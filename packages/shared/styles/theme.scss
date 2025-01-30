@@ -1319,7 +1319,8 @@
 .light {
   --form-filling-tips-circle-selected-background-color: #{$white};
   --form-filling-tips-circle-background-color: #{$gray-light-mid};
-  --form-filling-tips-circle-border: 3px solid #{$light-second-main};
+  --form-filling-tips-circle-border: 3px solid
+    var(--accent-main, #{$light-blue-main});
 }
 
 .dark {

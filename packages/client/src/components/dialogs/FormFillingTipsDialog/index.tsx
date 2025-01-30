@@ -44,10 +44,28 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 const StyledModalDialog = styled(ModalDialog)`
   #modal-dialog {
     width: 448px;
+    height: 374px;
 
     .modal-header {
-      height: 50px;
-      min-height: 50px;
+      margin-top: 16px;
+      margin-bottom: 0px;
+      height: 38px;
+      min-height: 38px;
+      :after {
+        border: none;
+      }
+    }
+
+    .modal-footer {
+      margin-top: 3px;
+    }
+
+    [data-testid="icon-button-svg"] {
+      position: relative;
+      right: -2px;
+      bottom: 10px;
+      width: 12px;
+      height: 12px;
     }
   }
 `;
@@ -90,7 +108,17 @@ const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
       onClose={onClose}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("WelcomeFillingForm")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        <Text
+          className="welcome-tips-header"
+          fontWeight="700"
+          fontSize="16px"
+          lineHeight="22px"
+          truncate
+        >
+          {t("WelcomeFillingForm")}
+        </Text>
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <div>
           <Text

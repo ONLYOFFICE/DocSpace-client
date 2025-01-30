@@ -515,7 +515,7 @@
     {
       "label": "Test | Jest:dependencies",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:deps ; open reports/tests-results.html",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:dependencies ; open reports/tests-results.html",
       "group": {
         "kind": "build",
         "isDefault": true

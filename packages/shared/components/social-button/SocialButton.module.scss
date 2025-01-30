@@ -28,6 +28,34 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/_mixins.scss";
 
+:global(.light) {
+  :local {
+    .socialButton {
+      &.isDisabled {
+        svg path {
+          opacity: 60%;
+        }
+      }
+    }
+  }
+}
+
+:global(.dark) {
+  :local {
+    .socialButton {
+      svg path {
+        fill: #{$white};
+      }
+
+      &.isDisabled {
+        svg path {
+          fill: #{$gray-dark-strong};
+        }
+      }
+    }
+  }
+}
+
 .socialButton {
   display: flex;
   flex-direction: row;
@@ -100,11 +128,31 @@
       background: var(--social-button-active-connect-background);
       border: none;
     }
+
+    svg {
+      path {
+        fill: var(--social-button-connect-svg-fill);
+      }
+    }
   }
 
   &.disabled {
     background: var(--social-button-disable-background);
     color: var(--social-button-disable-color);
+
+    &:hover {
+      cursor: not-allowed;
+      background: var(--social-button-disable-background);
+      border: var(--social-button-border);
+
+      .socialButtonText {
+        color: var(--social-button-text-color);
+
+        &.isConnect {
+          color: var(--social-button-connect-text-color);
+        }
+      }
+    }
   }
 
   &.small {

@@ -1519,6 +1519,7 @@
   --social-button-disable-background: #{$gray-light};
   --social-button-disable-color: #{$black};
   --social-button-hover-text-color: #{$black};
+  --social-button-connect-svg-fill: #{$white};
 }
 
 .dark {
@@ -1536,6 +1537,7 @@
   --social-button-disable-background: #{$dark-gray-light};
   --social-button-disable-color: #{$dark-gray-dark};
   --social-button-hover-text-color: #{$white};
+  --social-button-connect-svg-fill: #{$dark-black};
 }
 
 :global(.rtl) {

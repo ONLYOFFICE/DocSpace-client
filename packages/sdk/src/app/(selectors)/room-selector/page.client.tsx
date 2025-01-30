@@ -30,7 +30,8 @@ import React, { useCallback } from "react";
 
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
-import RoomSelectorComponent from "@docspace/shared/selectors/Room";
+import { getPrimaryLink } from "@docspace/shared/api/rooms";
+import RoomSelector from "@docspace/shared/selectors/Room";
 import type { TGetRooms } from "@docspace/shared/api/rooms/types";
 import type { TSelectorItem } from "@docspace/shared/components/selector";
 
@@ -38,7 +39,7 @@ import { getRoomsIcon } from "@/utils";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useSDK from "@/hooks/useSDK";
 
-export type RoomSelectorProps = {
+export type RoomSelectorClientProps = {
   baseConfig: {
     acceptLabel?: string;
     cancel?: boolean;
@@ -51,21 +52,14 @@ export type RoomSelectorProps = {
   roomList: TGetRooms;
 };
 
-export default function RoomSelector({
+export default function RoomSelectorClient({
   baseConfig,
   pageCount,
   roomList,
-}: RoomSelectorProps) {
+}: RoomSelectorClientProps) {
   const { sdkConfig } = useSDK();
 
   useDocumentTitle("RoomSelector");
-
-  const getPrimaryLink = async (roomId: string) => {
-    const res = await fetch(`/api/2.0/files/rooms/${roomId}/link`).then((r) =>
-      r.json(),
-    );
-    return res.response;
-  };
 
   const onSubmit = useCallback(async ([selectedItem]: TSelectorItem[]) => {
     const enrichedData = {
@@ -90,9 +84,17 @@ export default function RoomSelector({
         selectedItem.shared);
 
     if (isSharedRoom) {
+      const response = (await getPrimaryLink(selectedItem.id)) as {
+        sharedTo: {
+          id: string;
+          title: string;
+          requestToken: string;
+          primary: boolean;
+        };
+      };
       const {
         sharedTo: { id, title, requestToken, primary },
-      } = await getPrimaryLink(selectedItem.id as string);
+      } = response;
       enrichedData.requestTokens = [{ id, primary, title, requestToken }];
     }
 
@@ -136,7 +138,7 @@ export default function RoomSelector({
   const { folders, total } = roomList;
 
   return (
-    <RoomSelectorComponent
+    <RoomSelector
       {...cancelButtonProps}
       {...headerProps}
       {...roomTypeProps}

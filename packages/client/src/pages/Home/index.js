@@ -167,6 +167,8 @@ const PureHome = (props) => {
     clearUploadData,
     clearUploadedFiles,
     mainButtonVisible,
+    primaryOperationsAlert,
+    needErrorChecking,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -351,7 +353,8 @@ const PureHome = (props) => {
   sectionProps.primaryOperationsCompleted = primaryOperationsCompleted;
   sectionProps.cancelUpload = cancelUpload;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
-
+  sectionProps.primaryOperationsAlert = primaryOperationsAlert;
+  sectionProps.needErrorChecking = needErrorChecking;
   sectionProps.mainButtonVisible = mainButtonVisible;
 
   return (
@@ -508,6 +511,8 @@ export const Component = inject(
       clearPrimaryProgressData,
       primaryOperationsArray,
       primaryOperationsCompleted,
+      primaryOperationsAlert,
+      needErrorChecking,
     } = primaryProgressDataStore;
 
     const {
@@ -668,6 +673,8 @@ export const Component = inject(
       clearUploadData,
       clearUploadedFiles,
       mainButtonVisible,
+      primaryOperationsAlert,
+      needErrorChecking,
     };
   },
 )(observer(Home));

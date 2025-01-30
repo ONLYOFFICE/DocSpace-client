@@ -61,6 +61,8 @@ class PrimaryProgressDataStore {
 
   // convertingPercent = 0;
 
+  needErrorChecking = false;
+
   uploadingOperation = {
     error: 0,
     alert: false,
@@ -101,6 +103,10 @@ class PrimaryProgressDataStore {
     if (operationIndex !== -1) {
       const operationObject = this.primaryOperationsArray[operationIndex];
 
+      if (progressInfo.alert) {
+        this.setNeedErrorChecking(true);
+      }
+
       this.primaryOperationsArray[operationIndex] = {
         ...operationObject,
         ...progressInfo,
@@ -130,6 +136,8 @@ class PrimaryProgressDataStore {
         ...incompleteOperations,
       );
 
+      this.setNeedErrorChecking(false);
+
       console.log("clearPrimaryProgressData", this.primaryOperationsArray);
       return;
     }
@@ -151,6 +159,14 @@ class PrimaryProgressDataStore {
       this.primaryOperationsArray.every((op) => op.completed)
     );
   }
+
+  get primaryOperationsAlert() {
+    return this.primaryOperationsArray.some((op) => op.alert);
+  }
+
+  setNeedErrorChecking = (needErrorChecking) => {
+    this.needErrorChecking = needErrorChecking;
+  };
 
   setPrimaryProgressBarShowError = (error) => {
     this.alert = error;

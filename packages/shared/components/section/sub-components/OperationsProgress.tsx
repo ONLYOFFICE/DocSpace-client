@@ -65,6 +65,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   cancelUpload,
   onOpenPanel,
   mainButtonVisible,
+  needErrorChecking,
 }) => {
   const { t } = useTranslation(["UploadPanel", "Files"]);
 
@@ -164,7 +165,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     );
   };
 
-  const getTooltioLabel = () => {
+  const getTooltipLabel = () => {
     if (isSeveralOperations) {
       return t("Files:Processes", { count: operationsLength });
     }
@@ -200,19 +201,29 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     cancelUpload(t);
   };
 
+  const onButtonClick = () => {
+    if (timerId) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
+
+    onOpenPanel();
+  };
   return (
     <div
       ref={containerRef}
       className={classNames(styles.progressBarContainer, {
-        [styles.hideImmediate]: shouldHideButton,
-        [styles.hidden]: !isOpenDropdown && operationsCompleted,
+        [styles.autoHide]:
+          !isOpenDropdown && operationsCompleted && !needErrorChecking,
+        [styles.immediateHide]: shouldHideButton && !needErrorChecking,
+        [styles.laterHide]: primaryActiveOperations.length > 0,
         [styles.mainButtonVisible]: mainButtonVisible,
       })}
     >
       <HelpButton
         className="layout-progress-bar"
         place="left"
-        tooltipContent={getTooltioLabel()}
+        tooltipContent={getTooltipLabel()}
         openOnClick={false}
       >
         <FloatingButton
@@ -222,8 +233,8 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           {...(isSeveralOperations && { onClick: onOpenDropdown })}
           percent={operationsCompleted ? 100 : 0}
           {...(!isSeveralOperations &&
-            primaryActiveOperations.length && { onClick: onOpenPanel })}
-          onCloseButton={() => console.log("Click")}
+            primaryActiveOperations.length && { onClick: onButtonClick })}
+          //  onCloseButton={() => console.log("Click")}
         />
       </HelpButton>
 

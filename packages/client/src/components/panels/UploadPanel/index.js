@@ -44,7 +44,10 @@ import withLoader from "../../../HOCs/withLoader";
 
 class UploadPanelComponent extends React.Component {
   componentDidMount() {
+    const { setNeedErrorChecking } = this.props;
+
     document.addEventListener("keyup", this.onKeyPress);
+    setNeedErrorChecking(true);
   }
 
   componentWillUnmount() {
@@ -52,10 +55,11 @@ class UploadPanelComponent extends React.Component {
   }
 
   onClose = () => {
-    const { uploadPanelVisible, setUploadPanelVisible } = this.props;
+    const { uploadPanelVisible, setUploadPanelVisible, setNeedErrorChecking } =
+      this.props;
 
     setUploadPanelVisible(!uploadPanelVisible);
-
+    setNeedErrorChecking(false);
     // if (uploaded) {
     //   if (converted) {
     //     clearUploadData();
@@ -151,7 +155,8 @@ export default inject(({ settingsStore, uploadDataStore }) => {
     isUploadingAndConversion,
   } = uploadDataStore;
 
-  const { clearPrimaryProgressData } = primaryProgressDataStore;
+  const { clearPrimaryProgressData, setNeedErrorChecking } =
+    primaryProgressDataStore;
 
   return {
     uploadPanelVisible,
@@ -168,5 +173,6 @@ export default inject(({ settingsStore, uploadDataStore }) => {
     isUploadingAndConversion,
 
     theme: settingsStore.theme,
+    setNeedErrorChecking,
   };
 })(observer(UploadPanel));

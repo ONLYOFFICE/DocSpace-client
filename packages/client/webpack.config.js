@@ -49,6 +49,7 @@ const path = require("path");
 
 const pkg = require("./package.json");
 const runtime = require("../runtime.json");
+const loader = require("mini-css-extract-plugin/types/loader");
 const deps = pkg.dependencies || {};
 const homepage = pkg.homepage;
 const title = pkg.title;
@@ -219,7 +220,7 @@ const config = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
       {
         test: /\.module\.s[ac]ss$/i,
@@ -250,7 +251,7 @@ const config = {
       {
         test: /(?<!\.module)\.s[ac]ss$/i,
         use: [
-          "style-loader",
+          { loader: "style-loader" },
           {
             loader: "css-loader",
             options: {
@@ -289,7 +290,7 @@ const config = {
               ],
             },
           },
-          "source-map-loader",
+          { loader: "source-map-loader" },
         ],
       },
     ],

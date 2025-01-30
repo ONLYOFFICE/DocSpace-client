@@ -152,7 +152,7 @@ beforeAll(() => {
   const pattern1 = `require\\(['"](${depNamePattern})['"]\\)`;
   const pattern2 = `import\\(['"](${depNamePattern})['"]\\)`;
   const pattern3 = `from\\s+['"](${depNamePattern})['"]`;
-  const pattern4 = `loader:\\s+['"](${depNamePattern})['"],`;
+  const pattern4 = `loader:\\s+['"](${depNamePattern})['"]`;
 
   const regexp = new RegExp(
     `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})`,

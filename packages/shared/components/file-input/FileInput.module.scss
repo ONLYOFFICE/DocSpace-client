@@ -148,11 +148,11 @@
     }
 
     &.warning {
-      border-color: var(--file-input-warning-border-color);
+      border-color: var(--file-input-warning-border-color) !important;
     }
 
     &.error {
-      border-color: var(--file-input-error-border-color);
+      border-color: var(--file-input-error-border-color) !important;
     }
   }
 
@@ -231,11 +231,7 @@
 
   border-color: var(--file-input-border-color1);
 
-  // :global(.icon-button) {
-  //   cursor: pointer;
-  // }
-
-  .icon-button {
+  .iconButton {
     cursor: pointer;
   }
 
@@ -243,7 +239,7 @@
     border-color: var(--file-input-disabled-border-color1);
     cursor: default;
 
-    .icon-button {
+    .iconButton {
       cursor: default;
     }
   }

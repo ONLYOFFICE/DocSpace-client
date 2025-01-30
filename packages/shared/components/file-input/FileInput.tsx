@@ -141,6 +141,10 @@ const FileInputPure = ({
     [styles.warning]: hasWarning,
   });
 
+  const iconButtonClasses = classNames(styles.iconButton, {
+    [styles.disabled]: isDisabled,
+  });
+
   const onClickProp =
     fromStorage && !isDisabled ? { onClick: rest.onClick } : {};
 
@@ -200,7 +204,7 @@ const FileInputPure = ({
                 />
               ) : (
                 <IconButton
-                  className="icon-button"
+                  className={iconButtonClasses}
                   iconName={
                     isDocumentIcon
                       ? DocumentReactSvgUrl

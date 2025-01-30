@@ -114,8 +114,8 @@ export const getGuidPosition = (
     case FormFillingTipsState.Uploading:
       return {
         width: isTablet()
-          ? guidRects.uploading.width + GUID_UPLOADING_OFFSET * 2
-          : guidRects.uploading.width * 2,
+          ? guidRects.uploading.height + GUID_UPLOADING_OFFSET * 2
+          : guidRects.uploading.height * 2,
         height: isTablet()
           ? guidRects.uploading.height + GUID_UPLOADING_OFFSET * 2
           : guidRects.uploading.height * 2,

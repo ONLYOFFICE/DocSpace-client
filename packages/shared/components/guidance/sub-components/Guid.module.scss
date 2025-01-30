@@ -113,6 +113,11 @@
   &.smallBorderRadius {
     border-radius: 4px;
   }
+
+  &.fromRight {
+    left: unset !important;
+    right: 250px;
+  }
 }
 
 .guidBackdrop {

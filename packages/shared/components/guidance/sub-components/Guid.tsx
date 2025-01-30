@@ -65,6 +65,8 @@ const Guid = ({
     formFillingTipsNumber === FormFillingTipsState.Complete ||
     formFillingTipsNumber === FormFillingTipsState.Submitting;
 
+  const isSharingTip = formFillingTipsNumber === FormFillingTipsState.Sharing;
+
   const closeBackdrop = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -107,10 +109,24 @@ const Guid = ({
 
   const calculateTopPosition = React.useCallback(
     (screenHeight: number) => {
+      const screenWidth = document.documentElement.clientWidth;
       let top = position.bottom + GUID_MODAL_MARGIN;
 
-      if (isStartingTip && viewAs === "tile") {
-        top = position.top;
+      const positionX = isStartingTip ? position.right : position.left;
+
+      const changePositionCondition = isRTL
+        ? position.left - MODAL_WIDTH < 0
+        : screenWidth < positionX + MODAL_WIDTH + GUID_MODAL_MARGIN;
+
+      if (
+        (isStartingTip || isCompleteTip || isSharingTip) &&
+        viewAs === "tile"
+      ) {
+        if (changePositionCondition) {
+          top = position.bottom + GUID_MODAL_MARGIN;
+        } else if (isStartingTip) {
+          top = position.top;
+        }
       } else if (
         screenHeight <
         position.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT
@@ -119,33 +135,75 @@ const Guid = ({
       }
       return top;
     },
-    [position.bottom, position.top, isStartingTip, viewAs],
+    [
+      position.bottom,
+      position.right,
+      position.left,
+      position.top,
+      isStartingTip,
+      isRTL,
+      isCompleteTip,
+      isSharingTip,
+      viewAs,
+    ],
   );
 
   const calculateManualX = React.useCallback(
     (xDirection: string) => {
-      let manualX = isRTL ? "20px" : "20px";
+      const screenWidth = document.documentElement.clientWidth;
+      let manualX = "20px";
+
+      const positionX = isRTL
+        ? isStartingTip
+          ? position.left
+          : position.right
+        : isSharingTip
+          ? position.left
+          : position.right;
+
+      const changePositionCondition = isRTL
+        ? positionX - MODAL_WIDTH < 0
+        : screenWidth < positionX + MODAL_WIDTH + GUID_MODAL_MARGIN;
+
       if (isLastTip && !isDesktop()) {
         manualX = "15px";
-      } else if (isStartingTip && viewAs === "tile") {
-        manualX = isRTL
-          ? `${position.left - MODAL_WIDTH - GUID_MODAL_MARGIN}px`
-          : `${position.right + GUID_MODAL_MARGIN}px`;
-      } else if (isCompleteTip && viewAs === "tile") {
-        manualX = isRTL
-          ? `${position.right - MODAL_WIDTH}px`
-          : `${position.left}px`;
+      } else if (
+        (isStartingTip || isCompleteTip || isSharingTip) &&
+        viewAs === "tile"
+      ) {
+        if (changePositionCondition) {
+          if (isCompleteTip) {
+            manualX = isRTL
+              ? `${position.left}px`
+              : `${position.right - MODAL_WIDTH}px`;
+          } else if (isSharingTip) {
+            manualX = isRTL ? `0px` : `${position.right - MODAL_WIDTH}px`;
+          } else {
+            manualX = isRTL
+              ? `${position.right - MODAL_WIDTH}px`
+              : `${position.left}px`;
+          }
+        } else if (isStartingTip) {
+          manualX = isRTL
+            ? `${position.left - MODAL_WIDTH - GUID_MODAL_MARGIN}px`
+            : `${position.right + GUID_MODAL_MARGIN}px`;
+        } else {
+          manualX = isRTL
+            ? `${position.right - MODAL_WIDTH}px`
+            : `${position.left}px`;
+        }
       } else if (xDirection === "left" || isRTL) {
-        manualX = "250px";
+        manualX = isDesktop() ? "250px" : "60px";
       }
       return manualX;
     },
     [
       isRTL,
+      isStartingTip,
+      isSharingTip,
       position.left,
       position.right,
       isLastTip,
-      isStartingTip,
       isCompleteTip,
       viewAs,
     ],
@@ -179,7 +237,9 @@ const Guid = ({
   const directionX =
     isLastTip && !isDesktop()
       ? isRTL
-      : ((isStartingTip || isCompleteTip) && viewAs === "tile") || !isRTL;
+      : ((isStartingTip || isCompleteTip || isSharingTip) &&
+          viewAs === "tile") ||
+        !isRTL;
 
   const dialogClassName = classNames(
     styles.dialog,
@@ -209,7 +269,7 @@ const Guid = ({
     top: `${position.top}px`,
     width: position.width
       ? `${position.width}px`
-      : infoPanelVisible
+      : infoPanelVisible && viewAs !== "tile"
         ? "calc(100% - 650px)"
         : viewAs === "row"
           ? "calc(100% - 63px)"
@@ -228,6 +288,11 @@ const Guid = ({
           [styles.smallBorderRadius]:
             formFillingTipsNumber === FormFillingTipsState.Sharing ||
             formFillingTipsNumber === FormFillingTipsState.Uploading,
+          [styles.fromRight]:
+            infoPanelVisible &&
+            isRTL &&
+            viewAs !== "tile" &&
+            (isStartingTip || isCompleteTip),
         })}
         style={clippedStyles}
       />

@@ -45,9 +45,9 @@ import {
 import { getCronStringFromValues, stringToArray } from "./Cron.part";
 import { defaultCronString, defaultPeriod } from "./Cron.constants";
 import { getPeriodFromCronParts, getUnits } from "./Cron.utils";
-import { CronWrapper, Suffix, Wrapper } from "./Cron.styled";
 
 import type { PeriodType, CronProps } from "./Cron.types";
+import styles from "./Cron.module.scss";
 
 const Cron = ({
   value = defaultCronString,
@@ -152,7 +152,7 @@ const Cron = ({
   const units = useMemo(() => getUnits(i18n.language), [i18n.language]);
 
   return (
-    <CronWrapper data-testid="cron">
+    <div data-testid="cron" className={styles.cronWrapper}>
       <Period
         t={t}
         period={period}
@@ -189,7 +189,7 @@ const Cron = ({
           isDisabled={isDisabled}
         />
       ) : null}
-      <Wrapper>
+      <div className={styles.wrapper}>
         {!isHour && !isMinute ? (
           <Hours
             unit={units[1]}
@@ -210,9 +210,9 @@ const Cron = ({
             isDisabled={isDisabled}
           />
         ) : null}
-        <Suffix>{t("Common:UTC")}</Suffix>
-      </Wrapper>
-    </CronWrapper>
+        <span className={styles.suffix}>{t("Common:UTC")}</span>
+      </div>
+    </div>
   );
 };
 

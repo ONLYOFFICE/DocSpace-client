@@ -69,7 +69,14 @@ const Block = ({
   );
 };
 
-const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
+const VirtualDataRoomBlock = ({
+  t,
+  roomParams,
+  setRoomParams,
+  isEdit,
+  showLifetimeDialog,
+  setLifetimeDialogVisible,
+}) => {
   const role = t("Translations:RoleViewer");
 
   const initialInfo = useRef(null);
@@ -105,8 +112,16 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
   };
 
   const onChangeFileLifetime = () => {
-    if (fileLifetimeChecked) setRoomParams({ ...roomParams, lifetime: null });
-    setFileLifetimeChecked(!fileLifetimeChecked);
+    if (fileLifetimeChecked) {
+      setRoomParams({ ...roomParams, lifetime: null });
+      setFileLifetimeChecked(!fileLifetimeChecked);
+    } else if (isEdit && showLifetimeDialog) {
+      setLifetimeDialogVisible(true, () =>
+        setFileLifetimeChecked(!fileLifetimeChecked),
+      );
+    } else {
+      setFileLifetimeChecked(!fileLifetimeChecked);
+    }
   };
 
   const onChangeRestrictCopyAndDownload = () => {
@@ -130,6 +145,7 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
         onChange={onChangeFileLifetime}
         isDisabled={false}
         isChecked={fileLifetimeChecked}
+        setLifetimeDialogVisible={setLifetimeDialogVisible}
       >
         <FileLifetime
           t={t}

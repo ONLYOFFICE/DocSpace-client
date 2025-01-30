@@ -65,7 +65,7 @@ import styled, { css } from "styled-components";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
-import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import MobileView from "./MobileView";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 

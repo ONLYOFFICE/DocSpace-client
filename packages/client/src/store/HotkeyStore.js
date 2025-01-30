@@ -32,7 +32,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobile } from "@docspace/shared/utils";
-import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";

@@ -93,6 +93,7 @@ declare global {
       appearanceTheme: TGetColorTheme;
       versionInfo: TVersionBuild;
     };
+    Asc: unknown;
     zESettings: unknown;
     zE: unknown;
     i18n: {

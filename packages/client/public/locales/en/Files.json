@@ -226,5 +226,6 @@
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
   "WillBeMovedToTrash": "{{date}} will be moved to Trash",
   "WithSubfolders": "With subfolders",
-  "YouLeftTheRoom": "You have left the room"
+  "YouLeftTheRoom": "You have left the room",
+  "RecentlyOpenedTooltip": "Recently opened via the link"
 }

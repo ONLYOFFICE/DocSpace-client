@@ -31,10 +31,12 @@ import { useTranslation } from "react-i18next";
 
 import { setDocumentTitle } from "@/utils";
 
-export const useDocumentTitle = (titleI18nKey: string) => {
+const useDocumentTitle = (titleI18nKey: string) => {
   const { t } = useTranslation();
 
   useEffect(() => {
     setDocumentTitle(t, titleI18nKey);
   }, [t, titleI18nKey]);
 };
+
+export default useDocumentTitle;

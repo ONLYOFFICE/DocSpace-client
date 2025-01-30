@@ -85,9 +85,8 @@ const FileTile = (props) => {
     onDragOver,
     onDragLeave,
     badgeUrl,
-    icon,
-    isDownload,
     selectableRef,
+    isBlockingOperation,
   } = props;
 
   // const { sectionWidth } = useContext(Context);
@@ -171,6 +170,7 @@ const FileTile = (props) => {
           contextButtonSpacerWidth={displayShareButton}
           isActive={isActive}
           inProgress={inProgress}
+          isBlockingOperation={isBlockingOperation}
           isEdit={isEdit}
           getContextModel={getContextModel}
           hideContextMenu={onHideContextMenu}
@@ -184,8 +184,6 @@ const FileTile = (props) => {
           withCtrlSelect={withCtrlSelect}
           withShiftSelect={withShiftSelect}
           isHighlight={isHighlight}
-          iconProgress={icon}
-          isDownload={isDownload}
         >
           <FilesTileContent
             item={item}
@@ -200,14 +198,10 @@ const FileTile = (props) => {
 };
 
 export default inject(
-  (
-    { filesSettingsStore, filesStore, treeFoldersStore, uploadDataStore },
-    { item },
-  ) => {
+  ({ filesSettingsStore, filesStore, treeFoldersStore }, { item }) => {
     const { getIcon } = filesSettingsStore;
     const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
       filesStore;
-    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
 
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
@@ -223,8 +217,6 @@ export default inject(
       withCtrlSelect,
       withShiftSelect,
       isHighlight,
-      icon,
-      isDownload,
     };
   },
 )(

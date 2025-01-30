@@ -146,8 +146,6 @@ const Table = ({
   currentDeviceType,
   onEditIndex,
   isIndexing,
-  icon,
-  isDownload,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -227,8 +225,6 @@ const Table = ({
             ? highlightFile.isExst === !item.fileExst
             : null
         }
-        icon={icon}
-        isDownload={isDownload}
       />
     ));
   }, [
@@ -244,8 +240,6 @@ const Table = ({
     isTrashFolder,
     isIndexEditingMode,
     isIndexing,
-    icon,
-    isDownload,
   ]);
 
   return (
@@ -297,7 +291,6 @@ export default inject(
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
-    uploadDataStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -305,8 +298,6 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
-
-    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
 
     const {
       filesList,
@@ -347,8 +338,6 @@ export default inject(
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
-      icon,
-      isDownload,
     };
   },
 )(observer(Table));

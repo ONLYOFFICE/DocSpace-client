@@ -118,8 +118,6 @@ const PureHome = (props) => {
     isErrorRoomNotAvailable,
     isIndexEditingMode,
 
-    clearUploadedFilesHistory,
-
     isSecondaryProgressVisbile,
 
     isFrame,
@@ -321,7 +319,6 @@ const PureHome = (props) => {
       sectionProps.onDrop =
         isRecycleBinFolder || isPrivacyFolder ? null : onDrop;
 
-      sectionProps.clearUploadedFilesHistory = clearUploadedFilesHistory;
       sectionProps.viewAs = viewAs;
       sectionProps.hideAside =
         primaryProgressDataVisible || isSecondaryProgressVisbile;
@@ -431,7 +428,7 @@ export const Component = inject(
     const {
       secondaryProgressDataStore,
       primaryProgressDataStore,
-      clearUploadedFilesHistory,
+
       cancelUpload,
       clearUploadData,
       clearUploadedFiles,
@@ -565,8 +562,6 @@ export const Component = inject(
 
       clearPrimaryProgressData,
       disableUploadPanelOpen,
-
-      clearUploadedFilesHistory,
 
       isSecondaryProgressVisbile,
 

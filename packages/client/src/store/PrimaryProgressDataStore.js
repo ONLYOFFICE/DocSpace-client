@@ -31,18 +31,6 @@ import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
 import i18n from "../i18n";
 
 class PrimaryProgressDataStore {
-  percent = 0;
-
-  visible = false;
-
-  icon = "upload";
-
-  alert = false;
-
-  loadingFile = null;
-
-  errors = 0;
-
   disableUploadPanelOpen = false;
 
   // uploadingError = 0;
@@ -166,14 +154,6 @@ class PrimaryProgressDataStore {
 
   setNeedErrorChecking = (needErrorChecking) => {
     this.needErrorChecking = needErrorChecking;
-  };
-
-  setPrimaryProgressBarShowError = (error) => {
-    this.alert = error;
-  };
-
-  setPrimaryProgressBarErrors = (errors) => {
-    this.errors = errors;
   };
 }
 

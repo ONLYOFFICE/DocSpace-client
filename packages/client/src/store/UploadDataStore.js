@@ -1529,15 +1529,12 @@ class UploadDataStore {
           : toastr.error(f.error),
       );
 
-      // this.primaryProgressDataStore.setPrimaryProgressBarShowError(true); // for empty file
+      // for empty file
       this.primaryProgressDataStore.setPrimaryProgressBarData({
         operation: OPERATIONS_NAME.upload,
         alert: true,
       });
 
-      this.primaryProgressDataStore.setPrimaryProgressBarErrors(
-        totalErrorsCount,
-      );
       console.log("Errors: ", totalErrorsCount);
     }
 
@@ -1574,9 +1571,9 @@ class UploadDataStore {
     });
 
     setTimeout(() => {
-      if (!this.primaryProgressDataStore.alert) {
-        // this.primaryProgressDataStore.clearPrimaryProgressData();
-      }
+      // if (!this.primaryProgressDataStore.alert) {
+      // this.primaryProgressDataStore.clearPrimaryProgressData();
+      //  }
 
       if (this.uploadPanelVisible || this.primaryProgressDataStore.alert) {
         uploadData.files = this.files;
@@ -1603,7 +1600,10 @@ class UploadDataStore {
   ) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
-    const pbData = { operation: OPERATIONS_NAME.copy, operationId };
+    const pbData = {
+      operation: OPERATIONS_NAME.copy,
+      operationId,
+    };
 
     return copyToFolder(
       destFolderId,
@@ -1739,6 +1739,7 @@ class UploadDataStore {
       operationId,
       title,
       itemsCount,
+      operationIds: [...folderIds],
     });
 
     return isCopy

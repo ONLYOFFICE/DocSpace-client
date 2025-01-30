@@ -43,19 +43,26 @@ class SecondaryProgressDataStore {
   isDownload = false;
 
   secondaryOperationsArray = [
-    // {
-    //   label: "Duplicating",
-    //   operation: "other",
-    //   // alert: true,
-    //   completed: true,
-    //   items: [{ operationId: "operation_1", percent: 10, completed: false }],
-    // },
+    {
+      label: "Duplicating",
+      operation: OPERATIONS_NAME.duplicate,
+      // alert: true,
+      completed: true,
+      items: [
+        {
+          operationId: "operation_1",
+          percent: 10,
+          completed: true,
+          operationIds: [],
+        },
+      ],
+    },
     // {
     //   label: "Downloading",
-    //   operation: ,
+    //   operation: "other",
     //   // alert: false,
-    //   completed: false,
-    //   items: [{ operationId: "operation_1", percent: 50, completed: false }],
+    //   completed: true,
+    //   items: [{ operationId: "operation_1", percent: 50, completed: false, itemsId:[] }],
     // },
   ];
 
@@ -67,6 +74,10 @@ class SecondaryProgressDataStore {
     return this.secondaryOperationsArray;
   }
 
+  get isSecondaryProgressVisbile() {
+    return this.secondaryOperationsArray.length > 0;
+  }
+
   showSuccessToast = (cuttentOperation, operation) => {
     if (
       operation !== OPERATIONS_NAME.copy &&
@@ -74,6 +85,8 @@ class SecondaryProgressDataStore {
       operation !== OPERATIONS_NAME.move
     )
       return;
+
+    if (!cuttentOperation.title && !cuttentOperation.itemsCount) return;
 
     const t = (key, options) => i18n.t(key, { ...options, ns: "Files" });
     let i18nKey = "";
@@ -171,8 +184,8 @@ class SecondaryProgressDataStore {
     this.itemsSelectionLength = itemsSelectionLength;
   };
 
-  clearSecondaryProgressData = (operationId, operation, allOperations) => {
-    if (allOperations) {
+  clearSecondaryProgressData = (operationId, operation, clearAll) => {
+    if (clearAll) {
       const incompleteOperations = this.secondaryOperationsArray.filter(
         (item) => !item.completed,
       );
@@ -208,6 +221,30 @@ class SecondaryProgressDataStore {
       this.secondaryOperationsArray.splice(operationIndex, 1);
     }
     console.log("clearSecondaryProgressData", this.secondaryOperationsArray);
+  };
+
+  findOperationById = (itemId) => {
+    const operation = this.secondaryOperationsArray.find((process) => {
+      return process.items.some(
+        (item) => item.operationIds && item.operationIds.includes(itemId),
+      );
+    });
+
+    if (!operation)
+      return {
+        operation: "",
+        label: "",
+      };
+
+    const operationItem = operation.items.find(
+      (item) => item.operationIds && item.operationIds.includes(itemId),
+    );
+
+    return {
+      operation: operation.operation,
+      item: operationItem,
+      label: operation.label,
+    };
   };
 
   get secondaryOperationsAlert() {

@@ -31,6 +31,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { isMobile } from "react-device-detect";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -407,7 +408,9 @@ export default function withFileActions(WrappedFileItem) {
         withShiftSelect,
       } = filesStore;
       const { id } = selectedFolderStore;
-      const { startUpload } = uploadDataStore;
+      const { startUpload, secondaryProgressDataStore } = uploadDataStore;
+
+      const { findOperationById } = secondaryProgressDataStore;
 
       const selectedItem = selection.find(
         (x) => x.id === item.id && x.fileExst === item.fileExst,
@@ -448,6 +451,18 @@ export default function withFileActions(WrappedFileItem) {
       const isFolderProgress = isProgress(activeFolderIndex, activeFolders);
 
       const inProgress = isFileProgress || isFolderProgress;
+
+      let isBlockingOperation = inProgress;
+
+      if (inProgress && activeFolderIndex !== -1) {
+        const operationInfo = findOperationById(item.id);
+        const { operation } = operationInfo;
+        isBlockingOperation =
+          operation !== OPERATIONS_NAME.duplicate &&
+          operation !== OPERATIONS_NAME.download &&
+          operation !== OPERATIONS_NAME.copy;
+      }
+
 
       const dragIsDisabled =
         isPrivacyFolder ||
@@ -518,6 +533,7 @@ export default function withFileActions(WrappedFileItem) {
 
         canDrag: !dragIsDisabled,
         isIndexEditingMode,
+        isBlockingOperation,
       };
     },
   )(observer(WithFileActions));

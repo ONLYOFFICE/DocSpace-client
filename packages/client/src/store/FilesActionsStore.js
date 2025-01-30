@@ -661,6 +661,7 @@ class FilesActionStore {
       operation: operationName,
       percent: 0,
       operationId,
+      operationIds: [...fileConvertIds, ...folderIds],
     });
 
     const fileIds = fileConvertIds.map((f) => f.key || f);
@@ -1063,6 +1064,7 @@ class FilesActionStore {
       operationId,
       itemsCount: 1,
       title: item.title,
+      operationIds: [item.id],
     });
 
     this.filesStore.addActiveItems(fileIds, folderIds);

@@ -25,30 +25,80 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
-import { screen, render } from "@testing-library/react";
+import { screen, render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { ThemeProvider } from "styled-components";
+import { Base } from "../../themes";
 
-import { Slider } from "./Slider";
+import { Slider } from "./index";
+
+const renderWithTheme = (component: React.ReactElement) => {
+  return render(<ThemeProvider theme={Base}>{component}</ThemeProvider>);
+};
 
 describe("<Slider />", () => {
   it("renders without error", () => {
-    render(<Slider min={0} max={0} value={0} />);
-
+    renderWithTheme(<Slider min={0} max={100} value={50} />);
     expect(screen.getByTestId("slider")).toBeInTheDocument();
   });
 
-  // it("accepts id", () => {
-  //   const wrapper = mount(<Slider id="testId" />);
+  it("accepts and applies custom props", () => {
+    const props = {
+      id: "testId",
+      className: "test-class",
+      min: 0,
+      max: 100,
+      value: 50,
+      step: 5,
+      withPouring: true,
+      isDisabled: false,
+    };
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+    renderWithTheme(<Slider {...props} />);
+    const slider = screen.getByTestId("slider");
 
-  // it("accepts className", () => {
-  //   const wrapper = mount(<Slider className="test" />);
+    expect(slider).toHaveAttribute("id", "testId");
+    expect(slider).toHaveAttribute("class");
+    expect(slider.className).toContain("test-class");
+    expect(slider).toHaveAttribute("min", "0");
+    expect(slider).toHaveAttribute("max", "100");
+    expect(slider).toHaveAttribute("value", "50");
+    expect(slider).toHaveAttribute("step", "5");
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+  it("handles value changes correctly", () => {
+    const handleChange = jest.fn();
+    renderWithTheme(
+      <Slider min={0} max={100} value={50} onChange={handleChange} />,
+    );
+
+    const slider = screen.getByTestId("slider");
+    fireEvent.change(slider, { target: { value: "75" } });
+
+    expect(handleChange).toHaveBeenCalled();
+  });
+
+  it("respects disabled state", () => {
+    renderWithTheme(<Slider min={0} max={100} value={50} isDisabled />);
+
+    const slider = screen.getByTestId("slider");
+    expect(slider).toBeDisabled();
+  });
+
+  it("applies custom dimensions", () => {
+    renderWithTheme(
+      <Slider
+        min={0}
+        max={100}
+        value={50}
+        thumbHeight="20px"
+        thumbWidth="20px"
+        thumbBorderWidth="2px"
+        runnableTrackHeight="4px"
+      />,
+    );
+
+    const slider = screen.getByTestId("slider");
+    expect(slider).toBeInTheDocument();
+  });
 });

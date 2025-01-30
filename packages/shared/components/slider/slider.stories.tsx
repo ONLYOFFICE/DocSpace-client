@@ -25,54 +25,157 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-
 import { Meta, StoryObj } from "@storybook/react";
-
-import { Slider } from "./Slider";
+import { Slider } from "./index";
+import { SliderProps } from "./Slider.types";
 
 const meta = {
   title: "Components/Slider",
   component: Slider,
   parameters: {
-    docs: { description: { component: "Components/Slider" } },
+    docs: {
+      description: {
+        component:
+          "A customizable slider component that allows users to select a value from a range.",
+      },
+    },
     design: {
       type: "figma",
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=505-4112&mode=design&t=TBNCKMQKQMxr44IZ-0",
     },
   },
+  argTypes: {
+    min: {
+      description: "Minimum value of the slider",
+      control: { type: "number" },
+    },
+    max: {
+      description: "Maximum value of the slider",
+      control: { type: "number" },
+    },
+    value: {
+      description: "Current value of the slider",
+      control: { type: "number" },
+    },
+    step: {
+      description: "Step increment value",
+      control: { type: "number" },
+    },
+    thumbWidth: {
+      description: "Width of the slider thumb",
+      control: { type: "text" },
+    },
+    thumbHeight: {
+      description: "Height of the slider thumb",
+      control: { type: "text" },
+    },
+    thumbBorderWidth: {
+      description: "Border width of the slider thumb",
+      control: { type: "text" },
+    },
+    runnableTrackHeight: {
+      description: "Height of the slider track",
+      control: { type: "text" },
+    },
+    isDisabled: {
+      description: "Whether the slider is disabled",
+      control: { type: "boolean" },
+    },
+    withPouring: {
+      description: "Whether to show background color in the track",
+      control: { type: "boolean" },
+    },
+  },
 } satisfies Meta<typeof Slider>;
+
 type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const Template = ({ ...args }) => {
-  const [value, setValue] = useState(0);
+const Template = ({ ...args }: SliderProps) => {
+  const [value, setValue] = useState(args.value || 0);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { target } = e;
-    setValue(+target.value);
+    const newValue = parseFloat(e.target.value);
+    setValue(newValue);
+    args.onChange?.(e);
   };
 
-  return (
-    <div style={{ width: "400px", height: "50px" }}>
-      <Slider
-        {...args}
-        value={value}
-        onChange={handleChange}
-        min={0}
-        max={100}
-      />
-    </div>
-  );
+  return <Slider {...args} value={value} onChange={handleChange} />;
 };
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
+  render: Template,
   args: {
     min: 0,
-    max: 5,
-    value: 0,
-    step: 0.1,
+    max: 100,
+    value: 50,
+    step: 1,
+    thumbWidth: "20px",
+    thumbHeight: "20px",
+    thumbBorderWidth: "2px",
+    runnableTrackHeight: "4px",
+    withPouring: true,
+  },
+};
+
+export const CustomSized: Story = {
+  render: Template,
+  args: {
+    min: 0,
+    max: 100,
+    value: 75,
+    step: 1,
+    thumbWidth: "30px",
+    thumbHeight: "30px",
+    thumbBorderWidth: "3px",
+    runnableTrackHeight: "6px",
+    withPouring: true,
+  },
+};
+
+export const Disabled: Story = {
+  render: Template,
+  args: {
+    min: 0,
+    max: 100,
+    value: 25,
+    step: 1,
+    thumbWidth: "20px",
+    thumbHeight: "20px",
+    thumbBorderWidth: "2px",
+    runnableTrackHeight: "4px",
+    isDisabled: true,
+    withPouring: true,
+  },
+};
+
+export const PreciseControl: Story = {
+  render: Template,
+  args: {
+    min: 0,
+    max: 1,
+    value: 0.5,
+    step: 0.01,
+    thumbWidth: "16px",
+    thumbHeight: "16px",
+    thumbBorderWidth: "2px",
+    runnableTrackHeight: "3px",
+    withPouring: true,
+  },
+};
+
+export const WithoutPouring: Story = {
+  render: Template,
+  args: {
+    min: 0,
+    max: 100,
+    value: 50,
+    step: 1,
+    thumbWidth: "20px",
+    thumbHeight: "20px",
+    thumbBorderWidth: "2px",
+    runnableTrackHeight: "4px",
     withPouring: false,
   },
 };

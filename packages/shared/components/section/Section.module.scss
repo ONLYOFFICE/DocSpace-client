@@ -534,36 +534,12 @@
     transform 0.3s ease-in-out,
     bottom 0.3s ease-in-out;
 
-  // @keyframes showButton {
-  //   from {
-  //     opacity: 0;
-  //     transform: translateY(0px);
-  //   }
-
-  //   to {
-  //     opacity: 1;
-  //     transform: translateY(30px);
-  //   }
-  // }
-
   @keyframes hideButton {
     from {
-      // opacity: 1;
-      transform: translateY(0);
-    }
-    to {
-      // opacity: 0;
-      transform: translateY(72px);
-    }
-  }
-  @keyframes hideButtonImmediate {
-    from {
-      // opacity: 1;
       transform: translateY(0);
     }
     to {
       transform: translateY(72px);
-      //  opacity: 0;
     }
   }
 
@@ -573,22 +549,9 @@
 
     @keyframes hideButton {
       from {
-        // opacity: 1;
         transform: translateY(0);
       }
       to {
-        // opacity: 0;
-        transform: translateY(16px);
-      }
-    }
-
-    @keyframes hideButtonImmediate {
-      from {
-        // opacity: 1;
-        transform: translateY(0);
-      }
-      to {
-        //  opacity: 0;
         transform: translateY(16px);
       }
     }
@@ -598,22 +561,9 @@
 
       @keyframes hideButton {
         from {
-          // opacity: 1;
           transform: translateY(0);
         }
         to {
-          // opacity: 0;
-          transform: translateY(64px);
-        }
-      }
-
-      @keyframes hideButtonImmediate {
-        from {
-          // opacity: 1;
-          transform: translateY(0);
-        }
-        to {
-          //  opacity: 0;
           transform: translateY(64px);
         }
       }
@@ -629,15 +579,19 @@
     }
   }
 
-  &.hidden {
+  &.autoHide {
     animation: hideButton 0.3s ease-in-out 4s forwards;
+
+    &.laterHide {
+      animation-delay: 8s;
+    }
+
+    // &.immediateHide {
+    //   animation-delay: 0s;
+    // }
   }
 
-  &.hideImmediate {
-    animation: hideButtonImmediate 0.3s ease-in-out forwards;
-  }
-
-  &:not(.hidden):not(.hideImmediate) {
+  &:not(.autoHide) {
     opacity: 1;
     transform: translateY(0);
     animation: none;

@@ -177,16 +177,16 @@
       transition: opacity 0.4s ease;
     }
 
-    @include tablet {
-      :global(.layout-progress-bar_close-icon) {
-        display: none;
-      }
-    }
+    // @include tablet {
+    //   :global(.layout-progress-bar_close-icon) {
+    //     display: none;
+    //   }
+    // }
   }
 
-  @include tablet {
-    :global(.layout-progress-bar_close-icon) {
-      display: none;
-    }
-  }
+  // @include tablet {
+  //   :global(.layout-progress-bar_close-icon) {
+  //     display: none;
+  //   }
+  // }
 }

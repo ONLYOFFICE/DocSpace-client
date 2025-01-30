@@ -236,6 +236,9 @@ const Section = (props: SectionProps) => {
     return primaryOperationsCompleted;
   };
 
+  const showCancelButton =
+    primaryOperationsArray.length > 0 && !primaryOperationsCompleted;
+
   return (
     isSectionAvailable && (
       <Provider value={providerValue}>
@@ -329,6 +332,7 @@ const Section = (props: SectionProps) => {
               cancelUpload={cancelUpload}
               onOpenPanel={onOpenUploadPanel}
               mainButtonVisible={mainButtonVisible}
+              showCancelButton={showCancelButton}
             />
           ) : null}
 

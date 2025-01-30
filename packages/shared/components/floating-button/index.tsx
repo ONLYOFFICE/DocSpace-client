@@ -107,6 +107,7 @@ const FloatingButton = ({
   showTwoProgress,
   onCloseButton,
   withoutProgress,
+  showCancelButton,
 }: FloatingButtonProps) => {
   //  const animationCompleted = useProgressAnimation(percent);
 
@@ -202,7 +203,7 @@ const FloatingButton = ({
         </div>
       </div>
 
-      {completed && onCloseButton ? (
+      {showCancelButton ? (
         <CloseIcon
           className="layout-progress-bar_close-icon"
           onClick={handleProgressClear}

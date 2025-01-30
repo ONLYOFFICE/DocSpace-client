@@ -66,11 +66,12 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   onOpenPanel,
   mainButtonVisible,
   needErrorChecking,
+  showCancelButton,
 }) => {
   const { t } = useTranslation(["UploadPanel", "Files"]);
 
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
-  const [shouldHideButton, setShouldHideButton] = useState<boolean>(false);
+  // const [shouldHideButton, setShouldHideButton] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
   // const prevOperationsCompletedRef = useRef<boolean>(operationsCompleted);
 
@@ -129,21 +130,20 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   }, [isOpenDropdown, isSeveralOperations]);
 
   const onOpenDropdown = () => {
-    const willClose = isOpenDropdown;
+    // const willClose = isOpenDropdown;
     setIsOpenDropdown(!isOpenDropdown);
 
-    if (!willClose) {
-      clearTimeout(timerId);
-      timerId = null;
-    }
+    // if (!willClose) {
+    //   clearTimeout(timerId);
+    //   timerId = null;
+    // }
 
-    if (willClose && operationsCompleted && secondaryActiveOperations.length) {
-      const time = primaryActiveOperations.length > 0 ? 8000 : 4000;
-
-      timerId = setTimeout(() => {
-        setShouldHideButton(true);
-      }, time);
-    }
+    // if (willClose && operationsCompleted && secondaryActiveOperations.length) {
+    //   // const time = primaryActiveOperations.length > 0 ? 8000 : 4000;
+    //   // timerId = setTimeout(() => {
+    //   //  setShouldHideButton(true);
+    //   // }, time);
+    // }
   };
 
   // const onCloseButton = () => {
@@ -201,21 +201,13 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     cancelUpload(t);
   };
 
-  const onButtonClick = () => {
-    if (timerId) {
-      clearTimeout(timerId);
-      timerId = null;
-    }
-
-    onOpenPanel();
-  };
   return (
     <div
       ref={containerRef}
       className={classNames(styles.progressBarContainer, {
         [styles.autoHide]:
           !isOpenDropdown && operationsCompleted && !needErrorChecking,
-        [styles.immediateHide]: shouldHideButton && !needErrorChecking,
+        // [styles.immediateHide]: shouldHideButton && !needErrorChecking,
         [styles.laterHide]: primaryActiveOperations.length > 0,
         [styles.mainButtonVisible]: mainButtonVisible,
       })}
@@ -233,8 +225,9 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           {...(isSeveralOperations && { onClick: onOpenDropdown })}
           percent={operationsCompleted ? 100 : 0}
           {...(!isSeveralOperations &&
-            primaryActiveOperations.length && { onClick: onButtonClick })}
-          //  onCloseButton={() => console.log("Click")}
+            primaryActiveOperations.length && { onClick: onOpenPanel })}
+          {...(showCancelButton && { onCloseButton: onCanelOperation })}
+          showCancelButton={showCancelButton}
         />
       </HelpButton>
 

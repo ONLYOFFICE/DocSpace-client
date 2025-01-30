@@ -40,11 +40,15 @@ import {
 } from "@docspace/shared/utils/common";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { FolderType } from "@docspace/shared/enums";
+import { filesSettingsHandler } from "@docspace/shared/__mocks__/e2e";
+import { foldersTreeHandler } from "@docspace/shared/__mocks__/e2e";
+
+const IS_TEST = process.env.E2E_TEST;
 
 export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
   const [req] = createRequest([`/files/settings`], [["", ""]], "GET");
 
-  const res = await fetch(req);
+  const res = IS_TEST ? filesSettingsHandler() : await fetch(req);
 
   if (!res.ok) return;
 
@@ -60,7 +64,7 @@ export async function getFoldersTree(): Promise<TFolder[]> {
     "GET",
   );
 
-  const res = await fetch(req);
+  const res = IS_TEST ? foldersTreeHandler() : await fetch(req);
 
   if (!res.ok) {
     throw new Error("Failed to get folders tree");

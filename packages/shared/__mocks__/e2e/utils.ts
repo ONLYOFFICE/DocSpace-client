@@ -56,3 +56,6 @@ export const HEADER_NO_STANDALONE_SETTINGS =
 
 export const HEADER_ROOMS_LIST = "x-test-data-rooms-list";
 export const HEADER_FILTERED_ROOMS_LIST = "x-test-data-filtered-rooms-list";
+
+export const HEADER_FULL_FOLDER = "x-test-data-rooms-list";
+export const HEADER_FILTERED_FOLDER = "x-test-data-filtered-rooms-list";

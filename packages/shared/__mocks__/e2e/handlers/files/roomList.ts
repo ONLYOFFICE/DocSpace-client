@@ -69,7 +69,7 @@ const current = {
   title: "Rooms",
   access: 0,
   shared: false,
-  created: new Date(),
+  created: new Date().toString(),
   createdBy: {
     id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
     displayName: "Administrator ",
@@ -86,7 +86,7 @@ const current = {
     hasAvatar: false,
     isAnonim: false,
   },
-  updated: new Date(),
+  updated: new Date().toString(),
   rootFolderType: 14,
   parentRoomType: 14,
   updatedBy: {
@@ -161,7 +161,7 @@ const getRoomList = (filtered: boolean = false) => {
         "Very loooong looooong looooong looooong loooooong loooooong loooong room name Very loooong looooong looooong looooong loooooong loooooong loooong room name Very loooong looooong looooong looooong loooooong loooooong loooong room name Very loooong looooong looooong looooong loooooong loooooong loooong room name Very loooong looooong looooong looooong loooooong loooooong loooong room name Very loooong looooong looooong looooong loooooong loooooong loooong room name Very loooong looooong looooong looooong loooooong loooooong loooong room name",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -170,7 +170,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -232,7 +232,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "New room",
       access: 0,
       shared: false,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -241,7 +241,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -303,7 +303,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "New room",
       access: 0,
       shared: false,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -312,7 +312,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -374,7 +374,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "New room",
       access: 0,
       shared: false,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -383,7 +383,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -445,7 +445,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "New room",
       access: 0,
       shared: false,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -454,7 +454,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -516,7 +516,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "New room",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -525,7 +525,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -587,7 +587,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "New room",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -596,7 +596,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -658,7 +658,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "New room",
       access: 0,
       shared: false,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -667,7 +667,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -729,7 +729,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "s",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -738,7 +738,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -800,7 +800,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "2 (2) (1)",
       access: 0,
       shared: false,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -809,7 +809,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -871,7 +871,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "2 (2) (2)",
       access: 0,
       shared: false,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -880,7 +880,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -942,7 +942,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "3 (1) (1) (1)",
       access: 0,
       shared: false,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -951,7 +951,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1013,7 +1013,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "3 (3)",
       access: 0,
       shared: false,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1022,7 +1022,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1084,7 +1084,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "3 (3) (1)",
       access: 0,
       shared: false,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1093,7 +1093,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1155,7 +1155,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "fdsf",
       access: 0,
       shared: false,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1164,7 +1164,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1226,7 +1226,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "fdsf (1)",
       access: 0,
       shared: false,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1235,7 +1235,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1297,7 +1297,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "kk",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1306,7 +1306,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1368,7 +1368,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "kk (1)",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1377,7 +1377,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1439,7 +1439,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "kk (1) (1)",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1448,7 +1448,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1510,7 +1510,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "kk (1) (1) (1)",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1519,7 +1519,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1581,7 +1581,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "kk (1) (1) (1) (1)",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1590,7 +1590,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1652,7 +1652,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "kk (1) (1) (1) (1) (1)",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1661,7 +1661,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1723,7 +1723,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "kk (1) (1) (1) (1) (1) (1)",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1732,7 +1732,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1794,7 +1794,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "kk (1) (1) (2)",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1803,7 +1803,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1865,7 +1865,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "kk (1) (1) (2) (1)",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1874,7 +1874,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
@@ -1936,7 +1936,7 @@ const getRoomList = (filtered: boolean = false) => {
       title: "kk (1) (1) (2) (1) (1)",
       access: 0,
       shared: true,
-      created: new Date(),
+      created: new Date().toString(),
       createdBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
         displayName: "Administrator ",
@@ -1945,7 +1945,7 @@ const getRoomList = (filtered: boolean = false) => {
         profileUrl: "",
         hasAvatar: false,
       },
-      updated: new Date(),
+      updated: new Date().toString(),
       rootFolderType: 14,
       updatedBy: {
         id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",

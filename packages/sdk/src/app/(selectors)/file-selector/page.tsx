@@ -28,11 +28,12 @@ import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import type {
+  TFile,
   TFilesSettings,
   TFolder,
   TGetFolder,
 } from "@docspace/shared/api/files/types";
-import type { TGetRooms } from "@docspace/shared/api/rooms/types";
+import type { TGetRooms, TRoom } from "@docspace/shared/api/rooms/types";
 
 import { getFilesSettings, getFolder, getFoldersTree } from "@/api/files";
 import { getRooms } from "@/api/rooms";
@@ -103,7 +104,7 @@ export default async function Page({
     filesSettings: filesSettings as TFilesSettings,
     foldersTree: foldersTree as TFolder[],
     hasNextPage: total > PAGE_COUNT,
-    items,
+    items: items as (TFile | TFolder)[] | TRoom[],
     roomsFolderId,
     rootFolderType,
     searchValue: "search" in filter ? filter.search : filter.filterValue,

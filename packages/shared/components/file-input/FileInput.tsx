@@ -160,6 +160,8 @@ const FileInputPure = ({
           className={wrapperClasses}
           id={idButton}
           data-testid="file-input"
+          aria-disabled={isDisabled ? "true" : "false"}
+          role="button"
           {...rest}
           {...getRootProps()}
         >
@@ -192,6 +194,7 @@ const FileInputPure = ({
               isDisabled={isDisabled}
               label={buttonLabel}
               size={buttonSize}
+              type="button"
             />
           ) : (
             <div className={iconClasses} {...onClickProp}>
@@ -203,6 +206,7 @@ const FileInputPure = ({
                 />
               ) : (
                 <IconButton
+                  data-testid="icon-button"
                   className={iconButtonClasses}
                   iconName={
                     isDocumentIcon

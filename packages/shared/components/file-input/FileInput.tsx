@@ -165,7 +165,6 @@ const FileInputPure = ({
         >
           <TextInput
             isReadOnly
-            // className="text-input"
             className={textInputClasses}
             placeholder={placeholder}
             value={fromStorage && path ? path : fileName}

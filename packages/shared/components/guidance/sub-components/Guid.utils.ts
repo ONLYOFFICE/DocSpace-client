@@ -108,9 +108,15 @@ const getStandardPosition = (
   isRTL?: boolean,
 ) => {
   const dimensions = getViewTypeBasedDimensions(rect, viewAs);
+  const isTableMode = viewAs === "table";
+
   return {
     ...dimensions,
     left: getLeftPosition(rect, viewAs, isRTL),
+    top: isTableMode ? dimensions.top + 1 : dimensions.top,
+    height: isTableMode
+      ? (dimensions.height || rect.height) + 3
+      : dimensions.height || rect.height,
     bottom: rect.bottom,
     right: rect.right,
   };

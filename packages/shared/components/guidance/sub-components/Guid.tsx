@@ -110,30 +110,34 @@ const Guid = ({
   const calculateTopPosition = React.useCallback(
     (screenHeight: number) => {
       const screenWidth = document.documentElement.clientWidth;
-      let top = position.bottom + GUID_MODAL_MARGIN;
+      const defaultTopPosition = position.bottom + GUID_MODAL_MARGIN;
+      const isTileView = viewAs === "tile";
+      const isRelevantTip = isStartingTip || isCompleteTip || isSharingTip;
 
-      const positionX = isStartingTip ? position.right : position.left;
-
-      const changePositionCondition = isRTL
+      const isNotEnoughSpace = isRTL
         ? position.left - MODAL_WIDTH < 0
-        : screenWidth < positionX + MODAL_WIDTH + GUID_MODAL_MARGIN;
+        : screenWidth <
+          (isStartingTip ? position.right : position.left) +
+            MODAL_WIDTH +
+            GUID_MODAL_MARGIN;
 
-      if (
-        (isStartingTip || isCompleteTip || isSharingTip) &&
-        viewAs === "tile"
-      ) {
-        if (changePositionCondition) {
-          top = position.bottom + GUID_MODAL_MARGIN;
-        } else if (isStartingTip) {
-          top = position.top;
+      const isNotEnoughVerticalSpace =
+        screenHeight < position.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT;
+
+      if (isTileView && isRelevantTip) {
+        if (isNotEnoughSpace) {
+          return defaultTopPosition;
         }
-      } else if (
-        screenHeight <
-        position.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT
-      ) {
-        top = position.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT;
+        if (isStartingTip) {
+          return position.top;
+        }
       }
-      return top;
+
+      if (isNotEnoughVerticalSpace) {
+        return position.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT;
+      }
+
+      return defaultTopPosition;
     },
     [
       position.bottom,
@@ -151,51 +155,58 @@ const Guid = ({
   const calculateManualX = React.useCallback(
     (xDirection: string) => {
       const screenWidth = document.documentElement.clientWidth;
-      let manualX = "20px";
+      const isTileView = viewAs === "tile";
+      const isRelevantTip = isStartingTip || isCompleteTip || isSharingTip;
 
-      const positionX = isRTL
-        ? isStartingTip
-          ? position.left
-          : position.right
-        : isSharingTip
-          ? position.left
-          : position.right;
+      const getPositionX = () => {
+        if (isRTL) {
+          return isStartingTip ? position.left : position.right;
+        }
+        return isSharingTip ? position.left : position.right;
+      };
 
-      const changePositionCondition = isRTL
-        ? positionX - MODAL_WIDTH < 0
-        : screenWidth < positionX + MODAL_WIDTH + GUID_MODAL_MARGIN;
+      const isNotEnoughSpace = isRTL
+        ? getPositionX() - MODAL_WIDTH < 0
+        : screenWidth < getPositionX() + MODAL_WIDTH + GUID_MODAL_MARGIN;
 
+      // Default position for most cases
       if (isLastTip && !isDesktop()) {
-        manualX = "15px";
-      } else if (
-        (isStartingTip || isCompleteTip || isSharingTip) &&
-        viewAs === "tile"
-      ) {
-        if (changePositionCondition) {
+        return "15px";
+      }
+
+      // Handle tile view cases
+      if (isTileView && isRelevantTip) {
+        if (isNotEnoughSpace) {
           if (isCompleteTip) {
-            manualX = isRTL
+            return isRTL
               ? `${position.left}px`
               : `${position.right - MODAL_WIDTH}px`;
-          } else if (isSharingTip) {
-            manualX = isRTL ? `0px` : `${position.right - MODAL_WIDTH}px`;
-          } else {
-            manualX = isRTL
-              ? `${position.right - MODAL_WIDTH}px`
-              : `${position.left}px`;
           }
-        } else if (isStartingTip) {
-          manualX = isRTL
-            ? `${position.left - MODAL_WIDTH - GUID_MODAL_MARGIN}px`
-            : `${position.right + GUID_MODAL_MARGIN}px`;
-        } else {
-          manualX = isRTL
+          if (isSharingTip) {
+            return isRTL ? "0px" : `${position.right - MODAL_WIDTH}px`;
+          }
+          return isRTL
             ? `${position.right - MODAL_WIDTH}px`
             : `${position.left}px`;
         }
-      } else if (xDirection === "left" || isRTL) {
-        manualX = isDesktop() ? "250px" : "60px";
+
+        if (isStartingTip) {
+          return isRTL
+            ? `${position.left - MODAL_WIDTH - GUID_MODAL_MARGIN}px`
+            : `${position.right + GUID_MODAL_MARGIN}px`;
+        }
+
+        return isRTL
+          ? `${position.right - MODAL_WIDTH}px`
+          : `${position.left}px`;
       }
-      return manualX;
+
+      // Handle default RTL or left direction
+      if (xDirection === "left" || isRTL) {
+        return isDesktop() ? "250px" : "60px";
+      }
+
+      return "20px";
     },
     [
       isRTL,

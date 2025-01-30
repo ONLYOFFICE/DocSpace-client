@@ -28,34 +28,33 @@
 
 import React, { useCallback } from "react";
 
-import { TSelectorItem } from "@docspace/shared/components/selector";
-import RoomSelectorComponent from "@docspace/shared/selectors/Room";
 import { frameCallEvent } from "@docspace/shared/utils/common";
-
-import { TGetRooms } from "@docspace/shared/api/rooms/types";
 import { RoomsType } from "@docspace/shared/enums";
+import RoomSelectorComponent from "@docspace/shared/selectors/Room";
+import type { TGetRooms } from "@docspace/shared/api/rooms/types";
+import type { TSelectorItem } from "@docspace/shared/components/selector";
 
-import useSDK from "@/hooks/useSDK";
 import { getRoomsIcon } from "@/utils";
-import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
+import useSDK from "@/hooks/useSDK";
 
 export type RoomSelectorProps = {
-  roomList: TGetRooms;
-  pageCount: number;
   baseConfig: {
-    header?: boolean;
-    cancel?: boolean;
-    search?: boolean;
-    roomType?: RoomsType | RoomsType[] | null;
-    cancelLabel?: string;
     acceptLabel?: string;
+    cancel?: boolean;
+    cancelLabel?: string;
+    header?: boolean;
+    roomType?: RoomsType | RoomsType[] | null;
+    search?: boolean;
   };
+  pageCount: number;
+  roomList: TGetRooms;
 };
 
 export default function RoomSelector({
-  roomList,
-  pageCount,
   baseConfig,
+  pageCount,
+  roomList,
 }: RoomSelectorProps) {
   const { sdkConfig } = useSDK();
 
@@ -141,14 +140,14 @@ export default function RoomSelector({
       {...cancelButtonProps}
       {...headerProps}
       {...roomTypeProps}
-      onSubmit={onSubmit}
-      isMultiSelect={false}
-      withSearch={baseConfig?.search}
-      submitButtonLabel={baseConfig?.acceptLabel}
-      withInit
+      initHasNextPage={total > pageCount}
       initItems={folders}
       initTotal={total}
-      initHasNextPage={total > pageCount}
+      isMultiSelect={false}
+      onSubmit={onSubmit}
+      submitButtonLabel={baseConfig?.acceptLabel}
+      withInit
+      withSearch={baseConfig?.search}
     />
   );
 }

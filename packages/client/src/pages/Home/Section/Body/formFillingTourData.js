@@ -39,6 +39,7 @@ export const fakeFormFillingList = [
     updated: moment().format(),
     isFolder: true,
     icon: iconSize32.get(getIconPathByFolderType(FolderType.InProgress)),
+    contextOptions: ["select"],
   },
   {
     title: "Complete",
@@ -46,6 +47,7 @@ export const fakeFormFillingList = [
     updated: moment().format(),
     isFolder: true,
     icon: iconSize32.get(getIconPathByFolderType(FolderType.Done)),
+    contextOptions: ["select"],
   },
   {
     title: "ONLYOFFICE Sample PDF form",
@@ -53,6 +55,7 @@ export const fakeFormFillingList = [
     icon: PDFIcon,
     isFolder: false,
     isPDF: true,
+    contextOptions: ["select"],
     fileExst: ".pdf",
     security: {
       Lock: false,

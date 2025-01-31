@@ -41,16 +41,11 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 const minifyJson = require("@docspace/shared/utils/minifyJson");
 
-// const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
-//const fs = require("fs");
-//const { readdir } = require("fs").promises;
-
 const path = require("path");
 
 const pkg = require("./package.json");
 const runtime = require("../runtime.json");
-const loader = require("mini-css-extract-plugin/types/loader");
-const deps = pkg.dependencies || {};
+
 const homepage = pkg.homepage;
 const title = pkg.title;
 const version = pkg.version;

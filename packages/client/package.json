@@ -139,7 +139,6 @@
     "eslint": "8.57.1",
     "external-remotes-plugin": "1.0.0",
     "file-loader": "6.2.0",
-    "html-loader": "4.2.0",
     "html-webpack-plugin": "5.6.0",
     "json-loader": "0.5.7",
     "mini-css-extract-plugin": "2.9.2",
@@ -197,11 +196,11 @@
           "build:translations"
         ]
       },
-	  "deploy": {
-		"dependsOn": [
+      "deploy": {
+        "dependsOn": [
           "build"
         ]
-	  }
+      }
     }
   }
 }

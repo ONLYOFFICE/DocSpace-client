@@ -32,7 +32,6 @@
     "react-toastify": "10.0.6",
     "resize-image": "0.1.0",
     "react": "18.3.1",
-    "sass": "1.79.5",
     "styled-components": "5.3.11",
     "ts-pattern": "5.5.0"
   },
@@ -79,11 +78,11 @@
           "build"
         ]
       },
-	  "deploy": {
-		"dependsOn": [
+      "deploy": {
+        "dependsOn": [
           "build"
         ]
-	  }
+      }
     }
   }
 }

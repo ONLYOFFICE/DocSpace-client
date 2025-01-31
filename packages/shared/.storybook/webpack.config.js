@@ -61,7 +61,16 @@ module.exports = ({ config }) => {
         },
       },
       // Compiles Sass to CSS
-      { loader: "sass-loader" },
+      {
+        loader: "sass-loader",
+        options: {
+          sourceMap: true,
+          implementation: require("sass"),
+          sassOptions: {
+            outputStyle: "compressed",
+          },
+        },
+      },
     ],
   });
 

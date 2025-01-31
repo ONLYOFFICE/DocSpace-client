@@ -28,9 +28,11 @@
 
 import styled, { css } from "styled-components";
 
-import { RowContainer } from "@docspace/shared/components/row-container";
-import { Row } from "@docspace/shared/components/row";
-import { RowContent } from "@docspace/shared/components/row-content";
+import {
+  RowContainer,
+  Row,
+  RowContent,
+} from "@docspace/shared/components/rows";
 import { desktop, mobile } from "@docspace/shared/utils";
 
 export const StyledWrapper = styled.div`

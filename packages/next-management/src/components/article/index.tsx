@@ -38,7 +38,7 @@ import { useTheme } from "styled-components";
 import { observer } from "mobx-react";
 
 import { DeviceType } from "@docspace/shared/enums";
-import { ArticleItemNext as ArticleItem } from "@docspace/shared/components/article-item";
+import { ArticleItemNext as ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapperNext";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Portal } from "@docspace/shared/components/portal";
 

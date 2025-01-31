@@ -76,6 +76,9 @@ const RoomsItemHeader = ({
   const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
 
   const badgeUrl = getRoomBadgeUrl(selection);
+  const tooltipContent = selection?.external
+    ? t("Files:RecentlyOpenedTooltip")
+    : null;
 
   const isFile = !!selection.fileExst;
   let title = selection.title;
@@ -128,6 +131,7 @@ const RoomsItemHeader = ({
           imgClassName={`icon ${selection.isRoom && "is-room"}`}
           logo={icon}
           badgeUrl={badgeUrl || ""}
+          tooltipContent={tooltipContent}
           hoverSrc={
             selection.isRoom && selection.security?.EditRoom
               ? Camera10ReactSvgUrl
@@ -135,6 +139,7 @@ const RoomsItemHeader = ({
           }
           model={model}
           onChangeFile={onChangeFileContext}
+          tooltipId="info-panel-title_icon-tooltip"
         />
       </div>
 

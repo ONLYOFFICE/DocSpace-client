@@ -56,6 +56,8 @@ type RoomIconExpansion = {
   dropDownManualX?: string;
   model?: TModel[];
   logo?: TLogo | string;
+  tooltipContent?: string;
+  tooltipId?: string;
 };
 
 type RoomIconColor = {

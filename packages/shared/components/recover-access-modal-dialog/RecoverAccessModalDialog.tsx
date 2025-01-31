@@ -40,11 +40,8 @@ import { TValidate } from "../email-input/EmailInput.types";
 
 import { sendRecoverRequest } from "../../api/settings";
 
-import {
-  StyledBodyContent,
-  StyledFooterContent,
-} from "./RecoverAccessModalDialog.styled";
 import type { RecoverAccessModalDialogProps } from "./RecoverAccessModalDialog.types";
+import styles from "./RecoverAccessModalDialog.module.scss";
 
 const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
   visible,
@@ -131,10 +128,10 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
     >
       <ModalDialog.Header>{t("Common:RecoverTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent>
+        <div className={styles.body}>
           <Text
             key="text-body"
-            className="text-body"
+            className={styles.textBody}
             isBold={false}
             fontSize="13px"
             noSelect
@@ -200,12 +197,13 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
               aria-label="Problem description"
               aria-invalid={descErr}
               aria-required="true"
+              className={styles.textarea}
             />
           </FieldContainer>
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <StyledFooterContent>
+        <div className={styles.footer}>
           <Button
             primary
             tabIndex={3}
@@ -214,7 +212,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
             key="RecoverySendBtn"
             size={ButtonSize.normal}
             id="recover-access-modal_send"
-            className="recover-button-dialog"
+            className={styles.recoverButtonDialog}
             label={loading ? t("Common:Sending") : t("Common:SendButton")}
             onClick={onSendRecoverRequest}
             data-testid="recover-access-modal-submit"
@@ -227,11 +225,11 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
             size={ButtonSize.normal}
             key="SendBtn-recover-close"
             id="recover-access-modal_cancel"
-            className="recover-button-dialog"
+            className={styles.recoverButtonDialog}
             label={t("Common:CancelButton")}
             onClick={onRecoverModalClose}
           />
-        </StyledFooterContent>
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );

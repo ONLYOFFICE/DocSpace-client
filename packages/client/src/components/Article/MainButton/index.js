@@ -180,6 +180,7 @@ const ArticleMainButtonContent = (props) => {
     isWarningRoomsDialog,
     getContactsModel,
     contactsCanCreate,
+    setGuidRectsMainButton,
   } = props;
 
   const navigate = useNavigate();
@@ -757,6 +758,7 @@ const ArticleMainButtonContent = (props) => {
           text={mainButtonText}
           model={model}
           title={mainButtonText}
+          setGuidRectsMainButton={setGuidRectsMainButton}
         />
       )}
 
@@ -814,7 +816,7 @@ export default inject(
     peopleStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
-    const { mainButtonMobileVisible } = filesStore;
+    const { mainButtonMobileVisible, setGuidRectsMainButton } = filesStore;
     const {
       isPrivacyFolder,
       isFavoritesFolder,
@@ -918,6 +920,8 @@ export default inject(
 
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
+
+      setGuidRectsMainButton,
     };
   },
 )(

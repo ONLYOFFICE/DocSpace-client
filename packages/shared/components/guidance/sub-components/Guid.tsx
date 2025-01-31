@@ -53,6 +53,7 @@ const Guid = ({
   position,
   infoPanelVisible,
   viewAs,
+  mainButtonPosition,
 }: GuidProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["FormFillingTipsDialog", "Common"]);
@@ -288,25 +289,38 @@ const Guid = ({
     height: `${position.height}px`,
   };
 
+  const clippedClassName = classNames(styles.guidElement, {
+    [styles.smallBorderRadius]:
+      formFillingTipsNumber === FormFillingTipsState.Sharing ||
+      formFillingTipsNumber === FormFillingTipsState.Uploading,
+    [styles.fromRight]:
+      infoPanelVisible &&
+      isRTL &&
+      viewAs !== "tile" &&
+      (isStartingTip || isCompleteTip),
+  });
+
   return (
     <div className="guidance">
       <div
         className={classNames(styles.guidBackdrop)}
         onClick={closeBackdrop}
       />
-      <div
-        className={classNames(styles.guidElement, {
-          [styles.smallBorderRadius]:
-            formFillingTipsNumber === FormFillingTipsState.Sharing ||
-            formFillingTipsNumber === FormFillingTipsState.Uploading,
-          [styles.fromRight]:
-            infoPanelVisible &&
-            isRTL &&
-            viewAs !== "tile" &&
-            (isStartingTip || isCompleteTip),
-        })}
-        style={clippedStyles}
-      />
+      {isDesktop() && isLastTip && mainButtonPosition.width ? (
+        <div
+          className={clippedClassName}
+          style={{
+            ["--backdrop-filter-value" as string]: theme.isBase
+              ? "contrast(200%)"
+              : "contrast(0.73)",
+            left: `${mainButtonPosition.left}px`,
+            top: `${mainButtonPosition.top}px`,
+            width: `${mainButtonPosition.width}px`,
+            height: `${mainButtonPosition.height}px`,
+          }}
+        />
+      ) : null}
+      <div className={clippedClassName} style={clippedStyles} />
       <div
         id="modal-onMouseDown-close"
         role="dialog"

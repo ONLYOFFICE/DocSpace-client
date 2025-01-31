@@ -90,6 +90,20 @@ const getUploadingPosition = (rect: DOMRect) => {
   };
 };
 
+export const getMainButtonPosition = (rect: DOMRect) => {
+  if (!rect) return DEFAULT_POSITION;
+
+  const offset = GUID_SHARE_OFFSET;
+  return {
+    width: rect.width + offset * 2,
+    height: rect.height + offset * 2,
+    left: rect.left - offset,
+    top: rect.top - offset,
+    bottom: rect.bottom,
+    right: rect.right,
+  };
+};
+
 const getSharingPosition = (rect: DOMRect) => {
   const offset = GUID_SHARE_OFFSET;
   return {

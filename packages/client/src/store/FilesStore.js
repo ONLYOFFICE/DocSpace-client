@@ -259,6 +259,8 @@ class FilesStore {
 
   uploadingGuidRects = null;
 
+  mainButtonGuidRect = null;
+
   hotkeysClipboard = [];
 
   constructor(
@@ -4148,6 +4150,10 @@ class FilesStore {
 
   setGuidRectsUploading = (uploadingRect) => {
     this.uploadingGuidRects = uploadingRect;
+  };
+
+  setGuidRectsMainButton = (buttonRect) => {
+    this.mainButtonGuidRect = buttonRect;
   };
 
   setInRoomFolder = (roomId, inRoom) => {

@@ -45,4 +45,5 @@ export type MainButtonProps = {
   style?: React.CSSProperties;
   /** Data model menu */
   model: ContextMenuModel[];
+  setGuidRectsMainButton: (rect: DOMRect | null) => void;
 };

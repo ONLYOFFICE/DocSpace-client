@@ -40,10 +40,12 @@ export interface GuidanceProps {
   readyGuidRects: DOMRect;
   shareGuidRects: DOMRect;
   uploadingGuidRects: DOMRect;
+  mainButtonGuidRect: DOMRect;
   viewAs: string;
   infoPanelVisible: boolean;
 }
 
 export interface GuidProps extends GuidanceProps {
   position: ClippedPosition;
+  mainButtonPosition: ClippedPosition;
 }

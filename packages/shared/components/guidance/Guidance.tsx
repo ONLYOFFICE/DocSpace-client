@@ -29,7 +29,10 @@ import React from "react";
 import { Portal } from "../portal";
 import { Guid } from "./sub-components/Guid";
 import { GuidanceProps } from "./sub-components/Guid.types";
-import { getGuidPosition } from "./sub-components/Guid.utils";
+import {
+  getGuidPosition,
+  getMainButtonPosition,
+} from "./sub-components/Guid.utils";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
 const Guidance = (props: GuidanceProps) => {
@@ -40,6 +43,7 @@ const Guidance = (props: GuidanceProps) => {
     readyGuidRects,
     shareGuidRects,
     uploadingGuidRects,
+    mainButtonGuidRect,
   } = props;
 
   const { isRTL } = useInterfaceDirection();
@@ -50,7 +54,10 @@ const Guidance = (props: GuidanceProps) => {
     left: 0,
     top: 0,
     bottom: 0,
+    right: 0,
   });
+
+  const mainButtonPosition = getMainButtonPosition(mainButtonGuidRect);
 
   const onResize = React.useCallback(() => {
     const guidRects = {
@@ -93,7 +100,17 @@ const Guidance = (props: GuidanceProps) => {
     onResize,
   ]);
 
-  return <Portal element={<Guid position={position} {...props} />} />;
+  return (
+    <Portal
+      element={
+        <Guid
+          position={position}
+          mainButtonPosition={mainButtonPosition}
+          {...props}
+        />
+      }
+    />
+  );
 };
 
 export { Guidance };

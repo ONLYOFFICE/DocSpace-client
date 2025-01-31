@@ -158,6 +158,7 @@ const Panels = (props) => {
     readyGuidRects,
     shareGuidRects,
     uploadingGuidRects,
+    mainButtonGuidRect,
     infoPanelVisible,
     userId,
   } = props;
@@ -387,6 +388,7 @@ const Panels = (props) => {
         shareGuidRects={shareGuidRects}
         uploadingGuidRects={uploadingGuidRects}
         infoPanelVisible={infoPanelVisible}
+        mainButtonGuidRect={mainButtonGuidRect}
       />
     ),
   ];
@@ -474,6 +476,7 @@ export default inject(
       readyGuidRects,
       shareGuidRects,
       uploadingGuidRects,
+      mainButtonGuidRect,
     } = filesStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -576,6 +579,7 @@ export default inject(
       readyGuidRects,
       shareGuidRects,
       uploadingGuidRects,
+      mainButtonGuidRect,
       infoPanelVisible: infoPanelStore.isVisible,
       userId: userStore?.user?.id,
     };

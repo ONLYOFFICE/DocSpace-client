@@ -44,6 +44,7 @@ const MainButton = (props: MainButtonProps) => {
     isDisabled = false,
     className,
     id,
+    setGuidRectsMainButton,
     ...rest
   } = props;
 
@@ -57,6 +58,7 @@ const MainButton = (props: MainButtonProps) => {
       if (buttonRef.current) {
         const rect = buttonRef.current.getBoundingClientRect();
         setButtonWidth(rect.width);
+        setGuidRectsMainButton(rect);
       }
     };
 

@@ -96,8 +96,6 @@ export type MainButtonMobileProps = {
   style?: React.CSSProperties;
   /** Drop down items options */
   actionOptions?: ActionOption[];
-  /** Displays progress bar components */
-  progressOptions?: ProgressOption[];
   /** Menu that opens by clicking on the button */
   buttonOptions?: ButtonOption[];
   /** The function called after the button is clicked */

@@ -90,17 +90,22 @@
   &.completed {
     animation: highlight 0.5s ease-out;
   }
+}
 
-  :global {
-    .icon-box {
-      svg {
-        path {
-          fill: white;
-        }
-        // path:nth-child(2) {
-        //   fill: var(--color-scheme-main-accent);
-        // }
-      }
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    path {
+      fill: var(--color-scheme-text-accent);
+    }
+  }
+
+  &.accentIcon {
+    svg path {
+      fill: var(--color-scheme-main-accent);
     }
   }
 }
@@ -125,18 +130,6 @@
       path {
         fill: var(--status-icon-color-positive) !important;
       }
-    }
-  }
-}
-
-.iconBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  svg {
-    path {
-      fill: var(--floating-button-icon-fill);
     }
   }
 }

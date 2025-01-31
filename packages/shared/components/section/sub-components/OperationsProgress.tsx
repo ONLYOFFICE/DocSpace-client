@@ -165,7 +165,8 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
       : primaryActiveOperations[0].operation;
 
     return (
-      operationToIconMap[operation as OperationName] || FloatingButtonIcons.file
+      operationToIconMap[operation as OperationName] ||
+      FloatingButtonIcons.other
     );
   };
 

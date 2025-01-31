@@ -196,11 +196,11 @@ export const GENERAL_LINK_HEADER_KEY = "general-link_header";
 
 export const OPERATIONS_NAME = Object.freeze({
   trash: "trash",
-  deletePermanently: "delete-permanently",
+  deletePermanently: "deletePermanently",
   download: "download",
   duplicate: "duplicate",
-  exportIndex: "export-index",
-  markAsRead: "mark-as-read",
+  exportIndex: "exportIndex",
+  markAsRead: "markAsRead",
   copy: "copy",
   move: "move",
   convert: "convert",

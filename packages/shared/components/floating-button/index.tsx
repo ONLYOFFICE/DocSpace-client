@@ -52,25 +52,21 @@ import { FloatingButtonIcons } from "./FloatingButton.enums";
 import styles from "./FloatingButton.module.scss";
 
 const ICON_COMPONENTS = {
-  [FloatingButtonIcons.upload]: <UploadIcon data-icon="upload" />,
-  [FloatingButtonIcons.other]: <FileIcon data-icon="file" />,
-  [FloatingButtonIcons.trash]: <TrashIcon data-icon="trash" />,
-  [FloatingButtonIcons.move]: <MoveIcon data-icon="move" />,
-  [FloatingButtonIcons.plus]: <PlusIcon data-icon="plus" />,
-  [FloatingButtonIcons.minus]: <MinusIcon data-icon="minus" />,
-  [FloatingButtonIcons.refresh]: <RefreshIcon data-icon="refresh" />,
-  [FloatingButtonIcons.duplicate]: <DuplicateIcon data-icon="duplicate" />,
-  [FloatingButtonIcons.exportIndex]: (
-    <ExportRoomIndexIcon data-icon="exportIndex" />
-  ),
-  [FloatingButtonIcons.dots]: <HorizontalDotsIcon data-icon="dots" />,
-  [FloatingButtonIcons.arrow]: <ArrowIcon data-icon="arrow" />,
-  [FloatingButtonIcons.deletePermanently]: (
-    <DeletePermanentlyIcon data-icon="delete-permanently" />
-  ),
-  [FloatingButtonIcons.copy]: <CopyIcon data-icon="copy" />,
-  [FloatingButtonIcons.download]: <DownloadIcon data-icon="copy" />,
-  [FloatingButtonIcons.markAsRead]: <MarkAsReadIcon data-icon="markAsRead" />,
+  [FloatingButtonIcons.upload]: <UploadIcon />,
+  [FloatingButtonIcons.other]: <FileIcon />,
+  [FloatingButtonIcons.trash]: <TrashIcon />,
+  [FloatingButtonIcons.move]: <MoveIcon />,
+  [FloatingButtonIcons.plus]: <PlusIcon />,
+  [FloatingButtonIcons.minus]: <MinusIcon />,
+  [FloatingButtonIcons.refresh]: <RefreshIcon />,
+  [FloatingButtonIcons.duplicate]: <DuplicateIcon />,
+  [FloatingButtonIcons.exportIndex]: <ExportRoomIndexIcon />,
+  [FloatingButtonIcons.dots]: <HorizontalDotsIcon />,
+  [FloatingButtonIcons.arrow]: <ArrowIcon />,
+  [FloatingButtonIcons.deletePermanently]: <DeletePermanentlyIcon />,
+  [FloatingButtonIcons.copy]: <CopyIcon />,
+  [FloatingButtonIcons.download]: <DownloadIcon />,
+  [FloatingButtonIcons.markAsRead]: <MarkAsReadIcon />,
 } as const;
 
 const FloatingButton = ({
@@ -87,9 +83,7 @@ const FloatingButton = ({
   showCancelButton,
 }: FloatingButtonProps) => {
   const iconComponent = useMemo(() => {
-    return (
-      ICON_COMPONENTS[icon] ?? ICON_COMPONENTS[FloatingButtonIcons.duplicate]
-    );
+    return ICON_COMPONENTS[icon] ?? ICON_COMPONENTS[FloatingButtonIcons.other];
   }, [icon]);
 
   const handleProgressClear = () => {
@@ -134,7 +128,16 @@ const FloatingButton = ({
         >
           {withoutProgress ? null : <div className={styles.loader} />}
           <div className={classNames(styles.floatingButton)}>
-            <div className={classNames(styles.iconBox, "icon-box")}>
+            <div
+              className={classNames(styles.iconBox, "icon-box", {
+                [styles.accentIcon]: [
+                  FloatingButtonIcons.upload,
+                  FloatingButtonIcons.trash,
+                  FloatingButtonIcons.deletePermanently,
+                  FloatingButtonIcons.other,
+                ].includes(icon),
+              })}
+            >
               {iconComponent}
             </div>
             {alert || completed ? (

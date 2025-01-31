@@ -60,7 +60,7 @@ export const MobileView = ({
         badgeLabel={t("Paid")}
         onClickLink={onClickLink}
       />
-      {displayAbout && (
+      {displayAbout ? (
         <MobileCategoryWrapper
           title={t("CompanyInfoSettings")}
           subtitle={t("BrandingSectionDescription", {
@@ -71,8 +71,8 @@ export const MobileView = ({
           badgeLabel={t("Paid")}
           onClickLink={onClickLink}
         />
-      )}
-      {displayAdditional && (
+      ) : null}
+      {displayAdditional ? (
         <MobileCategoryWrapper
           title={t("AdditionalResources")}
           subtitle={t("AdditionalResourcesSubtitle")}
@@ -81,7 +81,7 @@ export const MobileView = ({
           badgeLabel={t("Paid")}
           onClickLink={onClickLink}
         />
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

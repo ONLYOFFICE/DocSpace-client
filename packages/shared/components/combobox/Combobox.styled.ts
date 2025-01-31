@@ -38,8 +38,8 @@ import {
 
 import { Loader } from "../loader";
 
-import { ComboBoxSize } from "./Combobox.enums";
-import { TCombobox } from "./Combobox.types";
+import { ComboBoxSize } from "./ComboBox.enums";
+import type { TCombobox } from "./ComboBox.types";
 
 // for ComboButton with plusBadge (StyledGroupsCombobox)
 const alternativeComboButtonStyles = css<{
@@ -82,6 +82,11 @@ const StyledComboBox = styled.div.attrs(injectDefaultTheme)<{
   noBorder?: boolean;
   advancedOptions?: React.ReactNode;
   disableMobileView?: boolean;
+  onClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
+  "data-testid"?: string;
+  title?: string;
+  className?: string;
+  ref?: React.RefObject<HTMLDivElement>;
 }>`
   width: ${(props) =>
     (props.scaled && "100%") ||
@@ -95,7 +100,7 @@ const StyledComboBox = styled.div.attrs(injectDefaultTheme)<{
   outline: 0;
   -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
-  padding: ${(props) => (props.withoutPadding ? "0" : "4px 0")};
+  padding: ${(props): string => (props.withoutPadding ? "0" : "4px 0")};
 
   ${(props) =>
     props.isOpen &&
@@ -106,25 +111,29 @@ const StyledComboBox = styled.div.attrs(injectDefaultTheme)<{
     `}
 
   .dropdown-container {
-    padding: ${(props) =>
-      props.advancedOptions && props.theme.comboBox.padding};
-
     ${(props) =>
-      !props.disableMobileView &&
-      css`
-        @media ${mobile} {
-          position: fixed;
-          top: unset !important;
-          inset-inline: 0;
-          bottom: 0 !important;
-          width: 100%;
-          width: -moz-available;
-          width: -webkit-fill-available;
-          width: fill-available;
-          border: none;
-          border-radius: 6px 6px 0px 0px;
-        }
-      `}
+      props.advancedOptions
+        ? css`
+            padding: ${props.theme.comboBox.padding};
+          `
+        : undefined}
+    ${(props) =>
+      !props.disableMobileView
+        ? css`
+            @media ${mobile} {
+              position: fixed;
+              top: unset !important;
+              inset-inline: 0;
+              bottom: 0 !important;
+              width: 100%;
+              width: -moz-available;
+              width: -webkit-fill-available;
+              width: fill-available;
+              border: none;
+              border-radius: 6px 6px 0px 0px;
+            }
+          `
+        : undefined}
   }
 
   -webkit-user-select: none;

@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum ComboBoxDisplayType {
+export enum ComboBoxDisplayType {
   default = "default",
   toggle = "toggle",
 }
 
-export const enum ComboBoxSize {
+export enum ComboBoxSize {
   base = "base",
   middle = "middle",
   big = "big",

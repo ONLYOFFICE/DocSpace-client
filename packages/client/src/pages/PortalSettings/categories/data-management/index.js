@@ -41,6 +41,10 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isManagement } from "@docspace/shared/utils/common";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 
 import config from "../../../../../package.json";
 
@@ -125,6 +129,23 @@ const DataManagementWrapper = (props) => {
 
     setIsLoaded(true);
   }, [location.pathname]);
+
+  useEffect(() => {
+    const { socketSubscribers } = SocketHelper;
+
+    if (!socketSubscribers.has("backup")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "backup",
+      });
+    }
+
+    return () => {
+      SocketHelper.off(SocketEvents.BackupProgress);
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: "backup",
+      });
+    };
+  }, []);
 
   const onSelect = (e) => {
     const url = isManagement()

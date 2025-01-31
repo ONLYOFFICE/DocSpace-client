@@ -68,8 +68,8 @@ const FieldContainer = ({
       removeMargin={removeMargin}
       data-testid="field-container"
     >
-      {labelVisible &&
-        (!inlineHelpButton ? (
+      {labelVisible ? (
+        !inlineHelpButton ? (
           <div className="field-label-icon">
             <Label
               isRequired={isRequired}
@@ -80,14 +80,14 @@ const FieldContainer = ({
               tooltipMaxWidth={tooltipMaxWidth}
               htmlFor=""
             />
-            {tooltipContent && (
+            {tooltipContent ? (
               <HelpButton
                 className={tooltipClass}
                 tooltipContent={tooltipContent}
                 place={place}
                 // helpButtonHeaderContent={helpButtonHeaderContent}
               />
-            )}
+            ) : null}
           </div>
         ) : (
           <div className="field-label-icon">
@@ -99,7 +99,7 @@ const FieldContainer = ({
               truncate
               className="field-label"
             >
-              {tooltipContent && (
+              {tooltipContent ? (
                 <HelpButton
                   className={tooltipClass}
                   tooltipContent={tooltipContent}
@@ -108,10 +108,11 @@ const FieldContainer = ({
                   style={displayInlineBlock}
                   offsetRight={0}
                 />
-              )}
+              ) : null}
             </Label>
           </div>
-        ))}
+        )
+      ) : null}
 
       <div className="field-body">
         {children}

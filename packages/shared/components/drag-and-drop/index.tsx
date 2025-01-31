@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import getFilesFromEvent from "./get-files-from-event";
-// import DragAndDrop from "./DragAndDrop";
+import DragAndDrop from "./DragAndDrop";
 
-// export { DragAndDrop, getFilesFromEvent };
+export { DragAndDrop };

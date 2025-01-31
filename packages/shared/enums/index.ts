@@ -471,7 +471,7 @@ export const enum FilterSelectorTypes {
   groups = "groups-selector",
 }
 
-export const enum DeviceType {
+export enum DeviceType {
   mobile = "mobile",
   tablet = "tablet",
   desktop = "desktop",

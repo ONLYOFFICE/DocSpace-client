@@ -69,14 +69,15 @@ export const EnterpriseContainer = ({
         isDeveloper={isDeveloper}
       />
 
-      {isLicenseDateExpired && (
+      {isLicenseDateExpired ? (
         <BenefitsContainer
           isTrial={isTrial}
           isEnterprise={isEnterprise}
           isDeveloper={isDeveloper}
         />
-      )}
+      ) : null}
 
+      {isLicenseDateExpired ? <BenefitsContainer /> : null}
       <Text fontSize="14px" className="payments_renew-subscription">
         {isLicenseDateExpired
           ? t("ActivatePurchaseBuyLicense")

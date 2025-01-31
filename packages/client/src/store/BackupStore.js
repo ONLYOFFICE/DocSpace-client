@@ -34,6 +34,7 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
+
 import {
   saveToLocalStorage,
   getFromLocalStorage,
@@ -118,6 +119,8 @@ class BackupStore {
   preparationPortalDialogVisible = false;
 
   downloadingProgress = 100;
+
+  errorInformation = "";
 
   temporaryLink = null;
 
@@ -551,105 +554,45 @@ class BackupStore {
     }
   };
 
+  setErrorInformation = (err, t) => {
+    let message = "";
+    if (typeof err === "string") message = err;
+    else
+      message =
+        ("response" in err && err.response?.data?.error?.message) ||
+        ("message" in err && err.message) ||
+        "";
+
+    if (err?.response?.status === 502) message = t("Common:UnexpectedError");
+
+    this.errorInformation = message ?? t("Common:UnexpectedError");
+  };
+
   getProgress = async (t) => {
     try {
       const response = await getBackupProgress();
 
       if (response) {
         const { progress, link, error } = response;
+
         if (!error) {
           this.downloadingProgress = progress;
 
           if (link && link.slice(0, 1) === "/") {
             this.temporaryLink = link;
           }
-
-          if (progress !== 100) {
-            this.getIntervalProgress(t);
-          } else {
-            // this.clearLocalStorage();
-          }
+          this.setErrorInformation("");
         } else {
           this.downloadingProgress = 100;
-          clearInterval(this.timerId);
-          // this.clearLocalStorage();
+          this.setErrorInformation(error);
         }
       }
-    } catch (e) {
-      toastr.error(t("BackupCreatedError"));
-      // this.clearLocalStorage();
+    } catch (err) {
+      this.setErrorInformation(err, t);
     }
   };
 
-  getIntervalProgress = (t) => {
-    if (this.timerId) {
-      return;
-    }
-
-    let isWaitRequest = false;
-    this.timerId = setInterval(async () => {
-      try {
-        if (isWaitRequest) {
-          return;
-        }
-
-        isWaitRequest = true;
-
-        const response = await getBackupProgress();
-
-        if (response) {
-          const { progress, link, error } = response;
-
-          if (error.length > 0 && progress !== 100) {
-            clearInterval(this.timerId);
-            this.timerId && toastr.error(error);
-            this.timerId = null;
-            // this.clearLocalStorage();
-            this.downloadingProgress = 100;
-            return;
-          }
-
-          if (progress > 0 && progress !== this.downloadingProgress) {
-            this.downloadingProgress = progress;
-          }
-
-          if (progress === 100) {
-            clearInterval(this.timerId);
-            // this.clearLocalStorage();
-
-            if (link && link.slice(0, 1) === "/") {
-              this.temporaryLink = link;
-            }
-
-            this.timerId && toastr.success(t("BackupCreatedSuccess"));
-            this.timerId = null;
-
-            return;
-          }
-        } else {
-          this.timerId && toastr.error(t("BackupCreatedError"));
-          this.downloadingProgress = 100;
-          clearInterval(this.timerId);
-          // this.clearLocalStorage();
-          this.timerId = null;
-          return;
-        }
-
-        isWaitRequest = false;
-      } catch (e) {
-        clearInterval(this.timerId);
-        // this.clearLocalStorage();
-        this.downloadingProgress = 100;
-        this.timerId && toastr.error(e);
-        this.timerId = null;
-      }
-    }, 1000);
-  };
-
-  clearProgressInterval = () => {
-    this.timerId && clearInterval(this.timerId);
-    this.timerId = null;
-
+  resetDownloadingProgress = () => {
     if (
       typeof window !== "undefined" &&
       !window.location.pathname.includes("data-backup") &&
@@ -660,11 +603,12 @@ class BackupStore {
   };
 
   get isBackupProgressVisible() {
-    return this.downloadingProgress > 0 && this.downloadingProgress !== 100;
+    return this.downloadingProgress >= 0 && this.downloadingProgress !== 100;
   }
 
   setDownloadingProgress = (progress) => {
-    this.downloadingProgress = progress;
+    if (progress !== this.downloadingProgress)
+      this.downloadingProgress = progress;
   };
 
   setTemporaryLink = (link) => {

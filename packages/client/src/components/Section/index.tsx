@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { useLocation } from "react-router-dom";
 
 import Section, { SectionProps } from "@docspace/shared/components/section";
 
@@ -33,7 +34,12 @@ const SectionWrapper = ({
 
   ...rest
 }: SectionProps) => {
-  return <Section {...rest}>{children}</Section>;
+  const location = useLocation();
+  return (
+    <Section {...rest} pathname={location.pathname}>
+      {children}
+    </Section>
+  );
 };
 
 export default inject(

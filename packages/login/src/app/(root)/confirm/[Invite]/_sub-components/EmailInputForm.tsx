@@ -86,7 +86,6 @@ const EmailInputForm = ({
         <EmailInput
           id="login"
           name="login"
-          type={InputType.email}
           size={InputSize.large}
           hasError={isEmailErrorShow && !emailValid}
           value={email}
@@ -104,6 +103,7 @@ const EmailInputForm = ({
         />
       </FieldContainer>
       <Button
+        id="email-continue"
         className="login-button"
         primary
         size={ButtonSize.medium}

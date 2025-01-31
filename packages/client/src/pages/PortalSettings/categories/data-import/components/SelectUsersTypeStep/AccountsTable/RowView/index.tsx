@@ -33,8 +33,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { Box } from "@docspace/shared/components/box";
 import { TableGroupMenu } from "@docspace/shared/components/table";
-import { RowContainer } from "@docspace/shared/components/row-container";
-import { Row } from "@docspace/shared/components/row";
+import { RowContainer, Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
@@ -158,7 +157,7 @@ const RowView = (props: TypeSelectRowViewProps) => {
 
   return (
     <StyledRowContainer useReactWindow={false}>
-      {checkedUsers.result.length > 0 && (
+      {checkedUsers.result.length > 0 ? (
         <div className="table-group-menu">
           <TableGroupMenu
             headerMenu={headerMenu}
@@ -169,7 +168,7 @@ const RowView = (props: TypeSelectRowViewProps) => {
             onChange={toggleAll}
           />
         </div>
-      )}
+      ) : null}
       {accountsData.length > 0 ? (
         <>
           <StyledRow key="Name">

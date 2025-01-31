@@ -313,7 +313,7 @@ const ConnectDialog = ({
           </FieldContainer>
         ) : (
           <>
-            {showUrlField && (
+            {showUrlField ? (
               <FieldContainer
                 labelVisible
                 isRequired
@@ -335,7 +335,7 @@ const ConnectDialog = ({
                   size={InputSize.base}
                 />
               </FieldContainer>
-            )}
+            ) : null}
 
             <FieldContainer
               labelVisible
@@ -381,7 +381,7 @@ const ConnectDialog = ({
             </FieldContainer>
           </>
         )}
-        {!(isConnectionViaBackupModule || roomCreation) && (
+        {!(isConnectionViaBackupModule || roomCreation) ? (
           <FieldContainer
             labelText={t("ConnectFolderTitle")}
             isRequired
@@ -400,7 +400,7 @@ const ConnectDialog = ({
               size={InputSize.base}
             />
           </FieldContainer>
-        )}
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

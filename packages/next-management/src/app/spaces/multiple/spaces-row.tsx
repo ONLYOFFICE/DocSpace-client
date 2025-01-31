@@ -140,4 +140,3 @@ export const SpacesRow = ({ item, tenantAlias, portals }) => {
     </>
   );
 };
-

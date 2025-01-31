@@ -32,7 +32,7 @@ import React from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
@@ -78,9 +78,9 @@ export const Section = ({
               className="arrow-button"
             />
           )}
-          <Headline className="headline" type="content" truncate={true}>
+          <Heading className="headline" type="content" truncate={true}>
             {key}
-          </Headline>
+          </Heading>
         </StyledHeading>
         {showBar && <Bar title={barTitle} />}
       </StyledSectionHeader>
@@ -90,4 +90,3 @@ export const Section = ({
     </StyledSection>
   );
 };
-

@@ -23,9 +23,10 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
+import { TOption, ComboBoxSize } from "../combobox";
 import { mapCulturesToArray } from "../../utils/common";
 import { StyledComboBox } from "./LanguageCombobox.styled";
 import { TCulture, ComboboxProps } from "./LanguageCombobox.types";
@@ -51,7 +52,8 @@ const LanguageCombobox = (props: ComboboxProps) => {
     (item) => item.key === selectedCulture,
   );
 
-  const onSelect = (culture: TCulture) => {
+  const onSelect = (option: TOption) => {
+    const culture = option as TCulture;
     if (culture.key === selectedCulture) return;
 
     onSelectLanguage(culture);
@@ -69,7 +71,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
       isDisabled={false}
       scaled={false}
       scaledOptions={false}
-      size="content"
+      size={ComboBoxSize.content}
       showDisabledItems
       dropDownMaxHeight={300}
       fillIcon={false}
@@ -78,11 +80,16 @@ const LanguageCombobox = (props: ComboboxProps) => {
       noBorder={false}
       type="onlyIcon"
       optionStyle={{ padding: "0 8px" }}
-      style={{ padding: "6px 0px" }}
       isMobileView={isMobileView}
       withBlur={isMobileView}
       withBorder={withBorder}
       withLabel={!!withLabel}
+      data-test-id="language-combobox"
+      role="combobox"
+      aria-label="Select language"
+      aria-expanded="false"
+      aria-haspopup="listbox"
+      aria-controls="language-options"
     />
   );
 };

@@ -137,7 +137,6 @@ const GroupsRowComponent = ({
             <Badges isLDAP={item.isLDAP} />
 
             <Link
-              key="group-title"
               target={LinkTarget.blank}
               title={item.name}
               fontWeight={600}

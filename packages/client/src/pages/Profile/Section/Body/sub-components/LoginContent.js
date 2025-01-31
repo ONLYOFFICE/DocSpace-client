@@ -68,7 +68,7 @@ const LoginContent = (props) => {
 
   return (
     <StyledWrapper>
-      {tfaOn && <LoginSettings backupCodesCount={backupCodesCount} />}
+      {tfaOn ? <LoginSettings backupCodesCount={backupCodesCount} /> : null}
       <SocialNetworks />
       <ActiveSession />
     </StyledWrapper>

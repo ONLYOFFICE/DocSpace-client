@@ -67,12 +67,12 @@ const DowngradePlanButtonContainer = ({
 
   return (
     <StyledBody>
-      {isVisibleDowngradePlanDialog && (
+      {isVisibleDowngradePlanDialog ? (
         <ChangePricingPlanDialog
           visible={isVisibleDowngradePlanDialog}
           onClose={onClose}
         />
-      )}
+      ) : null}
       <Button
         label={buttonLabel}
         size="medium"

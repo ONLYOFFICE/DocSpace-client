@@ -26,7 +26,7 @@
 
 import React, { Component } from "react";
 import styled, { css } from "styled-components";
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { inject, observer } from "mobx-react";
@@ -298,7 +298,11 @@ class FileRow extends Component {
         key={item.uniqueId}
         checkbox={false}
         element={
-          <img className={item.error && "img_error"} src={fileIcon} alt="" />
+          <img
+            className={item.error ? "img_error" : null}
+            src={fileIcon}
+            alt=""
+          />
         }
         isMediaActive={isMediaActive}
         showPasswordInput={showPasswordInput}
@@ -369,7 +373,7 @@ class FileRow extends Component {
               <LoadingButton item={item} />
             </div>
           )}
-          {showPasswordInput && (
+          {showPasswordInput ? (
             <div className="password-input">
               <SimulatePassword
                 onChange={this.onChangePassword}
@@ -387,7 +391,7 @@ class FileRow extends Component {
                 isDisabled={!password}
               />
             </div>
-          )}
+          ) : null}
         </>
       </StyledFileRow>
     );

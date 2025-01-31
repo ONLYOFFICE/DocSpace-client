@@ -374,7 +374,7 @@ const FileSelector = (props) => {
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
-            {sharedLinks && (
+            {sharedLinks ? (
               <ControlsGroup>
                 <LabelGroup>
                   <Label
@@ -398,7 +398,7 @@ const FileSelector = (props) => {
                   directionY="bottom"
                 />
               </ControlsGroup>
-            )}
+            ) : null}
           </ControlsSection>
 
           <ControlsSection>
@@ -412,7 +412,7 @@ const FileSelector = (props) => {
               onClick={changeColumnsOption}
               spacing="8px"
             />
-            {typeDisplay === "SelectorTypes" && (
+            {typeDisplay === "SelectorTypes" ? (
               <ComboBox
                 onSelect={onTypeSelect}
                 options={
@@ -425,7 +425,7 @@ const FileSelector = (props) => {
                 directionY="top"
                 selectedOption={selectedType}
               />
-            )}
+            ) : null}
           </ControlsSection>
 
           <Integration

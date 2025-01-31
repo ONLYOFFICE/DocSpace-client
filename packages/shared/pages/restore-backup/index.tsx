@@ -24,8 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import { toastr } from "@docspace/shared/components/toast";
+import StatusMessage from "@docspace/shared/components/status-message";
+import { getBackupProgressInfo } from "@docspace/shared/utils/common";
+import SocketHelper, {
+  SocketEvents,
+  TSocketListener,
+} from "@docspace/shared/utils/socket";
 
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -101,6 +109,11 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     uploadLocalFile,
     isBackupProgressVisible,
     isInitialLoading,
+
+    errorInformation,
+    setDownloadingProgress,
+    setTemporaryLink,
+    setErrorInformation,
   } = props;
 
   const { t } = useTranslation(["Settings", "Common"]);
@@ -113,6 +126,33 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
 
   const [isVisibleBackupListDialog, setIsVisibleBackupListDialog] =
     useState(false);
+
+  useEffect(() => {
+    const onBackupProgress: TSocketListener<SocketEvents.BackupProgress> = (
+      opt,
+    ) => {
+      const options = getBackupProgressInfo(
+        opt,
+        t,
+        setDownloadingProgress,
+        setTemporaryLink,
+      );
+
+      if (!options) return;
+
+      const { error, success } = options;
+
+      if (error) toastr.error(error);
+
+      if (success) toastr.success(success);
+    };
+
+    SocketHelper.on(SocketEvents.BackupProgress, onBackupProgress);
+
+    return () => {
+      SocketHelper.off(SocketEvents.BackupProgress, onBackupProgress);
+    };
+  }, []);
 
   const onChangeRadioButton = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -186,14 +226,14 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
 
   const backupModules = (
     <div className="restore-backup_modules">
-      {radioButtonState === LOCAL_FILE && (
+      {radioButtonState === LOCAL_FILE ? (
         <LocalFileModule
           isEnableRestore={isEnableRestore}
           setRestoreResource={setRestoreResource}
         />
-      )}
+      ) : null}
 
-      {radioButtonState === BACKUP_ROOM && (
+      {radioButtonState === BACKUP_ROOM ? (
         <RoomsModule
           settingsFileSelector={settingsFileSelector}
           newPath={newPath}
@@ -205,8 +245,8 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           setRestoreResource={setRestoreResource}
           isEnableRestore={false}
         />
-      )}
-      {radioButtonState === DISK_SPACE && (
+      ) : null}
+      {radioButtonState === DISK_SPACE ? (
         <ThirdPartyResourcesModule
           buttonSize={buttonSize}
           setRestoreResource={setRestoreResource}
@@ -235,8 +275,8 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           removeItem={removeItem}
           filesSelectorSettings={settingsFileSelector}
         />
-      )}
-      {radioButtonState === STORAGE_SPACE && (
+      ) : null}
+      {radioButtonState === STORAGE_SPACE ? (
         <ThirdPartyStoragesModule
           onSetStorageId={onSetStorageId}
           defaultRegion={defaultRegion}
@@ -250,7 +290,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           deleteValueFormSetting={deleteValueFormSetting}
           setIsThirdStorageChanged={setIsThirdStorageChanged}
         />
-      )}
+      ) : null}
     </div>
   );
 
@@ -267,7 +307,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           productName: t("Common:ProductName"),
         })}
       </Text>
-      {!standalone && (
+      {!standalone ? (
         <Text
           className="restore-backup_warning-link settings_unavailable"
           noSelect
@@ -276,7 +316,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
             productName: t("Common:ProductName"),
           })}
         </Text>
-      )}
+      ) : null}
     </>
   );
 
@@ -288,6 +328,8 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
 
   return (
     <StyledRestoreBackup isEnableRestore={isEnableRestore}>
+      <StatusMessage message={errorInformation} />
+
       <div className="restore-description">
         <Text className="restore-description settings_unavailable">
           {t("RestoreBackupDescription")}
@@ -304,7 +346,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         {t("BackupList")}
       </Text>
 
-      {isVisibleBackupListDialog && (
+      {isVisibleBackupListDialog ? (
         <BackupListModalDialog
           isVisibleDialog={isVisibleBackupListDialog}
           onModalClose={onModalClose}
@@ -314,7 +356,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           setTenantStatus={setTenantStatus}
           downloadingProgress={downloadingProgress}
         />
-      )}
+      ) : null}
       <Checkbox
         truncate
         name={NOTIFICATION}
@@ -335,6 +377,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         isDisabled={!isEnableRestore}
       />
       <ButtonContainer
+        setErrorInformation={setErrorInformation}
         isConfirmed={checkboxState.confirmation}
         isNotification={checkboxState.notification}
         getStorageType={getStorageType}

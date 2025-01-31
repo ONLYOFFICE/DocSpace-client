@@ -129,4 +129,3 @@ export const RowContent = ({ item, tenantAlias }) => {
     </StyledRowContent>
   );
 };
-

@@ -63,7 +63,7 @@ export const MobileCategoryWrapper = ({
         >
           {title}
         </Link>
-        {withPaidBadge && !isManagement() && (
+        {withPaidBadge && !isManagement() ? (
           <Badge
             backgroundColor={
               theme.isBase
@@ -75,7 +75,7 @@ export const MobileCategoryWrapper = ({
             className="paid-badge"
             fontWeight="700"
           />
-        )}
+        ) : null}
         <StyledArrowRightIcon className="settings_unavailable" size="small" />
       </div>
       <Text className="category-item-description">{subtitle}</Text>

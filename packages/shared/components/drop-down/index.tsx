@@ -27,7 +27,6 @@
 import React from "react";
 import { isMobile } from "react-device-detect";
 
-import { Portal } from "../portal";
 import { Backdrop } from "../backdrop";
 
 import { DropDownProps } from "./DropDown.types";
@@ -82,7 +81,7 @@ const DropDown = (props: DropDownProps) => {
 
   return (
     <>
-      {!usePortalBackdrop && backDrop}
+      {!usePortalBackdrop ? backDrop : null}
       <EnhancedComponent
         {...eventTypesProp}
         showDisabledItems={showDisabledItems}

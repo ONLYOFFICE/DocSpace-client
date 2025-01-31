@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { StyledTrashWarning } from "../Navigation.styled";
+import styles from "../Navigation.module.scss";
 
 const TrashWarning = ({ title }: { title?: string }) => {
   return (
-    <StyledTrashWarning className="trash-warning" title={title}>
+    <div className={`${styles.trashWarning} trash-warning`} title={title}>
       <div className="warning-text">{title}</div>
-    </StyledTrashWarning>
+    </div>
   );
 };
 

@@ -57,19 +57,19 @@ export const WhiteLabelHeader = ({
   return (
     <StyledHeader>
       <Text className="subtitle">{t("BrandingSubtitle")}</Text>
-      {showNotAvailable && <NotAvailable />}
+      {showNotAvailable ? <NotAvailable /> : null}
       <div className="header-container">
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
         </Text>
-        {!isSettingPaid && !standalone && (
+        {!isSettingPaid && !standalone ? (
           <Badge
             className="paid-badge"
             fontWeight="700"
             label={t("Common:Paid")}
             isPaidBadge
           />
-        )}
+        ) : null}
       </div>
       <Text className="wl-subtitle settings_unavailable" fontSize="12px">
         {t("WhiteLabelSubtitle")}
@@ -98,6 +98,7 @@ export const WhiteLabelHeader = ({
           labelVisible
         >
           <TextInput
+            testId="logo-text-input"
             className="company-name input"
             value={logoTextWhiteLabel}
             onChange={onChangeCompanyName}
@@ -111,6 +112,7 @@ export const WhiteLabelHeader = ({
             size={InputSize.base}
           />
           <Button
+            testId="use-as-logo-button"
             id="btnUseAsLogo"
             className="use-as-logo"
             size={ButtonSize.small}

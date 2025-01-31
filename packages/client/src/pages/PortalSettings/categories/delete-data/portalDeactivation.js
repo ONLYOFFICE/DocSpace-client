@@ -99,7 +99,7 @@ const PortalDeactivation = (props) => {
           onClick={onDeactivateClick}
           isDisabled={notActivatedEmail}
         />
-        {notActivatedEmail && (
+        {notActivatedEmail ? (
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,
@@ -115,7 +115,7 @@ const PortalDeactivation = (props) => {
               {t("MainBar:RequestActivation")}
             </Link>
           </Text>
-        )}
+        ) : null}
       </ButtonWrapper>
     </MainContainer>
   );

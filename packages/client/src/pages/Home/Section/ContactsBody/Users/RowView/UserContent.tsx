@@ -132,7 +132,7 @@ const UserContent = ({
       >
         {isGuests ? email : roleLabel}
       </Link>
-      {(!isRoomAdminUser || !isGuests) && (
+      {!isRoomAdminUser || !isGuests ? (
         <Link
           type={LinkType.page}
           title={email}
@@ -143,8 +143,8 @@ const UserContent = ({
         >
           {isGuests ? item.createdBy?.displayName : email}
         </Link>
-      )}
-      {isGuests && !isRoomAdminUser && !isPending && !isDisabled && (
+      ) : null}
+      {isGuests && !isRoomAdminUser && !isPending && !isDisabled ? (
         <Link
           type={LinkType.page}
           title={email}
@@ -155,8 +155,8 @@ const UserContent = ({
         >
           {item.registrationDate}
         </Link>
-      )}
-      {showStorageInfo && !isGuests && (
+      ) : null}
+      {showStorageInfo && !isGuests ? (
         <Link
           type={LinkType.page}
           fontSize="12px"
@@ -166,7 +166,7 @@ const UserContent = ({
         >
           {spaceQuota}
         </Link>
-      )}
+      ) : null}
     </StyledRowContent>
   );
 };

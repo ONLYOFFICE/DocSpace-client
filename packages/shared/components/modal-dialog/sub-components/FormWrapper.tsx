@@ -25,20 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
+import classNames from "classnames";
 
 import { ModalDialogFormWrapperProps } from "../ModalDialog.types";
+import styles from "../ModalDialog.module.scss";
 
-const Form = styled.form`
-  display: contents;
-`;
-
-function FormWrapper({
+const FormWrapper = ({
   withForm,
   children,
   className,
   onSubmit,
-}: ModalDialogFormWrapperProps) {
+}: ModalDialogFormWrapperProps) => {
   if (!withForm) return children;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -48,10 +45,13 @@ function FormWrapper({
   };
 
   return (
-    <Form className={className} onSubmit={handleSubmit}>
+    <form
+      className={classNames(styles.formWrapper, className)}
+      onSubmit={handleSubmit}
+    >
       {children}
-    </Form>
+    </form>
   );
-}
+};
 
 export { FormWrapper };

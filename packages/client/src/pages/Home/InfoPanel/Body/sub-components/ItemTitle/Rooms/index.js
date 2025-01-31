@@ -76,6 +76,9 @@ const RoomsItemHeader = ({
   const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
 
   const badgeUrl = getRoomBadgeUrl(selection);
+  const tooltipContent = selection?.external
+    ? t("Files:RecentlyOpenedTooltip")
+    : null;
 
   const isFile = !!selection.fileExst;
   let title = selection.title;
@@ -117,7 +120,7 @@ const RoomsItemHeader = ({
 
   return (
     <StyledTitle ref={itemTitleRef}>
-      {isRoomMembersPanel && showSearchBlock && <Search />}
+      {isRoomMembersPanel && showSearchBlock ? <Search /> : null}
 
       <div className="item-icon">
         <RoomIcon
@@ -128,13 +131,15 @@ const RoomsItemHeader = ({
           imgClassName={`icon ${selection.isRoom && "is-room"}`}
           logo={icon}
           badgeUrl={badgeUrl || ""}
+          tooltipContent={tooltipContent}
           hoverSrc={
-            selection.isRoom &&
-            selection.security?.EditRoom &&
-            Camera10ReactSvgUrl
+            selection.isRoom && selection.security?.EditRoom
+              ? Camera10ReactSvgUrl
+              : null
           }
           model={model}
           onChangeFile={onChangeFileContext}
+          tooltipId="info-panel-title_icon-tooltip"
         />
       </div>
 
@@ -147,13 +152,13 @@ const RoomsItemHeader = ({
         truncate
       >
         {title}
-        {isFile && displayFileExtension && (
+        {isFile && displayFileExtension ? (
           <span className="file-extension">{selection.fileExst}</span>
-        )}
+        ) : null}
       </Text>
 
       <div className="info_title-icons">
-        {isRoomMembersPanel && (
+        {isRoomMembersPanel ? (
           <IconButton
             id="info_search"
             className="icon"
@@ -162,9 +167,9 @@ const RoomsItemHeader = ({
             onClick={onSearchClick}
             size={16}
           />
-        )}
+        ) : null}
 
-        {canInviteUserInRoomAbility && isRoomMembersPanel && (
+        {canInviteUserInRoomAbility && isRoomMembersPanel ? (
           <IconButton
             id="info_add-user"
             className="icon"
@@ -174,7 +179,7 @@ const RoomsItemHeader = ({
             onClick={onClickInviteUsers}
             size={16}
           />
-        )}
+        ) : null}
         {/* Show after adding a calendar request
         {openHistory && (
           <CalendarComponent

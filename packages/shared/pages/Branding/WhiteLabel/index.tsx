@@ -68,7 +68,7 @@ export const WhiteLabel = ({
   }, [logoText, isWhiteLabelLoaded]);
 
   const onChangeCompanyName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const { value } = e.target;
     setLogoTextWhiteLabel(value);
     const trimmedValue = value?.trim();
     setIsEmpty(!trimmedValue);
@@ -124,14 +124,16 @@ export const WhiteLabel = ({
 
     const file = e.target.files && e.target.files[0];
 
-    const { data } = await uploadLogo(file, type);
+    const response = await uploadLogo(file, type);
+    if (!response) return;
+    const { data } = response;
 
     if (data.Success) {
       const url = data.Message;
-      const newArr = logoUrls.map((logo) => {
+      const newArr = logoUrls.map((logo, i) => {
         if (logo.name !== logoName) return logo;
-        if (theme === "light") logo.path.light = url;
-        if (theme === "dark") logo.path.dark = url;
+        if (theme === "light") logoUrls[i].path.light = url;
+        if (theme === "dark") logoUrls[i].path.dark = url;
         return logo;
       });
       setLogoUrls(newArr);
@@ -290,7 +292,7 @@ export const WhiteLabel = ({
           </div>
         </div>
 
-        {showAbout && (
+        {showAbout ? (
           <div className="logo-wrapper">
             <Text
               fontSize="15px"
@@ -325,7 +327,7 @@ export const WhiteLabel = ({
               />
             </div>
           </div>
-        )}
+        ) : null}
         <div className="logo-wrapper">
           <Text
             fontSize="15px"

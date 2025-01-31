@@ -26,25 +26,20 @@
 
 "use client";
 
-import { ScrollbarType } from "./Scrollbar.enums";
-import { ScrollbarComponent as Scrollbar } from "./Scrollbar";
-// import { ScrollbarContext } from "./custom-scrollbar";
-import {
-  CustomScrollbarsVirtualList,
-  CustomScrollbarsVirtualListWithAutoFocus,
-} from "./sub-components";
+import { Scrollbar } from "./Scrollbar";
 import type {
   ScrollbarProps,
   CustomScrollbarsVirtualListProps,
 } from "./Scrollbar.types";
+import {
+  CustomScrollbarsVirtualList,
+  CustomScrollbarsVirtualListWithAutoFocus,
+} from "./sub-components";
 
-export type { CustomScrollbarsVirtualListProps };
+export type { CustomScrollbarsVirtualListProps, ScrollbarProps };
 
 export {
   Scrollbar,
-  ScrollbarProps,
-  ScrollbarType,
   CustomScrollbarsVirtualList,
   CustomScrollbarsVirtualListWithAutoFocus,
-  // ScrollbarContext,
 };

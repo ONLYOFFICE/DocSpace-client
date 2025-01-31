@@ -282,11 +282,13 @@ const DirectThirdPartyConnection = ({
       </StyledComboBoxItem>
     );
   });
+
+  const isConnectedAccount =
+    Boolean(connectedThirdPartyAccount) && isTheSameThirdPartyAccount;
+
   return (
     <StyledBackup
-      isConnectedAccount={
-        !!connectedThirdPartyAccount && isTheSameThirdPartyAccount
-      }
+      isConnectedAccount={isConnectedAccount}
       isMobileScale={isMobileScale}
     >
       <div className="backup_connection">
@@ -314,18 +316,18 @@ const DirectThirdPartyConnection = ({
         />
 
         {connectedThirdPartyAccount?.id &&
-          selectedThirdPartyAccount &&
-          isTheSameThirdPartyAccount && (
-            <ContextMenuButton
-              zIndex={402}
-              className="backup_third-party-context"
-              iconName={VerticalDotsReactSvgUrl}
-              size={15}
-              getData={getContextOptions}
-              isDisabled={isDisabledComponent}
-              displayIconBorder
-            />
-          )}
+        selectedThirdPartyAccount &&
+        isTheSameThirdPartyAccount ? (
+          <ContextMenuButton
+            zIndex={402}
+            className="backup_third-party-context"
+            iconName={VerticalDotsReactSvgUrl}
+            size={15}
+            getData={getContextOptions}
+            isDisabled={isDisabledComponent}
+            displayIconBorder
+          />
+        ) : null}
       </div>
 
       {!connectedThirdPartyAccount?.id || !isTheSameThirdPartyAccount ? (
@@ -365,7 +367,7 @@ const DirectThirdPartyConnection = ({
           />
         )
       )}
-      {deleteThirdPartyDialogVisible && (
+      {deleteThirdPartyDialogVisible ? (
         <DeleteThirdPartyDialog
           updateInfo={() => setThirdPartyAccountsInfo(t)}
           key="thirdparty-delete-dialog"
@@ -378,7 +380,7 @@ const DirectThirdPartyConnection = ({
           providers={providers}
           removeItem={removeItem}
         />
-      )}
+      ) : null}
     </StyledBackup>
   );
 };

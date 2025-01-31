@@ -113,14 +113,14 @@ const Branding = ({
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
       <WhiteLabel />
-      {showSettings && (
+      {showSettings ? (
         <>
           <hr />
           {displayAbout && <CompanyInfoSettings />}
           <hr />
           <AdditionalResources />
         </>
-      )}
+      ) : null}
     </StyledComponent>
   );
 };

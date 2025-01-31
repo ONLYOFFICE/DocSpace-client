@@ -28,9 +28,9 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
-import { TenantStatus } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { isPublicPreview, isPublicRoom } from "@docspace/shared/utils/common";
+import { TenantStatus } from "../enums";
+import { combineUrl } from "../utils/combineUrl";
+import { isPublicPreview, isPublicRoom } from "../utils/common";
 
 import type { PublicRouteProps } from "./Routers.types";
 

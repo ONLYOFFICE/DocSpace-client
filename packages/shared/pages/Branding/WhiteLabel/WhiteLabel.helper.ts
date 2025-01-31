@@ -148,7 +148,7 @@ const getUploadedFileDimensions = (file: File): Promise<IUploadedDimensions> =>
 
       img.src = window.URL.createObjectURL(file);
     } catch (exception) {
-      return reject(exception);
+      reject(exception);
     }
   });
 

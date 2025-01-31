@@ -24,5 +24,176 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { ArticleItem } from "./ArticleItemWrapper";
-export { ArticleItemNext } from "./ArticleItemWrapperNext";
+import React from "react";
+import { ReactSVG } from "react-svg";
+import classNames from "classnames";
+import { Link } from "react-router-dom";
+import { isMobile } from "react-device-detect";
+
+import { Text } from "../text";
+import { Badge } from "../badge";
+
+import styles from "./ArticleItem.module.scss";
+import { ArticleItemProps } from "./ArticleItem.types";
+
+const getInitial = (text: string) => text.substring(0, 1).toUpperCase();
+
+export const ArticleItemPure = (props: ArticleItemProps) => {
+  const {
+    className,
+    id,
+    style,
+    icon,
+    text,
+    showText = false,
+    onClick,
+    onDrop,
+    isEndOfBlock = false,
+    isActive = false,
+    isDragging = false,
+    isDragActive = false,
+    showInitial = false,
+    showBadge = false,
+    labelBadge,
+    iconBadge,
+    onClickBadge,
+    isHeader = false,
+    isFirstHeader = false,
+    folderId,
+    badgeTitle,
+    badgeComponent,
+    title,
+    linkData,
+  } = props;
+
+  const onClickAction = (e: React.MouseEvent) => {
+    onClick?.(e, id);
+  };
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 1) return;
+
+    onClickAction(e);
+  };
+  const onClickBadgeAction = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onClickBadge?.(id);
+  };
+
+  const onMouseUpAction = () => {
+    if (isDragging) onDrop?.(id, text);
+  };
+
+  const renderHeaderItem = () => {
+    return (
+      <div
+        className={classNames(styles.articleItemHeaderContainer, {
+          [styles.showText]: showText,
+          [styles.firstHeader]: isFirstHeader,
+        })}
+        data-testid="article-item-header"
+      >
+        <Text className={styles.articleItemHeaderText} truncate noSelect>
+          {showText ? text : ""}
+        </Text>
+      </div>
+    );
+  };
+
+  const tooltipTitle = !showText ? title : undefined;
+
+  const renderItem = () => {
+    return (
+      <Link
+        style={{ textDecoration: "none" }}
+        to={linkData?.path}
+        state={linkData?.state}
+      >
+        <div
+          className={classNames(styles.articleItemContainer, className, {
+            [styles.showText]: showText,
+            [styles.endOfBlock]: isEndOfBlock,
+            [styles.active]: isActive,
+          })}
+          style={style}
+          data-testid="article-item"
+          title={tooltipTitle}
+        >
+          <div
+            className={classNames(styles.articleItemSibling, {
+              [styles.active]: isActive,
+              [styles.dragging]: isDragging,
+              [styles.dragActive]: isDragActive,
+              [styles.mobileDevice]: isMobile,
+            })}
+            id={folderId}
+            onClick={onClickAction}
+            onMouseUp={onMouseUpAction}
+            onMouseDown={onMouseDown}
+            data-testid="article-item-sibling"
+          />
+          <div
+            className={classNames(styles.articleItemImg, {
+              [styles.active]: isActive,
+            })}
+          >
+            <ReactSVG className={styles.icon} src={icon} />
+            {!showText ? (
+              <>
+                {showInitial ? (
+                  <Text className={styles.articleItemInitialText}>
+                    {getInitial(text)}
+                  </Text>
+                ) : null}
+                {showBadge && !iconBadge ? (
+                  <div
+                    className={classNames(styles.articleItemBadgeWrapper, {
+                      [styles.showText]: showText,
+                    })}
+                    onClick={onClickBadgeAction}
+                  />
+                ) : null}
+              </>
+            ) : null}
+          </div>
+          {showText ? (
+            <Text
+              className={classNames(styles.articleItemText, {
+                [styles.active]: isActive,
+              })}
+              noSelect
+            >
+              {text}
+            </Text>
+          ) : null}
+          {showBadge && showText ? (
+            <div
+              className={classNames(styles.articleItemBadgeWrapper, {
+                [styles.showText]: showText,
+              })}
+              onClick={onClickBadgeAction}
+              title={badgeTitle}
+            >
+              {iconBadge ? (
+                <ReactSVG className={styles.articleItemIcon} src={iconBadge} />
+              ) : (
+                (badgeComponent ?? (
+                  <Badge
+                    className={styles.articleItemBadge}
+                    label={labelBadge}
+                  />
+                ))
+              )}
+            </div>
+          ) : null}
+        </div>
+      </Link>
+    );
+  };
+
+  return isHeader ? renderHeaderItem() : renderItem();
+};
+
+const ArticleItem = React.memo(ArticleItemPure);
+
+export { ArticleItem };

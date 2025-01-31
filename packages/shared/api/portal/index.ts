@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
@@ -176,6 +179,7 @@ export function startRestore(
   storageType: string,
   storageParams,
   notify: boolean,
+  dump = false,
 ) {
   return request({
     method: "post",
@@ -185,6 +189,7 @@ export function startRestore(
       storageType,
       storageParams,
       notify,
+      dump,
     },
   });
 }

@@ -45,7 +45,7 @@ export const ContactContainer = ({
 
   return (
     <>
-      {isCommunity && (
+      {isCommunity ? (
         <StyledContactComponent>
           <div className="payments_contact">
             <Text className="text" fontWeight={600}>
@@ -89,7 +89,7 @@ export const ContactContainer = ({
             </Text>
           </div>
         </StyledContactComponent>
-      )}
+      ) : null}
       <StyledContactComponent>
         <div className="payments_contact">
           <Text className="text" fontWeight={600}>

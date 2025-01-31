@@ -186,18 +186,18 @@ const FolderInput = ({
             {createNewFolderIsChecked || path ? "/" : t("RootFolderLabel")}
           </span>
           <span className="path">{path}</span>
-          {createNewFolderIsChecked && (
+          {createNewFolderIsChecked ? (
             <span className="room_title">
               {(path ? "/" : "") + (roomTitle || t("Common:NewRoom"))}
             </span>
-          )}
+          ) : null}
         </div>
         <div title={t("Common:SelectFolder")} className="icon-wrapper">
           <IconButton size={16} iconName={FolderReactSvgUrl} isClickable />
         </div>
       </StyledFolderInput>
 
-      {isDialogOpen && (
+      {isDialogOpen ? (
         <FilesSelector
           isPanelVisible={isDialogOpen}
           onClose={onClose}
@@ -207,7 +207,7 @@ const FolderInput = ({
           passedFoldersTree={[thirdpartyAccount]}
           currentFolderId={treeNode ? treeNode.id : thirdpartyAccount.id}
         />
-      )}
+      ) : null}
     </>
   );
 };

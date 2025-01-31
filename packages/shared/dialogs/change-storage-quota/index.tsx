@@ -129,7 +129,7 @@ export const ChangeStorageQuotaDialog = ({
                 productName: t("Common:ProductName"),
               })}
         </Text>
-        {!isDisableQuota && (
+        {!isDisableQuota ? (
           <QuotaForm
             onSetQuotaBytesSize={onSetQuotaBytesSize}
             isLoading={isLoading}
@@ -137,7 +137,7 @@ export const ChangeStorageQuotaDialog = ({
             initialSize={initialSize}
             isAutoFocussed
           />
-        )}
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -146,7 +146,7 @@ export const ChangeStorageQuotaDialog = ({
           primary
           onClick={onSaveClick}
           isLoading={isLoading}
-          isDisabled={!isDisableQuota && size.trim() === ""}
+          isDisabled={!isDisableQuota ? size.trim() === "" : null}
           scale
         />
         <Button

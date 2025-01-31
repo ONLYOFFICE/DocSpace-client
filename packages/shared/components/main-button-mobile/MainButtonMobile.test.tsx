@@ -25,16 +25,83 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
-import { render, screen } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { MainButtonMobile } from "./MainButtonMobile";
+import { MainButtonMobile } from ".";
+import { ButtonOption } from "./MainButtonMobile.types";
+
+import { renderWithTheme } from "../../utils/render-with-theme";
+
+jest.mock("PUBLIC_DIR/images/button.alert.react.svg", () => ({
+  __esModule: true,
+  default: () => <div className="alertIcon" data-testid="alert-icon" />,
+}));
 
 describe("<MainButtonMobile />", () => {
-  it("renders without error", () => {
-    render(<MainButtonMobile />);
+  const mockOnClick = jest.fn();
 
+  const buttonOptions: ButtonOption[] = [
+    {
+      key: "option1",
+      label: "Option 1",
+      onClick: jest.fn(),
+    },
+    {
+      key: "option2",
+      label: "Option 2",
+      onClick: jest.fn(),
+    },
+  ];
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("renders without error", () => {
+    renderWithTheme(<MainButtonMobile />);
     expect(screen.getByTestId("main-button-mobile")).toBeInTheDocument();
+  });
+
+  it("renders with button options", () => {
+    renderWithTheme(<MainButtonMobile buttonOptions={buttonOptions} opened />);
+    expect(screen.getByTestId("dropdown")).toBeInTheDocument();
+    expect(screen.getByText("Option 1")).toBeInTheDocument();
+    expect(screen.getByText("Option 2")).toBeInTheDocument();
+  });
+
+  it("handles main button click", () => {
+    renderWithTheme(
+      <MainButtonMobile onClick={mockOnClick} withMenu={false} />,
+    );
+    const button = screen.getByTestId("floating-button");
+    fireEvent.click(button);
+    expect(mockOnClick).toHaveBeenCalled();
+  });
+
+  it("shows progress bar when uploading", () => {
+    renderWithTheme(
+      <MainButtonMobile
+        percent={50}
+        progressOptions={[
+          {
+            key: "upload",
+            label: "Uploading...",
+            percent: 50,
+            open: true,
+          },
+        ]}
+        opened
+      />,
+    );
+    expect(screen.getByText("Uploading...")).toBeInTheDocument();
+  });
+
+  it("hides loading indicator when upload is complete", () => {
+    renderWithTheme(<MainButtonMobile percent={100} />);
+    const wrapper = screen.getByTestId("main-button-mobile");
+    const button = wrapper.querySelector('[data-testid="floating-button"]');
+    expect(button).not.toBeNull();
+    expect(button?.className).toMatch(/hideLoading/);
   });
 });

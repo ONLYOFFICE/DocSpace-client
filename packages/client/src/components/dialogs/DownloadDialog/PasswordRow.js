@@ -165,7 +165,7 @@ const PasswordRow = ({
           />
         </div>
       </div>
-      {showPasswordInput && (
+      {showPasswordInput ? (
         <div className="password-input">
           <SimulatePassword
             onChange={onChangePassword}
@@ -183,7 +183,7 @@ const PasswordRow = ({
             isDisabled={!password}
           />
         </div>
-      )}
+      ) : null}
     </StyledDownloadContent>
   );
 };

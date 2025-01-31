@@ -1,6 +1,7 @@
 import React from "react";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
 import isEqual from "lodash/isEqual";
+
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 import { SectionContextMenuProps } from "../Section.types";
 
 const areEqual = (
@@ -15,12 +16,7 @@ const SectionContextMenu = React.memo(
   ({ getContextModel }: SectionContextMenuProps) => {
     const [isOpen, setIsOpen] = React.useState(false);
 
-    const cmRef = React.useRef<null | {
-      show: (e: React.MouseEvent | MouseEvent) => void;
-      hide: (e: React.MouseEvent | MouseEvent) => void;
-      toggle: (e: React.MouseEvent | MouseEvent) => boolean;
-      getVisible: () => boolean;
-    }>(null);
+    const cmRef = React.useRef<ContextMenuRefType>(null);
 
     const onHide = () => {
       setIsOpen(false);

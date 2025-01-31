@@ -36,6 +36,7 @@ import {
 import { TenantStatus } from "@docspace/shared/enums";
 import { startRestore } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
+import { isManagement } from "@docspace/shared/utils/common";
 
 import type { ButtonContainerProps } from "./ButtonContainer.types";
 
@@ -58,6 +59,7 @@ const ButtonContainer = (props: ButtonContainerProps) => {
     getStorageParams,
     uploadLocalFile,
     isBackupProgressVisible,
+    setErrorInformation,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -101,8 +103,16 @@ const ButtonContainer = (props: ButtonContainerProps) => {
       }
     }
 
+    setErrorInformation("");
+
     try {
-      await startRestore(backupId, storageType, storageParams, isNotification);
+      await startRestore(
+        backupId,
+        storageType,
+        storageParams,
+        isNotification,
+        isManagement(),
+      );
       setTenantStatus(TenantStatus.PortalRestore);
 
       SocketHelper.emit(SocketCommands.RestoreBackup);
@@ -116,7 +126,7 @@ const ButtonContainer = (props: ButtonContainerProps) => {
         // ),
       );
     } catch (e) {
-      toastr.error(e as Error);
+      setErrorInformation(e, t);
 
       setIsLoading(false);
     }
@@ -144,14 +154,14 @@ const ButtonContainer = (props: ButtonContainerProps) => {
         tabIndex={10}
       />
 
-      {isBackupProgressVisible && (
+      {isBackupProgressVisible ? (
         <FloatingButton
           className="layout-progress-bar"
           icon={FloatingButtonIcons.file}
           alert={false}
           percent={downloadingProgress}
         />
-      )}
+      ) : null}
     </div>
   );
 };

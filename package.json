@@ -1,6 +1,6 @@
 {
   "name": "docspace",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "private": true,
   "workspaces": {
     "packages": [
@@ -28,8 +28,8 @@
     "licenses-audit": "yarn licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
     "check-circular": "yarn madge --circular ./packages",
     "check-circular:graph": "yarn madge --circular --image graph.svg ./packages",
-    "lint": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor,@docspace/client}' run lint",
-    "lint:fix": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor,@docspace/client}' run lint:fix",
+    "lint": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor,@docspace/client,@docspace/shared}' run lint",
+    "lint:fix": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor,@docspace/client,@docspace/shared}' run lint:fix",
     "test:build": "yarn workspace @docspace/login test:build",
     "test:e2e:docker:build": "yarn workspace @docspace/login test:e2e:docker:build",
     "test:e2e:docker:start": "yarn workspace @docspace/login test:e2e:docker:start",
@@ -44,11 +44,14 @@
     "e2e.test:translation": "yarn workspaces foreach -vptiR --from '{@docspace/client,@docspace/login}' run test:translation:model"
   },
   "devDependencies": {
-    "@types/react-text-mask": "^5.4.14",
-    "he": "^1.2.0",
-    "madge": "^6.1.0",
-    "shx": "^0.3.4",
-    "terser": "^5.34.1"
+    "@types/node": "22.9.3",
+    "@types/react-text-mask": "5.4.14",
+    "he": "1.2.0",
+    "madge": "6.1.0",
+    "shx": "0.3.4",
+    "terser": "5.34.1",
+    "ts-node": "10.9.2",
+    "typescript": "5.7.2"
   },
   "packageManager": "yarn@4.3.0"
 }

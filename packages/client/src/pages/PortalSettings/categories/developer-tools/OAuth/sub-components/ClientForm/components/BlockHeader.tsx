@@ -56,7 +56,7 @@ const BlockHeader = ({
         textAlign=""
       >
         {header}
-        {isRequired && (
+        {isRequired ? (
           <span
             style={{
               color: globalColors.lightErrorStatus,
@@ -67,10 +67,10 @@ const BlockHeader = ({
             {" "}
             *
           </span>
-        )}
+        ) : null}
       </Text>
 
-      {helpButtonText && <HelpButton tooltipContent={helpButtonText} />}
+      {helpButtonText ? <HelpButton tooltipContent={helpButtonText} /> : null}
     </StyledHeaderRow>
   );
 };

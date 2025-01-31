@@ -144,6 +144,8 @@ const SetRoomParams = ({
   cover,
   covers,
   setCover,
+  setLifetimeDialogVisible,
+  hideConfirmRoomLifetime,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -160,6 +162,12 @@ const SetRoomParams = ({
   const isVDRRoom = roomParams.type === RoomsType.VirtualDataRoom;
 
   const isPublicRoom = roomParams.type === RoomsType.PublicRoom;
+
+  const filesCount = selection
+    ? selection.filesCount + selection.foldersCount
+    : 0;
+
+  const showLifetimeDialog = !hideConfirmRoomLifetime && filesCount > 0;
 
   const checkWidth = () => {
     if (!isMobile()) {
@@ -363,7 +371,9 @@ const SetRoomParams = ({
       imgClassName="react-svg-icon"
       model={model}
       className="room-params-icon"
-      isEmptyIcon={(!currentCover || roomLogoCoverDialogVisible) && isEmptyIcon}
+      isEmptyIcon={
+        !currentCover || roomLogoCoverDialogVisible ? isEmptyIcon : null
+      }
       color={cover ? cover.color : randomColor}
       logo={
         currentCover
@@ -395,7 +405,7 @@ const SetRoomParams = ({
           forceHideDropdown={forceHideRoomTypeDropdown}
         />
       )}
-      {isEdit && (
+      {isEdit ? (
         <PermanentSettings
           t={t}
           title={roomParams.title}
@@ -404,7 +414,7 @@ const SetRoomParams = ({
           isPrivate={roomParams.isPrivate}
           isDisabled={isDisabled}
         />
-      )}
+      ) : null}
 
       <div className="logo-name-container">
         {element}
@@ -447,33 +457,35 @@ const SetRoomParams = ({
         />
       )} */}
 
-      {isEdit && (
+      {isEdit ? (
         <ChangeRoomOwner
           canChangeOwner={roomParams.canChangeRoomOwner}
           roomOwner={roomParams.roomOwner}
           onOwnerChange={onOwnerChange}
         />
-      )}
+      ) : null}
 
-      {isVDRRoom && (
+      {isVDRRoom ? (
         <VirtualDataRoomBlock
           t={t}
+          showLifetimeDialog={showLifetimeDialog}
           roomParams={roomParams}
           setRoomParams={setRoomParams}
           isEdit={isEdit}
+          setLifetimeDialogVisible={setLifetimeDialogVisible}
         />
-      )}
+      ) : null}
 
-      {isDefaultRoomsQuotaSet && !roomParams.storageLocation.providerKey && (
+      {isDefaultRoomsQuotaSet && !roomParams.storageLocation.providerKey ? (
         <RoomQuota
           setRoomParams={setRoomParams}
           roomParams={roomParams}
           isEdit={isEdit}
           isLoading={isDisabled}
         />
-      )}
+      ) : null}
 
-      {!isEdit && enableThirdParty && isPublicRoom && (
+      {!isEdit && enableThirdParty && isPublicRoom ? (
         <ThirdPartyStorage
           t={t}
           roomTitle={roomParams.title}
@@ -485,10 +497,10 @@ const SetRoomParams = ({
           createNewFolderIsChecked={createNewFolderIsChecked}
           onCreateFolderChange={onCreateFolderChange}
         />
-      )}
+      ) : null}
 
       <div>
-        {avatarEditorDialogVisible && (
+        {avatarEditorDialogVisible ? (
           <AvatarEditorDialog
             t={t}
             isDisabled={isDisabled}
@@ -503,7 +515,7 @@ const SetRoomParams = ({
             visible={roomParams.icon.uploadedFile}
             maxImageSize={maxImageUploadSize}
           />
-        )}
+        ) : null}
       </div>
     </StyledSetRoomParams>
   );
@@ -517,6 +529,7 @@ export default inject(
     filesStore,
     infoPanelStore,
     avatarEditorDialogStore,
+    filesSettingsStore,
   }) => {
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
     const { folderFormValidation, maxImageUploadSize, currentColorScheme } =
@@ -542,7 +555,10 @@ export default inject(
       cover,
       covers,
       setCover,
+      setLifetimeDialogVisible,
     } = dialogsStore;
+
+    const { hideConfirmRoomLifetime } = filesSettingsStore;
 
     const selection =
       bufferSelection != null ? bufferSelection : infoPanelSelection;
@@ -570,6 +586,8 @@ export default inject(
       cover,
       covers,
       setCover,
+      setLifetimeDialogVisible,
+      hideConfirmRoomLifetime,
     };
   },
 )(

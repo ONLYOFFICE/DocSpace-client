@@ -191,13 +191,13 @@ const BackupListModalDialog = ({
       {t("RestoreBackupWarningText", {
         productName: t("Common:ProductName"),
       })}{" "}
-      {!standalone && (
+      {!standalone ? (
         <Text as="span" className="restore-backup_warning-link">
           {t("RestoreBackupResetInfoWarningText", {
             productName: t("Common:ProductName"),
           })}
         </Text>
-      )}
+      ) : null}
     </Text>
   );
 
@@ -211,7 +211,7 @@ const BackupListModalDialog = ({
       <ModalDialog.Body>
         <StyledBackupList>
           <div className="backup-list_content">
-            {filesList.length > 0 && (
+            {filesList.length > 0 ? (
               <div className="backup-restore_dialog-header">
                 <Text fontSize="12px" style={{ marginBottom: "10px" }}>
                   {t("BackupListWarningText")}
@@ -225,7 +225,7 @@ const BackupListModalDialog = ({
                   {t("ClearBackupList")}
                 </Link>
               </div>
-            )}
+            ) : null}
 
             <div className="backup-restore_dialog-scroll-body">
               {!isLoading ? (

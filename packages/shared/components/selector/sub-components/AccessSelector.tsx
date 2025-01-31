@@ -78,7 +78,7 @@ const AccessSelector = (props: AccessSelectorProps) => {
       accessOptions={accessRights as TOption[]}
       size={ComboBoxSize.content}
       scaled={false}
-      directionX="right"
+      directionX="left"
       directionY="top"
       fixedDirection={isMobileView}
       manualWidth={isMobileView ? "auto" : `${width}px`}

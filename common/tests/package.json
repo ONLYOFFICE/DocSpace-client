@@ -12,7 +12,6 @@
     "test:locales": "jest locales.test.js",
     "test:images": "jest images.test.js",
     "test:colors": "jest colors.test.js",
-    "test:deps": "jest deps.test.js",
     "test:dependencies": "jest dependencies.test.js"
   },
   "devDependencies": {

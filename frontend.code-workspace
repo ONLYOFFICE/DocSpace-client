@@ -235,14 +235,14 @@
             "tooltip": "🛠️ Start the \"Test | Jest:colors\" task",
           },
           {
-            "label": "unit",
-            "task": "Test | Jest:unit",
-            "tooltip": "🛠️ Start the \"Test | Jest:unit\" task",
-          },
-          {
             "label": "dependencies",
             "task": "Test | Jest:dependencies",
             "tooltip": "🛠️ Start the \"Test | Jest:dependencies\" task",
+          },
+          {
+            "label": "unit",
+            "task": "Test | Jest:unit",
+            "tooltip": "🛠️ Start the \"Test | Jest:unit\" task",
           },
           {
             "label": "e2e docker build",

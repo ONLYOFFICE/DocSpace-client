@@ -498,9 +498,9 @@
       }
     },
     {
-      "label": "Test | Jest:unit",
+      "label": "Test | Jest:dependencies",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; pnpm test ; ",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:dependencies ; open reports/tests-results.html",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -513,9 +513,9 @@
       }
     },
     {
-      "label": "Test | Jest:dependencies",
+      "label": "Test | Jest:unit",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:dependencies ; open reports/tests-results.html",
+      "command": "cd ${workspaceFolder} ; pnpm test ; ",
       "group": {
         "kind": "build",
         "isDefault": true

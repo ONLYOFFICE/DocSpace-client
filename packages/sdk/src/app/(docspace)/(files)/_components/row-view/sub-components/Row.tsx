@@ -38,7 +38,7 @@ import { RoomIcon } from "@docspace/shared/components/room-icon";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 
-import useContextMenuModel from "../../../_hooks/useContextMenuModel";
+import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "../RowView.types";

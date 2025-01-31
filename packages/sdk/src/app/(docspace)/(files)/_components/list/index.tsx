@@ -32,8 +32,11 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { PAGE_COUNT } from "@/utils/constants";
 
-import useItemIcon from "../../_hooks/useItemIcon";
-import useItemList, { TFolderItem, TFileItem } from "../../_hooks/useItemList";
+import useItemIcon from "../../../_hooks/useItemIcon";
+import useItemList, {
+  TFolderItem,
+  TFileItem,
+} from "../../../_hooks/useItemList";
 
 import RowView from "../row-view";
 

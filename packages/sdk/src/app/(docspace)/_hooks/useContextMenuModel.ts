@@ -11,12 +11,12 @@ import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
-import { useFilesSelectionStore } from "../../_store/FilesSelectionStore";
-import useFolderActions from "../../_hooks/useFolderActions";
+import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
+import useFolderActions from "./useFolderActions";
 
 import { TFileItem, TFolderItem } from "./useItemList";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
-import useFilesActions from "../../_hooks/useFilesActions";
+import useFilesActions from "./useFilesActions";
 import { toastr } from "@docspace/shared/components/toast";
 
 type UseContextMenuModelProps = {

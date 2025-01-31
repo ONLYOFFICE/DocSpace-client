@@ -39,7 +39,7 @@ import { SortByFieldName } from "@docspace/shared/enums";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 
-import getTitleWithoutExt from "../../../_utils/get-title-without-ext";
+import getTitleWithoutExt from "../../../../_utils/get-title-without-ext";
 
 import { RowContentProps } from "../RowView.types";
 

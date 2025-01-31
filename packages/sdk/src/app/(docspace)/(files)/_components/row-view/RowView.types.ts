@@ -27,7 +27,7 @@
 import { TSortBy } from "@docspace/shared/types";
 import type { IndexRange } from "react-virtualized";
 
-import { TFileItem, TFolderItem } from "../../_hooks/useItemList";
+import { TFileItem, TFolderItem } from "../../../_hooks/useItemList";
 
 export type RowContentProps = {
   item: TFolderItem | TFileItem;

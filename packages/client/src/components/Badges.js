@@ -64,6 +64,18 @@ const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   box-shadow: 0px 2px 4px ${globalColors.badgeShadow};
 `;
 
+const StyledWrapperNewBadge = styled.div.attrs(injectDefaultTheme)`
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  padding: 0;
+
+  background: ${(props) => props.theme.filesBadges.backgroundColor};
+
+  border-radius: 11px;
+  border: 1px solid ${(props) => props.theme.filesBadges.backgroundColor};
+`;
+
 const BadgeWrapper = ({ onClick, isTile, children: badge }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -331,7 +343,7 @@ const Badges = ({
         />
       ) : null}
 
-      {isRoom && mute ? (
+      {/*   {isRoom && mute ? (
         <ColorTheme
           themeId={ThemeId.IconButtonMute}
           onClick={onUnmuteClick}
@@ -340,7 +352,7 @@ const Badges = ({
           className="badge  is-mute tablet-badge"
           {...unmuteIconProps}
         />
-      ) : null}
+      ) : null} */}
       {isRoom && pinned ? (
         <ColorTheme
           themeId={ThemeId.IconButtonPin}
@@ -351,7 +363,7 @@ const Badges = ({
           {...unpinIconProps}
         />
       ) : null}
-      {showNew ? (
+      {showNew && !isTile ? (
         <NewFilesBadge
           className="tablet-badge"
           newFilesCount={newItems}
@@ -359,6 +371,17 @@ const Badges = ({
           mute={mute}
           isRoom={isRoom}
         />
+      ) : null}
+      {showNew && isTile ? (
+        <StyledWrapperNewBadge>
+          <NewFilesBadge
+            className="tablet-badge"
+            newFilesCount={newItems}
+            folderId={id}
+            mute={mute}
+            isRoom={isRoom}
+          />
+        </StyledWrapperNewBadge>
       ) : null}
     </div>
   );

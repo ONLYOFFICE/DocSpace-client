@@ -320,6 +320,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "eslint-import-resolver-webpack",
       "prettier",
       "typescript",
+      "local-web-server",
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));

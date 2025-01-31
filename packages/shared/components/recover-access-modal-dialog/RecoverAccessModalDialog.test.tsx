@@ -24,10 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { screen, render } from "@testing-library/react";
+import { screen, render, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
 
 import RecoverAccessModalDialog from "./RecoverAccessModalDialog";
+import { sendRecoverRequest } from "../../api/settings";
+import { toastr } from "../toast";
 
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({
@@ -38,6 +41,13 @@ jest.mock("react-i18next", () => ({
 
 jest.mock("../../api/settings", () => ({
   sendRecoverRequest: jest.fn(),
+}));
+
+jest.mock("../toast", () => ({
+  toastr: {
+    success: jest.fn(),
+    error: jest.fn(),
+  },
 }));
 
 describe("RecoverAccessModalDialog", () => {
@@ -59,5 +69,123 @@ describe("RecoverAccessModalDialog", () => {
     expect(screen.getByTestId("recover-access-modal-text")).toHaveTextContent(
       "Test body text",
     );
+    expect(screen.getByTestId("email-input")).toHaveAttribute(
+      "placeholder",
+      "Enter email",
+    );
+  });
+
+  it("validates email input", async () => {
+    render(<RecoverAccessModalDialog {...defaultProps} />);
+
+    const emailInput = screen.getByTestId("email-input");
+
+    // Test invalid email
+    await userEvent.type(emailInput, "invalid-email");
+    fireEvent.blur(emailInput);
+
+    expect(
+      screen.getByTestId("recover-access-modal-email-container"),
+    ).toHaveTextContent("Common:IncorrectEmail");
+
+    // Test valid email
+    await userEvent.clear(emailInput);
+    await userEvent.type(emailInput, "valid@email.com");
+    fireEvent.blur(emailInput);
+
+    expect(
+      screen.getByTestId("recover-access-modal-email-container"),
+    ).not.toHaveTextContent("Common:IncorrectEmail");
+  });
+
+  it("handles form submission successfully", async () => {
+    (sendRecoverRequest as jest.Mock).mockResolvedValueOnce("Success message");
+    render(<RecoverAccessModalDialog {...defaultProps} />);
+
+    const emailInput = screen.getByTestId("email-input");
+    const descriptionInput = screen.getByTestId("textarea");
+    const submitButton = screen.getByRole("button", {
+      name: "Common:SendButton",
+    });
+
+    await userEvent.type(emailInput, "test@email.com");
+    await userEvent.type(descriptionInput, "Test description");
+    await userEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(sendRecoverRequest).toHaveBeenCalledWith(
+        "test@email.com",
+        "Test description",
+      );
+      expect(toastr.success).toHaveBeenCalledWith("Success message");
+      expect(defaultProps.onClose).toHaveBeenCalled();
+    });
+  });
+
+  it("handles form submission error", async () => {
+    const errorMessage = "Error message";
+    (sendRecoverRequest as jest.Mock).mockRejectedValueOnce(errorMessage);
+    render(<RecoverAccessModalDialog {...defaultProps} />);
+
+    const emailInput = screen.getByTestId("email-input");
+    const descriptionInput = screen.getByTestId("textarea");
+    const submitButton = screen.getByRole("button", {
+      name: "Common:SendButton",
+    });
+
+    await userEvent.type(emailInput, "test@email.com");
+    await userEvent.type(descriptionInput, "Test description");
+    await userEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(sendRecoverRequest).toHaveBeenCalledWith(
+        "test@email.com",
+        "Test description",
+      );
+      expect(toastr.error).toHaveBeenCalledWith(errorMessage);
+      expect(defaultProps.onClose).toHaveBeenCalled();
+    });
+  });
+
+  it("disables inputs while loading", async () => {
+    (sendRecoverRequest as jest.Mock).mockImplementationOnce(
+      () => new Promise(() => {}),
+    ); // Never resolves
+    render(<RecoverAccessModalDialog {...defaultProps} />);
+
+    const emailInput = screen.getByTestId("email-input");
+    const descriptionInput = screen.getByTestId("textarea");
+    const submitButton = screen.getByRole("button", {
+      name: "Common:SendButton",
+    });
+
+    await userEvent.type(emailInput, "test@email.com");
+    await userEvent.type(descriptionInput, "Test description");
+    await userEvent.click(submitButton);
+
+    expect(emailInput).toBeDisabled();
+    expect(descriptionInput).toBeDisabled();
+    expect(submitButton).toBeDisabled();
+  });
+
+  it("clears form on close", () => {
+    render(<RecoverAccessModalDialog {...defaultProps} />);
+
+    const emailInput = screen.getByTestId("email-input");
+    const descriptionInput = screen.getByTestId("textarea");
+    const closeButton = screen.getByRole("button", {
+      name: "Common:CancelButton",
+    });
+
+    fireEvent.change(emailInput, { target: { value: "test@email.com" } });
+    fireEvent.change(descriptionInput, {
+      target: { value: "Test description" },
+    });
+
+    fireEvent.click(closeButton);
+
+    expect(defaultProps.onClose).toHaveBeenCalled();
+    expect(emailInput).toHaveValue("");
+    expect(descriptionInput).toHaveValue("");
   });
 });

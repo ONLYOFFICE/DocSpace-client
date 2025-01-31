@@ -87,6 +87,8 @@ const Navigation = ({
   onLogoClick,
   buttonRef,
   addButtonRef,
+  contextButtonAnimation,
+  guidAnimationVisible,
   ...rest
 }: TNavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -329,6 +331,8 @@ const Navigation = ({
               isEmptyPage={isEmptyPage}
               onContextOptionsClick={onContextOptionsClick}
               isMobile={currentDeviceType !== DeviceType.desktop}
+              contextButtonAnimation={contextButtonAnimation}
+              guidAnimationVisible={guidAnimationVisible}
             />
           </div>
           {isDesktop && !hideInfoPanel ? (

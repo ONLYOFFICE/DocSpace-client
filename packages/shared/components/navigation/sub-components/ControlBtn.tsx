@@ -77,6 +77,8 @@ const ControlButtons = ({
   // Guidance props
   addButtonRef,
   buttonRef,
+  contextButtonAnimation,
+  guidAnimationVisible,
 }: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -142,6 +144,8 @@ const ControlButtons = ({
         isMobile={isMobile || false}
         onCloseDropBox={onCloseDropBox}
         onContextOptionsClick={onContextOptionsClick}
+        contextButtonAnimation={contextButtonAnimation}
+        guidAnimationVisible={guidAnimationVisible}
       />
     );
   };

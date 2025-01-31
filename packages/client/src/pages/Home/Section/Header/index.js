@@ -272,6 +272,8 @@ const SectionHeaderContent = (props) => {
     setGuidRectsUploading,
     maintenanceExist,
     welcomeFormFillingTipsVisible,
+    guidAnimationVisible,
+    setguidAnimationVisible,
   } = props;
 
   const location = useLocation();
@@ -317,6 +319,24 @@ const SectionHeaderContent = (props) => {
 
   const onToggleInfoPanel = () => {
     setIsInfoPanelVisible(!isInfoPanelVisible);
+  };
+
+  const contextButtonAnimation = (setAnimationClasses) => {
+    setAnimationClasses(["guid-animation-after"]);
+
+    const beforeTimer = setTimeout(() => {
+      setAnimationClasses(["guid-animation-after", "guid-animation-before"]);
+    }, 1000);
+
+    const removeTimer = setTimeout(() => {
+      setAnimationClasses([]);
+    }, 3000);
+
+    return () => {
+      clearTimeout(beforeTimer);
+      clearTimeout(removeTimer);
+      setguidAnimationVisible(false);
+    };
   };
 
   const getContextOptionsFolder = () => {
@@ -730,6 +750,8 @@ const SectionHeaderContent = (props) => {
                 onLogoClick={onLogoClick}
                 buttonRef={buttonRef}
                 addButtonRef={addButtonRef}
+                contextButtonAnimation={contextButtonAnimation}
+                guidAnimationVisible={guidAnimationVisible}
               />
               {showSignInButton ? (
                 <Button
@@ -832,6 +854,8 @@ export default inject(
       setReorderDialogVisible,
       setCloseEditIndexDialogVisible,
       welcomeFormFillingTipsVisible,
+      setguidAnimationVisible,
+      guidAnimationVisible,
     } = dialogsStore;
 
     const {
@@ -1038,6 +1062,8 @@ export default inject(
       setGuidRectsUploading,
       maintenanceExist,
       welcomeFormFillingTipsVisible,
+      guidAnimationVisible,
+      setguidAnimationVisible,
     };
   },
 )(

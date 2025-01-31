@@ -46,6 +46,10 @@ export type TContextButtonProps = {
   title?: string;
   onCloseDropBox?: () => void;
   onContextOptionsClick?: () => void;
+  contextButtonAnimation?: (
+    setAnimationClasses: (classes: string[]) => void,
+  ) => () => void;
+  guidAnimationVisible?: boolean;
 };
 
 export type TPlusButtonProps = {

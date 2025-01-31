@@ -276,7 +276,7 @@ const Guid = ({
   const clippedStyles: React.CSSProperties = {
     ["--backdrop-filter-value" as string]: theme.isBase
       ? "contrast(200%)"
-      : "contrast(0.73)",
+      : "contrast(0.82)",
     left: `${position.left}px`,
     top: `${position.top}px`,
     width: position.width
@@ -312,7 +312,7 @@ const Guid = ({
           style={{
             ["--backdrop-filter-value" as string]: theme.isBase
               ? "contrast(200%)"
-              : "contrast(0.73)",
+              : "contrast(0.82)",
             left: `${mainButtonPosition.left}px`,
             top: `${mainButtonPosition.top}px`,
             width: `${mainButtonPosition.width}px`,

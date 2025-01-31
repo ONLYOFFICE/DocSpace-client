@@ -254,6 +254,8 @@ class DialogsStore {
 
   welcomeFormFillingTipsVisible = false;
 
+  guidAnimationVisible = false;
+
   formFillingTipsNumber = 1;
 
   sortedDownloadFiles = {
@@ -838,6 +840,10 @@ class DialogsStore {
 
   setCovers = (covers) => {
     this.covers = covers;
+  };
+
+  setguidAnimationVisible = (animation) => {
+    this.guidAnimationVisible = animation;
   };
 
   setRoomCoverDialogProps = (props) => {

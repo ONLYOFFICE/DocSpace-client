@@ -53,7 +53,60 @@
     }
 
     .option-button {
+      position: relative;
       min-width: 17px;
+
+      &::after,
+      &::before {
+        content: "";
+        position: absolute;
+        opacity: 0;
+        transform: scale(0.8);
+        pointer-events: none;
+        transition:
+          opacity 0.3s ease-in-out,
+          transform 0.3s ease-in-out;
+      }
+
+      &::after {
+        width: 25px;
+        height: 24px;
+        top: -5px;
+        left: -6px;
+        border: var(--navigation-guid-animation-border);
+        border-radius: 6px;
+      }
+
+      &::before {
+        width: 35px;
+        height: 34px;
+        top: -9px;
+        left: -10px;
+        border: var(--navigation-guid-animation-small-border);
+        border-radius: 8px;
+      }
+
+      &.guid-animation-after {
+        transition: all 0.3s ease-in-out;
+        &::after {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      &.guid-animation-before {
+        transition: all 0.3s ease-in-out;
+
+        svg {
+          path {
+            fill: var(--navigation-guid-animation-icon-color);
+          }
+        }
+        &::before {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
     }
 
     .trash-button {

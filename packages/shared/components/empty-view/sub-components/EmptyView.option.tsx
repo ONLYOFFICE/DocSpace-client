@@ -23,10 +23,11 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link as LinkRouter } from "react-router-dom";
 
 import { classNames } from "../../../utils";
+import { Link, LinkType } from "../../link";
 
 import { EmptyViewItem } from "./EmptyView.item";
 import { isEmptyLinkOptions } from "../EmptyView.utils";
@@ -35,9 +36,23 @@ import styles from "../EmptyView.module.scss";
 import type { EmptyViewOptionProps } from "../EmptyView.types";
 
 const EmptyViewOption = ({ option }: EmptyViewOptionProps) => {
-  if (isEmptyLinkOptions(option))
+  if (isEmptyLinkOptions(option)) {
+    if (option.isNext)
+      return (
+        <Link
+          type={LinkType.action}
+          id={option.key.toString()}
+          className={classNames(styles.link, option.className)}
+          onClick={(e) =>
+            option.onClick?.(e as React.MouseEvent<HTMLAnchorElement>)
+          }
+        >
+          {option.icon}
+          <span>{option.description}</span>
+        </Link>
+      );
     return (
-      <Link
+      <LinkRouter
         id={option.key.toString()}
         className={classNames(styles.link, option.className)}
         to={option.to}
@@ -46,8 +61,9 @@ const EmptyViewOption = ({ option }: EmptyViewOptionProps) => {
       >
         {option.icon}
         <span>{option.description}</span>
-      </Link>
+      </LinkRouter>
     );
+  }
 
   const { key, ...other } = option;
   return <EmptyViewItem id={option.key.toString()} {...other} />;

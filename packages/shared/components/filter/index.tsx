@@ -85,6 +85,8 @@ const FilterInput = React.memo(
     userId,
 
     disableThirdParty,
+
+    initSearchValue,
   }: FilterProps) => {
     const { searchComponent } = useSearch({
       onSearch,
@@ -94,6 +96,7 @@ const FilterInput = React.memo(
       getSelectedInputValue,
       placeholder,
       isIndexEditingMode,
+      initSearchValue,
     });
 
     const [viewSettings, setViewSettings] = React.useState<
@@ -101,8 +104,80 @@ const FilterInput = React.memo(
     >(getViewSettingsData());
     const [selectedFilterValue, setSelectedFilterValue] = React.useState<
       Map<FilterGroups, Map<string | number, TItem>>
-    >(new Map());
-    const [selectedItems, setSelectedItems] = React.useState<TItem[]>([]);
+    >(() => {
+      const value = getSelectedFilterData();
+
+      if (!value || !Array.isArray(value)) return new Map();
+
+      const newValue: Map<
+        FilterGroups,
+        Map<string | number, TItem>
+      > = new Map();
+      const newSelectedItems: TItem[] = [];
+
+      value.forEach((item) => {
+        const groupItems = Array.isArray(item.key)
+          ? (item.key.map((key) => ({
+              key,
+              group: item.group,
+              label: key,
+            })) as TItem[])
+          : [item];
+
+        newSelectedItems.push(...groupItems);
+
+        if (!newValue.has(item.group)) {
+          const groupItemsMap = new Map(
+            groupItems.map((groupItem) => [groupItem.key as string, groupItem]),
+          );
+
+          newValue.set(item.group, groupItemsMap);
+        } else {
+          groupItems.forEach((groupItem) => {
+            newValue.get(item.group)?.set(groupItem.key as string, groupItem);
+          });
+        }
+      });
+
+      return newValue;
+    });
+    const [selectedItems, setSelectedItems] = React.useState<TItem[]>(() => {
+      const value = getSelectedFilterData();
+
+      if (!value || !Array.isArray(value)) return [];
+
+      const newValue: Map<
+        FilterGroups,
+        Map<string | number, TItem>
+      > = new Map();
+      const newSelectedItems: TItem[] = [];
+
+      value.forEach((item) => {
+        const groupItems = Array.isArray(item.key)
+          ? (item.key.map((key) => ({
+              key,
+              group: item.group,
+              label: key,
+            })) as TItem[])
+          : [item];
+
+        newSelectedItems.push(...groupItems);
+
+        if (!newValue.has(item.group)) {
+          const groupItemsMap = new Map(
+            groupItems.map((groupItem) => [groupItem.key as string, groupItem]),
+          );
+
+          newValue.set(item.group, groupItemsMap);
+        } else {
+          groupItems.forEach((groupItem) => {
+            newValue.get(item.group)?.set(groupItem.key as string, groupItem);
+          });
+        }
+      });
+
+      return newSelectedItems;
+    });
 
     const { t } = useTranslation(["Common"]);
 
@@ -177,6 +252,8 @@ const FilterInput = React.memo(
     );
 
     React.useEffect(() => {
+      mountRef.current = true;
+
       return () => {
         mountRef.current = false;
       };

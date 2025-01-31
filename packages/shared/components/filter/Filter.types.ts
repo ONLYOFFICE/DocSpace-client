@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { DeviceType, FilterGroups } from "../../enums";
-import { TViewAs } from "../../types";
+import { TSortBy, TViewAs } from "../../types";
 
 import { TViewSelectorOption } from "../view-selector";
 import { TOption } from "../combobox";
@@ -42,7 +42,10 @@ export type TSortDataItem = {
 
 export type TGetSortData = () => TSortDataItem[];
 
-export type TGetSelectedSortData = () => TSortDataItem;
+export type TGetSelectedSortData = () => {
+  sortDirection: "asc" | "desc";
+  sortId: TSortBy;
+};
 
 export type TOnChangeViewAs = () => void;
 
@@ -205,12 +208,14 @@ export type SearchInputProps = {
   placeholder: string;
 
   isIndexEditingMode: boolean;
+
+  initSearchValue?: string;
 };
 
 export type FilterProps = SearchInputProps &
   Omit<SortButtonProps, "id" | "title" | "viewSettings"> &
   Omit<FilterButtonProps, "id" | "title" | "selectedFilterValue"> & {
-    getSelectedFilterData: () => Promise<TItem[]>;
+    getSelectedFilterData: () => Promise<TItem[]> | TItem[];
     getViewSettingsData: () => TViewSelectorOption[];
 
     clearAll: () => void;

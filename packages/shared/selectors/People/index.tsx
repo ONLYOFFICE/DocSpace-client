@@ -91,7 +91,9 @@ const toListItem = (
 
     const role = getUserType(item);
 
-    const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
+    const userAvatar = hasAvatar
+      ? avatar
+      : (DefaultUserPhoto as unknown as string);
 
     const isInvited = checkIfUserInvited
       ? checkIfUserInvited(item)

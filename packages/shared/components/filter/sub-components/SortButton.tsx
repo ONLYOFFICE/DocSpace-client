@@ -83,8 +83,8 @@ const SortButton = ({
     setSortData(data);
 
     setSelectedSortData({
-      sortDirection: selectedValue.sortDirection,
-      sortId: selectedValue.sortId,
+      sortDirection: selectedValue.sortDirection ?? "",
+      sortId: selectedValue.sortId ?? "",
     });
   }, [getSortData, getSelectedSortData]);
 

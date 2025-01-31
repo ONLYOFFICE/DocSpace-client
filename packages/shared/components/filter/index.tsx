@@ -98,7 +98,7 @@ const FilterInput = React.memo(
 
     const [viewSettings, setViewSettings] = React.useState<
       TViewSelectorOption[]
-    >([]);
+    >(getViewSettingsData());
     const [selectedFilterValue, setSelectedFilterValue] = React.useState<
       Map<FilterGroups, Map<string | number, TItem>>
     >(new Map());

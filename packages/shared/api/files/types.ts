@@ -68,6 +68,7 @@ export type TFileSecurity = {
   Rename: boolean;
   Review: boolean;
   SubmitToFormGallery: boolean;
+  EditForm: boolean;
 };
 
 export type TAvailableExternalRights = {
@@ -117,6 +118,7 @@ export type TFile = {
   thumbnailUrl?: string;
   expired?: string;
   isForm?: boolean;
+  startFilling?: boolean;
 };
 
 export type TOpenEditRequest = {

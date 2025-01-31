@@ -117,6 +117,8 @@ class FilesFilter {
 
   key: string | null = null;
 
+  static getOtherSearchParams() {}
+
   static getDefault(total = DEFAULT_TOTAL) {
     return new FilesFilter(DEFAULT_PAGE, DEFAULT_PAGE_COUNT, total);
   }
@@ -244,6 +246,38 @@ class FilesFilter {
     return this.page > 0;
   };
 
+  getOtherSearchParams = () => {
+    const searchParams = new URLSearchParams(window.location.search);
+
+    const filterSearchParams = [
+      SEARCH_TYPE,
+      AUTHOR_TYPE,
+      FILTER_TYPE,
+      ROOM_ID,
+      SEARCH,
+      SORT_BY,
+      SORT_ORDER,
+      VIEW_AS,
+      PAGE,
+      PAGE_COUNT,
+      FOLDER,
+      SEARCH_IN_CONTENT,
+      EXCLUDE_SUBJECT,
+      APPLY_FILTER_OPTION,
+      EXTENSION,
+      SEARCH_AREA,
+      KEY,
+    ];
+
+    filterSearchParams.forEach((param) => {
+      if (searchParams.get(param)) {
+        searchParams.delete(param);
+      }
+    });
+
+    return searchParams.toString();
+  };
+
   toApiUrlParams = () => {
     const {
       authorType,
@@ -341,8 +375,10 @@ class FilesFilter {
     dtoFilter[SORT_BY] = sortBy;
     dtoFilter[SORT_ORDER] = sortOrder;
 
+    const otherSearchParams = this.getOtherSearchParams();
+
     const str = toUrlParams(dtoFilter, true);
-    return str;
+    return str + "&" + otherSearchParams;
   };
 
   getLastPage() {

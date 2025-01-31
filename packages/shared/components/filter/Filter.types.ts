@@ -32,12 +32,12 @@ import { TOption } from "../combobox";
 
 export type TSortDataItem = {
   id: string;
-  className: string;
+  className?: string;
   key: string;
-  isSelected: boolean;
+  isSelected?: boolean;
   label: string;
-  sortDirection: string;
-  sortId: string;
+  sortDirection?: string;
+  sortId?: string;
 };
 
 export type TGetSortData = () => TSortDataItem[];
@@ -143,6 +143,7 @@ export type TItem = {
   displaySelectorType?: string;
   isMultiSelect?: boolean;
   selectedLabel?: string;
+  isCheckbox?: boolean;
 };
 
 export type TGetFilterData = () => Promise<TItem[]>;

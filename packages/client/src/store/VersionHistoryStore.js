@@ -46,7 +46,10 @@ class VersionHistoryStore {
   timerId = null;
 
   isEditing = false;
+
   deleteVersionDialogVisible = false;
+
+  version = null;
 
   constructor(filesStore) {
     makeAutoObservable(this);
@@ -93,6 +96,7 @@ class VersionHistoryStore {
   };
 
   setVerHistoryFileId = (fileId) => {
+    console.log("setVerHistoryFileId", fileId);
     this.fileId = fileId;
   };
 
@@ -102,6 +106,10 @@ class VersionHistoryStore {
 
   setVersions = (versions) => {
     this.versions = versions;
+  };
+
+  setCurrentVersion = (version) => {
+    this.version = version;
   };
 
   // setFileVersions

@@ -29,34 +29,33 @@ import { inject, observer } from "mobx-react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
 
 import { withTranslation } from "react-i18next";
 import { DeleteVersionDialogContainer } from "./DeleteLinkDialog.styled";
 
 const DeleteVersionDialogComponent = (props) => {
-  const { t, visible, setIsVisible, tReady } = props;
+  const {
+    t,
+    visible,
+    setIsVisible,
+    tReady,
+    fileId,
+    version,
+    onDeleteVersionFile,
+  } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDelete();
-  };
 
   const onClose = () => {
     setIsVisible(false);
   };
 
   const onDelete = () => {
+    console.log("onDeleteVersionFile", onDeleteVersionFile);
+
+    console.log("fileId version", fileId, version);
+    onDeleteVersionFile(+fileId, [version]);
+
     // setIsLoading(true);
     // const newLink = JSON.parse(JSON.stringify(link));
     // newLink.access = 0;
@@ -77,6 +76,19 @@ const DeleteVersionDialogComponent = (props) => {
     setIsLoading(false);
     onClose();
   };
+
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onDelete();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, []);
 
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
@@ -119,14 +131,20 @@ const DeleteVersionDialog = withTranslation(["Common", "VersionHistory"])(
   DeleteVersionDialogComponent,
 );
 
-export default inject(({ versionHistoryStore }) => {
+export default inject(({ versionHistoryStore, filesActionsStore }) => {
   const {
     deleteVersionDialogVisible: visible,
     onSetDeleteVersionDialogVisible: setIsVisible,
+    version,
+    fileId,
   } = versionHistoryStore;
+  const { onDeleteVersionFile } = filesActionsStore;
 
   return {
     visible,
     setIsVisible,
+    onDeleteVersionFile,
+    version,
+    fileId,
   };
 })(observer(DeleteVersionDialog));

@@ -78,6 +78,7 @@ const VersionRow = (props) => {
     setIsVerHistoryPanel,
     openOnNewPage,
     onSetDeleteVersionDialogVisible,
+    setCurrentVersion,
   } = props;
 
   const navigate = useNavigate();
@@ -184,6 +185,8 @@ const VersionRow = (props) => {
 
   const onDeleteVersion = () => {
     onSetDeleteVersionDialogVisible(true);
+    console.log("info.versionGroup", info.versionGroup);
+    setCurrentVersion(info.versionGroup);
   };
 
   const onContextMenu = (event) => {
@@ -400,6 +403,7 @@ export default inject(
       fileSecurity,
       setIsVerHistoryPanel,
       onSetDeleteVersionDialogVisible,
+      setCurrentVersion,
     } = versionHistoryStore;
 
     const isEdit = isEditingVersion || isEditing;
@@ -425,6 +429,7 @@ export default inject(
       setIsVerHistoryPanel,
       openOnNewPage,
       onSetDeleteVersionDialogVisible,
+      setCurrentVersion,
     };
   },
 )(

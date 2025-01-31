@@ -56,6 +56,7 @@ import {
   deleteFilesFromRecent,
   changeIndex,
   reorderIndex,
+  deleteVersionFile,
 } from "@docspace/shared/api/files";
 import {
   Events,
@@ -3278,6 +3279,10 @@ class FilesActionStore {
     }
 
     return null;
+  };
+
+  onDeleteVersionFile = async (fileId, versions) => {
+    await deleteVersionFile(fileId, versions);
   };
 }
 

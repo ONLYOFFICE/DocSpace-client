@@ -24,16 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useContext } from "react";
-import { ThemeContext } from "styled-components";
-
+import React, { useState, useEffect } from "react";
+import classNames from "classnames";
 import { SliderProps } from "./Slider.types";
-import { StyledSliderTheme } from "./Slider.styled";
+import styles from "./Slider.module.scss";
 
 const Slider = (props: SliderProps) => {
   const {
     id,
-
     className,
     onChange,
     min,
@@ -48,39 +46,44 @@ const Slider = (props: SliderProps) => {
     thumbWidth,
     runnableTrackHeight,
   } = props;
-  const defaultTheme = useContext(ThemeContext);
 
-  const currentColorScheme = defaultTheme?.currentColorScheme;
-
-  const [size, setSize] = useState("0%");
+  const [sizeProp, setSizeProp] = useState("0%");
 
   useEffect(() => {
-    setSize(`${((value - min) * 100) / (max - min)}%`);
-  }, [max, min, value]);
+    const percentage = ((value - min) / (max - min)) * 100;
+    setSizeProp(`${percentage}%`);
+  }, [value, min, max]);
 
-  const onChangeAction = (e: React.ChangeEvent<HTMLInputElement>) =>
-    onChange?.(e);
+  const sliderStyle = {
+    ...style,
+    "--thumb-width": thumbWidth,
+    "--thumb-height": thumbHeight,
+    "--thumb-border-width": thumbBorderWidth,
+    "--runnable-track-height": runnableTrackHeight,
+    "--size-prop": sizeProp,
+  } as React.CSSProperties;
+
+  const sliderClasses = classNames(
+    styles.slider,
+    {
+      [styles.withPouring]: withPouring,
+      [styles.disabled]: isDisabled,
+    },
+    className,
+  );
 
   return (
-    <StyledSliderTheme
-      {...props}
-      isDisabled={isDisabled}
-      disabled={isDisabled}
-      style={style}
+    <input
       id={id}
-      className={className}
+      type="range"
+      className={sliderClasses}
+      style={sliderStyle}
+      onChange={onChange}
       min={min}
       max={max}
       step={step}
       value={value}
-      sizeProp={!!value && withPouring ? size : "0%"}
-      withPouring={withPouring}
-      onChange={onChangeAction}
-      thumbBorderWidth={thumbBorderWidth}
-      thumbHeight={thumbHeight}
-      thumbWidth={thumbWidth}
-      runnableTrackHeight={runnableTrackHeight}
-      $currentColorScheme={currentColorScheme}
+      disabled={isDisabled}
       data-testid="slider"
     />
   );

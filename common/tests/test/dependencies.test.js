@@ -307,6 +307,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "@storybook/components",
       "@storybook/react-webpack5",
       "babel-eslint",
+      "babel-jest",
       "babel-plugin-styled-components",
       "@babel/plugin-transform-private-property-in-object",
       "@babel/plugin-transform-export-namespace-from",
@@ -327,6 +328,8 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "prettier",
       "typescript",
       "local-web-server",
+      "identity-obj-proxy",
+      "@types/identity-obj-proxy",
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));

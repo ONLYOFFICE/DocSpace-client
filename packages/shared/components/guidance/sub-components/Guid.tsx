@@ -42,7 +42,7 @@ import { getHeaderText } from "./Guid.utils";
 import { GuidProps } from "./Guid.types";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
-const GUID_MODAL_MARGIN = 16;
+const GUID_MODAL_MARGIN = 18;
 const MAX_MODAL_HEIGHT = 190;
 const MODAL_WIDTH = 430;
 

@@ -64,8 +64,8 @@ const StyledModalDialog = styled(ModalDialog)`
       position: relative;
       right: -2px;
       bottom: 10px;
-      width: 12px;
-      height: 12px;
+      width: 13px;
+      height: 13px;
     }
   }
 `;

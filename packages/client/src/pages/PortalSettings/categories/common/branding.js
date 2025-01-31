@@ -99,16 +99,19 @@ const Branding = ({
     navigate(e.target.pathname);
   };
 
-  if (isMobileView)
+  if (isMobileView) {
+    const mobileViewDisplayAbout = showSettings && displayAbout;
+
     return (
       <MobileView
         isSettingPaid={isSettingPaid || standalone}
-        displayAbout={showSettings && displayAbout}
+        displayAbout={mobileViewDisplayAbout}
         displayAdditional={showSettings}
         baseUrl={baseUrl}
         onClickLink={onClickLink}
       />
     );
+  }
 
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
@@ -116,7 +119,7 @@ const Branding = ({
       {showSettings ? (
         <>
           <hr />
-          {displayAbout && <CompanyInfoSettings />}
+          {displayAbout ? <CompanyInfoSettings /> : null}
           <hr />
           <AdditionalResources />
         </>

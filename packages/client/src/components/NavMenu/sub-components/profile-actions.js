@@ -170,9 +170,9 @@ class ProfileActions extends React.PureComponent {
         >
           <div style={{ paddingTop: "8px" }}>
             {userActions.map((action) => (
-              <React.Fragment key={action.key}>
-                {action &&
-                  (action?.isButton ? (
+              <React.Fragment key={action?.key}>
+                {action ? (
+                  action?.isButton ? (
                     <StyledButtonWrapper>
                       <Button
                         size="normal"
@@ -190,7 +190,8 @@ class ProfileActions extends React.PureComponent {
                     >
                       <StyledDropDownItem {...action} noHover />
                     </Link>
-                  ))}
+                  )
+                ) : null}
               </React.Fragment>
             ))}
           </div>

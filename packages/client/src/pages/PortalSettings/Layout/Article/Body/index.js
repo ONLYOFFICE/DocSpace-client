@@ -34,7 +34,7 @@ import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelpe
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 
-import { ArticleItem } from "@docspace/shared/components/article-item";
+import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import {
   // getKeyByLink,

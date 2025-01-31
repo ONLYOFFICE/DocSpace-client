@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -2115,6 +2116,12 @@ export const getBaseTheme = () => {
           upperBorderRadius: "6px 6px 0 0",
           roomsUpperBorderRadius: "12px 12px 0 0",
           backgroundColorTop: white,
+        },
+
+        tag: {
+          backgroundColor: white,
+          hoverBackgroundColor: grayStrong,
+          activeBackgroundColor: grayLight,
         },
 
         sideColor: black,

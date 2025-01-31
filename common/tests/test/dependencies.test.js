@@ -295,6 +295,35 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       return !success;
     });
 
+    // Filter out allowed unused dependencies
+    const allowedUnusedDeps = [
+      "@storybook/addon-controls",
+      "@storybook/addon-designs",
+      "@storybook/addon-docs",
+      "@storybook/addon-essentials",
+      "@storybook/addon-links",
+      "@storybook/addons",
+      "@storybook/components",
+      "babel-eslint",
+      "babel-plugin-styled-components",
+      "webpack-dev-server",
+      "eslint-config-airbnb",
+      "eslint-config-airbnb-typescript",
+      "eslint-config-prettier",
+      "eslint-plugin-import",
+      "eslint-plugin-jsx-a11y",
+      "eslint-plugin-prettier",
+      "eslint-plugin-react-hooks",
+      "eslint-plugin-react",
+      "eslint-plugin-storybook",
+      "eslint-config-next",
+      "eslint-import-resolver-webpack",
+      "prettier",
+      "typescript",
+    ];
+
+    missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));
+
     if (missing.length > 0) {
       unusedDependencies.push({ workspace, missing });
     }

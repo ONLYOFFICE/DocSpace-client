@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { HEADER_ROOMS_LIST } from "@docspace/shared/__mocks__/e2e";
+import { endpoints, HEADER_ROOMS_LIST } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
 import { describe } from "node:test";
@@ -122,6 +122,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -276,6 +277,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Dark&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -363,6 +365,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&search=true&breadCrumbs=true&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -433,6 +436,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&breadCrumbs=true&id=5&subtitle=true`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -461,6 +465,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&filter=documents&id=5&selectorType=userFolderOnly`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -545,6 +550,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&id=5&cancelLabel=CustomCancel&selectorType=roomsOnly`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -587,6 +593,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&id=5&subtitle=true`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -629,6 +636,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&breadCrumbs=true&cancelLabel=CustomCancel&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -643,6 +651,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&cancel=true&filter=documents&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -699,6 +708,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&id=5&search=true&selectorType=roomsOnly`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -755,6 +765,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -769,6 +780,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&filter=documents&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -839,6 +851,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&breadCrumbs=true&cancel=true&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -853,6 +866,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=documents&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -895,6 +909,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&breadCrumbs=true&id=5&selectorType=userFolderOnly`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -979,6 +994,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&cancel=true&id=5&subtitle=true`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1007,6 +1023,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&cancel=true&search=true&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1049,6 +1066,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1091,6 +1109,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&filter=documents&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1119,6 +1138,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&id=5&selectorType=userFolderOnly`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1147,6 +1167,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&search=true&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1175,6 +1196,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&filter=documents&id=5&subtitle=true`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1189,6 +1211,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&filter=documents&search=true&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1217,6 +1240,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&id=5&acceptLabel=CustomAccept&cancelLabel=CustomCancel`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1231,6 +1255,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&id=5&acceptLabel=CustomAccept&filter=documents`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1245,6 +1270,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&id=5&acceptLabel=CustomAccept&search=true`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1259,6 +1285,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&id=5&acceptLabel=CustomAccept&selectorType=roomsOnly`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1273,6 +1300,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&id=5&breadCrumbs=true&cancel=true`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1287,6 +1315,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&id=5&breadCrumbs=true&filter=documents`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1301,6 +1330,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&id=5&breadCrumbs=true&search=true`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1343,6 +1373,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&search=true&acceptLabel=CustomAccept&id=5`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",
@@ -1455,6 +1486,7 @@ describe("File selector config params", () => {
       const pageRoute = `${path}?theme=Base&selectorType=roomsOnly&id=5&subtitle=true`;
       await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
       await page.goto(pageRoute);
+      await mockRequest.router([endpoints.folder]);
       await expect(page).toHaveScreenshot([
         "desktop",
         "file-selector",

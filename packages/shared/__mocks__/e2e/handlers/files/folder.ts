@@ -29,6 +29,8 @@
 import { HEADER_FILTERED_FOLDER, HEADER_EMPTY_FOLDER } from "../../utils";
 import type { TFile, TFolder, TGetFolder } from "../../../../api/files/types";
 
+export const PATH_FOLDER = "files/[0-9]*?*";
+
 const files: TFile[] = [
   {
     folderId: 5,

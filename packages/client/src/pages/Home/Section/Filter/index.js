@@ -61,12 +61,11 @@ import {
   RoomSearchArea,
   RoomsProviderType,
   RoomsType,
+  SortByFieldName,
 } from "@docspace/shared/enums";
 import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
-
-import { SortByFieldName } from "@docspace/shared/enums";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";

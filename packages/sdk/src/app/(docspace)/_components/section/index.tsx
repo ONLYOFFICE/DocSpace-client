@@ -28,6 +28,9 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import { useSearchParams } from "next/navigation";
+
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import Section from "@docspace/shared/components/section";
 
@@ -39,6 +42,7 @@ type SectionProps = {
   sectionBodyContent: React.ReactNode;
 
   isEmptyPage: boolean;
+  filesFilter: string;
 };
 
 export const SectionWrapper = observer(
@@ -47,7 +51,20 @@ export const SectionWrapper = observer(
     sectionFilterContent,
     sectionBodyContent,
     isEmptyPage,
+    filesFilter,
   }: SectionProps) => {
+    const searchParams = useSearchParams();
+
+    const [isFiltered, setIsFiltered] = React.useState(() =>
+      FilesFilter.getFilter({
+        search: `?${filesFilter}`,
+      } as Location)!.isFiltered(),
+    );
+
+    React.useEffect(() => {
+      setIsFiltered(FilesFilter.getFilter(window.location)!.isFiltered());
+    }, [searchParams]);
+
     const settingsStore = useSettingsStore();
 
     const isEmptyList = settingsStore.isEmptyList || isEmptyPage;
@@ -62,7 +79,11 @@ export const SectionWrapper = observer(
         <Section.SectionHeader>{sectionHeaderContent}</Section.SectionHeader>
 
         <Section.SectionFilter>
-          {isEmptyList ? null : sectionFilterContent}
+          {!isEmptyList
+            ? sectionFilterContent
+            : !isFiltered
+              ? null
+              : sectionFilterContent}
         </Section.SectionFilter>
 
         <Section.SectionBody>{sectionBodyContent}</Section.SectionBody>

@@ -40,11 +40,11 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
       window.history.pushState({}, "", filterUrl);
     },
     [
+      shareKey,
       updateNavigationItems,
       setCurrentFolderId,
       setCurrentTitle,
       setCurrentIsRootRoom,
-      setBufferSelection,
       setSelection,
     ],
   );

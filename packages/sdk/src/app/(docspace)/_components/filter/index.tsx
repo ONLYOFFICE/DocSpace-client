@@ -44,38 +44,51 @@ export const Filter = ({
 }: FilterProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const { getFilterData, getSortData, getViewSettingsData } = useFilesFilter({
+  const {
+    getFilterData,
+    getSortData,
+    getViewSettingsData,
+    onClearFilter,
+    onSearch,
+    getSelectedInputValue,
+    getSelectedSortData,
+    onSort,
+    clearAll,
+    onFilter,
+    getSelectedFilterData,
+    removeSelectedItem,
+  } = useFilesFilter({
     filesFilter,
     shareKey,
     canSearchByContent: filesSettings.canSearchByContent,
   });
 
+  const initSearchValue = getSelectedInputValue();
+
   return (
     <FilterComponent
-      onSearch={() => {}}
+      onSearch={onSearch}
       onChangeViewAs={() => {}}
-      onClearFilter={() => {}}
-      onFilter={() => {}}
-      onSort={() => {}}
+      onClearFilter={onClearFilter}
+      onFilter={onFilter}
+      onSort={onSort}
       onSortButtonClick={() => {}}
       clearSearch={false}
       setClearSearch={() => {}}
-      getSelectedFilterData={async () => {
-        return [];
-      }}
+      getSelectedFilterData={getSelectedFilterData}
       getViewSettingsData={getViewSettingsData}
-      clearAll={() => {}}
-      removeSelectedItem={() => {}}
+      clearAll={clearAll}
+      removeSelectedItem={removeSelectedItem}
       isRooms={false}
       isContactsPage={false}
       isContactsPeoplePage={false}
       isContactsGroupsPage={false}
       isContactsInsideGroupPage={false}
       isContactsGuestsPage={false}
-      getSelectedInputValue={() => ""}
+      getSelectedInputValue={getSelectedInputValue}
       isIndexEditingMode={false}
       getSortData={getSortData}
-      getSelectedSortData={() => ({}) as TSortDataItem}
+      getSelectedSortData={getSelectedSortData}
       viewAs="table"
       viewSelectorVisible
       getFilterData={getFilterData}
@@ -89,6 +102,7 @@ export const Filter = ({
       sortByTitle={t("Common:SortBy")}
       selectorLabel=""
       isIndexing={false}
+      initSearchValue={initSearchValue}
     />
   );
 };

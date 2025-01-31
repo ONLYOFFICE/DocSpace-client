@@ -33,9 +33,9 @@ import { TSettings } from "@docspace/shared/api/settings/types";
 import { ThemeKeys } from "@docspace/shared/enums";
 
 import { useFilesSettingsStore } from "../../_store/FilesSettingsStore";
+import { useSettingsStore } from "../../_store/SettingsStore";
 
 import List from "../_components/list";
-import { useSettingsStore } from "../../_store/SettingsStore";
 
 type PublicRoomPageProps = {
   folderList: TGetFolder;

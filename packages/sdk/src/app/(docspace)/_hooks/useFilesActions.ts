@@ -2,7 +2,6 @@ import React from "react";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import api from "@docspace/shared/api";
-import { TFile } from "@docspace/shared/api/files/types";
 import { toastr } from "@docspace/shared/components/toast";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
@@ -45,7 +44,7 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
       )
         isSameTab = true;
 
-      isSameTab = filesSettings!.openEditorInSameTab || isSameTab;
+      isSameTab = filesSettings?.openEditorInSameTab || isSameTab;
 
       window.open(url, !isSameTab ? "_blank" : "_self");
     },

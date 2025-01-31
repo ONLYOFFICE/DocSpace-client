@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "next/navigation";
 
 import {
   TItem,
@@ -7,11 +8,19 @@ import {
 } from "@docspace/shared/components/filter/Filter.types";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
+  getFilterType,
+  getAuthorType,
+  getSearchParams,
+  getFilterContent,
+  getRoomId,
+} from "@docspace/shared/components/filter/Filter.utils";
+import {
   FilterType,
   FilterGroups,
   FilterKeys,
   SortByFieldName,
 } from "@docspace/shared/enums";
+import { Nullable, TSortBy } from "@docspace/shared/types";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
@@ -30,20 +39,78 @@ export default function useFilesFilter({
   canSearchByContent,
 }: useFiltesFiltersProps) {
   const { t } = useTranslation(["Common"]);
+  const searchParams = useSearchParams();
 
-  const [filter, setFilter] = React.useState<FilesFilter>();
+  const [filter, setFilter] = React.useState<FilesFilter>(
+    FilesFilter.getFilter({ search: `?${filesFilter}` } as Location)!,
+  );
+  const [, setSelectedFilterValues] = React.useState<Nullable<TItem[]>>(null);
+
+  const isSSR = React.useRef<boolean>(true);
+
+  React.useEffect(() => {
+    isSSR.current = false;
+  }, []);
 
   React.useEffect(() => {
     setFilter(FilesFilter.getFilter(window.location)!);
-  }, []);
+  }, [searchParams]);
 
-  const onClearFilter = React.useCallback(() => {}, []);
+  const onClearFilter = React.useCallback(() => {
+    const defaultFilter = FilesFilter.getDefault();
 
-  const onSearch = React.useCallback((value: string) => {}, []);
+    defaultFilter.pageCount = PAGE_COUNT;
+    defaultFilter.page = 0;
+    defaultFilter.folder = filter.folder;
+    defaultFilter.key = shareKey ?? "";
 
-  const getSelectedInputValue = React.useCallback(() => "", []);
+    setFilter(defaultFilter);
 
-  const onSort = React.useCallback(() => {}, []);
+    const urlFilter = defaultFilter.toUrlParams();
+
+    window.history.pushState(null, "", urlFilter);
+  }, [filter.folder, shareKey]);
+
+  const onSearch = React.useCallback(
+    (value: string) => {
+      const modifiedFilter = filter.clone();
+
+      modifiedFilter.search = value;
+      modifiedFilter.page = 0;
+      modifiedFilter.pageCount = PAGE_COUNT;
+
+      setFilter(modifiedFilter);
+
+      const urlFilter = modifiedFilter.toUrlParams();
+
+      window.history.pushState(null, "", `?${urlFilter}`);
+    },
+    [filter],
+  );
+
+  const getSelectedInputValue = React.useCallback(() => {
+    return filter.search ?? "";
+  }, [filter.search]);
+
+  const onSort = React.useCallback(
+    (sortId: string, sortDirection: string) => {
+      const sortBy = sortId;
+      const sortOrder = sortDirection === "desc" ? "descending" : "ascending";
+
+      const newFilter = filter.clone();
+      newFilter.sortBy = sortBy as TSortBy;
+      newFilter.sortOrder = sortOrder;
+      newFilter.page = 0;
+      newFilter.pageCount = PAGE_COUNT;
+
+      setFilter(newFilter);
+
+      const urlFilter = newFilter.toUrlParams();
+
+      window.history.pushState(null, "", `?${urlFilter}`);
+    },
+    [filter],
+  );
 
   const getSortData = React.useCallback(() => {
     const name = {
@@ -69,9 +136,38 @@ export default function useFilesFilter({
     return [name, modifiedDate, size];
   }, [t]);
 
-  const getSelectedSortData = React.useCallback(() => {}, []);
+  const getSelectedSortData = React.useCallback(() => {
+    return {
+      sortId: filter.sortBy,
+      sortDirection: filter.sortOrder === "ascending" ? "asc" : "desc",
+    } as { sortId: TSortBy; sortDirection: "asc" | "desc" };
+  }, [filter.sortBy, filter.sortOrder]);
 
-  const onFilter: TOnFilter = React.useCallback((value) => {}, []);
+  const onFilter: TOnFilter = React.useCallback(
+    (data) => {
+      const filterType = getFilterType(data) || null;
+
+      const withSubfolders = getSearchParams(data);
+      const withContent = getFilterContent(data);
+
+      const newFilter = filter.clone();
+      newFilter.page = 0;
+
+      newFilter.filterType = filterType;
+
+      newFilter.withSubfolders =
+        withSubfolders === FilterKeys.excludeSubfolders ? false : true;
+
+      newFilter.searchInContent = withContent === "true" ? true : null;
+
+      setFilter(newFilter);
+
+      const urlFilter = newFilter.toUrlParams();
+
+      window.history.pushState(null, "", `?${urlFilter}`);
+    },
+    [filter],
+  );
 
   const getFilterData = React.useCallback(async () => {
     const typeOptions = [
@@ -190,7 +286,113 @@ export default function useFilesFilter({
     return [...foldersOptions, ...contentOptions, ...typeOptions];
   }, [t, canSearchByContent]);
 
-  const getSelectedFilterData = React.useCallback(() => [], []);
+  const getSelectedFilterData = React.useCallback(() => {
+    const filterValues: TItem[] = [];
+
+    if (filter.filterType) {
+      let label = "";
+
+      switch (filter.filterType.toString()) {
+        case FilterType.DocumentsOnly.toString():
+          label = t("Common:Documents");
+          break;
+        case FilterType.FoldersOnly.toString():
+          label = t("Common:Folders");
+          break;
+        case FilterType.SpreadsheetsOnly.toString():
+          label = t("Common:Spreadsheets");
+          break;
+        case FilterType.ArchiveOnly.toString():
+          label = t("Common:Archives");
+          break;
+        case FilterType.PresentationsOnly.toString():
+          label = t("Common:Presentations");
+          break;
+        case FilterType.ImagesOnly.toString():
+          label = t("Common:Images");
+          break;
+        case FilterType.MediaOnly.toString():
+          label = t("Common:Media");
+          break;
+        case FilterType.FilesOnly.toString():
+          label = t("Common:Files");
+          break;
+        case FilterType.Pdf.toString():
+          label = t("Common:Forms");
+          break;
+        default:
+          break;
+      }
+
+      filterValues.push({
+        key: `${filter.filterType}`,
+        label: label.toLowerCase(),
+        group: FilterGroups.filterType,
+      });
+    }
+
+    if (filter.withSubfolders) {
+      filterValues.push({
+        key: FilterKeys.withSubfolders,
+        label: t("Common:WithSubfolders"),
+        group: FilterGroups.filterFolders,
+      });
+    }
+
+    if (filter.searchInContent) {
+      filterValues.push({
+        key: "true",
+        label: t("FileContents"),
+        group: FilterGroups.filterContent,
+      });
+    }
+
+    const currentFilterValues: TItem[] = [];
+
+    setSelectedFilterValues((value: Nullable<TItem[]>) => {
+      if (!value) {
+        currentFilterValues.push(...filterValues);
+
+        return filterValues.map((f) => ({ ...f }));
+      }
+
+      const items = value.map((v) => {
+        const item = filterValues.find((f) => f.group === v.group);
+
+        if (item) {
+          if (item.isMultiSelect) {
+            let isEqual = true;
+
+            if (Array.isArray(item.key))
+              item.key.forEach((k) => {
+                if (Array.isArray(v.key) && !v.key.includes(k)) {
+                  isEqual = false;
+                }
+              });
+
+            if (isEqual) return item;
+
+            return false;
+          }
+          if (item.key === v.key) return item;
+          return false;
+        }
+        return false;
+      });
+
+      const newItems = filterValues.filter(
+        (v) => !items.find((i) => i && i.group === v.group),
+      );
+
+      const filteredItems = items.filter((i) => i) as TItem[];
+
+      currentFilterValues.push(...filteredItems);
+
+      return filteredItems;
+    });
+
+    return isSSR ? filterValues : currentFilterValues;
+  }, [filter.filterType, filter.searchInContent, filter.withSubfolders, t]);
 
   const getViewSettingsData = React.useCallback(() => {
     const viewSettings = [
@@ -211,11 +413,44 @@ export default function useFilesFilter({
     return viewSettings;
   }, [t]);
 
+  // TODO: implement onChangeViewAs
   const onChangeViewAs = React.useCallback(() => {}, []);
 
-  const removeSelectedItem = React.useCallback(() => {}, []);
+  const removeSelectedItem = React.useCallback(
+    ({ key, group }: { key: string | number; group?: FilterGroups }) => {
+      const newFilter = filter.clone();
 
-  const clearAll = React.useCallback(() => {}, []);
+      if (group === FilterGroups.filterType) {
+        newFilter.filterType = null;
+      }
+      if (group === FilterGroups.filterAuthor) {
+        newFilter.authorType = null;
+        newFilter.excludeSubject = null;
+      }
+      if (group === FilterGroups.filterFolders) {
+        newFilter.withSubfolders = null;
+      }
+      if (group === FilterGroups.filterContent) {
+        newFilter.searchInContent = null;
+      }
+      if (group === FilterGroups.filterRoom) {
+        newFilter.roomId = null;
+      }
+
+      newFilter.page = 0;
+
+      setFilter(newFilter);
+
+      const urlFilter = newFilter.toUrlParams();
+
+      window.history.pushState(null, "", `?${urlFilter}`);
+    },
+    [filter],
+  );
+
+  const clearAll = React.useCallback(() => {
+    onClearFilter();
+  }, [onClearFilter]);
 
   return {
     onClearFilter,

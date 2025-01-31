@@ -52,7 +52,7 @@ export default async function DocspaceLayout({
   const theme = hdrs.get(THEME_HEADER);
   const shareKey = hdrs.get(SHARE_KEY_HEADER);
 
-  const navigationProps: HeaderProps = { theme, shareKey } as HeaderProps;
+  const navigationProps: HeaderProps = {} as HeaderProps;
 
   const filterProps: FilterProps = {
     filesFilter: filter,
@@ -89,6 +89,7 @@ export default async function DocspaceLayout({
           sectionFilterContent={<Filter {...filterProps} />}
           sectionBodyContent={children}
           isEmptyPage={folders.length === 0 && files.length === 0}
+          filesFilter={filter!}
         />
       </Layout>
     </main>

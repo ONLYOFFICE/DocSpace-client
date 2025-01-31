@@ -44,7 +44,7 @@ export default function useContextMenuModel({
         disabled: false,
       };
     },
-    [t, filesSelectionStore.addSelection],
+    [t, filesSelectionStore],
   );
 
   const getOpenItem = useCallback(
@@ -72,7 +72,7 @@ export default function useContextMenuModel({
         disabled: false,
       };
     },
-    [t],
+    [openFile, t],
   );
 
   const getLinkForRoomMembersItem = useCallback(
@@ -88,7 +88,7 @@ export default function useContextMenuModel({
         disabled: false,
       };
     },
-    [t],
+    [copyFileLink, copyFolderLink, t],
   );
 
   const getOpenPDFItem = useCallback(
@@ -102,7 +102,7 @@ export default function useContextMenuModel({
         disabled: false,
       };
     },
-    [t],
+    [openFile, t],
   );
 
   const getDownloadItem = useCallback(
@@ -166,7 +166,7 @@ export default function useContextMenuModel({
         disabled: false,
       };
     },
-    [t],
+    [openFile, t],
   );
 
   const getFillFormItem = useCallback(
@@ -180,7 +180,7 @@ export default function useContextMenuModel({
         disabled: false,
       };
     },
-    [t],
+    [openFile, t],
   );
 
   const getGroupContextMenuModel = useCallback(() => {
@@ -237,14 +237,17 @@ export default function useContextMenuModel({
     },
     [
       item,
-      filesSelectionStore.selection,
       getSelectItem,
       getOpenItem,
+      getViewItem,
+      getOpenPDFItem,
+      getFillFormItem,
+      getEditItem,
       getPreviewItem,
       getLinkForRoomMembersItem,
-      getOpenPDFItem,
       getDownloadItem,
       getDownloadAsItem,
+      filesSelectionStore,
       getGroupContextMenuModel,
     ],
   );

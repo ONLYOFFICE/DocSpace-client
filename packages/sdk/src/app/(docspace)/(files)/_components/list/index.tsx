@@ -69,7 +69,7 @@ const List = ({
 
   const [filter, setFilter] = React.useState<FilesFilter>(
     FilesFilter.getFilter({
-      search: filesFilter,
+      search: `?${filesFilter}`,
     } as Location)!,
   );
   const [filesList, setFilesList] = React.useState<(TFolderItem | TFileItem)[]>(
@@ -166,7 +166,15 @@ const List = ({
   ]);
 
   if (filesList.length === 0) {
-    return <EmptyView theme={theme!} current={current} />;
+    return (
+      <EmptyView
+        theme={theme!}
+        current={current}
+        folderId={filter.folder}
+        isFiltered={filter.isFiltered()}
+        shareKey={shareKey}
+      />
+    );
   }
 
   return (

@@ -34,6 +34,7 @@
     "ts-pattern": "5.5.0"
   },
   "devDependencies": {
+    "@babel/core": "7.25.8",
     "@svgr/webpack": "5.5.0",
     "@types/crypto-js": "4.2.2",
     "@types/nconf": "0.10.7",

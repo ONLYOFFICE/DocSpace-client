@@ -47,17 +47,17 @@ import type {
   ManualBackupWrapperProps,
 } from "./ManualBackup.types";
 
-function ManualBackupWrapper({
+const ManualBackupWrapper = ({
   isNotPaidPeriod,
   rootFoldersTitles,
   getProgress,
   fetchTreeFolders,
   setStorageRegions,
   setThirdPartyStorage,
-  clearProgressInterval,
+  resetDownloadingProgress,
   setConnectedThirdPartyAccount,
   ...props
-}: ManualBackupWrapperProps) {
+}: ManualBackupWrapperProps) => {
   const [isInitialLoading, setIsInitialLoading] = useState(false);
   const [isEmptyContentBeforeLoader, setIsEmptyContentBeforeLoader] =
     useState(true);
@@ -108,7 +108,7 @@ function ManualBackupWrapper({
     return () => {
       clearTimeout(timerId.current);
       timerId.current = undefined;
-      clearProgressInterval();
+      resetDownloadingProgress();
     };
   }, []);
 
@@ -122,7 +122,7 @@ function ManualBackupWrapper({
       {...props}
     />
   );
-}
+};
 
 export default inject<
   TStore,
@@ -145,6 +145,7 @@ export default inject<
       formSettings,
       temporaryLink,
       storageRegions,
+      errorInformation,
       thirdPartyStorage,
       defaultFormSettings,
       downloadingProgress,
@@ -161,9 +162,9 @@ export default inject<
       clearLocalStorage,
       setStorageRegions,
       saveToLocalStorage,
-      getIntervalProgress,
       setThirdPartyStorage,
-      clearProgressInterval,
+      setErrorInformation,
+      resetDownloadingProgress,
       setCompletedFormFields,
       addValueInFormSettings,
       setDownloadingProgress,
@@ -229,6 +230,7 @@ export default inject<
       storageRegions,
       thirdPartyStorage,
       defaultRegion,
+      errorInformation,
       downloadingProgress,
       errorsFieldsBeforeSafe,
       isBackupProgressVisible,
@@ -245,9 +247,9 @@ export default inject<
       clearLocalStorage,
       setStorageRegions,
       saveToLocalStorage,
-      getIntervalProgress,
+      setErrorInformation,
       setThirdPartyStorage,
-      clearProgressInterval,
+      resetDownloadingProgress,
       setCompletedFormFields,
       addValueInFormSettings,
       setDownloadingProgress,

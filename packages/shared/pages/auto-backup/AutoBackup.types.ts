@@ -51,7 +51,7 @@ export interface AutomaticBackupProps {
   buttonSize?: ButtonSize;
   removeItem: ThirdPartyAccountType;
   isNeedFilePath?: boolean;
-
+  isInitialError: boolean;
   isEnableAuto: boolean; // checkEnablePortalSettings(isRestoreAndAutoBackupAvailable);
 
   // authStore
@@ -64,9 +64,12 @@ export interface AutomaticBackupProps {
     periodObj: TOption[],
     weekdayArr: TOption[],
   ) => void;
-
+  setDownloadingProgress: (progress: number) => void;
+  setTemporaryLink: (link: string) => void;
   setThirdPartyStorage: (list: unknown) => void;
   setBackupSchedule: (list: unknown) => void;
+
+  setErrorInformation: (error: unknown, t: TTranslation) => void;
 
   setConnectedThirdPartyAccount: (
     account: Nullable<ConnectedThirdPartyAccountType>,
@@ -74,6 +77,7 @@ export interface AutomaticBackupProps {
   seStorageType: (type: string) => void;
   setSelectedEnableSchedule: VoidFunction;
   toDefault: VoidFunction;
+  errorInformation: string;
   selectedStorageType: Nullable<string>;
   selectedFolderId: Nullable<number | string>;
   isFormReady: () => boolean;

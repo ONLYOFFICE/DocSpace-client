@@ -122,10 +122,10 @@ export const CompanyInfo = ({
             &quot;This information will be displayed in the
             {isSettingPaid ? (
               <Link className="link" onClick={showExample} noHover>
-                {{ link }}
+                {link}
               </Link>
             ) : (
-              <span className="link">{{ link }}</span>
+              <span className="link">{link}</span>
             )}
             window.&quot;
           </Trans>

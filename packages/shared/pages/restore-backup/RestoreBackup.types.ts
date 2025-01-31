@@ -65,6 +65,7 @@ export interface RestoreBackupProps {
   setTenantStatus: (tenantStatus: TenantStatus) => void;
 
   // backup
+  errorInformation: string;
   isBackupProgressVisible: boolean;
   restoreResource: Nullable<string>;
   formSettings: Record<string, string>;
@@ -76,6 +77,9 @@ export interface RestoreBackupProps {
   selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
   isTheSameThirdPartyAccount: boolean;
   downloadingProgress: number;
+  setErrorInformation: (error: unknown, t?: TTranslation) => void;
+  setTemporaryLink: (link: string) => void;
+  setDownloadingProgress: (progress: number) => void;
   setConnectedThirdPartyAccount: (
     account: Nullable<ConnectedThirdPartyAccountType>,
   ) => void;

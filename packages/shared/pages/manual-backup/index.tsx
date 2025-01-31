@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
@@ -34,13 +34,21 @@ import { startBackup } from "@docspace/shared/api/portal";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { BackupStorageType, FolderType } from "@docspace/shared/enums";
+import StatusMessage from "@docspace/shared/components/status-message";
+import SocketHelper, {
+  SocketEvents,
+  TSocketListener,
+} from "@docspace/shared/utils/socket";
 
 import {
   FloatingButton,
   FloatingButtonIcons,
 } from "@docspace/shared/components/floating-button";
 import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
-import { isManagement } from "@docspace/shared/utils/common";
+import {
+  isManagement,
+  getBackupProgressInfo,
+} from "@docspace/shared/utils/common";
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
 
 import { StyledModules, StyledManualBackup } from "./ManualBackup.styled";
@@ -108,11 +116,12 @@ const ManualBackup = ({
   getStorageParams,
   clearLocalStorage,
   saveToLocalStorage,
-  getIntervalProgress,
   setDownloadingProgress,
   setConnectedThirdPartyAccount,
   setConnectDialogVisible,
   setIsThirdStorageChanged,
+  setErrorInformation,
+  errorInformation,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -134,7 +143,34 @@ const ManualBackup = ({
     () => selectedStorageType === "ThirdPartyStorage",
   );
 
+  useEffect(() => {
+    const onBackupProgress: TSocketListener<SocketEvents.BackupProgress> = (
+      opt,
+    ) => {
+      const options = getBackupProgressInfo(
+        opt,
+        t,
+        setDownloadingProgress,
+        setTemporaryLink,
+      );
+
+      if (!options) return;
+
+      const { error, success } = options;
+
+      if (error) toastr.error(error);
+      if (success) toastr.success(success);
+    };
+
+    SocketHelper.on(SocketEvents.BackupProgress, onBackupProgress);
+
+    return () => {
+      SocketHelper.off(SocketEvents.BackupProgress, onBackupProgress);
+    };
+  }, [setDownloadingProgress, setTemporaryLink, t]);
+
   const onMakeTemporaryBackup = async () => {
+    setErrorInformation("");
     clearLocalStorage();
     localStorage.setItem(
       "LocalCopyStorageType",
@@ -149,9 +185,8 @@ const ManualBackup = ({
         isManagement(),
       );
       setDownloadingProgress(1);
-      getIntervalProgress(t);
     } catch (err) {
-      toastr.error(err as Error);
+      setErrorInformation(err, t);
     }
   };
 
@@ -191,6 +226,7 @@ const ManualBackup = ({
     selectedStorageTitle?: string,
   ) => {
     clearLocalStorage();
+    setErrorInformation("");
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
       selectedFolder,
@@ -212,9 +248,8 @@ const ManualBackup = ({
       await startBackup(moduleType, storageParams, false, isManagement());
       setDownloadingProgress(1);
       setTemporaryLink("");
-      getIntervalProgress(t);
     } catch (err) {
-      toastr.error(err as Error);
+      setErrorInformation(err, t);
     }
   };
 
@@ -222,7 +257,7 @@ const ManualBackup = ({
 
   const commonRadioButtonProps = {
     fontSize: "13px",
-    fontWeight: 400,
+    fontWeight: 600,
     value: "value",
     className: "backup_radio-button",
     onClick: onClickShowStorage,
@@ -242,20 +277,23 @@ const ManualBackup = ({
 
   return (
     <StyledManualBackup>
+      <StatusMessage message={errorInformation} />
       <div className="backup_modules-header_wrapper">
         <Text className="backup_modules-description">
           {t("ManualBackupDescription")}
         </Text>
-        <Link
-          className="link-learn-more"
-          href={dataBackupUrl}
-          target={LinkTarget.blank}
-          fontSize="13px"
-          color={currentColorScheme?.main?.accent}
-          isHovered
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {!isManagement() ? (
+          <Link
+            className="link-learn-more"
+            href={dataBackupUrl}
+            target={LinkTarget.blank}
+            fontSize="13px"
+            color={currentColorScheme?.main?.accent}
+            isHovered
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <StyledModules>
@@ -271,7 +309,7 @@ const ManualBackup = ({
         <Text className="backup-description">
           {t("TemporaryStorageDescription")}
         </Text>
-        {isCheckedTemporaryStorage && (
+        {isCheckedTemporaryStorage ? (
           <div className="manual-backup_buttons">
             <Button
               id="create-button"
@@ -281,7 +319,7 @@ const ManualBackup = ({
               isDisabled={!isMaxProgress || pageIsDisabled}
               size={buttonSize}
             />
-            {temporaryLink && temporaryLink.length > 0 && isMaxProgress && (
+            {temporaryLink && temporaryLink.length > 0 && isMaxProgress ? (
               <Button
                 id="download-copy"
                 label={t("DownloadCopy")}
@@ -290,17 +328,17 @@ const ManualBackup = ({
                 size={buttonSize}
                 style={{ marginInlineStart: "8px" }}
               />
-            )}
-            {!isMaxProgress && (
+            ) : null}
+            {!isMaxProgress ? (
               <Button
                 label={`${t("Common:CopyOperation")} ...`}
                 isDisabled
                 size={buttonSize}
                 style={{ marginInlineStart: "8px" }}
               />
-            )}
+            ) : null}
           </div>
-        )}
+        ) : null}
       </StyledModules>
       <StyledModules isDisabled={isNotPaidPeriod}>
         <RadioButton
@@ -317,7 +355,7 @@ const ManualBackup = ({
             {{ roomName }}
           </Trans>
         </Text>
-        {isCheckedDocuments && (
+        {isCheckedDocuments ? (
           <RoomsModule
             newPath={newPath}
             basePath={basePath}
@@ -334,7 +372,7 @@ const ManualBackup = ({
             currentDeviceType={currentDeviceType}
             maxWidth={maxWidth}
           />
-        )}
+        ) : null}
       </StyledModules>
 
       <StyledModules isDisabled={isNotPaidPeriod}>
@@ -350,7 +388,7 @@ const ManualBackup = ({
         <Text className="backup-description">
           {t("ThirdPartyResourceDescription")}
         </Text>
-        {isCheckedThirdParty && (
+        {isCheckedThirdParty ? (
           <ThirdPartyModule
             newPath={newPath}
             accounts={accounts}
@@ -378,7 +416,7 @@ const ManualBackup = ({
             setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
             {...commonModulesProps}
           />
-        )}
+        ) : null}
       </StyledModules>
       <StyledModules isDisabled={isNotPaidPeriod}>
         <RadioButton
@@ -393,7 +431,7 @@ const ManualBackup = ({
         <Text className="backup-description">
           {t("ThirdPartyStorageDescription")}
         </Text>
-        {isCheckedThirdPartyStorage && (
+        {isCheckedThirdPartyStorage ? (
           <ThirdPartyStorageModule
             isValidForm={isValidForm}
             formSettings={formSettings}
@@ -411,17 +449,17 @@ const ManualBackup = ({
             isMaxProgress={isMaxProgress}
             onMakeCopy={onMakeCopy} // {...commonModulesProps}
           />
-        )}
+        ) : null}
       </StyledModules>
 
-      {isBackupProgressVisible && (
+      {isBackupProgressVisible ? (
         <FloatingButton
           alert={false}
           percent={downloadingProgress}
           className="layout-progress-bar"
           icon={FloatingButtonIcons.file}
         />
-      )}
+      ) : null}
     </StyledManualBackup>
   );
 };

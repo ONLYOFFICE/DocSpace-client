@@ -195,23 +195,23 @@ const ThirdPartyStoragesModule = ({
         className="backup_combo"
       />
 
-      {selectedStorageId === ThirdPartyStorages.GoogleId && (
+      {selectedStorageId === ThirdPartyStorages.GoogleId ? (
         <GoogleCloudStorage {...commonProps} />
-      )}
-      {selectedStorageId === ThirdPartyStorages.RackspaceId && (
+      ) : null}
+      {selectedStorageId === ThirdPartyStorages.RackspaceId ? (
         <RackspaceStorage {...commonProps} />
-      )}
-      {selectedStorageId === ThirdPartyStorages.SelectelId && (
+      ) : null}
+      {selectedStorageId === ThirdPartyStorages.SelectelId ? (
         <SelectelStorage {...commonProps} />
-      )}
-      {selectedStorageId === ThirdPartyStorages.AmazonId && (
+      ) : null}
+      {selectedStorageId === ThirdPartyStorages.AmazonId ? (
         <AmazonStorage
           defaultRegion={defaultRegion}
           storageRegions={storageRegions}
           deleteValueFormSetting={deleteValueFormSetting}
           {...commonProps}
         />
-      )}
+      ) : null}
     </>
   );
 };

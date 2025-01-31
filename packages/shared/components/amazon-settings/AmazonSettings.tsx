@@ -195,9 +195,14 @@ const AmazonSettings = ({
     setIsThirdStorageChanged(true);
   };
   const onSelectRegion = (options: TOption) => {
-    const systemName = options.systemName;
+    if (
+      !("systemName" in options) ||
+      !options.systemName ||
+      typeof options.systemName !== "string"
+    )
+      return;
 
-    if (!systemName) return;
+    const systemName = options.systemName;
 
     addValueInFormSettings(REGION, systemName);
     setIsThirdStorageChanged(true);
@@ -376,7 +381,7 @@ const AmazonSettings = ({
         />
       </StyledBody>
 
-      {selectedEncryption === serverSideEncryption && (
+      {selectedEncryption === serverSideEncryption ? (
         <>
           <RadioButton
             id="sse-s3"
@@ -400,7 +405,7 @@ const AmazonSettings = ({
             isDisabled={isDisabled}
           />
 
-          {formSettings[SSE] === sseKms && (
+          {formSettings[SSE] === sseKms ? (
             <>
               <Text isBold>Managed CMK</Text>
               <ComboBox
@@ -420,7 +425,7 @@ const AmazonSettings = ({
                 showDisabledItems
               />
 
-              {managedKeys.label === CUSTOMER_MANAGER && (
+              {managedKeys.label === CUSTOMER_MANAGER ? (
                 <>
                   <Text isBold>KMS Key Id:</Text>
                   <TextInput
@@ -437,13 +442,13 @@ const AmazonSettings = ({
                     size={InputSize.base}
                   />
                 </>
-              )}
+              ) : null}
             </>
-          )}
+          ) : null}
         </>
-      )}
+      ) : null}
 
-      {selectedEncryption === clientSideEncryption && (
+      {selectedEncryption === clientSideEncryption ? (
         <>
           <Text isBold>KMS Key Id:</Text>
           <TextInput
@@ -460,9 +465,9 @@ const AmazonSettings = ({
             size={InputSize.base}
           />
         </>
-      )}
+      ) : null}
 
-      {isNeedFilePath && (
+      {isNeedFilePath ? (
         <TextInput
           id="file-path-input"
           name="filePath"
@@ -476,7 +481,7 @@ const AmazonSettings = ({
           type={InputType.text}
           size={InputSize.base}
         />
-      )}
+      ) : null}
     </>
   );
 };

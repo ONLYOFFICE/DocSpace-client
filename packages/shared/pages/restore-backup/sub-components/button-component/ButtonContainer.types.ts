@@ -43,6 +43,7 @@ export interface ButtonContainerProps {
 
   // backup store
   downloadingProgress: number;
+  setErrorInformation: (error: unknown, t?: TTranslation) => void;
   isFormReady: () => boolean;
   getStorageParams: (
     isCheckedThirdPartyStorage: boolean,

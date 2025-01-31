@@ -76,8 +76,6 @@ const commonStyles = css`
 
   .radio-button_text {
     margin-inline-end: 7px;
-    font-size: 13px;
-    font-weight: 600;
   }
 
   .backup_radio-button {
@@ -151,10 +149,8 @@ export const StyledAutoBackup = styled.div<{ pageIsDisabled?: boolean }>`
   }
   .automatic-backup_main {
     margin-bottom: 30px;
-    .radio-button_text {
-      font-size: 13px;
-    }
   }
+
   .backup_toggle-btn {
     position: static;
     margin-top: 1px;

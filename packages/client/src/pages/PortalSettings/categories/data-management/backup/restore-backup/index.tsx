@@ -56,7 +56,7 @@ const RestoreBackupWrapper = ({
   setStorageRegions,
   setRestoreResource,
   setThirdPartyStorage,
-  clearProgressInterval,
+  resetDownloadingProgress,
   setConnectedThirdPartyAccount,
   ...props
 }: RestoreBackupWrapperProps) => {
@@ -99,7 +99,7 @@ const RestoreBackupWrapper = ({
 
   useEffect(() => {
     return () => {
-      clearProgressInterval();
+      resetDownloadingProgress();
       setRestoreResource(null);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -137,6 +137,7 @@ export default inject<
     thirdPartyStore,
   }) => {
     const {
+      errorInformation,
       selectedThirdPartyAccount,
       isBackupProgressVisible,
       restoreResource,
@@ -149,10 +150,13 @@ export default inject<
       isTheSameThirdPartyAccount,
       downloadingProgress,
       getProgress,
+      setTemporaryLink,
       setThirdPartyStorage,
+      setErrorInformation,
+      setDownloadingProgress,
       setStorageRegions,
       setConnectedThirdPartyAccount,
-      clearProgressInterval,
+      resetDownloadingProgress,
       setRestoreResource,
       clearLocalStorage,
       setSelectedThirdPartyAccount,
@@ -232,6 +236,7 @@ export default inject<
       setTenantStatus,
 
       // backup
+      errorInformation,
       isBackupProgressVisible,
       restoreResource,
       formSettings,
@@ -245,9 +250,12 @@ export default inject<
       downloadingProgress,
       getProgress,
       setThirdPartyStorage,
+      setTemporaryLink,
+      setErrorInformation,
+      setDownloadingProgress,
       setStorageRegions,
       setConnectedThirdPartyAccount,
-      clearProgressInterval,
+      resetDownloadingProgress,
       setRestoreResource,
       clearLocalStorage,
       setSelectedThirdPartyAccount,

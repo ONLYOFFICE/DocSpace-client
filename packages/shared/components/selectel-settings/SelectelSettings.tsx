@@ -110,7 +110,7 @@ const SelectelSettings = ({
         size={InputSize.base}
       />
 
-      {isNeedFilePath && (
+      {isNeedFilePath ? (
         <TextInput
           id="file-path-input"
           name={FILE_PATH}
@@ -125,7 +125,7 @@ const SelectelSettings = ({
           type={InputType.text}
           size={InputSize.base}
         />
-      )}
+      ) : null}
     </>
   );
 };

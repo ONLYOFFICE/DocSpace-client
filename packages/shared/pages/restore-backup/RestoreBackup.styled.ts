@@ -57,8 +57,6 @@ const commonStyles = css`
 
   .radio-button_text {
     margin-inline-end: 7px;
-    font-size: 13px;
-    font-weight: 600;
   }
 
   .backup_radio-button {
@@ -136,6 +134,8 @@ const floatingButtonStyles = css`
 export const StyledRestoreBackup = styled.div<StyledRestoreBackupProps>`
   ${commonStyles}
   ${floatingButtonStyles}
+
+  max-width: ${TEXT_LENGTH};
 
   .restore-backup_third-party-module {
     margin-top: 16px;

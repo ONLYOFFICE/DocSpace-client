@@ -32,7 +32,7 @@ export interface InjectedRestoreBackupWrapperProps
   getProgress: (t: TTranslation) => Promise<void>;
   setThirdPartyStorage: (list: unknown) => void;
   setStorageRegions: (regions: unknown) => void;
-  clearProgressInterval: VoidFunction;
+  resetDownloadingProgress: VoidFunction;
 }
 
 export interface RestoreBackupWrapperProps

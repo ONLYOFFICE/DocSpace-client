@@ -124,7 +124,7 @@ const RackspaceSettings = ({
         type={InputType.text}
         size={InputSize.base}
       />
-      {isNeedFilePath && (
+      {isNeedFilePath ? (
         <TextInput
           id="file-path-input"
           name={FILE_PATH}
@@ -139,7 +139,7 @@ const RackspaceSettings = ({
           type={InputType.text}
           size={InputSize.base}
         />
-      )}
+      ) : null}
     </>
   );
 };

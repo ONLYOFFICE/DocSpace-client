@@ -47,7 +47,7 @@ import type {
   AutoBackupWrapperProps,
 } from "./AutoBackup.types";
 
-function AutoBackupWrapper({
+const AutoBackupWrapper = ({
   getProgress,
   setConnectedThirdPartyAccount,
   setStorageRegions,
@@ -55,14 +55,16 @@ function AutoBackupWrapper({
   setThirdPartyStorage,
   setDefaultOptions,
   fetchTreeFolders,
-  clearProgressInterval,
+  resetDownloadingProgress,
+  setErrorInformation,
   ...props
-}: AutoBackupWrapperProps) {
+}: AutoBackupWrapperProps) => {
   const timerIdRef = useRef<number>();
   const { t, ready } = useTranslation(["Settings", "Common"]);
   const [isEmptyContentBeforeLoader, setIsEmptyContentBeforeLoader] =
     useState(true);
   const [isInitialLoading, setIsInitialLoading] = useState(false);
+  const [isInitialError, setIsInitialError] = useState(false);
   const { periodsObject, weekdaysLabelArray } = useDefaultOptions(
     t,
     props.language,
@@ -95,6 +97,8 @@ function AutoBackupWrapper({
 
         setDefaultOptions(t, periodsObject, weekdaysLabelArray);
       } catch (error) {
+        setErrorInformation(error, t);
+        setIsInitialError(true);
         toastr.error(error as Error);
       } finally {
         clearTimeout(timerIdRef.current);
@@ -109,7 +113,7 @@ function AutoBackupWrapper({
     return () => {
       clearTimeout(timerIdRef.current);
       timerIdRef.current = undefined;
-      clearProgressInterval();
+      resetDownloadingProgress();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -126,10 +130,12 @@ function AutoBackupWrapper({
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
       isInitialLoading={isInitialLoading}
       isEmptyContentBeforeLoader={isEmptyContentBeforeLoader}
+      setErrorInformation={setErrorInformation}
+      isInitialError={isInitialError}
       {...props}
     />
   );
-}
+};
 
 export default inject<
   TStore,
@@ -190,8 +196,10 @@ export default inject<
     } = dialogsStore;
 
     const {
+      errorInformation,
       setDefaultOptions,
-      clearProgressInterval,
+      setErrorInformation,
+      resetDownloadingProgress,
       setThirdPartyStorage,
       setBackupSchedule,
       getProgress,
@@ -246,6 +254,8 @@ export default inject<
       selectedThirdPartyAccount,
       accounts,
       setThirdPartyAccountsInfo,
+      setDownloadingProgress,
+      setTemporaryLink,
     } = backup;
 
     const defaultRegion =
@@ -265,7 +275,6 @@ export default inject<
       language,
       // backup
       setDefaultOptions,
-      clearProgressInterval,
       setThirdPartyStorage,
       setBackupSchedule,
       getProgress,
@@ -296,13 +305,17 @@ export default inject<
       connectedThirdPartyAccount,
       selectedPeriodLabel,
       selectedWeekdayLabel,
-
+      errorInformation,
+      resetDownloadingProgress,
+      setDownloadingProgress,
+      setTemporaryLink,
       setMaxCopies,
       setPeriod,
       setWeekday,
       setMonthNumber,
       setTime,
       setStorageId,
+      setErrorInformation,
       thirdPartyStorage,
       defaultStorageId,
       setCompletedFormFields,

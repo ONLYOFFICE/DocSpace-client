@@ -41,7 +41,7 @@ export interface InjectedManualBackupProps
   setStorageRegions: (regions: unknown) => void;
   setThirdPartyStorage: (list: unknown) => void;
   fetchTreeFolders: () => Promise<TFolder[] | undefined>;
-  clearProgressInterval: VoidFunction;
+  resetDownloadingProgress: VoidFunction;
 }
 
 export interface ExternalManualBackupProps

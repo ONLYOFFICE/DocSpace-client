@@ -63,8 +63,6 @@ const commonStyles = css`
 
   .radio-button_text {
     margin-inline-end: 7px;
-    font-size: 13px;
-    font-weight: 600;
   }
 
   .backup_radio-button {

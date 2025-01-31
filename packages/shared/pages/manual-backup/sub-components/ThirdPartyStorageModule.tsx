@@ -245,26 +245,26 @@ const ThirdPartyStorageModule = ({
           isDisabled={!isMaxProgress || isStartCopy || !thirdPartyStorage}
         />
 
-        {selectedId === ThirdPartyStorages.GoogleId && (
+        {selectedId === ThirdPartyStorages.GoogleId ? (
           <GoogleCloudStorage {...commonProps} />
-        )}
+        ) : null}
 
-        {selectedId === ThirdPartyStorages.RackspaceId && (
+        {selectedId === ThirdPartyStorages.RackspaceId ? (
           <RackspaceStorage {...commonProps} />
-        )}
+        ) : null}
 
-        {selectedId === ThirdPartyStorages.SelectelId && (
+        {selectedId === ThirdPartyStorages.SelectelId ? (
           <SelectelStorage {...commonProps} />
-        )}
+        ) : null}
 
-        {selectedId === ThirdPartyStorages.AmazonId && (
+        {selectedId === ThirdPartyStorages.AmazonId ? (
           <AmazonStorage
             defaultRegion={defaultRegion}
             storageRegions={storageRegions}
             deleteValueFormSetting={deleteValueFormSetting}
             {...commonProps}
           />
-        )}
+        ) : null}
       </div>
     </StyledManualBackup>
   );

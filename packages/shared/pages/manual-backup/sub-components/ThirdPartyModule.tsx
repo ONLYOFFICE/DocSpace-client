@@ -208,7 +208,7 @@ const ThirdPartyModule = ({
         isSelectFolder
       />
 
-      {connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount && (
+      {connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount ? (
         <Button
           primary
           size={buttonSize}
@@ -216,7 +216,7 @@ const ThirdPartyModule = ({
           label={t("Common:CreateCopy")}
           isDisabled={isModuleDisabled || selectedFolder === ""}
         />
-      )}
+      ) : null}
     </div>
   );
 };

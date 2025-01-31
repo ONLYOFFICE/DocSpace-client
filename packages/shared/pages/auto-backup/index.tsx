@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTheme } from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -44,13 +44,22 @@ import {
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { getBackupStorage } from "@docspace/shared/api/settings";
 import AutoBackupLoader from "@docspace/shared/skeletons/backup/AutoBackup";
+import StatusMessage from "@docspace/shared/components/status-message";
+import SocketHelper, {
+  SocketEvents,
+  type TSocketListener,
+} from "@docspace/shared/utils/socket";
 import {
   FloatingButton,
   FloatingButtonIcons,
 } from "@docspace/shared/components/floating-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
-import { isManagement } from "@docspace/shared/utils/common";
+import {
+  isManagement,
+  getBackupProgressInfo,
+} from "@docspace/shared/utils/common";
+
 import { globalColors } from "@docspace/shared/themes";
 import { useStateCallback } from "@docspace/shared/hooks/useStateCallback";
 import type { Nullable } from "@docspace/shared/types";
@@ -163,6 +172,11 @@ const AutomaticBackup = ({
   isNeedFilePath = false,
   isEmptyContentBeforeLoader,
   isInitialLoading,
+  setDownloadingProgress,
+  setTemporaryLink,
+  setErrorInformation,
+  isInitialError,
+  errorInformation,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -180,6 +194,31 @@ const AutomaticBackup = ({
 
   const { maxNumberCopiesArray, periodsObject, weekdaysLabelArray } =
     useDefaultOptions(t, language);
+
+  useEffect(() => {
+    const onBackupProgress: TSocketListener<SocketEvents.BackupProgress> = (
+      opt,
+    ) => {
+      const options = getBackupProgressInfo(
+        opt,
+        t,
+        setDownloadingProgress,
+        setTemporaryLink,
+      );
+      if (!options) return;
+
+      const { error, success } = options;
+
+      if (error) toastr.error(error);
+      if (success) toastr.success(success);
+    };
+
+    SocketHelper.on(SocketEvents.BackupProgress, onBackupProgress);
+
+    return () => {
+      SocketHelper.off(SocketEvents.BackupProgress, onBackupProgress);
+    };
+  }, [setDownloadingProgress, setTemporaryLink, t]);
 
   const onClickPermissions = () => {
     seStorageType(BackupStorageType.DocumentModuleType.toString());
@@ -233,6 +272,7 @@ const AutomaticBackup = ({
           toastr.success(t("SuccessfullySaveSettingsMessage"));
         })
         .catch((error) => {
+          setErrorInformation(error, t);
           toastr.error(error);
         })
         .finally(() => setIsLoadingData(false));
@@ -270,7 +310,7 @@ const AutomaticBackup = ({
       toastr.success(t("SuccessfullySaveSettingsMessage"));
     } catch (e) {
       toastr.error(e as Error);
-
+      setErrorInformation(e, t);
       if (isCheckedThirdParty || isCheckedDocuments) updateBaseFolderPath();
     } finally {
       setIsLoadingData(false);
@@ -335,7 +375,7 @@ const AutomaticBackup = ({
 
   const commonRadioButtonProps = {
     fontSize: "13px",
-    fontWeight: 400,
+    fontWeight: 600,
     value: "value",
     className: "backup_radio-button",
     onClick: onClickShowStorage,
@@ -349,13 +389,14 @@ const AutomaticBackup = ({
 
   return (
     <StyledAutoBackup>
+      <StatusMessage message={errorInformation} />
       <div className="backup_modules-header_wrapper">
         <Text className="backup_modules-description settings_unavailable">
           {t("AutoBackupDescription", {
             productName: t("Common:ProductName"),
           })}
         </Text>
-        {!isManagement() && (
+        {!isManagement() ? (
           <Link
             className="link-learn-more"
             href={automaticBackupUrl}
@@ -366,7 +407,7 @@ const AutomaticBackup = ({
           >
             {t("Common:LearnMore")}
           </Link>
-        )}
+        ) : null}
       </div>
 
       <div className="backup_toggle-wrapper">
@@ -374,7 +415,7 @@ const AutomaticBackup = ({
           className="enable-automatic-backup backup_toggle-btn"
           onChange={onClickPermissions}
           isChecked={selectedEnableSchedule}
-          isDisabled={isLoadingData || !isEnableAuto}
+          isDisabled={isLoadingData || !isEnableAuto || isInitialError}
         />
 
         <div className="toggle-caption">
@@ -387,7 +428,7 @@ const AutomaticBackup = ({
             >
               {t("EnableAutomaticBackup")}
             </Text>
-            {!isEnableAuto && !isManagement() && (
+            {!isEnableAuto && !isManagement() ? (
               <Badge
                 backgroundColor={
                   theme.isBase
@@ -399,22 +440,22 @@ const AutomaticBackup = ({
                 className="auto-backup_badge"
                 isPaidBadge
               />
-            )}
+            ) : null}
           </div>
           <Text className="backup_toggle-btn-description settings_unavailable">
             {t("EnableAutomaticBackupDescription")}
           </Text>
         </div>
       </div>
-      {selectedEnableSchedule && isEnableAuto && (
+      {!isInitialError && selectedEnableSchedule && isEnableAuto ? (
         <div className="backup_modules">
           <StyledModules>
             <RadioButton
+              key={0}
               {...commonRadioButtonProps}
               id="backup-room"
               label={t("RoomsModule")}
               name={`${BackupStorageType.DocumentModuleType}`}
-              key={0}
               isChecked={isCheckedDocuments}
               isDisabled={isLoadingData}
             />
@@ -423,7 +464,7 @@ const AutomaticBackup = ({
                 {{ roomName }}
               </Trans>
             </Text>
-            {isCheckedDocuments && (
+            {isCheckedDocuments ? (
               <RoomsModule
                 settingsFileSelector={settingsFileSelector}
                 newPath={newPath}
@@ -449,7 +490,7 @@ const AutomaticBackup = ({
                 {...commonProps}
                 isError={isError}
               />
-            )}
+            ) : null}
           </StyledModules>
 
           <StyledModules
@@ -469,7 +510,7 @@ const AutomaticBackup = ({
             <Text className="backup-description">
               {t("ThirdPartyResourceDescription")}
             </Text>
-            {isCheckedThirdParty && (
+            {isCheckedThirdParty ? (
               <ThirdPartyModule
                 setSelectedFolder={setSelectedFolder}
                 defaultStorageType={defaultStorageType}
@@ -515,7 +556,7 @@ const AutomaticBackup = ({
                 isError={isError}
                 buttonSize={buttonSize}
               />
-            )}
+            ) : null}
           </StyledModules>
           <StyledModules>
             <RadioButton
@@ -530,7 +571,7 @@ const AutomaticBackup = ({
               {t("ThirdPartyStorageDescription")}
             </Text>
 
-            {isCheckedThirdPartyStorage && (
+            {isCheckedThirdPartyStorage ? (
               <ThirdPartyStorageModule
                 thirdPartyStorage={thirdPartyStorage}
                 setStorageId={setStorageId}
@@ -558,14 +599,14 @@ const AutomaticBackup = ({
                 deleteValueFormSetting={deleteValueFormSetting}
                 {...commonProps}
               />
-            )}
+            ) : null}
           </StyledModules>
         </div>
-      )}
+      ) : null}
 
       <ButtonContainer
         t={t}
-        isLoadingData={isLoadingData}
+        isLoadingData={isLoadingData || isInitialError}
         buttonSize={buttonSize}
         onSaveModuleSettings={onSaveModuleSettings}
         onCancelModuleSettings={onCancelModuleSettings}
@@ -573,14 +614,14 @@ const AutomaticBackup = ({
         isThirdStorageChanged={isThirdStorageChanged}
       />
 
-      {isBackupProgressVisible && (
+      {isBackupProgressVisible ? (
         <FloatingButton
           className="layout-progress-bar"
           icon={FloatingButtonIcons.file}
           alert={false}
           percent={downloadingProgress}
         />
-      )}
+      ) : null}
     </StyledAutoBackup>
   );
 };

@@ -140,26 +140,26 @@ const ThirdPartyStorageModule = ({
           showDisabledItems
         />
 
-        {selectedStorageId === ThirdPartyStorages.GoogleId && (
+        {selectedStorageId === ThirdPartyStorages.GoogleId ? (
           <GoogleCloudStorage {...commonProps} />
-        )}
+        ) : null}
 
-        {selectedStorageId === ThirdPartyStorages.RackspaceId && (
+        {selectedStorageId === ThirdPartyStorages.RackspaceId ? (
           <RackspaceStorage {...commonProps} />
-        )}
+        ) : null}
 
-        {selectedStorageId === ThirdPartyStorages.SelectelId && (
+        {selectedStorageId === ThirdPartyStorages.SelectelId ? (
           <SelectelStorage {...commonProps} />
-        )}
+        ) : null}
 
-        {selectedStorageId === ThirdPartyStorages.AmazonId && (
+        {selectedStorageId === ThirdPartyStorages.AmazonId ? (
           <AmazonStorage
             storageRegions={storageRegions}
             defaultRegion={defaultRegion}
             deleteValueFormSetting={deleteValueFormSetting}
             {...commonProps}
           />
-        )}
+        ) : null}
       </div>
     </StyledAutoBackup>
   );

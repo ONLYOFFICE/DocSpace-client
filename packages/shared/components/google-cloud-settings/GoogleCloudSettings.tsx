@@ -84,7 +84,7 @@ const GoogleCloudSettings = ({
         size={InputSize.base}
       />
 
-      {isNeedFilePath && (
+      {isNeedFilePath ? (
         <TextInput
           scale
           tabIndex={2}
@@ -99,7 +99,7 @@ const GoogleCloudSettings = ({
           value={formSettings[FILE_PATH]}
           isDisabled={isLoadingData || isLoading || isDisabled}
         />
-      )}
+      ) : null}
     </>
   );
 };

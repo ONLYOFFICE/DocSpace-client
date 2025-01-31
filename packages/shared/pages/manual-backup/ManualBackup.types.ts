@@ -66,12 +66,12 @@ export interface ManualBackupProps {
   errorsFieldsBeforeSafe: Record<string, boolean>;
   selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
   connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
+  errorInformation: string;
   isFormReady: () => boolean;
   clearLocalStorage: VoidFunction;
-
+  setErrorInformation: (error: unknown, t?: TTranslation) => void;
   setTemporaryLink: (link: string) => void;
   deleteValueFormSetting: (key: string) => void;
-  getIntervalProgress: (t: TTranslation) => void;
   setRequiredFormSettings: (arr: string[]) => void;
   setDownloadingProgress: (progress: number) => void;
   setIsThirdStorageChanged: (changed: boolean) => void;

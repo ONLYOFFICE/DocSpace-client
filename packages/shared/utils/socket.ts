@@ -226,6 +226,12 @@ export type TListenEventCallbackMap = {
     isCompleted: boolean;
     error: string;
   }) => void;
+  [SocketEvents.BackupProgress]: (opt: {
+    progress: number;
+    isCompleted?: boolean;
+    link?: string;
+    error?: string;
+  }) => void;
 };
 
 /**

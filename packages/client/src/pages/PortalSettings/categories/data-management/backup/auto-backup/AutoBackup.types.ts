@@ -38,11 +38,12 @@ export interface InjectedAutoBackupWrapperProps
     | "isNeedFilePath"
     | "isEmptyContentBeforeLoader"
     | "isInitialLoading"
+    | "isInitialError"
   > {
-  clearProgressInterval: VoidFunction;
   setStorageRegions: (regions: unknown) => void;
   getProgress: (t: TTranslation) => Promise<void>;
   fetchTreeFolders: () => Promise<TFolder[] | undefined>;
+  resetDownloadingProgress: VoidFunction;
 }
 
 export type AutoBackupWrapperProps = InjectedAutoBackupWrapperProps &

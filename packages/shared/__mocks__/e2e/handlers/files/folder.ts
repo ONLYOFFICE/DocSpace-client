@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { HEADER_FILTERED_FOLDER, HEADER_FULL_FOLDER } from "../../utils";
+import { HEADER_FILTERED_FOLDER, HEADER_EMPTY_FOLDER } from "../../utils";
 import type { TFile, TFolder, TGetFolder } from "../../../../api/files/types";
 
 const files: TFile[] = [
@@ -4198,13 +4198,13 @@ const getEmptyFolder = () => {
 };
 
 export const folderHandler = (headers?: Headers): Response => {
-  if (headers?.get(HEADER_FULL_FOLDER)) {
-    return new Response(JSON.stringify({ response: getFolder() }));
+  if (headers?.get(HEADER_EMPTY_FOLDER)) {
+    return new Response(JSON.stringify({ response: getEmptyFolder() }));
   }
 
   if (headers?.get(HEADER_FILTERED_FOLDER)) {
     return new Response(JSON.stringify({ response: getFolder(true) }));
   }
 
-  return new Response(JSON.stringify({ response: getEmptyFolder() }));
+  return new Response(JSON.stringify({ response: getFolder() }));
 };

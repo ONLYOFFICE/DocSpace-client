@@ -31,7 +31,7 @@ import { withTranslation } from "react-i18next";
 import { PageType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import { ArticleItem } from "@docspace/shared/components/article-item";
+import { ArticleItem } from "@docspace/shared/components/article-item/ArticleItemWrapper";
 
 const PureAccountsItem = ({
   showText,

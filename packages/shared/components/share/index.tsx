@@ -54,7 +54,6 @@ import ShareLoader from "../../skeletons/share";
 
 import LinkRow from "./sub-components/LinkRow";
 
-import { StyledLinks } from "./Share.styled";
 import type {
   AccessItem,
   DefaultCreatePropsType,
@@ -66,6 +65,7 @@ import {
   getCreateShareLinkKey,
   getExpirationDate,
 } from "./Share.helpers";
+import styles from "./Share.module.scss";
 
 const Share = (props: ShareProps) => {
   const {
@@ -399,15 +399,15 @@ const Share = (props: ShareProps) => {
       {isLoading ? (
         <ShareLoader t={t} />
       ) : (
-        <StyledLinks>
-          <div className="additional-link">
-            <Text fontSize="14px" fontWeight={600} className="title-link">
+        <div className={styles.links}>
+          <div className={styles.additionalLink}>
+            <Text fontSize="14px" fontWeight={600} className={styles.titleLink}>
               {t("Common:SharedLinks")}
             </Text>
             {fileLinks.length > 0 ? (
               <div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
                 <IconButton
-                  className="link-to-viewing-icon"
+                  className={styles.linkToViewingIcon}
                   iconName={LinksToViewingIconUrl}
                   onClick={addAdditionalLinks}
                   size={16}
@@ -436,7 +436,7 @@ const Share = (props: ShareProps) => {
             }
             loadingLinks={loadingLinks}
           />
-        </StyledLinks>
+        </div>
       )}
     </div>
   );

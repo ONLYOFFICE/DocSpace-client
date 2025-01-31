@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,143 +24,140 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { DropDown } from "../drop-down";
-import { globalColors } from "../../themes";
+@import "../../styles/variables";
+@import "../../styles/mixins";
 
-const StyledLinks = styled.div`
+.links {
   margin-top: 20px;
 
-  .title-link {
+  .titleLink {
     margin-bottom: 12px;
     line-height: 16px;
-    color: ${globalColors.gray};
+    color: var(--text-color);
   }
 
-  .additional-link {
+  .additionalLink {
     display: flex;
     justify-content: space-between;
     gap: 10px;
 
-    .link-to-viewing-icon {
+    .linkToViewingIcon {
       svg {
-        weight: 16px;
+        width: 16px;
         height: 16px;
       }
     }
   }
-`;
+}
 
-const Strong = styled.strong`
+.strong {
   font-weight: 600;
-`;
+}
 
-const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
+.linkRow {
   display: flex;
   gap: 8px;
   align-items: center;
   height: 68px;
 
-  opacity: ${({ isDisabled }) => (isDisabled ? 0.4 : 1)};
+  &.isDisabled {
+    opacity: 0.4;
+  }
 
-  .avatar-wrapper,
-  .avatar-wrapper:hover {
-    svg {
-      path {
-        fill: ${({ theme }) => theme.infoPanel.avatarColor};
+  :global {
+    .avatar-wrapper,
+    .avatar-wrapper:hover {
+      svg {
+        path {
+          fill: var(--info-panel-avatar-color);
+        }
       }
+    }
+
+    .avatar_role-wrapper {
+      svg {
+        path:nth-child(3) {
+          fill: var(--background-color);
+        }
+      }
+    }
+
+    .combo-box {
+      padding: 0;
+    }
+
+    .combo-button {
+      padding-inline-start: 8px;
     }
   }
 
-  .avatar_role-wrapper {
-    svg {
-      path:nth-child(3) {
-        fill: ${({ theme }) => theme.backgroundColor};
-      }
-    }
-  }
-
-  .combo-box {
-    padding: 0;
-  }
-
-  .combo-button {
-    padding-inline-start: 8px;
-  }
-
-  .link-options {
+  .linkOptions {
     display: flex;
     flex-direction: column;
     gap: 0;
     overflow: hidden;
   }
 
-  .internal-combobox {
-    padding: 0px;
+  .internalCombobox {
+    padding: 0;
 
-    .combo-button-label {
+    :global(.combo-button-label) {
       font-size: 14px;
     }
   }
 
-  .link-options_title {
+  .linkOptionsTitle {
     font-size: 14px;
     font-weight: 600;
     line-height: 16px;
     margin: 6px 8px;
 
-    ${({ theme, isExpired }) =>
-      isExpired &&
-      css`
-        color: ${theme.infoPanel.members.linkAccessComboboxExpired};
-      `};
+    &.isExpired {
+      color: var(--info-panel-link-expired);
+    }
   }
 
-  .link-options-title-room {
-    margin-inline-start: 0px;
+  .linkOptionsTitleRoom {
+    margin-inline-start: 0;
   }
 
-  .expired-options {
-    padding: 0px;
+  .expiredOptions {
+    padding: 0;
 
-    .text {
-      color: ${({ theme }) => theme.infoPanel.links.color};
-      :hover {
-        color: ${({ theme }) => theme.infoPanel.links.color};
+    :global(.text) {
+      color: var(--info-panel-links-color);
+      &:hover {
+        color: var(--info-panel-links-color);
         background: unset;
       }
     }
 
     & > span > a {
-      padding: 0px !important;
+      padding: 0 !important;
     }
   }
 
-  .expire-text {
+  .expireText {
     margin-inline-start: 8px;
-    color: ${({ theme }) => theme.infoPanel.links.primaryColor};
+    color: var(--info-panel-links-primary-color);
   }
 
-  .expire-text-room {
-    margin-inline-start: 0px;
+  .expireTextRoom {
+    margin-inline-start: 0;
   }
 
-  .link-time-info {
-    color: ${({ theme }) => theme.infoPanel.links.primaryColor};
+  .linkTimeInfo {
+    color: var(--info-panel-links-primary-color);
   }
 
-  .link-actions {
+  .linkActions {
     display: flex;
     gap: 16px;
     align-items: center;
     margin-inline-start: auto;
 
-    .link-row_copy-icon {
-      min-width: 16px;
-      min-height: 16px;
-    }
-
-    .link-actions_copy-icon {
+    .linkRowCopyIcon,
+    .linkActionsCopyIcon {
       min-width: 16px;
       min-height: 16px;
     }
@@ -170,37 +167,47 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: ${(props) => props.theme.avatar.imageContainer.borderRadius};
-    background-color: ${(props) => props.theme.avatar.icon.background};
+    border-radius: 50%;
+    background-color: var(--avatar-icon-background);
     height: 32px;
     width: 32px;
     min-height: 32px;
     min-width: 32px;
   }
 
-  .create-and-copy_link {
+  .createAndCopyLink {
     width: 100%;
-    color: ${({ theme }) => theme.infoPanel.members.createLink};
+    color: var(--info-panel-members-create-link);
   }
-`;
+}
 
-const StyledSquare = styled.div`
+.square {
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 3px;
   padding: 10px;
-  background: ${(props) => props.theme.avatar.icon.background};
+  background: var(--avatar-icon-background);
   cursor: pointer;
-  .icon-button_svg {
+
+  :global(.icon-button_svg) {
     cursor: pointer;
   }
-`;
+}
 
-const StyledDropDown = styled(DropDown)`
-  .share-link_calendar {
+.dropdown {
+  :global(.share-link_calendar) {
     position: fixed;
   }
-`;
+}
 
-export { StyledLinks, StyledLinkRow, StyledSquare, StyledDropDown, Strong };
+.calendar {
+  position: absolute;
+  inset-inline-end: 32px;
+
+  @include mobile {
+    position: fixed;
+    bottom: 0;
+    inset-inline-start: 0;
+  }
+}

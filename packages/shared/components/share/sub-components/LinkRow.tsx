@@ -26,6 +26,8 @@
 
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
+import classNames from "classnames";
+
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
@@ -42,7 +44,6 @@ import { IconButton } from "../../icon-button";
 import { Loader, LoaderTypes } from "../../loader";
 import { Text } from "../../text";
 
-import { StyledLinkRow, StyledSquare } from "../Share.styled";
 import {
   getShareOptions,
   getAccessOptions,
@@ -56,6 +57,8 @@ import ExpiredComboBox from "./ExpiredComboBox";
 
 import { AccessRightSelect } from "../../access-right-select";
 import { ContextMenuButton } from "../../context-menu-button";
+
+import styles from "../Share.module.scss";
 
 const LinkRow = ({
   onAddClick,
@@ -106,14 +109,14 @@ const LinkRow = ({
   };
 
   return !links?.length ? (
-    <StyledLinkRow onClick={onAddClick}>
-      <StyledSquare>
+    <div className={styles.linkRow} onClick={onAddClick}>
+      <div className={styles.square}>
         <IconButton size={12} iconName={PlusIcon} isDisabled />
-      </StyledSquare>
-      <Link className="create-and-copy_link" noHover fontWeight={600}>
+      </div>
+      <Link className={styles.createAndCopyLink} noHover fontWeight={600}>
         {t("Common:CreateAndCopy")}
       </Link>
-    </StyledLinkRow>
+    </div>
   ) : (
     links.map((link, index) => {
       if (("isLoaded" in link && link.isLoaded) || "isLoaded" in link)
@@ -141,10 +144,11 @@ const LinkRow = ({
       const isLoaded = loadingLinks.includes(link.sharedTo.id);
 
       return (
-        <StyledLinkRow
-          isExpired={isExpiredLink}
+        <div
+          className={classNames(styles.linkRow, {
+            [styles.isDisabled]: isArchiveFolder,
+          })}
           key={`share-link-row-${index * 5}`}
-          isDisabled={isArchiveFolder}
         >
           {isLoaded ? (
             <Loader className="loader" size="20px" type={LoaderTypes.track} />
@@ -157,17 +161,23 @@ const LinkRow = ({
               noClick
             />
           )}
-          <div className="link-options">
+          <div className={styles.linkOptions}>
             {isRoomsLink ? (
               <Text
-                className="link-options_title link-options-title-room"
+                className={classNames(
+                  styles.linkOptionsTitle,
+                  styles.linkOptionsTitleRoom,
+                  {
+                    [styles.isExpired]: isExpiredLink,
+                  },
+                )}
                 truncate
               >
                 {linkTitle}
               </Text>
             ) : !isExpiredLink ? (
               <ComboBox
-                className="internal-combobox"
+                className={styles.internalCombobox}
                 directionY="both"
                 options={shareOptions}
                 selectedOption={shareOption ?? ({} as TOption)}
@@ -182,14 +192,20 @@ const LinkRow = ({
                 isDisabled={isLoaded}
               />
             ) : (
-              <Text className="link-options_title">{shareOption?.label}</Text>
+              <Text
+                className={classNames(styles.linkOptionsTitle, {
+                  [styles.isExpired]: isExpiredLink,
+                })}
+              >
+                {shareOption?.label}
+              </Text>
             )}
             {isPrimaryLink ? (
               <Text
                 fontSize="12px"
                 fontWeight="400"
                 lineHeight="16px"
-                className="link-time-info"
+                className={styles.linkTimeInfo}
               >
                 {t("Common:NoTimeLimit")}
               </Text>
@@ -205,10 +221,10 @@ const LinkRow = ({
               />
             )}
           </div>
-          <div className="link-actions">
+          <div className={styles.linkActions}>
             {!isArchiveFolder ? (
               <IconButton
-                className="link-actions_copy-icon"
+                className={styles.linkActionsCopyIcon}
                 size={16}
                 iconName={CopyIcon}
                 onClick={() => onCopyLink(link)}
@@ -266,7 +282,7 @@ const LinkRow = ({
               />
             )}
           </div>
-        </StyledLinkRow>
+        </div>
       );
     })
   );

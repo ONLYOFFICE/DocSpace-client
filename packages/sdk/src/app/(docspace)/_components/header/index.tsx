@@ -25,52 +25,76 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
-
+import { useCallback, useEffect, useMemo } from "react";
 import classnames from "classnames";
+import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
-import { TFolder } from "@docspace/shared/api/files/types";
-import { TRoom } from "@docspace/shared/api/rooms/types";
 import Navigation, {
   TNavigationItem,
 } from "@docspace/shared/components/navigation";
-import {
-  DeviceType,
-  FolderType,
-  WhiteLabelLogoType,
-} from "@docspace/shared/enums";
-import { TPathParts } from "@docspace/shared/types";
+import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 
-export type HeaderProps = {
-  current: TFolder | TRoom;
-  pathParts: TPathParts[];
-  isEmptyList: boolean;
-  theme: "Base" | "Dark";
-};
+import { useNavigationStore } from "../../_store/NavigationStore";
+import useFolderActions from "../../_hooks/useFolderActions";
 
-export const Header = ({
-  current,
-  pathParts,
-  isEmptyList,
-  theme,
-}: HeaderProps) => {
-  const { title, security, rootFolderType, rootFolderId } = current;
+import type { HeaderProps } from "./Header.types";
+
+export type { HeaderProps };
+
+const Header = ({ current, pathParts, isEmptyList, theme }: HeaderProps) => {
+  const navigationStore = useNavigationStore();
+
+  const { t } = useTranslation(["Common"]);
+
+  const { openFolder } = useFolderActions({ t });
+
+  const { title, security, rootFolderId, id } = current;
 
   const isRoomsFolder = pathParts[0].id === rootFolderId;
 
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, theme === "Dark");
   const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, theme === "Dark");
 
-  const navigationItems: TNavigationItem[] = pathParts
-    .map((p) => ({
+  const navigationItems: TNavigationItem[] = useMemo(() => {
+    const items = pathParts.map((p) => ({
       id: p.id,
       title: p.title,
       isRootRoom: !!p.roomType,
-    }))
-    .reverse();
+    }));
 
-  navigationItems.pop();
+    items.pop();
+
+    return items.reverse();
+  }, [pathParts]);
+
+  useEffect(() => {
+    navigationStore.setNavigationItems(navigationItems);
+    navigationStore.setCurrentFolderId(id);
+    navigationStore.setCurrentTitle(title);
+    navigationStore.setCurrentIsRootRoom(isRoomsFolder);
+  }, [title, navigationItems]);
+
+  const currentNavigationItems =
+    navigationStore.navigationItems ?? navigationItems;
+
+  const onBackToParentFolder = useCallback(() => {
+    openFolder(currentNavigationItems[0].id, currentNavigationItems[0].title);
+  }, [
+    openFolder,
+    currentNavigationItems[0]?.id,
+    currentNavigationItems[0]?.title,
+  ]);
+
+  useEffect(() => {
+    window.addEventListener("popstate", onBackToParentFolder);
+
+    return () => {
+      window.removeEventListener("popstate", onBackToParentFolder);
+    };
+  }, [onBackToParentFolder]);
 
   return (
     <div
@@ -81,14 +105,17 @@ export const Header = ({
       })}
     >
       <Navigation
-        title={title}
-        rootRoomTitle={navigationItems.length === 0 ? "" : pathParts[0].title}
-        showRootFolderTitle={pathParts.length > 1}
+        title={navigationStore.currentTitle ?? title}
+        onBackToParentFolder={onBackToParentFolder}
+        rootRoomTitle={
+          currentNavigationItems.length === 0 ? "" : pathParts[0].title
+        }
+        showRootFolderTitle={false}
         canCreate={security.Create}
         withLogo={logo}
         burgerLogo={burgerLogo}
         currentDeviceType={DeviceType.desktop}
-        navigationItems={navigationItems}
+        navigationItems={currentNavigationItems}
         titleIcon=""
         titleIconTooltip=""
         showNavigationButton={false}
@@ -101,7 +128,7 @@ export const Header = ({
         isEmptyFilesList={isEmptyList}
         withMenu={!isRoomsFolder}
         isRoom={!!current.roomType}
-        isRootFolder={navigationItems.length === 0}
+        isRootFolder={currentNavigationItems.length === 0}
         isInfoPanelVisible={false}
         toggleInfoPanel={() => {}}
         onLogoClick={() => {}}
@@ -109,10 +136,11 @@ export const Header = ({
         onClickFolder={() => {}}
         clearTrash={() => {}}
         showFolderInfo={() => {}}
-        onBackToParentFolder={() => {}}
         getContextOptionsPlus={() => []}
         getContextOptionsFolder={() => []}
       />
     </div>
   );
 };
+
+export default observer(Header);

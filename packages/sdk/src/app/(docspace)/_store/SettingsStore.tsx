@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,27 +26,51 @@
 
 "use client";
 
-import { Provider } from "mobx-react";
+import React from "react";
+import { makeAutoObservable } from "mobx";
 
-import store from "../../_store";
-import { NavigationStoreContextProvider } from "../../_store/NavigationStore";
-import { SettingsStoreContextProvider } from "../../_store/SettingsStore";
-import { FilesSettingsStoreContextProvider } from "../../_store/FilesSettingsStore";
+import { TViewAs } from "@docspace/shared/types";
 
-type LayoutProps = {
+class SettingsStore {
+  filesViewAs: TViewAs = "row";
+
+  isEmptyList: boolean = false;
+
+  shareKey: string = "";
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  setViewAs = (viewAs: TViewAs) => {
+    this.filesViewAs = viewAs;
+  };
+
+  setIsEmptyList = (isEmptyList: boolean) => {
+    this.isEmptyList = isEmptyList;
+  };
+
+  setShareKey = (shareKey: string) => {
+    this.shareKey = shareKey;
+  };
+}
+
+export const SettingsStoreContext = React.createContext<SettingsStore>(
+  new SettingsStore(),
+);
+
+export const SettingsStoreContextProvider = ({
+  children,
+}: {
   children: React.ReactNode;
+}) => {
+  return (
+    <SettingsStoreContext.Provider value={new SettingsStore()}>
+      {children}
+    </SettingsStoreContext.Provider>
+  );
 };
 
-export const Layout = ({ children }: LayoutProps) => {
-  return (
-    <Provider {...store}>
-      <SettingsStoreContextProvider>
-        <FilesSettingsStoreContextProvider>
-          <NavigationStoreContextProvider>
-            {children}
-          </NavigationStoreContextProvider>
-        </FilesSettingsStoreContextProvider>
-      </SettingsStoreContextProvider>
-    </Provider>
-  );
+export const useSettingsStore = () => {
+  return React.useContext(SettingsStoreContext);
 };

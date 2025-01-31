@@ -24,22 +24,102 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
+import React from "react";
 import { makeAutoObservable } from "mobx";
 
-export class NavigationStore {
-  navigationTitle = "";
+import { TNavigationItem } from "@docspace/shared/components/navigation";
+import { Nullable } from "@docspace/shared/types";
 
-  navigationPath = "";
+class NavigationStore {
+  navigationItems: Nullable<TNavigationItem[]> = null;
+
+  currentFolderId: Nullable<number | string> = null;
+
+  currentTitle: Nullable<string> = null;
+
+  currentIsRootRoom: Nullable<boolean> = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setNavigationTitle(title: string) {
-    this.navigationTitle = title;
-  }
+  setCurrentFolderId = (folderId: number | string) => {
+    this.currentFolderId = folderId;
+  };
 
-  setNavigationPath(path: string) {
-    this.navigationPath = path;
-  }
+  setCurrentTitle = (title: string) => {
+    this.currentTitle = title;
+  };
+
+  setCurrentIsRootRoom = (isRootRoom: boolean) => {
+    this.currentIsRootRoom = isRootRoom;
+  };
+
+  setNavigationItems = (navigationItems: TNavigationItem[]) => {
+    this.navigationItems = navigationItems;
+  };
+
+  updateNavigationItems = (itemId?: string | number) => {
+    if (
+      itemId &&
+      this.navigationItems &&
+      this.navigationItems.find((i) => i.id === itemId)
+    ) {
+      this.removeNavigationItem(itemId);
+    } else {
+      this.addNavigationItem();
+    }
+  };
+
+  addNavigationItem = () => {
+    if (!this.navigationItems) this.navigationItems = [];
+
+    this.navigationItems.unshift({
+      title: this.currentTitle!,
+      id: this.currentFolderId!,
+      isRootRoom: this.currentIsRootRoom!,
+    });
+  };
+
+  removeNavigationItem = (id: string | number) => {
+    if (!this.navigationItems) {
+      return;
+    }
+
+    const idx = this.navigationItems.findIndex((item) => item.id === id);
+    if (idx === -1) {
+      return;
+    }
+
+    this.setCurrentFolderId(this.navigationItems[idx].id);
+    this.setCurrentTitle(this.navigationItems[idx].title);
+    this.setCurrentIsRootRoom(this.navigationItems[idx].isRootRoom);
+
+    const newItems = [...this.navigationItems];
+    newItems.splice(idx, 1);
+
+    this.setNavigationItems(newItems);
+  };
 }
+
+export const NavigationStoreContext = React.createContext<NavigationStore>(
+  new NavigationStore(),
+);
+
+export const NavigationStoreContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  return (
+    <NavigationStoreContext.Provider value={new NavigationStore()}>
+      {children}
+    </NavigationStoreContext.Provider>
+  );
+};
+
+export const useNavigationStore = () => {
+  return React.useContext(NavigationStoreContext);
+};

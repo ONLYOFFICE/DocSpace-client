@@ -26,11 +26,30 @@
 
 "use client";
 
+import { useTranslation } from "react-i18next";
+
 import FilterComponent from "@docspace/shared/components/filter";
 import { TSortDataItem } from "@docspace/shared/components/filter/Filter.types";
 import { DeviceType } from "@docspace/shared/enums";
 
-export const Filter = () => {
+import type { FilterProps } from "./Filter.types";
+import useFilesFilter from "./useFilesFilter";
+
+export type { FilterProps };
+
+export const Filter = ({
+  filesFilter,
+  shareKey,
+  filesSettings,
+}: FilterProps) => {
+  const { t } = useTranslation(["Common"]);
+
+  const { getFilterData, getSortData, getViewSettingsData } = useFilesFilter({
+    filesFilter,
+    shareKey,
+    canSearchByContent: filesSettings.canSearchByContent,
+  });
+
   return (
     <FilterComponent
       onSearch={() => {}}
@@ -41,11 +60,10 @@ export const Filter = () => {
       onSortButtonClick={() => {}}
       clearSearch={false}
       setClearSearch={() => {}}
-      placeholder=""
       getSelectedFilterData={async () => {
         return [];
       }}
-      getViewSettingsData={() => []}
+      getViewSettingsData={getViewSettingsData}
       clearAll={() => {}}
       removeSelectedItem={() => {}}
       isRooms={false}
@@ -56,24 +74,21 @@ export const Filter = () => {
       isContactsGuestsPage={false}
       getSelectedInputValue={() => ""}
       isIndexEditingMode={false}
-      getSortData={() => {
-        return [];
-      }}
+      getSortData={getSortData}
       getSelectedSortData={() => ({}) as TSortDataItem}
-      view=""
       viewAs="table"
       viewSelectorVisible
-      getFilterData={async () => {
-        return [];
-      }}
-      filterHeader=""
-      filterTitle=""
-      selectorLabel=""
+      getFilterData={getFilterData}
       userId=""
       isRecentFolder
-      isIndexing
       currentDeviceType={DeviceType.desktop}
-      sortByTitle=""
+      filterHeader={t("Common:AdvancedFilter")}
+      placeholder={t("Common:Search")}
+      view={t("Common:View")}
+      filterTitle={t("Common:Filter")}
+      sortByTitle={t("Common:SortBy")}
+      selectorLabel=""
+      isIndexing={false}
     />
   );
 };

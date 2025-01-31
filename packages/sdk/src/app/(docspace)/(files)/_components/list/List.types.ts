@@ -24,29 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import {
+  TFolder,
+  TFile,
+  TFilesSettings,
+} from "@docspace/shared/api/files/types";
+import { TSettings } from "@docspace/shared/api/settings/types";
+import { ThemeKeys } from "@docspace/shared/enums";
 
-import { Provider } from "mobx-react";
+export type ListProps = {
+  total: number;
+  folders: TFolder[];
+  files: TFile[];
+  filesSettings: TFilesSettings;
+  filesFilter: string;
+  portalSettings: TSettings;
+  current: TFolder;
 
-import store from "../../_store";
-import { NavigationStoreContextProvider } from "../../_store/NavigationStore";
-import { SettingsStoreContextProvider } from "../../_store/SettingsStore";
-import { FilesSettingsStoreContextProvider } from "../../_store/FilesSettingsStore";
-
-type LayoutProps = {
-  children: React.ReactNode;
-};
-
-export const Layout = ({ children }: LayoutProps) => {
-  return (
-    <Provider {...store}>
-      <SettingsStoreContextProvider>
-        <FilesSettingsStoreContextProvider>
-          <NavigationStoreContextProvider>
-            {children}
-          </NavigationStoreContextProvider>
-        </FilesSettingsStoreContextProvider>
-      </SettingsStoreContextProvider>
-    </Provider>
-  );
+  shareKey?: string;
+  theme?: ThemeKeys.BaseStr | ThemeKeys.DarkStr;
 };

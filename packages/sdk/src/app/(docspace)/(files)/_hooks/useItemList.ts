@@ -44,55 +44,61 @@ type useItemListProps = {
 export default function useItemList({ shareKey, getIcon }: useItemListProps) {
   const { getFilesContextMenu, getFoldersContextMenu } = useItemContextMenu({});
 
-  const convertFileToItem = useCallback((file: TFile) => {
-    const canOpenPlayer =
-      file.viewAccessibility?.CanConvert || file.viewAccessibility.MediaView;
-    const needConvert = file.viewAccessibility?.MustConvert;
-    const isEditing =
-      (file.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
+  const convertFileToItem = useCallback(
+    (file: TFile) => {
+      const canOpenPlayer =
+        file.viewAccessibility?.CanConvert || file.viewAccessibility.MediaView;
+      const needConvert = file.viewAccessibility?.MustConvert;
+      const isEditing =
+        (file.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
-    const isFolder = false;
+      const isFolder = false;
 
-    const previewUrl = canOpenPlayer
-      ? getItemUrl(file.id, isFolder, needConvert, canOpenPlayer, shareKey)
-      : null;
-    const docUrl =
-      !canOpenPlayer &&
-      getItemUrl(file.id, isFolder, needConvert, false, shareKey);
+      const previewUrl = canOpenPlayer
+        ? getItemUrl(file.id, isFolder, needConvert, canOpenPlayer, shareKey)
+        : null;
+      const docUrl =
+        !canOpenPlayer &&
+        getItemUrl(file.id, isFolder, needConvert, false, shareKey);
 
-    const href = previewUrl || docUrl;
+      const href = previewUrl || docUrl;
 
-    const icon = getIcon(file.fileExst);
+      const icon = getIcon(file.fileExst);
 
-    const isForm = file.fileExst === ".oform";
+      const isForm = file.fileExst === ".oform";
 
-    const contextOptions = getFilesContextMenu(file);
+      const contextOptions = getFilesContextMenu(file);
 
-    return {
-      ...file,
-      icon,
-      isForm,
-      href,
-      isEditing,
-      isFolder,
-      previewUrl,
-      docUrl,
-      needConvert,
-      contextOptions,
-    };
-  }, []);
+      return {
+        ...file,
+        icon,
+        isForm,
+        href,
+        isEditing,
+        isFolder,
+        previewUrl,
+        docUrl,
+        needConvert,
+        contextOptions,
+      };
+    },
+    [getIcon, getFilesContextMenu, shareKey],
+  );
 
-  const convertFolderToItem = useCallback((folder: TFolder) => {
-    const isFolder = true;
+  const convertFolderToItem = useCallback(
+    (folder: TFolder) => {
+      const isFolder = true;
 
-    const folderUrl = getItemUrl(folder.id, isFolder, false, false);
+      const folderUrl = getItemUrl(folder.id, isFolder, false, false);
 
-    const icon = getIcon();
+      const icon = getIcon();
 
-    const contextOptions = getFoldersContextMenu(folder);
+      const contextOptions = getFoldersContextMenu(folder);
 
-    return { ...folder, isFolder, folderUrl, icon, contextOptions };
-  }, []);
+      return { ...folder, isFolder, folderUrl, icon, contextOptions };
+    },
+    [getFoldersContextMenu, getIcon],
+  );
 
   return { convertFileToItem, convertFolderToItem };
 }

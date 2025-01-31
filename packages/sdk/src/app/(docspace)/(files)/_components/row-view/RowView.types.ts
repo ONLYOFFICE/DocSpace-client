@@ -24,13 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  TFile,
-  TFilesSettings,
-  TFolder,
-} from "@docspace/shared/api/files/types";
 import { TSortBy } from "@docspace/shared/types";
-import { TSettings } from "@docspace/shared/api/settings/types";
+import type { IndexRange } from "react-virtualized";
 
 import { TFileItem, TFolderItem } from "../../_hooks/useItemList";
 
@@ -45,12 +40,13 @@ export type RowProps = RowContentProps & {
   index: number;
 };
 
-export type RowViewProps = {
+export type RowViewProps = Pick<
+  RowContentProps,
+  "filterSortBy" | "timezone" | "displayFileExtension"
+> & {
   total: number;
-  folders: TFolder[];
-  files: TFile[];
-  filesSettings: TFilesSettings;
-  filesFilter: string;
-  shareKey?: string;
-  portalSettings: TSettings;
+  hasMoreFiles: boolean;
+  items: (TFolderItem | TFileItem)[];
+
+  fetchMoreFiles: (params: IndexRange) => Promise<void>;
 };

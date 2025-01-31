@@ -27,6 +27,7 @@
 "use client";
 
 import React from "react";
+import { observer } from "mobx-react";
 
 import {
   StyledWrapper,
@@ -35,74 +36,77 @@ import {
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 
+import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+
 import useContextMenuModel from "../../../_hooks/useContextMenuModel";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "../RowView.types";
 
-const Row = ({
-  item,
-  index,
-  filterSortBy,
-  timezone,
-  displayFileExtension,
-}: RowProps) => {
-  const [isInit, setisInit] = React.useState(false);
+const Row = observer(
+  ({ item, index, filterSortBy, timezone, displayFileExtension }: RowProps) => {
+    const filesSelectionStore = useFilesSelectionStore();
 
-  const { getContextMenuModel } = useContextMenuModel({ item });
+    const [isInit, setisInit] = React.useState(false);
 
-  React.useEffect(() => {
-    setisInit(true);
-  }, []);
+    const { getContextMenuModel } = useContextMenuModel({ item });
 
-  const element = (
-    <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
-  );
+    React.useEffect(() => {
+      setisInit(true);
+    }, []);
 
-  const contextMenuModel = getContextMenuModel();
+    const element = (
+      <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
+    );
 
-  return (
-    <StyledWrapper
-      isActive={false}
-      isFirstElem={index === 0}
-      checked={false}
-      isDragging={false}
-      isIndexEditingMode={false}
-      isIndexUpdated={false}
-      showHotkeyBorder={false}
-      isHighlight={false}
-      className="row-wrapper"
-    >
-      <DragAndDrop data-title={item.title} className="files-item">
-        <StyledSimpleFilesRow
-          key={item.id}
-          isEdit={false}
-          checked={false}
-          mode="modern"
-          isIndexEditingMode={false}
-          onChangeIndex={() => {}}
-          sectionWidth={0}
-          folderCategory={null}
-          isActive={false}
-          isIndexUpdated={false}
-          isDragging={false}
-          isThirdPartyFolder={false}
-          withAccess={false}
-          className={`${!isInit ? "row-list-item " : ""} files-row`}
-          element={element}
-          contextOptions={contextMenuModel}
-          getContextModel={getContextMenuModel}
-        >
-          <RowContent
-            item={item}
-            filterSortBy={filterSortBy}
-            timezone={timezone}
-            displayFileExtension={displayFileExtension}
-          />
-        </StyledSimpleFilesRow>
-      </DragAndDrop>
-    </StyledWrapper>
-  );
-};
+    const contextMenuModel = getContextMenuModel(true);
+
+    const isChecked = filesSelectionStore.isCheckedItem(item);
+
+    return (
+      <StyledWrapper
+        isActive={false}
+        isFirstElem={index === 0}
+        checked={isChecked}
+        isDragging={false}
+        isIndexEditingMode={false}
+        isIndexUpdated={false}
+        showHotkeyBorder={false}
+        isHighlight={false}
+        className="row-wrapper"
+      >
+        <DragAndDrop data-title={item.title} className="files-item">
+          <StyledSimpleFilesRow
+            key={item.id}
+            isEdit={"isEditing" in item && item.isEditing}
+            checked={isChecked}
+            mode="modern"
+            isIndexEditingMode={false}
+            onChangeIndex={() => {}}
+            sectionWidth={0}
+            folderCategory={null}
+            isActive={false}
+            isIndexUpdated={false}
+            isDragging={false}
+            isThirdPartyFolder={false}
+            withAccess={false}
+            className={`${!isInit ? "row-list-item " : ""} files-row`}
+            onSelect={() => filesSelectionStore.addSelection(item)}
+            element={element}
+            contextOptions={contextMenuModel}
+            getContextModel={getContextMenuModel}
+          >
+            <RowContent
+              item={item}
+              filterSortBy={filterSortBy}
+              timezone={timezone}
+              displayFileExtension={displayFileExtension}
+            />
+          </StyledSimpleFilesRow>
+        </DragAndDrop>
+      </StyledWrapper>
+    );
+  },
+);
 
 export { Row };

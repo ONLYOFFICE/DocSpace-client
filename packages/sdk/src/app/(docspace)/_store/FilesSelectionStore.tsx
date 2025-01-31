@@ -27,53 +27,67 @@
 "use client";
 
 import React from "react";
-import { observer } from "mobx-react";
+import { makeAutoObservable } from "mobx";
 
-import { RowContainer } from "@docspace/shared/components/rows";
-import styles from "@docspace/shared/styles/FilesRowContainer.module.scss";
+import { Nullable } from "@docspace/shared/types";
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
 
-import { Row } from "./sub-components/Row";
+const isSame = (a: TFile | TFolder, b: TFile | TFolder) => {
+  if ("fileExst" in a && "fileExst" in b) {
+    return a.id === b.id;
+  }
 
-import { RowViewProps } from "./RowView.types";
+  return a.id === b.id;
+};
 
-const RowView = ({
-  total,
-  items,
-  hasMoreFiles,
-  filterSortBy,
-  timezone,
-  displayFileExtension,
-  fetchMoreFiles,
-}: RowViewProps) => {
-  const [isInit, setIsInit] = React.useState(false);
+class FilesSelectionStore {
+  bufferSelection: Nullable<TFile | TFolder> = null;
 
-  React.useEffect(() => {
-    setIsInit(true);
-  }, []);
+  selection: (TFile | TFolder)[] = [];
 
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  setSelection = (items?: (TFile | TFolder)[]) => {
+    this.selection = items ? items : [];
+  };
+
+  addSelection = (item: TFile | TFolder) => {
+    if (this.selection.some((i) => isSame(i, item))) {
+      return this.removeSelection(item);
+    }
+    this.selection.push(item);
+  };
+
+  removeSelection = (item: TFile | TFolder) => {
+    this.selection = this.selection.filter((i) => !isSame(i, item));
+  };
+
+  setBufferSelection = (item: Nullable<TFile | TFolder>) => {
+    this.bufferSelection = item;
+  };
+
+  isCheckedItem = (item: TFile | TFolder) => {
+    return this.selection.some((i) => isSame(i, item));
+  };
+}
+
+export const FilesSelectionStoreContext =
+  React.createContext<FilesSelectionStore>(new FilesSelectionStore());
+
+export const FilesSelectionStoreContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
-    <RowContainer
-      className={`files-row-container ${styles.filesRowContainer}`}
-      filesLength={items.length}
-      itemCount={total}
-      hasMoreFiles={hasMoreFiles}
-      useReactWindow={isInit}
-      fetchMoreFiles={fetchMoreFiles}
-      itemHeight={58}
-      onScroll={() => {}}
-    >
-      {items.map((item, index) => (
-        <Row
-          key={`${item.id}_${index}`}
-          index={index}
-          item={item}
-          filterSortBy={filterSortBy}
-          timezone={timezone}
-          displayFileExtension={displayFileExtension}
-        />
-      ))}
-    </RowContainer>
+    <FilesSelectionStoreContext.Provider value={new FilesSelectionStore()}>
+      {children}
+    </FilesSelectionStoreContext.Provider>
   );
 };
 
-export default observer(RowView);
+export const useFilesSelectionStore = () => {
+  return React.useContext(FilesSelectionStoreContext);
+};

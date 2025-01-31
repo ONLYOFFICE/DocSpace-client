@@ -27,25 +27,46 @@
 "use client";
 
 import React from "react";
+import { observer } from "mobx-react";
 
 import Section from "@docspace/shared/components/section";
+
+import { useSettingsStore } from "../../_store/SettingsStore";
 
 type SectionProps = {
   sectionHeaderContent: React.ReactNode;
   sectionFilterContent: React.ReactNode;
   sectionBodyContent: React.ReactNode;
+
+  isEmptyPage: boolean;
 };
 
-export const SectionWrapper = ({
-  sectionHeaderContent,
-  sectionFilterContent,
-  sectionBodyContent,
-}: SectionProps) => {
-  return (
-    <Section withBodyScroll settingsStudio={false} viewAs="row">
-      <Section.SectionHeader>{sectionHeaderContent}</Section.SectionHeader>
-      <Section.SectionFilter>{sectionFilterContent}</Section.SectionFilter>
-      <Section.SectionBody>{sectionBodyContent}</Section.SectionBody>
-    </Section>
-  );
-};
+export const SectionWrapper = observer(
+  ({
+    sectionHeaderContent,
+    sectionFilterContent,
+    sectionBodyContent,
+    isEmptyPage,
+  }: SectionProps) => {
+    const settingsStore = useSettingsStore();
+
+    const isEmptyList = settingsStore.isEmptyList || isEmptyPage;
+
+    return (
+      <Section
+        withBodyScroll
+        settingsStudio={false}
+        viewAs="row"
+        isEmptyPage={isEmptyList}
+      >
+        <Section.SectionHeader>{sectionHeaderContent}</Section.SectionHeader>
+
+        <Section.SectionFilter>
+          {isEmptyList ? null : sectionFilterContent}
+        </Section.SectionFilter>
+
+        <Section.SectionBody>{sectionBodyContent}</Section.SectionBody>
+      </Section>
+    );
+  },
+);

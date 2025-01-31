@@ -25,11 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
+import React from "react";
+import { observer } from "mobx-react";
 
 import { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
+import { ThemeKeys } from "@docspace/shared/enums";
 
-import RowView from "../_components/row-view";
+import { useFilesSettingsStore } from "../../_store/FilesSettingsStore";
+
+import List from "../_components/list";
+import { useSettingsStore } from "../../_store/SettingsStore";
 
 type PublicRoomPageProps = {
   folderList: TGetFolder;
@@ -37,19 +43,32 @@ type PublicRoomPageProps = {
   filesSettings: TFilesSettings;
   portalSettings: TSettings;
   filesFilter: string;
+  theme: ThemeKeys.BaseStr | ThemeKeys.DarkStr;
 };
 
-export default function PublicRoomPage({
+function PublicRoomPage({
   folderList,
   filesSettings,
   filesFilter,
   portalSettings,
+  theme,
   shareKey,
 }: PublicRoomPageProps) {
-  const { folders, files, total } = folderList;
+  const { folders, files, total, current } = folderList;
+
+  const filesSettingsStore = useFilesSettingsStore();
+  const settingsStore = useSettingsStore();
+
+  React.useEffect(() => {
+    filesSettingsStore.setFilesSettings(filesSettings);
+  }, [filesSettings]);
+
+  React.useEffect(() => {
+    settingsStore.setShareKey(shareKey);
+  }, [shareKey]);
 
   return (
-    <RowView
+    <List
       total={total}
       folders={folders}
       files={files}
@@ -57,6 +76,10 @@ export default function PublicRoomPage({
       filesSettings={filesSettings}
       portalSettings={portalSettings}
       filesFilter={filesFilter}
+      current={current}
+      theme={theme}
     />
   );
 }
+
+export default observer(PublicRoomPage);

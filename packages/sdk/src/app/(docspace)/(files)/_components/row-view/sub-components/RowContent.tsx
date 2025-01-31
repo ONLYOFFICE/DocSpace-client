@@ -34,14 +34,14 @@ import { Text } from "@docspace/shared/components/text";
 import { SimpleFilesRowContent } from "@docspace/shared/styles/FilesRow.styled";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
+import { SortByFieldName } from "@docspace/shared/enums";
+
+import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
+import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 
 import getTitleWithoutExt from "../../../_utils/get-title-without-ext";
 
 import { RowContentProps } from "../RowView.types";
-
-const linkStyles = {
-  noHover: true,
-};
 
 const RowContent = observer(
   ({ item, filterSortBy, timezone, displayFileExtension }: RowContentProps) => {
@@ -49,17 +49,20 @@ const RowContent = observer(
 
     const { t, i18n } = useTranslation(["Common"]);
 
+    const { openFolder } = useFolderActions({ t });
+    const { openFile } = useFilesActions({ t });
+
     const titleWithoutExt =
       "fileExst" in item ? getTitleWithoutExt(title, item.fileExst) : title;
 
     const getContentComponent = () => {
       switch (filterSortBy) {
-        case "Size":
+        case SortByFieldName.Size:
           if ("contentLength" in item) return item.contentLength;
           return "";
-        case "Author":
+        case SortByFieldName.Author:
           return createdBy.displayName;
-        case "DateAndTime":
+        case SortByFieldName.CreationDate:
           return getCorrectDate(
             i18n.language,
             created,
@@ -67,11 +70,11 @@ const RowContent = observer(
             "LT",
             timezone ?? "UTC",
           );
-        case "Tags":
+        case SortByFieldName.Tags:
           return "";
-        case "Type":
+        case SortByFieldName.Type:
           return getFileTypeName("fileType" in item ? item.fileType : "", t);
-        case "usedspace":
+        case SortByFieldName.UsedSpace:
           return "";
         default:
           return getCorrectDate(
@@ -95,7 +98,11 @@ const RowContent = observer(
           fontWeight="600"
           fontSize="15px"
           target={LinkTarget.blank}
-          {...linkStyles}
+          onClick={
+            item.isFolder
+              ? () => openFolder(item.id, item.title)
+              : () => openFile(item.id)
+          }
           isTextOverflow
           dir="auto"
           truncate

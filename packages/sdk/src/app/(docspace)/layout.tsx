@@ -26,14 +26,20 @@
 import { headers } from "next/headers";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
 
-import { FILTER_HEADER, PAGE_COUNT, THEME_HEADER } from "@/utils/constants";
-import { getFolder } from "@/api/files";
+import {
+  FILTER_HEADER,
+  PAGE_COUNT,
+  SHARE_KEY_HEADER,
+  THEME_HEADER,
+} from "@/utils/constants";
+import { getFilesSettings, getFolder } from "@/api/files";
 
 import { Layout } from "./_components/layout";
 import { SectionWrapper as Section } from "./_components/section";
-import { Header, HeaderProps } from "./_components/header";
-import { Filter } from "./_components/filter";
+import Header, { HeaderProps } from "./_components/header";
+import { Filter, FilterProps } from "./_components/filter";
 
 export default async function DocspaceLayout({
   children,
@@ -44,8 +50,16 @@ export default async function DocspaceLayout({
 
   const filter = hdrs.get(FILTER_HEADER);
   const theme = hdrs.get(THEME_HEADER);
+  const shareKey = hdrs.get(SHARE_KEY_HEADER);
 
-  const navigationProps: HeaderProps = { theme } as HeaderProps;
+  const navigationProps: HeaderProps = { theme, shareKey } as HeaderProps;
+
+  const filterProps: FilterProps = {
+    filesFilter: filter,
+    shareKey,
+  } as FilterProps;
+
+  const actions: unknown[] = [getFilesSettings()];
 
   if (filter) {
     const filesFilter = FilesFilter.getFilter({
@@ -54,22 +68,27 @@ export default async function DocspaceLayout({
 
     filesFilter.pageCount = PAGE_COUNT;
 
-    const folderList = await getFolder(filesFilter.folder, filesFilter);
-
-    const { current, pathParts, folders, files } = folderList;
-
-    navigationProps.current = current;
-    navigationProps.pathParts = pathParts;
-    navigationProps.isEmptyList = !folders.length && !files.length;
+    actions.push(getFolder(filesFilter.folder, filesFilter));
   }
+
+  const [filesSettings, folderList] = await Promise.all(actions);
+
+  filterProps.filesSettings = filesSettings as TFilesSettings;
+
+  const { current, pathParts, folders, files } = folderList as TGetFolder;
+
+  navigationProps.current = current;
+  navigationProps.pathParts = pathParts;
+  navigationProps.isEmptyList = !folders.length && !files.length;
 
   return (
     <main style={{ width: "100%", height: "100%" }}>
       <Layout>
         <Section
           sectionHeaderContent={<Header {...navigationProps} />}
-          sectionFilterContent={<Filter />}
+          sectionFilterContent={<Filter {...filterProps} />}
           sectionBodyContent={children}
+          isEmptyPage={folders.length === 0 && files.length === 0}
         />
       </Layout>
     </main>

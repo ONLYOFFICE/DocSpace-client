@@ -26,16 +26,10 @@
 
 "use client";
 
-import { FilesSettingsStoreContextProvider } from "../../_store/FilesSettingsStore";
-
 type LayoutProps = {
   children: React.ReactNode;
 };
 
 export const Layout = ({ children }: LayoutProps) => {
-  return (
-    <FilesSettingsStoreContextProvider>
-      {children}
-    </FilesSettingsStoreContextProvider>
-  );
+  return <>{children}</>;
 };

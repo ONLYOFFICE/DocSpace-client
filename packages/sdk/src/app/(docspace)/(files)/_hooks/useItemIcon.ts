@@ -12,17 +12,17 @@ type UseItemIconProps = {
 export default function useItemIcon({ filesSettings }: UseItemIconProps) {
   const isArchive = useCallback(
     (extension: string) => presentInArray(filesSettings.extsArchive, extension),
-    [],
+    [filesSettings.extsArchive],
   );
 
   const isImage = useCallback(
     (extension: string) => presentInArray(filesSettings.extsImage, extension),
-    [],
+    [filesSettings.extsImage],
   );
 
   const isSound = useCallback(
     (extension: string) => presentInArray(filesSettings.extsAudio, extension),
-    [],
+    [filesSettings.extsAudio],
   );
 
   const isHtml = useCallback(
@@ -56,7 +56,7 @@ export default function useItemIcon({ filesSettings }: UseItemIconProps) {
         ? (iconSize32.get(path) ?? "")
         : (iconSize32.get("file.svg") ?? "");
     },
-    [filesSettings, determineIconPath],
+    [determineIconPath],
   );
 
   return { getIcon };

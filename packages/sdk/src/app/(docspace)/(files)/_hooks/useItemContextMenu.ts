@@ -11,6 +11,9 @@ export default function useItemContextMenu({}: UseItemContextMenuProps) {
   const getFilesContextMenu = useCallback((file: TFile) => {
     const model = new Set([
       AVAILABLE_CONTEXT_ITEMS.select,
+      AVAILABLE_CONTEXT_ITEMS.fillForm,
+      AVAILABLE_CONTEXT_ITEMS.edit,
+      AVAILABLE_CONTEXT_ITEMS.editPDF,
       AVAILABLE_CONTEXT_ITEMS.preview,
       AVAILABLE_CONTEXT_ITEMS.openPDF,
       AVAILABLE_CONTEXT_ITEMS.view,
@@ -21,6 +24,10 @@ export default function useItemContextMenu({}: UseItemContextMenuProps) {
     ]);
 
     const isPdf = file.fileExst === ".pdf";
+    const shouldFillForm = file.viewAccessibility.WebRestrictedEditing;
+    const canFillForm = file.security?.FillForms;
+    const canEditFile = file.security.Edit && file.viewAccessibility.WebEdit;
+
     const canOpenPlayer =
       file.viewAccessibility.ImageView || file.viewAccessibility.MediaView;
 
@@ -32,16 +39,23 @@ export default function useItemContextMenu({}: UseItemContextMenuProps) {
     if (!file.viewAccessibility.WebView)
       model.delete(AVAILABLE_CONTEXT_ITEMS.preview);
 
-    if (
-      !isPdf ||
-      (file.viewAccessibility.WebRestrictedEditing && file.security.FillForms)
-    ) {
+    if (!isPdf || (shouldFillForm && canFillForm)) {
       model.delete(AVAILABLE_CONTEXT_ITEMS.openPDF);
     }
 
     if (!isPdf) model.delete(AVAILABLE_CONTEXT_ITEMS.pdfView);
 
     if (!canOpenPlayer) model.delete(AVAILABLE_CONTEXT_ITEMS.view);
+
+    if (!isPdf || !file.security.EditForm || file.startFilling || !file.isForm)
+      model.delete(AVAILABLE_CONTEXT_ITEMS.editPDF);
+
+    if (!(shouldFillForm && canFillForm) || !file.isForm)
+      model.delete(AVAILABLE_CONTEXT_ITEMS.fillForm);
+
+    if (canOpenPlayer || !canEditFile) {
+      model.delete(AVAILABLE_CONTEXT_ITEMS.edit);
+    }
 
     return Array.from(model);
   }, []);

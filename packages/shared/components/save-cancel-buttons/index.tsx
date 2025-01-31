@@ -24,4 +24,135 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { SaveCancelButtons } from "./SaveCancelButton";
+import React from "react";
+
+import { ButtonKeys } from "../../enums";
+import { isDesktop, isMobile } from "../../utils";
+
+import { Button, ButtonSize } from "../button";
+import { Text } from "../text";
+
+import StyledSaveCancelButtons from "./SaveCancelButton.styled";
+import { SaveCancelButtonProps } from "./SaveCancelButton.types";
+
+const SaveCancelButtons = ({
+  id,
+  className,
+  reminderText,
+  saveButtonLabel = "Save",
+  cancelButtonLabel = "Cancel",
+  onCancelClick,
+  onSaveClick,
+  showReminder,
+  displaySettings,
+  disableRestoreToDefault,
+  hasScroll,
+  isSaving,
+  cancelEnable,
+  tabIndex,
+  hideBorder,
+  additionalClassSaveButton,
+  additionalClassCancelButton,
+  saveButtonDisabled,
+  getTopComponent,
+}: SaveCancelButtonProps) => {
+  const onKeydown = React.useCallback(
+    (e: KeyboardEvent) => {
+      if (displaySettings) return;
+
+      switch (e.key) {
+        case ButtonKeys.enter:
+          onSaveClick?.();
+          break;
+        case ButtonKeys.esc:
+          onCancelClick?.();
+          break;
+        default:
+          break;
+      }
+    },
+    [displaySettings, onCancelClick, onSaveClick],
+  );
+
+  React.useEffect(() => {
+    document.addEventListener("keydown", onKeydown, false);
+
+    return () => {
+      document.removeEventListener("keydown", onKeydown, false);
+    };
+  }, [onKeydown]);
+
+  const cancelButtonDisabled = cancelEnable
+    ? false
+    : typeof disableRestoreToDefault === "boolean"
+      ? disableRestoreToDefault
+      : !showReminder;
+
+  const tabIndexSaveButton = tabIndex || -1;
+  const tabIndexCancelButton = tabIndex ? tabIndex + 1 : -1;
+
+  const classNameSave = additionalClassSaveButton
+    ? `save-button ${additionalClassSaveButton}`
+    : `save-button`;
+
+  const classNameCancel = additionalClassCancelButton
+    ? `cancel-button ${additionalClassCancelButton}`
+    : `cancel-button`;
+
+  const buttonSize = isDesktop() ? ButtonSize.small : ButtonSize.normal;
+
+  return (
+    <StyledSaveCancelButtons
+      id={id}
+      className={className}
+      data-testid="save-cancel-buttons"
+      role="group"
+      aria-label="Save or cancel changes"
+      displaySettings={displaySettings}
+      showReminder={showReminder}
+      hasScroll={hasScroll}
+      hideBorder={hideBorder}
+    >
+      {getTopComponent?.()}
+      {showReminder ? (
+        <Text
+          className="reminder-text"
+          data-testid="save-cancel-reminder"
+          aria-live="polite"
+        >
+          {reminderText}
+        </Text>
+      ) : null}
+      <div className="buttons-container">
+        <Button
+          className={classNameSave}
+          primary
+          size={buttonSize}
+          label={saveButtonLabel}
+          onClick={onSaveClick}
+          tabIndex={tabIndexSaveButton}
+          isLoading={isSaving}
+          isDisabled={saveButtonDisabled || showReminder === false}
+          testId="save-button"
+          aria-label={`${saveButtonLabel} changes`}
+          minWidth={displaySettings ? "auto" : ""}
+          scale={isMobile()}
+        />
+        <Button
+          className={classNameCancel}
+          size={buttonSize}
+          label={cancelButtonLabel}
+          onClick={onCancelClick}
+          tabIndex={tabIndexCancelButton}
+          isDisabled={cancelButtonDisabled || isSaving}
+          testId="cancel-button"
+          aria-label={`${cancelButtonLabel} changes`}
+          minWidth={displaySettings ? "auto" : ""}
+          scale={isMobile()}
+        />
+      </div>
+    </StyledSaveCancelButtons>
+  );
+};
+
+export { SaveCancelButtons };

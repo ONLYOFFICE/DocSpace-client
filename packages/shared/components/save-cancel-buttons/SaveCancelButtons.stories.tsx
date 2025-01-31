@@ -28,7 +28,7 @@ import React from "react";
 import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { SaveCancelButtons } from "./SaveCancelButton";
+import { SaveCancelButtons } from ".";
 import { SaveCancelButtonProps } from "./SaveCancelButton.types";
 
 const meta = {
@@ -37,16 +37,80 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component:
-          "Save and cancel buttons are located in the settings sections.",
+        component: `
+          Save and cancel buttons component with reminder text for unsaved changes.
+          
+          Features:
+          - Customizable save and cancel button labels
+          - Optional reminder text for unsaved changes
+          - Loading state for save button
+          - Keyboard navigation support (Enter to save, Escape to cancel)
+          - Full accessibility support with ARIA attributes
+          - Responsive design with mobile support
+        `,
+      },
+    },
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: "button-name",
+            enabled: true,
+          },
+          {
+            id: "aria-valid-attr-value",
+            enabled: true,
+          },
+        ],
       },
     },
   },
   argTypes: {
-    onSaveClick: { action: "onSaveClick" },
-    onCancelClick: { action: "onCancelClick" },
+    onSaveClick: {
+      action: "onSaveClick",
+      description: "Callback function triggered when save button is clicked",
+    },
+    onCancelClick: {
+      action: "onCancelClick",
+      description: "Callback function triggered when cancel button is clicked",
+    },
+    showReminder: {
+      control: "boolean",
+      description: "Controls visibility of the reminder text",
+    },
+    reminderText: {
+      control: "text",
+      description: "Text to display as reminder for unsaved changes",
+    },
+    saveButtonLabel: {
+      control: "text",
+      description: "Custom label for the save button",
+    },
+    cancelButtonLabel: {
+      control: "text",
+      description: "Custom label for the cancel button",
+    },
+    isSaving: {
+      control: "boolean",
+      description: "Controls loading state of the save button",
+    },
+    saveButtonDisabled: {
+      control: "boolean",
+      description: "Disables the save button",
+    },
+    cancelEnable: {
+      control: "boolean",
+      description:
+        "Explicitly enables the cancel button regardless of other states",
+    },
+    displaySettings: {
+      control: "boolean",
+      description: "Adjusts styling for settings panel display",
+    },
   },
+  tags: ["autodocs"],
 } satisfies Meta<typeof SaveCancelButtons>;
+
 type Story = StoryObj<typeof meta>;
 
 export default meta;
@@ -54,9 +118,14 @@ export default meta;
 const StyledWrapper = styled.div`
   position: relative;
   height: 300px;
+  padding: 20px;
+  background: var(--background-primary);
 
   .positionAbsolute {
     position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 `;
 
@@ -85,11 +154,99 @@ const Template = ({
 };
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
+  render: Template,
   args: {
     showReminder: false,
     reminderText: "You have unsaved changes",
     saveButtonLabel: "Save",
     cancelButtonLabel: "Cancel",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Default state of the SaveCancelButtons component without reminder text.",
+      },
+    },
+  },
+};
+
+export const WithReminder: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    showReminder: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "SaveCancelButtons with visible reminder text for unsaved changes.",
+      },
+    },
+  },
+};
+
+export const Loading: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    isSaving: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "SaveCancelButtons in loading state while saving changes.",
+      },
+    },
+  },
+};
+
+export const Disabled: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    saveButtonDisabled: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "SaveCancelButtons with disabled save button.",
+      },
+    },
+  },
+};
+
+export const CustomLabels: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    saveButtonLabel: "Apply Changes",
+    cancelButtonLabel: "Discard",
+    showReminder: true,
+    reminderText: "You have pending changes",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "SaveCancelButtons with custom button labels and reminder text.",
+      },
+    },
+  },
+};
+
+export const SettingsDisplay: Story = {
+  render: Template,
+  args: {
+    ...Default.args,
+    displaySettings: true,
+    showReminder: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "SaveCancelButtons styled for settings panel display.",
+      },
+    },
   },
 };

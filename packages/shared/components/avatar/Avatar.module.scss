@@ -19,14 +19,23 @@
   align-items: center;
   justify-content: center;
 
-  &.hasAvatar {
-    background-color: var(--avatar-edit-container-background);
+  &:hover {
+    background-color: var(--avatar-edit-container-fill-hover);
+  }
+
+  &:active {
+    background-color: var(--avatar-edit-container-fill-press);
   }
 
   :global(.edit_icon) {
     svg {
       path {
         fill: var(--avatar-edit-container-fill);
+      }
+      &:hover {
+        path {
+          fill: var(--avatar-edit-container-fill) !important;
+        }
       }
     }
   }

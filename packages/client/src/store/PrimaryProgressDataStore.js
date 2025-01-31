@@ -117,6 +117,8 @@ class PrimaryProgressDataStore {
   };
 
   clearPrimaryProgressData = (operation, allOperations) => {
+    this.setNeedErrorChecking(false);
+
     if (allOperations) {
       const incompleteOperations = this.primaryOperationsArray.filter(
         (item) => !item.completed,
@@ -127,8 +129,6 @@ class PrimaryProgressDataStore {
         this.primaryOperationsArray.length,
         ...incompleteOperations,
       );
-
-      this.setNeedErrorChecking(false);
 
       console.log("clearPrimaryProgressData", this.primaryOperationsArray);
       return;

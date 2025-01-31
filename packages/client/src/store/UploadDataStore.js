@@ -369,7 +369,15 @@ class UploadDataStore {
       if (!secondConvertingWithPassword)
         this.files = this.files.filter((f) => f.action === "converted");
 
-      this.primaryProgressDataStore.clearPrimaryProgressData();
+      //  this.primaryProgressDataStore.clearPrimaryProgressData();
+    }
+
+    if (secondConvertingWithPassword) {
+      const operationName = OPERATIONS_NAME.upload;
+      this.primaryProgressDataStore.setPrimaryProgressBarData({
+        operation: operationName,
+        alert: false,
+      });
     }
 
     if (!alreadyConverting) {
@@ -490,7 +498,6 @@ class UploadDataStore {
         });
 
         if (this.uploaded) {
-          // debugger;
           const primaryProgressData = {
             operation: OPERATIONS_NAME.upload,
             alert: true,
@@ -528,8 +535,7 @@ class UploadDataStore {
             if (hFile) hFile.convertProgress = progress;
           });
 
-          error = "";
-          if (res && res[0] && res[0].error) error = res[0].error;
+          error = response && response[0] && response[0].error;
 
           if (error.length) {
             const percent = this.getConversationPercent(index + 1);

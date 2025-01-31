@@ -168,7 +168,7 @@ class FileRow extends Component {
       password: "",
       passwordValid: true,
     };
-
+    this.inputRef = React.createRef();
     this.onChangePassword = this.onChangePassword.bind(this);
   }
 
@@ -379,6 +379,7 @@ class FileRow extends Component {
                 onChange={this.onChangePassword}
                 onKeyDown={this.onKeyDown}
                 hasError={!passwordValid}
+                forwardedRef={this.inputRef}
               />
               <Button
                 id="conversion-button"

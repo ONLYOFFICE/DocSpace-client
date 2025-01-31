@@ -11,23 +11,23 @@
     "deploy": "shx --silent mkdir -p ../../../publish/web/management && shx --silent mkdir -p ../../../publish/web/management/.next && shx --silent mkdir -p ../../../publish/web/management/config && shx cp -r config/* ../../../publish/web/management/config && shx --silent mkdir -p ../../../publish/web/management/node_modules && shx --silent mkdir -p ../../../publish/web/management/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/management/node_modules && shx cp -r .next/static/* ../../../publish/web/management/.next/static    && shx cp -r .next/standalone/packages/management/.next/* ../../../publish/web/management/.next &&  shx cp -f server.prod.js ../../../publish/web/management/server.js"
   },
   "dependencies": {
-    "i18next": "^20.6.1",
-    "next": "^14.2.15",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-i18next": "^13.5.0",
-    "sass": "^1.79.5",
+    "i18next": "20.6.1",
+    "next": "14.2.15",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-i18next": "13.5.0",
+    "sass": "1.79.5",
     "styled-components": "5.3.11"
   },
   "devDependencies": {
-    "@svgr/webpack": "^8.1.0",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
-    "prettier": "^3.2.4",
-    "shx": "^0.3.4",
-    "typescript": "^5"
+    "@svgr/webpack": "8.1.0",
+    "@types/node": "22.7.5",
+    "@types/react": "18.3.11",
+    "@types/react-dom": "18.3.1",
+    "eslint": "8.57.1",
+    "eslint-config-next": "14.2.15",
+    "prettier": "3.3.3",
+    "shx": "0.3.4",
+    "typescript": "5.6.3"
   }
 }

@@ -158,9 +158,10 @@ beforeAll(() => {
   const pattern3 = `from\\s+['"](${depNamePattern})['"]`;
   const pattern4 = `loader:\\s+['"](${depNamePattern})['"]`;
   const pattern5 = `target:\\s+['"](${depNamePattern})['"],`;
+  const pattern6 = `import\\s+['"](${depNamePattern})['"];`;
 
   const regexp = new RegExp(
-    `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})`,
+    `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})|(${pattern6})`,
     "gm"
   );
 
@@ -172,7 +173,7 @@ beforeAll(() => {
     const matches = [...jsFileText.matchAll(regexp)];
 
     const imports = matches
-      .map((m) => m[2] || m[4] || m[6] || m[8] || m[10])
+      .map((m) => m[2] || m[4] || m[6] || m[8] || m[10] || m[12])
       .filter((m) => m != null)
       .filter(
         (m) =>
@@ -304,8 +305,10 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "@storybook/addon-links",
       "@storybook/addons",
       "@storybook/components",
+      "@storybook/react-webpack5",
       "babel-eslint",
       "babel-plugin-styled-components",
+      "@babel/plugin-transform-private-property-in-object",
       "@babel/plugin-transform-export-namespace-from",
       "@babel/plugin-transform-class-properties",
       "@babel/plugin-proposal-export-default-from",

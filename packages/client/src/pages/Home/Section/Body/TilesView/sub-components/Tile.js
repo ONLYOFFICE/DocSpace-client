@@ -62,13 +62,13 @@ const roomsStyles = css`
   flex-direction: column;
   flex-wrap: nowrap;
 
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   align-content: center;
+  gap: 16px;
 
   .room-tile_top-content {
     width: 100%;
-    height: 64px;
 
     box-sizing: border-box;
 
@@ -80,10 +80,6 @@ const roomsStyles = css`
     align-items: center;
     align-content: center;
 
-    border-bottom: ${(props) => props.theme.filesSection.tilesView.tile.border};
-    background: ${(props) =>
-      props.theme.filesSection.tilesView.tile.backgroundColor};
-
     border-radius: ${({ theme, isRooms }) =>
       isRooms
         ? theme.filesSection.tilesView.tile.roomsUpperBorderRadius
@@ -93,22 +89,45 @@ const roomsStyles = css`
   .room-tile_bottom-content {
     display: ${(props) => props.isThirdParty && "flex"};
     width: 100%;
-    height: 56px;
 
     box-sizing: border-box;
+    padding: 0 16px;
 
-    padding: 16px;
-    background: ${(props) =>
-      props.theme.filesSection.tilesView.tile.backgroundColor};
     border-radius: ${({ theme, isRooms }) =>
       isRooms
         ? theme.filesSection.tilesView.tile.roomsBottomBorderRadius
         : theme.filesSection.tilesView.tile.bottomBorderRadius};
   }
+
+  .room-tags {
+    .tag,
+    .advanced-tag {
+      background: ${(props) =>
+        props.theme.filesSection.tilesView.tag.backgroundColor};
+      border: ${(props) => props.theme.filesSection.tilesView.tile.border};
+
+      &:hover {
+        border-color: transparent;
+        background: ${(props) =>
+          props.theme.filesSection.tilesView.tag.hoverBackgroundColor};
+      }
+
+      &:active {
+        border-color: transparent;
+        background: ${(props) =>
+          props.theme.filesSection.tilesView.tag.activeBackgroundColor};
+      }
+
+      &:disabled {
+        border-style: 1px dashed;
+        opacity: 0.4;
+      }
+    }
+  }
 `;
 
 const FolderStyles = css`
-  height: ${(props) => (props.isRoom ? "120px" : "64px")};
+  height: ${(props) => (props.isRoom ? "104px" : "64px")};
 `;
 
 const FileStyles = css`
@@ -156,8 +175,10 @@ const StyledTile = styled.div`
     `}
   box-sizing: border-box;
   width: 100%;
-  border: ${(props) => props.theme.filesSection.tilesView.tile.border};
+  background: ${(props) =>
+    props.theme.filesSection.tilesView.tile.backgroundColor};
 
+  border: ${(props) => props.theme.filesSection.tilesView.tile.border};
   border-radius: ${({ isRooms, theme }) =>
     isRooms
       ? theme.filesSection.tilesView.tile.roomsBorderRadius
@@ -181,10 +202,8 @@ const StyledTile = styled.div`
       ${checkedStyle}
     `};
 
-  :hover {
-    .room-tile_top-content {
-      ${checkedStyle}
-    }
+  &:hover {
+    ${checkedStyle}
   }
 
   ${(props) =>
@@ -381,22 +400,16 @@ const StyledContent = styled.div`
     word-break: break-word;
   }
 
-  .new-items {
-    margin-inline-start: 12px;
-  }
-
   .badges {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    gap: 12px;
 
-    :not(:empty) {
-      margin-inline-start: 12px;
-    }
-
-    > div {
+    > .is-pinned {
       margin: 0;
+
+      padding-block: 8px;
+      padding-inline: 0 8px;
     }
   }
 
@@ -423,7 +436,16 @@ const StyledOptionButton = styled.div.attrs(injectDefaultTheme)`
 
   .expandButton > div:first-child {
     padding-block: 8px;
-    padding-inline: 12px 21px;
+    padding-inline: 0 20px;
+
+    &:hover {
+      svg {
+        path {
+          fill: ${(props) =>
+            props.isRoom && props.theme.currentColorScheme.main.accent};
+        }
+      }
+    }
   }
 `;
 
@@ -472,7 +494,7 @@ const StyledIcons = styled.div.attrs(injectDefaultTheme)`
 
   ${(props) => props.isBadges && badgesPosition}
   ${(props) => props.isQuickButtons && quickButtonsPosition}
-  
+
   .badge {
     display: flex;
     align-items: center;
@@ -637,6 +659,7 @@ class Tile extends React.PureComponent {
       }
       this.cm.current.show(e);
     };
+
     const contextMenuDirection =
       theme.interfaceDirection === "rtl" ? "left" : "right";
     const icon = this.getIconFile();
@@ -747,7 +770,10 @@ class Tile extends React.PureComponent {
                   {FilesTileContent}
                   {badges}
                 </StyledContent>
-                <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
+                <StyledOptionButton
+                  spacerWidth={contextButtonSpacerWidth}
+                  isRoom
+                >
                   {renderContext ? (
                     <ContextMenuButton
                       isFill
@@ -776,33 +802,8 @@ class Tile extends React.PureComponent {
                   columnCount={columnCount}
                   onSelectTag={selectTag}
                   tags={tags}
+                  className="room-tags"
                 />
-                {/* {item.providerType && (
-                    <Tag
-                      icon={item.thirdPartyIcon}
-                      label={item.providerKey}
-                      onClick={() =>
-                        selectOption({
-                          option: "typeProvider",
-                          value: item.providerType,
-                        })
-                      }
-                    />
-                  )} */}
-                {/* {item.tags.length > 0 ? ( */}
-
-                {/* ) : (
-                    <Tag
-                      isDefault
-                      label={getRoomTypeName(item.roomType, t)}
-                      onClick={() =>
-                        selectOption({
-                          option: "defaultTypeRoom",
-                          value: item.roomType,
-                        })
-                      }
-                    />
-                  )} */}
               </div>
             </>
           ) : (

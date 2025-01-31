@@ -52,7 +52,7 @@ import { TTranslation } from "@docspace/shared/types";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import { TContactsTab, getContactsUrl } from "SRC_DIR/helpers/contacts";
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { SortByFieldName } from "@docspace/shared/enums";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 
 type TFilterValues = (TGroupItem | TItem)[];

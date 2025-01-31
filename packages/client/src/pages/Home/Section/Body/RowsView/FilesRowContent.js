@@ -34,7 +34,7 @@ import { SimpleFilesRowContent } from "@docspace/shared/styles/FilesRow.styled";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { SortByFieldName } from "@docspace/shared/enums";
 import withContent from "../../../../../HOCs/withContent";
 
 import { connectedCloudsTypeTitleTranslation } from "../../../../../helpers/filesUtils";

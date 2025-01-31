@@ -29,8 +29,6 @@ import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { withTranslation } from "react-i18next";
-import find from "lodash/find";
-import result from "lodash/result";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
@@ -38,8 +36,22 @@ import FilterInput from "@docspace/shared/components/filter";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
 import { getUser } from "@docspace/shared/api/people";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-
 import FilesFilter from "@docspace/shared/api/files/filter";
+
+import {
+  getFilterType,
+  getSubjectFilter,
+  getAuthorType,
+  getRoomId,
+  getSearchParams,
+  getType,
+  getProviderType,
+  getSubjectId,
+  getFilterContent,
+  getTags,
+  getQuotaFilter,
+} from "@docspace/shared/components/filter/Filter.utils";
+
 import {
   DeviceType,
   FilterGroups,
@@ -54,7 +66,7 @@ import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { SortByFieldName } from "@docspace/shared/enums";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
@@ -63,124 +75,6 @@ import { getRoomInfo } from "@docspace/shared/api/rooms";
 import { FilterLoader } from "@docspace/shared/skeletons/filter";
 
 import { useContactsFilter } from "./useContacts";
-
-const getFilterType = (filterValues) => {
-  const filterType = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterType;
-    }),
-    "key",
-  );
-
-  return filterType?.toString() ? +filterType : null;
-};
-
-const getSubjectFilter = (filterValues) => {
-  const subjectFilter = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.roomFilterOwner;
-    }),
-    "key",
-  );
-
-  return subjectFilter?.toString() ? subjectFilter?.toString() : null;
-};
-
-const getAuthorType = (filterValues) => {
-  const authorType = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterAuthor;
-    }),
-    "key",
-  );
-
-  return authorType || null;
-};
-
-const getRoomId = (filterValues) => {
-  const filterRoomId = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterRoom;
-    }),
-    "key",
-  );
-
-  return filterRoomId || null;
-};
-
-const getSearchParams = (filterValues) => {
-  const searchParams = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterFolders;
-    }),
-    "key",
-  );
-
-  return searchParams || FilterKeys.excludeSubfolders;
-};
-
-const getType = (filterValues) => {
-  const filterType = filterValues.find(
-    (value) => value.group === FilterGroups.roomFilterType,
-  )?.key;
-
-  const type = filterType;
-
-  return type;
-};
-
-const getProviderType = (filterValues) => {
-  const filterType = filterValues.find(
-    (value) => value.group === FilterGroups.roomFilterProviderType,
-  )?.key;
-
-  const type = filterType;
-
-  return type;
-};
-
-const getSubjectId = (filterValues) => {
-  const filterOwner = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.roomFilterSubject;
-    }),
-    "key",
-  );
-
-  return filterOwner || null;
-};
-
-const getFilterContent = (filterValues) => {
-  const filterContent = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterContent;
-    }),
-    "key",
-  );
-
-  return filterContent || null;
-};
-
-const getTags = (filterValues) => {
-  const filterTags = filterValues.find(
-    (value) => value.group === FilterGroups.roomFilterTags,
-  )?.key;
-
-  const tags = filterTags?.length > 0 ? filterTags : null;
-
-  return tags;
-};
-
-const getQuotaFilter = (filterValues) => {
-  const filterType = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterQuota;
-    }),
-    "key",
-  );
-
-  return filterType?.toString() ? +filterType : null;
-};
 
 const SectionFilterContent = ({
   t,

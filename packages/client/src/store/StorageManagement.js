@@ -38,8 +38,7 @@ import {
 } from "@docspace/shared/api/settings";
 import { getRooms } from "@docspace/shared/api/rooms";
 import { getUserList } from "@docspace/shared/api/people";
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
-import { RoomsProviderType } from "@docspace/shared/enums";
+import { SortByFieldName, RoomsProviderType } from "@docspace/shared/enums";
 
 const FILTER_COUNT = 6;
 

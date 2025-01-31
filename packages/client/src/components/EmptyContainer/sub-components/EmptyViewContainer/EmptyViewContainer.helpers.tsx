@@ -150,7 +150,6 @@ export const getIcon = (
   rootFolderType: Nullable<FolderType>,
 ): JSX.Element => {
   if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
-
   return isFolder
     ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
     : getRoomIcon(type, isBaseTheme, access);

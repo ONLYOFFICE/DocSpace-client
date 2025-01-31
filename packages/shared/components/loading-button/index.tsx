@@ -36,12 +36,10 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
   style,
   percent = 0,
   onClick,
-  isConversion = false,
   inConversion = false,
-  color,
+  loaderColor,
+  backgroundColor,
 }) => {
-  const progress = percent || null;
-
   const [isAnimation, setIsAnimation] = useState<boolean>(true);
 
   const stopAnimation = (): void => {
@@ -63,10 +61,10 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
       style={style}
       onClick={onClick}
       themeId={ThemeId.LoadingButton}
-      color={color}
+      loaderColor={loaderColor}
     >
       <StyledCircle
-        percent={progress}
+        percent={percent}
         inConversion={inConversion}
         isAnimation={isAnimation}
       >
@@ -79,7 +77,7 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
 
         <StyledLoadingButton
           className="loading-button"
-          isConversion={isConversion}
+          backgroundColor={backgroundColor}
         >
           {!inConversion ? <>&times;</> : null}
         </StyledLoadingButton>

@@ -370,7 +370,11 @@ class FileRow extends Component {
               data-id={item.uniqueId}
               // onClick={this.onCancelCurrentUpload}
             >
-              <LoadingButton item={item} onClick={this.onCancelCurrentUpload} />
+              <LoadingButton
+                item={item}
+                onClick={this.onCancelCurrentUpload}
+                percent={item.percent}
+              />
             </div>
           )}
           {showPasswordInput ? (

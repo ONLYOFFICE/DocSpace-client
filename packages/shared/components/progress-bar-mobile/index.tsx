@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ClearIcon from "PUBLIC_DIR/images/icons/16/clear.react.svg";
-import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import AlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import TickIcon from "PUBLIC_DIR/images/icons/12/tick.react.svg";
 import RightArrowIcon from "PUBLIC_DIR/images/icons/12/right-arrow.react.svg";
@@ -34,7 +33,7 @@ import RightArrowIcon from "PUBLIC_DIR/images/icons/12/right-arrow.react.svg";
 import { classNames } from "../../utils";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
-
+import { globalColors } from "../../themes";
 import styles from "./ProgressBarMobile.module.scss";
 import { ProgressBarMobileProps } from "./ProgressBarMobile.types";
 import { LoadingButton } from "../loading-button";
@@ -54,12 +53,6 @@ const ProgressBarMobile = ({
   onOpenPanel,
 }: ProgressBarMobileProps) => {
   const [isVisible, setIsVisible] = useState(true);
-  // const uploadPercent = percent > 100 ? 100 : percent;
-
-  // const onClickHeaderAction = () => {
-  //   onClickAction?.();
-  //   hideButton?.();
-  // };
 
   const onCloseClick = () => {
     if (onClearProgress && operation) {
@@ -134,7 +127,12 @@ const ProgressBarMobile = ({
           ) : completed ? (
             <ClearIcon onClick={onClearClick} />
           ) : (
-            <LoadingButton isConversion percent={percent} onClick={onCancel} />
+            <LoadingButton
+              percent={percent}
+              onClick={onCancel}
+              backgroundColor={globalColors.grayText}
+              loaderColor={globalColors.white}
+            />
           )}
         </div>
       </div>

@@ -56,13 +56,6 @@
       }
     }
   }
-
-  :global(.loading-button) {
-    color: var(--progress-bar-icon-color) !important;
-    &:hover {
-      color: var(--progress-bar-hover-icon) !important;
-    }
-  }
 }
 .progressMainContainer {
   display: flex;

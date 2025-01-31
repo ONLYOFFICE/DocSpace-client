@@ -31,19 +31,21 @@ import StyledCircleWrap from "../sub-components/StyledCircleWrap";
 
 const getDefaultStyles = ({
   $currentColorScheme,
-  color,
+  loaderColor,
 }: {
   $currentColorScheme?: TColorScheme;
-  color?: React.CSSProperties["color"];
+  loaderColor?: React.CSSProperties["color"];
 }) =>
   $currentColorScheme &&
   css`
-    .circle__mask .circle__fill {
-      background-color: ${color ?? $currentColorScheme.main?.accent};
+    --circle-fill-color: ${loaderColor || $currentColorScheme.main?.accent};
+
+    & .circle__mask .circle__fill {
+      background-color: var(--circle-fill-color);
     }
 
     .loading-button {
-      color: ${color ?? $currentColorScheme.main?.accent};
+      color: ${loaderColor || $currentColorScheme.main?.accent};
     }
   `;
 

@@ -70,8 +70,10 @@ const StyledCircle = styled.div.attrs(injectDefaultTheme)<{
 
   .circle__mask .circle__fill {
     clip: rect(0px, 8px, 16px, 0px);
-    background-color: ${(props) =>
-      props.theme.filesPanels.upload.loadingButton.color};
+    background-color: var(
+      --circle-fill-color,
+      ${(props) => props.theme.filesPanels.upload.loadingButton.color}
+    );
   }
 
   .circle__mask.circle__full {

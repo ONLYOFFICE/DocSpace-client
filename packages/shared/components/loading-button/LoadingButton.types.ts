@@ -30,7 +30,7 @@ export interface LoadingButtonProps {
   style?: React.CSSProperties;
   percent?: number;
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
-  isConversion?: boolean;
   inConversion?: boolean;
-  color?: React.CSSProperties["color"];
+  loaderColor?: React.CSSProperties["color"];
+  backgroundColor?: React.CSSProperties["color"];
 }

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Link } from "react-router-dom";
-import { ArticleItem as ArticleItemComponent } from "./ArticleItem";
+import { ArticleItem as ArticleItemComponent } from "./index";
 import { ArticleItemProps } from "./ArticleItem.types";
 
 export const ArticleItem = (props: ArticleItemProps) => {

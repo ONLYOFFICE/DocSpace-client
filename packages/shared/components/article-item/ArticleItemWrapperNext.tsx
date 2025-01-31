@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ArticleItem as ArticleItemComponent } from "./ArticleItem";
+import { ArticleItem as ArticleItemComponent } from "./index";
 import { ArticleItemProps } from "./ArticleItem.types";
 
 export const ArticleItemNext = (props: ArticleItemProps) => {
-  //TODO: use next link
+  // TODO: use next link
   return <ArticleItemComponent {...props} />;
 };

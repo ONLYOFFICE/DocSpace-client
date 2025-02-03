@@ -35,19 +35,42 @@ const meta = {
   title: "Components/TimePicker",
   component: TimePicker,
   argTypes: {
-    initialTime: { control: "date" },
-    hasError: { control: "boolean" },
-    onChange: { action: "onChange" },
-    tabIndex: { control: "number" },
-    focusOnRender: { control: "boolean" },
-    className: { control: "text" },
-    classNameInput: { control: "text" },
+    initialTime: {
+      control: "date",
+      description: "Initial time value in the picker (Moment object)",
+    },
+    hasError: {
+      control: "boolean",
+      description: "Indicates if the picker is in an error state",
+    },
+    onChange: {
+      action: "onChange",
+      description:
+        "Callback function called when the time changes. Receives a Moment object or null",
+    },
+    tabIndex: {
+      control: "number",
+      description: "Tab index for the time picker input",
+    },
+    focusOnRender: {
+      control: "boolean",
+      description:
+        "Whether to automatically focus the input when the component renders",
+    },
+    className: {
+      control: "text",
+      description: "Additional CSS class for the time picker container",
+    },
+    classNameInput: {
+      control: "text",
+      description: "Additional CSS class for the time picker input element",
+    },
   },
   parameters: {
     docs: {
       description: {
         component:
-          "Time input component that allows users to select or input time in HH:mm format",
+          "Time input component that allows users to select or input time in HH:mm format. Supports keyboard input and validation.",
       },
     },
   },

@@ -169,7 +169,7 @@ const TagPure = ({
     <div
       title={label}
       onClick={onClickAction}
-      className={classNames(styles.tag, className, {
+      className={classNames(styles.tag, "tag", className, {
         [styles.isNewTag]: isNewTag,
         [styles.isDisabled]: isDisabled,
         [styles.isDeleted]: isDeleted,

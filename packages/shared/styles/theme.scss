@@ -237,6 +237,9 @@
   --floating-button-icon-fill: #{$white};
   --floating-button-background: #{$light-icons};
   --floating-button-box-shadow: 0px 5px 20px #{$popup-shadow};
+
+  --save-cancel-border-color: #{$gray-light-mid};
+  --save-cancel-reminder-color: #{$gray};
 }
 
 .dark {
@@ -525,6 +528,9 @@
   --floating-button-icon-fill: #{$black};
   --floating-button-background: #{$white};
   --floating-button-box-shadow: 0px 12px 24px #{$popup-shadow};
+
+  --save-cancel-border-color: #{$gray-light-mid};
+  --save-cancel-reminder-color: #{$gray};
 }
 
 .light {

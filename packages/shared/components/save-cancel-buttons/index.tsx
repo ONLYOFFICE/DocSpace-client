@@ -25,15 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
+import classNames from "classnames";
 import { ButtonKeys } from "../../enums";
 import { isDesktop, isMobile } from "../../utils";
-
 import { Button, ButtonSize } from "../button";
 import { Text } from "../text";
-
-import StyledSaveCancelButtons from "./SaveCancelButton.styled";
 import { SaveCancelButtonProps } from "./SaveCancelButton.types";
+import styles from "./SaveCancelButtons.module.scss";
 
 const SaveCancelButtons = ({
   id,
@@ -76,7 +74,6 @@ const SaveCancelButtons = ({
 
   React.useEffect(() => {
     document.addEventListener("keydown", onKeydown, false);
-
     return () => {
       document.removeEventListener("keydown", onKeydown, false);
     };
@@ -91,39 +88,35 @@ const SaveCancelButtons = ({
   const tabIndexSaveButton = tabIndex || -1;
   const tabIndexCancelButton = tabIndex ? tabIndex + 1 : -1;
 
-  const classNameSave = additionalClassSaveButton
-    ? `save-button ${additionalClassSaveButton}`
-    : `save-button`;
-
-  const classNameCancel = additionalClassCancelButton
-    ? `cancel-button ${additionalClassCancelButton}`
-    : `cancel-button`;
+  const classNameSave = classNames("save-button", additionalClassSaveButton);
+  const classNameCancel = classNames(
+    "cancel-button",
+    additionalClassCancelButton,
+  );
 
   const buttonSize = isDesktop() ? ButtonSize.small : ButtonSize.normal;
 
+  const containerClassName = classNames(
+    styles.saveCancelButtons,
+    {
+      [styles.displaySettings]: displaySettings,
+      [styles.showReminder]: showReminder,
+      [styles.hasScroll]: hasScroll,
+      [styles.hideBorder]: hideBorder,
+    },
+    className,
+  );
+
   return (
-    <StyledSaveCancelButtons
+    <div
       id={id}
-      className={className}
+      className={containerClassName}
       data-testid="save-cancel-buttons"
       role="group"
       aria-label="Save or cancel changes"
-      displaySettings={displaySettings}
-      showReminder={showReminder}
-      hasScroll={hasScroll}
-      hideBorder={hideBorder}
     >
       {getTopComponent?.()}
-      {showReminder ? (
-        <Text
-          className="reminder-text"
-          data-testid="save-cancel-reminder"
-          aria-live="polite"
-        >
-          {reminderText}
-        </Text>
-      ) : null}
-      <div className="buttons-container">
+      <div className={styles.buttonsContainer}>
         <Button
           className={classNameSave}
           primary
@@ -151,7 +144,16 @@ const SaveCancelButtons = ({
           scale={isMobile()}
         />
       </div>
-    </StyledSaveCancelButtons>
+      {showReminder ? (
+        <Text
+          className={styles.reminderText}
+          data-testid="save-cancel-reminder"
+          aria-live="polite"
+        >
+          {reminderText}
+        </Text>
+      ) : null}
+    </div>
   );
 };
 

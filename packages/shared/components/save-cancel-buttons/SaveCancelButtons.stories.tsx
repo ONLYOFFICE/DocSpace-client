@@ -157,6 +157,7 @@ export const Default: Story = {
   render: Template,
   args: {
     showReminder: false,
+    displaySettings: true,
     reminderText: "You have unsaved changes",
     saveButtonLabel: "Save",
     cancelButtonLabel: "Cancel",
@@ -230,22 +231,6 @@ export const CustomLabels: Story = {
     docs: {
       description: {
         story: "SaveCancelButtons with custom button labels and reminder text.",
-      },
-    },
-  },
-};
-
-export const SettingsDisplay: Story = {
-  render: Template,
-  args: {
-    ...Default.args,
-    displaySettings: true,
-    showReminder: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "SaveCancelButtons styled for settings panel display.",
       },
     },
   },

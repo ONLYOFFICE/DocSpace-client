@@ -343,7 +343,7 @@ const Badges = ({
         />
       ) : null}
 
-      {/*   {isRoom && mute ? (
+      {isRoom && mute && !isTile ? (
         <ColorTheme
           themeId={ThemeId.IconButtonMute}
           onClick={onUnmuteClick}
@@ -352,7 +352,7 @@ const Badges = ({
           className="badge  is-mute tablet-badge"
           {...unmuteIconProps}
         />
-      ) : null} */}
+      ) : null}
       {isRoom && pinned ? (
         <ColorTheme
           themeId={ThemeId.IconButtonPin}

@@ -57,6 +57,7 @@ const FieldContainer = ({
   children,
   errorMessage,
   errorColor,
+  testId = "field-container",
 }: FieldContainerProps) => {
   const containerStyle = {
     ...style,
@@ -78,7 +79,7 @@ const FieldContainer = ({
       )}
       id={id}
       style={containerStyle}
-      data-testid="field-container"
+      data-testid={testId}
       data-vertical={isVertical}
       data-label-width={maxLabelWidth}
     >

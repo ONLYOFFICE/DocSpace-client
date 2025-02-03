@@ -72,4 +72,6 @@ export type FieldContainerProps = {
   tooltipMaxWidth?: string;
   /** Additional CSS class for tooltip */
   tooltipClass?: string;
+
+  testId?: string;
 };

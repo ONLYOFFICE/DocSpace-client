@@ -37,7 +37,7 @@ import type {
   ProvidersDataType,
 } from "./SocialButtonsGroup.types";
 import { PROVIDERS_DATA } from "../../constants";
-import MoreLoginModal from "../more-login-modal";
+import MoreLoginModal from "../../dialogs/more-login-modal";
 
 export const SocialButtonsGroup = memo(
   ({
@@ -129,7 +129,6 @@ export const SocialButtonsGroup = memo(
               onSocialLoginClick={onClick}
               ssoLabel={ssoLabel ?? ""}
               ssoUrl={ssoUrl ?? ""}
-              isSignUp
             />
           </div>
         ) : null}

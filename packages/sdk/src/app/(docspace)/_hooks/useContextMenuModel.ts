@@ -210,6 +210,7 @@ export default function useContextMenuModel({
 
       onClick: i.onClick,
       id: i.key,
+      key: i.key,
     }));
   }, [getGroupContextMenuModel]);
 

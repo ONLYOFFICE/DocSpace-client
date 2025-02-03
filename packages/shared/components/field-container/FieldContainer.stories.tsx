@@ -37,21 +37,79 @@ const meta = {
   title: "Components/FieldContainer",
   component: FieldContainer,
   argTypes: {
-    errorColor: { control: "color" },
-    labelText: { control: "text" },
-    tooltipContent: { control: "text" },
-    maxLabelWidth: { control: "text" },
-    errorMessageWidth: { control: "text" },
+    errorColor: {
+      control: "color",
+      description:
+        "Color used for error messages and indicators. Can be any valid CSS color value.",
+    },
+    labelText: {
+      control: "text",
+      description: "Text content of the field label",
+    },
+    tooltipContent: {
+      control: "text",
+      description:
+        "Content to be displayed in the tooltip when hovering over the help icon",
+    },
+    maxLabelWidth: {
+      control: "text",
+      description:
+        "Maximum width of the label element. Can be any valid CSS width value",
+    },
+    errorMessageWidth: {
+      control: "text",
+      description:
+        "Width of the error message container. Can be any valid CSS width value",
+    },
     place: {
       control: "select",
       options: ["top", "right", "bottom", "left"],
+      description: "Position of the tooltip relative to the help icon",
     },
-    isVertical: { control: "boolean" },
-    isRequired: { control: "boolean" },
-    hasError: { control: "boolean" },
-    labelVisible: { control: "boolean" },
-    removeMargin: { control: "boolean" },
-    inlineHelpButton: { control: "boolean" },
+    isVertical: {
+      control: "boolean",
+      description:
+        "When true, displays label above the input field instead of beside it",
+    },
+    isRequired: {
+      control: "boolean",
+      description:
+        "When true, displays a required field indicator (*) next to the label",
+    },
+    hasError: {
+      control: "boolean",
+      description:
+        "When true, displays the field in an error state with error styling",
+    },
+    labelVisible: {
+      control: "boolean",
+      description: "Controls visibility of the field label",
+    },
+    removeMargin: {
+      control: "boolean",
+      description: "When true, removes the default margin around the container",
+    },
+    inlineHelpButton: {
+      control: "boolean",
+      description: "When true, displays an inline help button with tooltip",
+    },
+    helpButtonHeaderContent: {
+      control: "text",
+      description:
+        "Custom header content for the help tooltip when using inline help button",
+    },
+    className: {
+      control: "text",
+      description: "Additional CSS class names to apply to the container",
+    },
+    style: {
+      control: "object",
+      description: "Custom inline styles to apply to the container",
+    },
+    errorMessage: {
+      control: "text",
+      description: "Error message to display when hasError is true",
+    },
   },
   parameters: {
     docs: {

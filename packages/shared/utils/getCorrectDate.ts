@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import moment, { Moment } from "moment-timezone";
-import "moment/locale/en-GB";
+import "moment/locale/en-gb";
 
 export default function getCorrectDate(
   locale: string,

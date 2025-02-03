@@ -56,6 +56,7 @@ const FieldContainer = ({
   children,
   errorMessage,
   errorColor,
+  testId = "field-container",
 }: FieldContainerProps) => {
   return (
     <Container
@@ -66,7 +67,7 @@ const FieldContainer = ({
       style={style}
       maxwidth={errorMessageWidth}
       removeMargin={removeMargin}
-      data-testid="field-container"
+      data-testid={testId}
     >
       {labelVisible ? (
         !inlineHelpButton ? (

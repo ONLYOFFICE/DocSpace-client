@@ -139,6 +139,10 @@ const checkedStyle = css`
     isRooms
       ? theme.filesSection.tilesView.tile.roomsCheckedColor
       : theme.filesSection.tilesView.tile.checkedColor};
+
+  a {
+    text-decoration: underline;
+  }
 `;
 
 const bottomFileBorder = css`
@@ -174,7 +178,7 @@ const StyledTile = styled.div`
       /* cursor: wait; */
     `}
   box-sizing: border-box;
-  width: 100%;
+
   background: ${(props) =>
     props.theme.filesSection.tilesView.tile.backgroundColor};
 
@@ -270,6 +274,18 @@ const StyledTile = styled.div`
       props.isFolder ? (props.isRoom ? "16px" : "15px") : "16px"};
     margin-inline-end: ${(props) =>
       props.isFolder ? (props.isRoom ? "12px" : "7px") : "8px"};
+
+    background: ${(props) =>
+      props.theme.filesSection.tilesView.tag.backgroundColor};
+    border-radius: 6px;
+
+    .checkbox {
+      padding: 8px;
+
+      svg {
+        margin: 0;
+      }
+    }
   }
 
   .tile-folder-loader {
@@ -518,6 +534,7 @@ class Tile extends React.PureComponent {
     this.cm = React.createRef();
     this.tile = React.createRef();
     this.checkboxContainerRef = React.createRef();
+    this.optionButtonRef = React.createRef();
   }
 
   onError = () => {
@@ -564,7 +581,7 @@ class Tile extends React.PureComponent {
     onSelect && onSelect(true, item);
   };
 
-  onFileClick = (e) => {
+  /*   onFileClick = (e) => {
     const {
       onSelect,
       item,
@@ -605,6 +622,24 @@ class Tile extends React.PureComponent {
 
       onSelect && onSelect(!checked, item);
     }
+  } */
+
+  onFileClick = (e) => {
+    const { thumbnailClick } = this.props;
+
+    if (
+      !e.target.closest(".checkbox") &&
+      !e.target.closest(".room-tags") &&
+      !e.target.closest(".badges")
+    ) {
+      thumbnailClick(e);
+    }
+  };
+
+  onContextMenu = (e) => {
+    e.stopPropagation();
+    const { getContextModel } = this.props;
+    getContextModel && this.cm.current.show(e);
   };
 
   render() {
@@ -652,13 +687,13 @@ class Tile extends React.PureComponent {
       return contextOptions;
     };
 
-    const onContextMenu = (e) => {
+    /*   const onContextMenu = (e) => {
       tileContextClick && tileContextClick(e.button === 2);
       if (!this.cm.current.menuRef.current) {
         this.tile.current.click(e); // TODO: need fix context menu to global
       }
       this.cm.current.show(e);
-    };
+    }; */
 
     const contextMenuDirection =
       theme.interfaceDirection === "rtl" ? "left" : "right";
@@ -713,7 +748,7 @@ class Tile extends React.PureComponent {
       <StyledTile
         ref={this.tile}
         {...this.props}
-        onContextMenu={onContextMenu}
+        onContextMenu={this.onContextMenu}
         isDragging={isDragging}
         dragging={dragging ? isFolder : null}
         isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
@@ -724,11 +759,11 @@ class Tile extends React.PureComponent {
         isRoom={isRoom}
         inProgress={inProgress}
         showHotkeyBorder={showHotkeyBorder}
-        onClick={this.onFileClick}
         isThirdParty={item.providerType}
         isHighlight={isHighlight}
         iconProgress={iconProgress}
         isDownload={isDownload}
+        onClick={this.onFileClick}
       >
         {isFolder || (!fileExst && id === -1) ? (
           isRoom ? (
@@ -771,6 +806,7 @@ class Tile extends React.PureComponent {
                   {badges}
                 </StyledContent>
                 <StyledOptionButton
+                  ref={this.optionButtonRef}
                   spacerWidth={contextButtonSpacerWidth}
                   isRoom
                 >
@@ -781,7 +817,10 @@ class Tile extends React.PureComponent {
                       directionX="right"
                       getData={getOptions}
                       displayType="toggle"
-                      onClick={onContextMenu}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        this.onContextMenu(e);
+                      }}
                       title={title}
                     />
                   ) : (
@@ -841,7 +880,10 @@ class Tile extends React.PureComponent {
                 {FilesTileContent}
                 {badges}
               </StyledContent>
-              <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
+              <StyledOptionButton
+                ref={this.optionButtonRef}
+                spacerWidth={contextButtonSpacerWidth}
+              >
                 {renderContext ? (
                   <ContextMenuButton
                     isFill
@@ -849,7 +891,10 @@ class Tile extends React.PureComponent {
                     directionX={contextMenuDirection}
                     getData={getOptions}
                     displayType="toggle"
-                    onClick={onContextMenu}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      this.onContextMenu(e);
+                    }}
                     title={title}
                   />
                 ) : (
@@ -920,7 +965,10 @@ class Tile extends React.PureComponent {
               >
                 {FilesTileContent}
               </StyledContent>
-              <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
+              <StyledOptionButton
+                ref={this.optionButtonRef}
+                spacerWidth={contextButtonSpacerWidth}
+              >
                 {renderContext ? (
                   <ContextMenuButton
                     isFill
@@ -928,7 +976,10 @@ class Tile extends React.PureComponent {
                     directionX="left"
                     getData={getOptions}
                     displayType="toggle"
-                    onClick={onContextMenu}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      this.onContextMenu(e);
+                    }}
                     title={title}
                   />
                 ) : (

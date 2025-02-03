@@ -45,9 +45,46 @@ const mockTranslation = (key: string) => {
 export default {
   title: "Dialogs/MoreLoginModal",
   component: MoreLoginModal,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Modal dialog displaying additional login options including social providers and SSO login.",
+      },
+    },
+  },
   argTypes: {
-    onClose: { action: "onClose" },
-    onSocialLoginClick: { action: "onSocialLoginClick" },
+    visible: {
+      control: "boolean",
+      description: "Controls the visibility of the modal dialog",
+      defaultValue: false,
+    },
+    onClose: {
+      action: "onClose",
+      description: "Callback function called when the modal is closed",
+    },
+    providers: {
+      control: "object",
+      description:
+        "Array of social login providers with their configuration. Each provider has properties: linked (boolean), provider (string), url (string)",
+    },
+    onSocialLoginClick: {
+      action: "onSocialLoginClick",
+      description:
+        "Callback function called when a social login button is clicked. Receives the click event as parameter",
+    },
+    ssoLabel: {
+      control: "text",
+      description: "Label text for the SSO (Single Sign-On) login button",
+    },
+    ssoUrl: {
+      control: "text",
+      description: "URL for the SSO login endpoint",
+    },
+    t: {
+      control: false,
+      description: "Translation function for internationalization",
+    },
   },
 } as Meta;
 

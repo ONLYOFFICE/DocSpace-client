@@ -42,6 +42,12 @@
     height: 24px;
     width: 24px;
     padding-inline-start: 4px;
+
+    :global(.dark) & {
+      path {
+        fill: #{$white};
+      }
+    }
   }
 
   .providerName {

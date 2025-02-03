@@ -73,6 +73,7 @@
     "react-window": "1.8.10",
     "react": "18.3.1",
     "resize-image": "0.1.0",
+    "sass": "1.79.5",
     "screenfull": "5.2.0",
     "sjcl": "1.0.8",
     "socket.io-client": "4.8.0",

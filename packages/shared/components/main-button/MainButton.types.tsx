@@ -46,4 +46,5 @@ export type MainButtonProps = {
   /** Data model menu */
   model: ContextMenuModel[];
   setGuidRectsMainButton: (rect: DOMRect | null) => void;
+  maintenanceExist: boolean;
 };

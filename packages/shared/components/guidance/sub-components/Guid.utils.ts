@@ -127,7 +127,7 @@ const getStandardPosition = (
   return {
     ...dimensions,
     left: getLeftPosition(rect, viewAs, isRTL),
-    top: isTableMode ? dimensions.top + 1 : dimensions.top,
+    top: isTableMode ? dimensions.top - 2 : dimensions.top,
     height: isTableMode
       ? (dimensions.height || rect.height) + 3
       : dimensions.height || rect.height,

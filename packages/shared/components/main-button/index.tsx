@@ -45,6 +45,7 @@ const MainButton = (props: MainButtonProps) => {
     className,
     id,
     setGuidRectsMainButton,
+    maintenanceExist,
     ...rest
   } = props;
 
@@ -65,7 +66,7 @@ const MainButton = (props: MainButtonProps) => {
     updateWidth();
     window.addEventListener("resize", updateWidth);
     return () => window.removeEventListener("resize", updateWidth);
-  }, []);
+  }, [maintenanceExist, setGuidRectsMainButton]);
 
   const onMainButtonClick = (e: React.MouseEvent) => {
     if (!isDisabled) {

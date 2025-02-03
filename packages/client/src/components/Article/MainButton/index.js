@@ -181,6 +181,7 @@ const ArticleMainButtonContent = (props) => {
     getContactsModel,
     contactsCanCreate,
     setGuidRectsMainButton,
+    maintenanceExist,
   } = props;
 
   const navigate = useNavigate();
@@ -759,6 +760,7 @@ const ArticleMainButtonContent = (props) => {
           model={model}
           title={mainButtonText}
           setGuidRectsMainButton={setGuidRectsMainButton}
+          maintenanceExist={maintenanceExist}
         />
       )}
 
@@ -839,8 +841,12 @@ export default inject(
       setSelectFileFormRoomDialogVisible,
     } = dialogsStore;
 
-    const { enablePlugins, currentColorScheme, currentDeviceType } =
-      settingsStore;
+    const {
+      enablePlugins,
+      currentColorScheme,
+      currentDeviceType,
+      maintenanceExist,
+    } = settingsStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const { security } = selectedFolderStore;
@@ -922,6 +928,7 @@ export default inject(
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
 
       setGuidRectsMainButton,
+      maintenanceExist,
     };
   },
 )(

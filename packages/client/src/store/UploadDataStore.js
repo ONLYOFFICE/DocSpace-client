@@ -1641,7 +1641,7 @@ class UploadDataStore {
           error: err,
         });
         this.clearActiveOperations(fileIds, folderIds);
-        // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
         return Promise.reject(err);
       });
   };
@@ -1694,7 +1694,7 @@ class UploadDataStore {
           error: err,
         });
         this.clearActiveOperations(fileIds, folderIds);
-        // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
         return Promise.reject(err);
       })
       .finally(() => {
@@ -1775,7 +1775,6 @@ class UploadDataStore {
         operationId: pbData.operationId,
       });
 
-      // setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
       return;
     }
 
@@ -1840,14 +1839,12 @@ class UploadDataStore {
     if (!isCopy || destFolderId === this.selectedFolderStore.id) {
       !isCopy && removeFiles(fileIds, folderIds);
       this.clearActiveOperations(fileIds, folderIds);
-      // setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
+
       isMovingSelectedFolder &&
         this.navigateToNewFolderLocation(this.selectedFolderStore.id);
       this.dialogsStore.setIsFolderActions(false);
     } else {
       this.clearActiveOperations(fileIds, folderIds);
-
-      // setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
     }
 
     setSecondaryProgressBarData({

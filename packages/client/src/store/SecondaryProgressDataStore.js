@@ -278,8 +278,8 @@ class SecondaryProgressDataStore {
     this.itemsSelectionLength = itemsSelectionLength;
   };
 
-  clearSecondaryProgressData = (operationId, operation, clearAll) => {
-    if (clearAll) {
+  clearSecondaryProgressData = (operationId, operation) => {
+    if (!operationId && !operation) {
       const incompleteOperations = this.secondaryOperationsArray.filter(
         (item) => !item.completed,
       );

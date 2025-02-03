@@ -106,7 +106,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         animation.includes("hideButton") ||
         animation.includes("hideButtonImmediate")
       ) {
-        clearSecondaryProgressData(null, null, true);
+        clearSecondaryProgressData();
         clearPrimaryProgressData?.();
       }
     },

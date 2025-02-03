@@ -237,7 +237,6 @@ class FilesActionStore {
     } finally {
       scrollToTop();
       this.dialogsStore.setIsFolderActions(false);
-      // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
 
       setSecondaryProgressBarData({
         operation,
@@ -387,7 +386,6 @@ class FilesActionStore {
       completed: true,
       operationId,
     });
-    // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
   };
 
   deleteAction = async (translations, newSelection = null) => {
@@ -523,7 +521,7 @@ class FilesActionStore {
           alert: true,
           operationId,
         });
-        // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
         return toastr.error(err.message ? err.message : err, null, 0, true);
       } finally {
         this.setGroupMenuBlocked(false);
@@ -586,7 +584,7 @@ class FilesActionStore {
         alert: true,
         ...pbData,
       });
-      // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
       return toastr.error(err.message ? err.message : err, null, 0, true);
     } finally {
       this.emptyTrashInProgress = false;
@@ -642,7 +640,6 @@ class FilesActionStore {
         alert: true,
         ...pbData,
       });
-      // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
 
       return toastr.error(err.message ? err.message : err);
     }
@@ -713,10 +710,6 @@ class FilesActionStore {
             operationId,
           });
 
-          // setTimeout(
-          //   () => clearSecondaryProgressData(operationId, "download"),
-          //   TIMEOUT,
-          // );
           !item.url && toastr.error(translations.error, null, 0, true);
         },
       );
@@ -730,11 +723,6 @@ class FilesActionStore {
         operationId,
       });
       const error = err.error;
-
-      // setTimeout(
-      //   () => clearSecondaryProgressData(operationId, "download"),
-      //   TIMEOUT,
-      // );
 
       if (error?.includes("password")) {
         const filesIds = error.match(/\d+/g)?.map(Number) ?? [
@@ -918,7 +906,7 @@ class FilesActionStore {
           alert: true,
           operationId,
         });
-        // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
         return toastr.error(err.message ? err.message : err, null, 0, true);
       } finally {
         setSecondaryProgressBarData({
@@ -927,11 +915,6 @@ class FilesActionStore {
           alert: false,
           operationId,
         });
-
-        // setTimeout(
-        //   () => clearActiveOperations(isFile && id, !isFile && id),
-        //   TIMEOUT,
-        // );
       }
     }
   };
@@ -1335,11 +1318,6 @@ class FilesActionStore {
               completed: true,
               ...pbData,
             });
-
-            // return setTimeout(
-            //   () => clearSecondaryProgressData(operationId),
-            //   TIMEOUT,
-            // );
           })
 
           .then(() => {
@@ -1366,7 +1344,7 @@ class FilesActionStore {
               alert: true,
               ...pbData,
             });
-            // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
             return toastr.error(err.message ? err.message : err, null, 0, true);
           })
           .finally(() => {
@@ -1393,11 +1371,6 @@ class FilesActionStore {
               completed: true,
               ...pbData,
             });
-
-            // return setTimeout(
-            //   () => clearSecondaryProgressData(operationId),
-            //   TIMEOUT,
-            // );
           })
 
           .then(() => {
@@ -1419,7 +1392,7 @@ class FilesActionStore {
               alert: true,
               ...pbData,
             });
-            // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
             return toastr.error(err.message ? err.message : err, null, 0, true);
           })
           .finally(() => {
@@ -1678,14 +1651,12 @@ class FilesActionStore {
         updateFileStatus(index, item.fileStatus & ~FileStatus.IsNew);
       })
       .catch((err) => toastr.error(err, null, 0, true))
-      .finally(
-        () =>
-          setSecondaryProgressBarData({
-            operation: OPERATIONS_NAME.markAsRead,
-            completed: true,
-            operationId,
-          }),
-        // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT),
+      .finally(() =>
+        setSecondaryProgressBarData({
+          operation: OPERATIONS_NAME.markAsRead,
+          completed: true,
+          operationId,
+        }),
       );
   };
 
@@ -1968,7 +1939,7 @@ class FilesActionStore {
         alert: true,
         ...pbData,
       });
-      //  setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
       return toastr.error(err.message ? err.message : err, null, 0, true);
     } finally {
       this.setGroupMenuBlocked(false);
@@ -3270,8 +3241,6 @@ class FilesActionStore {
       toastr.error(e, null, 0, true);
     } finally {
       this.alreadyExportingRoomIndex = false;
-
-      // setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
     }
   };
 

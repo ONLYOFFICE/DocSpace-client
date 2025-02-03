@@ -26,6 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { headers } from "next/headers";
+
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import {
   TFilesSettings,
@@ -41,13 +43,19 @@ import {
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { TValidateShareRoom } from "@docspace/shared/api/rooms/types";
 import { FolderType } from "@docspace/shared/enums";
-import { headers } from "next/headers";
 import { SHARE_KEY_HEADER } from "@/utils/constants";
+import {
+  filesSettingsHandler,
+  folderHandler,
+  foldersTreeHandler,
+} from "@docspace/shared/__mocks__/e2e";
+
+const IS_TEST = process.env.E2E_TEST;
 
 export async function getFilesSettings(): Promise<TFilesSettings | undefined> {
   const [req] = createRequest([`/files/settings`], [["", ""]], "GET");
 
-  const res = await fetch(req);
+  const res = IS_TEST ? filesSettingsHandler() : await fetch(req);
 
   if (!res.ok) return;
 
@@ -63,7 +71,7 @@ export async function getFoldersTree(): Promise<TFolder[]> {
     "GET",
   );
 
-  const res = await fetch(req);
+  const res = IS_TEST ? foldersTreeHandler() : await fetch(req);
 
   if (!res.ok) {
     throw new Error("Failed to get folders tree");
@@ -147,7 +155,7 @@ export async function getFolder(
     [signal],
   );
 
-  const res = await fetch(req);
+  const res = IS_TEST ? folderHandler(headers()) : await fetch(req);
 
   if (!res.ok) {
     throw new Error("Failed to get folder");

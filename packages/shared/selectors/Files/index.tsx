@@ -406,6 +406,11 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
   }, [currentFolderId, initSelectedItemId, setSelectedItemId]);
 
   React.useEffect(() => {
+    if (!ssrRendered.current) {
+      ssrRendered.current = true;
+      return;
+    }
+
     setIsFirstLoad(true);
 
     const needRoomList = isRoomsOnly && !currentFolderId;

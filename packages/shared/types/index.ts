@@ -74,10 +74,15 @@ export type TPathParts = {
 
 export type TCreatedBy = {
   avatarSmall: string;
+  avatar?: string;
+  avatarOriginal?: string;
+  avatarMax?: string;
+  avatarMedium?: string;
   displayName: string;
   hasAvatar: boolean;
   id: string;
   profileUrl: string;
+  isAnonim?: boolean;
 };
 
 export type TI18n = {

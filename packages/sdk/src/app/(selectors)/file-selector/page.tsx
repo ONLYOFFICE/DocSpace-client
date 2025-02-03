@@ -24,52 +24,60 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import FilesSelectorClient from "./page.client";
-
+import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import {
-  TFolder,
+import type {
+  TFile,
   TFilesSettings,
+  TFolder,
   TGetFolder,
 } from "@docspace/shared/api/files/types";
-import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
+import type { TGetRooms, TRoom } from "@docspace/shared/api/rooms/types";
 
 import { getFilesSettings, getFolder, getFoldersTree } from "@/api/files";
 import { getRooms } from "@/api/rooms";
 import { PAGE_COUNT } from "@/utils/constants";
-import { TGetRooms } from "@docspace/shared/api/rooms/types";
+
+import FilesSelectorClient from "./page.client";
 
 export default async function Page({
   searchParams,
 }: {
   searchParams: { [key: string]: string };
 }) {
-  const baseConfig = JSON.parse(JSON.stringify(searchParams), (k, v) =>
-    v === "true" ? true : v === "false" ? false : v,
+  const baseConfig = Object.fromEntries(
+    Object.entries(searchParams).map(([k, v]) => [
+      k,
+      v === "true" ? true : v === "false" ? false : v,
+    ]),
   );
 
-  const { id } = baseConfig;
-  const folderId = id ? JSON.parse(id as string) : null;
-  const actions: Promise<unknown>[] = [getFoldersTree(), getFilesSettings()];
-  const filter = folderId ? FilesFilter.getDefault() : RoomsFilter.getDefault();
+  const folderId = +(baseConfig.id ?? 0) || null;
+  const isRoomView = !folderId;
+
+  const filter = isRoomView
+    ? { ...RoomsFilter.getDefault(), searchArea: RoomSearchArea.Active }
+    : FilesFilter.getDefault();
 
   filter.page = 0;
   filter.pageCount = PAGE_COUNT;
 
-  if (!folderId) {
-    filter.searchArea = RoomSearchArea.Active;
+  const [foldersTree, filesSettings, itemsList] = await Promise.all([
+    getFoldersTree(),
+    getFilesSettings(),
+    isRoomView
+      ? getRooms(filter as RoomsFilter)
+      : getFolder(folderId!, filter as FilesFilter),
+  ]);
 
-    actions.push(getRooms(filter as RoomsFilter));
-  } else {
-    actions.push(getFolder(folderId, filter as FilesFilter));
-  }
-
-  const [foldersTree, filesSettings, itemsList] = await Promise.all(actions);
-
-  const { folders, files, current, pathParts, total } = itemsList as
-    | TGetFolder
-    | TGetRooms;
+  const {
+    folders = [],
+    files = [],
+    current,
+    pathParts,
+    total,
+  } = itemsList as TGetFolder | TGetRooms;
 
   const roomsFolderId = (foldersTree as TFolder[]).find(
     (x) => x.rootFolderType === FolderType.Rooms,
@@ -83,28 +91,27 @@ export default async function Page({
     roomType: part?.roomType,
     isRoom: !folderId
       ? true
-      : (index === 0 && typeof pathParts[0]?.roomType !== "undefined") ||
+      : Boolean(index === 0 && part?.roomType !== undefined) ||
         roomsFolderId === part.id,
   }));
 
-  const currentFolderId = current.id;
-  const rootFolderType = current.rootFolderType;
+  const { id: currentFolderId, rootFolderType } = current;
 
-  return (
-    <FilesSelectorClient
-      foldersTree={foldersTree as TFolder[]}
-      filesSettings={filesSettings as TFilesSettings}
-      items={items}
-      selectedItemType={folderId ? "files" : "rooms"}
-      selectedItemId={current.id}
-      total={total}
-      hasNextPage={total > PAGE_COUNT}
-      breadCrumbs={breadCrumbs}
-      searchValue={"search" in filter ? filter.search : filter.filterValue}
-      currentFolderId={currentFolderId}
-      rootFolderType={rootFolderType}
-      roomsFolderId={roomsFolderId}
-      baseConfig={baseConfig}
-    />
-  );
+  const clientProps = {
+    baseConfig,
+    breadCrumbs,
+    currentFolderId,
+    filesSettings: filesSettings as TFilesSettings,
+    foldersTree: foldersTree as TFolder[],
+    hasNextPage: total > PAGE_COUNT,
+    items: items as (TFile | TFolder)[] | TRoom[],
+    roomsFolderId,
+    rootFolderType,
+    searchValue: "search" in filter ? filter.search : filter.filterValue,
+    selectedItemId: current.id,
+    selectedItemType: (folderId ? "files" : "rooms") as "files" | "rooms",
+    total,
+  };
+
+  return <FilesSelectorClient {...clientProps} />;
 }

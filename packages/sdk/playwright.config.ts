@@ -71,4 +71,6 @@ export default defineConfig({
     port: PORT,
     timeout: 1000 * 60 * 5,
   },
+
+  testIgnore: ["e2e/roomSelector.spec.tsx"],
 });

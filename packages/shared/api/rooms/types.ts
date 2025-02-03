@@ -108,9 +108,9 @@ export type TRoom = {
   title: string;
   access: ShareAccessRights;
   shared: boolean;
-  created: Date;
+  created: string;
   createdBy: TCreatedBy;
-  updated: Date;
+  updated: string;
   rootFolderType: FolderType;
   updatedBy: TCreatedBy;
   isArchive?: boolean;

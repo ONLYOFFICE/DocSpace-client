@@ -26,9 +26,12 @@
 
 import { toastr } from "@docspace/shared/components/toast";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+
 import { makeAutoObservable } from "mobx";
 import { Trans } from "react-i18next";
 
+import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
 
 import i18n from "../i18n";
@@ -78,7 +81,7 @@ class SecondaryProgressDataStore {
     return this.secondaryOperationsArray.length > 0;
   }
 
-  showSuccessToast = (cuttentOperation, operation) => {
+  showToast = async (currentOperation, operation, isSuccess = true) => {
     if (
       operation !== OPERATIONS_NAME.copy &&
       operation !== OPERATIONS_NAME.duplicate &&
@@ -86,36 +89,125 @@ class SecondaryProgressDataStore {
     )
       return;
 
-    if (!cuttentOperation.title && !cuttentOperation.itemsCount) return;
+    if (!currentOperation.title && !currentOperation.itemsCount) return;
 
     const t = (key, options) => i18n.t(key, { ...options, ns: "Files" });
     let i18nKey = "";
     let toastTranslation = "";
 
-    if (cuttentOperation.itemsCount === 1) {
-      i18nKey = operation === OPERATIONS_NAME.move ? "MoveItem" : "CopyItem";
+    const { url, state } = await createFolderNavigation(
+      currentOperation.destFolderInfo,
+    );
+
+    const onClickLocation = () => {
+      toastr.clear();
+
+      window.DocSpace.navigate(url, { state });
+    };
+
+    const getError = () => {
+      const error = currentOperation.error;
+
+      if (typeof error === "string") return error;
+
+      if (error.message) return error?.message;
+
+      if (error.error) return error.error;
+    };
+
+    if (currentOperation.itemsCount === 1) {
+      const getTranslationKey = () => {
+        if (operation === OPERATIONS_NAME.move) {
+          return isSuccess ? "MoveItem" : "ErrorMoveItem";
+        }
+
+        if (operation === OPERATIONS_NAME.copy) {
+          return isSuccess ? "CopyItem" : "ErrorCopyItem";
+        }
+
+        return isSuccess ? "DuplicateItem" : "ErrorDuplicateItem";
+      };
+
+      i18nKey = getTranslationKey();
 
       toastTranslation = (
         <Trans
           t={t}
           i18nKey={i18nKey}
-          values={{ title: cuttentOperation.title }}
+          values={{ title: currentOperation.title, folderName: state.title }}
+          components={{
+            1: (
+              <ColorTheme
+                tag="a"
+                themeId={ThemeId.Link}
+                onClick={onClickLocation}
+                target="_blank"
+              />
+            ),
+            2: <strong />,
+          }}
         />
       );
+
+      if (currentOperation.error) {
+        const message = getError();
+
+        toastTranslation = (
+          <>
+            {toastTranslation}
+            <br />
+            {message}
+          </>
+        );
+      }
     }
 
-    if (cuttentOperation.itemsCount > 1) {
-      i18nKey = operation === OPERATIONS_NAME.move ? "MoveItems" : "CopyItems";
+    if (currentOperation.itemsCount > 1) {
+      const getTranslationKey = () => {
+        if (operation === OPERATIONS_NAME.move) {
+          return isSuccess ? "MoveItems" : "ErrorMoveItems";
+        }
+
+        return isSuccess ? "CopyItems" : "ErrorCopyItems";
+      };
+
+      i18nKey = getTranslationKey();
+
       toastTranslation = (
         <Trans
           t={t}
           i18nKey={i18nKey}
-          values={{ qty: cuttentOperation.itemsCount }}
+          values={{ qty: currentOperation.itemsCount, folderName: state.title }}
+          components={{
+            1: (
+              <ColorTheme
+                tag="a"
+                themeId={ThemeId.Link}
+                onClick={onClickLocation}
+                target="_blank"
+              />
+            ),
+            2: <strong />,
+          }}
         />
       );
+
+      if (currentOperation.error) {
+        const message = getError();
+
+        toastTranslation = (
+          <>
+            {toastTranslation}
+            <br />
+            {message}
+          </>
+        );
+      }
     }
 
-    toastr.success(toastTranslation);
+    isSuccess
+      ? toastr.success(toastTranslation)
+      : toastr.error(toastTranslation, null, 0, true);
   };
 
   setSecondaryProgressBarData = (secondaryProgressData) => {
@@ -151,9 +243,11 @@ class SecondaryProgressDataStore {
       const cuttentOperation = updatedItems[itemIndex];
 
       if (progressInfo.completed && !progressInfo.alert) {
-        this.showSuccessToast(cuttentOperation, operation);
+        this.showToast(cuttentOperation, operation);
       }
-
+      if (progressInfo.completed && progressInfo.alert) {
+        this.showToast(cuttentOperation, operation, false);
+      }
       this.secondaryOperationsArray[operationIndex] = {
         ...operationObject,
         alert: progressInfo.alert,

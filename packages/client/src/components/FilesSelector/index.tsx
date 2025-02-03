@@ -263,6 +263,7 @@ const FilesSelectorWrapper = ({
       if (folderIds.length || fileIds.length) {
         const operationData = {
           destFolderId: selectedItemId,
+          destFolderInfo: selectedTreeNode,
           folderIds,
           fileIds,
           deleteAfter: false,
@@ -298,7 +299,12 @@ const FilesSelectorWrapper = ({
             const move = !isCopy;
             if (move) setMovingInProgress(move);
             sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
-            await itemOperationToFolder(operationData);
+
+            try {
+              await itemOperationToFolder(operationData);
+            } catch (error) {
+              console.error(error);
+            }
           }
         } catch (e: unknown) {
           toastr.error(e as TData);

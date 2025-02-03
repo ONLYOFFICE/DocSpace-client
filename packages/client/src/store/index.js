@@ -241,6 +241,8 @@ const filesActionsStore = new FilesActionsStore(
   indexingStore,
 );
 
+secondaryProgressDataStore.filesActionsStore = filesActionsStore;
+
 const contextOptionsStore = new ContextOptionsStore(
   settingsStore,
   dialogsStore,

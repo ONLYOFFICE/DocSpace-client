@@ -148,6 +148,7 @@ const ShareCollectSelector = inject<TStore>(
 
         const operationData = {
           destFolderId: selectedItemId,
+          destFolderInfo: selectedTreeNode,
           folderIds,
           fileIds,
           deleteAfter: false,
@@ -177,7 +178,11 @@ const ShareCollectSelector = inject<TStore>(
             onCloseAndDeselectAction();
 
             openFileAction(selectedFolder, t);
-            await itemOperationToFolder(operationData);
+            try {
+              await itemOperationToFolder(operationData);
+            } catch (error) {
+              console.error(error);
+            }
           }
         } catch (e: unknown) {
           toastr.error(e as TData);

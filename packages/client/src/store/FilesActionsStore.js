@@ -100,6 +100,7 @@ import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { checkProtocol } from "../helpers/files-helpers";
@@ -823,12 +824,11 @@ class FilesActionStore {
       setHotkeyCaretStart,
       setHotkeyCaret,
       setEnabledHotkeys,
-      filesList,
     } = this.filesStore;
 
     if (!id) return;
 
-    const item = filesList.find(
+    const item = this.filesStore.filesList.find(
       (elm) => elm.id === id && elm.isFolder === isFolder,
     );
 
@@ -1047,6 +1047,7 @@ class FilesActionStore {
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
     const { clearActiveOperations } = this.uploadDataStore;
+    const selectedFolder = this.selectedFolderStore.getSelectedFolder();
 
     this.setSelectedItems();
 
@@ -1065,6 +1066,7 @@ class FilesActionStore {
       itemsCount: 1,
       title: item.title,
       operationIds: [item.id],
+      destFolderInfo: selectedFolder,
     });
 
     this.filesStore.addActiveItems(fileIds, folderIds);
@@ -1094,9 +1096,6 @@ class FilesActionStore {
           operationId,
           completed: true,
         });
-
-        // Wait for animation to complete before clearing
-        //  return setTimeout(() => clearSecondaryProgressData(operationId, operationName), 5000); // Match ANIMATION_DELAY from FloatingButton
       })
       .catch((err) => {
         clearActiveOperations(fileIds, folderIds);
@@ -1106,15 +1105,8 @@ class FilesActionStore {
           operationId,
           alert: true,
           completed: true,
+          error: err,
         });
-
-        // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-        return toastr.error(
-          err.error ? err.error : err.message ? err.message : err,
-          null,
-          0,
-          true,
-        );
       })
       .finally(() => {
         clearActiveOperations(fileIds, folderIds);
@@ -2520,68 +2512,18 @@ class FilesActionStore {
     if (isRecycleBinFolder || isLoading) return;
 
     if (isFolder) {
-      const { isRoom, rootFolderType, title, roomType: itemRoomType } = item;
-
-      const path = getCategoryUrl(
-        getCategoryTypeByFolderType(rootFolderType, id),
-        id,
+      const { url, state } = await createFolderNavigation(
+        item,
+        categoryType,
+        this.userStore.user?.id,
+        roomType,
+        currentTitle,
+        this.getPublicKey,
       );
-
-      const filter = FilesFilter.getDefault();
-
-      const filterObj = FilesFilter.getFilter(window.location);
-
-      if (isRoom) {
-        const key =
-          categoryType === CategoryType.Archive
-            ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
-            : `UserFilterSharedRoom=${this.userStore.user?.id}`;
-
-        const filterStorageSharedRoom =
-          this.userStore.user?.id && localStorage.getItem(key);
-
-        if (filterStorageSharedRoom) {
-          const splitFilter = filterStorageSharedRoom.split(",");
-
-          filter.sortBy = splitFilter[0];
-          filter.sortOrder = splitFilter[1];
-        }
-      } else {
-        // For the document section at all levels there is one sorting
-        filter.sortBy = filterObj.sortBy;
-        filter.sortOrder = filterObj.sortOrder;
-      }
-
-      filter.folder = id;
-
-      const shareKey = await this.getPublicKey(item);
-      if (shareKey) filter.key = shareKey;
-
-      const url = `${path}?${filter.toUrlParams()}`;
 
       if (openingNewTab(url, e)) return;
 
       setIsLoading(true);
-
-      const isShared =
-        item.shared || item.navigationPath?.findIndex((r) => r.shared) > -1;
-
-      const isExternal =
-        item.external || item.navigationPath?.findIndex((r) => r.external) > -1;
-
-      const state = {
-        title,
-        isRoot: false,
-        rootFolderType,
-        isRoom,
-        rootRoomTitle: roomType ? currentTitle : "",
-        isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
-        isShared,
-        isExternal,
-        canCreate: item.security?.canCreate,
-        isLifetimeEnabled:
-          itemRoomType === RoomsType.VirtualDataRoom && !!item?.lifetime,
-      };
 
       setSelection([]);
 

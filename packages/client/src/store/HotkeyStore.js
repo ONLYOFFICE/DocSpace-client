@@ -625,7 +625,12 @@ class HotkeyStore {
     const fileIds = [];
     const folderIds = [];
 
-    const { id: selectedItemId, roomType, security } = this.selectedFolderStore;
+    const {
+      id: selectedItemId,
+      roomType,
+      security,
+      getSelectedFolder,
+    } = this.selectedFolderStore;
     const { activeFiles, activeFolders, hotkeysClipboard } = this.filesStore;
     const { checkFileConflicts, setSelectedItems, setConflictDialogData } =
       this.filesActionsStore;
@@ -669,6 +674,7 @@ class HotkeyStore {
     if (folderIds.length || fileIds.length) {
       const operationData = {
         destFolderId: selectedItemId,
+        destFolderInfo: getSelectedFolder(),
         folderIds,
         fileIds,
         deleteAfter: false,
@@ -688,17 +694,18 @@ class HotkeyStore {
 
       const fileTitle = hotkeysClipboard.find((f) => f.title)?.title;
       setSelectedItems(fileTitle, hotkeysClipboard.length);
+
       checkFileConflicts(selectedItemId, folderIds, fileIds)
         .then(async (conflicts) => {
           if (conflicts.length) {
             setConflictDialogData(conflicts, operationData);
           } else {
             if (!isCopy) this.filesStore.setMovingInProgress(!isCopy);
+
             await itemOperationToFolder(operationData);
           }
         })
-        .catch((e) => {
-          toastr.error(e);
+        .catch(() => {
           clearActiveOperations(fileIds, folderIds);
         })
         .finally(() => {

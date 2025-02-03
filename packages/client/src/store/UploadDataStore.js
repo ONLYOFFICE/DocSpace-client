@@ -1649,6 +1649,7 @@ class UploadDataStore {
           alert: true,
           operationId,
           operation: pbData.operation,
+          error: err,
         });
         this.clearActiveOperations(fileIds, folderIds);
         // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
@@ -1701,6 +1702,7 @@ class UploadDataStore {
           alert: true,
           operationId,
           operation: pbData.operation,
+          error: err,
         });
         this.clearActiveOperations(fileIds, folderIds);
         // setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
@@ -1724,6 +1726,7 @@ class UploadDataStore {
   itemOperationToFolder = (data) => {
     const {
       destFolderId,
+      destFolderInfo,
       folderIds,
       fileIds,
       deleteAfter,
@@ -1749,6 +1752,7 @@ class UploadDataStore {
       title,
       itemsCount,
       operationIds: [...folderIds],
+      destFolderInfo,
     });
 
     return isCopy

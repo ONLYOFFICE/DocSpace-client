@@ -51,6 +51,7 @@ const HelpButton = (props: HelpButtonProps) => {
     openOnClick = true,
     isClickable = true,
     children,
+    isOpen,
   } = props;
 
   const currentId = id || uniqueId();
@@ -69,6 +70,7 @@ const HelpButton = (props: HelpButtonProps) => {
     afterHide,
     maxWidth: tooltipMaxWidth,
     anchorSelect,
+    isOpen,
   };
 
   return (

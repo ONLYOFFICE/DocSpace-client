@@ -24,11 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useLayoutEffect, useCallback, useRef } from "react";
+import React, {
+  useState,
+  useLayoutEffect,
+  useCallback,
+  useRef,
+  useEffect,
+} from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import type { AnimationEvent } from "react";
+import { isMobile } from "react-device-detect";
 import { FloatingButton } from "../../floating-button";
 import { FloatingButtonIcons } from "../../floating-button/FloatingButton.enums";
 import { DropDown } from "../../drop-down";
@@ -75,9 +82,21 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   const { t } = useTranslation(["UploadPanel", "Files"]);
 
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
-  // const [shouldHideButton, setShouldHideButton] = useState<boolean>(false);
+  const [isHideTooltip, setIsHideTooltip] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  // const prevOperationsCompletedRef = useRef<boolean>(operationsCompleted);
+  const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const clearTimers = () => {
+    if (hideTimerRef.current) {
+      clearTimeout(hideTimerRef.current);
+      hideTimerRef.current = null;
+    }
+    if (resetTimerRef.current) {
+      clearTimeout(resetTimerRef.current);
+      resetTimerRef.current = null;
+    }
+  };
 
   const handleAnimationEnd = useCallback(
     (e: AnimationEvent) => {
@@ -93,6 +112,17 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     },
     [clearSecondaryProgressData, clearPrimaryProgressData],
   );
+
+  const handleTooltipOpen = () => {
+    clearTimers();
+
+    hideTimerRef.current = setTimeout(() => {
+      setIsHideTooltip(true);
+      resetTimerRef.current = setTimeout(() => {
+        setIsHideTooltip(false);
+      }, 100);
+    }, 4000);
+  };
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -112,17 +142,11 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     };
   }, [handleAnimationEnd]);
 
-  // useLayoutEffect(() => {
-  //   if (prevOperationsCompletedRef.current && !operationsCompleted) {
-  //     clearSecondaryProgressData(null, null, true);
-  //   }
-
-  //   prevOperationsCompletedRef.current = operationsCompleted;
-  // }, [
-  //   operationsCompleted,
-  //   secondaryActiveOperations,
-  //   clearSecondaryProgressData,
-  // ]);
+  useEffect(() => {
+    return () => {
+      clearTimers();
+    };
+  }, []);
 
   const operationsLength =
     primaryActiveOperations.length + secondaryActiveOperations.length;
@@ -134,20 +158,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   }, [isOpenDropdown, isSeveralOperations]);
 
   const onOpenDropdown = () => {
-    // const willClose = isOpenDropdown;
     setIsOpenDropdown(!isOpenDropdown);
-
-    // if (!willClose) {
-    //   clearTimeout(timerId);
-    //   timerId = null;
-    // }
-
-    // if (willClose && operationsCompleted && secondaryActiveOperations.length) {
-    //   // const time = primaryActiveOperations.length > 0 ? 8000 : 4000;
-    //   // timerId = setTimeout(() => {
-    //   //  setShouldHideButton(true);
-    //   // }, time);
-    // }
   };
 
   const getIcons = () => {
@@ -208,7 +219,6 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
       className={classNames(styles.progressBarContainer, {
         [styles.autoHide]:
           !isOpenDropdown && operationsCompleted && !needErrorChecking,
-        // [styles.immediateHide]: shouldHideButton && !needErrorChecking,
         [styles.laterHide]: primaryActiveOperations.length > 0,
         [styles.mainButtonVisible]: mainButtonVisible,
       })}
@@ -217,7 +227,9 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         className="layout-progress-bar"
         place="left"
         tooltipContent={getTooltipLabel()}
-        openOnClick={false}
+        openOnClick={isMobile}
+        {...(isMobile && { afterShow: handleTooltipOpen })}
+        {...(isHideTooltip && isMobile && { isOpen: false })}
       >
         <FloatingButton
           icon={getIcons()}

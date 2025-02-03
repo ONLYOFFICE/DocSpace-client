@@ -145,6 +145,8 @@ class FilesSettingsStore {
 
   hideConfirmRoomLifetime = false;
 
+  cancellationNotification = false;
+
   constructor(
     thirdPartyStore,
     treeFoldersStore,
@@ -250,6 +252,10 @@ class FilesSettingsStore {
     api.files.storeForceSave(data).then((res) => this.setStoreForcesave(res));
 
   setStoreForcesave = (val) => (this.storeForcesave = val);
+
+  setCancellationNotification = (cancellationNotification) => {
+    this.cancellationNotification = cancellationNotification;
+  };
 
   setKeepNewFileName = (data) => {
     api.files

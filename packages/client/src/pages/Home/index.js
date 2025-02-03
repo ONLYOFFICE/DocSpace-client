@@ -164,6 +164,8 @@ const PureHome = (props) => {
     mainButtonVisible,
     primaryOperationsAlert,
     needErrorChecking,
+    setOperationCancelVisible,
+    cancellationNotification,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -253,7 +255,6 @@ const PureHome = (props) => {
   useSettings({
     t,
     isSettingsPage,
-
     setIsLoading,
   });
 
@@ -287,6 +288,15 @@ const PureHome = (props) => {
     if (isFrame) return null;
     if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
+  };
+
+  const onCancelUpload = () => {
+    if (cancellationNotification) {
+      cancelUpload(t);
+      return;
+    }
+
+    setOperationCancelVisible(true);
   };
 
   React.useEffect(() => {
@@ -340,7 +350,7 @@ const PureHome = (props) => {
   sectionProps.primaryOperationsArray = primaryOperationsArray;
   sectionProps.clearPrimaryProgressData = clearPrimaryProgressData;
   sectionProps.primaryOperationsCompleted = primaryOperationsCompleted;
-  sectionProps.cancelUpload = cancelUpload;
+  sectionProps.cancelUpload = onCancelUpload;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
   sectionProps.primaryOperationsAlert = primaryOperationsAlert;
   sectionProps.needErrorChecking = needErrorChecking;
@@ -404,7 +414,7 @@ const PureHome = (props) => {
   );
 };
 
-const Home = withTranslation(["Files", "People"])(PureHome);
+const Home = withTranslation(["UploadPanel", "Files", "People"])(PureHome);
 
 export const Component = inject(
   ({
@@ -423,6 +433,7 @@ export const Component = inject(
     contextOptionsStore,
     indexingStore,
     dialogsStore,
+    filesSettingsStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -516,6 +527,8 @@ export const Component = inject(
 
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
+    const { cancellationNotification } = filesSettingsStore;
+    const { setOperationCancelVisible } = dialogsStore;
     const {
       setFrameConfig,
       frameConfig,
@@ -657,6 +670,8 @@ export const Component = inject(
       mainButtonVisible,
       primaryOperationsAlert,
       needErrorChecking,
+      setOperationCancelVisible,
+      cancellationNotification,
     };
   },
 )(observer(Home));

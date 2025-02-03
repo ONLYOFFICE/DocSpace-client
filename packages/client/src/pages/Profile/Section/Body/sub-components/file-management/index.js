@@ -56,6 +56,8 @@ const FileManagement = ({
   displayFileExtension,
   setDisplayFileExtension,
   getFilesSettings,
+  cancellationNotification,
+  setCancellationNotification,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
@@ -84,6 +86,10 @@ const FileManagement = ({
     setDisplayFileExtension(!displayFileExtension);
     window.DocSpace.displayFileExtension = !displayFileExtension;
   }, [setDisplayFileExtension, displayFileExtension]);
+
+  const onChangeCancellationNotification = React.useCallback(() => {
+    setCancellationNotification(!displayFileExtension);
+  }, [cancellationNotification, setCancellationNotification]);
 
   const onChangeOpenEditorInSameTab = React.useCallback(() => {
     setOpenEditorInSameTab(!openEditorInSameTab);
@@ -141,6 +147,14 @@ const FileManagement = ({
           />
           <Text>{t("DisplayFileExtension")}</Text>
         </div>
+        <div className="toggle-btn-wrapper">
+          <ToggleButton
+            className="cancelletion-notification toggle-btn"
+            onChange={onChangeCancellationNotification}
+            isChecked={cancellationNotification}
+          />
+          <Text>{t("CancellaionNotification")}</Text>
+        </div>
       </Box>
     </StyledWrapper>
   );
@@ -167,6 +181,8 @@ export default inject(({ filesSettingsStore, treeFoldersStore }) => {
     displayFileExtension,
     setDisplayFileExtension,
     getFilesSettings,
+    cancellationNotification,
+    setCancellationNotification,
   } = filesSettingsStore;
 
   const { myFolderId, commonFolderId } = treeFoldersStore;
@@ -194,5 +210,7 @@ export default inject(({ filesSettingsStore, treeFoldersStore }) => {
     displayFileExtension,
     setDisplayFileExtension,
     getFilesSettings,
+    cancellationNotification,
+    setCancellationNotification,
   };
 })(observer(FileManagement));

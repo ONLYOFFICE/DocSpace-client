@@ -91,7 +91,7 @@ const ProgressList = observer(
         {primaryOperations.map((item) => (
           <div
             key={`${item.operation}`}
-            className={`progress-list ${primaryOperations.length > 0 ? "withHover" : ""}`}
+            className={`progress-list ${onOpenPanel ? "withHover" : ""}`}
           >
             <ProgressBarMobile
               completed={item.completed}

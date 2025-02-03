@@ -102,13 +102,11 @@ class PrimaryProgressDataStore {
       if (progressInfo.alert && !disableUploadPanelOpen) {
         this.setNeedErrorChecking(true);
       }
-      if (progressInfo.completed && disableUploadPanelOpen) {
-        progressInfo.immediateHide = true;
-      }
 
       this.primaryOperationsArray[operationIndex] = {
         ...operationObject,
         ...progressInfo,
+        disableOpenPanel: disableUploadPanelOpen,
       };
     } else {
       const progress = {
@@ -117,6 +115,7 @@ class PrimaryProgressDataStore {
         items: [progressInfo],
         label: getOperationsProgressTitle(operation),
         completed: progressInfo.completed,
+        disableOpenPanel: disableUploadPanelOpen,
       };
 
       this.primaryOperationsArray = [...this.primaryOperationsArray, progress];

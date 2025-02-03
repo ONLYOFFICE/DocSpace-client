@@ -36,7 +36,10 @@
 .progressHeader {
   color: var(--text-primary);
   margin-right: 8px;
-  cursor: pointer;
+
+  &.withClick {
+    cursor: pointer;
+  }
 }
 
 .progressInfoWrapper {

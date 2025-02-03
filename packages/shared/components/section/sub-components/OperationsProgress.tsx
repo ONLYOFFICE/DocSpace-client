@@ -213,13 +213,25 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     cancelUpload?.(t);
   };
 
+  const disableOpenPanel =
+    primaryActiveOperations.length === 1 &&
+    primaryActiveOperations[0].disableOpenPanel;
+
+  const isLaterHide = () => {
+    if (disableOpenPanel) return false;
+
+    if (primaryActiveOperations.length > 0) return true;
+
+    return false;
+  };
+
   return (
     <div
       ref={containerRef}
       className={classNames(styles.progressBarContainer, {
         [styles.autoHide]:
           !isOpenDropdown && operationsCompleted && !needErrorChecking,
-        [styles.laterHide]: primaryActiveOperations.length > 0,
+        [styles.laterHide]: isLaterHide(),
         [styles.mainButtonVisible]: mainButtonVisible,
       })}
     >
@@ -264,7 +276,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
             clearPrimaryProgressData?.(operationName)
           }
           onCancel={onCancelOperation}
-          onOpenPanel={onOpenPanel}
+          {...(!disableOpenPanel && { onOpenPanel })}
         />
       </DropDown>
     </div>

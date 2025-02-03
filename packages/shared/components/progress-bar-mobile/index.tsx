@@ -105,7 +105,12 @@ const ProgressBarMobile = ({
           </div>
           <div className={styles.labelWrapper}>
             <Text
-              className={styles.progressHeader}
+              className={classNames(
+                (styles.progressHeader,
+                {
+                  [styles.withClick]: onOpenPanel,
+                }),
+              )}
               fontSize="14px"
               fontWeight={600}
               truncate

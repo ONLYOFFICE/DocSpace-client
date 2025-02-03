@@ -110,8 +110,6 @@
   "MarkRead": "Označit jako přečtené",
   "Media": "Média",
   "MobileEditPdfNotAvailableInfo": "Nepodporovaná akce. Chcete-li upravovat soubory PDF nebo vytvářet formuláře PDF, přepněte prosím do režimu počítače.",
-  "MoveItem": "<strong>{{title}}</strong> přesunuty",
-  "MoveItems": "Prvky <strong>{{qty}}</strong> byly přesunuty",
   "MoveOrCopy": "Přesunout nebo kopírovat",
   "MoveToArchive": "Přesunout do archivu",
   "MoveToPublicRoom": "Tato místnost a veškerý její obsah jsou k dispozici komukoli, kdo má k dispozici odkaz. Chcete pokračovat?",

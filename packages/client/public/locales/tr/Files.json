@@ -110,8 +110,6 @@
   "MarkRead": "Okundu olarak işaretle",
   "Media": "Medya",
   "MobileEditPdfNotAvailableInfo": "Desteklenmeyen işlem. PDF'leri düzenleyebilmek veya PDF formları oluşturabilmek için lütfen masaüstü moduna geçin.",
-  "MoveItem": "<strong>{{title}}</strong> taşındı",
-  "MoveItems": "<strong>{{qty}}</strong> öğeler taşındı",
   "MoveOrCopy": "Taşı veya kopyala",
   "MoveToArchive": "Arşive taşı",
   "MoveToPublicRoom": "Bu oda ve tüm içeriği, bağlantıya sahip olan herkesin kullanımına açıktır. Devam etmek istiyor musunuz?",

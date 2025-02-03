@@ -110,8 +110,6 @@
   "MarkRead": "Đánh dấu là đã đọc",
   "Media": "Phương tiện",
   "MobileEditPdfNotAvailableInfo": "Hành động không được hỗ trợ. Vui lòng chuyển sang chế độ máy tính để có thể chỉnh sửa tập tin PDF hoặc tạo biểu mẫu PDF.",
-  "MoveItem": "<strong>{{title}}</strong> đã được chuyển ",
-  "MoveItems": "<strong>{{qty}}</strong> thành phần đã được chuyển ",
   "MoveOrCopy": "Di chuyển hoặc Sao chép",
   "MoveToArchive": "Di chuyển đến sao lưu",
   "MoveToPublicRoom": "Phòng này và tất cả nội dung của nó đều khả dụng cho bất kỳ ai có liên kết. Bạn có muốn tiếp tục không?",

@@ -110,8 +110,6 @@
   "MarkRead": "Atzīmēt kā lasītu",
   "Media": "Multivide",
   "MobileEditPdfNotAvailableInfo": "Neatbalstīta darbība. Lai varētu rediģēt PDF failus vai izveidot PDF veidlapas, pārslēdzieties uz darbvirsmas režīmu.",
-  "MoveItem": "<strong>{{title}}</strong> pārvietots",
-  "MoveItems": "<strong>{{qty}}</strong> elementi ir pārvietoti",
   "MoveOrCopy": "Pārvietot vai kopēt",
   "MoveToArchive": "Pārvietot uz arhīvu",
   "MoveToPublicRoom": "Šī telpa un viss tās saturs ir pieejams ikvienam, kam ir saite. Vai vēlaties turpināt?",

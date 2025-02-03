@@ -116,8 +116,6 @@
   "MarkRead": "Označi kao pročitano",
   "Media": "Mediji",
   "MobileEditPdfNotAvailableInfo": "Nepodržana akcija. Molimo Vas da pređete na desktop režim da biste mogli da uređujete PDF-ove ili kreirate PDF obrasce.",
-  "MoveItem": "<strong>{{title}}</strong> pomereno",
-  "MoveItems": "<strong>{{qty}}</strong> elementi su pomereni",
   "MoveOrCopy": "Pomeri ili kopiraj",
   "MoveToArchive": "Pomeri u arhivu",
   "MoveToPublicRoom": "Ova soba i sav njen sadržaj su dostupni svima sa linkom. Da li želite da nastavite?",

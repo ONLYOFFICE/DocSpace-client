@@ -110,8 +110,6 @@
   "MarkRead": "Merkitse luetuksi",
   "Media": "Media",
   "MobileEditPdfNotAvailableInfo": "Tätä toimintoa ei tueta. Ole hyvä ja vaihda työpöytätilaan voidaksesi muokata tai luoda PDF-lomakkeita.",
-  "MoveItem": "<strong> {{title}} </strong> siirretty",
-  "MoveItems": "<strong> {{qty}} </strong> elementtiä on siirretty",
   "MoveOrCopy": "Siirrä tai Kopioi",
   "MoveToArchive": "Siirrä arkistoon",
   "MoveToPublicRoom": "Tämä huone ja kaikki sen sisältö on saatavilla kaikille linkin kautta. Haluatko jatkaa?",

@@ -110,8 +110,6 @@
   "MarkRead": "Marcar como lido",
   "Media": "Multimédia",
   "MobileEditPdfNotAvailableInfo": "Ação sem suporte. Mude para o modo desktop para poder editar PDFs ou criar formulários PDF.",
-  "MoveItem": "<strong>{{title}}</strong> movido",
-  "MoveItems": "<strong>{{qty}}</strong> elementos foram movidos",
   "MoveOrCopy": "Mover ou copiar",
   "MoveToArchive": "Mover para o arquivo",
   "MoveToPublicRoom": "Esta sala e todo o seu conteúdo estão disponíveis para qualquer pessoa com o link. Você quer continuar?",

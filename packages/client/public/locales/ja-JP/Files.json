@@ -115,8 +115,6 @@
   "MarkRead": "既読にする",
   "Media": "メディア",
   "MobileEditPdfNotAvailableInfo": "サポートされていない操作。PDFを編集したり、PDFフォームを作成したりするには、デスクトップモードに切り替えてください。",
-  "MoveItem": "<strong>{{title}}</strong>を移動した",
-  "MoveItems": "<strong>{{qty}}</strong>の要素が移動しました",
   "MoveOrCopy": "移動またはコピーする",
   "MoveToArchive": "アーカイブに移動する",
   "MoveToPublicRoom": "このルームとすべてのコンテンツは、リンクがあれば誰でも利用できます。このまま続けますか？",

@@ -110,8 +110,6 @@
   "MarkRead": "읽은 것으로 표시",
   "Media": "미디어",
   "MobileEditPdfNotAvailableInfo": "지원되지 않는 작업입니다. PDF를 편집하거나 PDF 양식을 만들려면 데스크탑 모드로 전환하세요.",
-  "MoveItem": "<strong>{{title}}</strong> 이동 완료",
-  "MoveItems": "<strong>{{qty}}</strong> 요소 이동 완료",
   "MoveOrCopy": "이동 또는 복사",
   "MoveToArchive": "아카이브로 이동",
   "MoveToPublicRoom": "링크를 가진 누구나 이 방과 이 방의 모든 콘텐츠를 사용할 수 있습니다. 계속 하시겠습니까?",

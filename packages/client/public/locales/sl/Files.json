@@ -110,8 +110,6 @@
   "MarkRead": "Označi kot prebrano",
   "Media": "Medij",
   "MobileEditPdfNotAvailableInfo": "Nepodprto dejanje. Preklopite v namizni način, da boste lahko urejali datoteke PDF ali ustvarjali obrazce PDF.",
-  "MoveItem": "<strong>{{title}}</strong> premaknjen",
-  "MoveItems": "<strong>{{qty}}</strong> elementov je bilo premaknjenih",
   "MoveOrCopy": "Premakni ali kopiraj",
   "MoveToArchive": "Premakni v arhiv",
   "MoveToPublicRoom": "Ta soba in vsa njena vsebina so na voljo vsem s povezavo. Želite nadaljevati?",

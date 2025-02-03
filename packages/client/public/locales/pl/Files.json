@@ -110,8 +110,6 @@
   "MarkRead": "Oznacz jako przeczytane",
   "Media": "Media",
   "MobileEditPdfNotAvailableInfo": "Nieobsługiwane działanie. Włącz tryb pulpitu, aby móc edytować pliki PDF lub tworzyć formularze PDF.",
-  "MoveItem": "Przeniesiono <strong>{{title}}</strong>",
-  "MoveItems": "Przeniesiono <strong>{{qty}}</strong> element(y/ów)",
   "MoveOrCopy": "Przenieś lub kopiuj",
   "MoveToArchive": "Przenieś do archiwum",
   "MoveToPublicRoom": "Ten pokój i cała jego zawartość są dostępne dla każdego, kto ma link. Kontynuować?",

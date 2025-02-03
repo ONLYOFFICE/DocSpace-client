@@ -115,8 +115,6 @@
   "MarkRead": "Marchează ca citit",
   "Media": "Media",
   "MobileEditPdfNotAvailableInfo": "Acțiunea nu este acceptată. Treceți la modul desktop pentru a putea modifica fișiere PDF sau crea formulare PDF.",
-  "MoveItem": "<strong>{{title}}</strong> deplasat",
-  "MoveItems": "<strong>{{qty}}</strong> elemente au fost deplasate",
   "MoveOrCopy": "Mutare sau copiere",
   "MoveToArchive": "Mutare în arhivă",
   "MoveToPublicRoom": "Această sala și tot conținutul vor fi disponibile tuturor pe link-ul. Doriți să continuați?",

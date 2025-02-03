@@ -115,8 +115,6 @@
   "MarkRead": "标记为已读",
   "Media": "媒体",
   "MobileEditPdfNotAvailableInfo": "不支持该操作。切换到桌面模式才能编辑 PDF 或创建 PDF 表单。",
-  "MoveItem": "<strong>{{title}}</strong>已移动",
-  "MoveItems": "<strong>{{qty}}</strong>元素已移动",
   "MoveOrCopy": "移动或复制",
   "MoveToArchive": "移动至存档",
   "MoveToPublicRoom": "任何人都可以通过此链接访问此房间及房间中的所有内容。您要继续吗？",

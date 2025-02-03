@@ -115,8 +115,6 @@
   "MarkRead": "Als gelesen kennzeichnen",
   "Media": "Medien",
   "MobileEditPdfNotAvailableInfo": "Nicht unterstützte Aktion. Bitte wechseln Sie in den Desktopmodus, um PDFs bearbeiten oder PDF-Formulare erstellen zu können.",
-  "MoveItem": "<strong>{{title}}</strong> verschoben",
-  "MoveItems": "Elemente verschoben: <strong>{{qty}}</strong>",
   "MoveOrCopy": "Verschieben oder kopieren",
   "MoveToArchive": "Ins Archiv verschieben",
   "MoveToPublicRoom": "Dieser Raum und sein gesamter Inhalt sind für jeden mit dem Link zugänglich. Möchten Sie fortfahren?",

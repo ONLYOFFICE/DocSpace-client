@@ -110,8 +110,6 @@
   "MarkRead": "ضع إشارة مقروء",
   "Media": "الوسائط",
   "MobileEditPdfNotAvailableInfo": "إجراء غير معتمد. يرجى التبديل إلى وضع سطح المكتب لتتمكن من تحرير ملفات PDF أو إنشاء نماذج PDF.",
-  "MoveItem": "تم نقل <strong> {{title}} </strong>",
-  "MoveItems": "تم نقل العناصر <strong> {{qty}} </strong>",
   "MoveOrCopy": "انقل أو انسخ",
   "MoveToArchive": "انقل إلى الأرشيف",
   "MoveToPublicRoom": "هذه الغرفة وكافة محتوياتها متاحة لأي شخص لديه الرابط. هل تريد المتابعة؟",

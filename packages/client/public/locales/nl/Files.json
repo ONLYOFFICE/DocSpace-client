@@ -110,8 +110,6 @@
   "MarkRead": "Markeer als gelezen",
   "Media": "Media",
   "MobileEditPdfNotAvailableInfo": "Niet-ondersteunde handeling. Schakel over naar de desktopmodus om PDF's te bewerken of PDF formulieren te maken.",
-  "MoveItem": "<strong>{{title}}</strong> verplaatst",
-  "MoveItems": "<strong>{{qty}}</strong> elementen zijn verplaatst",
   "MoveOrCopy": "Verplaats of kopieer",
   "MoveToArchive": "Verplaatsen naar archief",
   "MoveToPublicRoom": "Deze kamer en alle inhoud zijn beschikbaar voor iedereen met de link. Wilt u doorgaan?",

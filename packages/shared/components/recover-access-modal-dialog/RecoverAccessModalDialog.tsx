@@ -177,7 +177,7 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
             isVertical
             hasError={descErr}
             labelVisible={false}
-            className="textarea"
+            className={styles.textarea}
             key="text-description"
             errorMessage={t("Common:RequiredField")}
             testId="recover-access-modal-description-container"
@@ -197,7 +197,6 @@ const RecoverAccessModalDialog: React.FC<RecoverAccessModalDialogProps> = ({
               aria-label="Problem description"
               aria-invalid={descErr}
               aria-required="true"
-              className={styles.textarea}
             />
           </FieldContainer>
         </div>

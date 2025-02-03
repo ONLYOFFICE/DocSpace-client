@@ -137,7 +137,7 @@ const DateTimePicker = (props: DateTimePickerProps) => {
               tabIndex={0}
             >
               <ClockIcon
-                className="clockIcon"
+                className={styles.clockIcon}
                 aria-hidden="true"
                 data-testid="date-time-picker-clock-icon"
               />

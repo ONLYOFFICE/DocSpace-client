@@ -368,8 +368,6 @@ class UploadDataStore {
       this.convertFilesSize = 0;
       if (!secondConvertingWithPassword)
         this.files = this.files.filter((f) => f.action === "converted");
-
-      //  this.primaryProgressDataStore.clearPrimaryProgressData();
     }
 
     if (secondConvertingWithPassword) {
@@ -1580,18 +1578,9 @@ class UploadDataStore {
     });
 
     setTimeout(() => {
-      // if (!this.primaryProgressDataStore.alert) {
-      // this.primaryProgressDataStore.clearPrimaryProgressData();
-      //  }
-
       if (this.uploadPanelVisible || this.primaryProgressDataStore.alert) {
         uploadData.files = this.files;
         uploadData.filesToConversion = this.filesToConversion;
-      } else {
-        // uploadData.files = [];
-        // uploadData.filesToConversion = [];
-        // this.isUploadingAndConversion = false;
-        // this.isUploading = false;
       }
 
       this.setUploadData(uploadData);
@@ -1882,11 +1871,6 @@ class UploadDataStore {
 
     setActiveFiles(newActiveFiles);
     setActiveFolders(newActiveFolders);
-  };
-
-  clearUploadedFilesHistory = () => {
-    this.primaryProgressDataStore.clearPrimaryProgressData();
-    this.uploadedFilesHistory = [];
   };
 }
 

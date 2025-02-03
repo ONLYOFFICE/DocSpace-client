@@ -304,9 +304,9 @@ class FilesActionStore {
   };
 
   createFoldersTree = async (t, files, folderId) => {
-    console.log("createFoldersTree", files, folderId);
+    //  console.log("createFoldersTree", files, folderId);
 
-    const { setPrimaryProgressBarData, clearPrimaryProgressData } =
+    const { setPrimaryProgressBarData } =
       this.uploadDataStore.primaryProgressDataStore;
 
     const roomFolder =
@@ -319,6 +319,12 @@ class FilesActionStore {
       return !isHidden;
     });
 
+    const pbData = {
+      operation: OPERATIONS_NAME.upload,
+      percent: 0,
+      completed: false,
+    };
+
     if (roomFolder && roomFolder.quotaLimit && roomFolder.quotaLimit !== -1) {
       const freeSpace = roomFolder.quotaLimit - roomFolder.usedSpace;
 
@@ -327,7 +333,12 @@ class FilesActionStore {
       }, 0);
 
       if (filesSize > freeSpace) {
-        clearPrimaryProgressData();
+        setPrimaryProgressBarData({
+          ...pbData,
+          completed: true,
+          alert: true,
+          disableUploadPanelOpen: true,
+        });
 
         const size = getConvertedSize(t, roomFolder.quotaLimit);
 
@@ -341,12 +352,6 @@ class FilesActionStore {
 
     const toFolderId = folderId || this.selectedFolderStore.id;
 
-    const pbData = {
-      operation: "upload",
-      percent: 0,
-      completed: false,
-    };
-
     setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
 
     const tree = this.convertToTree(withoutHiddenFiles);
@@ -355,7 +360,12 @@ class FilesActionStore {
     await this.createFolderTree(tree, toFolderId, filesList);
 
     if (!filesList.length) {
-      setTimeout(() => clearPrimaryProgressData(), TIMEOUT);
+      setPrimaryProgressBarData({
+        ...pbData,
+        completed: true,
+        alert: true,
+        disableUploadPanelOpen: true,
+      });
     } else {
       setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: false });
     }

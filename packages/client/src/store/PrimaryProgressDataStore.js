@@ -86,7 +86,11 @@ class PrimaryProgressDataStore {
   }
 
   setPrimaryProgressBarData = (primaryProgressData) => {
-    const { operation, ...progressInfo } = primaryProgressData;
+    const { operation, disableUploadPanelOpen, ...progressInfo } =
+      primaryProgressData;
+
+    if (typeof disableUploadPanelOpen !== "undefined")
+      this.disableUploadPanelOpen = disableUploadPanelOpen;
 
     const operationIndex = this.primaryOperationsArray.findIndex(
       (object) => object.operation === operation,
@@ -95,8 +99,11 @@ class PrimaryProgressDataStore {
     if (operationIndex !== -1) {
       const operationObject = this.primaryOperationsArray[operationIndex];
 
-      if (progressInfo.alert) {
+      if (progressInfo.alert && !disableUploadPanelOpen) {
         this.setNeedErrorChecking(true);
+      }
+      if (progressInfo.completed && disableUploadPanelOpen) {
+        progressInfo.immediateHide = true;
       }
 
       this.primaryOperationsArray[operationIndex] = {
@@ -116,10 +123,10 @@ class PrimaryProgressDataStore {
     }
   };
 
-  clearPrimaryProgressData = (operation, allOperations) => {
+  clearPrimaryProgressData = (operation) => {
     this.setNeedErrorChecking(false);
 
-    if (allOperations) {
+    if (!operation) {
       const incompleteOperations = this.primaryOperationsArray.filter(
         (item) => !item.completed,
       );

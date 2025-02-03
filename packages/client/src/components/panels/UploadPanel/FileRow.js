@@ -223,21 +223,16 @@ class FileRow extends Component {
     const {
       setMediaViewerData,
       setUploadPanelVisible,
-      clearUploadedFilesHistory,
+
       isMediaActive,
       setCurrentItem,
       item,
-      uploaded,
     } = this.props;
     if (!isMediaActive) setCurrentItem(item);
 
     const data = { visible: true, id };
     setMediaViewerData(data);
     setUploadPanelVisible(false);
-
-    if (uploaded) {
-      clearUploadedFilesHistory();
-    }
   };
 
   onButtonClick = () => {
@@ -512,7 +507,6 @@ export default inject(
       removeFileFromList,
       convertFile,
       files: uploadedFiles,
-      clearUploadedFilesHistory,
     } = uploadDataStore;
     const { playlist, setMediaViewerData, setCurrentItem } =
       mediaViewerDataStore;
@@ -548,7 +542,6 @@ export default inject(
       setUploadPanelVisible,
 
       setCurrentItem,
-      clearUploadedFilesHistory,
 
       isPlugin,
       onPluginClick,

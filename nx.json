@@ -13,6 +13,10 @@
       "cache": true,
       "outputs": ["{projectRoot}/.next", "{projectRoot}/dist"]
     },
+	"deploy": {
+      "cache": true,
+      "outputs": ["{projectRoot}/.next", "{projectRoot}/dist"]
+    },
     "storybook-build": {
       "cache": true,
       "outputs": ["{projectRoot}/storybook-static"]

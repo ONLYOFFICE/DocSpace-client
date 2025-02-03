@@ -46,6 +46,7 @@ import { IconButton } from "../icon-button";
 import { getRoomTitle } from "./RoomIcon.utils";
 import styles from "./RoomIcon.module.scss";
 import type { RoomIconProps } from "./RoomIcon.types";
+import { Tooltip } from "../tooltip";
 
 const RoomIcon = ({
   title,
@@ -65,6 +66,8 @@ const RoomIcon = ({
   onChangeFile,
   isEmptyIcon,
   dropDownManualX,
+  tooltipContent,
+  tooltipId,
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
   const [openEditLogo, setOpenLogoEdit] = React.useState(false);
@@ -139,6 +142,12 @@ const RoomIcon = ({
       setCorrectImage(false);
     };
   }, [imgSrc]);
+
+  const getContent = () => (
+    <Text fontSize="12px" fontWeight={400} noSelect>
+      {tooltipContent}
+    </Text>
+  );
 
   React.useEffect(() => {
     prefetchImage();
@@ -285,6 +294,7 @@ const RoomIcon = ({
             data-testid="badge-container"
           >
             <IconButton
+              data-tooltip-id={tooltipId}
               onClick={onBadgeClick}
               iconName={badgeUrl}
               size={isBigSize ? 28 : 12}
@@ -292,11 +302,16 @@ const RoomIcon = ({
                 styles.roomIconButton,
                 {
                   [styles.isBig]: isBigSize,
+                  [styles.isHovered]: !!tooltipContent,
                 },
                 "room-icon_button",
               )}
               isFill
             />
+
+            {tooltipContent ? (
+              <Tooltip id={tooltipId} getContent={getContent} place="bottom" />
+            ) : null}
           </div>
         ) : null}
 

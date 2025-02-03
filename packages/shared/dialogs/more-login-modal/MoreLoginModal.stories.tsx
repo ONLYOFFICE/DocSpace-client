@@ -30,7 +30,7 @@ import { Meta, StoryFn } from "@storybook/react";
 import MoreLoginModal from "./index";
 import type { MoreLoginModalProps } from "./MoreLoginModal.types";
 
-import { Button } from "../button";
+import { Button } from "../../components/button";
 
 const mockTranslation = (key: string) => {
   const translations: { [key: string]: string } = {
@@ -43,7 +43,7 @@ const mockTranslation = (key: string) => {
 };
 
 export default {
-  title: "Components/MoreLoginModal",
+  title: "Dialogs/MoreLoginModal",
   component: MoreLoginModal,
   argTypes: {
     onClose: { action: "onClose" },

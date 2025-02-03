@@ -29,10 +29,10 @@ import { ReactSVG } from "react-svg";
 
 import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
 
-import { Text } from "../text";
-import { Button, ButtonSize } from "../button";
+import { Text } from "../../components/text";
+import { Button, ButtonSize } from "../../components/button";
 import { PROVIDERS_DATA } from "../../constants";
-import { ModalDialog, ModalDialogType } from "../modal-dialog";
+import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import { getProviderLabel } from "../../utils/common";
 
 import type {

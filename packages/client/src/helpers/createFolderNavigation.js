@@ -16,7 +16,18 @@ export const createFolderNavigation = async (
 ) => {
   if (!item) return { url: "", state: {} };
 
-  const { isRoom, rootFolderType, id, roomType: itemRoomType, title } = item;
+  const {
+    isRoom,
+    rootFolderType,
+    id,
+    roomType: itemRoomType,
+    title,
+    shared,
+    external,
+    navigationPath,
+    lifetime,
+    security,
+  } = item;
 
   const path = getCategoryUrl(
     getCategoryTypeByFolderType(rootFolderType, id),
@@ -52,11 +63,10 @@ export const createFolderNavigation = async (
     if (shareKey) filter.key = shareKey;
   }
 
-  const isShared =
-    item.shared || item.navigationPath?.findIndex((r) => r.shared) > -1;
+  const isShared = shared || navigationPath?.findIndex((r) => r.shared) > -1;
 
   const isExternal =
-    item.external || item.navigationPath?.findIndex((r) => r.external) > -1;
+    external || navigationPath?.findIndex((r) => r.external) > -1;
 
   const state = {
     title,
@@ -67,9 +77,8 @@ export const createFolderNavigation = async (
     isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
     isShared,
     isExternal,
-    canCreate: item.security?.canCreate,
-    isLifetimeEnabled:
-      itemRoomType === RoomsType.VirtualDataRoom && !!item?.lifetime,
+    canCreate: security?.canCreate,
+    isLifetimeEnabled: itemRoomType === RoomsType.VirtualDataRoom && !!lifetime,
   };
   const url = `${path}?${filter.toUrlParams()}`;
 

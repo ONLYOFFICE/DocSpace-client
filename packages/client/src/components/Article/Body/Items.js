@@ -165,6 +165,7 @@ const Item = ({
       className="document-catalog"
     >
       <ArticleItem
+        item={item}
         key={item.id}
         id={item.id}
         title={item.title}
@@ -291,8 +292,8 @@ const Items = ({
   );
 
   const onMoveTo = React.useCallback(
-    (destFolderId, title) => {
-      moveDragItems(destFolderId, title);
+    (destFolderId, title, destFolderInfo) => {
+      moveDragItems(destFolderId, title, destFolderInfo);
     },
     [moveDragItems],
   );

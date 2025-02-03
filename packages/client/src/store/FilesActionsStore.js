@@ -1660,7 +1660,7 @@ class FilesActionStore {
       );
   };
 
-  moveDragItems = (destFolderId, folderTitle) => {
+  moveDragItems = (destFolderId, folderTitle, destFolderInfo) => {
     const folderIds = [];
     const fileIds = [];
     const deleteAfter = false;
@@ -1680,6 +1680,7 @@ class FilesActionStore {
 
     const operationData = {
       destFolderId,
+      destFolderInfo,
       folderIds,
       fileIds,
       deleteAfter,
@@ -1754,7 +1755,6 @@ class FilesActionStore {
         await this.uploadDataStore.itemOperationToFolder(operationData);
       } catch (err) {
         setBufferSelection(null);
-        return toastr.error(err.message ? err.message : err);
       }
     }
   };

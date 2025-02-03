@@ -88,6 +88,7 @@ const SectionBodyContent = (props) => {
     isIndexEditingMode,
     changeIndex,
     isErrorRoomNotAvailable,
+    getSelectedFolder,
   } = props;
 
   useEffect(() => {
@@ -269,9 +270,9 @@ const SectionBodyContent = (props) => {
     }
   };
 
-  const onMoveTo = (destFolderId, title) => {
+  const onMoveTo = (destFolderId, title, destFolderInfo) => {
     const id = Number.isNaN(+destFolderId) ? destFolderId : +destFolderId;
-    moveDragItems(id, title);
+    moveDragItems(id, title, destFolderInfo);
   };
 
   const onMouseUp = (e) => {
@@ -308,7 +309,13 @@ const SectionBodyContent = (props) => {
       ? value.split("_").slice(1, -3).join("_")
       : treeValue;
 
-    if (!isIndexEditingMode) return onMoveTo(selectedFolderId, title);
+    const selectedFolder = getSelectedFolder();
+    const destFolderInfo = selectedFolder.folders.find(
+      (folder) => folder.id == selectedFolderId,
+    );
+
+    if (!isIndexEditingMode)
+      return onMoveTo(selectedFolderId, title, destFolderInfo);
     if (filesList.length === 1) return;
 
     const replaceableItemId = Number.isNaN(+selectedFolderId)
@@ -463,6 +470,7 @@ export default inject(
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
+      getSelectedFolder: selectedFolderStore.getSelectedFolder,
     };
   },
 )(

@@ -31,9 +31,42 @@ import type { SocialButtonProps } from "./SocialButtonsGroup.types";
 export default {
   title: "Components/SocialButtonsGroup",
   component: SocialButtonsGroup,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "A group of social login buttons with support for SSO and additional providers through a 'More' button",
+      },
+    },
+  },
   argTypes: {
-    onClick: { action: "clicked" },
-    onMoreAuthToggle: { action: "more auth toggled" },
+    providers: {
+      control: "object",
+      description:
+        "Array of social providers configuration. Each provider has properties: provider (string), url (string), linked (boolean)",
+    },
+    onClick: {
+      action: "clicked",
+      description:
+        "Callback function triggered when a social button is clicked",
+    },
+    onMoreAuthToggle: {
+      action: "more auth toggled",
+      description:
+        "Callback function triggered when the 'More' button is clicked to show additional providers",
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "When true, disables all social buttons in the group",
+    },
+    ssoUrl: {
+      control: "text",
+      description: "URL for Single Sign-On (SSO) authentication",
+    },
+    ssoLabel: {
+      control: "text",
+      description: "Label text for the SSO button",
+    },
   },
 } as Meta;
 

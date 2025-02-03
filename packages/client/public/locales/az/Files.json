@@ -27,8 +27,6 @@
   "Clean": "Təmizləyin",
   "ContainsSpecCharacter": "Başlıqda aşağıdakı simvollardan heç biri ola bilməz: *+: \"<>? |/ ",
   "Convert": "Konvertasiya",
-  "CopyItem": "<strong>{{title}}</strong> köçürüldü",
-  "CopyItems": "<strong>{{qty}}</strong> elementlər köçürüldü",
   "CopyLink": "Linki kopyalayın",
   "CopyLinkPassword": "Keçid şifrəsini nüsxələyin",
   "CopyPassword": "Şifrəni nüsxələyin",

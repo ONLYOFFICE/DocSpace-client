@@ -27,8 +27,6 @@
   "Clean": "Reinig",
   "ContainsSpecCharacter": "De titel mag geen van de volgende tekens bevatten: *+:\"<>?|/",
   "Convert": "Converteren",
-  "CopyItem": "<strong>{{title}}</strong> gekopieerd",
-  "CopyItems": "<strong>{{qty}}</strong> elementen gekopieerd",
   "CopyLink": "Kopieer link",
   "CopyLinkPassword": "Kopieer link wachtwoord",
   "CopyPassword": "Kopieer wachtwoord",

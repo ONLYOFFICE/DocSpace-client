@@ -27,8 +27,6 @@
   "Clean": "Очистити",
   "ContainsSpecCharacter": "Наслов не сме да садржи било који од следећих знакова: *+:\"<>?||/",
   "Convert": "Конвертуј",
-  "CopyItem": "<strong> {{title}}</strong> копирано",
-  "CopyItems": "<strong> {{qty}}</strong> елементи копирани",
   "CopyLink": "Копирај линк",
   "CopyLinkPassword": "Копирај лозинку линка",
   "CopyPassword": "Копирај лозинку",

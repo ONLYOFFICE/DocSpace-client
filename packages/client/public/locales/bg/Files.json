@@ -27,8 +27,6 @@
   "Clean": "Изчисти",
   "ContainsSpecCharacter": "Заглавието не може да съдържа някой от следните символи: *+:\"<>?|/",
   "Convert": "Конвертирай",
-  "CopyItem": "<strong>{{title}}</strong> е копиран",
-  "CopyItems": "<strong>{{qty}}</strong> елемента са копирани",
   "CopyLink": "Копиране на линка",
   "CopyLinkPassword": "Копирай парола на линка",
   "CopyPassword": "Копирай парола",

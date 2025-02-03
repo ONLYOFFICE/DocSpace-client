@@ -27,8 +27,6 @@
   "Clean": "Limpar",
   "ContainsSpecCharacter": "O título não pode conter nenhum dos seguintes caracteres: *+:\"<>?|/",
   "Convert": "Converter",
-  "CopyItem": "<strong>{{title}}</strong> copiado",
-  "CopyItems": "<strong>{{qty}}</strong> elementos copiados",
   "CopyLink": "Copiar link",
   "CopyLinkPassword": "Copiar senha do link",
   "CopyPassword": "Copiar senha",

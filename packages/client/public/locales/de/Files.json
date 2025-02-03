@@ -27,8 +27,6 @@
   "Clean": "Löschen",
   "ContainsSpecCharacter": "Der Titel darf diese Symbole nicht beinhalten: *+:\"<>?|/",
   "Convert": "Konvertierung",
-  "CopyItem": "<strong>{{title}}</strong> kopiert",
-  "CopyItems": "Elemente kopiert: <strong>{{qty}}</strong>",
   "CopyLink": "Link kopieren",
   "CopyLinkPassword": "Passwort für Link kopieren",
   "CopyPassword": "Passwort kopieren",

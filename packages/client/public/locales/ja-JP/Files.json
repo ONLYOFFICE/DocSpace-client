@@ -27,8 +27,6 @@
   "Clean": "クリア",
   "ContainsSpecCharacter": "タイトルには以下の文字*+:\"<>?|/は使用できません。",
   "Convert": "変換",
-  "CopyItem": "<strong>{{title}}</strong>のコピー",
-  "CopyItems": "<strong>{{qty}}</strong>要素のコピー",
   "CopyLink": "リンクをコピーする",
   "CopyLinkPassword": "リンクパスワードをコピー",
   "CopyPassword": "パスワードをコピーする",

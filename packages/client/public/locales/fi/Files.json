@@ -27,8 +27,6 @@
   "Clean": "Puhdista",
   "ContainsSpecCharacter": "Otsikko ei voi sisältää mitään seuraavista merkeistä: *+: \"<>? |/",
   "Convert": "Muunna",
-  "CopyItem": "<strong> {{title}} </strong> kopioitu",
-  "CopyItems": "<strong> {{qty}} </strong> elementtiä kopioitu",
   "CopyLink": "Kopioi linkki",
   "CopyLinkPassword": "Kopioi linkin salasana",
   "CopyPassword": "Kopioi salasana",

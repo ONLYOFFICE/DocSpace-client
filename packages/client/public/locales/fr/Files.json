@@ -27,8 +27,6 @@
   "Clean": "Effacer",
   "ContainsSpecCharacter": "Le titre ne peut contenir aucun des caractères suivants : *+ :\"<>?|/",
   "Convert": "Conversion",
-  "CopyItem": "<strong>{{title}}</strong> copié",
-  "CopyItems": "<strong>{{qty}}</strong> éléments copiés",
   "CopyLink": "Copier le lien",
   "CopyLinkPassword": "Copier le mot de passe du lien",
   "CopyPassword": "Copier le mot de passe",

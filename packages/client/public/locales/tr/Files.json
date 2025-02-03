@@ -27,8 +27,6 @@
   "Clean": "Temizle",
   "ContainsSpecCharacter": "Başlık şu karakterlerden herhangi birini içeremez:: *+:\"<>?|/",
   "Convert": "Dönüştür",
-  "CopyItem": "<strong>{{title}}</strong> kopyalandı",
-  "CopyItems": "<strong>{{qty}}</strong> öğeler kopyalandı",
   "CopyLink": "Bağlantıyı kopyala",
   "CopyLinkPassword": "Bağlantı şifresini kopyala",
   "CopyPassword": "Şifreyi kopyala",

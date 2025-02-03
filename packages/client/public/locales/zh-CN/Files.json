@@ -27,8 +27,6 @@
   "Clean": "清理",
   "ContainsSpecCharacter": "标题中不得包含任意以下字符：*+:\"<>?|/",
   "Convert": "转换",
-  "CopyItem": "<strong>{{title}}</strong>已复制",
-  "CopyItems": "<strong>{{qty}}</strong>元素已复制",
   "CopyLink": "复制链接",
   "CopyLinkPassword": "复制链接密码",
   "CopyPassword": "复制密码",

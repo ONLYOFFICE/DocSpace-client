@@ -27,8 +27,6 @@
   "Clean": "Očistiť",
   "ContainsSpecCharacter": "Názov nemôže obsahovať žiadne z nasledujúcich znakov: *+:\"<>?|/",
   "Convert": "Konvertovať",
-  "CopyItem": "<strong>{{title}}</strong> skopírované",
-  "CopyItems": "<strong>{{qty}}</strong> prvkov bolo skopírovaných",
   "CopyLink": "Kopírovať odkaz",
   "CopyLinkPassword": "Skopírovať heslo pre odkaz",
   "CopyPassword": "Kopírovať heslo",

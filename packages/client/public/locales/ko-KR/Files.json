@@ -27,8 +27,6 @@
   "Clean": "삭제",
   "ContainsSpecCharacter": "제목에는 다음 문자가 포함될 수 없습니다: *+:\"<>?|/",
   "Convert": "변환",
-  "CopyItem": "<strong>{{title}}</strong> 복사 완료",
-  "CopyItems": "<strong>{{qty}}</strong> 요소 복사 완료",
   "CopyLink": "링크 복사",
   "CopyLinkPassword": "링크 비밀번호 복사",
   "CopyPassword": "복사 비밀번호 복사",

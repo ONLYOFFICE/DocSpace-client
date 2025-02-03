@@ -24,8 +24,6 @@
   "Clean": "මකන්න",
   "ContainsSpecCharacter": "සිරැසියේ මෙවැනි අකුරු අඩංගු නොවිය යුතුය: *+:\\\"<>?|/",
   "Convert": "හරවන්න",
-  "CopyItem": "<strong>{{title}}</strong> පිටපත් විය",
-  "CopyItems": "අංග <strong>{{qty}}</strong> ක් පිටපත් විය",
   "CopyLinkPassword": "සබැඳියේ මුරපදයේ පිටපතක්",
   "CopyPassword": "මුරපදයේ පිටපතක්",
   "CopySharedLink": "බෙදාගත් සබැඳියේ පිටපතක්",

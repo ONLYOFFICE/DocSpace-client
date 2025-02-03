@@ -27,8 +27,6 @@
   "Clean": "Очистить",
   "ContainsSpecCharacter": "Название не должно содержать следующих символов: *+:\"<>?|/",
   "Convert": "Конвертация",
-  "CopyItem": "<strong>{{title}}</strong> скопирован",
-  "CopyItems": "Скопировано элементов: <strong>{{qty}}</strong>",
   "CopyLink": "Скопировать ссылку",
   "CopyLinkPassword": "Скопировать пароль для ссылки",
   "CopyPassword": "Скопировать пароль",

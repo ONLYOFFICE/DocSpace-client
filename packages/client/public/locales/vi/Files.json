@@ -27,8 +27,6 @@
   "Clean": "Xóa",
   "ContainsSpecCharacter": "Tiêu đề không được chứa bất kỳ ký tự nào sau đây: *+:\"<>?|/",
   "Convert": "Chuyển đổi",
-  "CopyItem": "<strong>{{title}}</strong> đã sao chép ",
-  "CopyItems": "<strong>{{qty}}</strong> thành phần được sao chép ",
   "CopyLink": "Sao chép liên kết",
   "CopyLinkPassword": "Sao chép liên kết mật khẩu",
   "CopyPassword": "Sao chép mật khẩu",

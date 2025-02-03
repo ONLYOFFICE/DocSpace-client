@@ -27,8 +27,6 @@
   "Clean": "تنظيف",
   "ContainsSpecCharacter": "لا يمكن أن يحتوي العنوان على أي من الأحرف التالية: * +: \\ \"<>؟ | /",
   "Convert": "تحويل",
-  "CopyItem": "تم نسخ <strong> {{title}} </strong>",
-  "CopyItems": "تم نسخ عناصر <strong> {{qty}} </strong>",
   "CopyLink": "نسخ الرابط",
   "CopyLinkPassword": "نسخ رابط كلمة المرور",
   "CopyPassword": "نسخ كلمة المرور",

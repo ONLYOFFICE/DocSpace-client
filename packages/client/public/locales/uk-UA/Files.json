@@ -27,8 +27,6 @@
   "Clean": "Очистити",
   "ContainsSpecCharacter": "Заголовок не може містити жодного з цих символів: *+:\"<>?|/",
   "Convert": "Конвертувати",
-  "CopyItem": "<strong>{{title}}</strong> скопійовано",
-  "CopyItems": "<strong>{{qty}}</strong> елемент. скопійовано",
   "CopyLink": "Копіювати посилання",
   "CopyLinkPassword": "Копіювати пароль посилання",
   "CopyPassword": "Копіювати пароль",

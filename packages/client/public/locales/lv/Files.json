@@ -27,8 +27,6 @@
   "Clean": "Notīrīt",
   "ContainsSpecCharacter": "Nosaukumā nedrīkst būt neviena no šīm rakstzīmēm: *+:\"<>?|/",
   "Convert": "Konvertēt",
-  "CopyItem": "<strong>{{title}}</strong> nokopēts",
-  "CopyItems": "<strong>{{qty}}</strong> elementi nokopēti",
   "CopyLink": "Kopēt saiti",
   "CopyLinkPassword": "Kopēt saites paroli",
   "CopyPassword": "Kopēt paroli",

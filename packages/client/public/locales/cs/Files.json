@@ -27,8 +27,6 @@
   "Clean": "Vymazat",
   "ContainsSpecCharacter": "Název nesmí obsahovat žádný z následujících znaků: *+:\"<>?|/",
   "Convert": "Konvertovat",
-  "CopyItem": "<strong>{{title}}</strong> zkopírováno",
-  "CopyItems": "Prvky <strong>{{qty}}</strong> zkopírovany",
   "CopyLink": "Kopírovat odkaz",
   "CopyLinkPassword": "Kopírovat heslo odkazu",
   "CopyPassword": "Kopírování hesla",

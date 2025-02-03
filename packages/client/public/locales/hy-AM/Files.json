@@ -27,8 +27,6 @@
   "Clean": "Մաքուր",
   "ContainsSpecCharacter": "Վերնագիրը չի կարող պարունակել հետևյալ նիշերից որևէ մեկը՝ *+:\"<>?|/",
   "Convert": "Փոխարկել",
-  "CopyItem": "<strong>{{title}}</strong> պատճենված է",
-  "CopyItems": "<strong>{{qty}}</strong> տարրերը պատճենված են",
   "CopyLink": "Պատճենել հղումը",
   "CopyLinkPassword": "Պատճենել հղման գաղտնաբառը",
   "CopyPassword": "Պատճենել գաղտնաբառը",

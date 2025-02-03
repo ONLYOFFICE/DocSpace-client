@@ -24,8 +24,6 @@
   "Clean": "ສະອາດ",
   "ContainsSpecCharacter": "ຫົວຂໍ້ບໍ່ສາມາດມີຕົວອັກສອນຕໍ່ໄປນີ້: * +: \"<>? | /",
   "Convert": "ປ່ຽນ",
-  "CopyItem": "<strong>{{title}}</strong> ຄັດລອກ",
-  "CopyItems": "<strong>{{qty}}</strong> ອົງປະກອບທີ່ຖືກຄັດລອກ",
   "CopyLink": "ສຳເນົາລິ້ງ",
   "CopyLinkPassword": "ສຳເນົາລະຫັດຜ່ານລິ້ງ",
   "CopyPassword": "ສຳເນົາລະຫັດຜ່ານ",

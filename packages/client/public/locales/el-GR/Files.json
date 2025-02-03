@@ -27,8 +27,6 @@
   "Clean": "Εκκαθάριση",
   "ContainsSpecCharacter": "Ο τίτλος δεν μπορεί να περιέχει τους ακόλουθους χαρακτήρες: *+:\"<>?|/",
   "Convert": "Μετατροπή",
-  "CopyItem": "Το <strong>{{title}}</strong> αντιγράφηκε",
-  "CopyItems": "<strong> {{qty}} </strong> στοιχεία αντιγράφηκαν",
   "CopyLink": "Αντιγραφή συνδέσμου",
   "CopyLinkPassword": "Αντιγραφή κωδικού πρόσβασης συνδέσμου",
   "CopyPassword": "Αντιγραφή κωδικού πρόσβασης",

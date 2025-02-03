@@ -49,33 +49,6 @@ const rootNodeModulesPath = path.join(
   "node_modules",
 );
 
-const libsToCopy = [
-  "pino-roll",
-  "date-fns",
-  "@serdnam",
-  "nconf",
-  "async",
-  "y18n",
-  "string-width",
-  "strip-ansi",
-  "ansi-regex",
-  "is-fullwidth-code-point",
-  "wrap-ansi",
-  "ansi-styles",
-  "escalade/sync",
-  "get-caller-file",
-  "require-directory",
-  "secure-keys",
-];
-
-libsToCopy.forEach((dir) => {
-  fs.cpSync(
-    path.join(rootNodeModulesPath, dir),
-    path.join(nodeModulesBuild, dir),
-    { recursive: true },
-  );
-});
-
 fs.cpSync(configFolder, path.join(publishPath, "config"), { recursive: true });
 
 fs.cpSync(

@@ -37,8 +37,49 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "DatePicker component",
+        component:
+          "A customizable date picker component that allows users to select dates with various configuration options.",
       },
+    },
+  },
+  argTypes: {
+    initialDate: {
+      control: "date",
+      description: "Initial selected date value in the picker",
+    },
+    maxDate: {
+      control: "date",
+      description: "Maximum selectable date",
+    },
+    minDate: {
+      control: "date",
+      description: "Minimum selectable date",
+    },
+    openDate: {
+      control: "date",
+      description: "Date to display when the calendar initially opens",
+    },
+    locale: {
+      control: "text",
+      description:
+        "Locale for date formatting and calendar display (e.g., 'en', 'ru')",
+    },
+    selectDateText: {
+      control: "text",
+      description: "Placeholder text shown when no date is selected",
+    },
+    onChange: {
+      action: "onChange",
+      description:
+        "Callback function called when the selected date changes. Receives a Moment object or null",
+    },
+    showCalendarIcon: {
+      control: "boolean",
+      description: "Whether to show the calendar icon in the input field",
+    },
+    className: {
+      control: "text",
+      description: "Additional CSS class for the date picker container",
     },
   },
 } as Meta;

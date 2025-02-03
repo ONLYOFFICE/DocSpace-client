@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Row } from "@docspace/shared/components/rows";
 import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
 
@@ -151,6 +151,15 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
     svg {
       ${({ theme }) =>
         theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
+
+      ${(props) =>
+        props.versionDeleteProcess &&
+        css`
+          path {
+            fill: rgba(208, 213, 218, 1);
+            stroke: rgba(208, 213, 218, 1);
+          }
+        `}
     }
 
     @media ${tablet} {
@@ -162,6 +171,12 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    ${(props) =>
+      props.versionDeleteProcess &&
+      css`
+        color: #a3a9ae;
+      `}
   }
   .version-link-file:first-child {
     margin-bottom: 4px;

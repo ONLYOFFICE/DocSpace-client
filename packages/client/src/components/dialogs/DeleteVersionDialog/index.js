@@ -40,8 +40,9 @@ const DeleteVersionDialogComponent = (props) => {
     setIsVisible,
     tReady,
     fileId,
-    version,
+    versionSelectedForDeletion,
     onDeleteVersionFile,
+    setVersionDeleteProcess,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -51,10 +52,16 @@ const DeleteVersionDialogComponent = (props) => {
   };
 
   const onDelete = () => {
-    console.log("onDeleteVersionFile", onDeleteVersionFile);
+    // setIsLoading(true);
+    setVersionDeleteProcess(true);
+    // console.log("onDeleteVersionFile", onDeleteVersionFile);
 
-    console.log("fileId version", fileId, version);
-    onDeleteVersionFile(+fileId, [version]);
+    console.log(
+      "fileId versionSelectedForDeletion",
+      fileId,
+      versionSelectedForDeletion,
+    );
+    onDeleteVersionFile(+fileId, [versionSelectedForDeletion]);
 
     // setIsLoading(true);
     // const newLink = JSON.parse(JSON.stringify(link));
@@ -135,8 +142,9 @@ export default inject(({ versionHistoryStore, filesActionsStore }) => {
   const {
     deleteVersionDialogVisible: visible,
     onSetDeleteVersionDialogVisible: setIsVisible,
-    version,
+    versionSelectedForDeletion,
     fileId,
+    setVersionDeleteProcess,
   } = versionHistoryStore;
   const { onDeleteVersionFile } = filesActionsStore;
 
@@ -144,7 +152,8 @@ export default inject(({ versionHistoryStore, filesActionsStore }) => {
     visible,
     setIsVisible,
     onDeleteVersionFile,
-    version,
+    versionSelectedForDeletion,
     fileId,
+    setVersionDeleteProcess,
   };
 })(observer(DeleteVersionDialog));

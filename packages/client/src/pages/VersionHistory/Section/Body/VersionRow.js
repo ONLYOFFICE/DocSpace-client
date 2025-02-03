@@ -79,6 +79,8 @@ const VersionRow = (props) => {
     openOnNewPage,
     onSetDeleteVersionDialogVisible,
     setCurrentVersion,
+    canDeleteVersion,
+    versionDeleteProcess,
   } = props;
 
   const navigate = useNavigate();
@@ -135,6 +137,7 @@ const VersionRow = (props) => {
     setShowEditPanel(!showEditPanel);
   };
   const onOpenFile = () => {
+    if (versionDeleteProcess) return;
     const { MediaView, ImageView } = info?.viewAccessibility ?? {};
 
     if (MediaView || ImageView) {
@@ -220,16 +223,18 @@ const VersionRow = (props) => {
       onClick: onDownloadAction,
       disabled: !info.security.Download,
     },
-    {
-      key: "separator",
-      isSeparator: true,
-    },
-    canChangeVersionFileHistory && {
-      key: "delete",
-      icon: DeleteIcon,
-      label: t("Common:Delete"),
-      onClick: onDeleteVersion,
-    },
+    canDeleteVersion &&
+      index !== 0 && {
+        key: "separator",
+        isSeparator: true,
+      },
+    canDeleteVersion &&
+      index !== 0 && {
+        key: "delete",
+        icon: DeleteIcon,
+        label: t("Common:Delete"),
+        onClick: onDeleteVersion,
+      },
   ];
 
   // uncomment if we want to change versions again
@@ -245,6 +250,8 @@ const VersionRow = (props) => {
     newRowHeight && onUpdateHeight(index, newRowHeight);
   }, [showEditPanel, versionsListLength]);
 
+  console.log("index versionDeleteProcess", index, versionDeleteProcess);
+
   return (
     <StyledVersionRow
       showEditPanel={showEditPanel}
@@ -254,6 +261,7 @@ const VersionRow = (props) => {
       isSavingComment={isSavingComment}
       isEditing={isEditing}
       contextTitle={t("Common:Actions")}
+      versionDeleteProcess={true || versionDeleteProcess}
     >
       <div className={`version-row_${index}`} onContextMenu={onContextMenu}>
         <Box displayProp="flex" className="row-header">
@@ -404,10 +412,12 @@ export default inject(
       setIsVerHistoryPanel,
       onSetDeleteVersionDialogVisible,
       setCurrentVersion,
+      versionDeleteProcess,
     } = versionHistoryStore;
 
     const isEdit = isEditingVersion || isEditing;
     const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
+    const canDeleteVersion = !isEdit && fileSecurity?.Delete;
 
     const { openOnNewPage } = filesSettingsStore;
 
@@ -430,6 +440,8 @@ export default inject(
       openOnNewPage,
       onSetDeleteVersionDialogVisible,
       setCurrentVersion,
+      canDeleteVersion,
+      versionDeleteProcess,
     };
   },
 )(

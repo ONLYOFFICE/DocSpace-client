@@ -36,6 +36,8 @@ class SettingsStore {
 
   isEmptyList: boolean = false;
 
+  itemsCount: number = 0;
+
   shareKey: string = "";
 
   constructor() {
@@ -52,6 +54,10 @@ class SettingsStore {
 
   setShareKey = (shareKey: string) => {
     this.shareKey = shareKey;
+  };
+
+  setItemsCount = (itemsCount: number) => {
+    this.itemsCount = itemsCount;
   };
 }
 

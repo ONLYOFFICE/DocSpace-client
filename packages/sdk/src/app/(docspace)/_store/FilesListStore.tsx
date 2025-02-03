@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,6 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export default function usePublicRoom({}) {
-  return {};
+"use client";
+
+import React from "react";
+import { makeAutoObservable } from "mobx";
+
+import { TFileItem, TFolderItem } from "../_hooks/useItemList";
+
+class FilesListStore {
+  items: (TFileItem | TFolderItem)[] = [];
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  setItems = (items?: (TFileItem | TFolderItem)[]) => {
+    this.items = items ? items : [];
+  };
+
+  get itemsCount() {
+    return this.items.length;
+  }
 }
+
+export const FilesListStoreContext = React.createContext<FilesListStore>(
+  new FilesListStore(),
+);
+
+export const FilesListStoreContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  return (
+    <FilesListStoreContext.Provider value={new FilesListStore()}>
+      {children}
+    </FilesListStoreContext.Provider>
+  );
+};
+
+export const useFilesListStore = () => {
+  return React.useContext(FilesListStoreContext);
+};

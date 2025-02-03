@@ -61,11 +61,11 @@ function PublicRoomPage({
 
   React.useEffect(() => {
     filesSettingsStore.setFilesSettings(filesSettings);
-  }, [filesSettings]);
+  }, [filesSettings, filesSettingsStore]);
 
   React.useEffect(() => {
     settingsStore.setShareKey(shareKey);
-  }, [shareKey]);
+  }, [settingsStore, shareKey]);
 
   return (
     <List

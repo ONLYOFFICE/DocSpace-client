@@ -159,7 +159,7 @@ interface TableGroupmenuBased {
   checkboxOptions: React.ReactNode[];
   onClick: () => void;
   onChange: (isChecked: boolean) => void;
-  checkboxMargin: string;
+  checkboxMargin?: string;
   withoutInfoPanelToggler: boolean;
   isInfoPanelVisible?: boolean;
   isMobileView?: boolean;

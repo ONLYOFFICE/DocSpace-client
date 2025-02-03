@@ -32,17 +32,19 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { PAGE_COUNT } from "@/utils/constants";
 
-import useItemIcon from "../../../_hooks/useItemIcon";
+import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
+
+import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useItemList, {
   TFolderItem,
   TFileItem,
-} from "../../../_hooks/useItemList";
+} from "@/app/(docspace)/_hooks/useItemList";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import RowView from "../row-view";
+import EmptyView from "../empty-view";
 
 import { ListProps } from "./List.types";
-import EmptyView from "../empty-view";
-import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
 const List = ({
   folders,
@@ -60,6 +62,7 @@ const List = ({
   const searchParams = useSearchParams();
 
   const settingsStore = useSettingsStore();
+  const { setItems } = useFilesListStore();
 
   const { getIcon } = useItemIcon({
     filesSettings,
@@ -167,6 +170,10 @@ const List = ({
     convertFolderToItem,
     convertFileToItem,
   ]);
+
+  React.useEffect(() => {
+    setItems(filesList);
+  }, [filesList, setItems]);
 
   if (filesList.length === 0) {
     return (

@@ -97,8 +97,14 @@ class NavigationStore {
     this.setCurrentTitle(this.navigationItems[idx].title);
     this.setCurrentIsRootRoom(this.navigationItems[idx].isRootRoom);
 
-    const newItems = [...this.navigationItems];
-    newItems.splice(idx, 1);
+    const newItems = [...this.navigationItems]
+      .map((item, index) => {
+        if (index > idx) {
+          return item;
+        }
+        return null;
+      })
+      .filter((item) => item !== null);
 
     this.setNavigationItems(newItems);
   };

@@ -40,7 +40,12 @@ import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/shared/components/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { Consumer, getLogoUrl } from "@docspace/shared/utils";
+import {
+  Consumer,
+  getLogoUrl,
+  getCheckboxItemId,
+  getCheckboxItemLabel,
+} from "@docspace/shared/utils";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import {
   RoomsType,
@@ -60,10 +65,7 @@ import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import {
-  getCheckboxItemId,
-  getCheckboxItemLabel,
-} from "SRC_DIR/helpers/filesUtils";
+
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 

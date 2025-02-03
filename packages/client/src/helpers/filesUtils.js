@@ -33,7 +33,7 @@ import CloudServicesYandexReactSvgUrl from "PUBLIC_DIR/images/cloud.services.yan
 import CloudServicesNextcloudReactSvgUrl from "PUBLIC_DIR/images/cloud.services.nextcloud.react.svg?url";
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
-import { FilterType, RoomsType } from "@docspace/shared/enums";
+import { RoomsType } from "@docspace/shared/enums";
 
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import i18n from "../i18n";
@@ -214,88 +214,6 @@ export const getCountTilesInRow = () => {
   if (!isDesktopView) containerWidth += 3; // tablet tile margin -3px (TileContainer.js)
 
   return Math.floor(containerWidth / minTileWidth);
-};
-
-export const getCheckboxItemId = (key) => {
-  switch (key) {
-    case "all":
-      return "selected-all";
-    case FilterType.FoldersOnly:
-      return "selected-only-folders";
-    case FilterType.DocumentsOnly:
-      return "selected-only-documents";
-    case FilterType.PresentationsOnly:
-      return "selected-only-presentations";
-    case FilterType.SpreadsheetsOnly:
-      return "selected-only-spreadsheets";
-    case FilterType.ImagesOnly:
-      return "selected-only-images";
-    case FilterType.MediaOnly:
-      return "selected-only-media";
-    case FilterType.ArchiveOnly:
-      return "selected-only-archives";
-    case FilterType.FilesOnly:
-      return "selected-only-files";
-    case `room-${RoomsType.FillingFormsRoom}`:
-      return "selected-only-filling-form-rooms";
-    case `room-${RoomsType.CustomRoom}`:
-      return "selected-only-custom-room";
-    case `room-${RoomsType.EditingRoom}`:
-      return "selected-only-collaboration-rooms";
-    case `room-${RoomsType.ReviewRoom}`:
-      return "selected-only-review-rooms";
-    case `room-${RoomsType.ReadOnlyRoom}`:
-      return "selected-only-view-rooms";
-    case `room-${RoomsType.PublicRoom}`:
-      return "selected-only-public-rooms";
-    case `room-${RoomsType.VirtualDataRoom}`:
-      return "selected-only-vdr-rooms";
-
-    default:
-      return "";
-  }
-};
-
-export const getCheckboxItemLabel = (t, key) => {
-  switch (key) {
-    case "all":
-      return t("All");
-    case FilterType.FoldersOnly:
-      return t("Translations:Folders");
-    case FilterType.DocumentsOnly:
-      return t("Common:Documents");
-    case FilterType.PresentationsOnly:
-      return t("Translations:Presentations");
-    case FilterType.SpreadsheetsOnly:
-      return t("Translations:Spreadsheets");
-    case FilterType.ImagesOnly:
-      return t("Images");
-    case FilterType.MediaOnly:
-      return t("Media");
-    case FilterType.ArchiveOnly:
-      return t("Archives");
-    case FilterType.FilesOnly:
-      return t("Translations:Files");
-    case `room-${RoomsType.FillingFormsRoom}`:
-      return t("Common:FillingFormRooms");
-    case `room-${RoomsType.CustomRoom}`:
-      return t("Common:CustomRooms");
-    case `room-${RoomsType.EditingRoom}`:
-      return t("Common:CollaborationRooms");
-    case `room-${RoomsType.ReviewRoom}`:
-      return t("Common:Review");
-    case `room-${RoomsType.FormRoom}`:
-      return t("Common:FormRoom");
-    case `room-${RoomsType.ReadOnlyRoom}`:
-      return t("Common:ViewOnlyRooms");
-    case `room-${RoomsType.PublicRoom}`:
-      return t("Common:PublicRoomLabel");
-    case `room-${RoomsType.VirtualDataRoom}`:
-      return t("Common:VirtualDataRoom");
-
-    default:
-      return "";
-  }
 };
 
 export const calculateRoomLogoParams = (img, x, y, zoom) => {

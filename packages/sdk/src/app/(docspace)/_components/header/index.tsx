@@ -33,25 +33,39 @@ import { useTranslation } from "react-i18next";
 import Navigation, {
   TNavigationItem,
 } from "@docspace/shared/components/navigation";
+import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 
 import { useNavigationStore } from "../../_store/NavigationStore";
+import { useFilesSelectionStore } from "../../_store/FilesSelectionStore";
+
 import useFolderActions from "../../_hooks/useFolderActions";
+import useContextMenuModel from "../../_hooks/useContextMenuModel";
+import useHeaderMenu from "../../_hooks/useHeaderMenu";
 
 import type { HeaderProps } from "./Header.types";
+import { useFilesListStore } from "../../_store/FilesListStore";
 
 export type { HeaderProps };
 
 const Header = ({ current, pathParts, isEmptyList, theme }: HeaderProps) => {
   const navigationStore = useNavigationStore();
+  const filesSelectionStore = useFilesSelectionStore();
+  const filesListStore = useFilesListStore();
+  const { getHeaderContextMenuModel } = useContextMenuModel({});
+  const { getHeaderMenu, onCheckboxChange } = useHeaderMenu({});
+
+  const tableGroupMenuVisible = filesSelectionStore.selection.length > 0;
+  const isChecked =
+    filesListStore.itemsCount === filesSelectionStore.selection.length;
 
   const { t } = useTranslation(["Common"]);
 
   const { openFolder } = useFolderActions({ t });
 
-  const { title, security, rootFolderId, id } = current;
+  const { title, rootFolderId, id } = current;
 
   const isRoomsFolder = pathParts[0].id === rootFolderId;
 
@@ -75,18 +89,14 @@ const Header = ({ current, pathParts, isEmptyList, theme }: HeaderProps) => {
     navigationStore.setCurrentFolderId(id);
     navigationStore.setCurrentTitle(title);
     navigationStore.setCurrentIsRootRoom(isRoomsFolder);
-  }, [title, navigationItems]);
+  }, [title, navigationItems, navigationStore, id, isRoomsFolder]);
 
   const currentNavigationItems =
     navigationStore.navigationItems ?? navigationItems;
 
   const onBackToParentFolder = useCallback(() => {
     openFolder(currentNavigationItems[0].id, currentNavigationItems[0].title);
-  }, [
-    openFolder,
-    currentNavigationItems[0]?.id,
-    currentNavigationItems[0]?.title,
-  ]);
+  }, [currentNavigationItems, openFolder]);
 
   useEffect(() => {
     window.addEventListener("popstate", onBackToParentFolder);
@@ -104,41 +114,65 @@ const Header = ({ current, pathParts, isEmptyList, theme }: HeaderProps) => {
         [styles.isLifetimeEnabled]: false,
       })}
     >
-      <Navigation
-        title={navigationStore.currentTitle ?? title}
-        onBackToParentFolder={onBackToParentFolder}
-        rootRoomTitle={
-          currentNavigationItems.length === 0 ? "" : pathParts[0].title
-        }
-        showRootFolderTitle={false}
-        canCreate={security.Create}
-        withLogo={logo}
-        burgerLogo={burgerLogo}
-        currentDeviceType={DeviceType.desktop}
-        navigationItems={currentNavigationItems}
-        titleIcon=""
-        titleIconTooltip=""
-        showNavigationButton={false}
-        isCurrentFolderInfo={false}
-        isDesktop={false}
-        showText={false}
-        showTitle
-        isPublicRoom
-        isEmptyPage={isEmptyList}
-        isEmptyFilesList={isEmptyList}
-        withMenu={!isRoomsFolder}
-        isRoom={!!current.roomType}
-        isRootFolder={currentNavigationItems.length === 0}
-        isInfoPanelVisible={false}
-        toggleInfoPanel={() => {}}
-        onLogoClick={() => {}}
-        hideInfoPanel={() => {}}
-        onClickFolder={() => {}}
-        clearTrash={() => {}}
-        showFolderInfo={() => {}}
-        getContextOptionsPlus={() => []}
-        getContextOptionsFolder={() => []}
-      />
+      {tableGroupMenuVisible ? (
+        <TableGroupMenu
+          withComboBox={true}
+          withoutInfoPanelToggler={true}
+          isChecked={isChecked}
+          isIndeterminate={!isChecked}
+          headerMenu={getHeaderContextMenuModel()}
+          onClick={() => {}}
+          onChange={onCheckboxChange}
+          toggleInfoPanel={() => {}}
+          isInfoPanelVisible={false}
+          checkboxOptions={getHeaderMenu()}
+        />
+      ) : (
+        <div className="header-container">
+          <Navigation
+            showText
+            isRootFolder={currentNavigationItems.length === 0}
+            canCreate={false}
+            title={navigationStore.currentTitle ?? title}
+            rootRoomTitle={
+              currentNavigationItems.length === 0 ? "" : pathParts[0].title
+            }
+            isDesktop={false}
+            navigationItems={currentNavigationItems}
+            getContextOptionsPlus={() => []}
+            getContextOptionsFolder={() => [{ key: "test", label: "test" }]}
+            onClickFolder={(id) => {
+              openFolder(
+                id,
+                currentNavigationItems.find((v) => v.id === id)?.title ??
+                  currentNavigationItems[0].title,
+              );
+            }}
+            isTrashFolder={false}
+            isEmptyPage={isEmptyList}
+            isEmptyFilesList={isEmptyList}
+            onBackToParentFolder={onBackToParentFolder}
+            showRootFolderTitle={false}
+            withLogo={logo}
+            burgerLogo={burgerLogo}
+            withMenu={!isRoomsFolder}
+            currentDeviceType={DeviceType.desktop}
+            titleIcon=""
+            titleIconTooltip=""
+            showNavigationButton={false}
+            isCurrentFolderInfo={false}
+            showTitle
+            isPublicRoom
+            isRoom={!!current.roomType}
+            isInfoPanelVisible={false}
+            toggleInfoPanel={() => {}}
+            onLogoClick={() => {}}
+            hideInfoPanel={() => {}}
+            clearTrash={() => {}}
+            showFolderInfo={() => {}}
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -390,13 +390,10 @@ class FilesFilter {
         this.search ||
         this.roomId ||
         this.authorType ||
-        this.selectedItem ||
-        this.folder ||
         this.searchInContent ||
         this.excludeSubject ||
         this.applyFilterOption ||
-        this.extension ||
-        this.searchArea,
+        this.extension,
     );
   }
 

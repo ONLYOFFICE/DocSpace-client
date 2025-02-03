@@ -20,7 +20,7 @@ import useFilesActions from "./useFilesActions";
 import { toastr } from "@docspace/shared/components/toast";
 
 type UseContextMenuModelProps = {
-  item: TFileItem | TFolderItem;
+  item?: TFileItem | TFolderItem;
 };
 
 export default function useContextMenuModel({
@@ -106,7 +106,7 @@ export default function useContextMenuModel({
   );
 
   const getDownloadItem = useCallback(
-    (item: TFileItem | TFolderItem) => {
+    (item?: TFileItem | TFolderItem) => {
       return {
         id: "option_download",
         key: "download",
@@ -120,7 +120,7 @@ export default function useContextMenuModel({
   );
 
   const getDownloadAsItem = useCallback(
-    (item: TFileItem | TFolderItem) => {
+    (item?: TFileItem | TFolderItem) => {
       return {
         key: "download-as",
         label: t("Common:DownloadAs"),
@@ -184,36 +184,66 @@ export default function useContextMenuModel({
   );
 
   const getGroupContextMenuModel = useCallback(() => {
-    return [];
-  }, []);
+    const items = [];
+
+    items.push(getDownloadItem());
+
+    if (
+      filesSelectionStore.selection.some((i) => "fileExst" in i && i.fileExst)
+    ) {
+      items.push(getDownloadAsItem());
+    }
+
+    return items;
+  }, [filesSelectionStore.selection, getDownloadAsItem, getDownloadItem]);
+
+  const getHeaderContextMenuModel = useCallback(() => {
+    return getGroupContextMenuModel().map((i) => ({
+      iconUrl: i.icon,
+      label: i.label,
+      title: i.label,
+
+      disabled: i.disabled,
+
+      withDropDown: false,
+      options: [],
+
+      onClick: i.onClick,
+      id: i.key,
+    }));
+  }, [getGroupContextMenuModel]);
 
   const getContextMenuModel = useCallback(
     (skipSelect: boolean = false) => {
-      const { contextOptions } = item;
+      if (!item) {
+        return getHeaderContextMenuModel();
+      }
+
+      const { contextOptions } = item!;
 
       if (!skipSelect) {
         if (filesSelectionStore.selection.length) {
-          if (filesSelectionStore.isCheckedItem(item))
+          if (filesSelectionStore.isCheckedItem(item!))
             return getGroupContextMenuModel();
 
           filesSelectionStore.setSelection();
-          filesSelectionStore.setBufferSelection(item);
+          filesSelectionStore.setBufferSelection(item!);
         }
       }
 
       const model = [];
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.select))
-        model.push(getSelectItem(item));
+        model.push(getSelectItem(item!));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.open))
-        model.push(getOpenItem(item));
+        model.push(getOpenItem(item!));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.view))
-        model.push(getViewItem(item));
+        model.push(getViewItem(item!));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.openPDF))
-        model.push(getOpenPDFItem(item));
+        model.push(getOpenPDFItem(item!));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.fillForm))
         model.push(getFillFormItem(item as TFileItem));
@@ -222,10 +252,10 @@ export default function useContextMenuModel({
         model.push(getEditItem(item as TFileItem));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.preview))
-        model.push(getPreviewItem(item));
+        model.push(getPreviewItem(item!));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.copyLink))
-        model.push(getLinkForRoomMembersItem(item));
+        model.push(getLinkForRoomMembersItem(item!));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.download))
         model.push(getDownloadItem(item));
@@ -247,10 +277,12 @@ export default function useContextMenuModel({
       getLinkForRoomMembersItem,
       getDownloadItem,
       getDownloadAsItem,
-      filesSelectionStore,
+      getHeaderContextMenuModel,
       getGroupContextMenuModel,
+
+      filesSelectionStore,
     ],
   );
 
-  return { getContextMenuModel };
+  return { getContextMenuModel, getHeaderContextMenuModel };
 }

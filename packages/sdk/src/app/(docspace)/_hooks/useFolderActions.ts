@@ -2,7 +2,6 @@ import React from "react";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import api from "@docspace/shared/api";
-import { TFolder } from "@docspace/shared/api/files/types";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
 import { TTranslation } from "@docspace/shared/types";

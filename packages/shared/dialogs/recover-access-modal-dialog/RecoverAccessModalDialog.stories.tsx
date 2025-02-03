@@ -31,7 +31,7 @@ import type { RecoverAccessModalDialogProps } from "./RecoverAccessModalDialog.t
 import { Button, ButtonSize } from "../../components/button";
 
 export default {
-  title: "Components/RecoverAccessModalDialog",
+  title: "Dialogs/RecoverAccessModalDialog",
   component: RecoverAccessModalDialog,
   parameters: {
     docs: {

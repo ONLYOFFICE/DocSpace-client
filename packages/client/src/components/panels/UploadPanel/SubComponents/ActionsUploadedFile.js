@@ -28,7 +28,7 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 
 import RefreshReactSvg from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
-import ShareButton from "./ShareButton";
+import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 
 const circularRotate = keyframes`
   0% {
@@ -53,15 +53,13 @@ const StyledRefreshIcon = styled(RefreshReactSvg)`
   transform-origin: center;
 `;
 
-const ActionsUploadedFile = ({ item, onCancelCurrentUpload }) => {
-  const onCancelClick = !item.inConversion
-    ? { onClick: onCancelCurrentUpload }
-    : {};
-
+const ActionsUploadedFile = ({ item }) => {
   return (
     <>
-      {item.action === "upload" ? (
-        <ShareButton uniqueId={item.uniqueId} />
+      {item.action === "uploaded" || item.action === "converted" ? (
+        <div className="actions-wrapper">
+          <CheckReactSvg className="upload-panel_check-button" />
+        </div>
       ) : null}
       {item.action === "convert" ? (
         <div
@@ -69,7 +67,6 @@ const ActionsUploadedFile = ({ item, onCancelCurrentUpload }) => {
           data-id={item.uniqueId}
           data-file-id={item.fileId}
           data-action={item.action}
-          {...onCancelClick}
         >
           <StyledRefreshIcon />
         </div>

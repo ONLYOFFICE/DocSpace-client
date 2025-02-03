@@ -150,10 +150,6 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     // }
   };
 
-  // const onCloseButton = () => {
-  //   setShouldHideButton(true);
-  // };
-
   const getIcons = () => {
     if (isSeveralOperations) {
       return isOpenDropdown

@@ -714,7 +714,10 @@ class UploadDataStore {
     }
 
     if (this.uploaded) {
-      this.primaryProgressDataStore.clearPrimaryProgressData();
+      this.primaryProgressDataStore.setPrimaryProgressBarData({
+        operation: OPERATIONS_NAME.upload,
+        completed: true,
+      });
     }
   };
 

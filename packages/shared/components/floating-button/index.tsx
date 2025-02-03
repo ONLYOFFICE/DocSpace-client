@@ -78,7 +78,7 @@ const FloatingButton = ({
   completed = false,
   onClick,
   color,
-  onCloseButton,
+  clearUploadedFilesHistory,
   withoutProgress,
   showCancelButton,
 }: FloatingButtonProps) => {
@@ -87,7 +87,7 @@ const FloatingButton = ({
   }, [icon]);
 
   const handleProgressClear = () => {
-    onCloseButton?.();
+    clearUploadedFilesHistory?.();
   };
 
   const buttonClassName = useMemo(() => {

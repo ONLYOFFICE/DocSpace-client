@@ -29,12 +29,16 @@ import styled, { css } from "styled-components";
 import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { LoadingButton } from "@docspace/shared/components/loading-button";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
-import { NoUserSelect, tablet } from "@docspace/shared/utils";
+import { NoUserSelect } from "@docspace/shared/utils";
 import { Button } from "@docspace/shared/components/button";
+import { ProgressBar } from "@docspace/shared/components/progress-bar";
+import { IconButton } from "@docspace/shared/components/icon-button";
+
+import CloseSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
+
 import ActionsUploadedFile from "./SubComponents/ActionsUploadedFile";
 import ErrorFileUpload from "./SubComponents/ErrorFileUpload";
 import SimulatePassword from "../../SimulatePassword";
@@ -59,11 +63,7 @@ const StyledFileRow = styled(Row)`
     ${(props) =>
       props.showPasswordInput &&
       css`
-        margin-top: -40px;
-
-        @media ${tablet} {
-          margin-top: -44px;
-        }
+        margin-top: -36px;
       `}
   }
 
@@ -87,7 +87,12 @@ const StyledFileRow = styled(Row)`
   }
   .password-input {
     position: absolute;
-    top: 48px;
+    top: 37px;
+    ${(props) =>
+      props.showPasswordInput &&
+      css`
+        top: 48px;
+      `}
     inset-inline: 0;
     max-width: 470px;
     width: calc(100% - 16px);
@@ -157,6 +162,27 @@ const StyledFileRow = styled(Row)`
 
   .file-exst {
     color: ${(props) => props.theme.filesPanels.upload.color};
+  }
+
+  .actions-wrapper {
+    display: flex;
+    margin-inline-start: auto;
+    padding-inline-start: 16px;
+
+    align-items: center;
+
+    .upload-panel_percent-text {
+      margin-left: 16px;
+    }
+    .upload-panel_close-button,
+    .upload-panel_check-button {
+      margin-left: 16px;
+    }
+    .upload-panel_check-button {
+      path {
+        fill: #35ad17;
+      }
+    }
   }
 `;
 class FileRow extends Component {
@@ -365,18 +391,34 @@ class FileRow extends Component {
               showPasswordInput={showPasswordInput}
             />
           ) : (
-            <div
-              className="upload_panel-icon"
-              data-id={item.uniqueId}
-              // onClick={this.onCancelCurrentUpload}
-            >
-              <LoadingButton
-                item={item}
-                onClick={this.onCancelCurrentUpload}
-                percent={item.percent}
-              />
-            </div>
+            <>
+              <div className="actions-wrapper">
+                {item.percent ? (
+                  <Text className="upload-panel_percent-text">
+                    {Math.trunc(item.percent)}&#37;
+                  </Text>
+                ) : null}
+                <IconButton
+                  data-id={item.uniqueId}
+                  data-action={item.action}
+                  data-file-id={item.fileId}
+                  iconName={CloseSvgUrl}
+                  size={16}
+                  className="upload-panel_close-button"
+                  onClick={this.onCancelCurrentUpload}
+                />
+              </div>
+              {item.action !== "convert" ? (
+                <div className="password-input">
+                  <ProgressBar
+                    style={{ width: "100%" }}
+                    percent={item.percent}
+                  />
+                </div>
+              ) : null}
+            </>
           )}
+
           {showPasswordInput ? (
             <div className="password-input">
               <SimulatePassword

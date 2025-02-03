@@ -39,12 +39,13 @@ const ProgressBar = ({
   className,
   status,
   error,
+  style,
   ...rest
 }: ProgressBarProps) => {
   const progressPercent = percent > 100 ? 100 : percent;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={style}>
       <Text
         className={styles.fullText}
         fontSize="12px"

@@ -33,7 +33,7 @@ import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import FileRow from "./FileRow";
 
 const rowHeight = 52;
-const rowIncreasedHeight = 82;
+const rowIncreasedHeight = 88;
 
 const VirtualScroll = (props) => (
   <CustomScrollbarsVirtualListWithAutoFocus

@@ -208,15 +208,18 @@ const SectionBodyContent = (props) => {
       indexSeparatorNode.setAttribute("style", separatorStyles);
       indexSeparatorNode.style.top = styles.top;
     }
-
     if (currentDroppable !== droppable) {
       if (currentDroppable) {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
           const classElements = document.getElementsByClassName(value);
 
-          classElements.forEach((cl) => {
-            cl.classList.remove("droppable-hover");
+          // add check for column with width = 0, because without it dark theme d`n`d have bug color
+          // 30 - it`s column padding
+          Array.from(classElements).forEach((cl) => {
+            if (cl.clientWidth - 30) {
+              cl.classList.add("droppable-hover");
+            }
           });
           if (isIndexEditingMode) {
             droppableSeparator.remove();
@@ -234,7 +237,7 @@ const SectionBodyContent = (props) => {
 
           // add check for column with width = 0, because without it dark theme d`n`d have bug color
           // 30 - it`s column padding
-          classElements.forEach((cl) => {
+          Array.from(classElements).forEach((cl) => {
             if (cl.clientWidth - 30) {
               cl.classList.add("droppable-hover");
             }

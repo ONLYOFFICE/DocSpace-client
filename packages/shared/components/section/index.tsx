@@ -200,13 +200,6 @@ const Section = (props: SectionProps) => {
     }),
     [sectionSize.width, sectionSize.height],
   );
-  // console.log("==");
-  // console.log("secondaryActiveOperations", secondaryActiveOperations);
-  // console.log("==");
-
-  // const primaryActiveOperationsArray = uploadingOperation?.visible
-  //   ? [uploadingOperation]
-  //   : [];
 
   const isShowOperationButton =
     secondaryActiveOperations?.length || primaryOperationsArray?.length;

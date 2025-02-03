@@ -27,9 +27,9 @@
 import { OPERATIONS_NAME } from "../../constants";
 
 export const FloatingButtonIcons = {
-  upload: OPERATIONS_NAME.upload, //
+  upload: OPERATIONS_NAME.upload,
   file: "file",
-  trash: OPERATIONS_NAME.trash, //
+  trash: OPERATIONS_NAME.trash,
   move: OPERATIONS_NAME.move,
   duplicate: OPERATIONS_NAME.duplicate,
   plus: "plus",
@@ -38,9 +38,9 @@ export const FloatingButtonIcons = {
   exportIndex: OPERATIONS_NAME.exportIndex,
   dots: "dots",
   arrow: "arrow",
-  deletePermanently: OPERATIONS_NAME.deletePermanently, //
+  deletePermanently: OPERATIONS_NAME.deletePermanently,
   download: OPERATIONS_NAME.download,
   copy: OPERATIONS_NAME.copy,
   markAsRead: OPERATIONS_NAME.markAsRead,
-  other: OPERATIONS_NAME.other, //
+  other: OPERATIONS_NAME.other,
 } as const;

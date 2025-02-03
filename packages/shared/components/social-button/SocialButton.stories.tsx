@@ -43,38 +43,51 @@ const meta: Meta<SocialButtonType> = {
     docs: {
       description: {
         component:
-          "Button component for social network authentication and sharing",
+          "Button component for social network authentication and sharing. Supports different social providers, sizes, and states.",
       },
     },
   },
   argTypes: {
-    onClick: { action: "onClick" },
+    onClick: {
+      action: "onClick",
+      description: "Callback function triggered when the button is clicked",
+    },
     iconName: {
       control: {
         type: "select",
         options: [ShareGoogleReactSvgUrl, ShareLinkedinReactSvgUrl],
       },
+      description: "URL of the social network icon to display",
     },
     size: {
       control: {
         type: "radio",
         options: ["base", "small"],
       },
+      description:
+        "Size of the social button. 'base' for normal size, 'small' for compact version",
     },
     label: {
       control: "text",
+      description:
+        "Text label displayed next to the social icon (e.g., 'Continue with Google')",
     },
     isConnect: {
       control: "boolean",
+      description: "Indicates if the button is in a connected state",
     },
     isDisabled: {
       control: "boolean",
+      description: "Disables the button and prevents user interaction",
     },
     noHover: {
       control: "boolean",
+      description: "Disables hover effects on the button",
     },
     $iconOptions: {
       control: "object",
+      description:
+        "Additional options for customizing the icon appearance (e.g., size, color)",
     },
   },
   args: {

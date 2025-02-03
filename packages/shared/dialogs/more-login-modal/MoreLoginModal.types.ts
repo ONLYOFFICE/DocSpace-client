@@ -24,51 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Story, Meta } from "@storybook/react";
-import MoreLoginModal from "./index";
-import type { MoreLoginModalProps } from "./MoreLoginModal.types";
+import type { PROVIDERS_DATA } from "../../constants";
 
-export default {
-  title: "Components/MoreLoginModal",
-  component: MoreLoginModal,
-  argTypes: {
-    onClose: { action: "onClose" },
-    onSocialLoginClick: { action: "onSocialLoginClick" },
-  },
-} as Meta;
+import { TTranslation } from "../../types";
 
-const Template: Story<MoreLoginModalProps> = (args) => (
-  <MoreLoginModal {...args} />
-);
+export type ProvidersDataType = typeof PROVIDERS_DATA;
 
-export const Default = Template.bind({});
-Default.args = {
-  visible: true,
-  ssoLabel: "SSO Login",
-  ssoUrl: "https://example.com/sso",
-  t: (key: string) => key,
-  isSignUp: false,
-  providers: [
-    { linked: false, provider: "google", url: "https://example.com/google" },
-    {
-      linked: false,
-      provider: "facebook",
-      url: "https://example.com/facebook",
-    },
-  ],
+type Provider = {
+  linked: boolean;
+  provider: string;
+  url: string;
 };
 
-export const WithLinkedProviders = Template.bind({});
-WithLinkedProviders.args = {
-  ...Default.args,
-  providers: [
-    { linked: true, provider: "google", url: "https://example.com/google" },
-    { linked: true, provider: "facebook", url: "https://example.com/facebook" },
-  ],
-};
-
-export const SignUpMode = Template.bind({});
-SignUpMode.args = {
-  ...Default.args,
-  isSignUp: true,
+export type MoreLoginModalProps = {
+  visible: boolean;
+  onClose: VoidFunction;
+  providers?: Provider[];
+  onSocialLoginClick: (e: React.MouseEvent<Element, MouseEvent>) => void;
+  ssoLabel: string;
+  ssoUrl: string;
+  t: TTranslation;
 };

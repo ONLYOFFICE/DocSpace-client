@@ -269,10 +269,6 @@ const FilesSelectorWrapper = ({
           deleteAfter: false,
           isCopy,
           folderTitle,
-          translations: {
-            copy: t("Common:CopyOperation"),
-            move: t("Common:MoveToOperation"),
-          },
           itemsCount: selection.length,
           ...(selection.length === 1 && { title: selection[0].title }),
         };

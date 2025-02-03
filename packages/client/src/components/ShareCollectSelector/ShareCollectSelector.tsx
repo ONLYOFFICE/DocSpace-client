@@ -154,9 +154,6 @@ const ShareCollectSelector = inject<TStore>(
           deleteAfter: false,
           isCopy: true,
           folderTitle,
-          translations: {
-            copy: t("Common:CopyOperation"),
-          },
           selectedFolder,
           fromShareCollectSelector: true,
         };

@@ -1679,7 +1679,7 @@ class FilesActionStore {
       );
   };
 
-  moveDragItems = (destFolderId, folderTitle, translations) => {
+  moveDragItems = (destFolderId, folderTitle) => {
     const folderIds = [];
     const fileIds = [];
     const deleteAfter = false;
@@ -1702,7 +1702,6 @@ class FilesActionStore {
       folderIds,
       fileIds,
       deleteAfter,
-      translations,
       folderTitle,
       isCopy,
       itemsCount: selection.length,
@@ -2797,7 +2796,7 @@ class FilesActionStore {
     this.isGroupMenuBlocked = blocked;
   };
 
-  preparingDataForCopyingToRoom = async (destFolderId, selections, t) => {
+  preparingDataForCopyingToRoom = async (destFolderId, selections) => {
     const fileIds = [];
     let folderIds = [];
 
@@ -2840,9 +2839,6 @@ class FilesActionStore {
       fileIds,
       deleteAfter: false,
       isCopy: true,
-      translations: {
-        copy: t("Common:CopyOperation"),
-      },
       content: oneFolder,
       itemsCount: selections.length,
       ...(selections.length === 1 && { title: selections[0].title }),
@@ -2948,7 +2944,7 @@ class FilesActionStore {
     await refreshFiles();
   };
 
-  copyFromTemplateForm = async (fileInfo, t) => {
+  copyFromTemplateForm = async (fileInfo) => {
     const selectedItemId = this.selectedFolderStore.id;
     const fileIds = [fileInfo.id];
 
@@ -2959,9 +2955,6 @@ class FilesActionStore {
       deleteAfter: false,
       isCopy: true,
       folderTitle: this.selectedFolderStore.title,
-      translations: {
-        copy: t("Common:CopyOperation"),
-      },
     };
 
     this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionTitle(

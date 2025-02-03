@@ -402,9 +402,9 @@ export const getOperationsProgressTitle = (type) => {
     case trash:
       return i18n.t("Files:MovingToTrash");
     case move:
-      return i18n.t("Files:Moving");
+      return i18n.t("Common:MoveToOperation");
     case copy:
-      return i18n.t("Files:Copying");
+      return i18n.t("Common:CopyOperation");
     case download:
       return i18n.t("Files:Downloading");
     case duplicate:

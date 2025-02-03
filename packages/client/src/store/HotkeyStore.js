@@ -679,10 +679,6 @@ class HotkeyStore {
         fileIds,
         deleteAfter: false,
         isCopy,
-        translations: {
-          copy: t("Common:CopyOperation"),
-          move: t("Common:MoveToOperation"),
-        },
         itemsCount: itemsLength,
         ...(itemsLength === 1 && { title: itemTitle }),
       };

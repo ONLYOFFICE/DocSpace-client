@@ -215,7 +215,7 @@ export const getCountTilesInRow = () => {
   const isDesktopView = isDesktop();
   const isMobileView = isMobile();
   const tileGap = isDesktopView ? 16 : 14;
-  const minTileWidth = 216 + tileGap;
+  const minTileWidth = 275 + tileGap;
 
   const elem = document.getElementsByClassName("section-wrapper-content")[0];
   let containerWidth = 0;

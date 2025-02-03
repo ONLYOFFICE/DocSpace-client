@@ -26,6 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { desktop, tablet } from "@docspace/shared/utils";
+import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
 
 const paddingCss = css`
   @media ${desktop} {
@@ -45,13 +46,8 @@ const StyledCard = styled.div`
 
 const StyledItem = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
-  gap: 14px 16px;
-  width: 100%;
-
-  @media ${tablet} {
-    gap: 14px;
-  }
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+  gap: 16px;
 
   ${paddingCss};
 `;
@@ -61,4 +57,12 @@ const StyledHeaderItem = styled.div`
   grid-column: -1 / 1;
 `;
 
-export { StyledCard, StyledItem, StyledHeaderItem };
+const StyledInfiniteLoader = styled(InfiniteLoaderComponent)`
+  overflow: visible !important;
+
+  & > div {
+    overflow: visible !important;
+  }
+`;
+
+export { StyledCard, StyledItem, StyledHeaderItem, StyledInfiniteLoader };

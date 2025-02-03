@@ -29,10 +29,14 @@ import React, { useEffect, useState } from "react";
 import uniqueid from "lodash/uniqueId";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
-import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
 
 import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
-import { StyledCard, StyledItem, StyledHeaderItem } from "./StyledInfiniteGrid";
+import {
+  StyledCard,
+  StyledItem,
+  StyledHeaderItem,
+  StyledInfiniteLoader,
+} from "./StyledInfiniteGrid";
 
 const HeaderItem = ({ children, className, ...rest }) => {
   return (
@@ -50,10 +54,11 @@ const Card = ({ children, countTilesInRow, ...rest }) => {
 
     const horizontalGap = 16;
     const verticalGap = 14;
+    const verticalRoomGap = 16;
     const headerMargin = 15;
 
     const folderHeight = 64 + verticalGap;
-    const roomHeight = 122 + verticalGap;
+    const roomHeight = 104 + verticalRoomGap;
     const fileHeight = 220 + horizontalGap;
     const titleHeight = 20 + headerMargin;
 
@@ -212,7 +217,7 @@ const InfiniteGrid = (props) => {
   // console.log("InfiniteGrid render", list);
 
   return (
-    <InfiniteLoaderComponent
+    <StyledInfiniteLoader
       viewAs="tile"
       countTilesInRow={countTilesInRow}
       filesLength={filesLength}
@@ -224,7 +229,7 @@ const InfiniteGrid = (props) => {
       {...rest}
     >
       {list}
-    </InfiniteLoaderComponent>
+    </StyledInfiniteLoader>
   );
 };
 

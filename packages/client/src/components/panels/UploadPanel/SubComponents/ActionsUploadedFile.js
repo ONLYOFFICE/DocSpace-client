@@ -24,11 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import React from "react";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { LoadingButton } from "@docspace/shared/components/loading-button";
+import styled, { keyframes } from "styled-components";
+
+import RefreshReactSvg from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 import ShareButton from "./ShareButton";
+
+const circularRotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(-180deg);
+  }
+  50% {
+    transform: rotate(-180deg);
+  }
+  90% {
+    transform: rotate(-360deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+`;
+
+const StyledRefreshIcon = styled(RefreshReactSvg)`
+  animation: ${circularRotate} 2s ease-in-out infinite;
+  transform-origin: center;
+`;
 
 const ActionsUploadedFile = ({ item, onCancelCurrentUpload }) => {
   const onCancelClick = !item.inConversion
@@ -48,17 +71,7 @@ const ActionsUploadedFile = ({ item, onCancelCurrentUpload }) => {
           data-action={item.action}
           {...onCancelClick}
         >
-          <LoadingButton
-            isConversion
-            inConversion={item.inConversion}
-            percent={item.convertProgress}
-          />
-          <IconButton
-            iconName={RefreshReactSvgUrl}
-            className="convert_icon"
-            size="medium"
-            isfill
-          />
+          <StyledRefreshIcon />
         </div>
       ) : null}
     </>

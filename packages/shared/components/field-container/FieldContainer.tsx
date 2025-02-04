@@ -97,7 +97,7 @@ const FieldContainer = ({
             />
             {tooltipContent ? (
               <HelpButton
-                className={tooltipClass}
+                className={classNames(styles.iconButton, tooltipClass)}
                 tooltipContent={tooltipContent}
                 place={place}
                 // helpButtonHeaderContent={helpButtonHeaderContent}
@@ -116,7 +116,7 @@ const FieldContainer = ({
             >
               {tooltipContent ? (
                 <HelpButton
-                  className={tooltipClass}
+                  className={classNames(styles.iconButton, tooltipClass)}
                   tooltipContent={tooltipContent}
                   place={place}
                   //   helpButtonHeaderContent={helpButtonHeaderContent}

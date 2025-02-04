@@ -36,15 +36,14 @@
 
     .fieldLabel {
       line-height: 32px;
-      margin-inline-end: 8px;
+      margin: 0px;
       position: relative;
     }
 
     .fieldLabelIcon {
       display: inline-flex;
-      min-width: var(--label-width, 110px);
-      width: var(--label-width, 110px);
-      align-items: center;
+      min-width: var(--label-width);
+      width: var(--label-width);
     }
 
     .fieldBody {
@@ -53,18 +52,17 @@
 
     .iconButton {
       position: relative;
-      margin-top: 2px;
-      margin-inline-start: 4px;
+      margin-top: 10px;
+      margin-inline-start: 8px;
     }
   }
 
   &.vertical {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: start;
 
     .fieldLabel {
-      margin-inline-end: 8px;
       line-height: 20px;
       height: 20px;
       display: inline-block;
@@ -73,8 +71,7 @@
     .fieldLabelIcon {
       display: inline-flex;
       width: 100%;
-      margin: 0 0 4px;
-      align-items: center;
+      margin: 0 0 4px 0;
     }
 
     .fieldBody {
@@ -83,8 +80,8 @@
 
     .iconButton {
       position: relative;
-      margin: 0 0 0 8px;
-      padding: 2px 0;
+      margin: 0;
+      padding: 0 8px;
       display: flex;
       align-items: center;
       height: 100%;
@@ -93,18 +90,18 @@
 
   &:not(.noMargin) {
     &.horizontal {
-      margin: 0 0 16px;
+      margin: 0 0 16px 0;
     }
 
     &.vertical {
-      margin: 0 0 16px;
+      margin: 0 0 16px 0;
     }
   }
 }
 
 .errorContainer {
-  margin-top: 4px;
-  width: var(--error-width, 293px);
+  padding-top: 4px;
+  max-width: var(--error-width, 293px);
 }
 
 .errorText {

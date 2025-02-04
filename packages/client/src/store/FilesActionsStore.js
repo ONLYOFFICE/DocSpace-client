@@ -411,7 +411,7 @@ class FilesActionStore {
 
     selection = selection.filter((item) => item.security.Delete);
 
-    const isThirdPartyFile = selection.some((f) => f.providerKey);
+    //  const isThirdPartyFile = selection.some((f) => f.providerKey);
 
     const currentFolderId = this.selectedFolderStore.id;
 
@@ -444,11 +444,20 @@ class FilesActionStore {
     if (!folderIds.length && !fileIds.length) return;
 
     const operationName = OPERATIONS_NAME.trash;
+    const itemsLength = folderIds.length + fileIds.length;
 
     setSecondaryProgressBarData({
       operation: operationName,
       percent: 0,
       operationId,
+      ...(!immediately && {
+        destFolderInfo: this.treeFoldersStore.trashFolderInfo,
+        itemsCount: itemsLength,
+        ...(itemsLength === 1 && {
+          title: selection[0].title,
+          isFolder: selection[0].isFolder,
+        }),
+      }),
     });
 
     const destFolderId = immediately ? null : recycleBinFolderId;
@@ -473,14 +482,6 @@ class FilesActionStore {
               if (isRecycleBinFolder) {
                 return toastr.success(translations.deleteFromTrash);
               }
-
-              if (selection.length > 1 || isThirdPartyFile) {
-                return toastr.success(translations.deleteSelectedElem);
-              }
-              if (selection[0].fileExst) {
-                return toastr.success(translations.FileRemoved);
-              }
-              return toastr.success(translations.FolderRemoved);
             };
 
             if (this.dialogsStore.isFolderActions) {
@@ -520,9 +521,8 @@ class FilesActionStore {
           completed: true,
           alert: true,
           operationId,
+          error: err,
         });
-
-        return toastr.error(err.message ? err.message : err, null, 0, true);
       } finally {
         this.setGroupMenuBlocked(false);
       }
@@ -863,6 +863,7 @@ class FilesActionStore {
 
   deleteItemAction = async (
     itemId,
+    itemTitle,
     translations,
     isFile,
     isThirdParty,
@@ -886,6 +887,10 @@ class FilesActionStore {
         operation: operationName,
         percent: 0,
         operationId,
+        title: itemTitle,
+        destFolderInfo: this.treeFoldersStore.trashFolderInfo,
+        itemsCount: 1,
+        isFolder: !isFile,
       });
 
       // const id = Array.isArray(itemId) ? itemId : [itemId];
@@ -905,15 +910,7 @@ class FilesActionStore {
           completed: true,
           alert: true,
           operationId,
-        });
-
-        return toastr.error(err.message ? err.message : err, null, 0, true);
-      } finally {
-        setSecondaryProgressBarData({
-          operation: operationName,
-          completed: true,
-          alert: false,
-          operationId,
+          error: err,
         });
       }
     }
@@ -944,12 +941,7 @@ class FilesActionStore {
         });
 
         this.updateFilesAfterDelete(operationId, operation);
-        this.filesStore.removeFiles(
-          [itemId],
-          null,
-          () => toastr.success(translations.successRemoveFile),
-          destFolderId,
-        );
+        this.filesStore.removeFiles([itemId], null, null, destFolderId);
       });
     }
     if (isRoom) {
@@ -995,12 +987,7 @@ class FilesActionStore {
       });
 
       this.updateFilesAfterDelete(operationId, operation);
-      this.filesStore.removeFiles(
-        null,
-        [itemId],
-        () => toastr.success(translations.successRemoveFolder),
-        destFolderId,
-      );
+      this.filesStore.removeFiles(null, [itemId], null, destFolderId);
 
       getIsEmptyTrash();
     });
@@ -1058,6 +1045,7 @@ class FilesActionStore {
       operationId,
       itemsCount: 1,
       title: item.title,
+      isFolder: item.isFolder,
       operationIds: [item.id],
       destFolderInfo: selectedFolder,
     });
@@ -1687,7 +1675,10 @@ class FilesActionStore {
       folderTitle,
       isCopy,
       itemsCount: selection.length,
-      ...(selection.length === 1 && { title: selection[0].title }),
+      ...(selection.length === 1 && {
+        title: selection[0].title,
+        isFolder: selection[0].isFolder,
+      }),
     };
 
     selection.forEach((item) => {
@@ -1894,9 +1885,6 @@ class FilesActionStore {
     });
 
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
-      successRemoveFile: t("Files:FileRemoved"),
-      successRemoveFolder: t("Files:FolderRemoved"),
       successRemoveRoom: t("Files:RoomRemoved"),
       successRemoveRooms: t("Files:RoomsRemoved"),
     };
@@ -2174,11 +2162,7 @@ class FilesActionStore {
               setDeleteDialogVisible(true);
             } else {
               const translations = {
-                deleteOperation: t("Translations:DeleteOperation"),
                 deleteFromTrash: t("Translations:DeleteFromTrash"),
-                deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-                FileRemoved: t("Files:FileRemoved"),
-                FolderRemoved: t("Files:FolderRemoved"),
               };
 
               this.deleteAction(translations).catch((err) => toastr.error(err));

@@ -300,11 +300,7 @@ const Items = ({
 
   const onRemove = React.useCallback(() => {
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
       deleteFromTrash: t("Translations:DeleteFromTrash"),
-      deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-      FileRemoved: t("Files:FileRemoved"),
-      FolderRemoved: t("Files:FolderRemoved"),
     };
 
     deleteAction(translations);

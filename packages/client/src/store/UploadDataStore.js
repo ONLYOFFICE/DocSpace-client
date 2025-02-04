@@ -1724,6 +1724,7 @@ class UploadDataStore {
       content,
       title,
       itemsCount,
+      isFolder,
     } = data;
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
@@ -1743,6 +1744,7 @@ class UploadDataStore {
       itemsCount,
       operationIds: [...folderIds],
       destFolderInfo,
+      isFolder,
     });
 
     return isCopy

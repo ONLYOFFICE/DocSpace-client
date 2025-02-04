@@ -180,12 +180,6 @@ const FilesMediaViewer = (props) => {
 
   const onDeleteMediaFile = useCallback(
     (id) => {
-      const translations = {
-        deleteOperation: t("Translations:DeleteOperation"),
-        successRemoveFolder: t("Files:FolderRemoved"),
-        successRemoveFile: t("Files:FileRemoved"),
-      };
-
       if (files.length > 0) {
         const file = files.find((f) => f.id === id);
         if (file) {
@@ -198,7 +192,7 @@ const FilesMediaViewer = (props) => {
           if (isActiveFile || isActiveFolder) return;
 
           setRemoveMediaItem(file);
-          deleteItemAction(file.id, translations, true, file.providerKey);
+          deleteItemAction(file.id, file.title, {}, true, file.providerKey);
         }
       }
     },

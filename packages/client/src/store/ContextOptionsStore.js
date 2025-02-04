@@ -705,10 +705,7 @@ class ContextOptionsStore {
       );
     } else {
       translations = {
-        deleteOperation: t("Translations:DeleteOperation"),
         deleteFromTrash: t("Translations:DeleteFromTrash"),
-        deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-        FolderRemoved: t("Files:FolderRemoved"),
       };
 
       const selectedFolder = getSelectedFolder();
@@ -740,17 +737,10 @@ class ContextOptionsStore {
       return;
     }
 
-    const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
-      successRemoveFile: t("Files:FileRemoved"),
-      successRemoveFolder: t("Files:FolderRemoved"),
-      successRemoveRoom: t("Files:RoomRemoved"),
-      successRemoveRooms: t("Files:RoomsRemoved"),
-    };
-
     this.filesActionsStore.deleteItemAction(
       id,
-      translations,
+      title,
+      {},
       !isFolder,
       providerKey,
       isRoom,
@@ -2232,11 +2222,7 @@ class ContextOptionsStore {
                 setDeleteDialogVisible(true);
               } else {
                 const translations = {
-                  deleteOperation: t("Translations:DeleteOperation"),
                   deleteFromTrash: t("Translations:DeleteFromTrash"),
-                  deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-                  FileRemoved: t("Files:FileRemoved"),
-                  FolderRemoved: t("Files:FolderRemoved"),
                 };
 
                 this.filesActionsStore

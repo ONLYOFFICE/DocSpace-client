@@ -88,11 +88,7 @@ const DeleteDialogComponent = (props) => {
     onClose();
 
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
       deleteFromTrash: t("Translations:DeleteFromTrash"),
-      deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-      FileRemoved: t("Files:FileRemoved"),
-      FolderRemoved: t("Files:FolderRemoved"),
     };
 
     if (!selection.length) return;
@@ -116,9 +112,6 @@ const DeleteDialogComponent = (props) => {
 
   const onDeleteRoom = async () => {
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
-      successRemoveFile: t("Files:FileRemoved"),
-      successRemoveFolder: t("Files:FolderRemoved"),
       successRemoveRoom: t("Files:RoomRemoved"),
       successRemoveRooms: t("Files:RoomsRemoved"),
     };

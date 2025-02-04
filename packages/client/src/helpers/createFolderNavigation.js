@@ -50,7 +50,7 @@ export const createFolderNavigation = async (
       filter.sortBy = splitFilter[0];
       filter.sortOrder = splitFilter[1];
     }
-  } else {
+  } else if (filterObj) {
     // For the document section at all levels there is one sorting
     filter.sortBy = filterObj.sortBy;
     filter.sortOrder = filterObj.sortOrder;

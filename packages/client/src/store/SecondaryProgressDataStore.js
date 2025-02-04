@@ -69,7 +69,9 @@ class SecondaryProgressDataStore {
     // },
   ];
 
-  constructor() {
+  constructor(treeFoldersStore, mediaViewerDataStore) {
+    this.treeFoldersStore = treeFoldersStore;
+    this.mediaViewerDataStore = mediaViewerDataStore;
     makeAutoObservable(this);
   }
 
@@ -85,44 +87,61 @@ class SecondaryProgressDataStore {
     if (
       operation !== OPERATIONS_NAME.copy &&
       operation !== OPERATIONS_NAME.duplicate &&
-      operation !== OPERATIONS_NAME.move
+      operation !== OPERATIONS_NAME.move &&
+      operation !== OPERATIONS_NAME.trash
     )
       return;
 
     if (!currentOperation.title && !currentOperation.itemsCount) return;
 
+    const { error, title, itemsCount, destFolderInfo, isFolder } =
+      currentOperation;
     const t = (key, options) => i18n.t(key, { ...options, ns: "Files" });
     let i18nKey = "";
     let toastTranslation = "";
 
-    const { url, state } = await createFolderNavigation(
-      currentOperation.destFolderInfo,
-    );
+    const { url, state } = await createFolderNavigation(destFolderInfo);
 
     const onClickLocation = () => {
       toastr.clear();
+      const { visible, setMediaViewerData } = this.mediaViewerDataStore;
+
+      if (visible) {
+        setMediaViewerData({ visible: false, id: null });
+      }
 
       window.DocSpace.navigate(url, { state });
     };
 
     const getError = () => {
-      const error = currentOperation.error;
+      const errorMessage = error;
 
-      if (typeof error === "string") return error;
+      if (typeof errorMessage === "string") return errorMessage;
 
-      if (error.message) return error?.message;
+      if (errorMessage.message) return errorMessage?.message;
 
-      if (error.error) return error.error;
+      if (errorMessage.error) return errorMessage.error;
     };
 
     if (currentOperation.itemsCount === 1) {
       const getTranslationKey = () => {
-        if (operation === OPERATIONS_NAME.move) {
-          return isSuccess ? "MoveItem" : "ErrorMoveItem";
+        if (
+          operation === OPERATIONS_NAME.move ||
+          operation === OPERATIONS_NAME.trash
+        ) {
+          return isSuccess
+            ? isFolder
+              ? "MoveFolderItem"
+              : "MoveItem"
+            : "ErrorMoveItem";
         }
 
         if (operation === OPERATIONS_NAME.copy) {
-          return isSuccess ? "CopyItem" : "ErrorCopyItem";
+          return isSuccess
+            ? isFolder
+              ? "CopyFolderItem"
+              : "CopyItem"
+            : "ErrorCopyItem";
         }
 
         return isSuccess ? "DuplicateItem" : "ErrorDuplicateItem";
@@ -134,7 +153,7 @@ class SecondaryProgressDataStore {
         <Trans
           t={t}
           i18nKey={i18nKey}
-          values={{ title: currentOperation.title, folderName: state.title }}
+          values={{ title, folderName: state.title }}
           components={{
             1: (
               <ColorTheme
@@ -150,7 +169,7 @@ class SecondaryProgressDataStore {
         />
       );
 
-      if (currentOperation.error) {
+      if (error) {
         const message = getError();
 
         toastTranslation = (
@@ -163,9 +182,12 @@ class SecondaryProgressDataStore {
       }
     }
 
-    if (currentOperation.itemsCount > 1) {
+    if (itemsCount > 1) {
       const getTranslationKey = () => {
-        if (operation === OPERATIONS_NAME.move) {
+        if (
+          operation === OPERATIONS_NAME.move ||
+          operation === OPERATIONS_NAME.trash
+        ) {
           return isSuccess ? "MoveItems" : "ErrorMoveItems";
         }
 
@@ -178,7 +200,7 @@ class SecondaryProgressDataStore {
         <Trans
           t={t}
           i18nKey={i18nKey}
-          values={{ qty: currentOperation.itemsCount, folderName: state.title }}
+          values={{ qty: itemsCount, folderName: state.title }}
           components={{
             1: (
               <ColorTheme
@@ -194,7 +216,7 @@ class SecondaryProgressDataStore {
         />
       );
 
-      if (currentOperation.error) {
+      if (error) {
         const message = getError();
 
         toastTranslation = (

@@ -173,7 +173,10 @@ const mediaViewerDataStore = new MediaViewerDataStore(
 
 const oformsStore = new OformsStore(settingsStore, infoPanelStore, userStore);
 
-const secondaryProgressDataStore = new SecondaryProgressDataStore();
+const secondaryProgressDataStore = new SecondaryProgressDataStore(
+  treeFoldersStore,
+  mediaViewerDataStore,
+);
 const primaryProgressDataStore = new PrimaryProgressDataStore();
 const versionHistoryStore = new VersionHistoryStore(filesStore, settingsStore);
 

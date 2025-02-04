@@ -4,10 +4,7 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
 # Set up pnpm
-RUN corepack enable && \
-    corepack prepare pnpm@latest --activate && \
-    pnpm --version && \
-    pnpm config set store-dir .pnpm-store
+RUN corepack enable
 
 WORKDIR /app
 

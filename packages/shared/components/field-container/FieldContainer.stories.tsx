@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -138,7 +138,7 @@ const Template = ({ hasError, ...rest }: FieldContainerProps) => {
   const [value, setValue] = useState("");
 
   return (
-    <FieldContainer {...rest}>
+    <FieldContainer hasError={hasError} {...rest}>
       <TextInput
         value={value}
         hasError={hasError}
@@ -161,6 +161,8 @@ export const Default: Story = {
     maxLabelWidth: "110px",
     tooltipContent: "Enter your full name",
     place: "top",
+    errorMessage:
+      "Error text. Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
     children: null,
   },
   parameters: {

@@ -77,7 +77,7 @@ const Editor = ({
   isSkipError,
 
   sdkConfig,
-  organizationName,
+  organizationName = "",
   filesSettings,
 
   onDownloadAs,

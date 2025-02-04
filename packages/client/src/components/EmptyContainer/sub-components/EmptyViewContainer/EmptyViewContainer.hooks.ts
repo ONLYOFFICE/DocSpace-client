@@ -301,9 +301,9 @@ export const useOptions = (
           onGoToPersonal,
           onGoToShared,
         },
+        logoText,
         isVisitor,
         isFrame,
-        logoText,
       ),
     [
       type,

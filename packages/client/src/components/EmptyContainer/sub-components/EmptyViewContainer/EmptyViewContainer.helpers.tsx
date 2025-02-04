@@ -168,9 +168,9 @@ export const getOptions = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
   actions: OptionActions,
+  logoText: string,
   isVisitor: boolean = true,
   isFrame: boolean = false,
-  logoText: string,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;

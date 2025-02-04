@@ -100,12 +100,9 @@
 }
 
 .errorContainer {
+  color: var(--error-color, --input-error-color);
   padding-top: 4px;
   max-width: var(--error-width, 293px);
-}
-
-.errorText {
-  color: var(--error-color, #c96c27);
 }
 
 @include tablet {

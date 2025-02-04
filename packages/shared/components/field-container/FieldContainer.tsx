@@ -62,6 +62,10 @@ const FieldContainer = ({
   const containerStyle = {
     ...style,
     "--label-width": maxLabelWidth,
+  } as React.CSSProperties;
+
+  const errorContainerStyle = {
+    ...style,
     "--error-width": errorMessageWidth,
     "--error-color": errorColor,
   } as React.CSSProperties;
@@ -132,7 +136,12 @@ const FieldContainer = ({
       <div className={styles.fieldBody}>
         {children}
         {hasError && errorMessage ? (
-          <Text className={styles.errorText} fontSize="12px" color={errorColor}>
+          <Text
+            className={styles.errorContainer}
+            style={errorContainerStyle}
+            fontSize="12px"
+            color={errorColor}
+          >
             {errorMessage}
           </Text>
         ) : null}

@@ -128,10 +128,7 @@
   --button-border-base-disabled: 1px solid #{$gray-light-mid};
 
   --button-border-primary: 1px solid var(--accent-button, #{$light-second-main});
-  --button-border-primary-hover: 1px solid
-    var(--accent-button, #{$light-second-main});
-  --button-border-primary-active: 1px solid
-    var(--accent-button, #{$light-second-main});
+  --button-border-primary-active: var(--accent-button, #{$light-second-main});
   --button-border-primary-disabled: 1px solid
     var(--accent-button, #{$light-second-main-disabled});
 
@@ -237,6 +234,32 @@
   --floating-button-icon-fill: #{$white};
   --floating-button-background: #{$light-icons};
   --floating-button-box-shadow: 0px 5px 20px #{$popup-shadow};
+
+  --slider-track-height: 8px;
+  --slider-thumb-size: 24px;
+  --slider-thumb-border: 6px;
+  --slider-border-radius: 5.6px;
+  --slider-thumb-disabled-color: #{$gray-strong};
+  --slider-thumb-disabled-border: #{$light-second-main-disabled};
+  --slider-shadow: #{$blur-dark};
+  --slider-runnable-track-border: #{$gray-light-mid};
+  --slider-thumb-background: var(
+    --color-scheme-main-accent,
+    #{$light-second-main}
+  );
+  --slider-thumb-border-color: #{$white};
+  --slider-thumb-box-shadow: 0px 5px 20px #{$popup-shadow};
+  --slider-range-thumb: #{$light-second-main};
+  --slider-range-track-border: #{$white};
+  --slider-range-track-background: #{$light-second-main};
+  --slider-background: #{$gray-light-mid};
+  --slider-background-image: linear-gradient(
+    var(--slider-thumb-background),
+    var(--slider-thumb-background)
+  );
+
+  --save-cancel-border-color: #{$gray-light-mid};
+  --save-cancel-reminder-color: #{$gray};
 
   --language-combo-hover-border: #{$gray};
 }
@@ -427,10 +450,11 @@
   --button-border-base-disabled: 1px solid #{$gray-dark-strong};
 
   --button-border-primary: 1px solid var(--accent-button, #{$light-second-main});
-  --button-border-primary-hover: 1px solid
-    var(--accent-button, #{$light-second-main-hover});
-  --button-border-primary-active: 1px solid
-      linear-gradient(0deg, #{$light-second-main}, #{$light-second-main}),
+  --button-border-primary-active: linear-gradient(
+      0deg,
+      #{$light-second-main},
+      #{$light-second-main}
+    ),
     linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
   --button-border-primary-disabled: 1px solid
     var(--accent-button, #{$light-second-main-disabled});
@@ -527,6 +551,29 @@
   --floating-button-icon-fill: #{$black};
   --floating-button-background: #{$white};
   --floating-button-box-shadow: 0px 12px 24px #{$popup-shadow};
+
+  --slider-track-height: 8px;
+  --slider-thumb-size: 24px;
+  --slider-thumb-border: 6px;
+  --slider-border-radius: 5.6px;
+  --slider-thumb-disabled-color: #{$gray-dark-strong};
+  --slider-thumb-disabled-border: #{$light-second-main-disabled};
+  --slider-shadow: #{$blur-dark};
+  --slider-runnable-track-border: #{$gray-dark-mid};
+  --slider-thumb-background: #{$white};
+  --slider-thumb-border-color: #{$black};
+  --slider-thumb-box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.25);
+  --slider-range-thumb: #{$white};
+  --slider-range-track-border: #{$black};
+  --slider-range-track-background: #{$white};
+  --slider-background: #{$gray-dark-mid};
+  --slider-background-image: linear-gradient(
+    var(--slider-thumb-background),
+    var(--slider-thumb-background)
+  );
+
+  --save-cancel-border-color: #{$gray-light-mid};
+  --save-cancel-reminder-color: #{$gray};
 
   --language-combo-hover-border: #{$gray-dark};
 }
@@ -1497,6 +1544,20 @@
 }
 
 .light {
+  --date-picker-background: #{$white};
+  --date-picker-border: 1px solid #{$gray-strong};
+  --date-picker-cell-background: #{$gray-light-mid};
+  --date-picker-icon-color: #{$light-gray-dark};
+}
+
+.dark {
+  --date-picker-background: #{$black};
+  --date-picker-border: 1px solid #{$gray-dark-strong};
+  --date-picker-cell-background: #{$gray-dark-mid};
+  --date-picker-icon-color: #{$dark-gray-dark};
+}
+
+.light {
   --dropzone-border: 2px dashed #{$gray-light-mid};
   --dropzone-secondary-link: #${black};
   --dropzone-exsts-color: #{$gray};
@@ -1506,6 +1567,76 @@
   --dropzone-border: 2px dashed #{$gray-dark-strong};
   --dropzone-secondary-link: #${white};
   --dropzone-exsts-color: #{$gray};
+}
+
+.light {
+  --social-button-border: 1px solid #{$gray-strong};
+  --social-button-text-color: #{$gray};
+  --social-button-connect-text-color: #{$white};
+  --social-button-background: #{$white};
+  --social-button-hover-background: #{$white};
+  --social-button-connect-background: #{$light-icons};
+  --social-button-hover-connect-background: #{$link};
+  --social-button-hover-border: 1px solid #{$light-second-main};
+  --social-button-active-background: #{$gray-light-mid};
+  --social-button-active-border: 1px solid #{$gray-strong};
+  --social-button-active-connect-background: #{$blue-light-mid};
+  --social-button-disable-background: #{$gray-light};
+  --social-button-disable-color: #{$black};
+  --social-button-hover-text-color: #{$black};
+  --social-button-connect-svg-fill: #{$white};
+}
+
+.dark {
+  --social-button-border: 1px solid #{$gray-dark-strong};
+  --social-button-text-color: #{$white};
+  --social-button-connect-text-color: #{$dark-black};
+  --social-button-background: #{$black};
+  --social-button-hover-background: #{$black};
+  --social-button-connect-background: #{$dark-icon};
+  --social-button-hover-connect-background: #{$white};
+  --social-button-hover-border: 1px solid #{$gray-dark};
+  --social-button-active-background: #{$dark-gray-light};
+  --social-button-active-border: 1px solid #{$gray-dark-strong};
+  --social-button-active-connect-background: #{$big-gray-dark-mid};
+  --social-button-disable-background: #{$dark-gray-light};
+  --social-button-disable-color: #{$dark-gray-dark};
+  --social-button-hover-text-color: #{$white};
+  --social-button-connect-svg-fill: #{$dark-black};
+}
+
+.light {
+  --file-input-border-color: #{$gray-strong};
+  --file-input-disabled-border-color: #{$gray-light-mid};
+  --file-input-warning-border-color: #{$light-status-warning};
+  --file-input-error-border-color: #{$light-error-status};
+  --file-input-hover-border-color: #{$gray};
+  --file-input-hover-disabled-border-color: #{$gray-light-mid};
+  --file-input-hover-warning-border-color: #{$light-status-warning};
+  --file-input-hover-error-border-color: #{$light-error-status};
+  --file-input-focus-border-color: #{$light-second-main};
+  --file-input-focus-disabled-border-color: #{$gray-light-mid};
+  --file-input-focus-warning-border-color: #{$light-status-warning};
+  --file-input-focus-error-border-color: #{$light-error-status};
+
+  --file-input-disabled-placeholder-color: #{$gray-strong};
+}
+
+.dark {
+  --file-input-disabled-border-color: #{$gray-dark-strong};
+  --file-input-border-color: #{$gray-dark-strong};
+  --file-input-warning-border-color: #{$dark-status-warning};
+  --file-input-error-border-color: #{$dark-error-status};
+  --file-input-hover-border-color: #{$gray-dark};
+  --file-input-hover-disabled-border-color: #{$gray-dark-strong};
+  --file-input-hover-warning-border-color: #{$dark-status-warning};
+  --file-input-hover-error-border-color: #{$dark-error-status};
+  --file-input-focus-border-color: #{$white};
+  --file-input-focus-disabled-border-color: #{$gray-dark-strong};
+  --file-input-focus-warning-border-color: #{$dark-status-warning};
+  --file-input-focus-error-border-color: #{$dark-error-status};
+
+  --file-input-disabled-placeholder-color: #{$gray-dark-text};
 }
 
 :global(.rtl) {

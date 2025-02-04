@@ -90,6 +90,7 @@ export default inject<TStore>(
       currentDeviceType,
       standalone,
       isBurgerLoading,
+      logoText,
     } = settingsStore;
 
     const { isFreeTariff, isNonProfit, isTrial, currentTariffPlanTitle } =
@@ -145,7 +146,7 @@ export default inject<TStore>(
       isShowLiveChat,
 
       currentDeviceType,
-
+      logoText,
       isAdmin,
     };
   },

@@ -30,6 +30,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 
+import { toastr } from "@docspace/shared/components/toast";
 import { withTranslation } from "react-i18next";
 import { DeleteVersionDialogContainer } from "./DeleteLinkDialog.styled";
 
@@ -61,26 +62,17 @@ const DeleteVersionDialogComponent = (props) => {
       fileId,
       versionSelectedForDeletion,
     );
-    onDeleteVersionFile(+fileId, [versionSelectedForDeletion]);
+    onDeleteVersionFile(+fileId, [versionSelectedForDeletion])
+      .then((res) => {
+        console.log("res", res);
+      })
+      .catch((err) => toastr.error(err.response?.data?.error.message))
+      .finally(() => {
+        console.log("finally");
+        setIsLoading(false);
+        setVersionDeleteProcess(false);
+      });
 
-    // setIsLoading(true);
-    // const newLink = JSON.parse(JSON.stringify(link));
-    // newLink.access = 0;
-    // editExternalLink(roomId, newLink)
-    //   .then((res) => {
-    //     setRoomShared(roomId, !!res);
-    //     deleteExternalLink(res, newLink.sharedTo.id);
-    //     if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
-    //       toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
-    //     } else toastr.success(t("Files:LinkDeletedSuccessfully"));
-    //   })
-    //   .catch((err) => toastr.error(err.response?.data?.error.message))
-    //   .finally(() => {
-    //     setIsLoading(false);
-    //     onClose();
-    //   });
-
-    setIsLoading(false);
     onClose();
   };
 

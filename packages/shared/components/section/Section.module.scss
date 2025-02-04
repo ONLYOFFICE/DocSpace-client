@@ -569,16 +569,147 @@
     &.laterHide {
       animation-delay: 8s;
     }
-
-    // &.immediateHide {
-    //   animation-delay: 0s;
-    // }
   }
 
   &:not(.autoHide) {
     opacity: 1;
     transform: translateY(0);
     animation: none;
+  }
+
+  .progressBarWrapper {
+    display: none;
+    align-items: center;
+    flex-wrap: wrap;
+
+    padding: 8px 16px;
+    background: var(--background-primary);
+    border-top: 1px solid var(--progress-bar-border);
+    border-bottom: 1px solid var(--progress-bar-border);
+
+    transition:
+      opacity 0.3s ease-out,
+      transform 0.3s ease-out;
+    opacity: 1;
+
+    &.fadeOut {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &.isUploading {
+      display: flex;
+    }
+  }
+
+  .progressWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    width: 100%;
+  }
+
+  .progressHeader {
+    color: var(--text-primary);
+    margin-right: 8px;
+
+    &.withClick {
+      cursor: pointer;
+    }
+  }
+
+  .progressInfoWrapper {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    svg {
+      path {
+        fill: var(--progress-bar-icon-color) !important;
+      }
+      &:hover {
+        cursor: pointer;
+        path {
+          fill: var(--progress-bar-hover-icon) !important;
+        }
+      }
+    }
+  }
+  .progressMainContainer {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
+    div:first-child {
+      position: relative;
+    }
+
+    &.withClick {
+      cursor: pointer;
+    }
+  }
+
+  .progressLoader {
+    margin: auto;
+    width: 12px;
+    height: 12px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background-image: linear-gradient(rgb(85, 95, 101), rgb(85, 95, 101)),
+      conic-gradient(
+        from 0.25turn at 50% 30%,
+        rgb(85, 95, 101),
+        10deg,
+        rgb(85, 95, 101),
+        140deg,
+        white
+      );
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    animation: loader 1.3s linear infinite;
+  }
+
+  @keyframes loader {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .infoIcon {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    inset-inline-start: 20px;
+    top: -7px;
+    left: 9px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    &.alert {
+      svg {
+        path {
+          fill: var(--status-icon-color-negative) !important;
+        }
+      }
+    }
+
+    &.complete {
+      svg {
+        path {
+          fill: var(--status-icon-color-positive) !important;
+        }
+      }
+    }
+  }
+
+  .labelWrapper {
+    display: flex;
+    align-items: baseline;
   }
 
   :global {

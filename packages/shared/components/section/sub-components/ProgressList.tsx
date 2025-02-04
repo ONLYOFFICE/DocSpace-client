@@ -13,7 +13,7 @@ import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
 import UploadIconUrl from "PUBLIC_DIR/images/icons/16/upload.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 
-import { ProgressBarMobile } from "../../progress-bar-mobile";
+import { ProgressBar } from "./ProgressBar";
 import { Operation } from "../Section.types";
 import { OPERATIONS_NAME } from "../../../constants";
 
@@ -75,7 +75,7 @@ const ProgressList = observer(
             key={`${item.operation}-${item.items?.[0]?.operationId ?? ""}-${item.completed}`}
             className="progress-list"
           >
-            <ProgressBarMobile
+            <ProgressBar
               completed={item.completed}
               label={item.label}
               alert={item.alert}
@@ -93,7 +93,7 @@ const ProgressList = observer(
             key={`${item.operation}`}
             className={`progress-list ${onOpenPanel ? "withHover" : ""}`}
           >
-            <ProgressBarMobile
+            <ProgressBar
               completed={item.completed}
               label={item.label}
               alert={item.alert}

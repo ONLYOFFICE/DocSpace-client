@@ -110,6 +110,7 @@ export interface Operation {
   alert: boolean;
   completed: boolean;
   percent?: number;
+  disableOpenPanel?: boolean;
   items?: Array<{
     operationId: string;
     percent: number;
@@ -122,19 +123,16 @@ export interface OperationsProgressProps {
   operationsAlert?: boolean;
   operationsCompleted?: boolean;
   clearSecondaryProgressData: (
-    operationId: string | null,
-    operation: string | null,
-    clearAll?: boolean,
+    operationId?: string | null,
+    operation?: string | null,
   ) => void;
-  clearPrimaryProgressData: (
-    operation: string | null,
-    clearAll?: boolean | null,
-  ) => void;
-  cancelUpload: (t: (key: string) => string) => void;
+  clearPrimaryProgressData?: (operation?: string | null) => void;
+  cancelUpload?: (t: (key: string) => string) => void;
   onOpenPanel?: () => void;
   mainButtonVisible?: boolean;
   needErrorChecking?: boolean;
   showCancelButton?: boolean;
+  onCancelOperation?: (callback: () => void) => void;
 }
 
 export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
@@ -168,7 +166,6 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     maintenanceExist?: boolean;
     snackbarExist?: boolean;
     showText?: boolean;
-    clearUploadedFilesHistory?: () => void;
     isTrashFolder?: boolean;
     setIsInfoPanelVisible?: (value: boolean) => void;
     secondaryOperationsCompleted?: boolean;
@@ -181,17 +178,52 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
       clearAll?: boolean,
     ) => void;
 
-    clearPrimaryProgressData: (
-      operation: string | null,
-      clearAll?: boolean | null,
-    ) => void;
+    clearPrimaryProgressData: (operation?: string | null) => void;
     cancelUpload: (t: (key: string) => string) => void;
     secondaryOperationsAlert?: boolean;
     mainButtonVisible?: boolean;
     primaryOperationsAlert?: boolean;
     needErrorChecking?: boolean;
+    onCancelOperation?: (callback: () => void) => void;
   };
 
 export type SectionContextMenuProps = {
   getContextModel?: () => ContextMenuModel[];
 };
+
+export interface ProgressBarMobileProps {
+  /** Display text for the progress bar */
+  label?: string;
+  /** Alert status */
+  alert?: boolean;
+  /** Status text to display */
+  status?: string;
+  /** Progress completion percentage */
+  percent?: number;
+  /** Controls visibility of the progress bar */
+  open?: boolean;
+  /** The function that facilitates hiding the button */
+  onCancel?: () => void;
+  /** Icon URL or component */
+  icon?: React.ReactNode;
+  /** The function called after the progress header is clicked */
+  onClickAction?: () => void;
+  /** The function that facilitates hiding the button */
+  hideButton?: () => void;
+  /** Changes the progress bar color, if set to true */
+  error?: boolean;
+  /** Hides the progress bar */
+  withoutProgress?: boolean;
+  /** Icon URL */
+  iconUrl?: string;
+  /** Indicates if the operation is completed */
+  completed?: boolean;
+  /** Callback function for clearing progress */
+  onClearProgress?: (operationId: string | null, operation: string) => void;
+  /** Unique identifier for the operation */
+  operationId?: string;
+  /** Type of operation */
+  operation?: string;
+  /** The function called after the progress header is clicked */
+  onOpenPanel?: () => void;
+}

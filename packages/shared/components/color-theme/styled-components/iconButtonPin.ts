@@ -40,8 +40,7 @@ const IconButtonPinTheme = styled(StyledPinIcon).attrs(injectDefaultTheme)<
   &&:hover:not(.disabled) {
     svg {
       path {
-        fill: ${(props) =>
-          props.theme.isBase && props.$currentColorScheme?.main?.accent};
+        fill: ${(props) => props.$currentColorScheme?.main?.accent};
       }
     }
   }

@@ -57,6 +57,8 @@ const TagPure = ({
   removeTagIcon,
   roomType,
   providerType,
+  onMouseEnter,
+  onMouseLeave,
 }: TagProps) => {
   const [openDropdown, setOpenDropdown] = React.useState(false);
 
@@ -132,6 +134,8 @@ const TagPure = ({
         style={{ ...style, maxWidth: tagMaxWidth }}
         ref={tagRef}
         onClick={openDropdownAction}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         data-testid="tag"
       >
         <Text className={styles.tagText} fontSize="13px" noSelect>
@@ -182,6 +186,8 @@ const TagPure = ({
       data-testid="tag"
       aria-label={label}
       aria-disabled={isDisabled}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {icon ? (
         <ReactSVG className={styles.thirdPartyTag} src={icon} />

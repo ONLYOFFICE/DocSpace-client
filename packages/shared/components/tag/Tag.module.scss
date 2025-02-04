@@ -1,33 +1,55 @@
 @import "../../styles/variables/_colors.scss";
 
 .tag {
+  position: relative;
   width: fit-content;
   display: flex;
   align-items: center;
   box-sizing: border-box;
   padding: var(--tag-padding);
   margin-inline-end: var(--tag-margin-end);
-  background: var(--tag-background);
+  background: var();
+
   border-radius: var(--tag-border-radius);
+  border: var(--tag-border);
 
   &:last-child {
     margin-inline-end: 0;
   }
 
-  &.isDisabled {
-    background: var(--tag-disabled-background);
+  &::after {
+    content: "";
+    position: absolute;
+    inset-block: -3px;
+    inset-inline: -3px;
+  }
+
+  &:active {
+    border-color: transparent;
+    background: var(--tag-active-background);
   }
 
   &.isNewTag {
     background: var(--tag-new-background);
+    border-color: transparent;
   }
 
   &.isDeleted {
     background: var(--tag-deleted-background);
+    border-color: transparent;
 
     .tagText {
       text-decoration: line-through;
       color: var(--tag-deleted-color);
+    }
+  }
+
+  &.isDisabled {
+    border: var(--tag-disabled-border);
+    pointer-events: none;
+
+    .tagText {
+      color: var(--tag-disabled-color);
     }
   }
 
@@ -40,6 +62,7 @@
 
     &:hover {
       background: var(--tag-hover-background);
+      border-color: transparent;
 
       &.isNewTag {
         background: var(--tag-new-hover-background);

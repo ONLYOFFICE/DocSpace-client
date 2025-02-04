@@ -40,7 +40,11 @@ import ImportCompleteStep from "../../components/ImportCompleteStep";
 
 import { TFunciton } from "../../types";
 
-export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
+export const getStepsData = (
+  t: TFunciton,
+  isTypeSelectEmpty: boolean,
+  logoText: string,
+) => {
   return [
     {
       title: t("Common:SelectFile"),
@@ -58,7 +62,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       title: t("Settings:SelectUsersWithEmail"),
       description: t("Settings:SelectUsersDescriptionNextcloud", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: (
         <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />
@@ -68,7 +72,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       title: t("Settings:AddEmails"),
       description: t("Settings:AddEmailsDescription", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <AddEmailsStep t={t} />,
     },
@@ -157,7 +161,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionNextcloud", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <ImportCompleteStep t={t} />,
     },

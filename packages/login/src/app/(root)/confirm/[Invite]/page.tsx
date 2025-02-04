@@ -94,6 +94,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
               legalTerms={settings.legalTerms}
               licenseUrl={settings.licenseUrl}
               isStandalone={settings.standalone}
+              logoText={settings.logoText}
             />
           </FormWrapper>
         </>

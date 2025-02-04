@@ -178,6 +178,7 @@ class ThirdPartyServices extends React.Component {
       currentColorScheme,
       isThirdPartyAvailable,
       supportEmail,
+      logoText,
     } = this.props;
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
@@ -219,7 +220,7 @@ class ThirdPartyServices extends React.Component {
             <Text>
               {t("IntegrationRequest", {
                 productName: t("Common:ProductName"),
-                organizationName: t("Common:OrganizationName"),
+                organizationName: logoText,
               })}
             </Text>
             <Button
@@ -320,6 +321,7 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     theme,
     currentColorScheme,
     companyInfoSettingsData,
+    logoText,
   } = settingsStore;
   const {
     getConsumers,
@@ -342,5 +344,6 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     currentColorScheme,
     isThirdPartyAvailable,
     supportEmail: companyInfoSettingsData?.email,
+    logoText,
   };
 })(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

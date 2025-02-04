@@ -31,6 +31,7 @@ const AuthorizedApps = ({
   selection,
   bufferSelection,
   revokeClient,
+  logoText,
 }: AuthorizedAppsProps) => {
   const { t } = useTranslation(["OAuth"]);
 
@@ -89,6 +90,7 @@ const AuthorizedApps = ({
           onRevoke={revokeClient}
           selection={selection}
           bufferSelection={bufferSelection}
+          logoText={logoText}
         />
       ) : null}
     </StyledContainer>
@@ -118,7 +120,7 @@ export default inject(
       revokeClient,
     } = oauthStore;
 
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, logoText } = settingsStore;
 
     return {
       consents,
@@ -133,6 +135,7 @@ export default inject(
       selection,
       bufferSelection,
       revokeClient,
+      logoText,
     };
   },
 )(observer(AuthorizedApps));

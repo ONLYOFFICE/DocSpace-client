@@ -223,7 +223,7 @@
     &.primary {
       background: var(--accent-button, --button-background-primary-disabled);
       color: var(--button-color-primary-disabled);
-      border: var(--accent-button, --button-background-primary-disabled);
+      border: var(--button-border-primary-disabled);
     }
 
     .loader {

@@ -45,6 +45,7 @@ export type ArticleHeaderProps = {
 export type ArticleAppsProps = {
   showText: boolean;
   withDevTools: boolean;
+  logoText: string;
 };
 
 export type ArticleHideMenuButtonProps = {

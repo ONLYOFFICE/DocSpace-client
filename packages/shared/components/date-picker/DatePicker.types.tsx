@@ -26,7 +26,7 @@
 
 import moment from "moment";
 
-export interface DatePickerProps {
+export type DatePickerProps = {
   /** Allows to change select date text */
   selectDateText?: string;
   /** Selected date */
@@ -50,4 +50,4 @@ export interface DatePickerProps {
   /** Allows to set first shown date in calendar */
   openDate: moment.Moment;
   isMobile?: boolean;
-}
+};

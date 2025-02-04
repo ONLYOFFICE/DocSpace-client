@@ -26,6 +26,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import moment from "moment";
+import classNames from "classnames";
 
 import ClockIcon from "PUBLIC_DIR/images/clock.react.svg";
 
@@ -35,7 +36,7 @@ import { TimePicker } from "../time-picker";
 import { DatePicker } from "../date-picker";
 
 import { DateTimePickerProps } from "./DateTimerPicker.types";
-import { Selectors, TimeCell, TimeSelector } from "./DateTimerPicker.styled";
+import styles from "./DateTimePicker.module.scss";
 
 const DateTimePicker = (props: DateTimePickerProps) => {
   const {
@@ -90,15 +91,17 @@ const DateTimePicker = (props: DateTimePickerProps) => {
   }, []);
 
   return (
-    <Selectors
-      className={className}
+    <div
+      className={classNames(styles.selectors, className, {
+        [styles.hasError]: hasError,
+      })}
       id={id}
-      hasError={hasError}
       data-testid="date-time-picker"
+      aria-label={selectDateText}
+      aria-invalid={hasError}
     >
       <DatePicker
         initialDate={initialDate}
-        // date={date}
         onChange={handleChange}
         selectDateText={selectDateText}
         minDate={minDate}
@@ -107,7 +110,10 @@ const DateTimePicker = (props: DateTimePickerProps) => {
         openDate={openDate}
         outerDate={date}
       />
-      <TimeSelector>
+      <span
+        className={styles.timeSelector}
+        data-testid="date-time-picker-time-wrapper"
+      >
         {date !== null ? (
           isTimeFocused ? (
             <TimePicker
@@ -117,16 +123,30 @@ const DateTimePicker = (props: DateTimePickerProps) => {
               onBlur={hideTimePicker}
               focusOnRender
               forwardedRef={timePickerRef}
+              aria-label="Time picker"
             />
           ) : (
-            <TimeCell onClick={showTimePicker} hasError={hasError}>
-              <ClockIcon className="clockIcon" />
+            <span
+              className={classNames(styles.timeCell, {
+                [styles.hasError]: hasError,
+              })}
+              onClick={showTimePicker}
+              data-testid="date-time-picker-time-display"
+              role="button"
+              aria-label={`Current time: ${date.format("HH:mm")}`}
+              tabIndex={0}
+            >
+              <ClockIcon
+                className={styles.clockIcon}
+                aria-hidden="true"
+                data-testid="date-time-picker-clock-icon"
+              />
               {date.format("HH:mm")}
-            </TimeCell>
+            </span>
           )
         ) : null}
-      </TimeSelector>
-    </Selectors>
+      </span>
+    </div>
   );
 };
 

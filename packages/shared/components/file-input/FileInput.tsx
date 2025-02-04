@@ -136,7 +136,7 @@ const FileInputPure = ({
 
   const textInputClasses = classNames(styles.textInput, {
     [styles[size]]: size,
-    [styles.disabled]: isDisabled,
+    [styles.disabled]: isDisabled || isLoading,
     [styles.error]: hasError,
     [styles.warning]: hasWarning,
   });

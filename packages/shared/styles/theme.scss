@@ -1517,6 +1517,8 @@
   --file-input-focus-disabled-border-color: #{$gray-light-mid};
   --file-input-focus-warning-border-color: #{$light-status-warning};
   --file-input-focus-error-border-color: #{$light-error-status};
+
+  --file-input-disabled-placeholder-color: #{$gray-strong};
 }
 
 .dark {
@@ -1532,6 +1534,8 @@
   --file-input-focus-disabled-border-color: #{$gray-dark-strong};
   --file-input-focus-warning-border-color: #{$dark-status-warning};
   --file-input-focus-error-border-color: #{$dark-error-status};
+
+  --file-input-disabled-placeholder-color: #{$gray-dark-text};
 }
 
 :global(.rtl) {

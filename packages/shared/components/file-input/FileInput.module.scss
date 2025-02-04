@@ -145,6 +145,28 @@
     &.disabled {
       cursor: default !important;
       border-color: var(--file-input-disabled-border-color);
+
+      &::placeholder {
+        color: var(--file-input-disabled-placeholder-color);
+        -webkit-text-fill-color: var(--file-input-disabled-placeholder-color);
+      }
+
+      &::-webkit-input-placeholder {
+        color: var(--file-input-disabled-placeholder-color);
+        -webkit-text-fill-color: var(--file-input-disabled-placeholder-color);
+      }
+      &::-moz-placeholder {
+        color: var(--file-input-disabled-placeholder-color);
+        -webkit-text-fill-color: var(--file-input-disabled-placeholder-color);
+      }
+      &:-ms-input-placeholder {
+        color: var(--file-input-disabled-placeholder-color);
+        -webkit-text-fill-color: var(--file-input-disabled-placeholder-color);
+      }
+      &:-moz-placeholder {
+        color: var(--file-input-disabled-placeholder-color);
+        -webkit-text-fill-color: var(--file-input-disabled-placeholder-color);
+      }
     }
 
     &.warning {

@@ -46,5 +46,9 @@
   .showMoreButton {
     padding: 10px 16px;
     width: 52px;
+
+    svg {
+      transform: rotate(90deg);
+    }
   }
 }

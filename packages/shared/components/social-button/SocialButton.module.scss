@@ -173,6 +173,12 @@
     min-width: 20px;
     min-height: 20px;
   }
+
+  &[data-icon-options-color] {
+    svg path {
+      fill: var(--icon-options-color);
+    }
+  }
 }
 
 .iconWrapper {

@@ -45,8 +45,14 @@ export const SocialButton = memo((props: SocialButtonProps) => {
     isDisabled = false,
     noHover = false,
     className,
+    $iconOptions,
     ...otherProps
   } = props;
+
+  const buttonStyle = $iconOptions?.color
+    ? ({ "--icon-options-color": $iconOptions.color } as React.CSSProperties)
+    : undefined;
+
   return (
     <button
       type="button"
@@ -57,6 +63,8 @@ export const SocialButton = memo((props: SocialButtonProps) => {
         [styles.noHover]: noHover,
       })}
       data-testid="social-button"
+      data-icon-options-color={$iconOptions ? $iconOptions.color : null}
+      style={buttonStyle}
       tabIndex={tabIndex}
       disabled={isDisabled}
       {...otherProps}

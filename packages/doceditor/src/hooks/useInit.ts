@@ -60,8 +60,8 @@ const useInit = ({
       config.document.fileType,
       documentReady,
       successAuth ?? false,
-      setDocTitle,
       organizationName,
+      setDocTitle,
     );
   }, [
     t,

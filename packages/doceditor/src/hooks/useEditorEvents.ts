@@ -597,8 +597,8 @@ const useEditorEvents = ({
               config?.document.fileType ?? "",
               documentReady,
               successAuth ?? false,
-              setDocTitle,
               organizationName,
+              setDocTitle,
             )
           : setDocumentTitle(
               t,
@@ -606,8 +606,8 @@ const useEditorEvents = ({
               config?.document.fileType ?? "",
               documentReady,
               successAuth ?? false,
-              setDocTitle,
               organizationName,
+              setDocTitle,
             );
       }, 500);
     },
@@ -634,8 +634,8 @@ const useEditorEvents = ({
           config?.document.fileType ?? "",
           documentReady,
           successAuth ?? false,
-          setDocTitle,
           organizationName,
+          setDocTitle,
         );
         setDocTitle(newTitle);
       }

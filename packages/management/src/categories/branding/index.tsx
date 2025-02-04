@@ -31,11 +31,15 @@ import { useStore } from "SRC_DIR/store";
 import BrandingPage from "client/BrandingPage";
 import { setDocumentTitle } from "SRC_DIR/utils";
 
-const Branding = () => {
+interface BrandingProps {
+  logoText: string;
+}
+
+const Branding: React.FC<BrandingProps> = ({ logoText }) => {
   const { t } = useTranslation(["Settings"]);
 
   useEffect(() => {
-    setDocumentTitle(t("Branding"));
+    setDocumentTitle(t("Branding"), logoText);
   }, []);
 
   return <BrandingPage />;

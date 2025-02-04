@@ -30,11 +30,15 @@ import { useTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/utils";
 import AutoBackupPage from "client/AutoBackupPage";
 
-const AutoBackup = () => {
+interface AutoBackupProps {
+  logoText: string;
+}
+
+const AutoBackup: React.FC<AutoBackupProps> = ({ logoText }) => {
   const { t } = useTranslation(["Settings"]);
 
   useEffect(() => {
-    setDocumentTitle(t("AutoBackup"));
+    setDocumentTitle(t("AutoBackup"), logoText);
   }, []);
 
   return <AutoBackupPage />;

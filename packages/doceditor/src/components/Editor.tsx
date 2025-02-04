@@ -77,7 +77,7 @@ const Editor = ({
   isSkipError,
 
   sdkConfig,
-
+  organizationName = "",
   filesSettings,
 
   onDownloadAs,
@@ -125,6 +125,7 @@ const Editor = ({
     openOnNewPage,
     t,
     sdkConfig,
+    organizationName,
   });
 
   useInit({
@@ -135,6 +136,7 @@ const Editor = ({
     documentReady,
     setDocTitle,
     t,
+    organizationName,
   });
 
   const newConfig: IConfigType = config

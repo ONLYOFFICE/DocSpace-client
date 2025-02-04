@@ -28,6 +28,7 @@ import { observer } from "mobx-react";
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { isMobileOnly } from "react-device-detect";
+import { useTranslation } from "react-i18next";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { Toast } from "@docspace/shared/components/toast";
@@ -57,7 +58,9 @@ const App = observer(() => {
   const { authStore, userStore, settingsStore } = useStore();
 
   const { init, isLoaded } = authStore;
-  const { setTheme, timezone } = settingsStore;
+  const { setTheme, timezone, logoText, setLogoText } = settingsStore;
+
+  const { t } = useTranslation(["Common", "Settings"]);
 
   window.timezone = timezone;
 
@@ -76,6 +79,10 @@ const App = observer(() => {
   useEffect(() => {
     if (userTheme) setTheme(userTheme);
   }, [userTheme]);
+
+  useEffect(() => {
+    if (!logoText) setLogoText(t("Common:OrganizationName"));
+  }, [logoText, setLogoText]);
 
   useEffect(() => {
     const { socketSubscribers } = SocketHelper;

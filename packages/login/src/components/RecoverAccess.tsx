@@ -29,7 +29,7 @@
 import { useTranslation } from "react-i18next";
 
 import { Link, LinkType } from "@docspace/shared/components/link";
-import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
+import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
 
 import useRecoverDialog from "@/hooks/useRecoverDialog";
 

@@ -29,7 +29,7 @@ export type IconOptions = {
 };
 export type SocialButtonSize = "base" | "small";
 
-export interface StyledSocialButtonProps {
+export type StyledSocialButtonProps = {
   /** Accepts id */
   id?: string;
   /** Accepts tabindex prop */
@@ -50,9 +50,9 @@ export interface StyledSocialButtonProps {
   style?: React.CSSProperties;
   /** Sets a callback function that is triggered when the button is clicked */
   onClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
-}
+};
 
-export interface SocialButtonProps extends Partial<StyledSocialButtonProps> {
+export type SocialButtonProps = Partial<StyledSocialButtonProps> & {
   /** Button text */
   label?: string | React.ReactNode;
   /** Button icon */
@@ -62,4 +62,4 @@ export interface SocialButtonProps extends Partial<StyledSocialButtonProps> {
   "data-providername"?: string;
 
   IconComponent?: JSX.ElementType;
-}
+};

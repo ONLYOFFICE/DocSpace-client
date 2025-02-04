@@ -42,25 +42,26 @@ import ConnectDialog from "client/ConnectDialog";
 const Settings = () => {
   const { t } = useTranslation(["Common", "Settings"]);
   const navigate = useNavigate();
-  const { dialogsStore, currentTariffStatusStore } = useStore();
+  const { dialogsStore, currentTariffStatusStore, settingsStore } = useStore();
   const { connectDialogVisible } = dialogsStore;
   const { isCommunity } = currentTariffStatusStore;
+  const { logoText } = settingsStore;
 
   const data = [
     {
       id: "data-backup",
       name: t("Settings:DataBackup"),
-      content: <Backup />,
+      content: <Backup logoText={logoText} />,
     },
     {
       id: "auto-backup",
       name: t("Settings:AutoBackup"),
-      content: <AutoBackup />,
+      content: <AutoBackup logoText={logoText} />,
     },
     {
       id: "restore",
       name: t("Settings:RestoreBackup"),
-      content: <Restore />,
+      content: <Restore logoText={logoText} />,
     },
   ];
 
@@ -68,7 +69,7 @@ const Settings = () => {
     data.unshift({
       id: "branding",
       name: t("Settings:Branding"),
-      content: <Branding />,
+      content: <Branding logoText={logoText} />,
     });
   }
 

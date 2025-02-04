@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,39 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Story, Meta } from "@storybook/react";
-import RecoverAccessModalDialog from "./RecoverAccessModalDialog";
-import type { RecoverAccessModalDialogProps } from "./RecoverAccessModalDialog.types";
+@import "../../styles/variables/index.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
 
-export default {
-  title: "Components/RecoverAccessModalDialog",
-  component: RecoverAccessModalDialog,
-  argTypes: {
-    onClose: { action: "closed" },
-  },
-} as Meta;
+.timeInput {
+  width: 60px;
+  height: 32px;
+  box-sizing: border-box;
+  padding: 0px 6px;
+  direction: ltr;
 
-const Template: Story<RecoverAccessModalDialogProps> = (args) => (
-  <RecoverAccessModalDialog {...args} />
-);
+  border: 1px solid var(--input-border-color);
+  border-radius: 3px;
 
-export const Default = Template.bind({});
-Default.args = {
-  visible: true,
-  textBody:
-    "Please enter your email and describe your problem to recover access.",
-  emailPlaceholderText: "Enter your email",
-  id: "recover-modal",
-};
+  transition: "all 0.2s ease 0s";
 
-export const WithError = Template.bind({});
-WithError.args = {
-  ...Default.args,
-  visible: true,
-};
+  display: flex;
+  align-items: center;
 
-export const Loading = Template.bind({});
-Loading.args = {
-  ...Default.args,
-  visible: true,
-};
+  background-color: var(--input-bg);
+
+  &.hasError {
+    border-color: var(--input-error-border);
+  }
+
+  &.isFocused {
+    border-color: var(--input-border-focus);
+  }
+
+  :focus {
+    border-color: var(--input-border-focus);
+  }
+
+  & > input {
+    max-width: 22px;
+    padding: 0px !important;
+    margin-inline: 2.5px -2.5px;
+  }
+
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+}

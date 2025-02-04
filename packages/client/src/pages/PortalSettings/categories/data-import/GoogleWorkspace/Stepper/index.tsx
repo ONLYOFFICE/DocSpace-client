@@ -39,7 +39,11 @@ import ImportCompleteStep from "../../components/ImportCompleteStep";
 
 import { TFunciton } from "../../types";
 
-export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
+export const getStepsData = (
+  t: TFunciton,
+  isTypeSelectEmpty: boolean,
+  logoText: string,
+) => {
   return [
     {
       title: t("Common:SelectFiles"),
@@ -57,7 +61,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       title: t("Settings:SelectUsers"),
       description: t("Settings:SelectUsersDescriptionGoogle", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <SelectUsersStep t={t} canDisable shouldSetUsers />,
     },
@@ -149,7 +153,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionGoogle", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <ImportCompleteStep t={t} />,
     },

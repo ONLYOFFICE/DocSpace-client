@@ -24,9 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Meta, Story } from "@storybook/react";
-import { SocialButtonsGroup } from "./index";
-import type { SocialButtonProps } from "./SocialButtonsGroup.types";
+import { useState } from "react";
+import { Meta, StoryFn } from "@storybook/react";
+
+import MoreLoginModal from "./index";
+import type { MoreLoginModalProps } from "./MoreLoginModal.types";
+
+import { Button } from "../../components/button";
 
 const mockTranslation = (key: string) => {
   const translations: { [key: string]: string } = {
@@ -34,88 +38,82 @@ const mockTranslation = (key: string) => {
     "Common:ContinueButton": "Continue",
     "Common:ProviderFacebook": "Continue with Facebook",
     "Common:ProviderGoogle": "Continue with Google",
-    "Common:ProviderLinkedIn": "Continue with LinkedIn",
-    "Common:ProviderTwitter": "Continue with X",
   };
   return translations[key] || key;
 };
 
 export default {
-  title: "Components/SocialButtonsGroup",
-  component: SocialButtonsGroup,
+  title: "Dialogs/MoreLoginModal",
+  component: MoreLoginModal,
   parameters: {
     docs: {
       description: {
         component:
-          "A group of social login buttons with support for SSO and additional providers through a 'More' button",
+          "Modal dialog displaying additional login options including social providers and SSO login.",
       },
     },
   },
   argTypes: {
+    visible: {
+      control: "boolean",
+      description: "Controls the visibility of the modal dialog",
+      defaultValue: false,
+    },
+    onClose: {
+      action: "onClose",
+      description: "Callback function called when the modal is closed",
+    },
     providers: {
       control: "object",
       description:
-        "Array of social providers configuration. Each provider has properties: provider (string), url (string), linked (boolean)",
+        "Array of social login providers with their configuration. Each provider has properties: linked (boolean), provider (string), url (string)",
     },
-    onClick: {
-      action: "clicked",
+    onSocialLoginClick: {
+      action: "onSocialLoginClick",
       description:
-        "Callback function triggered when a social button is clicked",
-    },
-    onMoreAuthToggle: {
-      action: "more auth toggled",
-      description:
-        "Callback function triggered when the 'More' button is clicked to show additional providers",
-    },
-    isDisabled: {
-      control: "boolean",
-      description: "When true, disables all social buttons in the group",
-    },
-    ssoUrl: {
-      control: "text",
-      description: "URL for Single Sign-On (SSO) authentication",
+        "Callback function called when a social login button is clicked. Receives the click event as parameter",
     },
     ssoLabel: {
       control: "text",
-      description: "Label text for the SSO button",
+      description: "Label text for the SSO (Single Sign-On) login button",
+    },
+    ssoUrl: {
+      control: "text",
+      description: "URL for the SSO login endpoint",
+    },
+    t: {
+      control: false,
+      description: "Translation function for internationalization",
     },
   },
 } as Meta;
 
-const Template: Story<SocialButtonProps> = (args) => (
-  <SocialButtonsGroup {...args} />
-);
+const Template: StoryFn<MoreLoginModalProps> = (args) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  return (
+    <>
+      <Button primary label="Open Modal" onClick={() => setIsVisible(true)} />
+      <MoreLoginModal
+        {...args}
+        visible={isVisible}
+        onClose={() => setIsVisible(false)}
+      />
+    </>
+  );
+};
 
 export const Default = Template.bind({});
 Default.args = {
-  providers: [
-    { provider: "google", url: "google.com", linked: false },
-    { provider: "facebook", url: "facebook.com", linked: false },
-  ],
-  t: mockTranslation,
-  isDisabled: false,
-};
-
-export const WithSSO = Template.bind({});
-WithSSO.args = {
-  ...Default.args,
-  ssoUrl: "sso-url.com",
   ssoLabel: "SSO Login",
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  ...Default.args,
-  isDisabled: true,
-};
-
-export const WithMoreProviders = Template.bind({});
-WithMoreProviders.args = {
-  ...Default.args,
+  ssoUrl: "https://example.com/sso",
+  t: mockTranslation,
   providers: [
-    { provider: "google", url: "google.com", linked: false },
-    { provider: "facebook", url: "facebook.com", linked: false },
-    { provider: "twitter", url: "twitter.com", linked: false },
-    { provider: "linkedin", url: "linkedin.com", linked: false },
+    { linked: false, provider: "google", url: "https://example.com/google" },
+    {
+      linked: false,
+      provider: "facebook",
+      url: "https://example.com/facebook",
+    },
   ],
 };

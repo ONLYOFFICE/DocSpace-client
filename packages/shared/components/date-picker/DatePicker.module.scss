@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,17 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { globalColors } from "../../themes";
-import { injectDefaultTheme, mobile } from "../../utils";
+@import "../../styles/variables/index.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
 
-import { Calendar } from "../calendar";
-
-const DateInputStyle = styled.div.attrs(injectDefaultTheme)`
-  width: ${(props) => props.theme.datePicker.width};
-`;
-
-const DropDownStyle = styled.div.attrs(injectDefaultTheme)`
+.dropDownStyle {
   .drop-down {
     > div {
       > div {
@@ -42,9 +36,9 @@ const DropDownStyle = styled.div.attrs(injectDefaultTheme)`
       }
       margin: auto;
     }
-    padding: ${(props) => props.theme.datePicker.dropDownPadding};
+    padding: 16px 16px 16px 17px;
 
-    @media ${mobile} {
+    @include mobile {
       position: fixed;
       top: unset;
       inset-inline: 0;
@@ -63,84 +57,69 @@ const DropDownStyle = styled.div.attrs(injectDefaultTheme)`
   }
 
   position: relative;
-`;
+}
 
-const Content = styled.div.attrs(injectDefaultTheme)`
+.content {
   box-sizing: border-box;
   position: relative;
   width: 100%;
-  background-color: ${(props) => props.theme.datePicker.backgroundColor};
-  padding: ${(props) => props.theme.datePicker.contentPadding};
+  background-color: var(--date-picker-background);
+  padding: 0 16px 16px;
 
   .header {
-    max-width: ${(props) => props.theme.datePicker.contentMaxWidth};
+    max-width: 500px;
     margin: 0;
-    line-height: ${(props) => props.theme.datePicker.contentLineHeight};
-    font-weight: ${(props) =>
-      props.theme.datePicker.contentFontWeight} !important;
+    line-height: 56px;
+    font-weight: 700 !important;
   }
-`;
+}
 
-const Header = styled.div.attrs(injectDefaultTheme)`
+.header {
   display: flex;
   align-items: center;
-  border-bottom: ${(props) => props.theme.datePicker.borderBottom};
-`;
+  border-bottom: var(--date-picker-border);
+}
 
-const Body = styled.div.attrs(injectDefaultTheme)`
+.body {
   position: relative;
-  padding: ${(props) => props.theme.datePicker.bodyPadding};
-`;
+  padding: 16px 0;
+}
 
-const Wrapper = styled.div`
+.wrapper {
   .selectedItem {
     cursor: pointer;
+
     .calendarIcon {
       width: 12px;
       height: 12px;
       padding: 0 10px 0 2px;
       path {
-        fill: ${globalColors.lightGrayDark};
+        fill: #{$light-gray-dark};
       }
     }
   }
-`;
+}
 
-const DateSelector = styled.div`
+.dateSelector {
   width: fit-content;
   cursor: pointer;
 
   display: flex;
   align-items: center;
+  gap: 8px;
+}
 
-  .mr-8 {
-    margin-inline-end: 8px;
-  }
-`;
-
-const SelectedLabel = styled.span`
+.selectedLabel {
   display: flex;
   align-items: center;
-`;
+}
 
-const StyledCalendar = styled(Calendar)`
+.calendar {
   position: absolute;
 
-  @media ${mobile} {
+  @include mobile {
     position: fixed;
     bottom: 0;
     inset-inline-start: 0;
   }
-`;
-
-export {
-  Body,
-  Header,
-  Content,
-  DropDownStyle,
-  DateInputStyle,
-  Wrapper,
-  SelectedLabel,
-  StyledCalendar,
-  DateSelector,
-};
+}

@@ -330,6 +330,10 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "local-web-server",
       "identity-obj-proxy",
       "@types/identity-obj-proxy",
+      "jest-environment-jsdom",
+      "jest-styled-components",
+      "ts-jest",
+      "ts-node",
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));

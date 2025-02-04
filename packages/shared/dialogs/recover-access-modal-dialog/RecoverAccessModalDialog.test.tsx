@@ -43,7 +43,7 @@ jest.mock("../../api/settings", () => ({
   sendRecoverRequest: jest.fn(),
 }));
 
-jest.mock("../toast", () => ({
+jest.mock("../../components/toast", () => ({
   toastr: {
     success: jest.fn(),
     error: jest.fn(),

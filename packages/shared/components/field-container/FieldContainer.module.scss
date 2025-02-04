@@ -100,7 +100,7 @@
 }
 
 .errorContainer {
-  color: var(--error-color, --input-error-color);
+  color: var(--error-color, var(--input-error-color));
   padding-top: 4px;
   max-width: var(--error-width, 293px);
 }

@@ -12,6 +12,7 @@ RUN corepack enable && \
 WORKDIR /app
 
 COPY pnpm-lock.yaml .
+COPY .npmrc .
 COPY pnpm-workspace.yaml .
 COPY package.json .
 COPY packages/shared/package.json packages/shared/package.json

@@ -109,11 +109,6 @@
   .container {
     &.horizontal {
       flex-direction: column;
-
-      .fieldLabelIcon {
-        width: 100%;
-        margin-bottom: 4px;
-      }
     }
   }
 }

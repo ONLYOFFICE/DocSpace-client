@@ -51,7 +51,6 @@ const FieldContainer = ({
   tooltipMaxWidth,
   tooltipContent,
   tooltipClass,
-  //   helpButtonHeaderContent,
   place = "bottom",
   hasError,
   children,
@@ -92,7 +91,6 @@ const FieldContainer = ({
           <div className={styles.fieldLabelIcon}>
             <Label
               isRequired={isRequired}
-              // error={hasError}
               text={labelText}
               truncate
               className={styles.fieldLabel}
@@ -104,7 +102,6 @@ const FieldContainer = ({
                 className={classNames(styles.iconButton, tooltipClass)}
                 tooltipContent={tooltipContent}
                 place={place}
-                // helpButtonHeaderContent={helpButtonHeaderContent}
               />
             ) : null}
           </div>
@@ -113,7 +110,6 @@ const FieldContainer = ({
             <Label
               isRequired={isRequired}
               htmlFor=""
-              // error={hasError}
               text={labelText}
               truncate
               className={styles.fieldLabel}
@@ -123,7 +119,6 @@ const FieldContainer = ({
                   className={classNames(styles.iconButton, tooltipClass)}
                   tooltipContent={tooltipContent}
                   place={place}
-                  //   helpButtonHeaderContent={helpButtonHeaderContent}
                   style={displayInlineBlock}
                   offsetRight={0}
                 />

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ClearIcon from "PUBLIC_DIR/images/icons/16/clear.react.svg";
 import AlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import TickIcon from "PUBLIC_DIR/images/icons/12/tick.react.svg";
@@ -53,11 +53,24 @@ const ProgressBar = ({
   onOpenPanel,
 }: ProgressBarMobileProps) => {
   const [isVisible, setIsVisible] = useState(true);
+  const closeTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const clearTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const clearTimers = () => {
+    if (clearTimerRef.current) {
+      clearTimeout(clearTimerRef.current);
+      clearTimerRef.current = null;
+    }
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
 
   const onCloseClick = () => {
     if (onClearProgress && operation) {
       setIsVisible(false);
-      setTimeout(() => {
+      closeTimerRef.current = setTimeout(() => {
         onClearProgress(operationId ?? null, operation);
       }, 300);
     }
@@ -66,10 +79,16 @@ const ProgressBar = ({
   const onClearClick = () => {
     if (!onClearProgress || !operation) return;
     setIsVisible(false);
-    setTimeout(() => {
+    clearTimerRef.current = setTimeout(() => {
       onClearProgress(operationId ?? null, operation);
     }, 300);
   };
+
+  useEffect(() => {
+    return () => {
+      clearTimers();
+    };
+  }, []);
 
   return (
     <div

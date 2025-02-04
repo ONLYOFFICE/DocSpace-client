@@ -32,7 +32,7 @@ import { LinkColorTheme } from "../ColorTheme.types";
 
 const LinkTheme = styled(Link)<LinkColorTheme>`
   color: ${(props) => props.$currentColorScheme?.main?.accent} !important;
-
+  ${(props) => props.isUnderline && `text-decoration: underline;`}
   &:hover {
     color: ${(props) =>
       !props.noHover && props.$currentColorScheme?.main?.accent} !important;

@@ -120,6 +120,7 @@ export interface LinkColorTheme extends LinkProps, DefaultColorThemeProps {
   truncate?: boolean;
   $currentColorScheme?: TColorScheme;
   onClick?: (e: React.MouseEvent<Element>) => void;
+  isUnderline?: boolean;
 }
 
 export interface SubmenuTextTheme extends TextProps, DefaultColorThemeProps {

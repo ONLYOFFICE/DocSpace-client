@@ -142,9 +142,10 @@ class SecondaryProgressDataStore {
                 themeId={ThemeId.Link}
                 onClick={onClickLocation}
                 target="_blank"
+                isUnderline
               />
             ),
-            2: <strong />,
+            2: <span style={{ fontWeight: "600" }} />,
           }}
         />
       );
@@ -185,9 +186,10 @@ class SecondaryProgressDataStore {
                 themeId={ThemeId.Link}
                 onClick={onClickLocation}
                 target="_blank"
+                isUnderline
               />
             ),
-            2: <strong />,
+            2: <span style={{ fontWeight: "600" }} />,
           }}
         />
       );

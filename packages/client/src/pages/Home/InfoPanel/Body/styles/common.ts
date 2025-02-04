@@ -277,7 +277,7 @@ const StyledProperties = styled.div`
       .property-tag {
         max-width: 195px;
         margin: 0;
-        background: ${(props) => props.theme.infoPanel.details.tagBackground};
+
         p {
           white-space: nowrap;
           overflow: hidden;

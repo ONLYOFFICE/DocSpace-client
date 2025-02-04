@@ -40,6 +40,8 @@ const Tags: FC<TagsProps> = ({
   columnCount,
   onSelectTag,
   removeTagIcon,
+  onMouseEnter,
+  onMouseLeave,
 }) => {
   const [renderedTags, setRenderedTags] = React.useState<TagType[]>([]);
 
@@ -187,6 +189,8 @@ const Tags: FC<TagsProps> = ({
                 isLast={idx === renderedTags.length - 1}
                 removeTagIcon={removeTagIcon}
                 roomType={tag.roomType}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
               />
             );
           })

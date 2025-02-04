@@ -98,32 +98,6 @@ const roomsStyles = css`
         ? theme.filesSection.tilesView.tile.roomsBottomBorderRadius
         : theme.filesSection.tilesView.tile.bottomBorderRadius};
   }
-
-  .room-tags {
-    .tag,
-    .advanced-tag {
-      background: ${(props) =>
-        props.theme.filesSection.tilesView.tag.backgroundColor};
-      border: ${(props) => props.theme.filesSection.tilesView.tile.border};
-
-      &:hover {
-        border-color: transparent;
-        background: ${(props) =>
-          props.theme.filesSection.tilesView.tag.hoverBackgroundColor};
-      }
-
-      &:active {
-        border-color: transparent;
-        background: ${(props) =>
-          props.theme.filesSection.tilesView.tag.activeBackgroundColor};
-      }
-
-      &:disabled {
-        border-style: 1px dashed;
-        opacity: 0.4;
-      }
-    }
-  }
 `;
 
 const FolderStyles = css`
@@ -141,7 +115,14 @@ const checkedStyle = css`
       : theme.filesSection.tilesView.tile.checkedColor};
 
   a {
-    text-decoration: underline;
+    text-decoration: ${(props) => !props.checked && "underline"};
+  }
+
+  .tag,
+  .advanced-tag {
+    background: ${(props) =>
+      props.theme.isBase &&
+      props.theme.filesSection.tilesView.tile.backgroundColor};
   }
 `;
 
@@ -416,6 +397,12 @@ const StyledContent = styled.div`
     word-break: break-word;
   }
 
+  &.hover-on-elements {
+    a {
+      text-decoration: none !important;
+    }
+  }
+
   .badges {
     display: flex;
     flex-wrap: nowrap;
@@ -529,6 +516,7 @@ class Tile extends React.PureComponent {
 
     this.state = {
       errorLoadSrc: false,
+      isHovered: false,
     };
 
     this.cm = React.createRef();
@@ -629,11 +617,19 @@ class Tile extends React.PureComponent {
 
     if (
       !e.target.closest(".checkbox") &&
-      !e.target.closest(".room-tags") &&
+      !e.target.closest(".tags") &&
       !e.target.closest(".badges")
     ) {
       thumbnailClick(e);
     }
+  };
+
+  onHover = () => {
+    this.setState({ isHovered: true });
+  };
+
+  onLeave = () => {
+    this.setState({ isHovered: false });
   };
 
   onContextMenu = (e) => {
@@ -674,6 +670,8 @@ class Tile extends React.PureComponent {
     } = this.props;
 
     const { isFolder, isRoom, id, fileExst } = item;
+
+    const { isHovered } = this.state;
 
     const renderElement = hasOwnProperty(this.props, "element");
 
@@ -774,6 +772,8 @@ class Tile extends React.PureComponent {
                     <div
                       className="file-icon_container"
                       ref={this.checkboxContainerRef}
+                      onMouseEnter={this.onHover}
+                      onMouseLeave={this.onLeave}
                     >
                       <StyledElement
                         className="file-icon"
@@ -801,14 +801,19 @@ class Tile extends React.PureComponent {
                 ) : null}
                 <StyledContent
                   isFolder={(isFolder && !fileExst) || (!fileExst && id === -1)}
+                  className={isHovered ? "hover-on-elements" : ""}
                 >
                   {FilesTileContent}
-                  {badges}
+                  <div onMouseEnter={this.onHover} onMouseLeave={this.onLeave}>
+                    {badges}
+                  </div>
                 </StyledContent>
                 <StyledOptionButton
                   ref={this.optionButtonRef}
                   spacerWidth={contextButtonSpacerWidth}
                   isRoom
+                  onMouseEnter={this.onHover}
+                  onMouseLeave={this.onLeave}
                 >
                   {renderContext ? (
                     <ContextMenuButton
@@ -840,6 +845,8 @@ class Tile extends React.PureComponent {
                 <Tags
                   columnCount={columnCount}
                   onSelectTag={selectTag}
+                  onMouseEnter={this.onHover}
+                  onMouseLeave={this.onLeave}
                   tags={tags}
                   className="room-tags"
                 />

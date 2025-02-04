@@ -49,6 +49,8 @@ import type {
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useSDK from "@/hooks/useSDK";
 
+const IS_TEST = process.env.NEXT_PUBLIC_E2E_TEST;
+
 type FilesSelectorClientProps = {
   baseConfig: {
     acceptLabel?: string;
@@ -128,18 +130,27 @@ export default function FilesSelectorClient({
       }
 
       frameCallEvent({ event: "onSelectCallback", data: enrichedData });
-      // DON`N REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
-      console.log(
-        JSON.stringify({ onSelectCallback: "onSelectCallback", enrichedData }),
-      );
+
+      if (IS_TEST) {
+        // DON`T REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
+        console.log(
+          JSON.stringify({
+            onSelectCallback: "onSelectCallback",
+            enrichedData,
+          }),
+        );
+      }
     },
     [],
   );
 
   const onCancel = useCallback(() => {
     frameCallEvent({ event: "onCloseCallback" });
-    // DON`N REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
-    console.log("onCloseCallback");
+
+    if (IS_TEST) {
+      // DON`T REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
+      console.log("onCloseCallback");
+    }
   }, []);
 
   const getIsDisabled = useCallback(() => false, []);

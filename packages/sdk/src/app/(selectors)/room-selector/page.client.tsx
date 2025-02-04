@@ -39,6 +39,8 @@ import { getRoomsIcon } from "@/utils";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import useSDK from "@/hooks/useSDK";
 
+const IS_TEST = process.env.NEXT_PUBLIC_E2E_TEST;
+
 export type RoomSelectorClientProps = {
   baseConfig: {
     acceptLabel?: string;
@@ -100,16 +102,21 @@ export default function RoomSelectorClient({
 
     frameCallEvent({ event: "onSelectCallback", data: [enrichedData] });
 
-    // DON`N REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
-    console.log(
-      JSON.stringify({ onSelectCallback: "onSelectCallback", enrichedData }),
-    );
+    if (IS_TEST) {
+      // DON`T REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
+      console.log(
+        JSON.stringify({ onSelectCallback: "onSelectCallback", enrichedData }),
+      );
+    }
   }, []);
 
   const onClose = useCallback(() => {
     frameCallEvent({ event: "onCloseCallback" });
-    // DON`N REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
-    console.log("onCloseCallback");
+
+    if (IS_TEST) {
+      // DON`T REMOVE CONSOLE LOG, IT IS REQUIRED FOR TESTING
+      console.log("onCloseCallback");
+    }
   }, []);
 
   const cancelButtonProps = baseConfig?.cancel

@@ -39,13 +39,17 @@ import ImportStep from "../../components/ImportStep";
 import ImportProcessingStep from "../../components/ImportProcessingStep";
 import ImportCompleteStep from "../../components/ImportCompleteStep";
 
-export const getStepsData = (t: TFunction, isTypeSelectEmpty: boolean) => {
+export const getStepsData = (
+  t: TFunction,
+  isTypeSelectEmpty: boolean,
+  logoText: string,
+) => {
   return [
     {
       title: t("Common:SelectFile"),
       description: t("Settings:SelectFileDescriptionWorkspace", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: (
         <SelectFileStep
@@ -60,7 +64,7 @@ export const getStepsData = (t: TFunction, isTypeSelectEmpty: boolean) => {
       title: t("Settings:SelectUsers"),
       description: t("Settings:SelectUsersDescriptionWorkspace", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <SelectUsersStep t={t} canDisable shouldSetUsers />,
     },
@@ -118,12 +122,12 @@ export const getStepsData = (t: TFunction, isTypeSelectEmpty: boolean) => {
       title: t("Settings:DataImport"),
       description: t("Settings:ImportSectionDescription", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: (
         <ImportStep
           t={t}
-          serviceName={`${t("Common:OrganizationName")} Workspace`}
+          serviceName={`${logoText} Workspace`}
           usersExportDetails={{
             name: t("Common:People"),
             icon: UserSolidIcon,
@@ -154,7 +158,7 @@ export const getStepsData = (t: TFunction, isTypeSelectEmpty: boolean) => {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionWorkspace", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <ImportCompleteStep t={t} />,
     },

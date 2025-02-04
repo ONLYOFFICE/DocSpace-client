@@ -38,7 +38,11 @@ import ImportStep from "../../components/ImportStep";
 import ImportProcessingStep from "../../components/ImportProcessingStep";
 import ImportCompleteStep from "../../components/ImportCompleteStep";
 
-export const getStepsData = (t: TFunction, isTypeSelectEmpty: boolean) => {
+export const getStepsData = (
+  t: TFunction,
+  isTypeSelectEmpty: boolean,
+  logoText: string,
+) => {
   return [
     {
       title: t("Common:SelectFiles"),
@@ -56,7 +60,7 @@ export const getStepsData = (t: TFunction, isTypeSelectEmpty: boolean) => {
       title: t("Settings:SelectUsers"),
       description: t("Settings:SelectUsersDescriptionGoogle", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <SelectUsersStep t={t} canDisable shouldSetUsers />,
     },
@@ -148,7 +152,7 @@ export const getStepsData = (t: TFunction, isTypeSelectEmpty: boolean) => {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionGoogle", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <ImportCompleteStep t={t} />,
     },

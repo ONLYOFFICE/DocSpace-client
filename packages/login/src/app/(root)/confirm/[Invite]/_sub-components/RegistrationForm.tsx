@@ -80,6 +80,7 @@ type RegistrationFormProps = {
   legalTerms: string;
 
   isStandalone: boolean;
+  organizationName: string;
 };
 
 const RegistrationForm = ({
@@ -114,13 +115,14 @@ const RegistrationForm = ({
   licenseUrl,
   legalTerms,
   isStandalone,
+  organizationName,
 }: RegistrationFormProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
 
   const { linkData } = useContext(ConfirmRouteContext);
 
   const newsletter = t("Newsletter", {
-    organizationName: t("Common:OrganizationName"),
+    organizationName,
   });
 
   const termsConditionsComponent = (

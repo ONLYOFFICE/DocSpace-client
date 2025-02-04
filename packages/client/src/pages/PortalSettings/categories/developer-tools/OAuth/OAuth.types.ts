@@ -51,4 +51,5 @@ export interface OAuthProps {
   setIsInit: (value: boolean) => void;
 
   apiOAuthLink: string;
+  logoText: string;
 }

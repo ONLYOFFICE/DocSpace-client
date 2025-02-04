@@ -31,7 +31,7 @@ import VerticalDotsReactSvg from "PUBLIC_DIR/images/icons/16/vertical-dots.react
 
 import { getProviderLabel } from "../../utils/common";
 import { SocialButton } from "../social-button";
-import StyledSocialButtonsGroup from "./SocialButtonsGroup.styled";
+import styles from "./SocialButtonsGroup.module.scss";
 import type {
   SocialButtonProps,
   ProvidersDataType,
@@ -77,7 +77,7 @@ export const SocialButtonsGroup = memo(
 
       return (
         <div
-          className="buttonWrapper"
+          className={styles.buttonWrapper}
           key={`${provider}ProviderItem`}
           data-test-id={`${provider}-button-wrapper`}
         >
@@ -98,26 +98,26 @@ export const SocialButtonsGroup = memo(
     });
 
     return (
-      <StyledSocialButtonsGroup>
+      <div className={styles.container}>
         {ssoUrl ? (
           <SocialButton
             isDisabled={isDisabled}
             IconComponent={ssoSVG}
             data-test-id="sso-button"
             aria-label={ssoLabel}
-            className="sso-button social-button"
+            className={styles.ssoButton}
             label={ssoLabel || getProviderLabel("sso", t)}
             onClick={() => (window.location.href = ssoUrl)}
           />
         ) : null}
         {providers.length !== 0 ? (
-          <div className="social-buttons-group">
+          <div className={styles.socialButtonsGroup}>
             {elements}
             {length > 2 ? (
               <SocialButton
                 IconComponent={VerticalDotsReactSvg}
                 onClick={moreAuthOpen}
-                className="show-more-button"
+                className={styles.showMoreButton}
               />
             ) : null}
 
@@ -132,7 +132,7 @@ export const SocialButtonsGroup = memo(
             />
           </div>
         ) : null}
-      </StyledSocialButtonsGroup>
+      </div>
     );
   },
   equal,

@@ -120,6 +120,7 @@ class BrandingStore {
 
   saveWhiteLabelSettings = async (data) => {
     await setWhiteLabelSettings(data, isManagement());
+    this.settingsStore.getPortalSettings();
     const logos = await this.getLogoUrls();
     this.getIsDefault();
     this.getLogoText();

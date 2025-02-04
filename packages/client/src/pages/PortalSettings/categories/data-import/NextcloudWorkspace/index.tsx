@@ -46,6 +46,7 @@ const NextcloudWorkspace = (props: WorkspaceProps) => {
     migrationPhase,
     isMigrationInit,
     setIsMigrationInit,
+    logoText,
   } = props as InjectedWorkspaceProps;
 
   const { t, ready }: { t: TFunction; ready: boolean } = useTranslation([
@@ -54,7 +55,7 @@ const NextcloudWorkspace = (props: WorkspaceProps) => {
     "Settings",
   ]);
 
-  const StepsData = getStepsData(t, filteredUsers.length === 0);
+  const StepsData = getStepsData(t, filteredUsers.length === 0, logoText);
 
   useLayoutEffect(() => {
     if (migratingWorkspace === "Nextcloud" && !isMigrationInit) {
@@ -81,6 +82,7 @@ const NextcloudWorkspace = (props: WorkspaceProps) => {
       title={StepsData[step - 1].title}
       description={StepsData[step - 1].description}
       component={StepsData[step - 1].component}
+      logoText={logoText}
     />
   );
 };
@@ -97,7 +99,7 @@ export const Component = inject<TStore>(
       isMigrationInit,
       setIsMigrationInit,
     } = importAccountsStore;
-    const { theme } = settingsStore;
+    const { theme, logoText } = settingsStore;
 
     return {
       theme,
@@ -109,6 +111,7 @@ export const Component = inject<TStore>(
       migrationPhase,
       isMigrationInit,
       setIsMigrationInit,
+      logoText,
     };
   },
 )(observer(NextcloudWorkspace));

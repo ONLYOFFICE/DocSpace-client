@@ -107,7 +107,7 @@ const Article = ({
   user,
   getActions,
   onProfileClick,
-
+  logoText,
   ...rest
 }: ArticleProps) => {
   const [articleHeaderContent, setArticleHeaderContent] =
@@ -269,7 +269,11 @@ const Article = ({
                 />
               ) : null}
               {!hideAppsBlock ? (
-                <ArticleApps withDevTools={withDevTools} showText={showText} />
+                <ArticleApps
+                  withDevTools={withDevTools}
+                  showText={showText}
+                  logoText={logoText}
+                />
               ) : null}
               {!isMobile && isLiveChatAvailable ? (
                 <ArticleLiveChat

@@ -80,7 +80,7 @@ const InjectedEmptyViewContainer = inject<
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
     const { isPublicRoom } = publicRoomStore;
-    const { isFrame } = settingsStore;
+    const { isFrame, logoText } = settingsStore;
 
     const { myFolderId, myFolder, roomsFolder } = treeFoldersStore;
 
@@ -128,6 +128,7 @@ const InjectedEmptyViewContainer = inject<
       setQuotaWarningDialogVisible,
       isVisitor: userStore?.user?.isVisitor,
       isFrame,
+      logoText,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

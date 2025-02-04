@@ -27,12 +27,13 @@
 import { Story, Meta } from "@storybook/react";
 import { LanguageCombobox } from "./LanguageCombobox";
 import { ComboboxProps } from "./LanguageCombobox.types";
+import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
 
 export default {
   title: "Components/LanguageCombobox",
   component: LanguageCombobox,
   // eslint-disable-next-line @typescript-eslint/no-shadow
-  decorators: [(Story) => <Story />],
+  decorators: [(Story) => <Story />, i18nextStoryDecorator],
   argTypes: {
     withBorder: {
       control: "boolean",

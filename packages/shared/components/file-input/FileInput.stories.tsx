@@ -84,12 +84,12 @@ export const Default: Story = {
   },
 };
 
-export const Small: Story = {
+export const Middle: Story = {
   render: (args) => <Template {...args} />,
   args: {
     ...Default.args,
-    size: InputSize.small,
-    placeholder: "Small input",
+    size: InputSize.middle,
+    placeholder: "Middle input",
   },
 };
 

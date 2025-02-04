@@ -32,10 +32,10 @@
   &.horizontal {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: start;
 
     .fieldLabel {
-      line-height: 20px;
+      line-height: 32px;
       margin-inline-end: 8px;
       position: relative;
     }

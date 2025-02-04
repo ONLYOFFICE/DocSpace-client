@@ -46,7 +46,22 @@ const QUERY_PARAMS = [
   },
 ];
 
+const QUERY_PARAMS_WITH_LINK_DATA = QUERY_PARAMS.concat([
+  {
+    name: "linkData",
+    value: "yJ0eXBlIjoiTGlua0ludml",
+  },
+  {
+    name: "publicAuth",
+    value: "null",
+  },
+]);
+
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
+const URL_WITH_LINK_DATA_PARAMS = getUrlWithQueryParams(
+  URL,
+  QUERY_PARAMS_WITH_LINK_DATA,
+);
 const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
   NEXT_REQUEST_URL,
   QUERY_PARAMS,
@@ -85,6 +100,27 @@ test("tfa activation success", async ({ page, mockRequest }) => {
     "desktop",
     "tfa-activation",
     "tfa-activation-success-redirect.png",
+  ]);
+});
+
+test("tfa activation success with link data", async ({ page, mockRequest }) => {
+  await mockRequest.router([
+    endpoints.tfaAppValidate,
+    endpoints.loginWithTfaCode,
+    endpoints.checkConfirmLink,
+  ]);
+  await page.goto(URL_WITH_LINK_DATA_PARAMS);
+
+  await page.getByTestId("text-input").fill("123456");
+
+  await page.getByTestId("button").click();
+
+  await page.waitForURL("/profile", { waitUntil: "load" });
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "tfa-activation",
+    "tfa-activation-with-link-data-success.png",
   ]);
 });
 

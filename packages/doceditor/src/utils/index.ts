@@ -160,9 +160,9 @@ export const setDocumentTitle = (
   fileType: string,
   documentReady: boolean,
   successAuth: boolean,
+  organizationName: string,
   callback?: (value: string) => void,
 ) => {
-  const organizationName = t("Common:OrganizationName");
   const moduleTitle = "Documents"; //TODO: Replace to API variant
 
   let newSubTitle = subTitle;

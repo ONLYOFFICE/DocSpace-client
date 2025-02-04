@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface DateTimePickerProps {
+export type DateTimePickerProps = {
   /** Date object */
   initialDate?: moment.Moment | Date;
   /** Select date text */
@@ -45,4 +45,4 @@ export interface DateTimePickerProps {
   hasError: boolean;
   /** Allows to set first shown date in calendar */
   openDate: moment.Moment;
-}
+};

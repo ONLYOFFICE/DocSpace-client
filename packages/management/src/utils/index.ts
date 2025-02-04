@@ -89,11 +89,10 @@ export function loadLanguagePath(homepage: string, fixedNS = null) {
   };
 }
 
-export const setDocumentTitle = (subTitle = null) => {
+export const setDocumentTitle = (subTitle = null, organizationName = "") => {
   let title;
 
   // const currentModule = this.settingsStore?.product;
-  const organizationName = i18n.t("Common:OrganizationName");
 
   if (subTitle) {
     title = `${subTitle} - ${organizationName}`;

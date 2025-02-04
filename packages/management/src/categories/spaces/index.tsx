@@ -52,10 +52,10 @@ const Spaces = () => {
     deletePortalDialogVisible,
   } = spacesStore;
 
-  const { portals } = settingsStore;
+  const { portals, logoText } = settingsStore;
 
   React.useEffect(() => {
-    setDocumentTitle(t("Common:Spaces"));
+    setDocumentTitle(t("Common:Spaces"), logoText);
   }, []);
 
   if (!(portals.length > 0))

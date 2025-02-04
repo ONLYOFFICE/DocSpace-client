@@ -70,4 +70,5 @@ export interface FieldContainerProps {
   /** Sets the maximum width of the tooltip  */
   tooltipMaxWidth?: string;
   tooltipClass?: string;
+  testId?: string;
 }

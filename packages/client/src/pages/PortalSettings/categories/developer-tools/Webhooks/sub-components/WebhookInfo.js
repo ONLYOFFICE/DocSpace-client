@@ -50,14 +50,14 @@ const InfoText = styled(Text).attrs(injectDefaultTheme)`
 
 const WebhookInfo = (props) => {
   const { t } = useTranslation(["Webhooks"]);
-  const { webhooksGuideUrl } = props;
+  const { webhooksGuideUrl, logoText } = props;
 
   return (
     <InfoWrapper>
       <InfoText as="p">
         {t("WebhooksInfo", {
           productName: t("Common:ProductName"),
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
         })}
       </InfoText>
       <ColorTheme
@@ -77,9 +77,10 @@ const WebhookInfo = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { webhooksGuideUrl } = settingsStore;
+  const { webhooksGuideUrl, logoText } = settingsStore;
 
   return {
     webhooksGuideUrl,
+    logoText,
   };
 })(observer(WebhookInfo));

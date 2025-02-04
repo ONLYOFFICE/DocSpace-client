@@ -93,6 +93,7 @@ const SubmitToGalleryTile = ({
   hideSubmitToGalleryTile,
   setSubmitToGalleryDialogVisible,
   currentColorScheme,
+  logoText,
 }) => {
   if (!submitToGalleryTileIsVisible) return null;
 
@@ -109,12 +110,12 @@ const SubmitToGalleryTile = ({
       <div className="info">
         <div className="title">
           {t("Common:SubmitToGalleryBlockHeader", {
-            organizationName: t("Common:OrganizationName"),
+            organizationName: logoText,
           })}
         </div>
         <div className="body">
           {t("Common:SubmitToGalleryBlockBody", {
-            organizationName: t("Common:OrganizationName"),
+            organizationName: logoText,
           })}
         </div>
       </div>
@@ -130,7 +131,7 @@ const SubmitToGalleryTile = ({
 };
 
 export default inject(({ settingsStore, oformsStore, dialogsStore }) => {
-  const { currentColorScheme } = settingsStore;
+  const { currentColorScheme, logoText } = settingsStore;
 
   return {
     submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
@@ -138,5 +139,6 @@ export default inject(({ settingsStore, oformsStore, dialogsStore }) => {
     setSubmitToGalleryDialogVisible:
       dialogsStore.setSubmitToGalleryDialogVisible,
     currentColorScheme,
+    logoText,
   };
 })(withTranslation("Common", "FormGallery")(observer(SubmitToGalleryTile)));

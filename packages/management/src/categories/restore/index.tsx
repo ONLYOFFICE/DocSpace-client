@@ -30,11 +30,15 @@ import { useTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/utils";
 import { Component } from "client/RestorePage";
 
-const Restore = () => {
+interface RestoreProps {
+  logoText: string;
+}
+
+const Restore: React.FC<RestoreProps> = ({ logoText }) => {
   const { t } = useTranslation(["Settings"]);
 
   useEffect(() => {
-    setDocumentTitle(t("RestoreBackup"));
+    setDocumentTitle(t("RestoreBackup"), logoText);
   }, []);
 
   return <Component />;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { globalColors } from "../../themes";
-import { injectDefaultTheme } from "../../utils";
+@import "../../styles/variables/index.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
 
-const Selectors = styled.div<{ hasError?: boolean }>`
+.selectors {
   position: relative;
   margin-top: 8px;
   margin-bottom: 16px;
@@ -39,15 +39,14 @@ const Selectors = styled.div<{ hasError?: boolean }>`
   .selectedItem {
     margin-bottom: 0;
     cursor: pointer;
-    ${(props) =>
-      props.hasError &&
-      css`
-        color: red;
-      `}
-  }
-`;
 
-const TimeCell = styled.span.attrs(injectDefaultTheme)<{ hasError?: boolean }>`
+    &.hasError {
+      color: red;
+    }
+  }
+}
+
+.timeCell {
   display: flex;
   align-items: center;
 
@@ -56,8 +55,7 @@ const TimeCell = styled.span.attrs(injectDefaultTheme)<{ hasError?: boolean }>`
   width: 73px;
   height: 32px;
 
-  background-color: ${(props) =>
-    props.theme.isBase ? globalColors.grayLightMid : globalColors.grayDarkMid};
+  background-color: var(--date-picker-cell-background);
   border-radius: 3px;
 
   padding: 6px 8px;
@@ -70,7 +68,7 @@ const TimeCell = styled.span.attrs(injectDefaultTheme)<{ hasError?: boolean }>`
     padding-inline: 2px 10px;
 
     path {
-      fill: ${(props) => props.theme.dateTimePicker.colorClockIcon};
+      fill: var(--date-picker-icon-color);
     }
 
     circle {
@@ -78,17 +76,13 @@ const TimeCell = styled.span.attrs(injectDefaultTheme)<{ hasError?: boolean }>`
     }
   }
 
-  ${(props) =>
-    props.hasError &&
-    css`
-      color: red;
-    `}
-`;
+  &.hasError {
+    color: red;
+  }
+}
 
-const TimeSelector = styled.span.attrs(injectDefaultTheme)`
+.timeSelector {
   margin-inline-start: 4px;
   display: inline-flex;
   align-items: center;
-`;
-
-export { TimeSelector, TimeCell, Selectors };
+}

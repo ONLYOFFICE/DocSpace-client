@@ -40,13 +40,17 @@ import ImportCompleteStep from "../../components/ImportCompleteStep";
 
 import { TFunciton } from "../../types";
 
-export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
+export const getStepsData = (
+  t: TFunciton,
+  isTypeSelectEmpty: boolean,
+  logoText: string,
+) => {
   return [
     {
       title: t("Common:SelectFile"),
       description: t("Settings:SelectFileDescriptionWorkspace", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: (
         <SelectFileStep
@@ -61,7 +65,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       title: t("Settings:SelectUsers"),
       description: t("Settings:SelectUsersDescriptionWorkspace", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <SelectUsersStep t={t} canDisable shouldSetUsers />,
     },
@@ -119,12 +123,12 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       title: t("Settings:DataImport"),
       description: t("Settings:ImportSectionDescription", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: (
         <ImportStep
           t={t}
-          serviceName={`${t("Common:OrganizationName")} Workspace`}
+          serviceName={`${logoText} Workspace`}
           usersExportDetails={{
             name: t("Common:People"),
             icon: UserSolidIcon,
@@ -155,7 +159,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionWorkspace", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <ImportCompleteStep t={t} />,
     },

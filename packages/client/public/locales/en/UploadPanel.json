@@ -4,5 +4,6 @@
   "HideInput": "Hide",
   "Ready": "Done",
   "UploadAndConvert": "Upload and convert files",
-  "Uploads": "Uploads"
+  "Uploads": "Uploads",
+  "UploadingError": "Uploading error"
 }

@@ -714,6 +714,7 @@ class UploadDataStore {
     if (this.uploaded) {
       this.primaryProgressDataStore.setPrimaryProgressBarData({
         operation: OPERATIONS_NAME.upload,
+        alert: true,
         completed: true,
       });
     }

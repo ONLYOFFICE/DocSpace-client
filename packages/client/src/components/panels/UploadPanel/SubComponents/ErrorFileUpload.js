@@ -57,7 +57,7 @@ const ErrorFileUpload = ({
       <StyledLoadErrorIcon
         size="medium"
         data-tooltip-id="errorTooltip"
-        data-tooltip-content={item.error || t("Common:UnknownError")}
+        data-tooltip-content={item.error || t("UploadingError")}
       />
       <Tooltip
         id="errorTooltip"

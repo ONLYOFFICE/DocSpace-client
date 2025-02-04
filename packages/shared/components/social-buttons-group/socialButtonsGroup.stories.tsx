@@ -28,6 +28,16 @@ import { Meta, Story } from "@storybook/react";
 import { SocialButtonsGroup } from "./index";
 import type { SocialButtonProps } from "./SocialButtonsGroup.types";
 
+const mockTranslation = (key: string) => {
+  const translations: { [key: string]: string } = {
+    "Common:ContinueWith": "Continue with",
+    "Common:ContinueButton": "Continue",
+    "Common:ProviderFacebook": "Continue with Facebook",
+    "Common:ProviderGoogle": "Continue with Google",
+  };
+  return translations[key] || key;
+};
+
 export default {
   title: "Components/SocialButtonsGroup",
   component: SocialButtonsGroup,
@@ -80,7 +90,7 @@ Default.args = {
     { provider: "google", url: "google.com", linked: false },
     { provider: "facebook", url: "facebook.com", linked: false },
   ],
-  t: (key: string) => key,
+  t: mockTranslation,
   isDisabled: false,
 };
 

@@ -34,6 +34,8 @@ const mockTranslation = (key: string) => {
     "Common:ContinueButton": "Continue",
     "Common:ProviderFacebook": "Continue with Facebook",
     "Common:ProviderGoogle": "Continue with Google",
+    "Common:ProviderLinkedin": "Continue with LinkedIn",
+    "Common:ProviderTwitter": "Continue with X",
   };
   return translations[key] || key;
 };

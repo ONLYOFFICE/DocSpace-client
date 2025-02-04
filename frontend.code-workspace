@@ -189,6 +189,11 @@
             "tooltip": "🛠️ Start the \"frontend start production\" task",
           },
           {
+            "label": "Deploy",
+            "task": "Frontend | deploy",
+            "tooltip": "🛠️ Start the \"frontend deploy\" task",
+          },
+          {
             "label": "Start storybook",
             "task": "Frontend | storybook",
             "tooltip": "🛠️ Start the \"frontend start storybook\" task",

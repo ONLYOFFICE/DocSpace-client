@@ -408,6 +408,21 @@
       }
     },
     {
+      "label": "Frontend | deploy",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm nx run-many -t deploy -p @docspace/client @docspace/login @docspace/doceditor @docspace/management --parallel=4",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | storybook",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm nx storybook @docspace/shared",

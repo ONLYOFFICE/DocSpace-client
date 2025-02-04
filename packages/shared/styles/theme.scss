@@ -1520,6 +1520,42 @@
   --dropzone-exsts-color: #{$gray};
 }
 
+.light {
+  --social-button-border: 1px solid #{$gray-strong};
+  --social-button-text-color: #{$gray};
+  --social-button-connect-text-color: #{$white};
+  --social-button-background: #{$white};
+  --social-button-hover-background: #{$white};
+  --social-button-connect-background: #{$light-icons};
+  --social-button-hover-connect-background: #{$link};
+  --social-button-hover-border: 1px solid #{$light-second-main};
+  --social-button-active-background: #{$gray-light-mid};
+  --social-button-active-border: 1px solid #{$gray-strong};
+  --social-button-active-connect-background: #{$blue-light-mid};
+  --social-button-disable-background: #{$gray-light};
+  --social-button-disable-color: #{$black};
+  --social-button-hover-text-color: #{$black};
+  --social-button-connect-svg-fill: #{$white};
+}
+
+.dark {
+  --social-button-border: 1px solid #{$gray-dark-strong};
+  --social-button-text-color: #{$white};
+  --social-button-connect-text-color: #{$dark-black};
+  --social-button-background: #{$black};
+  --social-button-hover-background: #{$black};
+  --social-button-connect-background: #{$dark-icon};
+  --social-button-hover-connect-background: #{$white};
+  --social-button-hover-border: 1px solid #{$gray-dark};
+  --social-button-active-background: #{$dark-gray-light};
+  --social-button-active-border: 1px solid #{$gray-dark-strong};
+  --social-button-active-connect-background: #{$big-gray-dark-mid};
+  --social-button-disable-background: #{$dark-gray-light};
+  --social-button-disable-color: #{$dark-gray-dark};
+  --social-button-hover-text-color: #{$white};
+  --social-button-connect-svg-fill: #{$dark-black};
+}
+
 :global(.rtl) {
   --input-text-align: right;
   --input-direction: rtl;

@@ -149,6 +149,9 @@ const ShareCollectSelector = inject<TStore>(
         const operationData = {
           destFolderId: selectedItemId,
           destFolderInfo: selectedTreeNode,
+          title: file.title,
+          isFolder: file.isFolder,
+          itemsCount: 1,
           folderIds,
           fileIds,
           deleteAfter: false,

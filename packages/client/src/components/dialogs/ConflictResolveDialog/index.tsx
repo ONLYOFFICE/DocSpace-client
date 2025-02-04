@@ -154,7 +154,10 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
       isCopy,
       translations,
       itemsCount: items.length,
-      ...(items.length === 1 && { title: items[0].title }),
+      ...(items.length === 1 && {
+        title: items[0].title,
+        isFolder: items[0].isFolder,
+      }),
     };
 
     setSelected("none");

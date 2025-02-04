@@ -648,14 +648,11 @@ class HotkeyStore {
 
     const isPublic = roomType === RoomsType.PublicRoom;
 
-    let itemTitle = "";
-
     selections.forEach((item) => {
       if (item.fileExst || item.contentLength) {
         const fileInAction = activeFiles.includes(item.id);
         if (!fileInAction) {
           fileIds.push(item.id);
-          itemTitle = item.title;
         }
       } else if (item.id === selectedItemId) {
         toastr.error(t("Common:MoveToFolderMessage"));
@@ -664,7 +661,6 @@ class HotkeyStore {
 
         if (!folderInAction) {
           folderIds.push(item.id);
-          itemTitle = item.title;
         }
       }
     });
@@ -680,7 +676,10 @@ class HotkeyStore {
         deleteAfter: false,
         isCopy,
         itemsCount: itemsLength,
-        ...(itemsLength === 1 && { title: itemTitle }),
+        ...(itemsLength === 1 && {
+          title: selections[0].title,
+          isFolder: selections[0].isFolder,
+        }),
       };
 
       if (isPublic && !selections.rootFolderType) {

@@ -270,7 +270,10 @@ const FilesSelectorWrapper = ({
           isCopy,
           folderTitle,
           itemsCount: selection.length,
-          ...(selection.length === 1 && { title: selection[0].title }),
+          ...(selection.length === 1 && {
+            title: selection[0].title,
+            isFolder: selection[0].isFolder,
+          }),
         };
 
         if (showMoveToPublicDialog) {

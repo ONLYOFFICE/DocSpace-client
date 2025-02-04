@@ -128,10 +128,7 @@
   --button-border-base-disabled: 1px solid #{$gray-light-mid};
 
   --button-border-primary: 1px solid var(--accent-button, #{$light-second-main});
-  --button-border-primary-hover: 1px solid
-    var(--accent-button, #{$light-second-main});
-  --button-border-primary-active: 1px solid
-    var(--accent-button, #{$light-second-main});
+  --button-border-primary-active: var(--accent-button, #{$light-second-main});
   --button-border-primary-disabled: 1px solid
     var(--accent-button, #{$light-second-main-disabled});
 
@@ -260,6 +257,9 @@
     var(--slider-thumb-background),
     var(--slider-thumb-background)
   );
+
+  --save-cancel-border-color: #{$gray-light-mid};
+  --save-cancel-reminder-color: #{$gray};
 }
 
 .dark {
@@ -448,10 +448,11 @@
   --button-border-base-disabled: 1px solid #{$gray-dark-strong};
 
   --button-border-primary: 1px solid var(--accent-button, #{$light-second-main});
-  --button-border-primary-hover: 1px solid
-    var(--accent-button, #{$light-second-main-hover});
-  --button-border-primary-active: 1px solid
-      linear-gradient(0deg, #{$light-second-main}, #{$light-second-main}),
+  --button-border-primary-active: linear-gradient(
+      0deg,
+      #{$light-second-main},
+      #{$light-second-main}
+    ),
     linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
   --button-border-primary-disabled: 1px solid
     var(--accent-button, #{$light-second-main-disabled});
@@ -568,6 +569,9 @@
     var(--slider-thumb-background),
     var(--slider-thumb-background)
   );
+
+  --save-cancel-border-color: #{$gray-light-mid};
+  --save-cancel-reminder-color: #{$gray};
 }
 
 .light {

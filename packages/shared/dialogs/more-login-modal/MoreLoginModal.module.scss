@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,39 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Story, Meta } from "@storybook/react";
-import RecoverAccessModalDialog from "./RecoverAccessModalDialog";
-import type { RecoverAccessModalDialogProps } from "./RecoverAccessModalDialog.types";
+@import "../../styles/variables/index.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
 
-export default {
-  title: "Components/RecoverAccessModalDialog",
-  component: RecoverAccessModalDialog,
-  argTypes: {
-    onClose: { action: "closed" },
-  },
-} as Meta;
+.providerRow {
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  padding: 8px 0;
 
-const Template: Story<RecoverAccessModalDialogProps> = (args) => (
-  <RecoverAccessModalDialog {...args} />
-);
+  display: grid;
+  grid-template-columns: 32px minmax(100px, 501px) 100px;
 
-export const Default = Template.bind({});
-Default.args = {
-  visible: true,
-  textBody:
-    "Please enter your email and describe your problem to recover access.",
-  emailPlaceholderText: "Enter your email",
-  id: "recover-modal",
-};
+  svg {
+    height: 24px;
+    width: 24px;
+    padding-inline-start: 4px;
 
-export const WithError = Template.bind({});
-WithError.args = {
-  ...Default.args,
-  visible: true,
-};
+    :global(.dark) & {
+      path {
+        fill: #{$white};
+      }
+    }
+  }
 
-export const Loading = Template.bind({});
-Loading.args = {
-  ...Default.args,
-  visible: true,
-};
+  .providerName {
+    overflow-wrap: break-word;
+    padding: 0 12px;
+    line-height: 16px;
+  }
+}

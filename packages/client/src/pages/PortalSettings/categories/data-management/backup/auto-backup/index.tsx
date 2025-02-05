@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useEffect, useRef, useState } from "react";
 import { observer, inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -46,6 +47,7 @@ import type {
   InjectedAutoBackupWrapperProps,
   AutoBackupWrapperProps,
 } from "./AutoBackup.types";
+import type { TColorScheme } from "@docspace/shared/themes";
 
 const AutoBackupWrapper = ({
   getProgress,
@@ -90,8 +92,8 @@ const AutoBackupWrapper = ({
           ]);
 
         if (account) setConnectedThirdPartyAccount(account);
+        if (backupStorage) setThirdPartyStorage(backupStorage);
 
-        setThirdPartyStorage(backupStorage);
         setBackupSchedule(backupSchedule);
         setStorageRegions(newStorageRegions);
 
@@ -340,7 +342,7 @@ export default inject<
 
       // settingsStore
       automaticBackupUrl,
-      currentColorScheme,
+      currentColorScheme: currentColorScheme as TColorScheme,
 
       // filesSelectorInput
       newPath,

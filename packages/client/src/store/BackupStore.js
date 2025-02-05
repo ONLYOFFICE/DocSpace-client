@@ -345,15 +345,18 @@ class BackupStore {
   };
 
   toDefault = () => {
-    this.selectedMonthlySchedule = this.defaultMonthlySchedule;
-    this.selectedWeeklySchedule = this.defaultWeeklySchedule;
-    this.selectedDailySchedule = this.defaultDailySchedule;
+    // this.selectedMonthlySchedule = this.defaultMonthlySchedule;
+    // this.selectedWeeklySchedule = this.defaultWeeklySchedule;
+    // this.selectedDailySchedule = this.defaultDailySchedule;
+
     this.selectedHour = this.defaultHour;
     this.selectedPeriodLabel = this.defaultPeriodLabel;
     this.selectedPeriodNumber = this.defaultPeriodNumber;
+
     this.selectedWeekdayLabel = this.defaultWeekdayLabel;
     this.selectedMaxCopiesNumber = this.defaultMaxCopiesNumber;
     this.selectedStorageType = this.defaultStorageType;
+
     this.selectedMonthDay = this.defaultMonthDay;
     this.selectedWeekday = this.defaultWeekday;
     this.selectedStorageId = this.defaultStorageId;
@@ -627,6 +630,12 @@ class BackupStore {
     delete this.formSettings[key];
   };
 
+  /**
+   * @param { boolean } isCheckedThirdPartyStorage
+   * @param { null |string | number } selectedFolderId
+   * @param { string | null =} selectedStorageId
+   * @returns { import("@docspace/shared/types").Option[]}
+   */
   getStorageParams = (
     isCheckedThirdPartyStorage,
     selectedFolderId,

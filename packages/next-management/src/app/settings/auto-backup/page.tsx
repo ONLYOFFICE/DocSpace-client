@@ -24,9 +24,69 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { redirect } from "next/navigation";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+
+import {
+  getSettingsThirdParty,
+  getBackupSchedule,
+  getBackupStorage,
+  getStorageRegions,
+  getAllPortals,
+  getQuota,
+  getSettingsFiles,
+  getUser,
+  getFoldersTree,
+  getSettings,
+} from "@/lib/actions";
+
+import AutoBackup from "./page.client";
+
 async function Page() {
-  return <h1>Auto backup</h1>;
+  const [
+    account,
+    backupSchedule,
+    backupStorage,
+    newStorageRegions,
+    portals,
+    quota,
+    settingsFiles,
+    user,
+    foldersTree,
+    settings,
+  ] = await Promise.all([
+    getSettingsThirdParty(),
+    getBackupSchedule(),
+    getBackupStorage(),
+    getStorageRegions(),
+    getAllPortals(),
+    getQuota(),
+    getSettingsFiles(),
+    getUser(),
+    getFoldersTree(),
+    getSettings(),
+  ]);
+
+  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+
+  const helpLink = settings?.helpLink ?? "";
+
+  const automaticBackupUrl = `${helpLink}/administration/docspace-settings.aspx#AutoBackup`;
+
+  return (
+    <AutoBackup
+      user={user}
+      account={account}
+      foldersTree={foldersTree}
+      filesSettings={settingsFiles}
+      portals={portals?.tenants || []}
+      features={quota?.features || []}
+      automaticBackupUrl={automaticBackupUrl}
+      backupScheduleResponse={backupSchedule}
+      backupStorageResponse={backupStorage ?? []}
+      newStorageRegions={newStorageRegions ?? []}
+    />
+  );
 }
 
 export default Page;
-

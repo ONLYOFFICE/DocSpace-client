@@ -35,12 +35,24 @@ import type {
   TGetColorTheme,
   TVersionBuild,
   TPaymentSettings,
+  TStorageBackup,
 } from "@docspace/shared/api/settings/types";
 import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 import type {
+  TBackupSchedule,
   TPaymentQuota,
   TPortalTariff,
+  TStorageRegion,
 } from "@docspace/shared/api/portal/types";
+import type {
+  SettingsThirdPartyType,
+  TFilesSettings,
+  TFolder,
+} from "@docspace/shared/api/files/types";
+import {
+  getFolderClassNameByType,
+  sortInDisplayOrder,
+} from "@docspace/shared/utils/common";
 
 export async function getUser() {
   const hdrs = headers();
@@ -273,3 +285,140 @@ export async function getPaymentSettings() {
   return paymentSettings.response as TPaymentSettings;
 }
 
+export async function getSettingsThirdParty() {
+  const [getSettingsThirdParty] = createRequest(
+    [`/files/thirdparty/backup`],
+    [["", ""]],
+    "GET",
+  );
+
+  const settingsThirdParty = await fetch(getSettingsThirdParty);
+
+  if (!settingsThirdParty.ok) return;
+
+  const settingsThirdPartyRes = await settingsThirdParty.json();
+
+  return settingsThirdPartyRes.response as SettingsThirdPartyType;
+}
+
+export async function getBackupSchedule(dump: boolean = false) {
+  const searchParams = new URLSearchParams();
+
+  searchParams.append("dump", dump.toString());
+
+  const [getBackupSchedule] = createRequest(
+    [`/portal/getbackupschedule?${searchParams}`],
+    [["", ""]],
+    "GET",
+  );
+
+  const backupScheduleRes = await fetch(getBackupSchedule);
+
+  if (!backupScheduleRes.ok) return;
+
+  const backupSchedule = await backupScheduleRes.json();
+
+  return backupSchedule.response as TBackupSchedule;
+}
+
+export async function getBackupStorage(dump: boolean = false) {
+  const searchParams = new URLSearchParams();
+
+  searchParams.append("dump", dump.toString());
+
+  const [getBackupStorage] = createRequest(
+    [`/settings/storage/backup?${searchParams}`],
+    [["", ""]],
+    "GET",
+  );
+  const backupStorageRes = await fetch(getBackupStorage);
+
+  if (!backupStorageRes.ok) return;
+
+  const backupStorage = await backupStorageRes.json();
+
+  return backupStorage.response as TStorageBackup[];
+}
+
+export async function getStorageRegions() {
+  const [getStorageRegions] = createRequest(
+    [`/settings/storage/s3/regions`],
+    [["", ""]],
+    "GET",
+  );
+
+  const storageRegionsRes = await fetch(getStorageRegions);
+
+  if (!storageRegionsRes.ok) return;
+
+  const storageRegions = await storageRegionsRes.json();
+
+  return storageRegions.response as TStorageRegion[];
+}
+
+export async function getSettingsFiles(): Promise<TFilesSettings> {
+  const [getSettingsFiles] = createRequest(
+    [`/files/settings`],
+    [["", ""]],
+    "GET",
+  );
+
+  const settingsFilesRes = await fetch(getSettingsFiles);
+
+  if (!settingsFilesRes.ok) return {} as TFilesSettings;
+
+  const settingsFiles = await settingsFilesRes.json();
+
+  return settingsFiles.response;
+}
+
+export async function getFoldersTree() {
+  const [getFoldersTree] = createRequest(
+    ["/files/@root?filterType=2&count=1"],
+    [["", ""]],
+    "GET",
+  );
+
+  const foldersTreeRes = await fetch(getFoldersTree);
+
+  if (!foldersTreeRes.ok) return [];
+
+  const foldersTree = await foldersTreeRes.json();
+
+  const folders = sortInDisplayOrder(foldersTree.response);
+
+  return folders.map((data, index) => {
+    const { new: newItems, pathParts, current } = data;
+
+    const {
+      parentId,
+      title,
+      id,
+      rootFolderType,
+      security,
+      foldersCount,
+      filesCount,
+    } = current;
+
+    const type = +rootFolderType;
+
+    const name = getFolderClassNameByType(type);
+
+    return {
+      ...current,
+      id,
+      key: `0-${index}`,
+      parentId,
+      title,
+      rootFolderType: type,
+      folderClassName: name,
+      folders: null,
+      pathParts,
+      foldersCount,
+      filesCount,
+      newItems,
+      security,
+      new: newItems,
+    } as TFolder;
+  });
+}

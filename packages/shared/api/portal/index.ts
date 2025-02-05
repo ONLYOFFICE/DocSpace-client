@@ -30,8 +30,9 @@
 import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
-import {
+import type {
   TBackupHistory,
+  TBackupSchedule,
   TPaymentQuota,
   TPortal,
   TPortalTariff,
@@ -125,7 +126,7 @@ export function getBackupSchedule(dump: boolean = false) {
       dump,
     },
   };
-  return request(options);
+  return request<TBackupSchedule>(options);
 }
 
 export function createBackupSchedule(

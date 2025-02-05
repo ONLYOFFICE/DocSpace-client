@@ -57,6 +57,7 @@ import {
   TMigrationData,
   TSendWelcomeEmailData,
   TPortalCultures,
+  TStorageBackup,
 } from "./types";
 
 export async function getSettings(withPassword = false, headers = null) {
@@ -757,7 +758,7 @@ export function getBackupStorage(dump: boolean = false) {
       dump,
     },
   };
-  return request(options);
+  return request<TStorageBackup[]>(options);
 }
 
 export async function getBuildVersion(headers = null) {

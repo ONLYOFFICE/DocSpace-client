@@ -28,8 +28,10 @@ import type { TFolder } from "@docspace/shared/api/files/types";
 import type { AutomaticBackupProps } from "@docspace/shared/pages/auto-backup/AutoBackup.types";
 import type { TTranslation } from "@docspace/shared/types";
 
-export interface ExternalAutoBackupWrapperProps
-  extends Pick<AutomaticBackupProps, "buttonSize" | "isNeedFilePath"> {}
+export type ExternalAutoBackupWrapperProps = Pick<
+  AutomaticBackupProps,
+  "buttonSize" | "isNeedFilePath"
+>;
 
 export interface InjectedAutoBackupWrapperProps
   extends Omit<

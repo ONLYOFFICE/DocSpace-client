@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,45 +23,29 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+"use client";
 
-import type { TColorScheme, TTheme } from "@docspace/shared/themes";
+import { useMemo } from "react";
+import type { TFolder } from "@docspace/shared/api/files/types";
+import type { FolderType } from "@docspace/shared/enums";
 
-declare module "*.ico?url" {
-  const content: string;
-  export default content;
-}
-
-declare module "*.svg?url" {
-  const content: string;
-  export default content;
-}
-
-type TPortals = {
-  created: string;
-  domain: string;
-  industry: number;
-  language: string;
-  name: string;
-  ownerId: string;
-  portalName: string;
-  status: string;
-  tenantId: number;
-  owner: TOwner;
-  timeZoneName: string;
-  quotaUsage: TQuotaUsage;
-  customQuota: number;
-  usedSize: number;
+export type TreeFoldersProps = {
+  foldersTree: TFolder[];
 };
 
-type TNewPortalData = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  portalName: string;
-};
+export const useTreeFolders = ({ foldersTree }: TreeFoldersProps) => {
+  const rootFoldersTitles = useMemo(() => {
+    return foldersTree.reduce(
+      (acc, folder) => {
+        acc[folder.rootFolderType] = {
+          id: folder.id,
+          title: folder.title,
+        };
+        return acc;
+      },
+      {} as Record<FolderType, { id: number; title: string }>,
+    );
+  }, [foldersTree]);
 
-declare module "styled-components" {
-  export interface DefaultTheme extends TTheme {
-    currentColorScheme?: TColorScheme;
-  }
-}
+  return rootFoldersTitles;
+};

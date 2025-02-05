@@ -432,6 +432,7 @@ export type TConnectingStorage = {
   connected: boolean;
   oauth: boolean;
   redirectUrl: string;
+  clientId?: string;
 };
 
 export type TIndexItems = {

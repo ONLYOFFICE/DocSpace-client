@@ -35,7 +35,6 @@ export interface InjectedRestoreBackupWrapperProps
   resetDownloadingProgress: VoidFunction;
 }
 
-export interface RestoreBackupWrapperProps
-  extends InjectedRestoreBackupWrapperProps {}
+export type RestoreBackupWrapperProps = InjectedRestoreBackupWrapperProps;
 
-export interface ExternalRestoreBackupWrapperProps {}
+export type ExternalRestoreBackupWrapperProps = object;

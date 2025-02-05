@@ -322,3 +322,13 @@ export type TMigrationData = {
 export type TSendWelcomeEmailData = { isSendWelcomeEmail: boolean };
 
 export type TPortalCultures = string[];
+
+export type PropertiesType = { name: string; value: string; title: string };
+
+export type TStorageBackup = {
+  id: string;
+  current: boolean;
+  isSet: boolean;
+  title: string;
+  properties: PropertiesType[];
+};

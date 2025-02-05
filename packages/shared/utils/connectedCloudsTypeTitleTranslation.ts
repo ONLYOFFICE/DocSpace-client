@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -22,46 +22,44 @@
 //
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+
+import type { TTranslation } from "../types";
+
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+export const connectedCloudsTypeTitleTranslation = (
+  key: string,
+  t: TTranslation,
+) => {
+  switch (key) {
+    case "Box":
+    case "BoxNet":
+      return t("Translations:TypeTitleBoxNet");
 
-import type { TColorScheme, TTheme } from "@docspace/shared/themes";
+    case "DropBox":
+    case "DropboxV2":
+      return t("Translations:TypeTitleDropBox");
 
-declare module "*.ico?url" {
-  const content: string;
-  export default content;
-}
+    case "DocuSign":
+      return t("Translations:TypeTitleDocuSign");
 
-declare module "*.svg?url" {
-  const content: string;
-  export default content;
-}
+    case "Google":
+    case "GoogleDrive":
+      return t("Translations:TypeTitleGoogle");
 
-type TPortals = {
-  created: string;
-  domain: string;
-  industry: number;
-  language: string;
-  name: string;
-  ownerId: string;
-  portalName: string;
-  status: string;
-  tenantId: number;
-  owner: TOwner;
-  timeZoneName: string;
-  quotaUsage: TQuotaUsage;
-  customQuota: number;
-  usedSize: number;
-};
+    case "OneDrive":
+    case "SkyDrive":
+      return t("Translations:TypeTitleSkyDrive");
 
-type TNewPortalData = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  portalName: string;
-};
+    case "SharePoint":
+      return t("Translations:TypeTitleSharePoint");
+    case "WebDav":
+      return t("Translations:TypeTitleWebDav");
+    case "kDrive":
+      return t("Translations:TypeTitlekDrive");
+    case "Yandex":
+      return t("Translations:TypeTitleYandex");
 
-declare module "styled-components" {
-  export interface DefaultTheme extends TTheme {
-    currentColorScheme?: TColorScheme;
+    default:
+      return key;
   }
-}
+};

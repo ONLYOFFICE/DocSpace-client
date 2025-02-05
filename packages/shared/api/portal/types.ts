@@ -123,3 +123,27 @@ export type TBackupHistory = {
   createdOn: string;
   expiresOn: string;
 };
+
+export type TBackupSchedule = {
+  backupsStored: number;
+  cronParams: {
+    day: number;
+    hour: number;
+    period: number;
+  };
+  dump: boolean;
+  lastBackupTime: string;
+  storageParams: {
+    folderId: number;
+    module?: string;
+  };
+  storageType: BackupStorageType;
+};
+
+export type TStorageRegion = {
+  displayName: string;
+  originalSystemName: string;
+  partitionDnsSuffix: string;
+  partitionName: string;
+  systemName: string;
+};

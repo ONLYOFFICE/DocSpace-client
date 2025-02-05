@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { useTheme } from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
@@ -55,14 +57,11 @@ import {
 } from "@docspace/shared/components/floating-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
-import {
-  isManagement,
-  getBackupProgressInfo,
-} from "@docspace/shared/utils/common";
+import { getBackupProgressInfo } from "@docspace/shared/utils/common";
 
 import { globalColors } from "@docspace/shared/themes";
 import { useStateCallback } from "@docspace/shared/hooks/useStateCallback";
-import type { Nullable } from "@docspace/shared/types";
+import type { Nullable, Option } from "@docspace/shared/types";
 
 import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 import RoomsModule from "./sub-components/RoomsModule";
@@ -72,7 +71,7 @@ import { ButtonContainer } from "./sub-components/ButtonContainer";
 
 import { useDefaultOptions } from "./hooks/index";
 import { StyledModules, StyledAutoBackup } from "./AutoBackup.styled";
-import type { AutomaticBackupProps, Option } from "./AutoBackup.types";
+import type { AutomaticBackupProps } from "./AutoBackup.types";
 
 const hoursArray = Array(24)
   .fill(null)
@@ -177,6 +176,7 @@ const AutomaticBackup = ({
   setErrorInformation,
   isInitialError,
   errorInformation,
+  isManagement = false,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -298,14 +298,16 @@ const AutomaticBackup = ({
         time,
         day,
         false,
-        isManagement(),
+        isManagement,
       );
       const [selectedSchedule, storageInfo] = await Promise.all([
         getBackupSchedule(),
         getBackupStorage(),
       ]);
-      setBackupSchedule(selectedSchedule);
-      setThirdPartyStorage(storageInfo);
+
+      if (selectedSchedule) setBackupSchedule(selectedSchedule);
+      if (storageInfo) setThirdPartyStorage(storageInfo);
+
       setDefaultOptions(t, periodsObject, weekdaysLabelArray);
       toastr.success(t("SuccessfullySaveSettingsMessage"));
     } catch (e) {
@@ -387,6 +389,12 @@ const AutomaticBackup = ({
 
   if (isInitialLoading) return <AutoBackupLoader />;
 
+  console.log({
+    isLoadingData,
+    isEnableAuto,
+    isInitialError,
+  });
+
   return (
     <StyledAutoBackup>
       <StatusMessage message={errorInformation} />
@@ -396,7 +404,7 @@ const AutomaticBackup = ({
             productName: t("Common:ProductName"),
           })}
         </Text>
-        {!isManagement() ? (
+        {!isManagement ? (
           <Link
             className="link-learn-more"
             href={automaticBackupUrl}
@@ -428,7 +436,7 @@ const AutomaticBackup = ({
             >
               {t("EnableAutomaticBackup")}
             </Text>
-            {!isEnableAuto && !isManagement() ? (
+            {!isEnableAuto && !isManagement ? (
               <Badge
                 backgroundColor={
                   theme.isBase

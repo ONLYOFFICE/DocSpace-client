@@ -227,4 +227,5 @@ export interface ProgressBarMobileProps {
   operation?: string;
   /** The function called after the progress header is clicked */
   onOpenPanel?: () => void;
+  withoutStatus?: boolean;
 }

@@ -56,6 +56,7 @@ interface ProgressListProps {
   ) => void;
   onCancel?: () => void;
   onOpenPanel?: () => void;
+  withoutStatus?: boolean;
 }
 
 const getIcon = (icon: string): string => {
@@ -93,6 +94,7 @@ const ProgressList = observer(
     clearPrimaryProgressData,
     onCancel,
     onOpenPanel,
+    withoutStatus,
   }: ProgressListProps) => {
     return (
       <div className="progress-container">
@@ -131,6 +133,7 @@ const ProgressList = observer(
               operation={item.operation}
               onCancel={onCancel}
               onOpenPanel={onOpenPanel}
+              withoutStatus={withoutStatus}
             />
           </div>
         ))}

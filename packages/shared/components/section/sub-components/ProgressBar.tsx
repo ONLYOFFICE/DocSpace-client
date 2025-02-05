@@ -51,6 +51,7 @@ const ProgressBar = ({
   operationId,
   operation,
   onOpenPanel,
+  withoutStatus,
 }: ProgressBarMobileProps) => {
   const [isVisible, setIsVisible] = useState(true);
   const closeTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -111,7 +112,7 @@ const ProgressBar = ({
               size={16}
               color="white"
             />
-            {alert || completed ? (
+            {!withoutStatus && (alert || completed) ? (
               <div
                 className={classNames(styles.infoIcon, {
                   [styles.alert]: alert,

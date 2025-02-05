@@ -235,7 +235,8 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         [styles.autoHide]:
           !isOpenDropdown && operationsCompleted && !needErrorChecking,
         [styles.laterHide]: isLaterHide(),
-        [styles.immidiateHide]: operationsCompleted && disableOpenPanel,
+        [styles.immidiateHide]:
+          !isSeveralOperations && operationsCompleted && disableOpenPanel,
         [styles.mainButtonVisible]: mainButtonVisible,
       })}
     >
@@ -281,6 +282,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           }
           onCancel={onCancelOperation}
           {...(!disableOpenPanel && { onOpenPanel })}
+          withoutStatus={withoutStatus}
         />
       </DropDown>
     </div>

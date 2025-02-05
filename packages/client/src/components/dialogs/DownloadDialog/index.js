@@ -332,7 +332,7 @@ class DownloadDialogComponent extends React.Component {
 
   getItemIcon = (item) => {
     const { getIcon, getFolderIcon } = this.props;
-    const extension = item.fileExst;
+    const extension = item?.fileExst;
     const icon = extension ? getIcon(32, extension) : getFolderIcon(32);
 
     return (

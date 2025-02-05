@@ -1014,8 +1014,11 @@ class UploadDataStore {
     const fileIndex = this.uploadedFilesHistory.findIndex(
       (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
     );
-    if (fileIndex > -1)
-      this.uploadedFilesHistory[fileIndex].percent = percentCurrentFile;
+
+    if (fileIndex > -1) {
+      if (this.uploadedFilesHistory[fileIndex].percent < percentCurrentFile)
+        this.uploadedFilesHistory[fileIndex].percent = percentCurrentFile;
+    }
 
     this.primaryProgressDataStore.setPrimaryProgressBarData({
       operation: OPERATIONS_NAME.upload,

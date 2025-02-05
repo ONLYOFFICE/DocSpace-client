@@ -25,14 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-// import { Trans } from "react-i18next";
-
-// import { toastr } from "@docspace/shared/components/toast";
 
 const useOperations = ({
   setUploadPanelVisible,
-  uploaded,
-  converted,
   disableUploadPanelOpen,
   clearUploadData,
   clearUploadedFiles,
@@ -40,13 +35,8 @@ const useOperations = ({
 }) => {
   React.useEffect(() => {
     if (primaryOperationsArray?.length === 0) {
-      if (uploaded) {
-        if (converted) {
-          clearUploadData();
-        } else {
-          clearUploadedFiles();
-        }
-      }
+      clearUploadData();
+      clearUploadedFiles();
     }
   }, [primaryOperationsArray.length]);
 

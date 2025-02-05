@@ -90,8 +90,6 @@ const PureHome = (props) => {
     dragging,
     createFoldersTree,
     disableDrag,
-    uploaded,
-    converted,
     setUploadPanelVisible,
     clearPrimaryProgressData,
     isPrimaryProgressVisbile,
@@ -226,8 +224,6 @@ const PureHome = (props) => {
 
   const { showUploadPanel } = useOperations({
     setUploadPanelVisible,
-    uploaded,
-    converted,
     disableUploadPanelOpen,
     clearUploadData,
     clearUploadedFiles,
@@ -520,8 +516,7 @@ export const Component = inject(
       secondaryOperationsAlert,
     } = secondaryProgressDataStore;
 
-    const { setUploadPanelVisible, startUpload, uploaded, converted } =
-      uploadDataStore;
+    const { setUploadPanelVisible, startUpload } = uploadDataStore;
 
     const { createFoldersTree, onClickBack } = filesActionsStore;
 
@@ -566,8 +561,6 @@ export const Component = inject(
       firstLoad,
       dragging,
       viewAs,
-      uploaded,
-      converted,
       isRecycleBinFolder,
       isPrivacyFolder,
       isVisitor: userStore.user.isVisitor,

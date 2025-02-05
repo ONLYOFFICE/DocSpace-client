@@ -39,6 +39,7 @@ const CancelOperationDialog = ({
   setOperationCancelVisible,
   cancelUpload,
   setHideConfirmCancelOperation,
+  isSecondaryProgressVisbile,
 }) => {
   const { t } = useTranslation(["UploadPanel", "Files", "Common"]);
   const [isChecked, setIsChecked] = useState(false);
@@ -56,6 +57,10 @@ const CancelOperationDialog = ({
     setIsChecked(!isChecked);
   };
 
+  const bodyText = isSecondaryProgressVisbile
+    ? t("Common:CancelUploadingProcess")
+    : t("Common:CancelCurrentProcess");
+
   return (
     <ModalDialog
       visible={visible}
@@ -64,7 +69,7 @@ const CancelOperationDialog = ({
     >
       <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>{t("Common:CancelCurrentProcess")}</Text>
+        <Text>{bodyText}</Text>
         <Box displayProp="flex" alignItems="center" paddingProp="16px 0 0">
           <Checkbox
             label={t("Common:DontShowMessage")}
@@ -84,13 +89,16 @@ const CancelOperationDialog = ({
 export default inject(
   ({ dialogsStore, uploadDataStore, filesSettingsStore }) => {
     const { operationCancelVisible, setOperationCancelVisible } = dialogsStore;
-    const { cancelUpload } = uploadDataStore;
+    const { cancelUpload, secondaryProgressDataStore } = uploadDataStore;
     const { setHideConfirmCancelOperation } = filesSettingsStore;
+    const { isSecondaryProgressVisbile } = secondaryProgressDataStore;
+
     return {
       visible: operationCancelVisible,
       setOperationCancelVisible,
       cancelUpload,
       setHideConfirmCancelOperation,
+      isSecondaryProgressVisbile,
     };
   },
 )(observer(CancelOperationDialog));

@@ -88,7 +88,7 @@ const FileManagement = ({
   }, [setDisplayFileExtension, displayFileExtension]);
 
   const onChangeCancellationNotification = React.useCallback(() => {
-    setHideConfirmCancelOperation(!displayFileExtension);
+    setHideConfirmCancelOperation(!hideConfirmCancelOperation);
   }, [hideConfirmCancelOperation, setHideConfirmCancelOperation]);
 
   const onChangeOpenEditorInSameTab = React.useCallback(() => {

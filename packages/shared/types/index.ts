@@ -123,6 +123,7 @@ declare global {
       imageThumbnails?: boolean;
       oauth2: {
         origin: string;
+        secret: string;
       };
       editor?: {
         requestClose: boolean;

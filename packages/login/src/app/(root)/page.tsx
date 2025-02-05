@@ -101,7 +101,6 @@ async function Page({
                   cookieSettingsEnabled={settings?.cookieSettingsEnabled}
                   clientId={clientId}
                   client={oauthData?.client}
-                  oauthUrl={oauthData?.url}
                   reCaptchaPublicKey={settings?.recaptchaPublicKey}
                   reCaptchaType={settings?.recaptchaType}
                   ldapDomain={capabilities?.ldapDomain}

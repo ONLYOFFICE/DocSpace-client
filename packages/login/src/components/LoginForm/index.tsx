@@ -78,7 +78,6 @@ const LoginForm = ({
   reCaptchaPublicKey,
   clientId,
   client,
-  oauthUrl,
   reCaptchaType,
   ldapDomain,
   ldapEnabled,
@@ -301,22 +300,16 @@ const LoginForm = ({
     const session = !isChecked;
 
     if (client?.isPublic && hash) {
-      const region = oauthUrl?.replace("identity", "");
-      console.log(region);
-      const portals = await getAvailablePortals(
-        {
-          Email: user,
-          PasswordHash: hash,
-          recaptchaResponse: captchaToken,
-          recaptchaType: reCaptchaType,
-        },
-        region,
-      );
+      const portals = await getAvailablePortals({
+        Email: user,
+        PasswordHash: hash,
+        recaptchaResponse: captchaToken,
+        recaptchaType: reCaptchaType,
+      });
 
       if (portals.error) {
         const error = portals;
 
-        console.log(error);
         let errorMessage = "";
         if (typeof error === "object") {
           errorMessage =
@@ -477,7 +470,6 @@ const LoginForm = ({
     reCaptchaType,
     isCaptchaSuccessful,
     linkData,
-    oauthUrl,
     router,
     baseDomain,
     clientId,

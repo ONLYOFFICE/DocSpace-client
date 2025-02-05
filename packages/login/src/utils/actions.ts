@@ -33,6 +33,7 @@ import {
   getBaseUrl,
 } from "@docspace/shared/utils/next-ssr-helper";
 import { TUser } from "@docspace/shared/api/people/types";
+import { TPortal } from "@docspace/shared/api/portal/types";
 import {
   TCapabilities,
   TCompanyInfo,
@@ -203,8 +204,12 @@ export async function getUser() {
   return user.response as TUser;
 }
 
-export async function getScopeList() {
-  const [getScopeList] = createRequest([`/scopes`], [["", ""]], "GET");
+export async function getScopeList(jwtToken: string) {
+  const [getScopeList] = createRequest(
+    [`/scopes`],
+    [["X-Signature", jwtToken]],
+    "GET",
+  );
 
   const scopeList = IS_TEST ? scopesHandler() : await fetch(getScopeList);
 
@@ -216,38 +221,21 @@ export async function getScopeList() {
 }
 
 export async function getOAuthClient(clientId: string) {
-  const config = await getConfig();
+  try {
+    const route = `/clients/${clientId}/public/info`;
 
-  const route = `/clients/${clientId}/public/info`;
-  const path = `api/2.0${route}`;
-
-  const urls: string[] = config?.oauth2?.identity.map(
-    (url: string) => `https://${url}/${path}`,
-  );
-
-  let url = "";
-
-  const actions = urls
-    ? await Promise.allSettled(urls.map((url: string) => fetch(url)))
-    : [];
-
-  const oauthClient = IS_TEST
-    ? getClientHandler()
-    : actions.length
-      ? actions
-          .filter((action) => action.status === "fulfilled")
-          .filter((action, index) => {
-            if (!action.value.ok || action.value.status === 404) return false;
-            url = config.oauth2.identity[index];
-            return true;
-          })[0]?.value
+    const oauthClient = IS_TEST
+      ? getClientHandler()
       : await fetch(createRequest([route], [["", ""]], "GET")[0]);
 
-  if (!oauthClient) return;
+    if (!oauthClient) return;
 
-  const client = await oauthClient.json();
+    const client = await oauthClient.json();
 
-  return { client: transformToClientProps(client), url };
+    return { client: transformToClientProps(client) };
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 export async function getPortalCultures() {
@@ -392,6 +380,18 @@ export async function getPortalTimeZones(confirmKey: string | null = null) {
   return portalTimeZones.response as TTimeZone[];
 }
 
+export async function getPortal() {
+  const [getPortal] = createRequest([`/portal`], [["", ""]], "GET");
+
+  const res = IS_TEST ? portalTimeZoneHandler() : await fetch(getPortal);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const portal = await res.json();
+
+  return { ...portal.response, tenantAlias: portal.links[0].href } as TPortal;
+}
+
 export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
   const [getTfaSecretKeyAndQR] = createRequest(
     [`/settings/tfaapp/setup`],
@@ -427,23 +427,20 @@ export async function checkConfirmLink(data: TConfirmLinkParams) {
   return result.response as TConfirmLinkResult;
 }
 
-export async function getAvailablePortals(
-  data: {
-    Email: string;
-    PasswordHash: string;
-    recaptchaResponse?: string | null | undefined;
-    recaptchaType?: unknown | undefined;
-  },
-  region?: string,
-) {
+export async function getAvailablePortals(data: {
+  Email: string;
+  PasswordHash: string;
+  recaptchaResponse?: string | null | undefined;
+  recaptchaType?: unknown | undefined;
+}) {
   const config = await getConfig();
 
   const path = `/portal/signin`;
 
   if (config?.oauth2?.apiSystem.length) {
-    const urls: string[] = config.oauth2.apiSystem
-      .map((url: string) => `https://${url}/apisystem${path}`)
-      .filter((url: string) => (region ? url.includes(region) : true));
+    const urls: string[] = config.oauth2.apiSystem.map(
+      (url: string) => `https://${url}/apisystem${path}`,
+    );
 
     const actions = await Promise.allSettled(
       urls.map((url: string) =>

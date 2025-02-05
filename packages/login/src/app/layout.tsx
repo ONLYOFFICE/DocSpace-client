@@ -62,8 +62,6 @@ export default async function RootLayout({
 
   let redirectUrl = "";
 
-  console.log("start requests from layout");
-
   const [settings, colorTheme, user] = await Promise.all([
     getSettings(),
     getColorTheme(),

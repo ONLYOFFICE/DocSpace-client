@@ -41,6 +41,7 @@ import SettingsSetupStore from "./SettingsSetupStore";
 import ConfirmStore from "./ConfirmStore";
 import BackupStore from "./BackupStore";
 import CommonStore from "./CommonStore";
+import GuidanceStore from "./GuidanceStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
 import SsoFormStore from "./SsoFormStore";
@@ -165,6 +166,8 @@ const filesStore = new FilesStore(
   settingsStore,
   indexingStore,
 );
+
+const guidanceStore = new GuidanceStore(filesStore);
 
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
@@ -386,6 +389,8 @@ const store = {
   avatarEditorDialogStore,
 
   brandingStore,
+
+  guidanceStore,
 };
 
 export default store;

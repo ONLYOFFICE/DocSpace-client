@@ -154,13 +154,9 @@ const Panels = (props) => {
     formFillingTipsVisible,
     formFillingTipsNumber,
     viewAs,
-    pdfGuidRects,
-    readyGuidRects,
-    shareGuidRects,
-    uploadingGuidRects,
-    mainButtonGuidRect,
     infoPanelVisible,
     userId,
+    getFormFillingConfig,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -383,12 +379,8 @@ const Panels = (props) => {
         onClose={onCloseGuidance}
         viewAs={viewAs}
         // currentDeviceType={currentDeviceType}
-        pdfGuidRects={pdfGuidRects}
-        readyGuidRects={readyGuidRects}
-        shareGuidRects={shareGuidRects}
-        uploadingGuidRects={uploadingGuidRects}
         infoPanelVisible={infoPanelVisible}
-        mainButtonGuidRect={mainButtonGuidRect}
+        getConfig={getFormFillingConfig}
       />
     ),
   ];
@@ -408,6 +400,7 @@ export default inject(
     filesStore,
     infoPanelStore,
     userStore,
+    guidanceStore,
   }) => {
     const {
       copyPanelVisible,
@@ -470,14 +463,7 @@ export default inject(
       formFillingTipsNumber,
     } = dialogsStore;
 
-    const {
-      viewAs,
-      pdfGuidRects,
-      readyGuidRects,
-      shareGuidRects,
-      uploadingGuidRects,
-      mainButtonGuidRect,
-    } = filesStore;
+    const { viewAs } = filesStore;
 
     const { preparationPortalDialogVisible } = backup;
     const { copyFromTemplateForm } = filesActionsStore;
@@ -494,6 +480,8 @@ export default inject(
       deletePluginDialogVisible,
       pluginDialogVisible,
     } = pluginStore;
+
+    const { getFormFillingConfig } = guidanceStore;
 
     const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
     const resetQuotaItem = () => {
@@ -575,13 +563,9 @@ export default inject(
       formFillingTipsVisible,
       formFillingTipsNumber,
       viewAs,
-      pdfGuidRects,
-      readyGuidRects,
-      shareGuidRects,
-      uploadingGuidRects,
-      mainButtonGuidRect,
       infoPanelVisible: infoPanelStore.isVisible,
       userId: userStore?.user?.id,
+      getFormFillingConfig,
     };
   },
 )(observer(Panels));

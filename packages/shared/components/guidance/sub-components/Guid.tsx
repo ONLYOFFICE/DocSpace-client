@@ -34,12 +34,9 @@ import { Text } from "@docspace/shared/components/text";
 import { isMobile, isDesktop, classNames } from "../../../utils";
 import { AsideHeader } from "../../aside-header";
 
-import { FormFillingTipsState } from "../../../enums";
 import styles from "./Guid.module.scss";
 import modalStyles from "../../modal-dialog/ModalDialog.module.scss";
 
-import { getHeaderText } from "./Guid.utils";
-import { GuidProps } from "./Guid.types";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 const GUID_MODAL_MARGIN = 18;
@@ -47,26 +44,22 @@ const MAX_MODAL_HEIGHT = 190;
 const MODAL_WIDTH = 430;
 
 const Guid = ({
-  formFillingTipsNumber,
-  setFormFillingTipsNumber,
+  guidanceConfig,
+  currentStepIndex,
+  setCurrentStepIndex,
   onClose,
   position,
   infoPanelVisible,
   viewAs,
   mainButtonPosition,
+  currentGuidance,
 }: GuidProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["FormFillingTipsDialog", "Common"]);
   const { isRTL } = useInterfaceDirection();
 
-  const modalText = getHeaderText(formFillingTipsNumber, t);
-  const isLastTip = formFillingTipsNumber === FormFillingTipsState.Uploading;
-  const isStartingTip = formFillingTipsNumber === FormFillingTipsState.Starting;
-  const isCompleteTip =
-    formFillingTipsNumber === FormFillingTipsState.Complete ||
-    formFillingTipsNumber === FormFillingTipsState.Submitting;
-
-  const isSharingTip = formFillingTipsNumber === FormFillingTipsState.Sharing;
+  const isLastStep = currentStepIndex === guidanceConfig.length - 1;
+  const isStartingStep = currentStepIndex === 0;
 
   const closeBackdrop = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -75,27 +68,24 @@ const Guid = ({
   };
 
   const nextTips = () => {
-    if (isLastTip) {
+    if (isLastStep) {
       return onClose();
     }
-    setFormFillingTipsNumber(formFillingTipsNumber + 1);
+    setCurrentStepIndex(currentStepIndex + 1);
   };
 
   const prevTips = () => {
-    setFormFillingTipsNumber(formFillingTipsNumber - 1);
+    setCurrentStepIndex(currentStepIndex - 1);
   };
 
-  const tipsCircles = [];
-  for (let i = 1; i < 6; i += 1) {
-    tipsCircles.push(
-      <div
-        className={classNames(styles.tipsCircle, {
-          [styles.isSelected]: i === formFillingTipsNumber,
-        })}
-        key={`tips_circle_${i}`}
-      />,
-    );
-  }
+  const tipsCircles = guidanceConfig.map((step, index) => (
+    <div
+      className={classNames(styles.tipsCircle, {
+        [styles.isSelected]: index === currentStepIndex,
+      })}
+      key={`tips_circle_${step.id}`}
+    />
+  ));
 
   const getXDirection = React.useCallback(
     (screenWidth: number) => {
@@ -113,12 +103,12 @@ const Guid = ({
       const screenWidth = document.documentElement.clientWidth;
       const defaultTopPosition = position.bottom + GUID_MODAL_MARGIN;
       const isTileView = viewAs === "tile";
-      const isRelevantTip = isStartingTip || isCompleteTip || isSharingTip;
+      const isRelevantTip = isStartingStep;
 
       const isNotEnoughSpace = isRTL
         ? position.left - MODAL_WIDTH < 0
         : screenWidth <
-          (isStartingTip ? position.right : position.left) +
+          (isStartingStep ? position.right : position.left) +
             MODAL_WIDTH +
             GUID_MODAL_MARGIN;
 
@@ -129,7 +119,7 @@ const Guid = ({
         if (isNotEnoughSpace) {
           return defaultTopPosition;
         }
-        if (isStartingTip) {
+        if (isStartingStep) {
           return position.top;
         }
       }
@@ -145,10 +135,8 @@ const Guid = ({
       position.right,
       position.left,
       position.top,
-      isStartingTip,
+      isStartingStep,
       isRTL,
-      isCompleteTip,
-      isSharingTip,
       viewAs,
     ],
   );
@@ -157,13 +145,13 @@ const Guid = ({
     (xDirection: string) => {
       const screenWidth = document.documentElement.clientWidth;
       const isTileView = viewAs === "tile";
-      const isRelevantTip = isStartingTip || isCompleteTip || isSharingTip;
+      const isRelevantTip = isStartingStep;
 
       const getPositionX = () => {
         if (isRTL) {
-          return isStartingTip ? position.left : position.right;
+          return isStartingStep ? position.left : position.right;
         }
-        return isSharingTip ? position.left : position.right;
+        return position.left;
       };
 
       const isNotEnoughSpace = isRTL
@@ -171,27 +159,19 @@ const Guid = ({
         : screenWidth < getPositionX() + MODAL_WIDTH + GUID_MODAL_MARGIN;
 
       // Default position for most cases
-      if (isLastTip && !isDesktop()) {
+      if (isLastStep && !isDesktop()) {
         return "15px";
       }
 
       // Handle tile view cases
       if (isTileView && isRelevantTip) {
         if (isNotEnoughSpace) {
-          if (isCompleteTip) {
-            return isRTL
-              ? `${position.left}px`
-              : `${position.right - MODAL_WIDTH}px`;
-          }
-          if (isSharingTip) {
-            return isRTL ? "0px" : `${position.right - MODAL_WIDTH}px`;
-          }
           return isRTL
-            ? `${position.right - MODAL_WIDTH}px`
-            : `${position.left}px`;
+            ? `${position.left}px`
+            : `${position.right - MODAL_WIDTH}px`;
         }
 
-        if (isStartingTip) {
+        if (isStartingStep) {
           return isRTL
             ? `${position.left - MODAL_WIDTH - GUID_MODAL_MARGIN}px`
             : `${position.right + GUID_MODAL_MARGIN}px`;
@@ -209,16 +189,7 @@ const Guid = ({
 
       return "20px";
     },
-    [
-      isRTL,
-      isStartingTip,
-      isSharingTip,
-      position.left,
-      position.right,
-      isLastTip,
-      isCompleteTip,
-      viewAs,
-    ],
+    [isRTL, isStartingStep, position.left, position.right, isLastStep, viewAs],
   );
 
   const onResize = React.useCallback(() => {
@@ -247,11 +218,9 @@ const Guid = ({
   }
 
   const directionX =
-    isLastTip && !isDesktop()
+    isLastStep && !isDesktop()
       ? isRTL
-      : ((isStartingTip || isCompleteTip || isSharingTip) &&
-          viewAs === "tile") ||
-        !isRTL;
+      : (isStartingStep && viewAs === "tile") || !isRTL;
 
   const dialogClassName = classNames(
     styles.dialog,
@@ -290,14 +259,9 @@ const Guid = ({
   };
 
   const clippedClassName = classNames(styles.guidElement, {
-    [styles.smallBorderRadius]:
-      formFillingTipsNumber === FormFillingTipsState.Sharing ||
-      formFillingTipsNumber === FormFillingTipsState.Uploading,
+    [styles.smallBorderRadius]: isLastStep,
     [styles.fromRight]:
-      infoPanelVisible &&
-      isRTL &&
-      viewAs !== "tile" &&
-      (isStartingTip || isCompleteTip),
+      infoPanelVisible && isRTL && viewAs !== "tile" && isStartingStep,
   });
 
   return (
@@ -306,7 +270,7 @@ const Guid = ({
         className={classNames(styles.guidBackdrop)}
         onClick={closeBackdrop}
       />
-      {isDesktop() && isLastTip && mainButtonPosition.width ? (
+      {isDesktop() && isLastStep && mainButtonPosition.width ? (
         <div
           className={clippedClassName}
           style={{
@@ -331,7 +295,7 @@ const Guid = ({
           <AsideHeader
             id="modal-header-swipe"
             className={classNames(["modal-header"]) || "modal-header"}
-            header={modalText?.header}
+            header={currentGuidance?.header}
             onCloseClick={onClose}
           />
 
@@ -343,7 +307,7 @@ const Guid = ({
               lineHeight="20px"
             >
               {" "}
-              {modalText?.description}
+              {currentGuidance?.description}
             </Text>
           </div>
 
@@ -354,7 +318,7 @@ const Guid = ({
           >
             <div className="circle-container">{tipsCircles}</div>
             <div className="button-container">
-              {formFillingTipsNumber !== FormFillingTipsState.Starting ? (
+              {currentStepIndex !== 0 ? (
                 <Button
                   id="form-filling_tips_back"
                   key="TipsBack"
@@ -368,7 +332,7 @@ const Guid = ({
                 id="form-filling_tips_next"
                 key="TipsNext"
                 primary
-                label={isLastTip ? t("Common:GotIt") : t("Common:Next")}
+                label={isLastStep ? t("Common:GotIt") : t("Common:Next")}
                 size={ButtonSize.extraSmall}
                 onClick={nextTips}
               />

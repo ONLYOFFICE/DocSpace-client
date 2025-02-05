@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { Portal } from "../portal";
 import { Guid } from "./sub-components/Guid";
@@ -38,15 +39,18 @@ import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 const Guidance = (props: GuidanceProps) => {
   const {
     formFillingTipsNumber,
+    setFormFillingTipsNumber,
     viewAs,
-    pdfGuidRects,
-    readyGuidRects,
-    shareGuidRects,
-    uploadingGuidRects,
-    mainButtonGuidRect,
+    infoPanelVisible,
+    getConfig,
   } = props;
 
+  const { t } = useTranslation(["FormFillingTipsDialog", "Common"]);
   const { isRTL } = useInterfaceDirection();
+
+  const guidanceConfig = getConfig(t);
+
+  const currentGuidance = guidanceConfig[formFillingTipsNumber - 1];
 
   const [position, setPosition] = React.useState({
     width: 0,
@@ -57,56 +61,38 @@ const Guidance = (props: GuidanceProps) => {
     right: 0,
   });
 
-  const mainButtonPosition = getMainButtonPosition(mainButtonGuidRect);
+  // const mainButtonPosition = getMainButtonPosition(mainButtonGuidRect);
 
   const onResize = React.useCallback(() => {
-    const guidRects = {
-      pdf: pdfGuidRects,
-      ready: readyGuidRects,
-      share: shareGuidRects,
-      uploading: uploadingGuidRects,
-    };
+    if (!currentGuidance?.position?.rects) return;
 
     const newPosition = getGuidPosition(
-      guidRects,
-      formFillingTipsNumber,
+      currentGuidance.position,
       viewAs,
       isRTL,
     );
     setPosition(newPosition);
-  }, [
-    formFillingTipsNumber,
-    pdfGuidRects,
-    readyGuidRects,
-    shareGuidRects,
-    uploadingGuidRects,
-    viewAs,
-    isRTL,
-  ]);
+  }, [viewAs, isRTL, currentGuidance]);
 
   React.useEffect(() => {
     onResize();
     window.addEventListener("resize", onResize);
 
     return () => window.removeEventListener("resize", onResize);
-  }, [
-    pdfGuidRects,
-    readyGuidRects,
-    shareGuidRects,
-    uploadingGuidRects,
-    formFillingTipsNumber,
-    viewAs,
-    isRTL,
-    onResize,
-  ]);
+  }, [viewAs, isRTL, onResize]);
 
   return (
     <Portal
       element={
         <Guid
+          guidanceConfig={guidanceConfig}
+          currentStepIndex={formFillingTipsNumber - 1}
+          currentGuidance={currentGuidance}
+          setCurrentStepIndex={(index) => setFormFillingTipsNumber(index + 1)}
+          onClose={props.onClose}
           position={position}
-          mainButtonPosition={mainButtonPosition}
-          {...props}
+          infoPanelVisible={infoPanelVisible}
+          viewAs={viewAs}
         />
       }
     />

@@ -27,19 +27,7 @@
 import { TTranslation } from "@docspace/shared/types";
 import { FormFillingTipsState } from "../../../enums";
 import { isTablet } from "../../../utils";
-
-const GUID_SHARE_OFFSET = 2;
-const GUID_UPLOADING_OFFSET = 9;
-const ROW_VIEW_OFFSET = 15;
-const TILE_VIEW_OFFSET = 4;
-const TILE_VIEW_POSITION_OFFSET = 2;
-
-type GuidRectsProps = {
-  pdf: DOMRect;
-  ready: DOMRect;
-  share: DOMRect;
-  uploading: DOMRect;
-};
+import { GuidancePosition, GuidanceElementType } from "./Guid.types";
 
 const DEFAULT_POSITION = {
   width: 0,
@@ -50,150 +38,131 @@ const DEFAULT_POSITION = {
   right: 0,
 } as const;
 
-const getViewTypeBasedDimensions = (rect: DOMRect, viewAs: string) => {
+interface ViewDimensions {
+  width: number;
+  height: number;
+  top: number;
+}
+
+const getViewTypeBasedDimensions = (
+  rect: DOMRect,
+  viewAs: string,
+  offset: GuidancePosition["offset"],
+): ViewDimensions => {
   const isRowOrTable = viewAs === "row" || viewAs === "table";
   const isTileView = viewAs === "tile";
+  const offsetValue = offset?.value || 0;
 
   return {
-    width: isRowOrTable ? 0 : rect.width + TILE_VIEW_OFFSET,
-    height: isTileView ? rect.height + TILE_VIEW_OFFSET : rect.height,
-    top: isTileView ? rect.top - TILE_VIEW_POSITION_OFFSET : rect.top,
+    width: isRowOrTable ? 0 : rect.width + offsetValue,
+    height: isTileView ? rect.height + offsetValue : rect.height,
+    top: isTileView ? rect.top - offsetValue : rect.top,
   };
 };
 
-const getLeftPosition = (rect: DOMRect, viewAs: string, isRTL?: boolean) => {
+const getLeftPosition = (
+  rect: DOMRect,
+  viewAs: string,
+  isRTL: boolean = false,
+  offset: GuidancePosition["offset"],
+): number => {
   if (isRTL && (viewAs === "row" || viewAs === "table")) {
     return 0;
   }
 
+  const offsetValue = offset?.value || 0;
+  const rowOffset = offset?.row || offsetValue;
+
   switch (viewAs) {
     case "row":
-      return rect.left - ROW_VIEW_OFFSET;
+      return rect.left - rowOffset;
     case "tile":
-      return rect.left - TILE_VIEW_POSITION_OFFSET;
+      return rect.left - offsetValue;
     default:
       return rect.left;
   }
 };
 
-const getUploadingPosition = (rect: DOMRect) => {
-  const offset = GUID_UPLOADING_OFFSET;
-  const baseSize = isTablet() ? rect.height + offset * 2 : rect.height * 2;
+const getExpandedPosition = (
+  rect: DOMRect,
+  offset: GuidancePosition["offset"],
+  options: { useTabletSize?: boolean; expandHeight?: boolean } = {},
+) => {
+  const { useTabletSize = false, expandHeight = false } = options;
+  const offsetValue = offset?.value || 0;
+
+  const baseSize = useTabletSize
+    ? rect.height + offsetValue * 2
+    : expandHeight
+      ? rect.height * 2
+      : rect.height + offsetValue * 2;
 
   return {
     width: baseSize,
     height: baseSize,
-    left: rect.left - offset,
-    top: rect.top - offset,
-    bottom: rect.bottom + offset,
+    left: rect.left - offsetValue,
+    top: rect.top - offsetValue,
+    bottom: rect.bottom + offsetValue,
     right: rect.right,
   };
 };
 
-export const getMainButtonPosition = (rect: DOMRect) => {
-  if (!rect) return DEFAULT_POSITION;
-
-  const offset = GUID_SHARE_OFFSET;
-  return {
-    width: rect.width + offset * 2,
-    height: rect.height + offset * 2,
-    left: rect.left - offset,
-    top: rect.top - offset,
-    bottom: rect.bottom,
-    right: rect.right,
-  };
-};
-
-const getSharingPosition = (rect: DOMRect) => {
-  const offset = GUID_SHARE_OFFSET;
-  return {
-    width: rect.width + offset * 2,
-    height: rect.height + offset * 2,
-    left: rect.left - offset,
-    top: rect.top - offset,
-    bottom: rect.bottom,
-    right: rect.right,
-  };
-};
-
-const getStandardPosition = (
+const getTablePosition = (
   rect: DOMRect,
-  viewAs: string,
-  isRTL?: boolean,
+  offset: GuidancePosition["offset"],
+  isRTL: boolean = false,
 ) => {
-  const dimensions = getViewTypeBasedDimensions(rect, viewAs);
-  const isTableMode = viewAs === "table";
+  const offsetValue = offset?.value || 0;
+  const tableOffset = offset?.table || offsetValue;
 
   return {
-    ...dimensions,
-    left: getLeftPosition(rect, viewAs, isRTL),
-    top: isTableMode ? dimensions.top - 2 : dimensions.top,
-    height: isTableMode
-      ? (dimensions.height || rect.height) + 3
-      : dimensions.height || rect.height,
+    width: rect.width,
+    height: rect.height + tableOffset,
+    left: isRTL ? 0 : rect.left,
+    top: rect.top - tableOffset,
     bottom: rect.bottom,
     right: rect.right,
   };
 };
 
 export const getGuidPosition = (
-  guidRects: GuidRectsProps,
-  state: number,
+  guidance: GuidancePosition,
   viewAs: string,
-  isRTL?: boolean,
+  isRTL: boolean = false,
 ) => {
-  switch (state) {
-    case FormFillingTipsState.Starting:
-      return getStandardPosition(guidRects.pdf, viewAs, isRTL);
+  if (!guidance?.rects) return DEFAULT_POSITION;
 
-    case FormFillingTipsState.Sharing:
-      return getSharingPosition(guidRects.share);
+  const { rects, type, offset } = guidance;
 
-    case FormFillingTipsState.Submitting:
-    case FormFillingTipsState.Complete:
-      return getStandardPosition(guidRects.ready, viewAs, isRTL);
-
-    case FormFillingTipsState.Uploading:
-      return getUploadingPosition(guidRects.uploading);
-
-    default:
-      return DEFAULT_POSITION;
+  // Special handling for table view
+  if (viewAs === "table") {
+    return getTablePosition(rects, offset, isRTL);
   }
-};
 
-export const getHeaderText = (state: number, t: TTranslation) => {
-  switch (state) {
-    case FormFillingTipsState.Starting:
-      return {
-        header: t("HeaderStarting"),
-        description: t("TitleStarting"),
-      };
-    case FormFillingTipsState.Sharing:
-      return {
-        header: t("HeaderSharing"),
-        description: t("TitleSharing", {
-          productName: t("Common:ProductName"),
-        }),
-      };
-    case FormFillingTipsState.Submitting:
-      return {
-        header: t("HeaderSubmitting"),
-        description: t("TitleSubmitting"),
-      };
-    case FormFillingTipsState.Complete:
-      return {
-        header: t("HeaderComplete"),
-        description: t("TitleComplete"),
-      };
-    case FormFillingTipsState.Uploading:
-      return {
-        header: t("HeaderUploading"),
-        description: t("TitleUploading", {
-          productName: t("Common:ProductName"),
-        }),
-      };
+  // Handle different element types
+  switch (type) {
+    case GuidanceElementType.UploadArea:
+      return getExpandedPosition(rects, offset, {
+        useTabletSize: isTablet(),
+        expandHeight: !isTablet(),
+      });
 
-    default:
-      return null;
+    case GuidanceElementType.Interactive:
+      return getExpandedPosition(rects, offset);
+
+    case GuidanceElementType.Expandable:
+      return getExpandedPosition(rects, offset, { expandHeight: true });
+
+    case GuidanceElementType.Content:
+    default: {
+      // Default position calculation based on view type
+      const dimensions = getViewTypeBasedDimensions(rects, viewAs, offset);
+      return {
+        ...dimensions,
+        left: getLeftPosition(rects, viewAs, isRTL, offset),
+        bottom: rects.bottom,
+        right: rects.right,
+      };
+    }
   }
 };

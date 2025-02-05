@@ -24,28 +24,62 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TTranslation } from "../../../types";
+
+export enum GuidanceElementType {
+  Content = "content", // Regular content element
+  Expandable = "expandable", // Element that can expand
+  Interactive = "interactive", // Interactive elements like buttons
+  UploadArea = "uploadArea", // Special upload area
+}
+
+export interface GuidancePosition {
+  rects: DOMRect;
+  type: GuidanceElementType;
+  offset?: {
+    value?: number;
+    row?: number;
+    table?: number;
+  };
+}
+
+export interface GuidanceStep {
+  id: number;
+  header: string;
+  description: string;
+  key: string;
+  position?: GuidancePosition;
+}
+
 export interface ClippedPosition {
   right: number;
   width: number;
-  height: number;
   left: number;
   top: number;
   bottom: number;
 }
+
 export interface GuidanceProps {
   formFillingTipsNumber: number;
   setFormFillingTipsNumber: (value: number) => void;
   onClose: () => void;
+  viewAs: string;
   pdfGuidRects: DOMRect;
   readyGuidRects: DOMRect;
   shareGuidRects: DOMRect;
   uploadingGuidRects: DOMRect;
   mainButtonGuidRect: DOMRect;
-  viewAs: string;
   infoPanelVisible: boolean;
+  getConfig: (t: TTranslation) => GuidanceStep[];
 }
 
-export interface GuidProps extends GuidanceProps {
-  position: ClippedPosition;
-  mainButtonPosition: ClippedPosition;
+export interface GuidProps {
+  guidanceConfig: GuidanceStep[];
+  currentStepIndex: number;
+  setCurrentStepIndex: (index: number) => void;
+  onClose: () => void;
+  position: DOMRect;
+  infoPanelVisible?: boolean;
+  viewAs?: string;
+  mainButtonPosition?: DOMRect;
 }

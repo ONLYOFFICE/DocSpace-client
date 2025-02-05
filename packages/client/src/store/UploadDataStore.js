@@ -715,8 +715,8 @@ class UploadDataStore {
       this.primaryProgressDataStore.setPrimaryProgressBarData({
         operation: OPERATIONS_NAME.upload,
         completed: true,
-        disableUploadPanelOpen: true,
-        withoutStatus: true,
+        disableUploadPanelOpen: this.uploadedFilesHistory.length === 0,
+        withoutStatus: this.uploadedFilesHistory.length === 0,
       });
     }
   };
@@ -778,7 +778,7 @@ class UploadDataStore {
     } else {
       const newUploadData = { ...uploadData };
       newUploadData.files = newUploadData.filesWithoutConversion;
-      const waitConversion = !newUploadData.files.length;
+      const waitConversion = !!this.tempConversionFiles.length;
 
       this.handleFilesUpload(newUploadData, t, true, waitConversion);
 
@@ -1486,7 +1486,7 @@ class UploadDataStore {
 
         if (allFilesIsUploaded) {
           if (!this.filesToConversion.length) {
-            this.finishUploadFiles(t);
+            this.finishUploadFiles(t, !!this.tempConversionFiles.length);
           } else {
             runInAction(() => {
               this.uploaded = true;

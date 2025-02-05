@@ -362,8 +362,8 @@ class FilesActionStore {
       setPrimaryProgressBarData({
         ...pbData,
         completed: true,
-        alert: !tree.length,
         disableUploadPanelOpen: true,
+        withoutStatus: !tree.length,
       });
     } else {
       setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: false });

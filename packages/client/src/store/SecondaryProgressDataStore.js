@@ -45,29 +45,7 @@ class SecondaryProgressDataStore {
 
   isDownload = false;
 
-  secondaryOperationsArray = [
-    {
-      label: "Duplicating",
-      operation: OPERATIONS_NAME.duplicate,
-      // alert: true,
-      completed: true,
-      items: [
-        {
-          operationId: "operation_1",
-          percent: 10,
-          completed: true,
-          operationIds: [],
-        },
-      ],
-    },
-    // {
-    //   label: "Downloading",
-    //   operation: "other",
-    //   // alert: false,
-    //   completed: true,
-    //   items: [{ operationId: "operation_1", percent: 50, completed: false, itemsId:[] }],
-    // },
-  ];
+  secondaryOperationsArray = [];
 
   constructor(treeFoldersStore, mediaViewerDataStore) {
     this.treeFoldersStore = treeFoldersStore;

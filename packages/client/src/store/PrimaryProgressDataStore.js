@@ -24,48 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { makeAutoObservable } from "mobx";
 import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
-
-import i18n from "../i18n";
 
 class PrimaryProgressDataStore {
   disableUploadPanelOpen = false;
 
-  // uploadingError = 0;
-
-  // uploadingAlert = false;
-
-  // uploadingVisible = true;
-
-  // uploadingPercent = 0;
-
-  // convertingError = 0;
-
-  // convertingAlert = false;
-
-  // convertingVisible = true;
-
-  // convertingPercent = 0;
-
   needErrorChecking = false;
-
-  uploadingOperation = {
-    error: 0,
-    alert: false,
-    visible: false,
-    percent: 0,
-    operation: OPERATIONS_NAME.upload,
-    label: getOperationsProgressTitle(OPERATIONS_NAME.upload, i18n.t),
-  };
-
-  convertingOperation = {
-    error: 0,
-    alert: false,
-    visible: false,
-    percent: 0,
-  };
 
   primaryOperationsArray = [
     // {

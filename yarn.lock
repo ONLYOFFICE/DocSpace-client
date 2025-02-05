@@ -2797,7 +2797,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@docspace/doceditor@workspace:packages/doceditor"
   dependencies:
-    "@onlyoffice/document-editor-react": "file:./onlyoffice-document-editor-react-1.6.0.tgz"
+    "@onlyoffice/document-editor-react": "npm:^1.6.0"
     "@serdnam/pino-cloudwatch-transport": "npm:^1.0.4"
     "@svgr/webpack": "npm:^8.1.0"
     "@types/nconf": "npm:^0"
@@ -4799,15 +4799,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@onlyoffice/document-editor-react@file:./onlyoffice-document-editor-react-1.6.0.tgz::locator=%40docspace%2Fdoceditor%40workspace%3Apackages%2Fdoceditor":
+"@onlyoffice/document-editor-react@npm:^1.6.0":
   version: 1.6.0
-  resolution: "@onlyoffice/document-editor-react@file:./onlyoffice-document-editor-react-1.6.0.tgz#./onlyoffice-document-editor-react-1.6.0.tgz::hash=3e08be&locator=%40docspace%2Fdoceditor%40workspace%3Apackages%2Fdoceditor"
+  resolution: "@onlyoffice/document-editor-react@npm:1.6.0"
   dependencies:
     lodash: "npm:4.17.21"
   peerDependencies:
     react: ^16.9.0 || ^17 || ^18
     react-dom: ^16.9.0 || ^17 || ^18
-  checksum: 10/8ed9836dae11a8dd037cf2310c8a70ea1e0a104a88f9a2654c1a2c07e69b4f5b9e5a202d0696d7c9abfc2a2ab7beac4209c70cce475dfbec6defd96d7a984f4a
+  checksum: 10/d86b6f04444424d607b69ce65f43ac936dab7fc036158043d3fec7777edc524e13056c64f2c10860e561339813042b21be1885047bd7b9ce70525454cdb7f576
   languageName: node
   linkType: hard
 

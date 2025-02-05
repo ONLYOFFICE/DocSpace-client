@@ -13,7 +13,7 @@
     "deploy": "node ./scripts/deploy.js"
   },
   "dependencies": {
-    "@onlyoffice/document-editor-react": "file:./onlyoffice-document-editor-react-1.6.0.tgz",
+    "@onlyoffice/document-editor-react": "^1.6.0",
     "@serdnam/pino-cloudwatch-transport": "^1.0.4",
     "i18next": "^20.6.1",
     "moment": "^2.30.1",

@@ -24,66 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useContext } from "react";
-import { ThemeContext } from "styled-components";
+import type { PROVIDERS_DATA } from "../../constants";
 
-import { SliderProps } from "./Slider.types";
-import { StyledSliderTheme } from "./Slider.styled";
+import { TTranslation } from "../../types";
 
-const Slider = (props: SliderProps) => {
-  const {
-    id,
+export type ProvidersDataType = typeof PROVIDERS_DATA;
 
-    className,
-    onChange,
-    min,
-    max,
-    step,
-    value,
-    withPouring,
-    style,
-    isDisabled = false,
-    thumbBorderWidth,
-    thumbHeight,
-    thumbWidth,
-    runnableTrackHeight,
-  } = props;
-  const defaultTheme = useContext(ThemeContext);
-
-  const currentColorScheme = defaultTheme?.currentColorScheme;
-
-  const [size, setSize] = useState("0%");
-
-  useEffect(() => {
-    setSize(`${((value - min) * 100) / (max - min)}%`);
-  }, [max, min, value]);
-
-  const onChangeAction = (e: React.ChangeEvent<HTMLInputElement>) =>
-    onChange?.(e);
-
-  return (
-    <StyledSliderTheme
-      {...props}
-      isDisabled={isDisabled}
-      disabled={isDisabled}
-      style={style}
-      id={id}
-      className={className}
-      min={min}
-      max={max}
-      step={step}
-      value={value}
-      sizeProp={!!value && withPouring ? size : "0%"}
-      withPouring={withPouring}
-      onChange={onChangeAction}
-      thumbBorderWidth={thumbBorderWidth}
-      thumbHeight={thumbHeight}
-      thumbWidth={thumbWidth}
-      runnableTrackHeight={runnableTrackHeight}
-      $currentColorScheme={currentColorScheme}
-      data-testid="slider"
-    />
-  );
+type Provider = {
+  linked: boolean;
+  provider: string;
+  url: string;
 };
 
-export { Slider };
+export type MoreLoginModalProps = {
+  visible: boolean;
+  onClose: VoidFunction;
+  providers?: Provider[];
+  onSocialLoginClick: (e: React.MouseEvent<Element, MouseEvent>) => void;
+  ssoLabel: string;
+  ssoUrl: string;
+  t: TTranslation;
+};

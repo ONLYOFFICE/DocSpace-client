@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,39 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Story, Meta } from "@storybook/react";
-import RecoverAccessModalDialog from "./RecoverAccessModalDialog";
-import type { RecoverAccessModalDialogProps } from "./RecoverAccessModalDialog.types";
+.container {
+  width: 100%;
+}
 
-export default {
-  title: "Components/RecoverAccessModalDialog",
-  component: RecoverAccessModalDialog,
-  argTypes: {
-    onClose: { action: "closed" },
-  },
-} as Meta;
+.ssoButton {
+  margin-bottom: 8px;
+}
 
-const Template: Story<RecoverAccessModalDialogProps> = (args) => (
-  <RecoverAccessModalDialog {...args} />
-);
+.socialButtonsGroup {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 8px;
 
-export const Default = Template.bind({});
-Default.args = {
-  visible: true,
-  textBody:
-    "Please enter your email and describe your problem to recover access.",
-  emailPlaceholderText: "Enter your email",
-  id: "recover-modal",
-};
+  .buttonWrapper {
+    margin-bottom: 8px;
+    width: 100%;
+  }
 
-export const WithError = Template.bind({});
-WithError.args = {
-  ...Default.args,
-  visible: true,
-};
+  .showMoreButton {
+    padding: 10px 16px;
+    width: 52px;
 
-export const Loading = Template.bind({});
-Loading.args = {
-  ...Default.args,
-  visible: true,
-};
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+}

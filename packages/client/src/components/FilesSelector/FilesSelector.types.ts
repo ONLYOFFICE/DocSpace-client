@@ -153,4 +153,5 @@ export type FilesSelectorProps = TSelectorHeader & {
 
   withCreate?: boolean;
   checkCreating?: boolean;
+  logoText: string;
 };

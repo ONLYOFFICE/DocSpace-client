@@ -24,30 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { authStore } from "@docspace/shared/store";
+import { authStore, settingsStore } from "@docspace/shared/store";
 import { toCommunityHostname } from "@docspace/shared/utils/common";
 import { FolderType } from "@docspace/shared/enums";
 import { CategoryType } from "./constants";
 
-// import router from "SRC_DIR/router";
-import i18n from "../i18n";
 import { PEOPLE_ROUTE_WITH_FILTER } from "./contacts";
 
 export const setDocumentTitle = (subTitle = "") => {
   const { isAuthenticated, product: currentModule } = authStore;
-  const organizationName = i18n.t("Common:OrganizationName");
+  const { logoText } = settingsStore;
 
   let title;
   if (subTitle) {
     if (isAuthenticated && currentModule) {
       title = `${subTitle} - ${currentModule.title}`;
     } else {
-      title = `${subTitle} - ${organizationName}`;
+      title = `${subTitle} - ${logoText}`;
     }
-  } else if (currentModule && organizationName) {
-    title = `${currentModule.title} - ${organizationName}`;
+  } else if (currentModule && logoText) {
+    title = `${currentModule.title} - ${logoText}`;
   } else {
-    title = organizationName;
+    title = logoText;
   }
 
   document.title = title;

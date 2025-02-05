@@ -334,9 +334,15 @@ class SettingsStore {
 
   showGuestReleaseTip = false;
 
+  logoText = "";
+
   constructor() {
     makeAutoObservable(this);
   }
+
+  setLogoText = (logoText: string) => {
+    this.logoText = logoText;
+  };
 
   setTenantStatus = (tenantStatus: TenantStatus) => {
     this.tenantStatus = tenantStatus;

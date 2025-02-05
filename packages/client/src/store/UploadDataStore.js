@@ -612,7 +612,7 @@ class UploadDataStore {
             fileInfo !== "password" &&
             this.refreshFiles(file);
 
-          if (fileInfo && fileInfo !== "password") {
+          if (file && fileInfo && fileInfo !== "password") {
             file.fileInfo = fileInfo;
             historyFile.fileInfo = fileInfo;
             needToRefreshFilesList && this.refreshFiles(file);
@@ -637,7 +637,7 @@ class UploadDataStore {
           const percent = this.getConversationPercent(index + 1);
           this.setConversionPercent(percent, !!error);
 
-          if (!file.error && file.fileInfo.version > 2) {
+          if (!file?.error && file?.fileInfo.version > 2) {
             this.filesStore.setHighlightFile({
               highlightFileId: file.fileInfo.id,
               isFileHasExst: !file.fileInfo.fileExst,
@@ -727,15 +727,22 @@ class UploadDataStore {
     this.dialogsStore.setConflictResolveDialogVisible(true);
   };
 
-  handleFilesUpload = (newUploadData, t, createNewIfExist = true) => {
+  handleFilesUpload = (
+    newUploadData,
+    t,
+    createNewIfExist = true,
+    waitConversion = false,
+  ) => {
     this.uploadedFilesHistory = newUploadData.files;
     this.setUploadData(newUploadData);
-    this.startUploadFiles(t, createNewIfExist);
+
+    this.startUploadFiles(t, createNewIfExist, waitConversion);
   };
 
   conflictDialogUploadHandler = (uploadData, t, createNewIfExist) => {
     const newUploadData = { ...uploadData };
     newUploadData.files = newUploadData.filesWithoutConversion;
+
     this.handleFilesUpload(newUploadData, t, createNewIfExist);
 
     if (this.tempConversionFiles.length) {
@@ -771,7 +778,9 @@ class UploadDataStore {
     } else {
       const newUploadData = { ...uploadData };
       newUploadData.files = newUploadData.filesWithoutConversion;
-      this.handleFilesUpload(newUploadData, t);
+      const waitConversion = !newUploadData.files.length;
+
+      this.handleFilesUpload(newUploadData, t, true, waitConversion);
 
       if (this.tempConversionFiles.length) {
         if (this.filesSettingsStore.hideConfirmConvertSave) {
@@ -1288,11 +1297,15 @@ class UploadDataStore {
     }
   };
 
-  startUploadFiles = async (t, createNewIfExist = true) => {
+  startUploadFiles = async (
+    t,
+    createNewIfExist = true,
+    waitConversion = false,
+  ) => {
     const files = this.files;
 
     if (files.length === 0 || this.filesSize === 0) {
-      return this.finishUploadFiles(t);
+      return this.finishUploadFiles(t, waitConversion);
     }
 
     const progressData = {
@@ -1502,7 +1515,7 @@ class UploadDataStore {
       });
   };
 
-  finishUploadFiles = (t) => {
+  finishUploadFiles = (t, waitConversion) => {
     const filesWithErrors = this.files.filter((f) => f.error);
 
     const totalErrorsCount = filesWithErrors.length;
@@ -1572,10 +1585,11 @@ class UploadDataStore {
       }
     }
 
-    this.primaryProgressDataStore.setPrimaryProgressBarData({
-      operation: OPERATIONS_NAME.upload,
-      completed: true,
-    });
+    if (!waitConversion)
+      this.primaryProgressDataStore.setPrimaryProgressBarData({
+        operation: OPERATIONS_NAME.upload,
+        completed: true,
+      });
 
     setTimeout(() => {
       if (this.uploadPanelVisible || this.primaryProgressDataStore.alert) {

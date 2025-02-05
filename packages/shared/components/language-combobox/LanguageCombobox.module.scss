@@ -29,10 +29,10 @@
 @import "../../styles/variables/colors";
 
 .comboBox {
-  width: 41px;
-  height: 32px;
-  box-sizing: border-box;
-  padding: 0;
+  width: 41px !important;
+  height: 32px !important;
+  box-sizing: border-box !important;
+  padding: 0 !important;
 
   :global {
     .combo-button {

@@ -38,7 +38,7 @@ const CancelOperationDialog = ({
   visible,
   setOperationCancelVisible,
   cancelUpload,
-  setCancellationNotification,
+  setHideConfirmCancelOperation,
 }) => {
   const { t } = useTranslation(["UploadPanel", "Files", "Common"]);
   const [isChecked, setIsChecked] = useState(false);
@@ -48,7 +48,7 @@ const CancelOperationDialog = ({
 
   const onConfirm = () => {
     cancelUpload(t);
-    if (isChecked) setCancellationNotification(true);
+    if (isChecked) setHideConfirmCancelOperation(true);
     setOperationCancelVisible(false);
   };
 
@@ -85,12 +85,12 @@ export default inject(
   ({ dialogsStore, uploadDataStore, filesSettingsStore }) => {
     const { operationCancelVisible, setOperationCancelVisible } = dialogsStore;
     const { cancelUpload } = uploadDataStore;
-    const { setCancellationNotification } = filesSettingsStore;
+    const { setHideConfirmCancelOperation } = filesSettingsStore;
     return {
       visible: operationCancelVisible,
       setOperationCancelVisible,
       cancelUpload,
-      setCancellationNotification,
+      setHideConfirmCancelOperation,
     };
   },
 )(observer(CancelOperationDialog));

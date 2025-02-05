@@ -163,7 +163,7 @@ const PureHome = (props) => {
     primaryOperationsAlert,
     needErrorChecking,
     setOperationCancelVisible,
-    cancellationNotification,
+    hideConfirmCancelOperation,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -287,7 +287,7 @@ const PureHome = (props) => {
   };
 
   const onCancelUpload = () => {
-    if (cancellationNotification) {
+    if (hideConfirmCancelOperation) {
       cancelUpload(t);
       return;
     }
@@ -522,7 +522,7 @@ export const Component = inject(
 
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
-    const { cancellationNotification } = filesSettingsStore;
+    const { hideConfirmCancelOperation } = filesSettingsStore;
     const { setOperationCancelVisible } = dialogsStore;
     const {
       setFrameConfig,
@@ -664,7 +664,7 @@ export const Component = inject(
       primaryOperationsAlert,
       needErrorChecking,
       setOperationCancelVisible,
-      cancellationNotification,
+      hideConfirmCancelOperation,
     };
   },
 )(observer(Home));

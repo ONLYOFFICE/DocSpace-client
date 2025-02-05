@@ -56,8 +56,8 @@ const FileManagement = ({
   displayFileExtension,
   setDisplayFileExtension,
   getFilesSettings,
-  cancellationNotification,
-  setCancellationNotification,
+  hideConfirmCancelOperation,
+  setHideConfirmCancelOperation,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
@@ -88,8 +88,8 @@ const FileManagement = ({
   }, [setDisplayFileExtension, displayFileExtension]);
 
   const onChangeCancellationNotification = React.useCallback(() => {
-    setCancellationNotification(!displayFileExtension);
-  }, [cancellationNotification, setCancellationNotification]);
+    setHideConfirmCancelOperation(!displayFileExtension);
+  }, [hideConfirmCancelOperation, setHideConfirmCancelOperation]);
 
   const onChangeOpenEditorInSameTab = React.useCallback(() => {
     setOpenEditorInSameTab(!openEditorInSameTab);
@@ -151,7 +151,7 @@ const FileManagement = ({
           <ToggleButton
             className="cancelletion-notification toggle-btn"
             onChange={onChangeCancellationNotification}
-            isChecked={cancellationNotification}
+            isChecked={hideConfirmCancelOperation}
           />
           <Text>{t("CancellaionNotification")}</Text>
         </div>
@@ -181,8 +181,8 @@ export default inject(({ filesSettingsStore, treeFoldersStore }) => {
     displayFileExtension,
     setDisplayFileExtension,
     getFilesSettings,
-    cancellationNotification,
-    setCancellationNotification,
+    hideConfirmCancelOperation,
+    setHideConfirmCancelOperation,
   } = filesSettingsStore;
 
   const { myFolderId, commonFolderId } = treeFoldersStore;
@@ -210,7 +210,7 @@ export default inject(({ filesSettingsStore, treeFoldersStore }) => {
     displayFileExtension,
     setDisplayFileExtension,
     getFilesSettings,
-    cancellationNotification,
-    setCancellationNotification,
+    hideConfirmCancelOperation,
+    setHideConfirmCancelOperation,
   };
 })(observer(FileManagement));

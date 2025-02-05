@@ -569,6 +569,10 @@
     &.laterHide {
       animation-delay: 8s;
     }
+
+    &.immidiateHide {
+      animation-delay: 1s;
+    }
   }
 
   &:not(.autoHide) {

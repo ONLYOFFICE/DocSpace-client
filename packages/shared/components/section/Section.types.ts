@@ -110,6 +110,7 @@ export interface Operation {
   alert: boolean;
   completed: boolean;
   percent?: number;
+  withoutStatus?: boolean;
   disableOpenPanel?: boolean;
   items?: Array<{
     operationId: string;

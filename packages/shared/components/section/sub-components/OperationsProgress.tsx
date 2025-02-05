@@ -217,6 +217,9 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     primaryActiveOperations.length === 1 &&
     primaryActiveOperations[0].disableOpenPanel;
 
+  const withoutStatus =
+    disableOpenPanel && primaryActiveOperations[0].withoutStatus;
+
   const isLaterHide = () => {
     if (disableOpenPanel) return false;
 
@@ -232,6 +235,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         [styles.autoHide]:
           !isOpenDropdown && operationsCompleted && !needErrorChecking,
         [styles.laterHide]: isLaterHide(),
+        [styles.immidiateHide]: operationsCompleted && disableOpenPanel,
         [styles.mainButtonVisible]: mainButtonVisible,
       })}
     >
@@ -254,6 +258,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
             showCancelButton,
             clearUploadedFilesHistory: onCancelOperation,
           })}
+          withoutStatus={withoutStatus}
         />
       </HelpButton>
 

@@ -46,6 +46,7 @@ export type FloatingButtonProps = {
   withoutProgress?: boolean;
   showCancelButton?: boolean;
   completed?: boolean;
+  withoutStatus?: boolean;
 };
 
 export type DefaultStylesProps = {

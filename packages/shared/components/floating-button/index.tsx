@@ -81,6 +81,7 @@ const FloatingButton = ({
   clearUploadedFilesHistory,
   withoutProgress,
   showCancelButton,
+  withoutStatus = false,
 }: FloatingButtonProps) => {
   const iconComponent = useMemo(() => {
     return ICON_COMPONENTS[icon] ?? ICON_COMPONENTS[FloatingButtonIcons.other];
@@ -140,7 +141,7 @@ const FloatingButton = ({
             >
               {iconComponent}
             </div>
-            {alert || completed ? (
+            {!withoutStatus && (alert || completed) ? (
               <div
                 data-testid="floating-button-alert"
                 className={classNames(styles.alertIcon, {

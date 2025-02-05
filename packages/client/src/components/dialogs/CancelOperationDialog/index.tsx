@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,12 +29,36 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
-import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
+import { TTranslation } from "@docspace/shared/types";
 
-const CancelOperationDialog = ({
+interface ICancelOperationDialogProps {
+  visible: boolean;
+  setOperationCancelVisible: (visible: boolean) => void;
+  cancelUpload: (t: TTranslation) => void;
+  setHideConfirmCancelOperation: (hide: boolean) => void;
+  isSecondaryProgressVisbile: boolean;
+}
+
+interface IStoreProps {
+  dialogsStore: {
+    operationCancelVisible: boolean;
+    setOperationCancelVisible: (visible: boolean) => void;
+  };
+  uploadDataStore: {
+    cancelUpload: (t: TTranslation) => void;
+    secondaryProgressDataStore: {
+      isSecondaryProgressVisbile: boolean;
+    };
+  };
+  filesSettingsStore: {
+    setHideConfirmCancelOperation: (hide: boolean) => void;
+  };
+}
+
+const CancelOperationDialog: React.FC<ICancelOperationDialogProps> = ({
   visible,
   setOperationCancelVisible,
   cancelUpload,
@@ -42,7 +66,8 @@ const CancelOperationDialog = ({
   isSecondaryProgressVisbile,
 }) => {
   const { t } = useTranslation(["UploadPanel", "Files", "Common"]);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+
   const onClose = () => {
     setOperationCancelVisible(false);
   };
@@ -62,11 +87,7 @@ const CancelOperationDialog = ({
     : t("Common:CancelCurrentProcess");
 
   return (
-    <ModalDialog
-      visible={visible}
-      onClose={onClose}
-      type={ModalDialogType.modal}
-    >
+    <ModalDialog visible={visible} onClose={onClose}>
       <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{bodyText}</Text>
@@ -87,7 +108,7 @@ const CancelOperationDialog = ({
 };
 
 export default inject(
-  ({ dialogsStore, uploadDataStore, filesSettingsStore }) => {
+  ({ dialogsStore, uploadDataStore, filesSettingsStore }: IStoreProps) => {
     const { operationCancelVisible, setOperationCancelVisible } = dialogsStore;
     const { cancelUpload, secondaryProgressDataStore } = uploadDataStore;
     const { setHideConfirmCancelOperation } = filesSettingsStore;

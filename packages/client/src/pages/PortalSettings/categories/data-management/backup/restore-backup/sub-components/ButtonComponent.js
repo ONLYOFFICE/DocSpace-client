@@ -152,7 +152,6 @@ const ButtonContainer = (props) => {
       {isBackupProgressVisible ? (
         <FloatingButton
           className="layout-progress-bar"
-          icon="file"
           alert={false}
           percent={downloadingProgress}
         />

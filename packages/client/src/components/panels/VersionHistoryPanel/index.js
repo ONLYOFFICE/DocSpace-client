@@ -70,11 +70,7 @@ class PureVersionHistoryPanel extends React.Component {
           <SectionBodyContent onClose={this.onClose} />
 
           {showProgressBar ? (
-            <FloatingButton
-              className="layout-progress-bar"
-              icon="file"
-              alert={false}
-            />
+            <FloatingButton className="layout-progress-bar" alert={false} />
           ) : null}
         </ModalDialog.Body>
       </ModalDialog>

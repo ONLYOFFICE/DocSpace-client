@@ -73,7 +73,7 @@ const FloatingButton = ({
   id,
   className,
   style,
-  icon = FloatingButtonIcons.upload,
+  icon = FloatingButtonIcons.other,
   alert = false,
   completed = false,
   onClick,

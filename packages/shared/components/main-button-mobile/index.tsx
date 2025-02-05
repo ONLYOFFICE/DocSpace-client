@@ -271,6 +271,11 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
             })}
           >
             {buttonOptions?.map((option: ButtonOption) => {
+              const optionOnClickAction = () => {
+                toggle(false);
+                option.onClick?.();
+              };
+
               if (option.items) {
                 return (
                   <SubmenuItem
@@ -303,7 +308,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
                     "drop-down-item-button",
                   )}
                   key={option.key}
-                  onClick={option.onClick}
+                  onClick={optionOnClickAction}
                 />
               );
             })}

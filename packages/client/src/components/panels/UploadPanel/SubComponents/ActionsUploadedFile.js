@@ -27,7 +27,9 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-import RefreshReactSvg from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
+import { IconButton } from "@docspace/shared/components/icon-button";
+
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 
 const circularRotate = keyframes`
@@ -48,9 +50,11 @@ const circularRotate = keyframes`
   }
 `;
 
-const StyledRefreshIcon = styled(RefreshReactSvg)`
-  animation: ${circularRotate} 2s ease-in-out infinite;
-  transform-origin: center;
+const StyledIconButton = styled(IconButton)`
+  svg {
+    animation: ${circularRotate} 2s ease-in-out infinite;
+    transform-origin: center;
+  }
 `;
 
 const ActionsUploadedFile = ({ item }) => {
@@ -68,7 +72,7 @@ const ActionsUploadedFile = ({ item }) => {
           data-file-id={item.fileId}
           data-action={item.action}
         >
-          <StyledRefreshIcon />
+          <StyledIconButton iconName={RefreshReactSvgUrl} isDisabled />
         </div>
       ) : null}
     </>

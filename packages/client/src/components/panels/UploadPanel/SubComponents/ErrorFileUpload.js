@@ -29,6 +29,7 @@ import LoadErrorIcon from "PUBLIC_DIR/images/load.error.react.svg";
 import styled, { useTheme } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import React from "react";
+import uniqueid from "lodash/uniqueId";
 
 const StyledLoadErrorIcon = styled(LoadErrorIcon)`
   outline: none !important;
@@ -52,15 +53,17 @@ const ErrorFileUpload = ({
 }) => {
   const { interfaceDirection } = useTheme();
   const placeTooltip = interfaceDirection === "rtl" ? "right" : "left";
+  const tooltipId = uniqueid("uploading_tooltip");
+
   return (
     <div className="upload_panel-icon">
       <StyledLoadErrorIcon
         size="medium"
-        data-tooltip-id="errorTooltip"
+        data-tooltip-id={tooltipId}
         data-tooltip-content={item.error || t("UploadingError")}
       />
       <Tooltip
-        id="errorTooltip"
+        id={tooltipId}
         getContent={TooltipContent}
         place={placeTooltip}
         maxWidth="320"

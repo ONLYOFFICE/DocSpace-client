@@ -180,7 +180,7 @@ const StyledFileRow = styled(Row)`
     }
     .upload-panel_check-button {
       path {
-        fill: #35ad17;
+        fill: ${(props) => props.theme.filesPanels.upload.positiveStatusColor};
       }
     }
   }

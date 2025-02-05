@@ -247,14 +247,13 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           icon={getIcons()}
           alert={operationsAlert}
           completed={operationsCompleted}
-          showCancelButton={showCancelButton}
           {...(isSeveralOperations && { onClick: onOpenDropdown })}
           {...(!isSeveralOperations &&
             primaryActiveOperations.length && { onClick: onOpenPanel })}
-          {...(!isSeveralOperations &&
-            showCancelButton && {
-              clearUploadedFilesHistory: onCancelOperation,
-            })}
+          {...(!isSeveralOperations && {
+            showCancelButton,
+            clearUploadedFilesHistory: onCancelOperation,
+          })}
         />
       </HelpButton>
 

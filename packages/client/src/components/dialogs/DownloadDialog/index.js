@@ -424,60 +424,60 @@ class DownloadDialogComponent extends React.Component {
             </Text>
           ) : null}
         </StyledBodyContent>
-        {documents.length > 0 ? (
+        {documents.files.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedDocTitle}
             isIndeterminate={indeterminateDocTitle}
-            items={documents}
+            items={documents.files}
             titleFormat={documentsTitleFormat || t("OriginalFormat")}
             type="documents"
             title={t("Common:Documents")}
           />
         ) : null}
 
-        {spreadsheets.length > 0 ? (
+        {spreadsheets.files.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedSpreadsheetTitle}
             isIndeterminate={isIndeterminateSpreadsheetTitle}
-            items={spreadsheets}
+            items={spreadsheets.files}
             titleFormat={spreadsheetsTitleFormat || t("OriginalFormat")}
             type="spreadsheets"
             title={t("Translations:Spreadsheets")}
           />
         ) : null}
 
-        {presentations.length > 0 ? (
+        {presentations.files.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedPresentationTitle}
             isIndeterminate={indeterminatePresentationTitle}
-            items={presentations}
+            items={presentations.files}
             titleFormat={presentationsTitleFormat || t("OriginalFormat")}
             type="presentations"
             title={t("Translations:Presentations")}
           />
         ) : null}
 
-        {masterForms.length > 0 ? (
+        {masterForms.files.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedMasterFormsTitle}
             isIndeterminate={indeterminateMasterFormsTitle}
-            items={masterForms}
+            items={masterForms.files}
             titleFormat={masterFormsTitleFormat || t("OriginalFormat")}
             type="masterForms"
             title={t("Translations:FormTemplates")}
           />
         ) : null}
 
-        {other.length > 0 ? (
+        {other.files.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedOtherTitle}
             isIndeterminate={indeterminateOtherTitle}
-            items={other}
+            items={other.files}
             type="other"
             title={t("Translations:Other")}
           />
@@ -513,7 +513,7 @@ class DownloadDialogComponent extends React.Component {
         <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
 
         <ModalDialog.Body className="modalDialogToggle">
-          <Scrollbar bodyPadding="0px">
+          <Scrollbar paddingAfterLastItem="0px">
             {needPassword ? (
               <PasswordContent
                 getItemIcon={this.getItemIcon}

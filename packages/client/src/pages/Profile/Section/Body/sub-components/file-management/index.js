@@ -56,6 +56,7 @@ const FileManagement = ({
   displayFileExtension,
   setDisplayFileExtension,
   getFilesSettings,
+  logoText,
   hideConfirmCancelOperation,
   setHideConfirmCancelOperation,
 }) => {
@@ -134,7 +135,7 @@ const FileManagement = ({
           />
           <Text>
             {t("OpenSameTab", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
           </Text>
         </div>
@@ -160,57 +161,61 @@ const FileManagement = ({
   );
 };
 
-export default inject(({ filesSettingsStore, treeFoldersStore }) => {
-  const {
-    storeOriginalFiles,
-    confirmDelete,
+export default inject(
+  ({ filesSettingsStore, treeFoldersStore, settingsStore }) => {
+    const {
+      storeOriginalFiles,
+      confirmDelete,
 
-    setStoreOriginal,
+      setStoreOriginal,
 
-    setConfirmDelete,
+      setConfirmDelete,
 
-    favoritesSection,
-    recentSection,
+      favoritesSection,
+      recentSection,
 
-    keepNewFileName,
-    setKeepNewFileName,
+      keepNewFileName,
+      setKeepNewFileName,
 
-    openEditorInSameTab,
-    setOpenEditorInSameTab,
+      openEditorInSameTab,
+      setOpenEditorInSameTab,
 
-    displayFileExtension,
-    setDisplayFileExtension,
-    getFilesSettings,
-    hideConfirmCancelOperation,
-    setHideConfirmCancelOperation,
-  } = filesSettingsStore;
+      displayFileExtension,
+      setDisplayFileExtension,
+      getFilesSettings,
+      hideConfirmCancelOperation,
+      setHideConfirmCancelOperation,
+    } = filesSettingsStore;
+    const { logoText } = settingsStore;
 
-  const { myFolderId, commonFolderId } = treeFoldersStore;
+    const { myFolderId, commonFolderId } = treeFoldersStore;
 
-  return {
-    storeOriginalFiles,
-    confirmDelete,
+    return {
+      storeOriginalFiles,
+      confirmDelete,
 
-    myFolderId,
-    commonFolderId,
+      myFolderId,
+      commonFolderId,
 
-    favoritesSection,
-    recentSection,
+      favoritesSection,
+      recentSection,
 
-    setStoreOriginal,
+      setStoreOriginal,
 
-    setConfirmDelete,
+      setConfirmDelete,
 
-    keepNewFileName,
-    setKeepNewFileName,
+      keepNewFileName,
+      setKeepNewFileName,
 
-    openEditorInSameTab,
-    setOpenEditorInSameTab,
+      openEditorInSameTab,
+      setOpenEditorInSameTab,
 
-    displayFileExtension,
-    setDisplayFileExtension,
-    getFilesSettings,
-    hideConfirmCancelOperation,
-    setHideConfirmCancelOperation,
-  };
-})(observer(FileManagement));
+      displayFileExtension,
+      setDisplayFileExtension,
+      getFilesSettings,
+      logoText,
+      hideConfirmCancelOperation,
+      setHideConfirmCancelOperation,
+    };
+  },
+)(observer(FileManagement));

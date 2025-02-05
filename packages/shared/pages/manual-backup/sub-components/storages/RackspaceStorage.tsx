@@ -50,8 +50,8 @@ interface RackspaceStorageProps {
   onMakeCopyIntoStorage: () => Promise<void>;
   setIsThirdStorageChanged: (changed: boolean) => void;
   setCompletedFormFields: (
-    values: Record<string, unknown>,
-    module?: unknown,
+    values: Record<string, string>,
+    module?: string,
   ) => void;
 }
 

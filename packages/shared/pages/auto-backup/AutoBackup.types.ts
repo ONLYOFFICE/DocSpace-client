@@ -31,6 +31,8 @@ import type {
   StorageRegionsType,
   ThirdPartyAccountType,
   TTranslation,
+  Option,
+  TWeekdaysLabel,
 } from "@docspace/shared/types";
 import type { TOption } from "@docspace/shared/components/combobox";
 import type { FolderType } from "@docspace/shared/enums";
@@ -38,13 +40,12 @@ import type { ButtonSize } from "@docspace/shared/components/button";
 import type { TColorScheme } from "@docspace/shared/themes";
 import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-
-export type Option = {
-  key: string;
-  value: string;
-};
+import type { TBackupSchedule } from "api/portal/types";
+import type { TStorageBackup } from "api/settings/types";
 
 export interface AutomaticBackupProps {
+  isManagement?: boolean;
+
   isInitialLoading: boolean;
   isEmptyContentBeforeLoader: boolean;
   settingsFileSelector: FilesSelectorSettings;
@@ -52,7 +53,7 @@ export interface AutomaticBackupProps {
   removeItem: ThirdPartyAccountType;
   isNeedFilePath?: boolean;
   isInitialError: boolean;
-  isEnableAuto: boolean; // checkEnablePortalSettings(isRestoreAndAutoBackupAvailable);
+  isEnableAuto: boolean; //  checkEnablePortalSettings(isRestoreAndAutoBackupAvailable);
 
   // authStore
   language: string;
@@ -66,8 +67,8 @@ export interface AutomaticBackupProps {
   ) => void;
   setDownloadingProgress: (progress: number) => void;
   setTemporaryLink: (link: string) => void;
-  setThirdPartyStorage: (list: unknown) => void;
-  setBackupSchedule: (list: unknown) => void;
+  setThirdPartyStorage: (list: TStorageBackup[]) => void;
+  setBackupSchedule: (list: TBackupSchedule) => void;
 
   setErrorInformation: (error: unknown, t: TTranslation) => void;
 
@@ -97,7 +98,7 @@ export interface AutomaticBackupProps {
     selectedStorageId?: string | null,
   ) => Option[];
 
-  deleteSchedule: (weekdayArr: TOption[]) => void;
+  deleteSchedule: (weekdayArr: TWeekdaysLabel[]) => void;
   downloadingProgress: number;
 
   isBackupProgressVisible: boolean;
@@ -118,8 +119,8 @@ export interface AutomaticBackupProps {
   thirdPartyStorage: SelectedStorageType[];
   defaultStorageId: Nullable<string>;
   setCompletedFormFields: (
-    values: Record<string, unknown>,
-    module?: unknown,
+    values: Record<string, string>,
+    module?: string,
   ) => void;
   errorsFieldsBeforeSafe: Record<string, boolean>;
   formSettings: Record<string, string>;
@@ -140,13 +141,13 @@ export interface AutomaticBackupProps {
   // end backup
 
   // treeFoldersStore Store
-  rootFoldersTitles: Partial<Record<FolderType, { title: string }>>;
+  rootFoldersTitles: Partial<Record<FolderType, { title: string; id: number }>>;
 
   // end treeFoldersStore
 
   // settingsStore
   automaticBackupUrl: string;
-  currentColorScheme: Nullable<TColorScheme>;
+  currentColorScheme?: TColorScheme;
   // emd settingsStore
 
   // filesSelectorInput store

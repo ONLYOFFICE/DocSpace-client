@@ -36,7 +36,10 @@ import FirebaseHelper from "../utils/firebase";
 export type Option = {
   key: string;
   value: string;
+  label: string;
 };
+
+export type TWeekdaysLabel = Pick<Option, "key" | "label">;
 
 export type TDirectionX = "left" | "right";
 export type TDirectionY = "bottom" | "top" | "both";
@@ -63,8 +66,8 @@ export type ThirdPartyAccountType = {
   provider_link?: string;
   storageIsConnected: boolean;
   connected: boolean;
-  provider_id: string;
-  id: string;
+  provider_id?: string;
+  id?: string;
   disabled: boolean;
   className?: string;
 };

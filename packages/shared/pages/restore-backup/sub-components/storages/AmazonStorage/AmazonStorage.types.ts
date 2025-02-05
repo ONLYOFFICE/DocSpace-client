@@ -29,7 +29,7 @@ import type { AmazonSettingsProps } from "@docspace/shared/components/amazon-set
 export interface AmazonStorageProps
   extends Omit<AmazonSettingsProps, "t" | "isNeedFilePath"> {
   setCompletedFormFields: (
-    values: Record<string, unknown>,
-    module?: unknown,
+    values: Record<string, string>,
+    module?: string,
   ) => void;
 }

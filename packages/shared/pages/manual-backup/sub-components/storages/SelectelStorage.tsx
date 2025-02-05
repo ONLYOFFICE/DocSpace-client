@@ -51,8 +51,8 @@ interface SelectelStorageProps {
   setIsThirdStorageChanged: (changed: boolean) => void;
   addValueInFormSettings: (name: string, value: string) => void;
   setCompletedFormFields: (
-    values: Record<string, unknown>,
-    module?: unknown,
+    values: Record<string, string>,
+    module?: string,
   ) => void;
 }
 

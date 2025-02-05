@@ -69,8 +69,8 @@ export interface ThirdPartyStoragesModuleProps {
   onSetStorageId: (id: string) => void;
 
   setCompletedFormFields: (
-    values: Record<string, unknown>,
-    module?: unknown,
+    values: Record<string, string>,
+    module?: string,
   ) => void;
   errorsFieldsBeforeSafe: Record<string, boolean>;
   formSettings: Record<string, string>;

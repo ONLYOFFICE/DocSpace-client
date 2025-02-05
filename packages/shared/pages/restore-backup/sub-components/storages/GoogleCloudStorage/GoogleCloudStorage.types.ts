@@ -29,7 +29,7 @@ import type { GoogleCloudSettingsProps } from "@docspace/shared/components/googl
 export interface GoogleCloudStorageProps
   extends Omit<GoogleCloudSettingsProps, "t" | "isNeedFilePath"> {
   setCompletedFormFields: (
-    values: Record<string, unknown>,
-    module?: unknown,
+    values: Record<string, string>,
+    module?: string,
   ) => void;
 }

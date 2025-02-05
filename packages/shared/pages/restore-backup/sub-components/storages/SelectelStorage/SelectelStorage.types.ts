@@ -28,7 +28,7 @@ import type { SelectelSettingsProps } from "@docspace/shared/components/selectel
 export interface SelectelStorageProps
   extends Omit<SelectelSettingsProps, "t" | "isNeedFilePath"> {
   setCompletedFormFields: (
-    values: Record<string, unknown>,
-    module?: unknown,
+    values: Record<string, string>,
+    module?: string,
   ) => void;
 }

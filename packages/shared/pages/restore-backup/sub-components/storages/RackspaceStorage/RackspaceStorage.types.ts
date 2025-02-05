@@ -29,7 +29,7 @@ import type { RackspaceSettingsProps } from "@docspace/shared/components/rackspa
 export interface RackspaceStorageProps
   extends Omit<RackspaceSettingsProps, "t" | "isNeedFilePath"> {
   setCompletedFormFields: (
-    values: Record<string, unknown>,
-    module?: unknown,
+    values: Record<string, string>,
+    module?: string,
   ) => void;
 }

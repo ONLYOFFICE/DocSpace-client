@@ -31,7 +31,7 @@ export interface GoogleCloudStorageProps
   extends Omit<GoogleCloudSettingsProps, "t">,
     ScheduleComponentProps {
   setCompletedFormFields: (
-    values: Record<string, unknown>,
-    module?: unknown,
+    values: Record<string, string>,
+    module?: string,
   ) => void;
 }

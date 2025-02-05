@@ -95,8 +95,8 @@ export interface ManualBackupProps {
     account: Nullable<ConnectedThirdPartyAccountType>,
   ) => void;
   setCompletedFormFields: (
-    values: Record<string, unknown>,
-    module?: unknown,
+    values: Record<string, string>,
+    module?: string,
   ) => void;
   // end back store
 

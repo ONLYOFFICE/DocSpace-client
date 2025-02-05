@@ -86,8 +86,8 @@ interface ThirdPartyStorageModuleProps {
   ) => Promise<void>;
   deleteValueFormSetting: (key: string) => void;
   setCompletedFormFields: (
-    values: Record<string, unknown>,
-    module?: unknown,
+    values: Record<string, string>,
+    module?: string,
   ) => void;
   addValueInFormSettings: (name: string, value: string) => void;
   setRequiredFormSettings: (arr: string[]) => void;

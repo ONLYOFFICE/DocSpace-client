@@ -59,8 +59,8 @@ interface AmazonStorageProps {
   setRequiredFormSettings: (arr: string[]) => void;
 
   setCompletedFormFields: (
-    values: Record<string, unknown>,
-    module?: unknown,
+    values: Record<string, string>,
+    module?: string,
   ) => void;
   onMakeCopyIntoStorage: () => Promise<void>;
 }

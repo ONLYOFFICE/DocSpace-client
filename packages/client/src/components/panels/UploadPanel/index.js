@@ -60,14 +60,6 @@ class UploadPanelComponent extends React.Component {
 
     setUploadPanelVisible(!uploadPanelVisible);
     setNeedErrorChecking(false);
-    // if (uploaded) {
-    //   if (converted) {
-    //     clearUploadData();
-    //     clearPrimaryProgressData();
-    //   } else {
-    //     clearUploadedFiles();
-    //   }
-    // }
   };
 
   onKeyPress = (event) => {

@@ -32,15 +32,7 @@ class PrimaryProgressDataStore {
 
   needErrorChecking = false;
 
-  primaryOperationsArray = [
-    // {
-    //   label: "Uploading",
-    //   operation: "convert",
-    //   // alert: true,
-    //   completed: false,
-    //   percent: 50,
-    // },
-  ];
+  primaryOperationsArray = [];
 
   constructor() {
     makeAutoObservable(this);

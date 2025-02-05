@@ -1023,11 +1023,6 @@ class UploadDataStore {
     this.primaryProgressDataStore.setPrimaryProgressBarData({
       operation: OPERATIONS_NAME.upload,
       percent: newPercent,
-      // completed: newPercent >= 100,
-      // loadingFile: {
-      //   uniqueId: this.files[indexOfFile].uniqueId,
-      //   percent: percentCurrentFile,
-      // },
     });
 
     if (uploaded) {

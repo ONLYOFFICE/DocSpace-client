@@ -535,7 +535,7 @@ class UploadDataStore {
 
           error = response && response[0] && response[0].error;
 
-          if (error.length) {
+          if (error?.length) {
             const percent = this.getConversationPercent(index + 1);
             this.setConversionPercent(percent, !!error);
 

@@ -26,7 +26,7 @@
 
 import { TColorScheme } from "themes";
 
-export interface SliderProps {
+export type SliderProps = {
   /** Accepts id */
   id?: string;
 
@@ -56,9 +56,9 @@ export interface SliderProps {
   isDisabled?: boolean;
   /** Accepts css */
   style?: React.CSSProperties;
-}
+};
 
-export interface SliderThemeProps extends SliderProps {
+export type SliderThemeProps = SliderProps & {
   $currentColorScheme?: TColorScheme;
   sizeProp?: string;
-}
+};

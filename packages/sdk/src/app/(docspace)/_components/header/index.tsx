@@ -138,6 +138,7 @@ const Header = ({ current, pathParts, isEmptyList, theme }: HeaderProps) => {
               currentNavigationItems.length === 0 ? "" : pathParts[0].title
             }
             isDesktop={false}
+            isFrame
             navigationItems={currentNavigationItems}
             getContextOptionsPlus={() => []}
             getContextOptionsFolder={() => [{ key: "test", label: "test" }]}

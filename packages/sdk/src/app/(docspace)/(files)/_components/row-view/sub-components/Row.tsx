@@ -47,12 +47,12 @@ const Row = observer(
   ({ item, index, filterSortBy, timezone, displayFileExtension }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
 
-    const [isInit, setisInit] = React.useState(false);
+    const [isInit, setIsInit] = React.useState(false);
 
     const { getContextMenuModel } = useContextMenuModel({ item });
 
     React.useEffect(() => {
-      setisInit(true);
+      setIsInit(true);
     }, []);
 
     const element = (

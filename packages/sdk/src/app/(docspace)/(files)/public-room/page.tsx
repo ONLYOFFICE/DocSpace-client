@@ -39,8 +39,15 @@ export default async function PublicRoom({
 }: {
   searchParams: { [key: string]: string };
 }) {
+  const baseConfig = Object.fromEntries(
+    Object.entries(searchParams).map(([k, v]) => [
+      k,
+      v === "true" ? true : v === "false" ? false : v,
+    ]),
+  );
+
   const filterStr = new URLSearchParams(searchParams).toString();
-  const folder = searchParams.folder;
+  const folderId = baseConfig.folder;
 
   const filter = FilesFilter.getFilter({
     search: `?${filterStr}`,
@@ -49,7 +56,7 @@ export default async function PublicRoom({
   filter.pageCount = PAGE_COUNT;
 
   const [folderList, filesSettings, portalSettings] = await Promise.all([
-    getFolder(folder, filter),
+    getFolder(folderId as string, filter),
     getFilesSettings(),
     getSettings(),
   ]);
@@ -60,11 +67,15 @@ export default async function PublicRoom({
       filesSettings={filesSettings!}
       portalSettings={portalSettings! as TSettings}
       filesFilter={filterStr}
-      shareKey={searchParams.key!}
+      shareKey={baseConfig.key as string}
       theme={
-        (searchParams.theme! as ThemeKeys.BaseStr | ThemeKeys.DarkStr) ??
+        (baseConfig.theme as ThemeKeys.BaseStr | ThemeKeys.DarkStr) ??
         ThemeKeys.BaseStr
       }
+      baseConfig={{
+        header: baseConfig.header as boolean,
+        folder: baseConfig.id as string,
+      }}
     />
   );
 }

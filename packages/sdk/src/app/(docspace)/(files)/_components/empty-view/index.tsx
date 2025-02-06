@@ -27,6 +27,7 @@ const EmptyView = ({
   const { t } = useTranslation(["Common"]);
 
   const isRoot = current.parentId === current.rootFolderId;
+  const isBaseTheme = theme.toLowerCase() === ThemeKeys.BaseStr.toLowerCase();
 
   const title = isFiltered
     ? t("Common:NoFindingsFound")
@@ -39,10 +40,10 @@ const EmptyView = ({
       ? getRootDescription(t)
       : getDescription(t);
   const icon = isFiltered
-    ? getFilterIcon(theme === ThemeKeys.BaseStr)
+    ? getFilterIcon(isBaseTheme)
     : isRoot
-      ? getRootIcon(theme === ThemeKeys.BaseStr)
-      : getIcon(theme === ThemeKeys.BaseStr);
+      ? getRootIcon(isBaseTheme)
+      : getIcon(isBaseTheme);
 
   const onResetFilter = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,

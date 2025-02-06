@@ -35,8 +35,7 @@
   }
 
   &.isDeleted {
-    background: var(--tag-deleted-background);
-    border-color: transparent;
+    border-color: var(--tag-deleted-border);
 
     .tagText {
       text-decoration: line-through;
@@ -85,6 +84,7 @@
 .tagIcon {
   margin-inline-start: var(--tag-icon-margin-start);
   cursor: pointer;
+  z-index: 1;
 }
 
 .thirdPartyTag {

@@ -202,7 +202,6 @@ const StyledHistoryBlockTagList = styled.div`
   margin-top: 8px;
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
 `;
 
 const StyledHistoryBlockFilesList = styled.div.attrs(injectDefaultTheme)`

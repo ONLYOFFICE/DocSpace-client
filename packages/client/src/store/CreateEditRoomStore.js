@@ -380,6 +380,7 @@ class CreateEditRoomStore {
       roomId: item.id,
       logo: null,
       tags: tagsToAddList,
+      public: isAvailable,
     };
 
     if (icon.uploadedFile) {
@@ -416,10 +417,6 @@ class CreateEditRoomStore {
       notify: false,
       sharingMessage: "",
     });
-
-    if (isAvailable) {
-      await setTemplateAvailable(progressData.templateId, isAvailable);
-    }
 
     if (openCreatedTemplate) {
       this.onOpenNewRoom({

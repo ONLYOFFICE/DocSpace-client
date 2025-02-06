@@ -552,6 +552,7 @@ export function createTemplate({
   logo,
   share,
   tags,
+  isPublic,
 }: {
   roomId: number;
   title: string;
@@ -565,6 +566,7 @@ export function createTemplate({
     logo,
     share,
     tags,
+    public: isPublic,
   };
   const options = {
     method: "post",

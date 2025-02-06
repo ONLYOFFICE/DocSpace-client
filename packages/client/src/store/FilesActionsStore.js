@@ -133,6 +133,8 @@ class FilesActionStore {
 
   indexingStore;
 
+  versionHistoryStore;
+
   userStore = null;
 
   currentTariffStatusStore = null;
@@ -168,6 +170,7 @@ class FilesActionStore {
     peopleStore,
     currentQuotaStore,
     indexingStore,
+    versionHistoryStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -188,6 +191,7 @@ class FilesActionStore {
     this.peopleStore = peopleStore;
     this.currentQuotaStore = currentQuotaStore;
     this.indexingStore = indexingStore;
+    this.versionHistoryStore = versionHistoryStore;
   }
 
   updateCurrentFolder = async (
@@ -3282,7 +3286,50 @@ class FilesActionStore {
   };
 
   onDeleteVersionFile = async (fileId, versions) => {
-    await deleteVersionFile(fileId, versions);
+    const { secondaryProgressDataStore, clearActiveOperations } =
+      this.uploadDataStore;
+
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+      secondaryProgressDataStore;
+
+    const operationId = uniqueid("operation_");
+
+    setSecondaryProgressBarData({
+      icon: "file",
+      visible: true,
+      percent: 0,
+      alert: false,
+      filesCount: 1,
+      operationId,
+    });
+
+    this.filesStore.setActiveFiles([fileId]);
+
+    try {
+      await deleteVersionFile(fileId, versions)
+        .then(async (res) => {
+          if (res[0]?.error) return Promise.reject(res[0].error);
+          const data = res[0] ? res[0] : null;
+          const pbData = {
+            icon: "file",
+            operationId,
+          };
+
+          await this.uploadDataStore.loopFilesOperations(data, pbData);
+        })
+        .finally(() => {
+          clearActiveOperations([fileId]);
+          this.versionHistoryStore.fetchFileVersions(fileId, null, null, true);
+        });
+    } catch (err) {
+      setSecondaryProgressBarData({
+        visible: true,
+        alert: true,
+        operationId,
+      });
+      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+      return toastr.error(err.message ? err.message : err);
+    }
   };
 }
 

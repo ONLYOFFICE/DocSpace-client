@@ -147,10 +147,12 @@ class VersionHistoryStore {
     this.versions = versions;
   };
 
-  fetchFileVersions = (fileId, access, requestToken) => {
-    if (this.fileId !== fileId || !this.versions) {
-      this.setVerHistoryFileId(fileId);
-      this.setVerHistoryFileSecurity(access);
+  fetchFileVersions = (fileId, access, requestToken, update) => {
+    if (this.fileId !== fileId || !this.versions || update) {
+      if (!update) {
+        this.setVerHistoryFileId(fileId);
+        this.setVerHistoryFileSecurity(access);
+      }
 
       return api.files
         .getFileVersionInfo(fileId, requestToken)

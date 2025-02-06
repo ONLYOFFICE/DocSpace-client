@@ -250,8 +250,6 @@ const VersionRow = (props) => {
     newRowHeight && onUpdateHeight(index, newRowHeight);
   }, [showEditPanel, versionsListLength]);
 
-  console.log("index versionDeleteProcess", index, versionDeleteProcess);
-
   return (
     <StyledVersionRow
       showEditPanel={showEditPanel}
@@ -261,7 +259,7 @@ const VersionRow = (props) => {
       isSavingComment={isSavingComment}
       isEditing={isEditing}
       contextTitle={t("Common:Actions")}
-      versionDeleteProcess={true || versionDeleteProcess}
+      versionDeleteProcess={versionDeleteProcess}
     >
       <div className={`version-row_${index}`} onContextMenu={onContextMenu}>
         <Box displayProp="flex" className="row-header">

@@ -239,6 +239,7 @@ const filesActionsStore = new FilesActionsStore(
   peopleStore,
   currentQuotaStore,
   indexingStore,
+  versionHistoryStore,
 );
 
 const contextOptionsStore = new ContextOptionsStore(

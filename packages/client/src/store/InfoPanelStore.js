@@ -43,7 +43,7 @@ import {
   getCreateShareLinkKey,
   getExpirationDate,
 } from "@docspace/shared/components/share/Share.helpers";
-import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { getRoomInfo, getTemplateAvailable } from "@docspace/shared/api/rooms";
 import {
   getPrimaryLink,
   getExternalLinks,
@@ -112,6 +112,8 @@ class InfoPanelStore {
   publicRoomStore = null;
 
   infoPanelMembers = null;
+
+  templateAvailableToEveryone = false;
 
   infoPanelRoom = null;
 
@@ -529,6 +531,10 @@ class InfoPanelStore {
     this.infoPanelMembers = infoPanelMembers;
   };
 
+  setTemplateAvailableToEveryone = (isAvailable) => {
+    this.templateAvailableToEveryone = isAvailable;
+  };
+
   setInfoPanelSelection = (infoPanelSelection) => {
     if (isEqual(infoPanelSelection, this.infoPanelSelection)) {
       return;
@@ -777,6 +783,13 @@ class InfoPanelStore {
     }
 
     this.setIsMembersPanelUpdating(true);
+
+    if (this.infoPanelSelection.isTemplate) {
+      const templateAvailable = await getTemplateAvailable(
+        this.infoPanelSelection.id,
+      );
+      this.setTemplateAvailableToEveryone(templateAvailable);
+    }
 
     const fetchedMembers = await this.fetchMembers(t, true, !!this.searchValue);
     this.setInfoPanelMembers(fetchedMembers);

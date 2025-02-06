@@ -1321,56 +1321,7 @@ class ContextOptionsStore {
     }
 
     if (isTemplatesFolder) {
-      // TODO: Templates
       return [];
-      // return [
-      //   {
-      //     id: "header_option_create-room",
-      //     key: "create-room",
-      //     label: t("Files:CreateRoom"),
-      //     icon: CatalogRoomsReactSvgUrl,
-      //     onClick: () => onCreateRoomFromTemplate(selectedFolder),
-      //     disabled: false,
-      //   },
-      //   {
-      //     id: "header_option_edit-room",
-      //     key: "edit-template",
-      //     label: t("EditTemplate"),
-      //     icon: SettingsReactSvgUrl,
-      //     onClick: () => onEditRoomTemplate(selectedFolder),
-      //     disabled: false,
-      //   },
-      //   {
-      //     id: "header_option_access-settings",
-      //     key: "access-settings",
-      //     label: t("AccessSettings"),
-      //     icon: PersonReactSvgUrl,
-      //     onClick: () => onOpenTemplateAccessOptions(),
-      //     disabled: false,
-      //   },
-      //   {
-      //     id: "header_option_show-info",
-      //     key: "show-info",
-      //     label: t("Common:Info"),
-      //     onClick: onShowInfo,
-      //     disabled: false,
-      //     icon: InfoOutlineReactSvgUrl,
-      //   },
-      //   {
-      //     id: "header_option_separator",
-      //     key: "separator",
-      //     isSeparator: true,
-      //     disabled: false,
-      //   },
-      //   {
-      //     id: "header_option_delete",
-      //     key: "delete",
-      //     label: t("DeleteTemplate"),
-      //     icon: CatalogTrashReactSvgUrl,
-      //     onClick: onDeleteAction,
-      //     disabled: false,
-      //   },
-      // ];
     }
 
     return this.getFilesContextOptions(item, t, false, true);

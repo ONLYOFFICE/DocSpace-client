@@ -152,6 +152,7 @@ const SetRoomParams = ({
   inviteItems,
   setLifetimeDialogVisible,
   hideConfirmRoomLifetime,
+  templateIsAvailable,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -482,6 +483,7 @@ const SetRoomParams = ({
           roomOwner={createdBy ?? roomParams.roomOwner}
           inviteItems={inviteItems}
           onOpenAccessSettings={onOpenAccessSettings}
+          isAvailable={templateIsAvailable}
         />
       ) : null}
 

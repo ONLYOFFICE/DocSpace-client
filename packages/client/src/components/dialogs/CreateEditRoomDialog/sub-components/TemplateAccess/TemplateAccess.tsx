@@ -44,6 +44,7 @@ type TemplateAccessType = {
   roomOwner: TCreatedBy;
   inviteItems: TSelectorItem[];
   onOpenAccessSettings: VoidFunction;
+  isAvailable: boolean;
 };
 
 const TemplateAccess = ({
@@ -51,6 +52,7 @@ const TemplateAccess = ({
   roomOwner,
   inviteItems,
   onOpenAccessSettings,
+  isAvailable = false,
 }: TemplateAccessType) => {
   const userName = roomOwner.displayName;
 
@@ -83,8 +85,6 @@ const TemplateAccess = ({
     index++;
   }
 
-  const isAvailableToEveryone = false; // TODO: Templates
-
   const getAccessLabel = () => {
     if (usersList.length) {
       if (groupsList.length) {
@@ -94,14 +94,15 @@ const TemplateAccess = ({
         });
       }
       return t("Files:MeAndMembers", { membersCount: `${usersList.length}` });
-    } else if (groupsList.length) {
+    }
+    if (groupsList.length) {
       return t("Files:MeAndGroups", { groupsCount: `${groupsList.length}` });
     }
 
     return "";
   };
 
-  let accessLabel = getAccessLabel();
+  const accessLabel = getAccessLabel();
 
   return (
     <Styled.TemplateAccess>
@@ -109,7 +110,7 @@ const TemplateAccess = ({
         {`${t("Files:AccessToTemplate")}:`}
       </Text>
 
-      {isAvailableToEveryone ? (
+      {isAvailable ? (
         <PublicRoomBar
           headerText={t("Files:TemplateAvailable")}
           bodyText={

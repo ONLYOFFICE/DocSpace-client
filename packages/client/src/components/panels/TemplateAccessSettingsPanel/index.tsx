@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { TTranslation } from "@docspace/shared/types";
@@ -43,6 +43,8 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import {
   getRoomMembers,
+  getTemplateAvailable,
+  setTemplateAvailable,
   updateRoomMemberRole,
 } from "@docspace/shared/api/rooms";
 import { TRoom } from "@docspace/shared/api/rooms/types";
@@ -75,6 +77,8 @@ type TemplateAccessSettingsContainer =
       inviteItems: TSelectorItem[];
       setInviteItems: (inviteItems: TSelectorItem[]) => void;
       updateInfoPanelMembers: undefined;
+      templateIsAvailable: boolean;
+      setTemplateIsAvailable: (isAvailable: boolean) => void;
     }
   | {
       isContainer?: undefined;
@@ -86,6 +90,8 @@ type TemplateAccessSettingsContainer =
       inviteItems?: undefined;
       setInviteItems?: undefined;
       updateInfoPanelMembers: (t: TTranslation) => void;
+      templateIsAvailable: undefined;
+      setTemplateIsAvailable: undefined;
     };
 
 type TemplateAccessSettingsPanelProps = {
@@ -113,17 +119,22 @@ const TemplateAccessSettingsPanel = ({
   setInviteItems,
   onSetAccessSettings,
   updateInfoPanelMembers,
+  templateIsAvailable,
+  setTemplateIsAvailable,
 }: TemplateAccessSettingsPanelProps) => {
   const [accessItems, setAccessItems] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [isAvailable, setIsAvailable] = useState(false);
+  const [modalIsLoading, setModalIsLoading] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(templateIsAvailable ?? false);
 
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
 
   const templateId = templateItem?.id;
+
+  const prevIsAvailable = useRef<boolean>();
 
   const setAccessItemsAction = (items) => {
     if (isContainer) setInviteItems(items);
@@ -136,6 +147,7 @@ const TemplateAccessSettingsPanel = ({
   };
 
   const onAvailableChange = () => {
+    if (isContainer) setTemplateIsAvailable(!templateIsAvailable);
     setIsAvailable(!isAvailable);
   };
 
@@ -190,23 +202,30 @@ const TemplateAccessSettingsPanel = ({
   const getTemplateMembers = async () => {
     if (isLoading) return;
 
-    setIsLoading(true);
-    try {
-      const templateMembersData = await getRoomMembers(templateId, {});
+    setModalIsLoading(true);
+    Promise.all([
+      getRoomMembers(templateId, {}),
+      getTemplateAvailable(templateId),
+    ])
+      .then(([members, available]) => {
+        if (members?.items?.length) {
+          const convertedItems = members.items.map(
+            ({ access, isOwner, sharedTo }) => {
+              return { access, isOwner, ...sharedTo };
+            },
+          );
+          setAccessItems(convertedItems);
+        }
 
-      if (templateMembersData?.items?.length) {
-        const convertedItems = templateMembersData.items.map(
-          ({ access, isOwner, sharedTo }) => {
-            return { access, isOwner, ...sharedTo };
-          },
-        );
-        setAccessItems(convertedItems);
-      }
-    } catch (error) {
-      toastr.error(error as Error);
-    } finally {
-      setIsLoading(false);
-    }
+        prevIsAvailable.current = available;
+        setIsAvailable(available);
+      })
+      .catch((error) => {
+        toastr.error(error as Error);
+      })
+      .finally(() => {
+        setModalIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -226,6 +245,17 @@ const TemplateAccessSettingsPanel = ({
     }
 
     setIsLoading(true);
+
+    if (prevIsAvailable.current !== isAvailable) {
+      setTemplateAvailable(templateId, isAvailable)
+        .then(() => updateInfoPanelMembers(t))
+        .finally(() => {
+          setIsLoading(false);
+          onClose();
+        });
+
+      return;
+    }
 
     const invitations = accessItems
       .filter((i) => !i.isOwner)
@@ -331,7 +361,7 @@ const TemplateAccessSettingsPanel = ({
           <StyledSubHeader className="invite-input-text">
             {t("Files:AccessToTemplate")}
           </StyledSubHeader>
-          {hasInvitedUsers && (
+          {hasInvitedUsers ? (
             <ItemsList
               t={t}
               inviteItems={accessItems}
@@ -339,7 +369,7 @@ const TemplateAccessSettingsPanel = ({
               scrollAllPanelContent={scrollAllPanelContent}
               isDisabled={isAvailable}
             />
-          )}
+          ) : null}
         </StyledBody>
       </StyledTemplateAccessSettingsBody>
 
@@ -371,7 +401,7 @@ const TemplateAccessSettingsPanel = ({
       displayType={ModalDialogType.aside}
       onClose={onClose}
       withBodyScroll
-      isLoading={!tReady}
+      isLoading={!tReady || modalIsLoading}
       onSubmit={onSubmit}
       withForm
       containerVisible={addUsersPanelVisible}
@@ -424,7 +454,7 @@ const TemplateAccessSettingsPanel = ({
             <StyledSubHeader className="invite-input-text">
               {t("Files:AccessToTemplate")}
             </StyledSubHeader>
-            {hasInvitedUsers && (
+            {hasInvitedUsers ? (
               <ItemsList
                 t={t}
                 inviteItems={accessItems}
@@ -432,7 +462,7 @@ const TemplateAccessSettingsPanel = ({
                 scrollAllPanelContent={scrollAllPanelContent}
                 isDisabled={isAvailable}
               />
-            )}
+            ) : null}
           </StyledBody>
         </>
       </ModalDialog.Body>

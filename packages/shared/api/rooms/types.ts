@@ -122,6 +122,7 @@ export type TRoom = {
   providerKey?: string;
   quotaLimit?: number;
   isTemplate?: boolean;
+  isAvailable?: boolean;
 };
 
 export type TGetRooms = {

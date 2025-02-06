@@ -173,7 +173,6 @@ export default inject<TStore>(
     filesSettingsStore,
     currentQuotaStore,
     createEditRoomStore,
-    settingsStore,
   }) => {
     const { fetchTags } = tagsStore;
     const { setTemplateEventVisible } = dialogsStore;

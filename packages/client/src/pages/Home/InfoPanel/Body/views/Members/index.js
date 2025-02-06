@@ -89,6 +89,7 @@ const Members = ({
   setGuestReleaseTipDialogVisible,
   showGuestReleaseTip,
   setAccessSettingsIsVisible,
+  templateAvailable,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
@@ -264,8 +265,7 @@ const Members = ({
 
   const publicRoomItemsLength = publicRoomItems.length;
 
-  const isAvailableToEveryone = false; // TODO: Templates
-  if (isTemplate && isAvailableToEveryone) {
+  if (isTemplate && templateAvailable) {
     return (
       <PublicRoomBar
         headerText={t("Files:TemplateAvailable")}
@@ -372,6 +372,7 @@ export default inject(
       withPublicRoomBlock,
       searchValue,
       isMembersPanelUpdating,
+      templateAvailableToEveryone,
     } = infoPanelStore;
     const { membersFilter } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
@@ -426,6 +427,7 @@ export default inject(
       setGuestReleaseTipDialogVisible,
       showGuestReleaseTip,
       setAccessSettingsIsVisible,
+      templateAvailable: templateAvailableToEveryone,
     };
   },
 )(

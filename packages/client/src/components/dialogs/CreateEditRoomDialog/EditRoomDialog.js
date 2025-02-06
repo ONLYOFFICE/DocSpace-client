@@ -50,6 +50,7 @@ const EditRoomDialog = ({
   cover,
   item,
   accessItems,
+  templateIsAvailable,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isValidTitle, setIsValidTitle] = useState(true);
@@ -59,6 +60,7 @@ const EditRoomDialog = ({
   const [accessSettingsIsVisible, setAccessSettingsIsVisible] = useState(false);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [inviteItems, setInviteItems] = useState([]);
+  const [isAvailable, setIsAvailable] = useState(templateIsAvailable);
   const [roomParams, setRoomParams] = useState({
     ...fetchedRoomParams,
   });
@@ -104,7 +106,8 @@ const EditRoomDialog = ({
       prevParams.denyDownload === currentParams.denyDownload &&
       isEqual(prevParams.lifetime, currentParams.lifetime) &&
       isEqual(prevParams.watermark, currentParams.watermark) &&
-      isEqual(prevInviteItems, currentInviteItems)
+      isEqual(prevInviteItems, currentInviteItems) &&
+      isAvailable === templateIsAvailable
     );
   };
 
@@ -125,7 +128,13 @@ const EditRoomDialog = ({
       return;
     }
 
-    onSave(roomParams);
+    let params = roomParams;
+
+    if (isAvailable !== templateIsAvailable) {
+      params = { ...roomParams, isAvailable };
+    }
+
+    onSave(params);
   };
 
   const onKeyUpHandler = (e) => {
@@ -156,6 +165,10 @@ const EditRoomDialog = ({
       };
     }
   }, [accessItems]);
+
+  useEffect(() => {
+    setIsAvailable(templateIsAvailable);
+  }, [templateIsAvailable]);
 
   const onCloseAction = () => {
     if (isLoading) return;
@@ -271,6 +284,8 @@ const EditRoomDialog = ({
             onClosePanels={onClose}
             isContainer
             inviteItems={inviteItems}
+            templateIsAvailable={isAvailable}
+            setTemplateIsAvailable={setIsAvailable}
             setInviteItems={setInviteItems}
             setIsVisible={setAccessSettingsIsVisible}
             onSetAccessSettings={onSetAccessSettings}
@@ -302,6 +317,7 @@ const EditRoomDialog = ({
           canChangeOwner={roomParams?.security?.ChangeOwner}
           isTemplate={isTemplate}
           inviteItems={inviteItems}
+          templateIsAvailable={isAvailable}
         />
       </ModalDialog.Body>
 

@@ -37,6 +37,7 @@ import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 import {
   createTemplate,
   getCreateTemplateProgress,
+  setTemplateAvailable,
   updateRoomMemberRole,
 } from "@docspace/shared/api/rooms";
 
@@ -250,6 +251,7 @@ class CreateEditRoomStore {
       icon,
       invitations,
       roomId,
+      isAvailable,
     } = newParams;
 
     const quotaLimit = quota || room.quotaLimit;
@@ -353,6 +355,10 @@ class CreateEditRoomStore {
         );
       }
 
+      if (room.isTemplate && isAvailable !== undefined) {
+        requests.push(setTemplateAvailable(roomId, isAvailable));
+      }
+
       if (requests.length) {
         await Promise.all(requests);
       }
@@ -364,7 +370,8 @@ class CreateEditRoomStore {
   onSaveAsTemplate = async (item, roomParams, openCreatedTemplate) => {
     this.filesStore.setRoomCreated(true);
 
-    const { title, icon, tags, invitations, roomType } = roomParams;
+    const { title, icon, tags, invitations, roomType, isAvailable } =
+      roomParams;
 
     const tagsToAddList = tags.map((tag) => tag.name);
 
@@ -409,6 +416,10 @@ class CreateEditRoomStore {
       notify: false,
       sharingMessage: "",
     });
+
+    if (isAvailable) {
+      await setTemplateAvailable(progressData.templateId, isAvailable);
+    }
 
     if (openCreatedTemplate) {
       this.onOpenNewRoom({

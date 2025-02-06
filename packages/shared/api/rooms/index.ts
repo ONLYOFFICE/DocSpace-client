@@ -46,10 +46,6 @@ import {
   TRoom,
 } from "./types";
 
-
-
-
-
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
 
@@ -613,6 +609,25 @@ export function getCreateRoomFromTemplateProgress() {
   const options = {
     method: "get",
     url: `/files/rooms/fromTemplate/status`,
+  };
+
+  return request(options);
+}
+
+export function getTemplateAvailable(id: number) {
+  const options = {
+    method: "get",
+    url: `/files/roomtemplate/${id}/public`,
+  };
+
+  return request(options);
+}
+
+export function setTemplateAvailable(id: number, isAvailable: boolean) {
+  const options = {
+    method: "put",
+    url: `/files/roomtemplate/public`,
+    data: { id, public: isAvailable },
   };
 
   return request(options);

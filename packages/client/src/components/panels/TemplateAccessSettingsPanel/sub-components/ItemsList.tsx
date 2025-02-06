@@ -67,12 +67,7 @@ const Row = memo(({ data, index, style }: RowProps) => {
   const item = listItems[index];
 
   return (
-    <StyledRow
-      key={item.id}
-      style={style}
-      className="row-item"
-      // hasWarning={!!item.warning}
-    >
+    <StyledRow key={item.id} style={style} className="row-item">
       <Item
         t={t}
         item={item}

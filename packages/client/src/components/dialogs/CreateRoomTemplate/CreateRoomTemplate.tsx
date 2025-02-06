@@ -76,6 +76,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [accessSettingsIsVisible, setAccessSettingsIsVisible] = useState(false);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(false);
 
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -91,7 +92,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
       return;
     }
 
-    onSave(roomParams, openCreatedIsChecked);
+    onSave({ ...roomParams, isAvailable }, openCreatedIsChecked);
   };
 
   const setRoomTags = (newTags: TRoom["tags"]) => {
@@ -182,6 +183,8 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
             setInviteItems={setInviteItems}
             setIsVisible={setAccessSettingsIsVisible}
             onSetAccessSettings={onSetAccessSettings}
+            templateIsAvailable={isAvailable}
+            setTemplateIsAvailable={setIsAvailable}
           />
         )}
       </ModalDialog.Container>
@@ -210,6 +213,7 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
           onOpenAccessSettings={onOpenAccessSettings}
           createdBy={item.createdBy}
           inviteItems={inviteItems}
+          templateIsAvailable={isAvailable}
         />
       </ModalDialog.Body>
 

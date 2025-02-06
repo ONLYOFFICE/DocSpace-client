@@ -28,7 +28,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { getFetchedRoomParams } from "@docspace/shared/utils/rooms";
-import { getRoomMembers } from "@docspace/shared/api/rooms";
+import {
+  getRoomMembers,
+  getTemplateAvailable,
+} from "@docspace/shared/api/rooms";
 import { EditRoomDialog } from "../dialogs";
 
 const EditRoomEvent = ({
@@ -49,6 +52,7 @@ const EditRoomEvent = ({
   const [accessItems, setAccessItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isInitLoading, setIsInitLoading] = useState(false);
+  const [isAvailable, setIsAvailable] = useState(false);
 
   const fetchedRoomParams = getFetchedRoomParams(
     item,
@@ -91,6 +95,12 @@ const EditRoomEvent = ({
     }
   }, []);
 
+  const getTemplateIsAvailable = useCallback(() => {
+    getTemplateAvailable(item.id)
+      .then((available) => setIsAvailable(available))
+      .catch((err) => console.error(err));
+  }, []);
+
   useEffect(() => {
     setCreateRoomDialogVisible(true);
     setIsInitLoading(true);
@@ -99,7 +109,11 @@ const EditRoomEvent = ({
 
     const requests = [fetchTags()];
 
-    if (item.isTemplate) requests.push(getTemplateMembers());
+    if (item.isTemplate) {
+      requests.push(getTemplateMembers());
+      requests.push(getTemplateIsAvailable());
+    }
+
     if (logo) requests.push(fetchLogoAction);
 
     const fetchInfo = async () => {
@@ -131,6 +145,7 @@ const EditRoomEvent = ({
       item={item}
       isTemplate={item.isTemplate}
       accessItems={accessItems}
+      templateIsAvailable={isAvailable}
     />
   );
 };

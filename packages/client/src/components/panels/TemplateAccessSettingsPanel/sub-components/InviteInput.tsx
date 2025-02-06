@@ -217,9 +217,9 @@ const InviteInput = ({
             </Box>
             <SearchItemText>{email}</SearchItemText>
           </div>
-          {shared && (
+          {shared ? (
             <SearchItemText info>{t("Common:Invited")}</SearchItemText>
-          )}
+          ) : null}
         </DropDownItem>
       );
     },
@@ -293,7 +293,7 @@ const InviteInput = ({
           </div>
         </StyledInviteInput>
 
-        {!isAddEmailPanelBlocked && (
+        {!isAddEmailPanelBlocked ? (
           <StyledDropDown
             width={dropDownWidth}
             isDefaultMode={false}
@@ -308,7 +308,7 @@ const InviteInput = ({
           >
             {dropDownContent}
           </StyledDropDown>
-        )}
+        ) : null}
       </StyledInviteInputContainer>
     </>
   );

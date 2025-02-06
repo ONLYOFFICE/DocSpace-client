@@ -517,7 +517,7 @@ const PeopleSelector = ({
       onSearch("");
       resetSelectorList();
     },
-    [onSearch, resetSelectorList],
+    [onSearch, resetSelectorList, setActiveTab],
   );
 
   const withTabsProps: TSelectorTabs =

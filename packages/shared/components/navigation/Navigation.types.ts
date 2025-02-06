@@ -80,7 +80,7 @@ export type TTextProps = {
   onClick: () => void;
   className?: string;
   badgeLabel?: string;
-}
+};
 
 export type TNavigationLogoProps = {
   logo?: string;

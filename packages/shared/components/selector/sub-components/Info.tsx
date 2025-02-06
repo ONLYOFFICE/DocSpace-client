@@ -37,7 +37,7 @@ export const Info = ({ infoText, withInfoBadge }: TSelectorInfo) => {
   return (
     <StyledInfo id="selector-info-text">
       <div className="selector-info-text-wrapper">
-        {withInfoBadge && <ReactSVG src={InfoIcon} />}
+        {withInfoBadge ? <ReactSVG src={InfoIcon} /> : null}
         <Text
           fontSize="12px"
           fontWeight={400}

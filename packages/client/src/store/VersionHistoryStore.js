@@ -51,7 +51,7 @@ class VersionHistoryStore {
 
   versionSelectedForDeletion = null;
 
-  versionDeleteProcess = false;
+  versionDeleteId = null;
 
   constructor(filesStore) {
     makeAutoObservable(this);
@@ -114,9 +114,8 @@ class VersionHistoryStore {
     this.versionSelectedForDeletion = version;
   };
 
-  setVersionDeleteProcess = (process) => {
-    console.log("versionDeleteProcess", process);
-    this.versionDeleteProcess = process;
+  setVersionDeleteId = (versionDeleteId) => {
+    this.versionDeleteId = versionDeleteId;
   };
 
   // setFileVersions

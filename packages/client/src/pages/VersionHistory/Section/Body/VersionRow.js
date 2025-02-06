@@ -80,7 +80,7 @@ const VersionRow = (props) => {
     onSetDeleteVersionDialogVisible,
     setCurrentVersion,
     canDeleteVersion,
-    versionDeleteProcess,
+    versionDeleteId,
   } = props;
 
   const navigate = useNavigate();
@@ -137,7 +137,6 @@ const VersionRow = (props) => {
     setShowEditPanel(!showEditPanel);
   };
   const onOpenFile = () => {
-    if (versionDeleteProcess) return;
     const { MediaView, ImageView } = info?.viewAccessibility ?? {};
 
     if (MediaView || ImageView) {
@@ -259,7 +258,7 @@ const VersionRow = (props) => {
       isSavingComment={isSavingComment}
       isEditing={isEditing}
       contextTitle={t("Common:Actions")}
-      versionDeleteProcess={versionDeleteProcess}
+      versionDeleteProcess={versionDeleteId === info.versionGroup}
     >
       <div className={`version-row_${index}`} onContextMenu={onContextMenu}>
         <Box displayProp="flex" className="row-header">
@@ -410,7 +409,7 @@ export default inject(
       setIsVerHistoryPanel,
       onSetDeleteVersionDialogVisible,
       setCurrentVersion,
-      versionDeleteProcess,
+      versionDeleteId,
     } = versionHistoryStore;
 
     const isEdit = isEditingVersion || isEditing;
@@ -439,7 +438,7 @@ export default inject(
       onSetDeleteVersionDialogVisible,
       setCurrentVersion,
       canDeleteVersion,
-      versionDeleteProcess,
+      versionDeleteId,
     };
   },
 )(

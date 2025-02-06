@@ -262,7 +262,7 @@ const TemplateAccessSettingsPanel = ({
       .map((inviteItem) => {
         return {
           id: inviteItem.id,
-          access: inviteItem.access ?? ShareAccessRights.RoomManager,
+          access: inviteItem.access ?? ShareAccessRights.ReadOnly,
         };
       });
 

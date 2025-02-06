@@ -207,7 +207,7 @@ const EditRoomDialog = ({
       const userIndex = users.findIndex((u) => u.id === i.id);
       if (userIndex > -1) {
         newUsers.filter((x) => x.id === i.id);
-        return { ...users[userIndex], access: ShareAccessRights.RoomManager };
+        return { ...users[userIndex], access: ShareAccessRights.ReadOnly };
       }
       return i;
     });
@@ -232,7 +232,7 @@ const EditRoomDialog = ({
       .map((inviteItem) => {
         return {
           id: inviteItem.id,
-          access: inviteItem.access ?? ShareAccessRights.RoomManager,
+          access: inviteItem.access ?? ShareAccessRights.ReadOnly,
         };
       });
 

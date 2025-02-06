@@ -66,6 +66,7 @@ export interface OutEmptyViewContainerProps {
   isFolder: boolean;
   isArchiveFolderRoot: boolean;
   isRootEmptyPage: boolean;
+  logoText: string;
 }
 
 export interface InjectedEmptyViewContainerProps
@@ -95,6 +96,7 @@ export interface InjectedEmptyViewContainerProps
   isPublicRoom: boolean;
   isVisitor?: boolean;
   isFrame?: boolean;
+  logoText: string;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

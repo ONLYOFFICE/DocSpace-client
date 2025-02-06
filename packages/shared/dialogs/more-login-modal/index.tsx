@@ -29,17 +29,18 @@ import { ReactSVG } from "react-svg";
 
 import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
 
-import { Text } from "../text";
-import { Button, ButtonSize } from "../button";
+import { Text } from "../../components/text";
+import { Button, ButtonSize } from "../../components/button";
 import { PROVIDERS_DATA } from "../../constants";
-import { ModalDialog, ModalDialogType } from "../modal-dialog";
+import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import { getProviderLabel } from "../../utils/common";
 
-import { ProviderRow } from "./MoreLoginModal.styled";
 import type {
   MoreLoginModalProps,
   ProvidersDataType,
 } from "./MoreLoginModal.types";
+
+import styles from "./MoreLoginModal.module.scss";
 
 const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
   const {
@@ -62,12 +63,12 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
       <ModalDialog.Header>{t("Common:ContinueWith")}</ModalDialog.Header>
       <ModalDialog.Body>
         {ssoUrl ? (
-          <ProviderRow key="ProviderItemSSO">
+          <div className={styles.providerRow} key="ProviderItemSSO">
             <ReactSVG src={SsoReactSvgUrl} />
             <Text
               fontSize="14px"
               fontWeight="600"
-              className="provider-name"
+              className={styles.providerName}
               noSelect
             >
               {ssoLabel || getProviderLabel("sso-full", t)}
@@ -78,7 +79,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
               size={ButtonSize.small}
               onClick={() => (window.location.href = ssoUrl)}
             />
-          </ProviderRow>
+          </div>
         ) : null}
         {providers?.map((item) => {
           if (!PROVIDERS_DATA[item.provider as keyof ProvidersDataType]) return;
@@ -89,12 +90,12 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
           const IconComponent = icon;
 
           return (
-            <ProviderRow key={`ProviderItem${label}`}>
+            <div className={styles.providerRow} key={`ProviderItem${label}`}>
               <IconComponent />
               <Text
                 fontSize="14px"
                 fontWeight="600"
-                className="provider-name"
+                className={styles.providerName}
                 noSelect
               >
                 {getProviderLabel(label, t)}
@@ -107,7 +108,7 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
                 data-providername={item.provider}
                 onClick={onSocialLoginClick}
               />
-            </ProviderRow>
+            </div>
           );
         })}
       </ModalDialog.Body>

@@ -183,12 +183,15 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
     ) : (
       <div
         {...rest}
+        data-testid="snackbar-container"
         id="snackbar-container"
         style={snackbarStyle}
         className={styles.snackbar}
       >
         {htmlContent ? (
           <div
+            className={styles.iframe}
+            style={{ "--sectionWidth": sectionWidth } as React.CSSProperties}
             data-testid="snackbar-html-content"
             dangerouslySetInnerHTML={{
               __html: htmlContent,

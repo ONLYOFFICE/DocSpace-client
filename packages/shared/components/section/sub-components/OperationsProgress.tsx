@@ -113,6 +113,11 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     [clearSecondaryProgressData, clearPrimaryProgressData],
   );
 
+  const operationsLength =
+    primaryActiveOperations.length + secondaryActiveOperations.length;
+  const isSeveralOperations = operationsLength > 1;
+  const isSecondaryActive = secondaryActiveOperations.length > 0;
+
   const handleTooltipOpen = () => {
     clearTimers();
 
@@ -148,11 +153,6 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     };
   }, []);
 
-  const operationsLength =
-    primaryActiveOperations.length + secondaryActiveOperations.length;
-
-  const isSeveralOperations = operationsLength > 1;
-
   useLayoutEffect(() => {
     if (isOpenDropdown && !isSeveralOperations) setIsOpenDropdown(false);
   }, [isOpenDropdown, isSeveralOperations]);
@@ -181,8 +181,6 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     if (isSeveralOperations) {
       return t("Files:Processes", { count: operationsLength });
     }
-
-    const isSecondaryActive = secondaryActiveOperations.length > 0;
 
     if (operationsAlert) {
       const operationName = isSecondaryActive
@@ -246,7 +244,8 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         tooltipContent={getTooltipLabel()}
         openOnClick={isMobile}
         {...(isMobile && { afterShow: handleTooltipOpen })}
-        {...(isHideTooltip && isMobile && { isOpen: false })}
+        {...((isHideTooltip || (!isSeveralOperations && !isSecondaryActive)) &&
+          isMobile && { isOpen: false })}
       >
         <FloatingButton
           icon={getIcons()}
@@ -255,10 +254,11 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           {...(isSeveralOperations && { onClick: onOpenDropdown })}
           {...(!isSeveralOperations &&
             primaryActiveOperations.length && { onClick: onOpenPanel })}
-          {...(!isSeveralOperations && {
-            showCancelButton,
-            clearUploadedFilesHistory: onCancelOperation,
-          })}
+          {...(!isSeveralOperations &&
+            !isMobile && {
+              showCancelButton,
+              clearUploadedFilesHistory: onCancelOperation,
+            })}
           withoutStatus={withoutStatus}
         />
       </HelpButton>

@@ -26,20 +26,21 @@
 
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/no-danger */
+import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg";
+import InfoReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Countdown, { zeroPad } from "react-countdown";
-import { IconSizeType } from "../../utils";
+import classNames from "classnames";
 
 import { Box } from "../box";
 import { Heading, HeadingSize } from "../heading";
 import { Text } from "../text";
 
 import { BarConfig, SnackbarProps } from "./Snackbar.types";
-import { StyledAction, StyledSnackBar, StyledIframe } from "./Snackbar.styled";
-import StyledCrossIcon from "./SnackbarAction.styled";
-import StyledLogoIcon from "./SnackbarLogo.styled.ts";
 import { globalColors } from "../../themes";
+import styles from "./snacknar.module.scss";
 
 class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
   static show(barConfig: BarConfig) {
@@ -141,36 +142,50 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
       onAction,
       sectionWidth,
       backgroundColor = globalColors.lightToastAlert,
+      opacity,
+      backgroundImg,
       ...rest
     } = this.props;
 
     const headerStyles = headerText ? {} : { display: "none" };
 
+    const snackbarStyle = {
+      "--opacity": opacity,
+      "--background-color": backgroundColor,
+      "--background-image": backgroundImg,
+      ...style,
+    } as React.CSSProperties;
+
     const { isLoaded } = this.state;
 
     return isCampaigns ? (
       <div id="bar-banner" style={{ position: "relative" }}>
-        <StyledIframe
+        <iframe
           id="bar-frame"
+          title="bar-frame"
+          className={styles.iframe}
+          style={{ "--sectionWidth": sectionWidth } as React.CSSProperties}
           src={htmlContent}
           scrolling="no"
-          sectionWidth={sectionWidth}
           onLoad={() => {
             this.setState({ isLoaded: true });
           }}
         />
         {isLoaded ? (
-          <StyledAction className="action" onClick={this.onActionClick}>
-            <StyledCrossIcon size={IconSizeType.medium} />
-          </StyledAction>
+          <div
+            className={classNames(styles.actionWrapper, styles.action)}
+            onClick={this.onActionClick}
+          >
+            <CrossReactSvg className={styles.crossIcon} />
+          </div>
         ) : null}
       </div>
     ) : (
-      <StyledSnackBar
+      <div
         {...rest}
         id="snackbar-container"
-        style={style}
-        backgroundColor={backgroundColor}
+        style={snackbarStyle}
+        className={styles.snackbar}
       >
         {htmlContent ? (
           <div
@@ -180,14 +195,17 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
             }}
           />
         ) : (
-          <div className="text-container">
-            <div className="header-body" style={{ textAlign }}>
+          <div
+            className={styles.textContainer}
+            style={{ "--text-align": textAlign } as React.CSSProperties}
+          >
+            <div className={styles.headerBody} style={{ textAlign }}>
               {showIcon ? (
                 <Box className="logo">
-                  <StyledLogoIcon
+                  <InfoReactSvg
+                    className={styles.infoIcon}
+                    style={{ "--color": textColor } as React.CSSProperties}
                     data-testid="snackbar-icon"
-                    size={IconSizeType.medium}
-                    color={textColor}
                   />
                 </Box>
               ) : null}
@@ -195,7 +213,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
               <Heading
                 size={HeadingSize.xsmall}
                 isInline
-                className="text-header"
+                className={styles.textHeader}
                 style={headerStyles}
                 color={textColor}
                 data-testid="snackbar-header"
@@ -203,10 +221,10 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
                 {headerText}
               </Heading>
             </div>
-            <div className="text-body">
+            <div className={styles.textBody}>
               <Text
                 as="p"
-                className="text"
+                className={styles.text}
                 color={textColor}
                 fontSize={fontSize}
                 fontWeight={fontWeight}
@@ -219,7 +237,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
               {btnText ? (
                 <Text
                   color={textColor}
-                  className="button"
+                  className={styles.button}
                   onClick={this.onActionClick}
                 >
                   {btnText}
@@ -237,11 +255,15 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
           </div>
         )}
         {!btnText ? (
-          <button className="action" type="submit" onClick={this.onActionClick}>
-            <StyledCrossIcon size={IconSizeType.small} />
+          <button
+            className={styles.action}
+            type="submit"
+            onClick={this.onActionClick}
+          >
+            <CrossReactSvg className={styles.crossIcon} />
           </button>
         ) : null}
-      </StyledSnackBar>
+      </div>
     );
   }
 }

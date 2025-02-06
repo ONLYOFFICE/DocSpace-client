@@ -269,6 +269,7 @@ const SectionHeaderContent = (props) => {
     getIndexingArray,
     setCloseEditIndexDialogVisible,
     rootFolderId,
+    isTemplate,
   } = props;
 
   const location = useLocation();
@@ -545,15 +546,17 @@ const SectionHeaderContent = (props) => {
       isIndexEditingMode || isPublicRoom;
   }
 
-  const currentTitle = isSettingsPage
-    ? t("Common:Settings")
-    : isContactsPage
-      ? isContactsInsideGroupPage
-        ? getInsideGroupTitle()
-        : t("Common:Contacts")
-      : isLoading && stateTitle
-        ? stateTitle
-        : title;
+  const currentTitle = isTemplate
+    ? t("Common:Templates")
+    : isSettingsPage
+      ? t("Common:Settings")
+      : isContactsPage
+        ? isContactsInsideGroupPage
+          ? getInsideGroupTitle()
+          : t("Common:Contacts")
+        : isLoading && stateTitle
+          ? stateTitle
+          : title;
 
   const currentCanCreate =
     isLoading && hasOwnProperty(location?.state, "canCreate")
@@ -900,6 +903,7 @@ export default inject(
         : pathParts?.length === 1;
 
     const isArchive = rootFolderType === FolderType.Archive;
+    const isTemplate = rootFolderType === FolderType.RoomTemplates;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 
@@ -1009,6 +1013,7 @@ export default inject(
       getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
+      isTemplate,
     };
   },
 )(

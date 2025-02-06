@@ -909,7 +909,7 @@ class UploadDataStore {
       const newFolders = folders;
       const path = currentFile.path ? currentFile.path.slice() : [];
       const fileIndex = newFiles.findIndex(
-        (x) => x.id === currentFile.fileInfo.id,
+        (x) => x.id === currentFile.fileInfo?.id,
       );
 
       let folderInfo = null;

@@ -27,8 +27,6 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Box } from "../box";
-
 import { SnackBar } from "./Snackbar";
 import { SnackbarProps } from "./Snackbar.types";
 import { globalColors } from "../../themes";
@@ -83,16 +81,10 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const Wrapper = ({ children }: { children: React.ReactNode }) => (
-  <Box id="main-bar" displayProp="grid" data-testid="snackbar-wrapper">
-    {children}
-  </Box>
-);
-
 const BaseTemplate = (args: SnackbarProps) => (
-  <Wrapper>
+  <div data-testid="snackbar-wrapper" style={{ width: "calc(100% - 32px)" }}>
     <SnackBar {...args} onClose={() => console.log("Snackbar closed")} />
-  </Wrapper>
+  </div>
 );
 
 export const Default: Story = {
@@ -137,7 +129,7 @@ export const WithHtmlContent: Story = {
   args: {
     ...Default.args,
     htmlContent:
-      "<p>This is <strong>HTML</strong> content with <em>formatting</em></p>",
+      "<h1 style='color: black'>This is <strong>HTML</strong> content with <em>formatting</em></h1>",
     text: undefined,
   },
 };

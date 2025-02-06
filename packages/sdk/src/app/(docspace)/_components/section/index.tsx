@@ -43,6 +43,7 @@ type SectionProps = {
 
   isEmptyPage: boolean;
   filesFilter: string;
+  showFilter?: boolean;
 };
 
 export const SectionWrapper = observer(
@@ -52,6 +53,7 @@ export const SectionWrapper = observer(
     sectionBodyContent,
     isEmptyPage,
     filesFilter,
+    showFilter = false,
   }: SectionProps) => {
     const searchParams = useSearchParams();
 
@@ -79,11 +81,13 @@ export const SectionWrapper = observer(
         <Section.SectionHeader>{sectionHeaderContent}</Section.SectionHeader>
 
         <Section.SectionFilter>
-          {!isEmptyList
-            ? sectionFilterContent
-            : !isFiltered
-              ? null
-              : sectionFilterContent}
+          {showFilter
+            ? !isEmptyList
+              ? sectionFilterContent
+              : !isFiltered
+                ? null
+                : sectionFilterContent
+            : null}
         </Section.SectionFilter>
 
         <Section.SectionBody>{sectionBodyContent}</Section.SectionBody>

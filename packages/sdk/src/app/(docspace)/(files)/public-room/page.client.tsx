@@ -25,12 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
+
 import React from "react";
 import { observer } from "mobx-react";
 
 import { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 import { ThemeKeys } from "@docspace/shared/enums";
+
+import useSDK from "@/hooks/useSDK";
 
 import { useFilesSettingsStore } from "../../_store/FilesSettingsStore";
 import { useSettingsStore } from "../../_store/SettingsStore";
@@ -44,6 +47,10 @@ type PublicRoomPageProps = {
   portalSettings: TSettings;
   filesFilter: string;
   theme: ThemeKeys.BaseStr | ThemeKeys.DarkStr;
+  baseConfig: {
+    header?: boolean;
+    folder?: string;
+  };
 };
 
 function PublicRoomPage({
@@ -53,8 +60,11 @@ function PublicRoomPage({
   portalSettings,
   theme,
   shareKey,
+  baseConfig,
 }: PublicRoomPageProps) {
   const { folders, files, total, current } = folderList;
+
+  const { sdkConfig } = useSDK();
 
   const filesSettingsStore = useFilesSettingsStore();
   const settingsStore = useSettingsStore();

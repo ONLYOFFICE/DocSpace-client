@@ -82,7 +82,7 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   .item-file-name {
     max-height: 100%;
-    line-height: 20px;
+    line-height: ${(props) => (props.isRooms ? "22px" : "20px")};
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -90,6 +90,12 @@ const SimpleFilesTileContent = styled(TileContent)`
     display: -webkit-box;
     -webkit-box-orient: vertical;
     text-align: start;
+
+    font-size: ${(props) =>
+      (props.isRooms && "16px") ||
+      (!props.isRooms && props.currentDeviceType === DeviceType.desktop
+        ? "13px"
+        : "14px")};
   }
 
   .item-file-exst {
@@ -130,6 +136,7 @@ const FilesTileContent = ({
       sideColor={theme.filesSection.tilesView.sideColor}
       isFile={fileExst}
       isRooms={isRooms}
+      currentDeviceType={currentDeviceType}
     >
       <Link
         className="item-file-name"
@@ -137,7 +144,6 @@ const FilesTileContent = ({
         type="page"
         title={title}
         fontWeight="600"
-        fontSize={currentDeviceType === DeviceType.desktop ? "13px" : "14px"}
         target="_blank"
         {...linkStyles}
         color={theme.filesSection.tilesView.color}

@@ -115,14 +115,16 @@ const checkedStyle = css`
       : theme.filesSection.tilesView.tile.checkedColor};
 
   a {
-    text-decoration: ${(props) => !props.checked && "underline"};
+    text-decoration: ${(props) =>
+      !props.checked && props.isRoom && "underline"};
   }
 
   .tag,
   .advanced-tag {
     background: ${(props) =>
-      props.theme.isBase &&
-      props.theme.filesSection.tilesView.tile.backgroundColor};
+      props.theme.isBase
+        ? props.theme.filesSection.tilesView.tile.backgroundColor
+        : props.theme.filesSection.tilesView.tile.roomsCheckedColor};
   }
 `;
 
@@ -257,15 +259,35 @@ const StyledTile = styled.div`
       props.isFolder ? (props.isRoom ? "12px" : "7px") : "8px"};
 
     background: ${(props) =>
-      props.theme.filesSection.tilesView.tag.backgroundColor};
+      props.isRoom && props.theme.filesSection.tilesView.tag.backgroundColor};
     border-radius: 6px;
 
     .checkbox {
       padding: 8px;
 
-      svg {
-        margin: 0;
-      }
+      ${(props) =>
+        props.isRoom &&
+        css`
+          svg {
+            margin: 0;
+
+            rect {
+              fill: ${globalColors.white};
+              stroke: ${globalColors.grayStrong};
+            }
+
+            path {
+              fill: ${globalColors.black};
+            }
+          }
+
+          &:focus {
+            outline: none;
+            rect {
+              stroke: ${globalColors.gray};
+            }
+          }
+      }`}
     }
   }
 
@@ -413,6 +435,20 @@ const StyledContent = styled.div`
 
       padding-block: 8px;
       padding-inline: 0 8px;
+
+      svg {
+        path {
+          fill: ${(props) => props.theme.iconButton.color};
+        }
+      }
+
+      &:hover {
+        svg {
+          path {
+            fill: ${(props) => props.theme.currentColorScheme.main.accent};
+          }
+        }
+      }
     }
   }
 
@@ -439,7 +475,7 @@ const StyledOptionButton = styled.div.attrs(injectDefaultTheme)`
 
   .expandButton > div:first-child {
     padding-block: 8px;
-    padding-inline: 0 20px;
+    padding-inline: ${(props) => (props.isRoom ? "0 20px" : "12px 21px")};
 
     &:hover {
       svg {
@@ -569,7 +605,7 @@ class Tile extends React.PureComponent {
     onSelect && onSelect(true, item);
   };
 
-  /*   onFileClick = (e) => {
+  onFileClick = (e) => {
     const {
       onSelect,
       item,
@@ -610,15 +646,17 @@ class Tile extends React.PureComponent {
 
       onSelect && onSelect(!checked, item);
     }
-  } */
+  };
 
-  onFileClick = (e) => {
+  onRoomClick = (e) => {
     const { thumbnailClick } = this.props;
 
     if (
       !e.target.closest(".checkbox") &&
       !e.target.closest(".tags") &&
-      !e.target.closest(".badges")
+      !e.target.closest(".advanced-tag") &&
+      !e.target.closest(".badges") &&
+      !e.target.closest("#modal-dialog")
     ) {
       thumbnailClick(e);
     }
@@ -684,14 +722,6 @@ class Tile extends React.PureComponent {
       tileContextClick && tileContextClick();
       return contextOptions;
     };
-
-    /*   const onContextMenu = (e) => {
-      tileContextClick && tileContextClick(e.button === 2);
-      if (!this.cm.current.menuRef.current) {
-        this.tile.current.click(e); // TODO: need fix context menu to global
-      }
-      this.cm.current.show(e);
-    }; */
 
     const contextMenuDirection =
       theme.interfaceDirection === "rtl" ? "left" : "right";
@@ -761,7 +791,7 @@ class Tile extends React.PureComponent {
         isHighlight={isHighlight}
         iconProgress={iconProgress}
         isDownload={isDownload}
-        onClick={this.onFileClick}
+        onClick={isRoom ? this.onRoomClick : this.onFileClick}
       >
         {isFolder || (!fileExst && id === -1) ? (
           isRoom ? (

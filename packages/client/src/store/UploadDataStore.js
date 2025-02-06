@@ -702,11 +702,16 @@ class UploadDataStore {
       items ?? this.dialogsStore.conflictResolveDialogData.newUploadData.files;
 
     let i = files.length;
-    while (i !== 0) {
-      this.files = this.files.filter((f) => f.uniqueId === files[i - 1]);
 
+    while (i !== 0) {
+      this.uploadedFilesHistory = this.uploadedFilesHistory.filter(
+        (f) => f.uniqueId !== files[i - 1].uniqueId,
+      );
+      this.files = this.files.filter(
+        (f) => f.uniqueId !== files[i - 1].uniqueId,
+      );
       this.tempConversionFiles = this.tempConversionFiles.filter(
-        (f) => f.uniqueId === files[i - 1],
+        (f) => f.uniqueId !== files[i - 1].uniqueId,
       );
       i--;
     }

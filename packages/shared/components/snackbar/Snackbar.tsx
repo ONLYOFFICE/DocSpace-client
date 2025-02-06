@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable jsx-a11y/control-has-associated-label */
+/* eslint-disable jsx-a11y/iframe-has-title */
 /* eslint-disable react/no-danger */
 import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg";
 import InfoReactSvg from "PUBLIC_DIR/images/danger.toast.react.svg";
@@ -162,7 +163,6 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
       <div id="bar-banner" style={{ position: "relative" }}>
         <iframe
           id="bar-frame"
-          title="bar-frame"
           className={styles.iframe}
           style={{ "--sectionWidth": sectionWidth } as React.CSSProperties}
           src={htmlContent}

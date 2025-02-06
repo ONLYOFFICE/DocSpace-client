@@ -30,11 +30,10 @@ interface MobileDetailsProps {
   isError: boolean;
   isPreviewFile?: boolean;
   isPublicFile?: boolean;
-  contextModel: () => ContextMenuModel[];
-
   onHide: VoidFunction;
   onMaskClick: VoidFunction;
   onContextMenu: (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
+  contextModel: () => ContextMenuModel[];
 }
 
 export default MobileDetailsProps;

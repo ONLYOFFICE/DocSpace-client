@@ -28,74 +28,84 @@
 @import "../../styles/variables/_colors.scss";
 @import "../../styles/_mixins.scss";
 
-.container {
-  &.horizontal {
+@mixin displayVertical {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .fieldLabel {
+    line-height: 20px;
+    height: 20px;
+    display: inline-block;
+  }
+
+  .fieldLabelIcon {
+    display: inline-flex;
+    width: 100%;
+    margin: 0 0 4px 0;
+  }
+
+  .fieldBody {
+    width: 100%;
+  }
+
+  .iconButton {
+    position: relative;
+    margin: 0;
+    padding: 0 8px;
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
+    height: 100%;
+  }
+}
 
-    .fieldLabel {
-      line-height: 32px;
-      margin: 0px;
-      position: relative;
-    }
+@mixin displayHorizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 
-    .fieldLabelIcon {
-      display: inline-flex;
-      min-width: var(--label-width);
-      width: var(--label-width);
-    }
+  .fieldLabel {
+    line-height: 32px;
+    margin: 0px;
+    position: relative;
+  }
 
-    .fieldBody {
-      flex-grow: 1;
-    }
+  .fieldLabelIcon {
+    display: inline-flex;
+    min-width: var(--label-width);
+    width: var(--label-width);
+  }
 
-    .iconButton {
-      position: relative;
-      margin-top: 10px;
-      margin-inline-start: 8px;
-    }
+  .fieldBody {
+    flex-grow: 1;
+  }
+
+  .iconButton {
+    position: relative;
+    margin-top: 10px;
+    margin-inline-start: 8px;
+  }
+}
+
+.container {
+  margin: 0 0 16px 0;
+
+  &.horizontal {
+    @include displayHorizontal();
   }
 
   &.vertical {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    @include displayVertical();
+  }
 
-    .fieldLabel {
-      line-height: 20px;
-      height: 20px;
-      display: inline-block;
-    }
-
-    .fieldLabelIcon {
-      display: inline-flex;
-      width: 100%;
-      margin: 0 0 4px 0;
-    }
-
-    .fieldBody {
-      width: 100%;
-    }
-
-    .iconButton {
-      position: relative;
-      margin: 0;
-      padding: 0 8px;
-      display: flex;
-      align-items: center;
-      height: 100%;
+  @include tablet-and-below {
+    &.horizontal {
+      @include displayVertical();
     }
   }
 
-  &:not(.noMargin) {
-    &.horizontal {
-      margin: 0 0 16px 0;
-    }
-
-    &.vertical {
-      margin: 0 0 16px 0;
-    }
+  &.noMargin {
+    margin: 0;
   }
 }
 
@@ -103,12 +113,4 @@
   color: var(--error-color, var(--input-error-color));
   padding-top: 4px;
   max-width: var(--error-width, 293px);
-}
-
-@include tablet {
-  .container {
-    &.horizontal {
-      flex-direction: column;
-    }
-  }
 }

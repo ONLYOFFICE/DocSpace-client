@@ -27,6 +27,7 @@
 import styled, { css } from "styled-components";
 import { Row } from "@docspace/shared/components/rows";
 import { injectDefaultTheme, tablet } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledBody = styled.div`
   height: 100%;
@@ -156,9 +157,20 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
         props.versionDeleteProcess &&
         css`
           path {
-            fill: rgba(208, 213, 218, 1);
-            stroke: rgba(208, 213, 218, 1);
+            fill: ${({ theme }) =>
+              theme.filesVersionHistory.versionDisabled.fillDisabled};
+            stroke: ${({ theme }) =>
+              theme.filesVersionHistory.versionDisabled.fillDisabled};
           }
+        `}
+    }
+
+    .version_badge-text {
+      ${(props) =>
+        props.versionDeleteProcess &&
+        !props.theme.isBase &&
+        css`
+          color: ${globalColors.darkGrayDark} !important;
         `}
     }
 
@@ -175,7 +187,7 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
     ${(props) =>
       props.versionDeleteProcess &&
       css`
-        color: #a3a9ae;
+        color: ${({ theme }) => theme.filesVersionHistory.versionLink.color};
       `}
   }
   .version-link-file:first-child {
@@ -261,7 +273,7 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
 
     .expandButton {
       ${(props) =>
-        props.isSavingComment &&
+        (props.isSavingComment || props.versionDeleteProcess) &&
         `
         touch-action: none;
         pointer-events: none;
@@ -274,6 +286,13 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
               fill: ${({ theme }) =>
                 theme.filesVersionHistory.versionList.fill};
             `};
+
+          ${(props) =>
+            props.versionDeleteProcess &&
+            css`
+              fill: ${({ theme }) =>
+                theme.filesVersionHistory.versionDisabled.fillDisabled};
+            `}
         }
       }
     }
@@ -287,6 +306,17 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
         props.isSavingComment &&
         `
           color: ${({ theme }) => theme.filesVersionHistory.versionList.color};
+          touch-action: none;
+          pointer-events: none;
+        `}
+    }
+
+    .version-link-file,
+    .version_text,
+    .versioned {
+      ${(props) =>
+        props.versionDeleteProcess &&
+        `
           touch-action: none;
           pointer-events: none;
         `}

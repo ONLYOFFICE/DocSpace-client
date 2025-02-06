@@ -25,11 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
 import { Meta, StoryObj } from "@storybook/react";
 
 import { InputSize } from "../text-input";
-
 import { FileInputProps } from "./FileInput.types";
 import { FileInputPure } from "./FileInput";
 
@@ -38,42 +36,95 @@ const meta = {
   component: FileInputPure,
   argTypes: {
     onInput: { action: "onInput" },
+    size: {
+      control: "select",
+      options: Object.values(InputSize),
+      description: "Size of the input field",
+    },
+    hasError: {
+      control: "boolean",
+      description: "Shows error state",
+    },
+    hasWarning: {
+      control: "boolean",
+      description: "Shows warning state",
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "Disables the input",
+    },
+    isLoading: {
+      control: "boolean",
+      description: "Shows loading state",
+    },
   },
   parameters: {
     docs: {
       description: {
-        component: "File entry field",
+        component:
+          "File input component for handling file uploads with various states and sizes",
       },
     },
   },
 } satisfies Meta<typeof FileInputPure>;
-type Story = StoryObj<typeof FileInputPure>;
 
 export default meta;
+type Story = StoryObj<typeof FileInputPure>;
 
-const Template = (args: FileInputProps) => {
-  const { onInput } = args;
-  return (
-    <FileInputPure
-      {...args}
-      onInput={(file: File | File[]) => {
-        onInput?.(file);
-      }}
-    />
-  );
-};
+const Template = (args: FileInputProps) => <FileInputPure {...args} />;
 
 export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
-    placeholder: "Input file",
+    placeholder: "Choose file",
     size: InputSize.base,
     scale: false,
     isDisabled: false,
-    id: "file-input-id",
-    name: "demoFileInputName",
-    hasError: false,
-    hasWarning: false,
-    accept: [".doc", ".docx"],
+    "aria-label": "Choose file",
+  },
+};
+
+export const Middle: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    size: InputSize.middle,
+    placeholder: "Middle input",
+  },
+};
+
+export const WithError: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    hasError: true,
+    placeholder: "Error state",
+  },
+};
+
+export const WithWarning: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    hasWarning: true,
+    placeholder: "Warning state",
+  },
+};
+
+export const Disabled: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    isDisabled: true,
+    placeholder: "Disabled input",
+  },
+};
+
+export const Loading: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    isLoading: true,
+    placeholder: "Loading state",
   },
 };

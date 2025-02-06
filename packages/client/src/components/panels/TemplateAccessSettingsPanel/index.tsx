@@ -506,6 +506,7 @@ export default inject(
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
+      infoPanelSelection,
     } = infoPanelStore;
     const { selection, bufferSelection } = filesStore;
     const {
@@ -516,7 +517,9 @@ export default inject(
 
     return {
       setInfoPanelIsMobileHidden,
-      templateItem: selection.length ? selection[0] : bufferSelection,
+      templateItem: selection.length
+        ? selection[0]
+        : (bufferSelection ?? infoPanelSelection),
       templateEventVisible,
       visible: isContainer ? false : templateAccessSettingsVisible,
       setIsVisible: isContainer

@@ -27,12 +27,13 @@
 import { Story, Meta } from "@storybook/react";
 import { LanguageCombobox } from "./LanguageCombobox";
 import { ComboboxProps } from "./LanguageCombobox.types";
+import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
 
 export default {
   title: "Components/LanguageCombobox",
   component: LanguageCombobox,
   // eslint-disable-next-line @typescript-eslint/no-shadow
-  decorators: [(Story) => <Story />],
+  decorators: [(Story) => <Story />, i18nextStoryDecorator],
   argTypes: {
     withBorder: {
       control: "boolean",
@@ -44,7 +45,7 @@ export default {
     },
     selectedCulture: {
       control: "select",
-      options: ["en", "de", "fr", "es", "it"],
+      options: ["en-US", "de", "fr", "es", "it"],
     },
   },
 } as Meta;
@@ -53,8 +54,8 @@ const Template: Story<ComboboxProps> = (args) => <LanguageCombobox {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  selectedCulture: "en",
-  cultures: ["en", "de", "fr", "es", "it"],
+  selectedCulture: "en-US",
+  cultures: ["en-US", "de", "fr", "es", "it"],
   onSelectLanguage: (culture) => console.log("Selected culture:", culture),
   className: "custom-class",
   withBorder: true,

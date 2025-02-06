@@ -260,6 +260,8 @@
 
   --save-cancel-border-color: #{$gray-light-mid};
   --save-cancel-reminder-color: #{$gray};
+
+  --language-combo-hover-border: #{$gray};
 }
 
 .dark {
@@ -572,6 +574,8 @@
 
   --save-cancel-border-color: #{$gray-light-mid};
   --save-cancel-reminder-color: #{$gray};
+
+  --language-combo-hover-border: #{$gray-dark};
 }
 
 .light {

@@ -363,7 +363,7 @@ const Badges = ({
           {...unpinIconProps}
         />
       ) : null}
-      {showNew && !isTile ? (
+      {showNew && ((isTile && !isRoom) || !isTile) ? (
         <NewFilesBadge
           className="tablet-badge"
           newFilesCount={newItems}
@@ -372,7 +372,7 @@ const Badges = ({
           isRoom={isRoom}
         />
       ) : null}
-      {showNew && isTile ? (
+      {showNew && isTile && isRoom ? (
         <StyledWrapperNewBadge>
           <NewFilesBadge
             className="tablet-badge"

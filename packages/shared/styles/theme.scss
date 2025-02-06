@@ -387,7 +387,7 @@
   --backdrop-background-color: #{$blur-dark};
 
   --badge-background-color: var(--accent-main, #{$dark-status-warning});
-  --badge-disable-background-color: var(--accent-main, #{$gray-dark});
+  --badge-disable-background-color: #{$gray-dark-strong};
 
   --button-color-base: #{$white};
   --button-color-base-hover: #{$white};
@@ -1067,7 +1067,7 @@
   --tag-active-background: #{$gray-light};
   --tag-new-background: #{$gray-light-mid};
   --tag-new-hover-background: #{$light-gray-hover};
-  --tag-deleted-background: #{$gray-light};
+  --tag-deleted-border: #{$gray-light-mid};
   --tag-color: #{$black};
   --tag-default-color: #{$black};
   --tag-deleted-color: #{$gray};
@@ -1075,7 +1075,7 @@
   --tag-disabled-border: 1px dashed #{$gray-strong};
   --tag-border: 1px solid #{$gray-strong};
 
-  --tag-padding: 2px 10px;
+  --tag-padding: 1px 7px;
   --tag-margin-end: 4px;
   --tag-border-radius: 6px;
   --tag-icon-margin-start: 12px;
@@ -1095,10 +1095,10 @@
   --tag-active-background: #{$light-dark-gray-hover};
   --tag-new-background: #{$gray-dark-mid};
   --tag-new-hover-background: #{$light-dark-gray-hover};
-  --tag-deleted-background: #{$dark-gray-light};
+  --tag-deleted-border: #{$gray-dark-strong};
   --tag-color: #{$white};
   --tag-default-color: #{$gray};
-  --tag-deleted-color: #{$gray};
+  --tag-deleted-color: #{$gray-dark};
   --tag-disabled-color: #{$gray-dark};
   --tag-disabled-border: 1px dashed #{$gray-dark-strong};
   --tag-border: 1px solid #{$gray-dark-strong};
@@ -1117,7 +1117,7 @@
 }
 
 .dark {
-  --tag-padding: 2px 10px;
+  --tag-padding: 1px 7px;
   --tag-margin-end: 4px;
   --tag-border-radius: 6px;
   --tag-icon-margin-start: 12px;

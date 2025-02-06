@@ -31,7 +31,7 @@ import { IconButton } from "../../icon-button";
 const StyledMuteIcon = styled(IconButton)`
   ${commonIconsStyles}
 
-  svg {
+  && svg {
     path:first-child {
       stroke: ${(props) => props.theme.filesSection.rowView.pinColor};
     }

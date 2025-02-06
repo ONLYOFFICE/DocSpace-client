@@ -37,10 +37,18 @@ const IconButtonPinTheme = styled(StyledPinIcon).attrs(injectDefaultTheme)<
   margin-top: 2px;
   ${commonIconsStyles}
 
+  && svg {
+    path {
+      fill: ${(props) =>
+        props.theme.isBase && props.$currentColorScheme?.main?.accent};
+    }
+  }
+
   &&:hover:not(.disabled) {
     svg {
       path {
-        fill: ${(props) => props.$currentColorScheme?.main?.accent};
+        fill: ${(props) =>
+          props.theme.isBase && props.$currentColorScheme?.main?.accent};
       }
     }
   }

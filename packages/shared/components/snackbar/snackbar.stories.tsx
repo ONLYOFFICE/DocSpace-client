@@ -128,8 +128,7 @@ export const WithHtmlContent: Story = {
   render: (args) => <BaseTemplate {...args} />,
   args: {
     ...Default.args,
-    htmlContent:
-      "<h1 style='color: black'>This is <strong>HTML</strong> content with <em>formatting</em></h1>",
+    htmlContent: "<img src='images/logo/lightsmall.svg' />",
     text: undefined,
   },
 };

@@ -42,7 +42,7 @@
 .snackbar {
   transition: all 500ms ease;
   transition-property: top, right, bottom, left, opacity;
-  font-size: 12px;
+  font-size: 12px !important;
   min-height: 14px;
   position: relative;
   display: flex;
@@ -76,7 +76,7 @@
 }
 
 .textHeader {
-  font-size: 12px;
+  font-size: 12px !important;
   line-height: 16px;
   font-weight: 600;
   margin: 0;
@@ -90,7 +90,7 @@
 }
 
 .text {
-  font-size: 12px;
+  font-size: 12px !important;
   line-height: 16px;
   font-weight: 400;
 }
@@ -115,7 +115,7 @@
 .button {
   background: inherit;
   border: none;
-  font-size: 13px;
+  font-size: 13px !important;
   color: #{$dark-black};
   cursor: pointer;
   line-height: 14px;

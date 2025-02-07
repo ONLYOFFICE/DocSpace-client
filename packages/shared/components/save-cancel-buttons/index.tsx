@@ -144,7 +144,7 @@ const SaveCancelButtons = ({
           scale={isMobile()}
         />
       </div>
-      {showReminder ? (
+      {showReminder && reminderText ? (
         <Text
           className={styles.reminderText}
           data-testid="save-cancel-reminder"

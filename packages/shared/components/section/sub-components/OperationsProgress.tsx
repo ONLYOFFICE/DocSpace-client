@@ -44,6 +44,7 @@ import styles from "../Section.module.scss";
 import { OperationsProgressProps } from "../Section.types";
 import { OPERATIONS_NAME } from "../../../constants/index";
 import { HelpButton } from "../../help-button";
+import { Backdrop } from "../../backdrop";
 
 type ValueOf<T> = T[keyof T];
 
@@ -227,65 +228,74 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   };
 
   return (
-    <div
-      ref={containerRef}
-      className={classNames(styles.progressBarContainer, {
-        [styles.autoHide]:
-          !isOpenDropdown && operationsCompleted && !needErrorChecking,
-        [styles.laterHide]: isLaterHide(),
-        [styles.immidiateHide]:
-          !isSeveralOperations && operationsCompleted && disableOpenPanel,
-        [styles.mainButtonVisible]: mainButtonVisible,
-      })}
-    >
-      <HelpButton
-        className="layout-progress-bar"
-        place="left"
-        tooltipContent={getTooltipLabel()}
-        openOnClick={isMobile}
-        {...(isMobile && { afterShow: handleTooltipOpen })}
-        {...((isHideTooltip || (!isSeveralOperations && !isSecondaryActive)) &&
-          isMobile && { isOpen: false })}
+    <>
+      <Backdrop
+        zIndex={210}
+        visible={isOpenDropdown}
+        onClick={() => setIsOpenDropdown(false)}
+      />
+      <div
+        ref={containerRef}
+        className={classNames(styles.progressBarContainer, {
+          [styles.autoHide]:
+            !isOpenDropdown && operationsCompleted && !needErrorChecking,
+          [styles.laterHide]: isLaterHide(),
+          [styles.immidiateHide]:
+            !isSeveralOperations && operationsCompleted && disableOpenPanel,
+          [styles.mainButtonVisible]: mainButtonVisible,
+        })}
+        style={{ zIndex: isOpenDropdown ? "211" : "201" }}
       >
-        <FloatingButton
-          icon={getIcons()}
-          alert={operationsAlert}
-          completed={operationsCompleted}
-          {...(isSeveralOperations && { onClick: onOpenDropdown })}
-          {...(!isSeveralOperations &&
-            primaryActiveOperations.length && { onClick: onOpenPanel })}
-          {...(!isSeveralOperations &&
-            !isMobile && {
-              showCancelButton,
-              clearUploadedFilesHistory: onCancelOperation,
-            })}
-          withoutStatus={withoutStatus}
-        />
-      </HelpButton>
+        <HelpButton
+          className="layout-progress-bar"
+          place="left"
+          tooltipContent={getTooltipLabel()}
+          openOnClick={isMobile}
+          {...(isMobile && { afterShow: handleTooltipOpen })}
+          {...((isHideTooltip ||
+            (!isSeveralOperations && !isSecondaryActive)) &&
+            isMobile && { isOpen: false })}
+        >
+          <FloatingButton
+            icon={getIcons()}
+            alert={operationsAlert}
+            completed={operationsCompleted}
+            {...(isSeveralOperations && { onClick: onOpenDropdown })}
+            {...(!isSeveralOperations &&
+              primaryActiveOperations.length && { onClick: onOpenPanel })}
+            {...(!isSeveralOperations &&
+              !isMobile && {
+                showCancelButton,
+                clearUploadedFilesHistory: onCancelOperation,
+              })}
+            withoutStatus={withoutStatus}
+          />
+        </HelpButton>
 
-      <DropDown
-        open={isOpenDropdown}
-        withBackdrop
-        manualWidth="344px"
-        directionY="top"
-        directionX="right"
-        fixedDirection
-        isDefaultMode={false}
-        className={classNames(styles.styledDropDown, styles.progressDropdown)}
-      >
-        <ProgressList
-          secondaryOperations={secondaryActiveOperations}
-          primaryOperations={primaryActiveOperations}
-          clearSecondaryProgressData={clearSecondaryProgressData}
-          clearPrimaryProgressData={(operationId, operationName) =>
-            clearPrimaryProgressData?.(operationName)
-          }
-          onCancel={onCancelOperation}
-          {...(!disableOpenPanel && { onOpenPanel })}
-          withoutStatus={withoutStatus}
-        />
-      </DropDown>
-    </div>
+        <DropDown
+          open={isOpenDropdown}
+          withBackdrop={false}
+          manualWidth="344px"
+          directionY="top"
+          directionX="right"
+          fixedDirection
+          isDefaultMode={false}
+          className={classNames(styles.styledDropDown, styles.progressDropdown)}
+        >
+          <ProgressList
+            secondaryOperations={secondaryActiveOperations}
+            primaryOperations={primaryActiveOperations}
+            clearSecondaryProgressData={clearSecondaryProgressData}
+            clearPrimaryProgressData={(operationId, operationName) =>
+              clearPrimaryProgressData?.(operationName)
+            }
+            onCancel={onCancelOperation}
+            {...(!disableOpenPanel && { onOpenPanel })}
+            withoutStatus={withoutStatus}
+          />
+        </DropDown>
+      </div>
+    </>
   );
 };
 

@@ -630,5 +630,7 @@
   "UpgradeToProBannerInformationAboutShort": "Saiba mais sobre a Edição {{license}} no <1>site oficial</1>",
   "AutoBackupDescription": "A opção Backup automático é usada para automatizar o processo de backup de dados do {{productName}} para poder restaurá-los posteriormente em um servidor local.",
   "EnableAutomaticBackup": "Ativar Criação Automática de Cópias de Segurança.",
-  "EnableAutomaticBackupDescription": "Utilize esta opção para criar cópias de segurança dos dados do espaço."
+  "EnableAutomaticBackupDescription": "Utilize esta opção para criar cópias de segurança dos dados do espaço.",
+  "RoomsModule": "Sala de Apoio",
+  "RoomsModuleDescription": "Pode criar uma nova sala especificamente para a cópia de segurança, escolher uma das salas existentes, ou guardar a cópia na sua sala {{roomName}}."
 }

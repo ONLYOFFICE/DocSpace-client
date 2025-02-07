@@ -192,8 +192,6 @@
   "RolesAreSet": "الأدوار التي تم تعيينها بالفعل للمستخدمين المحددين.",
   "RoomQuotaDisabled": "تم تعطيل حصة الغرفة بنجاح.",
   "RoomQuotaEnabled": "تم تفعيل حصة الغرفة بنجاح.",
-  "RoomsModule": "غرفة النسخ الاحتياطي",
-  "RoomsModuleDescription": "يمكنك إنشاء غرفة جديدة خصيصًا للنسخ الاحتياطي ، أو اختيار إحدى الغرف الموجودة ، أو حفظ النسخة في غرفة {{roomName}} الخاصة بهم.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} للغرف",
   "SaveToApply": "انقر على <strong>حفظ</strong> في الأسفل للتطبيق.",
   "SelectedUsersCounter": "المُختار: مستخدمين {{selectedUsers}}/{{totalUsers}}",

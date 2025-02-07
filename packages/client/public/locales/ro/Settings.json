@@ -192,8 +192,6 @@
   "RolesAreSet": "Roluri sunt deja stabilite pentru utilizatorii selectați.",
   "RoomQuotaDisabled": "Cotă de stocare pentru sală a fost dezactivată cu succes.",
   "RoomQuotaEnabled": "Cotă de stocare pentru sală a fost activată cu succes.",
-  "RoomsModule": "Copiere de rezervă a sălii",
-  "RoomsModuleDescription": "Puteți crea o sală nouă destinată special pentru copiere de rezervă, alege una dintre sălile existente sau salva copia în sala {{roomName}}.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} pentru săli",
   "SaveToApply": "Faceți un clic pe butonul <strong>Salvare</strong> în partea de jos pentru a aplica.",
   "SelectedUsersCounter": "Selecționare: {{selectedUsers}}/{{totalUsers}} de utilizatori",

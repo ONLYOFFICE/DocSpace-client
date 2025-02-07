@@ -192,8 +192,6 @@
   "RolesAreSet": "Դերերն արդեն սահմանված են ընտրված օգտատերերի համար:",
   "RoomQuotaDisabled": "Սենյակների սահմանաչափը հաջողությամբ անջատվել է:",
   "RoomQuotaEnabled": "Սենյակի սահմանաչափը հաջողությամբ միացվել է:",
-  "RoomsModule": "Պահուստավորման սենյակ",
-  "RoomsModuleDescription": "Դուք կարող եք ստեղծել նոր սենյակ հատուկ պահուստավորման համար, ընտրել առկա սենյակներից մեկը կամ պատճենը պահել իր {{roomName}} սենյակում:",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} սենյակների համար",
   "SaveToApply": "Կիրառելու համար սեղմեք <strong>Պահպանել</strong> կոճակը ներքևում:",
   "SelectedUsersCounter": "Ընտրված է՝ {{selectedUsers}}/{{totalUsers}} օգտվողներ",

@@ -192,8 +192,6 @@
   "RolesAreSet": "Atlasītajiem lietotājiem jau ir iestatītas lomas.",
   "RoomQuotaDisabled": "Numuru kvota ir veiksmīgi atspējota.",
   "RoomQuotaEnabled": "Telpas kvota ir veiksmīgi iespējota.",
-  "RoomsModule": "Dublējuma telpa",
-  "RoomsModuleDescription": "Jūs varat izveidot jaunu telpu tieši dublēšanai, izvēlēties vienu no esošajām telpām vai saglabāt kopiju savā {{roomName}} telpā.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} telpām",
   "SaveToApply": "Lai lietotu, apakšā noklikšķiniet uz pogas <strong>Saglabāt</strong>.",
   "SelectedUsersCounter": "Atlasīti: {{selectedUsers}}/{{totalUsers}} lietotāji",

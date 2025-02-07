@@ -192,8 +192,6 @@
   "RolesAreSet": "Seçilmiş istifadəçilər üçün əvvəlcədən təyin edilmiş rollar.",
   "RoomQuotaDisabled": "Otaq kvotası uğurla deaktiv edildi.",
   "RoomQuotaEnabled": "Otaq kvotası uğurla aktivləşdirildi.",
-  "RoomsModule": "Ehtiyat otaq",
-  "RoomsModuleDescription": "Yedəkləmə üçün xüsusi olaraq yeni otaq yarada, mövcud otaqlardan birini seçə və ya nüsxəni onların {{roomName}} otağında saxlaya bilərsiniz.",
   "RoomsQuotaLimit": "Otaqlar üçün {{roomsQuotaLimit}}",
   "SaveToApply": "Tətbiq etmək üçün aşağıdakı <strong>Saxla</strong> düyməsini klikləyin.",
   "SelectedUsersCounter": "Seçildi: {{selectedUsers}}/{{totalUsers}} istifadəçi",

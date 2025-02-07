@@ -629,5 +629,7 @@
   "UpgradeToProBannerInformationAboutShort": "Tìm hiểu thêm về Phiên bản {{license}} trên <1> trang web chính thức </1>",
   "AutoBackupDescription": "Tùy chọn Sao lưu tự động được sử dụng để tự động hóa quá trình sao lưu dữ liệu {{productName}} để có thể khôi phục dữ liệu sau này về máy chủ cục bộ.",
   "EnableAutomaticBackup": "Bật sao lưu tự động.",
-  "EnableAutomaticBackupDescription": "Sử dụng tùy chọn này để sao lưu dữ liệu không gian."
+  "EnableAutomaticBackupDescription": "Sử dụng tùy chọn này để sao lưu dữ liệu không gian.",
+  "RoomsModule": "Phòng dự phòng",
+  "RoomsModuleDescription": "Bạn có thể tạo một phòng mới chuyên dùng để sao lưu, chọn một trong các phòng hiện có hoặc lưu bản sao trong phòng {{roomName}} của họ."
 }

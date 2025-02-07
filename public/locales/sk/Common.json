@@ -630,5 +630,7 @@
   "UpgradeToProBannerInformationAboutShort": "Viac informácií o {{license}} Edition nájdete na <1>oficiálnej webovej stránke</1>",
   "AutoBackupDescription": "Možnosť automatického zálohovania sa používa na automatizáciu procesu zálohovania údajov v priestore {{productName}}, aby ste ich mohli neskôr obnoviť na lokálnom serveri.",
   "EnableAutomaticBackup": "Povoliť automatické zálohovanie údajov.",
-  "EnableAutomaticBackupDescription": "Použiť túto voľbu na zálohovanie údajov priestoru."
+  "EnableAutomaticBackupDescription": "Použiť túto voľbu na zálohovanie údajov priestoru.",
+  "RoomsModule": "Zálohovať miestnosť",
+  "RoomsModuleDescription": "Môžete vytvoriť novú miestnosť špeciálne na zálohovanie, vybrať jednu z existujúcich miestností alebo uložiť kópiu do svojej miestnosti {{roomName}}."
 }

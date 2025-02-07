@@ -628,5 +628,7 @@
   "UpgradeToProBannerInstructionReadNow": "اقرا الان",
   "AutoBackupDescription": "يتم استخدام خيار النسخ الاحتياطي التلقائي لأتمتة عملية النسخ الاحتياطي لبيانات {{productName}} لتتمكن من استعادتها لاحقًا إلى خادم محلي.",
   "EnableAutomaticBackup": "قم بتمكين النسخ الاحتياطي التلقائي.",
-  "EnableAutomaticBackupDescription": "استخدم هذا الخيار لعمل نسخة احتياطية من بيانات الاستضافة."
+  "EnableAutomaticBackupDescription": "استخدم هذا الخيار لعمل نسخة احتياطية من بيانات الاستضافة.",
+  "RoomsModule": "غرفة النسخ الاحتياطي",
+  "RoomsModuleDescription": "يمكنك إنشاء غرفة جديدة خصيصًا للنسخ الاحتياطي ، أو اختيار إحدى الغرف الموجودة ، أو حفظ النسخة في غرفة {{roomName}} الخاصة بهم."
 }

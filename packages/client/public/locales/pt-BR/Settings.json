@@ -192,8 +192,6 @@
   "RolesAreSet": "Funções já definidas para os usuários selecionados.",
   "RoomQuotaDisabled": "A cota de salas foi desativada com sucesso.",
   "RoomQuotaEnabled": "A cota da sala foi ativada com sucesso.",
-  "RoomsModule": "Sala de backup",
-  "RoomsModuleDescription": "Você pode criar uma nova sala especificamente para o backup, escolher uma das salas existentes ou salvar a cópia em sua sala {{roomName}}.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} para salas",
   "SaveToApply": "Clique no botão <strong>Salvar</strong> na parte inferior para aplicar.",
   "SelectedUsersCounter": "Selecionado: {{selectedUsers}}/{{totalUsers}} usuários",

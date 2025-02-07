@@ -192,8 +192,6 @@
   "RolesAreSet": "Roly už sú nastavené pre vybraných používateľov.",
   "RoomQuotaDisabled": "Kvóta miestnosti bola úspešne deaktivovaná.",
   "RoomQuotaEnabled": "Kvóta miestnosti bola úspešne aktivovaná.",
-  "RoomsModule": "Zálohovať miestnosť",
-  "RoomsModuleDescription": "Môžete vytvoriť novú miestnosť špeciálne na zálohovanie, vybrať jednu z existujúcich miestností alebo uložiť kópiu do svojej miestnosti {{roomName}}.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} pre miestnosti",
   "SaveToApply": "Kliknite na tlačidlo <strong>Uložiť</strong> v dolnej časti, aby ste uložili nastavenia.",
   "SelectedUsersCounter": "Vybraných: {{selectedUsers}}/{{totalUsers}} používateľov",

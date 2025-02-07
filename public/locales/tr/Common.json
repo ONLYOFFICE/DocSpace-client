@@ -630,5 +630,7 @@
   "UpgradeToProBannerInformationAboutShort": "<1>Resmî web</1> sitesinden {{license}} Edition hakkında daha fazla bilgi edinin",
   "AutoBackupDescription": "Otomatik yedekleme seçeneği, daha sonra yerel bir sunucuya geri yükleyebilmek amacıyla {{productName}} veri yedekleme işlemini otomatikleştirmek için kullanılır.",
   "EnableAutomaticBackup": "Otomatik yedeklemeyi etkinleştir.",
-  "EnableAutomaticBackupDescription": "Alan verilerini yedeklemek için bu seçeneği kullanın."
+  "EnableAutomaticBackupDescription": "Alan verilerini yedeklemek için bu seçeneği kullanın.",
+  "RoomsModule": "Odayı yedekle",
+  "RoomsModuleDescription": "Yedekleme için özel olarak yeni bir oda oluşturabilir, mevcut odalardan birini seçebilir veya kopyayı onların {{roomName}} odasına kaydedebilirsiniz."
 }

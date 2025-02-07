@@ -630,5 +630,7 @@
   "UpgradeToProBannerInformationAboutShort": "Uzziniet vairāk par {{license}} versiju <1>oficiālajā vietnē</1>",
   "AutoBackupDescription": "Automātiskās dublēšanas opcija tiek izmantota, lai automatizētu {{productName}} datu dublēšanas procesu, lai vēlāk to varētu atjaunot lokālajā serverī.",
   "EnableAutomaticBackup": "Iespējojiet automātisko dublēšanu.",
-  "EnableAutomaticBackupDescription": "Izmantojiet šo opciju, lai dublētu portāla datus."
+  "EnableAutomaticBackupDescription": "Izmantojiet šo opciju, lai dublētu portāla datus.",
+  "RoomsModule": "Dublējuma telpa",
+  "RoomsModuleDescription": "Jūs varat izveidot jaunu telpu tieši dublēšanai, izvēlēties vienu no esošajām telpām vai saglabāt kopiju savā {{roomName}} telpā."
 }

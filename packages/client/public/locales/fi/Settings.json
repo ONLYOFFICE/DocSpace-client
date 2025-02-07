@@ -192,8 +192,6 @@
   "RolesAreSet": "Valituille käyttäjille on jo asetettu roolit.",
   "RoomQuotaDisabled": "Huoneen kiintiö on onnistuneesti poistettu käytöstä.",
   "RoomQuotaEnabled": "Huoneen kiintiö on onnistuneesti otettu käyttöön.",
-  "RoomsModule": "Varmuuskopioi huone",
-  "RoomsModuleDescription": "Voit luoda uuden huoneen erityisesti varmuuskopiolle, valita yhden olemassa olevista huoneista, tai tallentaa kopioin heidän {{roomName}} huoneeseen.",
   "RoomsQuotaLimit": "Huoneiden {{roomsQuotaLimit}}",
   "SaveToApply": "Klikkaa alaosan <strong>Tallenna</strong>-painiketta asettaaksesi.",
   "SelectedUsersCounter": "Valitut: {{selectedUsers}}/{{totalUsers}} käyttäjää",

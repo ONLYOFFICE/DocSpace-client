@@ -631,5 +631,7 @@
   "UpgradeToProBannerInformationAboutShort": "Ulteriori informazioni su {{license}} Edition sul sito <1>Web ufficiale</1>",
   "AutoBackupDescription": "L'opzione Backup automatico viene utilizzata per automatizzare il processo di backup dei dati di {{productName}} per poterli ripristinare successivamente su un server locale.",
   "EnableAutomaticBackup": "Attivare backup automatico.",
-  "EnableAutomaticBackupDescription": "Utilizza questa opzione per eseguire il backup dei dati dello spazio."
+  "EnableAutomaticBackupDescription": "Utilizza questa opzione per eseguire il backup dei dati dello spazio.",
+  "RoomsModule": "Stanza di backup",
+  "RoomsModuleDescription": "Puoi creare una nuova stanza appositamente per il backup, scegliere una delle stanze esistenti o salvare la copia nella loro stanza {{roomName}}."
 }

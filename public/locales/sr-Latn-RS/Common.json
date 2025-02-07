@@ -631,5 +631,7 @@
   "UpgradeToProBannerInformationAboutShort": "Saznajte više o {{license}} izdanju na <1>zvaničnom veb-sajtu</1>",
   "AutoBackupDescription": "Opcija automatske sigurnosne kopije se koristi kako bi se automatizovao proces sigurnosne kopije podataka {{productName}}-a kako bi se kasnije mogao povratiti na lokalni server.",
   "EnableAutomaticBackup": "Omogući automatsku rezervnu kopiju.",
-  "EnableAutomaticBackupDescription": "Koristite ovu opciju da napravite rezervnu kopiju podataka o prostoru."
+  "EnableAutomaticBackupDescription": "Koristite ovu opciju da napravite rezervnu kopiju podataka o prostoru.",
+  "RoomsModule": "Soba za rezervne kopije",
+  "RoomsModuleDescription": "Možete kreirati novu sobu posebno za rezervnu kopiju, izabrati jednu od postojećih soba ili sačuvati kopiju u njihovoj {{roomName}} sobi."
 }

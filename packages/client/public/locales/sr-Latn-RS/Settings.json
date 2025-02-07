@@ -192,8 +192,6 @@
   "RolesAreSet": "Uloge su već postavljene za odabrane korisnike.",
   "RoomQuotaDisabled": "Kvota prostorije je uspešno onemogućena.",
   "RoomQuotaEnabled": "Kvota prostorije je uspešno omogućena.",
-  "RoomsModule": "Soba za rezervne kopije",
-  "RoomsModuleDescription": "Možete kreirati novu sobu posebno za rezervnu kopiju, izabrati jednu od postojećih soba ili sačuvati kopiju u njihovoj {{roomName}} sobi.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} za prostorije",
   "SaveToApply": "Kliknite na <strong>Sačuvaj</strong> dugme na dnu da primenite.",
   "SelectedUsersCounter": "Odabrani: {{selectedUsers}}/{{totalUsers}} korisnici",

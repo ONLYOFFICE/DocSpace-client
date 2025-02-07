@@ -193,8 +193,6 @@
   "RolesAreSet": "已为选定用户设置角色。",
   "RoomQuotaDisabled": "已成功禁用房间配额",
   "RoomQuotaEnabled": "已成功启用房间配额",
-  "RoomsModule": "备份房间",
-  "RoomsModuleDescription": "您可以专门为一个备份创建一个新房间，选择现有的一个房间，或将副本保存在选定{{roomName}}夹中。",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}}的房间限制",
   "SaveToApply": "点击底部的<strong>保存</strong>按钮，使其生效。",
   "SelectedUsersCounter": "已选择：{{selectedUsers}}/{{totalUsers}} 位用户",

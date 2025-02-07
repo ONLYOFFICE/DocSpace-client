@@ -192,8 +192,6 @@
   "RolesAreSet": "Roles already set for the selected users.",
   "RoomQuotaDisabled": "Room quota has been successfully disabled.",
   "RoomQuotaEnabled": "Room quota has been successfully enabled.",
-  "RoomsModule": "Backup room",
-  "RoomsModuleDescription": "You may create a new room specifically for the backup, choose one of the existing rooms, or save the copy in their {{roomName}} room.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} for rooms",
   "SaveToApply": "Click the <strong>Save</strong> button at the bottom to apply.",
   "SelectedUsersCounter": "Selected: {{selectedUsers}}/{{totalUsers}} users",

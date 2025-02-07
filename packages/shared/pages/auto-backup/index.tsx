@@ -456,13 +456,13 @@ const AutomaticBackup = ({
               key={0}
               {...commonRadioButtonProps}
               id="backup-room"
-              label={t("RoomsModule")}
+              label={t("Common:RoomsModule")}
               name={`${BackupStorageType.DocumentModuleType}`}
               isChecked={isCheckedDocuments}
               isDisabled={isLoadingData}
             />
             <Text className="backup-description">
-              <Trans t={t} i18nKey="RoomsModuleDescription" ns="Settings">
+              <Trans t={t} i18nKey="RoomsModuleDescription" ns="Common">
                 {{ roomName }}
               </Trans>
             </Text>

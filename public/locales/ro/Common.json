@@ -631,5 +631,7 @@
   "UpgradeToProBannerInformationAboutShort": "Aflați mai multe despre Ediția {{license}} pe  <1>pagina oficială</1>",
   "AutoBackupDescription": "Opțiunea Copiere de rezervă automată permite automatizarea procesului de copiere automată a datelor de pe spațiu {{productName}} pentru a fi restaurate ulterior pe un server local.",
   "EnableAutomaticBackup": "Activează copiere de rezervă automată.",
-  "EnableAutomaticBackupDescription": "Utilizați această opțiune pentru a crea o copie de rezervă a datelor din portal."
+  "EnableAutomaticBackupDescription": "Utilizați această opțiune pentru a crea o copie de rezervă a datelor din portal.",
+  "RoomsModule": "Copiere de rezervă a sălii",
+  "RoomsModuleDescription": "Puteți crea o sală nouă destinată special pentru copiere de rezervă, alege una dintre sălile existente sau salva copia în sala {{roomName}}."
 }

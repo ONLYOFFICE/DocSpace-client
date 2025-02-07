@@ -192,8 +192,6 @@
   "RolesAreSet": "Die Rollen für die ausgewählten Benutzer sind bereits festgelegt.",
   "RoomQuotaDisabled": "Raumquote wurde erfolgreich deaktiviert.",
   "RoomQuotaEnabled": "Raumquote wurde erfolgreich aktiviert.",
-  "RoomsModule": "Ersatzraum",
-  "RoomsModuleDescription": "Sie können einen neuen Raum speziell für die Sicherung erstellen, einen der vorhandenen Räume wählen oder die Kopie in ihrem {{roomName}}-Raum speichern.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} für Räume",
   "SaveToApply": "Klicken Sie auf die Schaltfläche <strong>Speichern</strong> am Ende der Seite, um die Einstellungen zu übernehmen.",
   "SelectedUsersCounter": "Ausgewählt: {{selectedUsers}}/{{totalUsers}} Benutzer",

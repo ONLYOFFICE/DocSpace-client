@@ -192,8 +192,6 @@
   "RolesAreSet": "Ruoli già impostati per gli utenti selezionati.",
   "RoomQuotaDisabled": "La quota della stanza è stata disattivata con successo.",
   "RoomQuotaEnabled": "La quota della stanza è stata attivata con successo.",
-  "RoomsModule": "Stanza di backup",
-  "RoomsModuleDescription": "Puoi creare una nuova stanza appositamente per il backup, scegliere una delle stanze esistenti o salvare la copia nella loro stanza {{roomName}}.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} per le stanze",
   "SaveToApply": "Fai clic sul pulsante <strong>Salva</strong> in basso per applicare",
   "SelectedUsersCounter": "Selezionati: {{selectedUsers}}/{{totalUsers}} utenti",

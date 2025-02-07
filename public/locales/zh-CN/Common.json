@@ -632,5 +632,7 @@
   "UpgradeToProBannerInformationAboutShort": "要了解有关 {{license}} 版本的更多信息，请访问<1>官方网站</1>",
   "AutoBackupDescription": "自动备份选项用于自动执行{{productName}}数据备份过程，以便稍后将其恢复到本地服务器。",
   "EnableAutomaticBackup": "启用自动备份",
-  "EnableAutomaticBackupDescription": "使用该选项备份协作空间的数据。"
+  "EnableAutomaticBackupDescription": "使用该选项备份协作空间的数据。",
+  "RoomsModule": "备份房间",
+  "RoomsModuleDescription": "您可以专门为一个备份创建一个新房间，选择现有的一个房间，或将副本保存在选定{{roomName}}夹中。"
 }

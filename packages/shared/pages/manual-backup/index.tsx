@@ -343,7 +343,7 @@ const ManualBackup = ({
       <StyledModules isDisabled={isNotPaidPeriod}>
         <RadioButton
           id="backup-room"
-          label={t("RoomsModule")}
+          label={t("Common:RoomsModule")}
           name="isCheckedDocuments"
           key={1}
           isChecked={isCheckedDocuments}
@@ -351,7 +351,7 @@ const ManualBackup = ({
           {...commonRadioButtonProps}
         />
         <Text className="backup-description module-documents">
-          <Trans t={t} i18nKey="RoomsModuleDescription" ns="Settings">
+          <Trans t={t} i18nKey="RoomsModuleDescription" ns="Common">
             {{ roomName }}
           </Trans>
         </Text>

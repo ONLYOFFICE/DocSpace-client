@@ -192,8 +192,6 @@
   "RolesAreSet": "Roles ya establecidos para los usuarios seleccionados.",
   "RoomQuotaDisabled": "La cuota de sala se ha desactivado correctamente.",
   "RoomQuotaEnabled": "La cuota de sala se ha activado correctamente.",
-  "RoomsModule": "Sala de copia de seguridad",
-  "RoomsModuleDescription": "Puede crear una nueva sala específicamente para la copia de seguridad, elegir una de las salas existentes o guardar la copia en su sala {{roomName}}.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} para las salas",
   "SaveToApply": "Haga clic en el botón <strong>Guardar</strong> de la parte inferior para aplicar.",
   "SelectedUsersCounter": "Seleccionados: {{selectedUsers}}/{{totalUsers}} usuarios",

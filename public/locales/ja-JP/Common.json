@@ -631,5 +631,7 @@
   "UpgradeToProBannerInformationAboutShort": "{{license}}版の詳細は<1>公式サイト</1>でご確認ください。",
   "AutoBackupDescription": "自動バックアップオプションは、{{productName}}データのバックアッププロセスを自動化し、後でローカルサーバーに復元できるようにするためのオプションです。",
   "EnableAutomaticBackup": "自動バックアップを有効にする",
-  "EnableAutomaticBackupDescription": "スペースのデータをバックアップする場合は、このオプションを使用してください。"
+  "EnableAutomaticBackupDescription": "スペースのデータをバックアップする場合は、このオプションを使用してください。",
+  "RoomsModule": "ルームをバックアップする",
+  "RoomsModuleDescription": "バックアップのために特別に新しいルームを作るか、既存のルームの一つを選ぶか、その {{roomName}} ルムにコピーを保存することができます。"
 }

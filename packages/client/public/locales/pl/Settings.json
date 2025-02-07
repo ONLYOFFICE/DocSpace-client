@@ -192,8 +192,6 @@
   "RolesAreSet": "Role zostały już ustawione dla wybranych użytkowników.",
   "RoomQuotaDisabled": "Limit pokoi został wyłączony.",
   "RoomQuotaEnabled": "Limit pokoi został włączony.",
-  "RoomsModule": "Stwórz kopię zapasową pokoju",
-  "RoomsModuleDescription": "Możesz utworzyć nowy pokój specjalnie do kopii zapasowej, wybrać jeden z istniejących pokoi lub zapisać kopię w jej pokoju {{roomName}}.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} dla pokoi",
   "SaveToApply": "Aby zastosować wprowadzone zmiany, kliknij przycisk <strong>Zapisz</strong> u dołu sekcji.",
   "SelectedUsersCounter": "Wybrano: {{selectedUsers}}/{{totalUsers}} użytkowników",

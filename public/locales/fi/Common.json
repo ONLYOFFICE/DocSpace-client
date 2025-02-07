@@ -630,5 +630,7 @@
   "UpgradeToProBannerInformationAboutShort": "Lue lisää {{license}} -versiosta <1>official website</1>",
   "AutoBackupDescription": "Automaattista varmuuskopiointia käytetään automatisoimaan {{productName}} tietojen varmuuskopiointiprosessi, jotta se palauttaa myöhemmin paikalliselle palvelimelle. ",
   "EnableAutomaticBackup": "Ota automaattinen varmuuskopiointi käyttöön.",
-  "EnableAutomaticBackupDescription": "Tämän vaihtoehdon avulla voit varmuuskopioida tilan tiedot."
+  "EnableAutomaticBackupDescription": "Tämän vaihtoehdon avulla voit varmuuskopioida tilan tiedot.",
+  "RoomsModule": "Varmuuskopioi huone",
+  "RoomsModuleDescription": "Voit luoda uuden huoneen erityisesti varmuuskopiolle, valita yhden olemassa olevista huoneista, tai tallentaa kopioin heidän {{roomName}} huoneeseen."
 }

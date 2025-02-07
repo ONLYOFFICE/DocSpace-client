@@ -192,8 +192,6 @@
   "RolesAreSet": "選択したユーザーには既に役割が設定されています。",
   "RoomQuotaDisabled": "ルーム容量制限は正常に無効化されました。",
   "RoomQuotaEnabled": "ルーム容量制限が正常に有効化されました。",
-  "RoomsModule": "ルームをバックアップする",
-  "RoomsModuleDescription": "バックアップのために特別に新しいルームを作るか、既存のルームの一つを選ぶか、その {{roomName}} ルムにコピーを保存することができます。",
   "RoomsQuotaLimit": "ルームごとに{{roomsQuotaLimit}} ",
   "SaveToApply": "一番下の<strong>保存</strong>ボタンをクリックして適用してください。",
   "SelectedUsersCounter": "選択済み：{{selectedUsers}}/{{totalUsers}} ユーザー",

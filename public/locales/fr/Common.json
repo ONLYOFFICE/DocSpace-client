@@ -631,5 +631,7 @@
   "UpgradeToProBannerInformationAboutShort": "En savoir plus à propos d'{{license}} Edition sur le <1>site web officiel</1>",
   "AutoBackupDescription": "L'option Sauvegarde automatique est utilisée pour automatiser le processus de sauvegarde des données de {{productName}} afin de pouvoir les restaurer ultérieurement sur un serveur local.",
   "EnableAutomaticBackup": "Activer la sauvegarde automatique.",
-  "EnableAutomaticBackupDescription": "Utilisez cette option pour sauvegarder les données de l’espace."
+  "EnableAutomaticBackupDescription": "Utilisez cette option pour sauvegarder les données de l’espace.",
+  "RoomsModule": "Salle de sauvegarde",
+  "RoomsModuleDescription": "Vous pouvez créer une nouvelle salle spécialement pour la sauvegarde, choisir l’une des salles existantes ou enregistrer la copie dans la salle {{roomName}}."
 }

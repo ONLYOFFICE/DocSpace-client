@@ -205,7 +205,11 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
       className="backup_radio-button"
       options={[
         { id: "local-file", value: LOCAL_FILE, label: t("LocalFile") },
-        { id: "backup-room", value: BACKUP_ROOM, label: t("RoomsModule") },
+        {
+          id: "backup-room",
+          value: BACKUP_ROOM,
+          label: t("Common:RoomsModule"),
+        },
         {
           id: "third-party-resource",
           value: DISK_SPACE,

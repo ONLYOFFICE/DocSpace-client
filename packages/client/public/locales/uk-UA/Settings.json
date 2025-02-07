@@ -192,8 +192,6 @@
   "RolesAreSet": "Для вибраних користувачів уже встановлено ролі.",
   "RoomQuotaDisabled": "Квоту кімнати успішно вимкнено.",
   "RoomQuotaEnabled": "Квоту кімнати успішно ввімкнено.",
-  "RoomsModule": "Резервна кімната",
-  "RoomsModuleDescription": "Ви можете створити нову кімнату спеціально для резервного копіювання, вибрати одну з наявних кімнат або зберегти копію в їхній кімнаті {{roomName}}.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} для кімнат",
   "SaveToApply": "Натисніть кнопку <strong>Зберегти</strong> внизу, щоб застосувати.",
   "SelectedUsersCounter": "Вибрано користувачів: {{selectedUsers}}/{{totalUsers}}",

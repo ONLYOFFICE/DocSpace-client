@@ -192,8 +192,6 @@
   "RolesAreSet": "Role již byly nastaveny pro vybrané uživatele.",
   "RoomQuotaDisabled": "Kvóty místností byly úspěšně zakázány.",
   "RoomQuotaEnabled": "Kvóty místností byly úspěšně povoleny.",
-  "RoomsModule": "Záložní místnost",
-  "RoomsModuleDescription": "Můžete vytvořit novou místnost speciálně pro zálohu, vybrat jednu z existujících místností nebo uložit kopii do jejich místnosti {{roomName}}.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} pro místnosti",
   "SaveToApply": "Kliknutím na tlačítko <strong>Uložit</strong> v dolní části proveďte aplikaci.",
   "SelectedUsersCounter": "Vybráno: {{selectedUsers}}/{{totalUsers}} uživatelů",

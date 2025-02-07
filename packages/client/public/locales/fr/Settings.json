@@ -192,8 +192,6 @@
   "RolesAreSet": "Rôles déjà définis pour les utilisateurs sélectionnés.",
   "RoomQuotaDisabled": "Le quota de salle a été désactivé avec succès.",
   "RoomQuotaEnabled": "Le quota de salle a été activé avec succès.",
-  "RoomsModule": "Salle de sauvegarde",
-  "RoomsModuleDescription": "Vous pouvez créer une nouvelle salle spécialement pour la sauvegarde, choisir l’une des salles existantes ou enregistrer la copie dans la salle {{roomName}}.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} pour les salles",
   "SaveToApply": "Cliquez sur le bouton <strong>Enregistrer</strong> en bas pour appliquer.",
   "SelectedUsersCounter": "Sélection: {{selectedUsers}}/{{totalUsers}} utilisateurs",

@@ -192,8 +192,6 @@
   "RolesAreSet": "Ролите вече са зададени за избраните потребители.",
   "RoomQuotaDisabled": "Квотата за стаята е деактивирана успешно.",
   "RoomQuotaEnabled": "Квотата за стаята е активирана успешно.",
-  "RoomsModule": "Резервна стая",
-  "RoomsModuleDescription": "Можете да създадете нова стая специално за резервното копие, да изберете една от съществуващите стаи или да запазите копието в тяхната стая {{roomName}}.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} за стаи",
   "SaveToApply": "Натиснете бутона <strong>Запази</strong> най-долу, за да приложите.",
   "SelectedUsersCounter": "Избрани: {{selectedUsers}}/{{totalUsers}} потребители",

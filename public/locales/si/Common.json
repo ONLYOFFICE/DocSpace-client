@@ -486,5 +486,7 @@
   "UpgradeToProBannerInstructionReadNow": "දැන් කියවන්න",
   "AutoBackupDescription": "පසුව ස්ථානීය සේවාදායකයකට ප්‍රත්‍යර්පණය උදෙසා ස්වයංක්‍රීය උපස්ථ විකල්පය {{productName}} දත්ත උපස්ථ ක්‍රියාවලිය ස්වයංක්‍රියනයට යොදා ගැනෙයි.",
   "EnableAutomaticBackup": "ස්වයංක්‍රීය උපස්ථය සබල කරන්න",
-  "EnableAutomaticBackupDescription": "අවකාශයේ දත්ත උපස්ථ කිරීමට මෙම විකල්පය භාවිතා කරන්න."
+  "EnableAutomaticBackupDescription": "අවකාශයේ දත්ත උපස්ථ කිරීමට මෙම විකල්පය භාවිතා කරන්න.",
+  "RoomsModule": "උපස්ථ කාමරය",
+  "RoomsModuleDescription": "ඔබට උපස්ථය සඳහා විශේෂයෙන් නව කාමරයක් සෑදීමට, පවතින කාමර වලින් එකක් තෝරා ගැනීමට හෝ පිටපත {{roomName}} කාමරයේ සුරැකීමට හැකිය."
 }

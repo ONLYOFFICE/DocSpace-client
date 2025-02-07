@@ -192,8 +192,6 @@
   "RolesAreSet": "Vai trò đã được đặt cho người dùng đã chọn.",
   "RoomQuotaDisabled": "Hạn mức phòng đã bị vô hiệu hóa thành công.",
   "RoomQuotaEnabled": "Hạn mức phòng đã được kích hoạt thành công.",
-  "RoomsModule": "Phòng dự phòng",
-  "RoomsModuleDescription": "Bạn có thể tạo một phòng mới chuyên dùng để sao lưu, chọn một trong các phòng hiện có hoặc lưu bản sao trong phòng {{roomName}} của họ.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} cho phòng",
   "SaveToApply": "Nhấp vào nút <strong>Lưu</strong> ở dưới cùng để áp dụng.",
   "SelectedUsersCounter": "Đã chọn:{{selectedUsers}}/{{totalUsers}}người dùng",

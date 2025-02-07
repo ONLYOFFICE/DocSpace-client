@@ -630,5 +630,7 @@
   "UpgradeToProBannerInformationAboutShort": "<1>Rəsmi vebsaytda</1> {{license}} Edition haqqında ətraflı məlumat əldə edin",
   "AutoBackupDescription": "Avtomatik ehtiyat nüsxəsi seçimi {{productName}} məlumatların ehtiyat nüsxələmə prosesini avtomatlaşdırmaq üçün istifadə olunur ki, sonra yerli serverə bərpa olunsun.",
   "EnableAutomaticBackup": "Avtomatik yedəkləməni aktivləşdirin.",
-  "EnableAutomaticBackupDescription": "Sahə məlumatlarını yedəkləmək üçün bu seçimdən istifadə edin."
+  "EnableAutomaticBackupDescription": "Sahə məlumatlarını yedəkləmək üçün bu seçimdən istifadə edin.",
+  "RoomsModule": "Ehtiyat otaq",
+  "RoomsModuleDescription": "Yedəkləmə üçün xüsusi olaraq yeni otaq yarada, mövcud otaqlardan birini seçə və ya nüsxəni onların {{roomName}} otağında saxlaya bilərsiniz."
 }

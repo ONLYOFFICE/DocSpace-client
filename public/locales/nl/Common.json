@@ -630,5 +630,7 @@
   "UpgradeToProBannerInformationAboutShort": "Meer informatie over {{license}} Editie op de <1>officiële website</1>",
   "AutoBackupDescription": "De optie Automatische back-up wordt gebruikt om het back-upproces van {{productName}} gegevens te automatiseren, zodat u deze later op een lokale server kunt terugzetten.",
   "EnableAutomaticBackup": "Automatische back-up inschakelen.",
-  "EnableAutomaticBackupDescription": "Gebruik deze optie om een back-up te maken van de ruimtegegevens."
+  "EnableAutomaticBackupDescription": "Gebruik deze optie om een back-up te maken van de ruimtegegevens.",
+  "RoomsModule": "Backup kamer",
+  "RoomsModuleDescription": "U kunt een nieuwe kamer aanmaken speciaal voor de back-up, een van de bestaande kamers kiezen, of de kopie opslaan in hun {{roomName}} kamer."
 }

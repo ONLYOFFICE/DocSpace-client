@@ -192,8 +192,6 @@
   "RolesAreSet": "Seçilen kullanıcılar için roller zaten ayarlanmış.",
   "RoomQuotaDisabled": "Oda kotası başarıyla devre dışı bırakıldı.",
   "RoomQuotaEnabled": "Oda kotası başarıyla etkinleştirildi.",
-  "RoomsModule": "Odayı yedekle",
-  "RoomsModuleDescription": "Yedekleme için özel olarak yeni bir oda oluşturabilir, mevcut odalardan birini seçebilir veya kopyayı onların {{roomName}} odasına kaydedebilirsiniz.",
   "RoomsQuotaLimit": "Odalar için {{roomsQuotaLimit}}",
   "SaveToApply": "Uygulamak için alttaki <strong>Kaydet</strong> düğmesine tıklayın.",
   "SelectedUsersCounter": "Seçilenler: {{selectedUsers}}/{{totalUsers}} kullanıcı",

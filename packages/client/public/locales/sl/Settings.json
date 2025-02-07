@@ -192,8 +192,6 @@
   "RolesAreSet": "Vloge so že nastavljene za izbrane uporabnike.",
   "RoomQuotaDisabled": "Kvota sobe je bila uspešno onemogočena.",
   "RoomQuotaEnabled": "Kvota sobe je bila uspešno omogočena.",
-  "RoomsModule": "Varnostno kopiranje sobe",
-  "RoomsModuleDescription": "Ustvarite lahko novo sobo posebej za varnostno kopijo, izberete eno od obstoječih sob ali shranite kopijo v njihovo {{roomName}} sobo.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} za sobe",
   "SaveToApply": "Klikni gumb <strong>Shrani</strong> na dnu za prijavo.",
   "SelectedUsersCounter": "Izbranih: {{selectedUsers}}/{{totalUsers}} uporabnikov",

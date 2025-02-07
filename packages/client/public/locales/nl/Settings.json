@@ -192,8 +192,6 @@
   "RolesAreSet": "Rollen zijn al ingesteld voor de geselecteerde gebruikers.",
   "RoomQuotaDisabled": "Kamerquota is met succes uitgeschakeld.",
   "RoomQuotaEnabled": "Kamerquota is met succes ingeschakeld.",
-  "RoomsModule": "Backup kamer",
-  "RoomsModuleDescription": "U kunt een nieuwe kamer aanmaken speciaal voor de back-up, een van de bestaande kamers kiezen, of de kopie opslaan in hun {{roomName}} kamer.",
   "RoomsQuotaLimit": "{{roomsQuotaLimit}} voor kamers",
   "SaveToApply": "Klik op de knop <strong>Opslaan</strong> onderaan om toe te passen.",
   "SelectedUsersCounter": "Geselecteerd: {{selectedUsers}}/{{totalUsers}} gebruikers",

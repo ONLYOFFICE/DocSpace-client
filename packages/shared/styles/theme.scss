@@ -1402,6 +1402,7 @@
   --input-error-border: #{$light-error-status};
   --input-error-border-hover: #{$light-error-status};
   --input-error-border-focus: #{$light-error-status};
+  --input-error-color: #{$light-error-status};
 
   // Warning state
   --input-warning-border: #{$light-status-warning};
@@ -1462,6 +1463,7 @@
   --input-error-border: #{$dark-error-status};
   --input-error-border-hover: #{$dark-error-status};
   --input-error-border-focus: #{$dark-error-status};
+  --input-error-color: #{$dark-error-status};
 
   --input-warning-border: #{$dark-status-warning};
   --input-warning-border-hover: #{$dark-status-warning};

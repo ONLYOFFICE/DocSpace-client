@@ -1889,7 +1889,7 @@ class FilesActionStore {
       successRemoveRooms: t("Files:RoomsRemoved"),
     };
 
-    this.deleteItemAction(items, translations, null, null, true);
+    this.deleteItemAction(items, "", translations, null, null, true);
   };
 
   deleteRoomsAction = async (itemId, translations) => {

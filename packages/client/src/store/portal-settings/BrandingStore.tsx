@@ -27,10 +27,11 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import {
-  getLogoText as getWhiteLabelText,
-  getIsDefaultWhiteLabel,
-  setWhiteLabelSettings,
-  restoreWhiteLabelSettings,
+  getBrandName as getWhiteLabelBrandName,
+  setBrandName,
+  getIsDefaultWhiteLabelLogos,
+  setWhiteLabelLogos,
+  restoreWhiteLabelLogos,
 } from "@docspace/shared/api/settings";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { isManagement } from "@docspace/shared/utils/common";
@@ -44,11 +45,11 @@ class BrandingStore {
 
   logoUrls: ILogo[] = [];
 
-  logoText = "";
+  brandName = "";
 
-  defaultLogoText = "";
+  defaultBrandName = "";
 
-  isDefaultWhiteLabel = false;
+  isDefaultLogos = false;
 
   settingsStore: SettingsStore = {} as SettingsStore;
 
@@ -65,20 +66,27 @@ class BrandingStore {
     this.isLoadedCompanyInfoSettingsData = isLoaded;
   };
 
+  setBrandName = (text: string) => {
+    this.brandName = text;
+  };
+
+  setDefaultBrandName = (text: string) => {
+    this.defaultBrandName = text;
+  };
+
+  getBrandName = async () => {
+    const res = (await getWhiteLabelBrandName(isManagement())) as string;
+    this.setBrandName(res);
+    this.setDefaultBrandName(res);
+    return res;
+  };
+
   setLogoUrls = (urls: ILogo[]) => {
     this.logoUrls = urls;
   };
 
-  setLogoText = (text: string) => {
-    this.logoText = text;
-  };
-
-  setDefaultLogoText = (text: string) => {
-    this.defaultLogoText = text;
-  };
-
-  setIsDefaultWhiteLabel = (isDefault: boolean) => {
-    this.isDefaultWhiteLabel = isDefault;
+  setIsDefaultLogos = (isDefault: boolean) => {
+    this.isDefaultLogos = isDefault;
   };
 
   getLogoUrls = async () => {
@@ -88,17 +96,10 @@ class BrandingStore {
     return logos;
   };
 
-  getLogoText = async () => {
-    const res = (await getWhiteLabelText(isManagement())) as string;
-    this.setLogoText(res);
-    this.setDefaultLogoText(res);
-    return res;
-  };
-
-  getIsDefault = async () => {
-    const res = await getIsDefaultWhiteLabel(isManagement());
+  getIsDefaultLogos = async () => {
+    const res = await getIsDefaultWhiteLabelLogos(isManagement());
     const isDefaultWhiteLabel = res.map((item) => item.default).includes(false);
-    this.setIsDefaultWhiteLabel(isDefaultWhiteLabel);
+    this.setIsDefaultLogos(isDefaultWhiteLabel);
   };
 
   applyNewLogos = (logos: ILogo[]) => {
@@ -118,31 +119,35 @@ class BrandingStore {
     });
   };
 
-  saveWhiteLabelSettings = async (data) => {
-    await setWhiteLabelSettings(data, isManagement());
+  saveBrandName = async (data) => {
+    await setBrandName(data, isManagement());
+    this.settingsStore.getPortalSettings(); // ??
+    this.getBrandName();
+  };
+
+  saveWhiteLabelLogos = async (data) => {
+    await setWhiteLabelLogos(data, isManagement());
     this.settingsStore.getPortalSettings();
     const logos = await this.getLogoUrls();
-    this.getIsDefault();
-    this.getLogoText();
+    this.getIsDefaultLogos();
     this.applyNewLogos(logos);
   };
 
-  resetWhiteLabelSettings = async () => {
-    await restoreWhiteLabelSettings(isManagement());
+  resetWhiteLabelLogos = async () => {
+    await restoreWhiteLabelLogos(isManagement());
     const logos = await this.getLogoUrls();
-    this.getIsDefault();
-    this.getLogoText();
+    this.getIsDefaultLogos();
     this.applyNewLogos(logos);
   };
 
   initWhiteLabel = () => {
     this.getLogoUrls();
-    this.getLogoText();
-    this.getIsDefault();
+    this.getBrandName();
+    this.getIsDefaultLogos();
   };
 
   get isWhiteLabelLoaded() {
-    return this.logoUrls.length > 0 && this.logoText !== undefined;
+    return this.logoUrls.length > 0 && this.brandName !== undefined;
   }
 }
 

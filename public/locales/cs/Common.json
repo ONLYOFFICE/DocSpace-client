@@ -627,5 +627,6 @@
   "UpgradeToProBannerInstructionItemWindows": "Návod pro systém Windows.",
   "UpgradeToProBannerInstructionNote": "Upozorňujeme, že během upgradu nebudou editory dostupné. Doporučujeme také, abyste před zahájením <1>zálohovali svá data</1>.",
   "UpgradeToProBannerInstructionReadNow": "Přečtěte si nyní",
-  "UpgradeToProBannerInformationAboutShort": "Více informací o edici {{license}} na <1>oficiálních stránkách</1>"
+  "UpgradeToProBannerInformationAboutShort": "Více informací o edici {{license}} na <1>oficiálních stránkách</1>",
+  "AutoBackupDescription": "Možnost Automatické zálohování slouží k automatizaci procesu zálohování dat {{productName}}, aby bylo možné je později obnovit na místním serveru."
 }

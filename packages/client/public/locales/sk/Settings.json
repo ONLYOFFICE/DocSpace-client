@@ -31,7 +31,6 @@
   "AuditSubheader": "Podsekcia vám umožňuje prezerať zoznam posledných zmien (vytvorenie, úprava, odstránenie atď.), ktoré vykonali používatelia v objektoch (miestnosti, príležitosti, súbory atď.) vo vašom {{productName}}.",
   "AuditTrailNav": "Auditné záznamy",
   "AutoBackup": "Automatická záloha",
-  "AutoBackupDescription": "Možnosť automatického zálohovania sa používa na automatizáciu procesu zálohovania údajov v priestore {{productName}}, aby ste ich mohli neskôr obnoviť na lokálnom serveri.",
   "AutoSavePeriod": "Časový interval automatického ukladania",
   "AutoSavePeriodHelp": "Čas zobrazený nižšie je uvedený podľa časového pásma nastaveného na {{productName}}.",
   "Backup": "Záloha",

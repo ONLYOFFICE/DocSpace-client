@@ -628,5 +628,6 @@
   "UpgradeToProBannerInstructionItemWindows": "Anleitung für Windows.",
   "UpgradeToProBannerInstructionNote": "Bitte beachten Sie, dass während der Aktualisierung die Editoren unverfügbar werden. Wir empfehlen auch, dass Sie ein <1>Backup Ihrer Daten</1> zuvor machen.",
   "UpgradeToProBannerInstructionReadNow": "Jetzt lesen",
-  "UpgradeToProBannerInformationAboutShort": "Mehr Informationen zu {{license}} Edition auf der <1>offiziellen Website</1>"
+  "UpgradeToProBannerInformationAboutShort": "Mehr Informationen zu {{license}} Edition auf der <1>offiziellen Website</1>",
+  "AutoBackupDescription": "Die Option Automatisches Backup wird verwendet, um das Backup der {{productName}}-Daten zu automatisieren, um sie später auf einem lokalen Server wiederherstellen zu können."
 }

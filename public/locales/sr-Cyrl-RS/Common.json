@@ -628,5 +628,6 @@
   "UpgradeToProBannerInstructionItemWindows": "Windows упутство.",
   "UpgradeToProBannerInstructionNote": "Молим обратите пажњу да ће уређивачи бити недоступни у току надоградње. Такође препоручујемо да <1>направите резервну копију ваших података</1> пре него што почнете.",
   "UpgradeToProBannerInstructionReadNow": "Прочитај сада",
-  "UpgradeToProBannerInformationAboutShort": "Сазнајте више о {{license}} издању <1>на званичном веб-сајту</1>"
+  "UpgradeToProBannerInformationAboutShort": "Сазнајте више о {{license}} издању <1>на званичном веб-сајту</1>",
+  "AutoBackupDescription": "Опција аутоматске сигурносне копије се користи како би се аутоматизовао процес сигурносне копије података {{productName}}-а како би се касније могао повратити на локални сервер."
 }

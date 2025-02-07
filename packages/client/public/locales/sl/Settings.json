@@ -31,7 +31,6 @@
   "AuditSubheader": "Podrazdelek vam omogoča brskanje po seznamu zadnjih sprememb (ustvarjanje, spreminjanje, brisanje itd.), ki so jih uporabniki naredili za entitete (sobe, priložnosti, datoteke itd.) v vašem prostoru {{productName}}.",
   "AuditTrailNav": "Revizijska pot",
   "AutoBackup": "Samodejno varnostno kopiranje",
-  "AutoBackupDescription": "Možnost samodejnega varnostnega kopiranja se uporablja za avtomatizacijo postopka varnostnega kopiranja podatkov {{productName}}, da jih lahko pozneje obnovite na lokalni strežnik.",
   "AutoSavePeriod": "Obdobje samodejnega shranjevanja",
   "AutoSavePeriodHelp": "Spodaj prikazan čas ustreza časovnemu pasu, ki je nastavljen na {{productName}}.",
   "Backup": "Varnostna kopija",

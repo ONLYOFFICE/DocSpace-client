@@ -394,7 +394,7 @@ const AutomaticBackup = ({
       <StatusMessage message={errorInformation} />
       <div className="backup_modules-header_wrapper">
         <Text className="backup_modules-description settings_unavailable">
-          {t("AutoBackupDescription", {
+          {t("Common:AutoBackupDescription", {
             productName: t("Common:ProductName"),
           })}
         </Text>

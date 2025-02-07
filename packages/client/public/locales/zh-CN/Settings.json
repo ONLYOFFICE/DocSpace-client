@@ -31,7 +31,6 @@
   "AuditSubheader": "此子部分允许您浏览用户对{{productName}}中的实体（房间、机会、文件等）所做的最新更改（创建、修改、删除等）列表。",
   "AuditTrailNav": "审计追踪",
   "AutoBackup": "自动备份",
-  "AutoBackupDescription": "自动备份选项用于自动执行{{productName}}数据备份过程，以便稍后将其恢复到本地服务器。",
   "AutoSavePeriod": "自动保存期间",
   "AutoSavePeriodHelp": "下面显示的时间对应于{{productName}}中设置的时区。",
   "Backup": "备份",

@@ -627,5 +627,6 @@
   "UpgradeToProBannerInstructionItemWindows": "Windows talimatı.",
   "UpgradeToProBannerInstructionNote": "Yükseltme sırasında düzenleyicilerin kullanılamayacağını lütfen unutmayın. Aynı zamanda başlamadan önce <1>verilerinizi yedeklemenizi</1> öneririz.",
   "UpgradeToProBannerInstructionReadNow": "Şimdi Oku",
-  "UpgradeToProBannerInformationAboutShort": "<1>Resmî web</1> sitesinden {{license}} Edition hakkında daha fazla bilgi edinin"
+  "UpgradeToProBannerInformationAboutShort": "<1>Resmî web</1> sitesinden {{license}} Edition hakkında daha fazla bilgi edinin",
+  "AutoBackupDescription": "Otomatik yedekleme seçeneği, daha sonra yerel bir sunucuya geri yükleyebilmek amacıyla {{productName}} veri yedekleme işlemini otomatikleştirmek için kullanılır."
 }

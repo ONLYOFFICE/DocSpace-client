@@ -31,7 +31,6 @@
   "AuditSubheader": "La sottosezione ti permette di navigare attraverso l’elenco delle ultime modifiche (creazione, modifica, cancellazione ecc.) apportate dagli utenti alle entità (stanze, opportunità, file ecc.) all’interno del tuo {{productName}}.",
   "AuditTrailNav": "Registro di controllo",
   "AutoBackup": "Backup automatico",
-  "AutoBackupDescription": "L'opzione Backup automatico viene utilizzata per automatizzare il processo di backup dei dati di {{productName}} per poterli ripristinare successivamente su un server locale.",
   "AutoSavePeriod": "Periodo di salvataggio automatico",
   "AutoSavePeriodHelp": "L'ora mostrata di seguito corrisponde al fuso orario impostato in {{productName}}.",
   "Backup": "Copia di sicurezza",

@@ -31,7 +31,6 @@
   "AuditSubheader": "Subsecțiunea vă permite să răsfoiți lista celor mai recente modificări (creare, modificare, ştergere etc.) efectuate de utilizatori asupra elementelor (săli, oportunităţi, fişiere etc.) din cadrul {{productName}}.",
   "AuditTrailNav": "Audit-Trail",
   "AutoBackup": "Automatische Sicherung",
-  "AutoBackupDescription": "Die Option Automatisches Backup wird verwendet, um das Backup der {{productName}}-Daten zu automatisieren, um sie später auf einem lokalen Server wiederherstellen zu können.",
   "AutoSavePeriod": "Zeitraum für automatische Speicherung",
   "AutoSavePeriodHelp": "Die unten angegebene Zeit entspricht der im {{productName}} eingestellten Zeitzone.",
   "Backup": "Backup",

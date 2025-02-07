@@ -627,5 +627,6 @@
   "UpgradeToProBannerInstructionItemWindows": "Windows инструкции.",
   "UpgradeToProBannerInstructionNote": "Моля, имайте предвид, че редакторите няма да бъдат достъпни по време на надстройката. Също така препоръчваме да <1>архивирате данните си</1>, преди да започнете.",
   "UpgradeToProBannerInstructionReadNow": "Прочетете сега",
-  "UpgradeToProBannerInformationAboutShort": "Научете повече за {{license}} Edition на <1>официалния уебсайт</1>"
+  "UpgradeToProBannerInformationAboutShort": "Научете повече за {{license}} Edition на <1>официалния уебсайт</1>",
+  "AutoBackupDescription": "Опцията за автоматично архивиране се използва за автоматизиране процеса на архивиране на данни в {{productName}}, за да можете да ги възстановите по-късно в локален сървър."
 }

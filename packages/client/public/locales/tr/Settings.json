@@ -31,7 +31,6 @@
   "AuditSubheader": "Alt bölüm, kullanıcılar tarafından {{productName}}'inizdeki varlıklarda (odalar, fırsatlar, dosyalar vb.) yapılan en son değişikliklerin (oluşturma, değiştirme, silme vb.) listesine göz atmanıza olanak tanır.",
   "AuditTrailNav": "Denetim İzleme",
   "AutoBackup": "Otomatik yedekleme",
-  "AutoBackupDescription": "Otomatik yedekleme seçeneği, daha sonra yerel bir sunucuya geri yükleyebilmek amacıyla {{productName}} veri yedekleme işlemini otomatikleştirmek için kullanılır.",
   "AutoSavePeriod": "Otomatik kaydetme süresi",
   "AutoSavePeriodHelp": "Aşağıda gösterilen saat, {{productName}} ayarlanan saat dilimine karşılık gelir.",
   "Backup": "Yedek",

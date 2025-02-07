@@ -627,5 +627,6 @@
   "UpgradeToProBannerInstructionItemWindows": "Windows instructies.",
   "UpgradeToProBannerInstructionNote": "Houd er rekening mee dat de editors tijdens de upgrade niet beschikbaar zijn. Wij raden ook aan om <1>een back-up van uw gegevens</1> te maken voordat u begint.",
   "UpgradeToProBannerInstructionReadNow": "Lees nu",
-  "UpgradeToProBannerInformationAboutShort": "Meer informatie over {{license}} Editie op de <1>officiële website</1>"
+  "UpgradeToProBannerInformationAboutShort": "Meer informatie over {{license}} Editie op de <1>officiële website</1>",
+  "AutoBackupDescription": "De optie Automatische back-up wordt gebruikt om het back-upproces van {{productName}} gegevens te automatiseren, zodat u deze later op een lokale server kunt terugzetten."
 }

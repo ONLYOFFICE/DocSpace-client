@@ -627,5 +627,6 @@
   "UpgradeToProBannerInstructionItemWindows": "Windowsin ohje.",
   "UpgradeToProBannerInstructionNote": "Huomioithan, että muokkaukset eivät ole käytössä päivityksen aikana. Suosittelemme myös <1>varmuuskopioimaan tietosi</1> ennen kuin aloitat.",
   "UpgradeToProBannerInstructionReadNow": "Lue nyt",
-  "UpgradeToProBannerInformationAboutShort": "Lue lisää {{license}} -versiosta <1>official website</1>"
+  "UpgradeToProBannerInformationAboutShort": "Lue lisää {{license}} -versiosta <1>official website</1>",
+  "AutoBackupDescription": "Automaattista varmuuskopiointia käytetään automatisoimaan {{productName}} tietojen varmuuskopiointiprosessi, jotta se palauttaa myöhemmin paikalliselle palvelimelle. "
 }

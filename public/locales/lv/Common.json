@@ -627,5 +627,6 @@
   "UpgradeToProBannerInstructionItemWindows": "Windows instrukcija.",
   "UpgradeToProBannerInstructionNote": "Ņemiet vērā, ka jaunināšanas laikā redaktori nebūs pieejami. Pirms darba sākšanas iesakām arī <1>dublēt datus</1>.",
   "UpgradeToProBannerInstructionReadNow": "Lasīt tagad",
-  "UpgradeToProBannerInformationAboutShort": "Uzziniet vairāk par {{license}} versiju <1>oficiālajā vietnē</1>"
+  "UpgradeToProBannerInformationAboutShort": "Uzziniet vairāk par {{license}} versiju <1>oficiālajā vietnē</1>",
+  "AutoBackupDescription": "Automātiskās dublēšanas opcija tiek izmantota, lai automatizētu {{productName}} datu dublēšanas procesu, lai vēlāk to varētu atjaunot lokālajā serverī."
 }

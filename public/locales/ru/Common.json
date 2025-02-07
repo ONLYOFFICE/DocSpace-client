@@ -629,5 +629,6 @@
   "UpgradeToProBannerInstructionItemWindows": "Инструкция для Windows.",
   "UpgradeToProBannerInstructionNote": "Пожалуйста, обратите внимание, что редакторы будут недоступны в ходе обновления. Сначала рекомендуется выполнить <1>резервное копирование данных</1>.",
   "UpgradeToProBannerInstructionReadNow": "Читать",
-  "UpgradeToProBannerInformationAboutShort": "Узнайте больше об {{license}} Edition на <1>официальном сайте</1>"
+  "UpgradeToProBannerInformationAboutShort": "Узнайте больше об {{license}} Edition на <1>официальном сайте</1>",
+  "AutoBackupDescription": "Функция Автоматическое резервное копирование используется для автоматизации процесса резервного копирования данных {{productName}}, чтобы иметь возможность позже восстановить их на локальный сервер."
 }

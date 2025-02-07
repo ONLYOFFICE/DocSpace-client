@@ -55,14 +55,5 @@
   "ThirdPartyInfo": "تغيير معلومات الجهة الخارجية",
   "ThirdPartyTitle": "الخدمات الجهة الخارجية",
   "TitleShowActions": "عرض إجراءات الملف",
-  "TitleShowFolderActions": "عرض إجراءات المجلد",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "عرض إجراءات المجلد"
 }

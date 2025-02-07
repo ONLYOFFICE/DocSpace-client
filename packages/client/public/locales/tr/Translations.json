@@ -55,14 +55,5 @@
   "ThirdPartyInfo": "Üçüncü taraf bilgilerini değiştirin",
   "ThirdPartyTitle": "Üçüncü taraf hizmetleri",
   "TitleShowActions": "Dosya eylemlerini göster",
-  "TitleShowFolderActions": "Klasör eylemlerini göster",
-  "TypeTitleBoxNet": "Kutu",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google sürücü",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Klasör eylemlerini göster"
 }

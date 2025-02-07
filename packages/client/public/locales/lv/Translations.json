@@ -55,14 +55,5 @@
   "ThirdPartyInfo": "Mainīt trešās puses informāciju",
   "ThirdPartyTitle": "Trešo pušu pakalpojumi",
   "TitleShowActions": "Rādīt failu darbības",
-  "TitleShowFolderActions": "Rādīt mapes darbības",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Rādīt mapes darbības"
 }

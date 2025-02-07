@@ -638,5 +638,14 @@
   "MaxCopies": "{{copiesCount}} - максимальна кількість резервних копій",
   "ThirdPartyResource": "Сторонній ресурс",
   "ThirdPartyResourceDescription": "Резервну копію можна зберегти в сторонньому обліковому записі (Dropbox, Box.com, OneDrive або Google Диск). Вам потрібно підключити сторонній обліковий запис (Dropbox, Box.com, OneDrive або Google Диск), перш ніж ви зможете зберегти там резервну копію.",
-  "ThirdPartyStorageDescription": "Використовуйте сторонні служби як сховище даних для цієї кімнати. У під’єднаному сховищі буде створено нову папку для зберігання даних цієї кімнати."
+  "ThirdPartyStorageDescription": "Використовуйте сторонні служби як сховище даних для цієї кімнати. У під’єднаному сховищі буде створено нову папку для зберігання даних цієї кімнати.",
+  "TypeTitleBoxNet": "Box",
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleGoogle": "Google Drive",
+  "TypeTitleSkyDrive": "OneDrive",
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive",
+  "TypeTitleYandex": "Yandex.Disk"
 }

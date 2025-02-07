@@ -638,5 +638,14 @@
   "MaxCopies": "{{copiesCount}} - maximální počet záložních kopií",
   "ThirdPartyResource": "Zdroj třetí strany",
   "ThirdPartyResourceDescription": "Zálohu lze uložit na účet třetí strany (Dropbox, Box.com, OneDrive nebo Disk Google). Předtím, než tam budete moci zálohu uložit, musíte účet třetí strany (Dropbox, Box.com, OneDrive nebo Disk Google).",
-  "ThirdPartyStorageDescription": "Jako úložiště dat pro tuto místnost použijte služby třetích stran. V připojeném úložišti bude vytvořena nová složka pro ukládání dat této místnosti."
+  "ThirdPartyStorageDescription": "Jako úložiště dat pro tuto místnost použijte služby třetích stran. V připojeném úložišti bude vytvořena nová složka pro ukládání dat této místnosti.",
+  "TypeTitleBoxNet": "Box",
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleGoogle": "Google Drive",
+  "TypeTitleSkyDrive": "OneDrive",
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive",
+  "TypeTitleYandex": "Yandex.Disk"
 }

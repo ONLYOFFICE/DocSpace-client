@@ -494,5 +494,14 @@
   "MaxCopies": "{{copiesCount}} - උපරිම උපස්ථ පිටපත් ගණන",
   "ThirdPartyResource": "තෙවන පාර්ශ්ව සම්පත",
   "ThirdPartyResourceDescription": "තෙවන පාර්ශ්ව ගිණුමකට (ඩ්‍රොප්බොක්ස්, Box.com, වන්ඩ්‍රයිව් හෝ ගූගල් ඩ්‍රයිව්) උපස්ථය සුරැකීමට හැකිය. ඔබට ඒවායේ උපස්ථය සුරැකීම සඳහා පළමුව තෙවන පාර්ශ්ව ගිණුම (ඩ්‍රොප්බොක්ස්, Box.com, වන්ඩ්‍රයිව් හෝ ගූගල් ඩ්‍රයිව්) මෙයට සම්බන්ධ කළ යුතුය.",
-  "ThirdPartyStorageDescription": "මෙම කාමරයේ දත්ත ආචයනය සඳහා තෙවන පාර්ශ්ව සේවා භාවිතා කරන්න. මෙම කාමරයේ දත්ත ගබඩා කිරීමට නව බහාලුමක් සම්බන්ධිත ආචයනයේ සාදනු ඇත."
+  "ThirdPartyStorageDescription": "මෙම කාමරයේ දත්ත ආචයනය සඳහා තෙවන පාර්ශ්ව සේවා භාවිතා කරන්න. මෙම කාමරයේ දත්ත ගබඩා කිරීමට නව බහාලුමක් සම්බන්ධිත ආචයනයේ සාදනු ඇත.",
+  "TypeTitleBoxNet": "බොක්ස්",
+  "TypeTitleDropBox": "ඩ්‍රොප්බොක්ස්",
+  "TypeTitleDocuSign": "ඩොකුසයින්",
+  "TypeTitleGoogle": "ගූගල් ඩ්‍රයිව්",
+  "TypeTitleSkyDrive": "වන්ඩ්‍රයිව්",
+  "TypeTitleSharePoint": "ෂෙයාර්පොයින්ට්",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive",
+  "TypeTitleYandex": "යාන්ඩෙක්ස්.ඩිස්ක්"
 }

@@ -637,5 +637,14 @@
   "MaxCopies": "{{copiesCount}} - số lượng bản sao lưu tối đa",
   "ThirdPartyResource": "Tài nguyên của bên thứ ba",
   "ThirdPartyResourceDescription": "Bản sao lưu có thể được lưu vào tài khoản bên thứ ba của bạn (Dropbox, Box.com, OneDrive hoặc Google Drive). Bạn cần kết nối tài khoản bên thứ ba (Dropbox, Box.com, OneDrive hoặc Google Drive) trước khi bạn có thể lưu bản sao lưu của mình ở đó.",
-  "ThirdPartyStorageDescription": "Sử dụng dịch vụ của bên thứ ba làm nơi lưu trữ dữ liệu cho phòng này. Một thư mục mới để lưu trữ dữ liệu của phòng này sẽ được tạo trong bộ nhớ được kết nối."
+  "ThirdPartyStorageDescription": "Sử dụng dịch vụ của bên thứ ba làm nơi lưu trữ dữ liệu cho phòng này. Một thư mục mới để lưu trữ dữ liệu của phòng này sẽ được tạo trong bộ nhớ được kết nối.",
+  "TypeTitleBoxNet": "Box",
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleGoogle": "Google Drive",
+  "TypeTitleSkyDrive": "OneDrive",
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive",
+  "TypeTitleYandex": "Yandex.Disk"
 }

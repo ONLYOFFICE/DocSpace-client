@@ -55,14 +55,5 @@
   "ThirdPartyInfo": "Zmeniť informácie o tretej strane",
   "ThirdPartyTitle": "Služby tretích strán",
   "TitleShowActions": "Zobraziť akcie pre súbor",
-  "TitleShowFolderActions": "Zobraziť akcie pre priečinky",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Zobraziť akcie pre priečinky"
 }

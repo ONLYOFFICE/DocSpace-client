@@ -638,5 +638,14 @@
   "MaxCopies": "{{copiesCount}} - maksimum yedek kopya sayısı",
   "ThirdPartyResource": "Üçüncü taraf kaynak",
   "ThirdPartyResourceDescription": "Yedekleme, üçüncü taraf hesabınıza (Dropbox, Box.com, OneDrive veya Google Drive) kaydedilebilir. Üçüncü taraf hesabınızı öncelikle (Dropbox, Box.com, OneDrive veya Google Drive) bağlamanız gerekir, böylelikle yedeğinizi oraya kaydedebileceksiniz.",
-  "ThirdPartyStorageDescription": "Bu oda için veri depolama olarak üçüncü taraf hizmetleri kullanın. Bu odanın verilerini depolamak için bağlı depolama alanında yeni bir klasör oluşturulacak."
+  "ThirdPartyStorageDescription": "Bu oda için veri depolama olarak üçüncü taraf hizmetleri kullanın. Bu odanın verilerini depolamak için bağlı depolama alanında yeni bir klasör oluşturulacak.",
+  "TypeTitleBoxNet": "Kutu",
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleGoogle": "Google sürücü",
+  "TypeTitleSkyDrive": "OneDrive",
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive",
+  "TypeTitleYandex": "Yandex.Disk"
 }

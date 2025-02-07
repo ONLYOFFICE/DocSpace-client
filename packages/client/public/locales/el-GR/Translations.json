@@ -55,14 +55,5 @@
   "ThirdPartyInfo": "Αλλάξτε τις πληροφορίες τρίτου μέρους",
   "ThirdPartyTitle": "Υπηρεσίες τρίτων",
   "TitleShowActions": "Εμφάνιση ενεργειών αρχείου",
-  "TitleShowFolderActions": "Εμφάνιση Ενεργειών Φακέλου",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Εμφάνιση Ενεργειών Φακέλου"
 }

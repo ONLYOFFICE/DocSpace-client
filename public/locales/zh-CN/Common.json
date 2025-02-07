@@ -640,5 +640,14 @@
   "MaxCopies": "{{copiesCount}} - 备份的最大数量",
   "ThirdPartyResource": "第三方资源",
   "ThirdPartyResourceDescription": "备份可以保存到您的第三方账户（Dropbox、Box.com、OneDrive 或 Google Drive）。在使用此功能之前，您需要先连接您的第三方账户（Dropbox、Box.com、OneDrive 或 Google Drive），以便完成存储。",
-  "ThirdPartyStorageDescription": "使用第三方服务存储此房间的数据。启用后将在已连接的存储空间中创建一个新文件夹，用于存储此房间的数据。"
+  "ThirdPartyStorageDescription": "使用第三方服务存储此房间的数据。启用后将在已连接的存储空间中创建一个新文件夹，用于存储此房间的数据。",
+  "TypeTitleBoxNet": "Box",
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleGoogle": "Google 云端硬盘",
+  "TypeTitleSkyDrive": "OneDrive",
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive",
+  "TypeTitleYandex": "Yandex.Disk"
 }

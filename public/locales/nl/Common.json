@@ -638,5 +638,14 @@
   "MaxCopies": "{{copiesCount}} - maximum aantal back-ups",
   "ThirdPartyResource": "Bron van derden",
   "ThirdPartyResourceDescription": "Back-ups kunt u opslaan in uw account van derden (Dropbox, Box.com, OneDrive of Google Drive). U moet uw account van derden (Dropbox, Box.com, OneDrive of Google Drive) verbinden voordat u uw back-up daar kunt opslaan.",
-  "ThirdPartyStorageDescription": "Gebruik diensten van derden als gegevensopslag voor deze ruimte. Een nieuwe map voor het opslaan van de gegevens van deze kamer wordt aangemaakt in de aangesloten opslagruimte."
+  "ThirdPartyStorageDescription": "Gebruik diensten van derden als gegevensopslag voor deze ruimte. Een nieuwe map voor het opslaan van de gegevens van deze kamer wordt aangemaakt in de aangesloten opslagruimte.",
+  "TypeTitleBoxNet": "Box",
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleGoogle": "Google Drive",
+  "TypeTitleSkyDrive": "OneDrive",
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive",
+  "TypeTitleYandex": "Yandex.Disk"
 }

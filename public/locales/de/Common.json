@@ -639,5 +639,14 @@
   "MaxCopies": "{{copiesCount}} - maximale Anzahl von Sicherungskopien",
   "ThirdPartyResource": "Ressource eines Drittanbieters",
   "ThirdPartyResourceDescription": "Die Sicherungskopie kann in Ihrem Konto bei einem Drittanbieter (Dropbox, Box.com, OneDrive oder Google Drive) gespeichert werden. Sie müssen Ihr Konto (Dropbox, Box.com, OneDrive oder Google Drive) verbinden, bevor Sie Ihr Backup dort speichern können.",
-  "ThirdPartyStorageDescription": "Verwenden Sie Drittanbieterdienste als Datenspeicher für diesen Raum. Ein neuer Ordner zum Speichern der Daten dieses Raums wird im verbundenen Speicher erstellt."
+  "ThirdPartyStorageDescription": "Verwenden Sie Drittanbieterdienste als Datenspeicher für diesen Raum. Ein neuer Ordner zum Speichern der Daten dieses Raums wird im verbundenen Speicher erstellt.",
+  "TypeTitleBoxNet": "Box",
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleGoogle": "Google Drive",
+  "TypeTitleSkyDrive": "OneDrive",
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive",
+  "TypeTitleYandex": "Yandex.Disk"
 }

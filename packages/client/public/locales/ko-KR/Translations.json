@@ -55,14 +55,5 @@
   "ThirdPartyInfo": "제3자 정보 변경",
   "ThirdPartyTitle": "제3자 서비스",
   "TitleShowActions": "파일 동작 표시",
-  "TitleShowFolderActions": "폴더 작업 표시",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "폴더 작업 표시"
 }

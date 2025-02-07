@@ -55,14 +55,5 @@
   "ThirdPartyInfo": "更改第三方信息",
   "ThirdPartyTitle": "第三方服务",
   "TitleShowActions": "显示文件相关操作",
-  "TitleShowFolderActions": "显示文件夹相关操作",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google 云端硬盘",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "显示文件夹相关操作"
 }

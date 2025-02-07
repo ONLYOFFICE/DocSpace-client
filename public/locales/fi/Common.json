@@ -638,5 +638,14 @@
   "MaxCopies": "{{copiesCount}} - varmuuskopioiden enimmäismäärä",
   "ThirdPartyResource": "Kolmannen osapuolen resurssi",
   "ThirdPartyResourceDescription": "Varmuuskopio voidaan tallentaa kolmannen osapuolen tilillesi (Dropbox, Box.com, OneDrive tai Google Drive). Sinun on yhdistettävä kolmannen osapuolen tilisi (Dropbox, Box.com, OneDrive tai Google Drive), ennen kuin voit tallentaa varmuuskopiosi sinne.",
-  "ThirdPartyStorageDescription": "Käytä kolmannen osapuolen palveluita tallennustilana tälle huoneelle. Yhdistettyyn tallennustilaan luodaan uusi kansio tämän huoneen tietojen tallentamista varten."
+  "ThirdPartyStorageDescription": "Käytä kolmannen osapuolen palveluita tallennustilana tälle huoneelle. Yhdistettyyn tallennustilaan luodaan uusi kansio tämän huoneen tietojen tallentamista varten.",
+  "TypeTitleBoxNet": "Laatikko",
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleGoogle": "Google Drive",
+  "TypeTitleSkyDrive": "OneDrive",
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive",
+  "TypeTitleYandex": "Yandex.Disk"
 }

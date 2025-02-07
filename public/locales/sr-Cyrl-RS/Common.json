@@ -639,5 +639,14 @@
   "MaxCopies": "{{copiesCount}} - максимални број резервних копија",
   "ThirdPartyResource": "Ресурс треће стране",
   "ThirdPartyResourceDescription": "Резервна копија се може сачувати на ваш налог треће стране (Dropbox, Box.com, OneDrive или Google Drive). Морате повезати свој налог треће стране (Dropbox, Box.com, OneDrive или Google Drive) пре него што будете могли сачувати своју резервну копију тамо.",
-  "ThirdPartyStorageDescription": "Користите услуге трец́их страна као складиште података за ову просторију. Нова фасцикла за чување података ове собе биц́е креирана у повезаном складишту."
+  "ThirdPartyStorageDescription": "Користите услуге трец́их страна као складиште података за ову просторију. Нова фасцикла за чување података ове собе биц́е креирана у повезаном складишту.",
+  "TypeTitleBoxNet": "Box",
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleGoogle": "Google Drive",
+  "TypeTitleSkyDrive": "OneDrive",
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive",
+  "TypeTitleYandex": "Yandex.Disk"
 }

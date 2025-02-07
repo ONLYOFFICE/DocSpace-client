@@ -46,14 +46,5 @@
   "ThirdPartyInfo": "තෙවන පාර්ශ්වයේ තොරතුරු සංශෝධනය",
   "ThirdPartyTitle": "තෙවන පාර්ශ්ව සේවා",
   "TitleShowActions": "ගොනුවේ ක්‍රියාමාර්ග පෙන්වන්න",
-  "TitleShowFolderActions": "බහාලුමේ ක්‍රියාමාර්ග පෙන්වන්න",
-  "TypeTitleBoxNet": "බොක්ස්",
-  "TypeTitleDocuSign": "ඩොකුසයින්",
-  "TypeTitleDropBox": "ඩ්‍රොප්බොක්ස්",
-  "TypeTitleGoogle": "ගූගල් ඩ්‍රයිව්",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "ෂෙයාර්පොයින්ට්",
-  "TypeTitleSkyDrive": "වන්ඩ්‍රයිව්",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "යාන්ඩෙක්ස්.ඩිස්ක්"
+  "TitleShowFolderActions": "බහාලුමේ ක්‍රියාමාර්ග පෙන්වන්න"
 }

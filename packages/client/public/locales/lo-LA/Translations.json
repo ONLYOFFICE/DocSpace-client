@@ -46,14 +46,5 @@
   "ThirdPartyInfo": "ປ່ຽນຂໍ້ມູນພາກສ່ວນທີສາມ",
   "ThirdPartyTitle": "ການບໍລິການພາກສ່ວນທີສາມ",
   "TitleShowActions": "ສະແດງ ໄຟລ໌ ການ​ປະ​ຕິ​ບັດ",
-  "TitleShowFolderActions": "ສະແດງ ໂຟນເດີ ການ​ປະ​ຕິ​ບັດ",
-  "TypeTitleBoxNet": "ກ່ອງ",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "ສະແດງ ໂຟນເດີ ການ​ປະ​ຕິ​ບັດ"
 }

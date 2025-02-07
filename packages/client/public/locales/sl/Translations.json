@@ -55,14 +55,5 @@
   "ThirdPartyInfo": "Spremenite podatke tretjih oseb",
   "ThirdPartyTitle": "Storitve tretjih oseb",
   "TitleShowActions": "Pokaži akcije datoteke",
-  "TitleShowFolderActions": "Pokaži akcije mape",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Pokaži akcije mape"
 }

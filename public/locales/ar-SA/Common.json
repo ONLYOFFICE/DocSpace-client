@@ -636,5 +636,14 @@
   "MaxCopies": "{{copiesCount}} - الحد الأقصى لعدد النسخ الاحتياطية",
   "ThirdPartyResource": "مورد الطرف الثالث",
   "ThirdPartyResourceDescription": "يمكن حفظ النسخ الاحتياطي في حساب الطرف الثالث الخاص بك (دروب بوكس أو بوكس دوت كوم أو وان درايف  أو جوجل درايف). تحتاج إلى توصيل حساب الطرف الثالث الخاص بك (دروب بوكس أو بوكس دوت كوم أو وان درايف  أو جوجل درايف) قبل أن تتمكن من حفظ نسختك الاحتياطية هناك.",
-  "ThirdPartyStorageDescription": "استخدم التحزين عبر طرف ثالث لحفظ بيانات هذه الغرفة. يمكنك إنشاء مجلد جديد، أو اختيار مجلد داخل وحدة التخزين المتصلة."
+  "ThirdPartyStorageDescription": "استخدم التحزين عبر طرف ثالث لحفظ بيانات هذه الغرفة. يمكنك إنشاء مجلد جديد، أو اختيار مجلد داخل وحدة التخزين المتصلة.",
+  "TypeTitleBoxNet": "Box",
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleGoogle": "Google Drive",
+  "TypeTitleSkyDrive": "OneDrive",
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive",
+  "TypeTitleYandex": "Yandex.Disk"
 }

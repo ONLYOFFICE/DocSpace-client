@@ -55,14 +55,5 @@
   "ThirdPartyInfo": "第三者機関情報の変更",
   "ThirdPartyTitle": "サードパーティのサービス",
   "TitleShowActions": "ファイルアクションを表示",
-  "TitleShowFolderActions": "フォルダアクションを表示",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "フォルダアクションを表示"
 }

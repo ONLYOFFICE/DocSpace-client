@@ -640,5 +640,14 @@
   "MaxCopies": "{{copiesCount}} - maximum number of backup copies",
   "ThirdPartyResource": "Third-party resource",
   "ThirdPartyResourceDescription": "Backup can be saved to your third-party account (Dropbox, Box.com, OneDrive or Google Drive). You need to connect your third-party account (Dropbox, Box.com, OneDrive or Google Drive) before you will be able to save your backup there.",
-  "ThirdPartyStorageDescription": "Use third-party services as data storage for this room. You can create a new folder or select the existing one in the connected storage."
+  "ThirdPartyStorageDescription": "Use third-party services as data storage for this room. You can create a new folder or select the existing one in the connected storage.",
+  "TypeTitleBoxNet": "Box",
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleGoogle": "Google Drive",
+  "TypeTitleSkyDrive": "OneDrive",
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive",
+  "TypeTitleYandex": "Yandex.Disk"
 }

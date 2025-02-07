@@ -55,14 +55,5 @@
   "ThirdPartyInfo": "Փոխել երրորդ կողմի տվյալները",
   "ThirdPartyTitle": "Երրորդ կողմի ծառայություններ",
   "TitleShowActions": "Ցույց տալ ֆայլի գործողությունները",
-  "TitleShowFolderActions": "Ցույց տալ պանակի գործողությունները",
-  "TypeTitleBoxNet": "Տուփ",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Ցույց տալ պանակի գործողությունները"
 }

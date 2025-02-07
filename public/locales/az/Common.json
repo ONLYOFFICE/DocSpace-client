@@ -638,5 +638,14 @@
   "MaxCopies": "{{copiesCount}} - ehtiyat nüsxələrin maksimal sayı",
   "ThirdPartyResource": "Üçüncü tərəf resursu",
   "ThirdPartyResourceDescription": "Ehtiyat nüsxələr üçüncü tərəf hesablarda da (Dropbox, Box.com, OneDrive və ya Google Drive) saxlana bilər. Buna görə də, ehtiyat nüsxələrinizi yadda saxlaya bilmək üçün əvvəlcə öz üçüncü tərəf hesabınızı (Dropbox, Box.com, OneDrive və ya Google Drive) ilə əlaqələndirməlisiniz.",
-  "ThirdPartyStorageDescription": "Bu otaq üçün məlumat yaddaşı kimi üçüncü tərəf xidmətlərindən istifadə edin. Bu otağın məlumatlarını  saxlamaq üçün əlaqələndirilmiş yaddaşda yeni qovluq yaradılacaq."
+  "ThirdPartyStorageDescription": "Bu otaq üçün məlumat yaddaşı kimi üçüncü tərəf xidmətlərindən istifadə edin. Bu otağın məlumatlarını  saxlamaq üçün əlaqələndirilmiş yaddaşda yeni qovluq yaradılacaq.",
+  "TypeTitleBoxNet": "Box",
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleGoogle": "Google Drive",
+  "TypeTitleSkyDrive": "OneDrive",
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive",
+  "TypeTitleYandex": "Yandex.Disk"
 }

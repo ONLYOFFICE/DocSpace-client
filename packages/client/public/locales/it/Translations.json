@@ -55,14 +55,5 @@
   "ThirdPartyInfo": "Cambiare le informazioni di terze parti",
   "ThirdPartyTitle": "Servizi di terze parti",
   "TitleShowActions": "Mostra azioni con file",
-  "TitleShowFolderActions": "Mostra azioni con cartelle",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "Docusign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Mostra azioni con cartelle"
 }

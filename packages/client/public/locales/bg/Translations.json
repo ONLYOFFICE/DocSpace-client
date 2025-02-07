@@ -55,14 +55,5 @@
   "ThirdPartyInfo": "Смени информацията от трето лице",
   "ThirdPartyTitle": "Услуги на трети страни",
   "TitleShowActions": "Покажи действията за файлове",
-  "TitleShowFolderActions": "Покажи действията за папки",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Покажи действията за папки"
 }

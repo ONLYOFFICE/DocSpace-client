@@ -55,14 +55,5 @@
   "ThirdPartyInfo": "Wijzig de info van derden",
   "ThirdPartyTitle": "Diensten van derden",
   "TitleShowActions": "Bestand acties tonen",
-  "TitleShowFolderActions": "Toon folder acties",
-  "TypeTitleBoxNet": "Box",
-  "TypeTitleDocuSign": "DocuSign",
-  "TypeTitleDropBox": "Dropbox",
-  "TypeTitleGoogle": "Google Drive",
-  "TypeTitlekDrive": "kDrive",
-  "TypeTitleSharePoint": "SharePoint",
-  "TypeTitleSkyDrive": "OneDrive",
-  "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TitleShowFolderActions": "Toon folder acties"
 }

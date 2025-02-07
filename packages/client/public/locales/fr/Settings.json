@@ -103,8 +103,6 @@
   "EditColorScheme": "Modifier le jeu de couleurs",
   "Employees": "Utilisateurs",
   "EmptyBackupList": "Aucune sauvegarde n'a encore été créée. Créez une ou plusieurs sauvegardes pour qu'elles apparaissent dans cette liste.",
-  "EnableAutomaticBackup": "Activer la sauvegarde automatique.",
-  "EnableAutomaticBackupDescription": "Utilisez cette option pour sauvegarder les données de l’espace.",
   "EnterNumber": "Entrez le numéro",
   "EnterTime": "Entrez l'heure",
   "EnterTitle": "Saisir un titre",

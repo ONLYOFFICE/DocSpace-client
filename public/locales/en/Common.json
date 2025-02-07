@@ -630,5 +630,7 @@
   "UpgradeToProBannerInstructionNote": "Please note that the editors will be unavailable during the upgrade. We also recommend to <1>backup your data</1> before you start.",
   "UpgradeToProBannerInstructionReadNow": "Read now",
   "UpgradeToProBannerInformationAboutShort": "Learn more about {{license}} Edition on the <1>official website</1>",
-  "AutoBackupDescription": "The Automatic backup option is used to automate the {{productName}} data backup process to be able to restore it later to a local server."
+  "AutoBackupDescription": "The Automatic backup option is used to automate the {{productName}} data backup process to be able to restore it later to a local server.",
+  "EnableAutomaticBackup": "Enable automatic backup.",
+  "EnableAutomaticBackupDescription": "Use this option to back up the space data."
 }

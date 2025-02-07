@@ -629,5 +629,7 @@
   "UpgradeToProBannerInstructionNote": "Veuillez noter que les éditeurs ne seront pas disponibles pendant la mise à jour. Nous vous conseillons également de <1>sauvegarder vos données</1> avant de démarrer.",
   "UpgradeToProBannerInstructionReadNow": "Lire maintenant",
   "UpgradeToProBannerInformationAboutShort": "En savoir plus à propos d'{{license}} Edition sur le <1>site web officiel</1>",
-  "AutoBackupDescription": "L'option Sauvegarde automatique est utilisée pour automatiser le processus de sauvegarde des données de {{productName}} afin de pouvoir les restaurer ultérieurement sur un serveur local."
+  "AutoBackupDescription": "L'option Sauvegarde automatique est utilisée pour automatiser le processus de sauvegarde des données de {{productName}} afin de pouvoir les restaurer ultérieurement sur un serveur local.",
+  "EnableAutomaticBackup": "Activer la sauvegarde automatique.",
+  "EnableAutomaticBackupDescription": "Utilisez cette option pour sauvegarder les données de l’espace."
 }

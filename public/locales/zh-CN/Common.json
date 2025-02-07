@@ -630,5 +630,7 @@
   "UpgradeToProBannerInstructionNote": "请注意，在升级期间，编辑器将不可用。我们还建议在您开始进行更新之前<1>备份您的数据</1>。",
   "UpgradeToProBannerInstructionReadNow": "立即阅读",
   "UpgradeToProBannerInformationAboutShort": "要了解有关 {{license}} 版本的更多信息，请访问<1>官方网站</1>",
-  "AutoBackupDescription": "自动备份选项用于自动执行{{productName}}数据备份过程，以便稍后将其恢复到本地服务器。"
+  "AutoBackupDescription": "自动备份选项用于自动执行{{productName}}数据备份过程，以便稍后将其恢复到本地服务器。",
+  "EnableAutomaticBackup": "启用自动备份",
+  "EnableAutomaticBackupDescription": "使用该选项备份协作空间的数据。"
 }

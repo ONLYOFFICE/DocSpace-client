@@ -628,5 +628,7 @@
   "UpgradeToProBannerInstructionNote": "Należy pamiętać, że edytory będą niedostępne podczas aktualizowania. Przed rozpoczęciem zalecamy również <1>utworzenie kopii zapasowej swoich danych</1>.",
   "UpgradeToProBannerInstructionReadNow": "Czytaj teraz",
   "UpgradeToProBannerInformationAboutShort": "Dowiedz się więcej o wersji {{license}} na <1>oficjalnej stronie internetowej</1>",
-  "AutoBackupDescription": "Opcja automatycznego tworzenia kopii zapasowych umożliwia automatyzację procesu generowania kopii zapasowych danych {{productName}}, aby móc je później przywrócić na serwerze lokalnym."
+  "AutoBackupDescription": "Opcja automatycznego tworzenia kopii zapasowych umożliwia automatyzację procesu generowania kopii zapasowych danych {{productName}}, aby móc je później przywrócić na serwerze lokalnym.",
+  "EnableAutomaticBackup": "Włącz automatyczne tworzenie kopii zapasowych.",
+  "EnableAutomaticBackupDescription": "Użyj tej opcji do tworzenia kopii zapasowych danych portalu."
 }

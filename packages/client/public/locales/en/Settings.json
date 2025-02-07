@@ -103,8 +103,6 @@
   "EditColorScheme": "Edit color scheme",
   "Employees": "users",
   "EmptyBackupList": "No backups have been created yet. Create one or more backups for them to appear in this list.",
-  "EnableAutomaticBackup": "Enable automatic backup.",
-  "EnableAutomaticBackupDescription": "Use this option to back up the space data.",
   "EnterNumber": "Enter number",
   "EnterTime": "Enter time",
   "EnterTitle": "Enter title",

@@ -629,5 +629,7 @@
   "UpgradeToProBannerInstructionNote": "Vă rugăm să rețineți că aplicaţiile de editare nu vor fi disponibile în curs de actualizare. De asemenea vă recomandăm <1>să creați o copie de rezervă</1> înainte de a începe.",
   "UpgradeToProBannerInstructionReadNow": "Citiți acum",
   "UpgradeToProBannerInformationAboutShort": "Aflați mai multe despre Ediția {{license}} pe  <1>pagina oficială</1>",
-  "AutoBackupDescription": "Opțiunea Copiere de rezervă automată permite automatizarea procesului de copiere automată a datelor de pe spațiu {{productName}} pentru a fi restaurate ulterior pe un server local."
+  "AutoBackupDescription": "Opțiunea Copiere de rezervă automată permite automatizarea procesului de copiere automată a datelor de pe spațiu {{productName}} pentru a fi restaurate ulterior pe un server local.",
+  "EnableAutomaticBackup": "Activează copiere de rezervă automată.",
+  "EnableAutomaticBackupDescription": "Utilizați această opțiune pentru a crea o copie de rezervă a datelor din portal."
 }

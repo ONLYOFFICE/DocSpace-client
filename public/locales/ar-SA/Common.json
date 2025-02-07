@@ -626,5 +626,7 @@
   "UpgradeToProBannerInstructionItemWindows": "تعليمات ويندوز.",
   "UpgradeToProBannerInstructionNote": "يرجى ملاحظة أن المحررين لن يكونوا متوفرين أثناء الترقية. نوصي أيضًا بـ <1> نسخ بياناتك احتياطيًا </ 1> قبل البدء.",
   "UpgradeToProBannerInstructionReadNow": "اقرا الان",
-  "AutoBackupDescription": "يتم استخدام خيار النسخ الاحتياطي التلقائي لأتمتة عملية النسخ الاحتياطي لبيانات {{productName}} لتتمكن من استعادتها لاحقًا إلى خادم محلي."
+  "AutoBackupDescription": "يتم استخدام خيار النسخ الاحتياطي التلقائي لأتمتة عملية النسخ الاحتياطي لبيانات {{productName}} لتتمكن من استعادتها لاحقًا إلى خادم محلي.",
+  "EnableAutomaticBackup": "قم بتمكين النسخ الاحتياطي التلقائي.",
+  "EnableAutomaticBackupDescription": "استخدم هذا الخيار لعمل نسخة احتياطية من بيانات الاستضافة."
 }

@@ -428,7 +428,7 @@ const AutomaticBackup = ({
               noSelect
               className="settings_unavailable"
             >
-              {t("EnableAutomaticBackup")}
+              {t("Common:EnableAutomaticBackup")}
             </Text>
             {!isEnableAuto && !isManagement ? (
               <Badge
@@ -445,7 +445,7 @@ const AutomaticBackup = ({
             ) : null}
           </div>
           <Text className="backup_toggle-btn-description settings_unavailable">
-            {t("EnableAutomaticBackupDescription")}
+            {t("Common:EnableAutomaticBackupDescription")}
           </Text>
         </div>
       </div>

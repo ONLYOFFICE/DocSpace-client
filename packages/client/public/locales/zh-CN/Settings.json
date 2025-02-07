@@ -104,8 +104,6 @@
   "EditColorScheme": "编辑配色方案",
   "Employees": "用户",
   "EmptyBackupList": "尚未创建任何备份。请创建一个或多个备份，使其显示在此列表中。",
-  "EnableAutomaticBackup": "启用自动备份",
-  "EnableAutomaticBackupDescription": "使用该选项备份协作空间的数据。",
   "EnterNumber": "输入编号",
   "EnterTime": "输入时间",
   "EnterTitle": "请输入标题",

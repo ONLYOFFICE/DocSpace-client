@@ -629,5 +629,7 @@
   "UpgradeToProBannerInstructionNote": "アップグレード中は、エディターが利用できなくなりますのでご注意ください。また、事前に<1>データのバックアップ</1> を行うことをお勧めします。",
   "UpgradeToProBannerInstructionReadNow": "今すぐ読む",
   "UpgradeToProBannerInformationAboutShort": "{{license}}版の詳細は<1>公式サイト</1>でご確認ください。",
-  "AutoBackupDescription": "自動バックアップオプションは、{{productName}}データのバックアッププロセスを自動化し、後でローカルサーバーに復元できるようにするためのオプションです。"
+  "AutoBackupDescription": "自動バックアップオプションは、{{productName}}データのバックアッププロセスを自動化し、後でローカルサーバーに復元できるようにするためのオプションです。",
+  "EnableAutomaticBackup": "自動バックアップを有効にする",
+  "EnableAutomaticBackupDescription": "スペースのデータをバックアップする場合は、このオプションを使用してください。"
 }

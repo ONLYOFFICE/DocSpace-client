@@ -103,8 +103,6 @@
   "EditColorScheme": "Editar Esquema de Cores",
   "Employees": "utilizadores",
   "EmptyBackupList": "Ainda não foi criada nenhuma cópia de segurança. Crie uma ou mais cópias de segurança para que elas apareçam na lista.",
-  "EnableAutomaticBackup": "Ativar Criação Automática de Cópias de Segurança.",
-  "EnableAutomaticBackupDescription": "Utilize esta opção para criar cópias de segurança dos dados do espaço.",
   "EnterNumber": "Insira numeros",
   "EnterTime": "Insira a hora",
   "EnterTitle": "Introduza o título",

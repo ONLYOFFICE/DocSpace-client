@@ -103,8 +103,6 @@
   "EditColorScheme": "Editar esquema de cores",
   "Employees": "Usuários",
   "EmptyBackupList": "Nenhum backup foi criado ainda, crie um ou mais backups para eles aparecerem nesta lista.",
-  "EnableAutomaticBackup": "Ativar backup automático.",
-  "EnableAutomaticBackupDescription": "Use esta opção para fazer backup dos dados do espaço.",
   "EnterNumber": "Insira numeros",
   "EnterTime": "Insira a hora",
   "EnterTitle": "Insira o título",

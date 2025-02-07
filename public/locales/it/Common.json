@@ -629,5 +629,7 @@
   "UpgradeToProBannerInstructionNote": "Tieni presente che gli editor non saranno disponibili durante l'aggiornamento. Ti consigliamo inoltre di <1>effettuare il backup dei tuoi dati</1> prima di iniziare.",
   "UpgradeToProBannerInstructionReadNow": "Leggi ora",
   "UpgradeToProBannerInformationAboutShort": "Ulteriori informazioni su {{license}} Edition sul sito <1>Web ufficiale</1>",
-  "AutoBackupDescription": "L'opzione Backup automatico viene utilizzata per automatizzare il processo di backup dei dati di {{productName}} per poterli ripristinare successivamente su un server locale."
+  "AutoBackupDescription": "L'opzione Backup automatico viene utilizzata per automatizzare il processo di backup dei dati di {{productName}} per poterli ripristinare successivamente su un server locale.",
+  "EnableAutomaticBackup": "Attivare backup automatico.",
+  "EnableAutomaticBackupDescription": "Utilizza questa opzione per eseguire il backup dei dati dello spazio."
 }

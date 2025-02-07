@@ -103,8 +103,6 @@
   "EditColorScheme": "Renk düzenini düzenle",
   "Employees": "kullanıcılar",
   "EmptyBackupList": "Henüz hiçbir yedekleme yapılmadı. Listede yer alması için bir veya daha fazla yedekleme yapın.",
-  "EnableAutomaticBackup": "Otomatik yedeklemeyi etkinleştir.",
-  "EnableAutomaticBackupDescription": "Alan verilerini yedeklemek için bu seçeneği kullanın.",
   "EnterNumber": "Numarayı gir",
   "EnterTime": "Saati gir",
   "EnterTitle": "Başlık girin",

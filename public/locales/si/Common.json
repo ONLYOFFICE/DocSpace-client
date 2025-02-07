@@ -484,5 +484,7 @@
   "UpgradeToProBannerInstructionItemWindows": "වින්ඩෝස් උපදෙස්",
   "UpgradeToProBannerInstructionNote": "උත්ශ්‍රේණිය අතරතුර සංස්කරක භාවිතා කිරීමට නොහැකි බව කරුණාවෙන් සලකන්න. ආරම්භයට පෙර <1>ඔබගේ දත්ත උපස්ථයක්</1> තැබීමට නිර්දේශ කෙරේ.",
   "UpgradeToProBannerInstructionReadNow": "දැන් කියවන්න",
-  "AutoBackupDescription": "පසුව ස්ථානීය සේවාදායකයකට ප්‍රත්‍යර්පණය උදෙසා ස්වයංක්‍රීය උපස්ථ විකල්පය {{productName}} දත්ත උපස්ථ ක්‍රියාවලිය ස්වයංක්‍රියනයට යොදා ගැනෙයි."
+  "AutoBackupDescription": "පසුව ස්ථානීය සේවාදායකයකට ප්‍රත්‍යර්පණය උදෙසා ස්වයංක්‍රීය උපස්ථ විකල්පය {{productName}} දත්ත උපස්ථ ක්‍රියාවලිය ස්වයංක්‍රියනයට යොදා ගැනෙයි.",
+  "EnableAutomaticBackup": "ස්වයංක්‍රීය උපස්ථය සබල කරන්න",
+  "EnableAutomaticBackupDescription": "අවකාශයේ දත්ත උපස්ථ කිරීමට මෙම විකල්පය භාවිතා කරන්න."
 }

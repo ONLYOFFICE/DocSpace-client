@@ -103,8 +103,6 @@
   "EditColorScheme": "색 구성표 편집",
   "Employees": "사용자",
   "EmptyBackupList": "아직 백업이 생성되지 않았습니다. 이 목록에 표시될 하나 이상의 백업을 생성하세요.",
-  "EnableAutomaticBackup": "자동 백업을 활성화하세요.",
-  "EnableAutomaticBackupDescription": "스페이스 데이터를 백업하기 위해 이 옵션을 사용하세요.",
   "EnterNumber": "숫자 입력",
   "EnterTime": "시간 입력",
   "EnterTitle": "제목을 입력하세요",

@@ -628,5 +628,7 @@
   "UpgradeToProBannerInstructionNote": "Upoštevajte, da urejevalniki med nadgradnjo ne bodo na voljo. Priporočamo tudi, da pred začetkom <1>varnostno kopirate podatke</1>.",
   "UpgradeToProBannerInstructionReadNow": "Preberi zdaj",
   "UpgradeToProBannerInformationAboutShort": "Izvedite več o {{license}} Edition na <1>uradni spletni strani</1>",
-  "AutoBackupDescription": "Možnost samodejnega varnostnega kopiranja se uporablja za avtomatizacijo postopka varnostnega kopiranja podatkov {{productName}}, da jih lahko pozneje obnovite na lokalni strežnik."
+  "AutoBackupDescription": "Možnost samodejnega varnostnega kopiranja se uporablja za avtomatizacijo postopka varnostnega kopiranja podatkov {{productName}}, da jih lahko pozneje obnovite na lokalni strežnik.",
+  "EnableAutomaticBackup": "Omogoči samodejno varnostno kopiranje.",
+  "EnableAutomaticBackupDescription": "Uporabite to možnost za varnostno kopiranje podatkov prostora."
 }

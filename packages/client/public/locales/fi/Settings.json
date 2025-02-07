@@ -103,8 +103,6 @@
   "EditColorScheme": "Muokkaa värijärjestelmää",
   "Employees": "Käyttäjät",
   "EmptyBackupList": "Ei varmuuskopioita. Luo yksi tai useampi varmuuskopio ja ne näkyvät tässä listassa.",
-  "EnableAutomaticBackup": "Ota automaattinen varmuuskopiointi käyttöön.",
-  "EnableAutomaticBackupDescription": "Tämän vaihtoehdon avulla voit varmuuskopioida tilan tiedot.",
   "EnterNumber": "Syötä numero",
   "EnterTime": "Syötä aika",
   "EnterTitle": "Syötä otsikko",

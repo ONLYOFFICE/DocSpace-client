@@ -103,8 +103,6 @@
   "EditColorScheme": "تحرير نظام الألوان",
   "Employees": "المستخدمين",
   "EmptyBackupList": "لم يتم إنشاء نسخ احتياطية حتى الآن. قم بإنشاء نسخة احتياطية واحدة أو أكثر لكي تظهر في هذه القائمة.",
-  "EnableAutomaticBackup": "قم بتمكين النسخ الاحتياطي التلقائي.",
-  "EnableAutomaticBackupDescription": "استخدم هذا الخيار لعمل نسخة احتياطية من بيانات الاستضافة.",
   "EnterNumber": "ادخل رقم",
   "EnterTime": "ادخل وقت",
   "EnterTitle": "أدخل العنوان",

@@ -591,12 +591,14 @@ export function createRoomFromTemplate(
   title: string,
   logo,
   tags,
+  copyLogo: boolean,
 ) {
   const data = {
     templateId,
     title,
     logo,
     tags,
+    CopyLogo: copyLogo,
   };
   const options = {
     method: "post",

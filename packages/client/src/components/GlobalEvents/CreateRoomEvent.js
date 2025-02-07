@@ -67,7 +67,9 @@ const CreateRoomEvent = ({
   const [fetchedTags, setFetchedTags] = useState([]);
 
   const onCreate = (roomParams) => {
-    setRoomParams(roomParams);
+    const itemLogo = selectionItems.length ? selectionItems[0].logo : null;
+
+    setRoomParams({ ...roomParams, logo: itemLogo });
     setOnClose(onClose);
 
     const notConnectedThirdparty =

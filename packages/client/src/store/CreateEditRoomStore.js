@@ -468,9 +468,9 @@ class CreateEditRoomStore {
       createAsNewFolder,
       icon,
       watermark,
-      // roomType,
       isTemplate,
       roomId,
+      logo,
     } = roomParams;
 
     const isThirdparty = storageLocation.isThirdparty;
@@ -516,8 +516,10 @@ class CreateEditRoomStore {
 
     this.setIsLoading(true);
 
+    const isDeleteLogo = !!logo.original && !icon.uploadedFile;
+
     try {
-      if (icon.uploadedFile) {
+      if (icon.uploadedFile && typeof icon.uploadedFile !== "string") {
         const roomLogo = await this.getRoomLogo(icon);
         createRoomData.logo = roomLogo;
       }
@@ -531,7 +533,10 @@ class CreateEditRoomStore {
           createRoomData,
         );
       } else if (isTemplate) {
-        room = await this.onCreateTemplateRoom(createRoomData);
+        room = await this.onCreateTemplateRoom({
+          ...createRoomData,
+          copyLogo: !isDeleteLogo,
+        });
       } else {
         room = await createRoom(createRoomData);
       }
@@ -586,7 +591,7 @@ class CreateEditRoomStore {
   onCreateTemplateRoom = async (roomParams) => {
     this.filesStore.setRoomCreated(true);
 
-    const { roomId, tags, title, logo, roomType } = roomParams;
+    const { roomId, tags, title, logo, roomType, copyLogo } = roomParams;
 
     let isFinished = false;
     let progressData;
@@ -596,6 +601,7 @@ class CreateEditRoomStore {
       title,
       logo,
       tags,
+      copyLogo,
     );
 
     progressData = room;

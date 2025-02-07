@@ -164,7 +164,7 @@ const Members = ({
   const publicRoomItems = [];
 
   const isTemplate =
-    infoPanelSelection.rootFolderType === FolderType.RoomTemplates;
+    infoPanelSelection?.rootFolderType === FolderType.RoomTemplates;
 
   if (
     isPublicRoomType &&

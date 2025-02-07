@@ -29,11 +29,6 @@ import styled from "styled-components";
 import { mobile } from "../../../utils";
 
 export const StyledHeader = styled.div`
-  .subtitle {
-    margin-bottom: 20px;
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
-  }
-
   .header-container {
     display: flex;
     align-items: center;
@@ -41,15 +36,15 @@ export const StyledHeader = styled.div`
   }
 
   .wl-subtitle {
-    margin-top: 8px;
-    margin-bottom: 20px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 
   .wl-helper {
     display: flex;
     gap: 4px;
     align-items: center;
-    margin-bottom: 16px;
 
     .wl-helper-label > div {
       display: inline-flex;
@@ -62,12 +57,25 @@ export const StyledHeader = styled.div`
     background-color: ${(props) =>
       props.theme.client.settings.common.whiteLabel.paidBadgeBackground};
   }
+
+  .brand-name-buttons {
+    margin-top: 20px;
+  }
 `;
 
 export const WhiteLabelWrapper = styled.div`
-  .use-as-logo {
-    margin-top: 12px;
+  hr {
+    margin: 20px 0;
+  }
+
+  .generate-logo {
+    margin-top: 16px;
     margin-bottom: 24px;
+  }
+
+  .subtitle {
+    margin-bottom: 20px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
   }
 
   .input {
@@ -131,6 +139,7 @@ export const WhiteLabelWrapper = styled.div`
   .editor-header-container {
     position: relative;
   }
+
   .logo-item {
     display: flex;
     flex-direction: column;

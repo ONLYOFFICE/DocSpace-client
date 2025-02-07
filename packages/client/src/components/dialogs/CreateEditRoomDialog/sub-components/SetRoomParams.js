@@ -153,6 +153,7 @@ const SetRoomParams = ({
   setLifetimeDialogVisible,
   hideConfirmRoomLifetime,
   templateIsAvailable,
+  fromTemplate,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -285,7 +286,7 @@ const SetRoomParams = ({
       title: newValue,
     });
 
-    if (!cover && !previewIcon && !isEdit) {
+    if (!cover && !previewIcon && !isEdit && !isTemplate && !fromTemplate) {
       setCover(`#${randomColor}`, "");
     }
   };
@@ -320,9 +321,10 @@ const SetRoomParams = ({
     });
   };
 
-  const hasImage = isEdit
-    ? roomParams.icon.uploadedFile && selection?.logo?.original
-    : false;
+  const hasImage =
+    isEdit || isTemplate || fromTemplate
+      ? roomParams.icon.uploadedFile && selection?.logo?.original
+      : false;
   const model = getLogoCoverModel(t, hasImage);
 
   const isEditRoomModel = model.map((item) =>
@@ -338,66 +340,69 @@ const SetRoomParams = ({
           ? false
           : !createRoomTitle;
 
-  const element = isEdit ? (
-    <ItemIcon
-      id={selection?.id}
-      fileExst={selection?.fileExst}
-      isRoom
-      title={previewTitle}
-      className="room-params-icon"
-      logo={
-        currentCover
-          ? { cover: currentCover }
-          : avatarEditorDialogVisible
-            ? currentIcon
-            : previewIcon || currentIcon
-      }
-      showDefault={
-        cover && cover.cover
-          ? false
-          : (!previewIcon &&
-              !selection?.logo?.cover &&
-              !selection?.logo?.large) ||
-            cover?.color
-      }
-      color={cover ? cover.color : selection?.logo?.color}
-      size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
-      radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
-      withEditing
-      model={isEditRoomModel}
-      onChangeFile={onChangeFile}
-    />
-  ) : (
-    <RoomIcon
-      id={selection?.id}
-      title={createRoomTitle}
-      showDefault={
-        cover && cover.cover ? false : !previewIcon || avatarEditorDialogVisible
-      }
-      size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
-      radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
-      imgClassName="react-svg-icon"
-      model={model}
-      className="room-params-icon"
-      isEmptyIcon={
-        !currentCover || roomLogoCoverDialogVisible ? isEmptyIcon : null
-      }
-      color={cover ? cover.color : randomColor}
-      logo={
-        currentCover
-          ? { cover: currentCover }
-          : !avatarEditorDialogVisible && previewIcon
-      }
-      withEditing={
-        (previewIcon && !avatarEditorDialogVisible) ||
-        createRoomTitle ||
-        (currentCover && !roomLogoCoverDialogVisible) ||
-        cover?.color
-      }
-      onChangeFile={onChangeFile}
-      currentColorScheme={currentColorScheme}
-    />
-  );
+  const element =
+    isEdit || isTemplate || fromTemplate ? (
+      <ItemIcon
+        id={selection?.id}
+        fileExst={selection?.fileExst}
+        isRoom
+        title={previewTitle}
+        className="room-params-icon"
+        logo={
+          currentCover
+            ? { cover: currentCover }
+            : avatarEditorDialogVisible
+              ? currentIcon
+              : previewIcon || currentIcon
+        }
+        showDefault={
+          cover && cover.cover
+            ? false
+            : (!previewIcon &&
+                !selection?.logo?.cover &&
+                !selection?.logo?.large) ||
+              cover?.color
+        }
+        color={cover ? cover.color : selection?.logo?.color}
+        size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+        radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
+        withEditing
+        model={isEditRoomModel}
+        onChangeFile={onChangeFile}
+      />
+    ) : (
+      <RoomIcon
+        id={selection?.id}
+        title={createRoomTitle}
+        showDefault={
+          cover && cover.cover
+            ? false
+            : !previewIcon || avatarEditorDialogVisible
+        }
+        size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+        radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
+        imgClassName="react-svg-icon"
+        model={model}
+        className="room-params-icon"
+        isEmptyIcon={
+          !currentCover || roomLogoCoverDialogVisible ? isEmptyIcon : null
+        }
+        color={cover ? cover.color : randomColor}
+        logo={
+          currentCover
+            ? { cover: currentCover }
+            : !avatarEditorDialogVisible && previewIcon
+        }
+        withEditing={
+          (previewIcon && !avatarEditorDialogVisible) ||
+          createRoomTitle ||
+          (currentCover && !roomLogoCoverDialogVisible) ||
+          cover?.color
+        }
+        onChangeFile={onChangeFile}
+        currentColorScheme={currentColorScheme}
+      />
+    );
 
   const tagsTitle = isTemplateSelected || isTemplate ? t("Files:RoomTags") : "";
 

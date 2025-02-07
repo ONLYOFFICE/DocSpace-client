@@ -374,18 +374,17 @@ class CreateEditRoomStore {
       roomParams;
 
     const tagsToAddList = tags.map((tag) => tag.name);
+    const isDeleteLogo = !!item.logo.original && !icon.uploadedFile;
 
     const roomData = {
       title,
       roomId: item.id,
-      logo: null,
       tags: tagsToAddList,
       public: isAvailable,
     };
 
-    if (icon.uploadedFile) {
-      const roomLogo = await this.getRoomLogo(icon);
-      roomData.logo = roomLogo;
+    if (isDeleteLogo) {
+      roomData.logo = null;
     }
 
     let isCompleted = false;

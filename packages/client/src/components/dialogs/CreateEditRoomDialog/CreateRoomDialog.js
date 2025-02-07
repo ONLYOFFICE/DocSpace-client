@@ -271,6 +271,9 @@ const CreateRoomDialog = ({
             setIsWrongTitle={setIsWrongTitle}
             enableThirdParty={enableThirdParty}
             onKeyUp={onKeyUpHandler}
+            fromTemplate={
+              selectionItems.length ? selectionItems[0].isTemplate : false
+            }
           />
         )}
       </ModalDialog.Body>

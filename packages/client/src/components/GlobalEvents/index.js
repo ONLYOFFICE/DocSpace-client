@@ -325,6 +325,7 @@ const GlobalEvents = ({
       visible,
       item: e.item,
       onClose: () => {
+        setCover();
         setSaveAsTemplateDialog({
           visible: false,
           item: null,

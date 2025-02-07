@@ -634,5 +634,6 @@
   "RoomsModule": "Varnostno kopiranje sobe",
   "RoomsModuleDescription": "Ustvarite lahko novo sobo posebej za varnostno kopijo, izberete eno od obstoječih sob ali shranite kopijo v njihovo {{roomName}} sobo.",
   "AutoSavePeriod": "Obdobje samodejnega shranjevanja",
-  "AutoSavePeriodHelp": "Spodaj prikazan čas ustreza časovnemu pasu, ki je nastavljen na {{productName}}."
+  "AutoSavePeriodHelp": "Spodaj prikazan čas ustreza časovnemu pasu, ki je nastavljen na {{productName}}.",
+  "MaxCopies": "{{copiesCount}} - največje število varnostnih kopij"
 }

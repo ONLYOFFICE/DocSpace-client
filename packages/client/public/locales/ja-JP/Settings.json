@@ -143,7 +143,6 @@
   "ManagementCategoryIntegration": "統合",
   "ManagementCategorySecurity": "セキュリティ",
   "ManualBackupDescription": "スペースに含まれるすべてのデータをファイルとして取得したい場合にこのオプションを使用してください。",
-  "MaxCopies": "{{copiesCount}}は、バックアップの最大コピー数",
   "Migration": "移行",
   "NewColorScheme": "新しいカラースキーム",
   "NextStep": "次のステップ",

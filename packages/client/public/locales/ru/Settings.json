@@ -143,7 +143,6 @@
   "ManagementCategoryIntegration": "Интеграция",
   "ManagementCategorySecurity": "Безопасность",
   "ManualBackupDescription": "Используйте эту опцию, если Вы хотите получить все данные, содержащиеся на портале, в виде файла.",
-  "MaxCopies": "{{copiesCount}} - максимальное число копий",
   "Migration": "Миграция",
   "NewColorScheme": "Новая цветовая схема",
   "NextStep": "Следующий шаг",

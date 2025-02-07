@@ -635,5 +635,6 @@
   "RoomsModule": "Salle de sauvegarde",
   "RoomsModuleDescription": "Vous pouvez créer une nouvelle salle spécialement pour la sauvegarde, choisir l’une des salles existantes ou enregistrer la copie dans la salle {{roomName}}.",
   "AutoSavePeriod": "Période de sauvegarde automatique",
-  "AutoSavePeriodHelp": "L'heure indiquée ci-dessous correspond au fuseau horaire défini dans {{productName}}."
+  "AutoSavePeriodHelp": "L'heure indiquée ci-dessous correspond au fuseau horaire défini dans {{productName}}.",
+  "MaxCopies": "{{copiesCount}} - nombre maximum de copies de sauvegarde"
 }

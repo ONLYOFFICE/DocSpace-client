@@ -143,7 +143,6 @@
   "ManagementCategoryIntegration": "Інтеграція",
   "ManagementCategorySecurity": "Безпека",
   "ManualBackupDescription": "Використовуйте цю опцію, якщо ви хочете отримати всі дані, що містяться на порталі як файл.",
-  "MaxCopies": "{{copiesCount}} - максимальна кількість резервних копій",
   "Migration": "Перенесення",
   "NewColorScheme": "Нова колірна схема",
   "NextStep": "Наступний крок",

@@ -143,7 +143,6 @@
   "ManagementCategoryIntegration": "Integratie",
   "ManagementCategorySecurity": "Veiligheid",
   "ManualBackupDescription": "Gebruik deze optie als u alle data opgeslagen in de ruimte als bestand wilt ontvangen.",
-  "MaxCopies": "{{copiesCount}} - maximum aantal back-ups",
   "Migration": "Migratie",
   "NewColorScheme": "Nieuw kleurenschema",
   "NextStep": "Volgende stap",

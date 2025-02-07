@@ -169,7 +169,7 @@ const ScheduleComponent = ({
           options={maxNumberCopiesArray}
           selectedOption={{
             key: 0,
-            label: `${t("MaxCopies", {
+            label: `${t("Common:MaxCopies", {
               copiesCount: selectedMaxCopiesNumber,
             })}`,
           }}

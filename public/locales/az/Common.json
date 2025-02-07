@@ -634,5 +634,6 @@
   "RoomsModule": "Ehtiyat otaq",
   "RoomsModuleDescription": "Yedəkləmə üçün xüsusi olaraq yeni otaq yarada, mövcud otaqlardan birini seçə və ya nüsxəni onların {{roomName}} otağında saxlaya bilərsiniz.",
   "AutoSavePeriod": "Avtomatik yadda saxlama müddəti",
-  "AutoSavePeriodHelp": "Aşağıda göstərilən vaxt {{productName}} təyin olunmuş saat qurşağına uyğun gəlir."
+  "AutoSavePeriodHelp": "Aşağıda göstərilən vaxt {{productName}} təyin olunmuş saat qurşağına uyğun gəlir.",
+  "MaxCopies": "{{copiesCount}} - ehtiyat nüsxələrin maksimal sayı"
 }

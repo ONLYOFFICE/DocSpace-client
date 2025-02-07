@@ -143,7 +143,6 @@
   "ManagementCategoryIntegration": "Integration",
   "ManagementCategorySecurity": "Security",
   "ManualBackupDescription": "Use this option if you want to get all data contained in the space as a file.",
-  "MaxCopies": "{{copiesCount}} - maximum number of backup copies",
   "Migration": "Migration",
   "NewColorScheme": "New color scheme",
   "NextStep": "Next step",

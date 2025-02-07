@@ -143,7 +143,6 @@
   "ManagementCategoryIntegration": "Интеграција",
   "ManagementCategorySecurity": "Безбедност",
   "ManualBackupDescription": "Користите ову опцију ако желите да сви подаци буду садржани у простору као датотека.",
-  "MaxCopies": "{{copiesCount}} - максимални број резервних копија",
   "Migration": "Миграција",
   "NewColorScheme": "Нова шема боја",
   "NextStep": "Следећи корак",

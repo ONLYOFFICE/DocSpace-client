@@ -635,5 +635,6 @@
   "RoomsModule": "Sala de backup",
   "RoomsModuleDescription": "Você pode criar uma nova sala especificamente para o backup, escolher uma das salas existentes ou salvar a cópia em sua sala {{roomName}}.",
   "AutoSavePeriod": "Período de salvamento automático",
-  "AutoSavePeriodHelp": "A hora exibida abaixo corresponde ao fuso horário definido no {{productName}}."
+  "AutoSavePeriodHelp": "A hora exibida abaixo corresponde ao fuso horário definido no {{productName}}.",
+  "MaxCopies": "{{copiesCount}} - número máximo de cópias de backup"
 }

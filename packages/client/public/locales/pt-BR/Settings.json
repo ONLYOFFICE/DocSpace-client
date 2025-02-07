@@ -143,7 +143,6 @@
   "ManagementCategoryIntegration": "Integração",
   "ManagementCategorySecurity": "Segurança",
   "ManualBackupDescription": "Use esta opção se você quiser obter os dados contidos no espaço como um arquivo.",
-  "MaxCopies": "{{copiesCount}} - número máximo de cópias de backup",
   "Migration": "Migração",
   "NewColorScheme": "Novo esquema de cores",
   "NextStep": "Próxima Etapa",

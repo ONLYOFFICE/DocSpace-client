@@ -143,7 +143,6 @@
   "ManagementCategoryIntegration": "تكامل",
   "ManagementCategorySecurity": "حماية",
   "ManualBackupDescription": "استخدم هذا الخيار إذا كنت تريد الحصول على جميع البيانات الموجودة في الاستضافة كملف.",
-  "MaxCopies": "{{copiesCount}} - الحد الأقصى لعدد النسخ الاحتياطية",
   "Migration": "الترحيل",
   "NewColorScheme": "نظام ألوان جديد",
   "NextStep": "الخطوة التالية",

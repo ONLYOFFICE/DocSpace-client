@@ -634,5 +634,6 @@
   "RoomsModule": "Stwórz kopię zapasową pokoju",
   "RoomsModuleDescription": "Możesz utworzyć nowy pokój specjalnie do kopii zapasowej, wybrać jeden z istniejących pokoi lub zapisać kopię w jej pokoju {{roomName}}.",
   "AutoSavePeriod": "Częstotliwość autozapisywania",
-  "AutoSavePeriodHelp": "Widoczny poniżej czas odpowiada strefie czasowej ustawionej w {{productName}}."
+  "AutoSavePeriodHelp": "Widoczny poniżej czas odpowiada strefie czasowej ustawionej w {{productName}}.",
+  "MaxCopies": "{{copiesCount}} – maksymalna liczba kopii zapasowych"
 }

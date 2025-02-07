@@ -636,5 +636,6 @@
   "RoomsModule": "Backup room",
   "RoomsModuleDescription": "You may create a new room specifically for the backup, choose one of the existing rooms, or save the copy in their {{roomName}} room.",
   "AutoSavePeriod": "Autosave period",
-  "AutoSavePeriodHelp": "The time shown below corresponds to the time zone set in the {{productName}}."
+  "AutoSavePeriodHelp": "The time shown below corresponds to the time zone set in the {{productName}}.",
+  "MaxCopies": "{{copiesCount}} - maximum number of backup copies"
 }

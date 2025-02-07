@@ -143,7 +143,6 @@
   "ManagementCategoryIntegration": "Liittäminen",
   "ManagementCategorySecurity": "Turvallisuus",
   "ManualBackupDescription": "Käytä tätä, jos haluat tallettaa sivuston kaiken sisällön tiedostoon.",
-  "MaxCopies": "{{copiesCount}} - varmuuskopioiden enimmäismäärä",
   "Migration": "Migraatio",
   "NewColorScheme": "Uusi väriteema",
   "NextStep": "Seuraava vaihe",

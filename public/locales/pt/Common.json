@@ -634,5 +634,6 @@
   "RoomsModule": "Sala de Apoio",
   "RoomsModuleDescription": "Pode criar uma nova sala especificamente para a cópia de segurança, escolher uma das salas existentes, ou guardar a cópia na sua sala {{roomName}}.",
   "AutoSavePeriod": "Período para Guardar Automaticamente",
-  "AutoSavePeriodHelp": "O tempo mostrado abaixo corresponde ao fuso horário que definiu para o {{productName}}."
+  "AutoSavePeriodHelp": "O tempo mostrado abaixo corresponde ao fuso horário que definiu para o {{productName}}.",
+  "MaxCopies": "{{copiesCount}} - número máximo de cópias de segurança"
 }

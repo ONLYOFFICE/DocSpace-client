@@ -634,5 +634,6 @@
   "RoomsModule": "백업 방",
   "RoomsModuleDescription": "특별히 백업용으로 새 방을 만들거나 기존 방 중 하나를 선택하거나 {{roomName}} 방에 사본을 저장할 수 있습니다.",
   "AutoSavePeriod": "자동 저장 기간",
-  "AutoSavePeriodHelp": "아래에 표시된 시간은 {{productName}}에 설정된 시간대와 일치합니다."
+  "AutoSavePeriodHelp": "아래에 표시된 시간은 {{productName}}에 설정된 시간대와 일치합니다.",
+  "MaxCopies": "{{copiesCount}} - 최대 백업 복사본 수"
 }

@@ -635,5 +635,6 @@
   "RoomsModule": "Copiere de rezervă a sălii",
   "RoomsModuleDescription": "Puteți crea o sală nouă destinată special pentru copiere de rezervă, alege una dintre sălile existente sau salva copia în sala {{roomName}}.",
   "AutoSavePeriod": "Interval de timp pentru salvarea automată",
-  "AutoSavePeriodHelp": "Ora afișată mai jos va corespunde fusului orar în {{productName}}."
+  "AutoSavePeriodHelp": "Ora afișată mai jos va corespunde fusului orar în {{productName}}.",
+  "MaxCopies": "{{copiesCount}} - numărul maxim de copii de rezervă"
 }

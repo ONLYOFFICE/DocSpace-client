@@ -634,5 +634,6 @@
   "RoomsModule": "Dublējuma telpa",
   "RoomsModuleDescription": "Jūs varat izveidot jaunu telpu tieši dublēšanai, izvēlēties vienu no esošajām telpām vai saglabāt kopiju savā {{roomName}} telpā.",
   "AutoSavePeriod": "Automātiskās saglabāšanas periods",
-  "AutoSavePeriodHelp": "Zemāk redzamais laiks atbilst {{productName}} iestatītajai laika joslai."
+  "AutoSavePeriodHelp": "Zemāk redzamais laiks atbilst {{productName}} iestatītajai laika joslai.",
+  "MaxCopies": "Maksimālais rezerves dublējumu skaits: {{copiesCount}}"
 }

@@ -633,5 +633,6 @@
   "RoomsModule": "Phòng dự phòng",
   "RoomsModuleDescription": "Bạn có thể tạo một phòng mới chuyên dùng để sao lưu, chọn một trong các phòng hiện có hoặc lưu bản sao trong phòng {{roomName}} của họ.",
   "AutoSavePeriod": "Thời gian lưu tự động",
-  "AutoSavePeriodHelp": "Thời gian hiển thị bên dưới tương ứng với múi giờ được đặt trong {{productName}}."
+  "AutoSavePeriodHelp": "Thời gian hiển thị bên dưới tương ứng với múi giờ được đặt trong {{productName}}.",
+  "MaxCopies": "{{copiesCount}} - số lượng bản sao lưu tối đa"
 }

@@ -39,7 +39,7 @@ export const useDefaultOptions = (t: TTranslation, language: string) => {
       .fill(null)
       .map((_, index) => ({
         key: `${index + 1}`,
-        label: `${t("MaxCopies", { copiesCount: index + 1 })}`,
+        label: `${t("Common:MaxCopies", { copiesCount: index + 1 })}`,
       }));
   }, [t]);
 

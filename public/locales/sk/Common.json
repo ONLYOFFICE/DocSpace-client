@@ -634,5 +634,6 @@
   "RoomsModule": "Zálohovať miestnosť",
   "RoomsModuleDescription": "Môžete vytvoriť novú miestnosť špeciálne na zálohovanie, vybrať jednu z existujúcich miestností alebo uložiť kópiu do svojej miestnosti {{roomName}}.",
   "AutoSavePeriod": "Časový interval automatického ukladania",
-  "AutoSavePeriodHelp": "Čas zobrazený nižšie je uvedený podľa časového pásma nastaveného na {{productName}}."
+  "AutoSavePeriodHelp": "Čas zobrazený nižšie je uvedený podľa časového pásma nastaveného na {{productName}}.",
+  "MaxCopies": "{{copiesCount}} - maximálny počet zálohovaných kópií"
 }

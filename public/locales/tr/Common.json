@@ -634,5 +634,6 @@
   "RoomsModule": "Odayı yedekle",
   "RoomsModuleDescription": "Yedekleme için özel olarak yeni bir oda oluşturabilir, mevcut odalardan birini seçebilir veya kopyayı onların {{roomName}} odasına kaydedebilirsiniz.",
   "AutoSavePeriod": "Otomatik kaydetme süresi",
-  "AutoSavePeriodHelp": "Aşağıda gösterilen saat, {{productName}} ayarlanan saat dilimine karşılık gelir."
+  "AutoSavePeriodHelp": "Aşağıda gösterilen saat, {{productName}} ayarlanan saat dilimine karşılık gelir.",
+  "MaxCopies": "{{copiesCount}} - maksimum yedek kopya sayısı"
 }

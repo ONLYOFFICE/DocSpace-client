@@ -134,12 +134,16 @@ const FileInputPure = ({
     [styles.warning]: hasWarning,
   });
 
-  const textInputClasses = classNames(styles.textInput, {
-    [styles[size]]: size,
-    [styles.disabled]: isDisabled || isLoading,
-    [styles.error]: hasError,
-    [styles.warning]: hasWarning,
-  });
+  const textInputClasses = classNames(
+    styles.textInput,
+    {
+      [styles[size]]: size,
+      [styles.disabled]: isDisabled || isLoading,
+      [styles.error]: hasError,
+      [styles.warning]: hasWarning,
+    },
+    "text-input",
+  );
 
   const iconButtonClasses = classNames(styles.iconButton, {
     [styles.disabled]: isDisabled,

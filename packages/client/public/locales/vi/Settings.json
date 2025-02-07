@@ -31,8 +31,6 @@
   "AuditSubheader": "Phần phụ cho phép bạn duyệt qua danh sách các thay đổi mới nhất (tạo, sửa đổi, xóa, v.v.) do người dùng thực hiện đối với các thực thể (phòng, cơ hội, tập tin, v.v.) trong {{productName}} của bạn.",
   "AuditTrailNav": "Kiểm tra Truy nguyên",
   "AutoBackup": "Tự động sao lưu",
-  "AutoSavePeriod": "Thời gian lưu tự động",
-  "AutoSavePeriodHelp": "Thời gian hiển thị bên dưới tương ứng với múi giờ được đặt trong {{productName}}.",
   "Backup": "Sao lưu",
   "BackupCreatedError": "Xảy ra lỗi. Vui lòng liên hệ với quản trị viên của bạn.",
   "BackupCreatedSuccess": "Bản sao lưu đã được tạo thành công.",

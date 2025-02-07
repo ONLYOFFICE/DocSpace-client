@@ -31,8 +31,6 @@
   "AuditSubheader": "Tato podsekce umožňuje procházet seznam nejnovějších změn (vytvoření, úpravy, odstranění atd.), které uživatelé provedli v entitách (místnostech, příležitostech, souborech atd.) v rámci vašeho prostoru {{productName}}.",
   "AuditTrailNav": "Audit Trail",
   "AutoBackup": "Automatická záloha",
-  "AutoSavePeriod": "Doba automatického ukládání",
-  "AutoSavePeriodHelp": "Níže uvedený čas odpovídá časovému pásmu nastavenému na {{productName}}.",
   "Backup": "Záloha",
   "BackupCreatedError": "Došlo k chybě. Prosím kontaktujte Vašeho Administrátora.",
   "BackupCreatedSuccess": "Kopie zálohy byla úspěšně vytvořena.",

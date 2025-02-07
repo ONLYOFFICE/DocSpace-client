@@ -31,8 +31,6 @@
   "AuditSubheader": "Alt bölmə sizə {{productName}}-dəki (otaqlara, imkanlara, fayllara və s.) istifadəçilər tərəfindən edilən ən son dəyişikliklərin (yaradılması, dəyişdirilməsi, silinməsi və s.) siyahısını nəzərdən keçirməyə imkan verir.",
   "AuditTrailNav": "Audit izi",
   "AutoBackup": "Avtomatik ehtiyat nüsxəsi",
-  "AutoSavePeriod": "Avtomatik yadda saxlama müddəti",
-  "AutoSavePeriodHelp": "Aşağıda göstərilən vaxt {{productName}} təyin olunmuş saat qurşağına uyğun gəlir.",
   "Backup": "Yedəkləmə",
   "BackupCreatedError": "Xəta ilə üzləşdiniz. Administratorunuzla əlaqə saxlayın.",
   "BackupCreatedSuccess": "Ehtiyat nüsxə uğurla yaradıldı.",

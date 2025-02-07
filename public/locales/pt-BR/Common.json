@@ -633,5 +633,7 @@
   "EnableAutomaticBackup": "Ativar backup automático.",
   "EnableAutomaticBackupDescription": "Use esta opção para fazer backup dos dados do espaço.",
   "RoomsModule": "Sala de backup",
-  "RoomsModuleDescription": "Você pode criar uma nova sala especificamente para o backup, escolher uma das salas existentes ou salvar a cópia em sua sala {{roomName}}."
+  "RoomsModuleDescription": "Você pode criar uma nova sala especificamente para o backup, escolher uma das salas existentes ou salvar a cópia em sua sala {{roomName}}.",
+  "AutoSavePeriod": "Período de salvamento automático",
+  "AutoSavePeriodHelp": "A hora exibida abaixo corresponde ao fuso horário definido no {{productName}}."
 }

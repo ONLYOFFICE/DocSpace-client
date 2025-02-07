@@ -31,8 +31,6 @@
   "AuditSubheader": "Met deze subsectie kunt u bladeren door de lijst met de laatste wijzigingen (aanmaak, wijziging, verwijdering enz.) die gebruikers hebben aangebracht in de entiteiten (ruimtes, kansen, bestanden enz.) binnen uw {{productName}}.",
   "AuditTrailNav": "Audit Trail",
   "AutoBackup": "Automatische back-up",
-  "AutoSavePeriod": "Autosave periode",
-  "AutoSavePeriodHelp": "De hieronder aangegeven tijd komt overeen met de in de  {{productName}} ingestelde tijdzone.",
   "Backup": "Back-up",
   "BackupCreatedError": "Er is een fout opgetreden. Neem contact op met de beheerder.",
   "BackupCreatedSuccess": "De back-up kopie is succesvol aangemaakt.",

@@ -633,5 +633,7 @@
   "EnableAutomaticBackup": "Omogući automatsku rezervnu kopiju.",
   "EnableAutomaticBackupDescription": "Koristite ovu opciju da napravite rezervnu kopiju podataka o prostoru.",
   "RoomsModule": "Soba za rezervne kopije",
-  "RoomsModuleDescription": "Možete kreirati novu sobu posebno za rezervnu kopiju, izabrati jednu od postojećih soba ili sačuvati kopiju u njihovoj {{roomName}} sobi."
+  "RoomsModuleDescription": "Možete kreirati novu sobu posebno za rezervnu kopiju, izabrati jednu od postojećih soba ili sačuvati kopiju u njihovoj {{roomName}} sobi.",
+  "AutoSavePeriod": "Period automatskog čuvanja",
+  "AutoSavePeriodHelp": "Dole prikazano vreme odgovara vremenskoj zoni podešenoj u {{productName}}-u."
 }

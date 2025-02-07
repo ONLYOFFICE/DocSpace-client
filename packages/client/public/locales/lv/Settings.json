@@ -31,8 +31,6 @@
   "AuditSubheader": "Apakšsadaļa ļauj pārlūkot jaunāko izmaiņu sarakstu (izveide, modificēšana, dzēšana utt.), ko lietotāji veikuši jūsu {{productName}} esošajās entītijās (telpas, iespējas, faili utt.).",
   "AuditTrailNav": "Audita žurnāls",
   "AutoBackup": "Automātiskā rezerves kopēšana",
-  "AutoSavePeriod": "Automātiskās saglabāšanas periods",
-  "AutoSavePeriodHelp": "Zemāk redzamais laiks atbilst {{productName}} iestatītajai laika joslai.",
   "Backup": "Dublēšana",
   "BackupCreatedError": "Radās kļūda. Lūdzu, sazinieties ar savu administratoru.",
   "BackupCreatedSuccess": "Rezerves kopija veiksmīgi izveidota.",

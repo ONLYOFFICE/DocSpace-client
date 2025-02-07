@@ -632,5 +632,7 @@
   "EnableAutomaticBackup": "Iespējojiet automātisko dublēšanu.",
   "EnableAutomaticBackupDescription": "Izmantojiet šo opciju, lai dublētu portāla datus.",
   "RoomsModule": "Dublējuma telpa",
-  "RoomsModuleDescription": "Jūs varat izveidot jaunu telpu tieši dublēšanai, izvēlēties vienu no esošajām telpām vai saglabāt kopiju savā {{roomName}} telpā."
+  "RoomsModuleDescription": "Jūs varat izveidot jaunu telpu tieši dublēšanai, izvēlēties vienu no esošajām telpām vai saglabāt kopiju savā {{roomName}} telpā.",
+  "AutoSavePeriod": "Automātiskās saglabāšanas periods",
+  "AutoSavePeriodHelp": "Zemāk redzamais laiks atbilst {{productName}} iestatītajai laika joslai."
 }

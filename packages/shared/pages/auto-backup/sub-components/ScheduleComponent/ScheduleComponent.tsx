@@ -71,7 +71,7 @@ const ScheduleComponent = ({
 
   const renderHelpContent = () => (
     <Text className="schedule_description" fontSize="12px">
-      {t("AutoSavePeriodHelp", { productName: t("Common:ProductName") })}
+      {t("Common:AutoSavePeriodHelp", { productName: t("Common:ProductName") })}
     </Text>
   );
 
@@ -83,7 +83,7 @@ const ScheduleComponent = ({
     >
       <div className="schedule_help-section">
         <Text className="schedule_description" fontSize="12px">
-          {t("AutoSavePeriod")}
+          {t("Common:AutoSavePeriod")}
         </Text>
         <HelpButton
           className="schedule_help-button"

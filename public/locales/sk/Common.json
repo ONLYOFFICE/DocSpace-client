@@ -632,5 +632,7 @@
   "EnableAutomaticBackup": "Povoliť automatické zálohovanie údajov.",
   "EnableAutomaticBackupDescription": "Použiť túto voľbu na zálohovanie údajov priestoru.",
   "RoomsModule": "Zálohovať miestnosť",
-  "RoomsModuleDescription": "Môžete vytvoriť novú miestnosť špeciálne na zálohovanie, vybrať jednu z existujúcich miestností alebo uložiť kópiu do svojej miestnosti {{roomName}}."
+  "RoomsModuleDescription": "Môžete vytvoriť novú miestnosť špeciálne na zálohovanie, vybrať jednu z existujúcich miestností alebo uložiť kópiu do svojej miestnosti {{roomName}}.",
+  "AutoSavePeriod": "Časový interval automatického ukladania",
+  "AutoSavePeriodHelp": "Čas zobrazený nižšie je uvedený podľa časového pásma nastaveného na {{productName}}."
 }

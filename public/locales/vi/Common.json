@@ -631,5 +631,7 @@
   "EnableAutomaticBackup": "Bật sao lưu tự động.",
   "EnableAutomaticBackupDescription": "Sử dụng tùy chọn này để sao lưu dữ liệu không gian.",
   "RoomsModule": "Phòng dự phòng",
-  "RoomsModuleDescription": "Bạn có thể tạo một phòng mới chuyên dùng để sao lưu, chọn một trong các phòng hiện có hoặc lưu bản sao trong phòng {{roomName}} của họ."
+  "RoomsModuleDescription": "Bạn có thể tạo một phòng mới chuyên dùng để sao lưu, chọn một trong các phòng hiện có hoặc lưu bản sao trong phòng {{roomName}} của họ.",
+  "AutoSavePeriod": "Thời gian lưu tự động",
+  "AutoSavePeriodHelp": "Thời gian hiển thị bên dưới tương ứng với múi giờ được đặt trong {{productName}}."
 }

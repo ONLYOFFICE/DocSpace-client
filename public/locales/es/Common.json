@@ -633,5 +633,7 @@
   "EnableAutomaticBackup": "Active copia de seguridad automática.",
   "EnableAutomaticBackupDescription": "Utilice esta opción para hacer una copia de seguridad de los datos del espacio.",
   "RoomsModule": "Sala de copia de seguridad",
-  "RoomsModuleDescription": "Puede crear una nueva sala específicamente para la copia de seguridad, elegir una de las salas existentes o guardar la copia en su sala {{roomName}}."
+  "RoomsModuleDescription": "Puede crear una nueva sala específicamente para la copia de seguridad, elegir una de las salas existentes o guardar la copia en su sala {{roomName}}.",
+  "AutoSavePeriod": "Periodo de autoguardado",
+  "AutoSavePeriodHelp": "La hora que se muestra abajo corresponde a la zona horaria establecida en {{productName}}."
 }

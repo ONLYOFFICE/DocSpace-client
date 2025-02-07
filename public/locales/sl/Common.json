@@ -632,5 +632,7 @@
   "EnableAutomaticBackup": "Omogoči samodejno varnostno kopiranje.",
   "EnableAutomaticBackupDescription": "Uporabite to možnost za varnostno kopiranje podatkov prostora.",
   "RoomsModule": "Varnostno kopiranje sobe",
-  "RoomsModuleDescription": "Ustvarite lahko novo sobo posebej za varnostno kopijo, izberete eno od obstoječih sob ali shranite kopijo v njihovo {{roomName}} sobo."
+  "RoomsModuleDescription": "Ustvarite lahko novo sobo posebej za varnostno kopijo, izberete eno od obstoječih sob ali shranite kopijo v njihovo {{roomName}} sobo.",
+  "AutoSavePeriod": "Obdobje samodejnega shranjevanja",
+  "AutoSavePeriodHelp": "Spodaj prikazan čas ustreza časovnemu pasu, ki je nastavljen na {{productName}}."
 }

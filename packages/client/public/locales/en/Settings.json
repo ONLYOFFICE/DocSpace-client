@@ -31,8 +31,6 @@
   "AuditSubheader": "The subsection allows you to browse through the list of the latest changes (creation, modification, deletion etc.) made by users to the entities (rooms, opportunities, files etc.) within your {{productName}}.",
   "AuditTrailNav": "Audit Trail",
   "AutoBackup": "Automatic backup",
-  "AutoSavePeriod": "Autosave period",
-  "AutoSavePeriodHelp": "The time shown below corresponds to the time zone set in the {{productName}}.",
   "Backup": "Backup",
   "BackupCreatedError": "An error has been encountered. Please contact your administrator.",
   "BackupCreatedSuccess": "The backup copy has been successfully created.",

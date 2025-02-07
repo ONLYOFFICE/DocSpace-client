@@ -31,8 +31,6 @@
   "AuditSubheader": "La sous-section vous permet de parcourir la liste des derniers changements (création, modification, suppression, etc.) apportés par les utilisateurs aux entités (salles, opportunités, fichiers, etc.) de votre {{productName}}.",
   "AuditTrailNav": "Piste d'audit ",
   "AutoBackup": "Sauvegarde automatique",
-  "AutoSavePeriod": "Période de sauvegarde automatique",
-  "AutoSavePeriodHelp": "L'heure indiquée ci-dessous correspond au fuseau horaire défini dans {{productName}}.",
   "Backup": "Sauvegarde",
   "BackupCreatedError": "Une erreur s'est produite. S'il vous plaît contactez votre administrateur.",
   "BackupCreatedSuccess": "La copie de sauvegarde a été créée avec succès.",

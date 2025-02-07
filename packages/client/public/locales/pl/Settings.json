@@ -31,8 +31,6 @@
   "AuditSubheader": "Podsekcja umożliwia przeglądanie listy najnowszych zmian (utworzeń, modyfikacji, usunięć itp.) wprowadzonych przez użytkowników w poszczególnych elementach (pokojach, możliwościach, plikach itp.) w {{productName}}.",
   "AuditTrailNav": "Szlak audytu",
   "AutoBackup": "Automatyczna kopia zapasowa",
-  "AutoSavePeriod": "Częstotliwość autozapisywania",
-  "AutoSavePeriodHelp": "Widoczny poniżej czas odpowiada strefie czasowej ustawionej w {{productName}}.",
   "Backup": "Kopia zapasowa",
   "BackupCreatedError": "Napotkano błąd. Skontaktuj się ze swoim administratorem.",
   "BackupCreatedSuccess": "Kopia zapasowa została pomyślnie utworzona.",

@@ -632,5 +632,7 @@
   "EnableAutomaticBackup": "Avtomatik yedəkləməni aktivləşdirin.",
   "EnableAutomaticBackupDescription": "Sahə məlumatlarını yedəkləmək üçün bu seçimdən istifadə edin.",
   "RoomsModule": "Ehtiyat otaq",
-  "RoomsModuleDescription": "Yedəkləmə üçün xüsusi olaraq yeni otaq yarada, mövcud otaqlardan birini seçə və ya nüsxəni onların {{roomName}} otağında saxlaya bilərsiniz."
+  "RoomsModuleDescription": "Yedəkləmə üçün xüsusi olaraq yeni otaq yarada, mövcud otaqlardan birini seçə və ya nüsxəni onların {{roomName}} otağında saxlaya bilərsiniz.",
+  "AutoSavePeriod": "Avtomatik yadda saxlama müddəti",
+  "AutoSavePeriodHelp": "Aşağıda göstərilən vaxt {{productName}} təyin olunmuş saat qurşağına uyğun gəlir."
 }

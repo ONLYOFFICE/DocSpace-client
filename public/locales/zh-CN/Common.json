@@ -634,5 +634,7 @@
   "EnableAutomaticBackup": "启用自动备份",
   "EnableAutomaticBackupDescription": "使用该选项备份协作空间的数据。",
   "RoomsModule": "备份房间",
-  "RoomsModuleDescription": "您可以专门为一个备份创建一个新房间，选择现有的一个房间，或将副本保存在选定{{roomName}}夹中。"
+  "RoomsModuleDescription": "您可以专门为一个备份创建一个新房间，选择现有的一个房间，或将副本保存在选定{{roomName}}夹中。",
+  "AutoSavePeriod": "自动保存期间",
+  "AutoSavePeriodHelp": "下面显示的时间对应于{{productName}}中设置的时区。"
 }

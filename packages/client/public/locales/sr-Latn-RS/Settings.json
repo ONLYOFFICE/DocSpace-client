@@ -31,8 +31,6 @@
   "AuditSubheader": "Ova podsekcija vam omogućava pregled liste poslednjih promena (kreacija, modifikacija, brisanje itd.) koje su korisnici izvršili na entitetima (sobama, prilikama, datotekama itd.) unutar vašeg {{productName}}-a.",
   "AuditTrailNav": "Revizorska staza",
   "AutoBackup": "Automatka rezervna kopija",
-  "AutoSavePeriod": "Period automatskog čuvanja",
-  "AutoSavePeriodHelp": "Dole prikazano vreme odgovara vremenskoj zoni podešenoj u {{productName}}-u.",
   "Backup": "Rezervna kopija",
   "BackupCreatedError": "Naišla je greška. Molimo kontaktirajte vašeg administratora.",
   "BackupCreatedSuccess": "Rezervna kopija je uspešno kreirana.",

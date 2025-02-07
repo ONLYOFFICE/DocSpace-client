@@ -632,5 +632,7 @@
   "EnableAutomaticBackup": "Ota automaattinen varmuuskopiointi käyttöön.",
   "EnableAutomaticBackupDescription": "Tämän vaihtoehdon avulla voit varmuuskopioida tilan tiedot.",
   "RoomsModule": "Varmuuskopioi huone",
-  "RoomsModuleDescription": "Voit luoda uuden huoneen erityisesti varmuuskopiolle, valita yhden olemassa olevista huoneista, tai tallentaa kopioin heidän {{roomName}} huoneeseen."
+  "RoomsModuleDescription": "Voit luoda uuden huoneen erityisesti varmuuskopiolle, valita yhden olemassa olevista huoneista, tai tallentaa kopioin heidän {{roomName}} huoneeseen.",
+  "AutoSavePeriod": "Automaattisen tallennuksen aika",
+  "AutoSavePeriodHelp": "Alla näkyvä aika vastaa {{productName}}-ssa asetettua aikavyöhykettä."
 }

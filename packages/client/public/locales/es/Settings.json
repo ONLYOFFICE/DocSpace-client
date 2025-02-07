@@ -31,8 +31,6 @@
   "AuditSubheader": "La subsección le permite navegar por la lista de los últimos cambios (creación, modificación, eliminación, etc.) realizados por los usuarios en las entidades (salas, oportunidades, archivos, etc.) dentro de su {{productName}}.",
   "AuditTrailNav": "Rastro de auditoría",
   "AutoBackup": "Copia de seguridad automática",
-  "AutoSavePeriod": "Periodo de autoguardado",
-  "AutoSavePeriodHelp": "La hora que se muestra abajo corresponde a la zona horaria establecida en {{productName}}.",
   "Backup": "Copia de seguridad de datos",
   "BackupCreatedError": "Se ha producido un error. Por favor, póngase en contacto con su administrador.",
   "BackupCreatedSuccess": "La copia de seguridad se ha creado con éxito.",

@@ -31,8 +31,6 @@
   "AuditSubheader": "Podrazdelek vam omogoča brskanje po seznamu zadnjih sprememb (ustvarjanje, spreminjanje, brisanje itd.), ki so jih uporabniki naredili za entitete (sobe, priložnosti, datoteke itd.) v vašem prostoru {{productName}}.",
   "AuditTrailNav": "Revizijska pot",
   "AutoBackup": "Samodejno varnostno kopiranje",
-  "AutoSavePeriod": "Obdobje samodejnega shranjevanja",
-  "AutoSavePeriodHelp": "Spodaj prikazan čas ustreza časovnemu pasu, ki je nastavljen na {{productName}}.",
   "Backup": "Varnostna kopija",
   "BackupCreatedError": "Prišlo je do napake. Prosim kontaktirajte svojega administratorja.",
   "BackupCreatedSuccess": "Varnostna kopija je bila uspešno ustvarjena.",

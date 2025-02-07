@@ -633,5 +633,7 @@
   "EnableAutomaticBackup": "Automatische Datensicherung aktivieren.",
   "EnableAutomaticBackupDescription": "Verwenden Sie diese Option, um die Bereichsdaten zu sichern.",
   "RoomsModule": "Ersatzraum",
-  "RoomsModuleDescription": "Sie können einen neuen Raum speziell für die Sicherung erstellen, einen der vorhandenen Räume wählen oder die Kopie in ihrem {{roomName}}-Raum speichern."
+  "RoomsModuleDescription": "Sie können einen neuen Raum speziell für die Sicherung erstellen, einen der vorhandenen Räume wählen oder die Kopie in ihrem {{roomName}}-Raum speichern.",
+  "AutoSavePeriod": "Zeitraum für automatische Speicherung",
+  "AutoSavePeriodHelp": "Die unten angegebene Zeit entspricht der im {{productName}} eingestellten Zeitzone."
 }

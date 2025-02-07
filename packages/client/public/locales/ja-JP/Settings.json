@@ -31,8 +31,6 @@
   "AuditSubheader": "サブセクションでは、{{productName}}内のエンティティ（ルーム、機会、ファイルなど）に対してユーザーが行った最新の変更（作成、変更、削除など）のリストを閲覧することができます。",
   "AuditTrailNav": "監査証跡",
   "AutoBackup": "自動バックアップ",
-  "AutoSavePeriod": "自動保存期間",
-  "AutoSavePeriodHelp": "下記の時間は{{productName}}で設定したタイムゾーンに対応しています。",
   "Backup": "バックアップ",
   "BackupCreatedError": "エラーが発生してしまいました。管理者を連絡ください。",
   "BackupCreatedSuccess": "バックアップ・コピーは正常に作成されました。",

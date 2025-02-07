@@ -31,8 +31,6 @@
   "AuditSubheader": "Subsecțiunea vă permite să răsfoiți lista celor mai recente modificări (creare, modificare, ştergere etc.) efectuate de utilizatori asupra elementelor (săli, oportunităţi, fişiere etc.) din cadrul {{productName}}.",
   "AuditTrailNav": "Lanţ de audit",
   "AutoBackup": "Copiere de rezervă automată",
-  "AutoSavePeriod": "Interval de timp pentru salvarea automată",
-  "AutoSavePeriodHelp": "Ora afișată mai jos va corespunde fusului orar în {{productName}}.",
   "Backup": "Copie de siguranță",
   "BackupCreatedError": "S-a produs o eroare. Vă rugăm să contactați administratorul.",
   "BackupCreatedSuccess": "O copie de rezervă a fost creată cu succes.",

@@ -31,8 +31,6 @@
   "AuditSubheader": "Alt bölüm, kullanıcılar tarafından {{productName}}'inizdeki varlıklarda (odalar, fırsatlar, dosyalar vb.) yapılan en son değişikliklerin (oluşturma, değiştirme, silme vb.) listesine göz atmanıza olanak tanır.",
   "AuditTrailNav": "Denetim İzleme",
   "AutoBackup": "Otomatik yedekleme",
-  "AutoSavePeriod": "Otomatik kaydetme süresi",
-  "AutoSavePeriodHelp": "Aşağıda gösterilen saat, {{productName}} ayarlanan saat dilimine karşılık gelir.",
   "Backup": "Yedek",
   "BackupCreatedError": "Bir hata oluştu. Lütfen site yöneticisi ile görüşün.",
   "BackupCreatedSuccess": "Yedekleme kopyası başarıyla oluşturuldu.",

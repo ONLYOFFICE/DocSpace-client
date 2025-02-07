@@ -633,5 +633,7 @@
   "EnableAutomaticBackup": "自動バックアップを有効にする",
   "EnableAutomaticBackupDescription": "スペースのデータをバックアップする場合は、このオプションを使用してください。",
   "RoomsModule": "ルームをバックアップする",
-  "RoomsModuleDescription": "バックアップのために特別に新しいルームを作るか、既存のルームの一つを選ぶか、その {{roomName}} ルムにコピーを保存することができます。"
+  "RoomsModuleDescription": "バックアップのために特別に新しいルームを作るか、既存のルームの一つを選ぶか、その {{roomName}} ルムにコピーを保存することができます。",
+  "AutoSavePeriod": "自動保存期間",
+  "AutoSavePeriodHelp": "下記の時間は{{productName}}で設定したタイムゾーンに対応しています。"
 }

@@ -1791,7 +1791,7 @@ class ContextOptionsStore {
         icon: CreateTemplateSvgUrl,
         onClick: () => this.onSaveAsTemplate(item),
         badgeLabel: t("New"),
-        disabled: !item.security?.Create,
+        disabled: !item.security?.Create || item.providerKey,
       },
       {
         id: "option_owner-change",

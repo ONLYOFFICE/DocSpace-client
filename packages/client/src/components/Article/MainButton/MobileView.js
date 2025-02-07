@@ -81,6 +81,7 @@ const MobileView = ({
   mainButtonMobileVisible,
   uploaded,
   setGuidRectsUploading,
+  setGuidRectsMainButton,
 }) => {
   const [isOpenButton, setIsOpenButton] = React.useState(false);
   const [percentProgress, setPercentProgress] = React.useState(0);
@@ -106,6 +107,7 @@ const MobileView = ({
   const setGuidRects = () => {
     if (mainButtonRef?.current) {
       setGuidRectsUploading(mainButtonRef?.current.getClientRects()[0]);
+      setGuidRectsMainButton(null);
     }
   };
 
@@ -289,6 +291,6 @@ export default inject(({ uploadDataStore, treeFoldersStore, filesStore }) => {
     isRoomsFolder,
     uploaded,
     setGuidRectsUploading: filesStore.setGuidRectsUploading,
-    guidanceCoordinates: filesStore.guidanceCoordinates,
+    setGuidRectsMainButton: filesStore.setGuidRectsMainButton,
   };
 })(observer(MobileView));

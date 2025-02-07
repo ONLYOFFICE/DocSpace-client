@@ -24,79 +24,82 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import { Portal } from "../portal";
 import { Guid } from "./sub-components/Guid";
 import { GuidanceProps } from "./sub-components/Guid.types";
-import {
-  getGuidPosition,
-  getMainButtonPosition,
-} from "./sub-components/Guid.utils";
+import { getGuidPosition } from "./sub-components/Guid.utils";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
-const Guidance = (props: GuidanceProps) => {
-  const {
-    formFillingTipsNumber,
-    setFormFillingTipsNumber,
-    viewAs,
-    infoPanelVisible,
-    getConfig,
-  } = props;
+interface InjectedProps extends GuidanceProps {
+  guidanceStore?: any;
+}
 
-  const { t } = useTranslation(["FormFillingTipsDialog", "Common"]);
-  const { isRTL } = useInterfaceDirection();
-
-  const guidanceConfig = getConfig(t);
-
-  const currentGuidance = guidanceConfig[formFillingTipsNumber - 1];
-
-  const [position, setPosition] = React.useState({
-    width: 0,
-    height: 0,
-    left: 0,
-    top: 0,
-    bottom: 0,
-    right: 0,
-  });
-
-  // const mainButtonPosition = getMainButtonPosition(mainButtonGuidRect);
-
-  const onResize = React.useCallback(() => {
-    if (!currentGuidance?.position?.rects) return;
-
-    const newPosition = getGuidPosition(
-      currentGuidance.position,
+const Guidance = inject(({ guidanceStore }) => ({
+  guidanceStore,
+}))(
+  observer((props: InjectedProps) => {
+    const {
+      formFillingTipsNumber,
+      setFormFillingTipsNumber,
       viewAs,
-      isRTL,
+      infoPanelVisible,
+      guidanceStore,
+    } = props;
+
+    const [sectionWidth, setSectionWidth] = useState(0);
+
+    const { t } = useTranslation(["FormFillingTipsDialog", "Common"]);
+    const { isRTL } = useInterfaceDirection();
+
+    const guidanceConfig = guidanceStore?.config || [];
+    const currentGuidance = guidanceConfig[formFillingTipsNumber - 1];
+
+    useEffect(() => {
+      const updateSectionWidth = () => {
+        const section = document.getElementById("section");
+        if (section) {
+          setSectionWidth(section.clientWidth);
+        }
+      };
+
+      updateSectionWidth();
+      window.addEventListener("resize", updateSectionWidth);
+
+      return () => {
+        window.removeEventListener("resize", updateSectionWidth);
+      };
+    }, []);
+
+    if (!currentGuidance) return null;
+
+    const positions =
+      currentGuidance?.position?.map((pos) =>
+        getGuidPosition(pos, viewAs, isRTL),
+      ) || [];
+
+    console.log(positions);
+    return (
+      <Portal
+        element={
+          <Guid
+            guidanceConfig={guidanceConfig}
+            currentStepIndex={formFillingTipsNumber - 1}
+            currentGuidance={currentGuidance}
+            setCurrentStepIndex={(index) => setFormFillingTipsNumber(index + 1)}
+            onClose={props.onClose}
+            positions={positions}
+            infoPanelVisible={infoPanelVisible}
+            viewAs={viewAs}
+            sectionWidth={sectionWidth}
+          />
+        }
+      />
     );
-    setPosition(newPosition);
-  }, [viewAs, isRTL, currentGuidance]);
-
-  React.useEffect(() => {
-    onResize();
-    window.addEventListener("resize", onResize);
-
-    return () => window.removeEventListener("resize", onResize);
-  }, [viewAs, isRTL, onResize]);
-
-  return (
-    <Portal
-      element={
-        <Guid
-          guidanceConfig={guidanceConfig}
-          currentStepIndex={formFillingTipsNumber - 1}
-          currentGuidance={currentGuidance}
-          setCurrentStepIndex={(index) => setFormFillingTipsNumber(index + 1)}
-          onClose={props.onClose}
-          position={position}
-          infoPanelVisible={infoPanelVisible}
-          viewAs={viewAs}
-        />
-      }
-    />
-  );
-};
+  }),
+);
 
 export { Guidance };

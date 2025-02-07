@@ -31,16 +31,18 @@ export enum GuidanceElementType {
   Expandable = "expandable", // Element that can expand
   Interactive = "interactive", // Interactive elements like buttons
   UploadArea = "uploadArea", // Special upload area
+  Mixed = "mixed",
 }
 
 export interface GuidancePosition {
-  rects: DOMRect;
   type: GuidanceElementType;
+  rects: DOMRect | null;
   offset?: {
     value?: number;
     row?: number;
     table?: number;
   };
+  smallBorder?: boolean;
 }
 
 export interface GuidanceStep {
@@ -48,7 +50,7 @@ export interface GuidanceStep {
   header: string;
   description: string;
   key: string;
-  position?: GuidancePosition;
+  position: GuidancePosition[];
 }
 
 export interface ClippedPosition {
@@ -61,16 +63,10 @@ export interface ClippedPosition {
 
 export interface GuidanceProps {
   formFillingTipsNumber: number;
-  setFormFillingTipsNumber: (value: number) => void;
-  onClose: () => void;
+  setFormFillingTipsNumber: (index: number) => void;
   viewAs: string;
-  pdfGuidRects: DOMRect;
-  readyGuidRects: DOMRect;
-  shareGuidRects: DOMRect;
-  uploadingGuidRects: DOMRect;
-  mainButtonGuidRect: DOMRect;
   infoPanelVisible: boolean;
-  getConfig: (t: TTranslation) => GuidanceStep[];
+  onClose?: () => void;
 }
 
 export interface GuidProps {
@@ -78,8 +74,16 @@ export interface GuidProps {
   currentStepIndex: number;
   setCurrentStepIndex: (index: number) => void;
   onClose: () => void;
-  position: DOMRect;
-  infoPanelVisible?: boolean;
-  viewAs?: string;
-  mainButtonPosition?: DOMRect;
+  positions: {
+    width: number;
+    height: number;
+    left: number;
+    top: number;
+    bottom: number;
+    right: number;
+  }[];
+  infoPanelVisible: boolean;
+  viewAs: string;
+  currentGuidance: GuidanceStep;
+  sectionWidth: number;
 }

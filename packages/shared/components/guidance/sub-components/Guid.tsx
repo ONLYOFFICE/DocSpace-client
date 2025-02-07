@@ -48,11 +48,11 @@ const Guid = ({
   currentStepIndex,
   setCurrentStepIndex,
   onClose,
-  position,
+  positions,
   infoPanelVisible,
   viewAs,
-  mainButtonPosition,
   currentGuidance,
+  sectionWidth,
 }: GuidProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["FormFillingTipsDialog", "Common"]);
@@ -90,55 +90,54 @@ const Guid = ({
   const getXDirection = React.useCallback(
     (screenWidth: number) => {
       let xDirection = isRTL ? "right" : "left";
-      if (position.left + MODAL_WIDTH + GUID_MODAL_MARGIN >= screenWidth) {
+      const hasOverflow = positions.some(
+        (pos) => pos.left + MODAL_WIDTH + GUID_MODAL_MARGIN >= screenWidth,
+      );
+      if (hasOverflow) {
         xDirection = isRTL ? "right" : "left";
       }
       return xDirection;
     },
-    [isRTL, position.left],
+    [isRTL, positions],
   );
 
   const calculateTopPosition = React.useCallback(
     (screenHeight: number) => {
       const screenWidth = document.documentElement.clientWidth;
-      const defaultTopPosition = position.bottom + GUID_MODAL_MARGIN;
+      const defaultTopPosition = positions[0]?.bottom + GUID_MODAL_MARGIN;
       const isTileView = viewAs === "tile";
       const isRelevantTip = isStartingStep;
 
-      const isNotEnoughSpace = isRTL
-        ? position.left - MODAL_WIDTH < 0
-        : screenWidth <
-          (isStartingStep ? position.right : position.left) +
-            MODAL_WIDTH +
-            GUID_MODAL_MARGIN;
+      const isNotEnoughSpace = positions.some((pos) =>
+        isRTL
+          ? pos.left - MODAL_WIDTH < 0
+          : screenWidth <
+            (isStartingStep ? pos.right : pos.left) +
+              MODAL_WIDTH +
+              GUID_MODAL_MARGIN,
+      );
 
-      const isNotEnoughVerticalSpace =
-        screenHeight < position.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT;
+      const isNotEnoughVerticalSpace = positions.some(
+        (pos) =>
+          screenHeight < pos.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT,
+      );
 
       if (isTileView && isRelevantTip) {
         if (isNotEnoughSpace) {
           return defaultTopPosition;
         }
         if (isStartingStep) {
-          return position.top;
+          return positions[0]?.top;
         }
       }
 
       if (isNotEnoughVerticalSpace) {
-        return position.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT;
+        return positions[0]?.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT;
       }
 
       return defaultTopPosition;
     },
-    [
-      position.bottom,
-      position.right,
-      position.left,
-      position.top,
-      isStartingStep,
-      isRTL,
-      viewAs,
-    ],
+    [positions, isStartingStep, isRTL, viewAs],
   );
 
   const calculateManualX = React.useCallback(
@@ -149,47 +148,44 @@ const Guid = ({
 
       const getPositionX = () => {
         if (isRTL) {
-          return isStartingStep ? position.left : position.right;
+          return isStartingStep ? positions[0]?.left : positions[0]?.right;
         }
-        return position.left;
+        return positions[0]?.left;
       };
 
       const isNotEnoughSpace = isRTL
         ? getPositionX() - MODAL_WIDTH < 0
         : screenWidth < getPositionX() + MODAL_WIDTH + GUID_MODAL_MARGIN;
 
-      // Default position for most cases
       if (isLastStep && !isDesktop()) {
         return "15px";
       }
 
-      // Handle tile view cases
       if (isTileView && isRelevantTip) {
         if (isNotEnoughSpace) {
           return isRTL
-            ? `${position.left}px`
-            : `${position.right - MODAL_WIDTH}px`;
+            ? `${positions[0]?.left}px`
+            : `${positions[0]?.right - MODAL_WIDTH}px`;
         }
 
         if (isStartingStep) {
           return isRTL
-            ? `${position.left - MODAL_WIDTH - GUID_MODAL_MARGIN}px`
-            : `${position.right + GUID_MODAL_MARGIN}px`;
+            ? `${positions[0]?.left - MODAL_WIDTH - GUID_MODAL_MARGIN}px`
+            : `${positions[0]?.right + GUID_MODAL_MARGIN}px`;
         }
 
         return isRTL
-          ? `${position.right - MODAL_WIDTH}px`
-          : `${position.left}px`;
+          ? `${positions[0]?.right - MODAL_WIDTH}px`
+          : `${positions[0]?.left}px`;
       }
 
-      // Handle default RTL or left direction
       if (xDirection === "left" || isRTL) {
         return isDesktop() ? "250px" : "60px";
       }
 
       return "20px";
     },
-    [isRTL, isStartingStep, position.left, position.right, isLastStep, viewAs],
+    [isRTL, isStartingStep, positions, isLastStep, viewAs],
   );
 
   const onResize = React.useCallback(() => {
@@ -242,27 +238,24 @@ const Guid = ({
     [styles.displayTypeModal]: "modal",
   });
 
-  const clippedStyles: React.CSSProperties = {
-    ["--backdrop-filter-value" as string]: theme.isBase
-      ? "contrast(200%)"
-      : "contrast(0.82)",
-    left: `${position.left}px`,
-    top: `${position.top}px`,
-    width: position.width
-      ? `${position.width}px`
-      : infoPanelVisible && viewAs !== "tile"
-        ? "calc(100% - 650px)"
-        : viewAs === "row"
-          ? "calc(100% - 63px)"
-          : "calc(100% - 253px)",
-    height: `${position.height}px`,
-  };
-
   const clippedClassName = classNames(styles.guidElement, {
     [styles.smallBorderRadius]: isLastStep,
     [styles.fromRight]:
       infoPanelVisible && isRTL && viewAs !== "tile" && isStartingStep,
   });
+
+  const clippedElements = positions.map((position, index) => ({
+    key: `guid-element-${index}`,
+    style: {
+      ["--backdrop-filter-value" as string]: theme.isBase
+        ? "contrast(200%)"
+        : "contrast(0.82)",
+      left: `${position.left}px`,
+      top: `${position.top}px`,
+      width: position.width ? `${position.width}px` : `${sectionWidth}px`,
+      height: `${position.height}px`,
+    },
+  }));
 
   return (
     <div className="guidance">
@@ -270,21 +263,13 @@ const Guid = ({
         className={classNames(styles.guidBackdrop)}
         onClick={closeBackdrop}
       />
-      {isDesktop() && isLastStep && mainButtonPosition.width ? (
+      {clippedElements.map((element) => (
         <div
+          key={element.key}
           className={clippedClassName}
-          style={{
-            ["--backdrop-filter-value" as string]: theme.isBase
-              ? "contrast(200%)"
-              : "contrast(0.82)",
-            left: `${mainButtonPosition.left}px`,
-            top: `${mainButtonPosition.top}px`,
-            width: `${mainButtonPosition.width}px`,
-            height: `${mainButtonPosition.height}px`,
-          }}
+          style={element.style}
         />
-      ) : null}
-      <div className={clippedClassName} style={clippedStyles} />
+      ))}
       <div
         id="modal-onMouseDown-close"
         role="dialog"

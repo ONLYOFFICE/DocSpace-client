@@ -635,5 +635,7 @@
   "RoomsModuleDescription": "특별히 백업용으로 새 방을 만들거나 기존 방 중 하나를 선택하거나 {{roomName}} 방에 사본을 저장할 수 있습니다.",
   "AutoSavePeriod": "자동 저장 기간",
   "AutoSavePeriodHelp": "아래에 표시된 시간은 {{productName}}에 설정된 시간대와 일치합니다.",
-  "MaxCopies": "{{copiesCount}} - 최대 백업 복사본 수"
+  "MaxCopies": "{{copiesCount}} - 최대 백업 복사본 수",
+  "ThirdPartyResource": "타사 리소스",
+  "ThirdPartyResourceDescription": "타사 계정(DropBox, Box.com, OneDrive, Google Drive)에 백업을 저장할 수 있습니다. 그 곳에 백업을 저장하기 전에 타사 계정(Dropbox, Box.com, OneDrive, Google Drive)을 연결해야 합니다."
 }

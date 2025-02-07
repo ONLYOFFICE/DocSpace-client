@@ -635,5 +635,7 @@
   "RoomsModuleDescription": "Yedəkləmə üçün xüsusi olaraq yeni otaq yarada, mövcud otaqlardan birini seçə və ya nüsxəni onların {{roomName}} otağında saxlaya bilərsiniz.",
   "AutoSavePeriod": "Avtomatik yadda saxlama müddəti",
   "AutoSavePeriodHelp": "Aşağıda göstərilən vaxt {{productName}} təyin olunmuş saat qurşağına uyğun gəlir.",
-  "MaxCopies": "{{copiesCount}} - ehtiyat nüsxələrin maksimal sayı"
+  "MaxCopies": "{{copiesCount}} - ehtiyat nüsxələrin maksimal sayı",
+  "ThirdPartyResource": "Üçüncü tərəf resursu",
+  "ThirdPartyResourceDescription": "Ehtiyat nüsxələr üçüncü tərəf hesablarda da (Dropbox, Box.com, OneDrive və ya Google Drive) saxlana bilər. Buna görə də, ehtiyat nüsxələrinizi yadda saxlaya bilmək üçün əvvəlcə öz üçüncü tərəf hesabınızı (Dropbox, Box.com, OneDrive və ya Google Drive) ilə əlaqələndirməlisiniz."
 }

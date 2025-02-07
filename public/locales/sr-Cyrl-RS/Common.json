@@ -636,5 +636,7 @@
   "RoomsModuleDescription": "Можете креирати нову собу посебно за резервну копију, изабрати једну од постојећих соба или сачувати копију у њиховој {{roomName}} соби.",
   "AutoSavePeriod": "Период аутоматског чувања",
   "AutoSavePeriodHelp": "Доле приказано време одговара временској зони подешеној у {{productName}}-у.",
-  "MaxCopies": "{{copiesCount}} - максимални број резервних копија"
+  "MaxCopies": "{{copiesCount}} - максимални број резервних копија",
+  "ThirdPartyResource": "Ресурс треће стране",
+  "ThirdPartyResourceDescription": "Резервна копија се може сачувати на ваш налог треће стране (Dropbox, Box.com, OneDrive или Google Drive). Морате повезати свој налог треће стране (Dropbox, Box.com, OneDrive или Google Drive) пре него што будете могли сачувати своју резервну копију тамо."
 }

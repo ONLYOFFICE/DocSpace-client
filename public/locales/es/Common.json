@@ -636,5 +636,7 @@
   "RoomsModuleDescription": "Puede crear una nueva sala específicamente para la copia de seguridad, elegir una de las salas existentes o guardar la copia en su sala {{roomName}}.",
   "AutoSavePeriod": "Periodo de autoguardado",
   "AutoSavePeriodHelp": "La hora que se muestra abajo corresponde a la zona horaria establecida en {{productName}}.",
-  "MaxCopies": "{{copiesCount}} - número máximo de copias de seguridad"
+  "MaxCopies": "{{copiesCount}} - número máximo de copias de seguridad",
+  "ThirdPartyResource": "Recurso de terceros",
+  "ThirdPartyResourceDescription": "La copia de seguridad puede guardarse en su cuenta de terceros (Dropbox, Box.com, OneDrive o Google Drive). Debe conectar su cuenta de terceros (Dropbox, Box.com, OneDrive o Google Drive) para poder guardar la copia de seguridad allí."
 }

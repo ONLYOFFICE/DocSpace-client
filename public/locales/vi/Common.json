@@ -634,5 +634,7 @@
   "RoomsModuleDescription": "Bạn có thể tạo một phòng mới chuyên dùng để sao lưu, chọn một trong các phòng hiện có hoặc lưu bản sao trong phòng {{roomName}} của họ.",
   "AutoSavePeriod": "Thời gian lưu tự động",
   "AutoSavePeriodHelp": "Thời gian hiển thị bên dưới tương ứng với múi giờ được đặt trong {{productName}}.",
-  "MaxCopies": "{{copiesCount}} - số lượng bản sao lưu tối đa"
+  "MaxCopies": "{{copiesCount}} - số lượng bản sao lưu tối đa",
+  "ThirdPartyResource": "Tài nguyên của bên thứ ba",
+  "ThirdPartyResourceDescription": "Bản sao lưu có thể được lưu vào tài khoản bên thứ ba của bạn (Dropbox, Box.com, OneDrive hoặc Google Drive). Bạn cần kết nối tài khoản bên thứ ba (Dropbox, Box.com, OneDrive hoặc Google Drive) trước khi bạn có thể lưu bản sao lưu của mình ở đó."
 }

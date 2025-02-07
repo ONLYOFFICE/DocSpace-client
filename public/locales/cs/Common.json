@@ -635,5 +635,7 @@
   "RoomsModuleDescription": "Můžete vytvořit novou místnost speciálně pro zálohu, vybrat jednu z existujících místností nebo uložit kopii do jejich místnosti {{roomName}}.",
   "AutoSavePeriod": "Doba automatického ukládání",
   "AutoSavePeriodHelp": "Níže uvedený čas odpovídá časovému pásmu nastavenému na {{productName}}.",
-  "MaxCopies": "{{copiesCount}} - maximální počet záložních kopií"
+  "MaxCopies": "{{copiesCount}} - maximální počet záložních kopií",
+  "ThirdPartyResource": "Zdroj třetí strany",
+  "ThirdPartyResourceDescription": "Zálohu lze uložit na účet třetí strany (Dropbox, Box.com, OneDrive nebo Disk Google). Předtím, než tam budete moci zálohu uložit, musíte účet třetí strany (Dropbox, Box.com, OneDrive nebo Disk Google)."
 }

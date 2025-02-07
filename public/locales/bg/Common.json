@@ -635,5 +635,7 @@
   "RoomsModuleDescription": "Можете да създадете нова стая специално за резервното копие, да изберете една от съществуващите стаи или да запазите копието в тяхната стая {{roomName}}.",
   "AutoSavePeriod": "Период на автоматично запазване",
   "AutoSavePeriodHelp": "Времето, показано по-долу, съответства на часовата зона, зададена в {{productName}}.",
-  "MaxCopies": "{{copiesCount}} - максимален брой резервни копия"
+  "MaxCopies": "{{copiesCount}} - максимален брой резервни копия",
+  "ThirdPartyResource": "Ресурс на трета страна",
+  "ThirdPartyResourceDescription": "Архивното копие може да бъде запазено във вашия профил от трета страна (Dropbox, Box.com, OneDrive или Google Drive). Трябва да свържете своя профил от трета страна (Dropbox, Box.com, OneDrive или Google Drive) преди да можете да запазите резервното си копие там."
 }

@@ -213,7 +213,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         {
           id: "third-party-resource",
           value: DISK_SPACE,
-          label: t("ThirdPartyResource"),
+          label: t("Common:ThirdPartyResource"),
         },
         {
           id: "third-party-storage",

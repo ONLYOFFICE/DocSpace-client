@@ -637,5 +637,7 @@
   "RoomsModuleDescription": "您可以专门为一个备份创建一个新房间，选择现有的一个房间，或将副本保存在选定{{roomName}}夹中。",
   "AutoSavePeriod": "自动保存期间",
   "AutoSavePeriodHelp": "下面显示的时间对应于{{productName}}中设置的时区。",
-  "MaxCopies": "{{copiesCount}} - 备份的最大数量"
+  "MaxCopies": "{{copiesCount}} - 备份的最大数量",
+  "ThirdPartyResource": "第三方资源",
+  "ThirdPartyResourceDescription": "备份可以保存到您的第三方账户（Dropbox、Box.com、OneDrive 或 Google Drive）。在使用此功能之前，您需要先连接您的第三方账户（Dropbox、Box.com、OneDrive 或 Google Drive），以便完成存储。"
 }

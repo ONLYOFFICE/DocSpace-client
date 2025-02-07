@@ -635,5 +635,7 @@
   "RoomsModuleDescription": "Jūs varat izveidot jaunu telpu tieši dublēšanai, izvēlēties vienu no esošajām telpām vai saglabāt kopiju savā {{roomName}} telpā.",
   "AutoSavePeriod": "Automātiskās saglabāšanas periods",
   "AutoSavePeriodHelp": "Zemāk redzamais laiks atbilst {{productName}} iestatītajai laika joslai.",
-  "MaxCopies": "Maksimālais rezerves dublējumu skaits: {{copiesCount}}"
+  "MaxCopies": "Maksimālais rezerves dublējumu skaits: {{copiesCount}}",
+  "ThirdPartyResource": "Trešās puses resurss",
+  "ThirdPartyResourceDescription": "Dublējumu var saglabāt jūsu trešās puses kontā (Dropbox, Box.com, OneDrive vai Google Drive). Jums ir jāsavieno trešās puses konts (Dropbox, Box.com, OneDrive vai Google Drive) pirms varēsiet tur saglabāt savu dublējumu."
 }

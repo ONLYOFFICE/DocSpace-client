@@ -636,5 +636,7 @@
   "RoomsModuleDescription": "Você pode criar uma nova sala especificamente para o backup, escolher uma das salas existentes ou salvar a cópia em sua sala {{roomName}}.",
   "AutoSavePeriod": "Período de salvamento automático",
   "AutoSavePeriodHelp": "A hora exibida abaixo corresponde ao fuso horário definido no {{productName}}.",
-  "MaxCopies": "{{copiesCount}} - número máximo de cópias de backup"
+  "MaxCopies": "{{copiesCount}} - número máximo de cópias de backup",
+  "ThirdPartyResource": "Recurso de terceiros",
+  "ThirdPartyResourceDescription": "O backup pode ser salvo em sua conta de terceiros (Dropbox, Box.com, OneDrive ou Google Drive). Você precisa conectar sua conta de terceiros (Dropbox, Box.com, OneDrive ou Google Drive) antes de poder salvar seu backup lá."
 }

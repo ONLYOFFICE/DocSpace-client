@@ -636,5 +636,7 @@
   "RoomsModuleDescription": "Sie können einen neuen Raum speziell für die Sicherung erstellen, einen der vorhandenen Räume wählen oder die Kopie in ihrem {{roomName}}-Raum speichern.",
   "AutoSavePeriod": "Zeitraum für automatische Speicherung",
   "AutoSavePeriodHelp": "Die unten angegebene Zeit entspricht der im {{productName}} eingestellten Zeitzone.",
-  "MaxCopies": "{{copiesCount}} - maximale Anzahl von Sicherungskopien"
+  "MaxCopies": "{{copiesCount}} - maximale Anzahl von Sicherungskopien",
+  "ThirdPartyResource": "Ressource eines Drittanbieters",
+  "ThirdPartyResourceDescription": "Die Sicherungskopie kann in Ihrem Konto bei einem Drittanbieter (Dropbox, Box.com, OneDrive oder Google Drive) gespeichert werden. Sie müssen Ihr Konto (Dropbox, Box.com, OneDrive oder Google Drive) verbinden, bevor Sie Ihr Backup dort speichern können."
 }

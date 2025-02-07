@@ -241,8 +241,6 @@
   "ThirdPartyBottomDescription": "需要帮助？联系我们的<2>支持团队</2>。",
   "ThirdPartyPropsActivated": "更新成功",
   "ThirdPartyPropsDeactivated": "停用成功",
-  "ThirdPartyResource": "第三方资源",
-  "ThirdPartyResourceDescription": "备份可以保存到您的第三方账户（Dropbox、Box.com、OneDrive 或 Google Drive）。在使用此功能之前，您需要先连接您的第三方账户（Dropbox、Box.com、OneDrive 或 Google Drive），以便完成存储。",
   "ThirdPartyStorageDescription": "备份文件可以保存在第三方存储中。保存之前，您需要在‘集成’板块连接相应的服务。否则该设置将无法激活。",
   "ThirdPartyTitleDescription": "您可使用授权密钥通过协作空间连接第三方服务。使用 Facebook、Google 或领英轻松登录；添加 Dropbox、OneDrive 等服务以在文档模块中使用存储于其中的文件。",
   "TimeLanguageSettingsDescription": "更改语言和时区设置以调整常见的{{productName}}语言和时间。",

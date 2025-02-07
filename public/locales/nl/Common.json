@@ -635,5 +635,7 @@
   "RoomsModuleDescription": "U kunt een nieuwe kamer aanmaken speciaal voor de back-up, een van de bestaande kamers kiezen, of de kopie opslaan in hun {{roomName}} kamer.",
   "AutoSavePeriod": "Autosave periode",
   "AutoSavePeriodHelp": "De hieronder aangegeven tijd komt overeen met de in de  {{productName}} ingestelde tijdzone.",
-  "MaxCopies": "{{copiesCount}} - maximum aantal back-ups"
+  "MaxCopies": "{{copiesCount}} - maximum aantal back-ups",
+  "ThirdPartyResource": "Bron van derden",
+  "ThirdPartyResourceDescription": "Back-ups kunt u opslaan in uw account van derden (Dropbox, Box.com, OneDrive of Google Drive). U moet uw account van derden (Dropbox, Box.com, OneDrive of Google Drive) verbinden voordat u uw back-up daar kunt opslaan."
 }

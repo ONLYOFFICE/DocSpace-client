@@ -240,8 +240,6 @@
   "ThirdPartyBottomDescription": "Got any problems? Contact our <2>Support Team.</2>",
   "ThirdPartyPropsActivated": "Updated successfully",
   "ThirdPartyPropsDeactivated": "Deactivated successfully",
-  "ThirdPartyResource": "Third-party resource",
-  "ThirdPartyResourceDescription": "Backup can be saved to your third-party account (Dropbox, Box.com, OneDrive or Google Drive). You need to connect your third-party account (Dropbox, Box.com, OneDrive or Google Drive) before you will be able to save your backup there.",
   "ThirdPartyStorageDescription": "Backup can be saved to a third-party storage. Before, you need to connect the corresponding service in the 'Integration' section. Otherwise, the following settings will be inactive.",
   "ThirdPartyTitleDescription": "With Authorization keys, you can connect third-party services to your space. Sign in easily with Facebook, Google, or LinkedIn. Add Dropbox, OneDrive, and other accounts to work with files stored there.",
   "TimeLanguageSettingsDescription": "Change Language and Time Zone Settings to adjust common {{productName}} language and time.",

@@ -378,7 +378,7 @@ const ManualBackup = ({
       <StyledModules isDisabled={isNotPaidPeriod}>
         <RadioButton
           id="third-party-resource"
-          label={t("ThirdPartyResource")}
+          label={t("Common:ThirdPartyResource")}
           name="isCheckedThirdParty"
           key={2}
           isChecked={isCheckedThirdParty}
@@ -386,7 +386,7 @@ const ManualBackup = ({
           {...commonRadioButtonProps}
         />
         <Text className="backup-description">
-          {t("ThirdPartyResourceDescription")}
+          {t("Common:ThirdPartyResourceDescription")}
         </Text>
         {isCheckedThirdParty ? (
           <ThirdPartyModule

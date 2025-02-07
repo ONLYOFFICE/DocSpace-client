@@ -501,7 +501,7 @@ const AutomaticBackup = ({
             <RadioButton
               {...commonRadioButtonProps}
               id="third-party-resource"
-              label={t("ThirdPartyResource")}
+              label={t("Common:ThirdPartyResource")}
               name={`${BackupStorageType.ResourcesModuleType}`}
               isChecked={isCheckedThirdParty}
               isDisabled={
@@ -510,7 +510,7 @@ const AutomaticBackup = ({
               }
             />
             <Text className="backup-description">
-              {t("ThirdPartyResourceDescription")}
+              {t("Common:ThirdPartyResourceDescription")}
             </Text>
             {isCheckedThirdParty ? (
               <ThirdPartyModule
@@ -688,7 +688,7 @@ export default AutomaticBackup;
 //     const isCheckedThirdParty =
 //       selectedStorageType === `${BackupStorageType.ResourcesModuleType}`;
 //     const isCheckedThirdPartyStorage =
-//       selectedStorageType === `${BackupStorageType.StorageModuleType}`;
+//       selectedStorageType === `${BackupStorageType.StorageModuleType}` ;
 
 //     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
 

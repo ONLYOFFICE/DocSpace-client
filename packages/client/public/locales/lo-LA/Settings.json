@@ -217,8 +217,6 @@
   "ThirdPartyBottomDescription": "ຕ້ອງການໃຫ້ຊ່ວຍ? ຕິດຕໍ່ພວກຮົາ <2>Support Team.</2>",
   "ThirdPartyPropsActivated": "ອັບເດດສຳເລັດແລ້ວ",
   "ThirdPartyPropsDeactivated": "ປິດການນຳໃຊ້ຢ່າງສຳເລັດຜົນ",
-  "ThirdPartyResource": "ຊັບພະຍາກອນພາກສ່ວນທີສາມ",
-  "ThirdPartyResourceDescription": "ສາມາດບັນທຶກຂໍ້ມູນສຳຮອງໄວ້ໃນບັນຊີພາກສ່ວນທີສາມຂອງທ່ານ (Dropbox, Box.com, OneDrive ຫຼື Google Drive). ທ່ານຕ້ອງເຊື່ອມຕໍ່ບັນຊີພາກສ່ວນທີສາມຂອງທ່ານ (Dropbox, Box.com, OneDrive ຫຼື Google Drive). ກ່ອນທີ່ທ່ານຈະສາມາດບັນທຶກການ ສໍາຮອງຂໍ້ມູນ ຂອງທ່ານ ຢູ່ທີ່ນັ້ນ.",
   "ThirdPartyStorageDescription": "ການສໍາຮອງຂໍ້ມູນສາມາດຖືກບັນທຶກໄວ້ໃນ ບ່ອນເກັບຂໍ້ມູນ ພາກສ່ວນທີສາມ . ກ່ອນ, ທ່ານຈໍາເປັນຕ້ອງໄດ້ເຊື່ອມຕໍ່ການບໍລິການທີ່ສອດຄ້ອງກັນໃນພາກ 'ການລວມເຂົ້າກັນ'. ຖ້າບໍ່ດັ່ງນັ້ນ , ຕິດຕາມ ການຕັ້ງຄ່າ ຈະ ເປັນ ບໍ່ເຄື່ອນໄຫວ.",
   "ThirdPartyTitleDescription": "ດ້ວຍລະຫັດການອະນຸຍາດ, ທ່ານສາມາດເຊື່ອມຕໍ່ການບໍລິການຂອງພາກສ່ວນອື່ນກັບ portal ຂອງທ່ານ. ທ່ານເຂົ້າສູ່ລະບົບໄດ້ງ່າຍດ້ວຍ Facebook, Google, ຫຼື LinkedIn; ເພີ່ມ Dropbox, OneDrive, ແລະອື່ນໆ. ເພື່ອເຮັດວຽກກັບແຟ້ມທີ່ເກັບໄວ້ຢູ່ໃນໂມດູນເອກະສານ.",
   "TimeLanguageSettingsDescription": "ປ່ຽນການຕັ້ງຄ່າພາສາ ແລະເຂດເວລາເພື່ອປັບພາສາ ແລະເວລາ {{productName}} ທົ່ວໄປ.",

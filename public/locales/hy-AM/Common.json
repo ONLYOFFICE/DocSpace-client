@@ -636,5 +636,7 @@
   "RoomsModuleDescription": "Դուք կարող եք ստեղծել նոր սենյակ հատուկ պահուստավորման համար, ընտրել առկա սենյակներից մեկը կամ պատճենը պահել իր {{roomName}} սենյակում:",
   "AutoSavePeriod": "Ավտոմատ պահպանման ժամկետը",
   "AutoSavePeriodHelp": "Ստորև ներկայացված ժամը համապատասխանում է {{productName}}-ում սահմանված ժամային գոտուն:",
-  "MaxCopies": "{{copiesCount}} - կրկնօրինակների առավելագույն քանակը"
+  "MaxCopies": "{{copiesCount}} - կրկնօրինակների առավելագույն քանակը",
+  "ThirdPartyResource": "Երրորդ կողմի ռեսուրս",
+  "ThirdPartyResourceDescription": "Պահուստավորումը կարող է պահպանվել ձեր երրորդ կողմի հաշվում (Dropbox, Box.com, OneDrive կամ Google Drive). Դուք պետք է միացնեք ձեր երրորդ կողմի հաշիվը (Dropbox, Box.com, OneDrive կամ Google Drive), նախքան Դուք կկարողանաք այնտեղ պահել Ձեր պահեստավորումը:"
 }

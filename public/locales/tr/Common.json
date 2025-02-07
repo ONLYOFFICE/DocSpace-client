@@ -635,5 +635,7 @@
   "RoomsModuleDescription": "Yedekleme için özel olarak yeni bir oda oluşturabilir, mevcut odalardan birini seçebilir veya kopyayı onların {{roomName}} odasına kaydedebilirsiniz.",
   "AutoSavePeriod": "Otomatik kaydetme süresi",
   "AutoSavePeriodHelp": "Aşağıda gösterilen saat, {{productName}} ayarlanan saat dilimine karşılık gelir.",
-  "MaxCopies": "{{copiesCount}} - maksimum yedek kopya sayısı"
+  "MaxCopies": "{{copiesCount}} - maksimum yedek kopya sayısı",
+  "ThirdPartyResource": "Üçüncü taraf kaynak",
+  "ThirdPartyResourceDescription": "Yedekleme, üçüncü taraf hesabınıza (Dropbox, Box.com, OneDrive veya Google Drive) kaydedilebilir. Üçüncü taraf hesabınızı öncelikle (Dropbox, Box.com, OneDrive veya Google Drive) bağlamanız gerekir, böylelikle yedeğinizi oraya kaydedebileceksiniz."
 }

@@ -635,5 +635,7 @@
   "RoomsModuleDescription": "Możesz utworzyć nowy pokój specjalnie do kopii zapasowej, wybrać jeden z istniejących pokoi lub zapisać kopię w jej pokoju {{roomName}}.",
   "AutoSavePeriod": "Częstotliwość autozapisywania",
   "AutoSavePeriodHelp": "Widoczny poniżej czas odpowiada strefie czasowej ustawionej w {{productName}}.",
-  "MaxCopies": "{{copiesCount}} – maksymalna liczba kopii zapasowych"
+  "MaxCopies": "{{copiesCount}} – maksymalna liczba kopii zapasowych",
+  "ThirdPartyResource": "Zasób strony trzeciej",
+  "ThirdPartyResourceDescription": "Kopię zapasową możesz zapisać na koncie w innej usłudze, np. Dropbox, Box.com, OneDrive lub Google Drive. Zanim jednak będziesz w stanie to zrobić, pamiętaj, aby podłączyć swoje konto Dropbox, Box.com, OneDrive lub Google Drive."
 }

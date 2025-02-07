@@ -240,8 +240,6 @@
   "ThirdPartyBottomDescription": "Aveți nevoie de ajutor? Contactați <2>Echipa de asistență.</2>",
   "ThirdPartyPropsActivated": "S-a actualizat cu succes",
   "ThirdPartyPropsDeactivated": "Dezactivat cu succes",
-  "ThirdPartyResource": "Resursă terță parte",
-  "ThirdPartyResourceDescription": "Puteți salva o copie de rezervă prin intermediu contului de stocare de la terți (Dropbox, Box.com, OneDrive sau Google Drive). Trebuie să vă conectați cu contul de stocare de la terți (Dropbox, Box.com, OneDrive sau Google Drive) înainte de a crea o copie de rezervă acolo.",
   "ThirdPartyStorageDescription": "Puteți salva copia de rezervă prin intermediu contului de stocare de la terți. Mai întâi, trebuie să vă conectați cu acest cont de stocare în secțiunea Integrare.  În caz contrar, următoarele setări vor fi inactive.",
   "ThirdPartyTitleDescription": "Folosiți chei de autentificare pentru a vă conecta servicii terță parte la spațiul dvs. Vă conectați cu contul dvs Facebook, Google, sau LinkedIn; adăugați Dropbox, OneDrive, etc. pentru prelucrarea documentelor din stocarea direct în modulul Documente.",
   "TimeLanguageSettingsDescription": "Configurați setări limbă și fus orar pentru a alege limba și fusul orar al spațiului {{productName}}.",

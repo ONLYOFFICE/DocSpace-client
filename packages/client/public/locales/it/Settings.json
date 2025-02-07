@@ -240,8 +240,6 @@
   "ThirdPartyBottomDescription": "Ho bisogno di aiuto? Contatta il nostro <2>Team di supporto.</2>",
   "ThirdPartyPropsActivated": "Aggiornato correttamente",
   "ThirdPartyPropsDeactivated": "Disattivato correttamente",
-  "ThirdPartyResource": "Archiviazione di terze parti",
-  "ThirdPartyResourceDescription": "Il backup può essere salvato sul tuo account di terze parti (Dropbox, Box.com, OneDrive o Google Drive). Devi collegare il tuo account di terze parti (Dropbox, Box.com, OneDrive o Google Drive) prima che tu possa salvare lì il tuo backup.",
   "ThirdPartyStorageDescription": "Il backup può essere salvato su un archivio di terze parti. Prima, è necessario connettere il servizio corrispondente nella sezione 'Integrazione'. In caso contrario, le seguenti impostazioni non saranno attive.",
   "ThirdPartyTitleDescription": "Con le chiavi di autorizzazione puoi connettere dei servizi di terze parti al tuo spazio. Puoi accedere facilmente tramite: Facebook, Google, LinkedIn; oppure puoi aggiungere l'utilizzo di Dropbox, OneDrive, ecc., per lavorare con i file archiviati con l'uso del modulo Documenti.",
   "TimeLanguageSettingsDescription": "Modifica le impostazioni di lingua e fuso orario per regolare la lingua e l'ora comuni di {{productName}}.",

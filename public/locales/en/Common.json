@@ -637,5 +637,7 @@
   "RoomsModuleDescription": "You may create a new room specifically for the backup, choose one of the existing rooms, or save the copy in their {{roomName}} room.",
   "AutoSavePeriod": "Autosave period",
   "AutoSavePeriodHelp": "The time shown below corresponds to the time zone set in the {{productName}}.",
-  "MaxCopies": "{{copiesCount}} - maximum number of backup copies"
+  "MaxCopies": "{{copiesCount}} - maximum number of backup copies",
+  "ThirdPartyResource": "Third-party resource",
+  "ThirdPartyResourceDescription": "Backup can be saved to your third-party account (Dropbox, Box.com, OneDrive or Google Drive). You need to connect your third-party account (Dropbox, Box.com, OneDrive or Google Drive) before you will be able to save your backup there."
 }

@@ -240,8 +240,6 @@
   "ThirdPartyBottomDescription": "Имате проблем? Контактирајте наш <2>Тим за подршку.</2>",
   "ThirdPartyPropsActivated": "Ажурирано успешно",
   "ThirdPartyPropsDeactivated": "Деактивирано успешно",
-  "ThirdPartyResource": "Ресурс треће стране",
-  "ThirdPartyResourceDescription": "Резервна копија се може сачувати на ваш налог треће стране (Dropbox, Box.com, OneDrive или Google Drive). Морате повезати свој налог треће стране (Dropbox, Box.com, OneDrive или Google Drive) пре него што будете могли сачувати своју резервну копију тамо.",
   "ThirdPartyStorageDescription": "Резервна копија се може сачувати на складиште треће стране. Пре тога, морате повезати одговарајућу услугу у одељку 'Интеграција'. У супротном, следећа подешавања ће бити неактивна.",
   "ThirdPartyTitleDescription": "Помоћу ауторизационих кључева можете повезати треће стране сервисе са вашим простором. Лако се пријавите путем Facebook-а, Google-а или LinkedIn-а. Додајте Dropbox, OneDrive и друге налоге како бисте радили са датотекама које су тамо смештене.",
   "TimeLanguageSettingsDescription": "Промените Подешавања jезика и временске зоне да подесите уобичајен {{productName}} језик и време.",

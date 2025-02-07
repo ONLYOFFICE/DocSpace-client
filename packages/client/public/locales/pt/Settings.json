@@ -240,8 +240,6 @@
   "ThirdPartyBottomDescription": "Precisa de ajuda? Contacte a nossa <2>Equipa de suporte.</2>",
   "ThirdPartyPropsActivated": "Atualização bem-sucedida",
   "ThirdPartyPropsDeactivated": "Desativado com êxito",
-  "ThirdPartyResource": "Recurso de terceiros",
-  "ThirdPartyResourceDescription": "A cópia de segurança pode ser guardada na sua conta num serviço de terceiros (Dropbox, Box.com, OneDrive ou Google Drive). Precisa de conectar a sua conta do serviço oferecido por terceiros (Dropbox, Box.com, OneDrive ou Google Drive) antes que possa guardar a sua cópia de segurança lá.",
   "ThirdPartyStorageDescription": "A cópia de segurança pode ser guardada num armazenamento de terceiros. Para que o possa fazer, precisa de conectar o respetivo serviço na secção de 'Integração'. Caso contrário, as seguintes alterações ficaram inativas.",
   "ThirdPartyTitleDescription": "Com as chaves de Autorização, pode ligar serviços de terceiros ao seu espaço. Inicie sessão facilmente com o Facebook, Google ou LinkedIn; adicione o Dropbox, Onedrive, etc. para trabalhar em ficheiros armazenados nessas plataformas a partir do módulo dos documentos.",
   "TimeLanguageSettingsDescription": "Altere as configurações de idioma e fuso horário para ajustar o idioma e a hora comuns do {{productName}}.",

@@ -637,5 +637,7 @@
   "RoomsModuleDescription": "Вы можете создать новую комнату специально для резервного копирования, выбрать одну из существующих комнат или сохранить копию в {{roomName}}.",
   "AutoSavePeriod": "Период автоматического сохранения",
   "AutoSavePeriodHelp": "Указанное ниже время соответствует часовому поясу, выставленному в {{productName}}.",
-  "MaxCopies": "{{copiesCount}} - максимальное число копий"
+  "MaxCopies": "{{copiesCount}} - максимальное число копий",
+  "ThirdPartyResource": "Сторонний ресурс",
+  "ThirdPartyResourceDescription": "Резервную копию можно сохранить в сторонний аккаунт (Dropbox, Box.com, OneDrive или Google Drive). Вам необходимо подключить свою стороннюю учетную запись (Dropbox, Box.com, OneDrive или Google Drive), прежде чем вы сможете сохранить там свою резервную копию."
 }

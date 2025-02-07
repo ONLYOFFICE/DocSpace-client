@@ -636,5 +636,7 @@
   "RoomsModuleDescription": "バックアップのために特別に新しいルームを作るか、既存のルームの一つを選ぶか、その {{roomName}} ルムにコピーを保存することができます。",
   "AutoSavePeriod": "自動保存期間",
   "AutoSavePeriodHelp": "下記の時間は{{productName}}で設定したタイムゾーンに対応しています。",
-  "MaxCopies": "{{copiesCount}}は、バックアップの最大コピー数"
+  "MaxCopies": "{{copiesCount}}は、バックアップの最大コピー数",
+  "ThirdPartyResource": "サードパーティーリソース",
+  "ThirdPartyResourceDescription": "バックアップは、サードパーティーアカウント（Dropbox、Box.com、OneDrive、Google Drive）に保存できます。バックアップを保存する前、サードパーティーアカウント（Dropbox、Box.com、OneDrive、Google Drive）に接続する必要があります。"
 }

@@ -264,7 +264,6 @@ class UploadDataStore {
     }
 
     const newUploadData = {
-      files: newFiles,
       filesSize: this.filesSize,
       uploadedFiles: this.uploadedFiles,
       percent: 100,
@@ -274,10 +273,14 @@ class UploadDataStore {
     };
 
     const newHistory = this.uploadedFilesHistory.filter(
-      (el) => el.action === "uploaded",
+      (el) =>
+        el.action === "uploaded" ||
+        (el.action === "convert" && el.inConversion),
+    );
+    this.filesToConversion = this.filesToConversion.filter(
+      (el) => el.inConversion,
     );
 
-    if (newUploadData.files.length === 0) this.setUploadPanelVisible(false);
     this.setUploadData(newUploadData);
     this.uploadedFilesHistory = newHistory;
 
@@ -471,6 +474,7 @@ class UploadDataStore {
 
     let index = 0;
     let len = this.filesToConversion.length;
+    this.filesToConversion = removeDuplicate(this.filesToConversion);
     let filesToConversion = this.filesToConversion;
 
     while (index < len) {
@@ -614,7 +618,7 @@ class UploadDataStore {
 
           if (file && fileInfo && fileInfo !== "password") {
             file.fileInfo = fileInfo;
-            historyFile.fileInfo = fileInfo;
+            if (historyFile) historyFile.fileInfo = fileInfo;
             needToRefreshFilesList && this.refreshFiles(file);
           }
 
@@ -637,7 +641,7 @@ class UploadDataStore {
           const percent = this.getConversationPercent(index + 1);
           this.setConversionPercent(percent, !!error);
 
-          if (!file?.error && file?.fileInfo.version > 2) {
+          if (!file?.error && file?.fileInfo?.version > 2) {
             this.filesStore.setHighlightFile({
               highlightFileId: file.fileInfo.id,
               isFileHasExst: !file.fileInfo.fileExst,
@@ -907,9 +911,9 @@ class UploadDataStore {
     if (window.location.pathname.indexOf("/history") === -1) {
       const newFiles = files;
       const newFolders = folders;
-      const path = currentFile.path ? currentFile.path.slice() : [];
+      const path = currentFile?.path ? currentFile.path.slice() : [];
       const fileIndex = newFiles.findIndex(
-        (x) => x.id === currentFile.fileInfo?.id,
+        (x) => x.id === currentFile?.fileInfo?.id,
       );
 
       let folderInfo = null;
@@ -1039,7 +1043,6 @@ class UploadDataStore {
       operation: OPERATIONS_NAME.upload,
       percent: newPercent,
     });
-
     if (uploaded) {
       runInAction(() => {
         this.files[indexOfFile].action = "uploaded";
@@ -1066,8 +1069,13 @@ class UploadDataStore {
     // All chuncks are uploaded
 
     const currentFile = this.files[indexOfFile];
-    currentFile.path = path;
+
     if (!currentFile) return resolve();
+
+    if (!currentFile.fileId) return;
+
+    currentFile.path = path;
+
     const { needConvert } = currentFile;
 
     const isXML = currentFile.fileInfo?.fileExst?.includes(".xml");
@@ -1076,8 +1084,6 @@ class UploadDataStore {
 
     if (needConvert) {
       runInAction(() => (currentFile.action = "convert"));
-
-      if (!currentFile.fileId) return;
 
       if (!this.filesToConversion.length || this.converted) {
         this.filesToConversion.push(currentFile);

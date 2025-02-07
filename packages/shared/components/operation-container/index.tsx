@@ -24,30 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { useEffect } from "react";
-import { useTheme } from "styled-components";
 
 import DownloadingReactSvg from "PUBLIC_DIR/images/downloading.react.svg";
 import DownloadingDarkReactSvg from "PUBLIC_DIR/images/downloading.dark.react.svg";
 
-import { StyledOperationContainer } from "./OperationContainer.styled";
+import { useTheme } from "../../hooks/useTheme";
+
 import { OperationContainerProps } from "./OperationContainer.types";
 import { Text } from "../text";
 import PortalLogo from "../portal-logo/PortalLogo";
 
+import styles from "./OperationContainer.module.scss";
+
 const OperationContainer = (props: OperationContainerProps) => {
   const { url, authorized, title, description } = props;
 
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
-  const logo = theme?.isBase ? (
+  const logo = isBase ? (
     <DownloadingReactSvg
-      className="operation-logo"
+      className={styles.logo}
       data-testid="operation-logo"
       aria-hidden="true"
     />
   ) : (
     <DownloadingDarkReactSvg
-      className="operation-logo"
+      className={styles.logo}
       data-testid="operation-logo"
       aria-hidden="true"
     />
@@ -58,20 +60,17 @@ const OperationContainer = (props: OperationContainerProps) => {
   }, [url, authorized]);
 
   return (
-    <StyledOperationContainer
+    <div
+      className={styles.container}
       role="main"
       aria-label={title}
       data-testid="operation-container"
     >
       <PortalLogo isResizable data-testid="portal-logo" />
       {logo}
-      <Text className="operation-title" fontWeight={700} fontSize="23px">
-        {title}
-      </Text>
-      <Text className="operation-description" fontWeight={600} fontSize="13px">
-        {description}
-      </Text>
-    </StyledOperationContainer>
+      <Text className={styles.title}>{title}</Text>
+      <Text className={styles.description}>{description}</Text>
+    </div>
   );
 };
 

@@ -26,12 +26,14 @@
 
 import { ArticleStore } from "./articleStore";
 import { SpacesStore } from "./spacesStore";
+import BackupStore from "./BackupStore";
 
 const articleStore = new ArticleStore();
 const spacesStore = new SpacesStore();
+const backupStore = new BackupStore();
 
 export const RootStore = {
   articleStore,
   spacesStore,
+  backupStore,
 };
-

@@ -40,6 +40,7 @@ import { WhiteLabelWrapper, StyledSpacer } from "./WhiteLabel.styled";
 import { IWhiteLabel, IWhiteLabelData } from "./WhiteLabel.types";
 import { getLogoOptions, generateLogo, uploadLogo } from "./WhiteLabel.helper";
 import { WhiteLabelHeader } from "./WhiteLabelHeader";
+import { BrandName } from "./BrandName";
 import { brandingRedirectUrl } from "../constants";
 
 export const WhiteLabel = (props: IWhiteLabel) => {
@@ -57,12 +58,17 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     deviceType,
     setLogoUrls,
     isWhiteLabelLoaded,
-    defaultLogoText,
+    defaultBrandName,
     defaultWhiteLabelLogoUrls,
-    logoText,
+    brandName,
   } = props;
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
-  const [isEmpty, setIsEmpty] = useState(isWhiteLabelLoaded && !logoText);
+  const [brandNameWhiteLabel, setBrandNameWhiteLabel] = useState("");
+
+  const [isEmptyBrandName, setIsEmptyBrandName] = useState(
+    isWhiteLabelLoaded && !brandName,
+  );
+  const [isEmptyLogoText, setIsEmptyLogoText] = useState(!logoTextWhiteLabel);
 
   useResponsiveNavigation({
     redirectUrl: brandingRedirectUrl,
@@ -72,20 +78,27 @@ export const WhiteLabel = (props: IWhiteLabel) => {
 
   useEffect(() => {
     if (!isWhiteLabelLoaded) return;
-    setIsEmpty(!logoText);
-    if (!logoText) return;
-    setLogoTextWhiteLabel(logoText);
-  }, [logoText, isWhiteLabelLoaded]);
+    setIsEmptyBrandName(!brandName);
+    if (!brandName) return;
+    setBrandNameWhiteLabel(brandName);
+  }, [brandName, isWhiteLabelLoaded]);
 
-  const onChangeCompanyName = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeBrandName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setBrandNameWhiteLabel(value);
+    const trimmedValue = value?.trim();
+    setIsEmptyBrandName(!trimmedValue);
+  };
+
+  const onChangeLogoText = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setLogoTextWhiteLabel(value);
     const trimmedValue = value?.trim();
-    setIsEmpty(!trimmedValue);
+    setIsEmptyLogoText(!trimmedValue);
   };
 
   const onUseTextAsLogo = () => {
-    if (isEmpty) return;
+    if (isEmptyLogoText) return;
 
     const newLogos = logoUrls.map((logo, i) => {
       if (!showAbout && logo.name === "AboutPage") return logo;
@@ -124,6 +137,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
       return logo;
     });
     setLogoUrls(newLogos);
+    setLogoTextWhiteLabel("");
   };
 
   const onChangeLogo = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -174,27 +188,58 @@ export const WhiteLabel = (props: IWhiteLabel) => {
       }
     }
     const data: IWhiteLabelData = {
-      logoText: logoTextWhiteLabel,
+      logoText: "",
       logo: logosArr,
     };
     onSave(data);
   };
 
+  const onSaveBrandNameAction = (): void => {
+    const data: IWhiteLabelData = {
+      logoText: brandNameWhiteLabel,
+      logo: [],
+    };
+    onSave(data);
+  };
+
+  const onCancelBrandNameAction = (): void => {
+    setBrandNameWhiteLabel(defaultBrandName);
+  };
+
+  console.log("default logo", defaultBrandName);
+
   const isEqualLogo = isEqual(logoUrls, defaultWhiteLabelLogoUrls);
-  const isEqualText = defaultLogoText === logoTextWhiteLabel;
+  const isEqualText = defaultBrandName === brandNameWhiteLabel;
   const saveButtonDisabled = isEqualLogo && isEqualText;
 
   return (
     <WhiteLabelWrapper>
+      <Text className="subtitle">{t("BrandingSubtitle")}</Text>
+
+      <BrandName
+        t={t}
+        showNotAvailable={showNotAvailable}
+        isSettingPaid={isSettingPaid}
+        standalone={standalone}
+        isEmpty={isEmptyBrandName}
+        inputValue={brandNameWhiteLabel}
+        onChange={onChangeBrandName}
+        onSave={onSaveBrandNameAction}
+        onCancel={onCancelBrandNameAction}
+        isEqualText={isEqualText}
+      />
+
+      <hr />
+
       <WhiteLabelHeader
         t={t}
         showNotAvailable={showNotAvailable}
         isSettingPaid={isSettingPaid}
         standalone={standalone}
         onUseTextAsLogo={onUseTextAsLogo}
-        isEmpty={isEmpty}
+        isEmpty={isEmptyLogoText}
         logoTextWhiteLabel={logoTextWhiteLabel}
-        onChangeCompanyName={onChangeCompanyName}
+        onChange={onChangeLogoText}
       />
 
       <div className="logos-container">

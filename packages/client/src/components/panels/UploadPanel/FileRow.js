@@ -464,7 +464,7 @@ export default inject(
         ext = splitted.length > 1 ? `.${splitted.pop()}` : "";
       }
     } else {
-      ext = item.fileInfo.fileExst;
+      ext = item?.fileInfo?.fileExst;
       splitted = item.fileInfo.title.split(".");
       if (ext) splitted.splice(-1);
     }

@@ -172,6 +172,10 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
       ? secondaryActiveOperations[0].operation
       : primaryActiveOperations[0].operation;
 
+    if (!isSecondaryActive && primaryActiveOperations[0].isSingleConversion) {
+      return operationToIconMap[OPERATIONS_NAME.convert];
+    }
+
     return (
       operationToIconMap[operation as OperationName] ||
       FloatingButtonIcons.other
@@ -272,28 +276,33 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           />
         </HelpButton>
 
-        <DropDown
-          open={isOpenDropdown}
-          withBackdrop={false}
-          manualWidth="344px"
-          directionY="top"
-          directionX="right"
-          fixedDirection
-          isDefaultMode={false}
-          className={classNames(styles.styledDropDown, styles.progressDropdown)}
-        >
-          <ProgressList
-            secondaryOperations={secondaryActiveOperations}
-            primaryOperations={primaryActiveOperations}
-            clearSecondaryProgressData={clearSecondaryProgressData}
-            clearPrimaryProgressData={(operationId, operationName) =>
-              clearPrimaryProgressData?.(operationName)
-            }
-            onCancel={onCancelOperation}
-            {...(!disableOpenPanel && { onOpenPanel })}
-            withoutStatus={withoutStatus}
-          />
-        </DropDown>
+        {isOpenDropdown ? (
+          <DropDown
+            open={isOpenDropdown}
+            withBackdrop={false}
+            manualWidth="344px"
+            directionY="top"
+            directionX="right"
+            fixedDirection
+            isDefaultMode={false}
+            className={classNames(
+              styles.styledDropDown,
+              styles.progressDropdown,
+            )}
+          >
+            <ProgressList
+              secondaryOperations={secondaryActiveOperations}
+              primaryOperations={primaryActiveOperations}
+              clearSecondaryProgressData={clearSecondaryProgressData}
+              clearPrimaryProgressData={(operationId, operationName) =>
+                clearPrimaryProgressData?.(operationName)
+              }
+              onCancel={onCancelOperation}
+              {...(!disableOpenPanel && { onOpenPanel })}
+              withoutStatus={withoutStatus}
+            />
+          </DropDown>
+        ) : null}
       </div>
     </>
   );

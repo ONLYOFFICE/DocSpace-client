@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { makeAutoObservable } from "mobx";
 import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
 
@@ -43,8 +44,12 @@ class PrimaryProgressDataStore {
   }
 
   setPrimaryProgressBarData = (primaryProgressData) => {
-    const { operation, disableUploadPanelOpen, ...progressInfo } =
-      primaryProgressData;
+    const {
+      operation,
+      disableUploadPanelOpen,
+      isSingleConversion,
+      ...progressInfo
+    } = primaryProgressData;
 
     if (typeof disableUploadPanelOpen !== "undefined")
       this.disableUploadPanelOpen = disableUploadPanelOpen;
@@ -64,15 +69,24 @@ class PrimaryProgressDataStore {
         ...operationObject,
         ...progressInfo,
         disableOpenPanel: disableUploadPanelOpen,
+        ...(operationObject.isSingleConversion !== isSingleConversion && {
+          label: isSingleConversion
+            ? getOperationsProgressTitle(OPERATIONS_NAME.convert)
+            : getOperationsProgressTitle(operation),
+        }),
+        isSingleConversion,
       };
     } else {
       const progress = {
         operation,
         alert: progressInfo.alert,
         items: [progressInfo],
-        label: getOperationsProgressTitle(operation),
+        label: isSingleConversion
+          ? getOperationsProgressTitle(OPERATIONS_NAME.convert)
+          : getOperationsProgressTitle(operation),
         completed: progressInfo.completed,
         disableOpenPanel: disableUploadPanelOpen,
+        isSingleConversion,
       };
 
       this.primaryOperationsArray = [...this.primaryOperationsArray, progress];

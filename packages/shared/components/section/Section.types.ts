@@ -112,6 +112,7 @@ export interface Operation {
   percent?: number;
   withoutStatus?: boolean;
   disableOpenPanel?: boolean;
+  isSingleConversion?: boolean;
   items?: Array<{
     operationId: string;
     percent: number;

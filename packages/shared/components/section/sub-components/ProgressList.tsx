@@ -134,6 +134,7 @@ const ProgressList = observer(
               onCancel={onCancel}
               onOpenPanel={onOpenPanel}
               withoutStatus={withoutStatus}
+              withoutProgress={item.isSingleConversion}
             />
           </div>
         ))}

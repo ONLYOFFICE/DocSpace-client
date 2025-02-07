@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,42 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { useContext } from "react";
+import { AppStateContext } from "@/providers/AppStateProvider";
 
-import { TUser } from "@docspace/shared/api/people/types";
-import type {
-  TGetColorTheme,
-  TSettings,
-} from "@docspace/shared/api/settings/types";
-import type { ThemeKeys } from "@docspace/shared/enums";
+const useAppState = () => {
+  const context = useContext(AppStateContext);
 
-import ThemeProvider from "./ThemeProvider";
-import TranslationProvider from "./TranslationProvider";
-import StoreProvider from "./StoreProvider";
-import { AppStateProvider } from "./AppStateProvider";
+  if (!context) {
+    throw new Error("useAppState must be used within a AppStateProvider");
+  }
 
-export type TContextData = {
-  user: TUser | undefined;
-  settings: TSettings | undefined;
-  systemTheme: ThemeKeys | undefined;
-  colorTheme: TGetColorTheme | undefined;
+  return context;
 };
 
-export type TProviders = {
-  children: React.ReactNode;
-  contextData: TContextData;
-};
-
-const Providers = ({ children, contextData }: TProviders) => {
-  return (
-    <TranslationProvider {...contextData}>
-      <ThemeProvider {...contextData}>
-        <AppStateProvider {...contextData}>
-          <StoreProvider>{children}</StoreProvider>
-        </AppStateProvider>
-      </ThemeProvider>
-    </TranslationProvider>
-  );
-};
-
-export default Providers;
+export default useAppState;

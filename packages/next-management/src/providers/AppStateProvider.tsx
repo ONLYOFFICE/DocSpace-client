@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,42 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { createContext, PropsWithChildren, useMemo } from "react";
 
-import { TUser } from "@docspace/shared/api/people/types";
-import type {
-  TGetColorTheme,
-  TSettings,
-} from "@docspace/shared/api/settings/types";
-import type { ThemeKeys } from "@docspace/shared/enums";
+import { isAdmin as isAdminUtils } from "@docspace/shared/utils/common";
+import type { TUser } from "@docspace/shared/api/people/types";
+import type { TSettings } from "@docspace/shared/api/settings/types";
 
-import ThemeProvider from "./ThemeProvider";
-import TranslationProvider from "./TranslationProvider";
-import StoreProvider from "./StoreProvider";
-import { AppStateProvider } from "./AppStateProvider";
-
-export type TContextData = {
+export interface IAppStateContext {
   user: TUser | undefined;
   settings: TSettings | undefined;
-  systemTheme: ThemeKeys | undefined;
-  colorTheme: TGetColorTheme | undefined;
-};
+  isAdmin: boolean;
+}
 
-export type TProviders = {
-  children: React.ReactNode;
-  contextData: TContextData;
-};
+export interface AppStateProviderProps {
+  user: TUser | undefined;
+  settings: TSettings | undefined;
+}
 
-const Providers = ({ children, contextData }: TProviders) => {
+const AppStateContext = createContext<IAppStateContext | null>(null);
+
+const AppStateProvider = ({
+  user,
+  settings,
+  children,
+}: PropsWithChildren<AppStateProviderProps>) => {
+  const isAdmin = !!user && isAdminUtils(user);
+
+  const value = useMemo(() => {
+    return {
+      user,
+      settings,
+      isAdmin,
+    };
+  }, [user, settings, isAdmin]);
+
   return (
-    <TranslationProvider {...contextData}>
-      <ThemeProvider {...contextData}>
-        <AppStateProvider {...contextData}>
-          <StoreProvider>{children}</StoreProvider>
-        </AppStateProvider>
-      </ThemeProvider>
-    </TranslationProvider>
+    <AppStateContext.Provider value={value}>
+      {children}
+    </AppStateContext.Provider>
   );
 };
 
-export default Providers;
+export { AppStateContext, AppStateProvider };

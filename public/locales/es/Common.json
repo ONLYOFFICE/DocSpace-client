@@ -638,5 +638,6 @@
   "AutoSavePeriodHelp": "La hora que se muestra abajo corresponde a la zona horaria establecida en {{productName}}.",
   "MaxCopies": "{{copiesCount}} - número máximo de copias de seguridad",
   "ThirdPartyResource": "Recurso de terceros",
-  "ThirdPartyResourceDescription": "La copia de seguridad puede guardarse en su cuenta de terceros (Dropbox, Box.com, OneDrive o Google Drive). Debe conectar su cuenta de terceros (Dropbox, Box.com, OneDrive o Google Drive) para poder guardar la copia de seguridad allí."
+  "ThirdPartyResourceDescription": "La copia de seguridad puede guardarse en su cuenta de terceros (Dropbox, Box.com, OneDrive o Google Drive). Debe conectar su cuenta de terceros (Dropbox, Box.com, OneDrive o Google Drive) para poder guardar la copia de seguridad allí.",
+  "ThirdPartyStorageDescription": "Utilice servicios de terceros como almacenamiento de datos para esta sala. Se creará una nueva carpeta para almacenar los datos de esta sala en el almacenamiento conectado."
 }

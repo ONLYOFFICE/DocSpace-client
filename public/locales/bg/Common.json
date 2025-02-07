@@ -637,5 +637,6 @@
   "AutoSavePeriodHelp": "Времето, показано по-долу, съответства на часовата зона, зададена в {{productName}}.",
   "MaxCopies": "{{copiesCount}} - максимален брой резервни копия",
   "ThirdPartyResource": "Ресурс на трета страна",
-  "ThirdPartyResourceDescription": "Архивното копие може да бъде запазено във вашия профил от трета страна (Dropbox, Box.com, OneDrive или Google Drive). Трябва да свържете своя профил от трета страна (Dropbox, Box.com, OneDrive или Google Drive) преди да можете да запазите резервното си копие там."
+  "ThirdPartyResourceDescription": "Архивното копие може да бъде запазено във вашия профил от трета страна (Dropbox, Box.com, OneDrive или Google Drive). Трябва да свържете своя профил от трета страна (Dropbox, Box.com, OneDrive или Google Drive) преди да можете да запазите резервното си копие там.",
+  "ThirdPartyStorageDescription": "Използвайте услуги на трети страни за хранилище за данните от тази стая. В свързаното хранилище ще бъде създадена нова папка за съхраняване на данните от тази стая."
 }

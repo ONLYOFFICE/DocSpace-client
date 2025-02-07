@@ -638,5 +638,6 @@
   "AutoSavePeriodHelp": "L'heure indiquée ci-dessous correspond au fuseau horaire défini dans {{productName}}.",
   "MaxCopies": "{{copiesCount}} - nombre maximum de copies de sauvegarde",
   "ThirdPartyResource": "Ressource tierce",
-  "ThirdPartyResourceDescription": "La sauvegarde peut être enregistrée sur votre compte tiers (Dropbox, Box.com, OneDrive ou Google Drive). Il vous faut connecter votre compte tiers (Dropbox, Box.com, OneDrive ou Google Drive) avant de pouvoir y enregistrer votre sauvegarde."
+  "ThirdPartyResourceDescription": "La sauvegarde peut être enregistrée sur votre compte tiers (Dropbox, Box.com, OneDrive ou Google Drive). Il vous faut connecter votre compte tiers (Dropbox, Box.com, OneDrive ou Google Drive) avant de pouvoir y enregistrer votre sauvegarde.",
+  "ThirdPartyStorageDescription": "Utilisez des services tiers pour stocker les données de cette salle. Un nouveau dossier pour le stockage des données de cette salle sera créé dans l’espace de stockage connecté."
 }

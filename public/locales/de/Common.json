@@ -638,5 +638,6 @@
   "AutoSavePeriodHelp": "Die unten angegebene Zeit entspricht der im {{productName}} eingestellten Zeitzone.",
   "MaxCopies": "{{copiesCount}} - maximale Anzahl von Sicherungskopien",
   "ThirdPartyResource": "Ressource eines Drittanbieters",
-  "ThirdPartyResourceDescription": "Die Sicherungskopie kann in Ihrem Konto bei einem Drittanbieter (Dropbox, Box.com, OneDrive oder Google Drive) gespeichert werden. Sie müssen Ihr Konto (Dropbox, Box.com, OneDrive oder Google Drive) verbinden, bevor Sie Ihr Backup dort speichern können."
+  "ThirdPartyResourceDescription": "Die Sicherungskopie kann in Ihrem Konto bei einem Drittanbieter (Dropbox, Box.com, OneDrive oder Google Drive) gespeichert werden. Sie müssen Ihr Konto (Dropbox, Box.com, OneDrive oder Google Drive) verbinden, bevor Sie Ihr Backup dort speichern können.",
+  "ThirdPartyStorageDescription": "Verwenden Sie Drittanbieterdienste als Datenspeicher für diesen Raum. Ein neuer Ordner zum Speichern der Daten dieses Raums wird im verbundenen Speicher erstellt."
 }

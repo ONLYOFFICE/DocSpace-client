@@ -637,5 +637,6 @@
   "AutoSavePeriodHelp": "Alla näkyvä aika vastaa {{productName}}-ssa asetettua aikavyöhykettä.",
   "MaxCopies": "{{copiesCount}} - varmuuskopioiden enimmäismäärä",
   "ThirdPartyResource": "Kolmannen osapuolen resurssi",
-  "ThirdPartyResourceDescription": "Varmuuskopio voidaan tallentaa kolmannen osapuolen tilillesi (Dropbox, Box.com, OneDrive tai Google Drive). Sinun on yhdistettävä kolmannen osapuolen tilisi (Dropbox, Box.com, OneDrive tai Google Drive), ennen kuin voit tallentaa varmuuskopiosi sinne."
+  "ThirdPartyResourceDescription": "Varmuuskopio voidaan tallentaa kolmannen osapuolen tilillesi (Dropbox, Box.com, OneDrive tai Google Drive). Sinun on yhdistettävä kolmannen osapuolen tilisi (Dropbox, Box.com, OneDrive tai Google Drive), ennen kuin voit tallentaa varmuuskopiosi sinne.",
+  "ThirdPartyStorageDescription": "Käytä kolmannen osapuolen palveluita tallennustilana tälle huoneelle. Yhdistettyyn tallennustilaan luodaan uusi kansio tämän huoneen tietojen tallentamista varten."
 }

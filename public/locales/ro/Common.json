@@ -638,5 +638,6 @@
   "AutoSavePeriodHelp": "Ora afișată mai jos va corespunde fusului orar în {{productName}}.",
   "MaxCopies": "{{copiesCount}} - numărul maxim de copii de rezervă",
   "ThirdPartyResource": "Resursă terță parte",
-  "ThirdPartyResourceDescription": "Puteți salva o copie de rezervă prin intermediu contului de stocare de la terți (Dropbox, Box.com, OneDrive sau Google Drive). Trebuie să vă conectați cu contul de stocare de la terți (Dropbox, Box.com, OneDrive sau Google Drive) înainte de a crea o copie de rezervă acolo."
+  "ThirdPartyResourceDescription": "Puteți salva o copie de rezervă prin intermediu contului de stocare de la terți (Dropbox, Box.com, OneDrive sau Google Drive). Trebuie să vă conectați cu contul de stocare de la terți (Dropbox, Box.com, OneDrive sau Google Drive) înainte de a crea o copie de rezervă acolo.",
+  "ThirdPartyStorageDescription": "Trebuie să utilizaţi servicii terțe de stocare a datelor pentru această sală. Un nou dosar pentru stocarea datelor din această sală va fi creat în spaţiul de stocare conectat."
 }

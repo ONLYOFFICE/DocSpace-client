@@ -638,5 +638,6 @@
   "AutoSavePeriodHelp": "L'ora mostrata di seguito corrisponde al fuso orario impostato in {{productName}}.",
   "MaxCopies": "{{copiesCount}} - numero massimo di copie di backup",
   "ThirdPartyResource": "Archiviazione di terze parti",
-  "ThirdPartyResourceDescription": "Il backup può essere salvato sul tuo account di terze parti (Dropbox, Box.com, OneDrive o Google Drive). Devi collegare il tuo account di terze parti (Dropbox, Box.com, OneDrive o Google Drive) prima che tu possa salvare lì il tuo backup."
+  "ThirdPartyResourceDescription": "Il backup può essere salvato sul tuo account di terze parti (Dropbox, Box.com, OneDrive o Google Drive). Devi collegare il tuo account di terze parti (Dropbox, Box.com, OneDrive o Google Drive) prima che tu possa salvare lì il tuo backup.",
+  "ThirdPartyStorageDescription": "Utilizza servizi di terze parti come archivio dati per questa stanza. Verrà creata una nuova cartella per l'archiviazione dei dati di questa stanza nell&apos;archivio connesso."
 }

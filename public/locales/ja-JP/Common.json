@@ -638,5 +638,6 @@
   "AutoSavePeriodHelp": "下記の時間は{{productName}}で設定したタイムゾーンに対応しています。",
   "MaxCopies": "{{copiesCount}}は、バックアップの最大コピー数",
   "ThirdPartyResource": "サードパーティーリソース",
-  "ThirdPartyResourceDescription": "バックアップは、サードパーティーアカウント（Dropbox、Box.com、OneDrive、Google Drive）に保存できます。バックアップを保存する前、サードパーティーアカウント（Dropbox、Box.com、OneDrive、Google Drive）に接続する必要があります。"
+  "ThirdPartyResourceDescription": "バックアップは、サードパーティーアカウント（Dropbox、Box.com、OneDrive、Google Drive）に保存できます。バックアップを保存する前、サードパーティーアカウント（Dropbox、Box.com、OneDrive、Google Drive）に接続する必要があります。",
+  "ThirdPartyStorageDescription": "このルームのデータ保存先として、サードパーティーのサービスを利用します。接続されたストレージに、このルームのデータを保存するための新しいフォルダが作成されます。"
 }

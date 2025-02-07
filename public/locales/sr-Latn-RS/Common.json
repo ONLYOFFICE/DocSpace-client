@@ -638,5 +638,6 @@
   "AutoSavePeriodHelp": "Dole prikazano vreme odgovara vremenskoj zoni podešenoj u {{productName}}-u.",
   "MaxCopies": "{{copiesCount}} - maksimalni broj rezervnih kopija",
   "ThirdPartyResource": "Resurs treće strane",
-  "ThirdPartyResourceDescription": "Rezervna kopija se može sačuvati na vaš nalog treće strane (Dropbox, Box.com, OneDrive ili Google Drive). Morate povezati svoj nalog treće strane (Dropbox, Box.com, OneDrive ili Google Drive) pre nego što budete mogli sačuvati svoju rezervnu kopiju tamo."
+  "ThirdPartyResourceDescription": "Rezervna kopija se može sačuvati na vaš nalog treće strane (Dropbox, Box.com, OneDrive ili Google Drive). Morate povezati svoj nalog treće strane (Dropbox, Box.com, OneDrive ili Google Drive) pre nego što budete mogli sačuvati svoju rezervnu kopiju tamo.",
+  "ThirdPartyStorageDescription": "Koristite usluge trećih strana kao skladište podataka za ovu prostoriju. Nova fascikla za čuvanje podataka ove sobe biće kreirana u povezanom skladištu."
 }

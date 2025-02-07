@@ -637,5 +637,6 @@
   "AutoSavePeriodHelp": "아래에 표시된 시간은 {{productName}}에 설정된 시간대와 일치합니다.",
   "MaxCopies": "{{copiesCount}} - 최대 백업 복사본 수",
   "ThirdPartyResource": "타사 리소스",
-  "ThirdPartyResourceDescription": "타사 계정(DropBox, Box.com, OneDrive, Google Drive)에 백업을 저장할 수 있습니다. 그 곳에 백업을 저장하기 전에 타사 계정(Dropbox, Box.com, OneDrive, Google Drive)을 연결해야 합니다."
+  "ThirdPartyResourceDescription": "타사 계정(DropBox, Box.com, OneDrive, Google Drive)에 백업을 저장할 수 있습니다. 그 곳에 백업을 저장하기 전에 타사 계정(Dropbox, Box.com, OneDrive, Google Drive)을 연결해야 합니다.",
+  "ThirdPartyStorageDescription": "이 방의 데이터 스토리지로 제3자 서비스를 사용합니다. 연결된 스토리지에 이 방의 데이터를 저장할 새 폴더가 생성됩니다."
 }

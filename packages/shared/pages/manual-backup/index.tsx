@@ -429,7 +429,7 @@ const ManualBackup = ({
           {...commonRadioButtonProps}
         />
         <Text className="backup-description">
-          {t("ThirdPartyStorageDescription")}
+          {t("Common:ThirdPartyStorageDescription")}
         </Text>
         {isCheckedThirdPartyStorage ? (
           <ThirdPartyStorageModule

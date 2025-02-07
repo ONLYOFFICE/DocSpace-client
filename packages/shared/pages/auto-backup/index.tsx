@@ -570,7 +570,7 @@ const AutomaticBackup = ({
               isDisabled={isLoadingData}
             />
             <Text className="backup-description">
-              {t("ThirdPartyStorageDescription")}
+              {t("Common:ThirdPartyStorageDescription")}
             </Text>
 
             {isCheckedThirdPartyStorage ? (

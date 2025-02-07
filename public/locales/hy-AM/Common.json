@@ -638,5 +638,6 @@
   "AutoSavePeriodHelp": "Ստորև ներկայացված ժամը համապատասխանում է {{productName}}-ում սահմանված ժամային գոտուն:",
   "MaxCopies": "{{copiesCount}} - կրկնօրինակների առավելագույն քանակը",
   "ThirdPartyResource": "Երրորդ կողմի ռեսուրս",
-  "ThirdPartyResourceDescription": "Պահուստավորումը կարող է պահպանվել ձեր երրորդ կողմի հաշվում (Dropbox, Box.com, OneDrive կամ Google Drive). Դուք պետք է միացնեք ձեր երրորդ կողմի հաշիվը (Dropbox, Box.com, OneDrive կամ Google Drive), նախքան Դուք կկարողանաք այնտեղ պահել Ձեր պահեստավորումը:"
+  "ThirdPartyResourceDescription": "Պահուստավորումը կարող է պահպանվել ձեր երրորդ կողմի հաշվում (Dropbox, Box.com, OneDrive կամ Google Drive). Դուք պետք է միացնեք ձեր երրորդ կողմի հաշիվը (Dropbox, Box.com, OneDrive կամ Google Drive), նախքան Դուք կկարողանաք այնտեղ պահել Ձեր պահեստավորումը:",
+  "ThirdPartyStorageDescription": "Օգտագործեք երրորդ կողմի ծառայությունները՝ որպես այս սենյակի տվյալների պահեստ: Այս սենյակի տվյալները պահելու համար նոր պանակ կստեղծվի միացված պահեստում"
 }

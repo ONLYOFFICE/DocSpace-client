@@ -255,14 +255,6 @@ class UploadDataStore {
   };
 
   cancelUpload = (t) => {
-    const newFiles = [];
-
-    for (let i = 0; i < this.files.length; i++) {
-      if (this.files[i].fileId) {
-        newFiles.push(this.files[i]);
-      }
-    }
-
     const newUploadData = {
       filesSize: this.filesSize,
       uploadedFiles: this.uploadedFiles,

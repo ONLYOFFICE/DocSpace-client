@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,19 +24,93 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@import "../../styles/variables/index.scss";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
 
-import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg";
+@mixin displayVertical {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
-import { commonIconsStyles } from "../../utils";
-import { globalColors } from "../../themes";
-
-const StyledCrossIcon = styled(CrossReactSvg)`
-  ${commonIconsStyles}
-
-  path {
-    fill: ${globalColors.gray};
+  .fieldLabel {
+    line-height: 20px;
+    height: 20px;
+    display: inline-block;
   }
-`;
 
-export default StyledCrossIcon;
+  .fieldLabelIcon {
+    display: inline-flex;
+    width: 100%;
+    margin: 0 0 4px 0;
+  }
+
+  .fieldBody {
+    width: 100%;
+  }
+
+  .iconButton {
+    position: relative;
+    margin: 0;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+@mixin displayHorizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  .fieldLabel {
+    line-height: 32px;
+    margin: 0px;
+    position: relative;
+  }
+
+  .fieldLabelIcon {
+    display: inline-flex;
+    min-width: var(--label-width);
+    width: var(--label-width);
+  }
+
+  .fieldBody {
+    flex-grow: 1;
+  }
+
+  .iconButton {
+    position: relative;
+    margin-top: 10px;
+    margin-inline-start: 8px;
+  }
+}
+
+.container {
+  margin: 0 0 16px 0;
+
+  &.horizontal {
+    @include displayHorizontal();
+  }
+
+  &.vertical {
+    @include displayVertical();
+  }
+
+  @include tablet-and-below {
+    &.horizontal {
+      @include displayVertical();
+    }
+  }
+
+  &.noMargin {
+    margin: 0;
+  }
+}
+
+.errorContainer {
+  color: var(--error-color, var(--input-error-color));
+  padding-top: 4px;
+  max-width: var(--error-width, 293px);
+}

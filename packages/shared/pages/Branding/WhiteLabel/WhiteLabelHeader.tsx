@@ -50,16 +50,16 @@ export const WhiteLabelHeader = ({
   onUseTextAsLogo,
   isEmpty,
   logoTextWhiteLabel,
-  onChangeCompanyName,
+  onChange,
 }: IHeaderProps) => {
   return (
     <StyledHeader>
-      <Text className="subtitle">{t("BrandingSubtitle")}</Text>
       {showNotAvailable ? <NotAvailable t={t} /> : null}
       <div className="header-container">
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
         </Text>
+
         {!isSettingPaid && !standalone ? (
           <Badge
             className="paid-badge"
@@ -69,13 +69,13 @@ export const WhiteLabelHeader = ({
           />
         ) : null}
       </div>
-      <Text className="wl-subtitle settings_unavailable" fontSize="12px">
-        {t("WhiteLabelSubtitle")}
-      </Text>
 
       <div className="wl-helper">
-        <Text className="wl-helper-label settings_unavailable" as="div">
-          {t("WhiteLabelHelper")}
+        <Text
+          className="wl-subtitle wl-helper-label settings_unavailable"
+          fontSize="13px"
+        >
+          {t("WhiteLabelSubtitle")}
           <HelpButton
             tooltipContent={
               <Text fontSize="12px">{t("WhiteLabelTooltip")}</Text>
@@ -86,37 +86,39 @@ export const WhiteLabelHeader = ({
           />
         </Text>
       </div>
+
       <div className="settings-block">
         <FieldContainer
-          id="fieldContainerCompanyName"
-          labelText={t("Common:CompanyName")}
+          id="fieldContainerGenerateLogo"
+          labelText={t("GenerateLogoLabel")}
           isVertical
           className="settings_unavailable"
-          hasError={isEmpty}
+          //  hasError={isEmpty}
           labelVisible
         >
           <TextInput
             testId="logo-text-input"
-            className="company-name input"
+            className="logo-text input"
+            placeholder={t("YourLogo")}
             value={logoTextWhiteLabel}
-            onChange={onChangeCompanyName}
+            onChange={onChange}
             isDisabled={!isSettingPaid}
             isReadOnly={!isSettingPaid}
             scale
             isAutoFocussed={!isMobile}
-            maxLength={30}
-            hasError={isEmpty}
+            maxLength={10}
+            //  hasError={isEmpty}
             type={InputType.text}
             size={InputSize.base}
           />
           <Button
-            testId="use-as-logo-button"
-            id="btnUseAsLogo"
-            className="use-as-logo"
+            testId="generate-logo-button"
+            id="btnGenerateLogo"
+            className="generate-logo"
             size={ButtonSize.small}
-            label={t("UseAsLogoButton")}
+            label={t("GenerateLogoButton")}
             onClick={onUseTextAsLogo}
-            isDisabled={!isSettingPaid}
+            isDisabled={!isSettingPaid || isEmpty}
           />
         </FieldContainer>
       </div>

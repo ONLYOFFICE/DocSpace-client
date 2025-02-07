@@ -26,7 +26,6 @@
 import type {
   ConnectedThirdPartyAccountType,
   Nullable,
-  ProviderType,
   SelectedStorageType,
   StorageRegionsType,
   ThirdPartyAccountType,
@@ -40,8 +39,9 @@ import type { ButtonSize } from "@docspace/shared/components/button";
 import type { TColorScheme } from "@docspace/shared/themes";
 import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import type { TBackupSchedule } from "api/portal/types";
-import type { TStorageBackup } from "api/settings/types";
+import type { TBackupSchedule } from "@docspace/shared/api/portal/types";
+import type { TStorageBackup } from "@docspace/shared/api/settings/types";
+import type { TThirdParties } from "@docspace/shared/api/files/types";
 
 export interface AutomaticBackupProps {
   isManagement?: boolean;
@@ -166,8 +166,8 @@ export interface AutomaticBackupProps {
     serviceName: string,
     modal: Window | null,
   ) => Promise<Window | null>;
-  setThirdPartyProviders: (providers: ProviderType[]) => void;
-  providers: ProviderType[];
+  setThirdPartyProviders: (providers: TThirdParties) => void;
+  providers: TThirdParties;
   deleteThirdParty: (id: string) => Promise<void>;
   // end filesSettingsStore.thirdPartyStore;
 

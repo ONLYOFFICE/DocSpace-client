@@ -30,31 +30,22 @@ import { useCallback, useMemo, useState } from "react";
 
 import axios, { AxiosError } from "axios";
 
-import {
-  getConnectingStorages,
-  getSettingsThirdParty,
-} from "@docspace/shared/api/files";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
-import { connectedCloudsTypeTitleTranslation } from "@docspace/shared/utils/connectedCloudsTypeTitleTranslation";
-
-import { isAdmin as isAdminUtils } from "@docspace/shared/utils/common";
 
 import type {
   Nullable,
   Option,
-  ThirdPartyAccountType,
   TTranslation,
   TWeekdaysLabel,
 } from "@docspace/shared/types";
-import type { TBackupSchedule } from "@docspace/shared/api/portal/types";
 import type { TOption } from "@docspace/shared/components/combobox";
+import type { TBackupSchedule } from "@docspace/shared/api/portal/types";
 import type { TStorageBackup } from "@docspace/shared/api/settings/types";
-import type {
-  SettingsThirdPartyType,
-  TConnectingStorage,
-} from "@docspace/shared/api/files/types";
-import type { TUser } from "@docspace/shared/api/people/types";
+import type { SettingsThirdPartyType } from "@docspace/shared/api/files/types";
+
+import { useStores } from "./useStores";
+import useAppState from "./useAppState";
 
 interface ErrorResponse {
   error: {
@@ -66,21 +57,15 @@ interface BackupProps {
   account: SettingsThirdPartyType | undefined;
   backupScheduleResponse: TBackupSchedule | undefined;
   backupStorageResponse: TStorageBackup[];
-  user: TUser | undefined;
 }
 
 export const useBackup = ({
   account,
   backupScheduleResponse,
   backupStorageResponse,
-  user,
 }: BackupProps) => {
-  const [accounts, setThirdPartyAccounts] = useState<ThirdPartyAccountType[]>(
-    [],
-  );
-
-  const [selectedThirdPartyAccount, setSelectedThirdPartyAccount] =
-    useState<Nullable<Partial<ThirdPartyAccountType>>>(null);
+  const { backupStore } = useStores();
+  const { isAdmin } = useAppState();
 
   const [errorsFieldsBeforeSafe, setErrorsFormFields] = useState<
     Record<string, boolean>
@@ -176,6 +161,16 @@ export const useBackup = ({
     () => setSelectedEnableSchedule((prev) => !prev),
     [],
   );
+
+  const resetDownloadingProgress = useCallback(() => {
+    if (
+      typeof window !== "undefined" &&
+      !window.location.pathname.includes("data-backup") &&
+      !window.location.pathname.includes("restore-backup")
+    ) {
+      setDownloadingProgress(100);
+    }
+  }, []);
 
   const setDefaultOptions = useCallback(
     (t: TTranslation, periodObj: TOption[], weekdayArr: TOption[]) => {
@@ -466,18 +461,13 @@ export const useBackup = ({
   ]);
 
   const isTheSameThirdPartyAccount = useMemo(() => {
-    if (connectedThirdPartyAccount && selectedThirdPartyAccount)
+    if (connectedThirdPartyAccount && backupStore.selectedThirdPartyAccount)
       return (
-        connectedThirdPartyAccount.title === selectedThirdPartyAccount.title
+        connectedThirdPartyAccount.title ===
+        backupStore.selectedThirdPartyAccount.title
       );
     return true;
-  }, [connectedThirdPartyAccount, selectedThirdPartyAccount]);
-
-  const isAdmin = useMemo(() => {
-    if (!user || !user.id) return false;
-
-    return isAdminUtils(user);
-  }, [user]);
+  }, [connectedThirdPartyAccount, backupStore.selectedThirdPartyAccount]);
 
   const setMaxCopies = (option: TOption) => {
     setSelectedMaxCopiesNumber(option.key.toString());
@@ -559,85 +549,15 @@ export const useBackup = ({
       localStorage.removeItem("LocalCopyThirdPartyStorageValues");
   }, []);
 
-  const getThirdPartyAccount = (
-    provider: TConnectingStorage,
-    t: TTranslation,
-  ) => {
-    const serviceTitle = connectedCloudsTypeTitleTranslation(provider.name, t);
-    const serviceLabel = provider.connected
-      ? serviceTitle
-      : `${serviceTitle} (${t("CreateEditRoomDialog:ActivationRequired")})`;
-
-    const isConnected =
-      connectedThirdPartyAccount?.providerKey === "WebDav"
-        ? serviceTitle === connectedThirdPartyAccount?.title
-        : provider.key === connectedThirdPartyAccount?.providerKey;
-
-    const isDisabled = !provider.connected && !isAdmin;
-
-    const account: ThirdPartyAccountType = {
-      key: provider.name,
-      label: serviceLabel,
-      title: serviceLabel,
-      provider_key: provider.key,
-      ...(provider.clientId && {
-        provider_link: provider.clientId,
-      }),
-      storageIsConnected: isConnected,
-      connected: provider.connected,
-      ...(isConnected && {
-        provider_id: connectedThirdPartyAccount?.providerId,
-        id: connectedThirdPartyAccount?.id,
-      }),
-      disabled: isDisabled,
-    };
-
-    return { account, isConnected };
-  };
-
-  const setThirdPartyAccountsInfo = async (t: TTranslation) => {
-    const [connectedAccount, providers] = await Promise.all([
-      getSettingsThirdParty(),
-      getConnectingStorages(),
-    ]);
-
-    if (connectedAccount) setConnectedThirdPartyAccount(connectedAccount);
-
-    let tempAccounts: ThirdPartyAccountType[] = [];
-
-    let selectedAccount: ThirdPartyAccountType | undefined;
-    let index = 0;
-
-    providers.forEach((item) => {
-      const thirdPartyAccount = getThirdPartyAccount(item, t);
-
-      if (!thirdPartyAccount.account) return true; // continue
-
-      tempAccounts.push(thirdPartyAccount.account);
-
-      if (thirdPartyAccount.isConnected) {
-        selectedAccount = { ...tempAccounts[index] };
-      }
-      index++;
-    });
-
-    tempAccounts = tempAccounts.sort((storage) => (storage.connected ? -1 : 1));
-
-    setThirdPartyAccounts(tempAccounts);
-
-    const connectedThirdPartyAccount = tempAccounts.findLast(
-      (a) => a.connected,
-    );
-
-    setSelectedThirdPartyAccount(
-      Object.keys(selectedAccount ?? {}).length !== 0
-        ? (selectedAccount ?? {})
-        : (connectedThirdPartyAccount ?? {}),
-    );
-  };
+  const setThirdPartyAccountsInfo = useCallback(
+    (t: TTranslation) => {
+      return backupStore.setThirdPartyAccountsInfo(t, isAdmin);
+    },
+    [backupStore, isAdmin],
+  );
 
   return {
-    accounts,
+    accounts: backupStore.accounts,
     errorInformation,
     setErrorInformation,
 
@@ -718,10 +638,12 @@ export const useBackup = ({
     deleteValueFormSetting,
     clearLocalStorage,
 
-    selectedThirdPartyAccount,
-    setSelectedThirdPartyAccount,
+    selectedThirdPartyAccount: backupStore.selectedThirdPartyAccount,
+    setSelectedThirdPartyAccount: backupStore.setSelectedThirdPartyAccount,
     isTheSameThirdPartyAccount,
     setThirdPartyAccountsInfo,
+
+    fetchConnectingStorages: backupStore.fetchConnectingStorages,
+    resetDownloadingProgress,
   };
 };
-

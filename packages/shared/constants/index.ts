@@ -203,3 +203,5 @@ export const ThirdPartyServicesUrlName = Object.freeze({
   WebDav: "webdav",
 });
 export const GENERAL_LINK_HEADER_KEY = "general-link_header";
+
+export const FOLDER_FORM_VALIDATION = /[*+:"<>?|\\\/]/gim;

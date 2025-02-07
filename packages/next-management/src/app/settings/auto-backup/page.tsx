@@ -24,9 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { redirect } from "next/navigation";
-import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
-
 import {
   getSettingsThirdParty,
   getBackupSchedule,
@@ -35,9 +32,8 @@ import {
   getAllPortals,
   getQuota,
   getSettingsFiles,
-  getUser,
   getFoldersTree,
-  getSettings,
+  getBackupProgress,
 } from "@/lib/actions";
 
 import AutoBackup from "./page.client";
@@ -48,40 +44,32 @@ async function Page() {
     backupSchedule,
     backupStorage,
     newStorageRegions,
+    backupProgress,
+
     portals,
     quota,
     settingsFiles,
-    user,
     foldersTree,
-    settings,
   ] = await Promise.all([
     getSettingsThirdParty(),
     getBackupSchedule(),
     getBackupStorage(),
     getStorageRegions(),
+    getBackupProgress(),
     getAllPortals(),
     getQuota(),
     getSettingsFiles(),
-    getUser(),
     getFoldersTree(),
-    getSettings(),
   ]);
-
-  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-
-  const helpLink = settings?.helpLink ?? "";
-
-  const automaticBackupUrl = `${helpLink}/administration/docspace-settings.aspx#AutoBackup`;
 
   return (
     <AutoBackup
-      user={user}
       account={account}
       foldersTree={foldersTree}
       filesSettings={settingsFiles}
       portals={portals?.tenants || []}
       features={quota?.features || []}
-      automaticBackupUrl={automaticBackupUrl}
+      backupProgress={backupProgress}
       backupScheduleResponse={backupSchedule}
       backupStorageResponse={backupStorage ?? []}
       newStorageRegions={newStorageRegions ?? []}

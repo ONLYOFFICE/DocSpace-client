@@ -389,12 +389,6 @@ const AutomaticBackup = ({
 
   if (isInitialLoading) return <AutoBackupLoader />;
 
-  console.log({
-    isLoadingData,
-    isEnableAuto,
-    isInitialError,
-  });
-
   return (
     <StyledAutoBackup>
       <StatusMessage message={errorInformation} />

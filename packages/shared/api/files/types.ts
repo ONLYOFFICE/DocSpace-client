@@ -227,7 +227,7 @@ export type TUploadOperation = {
 
 export type TThirdPartyCapabilities = string[][];
 
-export type TThierdParty = {
+export type TThirdParty = {
   corporate: boolean;
   roomsStorage: boolean;
   customerTitle: string;
@@ -235,7 +235,7 @@ export type TThierdParty = {
   providerKey: string;
 };
 
-export type TTirdParties = TThierdParty[];
+export type TThirdParties = TThirdParty[];
 
 export type TFilesSettings = {
   automaticallyCleanUp: {
@@ -433,6 +433,7 @@ export type TConnectingStorage = {
   oauth: boolean;
   redirectUrl: string;
   clientId?: string;
+  requiredConnectionUrl: boolean;
 };
 
 export type TIndexItems = {

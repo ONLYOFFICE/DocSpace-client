@@ -39,6 +39,7 @@ import type {
 } from "@docspace/shared/api/settings/types";
 import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 import type {
+  TBackupProgress,
   TBackupSchedule,
   TPaymentQuota,
   TPortalTariff,
@@ -53,6 +54,7 @@ import {
   getFolderClassNameByType,
   sortInDisplayOrder,
 } from "@docspace/shared/utils/common";
+import { TError } from "@docspace/shared/utils/axiosClient";
 
 export async function getUser() {
   const hdrs = headers();
@@ -370,6 +372,24 @@ export async function getSettingsFiles(): Promise<TFilesSettings> {
   const settingsFiles = await settingsFilesRes.json();
 
   return settingsFiles.response;
+}
+
+export async function getBackupProgress() {
+  try {
+    const [getBackupProgress] = createRequest(
+      ["/portal/getbackupprogress"],
+      [["", ""]],
+      "GET",
+    );
+
+    const backupProgressRes = await fetch(getBackupProgress);
+
+    const backupProgress = await backupProgressRes.json();
+
+    return backupProgress.response as TBackupProgress | undefined;
+  } catch (error) {
+    return error as TError;
+  }
 }
 
 export async function getFoldersTree() {

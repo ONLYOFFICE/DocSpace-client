@@ -23,8 +23,13 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import type { TFolder } from "../../api/files/types";
-import type { Nullable, ProviderType, TTranslation } from "../../types";
+import type { TFolder, TThirdParty } from "../../api/files/types";
+import type {
+  ConnectingStoragesType,
+  Nullable,
+  ThirdPartyAccountType,
+  TTranslation,
+} from "../../types";
 
 export type ConnectionItemType = {
   link: string;
@@ -35,22 +40,10 @@ export type ConnectionItemType = {
   provider_key: string;
 };
 
-export type ConnectingStoragesType = {
-  id: string;
-  className: string;
-  providerKey: string;
-  isConnected: boolean;
-  isOauth: boolean;
-  oauthHref: string;
-  category: string;
-  requiredConnectionUrl: string;
-  clientId: string;
-};
-
 export interface ConnectDialogProps {
   visible: boolean;
-  item: Nullable<ConnectionItemType>;
-  providers: ProviderType[];
+  item: Nullable<ThirdPartyAccountType | ConnectionItemType>;
+  providers: TThirdParty[];
   selectedFolderId: Nullable<string | number>;
   selectedFolderFolders: Nullable<TFolder[]>;
   folderFormValidation: RegExp;
@@ -76,7 +69,7 @@ export interface ConnectDialogProps {
     modal: Nullable<Window>,
   ) => Promise<Nullable<Window>>;
   setConnectDialogVisible: (visible: boolean) => void;
-  setSaveThirdpartyResponse: (response: unknown) => void;
+  setSaveThirdpartyResponse?: (response: unknown) => void;
   setSaveAfterReconnectOAuth: (saveAfterReconnectOAuth: boolean) => void;
   setIsConnectDialogReconnect: (isConnectDialogReconnect: boolean) => void;
   setThirdPartyAccountsInfo: (t: TTranslation) => Promise<void>;

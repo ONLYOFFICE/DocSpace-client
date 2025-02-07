@@ -30,13 +30,13 @@ import type {
   ThirdPartyAccountType,
   ConnectedThirdPartyAccountType,
   TTranslation,
-  ProviderType,
 } from "@docspace/shared/types";
 import type { ButtonSize } from "@docspace/shared/components/button";
 import type {
   FileInfoType,
   FilesSelectorSettings,
 } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
+import type { TThirdParties } from "@docspace/shared/api/files/types";
 
 export type StyledComboBoxItemProps = {
   isDisabled?: boolean;
@@ -79,9 +79,9 @@ export interface DirectThirdPartyConnectionProps {
   setConnectedThirdPartyAccount: (
     account: Nullable<ConnectedThirdPartyAccountType>,
   ) => void;
-  setThirdPartyProviders: (providers: ProviderType[]) => void;
+  setThirdPartyProviders: (providers: TThirdParties) => void;
 
-  providers: ProviderType[];
+  providers: TThirdParties;
   removeItem: ThirdPartyAccountType;
   // FilesSelectorInput
   newPath: string;

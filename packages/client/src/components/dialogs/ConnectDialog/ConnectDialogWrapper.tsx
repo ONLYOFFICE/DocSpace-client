@@ -25,11 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { inject, observer } from "mobx-react";
 
-import {
-  ConnectDialog,
-  type ConnectionItemType,
-} from "@docspace/shared/dialogs/connect";
-import type { Nullable } from "@docspace/shared/types";
+import { ConnectDialog } from "@docspace/shared/dialogs/connect";
+import type { Nullable, ThirdPartyAccountType } from "@docspace/shared/types";
 
 import type {
   ConnectDialogWrapperProps,
@@ -109,6 +106,7 @@ export default inject<
       selectedThirdPartyAccount: backupConnectionItem,
       setThirdPartyAccountsInfo,
     } = backup;
+
     const {
       connectDialogVisible: visible,
       setConnectDialogVisible,
@@ -121,7 +119,7 @@ export default inject<
       setSaveAfterReconnectOAuth,
     } = dialogsStore;
 
-    const item: Nullable<ConnectionItemType> =
+    const item: Nullable<ThirdPartyAccountType> =
       backupConnectionItem ?? connectItem;
 
     const isConnectionViaBackupModule = !!backupConnectionItem;

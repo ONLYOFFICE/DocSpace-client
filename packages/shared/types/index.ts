@@ -106,6 +106,17 @@ export type TCreatedBy = {
   id: string;
   profileUrl: string;
 };
+export type ConnectingStoragesType = {
+  id: string;
+  className: string;
+  providerKey: string;
+  isConnected: boolean;
+  isOauth: boolean;
+  oauthHref: string;
+  category: string;
+  requiredConnectionUrl: boolean;
+  clientId?: string;
+};
 
 export type StorageRegionsType = { displayName: string; systemName: string };
 

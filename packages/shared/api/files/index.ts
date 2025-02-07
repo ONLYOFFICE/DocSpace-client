@@ -64,7 +64,7 @@ import {
   TSendEditorNotify,
   TSharedUsers,
   TThirdPartyCapabilities,
-  TTirdParties,
+  TThirdParties,
   TUploadOperation,
   TConnectingStorages,
   SettingsThirdPartyType,
@@ -1000,7 +1000,7 @@ export async function getThirdPartyList() {
   const res = (await request({
     method: "get",
     url: "files/thirdparty",
-  })) as TTirdParties;
+  })) as TThirdParties;
 
   return res;
 }
@@ -1032,7 +1032,7 @@ export function saveThirdParty(
   return request(
     { method: "post", url: "files/thirdparty", data },
     skipRedirect,
-  );
+  ) as Promise;
 }
 
 // TODO: Need update res type

@@ -170,7 +170,7 @@ const ConnectDialog = ({
       (showUrlField && !isUrlValidCheck)
     ) {
       setIsTitleValid(isTitleValidCheck);
-      showUrlField && setIsUrlValid(isUrlValidCheck);
+      if (showUrlField) setIsUrlValid(isUrlValidCheck);
       setIsLoginValid(isLoginValidCheck);
       setIsPasswordValid(isPasswordValidCheck);
       return;
@@ -215,7 +215,7 @@ const ConnectDialog = ({
       roomCreation,
     )
       .then(async (res) => {
-        setSaveThirdpartyResponse(res);
+        setSaveThirdpartyResponse?.(res);
         toastr.success(t("SuccessfulConnectionOfAThirdParty"));
         await fetchThirdPartyProviders();
       })

@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 "use client";
-
+import { observer } from "mobx-react";
 import { useTheme } from "styled-components";
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useLayoutEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import AutomaticBackup from "@docspace/shared/pages/auto-backup";
@@ -37,22 +37,24 @@ import type {
   TFolder,
 } from "@docspace/shared/api/files/types";
 import type {
+  TBackupProgress,
   TBackupSchedule,
   TPaymentFeature,
   TStorageRegion,
 } from "@docspace/shared/api/portal/types";
+import { openConnectWindowUtils } from "@docspace/shared/utils/openConnectWindow";
+import { deleteThirdParty as deleteThirdPartyApi } from "@docspace/shared/api/files";
+import type { TError } from "@docspace/shared/utils/axiosClient";
 
-import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import type { TUser } from "@docspace/shared/api/people/types";
-import type {
-  ThirdPartyAccountType,
-  ProviderType,
-} from "@docspace/shared/types";
+import type { ThirdPartyAccountType } from "@docspace/shared/types";
+
 import { useBackup } from "@/hooks/useBackup";
 import { TStorageBackup } from "@docspace/shared/api/settings/types";
 import { useTreeFolders } from "@/hooks/useTreeFolders";
 import { useFilesSelectorInput } from "@/hooks/useFilesSelectorInput";
-import { useThirdParty } from "@/hooks/useThirdParty";
+import { useStores } from "@/hooks/useStores";
+import useAppState from "@/hooks/useAppState";
+import { useDefaultOptions } from "@docspace/shared/pages/auto-backup/hooks";
 
 interface AutoBackupProps {
   account: SettingsThirdPartyType | undefined;
@@ -62,9 +64,8 @@ interface AutoBackupProps {
   portals: string[];
   features: TPaymentFeature[];
   filesSettings: TFilesSettings;
-  user: TUser | undefined;
   foldersTree: TFolder[];
-  automaticBackupUrl: string;
+  backupProgress: TBackupProgress | TError | undefined;
 }
 
 const AutoBackup = ({
@@ -75,15 +76,36 @@ const AutoBackup = ({
   portals,
   features,
   filesSettings,
-  user,
   foldersTree,
-  automaticBackupUrl,
+  backupProgress,
 }: AutoBackupProps) => {
+  const [deleteThirdPartyDialogVisible, setDeleteThirdPartyDialogVisible] =
+    useState(false);
+
   const { t } = useTranslation(["Settings", "Common"]);
 
   const { currentColorScheme } = useTheme();
+  const { backupStore, spacesStore } = useStores();
+  const { user, settings } = useAppState();
+
+  const language = user?.cultureName || "en";
 
   const rootFoldersTitles = useTreeFolders({ foldersTree });
+
+  const openConnectWindow = useCallback(
+    (serviceName: string, modal: Window | null) => {
+      return openConnectWindowUtils(serviceName, modal, t);
+    },
+    [t],
+  );
+
+  const deleteThirdParty = useCallback(async (id: string) => {
+    try {
+      await deleteThirdPartyApi(id);
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
 
   const {
     accounts,
@@ -161,13 +183,14 @@ const AutoBackup = ({
     setSelectedThirdPartyAccount,
     isTheSameThirdPartyAccount,
     setThirdPartyAccountsInfo,
+    resetDownloadingProgress,
   } = useBackup({
     account,
     backupScheduleResponse,
     backupStorageResponse,
-    user,
   });
 
+  const { periodsObject, weekdaysLabelArray } = useDefaultOptions(t, language);
   const {
     basePath,
     newPath,
@@ -179,12 +202,33 @@ const AutoBackup = ({
     updateBaseFolderPath,
   } = useFilesSelectorInput();
 
-  const {
-    openConnectWindow,
-    setThirdPartyProviders,
-    providers,
-    deleteThirdParty,
-  } = useThirdParty();
+  const getProgress = async () => {
+    if (backupProgress && "progress" in backupProgress) {
+      const { progress, link, error } = backupProgress;
+
+      if (!error) {
+        setDownloadingProgress(progress);
+
+        if (link && link.slice(0, 1) === "/") {
+          setTemporaryLink(link);
+        }
+        setErrorInformation("", t);
+      } else {
+        setDownloadingProgress(100);
+        setErrorInformation(error, t);
+      }
+    } else if (backupProgress) {
+      setErrorInformation(backupProgress, t);
+    }
+  };
+
+  useLayoutEffect(() => {
+    getProgress();
+    setDefaultOptions(t, periodsObject, weekdaysLabelArray);
+    return () => {
+      resetDownloadingProgress();
+    };
+  }, []);
 
   const isRestoreAndAutoBackupAvailable = useMemo(() => {
     return Boolean(
@@ -194,30 +238,21 @@ const AutoBackup = ({
   }, [features]);
 
   const checkEnablePortalSettings = () => {
-    return portals.length === 1 ? false : isRestoreAndAutoBackupAvailable;
+    return portals.length === 1 ? true : isRestoreAndAutoBackupAvailable;
   };
+
+  const automaticBackupUrl = `${settings?.helpLink ?? ""}/administration/docspace-settings.aspx#AutoBackup`;
 
   const isEnableAuto = checkEnablePortalSettings();
-  const language = user?.cultureName || "en";
-
-  const removeItem = {
-    key: "",
-    title: "",
-    label: "",
-    provider_key: "",
-    provider_link: undefined,
-    storageIsConnected: false,
-    connected: false,
-    provider_id: "",
-    id: "",
-    disabled: false,
-    className: undefined,
-  };
 
   const defaultRegion =
     defaultFormSettings && "region" in defaultFormSettings
       ? (defaultFormSettings.region as string)
       : "";
+
+  console.log({
+    selectedThirdPartyAccount,
+  });
 
   return (
     <AutomaticBackup
@@ -228,7 +263,7 @@ const AutoBackup = ({
       settingsFileSelector={{
         filesSettings,
       }}
-      removeItem={removeItem}
+      removeItem={selectedThirdPartyAccount as ThirdPartyAccountType}
       language={language}
       // backup
       setDefaultOptions={setDefaultOptions}
@@ -306,21 +341,16 @@ const AutoBackup = ({
       setNewPath={setNewPath}
       // thirdPartyStore
       openConnectWindow={openConnectWindow}
-      setThirdPartyProviders={setThirdPartyProviders}
-      providers={providers}
+      setThirdPartyProviders={backupStore.setThirdPartyProviders}
+      providers={backupStore.providers}
       deleteThirdParty={deleteThirdParty}
       // dialogsStore
-      connectDialogVisible={false}
-      deleteThirdPartyDialogVisible={false}
-      setConnectDialogVisible={function (visible: boolean): void {
-        throw new Error("Function not implemented.");
-      }}
-      setDeleteThirdPartyDialogVisible={function (visible: boolean): void {
-        throw new Error("Function not implemented.");
-      }}
+      deleteThirdPartyDialogVisible={deleteThirdPartyDialogVisible}
+      setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
+      connectDialogVisible={spacesStore.connectDialogVisible}
+      setConnectDialogVisible={spacesStore.setConnectDialogVisible}
     />
   );
 };
 
-export default AutoBackup;
-
+export default observer(AutoBackup);

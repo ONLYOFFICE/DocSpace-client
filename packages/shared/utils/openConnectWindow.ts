@@ -23,20 +23,9 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-"use client";
 
-import { useCallback, useState } from "react";
-import { useTranslation } from "react-i18next";
-
-import {
-  openConnectWindow as openConnectWindowApi,
-  deleteThirdParty as deleteThirdPartyApi,
-} from "@docspace/shared/api/files";
-import type {
-  Nullable,
-  ProviderType,
-  TTranslation,
-} from "@docspace/shared/types";
+import { openConnectWindow as openConnectWindowApi } from "../api/files";
+import type { Nullable, TTranslation } from "../types";
 
 const convertServiceName = (serviceName: string) => {
   // Docusign, OneDrive, Wordpress
@@ -67,38 +56,20 @@ const oAuthPopup = (url: string, modal: Nullable<Window>, t: TTranslation) => {
     newWindow = modal
       ? newWindow
       : window.open(url, t("Common:Authorization"), params);
-  } catch (err) {
+  } catch (error) {
     newWindow = modal ? newWindow : window.open(url, t("Common:Authorization"));
+    console.error(error);
   }
 
   return newWindow;
 };
 
-export const useThirdParty = () => {
-  const { t } = useTranslation(["Common"]);
-  const [providers, setThirdPartyProviders] = useState<ProviderType[]>([]);
-
-  const openConnectWindow = useCallback(
-    (
-      serviceName: string,
-      modal: Nullable<Window>,
-    ): Promise<Nullable<Window>> => {
-      const service = convertServiceName(serviceName);
-      return openConnectWindowApi(service).then((link) => {
-        return oAuthPopup(link, modal, t);
-      });
-    },
-    [t],
-  );
-
-  const deleteThirdParty = useCallback(async (id: string) => {
-    await deleteThirdPartyApi(id);
-  }, []);
-
-  return {
-    openConnectWindow,
-    deleteThirdParty,
-    providers,
-    setThirdPartyProviders,
-  };
+export const openConnectWindowUtils = async (
+  serviceName: string,
+  modal: Nullable<Window>,
+  t: TTranslation,
+): Promise<Nullable<Window>> => {
+  const service = convertServiceName(serviceName);
+  const link = await openConnectWindowApi(service);
+  return oAuthPopup(link, modal, t);
 };

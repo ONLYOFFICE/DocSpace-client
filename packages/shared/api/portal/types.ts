@@ -147,3 +147,9 @@ export type TStorageRegion = {
   partitionName: string;
   systemName: string;
 };
+
+export type TBackupProgress = {
+  progress: number;
+  error?: TError;
+  link?: string;
+};

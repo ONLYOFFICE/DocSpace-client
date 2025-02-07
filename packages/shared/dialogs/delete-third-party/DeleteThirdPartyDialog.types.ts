@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TThirdParties } from "@docspace/shared/api/files/types";
 import type {
   ConnectedThirdPartyAccountType,
   Nullable,
-  ProviderType,
   ThirdPartyAccountType,
 } from "../../types";
 
@@ -41,7 +41,7 @@ export interface DeleteThirdPartyDialogProps {
     account: Nullable<ConnectedThirdPartyAccountType>,
   ) => void;
   setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
-  setThirdPartyProviders: (providers: ProviderType[]) => void;
-  providers: ProviderType[];
+  setThirdPartyProviders: (providers: TThirdParties) => void;
+  providers: TThirdParties;
   removeItem: ThirdPartyAccountType;
 }

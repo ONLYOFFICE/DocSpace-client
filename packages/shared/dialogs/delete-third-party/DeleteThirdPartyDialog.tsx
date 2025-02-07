@@ -38,6 +38,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 // import { inject, observer } from "mobx-react";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
 import type { DeleteThirdPartyDialogProps } from "./DeleteThirdPartyDialog.types";
 
@@ -69,7 +70,10 @@ const DeleteThirdPartyDialog = ({
   const onDeleteThirdParty = () => {
     setIsLoading(true);
 
-    if (isConnectionViaBackupModule) {
+    if (
+      isConnectionViaBackupModule &&
+      !isNullOrUndefined(removeItem.provider_id)
+    ) {
       deleteThirdParty(removeItem.provider_id)
         .catch((err) => toastr.error(err))
         .finally(() => {
@@ -85,6 +89,8 @@ const DeleteThirdPartyDialog = ({
     const newProviders = providers.filter(
       (x) => x.provider_id !== removeItem.id,
     );
+
+    if (!removeItem.id) return;
 
     deleteThirdParty(removeItem.id)
       .then(() => {

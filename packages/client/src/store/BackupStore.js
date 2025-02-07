@@ -281,7 +281,6 @@ class BackupStore {
 
     this.setThirdPartyAccounts(accounts);
 
-    console.log(selectedAccount, accounts);
     const connectedThirdPartyAccount = accounts.findLast((a) => a.connected);
 
     this.setSelectedThirdPartyAccount(

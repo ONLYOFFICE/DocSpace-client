@@ -649,5 +649,6 @@
   "TypeTitleSharePoint": "SharePoint",
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TypeTitleYandex": "Yandex.Disk",
+  "ActivationRequired": "需要激活"
 }

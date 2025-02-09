@@ -303,7 +303,7 @@ class BackupStore {
     const serviceTitle = connectedCloudsTypeTitleTranslation(provider.name, t);
     const serviceLabel = provider.connected
       ? serviceTitle
-      : `${serviceTitle} (${t("CreateEditRoomDialog:ActivationRequired")})`;
+      : `${serviceTitle} (${t("Common:ActivationRequired")})`;
 
     const isConnected =
       this.connectedThirdPartyAccount?.providerKey === "WebDav"

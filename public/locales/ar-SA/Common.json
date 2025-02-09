@@ -645,5 +645,6 @@
   "TypeTitleSharePoint": "SharePoint",
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TypeTitleYandex": "Yandex.Disk",
+  "ActivationRequired": "مطلوب التنشيط"
 }

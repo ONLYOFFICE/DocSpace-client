@@ -250,7 +250,8 @@ const ThirdPartyComboBox = ({
     ?.map((item) => {
       const disabled = !item.isConnected && !isAdmin;
       const itemLabel =
-        item.title + (item.isConnected ? "" : ` (${t("ActivationRequired")})`);
+        item.title +
+        (item.isConnected ? "" : ` (${t("Common:ActivationRequired")})`);
 
       const disabledData = disabled
         ? { "data-tooltip-id": "file-links-tooltip", "data-tip": "tooltip" }

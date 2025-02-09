@@ -649,5 +649,6 @@
   "TypeTitleSharePoint": "SharePoint",
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
-  "TypeTitleYandex": "Яндекс.Диск"
+  "TypeTitleYandex": "Яндекс.Диск",
+  "ActivationRequired": "требуется активация"
 }

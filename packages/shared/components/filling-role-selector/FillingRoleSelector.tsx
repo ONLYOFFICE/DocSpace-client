@@ -106,6 +106,7 @@ const FillingRoleSelector = ({
               </div>
             </div>
             <ReactSVG
+              data-testid="remove-icon"
               src={RemoveSvgUrl}
               onClick={() => onRemoveUser(roleWithUser.id)}
             />
@@ -114,6 +115,7 @@ const FillingRoleSelector = ({
           <div className={styles.row} key={`${role.name}`}>
             <div className={styles.number}>{role.order}</div>
             <ReactSVG
+              data-testid="add-role-button"
               className={styles.addRoleButton}
               style={{ "--color": role.color } as React.CSSProperties}
               src={AddRoleButton}

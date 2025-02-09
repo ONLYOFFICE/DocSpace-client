@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,42 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { BackupDefaultStateType, BackupSelectedStateType } from "@/types";
+export type BackupDefaultStateType = {
+  weekday: string | null;
+  formSettings: Record<string, string>;
+  enableSchedule: boolean;
+  storageType: string | null;
+  folderId: string | null;
+  storageId: string | null;
+  monthDay: string;
+  day: string;
+  hour: string;
+  periodNumber: string;
+  maxCopiesNumber: string;
+  periodLabel: string;
+  weekdayLabel: string;
+};
 
-export const pathsWithoutTabs = [
-  "white-label",
-  "company-info",
-  "additional-resources",
-];
+export type BackupSelectedStateType = {
+  day: string;
+  hour: string;
+  periodNumber: string;
+  maxCopiesNumber: string;
+  storageType: string | null;
+  folderId: string | null;
+  monthDay: string;
+  periodLabel: string;
+  storageId: string | null;
+  weekdayLabel: string;
+  weekday: string | null;
+  enableSchedule: boolean;
+  formSettings: Record<string, string>;
+};
 
-export const initBackupDefaultState = {
-  hour: "12:00",
-  day: "0",
-  weekday: null,
-  weekdayLabel: "",
-  monthDay: "1",
-  periodNumber: "0",
-  periodLabel: "Every day",
-  maxCopiesNumber: "10",
-  storageType: null,
-  folderId: null,
-  storageId: null,
-  enableSchedule: false,
-  formSettings: {},
-} satisfies BackupDefaultStateType;
-
-export const initBackupSelectedState = {
-  day: "0",
-  hour: "12:00",
-  weekday: null,
-  weekdayLabel: "",
-  monthDay: "1",
-  periodNumber: "0",
-  periodLabel: "Every day",
-  maxCopiesNumber: "10",
-  storageType: null,
-  folderId: null,
-  storageId: null,
-  enableSchedule: false,
-  formSettings: {},
-} satisfies BackupSelectedStateType;
+export interface ErrorResponse {
+  error: {
+    message: string;
+  };
+}

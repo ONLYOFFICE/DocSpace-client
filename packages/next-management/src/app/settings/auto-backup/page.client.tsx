@@ -82,7 +82,7 @@ const AutoBackup = ({
   const [deleteThirdPartyDialogVisible, setDeleteThirdPartyDialogVisible] =
     useState(false);
 
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const { currentColorScheme } = useTheme();
   const { backupStore, spacesStore } = useStores();
@@ -112,38 +112,11 @@ const AutoBackup = ({
     toDefault,
     setErrorInformation,
     errorInformation,
+    defaults,
+    selected,
 
-    defaultDay,
-    defaultHour,
-    defaultWeekday,
-    defaultFolderId,
-    defaultMonthDay,
-    defaultStorageId,
-    defaultPeriodLabel,
-    defaultStorageType,
-    defaultWeekdayLabel,
-    defaultPeriodNumber,
-    defaultFormSettings,
-    defaultEnableSchedule,
-    defaultMaxCopiesNumber,
-
-    selectedHour,
-    selectedDay,
-    selectedWeekday,
-    selectedFolderId,
-    selectedMonthDay,
-    selectedStorageId,
-    selectedPeriodLabel,
-    selectedStorageType,
-    selectedWeekdayLabel,
-    selectedPeriodNumber,
-    selectedEnableSchedule,
-    selectedMaxCopiesNumber,
-
-    setSelectedStorageType,
     isThirdStorageChanged,
     setIsThirdStorageChanged,
-    formSettings,
     setDefaultOptions,
 
     setDownloadingProgress,
@@ -163,7 +136,6 @@ const AutoBackup = ({
 
     errorsFieldsBeforeSafe,
     isFormReady,
-    setSelectedFolderId,
     getStorageParams,
     deleteSchedule,
     isBackupProgressVisible,
@@ -173,7 +145,6 @@ const AutoBackup = ({
     setWeekday,
     setMonthNumber,
     setTime,
-    setSelectedStorageId,
     setCompletedFormFields,
     addValueInFormSettings,
     setRequiredFormSettings,
@@ -184,6 +155,9 @@ const AutoBackup = ({
     isTheSameThirdPartyAccount,
     setThirdPartyAccountsInfo,
     resetDownloadingProgress,
+    seStorageType,
+    setSelectedFolder,
+    setStorageId,
   } = useBackup({
     account,
     backupScheduleResponse,
@@ -238,7 +212,7 @@ const AutoBackup = ({
   }, [features]);
 
   const checkEnablePortalSettings = () => {
-    return portals.length === 1 ? true : isRestoreAndAutoBackupAvailable;
+    return portals.length === 1 ? false : isRestoreAndAutoBackupAvailable;
   };
 
   const automaticBackupUrl = `${settings?.helpLink ?? ""}/administration/docspace-settings.aspx#AutoBackup`;
@@ -246,13 +220,9 @@ const AutoBackup = ({
   const isEnableAuto = checkEnablePortalSettings();
 
   const defaultRegion =
-    defaultFormSettings && "region" in defaultFormSettings
-      ? (defaultFormSettings.region as string)
+    defaults.formSettings && "region" in defaults.formSettings
+      ? (defaults.formSettings.region as string)
       : "";
-
-  console.log({
-    selectedThirdPartyAccount,
-  });
 
   return (
     <AutomaticBackup
@@ -273,43 +243,43 @@ const AutoBackup = ({
       setBackupSchedule={setBackupSchedule}
       setErrorInformation={setErrorInformation}
       setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
-      seStorageType={setSelectedStorageType}
+      setStorageId={setStorageId}
+      seStorageType={seStorageType}
+      setSelectedFolder={setSelectedFolder}
       setSelectedEnableSchedule={setterSelectedEnableSchedule}
       toDefault={toDefault}
       errorInformation={errorInformation}
-      selectedStorageType={selectedStorageType}
-      selectedFolderId={selectedFolderId}
+      selectedStorageType={selected.storageType}
+      selectedFolderId={selected.folderId}
       isFormReady={isFormReady}
-      selectedMaxCopiesNumber={selectedMaxCopiesNumber}
-      selectedPeriodNumber={selectedPeriodNumber}
-      selectedWeekday={selectedWeekday}
-      selectedHour={selectedHour}
-      selectedMonthDay={selectedMonthDay}
-      selectedStorageId={selectedStorageId}
-      selectedEnableSchedule={selectedEnableSchedule}
-      setSelectedFolder={setSelectedFolderId}
+      selectedMaxCopiesNumber={selected.maxCopiesNumber}
+      selectedPeriodNumber={selected.periodNumber}
+      selectedWeekday={selected.weekday}
+      selectedHour={selected.hour}
+      selectedMonthDay={selected.monthDay}
+      selectedStorageId={selected.storageId}
+      selectedEnableSchedule={selected.enableSchedule}
       getStorageParams={getStorageParams}
       deleteSchedule={deleteSchedule}
       downloadingProgress={downloadingProgress}
       isBackupProgressVisible={isBackupProgressVisible}
       isChanged={isChanged}
       isThirdStorageChanged={isThirdStorageChanged}
-      defaultStorageType={defaultStorageType}
-      defaultFolderId={defaultFolderId}
+      defaultStorageType={defaults.storageType}
+      defaultFolderId={defaults.folderId}
       connectedThirdPartyAccount={connectedThirdPartyAccount}
-      selectedPeriodLabel={selectedPeriodLabel}
-      selectedWeekdayLabel={selectedWeekdayLabel}
+      selectedPeriodLabel={selected.periodLabel}
+      selectedWeekdayLabel={selected.weekdayLabel}
       setMaxCopies={setMaxCopies}
       setPeriod={setPeriod}
       setWeekday={setWeekday}
       setMonthNumber={setMonthNumber}
       setTime={setTime}
-      setStorageId={setSelectedStorageId}
       thirdPartyStorage={thirdPartyStorage}
-      defaultStorageId={defaultStorageId}
+      defaultStorageId={defaults.storageId}
       setCompletedFormFields={setCompletedFormFields}
       errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
-      formSettings={formSettings}
+      formSettings={selected.formSettings}
       addValueInFormSettings={addValueInFormSettings}
       setRequiredFormSettings={setRequiredFormSettings}
       setIsThirdStorageChanged={setIsThirdStorageChanged}

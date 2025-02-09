@@ -40,7 +40,7 @@ export type TRole = {
   id: string;
 };
 
-export interface FillingRoleSelectorProps {
+export type FillingRoleSelectorProps = {
   /** Accepts class */
   className?: string;
   /** Role description text Everyone */
@@ -59,4 +59,4 @@ export interface FillingRoleSelectorProps {
   style: React.CSSProperties;
   /** Array of assigned users per role */
   users: TUser[];
-}
+};

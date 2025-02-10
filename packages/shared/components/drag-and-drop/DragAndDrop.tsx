@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import React from "react";
 import classNames from "classnames";
 import { useDropzone } from "react-dropzone";
 
-import getFilesFromEvent from "./get-files-from-event";
+import getFilesFromEvent from "../../utils/get-files-from-event";
 
 import styles from "./DragAndDrop.module.scss";
 import { DragAndDropProps } from "./DragAndDrop.types";

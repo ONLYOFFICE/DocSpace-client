@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -145,6 +145,7 @@ const SetRoomParams = ({
   covers,
   setCover,
   setLifetimeDialogVisible,
+  hideConfirmRoomLifetime,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -165,6 +166,8 @@ const SetRoomParams = ({
   const filesCount = selection
     ? selection.filesCount + selection.foldersCount
     : 0;
+
+  const showLifetimeDialog = !hideConfirmRoomLifetime && filesCount > 0;
 
   const checkWidth = () => {
     if (!isMobile()) {
@@ -465,7 +468,7 @@ const SetRoomParams = ({
       {isVDRRoom ? (
         <VirtualDataRoomBlock
           t={t}
-          filesCount={filesCount}
+          showLifetimeDialog={showLifetimeDialog}
           roomParams={roomParams}
           setRoomParams={setRoomParams}
           isEdit={isEdit}
@@ -526,6 +529,7 @@ export default inject(
     filesStore,
     infoPanelStore,
     avatarEditorDialogStore,
+    filesSettingsStore,
   }) => {
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
     const { folderFormValidation, maxImageUploadSize, currentColorScheme } =
@@ -554,6 +558,8 @@ export default inject(
       setLifetimeDialogVisible,
     } = dialogsStore;
 
+    const { hideConfirmRoomLifetime } = filesSettingsStore;
+
     const selection =
       bufferSelection != null ? bufferSelection : infoPanelSelection;
 
@@ -581,6 +587,7 @@ export default inject(
       covers,
       setCover,
       setLifetimeDialogVisible,
+      hideConfirmRoomLifetime,
     };
   },
 )(

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -541,6 +541,16 @@ export function setRoomCover(roomId, cover) {
     method: "post",
     url: `files/rooms/${roomId}/cover`,
     data,
+  };
+
+  return request(options);
+}
+
+export function hideConfirmRoomLifetime(val: boolean) {
+  const options = {
+    method: "put",
+    url: "/files/hideconfirmroomlifetime",
+    data: { set: val },
   };
 
   return request(options);

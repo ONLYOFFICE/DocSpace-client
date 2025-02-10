@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -233,6 +233,7 @@ export type EditorProps = {
   errorMessage?: string;
   isSkipError?: boolean;
   filesSettings?: TFilesSettings;
+  organizationName?: string;
 
   onDownloadAs?: (obj: object) => void;
   onSDKRequestSharingSettings?: () => void;
@@ -298,6 +299,7 @@ export interface SelectFolderDialogProps {
   fileInfo: TFile;
   filesSettings: TFilesSettings;
   fileSaveAsExtension?: string;
+  organizationName: string;
 }
 
 export interface SelectFileDialogProps {
@@ -353,6 +355,7 @@ export interface UseEventsProps {
   t: TTranslation;
 
   sdkConfig?: TFrameConfig | null;
+  organizationName: string;
 }
 
 export interface UseInitProps {
@@ -364,6 +367,7 @@ export interface UseInitProps {
 
   setDocTitle: (value: string) => void;
   documentReady: boolean;
+  organizationName: string;
 }
 
 export type THistoryData =

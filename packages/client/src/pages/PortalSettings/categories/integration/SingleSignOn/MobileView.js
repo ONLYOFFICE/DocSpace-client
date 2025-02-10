@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,7 +37,7 @@ const StyledWrapper = styled.div`
   gap: 20px;
 `;
 
-const MobileView = ({ isSSOAvailable }) => {
+const MobileView = ({ isSSOAvailable, logoText }) => {
   const { t } = useTranslation(["SingleSignOn", "Settings"]);
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ const MobileView = ({ isSSOAvailable }) => {
     <StyledWrapper>
       <MobileCategoryWrapper
         title={t("ServiceProviderSettings", {
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
         })}
         subtitle={t("ServiceProviderSettingsDescription")}
         url="/portal-settings/integration/sso/settings"
@@ -60,11 +60,11 @@ const MobileView = ({ isSSOAvailable }) => {
       />
       <MobileCategoryWrapper
         title={t("SpMetadata", {
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
         })}
         subtitle={t("SpMetadataDescription", {
           productName: t("Common:ProductName"),
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
         })}
         url="/portal-settings/integration/sso/metadata"
         withPaidBadge={!isSSOAvailable}

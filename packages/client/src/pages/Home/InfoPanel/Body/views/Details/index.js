@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -116,6 +116,10 @@ const Details = ({
   const hasImage = selection?.logo?.original;
   const model = getLogoCoverModel(t, hasImage);
 
+  const tooltipContent = selection?.external
+    ? t("Files:RecentlyOpenedTooltip")
+    : null;
+
   return (
     <>
       {selection.thumbnailUrl && !isThumbnailError ? (
@@ -157,6 +161,8 @@ const Details = ({
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
             badgeUrl={badgeUrl}
+            tooltipContent={tooltipContent}
+            tooltipId="info-panel-details_icon-tooltip"
           />
         </StyledNoThumbnail>
       )}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -90,6 +90,7 @@ export type CreateUserFormProps = {
   firstName?: string;
   lastName?: string;
   isStandalone: boolean;
+  logoText: string;
 };
 
 const CreateUserForm = (props: CreateUserFormProps) => {
@@ -105,10 +106,14 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     licenseUrl,
     legalTerms,
     isStandalone,
+    logoText,
   } = props;
+
   const { linkData, roomData } = useContext(ConfirmRouteContext);
   const { t, i18n } = useTranslation(["Confirm", "Common"]);
   const router = useRouter();
+
+  const organizationName = logoText || t("Common:OrganizationName");
 
   const currentCultureName = i18n.language;
 
@@ -539,6 +544,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
             onClickBack={onClickBack}
             onSubmit={onSubmit}
             isStandalone={isStandalone}
+            organizationName={organizationName}
           />
         )}
       </div>

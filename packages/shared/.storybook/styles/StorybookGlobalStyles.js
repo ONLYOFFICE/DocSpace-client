@@ -8,6 +8,10 @@ const StorybookGlobalStyles = createGlobalStyle`
   .sbdocs-content .docs-story {
     direction: ${(props) => props.theme.interfaceDirection};
   }
+
+  #storybook-root {
+    direction: ${(props) => props.theme.interfaceDirection};
+  }
 `;
 
 export default StorybookGlobalStyles;

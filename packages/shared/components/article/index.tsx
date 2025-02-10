@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -107,7 +107,7 @@ const Article = ({
   user,
   getActions,
   onProfileClick,
-
+  logoText,
   ...rest
 }: ArticleProps) => {
   const [articleHeaderContent, setArticleHeaderContent] =
@@ -269,7 +269,11 @@ const Article = ({
                 />
               ) : null}
               {!hideAppsBlock ? (
-                <ArticleApps withDevTools={withDevTools} showText={showText} />
+                <ArticleApps
+                  withDevTools={withDevTools}
+                  showText={showText}
+                  logoText={logoText}
+                />
               ) : null}
               {!isMobile && isLiveChatAvailable ? (
                 <ArticleLiveChat

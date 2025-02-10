@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -65,7 +65,7 @@ import styled, { css } from "styled-components";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
-import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import MobileView from "./MobileView";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 

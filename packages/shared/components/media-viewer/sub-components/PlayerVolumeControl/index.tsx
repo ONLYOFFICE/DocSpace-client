@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,11 +30,7 @@ import IconVolumeMax from "PUBLIC_DIR/images/media.volumemax.react.svg";
 import IconVolumeMuted from "PUBLIC_DIR/images/media.volumeoff.react.svg";
 import IconVolumeMin from "PUBLIC_DIR/images/media.volumemin.react.svg";
 
-import {
-  IconWrapper,
-  PlayerVolumeControlWrapper,
-  VolumeWrapper,
-} from "./PlayerVolumeControl.styled";
+import styles from "./PlayerVolumeControl.module.scss";
 
 type PlayerVolumeControlProps = {
   volume: number;
@@ -51,8 +47,19 @@ const PlayerVolumeControl = memo(
     toggleVolumeMute,
   }: PlayerVolumeControlProps) => {
     return (
-      <PlayerVolumeControlWrapper>
-        <IconWrapper onClick={toggleVolumeMute}>
+      <div
+        className={styles.playerVolumeControlWrapper}
+        data-testid="player-volume-control"
+        role="group"
+        aria-label="Volume controls"
+      >
+        <div
+          className={styles.iconWrapper}
+          onClick={toggleVolumeMute}
+          data-testid="volume-mute-button"
+          aria-label={isMuted ? "Unmute" : "Mute"}
+          aria-pressed={isMuted}
+        >
           {isMuted ? (
             <IconVolumeMuted />
           ) : volume >= 50 ? (
@@ -60,8 +67,11 @@ const PlayerVolumeControl = memo(
           ) : (
             <IconVolumeMin />
           )}
-        </IconWrapper>
-        <VolumeWrapper>
+        </div>
+        <div
+          className={styles.volumeWrapper}
+          data-testid="volume-slider-wrapper"
+        >
           <input
             style={{
               backgroundSize: `${volume}% 100%`,
@@ -71,9 +81,15 @@ const PlayerVolumeControl = memo(
             max="100"
             value={volume}
             onChange={onChange}
+            data-testid="volume-slider"
+            aria-label="Volume"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={volume}
+            aria-valuetext={`${volume}%`}
           />
-        </VolumeWrapper>
-      </PlayerVolumeControlWrapper>
+        </div>
+      </div>
     );
   },
 );

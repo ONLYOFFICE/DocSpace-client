@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -167,6 +167,7 @@ export const getOptions = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
   actions: OptionActions,
+  logoText: string,
   isVisitor: boolean = true,
   isFrame: boolean = false,
 ): EmptyViewOptionsType => {
@@ -317,7 +318,7 @@ export const getOptions = (
     title: t("EmptyView:MigrationDataTitle"),
     description: t("EmptyView:MigrationDataDescription", {
       productName: t("Common:ProductName"),
-      organizationName: t("Common:OrganizationName"),
+      organizationName: logoText,
     }),
     icon: <InviteUserFormIcon />,
     key: "migration-data",

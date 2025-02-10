@@ -54,6 +54,14 @@
 
   --avatar-edit-container-background: #{$blue-light-mid};
   --avatar-edit-container-fill: #{$white};
+  --avatar-edit-container-fill-hover: var(
+    --accent-button,
+    #{$light-blue-main-hover}
+  );
+  --avatar-edit-container-fill-press: var(
+    --accent-button,
+    #{$light-blue-main-pressed}
+  );
   --avatar-image-container-background: #{$gray-strong};
   --avatar-image-container-background-image: #{$light-second-main};
   --avatar-image-container-group-background: #{$gray-light-mid};
@@ -122,10 +130,7 @@
   --button-border-base-disabled: 1px solid #{$gray-light-mid};
 
   --button-border-primary: 1px solid var(--accent-button, #{$light-second-main});
-  --button-border-primary-hover: 1px solid
-    var(--accent-button, #{$light-second-main});
-  --button-border-primary-active: 1px solid
-    var(--accent-button, #{$light-second-main});
+  --button-border-primary-active: var(--accent-button, #{$light-second-main});
   --button-border-primary-disabled: 1px solid
     var(--accent-button, #{$light-second-main-disabled});
 
@@ -231,6 +236,34 @@
   --floating-button-icon-fill: #{$white};
   --floating-button-background: #{$light-icons};
   --floating-button-box-shadow: 0px 5px 20px #{$popup-shadow};
+
+  --slider-track-height: 8px;
+  --slider-thumb-size: 24px;
+  --slider-thumb-border: 6px;
+  --slider-border-radius: 5.6px;
+  --slider-thumb-disabled-color: #{$gray-strong};
+  --slider-thumb-disabled-border: #{$light-second-main-disabled};
+  --slider-shadow: #{$blur-dark};
+  --slider-runnable-track-border: #{$gray-light-mid};
+  --slider-thumb-background: var(
+    --color-scheme-main-accent,
+    #{$light-second-main}
+  );
+  --slider-thumb-border-color: #{$white};
+  --slider-thumb-box-shadow: 0px 5px 20px #{$popup-shadow};
+  --slider-range-thumb: #{$light-second-main};
+  --slider-range-track-border: #{$white};
+  --slider-range-track-background: #{$light-second-main};
+  --slider-background: #{$gray-light-mid};
+  --slider-background-image: linear-gradient(
+    var(--slider-thumb-background),
+    var(--slider-thumb-background)
+  );
+
+  --save-cancel-border-color: #{$gray-light-mid};
+  --save-cancel-reminder-color: #{$gray};
+
+  --language-combo-hover-border: #{$gray};
 }
 
 .dark {
@@ -352,7 +385,15 @@
   --aside-header-border-color: #{$gray-dark-strong};
 
   --avatar-edit-container-background: rgba(255, 255, 255, 0.64);
-  --avatar-edit-container-fill: #{$black};
+  --avatar-edit-container-fill: #{$white};
+  --avatar-edit-container-fill-hover: var(
+    --accent-button,
+    #{$light-blue-main-hover}
+  );
+  --avatar-edit-container-fill-press: var(
+    --accent-button,
+    #{$light-blue-main-pressed}
+  );
   --avatar-image-container-background: #{$gray-dark-strong};
   --avatar-image-container-background-image: #{$gray-dark-strong};
   --avatar-image-container-group-background: #{$gray-dark-mid};
@@ -412,10 +453,11 @@
   --button-border-base-disabled: 1px solid #{$gray-dark-strong};
 
   --button-border-primary: 1px solid var(--accent-button, #{$light-second-main});
-  --button-border-primary-hover: 1px solid
-    var(--accent-button, #{$light-second-main-hover});
-  --button-border-primary-active: 1px solid
-      linear-gradient(0deg, #{$light-second-main}, #{$light-second-main}),
+  --button-border-primary-active: linear-gradient(
+      0deg,
+      #{$light-second-main},
+      #{$light-second-main}
+    ),
     linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
   --button-border-primary-disabled: 1px solid
     var(--accent-button, #{$light-second-main-disabled});
@@ -512,6 +554,31 @@
   --floating-button-icon-fill: #{$black};
   --floating-button-background: #{$white};
   --floating-button-box-shadow: 0px 12px 24px #{$popup-shadow};
+
+  --slider-track-height: 8px;
+  --slider-thumb-size: 24px;
+  --slider-thumb-border: 6px;
+  --slider-border-radius: 5.6px;
+  --slider-thumb-disabled-color: #{$gray-dark-strong};
+  --slider-thumb-disabled-border: #{$light-second-main-disabled};
+  --slider-shadow: #{$blur-dark};
+  --slider-runnable-track-border: #{$gray-dark-mid};
+  --slider-thumb-background: #{$white};
+  --slider-thumb-border-color: #{$black};
+  --slider-thumb-box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.25);
+  --slider-range-thumb: #{$white};
+  --slider-range-track-border: #{$black};
+  --slider-range-track-background: #{$white};
+  --slider-background: #{$gray-dark-mid};
+  --slider-background-image: linear-gradient(
+    var(--slider-thumb-background),
+    var(--slider-thumb-background)
+  );
+
+  --save-cancel-border-color: #{$gray-light-mid};
+  --save-cancel-reminder-color: #{$gray};
+
+  --language-combo-hover-border: #{$gray-dark};
 }
 
 .light {
@@ -1342,6 +1409,7 @@
   --input-error-border: #{$light-error-status};
   --input-error-border-hover: #{$light-error-status};
   --input-error-border-focus: #{$light-error-status};
+  --input-error-color: #{$light-error-status};
 
   // Warning state
   --input-warning-border: #{$light-status-warning};
@@ -1402,6 +1470,7 @@
   --input-error-border: #{$dark-error-status};
   --input-error-border-hover: #{$dark-error-status};
   --input-error-border-focus: #{$dark-error-status};
+  --input-error-color: #{$dark-error-status};
 
   --input-warning-border: #{$dark-status-warning};
   --input-warning-border-hover: #{$dark-status-warning};
@@ -1446,6 +1515,18 @@
 }
 
 .light {
+  --color-picker-border: 1px solid #{$gray-strong};
+  --color-picker-background: #{$white};
+  --color-picker-color: #{$gray-text};
+}
+
+.dark {
+  --color-picker-border: 1px solid #{$gray-dark-strong};
+  --color-picker-background: #{$dark-gray-light};
+  --color-picker-color: #{$gray-dark-text};
+}
+
+.light {
   --calendar-title-color: #{$gray-text};
   --calendar-outline-color: #{$gray-light-mid};
   --calendar-arrow-color: #{$gray-text};
@@ -1469,6 +1550,308 @@
   --calendar-on-hover-background: #{$light-dark-gray-hover};
   --calendar-past-color: #{$gray-dark};
   --calendar-disabled-color: #{$gray-dark-strong};
+}
+
+.light {
+  --date-picker-background: #{$white};
+  --date-picker-border: 1px solid #{$gray-strong};
+  --date-picker-cell-background: #{$gray-light-mid};
+  --date-picker-icon-color: #{$light-gray-dark};
+}
+
+.dark {
+  --date-picker-background: #{$black};
+  --date-picker-border: 1px solid #{$gray-dark-strong};
+  --date-picker-cell-background: #{$gray-dark-mid};
+  --date-picker-icon-color: #{$dark-gray-dark};
+}
+
+.light {
+  --dropzone-border: 2px dashed #{$gray-light-mid};
+  --dropzone-secondary-link: #${black};
+  --dropzone-exsts-color: #{$gray};
+}
+
+.dark {
+  --dropzone-border: 2px dashed #{$gray-dark-strong};
+  --dropzone-secondary-link: #${white};
+  --dropzone-exsts-color: #{$gray};
+}
+
+.light {
+  --social-button-border: 1px solid #{$gray-strong};
+  --social-button-text-color: #{$gray};
+  --social-button-connect-text-color: #{$white};
+  --social-button-background: #{$white};
+  --social-button-hover-background: #{$white};
+  --social-button-connect-background: #{$light-icons};
+  --social-button-hover-connect-background: #{$link};
+  --social-button-hover-border: 1px solid #{$light-second-main};
+  --social-button-active-background: #{$gray-light-mid};
+  --social-button-active-border: 1px solid #{$gray-strong};
+  --social-button-active-connect-background: #{$blue-light-mid};
+  --social-button-disable-background: #{$gray-light};
+  --social-button-disable-color: #{$black};
+  --social-button-hover-text-color: #{$black};
+  --social-button-connect-svg-fill: #{$white};
+}
+
+.dark {
+  --social-button-border: 1px solid #{$gray-dark-strong};
+  --social-button-text-color: #{$white};
+  --social-button-connect-text-color: #{$dark-black};
+  --social-button-background: #{$black};
+  --social-button-hover-background: #{$black};
+  --social-button-connect-background: #{$dark-icon};
+  --social-button-hover-connect-background: #{$white};
+  --social-button-hover-border: 1px solid #{$gray-dark};
+  --social-button-active-background: #{$dark-gray-light};
+  --social-button-active-border: 1px solid #{$gray-dark-strong};
+  --social-button-active-connect-background: #{$big-gray-dark-mid};
+  --social-button-disable-background: #{$dark-gray-light};
+  --social-button-disable-color: #{$dark-gray-dark};
+  --social-button-hover-text-color: #{$white};
+  --social-button-connect-svg-fill: #{$dark-black};
+}
+
+.light {
+  --media-viewer-title-color: #{$white};
+  --media-viewer-background-start: #{$tap-highlight};
+  --media-viewer-background-end: #{$background-color};
+  --media-viewer-control-btn-hover-bg: #{$silver};
+  --media-viewer-control-btn-svg: #{$white};
+
+  --image-viewer-bg-black: #{$dark-black};
+  --image-viewer-bg-transparent: #{$viewer-dark-color};
+
+  --message-error-bg: #{$error-bg-color};
+  --message-error-border-radius: 20px;
+  --message-error-padding: 20px 24px;
+  --message-error-text-color: #{$white};
+  --message-error-toolbar-background: #{$brown-background};
+  --message-error-toolbar-hover-background: #{$background-color};
+  --message-error-svg: #{$white};
+
+  --mobile-details-gradient-start: #{$tap-highlight};
+  --mobile-details-gradient-end: #{$background-color};
+  --mobile-details-text-color: #{$white};
+  --mobile-details-icon-color: #{$white};
+  --mobile-details-height: 53px;
+  --mobile-details-z-index: 307;
+
+  --bookmarks-text-color: #{$white};
+  --bookmarks-color: #{$gray-dark-strong};
+
+  --main-panel-margin-top-desktop: 85px;
+  --main-panel-margin-top-mobile: 66px;
+
+  --page-count-background: #{$brown-background};
+  --page-count-hover-background: #{$background-color};
+  --page-count-color: #{$white};
+
+  --media-viewer-background: #{$viewer-dark-color};
+  --media-viewer-toolbar-hover: #{$background-color};
+  --media-viewer-error-background: #{$media-viewer-dark};
+  --media-viewer-icon-color: #{$white};
+  --pdf-text-color: #{$white};
+  --sidebar-bg: #{$black};
+  --sidebar-icon-fill: #{$dark-icon-color};
+  --mobile-drawer-bg: #{$black};
+  --mobile-drawer-svg: #{$dark-icon-color};
+
+  --player-big-play-button-cursor: pointer;
+
+  --player-icon-fill: #{$white};
+
+  --player-duration-color: #{$white};
+
+  --player-fullscreen-hover-cursor: pointer;
+
+  --player-play-button-cursor: pointer;
+
+  --player-speed-control-cursor: pointer;
+  --player-speed-control-svg-fill: #{$white};
+  --player-speed-control-svg-stroke: #{$white};
+  --player-speed-control-dropdown-bg: #{$black};
+  --player-speed-control-dropdown-color: #{$white};
+  --player-speed-control-dropdown-item-hover-bg: #{$black};
+  --player-speed-control-toast-bg: #{$player-speed-control-background};
+  --player-speed-control-toast-color: #{$white};
+
+  --player-timeline-hover-bg: #{$player-timeline-hover};
+  --player-timeline-progress-bg: #{$player-timeline-progress};
+  --player-timeline-thumb-bg: #{$white};
+  --player-timeline-time-color: #{$white};
+  --player-timeline-input-bg: #{$player-background};
+  --player-timeline-bg: #{$white};
+
+  --volume-control-background: #{$player-background};
+  --volume-control-slider: #{$white};
+
+  --viewer-color: #{$gray-strong};
+  --viewer-fill: #{$white};
+  --viewer-rtl-margin-left: 10px;
+  --viewer-rtl-margin-right: 10px;
+  --media-viewer-tap-highlight: #{$tap-highlight};
+  --viewer-details: #{$background-color};
+
+  --viewer-loader-border-color: #{$white};
+  --viewer-loader-background: #{$brown-background};
+
+  --viewer-player-fullscreen-bg: #{$dark-black};
+  --viewer-player-bg: #{$viewer-dark-color};
+  --viewer-player-audio-bg: #{$error-bg-color};
+  --viewer-player-controls-gradient-start: #{$tap-highlight};
+  --viewer-player-controls-gradient-middle: #{$viewer-player-controls-gradient};
+  --viewer-player-controls-gradient-end: #{$viewer-player-controls-gradient-end-color};
+  --viewer-player-controls-tablet-bg: #{$background-color};
+
+  --viewer-toolbar-bg: #{$brown-background};
+  --viewer-toolbar-hover-bg: #{$background-color};
+  --viewer-toolbar-icon-color: #{$white};
+  --viewer-toolbar-percent-color: #{$white};
+  --viewer-toolbar-icon-disabled: #{$gray};
+
+  --viewer-dropdown-bg: #{$black};
+  --viewer-dropdown-item-color: #{$white};
+  --viewer-dropdown-item-hover-bg: #{$light-dark-gray-hover};
+}
+
+.dark {
+  --media-viewer-title-color: #{$white};
+  --media-viewer-background-start: #{$tap-highlight};
+  --media-viewer-background-end: #{$background-color};
+  --media-viewer-control-btn-hover-bg: #{$silver};
+  --media-viewer-control-btn-svg: #{$white};
+
+  --image-viewer-bg-black: #{$dark-black};
+  --image-viewer-bg-transparent: #{$viewer-dark-color};
+
+  --message-error-bg: #{$error-bg-color};
+  --message-error-border-radius: 20px;
+  --message-error-padding: 20px 24px;
+  --message-error-text-color: #{$white};
+  --message-error-toolbar-background: #{$brown-background};
+  --message-error-toolbar-hover-background: #{$background-color};
+  --message-error-svg: #{$white};
+
+  --mobile-details-gradient-start: #{$tap-highlight};
+  --mobile-details-gradient-end: #{$background-color};
+  --mobile-details-text-color: #{$white};
+  --mobile-details-icon-color: #{$white};
+  --mobile-details-height: 53px;
+  --mobile-details-z-index: 307;
+
+  --bookmarks-text-color: #{$white};
+  --bookmarks-color: #{$gray-dark-strong};
+
+  --main-panel-margin-top-desktop: 85px;
+  --main-panel-margin-top-mobile: 66px;
+
+  --page-count-background: #{$brown-background};
+  --page-count-hover-background: #{$background-color};
+  --page-count-color: #{$white};
+
+  --media-viewer-background: #{$viewer-dark-color};
+  --media-viewer-toolbar-hover: #{$background-color};
+  --media-viewer-error-background: #{$media-viewer-dark};
+  --media-viewer-icon-color: #{$white};
+  --pdf-text-color: #{$white};
+  --sidebar-bg: #{$black};
+  --sidebar-icon-fill: #{$dark-icon-color};
+  --mobile-drawer-bg: #{$black};
+  --mobile-drawer-svg: #{$dark-icon-color};
+
+  --player-big-play-button-cursor: pointer;
+
+  --player-icon-fill: #{$white};
+
+  --player-duration-color: #{$white};
+
+  --player-fullscreen-hover-cursor: pointer;
+
+  --player-play-button-cursor: pointer;
+
+  --player-speed-control-cursor: pointer;
+  --player-speed-control-svg-fill: #{$white};
+  --player-speed-control-svg-stroke: #{$white};
+  --player-speed-control-dropdown-bg: #{$black};
+  --player-speed-control-dropdown-color: #{$white};
+  --player-speed-control-dropdown-item-hover-bg: #{$black};
+  --player-speed-control-toast-bg: #{$player-speed-control-background};
+  --player-speed-control-toast-color: #{$white};
+
+  --player-timeline-hover-bg: #{$player-timeline-hover};
+  --player-timeline-progress-bg: #{$player-timeline-progress};
+  --player-timeline-thumb-bg: #{$white};
+  --player-timeline-time-color: #{$white};
+  --player-timeline-input-bg: #{$player-background};
+  --player-timeline-bg: #{$white};
+
+  --volume-control-background: #{$player-background};
+  --volume-control-slider: #{$white};
+
+  --viewer-color: #{$gray-dark-strong};
+  --viewer-fill: #{$white};
+  --viewer-rtl-margin-left: 10px;
+  --viewer-rtl-margin-right: 10px;
+  --media-viewer-tap-highlight: #{$tap-highlight};
+  --viewer-details: #{$background-color};
+
+  --viewer-loader-border-color: #{$white};
+  --viewer-loader-background: #{$brown-background};
+
+  --viewer-player-fullscreen-bg: #{$dark-black};
+  --viewer-player-bg: #{$viewer-dark-color};
+  --viewer-player-audio-bg: #{$error-bg-color};
+  --viewer-player-controls-gradient-start: #{$tap-highlight};
+  --viewer-player-controls-gradient-middle: #{$viewer-player-controls-gradient};
+  --viewer-player-controls-gradient-end: #{$viewer-player-controls-gradient-end-color};
+  --viewer-player-controls-tablet-bg: #{$background-color};
+
+  --viewer-toolbar-bg: #{$brown-background};
+  --viewer-toolbar-hover-bg: #{$background-color};
+  --viewer-toolbar-icon-color: #{$white};
+  --viewer-toolbar-percent-color: #{$white};
+  --viewer-toolbar-icon-disabled: #{$gray};
+
+  --viewer-dropdown-bg: #{$black};
+  --viewer-dropdown-item-color: #{$white};
+  --viewer-dropdown-item-hover-bg: #{$light-dark-gray-hover};
+}
+
+.light {
+  --file-input-border-color: #{$gray-strong};
+  --file-input-disabled-border-color: #{$gray-light-mid};
+  --file-input-warning-border-color: #{$light-status-warning};
+  --file-input-error-border-color: #{$light-error-status};
+  --file-input-hover-border-color: #{$gray};
+  --file-input-hover-disabled-border-color: #{$gray-light-mid};
+  --file-input-hover-warning-border-color: #{$light-status-warning};
+  --file-input-hover-error-border-color: #{$light-error-status};
+  --file-input-focus-border-color: #{$light-second-main};
+  --file-input-focus-disabled-border-color: #{$gray-light-mid};
+  --file-input-focus-warning-border-color: #{$light-status-warning};
+  --file-input-focus-error-border-color: #{$light-error-status};
+
+  --file-input-disabled-placeholder-color: #{$gray-strong};
+}
+
+.dark {
+  --file-input-disabled-border-color: #{$gray-dark-strong};
+  --file-input-border-color: #{$gray-dark-strong};
+  --file-input-warning-border-color: #{$dark-status-warning};
+  --file-input-error-border-color: #{$dark-error-status};
+  --file-input-hover-border-color: #{$gray-dark};
+  --file-input-hover-disabled-border-color: #{$gray-dark-strong};
+  --file-input-hover-warning-border-color: #{$dark-status-warning};
+  --file-input-hover-error-border-color: #{$dark-error-status};
+  --file-input-focus-border-color: #{$white};
+  --file-input-focus-disabled-border-color: #{$gray-dark-strong};
+  --file-input-focus-warning-border-color: #{$dark-status-warning};
+  --file-input-focus-error-border-color: #{$dark-error-status};
+
+  --file-input-disabled-placeholder-color: #{$gray-dark-text};
 }
 
 :global(.rtl) {

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -145,5 +145,41 @@ describe("<RoomIcon />", () => {
       "data-is-archive",
       "true",
     );
+  });
+
+  it("adds tooltip attributes to badge when tooltipContent is provided", () => {
+    const tooltipId = "room-tooltip";
+    renderWithTheme(
+      <RoomIcon
+        {...baseProps}
+        badgeUrl="badge.svg"
+        tooltipContent="Tooltip content"
+        tooltipId={tooltipId}
+      />,
+    );
+
+    const badgeButton = screen.getByTestId("icon-button");
+    expect(badgeButton).toHaveAttribute("data-tooltip-id", tooltipId);
+  });
+
+  it("adds isHovered class when tooltipContent is provided", () => {
+    renderWithTheme(
+      <RoomIcon
+        {...baseProps}
+        badgeUrl="badge.svg"
+        tooltipContent="Tooltip content"
+        tooltipId="room-tooltip"
+      />,
+    );
+    const badgeButton = screen.getByTestId("icon-button");
+    expect(badgeButton).toHaveClass("isHovered");
+  });
+
+  it("does not add tooltip attributes when tooltipContent is not provided", () => {
+    renderWithTheme(<RoomIcon {...baseProps} badgeUrl="badge.svg" />);
+    const badgeButton = screen.getByTestId("icon-button");
+    expect(badgeButton).not.toHaveAttribute("data-tooltip-id");
+    const buttonWithClass = screen.getByTestId("icon-button");
+    expect(buttonWithClass).not.toHaveClass("isHovered");
   });
 });

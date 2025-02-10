@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -160,9 +160,9 @@ export const setDocumentTitle = (
   fileType: string,
   documentReady: boolean,
   successAuth: boolean,
+  organizationName: string,
   callback?: (value: string) => void,
 ) => {
-  const organizationName = t("Common:OrganizationName");
   const moduleTitle = "Documents"; //TODO: Replace to API variant
 
   let newSubTitle = subTitle;

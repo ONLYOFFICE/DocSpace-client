@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -144,6 +144,7 @@ const FilesSelectorWrapper = ({
   withCreate,
   folderIsShared,
   checkCreating,
+  logoText,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -210,7 +211,7 @@ const FilesSelectorWrapper = ({
       // for backup
       if (!selection.length) return t("Files:BackupNotAllowedInFormRoom");
 
-      const option = { organizationName: t("Common:OrganizationName") };
+      const option = { organizationName: logoText };
 
       if (isCopy)
         return several
@@ -512,7 +513,7 @@ export default inject(
 
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, logoText } = settingsStore;
 
     const {
       selection,
@@ -618,6 +619,7 @@ export default inject(
           : folderId || currentFolderIdProp,
       filesSettings,
       folderIsShared: shared,
+      logoText,
     };
   },
 )(observer(FilesSelectorWrapper));

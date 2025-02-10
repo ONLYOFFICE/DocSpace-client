@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,7 @@ import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobile } from "@docspace/shared/utils";
-import { getFilesFromEvent } from "@docspace/shared/components/drag-and-drop";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";

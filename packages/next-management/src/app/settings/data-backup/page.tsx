@@ -44,6 +44,7 @@ async function Page() {
     backupSchedule,
     backupStorage,
     newStorageRegions,
+    backupProgress,
 
     portals,
     settingsFiles,
@@ -54,6 +55,7 @@ async function Page() {
     getBackupSchedule(),
     getBackupStorage(),
     getStorageRegions(),
+    getBackupProgress(),
     getAllPortals(),
     getSettingsFiles(),
     getFoldersTree(),
@@ -67,6 +69,7 @@ async function Page() {
       portalTariff={portalTariff}
       filesSettings={settingsFiles}
       portals={portals?.tenants || []}
+      backupProgress={backupProgress}
       backupScheduleResponse={backupSchedule}
       backupStorageResponse={backupStorage ?? []}
       newStorageRegions={newStorageRegions ?? []}

@@ -221,6 +221,8 @@ export default inject<
         ? (defaultFormSettings.region as string)
         : "";
 
+    const colorScheme = currentColorScheme ?? undefined;
+
     return {
       // backup
       accounts,
@@ -272,7 +274,7 @@ export default inject<
       dataBackupUrl,
       pageIsDisabled,
       currentDeviceType,
-      currentColorScheme,
+      currentColorScheme: colorScheme,
 
       // dialogsStore
       connectDialogVisible,

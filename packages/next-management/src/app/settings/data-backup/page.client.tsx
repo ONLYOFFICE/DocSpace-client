@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
@@ -39,6 +39,7 @@ import type {
   TFolder,
 } from "@docspace/shared/api/files/types";
 import type {
+  TBackupProgress,
   TBackupSchedule,
   TPortalTariff,
   TStorageRegion,
@@ -52,6 +53,7 @@ import { useStores } from "@/hooks/useStores";
 import { useFilesSelectorInput } from "@/hooks/useFilesSelectorInput";
 import { TariffState } from "@docspace/shared/enums";
 import { useTreeFolders } from "@/hooks/useTreeFolders";
+import { TError } from "@docspace/shared/utils/axiosClient";
 
 interface DataBackupProps {
   account: SettingsThirdPartyType | undefined;
@@ -62,6 +64,7 @@ interface DataBackupProps {
   filesSettings: TFilesSettings;
   foldersTree: TFolder[];
   portalTariff: TPortalTariff | undefined;
+  backupProgress: TBackupProgress | TError | undefined;
 }
 
 const DataBackup = ({
@@ -73,6 +76,7 @@ const DataBackup = ({
   filesSettings,
   foldersTree,
   portalTariff,
+  backupProgress,
 }: DataBackupProps) => {
   const { settings } = useAppState();
   const { backupStore, spacesStore } = useStores();
@@ -111,6 +115,7 @@ const DataBackup = ({
     saveToLocalStorage,
     setConnectedThirdPartyAccount,
     setCompletedFormFields,
+    resetDownloadingProgress,
   } = useBackup({
     account,
     backupScheduleResponse,
@@ -153,6 +158,33 @@ const DataBackup = ({
   const pageIsDisabled = portals.length === 1 && false;
 
   const isNotPaidPeriod = portalTariff?.state === TariffState.NotPaid;
+
+  const getProgress = async () => {
+    if (backupProgress && "progress" in backupProgress) {
+      const { progress, link, error } = backupProgress;
+
+      if (!error) {
+        setDownloadingProgress(progress);
+
+        if (link && link.slice(0, 1) === "/") {
+          setTemporaryLink(link);
+        }
+        setErrorInformation("", t);
+      } else {
+        setDownloadingProgress(100);
+        setErrorInformation(error, t);
+      }
+    } else if (backupProgress) {
+      setErrorInformation(backupProgress, t);
+    }
+  };
+
+  useEffect(() => {
+    getProgress();
+    return () => {
+      resetDownloadingProgress();
+    };
+  }, []);
 
   return (
     <ManualBackup

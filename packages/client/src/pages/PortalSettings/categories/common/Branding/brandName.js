@@ -44,14 +44,14 @@ const BrandNameComponent = (props) => {
     defaultBrandName,
     deviceType,
     isWhiteLabelLoaded,
-    initWhiteLabel,
     setBrandName,
     saveBrandName,
+    getBrandName,
   } = props;
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
-    initWhiteLabel();
+    getBrandName();
   }, []);
 
   const onSave = async (data) => {
@@ -92,7 +92,7 @@ export const BrandName = inject(
       brandName,
       defaultBrandName,
       isWhiteLabelLoaded,
-      initWhiteLabel,
+      getBrandName,
       setBrandName,
       saveBrandName,
     } = brandingStore;
@@ -114,7 +114,7 @@ export const BrandName = inject(
       brandName,
       defaultBrandName,
       isWhiteLabelLoaded,
-      initWhiteLabel,
+      getBrandName,
       setBrandName,
       saveBrandName,
     };

@@ -142,7 +142,6 @@ class BrandingStore {
 
   initWhiteLabel = () => {
     this.getLogoUrls();
-    this.getBrandName();
     this.getIsDefaultLogos();
   };
 

@@ -121,7 +121,11 @@ const ImageCropper = ({
   }, [handleImageChange, image, setPreviewImage]);
 
   return (
-    <div className={classNames(styles.imageCropperWrapper, "icon_cropper")}>
+    <div
+      className={classNames(styles.imageCropperWrapper, "icon_cropper")}
+      data-testid="image-cropper"
+      aria-disabled={isDisabled}
+    >
       <div className={styles.iconCropperCropArea}>
         <AvatarEditor
           className={

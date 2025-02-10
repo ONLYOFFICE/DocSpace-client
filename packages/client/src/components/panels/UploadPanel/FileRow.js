@@ -465,7 +465,7 @@ export default inject(
       }
     } else {
       ext = item?.fileInfo?.fileExst;
-      splitted = item.fileInfo.title.split(".");
+      splitted = item.fileInfo?.title?.split(".");
       if (ext) splitted.splice(-1);
     }
 

@@ -3328,6 +3328,8 @@ class FilesActionStore {
               null,
               true,
             );
+
+          setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
         });
     } catch (err) {
       setSecondaryProgressBarData({

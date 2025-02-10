@@ -81,6 +81,7 @@ const VersionRow = (props) => {
     setVersionSelectedForDeletion,
     canDeleteVersion,
     versionSelectedForDeletion,
+    versionDeletionProcess,
   } = props;
 
   const navigate = useNavigate();
@@ -258,8 +259,12 @@ const VersionRow = (props) => {
       isSavingComment={isSavingComment}
       isEditing={isEditing}
       contextTitle={t("Common:Actions")}
-      versionDeleteProcess={!!versionSelectedForDeletion}
-      versionDeleteRow={versionSelectedForDeletion === info.versionGroup}
+      versionDeleteProcess={versionDeletionProcess}
+      versionDeleteRow={
+        versionDeletionProcess
+          ? versionSelectedForDeletion === info.versionGroup
+          : null
+      }
     >
       <div className={`version-row_${index}`} onContextMenu={onContextMenu}>
         <Box displayProp="flex" className="row-header">
@@ -411,6 +416,7 @@ export default inject(
       onSetDeleteVersionDialogVisible,
       setVersionSelectedForDeletion,
       versionSelectedForDeletion,
+      versionDeletionProcess,
     } = versionHistoryStore;
 
     const isEdit = isEditingVersion || isEditing;
@@ -440,6 +446,7 @@ export default inject(
       setVersionSelectedForDeletion,
       canDeleteVersion,
       versionSelectedForDeletion,
+      versionDeletionProcess,
     };
   },
 )(

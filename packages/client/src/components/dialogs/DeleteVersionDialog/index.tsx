@@ -24,17 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 
-import { toastr } from "@docspace/shared/components/toast";
 import { withTranslation } from "react-i18next";
-import { DeleteVersionDialogContainer } from "./DeleteLinkDialog.styled";
 
-const DeleteVersionDialogComponent = (props) => {
+interface DeleteVersionDialogProps {
+  t: (key: string) => string;
+  visible: boolean;
+  setIsVisible: (visible: boolean) => void;
+  tReady: boolean;
+  fileId: string;
+  versionSelectedForDeletion: any;
+  onDeleteVersionFile: (
+    fileId: number,
+    versionSelectedForDeletion: any,
+  ) => void;
+}
+
+const DeleteVersionDialogComponent: React.FC<DeleteVersionDialogProps> = (
+  props,
+) => {
   const {
     t,
     visible,
@@ -45,36 +58,18 @@ const DeleteVersionDialogComponent = (props) => {
     onDeleteVersionFile,
   } = props;
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const onClose = () => {
     setIsVisible(false);
   };
 
   const onDelete = () => {
+    onDeleteVersionFile(+fileId, [versionSelectedForDeletion]);
     onClose();
-
-    console.log(
-      "fileId versionSelectedForDeletion",
-      fileId,
-      versionSelectedForDeletion,
-    );
-    onDeleteVersionFile(+fileId, [versionSelectedForDeletion])
-      .then((res) => {
-        console.log("res", res);
-      })
-      .catch((err) => toastr.error(err.response?.data?.error.message))
-      .finally(() => {
-        console.log("finally");
-        setIsLoading(false);
-      });
-
-    setIsLoading(false);
   };
 
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDelete();
+  const onKeyUp = (e: KeyboardEvent) => {
+    if (e.key === "Esc" || e.key === "Escape") onClose();
+    if (e.key === "Enter") onDelete();
   };
 
   useEffect(() => {
@@ -91,31 +86,29 @@ const DeleteVersionDialogComponent = (props) => {
         {t("VersionHistory:DeleteVersion")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <DeleteVersionDialogContainer className="modal-dialog-content-body">
+        <div className="modal-dialog-content-body">
           <Text lineHeight="20px" noSelect>
             {t("VersionHistory:DeleteVersionDescription")}
           </Text>
-        </DeleteVersionDialogContainer>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           id="delete-version-modal_submit"
           key="OkButton"
           label={t("Common:Delete")}
-          size="normal"
+          size={ButtonSize.normal}
           primary
           scale
           onClick={onDelete}
-          isDisabled={isLoading}
         />
         <Button
           id="delete-version-modal_cancel"
           key="CancelButton"
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           scale
           onClick={onClose}
-          isDisabled={isLoading}
         />
       </ModalDialog.Footer>
     </ModalDialog>
@@ -126,7 +119,7 @@ const DeleteVersionDialog = withTranslation(["Common", "VersionHistory"])(
   DeleteVersionDialogComponent,
 );
 
-export default inject(({ versionHistoryStore, filesActionsStore }) => {
+export default inject(({ versionHistoryStore, filesActionsStore }: TStore) => {
   const {
     deleteVersionDialogVisible: visible,
     onSetDeleteVersionDialogVisible: setIsVisible,

@@ -67,7 +67,11 @@ const CreateRoomEvent = ({
   const [fetchedTags, setFetchedTags] = useState([]);
 
   const onCreate = (roomParams) => {
-    const itemLogo = selectionItems.length ? selectionItems[0].logo : null;
+    const itemLogo = roomParams.logo
+      ? roomParams.logo
+      : selectionItems.length
+        ? selectionItems[0].logo
+        : null;
 
     setRoomParams({ ...roomParams, logo: itemLogo });
     setOnClose(onClose);
@@ -148,6 +152,8 @@ const CreateRoomEvent = ({
       setProcessCreatingRoomFromData={setProcessCreatingRoomFromData}
       selectionItems={selectionItems}
       setSelectedRoomType={setSelectedRoomType}
+      getThirdPartyIcon={getThirdPartyIcon}
+      isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
       {...roomParams}
     />
   );

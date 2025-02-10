@@ -65,6 +65,7 @@ export const convertToItems = (folders: TRoom[]) => {
       security,
       cover,
       isTemplate,
+      logo,
     };
   });
 

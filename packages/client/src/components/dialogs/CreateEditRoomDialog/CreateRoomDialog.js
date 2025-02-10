@@ -27,6 +27,7 @@
 import React, { useMemo, useState } from "react";
 
 import {
+  getFetchedRoomParams,
   getRoomCreationAdditionalParams,
   getStartRoomParams,
 } from "@docspace/shared/utils/rooms";
@@ -57,6 +58,8 @@ const CreateRoomDialog = ({
   setProcessCreatingRoomFromData,
   selectionItems,
   setSelectedRoomType,
+  getThirdPartyIcon,
+  isDefaultRoomsQuotaSet,
   fetchedRoomParams,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
@@ -94,6 +97,7 @@ const CreateRoomDialog = ({
   const [isValidTitle, setIsValidTitle] = useState(true);
   const [isTemplateSelected, setIsTemplateSelected] =
     useState(!!fetchedRoomParams);
+  const [templateItem, setTemplateItem] = useState(null);
 
   const setRoomTags = (newTags) =>
     setRoomParams({ ...roomParams, tags: newTags });
@@ -154,6 +158,8 @@ const CreateRoomDialog = ({
     if (isLoading) return;
     if (isTemplateSelected) {
       setIsTemplateSelected(false);
+      setTemplateItem(null);
+
       setRoomParams((prev) => ({
         ...prev,
         title: "",
@@ -186,14 +192,20 @@ const CreateRoomDialog = ({
   const onSubmitRoom = (items) => {
     const item = items[0];
     setIsTemplateSelected(true);
+    setTemplateItem(item);
 
-    setRoomParams((prev) => ({
-      ...prev,
-      title: item?.label,
+    const newRoomParams = getFetchedRoomParams(
+      { ...roomParams, id: item?.id, title: item?.label, logo: item?.logo },
+      getThirdPartyIcon,
+      isDefaultRoomsQuotaSet,
+    );
+
+    setRoomParams({
+      ...newRoomParams,
       type: item?.roomType,
-      roomId: item?.id,
+      logo: item?.logo,
       isTemplate: item.rootFolderType === FolderType.RoomTemplates,
-    }));
+    });
   };
 
   const onCloseCreateFromTemplateDialog = () => {
@@ -271,8 +283,11 @@ const CreateRoomDialog = ({
             setIsWrongTitle={setIsWrongTitle}
             enableThirdParty={enableThirdParty}
             onKeyUp={onKeyUpHandler}
+            templateItem={templateItem}
             fromTemplate={
-              selectionItems.length ? selectionItems[0].isTemplate : false
+              selectionItems.length
+                ? selectionItems[0].isTemplate
+                : isTemplateSelected
             }
           />
         )}

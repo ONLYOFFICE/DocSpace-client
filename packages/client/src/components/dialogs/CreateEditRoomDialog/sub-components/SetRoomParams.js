@@ -557,15 +557,18 @@ const SetRoomParams = ({
 };
 
 export default inject(
-  ({
-    settingsStore,
-    dialogsStore,
-    currentQuotaStore,
-    filesStore,
-    infoPanelStore,
-    avatarEditorDialogStore,
-    filesSettingsStore,
-  }) => {
+  (
+    {
+      settingsStore,
+      dialogsStore,
+      currentQuotaStore,
+      filesStore,
+      infoPanelStore,
+      avatarEditorDialogStore,
+      filesSettingsStore,
+    },
+    { templateItem },
+  ) => {
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
     const { folderFormValidation, maxImageUploadSize, currentColorScheme } =
       settingsStore;
@@ -596,7 +599,11 @@ export default inject(
     const { hideConfirmRoomLifetime } = filesSettingsStore;
 
     const selection =
-      bufferSelection != null ? bufferSelection : infoPanelSelection;
+      bufferSelection != null
+        ? bufferSelection
+        : infoPanelSelection?.isTemplate
+          ? infoPanelSelection
+          : templateItem;
 
     setCoverSelection(selection);
 

@@ -23,10 +23,11 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
+import type { TViewAs } from "@docspace/shared/types";
 
 import {
   FILTER_HEADER,
@@ -47,10 +48,12 @@ export default async function DocspaceLayout({
   children: React.ReactNode;
 }) {
   const hdrs = headers();
+  const cookieStore = cookies();
 
   const filter = hdrs.get(FILTER_HEADER);
   const theme = hdrs.get(THEME_HEADER);
   const shareKey = hdrs.get(SHARE_KEY_HEADER);
+  const initViewAs = (cookieStore.get("viewAs")?.value || "row") as TViewAs;
 
   const navigationProps: HeaderProps = {} as HeaderProps;
 
@@ -83,7 +86,7 @@ export default async function DocspaceLayout({
 
   return (
     <main style={{ width: "100%", height: "100%" }}>
-      <Layout>
+      <Layout initSettingsStoreData={{ viewAs: initViewAs }}>
         <Section
           sectionHeaderContent={<Header {...navigationProps} />}
           sectionFilterContent={<Filter {...filterProps} />}

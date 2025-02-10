@@ -37,12 +37,13 @@ import { FilesListStoreContextProvider } from "../../_store/FilesListStore";
 
 type LayoutProps = {
   children: React.ReactNode;
+  initSettingsStoreData: { viewAs: string };
 };
 
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = ({ children, initSettingsStoreData }: LayoutProps) => {
   return (
     <Provider {...store}>
-      <SettingsStoreContextProvider>
+      <SettingsStoreContextProvider initData={initSettingsStoreData}>
         <FilesSettingsStoreContextProvider>
           <FilesListStoreContextProvider>
             <FilesSelectionStoreContextProvider>

@@ -30,9 +30,14 @@ import React from "react";
 import { makeAutoObservable } from "mobx";
 
 import { TViewAs } from "@docspace/shared/types";
+import { setCookie } from "@docspace/shared/utils/cookie";
+
+type TSettingsStoreInitData = {
+  viewAs: TViewAs;
+};
 
 class SettingsStore {
-  filesViewAs: TViewAs = "row";
+  filesViewAs: TViewAs | null = null;
 
   isEmptyList: boolean = false;
 
@@ -40,11 +45,17 @@ class SettingsStore {
 
   shareKey: string = "";
 
-  constructor() {
+  constructor(initData: TSettingsStoreInitData) {
+    if (initData?.viewAs) {
+      this.filesViewAs = initData.viewAs;
+    }
+
     makeAutoObservable(this);
   }
 
-  setViewAs = (viewAs: TViewAs) => {
+  setFilesViewAs = (viewAs: TViewAs) => {
+    setCookie("viewAs", viewAs);
+
     this.filesViewAs = viewAs;
   };
 
@@ -67,11 +78,13 @@ export const SettingsStoreContext = React.createContext<SettingsStore>(
 
 export const SettingsStoreContextProvider = ({
   children,
+  initData,
 }: {
   children: React.ReactNode;
+  initData: TSettingsStoreInitData;
 }) => {
   return (
-    <SettingsStoreContext.Provider value={new SettingsStore()}>
+    <SettingsStoreContext.Provider value={new SettingsStore(initData)}>
       {children}
     </SettingsStoreContext.Provider>
   );

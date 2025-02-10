@@ -20,24 +20,28 @@ import {
   FilterKeys,
   SortByFieldName,
 } from "@docspace/shared/enums";
-import { Nullable, TSortBy } from "@docspace/shared/types";
+import { Nullable, TSortBy, type TViewAs } from "@docspace/shared/types";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 
 import { PAGE_COUNT } from "@/utils/constants";
 
-type useFiltesFiltersProps = {
+type useFilesFiltersProps = {
   filesFilter: string;
   shareKey?: string;
   canSearchByContent: boolean;
+  filesViewAs: TViewAs;
+  setFilesViewAs: (viewAs: TViewAs) => void;
 };
 
 export default function useFilesFilter({
   filesFilter,
   shareKey,
   canSearchByContent,
-}: useFiltesFiltersProps) {
+  filesViewAs,
+  setFilesViewAs,
+}: useFilesFiltersProps) {
   const { t } = useTranslation(["Common"]);
   const searchParams = useSearchParams();
 
@@ -413,8 +417,11 @@ export default function useFilesFilter({
     return viewSettings;
   }, [t]);
 
-  // TODO: implement onChangeViewAs
-  const onChangeViewAs = React.useCallback(() => {}, []);
+  const onChangeViewAs = React.useCallback(() => {
+    const newViewAs = filesViewAs === "tile" ? "row" : "tile";
+
+    setFilesViewAs(newViewAs);
+  }, [setFilesViewAs, filesViewAs]);
 
   const removeSelectedItem = React.useCallback(
     ({ key, group }: { key: string | number; group?: FilterGroups }) => {

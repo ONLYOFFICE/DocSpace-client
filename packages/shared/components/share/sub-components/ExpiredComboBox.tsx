@@ -204,7 +204,7 @@ const ExpiredComboBox = ({
           {getExpirationTrans()}
         </Text>
       )}
-      {showCalendar && (
+      {showCalendar ? (
         <ShareCalendar
           bodyRef={bodyRef}
           onDateSet={setDateFromCalendar}
@@ -213,7 +213,7 @@ const ExpiredComboBox = ({
           locale={i18n.language}
           useDropDown={isRoomsLink}
         />
-      )}
+      ) : null}
     </div>
   );
 };

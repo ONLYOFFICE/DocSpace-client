@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable @typescript-eslint/default-param-last */
+// eslint-disable @typescript-eslint/default-param-last
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { AxiosRequestConfig } from "axios";
 
 import moment from "moment";
@@ -36,12 +39,7 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
-import {
-  TGetRooms,
-  TRoomLifetime,
-  TExportRoomIndexTask,
-  TPublicRoomPassword,
-} from "./types";
+import { TGetRooms, TExportRoomIndexTask, TPublicRoomPassword } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -122,9 +120,9 @@ export function updateRoomMemberRole(id, data) {
 export function getHistory(
   selectionType: "file" | "folder",
   id,
-  signal = null,
   requestToken,
   filter,
+  signal = null,
 ) {
   let params = "";
 
@@ -336,7 +334,7 @@ export function removeLogoFromRoom(id) {
   });
 }
 
-export const setInvitationLinks = async (roomId, linkId, title, access) => {
+export const setInvitationLinks = async (roomId, title, access, linkId) => {
   const options = {
     method: "put",
     url: `/files/rooms/${roomId}/links`,
@@ -538,6 +536,16 @@ export function setRoomCover(roomId, cover) {
     method: "post",
     url: `files/rooms/${roomId}/cover`,
     data,
+  };
+
+  return request(options);
+}
+
+export function hideConfirmRoomLifetime(val: boolean) {
+  const options = {
+    method: "put",
+    url: "/files/hideconfirmroomlifetime",
+    data: { set: val },
   };
 
   return request(options);

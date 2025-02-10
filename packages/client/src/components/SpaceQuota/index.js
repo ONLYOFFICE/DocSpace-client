@@ -34,9 +34,9 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import { toastr } from "@docspace/shared/components/toast";
 import api from "@docspace/shared/api";
 
-import { StyledBody, StyledText } from "./StyledComponent";
 import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";
 import { changeUserQuota } from "SRC_DIR/helpers/contacts";
+import { StyledBody, StyledText } from "./StyledComponent";
 
 const getOptions = (t, item, spaceLimited) => {
   const items = [
@@ -128,8 +128,8 @@ const SpaceQuota = (props) => {
       try {
         const items = await updateQuota([item.id], -1, inRoom);
 
-        options.map((item) => {
-          if (item.key === "no-quota") item.label = t("Common:Unlimited");
+        options.forEach((o) => {
+          if (o.key === "no-quota") o.label = t("Common:Unlimited");
         });
 
         successCallback(items);
@@ -145,8 +145,8 @@ const SpaceQuota = (props) => {
     try {
       const items = await resetQuota([item.id], inRoom);
 
-      options.map((item) => {
-        if (item.key === "default-quota") item.label = defaultQuotaSize;
+      options.forEach((o) => {
+        if (o.key === "default-quota") o.label = defaultQuotaSize;
       });
 
       successCallback(items);

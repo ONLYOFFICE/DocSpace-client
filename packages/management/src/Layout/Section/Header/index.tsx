@@ -32,7 +32,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 
 import { getItemByLink } from "SRC_DIR/utils";
 import Bar from "SRC_DIR/components/Bar";
@@ -87,9 +87,9 @@ const SectionHeaderContent = () => {
             className="arrow-button"
           />
         )}
-        <Headline type="content" truncate={true}>
+        <Heading type="content" truncate={true}>
           <div className="header">{t(item?.tKey)}</div>
-        </Headline>
+        </Heading>
       </StyledHeader>
       <Bar />
     </StyledWrapper>

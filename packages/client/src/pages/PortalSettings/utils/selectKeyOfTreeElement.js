@@ -34,7 +34,6 @@ export const selectKeyOfTreeElement = (value, settingsTree) => {
   if (isRootElementSelected) {
     const firstChildren = selectFirstChildItem(selectedKey[0], settingsTree);
     return firstChildren;
-  } else {
-    return value;
   }
+  return value;
 };

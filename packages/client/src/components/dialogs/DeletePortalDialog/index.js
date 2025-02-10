@@ -81,7 +81,7 @@ const DeletePortalDialog = (props) => {
           label={t("Common:Delete")}
           size="normal"
           scale
-          primary={true}
+          primary
           onClick={onDeleteClick}
         />
         <Button

@@ -35,7 +35,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import api from "@docspace/shared/api";
-import { ButtonKeys, EmployeeType } from "@docspace/shared/enums";
+import { ButtonKeys } from "@docspace/shared/enums";
 
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import DialogStore from "SRC_DIR/store/contacts/DialogStore";

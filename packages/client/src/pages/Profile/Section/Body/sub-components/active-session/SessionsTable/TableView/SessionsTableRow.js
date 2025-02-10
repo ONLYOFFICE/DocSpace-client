@@ -27,8 +27,7 @@
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
-import { TableRow } from "@docspace/shared/components/table";
-import { TableCell } from "@docspace/shared/components/table";
+import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { convertTime } from "@docspace/shared/utils/convertTime";
@@ -94,14 +93,14 @@ const SessionsTableRow = (props) => {
       <TableCell>
         <Text className="session-platform">{platform}</Text>
         <Text className="session-info">{`(${browser})`}</Text>
-        {showTickIcon && (
+        {showTickIcon ? (
           <IconButton
             size={12}
             className="tick-icon"
             color={globalColors.tickColor}
             iconName={TickSvgUrl}
           />
-        )}
+        ) : null}
       </TableCell>
 
       <TableCell>
@@ -112,19 +111,19 @@ const SessionsTableRow = (props) => {
 
       <TableCell>
         <Text className="session-info" truncate>
-          {(country || city) && (
+          {country || city ? (
             <>
               {country}
-              {country && city && ", "}
+              {country && city ? ", " : null}
               {city}
-              <span className="divider"></span>
+              <span className="divider" />
             </>
-          )}
+          ) : null}
           {ip}
         </Text>
       </TableCell>
 
-      {showRemoveIcon && (
+      {showRemoveIcon ? (
         <TableCell className="remove-cell">
           <IconButton
             size={20}
@@ -133,7 +132,7 @@ const SessionsTableRow = (props) => {
             onClick={onRemoveClick}
           />
         </TableCell>
-      )}
+      ) : null}
     </StyledTableRow>
   );
 };

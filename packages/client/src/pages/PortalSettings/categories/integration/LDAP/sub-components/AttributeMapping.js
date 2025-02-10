@@ -34,20 +34,19 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-//import { ComboBox } from "@docspace/shared/components/combobox";
+// import { ComboBox } from "@docspace/shared/components/combobox";
 // import { EmployeeType } from "@docspace/shared/enums";
 
 import AccessSelector from "SRC_DIR/components/AccessSelector";
 import { isMobile } from "@docspace/shared/utils";
-import LdapFieldComponent from "./LdapFieldComponent";
 import { Link } from "@docspace/shared/components/link";
-import { globalColors } from "@docspace/shared/themes";
+import LdapFieldComponent from "./LdapFieldComponent";
 
-const FIRST_NAME = "firstName",
-  SECOND_NAME = "secondName",
-  MAIL = "mail",
-  AVATAR = "avatarAttribute",
-  QUOTA = "userQuotaLimit";
+const FIRST_NAME = "firstName";
+const SECOND_NAME = "secondName";
+const MAIL = "mail";
+const AVATAR = "avatarAttribute";
+const QUOTA = "userQuotaLimit";
 
 const FIELD_STYLE = { marginBottom: "0px" };
 
@@ -105,6 +104,8 @@ const AttributeMapping = (props) => {
       case QUOTA:
         setUserQuotaLimit(value);
         break;
+      default:
+        break;
     }
   };
 
@@ -119,7 +120,7 @@ const AttributeMapping = (props) => {
   return (
     <>
       <div className="ldap_attribute-mapping-text">
-        <Text fontWeight={600} fontSize={"14px"}>
+        <Text fontWeight={600} fontSize="14px">
           {t("LdapAttributeMapping")}
         </Text>
         <HelpButton tooltipContent={t("LdapAdvancedSettingsTooltip")} />
@@ -128,7 +129,7 @@ const AttributeMapping = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.firstName}
           labelText={t("Common:FirstName")}
@@ -148,7 +149,7 @@ const AttributeMapping = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.secondName}
           labelText={t("LdapSecondName")}
@@ -168,7 +169,7 @@ const AttributeMapping = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.mail}
           labelText={t("LdapMail")}
@@ -188,7 +189,7 @@ const AttributeMapping = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           hasError={errors.avatarAttribute}
           labelText={t("LdapAvatar")}
         >
@@ -206,7 +207,7 @@ const AttributeMapping = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           hasError={errors.userQuotaLimit}
           labelText={t("LdapQuota")}
           tooltipContent={t("LdapUserQuotaTooltip", {
@@ -225,19 +226,15 @@ const AttributeMapping = (props) => {
             }
             tabIndex={11}
           />
-          {!isDefaultUsersQuotaSet && (
-            <Text
-              as={"span"}
-              fontWeight={400}
-              fontSize="12px"
-              lineHeight="16px"
-            >
+          {!isDefaultUsersQuotaSet ? (
+            <Text as="span" fontWeight={400} fontSize="12px" lineHeight="16px">
               <Trans
                 t={t}
                 i18nKey="LdapQuotaInfo"
                 ns="Ldap"
                 components={[
                   <Link
+                    key="link"
                     type="action"
                     color={currentColorScheme.main.accent}
                     onClick={goToStarageManagement}
@@ -245,7 +242,7 @@ const AttributeMapping = (props) => {
                 ]}
               />
             </Text>
-          )}
+          ) : null}
         </FieldContainer>
       </Box>
       <Box marginProp="24px 0 24px 0">
@@ -259,15 +256,10 @@ const AttributeMapping = (props) => {
             <Text fontWeight={600} fontSize="15px" lineHeight="16px">
               {t("LdapUsersType")}
             </Text>
-            <HelpButton
-              tooltipContent={t("LdapUserTypeTooltip", {
-                productName: t("Common:ProductName"),
-              })}
-            />
           </Box>
           <Text fontWeight={400} fontSize="12px" lineHeight="16px">
-            {t("LdapUsersTypeInfo", {
-              contactsName: t("Common:Contacts"),
+            {t("LdapUserTypeTooltip", {
+              productName: t("Common:ProductName"),
             })}
           </Text>
         </Box>
@@ -286,8 +278,9 @@ const AttributeMapping = (props) => {
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={12}
             directionX="left"
+            scaledOptions={!isMobile()}
           />
-          <div></div>
+          <div />
         </Box>
       </Box>
     </>

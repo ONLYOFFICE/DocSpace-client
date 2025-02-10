@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { AxiosRequestConfig } from "axios";
 
 import { Encoder } from "../../utils/encoder";
@@ -416,7 +419,7 @@ export async function updateUserType(type: EmployeeType, userIds: string[]) {
     return user;
   });
 
-  return users;
+  return res;
 }
 
 export function linkOAuth(serializedProfile) {
@@ -427,7 +430,10 @@ export function linkOAuth(serializedProfile) {
   });
 }
 
-export function signupOAuth(signupAccount, confirmKey = null) {
+export function signupOAuth(
+  signupAccount,
+  confirmKey: Nullable<string> = null,
+) {
   const options = {
     method: "post",
     url: "people/thirdparty/signup",

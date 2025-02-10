@@ -65,7 +65,7 @@ import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
 import SocketHelper from "../utils/socket";
-import { TWhiteLabel } from "../utils/whiteLabelHelper";
+import { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
 
 import {
   ThemeKeys,
@@ -180,7 +180,7 @@ class SettingsStore {
     uploadDashboard: "",
   };
 
-  logoUrl: Nullable<TWhiteLabel> = null;
+  logoUrl: Nullable<ILogo> = null;
 
   isDesktopClient = isDesktopEditors;
 
@@ -286,7 +286,7 @@ class SettingsStore {
 
   companyInfoSettingsIsDefault = true;
 
-  whiteLabelLogoUrls: TWhiteLabel[] = [];
+  whiteLabelLogoUrls: ILogo[] = [];
 
   standalone = false;
 
@@ -334,9 +334,15 @@ class SettingsStore {
 
   showGuestReleaseTip = false;
 
+  logoText = "";
+
   constructor() {
     makeAutoObservable(this);
   }
+
+  setLogoText = (logoText: string) => {
+    this.logoText = logoText;
+  };
 
   setTenantStatus = (tenantStatus: TenantStatus) => {
     this.tenantStatus = tenantStatus;
@@ -783,11 +789,11 @@ class SettingsStore {
     this.companyInfoSettingsIsDefault = companyInfoSettingsIsDefault;
   };
 
-  setLogoUrl = (url: TWhiteLabel[]) => {
-    this.logoUrl = url[0];
+  setLogoUrl = (url: ILogo[]) => {
+    [this.logoUrl] = url;
   };
 
-  setLogoUrls = (urls: TWhiteLabel[]) => {
+  setLogoUrls = (urls: ILogo[]) => {
     this.whiteLabelLogoUrls = urls;
   };
 
@@ -820,7 +826,7 @@ class SettingsStore {
       this.setPortals(res.tenants);
       return res;
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e as string);
     }
   };
 
@@ -950,7 +956,7 @@ class SettingsStore {
     const socketUrl =
       isPublicRoom() && !this.publicRoomKey ? "" : this.socketUrl;
 
-    SocketHelper.connect(socketUrl, this.publicRoomKey);
+    SocketHelper?.connect(socketUrl, this.publicRoomKey);
   };
 
   setPublicRoomKey = (key: string) => {
@@ -958,7 +964,7 @@ class SettingsStore {
 
     const socketUrl = isPublicRoom() && !key ? "" : this.socketUrl;
 
-    SocketHelper.connect(socketUrl, key);
+    SocketHelper?.connect(socketUrl, key);
   };
 
   getBuildVersionInfo = async () => {
@@ -1217,7 +1223,7 @@ class SettingsStore {
     if (action === UrlActionType.Download) {
       return this.isFrame &&
         this.frameConfig?.downloadToEvent &&
-        this.frameConfig?.events.onDownload
+        this.frameConfig?.events?.onDownload
         ? frameCallEvent({ event: "onDownload", data: url })
         : replace
           ? (window.location.href = url)

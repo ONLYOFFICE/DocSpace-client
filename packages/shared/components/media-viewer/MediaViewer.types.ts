@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFile } from "@docspace/shared/api/files/types";
-import type { DeviceType } from "@docspace/shared/enums";
+import type { TFile } from "../../api/files/types";
+import type { DeviceType } from "../../enums";
 
 export type ContextMenuAction = (file: TFile, t: TranslationType) => void;
 
@@ -45,19 +45,19 @@ export type DevicesType = {
   isDesktop: boolean;
 };
 
-export type ContextFunctions = Partial<{
-  onClickDownloadAs: VoidFunction;
-  onMoveAction: VoidFunction;
-  onCopyAction: VoidFunction;
-  onClickRename: OmitSecondArg<ContextMenuAction>;
-  onDuplicate: ContextMenuAction;
-  onClickDelete: ContextMenuAction;
-  onClickDownload: ContextMenuAction;
-  onClickLinkEdit: OmitSecondArg<ContextMenuAction>;
-  onPreviewClick: OmitSecondArg<ContextMenuAction>;
-  onCopyLink: ContextMenuAction;
-  onShowInfoPanel: OmitSecondArg<ContextMenuAction>;
-}>;
+export type ContextFunctions = {
+  onClickDownloadAs?: VoidFunction;
+  onMoveAction?: VoidFunction;
+  onCopyAction?: VoidFunction;
+  onCopyLink?: ContextMenuAction;
+  onClickDelete?: ContextMenuAction;
+  onClickDownload?: ContextMenuAction;
+  onClickRename?: OmitSecondArg<ContextMenuAction>;
+  onDuplicate?: ContextMenuAction;
+  onClickLinkEdit?: OmitSecondArg<ContextMenuAction>;
+  onPreviewClick?: OmitSecondArg<ContextMenuAction>;
+  onShowInfoPanel?: OmitSecondArg<ContextMenuAction>;
+};
 
 export type PlaylistType = {
   id: number;
@@ -78,9 +78,12 @@ export type BoundsType = {
   left: number;
 };
 
-export type Point = { x: number; y: number };
+export type Point = {
+  x: number;
+  y: number;
+};
 
-export interface MediaViewerProps {
+export type MediaViewerProps = {
   /** Function for translating text. */
   t: TranslationType;
   /** List of media files to be displayed. */
@@ -164,4 +167,4 @@ export interface MediaViewerProps {
   setBufferSelection?: (file?: TFile | null) => void;
   /** Function to set the active files based on their IDs. */
   setActiveFiles?: (files: number[], destId?: number) => void;
-}
+};

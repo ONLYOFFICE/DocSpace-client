@@ -8,6 +8,7 @@
   "CurrentSpace": "Espaço atual",
   "DeleteEmptyPortalText": "Você excluirá permanentemente o espaço <1>{{domain}}</1>. Essa ação não pode ser desfeita.",
   "DeleteRequestSuccess": "Solicitação de exclusão enviada com sucesso para o endereço de e-mail do proprietário do {{productName}} <1>{{email}}</1>",
+  "DeleteSetupPortalText": "Você excluirá permanentemente o espaço <1>{{domain}}</1> com todos os dados e contas. Uma solicitação para excluir o <1>{{{domain}}</1> será enviada ao proprietário do {{productName}} para o endereço de e-mail <1>{{email}}</1>.",
   "DeleteWarning": "O último espaço de acesso total não pode ser excluído",
   "DomainName": "Nome do domínio",
   "DomainNotFound": "Domínio não encontrado, verifique nas configurações de DNS",

@@ -103,19 +103,19 @@ const UserFields = (props) => {
   }, [inputs]);
 
   const onBlur = (index) => {
-    let newErrors = Array.from(errors);
+    const newErrors = Array.from(errors);
     newErrors[index] = true;
     setErrors(newErrors);
   };
 
   const onFocus = (index) => {
-    let newErrors = Array.from(errors);
+    const newErrors = Array.from(errors);
     newErrors[index] = false;
     setErrors(newErrors);
   };
 
   const onDelete = (index) => {
-    let newErrors = Array.from(errors);
+    const newErrors = Array.from(errors);
     newErrors.splice(index, 1);
     setErrors(newErrors);
 
@@ -124,45 +124,43 @@ const UserFields = (props) => {
 
   return (
     <div className={className}>
-      {inputs ? (
-        inputs.map((input, index) => {
-          let newInput1;
-          let newInput2;
+      {inputs
+        ? inputs.map((input, index) => {
+            let newInput1;
+            let newInput2;
 
-          if (input?.includes("-")) {
-            newInput1 = input.split("-")[0];
-            newInput2 = input.split("-")[1];
-          }
+            if (input?.includes("-")) {
+              newInput1 = input.split("-")[0];
+              newInput2 = input.split("-")[1];
+            }
 
-          const error = newInput2
-            ? input?.split("-").length - 1 > 1 ||
-              !regexp.test(newInput1) ||
-              !regexp.test(newInput2)
-            : !regexp.test(input);
+            const error = newInput2
+              ? (input && input.split("-").length - 1 > 1) ||
+                !regexp.test(newInput1) ||
+                !regexp.test(newInput2)
+              : !regexp.test(input);
 
-          return (
-            <StyledInputWrapper key={`user-input-${index}`}>
-              <TextInput
-                className={`${classNameAdditional}-input`}
-                id={`user-input-${index}`}
-                isAutoFocussed={isAutoFocussed}
-                value={input}
-                onChange={(e) => onChangeInput(e, index)}
-                onBlur={() => onBlur(index)}
-                onFocus={() => onFocus(index)}
-                hasError={errors[index] && error}
-              />
-              <StyledTrashIcon
-                className={`${classNameAdditional}-delete-icon`}
-                size="medium"
-                onClick={() => onDelete(index)}
-              />
-            </StyledInputWrapper>
-          );
-        })
-      ) : (
-        <></>
-      )}
+            return (
+              <StyledInputWrapper key={`user-input-${input}`}>
+                <TextInput
+                  className={`${classNameAdditional}-input`}
+                  id={`user-input-${input}`}
+                  isAutoFocussed={isAutoFocussed}
+                  value={input}
+                  onChange={(e) => onChangeInput(e, index)}
+                  onBlur={() => onBlur(index)}
+                  onFocus={() => onFocus(index)}
+                  hasError={errors[index] ? error : null}
+                />
+                <StyledTrashIcon
+                  className={`${classNameAdditional}-delete-icon`}
+                  size="medium"
+                  onClick={() => onDelete(index)}
+                />
+              </StyledInputWrapper>
+            );
+          })
+        : null}
 
       <StyledAddWrapper
         className={classNameAdditional}
@@ -170,7 +168,7 @@ const UserFields = (props) => {
         inputsLength={inputs.length}
       >
         <StyledPlusIcon size="small" />
-        <Link type="action" isHovered={true} fontWeight={600}>
+        <Link type="action" isHovered fontWeight={600}>
           {buttonLabel}
         </Link>
       </StyledAddWrapper>

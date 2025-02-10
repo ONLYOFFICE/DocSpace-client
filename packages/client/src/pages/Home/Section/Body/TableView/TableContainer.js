@@ -38,9 +38,7 @@ import React, {
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/shared/themes";
-import { TableContainer } from "@docspace/shared/components/table";
-import { TableBody } from "@docspace/shared/components/table";
+import { TableContainer, TableBody } from "@docspace/shared/components/table";
 import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
@@ -148,6 +146,8 @@ const Table = ({
   currentDeviceType,
   onEditIndex,
   isIndexing,
+  icon,
+  isDownload,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -223,8 +223,12 @@ const Table = ({
         isTrashFolder={isTrashFolder}
         hideColumns={hideColumns}
         isHighlight={
-          highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
+          highlightFile.id == item.id
+            ? highlightFile.isExst === !item.fileExst
+            : null
         }
+        icon={icon}
+        isDownload={isDownload}
       />
     ));
   }, [
@@ -240,6 +244,8 @@ const Table = ({
     isTrashFolder,
     isIndexEditingMode,
     isIndexing,
+    icon,
+    isDownload,
   ]);
 
   return (
@@ -291,6 +297,7 @@ export default inject(
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
+    uploadDataStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -298,6 +305,8 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
+
+    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
 
     const {
       filesList,
@@ -338,6 +347,8 @@ export default inject(
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
+      icon,
+      isDownload,
     };
   },
 )(observer(Table));

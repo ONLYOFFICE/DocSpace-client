@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { TColorScheme } from "../../themes";
 
 export type TArticleLinkDataState =
   | {
@@ -42,13 +41,12 @@ export type TArticleLinkData = {
   state: TArticleLinkDataState;
 };
 
-export interface ArticleItemProps {
-  /** Accepts className */
-  className?: string;
-  /** Accepts id */
-  id?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
+type PickedDivProps = Pick<
+  React.ComponentProps<"div">,
+  "id" | "className" | "style"
+>;
+
+export type ArticleItemProps = PickedDivProps & {
   /** Catalog item icon */
   icon: string;
   /** Catalog item text */
@@ -83,9 +81,12 @@ export interface ArticleItemProps {
   isFirstHeader?: boolean;
   /** Accepts folder id */
   folderId?: string;
+  /** Title for the badge tooltip */
   badgeTitle?: string;
+  /** Custom badge component */
   badgeComponent?: React.ReactNode;
-  $currentColorScheme?: TColorScheme;
+  /** Title for the item tooltip */
   title?: string;
+  /** Link data for routing */
   linkData: TArticleLinkData;
-}
+};

@@ -66,6 +66,7 @@ const {
 
   darkErrorStatus,
   favoritesStatus,
+  favoriteStatusDark,
   lightStatusWarning,
   darkStatusWarning,
   darkStatusPositive,
@@ -103,8 +104,6 @@ const {
   darkScroll,
   darkScrollHover,
   darkScrollActive,
-  silver,
-  highlandGray,
 
   blurDark,
   darkGreyAction,
@@ -126,6 +125,9 @@ const Dark: TTheme = {
     emailColor: gray,
     fontWeight: "normal",
     fontWeightBold: "bold",
+    secondary: {
+      color: grayDark,
+    },
   },
 
   heading: {
@@ -413,7 +415,7 @@ const Dark: TTheme = {
     float: "left",
     height: "19px",
     overflow: "hidden",
-    padding: "0px",
+    padding: "",
 
     separator: {
       border: `1px solid ${grayDarkStrong}`,
@@ -1108,7 +1110,7 @@ const Dark: TTheme = {
       right: "0px",
       bottom: "0px",
       fill: black,
-      backgroundColor: bigGrayDarkMid,
+      backgroundColor: "rgba(255, 255, 255, 0.64)",
       borderRadius: "50%",
       height: "32px",
       width: "32px",
@@ -1601,6 +1603,7 @@ const Dark: TTheme = {
   },
 
   calendar: {
+    containerBorderColor: grayDarkStrong,
     color: white,
     disabledColor: grayDarkStrong,
     pastColor: grayDark,
@@ -2170,45 +2173,6 @@ const Dark: TTheme = {
     },
   },
 
-  mediaViewer: {
-    color: grayDarkStrong,
-    backgroundColor: highlandGray,
-    fill: white,
-    titleColor: white,
-    iconColor: white,
-
-    controlBtn: {
-      backgroundColor: silver,
-    },
-
-    imageViewer: {
-      backgroundColor: silver,
-      inactiveBackgroundColor: highlandGray,
-      fill: white,
-    },
-
-    progressBar: {
-      background: grayDarkStrong,
-      backgroundColor: silver,
-    },
-
-    scrollButton: {
-      backgroundColor: highlandGray,
-      background: silver,
-      border: `solid ${white}`,
-    },
-
-    videoViewer: {
-      fill: white,
-      stroke: white,
-      color: grayDarkStrong,
-      colorError: white,
-      backgroundColorError: darkBlack,
-      backgroundColor: highlandGray,
-      background: silver,
-    },
-  },
-
   createEditRoomDialog: {
     commonParam: {
       descriptionColor: gray,
@@ -2299,7 +2263,7 @@ const Dark: TTheme = {
         borderColor: gray,
         hoverBorderColor: lightDarkGrayHover,
         hoverColor: white,
-        color: darkGrayDark,
+        color: white,
         iconColor: darkGrayDark,
       },
     },
@@ -2639,9 +2603,9 @@ const Dark: TTheme = {
     },
 
     badge: {
-      color: black,
-      stroke: darkGrayDark,
-      fill: darkGrayDark,
+      color: white,
+      stroke: grayDark,
+      fill: grayDark,
       defaultFill: black,
       badgeFill: mainOrange,
     },
@@ -2714,6 +2678,7 @@ const Dark: TTheme = {
     background: darkGrayLight,
     textColor: grayDark,
     iconFill: black,
+    warningColor: darkErrorStatus,
   },
 
   client: {
@@ -2841,6 +2806,7 @@ const Dark: TTheme = {
           dataFontColorBlack: white,
           notAvailableBackground: grayDark,
           textColor: white,
+          paidBadgeBackground: favoriteStatusDark,
         },
 
         companyInfo: {
@@ -2964,7 +2930,6 @@ const Dark: TTheme = {
         linkColor: lightBlueMain,
         spanBackground: lightBlueMain,
         filterBorder: `1px solid ${black}`,
-        toastBackground: darkToastWarning,
         background: darkGrayLight,
       },
     },
@@ -2974,6 +2939,10 @@ const Dark: TTheme = {
       generatePasswordColor: darkGrayDark,
       textColor: grayDark,
     },
+  },
+
+  statusMessage: {
+    toastBackground: darkToastWarning,
   },
 
   tileLoader: {

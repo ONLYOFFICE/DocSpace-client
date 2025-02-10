@@ -66,21 +66,22 @@ const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
       headerText={t("NoPlugins")}
       descriptionText={
         <Text>
-          {withUpload &&
-            t("UploadDescription", { productName: t("Common:ProductName") })}
+          {withUpload
+            ? t("UploadDescription", { productName: t("Common:ProductName") })
+            : null}
         </Text>
       }
       style={{ gridColumnGap: "39px" }}
       buttonStyle={{ marginTop: "16px" }}
       imageSrc={imageSrc}
       buttons={
-        withUpload && (
+        withUpload ? (
           <Dropzone
             isDisabled={!withUpload}
             isLoading={false}
             onDrop={onDrop}
           />
-        )
+        ) : null
       }
     />
   );

@@ -39,7 +39,7 @@ const ButtonContainer = ({ t, buyUrl }) => {
     <StyledButtonComponent>
       <Button
         label={t("ActivatePurchaseBuyNow")}
-        size={"small"}
+        size="small"
         primary
         onClick={onClickBuy}
       />

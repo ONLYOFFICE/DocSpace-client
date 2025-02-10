@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { isMobile, isIOS } from "react-device-detect";
 import { inject, observer } from "mobx-react";
@@ -38,7 +38,7 @@ const Wrapper = styled.div`
 `;
 
 const ReactSmartBanner = (props) => {
-  const { t, ready, isBannerVisible, setIsBannerVisible } = props;
+  const { t, ready, isBannerVisible, setIsBannerVisible, logoText } = props;
   const force = isIOS ? "ios" : "android";
   const location = useLocation();
 
@@ -94,7 +94,7 @@ const ReactSmartBanner = (props) => {
     <Wrapper>
       <SmartBanner
         title={t("SmartBanner:AppName", {
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
         })}
         author="Ascensio System SIA"
         button={t("Common:View")}
@@ -106,15 +106,14 @@ const ReactSmartBanner = (props) => {
         appMeta={appMeta}
       />
     </Wrapper>
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 export default inject(({ settingsStore }) => {
-  const { isBannerVisible, setIsBannerVisible } = settingsStore;
+  const { isBannerVisible, setIsBannerVisible, logoText } = settingsStore;
   return {
     isBannerVisible,
     setIsBannerVisible,
+    logoText,
   };
 })(observer(ReactSmartBanner));

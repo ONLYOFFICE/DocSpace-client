@@ -33,15 +33,16 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { toastr } from "@docspace/shared/components/toast";
-import { LearnMoreWrapper } from "../StyledSecurity";
-import UserFields from "../sub-components/user-fields";
 import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { DeviceType } from "@docspace/shared/enums";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import { LearnMoreWrapper } from "../StyledSecurity";
+import UserFields from "../sub-components/user-fields";
 
 import IpSecurityLoader from "../sub-components/loaders/ip-security-loader";
-import { DeviceType } from "@docspace/shared/enums";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -88,7 +89,7 @@ const IpSecurity = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const regexp = /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/; //check ip valid
+  const regexp = /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/; // check ip valid
 
   const [enable, setEnable] = useState(false);
   const [ips, setIps] = useState();
@@ -96,6 +97,12 @@ const IpSecurity = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [autoFocus, setAutoFocus] = useState(false);
+
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("ip") &&
+      navigate("/portal-settings/security/access-portal");
+  };
 
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage("defaultIPSettings");
@@ -149,8 +156,8 @@ const IpSecurity = (props) => {
 
     const defaultSettings = getFromSessionStorage("defaultIPSettings");
     const newSettings = {
-      enable: enable,
-      ips: ips,
+      enable,
+      ips,
     };
     saveToSessionStorage("currentIPSettings", newSettings);
 
@@ -161,26 +168,20 @@ const IpSecurity = (props) => {
     }
   }, [enable, ips]);
 
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("ip") &&
-      navigate("/portal-settings/security/access-portal");
-  };
-
   const onSelectType = (e) => {
     const value = e.target.value;
     if (value === "enable" && !autoFocus) setAutoFocus(true);
-    setEnable(value === "enable" ? true : false);
+    setEnable(value === "enable");
   };
 
   const onChangeInput = (e, index) => {
-    let newInputs = Array.from(ips);
+    const newInputs = Array.from(ips);
     newInputs[index] = e.target.value;
     setIps(newInputs);
   };
 
   const onDeleteInput = (index) => {
-    let newInputs = Array.from(ips);
+    const newInputs = Array.from(ips);
     newInputs.splice(index, 1);
     setIps(newInputs);
   };
@@ -191,7 +192,7 @@ const IpSecurity = (props) => {
   };
 
   const onSaveClick = async () => {
-    const newIps = ips.filter((ips) => ips.trim() !== "");
+    const newIps = ips.filter((ip) => ip.trim() !== "");
 
     setIps(newIps);
     setIsSaving(true);
@@ -203,18 +204,18 @@ const IpSecurity = (props) => {
     }
 
     const ipsObjectArr = newIps.map((ip) => {
-      return { ip: ip };
+      return { ip };
     });
 
     try {
       await setIpRestrictions(ipsObjectArr, enable);
 
       saveToSessionStorage("currentIPSettings", {
-        enable: enable,
+        enable,
         ips: newIps,
       });
       saveToSessionStorage("defaultIPSettings", {
-        enable: enable,
+        enable,
         ips: newIps,
       });
       setShowReminder(false);
@@ -277,7 +278,7 @@ const IpSecurity = (props) => {
         onClick={onSelectType}
       />
 
-      {enable && (
+      {enable ? (
         <UserFields
           className="user-fields"
           inputs={ips}
@@ -289,9 +290,9 @@ const IpSecurity = (props) => {
           classNameAdditional="add-allowed-ip-address"
           isAutoFocussed={autoFocus}
         />
-      )}
+      ) : null}
 
-      {enable && (
+      {enable ? (
         <>
           <Text fontSize="16px" fontWeight="700" className="warning-text">
             {t("Common:Warning")}
@@ -300,7 +301,7 @@ const IpSecurity = (props) => {
             {t("IPSecurityWarningHelper")}
           </Text>
         </>
-      )}
+      ) : null}
 
       <SaveCancelButtons
         className="save-cancel-buttons"
@@ -310,7 +311,7 @@ const IpSecurity = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         isSaving={isSaving}
         additionalClassSaveButton="ip-security-save"

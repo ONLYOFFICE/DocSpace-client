@@ -32,7 +32,7 @@ import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 import EmailReactSvgUrl from "PUBLIC_DIR/images/email.react.svg?url";
 import LiveChatReactSvgUrl from "PUBLIC_DIR/images/support.react.svg?url";
 import BookTrainingReactSvgUrl from "PUBLIC_DIR/images/book.training.react.svg?url";
-//import VideoGuidesReactSvgUrl from "PUBLIC_DIR/images/video.guides.react.svg?url";
+// import VideoGuidesReactSvgUrl from "PUBLIC_DIR/images/video.guides.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import SpacesReactSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
@@ -50,34 +50,42 @@ import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile");
-//const PROFILE_MY_URL = combineUrl(PROXY_HOMEPAGE_URL, "/my");
+// const PROFILE_MY_URL = combineUrl(PROXY_HOMEPAGE_URL, "/my");
 const ABOUT_URL = combineUrl(PROXY_HOMEPAGE_URL, "/about");
 const PAYMENTS_URL = combineUrl(
   PROXY_HOMEPAGE_URL,
   "/portal-settings/payments/portal-payments",
 );
 
-//const VIDEO_GUIDES_URL = "https://onlyoffice.com/";
+// const VIDEO_GUIDES_URL = "https://onlyoffice.com/";
 
 const SPACES_URL = combineUrl(PROXY_HOMEPAGE_URL, "/management");
 class ProfileActionsStore {
   authStore = null;
+
   userStore = null;
+
   settingsStore = null;
+
   filesStore = null;
-  peopleStore = null;
+
   treeFoldersStore = null;
+
   selectedFolderStore = null;
+
   pluginStore = null;
+
   isAboutDialogVisible = false;
+
   isDebugDialogVisible = false;
+
   isShowLiveChat = false;
+
   profileClicked = false;
 
   constructor(
     authStore,
     filesStore,
-    peopleStore,
     treeFoldersStore,
     selectedFolderStore,
     pluginStore,
@@ -87,7 +95,6 @@ class ProfileActionsStore {
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
-    this.peopleStore = peopleStore;
     this.treeFoldersStore = treeFoldersStore;
     this.selectedFolderStore = selectedFolderStore;
     this.pluginStore = pluginStore;
@@ -197,9 +204,9 @@ class ProfileActionsStore {
     trainingEmail && window.open(`mailto:${trainingEmail}`, "_blank");
   };
 
-  //onVideoGuidesClick = () => {
+  // onVideoGuidesClick = () => {
   //  window.open(VIDEO_GUIDES_URL, "_blank");
-  //};
+  // };
 
   onHotkeysClick = () => {
     this.settingsStore.setHotkeyPanelVisible(true);
@@ -249,7 +256,7 @@ class ProfileActionsStore {
     //   settingsModule && combineUrl(PROXY_HOMEPAGE_URL, settingsModule.link);
 
     const {
-      //currentProductId,
+      // currentProductId,
       debugInfo,
     } = this.settingsStore;
 
@@ -360,8 +367,6 @@ class ProfileActionsStore {
 
     const feedbackAndSupportEnabled =
       this.settingsStore.additionalResourcesData?.feedbackAndSupportEnabled;
-    const videoGuidesEnabled =
-      this.settingsStore.additionalResourcesData?.videoGuidesEnabled;
     const helpCenterEnabled =
       this.settingsStore.additionalResourcesData?.helpCenterEnabled;
     const showFrameSignOut =
@@ -395,12 +400,12 @@ class ProfileActionsStore {
         label: t("Common:HelpCenter"),
         onClick: this.onHelpCenterClick,
       },
-      /*videoGuidesEnabled && {
+      /* videoGuidesEnabled && {
         key: "user-menu-video",
         icon: VideoGuidesReactSvgUrl,
         label: "VideoGuides",
         onClick: this.onVideoGuidesClick,
-      },*/
+      }, */
       hotkeys,
       !isMobile && {
         isSeparator: true,

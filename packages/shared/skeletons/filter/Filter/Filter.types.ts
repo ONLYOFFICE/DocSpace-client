@@ -26,8 +26,8 @@
 
 import { RectangleSkeletonProps } from "../../rectangle";
 
-export interface FilterLoaderProps extends RectangleSkeletonProps {
+export type FilterLoaderProps = RectangleSkeletonProps & {
   id?: string;
   className?: string;
   style?: React.CSSProperties;
-}
+};

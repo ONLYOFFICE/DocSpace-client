@@ -27,19 +27,16 @@
 /* eslint-disable react/prop-types */
 import React, { useMemo, forwardRef, memo, ForwardedRef } from "react";
 
-import { Text } from "@docspace/shared/components/text";
-import {
-  ContextMenu,
-  TContextMenuRef,
-} from "@docspace/shared/components/context-menu";
+import classNames from "classnames";
 
 import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import BackArrow from "PUBLIC_DIR/images/viewer.media.back.react.svg";
 
-import { StyledMobileDetails } from "../../MediaViewer.styled";
+import { Text } from "../../../text";
+import { ContextMenu, ContextMenuRefType } from "../../../context-menu";
 
+import styles from "./MobileDetails.module.scss";
 import type MobileDetailsProps from "./MobileDetails.props";
-import { globalColors } from "../../../../themes";
 
 const MobileDetails = memo(
   forwardRef(
@@ -55,7 +52,7 @@ const MobileDetails = memo(
         onContextMenu,
         contextModel,
       }: MobileDetailsProps,
-      ref: ForwardedRef<TContextMenuRef>,
+      ref: ForwardedRef<ContextMenuRefType>,
     ): JSX.Element => {
       const contextMenuHeader = useMemo(
         () => ({
@@ -66,18 +63,35 @@ const MobileDetails = memo(
       );
 
       return (
-        <StyledMobileDetails>
-          {!isPublicFile && (
-            <BackArrow className="mobile-close" onClick={onMaskClick} />
-          )}
-          <Text fontSize="14px" color={globalColors.white} className="title">
+        <div
+          className={classNames(styles.container)}
+          role="dialog"
+          aria-label={title}
+        >
+          {!isPublicFile ? (
+            <BackArrow
+              className={styles.mobileClose}
+              onClick={onMaskClick}
+              data-test-id="mobile-details-back"
+              role="button"
+              aria-label="Back"
+            />
+          ) : null}
+          <Text
+            fontSize="14px"
+            className={styles.title}
+            data-test-id="mobile-details-title"
+          >
             {title}
           </Text>
-          {!isPreviewFile && !isError && (
+          {!isPreviewFile && !isError ? (
             <div className="details-context">
               <MediaContextMenu
-                className="mobile-context"
+                className={styles.mobileContext}
                 onClick={onContextMenu}
+                data-test-id="mobile-details-context"
+                role="button"
+                aria-label="Open context menu"
               />
               <ContextMenu
                 ref={ref}
@@ -86,10 +100,11 @@ const MobileDetails = memo(
                 onHide={onHide}
                 header={contextMenuHeader}
                 getContextModel={contextModel}
+                data-test-id="mobile-details-context-menu"
               />
             </div>
-          )}
-        </StyledMobileDetails>
+          ) : null}
+        </div>
       );
     },
   ),

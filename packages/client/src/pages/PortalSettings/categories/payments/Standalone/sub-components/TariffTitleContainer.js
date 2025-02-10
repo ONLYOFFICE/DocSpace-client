@@ -39,6 +39,7 @@ const TariffTitleContainer = ({
   trialDaysLeft,
   paymentDate,
   isDeveloper,
+  logoText,
 }) => {
   const { t } = useTranslation(["PaymentsEnterprise", "Common"]);
   const alertComponent = () => {
@@ -97,17 +98,17 @@ const TariffTitleContainer = ({
           <Text fontWeight={600} fontSize="14px" as="span">
             {t("ActivateTariffDescr", {
               productName: t("Common:ProductName"),
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
               license: isDeveloper
                 ? t("Common:DeveloperLicense")
                 : t("Common:EnterpriseLicense"),
             })}
           </Text>{" "}
-          {!isLicenseDateExpired && (
+          {!isLicenseDateExpired ? (
             <Text fontSize="14px" as="span">
               {expiresDate()}
             </Text>
-          )}
+          ) : null}
         </div>
         {alertComponent()}
       </div>
@@ -115,16 +116,19 @@ const TariffTitleContainer = ({
   );
 };
 
-export default inject(({ currentQuotaStore, currentTariffStatusStore }) => {
-  const { trialDaysLeft, paymentDate, isLicenseDateExpired, isDeveloper } =
-    currentTariffStatusStore;
-  const { isTrial } = currentQuotaStore;
-
-  return {
-    isTrial,
-    trialDaysLeft,
-    paymentDate,
-    isLicenseDateExpired,
-    isDeveloper,
-  };
-})(observer(TariffTitleContainer));
+export default inject(
+  ({ currentQuotaStore, currentTariffStatusStore, settingsStore }) => {
+    const { trialDaysLeft, paymentDate, isLicenseDateExpired, isDeveloper } =
+      currentTariffStatusStore;
+    const { isTrial } = currentQuotaStore;
+    const { logoText } = settingsStore;
+    return {
+      isTrial,
+      trialDaysLeft,
+      paymentDate,
+      isLicenseDateExpired,
+      isDeveloper,
+      logoText,
+    };
+  },
+)(observer(TariffTitleContainer));

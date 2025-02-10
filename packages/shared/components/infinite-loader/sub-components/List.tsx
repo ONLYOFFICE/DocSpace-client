@@ -26,12 +26,13 @@
 
 import React, { useCallback, useEffect, useRef } from "react";
 import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
+import classNames from "classnames";
 
 import { TableSkeleton } from "../../../skeletons/table";
 import { RowsSkeleton } from "../../../skeletons/rows";
 
-import { StyledList } from "../InfiniteLoader.styled";
 import { ListComponentProps } from "../InfiniteLoader.types";
+import styles from "../InfiniteLoader.module.scss";
 
 const ListComponent = ({
   viewAs,
@@ -146,18 +147,26 @@ const ListComponent = ({
     );
   };
 
+  const listClassName = classNames(styles.list, className, {
+    [styles.tile]: viewAs === "tile",
+    [styles.row]: viewAs === "row",
+    [styles.table]: viewAs === "table",
+  });
+
   return (
     <InfiniteLoader
       isRowLoaded={isItemLoaded}
       rowCount={itemCount}
       loadMoreRows={loadMoreItems}
       ref={loaderRef}
+      data-testid="infinite-loader-container-list"
     >
       {({ onRowsRendered, registerChild }) => (
         <WindowScroller scrollElement={scroll}>
           {({ height, isScrolling, onChildScroll, scrollTop }) => {
+            let newHeight = height;
             if (height === undefined && scroll instanceof Element) {
-              height = scroll.getBoundingClientRect().height;
+              newHeight = scroll.getBoundingClientRect().height;
             }
 
             const viewId =
@@ -168,9 +177,9 @@ const ListComponent = ({
               0;
 
             return (
-              <StyledList
+              <List
                 autoHeight
-                height={height}
+                height={newHeight}
                 onRowsRendered={onRowsRendered}
                 ref={(ref: List | null) => {
                   listRef.current = ref;
@@ -179,16 +188,21 @@ const ListComponent = ({
                 rowCount={hasMoreFiles ? children.length + 2 : children.length}
                 rowHeight={itemSize}
                 rowRenderer={viewAs === "table" ? renderTable : renderRow}
-                width={width}
-                className={className}
                 isScrolling={isScrolling}
                 onChildScroll={onChildScroll}
                 scrollTop={scrollTop}
                 overscanRowCount={3}
                 onScroll={onScroll}
                 viewAs={viewAs}
+                width={width}
                 // React virtualized sets "LTR" by default.
-                style={{ direction: "inherit" }}
+                style={
+                  {
+                    direction: "inherit",
+                    "--infinite-loader-table-width": `${width}px`,
+                  } as React.CSSProperties
+                }
+                className={listClassName}
               />
             );
           }}

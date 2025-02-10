@@ -31,17 +31,17 @@ import { useTranslation } from "react-i18next";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
+import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
+import { DeviceType } from "@docspace/shared/enums";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import HideButton from "./sub-components/HideButton";
 import { SPSettingsSection } from "./SPSettings";
 import { ProviderMetadataSection } from "./ProviderMetadata";
 import StyledSsoPage from "./styled-containers/StyledSsoPageContainer";
-import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import ToggleSSO from "./sub-components/ToggleSSO";
 import SSOLoader from "./sub-components/ssoLoader";
 
 import MobileView from "./MobileView";
-import { DeviceType } from "@docspace/shared/enums";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const SERVICE_PROVIDER_SETTINGS = "serviceProviderSettings";
 const SP_METADATA = "spMetadata";
@@ -54,6 +54,7 @@ const SingleSignOn = (props) => {
     isSSOAvailable,
     isInit,
     currentDeviceType,
+    logoText,
   } = props;
   const { t, ready } = useTranslation(["SingleSignOn", "Settings"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
@@ -78,7 +79,7 @@ const SingleSignOn = (props) => {
       </Text>
 
       {isMobileView ? (
-        <MobileView isSSOAvailable={isSSOAvailable} />
+        <MobileView isSSOAvailable={isSSOAvailable} logoText={logoText} />
       ) : (
         <>
           <ToggleSSO />
@@ -86,11 +87,11 @@ const SingleSignOn = (props) => {
           <HideButton
             id="sp-settings-hide-button"
             text={t("ServiceProviderSettings", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
             label={SERVICE_PROVIDER_SETTINGS}
             value={serviceProviderSettings}
-            //isDisabled={!isSSOAvailable}
+            // isDisabled={!isSSOAvailable}
           />
 
           <SPSettingsSection />
@@ -99,11 +100,11 @@ const SingleSignOn = (props) => {
           <HideButton
             id="sp-metadata-hide-button"
             text={t("SpMetadata", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
             label={SP_METADATA}
             value={spMetadata}
-            //isDisabled={!isSSOAvailable}
+            // isDisabled={!isSSOAvailable}
           />
 
           <Box className="sp-metadata">
@@ -115,20 +116,19 @@ const SingleSignOn = (props) => {
   );
 };
 
-export default inject(
-  ({ authStore, settingsStore, ssoStore, currentQuotaStore }) => {
-    const { isSSOAvailable } = currentQuotaStore;
-    const { currentDeviceType } = settingsStore;
+export default inject(({ settingsStore, ssoStore, currentQuotaStore }) => {
+  const { isSSOAvailable } = currentQuotaStore;
+  const { currentDeviceType, logoText } = settingsStore;
 
-    const { init, serviceProviderSettings, spMetadata, isInit } = ssoStore;
+  const { init, serviceProviderSettings, spMetadata, isInit } = ssoStore;
 
-    return {
-      init,
-      serviceProviderSettings,
-      spMetadata,
-      isSSOAvailable,
-      isInit,
-      currentDeviceType,
-    };
-  },
-)(observer(SingleSignOn));
+  return {
+    init,
+    serviceProviderSettings,
+    spMetadata,
+    isSSOAvailable,
+    isInit,
+    currentDeviceType,
+    logoText,
+  };
+})(observer(SingleSignOn));

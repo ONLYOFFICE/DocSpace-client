@@ -25,8 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
-import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -62,13 +61,15 @@ const StyledContainer = styled.div`
     grid-gap: 4px;
 
     .payer-info_description {
+      display: flex;
+      align-items: center;
+
       p {
-        margin-inline-end: 3px;
+        margin-inline-end: 4px;
       }
       div {
         display: inline-block;
         margin: auto 0;
-        height: 14px;
       }
     }
     .payer-info_account-link {
@@ -95,6 +96,7 @@ const PayerInformationContainer = ({
     <HelpButton
       className="payer-tooltip"
       iconName={HelpReactSvgUrl}
+      style={{ height: "15px", margin: "0" }}
       tooltipContent={
         <>
           <Text isBold>{t("Payer")}</Text>
@@ -107,7 +109,7 @@ const PayerInformationContainer = ({
   );
 
   const unknownPayerDescription = () => {
-    const userNotFound = t("UserNotFoundMatchingEmail") + " ";
+    const userNotFound = `${t("UserNotFoundMatchingEmail")} `;
 
     let invalidEmailDescription = user.isOwner
       ? t("InvalidEmailWithActiveSubscription", {
@@ -138,7 +140,7 @@ const PayerInformationContainer = ({
         {unknownPayerDescription()}
       </Text>
       <div>
-        {isStripePortalAvailable && (
+        {isStripePortalAvailable ? (
           <ColorTheme
             noSelect
             fontWeight={600}
@@ -150,45 +152,41 @@ const PayerInformationContainer = ({
           >
             {t("ChooseNewPayer")}
           </ColorTheme>
-        )}
+        ) : null}
       </div>
     </div>
   );
 
-  const payerInformation = (
-    <>
-      {isStripePortalAvailable ? (
-        <ColorTheme
-          noSelect
-          fontWeight={600}
-          href={accountLink}
-          className="payer-info_account-link"
-          tag="a"
-          themeId={ThemeId.Link}
-          target="_blank"
-        >
-          {t("StripeCustomerPortal")}
-        </ColorTheme>
-      ) : (
-        <ColorTheme
-          fontWeight={600}
-          href={`mailto:${email}`}
-          tag="a"
-          themeId={ThemeId.Link}
-        >
-          {email}
-        </ColorTheme>
-      )}
-    </>
+  const payerInformation = isStripePortalAvailable ? (
+    <ColorTheme
+      noSelect
+      fontWeight={600}
+      href={accountLink}
+      className="payer-info_account-link"
+      tag="a"
+      themeId={ThemeId.Link}
+      target="_blank"
+    >
+      {t("StripeCustomerPortal")}
+    </ColorTheme>
+  ) : (
+    <ColorTheme
+      fontWeight={600}
+      href={`mailto:${email}`}
+      tag="a"
+      themeId={ThemeId.Link}
+    >
+      {email}
+    </ColorTheme>
   );
 
   const payerName = () => {
     let emailUnfoundedUser;
 
-    if (email) emailUnfoundedUser = "«" + email + "»";
+    if (email) emailUnfoundedUser = `«${email}»`;
 
     return (
-      <Text as="span" fontWeight={600} noSelect fontSize={"14px"}>
+      <Text as="span" fontWeight={600} noSelect fontSize="14px">
         {payerInfo ? (
           payerInfo.displayName
         ) : (
@@ -198,7 +196,7 @@ const PayerInformationContainer = ({
               as="span"
               color={theme.client.settings.payment.warningColor}
               fontWeight={600}
-              fontSize={"14px"}
+              fontSize="14px"
             >
               {{ email: emailUnfoundedUser }}
             </Text>
@@ -217,7 +215,7 @@ const PayerInformationContainer = ({
     <StyledContainer style={style}>
       <div className="payer-info_avatar">
         <Avatar
-          size={"base"}
+          size="base"
           {...avatarUrl}
           isDefaultSource
           userName={payerInfo?.displayName}
@@ -229,7 +227,7 @@ const PayerInformationContainer = ({
           {payerName()}
 
           <Text as="span" className="payer-info">
-            {" (" + t("Payer") + ") "}
+            {` (${t("Payer")}) `}
           </Text>
 
           {renderTooltip}

@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import axios, { AxiosRequestConfig } from "axios";
 import moment from "moment";
 import {
@@ -64,6 +67,7 @@ import {
   TTirdParties,
   TUploadOperation,
   TConnectingStorages,
+  TIndexItems,
 } from "./types";
 
 export async function openEdit(
@@ -151,12 +155,13 @@ export async function getFolderPath(folderId: number) {
 }
 
 export async function getFolder(
-  folderId: string | number,
+  folderIdParam: string | number,
   filter: FilesFilter,
   signal?: AbortSignal,
   share?: string,
 ) {
-  let params = folderId;
+  let params = folderIdParam;
+  let folderId = folderIdParam;
 
   if (folderId && typeof folderId === "string") {
     folderId = encodeURIComponent(folderId.replace(/\\\\/g, "\\"));
@@ -830,7 +835,7 @@ export async function convertFile(
     method: "put",
     url: `/files/file/${fileId}/checkconversion`,
     data,
-  })) as { result: { webUrl: string } }[];
+  })) as { result: { webUrl: string; title: string } }[];
 
   return res;
 }
@@ -1054,7 +1059,10 @@ export function saveSettingsThirdParty(
 
 // TODO: Need update res type
 export function getSettingsThirdParty() {
-  return request({ method: "get", url: "files/thirdparty/backup" });
+  return request({
+    method: "get",
+    url: "files/thirdparty/backup",
+  });
 }
 
 export function deleteThirdParty(providerId: string) {
@@ -1514,16 +1522,11 @@ export async function startFilling(fileId: string | number): Promise<void> {
   await request(options);
 }
 
-export async function changeIndex(
-  id: number,
-  order: number,
-  isFolder: boolean,
-) {
-  const url = isFolder ? `/files/folder/${id}/order` : `/files/${id}/order`;
+export async function changeIndex(items: TIndexItems[]) {
   return request({
     method: "put",
-    url,
-    data: { order },
+    url: "files/order",
+    data: { items },
   });
 }
 

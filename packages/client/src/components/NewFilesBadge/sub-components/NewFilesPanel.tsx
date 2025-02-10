@@ -40,7 +40,9 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { Nullable } from "@docspace/shared/types";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
+import { ButtonKeys } from "@docspace/shared/enums";
 
+import { Backdrop } from "@docspace/shared/components/backdrop";
 import {
   NewFilesPanelInjectStore,
   NewFilesPanelProps,
@@ -73,7 +75,7 @@ export const NewFilesPanelComponent = ({
 
   const isRooms = folderId === "rooms";
 
-  const markAsReadAction = async () => {
+  const markAsReadAction = React.useCallback(async () => {
     if (isMarkAsReadRunning) return;
 
     setIsMarkAsReadRunning(true);
@@ -94,7 +96,7 @@ export const NewFilesPanelComponent = ({
     setIsMarkAsReadRunning(false);
 
     onClose();
-  };
+  }, [folderId, isMarkAsReadRunning, isRooms, data, markAsRead, onClose]);
 
   React.useEffect(() => {
     return () => {
@@ -141,6 +143,24 @@ export const NewFilesPanelComponent = ({
     getData();
   }, [folderId, isRooms, onClose, setIsLoading]);
 
+  React.useEffect(() => {
+    const onKeyUp = (e: KeyboardEvent) => {
+      if (e.key === ButtonKeys.esc) {
+        return onClose();
+      }
+
+      if (e.key === ButtonKeys.enter) {
+        return markAsReadAction();
+      }
+    };
+
+    window.addEventListener("keyup", onKeyUp);
+
+    return () => {
+      window.removeEventListener("keyup", onKeyUp);
+    };
+  }, [markAsReadAction, onClose]);
+
   const isMobileDevice = !isDesktop();
 
   const markAsReadButton = (
@@ -175,10 +195,13 @@ export const NewFilesPanelComponent = ({
   );
 
   const panel = (
-    <StyledPanel className="new-files-panel" position={position}>
-      <Scrollbar>{content}</Scrollbar>
-      {markAsReadButton}
-    </StyledPanel>
+    <>
+      <StyledPanel className="new-files-panel" position={position}>
+        <Scrollbar>{content}</Scrollbar>
+        {markAsReadButton}
+      </StyledPanel>
+      {!isMobile() ? <Backdrop visible withoutBackground withoutBlur /> : null}
+    </>
   );
 
   const mobilePanel = (

@@ -311,9 +311,7 @@ const QuotasBar = ({
       onLoad={onLoad}
       onAction={onCloseAction}
     />
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 export default withTranslation(["MainBar"])(QuotasBar);

@@ -228,10 +228,12 @@ export type EditorProps = {
   doc?: string;
   documentserverUrl: string;
   fileInfo?: TFile;
+  sdkConfig?: TFrameConfig | null;
   isSharingAccess?: boolean;
   errorMessage?: string;
   isSkipError?: boolean;
   filesSettings?: TFilesSettings;
+  organizationName?: string;
 
   onDownloadAs?: (obj: object) => void;
   onSDKRequestSharingSettings?: () => void;
@@ -297,6 +299,7 @@ export interface SelectFolderDialogProps {
   fileInfo: TFile;
   filesSettings: TFilesSettings;
   fileSaveAsExtension?: string;
+  organizationName: string;
 }
 
 export interface SelectFileDialogProps {
@@ -351,7 +354,8 @@ export interface UseEventsProps {
   openOnNewPage: boolean;
   t: TTranslation;
 
-  frameConfig?: TFrameConfig | null;
+  sdkConfig?: TFrameConfig | null;
+  organizationName: string;
 }
 
 export interface UseInitProps {
@@ -363,6 +367,7 @@ export interface UseInitProps {
 
   setDocTitle: (value: string) => void;
   documentReady: boolean;
+  organizationName: string;
 }
 
 export type THistoryData =

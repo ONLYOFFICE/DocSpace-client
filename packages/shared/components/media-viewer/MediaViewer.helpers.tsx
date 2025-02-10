@@ -26,8 +26,6 @@
 
 import React from "react";
 
-import type { TFile } from "@docspace/shared/api/files/types";
-
 import MediaZoomInIcon from "PUBLIC_DIR/images/media.zoomin.react.svg";
 import MediaZoomOutIcon from "PUBLIC_DIR/images/media.zoomout.react.svg";
 import MediaRotateLeftIcon from "PUBLIC_DIR/images/media.rotateleft.react.svg";
@@ -47,6 +45,8 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import DuplicateReactSvgUrl from "PUBLIC_DIR/images/duplicate.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
+
+import type { TFile } from "../../api/files/types";
 
 import { ToolbarActionType } from "./MediaViewer.enums";
 import type { ContextFunctions, TranslationType } from "./MediaViewer.types";

@@ -26,11 +26,12 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import moment from "moment";
+import classNames from "classnames";
 
 import { InputSize, InputType, TextInput } from "../text-input";
 
 import { TimePickerProps } from "./TimePicker.types";
-import TimeInput from "./TimePicker.styled";
+import styles from "./TimePicker.module.scss";
 
 const TimePicker = ({
   initialTime,
@@ -187,12 +188,16 @@ const TimePicker = ({
     e.preventDefault();
 
   return (
-    <TimeInput
+    <div
       onClick={focusHoursInput}
-      className={className}
-      hasError={hasError}
-      isFocused={isInputFocused}
+      className={classNames(styles.timeInput, className, {
+        [styles.hasError]: hasError,
+        [styles.isFocused]: isInputFocused,
+      })}
       ref={forwardedRef}
+      data-testid="time-picker"
+      role="group"
+      aria-label="Time picker"
     >
       <TextInput
         className={`${classNameInput}-hours-input`}
@@ -208,6 +213,8 @@ const TimePicker = ({
         autoComplete="off"
         inputMode="numeric"
         size={InputSize.base}
+        data-test-id="hours-input"
+        aria-label="Hours"
       />
       :
       <TextInput
@@ -224,8 +231,10 @@ const TimePicker = ({
         autoComplete="off"
         inputMode="numeric"
         size={InputSize.base}
+        data-test-id="minutes-input"
+        aria-label="Minutes"
       />
-    </TimeInput>
+    </div>
   );
 };
 

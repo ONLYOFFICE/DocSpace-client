@@ -108,7 +108,7 @@ const MobileCategoryWrapper = (props) => {
         >
           {title}
         </Link>
-        {withPaidBadge && !isManagement() && (
+        {withPaidBadge && !isManagement() ? (
           <Badge
             backgroundColor={
               theme.isBase
@@ -116,11 +116,11 @@ const MobileCategoryWrapper = (props) => {
                 : globalColors.favoriteStatusDark
             }
             label={badgeLabel}
-            isPaidBadge={true}
+            isPaidBadge
             className="paid-badge"
             fontWeight="700"
           />
-        )}
+        ) : null}
         <StyledArrowRightIcon className="settings_unavailable" size="small" />
       </div>
       <Text className="category-item-description">{subtitle}</Text>

@@ -26,7 +26,7 @@
 
 import type { PlacesType } from "react-tooltip";
 
-interface InfoBadgeProps {
+type InfoBadgeProps = {
   /** badge Label */
   label: string;
   /** Global tooltip placement */
@@ -37,6 +37,6 @@ interface InfoBadgeProps {
   tooltipDescription: React.ReactNode;
   /** Space between the tooltip element and anchor element (arrow not included in calculation) */
   offset: number;
-}
+};
 
 export default InfoBadgeProps;

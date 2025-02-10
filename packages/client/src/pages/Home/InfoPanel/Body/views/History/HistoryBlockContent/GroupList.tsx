@@ -99,7 +99,9 @@ const HistoryGroupList = ({
           <StyledHistoryLink
             key={group.id}
             style={
-              withWrapping && { display: "inline", wordBreak: "break-all" }
+              withWrapping
+                ? { display: "inline", wordBreak: "break-all" }
+                : null
             }
           >
             {isVisitor || isCollaborator ? (
@@ -110,19 +112,21 @@ const HistoryGroupList = ({
               <Link
                 className="text link"
                 onClick={() => onGroupClick(group.id)}
-                style={withWrapping && { display: "inline", textWrap: "wrap" }}
+                style={
+                  withWrapping ? { display: "inline", textWrap: "wrap" } : null
+                }
               >
                 {decode(group.name)}
               </Link>
             )}
 
-            {withComma && ","}
-            {feed.related.length > 0 && <div className="space" />}
+            {withComma ? "," : null}
+            {feed.related.length > 0 ? <div className="space" /> : null}
           </StyledHistoryLink>
         );
       })}
 
-      {!isExpanded && (
+      {!isExpanded ? (
         <StyledHistoryBlockExpandLink
           className="user-list-expand-link"
           onClick={onExpand}
@@ -135,7 +139,7 @@ const HistoryGroupList = ({
             components={{ 1: <strong /> }}
           />
         </StyledHistoryBlockExpandLink>
-      )}
+      ) : null}
     </>
   );
 };

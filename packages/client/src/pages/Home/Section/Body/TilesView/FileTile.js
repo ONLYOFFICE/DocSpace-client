@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 // import { Context } from "@docspace/shared/utils";
 
 import Tile from "./sub-components/Tile";
@@ -62,7 +62,7 @@ const FileTile = (props) => {
     getIcon,
     onFilesClick,
     onDoubleClick,
-    onMouseClick,
+
     isActive,
     isEdit,
     inProgress,
@@ -82,10 +82,12 @@ const FileTile = (props) => {
     withCtrlSelect,
     withShiftSelect,
     isHighlight,
-    thumbnails1280x720,
     onDragOver,
     onDragLeave,
     badgeUrl,
+    icon,
+    isDownload,
+    selectableRef,
   } = props;
 
   // const { sectionWidth } = useContext(Context);
@@ -111,7 +113,7 @@ const FileTile = (props) => {
       fileExst={item.fileExst}
       isRoom={item.isRoom}
       showDefault={
-        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+        !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
       }
       title={item.title}
       logo={item.logo}
@@ -132,14 +134,14 @@ const FileTile = (props) => {
   };
 
   return (
-    <div ref={props.selectableRef} id={id}>
+    <div ref={selectableRef} id={id}>
       <StyledDragAndDrop
         data-title={item.title}
         value={value}
         className={`files-item ${className} ${activeClass} ${item.id}_${item.fileExst}`}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
-        dragging={dragging && isDragging}
+        dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
         contextOptions={item.contextOptions}
@@ -160,7 +162,7 @@ const FileTile = (props) => {
           tileContextClick={fileContextClick}
           isPrivacy={isPrivacy}
           isDragging={dragging}
-          dragging={dragging && isDragging}
+          dragging={dragging ? isDragging : null}
           // onClick={onMouseClick}
           thumbnailClick={onFilesClick}
           onDoubleClick={onDoubleClick}
@@ -182,7 +184,8 @@ const FileTile = (props) => {
           withCtrlSelect={withCtrlSelect}
           withShiftSelect={withShiftSelect}
           isHighlight={isHighlight}
-          thumbnails1280x720={thumbnails1280x720}
+          iconProgress={icon}
+          isDownload={isDownload}
         >
           <FilesTileContent
             item={item}
@@ -197,10 +200,14 @@ const FileTile = (props) => {
 };
 
 export default inject(
-  ({ filesSettingsStore, filesStore, treeFoldersStore }, { item }) => {
-    const { getIcon, thumbnails1280x720 } = filesSettingsStore;
+  (
+    { filesSettingsStore, filesStore, treeFoldersStore, uploadDataStore },
+    { item },
+  ) => {
+    const { getIcon } = filesSettingsStore;
     const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
       filesStore;
+    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
 
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
@@ -216,7 +223,8 @@ export default inject(
       withCtrlSelect,
       withShiftSelect,
       isHighlight,
-      thumbnails1280x720,
+      icon,
+      isDownload,
     };
   },
 )(

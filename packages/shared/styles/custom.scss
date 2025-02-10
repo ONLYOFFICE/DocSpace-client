@@ -27,7 +27,8 @@
 // Override default variables before the import
 $font-family-base: "Open Sans", sans-serif;
 
-@import url(../../../public/css/fonts.css);
+@import "../../../public/css/fonts.css";
+@import "./variables/_colors.scss";
 
 html,
 body {

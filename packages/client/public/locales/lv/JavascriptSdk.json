@@ -81,6 +81,7 @@
   "MobileOnly": "tikai mobilās ierīces",
   "Page": "Displeja lapa (numurs)",
   "PortalDescription": "Ieguliet visu {{productName}}, lai ļautu lietotājiem mijiedarboties ar visām telpām, failiem un iestatījumiem.",
+  "PublicRoomPresetInfo": "Ievietojiet publisku istabu, lai lietotāji bez reģistrācijas varētu skatīt, rediģēt, komentēt vai pārskatīt visus tajā saglabātos dokumentus",
   "RightPanelCollapsed": "Labais panelis sakļauts",
   "RoomFilter": "Telpas filtrs",
   "RoomOrFolder": "Telpa vai mape",

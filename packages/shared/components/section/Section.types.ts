@@ -26,20 +26,19 @@
 
 import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
-
 import { FloatingButtonIcons } from "../floating-button";
 import { ContextMenuModel } from "../context-menu";
 
-export interface SubInfoPanelHeaderProps {
+export type SubInfoPanelHeaderProps = {
   children: React.JSX.Element | null;
-}
+};
 
-export interface SubInfoPanelBodyProps {
+export type SubInfoPanelBodyProps = {
   children: React.JSX.Element | null;
   isInfoPanelScrollLocked?: boolean;
-}
+};
 
-export interface InfoPanelProps {
+export type InfoPanelProps = {
   children: React.ReactNode;
   isVisible?: boolean;
   isMobileHidden?: boolean;
@@ -48,15 +47,15 @@ export interface InfoPanelProps {
   anotherDialogOpen?: boolean;
   viewAs?: TViewAs;
   currentDeviceType?: DeviceType;
-}
+};
 
-export interface SectionBodyContentProps {
+export type SectionBodyContentProps = {
   children: React.ReactNode;
-}
+};
 
 export type TOnDrop = (acceptedFiles: File[]) => void;
 
-export interface SectionBodyProps {
+export type SectionBodyProps = {
   withScroll: boolean;
   autoFocus: boolean;
   onDrop?: TOnDrop;
@@ -66,12 +65,13 @@ export interface SectionBodyProps {
   settingsStudio: boolean;
   isFormGallery?: boolean;
   isDesktop?: boolean;
-  isIndexEditingMode?: boolean;
   currentDeviceType?: DeviceType;
   getContextModel?: () => ContextMenuModel[];
-}
+  pathname?: string;
+  isIndexEditingMode?: boolean;
+};
 
-export interface SectionContainerProps {
+export type SectionContainerProps = {
   showTwoProgress?: boolean;
   isSectionHeaderAvailable: boolean;
   isInfoPanelVisible?: boolean;
@@ -79,75 +79,68 @@ export interface SectionContainerProps {
   children: React.ReactNode;
   withBodyScroll: boolean;
   currentDeviceType?: DeviceType;
-}
+};
 
-export interface SectionFilterProps {
+export type SectionFilterProps = {
   children: React.ReactNode;
   className?: string;
   viewAs?: TViewAs;
-}
+};
 
-export interface SectionFooterProps {
+export type SectionFooterProps = {
   children: React.ReactNode;
-}
+};
 
-export interface SectionHeaderProps {
+export type SectionHeaderProps = {
   className: string;
   isFormGallery?: boolean;
   children: React.ReactNode;
-}
+};
 
-export interface SectionWarningProps {
+export type SectionWarningProps = {
   children: React.ReactNode;
-}
+};
 
-export interface SectionPagingProps {
+export type SectionSubmenuProps = {
   children: React.ReactNode;
-}
+};
 
-export interface SectionSubmenuProps {
-  children: React.ReactNode;
-}
+export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
+  Omit<SectionSubmenuProps, "children"> &
+  Omit<SubInfoPanelBodyProps, "children"> &
+  Omit<SectionWarningProps, "children"> &
+  Omit<SectionFooterProps, "children"> &
+  Omit<SectionFilterProps, "children" | "className"> &
+  Omit<InfoPanelProps, "children" | "setIsVisible" | "isVisible"> &
+  Omit<SectionHeaderProps, "children" | "className"> &
+  Omit<SectionContainerProps, "children" | "isSectionHeaderAvailable"> &
+  Omit<
+    SectionBodyProps,
+    "children" | "isSectionHeaderAvailable" | "autoFocus" | "withScroll"
+  > & {
+    children: React.JSX.Element[];
+    showPrimaryProgressBar?: boolean;
+    primaryProgressBarValue?: number;
+    showPrimaryButtonAlert?: boolean;
+    progressBarDropDownContent?: React.ReactNode;
+    primaryProgressBarIcon?: FloatingButtonIcons;
+    showSecondaryProgressBar?: boolean;
+    secondaryProgressBarValue?: number;
+    secondaryProgressBarIcon?: FloatingButtonIcons;
+    showSecondaryButtonAlert?: boolean;
+    onOpenUploadPanel?: () => void;
+    isTabletView?: boolean;
+    isHeaderVisible?: boolean;
+    isInfoPanelAvailable?: boolean;
+    isEmptyPage?: boolean;
+    maintenanceExist?: boolean;
+    snackbarExist?: boolean;
+    showText?: boolean;
+    clearUploadedFilesHistory?: () => void;
+    isTrashFolder?: boolean;
+    setIsInfoPanelVisible?: (value: boolean) => void;
+  };
 
-export interface SectionProps {
-  children: React.JSX.Element[];
-  withBodyScroll?: boolean;
-  showPrimaryProgressBar?: boolean;
-  primaryProgressBarValue?: number;
-  showPrimaryButtonAlert?: boolean;
-  progressBarDropDownContent?: React.ReactNode;
-  primaryProgressBarIcon?: FloatingButtonIcons;
-  showSecondaryProgressBar?: boolean;
-  secondaryProgressBarValue?: number;
-  secondaryProgressBarIcon?: FloatingButtonIcons;
-  showSecondaryButtonAlert?: boolean;
-  onDrop?: TOnDrop;
-  uploadFiles?: boolean;
-  viewAs?: TViewAs;
-  onOpenUploadPanel?: () => void;
-  isTabletView?: boolean;
-  isHeaderVisible?: boolean;
-  isInfoPanelAvailable?: boolean;
-  settingsStudio?: boolean;
-  isEmptyPage?: boolean;
-  maintenanceExist?: boolean;
-  snackbarExist?: boolean;
-  showText?: boolean;
-  clearUploadedFilesHistory?: () => void;
-  isInfoPanelScrollLocked?: boolean;
-  isTrashFolder?: boolean;
-  isFormGallery?: boolean;
-  currentDeviceType?: DeviceType;
-  isInfoPanelVisible?: boolean;
-  setIsInfoPanelVisible?: (value: boolean) => void;
-  isMobileHidden?: boolean;
-  canDisplay?: boolean;
-  anotherDialogOpen?: boolean;
-  isDesktop?: boolean;
+export type SectionContextMenuProps = {
   getContextModel?: () => ContextMenuModel[];
-  isIndexEditingMode?: boolean;
-}
-
-export interface SectionContextMenuProps {
-  getContextModel: () => ContextMenuModel[];
-}
+};

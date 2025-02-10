@@ -75,7 +75,6 @@ const FilesMediaViewer = (props) => {
     getIcon,
     onDuplicate,
     extsImagePreviewed,
-    extsMediaPreviewed,
     setIsPreview,
     isPreview,
     nextMedia,
@@ -90,7 +89,6 @@ const FilesMediaViewer = (props) => {
     setActiveFiles,
     pluginContextMenuItems,
     isOpenMediaViewer,
-    someDialogIsOpen,
     currentDeviceType,
     changeUrl,
     fetchPublicRoom,
@@ -101,21 +99,6 @@ const FilesMediaViewer = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-
-  useEffect(() => {
-    if (visible) {
-      resetSelection();
-    }
-  }, [visible]);
-
-  useEffect(() => {
-    const previewId = queryString.parse(location.search).preview;
-
-    if (previewId) {
-      removeQuery("preview");
-      onMediaFileClick(+previewId);
-    }
-  }, [removeQuery, onMediaFileClick]);
 
   useEffect(() => {
     if (previewFile) {
@@ -132,12 +115,6 @@ const FilesMediaViewer = (props) => {
     }
   }, [previewFile]);
 
-  useEffect(() => {
-    window.addEventListener("popstate", onButtonBackHandler);
-
-    return () => window.removeEventListener("popstate", onButtonBackHandler);
-  }, [onButtonBackHandler]);
-
   const onButtonBackHandler = () => {
     const hash = window.location.hash;
     const id = hash.slice(9);
@@ -147,6 +124,12 @@ const FilesMediaViewer = (props) => {
     }
     setMediaViewerData({ visible: true, id });
   };
+
+  useEffect(() => {
+    window.addEventListener("popstate", onButtonBackHandler);
+
+    return () => window.removeEventListener("popstate", onButtonBackHandler);
+  }, [onButtonBackHandler]);
 
   const onChangeUrl = useCallback(
     (id) => {
@@ -160,25 +143,40 @@ const FilesMediaViewer = (props) => {
     setSelection([]);
   };
 
+  useEffect(() => {
+    if (visible) {
+      resetSelection();
+    }
+  }, [visible]);
+
   const removeQuery = (queryName) => {
     const queryParams = new URLSearchParams(location.search);
 
     if (queryParams.has(queryName)) {
       queryParams.delete(queryName);
-      navigate(_, {
+      window.location.replace({
         search: queryParams.toString(),
       });
     }
   };
 
   const onMediaFileClick = (id) => {
-    //const itemId = typeof id !== "object" ? id : this.props.selection[0].id; TODO:
+    // const itemId = typeof id !== "object" ? id : this.props.selection[0].id; TODO:
 
     if (typeof id !== "object") {
       const item = { visible: true, id };
       setMediaViewerData(item);
     }
   };
+
+  useEffect(() => {
+    const previewId = queryString.parse(location.search).preview;
+
+    if (previewId) {
+      removeQuery("preview");
+      onMediaFileClick(+previewId);
+    }
+  }, [removeQuery, onMediaFileClick]);
 
   const onDeleteMediaFile = useCallback(
     (id) => {
@@ -189,7 +187,7 @@ const FilesMediaViewer = (props) => {
       };
 
       if (files.length > 0) {
-        let file = files.find((file) => file.id === id);
+        const file = files.find((f) => f.id === id);
         if (file) {
           // try to fix with one check later (see deleteAction)
           const isActiveFile = activeFiles.find((elem) => elem.id === file.id);
@@ -217,60 +215,52 @@ const FilesMediaViewer = (props) => {
   const onDownloadMediaFile = useCallback(
     (id) => {
       if (playlist.length > 0) {
-        let viewUrlFile = playlist.find((file) => file.fileId === id).src;
+        const viewUrlFile = playlist.find((file) => file.fileId === id).src;
         return openUrl(viewUrlFile, UrlActionType.Download);
       }
     },
     [playlist],
   );
 
-  const onMediaViewerClose = useCallback(
-    (e) => {
-      if (isPreview) {
-        setIsPreview(false);
-        resetUrl();
-        if (previewFile) {
-          setScrollToItem({ id: previewFile.id, type: "file" });
-          setBufferSelection(previewFile);
-        }
-        setToPreviewFile(null);
+  const onMediaViewerClose = useCallback(() => {
+    if (isPreview) {
+      setIsPreview(false);
+      resetUrl();
+      if (previewFile) {
+        setScrollToItem({ id: previewFile.id, type: "file" });
+        setBufferSelection(previewFile);
       }
+      setToPreviewFile(null);
+    }
 
-      setMediaViewerData({ visible: false, id: null });
-      const url = getFirstUrl();
+    setMediaViewerData({ visible: false, id: null });
+    const url = getFirstUrl();
 
-      if (!url) {
-        return;
-      }
+    if (!url) {
+      return;
+    }
 
-      const targetFile = files.find((item) => item.id === currentMediaFileId);
-      if (targetFile) {
-        setBufferSelection(targetFile);
-        setScrollToItem({ id: targetFile.id, type: "file" });
-      }
+    const targetFile = files.find((item) => item.id === currentMediaFileId);
+    if (targetFile) {
+      setBufferSelection(targetFile);
+      setScrollToItem({ id: targetFile.id, type: "file" });
+    }
 
-      navigate(url, {
-        state: {
-          ...location.state,
-          disableScrollToTop: true,
-        },
-      });
-    },
-    [
-      files,
-      isPreview,
-      previewFile,
+    window.history.pushState("", "", url);
+  }, [
+    files,
+    isPreview,
+    previewFile,
 
-      resetUrl,
-      navigate,
-      getFirstUrl,
-      setIsPreview,
-      setScrollToItem,
-      setToPreviewFile,
-      setMediaViewerData,
-      setBufferSelection,
-    ],
-  );
+    resetUrl,
+    navigate,
+    getFirstUrl,
+    setIsPreview,
+    setScrollToItem,
+    setToPreviewFile,
+    setMediaViewerData,
+    setBufferSelection,
+  ]);
   useEffect(() => {
     if (playlist.length === 0 && isOpenMediaViewer) onMediaViewerClose();
   }, [isOpenMediaViewer, onMediaViewerClose, playlist.length]);

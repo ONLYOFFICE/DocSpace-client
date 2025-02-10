@@ -54,11 +54,11 @@ const SubmitResetButtons = (props) => {
         className="save-cancel-buttons"
         onSaveClick={() => saveSsoSettings(t)}
         onCancelClick={isSsoEnabled ? openResetModal : resetForm}
-        showReminder={true}
+        showReminder
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Settings:DefaultSettings")}
-        displaySettings={true}
-        hasScroll={true}
+        displaySettings
+        hasScroll
         isSaving={isSubmitLoading}
         saveButtonDisabled={isDisabledSaveButton}
         disableRestoreToDefault={
@@ -67,13 +67,13 @@ const SubmitResetButtons = (props) => {
         additionalClassSaveButton="save-button"
         additionalClassCancelButton="restore-button"
       />
-      {confirmationResetModal && (
+      {confirmationResetModal ? (
         <ResetConfirmationModal
           closeResetModal={closeResetModal}
           confirmReset={confirmReset}
           confirmationResetModal={confirmationResetModal}
         />
-      )}
+      ) : null}
     </>
   );
 };

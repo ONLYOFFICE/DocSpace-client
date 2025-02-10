@@ -384,29 +384,39 @@ const PeopleSelector = ({
     ],
   );
 
+  const resetSelectorList = useCallback(() => {
+    setItemsList([]);
+    setHasNextPage(true);
+    setTotal(-1);
+    totalRef.current = 0;
+    isFirstLoadRef.current = true;
+  }, []);
+
   const onSearch = useCallback(
     (value: string, callback?: VoidFunction) => {
-      isFirstLoadRef.current = true;
       afterSearch.current = true;
-
       searchTab.current = activeTabId;
+      resetSelectorList();
 
       setSearchValue(() => {
         return value;
       });
       callback?.();
     },
-    [activeTabId],
+    [activeTabId, resetSelectorList],
   );
 
-  const onClearSearch = useCallback((callback?: VoidFunction) => {
-    isFirstLoadRef.current = true;
-    afterSearch.current = true;
-    setSearchValue(() => {
-      return "";
-    });
-    callback?.();
-  }, []);
+  const onClearSearch = useCallback(
+    (callback?: VoidFunction) => {
+      afterSearch.current = true;
+      resetSelectorList();
+      setSearchValue(() => {
+        return "";
+      });
+      callback?.();
+    },
+    [resetSelectorList],
+  );
 
   const emptyScreenImage = theme.isBase
     ? EmptyScreenPersonsSvgUrl
@@ -478,9 +488,9 @@ const PeopleSelector = ({
           >
             {label}
           </Text>
-          {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+          {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
         </Box>
-        {!isGroup && (
+        {!isGroup ? (
           <div style={{ display: "flex" }}>
             <Text
               className="label"
@@ -494,7 +504,7 @@ const PeopleSelector = ({
               {`${userType} | ${email}`}
             </Text>
           </div>
-        )}
+        ) : null}
       </div>
     );
   };
@@ -503,9 +513,9 @@ const PeopleSelector = ({
     (tab: number | string) => {
       setActiveTabId(`${tab}`);
       onSearch("");
-      isFirstLoadRef.current = true;
+      resetSelectorList();
     },
-    [onSearch],
+    [onSearch, resetSelectorList],
   );
 
   const withTabsProps: TSelectorTabs =

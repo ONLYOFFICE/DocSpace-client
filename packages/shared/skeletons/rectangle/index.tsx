@@ -59,6 +59,7 @@ const RectangleSkeleton = ({
     speed={speed}
     animate={animate}
     {...rest}
+    data-testid="rectangle-skeleton"
   >
     <rect
       x={x}

@@ -32,12 +32,15 @@ import {
 } from "@docspace/shared/constants";
 
 import { toastr } from "@docspace/shared/components/toast";
-import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 
 import resizeImage from "resize-image";
+import api from "@docspace/shared/api";
+import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
 
 class AvatarEditorDialogStore {
   uploadedFile = null;
+
   image = {
     uploadedFile: this.uploadedFile,
     x: 0.5,
@@ -69,16 +72,14 @@ class AvatarEditorDialogStore {
 
   onChangeFile = async (e, t) => {
     const uploadedFile = await this.uploadFile(t, e);
-    this.setImage({ ...this.image, uploadedFile: uploadedFile });
+    this.setImage({ ...this.image, uploadedFile });
   };
 
   getUploadedLogoData = async () => {
-    const { uploadRoomLogo } = this.filesStore;
-
     const uploadLogoData = new FormData();
     uploadLogoData.append(0, this.uploadedFile);
 
-    const responseData = await uploadRoomLogo(uploadLogoData);
+    const responseData = await api.rooms.uploadRoomLogo(uploadLogoData);
     const url = URL.createObjectURL(this.uploadedFile);
     const img = new Image();
 
@@ -97,12 +98,7 @@ class AvatarEditorDialogStore {
 
     if (!this.uploadedFile) return;
 
-    const {
-      addLogoToRoom,
-      calculateRoomLogoParams,
-      setActiveFolders,
-      updateRoom,
-    } = this.filesStore;
+    const { setActiveFolders, updateRoom } = this.filesStore;
 
     const data = await this.getUploadedLogoData();
     const { responseData, url, img } = data;
@@ -112,7 +108,7 @@ class AvatarEditorDialogStore {
         const { x, y, zoom } = icon;
 
         try {
-          room = await addLogoToRoom(roomId, {
+          room = await api.rooms.addLogoToRoom(roomId, {
             tmpFile: responseData.data,
             ...calculateRoomLogoParams(img, x, y, zoom),
           });
@@ -140,7 +136,7 @@ class AvatarEditorDialogStore {
     const uploadedFile = await this.uploadFileToImageEditor(t, file[0]);
 
     this.setUploadedFile(uploadedFile);
-    this.setImage({ ...this.image, uploadedFile: uploadedFile });
+    this.setImage({ ...this.image, uploadedFile });
     this.setAvatarEditorDialogVisible(true);
 
     return uploadedFile;
@@ -176,10 +172,11 @@ class AvatarEditorDialogStore {
       throw new Error("recursion depth exceeded");
     }
 
-    return new Promise((resolve) => {
-      return resolve(file);
-    }).then(() =>
-      this.resizeRecursiveAsync(img, canvas, compressionRatio + 1, depth + 1),
+    return this.resizeRecursiveAsync(
+      img,
+      canvas,
+      compressionRatio + 1,
+      depth + 1,
     );
   };
 

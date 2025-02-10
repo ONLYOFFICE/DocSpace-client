@@ -74,6 +74,7 @@ const FilesSelectorWrapper = ({
   withSearch = true,
   withBreadCrumbs = true,
   withSubtitle = true,
+  withPadding,
 
   isMove,
   isCopy,
@@ -139,6 +140,11 @@ const FilesSelectorWrapper = ({
 
   filesSettings,
   headerProps,
+
+  withCreate,
+  folderIsShared,
+  checkCreating,
+  logoText,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -187,15 +193,25 @@ const FilesSelectorWrapper = ({
   const formProps = useMemo(() => {
     let isRoomFormAccessible = true;
 
+    if (isSelect) return;
+
     if (isCopy || isMove)
       isRoomFormAccessible = selection.every(
         (item) => "isPDFForm" in item && item.isPDFForm,
       );
 
+    // for backup
+    if (!selection.length) {
+      isRoomFormAccessible = false;
+    }
+
     const getMessage = () => {
       const several = selection.length > 1;
 
-      const option = { organizationName: t("Common:OrganizationName") };
+      // for backup
+      if (!selection.length) return t("Files:BackupNotAllowedInFormRoom");
+
+      const option = { organizationName: logoText };
 
       if (isCopy)
         return several
@@ -221,7 +237,7 @@ const FilesSelectorWrapper = ({
   const onAccept = async (
     selectedItemId: string | number | undefined,
     folderTitle: string,
-    isPublic: boolean,
+    showMoveToPublicDialog: boolean,
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
@@ -259,7 +275,7 @@ const FilesSelectorWrapper = ({
           },
         };
 
-        if (isPublic) {
+        if (showMoveToPublicDialog) {
           setMoveToPublicRoomVisible(true, operationData);
           return;
         }
@@ -292,7 +308,7 @@ const FilesSelectorWrapper = ({
         toastr.error(t("Common:ErrorEmptyList"));
       }
     } else {
-      if (isRoomBackup && isPublic) {
+      if (isRoomBackup && showMoveToPublicDialog) {
         setBackupToPublicRoomVisible(true, {
           selectedItemId,
           breadCrumbs,
@@ -352,6 +368,7 @@ const FilesSelectorWrapper = ({
       | TRoomSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
   ) => {
     return getIsDisabled(
       isFirstLoad,
@@ -368,6 +385,7 @@ const FilesSelectorWrapper = ({
       !!selectedFileInfo,
       includeFolder,
       isRestore,
+      isDisabledFolder,
     );
   };
 
@@ -390,6 +408,7 @@ const FilesSelectorWrapper = ({
       currentFolderId={isFormRoom && openRootVar ? "" : currentFolderId}
       parentId={parentId}
       rootFolderType={rootFolderType || FolderType.Rooms}
+      folderIsShared={folderIsShared}
       currentDeviceType={currentDeviceType}
       onCancel={onCloseAction}
       onSubmit={onAccept}
@@ -409,6 +428,7 @@ const FilesSelectorWrapper = ({
       cancelButtonLabel={cancelButtonLabel}
       withBreadCrumbs={withBreadCrumbs}
       withSearch={withSearch}
+      withPadding={withPadding}
       descriptionText={
         !withSubtitle || !filterParam || filterParam === "ALL"
           ? ""
@@ -421,10 +441,13 @@ const FilesSelectorWrapper = ({
         isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
       }
       getFilesArchiveError={getFilesArchiveError}
-      withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
+      withCreate={
+        (isMove || isCopy || isRestore || isRestoreAll) ?? withCreate ?? false
+      }
       filesSettings={filesSettings}
       headerProps={headerProps}
       formProps={formProps}
+      checkCreating={checkCreating}
     />
   );
 };
@@ -461,7 +484,12 @@ export default inject(
       isThirdParty,
     }: FilesSelectorProps,
   ) => {
-    const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
+    const {
+      id: selectedId,
+      parentId,
+      rootFolderType,
+      shared,
+    } = selectedFolderStore;
 
     const { setConflictDialogData, checkFileConflicts, setSelectedItems } =
       filesActionsStore;
@@ -485,7 +513,7 @@ export default inject(
 
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, logoText } = settingsStore;
 
     const {
       selection,
@@ -590,6 +618,8 @@ export default inject(
           ? currentFolderIdProp
           : folderId || currentFolderIdProp,
       filesSettings,
+      folderIsShared: shared,
+      logoText,
     };
   },
 )(observer(FilesSelectorWrapper));

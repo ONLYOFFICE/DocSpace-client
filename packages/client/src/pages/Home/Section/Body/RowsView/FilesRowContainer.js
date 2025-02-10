@@ -31,7 +31,7 @@ import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Context, injectDefaultTheme } from "@docspace/shared/utils";
-import { RowContainer } from "@docspace/shared/components/row-container";
+import { RowContainer } from "@docspace/shared/components/rows";
 
 import SimpleFilesRow from "./SimpleFilesRow";
 
@@ -62,7 +62,6 @@ const FilesRowContainer = ({
   filesList,
   viewAs,
   setViewAs,
-  infoPanelVisible,
   filterTotal,
   fetchMoreFiles,
   hasMoreFiles,
@@ -72,6 +71,8 @@ const FilesRowContainer = ({
   currentDeviceType,
   isIndexEditingMode,
   changeIndex,
+  icon,
+  isDownload,
 }) => {
   const { sectionWidth } = useContext(Context);
 
@@ -95,9 +96,13 @@ const FilesRowContainer = ({
         isTrashFolder={isTrashFolder}
         changeIndex={changeIndex}
         isHighlight={
-          highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
+          highlightFile.id == item.id
+            ? highlightFile.isExst === !item.fileExst
+            : null
         }
         isIndexEditingMode={isIndexEditingMode}
+        icon={icon}
+        isDownload={isDownload}
       />
     ));
   }, [
@@ -107,6 +112,8 @@ const FilesRowContainer = ({
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
+    icon,
+    isDownload,
   ]);
 
   return (
@@ -133,6 +140,7 @@ export default inject(
     treeFoldersStore,
     indexingStore,
     filesActionsStore,
+    uploadDataStore,
   }) => {
     const {
       filesList,
@@ -151,6 +159,8 @@ export default inject(
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
+    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
+
     return {
       filesList,
       viewAs,
@@ -165,6 +175,8 @@ export default inject(
       currentDeviceType,
       isIndexEditingMode,
       changeIndex: filesActionsStore.changeIndex,
+      icon,
+      isDownload,
     };
   },
 )(observer(FilesRowContainer));

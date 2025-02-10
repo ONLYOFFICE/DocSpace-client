@@ -80,6 +80,7 @@ type RegistrationFormProps = {
   legalTerms: string;
 
   isStandalone: boolean;
+  organizationName: string;
 };
 
 const RegistrationForm = ({
@@ -114,13 +115,14 @@ const RegistrationForm = ({
   licenseUrl,
   legalTerms,
   isStandalone,
+  organizationName,
 }: RegistrationFormProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
 
   const { linkData } = useContext(ConfirmRouteContext);
 
   const newsletter = t("Newsletter", {
-    organizationName: t("Common:OrganizationName"),
+    organizationName,
   });
 
   const termsConditionsComponent = (
@@ -267,6 +269,7 @@ const RegistrationForm = ({
             isChecked={isChecked}
             isDisabled={isLoading}
             label={newsletter}
+            truncate={false}
           />
         </div>
       )}
@@ -274,6 +277,7 @@ const RegistrationForm = ({
       {termsConditionsComponent}
 
       <Button
+        id="register-singup"
         className="login-button"
         primary
         size={ButtonSize.medium}

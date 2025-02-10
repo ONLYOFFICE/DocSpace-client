@@ -37,44 +37,43 @@ import {
   StyledTriangleDownIcon,
   StyledLoader,
   StyledPlusBadge,
-} from "../Combobox.styled";
+  DescriptiveContainer,
+} from "../ComboBox.styled";
 
 import { Text } from "../../text";
 import { Badge } from "../../badge";
 
-import ComboButtonTheme from "../Combobox.theme";
+import ComboButtonTheme from "../ComboBox.theme";
 
-import { ComboBoxSize } from "../Combobox.enums";
-import type { ComboButtonProps } from "../Combobox.types";
+import { ComboBoxSize } from "../ComboBox.enums";
+import type { TComboButtonProps } from "../ComboBox.types";
 
-const ComboButton = (props: ComboButtonProps) => {
-  const {
-    onClick,
+const ComboButton: React.FC<TComboButtonProps> = ({
+  onClick,
 
-    innerContainer,
+  innerContainer,
 
-    selectedOption,
-    optionsLength = 0,
+  selectedOption,
+  optionsLength = 0,
 
-    comboIcon,
-    fillIcon,
+  comboIcon,
+  fillIcon,
 
-    type,
-    plusBadgeValue,
-    noBorder = false,
-    isDisabled = false,
-    withOptions = true,
-    withAdvancedOptions = false,
-    innerContainerClassName = "innerContainer",
-    isOpen = false,
-    size = ComboBoxSize.content,
-    scaled = false,
-    modernView = false,
-    tabIndex = -1,
-    isLoading = false,
-    displayArrow: displayArrowProp,
-  } = props;
-
+  type,
+  plusBadgeValue,
+  noBorder = false,
+  isDisabled = false,
+  withOptions = true,
+  withAdvancedOptions = false,
+  innerContainerClassName = "innerContainer",
+  isOpen = false,
+  size = ComboBoxSize.content,
+  scaled = false,
+  modernView = false,
+  tabIndex = -1,
+  isLoading = false,
+  displayArrow: displayArrowProp,
+}) => {
   const defaultOption = selectedOption?.default;
   // const isSelected = selectedOption?.key !== 0;
   const displayArrow = withOptions || withAdvancedOptions || displayArrowProp;
@@ -91,7 +90,6 @@ const ComboButton = (props: ComboButtonProps) => {
       onClick={onClick}
       scaled={scaled}
       size={size}
-      //  isSelected={isSelected}
       modernView={modernView}
       className={comboButtonClassName}
       tabIndex={tabIndex}
@@ -100,8 +98,14 @@ const ComboButton = (props: ComboButtonProps) => {
       type={type}
       selectedOption={selectedOption}
       plusBadgeValue={plusBadgeValue}
+      aria-disabled={isDisabled}
+      aria-expanded={isOpen}
+      aria-pressed={isOpen}
+      aria-haspopup="listbox"
+      role="button"
+      data-test-id="combo-button"
     >
-      {innerContainer && (
+      {innerContainer ? (
         <StyledOptionalItem
           className={innerContainerClassName}
           isDisabled={isDisabled}
@@ -111,21 +115,22 @@ const ComboButton = (props: ComboButtonProps) => {
         >
           {innerContainer}
         </StyledOptionalItem>
-      )}
-      {selectedOption && selectedOption.icon && (
+      ) : null}
+      {selectedOption && selectedOption.icon ? (
         <StyledIcon
           className="combo-button_selected-icon-container"
           isDisabled={isDisabled}
           defaultOption={defaultOption}
-          // isSelected={isSelected}
           isLoading={isLoading}
+          data-test-id="combo-button-icon"
         >
           <ReactSVG
             src={selectedOption.icon}
             className={fillIcon ? "combo-button_selected-icon" : ""}
           />
         </StyledIcon>
-      )}
+      ) : null}
+
       {type === "badge" ? (
         <Badge
           label={selectedOption.label}
@@ -134,7 +139,32 @@ const ComboButton = (props: ComboButtonProps) => {
           backgroundColor={selectedOption.backgroundColor}
           border={`2px solid ${selectedOption.border}`}
           compact={!!selectedOption.border}
+          data-test-id="combo-button-badge"
         />
+      ) : type === "descriptive" ? (
+        <DescriptiveContainer data-test-id="combo-button-descriptive">
+          <Text
+            title={selectedOption?.label}
+            as="div"
+            truncate
+            fontWeight={600}
+            className="combo-button-label"
+            fontSize="14px"
+            lineHeight="16px"
+            dir="auto"
+          >
+            {selectedOption?.label}
+          </Text>
+          <Text
+            title={selectedOption?.description}
+            fontSize="12px"
+            lineHeight="16px"
+            fontWeight={400}
+            dir="auto"
+          >
+            {selectedOption?.description}
+          </Text>
+        </DescriptiveContainer>
       ) : type !== "onlyIcon" ? (
         <Text
           title={selectedOption?.label}
@@ -148,11 +178,11 @@ const ComboButton = (props: ComboButtonProps) => {
         </Text>
       ) : null}
 
-      {plusBadgeValue && (
+      {plusBadgeValue ? (
         <StyledPlusBadge
           isOpen={isOpen}
         >{`+${plusBadgeValue}`}</StyledPlusBadge>
-      )}
+      ) : null}
 
       <StyledArrowIcon
         displayArrow={displayArrow}
@@ -160,21 +190,29 @@ const ComboButton = (props: ComboButtonProps) => {
         className="combo-buttons_arrow-icon"
         isLoading={isLoading}
         isDisabled={isDisabled}
+        data-test-id="combo-button-arrow"
+        aria-hidden="true"
       >
-        {displayArrow &&
-          (comboIcon ? (
-            <ReactSVG src={comboIcon} className="combo-buttons_expander-icon" />
+        {displayArrow ? (
+          comboIcon ? (
+            <ReactSVG
+              src={comboIcon}
+              className="combo-buttons_expander-icon"
+              data-test-id="combo-button-custom-icon"
+            />
           ) : (
             <StyledTriangleDownIcon
               size={IconSizeType.scale}
               className="combo-buttons_expander-icon"
+              data-test-id="combo-button-default-icon"
             />
-          ))}
+          )
+        ) : null}
       </StyledArrowIcon>
 
-      {isLoading && (
+      {isLoading ? (
         <StyledLoader displaySize={size} type={LoaderTypes.track} size="20px" />
-      )}
+      ) : null}
     </ComboButtonTheme>
   );
 };

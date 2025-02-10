@@ -36,6 +36,7 @@ import { StyledTableRow } from "./Table.styled";
 import { TableRowProps } from "./Table.types";
 
 import { TableCell } from "./sub-components/TableCell";
+import { hasOwnProperty } from "../../utils/object";
 
 const TableRow = (props: TableRowProps) => {
   const {
@@ -65,7 +66,7 @@ const TableRow = (props: TableRowProps) => {
   };
 
   const renderContext =
-    Object.prototype.hasOwnProperty.call(props, "contextOptions") &&
+    hasOwnProperty(props, "contextOptions") &&
     contextOptions &&
     contextOptions.length > 0;
 
@@ -82,10 +83,8 @@ const TableRow = (props: TableRowProps) => {
       {...rest}
     >
       {children}
-      {isIndexEditingMode ? (
-        <></>
-      ) : (
-        <div>
+      {isIndexEditingMode ? null : (
+        <div className="context-menu-container">
           <TableCell
             {...selectionProp}
             style={style}

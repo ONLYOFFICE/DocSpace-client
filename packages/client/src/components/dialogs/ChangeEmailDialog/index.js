@@ -80,8 +80,14 @@ class ChangeEmailDialogComponent extends React.Component {
 
   onSendEmailChangeInstructions = () => {
     const { email } = this.state;
-    const { user, updateProfile, updateProfileInUsers, fromList, profile } =
-      this.props;
+    const {
+      user,
+      updateProfile,
+      updateProfileInUsers,
+      fromList,
+      profile,
+      onClose,
+    } = this.props;
     const { id } = user;
     const newProfile = user;
     newProfile.email = email;
@@ -97,9 +103,7 @@ class ChangeEmailDialogComponent extends React.Component {
         })
         .catch((error) => toastr.error(error))
         .finally(() => {
-          this.setState({ isRequestRunning: false }, () =>
-            this.props.onClose(),
-          );
+          this.setState({ isRequestRunning: false }, () => onClose());
         });
     });
   };
@@ -175,7 +179,7 @@ class ChangeEmailDialogComponent extends React.Component {
 
   render() {
     console.log("ChangeEmailDialog render");
-    const { t, tReady, visible, onClose, isTabletView } = this.props;
+    const { t, tReady, visible, onClose } = this.props;
     const { isRequestRunning, email, errorMessage, hasError } = this.state;
 
     return (
@@ -192,15 +196,15 @@ class ChangeEmailDialogComponent extends React.Component {
             <FieldContainer
               isVertical
               style={{ margin: "0" }}
-              //labelText={t("EnterEmail")}
+              // labelText={t("EnterEmail")}
               errorMessage={errorMessage}
               hasError={hasError}
               labelVisible={false}
             >
               <EmailInput
                 id="new-email"
-                scale={true}
-                isAutoFocussed={true}
+                scale
+                isAutoFocussed
                 value={email}
                 onChange={this.onChangeEmailInput}
                 onValidateInput={this.onValidateEmailInput}
@@ -218,7 +222,7 @@ class ChangeEmailDialogComponent extends React.Component {
             label={t("Common:SendButton")}
             size="normal"
             scale
-            primary={true}
+            primary
             onClick={this.onValidateEmail}
             isLoading={isRequestRunning}
           />

@@ -38,7 +38,7 @@ import { ViewSelector } from "../../view-selector";
 import { Text } from "../../text";
 
 import { SortButtonProps, TSortDataItem } from "../Filter.types";
-import { StyledSortButton } from "../Filter.styled";
+import styles from "../Filter.module.scss";
 
 const SortButton = ({
   id,
@@ -68,7 +68,8 @@ const SortButton = ({
     const value = getSortData?.();
     const selectedValue = getSelectedSortData?.();
 
-    const data = value.map((item) => {
+    const data = value.map((itemProp) => {
+      const item = { ...itemProp };
       item.className = "option-item";
 
       if (selectedValue.sortId === item.key) {
@@ -109,7 +110,7 @@ const SortButton = ({
       const key = (target.closest(".option-item") as HTMLDivElement)?.dataset
         .value;
 
-      let sortDirection = selectedSortData.sortDirection;
+      let { sortDirection } = selectedSortData;
 
       if (key === selectedSortData.sortId) {
         sortDirection = sortDirection === "desc" ? "asc" : "desc";
@@ -117,7 +118,8 @@ const SortButton = ({
 
       let data = sortData.map((item) => ({ ...item }));
 
-      data = data.map((item) => {
+      data = data.map((itemProp) => {
+        const item = { ...itemProp };
         item.className = "option-item";
         item.isSelected = false;
         if (key === item.key) {
@@ -135,8 +137,6 @@ const SortButton = ({
         sortDirection,
       });
 
-      // toggleCombobox();
-
       onSort?.(key || "", sortDirection);
     },
     [onSort, sortData, selectedSortData],
@@ -144,7 +144,7 @@ const SortButton = ({
 
   const advancedOptions = (
     <>
-      {viewSelectorVisible && (
+      {viewSelectorVisible ? (
         <>
           <DropDownItem noHover className="view-selector-item">
             <Text fontWeight={600}>{view}</Text>
@@ -158,7 +158,7 @@ const SortButton = ({
 
           <DropDownItem isSeparator />
         </>
-      )}
+      ) : null}
       {sortData?.map((item) => (
         <DropDownItem
           id={item.id}
@@ -185,12 +185,13 @@ const SortButton = ({
   }
 
   return (
-    <StyledSortButton
-      viewAs={viewAs}
-      isDesc={selectedSortData.sortDirection === "desc"}
+    <div
       onClick={toggleCombobox}
       id={id}
       title={title}
+      className={styles.sortButton}
+      data-row-view={viewAs === "row" ? "true" : "false"}
+      data-desc={selectedSortData.sortDirection === "desc" ? "true" : "false"}
     >
       <ComboBox
         opened={isOpen}
@@ -206,7 +207,6 @@ const SortButton = ({
         disableIconClick={false}
         disableItemClick
         isDefaultMode={false}
-        manualY="102%"
         advancedOptionsCount={advancedOptionsCount}
         onSelect={() => {}}
         withBlur={false}
@@ -215,7 +215,7 @@ const SortButton = ({
       >
         <IconButton iconName={SortReactSvgUrl} size={16} />
       </ComboBox>
-    </StyledSortButton>
+    </div>
   );
 };
 

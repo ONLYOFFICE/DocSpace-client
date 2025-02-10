@@ -28,6 +28,7 @@ import { makeAutoObservable } from "mobx";
 
 class SelectionStore {
   selection = [];
+
   selected = "none";
 
   constructor(settingsSetupStore) {
@@ -81,7 +82,7 @@ class SelectionStore {
   };
 
   getUsersBySelected = (users) => {
-    let newSelection = [];
+    const newSelection = [];
     users.forEach((user) => {
       const checked = this.getUserChecked();
 
@@ -108,7 +109,7 @@ class SelectionStore {
   }
 
   get isHeaderIndeterminate() {
-    //console.log("RUN isHeaderIndeterminate");
+    // console.log("RUN isHeaderIndeterminate");
     const { admins } = this.settingsSetupStore.security.accessRight;
     return (
       this.isHeaderVisible &&

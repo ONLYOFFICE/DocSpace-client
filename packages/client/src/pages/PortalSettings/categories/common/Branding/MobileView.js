@@ -57,9 +57,9 @@ const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
       />
-      {showSettings && (
+      {showSettings ? (
         <>
-          {displayAbout && (
+          {displayAbout ? (
             <MobileCategoryWrapper
               title={t("CompanyInfoSettings")}
               subtitle={t("BrandingSectionDescription", {
@@ -70,7 +70,7 @@ const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
               badgeLabel={t("Common:Paid")}
               onClickLink={onClickLink}
             />
-          )}
+          ) : null}
           <MobileCategoryWrapper
             title={t("AdditionalResources")}
             subtitle={t("AdditionalResourcesSubtitle")}
@@ -80,7 +80,7 @@ const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
             onClickLink={onClickLink}
           />
         </>
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

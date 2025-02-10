@@ -32,11 +32,11 @@ import { Text } from "@docspace/shared/components/text";
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
 
 import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
+import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
 import StyledComponent from "./StyledComponent";
 import OfficialDocumentation from "./sub-components/OfficialDocumentation";
-import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
 
-const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
+const Bonus = ({ standaloneInit, isInitPaymentPage, logoText }) => {
   const { t, ready } = useTranslation("PaymentsEnterprise");
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
       <BenefitsContainer />
       <Text fontWeight={600}>
         {t("UpgradeToProBannerInstructionHeader", {
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
           license: t("Common:EnterpriseLicense"),
         })}
       </Text>
@@ -63,10 +63,12 @@ const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
   );
 };
 
-export const Component = inject(({ paymentStore }) => {
+export const Component = inject(({ paymentStore, settingsStore }) => {
   const { standaloneInit, isInitPaymentPage } = paymentStore;
+  const { logoText } = settingsStore;
   return {
     standaloneInit,
     isInitPaymentPage,
+    logoText,
   };
 })(observer(Bonus));

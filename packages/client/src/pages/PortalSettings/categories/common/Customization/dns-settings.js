@@ -24,11 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CombinedShapeSvgUrl from "PUBLIC_DIR/images/combined.shape.svg?url";
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useTheme } from "styled-components";
 import { withTranslation } from "react-i18next";
-import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Button } from "@docspace/shared/components/button";
@@ -36,10 +34,7 @@ import { inject, observer } from "mobx-react";
 
 import { useNavigate } from "react-router-dom";
 import { isMobileDevice } from "@docspace/shared/utils";
-import checkScrollSettingsBlock from "../utils";
-import { StyledSettingsComponent, StyledScrollbar } from "./StyledSettings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import LoaderCustomization from "../sub-components/loaderCustomization";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
@@ -49,6 +44,9 @@ import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 import { parseDomain } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
+import LoaderCustomization from "../sub-components/loaderCustomization";
+import { StyledSettingsComponent } from "./StyledSettings";
+import checkScrollSettingsBlock from "../utils";
 
 const toggleStyle = {
   position: "static",
@@ -75,7 +73,6 @@ const DNSSettingsComponent = (props) => {
     isLoaded,
     setIsLoadedDNSSettings,
     isLoadedPage,
-    helpLink,
     initSettings,
     setIsLoaded,
     isSettingPaid,
@@ -90,6 +87,7 @@ const DNSSettingsComponent = (props) => {
     dnsSettingsUrl,
     currentDeviceType,
   } = props;
+
   const [hasScroll, setHasScroll] = useState(false);
   const isLoadedSetting = isLoaded && tReady;
   const [isCustomizationView, setIsCustomizationView] = useState(false);
@@ -99,6 +97,25 @@ const DNSSettingsComponent = (props) => {
   const [errorText, setErrorText] = useState("");
 
   const theme = useTheme();
+
+  const checkInnerWidth = useCallback(() => {
+    if (!isMobileDevice()) {
+      setIsCustomizationView(true);
+
+      const currentUrl = window.location.href.replace(
+        window.location.origin,
+        "",
+      );
+
+      const newUrl = "/portal-settings/customization/general";
+
+      if (newUrl === currentUrl) return;
+
+      navigate(newUrl);
+    } else {
+      setIsCustomizationView(false);
+    }
+  }, [isMobileDevice, setIsCustomizationView]);
 
   useEffect(() => {
     setDocumentTitle(t("DNSSettings"));
@@ -170,24 +187,6 @@ const DNSSettingsComponent = (props) => {
     }
     setDNSName(value);
   };
-  const checkInnerWidth = useCallback(() => {
-    if (!isMobileDevice()) {
-      setIsCustomizationView(true);
-
-      const currentUrl = window.location.href.replace(
-        window.location.origin,
-        "",
-      );
-
-      const newUrl = "/portal-settings/customization/general";
-
-      if (newUrl === currentUrl) return;
-
-      navigate(newUrl);
-    } else {
-      setIsCustomizationView(false);
-    }
-  }, [isMobileDevice, setIsCustomizationView]);
 
   const domainExampleText = " ourcompany.com";
 
@@ -211,17 +210,18 @@ const DNSSettingsComponent = (props) => {
             hasError={isError}
           />
           <div style={{ marginTop: "5px" }}>
-            {errorText &&
-              errorText.map((err, index) => (
-                <Text
-                  className="dns-error-text"
-                  key={index}
-                  fontSize="12px"
-                  fontWeight="400"
-                >
-                  {err}
-                </Text>
-              ))}
+            {errorText
+              ? errorText.map((err) => (
+                  <Text
+                    className="dns-error-text"
+                    key={err}
+                    fontSize="12px"
+                    fontWeight="400"
+                  >
+                    {err}
+                  </Text>
+                ))
+              : null}
           </div>
           <div style={{ marginTop: "3px" }}>
             <Text
@@ -243,12 +243,12 @@ const DNSSettingsComponent = (props) => {
             id="fieldContainerDNSSettings"
             className="field-container-width settings_unavailable"
             labelText={`${t("YourCurrentDomain")}`}
-            isVertical={true}
+            isVertical
           >
             <TextInput
               {...textInputProps}
-              isDisabled={true}
-              value={location.hostname?.trim()}
+              isDisabled
+              value={window.location.hostname?.trim()}
             />
           </FieldContainer>
         </>
@@ -276,7 +276,7 @@ const DNSSettingsComponent = (props) => {
   );
 
   return !isLoadedPage ? (
-    <LoaderCustomization dnsSettings={true} />
+    <LoaderCustomization dnsSettings />
   ) : (
     <StyledSettingsComponent
       hasScroll={hasScroll}
@@ -284,10 +284,10 @@ const DNSSettingsComponent = (props) => {
       isSettingPaid={isSettingPaid}
       standalone={standalone}
     >
-      {isCustomizationView && !isMobileView && (
+      {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">{t("DNSSettings")}</div>
-          {!isSettingPaid && !standalone && (
+          {!isSettingPaid && !standalone ? (
             <Badge
               className="paid-badge"
               fontWeight="700"
@@ -297,11 +297,11 @@ const DNSSettingsComponent = (props) => {
                   : globalColors.favoriteStatusDark
               }
               label={t("Common:Paid")}
-              isPaidBadge={true}
+              isPaidBadge
             />
-          )}
+          ) : null}
         </div>
-      )}
+      ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("DNSSettingsDescription")}

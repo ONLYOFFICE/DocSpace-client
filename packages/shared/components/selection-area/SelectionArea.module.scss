@@ -1,0 +1,13 @@
+@import "../../styles/variables/_colors.scss";
+
+.selectionArea {
+  top: 0;
+  // doesn't require mirroring for RTL
+  left: 0;
+  position: fixed;
+  margin: 0;
+  display: none;
+  background: rgba(68, 170, 255, 0.5);
+  border: 1px solid #{$light-second-main};
+  z-index: 1000;
+}

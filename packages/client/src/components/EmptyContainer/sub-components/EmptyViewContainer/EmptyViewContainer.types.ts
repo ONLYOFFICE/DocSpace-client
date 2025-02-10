@@ -66,6 +66,7 @@ export interface OutEmptyViewContainerProps {
   isFolder: boolean;
   isArchiveFolderRoot: boolean;
   isRootEmptyPage: boolean;
+  logoText: string;
 }
 
 export interface InjectedEmptyViewContainerProps
@@ -94,6 +95,8 @@ export interface InjectedEmptyViewContainerProps
   setViewInfoPanel: TStore["infoPanelStore"]["setView"];
   isPublicRoom: boolean;
   isVisitor?: boolean;
+  isFrame?: boolean;
+  logoText: string;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

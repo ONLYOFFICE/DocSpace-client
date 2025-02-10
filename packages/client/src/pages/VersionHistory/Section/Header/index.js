@@ -25,9 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import React from "react";
-import styled, { css } from "styled-components";
-import Headline from "@docspace/shared/components/headline/Headline";
+import styled from "styled-components";
+import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { desktop, tablet } from "@docspace/shared/utils";
 
@@ -67,14 +66,14 @@ const SectionHeaderContent = (props) => {
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
-        isFill={true}
+        isFill
         onClick={onClickBack}
         className="arrow-button"
       />
 
-      <Headline className="headline-header" type="content" truncate={true}>
+      <Heading className="headline-header" type="content" truncate>
         {title}
-      </Headline>
+      </Heading>
     </StyledContainer>
   );
 };

@@ -49,6 +49,7 @@ import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 import useStartFillingSelectDialog from "@/hooks/useStartFillingSelectDialog";
+import useSDK from "@/hooks/useSDK";
 
 import Editor from "./Editor";
 
@@ -75,6 +76,7 @@ const ConflictResolveDialog = dynamic(() => import("./ConflictResolveDialog"), {
 });
 
 import { calculateAsideHeight } from "@/utils";
+import { TFrameConfig } from "@docspace/shared/types/Frame";
 
 const Root = ({
   settings,
@@ -90,6 +92,7 @@ const Root = ({
   shareKey,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
+  const [sdkConfig, setSdkConfig] = React.useState<TFrameConfig | null>(null);
 
   const documentserverUrl = config?.editorUrl ?? error?.editorUrl;
   const fileInfo = config?.file;
@@ -107,6 +110,10 @@ const Root = ({
   useRootInit({
     documentType: config?.documentType,
   });
+
+  const { sdkFrameConfig } = useSDK();
+
+  React.useEffect(() => setSdkConfig(sdkFrameConfig), [sdkFrameConfig]);
 
   const { getErrorMessage } = useError({
     error,
@@ -185,7 +192,7 @@ const Root = ({
       isVisibleSelectFolderDialog ||
       selectFileDialogVisible
     ) {
-      calculateAsideHeight();
+      setTimeout(() => calculateAsideHeight(calculateAsideHeight), 10);
 
       const activeElement = document.activeElement as HTMLElement | null;
 
@@ -196,15 +203,13 @@ const Root = ({
     } else if (editorRef.current) {
       editorRef.current.focus();
     }
-
-    if (isSharingDialogVisible) {
-      setTimeout(calculateAsideHeight, 10);
-    }
   }, [
     isSharingDialogVisible,
     isVisibleSelectFolderDialog,
     selectFileDialogVisible,
   ]);
+
+  const organizationName = settings?.logoText || t("Common:OrganizationName");
 
   return isShowDeepLink ? (
     <DeepLink
@@ -230,6 +235,7 @@ const Root = ({
           isSharingAccess={isSharingAccess}
           documentserverUrl={documentserverUrl}
           fileInfo={fileInfo}
+          sdkConfig={sdkConfig}
           errorMessage={error?.message}
           isSkipError={!!isSkipError}
           onDownloadAs={onDownloadAs}
@@ -241,6 +247,7 @@ const Root = ({
           onSDKRequestSelectDocument={onSDKRequestSelectDocument}
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
           onSDKRequestStartFilling={onSDKRequestStartFilling}
+          organizationName={organizationName}
         />
       )}
 
@@ -254,6 +261,7 @@ const Root = ({
           getIsDisabled={getIsDisabledSelectFolderDialog}
           filesSettings={filesSettings}
           fileSaveAsExtension={extensionSelectorFolderDialog}
+          organizationName={organizationName}
         />
       )}
       {selectFileDialogVisible && fileInfo && (
@@ -272,6 +280,7 @@ const Root = ({
         <SharingDialog
           isVisible={isSharingDialogVisible}
           fileInfo={fileInfo}
+          selfId={user?.id}
           onCancel={onCloseSharingDialog}
         />
       )}

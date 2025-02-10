@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const StyledLoader = styled.div`
   margin-top: 40px;

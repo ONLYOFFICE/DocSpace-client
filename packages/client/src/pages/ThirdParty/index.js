@@ -32,6 +32,7 @@ import Section from "@docspace/shared/components/section";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import SectionWrapper from "SRC_DIR/components/Section";
+
 const ThirdPartyResponsePage = ({ match }) => {
   const { params } = match;
   const { provider } = params;
@@ -41,10 +42,10 @@ const ThirdPartyResponsePage = ({ match }) => {
   useEffect(() => {
     const urlParams = getObjectByLocation(window.location);
     const code = urlParams ? urlParams.code || null : null;
-    const error = urlParams ? urlParams.error || null : null;
+    const errorMessage = urlParams ? urlParams.error || null : null;
     setDocumentTitle(provider);
-    if (error) {
-      setError(error);
+    if (errorMessage) {
+      setError(errorMessage);
     } else if (code) {
       localStorage.setItem("code", code);
       window.close();

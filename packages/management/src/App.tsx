@@ -28,12 +28,16 @@ import { observer } from "mobx-react";
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { isMobileOnly } from "react-device-detect";
+import { useTranslation } from "react-i18next";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { Toast } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import AppLoader from "@docspace/shared/components/app-loader";
-
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 import "@docspace/shared/styles/custom.scss";
 
 import { useStore } from "./store";
@@ -54,7 +58,9 @@ const App = observer(() => {
   const { authStore, userStore, settingsStore } = useStore();
 
   const { init, isLoaded } = authStore;
-  const { setTheme, timezone } = settingsStore;
+  const { setTheme, timezone, logoText, setLogoText } = settingsStore;
+
+  const { t } = useTranslation(["Common", "Settings"]);
 
   window.timezone = timezone;
 
@@ -73,6 +79,36 @@ const App = observer(() => {
   useEffect(() => {
     if (userTheme) setTheme(userTheme);
   }, [userTheme]);
+
+  useEffect(() => {
+    if (!logoText) setLogoText(t("Common:OrganizationName"));
+  }, [logoText, setLogoText]);
+
+  useEffect(() => {
+    const { socketSubscribers } = SocketHelper;
+
+    if (!SocketHelper.isReady) return;
+
+    if (!socketSubscribers.has("restore")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "restore",
+      });
+    }
+    if (!socketSubscribers.has("backup")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "backup",
+      });
+    }
+  }, [SocketHelper.isReady]);
+
+  useEffect(() => {
+    return () => {
+      SocketHelper.off(SocketEvents.BackupProgress);
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: "backup",
+      });
+    };
+  }, []);
 
   const rootElement = document.getElementById("root") as HTMLElement;
 

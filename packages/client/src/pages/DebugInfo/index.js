@@ -85,6 +85,18 @@ const StyledFooterContent = styled.div`
   }
 `;
 
+const MarkdownLink = ({ href, children }) => (
+  <ColorTheme
+    fontWeight="600"
+    target="_blank"
+    tag="a"
+    href={href}
+    themeId={ThemeId.Link}
+  >
+    {children}
+  </ColorTheme>
+);
+
 const DebugInfoDialog = (props) => {
   const { visible, onClose, user, debugInfoData, getDebugInfo } = props;
 
@@ -107,12 +119,13 @@ const DebugInfoDialog = (props) => {
         <StyledBodyContent>
           {/* <Text>{`# Build version: ${BUILD_VERSION}`}</Text> */}
           <Text>
-            # Version: <span className="version">{VERSION}</span>
+            # Version:{" "}
+            <span className="version">{VERSION /* eslint-disable-line */}</span>
           </Text>
-          <Text>{`# Build date: ${BUILD_AT}`}</Text>
-          {user && (
+          <Text>{`# Build date: ${BUILD_AT}` /* eslint-disable-line */}</Text>
+          {user ? (
             <Text>{`# Current User: ${user?.displayName} (id:${user?.id})`}</Text>
-          )}
+          ) : null}
           <Text>{`# User Agent: ${navigator.userAgent}`}</Text>
         </StyledBodyContent>
       </ModalDialog.Body>
@@ -121,38 +134,20 @@ const DebugInfoDialog = (props) => {
           <Box
             className="markdown-wrapper"
             overflowProp="auto"
-            heightProp={"362px"}
+            heightProp="362px"
           >
             <Scrollbar>
-              {!debugInfoData && <Loader size="20px" type="track" />}
-              {debugInfoData && (
+              {!debugInfoData ? <Loader size="20px" type="track" /> : null}
+              {debugInfoData ? (
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={{
-                    a: ({ node, href, children, ...props }) => (
-                      <ColorTheme
-                        fontWeight="600"
-                        target="_blank"
-                        tag="a"
-                        href={href}
-                        themeId={ThemeId.Link}
-                      >
-                        {children}
-                      </ColorTheme>
-                      // <a
-                      //   href={href}
-                      //   target="_blank"
-                      //   rel="noopener noreferrer"
-                      //   {...props}
-                      // >
-                      //   {children}
-                      // </a>
-                    ),
+                    a: MarkdownLink,
                   }}
                 >
                   {debugInfoData}
                 </ReactMarkdown>
-              )}
+              ) : null}
             </Scrollbar>
           </Box>
         </StyledFooterContent>
@@ -164,7 +159,6 @@ const DebugInfoDialog = (props) => {
 DebugInfoDialog.propTypes = {
   visible: PropTypes.bool,
   onClose: PropTypes.func,
-  buildVersionInfo: PropTypes.object,
 };
 
 export default inject(({ userStore, settingsStore }) => {

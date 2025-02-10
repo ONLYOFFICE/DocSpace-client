@@ -26,7 +26,7 @@
 
 import { IconSizeType } from "../../utils";
 
-export interface IconButtonProps {
+export type IconButtonProps = {
   /** Sets component class */
   className?: string;
   /** Icon color */
@@ -71,4 +71,4 @@ export interface IconButtonProps {
   dataTip?: string;
   /** Data when user hover on icon */
   title?: string;
-}
+};

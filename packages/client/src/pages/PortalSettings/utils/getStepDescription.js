@@ -30,6 +30,7 @@ export const getGoogleStepDescription = (
   renderTooltip,
   Trans,
   isTypeSelectEmpty,
+  logoText,
 ) => {
   switch (stepIndex) {
     case 1:
@@ -37,7 +38,7 @@ export const getGoogleStepDescription = (
     case 2:
       return t("Settings:SelectUsersDescriptionGoogle", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       });
     case 3:
       return isTypeSelectEmpty ? (
@@ -70,10 +71,9 @@ export const getGoogleStepDescription = (
     case 6:
       return t("Settings:ImportCompleteDescriptionGoogle", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       });
     default:
-      return;
   }
 };
 
@@ -83,16 +83,17 @@ export const getWorkspaceStepDescription = (
   renderTooltip,
   Trans,
   isTypeSelectEmpty,
+  logoText,
 ) => {
   switch (stepIndex) {
     case 1:
       return t("Settings:SelectFileDescriptionWorkspace", {
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       });
     case 2:
       return t("Settings:SelectUsersDescriptionWorkspace", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       });
     case 3:
       return isTypeSelectEmpty ? (
@@ -125,9 +126,8 @@ export const getWorkspaceStepDescription = (
     case 6:
       return t("Settings:ImportCompleteDescriptionWorkspace", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       });
     default:
-      return;
   }
 };

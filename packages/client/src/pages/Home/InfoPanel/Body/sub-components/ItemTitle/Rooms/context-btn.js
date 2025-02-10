@@ -78,7 +78,7 @@ const RoomsContextBtn = ({
       <ContextMenu
         ref={contextMenuRef}
         getContextModel={getData}
-        withBackdrop={true}
+        withBackdrop
         baseZIndex={310}
       />
     </StyledItemContextOptions>

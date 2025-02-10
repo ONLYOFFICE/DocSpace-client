@@ -54,7 +54,7 @@ class ConsumerToggle extends React.Component {
 
       const prop = [];
       let i = 0;
-      let propsLength = Object.keys(consumer.props).length;
+      const propsLength = Object.keys(consumer.props).length;
 
       for (i = 0; i < propsLength; i++) {
         prop.push({
@@ -84,18 +84,16 @@ class ConsumerToggle extends React.Component {
     const { onToggleClick } = this;
 
     return (
-      <>
-        <StyledToggle
-          className={consumer.name}
-          onChange={onToggleClick}
-          isDisabled={!consumer.canSet || isDisabled}
-          isChecked={
-            !consumer.canSet || consumer.props.find((p) => p.value)
-              ? true
-              : toggleActive
-          }
-        />
-      </>
+      <StyledToggle
+        className={consumer.name}
+        onChange={onToggleClick}
+        isDisabled={!consumer.canSet || isDisabled}
+        isChecked={
+          !consumer.canSet || consumer.props.find((p) => p.value)
+            ? true
+            : toggleActive
+        }
+      />
     );
   }
 }

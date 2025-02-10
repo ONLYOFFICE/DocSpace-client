@@ -40,10 +40,10 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
+import SectionWrapper from "SRC_DIR/components/Section";
 import SectionHeaderContent from "../Home/Section/Header";
 import SectionFilterContent from "../Home/Section/Filter";
 import FilesPanels from "../../components/FilesPanels";
-import SectionWrapper from "SRC_DIR/components/Section";
 import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
 import { usePublic, useSDK } from "../Home/Hooks";
@@ -78,14 +78,14 @@ const PublicRoomPage = (props) => {
 
   const [windowIsOpen, setWindowIsOpen] = useState(false);
 
+  useSDK({ frameConfig, setFrameConfig, isLoading });
+
   usePublic({
     location,
     fetchFiles,
     fetchPublicRoom,
     fetchPreviewMediaFile,
   });
-
-  useSDK({ frameConfig, setFrameConfig, isLoading });
 
   const getAuthWindow = () => {
     return new Promise((res, rej) => {
@@ -214,7 +214,7 @@ const PublicRoomPage = (props) => {
           />
         </Section.SectionHeader>
 
-        {!isEmptyPage && (
+        {!isEmptyPage ? (
           <Section.SectionFilter>
             {isFrame ? (
               frameConfig?.showFilter && <SectionFilterContent />
@@ -222,7 +222,7 @@ const PublicRoomPage = (props) => {
               <SectionFilterContent />
             )}
           </Section.SectionFilter>
-        )}
+        ) : null}
 
         <Section.SectionBody>
           <Outlet />

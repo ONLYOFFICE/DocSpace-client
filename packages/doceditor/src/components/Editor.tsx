@@ -50,7 +50,6 @@ import {
   onOutdatedVersion,
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
-import useSDK from "@/hooks/useSDK";
 import useEditorEvents from "@/hooks/useEditorEvents";
 
 type IConfigType = IConfig & {
@@ -77,6 +76,8 @@ const Editor = ({
   errorMessage,
   isSkipError,
 
+  sdkConfig,
+  organizationName = "",
   filesSettings,
 
   onDownloadAs,
@@ -93,8 +94,6 @@ const Editor = ({
   const searchParams = useSearchParams();
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
-
-  const { frameConfig } = useSDK();
 
   const {
     onDocumentReady,
@@ -125,7 +124,8 @@ const Editor = ({
     isSkipError,
     openOnNewPage,
     t,
-    frameConfig,
+    sdkConfig,
+    organizationName,
   });
 
   useInit({
@@ -136,6 +136,7 @@ const Editor = ({
     documentReady,
     setDocTitle,
     t,
+    organizationName,
   });
 
   const newConfig: IConfigType = config
@@ -156,7 +157,7 @@ const Editor = ({
   let goBack: TGoBack = {} as TGoBack;
 
   if (fileInfo) {
-    const editorGoBack = frameConfig?.editorGoBack;
+    const editorGoBack = sdkConfig?.editorGoBack;
     const openFileLocationText = (
       (
         i18n.getDataByLanguage(i18n.language) as unknown as {
@@ -167,7 +168,12 @@ const Editor = ({
       }
     )?.["FileLocation"]; // t("FileLocation");
 
-    if (editorGoBack === "false" || user?.isVisitor || !user) {
+    if (
+      editorGoBack === "false" ||
+      editorGoBack === false ||
+      user?.isVisitor ||
+      !user
+    ) {
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
@@ -194,7 +200,7 @@ const Editor = ({
 
   const sdkCustomization: NonNullable<
     IConfig["editorConfig"]
-  >["customization"] = frameConfig?.editorCustomization;
+  >["customization"] = sdkConfig?.editorCustomization;
 
   const theme = sdkCustomization?.uiTheme || user?.theme;
 
@@ -276,7 +282,7 @@ const Editor = ({
     newConfig.events.onRequestSharingSettings = onSDKRequestSharingSettings;
   }
 
-  if (!fileInfo?.providerKey) {
+  if (!fileInfo?.providerKey && user) {
     newConfig.events.onRequestReferenceData = onSDKRequestReferenceData;
 
     if (!IS_ZOOM) {

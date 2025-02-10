@@ -1,4 +1,4 @@
-﻿// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,7 @@ import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
+import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -56,9 +57,14 @@ import {
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
-import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import {
+  getCheckboxItemId,
+  getCheckboxItemLabel,
+} from "SRC_DIR/helpers/filesUtils";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { useContactsHeader } from "./useContacts";
 
 const StyledContainer = styled.div`
@@ -154,7 +160,7 @@ const StyledContainer = styled.div`
   }
 
   ${(props) =>
-    props.isVirtualDataRoomType &&
+    props.isLifetimeEnabled &&
     css`
       .title-icon {
         svg {
@@ -206,8 +212,6 @@ const SectionHeaderContent = (props) => {
 
     setSelected,
     cbMenuItems,
-    getCheckboxItemLabel,
-    getCheckboxItemId,
     setSelectedNode,
     setIsLoading,
 
@@ -225,7 +229,6 @@ const SectionHeaderContent = (props) => {
     setUsersSelected,
     setGroupsSelected,
     isRoomAdmin,
-    isCollaborator,
     isEmptyPage,
 
     isLoading,
@@ -233,7 +236,6 @@ const SectionHeaderContent = (props) => {
     categoryType,
     isPublicRoom,
     theme,
-    isPublicRoomType,
     isVirtualDataRoomType,
 
     moveToPublicRoom,
@@ -258,9 +260,14 @@ const SectionHeaderContent = (props) => {
     showSignInButton,
     onSignInClick,
     signInButtonIsDisabled,
-    isShared,
-    isExternal,
     displayAbout,
+    revokeFilesOrder,
+    saveIndexOfFiles,
+    infoPanelRoom,
+    getPublicKey,
+    getIndexingArray,
+    setCloseEditIndexDialogVisible,
+    rootFolderId,
   } = props;
 
   const location = useLocation();
@@ -359,7 +366,7 @@ const SectionHeaderContent = (props) => {
       : setSelected(checked ? "all" : "none");
   };
 
-  const onClickFolder = (id, isRootRoom) => {
+  const onClickFolder = async (id, isRootRoom) => {
     if (isPublicRoom) {
       return moveToPublicRoom(id);
     }
@@ -380,6 +387,8 @@ const SectionHeaderContent = (props) => {
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
+    const shareKey = await getPublicKey(selectedFolder);
+    if (shareKey) filter.key = shareKey;
 
     const itemIdx = selectedFolder.navigationPath.findIndex((v) => v.id === id);
 
@@ -387,7 +396,7 @@ const SectionHeaderContent = (props) => {
       title: selectedFolder.navigationPath[itemIdx]?.title || "",
       isRoot: itemIdx === selectedFolder.navigationPath.length - 1,
       isRoom: selectedFolder.navigationPath[itemIdx]?.isRoom || false,
-      rootFolderType: rootFolderType,
+      rootFolderType,
       isPublicRoomType: selectedFolder.navigationPath[itemIdx]?.isRoom
         ? selectedFolder.navigationPath[itemIdx]?.roomType ===
           RoomsType.PublicRoom
@@ -415,6 +424,14 @@ const SectionHeaderContent = (props) => {
   };
 
   const onCloseIndexMenu = () => {
+    const items = getIndexingArray();
+
+    if (items.length) {
+      setCloseEditIndexDialogVisible(true);
+      return;
+    }
+
+    revokeFilesOrder();
     setIsIndexEditingMode(false);
   };
 
@@ -422,19 +439,53 @@ const SectionHeaderContent = (props) => {
     setReorderDialogVisible(true);
   };
 
+  const onIndexApply = () => {
+    saveIndexOfFiles(t);
+    setIsIndexEditingMode(false);
+  };
+
+  const stateTitle = location?.state?.title;
+  const stateCanCreate = location?.state?.canCreate;
+  const stateIsRoot = location?.state?.isRoot;
+  const stateIsRoom = location?.state?.isRoom;
+  const stateRootRoomTitle = location?.state?.rootRoomTitle;
+  const stateIsShared = location?.state?.isShared;
+  const stateIsExternal = location?.state?.isExternal;
+  const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
+
+  const isRoot =
+    isLoading && typeof stateIsRoot === "boolean"
+      ? stateIsRoot
+      : isRootFolder || isContactsPage || isSettingsPage;
+
+  const isLifetimeEnabled = Boolean(
+    !isRoot &&
+      (selectedFolder?.lifetime ||
+        infoPanelRoom?.lifetime ||
+        (isLoading && stateIsLifetimeEnabled)),
+  );
+
+  const navigationButtonIsVisible = !!(showNavigationButton || stateIsShared);
+
+  const getInsideGroupTitle = () => {
+    return isLoading && insideGroupTempTitle
+      ? insideGroupTempTitle
+      : currentGroup?.name;
+  };
+
   const getTitleIcon = () => {
-    if (isExternal && !isPublicRoom) return SharedLinkSvgUrl;
+    if (stateIsExternal && !isPublicRoom) return SharedLinkSvgUrl;
 
-    if (isShared && !isPublicRoom) return PublicRoomIconUrl;
+    if (navigationButtonIsVisible && !isPublicRoom) return PublicRoomIconUrl;
 
-    if (isVirtualDataRoomType && selectedFolder.lifetime)
-      return LifetimeRoomIconUrl;
+    if (isLifetimeEnabled) return LifetimeRoomIconUrl;
 
     return "";
   };
+
   const onLogoClick = () => {
     if (isFrame) return;
-    moveToPublicRoom(props.rootFolderId);
+    moveToPublicRoom(rootFolderId);
   };
 
   const headerMenu = isIndexEditingMode
@@ -444,6 +495,12 @@ const SectionHeaderContent = (props) => {
           label: t("Files:Reorder"),
           onClick: onIndexReorder,
           iconUrl: RoundedArrowSvgUrl,
+        },
+        {
+          id: "save-index",
+          label: t("Common:ApplyButton"),
+          onClick: onIndexApply,
+          iconUrl: CheckIcon,
         },
       ]
     : isContactsPage
@@ -484,24 +541,6 @@ const SectionHeaderContent = (props) => {
       isIndexEditingMode || isPublicRoom;
   }
 
-  const stateTitle = location?.state?.title;
-  const stateCanCreate = location?.state?.canCreate;
-  const stateIsRoot = location?.state?.isRoot;
-  const stateIsRoom = location?.state?.isRoom;
-  const stateRootRoomTitle = location?.state?.rootRoomTitle;
-  const stateIsPublicRoomType = location?.state?.isPublicRoomType;
-
-  const isRoot =
-    isLoading && typeof stateIsRoot === "boolean"
-      ? stateIsRoot
-      : isRootFolder || isContactsPage || isSettingsPage;
-
-  const getInsideGroupTitle = () => {
-    return isLoading && insideGroupTempTitle
-      ? insideGroupTempTitle
-      : currentGroup?.name;
-  };
-
   const currentTitle = isSettingsPage
     ? t("Common:Settings")
     : isContactsPage
@@ -513,15 +552,16 @@ const SectionHeaderContent = (props) => {
         : title;
 
   const currentCanCreate =
-    isLoading && location?.state?.hasOwnProperty("canCreate")
+    isLoading && hasOwnProperty(location?.state, "canCreate")
       ? stateCanCreate
       : security?.Create;
 
   const currentRootRoomTitle =
     isLoading && stateRootRoomTitle
       ? stateRootRoomTitle
-      : navigationPath?.length > 1 &&
-        navigationPath[navigationPath?.length - 2].title;
+      : navigationPath &&
+        navigationPath.length > 1 &&
+        navigationPath[navigationPath.length - 2].title;
 
   const accountsNavigationPath = isContactsInsideGroupPage && [
     {
@@ -531,11 +571,6 @@ const SectionHeaderContent = (props) => {
       isRootRoom: true,
     },
   ];
-
-  const currentIsPublicRoomType =
-    isLoading && typeof stateIsPublicRoomType === "boolean"
-      ? stateIsPublicRoomType
-      : isPublicRoomType;
 
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
@@ -552,12 +587,14 @@ const SectionHeaderContent = (props) => {
 
   const titleIcon = getTitleIcon();
 
-  const titleIconTooltip = selectedFolder.lifetime
+  const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
+
+  const titleIconTooltip = lifetime
     ? `${t("Files:RoomFilesLifetime", {
-        days: selectedFolder.lifetime.value,
-        period: getLifetimePeriodTranslation(selectedFolder.lifetime.period, t),
+        days: lifetime.value,
+        period: getLifetimePeriodTranslation(lifetime.period, t),
       })}. ${
-        selectedFolder.lifetime.deletePermanently
+        lifetime.deletePermanently
           ? t("Files:AfterFilesWillBeDeletedPermanently")
           : t("Files:AfterFilesWillBeMovedToTrash")
       }`
@@ -579,13 +616,14 @@ const SectionHeaderContent = (props) => {
     <Consumer key="header">
       {(context) => (
         <StyledContainer
-          isExternalFolder={isExternal}
+          isExternalFolder={stateIsExternal}
           isRecycleBinFolder={isRecycleBinFolder}
           isVirtualDataRoomType={isVirtualDataRoomType}
+          isLifetimeEnabled={isLifetimeEnabled}
         >
           {tableGroupMenuVisible ? (
             <TableGroupMenu
-              withComboBox={!isIndexEditingMode && !!menuItems}
+              withComboBox={!isIndexEditingMode ? !!menuItems : null}
               {...tableGroupMenuProps}
               {...headerProps}
               {...closeProps}
@@ -595,11 +633,12 @@ const SectionHeaderContent = (props) => {
               <Navigation
                 sectionWidth={context.sectionWidth}
                 showText={showText}
-                isRootFolder={isRoot && !isContactsInsideGroupPage}
+                isRootFolder={isRoot ? !isContactsInsideGroupPage : null}
                 canCreate={
                   (currentCanCreate || (isContactsPage && contactsCanCreate)) &&
-                  !isSettingsPage &&
-                  !isPublicRoom
+                  !isSettingsPage
+                    ? !isPublicRoom
+                    : null
                 }
                 rootRoomTitle={currentRootRoomTitle}
                 title={currentTitle}
@@ -639,12 +678,14 @@ const SectionHeaderContent = (props) => {
                 isRoom={isCurrentRoom || isContactsPage}
                 hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
                 withLogo={
-                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
-                  logo
+                  isPublicRoom || (isFrame && !showMenu && displayAbout)
+                    ? logo
+                    : null
                 }
                 burgerLogo={
-                  (isPublicRoom || (isFrame && !showMenu && displayAbout)) &&
-                  burgerLogo
+                  isPublicRoom || (isFrame && !showMenu && displayAbout)
+                    ? burgerLogo
+                    : null
                 }
                 isPublicRoom={isPublicRoom}
                 titleIcon={titleIcon}
@@ -660,7 +701,7 @@ const SectionHeaderContent = (props) => {
                 onContextOptionsClick={onContextOptionsClick}
                 onLogoClick={onLogoClick}
               />
-              {showSignInButton && (
+              {showSignInButton ? (
                 <Button
                   className="header_sign-in-button"
                   label={t("Common:LoginButton")}
@@ -669,10 +710,10 @@ const SectionHeaderContent = (props) => {
                   isDisabled={signInButtonIsDisabled}
                   primary
                 />
-              )}
+              ) : null}
             </div>
           )}
-          {isFrame && (
+          {isFrame ? (
             <>
               <input
                 id="customFileInput"
@@ -687,14 +728,14 @@ const SectionHeaderContent = (props) => {
                 id="customFolderInput"
                 className="custom-file-input"
                 webkitdirectory=""
-                mozdirectory=""
+                mozdirectory="" // eslint-disable-line react/no-unknown-property
                 type="file"
                 style={{ display: "none" }}
                 onChange={onFileChange}
                 onClick={onInputClick}
               />
             </>
-          )}
+          ) : null}
         </StyledContainer>
       )}
     </Consumer>
@@ -730,8 +771,6 @@ export default inject(
       isHeaderIndeterminate,
       isHeaderChecked,
       cbMenuItems,
-      getCheckboxItemLabel,
-      getCheckboxItemId,
       isEmptyFilesList,
 
       roomsForRestore,
@@ -744,20 +783,21 @@ export default inject(
     } = filesStore;
 
     const {
-      setIsSectionFilterLoading,
+      setIsSectionBodyLoading,
       showHeaderLoader,
 
       isLoading,
     } = clientLoadingStore;
 
     const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
+      setIsSectionBodyLoading(param);
     };
 
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       treeFoldersStore;
 
-    const { setReorderDialogVisible } = dialogsStore;
+    const { setReorderDialogVisible, setCloseEditIndexDialogVisible } =
+      dialogsStore;
 
     const {
       getHeaderMenu,
@@ -766,9 +806,12 @@ export default inject(
       onClickBack,
       moveToPublicRoom,
       createFoldersTree,
+      revokeFilesOrder,
+      saveIndexOfFiles,
+      getPublicKey,
     } = filesActionsStore;
 
-    const { setIsVisible, isVisible } = infoPanelStore;
+    const { setIsVisible, isVisible, infoPanelRoom } = infoPanelStore;
 
     const {
       title,
@@ -778,7 +821,6 @@ export default inject(
       security,
       rootFolderType,
       shared,
-      external,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -787,7 +829,6 @@ export default inject(
       settingsStore;
 
     const isRoom = !!roomType;
-    const isPublicRoomType = roomType === RoomsType.PublicRoom;
     const isVirtualDataRoomType = roomType === RoomsType.VirtualDataRoom;
 
     const {
@@ -832,7 +873,8 @@ export default inject(
 
     const { setSelected: setUsersSelected } = usersStore;
 
-    const { isIndexEditingMode, setIsIndexEditingMode } = indexingStore;
+    const { isIndexEditingMode, setIsIndexEditingMode, getIndexingArray } =
+      indexingStore;
     const { isPublicRoom } = publicRoomStore;
 
     let folderPath = navigationPath;
@@ -849,10 +891,9 @@ export default inject(
     const isArchive = rootFolderType === FolderType.Archive;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
-    const isExternal = external || navigationPath.find((r) => r.external);
 
     const showNavigationButton =
-      isLoading || !security?.CopyLink || isPublicRoom || isArchive
+      !security?.CopyLink || isPublicRoom || isArchive
         ? false
         : security?.Read && isShared;
 
@@ -886,8 +927,6 @@ export default inject(
       security,
 
       getHeaderMenu,
-      getCheckboxItemLabel,
-      getCheckboxItemId,
 
       isRecycleBinFolder,
       isEmptyFilesList,
@@ -900,12 +939,10 @@ export default inject(
 
       selectedFolder,
 
-      isEmptyArchive,
       isGroupMenuBlocked,
 
       moveToRoomsPage,
       onClickBack,
-      isPublicRoomType,
       isVirtualDataRoomType,
       isPublicRoom,
 
@@ -947,11 +984,15 @@ export default inject(
       createFoldersTree,
       getContactsModel,
       contactsCanCreate,
+      revokeFilesOrder,
+      saveIndexOfFiles,
 
       rootFolderId,
-      isShared,
-      isExternal,
       displayAbout,
+      infoPanelRoom,
+      getPublicKey,
+      getIndexingArray,
+      setCloseEditIndexDialogVisible,
     };
   },
 )(

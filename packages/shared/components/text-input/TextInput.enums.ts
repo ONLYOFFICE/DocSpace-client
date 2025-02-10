@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum InputType {
+export enum InputType {
   text = "text",
   password = "password",
   email = "email",
@@ -32,7 +32,7 @@ export const enum InputType {
   search = "search",
 }
 
-export const enum InputSize {
+export enum InputSize {
   base = "base",
   middle = "middle",
   big = "big",

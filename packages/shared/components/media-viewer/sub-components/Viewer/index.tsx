@@ -23,7 +23,6 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 import React, {
   useRef,
   useState,
@@ -32,14 +31,15 @@ import React, {
   useMemo,
 } from "react";
 
-import { DeviceType } from "@docspace/shared/enums";
-import { includesMethod } from "@docspace/shared/utils/typeGuards";
-import type { TContextMenuRef } from "@docspace/shared/components/context-menu";
+import { DeviceType } from "../../../../enums";
+import { includesMethod } from "../../../../utils/typeGuards";
+import type { ContextMenuRefType } from "../../../context-menu";
 
-import { StyledViewerContainer } from "../../MediaViewer.styled";
+import { isHeic, isTiff } from "../../MediaViewer.utils";
+import styles from "./Viewer.module.scss";
 
-import { NextButton } from "../NextButton";
-import { PrevButton } from "../PrevButton";
+import { NextButton } from "../Buttons/NextButton";
+import { PrevButton } from "../Buttons/PrevButton";
 import { ImageViewer } from "../ImageViewer";
 import { MobileDetails } from "../MobileDetails";
 import { DesktopDetails } from "../DesktopDetails";
@@ -82,28 +82,37 @@ export const Viewer = (props: ViewerProps) => {
   const [isPDFSidebarOpen, setIsPDFSidebarOpen] = useState<boolean>(false);
   const [panelVisible, setPanelVisible] = useState<boolean>(true);
   const [isOpenContextMenu, setIsOpenContextMenu] = useState<boolean>(false);
+  const [backgroundBlack, setBackgroundBlack] = useState<boolean>(() => false);
 
   const [isError, setIsError] = useState<boolean>(false);
-
-  // const [imageTimer, setImageTimer] = useState<NodeJS.Timeout>();
 
   const panelVisibleRef = useRef<boolean>(false);
   const panelToolbarRef = useRef<boolean>(false);
 
-  const contextMenuRef = useRef<TContextMenuRef>(null);
+  const contextMenuRef = useRef<ContextMenuRefType>(null);
 
   const [isFullscreen, setIsFullScreen] = useState<boolean>(false);
 
-  const devices = useMemo(
-    () => ({
-      isMobileOnly: currentDeviceType === DeviceType.mobile,
-      isMobile:
-        currentDeviceType === DeviceType.tablet ||
-        currentDeviceType === DeviceType.mobile,
-      isDesktop: currentDeviceType === DeviceType.desktop,
-    }),
-    [currentDeviceType],
-  );
+  const devices = useMemo(() => {
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    const isMouse = window.matchMedia("(pointer: fine)").matches;
+
+    const isMobileOnly = currentDeviceType === DeviceType.mobile;
+    const isMobile =
+      ((currentDeviceType === DeviceType.tablet || isTouch) && !isMouse) ||
+      isMobileOnly;
+    const isDesktop =
+      (currentDeviceType === DeviceType.desktop || isMouse) &&
+      !isTouch &&
+      !isMobileOnly;
+
+    return {
+      isMobileOnly,
+      isMobile,
+      isDesktop,
+    };
+  }, [currentDeviceType]);
+
   const { isMobile } = devices;
 
   const resetToolbarVisibleTimer = useCallback(() => {
@@ -226,34 +235,52 @@ export const Viewer = (props: ViewerProps) => {
 
   const playlistFile = playlist[playlistPos];
 
-  const isTiff =
-    playlistFile.fileExst === ".tiff" || playlistFile.fileExst === ".tif";
+  const isDecodedImage =
+    isTiff(playlistFile.fileExst) || isHeic(playlistFile.fileExst);
+
+  const mediaType = isPdf
+    ? "PDF"
+    : isImage
+      ? "image"
+      : isVideo
+        ? "video"
+        : isAudio
+          ? "audio"
+          : "media";
 
   return (
-    <StyledViewerContainer dir="ltr" visible={visible}>
-      {!isFullscreen && !isMobile && panelVisible && !isPdf && (
+    <div
+      data-testid="media-viewer"
+      dir="ltr"
+      data-visible={visible}
+      className={styles.container}
+      role="dialog"
+      aria-label={`${mediaType} viewer - ${title}`}
+      aria-modal="true"
+    >
+      {!isFullscreen && !isMobile && panelVisible && !isPdf ? (
         <DesktopDetails
           title={title}
           onMaskClick={handleMaskClick}
           showCloseButton={!isPublicFile}
         />
-      )}
+      ) : null}
 
-      {playlist.length > 1 && !isFullscreen && !isMobile && (
+      {playlist.length > 1 && !isFullscreen && !isMobile ? (
         <>
-          {isNotFirstElement && !isPDFSidebarOpen && (
+          {isNotFirstElement && !isPDFSidebarOpen ? (
             <PrevButton prevClick={onPrevClick} />
-          )}
-          {isNotLastElement && (
+          ) : null}
+          {isNotLastElement ? (
             <NextButton isPDFFile={isPdf} nextClick={onNextClick} />
-          )}
+          ) : null}
         </>
-      )}
+      ) : null}
 
       {isImage ? (
         <ImageViewer
-          key={targetFile?.viewUrl}
-          isTiff={isTiff}
+          key={targetFile?.id}
+          isDecodedImage={isDecodedImage}
           devices={devices}
           toolbar={toolbar}
           errorTitle={errorTitle}
@@ -273,6 +300,8 @@ export const Viewer = (props: ViewerProps) => {
           setIsOpenContextMenu={setIsOpenContextMenu}
           resetToolbarVisibleTimer={resetToolbarVisibleTimer}
           isPublicFile={isPublicFile}
+          backgroundBlack={backgroundBlack}
+          setBackgroundBlack={setBackgroundBlack}
         />
       ) : isVideo || isAudio ? (
         <ViewerPlayer
@@ -327,6 +356,6 @@ export const Viewer = (props: ViewerProps) => {
           />
         )
       )}
-    </StyledViewerContainer>
+    </div>
   );
 };

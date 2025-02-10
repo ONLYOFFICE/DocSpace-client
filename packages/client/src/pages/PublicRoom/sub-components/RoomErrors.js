@@ -41,9 +41,7 @@ const RoomErrors = ({ t, tReady, isInvalid }) => {
 
   return tReady ? (
     <ErrorContainer headerText={headerText} bodyText={bodyText} />
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 export default withTranslation(["Errors", "Common"])(RoomErrors);

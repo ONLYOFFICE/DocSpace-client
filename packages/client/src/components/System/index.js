@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import AppLoader from "@docspace/shared/components/AppLoader";
+import AppLoader from "@docspace/shared/components/app-loader";
 import Error404 from "@docspace/shared/components/errors/Error404";
 
 import ErrorBoundary from "../ErrorBoundaryWrapper";
@@ -34,10 +34,10 @@ import { Error520Component } from "../Error520Wrapper";
 function loadComponent(scope, module) {
   return async () => {
     // Initializes the share scope. This fills it with known provided modules from this build and all remotes
-    await __webpack_init_sharing__("default");
+    await __webpack_init_sharing__("default"); // eslint-disable-line no-undef
     const container = window[scope]; // or get the container somewhere else
     // Initialize the container, it may provide shared modules
-    await container.init(__webpack_share_scopes__.default);
+    await container.init(__webpack_share_scopes__.default); // eslint-disable-line no-undef
     const factory = await window[scope].get(module);
     const Module = factory();
     return Module;
@@ -84,7 +84,7 @@ const useDynamicScript = (args) => {
 
     document.head.appendChild(element);
 
-    //TODO: Comment if you don't want to remove loaded remoteEntry
+    // TODO: Comment if you don't want to remove loaded remoteEntry
     return () => {
       console.log(`Dynamic Script Removed: ${args.url}`);
       document.head.removeChild(element);
@@ -98,29 +98,29 @@ const useDynamicScript = (args) => {
 };
 
 const System = (props) => {
+  const { system } = props;
+
   const { ready, failed } = useDynamicScript({
-    url: props.system && props.system.url,
-    id: props.system && props.system.scope,
+    url: system && system.url,
+    id: system && system.scope,
   });
 
-  if (!props.system) {
+  if (!system) {
     console.log(`Not system specified`);
     return <Error404 />;
   }
 
   if (!ready) {
-    console.log(`Loading dynamic script: ${props.system.url}`);
+    console.log(`Loading dynamic script: ${system.url}`);
     return <AppLoader />;
   }
 
   if (failed) {
-    console.log(`Failed to load dynamic script: ${props.system.url}`);
+    console.log(`Failed to load dynamic script: ${system.url}`);
     return <Error520Component />;
   }
 
-  const Component = React.lazy(
-    loadComponent(props.system.scope, props.system.module),
-  );
+  const Component = React.lazy(loadComponent(system.scope, system.module));
 
   return (
     <React.Suspense fallback={<AppLoader />}>

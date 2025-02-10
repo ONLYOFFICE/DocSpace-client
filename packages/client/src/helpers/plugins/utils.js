@@ -90,6 +90,8 @@ export const messageActions = (
               case PluginToastType.warning:
                 toastr.warning(toast.title);
                 break;
+              default:
+                break;
             }
           });
         }
@@ -168,7 +170,7 @@ export const messageActions = (
 
         break;
 
-      case PluginActions.sendPostMessage:
+      case PluginActions.sendPostMessage: {
         if (!message.postMessage) return;
 
         const { postMessage } = message;
@@ -183,9 +185,12 @@ export const messageActions = (
         }
 
         break;
-
+      }
       case PluginActions.saveSettings:
         updatePlugin(pluginName, null, message.settings);
+        break;
+      default:
+        break;
     }
   });
 };

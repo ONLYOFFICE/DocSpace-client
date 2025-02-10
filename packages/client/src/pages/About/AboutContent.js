@@ -108,6 +108,7 @@ const AboutContent = (props) => {
     standalone,
     licenseUrl,
     isEnterprise,
+    logoText,
   } = props;
   const { t } = useTranslation(["About", "Common"]);
   const isCommercial = !standalone || isEnterprise;
@@ -160,14 +161,14 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;{t("Common:OrganizationName")} {t("Common:ProductName")}&nbsp;
+            &nbsp;{logoText} {t("Common:ProductName")}&nbsp;
           </ColorTheme>
 
           <Text
             className="row-el select-el"
             fontSize="13px"
             fontWeight="600"
-            title={`${BUILD_AT}`}
+            title={`${BUILD_AT}`} // eslint-disable-line no-undef
           >
             v.
             <span className="version-document-management">
@@ -191,8 +192,7 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;{t("Common:OrganizationName")}{" "}
-            {t("Common:ProductEditorsName")}&nbsp;
+            &nbsp;{logoText} {t("Common:ProductEditorsName")}&nbsp;
           </ColorTheme>
           <Text className="row-el select-el" fontSize="13px" fontWeight="600">
             v.
@@ -293,7 +293,7 @@ const AboutContent = (props) => {
 };
 
 export default inject(({ settingsStore, currentTariffStatusStore }) => {
-  const { theme, companyInfoSettingsData, standalone, licenseUrl } =
+  const { theme, companyInfoSettingsData, standalone, licenseUrl, logoText } =
     settingsStore;
   const { isEnterprise } = currentTariffStatusStore;
 
@@ -303,5 +303,6 @@ export default inject(({ settingsStore, currentTariffStatusStore }) => {
     standalone,
     licenseUrl,
     isEnterprise,
+    logoText,
   };
 })(observer(AboutContent));

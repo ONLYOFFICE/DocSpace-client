@@ -105,8 +105,6 @@ const {
   lightScroll,
   lightScrollHover,
   lightScrollActive,
-  silver,
-  highlandGray,
 
   blurLight,
   lightBlueAction,
@@ -130,6 +128,10 @@ export const getBaseTheme = () => {
       emailColor: gray,
       fontWeight: "normal",
       fontWeightBold: "bold",
+
+      secondary: {
+        color: gray,
+      },
     },
 
     heading: {
@@ -1608,6 +1610,8 @@ export const getBaseTheme = () => {
     },
 
     calendar: {
+      containerBorderColor: white,
+
       color: black,
       disabledColor: lightGraySelected,
       pastColor: gray,
@@ -2179,45 +2183,6 @@ export const getBaseTheme = () => {
       },
     },
 
-    mediaViewer: {
-      color: grayStrong,
-      backgroundColor: highlandGray,
-      fill: white,
-      titleColor: white,
-      iconColor: white,
-
-      controlBtn: {
-        backgroundColor: silver,
-      },
-
-      imageViewer: {
-        backgroundColor: silver,
-        inactiveBackgroundColor: highlandGray,
-        fill: white,
-      },
-
-      progressBar: {
-        background: grayStrong,
-        backgroundColor: silver,
-      },
-
-      scrollButton: {
-        backgroundColor: highlandGray,
-        background: silver,
-        border: `solid ${white}`,
-      },
-
-      videoViewer: {
-        fill: white,
-        stroke: white,
-        color: grayStrong,
-        colorError: white,
-        backgroundColorError: darkBlack,
-        backgroundColor: highlandGray,
-        background: silver,
-      },
-    },
-
     createEditRoomDialog: {
       commonParam: {
         descriptionColor: gray,
@@ -2308,6 +2273,7 @@ export const getBaseTheme = () => {
           borderColor: grayLight,
           hoverBorderColor: lightGrayHover,
           color: grayText,
+          hoverColor: grayText,
           iconColor: lightGrayDark,
         },
       },
@@ -2722,6 +2688,7 @@ export const getBaseTheme = () => {
       background: grayLight,
       textColor: gray,
       iconFill: black,
+      warningColor: lightErrorStatus,
     },
 
     client: {
@@ -2849,6 +2816,7 @@ export const getBaseTheme = () => {
             dataFontColorBlack: black,
             notAvailableBackground: grayLight,
             textColor: black,
+            paidBadgeBackground: favoritesStatus,
           },
 
           companyInfo: {
@@ -2975,7 +2943,7 @@ export const getBaseTheme = () => {
           linkColor: link,
           spanBackground: lightBlueMain,
           filterBorder: `1px solid ${grayStrong}`,
-          toastBackground: lightToastWarning,
+
           background: grayLight,
         },
       },
@@ -2985,6 +2953,10 @@ export const getBaseTheme = () => {
         generatePasswordColor: lightGrayDark,
         textColor: gray,
       },
+    },
+
+    statusMessage: {
+      toastBackground: lightToastWarning,
     },
 
     tileLoader: {

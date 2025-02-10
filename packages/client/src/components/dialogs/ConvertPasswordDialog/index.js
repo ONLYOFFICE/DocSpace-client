@@ -33,11 +33,9 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
+import config from "PACKAGE_FILE";
 import SimulatePassword from "../../SimulatePassword";
 import StyledComponent from "./StyledConvertPasswordDialog";
-import config from "PACKAGE_FILE";
-
-let _isMounted = false;
 
 const ConvertPasswordDialogComponent = (props) => {
   const {
@@ -48,14 +46,20 @@ const ConvertPasswordDialogComponent = (props) => {
     formCreationInfo,
     setFormCreationInfo,
     setPasswordEntryProcess,
-
-    openOnNewPage,
   } = props;
   const inputRef = React.useRef(null);
 
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [passwordValid, setPasswordValid] = useState(true);
+
+  const onChangePassword = useCallback(
+    (pwd) => {
+      !passwordValid && setPasswordValid(true);
+      setPassword(pwd);
+    },
+    [passwordValid],
+  );
 
   const makeForm =
     formCreationInfo.fromExst === ".docxf" &&
@@ -112,31 +116,20 @@ const ConvertPasswordDialogComponent = (props) => {
         `/doceditor/create?${searchParams.toString()}`,
       );
 
-      window.open(url, openOnNewPage ? "_blank" : "_self");
+      window.open(url, "_self");
 
       setIsLoading(false);
       onClose();
-      return;
     }
   }, [isLoading]);
 
   useEffect(() => {
-    _isMounted = true;
     setPasswordEntryProcess(true);
 
     return () => {
-      _isMounted = false;
       setPasswordEntryProcess(false);
     };
   }, []);
-
-  const onChangePassword = useCallback(
-    (password) => {
-      !passwordValid && setPasswordValid(true);
-      setPassword(password);
-    },
-    [onChangePassword, passwordValid],
-  );
 
   return (
     <ModalDialog
@@ -165,8 +158,8 @@ const ConvertPasswordDialogComponent = (props) => {
             </div>
             <div className="password-input">
               <SimulatePassword
-                inputMaxWidth={"512px"}
-                inputBlockMaxWidth={"536px"}
+                inputMaxWidth="512px"
+                inputBlockMaxWidth="536px"
                 onChange={onChangePassword}
                 onKeyDown={onKeyDown}
                 hasError={!passwordValid}
@@ -216,7 +209,6 @@ export default inject(
     settingsStore,
     dialogsStore,
     uploadDataStore,
-    filesSettingsStore,
   }) => {
     const {
       convertPasswordDialogVisible: visible,
@@ -230,8 +222,6 @@ export default inject(
 
     const { isTabletView, isDesktopClient } = settingsStore;
 
-    const { openOnNewPage } = filesSettingsStore;
-
     return {
       visible,
       setConvertPasswordDialogVisible,
@@ -243,7 +233,6 @@ export default inject(
       setPasswordEntryProcess,
       isDesktop: isDesktopClient,
       completeAction,
-      openOnNewPage,
     };
   },
 )(observer(ConvertPasswordDialog));

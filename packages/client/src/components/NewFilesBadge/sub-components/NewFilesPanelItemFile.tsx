@@ -98,9 +98,9 @@ const NewFilesPanelItemFileComponent = ({
           lineHeight="16px"
         >
           {item.title.replace(item.fileExst, "")}
-          {displayFileExtension && (
+          {displayFileExtension ? (
             <span className="file-exst">{item.fileExst}</span>
-          )}
+          ) : null}
         </Text>
       </div>
       <IconButton

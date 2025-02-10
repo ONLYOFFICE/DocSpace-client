@@ -33,9 +33,9 @@ export const SelectTextInput = ({ t, config, setConfig }) => {
   const [value, setValue] = useState(config.acceptButtonLabel);
 
   const debouncedSetConfig = useCallback(
-    debounce((value) => {
-      setConfig((config) => {
-        return { ...config, acceptButtonLabel: value };
+    debounce((newValue) => {
+      setConfig((oldConfig) => {
+        return { ...oldConfig, acceptButtonLabel: newValue };
       });
     }, 500),
     [setConfig],

@@ -81,6 +81,7 @@ export type TAvailableExternalRights = {
 };
 
 export type TFile = {
+  isFile: boolean;
   access: ShareAccessRights;
   canShare: boolean;
   comment: string;
@@ -431,6 +432,12 @@ export type TConnectingStorage = {
   connected: boolean;
   oauth: boolean;
   redirectUrl: string;
+};
+
+export type TIndexItems = {
+  order: string;
+  entryType: number;
+  entryId: number;
 };
 
 export type TConnectingStorages = TConnectingStorage[];

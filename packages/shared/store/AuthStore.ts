@@ -27,7 +27,7 @@
 /* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents, TOptSocket } from "../utils/socket";
 
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";
@@ -97,54 +97,63 @@ class AuthStore {
 
     makeAutoObservable(this);
 
-    SocketHelper.on(SocketEvents.ChangedQuotaUsedValue, (res) => {
-      console.log(
-        `[WS] change-quota-used-value ${res?.featureId}:${res?.value}`,
-      );
+    SocketHelper?.on(
+      SocketEvents.ChangedQuotaUsedValue,
+      (res: { featureId: string; value: number }) => {
+        console.log(
+          `[WS] change-quota-used-value ${res?.featureId}:${res?.value}`,
+        );
 
-      if (!res || !res?.featureId) return;
-      const { featureId, value } = res;
+        if (!res || !res?.featureId) return;
+        const { featureId, value } = res;
 
-      runInAction(() => {
-        this.currentQuotaStore?.updateQuotaUsedValue(featureId, value);
-      });
-    });
+        runInAction(() => {
+          this.currentQuotaStore?.updateQuotaUsedValue(featureId, value);
+        });
+      },
+    );
 
-    SocketHelper.on(SocketEvents.ChangedQuotaFeatureValue, (res) => {
-      console.log(
-        `[WS] change-quota-feature-value ${res?.featureId}:${res?.value}`,
-      );
+    SocketHelper?.on(
+      SocketEvents.ChangedQuotaFeatureValue,
+      (res: { featureId: string; value: number }) => {
+        console.log(
+          `[WS] change-quota-feature-value ${res?.featureId}:${res?.value}`,
+        );
 
-      if (!res || !res?.featureId) return;
-      const { featureId, value } = res;
+        if (!res || !res?.featureId) return;
+        const { featureId, value } = res;
 
-      runInAction(() => {
-        if (featureId === "free") {
-          this.updateTariff();
-          return;
-        }
+        runInAction(() => {
+          if (featureId === "free") {
+            this.updateTariff();
+            return;
+          }
 
-        this.currentQuotaStore?.updateQuotaFeatureValue(featureId, value);
-      });
-    });
-    SocketHelper.on(SocketEvents.ChangedQuotaUserUsedValue, (options) => {
-      console.log(`[WS] change-user-quota-used-value`, options);
+          this.currentQuotaStore?.updateQuotaFeatureValue(featureId, value);
+        });
+      },
+    );
+    SocketHelper?.on(
+      SocketEvents.ChangedQuotaUserUsedValue,
+      (options: TOptSocket) => {
+        console.log(`[WS] change-user-quota-used-value`, options);
 
-      runInAction(() => {
-        if (options.customQuotaFeature === "user_custom_quota") {
-          this.userStore?.updateUserQuota(
-            options.usedSpace,
-            options.quotaLimit,
-          );
+        runInAction(() => {
+          if (options.customQuotaFeature === "user_custom_quota") {
+            this.userStore?.updateUserQuota(
+              options.usedSpace,
+              options.quotaLimit,
+            );
 
-          return;
-        }
+            return;
+          }
 
-        const { customQuotaFeature, ...updatableObject } = options;
+          const { customQuotaFeature, ...updatableObject } = options;
 
-        this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);
-      });
-    });
+          this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);
+        });
+      },
+    );
   }
 
   setIsUpdatingTariff = (isUpdatingTariff: boolean) => {
@@ -166,7 +175,7 @@ class AuthStore {
 
     this.skipRequest = skipRequest ?? false;
 
-    await Promise.all([this.settingsStore?.init(), this.getCapabilities()]);
+    await this.settingsStore?.init();
 
     const requests = [];
 
@@ -174,6 +183,8 @@ class AuthStore {
 
     const isPortalRestore =
       this.settingsStore?.tenantStatus === TenantStatus.PortalRestore;
+
+    if (!isPortalRestore) requests.push(this.getCapabilities());
 
     if (
       this.settingsStore?.isLoaded &&
@@ -186,6 +197,8 @@ class AuthStore {
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
           if (!isPortalRestore) {
             this.getPaymentInfo();
+          } else {
+            this.isPortalInfoLoaded = true;
           }
         }),
       );

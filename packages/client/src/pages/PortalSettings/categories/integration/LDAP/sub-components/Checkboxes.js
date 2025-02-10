@@ -70,7 +70,7 @@ const Checkboxes = ({
   return (
     <Box className="ldap_checkbox-container">
       <div className="ldap_connection_type-text">
-        <Text fontWeight={600} fontSize={"14px"}>
+        <Text fontWeight={600} fontSize="14px">
           {t("LdapConnectionType")}
         </Text>
       </div>
@@ -81,7 +81,7 @@ const Checkboxes = ({
             tabIndex={1}
             key={ConnectionType.Unencrypted}
             value={ConnectionType.Unencrypted}
-            isChecked={!isTlsEnabled && !isSslEnabled}
+            isChecked={!isTlsEnabled ? !isSslEnabled : null}
             onChange={onChangeUnencrypted}
             isDisabled={!isLdapEnabled || isUIDisabled}
             label={t("LdapConnectionTypeUnencrypted")}

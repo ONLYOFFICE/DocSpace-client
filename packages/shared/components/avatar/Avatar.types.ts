@@ -25,9 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { Nullable } from "../../types";
+
 import { AvatarRole, AvatarSize } from "./Avatar.enums";
 
-export interface AvatarProps {
+export type TAvarModel = { label: string; icon: string } & (
+  | {
+      key: string;
+      onClick: () => void;
+    }
+  | {
+      key: "upload";
+      onClick: (ref?: React.MutableRefObject<Nullable<HTMLDivElement>>) => void;
+    }
+);
+
+export type AvatarProps = {
   /** Size of avatar */
   size: AvatarSize;
   /** Adds a table of user roles */
@@ -60,4 +73,8 @@ export interface AvatarProps {
   /** Accepts roleIcon */
   roleIcon?: React.ReactElement;
   noClick?: boolean;
-}
+  hasAvatar?: boolean;
+  onChangeFile?: () => void;
+
+  model?: TAvarModel[];
+};

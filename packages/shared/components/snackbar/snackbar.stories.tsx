@@ -27,8 +27,6 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Box } from "../box";
-
 import { SnackBar } from "./Snackbar";
 import { SnackbarProps } from "./Snackbar.types";
 import { globalColors } from "../../themes";
@@ -39,33 +37,57 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: "SnackBar is used for displaying important messages.",
+        component:
+          "SnackBar is a component for displaying temporary notifications, alerts, or messages to users. It can be customized with various styles and behaviors.",
       },
     },
   },
   argTypes: {
-    textColor: { control: "color" },
-    backgroundColor: { control: "color" },
-    showIcon: { control: "boolean" },
+    text: {
+      control: "text",
+      description: "Main message text",
+    },
+    headerText: {
+      control: "text",
+      description: "Header text displayed above the main message",
+    },
+    btnText: {
+      control: "text",
+      description: "Text for the action button",
+    },
+    textColor: {
+      control: "color",
+      description: "Color of the text content",
+    },
+    backgroundColor: {
+      control: "color",
+      description: "Background color of the snackbar",
+    },
+    showIcon: {
+      control: "boolean",
+      description: "Whether to show the icon",
+    },
+    countDownTime: {
+      control: "number",
+      description: "Time in milliseconds before auto-dismissal",
+    },
+    opacity: {
+      control: { type: "range", min: 0, max: 1, step: 0.1 },
+      description: "Opacity of the snackbar",
+    },
   },
 } satisfies Meta<typeof SnackBar>;
 type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const Wrapper = ({ children }: { children: React.ReactNode }) => (
-  <Box id="main-bar" displayProp="grid">
-    {children}
-  </Box>
-);
-
 const BaseTemplate = (args: SnackbarProps) => (
-  <Wrapper>
-    <SnackBar {...args} onClose={() => {}} />
-  </Wrapper>
+  <div data-testid="snackbar-wrapper" style={{ width: "calc(100% - 32px)" }}>
+    <SnackBar {...args} onClose={() => console.log("Snackbar closed")} />
+  </div>
 );
 
-export const base: Story = {
+export const Default: Story = {
   render: (args) => <BaseTemplate {...args} />,
   args: {
     backgroundImg: "",
@@ -73,7 +95,7 @@ export const base: Story = {
     textColor: globalColors.darkBlack,
     opacity: 1,
     headerText: "Attention",
-    text: "We apologize for any short-term technical issues in service functioning, that may appear on 22.06.2021 during the update of ONLYOFFICE Personal.",
+    text: "Important notification message",
     showIcon: true,
     fontSize: "13px",
     fontWeight: 400,
@@ -81,5 +103,43 @@ export const base: Story = {
     htmlContent: "",
     countDownTime: 0,
     sectionWidth: 500,
+  },
+};
+
+export const WithAction: Story = {
+  render: (args) => <BaseTemplate {...args} />,
+  args: {
+    ...Default.args,
+    btnText: "Take Action",
+    onAction: () => console.log("Action clicked"),
+  },
+};
+
+export const WithCountdown: Story = {
+  render: (args) => <BaseTemplate {...args} />,
+  args: {
+    ...Default.args,
+    countDownTime: 5000,
+    text: "This message will disappear in 5 seconds",
+  },
+};
+
+export const WithHtmlContent: Story = {
+  render: (args) => <BaseTemplate {...args} />,
+  args: {
+    ...Default.args,
+    htmlContent: "<img src='images/logo/lightsmall.svg' />",
+    text: undefined,
+  },
+};
+
+export const Maintenance: Story = {
+  render: (args) => <BaseTemplate {...args} />,
+  args: {
+    ...Default.args,
+    isMaintenance: true,
+    headerText: "Maintenance Notice",
+    text: "System maintenance is scheduled for tonight at 10 PM",
+    backgroundColor: globalColors.lightToastWarning,
   },
 };

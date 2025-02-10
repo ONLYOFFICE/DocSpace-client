@@ -54,6 +54,7 @@ const CreateRoomEvent = ({
   startRoomType,
   isCorrectWatermark,
   processCreatingRoomFromData,
+  setProcessCreatingRoomFromData,
   selectionItems,
   setSelectedRoomType,
 }) => {
@@ -74,11 +75,11 @@ const CreateRoomEvent = ({
       return;
     }
 
-    onCreateRoom(false, t);
+    onCreateRoom(t, false);
   };
 
   const fetchTagsAction = useCallback(async () => {
-    let tags = await fetchTags();
+    const tags = await fetchTags();
     setFetchedTags(tags);
   }, []);
 
@@ -99,10 +100,9 @@ const CreateRoomEvent = ({
       title={title}
       t={t}
       visible={
-        visible &&
-        !connectDialogVisible &&
-        !createRoomConfirmDialogVisible &&
-        !confirmDialogIsLoading
+        visible && !connectDialogVisible && !createRoomConfirmDialogVisible
+          ? !confirmDialogIsLoading
+          : null
       }
       onClose={onClose}
       onCreate={onCreate}
@@ -114,6 +114,7 @@ const CreateRoomEvent = ({
       fetchThirdPartyProviders={fetchThirdPartyProviders}
       enableThirdParty={enableThirdParty}
       processCreatingRoomFromData={processCreatingRoomFromData}
+      setProcessCreatingRoomFromData={setProcessCreatingRoomFromData}
       selectionItems={selectionItems}
       setSelectedRoomType={setSelectedRoomType}
     />
@@ -131,9 +132,10 @@ export default inject(
     filesActionsStore,
   }) => {
     const { fetchTags } = tagsStore;
-    const { selection, bufferSelection } = filesStore;
+    const { selections } = filesStore;
 
-    const { processCreatingRoomFromData } = filesActionsStore;
+    const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
+      filesActionsStore;
 
     const { deleteThirdParty, fetchThirdPartyProviders } =
       filesSettingsStore.thirdPartyStore;
@@ -160,8 +162,7 @@ export default inject(
       setSelectedRoomType,
     } = createEditRoomStore;
 
-    const selectionItems =
-      selection && selection.length > 0 ? selection : [bufferSelection];
+    const selectionItems = selections;
 
     return {
       fetchTags,
@@ -184,6 +185,7 @@ export default inject(
       selectionItems,
       processCreatingRoomFromData,
       setSelectedRoomType,
+      setProcessCreatingRoomFromData,
     };
   },
 )(observer(CreateRoomEvent));

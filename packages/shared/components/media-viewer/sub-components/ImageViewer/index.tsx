@@ -25,8 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useGesture } from "@use-gesture/react";
-import { useSpring, config } from "@react-spring/web";
-import { isDesktop as isDesktopDeviceDetect } from "react-device-detect";
+import { useSpring, config, animated } from "@react-spring/web";
 import React, {
   SyntheticEvent,
   useCallback,
@@ -36,10 +35,9 @@ import React, {
   useState,
 } from "react";
 
-// import { IndexedDBStores } from "@docspace/shared/enums";
-// import indexedDBHelper from "@docspace/shared/utils/indexedDBHelper";
-import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
-import { LOADER_TIMEOUT } from "@docspace/shared/constants";
+import classNames from "classnames";
+import { checkDialogsOpen } from "../../../../utils/checkDialogsOpen";
+import { LOADER_TIMEOUT } from "../../../../constants";
 
 import {
   calculateAdjustBoundsUtils,
@@ -59,13 +57,8 @@ import {
 } from "../ViewerToolbar/ViewerToolbar.props";
 import { MessageError } from "../MessageError";
 
-import {
-  Image,
-  ImageViewerContainer,
-  ImageWrapper,
-} from "./ImageViewer.styled";
 import ImageViewerProps from "./ImageViewer.props";
-
+import styles from "./ImageViewer.module.scss";
 import {
   MaxScale,
   MinScale,
@@ -89,11 +82,13 @@ export const ImageViewer = ({
   thumbnailSrc,
   // imageId,
   // version,
-  isTiff,
+  isDecodedImage,
   contextModel,
   errorTitle,
   devices,
   isPublicFile,
+  backgroundBlack,
+  setBackgroundBlack,
 }: ImageViewerProps) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const imgWrapperRef = useRef<HTMLDivElement>(null);
@@ -114,7 +109,6 @@ export const ImageViewer = ({
   const [showOriginSrc, setShowOriginSrc] = useState(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [backgroundBlack, setBackgroundBlack] = useState<boolean>(() => false);
 
   const [style, api] = useSpring(() => ({
     width: 0,
@@ -176,8 +170,8 @@ export const ImageViewer = ({
   const resize = useCallback(() => {
     if (!imgRef.current || isLoading) return;
 
-    const naturalWidth = imgRef.current.naturalWidth;
-    const naturalHeight = imgRef.current.naturalHeight;
+    const { naturalWidth } = imgRef.current;
+    const { naturalHeight } = imgRef.current;
 
     const imagePositionAndSize = getImagePositionAndSize(
       naturalWidth,
@@ -200,8 +194,12 @@ export const ImageViewer = ({
 
   const imageLoaded = useCallback(
     (event: SyntheticEvent<HTMLImageElement, Event>) => {
-      const naturalWidth = (event.target as HTMLImageElement).naturalWidth;
-      const naturalHeight = (event.target as HTMLImageElement).naturalHeight;
+      if (!(window.ClientConfig?.imageThumbnails && thumbnailSrc)) {
+        setShowOriginSrc(true);
+      }
+
+      const { naturalWidth } = event.target as HTMLImageElement;
+      const { naturalHeight } = event.target as HTMLImageElement;
 
       const positionAndSize = getImagePositionAndSize(
         naturalWidth,
@@ -223,18 +221,18 @@ export const ImageViewer = ({
       setIsLoading(false);
       setIsError(false);
 
-      if (isTiff && src) {
+      if (isDecodedImage && src) {
         URL.revokeObjectURL(src);
       }
     },
-    [api, isTiff, src],
+    [api, isDecodedImage, src, thumbnailSrc],
   );
 
   const restartScaleAndSize = useCallback(() => {
     if (!imgRef.current || style.scale.isAnimating) return;
 
-    const naturalWidth = imgRef.current.naturalWidth;
-    const naturalHeight = imgRef.current.naturalHeight;
+    const { naturalWidth } = imgRef.current;
+    const { naturalHeight } = imgRef.current;
 
     const imagePositionAndSize = getImagePositionAndSize(
       naturalWidth,
@@ -596,6 +594,8 @@ export const ImageViewer = ({
         )
           return memo;
 
+        let memoLet = memo;
+
         if (!pinching) cancel();
 
         if (first) {
@@ -603,11 +603,11 @@ export const ImageViewer = ({
             imgRef.current.getBoundingClientRect();
           const tx = ox - (x + width / 2);
           const ty = oy - (y + height / 2);
-          memo = [style.x.get(), style.y.get(), tx, ty];
+          memoLet = [style.x.get(), style.y.get(), tx, ty];
         }
 
-        const x = memo[0] - (mScale - 1) * memo[2];
-        const y = memo[1] - (mScale - 1) * memo[3];
+        const x = memoLet[0] - (mScale - 1) * memoLet[2];
+        const y = memoLet[1] - (mScale - 1) * memoLet[3];
 
         const ratio = dScale / LScale;
 
@@ -637,7 +637,7 @@ export const ImageViewer = ({
           },
           config: config.default,
         });
-        return memo;
+        return memoLet;
       },
       onPinchEnd: ({
         movement: [, mRotate],
@@ -697,15 +697,10 @@ export const ImageViewer = ({
       },
 
       onClick: ({ pinching, event }) => {
-        if (isDesktopDeviceDetect && event.target === imgWrapperRef.current)
+        if (isDesktop && event.target === imgWrapperRef.current)
           return onMask?.();
 
-        if (
-          !imgRef.current ||
-          !containerRef.current ||
-          pinching ||
-          isDesktopDeviceDetect
-        )
+        if (!imgRef.current || !containerRef.current || pinching || isDesktop)
           return;
 
         const time = new Date().getTime();
@@ -742,19 +737,21 @@ export const ImageViewer = ({
         )
           return memo;
 
+        let memoLet = memo;
+
         resetToolbarVisibleTimer();
         const dScale = (-1 * yWheel) / RatioWheel;
         const mScale = (-1 * mYWheel) / RatioWheel;
 
-        if (first || !memo) {
+        if (first || !memoLet) {
           const { width, height, x, y } =
             imgRef.current.getBoundingClientRect();
           const tx = (event.pageX - (x + width / 2)) / style.scale.get();
           const ty = (event.pageY - (y + height / 2)) / style.scale.get();
-          memo = [style.x.get(), style.y.get(), tx, ty];
+          memoLet = [style.x.get(), style.y.get(), tx, ty];
         }
-        const dx = memo[0] - mScale * memo[2];
-        const dy = memo[1] - mScale * memo[3];
+        const dx = memoLet[0] - mScale * memoLet[2];
+        const dy = memoLet[1] - mScale * memoLet[3];
 
         const ratio = dScale / style.scale.get();
 
@@ -779,7 +776,7 @@ export const ImageViewer = ({
           },
         });
 
-        return memo;
+        return memoLet;
       },
     },
     {
@@ -851,7 +848,7 @@ export const ImageViewer = ({
   const toolbarEvent = (item: ToolbarItemType) => {
     if (item.onClick) {
       item.onClick();
-    } else {
+    } else if (item.actionType !== undefined) {
       handleToolbarAction(item.actionType);
     }
   };
@@ -860,7 +857,7 @@ export const ImageViewer = ({
     if (
       window.ClientConfig?.imageThumbnails &&
       thumbnailSrc &&
-      (src || isTiff)
+      (src || isDecodedImage)
     ) {
       // if thumbnailSrc is unavailable, try to load original image
       setShowOriginSrc(true);
@@ -868,7 +865,7 @@ export const ImageViewer = ({
     }
 
     setIsError(true);
-  }, [src, thumbnailSrc, isTiff]);
+  }, [src, thumbnailSrc, isDecodedImage]);
 
   const model = React.useMemo(() => contextModel(true), [contextModel]);
 
@@ -896,7 +893,7 @@ export const ImageViewer = ({
   }, [onKeyDown]);
 
   useLayoutEffect(() => {
-    if (unmountRef.current || (isTiff && src)) return;
+    if (unmountRef.current || (isDecodedImage && src)) return;
 
     if (!isLoaded.current) {
       timeoutRef.current = setTimeout(() => {
@@ -911,7 +908,7 @@ export const ImageViewer = ({
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [src, isTiff]);
+  }, [src, isDecodedImage]);
 
   // useEffect(() => {
   //   if (!window.ClientConfig?.imageThumbnails) return;
@@ -966,10 +963,15 @@ export const ImageViewer = ({
 
   return (
     <>
-      {isMobile && !backgroundBlack && mobileDetails}
-      <ImageViewerContainer
+      {isMobile && !backgroundBlack ? mobileDetails : null}
+      <div
         ref={containerRef}
-        $backgroundBlack={backgroundBlack}
+        className={classNames(styles.container, {
+          [styles.backgroundBlack]: backgroundBlack,
+        })}
+        data-testid="image-viewer"
+        role="img"
+        aria-label={errorTitle || "Image viewer"}
       >
         {isError ? (
           <MessageError
@@ -982,8 +984,15 @@ export const ImageViewer = ({
           <ViewerLoader isLoading={isLoading} />
         )}
 
-        <ImageWrapper ref={imgWrapperRef} $isLoading={isLoading}>
-          <Image
+        <div
+          className={classNames(styles.wrapper, {
+            [styles.loading]: isLoading,
+          })}
+          ref={imgWrapperRef}
+          data-testid="image-wrapper"
+        >
+          <animated.img
+            className={classNames(styles.image)}
             draggable="false"
             src={
               window.ClientConfig?.imageThumbnails &&
@@ -998,11 +1007,12 @@ export const ImageViewer = ({
             onLoad={imageLoaded}
             onError={onError}
             onContextMenu={(event) => event.preventDefault()}
+            data-testid="image-content"
           />
-        </ImageWrapper>
-      </ImageViewerContainer>
+        </div>
+      </div>
 
-      {isDesktop && !isMobile && panelVisible && !isError && (
+      {isDesktop && !isMobile && panelVisible && !isError ? (
         <ViewerToolbar
           ref={toolbarRef}
           toolbar={toolbar}
@@ -1010,8 +1020,9 @@ export const ImageViewer = ({
           generateContextMenu={generateContextMenu}
           setIsOpenContextMenu={setIsOpenContextMenu}
           toolbarEvent={toolbarEvent}
+          data-testid="image-toolbar"
         />
-      )}
+      ) : null}
     </>
   );
 };

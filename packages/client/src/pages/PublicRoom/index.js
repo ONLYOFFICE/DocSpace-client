@@ -31,12 +31,11 @@ import Section from "@docspace/shared/components/section";
 import { Loader } from "@docspace/shared/components/loader";
 import { ValidationStatus } from "@docspace/shared/enums";
 import SectionWrapper from "SRC_DIR/components/Section";
+import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomPassword from "./sub-components/RoomPassword";
 import RoomErrors from "./sub-components/RoomErrors";
 
 import PublicRoomPage from "./PublicRoomPage";
-
-import FilesFilter from "@docspace/shared/api/files/filter";
 
 const PublicRoom = (props) => {
   const {

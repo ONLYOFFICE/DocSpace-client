@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { StyledTypeCell } from "./CellStyles";
 import { FileType } from "@docspace/shared/enums";
+import { StyledTypeCell } from "./CellStyles";
 import { getRoomTypeName } from "../../../../../../helpers/filesUtils";
 
 const TypeCell = ({ t, item, sideColor }) => {
@@ -34,7 +34,7 @@ const TypeCell = ({ t, item, sideColor }) => {
   const getItemType = () => {
     switch (fileType) {
       case FileType.Unknown:
-        return fileTypeName ? fileTypeName : t("Common:Unknown");
+        return fileTypeName || t("Common:Unknown");
       case FileType.Archive:
         return t("Common:Archive");
       case FileType.Video:

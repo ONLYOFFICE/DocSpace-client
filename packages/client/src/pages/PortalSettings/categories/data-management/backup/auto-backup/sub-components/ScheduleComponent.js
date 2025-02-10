@@ -30,10 +30,10 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { Text } from "@docspace/shared/components/text";
-import { StyledScheduleComponent } from "../../StyledBackup";
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { StyledScheduleComponent } from "../../StyledBackup";
 
 const { EveryWeekType, EveryMonthType } = AutoBackupPeriod;
 const ScheduleComponent = ({
@@ -98,7 +98,7 @@ const ScheduleComponent = ({
           showDisabledItems
           directionY="both"
         />
-        {weeklySchedule && (
+        {weeklySchedule ? (
           <ComboBox
             options={weekdaysLabelArray}
             selectedOption={{
@@ -115,8 +115,8 @@ const ScheduleComponent = ({
             showDisabledItems
             directionY="both"
           />
-        )}
-        {monthlySchedule && (
+        ) : null}
+        {monthlySchedule ? (
           <ComboBox
             options={monthNumbersArray}
             selectedOption={{
@@ -133,7 +133,7 @@ const ScheduleComponent = ({
             showDisabledItems
             directionY="both"
           />
-        )}
+        ) : null}
         <ComboBox
           options={hoursArray}
           selectedOption={{

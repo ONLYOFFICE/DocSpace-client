@@ -90,6 +90,7 @@ export type CreateUserFormProps = {
   firstName?: string;
   lastName?: string;
   isStandalone: boolean;
+  logoText: string;
 };
 
 const CreateUserForm = (props: CreateUserFormProps) => {
@@ -105,10 +106,14 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     licenseUrl,
     legalTerms,
     isStandalone,
+    logoText,
   } = props;
+
   const { linkData, roomData } = useContext(ConfirmRouteContext);
   const { t, i18n } = useTranslation(["Confirm", "Common"]);
   const router = useRouter();
+
+  const organizationName = logoText || t("Common:OrganizationName");
 
   const currentCultureName = i18n.language;
 
@@ -164,7 +169,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         await signupOAuth(signupAccount, confirmKey);
 
         const url = roomData.roomId
-          ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`
+          ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
           : defaultPage;
         window.location.replace(url);
       } catch (error) {
@@ -425,9 +430,14 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     }
 
     const providerName = targetElement.dataset.providername;
-    const url = targetElement.dataset.url || "";
+    let url = targetElement.dataset.url || "";
 
     try {
+      //Lifehack for Twitter
+      if (providerName == "twitter") {
+        url += "authCallback";
+      }
+
       const tokenGetterWin =
         window.AscDesktopEditor !== undefined
           ? (window.location.href = url)
@@ -534,6 +544,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
             onClickBack={onClickBack}
             onSubmit={onSubmit}
             isStandalone={isStandalone}
+            organizationName={organizationName}
           />
         )}
       </div>

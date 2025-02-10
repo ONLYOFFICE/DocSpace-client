@@ -26,8 +26,8 @@
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import { Avatar } from "@docspace/shared/components/avatar";
-import { StyledHistoryBlock } from "../../styles/history";
 import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
+import { StyledHistoryBlock } from "../../styles/history";
 import HistoryTitleBlock from "./HistoryBlockContent/HistoryTitleBlock";
 import HistoryBlockContent from "./HistoryBlockContent";
 

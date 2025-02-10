@@ -64,6 +64,7 @@ class RackspaceSettings extends React.Component {
     this.regionPlaceholder =
       selectedStorage && selectedStorage.properties[2].title;
   }
+
   onChangeText = (event) => {
     const { addValueInFormSettings } = this.props;
 
@@ -122,7 +123,7 @@ class RackspaceSettings extends React.Component {
           placeholder={this.regionPlaceholder || ""}
           tabIndex={3}
         />
-        {isNeedFilePath && (
+        {isNeedFilePath ? (
           <TextInput
             id="file-path-input"
             name={filePath}
@@ -135,7 +136,7 @@ class RackspaceSettings extends React.Component {
             tabIndex={4}
             hasError={isError[filePath]}
           />
-        )}
+        ) : null}
       </>
     );
   }

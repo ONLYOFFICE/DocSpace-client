@@ -31,6 +31,7 @@ const AuthorizedApps = ({
   selection,
   bufferSelection,
   revokeClient,
+  logoText,
 }: AuthorizedAppsProps) => {
   const { t } = useTranslation(["OAuth"]);
 
@@ -78,10 +79,10 @@ const AuthorizedApps = ({
       ) : (
         <EmptyScreen t={t} />
       )}
-      {infoDialogVisible && (
+      {infoDialogVisible ? (
         <InfoDialog visible={infoDialogVisible} isProfile />
-      )}
-      {revokeDialogVisible && (
+      ) : null}
+      {revokeDialogVisible ? (
         <RevokeDialog
           visible={revokeDialogVisible}
           onClose={() => setRevokeDialogVisible(false)}
@@ -89,8 +90,9 @@ const AuthorizedApps = ({
           onRevoke={revokeClient}
           selection={selection}
           bufferSelection={bufferSelection}
+          logoText={logoText}
         />
-      )}
+      ) : null}
     </StyledContainer>
   );
 };
@@ -118,7 +120,7 @@ export default inject(
       revokeClient,
     } = oauthStore;
 
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, logoText } = settingsStore;
 
     return {
       consents,
@@ -133,6 +135,7 @@ export default inject(
       selection,
       bufferSelection,
       revokeClient,
+      logoText,
     };
   },
 )(observer(AuthorizedApps));

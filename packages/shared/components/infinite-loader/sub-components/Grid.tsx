@@ -26,10 +26,13 @@
 
 import React, { useCallback, useEffect, useRef } from "react";
 import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
-import { StyledItem, StyledList } from "../InfiniteLoader.styled";
-import { GridComponentProps } from "../InfiniteLoader.types";
+import classNames from "classnames";
+
 import { TileSkeleton } from "../../../skeletons/tiles";
-import { RectangleSkeleton } from "../../../skeletons";
+import { RectangleSkeleton } from "../../../skeletons/rectangle";
+
+import { GridComponentProps } from "../InfiniteLoader.types";
+import styles from "../InfiniteLoader.module.scss";
 
 const GridComponent = ({
   hasMoreFiles,
@@ -100,9 +103,9 @@ const GridComponent = ({
       if (isHeader) {
         return (
           <div key={key} style={style}>
-            <StyledItem>
+            <div className={styles.item}>
               <RectangleSkeleton height="22px" width="100px" animate />
-            </StyledItem>
+            </div>
           </div>
         );
       }
@@ -120,7 +123,7 @@ const GridComponent = ({
 
       return (
         <div key={key} style={style}>
-          <StyledItem>{list.map((item) => item)}</StyledItem>
+          <div className={styles.item}>{list.map((item) => item)}</div>
         </div>
       );
     }
@@ -162,7 +165,11 @@ const GridComponent = ({
       if (isFile) return fileHeight;
       return titleHeight;
     }
+
+    return 0;
   };
+
+  const listClassName = classNames(styles.list, className, styles.tile);
 
   return (
     <InfiniteLoader
@@ -170,12 +177,14 @@ const GridComponent = ({
       rowCount={itemCount}
       loadMoreRows={loadMoreItems}
       ref={loaderRef}
+      data-testid="infinite-loader-container-grid"
     >
       {({ onRowsRendered, registerChild }) => (
         <WindowScroller scrollElement={scroll}>
           {({ height, isScrolling, onChildScroll, scrollTop }) => {
+            let newHeight = height;
             if (height === undefined && scroll instanceof Element) {
-              height = scroll.getBoundingClientRect().height;
+              newHeight = scroll.getBoundingClientRect().height;
             }
 
             const width =
@@ -183,9 +192,9 @@ const GridComponent = ({
                 .width ?? 0;
 
             return (
-              <StyledList
+              <List
                 autoHeight
-                height={height}
+                height={newHeight}
                 onRowsRendered={onRowsRendered}
                 ref={(ref: List | null) => {
                   listRef.current = ref;
@@ -195,12 +204,12 @@ const GridComponent = ({
                 rowHeight={getItemSize}
                 rowRenderer={renderTile}
                 width={width}
-                className={className}
                 isScrolling={isScrolling}
                 onChildScroll={onChildScroll}
                 scrollTop={scrollTop}
                 overscanRowCount={3}
                 onScroll={onScroll}
+                className={listClassName}
               />
             );
           }}

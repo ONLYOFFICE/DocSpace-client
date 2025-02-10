@@ -24,19 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+/* eslint-disable no-param-reassign */
+
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useTheme } from "styled-components";
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import throttle from "lodash/throttle";
 
 import { classNames, isTouchDevice } from "../../utils";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
-import StyledScrollbar from "./Scrollbar.styled";
-import { ScrollbarProps } from "./Scrollbar.types";
-import { Scrollbar } from "./custom-scrollbar";
+import { Scrollbar as CustomScrollbar } from "./custom-scrollbar";
+import styles from "./Scrollbar.module.scss";
+import type { ScrollbarProps } from "./Scrollbar.types";
 
-const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
+const Scrollbar = React.forwardRef<CustomScrollbar, ScrollbarProps>(
   (props, ref) => {
     const {
       onScroll,
@@ -47,18 +55,16 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
       autoFocus,
       tabIndex = -1,
       paddingAfterLastItem,
+      paddingInlineEnd,
       ...rest
     } = props;
 
-    const defaultTheme = useTheme();
-    const interfaceDirection = defaultTheme?.interfaceDirection;
+    const { isRTL } = useInterfaceDirection();
 
     const [scrollVisible, setScrollVisible] = useState(false);
     const timerId = useRef<null | ReturnType<typeof setTimeout>>(null);
 
-    const scrollRef = useRef<null | Scrollbar>(null);
-
-    const isRtl = interfaceDirection === "rtl";
+    const scrollRef = useRef<null | CustomScrollbar>(null);
 
     // onScroll handler placed here on Scroller element to get native event instead of parameters that library put
     const renderScroller = React.useCallback(
@@ -69,9 +75,10 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
           <div
             {...restLibProps}
             key="scroll-renderer-div"
-            className={classNames("scroller", scrollClass || "") || "scroller"}
+            className={classNames(styles.scroller, "scroller", scrollClass)}
             ref={elementRef}
             onScroll={onScroll}
+            data-testid="scroller"
           />
         );
       },
@@ -96,13 +103,37 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
       [],
     );
 
-    const refSetter = (elementRef: Scrollbar) => {
+    const refSetter = (elementRef: CustomScrollbar) => {
       if (typeof ref === "function") {
         ref(elementRef);
       } else if (ref) {
         ref.current = elementRef;
       }
       scrollRef.current = elementRef;
+    };
+
+    const autoHideContainerProps = autoHide ? { onScroll: showTracks } : {};
+
+    const autoHideContentProps =
+      autoHide && !isTouchDevice ? { onMouseMove: showTracks } : {};
+    const tabIndexProp = tabIndex !== null ? { tabIndex } : {};
+
+    const renderScrollBody = (libProps: {
+      elementRef?: React.LegacyRef<HTMLDivElement>;
+    }) => {
+      const { elementRef, ...restLibProps } = libProps;
+
+      return (
+        <div
+          {...restLibProps}
+          key="scroll-body-renderer-div"
+          ref={elementRef}
+          data-testid="scroll-body"
+          className={classNames(styles.scrollBody, "scroll-body")}
+          {...tabIndexProp}
+          {...autoHideContentProps}
+        />
+      );
     };
 
     useEffect(() => {
@@ -117,40 +148,79 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
       }
     }, [autoFocus]);
 
-    const autoHideContainerProps = autoHide
-      ? {
-          onScroll: showTracks,
-          className: classNames(className, {
-            "auto-hide": autoHide,
-            "scroll-visible": autoHide && scrollVisible,
-          }),
-        }
-      : {};
+    useLayoutEffect(() => {
+      if (!scrollRef.current?.holderElement) return;
 
-    const autoHideContentProps =
-      autoHide && !isTouchDevice ? { onMouseMove: showTracks } : {};
-    const tabIndexProp = tabIndex !== null ? { tabIndex } : {};
+      if (paddingAfterLastItem) {
+        scrollRef.current.holderElement.style.setProperty(
+          "--scrollbar-padding-after-last-item",
+          paddingAfterLastItem,
+        );
+      }
+
+      if (paddingInlineEnd) {
+        scrollRef.current.holderElement.style.setProperty(
+          "--scrollbar-padding-inline-end",
+          paddingInlineEnd,
+        );
+        scrollRef.current.holderElement.style.setProperty(
+          "--scrollbar-padding-inline-end-mobile",
+          paddingInlineEnd,
+        );
+      }
+    }, [paddingAfterLastItem, paddingInlineEnd]);
 
     return (
-      <StyledScrollbar
+      <CustomScrollbar
         {...rest}
         data-testid="scrollbar"
         disableTracksWidthCompensation
-        $fixedSize={fixedSize}
-        $paddingAfterLastItem={paddingAfterLastItem}
-        rtl={isRtl}
-        className={className}
+        rtl={isRTL}
+        className={classNames(styles.scrollbar, className, {
+          [styles.fixedSize]: fixedSize,
+          [styles.paddingAfterLastItem]: paddingAfterLastItem,
+          [styles.autoHide]: autoHide,
+          [styles.scrollVisible]: autoHide && scrollVisible,
+          [styles.noScrollY]: rest.noScrollY,
+        })}
         wrapperProps={{ className: "scroll-wrapper" }}
         scrollerProps={{ renderer: renderScroller }}
         contentProps={{
-          className: "scroll-body",
-          ...tabIndexProp,
-          ...autoHideContentProps,
+          renderer: renderScrollBody,
         }}
-        thumbYProps={{ className: "thumb thumb-vertical" }}
-        thumbXProps={{ className: "thumb thumb-horizontal" }}
-        trackYProps={{ className: "track track-vertical" }}
-        trackXProps={{ className: "track track-horizontal" }}
+        thumbYProps={{
+          className: classNames(
+            styles.thumb,
+            styles.thumbVertical,
+            "thumb",
+            "thumb-vertical",
+          ),
+        }}
+        thumbXProps={{
+          className: classNames(
+            styles.thumb,
+            styles.thumbHorizontal,
+            "thumb",
+            "thumb-horizontal",
+          ),
+        }}
+        trackYProps={{
+          className: classNames(
+            styles.track,
+            styles.trackVertical,
+            "track",
+            "track-vertical",
+          ),
+        }}
+        trackXProps={{
+          className: classNames(
+            styles.track,
+            styles.trackHorizontal,
+            "track",
+            "track-horizontal",
+          ),
+        }}
+        // @ts-expect-error error from custom scrollbar
         ref={refSetter}
         {...autoHideContainerProps}
       />
@@ -158,6 +228,6 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
   },
 );
 
-ScrollbarComponent.displayName = "Scrollbar";
+Scrollbar.displayName = "Scrollbar";
 
-export { ScrollbarComponent };
+export { Scrollbar };

@@ -101,19 +101,19 @@ const CommentEditor = ({
     <div className="property-comment_editor property-content">
       {!isEdit ? (
         <div className="property-comment_editor-display">
-          {comment && (
+          {comment ? (
             <Text truncate className="property-content">
               {comment}
             </Text>
-          )}
-          {changeVersionHistoryAbility && (
+          ) : null}
+          {changeVersionHistoryAbility ? (
             <div className="edit_toggle" onClick={onOpenEditor}>
               <ReactSVG className="edit_toggle-icon" src={PencilReactSvgUrl} />
               <div className="property-content edit_toggle-text">
                 {comment ? t("Common:EditButton") : t("Common:AddButton")}
               </div>
             </div>
-          )}
+          ) : null}
         </div>
       ) : (
         <div className="property-comment_editor-editor">
@@ -154,7 +154,6 @@ export default inject(({ versionHistoryStore, infoPanelStore }) => {
     updateCommentVersion,
     isEditingVersion,
     isEditing,
-    fileId,
     setVerHistoryFileId,
     setVerHistoryFileSecurity,
   } = versionHistoryStore;

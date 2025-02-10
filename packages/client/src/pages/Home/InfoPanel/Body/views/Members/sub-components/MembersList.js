@@ -24,22 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
-  useState,
-  useCallback,
-  useEffect,
-  useRef,
-  useContext,
-} from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
 import { RowLoader } from "@docspace/shared/skeletons/selector";
 
-import { isMobile, mobile } from "@docspace/shared/utils";
+import { mobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
-import { StyledUserTypeHeader } from "../../../styles/members";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
+import { StyledUserTypeHeader } from "../../../styles/members";
 
 const MainStyles = styled.div`
   #members-list-header {
@@ -50,6 +44,10 @@ const MainStyles = styled.div`
     padding: 0;
     z-index: 1;
     background: ${(props) => props.theme.infoPanel.backgroundColor};
+
+    @media ${mobile} {
+      padding-inline-end: 16px;
+    }
   }
 `;
 
@@ -120,7 +118,7 @@ const MembersList = (props) => {
           className="members-list-item members-list-loader-item"
           style={style}
         >
-          <RowLoader isMultiSelect={false} isContainer={true} isUser={true} />
+          <RowLoader isMultiSelect={false} isContainer isUser />
         </div>
       );
     }
@@ -183,7 +181,7 @@ const MembersList = (props) => {
       ? GENERAL_LINK_HEADER_HEIGHT + (linksBlockLength - 1) * shareLinkItemSize
       : 0;
 
-    for (let titleIndex in listOfTitles) {
+    Object.keys(listOfTitles).forEach((titleIndex) => {
       const title = listOfTitles[titleIndex];
       const titleOffsetTop =
         linksBlockHeight + (title.index - linksBlockLength) * itemSize;
@@ -194,7 +192,7 @@ const MembersList = (props) => {
       } else if (scrollOffset <= linksBlockHeight) {
         header.style.display = "none";
       }
-    }
+    });
   };
 
   useEffect(() => {
@@ -213,14 +211,14 @@ const MembersList = (props) => {
 
   return (
     <MainStyles>
-      {!withoutTitlesAndLinks && (
+      {!withoutTitlesAndLinks ? (
         <StyledUserTypeHeader
           id="members-list-header"
           className="members-list-header"
         >
           <Text className="members-list-header_title title" />
         </StyledUserTypeHeader>
-      )}
+      ) : null}
       <StyledMembersList>
         <InfiniteLoader
           isRowLoaded={isItemLoaded}

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import DarkGeneralPngUrl from "PUBLIC_DIR/images/dark_general.png";
-import React, { useState } from "react";
+import { useState } from "react";
 import { observer, inject } from "mobx-react";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
@@ -121,7 +121,7 @@ const StyledPrivacyPage = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const PrivacyPageComponent = ({ t, tReady }) => {
+const PrivacyPageComponent = ({ t, tReady, logoText }) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const location = useLocation();
@@ -167,10 +167,10 @@ const PrivacyPageComponent = ({ t, tReady }) => {
             i18nKey="PrivacyClick"
             ns="PrivacyPage"
             values={{
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             }}
             components={{
-              1: <strong></strong>,
+              1: <strong />,
             }}
           />
         </Text>
@@ -189,7 +189,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
           primary
           isDisabled={isDisabled}
           label={t("PrivacyButton", {
-            organizationName: t("Common:OrganizationName"),
+            organizationName: logoText,
           })}
         />
 
@@ -202,7 +202,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
             fontWeight={300}
           >
             {t("PrivacyEditors", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
             ?
           </Text>
@@ -224,7 +224,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
         >
           <p>
             {t("PrivacyDescriptionEditors", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
             .
           </p>
@@ -249,4 +249,10 @@ const PrivacyPage = (props) => {
   );
 };
 
-export default observer(PrivacyPage);
+export default inject(({ settingsStore }) => {
+  const { logoText } = settingsStore;
+
+  return {
+    logoText,
+  };
+})(observer(PrivacyPage));

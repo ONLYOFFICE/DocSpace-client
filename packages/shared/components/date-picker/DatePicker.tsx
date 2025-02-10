@@ -26,21 +26,18 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import moment from "moment";
+import classNames from "classnames";
 
 import CalendarIconUrl from "PUBLIC_DIR/images/calendar.react.svg?url";
 import CalendarIcon from "PUBLIC_DIR/images/calendar.react.svg";
 
 import { Text } from "../text";
+import { Calendar } from "../calendar";
 import { SelectorAddButton } from "../selector-add-button";
 import { SelectedItem } from "../selected-item";
-import {
-  DateSelector,
-  SelectedLabel,
-  StyledCalendar,
-  Wrapper,
-} from "./DatePicker.styled";
 import { DatePickerProps } from "./DatePicker.types";
 import { globalColors } from "../../themes";
+import styles from "./DatePicker.module.scss";
 
 const DatePicker = (props: DatePickerProps) => {
   const {
@@ -80,7 +77,7 @@ const DatePicker = (props: DatePickerProps) => {
   };
 
   const deleteSelectedDate = (
-    propKey: string,
+    propKey: string | number,
     label: string | React.ReactNode,
     group: string | undefined,
     e: React.MouseEvent | undefined,
@@ -129,40 +126,65 @@ const DatePicker = (props: DatePickerProps) => {
   }, [date, outerDate]);
 
   return (
-    <Wrapper className={className} id={id} data-testid="date-picker">
+    <div
+      className={classNames(styles.wrapper, className)}
+      id={id}
+      data-testid="date-picker"
+      role="presentation"
+    >
       {!date ? (
-        <DateSelector onClick={toggleCalendar} ref={selectorRef}>
+        <div
+          className={styles.dateSelector}
+          onClick={toggleCalendar}
+          ref={selectorRef}
+          data-testid="date-selector"
+          role="button"
+          aria-label={selectDateText}
+          aria-expanded={isCalendarOpen}
+          tabIndex={0}
+        >
           <SelectorAddButton
             title={selectDateText}
-            className="mr-8 add-delivery-date-button"
+            className="add-delivery-date-button"
             iconName={CalendarIconUrl}
           />
           <Text isInline fontWeight={600} color={globalColors.gray}>
             {selectDateText}
           </Text>
-        </DateSelector>
-      ) : (
+        </div>
+      ) : null}
+
+      {date ? (
         <SelectedItem
-          className="selectedItem"
+          className={styles.selectedItem}
           propKey=""
           onClose={deleteSelectedDate}
           label={
             showCalendarIcon ? (
-              <SelectedLabel>
-                <CalendarIcon className="calendarIcon" />
+              <span
+                className={styles.selectedLabel}
+                data-testid="selected-label"
+              >
+                <CalendarIcon
+                  className={styles.calendarIcon}
+                  data-testid="calendar-icon"
+                />
                 {date.format("DD MMM YYYY")}
-              </SelectedLabel>
+              </span>
             ) : (
               date.format("DD MMM YYYY")
             )
           }
           onClick={toggleCalendar}
           forwardedRef={selectedItemRef}
+          aria-label={`Selected date: ${date.format("DD MMMM YYYY")}`}
+          aria-expanded={isCalendarOpen}
         />
-      )}
+      ) : null}
 
-      {isCalendarOpen && (
-        <StyledCalendar
+      {isCalendarOpen ? (
+        <Calendar
+          className={styles.calendar}
           isMobile={isMobile}
           selectedDate={date ?? moment()}
           setSelectedDate={handleChange}
@@ -172,9 +194,10 @@ const DatePicker = (props: DatePickerProps) => {
           maxDate={maxDate}
           locale={locale}
           initialDate={openDate}
+          aria-label="Date picker calendar"
         />
-      )}
-    </Wrapper>
+      ) : null}
+    </div>
   );
 };
 

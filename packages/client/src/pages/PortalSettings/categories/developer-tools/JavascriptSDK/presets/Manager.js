@@ -39,8 +39,6 @@ import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-import { TooltipContent } from "../sub-components/TooltipContent";
-import { Integration } from "../sub-components/Integration";
 import { useNavigate } from "react-router-dom";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
@@ -57,6 +55,8 @@ import ActionButtonDarkUrl from "PUBLIC_DIR/images/sdk-presets_action-button_dar
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { FilterBlock } from "../sub-components/FilterBlock";
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
@@ -83,8 +83,8 @@ import {
   SelectedItemsContainer,
   CheckboxGroup,
 } from "./StyledPresets";
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { Integration } from "../sub-components/Integration";
+import { TooltipContent } from "../sub-components/TooltipContent";
 
 const Manager = (props) => {
   const { t, fetchExternalLinks, theme, currentColorScheme } = props;
@@ -124,7 +124,7 @@ const Manager = (props) => {
   );
   const [selectedColumns, setSelectedColumns] = useState([
     { key: "Index", label: t("Files:Index") },
-    { key: "Name", label: t("Common:Name") },
+    { key: "Name", label: t("Common:Label") },
     { key: "Size", label: t("Common:Size") },
     { key: "Type", label: t("Common:Type") },
     { key: "Tags", label: t("Common:Tags") },
@@ -162,7 +162,7 @@ const Manager = (props) => {
   };
 
   const initFrame = () => {
-    sdk.init(config);
+    setTimeout(() => sdk.init(config), 10);
   };
 
   useEffect(() => {
@@ -178,14 +178,14 @@ const Manager = (props) => {
   }, []);
 
   const onChangeFolderId = async (id, publicInPath) => {
-    let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
+    const newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
 
-    if (!!publicInPath) {
+    if (publicInPath) {
       const links = await fetchExternalLinks(publicInPath.id);
 
       if (links.length > 1) {
         const linksOptions = links.map((link) => {
-          const { id, title, requestToken } = link.sharedTo;
+          const { title, requestToken } = link.sharedTo;
           const linkSettings = [];
 
           if ("password" in link.sharedTo) {
@@ -199,9 +199,9 @@ const Manager = (props) => {
           }
 
           return {
-            key: id,
+            key: link.sharedTo.id,
             label: title,
-            requestToken: requestToken,
+            requestToken,
             settings: linkSettings,
           };
         });
@@ -217,79 +217,85 @@ const Manager = (props) => {
       setSharedLinks(null);
     }
 
-    setConfig((config) => {
-      return { ...config, ...newConfig };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, ...newConfig };
     });
   };
 
   const onChangeSharedLink = (link) => {
     setSelectedLink(link);
-    setConfig((config) => {
-      return { ...config, requestToken: link.requestToken };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, requestToken: link.requestToken };
     });
   };
 
   const onChangeSortBy = (item) => {
-    setConfig((config) => {
-      return { ...config, filter: { ...config.filter, sortby: item.key } };
+    setConfig((oldConfig) => {
+      return {
+        ...oldConfig,
+        filter: { ...oldConfig.filter, sortby: item.key },
+      };
     });
 
     setSortBy(item);
   };
 
   const onChangeSortOrder = (item) => {
-    setConfig((config) => {
-      return { ...config, filter: { ...config.filter, sortorder: item.key } };
+    setConfig((oldConfig) => {
+      return {
+        ...oldConfig,
+        filter: { ...oldConfig.filter, sortorder: item.key },
+      };
     });
 
     setSortOrder(item);
   };
 
-  const onChangeShowHeader = (e) => {
-    setConfig((config) => {
-      return { ...config, showHeader: !config.showHeader };
+  const onChangeShowHeader = () => {
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showHeader: !config.showHeader };
     });
   };
 
   const onChangeShowTitle = () => {
-    setConfig((config) => {
-      return { ...config, showTitle: !config.showTitle };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showTitle: !config.showTitle };
     });
   };
 
   const toggleShowSettings = () => {
-    setConfig((config) => {
-      return { ...config, showSettings: !config.showSettings };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showSettings: !config.showSettings };
     });
   };
 
   const toggleActionButton = () => {
-    setConfig((config) => {
-      return { ...config, disableActionButton: !config.disableActionButton };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, disableActionButton: !config.disableActionButton };
     });
   };
 
-  const onChangeShowMenu = (e) => {
-    setConfig((config) => {
-      return { ...config, showMenu: !config.showMenu };
+  const onChangeShowMenu = () => {
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showMenu: !config.showMenu };
     });
   };
 
-  const onChangeShowFilter = (e) => {
-    setConfig((config) => {
-      return { ...config, showFilter: !config.showFilter };
+  const onChangeShowFilter = () => {
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showFilter: !config.showFilter };
     });
   };
 
   const changeColumnsOption = (e) => {
     if (e.target.value === "default") {
-      setConfig((config) => ({
-        ...config,
+      setConfig((oldConfig) => ({
+        ...oldConfig,
         viewTableColumns: "Index,Name,Type,Tags",
       }));
     } else if (e.target.value === "custom") {
-      setConfig((config) => ({
-        ...config,
+      setConfig((oldConfig) => ({
+        ...oldConfig,
         viewTableColumns: selectedColumns.map((column) => column.key).join(","),
       }));
     }
@@ -301,8 +307,8 @@ const Manager = (props) => {
       prevColumnsOptions.filter((column) => column.key !== option.key),
     );
     if (!selectedColumns.find((column) => column.key === option.key)) {
-      setConfig((config) => ({
-        ...config,
+      setConfig((oldConfig) => ({
+        ...oldConfig,
         viewTableColumns: [...selectedColumns, option]
           .map((column) => column.key)
           .join(","),
@@ -319,8 +325,8 @@ const Manager = (props) => {
     const filteredColumns = selectedColumns.filter(
       (column) => column.key !== option.key,
     );
-    setConfig((config) => ({
-      ...config,
+    setConfig((oldConfig) => ({
+      ...oldConfig,
       viewTableColumns: filteredColumns.map((column) => column.key).join(","),
     }));
     setSelectedColumns(filteredColumns);
@@ -340,7 +346,7 @@ const Manager = (props) => {
       height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
-      <Box id={config.frameId}></Box>
+      <Box id={config.frameId} />
     </Frame>
   );
 
@@ -535,7 +541,7 @@ const Manager = (props) => {
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
-            {sharedLinks && (
+            {sharedLinks ? (
               <ControlsGroup>
                 <LabelGroup>
                   <Label
@@ -559,16 +565,16 @@ const Manager = (props) => {
                   directionY="bottom"
                 />
 
-                {selectedLink && (
+                {selectedLink ? (
                   <SharedLinkHint
                     t={t}
                     linkSettings={selectedLink.settings}
                     redirectToSelectedRoom={redirectToSelectedRoom}
                     currentColorScheme={currentColorScheme}
                   />
-                )}
+                ) : null}
               </ControlsGroup>
-            )}
+            ) : null}
           </ControlsSection>
           <ControlsSection>
             <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
@@ -615,7 +621,7 @@ const Manager = (props) => {
               onClick={changeColumnsOption}
               spacing="8px"
             />
-            {columnDisplay === "custom" && (
+            {columnDisplay === "custom" ? (
               <ControlsGroup>
                 <ComboBox
                   onSelect={onColumnSelect}
@@ -647,7 +653,7 @@ const Manager = (props) => {
                   ))}
                 </SelectedItemsContainer>
               </ControlsGroup>
-            )}
+            ) : null}
           </ControlsSection>
 
           <Integration

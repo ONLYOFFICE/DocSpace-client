@@ -31,15 +31,19 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 
-import CustomSettings from "./sub-components/CustomSettings";
-import { StyledComponent } from "./StyledComponent";
 import { SettingsSMTPSkeleton } from "@docspace/shared/skeletons/settings";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import CustomSettings from "./sub-components/CustomSettings";
+import { StyledComponent } from "./StyledComponent";
 
 let timerId = null;
 const SMTPSettings = (props) => {
-  const { setInitSMTPSettings, currentColorScheme, integrationSettingsUrl } =
-    props;
+  const {
+    setInitSMTPSettings,
+    currentColorScheme,
+    integrationSettingsUrl,
+    logoText,
+  } = props;
 
   const { t, ready } = useTranslation([
     "SMTPSettings",
@@ -75,7 +79,7 @@ const SMTPSettings = (props) => {
 
   const isLoadingContent = isLoading || !ready;
 
-  if (!isLoading && !isInit) return <></>;
+  if (!isLoading && !isInit) return null;
 
   if (isLoadingContent && !isInit) return <SettingsSMTPSkeleton />;
 
@@ -84,7 +88,7 @@ const SMTPSettings = (props) => {
       <div className="smtp-settings_main-title">
         <Text className="smtp-settings_description">
           {t("Settings:SMTPSettingsDescription", {
-            organizationName: t("Common:OrganizationName"),
+            organizationName: logoText,
           })}
         </Text>
         <Link
@@ -104,12 +108,14 @@ const SMTPSettings = (props) => {
 };
 
 export default inject(({ settingsStore, setup }) => {
-  const { currentColorScheme, integrationSettingsUrl } = settingsStore;
+  const { currentColorScheme, integrationSettingsUrl, logoText } =
+    settingsStore;
   const { setInitSMTPSettings } = setup;
 
   return {
     setInitSMTPSettings,
     currentColorScheme,
     integrationSettingsUrl,
+    logoText,
   };
 })(observer(SMTPSettings));

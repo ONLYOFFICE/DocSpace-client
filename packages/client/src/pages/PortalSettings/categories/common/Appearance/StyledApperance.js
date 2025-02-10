@@ -27,7 +27,6 @@
 import { mobile } from "@docspace/shared/utils";
 import PlusThemeSvgUrl from "PUBLIC_DIR/images/plus.theme.svg?url";
 import styled, { css } from "styled-components";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 const StyledComponent = styled.div`
   width: 100%;

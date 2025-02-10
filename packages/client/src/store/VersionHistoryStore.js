@@ -98,7 +98,6 @@ class VersionHistoryStore {
   };
 
   setVerHistoryFileId = (fileId) => {
-    console.log("setVerHistoryFileId", fileId);
     this.fileId = fileId;
   };
 

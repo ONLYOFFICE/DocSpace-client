@@ -188,7 +188,6 @@ const VersionRow = (props) => {
 
   const onDeleteVersion = () => {
     onSetDeleteVersionDialogVisible(true);
-    console.log("info.versionGroup", info.versionGroup);
     setVersionSelectedForDeletion(info.versionGroup);
   };
 

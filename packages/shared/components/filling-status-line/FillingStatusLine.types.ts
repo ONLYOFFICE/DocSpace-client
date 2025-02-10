@@ -38,7 +38,7 @@ export type TData = {
   avatar: string | null;
 };
 
-export interface FillingStatusLineProps {
+export type FillingStatusLineProps = {
   /** Accepts id */
   id: string;
   /** Accepts class */
@@ -53,7 +53,7 @@ export interface FillingStatusLineProps {
   statusInterrupted: boolean;
 }
 
-export interface FillingStatusLineAccordionProps {
+export type FillingStatusLineAccordionProps = {
   id?: string | number;
   displayName: string;
   role: string;

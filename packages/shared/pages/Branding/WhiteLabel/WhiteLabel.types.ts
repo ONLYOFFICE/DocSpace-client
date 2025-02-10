@@ -61,28 +61,14 @@ export interface IHeaderProps {
   isEmpty: boolean;
   logoTextWhiteLabel: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClear: () => void;
 }
-
-export interface IBrandNameProps {
-  t: TTranslation;
-  showNotAvailable: boolean;
-  isSettingPaid: boolean;
-  standalone: boolean;
-  isEmpty: boolean;
-  inputValue: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSave: () => void;
-  onCancel: () => void;
-  isEqualText: boolean;
-}
-
 export interface IWhiteLabel {
   t: TTranslation;
   isSettingPaid: boolean;
   showNotAvailable: boolean;
   standalone: boolean;
   logoUrls: ILogo[];
-  brandName: string;
   showAbout: boolean;
   onSave: (data: IWhiteLabelData) => void;
   onRestoreDefault: () => void;
@@ -91,7 +77,6 @@ export interface IWhiteLabel {
   deviceType: DeviceType;
   setLogoUrls: (logoUrls: ILogo[]) => void;
   isWhiteLabelLoaded: boolean;
-  defaultBrandName: string;
   defaultWhiteLabelLogoUrls: ILogo[];
 }
 

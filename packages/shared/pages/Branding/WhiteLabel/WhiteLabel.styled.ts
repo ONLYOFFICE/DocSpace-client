@@ -24,21 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 
-import { mobile } from "../../../utils";
+import {
+  commonIconsStyles,
+  mobile,
+  injectDefaultTheme,
+  commonInputStyles,
+} from "../../../utils";
+
+const iconStyles = css`
+  ${commonIconsStyles}
+  path {
+    fill: ${(props) => props.theme.filesEditingWrapper.fill} !important;
+  }
+`;
+
+export const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
+  ${iconStyles}
+`;
 
 export const StyledHeader = styled.div`
   .header-container {
     display: flex;
     align-items: center;
     gap: 8px;
+
+    @media ${mobile} {
+      display: none;
+    }
   }
 
   .wl-subtitle {
     margin-top: 16px;
     margin-bottom: 16px;
+    line-height: 20px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
+
+    @media ${mobile} {
+      margin-top: 0;
+    }
   }
 
   .wl-helper {
@@ -58,16 +84,56 @@ export const StyledHeader = styled.div`
       props.theme.client.settings.common.whiteLabel.paidBadgeBackground};
   }
 
-  .brand-name-buttons {
-    margin-top: 20px;
+  .field-label-icon {
+      margin-top: 4px;
+      margin-bottom: 16px;
+    }
+  }
+`;
+
+export const StyledWhiteLabelInput = styled.div<{ isShowCross: boolean }>`
+  max-width: 350px;
+
+  .input-link {
+    height: 32px;
+    border: 0px;
+
+    > input {
+      height: 30px;
+    }
+  }
+
+  display: flex;
+  border: ${(props) => props.theme.filesPanels.invite.border};
+  border-radius: 3px;
+
+  .copy-link-icon {
+    padding: 0;
+  }
+
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .append {
+    display: ${(props) => (props.isShowCross ? "flex" : "none")};
+    align-items: center;
+    padding-inline-end: 8px;
+    cursor: default;
+  }
+
+  ${commonInputStyles}
+
+  :focus-within {
+    border-color: ${(props) => props.theme.inputBlock.borderColor};
   }
 `;
 
 export const WhiteLabelWrapper = styled.div`
-  hr {
-    margin: 20px 0;
-  }
-
   .generate-logo {
     margin-top: 16px;
     margin-bottom: 24px;

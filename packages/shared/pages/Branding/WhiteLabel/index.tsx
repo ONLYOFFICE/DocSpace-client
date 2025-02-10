@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import isEqual from "lodash/isEqual";
 
 import { Text } from "../../../components/text";
@@ -40,7 +40,6 @@ import { WhiteLabelWrapper, StyledSpacer } from "./WhiteLabel.styled";
 import { IWhiteLabel, IWhiteLabelData } from "./WhiteLabel.types";
 import { getLogoOptions, generateLogo, uploadLogo } from "./WhiteLabel.helper";
 import { WhiteLabelHeader } from "./WhiteLabelHeader";
-import { BrandName } from "./BrandName";
 import { brandingRedirectUrl } from "../constants";
 
 export const WhiteLabel = (props: IWhiteLabel) => {
@@ -57,17 +56,10 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     enableRestoreButton,
     deviceType,
     setLogoUrls,
-    isWhiteLabelLoaded,
-    defaultBrandName,
     defaultWhiteLabelLogoUrls,
-    brandName,
   } = props;
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
-  const [brandNameWhiteLabel, setBrandNameWhiteLabel] = useState("");
 
-  const [isEmptyBrandName, setIsEmptyBrandName] = useState(
-    isWhiteLabelLoaded && !brandName,
-  );
   const [isEmptyLogoText, setIsEmptyLogoText] = useState(!logoTextWhiteLabel);
 
   useResponsiveNavigation({
@@ -76,25 +68,16 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     deviceType,
   });
 
-  useEffect(() => {
-    if (!isWhiteLabelLoaded) return;
-    setIsEmptyBrandName(!brandName);
-    if (!brandName) return;
-    setBrandNameWhiteLabel(brandName);
-  }, [brandName, isWhiteLabelLoaded]);
-
-  const onChangeBrandName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setBrandNameWhiteLabel(value);
-    const trimmedValue = value?.trim();
-    setIsEmptyBrandName(!trimmedValue);
-  };
-
   const onChangeLogoText = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setLogoTextWhiteLabel(value);
     const trimmedValue = value?.trim();
     setIsEmptyLogoText(!trimmedValue);
+  };
+
+  const clearLogoText = () => {
+    setLogoTextWhiteLabel("");
+    setIsEmptyLogoText(true);
   };
 
   const onUseTextAsLogo = () => {
@@ -194,43 +177,12 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     onSave(data);
   };
 
-  const onSaveBrandNameAction = (): void => {
-    const data: IWhiteLabelData = {
-      logoText: brandNameWhiteLabel,
-      logo: [],
-    };
-    onSave(data);
-  };
-
-  const onCancelBrandNameAction = (): void => {
-    setBrandNameWhiteLabel(defaultBrandName);
-  };
-
-  console.log("default logo", defaultBrandName);
+  console.log("logosUrls", logoUrls);
 
   const isEqualLogo = isEqual(logoUrls, defaultWhiteLabelLogoUrls);
-  const isEqualText = defaultBrandName === brandNameWhiteLabel;
-  const saveButtonDisabled = isEqualLogo && isEqualText;
 
   return (
     <WhiteLabelWrapper>
-      <Text className="subtitle">{t("BrandingSubtitle")}</Text>
-
-      <BrandName
-        t={t}
-        showNotAvailable={showNotAvailable}
-        isSettingPaid={isSettingPaid}
-        standalone={standalone}
-        isEmpty={isEmptyBrandName}
-        inputValue={brandNameWhiteLabel}
-        onChange={onChangeBrandName}
-        onSave={onSaveBrandNameAction}
-        onCancel={onCancelBrandNameAction}
-        isEqualText={isEqualText}
-      />
-
-      <hr />
-
       <WhiteLabelHeader
         t={t}
         showNotAvailable={showNotAvailable}
@@ -239,6 +191,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         onUseTextAsLogo={onUseTextAsLogo}
         isEmpty={isEmptyLogoText}
         logoTextWhiteLabel={logoTextWhiteLabel}
+        onClear={clearLogoText}
         onChange={onChangeLogoText}
       />
 
@@ -448,7 +401,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           />
         </div>
       </div>
-      <StyledSpacer showReminder={!saveButtonDisabled} />
+      <StyledSpacer showReminder={!isEqualLogo} />
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={onSaveAction}
@@ -458,9 +411,9 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         displaySettings
         hasScroll
         hideBorder
-        showReminder={!saveButtonDisabled}
+        showReminder={!isEqualLogo}
         reminderText={t("YouHaveUnsavedChanges")}
-        saveButtonDisabled={saveButtonDisabled}
+        saveButtonDisabled={isEqualLogo}
         disableRestoreToDefault={!enableRestoreButton}
         isSaving={isSaving}
         additionalClassSaveButton="white-label-save"

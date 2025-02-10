@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { isMobile } from "react-device-detect";
 
 import { Text } from "../../../components/text";
 import { Badge } from "../../../components/badge";
@@ -39,7 +38,11 @@ import {
 import { Button, ButtonSize } from "../../../components/button";
 
 import { NotAvailable } from "./NotAvailable";
-import { StyledHeader } from "./WhiteLabel.styled";
+import {
+  StyledHeader,
+  StyledWhiteLabelInput,
+  StyledCrossIcon,
+} from "./WhiteLabel.styled";
 import { IHeaderProps } from "./WhiteLabel.types";
 
 export const WhiteLabelHeader = ({
@@ -51,6 +54,7 @@ export const WhiteLabelHeader = ({
   isEmpty,
   logoTextWhiteLabel,
   onChange,
+  onClear,
 }: IHeaderProps) => {
   return (
     <StyledHeader>
@@ -92,25 +96,29 @@ export const WhiteLabelHeader = ({
           id="fieldContainerGenerateLogo"
           labelText={t("GenerateLogoLabel")}
           isVertical
-          className="settings_unavailable"
-          //  hasError={isEmpty}
+          className="settings_unavailable field-container"
           labelVisible
         >
-          <TextInput
-            testId="logo-text-input"
-            className="logo-text input"
-            placeholder={t("YourLogo")}
-            value={logoTextWhiteLabel}
-            onChange={onChange}
-            isDisabled={!isSettingPaid}
-            isReadOnly={!isSettingPaid}
-            scale
-            isAutoFocussed={!isMobile}
-            maxLength={10}
-            //  hasError={isEmpty}
-            type={InputType.text}
-            size={InputSize.base}
-          />
+          <StyledWhiteLabelInput isShowCross={!!logoTextWhiteLabel}>
+            <TextInput
+              testId="logo-text-input"
+              className="logo-text input"
+              placeholder={t("YourLogo")}
+              value={logoTextWhiteLabel}
+              onChange={onChange}
+              isDisabled={!isSettingPaid}
+              isReadOnly={!isSettingPaid}
+              scale
+              maxLength={10}
+              type={InputType.text}
+              size={InputSize.base}
+              withBorder={false}
+            />
+
+            <div className="append" onClick={onClear}>
+              <StyledCrossIcon />
+            </div>
+          </StyledWhiteLabelInput>
           <Button
             testId="generate-logo-button"
             id="btnGenerateLogo"

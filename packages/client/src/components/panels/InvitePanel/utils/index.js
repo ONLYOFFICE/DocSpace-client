@@ -247,6 +247,7 @@ export const getAccessOptions = (
         accesses.contentCreator,
         accesses.editor,
         accesses.viewer,
+        accesses.formFiller,
       ];
       break;
 

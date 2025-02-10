@@ -240,8 +240,6 @@ const Guid = ({
 
   const clippedClassName = classNames(styles.guidElement, {
     [styles.smallBorderRadius]: isLastStep,
-    [styles.fromRight]:
-      infoPanelVisible && isRTL && viewAs !== "tile" && isStartingStep,
   });
 
   const clippedElements = positions.map((position, index) => ({
@@ -252,6 +250,7 @@ const Guid = ({
         : "contrast(0.82)",
       left: `${position.left}px`,
       top: `${position.top}px`,
+      right: `${position.right}px`,
       width: position.width ? `${position.width}px` : `${sectionWidth}px`,
       height: `${position.height}px`,
     },

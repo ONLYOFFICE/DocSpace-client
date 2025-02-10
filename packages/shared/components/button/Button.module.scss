@@ -113,15 +113,13 @@
     &:hover:not(:disabled) {
       background: var(--button-background-primary-hover);
       color: var(--button-color-primary-hover);
-      border: var(--button-border-primary-hover);
-
       opacity: 0.85;
     }
 
     &:active:not(:disabled) {
       background: var(--accent-button, --button-background-primary-active);
       color: var(--button-color-primary-active);
-      border: var(--button-border-primary-active);
+      border-color: var(--button-border-primary-active);
 
       filter: var(--button-brightness);
       opacity: 1;
@@ -223,7 +221,7 @@
     &.primary {
       background: var(--accent-button, --button-background-primary-disabled);
       color: var(--button-color-primary-disabled);
-      border: var(--accent-button, --button-background-primary-disabled);
+      border: var(--button-border-primary-disabled);
     }
 
     .loader {

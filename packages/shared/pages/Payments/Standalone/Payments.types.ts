@@ -36,6 +36,7 @@ export interface IPaymentsProps {
   trialDaysLeft: string;
   paymentDate: string;
   isEnterprise: boolean;
+  logoText: string;
 }
 
 export interface IEnterpriseProps {

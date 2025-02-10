@@ -155,6 +155,7 @@ export const useOptions = (
     inviteUser: inviteRootUser,
     isVisitor,
     isFrame,
+    logoText,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -300,6 +301,7 @@ export const useOptions = (
           onGoToPersonal,
           onGoToShared,
         },
+        logoText,
         isVisitor,
         isFrame,
       ),
@@ -327,6 +329,7 @@ export const useOptions = (
       onGoToShared,
       isVisitor,
       isFrame,
+      logoText,
     ],
   );
 

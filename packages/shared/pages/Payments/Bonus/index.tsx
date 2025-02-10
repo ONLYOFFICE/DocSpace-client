@@ -45,6 +45,7 @@ export const Bonus = ({
   helpUrl,
   salesEmail,
   dataBackupUrl,
+  logoText,
 }: IBonusProps) => {
   const { t, ready } = useTranslation("Common");
 
@@ -59,7 +60,7 @@ export const Bonus = ({
       />
       <Text fontWeight={600}>
         {t("UpgradeToProBannerInstructionHeader", {
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
           license: t("Common:EnterpriseLicense"),
         })}
       </Text>

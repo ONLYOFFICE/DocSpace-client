@@ -29,6 +29,7 @@ interface PlayerMessageErrorProps {
   model: ContextMenuModel[];
   onMaskClick?: VoidFunction;
   isMobile: boolean;
+  className?: string;
 }
 
 export default PlayerMessageErrorProps;

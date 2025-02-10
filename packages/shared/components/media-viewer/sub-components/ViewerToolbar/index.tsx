@@ -30,22 +30,14 @@ import React, {
   useRef,
   useState,
 } from "react";
-
+import classNames from "classnames";
 import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
-
+import styles from "./ViewerToolbar.module.scss";
 import { useClickOutside } from "../../../../utils/useClickOutside";
-
 import ImageViewerToolbarProps, {
   ImperativeHandle,
   ToolbarItemType,
 } from "./ViewerToolbar.props";
-
-import {
-  ImageViewerToolbarWrapper,
-  ListTools,
-  ToolbarItem,
-} from "./ViewerToolbar.styled";
-import { globalColors } from "../../../../themes";
 
 const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
   (
@@ -84,33 +76,32 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
       if (!contextMenu) return;
 
       return (
-        <ToolbarItem
+        <li
+          className={styles.toolbarItem}
           ref={contextMenuRef}
-          style={{ position: "relative" }}
           key={item.key}
           onClick={() => {
             setIsOpenContextMenu((open) => !open);
             setIsOpen((open) => !open);
           }}
+          data-testid="toolbar-item-context-menu"
           data-key={item.key}
+          aria-label="More options"
         >
           <div className="context" style={{ height: "16px" }}>
             <MediaContextMenu />
           </div>
           {contextMenu}
-        </ToolbarItem>
+        </li>
       );
     }
 
     function getPercentCompoent() {
       return (
         <div
-          className="iconContainer zoomPercent"
-          style={{
-            width: "auto",
-            color: globalColors.white,
-            userSelect: "none",
-          }}
+          className={styles.zoomPercent}
+          data-testid="zoom-percent"
+          aria-label={`Zoom level ${percent}%`}
         >
           {`${percent}%`}
         </div>
@@ -131,24 +122,33 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
       }
 
       return (
-        <ToolbarItem
-          $percent={item.percent ? percent : 100}
-          $isSeparator={item.actionType === -1}
+        <li
+          className={classNames(styles.toolbarItem, {
+            [styles.separator]: item.actionType === -1,
+            [styles.percent]: item.percent ? percent : 100,
+            [styles.disabled]: item.percent ? percent === 25 : false,
+          })}
           key={item.key}
-          onClick={() => {
-            toolbarEvent(item);
-          }}
+          onClick={() => toolbarEvent(item)}
+          data-testid={`toolbar-item-${item.key}`}
           data-key={item.key}
         >
           {content}
-        </ToolbarItem>
+        </li>
       );
     }
 
     return (
-      <ImageViewerToolbarWrapper className={className}>
-        <ListTools>{toolbar.map((item) => renderToolbarItem(item))}</ListTools>
-      </ImageViewerToolbarWrapper>
+      <div
+        className={`${className || ""} ${styles.toolbarWrapper}`}
+        data-testid="viewer-toolbar"
+        role="toolbar"
+        aria-label="Media viewer toolbar"
+      >
+        <ul className={styles.toolsList}>
+          {toolbar.map((item) => renderToolbarItem(item))}
+        </ul>
+      </div>
     );
   },
 );

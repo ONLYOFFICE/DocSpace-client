@@ -45,6 +45,7 @@ export const AboutContent = ({
   standalone,
   licenseUrl,
   isEnterprise,
+  logoText,
 }: IContentProps) => {
   const { t } = useTranslation("Common");
   const theme = useTheme();
@@ -97,13 +98,13 @@ export const AboutContent = ({
             target={LinkTarget.blank}
             enableUserSelect
           >
-            &nbsp;{t("Common:OrganizationName")} {t("Common:ProductName")}&nbsp;
+            &nbsp;{logoText} {t("Common:ProductName")}&nbsp;
           </ColorTheme>
 
           <Text className="row-el select-el" fontSize="13px" fontWeight="600">
             v.
             <span className="version-document-management">
-              {buildVersionInfo.docspace}
+              {buildVersionInfo.docSpace}
             </span>
           </Text>
         </div>
@@ -122,8 +123,7 @@ export const AboutContent = ({
             target={LinkTarget.blank}
             enableUserSelect
           >
-            &nbsp;{t("Common:OrganizationName")}{" "}
-            {t("Common:ProductEditorsName")}&nbsp;
+            &nbsp;{logoText} {t("Common:ProductEditorsName")}&nbsp;
           </ColorTheme>
           <Text className="row-el select-el" fontSize="13px" fontWeight="600">
             v.

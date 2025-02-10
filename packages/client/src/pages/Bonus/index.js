@@ -40,6 +40,7 @@ const Bonus = ({
   helpUrl,
   salesEmail,
   dataBackupUrl,
+  logoText,
 }) => {
   useEffect(() => {
     standaloneInit();
@@ -56,6 +57,7 @@ const Bonus = ({
       helpUrl={helpUrl}
       salesEmail={salesEmail}
       dataBackupUrl={dataBackupUrl}
+      logoText={logoText}
     />
   );
 };
@@ -71,7 +73,7 @@ export const Component = inject(
       paymentStore;
     const { isCommunity, isEnterprise, isDeveloper } = currentTariffStatusStore;
     const { isTrial } = currentQuotaStore;
-    const { dataBackupUrl } = settingsStore;
+    const { dataBackupUrl, logoText } = settingsStore;
 
     return {
       standaloneInit,
@@ -83,6 +85,7 @@ export const Component = inject(
       helpUrl,
       salesEmail,
       dataBackupUrl,
+      logoText,
     };
   },
 )(observer(Bonus));

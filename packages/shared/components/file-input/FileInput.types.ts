@@ -28,7 +28,7 @@ import React from "react";
 
 import { InputSize } from "../text-input";
 
-export interface FileInputProps {
+export type FileInputProps = {
   /** Accepts css style */
   style?: React.CSSProperties;
   /** Placeholder text for the input */
@@ -65,4 +65,10 @@ export interface FileInputProps {
   fromStorage?: boolean;
   /** Indicates that the input may contain multiple files. */
   isMultiple?: boolean;
-}
+  /** ARIA label for the file input button */
+  "aria-label"?: string;
+  /** ARIA description for the file input */
+  "aria-description"?: string;
+  /** Data attributes for testing */
+  "data-test-id"?: string;
+};

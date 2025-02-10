@@ -42,6 +42,7 @@ export const AboutDialog = ({
   standalone,
   licenseUrl,
   isEnterprise,
+  logoText,
 }: IDialogProps) => {
   const { t, ready } = useTranslation("Common");
 
@@ -63,6 +64,7 @@ export const AboutDialog = ({
             standalone={standalone}
             licenseUrl={licenseUrl}
             isEnterprise={isEnterprise}
+            logoText={logoText}
           />
         </StyledBodyContent>
       </ModalDialog.Body>

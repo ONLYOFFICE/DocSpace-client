@@ -131,6 +131,7 @@ export type TSettings = {
   recaptchaType?: RecaptchaType;
   maxImageUploadSize: number;
   isAmi: boolean;
+  logoText: string;
 };
 
 export type TCustomSchema = {

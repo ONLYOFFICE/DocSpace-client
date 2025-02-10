@@ -23,25 +23,94 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { screen, render } from "@testing-library/react";
+import { screen, render, fireEvent } from "@testing-library/react";
 import moment from "moment";
 import { DateTimePicker } from "./DateTimePicker";
+import { DateTimePickerProps } from "./DateTimerPicker.types";
 import "@testing-library/jest-dom";
 
 describe("DateTimePicker", () => {
-  it("should render the date picker and time picker", () => {
+  const defaultProps: DateTimePickerProps = {
+    initialDate: moment("2025-01-27T10:00:00"),
+    selectDateText: "Select Date",
+    onChange: jest.fn(),
+    className: "test-date-picker",
+    id: "test-date-picker",
+    locale: "en",
+    hasError: false,
+    openDate: moment("2025-01-27T10:00:00"),
+  };
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("should render with default props", () => {
+    render(<DateTimePicker {...defaultProps} />);
+
+    const picker = screen.getByTestId("date-time-picker");
+    expect(picker).toBeInTheDocument();
+    expect(picker).toHaveClass("test-date-picker");
+    expect(picker).toHaveAttribute("aria-label", "Select Date");
+    expect(picker).toHaveAttribute("aria-invalid", "false");
+  });
+
+  it("should render with error state", () => {
+    render(<DateTimePicker {...defaultProps} hasError />);
+
+    const picker = screen.getByTestId("date-time-picker");
+    expect(picker).toHaveClass("hasError");
+    expect(picker).toHaveAttribute("aria-invalid", "true");
+  });
+
+  it("should handle date change", () => {
+    const onChange = jest.fn();
+    render(<DateTimePicker {...defaultProps} onChange={onChange} />);
+
+    const datePicker = screen.getByTestId("date-picker");
+    expect(datePicker).toBeInTheDocument();
+  });
+
+  it("should display and handle time picker", () => {
+    render(<DateTimePicker {...defaultProps} />);
+
+    const timeDisplay = screen.getByTestId("date-time-picker-time-display");
+    expect(timeDisplay).toBeInTheDocument();
+    expect(timeDisplay).toHaveAttribute("role", "button");
+    expect(timeDisplay).toHaveAttribute("aria-label", "Current time: 10:00");
+
+    const clockIcon = screen.getByTestId("date-time-picker-clock-icon");
+    expect(clockIcon).toBeInTheDocument();
+    expect(clockIcon).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("should respect min and max date constraints", () => {
+    const minDate = moment("2025-01-01");
+    const maxDate = moment("2025-12-31");
+
     render(
-      <DateTimePicker
-        initialDate={moment()}
-        selectDateText="Select Date"
-        onChange={() => {}}
-        className=""
-        id=""
-        locale=""
-        hasError={false}
-        openDate={moment()}
-      />,
+      <DateTimePicker {...defaultProps} minDate={minDate} maxDate={maxDate} />,
     );
-    expect(screen.getByTestId("date-time-picker")).toBeInTheDocument();
+
+    const datePicker = screen.getByTestId("date-picker");
+    expect(datePicker).toBeInTheDocument();
+  });
+
+  it("should use provided locale", () => {
+    render(<DateTimePicker {...defaultProps} locale="fr" />);
+
+    const picker = screen.getByTestId("date-time-picker");
+    expect(picker).toBeInTheDocument();
+  });
+
+  it("should show time picker on click", () => {
+    render(<DateTimePicker {...defaultProps} />);
+
+    const timeDisplay = screen.getByTestId("date-time-picker-time-display");
+    fireEvent.click(timeDisplay);
+
+    const timePicker = screen.getByTestId("time-picker");
+    expect(timePicker).toBeInTheDocument();
+    expect(timePicker).toHaveAttribute("aria-label", "Time picker");
   });
 });

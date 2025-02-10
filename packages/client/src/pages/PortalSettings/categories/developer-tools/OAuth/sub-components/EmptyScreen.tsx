@@ -38,7 +38,13 @@ import EmptyScreenOauthDarkSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.da
 
 import RegisterNewButton from "./RegisterNewButton";
 
-const OAuthEmptyScreen = ({ apiOAuthLink }: { apiOAuthLink: string }) => {
+const OAuthEmptyScreen = ({
+  apiOAuthLink,
+  logoText,
+}: {
+  apiOAuthLink: string;
+  logoText: string;
+}) => {
   const { t } = useTranslation(["OAuth", "Common"]);
   const theme = useTheme();
 
@@ -55,7 +61,7 @@ const OAuthEmptyScreen = ({ apiOAuthLink }: { apiOAuthLink: string }) => {
       i18nKey="OAuthAppDescription"
       values={{
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }}
     />
   );

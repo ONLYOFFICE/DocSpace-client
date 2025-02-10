@@ -39,6 +39,7 @@ export const TariffTitleContainer = ({
   trialDaysLeft,
   paymentDate,
   isDeveloper,
+  logoText,
 }: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
   const alertComponent = () => {
@@ -89,15 +90,15 @@ export const TariffTitleContainer = ({
 
   return (
     <StyledTitleComponent
-      isLicenseDateExpired={isLicenseDateExpired}
       limitedWidth={isTrial ? true : isLicenseDateExpired}
+      isLicenseDateExpired={isLicenseDateExpired}
     >
       <div className="payments_subscription">
         <div className="title">
           <Text fontWeight={600} fontSize="14px" as="span">
             {t("ActivateTariffDescr", {
               productName: t("Common:ProductName"),
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
               license: isDeveloper
                 ? t("Common:DeveloperLicense")
                 : t("Common:EnterpriseLicense"),

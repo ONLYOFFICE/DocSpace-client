@@ -32,4 +32,5 @@ export interface IBonusProps {
   helpUrl: string;
   salesEmail: string;
   dataBackupUrl: string;
+  logoText: string;
 }

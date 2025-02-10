@@ -47,6 +47,7 @@ interface ListProps {
   viewAs: ViewAsType;
   currentDeviceType: DeviceType;
   apiOAuthLink: string;
+  logoText: string;
 }
 
 const List = ({
@@ -54,6 +55,7 @@ const List = ({
   viewAs,
   currentDeviceType,
   apiOAuthLink,
+  logoText,
 }: ListProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
 
@@ -64,7 +66,7 @@ const List = ({
       i18nKey="OAuthAppDescription"
       values={{
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }}
     />
   );

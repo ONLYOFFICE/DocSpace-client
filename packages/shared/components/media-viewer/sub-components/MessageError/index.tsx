@@ -27,11 +27,11 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 
+import classNames from "classnames";
 import { Text } from "../../../text";
 import { isSeparator } from "../../../../utils/typeGuards";
-import { globalColors } from "../../../../themes";
 
-import { StyledErrorToolbar, StyledMediaError } from "./MessageError.styled";
+import styles from "./MessageError.module.scss";
 import type PlayerMessageErrorProps from "./MessageError.props";
 
 export const MessageError = ({
@@ -47,19 +47,22 @@ export const MessageError = ({
   ).filter((m) => !m.disabled);
 
   return (
-    <div>
-      <StyledMediaError>
-        <Text
-          fontSize="15px"
-          color={globalColors.white}
-          textAlign="center"
-          className="title"
-        >
-          {errorTitle}
-        </Text>
-      </StyledMediaError>
+    <div data-testid="message-error-container">
+      <div
+        className={classNames(styles.mediaError)}
+        data-testid="message-error"
+      >
+        <div data-testid="message-error-title">
+          <Text fontSize="15px" textAlign="center" className={styles.title}>
+            {errorTitle}
+          </Text>
+        </div>
+      </div>
       {items.length !== 0 ? (
-        <StyledErrorToolbar>
+        <div
+          className={styles.errorToolbar}
+          data-testid="message-error-toolbar"
+        >
           {items.map((item) => {
             if (item.disabled || isSeparator(item)) return;
 
@@ -73,12 +76,17 @@ export const MessageError = ({
             if (!item.icon) return;
 
             return (
-              <div className="toolbar-item" key={item.key} onClick={onClick}>
+              <div
+                className={styles.toolbarItem}
+                key={item.key}
+                data-testid={`toolbar-item-${item.key}`}
+                onClick={onClick}
+              >
                 <ReactSVG src={item.icon} />
               </div>
             );
           })}
-        </StyledErrorToolbar>
+        </div>
       ) : null}
     </div>
   );

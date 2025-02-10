@@ -41,6 +41,7 @@ export interface IDialogProps {
   standalone: boolean;
   licenseUrl: string;
   isEnterprise: boolean;
+  logoText: string;
 }
 
 export interface IContentProps {
@@ -50,4 +51,5 @@ export interface IContentProps {
   standalone: boolean;
   licenseUrl: string;
   isEnterprise: boolean;
+  logoText: string;
 }

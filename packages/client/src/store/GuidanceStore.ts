@@ -102,7 +102,7 @@ class GuidanceStore {
         key: "form-filling-uploading",
         position: [
           {
-            type: GuidanceElementType.UploadArea,
+            type: GuidanceElementType.Expandable,
             rects: this.filesStore.uploadingGuidRects,
             offset: {
               value: 9,

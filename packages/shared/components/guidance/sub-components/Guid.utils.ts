@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "@docspace/shared/types";
-import { FormFillingTipsState } from "../../../enums";
 import { isTablet } from "../../../utils";
 import { GuidancePosition, GuidanceElementType } from "./Guid.types";
 
@@ -44,7 +42,49 @@ interface ViewDimensions {
   top: number;
 }
 
+interface Position extends ViewDimensions {
+  left: number;
+  bottom: number;
+  right: number;
+}
+
 const ADDITIONAL_ROW_LEFT_RTL_OFFSET = 3;
+
+const getOffsetValues = (offset: GuidancePosition["offset"]) => {
+  const baseOffset = (offset?.value ?? 0) / 2;
+  return {
+    base: baseOffset,
+    row: offset?.row ?? baseOffset,
+    rtl: offset?.rtl ?? 0,
+  };
+};
+
+const getMixedRtlLeftPosition = (
+  rect: DOMRect,
+  viewAs: string,
+  rtlOffset: number,
+): number => {
+  if (viewAs === "row") {
+    return rect.left - rtlOffset + ADDITIONAL_ROW_LEFT_RTL_OFFSET;
+  }
+  return rect.left + rtlOffset;
+};
+
+const getLeftPosition = (
+  rect: DOMRect,
+  viewAs: string,
+  offset: GuidancePosition["offset"],
+  type: GuidanceElementType,
+  isRTL: boolean = false,
+): number => {
+  const { base, row, rtl } = getOffsetValues(offset);
+
+  if (isRTL && type === GuidanceElementType.Mixed && viewAs !== "tile") {
+    return getMixedRtlLeftPosition(rect, viewAs, rtl);
+  }
+
+  return viewAs === "row" ? rect.left - row : rect.left - base;
+};
 
 const getViewTypeBasedDimensions = (
   rect: DOMRect,
@@ -62,41 +102,11 @@ const getViewTypeBasedDimensions = (
   };
 };
 
-const getLeftPosition = (
-  rect: DOMRect,
-  viewAs: string,
-  offset: GuidancePosition["offset"],
-  type: GuidanceElementType,
-  isRTL: boolean = false,
-): number => {
-  const offsetValue = (offset?.value ?? 0) / 2;
-  const rowOffset = offset?.row ?? offsetValue;
-  const rtlOffset = offset?.rtl ?? 0;
-
-  if (isRTL && type === GuidanceElementType.Mixed && viewAs !== "tile") {
-    switch (viewAs) {
-      case "row":
-        return rect.left - rtlOffset + ADDITIONAL_ROW_LEFT_RTL_OFFSET;
-      case "table":
-        return rect.left + rtlOffset;
-      default:
-        return rect.left + rtlOffset;
-    }
-  }
-
-  switch (viewAs) {
-    case "row":
-      return rect.left - rowOffset;
-    default:
-      return rect.left - offsetValue;
-  }
-};
-
 const getExpandedPosition = (
   rect: DOMRect,
   offset: GuidancePosition["offset"],
   options: { useTabletSize?: boolean; expandHeight?: boolean } = {},
-) => {
+): Position => {
   const { useTabletSize = false, expandHeight = false } = options;
   const offsetValue = offset?.value ?? 0;
 
@@ -122,13 +132,14 @@ const getPosition = (
   viewAs: string,
   type: GuidanceElementType,
   isRTL: boolean = false,
-) => {
+): Position => {
   const dimensions =
     viewAs === "tile" || type === GuidanceElementType.Content
       ? getViewTypeBasedDimensions(rects, viewAs, offset)
       : getViewTypeBasedDimensions(rects, viewAs, offset, {
           width: 0,
         });
+
   return {
     ...dimensions,
     left: getLeftPosition(rects, viewAs, offset, type, isRTL),
@@ -141,30 +152,21 @@ export const getGuidPosition = (
   guidance: GuidancePosition,
   viewAs: string,
   isRTL: boolean = false,
-) => {
+): Position => {
   if (!guidance?.rects) return DEFAULT_POSITION;
 
   const { rects, type, offset } = guidance;
 
   switch (type) {
-    case GuidanceElementType.UploadArea:
+    case GuidanceElementType.Expandable:
       return getExpandedPosition(rects, offset, {
         useTabletSize: isTablet(),
         expandHeight: !isTablet(),
       });
 
-    case GuidanceElementType.Interactive:
-      return getExpandedPosition(rects, offset);
-
-    case GuidanceElementType.Expandable:
-      return getExpandedPosition(rects, offset, { expandHeight: true });
-
     case GuidanceElementType.Mixed:
     case GuidanceElementType.Content:
+    default:
       return getPosition(rects, offset, viewAs, type, isRTL);
-
-    default: {
-      return getPosition(rects, offset, viewAs, type, isRTL);
-    }
   }
 };

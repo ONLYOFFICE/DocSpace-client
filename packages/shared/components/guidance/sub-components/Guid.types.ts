@@ -29,8 +29,6 @@ import { TTranslation } from "../../../types";
 export enum GuidanceElementType {
   Content = "content", // Regular content element
   Expandable = "expandable", // Element that can expand
-  Interactive = "interactive", // Interactive elements like buttons
-  UploadArea = "uploadArea", // Special upload area
   Mixed = "mixed",
 }
 

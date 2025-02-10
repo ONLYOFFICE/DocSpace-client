@@ -403,6 +403,8 @@ module.exports = (env, argv) => {
         "./utils": "./src/helpers/filesUtils.js",
         "./BrandingPage":
           "./src/pages/PortalSettings/categories/common/branding.js",
+        "./BrandNamePage":
+          "./src/pages/PortalSettings/categories/common/Branding/brandName.js",
         "./WhiteLabelPage":
           "./src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
         "./AdditionalResPage":

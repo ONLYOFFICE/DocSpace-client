@@ -32,44 +32,30 @@ const StyledLoader = styled.div`
   flex-direction: column;
   gap: 0px;
 
+  .header_loader {
+    margin-bottom: 16px;
+  }
+
   .description_loader {
     max-width: 700px;
     margin-bottom: 5px;
   }
 
-  .header_loader {
-    margin-bottom: 16px;
-  }
-
   .text-input_loader {
-    margin-bottom: 16px;
-  }
-
-  .subtitle_loader {
-    margin-top: 20px;
-    margin-bottom: 16px;
-  }
-
-  .buttons_loader {
-    margin-button: 24px;
+    margin-top: 16px;
+    margin-bottom: 20px;
   }
 `;
 
-const LoaderWhiteLabel = () => {
+const LoaderBrandName = () => {
   return (
     <StyledLoader>
-      <RectangleSkeleton height="22px" width="95px" className="header_loader" />
+      <RectangleSkeleton height="22px" width="98px" className="header_loader" />
       <RectangleSkeleton height="16px" className="description_loader" />
       <RectangleSkeleton
         height="16px"
-        width="200px"
+        width="70px"
         className="description_loader"
-      />
-
-      <RectangleSkeleton
-        height="20px"
-        width="151px"
-        className="subtitle_loader"
       />
       <RectangleSkeleton
         height="32px"
@@ -78,11 +64,11 @@ const LoaderWhiteLabel = () => {
       />
       <RectangleSkeleton
         height="32px"
-        width="115px"
+        width="192px"
         className="buttons_loader"
       />
     </StyledLoader>
   );
 };
 
-export default LoaderWhiteLabel;
+export default LoaderBrandName;

@@ -32,7 +32,7 @@ import { BrandName as BrandNamePage } from "@docspace/shared/pages/Branding/Bran
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 
-import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
+import LoaderBrandName from "../sub-components/loaderBrandName";
 
 const BrandNameComponent = (props) => {
   const {
@@ -69,7 +69,7 @@ const BrandNameComponent = (props) => {
   };
 
   return !isWhiteLabelLoaded ? (
-    <LoaderWhiteLabel />
+    <LoaderBrandName />
   ) : (
     <BrandNamePage
       t={t}

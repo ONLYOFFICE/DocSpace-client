@@ -40,9 +40,8 @@ import { CompanyInfoSettings } from "./Branding/companyInfoSettings";
 import { AdditionalResources } from "./Branding/additionalResources";
 import MobileView from "./Branding/MobileView";
 
-import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
+import LoaderBrandingSubtitle from "./sub-components/loaderBrandingSubtitle";
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
-import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
 
 const StyledComponent = styled.div`
   max-width: 700px;
@@ -119,7 +118,7 @@ const Branding = ({
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
       {!isWhiteLabelLoaded ? (
-        <LoaderDescriptionCustomization />
+        <LoaderBrandingSubtitle />
       ) : (
         <div className="category-description">{t("BrandingSubtitle")}</div>
       )}

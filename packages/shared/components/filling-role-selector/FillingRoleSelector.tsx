@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,25 +29,16 @@ import { ReactSVG } from "react-svg";
 
 import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
+import AddRoleButton from "PUBLIC_DIR/images/add.role.button.react.svg?url";
+import EveryoneRoleIcon from "PUBLIC_DIR/images/everyone.role.button.react.svg?url";
 
-import {
-  StyledFillingRoleSelector,
-  StyledRow,
-  StyledNumber,
-  StyledAddRoleButton,
-  StyledEveryoneRoleIcon,
-  StyledRole,
-  StyledEveryoneRoleContainer,
-  StyledTooltip,
-  StyledAssignedRole,
-  StyledAvatar,
-  StyledUserRow,
-} from "./FillingRoleSelector.styled";
 import {
   FillingRoleSelectorProps,
   TRole,
   TUser,
 } from "./FillingRoleSelector.types";
+
+import styles from "./FillingRoleSelector.module.scss";
 
 const FillingRoleSelector = ({
   roles,
@@ -68,23 +59,27 @@ const FillingRoleSelector = ({
 
   const everyoneRoleNode = (
     <>
-      <StyledRow>
-        <StyledNumber>{everyoneRole?.order}</StyledNumber>
-        <StyledEveryoneRoleIcon />
-        <StyledEveryoneRoleContainer>
-          <div className="title">
-            <StyledRole>{everyoneRole?.name}</StyledRole>
-            <StyledAssignedRole>{everyoneRole?.everyone}</StyledAssignedRole>
+      <div className={styles.row}>
+        <div className={styles.number}>{everyoneRole?.order}</div>
+        <ReactSVG className={styles.everyoneRoleIcon} src={EveryoneRoleIcon} />
+        <div className={styles.everyoneRoleContainer}>
+          <div className={styles.title}>
+            <div className={styles.role}>{everyoneRole?.name}</div>
+            <div className={styles.assignedRole}>{everyoneRole?.everyone}</div>
           </div>
-          <div className="role-description">{descriptionEveryone}</div>
-        </StyledEveryoneRoleContainer>
-      </StyledRow>
-      <StyledTooltip>{descriptionTooltip}</StyledTooltip>
+          <div className={styles.roleDescription}>{descriptionEveryone}</div>
+        </div>
+      </div>
+      <div className={styles.tooltip}>{descriptionTooltip}</div>
     </>
   );
 
   return (
-    <StyledFillingRoleSelector {...props} data-testid="filling-role-selector">
+    <div
+      {...props}
+      className={styles.fillingRoleSelector}
+      data-testid="filling-role-selector"
+    >
       {everyoneRole ? everyoneRoleNode : null}
       {sortedInOrderRoles.map((role: TRole) => {
         if (role.everyone) return;
@@ -93,35 +88,44 @@ const FillingRoleSelector = ({
         );
 
         return roleWithUser ? (
-          <StyledUserRow key={`${role.name}`}>
-            <div className="content">
-              <StyledNumber>{role.order}</StyledNumber>
-              <StyledAvatar
+          <div className={styles.userRow} key={`${role.name}`}>
+            <div className={styles.content}>
+              <div className={styles.number}>{role.order}</div>
+              <img
+                className={styles.avatar}
+                alt=""
                 src={
                   roleWithUser.hasAvatar
                     ? roleWithUser.avatar
                     : AvatarBaseReactSvgUrl
                 }
               />
-              <div className="user-with-role">
-                <StyledRole>{roleWithUser.displayName}</StyledRole>
-                <StyledAssignedRole>{roleWithUser.role}</StyledAssignedRole>
+              <div className={styles.userWithRole}>
+                <div className={styles.role}>{roleWithUser.displayName}</div>
+                <div className={styles.assignedRole}>{roleWithUser.role}</div>
               </div>
             </div>
             <ReactSVG
+              data-testid="remove-icon"
               src={RemoveSvgUrl}
               onClick={() => onRemoveUser(roleWithUser.id)}
             />
-          </StyledUserRow>
+          </div>
         ) : (
-          <StyledRow key={`${role.name}`}>
-            <StyledNumber>{role.order}</StyledNumber>
-            <StyledAddRoleButton onClick={onAddUser} color={role.color} />
-            <StyledRole>{role.name}</StyledRole>
-          </StyledRow>
+          <div className={styles.row} key={`${role.name}`}>
+            <div className={styles.number}>{role.order}</div>
+            <ReactSVG
+              data-testid="add-role-button"
+              className={styles.addRoleButton}
+              style={{ "--color": role.color } as React.CSSProperties}
+              src={AddRoleButton}
+              onClick={onAddUser}
+            />
+            <div className={styles.role}>{role.name}</div>
+          </div>
         );
       })}
-    </StyledFillingRoleSelector>
+    </div>
   );
 };
 

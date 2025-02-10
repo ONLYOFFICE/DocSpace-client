@@ -68,6 +68,9 @@ export const enum SocketEvents {
   AddGroup = "s:add-group",
   UpdateGroup = "s:update-group",
   DeleteGroup = "s:delete-group",
+  AddGuest = "s:add-guest",
+  UpdateGuest = "s:update-guest",
+  DeleteGuest = "s:delete-guest",
   BackupProgress = "s:backup-progress",
   RestoreProgress = "s:restore-progress",
 }
@@ -235,6 +238,9 @@ export type TListenEventCallbackMap = {
   [SocketEvents.DeleteUser]: (data: { id: string }) => void;
   [SocketEvents.AddGroup]: (data: { id: string; data: TGroup }) => void;
   [SocketEvents.UpdateGroup]: (data: { id: string; data: TGroup }) => void;
+  [SocketEvents.AddGuest]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.UpdateGuest]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.DeleteGuest]: (data: { id: string }) => void;
   [SocketEvents.DeleteGroup]: (data: { id: string }) => void;
   [SocketEvents.RestoreProgress]: (opt: {
     progress: number;

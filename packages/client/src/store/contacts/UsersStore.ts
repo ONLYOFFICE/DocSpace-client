@@ -166,6 +166,42 @@ class UsersStore {
         this.filter.total -= 1;
       });
     });
+
+    SocketHelper.on(SocketEvents.AddGuest, (value) => {
+      const { id, data } = value;
+
+      if (!data || !id) return;
+
+      runInAction(() => {
+        this.users.push(data);
+        this.filter.total += 1;
+      });
+    });
+
+    SocketHelper.on(SocketEvents.UpdateGuest, (value) => {
+      const { id, data } = value;
+
+      if (!data || !id) return;
+
+      const idx = this.users.findIndex((x) => x.id === id);
+
+      if (idx === -1) return;
+
+      runInAction(() => {
+        this.users[idx] = data;
+      });
+    });
+
+    SocketHelper.on(SocketEvents.DeleteGuest, (value) => {
+      const { id } = value;
+
+      const idx = this.users.findIndex((x) => x.id === id);
+
+      runInAction(() => {
+        this.users.splice(idx, 1);
+        this.filter.total -= 1;
+      });
+    });
   }
 
   setIsUsersFetched = (value: boolean) => {

@@ -62,6 +62,7 @@
 }
 
 .statusInterruptedIcon {
+  margin-inline-end: 10px;
   circle,
   path {
     stroke: #{$main-red};

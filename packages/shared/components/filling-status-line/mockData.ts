@@ -52,7 +52,7 @@ export const mockData = [
     comment: null,
     avatar: null,
   },
-{
+  {
     id: 2,
     displayName: "Kaiya Franci",
     role: "Director",

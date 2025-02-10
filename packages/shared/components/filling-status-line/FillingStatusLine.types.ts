@@ -40,9 +40,9 @@ export type TData = {
 
 export type FillingStatusLineProps = {
   /** Accepts id */
-  id: string;
+  id?: string;
   /** Accepts class */
-  className: string;
+  className?: string;
   /** Filling status done text */
   statusDoneText: string;
   /** Filling status interrupted text */
@@ -51,7 +51,7 @@ export type FillingStatusLineProps = {
   statusDone: boolean;
   /** Filling status interrupted */
   statusInterrupted: boolean;
-}
+};
 
 export type FillingStatusLineAccordionProps = {
   id?: string | number;
@@ -68,4 +68,4 @@ export type FillingStatusLineAccordionProps = {
 
   isDone?: boolean;
   isInterrupted?: boolean;
-}
+};

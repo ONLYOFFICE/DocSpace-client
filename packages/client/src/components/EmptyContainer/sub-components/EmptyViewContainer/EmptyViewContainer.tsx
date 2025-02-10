@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -80,7 +80,7 @@ const InjectedEmptyViewContainer = inject<
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
     const { isPublicRoom } = publicRoomStore;
-    const { isFrame } = settingsStore;
+    const { isFrame, logoText } = settingsStore;
 
     const { myFolderId, myFolder, roomsFolder } = treeFoldersStore;
 
@@ -128,6 +128,7 @@ const InjectedEmptyViewContainer = inject<
       setQuotaWarningDialogVisible,
       isVisitor: userStore?.user?.isVisitor,
       isFrame,
+      logoText,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

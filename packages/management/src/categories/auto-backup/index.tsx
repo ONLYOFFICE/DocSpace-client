@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,11 +30,15 @@ import { useTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/utils";
 import AutoBackupPage from "client/AutoBackupPage";
 
-const AutoBackup = () => {
+interface AutoBackupProps {
+  logoText: string;
+}
+
+const AutoBackup: React.FC<AutoBackupProps> = ({ logoText }) => {
   const { t } = useTranslation(["Settings"]);
 
   useEffect(() => {
-    setDocumentTitle(t("AutoBackup"));
+    setDocumentTitle(t("AutoBackup"), logoText);
   }, []);
 
   return <AutoBackupPage />;

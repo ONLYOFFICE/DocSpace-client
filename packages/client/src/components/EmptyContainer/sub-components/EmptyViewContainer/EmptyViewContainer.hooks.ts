@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -155,6 +155,7 @@ export const useOptions = (
     inviteUser: inviteRootUser,
     isVisitor,
     isFrame,
+    logoText,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -300,6 +301,7 @@ export const useOptions = (
           onGoToPersonal,
           onGoToShared,
         },
+        logoText,
         isVisitor,
         isFrame,
       ),
@@ -327,6 +329,7 @@ export const useOptions = (
       onGoToShared,
       isVisitor,
       isFrame,
+      logoText,
     ],
   );
 

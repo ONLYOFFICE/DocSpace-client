@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
 import { Button } from "@docspace/shared/components/button";
-import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
+import RecoverAccessModalDialog from "@docspace/shared/dialogs/recover-access-modal-dialog/RecoverAccessModalDialog";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -120,6 +120,7 @@ class BrandingStore {
 
   saveWhiteLabelSettings = async (data) => {
     await setWhiteLabelSettings(data, isManagement());
+    this.settingsStore.getPortalSettings();
     const logos = await this.getLogoUrls();
     this.getIsDefault();
     this.getLogoText();

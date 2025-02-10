@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import DarkGeneralPngUrl from "PUBLIC_DIR/images/dark_general.png";
 import { useState } from "react";
-import { observer } from "mobx-react";
+import { observer, inject } from "mobx-react";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -121,7 +121,7 @@ const StyledPrivacyPage = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const PrivacyPageComponent = ({ t, tReady }) => {
+const PrivacyPageComponent = ({ t, tReady, logoText }) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const location = useLocation();
@@ -167,7 +167,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
             i18nKey="PrivacyClick"
             ns="PrivacyPage"
             values={{
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             }}
             components={{
               1: <strong />,
@@ -189,7 +189,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
           primary
           isDisabled={isDisabled}
           label={t("PrivacyButton", {
-            organizationName: t("Common:OrganizationName"),
+            organizationName: logoText,
           })}
         />
 
@@ -202,7 +202,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
             fontWeight={300}
           >
             {t("PrivacyEditors", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
             ?
           </Text>
@@ -224,7 +224,7 @@ const PrivacyPageComponent = ({ t, tReady }) => {
         >
           <p>
             {t("PrivacyDescriptionEditors", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
             .
           </p>
@@ -249,4 +249,10 @@ const PrivacyPage = (props) => {
   );
 };
 
-export default observer(PrivacyPage);
+export default inject(({ settingsStore }) => {
+  const { logoText } = settingsStore;
+
+  return {
+    logoText,
+  };
+})(observer(PrivacyPage));

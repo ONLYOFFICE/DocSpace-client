@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,7 +36,7 @@ import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactCon
 import StyledComponent from "./StyledComponent";
 import OfficialDocumentation from "./sub-components/OfficialDocumentation";
 
-const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
+const Bonus = ({ standaloneInit, isInitPaymentPage, logoText }) => {
   const { t, ready } = useTranslation("PaymentsEnterprise");
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
       <BenefitsContainer />
       <Text fontWeight={600}>
         {t("UpgradeToProBannerInstructionHeader", {
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
           license: t("Common:EnterpriseLicense"),
         })}
       </Text>
@@ -63,10 +63,12 @@ const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
   );
 };
 
-export const Component = inject(({ paymentStore }) => {
+export const Component = inject(({ paymentStore, settingsStore }) => {
   const { standaloneInit, isInitPaymentPage } = paymentStore;
+  const { logoText } = settingsStore;
   return {
     standaloneInit,
     isInitPaymentPage,
+    logoText,
   };
 })(observer(Bonus));

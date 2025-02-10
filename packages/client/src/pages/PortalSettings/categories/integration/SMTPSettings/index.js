@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,8 +38,12 @@ import { StyledComponent } from "./StyledComponent";
 
 let timerId = null;
 const SMTPSettings = (props) => {
-  const { setInitSMTPSettings, currentColorScheme, integrationSettingsUrl } =
-    props;
+  const {
+    setInitSMTPSettings,
+    currentColorScheme,
+    integrationSettingsUrl,
+    logoText,
+  } = props;
 
   const { t, ready } = useTranslation([
     "SMTPSettings",
@@ -84,7 +88,7 @@ const SMTPSettings = (props) => {
       <div className="smtp-settings_main-title">
         <Text className="smtp-settings_description">
           {t("Settings:SMTPSettingsDescription", {
-            organizationName: t("Common:OrganizationName"),
+            organizationName: logoText,
           })}
         </Text>
         <Link
@@ -104,12 +108,14 @@ const SMTPSettings = (props) => {
 };
 
 export default inject(({ settingsStore, setup }) => {
-  const { currentColorScheme, integrationSettingsUrl } = settingsStore;
+  const { currentColorScheme, integrationSettingsUrl, logoText } =
+    settingsStore;
   const { setInitSMTPSettings } = setup;
 
   return {
     setInitSMTPSettings,
     currentColorScheme,
     integrationSettingsUrl,
+    logoText,
   };
 })(observer(SMTPSettings));

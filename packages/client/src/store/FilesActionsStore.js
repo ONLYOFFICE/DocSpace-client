@@ -3319,7 +3319,15 @@ class FilesActionStore {
         })
         .finally(() => {
           clearActiveOperations([fileId]);
-          this.versionHistoryStore.fetchFileVersions(fileId, null, null, true);
+          this.versionHistoryStore.setVersionSelectedForDeletion(null);
+
+          if (this.versionHistoryStore.isVisible)
+            this.versionHistoryStore.fetchFileVersions(
+              fileId,
+              null,
+              null,
+              true,
+            );
         });
     } catch (err) {
       setSecondaryProgressBarData({

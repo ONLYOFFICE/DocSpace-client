@@ -154,7 +154,7 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
         theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
 
       ${(props) =>
-        props.versionDeleteProcess &&
+        props.versionDeleteRow &&
         css`
           path {
             fill: ${({ theme }) =>
@@ -167,7 +167,7 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
 
     .version_badge-text {
       ${(props) =>
-        props.versionDeleteProcess &&
+        props.versionDeleteRow &&
         !props.theme.isBase &&
         css`
           color: ${globalColors.darkGrayDark} !important;
@@ -185,7 +185,7 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
     text-overflow: ellipsis;
 
     ${(props) =>
-      props.versionDeleteProcess &&
+      props.versionDeleteRow &&
       css`
         color: ${({ theme }) => theme.filesVersionHistory.versionLink.color};
       `}
@@ -288,7 +288,7 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
             `};
 
           ${(props) =>
-            props.versionDeleteProcess &&
+            props.versionDeleteRow &&
             css`
               fill: ${({ theme }) =>
                 theme.filesVersionHistory.versionDisabled.fillDisabled};

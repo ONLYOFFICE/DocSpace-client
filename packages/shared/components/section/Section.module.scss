@@ -493,10 +493,8 @@
   }
 
   &.infoPanelVisible {
-    :global {
-      .progressBarContainer {
-        inset-inline-end: 400px;
-      }
+    .progressBarContainer {
+      inset-inline-end: 424px;
     }
   }
 

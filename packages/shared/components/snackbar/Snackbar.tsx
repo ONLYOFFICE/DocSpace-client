@@ -164,7 +164,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
         <iframe
           id="bar-frame"
           className={styles.iframe}
-          style={{ "--sectionWidth": sectionWidth } as React.CSSProperties}
+          style={{ "--section-width": sectionWidth } as React.CSSProperties}
           src={htmlContent}
           scrolling="no"
           onLoad={() => {
@@ -191,7 +191,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
         {htmlContent ? (
           <div
             className={styles.iframe}
-            style={{ "--sectionWidth": sectionWidth } as React.CSSProperties}
+            style={{ "--section-width": sectionWidth } as React.CSSProperties}
             data-testid="snackbar-html-content"
             dangerouslySetInnerHTML={{
               __html: htmlContent,

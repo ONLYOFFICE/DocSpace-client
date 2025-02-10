@@ -49,12 +49,16 @@
   align-items: flex-start;
   color: #{$white};
   line-height: 16px;
-  padding: 12px 20px;
   margin: 0;
   opacity: var(--opacity, 0);
   width: 100%;
   background-color: var(--background-color);
   background-image: var(--background-image);
+
+  & > div,
+  & > button {
+    padding: 12px 20px;
+  }
 }
 
 .textContainer {
@@ -102,7 +106,7 @@
   font-size: inherit;
   color: #{$black};
   margin-block: 0 4px;
-  margin-inline: 24px 4px;
+  margin-inline: 12px 4px;
 
   padding: 0;
 

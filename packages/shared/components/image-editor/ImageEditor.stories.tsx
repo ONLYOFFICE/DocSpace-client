@@ -23,9 +23,14 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React, { useState, useCallback } from "react";
 import { Story, Meta } from "@storybook/react";
+import { useTranslation } from "react-i18next";
+
+import i18nextStoryDecorator from "../../.storybook/decorators/i18nextStoryDecorator";
+
 import { ImageEditor } from "./index";
-import { ImageEditorProps } from "./ImageEditor.types";
+import { ImageEditorProps, TImage } from "./ImageEditor.types";
 
 export default {
   title: "Components/ImageEditor",
@@ -34,50 +39,65 @@ export default {
     isDisabled: {
       control: "boolean",
       defaultValue: false,
+      description: "Disable image editor",
     },
     editorBorderRadius: {
       control: "number",
       defaultValue: 8,
+      description: "Border radius of the editor container in pixels",
     },
     disableImageRescaling: {
       control: "boolean",
       defaultValue: false,
+      description: "Disable image rescaling",
+    },
+    maxImageSize: {
+      control: "number",
+      defaultValue: 1048576,
+      description: "Maximum image size in bytes (default 1MB)",
     },
   },
+  decorators: [i18nextStoryDecorator],
 } as Meta;
 
-const Template: Story<ImageEditorProps> = (args) => <ImageEditor {...args} />;
+const InteractiveTemplate: Story<ImageEditorProps> = (args) => {
+  const { t } = useTranslation("Common");
 
-export const Default = Template.bind({});
-Default.args = {
-  t: (key: string) => key,
-  image: {
-    uploadedFile: undefined,
+  const [image, setImage] = useState<TImage>({
+    uploadedFile: "/images/avatar.base.react.svg",
     zoom: 1,
     x: 0,
     y: 0,
-  },
-  onChangeImage: () => {},
-  Preview: <div>Preview</div>,
-  setPreview: () => {},
+  });
+
+  const onChangeImage = useCallback((newImage: TImage) => {
+    setImage(newImage);
+  }, []);
+
+  const onChangeFile = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setImage((prev) => ({ ...prev, uploadedFile: file }));
+    }
+  }, []);
+
+  return (
+    <div style={{ width: "100%", maxWidth: "800px" }}>
+      <ImageEditor
+        {...args}
+        t={t}
+        image={image}
+        onChangeImage={onChangeImage}
+        onChangeFile={onChangeFile}
+      />
+    </div>
+  );
+};
+
+export const ProfileAvatar = InteractiveTemplate.bind({});
+ProfileAvatar.args = {
   isDisabled: false,
-  editorBorderRadius: 8,
-  onChangeFile: () => {},
-};
-
-export const WithImage = Template.bind({});
-WithImage.args = {
-  ...Default.args,
-  image: {
-    uploadedFile: "https://example.com/sample-image.jpg",
-    zoom: 1,
-    x: 0,
-    y: 0,
-  },
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  ...Default.args,
-  isDisabled: true,
+  disableImageRescaling: false,
+  editorBorderRadius: 400,
+  maxImageSize: 1048576,
 };

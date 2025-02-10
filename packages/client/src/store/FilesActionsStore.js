@@ -3292,7 +3292,14 @@ class FilesActionStore {
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       secondaryProgressDataStore;
 
-    this.versionHistoryStore.setVersionDeletionProcess(true);
+    const {
+      setVersionDeletionProcess,
+      setVersionSelectedForDeletion,
+      fetchFileVersions,
+      isVisible,
+    } = this.versionHistoryStore;
+
+    setVersionDeletionProcess(true);
 
     const operationId = uniqueid("operation_");
 
@@ -3320,16 +3327,10 @@ class FilesActionStore {
           await this.uploadDataStore.loopFilesOperations(data, pbData);
         })
         .finally(() => {
-          this.versionHistoryStore.setVersionSelectedForDeletion(null);
-          this.versionHistoryStore.setVersionDeletionProcess(false);
+          setVersionSelectedForDeletion(null);
+          setVersionDeletionProcess(false);
 
-          if (this.versionHistoryStore.isVisible)
-            this.versionHistoryStore.fetchFileVersions(
-              fileId,
-              null,
-              null,
-              true,
-            );
+          if (isVisible) fetchFileVersions(fileId, null, null, true);
 
           clearActiveOperations([fileId]);
           setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
@@ -3341,8 +3342,8 @@ class FilesActionStore {
         operationId,
       });
       setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-      this.versionHistoryStore.setVersionSelectedForDeletion(null);
-      this.versionHistoryStore.setVersionDeletionProcess(false);
+      setVersionSelectedForDeletion(null);
+      setVersionDeletionProcess(false);
       return toastr.error(err.message ? err.message : err);
     }
   };

@@ -1847,6 +1847,34 @@
   --file-input-disabled-placeholder-color: #{$gray-dark-text};
 }
 
+.light {
+  --icon-cropper-grid-color: #{$gray-strong};
+  --icon-cropper-delete-button-bg: #{$gray-light};
+  --icon-cropper-delete-button-hover-bg: #{$light-gray-hover};
+  --icon-cropper-delete-button-color: #{$gray-text};
+  --icon-cropper-delete-button-icon-color: #{$light-gray-dark};
+  --icon-cropper-zoom-button-icon-color: #{$gray};
+  --icon-cropper-zoom-button-hover-icon-color: #{$light-gray-dark};
+
+  --preview-tile-background: #{$white};
+  --preview-tile-border: 1px solid #{$gray-strong};
+  --preview-tile-icon-border: 1px solid #{$gray-light-mid};
+}
+
+.dark {
+  --icon-cropper-grid-color: #{$black};
+  --icon-cropper-delete-button-bg: #{$gray-dark-mid};
+  --icon-cropper-delete-button-hover-bg: #{$gray-dark-strong};
+  --icon-cropper-delete-button-color: #{$white};
+  --icon-cropper-delete-button-icon-color: #{$dark-gray-dark};
+  --icon-cropper-zoom-button-icon-color: #{$gray-dark};
+  --icon-cropper-zoom-button-hover-icon-color: #{$dark-gray-dark};
+
+  --preview-tile-background: #{$black};
+  --preview-tile-border: 1px solid #{$gray-dark-strong};
+  --preview-tile-icon-border: 1px solid #{$gray-light-mid};
+}
+
 :global(.rtl) {
   --input-text-align: right;
   --input-direction: rtl;

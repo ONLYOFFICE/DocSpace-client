@@ -28,7 +28,7 @@ import React, { useEffect } from "react";
 import { ReactSVG } from "react-svg";
 import throttle from "lodash/throttle";
 import AvatarEditor, { Position } from "react-avatar-editor";
-import { useTheme } from "styled-components";
+import classNames from "classnames";
 
 import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
 import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus.react.svg?url";
@@ -36,8 +36,12 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url
 
 import { Slider } from "../../slider";
 import { IconButton } from "../../icon-button";
-import { StyledImageCropper } from "../ImageEditor.styled";
+
+import { useTheme } from "../../../hooks/useTheme";
+
 import { ImageCropperProps } from "../ImageEditor.types";
+
+import styles from "./ImageCropper.module.scss";
 
 const ImageCropper = ({
   t,
@@ -55,7 +59,7 @@ const ImageCropper = ({
   const setEditorRef = (editor: AvatarEditor | null) => {
     editorRef.current = editor;
   };
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const handlePositionChange = (position: Position) => {
     if (isDisabled || disableImageRescaling) return;
@@ -117,20 +121,19 @@ const ImageCropper = ({
   }, [handleImageChange, image, setPreviewImage]);
 
   return (
-    <StyledImageCropper
-      className="icon_cropper"
-      disableImageRescaling={disableImageRescaling}
-    >
-      <div className="icon_cropper-crop_area">
+    <div className={classNames(styles.imageCropperWrapper, "icon_cropper")}>
+      <div className={styles.iconCropperCropArea}>
         <AvatarEditor
-          className="icon_cropper-avatar-editor"
+          className={
+            disableImageRescaling ? styles.iconCropperAvatarEditor : ""
+          }
           ref={setEditorRef}
           image={uploadedFile}
           width={648}
           height={648}
           position={{ x: image.x, y: image.y }}
           scale={image.zoom}
-          color={theme.isBase ? [6, 22, 38, 0.2] : [20, 20, 20, 0.8]}
+          color={isBase ? [6, 22, 38, 0.2] : [20, 20, 20, 0.8]}
           border={0}
           rotate={0}
           borderRadius={editorBorderRadius}
@@ -142,12 +145,12 @@ const ImageCropper = ({
         />
       </div>
       <div
-        className="icon_cropper-change_button"
+        className={styles.iconCropperChangeButton}
         onClick={() => inputFilesElement.current?.click()}
         title={t("Common:ChooseAnother")}
       >
         <ReactSVG src={RefreshReactSvgUrl} />
-        <div className="icon_cropper-change_button-text">
+        <div className={styles.iconCropperChangeButtonText}>
           {t("Common:ChooseAnother")}
         </div>
         <input
@@ -165,9 +168,9 @@ const ImageCropper = ({
       {typeof uploadedFile !== "string" &&
       uploadedFile?.name &&
       !disableImageRescaling ? (
-        <div className="icon_cropper-zoom-container">
+        <div className={styles.iconCropperZoomContainer}>
           <IconButton
-            className="icon_cropper-zoom-container-button"
+            className={styles.iconCropperZoomContainerButton}
             size={20}
             onClick={handleZoomOutClick}
             iconName={ZoomMinusReactSvgUrl}
@@ -177,7 +180,7 @@ const ImageCropper = ({
           />
 
           <Slider
-            className="icon_cropper-zoom-container-slider"
+            className={styles.slider}
             max={5}
             min={1}
             onChange={handleSliderChange}
@@ -186,7 +189,7 @@ const ImageCropper = ({
             isDisabled={isDisabled}
           />
           <IconButton
-            className="icon_cropper-zoom-container-button"
+            className={styles.button}
             size={20}
             onClick={handleZoomInClick}
             iconName={ZoomPlusReactSvgUrl}
@@ -196,7 +199,7 @@ const ImageCropper = ({
           />
         </div>
       ) : null}
-    </StyledImageCropper>
+    </div>
   );
 };
 

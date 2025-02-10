@@ -24,51 +24,75 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import classNames from "classnames";
+@import "../../../styles/variables/_colors.scss";
+@import "../../../styles/mixins.scss";
+@import "../../../styles/variables/devices.scss";
 
-import { Tags } from "../../tags";
-import { Tag } from "../../tag";
+.previewTile {
+  background: var(--preview-tile-background);
+  width: 214px;
+  border: var(--preview-tile-border);
+  height: 120px;
+  border-radius: 12px;
 
-import styles from "./PreviewTile.module.scss";
+  @include mobile {
+    display: none;
+  }
+}
 
-const PreviewTile = ({
-  title,
-  previewIcon,
-  tags,
-  defaultTagLabel,
-}: {
-  title: string;
-  previewIcon: string;
-  tags: string[];
-  defaultTagLabel: string;
-}) => {
-  return (
-    <div className={styles.previewTile}>
-      <div className={styles.tileHeader}>
-        <div
-          className={classNames(styles.tileHeaderIcon, {
-            [styles.isGeneratedPreview]: !previewIcon,
-          })}
-        >
-          <img src={previewIcon} alt={title} />
-        </div>
-        <div className={styles.tileHeaderTitle}>{title}</div>
-      </div>
-      <div className={styles.tileTags}>
-        {tags.length ? (
-          <Tags columnCount={2} tags={tags} onSelectTag={() => {}} />
-        ) : (
-          <Tag
-            className={styles.typeTag}
-            tag="script"
-            label={defaultTagLabel}
-            isDefault
-          />
-        )}
-      </div>
-    </div>
-  );
-};
+.tileHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  border-bottom: var(--preview-tile-border);
+}
 
-export default PreviewTile;
+.tileHeaderIcon {
+  width: 32px;
+  height: 32px;
+  border: var(--preview-tile-icon-border);
+  border-radius: 6px;
+
+  img {
+    user-select: none;
+    height: 32px;
+    width: auto;
+    border-radius: 6px;
+  }
+
+  &.isGeneratedPreview {
+    img {
+      width: 32px;
+    }
+  }
+}
+
+.tileHeaderTitle {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+}
+
+.tileTags {
+  box-sizing: border-box;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 15px;
+}
+
+.typeTags {
+  user-select: none;
+  box-sizing: border-box;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

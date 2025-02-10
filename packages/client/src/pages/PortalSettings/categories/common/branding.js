@@ -41,6 +41,7 @@ import { AdditionalResources } from "./Branding/additionalResources";
 import MobileView from "./Branding/MobileView";
 
 import LoaderBrandingSubtitle from "./sub-components/loaderBrandingSubtitle";
+import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
 
 const StyledComponent = styled.div`

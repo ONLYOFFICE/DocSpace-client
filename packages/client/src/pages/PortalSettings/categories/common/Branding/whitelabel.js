@@ -44,15 +44,11 @@ const WhiteLabelComponent = (props) => {
     showNotAvailable,
     defaultWhiteLabelLogoUrls,
     logoUrls,
-    brandName,
-    defaultBrandName,
     isDefaultLogos,
     isWhiteLabelLoaded,
     initWhiteLabel,
     setLogoUrls,
-    setBrandName,
     saveWhiteLabelLogos,
-    saveBrandName,
     resetWhiteLabelLogos,
   } = props;
   const [isSaving, setIsSaving] = useState(false);
@@ -74,13 +70,7 @@ const WhiteLabelComponent = (props) => {
   const onSave = async (data) => {
     try {
       setIsSaving(true);
-
-      if (data.logoText) {
-        await saveBrandName(data);
-        setBrandName(data.logoText);
-      } else {
-        await saveWhiteLabelLogos(data);
-      }
+      await saveWhiteLabelLogos(data);
 
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
@@ -106,8 +96,6 @@ const WhiteLabelComponent = (props) => {
       deviceType={deviceType}
       setLogoUrls={setLogoUrls}
       isWhiteLabelLoaded={isWhiteLabelLoaded}
-      defaultBrandName={defaultBrandName}
-      brandName={brandName}
       defaultWhiteLabelLogoUrls={defaultWhiteLabelLogoUrls}
       onSave={onSave}
     />

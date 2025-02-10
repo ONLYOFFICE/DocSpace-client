@@ -45,10 +45,19 @@ const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
   const onClickLink = (e) => {
     e.preventDefault();
     navigate(e.target.pathname);
+    console.log(e.target.pathname);
   };
 
   return (
     <StyledWrapper>
+      <MobileCategoryWrapper
+        title={t("BrandName")}
+        subtitle={t("BrandNameSubtitle")}
+        url={`${baseUrl}/branding/brand-name`}
+        withPaidBadge={!isSettingPaid}
+        badgeLabel={t("Common:Paid")}
+        onClickLink={onClickLink}
+      />
       <MobileCategoryWrapper
         title={t("WhiteLabel")}
         subtitle={t("BrandingSubtitle")}

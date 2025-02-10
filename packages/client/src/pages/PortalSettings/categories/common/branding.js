@@ -35,18 +35,26 @@ import { DeviceType } from "@docspace/shared/enums";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { WhiteLabel } from "./Branding/whitelabel";
+import { BrandName } from "./Branding/brandName";
 import { CompanyInfoSettings } from "./Branding/companyInfoSettings";
 import { AdditionalResources } from "./Branding/additionalResources";
 import MobileView from "./Branding/MobileView";
 
 import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
+import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
 
 const StyledComponent = styled.div`
   max-width: 700px;
   width: 100%;
   font-weight: 400;
   font-size: 13px;
+
+  .category-description {
+    line-height: 20px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    margin-bottom: 20px;
+  }
 
   .header {
     font-weight: 700;
@@ -71,7 +79,7 @@ const StyledComponent = styled.div`
   }
 
   hr {
-    margin: 24px 0;
+    margin: 20px 0;
     border: none;
     border-top: ${(props) => props.theme.client.settings.separatorBorder};
   }
@@ -82,6 +90,7 @@ const StyledComponent = styled.div`
 const Branding = ({
   t,
   isLoadedCompanyInfoSettingsData,
+  isWhiteLabelLoaded,
   isSettingPaid,
   standalone,
   deviceType,
@@ -109,6 +118,13 @@ const Branding = ({
 
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
+      {!isWhiteLabelLoaded ? (
+        <LoaderDescriptionCustomization />
+      ) : (
+        <div className="category-description">{t("BrandingSubtitle")}</div>
+      )}
+      <BrandName />
+      <hr />
       <WhiteLabel />
       {showSettings ? (
         <>
@@ -136,7 +152,7 @@ const Branding = ({
 
 export default inject(({ settingsStore, currentQuotaStore, brandingStore }) => {
   const { isCustomizationAvailable } = currentQuotaStore;
-  const { isLoadedCompanyInfoSettingsData } = brandingStore;
+  const { isLoadedCompanyInfoSettingsData, isWhiteLabelLoaded } = brandingStore;
   const {
     standalone,
     portals,
@@ -148,6 +164,7 @@ export default inject(({ settingsStore, currentQuotaStore, brandingStore }) => {
 
   return {
     isLoadedCompanyInfoSettingsData,
+    isWhiteLabelLoaded,
     isSettingPaid,
     standalone,
     portals,

@@ -62,7 +62,7 @@ const ChangeQuotaEvent = (props) => {
     setSize(value);
   };
 
-  const updateFunction = (sizeValue) => {
+  const updateFunction = () => {
     return type === "user"
       ? api.people.setCustomUserQuota(ids, size)
       : setCustomRoomQuota(ids, size, inRoom);

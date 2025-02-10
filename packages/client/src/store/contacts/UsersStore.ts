@@ -278,7 +278,7 @@ class UsersStore {
       this.abortController = new AbortController();
     }
 
-    if (!(window.DocSpace?.location?.state as { user?: unknown }).user) {
+    if (!(window.DocSpace?.location?.state as { user?: unknown })?.user) {
       this.setSelection([]);
       this.setBufferSelection(null);
     }

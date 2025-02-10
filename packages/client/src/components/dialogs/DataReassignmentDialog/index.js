@@ -92,13 +92,13 @@ const DataReassignmentDialog = ({
 
   const [percent, setPercent] = useState(0);
 
-  const updateAccountsAfterDeleteUser = () => {
-    const filter = Filter.getDefault();
+  // const updateAccountsAfterDeleteUser = () => {
+  //   const filter = Filter.getDefault();
 
-    filter.area = "people";
+  //   filter.area = "people";
 
-    getUsersList(filter, true);
-  };
+  //   getUsersList(filter, true);
+  // };
 
   const checkReassignCurrentUser = () => {
     setIsReassignCurrentUser(currentUser.id === selectedUser.id);

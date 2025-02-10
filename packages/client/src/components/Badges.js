@@ -114,7 +114,6 @@ const Badges = ({
 }) => {
   const {
     id,
-    version,
     versionGroup,
     fileExst,
     isEditing,
@@ -267,7 +266,7 @@ const Badges = ({
           hoverColor={theme.filesBadges.hoverIconColor}
         />
       ) : null}
-      {version > 1 ? (
+      {versionGroup > 1 ? (
         <BadgeWrapper {...onShowVersionHistoryProp} isTile={isTile}>
           <Badge
             {...versionBadgeProps}

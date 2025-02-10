@@ -45,7 +45,6 @@ const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
   const onClickLink = (e) => {
     e.preventDefault();
     navigate(e.target.pathname);
-    console.log(e.target.pathname);
   };
 
   return (

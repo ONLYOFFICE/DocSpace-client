@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,54 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  getAllPortals,
-  getBackupProgress,
-  getBackupSchedule,
-  getBackupStorage,
-  getFoldersTree,
-  getPortalTariff,
-  getQuota,
-  getSettingsFiles,
-  getSettingsThirdParty,
-  getStorageRegions,
-} from "@/lib/actions";
-import DataBackup from "./page.client";
-
-async function Page() {
-  const [
-    account,
-    backupSchedule,
-    backupStorage,
-    newStorageRegions,
-
-    portals,
-    settingsFiles,
-    foldersTree,
-    portalTariff,
-  ] = await Promise.all([
-    getSettingsThirdParty(),
-    getBackupSchedule(),
-    getBackupStorage(),
-    getStorageRegions(),
-    getAllPortals(),
-    getSettingsFiles(),
-    getFoldersTree(),
-    getPortalTariff(),
-  ]);
-
-  return (
-    <DataBackup
-      account={account}
-      foldersTree={foldersTree}
-      portalTariff={portalTariff}
-      filesSettings={settingsFiles}
-      portals={portals?.tenants || []}
-      backupScheduleResponse={backupSchedule}
-      backupStorageResponse={backupStorage ?? []}
-      newStorageRegions={newStorageRegions ?? []}
-    />
-  );
-}
-
-export default Page;
+export const saveToLocalStorageUtils = <T>(key: string, value: T) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};

@@ -45,10 +45,7 @@ import {
   FloatingButtonIcons,
 } from "@docspace/shared/components/floating-button";
 import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
-import {
-  isManagement,
-  getBackupProgressInfo,
-} from "@docspace/shared/utils/common";
+import { getBackupProgressInfo } from "@docspace/shared/utils/common";
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
 
 import { StyledModules, StyledManualBackup } from "./ManualBackup.styled";
@@ -122,6 +119,7 @@ const ManualBackup = ({
   setIsThirdStorageChanged,
   setErrorInformation,
   errorInformation,
+  isManagement = false,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -182,7 +180,7 @@ const ManualBackup = ({
         `${BackupStorageType.TemporaryModuleType}`,
         null,
         false,
-        isManagement(),
+        isManagement,
       );
       setDownloadingProgress(1);
     } catch (err) {
@@ -245,7 +243,7 @@ const ManualBackup = ({
     );
 
     try {
-      await startBackup(moduleType, storageParams, false, isManagement());
+      await startBackup(moduleType, storageParams, false, isManagement);
       setDownloadingProgress(1);
       setTemporaryLink("");
     } catch (err) {
@@ -282,7 +280,7 @@ const ManualBackup = ({
         <Text className="backup_modules-description">
           {t("ManualBackupDescription")}
         </Text>
-        {!isManagement() ? (
+        {!isManagement ? (
           <Link
             className="link-learn-more"
             href={dataBackupUrl}

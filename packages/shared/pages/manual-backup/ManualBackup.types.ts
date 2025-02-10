@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TThirdParties } from "../../api/files/types";
 import type { DeviceType, FolderType } from "../../enums";
 import type {
   ConnectedThirdPartyAccountType,
   Nullable,
-  ProviderType,
   SelectedStorageType,
   StorageRegionsType,
   ThirdPartyAccountType,
@@ -45,6 +45,7 @@ type StorageParamsType = {
 };
 
 export interface ManualBackupProps {
+  isManagement?: boolean;
   maxWidth?: string;
   buttonSize?: ButtonSize;
   isNeedFilePath?: boolean;
@@ -113,7 +114,7 @@ export interface ManualBackupProps {
   dataBackupUrl: string;
   pageIsDisabled: boolean; //  isManagement() && portals?.length === 1;
   currentDeviceType?: DeviceType;
-  currentColorScheme: Nullable<TColorScheme>;
+  currentColorScheme?: TColorScheme;
   // end SettingsStore
 
   // dialogsStore Store
@@ -136,9 +137,9 @@ export interface ManualBackupProps {
   removeItem: ThirdPartyAccountType; // selectedThirdPartyAccount ?? removeItem
 
   // thirdPartyStore store
-  providers: ProviderType[];
+  providers: TThirdParties;
   deleteThirdParty: (id: string) => Promise<void>;
-  setThirdPartyProviders: (providers: ProviderType[]) => void;
+  setThirdPartyProviders: (providers: TThirdParties) => void;
   openConnectWindow: (
     serviceName: string,
     modal: Window | null,

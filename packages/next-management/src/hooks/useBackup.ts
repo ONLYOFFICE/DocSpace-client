@@ -31,6 +31,7 @@ import { useCallback, useMemo, useState } from "react";
 import axios, { AxiosError } from "axios";
 
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
+import { saveToLocalStorageUtils } from "@docspace/shared/utils/saveToLocalStorage";
 
 import type { Nullable, Option, TTranslation } from "@docspace/shared/types";
 import type { TBackupSchedule } from "@docspace/shared/api/portal/types";
@@ -218,6 +219,29 @@ export const useBackup = ({
       localStorage.removeItem("LocalCopyThirdPartyStorageValues");
   }, []);
 
+  const saveToLocalStorage = (
+    isStorage: boolean,
+    moduleName: string,
+    selectedId: string | number | undefined,
+    selectedStorageTitle?: string,
+  ) => {
+    saveToLocalStorageUtils("LocalCopyStorageType", moduleName);
+
+    if (isStorage) {
+      saveToLocalStorageUtils("LocalCopyStorage", `${selectedId}`);
+      saveToLocalStorageUtils(
+        "LocalCopyThirdPartyStorageType",
+        selectedStorageTitle,
+      );
+      saveToLocalStorageUtils(
+        "LocalCopyThirdPartyStorageValues",
+        selected.formSettings,
+      );
+    } else {
+      saveToLocalStorageUtils("LocalCopyFolder", `${selectedId}`);
+    }
+  };
+
   const setThirdPartyAccountsInfo = useCallback(
     (t: TTranslation) => {
       return backupStore.setThirdPartyAccountsInfo(t, isAdmin);
@@ -291,5 +315,6 @@ export const useBackup = ({
     seStorageType,
     setSelectedFolder,
     setStorageId,
+    saveToLocalStorage,
   };
 };

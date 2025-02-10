@@ -36,12 +36,12 @@ import { DirectThirdPartyConnection } from "@docspace/shared/components/direct-t
 import type {
   ConnectedThirdPartyAccountType,
   Nullable,
-  ProviderType,
   ThirdPartyAccountType,
   TTranslation,
 } from "@docspace/shared/types";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
+import type { TThirdParties } from "@docspace/shared/api/files/types";
 
 interface ThirdPartyModuleProps {
   onMakeCopy: (
@@ -75,8 +75,8 @@ interface ThirdPartyModuleProps {
   setConnectedThirdPartyAccount: (
     account: Nullable<ConnectedThirdPartyAccountType>,
   ) => void;
-  setThirdPartyProviders: (providers: ProviderType[]) => void;
-  providers: ProviderType[];
+  setThirdPartyProviders: (providers: TThirdParties) => void;
+  providers: TThirdParties;
   removeItem: ThirdPartyAccountType;
   newPath: string;
   basePath: string;

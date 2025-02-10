@@ -51,7 +51,7 @@ const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
     <StyledWrapper>
       <MobileCategoryWrapper
         title={t("BrandName")}
-        subtitle={t("BrandNameSubtitle")}
+        subtitle={t("BrandNameSubtitleMobile")}
         url={`${baseUrl}/branding/brand-name`}
         withPaidBadge={!isSettingPaid}
         badgeLabel={t("Common:Paid")}
@@ -59,7 +59,7 @@ const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
       />
       <MobileCategoryWrapper
         title={t("WhiteLabel")}
-        subtitle={t("BrandingSubtitle")}
+        subtitle={t("BrandingSubtitleMobile")}
         url={`${baseUrl}/branding/white-label`}
         withPaidBadge={!isSettingPaid}
         badgeLabel={t("Common:Paid")}

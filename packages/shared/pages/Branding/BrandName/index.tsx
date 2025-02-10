@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
@@ -37,24 +37,58 @@ import {
   InputSize,
 } from "../../../components/text-input";
 
+import { StyledBrandName } from "./BrandName.styled";
+import { IBrandNameProps } from "./BreandName.types";
 import { NotAvailable } from "./NotAvailable";
-import { StyledHeader } from "./WhiteLabel.styled";
-import { IBrandNameProps } from "./WhiteLabel.types";
+import { IWhiteLabelData } from "../WhiteLabel/WhiteLabel.types";
+import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
+import { brandingRedirectUrl } from "../constants";
 
 export const BrandName = ({
   t,
   showNotAvailable,
   isSettingPaid,
   standalone,
-  isEmpty,
-  inputValue,
-  onChange,
   onSave,
-  onCancel,
-  isEqualText,
+  isWhiteLabelLoaded,
+  defaultBrandName,
+  brandName,
+  deviceType,
 }: IBrandNameProps) => {
+  useResponsiveNavigation({
+    redirectUrl: brandingRedirectUrl,
+    currentLocation: "white-label",
+    deviceType,
+  });
+
+  const [brandNameWhiteLabel, setBrandNameWhiteLabel] = useState("");
+
+  useEffect(() => {
+    if (!isWhiteLabelLoaded || !brandName) return;
+    setBrandNameWhiteLabel(brandName);
+  }, [brandName, isWhiteLabelLoaded]);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setBrandNameWhiteLabel(value);
+  };
+
+  const onSaveAction = (): void => {
+    const data: IWhiteLabelData = {
+      logoText: brandNameWhiteLabel,
+      logo: [],
+    };
+    onSave(data);
+  };
+
+  const onCancelAction = (): void => {
+    setBrandNameWhiteLabel(defaultBrandName);
+  };
+
+  const isEqualText = defaultBrandName === brandNameWhiteLabel;
+
   return (
-    <StyledHeader>
+    <StyledBrandName>
       {showNotAvailable ? <NotAvailable t={t} /> : null}
 
       <div className="header-container">
@@ -81,27 +115,25 @@ export const BrandName = ({
           id="fieldContainerBrandName"
           isVertical
           className="settings_unavailable"
-          hasError={isEmpty}
         >
           <TextInput
             testId="logo-text-input"
             className="brand-name input"
-            value={inputValue}
+            value={brandNameWhiteLabel}
             onChange={onChange}
             isDisabled={!isSettingPaid}
             isReadOnly={!isSettingPaid}
             scale
             isAutoFocussed={!isMobile}
             maxLength={40}
-            hasError={isEmpty}
             type={InputType.text}
             size={InputSize.base}
           />
           <SaveCancelButtons
             id="btnBrandName"
             className="brand-name-buttons"
-            onSaveClick={onSave}
-            onCancelClick={onCancel}
+            onSaveClick={onSaveAction}
+            onCancelClick={onCancelAction}
             saveButtonLabel={t("Common:SaveButton")}
             cancelButtonLabel={t("Common:CancelButton")}
             reminderText={t("YouHaveUnsavedChanges")}
@@ -112,6 +144,6 @@ export const BrandName = ({
           />
         </FieldContainer>
       </div>
-    </StyledHeader>
+    </StyledBrandName>
   );
 };

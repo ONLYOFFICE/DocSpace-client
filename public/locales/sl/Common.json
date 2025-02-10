@@ -648,5 +648,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "zahtevana aktivacija"
+  "ActivationRequired": "zahtevana aktivacija",
+  "ManualBackupDescription": "To možnost uporabite, če želite vse podatke v prostora dobiti v datoteki.",
+  "TemporaryStorage": "Začasno shranjevanje",
+  "TemporaryStorageDescription": "Varnostna kopija je shranjena v razdelku 'Varnostno kopiranje', lahko jo boste prenesli v 24 urah po kreiranju."
 }

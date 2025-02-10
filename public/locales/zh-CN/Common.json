@@ -650,5 +650,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "需要激活"
+  "ActivationRequired": "需要激活",
+  "ManualBackupDescription": "如果要将协作空间中包含的所有数据作为文件获取，请使用此选项。",
+  "TemporaryStorage": "临时存储",
+  "TemporaryStorageDescription": "备份的文件会储存在‘备份’板块中，创建后24小时内可下载备份。"
 }

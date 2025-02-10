@@ -648,5 +648,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "활성화가 필요합니다"
+  "ActivationRequired": "활성화가 필요합니다",
+  "ManualBackupDescription": "스페이스에 포함된 모든 데이터를 파일로 가져오려면 이 옵션을 사용하세요.",
+  "TemporaryStorage": "임시 저장소",
+  "TemporaryStorageDescription": "백업은 '백업' 섹션에 저장되며 생성 후 24시간 이내에 다운로드할 수 있습니다."
 }

@@ -647,5 +647,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "cần kích hoạt "
+  "ActivationRequired": "cần kích hoạt ",
+  "ManualBackupDescription": "Sử dụng tùy chọn này nếu bạn muốn lấy tất cả dữ liệu chứa trên không gian này dưới một tập tin.",
+  "TemporaryStorage": "Lưu trữ tạm thời",
+  "TemporaryStorageDescription": "Bản sao lưu được lưu trữ trong phần 'Sao lưu', bạn sẽ có thể tải xuống trong vòng 24 giờ sau khi tạo."
 }

@@ -648,5 +648,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "nutná aktivace"
+  "ActivationRequired": "nutná aktivace",
+  "ManualBackupDescription": "Použijte tuto možnost, pokud chcete získat všechna data obsažená v prostoru v souboru.",
+  "TemporaryStorage": "Dočasné úložiště",
+  "TemporaryStorageDescription": "Záloha je uložena v sekci 'Záloha', budete ji moci stáhnout do 24 hodin po vytvoření."
 }

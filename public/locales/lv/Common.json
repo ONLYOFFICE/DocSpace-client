@@ -648,5 +648,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "nepieciešams aktivizācijas kods"
+  "ActivationRequired": "nepieciešams aktivizācijas kods",
+  "ManualBackupDescription": "Izmantojiet šo iespēju, ka vēlaties visus portāla datus iegūt faila veidā.",
+  "TemporaryStorage": "Pagaidu uzglabāšana",
+  "TemporaryStorageDescription": "Dublējums tiek glabāts sadaļā 'Dublējums', to varēsiet lejupielādēt 24 stundu laikā pēc izveidošanas."
 }

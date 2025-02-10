@@ -648,5 +648,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "activatie vereist"
+  "ActivationRequired": "activatie vereist",
+  "ManualBackupDescription": "Gebruik deze optie als u alle data opgeslagen in de ruimte als bestand wilt ontvangen.",
+  "TemporaryStorage": "Tijdelijke opslag",
+  "TemporaryStorageDescription": "De back-up wordt opgeslagen in de rubriek 'Back-up', u kunt hem binnen 24 uur na het maken downloaden"
 }

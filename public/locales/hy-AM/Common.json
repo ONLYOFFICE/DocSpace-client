@@ -649,5 +649,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "անհրաժեշտ է ակտիվացում"
+  "ActivationRequired": "անհրաժեշտ է ակտիվացում",
+  "ManualBackupDescription": "Օգտագործեք այս տարբերակը, եթե ցանկանում եք ստանալ կայքէջում պարունակվող բոլոր տվյալները որպես ֆայլ:",
+  "TemporaryStorage": "Ժամանակավոր պահեստավորում",
+  "TemporaryStorageDescription": "Պահուստավորումը պահվում է 'Պահուստ' բաժնում, դուք կկարողանաք ներբեռնել այն ստեղծելուց հետո 24 ժամվա ընթացքում."
 }

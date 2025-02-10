@@ -648,5 +648,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "wymagana aktywacja"
+  "ActivationRequired": "wymagana aktywacja",
+  "ManualBackupDescription": "Użyj tej opcji, jeśli chcesz pobrać wszystkie dane na portalu jako plik.",
+  "TemporaryStorage": "Tymczasowe miejsce przechowywania",
+  "TemporaryStorageDescription": "Kopia zapasowa jest przechowywana w sekcji 'Kopia zapasowa' i będzie gotowa do pobrania w ciągu 24 godzin od jej utworzenia."
 }

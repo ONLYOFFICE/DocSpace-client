@@ -278,7 +278,7 @@ const ManualBackup = ({
       <StatusMessage message={errorInformation} />
       <div className="backup_modules-header_wrapper">
         <Text className="backup_modules-description">
-          {t("ManualBackupDescription")}
+          {t("Common:ManualBackupDescription")}
         </Text>
         {!isManagement ? (
           <Link
@@ -298,14 +298,14 @@ const ManualBackup = ({
         <RadioButton
           key={0}
           id="temporary-storage"
-          label={t("TemporaryStorage")}
+          label={t("Common:TemporaryStorage")}
           name="isCheckedTemporaryStorage"
           isChecked={isCheckedTemporaryStorage}
           isDisabled={!isMaxProgress || pageIsDisabled}
           {...commonRadioButtonProps}
         />
         <Text className="backup-description">
-          {t("TemporaryStorageDescription")}
+          {t("Common:TemporaryStorageDescription")}
         </Text>
         {isCheckedTemporaryStorage ? (
           <div className="manual-backup_buttons">

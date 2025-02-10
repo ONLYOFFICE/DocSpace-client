@@ -649,5 +649,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "potrebna aktivacija"
+  "ActivationRequired": "potrebna aktivacija",
+  "ManualBackupDescription": "Koristite ovu opciju ako želite da svi podaci budu sadržani u prostoru kao datoteka.",
+  "TemporaryStorage": "Privremeno skladište",
+  "TemporaryStorageDescription": "Rezervna kopija je smeštena u odeljku 'Rezervne kopije', moći ćete je preuzeti u roku od 24 sata nakon kreiranja."
 }

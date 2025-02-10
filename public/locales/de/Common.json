@@ -649,5 +649,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "aktivierung erforderlich"
+  "ActivationRequired": "aktivierung erforderlich",
+  "ManualBackupDescription": "Nutzen Sie diese Option, wenn Sie alle im Bereich enthaltenen Daten als Datei erhalten möchten.",
+  "TemporaryStorage": "Vorläufige Speicherung",
+  "TemporaryStorageDescription": "Die Sicherungskopie wird im Bereich 'Backup' gespeichert, Sie können diese innerhalb von 24 Stunden nach der Erstellung herunterladen."
 }

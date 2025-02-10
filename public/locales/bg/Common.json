@@ -648,5 +648,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "изисква активиране"
+  "ActivationRequired": "изисква активиране",
+  "ManualBackupDescription": "Използвайте тази опция, ако искате да получите всички данни, съдържащи се на портала, като файл.",
+  "TemporaryStorage": "Временно съхранение",
+  "TemporaryStorageDescription": "Архивното копие се съхранява в секцията 'Архивиране', ще можете да го изтеглите в рамките на 24 часа след създаването."
 }

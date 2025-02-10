@@ -648,5 +648,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "aktivointi vaaditaan"
+  "ActivationRequired": "aktivointi vaaditaan",
+  "ManualBackupDescription": "Käytä tätä, jos haluat tallettaa sivuston kaiken sisällön tiedostoon.",
+  "TemporaryStorage": "Väliaikainen varastointi",
+  "TemporaryStorageDescription": "Varmuuskopiointi tallennetaan 'Varmuuskopiointi' -osioon, voit ladata sen 24 tunnin kuluessa luomisesta."
 }

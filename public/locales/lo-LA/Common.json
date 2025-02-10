@@ -432,5 +432,8 @@
   "TypeTitleSharePoint": "SharePoint",
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TypeTitleYandex": "Yandex.Disk",
+  "ManualBackupDescription": "ໃຊ້ທາງເລືອກນີ້ຖ້າທ່ານຕ້ອງການເອົາຂໍ້ມູນທັງຫມົດທີ່ມີຢູ່ໃນປະຕູເປັນໄຟລ໌. ",
+  "TemporaryStorage": "ຊົ່ວຄາວ ການ​ເກັບ​ຮັກ​ສາ",
+  "TemporaryStorageDescription": "ການ​ສໍາ​ຮອງ​ຂໍ້​ມູນ​ແມ່ນ​ເກັບ​ໄວ້​ໃນ​ພາກ​ສ່ວນ 'ສໍາ​ຮອງ​ຂໍ້​ມູນ​, ທ່ານ​ຈະ​ສາ​ມາດ​ດາວ​ໂຫລດ​ໄດ້​ພາຍ​ໃນ 24 ຊົ່ວ​ໂມງ​ຫຼັງ​ຈາກ​ການ​ສ້າງ​."
 }

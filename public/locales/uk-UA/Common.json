@@ -648,5 +648,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "потрібна активація"
+  "ActivationRequired": "потрібна активація",
+  "ManualBackupDescription": "Використовуйте цю опцію, якщо ви хочете отримати всі дані, що містяться на порталі як файл.",
+  "TemporaryStorage": "Тимчасове сховище",
+  "TemporaryStorageDescription": "Резервна копія зберігається в розділі 'Резервна копія', ви зможете завантажити її протягом 24 годин після створення."
 }

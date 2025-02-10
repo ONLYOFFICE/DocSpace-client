@@ -648,5 +648,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "ativação necessária"
+  "ActivationRequired": "ativação necessária",
+  "ManualBackupDescription": "Utilize esta opção se quer obter todos os dados do espaço num ficheiro.",
+  "TemporaryStorage": "Armazenamento temporário",
+  "TemporaryStorageDescription": "A cópia de segurança é armazenada na secção de 'Cópias de Segurança', poderá fazer o download da cópia dentro de 24 horas após a criação."
 }

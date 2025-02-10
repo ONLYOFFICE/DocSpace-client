@@ -648,5 +648,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "aktivləşdirmə tələb olunur"
+  "ActivationRequired": "aktivləşdirmə tələb olunur",
+  "ManualBackupDescription": "Sahədə olan bütün məlumatları fayl kimi əldə etmək istəyirsinizsə, bu seçimdən istifadə edin.",
+  "TemporaryStorage": "Müvəqqəti yaddaş",
+  "TemporaryStorageDescription": "Ehtiyat nüsxələr 'Yedəkləmə' bölməsində saxlanmışdır, siz onları yaratdıqdan sonra 24 saat ərzində endirə bilərsiniz."
 }

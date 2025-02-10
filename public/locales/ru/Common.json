@@ -650,5 +650,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Яндекс.Диск",
-  "ActivationRequired": "требуется активация"
+  "ActivationRequired": "требуется активация",
+  "ManualBackupDescription": "Используйте эту опцию, если Вы хотите получить все данные, содержащиеся на портале, в виде файла.",
+  "TemporaryStorage": "Временное хранилище",
+  "TemporaryStorageDescription": "Резервная копия будет храниться в разделе 'Резервное копирование', вы сможете скачать её в течение 24 часов с момента создания."
 }

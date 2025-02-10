@@ -648,5 +648,8 @@
   "TypeTitleWebDav": "WebDAV",
   "TypeTitlekDrive": "kDrive",
   "TypeTitleYandex": "Yandex.Disk",
-  "ActivationRequired": "aktivasyon gerekli"
+  "ActivationRequired": "aktivasyon gerekli",
+  "ManualBackupDescription": "Alanda bulunan tüm verileri dosya olarak almak istiyorsanız bu seçeneği kullanın.",
+  "TemporaryStorage": "Geçici depolama",
+  "TemporaryStorageDescription": "Yedekler 'Yedekleme' bölümünde saklanır, oluşturduktan sonra 24 saat içinde indirebilirsiniz."
 }

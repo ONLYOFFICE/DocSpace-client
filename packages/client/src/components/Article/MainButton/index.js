@@ -701,6 +701,7 @@ const ArticleMainButtonContent = (props) => {
 
     if (!isAccountsPage) visibilityValue = security?.Create;
 
+    if (!isMobileArticle) visibilityValue = false;
     return visibilityValue;
   };
 

@@ -485,7 +485,7 @@
   padding: 0px 20px 16px;
   max-width: 100%;
 
-  @include tablet-and-below {
+  &[data-show-text="true"] {
     padding: 0;
     margin: 0;
   }

@@ -3,11 +3,20 @@ import { useCallback } from "react";
 import { HTML_EXST, EBOOK_EXST } from "@docspace/shared/constants";
 import { presentInArray } from "@docspace/shared/utils";
 import { TFilesSettings } from "@docspace/shared/api/files/types";
-import { iconSize32 } from "@docspace/shared/utils/image-helpers";
+import {
+  iconSize24,
+  iconSize32,
+  iconSize64,
+  iconSize96,
+} from "@docspace/shared/utils/image-helpers";
+
+type TItemIconSizes = 24 | 32 | 64 | 96;
 
 type UseItemIconProps = {
   filesSettings: TFilesSettings;
 };
+
+export type TGetIcon = ReturnType<typeof useItemIcon>["getIcon"];
 
 export default function useItemIcon({ filesSettings }: UseItemIconProps) {
   const isArchive = useCallback(
@@ -36,7 +45,7 @@ export default function useItemIcon({ filesSettings }: UseItemIconProps) {
   );
 
   const determineIconPath = useCallback(
-    (fileExst: string): string => {
+    (fileExst: string = ""): string => {
       if (isArchive(fileExst)) return "archive.svg";
       if (isImage(fileExst)) return "image.svg";
       if (isSound(fileExst)) return "sound.svg";
@@ -47,16 +56,37 @@ export default function useItemIcon({ filesSettings }: UseItemIconProps) {
     [isArchive, isImage, isSound, isHtml, isEbook],
   );
 
+  const getIconBySize = useCallback((path: string, size = 32) => {
+    const getOrDefault = (container: Map<string, string>) => {
+      const icon = container.has(path)
+        ? container.get(path)
+        : container.get("file.svg");
+
+      return icon ?? "";
+    };
+
+    switch (+size) {
+      case 24:
+        return getOrDefault(iconSize24);
+      case 32:
+        return getOrDefault(iconSize32);
+      case 64:
+        return getOrDefault(iconSize64);
+      case 96:
+        return getOrDefault(iconSize96);
+      default:
+        return getOrDefault(iconSize32);
+    }
+  }, []);
+
   const getIcon = useCallback(
-    (fileExst?: string) => {
-      if (!fileExst) return iconSize32.get("folder.svg");
+    (fileExst?: string, size: TItemIconSizes = 32, contentLength?: string) => {
+      if (!fileExst && !contentLength) return getIconBySize("folder.svg", size);
 
       const path = determineIconPath(fileExst);
-      return iconSize32.has(path)
-        ? (iconSize32.get(path) ?? "")
-        : (iconSize32.get("file.svg") ?? "");
+      return getIconBySize(path, size);
     },
-    [determineIconPath],
+    [determineIconPath, getIconBySize],
   );
 
   return { getIcon };

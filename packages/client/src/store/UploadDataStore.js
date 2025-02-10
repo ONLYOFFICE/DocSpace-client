@@ -273,6 +273,17 @@ class UploadDataStore {
       (el) => el.inConversion,
     );
 
+    const shouldCancelFile = (file) => {
+      return (
+        file.action === "upload" ||
+        (file.action === "convert" && !file.inConversion)
+      );
+    };
+
+    this.files = this.files.map((file) =>
+      shouldCancelFile(file) ? { ...file, cancel: true } : file,
+    );
+
     this.setUploadData(newUploadData);
     this.uploadedFilesHistory = newHistory;
 
@@ -585,7 +596,7 @@ class UploadDataStore {
               currentFile.error = error;
               currentFile.convertProgress = progress;
               currentFile.inConversion = false;
-              currentFile.fileInfo = fileInfo;
+              if (fileInfo) currentFile.fileInfo = fileInfo;
 
               if (error.indexOf("password") !== -1) {
                 currentFile.needPassword = true;
@@ -1489,7 +1500,7 @@ class UploadDataStore {
               f.action !== "uploaded" &&
               f.action !== "convert" &&
               f.action !== "converted" &&
-              !f.error,
+              !f.cancel,
           ) === -1;
 
         if (allFilesIsUploaded) {
@@ -1508,16 +1519,6 @@ class UploadDataStore {
             );
             if (totalErrorsCount > 0)
               console.log("Upload errors: ", totalErrorsCount);
-
-            setTimeout(() => {
-              if (
-                !this.uploadPanelVisible &&
-                !totalErrorsCount &&
-                this.converted
-              ) {
-                this.clearUploadedFiles();
-              }
-            }, TIMEOUT);
           }
         }
       });

@@ -24,84 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/_mixins.scss";
 
-import AddRoleButton from "PUBLIC_DIR/images/add.role.button.react.svg";
-import EveryoneRoleIcon from "PUBLIC_DIR/images/everyone.role.button.react.svg";
-
-import { globalColors } from "../../themes";
-import { injectDefaultTheme } from "../../utils";
-
-const StyledFillingRoleSelector = styled.div.attrs(injectDefaultTheme)`
+.fillingRoleSelector {
   display: flex;
   flex-direction: column;
   gap: 4px;
-`;
+}
 
-const StyledRow = styled.div`
+.row {
   height: 48px;
   display: flex;
   align-items: center;
   gap: 8px;
-`;
+}
 
-const StyledUserRow = styled.div`
+.userRow {
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
 
-  .content {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+.content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-  .user-with-role {
-    display: flex;
-  }
-`;
+.userWithRole {
+  display: flex;
+}
 
-const StyledNumber = styled.div`
+.number {
   font-weight: 600;
   font-size: 14px;
   line-height: 16px;
-  color: ${globalColors.gray};
-`;
+  color: #{$gray};
+}
 
-const StyledAvatar = styled.img`
+.avatar {
   height: 32px;
   width: 32px;
   border-radius: 50%;
-`;
+}
 
-const StyledAddRoleButton = styled(AddRoleButton)`
-  width: 32px;
-  height: 32px;
-
-  path {
-    fill: ${(props) => props.color};
-  }
-
-  rect {
-    stroke: ${(props) => props.color};
-  }
-`;
-
-const StyledEveryoneRoleIcon = styled(EveryoneRoleIcon)`
-  width: 32px;
-  height: 32px;
-`;
-
-const StyledRole = styled.div`
+.role {
   font-weight: 600;
   font-size: 14px;
   line-height: 16px;
-`;
+}
 
-const StyledAssignedRole = styled.div`
+.assignedRole {
   padding-inline-start: 4px;
-  color: ${globalColors.gray};
+  color: #{$gray};
 
   ::before {
     content: "(";
@@ -109,27 +86,27 @@ const StyledAssignedRole = styled.div`
   ::after {
     content: ")";
   }
-`;
+}
 
-const StyledEveryoneRoleContainer = styled.div`
+.everyoneRoleContainer {
   display: flex;
   flex-direction: column;
+}
 
-  .title {
-    display: flex;
-  }
+.title {
+  display: flex;
+}
 
-  .role-description {
-    font-weight: 400;
-    font-size: 10px;
-    line-height: 14px;
-    color: ${globalColors.lightGrayDark};
-  }
-`;
+.roleDescription {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  color: #{$light-gray-dark};
+}
 
-const StyledTooltip = styled.div`
-  background: ${globalColors.lightToastInfo};
-  color: ${globalColors.black};
+.tooltip {
+  background: #{$light-toast-info};
+  color: #{$black};
   border-radius: 6px;
   font-weight: 400;
   font-size: 12px;
@@ -138,18 +115,26 @@ const StyledTooltip = styled.div`
   height: 48px;
   box-sizing: border-box;
   margin: 8px 0;
-`;
+}
 
-export {
-  StyledFillingRoleSelector,
-  StyledRow,
-  StyledNumber,
-  StyledAddRoleButton,
-  StyledEveryoneRoleIcon,
-  StyledRole,
-  StyledEveryoneRoleContainer,
-  StyledTooltip,
-  StyledAssignedRole,
-  StyledAvatar,
-  StyledUserRow,
-};
+.addRoleButton {
+  svg {
+    width: 32px;
+    height: 32px;
+
+    path {
+      fill: var(--color);
+    }
+
+    rect {
+      stroke: var(--color);
+    }
+  }
+}
+
+.everyoneRoleIcon {
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+}

@@ -192,7 +192,7 @@ const CreateRoomDialog = ({
   const onSubmitRoom = (items) => {
     const item = items[0];
     setIsTemplateSelected(true);
-    setTemplateItem(item);
+    setTemplateItem({ ...item, title: item.label });
 
     const newRoomParams = getFetchedRoomParams(
       { ...roomParams, id: item?.id, title: item?.label, logo: item?.logo },

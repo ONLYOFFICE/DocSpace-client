@@ -586,20 +586,7 @@ export function getCreateTemplateProgress() {
   return request(options);
 }
 
-export function createRoomFromTemplate(
-  templateId: number,
-  title: string,
-  logo,
-  tags,
-  copyLogo: boolean,
-) {
-  const data = {
-    templateId,
-    title,
-    logo,
-    tags,
-    CopyLogo: copyLogo,
-  };
+export function createRoomFromTemplate(data) {
   const options = {
     method: "post",
     url: `/files/rooms/fromTemplate`,

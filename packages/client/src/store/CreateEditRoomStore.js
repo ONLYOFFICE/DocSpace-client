@@ -516,7 +516,9 @@ class CreateEditRoomStore {
 
     this.setIsLoading(true);
 
-    const isDeleteLogo = !!logo.original && !icon.uploadedFile;
+    const isDeleteLogo = isTemplate
+      ? !!logo.original && !icon.uploadedFile
+      : false;
 
     try {
       if (icon.uploadedFile && typeof icon.uploadedFile !== "string") {
@@ -591,18 +593,23 @@ class CreateEditRoomStore {
   onCreateTemplateRoom = async (roomParams) => {
     this.filesStore.setRoomCreated(true);
 
-    const { roomId, tags, title, logo, roomType, copyLogo } = roomParams;
+    const { roomId, tags, title, logo, roomType, copyLogo, color, cover } =
+      roomParams;
 
     let isFinished = false;
     let progressData;
 
-    const room = await api.rooms.createRoomFromTemplate(
-      roomId,
+    const data = {
+      templateId: roomId,
       title,
       logo,
       tags,
-      copyLogo,
-    );
+      CopyLogo: copyLogo,
+      color,
+      cover,
+    };
+
+    const room = await api.rooms.createRoomFromTemplate(data);
 
     progressData = room;
 

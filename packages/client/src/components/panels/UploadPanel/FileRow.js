@@ -494,7 +494,7 @@ export default inject(
       }
     }
 
-    const name = splitted.join(".");
+    const name = splitted?.join(".");
 
     const { theme } = settingsStore;
     const { canViewedDocs, getIconSrc, isArchive, openOnNewPage } =

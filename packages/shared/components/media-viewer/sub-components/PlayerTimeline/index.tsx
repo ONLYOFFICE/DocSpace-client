@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,18 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef, useImperativeHandle, forwardRef } from "react";
-
+import classNames from "classnames";
+import { isMobile } from "react-device-detect";
 import { formatTime } from "../../MediaViewer.utils";
 
 import type {
   PlayerTimelineProps,
   PlayerTimelineRef,
 } from "./PlayerTimeline.props";
-import {
-  HoverProgress,
-  PlayerTimelineWrapper,
-  Progress,
-} from "./PlayerTimeline.styled";
+
+import styles from "./PlayerTimeline.module.scss";
 
 const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
   ({ value, duration, onChange, onMouseEnter, onMouseLeave }, ref) => {
@@ -132,15 +130,41 @@ const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
     }, []);
 
     return (
-      <PlayerTimelineWrapper
+      <div
+        className={classNames(styles.wrapper, {
+          [styles.isMobile]: isMobile,
+        })}
         ref={timelineRef}
         onMouseMove={handleMouseMove}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        data-testid="player-timeline"
+        role="group"
+        aria-label="Video timeline"
       >
-        <time ref={timelineTooltipRef}>00:00</time>
-        <Progress ref={progressRef} />
-        <HoverProgress ref={hoverProgressRef} />
+        <time
+          ref={timelineTooltipRef}
+          data-testid="timeline-tooltip"
+          aria-live="polite"
+        >
+          00:00
+        </time>
+        <div
+          ref={progressRef}
+          className={styles.progress}
+          data-testid="timeline-progress"
+          role="progressbar"
+          aria-label="Video progress"
+          aria-valuenow={value}
+          aria-valuemin={0}
+          aria-valuemax={100}
+        />
+        <div
+          ref={hoverProgressRef}
+          className={styles.hoverProgress}
+          data-testid="timeline-hover-progress"
+          aria-hidden="true"
+        />
         <input
           min="0"
           max="100"
@@ -151,8 +175,9 @@ const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
           style={{
             backgroundSize: `${value}% 100%`,
           }}
+          data-testid="timeline-slider"
         />
-      </PlayerTimelineWrapper>
+      </div>
     );
   },
 );

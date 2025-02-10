@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,17 +28,34 @@ import React, { memo } from "react";
 import IconExitFullScreen from "PUBLIC_DIR/images/videoplayer.exit.react.svg";
 import IconFullScreen from "PUBLIC_DIR/images/videoplayer.full.react.svg";
 import PlayerFullSceenProps from "./PlayerFullScreen.props";
-
-import { PlayerFullSceenWrapper } from "./PlayerFullScreen.styled";
+import styles from "./PlayerFullScreen.module.scss";
 
 const PlayerFullScreen = memo(
   ({ isAudio, onClick, isFullScreen }: PlayerFullSceenProps) => {
     if (isAudio) return;
 
+    const buttonLabel = isFullScreen ? "Exit full screen" : "Enter full screen";
+
     return (
-      <PlayerFullSceenWrapper onClick={onClick}>
-        {isFullScreen ? <IconExitFullScreen /> : <IconFullScreen />}
-      </PlayerFullSceenWrapper>
+      <div
+        className={styles.wrapper}
+        onClick={onClick}
+        data-testid="player-fullscreen"
+        aria-label={buttonLabel}
+        aria-pressed={isFullScreen}
+      >
+        {isFullScreen ? (
+          <IconExitFullScreen
+            data-testid="exit-fullscreen-icon"
+            role="presentation"
+          />
+        ) : (
+          <IconFullScreen
+            data-testid="enter-fullscreen-icon"
+            role="presentation"
+          />
+        )}
+      </div>
     );
   },
 );

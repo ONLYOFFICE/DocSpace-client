@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,13 +23,14 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-
-import { TOption, ComboBoxSize } from "../combobox";
+import classNames from "classnames";
+import { TOption, ComboBoxSize, ComboBox } from "../combobox";
 import { mapCulturesToArray } from "../../utils/common";
-import { StyledComboBox } from "./LanguageCombobox.styled";
 import { TCulture, ComboboxProps } from "./LanguageCombobox.types";
+import styles from "./LanguageCombobox.module.scss";
 
 const LanguageCombobox = (props: ComboboxProps) => {
   const {
@@ -62,8 +63,16 @@ const LanguageCombobox = (props: ComboboxProps) => {
   if (!currentCulture) return null;
 
   return (
-    <StyledComboBox
-      className={`language-combo-box ${className}`}
+    <ComboBox
+      className={classNames(
+        styles.comboBox,
+        {
+          [styles.withBorder]: withBorder,
+          [styles.withoutBorder]: !withBorder,
+        },
+        className,
+        "language-combo-box",
+      )}
       directionY="both"
       options={cultureNames}
       selectedOption={currentCulture}
@@ -82,7 +91,6 @@ const LanguageCombobox = (props: ComboboxProps) => {
       optionStyle={{ padding: "0 8px" }}
       isMobileView={isMobileView}
       withBlur={isMobileView}
-      withBorder={withBorder}
       withLabel={!!withLabel}
       data-test-id="language-combobox"
       role="combobox"

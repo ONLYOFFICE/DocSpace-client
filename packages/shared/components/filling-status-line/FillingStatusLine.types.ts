@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,11 +38,11 @@ export type TData = {
   avatar: string | null;
 };
 
-export interface FillingStatusLineProps {
+export type FillingStatusLineProps = {
   /** Accepts id */
-  id: string;
+  id?: string;
   /** Accepts class */
-  className: string;
+  className?: string;
   /** Filling status done text */
   statusDoneText: string;
   /** Filling status interrupted text */
@@ -51,9 +51,9 @@ export interface FillingStatusLineProps {
   statusDone: boolean;
   /** Filling status interrupted */
   statusInterrupted: boolean;
-}
+};
 
-export interface FillingStatusLineAccordionProps {
+export type FillingStatusLineAccordionProps = {
   id?: string | number;
   displayName: string;
   role: string;
@@ -68,4 +68,4 @@ export interface FillingStatusLineAccordionProps {
 
   isDone?: boolean;
   isInterrupted?: boolean;
-}
+};

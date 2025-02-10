@@ -80,7 +80,6 @@
   "Filter": "Filtre",
   "FinalizeVersion": "Versiyonu sonlandır",
   "Folder": "Klasör",
-  "FolderRemoved": "Klasör Çöp kutusuna taşındı",
   "FolderRenamed": "'{{folderTitle}}' isimli klasörün adı '{{newFoldedTitle}}' olarak değiştirildi",
   "FolderSuccessfullyCreated": "<1>{{folderTitle}}</1> klasörü oluşturuldu",
   "Forms": "Formlar",

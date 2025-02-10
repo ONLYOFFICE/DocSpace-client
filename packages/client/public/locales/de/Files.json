@@ -82,7 +82,6 @@
   "Filter": "Filter",
   "FinalizeVersion": "Version abschließen",
   "Folder": "Ordner",
-  "FolderRemoved": "Ordner wurde in den Papierkorb verschoben",
   "FolderRenamed": "Der Ordner wurde von '{{folderTitle}}' in '{{newFoldedTitle}}' umbenannt",
   "FolderSuccessfullyCreated": "Ordner <1>{{folderTitle}}</1> erstellt",
   "Forms": "Formulare",

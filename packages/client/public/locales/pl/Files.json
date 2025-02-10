@@ -80,7 +80,6 @@
   "Filter": "Filtr",
   "FinalizeVersion": "Sfinalizuj wersję",
   "Folder": "Folder",
-  "FolderRemoved": "Folder został przeniesiony do kosza",
   "FolderRenamed": "Nazwa folderu '{{folderTitle}}' została zmieniona na '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Utworzono katalog <1>{{folderTitle}}</1>",
   "Forms": "Formularze",

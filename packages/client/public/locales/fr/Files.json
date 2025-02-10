@@ -82,7 +82,6 @@
   "Filter": "Filtrer",
   "FinalizeVersion": "Finaliser la version",
   "Folder": "Dossier",
-  "FolderRemoved": "Dossier déplacé vers la corbeille",
   "FolderRenamed": "Le dossier '{{folderTitle}}' est renommé en '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Dossier <1>{{folderTitle}}</1> créé",
   "Forms": "Formulaires",

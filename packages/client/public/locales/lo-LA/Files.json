@@ -68,7 +68,6 @@
   "Filter": "ຄັດກອງ",
   "FinalizeVersion": "ສະບັບສຸດທ້າຍ",
   "Folder": "ແຟ້ມ",
-  "FolderRemoved": "ຍ້າຍແຟ້ມໄປທີ່ຖັງຂີ້ເຫຍື້ອ",
   "FolderRenamed": "ໂຟນເດີ '{{folderTitle}}' ຖືກປ່ຽນເປັນ '{{newFoldedTitle}}'",
   "Forms": "ແບບຟອມ",
   "GeneralLinkDeletedSuccessfully": "ສ້າງລິ້ງທົ່ວໄປໃໝ່ສຳເລັດແລ້ວ ",

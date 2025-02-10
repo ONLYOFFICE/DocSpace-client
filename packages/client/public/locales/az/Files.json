@@ -80,7 +80,6 @@
   "Filter": "Süzgəc",
   "FinalizeVersion": "Versiyanı formalaşdır",
   "Folder": "Qovluq",
-  "FolderRemoved": "Qovluq zibil qutusuna göndərildi",
   "FolderRenamed": "'{{folderTitle}}' qovluğunun adı '{{newFoldedTitle}}' olaraq dəyişdirildi ",
   "FolderSuccessfullyCreated": "<1>{{folderTitle}}</1> qovluğu yaradıldı",
   "Forms": "Anketlər",

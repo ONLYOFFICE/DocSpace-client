@@ -80,7 +80,6 @@
   "Filter": "الفلتر",
   "FinalizeVersion": "النسخة النهائية",
   "Folder": "مجلد",
-  "FolderRemoved": "تم نقل المجلد إلى سلة المهملات",
   "FolderRenamed": "تمت إعادة تسمية المجلد \"{{folderTitle}}\" إلى \"{{newFoldedTitle}}\"",
   "FolderSuccessfullyCreated": "تم إنشاء المجلد <1>{{folderTitle}}</1>",
   "Forms": "نماذج",

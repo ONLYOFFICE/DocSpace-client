@@ -82,7 +82,6 @@
   "Filter": "Filtrare",
   "FinalizeVersion": "Finalizarea versiunii",
   "Folder": "Dosar",
-  "FolderRemoved": "Dosarul mutat în Coșul de gunoi",
   "FolderRenamed": "Dosarul '{{folderTitle}}' este redenumit în '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Folderul <1>{{folderTitle}}</1> a fost creat",
   "Forms": "Forms",

@@ -82,7 +82,6 @@
   "Filter": "Filtro",
   "FinalizeVersion": "Finalizar versão",
   "Folder": "Pasta",
-  "FolderRemoved": "Pasta movida para a lixeira",
   "FolderRenamed": "A pasta '{{folderTitle}}' é renomeada para '{{newFoldedTitle}}'.",
   "FolderSuccessfullyCreated": "Pasta <1>{{folderTitle}}</1> criada",
   "Forms": "Formulário",

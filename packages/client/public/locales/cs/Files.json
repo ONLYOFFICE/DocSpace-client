@@ -80,7 +80,6 @@
   "Filter": "Filtr",
   "FinalizeVersion": "Dokončit verzi",
   "Folder": "Složka",
-  "FolderRemoved": "Složka přesunuta do koše",
   "FolderRenamed": "Složka '{{folderTitle}}' je přejmenována na '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Složka <1>{{{folderTitle}}</1> vytvořena",
   "Forms": "Formuláře",

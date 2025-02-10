@@ -74,7 +74,6 @@
   "FileContents": "Ֆայլի բովանդակություն",
   "FileDownloadingIsRestricted": "Այս սենյակում ֆայլերի ներբեռնումը սահմանափակված է:",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> ֆայլ արտահանվել է Փաստաթղթեր",
-  "FileRemoved": "Ֆայլը տեղափոխվեց աղբարկղ",
   "FileRenamed": "Փաստաթուղթը '{{oldTitle}}'-ից վերանվանվում է '{{newTitle}}'",
   "FilesWillAppearHere": "Սենյակում ավելացված ֆայլերն ու թղթապանակները կհայտնվեն այստեղ:",
   "FileWillBeDeletedPermanently": "Ֆայլն ընդմիշտ կջնջվի {{date}}",

@@ -80,7 +80,6 @@
   "Filter": "Φίλτρο",
   "FinalizeVersion": "Οριστικοποίηση έκδοσης",
   "Folder": "Φάκελος",
-  "FolderRemoved": "Ο φάκελος μεταφέρθηκε στον Κάδο απορριμμάτων",
   "FolderRenamed": "Ο φάκελος '{{folderTitle}}' μετονομάστηκε σε '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Δημιουργήθηκε ο φάκελος <1>{{folderTitle}}</1>",
   "Forms": "Φόρμες",

@@ -80,7 +80,6 @@
   "Filter": "Filtrs",
   "FinalizeVersion": "Pabeigt versiju",
   "Folder": "Mape",
-  "FolderRemoved": "Mape ir pārvietota uz atkritni",
   "FolderRenamed": "Mape '{{folderTitle}}' ir pārvietota uz '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Mape <1>{{folderTitle}}</1> ir izveidota",
   "Forms": "Veidlapas",

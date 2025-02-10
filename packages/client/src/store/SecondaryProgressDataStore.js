@@ -102,30 +102,34 @@ class SecondaryProgressDataStore {
     };
 
     if (currentOperation.itemsCount === 1) {
-      const getTranslationKey = () => {
-        if (
-          operation === OPERATIONS_NAME.move ||
-          operation === OPERATIONS_NAME.trash
-        ) {
-          return isSuccess
-            ? isFolder
-              ? "MoveFolderItem"
-              : "MoveItem"
-            : "ErrorMoveItem";
-        }
+      //  const getTranslationKey = () => {
+      if (
+        operation === OPERATIONS_NAME.move ||
+        operation === OPERATIONS_NAME.trash
+      ) {
+        isSuccess
+          ? isFolder
+            ? (i18nKey = "MoveFolderItem")
+            : (i18nKey = "MoveItem")
+          : (i18nKey = "ErrorMoveItem");
+      }
 
-        if (operation === OPERATIONS_NAME.copy) {
-          return isSuccess
-            ? isFolder
-              ? "CopyFolderItem"
-              : "CopyItem"
-            : "ErrorCopyItem";
-        }
+      if (operation === OPERATIONS_NAME.copy) {
+        isSuccess
+          ? isFolder
+            ? (i18nKey = "CopyFolderItem")
+            : (i18nKey = "CopyItem")
+          : (i18nKey = "ErrorCopyItem");
+      }
+      if (operation === OPERATIONS_NAME.duplicate) {
+        isSuccess
+          ? isFolder
+            ? (i18nKey = "DuplicateFolderItem")
+            : (i18nKey = "DuplicateItem")
+          : (i18nKey = "ErrorDuplicateItem");
+      }
 
-        return isSuccess ? "DuplicateItem" : "ErrorDuplicateItem";
-      };
-
-      i18nKey = getTranslationKey();
+      // i18nKey = getTranslationKey();
 
       toastTranslation = (
         <Trans
@@ -161,18 +165,19 @@ class SecondaryProgressDataStore {
     }
 
     if (itemsCount > 1) {
-      const getTranslationKey = () => {
-        if (
-          operation === OPERATIONS_NAME.move ||
-          operation === OPERATIONS_NAME.trash
-        ) {
-          return isSuccess ? "MoveItems" : "ErrorMoveItems";
-        }
+      // const getTranslationKey = () => {
+      if (
+        operation === OPERATIONS_NAME.move ||
+        operation === OPERATIONS_NAME.trash
+      ) {
+        isSuccess ? (i18nKey = "MoveItems") : (i18nKey = "ErrorMoveItems");
+      }
 
-        return isSuccess ? "CopyItems" : "ErrorCopyItems";
-      };
+      if (operation === OPERATIONS_NAME.copy) {
+        isSuccess ? (i18nKey = "CopyItems") : (i18nKey = "ErrorCopyItems");
+      }
 
-      i18nKey = getTranslationKey();
+      //  i18nKey = getTranslationKey();
 
       toastTranslation = (
         <Trans

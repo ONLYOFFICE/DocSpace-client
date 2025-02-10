@@ -82,7 +82,6 @@
   "Filter": "Filtro",
   "FinalizeVersion": "Finalizar la versión",
   "Folder": "Carpeta",
-  "FolderRemoved": "Carpeta movida a la Papelera",
   "FolderRenamed": "El nombre de la carpeta '{{folderTitle}}' se ha cambiado a '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Carpeta <1>{{folderTitle}}</1> creada",
   "Forms": "Formularios",

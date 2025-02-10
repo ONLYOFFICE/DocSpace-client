@@ -80,7 +80,6 @@
   "Filter": "필터",
   "FinalizeVersion": "Finalize version",
   "Folder": "폴더",
-  "FolderRemoved": "폴더가 휴지통으로 이동되었습니다",
   "FolderRenamed": "'{{folderTitle}}' 폴더 이름이 '{{newFoldedTitle}}'으로 변경되었습니다",
   "FolderSuccessfullyCreated": "<1>{{folderTitle}}</1> 폴더가 생성되었습니다",
   "Forms": "양식",

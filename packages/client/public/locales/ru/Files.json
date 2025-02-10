@@ -82,7 +82,6 @@
   "Filter": "Фильтр",
   "FinalizeVersion": "Сформировать версию",
   "Folder": "Папка",
-  "FolderRemoved": "Папка перемещена в корзину",
   "FolderRenamed": "Папка '{{folderTitle}}' переименована в '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Создана папка <1>{{folderTitle}}</1>",
   "Forms": "Формы",

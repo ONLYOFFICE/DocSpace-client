@@ -82,7 +82,6 @@
   "Filter": "Filtro",
   "FinalizeVersion": "Finalizza versione",
   "Folder": "Cartella",
-  "FolderRemoved": "Cartella spostata nel cestino",
   "FolderRenamed": "La cartella '{{folderTitle}}' è stata rinominata in '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Cartella <1>{{folderTitle}}</1> creata",
   "Forms": "Moduli",

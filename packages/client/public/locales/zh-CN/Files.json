@@ -82,7 +82,6 @@
   "Filter": "筛选",
   "FinalizeVersion": "最终版本",
   "Folder": "文件夹",
-  "FolderRemoved": "文件已移至回收站",
   "FolderRenamed": "文件夹'{{folderTitle}}'已重命名为'{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "<1>{{folderTitle}}</1>文件夹已创建",
   "Forms": "表单",

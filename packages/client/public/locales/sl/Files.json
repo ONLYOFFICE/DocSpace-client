@@ -80,7 +80,6 @@
   "Filter": "Filter",
   "FinalizeVersion": "Dokončaj različico",
   "Folder": "Mapa",
-  "FolderRemoved": "Mapa je premaknjena v koš",
   "FolderRenamed": "Mapa '{{folderTitle}}' je preimenovana v '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Mapa <1>{{folderTitle}}</1> ustvarjena",
   "Forms": "Obrazci",

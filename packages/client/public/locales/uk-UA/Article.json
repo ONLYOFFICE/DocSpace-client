@@ -1,6 +1,4 @@
 {
-  "FilesNotLoaded": "Незавантажені файли: {{count}}",
-  "FilesUploaded": "Файли завантажено",
   "Upload": "Завантажити",
   "UploadFiles": "Передати файли",
   "UploadFolder": "Передати папку"

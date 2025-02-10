@@ -80,7 +80,6 @@
   "Filter": "Filtro",
   "FinalizeVersion": "Finalizar versão",
   "Folder": "Pasta",
-  "FolderRemoved": "Pasta movida para o lixo",
   "FolderRenamed": "A pasta '{{folderTitle}}' é renomeada para '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Pasta <1>{{folderTitle}}</1> criada",
   "Forms": "Formulários",

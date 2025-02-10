@@ -1,6 +1,4 @@
 {
-  "FilesNotLoaded": "Arquivos não carregados: {{count}}",
-  "FilesUploaded": "Ficheiros carregados",
   "Upload": "Carregar",
   "UploadFiles": "Carregar ficheiros",
   "UploadFolder": "Carregar pasta"

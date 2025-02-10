@@ -80,7 +80,6 @@
   "Filter": "Filter",
   "FinalizeVersion": "Versie afronden",
   "Folder": "Map",
-  "FolderRemoved": "Map verplaatst naar Prullenbak",
   "FolderRenamed": "De map '{{folderTitle}}' is hernoemd naar '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Map <1>{{folderTitle}}</1> aangemaakt",
   "Forms": "Formulieren",

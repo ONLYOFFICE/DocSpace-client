@@ -80,7 +80,6 @@
   "Filter": "Фільтр",
   "FinalizeVersion": "Фіналізувати версію",
   "Folder": "Папка",
-  "FolderRemoved": "Папку переміщено до кошика",
   "FolderRenamed": "Папку \"{{folderTitle}}\" перейменовано на \"{{newFoldedTitle}}\"",
   "FolderSuccessfullyCreated": "Папку <1>{{folderTitle}}</1> створено",
   "Forms": "Форми",

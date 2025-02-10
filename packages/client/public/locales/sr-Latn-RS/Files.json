@@ -83,7 +83,6 @@
   "Filter": "Filter",
   "FinalizeVersion": "Završi verziju",
   "Folder": "Folder",
-  "FolderRemoved": "Folder pomeren u Otpad",
   "FolderRenamed": "Folder '{{folderTitle}}' je preimenovan u '{{newFoldedTitle}}'",
   "FolderSuccessfullyCreated": "Folder <1>{{folderTitle}}</1> kreiran",
   "Forms": "Obrasci",

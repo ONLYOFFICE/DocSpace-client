@@ -80,7 +80,6 @@
   "Filter": "Bộ lọc",
   "FinalizeVersion": "Hoàn thành phiên bản",
   "Folder": "Thư mục",
-  "FolderRemoved": "Thư mục được chuyển vào Thùng rác",
   "FolderRenamed": "Thư mục {{folderTitle}}, được đổi tên thành {{newFoldedTitle}}",
   "FolderSuccessfullyCreated": "Đã tạo thư mục <1>{{folderTitle}}</1>",
   "Forms": "Các Biểu mẫu",

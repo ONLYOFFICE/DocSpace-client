@@ -80,7 +80,6 @@
   "Filter": "Suodatin",
   "FinalizeVersion": "Viimeistele versio",
   "Folder": "Kansio",
-  "FolderRemoved": "Kansio siirretty roskakoriin",
   "FolderRenamed": "Kansio ’{{folderTitle}}’ nimettiin uudelleen nimeksi ’{{newFoldedTitle}}’",
   "FolderSuccessfullyCreated": "Kansio <1>{{folderTitle}}</1> luotu",
   "Forms": "Lomakkeet",

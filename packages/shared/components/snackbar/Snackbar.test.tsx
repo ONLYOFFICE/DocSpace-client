@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { SnackBar } from "./Snackbar";
+import { globalColors } from "../../themes";
 
 describe("SnackBar", () => {
   const defaultProps = {
@@ -35,6 +36,7 @@ describe("SnackBar", () => {
     btnText: "Action",
     countDownTime: 5000,
     sectionWidth: 400,
+    backgroundColor: globalColors.lightToastAlert,
   };
 
   it("renders with required props", () => {
@@ -61,5 +63,54 @@ describe("SnackBar", () => {
   it("shows icon when showIcon is true", () => {
     render(<SnackBar {...defaultProps} showIcon />);
     expect(screen.getByTestId("snackbar-icon")).toBeInTheDocument();
+  });
+
+  it("renders close button when btnText is not provided", () => {
+    render(<SnackBar {...defaultProps} btnText={undefined} />);
+    expect(screen.getByRole("button")).toHaveClass("action");
+  });
+
+  it("handles click events", () => {
+    const onAction = jest.fn();
+    render(<SnackBar {...defaultProps} onAction={onAction} />);
+
+    const button = screen.getByText(defaultProps.btnText);
+    fireEvent.click(button);
+
+    expect(onAction).toHaveBeenCalled();
+  });
+
+  it("renders campaigns iframe when isCampaigns is true", () => {
+    const htmlContent = "https://example.com";
+    render(
+      <SnackBar {...defaultProps} isCampaigns htmlContent={htmlContent} />,
+    );
+
+    const iframe = screen.getByTitle("bar-frame");
+    expect(iframe).toBeInTheDocument();
+    expect(iframe).toHaveAttribute("src", htmlContent);
+  });
+
+  it("applies correct styles based on props", () => {
+    const backgroundColor = "#ff0000";
+    const textAlign = "center";
+
+    render(
+      <SnackBar
+        {...defaultProps}
+        backgroundColor={backgroundColor}
+        textAlign={textAlign}
+      />,
+    );
+
+    const container = screen.getByTestId("snackbar-container");
+    expect(container).toHaveStyle({
+      "--background-color": backgroundColor,
+    });
+
+    const textContainer = container.querySelector(".textContainer");
+    expect(textContainer).toHaveStyle({
+      "--text-align": textAlign,
+    });
   });
 });

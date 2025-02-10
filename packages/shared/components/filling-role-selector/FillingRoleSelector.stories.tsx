@@ -60,7 +60,7 @@ const mockUsers = [
     id: "1",
     displayName: "Makenna Lipshutz",
     role: "Accountant",
-    avatar: "/images/user.avatar.example.react.svg",
+    avatar: "/images/avatar.base.react.svg",
     hasAvatar: true,
   },
   {

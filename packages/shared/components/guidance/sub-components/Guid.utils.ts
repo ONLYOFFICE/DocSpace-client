@@ -44,17 +44,19 @@ interface ViewDimensions {
   top: number;
 }
 
+const ADDITIONAL_ROW_LEFT_RTL_OFFSET = 3;
+
 const getViewTypeBasedDimensions = (
   rect: DOMRect,
   viewAs: string,
   offset: GuidancePosition["offset"],
+  options: { width?: number } = {},
 ): ViewDimensions => {
-  // const isRowOrTable = viewAs === "row" || viewAs === "table";
-  //  const isTileView = viewAs === "tile";
   const offsetValue = offset?.value ?? 0;
+  const hasWidth = "width" in options;
 
   return {
-    width: rect.width + offsetValue,
+    width: hasWidth ? options.width! : rect.width + offsetValue,
     height: rect.height + offsetValue,
     top: rect.top - offsetValue / 2,
   };
@@ -64,14 +66,23 @@ const getLeftPosition = (
   rect: DOMRect,
   viewAs: string,
   offset: GuidancePosition["offset"],
+  type: GuidanceElementType,
   isRTL: boolean = false,
 ): number => {
-  // if (isRTL && (viewAs === "row" || viewAs === "table")) {
-  //   return 0;
-  // }
-
   const offsetValue = (offset?.value ?? 0) / 2;
   const rowOffset = offset?.row ?? offsetValue;
+  const rtlOffset = offset?.rtl ?? 0;
+
+  if (isRTL && type === GuidanceElementType.Mixed && viewAs !== "tile") {
+    switch (viewAs) {
+      case "row":
+        return rect.left - rtlOffset + ADDITIONAL_ROW_LEFT_RTL_OFFSET;
+      case "table":
+        return rect.left + rtlOffset;
+      default:
+        return rect.left + rtlOffset;
+    }
+  }
 
   switch (viewAs) {
     case "row":
@@ -105,29 +116,6 @@ const getExpandedPosition = (
   };
 };
 
-const getTableRowPosition = (
-  rect: DOMRect,
-  offset: GuidancePosition["offset"],
-  type: GuidanceElementType,
-  viewAs: string,
-  isRTL: boolean = false,
-) => {
-  const offsetValue = offset?.value ?? 0;
-  const rowOffset = offset?.row ?? offsetValue;
-  const tableOffset = offset?.table ?? rowOffset;
-
-  const leftPosition = getLeftPosition(rect, viewAs, offset, isRTL);
-
-  return {
-    width: 0,
-    height: rect.height + tableOffset,
-    left: isRTL ? 0 : leftPosition,
-    top: rect.top - 1,
-    bottom: rect.bottom,
-    right: rect.right,
-  };
-};
-
 const getPosition = (
   rects: DOMRect,
   offset: GuidancePosition["offset"],
@@ -135,19 +123,18 @@ const getPosition = (
   type: GuidanceElementType,
   isRTL: boolean = false,
 ) => {
-  if (type === GuidanceElementType.Content || viewAs === "tile") {
-    const dimensions = getViewTypeBasedDimensions(rects, viewAs, offset);
-    return {
-      ...dimensions,
-      left: getLeftPosition(rects, viewAs, offset, isRTL),
-      bottom: rects.bottom,
-      right: rects.right,
-    };
-  }
-
-  // Special handling for table view
-
-  return getTableRowPosition(rects, offset, type, viewAs, isRTL);
+  const dimensions =
+    viewAs === "tile" || type === GuidanceElementType.Content
+      ? getViewTypeBasedDimensions(rects, viewAs, offset)
+      : getViewTypeBasedDimensions(rects, viewAs, offset, {
+          width: 0,
+        });
+  return {
+    ...dimensions,
+    left: getLeftPosition(rects, viewAs, offset, type, isRTL),
+    bottom: rects.bottom,
+    right: rects.right,
+  };
 };
 
 export const getGuidPosition = (
@@ -173,11 +160,10 @@ export const getGuidPosition = (
       return getExpandedPosition(rects, offset, { expandHeight: true });
 
     case GuidanceElementType.Mixed:
+    case GuidanceElementType.Content:
       return getPosition(rects, offset, viewAs, type, isRTL);
 
-    case GuidanceElementType.Content:
     default: {
-      // Default position calculation based on view type
       return getPosition(rects, offset, viewAs, type, isRTL);
     }
   }

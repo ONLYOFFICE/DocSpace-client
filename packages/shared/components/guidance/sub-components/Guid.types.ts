@@ -41,6 +41,7 @@ export interface GuidancePosition {
     value?: number;
     row?: number;
     table?: number;
+    rtl?: number;
   };
   smallBorder?: boolean;
 }

@@ -69,6 +69,12 @@ export const useFeedTranslation = (
       return `${t("Translations:FileLocked")}.`;
     case "FileUnlocked":
       return `${t("Translations:FileUnlocked")}.`;
+    case "FileVersionRemoved":
+      if (feed.data.version) {
+        return t("InfoPanel:FileVersionRemoved", {
+          version: feed.data.version,
+        });
+      }
     case "FileIndexChanged":
     case "FolderIndexChanged":
       return t("InfoPanel:IndexChanged");

@@ -24,48 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type TData = {
-  id: string | number;
-  displayName: string;
-  role: string;
-  startFillingStatus: string;
-  startFillingDate: Date | string;
-  filledAndSignedStatus: string;
-  filledAndSignedDate: Date | string;
-  returnedByUser?: string | null;
-  returnedByUserDate: Date | string;
-  comment: string | null;
-  avatar: string | null;
-};
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/mixins.scss";
+@import "../../styles/variables/devices.scss";
 
-export type FillingStatusLineProps = {
-  /** Accepts id */
-  id?: string;
-  /** Accepts class */
-  className?: string;
-  /** Filling status done text */
-  statusDoneText: string;
-  /** Filling status interrupted text */
-  statusInterruptedText: string;
-  /** Filling status done */
-  statusDone: boolean;
-  /** Filling status interrupted */
-  statusInterrupted: boolean;
-};
+.fillingStatusContainer {
+  width: 100%;
+  max-width: 425px;
+  padding: 10px;
+}
 
-export type FillingStatusLineAccordionProps = {
-  id?: string | number;
-  displayName: string;
-  role: string;
-  startFilling: string;
-  startFillingDate: string;
-  filledAndSigned: string;
-  filledAndSignedDate: string;
-  returnedByUser?: string | null;
-  returnedDate: string | null;
-  comment?: string | null;
-  avatar: string | null;
+.statusDoneText {
+  color: #{$gray};
 
-  isDone?: boolean;
-  isInterrupted?: boolean;
-};
+  &.isDone {
+    color: #{$light-blue-main};
+  }
+}
+
+.statusDoneIcon {
+  margin-inline-end: 10px;
+  circle,
+  path {
+    stroke: #{$gray};
+  }
+
+  &.isDone {
+    circle,
+    path {
+      stroke: #{$light-blue-main};
+    }
+  }
+}
+
+.statusInterruptedText {
+  color: #{$main-red};
+}
+
+.statusInterruptedIcon {
+  margin-inline-end: 10px;
+  circle,
+  path {
+    stroke: #{$main-red};
+  }
+}

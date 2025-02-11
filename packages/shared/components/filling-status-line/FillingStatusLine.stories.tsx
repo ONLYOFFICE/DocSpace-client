@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import type { StoryFn } from "@storybook/react";
 
 import { FillingStatusLine } from "./FillingStatusLine";
 import { FillingStatusLineProps } from "./FillingStatusLine.types";
@@ -32,10 +33,64 @@ import { FillingStatusLineProps } from "./FillingStatusLine.types";
 export default {
   title: "Components/FillingStatusLine",
   component: FillingStatusLine,
+  argTypes: {
+    statusDoneText: {
+      description: "Text displayed when the status is done",
+      defaultValue: "Done",
+      control: "text",
+    },
+    statusInterruptedText: {
+      description: "Text displayed when the status is interrupted",
+      defaultValue: "Interrupted",
+      control: "text",
+    },
+    statusDone: {
+      description: "Whether the filling process is done",
+      defaultValue: true,
+      control: "boolean",
+    },
+    statusInterrupted: {
+      description: "Whether the filling process is interrupted",
+      defaultValue: false,
+      control: "boolean",
+    },
+  },
 };
 
-const Template = (args: FillingStatusLineProps) => {
+const Template: StoryFn<typeof FillingStatusLine> = (
+  args: FillingStatusLineProps,
+) => {
   return <FillingStatusLine {...args} />;
 };
 
 export const Default = Template.bind({});
+Default.args = {
+  statusDoneText: "Done",
+  statusInterruptedText: "Interrupted",
+  statusDone: true,
+  statusInterrupted: false,
+};
+
+export const Interrupted = Template.bind({});
+Interrupted.args = {
+  statusDoneText: "Done",
+  statusInterruptedText: "Interrupted",
+  statusDone: false,
+  statusInterrupted: true,
+};
+
+export const InProgress = Template.bind({});
+InProgress.args = {
+  statusDoneText: "Done",
+  statusInterruptedText: "Interrupted",
+  statusDone: false,
+  statusInterrupted: false,
+};
+
+export const CustomText = Template.bind({});
+CustomText.args = {
+  statusDoneText: "Completed",
+  statusInterruptedText: "Cancelled",
+  statusDone: true,
+  statusInterrupted: false,
+};

@@ -45,7 +45,7 @@ class SettingsStore {
 
   shareKey: string = "";
 
-  constructor(initData: TSettingsStoreInitData) {
+  constructor(initData?: TSettingsStoreInitData) {
     if (initData?.viewAs) {
       this.filesViewAs = initData.viewAs;
     }

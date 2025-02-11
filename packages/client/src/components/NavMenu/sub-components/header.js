@@ -178,9 +178,7 @@ const HeaderComponent = ({
         {currentProductId !== "home" && !isFormGallery ? (
           <HeaderCatalogBurger onClick={toggleArticleOpen} />
         ) : null}
-        {customHeader ? (
-          customHeader
-        ) : (
+        {customHeader || (
           <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
             <img alt="logo" src={logo} className="header-logo-icon" />
           </LinkWithoutRedirect>

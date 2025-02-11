@@ -24,20 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg?url";
+
 import React from "react";
-import { useTheme } from "styled-components";
+import { ReactSVG } from "react-svg";
+import classNames from "classnames";
 
 import { Text } from "../text";
 import { Badge } from "../badge";
 import { Link } from "../link";
+
+import { useTheme } from "../../hooks/useTheme";
+
 import { isManagement } from "../../utils/common";
 import { globalColors } from "../../themes";
 
-import {
-  StyledArrowRightIcon,
-  StyledMobileCategoryWrapper,
-} from "./MobileCategoryWrapper.styled";
 import { IMobileCategoryWrapperProps } from "./MobileCategoryWrapper.types";
+
+import styles from "./MobileCategoryWrapper.module.scss";
 
 export const MobileCategoryWrapper = ({
   title,
@@ -48,16 +52,17 @@ export const MobileCategoryWrapper = ({
   withPaidBadge,
   badgeLabel,
 }: IMobileCategoryWrapperProps) => {
-  const theme = useTheme();
+  const { isBase } = useTheme();
 
   const onClickProp = isDisabled ? {} : { onClick: onClickLink };
   const onHrefProp = isDisabled ? {} : { href: url };
 
   return (
-    <StyledMobileCategoryWrapper isDisabled={isDisabled}>
-      <div className="category-item-heading">
+    <div className={styles.mobileCategoryWrapper}>
+      <div className={styles.categoryItemHeading}>
         <Link
-          className="inherit-title-link header"
+          className={classNames(styles.inheritTitleLink, "header")}
+          noHover={isDisabled}
           {...onClickProp}
           {...onHrefProp}
         >
@@ -66,7 +71,7 @@ export const MobileCategoryWrapper = ({
         {withPaidBadge && !isManagement() ? (
           <Badge
             backgroundColor={
-              theme.isBase
+              isBase
                 ? globalColors.favoritesStatus
                 : globalColors.favoriteStatusDark
             }
@@ -76,9 +81,18 @@ export const MobileCategoryWrapper = ({
             fontWeight="700"
           />
         ) : null}
-        <StyledArrowRightIcon className="settings_unavailable" size="small" />
+        <ReactSVG
+          src={ArrowRightIcon}
+          className={classNames(styles.arrowIcon, "settings_unavailable")}
+        />
       </div>
-      <Text className="category-item-description">{subtitle}</Text>
-    </StyledMobileCategoryWrapper>
+      <Text
+        className={classNames(styles.categoryItemDescription, {
+          [styles.disabled]: isDisabled,
+        })}
+      >
+        {subtitle}
+      </Text>
+    </div>
   );
 };

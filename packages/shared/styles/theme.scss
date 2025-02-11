@@ -1847,6 +1847,16 @@
   --file-input-disabled-placeholder-color: #{$gray-dark-text};
 }
 
+.light {
+  --settings-description-color: #{$gray-text};
+  --settings-arrow-fill: #{$black};
+}
+
+.dark {
+  --settings-description-color: #{$gray-dark};
+  --settings-arrow-fill: #{$white};
+}
+
 :global(.rtl) {
   --input-text-align: right;
   --input-direction: rtl;

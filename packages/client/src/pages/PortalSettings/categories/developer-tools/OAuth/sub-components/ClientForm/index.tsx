@@ -69,7 +69,9 @@ const ClientForm = ({
   setClientSecretProps,
 
   currentDeviceType,
-  maxImageUploadSize,
+
+  jwtToken,
+  setJwtToken,
 }: ClientFormProps) => {
   const navigate = useNavigate();
 
@@ -151,9 +153,9 @@ const ClientForm = ({
 
         setIsRequestRunning(true);
 
-        await addClient?.(form);
+        await addClient?.(form, jwtToken!);
       } else {
-        await updateClient?.(clientId, form);
+        await updateClient?.(clientId, form, jwtToken!);
       }
 
       onCancelClick();
@@ -202,19 +204,18 @@ const ClientForm = ({
   };
 
   const getClientData = React.useCallback(async () => {
-    if (clientId) return;
-
     const actions = [];
 
-    if (id && !client) {
-      actions.push(getClient(id));
-    }
+    setIsLoading(true);
+
+    const token = jwtToken || (await setJwtToken!());
+    if (!token) return;
+
+    if (id || clientId) actions.push(getClient(id ?? clientId, token!));
 
     if (scopeList?.length === 0) actions.push(fetchScopes?.());
 
     try {
-      if (actions.length > 0) setIsLoading(true);
-
       const [fetchedClient] = await Promise.all(actions);
 
       const item = fetchedClient ?? client;
@@ -255,7 +256,7 @@ const ClientForm = ({
 
       toastr.error(e as unknown as TData);
     }
-  }, [clientId, id, client, scopeList?.length, fetchScopes]);
+  }, [clientId, id, client, scopeList?.length, fetchScopes, jwtToken]);
 
   React.useEffect(() => {
     getClientData();
@@ -410,7 +411,6 @@ const ClientForm = ({
               errorFields={errorFields}
               requiredErrorFields={requiredErrorFields}
               onBlur={onBlur}
-              maxImageSize={maxImageUploadSize}
             />
             {isEdit ? (
               <ClientBlock
@@ -477,6 +477,9 @@ export default inject(
 
       setClientSecret,
       clientSecret,
+
+      jwtToken,
+      setJwtToken,
     } = oauthStore;
 
     const { currentDeviceType, maxImageUploadSize } = settingsStore;
@@ -492,6 +495,9 @@ export default inject(
       setClientSecretProps: setClientSecret,
       clientSecretProps: clientSecret,
       maxImageUploadSize: maxImageUploadSize ?? undefined,
+
+      jwtToken,
+      setJwtToken,
     };
 
     if (id) {

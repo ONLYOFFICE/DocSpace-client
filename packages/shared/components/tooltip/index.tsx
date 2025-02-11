@@ -69,6 +69,7 @@ const Tooltip = React.forwardRef<TooltipRefProps, TooltipProps>(
       fallbackAxisSideDirection,
       opacity = 1,
       imperativeModeOnly,
+      noUserSelect,
       ...rest
     },
     ref,
@@ -86,7 +87,9 @@ const Tooltip = React.forwardRef<TooltipRefProps, TooltipProps>(
     };
 
     const renderTooltip = () => {
-      const tooltipClass = classNames(styles.tooltip, className);
+      const tooltipClass = classNames(styles.tooltip, className, {
+        [styles.noUserSelect]: noUserSelect,
+      });
 
       return (
         <div

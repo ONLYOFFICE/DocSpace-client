@@ -39,4 +39,5 @@ export type HelpButtonProps = IconButtonProps & {
   /** Left offset distance for tooltip positioning. */
   offsetLeft?: number;
   isOpen?: boolean;
+  noUserSelect?: boolean;
 };

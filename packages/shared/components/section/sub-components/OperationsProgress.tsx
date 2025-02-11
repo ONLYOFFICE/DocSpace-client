@@ -306,6 +306,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           openOnClick={isMobile}
           {...(isMobile && { afterShow: handleTooltipOpen })}
           {...(isHideTooltip && { isOpen: false })}
+          noUserSelect
         >
           <FloatingButton
             icon={getIcons()}

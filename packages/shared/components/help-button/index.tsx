@@ -52,6 +52,7 @@ const HelpButton = (props: HelpButtonProps) => {
     isClickable = true,
     children,
     isOpen,
+    noUserSelect,
   } = props;
 
   const currentId = id || uniqueId();
@@ -71,6 +72,7 @@ const HelpButton = (props: HelpButtonProps) => {
     maxWidth: tooltipMaxWidth,
     anchorSelect,
     isOpen,
+    noUserSelect,
   };
 
   return (

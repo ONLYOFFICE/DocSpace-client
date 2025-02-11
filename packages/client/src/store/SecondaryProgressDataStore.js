@@ -75,7 +75,7 @@ class SecondaryProgressDataStore {
     const { error, title, itemsCount, destFolderInfo, isFolder } =
       currentOperation;
     const t = (key, options) => i18n.t(key, { ...options, ns: "Files" });
-    let i18nKey = "";
+
     let toastTranslation = "";
 
     const { url, state } = await createFolderNavigation(destFolderInfo);
@@ -101,115 +101,164 @@ class SecondaryProgressDataStore {
       if (errorMessage.error) return errorMessage.error;
     };
 
+    const commonComponents = {
+      1: (
+        <ColorTheme
+          tag="a"
+          themeId={ThemeId.Link}
+          onClick={onClickLocation}
+          target="_blank"
+          $isUnderline
+        />
+      ),
+      2: <span style={{ fontWeight: "600" }} />,
+    };
+
     if (currentOperation.itemsCount === 1) {
-      //  const getTranslationKey = () => {
+      const commonProps = {
+        title,
+        folderName: state.title,
+      };
+
       if (
         operation === OPERATIONS_NAME.move ||
         operation === OPERATIONS_NAME.trash
       ) {
-        isSuccess
-          ? isFolder
-            ? (i18nKey = "MoveFolderItem")
-            : (i18nKey = "MoveItem")
-          : (i18nKey = "ErrorMoveItem");
+        toastTranslation = isSuccess ? (
+          isFolder ? (
+            <Trans
+              t={t}
+              i18nKey="MoveFolderItem"
+              components={commonComponents}
+              values={commonProps}
+            />
+          ) : (
+            <Trans
+              t={t}
+              i18nKey="MoveItem"
+              components={commonComponents}
+              values={commonProps}
+            />
+          )
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="ErrorMoveItem"
+            components={commonComponents}
+            values={commonProps}
+          />
+        );
       }
 
       if (operation === OPERATIONS_NAME.copy) {
-        isSuccess
-          ? isFolder
-            ? (i18nKey = "CopyFolderItem")
-            : (i18nKey = "CopyItem")
-          : (i18nKey = "ErrorCopyItem");
+        toastTranslation = isSuccess ? (
+          isFolder ? (
+            <Trans
+              t={t}
+              i18nKey="CopyFolderItem"
+              components={commonComponents}
+              values={commonProps}
+            />
+          ) : (
+            <Trans
+              t={t}
+              i18nKey="CopyItem"
+              components={commonComponents}
+              values={commonProps}
+            />
+          )
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="ErrorCopyItem"
+            components={commonComponents}
+            values={commonProps}
+          />
+        );
       }
+
       if (operation === OPERATIONS_NAME.duplicate) {
-        isSuccess
-          ? isFolder
-            ? (i18nKey = "DuplicateFolderItem")
-            : (i18nKey = "DuplicateItem")
-          : (i18nKey = "ErrorDuplicateItem");
-      }
-
-      // i18nKey = getTranslationKey();
-
-      toastTranslation = (
-        <Trans
-          t={t}
-          i18nKey={i18nKey}
-          values={{ title, folderName: state.title }}
-          components={{
-            1: (
-              <ColorTheme
-                tag="a"
-                themeId={ThemeId.Link}
-                onClick={onClickLocation}
-                target="_blank"
-                $isUnderline
-              />
-            ),
-            2: <span style={{ fontWeight: "600" }} />,
-          }}
-        />
-      );
-
-      if (error) {
-        const message = getError();
-
-        toastTranslation = (
-          <>
-            {toastTranslation}
-            <br />
-            {message}
-          </>
+        toastTranslation = isSuccess ? (
+          isFolder ? (
+            <Trans
+              t={t}
+              i18nKey="DuplicateFolderItem"
+              components={commonComponents}
+              values={commonProps}
+            />
+          ) : (
+            <Trans
+              t={t}
+              i18nKey="DuplicateItem"
+              components={commonComponents}
+              values={commonProps}
+            />
+          )
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="ErrorDuplicateItem"
+            components={commonComponents}
+            values={commonProps}
+          />
         );
       }
     }
 
     if (itemsCount > 1) {
-      // const getTranslationKey = () => {
+      const commonProps = {
+        qty: itemsCount,
+        folderName: state.title,
+      };
+
       if (
         operation === OPERATIONS_NAME.move ||
         operation === OPERATIONS_NAME.trash
       ) {
-        isSuccess ? (i18nKey = "MoveItems") : (i18nKey = "ErrorMoveItems");
+        toastTranslation = isSuccess ? (
+          <Trans
+            t={t}
+            i18nKey="MoveItems"
+            components={commonComponents}
+            values={commonProps}
+          />
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="ErrorMoveItems"
+            components={commonComponents}
+            values={commonProps}
+          />
+        );
       }
 
       if (operation === OPERATIONS_NAME.copy) {
-        isSuccess ? (i18nKey = "CopyItems") : (i18nKey = "ErrorCopyItems");
-      }
-
-      //  i18nKey = getTranslationKey();
-
-      toastTranslation = (
-        <Trans
-          t={t}
-          i18nKey={i18nKey}
-          values={{ qty: itemsCount, folderName: state.title }}
-          components={{
-            1: (
-              <ColorTheme
-                tag="a"
-                themeId={ThemeId.Link}
-                onClick={onClickLocation}
-                target="_blank"
-                $isUnderline
-              />
-            ),
-            2: <span style={{ fontWeight: "600" }} />,
-          }}
-        />
-      );
-
-      if (error) {
-        const message = getError();
-
-        toastTranslation = (
-          <>
-            {toastTranslation}
-            <br />
-            {message}
-          </>
+        toastTranslation = isSuccess ? (
+          <Trans
+            t={t}
+            i18nKey="CopyItems"
+            components={commonComponents}
+            values={commonProps}
+          />
+        ) : (
+          <Trans t={t} i18nKey="ErrorCopyItems">
+            {commonProps}
+            {commonComponents}
+          </Trans>
         );
       }
+    }
+
+    if (error) {
+      const message = getError();
+
+      toastTranslation = (
+        <>
+          {toastTranslation}
+          <br />
+          {message}
+        </>
+      );
     }
 
     isSuccess

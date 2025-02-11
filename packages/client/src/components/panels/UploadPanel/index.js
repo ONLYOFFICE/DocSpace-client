@@ -90,6 +90,7 @@ class UploadPanelComponent extends React.Component {
       cancelConversion,
       isUploading,
       isUploadingAndConversion,
+      hideHeaderButton,
     } = this.props;
 
     const visible = uploadPanelVisible;
@@ -115,7 +116,9 @@ class UploadPanelComponent extends React.Component {
         visible={visible}
         onClose={this.onClose}
         displayType={ModalDialogType.aside}
-        headerIcons={[{ key: "upload-panel", url, onClick: clickEvent }]}
+        {...(!hideHeaderButton && {
+          headerIcons: [{ key: "upload-panel", url, onClick: clickEvent }],
+        })}
       >
         <ModalDialog.Header>{title}</ModalDialog.Header>
         <ModalDialog.Body>
@@ -145,10 +148,18 @@ export default inject(({ settingsStore, uploadDataStore }) => {
     primaryProgressDataStore,
     isUploading,
     isUploadingAndConversion,
+    uploadedFilesHistory,
   } = uploadDataStore;
 
   const { clearPrimaryProgressData, setNeedErrorChecking } =
     primaryProgressDataStore;
+
+  const filesWithConvert = uploadedFilesHistory.filter(
+    (file) => file.action === "convert",
+  );
+  const hideHeaderButton =
+    filesWithConvert.length > 0 &&
+    filesWithConvert.every((file) => file.inConversion);
 
   return {
     uploadPanelVisible,
@@ -166,5 +177,6 @@ export default inject(({ settingsStore, uploadDataStore }) => {
 
     theme: settingsStore.theme,
     setNeedErrorChecking,
+    hideHeaderButton,
   };
 })(observer(UploadPanel));

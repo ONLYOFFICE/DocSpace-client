@@ -520,6 +520,11 @@ class CreateEditRoomStore {
       ? !!logo.original && !icon.uploadedFile
       : false;
 
+    const copyLogo =
+      !isDeleteLogo &&
+      icon.uploadedFile &&
+      typeof icon.uploadedFile === "string";
+
     try {
       if (icon.uploadedFile && typeof icon.uploadedFile !== "string") {
         const roomLogo = await this.getRoomLogo(icon);
@@ -537,7 +542,7 @@ class CreateEditRoomStore {
       } else if (isTemplate) {
         room = await this.onCreateTemplateRoom({
           ...createRoomData,
-          copyLogo: !isDeleteLogo,
+          copyLogo: !!copyLogo,
         });
       } else {
         room = await createRoom(createRoomData);

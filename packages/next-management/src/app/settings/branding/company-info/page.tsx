@@ -46,7 +46,7 @@ async function Page() {
       getCompanyInfo(),
     ]);
 
-  const { standalone, licenseUrl } = settings;
+  const { standalone, licenseUrl, logoText } = settings;
   const { enterprise } = portalTariff;
 
   return (
@@ -58,6 +58,7 @@ async function Page() {
       licenseUrl={licenseUrl}
       buildInfo={buildInfo}
       isEnterprise={enterprise}
+      logoText={logoText}
     />
   );
 }

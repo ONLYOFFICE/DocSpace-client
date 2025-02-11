@@ -51,7 +51,7 @@ import {
 
 export const WhiteLabelPage = ({
   whiteLabelLogos,
-  logoText,
+  whiteLabelText,
   showAbout,
   isDefaultWhiteLabel,
   standalone,
@@ -64,11 +64,11 @@ export const WhiteLabelPage = ({
   const pathname = usePathname();
 
   const [logoUrls, setLogoUrls] = useState(cloneDeep(whiteLabelLogos));
-  const [companyName, setCompanyName] = useState(logoText);
+  const [companyName, setCompanyName] = useState(whiteLabelText);
   const [defaultLogoUrls, setDefaultLogoUrls] = useState(
     cloneDeep(whiteLabelLogos),
   );
-  const [defaultText, setDefaultText] = useState(logoText);
+  const [defaultText, setDefaultText] = useState(whiteLabelText);
   const [isDefault, setIsDefault] = useState(isDefaultWhiteLabel);
 
   const [isSaving, startTransition] = useTransition();

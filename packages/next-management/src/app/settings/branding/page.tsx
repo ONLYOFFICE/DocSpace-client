@@ -65,7 +65,7 @@ async function Page() {
     getCompanyInfo(),
   ]);
 
-  const { displayAbout, standalone, licenseUrl } = settings;
+  const { displayAbout, standalone, licenseUrl, logoText } = settings;
   const { enterprise } = portalTariff;
 
   const showAbout = standalone && displayAbout;
@@ -75,7 +75,7 @@ async function Page() {
   return (
     <BrandingPage
       whiteLabelLogos={whiteLabelLogos}
-      logoText={whiteLabelText}
+      whiteLabelText={whiteLabelText}
       showAbout={showAbout}
       isDefaultWhiteLabel={isDefaultWhiteLabel}
       standalone={standalone}
@@ -86,6 +86,7 @@ async function Page() {
       buildInfo={buildInfo}
       licenseUrl={licenseUrl}
       isEnterprise={enterprise}
+      logoText={logoText}
     />
   );
 }

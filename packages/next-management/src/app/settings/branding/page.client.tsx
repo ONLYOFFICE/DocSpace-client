@@ -45,7 +45,7 @@ const baseUrl = "/settings";
 
 const BrandingPage = ({
   whiteLabelLogos,
-  logoText,
+  whiteLabelText,
   showAbout,
   isDefaultWhiteLabel,
   standalone,
@@ -56,6 +56,7 @@ const BrandingPage = ({
   buildInfo,
   licenseUrl,
   isEnterprise,
+  logoText,
 }) => {
   const router = useRouter();
   const { currentDeviceType } = useDeviceType();
@@ -84,7 +85,7 @@ const BrandingPage = ({
     <StyledBrandingPage>
       <WhiteLabelPage
         whiteLabelLogos={whiteLabelLogos}
-        logoText={logoText}
+        whiteLabelText={whiteLabelText}
         showAbout={showAbout}
         isDefaultWhiteLabel={isDefaultWhiteLabel}
         standalone={standalone}
@@ -102,6 +103,7 @@ const BrandingPage = ({
             licenseUrl={licenseUrl}
             buildInfo={buildInfo}
             isEnterprise={isEnterprise}
+            logoText={logoText}
           />
         </>
       )}

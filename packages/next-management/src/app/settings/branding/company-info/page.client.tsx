@@ -50,6 +50,7 @@ export const CompanyInfoPage = ({
   licenseUrl,
   buildInfo,
   isEnterprise,
+  logoText,
 }) => {
   const { t } = useTranslation("Common");
   const { currentDeviceType } = useDeviceType();
@@ -114,6 +115,7 @@ export const CompanyInfoPage = ({
       licenseUrl={licenseUrl}
       buildVersionInfo={buildInfo}
       isEnterprise={isEnterprise}
+      logoText={logoText}
     />
   );
 };

@@ -141,7 +141,11 @@ const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
 
   useEffect(() => {
     setTemplateEventVisible(true);
-  });
+
+    return () => {
+      setTemplateEventVisible(false);
+    };
+  }, []);
 
   useEffect(() => {
     fetchTagsAction();

@@ -387,6 +387,11 @@ class CreateEditRoomStore {
       roomData.logo = null;
     }
 
+    if (!isDeleteLogo && typeof icon.uploadedFile !== "string") {
+      const roomLogo = await this.getRoomLogo(icon);
+      roomData.logo = roomLogo;
+    }
+
     let isCompleted = false;
     let isError = false;
     let progressData;

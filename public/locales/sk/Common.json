@@ -651,5 +651,12 @@
   "ActivationRequired": "je potrebná aktivácia",
   "ManualBackupDescription": "Túto možnosť použite, ak chcete získať súbor všetkymi údajmi obsiahnutymi v priestore.",
   "TemporaryStorage": "Dočasné úložisko",
-  "TemporaryStorageDescription": "Zálohované údaje sa ukladajú v sekcii 'Záloha', a môžete si ich stiahnuť do 24 hodín po vytvorení."
+  "TemporaryStorageDescription": "Zálohované údaje sa ukladajú v sekcii 'Záloha', a môžete si ich stiahnuť do 24 hodín po vytvorení.",
+  "ContactUs": "V prípade otázok týkajúcich sa predaja nás kontaktujte na",
+  "AboutCompanyEmailTitle": "E-mail",
+  "AboutHeader": "O tomto programe",
+  "DocumentManagement": "Manažment dokumentov",
+  "OnlineEditors": "Online redaktori",
+  "Site": "Webové stránky",
+  "SoftwareLicense": "Softvérová licencia"
 }

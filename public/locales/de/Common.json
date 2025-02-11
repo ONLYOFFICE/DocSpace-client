@@ -652,5 +652,12 @@
   "ActivationRequired": "aktivierung erforderlich",
   "ManualBackupDescription": "Nutzen Sie diese Option, wenn Sie alle im Bereich enthaltenen Daten als Datei erhalten möchten.",
   "TemporaryStorage": "Vorläufige Speicherung",
-  "TemporaryStorageDescription": "Die Sicherungskopie wird im Bereich 'Backup' gespeichert, Sie können diese innerhalb von 24 Stunden nach der Erstellung herunterladen."
+  "TemporaryStorageDescription": "Die Sicherungskopie wird im Bereich 'Backup' gespeichert, Sie können diese innerhalb von 24 Stunden nach der Erstellung herunterladen.",
+  "ContactUs": "Beim Fragen zum Verkauf kontaktieren Sie uns unter",
+  "AboutCompanyEmailTitle": "E-Mail",
+  "AboutHeader": "Über dieses Programm",
+  "DocumentManagement": "Dokumentenverwaltung",
+  "OnlineEditors": "Online-Editoren",
+  "Site": "Website",
+  "SoftwareLicense": "Lizenz"
 }

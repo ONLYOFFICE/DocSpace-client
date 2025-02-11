@@ -652,5 +652,12 @@
   "ActivationRequired": "potrebna aktivacija",
   "ManualBackupDescription": "Koristite ovu opciju ako želite da svi podaci budu sadržani u prostoru kao datoteka.",
   "TemporaryStorage": "Privremeno skladište",
-  "TemporaryStorageDescription": "Rezervna kopija je smeštena u odeljku 'Rezervne kopije', moći ćete je preuzeti u roku od 24 sata nakon kreiranja."
+  "TemporaryStorageDescription": "Rezervna kopija je smeštena u odeljku 'Rezervne kopije', moći ćete je preuzeti u roku od 24 sata nakon kreiranja.",
+  "ContactUs": "Za pitanja prodaje, kontaktirajte nas na",
+  "AboutCompanyEmailTitle": "E-mail",
+  "AboutHeader": "U vezi ovog programa",
+  "DocumentManagement": "Upravljanje dokumentom",
+  "OnlineEditors": "Onlajn uređivači",
+  "Site": "Sajt",
+  "SoftwareLicense": "Licenca za softver"
 }

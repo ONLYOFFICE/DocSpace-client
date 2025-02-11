@@ -651,5 +651,12 @@
   "ActivationRequired": "aktivointi vaaditaan",
   "ManualBackupDescription": "Käytä tätä, jos haluat tallettaa sivuston kaiken sisällön tiedostoon.",
   "TemporaryStorage": "Väliaikainen varastointi",
-  "TemporaryStorageDescription": "Varmuuskopiointi tallennetaan 'Varmuuskopiointi' -osioon, voit ladata sen 24 tunnin kuluessa luomisesta."
+  "TemporaryStorageDescription": "Varmuuskopiointi tallennetaan 'Varmuuskopiointi' -osioon, voit ladata sen 24 tunnin kuluessa luomisesta.",
+  "ContactUs": "Myyntiin liittyviin kysymyksiin liittyen, ota meihin yhteyttä osoitteessa",
+  "AboutCompanyEmailTitle": "sähköposti",
+  "AboutHeader": "Tietoja tästä ohjelmasta",
+  "DocumentManagement": "Asiakirjojen hallinta",
+  "OnlineEditors": "Verkkoeditorit",
+  "Site": "Sivusto",
+  "SoftwareLicense": "Ohjelmiston käyttöoikeus"
 }

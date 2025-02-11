@@ -652,5 +652,12 @@
   "ActivationRequired": "se requiere activación",
   "ManualBackupDescription": "Use esta opción si quiere recibir todos los datos del espacio en un archivo.",
   "TemporaryStorage": "Almacenamiento temporal",
-  "TemporaryStorageDescription": "La copia de seguridad se almacena en la sección 'Copia de seguridad', podrá descargarla durante las 24 horas después de su creación."
+  "TemporaryStorageDescription": "La copia de seguridad se almacena en la sección 'Copia de seguridad', podrá descargarla durante las 24 horas después de su creación.",
+  "ContactUs": "Si tiene preguntas sobre ventas, póngase en contacto con nosotros a través de",
+  "AboutCompanyEmailTitle": "email",
+  "AboutHeader": "Acerca de este programa",
+  "DocumentManagement": "Administración de documentos",
+  "OnlineEditors": "Editores en línea",
+  "Site": "Sitio",
+  "SoftwareLicense": "Licencia de software"
 }

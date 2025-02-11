@@ -652,5 +652,12 @@
   "ActivationRequired": "activation requise",
   "ManualBackupDescription": "Utilisez cette option si vous souhaitez obtenir toutes les données de l’espace en tant que fichier.",
   "TemporaryStorage": "Stockage temporaire",
-  "TemporaryStorageDescription": "La sauvegarde est stockée dans la section 'Sauvegarde', vous pourrez la télécharger dans les 24 heures suivant sa création."
+  "TemporaryStorageDescription": "La sauvegarde est stockée dans la section 'Sauvegarde', vous pourrez la télécharger dans les 24 heures suivant sa création.",
+  "ContactUs": "Pour toute question relative aux ventes, contactez-nous à",
+  "AboutCompanyEmailTitle": "e-mail",
+  "AboutHeader": "À propos de ce programme",
+  "DocumentManagement": "Gestion des documents",
+  "OnlineEditors": "Éditeurs en ligne",
+  "Site": "Site",
+  "SoftwareLicense": "Licence du logiciel"
 }

@@ -653,5 +653,12 @@
   "ActivationRequired": "activation required",
   "ManualBackupDescription": "Use this option if you want to get all data contained in the space as a file.",
   "TemporaryStorage": "Temporary storage",
-  "TemporaryStorageDescription": "Backup is stored in the 'Backup' section, you will be able to download it within 24 hours after creating."
+  "TemporaryStorageDescription": "Backup is stored in the 'Backup' section, you will be able to download it within 24 hours after creating.",
+  "ContactUs": "For sales questions, contact us at",
+  "AboutCompanyEmailTitle": "E-mail",
+  "AboutHeader": "About this program",
+  "DocumentManagement": "Document management",
+  "OnlineEditors": "Online editors",
+  "Site": "Site",
+  "SoftwareLicense": "Software license"
 }

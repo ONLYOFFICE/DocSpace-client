@@ -651,5 +651,12 @@
   "ActivationRequired": "aktivləşdirmə tələb olunur",
   "ManualBackupDescription": "Sahədə olan bütün məlumatları fayl kimi əldə etmək istəyirsinizsə, bu seçimdən istifadə edin.",
   "TemporaryStorage": "Müvəqqəti yaddaş",
-  "TemporaryStorageDescription": "Ehtiyat nüsxələr 'Yedəkləmə' bölməsində saxlanmışdır, siz onları yaratdıqdan sonra 24 saat ərzində endirə bilərsiniz."
+  "TemporaryStorageDescription": "Ehtiyat nüsxələr 'Yedəkləmə' bölməsində saxlanmışdır, siz onları yaratdıqdan sonra 24 saat ərzində endirə bilərsiniz.",
+  "ContactUs": "Satış sualları üçün bizimlə əlaqə saxlayın:",
+  "AboutCompanyEmailTitle": "e-poçt",
+  "AboutHeader": "Bu proqram haqqında",
+  "DocumentManagement": "Sənədlərin idarə edilməsi",
+  "OnlineEditors": "Onlayn redaktorlar",
+  "Site": "Sayt",
+  "SoftwareLicense": "Proqram təminatı lisenziyası"
 }

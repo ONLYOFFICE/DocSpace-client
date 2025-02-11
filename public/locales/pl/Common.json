@@ -651,5 +651,12 @@
   "ActivationRequired": "wymagana aktywacja",
   "ManualBackupDescription": "Użyj tej opcji, jeśli chcesz pobrać wszystkie dane na portalu jako plik.",
   "TemporaryStorage": "Tymczasowe miejsce przechowywania",
-  "TemporaryStorageDescription": "Kopia zapasowa jest przechowywana w sekcji 'Kopia zapasowa' i będzie gotowa do pobrania w ciągu 24 godzin od jej utworzenia."
+  "TemporaryStorageDescription": "Kopia zapasowa jest przechowywana w sekcji 'Kopia zapasowa' i będzie gotowa do pobrania w ciągu 24 godzin od jej utworzenia.",
+  "ContactUs": "W przypadku pytań dotyczących sprzedaży skontaktuj się z nami pod adresem",
+  "AboutCompanyEmailTitle": "e-mail",
+  "AboutHeader": "O tym programie",
+  "DocumentManagement": "Zarządzanie dokumentami",
+  "OnlineEditors": "Edytory online",
+  "Site": "Strona",
+  "SoftwareLicense": "Licencja oprogramowania"
 }

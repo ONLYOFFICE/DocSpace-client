@@ -652,5 +652,12 @@
   "ActivationRequired": "ativação necessária",
   "ManualBackupDescription": "Use esta opção se você quiser obter os dados contidos no espaço como um arquivo.",
   "TemporaryStorage": "Armazenamento temporário",
-  "TemporaryStorageDescription": "O backup é armazenado na seção 'Backup'. Você poderá baixá-lo dentro de um período de 24 horas após criá-lo."
+  "TemporaryStorageDescription": "O backup é armazenado na seção 'Backup'. Você poderá baixá-lo dentro de um período de 24 horas após criá-lo.",
+  "ContactUs": "Para perguntas sobre vendas, entre em contato conosco em",
+  "AboutCompanyEmailTitle": "e-mail",
+  "AboutHeader": "Sobre este programa",
+  "DocumentManagement": "Gerenciamento de documentos",
+  "OnlineEditors": "Editores online",
+  "Site": "Site",
+  "SoftwareLicense": "Licença para software"
 }

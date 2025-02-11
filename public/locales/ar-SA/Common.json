@@ -648,5 +648,12 @@
   "ActivationRequired": "مطلوب التنشيط",
   "ManualBackupDescription": "استخدم هذا الخيار إذا كنت تريد الحصول على جميع البيانات الموجودة في الاستضافة كملف.",
   "TemporaryStorage": "التخزين المؤقت",
-  "TemporaryStorageDescription": "يتم تخزين النسخ الاحتياطي في قسم \"النسخ الاحتياطي\" ، وستتمكن من تنزيله في غضون 24 ساعة بعد إنشائه."
+  "TemporaryStorageDescription": "يتم تخزين النسخ الاحتياطي في قسم \"النسخ الاحتياطي\" ، وستتمكن من تنزيله في غضون 24 ساعة بعد إنشائه.",
+  "ContactUs": "لأسئلة المبيعات، اتصل بنا على",
+  "AboutCompanyEmailTitle": "البريد الإلكتروني",
+  "AboutHeader": "حول هذا البرنامج",
+  "DocumentManagement": "إدارة الوثائق",
+  "OnlineEditors": "المحررين عبر الإنترنت",
+  "Site": "موقع",
+  "SoftwareLicense": "ترخيص البرنامج"
 }

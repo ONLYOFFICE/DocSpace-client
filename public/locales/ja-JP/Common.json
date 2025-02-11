@@ -652,5 +652,12 @@
   "ActivationRequired": "アクティベーションが必要です",
   "ManualBackupDescription": "スペースに含まれるすべてのデータをファイルとして取得したい場合にこのオプションを使用してください。",
   "TemporaryStorage": "一時的な保存場所",
-  "TemporaryStorageDescription": "バックアップは「バックアップ」セクションに保存されています。作成後24時間以内にダウンロードすることができます。"
+  "TemporaryStorageDescription": "バックアップは「バックアップ」セクションに保存されています。作成後24時間以内にダウンロードすることができます。",
+  "ContactUs": "販売に関するご質問は、次のメールアドレスまでお問い合わせください：",
+  "AboutCompanyEmailTitle": "Eメール",
+  "AboutHeader": "本プログラムについて",
+  "DocumentManagement": "ドキュメント管理",
+  "OnlineEditors": "オンライン編集者",
+  "Site": "サイト",
+  "SoftwareLicense": "ソフトウェアライセンス"
 }

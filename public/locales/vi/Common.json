@@ -650,5 +650,12 @@
   "ActivationRequired": "cần kích hoạt ",
   "ManualBackupDescription": "Sử dụng tùy chọn này nếu bạn muốn lấy tất cả dữ liệu chứa trên không gian này dưới một tập tin.",
   "TemporaryStorage": "Lưu trữ tạm thời",
-  "TemporaryStorageDescription": "Bản sao lưu được lưu trữ trong phần 'Sao lưu', bạn sẽ có thể tải xuống trong vòng 24 giờ sau khi tạo."
+  "TemporaryStorageDescription": "Bản sao lưu được lưu trữ trong phần 'Sao lưu', bạn sẽ có thể tải xuống trong vòng 24 giờ sau khi tạo.",
+  "ContactUs": "Đối với câu hỏi về việc bán hàng, xin hãy liên hệ với chúng tôi tại",
+  "AboutCompanyEmailTitle": "email",
+  "AboutHeader": "Về chương trình này",
+  "DocumentManagement": "Quản lý tài liệu",
+  "OnlineEditors": "Người chỉnh sửa trực tuyến",
+  "Site": "Trang web",
+  "SoftwareLicense": "Giấy phép phần mềm"
 }

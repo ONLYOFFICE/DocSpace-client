@@ -651,5 +651,12 @@
   "ActivationRequired": "aktivasyon gerekli",
   "ManualBackupDescription": "Alanda bulunan tüm verileri dosya olarak almak istiyorsanız bu seçeneği kullanın.",
   "TemporaryStorage": "Geçici depolama",
-  "TemporaryStorageDescription": "Yedekler 'Yedekleme' bölümünde saklanır, oluşturduktan sonra 24 saat içinde indirebilirsiniz."
+  "TemporaryStorageDescription": "Yedekler 'Yedekleme' bölümünde saklanır, oluşturduktan sonra 24 saat içinde indirebilirsiniz.",
+  "ContactUs": "Satışla ilgili sorular için şu adresten bize ulaşın",
+  "AboutCompanyEmailTitle": "e-posta",
+  "AboutHeader": "Bu program hakkında",
+  "DocumentManagement": "Belge yönetimi",
+  "OnlineEditors": "Çevrimiçi editörler",
+  "Site": "Site",
+  "SoftwareLicense": "Yazılım lisansı"
 }

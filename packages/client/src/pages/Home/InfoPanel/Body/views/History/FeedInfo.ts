@@ -46,6 +46,7 @@ export enum FeedAction {
   Invite = "invite",
   CHANGE_COLOR = "changeColor",
   CHANGE_COVER = "changeCover",
+  DeleteVersion = "deleteVersion",
 }
 
 enum FeedTarget {
@@ -142,6 +143,11 @@ export const feedInfo = [
     key: "FileUnlocked",
     targetType: `${FeedTarget.File}`,
     actionType: `${FeedAction.Unlocked}`,
+  },
+  {
+    key: "FileVersionRemoved",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.DeleteVersion}`,
   },
   // FOLDER
   {

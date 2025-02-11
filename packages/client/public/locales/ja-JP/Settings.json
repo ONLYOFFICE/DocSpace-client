@@ -305,7 +305,6 @@
   "WantToCancelUpload": "アップロードをキャンセルしますか？",
   "WantToContinue": "ユーザーストレージ容量制限を継続または変更しますか？",
   "WhiteLabel": "ロゴ設定",
-  "WhiteLabelHelper": "背景が透明な画像を使用してください(PNG, SVG, JPG)。",
   "WhiteLabelSubtitle": "会社名を入力し、ロゴをアップロードし、ブランディングに合わせたスタイリングにカスタマイズをしましょう。",
   "WhiteLabelTooltip": "サイズはRetinaディスプレイ用に表示されています。標準的な解像度のディスプレイの場合、ロゴの幅と高さはアップロード時に適宜リサイズされます。",
   "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。",

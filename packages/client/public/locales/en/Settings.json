@@ -311,7 +311,6 @@
   "WantToCancelUpload": "Do you want to cancel the upload?",
   "WantToContinue": "Do you want to continue or change the user storage quota?",
   "WhiteLabel": "Logo settings",
-  "WhiteLabelHelper": "Use images with a transparent background. (PNG, SVG, JPG)",
   "WhiteLabelSubtitle": "Upload logos with a transparent background (PNG, SVG, JPG) for light and dark themes, or generate one instantly by entering your Your logo below.",
   "WhiteLabelTooltip": "The sizes are shown for the Retina displays. For the displays with standard resolutions the logo width and height will be resized accordingly upon upload.",
   "WithoutEmailHint": "You don’t have users without emails. Please proceed to the next step.",

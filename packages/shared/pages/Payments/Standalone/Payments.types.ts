@@ -26,14 +26,14 @@
 
 export interface IPaymentsProps {
   isTrial: boolean;
-  setPaymentsLicense: () => void;
+  setPaymentsLicense: (confirmKey: string, data: FormData) => void;
   acceptPaymentsLicense: () => void;
   isLicenseCorrect: boolean;
   salesEmail: string;
   isLicenseDateExpired: boolean;
   isDeveloper: boolean;
   buyUrl: string;
-  trialDaysLeft: string;
+  trialDaysLeft: string | number;
   paymentDate: string;
   isEnterprise: boolean;
   logoText: string;
@@ -46,7 +46,7 @@ export interface IEnterpriseProps {
 }
 
 export interface ILicenseProps {
-  setPaymentsLicense: () => void;
+  setPaymentsLicense: (confirmKey: string, data: FormData) => void;
   acceptPaymentsLicense: () => void;
   isLicenseCorrect: boolean;
   isTrial: boolean;

@@ -71,6 +71,7 @@ import DeleteGroupDialog from "./DeleteGroupDialog";
 import RoomLogoCoverDialog from "./RoomLogoCoverDialog";
 import RemoveGuestDialog from "./RemoveGuest";
 import GuestReleaseTipDialog from "./GuestReleaseTip";
+import DeleteVersionDialog from "./DeleteVersionDialog";
 import CancelOperationDialog from "./CancelOperationDialog";
 
 export {
@@ -121,5 +122,6 @@ export {
   RoomLogoCoverDialog,
   RemoveGuestDialog,
   GuestReleaseTipDialog,
+  DeleteVersionDialog,
   CancelOperationDialog,
 };

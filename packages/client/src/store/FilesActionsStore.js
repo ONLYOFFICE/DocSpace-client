@@ -56,6 +56,7 @@ import {
   deleteFilesFromRecent,
   changeIndex,
   reorderIndex,
+  deleteVersionFile,
 } from "@docspace/shared/api/files";
 import {
   Events,
@@ -134,6 +135,8 @@ class FilesActionStore {
 
   indexingStore;
 
+  versionHistoryStore;
+
   userStore = null;
 
   currentTariffStatusStore = null;
@@ -169,6 +172,7 @@ class FilesActionStore {
     peopleStore,
     currentQuotaStore,
     indexingStore,
+    versionHistoryStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -189,6 +193,7 @@ class FilesActionStore {
     this.peopleStore = peopleStore;
     this.currentQuotaStore = currentQuotaStore;
     this.indexingStore = indexingStore;
+    this.versionHistoryStore = versionHistoryStore;
   }
 
   updateCurrentFolder = async (
@@ -3253,6 +3258,69 @@ class FilesActionStore {
     }
 
     return null;
+  };
+
+  onDeleteVersionFile = async (fileId, versions) => {
+    const { secondaryProgressDataStore, clearActiveOperations } =
+      this.uploadDataStore;
+
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+      secondaryProgressDataStore;
+
+    const {
+      setVersionDeletionProcess,
+      setVersionSelectedForDeletion,
+      fetchFileVersions,
+      isVisible,
+    } = this.versionHistoryStore;
+
+    setVersionDeletionProcess(true);
+
+    const operationId = uniqueid("operation_");
+
+    setSecondaryProgressBarData({
+      icon: "file",
+      visible: true,
+      percent: 0,
+      alert: false,
+      filesCount: 1,
+      operationId,
+    });
+
+    this.filesStore.setActiveFiles([fileId]);
+
+    try {
+      await deleteVersionFile(fileId, versions)
+        .then(async (res) => {
+          if (res[0]?.error) return Promise.reject(res[0].error);
+          const data = res[0] ? res[0] : null;
+          const pbData = {
+            icon: "file",
+            operationId,
+          };
+
+          await this.uploadDataStore.loopFilesOperations(data, pbData);
+        })
+        .finally(() => {
+          setVersionSelectedForDeletion(null);
+          setVersionDeletionProcess(false);
+
+          if (isVisible) fetchFileVersions(fileId, null, null, true);
+
+          clearActiveOperations([fileId]);
+          setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+        });
+    } catch (err) {
+      setSecondaryProgressBarData({
+        visible: true,
+        alert: true,
+        operationId,
+      });
+      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+      setVersionSelectedForDeletion(null);
+      setVersionDeletionProcess(false);
+      return toastr.error(err.message ? err.message : err);
+    }
   };
 }
 

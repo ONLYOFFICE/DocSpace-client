@@ -2626,6 +2626,14 @@ export const getBaseTheme = () => {
         stroke: grayStrong,
         color: grayStrong,
       },
+
+      versionDisabled: {
+        fillDisabled: grayStrong,
+      },
+
+      versionLink: {
+        color: gray,
+      },
       commentColor: gray,
     },
 

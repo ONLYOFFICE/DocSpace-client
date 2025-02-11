@@ -48,6 +48,9 @@ const getBuildYear = () => {
 const nextConfig = {
   basePath: "/login",
   output: "standalone",
+  typescript: {
+    ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
+  },
   compiler: {
     styledComponents: true,
   },
@@ -64,6 +67,8 @@ const nextConfig = {
     },
   },
   webpack: (config) => {
+    console.log("ENV", { env: process.env });
+
     config.devtool = "source-map";
 
     if (config.mode === "production") {

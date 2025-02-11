@@ -1564,3 +1564,14 @@ export async function removeSharedFolder(folderIds: Array<string | number>) {
     },
   });
 }
+
+export async function deleteVersionFile(fileId: number, versions: number[]) {
+  const data = { fileId, versions };
+  const res = (await request({
+    method: "put",
+    url: "/files/fileops/deleteversion",
+    data,
+  })) as TOperation[];
+
+  return res;
+}

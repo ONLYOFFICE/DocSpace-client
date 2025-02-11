@@ -240,6 +240,7 @@ const filesActionsStore = new FilesActionsStore(
   peopleStore,
   currentQuotaStore,
   indexingStore,
+  versionHistoryStore,
 );
 
 secondaryProgressDataStore.filesActionsStore = filesActionsStore;

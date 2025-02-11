@@ -294,7 +294,9 @@ const EditRoomDialog = ({
       </ModalDialog.Container>
 
       <ModalDialog.Header>
-        {isTemplate ? t("Files:EditTemplate") : t("Files:RoomEditing")}
+        {isTemplate
+          ? t("Files:EditTemplate")
+          : t("CreateEditRoomDialog:RoomEditing")}
       </ModalDialog.Header>
 
       <ModalDialog.Body>

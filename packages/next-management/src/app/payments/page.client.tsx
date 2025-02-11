@@ -42,6 +42,15 @@ const PaymentsPage = ({
   buyUrl,
   dueDate,
   isEnterprise,
+  logoText,
+}: {
+  isTrial: boolean;
+  salesEmail: string;
+  isDeveloper: boolean;
+  buyUrl: string;
+  dueDate: Date | string;
+  isEnterprise: boolean;
+  logoText: string;
 }) => {
   const { t } = useTranslation("Common");
   const router = useRouter();
@@ -54,8 +63,8 @@ const PaymentsPage = ({
       setIsLicenseCorrect(true);
 
       toastr.success(message);
-    } catch (e) {
-      toastr.error(e);
+    } catch (error) {
+      toastr.error(error!);
       setIsLicenseCorrect(false);
     }
   };
@@ -73,8 +82,8 @@ const PaymentsPage = ({
       localStorage.removeItem("enterpriseAlertClose");
 
       router.refresh();
-    } catch (e) {
-      toastr.error(e);
+    } catch (error) {
+      toastr.error(error!);
     }
   };
 
@@ -95,6 +104,7 @@ const PaymentsPage = ({
       trialDaysLeft={trialDaysLeft}
       paymentDate={paymentDate}
       isEnterprise={isEnterprise}
+      logoText={logoText}
     />
   );
 };

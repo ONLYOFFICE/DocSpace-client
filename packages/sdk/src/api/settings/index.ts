@@ -50,7 +50,9 @@ export async function getSettings(
     "GET",
   );
 
-  const res = IS_TEST ? settingsHandler() : await fetch(req);
+  const res = IS_TEST
+    ? settingsHandler()
+    : await fetch(req, { next: { revalidate: 3600 } });
 
   if (res.status === 403) return `access-restricted`;
 
@@ -66,7 +68,9 @@ export async function getSettings(
 export async function getColorTheme(): Promise<TGetColorTheme | undefined> {
   const [req] = createRequest([`/settings/colortheme`], [["", ""]], "GET");
 
-  const res = IS_TEST ? colorThemeHandler() : await fetch(req);
+  const res = IS_TEST
+    ? colorThemeHandler()
+    : await fetch(req, { next: { revalidate: 3600 } });
 
   if (!res.ok) return;
 
@@ -78,7 +82,7 @@ export async function getColorTheme(): Promise<TGetColorTheme | undefined> {
 export async function getBuildInfo() {
   const [req] = createRequest([`/settings/version/build`], [["", ""]], "GET");
 
-  const res = await fetch(req);
+  const res = await fetch(req, { next: { revalidate: 3600 } });
 
   if (!res.ok) return;
 
@@ -90,7 +94,7 @@ export async function getBuildInfo() {
 export async function getCapabilities() {
   const [req] = createRequest([`/capabilities`], [["", ""]], "GET");
 
-  const res = await fetch(req);
+  const res = await fetch(req, { next: { revalidate: 3600 } });
 
   if (!res.ok) return;
 

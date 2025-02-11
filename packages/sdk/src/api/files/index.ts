@@ -71,7 +71,9 @@ export async function getFoldersTree(): Promise<TFolder[]> {
     "GET",
   );
 
-  const res = IS_TEST ? foldersTreeHandler() : await fetch(req);
+  const res = IS_TEST
+    ? foldersTreeHandler()
+    : await fetch(req, { next: { revalidate: 3600 } });
 
   if (!res.ok) {
     throw new Error("Failed to get folders tree");
@@ -155,7 +157,9 @@ export async function getFolder(
     [signal],
   );
 
-  const res = IS_TEST ? folderHandler(headers()) : await fetch(req);
+  const res = IS_TEST
+    ? folderHandler(headers())
+    : await fetch(req, { next: { revalidate: 3600 } });
 
   if (!res.ok) {
     throw new Error("Failed to get folder");
@@ -181,7 +185,7 @@ export async function validateShareFolder(share: string) {
 
   const [req] = createRequest([`/files/share/${share}`], [shareHeader], "GET");
 
-  const res = await fetch(req);
+  const res = await fetch(req, { next: { revalidate: 3600 } });
 
   if (!res.ok) {
     throw new Error("Failed to validate share folder");

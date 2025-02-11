@@ -55,7 +55,9 @@ export async function getRooms(
     [signal],
   );
 
-  const res = IS_TEST ? roomListHandler(headers()) : await fetch(req);
+  const res = IS_TEST
+    ? roomListHandler(headers())
+    : await fetch(req, { next: { revalidate: 3600 } });
 
   if (!res.ok) return;
 

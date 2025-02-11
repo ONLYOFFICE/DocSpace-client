@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,10 +36,10 @@ import { includesMethod } from "../../../../utils/typeGuards";
 import type { ContextMenuRefType } from "../../../context-menu";
 
 import { isHeic, isTiff } from "../../MediaViewer.utils";
-import { StyledViewerContainer } from "../../MediaViewer.styled";
+import styles from "./Viewer.module.scss";
 
-import { NextButton } from "../NextButton";
-import { PrevButton } from "../PrevButton";
+import { NextButton } from "../Buttons/NextButton";
+import { PrevButton } from "../Buttons/PrevButton";
 import { ImageViewer } from "../ImageViewer";
 import { MobileDetails } from "../MobileDetails";
 import { DesktopDetails } from "../DesktopDetails";
@@ -85,8 +85,6 @@ export const Viewer = (props: ViewerProps) => {
   const [backgroundBlack, setBackgroundBlack] = useState<boolean>(() => false);
 
   const [isError, setIsError] = useState<boolean>(false);
-
-  // const [imageTimer, setImageTimer] = useState<NodeJS.Timeout>();
 
   const panelVisibleRef = useRef<boolean>(false);
   const panelToolbarRef = useRef<boolean>(false);
@@ -240,8 +238,26 @@ export const Viewer = (props: ViewerProps) => {
   const isDecodedImage =
     isTiff(playlistFile.fileExst) || isHeic(playlistFile.fileExst);
 
+  const mediaType = isPdf
+    ? "PDF"
+    : isImage
+      ? "image"
+      : isVideo
+        ? "video"
+        : isAudio
+          ? "audio"
+          : "media";
+
   return (
-    <StyledViewerContainer dir="ltr" visible={visible}>
+    <div
+      data-testid="media-viewer"
+      dir="ltr"
+      data-visible={visible}
+      className={styles.container}
+      role="dialog"
+      aria-label={`${mediaType} viewer - ${title}`}
+      aria-modal="true"
+    >
       {!isFullscreen && !isMobile && panelVisible && !isPdf ? (
         <DesktopDetails
           title={title}
@@ -340,6 +356,6 @@ export const Viewer = (props: ViewerProps) => {
           />
         )
       )}
-    </StyledViewerContainer>
+    </div>
   );
 };

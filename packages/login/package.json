@@ -1,6 +1,6 @@
 {
   "name": "@docspace/login",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "private": true,
   "scripts": {
     "build": "node ./scripts/buildTranslations.js && next build",

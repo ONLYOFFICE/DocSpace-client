@@ -72,7 +72,6 @@
   "FileContents": "Nội dung tập tin",
   "FileDownloadingIsRestricted": "Việc tải tập tin xuống bị hạn chế trong phòng này.",
   "FileExportedToMyDocuments": "Tập tin <1>{{fileName}}</1> đã được xuất sang Tài liệu",
-  "FileRemoved": "Đã chuyển tệp vào Thùng rác",
   "FileRenamed": "Tài liệu {{oldTitle}} được đổi tên thành {{newTitle}}",
   "FilesWillAppearHere": "Các tập tin và thư mục được thêm vào phòng sẽ xuất hiện ở đây.",
   "FileWillBeDeletedPermanently": "Tập tin sẽ bị xóa {{date}}",

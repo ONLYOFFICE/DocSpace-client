@@ -74,7 +74,6 @@
   "FileContents": "Inhalt in der Datei",
   "FileDownloadingIsRestricted": "Das Herunterladen von Dateien ist in diesem Raum eingeschränkt.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> Datei in \"Dokumente\" exportiert",
-  "FileRemoved": "Die Datei wurde in den Papierkorb verschoben",
   "FileRenamed": "Das Dokument wurde von '{{oldTitle}}' in '{{newTitle}}' umbenannt",
   "FilesWillAppearHere": "Dem Raum hinzugefügte Dateien und Ordner werden hier angezeigt.",
   "FileWillBeDeletedPermanently": "Die Datei wird dauerhaft gelöscht {{date}}",

@@ -72,7 +72,6 @@
   "FileContents": "Περιεχόμενα αρχείου",
   "FileDownloadingIsRestricted": "Η λήψη αρχείων είναι περιορισμένη σε αυτό το δωμάτιο.",
   "FileExportedToMyDocuments": "Γίνεται εξαγωγή του αρχείου <1>{{fileName}}</1> στα Έγγραφα",
-  "FileRemoved": "Το αρχείο μεταφέρθηκε στον Κάδο απορριμμάτων",
   "FileRenamed": "Το έγγραφο «{{oldTitle}}» μετονομάστηκε σε '{{newTitle}}'",
   "FilesWillAppearHere": "Τα αρχεία και οι φάκελοι που προστίθενται στο δωμάτιο θα εμφανίζονται εδώ.",
   "FileWillBeDeletedPermanently": "Το αρχείο θα διαγραφεί {{date}}",

@@ -72,7 +72,6 @@
   "FileContents": "Fayl məzmunları",
   "FileDownloadingIsRestricted": "Bu otaqda faylların endirilməsi məhdudlaşdırılıb.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> faylı Sənədlərə ixrac edildi",
-  "FileRemoved": "Fayl zibil qutusuna göndərildi",
   "FileRenamed": "'{{oldTitle}}' sənəd adı '{{newTitle}}'adına dəyişdirildi",
   "FilesWillAppearHere": "Otağa əlavə edilmiş fayl və qovluqlar burada görünəcək.",
   "FileWillBeDeletedPermanently": "Fayl {{date}} tarixində silinəcək",

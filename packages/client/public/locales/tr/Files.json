@@ -72,7 +72,6 @@
   "FileContents": "Dosya içerikleri",
   "FileDownloadingIsRestricted": "Bu odada dosya indirme kısıtlanmıştır.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> dosyası Belgeler'e aktarıldı",
-  "FileRemoved": "Dosya Çöp Kutusuna taşındı",
   "FileRenamed": "'{{oldTitle}}' isimli belgenin adı '{{newTitle}}' olarak değiştirildi",
   "FilesWillAppearHere": "Odaya eklenen dosyalar ve klasörler burada görünecektir.",
   "FileWillBeDeletedPermanently": "Dosya silinecek {{date}}",

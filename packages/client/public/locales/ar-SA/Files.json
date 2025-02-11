@@ -72,7 +72,6 @@
   "FileContents": "محتويات الملف",
   "FileDownloadingIsRestricted": "تنزيل الملفات مقيد في هذه الغرفة.",
   "FileExportedToMyDocuments": "تم تصدير الملف <1>{{fileName}}</1> إلى المستندات",
-  "FileRemoved": "تم نقل الملف إلى المهملات",
   "FileRenamed": "تمت إعادة تسمية المستند \"{{oldTitle}}\" إلى \"{{newTitle}}\"",
   "FilesWillAppearHere": "ستظهر هنا الملفات والمجلدات التي تمت إضافتها إلى الغرفة.",
   "FileWillBeDeletedPermanently": "سيتم حذف الملف في {{date}} ",

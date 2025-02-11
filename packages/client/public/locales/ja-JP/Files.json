@@ -74,7 +74,6 @@
   "FileContents": "ファイルの内容",
   "FileDownloadingIsRestricted": "このルームではファイルのダウンロードが制限されています。",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1>ファイルをドキュメントにエクスポートしました。",
-  "FileRemoved": "ファイルがゴミ箱に移動",
   "FileRenamed": "ドキュメント'{{oldTitle}}'の名前が'{{newTitle}}'に変更されます。'",
   "FilesWillAppearHere": "ルームに追加されたファイルやフォルダはここに表示されます。",
   "FileWillBeDeletedPermanently": "ファイルは{{date}}に完全に削除されます",

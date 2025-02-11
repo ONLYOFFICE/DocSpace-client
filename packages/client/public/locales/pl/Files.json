@@ -72,7 +72,6 @@
   "FileContents": "Zawartość pliku",
   "FileDownloadingIsRestricted": "Pobieranie plików jest ograniczone w tym pomieszczeniu.",
   "FileExportedToMyDocuments": "Plik <1>{{fileName}}</1> został wyeksportowany do Dokumentów",
-  "FileRemoved": "Plik został przeniesiony do kosza",
   "FileRenamed": "Nazwa dokumentu '{{oldTitle}}' została zmieniona na '{{newTitle}}'",
   "FilesWillAppearHere": "Tutaj pojawią się pliki i katalogi dodane do pokoju.",
   "FileWillBeDeletedPermanently": "Plik zostanie usunięty {{date}}",

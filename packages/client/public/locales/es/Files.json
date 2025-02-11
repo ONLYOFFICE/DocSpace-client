@@ -74,7 +74,6 @@
   "FileContents": "Contenido del archivo",
   "FileDownloadingIsRestricted": "La descarga de archivos está restringida en esta sala.",
   "FileExportedToMyDocuments": "El archivo <1>{{fileName}}</1> exportado a Documentos",
-  "FileRemoved": "Archivo movido a la Papelera",
   "FileRenamed": "El nombre del documento '{{oldTitle}}' se ha cambiado a '{{newTitle}}'",
   "FilesWillAppearHere": "Los archivos y carpetas añadidos a la sala aparecerán aquí.",
   "FileWillBeDeletedPermanently": "El archivo se eliminará de forma permanente {{date}}",

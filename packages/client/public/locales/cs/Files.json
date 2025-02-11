@@ -72,7 +72,6 @@
   "FileContents": "Obsah souboru",
   "FileDownloadingIsRestricted": "Stahování souborů je v této místnosti omezeno.",
   "FileExportedToMyDocuments": "Soubor <1>{{fileName}}</1> exportován do Dokumentů",
-  "FileRemoved": "Soubor přesunut do koše",
   "FileRenamed": "Dokument '{{oldTitle}}' je přejmenován na '{{newTitle}}'",
   "FilesWillAppearHere": "Zde se zobrazí soubory a složky přidané do místnosti.",
   "FileWillBeDeletedPermanently": "Soubor bude smazán {{date}}",

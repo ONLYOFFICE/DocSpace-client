@@ -72,7 +72,6 @@
   "FileContents": "Inhoud van het bestand",
   "FileDownloadingIsRestricted": "Het downloaden van bestanden is in deze kamer beperkt.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> bestand geëxporteerd naar Documenten",
-  "FileRemoved": "Bestand verplaatst naar Prullenbak",
   "FileRenamed": "Het document '{{oldTitle}}' is hernoemd naar '{{newTitle}}'",
   "FilesWillAppearHere": "Bestanden en mappen die aan de kamer zijn toegevoegd, verschijnen hier.",
   "FileWillBeDeletedPermanently": "Het bestand wordt {{date}} verwijderd",

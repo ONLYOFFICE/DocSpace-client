@@ -72,7 +72,6 @@
   "FileContents": "Faila saturs",
   "FileDownloadingIsRestricted": "Failu lejupielāde šajā telpā ir ierobežota.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> fails ir eksportēts uz dokumentiem",
-  "FileRemoved": "Fails ir pārvietots uz atkritni",
   "FileRenamed": "Dokuments '{{oldTitle}}' ir pārdēvēts par '{{newTitle}}'",
   "FilesWillAppearHere": "Šeit tiks parādīti telpai pievienotie faili un mapes.",
   "FileWillBeDeletedPermanently": "Fails tiks izdzēsts {{date}}",

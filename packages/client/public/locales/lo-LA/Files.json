@@ -62,7 +62,6 @@
   "FavoritesEmptyContainerDescription": "ຖ້າຕ້ອງການເຮັດເຄື່ອງໝາຍໄຟລ໌ເປັນລາຍການໂປດ ຫຼື ລົບອອກຈາກລາຍການນີ້ໃຫ້ໃຊ້ເມນູ context ",
   "FileContents": "ເນື້ອໃນໄຟລ໌",
   "FileDownloadingIsRestricted": "ການດາວໂຫຼດໄຟລ໌ຖືກຈຳກັດຢູ່ໃນຫ້ອງນີ້.",
-  "FileRemoved": "ຍ້າຍແຟ້ມໄປທີ່ຖັງຂີ້ເຫຍື້ອ",
   "FileRenamed": "ເອກະສານ '{{oldTitle}}' ຖືກປ່ຽນຊື່ເປັນ '{{newTitle}}'",
   "FilesWillAppearHere": "ໄຟລ໌ ແລະໂຟນເດີທີ່ເພີ່ມໃສ່ຫ້ອງຈະປາກົດ ຢູ່ບ່ອນນີ້.",
   "Filter": "ຄັດກອງ",

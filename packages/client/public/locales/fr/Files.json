@@ -74,7 +74,6 @@
   "FileContents": "Contenu du fichier",
   "FileDownloadingIsRestricted": "Le téléchargement de fichiers est limité dans cette salle.",
   "FileExportedToMyDocuments": "Le fichier <1>{{fileName}}</1> exporté vers Documents",
-  "FileRemoved": "Fichier déplacé vers la corbeille",
   "FileRenamed": "Le document '{{oldTitle}}' est renommé en '{{newTitle}}'",
   "FilesWillAppearHere": "Les fichiers et dossiers ajoutés à la salle apparaissent ici.",
   "FileWillBeDeletedPermanently": "Le fichier sera supprimé définitivement {{date}}",

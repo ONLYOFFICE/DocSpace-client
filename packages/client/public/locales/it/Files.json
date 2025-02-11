@@ -74,7 +74,6 @@
   "FileContents": "Contenuto del file",
   "FileDownloadingIsRestricted": "In questa stanza il download dei file è limitato.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> file esportato in Documents",
-  "FileRemoved": "File spostato nel Cestino",
   "FileRenamed": "Il documento '{{oldTitle}}' è stato rinominato in '{{newTitle}}'",
   "FilesWillAppearHere": "I file e le cartelle aggiunti alla stanza verranno visualizzati qui.",
   "FileWillBeDeletedPermanently": "Il file verrà eliminato definitivamente {{date}}",

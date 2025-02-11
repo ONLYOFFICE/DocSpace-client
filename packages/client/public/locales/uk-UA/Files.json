@@ -72,7 +72,6 @@
   "FileContents": "Вміст файлу",
   "FileDownloadingIsRestricted": "Завантаження файлів у цій кімнаті обмежено.",
   "FileExportedToMyDocuments": "Файл <1>{{fileName}}</1> експортовано до Документів",
-  "FileRemoved": "Файл переміщено до кошика",
   "FileRenamed": "Документ \"{{oldTitle}}\" перейменовано на \"{{newTitle}}\"",
   "FilesWillAppearHere": "Тут з’являться файли та папки, додані до кімнати.",
   "FileWillBeDeletedPermanently": "Файл буде видалено {{date}}",

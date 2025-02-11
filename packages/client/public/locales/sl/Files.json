@@ -72,7 +72,6 @@
   "FileContents": "Vsebine datotek",
   "FileDownloadingIsRestricted": "Prenos datotek je v tej sobi omejen.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> datoteka izvožena v Dokumente",
-  "FileRemoved": "Datoteka premaknjena v koš",
   "FileRenamed": "Dokument '{{oldTitle}}' je preimenovan v '{{newTitle}}'",
   "FilesWillAppearHere": "Tukaj bodo prikazane datoteke in mape, dodane v sobi.",
   "FileWillBeDeletedPermanently": "Datoteka bo izbrisana {{date}}",

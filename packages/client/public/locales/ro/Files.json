@@ -74,7 +74,6 @@
   "FileContents": "Conținut fișier",
   "FileDownloadingIsRestricted": "Descărcarea fişierelor este restricționată în această sală.",
   "FileExportedToMyDocuments": "Fișierul <1>{{fileName}}</1> a fost exportat în secțiunea Documente",
-  "FileRemoved": "Fișierul mutat în Coșul de gunoi",
   "FileRenamed": "Documentul '{{oldTitle}}' este redenumit în '{{newTitle}}'",
   "FilesWillAppearHere": "Fișierele și folderele adăugate la această sală  vor fi afişate aici.",
   "FileWillBeDeletedPermanently": "Fișierul va fi ştears definitiv la data de {{date}}",

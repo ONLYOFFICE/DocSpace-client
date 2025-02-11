@@ -72,7 +72,6 @@
   "FileContents": "Tiedoston sisältö",
   "FileDownloadingIsRestricted": "Tiedostojen lataus on rajoitettu tässä huoneessa.",
   "FileExportedToMyDocuments": "<1>{{fileName}}</1> tiedosto viety asiakirjoihin",
-  "FileRemoved": "Tiedosto on siirretty roskakoriin",
   "FileRenamed": "Asiakirjan \"{{oldTitle}}\" nimeksi on muutettu \"{{newTitle}}”",
   "FilesWillAppearHere": "Huoneeseen lisätyt tiedostot ja kansiot näkyvät tässä.",
   "FileWillBeDeletedPermanently": "Tiedosto poistetaan {{date}}",

@@ -75,7 +75,6 @@
   "FileContents": "Sadržaji datoteke",
   "FileDownloadingIsRestricted": "Preuzimanje datoteka je ograničeno u ovoj sobi.",
   "FileExportedToMyDocuments": "Fajl <1>{{fileName}}</1> izvezen u Dokumente",
-  "FileRemoved": "Datoteka pomerena u Otpad",
   "FileRenamed": "Dokument '{{oldTitle}}' je preimenovan na '{{newTitle}}'",
   "FilesWillAppearHere": "Datoteke i folderi dodati u sobu će se pojaviti ovde.",
   "FileWillBeDeletedPermanently": "Fajl će biti trajno izbrisan {{date}}",

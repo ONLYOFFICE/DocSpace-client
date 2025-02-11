@@ -185,7 +185,6 @@ const Sdk = ({
     window.addEventListener("message", handleMessage, false);
     return () => {
       window.removeEventListener("message", handleMessage, false);
-      setFrameConfig(null);
     };
   }, [handleMessage]);
 

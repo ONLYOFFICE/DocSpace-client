@@ -2617,6 +2617,15 @@ const Dark: TTheme = {
       stroke: white,
       color: white,
     },
+
+    versionDisabled: {
+      fillDisabled: grayDarkStrong,
+    },
+
+    versionLink: {
+      color: grayDark,
+    },
+
     commentColor: grayDark,
   },
 

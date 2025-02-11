@@ -24,15 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
+import generateJwt from "@docspace/shared/utils/oauth/generate-jwt";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import {
   getConfig,
   getOAuthClient,
+  getPortal,
   getScopeList,
   getSettings,
   getUser,
@@ -47,15 +49,32 @@ async function Page({
   searchParams: { [key: string]: string };
 }) {
   const clientId = searchParams.clientId ?? searchParams.client_id;
-  const [oauthData, scopes, user, settings, config] = await Promise.all([
-    getOAuthClient(clientId),
-    getScopeList(),
+
+  const [user, settings, config, portal] = await Promise.all([
     getUser(),
     getSettings(),
     getConfig(),
+    getPortal(),
   ]);
 
-  const client = oauthData?.client;
+  const jwtToken = generateJwt(
+    user!.id,
+    user!.displayName,
+    user!.email,
+    portal.tenantId,
+    portal.tenantAlias,
+    user?.isAdmin || user?.isOwner || false,
+    config?.oauth2?.secret ?? "empty",
+  );
+
+  const [data, scopes] = await Promise.all([
+    getOAuthClient(clientId),
+    getScopeList(jwtToken),
+  ]);
+
+  const redirect_url = cookies().get("x-redirect-authorization-uri")!.value;
+
+  const client = data?.client as IClientProps;
 
   if (!client || (client && !("clientId" in client)) || !scopes || !user)
     return "";
@@ -81,10 +100,12 @@ async function Page({
               culture={culture}
             />
             <Consent
-              client={client as IClientProps}
+              client={client}
               scopes={scopes}
               user={user}
               baseUrl={config?.oauth2?.origin}
+              token={jwtToken}
+              redirect_url={redirect_url}
             />
           </>
         </ColorTheme>

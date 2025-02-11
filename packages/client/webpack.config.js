@@ -297,15 +297,6 @@ const config = {
 
   plugins: [
     new CleanWebpackPlugin(),
-    new ESLintPlugin({
-      configType: "eslintrc",
-      cacheLocation: path.resolve(
-        __dirname,
-        "../../node_modules/.cache/.eslintcache",
-      ),
-      quiet: true,
-      formatter: "json",
-    }),
     new MiniCssExtractPlugin({
       filename: "static/styles/[name].[contenthash].css",
       chunkFilename: "static/styles/[id].[contenthash].css",
@@ -342,6 +333,8 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
+  console.log("ENV", { env });
+
   config.devtool = "source-map";
 
   const isProduction = argv.mode === "production";
@@ -382,6 +375,7 @@ module.exports = (env, argv) => {
             },
           },
           extractComments: false,
+          parallel: false,
         }),
       ],
     };
@@ -490,6 +484,23 @@ module.exports = (env, argv) => {
 */`,
     }),
   );
+
+  if (!env.lint || env.lint == "true") {
+    console.log("Enable eslint");
+    config.plugins.push(
+      new ESLintPlugin({
+        configType: "eslintrc",
+        cacheLocation: path.resolve(
+          __dirname,
+          "../../node_modules/.cache/.eslintcache",
+        ),
+        quiet: true,
+        formatter: "json",
+      }),
+    );
+  } else {
+    console.log("Skip eslint");
+  }
 
   return config;
 };

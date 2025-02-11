@@ -40,7 +40,7 @@ const publishPath = path.join(
 const nextBuild = path.join(process.cwd(), ".next");
 const nodeModulesBuild = path.join(nextBuild, "standalone", "node_modules");
 const configFolder = path.join(process.cwd(), "config");
-const loggerFile = path.join(process.cwd(), "logger.mjs");
+//const loggerFile = path.join(process.cwd(), "logger.mjs");
 const serverFile = path.join(process.cwd(), "server.prod.js");
 const rootNodeModulesPath = path.join(
   process.cwd(),
@@ -96,4 +96,4 @@ fs.cpSync(
 );
 
 fs.copyFileSync(serverFile, path.join(publishPath, "server.js"));
-fs.copyFileSync(loggerFile, path.join(publishPath, "logger.mjs"));
+//fs.copyFileSync(loggerFile, path.join(publishPath, "logger.mjs"));

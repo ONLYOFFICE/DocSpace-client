@@ -132,6 +132,7 @@ export type TSettings = {
   maxImageUploadSize: number;
   isAmi: boolean;
   logoText: string;
+  displayAbout: boolean;
 };
 
 export type TCustomSchema = {

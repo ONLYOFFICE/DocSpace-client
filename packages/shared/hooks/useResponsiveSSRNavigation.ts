@@ -27,7 +27,6 @@
 "use client";
 
 import { useEffect, useCallback } from "react";
-import { type NextRouter } from "next/router";
 import { DeviceType } from "@docspace/shared/enums";
 import { size } from "@docspace/shared/utils";
 
@@ -35,7 +34,7 @@ interface IProps {
   redirectUrl: string;
   currentLocation: string;
   deviceType: DeviceType;
-  router: NextRouter;
+  router: unknown;
   pathname: string;
 }
 

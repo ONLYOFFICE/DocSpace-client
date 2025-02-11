@@ -408,7 +408,7 @@ const SetRoomParams = ({
 
   const inputTitle =
     isTemplateSelected || isTemplate
-      ? `${t("Common:Label")}:`
+      ? `${t("Files:TemplateName")}:`
       : `${t("Common:Name")}:`;
 
   return (
@@ -472,6 +472,9 @@ const SetRoomParams = ({
         isDisabled={isDisabled}
         onFocus={() => setForceHideRoomTypeDropdown(true)}
         onBlur={() => setForceHideRoomTypeDropdown(false)}
+        tooltipLabel={
+          isTemplateSelected || isTemplate ? t("Files:RoomTagsTooltip") : ""
+        }
       />
 
       {/* //TODO: Uncomment when private rooms are done

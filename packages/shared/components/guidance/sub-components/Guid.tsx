@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
@@ -43,7 +43,78 @@ const GUID_MODAL_MARGIN = 18;
 const MAX_MODAL_HEIGHT = 190;
 const MODAL_WIDTH = 430;
 
-const Guid = ({
+const SIDE_OFFSET = 16;
+
+const getModalPosition = (
+  positions: Position[],
+  placement: GuidancePlacement,
+  isRTL: boolean,
+  windowWidth: number,
+  windowHeight: number,
+  modalWidth: number,
+  modalHeight: number,
+): { left: number; top: number } => {
+  let mainPosition = positions[0];
+
+  if (mainPosition?.width === 0 && mainPosition?.height === 0 && positions[1]) {
+    mainPosition = positions[1];
+  }
+
+  if (!mainPosition) return { left: 0, top: 0 };
+
+  // Calculate side position first to check if it fits
+  const baseLeft = isRTL
+    ? mainPosition.left - modalWidth - SIDE_OFFSET
+    : mainPosition.right + SIDE_OFFSET;
+
+  const isNotEnoughHorizontalSpace = isRTL
+    ? baseLeft < 0
+    : baseLeft + modalWidth > windowWidth;
+  const proposedTop = mainPosition.bottom + SIDE_OFFSET;
+  const isNotEnoughVerticalSpace = proposedTop + modalHeight > windowHeight;
+
+  if (placement === "bottom") {
+    const wouldOverflowHorizontally =
+      mainPosition.left + modalWidth > windowWidth;
+    const left = wouldOverflowHorizontally
+      ? mainPosition.right - modalWidth
+      : Math.max(0, mainPosition.left);
+
+    return {
+      left,
+      top: isNotEnoughVerticalSpace
+        ? mainPosition.bottom - modalHeight
+        : proposedTop,
+    };
+  }
+
+  // placement === "side"
+  if (!isNotEnoughHorizontalSpace) {
+    // If side placement fits, use it
+    return {
+      left: baseLeft,
+      top: Math.max(0, mainPosition.top),
+    };
+  }
+
+  // If side doesn't fit, try bottom
+  if (!isNotEnoughVerticalSpace) {
+    return {
+      left: Math.max(0, mainPosition.left),
+      top: proposedTop,
+    };
+  }
+
+  // If neither side nor bottom fits, switch sides and lift up
+  return {
+    left: isRTL
+      ? mainPosition.right + SIDE_OFFSET
+      : mainPosition.left - modalWidth - SIDE_OFFSET,
+    top: mainPosition.bottom - modalHeight,
+  };
+};
+
+const Guid: React.FC<GuidProps> = ({
   guidanceConfig,
   currentStepIndex,
   setCurrentStepIndex,
@@ -53,13 +124,73 @@ const Guid = ({
   viewAs,
   currentGuidance,
   sectionWidth,
-}: GuidProps) => {
+  t,
+}) => {
   const theme = useTheme();
-  const { t } = useTranslation(["FormFillingTipsDialog", "Common"]);
   const { isRTL } = useInterfaceDirection();
 
+  const modalRef = useRef<HTMLDivElement>(null);
+  const [modalWidth, setModalWidth] = useState(0);
+  const [modalHeight, setModalHeight] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      setWindowHeight(window.innerHeight);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (modalRef.current) {
+      setModalWidth(modalRef.current.offsetWidth);
+      setModalHeight(modalRef.current.offsetHeight);
+    }
+  }, [currentGuidance]);
+
   const isLastStep = currentStepIndex === guidanceConfig.length - 1;
-  const isStartingStep = currentStepIndex === 0;
+  const { placement = "side" } = currentGuidance || {};
+
+  const modalPosition = getModalPosition(
+    positions,
+    placement,
+    isRTL,
+    windowWidth,
+    windowHeight,
+    modalWidth,
+    modalHeight,
+  );
+
+  const clippedClassName = classNames(styles.guidElement, {
+    [styles.smallBorderRadius]: isLastStep,
+  });
+
+  const clippedElements = positions.map((position, index) => ({
+    key: `guid-element-${index}`,
+    style: {
+      ["--backdrop-filter-value" as string]: theme.isBase
+        ? "contrast(200%)"
+        : "contrast(0.82)",
+      width: position.width ? `${position.width}px` : `${sectionWidth}px`,
+      height: `${position.height}px`,
+      left: `${position.left}px`,
+      top: `${position.top}px`,
+      right: `${position.right}px`,
+    },
+  }));
+
+  const tipsCircles = guidanceConfig.map((step, index) => (
+    <div
+      className={classNames(styles.tipsCircle, {
+        [styles.isSelected]: index === currentStepIndex,
+      })}
+      key={`tips_circle_${step.id}`}
+    />
+  ));
 
   const closeBackdrop = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -78,183 +209,15 @@ const Guid = ({
     setCurrentStepIndex(currentStepIndex - 1);
   };
 
-  const tipsCircles = guidanceConfig.map((step, index) => (
-    <div
-      className={classNames(styles.tipsCircle, {
-        [styles.isSelected]: index === currentStepIndex,
-      })}
-      key={`tips_circle_${step.id}`}
-    />
-  ));
-
-  const getXDirection = React.useCallback(
-    (screenWidth: number) => {
-      let xDirection = isRTL ? "right" : "left";
-      const hasOverflow = positions.some(
-        (pos) => pos.left + MODAL_WIDTH + GUID_MODAL_MARGIN >= screenWidth,
-      );
-      if (hasOverflow) {
-        xDirection = isRTL ? "right" : "left";
-      }
-      return xDirection;
-    },
-    [isRTL, positions],
-  );
-
-  const calculateTopPosition = React.useCallback(
-    (screenHeight: number) => {
-      const screenWidth = document.documentElement.clientWidth;
-      const defaultTopPosition = positions[0]?.bottom + GUID_MODAL_MARGIN;
-      const isTileView = viewAs === "tile";
-      const isRelevantTip = isStartingStep;
-
-      const isNotEnoughSpace = positions.some((pos) =>
-        isRTL
-          ? pos.left - MODAL_WIDTH < 0
-          : screenWidth <
-            (isStartingStep ? pos.right : pos.left) +
-              MODAL_WIDTH +
-              GUID_MODAL_MARGIN,
-      );
-
-      const isNotEnoughVerticalSpace = positions.some(
-        (pos) =>
-          screenHeight < pos.bottom + GUID_MODAL_MARGIN + MAX_MODAL_HEIGHT,
-      );
-
-      if (isTileView && isRelevantTip) {
-        if (isNotEnoughSpace) {
-          return defaultTopPosition;
-        }
-        if (isStartingStep) {
-          return positions[0]?.top;
-        }
-      }
-
-      if (isNotEnoughVerticalSpace) {
-        return positions[0]?.top - GUID_MODAL_MARGIN - MAX_MODAL_HEIGHT;
-      }
-
-      return defaultTopPosition;
-    },
-    [positions, isStartingStep, isRTL, viewAs],
-  );
-
-  const calculateManualX = React.useCallback(
-    (xDirection: string) => {
-      const screenWidth = document.documentElement.clientWidth;
-      const isTileView = viewAs === "tile";
-      const isRelevantTip = isStartingStep;
-
-      const getPositionX = () => {
-        if (isRTL) {
-          return isStartingStep ? positions[0]?.left : positions[0]?.right;
-        }
-        return positions[0]?.left;
-      };
-
-      const isNotEnoughSpace = isRTL
-        ? getPositionX() - MODAL_WIDTH < 0
-        : screenWidth < getPositionX() + MODAL_WIDTH + GUID_MODAL_MARGIN;
-
-      if (isLastStep && !isDesktop()) {
-        return "15px";
-      }
-
-      if (isTileView && isRelevantTip) {
-        if (isNotEnoughSpace) {
-          return isRTL
-            ? `${positions[0]?.left}px`
-            : `${positions[0]?.right - MODAL_WIDTH}px`;
-        }
-
-        if (isStartingStep) {
-          return isRTL
-            ? `${positions[0]?.left - MODAL_WIDTH - GUID_MODAL_MARGIN}px`
-            : `${positions[0]?.right + GUID_MODAL_MARGIN}px`;
-        }
-
-        return isRTL
-          ? `${positions[0]?.right - MODAL_WIDTH}px`
-          : `${positions[0]?.left}px`;
-      }
-
-      if (xDirection === "left" || isRTL) {
-        return isDesktop() ? "250px" : "60px";
-      }
-
-      return "20px";
-    },
-    [isRTL, isStartingStep, positions, isLastStep, viewAs],
-  );
-
-  const onResize = React.useCallback(() => {
-    const screenHeight = document.documentElement.clientHeight;
-    const screenWidth = document.documentElement.clientWidth;
-
-    const xDirection = getXDirection(screenWidth);
-    const top = calculateTopPosition(screenHeight);
-    const manualX = calculateManualX(xDirection);
-
-    return {
-      ["--manual-x" as string]: manualX,
-      ["--manual-y" as string]: `${top}px`,
-    };
-  }, [getXDirection, calculateTopPosition, calculateManualX]);
-
-  React.useEffect(() => {
-    onResize();
-    window.addEventListener("resize", onResize);
-
-    return () => window.removeEventListener("resize", onResize);
-  }, [onResize]);
-
-  if (isMobile()) {
-    onClose();
-  }
-
-  const directionX =
-    isLastStep && !isDesktop()
-      ? isRTL
-      : (isStartingStep && viewAs === "tile") || !isRTL;
-
-  const dialogClassName = classNames(
-    styles.dialog,
-    "not-selectable",
-    "dialog",
-    {
-      [styles.directionLeft]: directionX,
-      [styles.directionRight]: !directionX,
-    },
-  );
-
+  const dialogClassName = classNames(styles.dialog, "not-selectable", "dialog");
   const contentClassName = classNames(styles.content, "guidance-dialog", {
     [styles.visible]: true,
     [styles.displayTypeModal]: "modal",
     [styles.autoMaxHeight]: true,
   });
-
   const bodyClassName = classNames(modalStyles.body, "modal-body", {
     [styles.displayTypeModal]: "modal",
   });
-
-  const clippedClassName = classNames(styles.guidElement, {
-    [styles.smallBorderRadius]: isLastStep,
-  });
-
-  const clippedElements = positions.map((position, index) => ({
-    key: `guid-element-${index}`,
-    style: {
-      ["--backdrop-filter-value" as string]: theme.isBase
-        ? "contrast(200%)"
-        : "contrast(0.82)",
-      left: `${position.left}px`,
-      top: `${position.top}px`,
-      right: `${position.right}px`,
-      width: position.width ? `${position.width}px` : `${sectionWidth}px`,
-      height: `${position.height}px`,
-    },
-  }));
 
   return (
     <div className="guidance">
@@ -270,10 +233,14 @@ const Guid = ({
         />
       ))}
       <div
+        ref={modalRef}
         id="modal-onMouseDown-close"
         role="dialog"
         className={dialogClassName}
-        style={onResize()}
+        style={{
+          left: modalPosition.left,
+          top: modalPosition.top,
+        }}
       >
         <div id="modal-dialog" className={contentClassName}>
           <AsideHeader
@@ -290,7 +257,6 @@ const Guid = ({
               fontSize="13px"
               lineHeight="20px"
             >
-              {" "}
               {currentGuidance?.description}
             </Text>
           </div>
@@ -302,7 +268,7 @@ const Guid = ({
           >
             <div className="circle-container">{tipsCircles}</div>
             <div className="button-container">
-              {currentStepIndex !== 0 ? (
+              {currentStepIndex !== 0 && (
                 <Button
                   id="form-filling_tips_back"
                   key="TipsBack"
@@ -310,15 +276,14 @@ const Guid = ({
                   size={ButtonSize.extraSmall}
                   onClick={prevTips}
                 />
-              ) : null}
-
+              )}
               <Button
                 id="form-filling_tips_next"
                 key="TipsNext"
                 primary
                 label={isLastStep ? t("Common:GotIt") : t("Common:Next")}
                 size={ButtonSize.extraSmall}
-                onClick={nextTips}
+                onClick={isLastStep ? onClose : nextTips}
               />
             </div>
           </div>

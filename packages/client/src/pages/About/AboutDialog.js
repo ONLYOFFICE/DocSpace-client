@@ -39,6 +39,7 @@ const AboutDialog = (props) => {
     standalone,
     licenseUrl,
     isEnterprise,
+    logoText,
   } = props;
   return (
     <AboutDialogComponent
@@ -50,12 +51,14 @@ const AboutDialog = (props) => {
       standalone={standalone}
       licenseUrl={licenseUrl}
       isEnterprise={isEnterprise}
+      logoText={logoText}
     />
   );
 };
 
 export default inject(({ settingsStore, currentTariffStatusStore }) => {
-  const { companyInfoSettingsData, standalone, licenseUrl } = settingsStore;
+  const { companyInfoSettingsData, standalone, licenseUrl, logoText } =
+    settingsStore;
   const { isEnterprise } = currentTariffStatusStore;
 
   return {
@@ -63,5 +66,6 @@ export default inject(({ settingsStore, currentTariffStatusStore }) => {
     standalone,
     licenseUrl,
     isEnterprise,
+    logoText,
   };
 })(observer(AboutDialog));

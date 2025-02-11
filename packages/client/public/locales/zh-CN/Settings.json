@@ -288,7 +288,6 @@
   "UpdatingStatistics": "更新统计信息可能需要很长时间",
   "UploadBackupData": "从以下所需的服务中上传备份副本，开始迁移。",
   "UploadToServer": "上传到服务器",
-  "UseAsLogoButton": "作为Logo",
   "UseDigits": "必须包含数字",
   "UsedStorage": "已使用：{{size}}",
   "UseHttp": "使用Http",

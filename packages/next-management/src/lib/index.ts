@@ -83,16 +83,16 @@ export const isValidDate = (date: Date) => {
   return moment(date).tz(window.timezone)?.year() !== 9999;
 };
 
-export const getIsLicenseDateExpired = (dueDate: Date) => {
+export const getIsLicenseDateExpired = (dueDate: string | Date) => {
   if (!isValidDate(dueDate)) return true;
   return moment() > moment(dueDate).tz(window.timezone);
 };
 
-export const getPaymentDate = (dueDate: Date) => {
+export const getPaymentDate = (dueDate: string | Date) => {
   return moment(dueDate).tz(window.timezone)?.format("LL");
 };
 
-export const getDaysLeft = (dueDate: Date) => {
+export const getDaysLeft = (dueDate: string | Date) => {
   return moment(dueDate).startOf("day").diff(moment().startOf("day"), "days");
 };
 

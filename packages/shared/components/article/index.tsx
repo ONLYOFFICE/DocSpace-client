@@ -250,7 +250,7 @@ const Article = ({
         currentDeviceType !== DeviceType.mobile ? (
           <div
             className={styles.articleMainButton}
-            data-show-text={showText ? "true" : "false"}
+            data-mobile-article={isMobileArticle ? "true" : "false"}
           >
             {articleMainButtonContent.props.children}
           </div>
@@ -330,7 +330,7 @@ const Article = ({
       {articleMainButtonContent && currentDeviceType === DeviceType.mobile ? (
         <div
           className={styles.articleMainButton}
-          data-show-text={showText ? "true" : "false"}
+          data-mobile-article={isMobileArticle ? "true" : "false"}
         >
           {articleMainButtonContent.props.children}
         </div>

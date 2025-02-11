@@ -907,7 +907,7 @@ class UploadDataStore {
       filesWithoutConversion: removeDuplicate([...this.files, ...newFiles]),
       conversionFiles: removeDuplicate(this.tempConversionFiles),
       files: removeDuplicate(allFiles),
-      filesSize,
+      filesSize: filesSize + this.filesSize,
       uploadedFiles: this.uploadedFiles,
       percent: this.percent,
       uploaded: false,

@@ -84,9 +84,15 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
 
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
   const [isHideTooltip, setIsHideTooltip] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const operationsLength =
+    primaryActiveOperations.length + secondaryActiveOperations.length;
+  const isSeveralOperations = operationsLength > 1;
+  const isSecondaryActive = secondaryActiveOperations.length > 0;
 
   const clearTimers = () => {
     if (hideTimerRef.current) {
@@ -114,22 +120,64 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     [clearSecondaryProgressData, clearPrimaryProgressData],
   );
 
-  const operationsLength =
-    primaryActiveOperations.length + secondaryActiveOperations.length;
-  const isSeveralOperations = operationsLength > 1;
-  const isSecondaryActive = secondaryActiveOperations.length > 0;
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const onOpenDropdown = () => {
+    setIsOpenDropdown(!isOpenDropdown);
+  };
 
   const handleTooltipOpen = () => {
     clearTimers();
+    setIsHovered(false);
 
     hideTimerRef.current = setTimeout(() => {
       setIsHideTooltip(true);
+
       resetTimerRef.current = setTimeout(() => {
         setIsHideTooltip(false);
       }, 100);
-    }, 4000);
+    }, 3500);
   };
 
+  const handleFloatingButtonClick = () => {
+    if (isMobile && !primaryActiveOperations.length) {
+      setIsHovered(true);
+    }
+
+    if (isSeveralOperations) {
+      onOpenDropdown();
+
+      return;
+    }
+
+    if (primaryActiveOperations.length) {
+      setIsHideTooltip(true);
+
+      onOpenPanel?.();
+      clearTimers();
+
+      resetTimerRef.current = setTimeout(() => {
+        setIsHideTooltip(false);
+      }, 100);
+    }
+  };
+
+  const handleOperationClick = () => {
+    setIsHideTooltip(true);
+    clearTimers();
+
+    resetTimerRef.current = setTimeout(() => {
+      setIsHideTooltip(false);
+    }, 100);
+
+    onOpenPanel?.();
+  };
   useLayoutEffect(() => {
     const container = containerRef.current;
 
@@ -157,10 +205,6 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   useLayoutEffect(() => {
     if (isOpenDropdown && !isSeveralOperations) setIsOpenDropdown(false);
   }, [isOpenDropdown, isSeveralOperations]);
-
-  const onOpenDropdown = () => {
-    setIsOpenDropdown(!isOpenDropdown);
-  };
 
   const getIcons = () => {
     if (isSeveralOperations) {
@@ -242,13 +286,18 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         ref={containerRef}
         className={classNames(styles.progressBarContainer, {
           [styles.autoHide]:
-            !isOpenDropdown && operationsCompleted && !needErrorChecking,
+            !isOpenDropdown &&
+            operationsCompleted &&
+            !needErrorChecking &&
+            !isHovered,
           [styles.laterHide]: isLaterHide(),
           [styles.immidiateHide]:
             !isSeveralOperations && operationsCompleted && disableOpenPanel,
           [styles.mainButtonVisible]: mainButtonVisible,
         })}
         style={{ zIndex: isOpenDropdown ? "211" : "201" }}
+        onMouseEnter={!isMobile ? handleMouseEnter : undefined}
+        onMouseLeave={!isMobile ? handleMouseLeave : undefined}
       >
         <HelpButton
           className="layout-progress-bar"
@@ -256,17 +305,13 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           tooltipContent={getTooltipLabel()}
           openOnClick={isMobile}
           {...(isMobile && { afterShow: handleTooltipOpen })}
-          {...((isHideTooltip ||
-            (!isSeveralOperations && !isSecondaryActive)) &&
-            isMobile && { isOpen: false })}
+          {...(isHideTooltip && { isOpen: false })}
         >
           <FloatingButton
             icon={getIcons()}
             alert={operationsAlert}
             completed={operationsCompleted}
-            {...(isSeveralOperations && { onClick: onOpenDropdown })}
-            {...(!isSeveralOperations &&
-              primaryActiveOperations.length && { onClick: onOpenPanel })}
+            onClick={handleFloatingButtonClick}
             {...(!isSeveralOperations &&
               !isMobile && {
                 showCancelButton,
@@ -298,7 +343,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
                 clearPrimaryProgressData?.(operationName)
               }
               onCancel={onCancelOperation}
-              {...(!disableOpenPanel && { onOpenPanel })}
+              {...(!disableOpenPanel && { onOpenPanel: handleOperationClick })}
               withoutStatus={withoutStatus}
             />
           </DropDown>

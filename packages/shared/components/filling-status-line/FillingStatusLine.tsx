@@ -24,18 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { ReactSVG } from "react-svg";
-
 import StatusDoneReactSvgUrl from "PUBLIC_DIR/images/done.react.svg?url";
 import StatusInterruptedSvgUrl from "PUBLIC_DIR/images/interrupted.react.svg?url";
+
+import React from "react";
+import { ReactSVG } from "react-svg";
+import classNames from "classnames";
 
 import { Text } from "../text";
 import { Box } from "../box";
 
 import { FillingStatusAccordion } from "./FillingStatusLine.accordion";
 import { FillingStatusLineProps } from "./FillingStatusLine.types";
-import { FillingStatusContainer } from "./FillingStatusLine.styled";
+
+import styles from "./FillingStatusLine.module.scss";
 
 import { mockData } from "./mockData";
 
@@ -46,10 +48,9 @@ const FillingStatusLine = ({
   statusInterrupted = false,
 }: FillingStatusLineProps) => {
   return (
-    <FillingStatusContainer
+    <div
+      className={styles.fillingStatusContainer}
       data-testid="filling-status-line"
-      isDone={statusDone}
-      isInterrupted={statusInterrupted}
     >
       {mockData.map((data) => {
         return (
@@ -74,31 +75,38 @@ const FillingStatusLine = ({
         <Box displayProp="flex" alignItems="center" marginProp="15px 0 0">
           <ReactSVG
             src={StatusInterruptedSvgUrl}
-            className="status-interrupted-icon"
+            className={styles.statusInterruptedIcon}
           />
           <Text
             fontSize="14px"
             lineHeight="16px"
             fontWeight="bold"
-            className="status-interrupted-text"
+            className={styles.statusInterruptedText}
           >
             {statusInterruptedText}
           </Text>
         </Box>
       ) : (
         <Box displayProp="flex" alignItems="center" marginProp="15px 0 0">
-          <ReactSVG src={StatusDoneReactSvgUrl} className="status-done-icon" />
+          <ReactSVG
+            src={StatusDoneReactSvgUrl}
+            className={classNames(styles.statusDoneIcon, {
+              [styles.isDone]: statusDone,
+            })}
+          />
           <Text
             fontSize="14px"
             lineHeight="16px"
             fontWeight="bold"
-            className="status-done-text"
+            className={classNames(styles.statusDoneText, {
+              [styles.isDone]: statusDone,
+            })}
           >
             {statusDoneText}
           </Text>
         </Box>
       )}
-    </FillingStatusContainer>
+    </div>
   );
 };
 

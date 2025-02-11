@@ -52,13 +52,14 @@ import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 type GenerateDeveloperTokenDialogProps = {
   client?: IClientProps;
+  jwtToken?: string;
 
   setRevokeDeveloperTokenDialogVisible?: (value: boolean) => void;
 };
 
 const GenerateDeveloperTokenDialog = ({
   client,
-
+  jwtToken,
   setRevokeDeveloperTokenDialogVisible,
 }: GenerateDeveloperTokenDialogProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
@@ -79,7 +80,12 @@ const GenerateDeveloperTokenDialog = ({
 
       setRequestRunning(true);
 
-      await api.oauth.revokeDeveloperToken(token, clientId, clientSecret);
+      await api.oauth.revokeDeveloperToken(
+        token,
+        clientId,
+        clientSecret,
+        jwtToken!,
+      );
 
       setRequestRunning(false);
 
@@ -144,7 +150,6 @@ const GenerateDeveloperTokenDialog = ({
       onClose={onClose}
       displayType={ModalDialogType.modal}
       autoMaxHeight
-      scale
     >
       <ModalDialog.Header>{t("OAuth:RevokeDialogHeader")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -203,7 +208,7 @@ export default inject(
     oauthStore: OAuthStore;
     userStore: UserStore;
   }) => {
-    const { setRevokeDeveloperTokenDialogVisible, bufferSelection } =
+    const { setRevokeDeveloperTokenDialogVisible, jwtToken, bufferSelection } =
       oauthStore;
 
     const { user } = userStore;
@@ -211,7 +216,7 @@ export default inject(
     return {
       setRevokeDeveloperTokenDialogVisible,
       client: bufferSelection,
-
+      jwtToken,
       email: user?.email,
     };
   },

@@ -47,6 +47,12 @@ class VersionHistoryStore {
 
   isEditing = false;
 
+  deleteVersionDialogVisible = false;
+
+  versionSelectedForDeletion = null;
+
+  versionDeletionProcess = false;
+
   constructor(filesStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
@@ -103,6 +109,14 @@ class VersionHistoryStore {
     this.versions = versions;
   };
 
+  setVersionSelectedForDeletion = (version) => {
+    this.versionSelectedForDeletion = version;
+  };
+
+  setVersionDeletionProcess = (process) => {
+    this.versionDeletionProcess = process;
+  };
+
   // setFileVersions
   setVerHistoryFileVersions = (versions) => {
     const file = this.filesStore.files.find((item) => item.id == this.fileId);
@@ -131,10 +145,12 @@ class VersionHistoryStore {
     this.versions = versions;
   };
 
-  fetchFileVersions = (fileId, access, requestToken) => {
-    if (this.fileId !== fileId || !this.versions) {
-      this.setVerHistoryFileId(fileId);
-      this.setVerHistoryFileSecurity(access);
+  fetchFileVersions = (fileId, access, requestToken, update) => {
+    if (this.fileId !== fileId || !this.versions || update) {
+      if (!update) {
+        this.setVerHistoryFileId(fileId);
+        this.setVerHistoryFileSecurity(access);
+      }
 
       return api.files
         .getFileVersionInfo(fileId, requestToken)
@@ -184,6 +200,10 @@ class VersionHistoryStore {
 
   setShowProgressBar = (show) => {
     this.showProgressBar = show;
+  };
+
+  onSetDeleteVersionDialogVisible = (deleteVersionDialogVisible) => {
+    this.deleteVersionDialogVisible = deleteVersionDialogVisible;
   };
 }
 

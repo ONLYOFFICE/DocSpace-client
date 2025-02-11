@@ -24,63 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { DeviceType } from "@docspace/shared/enums";
+@import "../../styles/variables/_colors.scss";
+@import "../../styles/mixins.scss";
+@import "../../styles/variables/devices.scss";
 
-import OAuthStore from "SRC_DIR/store/OAuthStore";
-
-export interface InputProps {
-  value: string;
-  name: string;
-  placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-
-  isReadOnly?: boolean;
-  isSecret?: boolean;
-  withCopy?: boolean;
-
-  withButton?: boolean;
-  buttonLabel?: string;
-  onClickButton?: () => void;
-
-  multiplyInput?: boolean;
+.fillingStatusContainer {
+  width: 100%;
+  max-width: 425px;
+  padding: 10px;
 }
 
-export interface CheckboxProps {
-  isChecked: boolean;
-  onChange: () => void;
+.statusDoneText {
+  color: #{$gray};
 
-  label: string;
-  description: string;
+  &.isDone {
+    color: #{$light-blue-main};
+  }
 }
 
-export interface BlockProps {
-  children: React.ReactNode;
+.statusDoneIcon {
+  margin-inline-end: 10px;
+  circle,
+  path {
+    stroke: #{$gray};
+  }
+
+  &.isDone {
+    circle,
+    path {
+      stroke: #{$light-blue-main};
+    }
+  }
 }
 
-export interface ClientFormProps {
-  id?: string;
-  client?: IClientProps;
-
-  scopeList?: TScope[];
-
-  fetchScopes?: () => Promise<void>;
-
-  resetDialogVisible?: boolean;
-  setResetDialogVisible?: (value: boolean) => void;
-
-  currentDeviceType?: DeviceType;
-  maxImageUploadSize?: number;
-
-  setClientSecretProps?: (value: string) => void;
-  clientSecretProps?: string;
-
-  jwtToken?: string;
-  setJwtToken?: OAuthStore["setJwtToken"];
+.statusInterruptedText {
+  color: #{$main-red};
 }
 
-export interface ClientStore {
-  settingsStore: SettingsStore;
-  oauthStore: OAuthStore;
+.statusInterruptedIcon {
+  margin-inline-end: 10px;
+  circle,
+  path {
+    stroke: #{$main-red};
+  }
 }

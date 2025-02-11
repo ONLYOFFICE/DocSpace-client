@@ -36,6 +36,7 @@ import { NoUserSelect } from "@docspace/shared/utils";
 import { Button } from "@docspace/shared/components/button";
 import { ProgressBar } from "@docspace/shared/components/progress-bar";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { toastr } from "@docspace/shared/components/toast";
 
 import CloseSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
@@ -252,7 +253,7 @@ class FileRow extends Component {
       password,
       index,
     };
-
+    toastr.clear();
     this.onTextClick();
     removeFileFromList(fileId);
     convertFile(newItem);

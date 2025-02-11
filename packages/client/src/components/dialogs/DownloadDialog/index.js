@@ -36,6 +36,7 @@ import {
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { toastr } from "@docspace/shared/components/toast";
 
 import DownloadContent from "./DownloadContent";
 import PasswordContent from "./PasswordContent";
@@ -130,6 +131,7 @@ class DownloadDialogComponent extends React.Component {
     const { downloadItems, isAllPasswordFilesSorted } = this.props;
 
     if (downloadItems.length > 0 && isAllPasswordFilesSorted) {
+      toastr.clear();
       this.onDownloadFunction();
     }
   };

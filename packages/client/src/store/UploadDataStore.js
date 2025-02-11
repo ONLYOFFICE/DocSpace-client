@@ -400,7 +400,7 @@ class UploadDataStore {
           this.uploadedFilesHistory.push(file);
         }
 
-        this.startConversion(t, isOpen, true);
+        this.startConversion(t, isOpen, true, secondConvertingWithPassword);
       } else {
         this.filesToConversion.push(file);
         if (!secondConvertingWithPassword && !conversionPositionIndex)
@@ -462,7 +462,12 @@ class UploadDataStore {
     return (fileIndex / length) * 100;
   };
 
-  startConversion = async (t, isOpen = false, fromFiles = false) => {
+  startConversion = async (
+    t,
+    isOpen = false,
+    fromFiles = false,
+    secondConvertingWithPassword = false,
+  ) => {
     const { isRecentFolder, isFavoritesFolder, isShareFolder } =
       this.treeFoldersStore;
 
@@ -673,7 +678,12 @@ class UploadDataStore {
 
     if (this.uploaded || allFilesIsUploaded) {
       this.setConversionPercent(100, false, isSingleConversion);
-      this.finishUploadFiles(t, false, isSingleConversion);
+      this.finishUploadFiles(
+        t,
+        false,
+        isSingleConversion,
+        secondConvertingWithPassword,
+      );
     } else {
       runInAction(() => {
         this.converted = true;
@@ -1529,7 +1539,12 @@ class UploadDataStore {
       });
   };
 
-  finishUploadFiles = (t, waitConversion, isSingleConversion) => {
+  finishUploadFiles = (
+    t,
+    waitConversion,
+    isSingleConversion,
+    secondConvertingWithPassword,
+  ) => {
     const filesWithErrors = this.files.filter((f) => f.error);
 
     const totalErrorsCount = filesWithErrors.length;
@@ -1560,7 +1575,9 @@ class UploadDataStore {
               60000,
               true,
             )
-          : toastr.error(f.error),
+          : secondConvertingWithPassword
+            ? null
+            : toastr.error(f.error),
       );
 
       // for empty file

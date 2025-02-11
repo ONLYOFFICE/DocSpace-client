@@ -45,6 +45,8 @@ const StyledBody = styled.div`
 `;
 
 const StyledVersionList = styled.div.attrs(injectDefaultTheme)`
+  visibility: ${(props) => (props.showRows ? "visible" : "hidden")};
+
   .row_context-menu-wrapper {
     .expandButton {
       ${(props) =>

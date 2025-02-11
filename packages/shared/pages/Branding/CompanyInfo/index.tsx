@@ -52,6 +52,7 @@ export const CompanyInfo = ({
   standalone,
   licenseUrl,
   isEnterprise,
+  logoText,
 }: ICompanyInfo) => {
   const { t } = useTranslation("Common");
   const [isAboutDialogVisible, setIsAboutDialogVisible] = useState(false);
@@ -107,6 +108,7 @@ export const CompanyInfo = ({
         standalone={standalone}
         licenseUrl={licenseUrl}
         isEnterprise={isEnterprise}
+        logoText={logoText}
       />
       <StyledCompanyInfo isSettingPaid={isSettingPaid}>
         <div className="section-description settings_unavailable">
@@ -118,17 +120,25 @@ export const CompanyInfo = ({
           {t("CompanyInfoSettings")}
         </div>
         <div className="description settings_unavailable">
-          <Trans t={t} i18nKey="CompanyInfoSettingsDescription" ns="Common">
-            &quot;This information will be displayed in the
-            {isSettingPaid ? (
-              <Link className="link" onClick={showExample} noHover>
-                {link}
-              </Link>
-            ) : (
-              <span className="link">{link}</span>
-            )}
-            window.&quot;
-          </Trans>
+          {isSettingPaid ? (
+            <Trans
+              t={t}
+              i18nKey="CompanyInfoSettingsDescription"
+              ns="Common"
+              values={{ link }}
+              components={{
+                1: <Link className="link" onClick={showExample} noHover />,
+              }}
+            />
+          ) : (
+            <Trans
+              t={t}
+              i18nKey="CompanyInfoSettingsDescription"
+              ns="Common"
+              values={{ link }}
+              components={{ 1: <span className="link" /> }}
+            />
+          )}
         </div>
         <div className="settings-block">
           <FieldContainer

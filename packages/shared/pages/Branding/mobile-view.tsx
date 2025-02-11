@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { MouseEvent } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
@@ -46,7 +46,7 @@ export const MobileView = ({
   displayAbout: boolean;
   displayAdditional: boolean;
   baseUrl: string;
-  onClickLink: (e: Event) => void;
+  onClickLink: (e: MouseEvent<Element>) => void;
 }) => {
   const { t } = useTranslation("Common");
 

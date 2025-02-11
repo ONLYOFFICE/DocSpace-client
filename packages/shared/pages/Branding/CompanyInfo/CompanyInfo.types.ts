@@ -43,6 +43,7 @@ export interface ICompanyInfo {
   standalone: boolean;
   licenseUrl: string;
   isEnterprise: boolean;
+  logoText: string;
 }
 
 export interface ICompanySettings {

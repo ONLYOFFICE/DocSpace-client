@@ -381,10 +381,12 @@ class CreateEditRoomStore {
       roomId: item.id,
       tags: tagsToAddList,
       public: isAvailable,
+      copylogo: true,
     };
 
     if (isDeleteLogo) {
       roomData.logo = null;
+      roomData.copylogo = false;
     }
 
     if (!isDeleteLogo && typeof icon.uploadedFile !== "string") {

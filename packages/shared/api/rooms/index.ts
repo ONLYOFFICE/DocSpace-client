@@ -553,12 +553,14 @@ export function createTemplate({
   share,
   tags,
   isPublic,
+  copylogo,
 }: {
   roomId: number;
   title: string;
   logo: TRoom["logo"];
   share;
   tags: TRoom["tags"];
+  tags: boolean;
 }) {
   const data = {
     roomId,
@@ -567,6 +569,7 @@ export function createTemplate({
     share,
     tags,
     public: isPublic,
+    copylogo,
   };
   const options = {
     method: "post",

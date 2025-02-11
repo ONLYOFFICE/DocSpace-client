@@ -38,6 +38,7 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveSSRNavigation";
 import { AdditionalResources } from "@docspace/shared/pages/Branding/AdditionalResources";
+import type { TAdditionalResources } from "@docspace/shared/api/settings/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { getIsSettingsPaid, getIsCustomizationAvailable } from "@/lib";
@@ -46,6 +47,10 @@ export const AdditionalResourcesPage = ({
   portals,
   quota,
   additionalResourcesData,
+}: {
+  portals: unknown;
+  quota: unknown;
+  additionalResourcesData: TAdditionalResources;
 }) => {
   const { t } = useTranslation("Common");
   const { currentDeviceType } = useDeviceType();
@@ -81,7 +86,7 @@ export const AdditionalResourcesPage = ({
         setAdditionalRes(additional);
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       } catch (error) {
-        toastr.error(error);
+        toastr.error(error!);
       }
     });
   };
@@ -94,7 +99,7 @@ export const AdditionalResourcesPage = ({
         setAdditionalRes(additional);
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       } catch (error) {
-        toastr.error(error);
+        toastr.error(error!);
       }
     });
   };

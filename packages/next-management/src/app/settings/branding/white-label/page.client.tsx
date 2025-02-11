@@ -41,6 +41,10 @@ import {
 import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveSSRNavigation";
 import { toastr } from "@docspace/shared/components/toast";
 import { WhiteLabel } from "@docspace/shared/pages/Branding/WhiteLabel";
+import {
+  ILogo,
+  IWhiteLabelData,
+} from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import {
@@ -57,6 +61,14 @@ export const WhiteLabelPage = ({
   standalone,
   portals,
   quota,
+}: {
+  whiteLabelLogos: ILogo[];
+  whiteLabelText: string;
+  showAbout: boolean;
+  isDefaultWhiteLabel: boolean;
+  standalone: boolean;
+  portals: unknown;
+  quota: unknown;
 }) => {
   const { t } = useTranslation("Common");
   const { currentDeviceType } = useDeviceType();
@@ -84,11 +96,11 @@ export const WhiteLabelPage = ({
     pathname: pathname,
   });
 
-  const onSave = async (data) => {
+  const onSave = async (data: IWhiteLabelData) => {
     startTransition(async () => {
       try {
         await setWhiteLabelSettings(data, true);
-        const text = await getLogoText(true);
+        const text = (await getLogoText(true)) as string;
         const logos = await getLogoUrls(null, true);
         const isDefault = await getIsDefaultWhiteLabelRequest(true);
 
@@ -99,7 +111,7 @@ export const WhiteLabelPage = ({
         setIsDefault(getIsDefaultWhiteLabel(isDefault));
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       } catch (error) {
-        toastr.error(error);
+        toastr.error(error!);
       }
     });
   };
@@ -107,7 +119,7 @@ export const WhiteLabelPage = ({
   const onRestoreDefault = async () => {
     try {
       await restoreWhiteLabelSettings(true);
-      const text = await getLogoText(true);
+      const text = (await getLogoText(true)) as string;
       const logos = await getLogoUrls(null, true);
       const isDefault = await getIsDefaultWhiteLabelRequest(true);
 
@@ -118,7 +130,7 @@ export const WhiteLabelPage = ({
       setIsDefault(getIsDefaultWhiteLabel(isDefault));
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
-      toastr.error(error);
+      toastr.error(error!);
     }
   };
 

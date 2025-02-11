@@ -26,11 +26,15 @@
 
 "use client";
 
-import React from "react";
+import React, { MouseEvent } from "react";
 import { useRouter } from "next/navigation";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { MobileView } from "@docspace/shared/pages/Branding/mobile-view";
+import type { ILogo } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";
+import type { ICompanySettings } from "@docspace/shared/pages/Branding/CompanyInfo/CompanyInfo.types";
+import type { IBuildInfo } from "@docspace/shared/components/about-dialog/About.types";
+import type { TAdditionalResources } from "@docspace/shared/api/settings/types";
 
 import { getIsCustomizationAvailable, getIsSettingsPaid } from "@/lib";
 import useDeviceType from "@/hooks/useDeviceType";
@@ -57,6 +61,20 @@ const BrandingPage = ({
   licenseUrl,
   isEnterprise,
   logoText,
+}: {
+  whiteLabelLogos: ILogo[];
+  whiteLabelText: string;
+  showAbout: boolean;
+  isDefaultWhiteLabel: boolean;
+  standalone: boolean;
+  portals: unknown;
+  quota: unknown;
+  additionalResources: TAdditionalResources;
+  companyInfo: ICompanySettings;
+  buildInfo: IBuildInfo;
+  licenseUrl: string;
+  isEnterprise: boolean;
+  logoText: string;
 }) => {
   const router = useRouter();
   const { currentDeviceType } = useDeviceType();
@@ -65,7 +83,7 @@ const BrandingPage = ({
   const isCustomizationAvailable = getIsCustomizationAvailable(quota);
   const isSettingPaid = getIsSettingsPaid(portals, isCustomizationAvailable);
 
-  const onClickLink = (e: Event) => {
+  const onClickLink = (e: MouseEvent<Element>) => {
     const target = e.target as HTMLAnchorElement;
     e.preventDefault();
     router.push(target.pathname);

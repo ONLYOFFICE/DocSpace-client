@@ -38,6 +38,8 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveSSRNavigation";
 import { CompanyInfo } from "@docspace/shared/pages/Branding/CompanyInfo";
+import type { ICompanySettings } from "@docspace/shared/pages/Branding/CompanyInfo/CompanyInfo.types";
+import type { IBuildInfo } from "@docspace/shared/components/about-dialog/About.types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { getIsCustomizationAvailable, getIsSettingsPaid } from "@/lib";
@@ -51,6 +53,15 @@ export const CompanyInfoPage = ({
   buildInfo,
   isEnterprise,
   logoText,
+}: {
+  portals: unknown;
+  quota: unknown;
+  companyInfoSettingsData: ICompanySettings;
+  standalone: boolean;
+  licenseUrl: string;
+  buildInfo: IBuildInfo;
+  isEnterprise: boolean;
+  logoText: string;
 }) => {
   const { t } = useTranslation("Common");
   const { currentDeviceType } = useDeviceType();
@@ -85,7 +96,7 @@ export const CompanyInfoPage = ({
         setCompanyData(companyData);
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       } catch (error) {
-        toastr.error(error);
+        toastr.error(error!);
       }
     });
   };
@@ -98,7 +109,7 @@ export const CompanyInfoPage = ({
         setCompanyData(companyData);
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       } catch (error) {
-        toastr.error(error);
+        toastr.error(error!);
       }
     });
   };

@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { redirect } from "next/navigation";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+
 import {
   getSettings,
   getQuota,
@@ -53,6 +56,9 @@ async function Page() {
     getWhiteLabelIsDefault(),
   ]);
 
+  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  if (!settings) redirect(`${getBaseUrl()}/login`);
+
   const { displayAbout, standalone } = settings;
   const showAbout = standalone && displayAbout;
 
@@ -61,7 +67,7 @@ async function Page() {
   return (
     <WhiteLabelPage
       whiteLabelLogos={whiteLabelLogos}
-      logoText={whiteLabelText}
+      whiteLabelText={whiteLabelText}
       showAbout={showAbout}
       isDefaultWhiteLabel={isDefaultWhiteLabel}
       standalone={standalone}

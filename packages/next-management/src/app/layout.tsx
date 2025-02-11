@@ -64,7 +64,11 @@ export default async function RootLayout({
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
-  if ((user && !user.isAdmin) || (settings && settings.limitedAccessSpace))
+  if (
+    (user && !user.isAdmin) ||
+    (settings && settings.limitedAccessSpace) ||
+    !portalTariff
+  )
     redirect(`${getBaseUrl()}/error/403`);
 
   const cookieStore = cookies();

@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { redirect } from "next/navigation";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+
 import {
   getSettings,
   getVersionBuild,
@@ -65,6 +68,9 @@ async function Page() {
     getCompanyInfo(),
   ]);
 
+  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  if (!settings || !portalTariff) redirect(`${getBaseUrl()}/login`);
+
   const { displayAbout, standalone, licenseUrl, logoText } = settings;
   const { enterprise } = portalTariff;
 
@@ -83,7 +89,7 @@ async function Page() {
       quota={quota}
       additionalResources={additionalResources}
       companyInfo={companyInfo}
-      buildInfo={buildInfo}
+      buildInfo={buildInfo!}
       licenseUrl={licenseUrl}
       isEnterprise={enterprise}
       logoText={logoText}

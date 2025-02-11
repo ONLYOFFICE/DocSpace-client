@@ -28,6 +28,8 @@
 
 import { Provider } from "mobx-react";
 
+import type { TViewAs } from "@docspace/shared/types";
+
 import store from "../../_store";
 import { NavigationStoreContextProvider } from "../../_store/NavigationStore";
 import { SettingsStoreContextProvider } from "../../_store/SettingsStore";
@@ -37,7 +39,7 @@ import { FilesListStoreContextProvider } from "../../_store/FilesListStore";
 
 type LayoutProps = {
   children: React.ReactNode;
-  initSettingsStoreData: { viewAs: string };
+  initSettingsStoreData: { viewAs: TViewAs };
 };
 
 export const Layout = ({ children, initSettingsStoreData }: LayoutProps) => {

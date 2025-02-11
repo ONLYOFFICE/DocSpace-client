@@ -313,6 +313,7 @@ module.exports = (env, argv) => {
             },
           },
           extractComments: false,
+          parallel: false,
         }),
       ],
     };

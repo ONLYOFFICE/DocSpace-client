@@ -78,6 +78,7 @@ const nextConfig = {
               },
             },
             extractComments: false,
+            parallel: false,
           }),
         ],
       };

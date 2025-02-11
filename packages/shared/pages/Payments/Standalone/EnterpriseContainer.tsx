@@ -48,6 +48,7 @@ export const EnterpriseContainer = ({
   trialDaysLeft,
   paymentDate,
   isEnterprise,
+  logoText,
 }: Partial<IPaymentsProps>) => {
   const { t } = useTranslation("Common");
 
@@ -67,6 +68,7 @@ export const EnterpriseContainer = ({
         trialDaysLeft={trialDaysLeft}
         paymentDate={paymentDate}
         isDeveloper={isDeveloper}
+        logoText={logoText}
       />
 
       {isLicenseDateExpired ? (

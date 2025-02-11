@@ -27,7 +27,7 @@
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import RestoreAuthReactSvgUrl from "PUBLIC_DIR/images/restore.auth.react.svg?url";
 import { useNavigate } from "react-router-dom";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import { useState, useEffect } from "react";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";

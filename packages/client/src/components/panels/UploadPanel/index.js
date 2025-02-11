@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
+import ClearReactSvgUrl from "PUBLIC_DIR/images/icons/17/clear.react.svg?url";
 import ButtonCancelReactSvgUrl from "PUBLIC_DIR/images/button.cancel.react.svg?url";
 
 import { OPERATIONS_NAME } from "@docspace/shared/constants";

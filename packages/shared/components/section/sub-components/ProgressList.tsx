@@ -29,15 +29,15 @@ import { observer } from "mobx-react";
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import DuplicateIconUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import OtherOperationsIconUrl from "PUBLIC_DIR/images/icons/16/other-operations.react.svg?url";
 import ListIconUrl from "PUBLIC_DIR/images/icons/16/mark-as-read.react.svg?url";
 import DeletePermanentlyIconUrl from "PUBLIC_DIR/images/icons/16/delete-permanently.react.svg?url";
 import ExportIndexIconUrl from "PUBLIC_DIR/images/icons/16/export-index.react.svg?url";
-import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
+import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import UploadIconUrl from "PUBLIC_DIR/images/icons/16/upload.react.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import { ProgressBar } from "./ProgressBar";
 import { Operation } from "../Section.types";

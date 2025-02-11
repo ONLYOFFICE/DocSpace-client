@@ -28,7 +28,7 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import DuplicateIconUrl from "PUBLIC_DIR/images/duplicate.react.svg?url";
+import DuplicateIconUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import OtherOperationsIconUrl from "PUBLIC_DIR/images/icons/16/other-operations.react.svg?url";

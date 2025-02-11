@@ -275,6 +275,8 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     return false;
   };
 
+  const checkError = needErrorChecking && !disableOpenPanel;
+
   return (
     <>
       <Backdrop
@@ -286,10 +288,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         ref={containerRef}
         className={classNames(styles.progressBarContainer, {
           [styles.autoHide]:
-            !isOpenDropdown &&
-            operationsCompleted &&
-            !needErrorChecking &&
-            !isHovered,
+            !isOpenDropdown && operationsCompleted && !checkError && !isHovered,
           [styles.laterHide]: isLaterHide(),
           [styles.immidiateHide]:
             !isSeveralOperations && operationsCompleted && disableOpenPanel,

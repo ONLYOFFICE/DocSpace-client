@@ -1383,6 +1383,10 @@ class UploadDataStore {
       return Promise.resolve();
     }
 
+    if (item.error) {
+      return Promise.resolve();
+    }
+
     const { chunkUploadSize } = this.filesSettingsStore;
 
     const { file, toFolderId /* , action */ } = item;
@@ -1500,6 +1504,7 @@ class UploadDataStore {
               f.action !== "uploaded" &&
               f.action !== "convert" &&
               f.action !== "converted" &&
+              !f.error &&
               !f.cancel,
           ) === -1;
 

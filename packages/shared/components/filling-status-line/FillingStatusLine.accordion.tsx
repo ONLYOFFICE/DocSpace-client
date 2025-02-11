@@ -24,17 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
+
 import React, { useState } from "react";
 import { ReactSVG } from "react-svg";
-
-import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow.react.svg?url";
+import classNames from "classnames";
 
 import { Text } from "../text";
 import { Box } from "../box";
 import { Avatar, AvatarRole, AvatarSize } from "../avatar";
 
-import { AccordionItem } from "./FillingStatusLine.styled";
 import { FillingStatusLineAccordionProps } from "./FillingStatusLine.types";
+
+import styles from "./FillingStatusLine.accordion.module.scss";
 
 const FillingStatusAccordion = ({
   avatar,
@@ -57,37 +59,33 @@ const FillingStatusAccordion = ({
   };
 
   return (
-    <AccordionItem
-      isOpen={isOpen}
-      isDone={isDone}
-      isInterrupted={isInterrupted}
-    >
-      <div className="accordion-item-info" onClick={onClickHandler}>
+    <div className={styles.accordionItem}>
+      <div className={styles.accordionItemInfo} onClick={onClickHandler}>
         <Box displayProp="flex" alignItems="center">
-          <Avatar
-            className="user-avatar"
-            size={AvatarSize.min}
-            role={AvatarRole.user}
-            source={avatar || ""}
-            userName={displayName}
-          />
-
+          <div
+            className={classNames(styles.userAvatar, {
+              [styles.isDone]: isDone,
+              [styles.isInterrupted]: isInterrupted,
+            })}
+          >
+            <Avatar
+              size={AvatarSize.min}
+              role={AvatarRole.user}
+              source={avatar || ""}
+              userName={displayName}
+            />
+          </div>
           <Box
             displayProp="flex"
             flexDirection="column"
             marginProp="0 0 0 10px"
           >
-            <Text
-              className="accordion-displayname"
-              fontSize="14px"
-              lineHeight="16px"
-              fontWeight="bold"
-            >
+            <Text fontSize="14px" lineHeight="16px" fontWeight="bold">
               {displayName}
             </Text>
             <Text
               as="span"
-              className="accordion-role"
+              className={styles.accordionRole}
               fontSize="12px"
               lineHeight="16px"
             >
@@ -95,41 +93,79 @@ const FillingStatusAccordion = ({
             </Text>
           </Box>
         </Box>
-        <ReactSVG src={ArrowReactSvgUrl} className="arrow-icon" />
+        <ReactSVG
+          src={ArrowReactSvgUrl}
+          className={classNames(styles.arrowIcon, { [styles.isOpen]: isOpen })}
+        />
       </div>
 
       {isOpen ? (
         <>
-          <div className="accordion-item-history">
-            <div className="accordion-item-wrapper">
-              <Text fontSize="12px" lineHeight="16px" className="status-text">
+          <div className={styles.accordionItemHistory}>
+            <div
+              className={classNames(styles.accordionItemWrapper, {
+                [styles.isDone]: isDone,
+                [styles.isInterrupted]: isInterrupted,
+              })}
+            >
+              <Text
+                fontSize="12px"
+                lineHeight="16px"
+                className={styles.statusText}
+              >
                 {startFilling}
               </Text>
             </div>
 
-            <Text fontSize="12px" lineHeight="16px" className="status-date">
+            <Text
+              fontSize="12px"
+              lineHeight="16px"
+              className={styles.statusDate}
+            >
               {startFillingDate}
             </Text>
           </div>
 
           {returnedByUser ? (
-            <div className="accordion-item-history">
-              <div className="accordion-item-wrapper">
-                <Text fontSize="12px" lineHeight="16px" className="status-text">
+            <div className={styles.accordionItemHistory}>
+              <div
+                className={classNames(styles.accordionItemWrapper, {
+                  [styles.isDone]: isDone,
+                  [styles.isInterrupted]: isInterrupted,
+                })}
+              >
+                <Text
+                  fontSize="12px"
+                  lineHeight="16px"
+                  className={styles.statusText}
+                >
                   {returnedByUser}
                 </Text>
               </div>
 
-              <Text fontSize="12px" lineHeight="16px" className="status-date">
+              <Text
+                fontSize="12px"
+                lineHeight="16px"
+                className={styles.statusDate}
+              >
                 {returnedDate}
               </Text>
             </div>
           ) : null}
 
           {comment ? (
-            <div className="accordion-item-history">
-              <div className="accordion-item-wrapper">
-                <Text fontSize="12px" lineHeight="16px" className="status-text">
+            <div className={styles.accordionItemHistory}>
+              <div
+                className={classNames(styles.accordionItemWrapper, {
+                  [styles.isDone]: isDone,
+                  [styles.isInterrupted]: isInterrupted,
+                })}
+              >
+                <Text
+                  fontSize="12px"
+                  lineHeight="16px"
+                  className={styles.statusText}
+                >
                   {comment}
                 </Text>
               </div>
@@ -137,41 +173,59 @@ const FillingStatusAccordion = ({
           ) : null}
 
           {isDone ? (
-            <div className="accordion-item-history">
-              <div className="accordion-item-wrapper">
+            <div className={styles.accordionItemHistory}>
+              <div
+                className={classNames(styles.accordionItemWrapper, {
+                  [styles.isDone]: isDone,
+                  [styles.isInterrupted]: isInterrupted,
+                })}
+              >
                 <Text
                   fontSize="12px"
                   lineHeight="16px"
-                  className="filled-status-text"
+                  className={classNames(styles.filledStatusText, {
+                    [styles.isDone]: isDone,
+                  })}
                 >
                   {filledAndSigned}
                 </Text>
               </div>
 
-              <Text fontSize="12px" lineHeight="16px" className="status-date">
+              <Text
+                fontSize="12px"
+                lineHeight="16px"
+                className={styles.statusDate}
+              >
                 {filledAndSignedDate}
               </Text>
             </div>
           ) : null}
         </>
       ) : (
-        <div className="accordion-item-history">
-          <div className="accordion-item-wrapper">
+        <div className={styles.accordionItemHistory}>
+          <div
+            className={classNames(styles.accordionItemWrapper, {
+              [styles.isDone]: isDone,
+              [styles.isInterrupted]: isInterrupted,
+            })}
+          >
             <Text
               fontSize="12px"
               lineHeight="16px"
-              className="filled-status-text"
+              className={classNames(styles.filledStatusText, {
+                [styles.isDone]: isDone,
+              })}
             >
               {filledAndSigned}
             </Text>
           </div>
 
-          <Text fontSize="12px" lineHeight="16px" className="status-date">
+          <Text fontSize="12px" lineHeight="16px" className={styles.statusDate}>
             {filledAndSignedDate}
           </Text>
         </div>
       )}
-    </AccordionItem>
+    </div>
   );
 };
 export { FillingStatusAccordion };

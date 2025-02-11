@@ -24,12 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface IMobileCategoryWrapperProps {
+import { MouseEvent } from "react";
+
+export type IMobileCategoryWrapperProps = {
   title: string;
   url: string;
   subtitle: string;
-  onClickLink: (e: Event) => void;
+  onClickLink: (e: MouseEvent<Element>) => void;
   isDisabled?: boolean;
   withPaidBadge: boolean;
   badgeLabel: string;
-}
+};

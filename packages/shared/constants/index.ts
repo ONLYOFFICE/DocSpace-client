@@ -32,6 +32,7 @@ import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
 import { globalColors } from "../themes/globalColors";
+import { FillingFormStatus } from "../enums";
 
 export const LOADER_STYLE = Object.freeze({
   title: "",
@@ -193,3 +194,17 @@ export const ALLOWED_PASSWORD_CHARACTERS =
   "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
 
 export const GENERAL_LINK_HEADER_KEY = "general-link_header";
+
+// mainRed - draft
+// lightBlueMain - your turn
+// gray - in progress
+// mainGreen - completed
+// mainRed - stopped
+
+export const FILLING_FORM_STATUS_COLORS = Object.freeze({
+  [FillingFormStatus.Draft]: globalColors.mainRed,
+  [FillingFormStatus.YourTurn]: globalColors.lightBlueMain,
+  [FillingFormStatus.InProgress]: globalColors.gray,
+  [FillingFormStatus.Completed]: globalColors.mainGreen,
+  [FillingFormStatus.Stopped]: globalColors.mainRed,
+});

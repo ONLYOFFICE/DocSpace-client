@@ -653,3 +653,11 @@ export enum ValidationStatus {
   InvalidPassword = 4,
   ExternalAccessDenied = 5,
 }
+
+export enum FillingFormStatus {
+  Draft = 1,
+  YourTurn = 2,
+  InProgress = 3,
+  Completed = 4,
+  Stopped = 5,
+}

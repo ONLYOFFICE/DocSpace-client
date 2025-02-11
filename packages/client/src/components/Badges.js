@@ -43,6 +43,7 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/shared/themes";
+import { FILLING_FORM_STATUS_COLORS } from "@docspace/shared/constants";
 
 import {
   isTablet,
@@ -209,6 +210,9 @@ const Badges = ({
     if (!isTrashFolder) openLocationFile();
   };
 
+  const fillingStatus = 5;
+  const fillingStatusColor = FILLING_FORM_STATUS_COLORS[fillingStatus];
+
   return fileExst ? (
     <div className="badges additional-badges file__badges">
       {/* {startFilling && (
@@ -223,6 +227,23 @@ const Badges = ({
           className="badge icons-group is-editing tablet-badge tablet-edit"
         />
       )} */}
+
+      {fillingStatus ? (
+        <BadgeWrapper isTile={isTile}>
+          <Badge
+            noHover
+            isVersionBadge
+            className="badge tablet-badge icons-group"
+            backgroundColor={fillingStatusColor}
+            label={t("BadgeMyDraftTitle")}
+            title={t("BadgeMyDraftTitle")}
+            {...versionBadgeProps}
+            style={{
+              width: "max-content",
+            }}
+          />
+        </BadgeWrapper>
+      ) : null}
 
       {hasDraft ? (
         <BadgeWrapper isTile={isTile}>

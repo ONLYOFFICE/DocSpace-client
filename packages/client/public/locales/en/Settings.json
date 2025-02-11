@@ -49,7 +49,7 @@
   "BrandingSubtitle": "Use this option to provide on-brand experience to your users. These settings will be effective for all of your portals.",
   "BrandingSubtitleMobile": "Upload your logo or generate it from text to provide on-brand experience to your users. These settings will affect all of your portals.",
   "BrandName": "Brand name",
-  "BrandNameSubtitle": "Your Brand name will be displayed in invitations, notifications, and other places where your DocSpace name is referenced.",
+  "BrandNameSubtitle": "Your Brand name will be displayed in invitations, notifications, and other places where your {{productName}} name is referenced.",
   "BrandNameSubtitleMobile": "Enter your company or brand name which will be displayed in notifications, exported spreadsheets, and other resources.",
   "BreakpointMobileWarningText": "This section is unavailable in mobile version",
   "BreakpointMobileWarningTextPrompt": "Please use the desktop or tablet to access the <1>{{sectionName}}</1>.",

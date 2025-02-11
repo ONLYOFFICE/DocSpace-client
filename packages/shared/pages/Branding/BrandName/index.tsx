@@ -107,7 +107,7 @@ export const BrandName = ({
       </div>
 
       <Text className="wl-subtitle settings_unavailable" fontSize="13px">
-        {t("BrandNameSubtitle")}
+        {t("BrandNameSubtitle", { productName: t("Common:ProductName") })}
       </Text>
 
       <div className="settings-block">

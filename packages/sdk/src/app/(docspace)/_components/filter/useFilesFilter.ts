@@ -31,7 +31,7 @@ type useFilesFiltersProps = {
   filesFilter: string;
   shareKey?: string;
   canSearchByContent: boolean;
-  filesViewAs: TViewAs;
+  filesViewAs: TViewAs | null;
   setFilesViewAs: (viewAs: TViewAs) => void;
 };
 

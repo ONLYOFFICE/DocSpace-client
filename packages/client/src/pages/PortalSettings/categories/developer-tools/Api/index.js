@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -62,7 +62,7 @@ const EmptyContainer = styled(EmptyScreenContainer)`
 `;
 
 const Api = (props) => {
-  const { t, theme, apiBasicLink, currentDeviceType } = props;
+  const { t, theme, apiBasicLink, currentDeviceType, logoText } = props;
 
   const imgSrc = theme.isBase ? ApiSvgUrl : ApiDarkSvgUrl;
 
@@ -83,7 +83,7 @@ const Api = (props) => {
         }
         descriptionText={t("ApiPageDescription", {
           productName: t("Common:ProductName"),
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
         })}
         headerText={t("ApiPageHeader")}
         imageAlt={t("ApiPageHeader")}
@@ -94,11 +94,12 @@ const Api = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { theme, apiBasicLink, currentDeviceType } = settingsStore;
+  const { theme, apiBasicLink, currentDeviceType, logoText } = settingsStore;
 
   return {
     theme,
     apiBasicLink,
     currentDeviceType,
+    logoText,
   };
 })(withTranslation(["Settings", "Common"])(observer(Api)));

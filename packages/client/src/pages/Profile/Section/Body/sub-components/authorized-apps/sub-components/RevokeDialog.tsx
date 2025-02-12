@@ -17,6 +17,7 @@ const RevokeDialog = ({
   selection,
   bufferSelection,
   currentDeviceType,
+  logoText,
 }: RevokeDialogProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
 
@@ -33,7 +34,7 @@ const RevokeDialog = ({
       ns="OAuth"
       values={{
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }}
     />
   ) : (
@@ -44,7 +45,7 @@ const RevokeDialog = ({
       values={{
         name,
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }}
     />
   );
@@ -55,7 +56,7 @@ const RevokeDialog = ({
       ns="OAuth"
       values={{
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }}
     />
   ) : (
@@ -66,7 +67,7 @@ const RevokeDialog = ({
       values={{
         name,
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }}
     />
   );

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,6 +45,7 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
     migrationPhase,
     isMigrationInit,
     setIsMigrationInit,
+    logoText,
   } = props as InjectedWorkspaceProps;
 
   const { t, ready }: { t: TFunciton; ready: boolean } = useTranslation([
@@ -53,7 +54,7 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
     "Settings",
   ]);
 
-  const StepsData = getStepsData(t, filteredUsers.length === 0);
+  const StepsData = getStepsData(t, filteredUsers.length === 0, logoText);
 
   useLayoutEffect(() => {
     if (migratingWorkspace === "GoogleWorkspace" && !isMigrationInit) {
@@ -80,6 +81,7 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
       title={StepsData[step - 1].title}
       description={StepsData[step - 1].description}
       component={StepsData[step - 1].component}
+      logoText={logoText}
     />
   );
 };
@@ -96,7 +98,7 @@ export const Component = inject<TStore>(
       isMigrationInit,
       setIsMigrationInit,
     } = importAccountsStore;
-    const { theme } = settingsStore;
+    const { theme, logoText } = settingsStore;
 
     return {
       theme,
@@ -109,6 +111,7 @@ export const Component = inject<TStore>(
       migratingWorkspace,
       isMigrationInit,
       setIsMigrationInit,
+      logoText,
     };
   },
 )(observer(GoogleWorkspace));

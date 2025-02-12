@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -70,6 +70,7 @@ const OAuth = ({
   generateDeveloperTokenDialogVisible,
   revokeDeveloperTokenDialogVisible,
   apiOAuthLink,
+  logoText,
 }: OAuthProps) => {
   const { t } = useTranslation(["OAuth"]);
 
@@ -131,13 +132,14 @@ const OAuth = ({
       {isLoading ? (
         <OAuthLoader viewAs={viewAs} currentDeviceType={currentDeviceType} />
       ) : isEmptyClientList ? (
-        <OAuthEmptyScreen apiOAuthLink={apiOAuthLink} />
+        <OAuthEmptyScreen apiOAuthLink={apiOAuthLink} logoText={logoText} />
       ) : (
         <List
           clients={clientList}
           viewAs={viewAs}
           currentDeviceType={currentDeviceType}
           apiOAuthLink={apiOAuthLink}
+          logoText={logoText}
         />
       )}
 
@@ -165,7 +167,7 @@ export default inject(
     oauthStore: OAuthStore;
     settingsStore: SettingsStore;
   }) => {
-    const { currentDeviceType, apiOAuthLink } = settingsStore;
+    const { currentDeviceType, apiOAuthLink, logoText } = settingsStore;
     const {
       isEmptyClientList,
       clientList,
@@ -206,6 +208,7 @@ export default inject(
       generateDeveloperTokenDialogVisible,
       revokeDeveloperTokenDialogVisible,
       apiOAuthLink,
+      logoText,
     };
   },
 )(observer(OAuth));

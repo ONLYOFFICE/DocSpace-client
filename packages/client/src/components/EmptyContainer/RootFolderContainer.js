@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -91,6 +91,7 @@ const RootFolderContainer = (props) => {
     roomsFolder,
     isPublicRoom,
     userId,
+    logoText,
   } = props;
 
   const navigate = useNavigate();
@@ -121,7 +122,7 @@ const RootFolderContainer = (props) => {
       : t("ArchiveEmptyScreen", { productName: t("Common:ProductName") });
 
   const privateRoomHeader = t("PrivateRoomHeader", {
-    organizationName: t("Common:OrganizationName"),
+    organizationName: logoText,
   });
 
   const privacyIcon = <img alt="" src={PrivacySvgUrl} />;
@@ -156,7 +157,7 @@ const RootFolderContainer = (props) => {
         <Text fontSize="12px">
           <Trans t={t} i18nKey="PrivateRoomSupport" ns="Files">
             Work in Private Room is available via{" "}
-            {{ organizationName: t("Common:OrganizationName") }} desktop app.
+            {{ organizationName: logoText }} desktop app.
             <Link
               isBold
               isHovered
@@ -359,7 +360,8 @@ export default inject(
     userStore,
     publicRoomStore,
   }) => {
-    const { isDesktopClient, isEncryptionSupport, theme } = settingsStore;
+    const { isDesktopClient, isEncryptionSupport, theme, logoText } =
+      settingsStore;
 
     const { setIsSectionBodyLoading } = clientLoadingStore;
 
@@ -397,6 +399,7 @@ export default inject(
       myFolder,
       roomsFolder,
       isPublicRoom,
+      logoText,
     };
   },
 )(withTranslation(["Files"])(observer(RootFolderContainer)));

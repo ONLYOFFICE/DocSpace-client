@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -71,7 +71,7 @@ import {
 } from "./StyledPresets";
 
 const FileSelector = (props) => {
-  const { t, fetchExternalLinks, theme, currentColorScheme } = props;
+  const { t, fetchExternalLinks, theme, currentColorScheme, logoText } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -80,7 +80,7 @@ const FileSelector = (props) => {
     {
       value: "EditorSupportedTypes",
       label: t("AllTypesSupportedByEditor", {
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
     },
     { value: "SelectorTypes", label: t("SelectTypes") },
@@ -448,13 +448,14 @@ const FileSelector = (props) => {
 };
 
 export const Component = inject(({ settingsStore, publicRoomStore }) => {
-  const { theme, currentColorScheme } = settingsStore;
+  const { theme, currentColorScheme, logoText } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
     currentColorScheme,
     fetchExternalLinks,
+    logoText,
   };
 })(
   withTranslation([

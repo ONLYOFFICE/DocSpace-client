@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -66,6 +66,7 @@ export interface OutEmptyViewContainerProps {
   isFolder: boolean;
   isArchiveFolderRoot: boolean;
   isRootEmptyPage: boolean;
+  logoText: string;
 }
 
 export interface InjectedEmptyViewContainerProps
@@ -95,6 +96,7 @@ export interface InjectedEmptyViewContainerProps
   isPublicRoom: boolean;
   isVisitor?: boolean;
   isFrame?: boolean;
+  logoText: string;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

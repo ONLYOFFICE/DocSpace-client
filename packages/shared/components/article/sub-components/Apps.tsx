@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,7 +57,7 @@ const getLink = () => {
 };
 
 const ArticleApps = React.memo(
-  ({ showText, withDevTools }: ArticleAppsProps) => {
+  ({ showText, withDevTools, logoText }: ArticleAppsProps) => {
     const { t } = useTranslation(["Translations", "Common"]);
     const theme = useTheme();
 
@@ -87,7 +87,7 @@ const ArticleApps = React.memo(
             isFill
             hoverColor={theme.filesArticleBody.downloadAppList.winHoverColor}
             title={t("Common:MobileWin", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
           />
           <IconButton
@@ -97,7 +97,7 @@ const ArticleApps = React.memo(
             isFill
             hoverColor={theme.filesArticleBody.downloadAppList.macHoverColor}
             title={t("Common:MobileMac", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
           />
           <IconButton
@@ -107,7 +107,7 @@ const ArticleApps = React.memo(
             isFill
             hoverColor={theme.filesArticleBody.downloadAppList.linuxHoverColor}
             title={t("Common:MobileLinux", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
           />
           <IconButton
@@ -119,7 +119,7 @@ const ArticleApps = React.memo(
               theme.filesArticleBody.downloadAppList.androidHoverColor
             }
             title={t("Common:MobileAndroid", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
           />
           <IconButton
@@ -129,7 +129,7 @@ const ArticleApps = React.memo(
             isFill
             hoverColor={theme.filesArticleBody.downloadAppList.iosHoverColor}
             title={t("Common:MobileIos", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
           />
         </div>

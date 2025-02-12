@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useGesture } from "@use-gesture/react";
-import { useSpring, config } from "@react-spring/web";
+import { useSpring, config, animated } from "@react-spring/web";
 import React, {
   SyntheticEvent,
   useCallback,
@@ -35,6 +35,7 @@ import React, {
   useState,
 } from "react";
 
+import classNames from "classnames";
 import { checkDialogsOpen } from "../../../../utils/checkDialogsOpen";
 import { LOADER_TIMEOUT } from "../../../../constants";
 
@@ -56,13 +57,8 @@ import {
 } from "../ViewerToolbar/ViewerToolbar.props";
 import { MessageError } from "../MessageError";
 
-import {
-  Image,
-  ImageViewerContainer,
-  ImageWrapper,
-} from "./ImageViewer.styled";
 import ImageViewerProps from "./ImageViewer.props";
-
+import styles from "./ImageViewer.module.scss";
 import {
   MaxScale,
   MinScale,
@@ -852,7 +848,7 @@ export const ImageViewer = ({
   const toolbarEvent = (item: ToolbarItemType) => {
     if (item.onClick) {
       item.onClick();
-    } else {
+    } else if (item.actionType !== undefined) {
       handleToolbarAction(item.actionType);
     }
   };
@@ -968,9 +964,14 @@ export const ImageViewer = ({
   return (
     <>
       {isMobile && !backgroundBlack ? mobileDetails : null}
-      <ImageViewerContainer
+      <div
         ref={containerRef}
-        $backgroundBlack={backgroundBlack}
+        className={classNames(styles.container, {
+          [styles.backgroundBlack]: backgroundBlack,
+        })}
+        data-testid="image-viewer"
+        role="img"
+        aria-label={errorTitle || "Image viewer"}
       >
         {isError ? (
           <MessageError
@@ -983,8 +984,15 @@ export const ImageViewer = ({
           <ViewerLoader isLoading={isLoading} />
         )}
 
-        <ImageWrapper ref={imgWrapperRef} $isLoading={isLoading}>
-          <Image
+        <div
+          className={classNames(styles.wrapper, {
+            [styles.loading]: isLoading,
+          })}
+          ref={imgWrapperRef}
+          data-testid="image-wrapper"
+        >
+          <animated.img
+            className={classNames(styles.image)}
             draggable="false"
             src={
               window.ClientConfig?.imageThumbnails &&
@@ -999,9 +1007,10 @@ export const ImageViewer = ({
             onLoad={imageLoaded}
             onError={onError}
             onContextMenu={(event) => event.preventDefault()}
+            data-testid="image-content"
           />
-        </ImageWrapper>
-      </ImageViewerContainer>
+        </div>
+      </div>
 
       {isDesktop && !isMobile && panelVisible && !isError ? (
         <ViewerToolbar
@@ -1011,6 +1020,7 @@ export const ImageViewer = ({
           generateContextMenu={generateContextMenu}
           setIsOpenContextMenu={setIsOpenContextMenu}
           toolbarEvent={toolbarEvent}
+          data-testid="image-toolbar"
         />
       ) : null}
     </>

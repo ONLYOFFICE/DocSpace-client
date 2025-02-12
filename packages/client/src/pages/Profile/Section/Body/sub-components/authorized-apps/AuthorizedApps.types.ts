@@ -20,6 +20,7 @@ export interface AuthorizedAppsProps {
   selection: string[];
   bufferSelection: IClientProps;
   revokeClient: (value: string[]) => Promise<void>;
+  logoText: string;
 }
 
 export interface RevokeDialogProps {
@@ -30,4 +31,5 @@ export interface RevokeDialogProps {
   bufferSelection: IClientProps;
   onRevoke: (value: string[]) => Promise<void>;
   currentDeviceType: DeviceUnionType;
+  logoText: string;
 }

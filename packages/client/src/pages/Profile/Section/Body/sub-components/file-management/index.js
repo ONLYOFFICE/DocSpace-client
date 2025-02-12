@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,6 +56,7 @@ const FileManagement = ({
   displayFileExtension,
   setDisplayFileExtension,
   getFilesSettings,
+  logoText,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
@@ -128,7 +129,7 @@ const FileManagement = ({
           />
           <Text>
             {t("OpenSameTab", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
           </Text>
         </div>
@@ -146,53 +147,57 @@ const FileManagement = ({
   );
 };
 
-export default inject(({ filesSettingsStore, treeFoldersStore }) => {
-  const {
-    storeOriginalFiles,
-    confirmDelete,
+export default inject(
+  ({ filesSettingsStore, treeFoldersStore, settingsStore }) => {
+    const {
+      storeOriginalFiles,
+      confirmDelete,
 
-    setStoreOriginal,
+      setStoreOriginal,
 
-    setConfirmDelete,
+      setConfirmDelete,
 
-    favoritesSection,
-    recentSection,
+      favoritesSection,
+      recentSection,
 
-    keepNewFileName,
-    setKeepNewFileName,
+      keepNewFileName,
+      setKeepNewFileName,
 
-    openEditorInSameTab,
-    setOpenEditorInSameTab,
+      openEditorInSameTab,
+      setOpenEditorInSameTab,
 
-    displayFileExtension,
-    setDisplayFileExtension,
-    getFilesSettings,
-  } = filesSettingsStore;
+      displayFileExtension,
+      setDisplayFileExtension,
+      getFilesSettings,
+    } = filesSettingsStore;
+    const { logoText } = settingsStore;
 
-  const { myFolderId, commonFolderId } = treeFoldersStore;
+    const { myFolderId, commonFolderId } = treeFoldersStore;
 
-  return {
-    storeOriginalFiles,
-    confirmDelete,
+    return {
+      storeOriginalFiles,
+      confirmDelete,
 
-    myFolderId,
-    commonFolderId,
+      myFolderId,
+      commonFolderId,
 
-    favoritesSection,
-    recentSection,
+      favoritesSection,
+      recentSection,
 
-    setStoreOriginal,
+      setStoreOriginal,
 
-    setConfirmDelete,
+      setConfirmDelete,
 
-    keepNewFileName,
-    setKeepNewFileName,
+      keepNewFileName,
+      setKeepNewFileName,
 
-    openEditorInSameTab,
-    setOpenEditorInSameTab,
+      openEditorInSameTab,
+      setOpenEditorInSameTab,
 
-    displayFileExtension,
-    setDisplayFileExtension,
-    getFilesSettings,
-  };
-})(observer(FileManagement));
+      displayFileExtension,
+      setDisplayFileExtension,
+      getFilesSettings,
+      logoText,
+    };
+  },
+)(observer(FileManagement));

@@ -23,12 +23,12 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { Meta, Story } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import OperationContainer from "./index";
 import { OperationContainerProps } from "./OperationContainer.types";
 
-export default {
+const meta: Meta<typeof OperationContainer> = {
   title: "Components/OperationContainer",
   component: OperationContainer,
   parameters: {
@@ -37,37 +37,43 @@ export default {
         component:
           "Operation container component for displaying operation status with title and description",
       },
+      argTypes: {
+        url: {
+          control: "string",
+          description: "URL to redirect",
+        },
+        authorized: {
+          control: "boolean",
+          description: "Indicates if the user is authorized",
+        },
+        title: {
+          control: "string",
+          description: "Title of the operation",
+        },
+        description: {
+          control: "string",
+          description: "Description of the operation",
+        },
+      },
     },
   },
-  decorators: [
-    // eslint-disable-next-line @typescript-eslint/no-shadow
-    (Story) => <Story />,
-  ],
-} as Meta;
+  tags: ["autodocs"],
+};
 
-const Template: Story<OperationContainerProps> = (args) => (
+export default meta;
+
+const Template = (args: OperationContainerProps) => (
   <OperationContainer {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  title: "Operation in Progress",
-  description: "Please wait while we process your request",
-  authorized: false,
-};
+type Story = StoryObj<typeof OperationContainer>;
 
-export const WithRedirect = Template.bind({});
-WithRedirect.args = {
-  title: "Redirecting",
-  description: "You will be redirected to the target page",
-  authorized: true,
-  url: "https://example.com",
-};
-
-export const Unauthorized = Template.bind({});
-Unauthorized.args = {
-  title: "Access Denied",
-  description: "You are not authorized to view this content",
-  authorized: false,
-  url: "https://example.com",
+export const Default: Story = {
+  render: Template,
+  args: {
+    title: "Operation in Progress",
+    description: "Please wait while we process your request",
+    url: "https://example.com",
+    authorized: false,
+  },
 };

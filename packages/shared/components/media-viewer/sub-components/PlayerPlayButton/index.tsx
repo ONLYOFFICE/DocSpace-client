@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,18 +29,32 @@ import React, { memo } from "react";
 import IconPlay from "PUBLIC_DIR/images/videoplayer.play.react.svg";
 import IconStop from "PUBLIC_DIR/images/videoplayer.stop.react.svg";
 
-import { WrapperPlayerPlayButton } from "./PlayerPlayButton.styled";
 import type { PlayerPlayButtonProps } from "./PlayerPlayButton.types";
+import styles from "./PlayerPlayButton.module.scss";
 
 const PlayerPlayButton = memo(
   ({ isPlaying, onClick }: PlayerPlayButtonProps) => {
     const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
       event.stopPropagation();
     };
+
+    const buttonLabel = isPlaying ? "Pause" : "Play";
+
     return (
-      <WrapperPlayerPlayButton onClick={onClick} onTouchStart={onTouchStart}>
-        {isPlaying ? <IconStop /> : <IconPlay />}
-      </WrapperPlayerPlayButton>
+      <div
+        className={styles.wrapper}
+        onClick={onClick}
+        onTouchStart={onTouchStart}
+        data-testid="player-play-button"
+        aria-label={buttonLabel}
+        aria-pressed={isPlaying}
+      >
+        {isPlaying ? (
+          <IconStop data-testid="pause-icon" role="presentation" />
+        ) : (
+          <IconPlay data-testid="play-icon" role="presentation" />
+        )}
+      </div>
     );
   },
 );

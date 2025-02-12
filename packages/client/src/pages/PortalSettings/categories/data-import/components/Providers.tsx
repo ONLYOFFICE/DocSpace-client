@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,8 +47,14 @@ import { WorkspacesContainer } from "../StyledDataImport";
 import { ProvidersProps, InjectedProvidersProps } from "../types";
 
 const Providers = (props: ProvidersProps) => {
-  const { theme, services, setServices, getMigrationList, setWorkspace } =
-    props as InjectedProvidersProps;
+  const {
+    theme,
+    services,
+    setServices,
+    getMigrationList,
+    setWorkspace,
+    logoText,
+  } = props as InjectedProvidersProps;
 
   const [areProvidersReady, setAreProvidersReady] = useState(false);
 
@@ -91,7 +97,7 @@ const Providers = (props: ProvidersProps) => {
       <Text className="data-import-description">
         {t("DataImportDescription", {
           productName: t("Common:ProductName"),
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
         })}
       </Text>
       <Text className="data-import-subtitle">{t("UploadBackupData")}</Text>
@@ -126,13 +132,13 @@ export const Component = inject<TStore>(
     const { services, setServices, getMigrationList, setWorkspace } =
       importAccountsStore;
 
-    const { theme } = settingsStore;
+    const { theme, logoText } = settingsStore;
 
     return {
       services,
       setServices,
       getMigrationList,
-
+      logoText,
       theme,
       setWorkspace,
     };

@@ -28,12 +28,57 @@ import { Meta, Story } from "@storybook/react";
 import { SocialButtonsGroup } from "./index";
 import type { SocialButtonProps } from "./SocialButtonsGroup.types";
 
+const mockTranslation = (key: string) => {
+  const translations: { [key: string]: string } = {
+    "Common:ContinueWith": "Continue with",
+    "Common:ContinueButton": "Continue",
+    "Common:ProviderFacebook": "Continue with Facebook",
+    "Common:ProviderGoogle": "Continue with Google",
+    "Common:ProviderLinkedIn": "Continue with LinkedIn",
+    "Common:ProviderTwitter": "Continue with X",
+  };
+  return translations[key] || key;
+};
+
 export default {
   title: "Components/SocialButtonsGroup",
   component: SocialButtonsGroup,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "A group of social login buttons with support for SSO and additional providers through a 'More' button",
+      },
+    },
+  },
   argTypes: {
-    onClick: { action: "clicked" },
-    onMoreAuthToggle: { action: "more auth toggled" },
+    providers: {
+      control: "object",
+      description:
+        "Array of social providers configuration. Each provider has properties: provider (string), url (string), linked (boolean)",
+    },
+    onClick: {
+      action: "clicked",
+      description:
+        "Callback function triggered when a social button is clicked",
+    },
+    onMoreAuthToggle: {
+      action: "more auth toggled",
+      description:
+        "Callback function triggered when the 'More' button is clicked to show additional providers",
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "When true, disables all social buttons in the group",
+    },
+    ssoUrl: {
+      control: "text",
+      description: "URL for Single Sign-On (SSO) authentication",
+    },
+    ssoLabel: {
+      control: "text",
+      description: "Label text for the SSO button",
+    },
   },
 } as Meta;
 
@@ -47,7 +92,7 @@ Default.args = {
     { provider: "google", url: "google.com", linked: false },
     { provider: "facebook", url: "facebook.com", linked: false },
   ],
-  t: (key: string) => key,
+  t: mockTranslation,
   isDisabled: false,
 };
 

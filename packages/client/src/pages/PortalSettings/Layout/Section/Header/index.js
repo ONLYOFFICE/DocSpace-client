@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -284,6 +284,7 @@ const SectionHeaderContent = (props) => {
     isHeaderVisible,
     selection,
     addUsers,
+    logoText,
   } = props;
 
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
@@ -317,11 +318,11 @@ const SectionHeaderContent = (props) => {
           ? t("ImportFromNextcloud")
           : workspace === "Workspace"
             ? t("ImportFromPortal", {
-                organizationName: t("Common:OrganizationName"),
+                organizationName: logoText,
               })
             : t("DataImport")
       : t(header, {
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
           license: t("Common:EnterpriseLicense"),
         });
 
@@ -429,7 +430,7 @@ export default inject(
     const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
     const { workspace } = importAccountsStore;
-    const { standalone } = settingsStore;
+    const { standalone, logoText } = settingsStore;
 
     const { getHeaderMenuItems } = oauthStore;
     return {
@@ -456,6 +457,7 @@ export default inject(
       standalone,
       getHeaderMenuItems,
       setSelections: oauthStore.setSelections,
+      logoText,
     };
   },
 )(

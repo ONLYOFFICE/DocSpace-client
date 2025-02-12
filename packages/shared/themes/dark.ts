@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -104,8 +104,6 @@ const {
   darkScroll,
   darkScrollHover,
   darkScrollActive,
-  silver,
-  highlandGray,
 
   blurDark,
   darkGreyAction,
@@ -2172,45 +2170,6 @@ const Dark: TTheme = {
     alert: {
       fill: mainOrange,
       path: black,
-    },
-  },
-
-  mediaViewer: {
-    color: grayDarkStrong,
-    backgroundColor: highlandGray,
-    fill: white,
-    titleColor: white,
-    iconColor: white,
-
-    controlBtn: {
-      backgroundColor: silver,
-    },
-
-    imageViewer: {
-      backgroundColor: silver,
-      inactiveBackgroundColor: highlandGray,
-      fill: white,
-    },
-
-    progressBar: {
-      background: grayDarkStrong,
-      backgroundColor: silver,
-    },
-
-    scrollButton: {
-      backgroundColor: highlandGray,
-      background: silver,
-      border: `solid ${white}`,
-    },
-
-    videoViewer: {
-      fill: white,
-      stroke: white,
-      color: grayDarkStrong,
-      colorError: white,
-      backgroundColorError: darkBlack,
-      backgroundColor: highlandGray,
-      background: silver,
     },
   },
 

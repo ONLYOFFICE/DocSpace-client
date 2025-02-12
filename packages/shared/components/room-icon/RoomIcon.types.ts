@@ -32,6 +32,7 @@ type RoomIconExpansion = {
   logo?: TLogo | string;
   tooltipContent?: string;
   tooltipId?: string;
+  isTemplate?: boolean;
 };
 
 type RoomIconColor = {

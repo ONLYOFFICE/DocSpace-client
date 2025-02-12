@@ -27,12 +27,14 @@
 import React, { useMemo, useState } from "react";
 
 import {
+  getFetchedRoomParams,
   getRoomCreationAdditionalParams,
   getStartRoomParams,
 } from "@docspace/shared/utils/rooms";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-
+import RoomSelector from "@docspace/shared/selectors/Room";
+import { FolderType } from "@docspace/shared/enums";
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
@@ -56,10 +58,14 @@ const CreateRoomDialog = ({
   setProcessCreatingRoomFromData,
   selectionItems,
   setSelectedRoomType,
+  getThirdPartyIcon,
+  isDefaultRoomsQuotaSet,
+  fetchedRoomParams,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
+  const [templateDialogIsVisible, setTemplateDialogIsVisible] = useState(false);
   const isMountRef = React.useRef(true);
 
   const disabledFormRoom = useMemo(() => {
@@ -79,12 +85,19 @@ const CreateRoomDialog = ({
     };
   });
 
-  const startRoomParams = getStartRoomParams(startRoomType, title);
+  const isTemplateItem = !!fetchedRoomParams;
+
+  const startRoomParams = isTemplateItem
+    ? { ...fetchedRoomParams, isTemplate: true }
+    : getStartRoomParams(startRoomType, title);
 
   const [roomParams, setRoomParams] = useState({
     ...startRoomParams,
   });
   const [isValidTitle, setIsValidTitle] = useState(true);
+  const [isTemplateSelected, setIsTemplateSelected] =
+    useState(!!fetchedRoomParams);
+  const [templateItem, setTemplateItem] = useState(null);
 
   const setRoomTags = (newTags) =>
     setRoomParams({ ...roomParams, tags: newTags });
@@ -143,6 +156,17 @@ const CreateRoomDialog = ({
 
   const goBack = () => {
     if (isLoading) return;
+    if (isTemplateSelected) {
+      setIsTemplateSelected(false);
+      setTemplateItem(null);
+
+      setRoomParams((prev) => ({
+        ...prev,
+        title: "",
+        type: null,
+      }));
+      return;
+    }
     setRoomParams({ ...startRoomParams });
   };
 
@@ -165,23 +189,72 @@ const CreateRoomDialog = ({
     onClose();
   };
 
-  const dialogHeader = roomParams.type
+  const onSubmitRoom = (items) => {
+    const item = items[0];
+    setIsTemplateSelected(true);
+    setTemplateItem({ ...item, title: item.label });
+
+    const newRoomParams = getFetchedRoomParams(
+      { ...roomParams, id: item?.id, title: item?.label, logo: item?.logo },
+      getThirdPartyIcon,
+      isDefaultRoomsQuotaSet,
+    );
+
+    setRoomParams({
+      ...newRoomParams,
+      type: item?.roomType,
+      logo: item?.logo,
+      isTemplate: item.rootFolderType === FolderType.RoomTemplates,
+    });
+  };
+
+  const onCloseCreateFromTemplateDialog = () => {
+    setRoomParams({ ...startRoomParams });
+    setTemplateDialogIsVisible(false);
+  };
+
+  const isTemplate = !roomParams.type && !isTemplateSelected;
+
+  const dialogHeader = !roomParams.type
     ? t("ChooseRoomType")
     : t("Files:CreateRoom");
 
   return (
     <ModalDialog
       displayType="aside"
-      withBodyScroll
+      withBodyScroll={!isTemplate}
       visible={visible}
       onClose={onCloseAndDisconnectThirdparty}
       isScrollLocked={isScrollLocked}
       hideContent={isOauthWindowOpen}
+      isTemplate={isTemplate}
       isBackButton={roomParams.type}
       onBackClick={goBack}
       onSubmit={handleSubmit}
       withForm
+      containerVisible={isTemplate ? templateDialogIsVisible : false}
     >
+      {isTemplate ? (
+        <ModalDialog.Container>
+          <RoomSelector
+            className="template-body_selector"
+            onSubmit={onSubmitRoom}
+            searchArea="Templates"
+            isMultiSelect={false}
+            withHeader
+            headerProps={{
+              onBackClick: onCloseCreateFromTemplateDialog,
+              onCloseClick: onCloseCreateFromTemplateDialog,
+              headerLabel: t("Common:FromTemplate"),
+              withoutBackButton: false,
+              withoutBorder: false,
+            }}
+            withSearch
+            emptyScreenHeader={t("Common:EmptyTemplatesRoomsHeader")}
+            emptyScreenDescription={t("Common:EmptyTemplatesRoomsDescription")}
+          />
+        </ModalDialog.Container>
+      ) : null}
       <ModalDialog.Header>{dialogHeader}</ModalDialog.Header>
 
       <ModalDialog.Body>
@@ -190,11 +263,13 @@ const CreateRoomDialog = ({
             t={t}
             setRoomType={setRoomType}
             disabledFormRoom={disabledFormRoom}
+            setTemplateDialogIsVisible={setTemplateDialogIsVisible}
           />
         ) : (
           <SetRoomParams
             t={t}
             disabledChangeRoomType={Boolean(startRoomType)}
+            isTemplateSelected={isTemplateSelected}
             setIsOauthWindowOpen={setIsOauthWindowOpen}
             tagHandler={tagHandler}
             roomParams={roomParams}
@@ -208,11 +283,17 @@ const CreateRoomDialog = ({
             setIsWrongTitle={setIsWrongTitle}
             enableThirdParty={enableThirdParty}
             onKeyUp={onKeyUpHandler}
+            templateItem={templateItem}
+            fromTemplate={
+              selectionItems.length
+                ? selectionItems[0].isTemplate
+                : isTemplateSelected
+            }
           />
         )}
       </ModalDialog.Body>
 
-      {roomParams.type ? (
+      {!!roomParams.type && !isTemplate ? (
         <ModalDialog.Footer>
           <Button
             id="shared_create-room-modal_submit"

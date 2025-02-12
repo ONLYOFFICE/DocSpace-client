@@ -225,7 +225,6 @@ export default inject(({ tableStore }) => {
     modifiedRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
     tableStorageName,
   } = tableStore;
@@ -236,7 +235,6 @@ export default inject(({ tableStore }) => {
     modifiedRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
     tableStorageName,
   };

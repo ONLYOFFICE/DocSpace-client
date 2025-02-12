@@ -94,9 +94,9 @@ export type NewFilesPanelItemDateProps = {
 
 export type NewFilesPanelItemRoomProps = {
   room: TRoom;
-
   onClose: VoidFunction;
   openItemAction?: FilesActionStore["openItemAction"];
+  getFolderInfo?: FilesStore["getFolderInfo"];
 };
 
 export type NewFilesPanelItemFileInjectStore = {

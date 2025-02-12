@@ -100,7 +100,7 @@ class OAuthStore {
 
     makeAutoObservable(this);
 
-    this.setJwtToken();
+    //this.setJwtToken();
   }
 
   setJwtToken = async () => {

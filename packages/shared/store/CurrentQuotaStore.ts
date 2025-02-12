@@ -43,6 +43,7 @@ import {
   USERS_IN_ROOM,
   COUNT_FOR_SHOWING_BAR,
   PERCENTAGE_FOR_SHOWING_BAR,
+  YEAR_KEY,
 } from "../constants";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
@@ -157,7 +158,7 @@ class CurrentQuotasStore {
 
   get isYearTariff() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "year",
+      (obj) => obj.id === YEAR_KEY,
     );
 
     return result?.value;

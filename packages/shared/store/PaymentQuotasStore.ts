@@ -27,7 +27,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "../api";
 import { TPaymentFeature, TPaymentQuota } from "../api/portal/types";
-import { MANAGER, TOTAL_SIZE } from "../constants";
+import { MANAGER, TOTAL_SIZE, YEAR_KEY } from "../constants";
 import { Nullable } from "../types";
 import { CurrentQuotasStore } from "./CurrentQuotaStore";
 
@@ -102,7 +102,7 @@ class PaymentQuotasStore {
     const findQuotaByYearFeature = (yearValue: boolean) =>
       res.find((quota) =>
         quota.features.some(
-          (feature) => feature.id === "year" && feature.value === yearValue,
+          (feature) => feature.id === YEAR_KEY && feature.value === yearValue,
         ),
       ) || null;
 

@@ -131,18 +131,20 @@ class UsersStore {
 
     makeAutoObservable(this);
 
-    SocketHelper.on(SocketEvents.AddUser, (value) => {
+    SocketHelper.on(SocketEvents.AddUser, async (value) => {
       const { id, data } = value;
 
       if (!data || !id) return;
 
+      const user = await api.people.getUserById(data.id);
+
       runInAction(() => {
-        this.users.push(data);
+        this.users.push(user);
         this.filter.total += 1;
       });
     });
 
-    SocketHelper.on(SocketEvents.UpdateUser, (value) => {
+    SocketHelper.on(SocketEvents.UpdateUser, async (value) => {
       const { id, data } = value;
 
       if (!data || !id) return;
@@ -151,8 +153,10 @@ class UsersStore {
 
       if (idx === -1) return;
 
+      const user = await api.people.getUserById(data.id);
+
       runInAction(() => {
-        this.users[idx] = data;
+        this.users[idx] = user;
       });
     });
 
@@ -167,18 +171,20 @@ class UsersStore {
       });
     });
 
-    SocketHelper.on(SocketEvents.AddGuest, (value) => {
+    SocketHelper.on(SocketEvents.AddGuest, async (value) => {
       const { id, data } = value;
 
       if (!data || !id) return;
 
+      const user = await api.people.getUserById(data.id);
+
       runInAction(() => {
-        this.users.push(data);
+        this.users.push(user);
         this.filter.total += 1;
       });
     });
 
-    SocketHelper.on(SocketEvents.UpdateGuest, (value) => {
+    SocketHelper.on(SocketEvents.UpdateGuest, async (value) => {
       const { id, data } = value;
 
       if (!data || !id) return;
@@ -187,8 +193,10 @@ class UsersStore {
 
       if (idx === -1) return;
 
+      const user = await api.people.getUserById(data.id);
+
       runInAction(() => {
-        this.users[idx] = data;
+        this.users[idx] = user;
       });
     });
 
@@ -197,8 +205,12 @@ class UsersStore {
 
       const idx = this.users.findIndex((x) => x.id === id);
 
+      console.log(idx);
+
       runInAction(() => {
-        this.users.splice(idx, 1);
+        const newUsers = this.users;
+        newUsers.splice(idx, 1);
+        this.users = newUsers;
         this.filter.total -= 1;
       });
     });
@@ -389,6 +401,8 @@ class UsersStore {
   removeUsers = async (userIds: string[]) => {
     const { updateCurrentGroup } = this.groupsStore;
 
+    console.log(userIds);
+
     await api.people.deleteUsers(userIds);
 
     const actions: Promise<void>[] = [];
@@ -448,6 +462,8 @@ class UsersStore {
 
   removeGuests = async (ids: string[]) => {
     if (this.contactsTab !== "guests" || !ids.length) return;
+
+    console.log(ids);
 
     const removedGuests = await api.people.deleteGuests(ids);
 

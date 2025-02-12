@@ -561,6 +561,9 @@ importers:
         specifier: 5.5.0
         version: 5.5.0
     devDependencies:
+      '@babel/core':
+        specifier: 7.25.8
+        version: 7.25.8
       '@playwright/test':
         specifier: 1.48.0
         version: 1.48.0
@@ -597,9 +600,15 @@ importers:
       prettier:
         specifier: 3.3.3
         version: 3.3.3
+      sass:
+        specifier: 1.79.5
+        version: 1.79.5
       shx:
         specifier: 0.3.4
         version: 0.3.4
+      terser-webpack-plugin:
+        specifier: 5.3.10
+        version: 5.3.10(@swc/core@1.10.15(@swc/helpers@0.5.5))(webpack@5.95.0(@swc/core@1.10.15(@swc/helpers@0.5.5)))
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -700,6 +709,9 @@ importers:
       css-loader:
         specifier: 6.11.0
         version: 6.11.0(webpack@5.95.0)
+      eslint-webpack-plugin:
+        specifier: 4.2.0
+        version: 4.2.0(eslint@8.57.1)(webpack@5.95.0)
       external-remotes-plugin:
         specifier: 1.0.0
         version: 1.0.0(webpack@5.95.0)

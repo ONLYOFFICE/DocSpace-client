@@ -180,8 +180,7 @@ const ArticleMainButtonContent = (props) => {
     isWarningRoomsDialog,
     getContactsModel,
     contactsCanCreate,
-    setGuidRectsMainButton,
-    maintenanceExist,
+    setRefMap,
   } = props;
 
   const navigate = useNavigate();
@@ -759,8 +758,7 @@ const ArticleMainButtonContent = (props) => {
           text={mainButtonText}
           model={model}
           title={mainButtonText}
-          setGuidRectsMainButton={setGuidRectsMainButton}
-          maintenanceExist={maintenanceExist}
+          setRefMap={setRefMap}
         />
       )}
 
@@ -816,9 +814,11 @@ export default inject(
     filesActionsStore,
     currentQuotaStore,
     peopleStore,
+    guidanceStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
-    const { mainButtonMobileVisible, setGuidRectsMainButton } = filesStore;
+    const { setRefMap } = guidanceStore;
+    const { mainButtonMobileVisible } = filesStore;
     const {
       isPrivacyFolder,
       isFavoritesFolder,
@@ -841,12 +841,8 @@ export default inject(
       setSelectFileFormRoomDialogVisible,
     } = dialogsStore;
 
-    const {
-      enablePlugins,
-      currentColorScheme,
-      currentDeviceType,
-      maintenanceExist,
-    } = settingsStore;
+    const { enablePlugins, currentColorScheme, currentDeviceType } =
+      settingsStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const { security } = selectedFolderStore;
@@ -926,9 +922,7 @@ export default inject(
 
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
-
-      setGuidRectsMainButton,
-      maintenanceExist,
+      setRefMap,
     };
   },
 )(

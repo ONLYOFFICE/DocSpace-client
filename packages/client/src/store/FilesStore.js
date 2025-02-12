@@ -251,16 +251,6 @@ class FilesStore {
     start: true,
   });
 
-  pdfGuidRects = null;
-
-  readyGuidRects = null;
-
-  shareGuidRects = null;
-
-  uploadingGuidRects = null;
-
-  mainButtonGuidRect = null;
-
   hotkeysClipboard = [];
 
   constructor(
@@ -4134,26 +4124,6 @@ class FilesStore {
     if (pathPartsRoomIndex === -1) return;
     navigationPath[pathPartsRoomIndex].shared = shared;
     this.selectedFolderStore.setNavigationPath(navigationPath);
-  };
-
-  setGuidRectsPdf = (pdfRect) => {
-    this.pdfGuidRects = pdfRect;
-  };
-
-  setGuidRectsReady = (readyRect) => {
-    this.readyGuidRects = readyRect;
-  };
-
-  setGuidRectsShare = (shareRect) => {
-    this.shareGuidRects = shareRect;
-  };
-
-  setGuidRectsUploading = (uploadingRect) => {
-    this.uploadingGuidRects = uploadingRect;
-  };
-
-  setGuidRectsMainButton = (buttonRect) => {
-    this.mainButtonGuidRect = buttonRect;
   };
 
   setInRoomFolder = (roomId, inRoom) => {

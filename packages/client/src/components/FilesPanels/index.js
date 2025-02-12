@@ -156,7 +156,8 @@ const Panels = (props) => {
     viewAs,
     infoPanelVisible,
     userId,
-    getFormFillingConfig,
+    getRefElement,
+    config,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -376,11 +377,11 @@ const Panels = (props) => {
       <Guidance
         formFillingTipsNumber={formFillingTipsNumber}
         setFormFillingTipsNumber={setFormFillingTipsNumber}
-        onClose={onCloseGuidance}
         viewAs={viewAs}
-        // currentDeviceType={currentDeviceType}
         infoPanelVisible={infoPanelVisible}
-        getConfig={getFormFillingConfig}
+        onClose={onCloseGuidance}
+        getRefElement={getRefElement}
+        config={config}
       />
     ),
   ];
@@ -481,7 +482,7 @@ export default inject(
       pluginDialogVisible,
     } = pluginStore;
 
-    const { getFormFillingConfig } = guidanceStore;
+    const { getRefElement, config } = guidanceStore;
 
     const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
     const resetQuotaItem = () => {
@@ -565,7 +566,8 @@ export default inject(
       viewAs,
       infoPanelVisible: infoPanelStore.isVisible,
       userId: userStore?.user?.id,
-      getFormFillingConfig,
+      getRefElement,
+      config,
     };
   },
 )(observer(Panels));

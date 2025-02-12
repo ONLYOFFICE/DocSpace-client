@@ -39,6 +39,7 @@ import {
 } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
 import { FolderType } from "@docspace/shared/enums";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 import FilesRowContent from "./FilesRowContent";
 
@@ -367,9 +368,9 @@ const SimpleFilesRow = (props) => {
     isFolder,
     icon,
     isDownload,
-    setGuidRectsPdf,
-    setGuidRectsReady,
     isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -387,12 +388,17 @@ const SimpleFilesRow = (props) => {
 
   React.useEffect(() => {
     if (item?.isPDF && rowRef?.current) {
-      setGuidRectsPdf(rowRef.current.getClientRects()[0]);
+      setRefMap(GuidanceRefKey.Pdf, rowRef);
     }
     if (item?.type === FolderType.Done && rowRef?.current) {
-      setGuidRectsReady(rowRef.current.getClientRects()[0]);
+      setRefMap(GuidanceRefKey.Ready, rowRef);
     }
-  }, [rowRef?.current]);
+
+    return () => {
+      deleteRefMap(GuidanceRefKey.Pdf);
+      deleteRefMap(GuidanceRefKey.Ready);
+    };
+  }, []);
 
   const element = (
     <ItemIcon

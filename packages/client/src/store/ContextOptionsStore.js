@@ -99,6 +99,8 @@ import {
   copyRoomShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
 
+import { getGuidanceConfig } from "@docspace/shared/components/guidance/configs";
+
 import {
   connectedCloudsTypeTitleTranslation,
   removeOptions,
@@ -175,6 +177,8 @@ class ContextOptionsStore {
 
   linksIsLoading = false;
 
+  guidanceStore;
+
   constructor(
     settingsStore,
     dialogsStore,
@@ -195,6 +199,7 @@ class ContextOptionsStore {
     userStore,
     indexingStore,
     clientLoadingStore,
+    guidanceStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -216,6 +221,7 @@ class ContextOptionsStore {
     this.userStore = userStore;
     this.indexingStore = indexingStore;
     this.clientLoadingStore = clientLoadingStore;
+    this.guidanceStore = guidanceStore;
   }
 
   onOpenFolder = async (item, t) => {
@@ -1023,7 +1029,14 @@ class ContextOptionsStore {
     this.indexingStore.setIsIndexEditingMode(true);
   };
 
-  onEnableFormFillingGuid = () => {
+  onEnableFormFillingGuid = (t, roomType) => {
+    const guidanceConfig = getGuidanceConfig(roomType, t);
+
+    if (!guidanceConfig) {
+      return;
+    }
+
+    this.guidanceStore.setConfig(guidanceConfig);
     this.dialogsStore.setWelcomeFormFillingTipsVisible(true);
   };
 
@@ -1940,7 +1953,7 @@ class ContextOptionsStore {
         key: "short-tour",
         label: t("FormFillingTipsDialog:WelcomeStartTutorial"),
         icon: HelpCenterReactSvgUrl,
-        onClick: this.onEnableFormFillingGuid,
+        onClick: () => this.onEnableFormFillingGuid(t, item.roomType),
         disabled: !isFormRoom || isMobileUtils(),
       },
       {

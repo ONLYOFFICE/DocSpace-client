@@ -24,10 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { classNames } from "@docspace/shared/utils";
 import { FolderType } from "@docspace/shared/enums";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
@@ -80,9 +81,10 @@ const FilesTableRow = (props) => {
     displayFileExtension,
     icon,
     isDownload,
-    setGuidRectsPdf,
-    setGuidRectsReady,
+
     isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
@@ -145,7 +147,7 @@ const FilesTableRow = (props) => {
     setIsDragActive(false);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (index === 0) {
       if (checkedProps || isActive) {
         setFirsElemChecked(true);
@@ -159,6 +161,20 @@ const FilesTableRow = (props) => {
       }
     }
   }, [checkedProps, isActive, showHotkeyBorder, isTutorialEnabled]);
+
+  useEffect(() => {
+    if (item?.isPDF && rowRef?.current) {
+      setRefMap(GuidanceRefKey.Pdf, rowRef, "firstChildOffset");
+    }
+    if (item?.type === FolderType.Done && rowRef?.current) {
+      setRefMap(GuidanceRefKey.Ready, rowRef, "firstChildOffset");
+    }
+
+    return () => {
+      deleteRefMap(GuidanceRefKey.Pdf);
+      deleteRefMap(GuidanceRefKey.Ready);
+    };
+  }, []);
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
@@ -175,24 +191,6 @@ const FilesTableRow = (props) => {
     e.stopPropagation();
     onChangeIndex(action);
   };
-  const setGuidRects = () => {
-    if (item?.isPDF && rowRef?.current) {
-      setGuidRectsPdf(
-        rowRef.current.firstChild.offsetParent.getClientRects()[0],
-      );
-    }
-    if (item?.type === FolderType.Done && rowRef?.current) {
-      setGuidRectsReady(
-        rowRef.current.firstChild.offsetParent.getClientRects()[0],
-      );
-    }
-  };
-  React.useEffect(() => {
-    setGuidRects();
-    window.addEventListener("resize", setGuidRects);
-
-    return () => window.removeEventListener("resize", setGuidRects);
-  }, []);
 
   return (
     <StyledDragAndDrop

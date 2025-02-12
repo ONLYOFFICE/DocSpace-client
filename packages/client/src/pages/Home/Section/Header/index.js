@@ -56,6 +56,7 @@ import {
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
@@ -268,12 +269,10 @@ const SectionHeaderContent = (props) => {
     getIndexingArray,
     setCloseEditIndexDialogVisible,
     rootFolderId,
-    setGuidRectsShare,
-    setGuidRectsUploading,
-    maintenanceExist,
-    welcomeFormFillingTipsVisible,
     guidAnimationVisible,
     setguidAnimationVisible,
+    setRefMap,
+    deleteRefMap,
   } = props;
 
   const location = useLocation();
@@ -599,26 +598,19 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
-  const setGuidRects = () => {
-    if (buttonRef?.current?.clientWidth) {
-      setGuidRectsShare(buttonRef.current.getClientRects()[0]);
-    }
-    if (addButtonRef?.current?.clientWidth) {
-      setGuidRectsUploading(addButtonRef.current.getClientRects()[0]);
-    }
-  };
-
   React.useEffect(() => {
-    setGuidRects();
-    window.addEventListener("resize", setGuidRects);
+    if (buttonRef?.current) {
+      setRefMap(GuidanceRefKey.Share, buttonRef);
+    }
+    if (addButtonRef?.current) {
+      setRefMap(GuidanceRefKey.Uploading, addButtonRef);
+    }
 
-    return () => window.removeEventListener("resize", setGuidRects);
-  }, [
-    buttonRef?.current,
-    addButtonRef?.current,
-    maintenanceExist,
-    welcomeFormFillingTipsVisible,
-  ]);
+    return () => {
+      deleteRefMap(GuidanceRefKey.Share);
+      deleteRefMap(GuidanceRefKey.Uploading);
+    };
+  }, [buttonRef.current, addButtonRef.current]);
 
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
@@ -810,6 +802,7 @@ export default inject(
     uploadDataStore,
     indexingStore,
     dialogsStore,
+    guidanceStore,
   }) => {
     const { startUpload } = uploadDataStore;
 
@@ -832,9 +825,9 @@ export default inject(
 
       categoryType,
       setBufferSelection,
-      setGuidRectsShare,
-      setGuidRectsUploading,
     } = filesStore;
+
+    const { setRefMap, deleteRefMap } = guidanceStore;
 
     const {
       setIsSectionBodyLoading,
@@ -1058,12 +1051,12 @@ export default inject(
       getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
-      setGuidRectsShare,
-      setGuidRectsUploading,
       maintenanceExist,
       welcomeFormFillingTipsVisible,
       guidAnimationVisible,
       setguidAnimationVisible,
+      setRefMap,
+      deleteRefMap,
     };
   },
 )(

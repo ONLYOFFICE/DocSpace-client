@@ -167,7 +167,7 @@ const filesStore = new FilesStore(
   indexingStore,
 );
 
-const guidanceStore = new GuidanceStore(filesStore);
+const guidanceStore = new GuidanceStore();
 
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
@@ -264,6 +264,7 @@ const contextOptionsStore = new ContextOptionsStore(
   userStore,
   indexingStore,
   clientLoadingStore,
+  guidanceStore,
 );
 
 const hotkeyStore = new HotkeyStore(

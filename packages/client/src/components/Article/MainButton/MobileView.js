@@ -35,6 +35,7 @@ import { mobile } from "@docspace/shared/utils";
 import { isMobileOnly } from "react-device-detect";
 
 import { MainButtonMobile } from "@docspace/shared/components/main-button-mobile";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 
 const StyledMainButtonMobile = styled(MainButtonMobile)`
   position: fixed;
@@ -80,8 +81,8 @@ const MobileView = ({
   isRoomsFolder,
   mainButtonMobileVisible,
   uploaded,
-  setGuidRectsUploading,
-  setGuidRectsMainButton,
+  setRefMap,
+  deleteRefMap,
 }) => {
   const [isOpenButton, setIsOpenButton] = React.useState(false);
   const [percentProgress, setPercentProgress] = React.useState(0);
@@ -104,19 +105,16 @@ const MobileView = ({
     clearPrimaryProgressData && clearPrimaryProgressData();
   }, [clearUploadData, clearPrimaryProgressData]);
 
-  const setGuidRects = () => {
-    if (mainButtonRef?.current) {
-      setGuidRectsUploading(mainButtonRef?.current.getClientRects()[0]);
-      setGuidRectsMainButton(null);
-    }
-  };
-
   React.useEffect(() => {
-    setGuidRects();
-    window.addEventListener("resize", setGuidRects);
+    if (mainButtonRef?.current) {
+      setRefMap(GuidanceRefKey.Uploading, mainButtonRef);
+      deleteRefMap(GuidanceRefKey.MainButton);
+    }
 
-    return () => window.removeEventListener("resize", setGuidRects);
-  }, [mainButtonRef?.current]);
+    return () => {
+      deleteRefMap(GuidanceRefKey.Uploading);
+    };
+  }, [mainButtonRef.current]);
 
   React.useEffect(() => {
     let currentPrimaryNumEl = primaryNumEl;
@@ -243,54 +241,58 @@ const MobileView = ({
   );
 };
 
-export default inject(({ uploadDataStore, treeFoldersStore, filesStore }) => {
-  const { isRoomsFolder } = treeFoldersStore;
-  const {
-    files,
-    setUploadPanelVisible,
-    secondaryProgressDataStore,
-    primaryProgressDataStore,
-    clearUploadData,
-    uploaded,
-  } = uploadDataStore;
+export default inject(
+  ({ uploadDataStore, treeFoldersStore, guidanceStore }) => {
+    const { isRoomsFolder } = treeFoldersStore;
+    const {
+      files,
+      setUploadPanelVisible,
+      secondaryProgressDataStore,
+      primaryProgressDataStore,
+      clearUploadData,
+      uploaded,
+    } = uploadDataStore;
 
-  const {
-    visible: primaryProgressDataVisible,
-    percent: primaryProgressDataPercent,
-    loadingFile: primaryProgressDataLoadingFile,
-    alert: primaryProgressDataAlert,
-    errors: primaryProgressDataErrors,
-    clearPrimaryProgressData,
-  } = primaryProgressDataStore;
+    const { setRefMap, deleteRefMap } = guidanceStore;
 
-  const {
-    visible: secondaryProgressDataStoreVisible,
-    percent: secondaryProgressDataStorePercent,
-    currentFile: secondaryProgressDataStoreCurrentFile,
-    filesCount: secondaryProgressDataStoreCurrentFilesCount,
-    clearSecondaryProgressData,
-    isDownload: secondaryProgressDataStoreIsDownload,
-  } = secondaryProgressDataStore;
+    const {
+      visible: primaryProgressDataVisible,
+      percent: primaryProgressDataPercent,
+      loadingFile: primaryProgressDataLoadingFile,
+      alert: primaryProgressDataAlert,
+      errors: primaryProgressDataErrors,
+      clearPrimaryProgressData,
+    } = primaryProgressDataStore;
 
-  return {
-    files,
-    clearUploadData,
-    setUploadPanelVisible,
-    primaryProgressDataVisible,
-    primaryProgressDataPercent,
-    primaryProgressDataLoadingFile,
-    primaryProgressDataAlert,
-    primaryProgressDataErrors,
-    clearPrimaryProgressData,
-    secondaryProgressDataStoreVisible,
-    secondaryProgressDataStorePercent,
-    secondaryProgressDataStoreIsDownload,
-    secondaryProgressDataStoreCurrentFile,
-    secondaryProgressDataStoreCurrentFilesCount,
-    clearSecondaryProgressData,
-    isRoomsFolder,
-    uploaded,
-    setGuidRectsUploading: filesStore.setGuidRectsUploading,
-    setGuidRectsMainButton: filesStore.setGuidRectsMainButton,
-  };
-})(observer(MobileView));
+    const {
+      visible: secondaryProgressDataStoreVisible,
+      percent: secondaryProgressDataStorePercent,
+      currentFile: secondaryProgressDataStoreCurrentFile,
+      filesCount: secondaryProgressDataStoreCurrentFilesCount,
+      clearSecondaryProgressData,
+      isDownload: secondaryProgressDataStoreIsDownload,
+    } = secondaryProgressDataStore;
+
+    return {
+      files,
+      clearUploadData,
+      setUploadPanelVisible,
+      primaryProgressDataVisible,
+      primaryProgressDataPercent,
+      primaryProgressDataLoadingFile,
+      primaryProgressDataAlert,
+      primaryProgressDataErrors,
+      clearPrimaryProgressData,
+      secondaryProgressDataStoreVisible,
+      secondaryProgressDataStorePercent,
+      secondaryProgressDataStoreIsDownload,
+      secondaryProgressDataStoreCurrentFile,
+      secondaryProgressDataStoreCurrentFilesCount,
+      clearSecondaryProgressData,
+      isRoomsFolder,
+      uploaded,
+      setRefMap,
+      deleteRefMap,
+    };
+  },
+)(observer(MobileView));

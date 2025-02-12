@@ -149,9 +149,9 @@ const Table = ({
   isIndexing,
   icon,
   isDownload,
-  setGuidRectsPdf,
-  setGuidRectsReady,
   isTutorialEnabled,
+  setRefMap,
+  deleteRefMap,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -227,8 +227,6 @@ const Table = ({
         isRooms={isRooms}
         isTrashFolder={isTrashFolder}
         hideColumns={hideColumns}
-        setGuidRectsPdf={setGuidRectsPdf}
-        setGuidRectsReady={setGuidRectsReady}
         isHighlight={
           highlightFile.id == item.id
             ? highlightFile.isExst === !item.fileExst
@@ -237,6 +235,8 @@ const Table = ({
         icon={icon}
         isDownload={isDownload}
         isTutorialEnabled={isTutorialEnabled}
+        setRefMap={setRefMap}
+        deleteRefMap={deleteRefMap}
       />
     ));
   }, [
@@ -255,6 +255,8 @@ const Table = ({
     icon,
     isDownload,
     isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
   ]);
 
   return (
@@ -298,11 +300,10 @@ export default inject(
     filesStore,
     infoPanelStore,
     treeFoldersStore,
-
     tableStore,
     userStore,
     settingsStore,
-
+    guidanceStore,
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
@@ -335,14 +336,13 @@ export default inject(
       roomsFilter,
       highlightFile,
       filter,
-      setGuidRectsPdf,
-      setGuidRectsReady,
     } = filesStore;
 
     const { isIndexEditingMode } = indexingStore;
     const { changeIndex } = filesActionsStore;
     const { isIndexedFolder } = selectedFolderStore;
     const { theme, currentDeviceType } = settingsStore;
+    const { setRefMap, deleteRefMap } = guidanceStore;
 
     return {
       filesList,
@@ -365,11 +365,11 @@ export default inject(
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
-      setGuidRectsPdf,
-      setGuidRectsReady,
       icon,
       isDownload,
       isTutorialEnabled,
+      setRefMap,
+      deleteRefMap,
     };
   },
 )(observer(Table));

@@ -31,6 +31,7 @@ import { withTranslation } from "react-i18next";
 
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import { FolderType } from "@docspace/shared/enums";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 // import { Context } from "@docspace/shared/utils";
 
 import Tile from "./sub-components/Tile";
@@ -89,8 +90,8 @@ const FileTile = (props) => {
     icon,
     isDownload,
     selectableRef,
-    setGuidRectsPdf,
-    setGuidRectsReady,
+    setRefMap,
+    deleteRefMap,
   } = props;
 
   // const { sectionWidth } = useContext(Context);
@@ -111,20 +112,18 @@ const FileTile = (props) => {
 
   const { thumbnailUrl } = item;
 
-  const setGuidRects = () => {
+  useEffect(() => {
     if (item?.isPDF && tileRef?.current) {
-      setGuidRectsPdf(tileRef?.current.getClientRects()[0]);
+      setRefMap(GuidanceRefKey.Pdf, tileRef);
     }
     if (item?.type === FolderType.Done && tileRef?.current) {
-      setGuidRectsReady(tileRef?.current.getClientRects()[0]);
+      setRefMap(GuidanceRefKey.Ready, tileRef);
     }
-  };
 
-  useEffect(() => {
-    setGuidRects();
-    window.addEventListener("resize", setGuidRects);
-
-    return () => window.removeEventListener("resize", setGuidRects);
+    return () => {
+      deleteRefMap(GuidanceRefKey.Pdf);
+      deleteRefMap(GuidanceRefKey.Ready);
+    };
   }, []);
 
   const element = (
@@ -223,19 +222,21 @@ const FileTile = (props) => {
 
 export default inject(
   (
-    { filesSettingsStore, filesStore, treeFoldersStore, uploadDataStore },
+    {
+      filesSettingsStore,
+      filesStore,
+      treeFoldersStore,
+      uploadDataStore,
+      guidanceStore,
+    },
     { item },
   ) => {
     const { getIcon } = filesSettingsStore;
-    const {
-      setSelection,
-      withCtrlSelect,
-      withShiftSelect,
-      highlightFile,
-      setGuidRectsPdf,
-      setGuidRectsReady,
-    } = filesStore;
+    const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
+      filesStore;
     const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
+
+    const { setRefMap, deleteRefMap } = guidanceStore;
 
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
@@ -253,8 +254,8 @@ export default inject(
       isHighlight,
       icon,
       isDownload,
-      setGuidRectsPdf,
-      setGuidRectsReady,
+      setRefMap,
+      deleteRefMap,
     };
   },
 )(

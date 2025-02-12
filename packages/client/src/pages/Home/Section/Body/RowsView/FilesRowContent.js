@@ -46,6 +46,7 @@ import withContent from "../../../../../HOCs/withContent";
 import {
   connectedCloudsTypeTitleTranslation,
   getFileTypeName,
+  getRoomTypeName,
 } from "../../../../../helpers/filesUtils";
 
 const SimpleFilesRowContent = styled(RowContent).attrs(injectDefaultTheme)`
@@ -184,6 +185,7 @@ const FilesRowContent = ({
     quotaLimit,
     usedSpace,
     order,
+    roomType,
   } = item;
 
   const contentComponent = () => {
@@ -200,6 +202,9 @@ const FilesRowContent = ({
 
       case SortByFieldName.Type:
         return getFileTypeName(fileType);
+
+      case SortByFieldName.RoomType:
+        return getRoomTypeName(roomType, t);
 
       case SortByFieldName.Tags:
         if (tags?.length === 0) return "";
@@ -228,21 +233,6 @@ const FilesRowContent = ({
         return updatedDate;
     }
   };
-
-  // const additionalComponent = () => {
-  //   if (isRooms) return getRoomTypeName(item.roomType, t);
-
-  //   if (!fileExst && !contentLength && !providerKey)
-  //     return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
-  //       "Translations:Files",
-  //     )}`;
-
-  //   if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
-
-  //   return "";
-  // };
-
-  // const additionalInfo = additionalComponent();
 
   const mainInfo = contentComponent();
 
@@ -298,20 +288,6 @@ const FilesRowContent = ({
           {mainInfo}
         </Text>
       ) : null}
-
-      {/* {additionalInfo && (
-          <Text
-            containerMinWidth="90px"
-            containerWidth="10%"
-            as="div"
-            className="row-content-text"
-            fontSize="12px"
-            fontWeight={400}
-            truncate={true}
-          >
-            {additionalInfo}
-          </Text>
-        )} */}
     </SimpleFilesRowContent>
   );
 };
@@ -325,23 +301,24 @@ export default inject(
     selectedFolderStore,
   }) => {
     const { filter, roomsFilter } = filesStore;
-    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
-      treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isRoomsFolder,
+      isArchiveFolder,
+      isTemplatesFolder,
+    } = treeFoldersStore;
     const { isIndexedFolder } = selectedFolderStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
     const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
 
-    const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
-      currentQuotaStore;
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     return {
       filterSortBy,
       theme: settingsStore.theme,
       isTrashFolder: isRecycleBinFolder,
       isDefaultRoomsQuotaSet,
-      isStatisticsAvailable,
-      showStorageInfo,
       isIndexing: isIndexedFolder,
     };
   },

@@ -42,7 +42,6 @@ import {
   StyledText,
   StyledTextWithExpander,
   StyledLinkWithDropdown,
-  // Caret,
 } from "./LinkWithDropdown.styled";
 import { LinkWithDropDownProps } from "./LinkWithDropdown.types";
 

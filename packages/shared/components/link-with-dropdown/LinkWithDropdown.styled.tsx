@@ -25,15 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import ExpanderDownReactSvg from "PUBLIC_DIR/images/expander-down.react.svg";
 
 import { Text } from "../text";
 import { TextProps } from "../text/Text.types";
 
-import {
-  SimpleLinkWithDropdownProps,
-  TDropdownType,
-} from "./LinkWithDropdown.types";
+import { SimpleLinkWithDropdownProps } from "./LinkWithDropdown.types";
 import { injectDefaultTheme } from "../../utils";
 
 const SimpleLinkWithDropdown = ({
@@ -51,58 +47,6 @@ const SimpleLinkWithDropdown = ({
   children,
   ...props
 }: SimpleLinkWithDropdownProps) => <a {...props}>{children}</a>;
-
-// eslint-disable-next-line react/prop-types, no-unused-vars
-const ExpanderDownIconWrapper = ({
-  isSemitransparent,
-  dropdownType,
-  isOpen,
-  isDisabled,
-  ...props
-}: {
-  isSemitransparent: boolean;
-  dropdownType: TDropdownType;
-  isOpen: boolean;
-  isDisabled: boolean;
-}) => <ExpanderDownReactSvg {...props} />;
-
-const Caret = styled(ExpanderDownIconWrapper).attrs(injectDefaultTheme)<{
-  color?: string;
-}>`
-  position: absolute;
-
-  width: ${(props) => props.theme.linkWithDropdown.caret.width};
-  min-width: ${(props) => props.theme.linkWithDropdown.caret.minWidth};
-  height: ${(props) => props.theme.linkWithDropdown.caret.height};
-  min-height: ${(props) => props.theme.linkWithDropdown.caret.minHeight};
-  margin-inline-start: ${(props) =>
-    props.theme.linkWithDropdown.caret.marginLeft};
-  margin-top: ${(props) => props.theme.linkWithDropdown.caret.marginTop};
-
-  inset-inline-end: ${(props) => props.theme.linkWithDropdown.caret.right};
-  top: ${(props) => props.theme.linkWithDropdown.caret.top};
-  bottom: ${(props) => props.theme.linkWithDropdown.caret.bottom};
-
-  margin: ${(props) => props.theme.linkWithDropdown.caret.margin};
-
-  path {
-    fill: ${(props) =>
-      props.isDisabled
-        ? props.theme.linkWithDropdown.disableColor
-        : props.color};
-  }
-
-  ${(props) =>
-    props.dropdownType === "appearDashedAfterHover" &&
-    `opacity: ${props.theme.linkWithDropdown.caret.opacity};`}
-
-  ${(props) =>
-    props.isOpen &&
-    `
-      bottom: ${props.theme.linkWithDropdown.caret.isOpenBottom};
-      transform: ${props.theme.linkWithDropdown.caret.transform};
-    `}
-`;
 
 const StyledLinkWithDropdown = styled(SimpleLinkWithDropdown).attrs(
   injectDefaultTheme,
@@ -173,6 +117,7 @@ const StyledTextWithExpander = styled.div<{ isOpen?: boolean }>`
       transform: ${(props) => (props.isOpen ? "rotate(180deg)" : "rotate(0)")};
       width: 6.35px;
       height: auto;
+      padding-bottom: 2px;
     }
   }
 `;
@@ -249,5 +194,4 @@ export {
   StyledTextWithExpander,
   StyledText,
   StyledLinkWithDropdown,
-  Caret,
 };

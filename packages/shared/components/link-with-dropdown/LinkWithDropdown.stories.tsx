@@ -24,64 +24,160 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-
 import { LinkWithDropdown } from "./LinkWithDropdown";
-
-import { LinkWithDropDownProps } from "./LinkWithDropdown.types";
 
 const meta = {
   title: "Components/LinkWithDropdown",
   component: LinkWithDropdown,
-  parameters: { docs: { description: { component: "Link with dropdown" } } },
-  argTypes: {
-    color: { control: "color" },
-    dropdownType: { required: false },
-    // linkLabel: { control: "text", description: "Link text" },
-    // onItemClick: { action: "Button action", table: { disable: true } },
+  parameters: {
+    docs: {
+      description: {
+        component: `
+A dropdown component that appears as a link and expands to show a menu of options.
+
+## Features
+- Customizable text styles (font size, weight, color)
+- Optional expander icon
+- Support for disabled state
+- Theme support (light/dark)
+- Keyboard navigation
+- ARIA attributes for accessibility
+`,
+      },
+    },
   },
+  argTypes: {
+    color: {
+      control: "color",
+      description: "Text color of the link",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "theme.color" },
+      },
+    },
+    dropdownType: {
+      control: "select",
+      options: ["alwaysDashed", "appearDashedAfterHover"],
+      description: "Determines when the dashed underline appears",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "alwaysDashed" },
+      },
+    },
+    fontSize: {
+      control: "text",
+      description: "Font size of the link text",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "13px" },
+      },
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "Disables the dropdown functionality",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
+    },
+    withExpander: {
+      control: "boolean",
+      description: "Shows/hides the expander icon",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
+    },
+    isSemitransparent: {
+      control: "boolean",
+      description: "Makes the link semi-transparent",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: false },
+      },
+    },
+  },
+  tags: ["autodocs"],
 } satisfies Meta<typeof LinkWithDropdown>;
+
 type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const Template = ({ ...args }: LinkWithDropDownProps) => {
-  const dropdownItems = [
-    {
-      key: "key1",
-      label: "Button 1",
-      onClick: () => {},
-    },
-    {
-      key: "key2",
-      label: "Button 2",
-      onClick: () => {},
-    },
-    {
-      key: "key3",
-      isSeparator: true,
-    },
-    {
-      key: "key4",
-      label: "Button 3",
-      onClick: () => {},
-    },
-  ];
-  return (
-    <LinkWithDropdown {...args} data={dropdownItems}>
-      Test link
-    </LinkWithDropdown>
-  );
-};
+const dropdownItems = [
+  {
+    key: "key1",
+    label: "Button 1",
+    onClick: () => console.log("Button 1 clicked"),
+  },
+  {
+    key: "key2",
+    label: "Button 2",
+    onClick: () => console.log("Button 2 clicked"),
+  },
+  {
+    key: "key3",
+    isSeparator: true,
+  },
+  {
+    key: "key4",
+    label: "Button 3",
+    onClick: () => console.log("Button 3 clicked"),
+  },
+];
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
   args: {
+    children: "Default Link",
+    data: dropdownItems,
     fontSize: "13px",
     fontWeight: 400,
     isBold: false,
     isTextOverflow: false,
     isSemitransparent: false,
+  },
+};
+
+export const WithExpander: Story = {
+  args: {
+    ...Default.args,
+    children: "Link with Expander",
+    withExpander: true,
+  },
+};
+
+export const CustomStyling: Story = {
+  args: {
+    ...Default.args,
+    children: "Custom Styled Link",
+    fontSize: "16px",
+    fontWeight: 600,
+    isBold: true,
+    color: "#4781d1",
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    ...Default.args,
+    children: "Disabled Link",
+    isDisabled: true,
+  },
+};
+
+export const SemiTransparent: Story = {
+  args: {
+    ...Default.args,
+    children: "Semi-transparent Link",
+    isSemitransparent: true,
+  },
+};
+
+export const WithCustomWidth: Story = {
+  args: {
+    ...Default.args,
+    children: "Custom Width Link",
+    manualWidth: "300px",
   },
 };

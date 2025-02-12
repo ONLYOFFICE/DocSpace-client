@@ -1509,7 +1509,11 @@ class FilesActionStore {
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
       this.treeFoldersStore;
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
-    const { rootFolderType } = this.selectedFolderStore;
+    const {
+      rootFolderType,
+      shared,
+      id: selectedFolderId,
+    } = this.selectedFolderStore;
 
     const setIsLoading = (param) => {
       setIsSectionBodyLoading(param);
@@ -1545,6 +1549,14 @@ class FilesActionStore {
 
     newFilter.search = title;
     newFilter.folder = parentId;
+
+    const publicKey = await this.getPublicKey({
+      ...item,
+      id: selectedFolderId,
+      shared,
+      rootFolderType,
+    });
+    if (publicKey) newFilter.key = publicKey;
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||

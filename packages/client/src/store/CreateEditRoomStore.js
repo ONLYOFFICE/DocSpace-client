@@ -347,11 +347,13 @@ class CreateEditRoomStore {
   onCreateRoom = async (t, withConfirm = false) => {
     const roomParams = this.roomParams;
 
-    const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
-      this.filesActionsStore;
+    const {
+      processCreatingRoomFromData,
+      setProcessCreatingRoomFromData,
+      preparingDataForCopyingToRoom,
+    } = this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
     const { createRoom, selection, bufferSelection } = this.filesStore;
-    const { preparingDataForCopyingToRoom } = this.filesActionsStore;
     const { getUploadedLogoData } = this.avatarEditorDialogStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover } = this.dialogsStore;
@@ -479,6 +481,7 @@ class CreateEditRoomStore {
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
     const { setSelection } = this.filesStore;
     const { setView, setIsVisible } = this.infoPanelStore;
+    const { getPublicKey } = this.filesActionsStore;
 
     const state = {
       isRoot: false,
@@ -490,6 +493,14 @@ class CreateEditRoomStore {
 
     const newFilter = FilesFilter.getDefault();
     newFilter.folder = room.id;
+
+    if (
+      room.roomType === RoomsType.PublicRoom ||
+      room.roomType === RoomsType.FormRoom
+    ) {
+      const shareKey = await getPublicKey({ ...room, shared: true });
+      if (shareKey) newFilter.key = shareKey;
+    }
 
     setIsSectionBodyLoading(true);
 

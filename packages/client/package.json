@@ -4,14 +4,13 @@
   "private": true,
   "homepage": "",
   "scripts": {
+    "before-build": "node ../../common/scripts/before-build.js",
     "build": "webpack --mode production",
     "build:translations": "node scripts/buildTranslations.js",
     "clean": "shx rm -rf dist",
     "deploy": "shx --silent mkdir -p ../../../publish/web/client && shx cp -r dist/* ../../../publish/web/client",
     "start": "webpack-cli serve",
     "start-prod": "serve dist -s -p 5001",
-    "start:internal": "webpack-cli serve",
-    "start-prod:internal": "serve dist -s -p 5001",
     "analyze": "webpack --profile --json  --env mode=analyze  && webpack-bundle-analyzer bundle/output/path/stats.json",
     "test:build": "PORT=5110 E2E_TEST=true pnpm run build:translations && pnpm run build",
     "test:start": "PORT=5111 NODE_ENV=production E2E_TEST=true node server.js",
@@ -150,27 +149,18 @@
     "targets": {
       "build": {
         "dependsOn": [
+          "before-build",
           "build:translations"
         ]
       },
       "start": {
         "dependsOn": [
-          "build:translations"
-        ]
-      },
-      "start:internal": {
-        "dependsOn": [
+          "before-build",
           "build:translations"
         ]
       },
       "start-prod": {
         "dependsOn": [
-          "build"
-        ]
-      },
-      "start-prod:internal": {
-        "dependsOn": [
-          "build:translations",
           "build"
         ]
       },

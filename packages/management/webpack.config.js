@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,6 +31,7 @@ const ModuleFederationPlugin =
   require("webpack").container.ModuleFederationPlugin;
 const DefinePlugin = require("webpack").DefinePlugin;
 const BannerPlugin = require("webpack").BannerPlugin;
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -318,6 +319,8 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
+  console.log("ENV", { env });
+
   config.devtool = "source-map";
 
   if (argv.mode === "production") {
@@ -333,6 +336,7 @@ module.exports = (env, argv) => {
             },
           },
           extractComments: false,
+          parallel: false,
         }),
       ],
     };
@@ -439,6 +443,23 @@ module.exports = (env, argv) => {
 */`,
     })
   );
+
+  if (!env.lint || env.lint == "true") {
+    console.log("Enable eslint");
+    config.plugins.push(
+      new ESLintPlugin({
+        configType: "eslintrc",
+        cacheLocation: path.resolve(
+          __dirname,
+          "../../node_modules/.cache/.eslintcache"
+        ),
+        quiet: true,
+        formatter: "json",
+      })
+    );
+  } else {
+    console.log("Skip eslint");
+  }
 
   return config;
 };

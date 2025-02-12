@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import React from "react";
 import BigIconPlay from "PUBLIC_DIR/images/media.bgplay.react.svg";
-import WrapperPlayerBigPlayButton from "./PlayerBigPlayButton.styled";
+import styles from "./PlayerBigPlayButton.module.scss";
 import PlayerBigPlayButtonProps from "./PlayerBigPlayButton.props";
 
 export const PlayerBigPlayButton = ({
@@ -36,10 +36,17 @@ export const PlayerBigPlayButton = ({
   if (!visible) return;
 
   return (
-    <WrapperPlayerBigPlayButton
+    <div
+      className={styles.wrapper}
       onContextMenu={(event) => event.preventDefault()}
+      data-testid="player-big-play-button"
+      aria-label="Play media"
     >
-      <BigIconPlay onClick={onClick} />
-    </WrapperPlayerBigPlayButton>
+      <BigIconPlay
+        onClick={onClick}
+        data-testid="play-icon"
+        role="presentation"
+      />
+    </div>
   );
 };

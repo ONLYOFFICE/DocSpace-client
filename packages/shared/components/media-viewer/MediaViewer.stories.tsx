@@ -24,11 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
-import { useState } from "react";
-import { Meta, StoryObj } from "@storybook/react";
+import React from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { useTranslation } from "react-i18next";
 
 import { DeviceType } from "../../enums";
@@ -42,24 +39,44 @@ import { Button } from "../button";
 import MediaViewer from "./MediaViewer";
 import type { MediaViewerProps, PlaylistType } from "./MediaViewer.types";
 
-type MediaViewerType = typeof MediaViewer;
-type Story = StoryObj<MediaViewerType>;
-
-const meta = {
+const meta: Meta<typeof MediaViewer> = {
   title: "Components/MediaViewer",
   component: MediaViewer,
-  parameters: {},
+  parameters: {
+    docs: {
+      description: {
+        component: `MediaViewer is a component for displaying various media types with a focus on images. 
+        It supports playlist functionality and responsive design for different device types.`,
+      },
+    },
+  },
+  argTypes: {
+    currentDeviceType: {
+      control: { type: "select" },
+      options: Object.values(DeviceType),
+      description: "Device type for responsive display",
+    },
+    files: {
+      control: "object",
+      description: "Array of media files to display",
+    },
+    onClose: { action: "closed" },
+    nextMedia: { action: "next" },
+    prevMedia: { action: "previous" },
+  },
   decorators: [i18nextStoryDecorator],
-} satisfies Meta<MediaViewerType>;
+  tags: ["autodocs"],
+};
 
 export default meta;
 
+type Story = StoryObj<typeof MediaViewer>;
+
 const DefaultTemplate = (props: MediaViewerProps) => {
   const { onClose, files, nextMedia, prevMedia } = props;
-
   const { t } = useTranslation();
-  const [visible, setVisible] = useState<boolean>(false);
-  const [playlistPos, setPlaylistPos] = useState(0);
+  const [visible, setVisible] = React.useState<boolean>(false);
+  const [playlistPos, setPlaylistPos] = React.useState(0);
 
   const openMediaViewer = () => setVisible(true);
 
@@ -89,9 +106,7 @@ const DefaultTemplate = (props: MediaViewerProps) => {
 
   const onPrevMedia = () => {
     const nextPlaylistPos = playlistPos - 1;
-
     if (nextPlaylistPos !== -1) setPlaylistPos(nextPlaylistPos);
-
     prevMedia?.();
   };
 
@@ -108,13 +123,7 @@ const DefaultTemplate = (props: MediaViewerProps) => {
       96: iconSize96,
     };
 
-    const result = icons[size]?.get(extensions[extension]);
-
-    return result;
-  };
-
-  const getIconStory = (size: number, ext: string) => {
-    return getIconUrl(size, ext) ?? "";
+    return icons[size]?.get(extensions[extension]) ?? "";
   };
 
   return (
@@ -122,7 +131,6 @@ const DefaultTemplate = (props: MediaViewerProps) => {
       <Button label="Open viewer" onClick={openMediaViewer} />
       {visible ? (
         <Portal
-          visible
           element={
             <MediaViewer
               {...props}
@@ -130,12 +138,12 @@ const DefaultTemplate = (props: MediaViewerProps) => {
               visible={visible}
               playlist={playlist}
               isPreviewFile={false}
-              getIcon={getIconStory}
+              getIcon={getIconUrl}
               nextMedia={onNextMedia}
               prevMedia={onPrevMedia}
               playlistPos={playlistPos}
               onClose={onCloseMediaViewer}
-              currentFileId={playlist[playlistPos].fileId}
+              currentFileId={playlist[playlistPos]?.fileId}
             />
           }
         />
@@ -144,8 +152,9 @@ const DefaultTemplate = (props: MediaViewerProps) => {
   );
 };
 
-const files: TFile[] = [
+const filesMock: TFile[] = [
   {
+    isFile: true,
     access: 0,
     canShare: true,
     comment: "",
@@ -218,8 +227,8 @@ const files: TFile[] = [
     webUrl:
       "https://helpcenter.onlyoffice.com/ru/images/Help/Guides/big/guide139/hyperlink_settings.png",
   },
-
   {
+    isFile: true,
     access: 0,
     canShare: true,
     comment: "",
@@ -287,178 +296,45 @@ const files: TFile[] = [
       WebReview: false,
       WebView: false,
     },
-    viewUrl: "	https://api.onlyoffice.com/content/img/sprite.svg",
-    webUrl: "	https://api.onlyoffice.com/content/img/sprite.svg",
+    viewUrl:
+      "https://helpcenter.onlyoffice.com/ru/images/Help/GettingStarted/DocSpace/Big/RoomTypes.png",
+    webUrl:
+      "https://helpcenter.onlyoffice.com/ru/images/Help/GettingStarted/DocSpace/Big/RoomTypes.png",
   },
-
-  // {
-  //   access: 0,
-  //   canShare: true,
-  //   comment: "",
-  //   contentLength: "",
-  //   created: new Date("2024-01-01T00:00:00.0000000Z"),
-  //   createdBy: {
-  //     avatarSmall: "",
-  //     displayName: "",
-  //     hasAvatar: false,
-  //     id: "f",
-  //     profileUrl: "",
-  //   },
-  //   denyDownload: false,
-  //   denySharing: false,
-  //   fileExst: ".mp3",
-  //   fileStatus: 0,
-  //   fileType: 3,
-  //   folderId: 17,
-  //   id: 2,
-  //   mute: false,
-  //   pureContentLength: 5319693,
-  //   rootFolderId: 2,
-  //   rootFolderType: 14,
-  //   security: {
-  //     Convert: true,
-  //     Copy: true,
-  //     CustomFilter: true,
-  //     Delete: true,
-  //     Download: true,
-  //     Duplicate: true,
-  //     Edit: true,
-  //     EditHistory: true,
-  //     FillForms: true,
-  //     Lock: true,
-  //     Move: true,
-  //     Read: true,
-  //     ReadHistory: true,
-  //     Rename: true,
-  //     Review: true,
-  //     SubmitToFormGallery: false,
-  //   },
-  //   shared: false,
-  //   thumbnailStatus: 1,
-  //   title: "BigBuckBunny.mp4",
-  //   updated: new Date("2024-01-01T00:00:00.0000000Z"),
-  //   updatedBy: {
-  //     avatarSmall: "",
-  //     displayName: "",
-  //     hasAvatar: false,
-  //     id: "",
-  //     profileUrl: "",
-  //   },
-  //   version: 1,
-  //   versionGroup: 1,
-  //   viewAccessibility: {
-  //     CanConvert: false,
-  //     CoAuhtoring: false,
-  //     ImageView: false,
-  //     MediaView: true,
-  //     MustConvert: false,
-  //     WebComment: false,
-  //     WebCustomFilterEditing: false,
-  //     WebEdit: false,
-  //     WebRestrictedEditing: false,
-  //     WebReview: false,
-  //     WebView: false,
-  //   },
-  //   viewUrl:
-  //     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-  //   webUrl:
-  //     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-  // },
-
-  // {
-  //   access: 0,
-  //   canShare: true,
-  //   comment: "",
-  //   contentLength: "",
-  //   created: new Date("2024-01-01T00:00:00.0000000Z"),
-  //   createdBy: {
-  //     avatarSmall: "",
-  //     displayName: "",
-  //     hasAvatar: false,
-  //     id: "f",
-  //     profileUrl: "",
-  //   },
-  //   denyDownload: false,
-  //   denySharing: false,
-  //   fileExst: ".mp3",
-  //   fileStatus: 0,
-  //   fileType: 3,
-  //   folderId: 17,
-  //   id: 3,
-  //   mute: false,
-  //   pureContentLength: 5319693,
-  //   rootFolderId: 2,
-  //   rootFolderType: 14,
-  //   security: {
-  //     Convert: true,
-  //     Copy: true,
-  //     CustomFilter: true,
-  //     Delete: true,
-  //     Download: true,
-  //     Duplicate: true,
-  //     Edit: true,
-  //     EditHistory: true,
-  //     FillForms: true,
-  //     Lock: true,
-  //     Move: true,
-  //     Read: true,
-  //     ReadHistory: true,
-  //     Rename: true,
-  //     Review: true,
-  //     SubmitToFormGallery: false,
-  //   },
-  //   shared: false,
-  //   thumbnailStatus: 1,
-  //   title: "Sample MP3 File.mp3",
-  //   updated: new Date("2024-01-01T00:00:00.0000000Z"),
-  //   updatedBy: {
-  //     avatarSmall: "",
-  //     displayName: "",
-  //     hasAvatar: false,
-  //     id: "",
-  //     profileUrl: "",
-  //   },
-  //   version: 1,
-  //   versionGroup: 1,
-  //   viewAccessibility: {
-  //     CanConvert: false,
-  //     CoAuhtoring: false,
-  //     ImageView: false,
-  //     MediaView: true,
-  //     MustConvert: false,
-  //     WebComment: false,
-  //     WebCustomFilterEditing: false,
-  //     WebEdit: false,
-  //     WebRestrictedEditing: false,
-  //     WebReview: false,
-  //     WebView: false,
-  //   },
-  //   viewUrl:
-  //     "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
-  //   webUrl:
-  //     "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
-  // },
 ];
 
-export const Default = {
-  args: {
-    files,
-    extsImagePreviewed: [
-      ".svg",
-      ".bmp",
-      ".gif",
-      ".jpeg",
-      ".jpg",
-      ".png",
-      ".ico",
-      ".tif",
-      ".tiff",
-      ".webp",
-    ],
-    currentDeviceType: DeviceType.desktop,
-  },
+const extsImagePreviewed = [".png", ".jpg", ".jpeg", ".gif", ".svg"];
 
-  render: (props) => {
-    return <DefaultTemplate {...props} />;
+export const ImageGallery: Story = {
+  args: {
+    files: filesMock,
+    currentDeviceType: DeviceType.desktop,
+    extsImagePreviewed,
+    visible: true,
   },
-} satisfies Story;
+  parameters: {
+    docs: {
+      description: {
+        story: `Gallery view showing multiple images with navigation capabilities.`,
+      },
+    },
+  },
+  render: (args) => <DefaultTemplate {...args} />,
+};
+
+export const MobileView: Story = {
+  args: {
+    files: filesMock,
+    currentDeviceType: DeviceType.mobile,
+    extsImagePreviewed,
+    visible: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: `Mobile-optimized view of the image viewer.`,
+      },
+    },
+  },
+  render: (args) => <DefaultTemplate {...args} />,
+};

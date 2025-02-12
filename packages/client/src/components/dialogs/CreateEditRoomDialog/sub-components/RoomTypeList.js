@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -58,9 +58,18 @@ const getTooltipContent = (t) => {
   return TooltipRenderer;
 };
 
-const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
+const RoomTypeList = ({
+  t,
+  setRoomType,
+  disabledFormRoom,
+  setTemplateDialogIsVisible,
+}) => {
   const handleClick = (roomType) => {
     if (disabledFormRoom && roomType === RoomsType.FormRoom) return;
+
+    if (!roomType) {
+      setTemplateDialogIsVisible(true);
+    }
 
     setRoomType(roomType);
   };
@@ -85,6 +94,14 @@ const RoomTypeList = ({ t, setRoomType, disabledFormRoom }) => {
           disabledFormRoom={disabledFormRoom}
         />
       ))}
+      <RoomType
+        id="Template"
+        t={t}
+        isTemplate
+        type="listItem"
+        onClick={() => handleClick()}
+        disabledFormRoom={disabledFormRoom}
+      />
     </StyledRoomTypeList>
   );
 };

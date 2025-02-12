@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -196,12 +196,14 @@ const StyledSimpleFilesRow = styled(Row).attrs(injectDefaultTheme)`
     }
   }
 
-  .tablet-row-copy-link {
+  .tablet-row-copy-link,
+  .tablet-row-create-room {
     display: none;
   }
 
   @media ${tablet} {
-    .tablet-row-copy-link {
+    .tablet-row-copy-link,
+    .tablet-row-create-room {
       display: block;
     }
 
@@ -211,11 +213,13 @@ const StyledSimpleFilesRow = styled(Row).attrs(injectDefaultTheme)`
   }
 
   @media ${mobile} {
-    .tablet-row-copy-link {
+    .tablet-row-copy-link,
+    .tablet-row-create-room {
       display: none;
     }
 
-    .row-copy-link {
+    .row-copy-link,
+    .tablet-row-create-room {
       display: block;
 
       ${isMobileOnly &&
@@ -392,6 +396,7 @@ const SimpleFilesRow = (props) => {
       }
       color={item.logo?.color}
       isArchive={item.isArchive}
+      isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
     />
   );
@@ -462,7 +467,9 @@ const SimpleFilesRow = (props) => {
           contentElement={
             isMobileDevice || isRooms ? null : quickButtonsComponent
           }
-          badgesComponent={!isMobileDevice ? badgesComponent : null}
+          badgesComponent={
+            !isMobileDevice || item.isTemplate ? badgesComponent : null
+          }
           onSelect={onContentFileSelect}
           onContextClick={fileContextClick}
           isPrivacy={isPrivacy}
@@ -505,7 +512,9 @@ const SimpleFilesRow = (props) => {
               isMobileDevice || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
-            badgesComponent={isMobileDevice ? badgesComponent : null}
+            badgesComponent={
+              isMobileDevice && !item.isTemplate ? badgesComponent : null
+            }
           />
         </StyledSimpleFilesRow>
       </DragAndDrop>

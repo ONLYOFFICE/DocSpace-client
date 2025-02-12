@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -216,6 +216,12 @@ class TreeFoldersStore {
     );
   }
 
+  get templatesFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.Templates,
+    );
+  }
+
   get privacyFolder() {
     return this.treeFolders.find(
       (x) => x.rootFolderType === FolderType.Privacy,
@@ -323,6 +329,21 @@ class TreeFoldersStore {
       this.archiveFolder &&
       this.selectedFolderStore.id === this.archiveFolder.id
     );
+  }
+
+  get isTemplatesFolderRoot() {
+    return FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isTemplatesFolder() {
+    return (
+      FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType &&
+      this.selectedFolderStore.isRootFolder
+    );
+  }
+
+  get isRoomsFolderRoot() {
+    return FolderType.Rooms === this.selectedFolderStore.rootFolderType;
   }
 
   get isArchiveFolderRoot() {

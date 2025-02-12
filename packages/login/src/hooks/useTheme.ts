@@ -1,5 +1,5 @@
 import { i18n } from "i18next";
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -59,8 +59,8 @@ const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
 
   const [theme, setTheme] = React.useState<TTheme>(() => {
     const currColorTheme = colorTheme
-      ? colorTheme.themes.find((theme) => theme.id === colorTheme.selected) ??
-        ({} as TColorScheme)
+      ? (colorTheme.themes.find((theme) => theme.id === colorTheme.selected) ??
+        ({} as TColorScheme))
       : ({} as TColorScheme);
 
     let newTheme;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,6 +44,7 @@ import { Tags } from "@docspace/shared/components/tags";
 
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
+import TemplatesTile from "./TemplatesTile";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
 
@@ -104,11 +105,22 @@ const roomsStyles = css`
       isRooms
         ? theme.filesSection.tilesView.tile.roomsBottomBorderRadius
         : theme.filesSection.tilesView.tile.bottomBorderRadius};
+
+    .room-tile_bottom-content-wrapper {
+      display: flex;
+      gap: 20px;
+
+      .room-tile_bottom-content_field {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 `;
 
 const FolderStyles = css`
-  height: ${(props) => (props.isRoom ? "120px" : "64px")};
+  height: ${({ isTemplate, isRoom }) =>
+    isTemplate ? "126px" : isRoom ? "120px" : "64px"};
 `;
 
 const FileStyles = css`
@@ -614,9 +626,9 @@ class Tile extends React.PureComponent {
       iconProgress,
       isDownload,
       theme,
+      openUser,
     } = this.props;
-
-    const { isFolder, isRoom, id, fileExst } = item;
+    const { isFolder, isRoom, isTemplate, id, fileExst } = item;
 
     const renderElement = hasOwnProperty(this.props, "element");
 
@@ -706,9 +718,27 @@ class Tile extends React.PureComponent {
         isHighlight={isHighlight}
         iconProgress={iconProgress}
         isDownload={isDownload}
+        isTemplate={isTemplate}
       >
         {isFolder || (!fileExst && id === -1) ? (
-          isRoom ? (
+          isTemplate ? (
+            <TemplatesTile
+              {...this.props}
+              onContextMenu={onContextMenu}
+              cmRef={this.cm}
+              cbRef={this.checkboxContainerRef}
+              changeCheckbox={this.changeCheckbox}
+              onFileIconClick={this.onFileIconClick}
+              renderElement={renderElement}
+              renderContext={renderContext}
+              getOptions={getOptions}
+              contextMenuHeader={contextMenuHeader}
+              FilesTileContent={FilesTileContent}
+              badges={badges}
+              contextMenuTitle={title}
+              openUser={openUser}
+            />
+          ) : isRoom ? (
             <>
               <div className="room-tile_top-content">
                 {renderElement && !(!fileExst && id === -1) && !isEdit ? (

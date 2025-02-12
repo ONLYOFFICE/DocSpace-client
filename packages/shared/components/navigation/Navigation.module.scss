@@ -112,6 +112,20 @@
   }
 }
 
+.titleBlockBadge {
+  margin-inline-start: 8px;
+
+  div {
+    background-color: var(--navigation-header-icon-fill) !important;
+  }
+
+  &.rootFolderTitle {
+    div {
+      background-color: var(--navigation-root-folder-title-color) !important;
+    }
+  }
+}
+
 .expanderIcon {
   min-width: 8px !important;
   width: 8px !important;

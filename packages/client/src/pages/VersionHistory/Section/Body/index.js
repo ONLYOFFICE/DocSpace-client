@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -48,6 +48,7 @@ class SectionBodyContent extends React.Component {
     this.state = {
       isRestoreProcess: false,
       rowSizes: {},
+      showRows: false,
     };
 
     this.listRef = React.createRef();
@@ -101,6 +102,10 @@ class SectionBodyContent extends React.Component {
         [i]: itemHeight + 27, // composed of itemHeight = clientHeight of div and padding-top = 13px and padding-bottom = 12px
       },
     }));
+
+    this.setState({
+      showRows: true,
+    });
   };
 
   getSize = (i) => {
@@ -137,10 +142,13 @@ class SectionBodyContent extends React.Component {
 
   render() {
     const { versions, isLoading } = this.props;
-    const { isRestoreProcess } = this.state;
+    const { isRestoreProcess, showRows } = this.state;
 
     const renderList = ({ height, width }) => (
-      <StyledVersionList isRestoreProcess={isRestoreProcess}>
+      <StyledVersionList
+        isRestoreProcess={isRestoreProcess}
+        showRows={showRows}
+      >
         <List
           ref={this.listRef}
           className="List"

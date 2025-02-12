@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,6 +33,10 @@ export interface RoomLogoProps {
   isPrivacy?: boolean;
   /** Adds archive icon  */
   isArchive?: boolean;
+  /** Adds template icon  */
+  isTemplate?: boolean;
+  /** Adds template room icon  */
+  isTemplateRoom?: boolean;
   /** Adds checkbox when row/tile is hovered or checked  */
   withCheckbox?: boolean;
   /** Sets a checked state of the checkbox  */

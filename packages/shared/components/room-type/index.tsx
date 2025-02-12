@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,6 +34,7 @@ import { RoomsType } from "../../enums";
 import { RoomLogo } from "../room-logo";
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
+import { Badge } from "../badge";
 
 import {
   getRoomTypeDescriptionTranslation,
@@ -41,6 +42,7 @@ import {
 } from "./RoomType.utils";
 import styles from "./RoomType.module.scss";
 import { RoomTypeProps } from "./RoomType.types";
+import { globalColors } from "../../themes";
 
 const RoomType = ({
   roomType,
@@ -50,13 +52,15 @@ const RoomType = ({
   id,
   selectedId,
   disabledFormRoom,
+  isTemplate,
+  isTemplateRoom,
 }: RoomTypeProps) => {
   const { t } = useTranslation(["Common"]);
 
   const room = {
     type: roomType,
-    title: getRoomTypeTitleTranslation(t, roomType),
-    description: getRoomTypeDescriptionTranslation(t, roomType),
+    title: getRoomTypeTitleTranslation(t, roomType, isTemplate),
+    description: getRoomTypeDescriptionTranslation(t, roomType, isTemplate),
   };
 
   const isFormRoom = roomType === RoomsType.FormRoom;
@@ -73,7 +77,11 @@ const RoomType = ({
   const content = (
     <>
       <div className="choose_room-logo_wrapper">
-        <RoomLogo type={room.type} />
+        <RoomLogo
+          type={room.type}
+          isTemplate={isTemplate}
+          isTemplateRoom={isTemplateRoom}
+        />
       </div>
 
       <div className="choose_room-info_wrapper">
@@ -81,6 +89,17 @@ const RoomType = ({
           <Text noSelect className="choose_room-title-text">
             {t(room.title)}
           </Text>
+          {isTemplate ? (
+            <Badge
+              label={t("New")}
+              backgroundColor={globalColors.lightBlueMain}
+              fontSize="9px"
+              fontWeight={700}
+              borderRadius="50px"
+              noHover
+              isHovered={false}
+            />
+          ) : null}
         </div>
         <Text noSelect className="choose_room-description">
           {t(room.description)}

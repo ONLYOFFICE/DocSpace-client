@@ -33,6 +33,47 @@
       position: absolute;
     }
 
+    .template-icon-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: var(--room-icon-size);
+      height: var(--room-icon-size);
+
+      .template-icon-svg {
+        position: absolute;
+        width: var(--room-icon-size);
+        height: var(--room-icon-size);
+
+        svg {
+          width: var(--room-icon-size);
+          height: var(--room-icon-size);
+
+          path {
+            fill: var(--room-icon-color, var(--room-icon-button-color));
+          }
+        }
+      }
+
+      .room-image {
+        width: 24px;
+        height: 24px;
+        max-width: 24px;
+        max-height: 24px;
+        min-width: 24px;
+        min-height: 24px;
+      }
+
+      .room-title {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 16px;
+
+        color: var(--room-icon-color);
+        position: relative;
+      }
+    }
+
     .room-icon-empty {
       svg {
         width: 16px;

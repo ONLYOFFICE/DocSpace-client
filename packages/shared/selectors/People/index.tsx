@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -211,6 +211,7 @@ const PeopleSelector = ({
   onClose,
   withoutBackground,
   withBlur,
+  setActiveTab,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -511,11 +512,12 @@ const PeopleSelector = ({
 
   const changeActiveTab = useCallback(
     (tab: number | string) => {
+      if (setActiveTab) setActiveTab(`${tab}`);
       setActiveTabId(`${tab}`);
       onSearch("");
       resetSelectorList();
     },
-    [onSearch, resetSelectorList],
+    [onSearch, resetSelectorList, setActiveTab],
   );
 
   const withTabsProps: TSelectorTabs =

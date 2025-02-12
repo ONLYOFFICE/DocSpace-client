@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,9 @@ const version = pkg.version;
 const nextConfig = {
   basePath: "/doceditor",
   output: "standalone",
+  typescript: {
+    ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
+  },
   experimental: {
     instrumentationHook: true,
     serverComponentsExternalPackages: ["pino", "pino-pretty"],
@@ -72,6 +75,8 @@ const getBuildYear = () => {
 
 module.exports = {
   webpack(config) {
+    console.log("ENV", { env: process.env });
+
     config.devtool = "source-map";
 
     if (config.mode === "production") {
@@ -86,6 +91,7 @@ module.exports = {
               },
             },
             extractComments: false,
+            parallel: false,
           }),
         ],
       };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -199,8 +199,15 @@ class FilesTableHeader extends React.Component {
   };
 
   getDefaultColumns = () => {
-    const { isRooms, isTrashFolder, isRecentTab, isIndexing } = this.props;
+    const {
+      isRooms,
+      isTrashFolder,
+      isRecentTab,
+      isTemplatesFolder,
+      isIndexing,
+    } = this.props;
 
+    if (isTemplatesFolder) return this.getTemplatesColumns();
     if (isRooms) return this.getRoomsColumns();
     if (isTrashFolder) return this.getTrashFolderColumns();
     if (isRecentTab) return this.getRecentTabColumns();
@@ -621,6 +628,87 @@ class FilesTableHeader extends React.Component {
     return [...columns];
   };
 
+  getTemplatesColumns = () => {
+    const {
+      t,
+      showStorageInfo,
+      isDefaultRoomsQuotaSet,
+      isArchiveFolder,
+      roomColumnNameIsEnabled,
+      templatesRoomColumnTypeIsEnabled,
+      templateRoomColumnTagsIsEnabled,
+      templatesRoomColumnOwnerIsEnabled,
+      templateRoomColumnActivityIsEnabled,
+      templateRoomQuotaColumnIsEnable,
+    } = this.props;
+
+    const columns = [
+      {
+        key: "Name",
+        title: t("Common:Name"),
+        resizable: true,
+        enable: roomColumnNameIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "TypeTemplates",
+        title: t("Common:Type"),
+        enable: templatesRoomColumnTypeIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.RoomType,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "TagsTemplates",
+        title: t("Common:Tags"),
+        enable: templateRoomColumnTagsIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Tags,
+        withTagRef: true,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "OwnerTemplates",
+        title: t("Common:Owner"),
+        enable: templatesRoomColumnOwnerIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Author,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "ActivityTemplates",
+        title: t("LastActivity"),
+        enable: templateRoomColumnActivityIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+    ];
+
+    showStorageInfo &&
+      columns.splice(columns.length, 0, {
+        key: "StorageTemplates",
+        title:
+          isDefaultRoomsQuotaSet && !isArchiveFolder
+            ? t("Common:StorageAndQuota")
+            : t("Common:Storage"),
+        enable: templateRoomQuotaColumnIsEnable,
+        sortBy: SortByFieldName.UsedSpace,
+        resizable: true,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      });
+
+    return [...columns];
+  };
+
   onColumnChange = (key) => {
     const { columns } = this.state;
     const { setColumnEnable } = this.props;
@@ -767,7 +855,8 @@ export default inject(
       setRoomsFilter,
       indexColumnSize,
     } = filesStore;
-    const { isRecentTab, isArchiveFolder, isTrashFolder } = treeFoldersStore;
+    const { isRecentTab, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
+      treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
     const { isFrame, frameConfig } = settingsStore;
@@ -810,6 +899,12 @@ export default inject(
       createdVDRColumnIsEnabled,
       sizeVDRColumnIsEnabled,
       typeVDRColumnIsEnabled,
+
+      templatesRoomColumnTypeIsEnabled,
+      templateRoomColumnTagsIsEnabled,
+      templatesRoomColumnOwnerIsEnabled,
+      templateRoomColumnActivityIsEnabled,
+      templateRoomQuotaColumnIsEnable,
 
       getColumns,
       setColumnEnable,
@@ -875,9 +970,16 @@ export default inject(
       sizeVDRColumnIsEnabled,
       typeVDRColumnIsEnabled,
 
+      templatesRoomColumnTypeIsEnabled,
+      templateRoomColumnTagsIsEnabled,
+      templatesRoomColumnOwnerIsEnabled,
+      templateRoomColumnActivityIsEnabled,
+      templateRoomQuotaColumnIsEnable,
+
       getColumns,
       setColumnEnable,
       isTrashFolder,
+      isTemplatesFolder,
       isPublicRoom,
       publicRoomKey,
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -105,8 +105,6 @@ const {
   lightScroll,
   lightScrollHover,
   lightScrollActive,
-  silver,
-  highlandGray,
 
   blurLight,
   lightBlueAction,
@@ -1862,6 +1860,7 @@ export const getBaseTheme = () => {
         iconColor: lightIcons,
         iconErrorColor: lightErrorStatus,
         primaryColor: grayText,
+        barIconColor: lightGrayDark,
       },
 
       members: {
@@ -2120,6 +2119,7 @@ export const getBaseTheme = () => {
         sideColor: black,
         color: black,
         textColor: gray,
+        subTextColor: "#657077",
       },
 
       animationColor: lightSecondMain,
@@ -2182,45 +2182,6 @@ export const getBaseTheme = () => {
       alert: {
         fill: "",
         path: "",
-      },
-    },
-
-    mediaViewer: {
-      color: grayStrong,
-      backgroundColor: highlandGray,
-      fill: white,
-      titleColor: white,
-      iconColor: white,
-
-      controlBtn: {
-        backgroundColor: silver,
-      },
-
-      imageViewer: {
-        backgroundColor: silver,
-        inactiveBackgroundColor: highlandGray,
-        fill: white,
-      },
-
-      progressBar: {
-        background: grayStrong,
-        backgroundColor: silver,
-      },
-
-      scrollButton: {
-        backgroundColor: highlandGray,
-        background: silver,
-        border: `solid ${white}`,
-      },
-
-      videoViewer: {
-        fill: white,
-        stroke: white,
-        color: grayStrong,
-        colorError: white,
-        backgroundColorError: darkBlack,
-        backgroundColor: highlandGray,
-        background: silver,
       },
     },
 
@@ -2665,6 +2626,14 @@ export const getBaseTheme = () => {
         fill: grayStrong,
         stroke: grayStrong,
         color: grayStrong,
+      },
+
+      versionDisabled: {
+        fillDisabled: grayStrong,
+      },
+
+      versionLink: {
+        color: gray,
       },
       commentColor: gray,
     },

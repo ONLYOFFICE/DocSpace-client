@@ -1,0 +1,31 @@
+.container {
+  background: var(--error-container-background);
+  cursor: default;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto 8px 0;
+  padding: 100px 20px 20px 20px;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.logo {
+  margin-top: 115px;
+  margin-bottom: 50px;
+}
+
+.title {
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.description {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 16px;
+  color: var(--error-container-body-text);
+}

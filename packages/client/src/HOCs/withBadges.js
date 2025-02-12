@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -144,6 +144,12 @@ export default function withBadges(WrappedComponent) {
       checkAndOpenLocationAction?.(file);
     };
 
+    onCreateRoom = () => {
+      const { item, onCreateRoomFromTemplate } = this.props;
+
+      onCreateRoomFromTemplate(item);
+    };
+
     render() {
       const {
         t,
@@ -161,6 +167,7 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolder,
         isPublicRoom,
         isRecentTab,
+        isTemplatesFolder,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -202,6 +209,8 @@ export default function withBadges(WrappedComponent) {
           isArchiveFolder={isArchiveFolder}
           isRecentTab={isRecentTab}
           canEditing={canEditing}
+          onCreateRoom={this.onCreateRoom}
+          isTemplatesFolder={isTemplatesFolder}
         />
       );
 
@@ -232,12 +241,14 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolderRoot,
         isArchiveFolder,
         isRecentTab,
+        isTemplatesFolder,
       } = treeFoldersStore;
       const {
         markAsRead,
         setPinAction,
         setMuteAction,
         checkAndOpenLocationAction,
+        onCreateRoomFromTemplate,
       } = filesActionsStore;
       const { isTabletView, isDesktopClient, theme } = settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
@@ -275,6 +286,8 @@ export default function withBadges(WrappedComponent) {
         isPublicRoom: publicRoomStore.isPublicRoom,
         isRecentTab,
         checkAndOpenLocationAction,
+        isTemplatesFolder,
+        onCreateRoomFromTemplate,
       };
     },
   )(observer(WithBadges));

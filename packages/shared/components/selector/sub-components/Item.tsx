@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -123,6 +123,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       cover,
       userType,
       fileExst: ext,
+      isTemplate,
     } = item;
 
     if (isInputItem) {
@@ -228,6 +229,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             showDefault={false}
             badgeUrl={badgeUrl ?? ""}
             className="item-logo"
+            isTemplate={isTemplate}
           />
         ) : color ? (
           <RoomIcon
@@ -236,6 +238,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             showDefault
             badgeUrl={badgeUrl ?? ""}
             className="item-logo"
+            isTemplate={isTemplate}
           />
         ) : icon ? (
           <RoomIcon
@@ -245,6 +248,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             logo={icon}
             showDefault={false}
             badgeUrl={badgeUrl ?? ""}
+            isTemplate={isTemplate}
           />
         ) : null}
         {renderCustomItem ? (

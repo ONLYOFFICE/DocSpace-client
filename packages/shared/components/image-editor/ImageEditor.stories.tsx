@@ -64,7 +64,7 @@ const InteractiveTemplate: Story<ImageEditorProps> = (args) => {
   const { t } = useTranslation("Common");
 
   const [image, setImage] = useState<TImage>({
-    uploadedFile: "/images/avatar.base.react.svg",
+    uploadedFile: "/images/logo/leftmenu.svg",
     zoom: 1,
     x: 0,
     y: 0,

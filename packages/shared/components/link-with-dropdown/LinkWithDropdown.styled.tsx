@@ -104,24 +104,6 @@ const StyledLinkWithDropdown = styled(SimpleLinkWithDropdown).attrs(
   }
 `;
 
-const StyledTextWithExpander = styled.div<{ isOpen?: boolean }>`
-  display: flex;
-  gap: 4px;
-
-  .expander {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 6.35px;
-    svg {
-      transform: ${(props) => (props.isOpen ? "rotate(180deg)" : "rotate(0)")};
-      width: 6.35px;
-      height: auto;
-      padding-bottom: 2px;
-    }
-  }
-`;
-
 const SimpleText = ({ c, ...props }: TextProps & { c?: string }) => (
   <Text as="span" {...props} />
 );
@@ -138,60 +120,4 @@ const StyledText = styled(SimpleText).attrs(injectDefaultTheme)<{
     `};
 `;
 
-// const focusColor = css`
-//   color: ${(props) => props.theme.linkWithDropdown.color.focus};
-//   background: ${(props) => props.theme.linkWithDropdown.background.focus};
-//   .expander {
-//     path {
-//       fill: ${(props) => props.theme.linkWithDropdown.color.focus};
-//     }
-//   }
-// `;
-
-const StyledSpan = styled.span.attrs(injectDefaultTheme)<{ $isOpen?: boolean }>`
-  display: inline-block;
-  padding: 4px 8px;
-  border-radius: 3px;
-  position: relative;
-
-  .drop-down-item {
-    display: block;
-  }
-
-  .fixed-max-width {
-    max-width: ${(props) => props.theme.linkWithDropdown.text.maxWidth};
-  }
-
-  color: ${(props) => props.theme.linkWithDropdown.color.default};
-  background: ${(props) => props.theme.linkWithDropdown.background.default};
-  .expander {
-    path {
-      fill: ${(props) => props.theme.linkWithDropdown.color.default};
-    }
-  }
-
-  :hover {
-    color: ${(props) => props.theme.linkWithDropdown.color.hover};
-
-    background: ${(props) => props.theme.linkWithDropdown.background.hover};
-    .expander {
-      path {
-        fill: ${(props) => props.theme.linkWithDropdown.color.hover};
-      }
-    }
-  }
-
-  ${(props) =>
-    props.$isOpen &&
-    css`
-      color: ${props.theme.linkWithDropdown.color.hover};
-      background: ${props.theme.linkWithDropdown.background.hover};
-    `}
-`;
-
-export {
-  StyledSpan,
-  StyledTextWithExpander,
-  StyledText,
-  StyledLinkWithDropdown,
-};
+export { StyledText, StyledLinkWithDropdown };

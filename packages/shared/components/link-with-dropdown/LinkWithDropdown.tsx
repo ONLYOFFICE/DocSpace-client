@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useRef, useState } from "react";
-// import equal from "fast-deep-equal/react";
 import { isMobileOnly } from "react-device-detect";
 import { ReactSVG } from "react-svg";
 
@@ -37,13 +36,9 @@ import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { Scrollbar } from "../scrollbar";
 
-import {
-  StyledSpan,
-  StyledText,
-  StyledTextWithExpander,
-  StyledLinkWithDropdown,
-} from "./LinkWithDropdown.styled";
+import { StyledText, StyledLinkWithDropdown } from "./LinkWithDropdown.styled";
 import { LinkWithDropDownProps } from "./LinkWithDropdown.types";
+import styles from "./LinkWithDropdown.module.scss";
 
 const LinkWithDropdown = ({
   isSemitransparent = false,
@@ -137,7 +132,7 @@ const LinkWithDropdown = ({
       <DropDownItem
         key={key}
         {...restProp}
-        className="drop-down-item"
+        className={classNames(styles.dropDownItem, "drop-down-item")}
         id={`${item.key}`}
         onClick={onClickDropDownItem}
         data-key={item.key}
@@ -156,20 +151,20 @@ const LinkWithDropdown = ({
       color={color}
       isBold={isBold}
       title={title}
-      // dropdownType={dropdownType}
-      // isDisabled={isDisabled}
-      // withTriangle
     >
       {children}
     </StyledText>
   );
 
   return (
-    <StyledSpan
-      $isOpen={state.isOpen}
-      className={className}
+    <span
       id={id}
       style={style}
+      className={classNames(
+        styles.span,
+        { [styles.isOpen]: state.isOpen },
+        className,
+      )}
       ref={ref}
     >
       <span onClick={onOpen}>
@@ -180,25 +175,38 @@ const LinkWithDropdown = ({
           isDisabled={isDisabled}
         >
           {withExpander ? (
-            <StyledTextWithExpander isOpen={state.isOpen}>
+            <div
+              className={classNames(
+                styles.textWithExpander,
+                { [styles.isOpen]: state.isOpen },
+                className,
+              )}
+            >
               {styledText}
-              <ReactSVG className="expander" src={ExpanderDownReactSvgUrl} />
-            </StyledTextWithExpander>
+              <ReactSVG
+                className={styles.expander}
+                src={ExpanderDownReactSvgUrl}
+              />
+            </div>
           ) : (
             styledText
           )}
         </StyledLinkWithDropdown>
       </span>
       <DropDown
-        className={classNames("fixed-max-width", dropDownClassName || "") || ""}
+        className={
+          classNames(
+            "fixed-max-width",
+            dropDownClassName || "",
+            styles.fixedMaxWidth,
+          ) || ""
+        }
         manualWidth={
           manualWidth || (showScroll ? onCheckManualWidth() : undefined)
         }
         open={state.isOpen}
-        // withArrow={false}
         forwardedRef={ref}
         directionY={directionY}
-        // isDropdown={false}
         clickOutsideAction={onClose}
         {...rest}
       >
@@ -215,7 +223,7 @@ const LinkWithDropdown = ({
           dropDownItem
         )}
       </DropDown>
-    </StyledSpan>
+    </span>
   );
 };
 

@@ -45,7 +45,7 @@ export type TPortalTariff = {
 
 export type TPaymentFeature = {
   id: string;
-  value: number;
+  value: number | boolean;
   type: string;
   priceTitle?: string;
   image?: string;

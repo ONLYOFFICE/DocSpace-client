@@ -29,6 +29,7 @@ import api from "../api";
 import { TPaymentFeature, TPaymentQuota } from "../api/portal/types";
 import { MANAGER, TOTAL_SIZE } from "../constants";
 import { Nullable } from "../types";
+import { CurrentQuotasStore } from "./CurrentQuotaStore";
 
 class PaymentQuotasStore {
   portalPaymentQuotas: Nullable<TPaymentQuota> = null;
@@ -37,8 +38,11 @@ class PaymentQuotasStore {
 
   isLoaded = false;
 
-  constructor() {
+  private currentQuotaStore: CurrentQuotasStore;
+
+  constructor(currentQuotaStore: CurrentQuotasStore) {
     makeAutoObservable(this);
+    this.currentQuotaStore = currentQuotaStore;
   }
 
   setIsLoaded = (isLoaded: boolean) => {
@@ -93,10 +97,23 @@ class PaymentQuotasStore {
 
     if (!res) return;
 
-    runInAction(() => {
-      [this.portalPaymentQuotas] = res;
+    const { isFreeTariff, currentQuotaId } = this.currentQuotaStore;
 
-      this.portalPaymentQuotasFeatures = res[0].features;
+    const findQuotaByYearFeature = (yearValue: boolean) =>
+      res.find((quota) =>
+        quota.features.some(
+          (feature) => feature.id === "year" && feature.value === yearValue,
+        ),
+      ) || null;
+
+    runInAction(() => {
+      this.portalPaymentQuotas = isFreeTariff
+        ? findQuotaByYearFeature(false)
+        : res.find((quota) => quota.id === currentQuotaId) ||
+          findQuotaByYearFeature(true);
+
+      this.portalPaymentQuotasFeatures =
+        this.portalPaymentQuotas?.features || [];
     });
 
     this.setIsLoaded(true);

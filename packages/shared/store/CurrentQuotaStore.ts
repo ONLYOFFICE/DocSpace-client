@@ -72,6 +72,10 @@ class CurrentQuotasStore {
     this.isLoaded = isLoaded;
   };
 
+  get currentQuotaId() {
+    return this.currentPortalQuota?.id;
+  }
+
   get isFreeTariff() {
     return this.currentPortalQuota?.free;
   }
@@ -149,6 +153,14 @@ class CurrentQuotasStore {
     );
 
     return result?.used?.value || 0;
+  }
+
+  get isYearTariff() {
+    const result = this.currentPortalQuotaFeatures.find(
+      (obj) => obj.id === "year",
+    );
+
+    return result?.value;
   }
 
   get isCustomizationAvailable() {

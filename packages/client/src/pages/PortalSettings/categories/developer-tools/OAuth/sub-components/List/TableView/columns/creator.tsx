@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,12 +34,12 @@ import {
 } from "@docspace/shared/components/avatar";
 
 const StyledAvatar = styled(Avatar)`
-  width: 16px;
+  width: 16px !important;
   margin-inline-end: 4px;
-  max-width: 100%;
-  height: 16px;
+  max-width: 16px !important;
+  height: 16px !important;
 
-  min-width: unset;
+  min-width: unset !important;
 `;
 
 interface CreatorCellProps {
@@ -52,7 +52,7 @@ const CreatorCell = ({ avatar, displayName }: CreatorCellProps) => {
     <>
       <StyledAvatar
         source={avatar}
-        size={AvatarSize.min}
+        size={AvatarSize.small}
         role={AvatarRole.user}
         className="textOverflow"
       />

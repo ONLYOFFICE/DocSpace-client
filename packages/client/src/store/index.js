@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -87,8 +87,6 @@ import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 import OAuthStore from "./OAuthStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
-
-const oauthStore = new OAuthStore(userStore);
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -239,6 +237,7 @@ const filesActionsStore = new FilesActionsStore(
   peopleStore,
   currentQuotaStore,
   indexingStore,
+  versionHistoryStore,
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -320,6 +319,8 @@ const storageManagement = new StorageManagement(
   currentQuotaStore,
   settingsStore,
 );
+
+const oauthStore = new OAuthStore(userStore, storageManagement);
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 

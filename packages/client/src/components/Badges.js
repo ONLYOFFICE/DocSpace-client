@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -114,7 +114,6 @@ const Badges = ({
 }) => {
   const {
     id,
-    version,
     versionGroup,
     fileExst,
     isEditing,
@@ -267,7 +266,7 @@ const Badges = ({
           hoverColor={theme.filesBadges.hoverIconColor}
         />
       ) : null}
-      {version > 1 ? (
+      {versionGroup > 1 ? (
         <BadgeWrapper {...onShowVersionHistoryProp} isTile={isTile}>
           <Badge
             {...versionBadgeProps}

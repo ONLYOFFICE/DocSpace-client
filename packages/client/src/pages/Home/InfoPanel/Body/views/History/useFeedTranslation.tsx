@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -69,6 +69,12 @@ export const useFeedTranslation = (
       return `${t("Translations:FileLocked")}.`;
     case "FileUnlocked":
       return `${t("Translations:FileUnlocked")}.`;
+    case "FileVersionRemoved":
+      if (feed.data.version) {
+        return t("InfoPanel:FileVersionRemoved", {
+          version: feed.data.version,
+        });
+      }
     case "FileIndexChanged":
     case "FolderIndexChanged":
       return t("InfoPanel:IndexChanged");

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,7 +54,7 @@ export enum OAuth2ErrorKey {
   client_disabled_error = "client_disabled_error",
   client_not_found_error = "client_not_found_error",
   client_permission_denied_error = "client_permission_denied_error",
-  missing_asc_cookie_error = "missing_asc_cookie_error",
+  missing_asc_cookie_error = "missing_asc_signature_error",
   missing_client_id_error = "missing_client_id_error",
   something_went_wrong_error = "something_went_wrong_error",
 }

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -71,6 +71,7 @@ import DeleteGroupDialog from "./DeleteGroupDialog";
 import RoomLogoCoverDialog from "./RoomLogoCoverDialog";
 import RemoveGuestDialog from "./RemoveGuest";
 import GuestReleaseTipDialog from "./GuestReleaseTip";
+import DeleteVersionDialog from "./DeleteVersionDialog";
 
 export {
   EmptyTrashDialog,
@@ -120,4 +121,5 @@ export {
   RoomLogoCoverDialog,
   RemoveGuestDialog,
   GuestReleaseTipDialog,
+  DeleteVersionDialog,
 };

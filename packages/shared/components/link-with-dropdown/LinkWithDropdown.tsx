@@ -36,9 +36,8 @@ import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { Scrollbar } from "../scrollbar";
 
-import { StyledText, StyledLinkWithDropdown } from "./LinkWithDropdown.styled";
-import { LinkWithDropDownProps } from "./LinkWithDropdown.types";
 import styles from "./LinkWithDropdown.module.scss";
+import { Text } from "../text";
 
 const LinkWithDropdown = ({
   isSemitransparent = false,
@@ -142,9 +141,11 @@ const LinkWithDropdown = ({
   });
 
   const styledText = (
-    <StyledText
-      className="text"
-      isTextOverflow={isTextOverflow}
+    <Text
+      as="span"
+      className={classNames(styles.text, {
+        [styles.textOverflow]: isTextOverflow,
+      })}
       truncate={isTextOverflow}
       fontSize={fontSize}
       fontWeight={fontWeight}
@@ -153,7 +154,7 @@ const LinkWithDropdown = ({
       title={title}
     >
       {children}
-    </StyledText>
+    </Text>
   );
 
   return (
@@ -168,11 +169,20 @@ const LinkWithDropdown = ({
       ref={ref}
     >
       <span onClick={onOpen}>
-        <StyledLinkWithDropdown
-          isSemitransparent={isSemitransparent}
-          dropdownType={dropdownType}
-          color={color}
-          isDisabled={isDisabled}
+        <a
+          className={classNames(
+            styles.linkWithDropdown,
+            {
+              [styles.disabled]: isDisabled,
+              [styles.semitransparent]: isSemitransparent,
+              [styles.alwaysDashed]: dropdownType === "alwaysDashed",
+              [styles.appearDashedAfterHover]:
+                dropdownType === "appearDashedAfterHover",
+            },
+            className,
+          )}
+          style={{ color }}
+          {...rest}
         >
           {withExpander ? (
             <div
@@ -191,7 +201,7 @@ const LinkWithDropdown = ({
           ) : (
             styledText
           )}
-        </StyledLinkWithDropdown>
+        </a>
       </span>
       <DropDown
         className={

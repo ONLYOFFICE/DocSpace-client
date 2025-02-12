@@ -63,34 +63,99 @@
     color: var(--link-dropdown-hover-color);
     background: var(--link-dropdown-hover-background);
   }
-}
 
-.textWithExpander {
-  display: flex;
-  gap: 4px;
+  .text {
+    color: inherit;
 
-  .expander {
+    &.textOverflow {
+      display: inline-block;
+      max-width: var(--link-dropdown-max-width);
+    }
+  }
+
+  .linkWithDropdown {
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none;
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: var(--link-dropdown-expander-width);
+    padding-inline-end: var(--link-dropdown-padding-right);
 
-    svg {
+    &.disabled {
+      cursor: default;
+      color: var(--link-dropdown-disable-color);
+    }
+
+    &.semitransparent {
+      opacity: 0.5;
+    }
+
+    &.alwaysDashed {
+      text-decoration: var(--link-dropdown-text-decoration);
+    }
+
+    &:not([href]):not([tabindex]) {
+      &.alwaysDashed {
+        text-decoration: var(--link-dropdown-text-decoration);
+      }
+
+      &:hover {
+        text-decoration: var(--link-dropdown-text-decoration);
+      }
+
+      &.disabled {
+        color: var(--link-dropdown-disable-color);
+      }
+    }
+
+    &:hover {
+      &.disabled {
+        color: var(--link-dropdown-disable-color);
+      }
+
+      &.appearDashedAfterHover {
+        svg {
+          position: absolute;
+          opacity: var(--link-dropdown-svg-opacity);
+        }
+      }
+
+      &.semitransparent {
+        svg {
+          opacity: var(--link-dropdown-svg-semi-transparent);
+        }
+      }
+    }
+  }
+
+  .textWithExpander {
+    display: flex;
+    gap: 4px;
+
+    .expander {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: var(--link-dropdown-expander-width);
-      height: auto;
-      padding-bottom: 2px;
-    }
-  }
 
-  &.isOpen {
-    svg {
-      transform: rotate(180deg);
+      svg {
+        width: var(--link-dropdown-expander-width);
+        height: auto;
+        padding-bottom: 2px;
+      }
     }
-  }
 
-  &:not(.isOpen) {
-    svg {
-      transform: rotate(0);
+    &.isOpen {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    &:not(.isOpen) {
+      svg {
+        transform: rotate(0);
+      }
     }
   }
 }

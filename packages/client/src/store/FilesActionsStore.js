@@ -1550,12 +1550,21 @@ class FilesActionStore {
     newFilter.search = title;
     newFilter.folder = parentId;
 
-    const publicKey = await this.getPublicKey({
-      ...item,
-      id: selectedFolderId,
-      shared,
-      rootFolderType,
-    });
+    let publicKey;
+    if (item.toFolderId || item.folderId || item.parentId) {
+      const newFolder = await this.filesStore.getFolderInfo(parentId);
+      publicKey = await this.getPublicKey({
+        ...newFolder,
+        updatePublicKey: true,
+      });
+    } else {
+      publicKey = await this.getPublicKey({
+        ...item,
+        id: selectedFolderId,
+        shared,
+        rootFolderType,
+      });
+    }
     if (publicKey) newFilter.key = publicKey;
 
     setIsLoading(
@@ -3273,8 +3282,7 @@ class FilesActionStore {
       folder?.type !== FolderType.InProgress
     ) {
       const filterObj = FilesFilter.getFilter(window.location);
-
-      if (filterObj.key) {
+      if (filterObj.key && !folder.updatePublicKey) {
         return filterObj.key;
       }
 

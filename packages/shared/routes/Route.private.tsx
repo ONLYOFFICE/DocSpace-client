@@ -130,6 +130,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname.includes("bonus") && !isCommunity;
 
     const isAboutPage = location.pathname.includes("about");
+    const isDeveloperToolsPage = location.pathname.includes("/developer-tools");
 
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
@@ -273,6 +274,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
           to={location.pathname.replace("authorized-apps", "login")}
         />
       );
+    }
+
+    if (isDeveloperToolsPage && user?.isVisitor) {
+      return <Navigate replace to="/error/404" />;
     }
 
     if (

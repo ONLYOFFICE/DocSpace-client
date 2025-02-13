@@ -26,15 +26,88 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "../api";
-import { TPaymentFeature, TPaymentQuota } from "../api/portal/types";
+import {
+  TPaymentFeature,
+  TPaymentQuota,
+  TBooleanPaymentFeature,
+} from "../api/portal/types";
 import { MANAGER, TOTAL_SIZE, YEAR_KEY } from "../constants";
 import { Nullable } from "../types";
 import { CurrentQuotasStore } from "./CurrentQuotaStore";
 
+type QuotaId = string | number;
+
+type QuotaWithFeatureMap = TPaymentQuota & {
+  featuresMap: Map<string, TPaymentFeature>;
+};
+
+const transformQuotaFeatures = (quota: TPaymentQuota): QuotaWithFeatureMap => {
+  return {
+    ...quota,
+    featuresMap: new Map(
+      quota.features.map((feature) => [feature.id, feature]),
+    ),
+  };
+};
+
+const createQuotasMap = (quotas: TPaymentQuota[]) => {
+  return new Map<QuotaId, QuotaWithFeatureMap>(
+    quotas.map((quota) => [quota.id, transformQuotaFeatures(quota)]),
+  );
+};
+
+const createYearQuotasMap = (quotasById: Map<QuotaId, QuotaWithFeatureMap>) => {
+  return new Map(
+    Array.from(quotasById.values()).map((quota) => {
+      const yearFeature = quota.featuresMap.get(
+        YEAR_KEY,
+      ) as TBooleanPaymentFeature;
+
+      return [yearFeature?.value, quota];
+    }),
+  );
+};
+
+const findQuotaByYear = (
+  yearValue: boolean,
+  quotasByYear: Map<boolean, QuotaWithFeatureMap>,
+) => {
+  const quota = quotasByYear.get(yearValue);
+
+  return {
+    quota,
+    featuresMap: quota?.featuresMap ?? new Map(),
+  };
+};
+
+const getCurrentQuota = (
+  isFreeTariff: boolean | undefined,
+  currentQuotaId: QuotaId | undefined,
+  quotasById: Map<QuotaId, QuotaWithFeatureMap>,
+  quotasByYear: Map<boolean, QuotaWithFeatureMap>,
+) => {
+  if (isFreeTariff) {
+    return findQuotaByYear(false, quotasByYear);
+  }
+
+  if (currentQuotaId) {
+    const currentQuota = quotasById.get(currentQuotaId);
+
+    if (currentQuota) {
+      return {
+        quota: currentQuota,
+        featuresMap: currentQuota.featuresMap,
+      };
+    }
+  }
+
+  return findQuotaByYear(true, quotasByYear);
+};
+
 class PaymentQuotasStore {
   portalPaymentQuotas: Nullable<TPaymentQuota> = null;
 
-  portalPaymentQuotasFeatures: TPaymentFeature[] = [];
+  portalPaymentQuotasFeatures: Map<string, TPaymentFeature> = new Map();
 
   isLoaded = false;
 
@@ -55,17 +128,11 @@ class PaymentQuotasStore {
   }
 
   get stepAddingQuotaManagers() {
-    const result = this.portalPaymentQuotasFeatures.find(
-      (obj) => obj.id === MANAGER,
-    );
-    return result?.value;
+    return this.portalPaymentQuotasFeatures.get(MANAGER)?.value;
   }
 
   get stepAddingQuotaTotalSize() {
-    const result = this.portalPaymentQuotasFeatures.find(
-      (obj) => obj.id === TOTAL_SIZE,
-    );
-    return result?.value;
+    return this.portalPaymentQuotasFeatures.get(TOTAL_SIZE)?.value;
   }
 
   get tariffTitle() {
@@ -73,17 +140,11 @@ class PaymentQuotasStore {
   }
 
   get usedTotalStorageSizeTitle() {
-    const result = this.portalPaymentQuotasFeatures.find(
-      (obj) => obj.id === TOTAL_SIZE,
-    );
-    return result?.priceTitle;
+    return this.portalPaymentQuotasFeatures.get(TOTAL_SIZE)?.priceTitle;
   }
 
   get addedManagersCountTitle() {
-    const result = this.portalPaymentQuotasFeatures.find(
-      (obj) => obj.id === MANAGER,
-    );
-    return result?.priceTitle;
+    return this.portalPaymentQuotasFeatures.get(MANAGER)?.priceTitle;
   }
 
   get tariffPlanTitle() {
@@ -94,26 +155,23 @@ class PaymentQuotasStore {
     if (this.isLoaded) return;
 
     const res = await api.portal.getPortalPaymentQuotas();
-
     if (!res) return;
 
     const { isFreeTariff, currentQuotaId } = this.currentQuotaStore;
 
-    const findQuotaByYearFeature = (yearValue: boolean) =>
-      res.find((quota) =>
-        quota.features.some(
-          (feature) => feature.id === YEAR_KEY && feature.value === yearValue,
-        ),
-      ) || null;
+    const quotasById = createQuotasMap(res);
+    const quotasByYear = createYearQuotasMap(quotasById);
 
     runInAction(() => {
-      this.portalPaymentQuotas = isFreeTariff
-        ? findQuotaByYearFeature(false)
-        : res.find((quota) => quota.id === currentQuotaId) ||
-          findQuotaByYearFeature(true);
+      const result = getCurrentQuota(
+        isFreeTariff,
+        currentQuotaId,
+        quotasById,
+        quotasByYear,
+      );
 
-      this.portalPaymentQuotasFeatures =
-        this.portalPaymentQuotas?.features || [];
+      this.portalPaymentQuotas = result?.quota || null;
+      this.portalPaymentQuotasFeatures = result?.featuresMap || new Map();
     });
 
     this.setIsLoaded(true);

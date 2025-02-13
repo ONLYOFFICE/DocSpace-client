@@ -246,8 +246,10 @@ const SectionHeaderContent = (props) => {
 
   const onBackToParent = () => {
     const newArrayOfParams = getArrayOfParams();
-    newArrayOfParams.splice(-1, 1);
-    const newPath = newArrayOfParams.join("/");
+    const filteredParams = newArrayOfParams.filter(
+      (param) => param !== "developer-tools",
+    );
+    const newPath = filteredParams[0];
     navigate(newPath);
   };
 

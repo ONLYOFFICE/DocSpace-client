@@ -136,10 +136,14 @@ class UsersStore {
 
       if (!data || !id) return;
 
+      const idx = this.users.findIndex((x) => x.id === id);
+
       const user = await api.people.getUserById(data.id);
 
       runInAction(() => {
-        this.users.push(user);
+        if (idx === -1) this.users.push(user);
+        else this.users[idx] = user;
+
         this.filter.total += 1;
       });
     });
@@ -217,6 +221,23 @@ class UsersStore {
         this.filter.total -= 1;
       });
     });
+
+    SocketHelper.on(SocketEvents.UpdateGroup, async (value) => {
+      const { contactsTab } = this;
+
+      if (contactsTab !== "inside_group") return;
+
+      const { id, data } = value;
+
+      if (!data || !id) return;
+
+      const group = await api.groups.getGroupById(id, true);
+
+      runInAction(() => {
+        this.users = group.members ?? [];
+        this.filter.total = this.users.length;
+      });
+    });
   }
 
   setIsUsersFetched = (value: boolean) => {
@@ -228,9 +249,9 @@ class UsersStore {
       const roomParts =
         contactsTab === "guests"
           ? `guests`
-          : contactsTab === "people" || contactsTab === "inside_group"
-            ? "users"
-            : "groups";
+          : contactsTab === "groups" || contactsTab === "inside_group"
+            ? "groups"
+            : "users";
 
       if (
         SocketHelper.socketSubscribers.has(this.roomParts) &&
@@ -405,8 +426,6 @@ class UsersStore {
   removeUsers = async (userIds: string[]) => {
     const { updateCurrentGroup } = this.groupsStore;
 
-    console.log(userIds);
-
     await api.people.deleteUsers(userIds);
 
     const actions: Promise<void>[] = [];
@@ -466,8 +485,6 @@ class UsersStore {
 
   removeGuests = async (ids: string[]) => {
     if (this.contactsTab !== "guests" || !ids.length) return;
-
-    console.log(ids);
 
     const removedGuests = await api.people.deleteGuests(ids);
 

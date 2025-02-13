@@ -37,6 +37,8 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Nullable } from "@docspace/shared/types";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
+import api from "@docspace/shared/api";
+
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
@@ -94,18 +96,32 @@ class GroupsStore {
 
     makeAutoObservable(this);
 
-    SocketHelper.on(SocketEvents.AddGroup, (value) => {
+    SocketHelper.on(SocketEvents.AddGroup, async (value) => {
+      const { contactsTab } = this.peopleStore.usersStore;
+
+      if (contactsTab !== "groups") return;
+
       const { id, data } = value;
 
       if (!data || !id) return;
 
+      const group = await api.groups.getGroupById(id, true);
+
       runInAction(() => {
-        this.groups.push(data);
+        this.groups.push(group);
         this.groupsFilter.total += 1;
       });
     });
 
-    SocketHelper.on(SocketEvents.UpdateGroup, (value) => {
+    SocketHelper.on(SocketEvents.UpdateGroup, async (value) => {
+      const {
+        infoPanelSelection,
+        setInfoPanelSelection,
+        setInfoPanelSelectedGroup,
+      } = this.infoPanelStore;
+
+      const { contactsTab } = this.peopleStore.usersStore;
+
       const { id, data } = value;
 
       if (!data || !id) return;
@@ -114,15 +130,34 @@ class GroupsStore {
 
       if (idx === -1) return;
 
+      const group = await api.groups.getGroupById(id, true);
+
+      if ((infoPanelSelection as unknown as TGroup)?.id === group.id) {
+        setInfoPanelSelection(group);
+        setInfoPanelSelectedGroup(group);
+      }
+
+      if (contactsTab !== "groups") {
+        this.currentGroup = group;
+        return;
+      }
+
       runInAction(() => {
-        this.groups[idx] = data;
+        this.groups[idx] = group;
       });
     });
 
     SocketHelper.on(SocketEvents.DeleteGroup, (value) => {
+      const { contactsTab } = this.peopleStore.usersStore;
+
       const { id } = value;
 
       const idx = this.groups.findIndex((x) => x.id === id);
+
+      if (contactsTab !== "groups") {
+        window.DocSpace.navigate("/accounts/groups/filter");
+        return;
+      }
 
       runInAction(() => {
         this.groups.splice(idx, 1);

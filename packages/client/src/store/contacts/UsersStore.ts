@@ -171,13 +171,13 @@ class UsersStore {
 
       const idx = this.users.findIndex((x) => x.id === id);
 
+      console.log(idx);
+
       runInAction(() => {
-        runInAction(() => {
-          const newUsers = this.users;
-          newUsers.splice(idx, 1);
-          this.users = newUsers;
-          this.filter.total -= 1;
-        });
+        const newUsers = this.users;
+        newUsers.splice(idx, 1);
+        console.log(newUsers);
+        this.users = newUsers;
         this.filter.total -= 1;
       });
     });

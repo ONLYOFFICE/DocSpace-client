@@ -45,6 +45,8 @@ import {
   ContextMenuType,
   SeparatorType,
 } from "../ContextMenu.types";
+import { Badge } from "../../badge";
+import { globalColors } from "../../../themes";
 
 import styles from "../ContextMenu.module.scss";
 
@@ -389,6 +391,18 @@ const SubMenu = (props: SubMenuProps) => {
         {subMenuIcon}
         {item.isOutsideLink ? (
           <OutsdideIcon className={subMenuIconClassName} />
+        ) : null}
+        {item.badgeLabel ? (
+          <Badge
+            label={item.badgeLabel}
+            className={`${subMenuIconClassName} p-submenu-badge`}
+            backgroundColor={globalColors.lightBlueMain}
+            fontSize="9px"
+            fontWeight={700}
+            borderRadius="50px"
+            noHover
+            isHovered={false}
+          />
         ) : null}
       </a>
     );

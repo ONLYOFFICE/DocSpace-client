@@ -112,9 +112,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname ===
       "/portal-settings/customization/general/portal-renaming";
 
-    const isOAuthPage = location.pathname.includes(
-      "portal-settings/developer-tools/oauth",
-    );
+    const isOAuthPage = location.pathname.includes("/developer-tools/oauth");
     const isAuthorizedAppsPage = location.pathname.includes("authorized-apps");
 
     const isBrandingPage = location.pathname.includes(
@@ -265,12 +263,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     }
 
     if (isOAuthPage && !identityServerEnabled) {
-      return (
-        <Navigate
-          replace
-          to="/portal-settings/developer-tools/javascript-sdk"
-        />
-      );
+      return <Navigate replace to="/developer-tools/javascript-sdk" />;
     }
 
     if (isAuthorizedAppsPage && !identityServerEnabled) {

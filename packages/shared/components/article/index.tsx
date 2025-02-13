@@ -108,6 +108,8 @@ const Article = ({
   getActions,
   onProfileClick,
   logoText,
+
+  isVisitor,
   ...rest
 }: ArticleProps) => {
   const [articleHeaderContent, setArticleHeaderContent] =
@@ -221,7 +223,7 @@ const Article = ({
   const withDevTools =
     !window.location.pathname.includes("portal-settings") &&
     !window.location.pathname.includes("management") &&
-    isAdmin;
+    !isVisitor;
 
   const articleComponent = (
     <>

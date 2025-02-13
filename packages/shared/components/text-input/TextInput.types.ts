@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -70,7 +70,7 @@ export type TextInputProps = HTMLInputProps & {
   /** When guide is true, Text Mask always shows both placeholder characters and non-placeholder mask characters */
   guide?: boolean;
   /** Supported size of the input fields */
-  size: InputSize;
+  size?: InputSize;
   /** Indicates the input field has scale */
   scale?: boolean;
   /** Called with the new value. Required when input is not read only */

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -66,11 +66,13 @@ import {
   ShareFolderDialog,
   RoomLogoCoverDialog,
   GuestReleaseTipDialog,
+  DeleteVersionDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
 import RestoreRoomDialog from "../dialogs/RestoreRoomDialog";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
+import CreateRoomTemplateDialog from "../dialogs/CreateRoomTemplate/CreateRoomTemplate";
 import FilesSelector from "../FilesSelector";
 
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
@@ -83,6 +85,7 @@ import { ShareCollectSelector } from "../ShareCollectSelector";
 
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
+import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 
 const Panels = (props) => {
   const {
@@ -135,6 +138,8 @@ const Panels = (props) => {
     reorderDialogVisible,
     fillPDFDialogData,
     shareCollectSelector,
+    createRoomTemplateDialogVisible,
+    templateAccessSettingsVisible,
 
     setQuotaWarningDialogVisible,
     resetQuotaItem,
@@ -143,6 +148,7 @@ const Panels = (props) => {
     passwordEntryDialogDate,
     guestReleaseTipDialogVisible,
     closeEditIndexDialogVisible,
+    deleteVersionDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -323,6 +329,12 @@ const Panels = (props) => {
     ),
     shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
     reorderDialogVisible && <ReorderIndexDialog key="reorder-index-dialog" />,
+    createRoomTemplateDialogVisible && (
+      <CreateRoomTemplateDialog key="create-room-template-dialog" />
+    ),
+    templateAccessSettingsVisible && (
+      <TemplateAccessSettingsPanel key="template-access-settings" />
+    ),
     sharePDFForm.visible && (
       <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
     ),
@@ -347,6 +359,9 @@ const Panels = (props) => {
     ),
     closeEditIndexDialogVisible && (
       <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
+    ),
+    deleteVersionDialogVisible && (
+      <DeleteVersionDialog key="delete-version-dialog" />
     ),
   ];
 };
@@ -408,6 +423,9 @@ export default inject(
       fillPDFDialogData,
       shareCollectSelector,
       roomLogoCoverDialogVisible,
+      createRoomTemplateDialogVisible,
+      templateAccessSettingsVisible,
+
       setQuotaWarningDialogVisible,
       setIsNewRoomByCurrentUser,
       setIsNewUserByCurrentUser,
@@ -422,7 +440,10 @@ export default inject(
     const { copyFromTemplateForm } = filesActionsStore;
 
     const { uploadPanelVisible } = uploadDataStore;
-    const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
+    const {
+      isVisible: versionHistoryPanelVisible,
+      deleteVersionDialogVisible,
+    } = versionHistoryStore;
     const { hotkeyPanelVisible } = settingsStore;
     const { confirmDialogIsLoading } = createEditRoomStore;
     const { isRoomsTariffAlmostLimit, isUserTariffAlmostLimit } =
@@ -502,12 +523,16 @@ export default inject(
       fillPDFDialogData,
       shareCollectSelector,
       roomLogoCoverDialogVisible,
+      createRoomTemplateDialogVisible,
+      templateAccessSettingsVisible,
+
       setQuotaWarningDialogVisible,
       resetQuotaItem,
       isShowWarningDialog,
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
+      deleteVersionDialogVisible,
     };
   },
 )(observer(Panels));

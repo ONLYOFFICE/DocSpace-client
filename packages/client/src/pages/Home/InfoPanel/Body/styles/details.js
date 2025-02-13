@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -70,4 +70,25 @@ const StyledNoThumbnail = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-export { StyledThumbnail, StyledNoThumbnail };
+const StyledPublicRoomBar = styled.div`
+  display: contents;
+
+  .room-template_bar {
+    margin-top: 0;
+    margin-bottom: 1px;
+  }
+
+  .room-template_button {
+    margin-top: 10px;
+  }
+
+  .room-template_text {
+    color: ${({ theme }) => theme.infoPanel.links.primaryColor};
+  }
+
+  svg path {
+    fill: ${({ theme }) => theme.infoPanel.links.barIconColor};
+  }
+`;
+
+export { StyledThumbnail, StyledNoThumbnail, StyledPublicRoomBar };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,6 +41,7 @@ import EditGroupEvent from "./GroupEvents/EditGroupEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
+import SaveAsTemplateEvent from "./SaveAsTemplateEvent";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 
 const GlobalEvents = ({
@@ -92,6 +93,11 @@ const GlobalEvents = ({
     headerTitle: null,
   });
   const [createPluginFileDialog, setCreatePluginFileProps] = useState({
+    visible: false,
+    props: null,
+    onClose: null,
+  });
+  const [saveAsTemplateDialog, setSaveAsTemplateDialog] = useState({
     visible: false,
     props: null,
     onClose: null,
@@ -168,6 +174,7 @@ const GlobalEvents = ({
     );
     setCreateRoomDialogProps({
       ...startRoomParams,
+      item: e.item,
       visible: true,
       onClose: () =>
         setCreateRoomDialogProps({
@@ -311,6 +318,22 @@ const GlobalEvents = ({
     });
   }, []);
 
+  const onSaveAsTemplate = (e) => {
+    const visible = !!e.item;
+
+    setSaveAsTemplateDialog({
+      visible,
+      item: e.item,
+      onClose: () => {
+        setCover();
+        setSaveAsTemplateDialog({
+          visible: false,
+          item: null,
+        });
+      },
+    });
+  };
+
   useEffect(() => {
     window.addEventListener(
       Events.CREATE_PDF_FORM_FILE,
@@ -334,6 +357,7 @@ const GlobalEvents = ({
     window.addEventListener(Events.GROUP_CREATE, onCreateGroup);
     window.addEventListener(Events.GROUP_EDIT, onEditGroup);
     window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
+    window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
     if (enablePlugins) {
       window.addEventListener(
         Events.CREATE_PLUGIN_FILE,
@@ -361,6 +385,7 @@ const GlobalEvents = ({
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
       window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
       window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
+      window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
 
       if (enablePlugins) {
         window.removeEventListener(
@@ -419,6 +444,12 @@ const GlobalEvents = ({
       <CreatePluginFile
         key={Events.CREATE_PLUGIN_FILE}
         {...createPluginFileDialog}
+      />
+    ),
+    saveAsTemplateDialog.visible && (
+      <SaveAsTemplateEvent
+        key={Events.SAVE_AS_TEMPLATE}
+        {...saveAsTemplateDialog}
       />
     ),
     changeQuotaDialog.visible && (

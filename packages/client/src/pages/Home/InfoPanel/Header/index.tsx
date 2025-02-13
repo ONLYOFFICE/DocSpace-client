@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -104,6 +104,11 @@ const InfoPanelHeaderContent = ({
     !isLockedSharedRoom(selection as TRoom) &&
     !(external && expired === true);
 
+  const isTemplate =
+    selection &&
+    "rootFolderType" in selection &&
+    selection.rootFolderType === FolderType.RoomTemplates;
+
   const closeInfoPanel = () => setIsVisible(false);
 
   const setMembers = () => setView("info_members");
@@ -113,10 +118,19 @@ const InfoPanelHeaderContent = ({
 
   const memberTab = {
     id: "info_members",
-    name: t("Common:Contacts"),
+    name: isTemplate ? t("Common:Accesses") : t("Common:Contacts"),
     onClick: setMembers,
     content: null,
   };
+
+  const detailsTab = {
+    id: "info_details",
+    name: t("InfoPanel:SubmenuDetails"),
+    onClick: setDetails,
+    content: null,
+  };
+
+  const templateSubmenu = [memberTab, detailsTab];
 
   const tabsData = [
     {
@@ -125,19 +139,15 @@ const InfoPanelHeaderContent = ({
       onClick: setHistory,
       content: null,
     },
-    {
-      id: "info_details",
-      name: t("InfoPanel:SubmenuDetails"),
-      onClick: setDetails,
-      content: null,
-    },
+    detailsTab,
   ];
 
   const isRoomsType =
     selection &&
     "rootFolderType" in selection &&
     (selection.rootFolderType === FolderType.Rooms ||
-      selection.rootFolderType === FolderType.Archive);
+      selection.rootFolderType === FolderType.Archive ||
+      selection.rootFolderType === FolderType.RoomTemplates);
 
   if (isRoomsType) tabsData.unshift(memberTab);
 
@@ -218,7 +228,7 @@ const InfoPanelHeaderContent = ({
         <div className="tabs">
           <Tabs
             style={{ width: "100%" }}
-            items={tabsData}
+            items={isTemplate ? templateSubmenu : tabsData}
             selectedItemId={isRoomsType ? roomsView : fileView}
           />
         </div>

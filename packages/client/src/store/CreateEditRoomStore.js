@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,8 +32,14 @@ import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import { RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
+import {
+  createTemplate,
+  getCreateTemplateProgress,
+  setTemplateAvailable,
+  updateRoomMemberRole,
+} from "@docspace/shared/api/rooms";
 
 class CreateEditRoomStore {
   roomParams = null;
@@ -243,6 +249,9 @@ class CreateEditRoomStore {
       title,
       roomOwner,
       icon,
+      invitations,
+      roomId,
+      isAvailable,
     } = newParams;
 
     const quotaLimit = quota || room.quotaLimit;
@@ -336,6 +345,20 @@ class CreateEditRoomStore {
       if (isIndexingChanged)
         requests.push(updateCurrentFolder(null, currentFolderId));
 
+      if (room.isTemplate && invitations?.length) {
+        requests.push(
+          updateRoomMemberRole(roomId, {
+            invitations,
+            notify: false,
+            sharingMessage: "",
+          }),
+        );
+      }
+
+      if (room.isTemplate && isAvailable !== undefined) {
+        requests.push(setTemplateAvailable(roomId, isAvailable));
+      }
+
       if (requests.length) {
         await Promise.all(requests);
       }
@@ -344,7 +367,92 @@ class CreateEditRoomStore {
     }
   };
 
-  onCreateRoom = async (t, withConfirm = false) => {
+  onSaveAsTemplate = async (item, roomParams, openCreatedTemplate) => {
+    this.filesStore.setRoomCreated(true);
+
+    const { title, icon, tags, invitations, roomType, isAvailable } =
+      roomParams;
+
+    const tagsToAddList = tags.map((tag) => tag.name);
+    const isDeleteLogo = !!item.logo.original && !icon.uploadedFile;
+
+    const roomData = {
+      title,
+      roomId: item.id,
+      tags: tagsToAddList,
+      public: isAvailable,
+      copylogo: true,
+    };
+
+    if (isDeleteLogo) {
+      roomData.logo = null;
+      roomData.copylogo = false;
+    }
+
+    if (!isDeleteLogo && typeof icon.uploadedFile !== "string") {
+      const roomLogo = await this.getRoomLogo(icon);
+      roomData.logo = roomLogo;
+    }
+
+    let isCompleted = false;
+    let isError = false;
+    let progressData;
+
+    const room = await createTemplate(roomData);
+    progressData = room;
+
+    isCompleted = progressData?.isCompleted;
+    isError = progressData?.error;
+
+    while (!isCompleted) {
+      progressData = await this.getProgress(getCreateTemplateProgress);
+      isCompleted = progressData.isCompleted;
+      isError = progressData.error;
+
+      if (isError) break;
+    }
+
+    if (isError) {
+      return Promise.reject(progressData.error);
+    }
+
+    if (!progressData) return;
+
+    await updateRoomMemberRole(progressData.templateId, {
+      invitations,
+      notify: false,
+      sharingMessage: "",
+    });
+
+    if (openCreatedTemplate) {
+      this.onOpenNewRoom({
+        id: progressData.templateId,
+        title,
+        roomType,
+        rootFolderType: FolderType.RoomTemplates,
+      });
+    }
+
+    return Promise.resolve(progressData);
+  };
+
+  getRoomLogo = async (icon) => {
+    try {
+      const [logoParamsData, uploadedData] = await Promise.all([
+        this.getLogoParams(icon.uploadedFile, icon),
+        this.avatarEditorDialogStore.getUploadedLogoData(),
+      ]);
+
+      return {
+        tmpFile: uploadedData.responseData.data,
+        ...logoParamsData,
+      };
+    } catch (err) {
+      toastr.error(err);
+    }
+  };
+
+  onCreateRoom = async (t, withConfirm = false, successToast = null) => {
     const roomParams = this.roomParams;
 
     const {
@@ -354,7 +462,6 @@ class CreateEditRoomStore {
     } = this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
     const { createRoom, selection, bufferSelection } = this.filesStore;
-    const { getUploadedLogoData } = this.avatarEditorDialogStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover } = this.dialogsStore;
 
@@ -370,6 +477,9 @@ class CreateEditRoomStore {
       createAsNewFolder,
       icon,
       watermark,
+      isTemplate,
+      roomId,
+      logo,
     } = roomParams;
 
     const isThirdparty = storageLocation.isThirdparty;
@@ -382,6 +492,7 @@ class CreateEditRoomStore {
     const tagsToAddList = tags.map((tag) => tag.name);
 
     const createRoomData = {
+      roomId,
       roomType: type,
       title: title || t("Common:NewRoom"),
       ...(isThirdPartyRoom && {
@@ -412,39 +523,39 @@ class CreateEditRoomStore {
       createRoomData.watermark = await this.getWatermarkRequest(watermark);
     }
 
-    const additionalRequest = [];
-
-    const uploadedFile = icon.uploadedFile;
-
-    if (uploadedFile) {
-      additionalRequest.push(
-        this.getLogoParams(uploadedFile, icon),
-        getUploadedLogoData(),
-      );
-    }
-
     this.setIsLoading(true);
 
-    try {
-      try {
-        if (additionalRequest.length) {
-          const [logoParamsData, uploadedData] =
-            await Promise.all(additionalRequest);
+    const isDeleteLogo = isTemplate
+      ? !!logo.original && !icon.uploadedFile
+      : false;
 
-          createRoomData.logo = {
-            tmpFile: uploadedData.responseData.data,
-            ...logoParamsData,
-          };
-        }
-      } catch (e) {
-        toastr.error(e);
+    const copyLogo =
+      !isDeleteLogo &&
+      icon.uploadedFile &&
+      typeof icon.uploadedFile === "string";
+
+    try {
+      if (icon.uploadedFile && typeof icon.uploadedFile !== "string") {
+        const roomLogo = await this.getRoomLogo(icon);
+        createRoomData.logo = roomLogo;
       }
 
       withConfirm && this.setConfirmDialogIsLoading(true);
 
-      const room = isThirdPartyRoom
-        ? await api.rooms.createRoomInThirdpary(storageFolderId, createRoomData)
-        : await createRoom(createRoomData);
+      let room = null;
+      if (isThirdPartyRoom) {
+        room = await api.rooms.createRoomInThirdpary(
+          storageFolderId,
+          createRoomData,
+        );
+      } else if (isTemplate) {
+        room = await this.onCreateTemplateRoom({
+          ...createRoomData,
+          copyLogo: !!copyLogo,
+        });
+      } else {
+        room = await createRoom(createRoomData);
+      }
 
       this.dialogsStore.setIsNewRoomByCurrentUser(true);
 
@@ -469,12 +580,67 @@ class CreateEditRoomStore {
     } catch (err) {
       toastr.error(err);
     } finally {
+      if (successToast) toastr.success(successToast);
+
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);
       this.onClose();
 
       processCreatingRoomFromData && setProcessCreatingRoomFromData(false);
     }
+  };
+
+  getProgress = (request) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(async () => {
+        try {
+          await request().then((res) => {
+            resolve(res);
+          });
+        } catch (error) {
+          reject(error);
+        }
+      }, 1000);
+    });
+  };
+
+  onCreateTemplateRoom = async (roomParams) => {
+    this.filesStore.setRoomCreated(true);
+
+    const { roomId, tags, title, logo, roomType, copyLogo, color, cover } =
+      roomParams;
+
+    let isFinished = false;
+    let progressData;
+
+    const data = {
+      templateId: roomId,
+      title,
+      logo,
+      tags,
+      CopyLogo: copyLogo,
+      color,
+      cover,
+    };
+
+    const room = await api.rooms.createRoomFromTemplate(data);
+
+    progressData = room;
+
+    while (!isFinished) {
+      progressData = await this.getProgress(
+        api.rooms.getCreateRoomFromTemplateProgress,
+      );
+
+      isFinished = progressData.isCompleted;
+    }
+
+    return {
+      id: progressData.roomId,
+      title,
+      roomType,
+      rootFolderType: FolderType.Rooms,
+    };
   };
 
   onOpenNewRoom = async (room) => {

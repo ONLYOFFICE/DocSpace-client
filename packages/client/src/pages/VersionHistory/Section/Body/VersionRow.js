@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,7 @@ import { Textarea } from "@docspace/shared/components/textarea";
 import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
+import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 import { getCorrectDate } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
@@ -76,6 +77,11 @@ const VersionRow = (props) => {
     openUrl,
     setIsVerHistoryPanel,
     openOnNewPage,
+    onSetDeleteVersionDialogVisible,
+    setVersionSelectedForDeletion,
+    canDeleteVersion,
+    versionSelectedForDeletion,
+    versionDeletionProcess,
   } = props;
 
   const navigate = useNavigate();
@@ -180,6 +186,11 @@ const VersionRow = (props) => {
   //   );
   // };
 
+  const onDeleteVersion = () => {
+    onSetDeleteVersionDialogVisible(true);
+    setVersionSelectedForDeletion(info.versionGroup);
+  };
+
   const onContextMenu = (event) => {
     if (showEditPanel) event.stopPropagation();
   };
@@ -211,6 +222,18 @@ const VersionRow = (props) => {
       onClick: onDownloadAction,
       disabled: !info.security.Download,
     },
+    canDeleteVersion &&
+      index !== 0 && {
+        key: "separator",
+        isSeparator: true,
+      },
+    canDeleteVersion &&
+      index !== 0 && {
+        key: "delete",
+        icon: DeleteIcon,
+        label: t("Common:Delete"),
+        onClick: onDeleteVersion,
+      },
   ];
 
   // uncomment if we want to change versions again
@@ -235,6 +258,12 @@ const VersionRow = (props) => {
       isSavingComment={isSavingComment}
       isEditing={isEditing}
       contextTitle={t("Common:Actions")}
+      versionDeleteProcess={versionDeletionProcess}
+      versionDeleteRow={
+        versionDeletionProcess
+          ? versionSelectedForDeletion === info.versionGroup
+          : null
+      }
     >
       <div className={`version-row_${index}`} onContextMenu={onContextMenu}>
         <Box displayProp="flex" className="row-header">
@@ -383,10 +412,15 @@ export default inject(
       isEditingVersion,
       fileSecurity,
       setIsVerHistoryPanel,
+      onSetDeleteVersionDialogVisible,
+      setVersionSelectedForDeletion,
+      versionSelectedForDeletion,
+      versionDeletionProcess,
     } = versionHistoryStore;
 
     const isEdit = isEditingVersion || isEditing;
     const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
+    const canDeleteVersion = !isEdit && fileSecurity?.Delete;
 
     const { openOnNewPage } = filesSettingsStore;
 
@@ -407,6 +441,11 @@ export default inject(
       openUrl,
       setIsVerHistoryPanel,
       openOnNewPage,
+      onSetDeleteVersionDialogVisible,
+      setVersionSelectedForDeletion,
+      canDeleteVersion,
+      versionSelectedForDeletion,
+      versionDeletionProcess,
     };
   },
 )(

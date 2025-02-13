@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -46,6 +46,7 @@ import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link } from "@docspace/shared/components/link";
 import api from "@docspace/shared/api";
+import { FolderType } from "@docspace/shared/enums";
 import { StyledUserTypeHeader, StyledUser } from "../../styles/members";
 
 const User = ({
@@ -77,6 +78,8 @@ const User = ({
   const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
   const withoutTitles = !!searchValue;
+  const hideUserRole =
+    infoPanelSelection.rootFolderType === FolderType.RoomTemplates;
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
     infoPanelSelection.roomType,
@@ -319,7 +322,7 @@ const User = ({
         ) : null}
       </div>
 
-      {userRole && userRoleOptions ? (
+      {userRole && userRoleOptions && !hideUserRole ? (
         <div className="role-wrapper">
           {canChangeUserRole ? (
             <ComboBox

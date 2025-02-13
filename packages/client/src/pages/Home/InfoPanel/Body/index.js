@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -63,6 +63,7 @@ const InfoPanelBodyContent = ({
   setImage,
   image,
   onChangeFile,
+  templateEventVisible,
   ...props
 }) => {
   const { groupId } = useParams();
@@ -219,7 +220,11 @@ const InfoPanelBodyContent = ({
           image={image}
           onChangeImage={onChangeIcon}
           onClose={() => setAvatarEditorDialogVisible(false)}
-          onSave={(img) => onSaveRoomLogo(selection.id, img, selection, true)}
+          onSave={(img) =>
+            !templateEventVisible
+              ? onSaveRoomLogo(selection.id, img, selection, true)
+              : setAvatarEditorDialogVisible(false)
+          }
           onChangeFile={onChangeFile}
           classNameWrapperImageCropper="icon-editor"
           visible={image.uploadedFile}
@@ -255,7 +260,8 @@ export default inject(
       setShowSearchBlock,
     } = infoPanelStore;
 
-    const { editRoomDialogProps, createRoomDialogProps } = dialogsStore;
+    const { editRoomDialogProps, createRoomDialogProps, templateEventVisible } =
+      dialogsStore;
 
     const selection =
       infoPanelSelection?.length > 1 ? null : infoPanelSelection;
@@ -306,6 +312,7 @@ export default inject(
       uploadedFile,
       setImage,
       image,
+      templateEventVisible,
     };
   },
 )(observer(InfoPanelBodyContent));

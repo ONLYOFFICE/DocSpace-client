@@ -1539,46 +1539,50 @@ class UploadDataStore {
       });
   };
 
-  finishUploadFiles = (
-    t,
-    waitConversion,
-    isSingleConversion,
-    secondConvertingWithPassword,
-  ) => {
-    const filesWithErrors = this.files.filter((f) => f.error);
-
+  finishUploadFiles = (t, waitConversion, isSingleConversion) => {
+    const filesWithErrors = this.uploadedFilesHistory.filter(
+      (f) => f.error && !f.errorShown,
+    );
     const totalErrorsCount = filesWithErrors.length;
 
+
     if (totalErrorsCount > 0) {
-      const uniqErrors = uniqBy(filesWithErrors, "error");
-      uniqErrors.forEach((f) =>
-        f.error.indexOf("password") > -1
-          ? toastr.warning(
-              <Trans
-                i18nKey="Files:PasswordProtectedFiles"
-                t={t}
-                components={[
-                  <ColorTheme
-                    key="a"
-                    tag="a"
-                    themeId={ThemeId.Link}
-                    isHovered
-                    color={globalColors.link}
-                    onClick={() => {
-                      toastr.clear();
-                      this.setUploadPanelVisible(true);
-                    }}
-                  />,
-                ]}
-              />,
-              null,
-              60000,
-              true,
-            )
-          : secondConvertingWithPassword
-            ? null
-            : toastr.error(f.error),
-      );
+      filesWithErrors.forEach((f) => {
+        const historyFile = this.uploadedFilesHistory.find(
+          (file) => file.uniqueId === f.uniqueId,
+        );
+
+        if (f.error.indexOf("password") > -1) {
+          toastr.warning(
+            <Trans
+              i18nKey="Files:PasswordProtectedFiles"
+              t={t}
+              components={[
+                <ColorTheme
+                  key="a"
+                  tag="a"
+                  themeId={ThemeId.Link}
+                  isHovered
+                  color={globalColors.link}
+                  onClick={() => {
+                    toastr.clear();
+                    this.setUploadPanelVisible(true);
+                  }}
+                />,
+              ]}
+            />,
+            null,
+            60000,
+            true,
+          );
+        } else {
+          toastr.error(f.error);
+        }
+        if (historyFile) {
+          historyFile.errorShown = true;
+        }
+
+      });
 
       // for empty file
       this.primaryProgressDataStore.setPrimaryProgressBarData({

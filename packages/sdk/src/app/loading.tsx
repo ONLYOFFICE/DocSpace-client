@@ -28,5 +28,5 @@ import AppLoader from "@docspace/shared/components/app-loader";
 
 export default function Loading() {
   // You can add any UI inside Loading, including a Skeleton.
-  return <AppLoader />;
+  return <></>;
 }

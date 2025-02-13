@@ -43,7 +43,11 @@ const NewFilesPanelItemRoomComponent = ({
 
   const onClick = async () => {
     const roomInfo = await getFolderInfo!(room.id);
-    openItemAction!({ ...roomInfo, isFolder: true });
+    openItemAction!({
+      ...roomInfo,
+      isFolder: true,
+      updatePublicKey: true,
+    });
     onClose();
   };
 

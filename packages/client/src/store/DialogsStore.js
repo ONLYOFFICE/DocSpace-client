@@ -256,8 +256,6 @@ class DialogsStore {
 
   guidAnimationVisible = false;
 
-  formFillingTipsNumber = 1;
-
   sortedDownloadFiles = {
     other: [],
     password: [],
@@ -832,10 +830,6 @@ class DialogsStore {
 
   setWelcomeFormFillingTipsVisible = (visible) => {
     this.welcomeFormFillingTipsVisible = visible;
-  };
-
-  setFormFillingTipsNumber = (number) => {
-    this.formFillingTipsNumber = number;
   };
 
   setCovers = (covers) => {

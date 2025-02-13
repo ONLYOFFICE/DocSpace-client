@@ -33,7 +33,6 @@ import {
   Events,
   FilesSelectorFilterTypes,
   FilterType,
-  FormFillingTipsState,
 } from "@docspace/shared/enums";
 
 import { Guidance } from "@docspace/shared/components/guidance";
@@ -149,10 +148,8 @@ const Panels = (props) => {
     guestReleaseTipDialogVisible,
     closeEditIndexDialogVisible,
 
-    setFormFillingTipsNumber,
     setFormFillingTipsDialog,
     formFillingTipsVisible,
-    formFillingTipsNumber,
     viewAs,
     infoPanelVisible,
     userId,
@@ -225,7 +222,6 @@ const Panels = (props) => {
   }, [isShowWarningDialog]);
 
   const onCloseGuidance = () => {
-    setFormFillingTipsNumber(FormFillingTipsState.Starting);
     setFormFillingTipsDialog(false);
     window.localStorage.setItem(`closedFormFillingTips-${userId}`, "true");
   };
@@ -375,8 +371,6 @@ const Panels = (props) => {
 
     formFillingTipsVisible && (
       <Guidance
-        formFillingTipsNumber={formFillingTipsNumber}
-        setFormFillingTipsNumber={setFormFillingTipsNumber}
         viewAs={viewAs}
         infoPanelVisible={infoPanelVisible}
         onClose={onCloseGuidance}
@@ -458,10 +452,8 @@ export default inject(
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
 
-      setFormFillingTipsNumber,
       setFormFillingTipsDialog,
       formFillingTipsVisible,
-      formFillingTipsNumber,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
@@ -559,10 +551,8 @@ export default inject(
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
-      setFormFillingTipsNumber,
       setFormFillingTipsDialog,
       formFillingTipsVisible,
-      formFillingTipsNumber,
       viewAs,
       infoPanelVisible: infoPanelStore.isVisible,
       userId: userStore?.user?.id,

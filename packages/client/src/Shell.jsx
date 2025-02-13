@@ -555,10 +555,8 @@ const ShellWrapper = inject(
 
     const {
       setConvertPasswordDialogVisible,
-      setFormFillingTipsNumber,
       setFormFillingTipsDialog,
       formFillingTipsVisible,
-      formFillingTipsNumber,
 
       setFormCreationInfo,
     } = dialogsStore;
@@ -589,10 +587,8 @@ const ShellWrapper = inject(
       setCheckedMaintenance,
       setMaintenanceExist,
       setPreparationPortalDialogVisible,
-      setFormFillingTipsNumber,
       setFormFillingTipsDialog,
       formFillingTipsVisible,
-      formFillingTipsNumber,
       isBase,
       setTheme,
       roomsMode,

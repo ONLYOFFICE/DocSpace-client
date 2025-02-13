@@ -3,11 +3,12 @@ import {
   GuidanceStep,
   GuidanceRefKey,
 } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+import { RefObject } from "react";
 
 type RefType = "direct" | "firstChildOffset";
 
 interface RefInfo {
-  ref: any;
+  ref: RefObject<HTMLDivElement>;
   type: RefType;
 }
 
@@ -20,7 +21,11 @@ class GuidanceStore {
     makeAutoObservable(this);
   }
 
-  setRefMap = (key: GuidanceRefKey, ref: any, type: RefType = "direct") => {
+  setRefMap = (
+    key: GuidanceRefKey,
+    ref: RefObject<HTMLDivElement>,
+    type: RefType = "direct",
+  ) => {
     this.refMaps.set(key, { ref, type });
   };
 
@@ -38,7 +43,8 @@ class GuidanceStore {
       case "direct":
         return ref?.current;
       case "firstChildOffset":
-        return ref?.current?.firstChild?.offsetParent;
+        return (ref?.current?.firstChild as HTMLElement | null | undefined)
+          ?.offsetParent;
       default:
         return null;
     }

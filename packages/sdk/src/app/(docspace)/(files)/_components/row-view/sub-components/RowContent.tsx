@@ -64,7 +64,7 @@ const RowContent = observer(
           return createdBy.displayName;
         case SortByFieldName.CreationDate:
           return getCorrectDate(
-            i18n.language,
+            i18n.language || "",
             created,
             "L",
             "LT",
@@ -78,7 +78,7 @@ const RowContent = observer(
           return "";
         default:
           return getCorrectDate(
-            i18n.language,
+            i18n.language || "",
             updated,
             "L",
             "LT",

@@ -61,6 +61,7 @@ export default inject<TStore>(
     const { email, displayName } = user!;
 
     const isAdmin = user?.isAdmin;
+    const isVisitor = user?.isVisitor;
 
     const { visible: primaryProgressDataVisible } = primaryProgressDataStore;
     const { visible: secondaryProgressDataStoreVisible } =
@@ -148,6 +149,7 @@ export default inject<TStore>(
       currentDeviceType,
       logoText,
       isAdmin,
+      isVisitor,
     };
   },
 )(observer(ArticleWrapper));

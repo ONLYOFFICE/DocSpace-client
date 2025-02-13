@@ -267,6 +267,9 @@ class UploadDataStore {
     const newHistory = this.uploadedFilesHistory.filter(
       (el) =>
         el.action === "uploaded" ||
+        el.action === "converted" ||
+        (el.action === "upload" && el.error) ||
+        (el.action === "convert" && el.error) ||
         (el.action === "convert" && el.inConversion),
     );
     this.filesToConversion = this.filesToConversion.filter(

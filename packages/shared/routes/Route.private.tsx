@@ -76,7 +76,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
   const renderComponent = () => {
     const key = searchParams.get("key");
 
-    if (key && isLoadedUser && !user) {
+    if (isLoadedUser && !user) {
       const filter = FilesFilter.getDefault();
       const subFolder = new URLSearchParams(window.location.search).get(
         "folder",
@@ -84,7 +84,9 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       const path = "/rooms/share";
 
       filter.folder = subFolder || roomId || "";
-      filter.key = key;
+      if (key) {
+        filter.key = key;
+      }
 
       window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`);
     }

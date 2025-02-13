@@ -38,6 +38,7 @@ import { Scrollbar } from "../scrollbar";
 
 import styles from "./LinkWithDropdown.module.scss";
 import { Text } from "../text";
+import { LinkWithDropDownProps } from "./LinkWithDropdown.types";
 
 const LinkWithDropdown = ({
   isSemitransparent = false,
@@ -166,6 +167,7 @@ const LinkWithDropdown = ({
         { [styles.isOpen]: state.isOpen },
         className,
       )}
+      data-test-id="link-dropdown"
       ref={ref}
     >
       <span onClick={onOpen}>
@@ -182,6 +184,10 @@ const LinkWithDropdown = ({
             className,
           )}
           style={{ color }}
+          role="button"
+          aria-haspopup="true"
+          aria-expanded={state.isOpen}
+          aria-disabled={isDisabled}
           {...rest}
         >
           {withExpander ? (

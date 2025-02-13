@@ -83,21 +83,26 @@ const getLeftPosition = (
     return getMixedRtlLeftPosition(rect, viewAs, rtl);
   }
 
-  return viewAs === "row" ? rect.left - row : rect.left - base;
+  if (viewAs === "tile" || type === GuidanceElementType.Content) {
+    return viewAs === "row" ? rect.left - row : rect.left - base;
+  }
+
+  return viewAs === "row" ? rect.left - row : rect.left + base;
 };
 
 const getViewTypeBasedDimensions = (
   rect: DOMRect,
   viewAs: string,
   offset: GuidancePosition["offset"],
-  options: { width?: number } = {},
+  options: { width?: number; heightOffset?: number } = {},
 ): ViewDimensions => {
   const offsetValue = offset?.value ?? 0;
   const hasWidth = "width" in options;
+  const heightOffset = options?.heightOffset ?? 0;
 
   return {
     width: hasWidth ? options.width! : rect.width + offsetValue,
-    height: rect.height + offsetValue,
+    height: rect.height + offsetValue - heightOffset,
     top: rect.top - offsetValue / 2,
   };
 };
@@ -122,7 +127,7 @@ const getExpandedPosition = (
     left: rect.left - offsetValue,
     top: rect.top - offsetValue,
     bottom: rect.bottom + offsetValue,
-    right: rect.right,
+    right: rect.right + offsetValue,
   };
 };
 
@@ -138,6 +143,7 @@ const getPosition = (
       ? getViewTypeBasedDimensions(rects, viewAs, offset)
       : getViewTypeBasedDimensions(rects, viewAs, offset, {
           width: 0,
+          heightOffset: 1,
         });
 
   return {

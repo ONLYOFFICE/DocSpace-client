@@ -32,9 +32,20 @@ export enum GuidanceElementType {
   Mixed = "mixed",
 }
 
+export enum GuidanceRefKey {
+  Pdf = "pdf",
+  Ready = "ready",
+  Share = "share",
+  Uploading = "uploading",
+  MainButton = "mainButton",
+}
+
+export type GuidancePlacement = "side" | "bottom" | "dynamic";
+
 export interface GuidancePosition {
   type: GuidanceElementType;
-  rects: DOMRect | null;
+  placement?: GuidancePlacement;
+  refKey?: GuidanceRefKey;
   offset?: {
     value?: number;
     row?: number;
@@ -42,6 +53,7 @@ export interface GuidancePosition {
     rtl?: number;
   };
   smallBorder?: boolean;
+  rects?: DOMRect;
 }
 
 export interface GuidanceStep {
@@ -49,6 +61,7 @@ export interface GuidanceStep {
   header: string;
   description: string;
   key: string;
+  placement: GuidancePlacement;
   position: GuidancePosition[];
 }
 
@@ -64,8 +77,8 @@ export interface GuidanceProps {
   formFillingTipsNumber: number;
   setFormFillingTipsNumber: (index: number) => void;
   viewAs: string;
-  infoPanelVisible: boolean;
   onClose?: () => void;
+  getRefElement: (key: GuidanceRefKey) => HTMLElement | null;
 }
 
 export interface GuidProps {
@@ -73,6 +86,9 @@ export interface GuidProps {
   currentStepIndex: number;
   setCurrentStepIndex: (index: number) => void;
   onClose: () => void;
+  viewAs: string;
+  currentGuidance: GuidanceStep;
+  sectionWidth?: number;
   positions: {
     width: number;
     height: number;
@@ -81,8 +97,4 @@ export interface GuidProps {
     bottom: number;
     right: number;
   }[];
-  infoPanelVisible: boolean;
-  viewAs: string;
-  currentGuidance: GuidanceStep;
-  sectionWidth: number;
 }

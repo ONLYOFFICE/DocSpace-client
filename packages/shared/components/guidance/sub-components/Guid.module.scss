@@ -45,15 +45,6 @@
   margin: 0 auto;
   min-height: auto;
   position: absolute;
-  top: var(--manual-y);
-
-  &.directionLeft {
-    left: var(--manual-x);
-  }
-
-  &.directionRight {
-    right: var(--manual-x);
-  }
 }
 
 :global {
@@ -112,11 +103,6 @@
 
   &.smallBorderRadius {
     border-radius: 4px;
-  }
-
-  &.fromRight {
-    left: unset !important;
-    right: 250px;
   }
 }
 

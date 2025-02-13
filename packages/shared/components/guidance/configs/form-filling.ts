@@ -18,7 +18,7 @@ export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
         refKey: GuidanceRefKey.Pdf,
         offset: {
           value: 4,
-          row: 15,
+          row: 14,
           table: 3,
           rtl: 20,
         },
@@ -56,7 +56,7 @@ export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
         refKey: GuidanceRefKey.Ready,
         offset: {
           value: 4,
-          row: 15,
+          row: 14,
           table: 3,
           rtl: 20,
         },
@@ -75,7 +75,7 @@ export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
         refKey: GuidanceRefKey.Ready,
         offset: {
           value: 4,
-          row: 15,
+          row: 14,
           table: 3,
           rtl: 20,
         },

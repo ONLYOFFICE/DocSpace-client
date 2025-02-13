@@ -24,9 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 
-import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -37,13 +42,8 @@ import { AsideHeader } from "../../aside-header";
 import styles from "./Guid.module.scss";
 import modalStyles from "../../modal-dialog/ModalDialog.module.scss";
 
-import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
-
-const GUID_MODAL_MARGIN = 18;
-const MAX_MODAL_HEIGHT = 190;
-const MODAL_WIDTH = 430;
-
 const SIDE_OFFSET = 16;
+const RTL_ROW_OFFSET = 15;
 
 const getModalPosition = (
   positions: Position[],
@@ -53,6 +53,8 @@ const getModalPosition = (
   windowHeight: number,
   modalWidth: number,
   modalHeight: number,
+  viewAs: string,
+  currentGuidance?: GuidanceStep,
 ): { left: number; top: number } => {
   let mainPosition = positions[0];
 
@@ -62,9 +64,13 @@ const getModalPosition = (
 
   if (!mainPosition) return { left: 0, top: 0 };
 
-  // Calculate side position first to check if it fits
+  const rtlOffset =
+    isRTL && viewAs === "row" && currentGuidance?.position?.[0]?.offset?.rtl
+      ? RTL_ROW_OFFSET
+      : 0;
+
   const baseLeft = isRTL
-    ? mainPosition.left - modalWidth - SIDE_OFFSET
+    ? mainPosition.left - modalWidth - SIDE_OFFSET + rtlOffset
     : mainPosition.right + SIDE_OFFSET;
 
   const isNotEnoughHorizontalSpace = isRTL
@@ -74,11 +80,20 @@ const getModalPosition = (
   const isNotEnoughVerticalSpace = proposedTop + modalHeight > windowHeight;
 
   if (placement === "bottom") {
-    const wouldOverflowHorizontally =
-      mainPosition.left + modalWidth > windowWidth;
-    const left = wouldOverflowHorizontally
-      ? mainPosition.right - modalWidth
-      : Math.max(0, mainPosition.left);
+    let left;
+    if (isRTL) {
+      const wouldOverflowHorizontally =
+        windowWidth - mainPosition.right + modalWidth > windowWidth;
+      left = wouldOverflowHorizontally
+        ? mainPosition.left + rtlOffset
+        : mainPosition.right - modalWidth + rtlOffset;
+    } else {
+      const wouldOverflowHorizontally =
+        mainPosition.left + modalWidth > windowWidth;
+      left = wouldOverflowHorizontally
+        ? mainPosition.right - modalWidth
+        : Math.max(0, mainPosition.left);
+    }
 
     return {
       left,
@@ -88,46 +103,45 @@ const getModalPosition = (
     };
   }
 
-  // placement === "side"
   if (!isNotEnoughHorizontalSpace) {
-    // If side placement fits, use it
     return {
       left: baseLeft,
       top: Math.max(0, mainPosition.top),
     };
   }
 
-  // If side doesn't fit, try bottom
   if (!isNotEnoughVerticalSpace) {
     return {
-      left: Math.max(0, mainPosition.left),
+      left: isRTL
+        ? mainPosition.left + rtlOffset
+        : Math.max(0, mainPosition.left),
       top: proposedTop,
     };
   }
 
-  // If neither side nor bottom fits, switch sides and lift up
   return {
     left: isRTL
       ? mainPosition.right + SIDE_OFFSET
-      : mainPosition.left - modalWidth - SIDE_OFFSET,
+      : mainPosition.left - modalWidth - SIDE_OFFSET + rtlOffset,
     top: mainPosition.bottom - modalHeight,
   };
 };
 
 const Guid: React.FC<GuidProps> = ({
-  guidanceConfig,
-  currentStepIndex,
-  setCurrentStepIndex,
-  onClose,
-  positions,
-  infoPanelVisible,
-  viewAs,
   currentGuidance,
+  positions,
   sectionWidth,
+  onNext,
+  onPrev,
+  onClose,
+  currentStep,
+  totalSteps,
+  isRTL,
+  viewAs,
+  guidanceConfig,
   t,
 }) => {
   const theme = useTheme();
-  const { isRTL } = useInterfaceDirection();
 
   const modalRef = useRef<HTMLDivElement>(null);
   const [modalWidth, setModalWidth] = useState(0);
@@ -135,89 +149,116 @@ const Guid: React.FC<GuidProps> = ({
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-      setWindowHeight(window.innerHeight);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+  const handleResize = useCallback(() => {
+    setWindowWidth(window.innerWidth);
+    setWindowHeight(window.innerHeight);
   }, []);
 
   useEffect(() => {
-    if (modalRef.current) {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [handleResize]);
+
+  useEffect(() => {
+    if (!modalRef.current) return;
+
+    const updateModalSize = () => {
+      if (!modalRef.current) return;
       setModalWidth(modalRef.current.offsetWidth);
       setModalHeight(modalRef.current.offsetHeight);
-    }
+    };
+
+    const timeoutId = setTimeout(updateModalSize, 0);
+    return () => clearTimeout(timeoutId);
   }, [currentGuidance]);
 
-  const isLastStep = currentStepIndex === guidanceConfig.length - 1;
+  const isLastStep = currentStep === totalSteps - 1;
   const { placement = "side" } = currentGuidance || {};
 
-  const modalPosition = getModalPosition(
-    positions,
-    placement,
-    isRTL,
-    windowWidth,
-    windowHeight,
-    modalWidth,
-    modalHeight,
+  const modalPosition = useMemo(
+    () =>
+      getModalPosition(
+        positions,
+        placement,
+        isRTL,
+        windowWidth,
+        windowHeight,
+        modalWidth,
+        modalHeight,
+        viewAs,
+        currentGuidance,
+      ),
+    [
+      positions,
+      placement,
+      isRTL,
+      windowWidth,
+      windowHeight,
+      modalWidth,
+      modalHeight,
+      viewAs,
+      currentGuidance,
+    ],
   );
 
-  const clippedClassName = classNames(styles.guidElement, {
-    [styles.smallBorderRadius]: isLastStep,
-  });
+  const clippedElements = useMemo(
+    () =>
+      positions.map((position, index) => ({
+        key: `guid-element-${index}`,
+        style: {
+          ["--backdrop-filter-value" as string]: theme.isBase
+            ? "contrast(165%)"
+            : "contrast(0.82)",
+          width: position.width
+            ? `${position.width}px`
+            : `${sectionWidth - 4}px`,
+          height: `${position.height}px`,
+          left: `${position.left}px`,
+          top: `${position.top}px`,
+          right: `${position.right}px`,
+        },
+      })),
+    [positions, theme.isBase, sectionWidth],
+  );
 
-  const clippedElements = positions.map((position, index) => ({
-    key: `guid-element-${index}`,
-    style: {
-      ["--backdrop-filter-value" as string]: theme.isBase
-        ? "contrast(200%)"
-        : "contrast(0.82)",
-      width: position.width ? `${position.width}px` : `${sectionWidth}px`,
-      height: `${position.height}px`,
-      left: `${position.left}px`,
-      top: `${position.top}px`,
-      right: `${position.right}px`,
+  const renderClippedElements = useCallback(() => {
+    return clippedElements.map((element, index) => {
+      const elementClippedClassName = classNames(styles.guidElement, {
+        [styles.smallBorderRadius]:
+          currentGuidance?.position[index]?.smallBorder,
+      });
+
+      return (
+        <div
+          key={element.key}
+          className={elementClippedClassName}
+          style={element.style}
+        />
+      );
+    });
+  }, [clippedElements, currentGuidance]);
+
+  const tipsCircles = useMemo(
+    () =>
+      guidanceConfig.map((step, index) => (
+        <div
+          className={classNames(styles.tipsCircle, {
+            [styles.isSelected]: index === currentStep,
+          })}
+          key={`tips_circle_${step.id}`}
+        />
+      )),
+    [guidanceConfig, currentStep],
+  );
+
+  const closeBackdrop = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      onClose();
     },
-  }));
-
-  const tipsCircles = guidanceConfig.map((step, index) => (
-    <div
-      className={classNames(styles.tipsCircle, {
-        [styles.isSelected]: index === currentStepIndex,
-      })}
-      key={`tips_circle_${step.id}`}
-    />
-  ));
-
-  const closeBackdrop = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onClose();
-  };
-
-  const nextTips = () => {
-    if (isLastStep) {
-      return onClose();
-    }
-    setCurrentStepIndex(currentStepIndex + 1);
-  };
-
-  const prevTips = () => {
-    setCurrentStepIndex(currentStepIndex - 1);
-  };
-
-  const dialogClassName = classNames(styles.dialog, "not-selectable", "dialog");
-  const contentClassName = classNames(styles.content, "guidance-dialog", {
-    [styles.visible]: true,
-    [styles.displayTypeModal]: "modal",
-    [styles.autoMaxHeight]: true,
-  });
-  const bodyClassName = classNames(modalStyles.body, "modal-body", {
-    [styles.displayTypeModal]: "modal",
-  });
+    [onClose],
+  );
 
   return (
     <div className="guidance">
@@ -225,24 +266,25 @@ const Guid: React.FC<GuidProps> = ({
         className={classNames(styles.guidBackdrop)}
         onClick={closeBackdrop}
       />
-      {clippedElements.map((element) => (
-        <div
-          key={element.key}
-          className={clippedClassName}
-          style={element.style}
-        />
-      ))}
+      {renderClippedElements()}
       <div
         ref={modalRef}
         id="modal-onMouseDown-close"
         role="dialog"
-        className={dialogClassName}
+        className={classNames(styles.dialog, "not-selectable", "dialog")}
         style={{
           left: modalPosition.left,
           top: modalPosition.top,
         }}
       >
-        <div id="modal-dialog" className={contentClassName}>
+        <div
+          id="modal-dialog"
+          className={classNames(styles.content, "guidance-dialog", {
+            [styles.visible]: true,
+            [styles.displayTypeModal]: "modal",
+            [styles.autoMaxHeight]: true,
+          })}
+        >
           <AsideHeader
             id="modal-header-swipe"
             className={classNames(["modal-header"]) || "modal-header"}
@@ -250,7 +292,11 @@ const Guid: React.FC<GuidProps> = ({
             onCloseClick={onClose}
           />
 
-          <div className={bodyClassName}>
+          <div
+            className={classNames(modalStyles.body, "modal-body", {
+              [styles.displayTypeModal]: "modal",
+            })}
+          >
             <Text
               className="tips-description"
               fontWeight="400"
@@ -268,13 +314,13 @@ const Guid: React.FC<GuidProps> = ({
           >
             <div className="circle-container">{tipsCircles}</div>
             <div className="button-container">
-              {currentStepIndex !== 0 && (
+              {currentStep !== 0 && (
                 <Button
                   id="form-filling_tips_back"
                   key="TipsBack"
                   label={t("Common:Back")}
                   size={ButtonSize.extraSmall}
-                  onClick={prevTips}
+                  onClick={onPrev}
                 />
               )}
               <Button
@@ -283,7 +329,7 @@ const Guid: React.FC<GuidProps> = ({
                 primary
                 label={isLastStep ? t("Common:GotIt") : t("Common:Next")}
                 size={ButtonSize.extraSmall}
-                onClick={isLastStep ? onClose : nextTips}
+                onClick={isLastStep ? onClose : onNext}
               />
             </div>
           </div>

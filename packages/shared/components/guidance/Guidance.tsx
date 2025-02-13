@@ -26,80 +26,132 @@
 
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 
 import { Portal } from "../portal";
 import { Guid } from "./sub-components/Guid";
-import { GuidanceProps } from "./sub-components/Guid.types";
+import {
+  GuidanceStep,
+  GuidanceRefKey,
+  GuidancePosition,
+} from "./sub-components/Guid.types";
 import { getGuidPosition } from "./sub-components/Guid.utils";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
-interface InjectedProps extends GuidanceProps {
-  guidanceStore?: any;
+interface GuidanceProps {
+  viewAs: string;
+  onClose?: () => void;
+  getRefElement: (key: GuidanceRefKey) => HTMLElement | null;
+  config: GuidanceStep[];
 }
 
-const Guidance = inject(({ guidanceStore }) => ({
-  guidanceStore,
-}))(
-  observer((props: InjectedProps) => {
-    const {
-      formFillingTipsNumber,
-      setFormFillingTipsNumber,
-      viewAs,
-      infoPanelVisible,
-      guidanceStore,
-    } = props;
+const Guidance: React.FC<GuidanceProps> = ({
+  viewAs,
+  onClose,
+  getRefElement,
+  config,
+}) => {
+  const [sectionWidth, setSectionWidth] = useState<number>(0);
+  const [positions, setPositions] = useState<GuidancePosition[]>([]);
+  const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
+  const [currentGuidance, setCurrentGuidance] = useState<GuidanceStep | null>(
+    null,
+  );
 
-    const [sectionWidth, setSectionWidth] = useState(0);
+  const { t } = useTranslation(["FormFillingTipsDialog", "Common"]);
+  const { isRTL } = useInterfaceDirection();
 
-    const { t } = useTranslation(["FormFillingTipsDialog", "Common"]);
-    const { isRTL } = useInterfaceDirection();
+  useEffect(() => {
+    const updatePositions = () => {
+      if (!currentGuidance?.position) return;
 
-    const guidanceConfig = guidanceStore?.config || [];
-    const currentGuidance = guidanceConfig[formFillingTipsNumber - 1];
+      const calculatePositions = () => {
+        const newPositions = currentGuidance.position
+          .map((pos) => {
+            const element = getRefElement(pos.refKey as GuidanceRefKey);
 
-    useEffect(() => {
-      const updateSectionWidth = () => {
+            if (!element) return null;
+
+            const clientRects = element.getClientRects?.();
+            if (!clientRects || clientRects.length === 0) return null;
+
+            return getGuidPosition(
+              {
+                ...pos,
+                rects: clientRects[0],
+              },
+              viewAs,
+              isRTL,
+            );
+          })
+          .filter(Boolean);
+
+        setPositions(newPositions);
+
         const section = document.getElementById("section");
         if (section) {
           setSectionWidth(section.clientWidth);
         }
       };
 
-      updateSectionWidth();
-      window.addEventListener("resize", updateSectionWidth);
+      const timeoutId = setTimeout(calculatePositions, 0);
 
-      return () => {
-        window.removeEventListener("resize", updateSectionWidth);
-      };
-    }, []);
+      return () => clearTimeout(timeoutId);
+    };
 
-    if (!currentGuidance) return null;
+    updatePositions();
+    window.addEventListener("resize", updatePositions);
 
-    const positions =
-      currentGuidance?.position?.map((pos) =>
-        getGuidPosition(pos, viewAs, isRTL),
-      ) || [];
+    return () => {
+      window.removeEventListener("resize", updatePositions);
+    };
+  }, [currentGuidance, viewAs, isRTL]);
 
-    console.log(positions);
-    return (
-      <Portal
-        element={
-          <Guid
-            guidanceConfig={guidanceConfig}
-            currentStepIndex={formFillingTipsNumber - 1}
-            currentGuidance={currentGuidance}
-            setCurrentStepIndex={(index) => setFormFillingTipsNumber(index + 1)}
-            onClose={props.onClose}
-            positions={positions}
-            infoPanelVisible={infoPanelVisible}
-            viewAs={viewAs}
-            sectionWidth={sectionWidth}
-          />
-        }
-      />
-    );
-  }),
-);
+  const handleNext = () => {
+    if (currentStepIndex < config.length - 1) {
+      setCurrentStepIndex(currentStepIndex + 1);
+    } else {
+      onClose?.();
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentStepIndex > 0) {
+      setCurrentStepIndex(currentStepIndex - 1);
+    }
+  };
+
+  useEffect(() => {
+    setCurrentGuidance(config[currentStepIndex]);
+  }, [currentStepIndex, config]);
+
+  if (!currentGuidance || !config.length) return null;
+
+  const hasValidPositions = positions.some(
+    (pos) => pos.height !== 0 && pos.left !== 0 && pos.top !== 0,
+  );
+
+  if (!hasValidPositions) return null;
+
+  return (
+    <Portal
+      element={
+        <Guid
+          viewAs={viewAs}
+          currentGuidance={currentGuidance}
+          positions={positions}
+          sectionWidth={sectionWidth}
+          onNext={handleNext}
+          onPrev={handlePrev}
+          onClose={onClose}
+          currentStep={currentStepIndex}
+          totalSteps={config.length}
+          isRTL={isRTL}
+          guidanceConfig={config}
+          t={t}
+        />
+      }
+    />
+  );
+};
 
 export { Guidance };

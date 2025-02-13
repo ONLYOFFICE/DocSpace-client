@@ -303,6 +303,9 @@ class DialogsStore {
 
   setCreatePDFFormFile = (props) => {
     this.createPDFFormFileProps = props;
+    if (props.visible) {
+      this.welcomeFormFillingTipsVisible = false;
+    }
   };
 
   setCreateRoomDialogProps = (props) => {

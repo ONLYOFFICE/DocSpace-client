@@ -48,25 +48,27 @@ export const Component = () => {
   const currentPath = window.location.pathname;
 
   return (
-    <ErrorBoundary>
-      <SectionWrapper withBodyScroll viewAs="settings">
-        <Section.SectionHeader>
-          {currentPath === webhookHistoryPath ? (
-            <HistoryHeader />
-          ) : currentPath === webhookDetailsPath ? (
-            <DetailsNavigationHeader />
-          ) : currentPath === oauthCreatePath ||
-            currentPath === oauthEditPath ? (
-            <OAuthSectionHeader isEdit={currentPath === oauthEditPath} />
-          ) : (
-            <SectionHeaderContent />
-          )}
-        </Section.SectionHeader>
+    <PrivateRoute>
+      <ErrorBoundary>
+        <SectionWrapper withBodyScroll viewAs="settings">
+          <Section.SectionHeader>
+            {currentPath === webhookHistoryPath ? (
+              <HistoryHeader />
+            ) : currentPath === webhookDetailsPath ? (
+              <DetailsNavigationHeader />
+            ) : currentPath === oauthCreatePath ||
+              currentPath === oauthEditPath ? (
+              <OAuthSectionHeader isEdit={currentPath === oauthEditPath} />
+            ) : (
+              <SectionHeaderContent />
+            )}
+          </Section.SectionHeader>
 
-        <Section.SectionBody>
-          <Outlet />
-        </Section.SectionBody>
-      </SectionWrapper>
-    </ErrorBoundary>
+          <Section.SectionBody>
+            <Outlet />
+          </Section.SectionBody>
+        </SectionWrapper>
+      </ErrorBoundary>
+    </PrivateRoute>
   );
 };

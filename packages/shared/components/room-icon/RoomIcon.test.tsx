@@ -182,4 +182,10 @@ describe("<RoomIcon />", () => {
     const buttonWithClass = screen.getByTestId("icon-button");
     expect(buttonWithClass).not.toHaveClass("isHovered");
   });
+
+  it("handles template icon state", () => {
+    renderWithTheme(<RoomIcon {...baseProps} isTemplate />);
+    const roomIcon = screen.getByTestId("room-icon");
+    expect(roomIcon).toHaveAttribute("data-is-template", "true");
+  });
 });

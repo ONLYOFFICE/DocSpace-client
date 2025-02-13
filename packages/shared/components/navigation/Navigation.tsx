@@ -83,6 +83,7 @@ const Navigation = ({
   onNavigationButtonClick,
   tariffBar,
   showNavigationButton,
+  badgeLabel,
   onContextOptionsClick,
   onLogoClick,
   ...rest
@@ -203,6 +204,7 @@ const Navigation = ({
         isRootFolder={isRootFolder}
         onClick={toggleDropBox}
         isRootFolderTitle={false}
+        badgeLabel={!showRootFolderNavigation ? badgeLabel : ""}
       />
     </div>
   );
@@ -223,6 +225,7 @@ const Navigation = ({
         isRootFolder={isRootFolder}
         isRootFolderTitle
         onClick={onTextClick}
+        badgeLabel={badgeLabel}
       />
 
       {navigationTitleNode}

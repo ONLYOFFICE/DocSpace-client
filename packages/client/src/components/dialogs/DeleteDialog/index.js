@@ -29,7 +29,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 
 import { inject, observer } from "mobx-react";
 
@@ -68,6 +68,8 @@ const DeleteDialogComponent = (props) => {
     }
     i++;
   }
+
+  const isTemplate = selection[0]?.isTemplate;
 
   const onClose = () => {
     if (
@@ -123,6 +125,10 @@ const DeleteDialogComponent = (props) => {
       successRemoveRooms: t("Files:RoomsRemoved"),
     };
 
+    if (isTemplate) {
+      translations.successRemoveTemplate = t("Files:TemplateRemoved");
+    }
+
     setSelected("none");
     onClose();
 
@@ -134,7 +140,7 @@ const DeleteDialogComponent = (props) => {
   };
 
   const onDeleteAction = () => {
-    if (isRoomDelete) {
+    if (isRoomDelete || isTemplate) {
       onDeleteRoom();
       return;
     }
@@ -169,6 +175,20 @@ const DeleteDialogComponent = (props) => {
     const isFolder = selection[0]?.isFolder || !!selection[0]?.parentId;
     const isSingle = selection.length === 1;
     const isThirdParty = selection[0]?.providerKey;
+
+    if (isTemplate) {
+      return isSingle ? (
+        <Trans
+          i18nKey="DeleteTemplate"
+          ns="DeleteDialog"
+          t={t}
+          values={{ templateName: selection[0].title }}
+          components={{ 1: <Text fontWeight={600} as="span" /> }}
+        />
+      ) : (
+        t("DeleteTemplates")
+      );
+    }
 
     if (isRoomDelete) {
       return isSingle
@@ -248,8 +268,9 @@ const DeleteDialogComponent = (props) => {
     }
   };
 
-  const title =
-    isRoomDelete || isRecycleBinFolder
+  const title = isTemplate
+    ? t("Files:DeleteTemplate")
+    : isRoomDelete || isRecycleBinFolder
       ? t("EmptyTrashDialog:DeleteForeverTitle")
       : isPrivacyFolder || selection[0]?.providerKey
         ? t("Common:Confirmation")
@@ -257,8 +278,9 @@ const DeleteDialogComponent = (props) => {
 
   const noteText = unsubscribe ? t("UnsubscribeNote") : moveToTrashNoteText();
 
-  const accessButtonLabel =
-    isRoomDelete || isRecycleBinFolder
+  const accessButtonLabel = isTemplate
+    ? t("Common:Delete")
+    : isRoomDelete || isRecycleBinFolder
       ? t("EmptyTrashDialog:DeleteForeverButton")
       : isPrivacyFolder || selection[0]?.providerKey
         ? t("Common:OKButton")

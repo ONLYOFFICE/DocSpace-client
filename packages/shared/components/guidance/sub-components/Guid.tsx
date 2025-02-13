@@ -36,17 +36,24 @@ import { useTheme } from "styled-components";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import { isMobile, isDesktop, classNames } from "../../../utils";
+import { isMobile, classNames } from "../../../utils";
 import { AsideHeader } from "../../aside-header";
 
 import styles from "./Guid.module.scss";
 import modalStyles from "../../modal-dialog/ModalDialog.module.scss";
+import { getDynamicPlacement } from "./Guid.utils";
+import {
+  GuidProps,
+  GuidanceStep,
+  ClippedPosition,
+  GuidancePlacement,
+} from "./Guid.types";
 
-const SIDE_OFFSET = 16;
+const SIDE_OFFSET = 18;
 const RTL_ROW_OFFSET = 15;
 
 const getModalPosition = (
-  positions: Position[],
+  positions: ClippedPosition[],
   placement: GuidancePlacement,
   isRTL: boolean,
   windowWidth: number,
@@ -57,6 +64,8 @@ const getModalPosition = (
   currentGuidance?: GuidanceStep,
 ): { left: number; top: number } => {
   let mainPosition = positions[0];
+  const currentPlacement =
+    placement === "dynamic" ? getDynamicPlacement(viewAs) : placement;
 
   if (mainPosition?.width === 0 && mainPosition?.height === 0 && positions[1]) {
     mainPosition = positions[1];
@@ -79,7 +88,7 @@ const getModalPosition = (
   const proposedTop = mainPosition.bottom + SIDE_OFFSET;
   const isNotEnoughVerticalSpace = proposedTop + modalHeight > windowHeight;
 
-  if (placement === "bottom") {
+  if (currentPlacement === "bottom") {
     let left;
     if (isRTL) {
       const wouldOverflowHorizontally =
@@ -113,7 +122,7 @@ const getModalPosition = (
   if (!isNotEnoughVerticalSpace) {
     return {
       left: isRTL
-        ? mainPosition.left + rtlOffset
+        ? mainPosition.right + rtlOffset - modalWidth
         : Math.max(0, mainPosition.left),
       top: proposedTop,
     };
@@ -260,6 +269,10 @@ const Guid: React.FC<GuidProps> = ({
     [onClose],
   );
 
+  if (isMobile()) {
+    onClose();
+  }
+
   return (
     <div className="guidance">
       <div
@@ -314,7 +327,7 @@ const Guid: React.FC<GuidProps> = ({
           >
             <div className="circle-container">{tipsCircles}</div>
             <div className="button-container">
-              {currentStep !== 0 && (
+              {currentStep !== 0 ? (
                 <Button
                   id="form-filling_tips_back"
                   key="TipsBack"
@@ -322,7 +335,7 @@ const Guid: React.FC<GuidProps> = ({
                   size={ButtonSize.extraSmall}
                   onClick={onPrev}
                 />
-              )}
+              ) : null}
               <Button
                 id="form-filling_tips_next"
                 key="TipsNext"

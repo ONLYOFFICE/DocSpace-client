@@ -612,7 +612,6 @@ const SectionHeaderContent = (props) => {
 
     return () => {
       deleteRefMap(GuidanceRefKey.Share);
-      deleteRefMap(GuidanceRefKey.Uploading);
     };
   }, [buttonRef.current, addButtonRef.current]);
 

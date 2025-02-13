@@ -110,16 +110,14 @@ const getViewTypeBasedDimensions = (
 const getExpandedPosition = (
   rect: DOMRect,
   offset: GuidancePosition["offset"],
-  options: { useTabletSize?: boolean; expandHeight?: boolean } = {},
+  options: { useTabletSize?: boolean; expandSize?: number } = {},
 ): Position => {
-  const { useTabletSize = false, expandHeight = false } = options;
+  const { useTabletSize = false, expandSize } = options;
   const offsetValue = offset?.value ?? 0;
 
   const baseSize = useTabletSize
     ? rect.height + offsetValue * 2
-    : expandHeight
-      ? rect.height * 2
-      : rect.height + offsetValue * 2;
+    : expandSize || rect.height + offsetValue * 2;
 
   return {
     width: baseSize,
@@ -167,7 +165,7 @@ export const getGuidPosition = (
     case GuidanceElementType.Expandable:
       return getExpandedPosition(rects, offset, {
         useTabletSize: isTablet(),
-        expandHeight: !isTablet(),
+        expandSize: !isTablet() ? 35 : 0,
       });
 
     case GuidanceElementType.Mixed:
@@ -175,4 +173,8 @@ export const getGuidPosition = (
     default:
       return getPosition(rects, offset, viewAs, type, isRTL);
   }
+};
+
+export const getDynamicPlacement = (viewAs: string) => {
+  return viewAs === "tile" ? "side" : "bottom";
 };

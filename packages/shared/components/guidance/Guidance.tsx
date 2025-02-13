@@ -32,17 +32,11 @@ import { Guid } from "./sub-components/Guid";
 import {
   GuidanceStep,
   GuidanceRefKey,
-  GuidancePosition,
+  GuidanceProps,
+  ClippedPosition,
 } from "./sub-components/Guid.types";
 import { getGuidPosition } from "./sub-components/Guid.utils";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
-
-interface GuidanceProps {
-  viewAs: string;
-  onClose?: () => void;
-  getRefElement: (key: GuidanceRefKey) => HTMLElement | null;
-  config: GuidanceStep[];
-}
 
 const Guidance: React.FC<GuidanceProps> = ({
   viewAs,
@@ -51,7 +45,7 @@ const Guidance: React.FC<GuidanceProps> = ({
   config,
 }) => {
   const [sectionWidth, setSectionWidth] = useState<number>(0);
-  const [positions, setPositions] = useState<GuidancePosition[]>([]);
+  const [positions, setPositions] = useState<ClippedPosition[]>([]);
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
   const [currentGuidance, setCurrentGuidance] = useState<GuidanceStep | null>(
     null,
@@ -127,7 +121,7 @@ const Guidance: React.FC<GuidanceProps> = ({
   if (!currentGuidance || !config.length) return null;
 
   const hasValidPositions = positions.some(
-    (pos) => pos.height !== 0 && pos.left !== 0 && pos.top !== 0,
+    (pos) => pos.height !== 0 && pos.top !== 0,
   );
 
   if (!hasValidPositions) return null;

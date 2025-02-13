@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "../../../types";
-
 export enum GuidanceElementType {
   Content = "content", // Regular content element
   Expandable = "expandable", // Element that can expand
@@ -66,35 +64,32 @@ export interface GuidanceStep {
 }
 
 export interface ClippedPosition {
-  right: number;
   width: number;
+  height: number;
   left: number;
   top: number;
   bottom: number;
+  right: number;
 }
 
 export interface GuidanceProps {
-  formFillingTipsNumber: number;
-  setFormFillingTipsNumber: (index: number) => void;
   viewAs: string;
-  onClose?: () => void;
+  onClose: () => void;
   getRefElement: (key: GuidanceRefKey) => HTMLElement | null;
+  config: GuidanceStep[];
 }
 
 export interface GuidProps {
   guidanceConfig: GuidanceStep[];
-  currentStepIndex: number;
-  setCurrentStepIndex: (index: number) => void;
-  onClose: () => void;
-  viewAs: string;
   currentGuidance: GuidanceStep;
-  sectionWidth?: number;
-  positions: {
-    width: number;
-    height: number;
-    left: number;
-    top: number;
-    bottom: number;
-    right: number;
-  }[];
+  positions: ClippedPosition[];
+  sectionWidth: number;
+  currentStep: number;
+  totalSteps: number;
+  isRTL: boolean;
+  viewAs: string;
+  onNext: () => void;
+  onPrev: () => void;
+  onClose: () => void;
+  t: (key: string) => string;
 }

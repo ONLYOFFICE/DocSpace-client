@@ -66,6 +66,13 @@ const generalRoutes = [
   },
   {
     path: "developer-tools/",
+    lazy: () =>
+      componentLoader(
+        () =>
+          import(
+            "SRC_DIR/pages/PortalSettings/categories/developer-tools/Wrapper"
+          ),
+      ),
     children: [
       {
         index: true,

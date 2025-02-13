@@ -151,7 +151,6 @@ const Panels = (props) => {
     setFormFillingTipsDialog,
     formFillingTipsVisible,
     viewAs,
-    infoPanelVisible,
     userId,
     getRefElement,
     config,
@@ -372,7 +371,6 @@ const Panels = (props) => {
     formFillingTipsVisible && (
       <Guidance
         viewAs={viewAs}
-        infoPanelVisible={infoPanelVisible}
         onClose={onCloseGuidance}
         getRefElement={getRefElement}
         config={config}
@@ -393,7 +391,6 @@ export default inject(
     currentQuotaStore,
     filesActionsStore,
     filesStore,
-    infoPanelStore,
     userStore,
     guidanceStore,
   }) => {
@@ -554,7 +551,6 @@ export default inject(
       setFormFillingTipsDialog,
       formFillingTipsVisible,
       viewAs,
-      infoPanelVisible: infoPanelStore.isVisible,
       userId: userStore?.user?.id,
       getRefElement,
       config,

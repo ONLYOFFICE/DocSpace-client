@@ -235,13 +235,13 @@ export type TListenEventCallbackMap = {
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.AddUser]: (data: { id: string; data: TUser }) => void;
   [SocketEvents.UpdateUser]: (data: { id: string; data: TUser }) => void;
-  [SocketEvents.DeleteUser]: (data: { id: string }) => void;
+  [SocketEvents.DeleteUser]: (data: string) => void;
   [SocketEvents.AddGroup]: (data: { id: string; data: TGroup }) => void;
   [SocketEvents.UpdateGroup]: (data: { id: string; data: TGroup }) => void;
   [SocketEvents.AddGuest]: (data: { id: string; data: TUser }) => void;
   [SocketEvents.UpdateGuest]: (data: { id: string; data: TUser }) => void;
-  [SocketEvents.DeleteGuest]: (data: { id: string }) => void;
-  [SocketEvents.DeleteGroup]: (data: { id: string }) => void;
+  [SocketEvents.DeleteGuest]: (data: string) => void;
+  [SocketEvents.DeleteGroup]: (data: string) => void;
   [SocketEvents.RestoreProgress]: (opt: {
     progress: number;
     isCompleted: boolean;

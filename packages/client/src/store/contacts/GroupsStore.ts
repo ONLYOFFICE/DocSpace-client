@@ -108,6 +108,12 @@ class GroupsStore {
       const group = await api.groups.getGroupById(id, true);
 
       runInAction(() => {
+        const idx = this.groups.findIndex((x) => x.id === group.id);
+
+        if (idx !== -1) {
+          this.groups[idx] = group;
+          return;
+        }
         this.groups.push(group);
         this.groupsFilter.total += 1;
       });
@@ -147,10 +153,8 @@ class GroupsStore {
       });
     });
 
-    SocketHelper.on(SocketEvents.DeleteGroup, (value) => {
+    SocketHelper.on(SocketEvents.DeleteGroup, (id) => {
       const { contactsTab } = this.peopleStore.usersStore;
-
-      const { id } = value;
 
       const idx = this.groups.findIndex((x) => x.id === id);
 

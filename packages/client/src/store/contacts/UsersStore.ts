@@ -131,7 +131,7 @@ class UsersStore {
 
     makeAutoObservable(this);
 
-    SocketHelper.on(SocketEvents.AddUser, async (value) => {
+    const addUser = async (value: { id: string; data: TUser }) => {
       const { id, data } = value;
 
       if (!data || !id) return;
@@ -148,9 +148,9 @@ class UsersStore {
           this.users[idx] = user;
         }
       });
-    });
+    };
 
-    SocketHelper.on(SocketEvents.UpdateUser, async (value) => {
+    const updateUser = async (value: { id: string; data: TUser }) => {
       const { id, data } = value;
 
       if (!data || !id) return;
@@ -164,71 +164,27 @@ class UsersStore {
       runInAction(() => {
         this.users[idx] = user;
       });
-    });
+    };
 
-    SocketHelper.on(SocketEvents.DeleteUser, (value) => {
-      const { id } = value;
-
-      const idx = this.users.findIndex((x) => x.id === id);
-
-      console.log(idx);
-
-      runInAction(() => {
-        const newUsers = this.users;
-        newUsers.splice(idx, 1);
-        console.log(newUsers);
-        this.users = newUsers;
-        this.filter.total -= 1;
-      });
-    });
-
-    SocketHelper.on(SocketEvents.AddGuest, async (value) => {
-      const { id, data } = value;
-
-      if (!data || !id) return;
-
-      const idx = this.users.findIndex((x) => x.id === id);
-
-      const user = await api.people.getUserById(data.id);
-
-      runInAction(() => {
-        if (idx === -1) {
-          this.users.push(user);
-          this.filter.total += 1;
-        } else {
-          this.users[idx] = user;
-        }
-      });
-    });
-
-    SocketHelper.on(SocketEvents.UpdateGuest, async (value) => {
-      const { id, data } = value;
-
-      if (!data || !id) return;
-
+    const deleteUser = (id: string) => {
       const idx = this.users.findIndex((x) => x.id === id);
 
       if (idx === -1) return;
 
-      const user = await api.people.getUserById(data.id);
-
-      runInAction(() => {
-        this.users[idx] = user;
-      });
-    });
-
-    SocketHelper.on(SocketEvents.DeleteGuest, (value) => {
-      const { id } = value;
-
-      const idx = this.users.findIndex((x) => x.id === id);
-
       runInAction(() => {
         const newUsers = this.users;
         newUsers.splice(idx, 1);
         this.users = newUsers;
         this.filter.total -= 1;
       });
-    });
+    };
+
+    SocketHelper.on(SocketEvents.AddUser, addUser);
+    SocketHelper.on(SocketEvents.AddGuest, addUser);
+    SocketHelper.on(SocketEvents.UpdateUser, updateUser);
+    SocketHelper.on(SocketEvents.UpdateGuest, updateUser);
+    SocketHelper.on(SocketEvents.DeleteUser, deleteUser);
+    SocketHelper.on(SocketEvents.DeleteGuest, deleteUser);
 
     SocketHelper.on(SocketEvents.UpdateGroup, async (value) => {
       const { contactsTab } = this;

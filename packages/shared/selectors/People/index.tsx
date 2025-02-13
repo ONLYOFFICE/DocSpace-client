@@ -53,7 +53,6 @@ import { TUser } from "../../api/people/types";
 import { TGroup } from "../../api/groups/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Text } from "../../components/text";
-import { Box } from "../../components/box";
 import { globalColors } from "../../themes";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
@@ -478,7 +477,14 @@ const PeopleSelector = ({
       <div
         style={{ width: "100%", overflow: "hidden", marginInlineEnd: "16px" }}
       >
-        <Box displayProp="flex" alignItems="center" gapProp="8px">
+        <div
+          style={{
+            display: "flex",
+            boxSizing: "border-box",
+            alignItems: "center",
+            gap: "8px",
+          }}
+        >
           <Text
             className="label"
             fontWeight={600}
@@ -490,7 +496,7 @@ const PeopleSelector = ({
             {label}
           </Text>
           {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
-        </Box>
+        </div>
         {!isGroup ? (
           <div style={{ display: "flex" }}>
             <Text

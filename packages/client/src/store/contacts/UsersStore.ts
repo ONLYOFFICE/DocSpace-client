@@ -141,10 +141,12 @@ class UsersStore {
       const user = await api.people.getUserById(data.id);
 
       runInAction(() => {
-        if (idx === -1) this.users.push(user);
-        else this.users[idx] = user;
-
-        this.filter.total += 1;
+        if (idx === -1) {
+          this.users.push(user);
+          this.filter.total += 1;
+        } else {
+          this.users[idx] = user;
+        }
       });
     });
 

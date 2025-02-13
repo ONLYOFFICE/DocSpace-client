@@ -187,11 +187,17 @@ class UsersStore {
 
       if (!data || !id) return;
 
+      const idx = this.users.findIndex((x) => x.id === id);
+
       const user = await api.people.getUserById(data.id);
 
       runInAction(() => {
-        this.users.push(user);
-        this.filter.total += 1;
+        if (idx === -1) {
+          this.users.push(user);
+          this.filter.total += 1;
+        } else {
+          this.users[idx] = user;
+        }
       });
     });
 

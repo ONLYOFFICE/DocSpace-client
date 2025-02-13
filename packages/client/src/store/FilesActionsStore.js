@@ -3282,7 +3282,8 @@ class FilesActionStore {
       folder?.type !== FolderType.InProgress
     ) {
       const filterObj = FilesFilter.getFilter(window.location);
-      if (filterObj.key && !folder.updatePublicKey) {
+
+      if (filterObj?.key && !folder.updatePublicKey) {
         return filterObj.key;
       }
 

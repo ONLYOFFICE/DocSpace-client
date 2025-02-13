@@ -147,6 +147,7 @@ const Selector = ({
   onClose,
   withBlur,
   withoutBackground,
+  withInfoBadge,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
 
@@ -567,6 +568,7 @@ const Selector = ({
     ? {
         withInfo,
         infoText,
+        withInfoBadge,
       }
     : {};
 

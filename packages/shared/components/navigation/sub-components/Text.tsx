@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { Badge } from "../../badge";
 
 import styles from "../Navigation.module.scss";
 import { TTextProps } from "../Navigation.types";
@@ -39,6 +40,7 @@ const Text = ({
   isRootFolder,
   isRootFolderTitle,
   onClick,
+  badgeLabel,
   className,
   ...rest
 }: TTextProps) => {
@@ -53,9 +55,19 @@ const Text = ({
       <Heading title={title} truncate isRootFolderTitle={isRootFolderTitle}>
         {title}
       </Heading>
-
+      {badgeLabel ? (
+        <Badge
+          className={`${styles.titleBlockBadge} ${isRootFolderTitle ? styles.rootFolderTitle : ""}`}
+          label={badgeLabel}
+          fontSize="9px"
+          padding="2px 5px"
+          fontWeight={700}
+          borderRadius="50px"
+          noHover
+          isHovered={false}
+        />
+      ) : null}
       {isRootFolderTitle ? <ArrowIcon /> : null}
-
       {!isRootFolderTitle && !isRootFolder ? (
         <ExpanderIcon isRotated={isOpen} />
       ) : null}

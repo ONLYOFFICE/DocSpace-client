@@ -89,8 +89,6 @@ import OAuthStore from "./OAuthStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
 
-const oauthStore = new OAuthStore(userStore);
-
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
 const pluginStore = new PluginStore(
@@ -242,6 +240,7 @@ const filesActionsStore = new FilesActionsStore(
   peopleStore,
   currentQuotaStore,
   indexingStore,
+  versionHistoryStore,
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -324,6 +323,8 @@ const storageManagement = new StorageManagement(
   currentQuotaStore,
   settingsStore,
 );
+
+const oauthStore = new OAuthStore(userStore, storageManagement);
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 

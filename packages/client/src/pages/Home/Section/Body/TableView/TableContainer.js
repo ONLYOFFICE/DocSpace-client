@@ -141,6 +141,7 @@ const Table = ({
   isRooms,
   isTrashFolder,
   isIndexEditingMode,
+  isTemplatesFolder,
   columnStorageName,
   columnInfoPanelStorageName,
   highlightFile,
@@ -225,6 +226,7 @@ const Table = ({
         theme={theme}
         tagCount={tagCount}
         isRooms={isRooms}
+        isTemplates={isTemplatesFolder}
         isTrashFolder={isTrashFolder}
         hideColumns={hideColumns}
         isHighlight={
@@ -312,7 +314,8 @@ export default inject(
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
+      treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
@@ -360,6 +363,7 @@ export default inject(
       isTrashFolder,
       isIndexEditingMode,
       isIndexing: isIndexedFolder,
+      isTemplatesFolder,
       columnStorageName,
       columnInfoPanelStorageName,
       highlightFile,

@@ -28,7 +28,7 @@ import { useContext, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-
+import { useNavigate } from "react-router";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import { FolderType } from "@docspace/shared/enums";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
@@ -90,9 +90,13 @@ const FileTile = (props) => {
     icon,
     isDownload,
     selectableRef,
+    openUser,
+    showStorageInfo,
     setRefMap,
     deleteRefMap,
   } = props;
+
+  const navigate = useNavigate();
 
   // const { sectionWidth } = useContext(Context);
 
@@ -139,6 +143,7 @@ const FileTile = (props) => {
       logo={item.logo}
       color={item.logo?.color}
       isArchive={item.isArchive}
+      isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
     />
   );
@@ -151,6 +156,10 @@ const FileTile = (props) => {
 
   const onDragLeaveEvent = (e) => {
     onDragLeave && onDragLeave(e);
+  };
+
+  const onOpenUser = () => {
+    openUser(item.createdBy, navigate);
   };
 
   return (
@@ -207,8 +216,11 @@ const FileTile = (props) => {
           isHighlight={isHighlight}
           iconProgress={icon}
           isDownload={isDownload}
+          openUser={onOpenUser}
+          showStorageInfo={showStorageInfo}
         >
           <FilesTileContent
+            t={t}
             item={item}
             // sectionWidth={sectionWidth}
             onFilesClick={onFilesClick}
@@ -227,7 +239,9 @@ export default inject(
       filesStore,
       treeFoldersStore,
       uploadDataStore,
+      infoPanelStore,
       guidanceStore,
+      currentQuotaStore,
     },
     { item },
   ) => {
@@ -241,9 +255,12 @@ export default inject(
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
 
-    const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
+      treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const { showStorageInfo } = currentQuotaStore;
+
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     return {
       getIcon,
@@ -256,6 +273,8 @@ export default inject(
       isDownload,
       setRefMap,
       deleteRefMap,
+      openUser: infoPanelStore.openUser,
+      showStorageInfo,
     };
   },
 )(

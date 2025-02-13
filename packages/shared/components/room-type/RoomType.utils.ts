@@ -4,7 +4,10 @@ import { RoomsType } from "../../enums";
 export const getRoomTypeTitleTranslation = (
   t: TTranslation,
   roomType: RoomsType = 1,
+  isTemplate: boolean = false,
 ) => {
+  if (isTemplate) return t("Common:FromTemplate");
+
   switch (roomType) {
     case RoomsType.EditingRoom:
       return t("Common:CollaborationRoomTitle");
@@ -24,7 +27,10 @@ export const getRoomTypeTitleTranslation = (
 export const getRoomTypeDescriptionTranslation = (
   t: TTranslation,
   roomType: RoomsType = 1,
+  isTemplate: boolean = false,
 ) => {
+  if (isTemplate) return t("Common:FromTemplateRoomInfo");
+
   switch (roomType) {
     case RoomsType.EditingRoom:
       return t("Common:CollaborationRoomDescription");

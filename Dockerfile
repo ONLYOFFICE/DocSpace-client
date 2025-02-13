@@ -24,18 +24,44 @@
 # content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 # International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-FROM node:12
-WORKDIR /usr/src/app
+FROM node:20-alpine
 
-COPY package.json ./
-COPY yarn.lock ./
+# Install required dependencies
+RUN apk add --no-cache python3 make g++
 
+# Enable Corepack for Yarn 4 support
+RUN corepack enable
+
+# Set Yarn version to 4.3.0
+RUN corepack prepare yarn@4.3.0 --activate
+
+WORKDIR /app
+
+# Copy yarn-related files
+COPY .yarn/ ./.yarn/
+COPY package.json yarn.lock .yarnrc.yml ./
+
+# Copy the source code with correct directory structure
+COPY common/ ./common/
+COPY packages/ ./packages/
+COPY public/ ./public/
+
+# ENV NODE_OPTIONS="--max-old-space-size=8192"
+
+# Install dependencies
 RUN yarn install
 
-COPY . .
+# Run before-build script (packages/runtime.json)
+RUN yarn ./common/scripts/before-build.js
 
-RUN yarn build
+# Run build webpack apps
+RUN yarn workspace @docspace/client build --env lint=false 
+RUN yarn workspace @docspace/management build --env lint=false
 
-EXPOSE 8080
+# Run build next apps
+RUN TS_ERRORS_IGNORE=true yarn workspace @docspace/login build 
+RUN TS_ERRORS_IGNORE=true yarn workspace @docspace/doceditor build
 
-CMD [ "yarn", "build:start" ]
+EXPOSE 5001 5011 5013 5015
+
+CMD [ "yarn", "start-prod" ]

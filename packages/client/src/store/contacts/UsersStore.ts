@@ -227,7 +227,7 @@ class UsersStore {
     if (contactsTab) {
       const roomParts =
         contactsTab === "guests"
-          ? `${this.userStore.user!.id}-guests`
+          ? `guests`
           : contactsTab === "people" || contactsTab === "inside_group"
             ? "users"
             : "groups";
@@ -245,6 +245,7 @@ class UsersStore {
       if (!SocketHelper.socketSubscribers.has(roomParts))
         SocketHelper.emit(SocketCommands.Subscribe, {
           roomParts,
+          individual: true,
         });
     }
 

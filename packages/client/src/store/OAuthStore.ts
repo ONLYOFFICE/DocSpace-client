@@ -100,7 +100,8 @@ class OAuthStore {
 
     makeAutoObservable(this);
 
-    this.setJwtToken();
+    const searchParams = new URLSearchParams(window.location.search);
+    if (!searchParams.get("key")) this.setJwtToken();
   }
 
   setJwtToken = async () => {

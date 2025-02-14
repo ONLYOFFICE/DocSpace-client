@@ -91,6 +91,7 @@ const Branding = ({
   t,
   isLoadedCompanyInfoSettingsData,
   isWhiteLabelLoaded,
+  isBrandNameLoaded,
   isSettingPaid,
   standalone,
   deviceType,
@@ -118,7 +119,7 @@ const Branding = ({
 
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
-      {!isWhiteLabelLoaded ? (
+      {!isWhiteLabelLoaded && !isBrandNameLoaded ? (
         <LoaderBrandingSubtitle />
       ) : (
         <div className="category-description">{t("BrandingSubtitle")}</div>
@@ -152,7 +153,11 @@ const Branding = ({
 
 export default inject(({ settingsStore, currentQuotaStore, brandingStore }) => {
   const { isCustomizationAvailable } = currentQuotaStore;
-  const { isLoadedCompanyInfoSettingsData, isWhiteLabelLoaded } = brandingStore;
+  const {
+    isLoadedCompanyInfoSettingsData,
+    isWhiteLabelLoaded,
+    isBrandNameLoaded,
+  } = brandingStore;
   const {
     standalone,
     portals,
@@ -165,6 +170,7 @@ export default inject(({ settingsStore, currentQuotaStore, brandingStore }) => {
   return {
     isLoadedCompanyInfoSettingsData,
     isWhiteLabelLoaded,
+    isBrandNameLoaded,
     isSettingPaid,
     standalone,
     portals,

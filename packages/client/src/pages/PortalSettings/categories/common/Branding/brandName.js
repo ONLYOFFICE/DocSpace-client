@@ -43,7 +43,7 @@ const BrandNameComponent = (props) => {
     brandName,
     defaultBrandName,
     deviceType,
-    isWhiteLabelLoaded,
+    isBrandNameLoaded,
     setBrandName,
     saveBrandName,
     getBrandName,
@@ -68,7 +68,7 @@ const BrandNameComponent = (props) => {
     }
   };
 
-  return !isWhiteLabelLoaded ? (
+  return !isBrandNameLoaded ? (
     <LoaderBrandName />
   ) : (
     <BrandNamePage
@@ -77,7 +77,7 @@ const BrandNameComponent = (props) => {
       showNotAvailable={showNotAvailable}
       standalone={standalone}
       isSaving={isSaving}
-      isWhiteLabelLoaded={isWhiteLabelLoaded}
+      isBrandNameLoaded={isBrandNameLoaded}
       defaultBrandName={defaultBrandName}
       brandName={brandName}
       onSave={onSave}
@@ -91,7 +91,7 @@ export const BrandName = inject(
     const {
       brandName,
       defaultBrandName,
-      isWhiteLabelLoaded,
+      isBrandNameLoaded,
       getBrandName,
       setBrandName,
       saveBrandName,
@@ -113,7 +113,7 @@ export const BrandName = inject(
       showNotAvailable,
       brandName,
       defaultBrandName,
-      isWhiteLabelLoaded,
+      isBrandNameLoaded,
       getBrandName,
       setBrandName,
       saveBrandName,

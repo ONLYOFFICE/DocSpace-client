@@ -146,7 +146,11 @@ class BrandingStore {
   };
 
   get isWhiteLabelLoaded() {
-    return this.logoUrls.length > 0 && this.brandName !== undefined;
+    return this.logoUrls.length > 0;
+  }
+
+  get isBrandNameLoaded() {
+    return this.brandName !== undefined && this.defaultBrandName !== undefined;
   }
 }
 

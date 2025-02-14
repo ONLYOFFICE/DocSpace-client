@@ -35,7 +35,7 @@ export interface IBrandNameProps {
   standalone: boolean;
   onSave: (data: IWhiteLabelData) => void;
   isEqualText: boolean;
-  isWhiteLabelLoaded: boolean;
+  isBrandNameLoaded: boolean;
   defaultBrandName: string;
   brandName: string;
   deviceType: DeviceType;

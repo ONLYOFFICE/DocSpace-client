@@ -177,8 +177,6 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     onSave(data);
   };
 
-  console.log("logosUrls", logoUrls);
-
   const isEqualLogo = isEqual(logoUrls, defaultWhiteLabelLogoUrls);
 
   return (

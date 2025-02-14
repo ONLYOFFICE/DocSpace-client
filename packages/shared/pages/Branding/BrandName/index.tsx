@@ -27,6 +27,7 @@
 import React, { useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 
+import { Nullable } from "types";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { Text } from "../../../components/text";
 import { Badge } from "../../../components/badge";
@@ -50,23 +51,24 @@ export const BrandName = ({
   isSettingPaid,
   standalone,
   onSave,
-  isWhiteLabelLoaded,
+  isBrandNameLoaded,
   defaultBrandName,
   brandName,
   deviceType,
 }: IBrandNameProps) => {
   useResponsiveNavigation({
     redirectUrl: brandingRedirectUrl,
-    currentLocation: "white-label",
+    currentLocation: "brand-name",
     deviceType,
   });
 
-  const [brandNameWhiteLabel, setBrandNameWhiteLabel] = useState("");
+  const [brandNameWhiteLabel, setBrandNameWhiteLabel] =
+    useState<Nullable<string>>(null);
 
   useEffect(() => {
-    if (!isWhiteLabelLoaded || !brandName) return;
+    if (!isBrandNameLoaded || !brandName) return;
     setBrandNameWhiteLabel(brandName);
-  }, [brandName, isWhiteLabelLoaded]);
+  }, [brandName, isBrandNameLoaded]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -75,7 +77,7 @@ export const BrandName = ({
 
   const onSaveAction = (): void => {
     const data: IWhiteLabelData = {
-      logoText: brandNameWhiteLabel,
+      logoText: brandNameWhiteLabel ?? "",
       logo: [],
     };
     onSave(data);
@@ -85,7 +87,8 @@ export const BrandName = ({
     setBrandNameWhiteLabel(defaultBrandName);
   };
 
-  const isEqualText = defaultBrandName === brandNameWhiteLabel;
+  const isEqualText = defaultBrandName === (brandNameWhiteLabel ?? "");
+  const showReminder = !isEqualText && brandNameWhiteLabel !== null;
 
   return (
     <StyledBrandName>
@@ -119,7 +122,7 @@ export const BrandName = ({
           <TextInput
             testId="logo-text-input"
             className="brand-name input"
-            value={brandNameWhiteLabel}
+            value={brandNameWhiteLabel ?? ""}
             onChange={onChange}
             isDisabled={!isSettingPaid}
             isReadOnly={!isSettingPaid}
@@ -140,7 +143,7 @@ export const BrandName = ({
             displaySettings
             saveButtonDisabled={isEqualText}
             disableRestoreToDefault={isEqualText}
-            showReminder={!isEqualText}
+            showReminder={showReminder}
           />
         </FieldContainer>
       </div>

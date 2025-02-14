@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { inject, observer } from "mobx-react";
 import moment from "moment";
@@ -36,6 +36,7 @@ import { setDocumentTitle } from "@docspace/client/src/helpers/utils";
 
 import PaymentContainer from "./PaymentContainer";
 
+let timerId = null;
 const SaaSPage = ({
   language,
   isLoadedTariffStatus,
@@ -52,8 +53,13 @@ const SaaSPage = ({
   isDesktop,
   isDesktopClientInit,
   setIsDesktopClientInit,
+  setIsUpdatingBasicSettings,
 }) => {
   const { t, ready } = useTranslation(["Payments", "Common", "Settings"]);
+  const shouldShowLoader =
+    !isInitPaymentPage || !ready || isUpdatingTariff || isUpdatingBasicSettings;
+
+  const [showLoader, setShowLoader] = useState(shouldShowLoader);
 
   useEffect(() => {
     moment.locale(language);
@@ -84,11 +90,28 @@ const SaaSPage = ({
     init(t);
   }, [isLoadedTariffStatus, isLoadedCurrentQuota, ready]);
 
-  return !isInitPaymentPage ||
-    !ready ||
-    isUpdatingTariff ||
-    isUpdatingBasicSettings ? (
-    <PaymentsLoader />
+  useEffect(() => {
+    if (!shouldShowLoader && timerId) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
+  }, [shouldShowLoader]);
+
+  useEffect(() => {
+    timerId = setTimeout(() => {
+      setShowLoader(true);
+    }, 200);
+
+    return () => {
+      clearTimeout(timerId);
+      setIsUpdatingBasicSettings(true);
+    };
+  }, []);
+
+  return shouldShowLoader ? (
+    showLoader ? (
+      <PaymentsLoader />
+    ) : null
   ) : (
     <PaymentContainer t={t} />
   );
@@ -116,6 +139,7 @@ export default inject(
       init,
       isUpdatingBasicSettings,
       resetTariffContainerToBasic,
+      setIsUpdatingBasicSettings,
     } = paymentStore;
     const {
       isEncryptionSupport,
@@ -141,6 +165,7 @@ export default inject(
       isLoadedTariffStatus,
       isLoadedCurrentQuota,
       isUpdatingBasicSettings,
+      setIsUpdatingBasicSettings,
     };
   },
 )(observer(SaaSPage));

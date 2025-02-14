@@ -336,6 +336,8 @@ class SettingsStore {
 
   logoText = "";
 
+  limitedAccessDevToolsForUsers = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -1238,6 +1240,16 @@ class SettingsStore {
   setIsBannerVisible = (visible: boolean) => {
     this.isBannerVisible = visible;
   };
+
+  setDevToolsAccessSettings = async (enable: string) => {
+    const boolEnable = enable === "true";
+    await api.settings.setLimitedAccessForUsers(boolEnable);
+    this.limitedAccessDevToolsForUsers = boolEnable;
+  };
+
+  get accessDevToolsForUsers() {
+    return this.limitedAccessDevToolsForUsers.toString();
+  }
 }
 
 export { SettingsStore };

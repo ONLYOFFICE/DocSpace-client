@@ -1263,3 +1263,14 @@ export function getCronLdap() {
 
   return request(options);
 }
+
+export function setLimitedAccessForUsers(enable: boolean) {
+  const data = { limitedAccessForUsers: enable };
+  const options = {
+    method: "post",
+    url: "/settings/devtoolsaccess",
+    data,
+  };
+
+  return request(options);
+}

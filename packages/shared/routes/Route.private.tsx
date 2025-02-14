@@ -60,6 +60,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     baseDomain,
     limitedAccessSpace,
     displayAbout,
+    limitedAccessDevToolsForUsers,
   } = props;
 
   const location = useLocation();
@@ -276,8 +277,9 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       );
     }
 
-    if (isDeveloperToolsPage && user?.isVisitor) {
-      return <Navigate replace to="/error/404" />;
+    if (isDeveloperToolsPage) {
+      if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin))
+        return <Navigate replace to="/error/403" />;
     }
 
     if (

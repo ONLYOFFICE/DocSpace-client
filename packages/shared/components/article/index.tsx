@@ -110,6 +110,8 @@ const Article = ({
   logoText,
 
   isVisitor,
+  limitedAccessDevToolsForUsers,
+
   ...rest
 }: ArticleProps) => {
   const [articleHeaderContent, setArticleHeaderContent] =
@@ -223,7 +225,8 @@ const Article = ({
   const withDevTools =
     !window.location.pathname.includes("portal-settings") &&
     !window.location.pathname.includes("management") &&
-    !isVisitor;
+    !isVisitor &&
+    !limitedAccessDevToolsForUsers;
 
   const articleComponent = (
     <>

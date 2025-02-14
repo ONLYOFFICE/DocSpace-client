@@ -113,4 +113,6 @@ export type ArticleProps = ArticleProfileProps &
     standalone?: boolean;
     currentTariffPlanTitle?: string;
     trialDaysLeft?: number;
+
+    limitedAccessDevToolsForUsers: boolean;
   };

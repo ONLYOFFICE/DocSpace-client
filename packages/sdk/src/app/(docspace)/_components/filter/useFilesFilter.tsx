@@ -22,8 +22,8 @@ import {
 } from "@docspace/shared/enums";
 import { Nullable, TSortBy, type TViewAs } from "@docspace/shared/types";
 
-import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
-import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
+import ViewRowsReactSvg from "PUBLIC_DIR/images/view-rows.react.svg";
+import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg";
 
 import { PAGE_COUNT } from "@/utils/constants";
 
@@ -404,13 +404,13 @@ export default function useFilesFilter({
         id: "view-switch_rows",
         value: "row",
         label: t("Common:ViewList"),
-        icon: ViewRowsReactSvgUrl,
+        icon: <ViewRowsReactSvg />,
       },
       {
         id: "view-switch_tiles",
         value: "tile",
         label: t("Common:ViewTiles"),
-        icon: ViewTilesReactSvgUrl,
+        icon: <ViewTilesReactSvg />,
       },
     ];
 

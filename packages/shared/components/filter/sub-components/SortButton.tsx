@@ -27,7 +27,7 @@
 import React from "react";
 
 import SortDesc from "PUBLIC_DIR/images/sort.desc.react.svg";
-import SortReactSvgUrl from "PUBLIC_DIR/images/sort.react.svg?url";
+import SortReactSvg from "PUBLIC_DIR/images/sort.react.svg";
 
 import { Events } from "../../../enums";
 
@@ -213,7 +213,7 @@ const SortButton = ({
         withBackdrop
         onBackdropClick={toggleCombobox}
       >
-        <IconButton iconName={SortReactSvgUrl} size={16} />
+        <IconButton iconNode={<SortReactSvg />} size={16} />
       </ComboBox>
     </div>
   );

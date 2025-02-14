@@ -70,9 +70,17 @@ type RoomIconImage = {
   imgClassName?: string;
 };
 
-type RoomIconBadge = { badgeUrl?: string; onBadgeClick?: () => void };
+type RoomIconBadge = {
+  badgeUrl?: string;
+  badgeIconNode?: React.ReactNode;
+  onBadgeClick?: () => void;
+};
 
-type RoomIconNonBadge = { badgeUrl?: undefined; onBadgeClick?: undefined };
+type RoomIconNonBadge = {
+  badgeUrl?: undefined;
+  badgeIconNode?: undefined;
+  onBadgeClick?: undefined;
+};
 
 export type RoomIconProps = RoomIconDefault &
   RoomIconExpansion &

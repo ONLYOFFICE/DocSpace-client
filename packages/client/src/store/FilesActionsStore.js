@@ -1972,7 +1972,7 @@ class FilesActionStore {
     });
 
     try {
-      await setCustomRoomQuota(-1, userIDs);
+      await setCustomRoomQuota(userIDs, -1);
       toastr.success(t("Common:StorageQuotaDisabled"));
     } catch (e) {
       toastr.error(e);

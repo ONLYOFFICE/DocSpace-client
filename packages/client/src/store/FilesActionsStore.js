@@ -1525,7 +1525,11 @@ class FilesActionStore {
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
       this.treeFoldersStore;
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
-    const { rootFolderType } = this.selectedFolderStore;
+    const {
+      rootFolderType,
+      shared,
+      id: selectedFolderId,
+    } = this.selectedFolderStore;
 
     const setIsLoading = (param) => {
       setIsSectionBodyLoading(param);
@@ -1561,6 +1565,23 @@ class FilesActionStore {
 
     newFilter.search = title;
     newFilter.folder = parentId;
+
+    let publicKey;
+    if (item.toFolderId || item.folderId || item.parentId) {
+      const newFolder = await this.filesStore.getFolderInfo(parentId);
+      publicKey = await this.getPublicKey({
+        ...newFolder,
+        updatePublicKey: true,
+      });
+    } else {
+      publicKey = await this.getPublicKey({
+        ...item,
+        id: selectedFolderId,
+        shared,
+        rootFolderType,
+      });
+    }
+    if (publicKey) newFilter.key = publicKey;
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
@@ -1972,7 +1993,7 @@ class FilesActionStore {
     });
 
     try {
-      await setCustomRoomQuota(-1, userIDs);
+      await setCustomRoomQuota(userIDs, -1);
       toastr.success(t("Common:StorageQuotaDisabled"));
     } catch (e) {
       toastr.error(e);
@@ -2795,8 +2816,8 @@ class FilesActionStore {
 
     filter.folder = id;
 
-    const selectedFolder = this.selectedFolderStore.getSelectedFolder();
-    const shareKey = await this.getPublicKey(selectedFolder);
+    const currentFolder = await this.filesStore.getFolderInfo(id);
+    const shareKey = await this.getPublicKey(currentFolder);
     if (shareKey) filter.key = shareKey;
 
     const categoryType = getCategoryType(window.DocSpace.location);
@@ -3298,16 +3319,15 @@ class FilesActionStore {
   };
 
   getPublicKey = async (folder) => {
-    const { isOwner, isAdmin } = this.userStore.user;
-
     if (
-      folder?.shared &&
+      folder.shared &&
       folder?.rootFolderType === FolderType.Rooms &&
-      (isOwner || isAdmin)
+      folder?.type !== FolderType.Done &&
+      folder?.type !== FolderType.InProgress
     ) {
       const filterObj = FilesFilter.getFilter(window.location);
 
-      if (filterObj.key) {
+      if (filterObj?.key && !folder.updatePublicKey) {
         return filterObj.key;
       }
 

@@ -37,6 +37,7 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+import api from "@docspace/shared/api";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
@@ -85,7 +86,7 @@ class HeaderMenuStore {
   };
 
   resetUserQuota = async (users: (TUser | string)[], t: TTranslation) => {
-    const { resetUserQuota, getPeopleListItem } = this.usersStore;
+    const { getPeopleListItem } = this.usersStore;
     const { setInfoPanelSelection } = this.infoPanelStore;
 
     const userIDs = users.map((user) => {
@@ -93,7 +94,7 @@ class HeaderMenuStore {
     });
 
     try {
-      const items = await resetUserQuota(userIDs);
+      const items = await api.people.resetUserQuota(userIDs);
 
       if (items.length === 1) {
         setInfoPanelSelection(getPeopleListItem(items[0]));
@@ -108,7 +109,7 @@ class HeaderMenuStore {
   };
 
   disableUserQuota = async (users: (TUser | string)[], t: TTranslation) => {
-    const { setCustomUserQuota, getPeopleListItem } = this.usersStore!;
+    const { getPeopleListItem } = this.usersStore!;
     const { setInfoPanelSelection } = this.infoPanelStore;
 
     const userIDs = users.map((user) => {
@@ -116,7 +117,7 @@ class HeaderMenuStore {
     });
 
     try {
-      const items = await setCustomUserQuota(-1, userIDs);
+      const items = await api.people.setCustomUserQuota(userIDs, -1);
 
       if (items.length === 1) {
         setInfoPanelSelection(getPeopleListItem(items[0]));

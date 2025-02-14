@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,49 +28,37 @@ import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { WhiteLabel as WhiteLabelPage } from "@docspace/shared/pages/Branding/WhiteLabel";
+import { BrandName as BrandNamePage } from "@docspace/shared/pages/Branding/BrandName";
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 
-import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
+import LoaderBrandName from "../sub-components/loaderBrandName";
 
-const WhiteLabelComponent = (props) => {
+const BrandNameComponent = (props) => {
   const {
     t,
     isSettingPaid,
-    deviceType,
     standalone,
-    displayAbout,
     showNotAvailable,
-    defaultWhiteLabelLogoUrls,
-    logoUrls,
-    isDefaultLogos,
-    isWhiteLabelLoaded,
-    initWhiteLabel,
-    setLogoUrls,
-    saveWhiteLabelLogos,
-    resetWhiteLabelLogos,
+    brandName,
+    defaultBrandName,
+    deviceType,
+    isBrandNameLoaded,
+    setBrandName,
+    saveBrandName,
+    getBrandName,
   } = props;
   const [isSaving, setIsSaving] = useState(false);
-  const showAbout = standalone && isManagement() && displayAbout;
 
   useEffect(() => {
-    initWhiteLabel();
+    getBrandName();
   }, []);
-
-  const onRestoreDefault = async () => {
-    try {
-      await resetWhiteLabelLogos();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
-    } catch (error) {
-      toastr.error(error);
-    }
-  };
 
   const onSave = async (data) => {
     try {
       setIsSaving(true);
-      await saveWhiteLabelLogos(data);
+      await saveBrandName(data);
+      setBrandName(data.logoText);
 
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
@@ -80,51 +68,36 @@ const WhiteLabelComponent = (props) => {
     }
   };
 
-  return !isWhiteLabelLoaded ? (
-    <LoaderWhiteLabel />
+  return !isBrandNameLoaded ? (
+    <LoaderBrandName />
   ) : (
-    <WhiteLabelPage
+    <BrandNamePage
       t={t}
-      logoUrls={logoUrls}
       isSettingPaid={isSettingPaid}
-      showAbout={showAbout}
       showNotAvailable={showNotAvailable}
       standalone={standalone}
-      onRestoreDefault={onRestoreDefault}
       isSaving={isSaving}
-      enableRestoreButton={isDefaultLogos}
-      deviceType={deviceType}
-      setLogoUrls={setLogoUrls}
-      isWhiteLabelLoaded={isWhiteLabelLoaded}
-      defaultWhiteLabelLogoUrls={defaultWhiteLabelLogoUrls}
+      isBrandNameLoaded={isBrandNameLoaded}
+      defaultBrandName={defaultBrandName}
+      brandName={brandName}
       onSave={onSave}
+      deviceType={deviceType}
     />
   );
 };
 
-export const WhiteLabel = inject(
+export const BrandName = inject(
   ({ settingsStore, currentQuotaStore, brandingStore }) => {
     const {
-      logoUrls,
       brandName,
       defaultBrandName,
-      isDefaultLogos,
-      isWhiteLabelLoaded,
-      initWhiteLabel,
-      setLogoUrls,
+      isBrandNameLoaded,
+      getBrandName,
       setBrandName,
-      saveWhiteLabelLogos,
       saveBrandName,
-      resetWhiteLabelLogos,
     } = brandingStore;
 
-    const {
-      whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
-      deviceType,
-      checkEnablePortalSettings,
-      standalone,
-      displayAbout,
-    } = settingsStore;
+    const { deviceType, checkEnablePortalSettings, standalone } = settingsStore;
 
     const { isCustomizationAvailable } = currentQuotaStore;
 
@@ -137,24 +110,17 @@ export const WhiteLabel = inject(
       isSettingPaid,
       deviceType,
       standalone,
-      displayAbout,
       showNotAvailable,
-      defaultWhiteLabelLogoUrls,
-      logoUrls,
       brandName,
       defaultBrandName,
-      isDefaultLogos,
-      isWhiteLabelLoaded,
-      initWhiteLabel,
-      setLogoUrls,
+      isBrandNameLoaded,
+      getBrandName,
       setBrandName,
-      saveWhiteLabelLogos,
       saveBrandName,
-      resetWhiteLabelLogos,
     };
   },
 )(
   withTranslation(["Settings", "Profile", "Common"])(
-    observer(WhiteLabelComponent),
+    observer(BrandNameComponent),
   ),
 );

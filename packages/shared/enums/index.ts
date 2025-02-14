@@ -654,10 +654,18 @@ export enum ValidationStatus {
   ExternalAccessDenied = 5,
 }
 
-export enum FillingFormStatus {
+export enum FileFillingFormStatus {
   Draft = 1,
   YourTurn = 2,
   InProgress = 3,
   Completed = 4,
   Stopped = 5,
+}
+
+export enum RoleStatus {
+  Waiting = "waiting",
+  YourTurn = "yourTurn",
+  Filling = "filling",
+  Filled = "filled",
+  Stopped = "stopped",
 }

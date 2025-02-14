@@ -73,7 +73,7 @@ const ConvertDialogComponent = (props) => {
     isRecentFolder,
     isFavoritesFolder,
     isShareFolder,
-    setIsConvertSingleFile,
+
     createNewIfExist,
     isUploadAction,
     cancelUploadAction,
@@ -110,7 +110,6 @@ const ConvertDialogComponent = (props) => {
 
   const onChangeRadioButton = (e) => {
     setSelectedOptionType(e.target.value);
-    setIsConvertSingleFile(false);
   };
 
   const onChangeFormat = () =>
@@ -119,7 +118,6 @@ const ConvertDialogComponent = (props) => {
 
   const onClose = () => {
     setConvertDialogVisible(false);
-    setIsConvertSingleFile(false);
   };
 
   const onCloseDialog = () => {
@@ -134,7 +132,6 @@ const ConvertDialogComponent = (props) => {
     onClose();
 
     if (convertSingleFile) {
-      setIsConvertSingleFile(true);
       const item = {
         fileId: convertItem.id,
         toFolderId: folderId,
@@ -270,7 +267,7 @@ export default inject(
     const {
       convertUploadedFiles,
       convertFile,
-      setIsConvertSingleFile,
+
       cancelUploadAction,
     } = uploadDataStore;
     const { storeOriginalFiles, setStoreOriginal, hideConfirmConvert } =
@@ -300,7 +297,6 @@ export default inject(
       isRecentFolder,
       isFavoritesFolder,
       isShareFolder,
-      setIsConvertSingleFile,
       createNewIfExist,
       isUploadAction,
       cancelUploadAction,

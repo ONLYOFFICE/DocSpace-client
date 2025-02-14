@@ -309,6 +309,7 @@ class FilesActionStore {
 
   createFoldersTree = async (t, files, folderId) => {
     //  console.log("createFoldersTree", files, folderId);
+    const { uploadedFilesHistory, uploaded } = this.uploadDataStore;
 
     const { setPrimaryProgressBarData } =
       this.uploadDataStore.primaryProgressDataStore;
@@ -339,9 +340,9 @@ class FilesActionStore {
       if (filesSize > freeSpace) {
         setPrimaryProgressBarData({
           ...pbData,
-          completed: true,
+          completed: uploaded,
           alert: true,
-          disableUploadPanelOpen: true,
+          disableUploadPanelOpen: uploadedFilesHistory.length === 0,
         });
 
         const size = getConvertedSize(t, roomFolder.quotaLimit);
@@ -366,8 +367,8 @@ class FilesActionStore {
     if (!filesList.length) {
       setPrimaryProgressBarData({
         ...pbData,
-        completed: true,
-        disableUploadPanelOpen: true,
+        completed: uploaded,
+        disableUploadPanelOpen: uploadedFilesHistory.length === 0,
         withoutStatus: !tree.length,
       });
     } else {

@@ -238,7 +238,7 @@ class FileRow extends Component {
 
   onButtonClick = () => {
     const { password } = this.state;
-    const { removeFileFromList, convertFile, item, uploadedFiles } = this.props;
+    const { convertFile, item, uploadedFiles } = this.props;
     const { fileId, toFolderId, fileInfo } = item;
 
     if (this.hasError()) return;
@@ -255,7 +255,6 @@ class FileRow extends Component {
     };
     toastr.clear();
     this.onTextClick();
-    removeFileFromList(fileId);
     convertFile(newItem);
   };
 
@@ -313,7 +312,6 @@ class FileRow extends Component {
       if (!url) return;
       window.open(url, downloadInCurrentTab ? "_self" : "_blank");
     };
-
     return (
       <StyledFileRow
         className="download-row"
@@ -505,7 +503,7 @@ export default inject(
       cancelCurrentUpload,
       cancelCurrentFileConversion,
       setUploadPanelVisible,
-      removeFileFromList,
+
       convertFile,
       files: uploadedFiles,
     } = uploadDataStore;
@@ -533,7 +531,7 @@ export default inject(
       name,
       isMediaActive,
       downloadInCurrentTab,
-      removeFileFromList,
+
       convertFile,
       uploadedFiles,
 

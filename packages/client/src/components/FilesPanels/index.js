@@ -83,6 +83,7 @@ import { ShareCollectSelector } from "../ShareCollectSelector";
 
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
+import FillingStatusPanel from "../panels/FillingStatusPanel";
 
 const Panels = (props) => {
   const {
@@ -348,6 +349,7 @@ const Panels = (props) => {
     closeEditIndexDialogVisible && (
       <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
     ),
+    <FillingStatusPanel key="filling-status-panel" />,
   ];
 };
 

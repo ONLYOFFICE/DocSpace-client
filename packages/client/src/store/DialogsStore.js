@@ -252,6 +252,8 @@ class DialogsStore {
 
   downloadItems = [];
 
+  fillingStatusPanel = true;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -884,6 +886,10 @@ class DialogsStore {
     const response = await getRoomCovers();
 
     this.setCovers(response);
+  };
+
+  setFillingStatusPanelVisible = (visible) => {
+    this.fillingStatusPanel = visible;
   };
 }
 

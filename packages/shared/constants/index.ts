@@ -32,7 +32,7 @@ import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
 import { globalColors } from "../themes/globalColors";
-import { FillingFormStatus } from "../enums";
+import { FileFillingFormStatus } from "../enums";
 
 export const LOADER_STYLE = Object.freeze({
   title: "",
@@ -202,9 +202,9 @@ export const GENERAL_LINK_HEADER_KEY = "general-link_header";
 // mainRed - stopped
 
 export const FILLING_FORM_STATUS_COLORS = Object.freeze({
-  [FillingFormStatus.Draft]: globalColors.mainRed,
-  [FillingFormStatus.YourTurn]: globalColors.lightBlueMain,
-  [FillingFormStatus.InProgress]: globalColors.gray,
-  [FillingFormStatus.Completed]: globalColors.mainGreen,
-  [FillingFormStatus.Stopped]: globalColors.mainRed,
+  [FileFillingFormStatus.Draft]: globalColors.mainRed,
+  [FileFillingFormStatus.YourTurn]: globalColors.lightBlueMain,
+  [FileFillingFormStatus.InProgress]: globalColors.gray,
+  [FileFillingFormStatus.Completed]: globalColors.mainGreen,
+  [FileFillingFormStatus.Stopped]: globalColors.mainRed,
 });

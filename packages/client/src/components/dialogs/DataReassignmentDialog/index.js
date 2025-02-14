@@ -74,7 +74,6 @@ const DataReassignmentDialog = ({
   isDeletingUserWithReassignment,
   t,
   tReady,
-  getUsersList,
   setIsDeletingUserWithReassignment,
   setDataReassignmentDeleteProfile,
   dataReassignmentUrl,
@@ -93,13 +92,13 @@ const DataReassignmentDialog = ({
 
   const [percent, setPercent] = useState(0);
 
-  const updateAccountsAfterDeleteUser = () => {
-    const filter = Filter.getDefault();
+  // const updateAccountsAfterDeleteUser = () => {
+  //   const filter = Filter.getDefault();
 
-    filter.area = "people";
+  //   filter.area = "people";
 
-    getUsersList(filter, true);
-  };
+  //   getUsersList(filter, true);
+  // };
 
   const checkReassignCurrentUser = () => {
     setIsReassignCurrentUser(currentUser.id === selectedUser.id);
@@ -127,7 +126,6 @@ const DataReassignmentDialog = ({
         if (res.status === statusTerminateCompleted) return;
 
         toastr.success(t("Common:ChangesSavedSuccessfully"));
-        isDeleteProfile && updateAccountsAfterDeleteUser();
       })
       .catch((error) => {
         toastr.error(error?.response?.data?.error?.message);
@@ -305,8 +303,7 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
 
   const { user: currentUser } = userStore;
 
-  const { getUsersList, needResetUserSelection, setSelected } =
-    peopleStore.usersStore;
+  const { needResetUserSelection, setSelected } = peopleStore.usersStore;
 
   return {
     setDataReassignmentDialogVisible,
@@ -318,7 +315,6 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
     dataReassignmentTerminate,
     deleteProfile: dataReassignmentDeleteProfile,
     setDataReassignmentDeleteProfile,
-    getUsersList,
     isDeletingUserWithReassignment,
     setIsDeletingUserWithReassignment,
     dataReassignmentUrl,

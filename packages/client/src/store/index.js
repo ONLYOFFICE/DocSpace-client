@@ -167,9 +167,12 @@ const filesStore = new FilesStore(
 
 const guidanceStore = new GuidanceStore();
 
+publicRoomStore.filesStore = filesStore;
+
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
   publicRoomStore,
+  selectedFolderStore,
 );
 
 const oformsStore = new OformsStore(settingsStore, infoPanelStore, userStore);
@@ -242,6 +245,8 @@ const filesActionsStore = new FilesActionsStore(
   indexingStore,
   versionHistoryStore,
 );
+
+mediaViewerDataStore.filesActionsStore = filesActionsStore;
 
 const contextOptionsStore = new ContextOptionsStore(
   settingsStore,

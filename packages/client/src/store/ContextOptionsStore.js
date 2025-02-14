@@ -1105,11 +1105,22 @@ class ContextOptionsStore {
     cb && cb();
   };
 
-  onCreateOform = (navigate) => {
+  onCreateOform = async (navigate) => {
+    const { oformFromFolderId } = this.oformsStore;
+    const { getFolderInfo } = this.filesStore;
+    const { getPublicKey } = this.filesActionsStore;
+
     this.infoPanelStore.setIsVisible(false);
+
     const filesFilter = FilesFilter.getDefault();
     filesFilter.folder = this.oformsStore.oformFromFolderId;
+
+    const currentFolder = await getFolderInfo(oformFromFolderId);
+    const publicKey = await getPublicKey(currentFolder);
+    if (publicKey) filesFilter.key = publicKey;
+
     const filterUrlParams = filesFilter.toUrlParams();
+
     const url = getCategoryUrl(
       this.filesStore.categoryType,
       filesFilter.folder,

@@ -46,6 +46,7 @@ import {
   TSettings,
   TTimeZone,
   TVersionBuild,
+  TExternalResources,
 } from "../api/settings/types";
 import { TUser } from "../api/people/types";
 import {
@@ -254,9 +255,7 @@ class SettingsStore {
 
   tenantStatus: TenantStatus | null = null;
 
-  helpLink = null;
-
-  apiDocsLink = null;
+  externalResources: TExternalResources | null = null;
 
   licenseUrl = null;
 
@@ -352,189 +351,356 @@ class SettingsStore {
     this.showGuestReleaseTip = showGuestReleaseTip;
   };
 
+  get helpCenterDomain() {
+    return this.externalResources?.helpcenter?.domain;
+  }
+
+  get helpCenterEntries() {
+    return this.externalResources?.helpcenter?.entries;
+  }
+
+  get apiDomain() {
+    return this.externalResources?.api?.domain;
+  }
+
+  get apiEntries() {
+    return this.externalResources?.api?.entries;
+  }
+
+  get commonEntries() {
+    return this.externalResources?.common?.entries;
+  }
+
+  get forumDomain() {
+    return this.externalResources?.forum?.domain;
+  }
+
+  get siteDomain() {
+    return this.externalResources?.site?.domain;
+  }
+
+  get siteEntries() {
+    return this.externalResources?.site?.entries;
+  }
+
+  get socialNetworkEntries() {
+    return this.externalResources?.socialNetworks?.entries;
+  }
+
+  get supportDomain() {
+    return this.externalResources?.support?.domain;
+  }
+
+  get videoGuidesDomain() {
+    return this.externalResources?.videoguides?.domain;
+  }
+
+  get videoGuidesEntries() {
+    return this.externalResources?.videoguides?.entries;
+  }
+
+  get helpLink() {
+    return this.helpCenterDomain;
+  }
+
+  get videoGuideUrl() {
+    return this.videoGuidesDomain;
+  }
+
+  get userForumUrl() {
+    return this.forumDomain;
+  }
+
+  get feedbackAndSupportUrl() {
+    return this.supportDomain;
+  }
+
+  get salesEmail() {
+    return this.commonEntries?.paymentemail;
+  }
+
+  get buyUrl() {
+    return this.siteEntries?.buyenterprise;
+  }
+
+  get licenseAgreementsUrl() {
+    return this.commonEntries?.license;
+  }
+
+  get apiDocsLink() {
+    return this.apiDomain;
+  }
+
   get ldapSettingsUrl() {
-    // TODO: Change to real link
-    return `${this.helpLink}/administration/docspace-settings.aspx#LdapSettings_block`;
+    return this.helpCenterDomain && this.helpCenterEntries?.ldap
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.ldap}`
+      : null;
   }
 
   get portalSettingsUrl() {
-    return `${this.helpLink}/administration/docspace-settings.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.settings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.settings}`
+      : null;
   }
 
   get integrationSettingsUrl() {
-    return `${this.helpLink}/administration/docspace-settings.aspx#AdjustingIntegrationSettings_block`;
+    return this.helpCenterDomain && this.helpCenterEntries?.integrationsettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.integrationsettings}`
+      : null;
   }
 
   get docuSignUrl() {
-    return `${this.helpLink}/administration/connect-docusign-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectdocusign
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectdocusign}`
+      : null;
   }
 
   get dropboxUrl() {
-    return `${this.helpLink}/administration/connect-dropbox-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectdropbox
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectdropbox}`
+      : null;
   }
 
   get boxUrl() {
-    return `${this.helpLink}/administration/connect-box-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectbox
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectbox}`
+      : null;
   }
 
   get mailRuUrl() {
-    return `${this.helpLink}/administration/connect-mail-ru-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectmailru
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectmailru}`
+      : null;
   }
 
   get oneDriveUrl() {
-    return `${this.helpLink}/administration/connect-onedrive-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectonedrive
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectonedrive}`
+      : null;
   }
 
   get microsoftUrl() {
-    return `${this.helpLink}/administration/connect-microsoft-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectmicrosoft
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectmicrosoft}`
+      : null;
   }
 
   get googleUrl() {
-    return `${this.helpLink}/administration/connect-google-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectgoogle
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectgoogle}`
+      : null;
   }
 
   get facebookUrl() {
-    return `${this.helpLink}/administration/connect-facebook-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectfacebook
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectfacebook}`
+      : null;
   }
 
   get linkedinUrl() {
-    return `${this.helpLink}/administration/connect-linkedin-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectlinkedin
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectlinkedin}`
+      : null;
   }
 
   get clickatellUrl() {
-    return `${this.helpLink}/administration/connect-clickatell-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectclickatell
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectclickatell}`
+      : null;
   }
 
   get smsclUrl() {
-    return `${this.helpLink}/administration/connect-smsc-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectsmsc
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectsmsc}`
+      : null;
   }
 
   get firebaseUrl() {
-    return `${this.helpLink}/administration/connect-firebase-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectfirebase
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectfirebase}`
+      : null;
   }
 
   get appleIDUrl() {
-    return `${this.helpLink}/administration/connect-apple-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectapple
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectapple}`
+      : null;
   }
 
   get telegramUrl() {
-    return `${this.helpLink}/administration/connect-telegram-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connecttelegram
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connecttelegram}`
+      : null;
   }
 
   get wordpressUrl() {
-    return `${this.helpLink}/administration/connect-wordpress-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectwordpress
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectwordpress}`
+      : null;
   }
 
   get awsUrl() {
-    return `${this.helpLink}/administration/connect-amazon-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectamazon
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectamazon}`
+      : null;
   }
 
   get googleCloudUrl() {
-    return `${this.helpLink}/administration/connect-google-cloud-storage-docspace.aspx`;
+    return this.helpCenterDomain &&
+      this.helpCenterEntries?.connectgooglecloudstorage
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectgooglecloudstorage}`
+      : null;
   }
 
   get rackspaceUrl() {
-    return `${this.helpLink}/administration/connect-rackspace-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectrackspace
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectrackspace}`
+      : null;
   }
 
   get selectelUrl() {
-    return `${this.helpLink}/administration/connect-selectel-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectselectel
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectselectel}`
+      : null;
   }
 
   get yandexUrl() {
-    return `${this.helpLink}/administration/connect-yandex-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectyandex
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectyandex}`
+      : null;
   }
 
   get vkUrl() {
-    return `${this.helpLink}/administration/connect-vk-docspace.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.connectvk
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.connectvk}`
+      : null;
   }
 
   get languageAndTimeZoneSettingsUrl() {
-    return `${this.helpLink}/administration/docspace-settings.aspx#DocSpacelanguage`;
+    return this.helpCenterDomain && this.helpCenterEntries?.language
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.language}`
+      : null;
   }
 
   get welcomePageSettingsUrl() {
-    return `${this.helpLink}/administration/docspace-settings.aspx#DocSpacetitle`;
+    return this.helpCenterDomain && this.helpCenterEntries?.welcomepage
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.welcomepage}`
+      : null;
   }
 
   get dnsSettingsUrl() {
-    return `${this.helpLink}/administration/docspace-settings.aspx#alternativeurl`;
+    return this.helpCenterDomain && this.helpCenterEntries?.alternativeurl
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.alternativeurl}`
+      : null;
   }
 
   get renamingSettingsUrl() {
-    return `${this.helpLink}/administration/docspace-settings.aspx#DocSpacerenaming`;
+    return this.helpCenterDomain && this.helpCenterEntries?.renaming
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.renaming}`
+      : null;
   }
 
   get passwordStrengthSettingsUrl() {
-    return `${this.helpLink}/administration/docspace-settings.aspx#passwordstrength`;
+    return this.helpCenterDomain && this.helpCenterEntries?.passwordstrength
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.passwordstrength}`
+      : null;
   }
 
   get tfaSettingsUrl() {
-    return `${this.helpLink}/administration/docspace-two-factor-authentication.aspx`;
+    return this.helpCenterDomain &&
+      this.helpCenterEntries?.twofactorauthentication
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.twofactorauthentication}`
+      : null;
   }
 
   get trustedMailDomainSettingsUrl() {
-    return `${this.helpLink}/administration/docspace-settings.aspx#TrustedDomain`;
+    return this.helpCenterDomain && this.helpCenterEntries?.trusteddomain
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.trusteddomain}`
+      : null;
   }
 
   get ipSettingsUrl() {
-    return `${this.helpLink}/administration/docspace-settings.aspx#ipsecurity`;
+    return this.helpCenterDomain && this.helpCenterEntries?.ipsecurity
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.ipsecurity}`
+      : null;
   }
 
   get bruteForceProtectionUrl() {
-    return `${this.helpLink}/administration/configuration.aspx#loginsettings`;
+    return this.helpCenterDomain && this.helpCenterEntries?.login
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.login}`
+      : null;
   }
 
   get administratorMessageSettingsUrl() {
-    return `${this.helpLink}/administration/docspace-settings.aspx#administratormessage`;
+    return this.helpCenterDomain && this.helpCenterEntries?.administratormessage
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.administratormessage}`
+      : null;
   }
 
   get lifetimeSettingsUrl() {
-    return `${this.helpLink}/administration/docspace-settings.aspx#sessionlifetime`;
+    return this.helpCenterDomain && this.helpCenterEntries?.sessionlifetime
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.sessionlifetime}`
+      : null;
   }
 
   get dataBackupUrl() {
-    return `${this.helpLink}/administration/docspace-settings.aspx#CreatingBackup_block`;
+    return this.helpCenterDomain && this.helpCenterEntries?.creatingbackup
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.creatingbackup}`
+      : null;
   }
 
   get automaticBackupUrl() {
-    return `${this.helpLink}/administration/docspace-settings.aspx#AutoBackup`;
+    return this.helpCenterDomain && this.helpCenterEntries?.autobackup
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.autobackup}`
+      : null;
   }
 
   get webhooksGuideUrl() {
-    return `${this.helpLink}/administration/docspace-webhooks.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.administrationguides
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.administrationguides}`
+      : null;
   }
 
   get dataReassignmentUrl() {
-    return `${this.helpLink}/userguides/docspace-managing-users.aspx`;
+    return this.helpCenterDomain && this.helpCenterEntries?.managingusers
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.managingusers}`
+      : null;
   }
 
   get installationGuidesUrl() {
-    return `${this.helpLink}/installation/docspace-enterprise-index.aspx`;
-  }
-
-  get sdkLink() {
-    return `${this.apiDocsLink}/docspace/javascript-sdk/get-started/basic-concepts/`;
-  }
-
-  get apiBasicLink() {
-    return `${this.apiDocsLink}/docspace/`;
-  }
-
-  get apiPluginSDKLink() {
-    return `${this.apiDocsLink}/docspace/plugins-sdk/get-started/basic-concepts/`;
+    return this.helpCenterDomain && this.helpCenterEntries?.enterpriseinstall
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.enterpriseinstall}`
+      : null;
   }
 
   get apiOAuthLink() {
-    return `${this.helpLink}/administration/docspace-settings.aspx#oauth`;
+    return this.helpCenterDomain && this.helpCenterEntries?.oauth
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.oauth}`
+      : null;
   }
 
   get accessRightsLink() {
-    return `${this.helpLink}/userguides/docspace-gettingstarted.aspx#AccessRights_block`;
+    return this.helpCenterDomain && this.helpCenterEntries?.accessrights
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.accessrights}`
+      : null;
   }
 
-  get wizardCompleted() {
-    return this.isLoaded && !this.wizardToken;
+  get sdkLink() {
+    return this.apiDomain && this.apiEntries?.["javascript-sdk"]
+      ? `${this.apiDomain}${this.apiEntries["javascript-sdk"]}`
+      : null;
+  }
+
+  get apiBasicLink() {
+    return this.apiDomain && this.apiEntries?.docspace
+      ? `${this.apiDomain}${this.apiEntries.docspace}`
+      : null;
+  }
+
+  get apiPluginSDKLink() {
+    return this.apiDomain && this.apiEntries?.["plugins-sdk"]
+      ? `${this.apiDomain}${this.apiEntries["plugins-sdk"]}`
+      : null;
   }
 
   setIsDesktopClientInit = (isDesktopClientInit: boolean) => {
@@ -1238,6 +1404,98 @@ class SettingsStore {
   setIsBannerVisible = (visible: boolean) => {
     this.isBannerVisible = visible;
   };
+
+  get forEnterprisesUrl() {
+    return this.siteDomain && this.siteEntries?.forenterprises
+      ? `${this.siteDomain}${this.siteEntries.forenterprises}`
+      : null;
+  }
+
+  get demoOrderUrl() {
+    return this.siteDomain && this.siteEntries?.demoorder
+      ? `${this.siteDomain}${this.siteEntries.demoorder}`
+      : null;
+  }
+
+  get wrongPortalNameUrl() {
+    return this.siteDomain && this.siteEntries?.wrongportalname
+      ? `${this.siteDomain}${this.siteEntries.wrongportalname}`
+      : null;
+  }
+
+  get desktopUrl() {
+    return this.siteDomain && this.siteEntries?.desktop
+      ? `${this.siteDomain}${this.siteEntries.desktop}`
+      : null;
+  }
+
+  get enterpriseEditionUrl() {
+    return this.siteDomain && this.siteEntries?.buyenterprise
+      ? `${this.siteDomain}${this.siteEntries.buyenterprise}`
+      : null;
+  }
+
+  get privateRoomsUrl() {
+    return this.siteDomain && this.siteEntries?.privaterooms
+      ? `${this.siteDomain}${this.siteEntries.privaterooms}`
+      : null;
+  }
+
+  get allConnectorsUrl() {
+    return this.siteDomain && this.siteEntries?.allconnectors
+      ? `${this.siteDomain}${this.siteEntries.allconnectors}`
+      : null;
+  }
+
+  get zoomUrl() {
+    return this.siteDomain && this.siteEntries?.officeforzoom
+      ? `${this.siteDomain}${this.siteEntries.officeforzoom}`
+      : null;
+  }
+
+  get wordPressUrl() {
+    return this.siteDomain && this.siteEntries?.officeforwordpress
+      ? `${this.siteDomain}${this.siteEntries.officeforwordpress}`
+      : null;
+  }
+
+  get drupalUrl() {
+    return this.siteDomain && this.siteEntries?.officefordrupal
+      ? `${this.siteDomain}${this.siteEntries.officefordrupal}`
+      : null;
+  }
+
+  get storageManagementUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.storagemanagement
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.storagemanagement}`
+      : null;
+  }
+
+  get enterpriseInstallScriptUrl() {
+    return this.helpCenterDomain &&
+      this.helpCenterEntries?.enterpriseinstallscript
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.enterpriseinstallscript}`
+      : null;
+  }
+
+  get enterpriseInstallWindowsUrl() {
+    return this.helpCenterDomain &&
+      this.helpCenterEntries?.enterpriseinstallwindows
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.enterpriseinstallwindows}`
+      : null;
+  }
+
+  get downloaddesktop() {
+    return this.externalResources?.site?.entries.downloaddesktop;
+  }
+
+  get officeforandroid() {
+    return this.externalResources?.site?.entries.officeforandroid;
+  }
+
+  get officeforios() {
+    return this.externalResources?.site?.entries.officeforios;
+  }
 }
 
 export { SettingsStore };

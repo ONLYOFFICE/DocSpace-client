@@ -664,6 +664,11 @@ class ContextOptionsStore {
     this.filesActionsStore.setThirdpartyInfo(providerKey);
   };
 
+  onFillingStatus = (item) => {
+    console.log(item);
+    this.dialogsStore.setFillingStatusPanelVisible(true);
+  };
+
   onMediaFileClick = (fileId, item) => {
     const itemId = typeof fileId !== "object" ? fileId : item.id;
     this.mediaViewerDataStore.setMediaViewerData({ visible: true, id: itemId });
@@ -1636,6 +1641,14 @@ class ContextOptionsStore {
         onClick: () => this.onClickSubmitToFormGallery(item),
         isOutsideLink: true,
         disabled: !item.security?.SubmitToFormGallery,
+      },
+      {
+        id: "option_filling-status",
+        key: "filling-status",
+        label: t("Common:FillingStatus"),
+        icon: FormFillRectSvgUrl,
+        onClick: () => this.onFillingStatus(item),
+        disabled: false,
       },
       {
         key: "separator-SubmitToGallery",

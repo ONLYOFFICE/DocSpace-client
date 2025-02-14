@@ -140,9 +140,7 @@ export const FillingStatusPanel = ({
       displayType={ModalDialogType.aside}
       withBodyScroll
     >
-      <ModalDialog.Header>
-        {t("Common:FillingStatusPanelTitle")}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:FillingStatus")}</ModalDialog.Header>
       <ModalDialog.Body>
         {value ? (
           <PublicRoomBar

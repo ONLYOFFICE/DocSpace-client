@@ -2163,6 +2163,7 @@ class FilesStore {
         "make-form",
         "edit-pdf",
         "separator0",
+        "filling-status",
         "submit-to-gallery",
         "separator-SubmitToGallery",
         "link-for-room-members",
@@ -2217,6 +2218,11 @@ class FilesStore {
           "remove-from-recent",
           "copy-general-link",
         ]);
+      }
+
+      if (!isPdf) {
+        // TODO: Remove after change security options
+        fileOptions = removeOptions(fileOptions, ["filling-status"]);
       }
 
       if (!canDownload) {

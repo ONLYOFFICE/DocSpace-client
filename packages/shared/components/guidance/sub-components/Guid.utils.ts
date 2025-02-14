@@ -25,7 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { isTablet } from "../../../utils";
-import { GuidancePosition, GuidanceElementType } from "./Guid.types";
+import {
+  GuidancePosition,
+  GuidanceElementType,
+  ClippedPosition,
+} from "./Guid.types";
 
 const DEFAULT_POSITION = {
   width: 0,
@@ -135,7 +139,7 @@ const getPosition = (
   viewAs: string,
   type: GuidanceElementType,
   isRTL: boolean = false,
-): Position => {
+): ClippedPosition => {
   const dimensions =
     viewAs === "tile" || type === GuidanceElementType.Content
       ? getViewTypeBasedDimensions(rects, viewAs, offset)
@@ -156,7 +160,7 @@ export const getGuidPosition = (
   guidance: GuidancePosition,
   viewAs: string,
   isRTL: boolean = false,
-): Position => {
+): ClippedPosition => {
   if (!guidance?.rects) return DEFAULT_POSITION;
 
   const { rects, type, offset, size } = guidance;

@@ -59,7 +59,7 @@ const Guidance: React.FC<GuidanceProps> = ({
       if (!currentGuidance?.position) return;
 
       const calculatePositions = () => {
-        const newPositions = currentGuidance.position
+        const newPositions: ClippedPosition[] = currentGuidance.position
           .map((pos) => {
             const element = getRefElement(pos.refKey as GuidanceRefKey);
 
@@ -77,7 +77,7 @@ const Guidance: React.FC<GuidanceProps> = ({
               isRTL,
             );
           })
-          .filter(Boolean);
+          .filter((pos): pos is ClippedPosition => pos !== null);
 
         setPositions(newPositions);
 

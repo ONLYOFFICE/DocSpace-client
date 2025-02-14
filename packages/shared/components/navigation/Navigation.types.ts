@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { RefObject, LegacyRef } from "react";
 import { DeviceType } from "../../enums";
 import { TGetContextMenuModel } from "../context-menu";
 
@@ -150,8 +151,8 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
 
     isMobile?: boolean;
     /** Used for guidance */
-    addButtonRef: React.RefObject<HTMLDivElement>;
-    buttonRef?: React.LegacyRef<HTMLButtonElement>;
+    addButtonRef?: RefObject<HTMLDivElement>;
+    buttonRef?: LegacyRef<HTMLButtonElement>;
   };
 
 export type TDropBoxProps = TArrowButtonProps &

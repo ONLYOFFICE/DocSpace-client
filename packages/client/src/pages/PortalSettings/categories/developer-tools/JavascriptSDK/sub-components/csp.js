@@ -133,6 +133,7 @@ const CSP = ({
   standalone,
   t,
   theme,
+  disableCSPInput,
 }) => {
   const [domain, changeDomain] = useState("");
   const [error, setError] = useState(null);
@@ -252,6 +253,7 @@ const CSP = ({
           placeholder={t("CSPInputPlaceholder")}
           tabIndex={1}
           hasError={error}
+          isDisabled={disableCSPInput}
         />
         <SelectorAddButton isDisabled={!domain.trim()} onClick={addDomain} />
       </Container>
@@ -266,7 +268,7 @@ const CSP = ({
   );
 };
 
-export default inject(({ settingsStore }) => {
+export default inject(({ settingsStore, userStore }) => {
   const {
     cspDomains,
     currentColorScheme,
@@ -275,6 +277,9 @@ export default inject(({ settingsStore }) => {
     setCSPSettings,
     standalone,
   } = settingsStore;
+
+  const disableCSPInput = userStore.user.isCollaborator;
+
   return {
     cspDomains,
     currentColorScheme,
@@ -282,5 +287,6 @@ export default inject(({ settingsStore }) => {
     installationGuidesUrl,
     setCSPSettings,
     standalone,
+    disableCSPInput,
   };
 })(observer(CSP));

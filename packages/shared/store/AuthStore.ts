@@ -35,13 +35,7 @@ import { loginWithTfaCode } from "../api/user";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
 import { logout as logoutDesktop } from "../utils/desktop";
-import {
-  frameCallEvent,
-  isAdmin,
-  isPublicRoom,
-  insertDataLayer,
-  isPublicPreview,
-} from "../utils/common";
+import { frameCallEvent, isAdmin, insertDataLayer } from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
@@ -189,13 +183,11 @@ class AuthStore {
     if (
       this.settingsStore?.isLoaded &&
       this.settingsStore?.socketUrl &&
-      !isPublicPreview() &&
-      !isPublicRoom() &&
       !isPortalDeactivated
     ) {
       requests.push(
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
-          if (!isPortalRestore) {
+          if (!isPortalRestore && this.userStore?.isAuthenticated) {
             this.getPaymentInfo();
           } else {
             this.isPortalInfoLoaded = true;
@@ -206,7 +198,11 @@ class AuthStore {
       this.userStore?.setIsLoaded(true);
     }
 
-    if (this.isAuthenticated && !skipRequest) {
+    if (
+      this.isAuthenticated &&
+      !skipRequest &&
+      this.userStore?.isAuthenticated
+    ) {
       if (!isPortalRestore && !isPortalDeactivated)
         requests.push(this.settingsStore?.getAdditionalResources());
 
@@ -461,10 +457,9 @@ class AuthStore {
 
   get isAuthenticated() {
     return (
-      this.settingsStore?.isLoaded &&
-      !!this.settingsStore?.socketUrl &&
-      !isPublicRoom()
-      // || //this.userStore.isAuthenticated
+      this.settingsStore?.isLoaded && !!this.settingsStore?.socketUrl
+      // !isPublicRoom()
+      //  this.userStore?.isAuthenticated
     );
   }
 

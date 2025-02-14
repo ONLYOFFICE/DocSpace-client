@@ -28,7 +28,6 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Cron, getNextSynchronization } from "@docspace/shared/components/cron";
@@ -90,7 +89,7 @@ const SyncContainer = ({
   }, [cron]);
 
   const renderBody = () => (
-    <Box className="ldap_sync-container">
+    <div className="ldap_sync-container">
       {!isMobileView ? (
         <Text
           fontSize="16px"
@@ -161,7 +160,7 @@ const SyncContainer = ({
           />
         </>
       ) : null}
-    </Box>
+    </div>
   );
 
   if (isMobileView) {

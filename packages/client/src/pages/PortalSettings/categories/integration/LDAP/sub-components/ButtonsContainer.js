@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { Box } from "@docspace/shared/components/box";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
 import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
@@ -78,7 +77,7 @@ const ButtonContainer = ({
   const resetDisabled = !isLdapEnabled || isUIDisabled || isDefaultSettings;
 
   return (
-    <Box className="ldap_buttons-container">
+    <div className="ldap_buttons-container">
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={onSaveClick}
@@ -102,7 +101,7 @@ const ButtonContainer = ({
           confirmationResetModal={confirmationResetModal}
         />
       ) : null}
-    </Box>
+    </div>
   );
 };
 

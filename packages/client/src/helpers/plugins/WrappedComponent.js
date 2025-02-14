@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Textarea } from "@docspace/shared/components/textarea";
@@ -135,7 +134,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
               />
             ));
 
-            return <Box {...elementProps}>{childrenComponents}</Box>;
+            return <div {...elementProps}>{childrenComponents}</div>;
           }
 
           case PluginComponents.text: {

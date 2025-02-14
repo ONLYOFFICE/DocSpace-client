@@ -38,7 +38,6 @@ import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { toastr } from "@docspace/shared/components/toast";
 import { LinkType } from "@docspace/shared/components/link";
 import { TSelectorItem } from "@docspace/shared/components/selector";
-import { Box } from "@docspace/shared/components/box";
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList } from "@docspace/shared/api/people";
 import {
@@ -210,11 +209,11 @@ const InviteInput = ({
           />
 
           <div className="list-item_content">
-            <Box displayProp="flex" alignItems="center" gapProp="8px">
+            <div className="list-item_content-box">
               <SearchItemText primary disabled={shared}>
                 {displayName || groupName}
               </SearchItemText>
-            </Box>
+            </div>
             <SearchItemText>{email}</SearchItemText>
           </div>
           {shared ? (

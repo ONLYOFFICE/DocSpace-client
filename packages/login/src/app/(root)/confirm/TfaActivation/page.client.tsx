@@ -35,7 +35,6 @@ import { useTheme } from "styled-components";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
@@ -157,7 +156,7 @@ const TfaActivationForm = ({
 
   return (
     <>
-      <Box className="set-app-description" marginProp="0 0 32px 0">
+      <div className="set-app-description">
         <GreetingContainer />
 
         <Text isBold fontSize="14px" className="set-app-title">
@@ -211,17 +210,13 @@ const TfaActivationForm = ({
             from your application in the field below.
           </Trans>
         </Text>
-      </Box>
+      </div>
       <FormWrapper id="tfa-activation-form">
-        <Box
-          displayProp="flex"
-          flexDirection="column"
-          className="app-code-wrapper"
-        >
+        <div className="app-code-wrapper">
           <div className="qrcode-wrapper">
             <img src={qrCode} height="180px" width="180px" alt="QR-code" />
           </div>
-          <Box className="app-code-input">
+          <div className="app-code-input">
             <FieldContainer
               labelVisible={false}
               hasError={error ? true : false}
@@ -244,8 +239,8 @@ const TfaActivationForm = ({
                 onKeyDown={onKeyPress}
               />
             </FieldContainer>
-          </Box>
-          <Box className="app-code-continue-btn">
+          </div>
+          <div className="app-code-continue-btn">
             <Button
               scale
               primary
@@ -258,8 +253,8 @@ const TfaActivationForm = ({
               isLoading={isLoading}
               onClick={onSubmit}
             />
-          </Box>
-        </Box>
+          </div>
+        </div>
       </FormWrapper>
     </>
   );

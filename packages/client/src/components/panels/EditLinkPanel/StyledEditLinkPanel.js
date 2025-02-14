@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Box } from "@docspace/shared/components/box";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 const StyledEditLinkBodyContent = styled.div`
@@ -142,7 +141,8 @@ const StyledScrollbar = styled(Scrollbar)`
   height: calc(100% - 150px) !important;
 `;
 
-const StyledButtons = styled(Box)`
+const StyledButtons = styled.div`
+  box-sizing: border-box;
   padding: 16px;
   display: flex;
   align-items: center;

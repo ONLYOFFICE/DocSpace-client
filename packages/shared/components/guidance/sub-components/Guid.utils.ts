@@ -159,13 +159,13 @@ export const getGuidPosition = (
 ): Position => {
   if (!guidance?.rects) return DEFAULT_POSITION;
 
-  const { rects, type, offset } = guidance;
+  const { rects, type, offset, size } = guidance;
 
   switch (type) {
     case GuidanceElementType.Expandable:
       return getExpandedPosition(rects, offset, {
         useTabletSize: isTablet(),
-        expandSize: !isTablet() ? 35 : 0,
+        expandSize: !isTablet() ? size : 0,
       });
 
     case GuidanceElementType.Mixed:

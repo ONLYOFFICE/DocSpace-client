@@ -19,7 +19,6 @@ export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
         offset: {
           value: 4,
           row: 14,
-          table: 3,
           rtl: 22,
         },
       },
@@ -57,7 +56,6 @@ export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
         offset: {
           value: 4,
           row: 14,
-          table: 3,
           rtl: 22,
         },
       },
@@ -76,7 +74,6 @@ export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
         offset: {
           value: 4,
           row: 14,
-          table: 3,
           rtl: 22,
         },
       },
@@ -100,6 +97,7 @@ export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
       {
         type: GuidanceElementType.Expandable,
         refKey: GuidanceRefKey.Uploading,
+        size: 35,
         offset: {
           value: 9,
         },

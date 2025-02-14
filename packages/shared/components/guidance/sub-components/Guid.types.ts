@@ -44,10 +44,10 @@ export interface GuidancePosition {
   type: GuidanceElementType;
   placement?: GuidancePlacement;
   refKey?: GuidanceRefKey;
+  size?: number;
   offset?: {
     value?: number;
     row?: number;
-    table?: number;
     rtl?: number;
   };
   smallBorder?: boolean;

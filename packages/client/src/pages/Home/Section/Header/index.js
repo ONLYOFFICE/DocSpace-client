@@ -883,14 +883,8 @@ export default inject(
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
-    const {
-      theme,
-      frameConfig,
-      isFrame,
-      currentDeviceType,
-      displayAbout,
-      maintenanceExist,
-    } = settingsStore;
+    const { theme, frameConfig, isFrame, currentDeviceType, displayAbout } =
+      settingsStore;
 
     const isRoom = !!roomType;
     const isVirtualDataRoomType = roomType === RoomsType.VirtualDataRoom;
@@ -1066,7 +1060,6 @@ export default inject(
       getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
-      maintenanceExist,
       welcomeFormFillingTipsVisible,
       guidAnimationVisible,
       setguidAnimationVisible,

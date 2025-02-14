@@ -476,8 +476,11 @@ class FilesActionStore {
         this.setGroupMenuBlocked(true);
         await removeFiles(folderIds, fileIds, deleteAfter, immediately)
           .then(async (res) => {
-            if (res[0]?.error) return Promise.reject(res[0].error);
-            const data = res[0] ? res[0] : null;
+            const result = res[res.length - 1];
+
+            if (result?.error) return Promise.reject(result.error);
+
+            const data = result ?? null;
             const pbData = {
               operation: operationName,
               operationId,
@@ -568,8 +571,10 @@ class FilesActionStore {
 
     try {
       await emptyTrash().then(async (res) => {
-        if (res[0]?.error) return Promise.reject(res[0].error);
-        const data = res[0] ? res[0] : null;
+        const result = res[res.length - 1];
+
+        if (result?.error) return Promise.reject(result.error);
+        const data = result ?? null;
 
         await loopFilesOperations(data, pbData);
         toastr.success(translations.successOperation);
@@ -624,8 +629,10 @@ class FilesActionStore {
 
     try {
       await removeFiles(folderIds, [], true, true).then(async (res) => {
-        if (res[0]?.error) return Promise.reject(res[0].error);
-        const data = res[0] ? res[0] : null;
+        const result = res[res.length - 1];
+
+        if (result?.error) return Promise.reject(result.error);
+        const data = result ?? null;
 
         await loopFilesOperations(data, pbData);
         toastr.success(translations.successOperation);
@@ -686,7 +693,10 @@ class FilesActionStore {
     try {
       await downloadFiles(fileConvertIds, folderIds, shareKey).then(
         async (res) => {
-          const data = res[0] ? res[0] : null;
+          const result = res[res.length - 1];
+
+          if (result?.error) return Promise.reject(result.error);
+          const data = result ?? null;
           const pbData = {
             operation: operationName,
             label,
@@ -938,8 +948,10 @@ class FilesActionStore {
     if (isFile) {
       addActiveItems([itemId], null, destFolderId);
       return deleteFile(itemId).then(async (res) => {
-        if (res[0]?.error) return Promise.reject(res[0].error);
-        const data = res[0] ? res[0] : null;
+        const result = res[res.length - 1];
+
+        if (result?.error) return Promise.reject(result.error);
+        const data = result ?? null;
 
         await this.uploadDataStore.loopFilesOperations(data, {
           operationId,
@@ -957,8 +969,10 @@ class FilesActionStore {
       this.setGroupMenuBlocked(true);
       return removeFiles(items, [], false, true)
         .then(async (res) => {
-          if (res[0]?.error) return Promise.reject(res[0].error);
-          const data = res[0] ? res[0] : null;
+          const result = res[res.length - 1];
+
+          if (result?.error) return Promise.reject(result.error);
+          const data = result ?? null;
           await this.uploadDataStore.loopFilesOperations(data, {
             operation,
             operationId,
@@ -985,8 +999,10 @@ class FilesActionStore {
 
     addActiveItems(null, [itemId], destFolderId);
     return deleteFolder(itemId).then(async (res) => {
-      if (res[0]?.error) return Promise.reject(res[0].error);
-      const data = res[0] ? res[0] : null;
+      const result = res[res.length - 1];
+
+      if (result?.error) return Promise.reject(result.error);
+      const data = result ?? null;
       await this.uploadDataStore.loopFilesOperations(data, {
         operationId,
         operation,
@@ -1060,12 +1076,12 @@ class FilesActionStore {
 
     return duplicate(folderIds, fileIds)
       .then(async (res) => {
-        const lastResult = res && res[res.length - 1];
+        const lastResult = res[res.length - 1];
 
         if (lastResult?.error) return Promise.reject(lastResult.error);
 
         const pbData = { operation: operationName, operationId };
-        const data = lastResult || null;
+        const data = lastResult ?? null;
 
         const operationData = await this.uploadDataStore.loopFilesOperations(
           data,
@@ -1282,11 +1298,11 @@ class FilesActionStore {
         this.setGroupMenuBlocked(true);
         return moveToFolder(archiveRoomsId, items)
           .then(async (res) => {
-            const lastResult = res && res[res.length - 1];
+            const lastResult = res[res.length - 1];
 
             if (lastResult?.error) return Promise.reject(lastResult.error);
 
-            const data = lastResult || null;
+            const data = lastResult ?? null;
 
             const operationData =
               await this.uploadDataStore.loopFilesOperations(data, pbData);
@@ -1349,11 +1365,11 @@ class FilesActionStore {
         this.setGroupMenuBlocked(true);
         return moveToFolder(myRoomsId, items)
           .then(async (res) => {
-            const lastResult = res && res[res.length - 1];
+            const lastResult = res[res.length - 1];
 
             if (lastResult?.error) return Promise.reject(lastResult.error);
 
-            const data = lastResult || null;
+            const data = lastResult ?? null;
 
             console.log(pbData.label, { data, res });
 
@@ -1630,7 +1646,9 @@ class FilesActionStore {
 
     return markAsRead(folderIds, fileIds)
       .then(async (res) => {
-        const data = res[0] ? res[0] : null;
+        const result = res[res.length - 1];
+
+        const data = result ?? null;
 
         await this.uploadDataStore.loopFilesOperations(data, pbData);
       })
@@ -3293,8 +3311,10 @@ class FilesActionStore {
     try {
       await deleteVersionFile(fileId, versions)
         .then(async (res) => {
-          if (res[0]?.error) return Promise.reject(res[0].error);
-          const data = res[0] ? res[0] : null;
+          const result = res[res.length - 1];
+
+          if (result?.error) return Promise.reject(result.error);
+          const data = result ?? null;
           const pbData = {
             icon: "file",
             operationId,

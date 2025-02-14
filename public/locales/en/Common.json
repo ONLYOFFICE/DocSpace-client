@@ -570,5 +570,10 @@
   "Years": "Years",
   "Yes": "Yes",
   "Yesterday": "Yesterday",
-  "You": "You"
+  "You": "You",
+  "FillingStatusPanelTitle": "Filling status",
+  "FillingStatusBarDescription": "In this panel you can monitor the completion of the form in which you participate or in which you are the organizer of completion",
+  "FillingStatusBarTitle": "Process of filling out the form",
+  "Complete": "Complete",
+  "Stopped": "Stopped"
 }

@@ -59,7 +59,7 @@ const SaaSPage = ({
   const shouldShowLoader =
     !isInitPaymentPage || !ready || isUpdatingTariff || isUpdatingBasicSettings;
 
-  const [showLoader, setShowLoader] = useState(shouldShowLoader);
+  const [showLoader, setShowLoader] = useState(false);
 
   useEffect(() => {
     moment.locale(language);

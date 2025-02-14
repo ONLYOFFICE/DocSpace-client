@@ -121,7 +121,7 @@ class BrandingStore {
 
   saveBrandName = async (data) => {
     await setBrandName(data, isManagement());
-    this.settingsStore.getPortalSettings(); // ??
+    this.settingsStore.getPortalSettings();
     this.getBrandName();
   };
 

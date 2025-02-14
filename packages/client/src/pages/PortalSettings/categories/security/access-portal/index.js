@@ -41,6 +41,8 @@ import { IpSecuritySection } from "./ipSecurity";
 import { AdminMessageSection } from "./adminMessage";
 import { SessionLifetimeSection } from "./sessionLifetime";
 import { BruteForceProtectionSection } from "./bruteForceProtection";
+import { DevToolsAccessSection } from "./devToolsAccess";
+
 import MobileView from "./mobileView";
 
 const AccessPortal = (props) => {
@@ -144,6 +146,30 @@ const AccessPortal = (props) => {
 
       <TrustedMailSection />
       <StyledSettingsSeparator />
+
+      <Text fontSize="16px" fontWeight="700">
+        {t("DeveloperToolsAccess")}
+      </Text>
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight="400">
+          {t("DeveloperToolsAccessDescription")}
+        </Text>
+        <Text fontSize="13px" fontWeight="400">
+          <Trans t={t} i18nKey="SaveToApply" />
+        </Text>
+        <Link
+          className="link-learn-more"
+          target="_blank"
+          isHovered
+          color={currentColorScheme.main?.accent}
+          href="" // TODO: add link
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      </div>
+      <DevToolsAccessSection />
+      <StyledSettingsSeparator />
+
       <Text fontSize="16px" fontWeight="700">
         {t("IPSecurity")}
       </Text>

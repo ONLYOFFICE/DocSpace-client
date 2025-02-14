@@ -92,6 +92,7 @@ export default inject<TStore>(
       standalone,
       isBurgerLoading,
       logoText,
+      limitedAccessDevToolsForUsers,
     } = settingsStore;
 
     const { isFreeTariff, isNonProfit, isTrial, currentTariffPlanTitle } =
@@ -150,6 +151,7 @@ export default inject<TStore>(
       logoText,
       isAdmin,
       isVisitor,
+      limitedAccessDevToolsForUsers,
     };
   },
 )(observer(ArticleWrapper));

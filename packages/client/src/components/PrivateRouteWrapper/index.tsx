@@ -50,6 +50,7 @@ const PrivateRouteWrapper = ({
   limitedAccessSpace,
   baseDomain,
   displayAbout,
+  limitedAccessDevToolsForUsers,
 }: Partial<PrivateRouteProps>) => {
   return (
     <PrivateRoute
@@ -70,8 +71,9 @@ const PrivateRouteWrapper = ({
       enablePortalRename={enablePortalRename!}
       identityServerEnabled={identityServerEnabled}
       limitedAccessSpace={limitedAccessSpace ?? null}
-      baseDomain={baseDomain}
-      displayAbout={displayAbout}
+      baseDomain={baseDomain!}
+      displayAbout={displayAbout!}
+      limitedAccessDevToolsForUsers={limitedAccessDevToolsForUsers!}
     >
       {children}
     </PrivateRoute>
@@ -98,6 +100,7 @@ export default inject<TStore>(
       limitedAccessSpace,
       baseDomain,
       displayAbout,
+      limitedAccessDevToolsForUsers,
     } = settingsStore;
 
     return {
@@ -117,6 +120,7 @@ export default inject<TStore>(
       limitedAccessSpace,
       baseDomain,
       displayAbout,
+      limitedAccessDevToolsForUsers,
     };
   },
 )(observer(PrivateRouteWrapper));

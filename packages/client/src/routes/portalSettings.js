@@ -221,6 +221,19 @@ const PortalSettingsRoutes = {
       },
     },
     {
+      path: "security/access-portal/access-dev-tools",
+      async lazy() {
+        const { DevToolsAccessSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/devToolsAccess"
+            ),
+        );
+
+        return { Component: DevToolsAccessSection };
+      },
+    },
+    {
       path: "security/access-portal/ip",
       async lazy() {
         const { IpSecuritySection } = await componentLoader(

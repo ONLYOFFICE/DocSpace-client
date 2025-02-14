@@ -50,7 +50,8 @@ A dropdown component that appears as a link and expands to show a menu of option
   argTypes: {
     children: {
       control: "text",
-      description: "Content to be displayed as the link text. Can be a string or React nodes",
+      description:
+        "Content to be displayed as the link text. Can be a string or React nodes",
       table: {
         type: { summary: "ReactNode" },
         defaultValue: { summary: "undefined" },
@@ -58,15 +59,20 @@ A dropdown component that appears as a link and expands to show a menu of option
     },
     data: {
       control: "object",
-      description: "Array of dropdown items. Each item should have: `key` (required), `label` (string), `onClick` (function), and optionally `isSeparator` (boolean)",
+      description:
+        "Array of dropdown items. Each item should have: `key` (required), `label` (string), `onClick` (function), and optionally `isSeparator` (boolean)",
       table: {
-        type: { summary: "Array<{ key: string; label?: string; onClick?: () => void; isSeparator?: boolean; }>" },
+        type: {
+          summary:
+            "Array<{ key: string; label?: string; onClick?: () => void; isSeparator?: boolean; }>",
+        },
         defaultValue: { summary: "[]" },
       },
     },
     fontWeight: {
       control: "text",
-      description: "CSS font-weight value. Can be a number (400, 500, etc.) or string (normal, bold, etc.). Used in conjunction with or instead of isBold",
+      description:
+        "CSS font-weight value. Can be a number (400, 500, etc.) or string (normal, bold, etc.). Used in conjunction with or instead of isBold",
       table: {
         type: { summary: "number | string" },
         defaultValue: { summary: "undefined" },
@@ -74,7 +80,8 @@ A dropdown component that appears as a link and expands to show a menu of option
     },
     isBold: {
       control: "boolean",
-      description: "Quick way to make text bold (equivalent to fontWeight: 'bold'). Takes precedence over fontWeight if both are specified",
+      description:
+        "Quick way to make text bold (equivalent to fontWeight: 'bold'). Takes precedence over fontWeight if both are specified",
       table: {
         type: { summary: "boolean" },
         defaultValue: { summary: false },
@@ -82,7 +89,8 @@ A dropdown component that appears as a link and expands to show a menu of option
     },
     isTextOverflow: {
       control: "boolean",
-      description: "When true, long text will be truncated with ellipsis (...). Useful for fixed-width containers",
+      description:
+        "When true, long text will be truncated with ellipsis (...). Useful for fixed-width containers",
       table: {
         type: { summary: "boolean" },
         defaultValue: { summary: false },
@@ -135,6 +143,15 @@ A dropdown component that appears as a link and expands to show a menu of option
       table: {
         type: { summary: "boolean" },
         defaultValue: { summary: false },
+      },
+    },
+    manualWidth: {
+      control: "text",
+      description:
+        "Sets a custom width for the dropdown menu. If not provided, the width is automatically calculated based on the content width plus padding",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "undefined" },
       },
     },
   },

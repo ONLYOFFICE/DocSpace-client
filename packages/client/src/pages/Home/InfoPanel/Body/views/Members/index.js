@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useContext, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
@@ -43,6 +44,7 @@ import {
   GENERAL_LINK_HEADER_KEY,
   LINKS_LIMIT_COUNT,
 } from "@docspace/shared/constants";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
@@ -88,6 +90,9 @@ const Members = ({
   isMembersPanelUpdating,
   setGuestReleaseTipDialogVisible,
   showGuestReleaseTip,
+  setRoomShared,
+  currentId,
+  setPublicRoomKey,
   setAccessSettingsIsVisible,
   templateAvailable,
 }) => {
@@ -95,6 +100,7 @@ const Members = ({
   const membersHelper = new MembersHelper({ t });
 
   const scrollContext = useContext(ScrollbarContext);
+  const [, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     updateInfoPanelMembers(t);
@@ -153,6 +159,17 @@ const Members = ({
         setExternalLink(link);
         copyShareLink(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+
+        const filterObj = FilesFilter.getFilter(window.location);
+
+        if (isPublicRoomType && !filterObj.key) {
+          setRoomShared(currentId, true);
+          setPublicRoomKey(link.sharedTo.requestToken);
+          setSearchParams((prev) => {
+            prev.set("key", link.sharedTo.requestToken);
+            return prev;
+          });
+        }
       });
     }
   };
@@ -374,10 +391,12 @@ export default inject(
       isMembersPanelUpdating,
       templateAvailableToEveryone,
     } = infoPanelStore;
-    const { membersFilter } = filesStore;
+    const { membersFilter, setRoomShared } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
 
-    const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
+    const { primaryLink, additionalLinks, setExternalLink, setPublicRoomKey } =
+      publicRoomStore;
+
     const { isArchiveFolderRoot } = treeFoldersStore;
     const {
       setLinkParams,
@@ -386,6 +405,7 @@ export default inject(
       setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
     } = dialogsStore;
 
+    const { id } = selectedFolderStore;
     const { showGuestReleaseTip } = settingsStore;
 
     const roomType =
@@ -426,6 +446,9 @@ export default inject(
       isMembersPanelUpdating,
       setGuestReleaseTipDialogVisible,
       showGuestReleaseTip,
+      setRoomShared,
+      currentId: id,
+      setPublicRoomKey,
       setAccessSettingsIsVisible,
       templateAvailable: templateAvailableToEveryone,
     };

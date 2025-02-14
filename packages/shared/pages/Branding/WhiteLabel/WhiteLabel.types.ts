@@ -60,16 +60,15 @@ export interface IHeaderProps {
   onUseTextAsLogo: () => void;
   isEmpty: boolean;
   logoTextWhiteLabel: string;
-  onChangeCompanyName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClear: () => void;
 }
-
 export interface IWhiteLabel {
   t: TTranslation;
   isSettingPaid: boolean;
   showNotAvailable: boolean;
   standalone: boolean;
   logoUrls: ILogo[];
-  logoText: string;
   showAbout: boolean;
   onSave: (data: IWhiteLabelData) => void;
   onRestoreDefault: () => void;
@@ -78,7 +77,6 @@ export interface IWhiteLabel {
   deviceType: DeviceType;
   setLogoUrls: (logoUrls: ILogo[]) => void;
   isWhiteLabelLoaded: boolean;
-  defaultLogoText: string;
   defaultWhiteLabelLogoUrls: ILogo[];
 }
 

@@ -37,7 +37,10 @@ import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { SortByFieldName } from "@docspace/shared/enums";
 import withContent from "../../../../../HOCs/withContent";
 
-import { connectedCloudsTypeTitleTranslation } from "../../../../../helpers/filesUtils";
+import {
+  connectedCloudsTypeTitleTranslation,
+  getRoomTypeName,
+} from "../../../../../helpers/filesUtils";
 
 const FilesRowContent = ({
   t,
@@ -70,6 +73,7 @@ const FilesRowContent = ({
     quotaLimit,
     usedSpace,
     order,
+    roomType,
   } = item;
 
   const contentComponent = () => {
@@ -86,6 +90,9 @@ const FilesRowContent = ({
 
       case SortByFieldName.Type:
         return getFileTypeName(fileType, t);
+
+      case SortByFieldName.RoomType:
+        return getRoomTypeName(roomType, t);
 
       case SortByFieldName.Tags:
         if (tags?.length === 0) return "";
@@ -182,23 +189,24 @@ export default inject(
     selectedFolderStore,
   }) => {
     const { filter, roomsFilter } = filesStore;
-    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
-      treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isRoomsFolder,
+      isArchiveFolder,
+      isTemplatesFolder,
+    } = treeFoldersStore;
     const { isIndexedFolder } = selectedFolderStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
     const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
 
-    const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
-      currentQuotaStore;
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     return {
       filterSortBy,
       theme: settingsStore.theme,
       isTrashFolder: isRecycleBinFolder,
       isDefaultRoomsQuotaSet,
-      isStatisticsAvailable,
-      showStorageInfo,
       isIndexing: isIndexedFolder,
     };
   },

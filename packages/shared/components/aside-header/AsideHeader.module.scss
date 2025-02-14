@@ -57,6 +57,11 @@
     display: flex;
     margin-inline: 16px 16px;
     gap: 16px;
+
+    .header-icon {
+      height: 16px;
+      width: 16px;
+    }
   }
 
   .heading {

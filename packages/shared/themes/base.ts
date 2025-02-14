@@ -1860,6 +1860,7 @@ export const getBaseTheme = () => {
         iconColor: lightIcons,
         iconErrorColor: lightErrorStatus,
         primaryColor: grayText,
+        barIconColor: lightGrayDark,
       },
 
       members: {
@@ -2118,6 +2119,7 @@ export const getBaseTheme = () => {
         sideColor: black,
         color: black,
         textColor: gray,
+        subTextColor: "#657077",
       },
 
       animationColor: lightSecondMain,

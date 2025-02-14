@@ -520,7 +520,7 @@ class UploadDataStore {
           });
 
           error = res && res[0] && res[0].error;
-          if (error.length) {
+          if (error?.length) {
             const percent = this.getConversationPercent(index + 1);
             this.setConversionPercent(percent, !!error);
 

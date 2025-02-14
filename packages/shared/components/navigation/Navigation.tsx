@@ -86,6 +86,7 @@ const Navigation = (props: TNavigationProps) => {
     showNavigationButton,
     onContextOptionsClick,
     onLogoClick,
+    badgeLabel,
     ...rest
   } = props;
 
@@ -205,6 +206,7 @@ const Navigation = (props: TNavigationProps) => {
         isRootFolder={isRootFolder}
         onClick={toggleDropBox}
         isRootFolderTitle={false}
+        badgeLabel={!showRootFolderNavigation ? badgeLabel : ""}
       />
     </div>
   );
@@ -225,6 +227,7 @@ const Navigation = (props: TNavigationProps) => {
         isRootFolder={isRootFolder}
         isRootFolderTitle
         onClick={onTextClick}
+        badgeLabel={badgeLabel}
       />
 
       {navigationTitleNode}

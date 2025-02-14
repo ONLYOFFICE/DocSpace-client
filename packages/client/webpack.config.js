@@ -27,8 +27,8 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-// const ModuleFederationPlugin =
-//   require("webpack").container.ModuleFederationPlugin;
+const ModuleFederationPlugin =
+  require("webpack").container.ModuleFederationPlugin;
 const DefinePlugin = require("webpack").DefinePlugin;
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
@@ -41,7 +41,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 const minifyJson = require("@docspace/shared/utils/minifyJson");
 
-// const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
+const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
 //const fs = require("fs");
 //const { readdir } = require("fs").promises;
 
@@ -49,7 +49,7 @@ const path = require("path");
 
 const pkg = require("./package.json");
 const runtime = require("../runtime.json");
-// const deps = pkg.dependencies || {};
+const deps = pkg.dependencies || {};
 const homepage = pkg.homepage;
 const title = pkg.title;
 const version = pkg.version;
@@ -381,50 +381,48 @@ module.exports = (env, argv) => {
     };
   }
 
-  // config.plugins.push(
-  //   new ModuleFederationPlugin({
-  //     name: "client",
-  //     filename: "remoteEntry.js",
-  //     remotes: [],
-  //     exposes: {
-  //       "./shell": "./src/Shell",
-  //       "./store": "./src/store",
-  //       "./Layout": "./src/components/Layout",
-  //       "./Main": "./src/components/Main",
-  //       "./NavMenu": "./src/components/NavMenu",
-  //       "./PreparationPortalDialog":
-  //         "./src/components/dialogs/PreparationPortalDialog/PreparationPortalDialogWrapper.js",
-  //       "./utils": "./src/helpers/filesUtils.js",
-  //       "./BrandingPage":
-  //         "./src/pages/PortalSettings/categories/common/branding.js",
-  //       "./WhiteLabelPage":
-  //         "./src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
-  //       "./AdditionalResPage":
-  //         "./src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
-  //       "./CompanyInfoPage":
-  //         "./src/pages/PortalSettings/categories/common/Branding/companyInfoSettings.js",
-  //       "./BackupPage":
-  //         "./src/pages/PortalSettings/categories/data-management/backup/manual-backup",
-  //       "./AutoBackupPage":
-  //         "./src/pages/PortalSettings/categories/data-management/backup/auto-backup",
-  //       "./RestorePage":
-  //         "./src/pages/PortalSettings/categories/data-management/backup/restore-backup",
-  //       "./PaymentsPage": "./src/pages/PortalSettings/categories/payments",
-  //       "./BonusPage": "./src/pages/Bonus",
-  //       "./ChangeStorageQuotaDialog":
-  //         "./src/components/dialogs/ChangeStorageQuotaDialog",
-  //       "./ConnectDialog": "./src/components/dialogs/ConnectDialog",
-  //     },
-  //     shared: [
-  //       "react",
-  //       "react-dom",
-  //       "react-router-dom",
-  //       "mobx",
-  //       "mobx-react",
-  //       "styled-components",
-  //     ],
-  //   }),
-  // );
+  config.plugins.push(
+    new ModuleFederationPlugin({
+      name: "client",
+      filename: "remoteEntry.js",
+      remotes: [],
+      exposes: {
+        "./shell": "./src/Shell",
+        "./store": "./src/store",
+        "./Layout": "./src/components/Layout",
+        "./Main": "./src/components/Main",
+        "./NavMenu": "./src/components/NavMenu",
+        "./PreparationPortalDialog":
+          "./src/components/dialogs/PreparationPortalDialog/PreparationPortalDialogWrapper.js",
+        "./utils": "./src/helpers/filesUtils.js",
+        "./BrandingPage":
+          "./src/pages/PortalSettings/categories/common/branding.js",
+        "./BrandNamePage":
+          "./src/pages/PortalSettings/categories/common/Branding/brandName.js",
+        "./WhiteLabelPage":
+          "./src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
+        "./AdditionalResPage":
+          "./src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
+        "./CompanyInfoPage":
+          "./src/pages/PortalSettings/categories/common/Branding/companyInfoSettings.js",
+        "./BackupPage":
+          "./src/pages/PortalSettings/categories/data-management/backup/manual-backup",
+        "./AutoBackupPage":
+          "./src/pages/PortalSettings/categories/data-management/backup/auto-backup",
+        "./RestorePage":
+          "./src/pages/PortalSettings/categories/data-management/backup/restore-backup",
+        "./PaymentsPage": "./src/pages/PortalSettings/categories/payments",
+        "./BonusPage": "./src/pages/Bonus",
+        "./ChangeStorageQuotaDialog":
+          "./src/components/dialogs/ChangeStorageQuotaDialog",
+        "./ConnectDialog": "./src/components/dialogs/ConnectDialog",
+      },
+      shared: {
+        ...deps,
+        ...sharedDeps,
+      },
+    }),
+  );
 
   const htmlTemplate = {
     title: title,

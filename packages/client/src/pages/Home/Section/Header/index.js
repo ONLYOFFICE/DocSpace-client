@@ -36,6 +36,7 @@ import classnames from "classnames";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useLocation, useParams } from "react-router-dom";
+
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/shared/components/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -347,6 +348,9 @@ const SectionHeaderContent = (props) => {
   const stateIsShared = location?.state?.isShared;
   const stateIsExternal = location?.state?.isExternal;
   const stateIsLifetimeEnabled = location?.state?.isLifetimeEnabled;
+  const showTemplateBadge =
+    location?.state?.rootFolderType === FolderType.RoomTemplates &&
+    !stateIsRoot;
 
   const isRoot =
     isLoading && typeof stateIsRoot === "boolean"
@@ -507,6 +511,8 @@ const SectionHeaderContent = (props) => {
     ? { isCloseable: true, onCloseClick: onCloseIndexMenu }
     : {};
 
+  const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
+
   return (
     <Consumer key="header">
       {(context) => (
@@ -594,6 +600,7 @@ const SectionHeaderContent = (props) => {
                 onNavigationButtonClick={onNavigationButtonClick}
                 tariffBar={<TariffBar />}
                 showNavigationButton={!!showNavigationButton}
+                badgeLabel={badgeLabel}
                 onContextOptionsClick={onContextOptionsClick}
                 onLogoClick={onLogoClick}
               />
@@ -727,6 +734,10 @@ export default inject(
     const isRoom = !!roomType;
 
     const {
+      onClickEditRoom,
+      onClickInviteUsers,
+      onClickArchive,
+      onCopyLink,
       onCreateAndCopySharedLink,
       getFolderModel,
       onCreateRoom,
@@ -833,6 +844,11 @@ export default inject(
       isRoomsFolder,
 
       selectedFolder,
+
+      onClickEditRoom,
+      onClickInviteUsers,
+      onClickArchive,
+      onCopyLink,
 
       isGroupMenuBlocked,
 

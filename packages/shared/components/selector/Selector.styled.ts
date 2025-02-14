@@ -574,6 +574,11 @@ const StyledInfo = styled.div.attrs(injectDefaultTheme)`
   .text {
     color: ${(props) => props.theme.selector.info.color};
   }
+
+  .selector-info-text-wrapper {
+    display: flex;
+    gap: 8px;
+  }
 `;
 
 const StyledInputWrapper = styled.div.attrs(injectDefaultTheme)`

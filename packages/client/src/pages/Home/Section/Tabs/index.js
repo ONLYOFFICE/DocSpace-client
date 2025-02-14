@@ -29,18 +29,27 @@ import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { inject, observer } from "mobx-react";
 import ContactsTabs from "./ContactsTabs";
 import MyDocumentsTabs from "./MyDocumentsTabs";
+import RoomTemplatesTabs from "./RoomTemplatesTabs";
 
-const SectionSubmenuContent = ({ isPersonalRoom, isRecentTab }) => {
+const SectionSubmenuContent = ({
+  isPersonalRoom,
+  isRecentTab,
+  isRoomsFolderRoot,
+  isTemplatesFolder,
+}) => {
   const location = useLocation();
 
   const isContacts = getContactsView(location);
 
   if (isPersonalRoom || isRecentTab) return <MyDocumentsTabs />;
   if (isContacts) return <ContactsTabs />;
+  if (isRoomsFolderRoot || isTemplatesFolder) return <RoomTemplatesTabs />;
   return null;
 };
 
 export default inject(({ treeFoldersStore }) => ({
   isPersonalRoom: treeFoldersStore.isPersonalRoom,
   isRecentTab: treeFoldersStore.isRecentTab,
+  isRoomsFolderRoot: treeFoldersStore.isRoomsFolderRoot,
+  isTemplatesFolder: treeFoldersStore.isTemplatesFolder,
 }))(observer(SectionSubmenuContent));

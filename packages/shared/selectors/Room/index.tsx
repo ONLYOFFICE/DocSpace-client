@@ -73,8 +73,11 @@ const RoomSelector = ({
   onCancel,
 
   roomType,
+  searchArea,
 
   disableThirdParty,
+  emptyScreenHeader,
+  emptyScreenDescription,
 
   withInit,
   initItems,
@@ -164,6 +167,7 @@ const RoomSelector = ({
       filter.pageCount = PAGE_COUNT;
       filter.type = roomType as unknown as string | string[];
       filter.filterValue = searchValue || null;
+      filter.searchArea = searchArea || "";
 
       if (disableThirdParty)
         filter.storageFilter = RoomsStorageFilter.internal as unknown as string;
@@ -198,7 +202,14 @@ const RoomSelector = ({
 
       setIsNextPageLoading(false);
     },
-    [disableThirdParty, excludeItems, roomType, searchValue, setIsDataReady],
+    [
+      disableThirdParty,
+      excludeItems,
+      roomType,
+      searchValue,
+      searchArea,
+      setIsDataReady,
+    ],
   );
 
   const headerSelectorProps: TSelectorHeader = withHeader
@@ -247,8 +258,10 @@ const RoomSelector = ({
       onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}
       emptyScreenImage={EmptyScreenCorporateSvgUrl}
-      emptyScreenHeader={t("Common:EmptyRoomsHeader")}
-      emptyScreenDescription={t("Common:EmptyRoomsDescription")}
+      emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyRoomsHeader")}
+      emptyScreenDescription={
+        emptyScreenDescription ?? t("Common:EmptyRoomsDescription")
+      }
       searchEmptyScreenImage={EmptyScreenCorporateSvgUrl}
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("Common:SearchEmptyRoomsDescription")}

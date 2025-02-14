@@ -206,8 +206,12 @@ class FilesActionStore {
     const { fetchFiles, fetchRooms, filter, roomsFilter, scrollToTop } =
       this.filesStore;
 
-    const { isRoomsFolder, isArchiveFolder, isArchiveFolderRoot } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isArchiveFolderRoot,
+      isTemplatesFolder,
+    } = this.treeFoldersStore;
 
     let newFilter;
 
@@ -218,7 +222,12 @@ class FilesActionStore {
     }
 
     try {
-      if (isRoomsFolder || isArchiveFolder || isArchiveFolderRoot) {
+      if (
+        isRoomsFolder ||
+        isArchiveFolder ||
+        isArchiveFolderRoot ||
+        isTemplatesFolder
+      ) {
         await fetchRooms(
           updatedFolder,
           newFilter || roomsFilter.clone(),
@@ -942,9 +951,11 @@ class FilesActionStore {
         })
         .then(() =>
           toastr.success(
-            items.length > 1
-              ? translations?.successRemoveRooms
-              : translations?.successRemoveRoom,
+            translations?.successRemoveTemplate
+              ? translations.successRemoveTemplate
+              : items.length > 1
+                ? translations?.successRemoveRooms
+                : translations?.successRemoveRoom,
           ),
         )
         .finally(() => {
@@ -1467,7 +1478,7 @@ class FilesActionStore {
     if (this.publicRoomStore.isPublicRoom)
       return this.moveToPublicRoom(item.id);
 
-    const { id, isRoom, title, rootFolderType } = item;
+    const { id, isRoom, isTemplate, title, rootFolderType } = item;
     const categoryType = getCategoryTypeByFolderType(rootFolderType, id);
 
     const state = { title, rootFolderType, isRoot: false, isRoom };
@@ -1477,7 +1488,7 @@ class FilesActionStore {
     const shareKey = await this.getPublicKey(item);
     if (shareKey) filter.key = shareKey;
 
-    if (isRoom) {
+    if (isRoom || isTemplate) {
       const key =
         categoryType === CategoryType.Archive
           ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
@@ -1514,7 +1525,11 @@ class FilesActionStore {
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
       this.treeFoldersStore;
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
-    const { rootFolderType } = this.selectedFolderStore;
+    const {
+      rootFolderType,
+      shared,
+      id: selectedFolderId,
+    } = this.selectedFolderStore;
 
     const setIsLoading = (param) => {
       setIsSectionBodyLoading(param);
@@ -1550,6 +1565,23 @@ class FilesActionStore {
 
     newFilter.search = title;
     newFilter.folder = parentId;
+
+    let publicKey;
+    if (item.toFolderId || item.folderId || item.parentId) {
+      const newFolder = await this.filesStore.getFolderInfo(parentId);
+      publicKey = await this.getPublicKey({
+        ...newFolder,
+        updatePublicKey: true,
+      });
+    } else {
+      publicKey = await this.getPublicKey({
+        ...item,
+        id: selectedFolderId,
+        shared,
+        rootFolderType,
+      });
+    }
+    if (publicKey) newFilter.key = publicKey;
 
     setIsLoading(
       window.DocSpace.location.search !== `?${newFilter.toUrlParams()}` ||
@@ -1961,7 +1993,7 @@ class FilesActionStore {
     });
 
     try {
-      await setCustomRoomQuota(-1, userIDs);
+      await setCustomRoomQuota(userIDs, -1);
       toastr.success(t("Common:StorageQuotaDisabled"));
     } catch (e) {
       toastr.error(e);
@@ -2199,6 +2231,14 @@ class FilesActionStore {
     return this.convertToArray(itemsCollection);
   };
 
+  getTemplatesFolderOptions = (itemsCollection, t) => {
+    const deleteOption = this.getOption("delete", t);
+
+    itemsCollection.set("delete", deleteOption);
+
+    return this.convertToArray(itemsCollection);
+  };
+
   getAnotherFolderOptions = (itemsCollection, t) => {
     const createRoom = this.getOption("create-room", t);
     const download = this.getOption("download", t);
@@ -2337,6 +2377,7 @@ class FilesActionStore {
       isRoomsFolder,
       isArchiveFolder,
       isRecentTab,
+      isTemplatesFolder,
     } = this.treeFoldersStore;
 
     const itemsCollection = new Map();
@@ -2357,6 +2398,9 @@ class FilesActionStore {
       return this.getArchiveRoomsFolderOptions(itemsCollection, t);
 
     if (isRoomsFolder) return this.getRoomsFolderOptions(itemsCollection, t);
+
+    if (isTemplatesFolder)
+      return this.getTemplatesFolderOptions(itemsCollection, t);
 
     return this.getAnotherFolderOptions(itemsCollection, t);
   };
@@ -2716,6 +2760,16 @@ class FilesActionStore {
       filter.searchArea = RoomSearchArea.Archive;
     }
 
+    if (
+      this.selectedFolderStore?.navigationPath &&
+      this.selectedFolderStore?.navigationPath.length > 0 &&
+      this.selectedFolderStore?.navigationPath[
+        this.selectedFolderStore.navigationPath.length - 1
+      ]?.isTemplatesFolder
+    ) {
+      filter.searchArea = RoomSearchArea.Templates;
+    }
+
     window.DocSpace.navigate(
       `${path}?${filter.toUrlParams(this.userStore?.user?.id, true)}`,
       {
@@ -2762,8 +2816,8 @@ class FilesActionStore {
 
     filter.folder = id;
 
-    const selectedFolder = this.selectedFolderStore.getSelectedFolder();
-    const shareKey = await this.getPublicKey(selectedFolder);
+    const currentFolder = await this.filesStore.getFolderInfo(id);
+    const shareKey = await this.getPublicKey(currentFolder);
     if (shareKey) filter.key = shareKey;
 
     const categoryType = getCategoryType(window.DocSpace.location);
@@ -2939,6 +2993,12 @@ class FilesActionStore {
 
     await deleteFilesFromRecent(fileIds);
     await refreshFiles();
+  };
+
+  onCreateRoomFromTemplate = (item) => {
+    const event = new Event(Events.ROOM_CREATE);
+    event.item = item;
+    window.dispatchEvent(event);
   };
 
   copyFromTemplateForm = async (fileInfo, t) => {
@@ -3259,16 +3319,15 @@ class FilesActionStore {
   };
 
   getPublicKey = async (folder) => {
-    const { isOwner, isAdmin } = this.userStore.user;
-
     if (
-      folder?.shared &&
+      folder.shared &&
       folder?.rootFolderType === FolderType.Rooms &&
-      (isOwner || isAdmin)
+      folder?.type !== FolderType.Done &&
+      folder?.type !== FolderType.InProgress
     ) {
       const filterObj = FilesFilter.getFilter(window.location);
 
-      if (filterObj.key) {
+      if (filterObj?.key && !folder.updatePublicKey) {
         return filterObj.key;
       }
 

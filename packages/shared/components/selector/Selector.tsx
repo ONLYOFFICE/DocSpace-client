@@ -147,6 +147,7 @@ const Selector = ({
   onClose,
   withBlur,
   withoutBackground,
+  withInfoBadge,
 
   isSSR,
 }: SelectorProps) => {
@@ -569,6 +570,7 @@ const Selector = ({
     ? {
         withInfo,
         infoText,
+        withInfoBadge,
       }
     : {};
 

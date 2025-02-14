@@ -46,5 +46,7 @@
   "UploadFromPortalTitle": "Upload from {{productName}}",
   "UploadPDFFormOptionDescription": "Select a ready PDF form available in {{productName}} and upload it to the room.",
   "UserEmptyDescription": "Files and folders uploaded by admins will appeared here.",
-  "VirtualDataRoomEmptyTitle": "Welcome to the Virtual Data Room"
+  "VirtualDataRoomEmptyTitle": "Welcome to the Virtual Data Room",
+  "EmptyTemplatesTitle": "No templates here yet",
+  "EmptyTemplatesDescription": "You can create a template from a room in the Room section"
 }

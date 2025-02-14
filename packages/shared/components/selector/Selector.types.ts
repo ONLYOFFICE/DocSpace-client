@@ -319,8 +319,12 @@ export type TSelectorFooterCheckbox = TSelectorCheckbox & {
 };
 
 export type TSelectorInfo =
-  | { withInfo: true; infoText: string }
-  | { withInfo?: undefined; infoText?: undefined };
+  | { withInfo: true; infoText: string; withInfoBadge?: boolean }
+  | {
+      withInfo?: undefined;
+      infoText?: undefined;
+      withInfoBadge?: undefined;
+    };
 
 export type TRenderCustomItem = (
   label: string,
@@ -404,6 +408,7 @@ export type BodyProps = TSelectorInfo & {
   withFooterInput?: boolean;
   withFooterCheckbox?: boolean;
   descriptionText?: string;
+  withInfoBadge?: boolean;
 
   isSSR?: boolean;
 };
@@ -582,6 +587,7 @@ export type TSelectorItem = TSelectorItemType & {
   disabledText?: string;
   lifetimeTooltip?: string | null;
   viewUrl?: string;
+  isTemplate?: boolean;
 };
 
 export type Data = {

@@ -107,6 +107,7 @@ const SimpleFilesRow = (props) => {
       }
       color={item.logo?.color}
       isArchive={item.isArchive}
+      isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
     />
   );
@@ -177,7 +178,9 @@ const SimpleFilesRow = (props) => {
           contentElement={
             isMobileDevice || isRooms ? null : quickButtonsComponent
           }
-          badgesComponent={!isMobileDevice ? badgesComponent : null}
+          badgesComponent={
+            !isMobileDevice || item.isTemplate ? badgesComponent : null
+          }
           onSelect={onContentFileSelect}
           onContextClick={fileContextClick}
           isPrivacy={isPrivacy}
@@ -220,7 +223,9 @@ const SimpleFilesRow = (props) => {
               isMobileDevice || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
-            badgesComponent={isMobileDevice ? badgesComponent : null}
+            badgesComponent={
+              isMobileDevice && !item.isTemplate ? badgesComponent : null
+            }
           />
         </StyledSimpleFilesRow>
       </DragAndDrop>

@@ -122,6 +122,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       cover,
       userType,
       fileExst: ext,
+      isTemplate,
     } = item;
 
     if (isInputItem) {
@@ -228,6 +229,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             showDefault={false}
             badgeIconNode={badgeIconNode ?? undefined}
             className="item-logo"
+            isTemplate={isTemplate}
           />
         ) : color ? (
           <RoomIcon
@@ -236,6 +238,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             showDefault
             badgeIconNode={badgeIconNode ?? undefined}
             className="item-logo"
+            isTemplate={isTemplate}
           />
         ) : icon ? (
           <RoomIcon
@@ -245,6 +248,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             logo={icon}
             showDefault={false}
             badgeIconNode={badgeIconNode ?? undefined}
+            isTemplate={isTemplate}
           />
         ) : null}
         {renderCustomItem ? (

@@ -87,6 +87,7 @@ const Body = ({
 
   withInfo,
   infoText,
+  withInfoBadge,
   setInputItemVisible,
   inputItemVisible,
 
@@ -269,7 +270,11 @@ const Body = ({
       <Search isSearch={itemsCount > 0 || isSearch} />
 
       {withInfo && !isLoading ? (
-        <Info withInfo={withInfo} infoText={infoText} />
+        <Info
+          withInfo={withInfo}
+          infoText={infoText}
+          withInfoBadge={withInfoBadge}
+        />
       ) : null}
 
       {isLoading ? (

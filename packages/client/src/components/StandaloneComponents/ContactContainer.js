@@ -37,10 +37,17 @@ import { StyledContactComponent } from "./StyledComponent";
 const ContactContainer = (props) => {
   const { t } = useTranslation("PaymentsEnterprise");
 
-  const { helpUrl, salesEmail, theme, isCommunity } = props;
+  const {
+    theme,
+    isCommunity,
+    forEnterprisesUrl,
+    demoOrderUrl,
+    salesEmail,
+    helpUrl,
+  } = props;
 
-  const officialWebsiteUrl = "https://www.onlyoffice.com/for-enterprises.aspx";
-  const demonstrationUrl = "https://www.onlyoffice.com/demo-order.aspx";
+  const officialWebsiteUrl = forEnterprisesUrl;
+  const demonstrationUrl = demoOrderUrl;
 
   return (
     <>
@@ -155,7 +162,14 @@ export default inject(
   ({ currentTariffStatusStore, settingsStore, paymentStore }) => {
     const { isCommunity } = currentTariffStatusStore;
     const { helpUrl, salesEmail } = paymentStore;
-    const { theme } = settingsStore;
-    return { helpUrl, salesEmail, theme, isCommunity };
+    const { theme, forEnterprisesUrl, demoOrderUrl } = settingsStore;
+    return {
+      helpUrl,
+      salesEmail,
+      theme,
+      isCommunity,
+      forEnterprisesUrl,
+      demoOrderUrl,
+    };
   },
 )(observer(ContactContainer));

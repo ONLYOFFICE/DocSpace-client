@@ -56,10 +56,10 @@ import {
   Container,
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
-import { Integration } from "../sub-components/Integration";
+import Integration from "../sub-components/Integration";
 
 const Viewer = (props) => {
-  const { t, theme, currentColorScheme } = props;
+  const { t, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -197,31 +197,20 @@ const Viewer = (props) => {
             />
           </ControlsSection>
 
-          <Integration
-            className="integration-examples"
-            t={t}
-            theme={theme}
-            currentColorScheme={currentColorScheme}
-          />
+          <Integration className="integration-examples" />
         </Controls>
       </Container>
 
-      <Integration
-        className="integration-examples integration-examples-bottom"
-        t={t}
-        theme={theme}
-        currentColorScheme={currentColorScheme}
-      />
+      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };
 
 export const Component = inject(({ settingsStore }) => {
-  const { theme, currentColorScheme } = settingsStore;
+  const { theme } = settingsStore;
 
   return {
     theme,
-    currentColorScheme,
   };
 })(
   withTranslation([

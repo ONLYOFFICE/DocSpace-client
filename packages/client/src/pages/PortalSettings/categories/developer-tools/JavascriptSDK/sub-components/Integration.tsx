@@ -27,10 +27,10 @@ import { ReactSVG } from "react-svg";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-
+import { inject, observer } from "mobx-react";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
-
+import { useTranslation } from "react-i18next";
 import ZoomIcon from "PUBLIC_DIR/images/zoom.integration.react.svg?url";
 import WordpressIcon from "PUBLIC_DIR/images/wordpress.integration.react.svg?url";
 import DrupalIcon from "PUBLIC_DIR/images/drupal.integration.react.svg?url";
@@ -41,22 +41,32 @@ import {
   CategoryHeader,
 } from "./StyledPortalIntegration";
 
-const allConnectors = "https://www.onlyoffice.com/all-connectors.aspx";
-const zoom = "https://www.onlyoffice.com/office-for-zoom.aspx";
-const wordPress = "https://www.onlyoffice.com/office-for-wordpress.aspx";
-const drupal = "https://www.onlyoffice.com/office-for-drupal.aspx";
-
 const zoomTitle = "Zoom";
 const wordPressTitle = "WordPress";
 const drupalTitle = "Drupal";
 
-export const Integration = (props: {
-  t: TTranslation;
+const Integration: React.FC<{
   theme: TTheme;
   currentColorScheme: TColorScheme;
   className: string;
+  allConnectorsUrl: string;
+  zoomUrl: string;
+  wordPressUrl: string;
+  drupalUrl: string;
+}> = ({
+  theme,
+  currentColorScheme,
+  className,
+  allConnectorsUrl,
+  zoomUrl,
+  wordPressUrl,
+  drupalUrl,
 }) => {
-  const { t, theme, currentColorScheme, className } = props;
+  const { t } = useTranslation();
+  const allConnectors = allConnectorsUrl;
+  const zoom = zoomUrl;
+  const wordPress = wordPressUrl;
+  const drupal = drupalUrl;
 
   return (
     <IntegrationContainer
@@ -116,3 +126,22 @@ export const Integration = (props: {
     </IntegrationContainer>
   );
 };
+
+export default inject<TStore>(({ settingsStore }) => {
+  const {
+    allConnectorsUrl,
+    zoomUrl,
+    wordPressUrl,
+    drupalUrl,
+    theme,
+    currentColorScheme,
+  } = settingsStore;
+  return {
+    allConnectorsUrl,
+    zoomUrl,
+    wordPressUrl,
+    drupalUrl,
+    theme,
+    currentColorScheme,
+  };
+})(observer(Integration));

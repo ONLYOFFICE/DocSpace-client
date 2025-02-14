@@ -48,23 +48,31 @@ import { SUPPORTED_LANGUAGES } from "../Article.constants";
 const lng: string[] | string = getCookie(LANGUAGE) || "en";
 const language = getLanguage(typeof lng === "object" ? lng[0] : lng);
 
-const getLink = () => {
+const getLink = (siteDomain) => {
   const currentLng = language.split("-")[0];
   if (SUPPORTED_LANGUAGES.includes(currentLng)) {
-    return `https://www.onlyoffice.com/${currentLng}`;
+    return `${siteDomain}/${currentLng}`;
   }
-  return "https://www.onlyoffice.com";
+  return `${siteDomain}`;
 };
 
 const ArticleApps = React.memo(
-  ({ showText, withDevTools, logoText }: ArticleAppsProps) => {
+  ({
+    showText,
+    withDevTools,
+    logoText,
+    siteDomain,
+    downloaddesktop,
+    officeforandroid,
+    officeforios,
+  }: ArticleAppsProps) => {
     const { t } = useTranslation(["Translations", "Common"]);
     const theme = useTheme();
 
-    const baseUrl = getLink();
-    const desktopLink = `${baseUrl}/download-desktop.aspx`;
-    const androidLink = `${baseUrl}/office-for-android.aspx`;
-    const iosLink = `${baseUrl}/office-for-ios.aspx`;
+    const baseUrl = getLink(siteDomain);
+    const desktopLink = `${baseUrl}${downloaddesktop}`;
+    const androidLink = `${baseUrl}${officeforandroid}`;
+    const iosLink = `${baseUrl}${officeforios}`;
 
     if (!showText) return null;
 

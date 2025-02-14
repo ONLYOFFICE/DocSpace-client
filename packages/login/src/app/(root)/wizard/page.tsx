@@ -80,7 +80,7 @@ async function Page() {
             portalTimeZones={portalTimeZones}
             licenseUrl={objectSettings?.licenseUrl}
             culture={objectSettings?.culture}
-            forumLink={objectSettings?.forumLink}
+            forumLinkUrl={objectSettings?.externalResources.forum.domain}
             wizardToken={objectSettings?.wizardToken}
             passwordHash={objectSettings?.passwordHash}
             documentationEmail={objectSettings?.documentationEmail}

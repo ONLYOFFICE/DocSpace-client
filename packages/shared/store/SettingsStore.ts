@@ -167,8 +167,6 @@ class SettingsStore {
 
   urlSupport = "https://helpdesk.onlyoffice.com/";
 
-  forumLink = null;
-
   formGallery: TFormGallery = {
     url: "",
     ext: ".oform",
@@ -1495,6 +1493,10 @@ class SettingsStore {
 
   get officeforios() {
     return this.externalResources?.site?.entries.officeforios;
+  }
+
+  get forumLinkUrl() {
+    return this.externalResources?.forum?.domain;
   }
 }
 

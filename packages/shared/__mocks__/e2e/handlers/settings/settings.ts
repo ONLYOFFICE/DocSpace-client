@@ -38,7 +38,7 @@ export const settingsWizzard = {
     debugInfo: false,
     tenantStatus: 0,
     tenantAlias: "localhost",
-    forumLink: "https://forum.onlyoffice.com",
+    forumLinkUrl: "https://forum.onlyoffice.com",
     legalTerms:
       "https://help.onlyoffice.co/products/files/doceditor.aspx?fileid=5048502&doc=SXhWMEVzSEYxNlVVaXJJeUVtS0kyYk14YWdXTEFUQmRWL250NllHNUFGbz0_IjUwNDg1MDIi0",
     cookieSettingsEnabled: false,
@@ -91,7 +91,7 @@ export const settingsNoAuth = {
     debugInfo: false,
     tenantStatus: 0,
     tenantAlias: "localhost",
-    forumLink: "https://forum.onlyoffice.com",
+    forumLinkUrl: "https://forum.onlyoffice.com",
     legalTerms:
       "https://help.onlyoffice.co/products/files/doceditor.aspx?fileid=5048502&doc=SXhWMEVzSEYxNlVVaXJJeUVtS0kyYk14YWdXTEFUQmRWL250NllHNUFGbz0_IjUwNDg1MDIi0",
     licenseUrl: "https://www.gnu.org/licenses/agpl-3.0.en.html",
@@ -136,7 +136,7 @@ export const settingsNoAuthNoStandalone = {
     debugInfo: false,
     tenantStatus: 0,
     tenantAlias: "localhost",
-    forumLink: "https://forum.onlyoffice.com",
+    forumLinkUrl: "https://forum.onlyoffice.com",
     legalTerms:
       "https://help.onlyoffice.co/products/files/doceditor.aspx?fileid=5048502&doc=SXhWMEVzSEYxNlVVaXJJeUVtS0kyYk14YWdXTEFUQmRWL250NllHNUFGbz0_IjUwNDg1MDIi0",
     licenseUrl: "https://www.gnu.org/licenses/agpl-3.0.en.html",

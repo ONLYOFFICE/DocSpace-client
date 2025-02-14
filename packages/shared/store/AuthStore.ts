@@ -198,26 +198,22 @@ class AuthStore {
       this.userStore?.setIsLoaded(true);
     }
 
-    if (
-      this.isAuthenticated &&
-      !skipRequest &&
-      this.userStore?.isAuthenticated
-    ) {
-      if (!isPortalRestore && !isPortalDeactivated)
-        requests.push(this.settingsStore?.getAdditionalResources());
-
-      if (!this.settingsStore?.passwordSettings) {
-        if (!isPortalRestore && !isPortalDeactivated) {
-          requests.push(this.settingsStore?.getCompanyInfoSettings());
-        }
-      }
-    }
-
     return Promise.all(requests).then(() => {
       const user = this.userStore?.user;
 
       if (user?.id) {
         insertDataLayer(user.id);
+      }
+
+      if (this.isAuthenticated && !skipRequest && user) {
+        if (!isPortalRestore && !isPortalDeactivated)
+          requests.push(this.settingsStore?.getAdditionalResources());
+
+        if (!this.settingsStore?.passwordSettings) {
+          if (!isPortalRestore && !isPortalDeactivated) {
+            requests.push(this.settingsStore?.getCompanyInfoSettings());
+          }
+        }
       }
 
       if (

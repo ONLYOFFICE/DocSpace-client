@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,64 +25,52 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { mobile } from "../../../utils";
 
-const StyledLoader = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
+export const StyledBrandName = styled.div`
+  .header-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-  .description_loader {
-    max-width: 700px;
-    margin-bottom: 5px;
+    @media ${mobile} {
+      display: none;
+    }
   }
 
-  .header_loader {
+  .wl-subtitle {
+    margin-top: 16px;
     margin-bottom: 16px;
+    line-height: 20px;
+    color: ${(props) => props.theme.client.settings.common.descriptionColor};
+
+    @media ${mobile} {
+      margin-top: 0;
+    }
   }
 
-  .text-input_loader {
-    margin-bottom: 16px;
+  .wl-helper {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+
+    .wl-helper-label > div {
+      display: inline-flex;
+      margin: 0 4px;
+    }
   }
 
-  .subtitle_loader {
+  .input {
+    max-width: 350px;
+  }
+
+  .paid-badge {
+    cursor: auto;
+    background-color: ${(props) =>
+      props.theme.client.settings.common.whiteLabel.paidBadgeBackground};
+  }
+
+  .brand-name-buttons {
     margin-top: 20px;
-    margin-bottom: 16px;
-  }
-
-  .buttons_loader {
-    margin-button: 24px;
   }
 `;
-
-const LoaderWhiteLabel = () => {
-  return (
-    <StyledLoader>
-      <RectangleSkeleton height="22px" width="95px" className="header_loader" />
-      <RectangleSkeleton height="16px" className="description_loader" />
-      <RectangleSkeleton
-        height="16px"
-        width="200px"
-        className="description_loader"
-      />
-
-      <RectangleSkeleton
-        height="20px"
-        width="151px"
-        className="subtitle_loader"
-      />
-      <RectangleSkeleton
-        height="32px"
-        width="350px"
-        className="text-input_loader"
-      />
-      <RectangleSkeleton
-        height="32px"
-        width="115px"
-        className="buttons_loader"
-      />
-    </StyledLoader>
-  );
-};
-
-export default LoaderWhiteLabel;

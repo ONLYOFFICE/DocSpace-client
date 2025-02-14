@@ -752,7 +752,7 @@ class UploadDataStore {
     this.startUploadFiles(t, createNewIfExist);
   };
 
-  conflictDialogUploadHandler = (uploadData, t, createNewIfExist) => {
+  handleUploadAndOptionalConversion = (uploadData, t, createNewIfExist) => {
     const newUploadData = { ...uploadData };
     newUploadData.files = newUploadData.filesWithoutConversion;
     const onlyConversion =
@@ -783,6 +783,10 @@ class UploadDataStore {
     }
   };
 
+  conflictDialogUploadHandler = (uploadData, t, createNewIfExist) => {
+    this.handleUploadAndOptionalConversion(uploadData, t, createNewIfExist);
+  };
+
   handleUploadConflicts = async (t, toFolderId, uploadData) => {
     const filesArray = uploadData.files.map((fileInfo) => fileInfo.file.name);
     let conflicts = await checkIsFileExist(toFolderId, filesArray);
@@ -800,34 +804,7 @@ class UploadDataStore {
         folderTitle: folderInfo.title,
       });
     } else {
-      const newUploadData = { ...uploadData };
-      newUploadData.files = newUploadData.filesWithoutConversion;
-      const onlyConversion =
-        !!this.tempConversionFiles.length &&
-        newUploadData.newFilesWithoutConversion.length === 0;
-
-      if (!onlyConversion) {
-        this.handleFilesUpload(newUploadData, t, true);
-      } else {
-        newUploadData.uploaded = true;
-        this.uploaded = true;
-        this.asyncUploadObj = {};
-
-        this.setUploadData(newUploadData);
-      }
-
-      if (this.tempConversionFiles.length) {
-        if (this.filesSettingsStore.hideConfirmConvertSave) {
-          this.convertUploadedFiles(t);
-        } else {
-          this.dialogsStore.setConvertDialogVisible(true);
-          this.dialogsStore.setConvertDialogData({
-            createNewIfExist: true,
-            isUploadAction: true,
-            files: uploadData.conversionFiles,
-          });
-        }
-      }
+      this.handleUploadAndOptionalConversion(uploadData, t, true);
     }
   };
 

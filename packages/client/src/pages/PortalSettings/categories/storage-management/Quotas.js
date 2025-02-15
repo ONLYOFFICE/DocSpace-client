@@ -39,9 +39,6 @@ import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
 import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
 
-const helpLink =
-  "https://helpcenter.onlyoffice.com/administration/docspace-settings.aspx#StorageManagement_block";
-
 const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
   if (isMobile())
     return <MobileQuotasComponent isDisabled={!isStatisticsAvailable} />;
@@ -57,7 +54,7 @@ const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
   const theme = useTheme();
 
-  const { isStatisticsAvailable } = props;
+  const { isStatisticsAvailable, storageManagementUrl } = props;
 
   return (
     <StyledBaseQuotaComponent>
@@ -87,7 +84,7 @@ const QuotasComponent = (props) => {
             tag="a"
             isHovered={false}
             target="_blank"
-            href={helpLink}
+            href={storageManagementUrl}
           >
             Help Center
           </ColorTheme>
@@ -99,10 +96,12 @@ const QuotasComponent = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export default inject(({ currentQuotaStore, settingsStore }) => {
   const { isStatisticsAvailable } = currentQuotaStore;
+  const { storageManagementUrl } = settingsStore;
 
   return {
     isStatisticsAvailable,
+    storageManagementUrl,
   };
 })(observer(QuotasComponent));

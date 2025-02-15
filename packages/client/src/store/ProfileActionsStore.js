@@ -176,9 +176,9 @@ class ProfileActionsStore {
   };
 
   onHelpCenterClick = () => {
-    const helpUrl = this.settingsStore.helpLink;
+    const helpLink = this.settingsStore.helpLink;
 
-    window.open(helpUrl, "_blank");
+    window.open(helpLink, "_blank");
   };
 
   onLiveChatClick = (t) => {
@@ -192,8 +192,7 @@ class ProfileActionsStore {
   };
 
   onSupportClick = () => {
-    const supportUrl =
-      this.settingsStore.additionalResourcesData?.feedbackAndSupportUrl;
+    const supportUrl = this.settingsStore.feedbackAndSupportUrl;
 
     window.open(supportUrl, "_blank");
   };

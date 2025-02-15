@@ -33,15 +33,19 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import StyledComponent from "../StyledComponent";
 
-const OfficialDocumentation = ({ dataBackupUrl }) => {
+const OfficialDocumentation = ({
+  helpCenterDomain,
+  helpCenterEntries,
+  dataBackupUrl,
+}) => {
   const { t } = useTranslation("PaymentsEnterprise");
 
   const dockerLink =
-    "https://helpcenter.onlyoffice.com/installation/docspace-enterprise-install-script.aspx";
+    helpCenterDomain + helpCenterEntries.docspaceenterpriseinstallscript;
   const linuxDocker =
-    "https://helpcenter.onlyoffice.com/installation/docspace-enterprise-install-script.aspx";
+    helpCenterDomain + helpCenterEntries.docspaceenterpriseinstallscript;
   const windowsDocker =
-    "https://helpcenter.onlyoffice.com/installation/docspace-enterprise-install-windows.aspx";
+    helpCenterDomain + helpCenterEntries.docspaceenterpriseinstallwindows;
 
   return (
     <StyledComponent>
@@ -115,7 +119,11 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { dataBackupUrl } = settingsStore;
+  const { helpCenterDomain, helpCenterEntries, dataBackupUrl } = settingsStore;
 
-  return { dataBackupUrl };
+  return {
+    helpCenterDomain,
+    helpCenterEntries,
+    dataBackupUrl,
+  };
 })(observer(OfficialDocumentation));

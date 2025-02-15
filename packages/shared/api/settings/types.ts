@@ -100,15 +100,11 @@ export type TSettings = {
   socketUrl: string;
   tenantStatus: TenantStatus;
   tenantAlias: string;
-  helpLink: string;
-  forumLink: string;
-  apiDocsLink: string;
   domainValidator: TDomainValidator;
   zendeskKey: string;
   bookTrainingEmail: string;
   documentationEmail: string;
   legalTerms: string;
-  licenseUrl: string;
   cookieSettingsEnabled: boolean;
   userNameRegex: string;
   plugins: {

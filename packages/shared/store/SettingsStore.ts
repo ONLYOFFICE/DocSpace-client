@@ -165,8 +165,6 @@ class SettingsStore {
 
   enabledJoin = false;
 
-  urlSupport = "https://helpdesk.onlyoffice.com/";
-
   formGallery: TFormGallery = {
     url: "",
     ext: ".oform",
@@ -385,10 +383,6 @@ class SettingsStore {
     return this.externalResources?.socialNetworks?.entries;
   }
 
-  get supportDomain() {
-    return this.externalResources?.support?.domain;
-  }
-
   get videoGuidesDomain() {
     return this.externalResources?.videoguides?.domain;
   }
@@ -410,7 +404,7 @@ class SettingsStore {
   }
 
   get feedbackAndSupportUrl() {
-    return this.supportDomain;
+    return this.externalResources?.support?.domain;
   }
 
   get salesEmail() {

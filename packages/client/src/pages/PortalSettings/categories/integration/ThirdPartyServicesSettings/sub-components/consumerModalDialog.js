@@ -61,7 +61,7 @@ class ConsumerModalDialog extends React.Component {
     required.current = [];
     this.requiredRef = required.current;
 
-    const { selectedConsumer, t, theme, urlSupport } = this.props;
+    const { selectedConsumer, t, theme, feedbackAndSupportUrl } = this.props;
 
     this.consumerInstruction =
       selectedConsumer.instruction &&
@@ -92,7 +92,7 @@ class ConsumerModalDialog extends React.Component {
             color={theme.client.settings.integration.linkColor}
             isHovered={false}
             target="_blank"
-            href={urlSupport}
+            href={feedbackAndSupportUrl}
           >
             Support Team
           </Link>
@@ -346,13 +346,13 @@ ConsumerModalDialog.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   onChangeLoading: PropTypes.func.isRequired,
   updateConsumerProps: PropTypes.func.isRequired,
-  urlSupport: PropTypes.string,
+  feedbackAndSupportUrl: PropTypes.string,
 };
 
 export default inject(({ setup, settingsStore }) => {
   const {
     theme,
-    urlSupport,
+    feedbackAndSupportUrl,
     portalSettingsUrl,
     docuSignUrl,
     dropboxUrl,
@@ -382,7 +382,7 @@ export default inject(({ setup, settingsStore }) => {
   return {
     theme,
     selectedConsumer,
-    urlSupport,
+    feedbackAndSupportUrl,
     portalSettingsUrl,
     docuSignUrl,
     dropboxUrl,

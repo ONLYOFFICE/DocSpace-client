@@ -24,9 +24,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import {
+  getAllPortals,
+  getBackupProgress,
+  getBackupSchedule,
+  getBackupStorage,
+  getFoldersTree,
+  getPortalTariff,
+  getQuota,
+  getSettingsFiles,
+  getSettingsThirdParty,
+  getStorageRegions,
+} from "@/lib/actions";
+
+import Restore from "./page.client";
+
 async function Page() {
-  return <h1>Restore</h1>;
+  const [
+    account,
+    backupSchedule,
+    backupStorage,
+    newStorageRegions,
+    backupProgress,
+
+    portals,
+    settingsFiles,
+    quota,
+  ] = await Promise.all([
+    getSettingsThirdParty(),
+    getBackupSchedule(),
+    getBackupStorage(),
+    getStorageRegions(),
+    getBackupProgress(),
+    getAllPortals(),
+    getSettingsFiles(),
+    getQuota(),
+  ]);
+
+  return (
+    <Restore
+      account={account}
+      filesSettings={settingsFiles}
+      portals={portals?.tenants || []}
+      features={quota?.features || []}
+      backupProgress={backupProgress}
+      backupScheduleResponse={backupSchedule}
+      backupStorageResponse={backupStorage ?? []}
+      newStorageRegions={newStorageRegions ?? []}
+    />
+  );
 }
 
 export default Page;
-

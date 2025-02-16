@@ -454,4 +454,6 @@ export type SettingsThirdPartyType = {
 export type TUploadBackup = {
   Message?: string;
   EndUpload: boolean;
+  Success: boolean;
+  ChunkSize: number;
 };

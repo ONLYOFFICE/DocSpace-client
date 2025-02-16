@@ -29,7 +29,6 @@ import type {
   ConnectedThirdPartyAccountType,
   Nullable,
   Option,
-  ProviderType,
   SelectedStorageType,
   StorageRegionsType,
   ThirdPartyAccountType,
@@ -39,7 +38,10 @@ import type { ButtonSize } from "@docspace/shared/components/button";
 import type { TenantStatus } from "@docspace/shared/enums";
 import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import type { TUploadBackup } from "@docspace/shared/api/files/types";
+import type {
+  TThirdParties,
+  TUploadBackup,
+} from "@docspace/shared/api/files/types";
 
 export type StyledBackupListProps = {
   isChecked?: boolean;
@@ -67,7 +69,7 @@ export interface RestoreBackupProps {
   // backup
   errorInformation: string;
   isBackupProgressVisible: boolean;
-  restoreResource: Nullable<string>;
+  restoreResource: Nullable<File | number | string>;
   formSettings: Record<string, string>;
   errorsFieldsBeforeSafe: Record<string, boolean>;
   thirdPartyStorage: SelectedStorageType[];
@@ -116,13 +118,13 @@ export interface RestoreBackupProps {
   setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
 
   // filesSettingsStore.thirdPartyStore;
-  providers: ProviderType[];
+  providers: TThirdParties;
   deleteThirdParty: (id: string) => Promise<void>;
   openConnectWindow: (
     serviceName: string,
     modal: Window | null,
   ) => Promise<Window | null>;
-  setThirdPartyProviders: (providers: ProviderType[]) => void;
+  setThirdPartyProviders: (providers: TThirdParties) => void;
 
   // dialogsStore
   connectDialogVisible: boolean;

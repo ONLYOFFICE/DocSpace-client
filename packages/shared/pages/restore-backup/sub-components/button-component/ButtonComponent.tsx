@@ -73,13 +73,13 @@ const ButtonContainer = (props: ButtonContainerProps) => {
     setIsLoading(true);
 
     let storageParams = [];
-    const tempObj: Record<string, string | null> = {};
+    const tempObj: Record<string, File | number | string | null> = {};
 
     const backupId = "";
     const storageType = getStorageType().toString();
 
     if (isCheckedThirdPartyStorage) {
-      storageParams = getStorageParams(true, null, restoreResource);
+      storageParams = getStorageParams(true, null, restoreResource as string);
     } else {
       tempObj.key = "filePath";
       tempObj.value = isCheckedLocalFile ? "" : restoreResource;

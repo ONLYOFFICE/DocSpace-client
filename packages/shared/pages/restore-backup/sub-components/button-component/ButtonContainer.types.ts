@@ -50,7 +50,7 @@ export interface ButtonContainerProps {
     selectedFolderId: Nullable<string | number>,
     selectedStorageId?: Nullable<string>,
   ) => Option[];
-  restoreResource: Nullable<string>;
+  restoreResource: Nullable<File | number | string>;
   uploadLocalFile: () => Promise<
     false | AxiosResponse<TUploadBackup> | undefined | null
   >;

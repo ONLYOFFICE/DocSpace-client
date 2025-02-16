@@ -676,7 +676,7 @@ export function uploadFile(url: string, data: unknown) {
 }
 
 // TODO: Need update res type and remove unknown
-export function uploadBackup(url: string, data: unknown) {
+export function uploadBackup(url: string, data?: unknown) {
   return axios.post<unknown, AxiosResponse<TUploadBackup>>(url, data);
 }
 

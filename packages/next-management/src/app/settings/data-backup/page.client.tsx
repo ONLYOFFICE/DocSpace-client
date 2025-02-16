@@ -155,7 +155,7 @@ const DataBackup = ({
 
   const dataBackupUrl = `${settings?.helpLink ?? ""}/administration/docspace-settings.aspx#CreatingBackup_block`;
 
-  const pageIsDisabled = portals.length === 1 && false;
+  const pageIsDisabled = portals.length === 1;
 
   const isNotPaidPeriod = portalTariff?.state === TariffState.NotPaid;
 

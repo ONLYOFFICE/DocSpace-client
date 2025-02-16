@@ -6,7 +6,7 @@ on:
       - 'feature/sdk-ssr'
 env:
   BUILD_ALL_SERVICES: "false"
-  BUILD_SERVICES_LIST: "onlyoffice-router onlyoffice-sdk"
+  BUILD_SERVICES_LIST: " onlyoffice-router onlyoffice-sdk "
 
 jobs:
   deploy:

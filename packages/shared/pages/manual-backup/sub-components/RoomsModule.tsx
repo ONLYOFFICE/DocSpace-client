@@ -75,7 +75,7 @@ const RoomsModule = ({
   currentDeviceType,
   settingsFileSelector,
 }: RoomsModuleProps) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const folderRef = useRef("");
   const isMountRef = useRef(false);

@@ -112,7 +112,7 @@ const ThirdPartyStorageModule = ({
   setRequiredFormSettings,
   setIsThirdStorageChanged,
 }: ThirdPartyStorageModuleProps) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const { comboBoxOptions, storagesInfo, ...parameters } =
     useMemo((): NonNullable<ReturnType<typeof getOptions>> => {

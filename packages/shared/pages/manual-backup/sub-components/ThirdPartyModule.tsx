@@ -131,7 +131,7 @@ const ThirdPartyModule = ({
     return moduleType === ThirdPartyResource ? folderRef.current : "";
   });
 
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   useEffect(() => {
     isMountRef.current = true;

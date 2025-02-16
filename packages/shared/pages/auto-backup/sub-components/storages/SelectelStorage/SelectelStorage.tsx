@@ -66,7 +66,7 @@ const SelectelStorage = ({
   setWeekday,
   weekdaysLabelArray,
 }: SelectelStorageProps) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   useEffect(() => {
     setCompletedFormFields(formNames(), "selectel");

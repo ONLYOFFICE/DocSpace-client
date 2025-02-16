@@ -56,7 +56,7 @@ const ScheduleComponent = ({
   maxNumberCopiesArray,
   selectedPeriodNumber,
 }: ScheduleComponentProps) => {
-  const { t } = useTranslation("Settings");
+  const { t } = useTranslation(["Common"]);
 
   const { weeklySchedule, monthlySchedule } = useMemo(() => {
     const selectedPeriodNumberConverted = +selectedPeriodNumber;

@@ -185,7 +185,7 @@ const AutomaticBackup = ({
   const isCheckedThirdPartyStorage =
     selectedStorageType === `${BackupStorageType.StorageModuleType}`;
 
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Common"]);
   const theme = useTheme();
 
   const [isLoadingData, setIsLoadingData] = useStateCallback(false);

@@ -43,7 +43,7 @@ const SelectelStorage = ({
   setRequiredFormSettings,
   selectedStorage,
 }: SelectelStorageProps) => {
-  const { t } = useTranslation("Settings");
+  const { t } = useTranslation(["Common"]);
 
   useEffect(() => {
     setCompletedFormFields({

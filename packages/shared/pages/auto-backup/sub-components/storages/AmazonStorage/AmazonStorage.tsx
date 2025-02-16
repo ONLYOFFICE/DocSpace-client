@@ -69,7 +69,7 @@ const AmazonStorage = ({
   setTime,
   setWeekday,
 }: AmazonStorageProps) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   useEffect(() => {
     setCompletedFormFields(formNames(storageRegions[0].systemName), "s3");

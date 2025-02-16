@@ -71,7 +71,7 @@ const BackupListModalDialog = ({
 
   downloadingProgress,
 }: BackupListModalDialogProps) => {
-  const { t } = useTranslation(["Settings", "Common", "Translations"]);
+  const { t } = useTranslation(["Common"]);
 
   const [state, setState] = React.useState<TBackupListState>(() => initState);
 

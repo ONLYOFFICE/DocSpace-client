@@ -116,7 +116,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     setErrorInformation,
   } = props;
 
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const [radioButtonState, setRadioButtonState] = useState(LOCAL_FILE);
   const [checkboxState, setCheckboxState] = useState({

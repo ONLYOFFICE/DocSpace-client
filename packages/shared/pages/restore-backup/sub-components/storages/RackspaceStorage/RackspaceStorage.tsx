@@ -43,7 +43,7 @@ const RackspaceStorage = ({
   selectedStorage,
   isLoadingData = false,
 }: RackspaceStorageProps) => {
-  const { t } = useTranslation("Settings");
+  const { t } = useTranslation(["Common"]);
 
   useEffect(() => {
     setCompletedFormFields({

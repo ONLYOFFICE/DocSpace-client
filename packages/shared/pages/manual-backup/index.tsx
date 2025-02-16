@@ -121,7 +121,7 @@ const ManualBackup = ({
   errorInformation,
   isManagement = false,
 }: ManualBackupProps) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const selectedStorageType = useMemo(
     () => getFromLocalStorage<string>("LocalCopyStorageType"),

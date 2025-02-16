@@ -48,7 +48,7 @@ const AmazonStorage = ({
   setIsThirdStorageChanged,
   setRequiredFormSettings,
 }: AmazonStorageProps) => {
-  const { t } = useTranslation("Settings");
+  const { t } = useTranslation("Common");
 
   useEffect(() => {
     setCompletedFormFields({

@@ -66,7 +66,7 @@ const GoogleCloudStorage = ({
   setWeekday,
   weekdaysLabelArray,
 }: GoogleCloudStorageProps) => {
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   useEffect(() => {
     setCompletedFormFields(formNames(), "googlecloud");

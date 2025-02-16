@@ -66,7 +66,7 @@ const RoomsModule = ({
   setNewPath,
   settingsFileSelector,
 }: RoomsModuleProps) => {
-  const { t } = useTranslation("Settings");
+  const { t } = useTranslation(["Common"]);
 
   const onSelectFile = (file: FileInfoType) => {
     setRestoreResource(file.id);

@@ -45,7 +45,7 @@ const GoogleCloudStorage = ({
   setRequiredFormSettings,
   setIsThirdStorageChanged,
 }: GoogleCloudStorageProps) => {
-  const { t } = useTranslation("Settings");
+  const { t } = useTranslation(["Common"]);
 
   useEffect(() => {
     setCompletedFormFields({

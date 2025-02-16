@@ -176,9 +176,9 @@ class ProfileActionsStore {
   };
 
   onHelpCenterClick = () => {
-    const helpLink = this.settingsStore.helpLink;
+    const helpCenterDomain = this.settingsStore.helpCenterDomain;
 
-    window.open(helpLink, "_blank");
+    window.open(helpCenterDomain, "_blank");
   };
 
   onLiveChatClick = (t) => {

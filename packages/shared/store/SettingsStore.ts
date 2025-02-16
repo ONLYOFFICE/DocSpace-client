@@ -391,10 +391,6 @@ class SettingsStore {
     return this.externalResources?.videoguides?.entries;
   }
 
-  get helpLink() {
-    return this.helpCenterDomain;
-  }
-
   get videoGuideUrl() {
     return this.videoGuidesDomain;
   }
@@ -1491,6 +1487,12 @@ class SettingsStore {
 
   get forumLinkUrl() {
     return this.externalResources?.forum?.domain;
+  }
+
+  get becometranslatorUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.becometranslator
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.becometranslator}`
+      : null;
   }
 }
 

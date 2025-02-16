@@ -99,6 +99,17 @@ class ConsumerModalDialog extends React.Component {
         </Trans>
       </StyledBox>
     );
+
+    this.description = !feedbackAndSupportUrl ? (
+      <Text as="div">
+        <StyledBox>{this.helpCenterDescription}</StyledBox>
+      </Text>
+    ) : (
+      <>
+        <Text as="div">{this.supportTeamDescription}</Text>
+        <Text as="div">{this.helpCenterDescription}</Text>
+      </>
+    );
   }
 
   componentDidMount() {
@@ -287,9 +298,8 @@ class ConsumerModalDialog extends React.Component {
       state,
       updateConsumerValues,
       consumerInstruction,
-      helpCenterDescription,
-      supportTeamDescription,
       requiredRef,
+      description,
     } = this;
 
     const isDisabled = requiredRef.some((name) => state[name].trim() === "");
@@ -309,8 +319,7 @@ class ConsumerModalDialog extends React.Component {
               this.inputsRender(prop, i),
             )}
           </>
-          <Text as="div">{supportTeamDescription}</Text>
-          <Text as="div">{helpCenterDescription}</Text>
+          {description}
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button

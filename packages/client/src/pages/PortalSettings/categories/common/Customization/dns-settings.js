@@ -325,7 +325,6 @@ const DNSSettingsComponent = (props) => {
 export const DNSSettings = inject(
   ({ settingsStore, common, currentQuotaStore }) => {
     const {
-      helpLink,
       currentColorScheme,
       standalone,
       dnsSettingsUrl,
@@ -354,7 +353,6 @@ export const DNSSettings = inject(
       setDNSName,
       isLoaded,
       setIsLoadedDNSSettings,
-      helpLink,
       initSettings,
       setIsLoaded,
       isSettingPaid: isCustomizationAvailable,

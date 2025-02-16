@@ -75,7 +75,7 @@ const MainProfile = (props) => {
     theme,
     profile,
     culture,
-    helpLink,
+    becometranslatorUrl,
     cultureNames,
 
     setChangeEmailVisible,
@@ -201,7 +201,7 @@ const MainProfile = (props) => {
           isHovered
           isBold
           fontSize="13px"
-          href={`${helpLink}/guides/become-translator.aspx`}
+          href={becometranslatorUrl}
           target="_blank"
         >
           {t("Common:LearnMore")}
@@ -639,8 +639,13 @@ const MainProfile = (props) => {
 export default inject(
   ({ settingsStore, peopleStore, userStore, avatarEditorDialogStore }) => {
     const { withActivationBar, sendActivationLink } = userStore;
-    const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
-      settingsStore;
+    const {
+      theme,
+      becometranslatorUrl,
+      culture,
+      currentColorScheme,
+      documentationEmail,
+    } = settingsStore;
 
     const {
       avatarEditorDialogVisible,
@@ -665,7 +670,7 @@ export default inject(
       theme,
       profile,
       culture,
-      helpLink,
+      becometranslatorUrl,
 
       setChangeEmailVisible,
       setChangePasswordVisible,

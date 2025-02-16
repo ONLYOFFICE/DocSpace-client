@@ -658,5 +658,11 @@
   "DocumentManagement": "Asiakirjojen hallinta",
   "OnlineEditors": "Verkkoeditorit",
   "Site": "Sivusto",
-  "SoftwareLicense": "Ohjelmiston käyttöoikeus"
+  "SoftwareLicense": "Ohjelmiston käyttöoikeus",
+  "RestoreBackupDescription": "Käytä tätä, jos haluat palauttaa sivuston sisällön aiemmin tehdyltä varmuuskopiolta.",
+  "SendNotificationAboutRestoring": "Lähetä ilmoitus sivuston käyttäjille",
+  "BackupList": "Varmuuskopiolista",
+  "RestoreBackupWarningText": "{{productName}}:n ei ole pääsyä palautusprosessin aikana. Palautuksen jälkeen kaikki muutokset, jotka on tehty valitun palautuspisteen jälkeen häviävät.",
+  "UserAgreement": "Vahvistan ja haluan jatkaa",
+  "LocalFile": "Paikallinen tiedosto"
 }

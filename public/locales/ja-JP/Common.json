@@ -659,5 +659,11 @@
   "DocumentManagement": "ドキュメント管理",
   "OnlineEditors": "オンライン編集者",
   "Site": "サイト",
-  "SoftwareLicense": "ソフトウェアライセンス"
+  "SoftwareLicense": "ソフトウェアライセンス",
+  "RestoreBackupDescription": "バックアップ・ファイルからスペースを復するためにこの操作を使用してください。",
+  "SendNotificationAboutRestoring": "ユーザーへスペース復元のお知らせを送信",
+  "BackupList": "バックアップリスト",
+  "RestoreBackupWarningText": "{{productName}}はリストアプロセス中に使用できなくなります。復元が完了すると、選択した復元ポイントの日付以降に行われたすべての変更が失われます。",
+  "UserAgreement": "確認して、進む",
+  "LocalFile": "ローカルファイル"
 }

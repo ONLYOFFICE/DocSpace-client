@@ -659,5 +659,11 @@
   "DocumentManagement": "Gestione documentale",
   "OnlineEditors": "Editor online",
   "Site": "Sito",
-  "SoftwareLicense": "Licenza di software"
+  "SoftwareLicense": "Licenza di software",
+  "RestoreBackupDescription": "Utilizza questa opzione per ripristinare il tuo spazio dal file di backup precedentemente salvato.",
+  "SendNotificationAboutRestoring": "Invia agli utenti una notifica relativa al ripristino dello spazio",
+  "BackupList": "Elenco di backup",
+  "RestoreBackupWarningText": "{{productName}} non sarà più disponibile durante il processo di ripristino. Una volta completato il ripristino, tutte le modifiche apportate dopo la data del punto di ripristino selezionato andranno perse.",
+  "UserAgreement": "Confermo e voglio procedere",
+  "LocalFile": "File locale"
 }

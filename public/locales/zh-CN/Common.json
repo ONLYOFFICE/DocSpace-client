@@ -660,5 +660,11 @@
   "DocumentManagement": "文档管理",
   "OnlineEditors": "在线编辑器",
   "Site": "站点",
-  "SoftwareLicense": "软件许可"
+  "SoftwareLicense": "软件许可",
+  "RestoreBackupDescription": "设置此选项，从之前保存的备份文件中恢复门户数据。",
+  "SendNotificationAboutRestoring": "向用户发送关于协作空间恢复的通知",
+  "BackupList": "备份列表",
+  "RestoreBackupWarningText": "{{productName}}在恢复过程中将不可用。恢复完成后，在点击“恢复”按钮之后所做的一切修改都作废消失。",
+  "UserAgreement": "我确认并继续",
+  "LocalFile": "本地文件"
 }

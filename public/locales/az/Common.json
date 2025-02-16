@@ -658,5 +658,11 @@
   "DocumentManagement": "Sənədlərin idarə edilməsi",
   "OnlineEditors": "Onlayn redaktorlar",
   "Site": "Sayt",
-  "SoftwareLicense": "Proqram təminatı lisenziyası"
+  "SoftwareLicense": "Proqram təminatı lisenziyası",
+  "RestoreBackupDescription": "Sahənizi əvvəllər saxlanmış ehtiyat faylından bərpa etmək üçün bu seçimdən istifadə edin.",
+  "SendNotificationAboutRestoring": "Sahənin bərpası ilə bağlı istifadəçilərə bildiriş göndərin",
+  "BackupList": "Ehtiyyat siyahısı",
+  "RestoreBackupWarningText": "{{productName}} bərpa prosesi zamanı yararsız olacaq. Bərpa tamamlandıqdan sonra seçilmiş bərpa nöqtəsinin tarixindən sonra edilən hər hansı dəyişikliklər itəcək.",
+  "UserAgreement": "Təsdiqləyirəm və davam etmək istəyirəm",
+  "LocalFile": "Yerli fayl"
 }

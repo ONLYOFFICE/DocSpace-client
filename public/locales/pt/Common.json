@@ -658,5 +658,11 @@
   "DocumentManagement": "Gestão de documentos",
   "OnlineEditors": "Editores online",
   "Site": "Website",
-  "SoftwareLicense": "Licença de software"
+  "SoftwareLicense": "Licença de software",
+  "RestoreBackupDescription": "Utilize esta opção para restaurar o seu espaço através de uma cópia de segurança guardada anteriormente.",
+  "SendNotificationAboutRestoring": "Enviar uma notificação sobre a restauração do espaço aos utilizadores",
+  "BackupList": "Lista de Cópias de Segurança",
+  "RestoreBackupWarningText": "O {{productName}} ficará indisponível durante o processo de restauração. Após a conclusão da restauração, todas as alterações feitas após a data do ponto de restauração selecionado serão perdidas.",
+  "UserAgreement": "Eu confirmo e quero proceder",
+  "LocalFile": "Ficheiro local"
 }

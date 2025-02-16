@@ -204,7 +204,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
       fontWeight={400}
       className="backup_radio-button"
       options={[
-        { id: "local-file", value: LOCAL_FILE, label: t("LocalFile") },
+        { id: "local-file", value: LOCAL_FILE, label: t("Common:LocalFile") },
         {
           id: "backup-room",
           value: BACKUP_ROOM,
@@ -307,7 +307,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         className="restore-backup_warning-description settings_unavailable"
         noSelect
       >
-        {t("RestoreBackupWarningText", {
+        {t("Common:RestoreBackupWarningText", {
           productName: t("Common:ProductName"),
         })}
       </Text>
@@ -336,7 +336,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
 
       <div className="restore-description">
         <Text className="restore-description settings_unavailable">
-          {t("RestoreBackupDescription")}
+          {t("Common:RestoreBackupDescription")}
         </Text>
       </div>
       {radioButtonContent}
@@ -347,7 +347,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         {...onClickVersionListProp}
         noSelect
       >
-        {t("BackupList")}
+        {t("Common:BackupList")}
       </Text>
 
       {isVisibleBackupListDialog ? (
@@ -367,7 +367,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         className="restore-backup-checkbox_notification"
         onChange={onChangeCheckbox}
         isChecked={checkboxState.notification}
-        label={t("SendNotificationAboutRestoring")}
+        label={t("Common:SendNotificationAboutRestoring")}
         isDisabled={!isEnableRestore}
       />
       {warningContent}
@@ -377,7 +377,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         className="restore-backup-checkbox"
         onChange={onChangeCheckbox}
         isChecked={checkboxState.confirmation}
-        label={t("UserAgreement")}
+        label={t("Common:UserAgreement")}
         isDisabled={!isEnableRestore}
       />
       <ButtonContainer

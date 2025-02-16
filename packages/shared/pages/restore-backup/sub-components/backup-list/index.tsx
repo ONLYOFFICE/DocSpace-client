@@ -188,7 +188,7 @@ const BackupListModalDialog = ({
 
   const helpContent = () => (
     <Text className="restore-backup_warning-description">
-      {t("RestoreBackupWarningText", {
+      {t("Common:RestoreBackupWarningText", {
         productName: t("Common:ProductName"),
       })}{" "}
       {!standalone ? (
@@ -265,7 +265,7 @@ const BackupListModalDialog = ({
               isChecked={isChecked}
             />
             <Text as="span" className="backup-list_agreement-text">
-              {t("UserAgreement")}
+              {t("Common:UserAgreement")}
               <HelpButton
                 className="backup-list_tooltip"
                 offsetLeft={100}

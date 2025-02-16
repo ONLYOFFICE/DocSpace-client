@@ -658,5 +658,11 @@
   "DocumentManagement": "Documentbeheer",
   "OnlineEditors": "Online editors",
   "Site": "Site",
-  "SoftwareLicense": "Software licentie"
+  "SoftwareLicense": "Software licentie",
+  "RestoreBackupDescription": "Gebruik deze optie om uw ruimte te herstellen vanaf het voorgaande opgeslagen back-up bestand.",
+  "SendNotificationAboutRestoring": "Stuur notificatie over ruimte herstel aan gebruikers",
+  "BackupList": "Back-up lijst",
+  "RestoreBackupWarningText": "{{productName}} zal tijdens het herstelproces onbeschikbaar worden. Nadat het herstel is afgerond, gaan alle wijzigingen verloren die na de datum van het geselecteerde herstelpunt zijn aangebracht.",
+  "UserAgreement": "Ik bevestig en wil doorgaan",
+  "LocalFile": "Lokaal bestand"
 }

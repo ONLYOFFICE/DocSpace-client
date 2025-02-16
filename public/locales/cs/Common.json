@@ -658,5 +658,11 @@
   "DocumentManagement": "Správa dokumentů",
   "OnlineEditors": "Online editory",
   "Site": "Stránka",
-  "SoftwareLicense": "Softwarová licence"
+  "SoftwareLicense": "Softwarová licence",
+  "RestoreBackupDescription": "Použijte tuto možnost pro obnovu Vašeho prostoru z předchozího souboru obnovy.",
+  "SendNotificationAboutRestoring": "Odeslat oznámení uživatelům o obnovení prostoru",
+  "BackupList": "Seznam záloh",
+  "RestoreBackupWarningText": "Prostor {{productName}} bude během procesu obnovy nedostupný. Po dokončení obnovy budou všechny změny provedené po datu vybraného bodu obnovy ztraceny.",
+  "UserAgreement": "Potvrzuji a chci pokračovat",
+  "LocalFile": "Místní soubor"
 }

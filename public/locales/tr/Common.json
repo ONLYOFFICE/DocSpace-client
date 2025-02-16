@@ -658,5 +658,11 @@
   "DocumentManagement": "Belge yönetimi",
   "OnlineEditors": "Çevrimiçi editörler",
   "Site": "Site",
-  "SoftwareLicense": "Yazılım lisansı"
+  "SoftwareLicense": "Yazılım lisansı",
+  "RestoreBackupDescription": "Alanda bulunan tüm verileri dosya olarak almak istiyorsanız bu seçeneği kullanın.",
+  "SendNotificationAboutRestoring": "Kullanıcılara alan geri yüklemesi hakkında bildirim gönder",
+  "BackupList": "Yedekleme listesi",
+  "RestoreBackupWarningText": "Geri yükleme işlemi sırasında {{productName}} kullanılamaz hale gelecektir. Geri yükleme tamamlandıktan sonra, seçilen geri yükleme noktası tarihinden sonra yapılan tüm değişiklikler kaybolacaktır.",
+  "UserAgreement": "Onaylıyorum ve devam etmek istiyorum",
+  "LocalFile": "Yerel dosya"
 }

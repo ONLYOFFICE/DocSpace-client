@@ -659,5 +659,11 @@
   "DocumentManagement": "Upravljanje dokumentom",
   "OnlineEditors": "Onlajn uređivači",
   "Site": "Sajt",
-  "SoftwareLicense": "Licenca za softver"
+  "SoftwareLicense": "Licenca za softver",
+  "RestoreBackupDescription": "Koristi ovu opciju da povratiš svoj prostor od prethodno sačuvane rezervne kopije datoteke.",
+  "SendNotificationAboutRestoring": "Pošalji notifikaciju u vezi obnavljanja prostora korisnicima",
+  "BackupList": "Lista rezervnih kopija",
+  "RestoreBackupWarningText": "{{productName}} će postati nedostupan tokom procesa obnavljanja. Nakon što je obnavljanje završeno, sve promene napravljene nakon datuma odabrane tačke obnavljanja će biti izgubljene.",
+  "UserAgreement": "Potvrđujem i želim da nastavim",
+  "LocalFile": "Lokalna datoteka"
 }

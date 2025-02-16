@@ -658,5 +658,11 @@
   "DocumentManagement": "Dokumentu pārvaldība",
   "OnlineEditors": "Tiešsaistes redaktori",
   "Site": "Vietne",
-  "SoftwareLicense": "Programmatūras licence"
+  "SoftwareLicense": "Programmatūras licence",
+  "RestoreBackupDescription": "Izmantojiet šo iespēju, lai atjaunotu portālu no iepriekš noglabāta rezerves faila.",
+  "SendNotificationAboutRestoring": "Nosūtīt lietotājiem paziņojumu par portāla atjaunošanu",
+  "BackupList": "Rezerves kopiju saraksts",
+  "RestoreBackupWarningText": "Atjaunošanas procesa laikā programma {{productName}} kļūs nepieejama. Pēc atjaunošanas pabeigšanas visas izmaiņas, kas veiktas pēc atlasītā atjaunošanas punkta datuma, tiks zaudētas.",
+  "UserAgreement": "Es apstiprinu un vēlos turpināt",
+  "LocalFile": "Vietējais fails"
 }

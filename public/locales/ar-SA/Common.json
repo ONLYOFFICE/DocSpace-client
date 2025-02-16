@@ -655,5 +655,11 @@
   "DocumentManagement": "إدارة الوثائق",
   "OnlineEditors": "المحررين عبر الإنترنت",
   "Site": "موقع",
-  "SoftwareLicense": "ترخيص البرنامج"
+  "SoftwareLicense": "ترخيص البرنامج",
+  "RestoreBackupDescription": "استخدم هذا الخيار لاستعادة إستضافتك من ملف النسخ الاحتياطي المحفوظ مسبقًا.",
+  "SendNotificationAboutRestoring": "إرسال إشعار حول استعادة المساحة للمستخدمين",
+  "BackupList": "قائمة النسخ الاحتياطي",
+  "RestoreBackupWarningText": "سيصبح {{productName}}غير متاح خلال عملية الاستعادة. بعد اكتمال الاستعادة سيتم فقدان كل التغييرات التي تم القيام بها بعد تاريخ الاستعادة المحدد.",
+  "UserAgreement": "أؤكد وأريد المتابعة",
+  "LocalFile": "ملف محلي"
 }

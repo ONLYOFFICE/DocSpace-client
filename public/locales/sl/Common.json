@@ -658,5 +658,11 @@
   "DocumentManagement": "Upravljanje z dokumenti",
   "OnlineEditors": "Spletni urejevalniki",
   "Site": "Stran",
-  "SoftwareLicense": "Programska licenca"
+  "SoftwareLicense": "Programska licenca",
+  "RestoreBackupDescription": "S to opcijo obnovite svoj prostor iz predhodno shranjene varnostne kopije.",
+  "SendNotificationAboutRestoring": "Pošlji uporabnikom obvestilo o obnovi prostora",
+  "BackupList": "Seznam varnostnih kopij",
+  "RestoreBackupWarningText": "{{productName}} med postopkom obnovitve ne bo več na voljo. Ko bo obnovitev končana, bodo izgubljene vse spremembe po datumu izbrane obnovitvene točke.",
+  "UserAgreement": "Potrjujem in želim nadaljevati",
+  "LocalFile": "Lokalna datoteka"
 }

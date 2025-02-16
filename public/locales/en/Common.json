@@ -660,5 +660,11 @@
   "DocumentManagement": "Document management",
   "OnlineEditors": "Online editors",
   "Site": "Site",
-  "SoftwareLicense": "Software license"
+  "SoftwareLicense": "Software license",
+  "RestoreBackupDescription": "Use this option to restore your space from the previously saved backup file.",
+  "SendNotificationAboutRestoring": "Send notification about space restoring to users",
+  "BackupList": "Backup List",
+  "RestoreBackupWarningText": "{{productName}} will become unavailable during the restore process. After the restore is complete all the changes made after the date of the selected restore point will be lost.",
+  "UserAgreement": "I confirm and want to proceed",
+  "LocalFile": "Local file"
 }

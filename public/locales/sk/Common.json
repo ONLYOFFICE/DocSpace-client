@@ -658,5 +658,11 @@
   "DocumentManagement": "Manažment dokumentov",
   "OnlineEditors": "Online redaktori",
   "Site": "Webové stránky",
-  "SoftwareLicense": "Softvérová licencia"
+  "SoftwareLicense": "Softvérová licencia",
+  "RestoreBackupDescription": "Túto možnosť použite na obnovenie Vášho priestoru z predtým uloženého záložného súboru.",
+  "SendNotificationAboutRestoring": "Odošlite používateľom upozornenie o obnovení priestoru",
+  "BackupList": "Zoznam záloh",
+  "RestoreBackupWarningText": "{{productName}} bude počas procesu obnovenia nedostupný. Po dokončení obnovenia budú všetky zmeny vykonané po dátume zvoleného bodu obnovenia stratené.",
+  "UserAgreement": "Potvrdzujem a chcem pokračovať",
+  "LocalFile": "Miestny súbor"
 }

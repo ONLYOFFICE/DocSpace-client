@@ -513,5 +513,10 @@
   "DocumentManagement": "ලේඛන කළමනාකරණය",
   "OnlineEditors": "මාර්ගගත සංස්කරක",
   "Site": "අඩවිය",
-  "SoftwareLicense": "මෘදුකාංගයේ බලපත්‍රය"
+  "SoftwareLicense": "මෘදුකාංගයේ බලපත්‍රය",
+  "RestoreBackupDescription": "කලින් සුරකින ලද උපස්ථ ගොනුවකින් ඔබගේ අවකාශය ප්‍රත්‍යර්පණයට මෙම විකල්පය භාවිතා කරන්න.",
+  "SendNotificationAboutRestoring": "අවකාශය ප්‍රත්‍යර්පණය ගැන පරිශ්‍රීලකයින්ට දන්වන්න",
+  "BackupList": "උපස්ථ ලැයිස්තුව",
+  "UserAgreement": "මම තහවුරු කරමි. ඉදිරියට යාමට වුවමනාය.",
+  "LocalFile": "ස්ථානීය ගොනුව"
 }

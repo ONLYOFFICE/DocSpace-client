@@ -658,5 +658,11 @@
   "DocumentManagement": "Zarządzanie dokumentami",
   "OnlineEditors": "Edytory online",
   "Site": "Strona",
-  "SoftwareLicense": "Licencja oprogramowania"
+  "SoftwareLicense": "Licencja oprogramowania",
+  "RestoreBackupDescription": "Użyj tej opcji do przywrócenia portalu z wcześniej zapisanego pliku kopii zapasowej.",
+  "SendNotificationAboutRestoring": "Wyślij powiadomienie o przywracaniu użytkowników do portalu",
+  "BackupList": "Lista kopii zapasowych",
+  "RestoreBackupWarningText": "Obszar {{productName}} będzie niedostępny podczas procesu przywracania. Po jego zakończeniu wszystkie zmiany dokonane po dacie wybranego puntu przywracania zostaną utracone.",
+  "UserAgreement": "Potwierdzam i chcę kontynuować",
+  "LocalFile": "Plik lokalny"
 }

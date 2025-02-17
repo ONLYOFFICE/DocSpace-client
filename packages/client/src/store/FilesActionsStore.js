@@ -3473,7 +3473,7 @@ class FilesActionStore {
         op === "download"
           ? availableFiles.slice(currentFileIndex, currentFileIndex + 2)
           : availableFiles.slice(currentFileIndex, currentFileIndex + 1);
-      console.log(`!!!!!!!Operation: ${op}`, currentFileIndex);
+
       switch (op) {
         case "delete": {
           const hasDeletePermissions = filesToProcess.every(

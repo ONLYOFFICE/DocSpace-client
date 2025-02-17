@@ -27,7 +27,6 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { Text } from "@docspace/shared/components/text";
@@ -68,7 +67,7 @@ const Checkboxes = ({
   };
 
   return (
-    <Box className="ldap_checkbox-container">
+    <div className="ldap_checkbox-container">
       <div className="ldap_connection_type-text">
         <Text fontWeight={600} fontSize="14px">
           {t("LdapConnectionType")}
@@ -114,7 +113,7 @@ const Checkboxes = ({
           <HelpButton tooltipContent={t("LdapConnectionTypeSSLTooltip")} />
         </div>
       </div>
-    </Box>
+    </div>
   );
 };
 

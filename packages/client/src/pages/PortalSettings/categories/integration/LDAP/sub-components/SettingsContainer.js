@@ -31,7 +31,6 @@ import { useNavigate } from "react-router-dom";
 import { isMobile } from "@docspace/shared/utils/device";
 
 import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -89,10 +88,10 @@ const SettingsContainer = ({
 
       {isMobileView || isSettingsShown ? (
         <>
-          <Box>
+          <div>
             <Text className="ldap-disclaimer">{t("LdapDisclaimer")}</Text>
             <Checkboxes />
-          </Box>
+          </div>
 
           <ConnectionSettings />
           <AttributeMapping />

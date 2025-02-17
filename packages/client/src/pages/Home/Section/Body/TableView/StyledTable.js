@@ -205,7 +205,7 @@ const StyledTableRow = styled(TableRow)`
       `url(${CursorPalmSvgUrl}) 8 0, auto !important`};
 
     ${(props) =>
-      props.inProgress &&
+      props.isBlockingOperation &&
       css`
         pointer-events: none;
         /* cursor: wait; */

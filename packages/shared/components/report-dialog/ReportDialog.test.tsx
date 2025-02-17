@@ -57,7 +57,7 @@ jest.mock("../toast", () => ({
 // Mock SVG imports
 jest.mock("PUBLIC_DIR/images/icons/32/file.svg?url", () => "file-icon.svg");
 jest.mock(
-  "PUBLIC_DIR/images/download.react.svg?url",
+  "PUBLIC_DIR/images/icons/16/download.react.svg?url",
   () => "download-icon.svg",
 );
 

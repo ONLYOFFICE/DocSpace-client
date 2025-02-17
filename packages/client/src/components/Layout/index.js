@@ -77,6 +77,7 @@ const Layout = (props) => {
     setWindowWidth,
     setWindowAngle,
     isFrame,
+    runOperations,
   } = props;
 
   const [isPortrait, setIsPortrait] = useState();
@@ -88,6 +89,7 @@ const Layout = (props) => {
     ...window.DocSpace,
     navigate,
     location,
+    runOperations,
   };
 
   const isSDKPath = window.DocSpace.location.pathname.includes("/sdk/");
@@ -182,7 +184,7 @@ Layout.propTypes = {
   setIsTabletView: PropTypes.func,
 };
 
-export default inject(({ settingsStore }) => {
+export default inject(({ settingsStore, filesActionsStore }) => {
   const {
     isTabletView,
     setIsTabletView,
@@ -190,11 +192,14 @@ export default inject(({ settingsStore }) => {
     setWindowAngle,
     isFrame,
   } = settingsStore;
+  const { runOperations } = filesActionsStore;
+
   return {
     isTabletView,
     setIsTabletView,
     setWindowWidth,
     setWindowAngle,
     isFrame,
+    runOperations,
   };
 })(observer(Layout));

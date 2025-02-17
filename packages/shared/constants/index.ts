@@ -194,3 +194,17 @@ export const ALLOWED_PASSWORD_CHARACTERS =
   "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
 
 export const GENERAL_LINK_HEADER_KEY = "general-link_header";
+
+export const OPERATIONS_NAME = Object.freeze({
+  trash: "trash",
+  deletePermanently: "deletePermanently",
+  download: "download",
+  duplicate: "duplicate",
+  exportIndex: "exportIndex",
+  markAsRead: "markAsRead",
+  copy: "copy",
+  move: "move",
+  convert: "convert",
+  other: "other",
+  upload: "upload",
+});

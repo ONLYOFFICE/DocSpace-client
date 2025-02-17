@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Kiintiö per huone",
   "QuotaPerUser": "Kiintiö per käyttäjä",
   "Quotas": "Kiintiöt",
-  "QuotasDescription": "Tässä voit asettaa käyttäjille ja huoneille tallennuskiintiön. <1>Help Center.</1>",
+  "QuotasDescription": "Tässä voit asettaa käyttäjille ja huoneille tallennuskiintiön.",
   "Recalculate": "Laske uudelleen",
   "RecoveryFileNotSelected": "Palautusvirhe. Palautustiedostoa ei ole valittu.",
   "RestoreBackup": "Tiedon Palautus",

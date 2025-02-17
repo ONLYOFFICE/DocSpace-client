@@ -198,7 +198,7 @@
   "QuotaPerRoom": "每个房间的配额",
   "QuotaPerUser": "每位用户的配额",
   "Quotas": "分配额度",
-  "QuotasDescription": "您可以设置用户和房间的储存空间额度。 <1>帮助中心。</1>",
+  "QuotasDescription": "您可以设置用户和房间的储存空间额度。",
   "Recalculate": "重新计算",
   "RecoveryFileNotSelected": "恢复错误。未选择恢复文件",
   "RestoreBackup": "数据恢复",

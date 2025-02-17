@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Kvóta na místnost",
   "QuotaPerUser": "Kvóta na uživatele",
   "Quotas": "Kvóty",
-  "QuotasDescription": "Zde můžete nastavit kvótu úložiště pro uživatele a místnosti. <1>Centrum nápovědy.</1>",
+  "QuotasDescription": "Zde můžete nastavit kvótu úložiště pro uživatele a místnosti.",
   "Recalculate": "Přepočítat",
   "RecoveryFileNotSelected": "Chyba při obnově. Soubor pro obnovení nebyl vybrán.",
   "RestoreBackup": "Obnova dat",

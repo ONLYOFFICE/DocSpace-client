@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Limit na pokój",
   "QuotaPerUser": "Limit na użytkownika",
   "Quotas": "Limity",
-  "QuotasDescription": "Tutaj możesz skonfigurować limity pamięci dla użytkowników i pokoi. <1>Centrum pomocy.</1>",
+  "QuotasDescription": "Tutaj możesz skonfigurować limity pamięci dla użytkowników i pokoi.",
   "Recalculate": "Przelicz",
   "RecoveryFileNotSelected": "Błąd odzyskiwania. Nie wybrano pliku odzyskiwania.",
   "RestoreBackup": "Odzyskiwanie danych",

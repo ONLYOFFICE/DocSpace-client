@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Quota per kamer",
   "QuotaPerUser": "Quota per gebruiker",
   "Quotas": "Quota",
-  "QuotasDescription": "Hier kunt u opslagquota voor gebruikers en kamers instellen. <1>Helpcentrum.</1>",
+  "QuotasDescription": "Hier kunt u opslagquota voor gebruikers en kamers instellen.",
   "Recalculate": "Opnieuw berekenen",
   "RecoveryFileNotSelected": "Herstelfout. Herstelbestand niet geselecteerd.",
   "RestoreBackup": "Dataherstel",

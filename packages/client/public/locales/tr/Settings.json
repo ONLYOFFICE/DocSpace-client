@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Oda başına kota",
   "QuotaPerUser": "Kullanıcı başına kota",
   "Quotas": "Kotalar",
-  "QuotasDescription": "Burada, kullanıcılar ve odalar için depolama kotası ayarlayabilirsiniz. <1>Yardım Merkezi.</1>",
+  "QuotasDescription": "Burada, kullanıcılar ve odalar için depolama kotası ayarlayabilirsiniz.",
   "Recalculate": "Yeniden hesapla",
   "RecoveryFileNotSelected": "Kurtarma hatası. Kurtarma dosyası seçilmedi.",
   "RestoreBackup": "Veri Geri Yükleme",

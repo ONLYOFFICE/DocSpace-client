@@ -198,7 +198,7 @@
   "QuotaPerRoom": "الحصة لكل غرفة",
   "QuotaPerUser": "الحصة لكل مستخدم",
   "Quotas": "الحصص",
-  "QuotasDescription": "هنا، يمكنك تعيين حصة التخزين للمستخدمين والغرف. <1>مركز المساعدة</1>",
+  "QuotasDescription": "هنا، يمكنك تعيين حصة التخزين للمستخدمين والغرف.",
   "Recalculate": "إعادة الحساب",
   "RecoveryFileNotSelected": "خطأ في الاسترداد. لم يتم تحديد ملف الاسترداد.",
   "RestoreBackup": "استرجاع",

@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Kvota po sobi",
   "QuotaPerUser": "Kvota po korisniku",
   "Quotas": "Kvote",
-  "QuotasDescription": "Ovde, možete postaviti skladišnu kvotu za korisnike i sobe. <1>Centar za pomoć.</1>",
+  "QuotasDescription": "Ovde, možete postaviti skladišnu kvotu za korisnike i sobe.",
   "Recalculate": "Ponovo izračunaj",
   "RecoveryFileNotSelected": "Oporavak greška. Datoteka za oporavak nije odabrana.",
   "RestoreBackup": "Povrati",

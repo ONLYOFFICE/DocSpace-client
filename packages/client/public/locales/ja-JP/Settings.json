@@ -198,7 +198,7 @@
   "QuotaPerRoom": "ルームあたりの容量制限",
   "QuotaPerUser": "ユーザーあたりの容量制限",
   "Quotas": "容量制限",
-  "QuotasDescription": "ここでは、ユーザーとルームのストレージ容量制限を設定することができます。<1>ヘルプセンター</1>",
+  "QuotasDescription": "ここでは、ユーザーとルームのストレージ容量制限を設定することができます。",
   "Recalculate": "再計算",
   "RecoveryFileNotSelected": "回復エラー。回復ファイルが選択されていません。",
   "RestoreBackup": "データ復元",

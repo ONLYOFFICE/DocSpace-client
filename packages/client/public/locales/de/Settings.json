@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Quote pro Zimmer",
   "QuotaPerUser": "Quote pro Benutzer",
   "Quotas": "Quoten",
-  "QuotasDescription": "Hier können Sie Speicherquote für Benutzer und Räume festlegen. <1>Hilfe-Center.</1>",
+  "QuotasDescription": "Hier können Sie Speicherquote für Benutzer und Räume festlegen.",
   "Recalculate": "Neu berechnen",
   "RecoveryFileNotSelected": "Fehler bei der Wiederherstellung. Datei zur Wiederherstellung nicht ausgewählt.",
   "RestoreBackup": "Datenwiederherstellung",

@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Kvota na sobo",
   "QuotaPerUser": "Kvota na uporabnika",
   "Quotas": "Kvote",
-  "QuotasDescription": "Tukaj lahko nastavite kvoto prostora za shranjevanje za uporabnike in sobe. <1>Center za pomoč.</1>",
+  "QuotasDescription": "Tukaj lahko nastavite kvoto prostora za shranjevanje za uporabnike in sobe.",
   "Recalculate": "Preračunaj",
   "RecoveryFileNotSelected": "Napaka pri obnovitvi. Datoteka za obnovitev ni izbrana.",
   "RestoreBackup": "Obnovitev podatkov",

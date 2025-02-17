@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Kvota katrai telpai",
   "QuotaPerUser": "Kvota katram lietotājam",
   "Quotas": "Kvotas",
-  "QuotasDescription": "Šeit varat iestatīt krātuves kvotu lietotājiem un telpām. <1>Palīdzības centrs.</1>",
+  "QuotasDescription": "Šeit varat iestatīt krātuves kvotu lietotājiem un telpām.",
   "Recalculate": "Pārrēķināt",
   "RecoveryFileNotSelected": "Atkopšanas kļūda. Atkopšanas fails nav atlasīts.",
   "RestoreBackup": "Datu atjaunošana",

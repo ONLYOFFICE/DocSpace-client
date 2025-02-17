@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Cotă per sală",
   "QuotaPerUser": "Cotă per utilizator",
   "Quotas": "Cote",
-  "QuotasDescription": "Aici puteți stabili cotă de stocare pentru utilizatori și săli. <1>Centru de ajutor.</1>",
+  "QuotasDescription": "Aici puteți stabili cotă de stocare pentru utilizatori și săli.",
   "Recalculate": "Recalculare",
   "RecoveryFileNotSelected": "Eroare la recuperarea. Fișierul de recuperare nu a fost selectat.",
   "RestoreBackup": "Restaurarea datelor",

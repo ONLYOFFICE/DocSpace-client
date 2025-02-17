@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Quota pour la salle",
   "QuotaPerUser": "Quota pour l'utilisateur",
   "Quotas": "Quotas",
-  "QuotasDescription": "Ici, vous pouvez définir le quota de stockage pour les utilisateurs et les salles. <1>Centre d'aide.</1>",
+  "QuotasDescription": "Ici, vous pouvez définir le quota de stockage pour les utilisateurs et les salles.",
   "Recalculate": "Recalculer",
   "RecoveryFileNotSelected": "Erreur de récupération. Fichier de récupération non sélectionné.",
   "RestoreBackup": "Restauration des données",

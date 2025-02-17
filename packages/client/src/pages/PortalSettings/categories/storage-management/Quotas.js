@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
 
@@ -77,18 +77,22 @@ const QuotasComponent = (props) => {
         ) : null}
       </div>
       <Text className="quotas_description">
-        <Trans t={t} i18nKey="QuotasDescription" ns="Settings">
-          Here, you can set storage quota for users and rooms.
-          <ColorTheme
-            themeId={ThemeId.Link}
-            tag="a"
-            isHovered={false}
-            target="_blank"
-            href={storageManagementUrl}
-          >
-            Help Center
-          </ColorTheme>
-        </Trans>
+        {storageManagementUrl ? (
+          <>
+            {t("Settings:QuotasDescription")}{" "}
+            <ColorTheme
+              themeId={ThemeId.Link}
+              tag="a"
+              isHovered={false}
+              target="_blank"
+              href={storageManagementUrl}
+            >
+              {t("Common:HelpCenter")}
+            </ColorTheme>
+          </>
+        ) : (
+          t("Settings:QuotasDescription")
+        )}
       </Text>
 
       <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />

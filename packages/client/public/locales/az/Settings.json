@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Otaq üçün kvota",
   "QuotaPerUser": "İstifadəçi üçün kvota",
   "Quotas": "Kvotalar",
-  "QuotasDescription": "Burada istifadəçi və otaqlar üçün yaddaş kvotasını təyin edə bilərsiniz. <1>Yardım Mərkəzi.</1>",
+  "QuotasDescription": "Burada istifadəçi və otaqlar üçün yaddaş kvotasını təyin edə bilərsiniz.",
   "Recalculate": "Yenidən hesablayın",
   "RecoveryFileNotSelected": "Bərpa xətası. Bərpa olunacaq fayl seçilməyib.",
   "RestoreBackup": "Məlumatların bərpası",

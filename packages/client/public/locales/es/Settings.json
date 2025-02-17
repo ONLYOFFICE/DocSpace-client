@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Cuota por sala",
   "QuotaPerUser": "Cuota por usuario",
   "Quotas": "Cuotas",
-  "QuotasDescription": "Aquí puede establecer una cuota de almacenamiento para usuarios y salas. <1>Centro de ayuda.</1>",
+  "QuotasDescription": "Aquí puede establecer una cuota de almacenamiento para usuarios y salas.",
   "Recalculate": "Recalcular",
   "RecoveryFileNotSelected": "Error de recuperación. No se ha seleccionado el archivo de recuperación.",
   "RestoreBackup": "Restauración de datos",

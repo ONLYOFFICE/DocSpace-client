@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Hạn mức mỗi phòng",
   "QuotaPerUser": "Hạn mức cho mỗi người dùng",
   "Quotas": "Hạn mức",
-  "QuotasDescription": "Tại đây, bạn có thể đặt hạn mức lưu trữ cho người dùng và phòng. <1>Trung tâm Trợ giúp.</1>",
+  "QuotasDescription": "Tại đây, bạn có thể đặt hạn mức lưu trữ cho người dùng và phòng.",
   "Recalculate": "Tính toán lại",
   "RecoveryFileNotSelected": "Lỗi khôi phục. Tập tin khôi phục không được chọn.",
   "RestoreBackup": "Khôi phục dữ liệu",

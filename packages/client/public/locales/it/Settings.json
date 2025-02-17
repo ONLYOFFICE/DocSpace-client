@@ -198,7 +198,7 @@
   "QuotaPerRoom": "Quota per stanza",
   "QuotaPerUser": "Quota per utente",
   "Quotas": "Quote",
-  "QuotasDescription": "Qui puoi impostare la quota di archiviazione per utenti e stanze. <1>Centro assistenza.</1>",
+  "QuotasDescription": "Qui puoi impostare la quota di archiviazione per utenti e stanze.",
   "Recalculate": "Ricalcola",
   "RecoveryFileNotSelected": "Errore di ripristino. File di ripristino non selezionato.",
   "RestoreBackup": "Ripristino dati",

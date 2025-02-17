@@ -198,7 +198,7 @@
   "QuotaPerRoom": "방당 할당량",
   "QuotaPerUser": "사용자당 할당량",
   "Quotas": "할당량",
-  "QuotasDescription": "여기에서 사용자 및 방에 대한 스토리지 할당량을 설정할 수 있습니다. <1>도움말 센터.</1>",
+  "QuotasDescription": "여기에서 사용자 및 방에 대한 스토리지 할당량을 설정할 수 있습니다.",
   "Recalculate": "재계산",
   "RecoveryFileNotSelected": "복원 오류입니다. 복원 파일이 선택되지 않았습니다",
   "RestoreBackup": "데이터 복원",

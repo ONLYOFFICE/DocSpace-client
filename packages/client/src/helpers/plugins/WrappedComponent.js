@@ -134,7 +134,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
           heightProp,
           marginProp,
           overflowProp,
-          ...rest
+          ...elementRest
         } = elementProps;
 
         const elementStyles = {
@@ -147,7 +147,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
           background: backgroundProp,
           flex: flexProp,
           overflow: overflowProp,
-          ...rest,
+          ...elementRest,
         };
 
         switch (componentName) {

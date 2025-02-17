@@ -3415,9 +3415,11 @@ class FilesActionStore {
   };
 
   runOperations = (operations = []) => {
-    const { files, folders, activeFiles, activeFolders } = this.filesStore;
-    const { addActiveItems, clearActiveOperations } = this.uploadDataStore;
+    const { files, folders, activeFiles, activeFolders, addActiveItems } =
+      this.filesStore;
 
+    const { itemOperationToFolder, clearActiveOperations } =
+      this.uploadDataStore;
     if (!operations || operations.length === 0) {
       return "No operations specified";
     }
@@ -3471,7 +3473,7 @@ class FilesActionStore {
         op === "download"
           ? availableFiles.slice(currentFileIndex, currentFileIndex + 2)
           : availableFiles.slice(currentFileIndex, currentFileIndex + 1);
-
+      console.log(`!!!!!!!Operation: ${op}`, currentFileIndex);
       switch (op) {
         case "delete": {
           const hasDeletePermissions = filesToProcess.every(
@@ -3574,7 +3576,7 @@ class FilesActionStore {
             operationData.destFolderId,
           );
 
-          this.itemOperationToFolder(operationData)
+          itemOperationToFolder(operationData)
             .then(() => {
               console.log(
                 `${op === "copy" ? "Copy" : "Move"} operation initiated for file: ${fileToProcess.title} to folder: ${targetFolder.title}`,

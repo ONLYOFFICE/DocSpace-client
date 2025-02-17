@@ -32,7 +32,7 @@ import { TGetCSPSettings } from "@docspace/shared/api/settings/types";
 export async function getCSP(): Promise<TGetCSPSettings | undefined> {
   const [req] = createRequest([`/security/csp`], [["", ""]], "GET");
 
-  const res = await fetch(req, { next: { revalidate: 3600 } });
+  const res = await fetch(req, { next: { revalidate: 300 } });
 
   if (!res.ok) return;
 

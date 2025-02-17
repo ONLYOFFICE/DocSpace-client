@@ -43,7 +43,7 @@ export async function getSelf(): Promise<TUser | undefined> {
   const [req] = createRequest([`/people/@self`], [["", ""]], "GET");
   const res = IS_TEST
     ? selfHandler()
-    : await fetch(req, { next: { revalidate: 3600 } });
+    : await fetch(req, { next: { revalidate: 300 } });
 
   if (res.status === 401 || !res.ok) {
     return;

@@ -33,4 +33,5 @@ export interface RoleStepProps {
   processStatus: RoleStatus;
   roleName: string;
   histories: RoleHistory[];
+  currentUserId: string;
 }

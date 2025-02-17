@@ -26,6 +26,7 @@
 
 import { useState } from "react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
@@ -42,9 +43,11 @@ const RoleStep = ({
   processStatus,
   roleName,
   histories,
+  currentUserId,
 }: RoleStepProps) => {
   const [collapsed, setCollapsed] = useState(true);
   const { isBase } = useTheme();
+  const { t } = useTranslation("Common");
 
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
@@ -80,7 +83,10 @@ const RoleStep = ({
           />
         </picture>
         <h5 className={styles.roleTitle}>{roleName}</h5>
-        <p className={styles.userName}>{user.userName}</p>
+        <p className={styles.userName}>
+          {user.userName}{" "}
+          {currentUserId === user.id ? `(${t("Common:MeLabel")})` : null}
+        </p>
         {hasMoreThanOneHistory ? (
           <ArrowIcon
             onClick={toggleCollapse}

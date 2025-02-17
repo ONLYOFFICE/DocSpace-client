@@ -101,7 +101,7 @@ export const FillingStatusPanel = ({
   const processDetails: ProcessDetails[] = [
     {
       id: "1",
-      user: userMock,
+      user: { ...userMock, id: "1", userName: "User #1" },
       processStatus: RoleStatus.Filled,
       roleName: "Role #1",
       histories: [
@@ -126,7 +126,7 @@ export const FillingStatusPanel = ({
     },
     {
       id: "3",
-      user: userMock,
+      user: { ...userMock, id: "3", userName: "User #3" },
       processStatus: RoleStatus.Waiting,
       roleName: "Role #3",
       histories: [],
@@ -168,6 +168,7 @@ export const FillingStatusPanel = ({
           <FillingRoleProcess
             fileStatus={fillingStatus}
             processDetails={processDetails}
+            currentUserId={userMock.id}
           />
         </div>
       </ModalDialog.Body>

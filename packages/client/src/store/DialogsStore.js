@@ -258,7 +258,7 @@ class DialogsStore {
 
   downloadItems = [];
 
-  fillingStatusPanel = true;
+  fillingStatusPanel = false;
 
   constructor(
     authStore,

@@ -33,6 +33,7 @@ import { StatusIndicator } from "./sub-components/status-indicator";
 const FillingRoleProcess = ({
   processDetails,
   fileStatus,
+  currentUserId,
 }: FillingRoleProcessProps) => {
   return (
     <section className={styles.fillingRoleProcess}>
@@ -40,6 +41,7 @@ const FillingRoleProcess = ({
         <RoleStep
           key={detail.id}
           user={detail.user}
+          currentUserId={currentUserId}
           processStatus={detail.processStatus}
           roleName={detail.roleName}
           histories={detail.histories}

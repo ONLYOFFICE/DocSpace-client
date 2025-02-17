@@ -39,4 +39,5 @@ export type ProcessDetails = {
 export interface FillingRoleProcessProps {
   processDetails: ProcessDetails[];
   fileStatus: FileFillingFormStatus;
+  currentUserId: string;
 }

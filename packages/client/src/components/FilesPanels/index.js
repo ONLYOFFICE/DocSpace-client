@@ -35,6 +35,8 @@ import {
   FilterType,
 } from "@docspace/shared/enums";
 
+import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
+
 import {
   UploadPanel,
   VersionHistoryPanel,
@@ -150,6 +152,9 @@ const Panels = (props) => {
     guestReleaseTipDialogVisible,
     closeEditIndexDialogVisible,
     deleteVersionDialogVisible,
+
+    setStopFillingDialogVisible,
+    stopFillingDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -157,6 +162,10 @@ const Panels = (props) => {
     data: null,
     onClose: null,
   });
+
+  const onCloseStopFillingDialog = () => {
+    setStopFillingDialogVisible(false);
+  };
 
   const { t } = useTranslation(["Translations", "Common", "PDFFormDialog"]);
 
@@ -365,6 +374,14 @@ const Panels = (props) => {
     deleteVersionDialogVisible && (
       <DeleteVersionDialog key="delete-version-dialog" />
     ),
+
+    stopFillingDialogVisible && (
+      <StopFillingDialog
+        key="stop-filling-dialog"
+        visible={stopFillingDialogVisible}
+        onClose={onCloseStopFillingDialog}
+      />
+    ),
   ];
 };
 
@@ -436,6 +453,9 @@ export default inject(
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
+
+      setStopFillingDialogVisible,
+      stopFillingDialogVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -535,6 +555,9 @@ export default inject(
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
       deleteVersionDialogVisible,
+
+      setStopFillingDialogVisible,
+      stopFillingDialogVisible,
     };
   },
 )(observer(Panels));

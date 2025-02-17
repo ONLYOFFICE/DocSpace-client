@@ -260,6 +260,8 @@ class DialogsStore {
 
   fillingStatusPanel = false;
 
+  stopFillingDialogVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -908,6 +910,10 @@ class DialogsStore {
 
   setFillingStatusPanelVisible = (visible) => {
     this.fillingStatusPanel = visible;
+  };
+
+  setStopFillingDialogVisible = (visible) => {
+    this.stopFillingDialogVisible = visible;
   };
 }
 

@@ -124,6 +124,32 @@ export const PluginComponent = inject(({ pluginStore }) => {
       const getElement = () => {
         const componentName = component.component;
 
+        const {
+          widthProp,
+          paddingProp,
+          displayProp,
+          borderProp,
+          backgroundProp,
+          flexProp,
+          heightProp,
+          marginProp,
+          overflowProp,
+          ...rest
+        } = elementProps;
+
+        const elementStyles = {
+          width: widthProp,
+          height: heightProp,
+          padding: paddingProp,
+          margin: marginProp,
+          display: displayProp,
+          border: borderProp,
+          background: backgroundProp,
+          flex: flexProp,
+          overflow: overflowProp,
+          ...rest,
+        };
+
         switch (componentName) {
           case PluginComponents.box: {
             const childrenComponents = elementProps?.children?.map((item) => (
@@ -134,7 +160,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
               />
             ));
 
-            return <div {...elementProps}>{childrenComponents}</div>;
+            return <div style={elementStyles}>{childrenComponents}</div>;
           }
 
           case PluginComponents.text: {

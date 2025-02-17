@@ -1033,6 +1033,8 @@ class UsersStore {
   get hasUsersToChangeType() {
     const { canChangeUserType } = this.accessRightsStore;
 
+    if (this.selection.length > 1) return false;
+
     const users = this.selection.filter((x) => canChangeUserType(x));
 
     return users.length > 0;

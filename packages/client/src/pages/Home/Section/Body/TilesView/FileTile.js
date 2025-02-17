@@ -89,6 +89,8 @@ const FileTile = (props) => {
     openUser,
     showStorageInfo,
     isBlockingOperation,
+    icon,
+    isDownload,
   } = props;
 
   const navigate = useNavigate();
@@ -226,6 +228,7 @@ export default inject(
     const { getIcon } = filesSettingsStore;
     const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
       filesStore;
+    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
 
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;

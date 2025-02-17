@@ -209,6 +209,7 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
 
   .version_edit-comment {
     display: block;
+    margin: 8px 0 2px 70px;
   }
 
   .textarea-wrapper {
@@ -258,6 +259,8 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
   }
 
   .version-comment-wrapper {
+    box-sizing: border-box;
+    display: flex;
     margin-inline-start: 72px;
     white-space: normal !important;
 
@@ -334,10 +337,14 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
   }
 
   .version_edit-comment-button-primary {
+    box-sizing: border-box;
+    display: inline-block;
     margin-inline-end: 8px;
     width: 87px;
   }
   .version_edit-comment-button-second {
+    box-sizing: border-box;
+    display: inline-block;
     width: 87px;
   }
   .version_modal-dialog .modal-dialog-aside-header {
@@ -348,7 +355,16 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
   }
 
   .row-header {
+    box-sizing: border-box;
+    display: flex;
     max-width: 350px;
+
+    .version-link-box {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      margin: -2px 0 0 0;
+    }
   }
 `;
 

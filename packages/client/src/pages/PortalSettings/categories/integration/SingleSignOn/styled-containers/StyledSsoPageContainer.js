@@ -83,10 +83,12 @@ const StyledSsoPage = styled.div`
   }
 
   .service-provider-settings {
+    box-sizing: border-box;
     display: ${(props) => (!props.hideSettings ? "none" : "block")};
   }
 
   .sp-metadata {
+    box-sizing: border-box;
     display: ${(props) => (!props.hideMetadata ? "none" : "block")};
   }
 

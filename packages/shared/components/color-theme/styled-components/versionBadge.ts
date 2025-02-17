@@ -26,7 +26,6 @@
 
 import styled, { css } from "styled-components";
 import { TColorScheme, TTheme } from "../../../themes";
-import { Box } from "../../box";
 
 const getDefaultStyles = ({
   $currentColorScheme,
@@ -54,4 +53,4 @@ const getDefaultStyles = ({
     }
   `;
 
-export default styled(Box)(getDefaultStyles);
+export default styled.div(getDefaultStyles);

@@ -322,12 +322,14 @@ export async function getPaymentLink(
   return res;
 }
 
-export function updatePayment(adminCount) {
+export function updatePayment(adminCount, isYearTariff) {
+  const data = isYearTariff ? { adminyear: adminCount } : { admin: adminCount };
+
   return request({
     method: "put",
     url: `/portal/payment/update`,
     data: {
-      quantity: { admin: adminCount },
+      quantity: data,
     },
   });
 }

@@ -46,15 +46,12 @@ const WhiteLabelComponent = (props) => {
     showNotAvailable,
     defaultWhiteLabelLogoUrls,
     logoUrls,
-    logoText,
-    defaultLogoText,
-    isDefaultWhiteLabel,
+    isDefaultLogos,
     isWhiteLabelLoaded,
     initWhiteLabel,
     setLogoUrls,
-    setLogoText,
-    saveWhiteLabelSettings,
-    resetWhiteLabelSettings,
+    saveWhiteLabelLogos,
+    resetWhiteLabelLogos,
   } = props;
   const [isSaving, setIsSaving] = useState(false);
   const showAbout = standalone && isManagement() && displayAbout;
@@ -71,7 +68,7 @@ const WhiteLabelComponent = (props) => {
 
   const onRestoreDefault = async () => {
     try {
-      await resetWhiteLabelSettings();
+      await resetWhiteLabelLogos();
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
@@ -81,8 +78,8 @@ const WhiteLabelComponent = (props) => {
   const onSave = async (data) => {
     try {
       setIsSaving(true);
-      await saveWhiteLabelSettings(data);
-      setLogoText(data.logoText);
+      await saveWhiteLabelLogos(data);
+
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
@@ -95,21 +92,19 @@ const WhiteLabelComponent = (props) => {
     <LoaderWhiteLabel />
   ) : (
     <WhiteLabelPage
-      t={t}
       logoUrls={logoUrls}
       isSettingPaid={isSettingPaid}
       showAbout={showAbout}
       showNotAvailable={showNotAvailable}
       standalone={standalone}
-      onSave={onSave}
       onRestoreDefault={onRestoreDefault}
       isSaving={isSaving}
-      enableRestoreButton={isDefaultWhiteLabel}
+      enableRestoreButton={isDefaultLogos}
+      deviceType={deviceType}
       setLogoUrls={setLogoUrls}
       isWhiteLabelLoaded={isWhiteLabelLoaded}
-      defaultLogoText={defaultLogoText}
       defaultWhiteLabelLogoUrls={defaultWhiteLabelLogoUrls}
-      logoText={logoText}
+      onSave={onSave}
     />
   );
 };
@@ -118,16 +113,18 @@ export const WhiteLabel = inject(
   ({ settingsStore, currentQuotaStore, brandingStore }) => {
     const {
       logoUrls,
-      logoText,
-      defaultLogoText,
-      isDefaultWhiteLabel,
+      brandName,
+      defaultBrandName,
+      isDefaultLogos,
       isWhiteLabelLoaded,
       initWhiteLabel,
       setLogoUrls,
-      setLogoText,
-      saveWhiteLabelSettings,
-      resetWhiteLabelSettings,
+      setBrandName,
+      saveWhiteLabelLogos,
+      saveBrandName,
+      resetWhiteLabelLogos,
     } = brandingStore;
+
     const {
       whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
       deviceType,
@@ -135,6 +132,7 @@ export const WhiteLabel = inject(
       standalone,
       displayAbout,
     } = settingsStore;
+
     const { isCustomizationAvailable } = currentQuotaStore;
 
     const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
@@ -150,15 +148,16 @@ export const WhiteLabel = inject(
       showNotAvailable,
       defaultWhiteLabelLogoUrls,
       logoUrls,
-      logoText,
-      defaultLogoText,
-      isDefaultWhiteLabel,
+      brandName,
+      defaultBrandName,
+      isDefaultLogos,
       isWhiteLabelLoaded,
       initWhiteLabel,
       setLogoUrls,
-      setLogoText,
-      saveWhiteLabelSettings,
-      resetWhiteLabelSettings,
+      setBrandName,
+      saveWhiteLabelLogos,
+      saveBrandName,
+      resetWhiteLabelLogos,
     };
   },
 )(

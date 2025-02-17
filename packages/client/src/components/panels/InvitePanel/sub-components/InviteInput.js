@@ -55,7 +55,6 @@ import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
-import { Box } from "@docspace/shared/components/box";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
 import {
@@ -382,12 +381,12 @@ const InviteInput = ({
           isGroup={isGroup}
         />
         <div className="list-item_content">
-          <Box displayProp="flex" alignItems="center" gapProp="8px">
+          <div className="list-item_content-box">
             <SearchItemText primary disabled={shared}>
               {displayName || groupName}
             </SearchItemText>
             {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
-          </Box>
+          </div>
           <SearchItemText>{email}</SearchItemText>
         </div>
         {shared ? (

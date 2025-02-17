@@ -52,7 +52,6 @@ import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import Filter from "@docspace/shared/api/people/filter";
-import { Box } from "@docspace/shared/components/box";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import AccessSelector from "../../../AccessSelector";
 import {
@@ -293,17 +292,14 @@ const Item = ({
   const displayBody = (
     <>
       <StyledInviteUserBody>
-        <Box
-          displayProp="flex"
-          alignItems="center"
-          gapProp="8px"
-          className={isGroup ? "group-name" : null}
+        <div
+          className={isGroup ? "invite-user-box group-name" : "invite-user-box"}
         >
           <Text {...textProps} truncate noSelect>
             {inputValue}
           </Text>
           {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
-        </Box>
+        </div>
 
         {!isGroup ? (
           <Text
@@ -336,12 +332,7 @@ const Item = ({
           />
         </ErrorWrapper>
       ) : (
-        <Box
-          displayProp="flex"
-          alignItems="right"
-          gapProp="8px"
-          className="role-access"
-        >
+        <div className="role-access">
           {warning ? (
             <div className="role-warning">
               <StyledHelpButton
@@ -370,7 +361,7 @@ const Item = ({
               availableAccess,
             })}
           />
-        </Box>
+        </div>
       )}
     </>
   );

@@ -32,7 +32,6 @@ import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
 import { Text } from "../text";
-import { Box } from "../box";
 
 import { FillingStatusAccordion } from "./FillingStatusLine.accordion";
 import { FillingStatusLineProps } from "./FillingStatusLine.types";
@@ -72,7 +71,7 @@ const FillingStatusLine = ({
         );
       })}
       {statusInterrupted ? (
-        <Box displayProp="flex" alignItems="center" marginProp="15px 0 0">
+        <div className={styles.statusInterruptedContainer}>
           <ReactSVG
             src={StatusInterruptedSvgUrl}
             className={styles.statusInterruptedIcon}
@@ -85,9 +84,9 @@ const FillingStatusLine = ({
           >
             {statusInterruptedText}
           </Text>
-        </Box>
+        </div>
       ) : (
-        <Box displayProp="flex" alignItems="center" marginProp="15px 0 0">
+        <div className={styles.statusDoneContainer}>
           <ReactSVG
             src={StatusDoneReactSvgUrl}
             className={classNames(styles.statusDoneIcon, {
@@ -104,7 +103,7 @@ const FillingStatusLine = ({
           >
             {statusDoneText}
           </Text>
-        </Box>
+        </div>
       )}
     </div>
   );

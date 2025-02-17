@@ -78,6 +78,7 @@ export type PeopleSelectorProps = TSelectorHeader &
     emptyScreenDescription?: string;
 
     roomId?: string | number;
+    setActiveTab?: (id: string) => void;
 
     checkIfUserInvited?: (user: TUser) => boolean;
   } & ContactsSelectorGroups &

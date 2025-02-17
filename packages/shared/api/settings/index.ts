@@ -316,15 +316,6 @@ export function deleteAppearanceTheme(id) {
   });
 }
 
-export function getLogoText(isManagement: boolean = false) {
-  const url = "/settings/whitelabel/logotext";
-
-  return request({
-    method: "get",
-    url: isManagement ? `${url}?isDefault=true` : url,
-  });
-}
-
 export async function getLogoUrls(
   headers = null,
   isManagement: boolean = false,
@@ -345,8 +336,26 @@ export async function getLogoUrls(
   return res;
 }
 
-export function setWhiteLabelSettings(data, isManagement: boolean = false) {
-  const url = "/settings/whitelabel/save";
+export function getIsDefaultWhiteLabelLogos(isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logos/isdefault";
+
+  return request({
+    method: "get",
+    url: isManagement ? `${url}?isDefault=true` : url,
+  });
+}
+
+export function restoreWhiteLabelLogos(isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logos/restore";
+
+  return request({
+    method: "put",
+    url: isManagement ? `${url}?isDefault=true` : url,
+  });
+}
+
+export function setWhiteLabelLogos(data, isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logos/save";
 
   const options = {
     method: "post",
@@ -357,20 +366,23 @@ export function setWhiteLabelSettings(data, isManagement: boolean = false) {
   return request(options);
 }
 
-export function getIsDefaultWhiteLabel(isManagement: boolean = false) {
-  const url = "/settings/whitelabel/logos/isdefault";
+export function setBrandName(data, isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logotext/save";
+
+  const options = {
+    method: "post",
+    url: isManagement ? `${url}?isDefault=true` : url,
+    data,
+  };
+
+  return request(options);
+}
+
+export function getBrandName(isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logotext";
 
   return request({
     method: "get",
-    url: isManagement ? `${url}?isDefault=true` : url,
-  });
-}
-
-export function restoreWhiteLabelSettings(isManagement: boolean = false) {
-  const url = "/settings/whitelabel/restore";
-
-  return request({
-    method: "put",
     url: isManagement ? `${url}?isDefault=true` : url,
   });
 }

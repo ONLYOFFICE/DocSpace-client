@@ -35,7 +35,6 @@ import ReactDOM from "react-dom/client";
 import Countdown, { zeroPad } from "react-countdown";
 import classNames from "classnames";
 
-import { Box } from "../box";
 import { Heading, HeadingSize } from "../heading";
 import { Text } from "../text";
 
@@ -204,13 +203,13 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
           >
             <div className={styles.headerBody} style={{ textAlign }}>
               {showIcon ? (
-                <Box className="logo">
+                <div className="logo">
                   <InfoReactSvg
                     className={styles.infoIcon}
                     style={{ "--color": textColor } as React.CSSProperties}
                     data-testid="snackbar-icon"
                   />
-                </Box>
+                </div>
               ) : null}
 
               <Heading

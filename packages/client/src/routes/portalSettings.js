@@ -66,6 +66,19 @@ const PortalSettingsRoutes = {
         ),
     },
     {
+      path: "customization/branding/brand-name",
+      async lazy() {
+        const { BrandName } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Branding/brandName"
+            ),
+        );
+
+        return { Component: BrandName };
+      },
+    },
+    {
       path: "customization/branding/white-label",
       async lazy() {
         const { WhiteLabel } = await componentLoader(

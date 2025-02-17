@@ -53,6 +53,7 @@ export const FILE_SIZE = "file_size";
 export const ROOM = "room";
 export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
+export const YEAR_KEY = "year";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
 export const PUBLIC_STORAGE_KEY = "public-auth";

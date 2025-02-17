@@ -31,6 +31,7 @@ import classNames from "classnames";
 import EditPenSvgUrl from "PUBLIC_DIR/images/icons/12/pen-edit.react.svg?url";
 import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
+import TemplateRoomIcon from "PUBLIC_DIR/images/template-room-icon.react.svg?url";
 
 import { useClickOutside } from "../../utils/useClickOutside";
 import { getTextColor } from "../../utils";
@@ -40,6 +41,7 @@ import { globalColors } from "../../themes/globalColors";
 
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
+
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
 
@@ -68,6 +70,7 @@ const RoomIcon = ({
   dropDownManualX,
   tooltipContent,
   tooltipId,
+  isTemplate = false,
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
   const [openEditLogo, setOpenLogoEdit] = React.useState(false);
@@ -166,6 +169,26 @@ const RoomIcon = ({
     typeof logo !== "string" &&
     !logo?.color;
 
+  const roomTitleText = (
+    <Text
+      className={classNames("room-title", styles.roomTitle)}
+      noSelect
+      data-testid="room-title"
+      style={
+        {
+          "--room-icon-text-color":
+            isBase && isWrongImage
+              ? globalColors.black
+              : !isBase && !isArchive
+                ? `#${color}`
+                : textColor,
+        } as React.CSSProperties
+      }
+    >
+      {roomTitle}
+    </Text>
+  );
+
   return (
     <>
       <div
@@ -185,7 +208,7 @@ const RoomIcon = ({
           {
             "--room-icon-size": size,
             "--room-icon-radius": radius,
-            "--room-icon-color": `#${color}`,
+            "--room-icon-color": color ? `#${color}` : null,
             "--room-icon-text-color": textColor,
             "--room-icon-cover-size": coverSize / 20,
           } as React.CSSProperties
@@ -193,10 +216,24 @@ const RoomIcon = ({
         data-testid="room-icon"
         data-is-archive={isArchive}
         data-has-editing={withEditing}
+        data-is-template={isTemplate}
         data-is-empty={isEmptyIcon}
         onClick={onToggleOpenEditLogo}
       >
-        {isEmptyIcon ? (
+        {isTemplate ? (
+          <div className="template-icon-container">
+            <ReactSVG className="template-icon-svg" src={TemplateRoomIcon} />
+            {showDefault || !correctImage ? (
+              roomTitleText
+            ) : (
+              <img
+                className={classNames([imgClassName, "room-image"])}
+                src={imgSrc}
+                alt="room icon"
+              />
+            )}
+          </div>
+        ) : isEmptyIcon ? (
           <>
             <ReactSVG
               className="room-icon-empty"
@@ -221,23 +258,7 @@ const RoomIcon = ({
         ) : showDefault || !correctImage ? (
           <>
             <div className="room-background hover-class" />
-            <Text
-              className={classNames("room-title", styles.roomTitle)}
-              noSelect
-              data-testid="room-title"
-              style={
-                {
-                  "--room-icon-text-color":
-                    isBase && isWrongImage
-                      ? globalColors.black
-                      : !isBase && !isArchive
-                        ? `#${color}`
-                        : textColor,
-                } as React.CSSProperties
-              }
-            >
-              {roomTitle}
-            </Text>
+            {roomTitleText}
           </>
         ) : logo &&
           typeof logo !== "string" &&

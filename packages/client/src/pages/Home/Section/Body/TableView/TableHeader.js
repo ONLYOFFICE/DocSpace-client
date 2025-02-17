@@ -28,7 +28,7 @@ import React from "react";
 import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Events } from "@docspace/shared/enums";
+import { Events, RoomsType } from "@docspace/shared/enums";
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
 class FilesTableHeader extends React.Component {
@@ -199,8 +199,15 @@ class FilesTableHeader extends React.Component {
   };
 
   getDefaultColumns = () => {
-    const { isRooms, isTrashFolder, isRecentTab, isIndexing } = this.props;
+    const {
+      isRooms,
+      isTrashFolder,
+      isRecentTab,
+      isTemplatesFolder,
+      isIndexing,
+    } = this.props;
 
+    if (isTemplatesFolder) return this.getTemplatesColumns();
     if (isRooms) return this.getRoomsColumns();
     if (isTrashFolder) return this.getTrashFolderColumns();
     if (isRecentTab) return this.getRecentTabColumns();
@@ -621,6 +628,87 @@ class FilesTableHeader extends React.Component {
     return [...columns];
   };
 
+  getTemplatesColumns = () => {
+    const {
+      t,
+      showStorageInfo,
+      isDefaultRoomsQuotaSet,
+      isArchiveFolder,
+      roomColumnNameIsEnabled,
+      templatesRoomColumnTypeIsEnabled,
+      templateRoomColumnTagsIsEnabled,
+      templatesRoomColumnOwnerIsEnabled,
+      templateRoomColumnActivityIsEnabled,
+      templateRoomQuotaColumnIsEnable,
+    } = this.props;
+
+    const columns = [
+      {
+        key: "Name",
+        title: t("Common:Name"),
+        resizable: true,
+        enable: roomColumnNameIsEnabled,
+        default: true,
+        sortBy: SortByFieldName.Name,
+        minWidth: 210,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "TypeTemplates",
+        title: t("Common:Type"),
+        enable: templatesRoomColumnTypeIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.RoomType,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "TagsTemplates",
+        title: t("Common:Tags"),
+        enable: templateRoomColumnTagsIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Tags,
+        withTagRef: true,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "OwnerTemplates",
+        title: t("Common:Owner"),
+        enable: templatesRoomColumnOwnerIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.Author,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+      {
+        key: "ActivityTemplates",
+        title: t("LastActivity"),
+        enable: templateRoomColumnActivityIsEnabled,
+        resizable: true,
+        sortBy: SortByFieldName.ModifiedDate,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      },
+    ];
+
+    showStorageInfo &&
+      columns.splice(columns.length, 0, {
+        key: "StorageTemplates",
+        title:
+          isDefaultRoomsQuotaSet && !isArchiveFolder
+            ? t("Common:StorageAndQuota")
+            : t("Common:Storage"),
+        enable: templateRoomQuotaColumnIsEnable,
+        sortBy: SortByFieldName.UsedSpace,
+        resizable: true,
+        onChange: this.onColumnChange,
+        onClick: this.onRoomsFilter,
+      });
+
+    return [...columns];
+  };
+
   onColumnChange = (key) => {
     const { columns } = this.state;
     const { setColumnEnable } = this.props;
@@ -642,7 +730,13 @@ class FilesTableHeader extends React.Component {
   };
 
   onFilter = (sortBy) => {
-    const { filter, setIsLoading, isPublicRoom, publicRoomKey } = this.props;
+    const {
+      filter,
+      setIsLoading,
+      isPublicRoom,
+      publicRoomKey,
+      isPublicRoomType,
+    } = this.props;
     const newFilter = filter.clone();
 
     if (newFilter.sortBy !== sortBy) {
@@ -654,17 +748,18 @@ class FilesTableHeader extends React.Component {
 
     setIsLoading(true);
 
-    if (isPublicRoom) {
-      window.DocSpace.navigate(
-        `${
-          window.DocSpace.location.pathname
-        }?key=${publicRoomKey}&${newFilter.toUrlParams()}`,
-      );
-    } else {
-      window.DocSpace.navigate(
-        `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
-      );
+    const currentUrl = window.location.href;
+
+    if (
+      isPublicRoom ||
+      (isPublicRoomType && publicRoomKey && currentUrl.includes("key"))
+    ) {
+      newFilter.key = publicRoomKey;
     }
+
+    window.DocSpace.navigate(
+      `${window.DocSpace.location.pathname}?${newFilter.toUrlParams()}`,
+    );
   };
 
   onRoomsFilter = (sortBy) => {
@@ -672,6 +767,7 @@ class FilesTableHeader extends React.Component {
       this.props;
 
     const newFilter = roomsFilter.clone();
+
     if (newFilter.sortBy !== sortBy) {
       newFilter.sortBy = sortBy;
     } else {
@@ -767,7 +863,8 @@ export default inject(
       setRoomsFilter,
       indexColumnSize,
     } = filesStore;
-    const { isRecentTab, isArchiveFolder, isTrashFolder } = treeFoldersStore;
+    const { isRecentTab, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
+      treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
     const { isFrame, frameConfig } = settingsStore;
@@ -811,12 +908,25 @@ export default inject(
       sizeVDRColumnIsEnabled,
       typeVDRColumnIsEnabled,
 
+      templatesRoomColumnTypeIsEnabled,
+      templateRoomColumnTagsIsEnabled,
+      templatesRoomColumnOwnerIsEnabled,
+      templateRoomColumnActivityIsEnabled,
+      templateRoomQuotaColumnIsEnable,
+
       getColumns,
       setColumnEnable,
     } = tableStore;
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
-    const { changeDocumentsTabs, isIndexedFolder } = selectedFolderStore;
+
+    const { changeDocumentsTabs, isIndexedFolder, roomType } =
+      selectedFolderStore;
+
+    const isPublicRoomType =
+      roomType === RoomsType.PublicRoom ||
+      roomType === RoomsType.CustomRoom ||
+      roomType === RoomsType.FormRoom;
 
     return {
       setRoomsFilter,
@@ -875,11 +985,19 @@ export default inject(
       sizeVDRColumnIsEnabled,
       typeVDRColumnIsEnabled,
 
+      templatesRoomColumnTypeIsEnabled,
+      templateRoomColumnTagsIsEnabled,
+      templatesRoomColumnOwnerIsEnabled,
+      templateRoomColumnActivityIsEnabled,
+      templateRoomQuotaColumnIsEnable,
+
       getColumns,
       setColumnEnable,
       isTrashFolder,
+      isTemplatesFolder,
       isPublicRoom,
       publicRoomKey,
+      isPublicRoomType,
 
       isFrame,
       isRecentTab,

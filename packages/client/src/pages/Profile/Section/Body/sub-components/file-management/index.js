@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { SettingsCommonSkeleton } from "@docspace/shared/skeletons/settings";
 
@@ -93,7 +92,7 @@ const FileManagement = ({
   if (!ready) return <SettingsCommonSkeleton />;
   return (
     <StyledWrapper showTitle={showTitle} hideAdminSettings={!showAdminSettings}>
-      <Box className="settings-section">
+      <div className="settings-section">
         <div className="toggle-btn-wrapper">
           <ToggleButton
             className="ask-again toggle-btn"
@@ -142,7 +141,7 @@ const FileManagement = ({
           />
           <Text>{t("DisplayFileExtension")}</Text>
         </div>
-      </Box>
+      </div>
     </StyledWrapper>
   );
 };

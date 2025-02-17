@@ -28,7 +28,6 @@ import { useState } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button } from "@docspace/shared/components/button";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
 const LogoutAllSessionDialog = ({
@@ -62,14 +61,20 @@ const LogoutAllSessionDialog = ({
         <Text style={{ margin: "15px 0" }}>
           {t("Profile:DescriptionForSecurity")}
         </Text>
-        <Box displayProp="flex" alignItems="center">
+        <div
+          style={{
+            boxSizing: "border-box",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
           <Checkbox
             className="change-password"
             isChecked={isChecked}
             onChange={onChangeCheckbox}
             label={t("Profile:ChangePasswordAfterLoggingOut")}
           />
-        </Box>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

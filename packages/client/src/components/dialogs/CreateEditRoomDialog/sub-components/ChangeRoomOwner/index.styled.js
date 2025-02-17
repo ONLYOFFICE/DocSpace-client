@@ -45,4 +45,13 @@ export const ChangeRoomOwner = styled.div.attrs(injectDefaultTheme)`
       }
     }
   }
+
+  .change-owner-display-wrapper {
+    display: block;
+    align-items: center;
+
+    .change-owner-link {
+      margin-left: auto;
+    }
+  }
 `;

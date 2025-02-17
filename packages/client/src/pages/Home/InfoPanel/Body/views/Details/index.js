@@ -31,13 +31,20 @@ import { withTranslation } from "react-i18next";
 
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
+import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import { FileType, FolderType } from "@docspace/shared/enums";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
-
+import { Button } from "@docspace/shared/components/button";
+import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import DetailsHelper from "../../helpers/DetailsHelper";
-import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details";
 import { StyledProperties, StyledSubtitle } from "../../styles/common";
+
+import {
+  StyledNoThumbnail,
+  StyledThumbnail,
+  StyledPublicRoomBar,
+} from "../../styles/details";
 
 const Details = ({
   t,
@@ -55,6 +62,7 @@ const Details = ({
   getLogoCoverModel,
   onChangeFile,
   roomLifetime,
+  onCreateRoomFromTemplate,
 }) => {
   const [itemProperties, setItemProperties] = useState([]);
 
@@ -96,6 +104,10 @@ const Details = ({
     onChangeFile(e, t);
   };
 
+  const onCreateRoom = () => {
+    onCreateRoomFromTemplate(selection);
+  };
+
   useEffect(() => {
     createThumbnailAction();
   }, [selection, createThumbnailAction]);
@@ -120,9 +132,39 @@ const Details = ({
     ? t("Files:RecentlyOpenedTooltip")
     : null;
 
+  const isTemplate =
+    selection && "isTemplate" in selection && selection.isTemplate;
+
   return (
     <>
-      {selection.thumbnailUrl && !isThumbnailError ? (
+      {isTemplate ? (
+        <StyledPublicRoomBar>
+          <PublicRoomBar
+            className="room-template_bar"
+            headerText={t("Files:RoomTemplate")}
+            iconName={FormReactSvgUrl}
+            bodyText={
+              <>
+                <Text
+                  fontSize="12px"
+                  fontWeight={400}
+                  className="room-template_text"
+                >
+                  {t("Files:RoomTemplateDescription")}
+                </Text>
+
+                <Button
+                  label={t("Files:CreateRoom")}
+                  className="room-template_button"
+                  onClick={onCreateRoom}
+                  size="extraSmall"
+                  primary
+                />
+              </>
+            }
+          />
+        </StyledPublicRoomBar>
+      ) : selection.thumbnailUrl && !isThumbnailError ? (
         <StyledThumbnail
           isImageOrMedia={
             selection?.viewAccessibility?.ImageView ||
@@ -166,13 +208,11 @@ const Details = ({
           />
         </StyledNoThumbnail>
       )}
-
       <StyledSubtitle>
         <Text fontWeight="600" fontSize="14px">
           {t("Properties")}
         </Text>
       </StyledSubtitle>
-
       <StyledProperties>
         {itemProperties.map((property) => {
           return (
@@ -214,7 +254,7 @@ export default inject(
     const { culture } = settingsStore;
     const { user } = userStore;
 
-    const { selectTag } = filesActionsStore;
+    const { selectTag, onCreateRoomFromTemplate } = filesActionsStore;
 
     const isVisitor = user.isVisitor;
     const isCollaborator = user.isCollaborator;
@@ -237,6 +277,7 @@ export default inject(
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
       onChangeFile: avatarEditorDialogStore.onChangeFile,
       roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
+      onCreateRoomFromTemplate,
     };
   },
 )(

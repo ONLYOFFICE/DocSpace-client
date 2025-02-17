@@ -134,6 +134,7 @@ export const getCategoryType = (location) => {
 export const getCategoryTypeByFolderType = (folderType, parentId) => {
   switch (folderType) {
     case FolderType.Rooms:
+    case FolderType.RoomTemplates:
       return parentId > 0 ? CategoryType.SharedRoom : CategoryType.Shared;
 
     case FolderType.Archive:

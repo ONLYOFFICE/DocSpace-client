@@ -169,7 +169,9 @@
   "EmptyGroupDescription": "This group is empty",
   "EmptyHeader": "No other accounts here yet",
   "EmptyRoomsDescription": "Please create the first room in My rooms.",
+  "EmptyTemplatesRoomsDescription": "Create your first room template and then you can create new rooms based on it.",
   "EmptyRoomsHeader": "No rooms here yet",
+  "EmptyTemplatesRoomsHeader": "No templates found",
   "Enable": "Enable",
   "EnableThirdPartyIntegration": "Please ask a {{productName}} owner or administrator to enable the corresponding service in the Integration section of the {{productName}} Settings.",
   "EncryptingFile": "Encrypting file",
@@ -295,6 +297,7 @@
   "MeLabel": "Me",
   "Member": "Member",
   "Members": "Members",
+  "Accesses": "Accesses",
   "MergeAndOverwrite": "Merge and overwrite",
   "MergeFolders": "Merge folders",
   "MergeFoldersDescription": "Two folders will be merged into one with all the contents",
@@ -376,6 +379,7 @@
   "PaymentsTitle": "Payments",
   "People": "People",
   "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> per admin/month",
+  "PerUserYear": "<1>{{currencySymbol}}</1><1>{{price}}</1> per admin/year",
   "Petabyte": "PB",
   "Phone": "Phone",
   "Plugins": "Plugins",
@@ -442,6 +446,7 @@
   "RoomShareLinkRestrictionActivated": "File content copy, file downloading and printing restriction activated.",
   "RoomShareLinkRole": "The link for the <1>{{role}}</1> role is successfully copied to clipboard.",
   "RoomSpaceQuotaExceeded": "Room space quota exceeded ({{size}}).",
+  "Templates": "Templates",
   "SameEmail": "You can't use the same email address",
   "SaveButton": "Save",
   "SaveHereButton": "Save here",
@@ -666,5 +671,7 @@
   "BackupList": "Backup List",
   "RestoreBackupWarningText": "{{productName}} will become unavailable during the restore process. After the restore is complete all the changes made after the date of the selected restore point will be lost.",
   "UserAgreement": "I confirm and want to proceed",
-  "LocalFile": "Local file"
+  "LocalFile": "Local file",
+  "FromTemplate": "From template",
+  "FromTemplateRoomInfo": "Create a room based on a template. All settings, users, folders and files will be taken from the selected room template."
 }

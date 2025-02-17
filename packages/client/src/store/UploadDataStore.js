@@ -1652,6 +1652,9 @@ class UploadDataStore {
           data = res[res.length - 1] ? res[res.length - 1] : null;
         }
 
+        if (!data) {
+          return Promise.reject();
+        }
         return this.loopFilesOperations(data, pbData)
           .then(() =>
             this.moveToCopyTo(destFolderId, pbData, true, fileIds, folderIds),
@@ -1703,6 +1706,10 @@ class UploadDataStore {
           }
 
           data = res[res.length - 1] ? res[res.length - 1] : null;
+        }
+
+        if (!data) {
+          return Promise.reject();
         }
 
         return this.loopFilesOperations(data, pbData)
@@ -1796,7 +1803,7 @@ class UploadDataStore {
         );
   };
 
-  loopFilesOperations = async (data, pbData, isDownloadAction) => {
+  loopFilesOperations = async (data, pbData) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
     if (!data) {
@@ -1823,11 +1830,7 @@ class UploadDataStore {
       operationItem = item;
 
       progress = item ? item.progress : 100;
-      finished = item
-        ? isDownloadAction
-          ? item.finished && item.url
-          : item.finished
-        : true;
+      finished = item ? item.finished : true;
 
       setSecondaryProgressBarData({
         operation: pbData.operation,

@@ -481,10 +481,16 @@ class FilesActionStore {
             if (result?.error) return Promise.reject(result.error);
 
             const data = result ?? null;
+
+            if (!data) {
+              return Promise.reject();
+            }
+
             const pbData = {
               operation: operationName,
               operationId,
             };
+
             await this.uploadDataStore.loopFilesOperations(data, pbData);
 
             const showToast = () => {
@@ -697,6 +703,10 @@ class FilesActionStore {
 
           if (result?.error) return Promise.reject(result.error);
           const data = result ?? null;
+
+          if (!data) {
+            return Promise.reject();
+          }
           const pbData = {
             operation: operationName,
             label,
@@ -706,11 +716,7 @@ class FilesActionStore {
           const item =
             data?.finished && data?.url
               ? data
-              : await this.uploadDataStore.loopFilesOperations(
-                  data,
-                  pbData,
-                  true,
-                );
+              : await this.uploadDataStore.loopFilesOperations(data, pbData);
 
           clearActiveOperations(fileIds, folderIds);
           setDownloadItems([]);
@@ -738,7 +744,7 @@ class FilesActionStore {
         completed: true,
         operationId,
       });
-      const error = err.error;
+      const error = err?.error;
 
       if (error?.includes("password")) {
         const filesIds = error.match(/\d+/g)?.map(Number) ?? [
@@ -1070,6 +1076,7 @@ class FilesActionStore {
       isFolder: item.isFolder,
       operationIds: [item.id],
       destFolderInfo: selectedFolder,
+      alert: false,
     });
 
     this.filesStore.addActiveItems(fileIds, folderIds);
@@ -1082,6 +1089,10 @@ class FilesActionStore {
 
         const pbData = { operation: operationName, operationId };
         const data = lastResult ?? null;
+
+        if (!data) {
+          return Promise.reject();
+        }
 
         const operationData = await this.uploadDataStore.loopFilesOperations(
           data,

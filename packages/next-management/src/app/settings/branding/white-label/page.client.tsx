@@ -32,11 +32,10 @@ import { useRouter, usePathname } from "next/navigation";
 import cloneDeep from "lodash/cloneDeep";
 
 import {
-  setWhiteLabelSettings,
-  restoreWhiteLabelSettings,
-  getLogoText,
+  setWhiteLabelLogos,
+  restoreWhiteLabelLogos,
   getLogoUrls,
-  getIsDefaultWhiteLabel as getIsDefaultWhiteLabelRequest,
+  getIsDefaultWhiteLabelLogos,
 } from "@docspace/shared/api/settings";
 import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveSSRNavigation";
 import { toastr } from "@docspace/shared/components/toast";
@@ -76,11 +75,9 @@ export const WhiteLabelPage = ({
   const pathname = usePathname();
 
   const [logoUrls, setLogoUrls] = useState(cloneDeep(whiteLabelLogos));
-  const [companyName, setCompanyName] = useState(whiteLabelText);
   const [defaultLogoUrls, setDefaultLogoUrls] = useState(
     cloneDeep(whiteLabelLogos),
   );
-  const [defaultText, setDefaultText] = useState(whiteLabelText);
   const [isDefault, setIsDefault] = useState(isDefaultWhiteLabel);
 
   const [isSaving, startTransition] = useTransition();
@@ -99,13 +96,10 @@ export const WhiteLabelPage = ({
   const onSave = async (data: IWhiteLabelData) => {
     startTransition(async () => {
       try {
-        await setWhiteLabelSettings(data, true);
-        const text = (await getLogoText(true)) as string;
+        await setWhiteLabelLogos(data, true);
         const logos = await getLogoUrls(null, true);
-        const isDefault = await getIsDefaultWhiteLabelRequest(true);
+        const isDefault = await getIsDefaultWhiteLabelLogos(true);
 
-        setCompanyName(text);
-        setDefaultText(text);
         setLogoUrls(logos);
         setDefaultLogoUrls(logos);
         setIsDefault(getIsDefaultWhiteLabel(isDefault));
@@ -118,13 +112,10 @@ export const WhiteLabelPage = ({
 
   const onRestoreDefault = async () => {
     try {
-      await restoreWhiteLabelSettings(true);
-      const text = (await getLogoText(true)) as string;
+      await restoreWhiteLabelLogos(true);
       const logos = await getLogoUrls(null, true);
-      const isDefault = await getIsDefaultWhiteLabelRequest(true);
+      const isDefault = await getIsDefaultWhiteLabelLogos(true);
 
-      setCompanyName(text);
-      setDefaultText(text);
       setLogoUrls(logos);
       setDefaultLogoUrls(logos);
       setIsDefault(getIsDefaultWhiteLabel(isDefault));
@@ -147,9 +138,7 @@ export const WhiteLabelPage = ({
       enableRestoreButton={isDefault}
       setLogoUrls={setLogoUrls}
       isWhiteLabelLoaded={true}
-      defaultLogoText={defaultText}
       defaultWhiteLabelLogoUrls={defaultLogoUrls}
-      logoText={companyName}
     />
   );
 };

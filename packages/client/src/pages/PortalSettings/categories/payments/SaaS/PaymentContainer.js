@@ -127,6 +127,7 @@ const PaymentContainer = (props) => {
     t,
     isNonProfit,
     isPaymentDateValid,
+    isYearTariff,
   } = props;
   const renderTooltip = () => {
     return (
@@ -330,10 +331,23 @@ const PaymentContainer = (props) => {
                 fontSize="14px"
                 className="payment-info_managers-price"
               >
-                <Trans t={t} i18nKey="PerUserMonth" ns="Common">
-                  From {{ currencySymbol }}
-                  {{ price: startValue }} per admin/month
-                </Trans>
+                {isYearTariff ? (
+                  <Trans
+                    t={t}
+                    i18nKey="PerUserYear"
+                    ns="Common"
+                    values={{ currencySymbol, price: startValue }}
+                    components={{ 1: <span /> }}
+                  />
+                ) : (
+                  <Trans
+                    t={t}
+                    i18nKey="PerUserMonth"
+                    ns="Common"
+                    values={{ currencySymbol, price: startValue }}
+                    components={{ 1: <span /> }}
+                  />
+                )}
               </Text>
 
               {renderTooltip()}
@@ -367,7 +381,7 @@ export default inject(
   }) => {
     const { showText: expandArticle, theme } = settingsStore;
 
-    const { isFreeTariff, currentTariffPlanTitle, isNonProfit } =
+    const { isFreeTariff, currentTariffPlanTitle, isNonProfit, isYearTariff } =
       currentQuotaStore;
 
     const {
@@ -411,6 +425,7 @@ export default inject(
       portalPaymentQuotas,
       isNonProfit,
       isPaymentDateValid,
+      isYearTariff,
     };
   },
 )(observer(PaymentContainer));

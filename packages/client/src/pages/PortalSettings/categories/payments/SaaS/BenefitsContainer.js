@@ -90,7 +90,7 @@ const BenefitsContainer = ({ t, features }) => {
       >
         {t("Benefits")}
       </Text>
-      {features.map((item) => {
+      {Array.from(features.values()).map((item) => {
         if (!item.title || !item.image) return;
         return (
           <div className="payment-benefits" key={item.title || item.image}>

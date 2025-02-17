@@ -248,7 +248,10 @@ const Article = ({
         {articleMainButtonContent &&
         withMainButton &&
         currentDeviceType !== DeviceType.mobile ? (
-          <div className={styles.articleMainButton}>
+          <div
+            className={styles.articleMainButton}
+            data-mobile-article={isMobileArticle ? "true" : "false"}
+          >
             {articleMainButtonContent.props.children}
           </div>
         ) : null}
@@ -325,7 +328,10 @@ const Article = ({
       ) : null}
 
       {articleMainButtonContent && currentDeviceType === DeviceType.mobile ? (
-        <div className={styles.articleMainButton}>
+        <div
+          className={styles.articleMainButton}
+          data-mobile-article={isMobileArticle ? "true" : "false"}
+        >
           {articleMainButtonContent.props.children}
         </div>
       ) : null}

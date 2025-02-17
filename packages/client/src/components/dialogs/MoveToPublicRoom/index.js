@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
@@ -93,8 +92,7 @@ const MoveToPublicRoomComponent = (props) => {
           await itemOperationToFolder(moveToPublicRoomData);
         }
       })
-      .catch((e) => {
-        toastr.error(e);
+      .catch(() => {
         setIsLoading(false);
         clearActiveOperations(fileIds, folderIds);
       })

@@ -148,6 +148,8 @@ class FilesSettingsStore {
 
   hideConfirmRoomLifetime = false;
 
+  hideConfirmCancelOperation = false;
+
   constructor(
     thirdPartyStore,
     treeFoldersStore,
@@ -253,6 +255,13 @@ class FilesSettingsStore {
     api.files.storeForceSave(data).then((res) => this.setStoreForcesave(res));
 
   setStoreForcesave = (val) => (this.storeForcesave = val);
+
+  setHideConfirmCancelOperation = (data) => {
+    api.files
+      .changeHideConfirmCancelOperation(data)
+      .then((res) => this.setFilesSetting("hideConfirmCancelOperation", res))
+      .catch((e) => toastr.error(e));
+  };
 
   setKeepNewFileName = (data) => {
     api.files

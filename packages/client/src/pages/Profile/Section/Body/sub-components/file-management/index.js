@@ -56,6 +56,8 @@ const FileManagement = ({
   setDisplayFileExtension,
   getFilesSettings,
   logoText,
+  hideConfirmCancelOperation,
+  setHideConfirmCancelOperation,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
@@ -84,6 +86,10 @@ const FileManagement = ({
     setDisplayFileExtension(!displayFileExtension);
     window.DocSpace.displayFileExtension = !displayFileExtension;
   }, [setDisplayFileExtension, displayFileExtension]);
+
+  const onChangeCancellationNotification = React.useCallback(() => {
+    setHideConfirmCancelOperation(!hideConfirmCancelOperation);
+  }, [hideConfirmCancelOperation, setHideConfirmCancelOperation]);
 
   const onChangeOpenEditorInSameTab = React.useCallback(() => {
     setOpenEditorInSameTab(!openEditorInSameTab);
@@ -141,6 +147,14 @@ const FileManagement = ({
           />
           <Text>{t("DisplayFileExtension")}</Text>
         </div>
+        <div className="toggle-btn-wrapper">
+          <ToggleButton
+            className="cancelletion-notification toggle-btn"
+            onChange={onChangeCancellationNotification}
+            isChecked={hideConfirmCancelOperation}
+          />
+          <Text>{t("CancellaionNotification")}</Text>
+        </div>
       </div>
     </StyledWrapper>
   );
@@ -168,6 +182,8 @@ export default inject(
       displayFileExtension,
       setDisplayFileExtension,
       getFilesSettings,
+      hideConfirmCancelOperation,
+      setHideConfirmCancelOperation,
     } = filesSettingsStore;
     const { logoText } = settingsStore;
 
@@ -197,6 +213,8 @@ export default inject(
       setDisplayFileExtension,
       getFilesSettings,
       logoText,
+      hideConfirmCancelOperation,
+      setHideConfirmCancelOperation,
     };
   },
 )(observer(FileManagement));

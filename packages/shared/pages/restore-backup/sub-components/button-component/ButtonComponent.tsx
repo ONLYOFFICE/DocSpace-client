@@ -159,7 +159,6 @@ const ButtonContainer = (props: ButtonContainerProps) => {
           className="layout-progress-bar"
           icon={FloatingButtonIcons.file}
           alert={false}
-          percent={downloadingProgress}
         />
       ) : null}
     </div>

@@ -206,3 +206,17 @@ export const ThirdPartyServicesUrlName = Object.freeze({
 export const GENERAL_LINK_HEADER_KEY = "general-link_header";
 
 export const FOLDER_FORM_VALIDATION = /[*+:"<>?|\\\/]/gim;
+
+export const OPERATIONS_NAME = Object.freeze({
+  trash: "trash",
+  deletePermanently: "deletePermanently",
+  download: "download",
+  duplicate: "duplicate",
+  exportIndex: "exportIndex",
+  markAsRead: "markAsRead",
+  copy: "copy",
+  move: "move",
+  convert: "convert",
+  other: "other",
+  upload: "upload",
+});

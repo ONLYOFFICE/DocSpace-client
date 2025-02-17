@@ -229,8 +229,6 @@
   --filter-sort-button-sort-fill: #{$light-gray-dark};
   --filter-sort-button-selected-background: #{$light-gray-hover};
 
-  --floating-button-alert-fill: "";
-  --floating-button-alert-path: "";
   --floating-button-icon-fill: #{$white};
   --floating-button-background: #{$light-icons};
   --floating-button-box-shadow: 0px 5px 20px #{$popup-shadow};
@@ -274,6 +272,8 @@
   --link-dropdown-padding-right: 20px;
   --link-dropdown-max-width: 200px;
   --link-dropdown-expander-width: 6.35px;
+  --status-icon-color-positive: #{$light-status-positive};
+  --status-icon-color-negative: #{$light-error-status};
 }
 
 .dark {
@@ -558,8 +558,6 @@
   --filter-sort-button-sort-fill: #{$dark-gray-dark};
   --filter-sort-button-selected-background: #{$gray-dark-strong};
 
-  --floating-button-alert-fill: #{$main-orange};
-  --floating-button-alert-path: #{$black};
   --floating-button-icon-fill: #{$black};
   --floating-button-background: #{$white};
   --floating-button-box-shadow: 0px 12px 24px #{$popup-shadow};
@@ -600,6 +598,8 @@
   --link-dropdown-padding-right: 20px;
   --link-dropdown-max-width: 200px;
   --link-dropdown-expander-width: 6.35px;
+  --status-icon-color-positive: #{$dark-status-positive};
+  --status-icon-color-negative: #{$dark-error-status};
 }
 
 .light {
@@ -866,6 +866,9 @@
   --progress-bar-percent-background: #{$light-blue-main};
   --progress-bar-status-color: #{$black};
   --progress-bar-error-color: #{$light-error-status};
+
+  --progress-bar-icon-color: #{$white};
+  --progress-bar-hover-icon: #{$gray};
 }
 
 .dark {
@@ -873,6 +876,9 @@
   --progress-bar-percent-background: #{$dark-status-warning};
   --progress-bar-status-color: #{$white};
   --progress-bar-error-color: #{$dark-error-status};
+
+  --progress-bar-icon-color: #{$white};
+  --progress-bar-hover-icon: #{$gray};
 }
 
 .light {

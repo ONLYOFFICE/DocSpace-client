@@ -62,6 +62,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     badgeTitle,
     badgeComponent,
     title,
+    item,
   } = props;
 
   const onClickAction = (e: React.MouseEvent) => {
@@ -79,7 +80,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
   };
 
   const onMouseUpAction = () => {
-    if (isDragging) onDrop?.(id, text);
+    if (isDragging) onDrop?.(id, text, item);
   };
 
   const renderHeaderItem = () => {

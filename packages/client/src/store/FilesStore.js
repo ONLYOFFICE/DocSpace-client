@@ -2208,6 +2208,8 @@ class FilesStore {
         "delete",
         "remove-from-recent",
         "copy-general-link",
+        "separate-stop-filling",
+        "stop-filling",
       ];
 
       if (optionsToRemove.length) {
@@ -2230,7 +2232,11 @@ class FilesStore {
 
       if (!isPdf) {
         // TODO: Remove after change security options
-        fileOptions = removeOptions(fileOptions, ["filling-status"]);
+        fileOptions = removeOptions(fileOptions, [
+          "filling-status",
+          "separate-stop-filling",
+          "stop-filling",
+        ]);
       }
 
       if (!canDownload) {

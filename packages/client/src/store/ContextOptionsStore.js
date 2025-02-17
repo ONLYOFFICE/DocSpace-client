@@ -76,6 +76,7 @@ import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
+import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
@@ -2052,6 +2053,18 @@ class ContextOptionsStore {
         icon: RemoveOutlineSvgUrl,
         onClick: () => this.onClickRemoveFromRecent(item),
         disabled: !this.treeFoldersStore.isRecentTab,
+      },
+      {
+        key: "separate-stop-filling",
+        isSeparator: true,
+      },
+      {
+        id: "option_stop-filling",
+        key: "stop-filling",
+        label: t("Common:StopFilling"),
+        icon: AccessNoneReactSvgUrl,
+        onClick: () => this.dialogsStore.setStopFillingDialogVisible(true),
+        disabled: false,
       },
     ];
     const options = this.filterModel(optionsModel, contextOptions);

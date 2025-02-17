@@ -32,6 +32,27 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { Link, LinkType } from "@docspace/shared/components/link";
+import styled from "styled-components";
+
+const StyledBody = styled.div`
+  .note-text {
+    margin: 0;
+  }
+
+  .warning-text {
+    margin: 16px 0;
+  }
+
+  .body-text {
+    margin-top: 8px;
+  }
+
+  .body-link {
+    display: block;
+    margin-top: 12px;
+  }
+`;
 
 type ChangeUserTypeDialogProps = {
   visible: boolean;
@@ -47,6 +68,8 @@ type ChangeUserTypeDialogProps = {
 
   onClose: VoidFunction;
   onChangeUserType: VoidFunction;
+
+  personalUserFolderTitle: string;
 };
 
 const ChangeUserTypeDialog = ({
@@ -58,6 +81,7 @@ const ChangeUserTypeDialog = ({
   userNames,
   onClose,
   onChangeUserType,
+  personalUserFolderTitle,
 }: ChangeUserTypeDialogProps) => {
   const { t } = useTranslation(["ChangeUserTypeDialog", "People", "Common"]);
 
@@ -80,42 +104,72 @@ const ChangeUserTypeDialog = ({
       })
     );
 
+  const needReassignData = true;
+  const getBody = () => {
+    if (isGuestsDialog) return guestBody;
+
+    return (
+      <StyledBody>
+        <Text>
+          <Trans
+            i18nKey="ChangeUserTypeMessage"
+            ns="ChangeUserTypeDialog"
+            t={t}
+            values={{ firstType, secondType }}
+          />
+        </Text>
+        <Text className="note-text">
+          <Trans
+            i18nKey="ChangeUserTypeNote"
+            ns="ChangeUserTypeDialog"
+            t={t}
+            values={{ productName: t("Common:ProductName") }}
+            components={{
+              1: <span style={{ fontWeight: 600 }} />,
+            }}
+          />
+        </Text>
+        <Text className="warning-text" fontSize="16px">
+          {t("Common:Warning")}
+        </Text>
+        <Text className="body-text">
+          <Trans
+            i18nKey="DataReassignmentInfo"
+            ns="ChangeUserTypeDialog"
+            t={t}
+            values={{ sectionName: personalUserFolderTitle }}
+            components={{
+              1: <span style={{ fontWeight: 600 }} />,
+            }}
+          />
+        </Text>
+        {needReassignData ? (
+          <Link
+            className="body-link"
+            type={LinkType.action}
+            fontSize="13px"
+            fontWeight={600}
+            isHovered
+            // onClick={onClickReassignData}
+          >
+            {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
+          </Link>
+        ) : null}
+      </StyledBody>
+    );
+  };
   return (
     <ModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
       autoMaxHeight
+      isLarge={!isGuestsDialog}
     >
       <ModalDialog.Header>
         {isGuestsDialog ? t("ChangeUserTypeButton") : t("ChangeUserTypeHeader")}
       </ModalDialog.Header>
-      <ModalDialog.Body>
-        <Text>
-          {isGuestsDialog ? (
-            guestBody
-          ) : firstType ? (
-            <Trans
-              i18nKey="ChangeUserTypeMessage"
-              ns="ChangeUserTypeDialog"
-              t={t}
-              values={{ firstType, secondType }}
-            />
-          ) : (
-            <Trans
-              i18nKey="ChangeUserTypeMessageMulti"
-              ns="ChangeUserTypeDialog"
-              t={t}
-              values={{ secondType }}
-            />
-          )}{" "}
-          {!isGuestsDialog
-            ? t("ChangeUserTypeMessageWarning", {
-                productName: t("Common:ProductName"),
-              })
-            : null}
-        </Text>
-      </ModalDialog.Body>
+      <ModalDialog.Body>{getBody()}</ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           id="change-user-type-modal_submit"

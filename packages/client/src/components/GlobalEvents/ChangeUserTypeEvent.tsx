@@ -63,6 +63,7 @@ const ChangeUserTypeEvent = ({
   setInfoPanelSelection,
 
   onClose,
+  personalUserFolderTitle,
 }: ChangeUserTypeEventProps) => {
   const { t } = useTranslation(["ChangeUserTypeDialog", "Common", "Payments"]);
 
@@ -182,30 +183,36 @@ const ChangeUserTypeEvent = ({
       onClose={onCloseAction}
       onChangeUserType={onChangeUserType}
       isRequestRunning={isRequestRunning}
+      personalUserFolderTitle={personalUserFolderTitle}
     />
   );
 };
 
-export default inject(({ peopleStore, infoPanelStore }: TStore) => {
-  const { setInfoPanelSelection } = infoPanelStore;
+export default inject(
+  ({ peopleStore, infoPanelStore, treeFoldersStore }: TStore) => {
+    const { setInfoPanelSelection } = infoPanelStore;
 
-  const { dialogStore, usersStore } = peopleStore;
+    const { dialogStore, usersStore } = peopleStore;
 
-  const { data: dialogData } = dialogStore!;
-  const {
-    updateUserType,
-    getPeopleListItem,
-    needResetUserSelection,
-    setSelected,
-  } = usersStore!;
-  return {
-    needResetUserSelection,
+    const { data: dialogData } = dialogStore!;
 
-    getPeopleListItem,
-    setInfoPanelSelection,
-    setSelected,
+    const { personalUserFolderTitle } = treeFoldersStore;
+    const {
+      updateUserType,
+      getPeopleListItem,
+      needResetUserSelection,
+      setSelected,
+    } = usersStore!;
+    return {
+      needResetUserSelection,
 
-    dialogData,
-    updateUserType,
-  };
-})(observer(ChangeUserTypeEvent));
+      getPeopleListItem,
+      setInfoPanelSelection,
+      setSelected,
+
+      dialogData,
+      updateUserType,
+      personalUserFolderTitle,
+    };
+  },
+)(observer(ChangeUserTypeEvent));

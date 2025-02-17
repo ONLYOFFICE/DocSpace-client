@@ -182,6 +182,10 @@ class TreeFoldersStore {
     return this.rootFoldersTitles[FolderType.Archive]?.id;
   }
 
+  get personalUserFolderTitle() {
+    return this.rootFoldersTitles[FolderType.USER]?.title;
+  }
+
   /**
    * @type {import("@docspace/shared/api/files/types").TFolder=}
    */

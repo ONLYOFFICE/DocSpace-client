@@ -84,22 +84,26 @@ const SMTPSettings = (props) => {
   if (isLoadingContent && !isInit) return <SettingsSMTPSkeleton />;
 
   return (
-    <StyledComponent>
+    <StyledComponent withoutExternalLink={!integrationSettingsUrl}>
       <div className="smtp-settings_main-title">
         <Text className="smtp-settings_description">
           {t("Settings:SMTPSettingsDescription", {
             organizationName: logoText,
           })}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          isHovered
-          target="_blank"
-          href={integrationSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {integrationSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            isHovered
+            target="_blank"
+            href={integrationSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : (
+          <></>
+        )}
       </div>
 
       <CustomSettings t={t} />

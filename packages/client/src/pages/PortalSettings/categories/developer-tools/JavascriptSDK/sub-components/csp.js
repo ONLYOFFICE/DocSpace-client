@@ -233,14 +233,18 @@ const CSP = ({
               {t("CSPInfoBarDescription", {
                 productName: t("Common:ProductName"),
               })}{" "}
-              <Link
-                color={currentColorScheme?.main?.accent}
-                fontSize="13px"
-                fontWeight="400"
-                onClick={() => window.open(installationGuidesUrl, "_blank")}
-              >
-                {t("Common:LearnMore")}
-              </Link>
+              {installationGuidesUrl ? (
+                <Link
+                  color={currentColorScheme?.main?.accent}
+                  fontSize="13px"
+                  fontWeight="400"
+                  onClick={() => window.open(installationGuidesUrl, "_blank")}
+                >
+                  {t("Common:LearnMore")}
+                </Link>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </InfoBar>

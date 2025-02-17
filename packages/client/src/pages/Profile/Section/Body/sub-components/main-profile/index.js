@@ -197,15 +197,19 @@ const MainProfile = (props) => {
         to take part in the translation and get up to 1 year free of charge."
       </Trans>
       <Box displayProp="block" marginProp="10px 0 0">
-        <Link
-          isHovered
-          isBold
-          fontSize="13px"
-          href={becometranslatorUrl}
-          target="_blank"
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {becometranslatorUrl ? (
+          <Link
+            isHovered
+            isBold
+            fontSize="13px"
+            href={becometranslatorUrl}
+            target="_blank"
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : (
+          <></>
+        )}
       </Box>
     </Text>
   );

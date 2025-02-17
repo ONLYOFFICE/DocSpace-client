@@ -201,15 +201,19 @@ class ThirdPartyServices extends React.Component {
             {t("ThirdPartyTitleDescription")}
           </Text>
           <Box marginProp="8px 0 20px 0">
-            <Link
-              className="third-party-link"
-              color={currentColorScheme.main?.accent}
-              isHovered
-              target="_blank"
-              href={integrationSettingsUrl}
-            >
-              {t("Common:LearnMore")}
-            </Link>
+            {integrationSettingsUrl ? (
+              <Link
+                className="third-party-link"
+                color={currentColorScheme.main?.accent}
+                isHovered
+                target="_blank"
+                href={integrationSettingsUrl}
+              >
+                {t("Common:LearnMore")}
+              </Link>
+            ) : (
+              <></>
+            )}
           </Box>
           <Box className="consumer-item-wrapper request-block">
             <img

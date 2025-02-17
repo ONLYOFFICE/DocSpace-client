@@ -283,6 +283,7 @@ const DNSSettingsComponent = (props) => {
       className="category-item-wrapper"
       isSettingPaid={isSettingPaid}
       standalone={standalone}
+      withoutExternalLink={!dnsSettingsUrl}
     >
       {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
@@ -306,15 +307,19 @@ const DNSSettingsComponent = (props) => {
         <Text fontSize="13px" fontWeight={400}>
           {t("DNSSettingsDescription")}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={dnsSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {dnsSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={dnsSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : (
+          <></>
+        )}
       </div>
       {settingsBlock}
       <div className="send-request-container">{buttonContainer}</div>

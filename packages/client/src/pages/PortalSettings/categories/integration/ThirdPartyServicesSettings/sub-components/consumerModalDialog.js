@@ -100,16 +100,21 @@ class ConsumerModalDialog extends React.Component {
       </StyledBox>
     );
 
-    this.description = !feedbackAndSupportUrl ? (
-      <Text as="div">
-        <StyledBox>{this.helpCenterDescription}</StyledBox>
-      </Text>
-    ) : (
-      <>
+    this.description =
+      feedbackAndSupportUrl && this.thirdPartyServicesUrl() ? (
+        <>
+          <Text as="div">{this.supportTeamDescription}</Text>
+          <Text as="div">{this.helpCenterDescription}</Text>
+        </>
+      ) : !feedbackAndSupportUrl && this.thirdPartyServicesUrl() ? (
+        <Text as="div">
+          <StyledBox>{this.helpCenterDescription}</StyledBox>
+        </Text>
+      ) : feedbackAndSupportUrl && !this.thirdPartyServicesUrl() ? (
         <Text as="div">{this.supportTeamDescription}</Text>
-        <Text as="div">{this.helpCenterDescription}</Text>
-      </>
-    );
+      ) : (
+        <></>
+      );
   }
 
   componentDidMount() {

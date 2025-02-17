@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TTranslation } from "types";
-import { DeviceType } from "enums";
 import { IWhiteLabelData } from "../WhiteLabel/WhiteLabel.types";
 
 export interface IBrandNameProps {
@@ -38,5 +37,4 @@ export interface IBrandNameProps {
   isBrandNameLoaded: boolean;
   defaultBrandName: string;
   brandName: string;
-  deviceType: DeviceType;
 }

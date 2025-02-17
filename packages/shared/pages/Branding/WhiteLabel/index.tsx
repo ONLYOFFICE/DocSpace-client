@@ -34,15 +34,11 @@ import { toastr } from "../../../components/toast";
 import { WhiteLabelLogoType } from "../../../enums";
 import { globalColors } from "../../../themes";
 
-import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
-
 import { Logo } from "./Logo";
 import { WhiteLabelWrapper, StyledSpacer } from "./WhiteLabel.styled";
 import { IWhiteLabel, IWhiteLabelData } from "./WhiteLabel.types";
 import { getLogoOptions, generateLogo, uploadLogo } from "./WhiteLabel.helper";
 import { WhiteLabelHeader } from "./WhiteLabelHeader";
-
-import { brandingRedirectUrl } from "../constants";
 
 export const WhiteLabel = (props: IWhiteLabel) => {
   const {
@@ -55,20 +51,14 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     onRestoreDefault,
     isSaving,
     enableRestoreButton,
-    deviceType,
     setLogoUrls,
     defaultWhiteLabelLogoUrls,
   } = props;
   const { t } = useTranslation("Common");
+
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
 
   const [isEmptyLogoText, setIsEmptyLogoText] = useState(!logoTextWhiteLabel);
-
-  useResponsiveNavigation({
-    redirectUrl: brandingRedirectUrl,
-    currentLocation: "white-label",
-    deviceType,
-  });
 
   const onChangeLogoText = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;

@@ -74,7 +74,6 @@ export interface IWhiteLabel {
   setLogoUrls: (logoUrls: ILogo[]) => void;
   isWhiteLabelLoaded: boolean;
   defaultWhiteLabelLogoUrls: ILogo[];
-  deviceType: DeviceType;
 }
 
 export interface ILogoProps {

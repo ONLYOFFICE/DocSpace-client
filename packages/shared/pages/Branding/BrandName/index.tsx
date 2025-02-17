@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
 import { Nullable } from "types";
@@ -40,13 +41,10 @@ import {
 
 import { StyledBrandName } from "./BrandName.styled";
 import { IBrandNameProps } from "./BreandName.types";
-import { NotAvailable } from "./NotAvailable";
+import { NotAvailable } from "../WhiteLabel/NotAvailable";
 import { IWhiteLabelData } from "../WhiteLabel/WhiteLabel.types";
-import { useResponsiveNavigation } from "../../../hooks/useResponsiveNavigation";
-import { brandingRedirectUrl } from "../constants";
 
 export const BrandName = ({
-  t,
   showNotAvailable,
   isSettingPaid,
   standalone,
@@ -54,13 +52,8 @@ export const BrandName = ({
   isBrandNameLoaded,
   defaultBrandName,
   brandName,
-  deviceType,
 }: IBrandNameProps) => {
-  useResponsiveNavigation({
-    redirectUrl: brandingRedirectUrl,
-    currentLocation: "brand-name",
-    deviceType,
-  });
+  const { t } = useTranslation("Common");
 
   const [brandNameWhiteLabel, setBrandNameWhiteLabel] =
     useState<Nullable<string>>(null);
@@ -92,7 +85,7 @@ export const BrandName = ({
 
   return (
     <StyledBrandName>
-      {showNotAvailable ? <NotAvailable t={t} /> : null}
+      {showNotAvailable ? <NotAvailable /> : null}
 
       <div className="header-container">
         <Text fontSize="16px" fontWeight="700">

@@ -356,14 +356,11 @@ class ContactsConextOptionsStore {
       isActive: item ? isCollaborator : userSelectionRole === EmployeeType.User,
     };
 
-    if ((isRoomAdmin || isCollaborator || isAdmin) && isUserOwner) {
-      options.push(adminOption);
+    if (isUserAdmin) {
+      if (isUserOwner) {
+        options.push(adminOption);
+      }
 
-      if ((isAdmin || isRoomAdmin) && !isCollaborator)
-        options.push(roomAdminOption);
-    }
-
-    if (isCollaborator && isUserAdmin) {
       options.push(roomAdminOption);
       options.push(userOption);
     }

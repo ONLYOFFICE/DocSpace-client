@@ -43,7 +43,6 @@ import { CompanyInfoSettings } from "./Branding/companyInfoSettings";
 import { AdditionalResources } from "./Branding/additionalResources";
 
 import LoaderBrandingSubtitle from "./sub-components/loaderBrandingSubtitle";
-import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
 
 const baseUrl = "/portal-settings/customization";
@@ -86,7 +85,6 @@ const StyledComponent = styled.div`
 
 const Branding = ({
   t,
-  isLoadedCompanyInfoSettingsData,
   isWhiteLabelLoaded,
   isBrandNameLoaded,
   isSettingPaid,
@@ -130,7 +128,9 @@ const Branding = ({
       {!isWhiteLabelLoaded && !isBrandNameLoaded ? (
         <LoaderBrandingSubtitle />
       ) : (
-        <div className="category-description">{t("BrandingSubtitle")}</div>
+        <div className="category-description">
+          {t("Common:BrandingSubtitle")}
+        </div>
       )}
       <BrandName />
       <hr />
@@ -147,13 +147,9 @@ const Branding = ({
   );
 };
 
-export default inject(({ settingsStore, currentQuotaStore }) => {
+export default inject(({ settingsStore, currentQuotaStore, brandingStore }) => {
   const { isCustomizationAvailable } = currentQuotaStore;
-  const {
-    isLoadedCompanyInfoSettingsData,
-    isWhiteLabelLoaded,
-    isBrandNameLoaded,
-  } = brandingStore;
+  const { isWhiteLabelLoaded, isBrandNameLoaded } = brandingStore;
   const {
     standalone,
     portals,
@@ -164,7 +160,6 @@ export default inject(({ settingsStore, currentQuotaStore }) => {
   const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
   return {
-    isLoadedCompanyInfoSettingsData,
     isWhiteLabelLoaded,
     isBrandNameLoaded,
     isSettingPaid,

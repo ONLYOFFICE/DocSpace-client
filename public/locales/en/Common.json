@@ -673,5 +673,11 @@
   "UserAgreement": "I confirm and want to proceed",
   "LocalFile": "Local file",
   "FromTemplate": "From template",
-  "FromTemplateRoomInfo": "Create a room based on a template. All settings, users, folders and files will be taken from the selected room template."
+  "FromTemplateRoomInfo": "Create a room based on a template. All settings, users, folders and files will be taken from the selected room template.",
+  "BrandName": "Brand name",
+  "BrandNameSubtitle": "Your Brand name will be displayed in invitations, notifications, and other places where your {{productName}} name is referenced.",
+  "BrandNameSubtitleMobile": "Enter your company or brand name which will be displayed in notifications, exported spreadsheets, and other resources.",
+  "GenerateLogoButton": "Generate",
+  "GenerateLogoLabel": "Generate logo from text",
+  "YourLogo": "Your logo"
 }

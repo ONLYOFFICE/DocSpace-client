@@ -430,7 +430,7 @@ export async function getUser(share?: string) {
   );
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
-  const userRes = await fetch(getUser);
+  const userRes = await fetch(getUser, { next: { revalidate: 60 } });
 
   if (userRes.status === 401) return undefined;
 
@@ -465,7 +465,7 @@ export async function getSettings(share?: string) {
     undefined,
   );
 
-  const settingsRes = await fetch(getSettings);
+  const settingsRes = await fetch(getSettings, { next: { revalidate: 300 } });
 
   if (settingsRes.status === 403) return `access-restricted`;
 
@@ -489,7 +489,7 @@ export const checkIsAuthenticated = async () => {
 
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
 
-  const res = await fetch(request);
+  const res = await fetch(request, { next: { revalidate: 60 } });
 
   if (!res.ok) {
     const hdrs = headers();
@@ -515,7 +515,7 @@ export async function validatePublicRoomKey(key: string, fileId?: string) {
     "GET",
   );
 
-  const res = await fetch(validatePublicRoomKey);
+  const res = await fetch(validatePublicRoomKey, { next: { revalidate: 60 } });
   if (res.status === 401) return undefined;
   if (!res.ok) {
     const hdrs = headers();
@@ -572,7 +572,7 @@ export async function openEdit(
     undefined,
   );
 
-  const res = await fetch(getConfig);
+  const res = await fetch(getConfig, { next: { revalidate: 300 } });
 
   const hostname = hdrs.get("x-forwarded-host");
 
@@ -644,7 +644,7 @@ export async function getEditorUrl(
     undefined,
   );
 
-  const res = await fetch(request);
+  const res = await fetch(request, { next: { revalidate: 300 } });
 
   if (!res.ok) {
     const hdrs = headers();
@@ -670,7 +670,7 @@ export async function getColorTheme() {
     "GET",
   );
 
-  const res = await fetch(getSettings);
+  const res = await fetch(getSettings, { next: { revalidate: 300 } });
 
   if (!res.ok) {
     const hdrs = headers();

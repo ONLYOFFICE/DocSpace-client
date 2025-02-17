@@ -24,44 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { BackupDefaultStateType, BackupSelectedStateType } from "@/types";
+import { redirect } from "next/navigation";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
-export const pathsWithoutTabs = [
-  "white-label",
-  "company-info",
-  "additional-resources",
-  "brand-name",
-];
+import {
+  getSettings,
+  getQuota,
+  getAllPortals,
+  getWhiteLabelText,
+} from "@/lib/actions";
+import { getIsSettingsPaid, getIsCustomizationAvailable } from "@/lib";
 
-export const initBackupDefaultState = {
-  hour: "12:00",
-  day: "0",
-  weekday: null,
-  weekdayLabel: "",
-  monthDay: "1",
-  periodNumber: "0",
-  periodLabel: "Every day",
-  maxCopiesNumber: "10",
-  storageType: null,
-  folderId: null,
-  storageId: null,
-  enableSchedule: false,
-  formSettings: {},
-} satisfies BackupDefaultStateType;
+import { BrandNamePage } from "./page.client";
 
-export const initBackupSelectedState = {
-  day: "0",
-  hour: "12:00",
-  weekday: null,
-  weekdayLabel: "",
-  monthDay: "1",
-  periodNumber: "0",
-  periodLabel: "Every day",
-  maxCopiesNumber: "10",
-  storageType: null,
-  folderId: null,
-  storageId: null,
-  enableSchedule: false,
-  formSettings: {},
-} satisfies BackupSelectedStateType;
+async function Page() {
+  const [settings, quota, portals, whiteLabelText] = await Promise.all([
+    getSettings(),
+    getQuota(),
+    getAllPortals(),
+    getWhiteLabelText(),
+  ]);
+
+  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  if (!settings) redirect(`${getBaseUrl()}/login`);
+
+  const { standalone } = settings;
+
+  const isCustomizationAvailable = getIsCustomizationAvailable(quota);
+  const isSettingPaid = getIsSettingsPaid(portals, isCustomizationAvailable);
+
+  return (
+    <BrandNamePage
+      isSettingPaid={isSettingPaid}
+      brandName={whiteLabelText}
+      standalone={standalone}
+      quota={quota}
+    />
+  );
+}
+
+export default Page;
 

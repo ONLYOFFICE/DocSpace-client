@@ -39,6 +39,7 @@ import type { TAdditionalResources } from "@docspace/shared/api/settings/types";
 import { getIsCustomizationAvailable, getIsSettingsPaid } from "@/lib";
 import useDeviceType from "@/hooks/useDeviceType";
 
+import { BrandNamePage } from "./brand-name/page.client";
 import { WhiteLabelPage } from "./white-label/page.client";
 import { CompanyInfoPage } from "./company-info/page.client";
 import { AdditionalResourcesPage } from "./additional-resources/page.client";
@@ -101,6 +102,12 @@ const BrandingPage = ({
     );
   return (
     <StyledBrandingPage>
+      <BrandNamePage
+        brandName={whiteLabelText}
+        isSettingPaid={isSettingPaid}
+        standalone={standalone}
+        quota={quota}
+      />
       <WhiteLabelPage
         whiteLabelLogos={whiteLabelLogos}
         whiteLabelText={whiteLabelText}

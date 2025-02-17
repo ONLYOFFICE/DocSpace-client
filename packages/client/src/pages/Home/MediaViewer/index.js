@@ -216,7 +216,7 @@ const FilesMediaViewer = (props) => {
     [playlist],
   );
 
-  const onMediaViewerClose = useCallback(() => {
+  const onMediaViewerClose = useCallback(async () => {
     if (isPreview) {
       setIsPreview(false);
       resetUrl();
@@ -228,7 +228,7 @@ const FilesMediaViewer = (props) => {
     }
 
     setMediaViewerData({ visible: false, id: null });
-    const url = getFirstUrl();
+    const url = await getFirstUrl();
 
     if (!url) {
       return;

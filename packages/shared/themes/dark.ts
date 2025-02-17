@@ -1852,6 +1852,7 @@ const Dark: TTheme = {
       iconColor: grayDark,
       iconErrorColor: darkErrorStatus,
       primaryColor: darkGrayDark,
+      barIconColor: darkGrayDark,
     },
 
     members: {
@@ -2109,6 +2110,7 @@ const Dark: TTheme = {
       sideColor: white,
       color: white,
       textColor: grayDark,
+      subTextColor: "#858585",
     },
 
     animationColor: lightSecondMain,

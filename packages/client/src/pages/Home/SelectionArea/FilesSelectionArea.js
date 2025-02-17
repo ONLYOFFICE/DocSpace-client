@@ -83,7 +83,7 @@ const SelectionArea = (props) => {
     {
       type: "folder",
       rowCount: Math.ceil(foldersLength / countTilesInRow),
-      rowGap: 12,
+      rowGap: isRooms ? 14 : 12,
       countOfMissingTiles: getCountOfMissingFilesTiles(foldersLength),
     },
   ];

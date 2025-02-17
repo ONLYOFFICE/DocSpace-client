@@ -1692,12 +1692,16 @@ class FilesStore {
               });
             }
 
+            const isTemplatesFolder =
+              data.current.rootFolderType === FolderType.RoomTemplates;
+
             return {
               id: folder.id,
               title,
               isRoom: !!roomType,
               roomType,
               isRootRoom,
+              isTemplatesFolder,
               shared,
               external,
               quotaLimit,
@@ -1718,6 +1722,8 @@ class FilesStore {
             ...data.current,
             inRoom: !!data.current.inRoom,
             isRoom: !!data.current.roomType,
+            isTemplate:
+              data.current.rootFolderType === FolderType.RoomTemplates,
             pathParts: data.pathParts,
             navigationPath,
             ...{ new: data.new },
@@ -2093,6 +2099,8 @@ class FilesStore {
   getFilesContextOptions = (item, optionsToRemove = []) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
+    const isTemplate =
+      item.rootFolderType === FolderType.RoomTemplates && isRoom;
 
     const hasNew =
       item.new > 0 || (item.fileStatus & FileStatus.IsNew) === FileStatus.IsNew;
@@ -2463,6 +2471,21 @@ class FilesStore {
 
       return fileOptions;
     }
+    if (isTemplate) {
+      const templateOptions = [
+        "select",
+        "open",
+        "separator0",
+        "create-room-from-template",
+        "edit-template",
+        "access-settings",
+        "room-info",
+        "separator1",
+        "delete",
+      ];
+
+      return templateOptions;
+    }
     if (isRoom) {
       const canInviteUserInRoom = item.security?.EditAccess;
       const canRemoveRoom = item.security?.Delete;
@@ -2499,6 +2522,7 @@ class FilesStore {
         "unmute-room",
         "edit-index",
         "export-room-index",
+        "save-as-template",
         "separator1",
         "duplicate-room",
         "download",
@@ -2532,6 +2556,7 @@ class FilesStore {
       if (!canEditRoom) {
         roomOptions = removeOptions(roomOptions, [
           "edit-room",
+          "save-as-template",
           "reconnect-storage",
         ]);
       }
@@ -2786,6 +2811,10 @@ class FilesStore {
         return Promise.resolve(file);
       })
       .then(() => this.fetchFiles(folderId, this.filter, true, true, false));
+  };
+
+  setRoomCreated = (roomCreated) => {
+    this.roomCreated = roomCreated;
   };
 
   createRoom = (roomParams) => {
@@ -3311,6 +3340,8 @@ class FilesStore {
             : folderUrl);
 
       const isRoom = !!roomType;
+      const isTemplate =
+        item.rootFolderType === FolderType.RoomTemplates && isRoom;
 
       const icon =
         isRoom && logo?.medium
@@ -3410,6 +3441,7 @@ class FilesStore {
         isEditing,
         roomType,
         isRoom,
+        isTemplate,
         isArchive,
         tags,
         pinned,
@@ -3914,9 +3946,10 @@ class FilesStore {
   }
 
   get hasMoreFiles() {
-    const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
+      this.treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
     const filterTotal = isRooms ? this.roomsFilter.total : this.filter.total;
 
     if (this.clientLoadingStore.isLoading) return false;

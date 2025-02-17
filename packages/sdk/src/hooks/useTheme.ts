@@ -36,7 +36,6 @@ import { getAppearanceTheme } from "@docspace/shared/api/settings";
 import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
-import type { TUser } from "@docspace/shared/api/people/types";
 import type { TGetColorTheme } from "@docspace/shared/api/settings/types";
 import { getDirectionByLanguage } from "@docspace/shared/utils/common";
 
@@ -114,7 +113,6 @@ const useTheme = ({
     const fontFamily = getFontFamilyDependingOnLanguage(i18n?.language ?? "en");
 
     const isBaseTheme = theme === ThemeKeys.BaseStr;
-    const themeCookie = isBaseTheme ? ThemeKeys.BaseStr : ThemeKeys.DarkStr;
 
     setTheme({
       ...(isBaseTheme ? Base : Dark),
@@ -123,7 +121,7 @@ const useTheme = ({
       fontFamily,
     });
 
-    setCookie(SYSTEM_THEME_KEY, themeCookie);
+    setCookie(SYSTEM_THEME_KEY, SYSTEM_THEME);
   }, [i18n, lang, initialTheme, currentColorTheme]);
 
   React.useEffect(() => {

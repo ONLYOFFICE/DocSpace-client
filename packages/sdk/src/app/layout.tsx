@@ -73,15 +73,19 @@ export default async function RootLayout({
     (typeof portalSettings === "object" && portalSettings.culture) ||
     "en";
 
-  const systemTheme = theme
-    ? (theme as ThemeKeys)
-    : (cookieStore.get(SYSTEM_THEME_KEY)?.value as ThemeKeys | undefined);
+  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
+    | ThemeKeys
+    | undefined;
 
   const currentColorScheme = colorTheme?.themes.find(
     (theme) => theme.id === colorTheme.selected,
   );
 
   const dirClass = getDirectionByLanguage(locale || "en");
+  const themeClass =
+    (theme !== ThemeKeys.SystemStr ? theme : systemTheme) === ThemeKeys.DarkStr
+      ? "dark"
+      : "light";
 
   const styles = {
     "--color-scheme-main-accent": currentColorScheme?.main.accent,
@@ -105,10 +109,7 @@ export default async function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
-      <body
-        style={styles}
-        className={`${dirClass} ${systemTheme === "Dark" ? "dark" : "light"}`}
-      >
+      <body style={styles} className={`${dirClass} ${themeClass}`}>
         <StyledComponentsRegistry>
           <Providers
             contextData={{

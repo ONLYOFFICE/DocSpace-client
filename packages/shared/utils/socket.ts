@@ -34,6 +34,9 @@
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 
+import { TUser } from "../api/people/types";
+import { TGroup } from "../api/groups/types";
+
 import { addLog } from ".";
 
 /**
@@ -59,6 +62,15 @@ export const enum SocketEvents {
   ChangedQuotaUsedValue = "s:change-quota-used-value",
   ChangedQuotaFeatureValue = "s:change-quota-feature-value",
   ChangedQuotaUserUsedValue = "s:change-user-quota-used-value",
+  AddUser = "s:add-user",
+  UpdateUser = "s:update-user",
+  DeleteUser = "s:delete-user",
+  AddGroup = "s:add-group",
+  UpdateGroup = "s:update-group",
+  DeleteGroup = "s:delete-group",
+  AddGuest = "s:add-guest",
+  UpdateGuest = "s:update-guest",
+  DeleteGuest = "s:delete-guest",
   BackupProgress = "s:backup-progress",
   RestoreProgress = "s:restore-progress",
 }
@@ -221,6 +233,15 @@ export type TListenEventCallbackMap = {
   [SocketEvents.ChangedQuotaUsedValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaFeatureValue]: (data: TOptSocket) => void;
   [SocketEvents.ChangedQuotaUserUsedValue]: (data: TOptSocket) => void;
+  [SocketEvents.AddUser]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.UpdateUser]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.DeleteUser]: (data: string) => void;
+  [SocketEvents.AddGroup]: (data: { id: string; data: TGroup }) => void;
+  [SocketEvents.UpdateGroup]: (data: { id: string; data: TGroup }) => void;
+  [SocketEvents.AddGuest]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.UpdateGuest]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.DeleteGuest]: (data: string) => void;
+  [SocketEvents.DeleteGroup]: (data: string) => void;
   [SocketEvents.RestoreProgress]: (opt: {
     progress: number;
     isCompleted: boolean;

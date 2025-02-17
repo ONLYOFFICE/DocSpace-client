@@ -88,8 +88,6 @@ import OAuthStore from "./OAuthStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
 
-const oauthStore = new OAuthStore(userStore);
-
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
 const pluginStore = new PluginStore(
@@ -166,9 +164,12 @@ const filesStore = new FilesStore(
   indexingStore,
 );
 
+publicRoomStore.filesStore = filesStore;
+
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
   publicRoomStore,
+  selectedFolderStore,
 );
 
 const oformsStore = new OformsStore(settingsStore, infoPanelStore, userStore);
@@ -239,7 +240,10 @@ const filesActionsStore = new FilesActionsStore(
   peopleStore,
   currentQuotaStore,
   indexingStore,
+  versionHistoryStore,
 );
+
+mediaViewerDataStore.filesActionsStore = filesActionsStore;
 
 const contextOptionsStore = new ContextOptionsStore(
   settingsStore,
@@ -320,6 +324,8 @@ const storageManagement = new StorageManagement(
   currentQuotaStore,
   settingsStore,
 );
+
+const oauthStore = new OAuthStore(userStore, storageManagement);
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 

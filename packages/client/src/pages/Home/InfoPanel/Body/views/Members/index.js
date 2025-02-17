@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useContext, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { isDesktop } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -43,6 +44,7 @@ import {
   GENERAL_LINK_HEADER_KEY,
   LINKS_LIMIT_COUNT,
 } from "@docspace/shared/constants";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
@@ -88,11 +90,17 @@ const Members = ({
   isMembersPanelUpdating,
   setGuestReleaseTipDialogVisible,
   showGuestReleaseTip,
+  setRoomShared,
+  currentId,
+  setPublicRoomKey,
+  setAccessSettingsIsVisible,
+  templateAvailable,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
   const scrollContext = useContext(ScrollbarContext);
+  const [, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     updateInfoPanelMembers(t);
@@ -151,13 +159,36 @@ const Members = ({
         setExternalLink(link);
         copyShareLink(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+
+        const filterObj = FilesFilter.getFilter(window.location);
+
+        if (isPublicRoomType && !filterObj.key) {
+          setRoomShared(currentId, true);
+          setPublicRoomKey(link.sharedTo.requestToken);
+          setSearchParams((prev) => {
+            prev.set("key", link.sharedTo.requestToken);
+            return prev;
+          });
+        }
       });
     }
   };
 
+  const onOpenAccessSettings = () => {
+    setAccessSettingsIsVisible(true);
+  };
+
   const publicRoomItems = [];
 
-  if (isPublicRoomType && withPublicRoomBlock && !withoutTitlesAndLinks) {
+  const isTemplate =
+    infoPanelSelection?.rootFolderType === FolderType.RoomTemplates;
+
+  if (
+    isPublicRoomType &&
+    withPublicRoomBlock &&
+    !withoutTitlesAndLinks &&
+    !isTemplate
+  ) {
     if (!isArchiveFolder || primaryLink) {
       publicRoomItems.push(
         <LinksBlock key={GENERAL_LINK_HEADER_KEY}>
@@ -251,6 +282,33 @@ const Members = ({
 
   const publicRoomItemsLength = publicRoomItems.length;
 
+  if (isTemplate && templateAvailable) {
+    return (
+      <PublicRoomBar
+        headerText={t("Files:TemplateAvailable")}
+        bodyText={
+          <>
+            <div className="template-access_description">
+              {t("Files:TemplateAvailableDescription", {
+                productName: t("Common:ProductName"),
+              })}
+            </div>
+            <Link
+              className="template-access_link"
+              isHovered
+              type="action"
+              fontWeight={600}
+              fontSize="13px"
+              onClick={onOpenAccessSettings}
+            >
+              {t("Files:AccessSettings")}
+            </Link>
+          </>
+        }
+      />
+    );
+  }
+
   if (!membersList.length) {
     return <EmptyContainer />;
   }
@@ -331,34 +389,36 @@ export default inject(
       withPublicRoomBlock,
       searchValue,
       isMembersPanelUpdating,
+      templateAvailableToEveryone,
     } = infoPanelStore;
-    const { membersFilter } = filesStore;
+    const { membersFilter, setRoomShared } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
 
-    const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
+    const { primaryLink, additionalLinks, setExternalLink, setPublicRoomKey } =
+      publicRoomStore;
+
     const { isArchiveFolderRoot } = treeFoldersStore;
     const {
       setLinkParams,
       setEditLinkPanelIsVisible,
       setGuestReleaseTipDialogVisible,
+      setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
     } = dialogsStore;
+
+    const { id } = selectedFolderStore;
+    const { showGuestReleaseTip } = settingsStore;
 
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
 
-    const isFormRoom = roomType === RoomsType.FormRoom;
-
-    const isPublicRoomType =
-      roomType === RoomsType.PublicRoom ||
-      roomType === RoomsType.CustomRoom ||
-      isFormRoom;
-
-    const isPublicRoom = roomType === RoomsType.PublicRoom;
-
     const infoSelection =
       infoPanelSelection?.length > 1 ? null : infoPanelSelection;
 
-    const { showGuestReleaseTip } = settingsStore;
+    const isFormRoom = roomType === RoomsType.FormRoom;
+    const isPublicRoom = roomType === RoomsType.PublicRoom;
+    const isCustomRoom = roomType === RoomsType.CustomRoom;
+
+    const isPublicRoomType = isPublicRoom || isCustomRoom || isFormRoom;
 
     return {
       infoPanelSelection: infoSelection,
@@ -386,6 +446,11 @@ export default inject(
       isMembersPanelUpdating,
       setGuestReleaseTipDialogVisible,
       showGuestReleaseTip,
+      setRoomShared,
+      currentId: id,
+      setPublicRoomKey,
+      setAccessSettingsIsVisible,
+      templateAvailable: templateAvailableToEveryone,
     };
   },
 )(

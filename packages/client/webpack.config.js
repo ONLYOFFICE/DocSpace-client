@@ -297,15 +297,6 @@ const config = {
 
   plugins: [
     new CleanWebpackPlugin(),
-    new ESLintPlugin({
-      configType: "eslintrc",
-      cacheLocation: path.resolve(
-        __dirname,
-        "../../node_modules/.cache/.eslintcache",
-      ),
-      quiet: true,
-      formatter: "json",
-    }),
     new MiniCssExtractPlugin({
       filename: "static/styles/[name].[contenthash].css",
       chunkFilename: "static/styles/[id].[contenthash].css",
@@ -342,6 +333,8 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
+  console.log("ENV", { env });
+
   config.devtool = "source-map";
 
   const isProduction = argv.mode === "production";
@@ -404,6 +397,8 @@ module.exports = (env, argv) => {
         "./utils": "./src/helpers/filesUtils.js",
         "./BrandingPage":
           "./src/pages/PortalSettings/categories/common/branding.js",
+        "./BrandNamePage":
+          "./src/pages/PortalSettings/categories/common/Branding/brandName.js",
         "./WhiteLabelPage":
           "./src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
         "./AdditionalResPage":
@@ -491,6 +486,23 @@ module.exports = (env, argv) => {
 */`,
     }),
   );
+
+  if (!env.lint || env.lint == "true") {
+    console.log("Enable eslint");
+    config.plugins.push(
+      new ESLintPlugin({
+        configType: "eslintrc",
+        cacheLocation: path.resolve(
+          __dirname,
+          "../../node_modules/.cache/.eslintcache",
+        ),
+        quiet: true,
+        formatter: "json",
+      }),
+    );
+  } else {
+    console.log("Skip eslint");
+  }
 
   return config;
 };

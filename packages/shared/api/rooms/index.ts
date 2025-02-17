@@ -39,7 +39,12 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
-import { TGetRooms, TExportRoomIndexTask, TPublicRoomPassword } from "./types";
+import {
+  TGetRooms,
+  TExportRoomIndexTask,
+  TPublicRoomPassword,
+  TRoom,
+} from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -536,6 +541,87 @@ export function setRoomCover(roomId, cover) {
     method: "post",
     url: `files/rooms/${roomId}/cover`,
     data,
+  };
+
+  return request(options);
+}
+
+export function createTemplate({
+  roomId,
+  title,
+  logo,
+  share,
+  tags,
+  isPublic,
+  copylogo,
+}: {
+  roomId: number;
+  title: string;
+  logo: TRoom["logo"];
+  share;
+  tags: TRoom["tags"];
+  tags: boolean;
+}) {
+  const data = {
+    roomId,
+    title,
+    logo,
+    share,
+    tags,
+    public: isPublic,
+    copylogo,
+  };
+  const options = {
+    method: "post",
+    url: `/files/roomtemplate`,
+    data,
+  };
+
+  return request(options);
+}
+
+export function getCreateTemplateProgress() {
+  const options = {
+    method: "get",
+    url: `/files/roomtemplate/status`,
+  };
+
+  return request(options);
+}
+
+export function createRoomFromTemplate(data) {
+  const options = {
+    method: "post",
+    url: `/files/rooms/fromTemplate`,
+    data,
+  };
+
+  return request(options);
+}
+
+export function getCreateRoomFromTemplateProgress() {
+  const options = {
+    method: "get",
+    url: `/files/rooms/fromTemplate/status`,
+  };
+
+  return request(options);
+}
+
+export function getTemplateAvailable(id: number) {
+  const options = {
+    method: "get",
+    url: `/files/roomtemplate/${id}/public`,
+  };
+
+  return request(options);
+}
+
+export function setTemplateAvailable(id: number, isAvailable: boolean) {
+  const options = {
+    method: "put",
+    url: `/files/roomtemplate/public`,
+    data: { id, public: isAvailable },
   };
 
   return request(options);

@@ -44,11 +44,17 @@ import {
   TIntrospectDeveloperToken,
 } from "../../utils/oauth/types";
 
-export const getClient = async (clientId: string): Promise<IClientProps> => {
+export const getClient = async (
+  clientId: string,
+  token: string,
+): Promise<IClientProps> => {
   const client = (await request(
     {
       method: "get",
       url: `/clients/${clientId}`,
+      headers: {
+        "X-Signature": token,
+      },
     },
     false,
     true,
@@ -60,11 +66,15 @@ export const getClient = async (clientId: string): Promise<IClientProps> => {
 export const getClientList = async (
   page: number,
   limit: number,
+  token: string,
 ): Promise<IClientListProps> => {
   const data = (await request(
     {
       method: "get",
       url: `/clients?page=${page}&limit=${limit}`,
+      headers: {
+        "X-Signature": token,
+      },
     },
     false,
     true,
@@ -83,6 +93,7 @@ export const getClientList = async (
 
 export const addClient = async (
   dataParam: IClientReqDTO,
+  token: string,
 ): Promise<IClientProps> => {
   const data = { ...dataParam };
   data.logout_redirect_uri = data.website_url;
@@ -92,6 +103,9 @@ export const addClient = async (
       method: "post",
       url: `/clients`,
       data,
+      headers: {
+        "X-Signature": token,
+      },
     },
     false,
     true,
@@ -100,12 +114,19 @@ export const addClient = async (
   return transformToClientProps(client);
 };
 
-export const updateClient = async (clientId: string, data: IClientReqDTO) => {
+export const updateClient = async (
+  clientId: string,
+  data: IClientReqDTO,
+  token: string,
+) => {
   await request(
     {
       method: "put",
       url: `/clients/${clientId}`,
       data,
+      headers: {
+        "X-Signature": token,
+      },
     },
     false,
     true,
@@ -115,12 +136,16 @@ export const updateClient = async (clientId: string, data: IClientReqDTO) => {
 export const changeClientStatus = async (
   clientId: string,
   status: boolean,
+  token: string,
 ): Promise<void> => {
   await request(
     {
       method: "patch",
       url: `/clients/${clientId}/activation`,
       data: { status },
+      headers: {
+        "X-Signature": token,
+      },
     },
     false,
     true,
@@ -129,11 +154,15 @@ export const changeClientStatus = async (
 
 export const regenerateSecret = async (
   clientId: string,
+  token: string,
 ): Promise<{ client_secret: string }> => {
   const clientSecret = (await request(
     {
       method: "patch",
       url: `/clients/${clientId}/regenerate`,
+      headers: {
+        "X-Signature": token,
+      },
     },
     false,
     true,
@@ -142,22 +171,34 @@ export const regenerateSecret = async (
   return clientSecret;
 };
 
-export const deleteClient = async (clientId: string): Promise<void> => {
+export const deleteClient = async (
+  clientId: string,
+  token: string,
+): Promise<void> => {
   await request(
     {
       method: "delete",
       url: `/clients/${clientId}`,
+      headers: {
+        "X-Signature": token,
+      },
     },
     false,
     true,
   );
 };
 
-export const getScope = async (name: string): Promise<TScope> => {
+export const getScope = async (
+  name: string,
+  token: string,
+): Promise<TScope> => {
   const scope = (await request(
     {
       method: "get",
       url: `/scopes/${name}`,
+      headers: {
+        "X-Signature": token,
+      },
     },
     false,
     true,
@@ -166,11 +207,14 @@ export const getScope = async (name: string): Promise<TScope> => {
   return scope;
 };
 
-export const getScopeList = async (): Promise<TScope[]> => {
+export const getScopeList = async (token: string): Promise<TScope[]> => {
   const scopeList = (await request(
     {
       method: "get",
       url: `/scopes`,
+      headers: {
+        "X-Signature": token,
+      },
     },
     false,
     true,
@@ -181,12 +225,16 @@ export const getScopeList = async (): Promise<TScope[]> => {
 
 export const getConsentList = async (
   page: number = 0,
-  limit: number = 100,
+  limit: number = 50,
+  token?: string,
 ): Promise<TConsentList & { consents: IClientProps[] }> => {
   const consentList = (await request(
     {
       method: "get",
       url: `/clients/consents?page=${page}&limit=${limit}`,
+      headers: {
+        "X-Signature": token,
+      },
     },
     false,
     true,
@@ -211,11 +259,17 @@ export const getConsentList = async (
   return { ...consentList, consents };
 };
 
-export const revokeUserClient = async (clientId: string): Promise<void> => {
+export const revokeUserClient = async (
+  clientId: string,
+  token: string,
+): Promise<void> => {
   await request(
     {
       method: "delete",
       url: `/clients/${clientId}/revoke`,
+      headers: {
+        "X-Signature": token,
+      },
     },
     false,
     true,
@@ -226,6 +280,7 @@ export const onOAuthSubmit = (
   clientId: string,
   clientState: string,
   scope: string[],
+  token: string,
 ) => {
   const formData = new FormData();
 
@@ -244,6 +299,7 @@ export const onOAuthSubmit = (
       withRedirect: true,
       headers: {
         "X-Disable-Redirect": "true",
+        "X-Signature": token,
       },
     },
     false,
@@ -251,7 +307,11 @@ export const onOAuthSubmit = (
   );
 };
 
-export const onOAuthCancel = (clientId: string, clientState: string) => {
+export const onOAuthCancel = (
+  clientId: string,
+  clientState: string,
+  token: string,
+) => {
   const formData = new FormData();
 
   formData.append("client_id", clientId);
@@ -265,6 +325,7 @@ export const onOAuthCancel = (clientId: string, clientState: string) => {
       withRedirect: true,
       headers: {
         "X-Disable-Redirect": "true",
+        "X-Signature": token,
       },
     },
     false,
@@ -276,6 +337,7 @@ export const generateDevelopToken = (
   client_id: string,
   client_secret: string,
   scopes: string[],
+  token: string,
 ): Promise<TGenerateDeveloperToken> | undefined => {
   const params = new URLSearchParams();
   params.append("grant_type", "personal_access_token");
@@ -284,7 +346,15 @@ export const generateDevelopToken = (
   params.append("scope", scopes.join(" "));
 
   return request<TGenerateDeveloperToken>(
-    { method: "post", url: "/oauth2/token", data: params },
+    {
+      method: "post",
+      url: "/oauth2/token",
+      data: params,
+      headers: {
+        "X-Signature": token,
+        "X-Disable-Redirect": "true",
+      },
+    },
     false,
     true,
   );
@@ -294,6 +364,7 @@ export const revokeDeveloperToken = (
   token: string,
   client_id: string,
   client_secret: string,
+  jwtToken: string,
 ) => {
   const params = new URLSearchParams();
   params.append("token", token);
@@ -301,7 +372,12 @@ export const revokeDeveloperToken = (
   params.append("client_secret", client_secret);
 
   return request(
-    { method: "post", url: "/oauth2/revoke", data: params },
+    {
+      method: "post",
+      url: "/oauth2/revoke",
+      data: params,
+      headers: { "X-Signature": jwtToken },
+    },
     false,
     true,
   );

@@ -89,6 +89,14 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "templates",
+            element: (
+              <PrivateRoute>
+                <Navigate to="/rooms/templates" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "rooms/personal",
             async lazy() {
               const { FilesView } = await componentLoader(
@@ -288,6 +296,79 @@ const ClientRoutes = [
           },
           {
             path: "rooms/archived/:room/filter",
+            async lazy() {
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <FilesView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          {
+            path: "rooms/templates",
+
+            async lazy() {
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <FilesView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          {
+            path: "rooms/templates/filter",
+            async lazy() {
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <FilesView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          {
+            path: "rooms/templates/:room",
+            async lazy() {
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <FilesView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          {
+            path: "rooms/templates/:room/filter",
             async lazy() {
               const { FilesView } = await componentLoader(
                 () => import("SRC_DIR/pages/Home/View/Files"),

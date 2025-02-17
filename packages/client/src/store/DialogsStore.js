@@ -194,6 +194,12 @@ class DialogsStore {
     isDownload: false,
   };
 
+  createRoomTemplateDialogVisible = false;
+
+  templateAccessSettingsVisible = false;
+
+  templateEventVisible = false;
+
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
 
   selectFileFormRoomOpenRoot = false;
@@ -795,6 +801,18 @@ class DialogsStore {
       visible,
       file,
     };
+  };
+
+  setCreateRoomTemplateDialogVisible = (visible) => {
+    this.createRoomTemplateDialogVisible = visible;
+  };
+
+  setTemplateAccessSettingsVisible = (isVisible) => {
+    this.templateAccessSettingsVisible = isVisible;
+  };
+
+  setTemplateEventVisible = (isVisible) => {
+    this.templateEventVisible = isVisible;
   };
 
   setWarningQuotaDialogVisible = (visible) => {

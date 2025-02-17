@@ -29,6 +29,7 @@
 import {
   TCapabilities,
   TGetColorTheme,
+  TPortalCultures,
   TSettings,
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
@@ -36,6 +37,7 @@ import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 
 import {
   colorThemeHandler,
+  portalCulturesHandler,
   settingsHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
@@ -101,4 +103,24 @@ export async function getCapabilities() {
   const capabilities = await res.json();
 
   return capabilities.response as TCapabilities;
+}
+
+export async function getPortalCultures(): Promise<TPortalCultures> {
+  const [getPortalCultures] = createRequest(
+    [`/settings/cultures`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? portalCulturesHandler()
+    : await fetch(getPortalCultures, { next: { revalidate: 300 } });
+
+  if (!res.ok) {
+    throw new Error("Failed to get portal cultures");
+  }
+
+  const cultures = await res.json();
+
+  return cultures.response;
 }

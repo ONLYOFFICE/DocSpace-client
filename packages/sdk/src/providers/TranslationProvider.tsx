@@ -33,12 +33,14 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 
 import useI18N from "@/hooks/useI18N";
+import { importMomentLocales } from "@/utils/importMomentLocales";
 
 type TTranslationProvider = {
   children: React.ReactNode;
   settings: TSettings | undefined;
   user: TUser | undefined;
   locale?: string;
+  portalCultures: string[];
 };
 
 const TranslationProvider = ({
@@ -46,7 +48,10 @@ const TranslationProvider = ({
   settings,
   user,
   locale,
+  portalCultures,
 }: TTranslationProvider) => {
+  importMomentLocales(portalCultures);
+
   const { i18n } = useI18N({ settings, user, locale });
 
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;

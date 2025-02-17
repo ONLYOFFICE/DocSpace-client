@@ -33,7 +33,7 @@ import { getDirectionByLanguage } from "@docspace/shared/utils/common";
 import "@docspace/shared/styles/theme.scss";
 
 import "@/styles/globals.scss";
-import { getColorTheme, getSettings } from "@/api/settings";
+import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
 import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
 import StyledComponentsRegistry from "@/utils/registry";
 import Providers from "@/providers";
@@ -56,10 +56,11 @@ export default async function RootLayout({
 
   const cookieStore = cookies();
 
-  const [self, portalSettings, colorTheme] = await Promise.all([
+  const [self, portalSettings, colorTheme, portalCultures] = await Promise.all([
     getSelf(),
     getSettings(),
     getColorTheme(),
+    getPortalCultures(),
   ]);
 
   const theme =
@@ -118,6 +119,7 @@ export default async function RootLayout({
               systemTheme,
               colorTheme,
               locale,
+              portalCultures,
             }}
           >
             {children}

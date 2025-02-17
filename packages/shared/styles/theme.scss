@@ -262,6 +262,18 @@
   --save-cancel-reminder-color: #{$gray};
 
   --language-combo-hover-border: #{$gray};
+
+  --link-dropdown-color-default: #{$gray};
+  --link-dropdown-hover-color: #{$gray-text};
+  --link-dropdown-hover-background: #{$gray-light-mid};
+  --link-dropdown-background-default: transparent;
+  --link-dropdown-disable-color: #{$gray};
+  --link-dropdown-text-decoration: dashed;
+  --link-dropdown-svg-opacity: 1;
+  --link-dropdown-svg-semi-transparent: 0.5;
+  --link-dropdown-padding-right: 20px;
+  --link-dropdown-max-width: 200px;
+  --link-dropdown-expander-width: 6.35px;
 }
 
 .dark {
@@ -576,6 +588,18 @@
   --save-cancel-reminder-color: #{$gray};
 
   --language-combo-hover-border: #{$gray-dark};
+
+  --link-dropdown-color-default: #{$gray-dark};
+  --link-dropdown-hover-color: #{$dark-gray-dark};
+  --link-dropdown-hover-background: #{$gray-dark-strong};
+  --link-dropdown-background-default: transparent;
+  --link-dropdown-disable-color: #{$gray-dark-text};
+  --link-dropdown-text-decoration: dashed;
+  --link-dropdown-svg-opacity: 1;
+  --link-dropdown-svg-semi-transparent: 0.5;
+  --link-dropdown-padding-right: 20px;
+  --link-dropdown-max-width: 200px;
+  --link-dropdown-expander-width: 6.35px;
 }
 
 .light {

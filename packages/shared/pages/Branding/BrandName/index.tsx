@@ -40,7 +40,7 @@ import {
 } from "../../../components/text-input";
 
 import { StyledBrandName } from "./BrandName.styled";
-import { IBrandNameProps } from "./BreandName.types";
+import { IBrandNameProps } from "./BrandName.types";
 import { NotAvailable } from "../WhiteLabel/NotAvailable";
 import { IWhiteLabelData } from "../WhiteLabel/WhiteLabel.types";
 

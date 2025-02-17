@@ -24,16 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "types";
 import { IWhiteLabelData } from "../WhiteLabel/WhiteLabel.types";
 
 export interface IBrandNameProps {
-  t: TTranslation;
   showNotAvailable: boolean;
   isSettingPaid: boolean;
   standalone: boolean;
   onSave: (data: IWhiteLabelData) => void;
-  isEqualText: boolean;
   isBrandNameLoaded: boolean;
   defaultBrandName: string;
   brandName: string;

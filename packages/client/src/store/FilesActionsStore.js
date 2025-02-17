@@ -3343,6 +3343,212 @@ class FilesActionStore {
       return toastr.error(err.message ? err.message : err);
     }
   };
+
+  runOperations = (operations = []) => {
+    const { files, folders, activeFiles, activeFolders } = this.filesStore;
+    const { addActiveItems, clearActiveOperations } = this.uploadDataStore;
+
+    if (!operations || operations.length === 0) {
+      return "No operations specified";
+    }
+
+    // Count operations that need files (all except emptyTrash)
+    const fileOperations = ["delete", "duplicate", "copy", "move"];
+
+    const totalFilesNeeded =
+      operations.filter((op) => fileOperations.includes(op)).length +
+      (operations.includes("download") ? 2 : 0);
+
+    const needsFolder =
+      operations.includes("copy") || operations.includes("move");
+
+    if (totalFilesNeeded > 0 && (!files || files.length < totalFilesNeeded)) {
+      return `Need at least ${totalFilesNeeded} files`;
+    }
+
+    if (needsFolder && (!folders || folders.length < 1)) {
+      return "Need at least 1 folder for copy and move operations";
+    }
+
+    const availableFiles = files
+      ? files.filter(
+          (file) => !activeFiles.some((active) => active.id === file.id),
+        )
+      : [];
+
+    const availableFolders = folders
+      ? folders.filter(
+          (folder) => !activeFolders.some((active) => active.id === folder.id),
+        )
+      : [];
+
+    if (totalFilesNeeded > 0 && availableFiles.length < totalFilesNeeded) {
+      return `Need ${totalFilesNeeded} available files. Found only ${availableFiles.length} files that are not in active operations`;
+    }
+
+    if (needsFolder && availableFolders.length < 1) {
+      return "Need at least 1 available folder. Found no folders that are not in active operations";
+    }
+
+    let currentFileIndex = 0;
+    const operationResults = [];
+    let errorMessage = null;
+
+    operations.forEach((op) => {
+      if (errorMessage) return;
+
+      const filesToProcess =
+        op === "download"
+          ? availableFiles.slice(currentFileIndex, currentFileIndex + 2)
+          : availableFiles.slice(currentFileIndex, currentFileIndex + 1);
+
+      switch (op) {
+        case "delete": {
+          const hasDeletePermissions = filesToProcess.every(
+            (file) => file.security?.Delete,
+          );
+
+          if (!hasDeletePermissions) {
+            errorMessage = "No delete permission for one or more files";
+            return;
+          }
+
+          this.deleteAction(null, filesToProcess)
+            .then(() => {
+              console.log(
+                `Delete operation started for file: ${filesToProcess[0].title}`,
+              );
+            })
+            .catch((err) => {
+              console.log(
+                `Error deleting file ${filesToProcess[0].title}: ${err}`,
+              );
+            });
+
+          currentFileIndex += 1;
+          operationResults.push(`deleting file: ${filesToProcess[0].title}`);
+          break;
+        }
+        case "download": {
+          const translations = {
+            error: "Downloading error",
+          };
+
+          this.downloadFiles(
+            filesToProcess.map((file) => file.id),
+            [],
+            translations,
+          )
+            .then(() => {
+              console.log(
+                `Download started for files: ${filesToProcess
+                  .map((file) => file.title)
+                  .join(", ")}`,
+              );
+            })
+            .catch((err) => {
+              console.log(
+                `Error downloading files ${filesToProcess
+                  .map((file) => file.title)
+                  .join(", ")}: ${err}`,
+              );
+            });
+
+          currentFileIndex += 2;
+          operationResults.push(
+            `downloading files: ${filesToProcess
+              .map((file) => file.title)
+              .join(", ")}`,
+          );
+          break;
+        }
+        case "duplicate": {
+          const fileToDuplicate = filesToProcess[0];
+
+          this.duplicateAction(fileToDuplicate)
+            .then(() => {
+              console.log(
+                `Duplication started for file: ${fileToDuplicate.title}`,
+              );
+            })
+            .catch((err) => {
+              console.log(
+                `Error duplicating file ${fileToDuplicate.title}: ${err}`,
+              );
+            });
+
+          currentFileIndex += 1;
+          operationResults.push(`duplicating file: ${fileToDuplicate.title}`);
+          break;
+        }
+        case "copy":
+        case "move": {
+          const fileToProcess = filesToProcess[0];
+          const targetFolder = availableFolders[0];
+
+          const operationData = {
+            destFolderId: targetFolder.id,
+            destFolderInfo: targetFolder,
+            fileIds: [fileToProcess.id],
+            folderIds: [],
+            deleteAfter: false,
+            isCopy: op === "copy",
+            content: false,
+            itemsCount: 1,
+            title: fileToProcess.title,
+          };
+
+          addActiveItems(
+            operationData.fileIds,
+            operationData.folderIds,
+            operationData.destFolderId,
+          );
+
+          this.itemOperationToFolder(operationData)
+            .then(() => {
+              console.log(
+                `${op === "copy" ? "Copy" : "Move"} operation initiated for file: ${fileToProcess.title} to folder: ${targetFolder.title}`,
+              );
+            })
+            .catch((err) => {
+              clearActiveOperations(
+                operationData.fileIds,
+                operationData.folderIds,
+              );
+              console.log(
+                `Error ${op === "copy" ? "copying" : "moving"} file ${fileToProcess.title}: ${err}`,
+              );
+            });
+
+          currentFileIndex += 1;
+          operationResults.push(
+            `${op === "copy" ? "copying" : "moving"} file: ${fileToProcess.title} to folder: ${targetFolder.title}`,
+          );
+          break;
+        }
+        case "emptyTrash": {
+          const translations = {
+            successOperation: "Trash emptied",
+          };
+
+          this.emptyTrash(translations)
+            .then(() => {
+              console.log("Empty trash operation started");
+            })
+            .catch((err) => {
+              console.log(`Error in empty trash operation: ${err}`);
+            });
+
+          operationResults.push("emptying trash");
+          break;
+        }
+        default:
+          errorMessage = `Unknown operation: ${op}`;
+      }
+    });
+
+    return errorMessage || `Started ${operationResults.join(" and ")}`;
+  };
 }
 
 export default FilesActionStore;

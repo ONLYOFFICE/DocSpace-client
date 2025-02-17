@@ -30,7 +30,6 @@ import { useTranslation } from "react-i18next";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -91,13 +90,20 @@ const CancelOperationDialog: React.FC<ICancelOperationDialogProps> = ({
       <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{bodyText}</Text>
-        <Box displayProp="flex" alignItems="center" paddingProp="16px 0 0">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            padding: "16px 0 0",
+            boxSizing: "border-box",
+          }}
+        >
           <Checkbox
             label={t("Common:DontShowMessage")}
             isChecked={isChecked}
             onChange={onChangeCheckbox}
           />
-        </Box>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button label={t("Common:Yes")} onClick={onConfirm} primary scale />

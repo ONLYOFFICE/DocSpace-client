@@ -28,7 +28,6 @@ import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
@@ -107,9 +106,9 @@ const SingleSignOn = (props) => {
             // isDisabled={!isSSOAvailable}
           />
 
-          <Box className="sp-metadata">
+          <div className="sp-metadata">
             <ProviderMetadataSection />
-          </Box>
+          </div>
         </>
       )}
     </StyledSsoPage>

@@ -77,6 +77,10 @@
   align-items: center;
   gap: 8px;
   justify-content: start;
+
+  .logo {
+    box-sizing: border-box;
+  }
 }
 
 .textHeader {

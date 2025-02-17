@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { Box } from "@docspace/shared/components/box";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -125,7 +124,7 @@ const AttributeMapping = (props) => {
         </Text>
         <HelpButton tooltipContent={t("LdapAdvancedSettingsTooltip")} />
       </div>
-      <Box className="ldap_attribute-mapping">
+      <div className="ldap_attribute-mapping">
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
@@ -244,26 +243,21 @@ const AttributeMapping = (props) => {
             </Text>
           ) : null}
         </FieldContainer>
-      </Box>
-      <Box marginProp="24px 0 24px 0">
-        <Box
-          displayProp="flex"
-          flexDirection="column"
-          gapProp="8px"
-          marginProp="0 0 12px 0"
-        >
-          <Box displayProp="flex" flexDirection="row" gapProp="4px">
+      </div>
+      <div className="ldap_users-type-box">
+        <div className="ldap_users-type-box-title">
+          <div className="ldap_users-type-title">
             <Text fontWeight={600} fontSize="15px" lineHeight="16px">
               {t("LdapUsersType")}
             </Text>
-          </Box>
+          </div>
           <Text fontWeight={400} fontSize="12px" lineHeight="16px">
             {t("LdapUserTypeTooltip", {
               productName: t("Common:ProductName"),
             })}
           </Text>
-        </Box>
-        <Box className="access-selector-wrapper">
+        </div>
+        <div className="access-selector-wrapper">
           <AccessSelector
             className="add-manually-access"
             t={t}
@@ -281,8 +275,8 @@ const AttributeMapping = (props) => {
             scaledOptions={!isMobile()}
           />
           <div />
-        </Box>
-      </Box>
+        </div>
+      </div>
     </>
   );
 };

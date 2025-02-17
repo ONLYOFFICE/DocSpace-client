@@ -381,6 +381,7 @@
   "PaymentsTitle": "Payments",
   "People": "People",
   "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> per admin/month",
+  "PerUserYear": "<1>{{currencySymbol}}</1><1>{{price}}</1> per admin/year",
   "Petabyte": "PB",
   "Phone": "Phone",
   "Plugins": "Plugins",

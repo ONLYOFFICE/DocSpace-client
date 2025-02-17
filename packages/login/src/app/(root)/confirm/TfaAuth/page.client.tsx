@@ -33,7 +33,6 @@ import { validateTfaCode } from "@docspace/shared/api/settings";
 import { checkConfirmLink, loginWithTfaCode } from "@docspace/shared/api/user";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import {
@@ -146,18 +145,14 @@ const TfaAuthForm = ({
 
   return (
     <>
-      <Box className="app-code-description" marginProp="0 0 32px 0">
+      <div className="app-code-description">
         <Text isBold fontSize="14px" className="app-code-text">
           {t("EnterAppCodeTitle")}
         </Text>
         <Text>{t("EnterAppCodeDescription")}</Text>
-      </Box>
-      <Box
-        displayProp="flex"
-        flexDirection="column"
-        className="app-code-wrapper"
-      >
-        <Box className="app-code-input">
+      </div>
+      <div className="app-code-wrapper">
+        <div className="app-code-input">
           <FieldContainer
             labelVisible={false}
             hasError={error ? true : false}
@@ -180,8 +175,8 @@ const TfaAuthForm = ({
               onKeyDown={onKeyPress}
             />
           </FieldContainer>
-        </Box>
-        <Box className="app-code-continue-btn">
+        </div>
+        <div className="app-code-continue-btn">
           <Button
             scale
             primary
@@ -196,8 +191,8 @@ const TfaAuthForm = ({
             isLoading={isLoading}
             onClick={onSubmit}
           />
-        </Box>
-      </Box>
+        </div>
+      </div>
     </>
   );
 };

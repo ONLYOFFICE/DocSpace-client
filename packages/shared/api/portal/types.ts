@@ -43,9 +43,8 @@ export type TPortalTariff = {
   openSource: boolean;
 };
 
-export type TPaymentFeature = {
+export type TBasePaymentFeature = {
   id: string;
-  value: number;
   type: string;
   priceTitle?: string;
   image?: string;
@@ -54,6 +53,16 @@ export type TPaymentFeature = {
     title?: string;
   };
 };
+
+export type TNumericPaymentFeature = TBasePaymentFeature & {
+  value: number;
+};
+
+export type TBooleanPaymentFeature = TBasePaymentFeature & {
+  value: boolean;
+};
+
+export type TPaymentFeature = TNumericPaymentFeature | TBooleanPaymentFeature;
 
 export type TPaymentQuota = {
   id: number;

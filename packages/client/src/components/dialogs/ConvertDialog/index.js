@@ -29,7 +29,6 @@ import styled from "styled-components";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 
@@ -178,7 +177,7 @@ const ConvertDialogComponent = (props) => {
         </Text>
 
         {isXML ? (
-          <Box paddingProp="16px 0 0">
+          <div style={{ boxSizing: "border-box", padding: "16px 0 0" }}>
             <Text>{t("SelectFileType")}</Text>
             <RadioButtonGroup
               orientation="vertical"
@@ -189,7 +188,7 @@ const ConvertDialogComponent = (props) => {
               spacing="12px"
               style={{ marginTop: "12px" }}
             />
-          </Box>
+          </div>
         ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,4 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { Box } from "./Box";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import styled from "styled-components";
+
+const StyledLoader = styled.div`
+  padding-bottom: 18px;
+
+  .loader-sibtitle {
+    display: block;
+    padding-bottom: 8px;
+  }
+`;
+
+const LoaderBrandingSubtitle = () => {
+  return (
+    <StyledLoader>
+      <RectangleSkeleton
+        width="700px"
+        height="16px"
+        className="loader-sibtitle"
+      />
+    </StyledLoader>
+  );
+};
+
+export default LoaderBrandingSubtitle;

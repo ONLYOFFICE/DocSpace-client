@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useRef, useState } from "react";
-// import equal from "fast-deep-equal/react";
 import { isMobileOnly } from "react-device-detect";
 import { ReactSVG } from "react-svg";
 
@@ -37,13 +36,8 @@ import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { Scrollbar } from "../scrollbar";
 
-import {
-  StyledSpan,
-  StyledText,
-  StyledTextWithExpander,
-  StyledLinkWithDropdown,
-  // Caret,
-} from "./LinkWithDropdown.styled";
+import styles from "./LinkWithDropdown.module.scss";
+import { Text } from "../text";
 import { LinkWithDropDownProps } from "./LinkWithDropdown.types";
 
 const LinkWithDropdown = ({
@@ -138,7 +132,7 @@ const LinkWithDropdown = ({
       <DropDownItem
         key={key}
         {...restProp}
-        className="drop-down-item"
+        className={classNames(styles.dropDownItem, "drop-down-item")}
         id={`${item.key}`}
         onClick={onClickDropDownItem}
         data-key={item.key}
@@ -148,58 +142,87 @@ const LinkWithDropdown = ({
   });
 
   const styledText = (
-    <StyledText
-      className="text"
-      isTextOverflow={isTextOverflow}
+    <Text
+      as="span"
+      className={classNames(styles.text, {
+        [styles.textOverflow]: isTextOverflow,
+      })}
       truncate={isTextOverflow}
       fontSize={fontSize}
       fontWeight={fontWeight}
       color={color}
       isBold={isBold}
       title={title}
-      // dropdownType={dropdownType}
-      // isDisabled={isDisabled}
-      // withTriangle
     >
       {children}
-    </StyledText>
+    </Text>
   );
 
   return (
-    <StyledSpan
-      $isOpen={state.isOpen}
-      className={className}
+    <span
       id={id}
       style={style}
+      className={classNames(
+        styles.span,
+        { [styles.isOpen]: state.isOpen },
+        className,
+      )}
+      data-test-id="link-dropdown"
       ref={ref}
     >
       <span onClick={onOpen}>
-        <StyledLinkWithDropdown
-          isSemitransparent={isSemitransparent}
-          dropdownType={dropdownType}
-          color={color}
-          isDisabled={isDisabled}
+        <a
+          className={classNames(
+            styles.linkWithDropdown,
+            {
+              [styles.disabled]: isDisabled,
+              [styles.semitransparent]: isSemitransparent,
+              [styles.alwaysDashed]: dropdownType === "alwaysDashed",
+              [styles.appearDashedAfterHover]:
+                dropdownType === "appearDashedAfterHover",
+            },
+            className,
+          )}
+          style={{ color }}
+          role="button"
+          aria-haspopup="true"
+          aria-expanded={state.isOpen}
+          aria-disabled={isDisabled}
+          {...rest}
         >
           {withExpander ? (
-            <StyledTextWithExpander isOpen={state.isOpen}>
+            <div
+              className={classNames(
+                styles.textWithExpander,
+                { [styles.isOpen]: state.isOpen },
+                className,
+              )}
+            >
               {styledText}
-              <ReactSVG className="expander" src={ExpanderDownReactSvgUrl} />
-            </StyledTextWithExpander>
+              <ReactSVG
+                className={styles.expander}
+                src={ExpanderDownReactSvgUrl}
+              />
+            </div>
           ) : (
             styledText
           )}
-        </StyledLinkWithDropdown>
+        </a>
       </span>
       <DropDown
-        className={classNames("fixed-max-width", dropDownClassName || "") || ""}
+        className={
+          classNames(
+            "fixed-max-width",
+            dropDownClassName || "",
+            styles.fixedMaxWidth,
+          ) || ""
+        }
         manualWidth={
           manualWidth || (showScroll ? onCheckManualWidth() : undefined)
         }
         open={state.isOpen}
-        // withArrow={false}
         forwardedRef={ref}
         directionY={directionY}
-        // isDropdown={false}
         clickOutsideAction={onClose}
         {...rest}
       >
@@ -216,7 +239,7 @@ const LinkWithDropdown = ({
           dropDownItem
         )}
       </DropDown>
-    </StyledSpan>
+    </span>
   );
 };
 

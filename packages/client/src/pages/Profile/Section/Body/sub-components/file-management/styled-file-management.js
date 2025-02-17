@@ -55,6 +55,7 @@ const StyledWrapper = styled.div`
   }
 
   .settings-section {
+    box-sizing: border-box;
     display: grid;
     grid-gap: 12px;
   }

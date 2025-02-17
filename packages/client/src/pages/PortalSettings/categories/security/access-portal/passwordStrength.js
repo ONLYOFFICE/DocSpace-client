@@ -29,7 +29,6 @@ import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Slider } from "@docspace/shared/components/slider";
@@ -56,6 +55,7 @@ const MainContainer = styled.div`
   }
 
   .checkboxes {
+    box-sizing: border-box;
     display: inline-block;
     margin-top: 18px;
     margin-bottom: 24px;
@@ -63,6 +63,13 @@ const MainContainer = styled.div`
     .second-checkbox {
       margin: 8px 0;
     }
+  }
+
+  .slider-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 `;
 
@@ -258,7 +265,7 @@ const PasswordStrength = (props) => {
       <Text fontSize="14px" fontWeight="600" className="length-subtitle">
         {t("PasswordMinLenght")}
       </Text>
-      <Box displayProp="flex" flexDirection="row" alignItems="center">
+      <div className="slider-box">
         <Slider
           className="password-slider"
           min="8"
@@ -273,8 +280,8 @@ const PasswordStrength = (props) => {
             length: passwordLen,
           })}
         </Text>
-      </Box>
-      <Box className="checkboxes">
+      </div>
+      <div className="checkboxes">
         <Checkbox
           className="use-upper-case"
           onChange={onClickCheckbox}
@@ -296,7 +303,7 @@ const PasswordStrength = (props) => {
           isChecked={useSpecialSymbols}
           value="special"
         />
-      </Box>
+      </div>
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={onSaveClick}

@@ -184,6 +184,8 @@ const SectionHeaderContent = (props) => {
         return isCustomizationAvailable;
       case "RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
+      case "BrandName":
+        return isCustomizationAvailable || standalone;
       case "WhiteLabel":
         return isCustomizationAvailable || standalone;
       case "CompanyInfoSettings":

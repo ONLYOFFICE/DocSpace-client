@@ -35,7 +35,6 @@ import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { DeviceType } from "@docspace/shared/enums";
@@ -86,7 +85,7 @@ const DataManagementWrapper = (props) => {
             <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
               {helpInfo}
             </Trans>
-            <Box as="span" marginProp="10px 0 0">
+            <span style={{ margin: "10px 0 0" }}>
               <Link
                 id="link-tooltip"
                 fontSize="13px"
@@ -97,7 +96,7 @@ const DataManagementWrapper = (props) => {
               >
                 {t("Common:LearnMore")}
               </Link>
-            </Box>
+            </span>
           </Text>
         }
       />

@@ -46,8 +46,17 @@ const StyledBodyContent = styled.div`
 `;
 
 const ChangeNameDialog = (props) => {
+  const {
+    visible,
+    onClose,
+    profile,
+    updateProfile,
+    updateProfileInUsers,
+    userNameRegex,
+    fromList,
+  } = props;
+
   const { t, ready } = useTranslation(["PeopleTranslations", "Common"]);
-  const { visible, onClose, profile, updateProfile, userNameRegex } = props;
   const [firstName, setFirstName] = useState(profile.firstName);
   const [lastName, setLastName] = useState(profile.lastName);
   const [isSaving, setIsSaving] = useState(false);
@@ -84,10 +93,13 @@ const ChangeNameDialog = (props) => {
     setIsSaving(true);
 
     try {
-      await updateProfile({
-        firstName: firstName.trim(),
-        lastName: lastName.trim(),
-      });
+      const newProfile = profile;
+      newProfile.firstName = firstName.trim();
+      newProfile.lastName = lastName.trim();
+
+      const currentProfile = await updateProfile(newProfile);
+      fromList && (await updateProfileInUsers(currentProfile));
+      toastr.success(t("Common:ChangesSavedSuccessfully"));
 
       setIsSaving(false);
       onClose();

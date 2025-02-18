@@ -52,9 +52,37 @@ export function middleware(request: NextRequest) {
       `${redirectUrl}/doceditor${request.nextUrl.search}`,
     );
   }
+
+  const searchParams = new URLSearchParams(request.nextUrl.searchParams);
+
+  let theme = searchParams.get("theme");
+  const locale = searchParams.get("locale");
+  const shareKey = searchParams.get("share");
+
+  if (theme) {
+    const firstChar = theme[0].toUpperCase();
+    const rest = theme.slice(1).toLowerCase();
+    theme = `${firstChar}${rest}`;
+  }
+
+  const headers = {
+    "x-sdk-config-theme": theme ?? "",
+    "x-sdk-config-locale": locale ?? "",
+    "x-sdk-config-share-key": shareKey ?? "",
+  };
+
+  Object.entries(headers).forEach(([key, value]) => {
+    requestHeaders.set(key, value);
+  });
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/health", "/doceditor"],
+  matcher: ["/", "/health", "/doceditor"],
 };

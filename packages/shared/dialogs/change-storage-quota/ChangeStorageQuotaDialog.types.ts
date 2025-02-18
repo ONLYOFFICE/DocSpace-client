@@ -26,7 +26,7 @@
 
 export interface ChangeStorageQuotaDialogProps {
   initialSize: string;
-  portalInfo: any;
+  portalInfo: unknown;
   isVisible: boolean;
   updateFunction: (quota: unknown) => void;
   onClose: () => void;

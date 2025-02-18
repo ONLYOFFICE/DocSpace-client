@@ -62,7 +62,7 @@ export const ChangeStorageQuotaDialog = ({
   const onSaveClick = async () => {
     if (isSizeError()) return;
 
-    isError && setIsError(false);
+    if (isError) setIsError(false);
     setIsLoading(true);
 
     try {
@@ -74,11 +74,11 @@ export const ChangeStorageQuotaDialog = ({
       await updateFunction(storageQuota);
       toastr.success(t("Common:StorageQuotaSet"));
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e!);
     }
 
     setSize("");
-    onClose && onClose();
+    if (onClose) onClose();
     setIsLoading(false);
   };
 
@@ -86,7 +86,7 @@ export const ChangeStorageQuotaDialog = ({
     setSize(bytes);
   };
 
-  const onKeyUpHandler = (e) => {
+  const onKeyUpHandler = (e: KeyboardEvent) => {
     if (e.keyCode === 13 || e.which === 13) {
       if (isSizeError()) return;
       onSaveClick();
@@ -97,15 +97,16 @@ export const ChangeStorageQuotaDialog = ({
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyUpHandler, false);
+
     return () => {
       document.removeEventListener("keyup", onKeyUpHandler, false);
     };
-  }, [size]);
+  }, []);
 
   const onCloseClick = () => {
     setSize("");
     setIsError(false);
-    onClose && onClose();
+    if (onClose) onClose();
   };
 
   return (
@@ -134,7 +135,7 @@ export const ChangeStorageQuotaDialog = ({
             onSetQuotaBytesSize={onSetQuotaBytesSize}
             isLoading={isLoading}
             isError={isError}
-            initialSize={initialSize}
+            initialSize={Number(initialSize)}
             isAutoFocussed
           />
         ) : null}
@@ -146,7 +147,7 @@ export const ChangeStorageQuotaDialog = ({
           primary
           onClick={onSaveClick}
           isLoading={isLoading}
-          isDisabled={!isDisableQuota ? size.trim() === "" : null}
+          isDisabled={!isDisableQuota ? size.trim() === "" : false}
           scale
         />
         <Button

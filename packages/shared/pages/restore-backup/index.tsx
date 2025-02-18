@@ -152,7 +152,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     return () => {
       SocketHelper.off(SocketEvents.BackupProgress, onBackupProgress);
     };
-  }, []);
+  }, [setDownloadingProgress, setTemporaryLink, t]);
 
   const onChangeRadioButton = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

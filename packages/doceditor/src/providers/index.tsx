@@ -41,6 +41,7 @@ export type TContextData = {
   settings: TSettings | undefined;
   systemTheme: ThemeKeys | undefined;
   colorTheme: TGetColorTheme | undefined;
+  locale?: string;
 };
 
 export type TProviders = {

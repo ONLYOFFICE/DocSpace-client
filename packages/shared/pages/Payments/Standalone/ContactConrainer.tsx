@@ -36,7 +36,7 @@ export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
   const { t } = useTranslation("Common");
   return (
     <StyledContactContainer>
-      {salesEmail && (
+      {salesEmail ? (
         <Text as="span" noSelect fontWeight={600}>
           {t("ContactUs")}
           <ColorTheme
@@ -49,7 +49,7 @@ export const ContactContainer = ({ salesEmail }: { salesEmail: string }) => {
             {salesEmail}
           </ColorTheme>
         </Text>
-      )}
+      ) : null}
     </StyledContactContainer>
   );
 };

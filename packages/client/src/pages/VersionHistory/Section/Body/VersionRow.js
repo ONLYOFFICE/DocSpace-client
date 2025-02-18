@@ -26,15 +26,17 @@
 
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import RestoreAuthReactSvgUrl from "PUBLIC_DIR/images/restore.auth.react.svg?url";
-import { useNavigate } from "react-router-dom";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
-import { useState, useEffect } from "react";
+import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
+
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { withTranslation } from "react-i18next";
+
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Button } from "@docspace/shared/components/button";
-import { withTranslation } from "react-i18next";
-import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 import { getCorrectDate } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
@@ -328,25 +330,22 @@ const VersionRow = (props) => {
           </Text> */}
         </div>
         <div>
-          <>
-            {showEditPanel ? (
-              <Textarea
-                className="version_edit-comment"
-                wrapperClassName="textarea-wrapper"
-                onChange={onChange}
-                fontSize={12}
-                heightTextArea="54px"
-                value={commentValue}
-                isDisabled={isSavingComment}
-                autoFocus
-                areaSelect
-              />
-            ) : null}
+          {showEditPanel ? (
+            <Textarea
+              className="version_edit-comment"
+              value={commentValue}
+              onChange={onChange}
+              heightScale
+              heightMin={60}
+              heightMax={250}
+              autoFocus
+              areaSelect
+            />
+          ) : null}
 
-            <Text className="version_text" truncate>
-              {info.comment}
-            </Text>
-          </>
+          <Text className="version_text" truncate>
+            {info.comment}
+          </Text>
         </div>
         {showEditPanel ? (
           <div className="version_edit-comment">

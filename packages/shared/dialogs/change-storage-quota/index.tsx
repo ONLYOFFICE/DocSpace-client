@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import { Button, ButtonSize } from "../../components/button";
@@ -50,62 +50,75 @@ export const ChangeStorageQuotaDialog = ({
   const [isError, setIsError] = useState(false);
   const [size, setSize] = useState("");
 
-  const isSizeError = () => {
+  const isSizeError = useCallback(() => {
     if (isDisableQuota) return false;
     if (size.trim() === "") {
       setIsError(true);
       return true;
     }
-    return false;
-  };
 
-  const onSaveClick = async () => {
+    return false;
+  }, [size, setIsError, isDisableQuota]);
+
+  const onSaveClick = useCallback(async () => {
     if (isSizeError()) return;
 
-    isError && setIsError(false);
     setIsLoading(true);
 
     try {
       const storageQuota = await setTenantQuotaSettings({
-        TenantId: portalInfo.tenantId,
+        TenantId: portalInfo?.tenantId,
         Quota: isDisableQuota ? -1 : size,
       });
 
-      await updateFunction(storageQuota);
-      toastr.success(t("Common:StorageQuotaSet"));
-    } catch (e) {
-      toastr.error(e);
+      if (updateFunction) {
+        updateFunction(storageQuota);
+      }
+
+      if (onClose) onClose();
+    } catch (error) {
+      toastr.error(error);
     }
 
-    setSize("");
-    onClose && onClose();
+    if (onClose) onClose();
     setIsLoading(false);
-  };
+  }, [
+    isSizeError,
+    portalInfo?.tenantId,
+    isDisableQuota,
+    size,
+    updateFunction,
+    onClose,
+  ]);
 
   const onSetQuotaBytesSize = (bytes: string) => {
     setSize(bytes);
   };
 
-  const onKeyUpHandler = (e) => {
-    if (e.keyCode === 13 || e.which === 13) {
-      if (isSizeError()) return;
-      onSaveClick();
-      setSize("");
-      setIsError(false);
-    }
-  };
+  const onKeyUpHandler = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.keyCode === 13 || e.which === 13) {
+        if (isSizeError()) return;
+        onSaveClick();
+        setSize("");
+        setIsError(false);
+      }
+    },
+    [isSizeError, onSaveClick, setSize, setIsError],
+  );
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyUpHandler, false);
+
     return () => {
       document.removeEventListener("keyup", onKeyUpHandler, false);
     };
-  }, [size]);
+  }, [onKeyUpHandler]);
 
   const onCloseClick = () => {
     setSize("");
     setIsError(false);
-    onClose && onClose();
+    if (onClose) onClose();
   };
 
   return (
@@ -134,7 +147,7 @@ export const ChangeStorageQuotaDialog = ({
             onSetQuotaBytesSize={onSetQuotaBytesSize}
             isLoading={isLoading}
             isError={isError}
-            initialSize={initialSize}
+            initialSize={Number(initialSize)}
             isAutoFocussed
           />
         ) : null}
@@ -146,7 +159,7 @@ export const ChangeStorageQuotaDialog = ({
           primary
           onClick={onSaveClick}
           isLoading={isLoading}
-          isDisabled={!isDisableQuota ? size.trim() === "" : null}
+          isDisabled={!isDisableQuota ? size.trim() === "" : false}
           scale
         />
         <Button

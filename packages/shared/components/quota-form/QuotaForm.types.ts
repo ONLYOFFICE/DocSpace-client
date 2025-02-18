@@ -25,19 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export interface QuotaFormProps {
-  maxInputWidth: string;
+  maxInputWidth?: string;
   isLoading: boolean;
   isError: boolean;
-  isButtonsEnable: boolean;
+  isButtonsEnable?: boolean;
   onSetQuotaBytesSize: (bytes: string) => void;
   initialSize: number;
-  initialPower: number;
-  isDisabled: boolean;
-  onSave: any;
-  onCancel: any;
-  description: string;
-  isAutoFocussed: boolean;
-  checkboxLabel: string;
-  label: string;
+  initialPower?: number;
+  isDisabled?: boolean;
+  onSave?: (data: unknown) => void;
+  onCancel?: () => void;
+  description?: string;
+  isAutoFocussed?: boolean;
+  checkboxLabel?: string;
+  label?: string;
   tabIndex?: number;
 }

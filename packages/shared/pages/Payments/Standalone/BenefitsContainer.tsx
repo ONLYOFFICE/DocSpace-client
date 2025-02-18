@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
 

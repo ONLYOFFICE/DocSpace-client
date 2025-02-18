@@ -663,5 +663,9 @@
   "BackupList": "Ehtiyyat siyahısı",
   "RestoreBackupWarningText": "{{productName}} bərpa prosesi zamanı yararsız olacaq. Bərpa tamamlandıqdan sonra seçilmiş bərpa nöqtəsinin tarixindən sonra edilən hər hansı dəyişikliklər itəcək.",
   "UserAgreement": "Təsdiqləyirəm və davam etmək istəyirəm",
-  "LocalFile": "Yerli fayl"
+  "LocalFile": "Yerli fayl",
+  "Branding": "Brendləşmə",
+  "DataBackup": "Məlumatların yedəklənməsi",
+  "AutoBackup": "Avtomatik ehtiyat nüsxəsi",
+  "RestoreBackup": "Məlumatların bərpası"
 }

@@ -108,14 +108,14 @@ const DataManagementWrapper = (props) => {
   const data = [
     {
       id: "data-backup",
-      name: t("DataBackup"),
+      name: t("Common:DataBackup"),
       content: (
         <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
       ),
     },
     {
       id: "auto-backup",
-      name: t("AutoBackup"),
+      name: t("Common:AutoBackup"),
       content: (
         <AutoBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
       ),

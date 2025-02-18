@@ -664,5 +664,9 @@
   "BackupList": "Lista de copias de seguridad",
   "RestoreBackupWarningText": "{{productName}} dejará de estar disponible durante el proceso de restauración. Una vez finalizada la restauración, se perderán todos los cambios realizados después de la fecha del punto de restauración seleccionado.",
   "UserAgreement": "Confirmo y deseo proceder",
-  "LocalFile": "Archivo local"
+  "LocalFile": "Archivo local",
+  "Branding": "Personalización de marca",
+  "DataBackup": "Copia de seguridad de datos",
+  "AutoBackup": "Copia de seguridad automática",
+  "RestoreBackup": "Restauración de datos"
 }

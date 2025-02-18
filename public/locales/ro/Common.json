@@ -664,5 +664,9 @@
   "BackupList": "Lista copiilor de rezervă",
   "RestoreBackupWarningText": "În timpul procesului de restaurare spațiul {{productName}} va deveni indisponibil. Odată ce procesul de restaurare este finalizat, toate modificările efectuate după crearea unui punct de restaurare vor fi pierdute.",
   "UserAgreement": "Agreez și doresc să continui",
-  "LocalFile": "Fișierul local"
+  "LocalFile": "Fișierul local",
+  "Branding": "Branding",
+  "DataBackup": "Copiere de rezervă a datelor",
+  "AutoBackup": "Copiere de rezervă automată",
+  "RestoreBackup": "Restaurarea datelor"
 }

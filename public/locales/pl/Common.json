@@ -663,5 +663,9 @@
   "BackupList": "Lista kopii zapasowych",
   "RestoreBackupWarningText": "Obszar {{productName}} będzie niedostępny podczas procesu przywracania. Po jego zakończeniu wszystkie zmiany dokonane po dacie wybranego puntu przywracania zostaną utracone.",
   "UserAgreement": "Potwierdzam i chcę kontynuować",
-  "LocalFile": "Plik lokalny"
+  "LocalFile": "Plik lokalny",
+  "Branding": "Branding",
+  "DataBackup": "Kopia zapasowa danych",
+  "AutoBackup": "Automatyczna kopia zapasowa",
+  "RestoreBackup": "Odzyskiwanie danych"
 }

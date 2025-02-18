@@ -121,7 +121,7 @@ const AutoBackupWrapper = ({
   }, []);
 
   useEffect(() => {
-    if (ready) setDocumentTitle(t("DataBackup"));
+    if (ready) setDocumentTitle(t("Common:DataBackup"));
   }, [t, ready]);
 
   return (

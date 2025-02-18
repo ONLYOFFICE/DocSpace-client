@@ -663,5 +663,9 @@
   "BackupList": "Rezerves kopiju saraksts",
   "RestoreBackupWarningText": "Atjaunošanas procesa laikā programma {{productName}} kļūs nepieejama. Pēc atjaunošanas pabeigšanas visas izmaiņas, kas veiktas pēc atlasītā atjaunošanas punkta datuma, tiks zaudētas.",
   "UserAgreement": "Es apstiprinu un vēlos turpināt",
-  "LocalFile": "Vietējais fails"
+  "LocalFile": "Vietējais fails",
+  "Branding": "Zīmolrade",
+  "DataBackup": "Datu dublēšana",
+  "AutoBackup": "Automātiskā rezerves kopēšana",
+  "RestoreBackup": "Datu atjaunošana"
 }

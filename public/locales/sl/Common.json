@@ -663,5 +663,9 @@
   "BackupList": "Seznam varnostnih kopij",
   "RestoreBackupWarningText": "{{productName}} med postopkom obnovitve ne bo več na voljo. Ko bo obnovitev končana, bodo izgubljene vse spremembe po datumu izbrane obnovitvene točke.",
   "UserAgreement": "Potrjujem in želim nadaljevati",
-  "LocalFile": "Lokalna datoteka"
+  "LocalFile": "Lokalna datoteka",
+  "Branding": "Blagovna znamka",
+  "DataBackup": "Varnostno kopiranje podatkov",
+  "AutoBackup": "Samodejno varnostno kopiranje",
+  "RestoreBackup": "Obnovitev podatkov"
 }

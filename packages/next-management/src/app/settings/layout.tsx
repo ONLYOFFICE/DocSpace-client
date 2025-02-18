@@ -12,7 +12,7 @@ import useDeviceType from "@/hooks/useDeviceType";
 import { pathsWithoutTabs } from "@/lib/constants";
 
 const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
-  const { t } = useTranslation(["Common", "Settings"]);
+  const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
   const router = useRouter();
   const { currentDeviceType } = useDeviceType();
@@ -20,22 +20,22 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   const data = [
     {
       id: "branding",
-      name: t("Settings:Branding"),
+      name: t("Common:Branding"),
       content: children,
     },
     {
       id: "data-backup",
-      name: t("Settings:DataBackup"),
+      name: t("Common:DataBackup"),
       content: children,
     },
     {
       id: "auto-backup",
-      name: t("Settings:AutoBackup"),
+      name: t("Common:AutoBackup"),
       content: children,
     },
     {
       id: "restore",
-      name: t("Settings:RestoreBackup"),
+      name: t("Common:RestoreBackup"),
       content: children,
     },
   ];
@@ -66,4 +66,3 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default observer(SettingsLayout);
-

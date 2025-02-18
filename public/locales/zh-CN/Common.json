@@ -665,5 +665,9 @@
   "BackupList": "备份列表",
   "RestoreBackupWarningText": "{{productName}}在恢复过程中将不可用。恢复完成后，在点击“恢复”按钮之后所做的一切修改都作废消失。",
   "UserAgreement": "我确认并继续",
-  "LocalFile": "本地文件"
+  "LocalFile": "本地文件",
+  "Branding": "品牌",
+  "DataBackup": "数据备份",
+  "AutoBackup": "自动备份",
+  "RestoreBackup": "数据恢复"
 }

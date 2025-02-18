@@ -97,7 +97,7 @@ const Branding = ({
   const isMobileView = deviceType === DeviceType.mobile;
 
   useEffect(() => {
-    setDocumentTitle(t("Branding"));
+    setDocumentTitle(t("Common:Branding"));
   }, []);
 
   const hideBlock = isManagement() ? false : portals?.length > 1;

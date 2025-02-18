@@ -216,8 +216,8 @@ const ArticleBodyContent = (props) => {
         return t("Ldap:LdapSettings");
       case "LdapSyncTitle":
         return t("Ldap:LdapSyncTitle");
-      case "RestoreBackup":
-        return t("RestoreBackup");
+      case "Common:RestoreBackup":
+        return t("Common:RestoreBackup");
       case "PortalDeletion":
         return t("PortalDeletion", { productName: t("Common:ProductName") });
       case "Common:DeveloperTools":

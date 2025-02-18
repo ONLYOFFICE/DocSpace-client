@@ -67,7 +67,7 @@ const ManualBackupWrapper = ({
   const { t } = useTranslation(["Settings", "Common"]);
 
   useLayoutEffect(() => {
-    setDocumentTitle(t("DataBackup"));
+    setDocumentTitle(t("Common:DataBackup"));
   }, [setDocumentTitle, t]);
 
   useEffect(() => {

@@ -253,6 +253,8 @@ class FilesStore {
 
   hotkeysClipboard = [];
 
+  mainButtonVisible = false;
+
   constructor(
     authStore,
     selectedFolderStore,
@@ -4257,6 +4259,10 @@ class FilesStore {
 
     return true;
   }
+
+  setMainButtonVisible = (mainButtonVisible) => {
+    this.mainButtonVisible = mainButtonVisible;
+  };
 }
 
 export default FilesStore;

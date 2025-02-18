@@ -32,7 +32,7 @@ import {
   getPowerFromBytes,
   getSizeFromBytes,
 } from "../../utils/common";
-import { TextInput, InputType, InputSize } from "../text-input";
+import { TextInput, InputType } from "../text-input";
 import { ComboBox, ComboBoxSize, TOption } from "../combobox";
 import { SaveCancelButtons } from "../save-cancel-buttons";
 import { Text } from "../text";
@@ -185,7 +185,10 @@ export const QuotaForm = ({
   };
 
   const isDisable =
-    isLoading || isDisabled || (checkboxLabel.length > 0 && isChecked);
+    isLoading ||
+    isDisabled ||
+    (checkboxLabel !== undefined && checkboxLabel.length > 0 && isChecked);
+
   const isDefaultQuota = isDefaultValue(
     initPower,
     Number(initSize),
@@ -196,7 +199,7 @@ export const QuotaForm = ({
 
   return (
     <StyledBody
-      maxInputWidth={maxInputWidth}
+      maxInputWidth={maxInputWidth || "300px"}
       isLabel={!!label}
       isCheckbox={!!checkboxLabel}
     >

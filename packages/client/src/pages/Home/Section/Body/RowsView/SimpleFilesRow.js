@@ -158,7 +158,7 @@ const StyledSimpleFilesRow = styled(Row).attrs(injectDefaultTheme)`
     props.canDrag &&
     `url(${CursorPalmReactSvgUrl}) 8 0, auto`};
   ${(props) =>
-    props.inProgress &&
+    props.isBlockingOperation &&
     css`
       pointer-events: none;
       /* cursor: wait; */
@@ -370,8 +370,7 @@ const SimpleFilesRow = (props) => {
     changeIndex,
     isIndexUpdated,
     isFolder,
-    icon,
-    isDownload,
+    isBlockingOperation,
     isTutorialEnabled,
     setRefMap,
     deleteRefMap,
@@ -505,11 +504,8 @@ const SimpleFilesRow = (props) => {
           isIndexEditingMode={isIndexEditingMode}
           onChangeIndex={onChangeIndex}
           isActive={isActive}
-          inProgress={
-            inProgress && isFolder
-              ? icon !== "duplicate" && icon !== "duplicate-room" && !isDownload
-              : inProgress
-          }
+          isBlockingOperation={isBlockingOperation}
+          inProgress={inProgress}
           isThirdPartyFolder={item.isThirdPartyFolder}
           className="files-row"
           withAccess={withAccess}

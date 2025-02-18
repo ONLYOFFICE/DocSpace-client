@@ -2463,6 +2463,7 @@ export const getBaseTheme = () => {
         color: gray,
         tooltipColor: lightToastInfo,
         iconColor: lightErrorStatus,
+        positiveStatusColor: lightStatusPositive,
 
         shareButton: {
           color: gray,

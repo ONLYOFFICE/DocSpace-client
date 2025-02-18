@@ -44,9 +44,7 @@ import {
   ActionOption,
   ButtonOption,
   MainButtonMobileProps,
-  ProgressOption,
 } from "./MainButtonMobile.types";
-import { ProgressBarMobile } from "./sub-components/ProgressBar";
 
 const MainButtonMobile = (props: MainButtonMobileProps) => {
   const {
@@ -54,9 +52,8 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
     style,
     opened,
     actionOptions,
-    progressOptions,
+
     buttonOptions,
-    percent,
 
     withoutButton,
     manualWidth,
@@ -73,7 +70,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
   } = props;
 
   const [isOpen, setIsOpen] = useState(opened);
-  const [isUploading, setIsUploading] = useState(false);
+
   const [height, setHeight] = useState(`${window.innerHeight - 48}px`);
   const [openedSubmenuKey, setOpenedSubmenuKey] = useState("");
 
@@ -189,7 +186,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
 
   useLayoutEffect(() => {
     recalculateHeight();
-  }, [isOpen, isOpenButton, isUploading, recalculateHeight]);
+  }, [isOpen, isOpenButton, recalculateHeight]);
 
   useEffect(() => {
     window.addEventListener("resize", recalculateHeight);
@@ -225,16 +222,6 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
       return;
     toggle(false);
   };
-
-  React.useEffect(() => {
-    if (progressOptions) {
-      const openProgressOptions = progressOptions.filter(
-        (option: ProgressOption) => option.open,
-      );
-
-      setIsUploading(openProgressOptions.length > 0);
-    }
-  }, [progressOptions]);
 
   const noHover = isMobile;
 
@@ -282,30 +269,6 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
           })}
         </div>
 
-        <div
-          className={classNames(styles.progressContainer, {
-            [styles.isUploading]: isUploading,
-          })}
-        >
-          {progressOptions
-            ? progressOptions.map((option: ProgressOption) => (
-                <ProgressBarMobile
-                  key={option.key}
-                  label={option.label}
-                  icon={option.icon || ""}
-                  className={option.className}
-                  percent={option.percent || 0}
-                  status={option.status}
-                  open={option.open || false}
-                  onCancel={option.onCancel}
-                  onClickAction={option.onClick}
-                  hideButton={() => toggle(false)}
-                  error={option.error}
-                />
-              ))
-            : null}
-        </div>
-
         {buttonOptions ? (
           <div
             className={classNames(styles.buttonOptions, {
@@ -313,6 +276,11 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
             })}
           >
             {buttonOptions?.map((option: ButtonOption) => {
+              const optionOnClickAction = () => {
+                toggle(false);
+                option.onClick?.();
+              };
+
               if (option.items) {
                 return (
                   <SubmenuItem
@@ -345,7 +313,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
                     "drop-down-item-button",
                   )}
                   key={option.key}
-                  onClick={option.onClick}
+                  onClick={optionOnClickAction}
                 />
               );
             })}
@@ -367,12 +335,10 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
         data-testid="main-button-mobile"
       >
         <FloatingButton
+          className={classNames(styles.floatingButton)}
           icon={isOpen ? FloatingButtonIcons.minus : FloatingButtonIcons.plus}
           onClick={onMainButtonClick}
-          percent={isOpen ? 0 : percent}
-          className={classNames(styles.floatingButton, {
-            [styles.hideLoading]: percent === 0 || percent === 100 || isOpen,
-          })}
+          withoutProgress
         />
 
         <DropDown

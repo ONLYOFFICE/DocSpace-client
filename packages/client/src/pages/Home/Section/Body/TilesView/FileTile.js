@@ -87,11 +87,12 @@ const FileTile = (props) => {
     onDragOver,
     onDragLeave,
     badgeUrl,
-    icon,
-    isDownload,
     selectableRef,
     openUser,
     showStorageInfo,
+    isBlockingOperation,
+    icon,
+    isDownload,
     setRefMap,
     deleteRefMap,
   } = props;
@@ -201,6 +202,7 @@ const FileTile = (props) => {
           contextButtonSpacerWidth={displayShareButton}
           isActive={isActive}
           inProgress={inProgress}
+          isBlockingOperation={isBlockingOperation}
           isEdit={isEdit}
           getContextModel={getContextModel}
           hideContextMenu={onHideContextMenu}

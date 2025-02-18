@@ -70,6 +70,7 @@ import {
   GuestReleaseTipDialog,
   FormFillingTipsDialog,
   DeleteVersionDialog,
+  CancelOperationDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -153,6 +154,7 @@ const Panels = (props) => {
     guestReleaseTipDialogVisible,
     closeEditIndexDialogVisible,
     deleteVersionDialogVisible,
+    operationCancelVisible,
     setFormFillingTipsDialog,
     formFillingTipsVisible,
     viewAs,
@@ -378,6 +380,9 @@ const Panels = (props) => {
     deleteVersionDialogVisible && (
       <DeleteVersionDialog key="delete-version-dialog" />
     ),
+    operationCancelVisible && (
+      <CancelOperationDialog key="cancel-operation-dialog" />
+    ),
     welcomeFormFillingTipsVisible && (
       <FormFillingTipsDialog key="form-filling_tips_dialog" />
     ),
@@ -465,6 +470,7 @@ export default inject(
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
+      operationCancelVisible,
 
       setFormFillingTipsDialog,
       formFillingTipsVisible,
@@ -572,6 +578,7 @@ export default inject(
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
       deleteVersionDialogVisible,
+      operationCancelVisible,
       setFormFillingTipsDialog,
       formFillingTipsVisible,
       viewAs,

@@ -32,12 +32,17 @@ import { Link } from "@docspace/shared/components/link";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
-import { NoUserSelect, tablet } from "@docspace/shared/utils";
+import { NoUserSelect } from "@docspace/shared/utils";
 import { Button } from "@docspace/shared/components/button";
+import { ProgressBar } from "@docspace/shared/components/progress-bar";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { toastr } from "@docspace/shared/components/toast";
+
+import CloseSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
+
 import ActionsUploadedFile from "./SubComponents/ActionsUploadedFile";
 import ErrorFileUpload from "./SubComponents/ErrorFileUpload";
 import SimulatePassword from "../../SimulatePassword";
-import LoadingButton from "./SubComponents/LoadingButton";
 
 const StyledFileRow = styled(Row)`
   width: 100%;
@@ -59,11 +64,7 @@ const StyledFileRow = styled(Row)`
     ${(props) =>
       props.showPasswordInput &&
       css`
-        margin-top: -40px;
-
-        @media ${tablet} {
-          margin-top: -44px;
-        }
+        margin-top: -36px;
       `}
   }
 
@@ -87,7 +88,12 @@ const StyledFileRow = styled(Row)`
   }
   .password-input {
     position: absolute;
-    top: 48px;
+    top: 37px;
+    ${(props) =>
+      props.showPasswordInput &&
+      css`
+        top: 48px;
+      `}
     inset-inline: 0;
     max-width: 470px;
     width: calc(100% - 16px);
@@ -158,6 +164,27 @@ const StyledFileRow = styled(Row)`
   .file-exst {
     color: ${(props) => props.theme.filesPanels.upload.color};
   }
+
+  .actions-wrapper {
+    display: flex;
+    margin-inline-start: auto;
+    padding-inline-start: 16px;
+
+    align-items: center;
+
+    .upload-panel_percent-text {
+      margin-left: 16px;
+    }
+    .upload-panel_close-button,
+    .upload-panel_check-button {
+      margin-left: 16px;
+    }
+    .upload-panel_check-button {
+      path {
+        fill: ${(props) => props.theme.filesPanels.upload.positiveStatusColor};
+      }
+    }
+  }
 `;
 class FileRow extends Component {
   constructor(props) {
@@ -168,7 +195,7 @@ class FileRow extends Component {
       password: "",
       passwordValid: true,
     };
-
+    this.inputRef = React.createRef();
     this.onChangePassword = this.onChangePassword.bind(this);
   }
 
@@ -197,26 +224,21 @@ class FileRow extends Component {
     const {
       setMediaViewerData,
       setUploadPanelVisible,
-      clearUploadedFilesHistory,
+
       isMediaActive,
       setCurrentItem,
       item,
-      uploaded,
     } = this.props;
     if (!isMediaActive) setCurrentItem(item);
 
     const data = { visible: true, id };
     setMediaViewerData(data);
     setUploadPanelVisible(false);
-
-    if (uploaded) {
-      clearUploadedFilesHistory();
-    }
   };
 
   onButtonClick = () => {
     const { password } = this.state;
-    const { removeFileFromList, convertFile, item, uploadedFiles } = this.props;
+    const { convertFile, item, uploadedFiles } = this.props;
     const { fileId, toFolderId, fileInfo } = item;
 
     if (this.hasError()) return;
@@ -231,9 +253,8 @@ class FileRow extends Component {
       password,
       index,
     };
-
+    toastr.clear();
     this.onTextClick();
-    removeFileFromList(fileId);
     convertFile(newItem);
   };
 
@@ -291,7 +312,6 @@ class FileRow extends Component {
       if (!url) return;
       window.open(url, downloadInCurrentTab ? "_self" : "_blank");
     };
-
     return (
       <StyledFileRow
         className="download-row"
@@ -365,20 +385,41 @@ class FileRow extends Component {
               showPasswordInput={showPasswordInput}
             />
           ) : (
-            <div
-              className="upload_panel-icon"
-              data-id={item.uniqueId}
-              onClick={this.onCancelCurrentUpload}
-            >
-              <LoadingButton item={item} />
-            </div>
+            <>
+              <div className="actions-wrapper">
+                {item.percent ? (
+                  <Text className="upload-panel_percent-text">
+                    {Math.trunc(item.percent)}&#37;
+                  </Text>
+                ) : null}
+                <IconButton
+                  data-id={item.uniqueId}
+                  data-action={item.action}
+                  data-file-id={item.fileId}
+                  iconName={CloseSvgUrl}
+                  size={16}
+                  className="upload-panel_close-button"
+                  onClick={this.onCancelCurrentUpload}
+                />
+              </div>
+              {item.action !== "convert" ? (
+                <div className="password-input">
+                  <ProgressBar
+                    style={{ width: "100%" }}
+                    percent={item.percent}
+                  />
+                </div>
+              ) : null}
+            </>
           )}
+
           {showPasswordInput ? (
             <div className="password-input">
               <SimulatePassword
                 onChange={this.onChangePassword}
                 onKeyDown={this.onKeyDown}
                 hasError={!passwordValid}
+                forwardedRef={this.inputRef}
               />
               <Button
                 id="conversion-button"
@@ -422,8 +463,8 @@ export default inject(
         ext = splitted.length > 1 ? `.${splitted.pop()}` : "";
       }
     } else {
-      ext = item.fileInfo.fileExst;
-      splitted = item.fileInfo.title.split(".");
+      ext = item?.fileInfo?.fileExst;
+      splitted = item.fileInfo?.title?.split(".");
       if (ext) splitted.splice(-1);
     }
 
@@ -452,7 +493,7 @@ export default inject(
       }
     }
 
-    const name = splitted.join(".");
+    const name = splitted?.join(".");
 
     const { theme } = settingsStore;
     const { canViewedDocs, getIconSrc, isArchive, openOnNewPage } =
@@ -462,10 +503,9 @@ export default inject(
       cancelCurrentUpload,
       cancelCurrentFileConversion,
       setUploadPanelVisible,
-      removeFileFromList,
+
       convertFile,
       files: uploadedFiles,
-      clearUploadedFilesHistory,
     } = uploadDataStore;
     const { playlist, setMediaViewerData, setCurrentItem } =
       mediaViewerDataStore;
@@ -491,7 +531,7 @@ export default inject(
       name,
       isMediaActive,
       downloadInCurrentTab,
-      removeFileFromList,
+
       convertFile,
       uploadedFiles,
 
@@ -501,7 +541,6 @@ export default inject(
       setUploadPanelVisible,
 
       setCurrentItem,
-      clearUploadedFilesHistory,
 
       isPlugin,
       onPluginClick,

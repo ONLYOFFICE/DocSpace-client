@@ -81,8 +81,7 @@ const FilesTableRow = (props) => {
     onEditIndex,
     isIndexUpdated,
     displayFileExtension,
-    icon,
-    isDownload,
+    isBlockingOperation,
 
     isTutorialEnabled,
     setRefMap,
@@ -222,11 +221,8 @@ const FilesTableRow = (props) => {
         onClick={isIndexEditingMode ? () => {} : onMouseClick}
         isActive={isActive}
         isIndexEditingMode={isIndexEditingMode}
-        inProgress={
-          inProgress && item.isFolder
-            ? icon !== "duplicate" && icon !== "duplicate-room" && !isDownload
-            : inProgress
-        }
+        isBlockingOperation={isBlockingOperation}
+        inProgress={inProgress}
         isFolder={item.isFolder}
         onHideContextMenu={onHideContextMenu}
         isThirdPartyFolder={item.isThirdPartyFolder}

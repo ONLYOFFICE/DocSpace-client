@@ -148,8 +148,6 @@ const Table = ({
   currentDeviceType,
   onEditIndex,
   isIndexing,
-  icon,
-  isDownload,
   isTutorialEnabled,
   setRefMap,
   deleteRefMap,
@@ -234,8 +232,6 @@ const Table = ({
             ? highlightFile.isExst === !item.fileExst
             : null
         }
-        icon={icon}
-        isDownload={isDownload}
         isTutorialEnabled={isTutorialEnabled}
         setRefMap={setRefMap}
         deleteRefMap={deleteRefMap}
@@ -254,8 +250,6 @@ const Table = ({
     isTrashFolder,
     isIndexEditingMode,
     isIndexing,
-    icon,
-    isDownload,
     isTutorialEnabled,
     setRefMap,
     deleteRefMap,
@@ -309,7 +303,6 @@ export default inject(
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
-    uploadDataStore,
     dialogsStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
@@ -319,8 +312,6 @@ export default inject(
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
-
-    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
 
     const { formFillingTipsVisible, welcomeFormFillingTipsVisible } =
       dialogsStore;
@@ -369,8 +360,6 @@ export default inject(
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
-      icon,
-      isDownload,
       isTutorialEnabled,
       setRefMap,
       deleteRefMap,

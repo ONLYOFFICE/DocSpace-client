@@ -72,8 +72,6 @@ const FilesRowContainer = ({
   currentDeviceType,
   isIndexEditingMode,
   changeIndex,
-  icon,
-  isDownload,
   isTutorialEnabled,
   setRefMap,
   deleteRefMap,
@@ -106,8 +104,6 @@ const FilesRowContainer = ({
             : null
         }
         isIndexEditingMode={isIndexEditingMode}
-        icon={icon}
-        isDownload={isDownload}
         isTutorialEnabled={isTutorialEnabled}
         setRefMap={setRefMap}
         deleteRefMap={deleteRefMap}
@@ -120,8 +116,6 @@ const FilesRowContainer = ({
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
-    icon,
-    isDownload,
     isTutorialEnabled,
   ]);
 
@@ -149,7 +143,6 @@ export default inject(
     treeFoldersStore,
     indexingStore,
     filesActionsStore,
-    uploadDataStore,
     dialogsStore,
     guidanceStore,
   }) => {
@@ -178,8 +171,6 @@ export default inject(
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
-    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
-
     return {
       filesList,
       viewAs,
@@ -194,8 +185,6 @@ export default inject(
       currentDeviceType,
       isIndexEditingMode,
       changeIndex: filesActionsStore.changeIndex,
-      icon,
-      isDownload,
       isTutorialEnabled,
       setRefMap,
       deleteRefMap,

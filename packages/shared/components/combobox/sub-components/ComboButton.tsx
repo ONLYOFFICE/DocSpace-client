@@ -46,7 +46,7 @@ import { Badge } from "../../badge";
 import ComboButtonTheme from "../Combobox.theme";
 
 import { ComboBoxSize } from "../Combobox.enums";
-import type { TComboButtonProps } from "../Combobox.types";
+import type { TComboButtonProps } from "../ComboBox.types";
 
 const ComboButton: React.FC<TComboButtonProps> = ({
   onClick,

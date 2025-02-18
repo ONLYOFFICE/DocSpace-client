@@ -28,7 +28,7 @@ import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { ComboBox } from "./ComboBox";
-import { TComboboxProps } from "./Combobox.types";
+import { TComboboxProps } from "./ComboBox.types";
 import { globalColors } from "../../themes";
 import { ComboBoxDisplayType, ComboBoxSize } from "./Combobox.enums";
 

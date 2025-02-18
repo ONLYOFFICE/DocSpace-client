@@ -31,7 +31,7 @@ import userEvent from "@testing-library/user-event";
 import { renderWithTheme } from "../../../utils/render-with-theme";
 import { ComboButton } from "./ComboButton";
 import { ComboBoxSize } from "../ComboBox.enums";
-import type { TCombobox, TOption } from "../Combobox.types";
+import type { TCombobox, TOption } from "../ComboBox.types";
 
 describe("ComboButton", () => {
   const baseProps = {

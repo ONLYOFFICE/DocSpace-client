@@ -33,7 +33,7 @@ import React, {
 import { ThemeContext } from "styled-components";
 
 import { StyledThemeComboButton } from "./Combobox.styled";
-import type { TComboButtonThemeProps } from "./Combobox.types";
+import type { TComboButtonThemeProps } from "./ComboBox.types";
 
 const ComboButtonTheme = forwardRef(
   (

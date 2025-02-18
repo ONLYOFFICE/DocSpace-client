@@ -34,7 +34,7 @@ import { DropDownItem } from "../drop-down-item";
 import { ComboButton } from "./sub-components/ComboButton";
 import { StyledComboBox } from "./Combobox.styled";
 import { ComboBoxSize, ComboBoxDisplayType } from "./Combobox.enums";
-import type { TComboboxProps, TOption } from "./Combobox.types";
+import type { TComboboxProps, TOption } from "./ComboBox.types";
 
 const compare = (prevProps: TComboboxProps, nextProps: TComboboxProps) => {
   return equal(prevProps, nextProps);

@@ -29,7 +29,7 @@ import DeleteDialog from "./DeleteDialog";
 import DownloadDialog from "./DownloadDialog";
 import ConvertDialog from "./ConvertDialog";
 import DeleteThirdPartyDialog from "./DeleteThirdPartyDialog";
-import ConnectDialog from "./ConnectDialog";
+import ConnectDialog from "./ConnectDialog/ConnectDialogWrapper";
 import ConflictResolveDialog from "./ConflictResolveDialog";
 import ChangeEmailDialog from "./ChangeEmailDialog";
 import ChangePasswordDialog from "./ChangePasswordDialog";

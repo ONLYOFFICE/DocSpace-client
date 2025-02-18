@@ -27,8 +27,6 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin =
-  require("webpack").container.ModuleFederationPlugin;
 const DefinePlugin = require("webpack").DefinePlugin;
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
@@ -40,10 +38,6 @@ const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 const minifyJson = require("@docspace/shared/utils/minifyJson");
-
-const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
-//const fs = require("fs");
-//const { readdir } = require("fs").promises;
 
 const path = require("path");
 
@@ -380,28 +374,6 @@ module.exports = (env, argv) => {
       ],
     };
   }
-
-  config.plugins.push(
-    new ModuleFederationPlugin({
-      name: "client",
-      filename: "remoteEntry.js",
-      remotes: [],
-      exposes: {
-        "./shell": "./src/Shell",
-        "./store": "./src/store",
-        "./Layout": "./src/components/Layout",
-        "./Main": "./src/components/Main",
-        "./NavMenu": "./src/components/NavMenu",
-        "./PreparationPortalDialog":
-          "./src/components/dialogs/PreparationPortalDialog/PreparationPortalDialogWrapper.js",
-        "./utils": "./src/helpers/filesUtils.js",
-      },
-      shared: {
-        ...deps,
-        ...sharedDeps,
-      },
-    }),
-  );
 
   const htmlTemplate = {
     title: title,

@@ -33,8 +33,8 @@ export interface QuotaFormProps {
   initialSize: number;
   initialPower: number;
   isDisabled: boolean;
-  onSave: any;
-  onCancel: any;
+  onSave: (data: unknown) => void;
+  onCancel: () => void;
   description: string;
   isAutoFocussed: boolean;
   checkboxLabel: string;

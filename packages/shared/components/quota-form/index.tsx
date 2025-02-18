@@ -32,11 +32,13 @@ import {
   getPowerFromBytes,
   getSizeFromBytes,
 } from "../../utils/common";
-import { TextInput } from "../text-input";
-import { ComboBox, ComboBoxSize } from "../combobox";
+import { TextInput, InputType, InputSize } from "../text-input";
+import { ComboBox, ComboBoxSize, TOption } from "../combobox";
 import { SaveCancelButtons } from "../save-cancel-buttons";
 import { Text } from "../text";
 import { Checkbox } from "../checkbox";
+
+import { TTranslation } from "../../types";
 
 import { QuotaFormProps } from "./QuotaForm.types";
 import { StyledBody } from "./QuotaForm.styled";
@@ -52,7 +54,7 @@ const isDefaultValue = (
 
   if (initialSize === -1) return false;
 
-  if (initPower == power && initSize == value) return true;
+  if (initPower === power && initSize === value) return true;
 
   return false;
 };
@@ -72,7 +74,7 @@ const getInitialPower = (initialSize: number) => {
   return 2;
 };
 
-const getOptions = (t: any) => [
+const getOptions = (t: TTranslation) => [
   { key: 0, label: t("Common:Bytes") },
   { key: 1, label: t("Common:Kilobyte") },
   { key: 2, label: t("Common:Megabyte") },
@@ -80,10 +82,9 @@ const getOptions = (t: any) => [
   { key: 4, label: t("Common:Terabyte") },
 ];
 
-const getConvertedSize = (value, power) => {
+const getConvertedSize = (value: string, power: number) => {
   if (value.trim() === "") return "";
-
-  return conversionToBytes(value, power);
+  return conversionToBytes(Number(value), power);
 };
 export const QuotaForm = ({
   isLoading,
@@ -112,41 +113,41 @@ export const QuotaForm = ({
   useEffect(() => {
     setSize(initSize);
     setPower(initPower);
-  }, [initialSize]);
+  }, [initSize, initPower, setSize, setPower]);
 
   const { t } = useTranslation(["Settings", "Common"]);
   const options = getOptions(t);
 
-  const onChangeTextInput = (e) => {
+  const onChangeTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, validity } = e.target;
 
     if (validity.valid) {
       const transmittedSize = getConvertedSize(value, power);
 
-      onSetQuotaBytesSize && onSetQuotaBytesSize(transmittedSize);
+      if (onSetQuotaBytesSize) onSetQuotaBytesSize(transmittedSize);
       setSize(value);
     }
   };
 
-  const onSelectComboBox = (option) => {
+  const onSelectComboBox = (option: TOption) => {
     const { key } = option;
 
-    size.trim() !== "" &&
-      onSetQuotaBytesSize &&
-      onSetQuotaBytesSize(conversionToBytes(size, key));
+    if (onSetQuotaBytesSize && size.trim() !== "")
+      onSetQuotaBytesSize(conversionToBytes(Number(size), Number(key)));
 
-    setPower(key);
+    setPower(Number(key));
   };
 
   const onChangeCheckbox = () => {
-    const changeСheckbox = !isChecked;
+    const changeCheckbox = !isChecked;
 
-    setIsChecked(changeСheckbox);
+    setIsChecked(changeCheckbox);
 
-    const sizeValue = changeСheckbox ? -1 : getConvertedSize(size, power);
+    const sizeValue = changeCheckbox ? -1 : getConvertedSize(size, power);
 
-    onSetQuotaBytesSize && onSetQuotaBytesSize(sizeValue);
+    if (onSetQuotaBytesSize) onSetQuotaBytesSize(sizeValue.toString());
   };
+
   const isSizeError = () => {
     if (size.trim() === "") {
       setHasError(true);
@@ -159,12 +160,12 @@ export const QuotaForm = ({
   const onSaveClick = async () => {
     if (isSizeError()) return;
 
-    onSave & onSave(conversionToBytes(size, power));
+    if (onSave) onSave(conversionToBytes(Number(size), Number(power)));
 
     setHasError(false);
   };
 
-  const onKeyDownInput = (e) => {
+  const onKeyDownInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.keyCode === 13 || e.which === 13) {
       if (isButtonsEnable) {
         if (isSizeError()) return;
@@ -177,18 +178,19 @@ export const QuotaForm = ({
   };
 
   const onCancelClick = () => {
-    onCancel && onCancel();
+    if (onCancel) onCancel();
 
     setSize(initSize);
     setPower(initPower);
   };
 
-  const isDisable = isLoading || isDisabled || (checkboxLabel && isChecked);
+  const isDisable =
+    isLoading || isDisabled || (checkboxLabel.length > 0 && isChecked);
   const isDefaultQuota = isDefaultValue(
     initPower,
-    initSize,
+    Number(initSize),
     power,
-    size,
+    Number(size),
     initialSize,
   );
 
@@ -206,6 +208,7 @@ export const QuotaForm = ({
       ) : null}
       <div className="quota-container">
         <TextInput
+          type={InputType.number}
           className="quota_limit"
           isAutoFocussed={isAutoFocussed}
           value={size}
@@ -222,7 +225,7 @@ export const QuotaForm = ({
           className="quota_value"
           options={options}
           isDisabled={isDisable}
-          selectedOption={options.find((elem) => elem.key === power)}
+          selectedOption={options.find((elem) => elem.key === power)!}
           size={ComboBoxSize.content}
           onSelect={onSelectComboBox}
           showDisabledItems

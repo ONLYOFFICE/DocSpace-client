@@ -253,8 +253,6 @@ class SettingsStore {
 
   externalResources: TExternalResources | null = null;
 
-  licenseUrl = null;
-
   bookTrainingEmail = null;
 
   hotkeyPanelVisible = false;

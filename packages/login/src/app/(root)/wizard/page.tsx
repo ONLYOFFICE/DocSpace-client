@@ -78,7 +78,9 @@ async function Page() {
             isRequiredLicense={isRequiredLicense}
             portalCultures={portalCultures}
             portalTimeZones={portalTimeZones}
-            licenseUrl={objectSettings?.licenseUrl}
+            licenseUrl={
+              objectSettings?.externalResources.common.entries.license
+            }
             culture={objectSettings?.culture}
             forumLinkUrl={objectSettings?.externalResources.forum.domain}
             wizardToken={objectSettings?.wizardToken}

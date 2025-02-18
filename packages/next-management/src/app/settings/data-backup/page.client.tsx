@@ -30,6 +30,9 @@ import { observer } from "mobx-react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
+import { useUnmount } from "@docspace/shared/hooks/useUnmount";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+
 import { openConnectWindowUtils } from "@docspace/shared/utils/openConnectWindow";
 import { deleteThirdParty as deleteThirdPartyApi } from "@docspace/shared/api/files";
 import ManualBackup from "@docspace/shared/pages/manual-backup";
@@ -179,12 +182,13 @@ const DataBackup = ({
     }
   };
 
-  useEffect(() => {
+  useUnmount(() => {
+    resetDownloadingProgress();
+  });
+
+  useDidMount(() => {
     getProgress();
-    return () => {
-      resetDownloadingProgress();
-    };
-  }, []);
+  });
 
   return (
     <ManualBackup

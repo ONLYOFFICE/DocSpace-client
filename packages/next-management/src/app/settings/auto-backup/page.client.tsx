@@ -30,6 +30,8 @@ import React, { useCallback, useLayoutEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import AutomaticBackup from "@docspace/shared/pages/auto-backup";
+import { useUnmount } from "@docspace/shared/hooks/useUnmount";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import type {
   SettingsThirdPartyType,
@@ -196,13 +198,14 @@ const AutoBackup = ({
     }
   };
 
-  useLayoutEffect(() => {
+  useUnmount(() => {
+    resetDownloadingProgress();
+  });
+
+  useDidMount(() => {
     getProgress();
     setDefaultOptions(t, periodsObject, weekdaysLabelArray);
-    return () => {
-      resetDownloadingProgress();
-    };
-  }, []);
+  });
 
   const isRestoreAndAutoBackupAvailable = useMemo(() => {
     return Boolean(

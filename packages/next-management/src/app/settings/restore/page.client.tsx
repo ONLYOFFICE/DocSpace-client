@@ -31,6 +31,9 @@ import { useTranslation } from "react-i18next";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 
+import { useUnmount } from "@docspace/shared/hooks/useUnmount";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+
 import { RestoreBackup } from "@docspace/shared/pages/restore-backup";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { openConnectWindowUtils } from "@docspace/shared/utils/openConnectWindow";
@@ -152,13 +155,14 @@ const Restore = ({
     }
   };
 
-  useEffect(() => {
+  useUnmount(() => {
+    resetDownloadingProgress();
+    setRestoreResource(null);
+  });
+
+  useDidMount(() => {
     getProgress();
-    return () => {
-      resetDownloadingProgress();
-      setRestoreResource(null);
-    };
-  }, []);
+  });
 
   const isRestoreAndAutoBackupAvailable = useMemo(() => {
     return Boolean(

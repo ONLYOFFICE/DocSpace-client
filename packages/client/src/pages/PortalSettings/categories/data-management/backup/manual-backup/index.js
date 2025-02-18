@@ -450,7 +450,6 @@ class ManualBackup extends React.Component {
         {isBackupProgressVisible ? (
           <FloatingButton
             className="layout-progress-bar"
-            icon="file"
             alert={false}
             percent={downloadingProgress}
           />

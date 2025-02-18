@@ -79,24 +79,6 @@ describe("<MainButtonMobile />", () => {
     expect(mockOnClick).toHaveBeenCalled();
   });
 
-  it("shows progress bar when uploading", () => {
-    renderWithTheme(
-      <MainButtonMobile
-        percent={50}
-        progressOptions={[
-          {
-            key: "upload",
-            label: "Uploading...",
-            percent: 50,
-            open: true,
-          },
-        ]}
-        opened
-      />,
-    );
-    expect(screen.getByText("Uploading...")).toBeInTheDocument();
-  });
-
   it("hides loading indicator when upload is complete", () => {
     renderWithTheme(<MainButtonMobile percent={100} />);
     const wrapper = screen.getByTestId("main-button-mobile");

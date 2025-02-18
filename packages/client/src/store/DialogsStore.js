@@ -262,6 +262,8 @@ class DialogsStore {
 
   stopFillingDialogVisible = false;
 
+  operationCancelVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -318,6 +320,10 @@ class DialogsStore {
 
   setIsFolderActions = (isFolderActions) => {
     this.isFolderActions = isFolderActions;
+  };
+
+  setOperationCancelVisible = (operationCancelVisible) => {
+    this.operationCancelVisible = operationCancelVisible;
   };
 
   setMoveToPanelVisible = (visible) => {

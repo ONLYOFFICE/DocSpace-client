@@ -32,7 +32,6 @@ import MobileActionsDocumentReactSvgUrl from "PUBLIC_DIR/images/actions.document
 import MobileActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
 import MobileActionsSpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import MobileActionsFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
-import MobileActionsRemoveReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.remove.react.svg?url";
 import MobileUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 
 import { MainButtonMobile } from ".";
@@ -118,19 +117,9 @@ const Template = ({ ...args }) => {
   const maxUploads = 10;
   const maxOperations = 7;
 
-  const [isOpenUploads, setIsOpenUploads] = useState(false);
-  const [isOpenOperations, setIsOpenOperations] = useState(false);
   const [isOpenButton, setIsOpenButton] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [state, setState] = useState({ uploads: 0, operations: 0 });
-
-  const onUploadClick = () => {
-    setState({ uploads: 0, operations: 0 });
-    setIsUploading(true);
-    setIsOpenUploads(true);
-    setIsOpenOperations(true);
-    setIsOpenButton(true);
-  };
 
   useEffect(() => {
     if (!isUploading) return;
@@ -151,31 +140,6 @@ const Template = ({ ...args }) => {
 
     return () => clearInterval(interval);
   }, [isUploading, state]);
-
-  const uploadPercent = (state.uploads / maxUploads) * 100;
-  const operationPercent = (state.operations / maxOperations) * 100;
-
-  const progressOptions = [
-    {
-      key: "1",
-      label: "Uploads",
-      icon: MobileActionsRemoveReactSvgUrl,
-      percent: uploadPercent,
-      status: `${state.uploads}/${maxUploads}`,
-      open: isOpenUploads,
-      onCancel: () => setIsOpenUploads(false),
-    },
-    {
-      key: "2",
-      label: "Other operations",
-      icon: MobileActionsRemoveReactSvgUrl,
-      percent: operationPercent,
-      status: `3 files not loaded`,
-      open: isOpenOperations,
-      onCancel: () => setIsOpenOperations(false),
-      error: true,
-    },
-  ];
 
   const buttonOptions = [
     {
@@ -221,12 +185,9 @@ const Template = ({ ...args }) => {
           bottom: "25px",
           insetInlineEnd: "60px",
         }}
-        progressOptions={progressOptions}
         buttonOptions={buttonOptions}
-        onUploadClick={onUploadClick}
         withButton
         isOpenButton={isOpenButton}
-        percent={uploadPercent}
         opened={false}
       />
     </StyledWrapper>

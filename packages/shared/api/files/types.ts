@@ -117,6 +117,7 @@ export type TFile = {
   thumbnailUrl?: string;
   expired?: string;
   isForm?: boolean;
+  isFolder?: boolean;
 };
 
 export type TOpenEditRequest = {
@@ -191,6 +192,7 @@ export type TFolder = {
   roomType?: RoomsType;
   path?: TPathParts[];
   type?: FolderType;
+  isFolder?: boolean;
 };
 
 export type TGetFolderPath = TFolder[];

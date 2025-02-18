@@ -28,7 +28,6 @@ import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
-import { Box } from "@docspace/shared/components/box";
 import { size } from "@docspace/shared/utils";
 
 import { DeviceType } from "@docspace/shared/enums";
@@ -58,7 +57,7 @@ const SPSettings = ({ currentDeviceType }) => {
   }, []);
 
   return (
-    <Box className="service-provider-settings">
+    <div className="service-provider-settings">
       {isMobileView ? <ToggleSSO /> : null}
       <IdpSettings />
       <Certificates provider="IdentityProvider" />
@@ -67,7 +66,7 @@ const SPSettings = ({ currentDeviceType }) => {
       <UsersType />
       <AdvancedSettings />
       <SubmitResetButtons />
-    </Box>
+    </div>
   );
 };
 

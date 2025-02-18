@@ -52,7 +52,7 @@
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import { TTranslation } from "../../../types";
 
 const StyledButton = styled.div`

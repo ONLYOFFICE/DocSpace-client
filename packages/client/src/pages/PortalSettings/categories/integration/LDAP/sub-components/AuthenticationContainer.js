@@ -27,7 +27,6 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
@@ -79,7 +78,7 @@ const AuthenticationContainer = ({
         />
         <HelpButton tooltipContent={t("LdapAuthenticationTooltip")} />
       </div>
-      <Box className="ldap_authentication">
+      <div className="ldap_authentication">
         <FieldContainer
           isVertical
           labelVisible
@@ -128,7 +127,7 @@ const AuthenticationContainer = ({
             isDisableTooltip
           />
         </FieldContainer>
-      </Box>
+      </div>
     </>
   );
 };

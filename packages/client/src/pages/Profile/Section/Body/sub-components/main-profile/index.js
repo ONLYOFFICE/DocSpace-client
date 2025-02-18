@@ -35,7 +35,6 @@ import { inject, observer } from "mobx-react";
 import { Avatar } from "@docspace/shared/components/avatar";
 
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -196,7 +195,7 @@ const MainProfile = (props) => {
         </Link>
         to take part in the translation and get up to 1 year free of charge."
       </Trans>
-      <Box displayProp="block" marginProp="10px 0 0">
+      <div className="tooltip-link-box">
         <Link
           isHovered
           isBold
@@ -206,7 +205,7 @@ const MainProfile = (props) => {
         >
           {t("Common:LearnMore")}
         </Link>
-      </Box>
+      </div>
     </Text>
   );
 

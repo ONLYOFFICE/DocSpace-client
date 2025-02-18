@@ -28,7 +28,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import cloneDeep from "lodash/cloneDeep";
 
-import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
+import ClearReactSvgUrl from "PUBLIC_DIR/images/icons/17/clear.react.svg?url";
 
 import GroupsSelector from "../../../selectors/Groups";
 import PeopleSelector from "../../../selectors/People";

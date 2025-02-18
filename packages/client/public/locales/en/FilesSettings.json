@@ -1,4 +1,5 @@
 {
+  "CancellaionNotification": "Don't display cancellation notification again",
   "DisplayFileExtension": "Display file extension next to file name",
   "DisplayNotification": "Display notification when moving items to Trash",
   "OpenSameTab": "Open {{organizationName}} editor in same tab",

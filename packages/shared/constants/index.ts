@@ -54,6 +54,7 @@ export const FILE_SIZE = "file_size";
 export const ROOM = "room";
 export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
+export const YEAR_KEY = "year";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
 export const PUBLIC_STORAGE_KEY = "public-auth";
@@ -195,16 +196,24 @@ export const ALLOWED_PASSWORD_CHARACTERS =
 
 export const GENERAL_LINK_HEADER_KEY = "general-link_header";
 
-// mainRed - draft
-// lightBlueMain - your turn
-// gray - in progress
-// mainGreen - completed
-// mainRed - stopped
-
 export const FILLING_FORM_STATUS_COLORS = Object.freeze({
   [FileFillingFormStatus.Draft]: globalColors.mainRed,
   [FileFillingFormStatus.YourTurn]: globalColors.lightBlueMain,
   [FileFillingFormStatus.InProgress]: globalColors.gray,
   [FileFillingFormStatus.Completed]: globalColors.mainGreen,
   [FileFillingFormStatus.Stopped]: globalColors.mainRed,
+});
+
+export const OPERATIONS_NAME = Object.freeze({
+  trash: "trash",
+  deletePermanently: "deletePermanently",
+  download: "download",
+  duplicate: "duplicate",
+  exportIndex: "exportIndex",
+  markAsRead: "markAsRead",
+  copy: "copy",
+  move: "move",
+  convert: "convert",
+  other: "other",
+  upload: "upload",
 });

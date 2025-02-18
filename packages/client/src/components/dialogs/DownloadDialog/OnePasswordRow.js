@@ -53,6 +53,8 @@ import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
+import { toastr } from "@docspace/shared/components/toast";
+
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 
 import {
@@ -100,6 +102,7 @@ const OnePasswordRow = ({
     const files = updateDownloadItem(item.id, {
       password,
     });
+    toastr.clear();
     onDownload(files);
   };
 

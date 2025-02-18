@@ -30,7 +30,7 @@ import "@testing-library/jest-dom";
 import { PlayerDesktopContextMenu } from ".";
 
 // Mock SVG components
-jest.mock("PUBLIC_DIR/images/download.react.svg", () => {
+jest.mock("PUBLIC_DIR/images/icons/16/download.react.svg", () => {
   const DummyDownloadIcon = React.forwardRef(
     (props: React.ComponentProps<"div">, ref: React.Ref<HTMLDivElement>) => (
       <div {...props} ref={ref}>

@@ -25,17 +25,24 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import { inject, observer } from "mobx-react";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import StyledLoadingButton from "@docspace/shared/components/color-theme/sub-components/StyledLoadingButton";
-import StyledCircle from "@docspace/shared/components/color-theme/sub-components/StyledCircle";
+import { ColorTheme, ThemeId } from "../color-theme";
+import StyledLoadingButton from "../color-theme/sub-components/StyledLoadingButton";
+import StyledCircle from "../color-theme/sub-components/StyledCircle";
+import type { LoadingButtonProps } from "./LoadingButton.types";
 
-const LoadingButton = (props) => {
-  const { id, className, style, percent, onClick, isConversion, inConversion } =
-    props;
-  const [isAnimation, setIsAnimation] = useState(true);
+const LoadingButton: React.FC<LoadingButtonProps> = ({
+  id,
+  className,
+  style,
+  percent = 0,
+  onClick,
+  inConversion = false,
+  loaderColor,
+  backgroundColor,
+}) => {
+  const [isAnimation, setIsAnimation] = useState<boolean>(true);
 
-  const stopAnimation = () => {
+  const stopAnimation = (): void => {
     setIsAnimation(false);
   };
 
@@ -49,12 +56,12 @@ const LoadingButton = (props) => {
 
   return (
     <ColorTheme
-      {...props}
       id={id}
       className={className}
       style={style}
       onClick={onClick}
       themeId={ThemeId.LoadingButton}
+      loaderColor={loaderColor}
     >
       <StyledCircle
         percent={percent}
@@ -70,7 +77,7 @@ const LoadingButton = (props) => {
 
         <StyledLoadingButton
           className="loading-button"
-          isConversion={isConversion}
+          backgroundColor={backgroundColor}
         >
           {!inConversion ? <>&times;</> : null}
         </StyledLoadingButton>
@@ -79,8 +86,4 @@ const LoadingButton = (props) => {
   );
 };
 
-export default inject((_, { item }) => {
-  return {
-    percent: item?.percent ? item.percent : null,
-  };
-})(observer(LoadingButton));
+export { LoadingButton };

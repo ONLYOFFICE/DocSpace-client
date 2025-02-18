@@ -69,6 +69,7 @@ import {
   RoomLogoCoverDialog,
   GuestReleaseTipDialog,
   DeleteVersionDialog,
+  CancelOperationDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -155,6 +156,7 @@ const Panels = (props) => {
 
     setStopFillingDialogVisible,
     stopFillingDialogVisible,
+    operationCancelVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -382,6 +384,9 @@ const Panels = (props) => {
         onClose={onCloseStopFillingDialog}
       />
     ),
+    operationCancelVisible && (
+      <CancelOperationDialog key="cancel-operation-dialog" />
+    ),
   ];
 };
 
@@ -456,6 +461,7 @@ export default inject(
 
       setStopFillingDialogVisible,
       stopFillingDialogVisible,
+      operationCancelVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -558,6 +564,7 @@ export default inject(
 
       setStopFillingDialogVisible,
       stopFillingDialogVisible,
+      operationCancelVisible,
     };
   },
 )(observer(Panels));

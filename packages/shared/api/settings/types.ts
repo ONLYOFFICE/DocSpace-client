@@ -156,6 +156,10 @@ export type TApiEntries = {
   "plugins-sdk": string;
 };
 
+export type TSupportEntries = {
+  request: string;
+};
+
 export type TCommonEntries = {
   booktrainingemail: string;
   documentationemail: string;
@@ -305,6 +309,7 @@ export type TExternalResources = {
   };
   support: {
     domain: string;
+    entries: TSupportEntries;
   };
   videoguides: {
     domain: string;

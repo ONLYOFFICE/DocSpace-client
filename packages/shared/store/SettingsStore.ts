@@ -1494,6 +1494,13 @@ class SettingsStore {
       ? `${this.helpCenterDomain}${this.helpCenterEntries.becometranslator}`
       : null;
   }
+
+  get requestSupportUrl() {
+    return this.feedbackAndSupportUrl &&
+      this.externalResources?.support.entries?.request
+      ? `${this.feedbackAndSupportUrl}${this.externalResources?.support.entries?.request}`
+      : null;
+  }
 }
 
 export { SettingsStore };

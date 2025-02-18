@@ -101,7 +101,6 @@ export type ArticleProps = ArticleProfileProps &
 
     showArticleLoader?: boolean;
     isAdmin: boolean;
-    isVisitor: boolean;
 
     isNonProfit?: boolean;
     isGracePeriod?: boolean;

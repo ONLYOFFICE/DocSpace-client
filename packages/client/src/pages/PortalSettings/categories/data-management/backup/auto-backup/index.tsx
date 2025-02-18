@@ -40,6 +40,7 @@ import AutomaticBackup from "@docspace/shared/pages/auto-backup";
 import { useDefaultOptions } from "@docspace/shared/pages/auto-backup/hooks";
 
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
+import type { TColorScheme } from "@docspace/shared/themes";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import type {
@@ -47,7 +48,6 @@ import type {
   InjectedAutoBackupWrapperProps,
   AutoBackupWrapperProps,
 } from "./AutoBackup.types";
-import type { TColorScheme } from "@docspace/shared/themes";
 
 const AutoBackupWrapper = ({
   getProgress,
@@ -94,7 +94,7 @@ const AutoBackupWrapper = ({
         if (account) setConnectedThirdPartyAccount(account);
         if (backupStorage) setThirdPartyStorage(backupStorage);
 
-        setBackupSchedule(backupSchedule);
+        setBackupSchedule(backupSchedule!);
         setStorageRegions(newStorageRegions);
 
         setDefaultOptions(t, periodsObject, weekdaysLabelArray);

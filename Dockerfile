@@ -56,7 +56,7 @@ RUN yarn ./common/scripts/before-build.js
 
 # Run build webpack apps
 RUN yarn workspace @docspace/client build --env lint=false 
-RUN yarn workspace @docspace/management build --env lint=false
+RUN yarn workspace @docspace/next-management build --env lint=false
 
 # Run build next apps
 RUN TS_ERRORS_IGNORE=true yarn workspace @docspace/login build 

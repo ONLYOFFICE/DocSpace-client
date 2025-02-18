@@ -1,30 +1,31 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * (c) Copyright Ascensio System SIA 2009-2025
+ *
+ * This program is a free software product.
+ * You can redistribute it and/or modify it under the terms
+ * of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+ * Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+ * to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+ * any third-party rights.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+ * the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+ *
+ * The  interactive user interfaces in modified source and object code versions of the Program must
+ * display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+ *
+ * Pursuant to Section 7(b) of the License you must retain the original Product logo when
+ * distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+ * trademark law for use of our trademarks.
+ *
+ * All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+ * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+ * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+ */
 
-import styled from "styled-components";
 import React, { useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
@@ -39,33 +40,27 @@ import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-import { Badge } from "@docspace/shared/components/badge";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Badge } from "../badge";
+import { ColorTheme, ThemeId } from "../color-theme";
 
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
-import { globalColors } from "@docspace/shared/themes";
+import { RoomsType, ShareAccessRights } from "../../enums";
 
 import {
-  isTablet,
-  isDesktop,
-  size,
   classNames,
-  injectDefaultTheme,
-} from "@docspace/shared/utils";
-import NewFilesBadge from "./NewFilesBadge";
+  IconSizeType,
+  isDesktop,
+  isTablet,
+  size,
+} from "../../utils";
 
-const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+import styles from "./Badges.module.scss";
+import type { BadgesProps, BadgeWrapperProps } from "./Badges.type";
 
-  background: ${(props) => props.theme.filesBadges.backgroundColor};
-  padding: 6px;
-  border-radius: 4px;
-  box-shadow: 0px 2px 4px ${globalColors.badgeShadow};
-`;
-
-const BadgeWrapper = ({ onClick, isTile, children: badge }) => {
+const BadgeWrapper = ({
+  onClick,
+  isTile,
+  children: badge,
+}: BadgeWrapperProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   if (!isTile) return badge;
@@ -81,20 +76,20 @@ const BadgeWrapper = ({ onClick, isTile, children: badge }) => {
   const newBadge = React.cloneElement(badge, { isHovered });
 
   return (
-    <StyledWrapper
+    <div
+      className={styles.badgeWrapper}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       {newBadge}
-    </StyledWrapper>
+    </div>
   );
 };
 
 const Badges = ({
   t,
   theme,
-  newItems,
   item,
   isTrashFolder,
   showNew,
@@ -114,7 +109,8 @@ const Badges = ({
   canEditing,
   isTemplatesFolder,
   onCreateRoom,
-}) => {
+  newFilesBadge,
+}: BadgesProps) => {
   const {
     id,
     versionGroup,
@@ -127,12 +123,14 @@ const Badges = ({
     rootFolderId,
     new: newCount,
     hasDraft,
+    security,
     // startFilling,
   } = item;
 
   const isTile = viewAs === "tile";
 
-  const countVersions = versionGroup > 999 ? "999+" : versionGroup;
+  const countVersions =
+    versionGroup && versionGroup > 999 ? "999+" : versionGroup;
 
   const isLargeTabletDevice =
     isMobileDevice && window.innerWidth >= size.desktop;
@@ -140,7 +138,8 @@ const Badges = ({
   const tabletViewBadge = !isTile && (isTablet() || isLargeTabletDevice);
   const desktopView = !isTile && isDesktop();
 
-  const sizeBadge = isTile || tabletViewBadge ? "medium" : "small";
+  const sizeBadge =
+    isTile || tabletViewBadge ? IconSizeType.medium : IconSizeType.small;
 
   const lineHeightBadge = isTile || tabletViewBadge ? "1.46" : "1.34";
 
@@ -187,9 +186,10 @@ const Badges = ({
     "data-rootfolderid": rootFolderId,
     "data-new": newCount,
   };
-  const onShowVersionHistoryProp = item.security?.ReadHistory
-    ? { onClick: onShowVersionHistory }
-    : {};
+  const onShowVersionHistoryProp =
+    security && "ReadHistory" in security && security?.ReadHistory
+      ? { onClick: onShowVersionHistory }
+      : {};
 
   const isPublicRoomType =
     item.roomType === RoomsType.PublicRoom ||
@@ -208,7 +208,7 @@ const Badges = ({
     !isTile;
 
   const onDraftClick = () => {
-    if (!isTrashFolder) openLocationFile();
+    if (!isTrashFolder) openLocationFile?.();
   };
 
   return fileExst ? (
@@ -257,7 +257,9 @@ const Badges = ({
         />
       ) : null}
       {item.viewAccessibility?.MustConvert &&
-      item.security?.Convert &&
+      security &&
+      "Convert" in security &&
+      security?.Convert &&
       !isTrashFolder &&
       !isArchiveFolderRoot ? (
         <ColorTheme
@@ -269,13 +271,15 @@ const Badges = ({
           hoverColor={theme.filesBadges.hoverIconColor}
         />
       ) : null}
-      {versionGroup > 1 ? (
+      {versionGroup && versionGroup > 1 ? (
         <BadgeWrapper {...onShowVersionHistoryProp} isTile={isTile}>
           <Badge
             {...versionBadgeProps}
             className="badge-version badge-version-current tablet-badge icons-group"
             backgroundColor={theme.filesBadges.badgeBackgroundColor}
-            label={t("VersionBadge", { version: countVersions })}
+            label={t("VersionBadge", {
+              version: countVersions as string,
+            })}
             {...onShowVersionHistoryProp}
             noHover
             isVersionBadge
@@ -358,20 +362,12 @@ const Badges = ({
           themeId={ThemeId.IconButton}
           iconName={CreateRoomReactSvgUrl}
           className="badge tablet-row-create-room icons-group  tablet-badge"
-          size="medium"
+          size={IconSizeType.medium}
           onClick={onCreateRoom}
           title={t("Files:CreateRoom")}
         />
       ) : null}
-      {showNew ? (
-        <NewFilesBadge
-          className="tablet-badge"
-          newFilesCount={newItems}
-          folderId={id}
-          mute={mute}
-          isRoom={isRoom}
-        />
-      ) : null}
+      {showNew ? newFilesBadge : null}
     </div>
   );
 };

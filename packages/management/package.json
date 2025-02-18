@@ -1,5 +1,5 @@
 {
-  "name": "@docspace/next-management",
+  "name": "@docspace/management",
   "version": "3.0.1",
   "private": true,
   "scripts": {

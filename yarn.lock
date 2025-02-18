@@ -3128,9 +3128,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@docspace/next-management@workspace:packages/next-management":
+"@docspace/management@workspace:packages/management":
   version: 0.0.0-use.local
-  resolution: "@docspace/next-management@workspace:packages/next-management"
+  resolution: "@docspace/management@workspace:packages/management"
   dependencies:
     "@svgr/webpack": "npm:8.1.0"
     "@types/node": "npm:22.7.5"

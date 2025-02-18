@@ -46,10 +46,21 @@ const StyledCard = styled.div`
 
 const StyledItem = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
-  gap: 16px;
+  grid-template-columns: ${(props) =>
+    props.isRoom
+      ? "repeat(auto-fill, minmax(275px, 1fr))"
+      : "repeat(auto-fill, minmax(216px, 1fr))"};
+  gap: ${(props) => (props.isRoom ? "16px" : "14px 16px")};
 
   ${paddingCss};
+
+  ${(props) =>
+    !props.isRoom &&
+    css`
+      @media ${tablet} {
+        gap: 14px;
+      }
+    `}
 `;
 
 const StyledHeaderItem = styled.div`

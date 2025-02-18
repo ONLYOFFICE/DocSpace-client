@@ -78,8 +78,9 @@ const Card = ({ children, countTilesInRow, ...rest }) => {
 };
 
 const Item = ({ children, className, ...rest }) => {
+  const isRoom = className === "isRoom";
   return (
-    <StyledItem className={`Item ${className}`} {...rest}>
+    <StyledItem className={`Item ${className}`} isRoom={isRoom} {...rest}>
       {children}
     </StyledItem>
   );
@@ -103,6 +104,7 @@ const InfiniteGrid = (props) => {
   const list = [];
 
   const addItemToList = (key, cls, clear) => {
+    console.log("cls", cls);
     list.push(
       <Item key={key} className={cls}>
         {cards}

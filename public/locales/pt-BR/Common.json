@@ -664,5 +664,9 @@
   "BackupList": "Lista de backup",
   "RestoreBackupWarningText": "O {{productName}} ficará indisponível durante o processo de restauração. Após a conclusão da restauração, todas as alterações feitas após a data do ponto de restauração selecionado serão perdidas.",
   "UserAgreement": "Confirmo e quero continuar",
-  "LocalFile": "Arquivo local"
+  "LocalFile": "Arquivo local",
+  "Branding": "Marca",
+  "DataBackup": "Backup de dados",
+  "AutoBackup": "Backup automático",
+  "RestoreBackup": "Restauração de dados"
 }

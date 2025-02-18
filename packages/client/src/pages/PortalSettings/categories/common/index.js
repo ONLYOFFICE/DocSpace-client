@@ -69,7 +69,7 @@ const TabsCommon = (props) => {
   if (!isCommunity) {
     data.splice(1, 0, {
       id: "branding",
-      name: t("Branding"),
+      name: t("Common:Branding"),
       content: <Branding />,
     });
   }

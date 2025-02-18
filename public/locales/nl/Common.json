@@ -663,5 +663,9 @@
   "BackupList": "Back-up lijst",
   "RestoreBackupWarningText": "{{productName}} zal tijdens het herstelproces onbeschikbaar worden. Nadat het herstel is afgerond, gaan alle wijzigingen verloren die na de datum van het geselecteerde herstelpunt zijn aangebracht.",
   "UserAgreement": "Ik bevestig en wil doorgaan",
-  "LocalFile": "Lokaal bestand"
+  "LocalFile": "Lokaal bestand",
+  "Branding": "Branding",
+  "DataBackup": "Data backup",
+  "AutoBackup": "Automatische back-up",
+  "RestoreBackup": "Dataherstel"
 }

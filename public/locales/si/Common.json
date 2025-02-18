@@ -517,5 +517,9 @@
   "SendNotificationAboutRestoring": "අවකාශය ප්‍රත්‍යර්පණය ගැන පරිශ්‍රීලකයින්ට දන්වන්න",
   "BackupList": "උපස්ථ ලැයිස්තුව",
   "UserAgreement": "මම තහවුරු කරමි. ඉදිරියට යාමට වුවමනාය.",
-  "LocalFile": "ස්ථානීය ගොනුව"
+  "LocalFile": "ස්ථානීය ගොනුව",
+  "Branding": "සන්නමනය",
+  "DataBackup": "දත්ත උපස්ථය",
+  "AutoBackup": "ස්වයංක්‍රීය උපස්ථය",
+  "RestoreBackup": "ප්‍රත්‍යර්පණය"
 }

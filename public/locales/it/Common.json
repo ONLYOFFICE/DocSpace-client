@@ -664,5 +664,9 @@
   "BackupList": "Elenco di backup",
   "RestoreBackupWarningText": "{{productName}} non sarà più disponibile durante il processo di ripristino. Una volta completato il ripristino, tutte le modifiche apportate dopo la data del punto di ripristino selezionato andranno perse.",
   "UserAgreement": "Confermo e voglio procedere",
-  "LocalFile": "File locale"
+  "LocalFile": "File locale",
+  "Branding": "Marchio",
+  "DataBackup": "Backup dei dati",
+  "AutoBackup": "Backup automatico",
+  "RestoreBackup": "Ripristino dati"
 }

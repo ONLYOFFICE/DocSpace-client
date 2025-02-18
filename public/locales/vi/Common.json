@@ -662,5 +662,9 @@
   "BackupList": "Danh sách sao lưu",
   "RestoreBackupWarningText": "{{productName}} sẽ không khả dụng trong quá trình khôi phục. Sau khi việc khôi phục hoàn tất, tất cả các thay đổi được thực hiện sau ngày của điểm khôi phục đã chọn sẽ bị mất.",
   "UserAgreement": "Tôi xác nhận và muốn tiếp tục",
-  "LocalFile": "Tập tin cục bộ"
+  "LocalFile": "Tập tin cục bộ",
+  "Branding": "Thương hiệu",
+  "DataBackup": "Sao lưu dữ liệu",
+  "AutoBackup": "Tự động sao lưu",
+  "RestoreBackup": "Khôi phục dữ liệu"
 }

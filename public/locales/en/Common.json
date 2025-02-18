@@ -681,5 +681,9 @@
   "BrandNameSubtitleMobile": "Enter your company or brand name which will be displayed in notifications, exported spreadsheets, and other resources.",
   "GenerateLogoButton": "Generate",
   "GenerateLogoLabel": "Generate logo from text",
-  "YourLogo": "Your logo"
+  "YourLogo": "Your logo",
+  "Branding": "Branding",
+  "DataBackup": "Data backup",
+  "AutoBackup": "Automatic backup",
+  "RestoreBackup": "Restore"
 }

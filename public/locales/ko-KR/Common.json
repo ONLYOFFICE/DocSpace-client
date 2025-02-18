@@ -662,5 +662,9 @@
   "BackupList": "백업 목록",
   "RestoreBackupWarningText": "복원 프로세스 중에는 {{productName}}를 사용할 수 없게 됩니다. 복원이 완료되면 선택한 복원 날짜 이후에 이루어진 모든 변경 사항은 손실됩니다.",
   "UserAgreement": "확인하고 진행하겠습니다",
-  "LocalFile": "로컬 파일"
+  "LocalFile": "로컬 파일",
+  "Branding": "브랜딩",
+  "DataBackup": "데이터 백업",
+  "AutoBackup": "자동 백업",
+  "RestoreBackup": "데이터 복원"
 }

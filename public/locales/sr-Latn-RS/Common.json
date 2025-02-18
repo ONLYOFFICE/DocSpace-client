@@ -664,5 +664,9 @@
   "BackupList": "Lista rezervnih kopija",
   "RestoreBackupWarningText": "{{productName}} će postati nedostupan tokom procesa obnavljanja. Nakon što je obnavljanje završeno, sve promene napravljene nakon datuma odabrane tačke obnavljanja će biti izgubljene.",
   "UserAgreement": "Potvrđujem i želim da nastavim",
-  "LocalFile": "Lokalna datoteka"
+  "LocalFile": "Lokalna datoteka",
+  "Branding": "Brendiranje",
+  "DataBackup": "Rezervna kopija podataka",
+  "AutoBackup": "Automatka rezervna kopija",
+  "RestoreBackup": "Povrati"
 }

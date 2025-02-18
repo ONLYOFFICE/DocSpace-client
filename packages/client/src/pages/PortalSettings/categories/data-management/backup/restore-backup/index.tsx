@@ -94,7 +94,7 @@ const RestoreBackupWrapper = ({
   ]);
 
   useEffect(() => {
-    setDocumentTitle(t("RestoreBackup"));
+    setDocumentTitle(t("Common:RestoreBackup"));
   }, [t]);
 
   useEffect(() => {

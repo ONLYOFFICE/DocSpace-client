@@ -664,5 +664,9 @@
   "BackupList": "Liste des sauvegardes",
   "RestoreBackupWarningText": "{{productName}} sera indisponible pendant le processus de restauration. Une fois la restauration terminée, toutes les modifications effectuées après la date du point de restauration sélectionné seront perdues.",
   "UserAgreement": "Je confirme et je veux continuer",
-  "LocalFile": "Fichier local"
+  "LocalFile": "Fichier local",
+  "Branding": "Personnalisation",
+  "DataBackup": "Sauvegarde des données",
+  "AutoBackup": "Sauvegarde automatique",
+  "RestoreBackup": "Restauration des données"
 }

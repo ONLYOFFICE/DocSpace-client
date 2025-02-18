@@ -664,5 +664,9 @@
   "BackupList": "Backup-Liste",
   "RestoreBackupWarningText": "Während der Wiederherstellung wird {{productName}} nicht verfügbar sein. Nach Abschluss der Wiederherstellung gehen alle Änderungen verloren, die nach dem Datum des ausgewählten Wiederherstellungspunktes vorgenommen wurden.",
   "UserAgreement": "Ich bestätige und möchte weitermachen",
-  "LocalFile": "Lokale Datei"
+  "LocalFile": "Lokale Datei",
+  "Branding": "Branding",
+  "DataBackup": "Datensicherung",
+  "AutoBackup": "Automatische Sicherung",
+  "RestoreBackup": "Datenwiederherstellung"
 }

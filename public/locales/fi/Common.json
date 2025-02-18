@@ -663,5 +663,9 @@
   "BackupList": "Varmuuskopiolista",
   "RestoreBackupWarningText": "{{productName}}:n ei ole pääsyä palautusprosessin aikana. Palautuksen jälkeen kaikki muutokset, jotka on tehty valitun palautuspisteen jälkeen häviävät.",
   "UserAgreement": "Vahvistan ja haluan jatkaa",
-  "LocalFile": "Paikallinen tiedosto"
+  "LocalFile": "Paikallinen tiedosto",
+  "Branding": "Brändäys",
+  "DataBackup": "Tietojen varmuuskopiointi",
+  "AutoBackup": "Automaattinen varmuuskopiointi",
+  "RestoreBackup": "Tiedon Palautus"
 }

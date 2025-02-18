@@ -664,5 +664,9 @@
   "BackupList": "バックアップリスト",
   "RestoreBackupWarningText": "{{productName}}はリストアプロセス中に使用できなくなります。復元が完了すると、選択した復元ポイントの日付以降に行われたすべての変更が失われます。",
   "UserAgreement": "確認して、進む",
-  "LocalFile": "ローカルファイル"
+  "LocalFile": "ローカルファイル",
+  "Branding": "ブランディング",
+  "DataBackup": "データのバックアップ",
+  "AutoBackup": "自動バックアップ",
+  "RestoreBackup": "データ復元"
 }

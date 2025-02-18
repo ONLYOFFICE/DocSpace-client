@@ -72,7 +72,6 @@ const SectionBodyContent = (props) => {
     startDrag,
     setStartDrag,
     setTooltipPosition,
-    setWelcomeFormFillingTipsVisible,
     isRecycleBinFolder,
     moveDragItems,
     viewAs,
@@ -99,6 +98,8 @@ const SectionBodyContent = (props) => {
     roomType,
     userId,
     createPDFFormFileVisible,
+    guestReleaseTipDialogVisible,
+    onEnableFormFillingGuid,
   } = props;
 
   useEffect(() => {
@@ -110,7 +111,7 @@ const SectionBodyContent = (props) => {
       `closedFormFillingTips-${userId}`,
     );
 
-    if (createPDFFormFileVisible) {
+    if (createPDFFormFileVisible || guestReleaseTipDialogVisible) {
       return window.localStorage.setItem(
         `closedFormFillingTips-${userId}`,
         "true",
@@ -121,14 +122,15 @@ const SectionBodyContent = (props) => {
       if (
         roomType === RoomsType.FormRoom &&
         !closedFormFillingTips &&
-        !createPDFFormFileVisible
+        !createPDFFormFileVisible &&
+        !guestReleaseTipDialogVisible
       ) {
-        setWelcomeFormFillingTipsVisible(true);
+        onEnableFormFillingGuid(t, roomType);
       }
-    }, 1000);
+    }, 2000);
 
     return () => clearTimeout(timeoutId);
-  }, [roomType, createPDFFormFileVisible]);
+  }, [roomType, createPDFFormFileVisible, guestReleaseTipDialogVisible]);
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
@@ -460,6 +462,7 @@ export default inject(
     indexingStore,
     dialogsStore,
     userStore,
+    contextOptionsStore,
   }) => {
     const {
       isEmptyFilesList,
@@ -486,9 +489,11 @@ export default inject(
     const {
       welcomeFormFillingTipsVisible,
       formFillingTipsVisible,
-      setWelcomeFormFillingTipsVisible,
       createPDFFormFileProps,
+      guestReleaseTipDialogVisible,
     } = dialogsStore;
+
+    const { onEnableFormFillingGuid } = contextOptionsStore;
 
     return {
       dragging,
@@ -523,13 +528,14 @@ export default inject(
       getSelectedFolder: selectedFolderStore.getSelectedFolder,
       welcomeFormFillingTipsVisible,
       formFillingTipsVisible,
-      setWelcomeFormFillingTipsVisible,
       userId: userStore?.user?.id,
       createPDFFormFileVisible: createPDFFormFileProps.visible,
+      guestReleaseTipDialogVisible,
+      onEnableFormFillingGuid,
     };
   },
 )(
-  withTranslation(["Files", "Common", "Translations"])(
+  withTranslation(["Files", "Common", "Translations", "FormFillingTipsDialog"])(
     withHotkeys(withLoader(observer(SectionBodyContent))()),
   ),
 );

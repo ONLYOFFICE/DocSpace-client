@@ -52,7 +52,7 @@ interface Position extends ViewDimensions {
   right: number;
 }
 
-const ADDITIONAL_ROW_LEFT_RTL_OFFSET = 3;
+const ADDITIONAL_ROW_LEFT_RTL_OFFSET = 7;
 
 const getOffsetValues = (offset: GuidancePosition["offset"]) => {
   const baseOffset = (offset?.value ?? 0) / 2;

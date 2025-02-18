@@ -180,7 +180,6 @@ async function Page({ searchParams }: RootPageProps) {
 
   return (
     <>
-      <Root {...data} shareKey={share} />
       {url && (
         <Script
           id="onlyoffice-api-script"
@@ -188,6 +187,7 @@ async function Page({ searchParams }: RootPageProps) {
           src={docApiUrl}
         />
       )}
+      <Root {...data} shareKey={share} />
     </>
   );
 }

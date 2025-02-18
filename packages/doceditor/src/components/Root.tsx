@@ -96,7 +96,6 @@ const Root = ({
 
   const documentserverUrl = config?.editorUrl ?? error?.editorUrl;
   const fileInfo = config?.file;
-
   const instanceId = config?.document?.referenceData.instanceId;
 
   const isSkipError =
@@ -125,12 +124,15 @@ const Root = ({
     fileInfo,
     email: user?.email,
   });
+
   const { filesSettings } = useFilesSettings({});
+
   useSocketHelper({
     socketUrl: user ? (settings?.socketUrl ?? "") : "",
     user,
     shareKey,
   });
+
   const {
     onSDKRequestSaveAs,
     onCloseSelectFolderDialog,
@@ -141,6 +143,7 @@ const Root = ({
     titleSelectorFolderDialog,
     extensionSelectorFolderDialog,
   } = useSelectFolderDialog({});
+
   const {
     onSDKRequestInsertImage,
     onSDKRequestReferenceSource,

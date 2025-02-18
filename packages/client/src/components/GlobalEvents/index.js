@@ -55,6 +55,7 @@ const GlobalEvents = ({
 
   setCreatePDFFormFile,
   createPDFFormFileProps,
+  userId,
 }) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
@@ -271,8 +272,12 @@ const GlobalEvents = ({
         );
       }
 
+      const closedFormFillingTips = localStorage.getItem(
+        `closedFormFillingTips-${userId}`,
+      );
+
       setCreatePDFFormFile({
-        visible: true,
+        visible: closedFormFillingTips,
         file,
         localKey,
         onClose: () => {
@@ -460,30 +465,33 @@ const GlobalEvents = ({
   ];
 };
 
-export default inject(({ settingsStore, pluginStore, dialogsStore }) => {
-  const { enablePlugins } = settingsStore;
+export default inject(
+  ({ settingsStore, pluginStore, dialogsStore, userStore }) => {
+    const { enablePlugins } = settingsStore;
 
-  const {
-    editRoomDialogProps,
-    setEditRoomDialogProps,
-    createRoomDialogProps,
-    setCreateRoomDialogProps,
-    setCover,
-    setCreatePDFFormFile,
-    createPDFFormFileProps,
-  } = dialogsStore;
+    const {
+      editRoomDialogProps,
+      setEditRoomDialogProps,
+      createRoomDialogProps,
+      setCreateRoomDialogProps,
+      setCover,
+      setCreatePDFFormFile,
+      createPDFFormFileProps,
+    } = dialogsStore;
 
-  const { eventListenerItemsList } = pluginStore;
+    const { eventListenerItemsList } = pluginStore;
 
-  return {
-    enablePlugins,
-    eventListenerItemsList,
-    editRoomDialogProps,
-    setEditRoomDialogProps,
-    createRoomDialogProps,
-    setCreateRoomDialogProps,
-    setCover,
-    setCreatePDFFormFile,
-    createPDFFormFileProps,
-  };
-})(observer(GlobalEvents));
+    return {
+      enablePlugins,
+      eventListenerItemsList,
+      editRoomDialogProps,
+      setEditRoomDialogProps,
+      createRoomDialogProps,
+      setCreateRoomDialogProps,
+      setCover,
+      setCreatePDFFormFile,
+      createPDFFormFileProps,
+      userId: userStore?.user?.id,
+    };
+  },
+)(observer(GlobalEvents));

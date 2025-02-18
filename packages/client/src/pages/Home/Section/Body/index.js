@@ -97,8 +97,6 @@ const SectionBodyContent = (props) => {
     formFillingTipsVisible,
     roomType,
     userId,
-    createPDFFormFileVisible,
-    guestReleaseTipDialogVisible,
     onEnableFormFillingGuid,
   } = props;
 
@@ -111,26 +109,10 @@ const SectionBodyContent = (props) => {
       `closedFormFillingTips-${userId}`,
     );
 
-    if (createPDFFormFileVisible || guestReleaseTipDialogVisible) {
-      return window.localStorage.setItem(
-        `closedFormFillingTips-${userId}`,
-        "true",
-      );
+    if (roomType === RoomsType.FormRoom && !closedFormFillingTips) {
+      onEnableFormFillingGuid(t, roomType);
     }
-
-    const timeoutId = setTimeout(() => {
-      if (
-        roomType === RoomsType.FormRoom &&
-        !closedFormFillingTips &&
-        !createPDFFormFileVisible &&
-        !guestReleaseTipDialogVisible
-      ) {
-        onEnableFormFillingGuid(t, roomType);
-      }
-    }, 2000);
-
-    return () => clearTimeout(timeoutId);
-  }, [roomType, createPDFFormFileVisible, guestReleaseTipDialogVisible]);
+  }, [roomType]);
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
@@ -486,12 +468,8 @@ export default inject(
       isErrorRoomNotAvailable,
     } = filesStore;
 
-    const {
-      welcomeFormFillingTipsVisible,
-      formFillingTipsVisible,
-      createPDFFormFileProps,
-      guestReleaseTipDialogVisible,
-    } = dialogsStore;
+    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
+      dialogsStore;
 
     const { onEnableFormFillingGuid } = contextOptionsStore;
 
@@ -529,8 +507,6 @@ export default inject(
       welcomeFormFillingTipsVisible,
       formFillingTipsVisible,
       userId: userStore?.user?.id,
-      createPDFFormFileVisible: createPDFFormFileProps.visible,
-      guestReleaseTipDialogVisible,
       onEnableFormFillingGuid,
     };
   },

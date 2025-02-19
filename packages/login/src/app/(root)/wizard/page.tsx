@@ -85,7 +85,10 @@ async function Page() {
             forumLinkUrl={objectSettings?.externalResources.forum.domain}
             wizardToken={objectSettings?.wizardToken}
             passwordHash={objectSettings?.passwordHash}
-            documentationEmail={objectSettings?.documentationEmail}
+            documentationEmail={
+              objectSettings?.externalResources.common.entries
+                .documentationemail
+            }
             isAmi={objectSettings?.isAmi}
           />
         </FormWrapper>

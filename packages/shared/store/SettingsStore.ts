@@ -295,8 +295,6 @@ class SettingsStore {
 
   domain = null;
 
-  documentationEmail = null;
-
   cspDomains: string[] = [];
 
   publicRoomKey = "";
@@ -1497,6 +1495,13 @@ class SettingsStore {
     return this.feedbackAndSupportUrl &&
       this.externalResources?.support.entries?.request
       ? `${this.feedbackAndSupportUrl}${this.externalResources?.support.entries?.request}`
+      : null;
+  }
+
+  get documentationEmail() {
+    return this.externalResources &&
+      this.externalResources?.common.entries?.documentationemail
+      ? `${this.externalResources}${this.externalResources?.common.entries?.documentationemail}`
       : null;
   }
 }

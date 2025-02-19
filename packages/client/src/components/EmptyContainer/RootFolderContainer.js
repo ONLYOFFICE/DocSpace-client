@@ -69,7 +69,7 @@ const RootFolderContainer = (props) => {
     isPrivacyFolder,
     isDesktop,
     isEncryptionSupport,
-    privacyInstructions,
+    privateRoomsUrl,
     title,
     onCreate,
     onCreateRoom,
@@ -162,7 +162,7 @@ const RootFolderContainer = (props) => {
               isBold
               isHovered
               color={theme.filesEmptyContainer.privateRoom.linkColor}
-              href={privacyInstructions}
+              href={privateRoomsUrl}
             >
               Instructions
             </Link>
@@ -360,8 +360,13 @@ export default inject(
     userStore,
     publicRoomStore,
   }) => {
-    const { isDesktopClient, isEncryptionSupport, theme, logoText } =
-      settingsStore;
+    const {
+      isDesktopClient,
+      isEncryptionSupport,
+      theme,
+      logoText,
+      privateRoomsUrl,
+    } = settingsStore;
 
     const { setIsSectionBodyLoading } = clientLoadingStore;
 
@@ -369,7 +374,7 @@ export default inject(
       setIsSectionBodyLoading(param);
     };
 
-    const { filter, privacyInstructions, isEmptyPage } = filesStore;
+    const { filter, isEmptyPage } = filesStore;
     const { title, rootFolderType, security } = selectedFolderStore;
     const { isPrivacyFolder, myFolderId, myFolder, roomsFolder } =
       treeFoldersStore;
@@ -384,7 +389,7 @@ export default inject(
       userId: userStore?.user?.id,
       isCollaborator: userStore?.user?.isCollaborator,
       isEncryptionSupport,
-      privacyInstructions,
+      privateRoomsUrl,
       title,
       myFolderId,
       filter,

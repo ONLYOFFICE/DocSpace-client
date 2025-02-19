@@ -147,8 +147,6 @@ class FilesStore {
 
   dragging = false;
 
-  privacyInstructions = "https://www.onlyoffice.com/private-rooms.aspx";
-
   isInit = false;
 
   isUpdatingRowItem = false;

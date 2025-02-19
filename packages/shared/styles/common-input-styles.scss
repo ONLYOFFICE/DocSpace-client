@@ -51,7 +51,6 @@
 
     &::placeholder {
       color: var(--text-input-placeholder-disabled-color);
-      -webkit-text-fill-color: var(--text-input-placeholder-disabled-color);
     }
     &::-webkit-input-placeholder {
       color: var(--text-input-placeholder-disabled-color);

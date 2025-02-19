@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import React, { useEffect, useMemo } from "react";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
@@ -70,14 +72,16 @@ const ThirdPartyStorageModule = ({
   storageRegions,
   defaultRegion,
   deleteValueFormSetting,
+  selectedStorageId,
 }: ThirdPartyStorageModuleProps) => {
-  const { comboBoxOptions, storagesInfo, selectedStorageId } = useMemo(
-    () => getOptions(thirdPartyStorage),
-    [thirdPartyStorage],
-  );
+  const {
+    comboBoxOptions,
+    storagesInfo,
+    selectedStorageId: defaultSelectedStorageId,
+  } = useMemo(() => getOptions(thirdPartyStorage), [thirdPartyStorage]);
 
   useEffect(() => {
-    if (!defaultStorageId) setStorageId(selectedStorageId);
+    if (!defaultStorageId) setStorageId(defaultSelectedStorageId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -85,11 +89,14 @@ const ThirdPartyStorageModule = ({
     const key = option.key;
     const storage = storagesInfo[key];
 
+    console.log({ option, storage });
+
     setStorageId(storage.id);
   };
 
   const commonProps = {
-    selectedStorage: storagesInfo[selectedStorageId],
+    selectedStorage:
+      storagesInfo[selectedStorageId ?? defaultSelectedStorageId],
     selectedId: selectedStorageId,
     isLoadingData,
     setCompletedFormFields,
@@ -119,7 +126,10 @@ const ThirdPartyStorageModule = ({
     maxNumberCopiesArray,
   };
 
-  const storageTitle = storagesInfo[selectedStorageId]?.title;
+  const storageTitle =
+    storagesInfo[selectedStorageId ?? defaultSelectedStorageId]?.title;
+
+  console.log({ storageTitle, selectedStorageId, comboBoxOptions });
 
   return (
     <StyledAutoBackup>

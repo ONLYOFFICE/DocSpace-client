@@ -599,6 +599,7 @@ const AutomaticBackup = ({
                 storageRegions={storageRegions}
                 defaultRegion={defaultRegion}
                 deleteValueFormSetting={deleteValueFormSetting}
+                selectedStorageId={selectedStorageId}
                 {...commonProps}
               />
             ) : null}

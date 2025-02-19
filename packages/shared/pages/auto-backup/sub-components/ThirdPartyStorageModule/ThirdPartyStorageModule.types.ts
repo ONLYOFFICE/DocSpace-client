@@ -70,4 +70,5 @@ export interface ThirdPartyStorageModuleProps {
   storageRegions: StorageRegionsType[];
   defaultRegion: string;
   deleteValueFormSetting: (key: string) => void;
+  selectedStorageId: string | null;
 }

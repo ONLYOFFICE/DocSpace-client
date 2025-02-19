@@ -200,21 +200,18 @@ class UsersStore {
       const { setUser } = this.userStore;
 
       const { data } = value;
-
+      const { isAdmin, isRoomAdmin, isCollaborator, isVisitor } = data;
       const { pathname } = window.location;
 
       if (
-        (data.isCollaborator && pathname.includes("accounts/people")) ||
-        (data.isVisitor && pathname.includes("rooms/personal"))
+        (isCollaborator && pathname.includes("accounts/people")) ||
+        (isVisitor && pathname.includes("rooms/personal"))
       ) {
         window.DocSpace.navigate(
           combineUrl(window.ClientConfig?.proxy?.url, "/"),
         );
       }
-      if (
-        (data.isAdmin || data.isRoomAdmin) &&
-        pathname.includes("accounts/people")
-      ) {
+      if ((isAdmin || isRoomAdmin) && pathname.includes("accounts/people")) {
         this.getUsersList();
       }
       setUser(data);

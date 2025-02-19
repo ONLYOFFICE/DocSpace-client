@@ -1216,6 +1216,8 @@ class TableHeaderComponent extends React.Component<
       } else {
         localStorage.setItem(columnInfoPanelStorageName || "", str);
       }
+
+      this.updateTableRows(str);
     }
 
     // Only call onResize if not already resized and container width has changed

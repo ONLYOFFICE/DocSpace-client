@@ -34,18 +34,15 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import StyledComponent from "../StyledComponent";
 
 const OfficialDocumentation = ({
-  helpCenterDomain,
-  helpCenterEntries,
+  enterpriseInstallScriptUrl,
+  enterpriseInstallWindowsUrl,
   dataBackupUrl,
 }) => {
   const { t } = useTranslation("PaymentsEnterprise");
 
-  const dockerLink =
-    helpCenterDomain + helpCenterEntries.docspaceenterpriseinstallscript;
-  const linuxDocker =
-    helpCenterDomain + helpCenterEntries.docspaceenterpriseinstallscript;
-  const windowsDocker =
-    helpCenterDomain + helpCenterEntries.docspaceenterpriseinstallwindows;
+  const dockerLink = enterpriseInstallScriptUrl;
+  const linuxDocker = enterpriseInstallScriptUrl;
+  const windowsDocker = enterpriseInstallWindowsUrl;
 
   return (
     <StyledComponent>
@@ -119,11 +116,15 @@ const OfficialDocumentation = ({
 };
 
 export default inject(({ settingsStore }) => {
-  const { helpCenterDomain, helpCenterEntries, dataBackupUrl } = settingsStore;
+  const {
+    enterpriseInstallScriptUrl,
+    enterpriseInstallWindowsUrl,
+    dataBackupUrl,
+  } = settingsStore;
 
   return {
-    helpCenterDomain,
-    helpCenterEntries,
+    enterpriseInstallScriptUrl,
+    enterpriseInstallWindowsUrl,
     dataBackupUrl,
   };
 })(observer(OfficialDocumentation));

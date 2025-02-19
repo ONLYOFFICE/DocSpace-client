@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -43,7 +43,6 @@ const SectionContainer = React.forwardRef<
       children,
       currentDeviceType,
       isInfoPanelVisible,
-      showTwoProgress,
       isSectionHeaderAvailable,
       ...props
     },
@@ -56,7 +55,6 @@ const SectionContainer = React.forwardRef<
         className={classNames(styles.sectionContainer, {
           [styles.withBodyScroll]: withBodyScroll,
           [styles.infoPanelVisible]: isInfoPanelVisible,
-          [styles.showTwoProgress]: showTwoProgress,
           [styles.withoutSectionHeader]: !isSectionHeaderAvailable,
         })}
         {...props}

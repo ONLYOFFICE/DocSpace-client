@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -71,22 +71,6 @@ const StyledBody = styled.div`
     }
   }
 
-  .payment-operations_input {
-    width: 101px;
-    height: 60px;
-    font-size: 44px;
-    text-align: center;
-    margin-inline: 20px;
-    padding: 0;
-    font-weight: 700;
-    ${(props) =>
-      props.isDisabled &&
-      css`
-        color: ${props.theme.client.settings.payment.priceContainer
-          .disableColor};
-      `};
-  }
-
   .payment-users {
     display: flex;
     align-items: center;
@@ -139,6 +123,21 @@ const StyledBody = styled.div`
         inset-inline-start: 27%;
       }
     }
+  }
+  .payment-users .payment-operations_input {
+    width: 101px;
+    height: 60px;
+    font-size: 44px;
+    text-align: center;
+    margin-inline: 20px;
+    padding: 0;
+    font-weight: 700;
+    ${(props) =>
+      props.isDisabled &&
+      css`
+        color: ${props.theme.client.settings.payment.priceContainer
+          .disableColor};
+      `};
   }
   .payment-users_count {
     margin-inline: 20px;

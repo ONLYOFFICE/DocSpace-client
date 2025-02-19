@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,67 +26,54 @@
 
 import { render, screen } from "@testing-library/react";
 import { FillingStatusLine } from "./index";
+import { FillingStatusLineProps } from "./FillingStatusLine.types";
+import { mockData } from "./mockData";
 import "@testing-library/jest-dom";
 
 describe("FillingStatusLine", () => {
-  const mockData = [
-    {
-      id: 0,
-      displayName: "Lydia Calzoni",
-      role: "Employee",
-      startFillingStatus: "Start filling",
-      startFillingDate: "15.01.2023 17:56",
-      filledAndSignedStatus: "Filled and signed",
-      filledAndSignedDate: "26.01.2023 13:56",
-      returnedByUser: "Returned by Teacher",
-      returnedByUserDate: "25.01.2023 13:56",
-      comment:
-        "The registration block is filled in incorrectly. It is necessary to specify the user ID, and the email is specified. The user ID can be viewed on the profile page.",
-      avatar: null,
-    },
-    {
-      id: 1,
-      displayName: "Dulce Vaccaro",
-      role: "Accountant",
-      startFillingStatus: "Start filling",
-      startFillingDate: "21.01.2023 17:56",
-      filledAndSignedStatus: "Filled and signed",
-      filledAndSignedDate: "23.01.2023 14:56",
-      returnedByUser: "Returned by Teacher",
-      returnedByUserDate: "22.01.2023 13:56",
-      comment: null,
-      avatar: null,
-    },
-  ];
+  const defaultProps: FillingStatusLineProps = {
+    id: "test-id",
+    className: "test-class",
+    statusDoneText: "Done",
+    statusInterruptedText: "Interrupted",
+    statusDone: true,
+    statusInterrupted: false,
+  };
 
   it("renders without error", () => {
-    render(
-      <FillingStatusLine
-        statusDone
-        statusInterrupted={false}
-        id=""
-        className=""
-        statusDoneText=""
-        statusInterruptedText=""
-      />,
-    );
+    render(<FillingStatusLine {...defaultProps} />);
     expect(screen.getByTestId("filling-status-line")).toBeInTheDocument();
   });
 
   it("should render the FillingStatusAccordion components with correct props", () => {
-    render(
-      <FillingStatusLine
-        statusDone
-        statusInterrupted={false}
-        id=""
-        className=""
-        statusDoneText=""
-        statusInterruptedText=""
-      />,
-    );
+    render(<FillingStatusLine {...defaultProps} />);
     mockData.forEach((data) => {
-      expect(screen.getByText(data.displayName)).toBeInTheDocument();
+      expect(screen.getByText(data.role)).toBeInTheDocument();
       expect(screen.getByText(data.filledAndSignedDate)).toBeInTheDocument();
     });
+  });
+
+  it("should render status done text and icon when statusDone is true", () => {
+    render(<FillingStatusLine {...defaultProps} />);
+
+    expect(screen.getByText("Done")).toBeInTheDocument();
+    const doneIcon = document.querySelector(".statusDoneIcon");
+    expect(doneIcon).toBeInTheDocument();
+    expect(doneIcon).toHaveClass("isDone");
+  });
+
+  it("should render status interrupted text and icon when statusInterrupted is true", () => {
+    render(
+      <FillingStatusLine
+        {...defaultProps}
+        statusDone={false}
+        statusInterrupted
+      />,
+    );
+
+    expect(screen.getByText("Interrupted")).toBeInTheDocument();
+    expect(
+      document.querySelector(".statusInterruptedIcon"),
+    ).toBeInTheDocument();
   });
 });

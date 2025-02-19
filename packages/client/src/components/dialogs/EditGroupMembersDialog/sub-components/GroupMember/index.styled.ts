@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,6 +53,13 @@ export const GroupMember = styled.div.attrs(injectDefaultTheme)<{
 
   .info {
     flex-direction: column;
+
+    .info-box {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
   }
 
   .name {

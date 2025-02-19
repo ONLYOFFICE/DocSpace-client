@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,6 +56,7 @@ import {
   SECTION_SUBMENU_NAME,
 } from "./Section.constants";
 import { parseChildren } from "./Section.utils";
+import OperationsProgress from "./sub-components/OperationsProgress";
 
 export type { SectionProps };
 
@@ -86,14 +87,6 @@ SectionSubmenu.displayName = SECTION_SUBMENU_NAME;
 const Section = (props: SectionProps) => {
   const {
     onDrop,
-    showPrimaryProgressBar,
-    primaryProgressBarIcon,
-    primaryProgressBarValue,
-    showPrimaryButtonAlert,
-    showSecondaryProgressBar,
-    secondaryProgressBarValue,
-    secondaryProgressBarIcon,
-    showSecondaryButtonAlert,
     uploadFiles,
     viewAs,
     withBodyScroll = true,
@@ -101,7 +94,6 @@ const Section = (props: SectionProps) => {
     onOpenUploadPanel,
     isInfoPanelAvailable = true,
     settingsStudio = false,
-    clearUploadedFilesHistory,
     isInfoPanelScrollLocked,
     isFormGallery,
     currentDeviceType,
@@ -115,6 +107,18 @@ const Section = (props: SectionProps) => {
     isIndexEditingMode,
 
     pathname,
+    secondaryOperationsCompleted,
+    secondaryActiveOperations = [],
+    clearSecondaryProgressData,
+    primaryOperationsArray = [],
+    clearPrimaryProgressData,
+    primaryOperationsCompleted,
+    cancelUpload,
+    secondaryOperationsAlert,
+    mainButtonVisible,
+
+    primaryOperationsAlert,
+    needErrorChecking,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -189,8 +193,6 @@ const Section = (props: SectionProps) => {
     };
   }, [onResize]);
 
-  const showTwoProgress = showPrimaryProgressBar && showSecondaryProgressBar;
-
   const providerValue = useMemo(
     () => ({
       sectionWidth: sectionSize.width,
@@ -198,6 +200,28 @@ const Section = (props: SectionProps) => {
     }),
     [sectionSize.width, sectionSize.height],
   );
+
+  const isShowOperationButton =
+    secondaryActiveOperations?.length || primaryOperationsArray?.length;
+
+  const isCompletedOperations = () => {
+    if (
+      secondaryActiveOperations?.length > 0 &&
+      primaryOperationsArray?.length > 0 &&
+      secondaryActiveOperations.length + primaryOperationsArray.length > 1
+    )
+      return secondaryOperationsCompleted && primaryOperationsCompleted;
+
+    if (secondaryActiveOperations?.length > 0)
+      return secondaryOperationsCompleted;
+
+    return primaryOperationsCompleted;
+  };
+
+  const showCancelButton =
+    primaryOperationsArray.length > 0 &&
+    !primaryOperationsCompleted &&
+    !primaryOperationsArray[0].isSingleConversion;
 
   return (
     isSectionAvailable && (
@@ -207,7 +231,6 @@ const Section = (props: SectionProps) => {
           ref={containerRef}
           isSectionHeaderAvailable={isSectionHeaderAvailable}
           isInfoPanelVisible={isInfoPanelVisible}
-          showTwoProgress={showTwoProgress}
           withBodyScroll={withBodyScroll}
           currentDeviceType={currentDeviceType}
         >
@@ -278,46 +301,22 @@ const Section = (props: SectionProps) => {
             </SubSectionBody>
           ) : null}
 
-          {currentDeviceType === DeviceType.desktop ? (
-            showTwoProgress ? (
-              <div className="progress-bar_container">
-                <FloatingButton
-                  className="layout-progress-bar"
-                  icon={primaryProgressBarIcon}
-                  percent={primaryProgressBarValue}
-                  alert={showPrimaryButtonAlert}
-                  onClick={onOpenUploadPanel}
-                  clearUploadedFilesHistory={clearUploadedFilesHistory}
-                />
-                <FloatingButton
-                  className="layout-progress-second-bar"
-                  icon={secondaryProgressBarIcon}
-                  percent={secondaryProgressBarValue}
-                  alert={showSecondaryButtonAlert}
-                  showTwoProgress={showTwoProgress}
-                />
-              </div>
-            ) : showPrimaryProgressBar && !showSecondaryProgressBar ? (
-              <div className="progress-bar_container">
-                <FloatingButton
-                  className="layout-progress-bar"
-                  icon={primaryProgressBarIcon}
-                  percent={primaryProgressBarValue}
-                  alert={showPrimaryButtonAlert}
-                  onClick={onOpenUploadPanel}
-                  clearUploadedFilesHistory={clearUploadedFilesHistory}
-                />
-              </div>
-            ) : !showPrimaryProgressBar && showSecondaryProgressBar ? (
-              <div className="progress-bar_container">
-                <FloatingButton
-                  className="layout-progress-bar"
-                  icon={secondaryProgressBarIcon}
-                  percent={secondaryProgressBarValue}
-                  alert={showSecondaryButtonAlert}
-                />
-              </div>
-            ) : null
+          {isShowOperationButton ? (
+            <OperationsProgress
+              clearSecondaryProgressData={clearSecondaryProgressData}
+              secondaryActiveOperations={secondaryActiveOperations}
+              operationsCompleted={isCompletedOperations()}
+              clearPrimaryProgressData={clearPrimaryProgressData}
+              operationsAlert={
+                primaryOperationsAlert || secondaryOperationsAlert
+              }
+              needErrorChecking={needErrorChecking}
+              primaryActiveOperations={primaryOperationsArray}
+              cancelUpload={cancelUpload}
+              onOpenPanel={onOpenUploadPanel}
+              mainButtonVisible={mainButtonVisible}
+              showCancelButton={showCancelButton}
+            />
           ) : null}
         </SectionContainer>
 

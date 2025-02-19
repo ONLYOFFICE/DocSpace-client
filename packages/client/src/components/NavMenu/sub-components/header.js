@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -178,9 +178,7 @@ const HeaderComponent = ({
         {currentProductId !== "home" && !isFormGallery ? (
           <HeaderCatalogBurger onClick={toggleArticleOpen} />
         ) : null}
-        {customHeader ? (
-          { customHeader }
-        ) : (
+        {customHeader || (
           <LinkWithoutRedirect className="header-logo-wrapper" to={defaultPage}>
             <img alt="logo" src={logo} className="header-logo-icon" />
           </LinkWithoutRedirect>

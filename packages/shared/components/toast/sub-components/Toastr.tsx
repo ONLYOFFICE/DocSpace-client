@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -152,12 +152,11 @@ const getToastOptions = (
   type,
   closeOnClick: !withCross,
   closeButton: withCross && <CloseButton />,
-  autoClose:
-    timeout === 0
-      ? 0
-      : timeout < MIN_TIMEOUT_THRESHOLD
-        ? DEFAULT_TIMEOUT
-        : timeout || 5000,
+  autoClose: (timeout === 0
+    ? false
+    : timeout < MIN_TIMEOUT_THRESHOLD
+      ? DEFAULT_TIMEOUT
+      : timeout || 5000) as number | false,
   position: centerPosition ? ("top-center" as ToastPosition) : undefined,
   containerId: "toast-container",
 });
@@ -225,7 +224,7 @@ const createToastMethod =
       type,
       message,
       finalTitle,
-      timeout || DEFAULT_TIMEOUT,
+      timeout ?? DEFAULT_TIMEOUT,
       withCross,
       centerPosition,
     );

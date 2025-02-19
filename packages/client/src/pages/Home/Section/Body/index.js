@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -88,6 +88,7 @@ const SectionBodyContent = (props) => {
     isIndexEditingMode,
     changeIndex,
     isErrorRoomNotAvailable,
+    getSelectedFolder,
   } = props;
 
   useEffect(() => {
@@ -208,15 +209,18 @@ const SectionBodyContent = (props) => {
       indexSeparatorNode.setAttribute("style", separatorStyles);
       indexSeparatorNode.style.top = styles.top;
     }
-
     if (currentDroppable !== droppable) {
       if (currentDroppable) {
         if (viewAs === "table") {
           const value = currentDroppable.getAttribute("value");
           const classElements = document.getElementsByClassName(value);
 
-          classElements.forEach((cl) => {
-            cl.classList.remove("droppable-hover");
+          // add check for column with width = 0, because without it dark theme d`n`d have bug color
+          // 30 - it`s column padding
+          Array.from(classElements).forEach((cl) => {
+            if (cl.clientWidth - 30) {
+              cl.classList.add("droppable-hover");
+            }
           });
           if (isIndexEditingMode) {
             droppableSeparator.remove();
@@ -234,7 +238,7 @@ const SectionBodyContent = (props) => {
 
           // add check for column with width = 0, because without it dark theme d`n`d have bug color
           // 30 - it`s column padding
-          classElements.forEach((cl) => {
+          Array.from(classElements).forEach((cl) => {
             if (cl.clientWidth - 30) {
               cl.classList.add("droppable-hover");
             }
@@ -266,12 +270,9 @@ const SectionBodyContent = (props) => {
     }
   };
 
-  const onMoveTo = (destFolderId, title) => {
+  const onMoveTo = (destFolderId, title, destFolderInfo) => {
     const id = Number.isNaN(+destFolderId) ? destFolderId : +destFolderId;
-    moveDragItems(id, title, {
-      copy: t("Common:CopyOperation"),
-      move: t("Common:MoveToOperation"),
-    });
+    moveDragItems(id, title, destFolderInfo);
   };
 
   const onMouseUp = (e) => {
@@ -308,7 +309,13 @@ const SectionBodyContent = (props) => {
       ? value.split("_").slice(1, -3).join("_")
       : treeValue;
 
-    if (!isIndexEditingMode) return onMoveTo(selectedFolderId, title);
+    const selectedFolder = getSelectedFolder();
+    const destFolderInfo = selectedFolder.folders.find(
+      (folder) => folder.id == selectedFolderId,
+    );
+
+    if (!isIndexEditingMode)
+      return onMoveTo(selectedFolderId, title, destFolderInfo);
     if (filesList.length === 1) return;
 
     const replaceableItemId = Number.isNaN(+selectedFolderId)
@@ -463,6 +470,7 @@ export default inject(
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
+      getSelectedFolder: selectedFolderStore.getSelectedFolder,
     };
   },
 )(

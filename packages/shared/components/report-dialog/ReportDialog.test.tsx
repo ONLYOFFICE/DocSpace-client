@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,7 +57,7 @@ jest.mock("../toast", () => ({
 // Mock SVG imports
 jest.mock("PUBLIC_DIR/images/icons/32/file.svg?url", () => "file-icon.svg");
 jest.mock(
-  "PUBLIC_DIR/images/download.react.svg?url",
+  "PUBLIC_DIR/images/icons/16/download.react.svg?url",
   () => "download-icon.svg",
 );
 

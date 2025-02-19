@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -184,6 +184,8 @@ const SectionHeaderContent = (props) => {
         return isCustomizationAvailable;
       case "RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
+      case "BrandName":
+        return isCustomizationAvailable || standalone;
       case "WhiteLabel":
         return isCustomizationAvailable || standalone;
       case "CompanyInfoSettings":

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import FileReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 
 import {
   getCrashReport,

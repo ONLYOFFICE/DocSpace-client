@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,6 +32,7 @@ import App from "./App";
 import Spaces from "./categories/spaces";
 import Settings from "./categories/settings";
 import { WhiteLabel } from "client/WhiteLabelPage";
+import { BrandName } from "client/BrandNamePage";
 import { CompanyInfoSettings } from "client/CompanyInfoPage";
 import { AdditionalResources } from "client/AdditionalResPage";
 import Payments from "./categories/payments";
@@ -66,6 +67,10 @@ const routes = [
       {
         path: "/management/settings/branding",
         element: <Settings />,
+      },
+      {
+        path: "/management/settings/branding/brand-name",
+        element: <BrandName />,
       },
       {
         path: "/management/settings/branding/white-label",

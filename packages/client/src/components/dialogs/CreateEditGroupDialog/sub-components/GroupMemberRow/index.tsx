@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,7 +38,6 @@ import {
   getUserTypeTranslation,
 } from "@docspace/shared/utils/common";
 import { TUser } from "@docspace/shared/api/people/types";
-import { Box } from "@docspace/shared/components/box";
 import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
 
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
@@ -85,17 +84,12 @@ const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
         source={groupMember.avatarSmall ?? groupMember.avatar}
       />
       <div className="info">
-        <Box
-          displayProp="flex"
-          alignItems="center"
-          gapProp="8px"
-          widthProp="100%"
-        >
+        <div className="info-box">
           <div className="name">{groupMember.displayName}</div>
           {groupMember.status === EmployeeStatus.Pending ? (
             <StyledSendClockIcon />
           ) : null}
-        </Box>
+        </div>
         <div className="email">{`${getUserTypeTranslation(type, t)} | ${groupMember.email}`}</div>
       </div>
       <ReactSVG

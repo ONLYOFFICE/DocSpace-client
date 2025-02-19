@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -83,7 +83,7 @@ const SelectionArea = (props) => {
     {
       type: "folder",
       rowCount: Math.ceil(foldersLength / countTilesInRow),
-      rowGap: 12,
+      rowGap: isRooms ? 14 : 12,
       countOfMissingTiles: getCountOfMissingFilesTiles(foldersLength),
     },
   ];

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,6 @@ import styled from "styled-components";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkType } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { RowContainer, Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
@@ -93,6 +92,12 @@ const StyledRowContainer = styled(RowContainer)`
     @media ${tablet} {
       margin: 0;
     }
+  }
+
+  .buttons-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
   }
 `;
 
@@ -184,7 +189,7 @@ const RowView = (props: RowViewProps) => {
           headerText={t("Common:NotFoundUsers")}
           descriptionText={t("Common:NotFoundUsersDescription")}
           buttons={
-            <Box displayProp="flex" alignItems="center">
+            <div className="buttons-box">
               <IconButton
                 className="clear-icon"
                 isFill
@@ -200,7 +205,7 @@ const RowView = (props: RowViewProps) => {
               >
                 {t("Common:ClearFilter")}
               </Link>
-            </Box>
+            </div>
           }
         />
       )}

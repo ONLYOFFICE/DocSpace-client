@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,6 @@
 
 import { inject, observer } from "mobx-react";
 
-import { Box } from "@docspace/shared/components/box";
 import { ProgressBar } from "@docspace/shared/components/progress-bar";
 
 const ProgressContainer = ({ inProgress, percents, error, source, status }) => {
@@ -39,9 +38,9 @@ const ProgressContainer = ({ inProgress, percents, error, source, status }) => {
 
   return (
     inProgress && (
-      <Box className="ldap_progress-container">
+      <div className="ldap_progress-container">
         <ProgressBar percent={percents} status={progressStatus} error={error} />
-      </Box>
+      </div>
     )
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,7 +50,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";

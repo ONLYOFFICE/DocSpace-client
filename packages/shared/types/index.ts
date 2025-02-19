@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -105,7 +105,7 @@ declare global {
     snackbar?: {};
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
-      location: Location;
+      location: Location & { state: unknown };
     };
     logs: {
       socket: string[];
@@ -123,6 +123,7 @@ declare global {
       imageThumbnails?: boolean;
       oauth2: {
         origin: string;
+        secret: string;
       };
       editor?: {
         requestClose: boolean;

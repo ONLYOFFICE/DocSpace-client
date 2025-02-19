@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Box } from "@docspace/shared/components/box";
 import { inject, observer } from "mobx-react";
 import { globalColors } from "@docspace/shared/themes";
 import { mobile, getLogoUrl, injectDefaultTheme } from "@docspace/shared/utils";
@@ -47,6 +46,10 @@ const Header = styled.header.attrs(injectDefaultTheme)`
 
   .header-items-wrapper {
     width: 960px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     @media ${mobile} {
       width: 475px;
@@ -103,12 +106,7 @@ const HeaderUnAuth = ({
 
   return (
     <Header isLoaded={isLoaded} className="navMenuHeaderUnAuth">
-      <Box
-        displayProp="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        className="header-items-wrapper"
-      >
+      <div className="header-items-wrapper">
         {!isAuthenticated && isLoaded ? (
           <div>
             <a className="header-logo-wrapper" href="/">
@@ -116,7 +114,7 @@ const HeaderUnAuth = ({
             </a>
           </div>
         ) : null}
-      </Box>
+      </div>
 
       {!wizardToken ? (
         <LanguageCombobox

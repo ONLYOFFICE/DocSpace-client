@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,6 +57,7 @@ export const WorkspacesContainer = styled.div`
   }
 
   .workspace-list {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -65,6 +66,7 @@ export const WorkspacesContainer = styled.div`
   }
 
   .workspace-item {
+    box-sizing: border-box;
     background: ${(props) =>
       props.theme.client.settings.migration.workspaceBackground};
     border: ${(props) => props.theme.client.settings.migration.workspaceBorder};
@@ -233,6 +235,12 @@ export const StyledTableContainer = styled(TableContainer).attrs(
 
   .ec-desc {
     max-width: 618px;
+  }
+
+  .buttons-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
   }
 `;
 

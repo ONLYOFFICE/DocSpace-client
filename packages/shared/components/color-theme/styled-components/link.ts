@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,7 @@ import { LinkColorTheme } from "../ColorTheme.types";
 
 const LinkTheme = styled(Link)<LinkColorTheme>`
   color: ${(props) => props.$currentColorScheme?.main?.accent} !important;
-
+  ${(props) => props.$isUnderline && `text-decoration: underline;`}
   &:hover {
     color: ${(props) =>
       !props.noHover && props.$currentColorScheme?.main?.accent} !important;

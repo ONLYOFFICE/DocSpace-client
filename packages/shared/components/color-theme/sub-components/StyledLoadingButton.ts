@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,14 +27,23 @@
 import styled from "styled-components";
 import { injectDefaultTheme } from "../../../utils";
 
-const StyledLoadingButton = styled.div.attrs(injectDefaultTheme)`
+interface StyledLoadingButtonProps {
+  backgroundColor?: string;
+}
+
+const StyledLoadingButton = styled.div.attrs(
+  injectDefaultTheme,
+)<StyledLoadingButtonProps>`
   width: 12px;
   height: 12px;
   border-radius: 50%;
   text-align: center;
   line-height: 12px;
   background: ${(props) =>
-    props.theme.filesPanels.upload.loadingButton.background};
+    props.backgroundColor
+      ? props.backgroundColor
+      : props.theme.filesPanels.upload.loadingButton.background};
+
   position: absolute;
   margin: 2px;
   font-size: 16px;

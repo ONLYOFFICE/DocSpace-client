@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -90,7 +90,7 @@ const BenefitsContainer = ({ t, features }) => {
       >
         {t("Benefits")}
       </Text>
-      {features.map((item) => {
+      {Array.from(features.values()).map((item) => {
         if (!item.title || !item.image) return;
         return (
           <div className="payment-benefits" key={item.title || item.image}>

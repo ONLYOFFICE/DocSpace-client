@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -77,24 +77,6 @@ describe("<MainButtonMobile />", () => {
     const button = screen.getByTestId("floating-button");
     fireEvent.click(button);
     expect(mockOnClick).toHaveBeenCalled();
-  });
-
-  it("shows progress bar when uploading", () => {
-    renderWithTheme(
-      <MainButtonMobile
-        percent={50}
-        progressOptions={[
-          {
-            key: "upload",
-            label: "Uploading...",
-            percent: 50,
-            open: true,
-          },
-        ]}
-        opened
-      />,
-    );
-    expect(screen.getByText("Uploading...")).toBeInTheDocument();
   });
 
   it("hides loading indicator when upload is complete", () => {

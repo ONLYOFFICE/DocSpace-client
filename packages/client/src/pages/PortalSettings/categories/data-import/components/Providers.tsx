@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,7 +30,6 @@ import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
 import GoogleWorkspaceSvgUrl from "PUBLIC_DIR/images/workspace.google.react.svg?url";
@@ -102,9 +101,9 @@ const Providers = (props: ProvidersProps) => {
       </Text>
       <Text className="data-import-subtitle">{t("UploadBackupData")}</Text>
 
-      <Box className="workspace-list">
+      <div className="workspace-list">
         {workspaces.map((workspace) => (
-          <Box
+          <div
             key={workspace.title}
             className="workspace-item"
             onClick={() => setWorkspace(workspace.title)}
@@ -121,9 +120,9 @@ const Providers = (props: ProvidersProps) => {
             >
               {t("Import")}
             </ColorTheme>
-          </Box>
+          </div>
         ))}
-      </Box>
+      </div>
     </WorkspacesContainer>
   );
 };

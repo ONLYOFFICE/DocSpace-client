@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import isEqual from "lodash/isEqual";
 
 import { Text } from "../../../components/text";
@@ -56,13 +56,11 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     enableRestoreButton,
     deviceType,
     setLogoUrls,
-    isWhiteLabelLoaded,
-    defaultLogoText,
     defaultWhiteLabelLogoUrls,
-    logoText,
   } = props;
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
-  const [isEmpty, setIsEmpty] = useState(isWhiteLabelLoaded && !logoText);
+
+  const [isEmptyLogoText, setIsEmptyLogoText] = useState(!logoTextWhiteLabel);
 
   useResponsiveNavigation({
     redirectUrl: brandingRedirectUrl,
@@ -70,22 +68,20 @@ export const WhiteLabel = (props: IWhiteLabel) => {
     deviceType,
   });
 
-  useEffect(() => {
-    if (!isWhiteLabelLoaded) return;
-    setIsEmpty(!logoText);
-    if (!logoText) return;
-    setLogoTextWhiteLabel(logoText);
-  }, [logoText, isWhiteLabelLoaded]);
-
-  const onChangeCompanyName = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeLogoText = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setLogoTextWhiteLabel(value);
     const trimmedValue = value?.trim();
-    setIsEmpty(!trimmedValue);
+    setIsEmptyLogoText(!trimmedValue);
+  };
+
+  const clearLogoText = () => {
+    setLogoTextWhiteLabel("");
+    setIsEmptyLogoText(true);
   };
 
   const onUseTextAsLogo = () => {
-    if (isEmpty) return;
+    if (isEmptyLogoText) return;
 
     const newLogos = logoUrls.map((logo, i) => {
       if (!showAbout && logo.name === "AboutPage") return logo;
@@ -124,6 +120,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
       return logo;
     });
     setLogoUrls(newLogos);
+    setLogoTextWhiteLabel("");
   };
 
   const onChangeLogo = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -174,15 +171,13 @@ export const WhiteLabel = (props: IWhiteLabel) => {
       }
     }
     const data: IWhiteLabelData = {
-      logoText: logoTextWhiteLabel,
+      logoText: "",
       logo: logosArr,
     };
     onSave(data);
   };
 
   const isEqualLogo = isEqual(logoUrls, defaultWhiteLabelLogoUrls);
-  const isEqualText = defaultLogoText === logoTextWhiteLabel;
-  const saveButtonDisabled = isEqualLogo && isEqualText;
 
   return (
     <WhiteLabelWrapper>
@@ -192,9 +187,10 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         isSettingPaid={isSettingPaid}
         standalone={standalone}
         onUseTextAsLogo={onUseTextAsLogo}
-        isEmpty={isEmpty}
+        isEmpty={isEmptyLogoText}
         logoTextWhiteLabel={logoTextWhiteLabel}
-        onChangeCompanyName={onChangeCompanyName}
+        onClear={clearLogoText}
+        onChange={onChangeLogoText}
       />
 
       <div className="logos-container">
@@ -403,7 +399,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           />
         </div>
       </div>
-      <StyledSpacer showReminder={!saveButtonDisabled} />
+      <StyledSpacer showReminder={!isEqualLogo} />
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={onSaveAction}
@@ -413,9 +409,9 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         displaySettings
         hasScroll
         hideBorder
-        showReminder={!saveButtonDisabled}
+        showReminder={!isEqualLogo}
         reminderText={t("YouHaveUnsavedChanges")}
-        saveButtonDisabled={saveButtonDisabled}
+        saveButtonDisabled={isEqualLogo}
         disableRestoreToDefault={!enableRestoreButton}
         isSaving={isSaving}
         additionalClassSaveButton="white-label-save"

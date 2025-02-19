@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -70,11 +70,7 @@ class PureVersionHistoryPanel extends React.Component {
           <SectionBodyContent onClose={this.onClose} />
 
           {showProgressBar ? (
-            <FloatingButton
-              className="layout-progress-bar"
-              icon="file"
-              alert={false}
-            />
+            <FloatingButton className="layout-progress-bar" alert={false} />
           ) : null}
         </ModalDialog.Body>
       </ModalDialog>

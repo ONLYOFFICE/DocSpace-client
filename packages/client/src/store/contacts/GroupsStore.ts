@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,9 +35,12 @@ import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { Nullable } from "@docspace/shared/types";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+
+import api from "@docspace/shared/api";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import {
@@ -92,6 +95,79 @@ class GroupsStore {
     this.dialogStore = dialogStore;
 
     makeAutoObservable(this);
+
+    SocketHelper.on(SocketEvents.AddGroup, async (value) => {
+      const { contactsTab } = this.peopleStore.usersStore;
+
+      if (contactsTab !== "groups") return;
+
+      const { id, data } = value;
+
+      if (!data || !id) return;
+
+      const group = await api.groups.getGroupById(id, true);
+
+      runInAction(() => {
+        const idx = this.groups.findIndex((x) => x.id === group.id);
+
+        if (idx !== -1) {
+          this.groups[idx] = group;
+          return;
+        }
+        this.groups.push(group);
+        this.groupsFilter.total += 1;
+      });
+    });
+
+    SocketHelper.on(SocketEvents.UpdateGroup, async (value) => {
+      const {
+        infoPanelSelection,
+        setInfoPanelSelection,
+        setInfoPanelSelectedGroup,
+      } = this.infoPanelStore;
+
+      const { contactsTab } = this.peopleStore.usersStore;
+
+      const { id, data } = value;
+
+      if (!data || !id) return;
+
+      const idx = this.groups.findIndex((x) => x.id === id);
+
+      if (idx === -1) return;
+
+      const group = await api.groups.getGroupById(id, true);
+
+      if ((infoPanelSelection as unknown as TGroup)?.id === group.id) {
+        setInfoPanelSelection(group);
+        setInfoPanelSelectedGroup(group);
+      }
+
+      if (contactsTab !== "groups") {
+        this.currentGroup = group;
+        return;
+      }
+
+      runInAction(() => {
+        this.groups[idx] = group;
+      });
+    });
+
+    SocketHelper.on(SocketEvents.DeleteGroup, (id) => {
+      const { contactsTab } = this.peopleStore.usersStore;
+
+      const idx = this.groups.findIndex((x) => x.id === id);
+
+      if (contactsTab !== "groups") {
+        window.DocSpace.navigate("/accounts/groups/filter");
+        return;
+      }
+
+      runInAction(() => {
+        this.groups.splice(idx, 1);
+        this.groupsFilter.total -= 1;
+      });
+    });
   }
 
   setIsGroupsFetched = (isGroupsFetched: boolean) => {
@@ -222,7 +298,7 @@ class GroupsStore {
 
   setSelected = (selected: "all" | "none") => {
     const { hotkeyCaret, setHotkeyCaret } =
-      this.peopleStore.contactsHotkeysStore;
+      this.peopleStore.contactsHotkeysStore!;
 
     this.bufferSelection = null;
     this.selected = selected;

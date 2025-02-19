@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@ import styled, { css } from "styled-components";
 import { Heading } from "@docspace/shared/components/heading";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { Box } from "@docspace/shared/components/box";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -115,6 +114,13 @@ const StyledInviteUserBody = styled.div`
   flex-direction: column;
   overflow: auto;
 
+  .invite-user-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .group-name {
     padding-top: 8px;
   }
@@ -177,6 +183,11 @@ const StyledRow = styled.div`
   }
 
   .role-access {
+    box-sizing: border-box;
+    display: flex;
+    align-items: right;
+    gap: 8px;
+
     .role-warning {
       padding-top: 4px;
     }
@@ -333,6 +344,13 @@ const StyledDropDown = styled(DropDown)`
     .list-item_content {
       text-overflow: ellipsis;
       overflow: hidden;
+
+      .list-item_content-box {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
     }
 
     .email-list_avatar {
@@ -426,7 +444,8 @@ const StyledHelpButton = styled(HelpButton)`
   margin-inline-start: 8px;
 `;
 
-const StyledButtons = styled(Box).attrs(injectDefaultTheme)`
+const StyledButtons = styled.div.attrs(injectDefaultTheme)`
+  box-sizing: border-box;
   padding: 16px;
   display: flex;
   align-items: center;

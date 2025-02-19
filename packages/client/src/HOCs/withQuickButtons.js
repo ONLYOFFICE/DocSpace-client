@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -152,6 +152,12 @@ export default function withQuickButtons(WrappedComponent) {
       return getCorrectDate(locale, item.expired);
     };
 
+    onCreateRoom = () => {
+      const { item, onCreateRoomFromTemplate } = this.props;
+
+      onCreateRoomFromTemplate(item);
+    };
+
     render() {
       const { isLoading } = this.state;
 
@@ -170,6 +176,7 @@ export default function withQuickButtons(WrappedComponent) {
         currentDeviceType,
         roomLifetime,
         currentColorScheme,
+        isTemplatesFolder,
       } = this.props;
 
       const showLifetimeIcon =
@@ -201,6 +208,8 @@ export default function withQuickButtons(WrappedComponent) {
           expiredDate={expiredDate}
           roomLifetime={roomLifetime}
           currentColorScheme={currentColorScheme}
+          onCreateRoom={this.onCreateRoom}
+          isTemplatesFolder={isTemplatesFolder}
         />
       );
 
@@ -227,14 +236,19 @@ export default function withQuickButtons(WrappedComponent) {
       contextOptionsStore,
       selectedFolderStore,
     }) => {
-      const { lockFileAction, setFavoriteAction, onSelectItem } =
-        filesActionsStore;
+      const {
+        lockFileAction,
+        setFavoriteAction,
+        onSelectItem,
+        onCreateRoomFromTemplate,
+      } = filesActionsStore;
       const {
         isDocumentsFolder,
         isArchiveFolderRoot,
         isTrashFolder,
         isPersonalRoom,
         isArchiveFolder,
+        isTemplatesFolder,
       } = treeFoldersStore;
 
       const { isIndexEditingMode } = indexingStore;
@@ -270,6 +284,8 @@ export default function withQuickButtons(WrappedComponent) {
         roomLifetime: infoPanelRoom?.lifetime ?? selectedFolderStore?.lifetime,
         getManageLinkOptions,
         currentColorScheme: settingsStore.currentColorScheme,
+        isTemplatesFolder,
+        onCreateRoomFromTemplate,
       };
     },
   )(observer(WithQuickButtons));

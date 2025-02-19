@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
@@ -47,7 +46,7 @@ const AdvancedSettings = ({
   };
 
   return (
-    <Box className="ldap_advanced-settings">
+    <div className="ldap_advanced-settings">
       <Text fontWeight={600} fontSize="14px">
         {t("LdapAdvancedSettings")}
       </Text>
@@ -62,7 +61,7 @@ const AdvancedSettings = ({
         />
         <HelpButton tooltipContent={t("LdapSendWelcomeLetterTooltip")} />
       </div>
-    </Box>
+    </div>
   );
 };
 

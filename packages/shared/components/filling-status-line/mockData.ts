@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ export const mockData = [
   {
     id: 0,
     displayName: "Lydia Calzoni",
-    role: "Сотрудник",
+    role: "Employee",
     startFillingStatus: "Start filling",
     startFillingDate: "15.01.2023 17:56",
     filledAndSignedStatus: "Filled and signed",
@@ -42,7 +42,7 @@ export const mockData = [
   {
     id: 1,
     displayName: "Dulce Vaccaro",
-    role: "Бухгалтер",
+    role: "Accountant",
     startFillingStatus: "Start filling",
     startFillingDate: "21.01.2023 17:56",
     filledAndSignedStatus: "Filled and signed",
@@ -55,7 +55,7 @@ export const mockData = [
   {
     id: 2,
     displayName: "Kaiya Franci",
-    role: "Директор",
+    role: "Director",
     startFillingStatus: "Start filling",
     startFillingDate: "12.01.2023 16:31",
     filledAndSignedStatus: "Filled and signed",

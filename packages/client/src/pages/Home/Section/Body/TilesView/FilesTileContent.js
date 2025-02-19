@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,8 +27,10 @@
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
+import { getRoomTypeTitleTranslation } from "@docspace/shared/components/room-type/RoomType.utils";
 
 import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet } from "@docspace/shared/utils";
@@ -43,6 +45,17 @@ const SimpleFilesTileContent = styled(TileContent)`
     display: flex;
     align-items: flex-end;
   }
+
+  ${(props) =>
+    props.isTemplate &&
+    css`
+      overflow: hidden;
+
+      .row-main-container {
+        flex-direction: column;
+        align-items: start;
+      }
+    `}
 
   .main-icons {
     align-self: flex-end;
@@ -121,6 +134,7 @@ const SimpleFilesTileContent = styled(TileContent)`
 `;
 
 const FilesTileContent = ({
+  t,
   item,
   titleWithoutExt,
   linkStyles,
@@ -129,13 +143,16 @@ const FilesTileContent = ({
   currentDeviceType,
   displayFileExtension,
 }) => {
-  const { fileExst, title } = item;
+  const { fileExst, title, isTemplate } = item;
+
+  const roomType = getRoomTypeTitleTranslation(t, item.roomType);
 
   return (
     <SimpleFilesTileContent
       sideColor={theme.filesSection.tilesView.sideColor}
       isFile={fileExst}
       isRooms={isRooms}
+      isTemplate={isTemplate}
       currentDeviceType={currentDeviceType}
     >
       <Link
@@ -156,12 +173,24 @@ const FilesTileContent = ({
           <span className="item-file-exst">{fileExst}</span>
         ) : null}
       </Link>
+      {isTemplate ? (
+        <Text
+          className="item-file-sub-name"
+          color={theme.filesSection.tilesView.subTextColor}
+          fontSize="13px"
+          fontWeight={400}
+          truncate
+        >
+          {roomType}
+        </Text>
+      ) : null}
     </SimpleFilesTileContent>
   );
 };
 
 export default inject(({ settingsStore, treeFoldersStore }) => {
-  const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+  const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
+    treeFoldersStore;
 
   const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -169,6 +198,7 @@ export default inject(({ settingsStore, treeFoldersStore }) => {
     theme: settingsStore.theme,
     currentDeviceType: settingsStore.currentDeviceType,
     isRooms,
+    isTemplate: isTemplatesFolder,
   };
 })(
   observer(

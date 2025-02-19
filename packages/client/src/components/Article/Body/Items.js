@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -165,6 +165,7 @@ const Item = ({
       className="document-catalog"
     >
       <ArticleItem
+        item={item}
         key={item.id}
         id={item.id}
         title={item.title}
@@ -291,22 +292,15 @@ const Items = ({
   );
 
   const onMoveTo = React.useCallback(
-    (destFolderId, title) => {
-      moveDragItems(destFolderId, title, {
-        copy: t("Common:CopyOperation"),
-        move: t("Common:MoveToOperation"),
-      });
+    (destFolderId, title, destFolderInfo) => {
+      moveDragItems(destFolderId, title, destFolderInfo);
     },
-    [moveDragItems, t],
+    [moveDragItems],
   );
 
   const onRemove = React.useCallback(() => {
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
       deleteFromTrash: t("Translations:DeleteFromTrash"),
-      deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-      FileRemoved: t("Files:FileRemoved"),
-      FolderRemoved: t("Files:FolderRemoved"),
     };
 
     deleteAction(translations);

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -194,6 +194,12 @@ class DialogsStore {
     isDownload: false,
   };
 
+  createRoomTemplateDialogVisible = false;
+
+  templateAccessSettingsVisible = false;
+
+  templateEventVisible = false;
+
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
 
   selectFileFormRoomOpenRoot = false;
@@ -252,6 +258,8 @@ class DialogsStore {
 
   downloadItems = [];
 
+  operationCancelVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -308,6 +316,10 @@ class DialogsStore {
 
   setIsFolderActions = (isFolderActions) => {
     this.isFolderActions = isFolderActions;
+  };
+
+  setOperationCancelVisible = (operationCancelVisible) => {
+    this.operationCancelVisible = operationCancelVisible;
   };
 
   setMoveToPanelVisible = (visible) => {
@@ -793,6 +805,18 @@ class DialogsStore {
       visible,
       file,
     };
+  };
+
+  setCreateRoomTemplateDialogVisible = (visible) => {
+    this.createRoomTemplateDialogVisible = visible;
+  };
+
+  setTemplateAccessSettingsVisible = (isVisible) => {
+    this.templateAccessSettingsVisible = isVisible;
+  };
+
+  setTemplateEventVisible = (isVisible) => {
+    this.templateEventVisible = isVisible;
   };
 
   setWarningQuotaDialogVisible = (visible) => {

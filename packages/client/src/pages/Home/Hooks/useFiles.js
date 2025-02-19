@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -98,10 +98,23 @@ const useFiles = ({
 
     const url = getCategoryUrl(categoryType);
 
-    filter.searchArea =
-      categoryType === CategoryType.Shared
-        ? RoomSearchArea.Active
-        : RoomSearchArea.Archive;
+    let searchArea;
+
+    switch (categoryType) {
+      case CategoryType.Shared:
+        searchArea = RoomSearchArea.Shared;
+        break;
+
+      case CategoryType.Archive:
+        searchArea = RoomSearchArea.Archive;
+        break;
+
+      default:
+        searchArea = RoomSearchArea.Archive;
+        break;
+    }
+
+    filter.searchArea = searchArea;
 
     navigate(`${url}?${filter.toUrlParams()}`);
   };
@@ -123,7 +136,7 @@ const useFiles = ({
         if (f.length > 0) startUpload(f, null, t);
       })
       .catch((err) => {
-        toastr.error(err);
+        toastr.error(err, null, 0, true);
       });
   };
 

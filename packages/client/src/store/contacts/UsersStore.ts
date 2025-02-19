@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,6 +42,10 @@ import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
@@ -100,6 +104,8 @@ class UsersStore {
 
   guestsTabVisited: boolean = false;
 
+  roomParts: string = "";
+
   constructor(
     public settingsStore: SettingsStore,
     public infoPanelStore: InfoPanelStore,
@@ -124,6 +130,78 @@ class UsersStore {
     this.contactsTab = getContactsView();
 
     makeAutoObservable(this);
+
+    const addUser = async (value: { id: string; data: TUser }) => {
+      const { id, data } = value;
+
+      if (!data || !id) return;
+
+      const idx = this.users.findIndex((x) => x.id === id);
+
+      const user = await api.people.getUserById(data.id);
+
+      runInAction(() => {
+        if (idx === -1) {
+          this.users.push(user);
+          this.filter.total += 1;
+        } else {
+          this.users[idx] = user;
+        }
+      });
+    };
+
+    const updateUser = async (value: { id: string; data: TUser }) => {
+      const { id, data } = value;
+
+      if (!data || !id) return;
+
+      const idx = this.users.findIndex((x) => x.id === id);
+
+      if (idx === -1) return;
+
+      const user = await api.people.getUserById(data.id);
+
+      runInAction(() => {
+        this.users[idx] = user;
+      });
+    };
+
+    const deleteUser = (id: string) => {
+      const idx = this.users.findIndex((x) => x.id === id);
+
+      if (idx === -1) return;
+
+      runInAction(() => {
+        const newUsers = this.users;
+        newUsers.splice(idx, 1);
+        this.users = newUsers;
+        this.filter.total -= 1;
+      });
+    };
+
+    SocketHelper.on(SocketEvents.AddUser, addUser);
+    SocketHelper.on(SocketEvents.AddGuest, addUser);
+    SocketHelper.on(SocketEvents.UpdateUser, updateUser);
+    SocketHelper.on(SocketEvents.UpdateGuest, updateUser);
+    SocketHelper.on(SocketEvents.DeleteUser, deleteUser);
+    SocketHelper.on(SocketEvents.DeleteGuest, deleteUser);
+
+    SocketHelper.on(SocketEvents.UpdateGroup, async (value) => {
+      const { contactsTab } = this;
+
+      if (contactsTab !== "inside_group") return;
+
+      const { id, data } = value;
+
+      if (!data || !id) return;
+
+      const group = await api.groups.getGroupById(id, true);
+
+      runInAction(() => {
+        this.users = group.members ?? [];
+        this.filter.total = this.users.length;
+      });
+    });
   }
 
   setIsUsersFetched = (value: boolean) => {
@@ -131,6 +209,31 @@ class UsersStore {
   };
 
   setContactsTab = (contactsTab: TContactsTab) => {
+    if (contactsTab) {
+      const roomParts =
+        contactsTab === "guests"
+          ? `guests`
+          : contactsTab === "groups" || contactsTab === "inside_group"
+            ? "groups"
+            : "users";
+
+      if (
+        SocketHelper.socketSubscribers.has(this.roomParts) &&
+        this.roomParts !== roomParts
+      )
+        SocketHelper.emit(SocketCommands.Unsubscribe, {
+          roomParts: this.roomParts,
+        });
+
+      this.roomParts = roomParts;
+
+      if (!SocketHelper.socketSubscribers.has(roomParts))
+        SocketHelper.emit(SocketCommands.Subscribe, {
+          roomParts,
+          individual: true,
+        });
+    }
+
     if (contactsTab !== this.contactsTab) {
       this.filter = Filter.getDefault();
     }
@@ -212,7 +315,7 @@ class UsersStore {
       this.abortController = new AbortController();
     }
 
-    if (!window.DocSpace?.location?.state?.user) {
+    if (!(window.DocSpace?.location?.state as { user?: unknown })?.user) {
       this.setSelection([]);
       this.setBufferSelection(null);
     }
@@ -289,9 +392,7 @@ class UsersStore {
 
     await api.people.deleteUsers(userIds);
 
-    const actions: (Promise<TUser[]> | Promise<void>)[] = [
-      this.getUsersList(this.filter, true, false),
-    ];
+    const actions: Promise<void>[] = [];
 
     if (this.contactsTab === "inside_group" && this.filter.group) {
       actions.push(updateCurrentGroup(this.filter.group));
@@ -303,11 +404,6 @@ class UsersStore {
   updateUserStatus = async (status: EmployeeStatus, userIds: string[]) => {
     const updatedUsers = await api.people.updateUserStatus(status, userIds);
     if (updatedUsers) {
-      updatedUsers.forEach((user) => {
-        const userIndex = this.users.findIndex((x) => x.id === user.id);
-        if (userIndex !== -1) this.users[userIndex] = user;
-      });
-
       if (!this.needResetUserSelection) {
         this.updateSelection();
       }
@@ -316,11 +412,7 @@ class UsersStore {
     return updatedUsers;
   };
 
-  updateUserType = async (
-    type: EmployeeType,
-    userIds: string[],
-    filter: Filter = this.filter,
-  ) => {
+  updateUserType = async (type: EmployeeType, userIds: string[]) => {
     let toType = type ?? 0;
 
     switch (type) {
@@ -348,8 +440,6 @@ class UsersStore {
       throw new Error(e as string);
     }
 
-    await this.getUsersList(filter, true);
-
     if (updatedUsers && !this.needResetUserSelection) {
       this.updateSelection();
     }
@@ -362,35 +452,11 @@ class UsersStore {
 
     const removedGuests = await api.people.deleteGuests(ids);
 
-    await this.getUsersList(this.filter, true);
-
     if (!!removedGuests && !this.needResetUserSelection) {
       this.updateSelection();
     }
 
     return removedGuests;
-  };
-
-  setCustomUserQuota = async (
-    quotaSize: string | number,
-    userIds: string[],
-  ) => {
-    const updatedUsers = await api.people.setCustomUserQuota(
-      userIds,
-      +quotaSize,
-    );
-
-    await this.getUsersList(this.filter, true);
-
-    return updatedUsers;
-  };
-
-  resetUserQuota = async (userIds: string[]) => {
-    const updatedUsers = await api.people.resetUserQuota(userIds);
-
-    await this.getUsersList(this.filter, true);
-
-    return updatedUsers;
   };
 
   updateProfileInUsers = async (updatedProfile?: TUser) => {

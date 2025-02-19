@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -61,8 +61,6 @@ export default async function RootLayout({
   const cookieLng = cookieStore.get(LANGUAGE);
 
   let redirectUrl = "";
-
-  console.log("start requests from layout");
 
   const [settings, colorTheme, user] = await Promise.all([
     getSettings(),

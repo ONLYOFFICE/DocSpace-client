@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -88,8 +88,6 @@ import OAuthStore from "./OAuthStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
 
-const oauthStore = new OAuthStore(userStore);
-
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
 const pluginStore = new PluginStore(
@@ -166,14 +164,20 @@ const filesStore = new FilesStore(
   indexingStore,
 );
 
+publicRoomStore.filesStore = filesStore;
+
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
   publicRoomStore,
+  selectedFolderStore,
 );
 
 const oformsStore = new OformsStore(settingsStore, infoPanelStore, userStore);
 
-const secondaryProgressDataStore = new SecondaryProgressDataStore();
+const secondaryProgressDataStore = new SecondaryProgressDataStore(
+  treeFoldersStore,
+  mediaViewerDataStore,
+);
 const primaryProgressDataStore = new PrimaryProgressDataStore();
 const versionHistoryStore = new VersionHistoryStore(filesStore, settingsStore);
 
@@ -239,7 +243,11 @@ const filesActionsStore = new FilesActionsStore(
   peopleStore,
   currentQuotaStore,
   indexingStore,
+  versionHistoryStore,
 );
+
+mediaViewerDataStore.filesActionsStore = filesActionsStore;
+secondaryProgressDataStore.filesActionsStore = filesActionsStore;
 
 const contextOptionsStore = new ContextOptionsStore(
   settingsStore,
@@ -320,6 +328,8 @@ const storageManagement = new StorageManagement(
   currentQuotaStore,
   settingsStore,
 );
+
+const oauthStore = new OAuthStore(userStore, storageManagement);
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 

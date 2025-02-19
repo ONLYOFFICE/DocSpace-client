@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -70,6 +70,7 @@
       font-weight: 600;
       width: calc(100% - 32px);
       bottom: 56px;
+      background-color: var(--background-color);
     }
 
     @include not-mobile {
@@ -88,15 +89,19 @@
         width: calc(100% - 16px);
         inset-inline-start: 0;
         padding-inline-start: 16px;
+
+        @include not-mobile {
+          border-top: none;
+          position: static;
+          padding: 0;
+          margin-bottom: 0;
+          margin-inline-start: 8px;
+        }
       }
     }
   }
 
   @include mobile {
-    position: fixed;
-    inset-inline: 0;
-    bottom: 0;
-
     &.showReminder {
       .reminderText {
         padding-top: 30px;
@@ -104,6 +109,11 @@
     }
 
     &.displaySettings {
+      position: fixed;
+      inset-inline: 0;
+      bottom: 0 !important;
+      background-color: var(--background-color);
+
       .buttonsContainer {
         padding: 16px;
         bottom: 0;

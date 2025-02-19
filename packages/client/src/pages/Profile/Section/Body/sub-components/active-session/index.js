@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,6 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { ProfileFooterLoader } from "@docspace/shared/skeletons/profile";
@@ -53,6 +52,7 @@ const StyledWrapper = styled.div`
     color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
   }
   .terminate-session-container {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -162,7 +162,7 @@ const ActiveSessions = ({
       {/* TODO: Uncomment after fix on backend */}
       {/* <Text className="auto-delete-title">{t("Profile:AutoDeleteTitle")}</Text> */}
 
-      <Box className="terminate-session-container">
+      <div className="terminate-session-container">
         <Link
           className="terminate-all-sessions"
           type="action"
@@ -176,7 +176,7 @@ const ActiveSessions = ({
           iconName={InfoReactSvgUrl}
           tooltipContent={tooltipContent}
         />
-      </Box>
+      </div>
 
       <SessionsTable t={t} sessionsData={sessions} viewAs={viewAs} />
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,14 +38,15 @@ export type FloatingButtonProps = {
   icon?: FloatingButtonIcons;
   /** Displays the alert */
   alert?: boolean;
-  /** Loading indicator */
-  percent?: number;
   /**  Sets a callback function that is triggered when the button is clicked */
   onClick?: (e: React.MouseEvent) => void;
   /** CSS color */
   color?: string;
   clearUploadedFilesHistory?: () => void;
-  showTwoProgress?: boolean;
+  withoutProgress?: boolean;
+  showCancelButton?: boolean;
+  completed?: boolean;
+  withoutStatus?: boolean;
 };
 
 export type DefaultStylesProps = {

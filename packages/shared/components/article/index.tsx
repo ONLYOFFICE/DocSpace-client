@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -248,7 +248,10 @@ const Article = ({
         {articleMainButtonContent &&
         withMainButton &&
         currentDeviceType !== DeviceType.mobile ? (
-          <div className={styles.articleMainButton}>
+          <div
+            className={styles.articleMainButton}
+            data-mobile-article={isMobileArticle ? "true" : "false"}
+          >
             {articleMainButtonContent.props.children}
           </div>
         ) : null}
@@ -325,7 +328,10 @@ const Article = ({
       ) : null}
 
       {articleMainButtonContent && currentDeviceType === DeviceType.mobile ? (
-        <div className={styles.articleMainButton}>
+        <div
+          className={styles.articleMainButton}
+          data-mobile-article={isMobileArticle ? "true" : "false"}
+        >
           {articleMainButtonContent.props.children}
         </div>
       ) : null}

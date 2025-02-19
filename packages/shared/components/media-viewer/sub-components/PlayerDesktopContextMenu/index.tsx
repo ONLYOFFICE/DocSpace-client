@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import React, { memo, useEffect, useMemo, useRef, useState } from "react";
 
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg";
 import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import styles from "./PlayerDesktopContextMenu.module.scss";
 

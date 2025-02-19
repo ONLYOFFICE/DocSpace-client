@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,7 +41,7 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 // import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 // import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { inject, observer } from "mobx-react";
 
@@ -180,6 +180,7 @@ const ArticleMainButtonContent = (props) => {
     isWarningRoomsDialog,
     getContactsModel,
     contactsCanCreate,
+    setMainButtonVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -256,7 +257,7 @@ const ArticleMainButtonContent = (props) => {
           if (f.length > 0) startUpload(f, null, t);
         })
         .catch((err) => {
-          toastr.error(err);
+          toastr.error(err, null, 0, true);
         });
     },
     [startUpload, t],
@@ -678,6 +679,38 @@ const ArticleMainButtonContent = (props) => {
     isMobileArticle,
   ]);
 
+  const isProfile = location.pathname.includes("/profile");
+
+  const getMainButtonVisible = () => {
+    let visibilityValue = true;
+
+    if (currentDeviceType === DeviceType.mobile) {
+      visibilityValue = !(
+        moveToPanelVisible ||
+        restorePanelVisible ||
+        copyPanelVisible ||
+        selectFileDialogVisible ||
+        selectFileFormRoomDialogVisible ||
+        versionHistoryPanelVisible
+      );
+    }
+
+    if (isProfile || (isAccountsPage && !contactsCanCreate)) {
+      visibilityValue = false;
+    }
+
+    if (!isAccountsPage) visibilityValue = security?.Create;
+
+    if (!isMobileArticle) visibilityValue = false;
+    return visibilityValue;
+  };
+
+  const mainButtonVisible = getMainButtonVisible();
+
+  useEffect(() => {
+    setMainButtonVisible(mainButtonVisible);
+  }, [mainButtonVisible]);
+
   const mainButtonText =
     isRoomAdmin && isAccountsPage ? t("Common:Invite") : t("Common:Actions");
 
@@ -692,46 +725,24 @@ const ArticleMainButtonContent = (props) => {
     isDisabled = !security?.Create;
   }
 
-  const isProfile = location.pathname.includes("/profile");
-
-  let mainButtonVisible = true;
-
-  if (currentDeviceType === DeviceType.mobile) {
-    mainButtonVisible = !(
-      moveToPanelVisible ||
-      restorePanelVisible ||
-      copyPanelVisible ||
-      selectFileDialogVisible ||
-      selectFileFormRoomDialogVisible ||
-      versionHistoryPanelVisible
-    );
-  }
-
-  if (isAccountsPage && !contactsCanCreate) {
-    mainButtonVisible = false;
-  }
-
   if (showArticleLoader)
     return isMobileArticle ? null : <ArticleButtonLoader height="32px" />;
 
   return (
     <>
       {isMobileArticle ? (
-        !isProfile &&
-        (security?.Create || isAccountsPage) && (
-          <MobileView
-            t={t}
-            titleProp={t("Upload")}
-            actionOptions={actions}
-            buttonOptions={!isAccountsPage ? uploadActions : null}
-            withoutButton={isRoomsFolder || isAccountsPage}
-            withMenu={!isRoomsFolder}
-            mainButtonMobileVisible={
-              mainButtonMobileVisible ? mainButtonVisible : null
-            }
-            onMainButtonClick={onCreateRoom}
-          />
-        )
+        <MobileView
+          t={t}
+          titleProp={t("Upload")}
+          actionOptions={actions}
+          buttonOptions={!isAccountsPage ? uploadActions : null}
+          withoutButton={isRoomsFolder || isAccountsPage}
+          withMenu={!isRoomsFolder}
+          mainButtonMobileVisible={
+            mainButtonMobileVisible ? mainButtonVisible : null
+          }
+          onMainButtonClick={onCreateRoom}
+        />
       ) : isRoomsFolder ? (
         <StyledButton
           className="create-room-button"
@@ -814,7 +825,7 @@ export default inject(
     peopleStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
-    const { mainButtonMobileVisible } = filesStore;
+    const { mainButtonMobileVisible, setMainButtonVisible } = filesStore;
     const {
       isPrivacyFolder,
       isFavoritesFolder,
@@ -918,6 +929,7 @@ export default inject(
 
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
+      setMainButtonVisible,
     };
   },
 )(

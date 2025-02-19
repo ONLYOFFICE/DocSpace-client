@@ -101,7 +101,7 @@ export const WhiteLabelPage = ({
         const isDefault = await getIsDefaultWhiteLabelLogos(true);
 
         setLogoUrls(logos);
-        setDefaultLogoUrls(logos);
+        setDefaultLogoUrls(cloneDeep(logos));
         setIsDefault(getIsDefaultWhiteLabel(isDefault));
         toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
@@ -117,7 +117,7 @@ export const WhiteLabelPage = ({
       const isDefault = await getIsDefaultWhiteLabelLogos(true);
 
       setLogoUrls(logos);
-      setDefaultLogoUrls(logos);
+      setDefaultLogoUrls(cloneDeep(logos));
       setIsDefault(getIsDefaultWhiteLabel(isDefault));
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
@@ -142,3 +142,4 @@ export const WhiteLabelPage = ({
     />
   );
 };
+

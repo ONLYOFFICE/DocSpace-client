@@ -46,6 +46,7 @@ import { LayoutWrapper } from "@/components/layout";
 import { ManagementDialogs } from "@/dialogs";
 
 import "@/styles/globals.scss";
+import "../../../shared/styles/theme.scss";
 
 export default async function RootLayout({
   children,
@@ -100,3 +101,4 @@ export default async function RootLayout({
     </html>
   );
 }
+

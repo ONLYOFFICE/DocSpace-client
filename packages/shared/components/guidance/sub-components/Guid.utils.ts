@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { isTablet } from "../../../utils";
+import { ADDITIONAL_ROW_LEFT_RTL_OFFSET } from "./Guid.constants";
 import {
   GuidancePosition,
   GuidanceElementType,
@@ -51,8 +52,6 @@ interface Position extends ViewDimensions {
   bottom: number;
   right: number;
 }
-
-const ADDITIONAL_ROW_LEFT_RTL_OFFSET = 7;
 
 const getOffsetValues = (offset: GuidancePosition["offset"]) => {
   const baseOffset = (offset?.value ?? 0) / 2;

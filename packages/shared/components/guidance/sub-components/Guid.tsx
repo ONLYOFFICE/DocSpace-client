@@ -48,9 +48,7 @@ import {
   ClippedPosition,
   GuidancePlacement,
 } from "./Guid.types";
-
-const SIDE_OFFSET = 18;
-const RTL_ROW_OFFSET = 15;
+import { SIDE_OFFSET, RTL_ROW_OFFSET } from "./Guid.constants";
 
 const getModalPosition = (
   positions: ClippedPosition[],

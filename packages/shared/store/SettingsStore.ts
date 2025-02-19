@@ -1462,16 +1462,22 @@ class SettingsStore {
       : null;
   }
 
-  get downloaddesktop() {
-    return this.externalResources?.site?.entries.downloaddesktop;
+  get downloaddesktopUrl() {
+    return this.siteDomain && this.siteEntries?.downloaddesktop
+      ? `${this.siteDomain}${this.siteEntries.downloaddesktop}`
+      : null;
   }
 
-  get officeforandroid() {
-    return this.externalResources?.site?.entries.officeforandroid;
+  get officeforandroidUrl() {
+    return this.siteDomain && this.siteEntries?.officeforandroid
+      ? `${this.siteDomain}${this.siteEntries.officeforandroid}`
+      : null;
   }
 
-  get officeforios() {
-    return this.externalResources?.site?.entries.officeforios;
+  get officeforiosUrl() {
+    return this.siteDomain && this.siteEntries?.officeforios
+      ? `${this.siteDomain}${this.siteEntries.officeforios}`
+      : null;
   }
 
   get forumLinkUrl() {

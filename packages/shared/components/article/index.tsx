@@ -108,10 +108,9 @@ const Article = ({
   getActions,
   onProfileClick,
   logoText,
-  siteDomain,
-  downloaddesktop,
-  officeforandroid,
-  officeforios,
+  downloaddesktopUrl,
+  officeforandroidUrl,
+  officeforiosUrl,
   ...rest
 }: ArticleProps) => {
   const [articleHeaderContent, setArticleHeaderContent] =
@@ -277,10 +276,9 @@ const Article = ({
                   withDevTools={withDevTools}
                   showText={showText}
                   logoText={logoText}
-                  siteDomain={siteDomain}
-                  downloaddesktop={downloaddesktop}
-                  officeforandroid={officeforandroid}
-                  officeforios={officeforios}
+                  downloaddesktopUrl={downloaddesktopUrl}
+                  officeforandroidUrl={officeforandroidUrl}
+                  officeforiosUrl={officeforiosUrl}
                 />
               ) : null}
               {!isMobile && isLiveChatAvailable ? (

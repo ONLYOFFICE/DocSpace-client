@@ -668,5 +668,11 @@
   "AutoBackup": "Automatka rezervna kopija",
   "RestoreBackup": "Povrati",
   "DownloadCopy": "Preuzmi kopiju",
-  "SuccessfullySaveSettingsMessage": "Podešavanja su uspešno ažurirana"
+  "SuccessfullySaveSettingsMessage": "Podešavanja su uspešno ažurirana",
+  "AmazonBucketTip": "Unesite jedinstveno ime Amazon S3 korpe gde želite da čuvate svoje rezervne kopije.",
+  "AmazonRegionTip": "Unesite AWS region u kojem se nalazi vaš Amazon bucket.",
+  "AmazonServiceTip": "Ovo je opcionalna osobina; promenite je samo ako želite da isprobate drugi krajnji bod usluge.",
+  "AmazonForcePathStyleTip": "Kada je true, zahtevi će uvek koristiti adresiranje putanje.",
+  "AmazonHTTPTip": "Ako je ova osobina postavljena na true, klijent pokušava da koristi HTTP protokol, ako ciljni krajnji bod podržava. Podrazumevano, ova osobina je postavljena na false.",
+  "AmazonSSETip": "Algoritam šifrovanja na serveru koji se koristi prilikom čuvanja ovog objekta u S3."
 }

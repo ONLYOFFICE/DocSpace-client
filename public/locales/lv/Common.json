@@ -667,5 +667,11 @@
   "AutoBackup": "Automātiskā rezerves kopēšana",
   "RestoreBackup": "Datu atjaunošana",
   "DownloadCopy": "Lejupielādēt kopiju",
-  "SuccessfullySaveSettingsMessage": "Iestatījumi ir veiksmīgi atjaunināti"
+  "SuccessfullySaveSettingsMessage": "Iestatījumi ir veiksmīgi atjaunināti",
+  "AmazonBucketTip": "Ievadiet unikālo Amazon S3 kopnes nosaukumu, kurā vēlaties saglabāt dublējumus",
+  "AmazonRegionTip": "Ievadiet AWS reģionu, kurā atrodas jūsu.",
+  "AmazonServiceTip": "Šis ir neobligāts rekvizīts. Mainiet to tikai tad, ja vēlaties izmēģināt citu pakalpojuma galapunktu.",
+  "AmazonForcePathStyleTip": "Kad patiess, pieprasījumi vienmēr izmantos ceļa stila adresāciju",
+  "AmazonHTTPTip": "Ja šis rekvizīts ir iestatīts uz patiesu, klients mēģina izmantot http protokolu, ja mērķa galapunkts to atbalsta. Pēc noklusējuma šis rekvizīts ir iestatīts kā aplams",
+  "AmazonSSETip": "Servera puses šifrēšanas algoritms, ko izmanto, glabājot šo objektu S3."
 }

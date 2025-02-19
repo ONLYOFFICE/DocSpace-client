@@ -667,5 +667,11 @@
   "AutoBackup": "Avtomatik ehtiyat nüsxəsi",
   "RestoreBackup": "Məlumatların bərpası",
   "DownloadCopy": "Nüsxəni endirin",
-  "SuccessfullySaveSettingsMessage": "Ayarlar uğurla yenilənmişdir"
+  "SuccessfullySaveSettingsMessage": "Ayarlar uğurla yenilənmişdir",
+  "AmazonBucketTip": "Ehtiyat nüsxələrinizi saxlamaq istədiyiniz Amazon S3 səbətinin unikal adını daxil edin.",
+  "AmazonRegionTip": "Amazon səbətinizin yerləşdiyi AWS bölgəsini daxil edin.",
+  "AmazonServiceTip": "Bu seçilə bilən bir xüsusiyyətdir; onu yalnız başqa xidmətin son nöqtəsini sınamaq istəyirsinizsə dəyişdirin.",
+  "AmazonForcePathStyleTip": "Doğru olduqda, sorğular həmişə yol tərzi ünvandan istifadə edəcək.",
+  "AmazonHTTPTip": "Bu xüsusiyyət doğru olaraq təyin edilərsə, hədəf son nöqtə onu dəstəklədiyi halda, müştəri HTTP protokolundan istifadə etməyə çalışacaq. Deffolt olaraq, bu xüsusiyyət yanlış olaraq təyin edilmişdir.",
+  "AmazonSSETip": "Bu obyekti S3-də saxlayarkən istifadə edilən server tərəfi şifrələmə alqoritmi."
 }

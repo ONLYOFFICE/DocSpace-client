@@ -667,5 +667,11 @@
   "AutoBackup": "Automatische back-up",
   "RestoreBackup": "Dataherstel",
   "DownloadCopy": "Download de kopie",
-  "SuccessfullySaveSettingsMessage": "De instellingen zijn met succes bijgewerkt"
+  "SuccessfullySaveSettingsMessage": "De instellingen zijn met succes bijgewerkt",
+  "AmazonBucketTip": "Voer de unieke naam in van de Amazon S3 bucket waar u uw back-ups wilt opslaan.",
+  "AmazonRegionTip": "Voer de AWS-regio in waar uw Amazon-bucket zich bevindt.",
+  "AmazonServiceTip": "Dit is een optionele eigenschap; verander het alleen als u een ander service eindpunt wilt proberen.",
+  "AmazonForcePathStyleTip": "Indien true, zullen verzoeken altijd gebruik maken van path stijl adressering.",
+  "AmazonHTTPTip": "Als deze eigenschap is ingesteld op waar, probeert de client het HTTP-protocol te gebruiken, indien het doel-eindpunt dit ondersteunt. Standaard is deze eigenschap ingesteld op false.",
+  "AmazonSSETip": "Het versleutelingsalgoritme aan de serverzijde dat wordt gebruikt bij het opslaan van dit object in S3."
 }

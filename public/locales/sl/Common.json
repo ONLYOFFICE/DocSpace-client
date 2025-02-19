@@ -667,5 +667,11 @@
   "AutoBackup": "Samodejno varnostno kopiranje",
   "RestoreBackup": "Obnovitev podatkov",
   "DownloadCopy": "Prenesi kopijo",
-  "SuccessfullySaveSettingsMessage": "Nastavitve so bile uspešno posodobljene"
+  "SuccessfullySaveSettingsMessage": "Nastavitve so bile uspešno posodobljene",
+  "AmazonBucketTip": "Vnesite edinstveno ime košarice Amazon S3, kamor želite shraniti svoje varnostne kopije.",
+  "AmazonRegionTip": "Vnesite regijo AWS, kjer se nahaja vaša Amazon košarica.",
+  "AmazonServiceTip": "To je neobvezna lastnost; spremenite le, če želite poskusiti z drugo končno točko storitve.",
+  "AmazonForcePathStyleTip": "Če je postavljeno na pravilno, bodo zahteve vedno uporabljale naslavljanje v slogu poti.",
+  "AmazonHTTPTip": "Če je ta lastnost nastavljena na pravilno, poskuša odjemalec uporabiti protokol HTTP, če ga ciljna končna točka podpira. Privzeto je ta lastnost nastavljena na napačno.",
+  "AmazonSSETip": "Algoritem za šifriranje na strani strežnika, uporabljen pri shranjevanju tega predmeta v S3."
 }

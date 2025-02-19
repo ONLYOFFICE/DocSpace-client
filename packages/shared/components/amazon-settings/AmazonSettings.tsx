@@ -234,7 +234,7 @@ const AmazonSettings = ({
         offsetRight={0}
         iconName={HelpReactSvgUrl}
         tooltipContent={
-          <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
+          <Trans t={t} i18nKey={`${helpInfo}`} ns="Common">
             {helpInfo}
           </Trans>
         }

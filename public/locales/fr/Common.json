@@ -668,5 +668,11 @@
   "AutoBackup": "Sauvegarde automatique",
   "RestoreBackup": "Restauration des données",
   "DownloadCopy": "Télécharger la copie",
-  "SuccessfullySaveSettingsMessage": "Les paramètres ont été mis à jour avec succès"
+  "SuccessfullySaveSettingsMessage": "Les paramètres ont été mis à jour avec succès",
+  "AmazonBucketTip": "Saisissez le nom unique de l’espace de stockage Amazon S3 dans lequel vous souhaitez stocker vos fichiers de sauvegarde.",
+  "AmazonRegionTip": "Saisissez la région AWS dans laquelle se trouve votre panier Amazon.",
+  "AmazonServiceTip": "Il s’agit d’une propriété facultative ; ne la modifiez que si vous souhaitez essayer un point de terminaison de service différent.",
+  "AmazonForcePathStyleTip": "Si la valeur est vraie, les demandes utiliseront toujours l’adressage de type \"chemin\".",
+  "AmazonHTTPTip": "Si cette propriété est définie sur «true», le client tente d’utiliser le protocole HTTP, si le point de terminaison cible le prend en charge. Par défaut, cette propriété a la valeur «false».",
+  "AmazonSSETip": "Algorithme de chiffrement côté serveur utilisé lors du stockage de cet objet dans S3."
 }

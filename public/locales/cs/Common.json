@@ -667,5 +667,11 @@
   "AutoBackup": "Automatická záloha",
   "RestoreBackup": "Obnova dat",
   "DownloadCopy": "Stáhnout kopii",
-  "SuccessfullySaveSettingsMessage": "Nastavení bylo úspěšně aktualizováno"
+  "SuccessfullySaveSettingsMessage": "Nastavení bylo úspěšně aktualizováno",
+  "AmazonBucketTip": "Zadejte jedinečný název kbelíku Amazon S3, do kterého chcete ukládat zálohy.",
+  "AmazonRegionTip": "Zadejte oblast AWS, ve které se nachází váš kbelík Amazon.",
+  "AmazonServiceTip": "Toto je nepovinná vlastnost; změňte ji pouze v případě, že chcete vyzkoušet jiný koncový bod služby.",
+  "AmazonForcePathStyleTip": "Pokud je hodnota true, budou požadavky vždy používat adresování ve stylu cesty.",
+  "AmazonHTTPTip": "Pokud je tato vlastnost nastavena na hodnotu true, klient se pokusí použít protokol HTTP, pokud jej cílový koncový bod podporuje. Ve výchozím nastavení je tato vlastnost nastavena na false.",
+  "AmazonSSETip": "Šifrovací algoritmus na straně serveru použitý při ukládání tohoto objektu do S3."
 }

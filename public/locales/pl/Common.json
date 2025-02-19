@@ -667,5 +667,11 @@
   "AutoBackup": "Automatyczna kopia zapasowa",
   "RestoreBackup": "Odzyskiwanie danych",
   "DownloadCopy": "Pobierz kopię",
-  "SuccessfullySaveSettingsMessage": "Ustawienia zostały pomyślnie zaktualizowane"
+  "SuccessfullySaveSettingsMessage": "Ustawienia zostały pomyślnie zaktualizowane",
+  "AmazonBucketTip": "Wpisz unikatową nazwę bucketu Amazon S3, w którym chcesz przechowywać swoje kopie zapasowe.",
+  "AmazonRegionTip": "Wpisz region AWS, w którym znajduje się Twój bucket.",
+  "AmazonServiceTip": "Jest to właściwość opcjonalna; zmień ją, tylko jeśli chcesz wypróbować inny punkt końcowy usługi.",
+  "AmazonForcePathStyleTip": "Gdy ma wartość true, żądania zawsze będą używać adresowania w stylu ścieżki.",
+  "AmazonHTTPTip": "Jeśli właściwość ma wartość true, klient próbuje użyć protokołu HTTP, jeżeli docelowy punkt końcowy go obsługuje. Domyślnie dana właściwość ma wartość false.",
+  "AmazonSSETip": "Algorytm szyfrowania po stronie serwera używany podczas przechowywania danego obiektu w S3."
 }

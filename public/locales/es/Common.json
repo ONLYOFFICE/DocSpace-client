@@ -668,5 +668,11 @@
   "AutoBackup": "Copia de seguridad automática",
   "RestoreBackup": "Restauración de datos",
   "DownloadCopy": "Descargar la copia",
-  "SuccessfullySaveSettingsMessage": "Ajustes se han actualizado correctamente"
+  "SuccessfullySaveSettingsMessage": "Ajustes se han actualizado correctamente",
+  "AmazonBucketTip": "Introduzca el nombre único del bucket de Amazon S3 donde desea almacenar sus copias de seguridad.",
+  "AmazonRegionTip": "Introduzca la región de AWS donde reside su bucket de Amazon.",
+  "AmazonServiceTip": "Esta propiedad es opcional; cámbiela solo si desea probar el punto de conexión de un servicio diferente.",
+  "AmazonForcePathStyleTip": "Cuando es verdadero, las solicitudes utilizarán siempre el direccionamiento de estilo ruta.",
+  "AmazonHTTPTip": "Se esta propriedade for configurada como verdadeiro, o cliente tentará usar o protocolo HTTP, se o terminal de destino for compatível. Por padrão, essa propriedade é definida como falsa.",
+  "AmazonSSETip": "El algoritmo de cifrado del lado del servidor utilizado para almacenar este objeto en S3."
 }

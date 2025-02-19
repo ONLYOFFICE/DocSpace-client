@@ -667,5 +667,11 @@
   "AutoBackup": "Automatická záloha",
   "RestoreBackup": "Obnova dát",
   "DownloadCopy": "Stiahnuť si kópiu",
-  "SuccessfullySaveSettingsMessage": "Nastavenia boli úspešne aktualizované"
+  "SuccessfullySaveSettingsMessage": "Nastavenia boli úspešne aktualizované",
+  "AmazonBucketTip": "Zadajte jedinečný názov košíka Amazon S3, do ktorého chcete ukladať svoje zálohy.",
+  "AmazonRegionTip": "Zadajte oblasť AWS, kde sa nachádza váš Amazon košík.",
+  "AmazonServiceTip": "Toto je voliteľná vlastnosť; zmeňte to iba vtedy, ak chcete vyskúšať iný koncový bod služby.",
+  "AmazonForcePathStyleTip": "Pri nastavení na hodnotu true budú požiadavky vždy používať path-štýle adresovanie.",
+  "AmazonHTTPTip": "Ak je táto vlastnosť nastavená na hodnotu true, klient sa pokúsi použiť protokol HTTP, ak to podporuje cieľový koncový bod. Štandardne je táto vlastnosť nastavená na hodnotu false.",
+  "AmazonSSETip": "Algoritmus šifrovania na strane servera použitý pri ukladaní tohto objektu v S3."
 }

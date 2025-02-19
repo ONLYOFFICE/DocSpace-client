@@ -668,5 +668,11 @@
   "AutoBackup": "Backup automatico",
   "RestoreBackup": "Ripristino dati",
   "DownloadCopy": "Scaricare la copia",
-  "SuccessfullySaveSettingsMessage": "Le impostazioni sono state aggiornate con successo"
+  "SuccessfullySaveSettingsMessage": "Le impostazioni sono state aggiornate con successo",
+  "AmazonBucketTip": "Inserisci il nome univoco del bucket Amazon S3 dove desideri archiviare i backup.",
+  "AmazonRegionTip": "Inserisci la regione AWS in cui si trova il bucket Amazon.",
+  "AmazonServiceTip": "Si tratta di una proprietà opzionale; cambiala solo se vuoi provare un endpoint di servizio diverso.",
+  "AmazonForcePathStyleTip": "Se vero, le richieste utilizzeranno sempre l’indirizzamento in stile percorso.",
+  "AmazonHTTPTip": "Se questa proprietà è impostata su true, il client tenta di utilizzare il protocollo HTTP, se l’endpoint di destinazione lo supporta. Per impostazione predefinita, questa proprietà è impostata su false.",
+  "AmazonSSETip": "L’algoritmo di crittografia lato server utilizzato durante l’archiviazione di questo oggetto in S3."
 }

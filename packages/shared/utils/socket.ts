@@ -649,7 +649,7 @@ class SocketHelper {
    */
   public off = <T extends SocketEvents>(
     eventName: T,
-    callback: TSocketListener<T>,
+    callback?: TSocketListener<T>,
   ) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
       addLog(

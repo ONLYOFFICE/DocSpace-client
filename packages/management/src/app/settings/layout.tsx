@@ -1,21 +1,31 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { usePathname, useRouter } from "next/navigation";
 
 import { Tabs, type TTabItem } from "@docspace/shared/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { pathsWithoutTabs } from "@/lib/constants";
+import useAppState from "@/hooks/useAppState";
 
 const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
   const router = useRouter();
+
+  const { settings } = useAppState();
+
   const { currentDeviceType } = useDeviceType();
+
+  const socketUrl = settings?.socketUrl;
 
   const data = [
     {
@@ -39,6 +49,29 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
       content: children,
     },
   ];
+
+  useEffect(() => {
+    if (!socketUrl) return;
+
+    SocketHelper.connect(socketUrl, "");
+  }, [socketUrl]);
+
+  useEffect(() => {
+    const { socketSubscribers } = SocketHelper;
+
+    if (!socketSubscribers.has("backup")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "backup",
+      });
+    }
+
+    return () => {
+      SocketHelper.off(SocketEvents.BackupProgress);
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: "backup",
+      });
+    };
+  }, []);
 
   const getCurrentTab = () => {
     const currentTab = data.find((item) => pathname.includes(item.id));

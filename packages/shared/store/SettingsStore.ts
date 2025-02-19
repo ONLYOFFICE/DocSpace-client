@@ -781,7 +781,13 @@ class SettingsStore {
     const origSettings = await this.getSettings().catch((err) => {
       if (err?.response?.status === 404) {
         // portal not found
-        const url = new URL(WRONG_PORTAL_NAME_URL);
+
+        const wrongportalname =
+          (typeof window !== "undefined" &&
+            window.ClientConfig?.wrongPortalNameUrl) ||
+          `https://www.onlyoffice.com/wrongportalname.aspx`;
+
+        const url = new URL(wrongportalname);
         url.searchParams.append("url", window.location.hostname);
         url.searchParams.append("ref", window.location.href);
         return window.location.replace(url);
@@ -895,6 +901,8 @@ class SettingsStore {
 
     this.setAdditionalResourcesData(res);
     this.setAdditionalResourcesIsDefault(res.isDefault);
+
+    this.getSettings();
   };
 
   getPortalCultures = async () => {

@@ -667,5 +667,7 @@
   "Branding": "Брендинг",
   "DataBackup": "Резервное копирование данных",
   "AutoBackup": "Автоматическое резервное копирование",
-  "RestoreBackup": "Восстановление"
+  "RestoreBackup": "Восстановление",
+  "DownloadCopy": "Скачать копию",
+  "SuccessfullySaveSettingsMessage": "Настройки успешно обновлены"
 }

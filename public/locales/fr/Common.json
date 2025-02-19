@@ -666,5 +666,7 @@
   "Branding": "Personnalisation",
   "DataBackup": "Sauvegarde des données",
   "AutoBackup": "Sauvegarde automatique",
-  "RestoreBackup": "Restauration des données"
+  "RestoreBackup": "Restauration des données",
+  "DownloadCopy": "Télécharger la copie",
+  "SuccessfullySaveSettingsMessage": "Les paramètres ont été mis à jour avec succès"
 }

@@ -103,7 +103,7 @@ export const WhiteLabelPage = ({
         setLogoUrls(logos);
         setDefaultLogoUrls(logos);
         setIsDefault(getIsDefaultWhiteLabel(isDefault));
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error!);
       }
@@ -119,7 +119,7 @@ export const WhiteLabelPage = ({
       setLogoUrls(logos);
       setDefaultLogoUrls(logos);
       setIsDefault(getIsDefaultWhiteLabel(isDefault));
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error!);
     }
@@ -142,4 +142,3 @@ export const WhiteLabelPage = ({
     />
   );
 };
-

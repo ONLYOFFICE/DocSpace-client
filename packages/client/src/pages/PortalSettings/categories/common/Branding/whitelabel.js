@@ -69,7 +69,7 @@ const WhiteLabelComponent = (props) => {
   const onRestoreDefault = async () => {
     try {
       await resetWhiteLabelLogos();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }
@@ -80,7 +80,7 @@ const WhiteLabelComponent = (props) => {
       setIsSaving(true);
       await saveWhiteLabelLogos(data);
 
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     } finally {

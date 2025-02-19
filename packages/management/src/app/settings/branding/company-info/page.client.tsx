@@ -94,7 +94,7 @@ export const CompanyInfoPage = ({
         await setCompanyInfoSettings(address, companyName, email, phone, site);
         const companyData = await getCompanyInfoSettings();
         setCompanyData(companyData);
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error!);
       }
@@ -107,7 +107,7 @@ export const CompanyInfoPage = ({
         await restoreCompanyInfoSettings();
         const companyData = await getCompanyInfoSettings();
         setCompanyData(companyData);
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error!);
       }
@@ -130,4 +130,3 @@ export const CompanyInfoPage = ({
     />
   );
 };
-

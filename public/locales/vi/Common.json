@@ -664,5 +664,7 @@
   "Branding": "Thương hiệu",
   "DataBackup": "Sao lưu dữ liệu",
   "AutoBackup": "Tự động sao lưu",
-  "RestoreBackup": "Khôi phục dữ liệu"
+  "RestoreBackup": "Khôi phục dữ liệu",
+  "DownloadCopy": "Tải xuống bản sao",
+  "SuccessfullySaveSettingsMessage": "Cài đặt đã được cập nhật thành công"
 }

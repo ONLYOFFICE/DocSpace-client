@@ -450,7 +450,7 @@ class SsoFormStore {
 
     try {
       await submitSsoForm(data);
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       this.isSubmitLoading = false;
       this.load();
     } catch (err) {

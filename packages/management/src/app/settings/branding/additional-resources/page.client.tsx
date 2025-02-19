@@ -84,7 +84,7 @@ export const AdditionalResourcesPage = ({
         await setAdditionalResources(updatedData);
         const additional = await getAdditionalResources();
         setAdditionalRes(additional);
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error!);
       }
@@ -97,7 +97,7 @@ export const AdditionalResourcesPage = ({
         await restoreAdditionalResources();
         const additional = await getAdditionalResources();
         setAdditionalRes(additional);
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error!);
       }
@@ -116,4 +116,3 @@ export const AdditionalResourcesPage = ({
     />
   );
 };
-

@@ -336,7 +336,7 @@ const Appearance = (props) => {
     try {
       await api.settings.sendAppearanceTheme({ selected: selectThemeId });
       await getAppearanceTheme();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }
@@ -384,7 +384,7 @@ const Appearance = (props) => {
 
       onCloseDialogDelete();
 
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }
@@ -498,7 +498,7 @@ const Appearance = (props) => {
         await api.settings.sendAppearanceTheme({ theme: newTheme });
         await getAppearanceTheme();
 
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
       }
@@ -513,7 +513,7 @@ const Appearance = (props) => {
         await getAppearanceTheme();
         setPreviewAccent(editTheme.main?.accent);
 
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
       }

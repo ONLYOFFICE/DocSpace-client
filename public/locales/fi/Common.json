@@ -665,5 +665,7 @@
   "Branding": "Brändäys",
   "DataBackup": "Tietojen varmuuskopiointi",
   "AutoBackup": "Automaattinen varmuuskopiointi",
-  "RestoreBackup": "Tiedon Palautus"
+  "RestoreBackup": "Tiedon Palautus",
+  "DownloadCopy": "Lataa kopio",
+  "SuccessfullySaveSettingsMessage": "Asetusten päivittäminen onnistui"
 }

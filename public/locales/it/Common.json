@@ -666,5 +666,7 @@
   "Branding": "Marchio",
   "DataBackup": "Backup dei dati",
   "AutoBackup": "Backup automatico",
-  "RestoreBackup": "Ripristino dati"
+  "RestoreBackup": "Ripristino dati",
+  "DownloadCopy": "Scaricare la copia",
+  "SuccessfullySaveSettingsMessage": "Le impostazioni sono state aggiornate con successo"
 }

@@ -665,5 +665,7 @@
   "Branding": "Branding",
   "DataBackup": "Kopia zapasowa danych",
   "AutoBackup": "Automatyczna kopia zapasowa",
-  "RestoreBackup": "Odzyskiwanie danych"
+  "RestoreBackup": "Odzyskiwanie danych",
+  "DownloadCopy": "Pobierz kopię",
+  "SuccessfullySaveSettingsMessage": "Ustawienia zostały pomyślnie zaktualizowane"
 }

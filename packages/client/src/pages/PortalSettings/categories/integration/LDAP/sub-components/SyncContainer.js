@@ -74,7 +74,7 @@ const SyncContainer = ({
 
   const onSaveClick = React.useCallback(() => {
     saveCronLdap()
-      .then(() => toastr.success(t("Settings:SuccessfullySaveSettingsMessage")))
+      .then(() => toastr.success(t("Common:SuccessfullySaveSettingsMessage")))
       .catch((e) => toastr.error(e));
   }, []);
 

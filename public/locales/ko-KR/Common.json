@@ -664,5 +664,7 @@
   "Branding": "브랜딩",
   "DataBackup": "데이터 백업",
   "AutoBackup": "자동 백업",
-  "RestoreBackup": "데이터 복원"
+  "RestoreBackup": "데이터 복원",
+  "DownloadCopy": "복사본 다운로드",
+  "SuccessfullySaveSettingsMessage": "설정이 성공적으로 업데이트되었습니다"
 }

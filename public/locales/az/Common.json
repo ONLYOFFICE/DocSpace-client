@@ -665,5 +665,7 @@
   "Branding": "Brendləşmə",
   "DataBackup": "Məlumatların yedəklənməsi",
   "AutoBackup": "Avtomatik ehtiyat nüsxəsi",
-  "RestoreBackup": "Məlumatların bərpası"
+  "RestoreBackup": "Məlumatların bərpası",
+  "DownloadCopy": "Nüsxəni endirin",
+  "SuccessfullySaveSettingsMessage": "Ayarlar uğurla yenilənmişdir"
 }

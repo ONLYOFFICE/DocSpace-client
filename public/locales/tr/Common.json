@@ -665,5 +665,7 @@
   "Branding": "Markalaşma",
   "DataBackup": "Veri yedekleme",
   "AutoBackup": "Otomatik yedekleme",
-  "RestoreBackup": "Veri Geri Yükleme"
+  "RestoreBackup": "Veri Geri Yükleme",
+  "DownloadCopy": "Kopyayı indir",
+  "SuccessfullySaveSettingsMessage": "Ayarlar başarıyla güncellendi"
 }

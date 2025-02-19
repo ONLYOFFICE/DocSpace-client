@@ -666,5 +666,7 @@
   "Branding": "ブランディング",
   "DataBackup": "データのバックアップ",
   "AutoBackup": "自動バックアップ",
-  "RestoreBackup": "データ復元"
+  "RestoreBackup": "データ復元",
+  "DownloadCopy": "コピーを保存",
+  "SuccessfullySaveSettingsMessage": "設定の更新が完了しました。"
 }

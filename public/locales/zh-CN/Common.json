@@ -667,5 +667,7 @@
   "Branding": "品牌",
   "DataBackup": "数据备份",
   "AutoBackup": "自动备份",
-  "RestoreBackup": "数据恢复"
+  "RestoreBackup": "数据恢复",
+  "DownloadCopy": "下载副本",
+  "SuccessfullySaveSettingsMessage": "设置已成功更新"
 }

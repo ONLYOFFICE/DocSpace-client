@@ -665,5 +665,7 @@
   "Branding": "Blagovna znamka",
   "DataBackup": "Varnostno kopiranje podatkov",
   "AutoBackup": "Samodejno varnostno kopiranje",
-  "RestoreBackup": "Obnovitev podatkov"
+  "RestoreBackup": "Obnovitev podatkov",
+  "DownloadCopy": "Prenesi kopijo",
+  "SuccessfullySaveSettingsMessage": "Nastavitve so bile uspešno posodobljene"
 }

@@ -684,5 +684,7 @@
   "Branding": "Branding",
   "DataBackup": "Data backup",
   "AutoBackup": "Automatic backup",
-  "RestoreBackup": "Restore"
+  "RestoreBackup": "Restore",
+  "DownloadCopy": "Download copy",
+  "SuccessfullySaveSettingsMessage": "Settings have been successfully updated"
 }

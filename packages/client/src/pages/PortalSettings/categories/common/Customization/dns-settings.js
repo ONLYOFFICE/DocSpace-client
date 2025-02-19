@@ -157,7 +157,7 @@ const DNSSettingsComponent = (props) => {
       }, [200]);
 
       await saveDNSSettings();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       setIsError(true);
       toastr.error(e);

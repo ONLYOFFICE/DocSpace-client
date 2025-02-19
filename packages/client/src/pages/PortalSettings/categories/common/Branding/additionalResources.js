@@ -77,7 +77,7 @@ const AdditionalResourcesComponent = (props) => {
         settings.helpCenterEnabled = helpEnabled;
         await setAdditionalResources(settings);
         await getAdditionalResources();
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
       } finally {
@@ -92,7 +92,7 @@ const AdditionalResourcesComponent = (props) => {
     try {
       await restoreAdditionalResources();
       await getAdditionalResources();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     } finally {

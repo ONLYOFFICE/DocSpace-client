@@ -449,5 +449,7 @@
   "Branding": "ຍີ່ຫໍ້",
   "DataBackup": "ສຳຮອງຂໍ້ມູນ",
   "AutoBackup": "ອັດຕະໂນມັດ ສໍາຮອງຂໍ້ມູນ",
-  "RestoreBackup": "ຂໍ້ມູນ ຟື້ນຟູ"
+  "RestoreBackup": "ຂໍ້ມູນ ຟື້ນຟູ",
+  "DownloadCopy": "ດາວໂຫລດ ໄດ້ ສຳເນົາ",
+  "SuccessfullySaveSettingsMessage": "ການຕັ້ງຄ່າໄດ້ຖືກອັບເດດສຳເລັດແລ້ວ"
 }

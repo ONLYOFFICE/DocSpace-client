@@ -519,5 +519,7 @@
   "Branding": "සන්නමනය",
   "DataBackup": "දත්ත උපස්ථය",
   "AutoBackup": "ස්වයංක්‍රීය උපස්ථය",
-  "RestoreBackup": "ප්‍රත්‍යර්පණය"
+  "RestoreBackup": "ප්‍රත්‍යර්පණය",
+  "DownloadCopy": "පිටපතක් බාගන්න",
+  "SuccessfullySaveSettingsMessage": "සැකසුම් සාර්ථකව යාවත්කාල කෙරිණි"
 }

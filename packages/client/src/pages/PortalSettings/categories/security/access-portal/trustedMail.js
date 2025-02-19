@@ -195,7 +195,7 @@ const TrustedMail = (props) => {
         domains,
       });
       setShowReminder(false);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     }

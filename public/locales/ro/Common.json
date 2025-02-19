@@ -666,5 +666,7 @@
   "Branding": "Branding",
   "DataBackup": "Copiere de rezervă a datelor",
   "AutoBackup": "Copiere de rezervă automată",
-  "RestoreBackup": "Restaurarea datelor"
+  "RestoreBackup": "Restaurarea datelor",
+  "DownloadCopy": "Descărcare copie",
+  "SuccessfullySaveSettingsMessage": "Setările au fost actualizate cu succes"
 }

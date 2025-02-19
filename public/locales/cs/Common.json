@@ -665,5 +665,7 @@
   "Branding": "Branding",
   "DataBackup": "Zálohování dat",
   "AutoBackup": "Automatická záloha",
-  "RestoreBackup": "Obnova dat"
+  "RestoreBackup": "Obnova dat",
+  "DownloadCopy": "Stáhnout kopii",
+  "SuccessfullySaveSettingsMessage": "Nastavení bylo úspěšně aktualizováno"
 }

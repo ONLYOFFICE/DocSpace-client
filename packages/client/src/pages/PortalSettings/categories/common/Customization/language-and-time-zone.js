@@ -412,7 +412,9 @@ const LanguageAndTimeZoneComponent = (props) => {
           });
         window.timezone = selectedTimezone.key;
       })
-      .then(() => toastr.success(translate("SuccessfullySaveSettingsMessage")))
+      .then(() =>
+        toastr.success(translate("Common:SuccessfullySaveSettingsMessage")),
+      )
       .then(
         () =>
           !user.cultureName &&

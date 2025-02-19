@@ -144,7 +144,7 @@ const AdminMessage = (props) => {
   const onSaveClick = () => {
     const turnOn = type === "enable";
     setMessageSettings(turnOn);
-    toastr.success(t("SuccessfullySaveSettingsMessage"));
+    toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     saveToSessionStorage("currentAdminMessageSettings", type);
     saveToSessionStorage("defaultAdminMessageSettings", type);
     setShowReminder(false);

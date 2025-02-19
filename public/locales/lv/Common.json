@@ -665,5 +665,7 @@
   "Branding": "Zīmolrade",
   "DataBackup": "Datu dublēšana",
   "AutoBackup": "Automātiskā rezerves kopēšana",
-  "RestoreBackup": "Datu atjaunošana"
+  "RestoreBackup": "Datu atjaunošana",
+  "DownloadCopy": "Lejupielādēt kopiju",
+  "SuccessfullySaveSettingsMessage": "Iestatījumi ir veiksmīgi atjaunināti"
 }

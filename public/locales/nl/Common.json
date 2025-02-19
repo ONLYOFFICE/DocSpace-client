@@ -665,5 +665,7 @@
   "Branding": "Branding",
   "DataBackup": "Data backup",
   "AutoBackup": "Automatische back-up",
-  "RestoreBackup": "Dataherstel"
+  "RestoreBackup": "Dataherstel",
+  "DownloadCopy": "Download de kopie",
+  "SuccessfullySaveSettingsMessage": "De instellingen zijn met succes bijgewerkt"
 }

@@ -666,5 +666,7 @@
   "Branding": "Բրենդինգ",
   "DataBackup": "Տվյալների կրկնօրինակում",
   "AutoBackup": "Ինքնաշխատ պահուստավորում",
-  "RestoreBackup": "Տվյալների վերականգնում"
+  "RestoreBackup": "Տվյալների վերականգնում",
+  "DownloadCopy": "Ներբեռնել պատճենը",
+  "SuccessfullySaveSettingsMessage": "Կարգավորումները հաջողությամբ թարմացվել են"
 }

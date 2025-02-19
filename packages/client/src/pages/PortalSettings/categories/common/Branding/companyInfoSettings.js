@@ -78,7 +78,7 @@ const CompanyInfoSettingsComponent = (props) => {
       try {
         await setCompanyInfoSettings(address, companyName, email, phone, site);
         await getCompanyInfoSettings();
-        toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+        toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       } catch (error) {
         toastr.error(error);
       } finally {
@@ -94,7 +94,7 @@ const CompanyInfoSettingsComponent = (props) => {
     try {
       await restoreCompanyInfoSettings();
       await getCompanyInfoSettings();
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error);
     } finally {

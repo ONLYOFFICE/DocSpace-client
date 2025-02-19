@@ -666,5 +666,7 @@
   "Branding": "Brendiranje",
   "DataBackup": "Rezervna kopija podataka",
   "AutoBackup": "Automatka rezervna kopija",
-  "RestoreBackup": "Povrati"
+  "RestoreBackup": "Povrati",
+  "DownloadCopy": "Preuzmi kopiju",
+  "SuccessfullySaveSettingsMessage": "Podešavanja su uspešno ažurirana"
 }

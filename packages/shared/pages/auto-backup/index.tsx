@@ -269,7 +269,7 @@ const AutomaticBackup = ({
       deleteBackupSchedule()
         ?.then(() => {
           deleteSchedule(weekdaysLabelArray);
-          toastr.success(t("SuccessfullySaveSettingsMessage"));
+          toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
         })
         .catch((error) => {
           setErrorInformation(error, t);
@@ -309,7 +309,7 @@ const AutomaticBackup = ({
       if (storageInfo) setThirdPartyStorage(storageInfo);
 
       setDefaultOptions(t, periodsObject, weekdaysLabelArray);
-      toastr.success(t("SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       toastr.error(e as Error);
       setErrorInformation(e, t);

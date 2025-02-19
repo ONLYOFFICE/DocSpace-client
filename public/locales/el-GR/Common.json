@@ -665,5 +665,7 @@
   "Branding": "Επωνυμία",
   "DataBackup": "Δημιουργία αντιγράφων ασφαλείας δεδομένων",
   "AutoBackup": "Αυτόματα αντίγραφα ασφαλείας",
-  "RestoreBackup": "Επαναφορά Δεδομένων"
+  "RestoreBackup": "Επαναφορά Δεδομένων",
+  "DownloadCopy": "Κατεβάστε το αντίγραφο",
+  "SuccessfullySaveSettingsMessage": "Οι ρυθμίσεις ενημερώθηκαν με επιτυχία"
 }

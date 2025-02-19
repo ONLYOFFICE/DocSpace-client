@@ -361,11 +361,7 @@ const withHotkeys = (Component) => {
             setDeleteDialogVisible(true);
           } else {
             const translations = {
-              deleteOperation: t("Translations:DeleteOperation"),
               deleteFromTrash: t("Translations:DeleteFromTrash"),
-              deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-              FileRemoved: t("Files:FileRemoved"),
-              FolderRemoved: t("Files:FolderRemoved"),
             };
             deleteAction(translations).catch((err) => toastr.error(err));
           }

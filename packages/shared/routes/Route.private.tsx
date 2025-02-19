@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable react/prop-types */
+import React from "react";
+import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 
-import { Navigate, useLocation } from "react-router-dom";
-
+import FilesFilter from "@docspace/shared/api/files/filter";
 import AppLoader from "../components/app-loader";
 
 import { TenantStatus } from "../enums";
@@ -51,6 +52,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     wizardCompleted,
 
     user,
+    isLoadedUser,
     children,
     restricted,
     tenantStatus,
@@ -60,11 +62,46 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     baseDomain,
     limitedAccessSpace,
     displayAbout,
+
+    validatePublicRoomKey,
+    publicRoomKey,
+    roomId,
+    isLoadedPublicRoom,
+    isLoadingPublicRoom,
   } = props;
 
   const location = useLocation();
+  const [searchParams] = useSearchParams();
 
   const renderComponent = () => {
+    const key = searchParams.get("key");
+
+    if (isLoadedUser && !user) {
+      const filter = FilesFilter.getDefault();
+      const subFolder = new URLSearchParams(window.location.search).get(
+        "folder",
+      );
+      const path = "/rooms/share";
+
+      filter.folder = subFolder || roomId || "";
+      if (key) {
+        filter.key = key;
+      }
+
+      window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`);
+    }
+
+    if (
+      key &&
+      (!publicRoomKey || publicRoomKey !== key) &&
+      location.pathname.includes("/rooms/shared") &&
+      !isLoadedPublicRoom &&
+      !isLoadingPublicRoom &&
+      validatePublicRoomKey
+    ) {
+      validatePublicRoomKey(key);
+    }
+
     if (!user && isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(

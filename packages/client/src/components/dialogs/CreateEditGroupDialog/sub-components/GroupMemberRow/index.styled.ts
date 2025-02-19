@@ -47,6 +47,14 @@ export const GroupMemberRow = styled.div<{}>`
     overflow: hidden;
     margin-inline-end: 16px;
 
+    .info-box {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+
     .name {
       color: ${({ theme }) => theme.sideBarRow.titleColor};
       font-size: 14px;

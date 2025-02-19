@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,54 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { BoxProps } from "./Box.types";
-import { StyledBox } from "./Box.styled";
+import styled from "styled-components";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const Box = (props: BoxProps) => {
-  const {
-    as,
-    displayProp = "block",
-    role,
-    "aria-label": ariaLabel,
-    "aria-expanded": ariaExpanded,
-    "aria-hidden": ariaHidden,
-    "aria-controls": ariaControls,
-    "aria-describedby": ariaDescribedby,
-    "aria-labelledby": ariaLabelledby,
-    "aria-modal": ariaModal,
-    tabIndex,
-    ...restProps
-  } = props;
+const StyledLoader = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
 
-  const dataAttributes = Object.keys(restProps)
-    .filter((key) => key.startsWith("data-"))
-    .reduce(
-      (obj, key) => ({
-        ...obj,
-        [key]: restProps[key as keyof typeof restProps],
-      }),
-      {},
-    );
+  .header_loader {
+    margin-bottom: 16px;
+  }
 
+  .description_loader {
+    max-width: 700px;
+    margin-bottom: 5px;
+  }
+
+  .text-input_loader {
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+`;
+
+const LoaderBrandName = () => {
   return (
-    <StyledBox
-      {...restProps}
-      {...dataAttributes}
-      displayProp={displayProp}
-      as={as || "div"}
-      data-testid="box"
-      role={role}
-      aria-label={ariaLabel}
-      aria-expanded={ariaExpanded}
-      aria-hidden={ariaHidden}
-      aria-controls={ariaControls}
-      aria-describedby={ariaDescribedby}
-      aria-labelledby={ariaLabelledby}
-      aria-modal={ariaModal}
-      tabIndex={tabIndex}
-    />
+    <StyledLoader>
+      <RectangleSkeleton height="22px" width="98px" className="header_loader" />
+      <RectangleSkeleton height="16px" className="description_loader" />
+      <RectangleSkeleton
+        height="16px"
+        width="70px"
+        className="description_loader"
+      />
+      <RectangleSkeleton
+        height="32px"
+        width="350px"
+        className="text-input_loader"
+      />
+      <RectangleSkeleton
+        height="32px"
+        width="192px"
+        className="buttons_loader"
+      />
+    </StyledLoader>
   );
 };
 
-export { Box };
+export default LoaderBrandName;

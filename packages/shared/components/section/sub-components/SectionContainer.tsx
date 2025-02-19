@@ -43,7 +43,6 @@ const SectionContainer = React.forwardRef<
       children,
       currentDeviceType,
       isInfoPanelVisible,
-      showTwoProgress,
       isSectionHeaderAvailable,
       ...props
     },
@@ -56,7 +55,6 @@ const SectionContainer = React.forwardRef<
         className={classNames(styles.sectionContainer, {
           [styles.withBodyScroll]: withBodyScroll,
           [styles.infoPanelVisible]: isInfoPanelVisible,
-          [styles.showTwoProgress]: showTwoProgress,
           [styles.withoutSectionHeader]: !isSectionHeaderAvailable,
         })}
         {...props}

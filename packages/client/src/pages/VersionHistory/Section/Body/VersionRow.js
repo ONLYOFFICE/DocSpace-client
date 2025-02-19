@@ -27,11 +27,10 @@
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import RestoreAuthReactSvgUrl from "PUBLIC_DIR/images/restore.auth.react.svg?url";
 import { useNavigate } from "react-router-dom";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import { useState, useEffect } from "react";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
@@ -266,7 +265,7 @@ const VersionRow = (props) => {
       }
     >
       <div className={`version-row_${index}`} onContextMenu={onContextMenu}>
-        <Box displayProp="flex" className="row-header">
+        <div className="row-header">
           <VersionBadge
             theme={theme}
             className={`version_badge ${
@@ -285,11 +284,7 @@ const VersionRow = (props) => {
                 : ""
             }
           />
-          <Box
-            displayProp="flex"
-            flexDirection="column"
-            marginProp="-2px 0 0 0"
-          >
+          <div className="version-link-box">
             <Link
               onClick={onOpenFile}
               fontWeight={600}
@@ -321,7 +316,7 @@ const VersionRow = (props) => {
                 {title}
               </Link>
             )}
-          </Box>
+          </div>
 
           {/* <Text
             className="version_content-length"
@@ -331,8 +326,8 @@ const VersionRow = (props) => {
           >
             {info.contentLength}
           </Text> */}
-        </Box>
-        <Box className="version-comment-wrapper" displayProp="flex">
+        </div>
+        <div>
           <>
             {showEditPanel ? (
               <Textarea
@@ -352,13 +347,10 @@ const VersionRow = (props) => {
               {info.comment}
             </Text>
           </>
-        </Box>
+        </div>
         {showEditPanel ? (
-          <Box className="version_edit-comment" marginProp="8px 0 2px 70px">
-            <Box
-              className="version_edit-comment-button-primary"
-              displayProp="inline-block"
-            >
+          <div className="version_edit-comment">
+            <div className="version_edit-comment-button-primary">
               <Button
                 isDisabled={isSavingComment}
                 size="extraSmall"
@@ -367,11 +359,8 @@ const VersionRow = (props) => {
                 onClick={onSaveClick}
                 label={t("Common:SaveButton")}
               />
-            </Box>
-            <Box
-              className="version_edit-comment-button-second"
-              displayProp="inline-block"
-            >
+            </div>
+            <div className="version_edit-comment-button-second">
               <Button
                 isDisabled={isSavingComment}
                 size="extraSmall"
@@ -379,8 +368,8 @@ const VersionRow = (props) => {
                 onClick={onCancelClick}
                 label={t("Common:CancelButton")}
               />
-            </Box>
-          </Box>
+            </div>
+          </div>
         ) : null}
       </div>
     </StyledVersionRow>

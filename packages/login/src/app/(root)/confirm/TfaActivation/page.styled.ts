@@ -29,9 +29,9 @@
 import styled from "styled-components";
 
 import { mobile, tablet } from "@docspace/shared/utils";
-import { Box } from "@docspace/shared/components/box";
 
-export const StyledForm = styled(Box)`
+export const StyledForm = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex: 1fr 1fr;
   gap: 80px;
@@ -54,6 +54,9 @@ export const StyledForm = styled(Box)`
   }
 
   .app-code-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     width: 100%;
 
     @media ${tablet} {
@@ -78,6 +81,8 @@ export const StyledForm = styled(Box)`
   }
 
   .set-app-description {
+    box-sizing: border-box;
+    margin: 0 0 32px 0;
     width: 100%;
     max-width: 480px;
 
@@ -107,5 +112,10 @@ export const StyledForm = styled(Box)`
     @media ${mobile} {
       display: none;
     }
+  }
+
+  .app-code-input,
+  .app-code-continue-btn {
+    box-sizing: border-box;
   }
 `;

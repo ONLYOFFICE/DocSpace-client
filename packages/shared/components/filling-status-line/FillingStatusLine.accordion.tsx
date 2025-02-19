@@ -31,7 +31,6 @@ import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
 import { Text } from "../text";
-import { Box } from "../box";
 import { Avatar, AvatarRole, AvatarSize } from "../avatar";
 
 import { FillingStatusLineAccordionProps } from "./FillingStatusLine.types";
@@ -61,7 +60,7 @@ const FillingStatusAccordion = ({
   return (
     <div className={styles.accordionItem}>
       <div className={styles.accordionItemInfo} onClick={onClickHandler}>
-        <Box displayProp="flex" alignItems="center">
+        <div className={styles.accordionItemInfoBox}>
           <div
             className={classNames(styles.userAvatar, {
               [styles.isDone]: isDone,
@@ -75,11 +74,7 @@ const FillingStatusAccordion = ({
               userName={displayName}
             />
           </div>
-          <Box
-            displayProp="flex"
-            flexDirection="column"
-            marginProp="0 0 0 10px"
-          >
+          <div className={styles.accordionRoleBox}>
             <Text fontSize="14px" lineHeight="16px" fontWeight="bold">
               {displayName}
             </Text>
@@ -91,8 +86,8 @@ const FillingStatusAccordion = ({
             >
               {role}
             </Text>
-          </Box>
-        </Box>
+          </div>
+        </div>
         <ReactSVG
           src={ArrowReactSvgUrl}
           className={classNames(styles.arrowIcon, { [styles.isOpen]: isOpen })}

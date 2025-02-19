@@ -29,7 +29,6 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { Button } from "@docspace/shared/components/button";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
@@ -49,6 +48,21 @@ import {
 const StyledWrapper = styled.div`
   .icon-button {
     padding: 0 5px;
+  }
+
+  .certificates-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 40px 0 12px 0;
+  }
+
+  .certificates-buttons-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
   }
 `;
 
@@ -93,12 +107,7 @@ const Certificates = (props) => {
 
   return (
     <StyledWrapper>
-      <Box
-        alignItems="center"
-        displayProp="flex"
-        flexDirection="row"
-        marginProp="40px 0 12px 0"
-      >
+      <div className="certificates-box">
         <Text as="h2" fontSize="15px" fontWeight={600} noSelect>
           {prefix === "idp" ? t("idpCertificates") : t("spCertificates")}
         </Text>
@@ -118,11 +127,11 @@ const Certificates = (props) => {
               : "sp-certificates-tooltip icon-button"
           }
         />
-      </Box>
+      </div>
 
       {certificates.length > 0 ? <CertificatesTable prefix={prefix} /> : null}
 
-      <Box alignItems="center" displayProp="flex" flexDirection="row">
+      <div className="certificates-buttons-box">
         {prefix === "idp" ? (
           <>
             <Button
@@ -161,7 +170,7 @@ const Certificates = (props) => {
           }
           isAdditionalParameters
         />
-      </Box>
+      </div>
 
       {additionalParameters ? (
         <>

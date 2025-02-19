@@ -67,6 +67,7 @@ import {
   RoomLogoCoverDialog,
   GuestReleaseTipDialog,
   DeleteVersionDialog,
+  CancelOperationDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -149,6 +150,7 @@ const Panels = (props) => {
     guestReleaseTipDialogVisible,
     closeEditIndexDialogVisible,
     deleteVersionDialogVisible,
+    operationCancelVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -363,6 +365,9 @@ const Panels = (props) => {
     deleteVersionDialogVisible && (
       <DeleteVersionDialog key="delete-version-dialog" />
     ),
+    operationCancelVisible && (
+      <CancelOperationDialog key="cancel-operation-dialog" />
+    ),
   ];
 };
 
@@ -434,6 +439,7 @@ export default inject(
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
+      operationCancelVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -533,6 +539,7 @@ export default inject(
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
       deleteVersionDialogVisible,
+      operationCancelVisible,
     };
   },
 )(observer(Panels));

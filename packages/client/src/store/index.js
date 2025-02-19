@@ -164,14 +164,20 @@ const filesStore = new FilesStore(
   indexingStore,
 );
 
+publicRoomStore.filesStore = filesStore;
+
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
   publicRoomStore,
+  selectedFolderStore,
 );
 
 const oformsStore = new OformsStore(settingsStore, infoPanelStore, userStore);
 
-const secondaryProgressDataStore = new SecondaryProgressDataStore();
+const secondaryProgressDataStore = new SecondaryProgressDataStore(
+  treeFoldersStore,
+  mediaViewerDataStore,
+);
 const primaryProgressDataStore = new PrimaryProgressDataStore();
 const versionHistoryStore = new VersionHistoryStore(filesStore, settingsStore);
 
@@ -239,6 +245,9 @@ const filesActionsStore = new FilesActionsStore(
   indexingStore,
   versionHistoryStore,
 );
+
+mediaViewerDataStore.filesActionsStore = filesActionsStore;
+secondaryProgressDataStore.filesActionsStore = filesActionsStore;
 
 const contextOptionsStore = new ContextOptionsStore(
   settingsStore,

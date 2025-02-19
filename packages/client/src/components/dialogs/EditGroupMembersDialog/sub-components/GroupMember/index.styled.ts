@@ -53,6 +53,13 @@ export const GroupMember = styled.div.attrs(injectDefaultTheme)<{
 
   .info {
     flex-direction: column;
+
+    .info-box {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
   }
 
   .name {

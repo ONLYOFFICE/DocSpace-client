@@ -113,6 +113,7 @@ const config = {
       SRC_DIR: path.resolve(__dirname, "./src"),
       PACKAGE_FILE: path.resolve(__dirname, "package.json"),
       COMMON_DIR: path.resolve(__dirname, "../common"),
+      "@docspace/shared": path.resolve(__dirname, "../shared"),
     },
   },
 

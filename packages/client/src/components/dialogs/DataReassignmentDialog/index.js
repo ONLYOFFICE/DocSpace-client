@@ -63,11 +63,7 @@ let timerId;
 
 const DataReassignmentDialog = ({
   visible,
-  user,
   setDataReassignmentDialogVisible,
-  dataReassignment,
-  dataReassignmentProgress,
-  dataReassignmentTerminate,
   currentColorScheme,
   currentUser,
   deleteProfile,
@@ -79,12 +75,20 @@ const DataReassignmentDialog = ({
   dataReassignmentUrl,
   needResetUserSelection,
   setSelected,
+  data,
 }) => {
+  const {
+    user,
+    getReassignmentProgress,
+    reassignUserData,
+    cancelReassignment,
+    showDeleteProfileCheckbox,
+    toType,
+  } = data;
+
   const [selectorVisible, setSelectorVisible] = useState(false);
-  const defaultSelectedUser = isDeletingUserWithReassignment
-    ? currentUser
-    : null;
-  const [selectedUser, setSelectedUser] = useState(defaultSelectedUser);
+  const defaultTargetUser = isDeletingUserWithReassignment ? currentUser : null;
+  const [targetUser, setTargetUser] = useState(defaultTargetUser);
   const [isDeleteProfile, setIsDeleteProfile] = useState(deleteProfile);
   const [showProgress, setShowProgress] = useState(false);
   const [isReassignCurrentUser, setIsReassignCurrentUser] = useState(false);
@@ -101,11 +105,11 @@ const DataReassignmentDialog = ({
   // };
 
   const checkReassignCurrentUser = () => {
-    setIsReassignCurrentUser(currentUser.id === selectedUser.id);
+    setIsReassignCurrentUser(currentUser.id === targetUser.id);
   };
 
   const checkProgress = () => {
-    dataReassignmentProgress(user.id)
+    getReassignmentProgress(user.id)
       .then((res) => {
         // If the task has already been interrupted and killed
         if (!res) return;
@@ -132,11 +136,16 @@ const DataReassignmentDialog = ({
       });
   };
 
+  const handleReassignUserData = (userId, targetUserId) => {
+    if (toType) return reassignUserData(toType, userId, targetUserId);
+    return reassignUserData(userId, targetUserId, isDeleteProfile);
+  };
+
   const onReassign = () => {
     checkReassignCurrentUser();
     setShowProgress(true);
 
-    dataReassignment(user.id, selectedUser.id, isDeleteProfile)
+    handleReassignUserData(user.id, targetUser.id)
       .then(() => checkProgress())
       .catch((error) => {
         toastr.error(error?.response?.data?.error?.message);
@@ -183,7 +192,7 @@ const DataReassignmentDialog = ({
 
   const onAccept = (item) => {
     setSelectorVisible(false);
-    setSelectedUser({ ...item[0] });
+    setTargetUser({ ...item[0] });
   };
 
   const filter = Filter.getDefault();
@@ -229,9 +238,11 @@ const DataReassignmentDialog = ({
   }
 
   const onTerminate = () => {
-    dataReassignmentTerminate(user.id)
-      .then(() => {
+    cancelReassignment(user.id)
+      .then((res) => {
         toastr.success(t("Common:ChangesSavedSuccessfully"));
+        setIsAbortTransfer(true);
+        if (res) setPercent(res.percentage);
       })
       .catch((error) => {
         toastr.error(error?.response?.data?.error?.message);
@@ -257,7 +268,7 @@ const DataReassignmentDialog = ({
             showProgress={showProgress}
             isReassignCurrentUser={isReassignCurrentUser}
             user={user}
-            selectedUser={selectedUser}
+            targetUser={targetUser}
             percent={percent}
             isAbortTransfer={isAbortTransfer}
             dataReassignmentUrl={dataReassignmentUrl}
@@ -273,20 +284,21 @@ const DataReassignmentDialog = ({
           showProgress={showProgress}
           isDeleteProfile={isDeleteProfile}
           onToggleDeleteProfile={onToggleDeleteProfile}
-          selectedUser={selectedUser}
+          targetUser={targetUser}
           onReassign={onReassign}
           percent={percent}
           isAbortTransfer={isAbortTransfer}
           onClose={onClose}
           onTerminate={onTerminate}
           onStartAgain={onStartAgain}
+          showDeleteProfileCheckbox={showDeleteProfileCheckbox}
         />
       </ModalDialog.Footer>
     </ModalDialog>
   );
 };
 
-export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
+export default inject(({ settingsStore, peopleStore, userStore }) => {
   const {
     setDataReassignmentDialogVisible,
     dataReassignmentDeleteProfile,
@@ -295,11 +307,6 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
     setIsDeletingUserWithReassignment,
   } = peopleStore.dialogStore;
   const { currentColorScheme, dataReassignmentUrl } = settingsStore;
-  const {
-    dataReassignment,
-    dataReassignmentProgress,
-    dataReassignmentTerminate,
-  } = setup;
 
   const { user: currentUser } = userStore;
 
@@ -309,10 +316,7 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
     setDataReassignmentDialogVisible,
     theme: settingsStore.theme,
     currentColorScheme,
-    dataReassignment,
     currentUser,
-    dataReassignmentProgress,
-    dataReassignmentTerminate,
     deleteProfile: dataReassignmentDeleteProfile,
     setDataReassignmentDeleteProfile,
     isDeletingUserWithReassignment,

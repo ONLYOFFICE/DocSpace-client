@@ -36,7 +36,7 @@ const Body = ({
   showProgress,
   isReassignCurrentUser,
   user,
-  selectedUser,
+  targetUser,
   percent,
   currentColorScheme,
   isAbortTransfer,
@@ -52,9 +52,7 @@ const Body = ({
         isReassignCurrentUser={isReassignCurrentUser}
         fromUser={user.displayName}
         toUser={
-          selectedUser.displayName
-            ? selectedUser.displayName
-            : selectedUser.label
+          targetUser.displayName ? targetUser.displayName : targetUser.label
         }
         noRooms={user.isCollaborator || user.isVisitor}
         percent={percent}
@@ -68,7 +66,7 @@ const Body = ({
       <AccountInfo user={user} />
       <NewOwner
         t={t}
-        selectedUser={selectedUser}
+        targetUser={targetUser}
         currentColorScheme={currentColorScheme}
         onTogglePeopleSelector={onTogglePeopleSelector}
       />

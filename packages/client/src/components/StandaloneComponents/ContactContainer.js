@@ -43,11 +43,8 @@ const ContactContainer = (props) => {
     forEnterprisesUrl,
     demoOrderUrl,
     salesEmail,
-    helpUrl,
+    feedbackAndSupportUrl,
   } = props;
-
-  const officialWebsiteUrl = forEnterprisesUrl;
-  const demonstrationUrl = demoOrderUrl;
 
   return (
     <>
@@ -69,7 +66,7 @@ const ContactContainer = (props) => {
                       target="_blank"
                       tag="a"
                       fontWeight="600"
-                      href={officialWebsiteUrl}
+                      href={forEnterprisesUrl}
                       color={
                         theme.client.settings.payment.contactContainer.linkColor
                       }
@@ -94,7 +91,7 @@ const ContactContainer = (props) => {
                   target="_blank"
                   tag="a"
                   fontWeight="600"
-                  href={demonstrationUrl}
+                  href={demoOrderUrl}
                   color={
                     theme.client.settings.payment.contactContainer.linkColor
                   }
@@ -130,29 +127,35 @@ const ContactContainer = (props) => {
             </Trans>
           </Text>
         </div>
-        <div className="payments_contact">
-          <Text
-            fontWeight={600}
-            color={theme.client.settings.payment.contactContainer.textColor}
-          >
-            <Trans
-              i18nKey="UpgradeToProBannerInformationSupport"
-              ns="PaymentsEnterprise"
-              t={t}
+        {feedbackAndSupportUrl ? (
+          <div className="payments_contact">
+            <Text
+              fontWeight={600}
+              color={theme.client.settings.payment.contactContainer.textColor}
             >
-              Get tech assistance
-              <Link
-                target="_blank"
-                tag="a"
-                fontWeight="600"
-                href={helpUrl}
-                color={theme.client.settings.payment.contactContainer.linkColor}
+              <Trans
+                i18nKey="UpgradeToProBannerInformationSupport"
+                ns="PaymentsEnterprise"
+                t={t}
               >
-                {{ helpUrl }}
-              </Link>
-            </Trans>
-          </Text>
-        </div>
+                Get tech assistance
+                <Link
+                  target="_blank"
+                  tag="a"
+                  fontWeight="600"
+                  href={feedbackAndSupportUrl}
+                  color={
+                    theme.client.settings.payment.contactContainer.linkColor
+                  }
+                >
+                  {{ helpUrl: feedbackAndSupportUrl }}
+                </Link>
+              </Trans>
+            </Text>
+          </div>
+        ) : (
+          <></>
+        )}
       </StyledContactComponent>
     </>
   );
@@ -161,10 +164,11 @@ const ContactContainer = (props) => {
 export default inject(
   ({ currentTariffStatusStore, settingsStore, paymentStore }) => {
     const { isCommunity } = currentTariffStatusStore;
-    const { helpUrl, salesEmail } = paymentStore;
-    const { theme, forEnterprisesUrl, demoOrderUrl } = settingsStore;
+    const { salesEmail } = paymentStore;
+    const { theme, forEnterprisesUrl, demoOrderUrl, feedbackAndSupportUrl } =
+      settingsStore;
     return {
-      helpUrl,
+      feedbackAndSupportUrl,
       salesEmail,
       theme,
       isCommunity,

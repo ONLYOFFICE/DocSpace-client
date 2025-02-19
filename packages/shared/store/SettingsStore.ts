@@ -403,10 +403,6 @@ class SettingsStore {
     return this.commonEntries?.paymentemail;
   }
 
-  get buyUrl() {
-    return this.siteEntries?.buyenterprise;
-  }
-
   get licenseAgreementsUrl() {
     return this.commonEntries?.license;
   }

@@ -38,12 +38,12 @@ import {
 import { getGuidPosition } from "./sub-components/Guid.utils";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
-const Guidance: React.FC<GuidanceProps> = ({
+const Guidance = ({
   viewAs,
   onClose,
   getRefElement,
   config,
-}) => {
+}: GuidanceProps) => {
   const [sectionWidth, setSectionWidth] = useState<number>(0);
   const [positions, setPositions] = useState<ClippedPosition[]>([]);
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);

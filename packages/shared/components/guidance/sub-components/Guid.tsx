@@ -134,7 +134,7 @@ const getModalPosition = (
   };
 };
 
-const Guid: React.FC<GuidProps> = ({
+const Guid = ({
   currentGuidance,
   positions,
   sectionWidth,
@@ -147,7 +147,7 @@ const Guid: React.FC<GuidProps> = ({
   viewAs,
   guidanceConfig,
   t,
-}) => {
+}: GuidProps) => {
   const theme = useTheme();
 
   const modalRef = useRef<HTMLDivElement>(null);

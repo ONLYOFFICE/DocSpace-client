@@ -384,18 +384,18 @@ const Panels = (props) => {
     operationCancelVisible && (
       <CancelOperationDialog key="cancel-operation-dialog" />
     ),
-    welcomeFormFillingTipsVisible && (
+    welcomeFormFillingTipsVisible ? (
       <FormFillingTipsDialog key="form-filling_tips_dialog" />
-    ),
+    ) : null,
 
-    formFillingTipsVisible && (
+    formFillingTipsVisible ? (
       <Guidance
         viewAs={viewAs}
         onClose={onCloseGuidance}
         getRefElement={getRefElement}
         config={config}
       />
-    ),
+    ) : null,
   ];
 };
 

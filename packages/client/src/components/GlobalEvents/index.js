@@ -458,12 +458,12 @@ const GlobalEvents = ({
     changeQuotaDialog.visible && (
       <ChangeQuotaEvent key={Events.CHANGE_QUOTA} {...changeQuotaDialog} />
     ),
-    createPDFFormFileProps.visible && !createDialogProps.visible && (
+    createPDFFormFileProps.visible && !createDialogProps.visible ? (
       <CreatedPDFFormDialog
         key="created-pdf-form-dialog"
         {...createPDFFormFileProps}
       />
-    ),
+    ) : null,
   ];
 };
 

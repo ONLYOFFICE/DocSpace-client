@@ -28,7 +28,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 // import { Context } from "@docspace/shared/utils";
 

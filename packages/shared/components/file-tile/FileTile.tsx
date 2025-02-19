@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,14 @@ import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "@docspace/shared/components/context-menu-button";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
+import {
+  ContextMenu,
+  ContextMenuRefType,
+} from "@docspace/shared/components/context-menu";
+import {
+  HeaderType,
+  ContextMenuModel,
+} from "@docspace/shared/components/context-menu/ContextMenu.types";
 import React, { useRef, useState } from "react";
 import { ReactSVG } from "react-svg";
 import { Link, LinkType } from "@docspace/shared/components/link";
@@ -40,10 +47,11 @@ import { FileTileProps } from "./FileTile.types";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 import { useTranslation } from "react-i18next";
+import { isMobile as isMobileUtils } from "@docspace/shared/utils";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
 
-const FileTile: React.FC<FileTileProps> = ({
+const FileTile = ({
   checked,
   children,
   contextButtonSpacerWidth,
@@ -62,16 +70,18 @@ const FileTile: React.FC<FileTileProps> = ({
   withCtrlSelect,
   withShiftSelect,
   tileContextClick,
+  getContextModel,
+  hideContextMenu,
   ...rest
-}) => {
+}: FileTileProps) => {
   const childrenArray = React.Children.toArray(children);
   const [FilesTileContent, badges] = childrenArray;
 
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Translations"]);
 
   const [errorLoadSrc, setErrorLoadSrc] = useState(false);
 
-  const cm = useRef(null);
+  const cm = useRef<ContextMenuRefType>(null);
   const tile = useRef(null);
   const checkboxContainerRef = useRef(null);
 
@@ -85,34 +95,28 @@ const FileTile: React.FC<FileTileProps> = ({
   const contextMenuDirection = isRTL ? "left" : "right";
 
   const firstChild = childrenArray[0];
-  const contextMenuHeader =
+  const contextMenuHeader: HeaderType | undefined =
     React.isValidElement(firstChild) && firstChild.props?.item
       ? {
-          icon: firstChild.props.item.icon,
           title: firstChild.props.item.title,
+          icon: firstChild.props.item.icon,
+          original: firstChild.props.item.logo?.original,
+          large: firstChild.props.item.logo?.large,
+          medium: firstChild.props.item.logo?.medium,
+          small: firstChild.props.item.logo?.small,
           color: firstChild.props.item.logo?.color,
           cover: firstChild.props.item.logo?.cover,
-          logo: firstChild.props.item.logo?.medium,
         }
-      : {};
+      : undefined;
 
   const getOptions = () => {
     tileContextClick && tileContextClick();
     return contextOptions;
   };
 
-  const hideContextMenu = () => {
-    cm.current?.hide();
-  };
-
   const onContextMenu = (e: React.MouseEvent) => {
-    e.preventDefault();
     e.stopPropagation();
-    cm.current?.show(e);
-  };
-
-  const getContextModel = () => {
-    return contextOptions || [];
+    getContextModel && cm.current?.show(e);
   };
 
   const onError = () => {
@@ -138,7 +142,7 @@ const FileTile: React.FC<FileTileProps> = ({
         ) : (
           <ReactSVG
             className={styles.temporaryIcon}
-            src={icon}
+            src={icon ?? ""}
             loading={svgLoader}
           />
         )}
@@ -150,13 +154,13 @@ const FileTile: React.FC<FileTileProps> = ({
 
   const onFileClick = (e: React.MouseEvent) => {
     if (e.ctrlKey || e.metaKey) {
-      withCtrlSelect?.(item);
+      withCtrlSelect && withCtrlSelect(item);
       e.preventDefault();
       return;
     }
 
     if (e.shiftKey) {
-      withShiftSelect(item);
+      withShiftSelect && withShiftSelect(item);
       e.preventDefault();
       return;
     }
@@ -210,8 +214,6 @@ const FileTile: React.FC<FileTileProps> = ({
       ref={tile}
       className={fileTileClassNames}
       onClick={onFileClick}
-      className={fileTileClassNames}
-      style={{ borderLeft: sideColor ? `4px solid ${sideColor}` : "none" }}
     >
       <div className={styles.fileTileTop}>{icon}</div>
 
@@ -236,8 +238,8 @@ const FileTile: React.FC<FileTileProps> = ({
           {renderContext ? (
             <ContextMenuButton
               isFill
-              className="expandButton"
-              directionX={contextMenuDirection}
+              className={classNames(styles.expandButton, "expandButton")}
+              directionX="left"
               getData={getOptions}
               displayType={ContextMenuButtonDisplayType.toggle}
               onClick={(e) => {
@@ -250,11 +252,12 @@ const FileTile: React.FC<FileTileProps> = ({
             <div className="expandButton" />
           )}
           <ContextMenu
+            model={contextOptions}
             onHide={hideContextMenu}
             getContextModel={getContextModel}
             ref={cm}
             header={contextMenuHeader}
-            withBackdrop
+            withBackdrop={isMobileUtils()}
           />
         </div>
       </div>

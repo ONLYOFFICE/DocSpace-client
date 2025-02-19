@@ -62,8 +62,8 @@ const MobileView = ({
   deleteRefMap,
 }) => {
   const [isOpenButton, setIsOpenButton] = React.useState(false);
-
   const mainButtonRef = React.useRef(null);
+
   const openButtonToggler = React.useCallback(() => {
     setIsOpenButton((prevState) => !prevState);
   }, []);
@@ -73,19 +73,20 @@ const MobileView = ({
   }, [setUploadPanelVisible]);
 
   React.useEffect(() => {
-    if (mainButtonRef?.current) {
-      setRefMap(GuidanceRefKey.Uploading, mainButtonRef);
-      deleteRefMap(GuidanceRefKey.MainButton);
+    const buttonElement = mainButtonRef.current?.getButtonElement();
+    if (buttonElement) {
+      setRefMap(GuidanceRefKey.Uploading, buttonElement);
     }
 
     return () => {
       deleteRefMap(GuidanceRefKey.Uploading);
     };
-  }, [mainButtonRef.current]);
+  }, [setRefMap, deleteRefMap]);
+
   return (
     mainButtonMobileVisible && (
       <StyledMainButtonMobile
-        mainButtonRef={mainButtonRef}
+        ref={mainButtonRef}
         actionOptions={actionOptions}
         isOpenButton={isOpenButton}
         onUploadClick={openButtonToggler}

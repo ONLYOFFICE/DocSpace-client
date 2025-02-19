@@ -152,3 +152,10 @@ export type SubmenuItemProps = {
   /** If true, submenu is open by default */
   openByDefault: boolean;
 };
+
+export interface MainButtonMobileRef {
+  /** Checks if the given target element is contained within the main button component */
+  contains: (target: HTMLElement) => boolean;
+  /** Returns the ref object pointing to the main button DOM element */
+  getButtonElement: () => React.MutableRefObject<HTMLDivElement | null>;
+}

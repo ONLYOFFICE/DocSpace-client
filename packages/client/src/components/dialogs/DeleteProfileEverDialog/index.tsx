@@ -65,6 +65,9 @@ export type DeleteProfileEvenerDialogComponentsProps = {
 
   deleteWithoutReassign: boolean;
   onlyOneUser: boolean;
+  dataReassignment?: boolean;
+  dataReassignmentProgress?: boolean;
+  dataReassignmentTerminate?: boolean;
 };
 
 const DeleteProfileEverDialogComponent = ({
@@ -87,6 +90,9 @@ const DeleteProfileEverDialogComponent = ({
 
   deleteWithoutReassign,
   onlyOneUser,
+  dataReassignment,
+  dataReassignmentProgress,
+  dataReassignmentTerminate,
 }: DeleteProfileEvenerDialogComponentsProps) => {
   const { t } = useTranslation([
     "DeleteProfileEverDialog",
@@ -192,7 +198,12 @@ const DeleteProfileEverDialogComponent = ({
       return;
     }
 
-    setDialogData(usersToDelete[0]);
+    setDialogData({
+      user: usersToDelete[0],
+      reassignUserData: dataReassignment,
+      getReassignmentProgress: dataReassignmentProgress,
+      cancelReassignment: dataReassignmentTerminate,
+    });
 
     setIsDeletingUserWithReassignment(true);
     setDataReassignmentDialogVisible(true);
@@ -215,7 +226,12 @@ const DeleteProfileEverDialogComponent = ({
   ]);
 
   const onClickReassignData = () => {
-    setDialogData(usersToDelete[0]);
+    setDialogData({
+      user: usersToDelete[0],
+      reassignUserData: dataReassignment,
+      getReassignmentProgress: dataReassignmentProgress,
+      cancelReassignment: dataReassignmentTerminate,
+    });
 
     setDataReassignmentDialogVisible(true);
     setDataReassignmentDeleteProfile(true);
@@ -293,7 +309,10 @@ const DeleteProfileEverDialogComponent = ({
 };
 
 export default inject(
-  ({ peopleStore }: TStore, { users }: { users: UsersStore["selection"] }) => {
+  (
+    { peopleStore, setup }: TStore,
+    { users }: { users: UsersStore["selection"] },
+  ) => {
     const { dialogStore, usersStore, groupsStore } = peopleStore;
 
     const { updateCurrentGroup } = groupsStore!;
@@ -315,6 +334,12 @@ export default inject(
       setIsDeletingUserWithReassignment,
       setDialogData,
     } = dialogStore!;
+
+    const {
+      dataReassignment,
+      dataReassignmentProgress,
+      dataReassignmentTerminate,
+    } = setup;
 
     const usersToDelete = users.length ? users : selection;
 
@@ -342,6 +367,9 @@ export default inject(
       userIds,
       usersToDelete,
       contactsTab,
+      dataReassignment,
+      dataReassignmentProgress,
+      dataReassignmentTerminate,
     };
   },
 )(observer(DeleteProfileEverDialogComponent));

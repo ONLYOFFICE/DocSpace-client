@@ -354,6 +354,18 @@ const PureHome = (props) => {
   sectionProps.needErrorChecking = needErrorChecking;
   sectionProps.mainButtonVisible = mainButtonVisible;
 
+  const hasVisibleContent =
+    !isEmptyPage ||
+    welcomeFormFillingTipsVisible ||
+    formFillingTipsVisible ||
+    showFilterLoader;
+
+  const isValidMainContent = hasVisibleContent && !isErrorRoomNotAvailable;
+  const isValidContactsContent = !isContactsEmptyView && isContactsPage;
+
+  const shouldRenderSectionFilter =
+    (isValidMainContent || isValidContactsContent) && !isSettingsPage;
+
   return (
     <>
       {isSettingsPage ? null : isContactsPage ? (
@@ -385,13 +397,7 @@ const PureHome = (props) => {
           </Section.SectionWarning>
         ) : null}
 
-        {(((!isEmptyPage ||
-          welcomeFormFillingTipsVisible ||
-          formFillingTipsVisible ||
-          showFilterLoader) &&
-          !isErrorRoomNotAvailable) ||
-          (!isContactsEmptyView && isContactsPage)) &&
-        !isSettingsPage ? (
+        {shouldRenderSectionFilter ? (
           <Section.SectionFilter>
             {isFrame ? (
               showFilter && <SectionFilterContent />

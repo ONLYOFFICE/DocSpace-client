@@ -33,8 +33,9 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 import { RowContainer } from "@docspace/shared/components/rows";
 
+import withContainer from "../../../../../HOCs/withContainer";
+
 import SimpleFilesRow from "./SimpleFilesRow";
-import { fakeFormFillingList } from "../formFillingTourData";
 
 const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
   .row-list-item:first-child {
@@ -60,7 +61,7 @@ const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
 `;
 
 const FilesRowContainer = ({
-  filesList,
+  list,
   viewAs,
   setViewAs,
   filterTotal,
@@ -85,7 +86,6 @@ const FilesRowContainer = ({
   });
 
   const filesListNode = useMemo(() => {
-    const list = isTutorialEnabled ? fakeFormFillingList : filesList;
     return list.map((item, index) => (
       <SimpleFilesRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
@@ -110,7 +110,7 @@ const FilesRowContainer = ({
       />
     ));
   }, [
-    filesList,
+    list,
     sectionWidth,
     isRooms,
     highlightFile.id,
@@ -122,7 +122,7 @@ const FilesRowContainer = ({
   return (
     <StyledRowContainer
       className="files-row-container"
-      filesLength={filesList.length}
+      filesLength={list.length}
       itemCount={filterTotal}
       fetchMoreFiles={fetchMoreFiles}
       hasMoreFiles={hasMoreFiles}
@@ -143,11 +143,9 @@ export default inject(
     treeFoldersStore,
     indexingStore,
     filesActionsStore,
-    dialogsStore,
     guidanceStore,
   }) => {
     const {
-      filesList,
       viewAs,
       setViewAs,
       filter,
@@ -163,16 +161,9 @@ export default inject(
     const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
 
-    const { formFillingTipsVisible, welcomeFormFillingTipsVisible } =
-      dialogsStore;
-
-    const isTutorialEnabled =
-      formFillingTipsVisible || welcomeFormFillingTipsVisible;
-
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     return {
-      filesList,
       viewAs,
       setViewAs,
       infoPanelVisible,
@@ -185,9 +176,8 @@ export default inject(
       currentDeviceType,
       isIndexEditingMode,
       changeIndex: filesActionsStore.changeIndex,
-      isTutorialEnabled,
       setRefMap,
       deleteRefMap,
     };
   },
-)(observer(FilesRowContainer));
+)(observer(withContainer(FilesRowContainer)));

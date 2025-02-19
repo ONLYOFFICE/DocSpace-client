@@ -33,7 +33,6 @@ import React, {
   useContext,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 
 import { Context } from "@docspace/shared/utils";
 
@@ -42,9 +41,9 @@ import { FileTileProvider } from "./FileTile.provider";
 import { elementResizeDetector } from "./FileTile.utils";
 
 import TileContainer from "./sub-components/TileContainer";
-import { fakeFormFillingList } from "../formFillingTourData";
+import withContainer from "../../../../../HOCs/withContainer";
 
-const FilesTileContainer = ({ filesList, isTutorialEnabled }) => {
+const FilesTileContainer = ({ list, isTutorialEnabled }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
@@ -107,7 +106,6 @@ const FilesTileContainer = ({ filesList, isTutorialEnabled }) => {
   }, []);
 
   const filesListNode = useMemo(() => {
-    const list = isTutorialEnabled ? fakeFormFillingList : filesList;
     return list.map((item, index) => {
       return index % 11 == 0 ? (
         <FileTile
@@ -131,7 +129,7 @@ const FilesTileContainer = ({ filesList, isTutorialEnabled }) => {
         />
       );
     });
-  }, [filesList, onSetTileRef, sectionWidth, isTutorialEnabled]);
+  }, [list, onSetTileRef, sectionWidth, isTutorialEnabled]);
 
   return (
     <FileTileProvider columnCount={columnCount} thumbSize={thumbSize}>
@@ -148,16 +146,4 @@ const FilesTileContainer = ({ filesList, isTutorialEnabled }) => {
   );
 };
 
-export default inject(({ filesStore, dialogsStore }) => {
-  const { filesList } = filesStore;
-  const { formFillingTipsVisible, welcomeFormFillingTipsVisible } =
-    dialogsStore;
-
-  const isTutorialEnabled =
-    formFillingTipsVisible || welcomeFormFillingTipsVisible;
-
-  return {
-    filesList,
-    isTutorialEnabled,
-  };
-})(observer(FilesTileContainer));
+export default withContainer(FilesTileContainer);

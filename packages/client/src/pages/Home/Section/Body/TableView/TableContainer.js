@@ -43,7 +43,7 @@ import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-import { fakeFormFillingList } from "../formFillingTourData";
+import withContainer from "../../../../../HOCs/withContainer";
 
 const fileNameCss = css`
   margin-inline-start: -24px;
@@ -128,7 +128,7 @@ const elementResizeDetector = elementResizeDetectorMaker({
 });
 
 const Table = ({
-  filesList,
+  list,
   viewAs,
   setViewAs,
   setFirsElemChecked,
@@ -206,7 +206,6 @@ const Table = ({
   }, [isRooms]);
 
   const filesListNode = useMemo(() => {
-    const list = isTutorialEnabled ? fakeFormFillingList : filesList;
     return list.map((item, index) => (
       <TableRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
@@ -238,7 +237,7 @@ const Table = ({
       />
     ));
   }, [
-    filesList,
+    list,
     setFirsElemChecked,
     setHeaderBorder,
     theme,
@@ -270,13 +269,13 @@ const Table = ({
         location={location}
         isRooms={isRooms}
         isIndexing={isIndexing}
-        filesList={filesList}
+        filesList={list}
       />
 
       <TableBody
         fetchMoreFiles={fetchMoreFiles}
         columnStorageName={columnStorageName}
-        filesLength={filesList.length}
+        filesLength={list.length}
         hasMoreFiles={hasMoreFiles}
         itemCount={filterTotal}
         useReactWindow
@@ -303,7 +302,6 @@ export default inject(
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
-    dialogsStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -313,14 +311,7 @@ export default inject(
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
 
-    const { formFillingTipsVisible, welcomeFormFillingTipsVisible } =
-      dialogsStore;
-
-    const isTutorialEnabled =
-      formFillingTipsVisible || welcomeFormFillingTipsVisible;
-
     const {
-      filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
@@ -339,7 +330,6 @@ export default inject(
     const { setRefMap, deleteRefMap } = guidanceStore;
 
     return {
-      filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
@@ -360,9 +350,8 @@ export default inject(
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
-      isTutorialEnabled,
       setRefMap,
       deleteRefMap,
     };
   },
-)(observer(Table));
+)(observer(withContainer(Table)));

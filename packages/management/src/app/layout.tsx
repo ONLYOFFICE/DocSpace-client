@@ -43,6 +43,7 @@ import {
 import Providers from "@/providers";
 
 import { LayoutWrapper } from "@/components/layout";
+import { Scripts } from "@/components/Scripts";
 import { ManagementDialogs } from "@/dialogs";
 
 import "@/styles/globals.scss";
@@ -81,9 +82,21 @@ export default async function RootLayout({
   const { openSource } = portalTariff;
 
   return (
-    <html lang="en">
+    <html lang="en" translate="no">
       <head>
-        <link id="favicon" rel="shortcut icon" type="image/x-icon" />
+        <link rel="icon" type="image/x-icon" href="/logo.ashx?logotype=3" />
+        <link rel="mask-icon" href="/logo.ashx?logotype=3" />
+        <link
+          rel="apple-touch-icon"
+          sizes="32x32"
+          href="/logo.ashx?logotype=3"
+        />
+        <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+        />
+        <meta name="google" content="notranslate" />
       </head>
       <body
         className={`${systemTheme === ThemeKeys.DarkStr ? "dark" : "light"}`}
@@ -97,6 +110,7 @@ export default async function RootLayout({
             </LayoutWrapper>
           </Providers>
         </StyledComponentsRegistry>
+        <Scripts />
       </body>
     </html>
   );

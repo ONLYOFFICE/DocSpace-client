@@ -26,6 +26,8 @@
 
 "use client";
 
+import { useTranslation } from "react-i18next";
+
 import { StyledLayout } from "./layout.styled";
 import { Article } from "../article";
 import { Section } from "../section";
@@ -40,8 +42,10 @@ export const LayoutWrapper = ({
   portals: unknown;
   isCommunity: boolean;
 }) => {
+  const { i18n } = useTranslation();
+
   return (
-    <StyledLayout>
+    <StyledLayout style={{ direction: i18n.dir() }}>
       <Header />
       <Article isCommunity={isCommunity} />
       <Section portals={portals}>{children}</Section>

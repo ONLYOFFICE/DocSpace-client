@@ -31,6 +31,7 @@ import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import { ButtonKeys, EmployeeType } from "@docspace/shared/enums";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
+import { downgradeUserType } from "@docspace/shared/api/people";
 
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
@@ -50,6 +51,7 @@ type ChangeUserTypeEventProps = {
   dialogData: TChangeUserTypeDialogData;
 
   onClose: VoidFunction;
+  personalUserFolderTitle?: string;
 };
 
 const ChangeUserTypeEvent = ({
@@ -69,14 +71,8 @@ const ChangeUserTypeEvent = ({
 
   const [isRequestRunning, setIsRequestRunning] = useState(false);
 
-  const {
-    toType,
-    fromType,
-    userIDs,
-    userNames,
-    successCallback,
-    abortCallback,
-  } = dialogData;
+  const { toType, fromType, userIDs, successCallback, abortCallback } =
+    dialogData;
 
   const isGuestsDialog = fromType[0] === EmployeeType.Guest;
 
@@ -91,7 +87,12 @@ const ChangeUserTypeEvent = ({
 
     setIsRequestRunning(true);
 
-    updateUserType(toType, userIDs)
+    const updatePromise =
+      toType === EmployeeType.Guest || toType === EmployeeType.User
+        ? downgradeUserType(toType, userIDs[0])
+        : updateUserType(toType, userIDs);
+
+    updatePromise
       .then((users) => {
         toastr.success(
           isGuestsDialog
@@ -179,7 +180,6 @@ const ChangeUserTypeEvent = ({
       isGuestsDialog={isGuestsDialog}
       firstType={firstType ?? ""}
       secondType={secondType}
-      userNames={userNames}
       onClose={onCloseAction}
       onChangeUserType={onChangeUserType}
       isRequestRunning={isRequestRunning}

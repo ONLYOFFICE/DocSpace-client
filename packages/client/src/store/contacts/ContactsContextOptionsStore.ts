@@ -314,7 +314,7 @@ class ContactsConextOptionsStore {
 
     const { isOwner: isUserOwner, isAdmin: isUserAdmin } = this.userStore.user!;
 
-    const { isCollaborator, isRoomAdmin, isAdmin } =
+    const { isCollaborator, isRoomAdmin, isAdmin, isVisitor } =
       item ?? selectionUsersRights;
 
     const options = [];
@@ -356,6 +356,17 @@ class ContactsConextOptionsStore {
       isActive: item ? isCollaborator : userSelectionRole === EmployeeType.User,
     };
 
+    const guestOption = {
+      id: "menu_change-guest",
+      key: EmployeeType.Guest,
+      label: getUserTypeTranslation(EmployeeType.Guest, t),
+      title: getUserTypeTranslation(EmployeeType.Guest, t),
+      "data-action": EmployeeType.Guest,
+      action: EmployeeType.Guest,
+      onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
+      isActive: item ? isVisitor : userSelectionRole === EmployeeType.Guest,
+    };
+
     if (isUserAdmin) {
       if (isUserOwner) {
         options.push(adminOption);
@@ -363,6 +374,7 @@ class ContactsConextOptionsStore {
 
       options.push(roomAdminOption);
       options.push(userOption);
+      options.push(guestOption);
     }
 
     return options;

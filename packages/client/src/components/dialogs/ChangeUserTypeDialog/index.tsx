@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation, Trans } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -34,6 +35,16 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import styled from "styled-components";
+import { TUser } from "@docspace/shared/api/people/types";
+
+import DialogStore from "SRC_DIR/store/contacts/DialogStore";
+import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
+
+interface TStore {
+  peopleStore: {
+    dialogStore: DialogStore;
+  };
+}
 
 const StyledBody = styled.div`
   .note-text {
@@ -56,20 +67,16 @@ const StyledBody = styled.div`
 
 type ChangeUserTypeDialogProps = {
   visible: boolean;
-
   isGuestsDialog: boolean;
-
   isRequestRunning: boolean;
-
   firstType: string;
   secondType: string;
-
-  userNames: string[];
-
   onClose: VoidFunction;
   onChangeUserType: VoidFunction;
-
-  personalUserFolderTitle: string;
+  personalUserFolderTitle?: string;
+  setDataReassignmentDialogVisible: (visible: boolean) => void;
+  setDialogData: (data: any) => void;
+  dialogData: TChangeUserTypeDialogData;
 };
 
 const ChangeUserTypeDialog = ({
@@ -78,11 +85,22 @@ const ChangeUserTypeDialog = ({
   isRequestRunning,
   firstType,
   secondType,
-  userNames,
   onClose,
   onChangeUserType,
   personalUserFolderTitle,
+  setDataReassignmentDialogVisible,
+  setDialogData,
+  dialogData,
 }: ChangeUserTypeDialogProps) => {
+  const {
+    toType,
+    userNames,
+    user,
+    getReassignmentProgress,
+    reassignUserData,
+    cancelReassignment,
+  } = dialogData;
+
   const { t } = useTranslation(["ChangeUserTypeDialog", "People", "Common"]);
 
   const guestBody =
@@ -103,6 +121,19 @@ const ChangeUserTypeDialog = ({
         documentsSection: t("Common:Documents"),
       })
     );
+  const onClickReassignData = () => {
+    setDialogData({
+      user,
+      getReassignmentProgress,
+      reassignUserData,
+      cancelReassignment,
+      toType,
+    });
+
+    setDataReassignmentDialogVisible(true);
+
+    onClose();
+  };
 
   const needReassignData = true;
   const getBody = () => {
@@ -150,7 +181,7 @@ const ChangeUserTypeDialog = ({
             fontSize="13px"
             fontWeight={600}
             isHovered
-            // onClick={onClickReassignData}
+            onClick={onClickReassignData}
           >
             {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
           </Link>
@@ -193,4 +224,16 @@ const ChangeUserTypeDialog = ({
   );
 };
 
-export default ChangeUserTypeDialog;
+export default inject(({ peopleStore }: TStore) => {
+  const {
+    setDataReassignmentDialogVisible,
+    setDialogData,
+    data: dialogData,
+  } = peopleStore.dialogStore;
+
+  return {
+    setDataReassignmentDialogVisible,
+    setDialogData,
+    dialogData,
+  };
+})(observer(ChangeUserTypeDialog));

@@ -71,6 +71,11 @@ import TargetUserStore from "./TargetUserStore";
 import GroupsStore from "./GroupsStore";
 import ContactsHotkeysStore from "./ContactsHotkeysStore";
 import DialogStore from "./DialogStore";
+import {
+  downgradeUserType,
+  getReassignmentProgress,
+  terminateReassignment,
+} from "@docspace/shared/api/people";
 
 class UsersStore {
   filter = Filter.getDefault();
@@ -1214,6 +1219,13 @@ class UsersStore {
       userNames,
       successCallback,
       abortCallback,
+      ...(fromType[0] !== EmployeeType.Guest && {
+        user: users[0],
+        getReassignmentProgress,
+        reassignUserData: downgradeUserType,
+        cancelReassignment: terminateReassignment,
+        showDeleteProfileCheckbox: false,
+      }),
     } as TChangeUserTypeDialogData);
 
     window.dispatchEvent(event);

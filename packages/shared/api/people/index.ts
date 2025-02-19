@@ -422,6 +422,33 @@ export async function updateUserType(type: EmployeeType, userIds: string[]) {
   return res;
 }
 
+export async function downgradeUserType(
+  type: EmployeeType,
+  userId: number | string,
+  reassignUserId?: number | string,
+) {
+  return request({
+    method: "post",
+    url: "people/type",
+    data: { type, userId, reassignUserId },
+  });
+}
+
+export async function getReassignmentProgress(userId: number | string) {
+  return request({
+    method: "get",
+    url: `people/type/progress/${userId}`,
+  });
+}
+
+export async function terminateReassignment(userId: number | string) {
+  return request({
+    method: "put",
+    url: `people/type/terminate`,
+    data: { userId },
+  });
+}
+
 export function linkOAuth(serializedProfile) {
   return request({
     method: "put",

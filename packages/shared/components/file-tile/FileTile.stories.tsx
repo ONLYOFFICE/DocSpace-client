@@ -25,12 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-import { Meta, Story, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { FileTile } from "./FileTile";
 import { FileTileProps } from "./FileTile.types";
 import { ReactSVG } from "react-svg";
 import File32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
 import ImageReactSvgUrl from "PUBLIC_DIR/images/empty_screen_done.svg?url";
+import FileTileContent from "./sub-components/file-tile-content/FileTileContent";
+import { Link } from "../link";
 
 const element = (
   <ReactSVG
@@ -39,6 +41,23 @@ const element = (
     data-testid="empty-icon"
   />
 );
+
+const contextOptions = [
+  {
+    id: "option_copy-to",
+    key: "copy-to",
+    label: "Copy",
+    onClick: () => {},
+    disabled: false,
+  },
+  {
+    id: "option_move-to",
+    key: "move-to",
+    label: "Move to",
+    onClick: () => {},
+    disabled: false,
+  },
+];
 
 const meta = {
   title: "Components/FileTile",
@@ -71,9 +90,11 @@ const Template = (args: FileTileProps) => {
   };
 
   return (
-    <div style={{ maxWidth: "300px" }}>
+    <div style={{ maxWidth: "300px", margin: "30px" }}>
       <FileTile {...args} checked={checked} onSelect={onSelect}>
-        <div style={{ padding: "16px" }}>File Content</div>
+        <FileTileContent style={{ padding: "16px" }}>
+          <Link>File Content</Link>
+        </FileTileContent>
       </FileTile>
     </div>
   );
@@ -87,14 +108,19 @@ export const Default: Story = {
       title: "Document.docx",
       fileExst: ".docx",
       fileType: "docx",
+      contextOptions,
     },
     element,
+    contextOptions,
     temporaryIcon: ImageReactSvgUrl,
     onSelect: (item: any) => {},
     thumbnailClick: (e: React.MouseEvent) => {},
     setSelection: (checked: boolean) => {},
     withCtrlSelect: (item: any) => {},
     withShiftSelect: (item: any) => {},
+    getContextModel: () => {
+      return contextOptions;
+    },
   },
   parameters: {
     docs: {

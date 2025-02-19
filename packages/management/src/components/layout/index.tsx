@@ -26,12 +26,17 @@
 
 "use client";
 
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+
+import SocketHelper from "@docspace/shared/utils/socket";
 
 import { StyledLayout } from "./layout.styled";
 import { Article } from "../article";
 import { Section } from "../section";
 import { Header } from "../header";
+
+import useAppState from "@/hooks/useAppState";
 
 export const LayoutWrapper = ({
   children,
@@ -44,6 +49,16 @@ export const LayoutWrapper = ({
 }) => {
   const { i18n } = useTranslation();
 
+  const { settings } = useAppState();
+
+  const socketUrl = settings?.socketUrl;
+
+  useEffect(() => {
+    if (!socketUrl) return;
+
+    SocketHelper.connect(socketUrl, "");
+  }, [socketUrl]);
+
   return (
     <StyledLayout style={{ direction: i18n.dir() }}>
       <Header />
@@ -52,4 +67,3 @@ export const LayoutWrapper = ({
     </StyledLayout>
   );
 };
-

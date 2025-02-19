@@ -14,18 +14,13 @@ import SocketHelper, {
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { pathsWithoutTabs } from "@/lib/constants";
-import useAppState from "@/hooks/useAppState";
 
 const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
   const router = useRouter();
 
-  const { settings } = useAppState();
-
   const { currentDeviceType } = useDeviceType();
-
-  const socketUrl = settings?.socketUrl;
 
   const data = [
     {
@@ -49,12 +44,6 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
       content: children,
     },
   ];
-
-  useEffect(() => {
-    if (!socketUrl) return;
-
-    SocketHelper.connect(socketUrl, "");
-  }, [socketUrl]);
 
   useEffect(() => {
     const { socketSubscribers } = SocketHelper;

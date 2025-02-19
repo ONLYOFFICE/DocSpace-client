@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { observer, inject } from "mobx-react";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { TUser } from "@docspace/shared/api/people/types";
 import TutorialPreview from "PUBLIC_DIR/images/form_filling_tutorial.gif";

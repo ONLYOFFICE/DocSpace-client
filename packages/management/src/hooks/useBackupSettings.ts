@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import { Reducer, useCallback, useMemo, useReducer, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { AutoBackupPeriod } from "@docspace/shared/enums";
 import type { TOption } from "@docspace/shared/components/combobox";
@@ -48,6 +51,8 @@ type BackupSettingsProps = {
 export const useBackupSettings = ({
   backupScheduleResponse,
 }: BackupSettingsProps) => {
+  const { t } = useTranslation(["Common"]);
+
   const [errorsFieldsBeforeSafe, setErrorsFormFields] = useState<
     Record<string, boolean>
   >({});
@@ -60,11 +65,18 @@ export const useBackupSettings = ({
 
   const [defaults, setDefaults] = useReducer<
     Reducer<BackupDefaultStateType, Partial<BackupDefaultStateType>>
-  >((state, action) => ({ ...state, ...action }), initBackupDefaultState);
+  >((state, action) => ({ ...state, ...action }), {
+    ...initBackupDefaultState,
+
+    periodLabel: t("Common:EveryDay"),
+  });
 
   const [selected, setSelected] = useReducer<
     Reducer<BackupSelectedStateType, Partial<BackupSelectedStateType>>
-  >((state, action) => ({ ...state, ...action }), initBackupSelectedState);
+  >((state, action) => ({ ...state, ...action }), {
+    ...initBackupSelectedState,
+    periodLabel: t("Common:EveryDay"),
+  });
 
   const setDefaultOptions = useCallback(
     (t: TTranslation, periodObj: TOption[], weekdayArr: TOption[]) => {
@@ -195,7 +207,7 @@ export const useBackupSettings = ({
       day: "0",
       hour: "12:00",
       periodNumber: "0",
-      periodLabel: "Every day",
+      periodLabel: t("Common:EveryDay"),
       maxCopiesNumber: "10",
       storageType: "0",
       folderId: null,
@@ -210,7 +222,7 @@ export const useBackupSettings = ({
       day: "0",
       hour: "12:00",
       periodNumber: "0",
-      periodLabel: "Every day",
+      periodLabel: t("Common:EveryDay"),
       maxCopiesNumber: "10",
       storageType: "0",
       folderId: null,

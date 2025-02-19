@@ -24,16 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import moment from "moment";
-import { useLayoutEffect, useMemo } from "react";
+import { Info } from "luxon";
+import { useMemo } from "react";
 
 import type { TTranslation } from "@docspace/shared/types";
 
 export const useDefaultOptions = (t: TTranslation, language: string) => {
-  useLayoutEffect(() => {
-    moment.locale(language);
-  }, [language]);
-
   const maxNumberCopiesArray = useMemo(() => {
     return Array(30)
       .fill(null)
@@ -62,7 +58,7 @@ export const useDefaultOptions = (t: TTranslation, language: string) => {
   );
 
   const weekdaysLabelArray = useMemo(() => {
-    const gettingWeekdays = moment.weekdays();
+    const gettingWeekdays = Info.weekdays("long", { locale: language });
     const temp = [];
 
     const isEnglishLanguage = language === "en";

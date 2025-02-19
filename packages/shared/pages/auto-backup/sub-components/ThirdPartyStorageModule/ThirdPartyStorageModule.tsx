@@ -89,8 +89,6 @@ const ThirdPartyStorageModule = ({
     const key = option.key;
     const storage = storagesInfo[key];
 
-    console.log({ option, storage });
-
     setStorageId(storage.id);
   };
 
@@ -128,8 +126,6 @@ const ThirdPartyStorageModule = ({
 
   const storageTitle =
     storagesInfo[selectedStorageId ?? defaultSelectedStorageId]?.title;
-
-  console.log({ storageTitle, selectedStorageId, comboBoxOptions });
 
   return (
     <StyledAutoBackup>

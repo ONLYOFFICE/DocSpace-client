@@ -140,7 +140,7 @@ class UsersStore {
     makeAutoObservable(this);
 
     const addUser = async (value: { id: string; data: TUser }) => {
-      console.log(`[WS] add-user: ${value?.id}`);
+      console.log(`[WS] ${SocketEvents.AddUser}, id: ${value?.id}`);
       const { id, data } = value;
 
       if (!data || !id) return;
@@ -160,7 +160,7 @@ class UsersStore {
     };
 
     const updateUser = async (value: { id: string; data: TUser }) => {
-      console.log(`[WS] update-user: ${value?.id}`);
+      console.log(`[WS] ${SocketEvents.UpdateUser},id: ${value?.id}`);
 
       const { id, data } = value;
 
@@ -178,7 +178,7 @@ class UsersStore {
     };
 
     const deleteUser = (id: string) => {
-      console.log(`[WS] delete-user: ${id}`);
+      console.log(`[WS] ${SocketEvents.DeleteUser}, id: ${id}`);
       const idx = this.users.findIndex((x) => x.id === id);
 
       if (idx === -1) return;
@@ -191,8 +191,8 @@ class UsersStore {
       });
     };
 
-    const changeMyType = (value: { id: string; data: Partial<TUser> }) => {
-      console.log(`[WS] change-my-type: ${value?.id}:`, value?.data);
+    const changeMyType = (value: { id: string; data: TUser }) => {
+      console.log(`[WS] ${SocketEvents.ChangeMyType}, id: ${value?.id}`);
 
       if (!value?.data) return;
 
@@ -211,7 +211,12 @@ class UsersStore {
           combineUrl(window.ClientConfig?.proxy?.url, "/"),
         );
       }
-
+      if (
+        (data.isAdmin || data.isRoomAdmin) &&
+        pathname.includes("accounts/people")
+      ) {
+        this.getUsersList();
+      }
       setUser(data);
       fetchTreeFolders();
     };

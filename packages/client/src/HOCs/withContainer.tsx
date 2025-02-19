@@ -1,6 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { fakeFormFillingList } from "../pages/Home/Section/Body/formFillingTourData";
+import { fakeFormFillingList } from "@docspace/shared/utils/formFillingTourData";
 
 interface InjectedProps {
   filesStore?: {

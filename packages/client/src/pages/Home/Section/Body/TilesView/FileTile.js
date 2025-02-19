@@ -118,10 +118,12 @@ const FileTile = (props) => {
   const { thumbnailUrl } = item;
 
   useEffect(() => {
-    if (item?.isPDF && tileRef?.current) {
+    if (!tileRef?.current) return;
+
+    if (item?.isPDF) {
       setRefMap(GuidanceRefKey.Pdf, tileRef);
     }
-    if (item?.type === FolderType.Done && tileRef?.current) {
+    if (item?.type === FolderType.Done) {
       setRefMap(GuidanceRefKey.Ready, tileRef);
     }
 
@@ -129,7 +131,7 @@ const FileTile = (props) => {
       deleteRefMap(GuidanceRefKey.Pdf);
       deleteRefMap(GuidanceRefKey.Ready);
     };
-  }, []);
+  }, [setRefMap, deleteRefMap]);
 
   const element = (
     <ItemIcon

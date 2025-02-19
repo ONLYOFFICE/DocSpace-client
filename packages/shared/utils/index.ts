@@ -85,6 +85,7 @@ import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
 import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
+import { fakeFormFillingList } from "./formFillingTourData";
 
 export {
   isBetaLanguage,
@@ -143,6 +144,7 @@ export {
   getFromSessionStorage,
   saveToSessionStorage,
   getFormFillingTipsStorageName,
+  fakeFormFillingList,
 };
 
 export const getModalType = () => {

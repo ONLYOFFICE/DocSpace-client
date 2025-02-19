@@ -390,10 +390,12 @@ const SimpleFilesRow = (props) => {
   };
 
   React.useEffect(() => {
-    if (item?.isPDF && rowRef?.current) {
+    if (!rowRef?.current) return;
+
+    if (item?.isPDF) {
       setRefMap(GuidanceRefKey.Pdf, rowRef);
     }
-    if (item?.type === FolderType.Done && rowRef?.current) {
+    if (item?.type === FolderType.Done) {
       setRefMap(GuidanceRefKey.Ready, rowRef);
     }
 
@@ -401,7 +403,7 @@ const SimpleFilesRow = (props) => {
       deleteRefMap(GuidanceRefKey.Pdf);
       deleteRefMap(GuidanceRefKey.Ready);
     };
-  }, []);
+  }, [setRefMap, deleteRefMap]);
 
   const element = (
     <ItemIcon

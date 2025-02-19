@@ -74,12 +74,7 @@ import {
   UrlActionType,
   RecaptchaType,
 } from "../enums";
-import {
-  LANGUAGE,
-  COOKIE_EXPIRATION_YEAR,
-  MEDIA_VIEW_URL,
-  WRONG_PORTAL_NAME_URL,
-} from "../constants";
+import { LANGUAGE, COOKIE_EXPIRATION_YEAR, MEDIA_VIEW_URL } from "../constants";
 import { Dark, Base, TColorScheme } from "../themes";
 import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
@@ -1394,12 +1389,6 @@ class SettingsStore {
   get demoOrderUrl() {
     return this.siteDomain && this.siteEntries?.demoorder
       ? `${this.siteDomain}${this.siteEntries.demoorder}`
-      : null;
-  }
-
-  get wrongPortalNameUrl() {
-    return this.siteDomain && this.siteEntries?.wrongportalname
-      ? `${this.siteDomain}${this.siteEntries.wrongportalname}`
       : null;
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "@docspace/management",
-  "version": "3.0.1",
+  "version": "3.0.4",
   "private": true,
   "scripts": {
     "build": "node ./scripts/buildTranslations.js && next build",
@@ -31,3 +31,4 @@
     "typescript": "5.6.3"
   }
 }
+

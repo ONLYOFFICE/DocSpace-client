@@ -76,6 +76,11 @@ const ChangeUserTypeEvent = ({
 
   const isGuestsDialog = fromType[0] === EmployeeType.Guest;
 
+  const isDowngradeType =
+    (toType === EmployeeType.Guest || toType === EmployeeType.User) &&
+    fromType[0] !== EmployeeType.Guest;
+  const isDowngradeToUser = toType === EmployeeType.User;
+
   const onCloseAction = useCallback(() => {
     if (isRequestRunning) return;
     abortCallback?.();
@@ -87,10 +92,9 @@ const ChangeUserTypeEvent = ({
 
     setIsRequestRunning(true);
 
-    const updatePromise =
-      toType === EmployeeType.Guest || toType === EmployeeType.User
-        ? downgradeUserType(toType, userIDs[0])
-        : updateUserType(toType, userIDs);
+    const updatePromise = isDowngradeType
+      ? downgradeUserType(toType, userIDs[0])
+      : updateUserType(toType, userIDs);
 
     updatePromise
       .then((users) => {
@@ -184,6 +188,8 @@ const ChangeUserTypeEvent = ({
       onChangeUserType={onChangeUserType}
       isRequestRunning={isRequestRunning}
       personalUserFolderTitle={personalUserFolderTitle}
+      isDowngradeType={isDowngradeType}
+      isDowngradeToUser={isDowngradeToUser}
     />
   );
 };

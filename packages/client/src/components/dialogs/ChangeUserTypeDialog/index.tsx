@@ -35,7 +35,6 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import styled from "styled-components";
-import { TUser } from "@docspace/shared/api/people/types";
 
 import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
@@ -53,6 +52,7 @@ const StyledBody = styled.div`
 
   .warning-text {
     margin: 16px 0;
+    color: ${(props) => props.theme.client.settings.backup.warningColor};
   }
 
   .body-text {
@@ -77,6 +77,9 @@ type ChangeUserTypeDialogProps = {
   setDataReassignmentDialogVisible: (visible: boolean) => void;
   setDialogData: (data: any) => void;
   dialogData: TChangeUserTypeDialogData;
+  isDowngradeType: boolean;
+  isDowngradeToUser: boolean;
+  isCurrentUserOwner?: boolean;
 };
 
 const ChangeUserTypeDialog = ({
@@ -91,6 +94,9 @@ const ChangeUserTypeDialog = ({
   setDataReassignmentDialogVisible,
   setDialogData,
   dialogData,
+  isDowngradeType,
+  isDowngradeToUser,
+  isCurrentUserOwner,
 }: ChangeUserTypeDialogProps) => {
   const {
     toType,
@@ -136,43 +142,35 @@ const ChangeUserTypeDialog = ({
   };
 
   const needReassignData = true;
-  const getBody = () => {
-    if (isGuestsDialog) return guestBody;
+
+  const getDowngradeContent = () => {
+    if (!isDowngradeType) return;
 
     return (
-      <StyledBody>
-        <Text>
-          <Trans
-            i18nKey="ChangeUserTypeMessage"
-            ns="ChangeUserTypeDialog"
-            t={t}
-            values={{ firstType, secondType }}
-          />
-        </Text>
-        <Text className="note-text">
-          <Trans
-            i18nKey="ChangeUserTypeNote"
-            ns="ChangeUserTypeDialog"
-            t={t}
-            values={{ productName: t("Common:ProductName") }}
-            components={{
-              1: <span style={{ fontWeight: 600 }} />,
-            }}
-          />
-        </Text>
-        <Text className="warning-text" fontSize="16px">
-          {t("Common:Warning")}
-        </Text>
+      <>
+        {!isDowngradeToUser ? (
+          <Text className="warning-text" fontSize="16px" fontWeight={700}>
+            {t("Common:Warning")}
+          </Text>
+        ) : null}
         <Text className="body-text">
-          <Trans
-            i18nKey="DataReassignmentInfo"
-            ns="ChangeUserTypeDialog"
-            t={t}
-            values={{ sectionName: personalUserFolderTitle }}
-            components={{
-              1: <span style={{ fontWeight: 600 }} />,
-            }}
-          />
+          {isDowngradeToUser ? (
+            <Trans
+              i18nKey="DataReassignmentInfo"
+              ns="ChangeUserTypeDialog"
+              t={t}
+            />
+          ) : (
+            <Trans
+              i18nKey="DataReassignmentWithFilesDeletion"
+              ns="ChangeUserTypeDialog"
+              t={t}
+              values={{ sectionName: personalUserFolderTitle }}
+              components={{
+                1: <span style={{ fontWeight: 600 }} />,
+              }}
+            />
+          )}
         </Text>
         {needReassignData ? (
           <Link
@@ -186,16 +184,48 @@ const ChangeUserTypeDialog = ({
             {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
           </Link>
         ) : null}
+      </>
+    );
+  };
+
+  const getBody = () => {
+    if (isGuestsDialog) return guestBody;
+
+    return (
+      <StyledBody>
+        <Text>
+          <Trans
+            i18nKey="ChangeUserTypeMessage"
+            ns="ChangeUserTypeDialog"
+            t={t}
+            values={{ firstType, secondType }}
+          />
+        </Text>
+        {!isCurrentUserOwner ? (
+          <Text className="note-text">
+            <Trans
+              i18nKey="ChangeUserTypeNote"
+              ns="ChangeUserTypeDialog"
+              t={t}
+              values={{ productName: t("Common:ProductName") }}
+              components={{
+                1: <span style={{ fontWeight: 600 }} />,
+              }}
+            />
+          </Text>
+        ) : null}
+        {isDowngradeType ? getDowngradeContent() : null}
       </StyledBody>
     );
   };
+
   return (
     <ModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
       autoMaxHeight
-      isLarge={!isGuestsDialog}
+      isLarge={isDowngradeType}
     >
       <ModalDialog.Header>
         {isGuestsDialog ? t("ChangeUserTypeButton") : t("ChangeUserTypeHeader")}
@@ -224,16 +254,18 @@ const ChangeUserTypeDialog = ({
   );
 };
 
-export default inject(({ peopleStore }: TStore) => {
+export default inject(({ peopleStore, userStore }: TStore) => {
   const {
     setDataReassignmentDialogVisible,
     setDialogData,
     data: dialogData,
   } = peopleStore.dialogStore;
+  const { user } = userStore;
 
   return {
     setDataReassignmentDialogVisible,
     setDialogData,
     dialogData,
+    isCurrentUserOwner: user.isOwner,
   };
 })(observer(ChangeUserTypeDialog));

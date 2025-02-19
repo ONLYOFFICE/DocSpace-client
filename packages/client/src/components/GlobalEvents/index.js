@@ -32,6 +32,8 @@ import { FileAction, Events } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { toastr } from "@docspace/shared/components/toast";
 
+import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
+
 import CreateEvent from "./CreateEvent";
 import RenameEvent from "./RenameEvent";
 import CreateRoomEvent from "./CreateRoomEvent";
@@ -273,7 +275,7 @@ const GlobalEvents = ({
       }
 
       const closedFormFillingTips = localStorage.getItem(
-        `closedFormFillingTips-${userId}`,
+        getFormFillingTipsStorageName(userId),
       );
 
       setCreatePDFFormFile({

@@ -40,6 +40,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
 
 const StyledModalDialog = styled(ModalDialog)`
   #modal-dialog {
@@ -98,13 +99,15 @@ const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
 
   const onClose = () => {
     setWelcomeFormFillingTipsVisible(false);
-    const closedFormFillingTips = localStorage.getItem(
-      `closedFormFillingTips-${userId}`,
-    );
+
+    const storageName = getFormFillingTipsStorageName(userId);
+
+    const closedFormFillingTips = localStorage.getItem(storageName);
+
     if (!closedFormFillingTips) {
       setguidAnimationVisible(true);
     }
-    window.localStorage.setItem(`closedFormFillingTips-${userId}`, "true");
+    window.localStorage.setItem(storageName, "true");
   };
 
   const { t } = useTranslation(["FormFillingTipsDialog"]);

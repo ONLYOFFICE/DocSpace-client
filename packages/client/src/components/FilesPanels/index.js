@@ -36,6 +36,7 @@ import {
 } from "@docspace/shared/enums";
 
 import { Guidance } from "@docspace/shared/components/guidance";
+import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
 
 import {
   UploadPanel,
@@ -229,7 +230,7 @@ const Panels = (props) => {
 
   const onCloseGuidance = () => {
     setFormFillingTipsDialog(false);
-    window.localStorage.setItem(`closedFormFillingTips-${userId}`, "true");
+    window.localStorage.setItem(getFormFillingTipsStorageName(userId), "true");
   };
 
   return [

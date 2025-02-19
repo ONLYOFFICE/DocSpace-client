@@ -42,6 +42,7 @@ import { trimSeparator } from "./trimSeparator";
 import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
 import { getTextColor } from "./getTextColor";
+import { getFormFillingTipsStorageName } from "./getFormFillingTipsStorageName";
 
 import DomHelpers from "./domHelpers";
 import ObjectUtils from "./objectUtils";
@@ -141,6 +142,7 @@ export {
   getTextColor,
   getFromSessionStorage,
   saveToSessionStorage,
+  getFormFillingTipsStorageName,
 };
 
 export const getModalType = () => {

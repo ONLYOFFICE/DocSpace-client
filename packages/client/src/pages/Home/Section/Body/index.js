@@ -30,6 +30,7 @@ import { observer, inject } from "mobx-react";
 
 import {
   clearEdgeScrollingTimer,
+  getFormFillingTipsStorageName,
   isMobile,
   isTablet,
   onEdgeScrolling,
@@ -106,7 +107,7 @@ const SectionBodyContent = (props) => {
 
   useEffect(() => {
     const closedFormFillingTips = localStorage.getItem(
-      `closedFormFillingTips-${userId}`,
+      getFormFillingTipsStorageName(userId),
     );
 
     if (roomType === RoomsType.FormRoom && !closedFormFillingTips) {

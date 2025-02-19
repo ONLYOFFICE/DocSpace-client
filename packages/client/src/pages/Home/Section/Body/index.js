@@ -113,7 +113,7 @@ const SectionBodyContent = (props) => {
     if (roomType === RoomsType.FormRoom && !closedFormFillingTips) {
       onEnableFormFillingGuid(t, roomType);
     }
-  }, [roomType]);
+  }, [roomType, onEnableFormFillingGuid]);
 
   useEffect(() => {
     const customScrollElm = document.querySelector(

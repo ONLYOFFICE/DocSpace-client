@@ -36,8 +36,6 @@ export class SpacesStore {
   domainDialogVisible = false;
   connectDialogVisible = false;
 
-  referenceLink: URL | string = "";
-
   currentPortal = false;
 
   constructor() {
@@ -46,10 +44,6 @@ export class SpacesStore {
 
   setCurrentPortal = (portal) => {
     this.currentPortal = portal;
-  };
-
-  setReferenceLink = (link: URL | string) => {
-    this.referenceLink = link;
   };
 
   createNewPortal = async (data: TNewPortalData) => {
@@ -81,3 +75,4 @@ export class SpacesStore {
     this.connectDialogVisible = connectDialogVisible;
   };
 }
+

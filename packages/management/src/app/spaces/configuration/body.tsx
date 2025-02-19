@@ -46,15 +46,13 @@ import {
 } from "@docspace/shared/api/management";
 
 import useDeviceType from "@/hooks/useDeviceType";
-import { useStores } from "@/hooks/useStores";
+
 import { StyledBody } from "./configuration.styled";
 
 export const Body = ({ domainValidator }) => {
   const { t } = useTranslation(["Management", "Common"]);
   const router = useRouter();
   const { currentDeviceType } = useDeviceType();
-  const { spacesStore } = useStores();
-  const { setReferenceLink } = spacesStore;
 
   const [domain, setDomain] = useState<string>("");
   const [name, setName] = useState<string>("");
@@ -111,9 +109,14 @@ export const Body = ({ domainValidator }) => {
       try {
         setIsLoading(true);
         await setDomainName(domain);
-        await setPortalName(name).then((result) => setReferenceLink(result));
-      } catch (err) {
-        console.error(err);
+        try {
+          const result = (await setPortalName(name)) as string;
+          let url = new URL(result);
+          url.searchParams.append("referenceUrl", "/management");
+          window.location.replace(url);
+        } catch (err) {
+          console.error(err);
+        }
       } finally {
         setIsLoading(false);
         router.refresh();

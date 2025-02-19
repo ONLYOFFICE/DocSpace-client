@@ -41,35 +41,7 @@ import {
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
-
-const StyledModalDialog = styled(ModalDialog)`
-  #modal-dialog {
-    width: 448px;
-    height: 374px;
-
-    .modal-header {
-      margin-top: 16px;
-      margin-bottom: 0px;
-      height: 38px;
-      min-height: 38px;
-      :after {
-        border: none;
-      }
-    }
-
-    .modal-footer {
-      margin-top: 3px;
-    }
-
-    [data-testid="icon-button-svg"] {
-      position: relative;
-      right: -2px;
-      bottom: 10px;
-      width: 13px;
-      height: 13px;
-    }
-  }
-`;
+import { StyledModalDialog } from "./FormFillingTips.styled";
 
 type FormFillingTipsDialogProps = {
   visible: DialogsStore["welcomeFormFillingTipsVisible"];

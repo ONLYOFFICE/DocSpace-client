@@ -84,7 +84,9 @@ export default async function RootLayout({
       <head>
         <link id="favicon" rel="shortcut icon" type="image/x-icon" />
       </head>
-      <body>
+      <body
+        className={`${systemTheme === ThemeKeys.DarkStr ? "dark" : "light"}`}
+      >
         <StyledComponentsRegistry>
           <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
             <Toast isSSR />
@@ -98,4 +100,3 @@ export default async function RootLayout({
     </html>
   );
 }
-

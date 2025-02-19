@@ -30,7 +30,7 @@ import React, { useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import FileActionsConvertEditDocReactSvgUrl from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg?url";
+import FileActionsConvertEditDocReactSvg from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
@@ -110,6 +110,7 @@ const Badges = ({
   isTemplatesFolder,
   onCreateRoom,
   newFilesBadge,
+  className,
 }: BadgesProps) => {
   const {
     id,
@@ -147,7 +148,7 @@ const Badges = ({
 
   const fontSizeBadge = isTile || tabletViewBadge ? "11px" : "9px";
 
-  const iconEdit = FileActionsConvertEditDocReactSvgUrl;
+  const iconEdit = <FileActionsConvertEditDocReactSvg />;
 
   const iconRefresh = desktopView ? Refresh12ReactSvgUrl : RefreshReactSvgUrl;
 
@@ -177,7 +178,6 @@ const Badges = ({
     fontSize: "9px",
     fontWeight: 800,
     maxWidth: "60px",
-    padding: isTile || tabletViewBadge ? "2px 5px" : "0 4px",
     lineHeight: "12px",
     "data-id": id,
   };
@@ -212,7 +212,18 @@ const Badges = ({
   };
 
   return fileExst ? (
-    <div className="badges additional-badges file__badges">
+    <div
+      className={classNames(
+        styles.badges,
+        className,
+        "badges additional-badges file__badges",
+        {
+          [styles.tableView]: viewAs === "table",
+          [styles.rowView]: viewAs === "row",
+          [styles.tileView]: viewAs === "tile",
+        },
+      )}
+    >
       {/* {startFilling && (
         <ColorTheme
           isEditing
@@ -231,7 +242,10 @@ const Badges = ({
           <Badge
             noHover
             isVersionBadge
-            className="badge-version badge-version-current tablet-badge icons-group"
+            className={classNames(
+              styles.versionBadge,
+              "badge-version badge-version-current tablet-badge icons-group",
+            )}
             backgroundColor={theme.filesBadges.badgeBackgroundColor}
             label={t("BadgeMyDraftTitle")}
             title={t("BadgeMyDraftTitle")}
@@ -248,9 +262,11 @@ const Badges = ({
         <ColorTheme
           themeId={ThemeId.IconButton}
           isEditing={isEditing}
-          iconName={iconEdit}
-          className="badge icons-group is-editing tablet-badge tablet-edit"
-          size={sizeBadge}
+          iconNode={iconEdit}
+          className={classNames(
+            styles.iconBadge,
+            "badge icons-group is-editing tablet-badge tablet-edit",
+          )}
           onClick={onFilesClick}
           hoverColor={theme.filesBadges.hoverIconColor}
           title={t("Common:EditButton")}
@@ -266,8 +282,10 @@ const Badges = ({
           themeId={ThemeId.IconButton}
           onClick={setConvertDialogVisible}
           iconName={iconRefresh}
-          className="badge tablet-badge icons-group can-convert"
-          size={sizeBadge}
+          className={classNames(
+            styles.iconBadge,
+            "badge tablet-badge icons-group can-convert",
+          )}
           hoverColor={theme.filesBadges.hoverIconColor}
         />
       ) : null}
@@ -275,7 +293,10 @@ const Badges = ({
         <BadgeWrapper {...onShowVersionHistoryProp} isTile={isTile}>
           <Badge
             {...versionBadgeProps}
-            className="badge-version badge-version-current tablet-badge icons-group"
+            className={classNames(
+              styles.versionBadge,
+              "badge-version badge-version-current tablet-badge icons-group",
+            )}
             backgroundColor={theme.filesBadges.badgeBackgroundColor}
             label={t("VersionBadge", {
               version: countVersions as string,
@@ -319,8 +340,10 @@ const Badges = ({
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}
-          className="badge row-copy-link icons-group tablet-badge"
-          size={sizeBadge}
+          className={classNames(
+            styles.iconBadge,
+            "badge row-copy-link icons-group tablet-badge",
+          )}
           onClick={onCopyPrimaryLink}
           title={t("Files:CopySharedLink")}
         />
@@ -330,8 +353,10 @@ const Badges = ({
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={TabletLinkReactSvgUrl}
-          className="badge tablet-row-copy-link icons-group tablet-badge"
-          size={sizeBadge}
+          className={classNames(
+            styles.iconBadge,
+            "badge tablet-row-copy-link icons-group tablet-badge",
+          )}
           onClick={onCopyPrimaryLink}
           title={t("Files:CopySharedLink")}
         />
@@ -342,8 +367,10 @@ const Badges = ({
           themeId={ThemeId.IconButtonMute}
           onClick={onUnmuteClick}
           iconName={iconMute}
-          size={sizeBadge}
-          className="badge  is-mute tablet-badge"
+          className={classNames(
+            styles.iconBadge,
+            "badge  is-mute tablet-badge",
+          )}
           {...unmuteIconProps}
         />
       ) : null}
@@ -351,9 +378,11 @@ const Badges = ({
         <ColorTheme
           themeId={ThemeId.IconButtonPin}
           onClick={onUnpinClick}
-          className="badge icons-group is-pinned tablet-badge tablet-pinned"
+          className={classNames(
+            styles.iconBadge,
+            "badge icons-group is-pinned tablet-badge tablet-pinned",
+          )}
           iconName={iconPin}
-          size={sizeBadge}
           {...unpinIconProps}
         />
       ) : null}
@@ -361,7 +390,10 @@ const Badges = ({
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={CreateRoomReactSvgUrl}
-          className="badge tablet-row-create-room icons-group  tablet-badge"
+          className={classNames(
+            styles.iconBadge,
+            "badge tablet-row-create-room icons-group  tablet-badge",
+          )}
           size={IconSizeType.medium}
           onClick={onCreateRoom}
           title={t("Files:CreateRoom")}

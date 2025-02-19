@@ -34,6 +34,7 @@ export type RowContentProps = {
   filterSortBy: TSortBy;
   timezone: string;
   displayFileExtension: boolean;
+  badgesComponent?: React.ReactNode;
 };
 
 export type RowProps = RowContentProps & {

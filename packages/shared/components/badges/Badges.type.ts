@@ -40,9 +40,9 @@ type ItemData = {
   id: number;
   versionGroup?: number;
   fileExst?: string;
-  isEditing: boolean;
+  isEditing?: boolean;
   isRoom?: boolean;
-  pinned: boolean;
+  pinned?: boolean;
   isFolder: boolean;
   mute: boolean;
   rootFolderId: number;
@@ -78,6 +78,7 @@ export type BadgesProps = {
   isTemplatesFolder?: boolean;
   onCreateRoom?: () => void;
   newFilesBadge?: React.ReactElement;
+  className?: string;
 };
 
 export type BadgeWrapperProps = {

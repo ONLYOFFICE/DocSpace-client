@@ -28,6 +28,9 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
+import classNames from "classnames";
 
 import {
   StyledWrapper,
@@ -35,6 +38,7 @@ import {
 } from "@docspace/shared/styles/FilesRow.styled";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
+import Badges from "@docspace/shared/components/badges";
 
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 
@@ -43,11 +47,17 @@ import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 import { RowContent } from "./RowContent";
 import { RowProps } from "../RowView.types";
 
+import styles from "../RowView.module.scss";
+import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
+
 const Row = observer(
   ({ item, index, filterSortBy, timezone, displayFileExtension }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
 
     const [isInit, setIsInit] = React.useState(false);
+    const { t } = useTranslation(["Common"]);
+    const theme = useTheme();
+    const { openFile } = useFilesActions({ t });
 
     const { getContextMenuModel } = useContextMenuModel({ item });
 
@@ -57,6 +67,18 @@ const Row = observer(
 
     const element = (
       <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
+    );
+
+    const badgesComponent = (
+      <Badges
+        className={styles.badgesComponent}
+        t={t}
+        theme={theme}
+        item={item}
+        viewAs="row"
+        showNew={false}
+        onFilesClick={() => openFile(item.id)}
+      />
     );
 
     const contextMenuModel = getContextMenuModel(true);
@@ -73,12 +95,11 @@ const Row = observer(
         isIndexUpdated={false}
         showHotkeyBorder={false}
         isHighlight={false}
-        className="row-wrapper"
+        className={classNames(styles.rowWrapper, "row-wrapper")}
       >
         <DragAndDrop data-title={item.title} className="files-item">
           <StyledSimpleFilesRow
             key={item.id}
-            isEdit={"isEditing" in item && item.isEditing}
             checked={isChecked}
             mode="modern"
             isIndexEditingMode={false}
@@ -95,12 +116,14 @@ const Row = observer(
             element={element}
             contextOptions={contextMenuModel}
             getContextModel={getContextMenuModel}
+            badgesComponent={badgesComponent}
           >
             <RowContent
               item={item}
               filterSortBy={filterSortBy}
               timezone={timezone}
               displayFileExtension={displayFileExtension}
+              badgesComponent={badgesComponent}
             />
           </StyledSimpleFilesRow>
         </DragAndDrop>

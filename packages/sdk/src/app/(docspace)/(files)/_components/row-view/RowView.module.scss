@@ -26,57 +26,19 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-@import "../../styles/common-icons-style.scss";
-@import "../../styles/variables/colors.scss";
-@import "../../styles/variables/devices";
-@import "../../styles/mixins";
+@import "@docspace/shared/styles/variables/devices";
+@import "@docspace/shared/styles/mixins";
 
-.badges {
-  &.tableView {
-    .versionBadge > div {
-      padding: 0 4px !important;
-    }
-
-    .iconBadge {
-      @include icon-size(small);
-    }
-  }
-  &.rowView {
-    .versionBadge > div {
-      padding: 2px 5px !important;
-
-      @include mobile {
-        padding: 0 4px !important;
-      }
-    }
-
-    .iconBadge {
-      @include icon-size(medium);
-
-      @include mobile {
-        @include icon-size(small);
-      }
+.rowWrapper {
+  :global(.row_context-menu-wrapper) .badgesComponent {
+    @include mobile {
+      display: none;
     }
   }
 
-  &.tileView {
-    .versionBadge > div {
-      padding: 2px 5px !important;
-    }
-
-    .iconBadge {
-      @include icon-size(medium);
+  .mobileBadges .badgesComponent {
+    @include not-mobile {
+      display: none;
     }
   }
-}
-
-.badgeWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background: var(--files-badges-bg-color);
-  padding: 6px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px $badge-shadow;
 }

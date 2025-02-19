@@ -1412,7 +1412,7 @@
 .dark {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-dark-strong};
 
-  --files-badges-bg-color: #{black};
+  --files-badges-bg-color: #{$black};
 }
 
 .light {

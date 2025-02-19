@@ -46,6 +46,12 @@ import SocketHelper, {
   SocketCommands,
   SocketEvents,
 } from "@docspace/shared/utils/socket";
+import {
+  downgradeUserType,
+  getReassignmentProgress,
+  terminateReassignment,
+} from "@docspace/shared/api/people";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
@@ -66,16 +72,12 @@ import type {
 import InfoPanelStore from "../InfoPanelStore";
 import AccessRightsStore from "../AccessRightsStore";
 import ClientLoadingStore from "../ClientLoadingStore";
+import TreeFoldersStore from "../TreeFoldersStore";
 
 import TargetUserStore from "./TargetUserStore";
 import GroupsStore from "./GroupsStore";
 import ContactsHotkeysStore from "./ContactsHotkeysStore";
 import DialogStore from "./DialogStore";
-import {
-  downgradeUserType,
-  getReassignmentProgress,
-  terminateReassignment,
-} from "@docspace/shared/api/people";
 
 class UsersStore {
   filter = Filter.getDefault();
@@ -121,6 +123,7 @@ class UsersStore {
     public accessRightsStore: AccessRightsStore,
     public dialogStore: DialogStore,
     public clientLoadingStore: ClientLoadingStore,
+    public treeFoldersStore: TreeFoldersStore,
   ) {
     this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
@@ -131,12 +134,13 @@ class UsersStore {
     this.accessRightsStore = accessRightsStore;
     this.dialogStore = dialogStore;
     this.clientLoadingStore = clientLoadingStore;
-
+    this.treeFoldersStore = treeFoldersStore;
     this.contactsTab = getContactsView();
 
     makeAutoObservable(this);
 
     const addUser = async (value: { id: string; data: TUser }) => {
+      console.log(`[WS] add-user: ${value?.id}`);
       const { id, data } = value;
 
       if (!data || !id) return;
@@ -156,6 +160,8 @@ class UsersStore {
     };
 
     const updateUser = async (value: { id: string; data: TUser }) => {
+      console.log(`[WS] update-user: ${value?.id}`);
+
       const { id, data } = value;
 
       if (!data || !id) return;
@@ -172,6 +178,7 @@ class UsersStore {
     };
 
     const deleteUser = (id: string) => {
+      console.log(`[WS] delete-user: ${id}`);
       const idx = this.users.findIndex((x) => x.id === id);
 
       if (idx === -1) return;
@@ -184,14 +191,43 @@ class UsersStore {
       });
     };
 
+    const changeMyType = (value: { id: string; data: Partial<TUser> }) => {
+      console.log(`[WS] change-my-type: ${value?.id}:`, value?.data);
+
+      if (!value?.data) return;
+
+      const { fetchTreeFolders } = this.treeFoldersStore;
+      const { setUser } = this.userStore;
+
+      const { data } = value;
+
+      const { pathname } = window.location;
+
+      if (
+        (data.isCollaborator && pathname.includes("accounts/people")) ||
+        (data.isVisitor && pathname.includes("rooms/personal"))
+      ) {
+        window.DocSpace.navigate(
+          combineUrl(window.ClientConfig?.proxy?.url, "/"),
+        );
+      }
+
+      setUser(data);
+      fetchTreeFolders();
+    };
+
     SocketHelper.on(SocketEvents.AddUser, addUser);
     SocketHelper.on(SocketEvents.AddGuest, addUser);
     SocketHelper.on(SocketEvents.UpdateUser, updateUser);
     SocketHelper.on(SocketEvents.UpdateGuest, updateUser);
     SocketHelper.on(SocketEvents.DeleteUser, deleteUser);
     SocketHelper.on(SocketEvents.DeleteGuest, deleteUser);
+    SocketHelper.on(SocketEvents.ChangeMyType, changeMyType);
 
     SocketHelper.on(SocketEvents.UpdateGroup, async (value) => {
+      console.log(
+        `[WS] ${SocketEvents.UpdateGroup}: ${value?.id}:${value?.data}`,
+      );
       const { contactsTab } = this;
 
       if (contactsTab !== "inside_group") return;

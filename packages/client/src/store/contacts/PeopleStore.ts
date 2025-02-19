@@ -41,6 +41,7 @@ import InfoPanelStore from "../InfoPanelStore";
 import ClientLoadingStore from "../ClientLoadingStore";
 import ProfileActionsStore from "../ProfileActionsStore";
 import DialogsStore from "../DialogsStore";
+import TreeFoldersStore from "../TreeFoldersStore";
 
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
@@ -82,6 +83,7 @@ class PeopleStore {
     public profileActionsStore: ProfileActionsStore,
     public dialogsStore: DialogsStore,
     public currentQuotaStore: CurrentQuotasStore,
+    public treeFoldersStore: TreeFoldersStore,
   ) {
     this.infoPanelStore = infoPanelStore;
     this.accessRightsStore = accessRightsStore;
@@ -92,6 +94,7 @@ class PeopleStore {
     this.profileActionsStore = profileActionsStore;
     this.dialogsStore = dialogsStore;
     this.currentQuotaStore = currentQuotaStore;
+    this.treeFoldersStore = treeFoldersStore;
 
     this.dialogStore = new DialogStore();
     this.contactsHotkeysStore = new ContactsHotkeysStore(this);
@@ -117,6 +120,7 @@ class PeopleStore {
       accessRightsStore,
       this.dialogStore,
       clientLoadingStore,
+      treeFoldersStore,
     );
 
     this.contextOptionsStore = new ContactsConextOptionsStore(

@@ -49,6 +49,7 @@ import SocketHelper, {
 import {
   downgradeUserType,
   getReassignmentProgress,
+  reassignmentNecessary,
   terminateReassignment,
 } from "@docspace/shared/api/people";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -112,6 +113,8 @@ class UsersStore {
   guestsTabVisited: boolean = false;
 
   roomParts: string = "";
+
+  activeUsers: TUser[] = [];
 
   constructor(
     public settingsStore: SettingsStore,
@@ -1172,7 +1175,7 @@ class UsersStore {
   get hasOnlyOneUserToRemove() {
     const { canRemoveOnlyOneUser } = this.accessRightsStore;
 
-    if (this.selection.length !== 1) return false;
+    if (!this.isOneUserSelection) return false;
 
     const users = this.selection.filter((x) => canRemoveOnlyOneUser(x));
 
@@ -1211,14 +1214,32 @@ class UsersStore {
     return users.length > 0;
   }
 
-  changeType = (
+  changeType = async (
     type: EmployeeType,
     users: UsersStore["getUsersToMakeEmployees"],
     successCallback?: (users?: TUser[]) => void,
     abortCallback?: VoidFunction,
   ) => {
     const { setDialogData } = this.dialogStore!;
+
     const event = new Event(Events.CHANGE_USER_TYPE);
+
+    let needReassignData = false;
+
+    if (type === EmployeeType.Guest || type === EmployeeType.User) {
+      let timerId: NodeJS.Timeout | null = setTimeout(() => {
+        this.setActiveUsers([users[0]]);
+      }, 200);
+
+      needReassignData = (await reassignmentNecessary(
+        users[0].id,
+        type,
+      )) as boolean;
+
+      if (timerId) clearTimeout(timerId);
+      timerId = null;
+      this.setActiveUsers([]);
+    }
 
     let fromType =
       users.length === 1
@@ -1263,6 +1284,7 @@ class UsersStore {
         reassignUserData: downgradeUserType,
         cancelReassignment: terminateReassignment,
         showDeleteProfileCheckbox: false,
+        needReassignData,
       }),
     } as TChangeUserTypeDialogData);
 
@@ -1289,6 +1311,10 @@ class UsersStore {
     } as TChangeUserStatusDialogData);
 
     setChangeUserStatusDialogVisible(true);
+  };
+
+  setActiveUsers = (users: TUser[]) => {
+    this.activeUsers = users;
   };
 }
 

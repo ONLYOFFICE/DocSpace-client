@@ -105,6 +105,7 @@ const ChangeUserTypeDialog = ({
     getReassignmentProgress,
     reassignUserData,
     cancelReassignment,
+    needReassignData,
   } = dialogData;
 
   const { t } = useTranslation(["ChangeUserTypeDialog", "People", "Common"]);
@@ -141,10 +142,10 @@ const ChangeUserTypeDialog = ({
     onClose();
   };
 
-  const needReassignData = true;
-
   const getDowngradeContent = () => {
     if (!isDowngradeType) return;
+
+    if (!needReassignData) return;
 
     return (
       <>
@@ -153,6 +154,7 @@ const ChangeUserTypeDialog = ({
             {t("Common:Warning")}
           </Text>
         ) : null}
+
         <Text className="body-text">
           {isDowngradeToUser ? (
             <Trans
@@ -172,18 +174,17 @@ const ChangeUserTypeDialog = ({
             />
           )}
         </Text>
-        {needReassignData ? (
-          <Link
-            className="body-link"
-            type={LinkType.action}
-            fontSize="13px"
-            fontWeight={600}
-            isHovered
-            onClick={onClickReassignData}
-          >
-            {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
-          </Link>
-        ) : null}
+
+        <Link
+          className="body-link"
+          type={LinkType.action}
+          fontSize="13px"
+          fontWeight={600}
+          isHovered
+          onClick={onClickReassignData}
+        >
+          {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
+        </Link>
       </>
     );
   };
@@ -225,7 +226,7 @@ const ChangeUserTypeDialog = ({
       onClose={onClose}
       displayType={ModalDialogType.modal}
       autoMaxHeight
-      isLarge={isDowngradeType}
+      isLarge={needReassignData}
     >
       <ModalDialog.Header>
         {isGuestsDialog ? t("ChangeUserTypeButton") : t("ChangeUserTypeHeader")}

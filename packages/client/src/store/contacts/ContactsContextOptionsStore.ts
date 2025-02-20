@@ -42,6 +42,7 @@ import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
+import { reassignmentNecessary } from "@docspace/shared/api/people";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import ChangeMailReactSvgUrl from "PUBLIC_DIR/images/email.react.svg?url";
@@ -78,6 +79,7 @@ import {
 import InfoPanelStore from "../InfoPanelStore";
 import ProfileActionsStore from "../ProfileActionsStore";
 import DialogsStore from "../DialogsStore";
+import SettingsSetupStore from "../SettingsSetupStore";
 
 import UsersStore from "./UsersStore";
 import DialogStore from "./DialogStore";
@@ -99,6 +101,7 @@ class ContactsConextOptionsStore {
     public targetUserStore: TargetUserStore,
     public dialogsStore: DialogsStore,
     public currentQuotaStore: CurrentQuotasStore,
+    public setup: SettingsSetupStore,
   ) {
     this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
@@ -110,7 +113,7 @@ class ContactsConextOptionsStore {
     this.targetUserStore = targetUserStore;
     this.dialogsStore = dialogsStore;
     this.currentQuotaStore = currentQuotaStore;
-
+    this.setup = setup;
     makeAutoObservable(this);
   }
 
@@ -549,6 +552,15 @@ class ContactsConextOptionsStore {
   toggleDataReassignmentDialog = (item: TItem) => {
     const { setDialogData, setDataReassignmentDialogVisible, closeDialogs } =
       this.dialogStore;
+
+    if (!this.setup) return;
+
+    const {
+      dataReassignment,
+      dataReassignmentProgress,
+      dataReassignmentTerminate,
+    } = this.setup;
+
     const {
       id,
       displayName,
@@ -562,13 +574,18 @@ class ContactsConextOptionsStore {
     closeDialogs();
 
     setDialogData({
-      id,
-      avatar,
-      displayName,
-      statusType,
-      userName,
-      isCollaborator,
-      isVisitor,
+      user: {
+        id,
+        avatar,
+        displayName,
+        statusType,
+        userName,
+        isCollaborator,
+        isVisitor,
+      },
+      reassignUserData: dataReassignment,
+      getReassignmentProgress: dataReassignmentProgress,
+      cancelReassignment: dataReassignmentTerminate,
     });
 
     setDataReassignmentDialogVisible(true);

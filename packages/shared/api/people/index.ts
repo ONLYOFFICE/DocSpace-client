@@ -449,6 +449,16 @@ export async function terminateReassignment(userId: number | string) {
   });
 }
 
+export async function reassignmentNecessary(
+  userId: number | string,
+  type: EmployeeType,
+) {
+  return request({
+    method: "get",
+    url: "people/reassign/necessary",
+    params: { userId, type },
+  });
+}
 export function linkOAuth(serializedProfile) {
   return request({
     method: "put",

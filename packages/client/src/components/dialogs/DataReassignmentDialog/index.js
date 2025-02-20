@@ -117,7 +117,7 @@ const DataReassignmentDialog = ({
         if (res.error) {
           toastr.error(res.error);
           setIsAbortTransfer(true);
-          if (res) setPercent(res.percentage);
+
           return;
         }
 
@@ -241,10 +241,9 @@ const DataReassignmentDialog = ({
 
   const onTerminate = () => {
     cancelReassignment(user.id)
-      .then((res) => {
+      .then(() => {
         toastr.success(t("Common:ChangesSavedSuccessfully"));
         setIsAbortTransfer(true);
-        if (res) setPercent(res.percentage);
       })
       .catch((error) => {
         toastr.error(error?.response?.data?.error?.message);

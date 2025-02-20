@@ -57,6 +57,7 @@ const UpdatePlanButtonContainer = ({
   currentTariffPlanTitle,
   t,
   canPayTariff,
+  isYearTariff,
 }) => {
   const resetIntervalSuccess = () => {
     intervalId &&
@@ -117,7 +118,7 @@ const UpdatePlanButtonContainer = ({
         setIsLoading(true);
       }, 500);
 
-      const res = await updatePayment(managersCount);
+      const res = await updatePayment(managersCount, isYearTariff);
 
       if (res === false) {
         toastr.error(t("ErrorNotification"));
@@ -219,6 +220,7 @@ export default inject(
       maxCountManagersByQuota,
       setPortalQuotaValue,
       currentTariffPlanTitle,
+      isYearTariff,
     } = currentQuotaStore;
 
     const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
@@ -250,6 +252,7 @@ export default inject(
       accountLink,
       setPortalQuotaValue,
       currentTariffPlanTitle,
+      isYearTariff,
     };
   },
 )(observer(UpdatePlanButtonContainer));

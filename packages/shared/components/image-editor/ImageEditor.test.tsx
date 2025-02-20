@@ -26,7 +26,18 @@
 
 import { render, screen } from "@testing-library/react";
 import { ImageEditor } from "./index";
+import { TImage } from "./ImageEditor.types";
 import "@testing-library/jest-dom";
+
+jest.mock("react-avatar-editor", () => {
+  return function AvatarEditor() {
+    return null;
+  };
+});
+
+jest.mock("react-svg", () => ({
+  ReactSVG: () => null,
+}));
 
 const mockT = (key: string) => key;
 const mockOnChangeImage = jest.fn();
@@ -40,7 +51,7 @@ const defaultProps = {
     zoom: 1,
     x: 0,
     y: 0,
-  },
+  } as TImage,
   onChangeImage: mockOnChangeImage,
   Preview: <div data-testid="preview">Preview</div>,
   setPreview: mockSetPreview,
@@ -75,5 +86,40 @@ describe("ImageEditor", () => {
     const className = "custom-class";
     render(<ImageEditor {...defaultProps} className={className} />);
     expect(screen.getByRole("region")).toHaveClass(className);
+  });
+
+  it("handles image rescaling when enabled", () => {
+    const props = {
+      ...defaultProps,
+      image: {
+        uploadedFile: new File([""], "test.jpg", { type: "image/jpeg" }),
+        zoom: 1,
+        x: 0,
+        y: 0,
+      } as TImage,
+      disableImageRescaling: false,
+    };
+
+    render(<ImageEditor {...props} />);
+    expect(screen.getByTestId("slider")).toBeInTheDocument();
+  });
+
+  it("disables editor when isDisabled is true", () => {
+    const props = {
+      ...defaultProps,
+      image: {
+        uploadedFile: new File([""], "test.jpg", { type: "image/jpeg" }),
+        zoom: 1,
+        x: 0,
+        y: 0,
+      } as TImage,
+      isDisabled: true,
+    };
+
+    render(<ImageEditor {...props} />);
+    expect(screen.getByTestId("image-cropper")).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
   });
 });

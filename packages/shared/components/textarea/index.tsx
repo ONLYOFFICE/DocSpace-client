@@ -29,7 +29,7 @@ import copy from "copy-to-clipboard";
 import classNames from "classnames";
 import TextareaAutosize from "react-autosize-textarea";
 
-import CopyIconUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 import { isJSON } from "../../utils/json";

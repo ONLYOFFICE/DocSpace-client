@@ -36,6 +36,7 @@ import RoomsRowDataComponent from "./sub-components/RoomsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
 import RecentRowDataComponent from "./sub-components/RecentRowData";
 import IndexRowDataComponent from "./sub-components/IndexRowData";
+import TemplatesRowData from "./sub-components/TemplatesRowData";
 import RowDataComponent from "./sub-components/RowData";
 import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
 
@@ -64,6 +65,7 @@ const FilesTableRow = (props) => {
     showHotkeyBorder,
     id,
     isRooms,
+    isTemplates,
     isTrashFolder,
     isIndexEditingMode,
     isIndexing,
@@ -77,8 +79,7 @@ const FilesTableRow = (props) => {
     onEditIndex,
     isIndexUpdated,
     displayFileExtension,
-    icon,
-    isDownload,
+    isBlockingOperation,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
@@ -96,6 +97,7 @@ const FilesTableRow = (props) => {
       logo={item.logo}
       color={item.logo?.color}
       isArchive={item.isArchive}
+      isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
       className={classNames({
         "icon-with-index-column": isIndexing,
@@ -196,11 +198,8 @@ const FilesTableRow = (props) => {
         onClick={isIndexEditingMode ? () => {} : onMouseClick}
         isActive={isActive}
         isIndexEditingMode={isIndexEditingMode}
-        inProgress={
-          inProgress && item.isFolder
-            ? icon !== "duplicate" && icon !== "duplicate-room" && !isDownload
-            : inProgress
-        }
+        isBlockingOperation={isBlockingOperation}
+        inProgress={inProgress}
         isFolder={item.isFolder}
         onHideContextMenu={onHideContextMenu}
         isThirdPartyFolder={item.isThirdPartyFolder}
@@ -222,7 +221,14 @@ const FilesTableRow = (props) => {
         canDrag={canDrag}
         {...contextOptionProps}
       >
-        {isRooms ? (
+        {isTemplates ? (
+          <TemplatesRowData
+            t={t}
+            element={element}
+            dragStyles={dragStyles}
+            {...props}
+          />
+        ) : isRooms ? (
           <RoomsRowDataComponent
             element={element}
             dragStyles={dragStyles}

@@ -1852,6 +1852,7 @@ const Dark: TTheme = {
       iconColor: grayDark,
       iconErrorColor: darkErrorStatus,
       primaryColor: darkGrayDark,
+      barIconColor: darkGrayDark,
     },
 
     members: {
@@ -2109,6 +2110,7 @@ const Dark: TTheme = {
       sideColor: white,
       color: white,
       textColor: grayDark,
+      subTextColor: "#858585",
     },
 
     animationColor: lightSecondMain,
@@ -2451,6 +2453,7 @@ const Dark: TTheme = {
       color: white,
       tooltipColor: darkToastInfo,
       iconColor: darkErrorStatus,
+      positiveStatusColor: darkStatusPositive,
 
       shareButton: {
         color: gray,
@@ -2615,6 +2618,15 @@ const Dark: TTheme = {
       stroke: white,
       color: white,
     },
+
+    versionDisabled: {
+      fillDisabled: grayDarkStrong,
+    },
+
+    versionLink: {
+      color: grayDark,
+    },
+
     commentColor: grayDark,
   },
 

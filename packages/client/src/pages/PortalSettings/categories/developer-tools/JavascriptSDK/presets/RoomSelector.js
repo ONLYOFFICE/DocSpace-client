@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
@@ -168,7 +167,7 @@ const RoomSelector = (props) => {
       }
       targetId={config.frameId}
     >
-      <Box id={config.frameId} />
+      <div id={config.frameId} />
     </Frame>
   );
 

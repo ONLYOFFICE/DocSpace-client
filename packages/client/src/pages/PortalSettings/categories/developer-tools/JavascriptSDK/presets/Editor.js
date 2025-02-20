@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { inject, observer } from "mobx-react";
@@ -128,7 +127,7 @@ const Editor = (props) => {
       targetId={config.frameId}
     >
       {config.id !== undefined ? (
-        <Box id={config.frameId} />
+        <div id={config.frameId} />
       ) : (
         <EmptyIframeContainer
           text={t("FilePreview")}

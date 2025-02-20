@@ -27,7 +27,7 @@
 import FileActionsOwnerReactSvgUrl from "PUBLIC_DIR/images/file.actions.owner.react.svg?url";
 import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
-import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
+import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
@@ -35,15 +35,15 @@ import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.rea
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import TickRoundedSvgUrl from "PUBLIC_DIR/images/tick.rounded.svg?url";
 import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import CircleCrossSvgUrl from "PUBLIC_DIR/images/icons/16/circle.cross.svg?url";
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import DuplicateReactSvgUrl from "PUBLIC_DIR/images/duplicate.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
@@ -77,6 +77,8 @@ import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 
+import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
+import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
@@ -705,10 +707,7 @@ class ContextOptionsStore {
       );
     } else {
       translations = {
-        deleteOperation: t("Translations:DeleteOperation"),
         deleteFromTrash: t("Translations:DeleteFromTrash"),
-        deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-        FolderRemoved: t("Files:FolderRemoved"),
       };
 
       const selectedFolder = getSelectedFolder();
@@ -740,17 +739,10 @@ class ContextOptionsStore {
       return;
     }
 
-    const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
-      successRemoveFile: t("Files:FileRemoved"),
-      successRemoveFolder: t("Files:FolderRemoved"),
-      successRemoveRoom: t("Files:RoomRemoved"),
-      successRemoveRooms: t("Files:RoomsRemoved"),
-    };
-
     this.filesActionsStore.deleteItemAction(
       id,
-      translations,
+      title,
+      {},
       !isFolder,
       providerKey,
       isRoom,
@@ -821,6 +813,26 @@ class ContextOptionsStore {
     const event = new Event(Events.ROOM_EDIT);
     event.item = item;
     window.dispatchEvent(event);
+  };
+
+  onSaveAsTemplate = (item) => {
+    const event = new Event(Events.SAVE_AS_TEMPLATE);
+    event.item = item;
+    window.dispatchEvent(event);
+  };
+
+  onCreateRoomTemplate = (item) => {
+    this.filesActionsStore.onCreateRoomFromTemplate(item);
+  };
+
+  onEditRoomTemplate = (item) => {
+    const event = new Event(Events.ROOM_EDIT);
+    event.item = { ...item, isEdit: true };
+    window.dispatchEvent(event);
+  };
+
+  onOpenTemplateAccessOptions = () => {
+    this.dialogsStore.setTemplateAccessSettingsVisible(true);
   };
 
   // onLoadLinks = async (t, item) => {
@@ -1061,11 +1073,22 @@ class ContextOptionsStore {
     cb && cb();
   };
 
-  onCreateOform = (navigate) => {
+  onCreateOform = async (navigate) => {
+    const { oformFromFolderId } = this.oformsStore;
+    const { getFolderInfo } = this.filesStore;
+    const { getPublicKey } = this.filesActionsStore;
+
     this.infoPanelStore.setIsVisible(false);
+
     const filesFilter = FilesFilter.getDefault();
     filesFilter.folder = this.oformsStore.oformFromFolderId;
+
+    const currentFolder = await getFolderInfo(oformFromFolderId);
+    const publicKey = await getPublicKey(currentFolder);
+    if (publicKey) filesFilter.key = publicKey;
+
     const filterUrlParams = filesFilter.toUrlParams();
+
     const url = getCategoryUrl(
       this.filesStore.categoryType,
       filesFilter.folder,
@@ -1220,7 +1243,8 @@ class ContextOptionsStore {
   };
 
   getHeaderOptions = (t, item) => {
-    const { isRecycleBinFolder, isArchiveFolder } = this.treeFoldersStore;
+    const { isRecycleBinFolder, isArchiveFolder, isTemplatesFolder } =
+      this.treeFoldersStore;
     const { roomsForDelete, roomsForRestore } = this.filesStore;
 
     const canRestoreAll = roomsForRestore.length > 0;
@@ -1295,6 +1319,10 @@ class ContextOptionsStore {
           icon: MoveReactSvgUrl,
         },
       ];
+    }
+
+    if (isTemplatesFolder) {
+      return [];
     }
 
     return this.getFilesContextOptions(item, t, false, true);
@@ -1650,11 +1678,35 @@ class ContextOptionsStore {
         disabled: !item.security?.Reconnect || !item.security?.EditRoom,
       },
       {
+        id: "option_create-room",
+        key: "create-room-from-template",
+        label: t("Files:CreateRoom"),
+        icon: CreateRoomReactSvgUrl,
+        onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),
+        disabled: false,
+      },
+      {
         id: "option_edit-room",
         key: "edit-room",
         label: t("EditRoom"),
         icon: SettingsReactSvgUrl,
         onClick: () => this.onClickEditRoom(item),
+        disabled: false,
+      },
+      {
+        id: "option_edit-room",
+        key: "edit-template",
+        label: t("EditTemplate"),
+        icon: SettingsReactSvgUrl,
+        onClick: () => this.onEditRoomTemplate(item),
+        disabled: false,
+      },
+      {
+        id: "option_access-settings",
+        key: "access-settings",
+        label: t("AccessSettings"),
+        icon: PersonReactSvgUrl,
+        onClick: () => this.onOpenTemplateAccessOptions(),
         disabled: false,
       },
       {
@@ -1732,6 +1784,15 @@ class ContextOptionsStore {
         icon: ExportRoomIndexSvgUrl,
         onClick: () => this.onExportRoomIndex(t, item.id),
         disabled: !item.indexing || !item.security?.IndexExport,
+      },
+      {
+        id: "option_save-as-template",
+        key: "save-as-template",
+        label: t("SaveAsTemplate"),
+        icon: CreateTemplateSvgUrl,
+        onClick: () => this.onSaveAsTemplate(item),
+        badgeLabel: t("New"),
+        disabled: !item.security?.Create || item.providerKey,
       },
       {
         id: "option_owner-change",
@@ -1949,7 +2010,9 @@ class ContextOptionsStore {
         key: "delete",
         label: isRootThirdPartyFolder
           ? t("Common:Disconnect")
-          : t("Common:Delete"),
+          : item.isTemplate
+            ? t("DeleteTemplate")
+            : t("Common:Delete"),
         icon: TrashReactSvgUrl,
         onClick: () =>
           isEditing
@@ -2232,11 +2295,7 @@ class ContextOptionsStore {
                 setDeleteDialogVisible(true);
               } else {
                 const translations = {
-                  deleteOperation: t("Translations:DeleteOperation"),
                   deleteFromTrash: t("Translations:DeleteFromTrash"),
-                  deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-                  FileRemoved: t("Files:FileRemoved"),
-                  FolderRemoved: t("Files:FolderRemoved"),
                 };
 
                 this.filesActionsStore

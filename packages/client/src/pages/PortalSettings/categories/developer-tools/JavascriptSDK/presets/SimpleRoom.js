@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
@@ -215,7 +214,7 @@ const SimpleRoom = (props) => {
       targetId={config.frameId}
     >
       {config.id !== undefined ? (
-        <Box id={config.frameId} />
+        <div id={config.frameId} />
       ) : (
         <EmptyIframeContainer
           text={t("RoomPreview")}

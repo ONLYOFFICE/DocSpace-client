@@ -29,7 +29,6 @@ import styled from "styled-components";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 
@@ -73,7 +72,7 @@ const ConvertDialogComponent = (props) => {
     isRecentFolder,
     isFavoritesFolder,
     isShareFolder,
-    setIsConvertSingleFile,
+
     createNewIfExist,
     isUploadAction,
     cancelUploadAction,
@@ -110,7 +109,6 @@ const ConvertDialogComponent = (props) => {
 
   const onChangeRadioButton = (e) => {
     setSelectedOptionType(e.target.value);
-    setIsConvertSingleFile(false);
   };
 
   const onChangeFormat = () =>
@@ -119,7 +117,6 @@ const ConvertDialogComponent = (props) => {
 
   const onClose = () => {
     setConvertDialogVisible(false);
-    setIsConvertSingleFile(false);
   };
 
   const onCloseDialog = () => {
@@ -134,7 +131,6 @@ const ConvertDialogComponent = (props) => {
     onClose();
 
     if (convertSingleFile) {
-      setIsConvertSingleFile(true);
       const item = {
         fileId: convertItem.id,
         toFolderId: folderId,
@@ -178,7 +174,7 @@ const ConvertDialogComponent = (props) => {
         </Text>
 
         {isXML ? (
-          <Box paddingProp="16px 0 0">
+          <div style={{ boxSizing: "border-box", padding: "16px 0 0" }}>
             <Text>{t("SelectFileType")}</Text>
             <RadioButtonGroup
               orientation="vertical"
@@ -189,7 +185,7 @@ const ConvertDialogComponent = (props) => {
               spacing="12px"
               style={{ marginTop: "12px" }}
             />
-          </Box>
+          </div>
         ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -270,7 +266,7 @@ export default inject(
     const {
       convertUploadedFiles,
       convertFile,
-      setIsConvertSingleFile,
+
       cancelUploadAction,
     } = uploadDataStore;
     const { storeOriginalFiles, setStoreOriginal, hideConfirmConvert } =
@@ -300,7 +296,6 @@ export default inject(
       isRecentFolder,
       isFavoritesFolder,
       isShareFolder,
-      setIsConvertSingleFile,
       createNewIfExist,
       isUploadAction,
       cancelUploadAction,

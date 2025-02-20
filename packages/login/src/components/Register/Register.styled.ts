@@ -26,10 +26,10 @@
 
 import styled from "styled-components";
 
-import { Box } from "@docspace/shared/components/box";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
-export const StyledRegister = styled(Box).attrs(injectDefaultTheme)`
+export const StyledRegister = styled.div.attrs(injectDefaultTheme)`
+  box-sizing: border-box;
   position: absolute;
   display: flex;
   align-items: center;

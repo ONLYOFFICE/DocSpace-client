@@ -79,6 +79,7 @@ export type TTextProps = {
   isRootFolderTitle: boolean;
   onClick: () => void;
   className?: string;
+  badgeLabel?: string;
 };
 
 export type TNavigationLogoProps = {

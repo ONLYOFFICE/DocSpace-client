@@ -123,12 +123,10 @@ export default inject(
     const { primaryProgressDataStore, secondaryProgressDataStore } =
       uploadDataStore;
 
-    const { visible: primaryProgressDataVisible } = primaryProgressDataStore;
-    const { visible: secondaryProgressDataStoreVisible } =
-      secondaryProgressDataStore;
+    const { isPrimaryProgressVisbile } = primaryProgressDataStore;
+    const { isSecondaryProgressVisbile } = secondaryProgressDataStore;
 
-    const showProgress =
-      primaryProgressDataVisible || secondaryProgressDataStoreVisible;
+    const showProgress = isPrimaryProgressVisbile || isSecondaryProgressVisbile;
 
     const {
       showText,

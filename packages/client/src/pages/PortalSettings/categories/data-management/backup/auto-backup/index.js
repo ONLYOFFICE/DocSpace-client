@@ -639,7 +639,6 @@ class AutomaticBackup extends React.PureComponent {
         {isBackupProgressVisible ? (
           <FloatingButton
             className="layout-progress-bar"
-            icon="file"
             alert={false}
             percent={downloadingProgress}
           />

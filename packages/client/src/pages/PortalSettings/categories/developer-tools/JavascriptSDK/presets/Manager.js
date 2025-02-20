@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -346,7 +345,7 @@ const Manager = (props) => {
       height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
-      <Box id={config.frameId} />
+      <div id={config.frameId} />
     </Frame>
   );
 

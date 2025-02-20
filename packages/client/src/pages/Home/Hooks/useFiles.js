@@ -98,10 +98,23 @@ const useFiles = ({
 
     const url = getCategoryUrl(categoryType);
 
-    filter.searchArea =
-      categoryType === CategoryType.Shared
-        ? RoomSearchArea.Active
-        : RoomSearchArea.Archive;
+    let searchArea;
+
+    switch (categoryType) {
+      case CategoryType.Shared:
+        searchArea = RoomSearchArea.Shared;
+        break;
+
+      case CategoryType.Archive:
+        searchArea = RoomSearchArea.Archive;
+        break;
+
+      default:
+        searchArea = RoomSearchArea.Archive;
+        break;
+    }
+
+    filter.searchArea = searchArea;
 
     navigate(`${url}?${filter.toUrlParams()}`);
   };
@@ -123,7 +136,7 @@ const useFiles = ({
         if (f.length > 0) startUpload(f, null, t);
       })
       .catch((err) => {
-        toastr.error(err);
+        toastr.error(err, null, 0, true);
       });
   };
 

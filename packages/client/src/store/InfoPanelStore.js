@@ -43,7 +43,7 @@ import {
   getCreateShareLinkKey,
   getExpirationDate,
 } from "@docspace/shared/components/share/Share.helpers";
-import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { getRoomInfo, getTemplateAvailable } from "@docspace/shared/api/rooms";
 import {
   getPrimaryLink,
   getExternalLinks,
@@ -112,6 +112,8 @@ class InfoPanelStore {
   publicRoomStore = null;
 
   infoPanelMembers = null;
+
+  templateAvailableToEveryone = false;
 
   infoPanelRoom = null;
 
@@ -379,8 +381,6 @@ class InfoPanelStore {
 
     const newInfoPanelSelection = await getRoomInfo(currentFolderRoomId);
 
-    console.log("newInfoPanelSelection", newInfoPanelSelection);
-
     const roomIndex = this.selectedFolderStore.navigationPath.findIndex(
       (f) => f.id === currentFolderRoomId,
     );
@@ -527,6 +527,10 @@ class InfoPanelStore {
 
   setInfoPanelMembers = (infoPanelMembers) => {
     this.infoPanelMembers = infoPanelMembers;
+  };
+
+  setTemplateAvailableToEveryone = (isAvailable) => {
+    this.templateAvailableToEveryone = isAvailable;
   };
 
   setInfoPanelSelection = (infoPanelSelection) => {
@@ -685,6 +689,7 @@ class InfoPanelStore {
     if (this.membersIsLoading) return;
     const roomId = this.infoPanelSelection.id;
     const roomType = this.infoPanelSelection.roomType;
+    const isTemplate = this.infoPanelSelection.isTemplate;
 
     const isPublicRoomType =
       roomType === RoomsType.PublicRoom ||
@@ -699,7 +704,8 @@ class InfoPanelStore {
       isPublicRoomType &&
       clearFilter &&
       this.withPublicRoomBlock &&
-      !withoutTitlesAndLinks
+      !withoutTitlesAndLinks &&
+      !isTemplate
     ) {
       requests.push(
         api.rooms
@@ -775,6 +781,13 @@ class InfoPanelStore {
     }
 
     this.setIsMembersPanelUpdating(true);
+
+    if (this.infoPanelSelection.isTemplate) {
+      const templateAvailable = await getTemplateAvailable(
+        this.infoPanelSelection.id,
+      );
+      this.setTemplateAvailableToEveryone(templateAvailable);
+    }
 
     const fetchedMembers = await this.fetchMembers(t, true, !!this.searchValue);
     this.setInfoPanelMembers(fetchedMembers);

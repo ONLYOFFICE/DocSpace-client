@@ -119,8 +119,7 @@ class TreeFoldersStore {
   setRootFoldersTitles = (treeFolders) => {
     treeFolders.forEach((elem) => {
       this.rootFoldersTitles[elem.rootFolderType] = {
-        id: elem.id,
-        title: elem.title,
+        ...elem,
       };
     });
   };
@@ -182,6 +181,10 @@ class TreeFoldersStore {
     return this.rootFoldersTitles[FolderType.Archive]?.id;
   }
 
+  get trashFolderInfo() {
+    return this.rootFoldersTitles[FolderType.TRASH];
+  }
+
   /**
    * @type {import("@docspace/shared/api/files/types").TFolder=}
    */
@@ -213,6 +216,12 @@ class TreeFoldersStore {
   get archiveFolder() {
     return this.treeFolders.find(
       (x) => x.rootFolderType === FolderType.Archive,
+    );
+  }
+
+  get templatesFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.Templates,
     );
   }
 
@@ -323,6 +332,21 @@ class TreeFoldersStore {
       this.archiveFolder &&
       this.selectedFolderStore.id === this.archiveFolder.id
     );
+  }
+
+  get isTemplatesFolderRoot() {
+    return FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isTemplatesFolder() {
+    return (
+      FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType &&
+      this.selectedFolderStore.isRootFolder
+    );
+  }
+
+  get isRoomsFolderRoot() {
+    return FolderType.Rooms === this.selectedFolderStore.rootFolderType;
   }
 
   get isArchiveFolderRoot() {

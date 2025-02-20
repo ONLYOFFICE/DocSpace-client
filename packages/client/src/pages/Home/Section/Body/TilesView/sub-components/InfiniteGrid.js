@@ -104,7 +104,6 @@ const InfiniteGrid = (props) => {
   const list = [];
 
   const addItemToList = (key, cls, clear) => {
-    console.log("cls", cls);
     list.push(
       <Item key={key} className={cls}>
         {cards}
@@ -152,7 +151,7 @@ const InfiniteGrid = (props) => {
 
   React.Children.map(children.props.children, (child) => {
     if (child) {
-      if (child.props.className === "tile-items-heading") {
+      if (child?.props["data-type"] === "header") {
         // If cards is not empty then put the cards into the list
         if (cards.length) {
           const type = checkType();

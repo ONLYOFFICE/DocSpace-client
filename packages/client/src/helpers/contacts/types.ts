@@ -65,6 +65,7 @@ export type TChangeUserTypeDialogData = {
   reassignUserData?: boolean;
   cancelReassignment?: VoidFunction;
   showDeleteProfileCheckbox?: boolean;
+  needReassignData?: boolean;
 };
 
 export type TChangeUserStatusDialogData = {

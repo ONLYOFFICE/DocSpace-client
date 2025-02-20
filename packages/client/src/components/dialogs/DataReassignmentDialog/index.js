@@ -116,6 +116,8 @@ const DataReassignmentDialog = ({
 
         if (res.error) {
           toastr.error(res.error);
+          setIsAbortTransfer(true);
+          if (res) setPercent(res.percentage);
           return;
         }
 

@@ -28,6 +28,7 @@ import FileActionsOwnerReactSvgUrl from "PUBLIC_DIR/images/file.actions.owner.re
 import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
+import BackupSvgUrl from "PUBLIC_DIR/images/icons/16/backup.svg?url";
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
@@ -670,6 +671,14 @@ class ContextOptionsStore {
   onFillingStatus = (item) => {
     console.log(item);
     this.dialogsStore.setFillingStatusPanelVisible(true);
+  };
+
+  onClickStartFilling = (item) => {
+    console.log(item);
+  };
+
+  onClickResetAndStartFilling = (item) => {
+    console.log(item);
   };
 
   onMediaFileClick = (fileId, item) => {
@@ -1670,6 +1679,22 @@ class ContextOptionsStore {
         onClick: () => this.onClickSubmitToFormGallery(item),
         isOutsideLink: true,
         disabled: !item.security?.SubmitToFormGallery,
+      },
+      {
+        id: "option_start-filling",
+        key: "start-filling",
+        label: t("Common:StartFilling"),
+        icon: FormFillRectSvgUrl,
+        onClick: () => this.onClickStartFilling(item),
+        disabled: false,
+      },
+      {
+        id: "option_reset-and-start-filling",
+        key: "reset-and-start-filling",
+        label: t("Common:ResetAndStartFilling"),
+        icon: BackupSvgUrl,
+        onClick: () => this.onClickResetAndStartFilling(item),
+        disabled: false,
       },
       {
         id: "option_filling-status",

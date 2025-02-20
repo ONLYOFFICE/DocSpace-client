@@ -2174,6 +2174,8 @@ class FilesStore {
         "edit-pdf",
         "separator0",
         "filling-status",
+        "start-filling",
+        "reset-and-start-filling",
         "submit-to-gallery",
         "separator-SubmitToGallery",
         "link-for-room-members",
@@ -2232,10 +2234,19 @@ class FilesStore {
         ]);
       }
 
-      if (!isPdf) {
-        // TODO: Remove after change security options
+      if (!item.security?.FillingStatus) {
+        fileOptions = removeOptions(fileOptions, ["filling-status"]);
+      }
+
+      if (!item.security?.StartFilling) {
+        fileOptions = removeOptions(fileOptions, ["start-filling"]);
+      }
+      if (!item.security?.ResetFilling) {
+        fileOptions = removeOptions(fileOptions, ["reset-and-start-filling"]);
+      }
+
+      if (!item.security?.StopFilling) {
         fileOptions = removeOptions(fileOptions, [
-          "filling-status",
           "separate-stop-filling",
           "stop-filling",
         ]);

@@ -590,5 +590,8 @@
   "StopFilling": "Stop filling",
   "BadgeMyDraftTitle": "My draft",
   "InProgress": "In progress",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "ProcessDetails": "Process details",
+  "StartFilling": "Start filling",
+  "ResetAndStartFilling": "Reset and start filling"
 }

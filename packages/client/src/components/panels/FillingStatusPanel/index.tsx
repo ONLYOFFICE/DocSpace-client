@@ -28,26 +28,53 @@ import { inject, observer } from "mobx-react";
 
 import { FillingStatusPanel } from "@docspace/shared/dialogs/FillingStatusPanel";
 
+import type { TFile } from "@docspace/shared/api/files/types";
+
+import type { TUser } from "@docspace/shared/api/people/types";
+
 export interface FillingStatusPanelWrapperProps {
   fillingStatusPanel: boolean;
   setFillingStatusPanelVisible: (visible: boolean) => void;
+  file: TFile | null;
+  user: TUser | null;
 }
 
 const FillingStatusPanelWrapper = ({
   fillingStatusPanel,
   setFillingStatusPanelVisible,
+  file,
+  user,
 }: FillingStatusPanelWrapperProps) => {
   const onClose = () => {
     setFillingStatusPanelVisible(false);
   };
 
-  return <FillingStatusPanel visible={fillingStatusPanel} onClose={onClose} />;
+  if (!file || !user) return null;
+
+  return (
+    <FillingStatusPanel
+      user={user}
+      file={file}
+      visible={fillingStatusPanel}
+      onClose={onClose}
+    />
+  );
 };
 
 export default inject<TStore, React.FC, FillingStatusPanelWrapperProps>(
-  ({ dialogsStore }) => {
+  ({ dialogsStore, filesStore, userStore }) => {
     const { fillingStatusPanel, setFillingStatusPanelVisible } = dialogsStore;
 
-    return { fillingStatusPanel, setFillingStatusPanelVisible };
+    const { user } = userStore;
+    const { bufferSelection } = filesStore;
+
+    const file = bufferSelection as TFile | null;
+
+    return {
+      fillingStatusPanel,
+      setFillingStatusPanelVisible,
+      file,
+      user,
+    };
   },
 )(observer(FillingStatusPanelWrapper as React.FC));

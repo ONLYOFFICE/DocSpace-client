@@ -26,9 +26,10 @@
 
 import moment from "moment";
 import { TCreatedBy, TPathParts } from "../../types";
-import {
+import type {
   EmployeeActivationStatus,
   EmployeeStatus,
+  FileFillingFormStatus,
   FileStatus,
   FileType,
   FolderType,
@@ -118,6 +119,7 @@ export type TFile = {
   expired?: string;
   isForm?: boolean;
   isFolder?: boolean;
+  formFillingStatus?: FileFillingFormStatus;
 };
 
 export type TOpenEditRequest = {

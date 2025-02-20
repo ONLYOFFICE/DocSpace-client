@@ -77,13 +77,14 @@ import {
   isBetaLanguage,
   getLogoUrl,
 } from "./common";
-import { DeviceType } from "../enums";
+import { DeviceType, FileFillingFormStatus } from "../enums";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
 import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
+import type { TTranslation } from "../types";
 
 export {
   isBetaLanguage,
@@ -235,5 +236,25 @@ export const addLog = (log: string, category: "socket") => {
     if (!window.logs[category]) window.logs[category] = [];
 
     window.logs[category].push(log);
+  }
+};
+
+export const getFillingStatusTitle = (
+  status: FileFillingFormStatus,
+  t: TTranslation,
+) => {
+  switch (status) {
+    case FileFillingFormStatus.Draft:
+      return t("Common:BadgeMyDraftTitle");
+    case FileFillingFormStatus.YourTurn:
+      return t("Common:YourTurn");
+    case FileFillingFormStatus.InProgress:
+      return t("Common:InProgress");
+    case FileFillingFormStatus.Stopped:
+      return t("Common:Stopped");
+    case FileFillingFormStatus.Completed:
+      return t("Common:Complete");
+    default:
+      return "";
   }
 };

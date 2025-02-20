@@ -17,7 +17,6 @@
   "AssignOwner": "Dodeli Vlasnika",
   "BackToParentFolderButton": "Izvrši povratak u roditeljski folder",
   "BadgeAlertDescription": "U ovom obrascu je navedeno nekoliko uloga. Obrasci sa više uloga nisu dostupni za popunjavanje ove vrste soba",
-  "BadgeMyDraftTitle": "Moja skica",
   "ByAuthor": "Autor",
   "ByCreation": "Kreirano",
   "ByErasure": "Brisanje",
@@ -27,7 +26,6 @@
   "Clean": "Očistiti",
   "ContainsSpecCharacter": "Naslov ne sme da sadrži bilo koji od sledećih znakova: *+:\"<>?|/",
   "Convert": "Konvertuj",
-
   "CopyLink": "Kopiraj link",
   "CopyLinkPassword": "Kopiraj lozinku linka",
   "CopyPassword": "Kopiraj lozinku",

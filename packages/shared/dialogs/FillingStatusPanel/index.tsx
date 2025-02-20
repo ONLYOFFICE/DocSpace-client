@@ -31,6 +31,7 @@ import { useTranslation } from "react-i18next";
 import PDFIcon from "PUBLIC_DIR/images/icons/24/pdf.svg";
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
+import { getFillingStatusTitle, getTitleWithoutExtension } from "../../utils";
 import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
@@ -46,62 +47,28 @@ import { Button, ButtonSize } from "../../components/button";
 import styles from "./FillingStatusPanel.module.scss";
 import type { FillingStatusPanelProps } from "./FillingStatusPanel.types";
 
-const userMock: ProcessDetails["user"] = {
-  activationStatus: 0,
-  avatar: "/static/images/default_user_photo_size_82-82.png?hash=2048559220",
-  avatarMax:
-    "/static/images/default_user_photo_size_200-200.png?hash=2048559220",
-  avatarMedium:
-    "/static/images/default_user_photo_size_48-48.png?hash=2048559220",
-  avatarOriginal:
-    "/static/images/default_user_photo_size_200-200.png?hash=2048559220",
-  avatarSmall:
-    "/static/images/default_user_photo_size_32-32.png?hash=2048559220",
-  department: "",
-  displayName: " Administrator",
-  email: "administrator@mail.com",
-  firstName: "Administrator",
-  hasAvatar: false,
-  id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
-  isAdmin: true,
-  isAnonim: false,
-  isCollaborator: false,
-  isLDAP: false,
-  isOwner: true,
-  isRoomAdmin: false,
-  isSSO: false,
-  isVisitor: false,
-  lastName: "",
-  loginEventId: 1,
-  mobilePhoneActivationStatus: 0,
-  profileUrl:
-    "http://192.168.1.121/accounts/people/filter?search=administrator%40gmail.com",
-  registrationDate: "2022-07-08T05:00:00.0000000+05:00",
-  status: 1,
-  // theme: "Base",
-  usedSpace: 220937408,
-  userName: "administrator",
-  workFrom: "2021-03-09T14:52:55.0000000+05:00",
-};
-
 export const FillingStatusPanel = ({
   visible,
   onClose,
+  file,
+  user,
 }: FillingStatusPanelProps) => {
   const { t } = useTranslation(["Common"]);
-  const [value, setValue] = useLocalStorage("fillingStatusBarPanel", true);
+  const [value, setValue] = useLocalStorage(
+    `fillingStatusBarPanel-${user.id}`,
+    true,
+  );
 
-  const fileName = "Document";
-  const fillingStatus = 3;
+  const fileName = getTitleWithoutExtension(file, false);
+  const fillingStatus = file.formFillingStatus!;
 
   const color = FILLING_FORM_STATUS_COLORS[fillingStatus];
-  const fileStatusText = "In progress";
-  const processTitle = "Process details";
+  const fileStatusText = getFillingStatusTitle(fillingStatus, t);
 
   const processDetails: ProcessDetails[] = [
     {
       id: "1",
-      user: { ...userMock, id: "1", userName: "User #1" },
+      user: { ...user, id: "1", userName: "User #1" },
       processStatus: RoleStatus.Filled,
       roleName: "Role #1",
       histories: [
@@ -119,14 +86,14 @@ export const FillingStatusPanel = ({
     },
     {
       id: "2",
-      user: userMock,
+      user,
       processStatus: RoleStatus.YourTurn,
       roleName: "Role #2",
       histories: [],
     },
     {
       id: "3",
-      user: { ...userMock, id: "3", userName: "User #3" },
+      user: { ...user, id: "3", userName: "User #3" },
       processStatus: RoleStatus.Waiting,
       roleName: "Role #3",
       histories: [],
@@ -163,12 +130,12 @@ export const FillingStatusPanel = ({
             className={styles.processTitle}
             level={HeadingLevel.h5}
           >
-            {processTitle}
+            {t("Common:ProcessDetails")}
           </Heading>
           <FillingRoleProcess
             fileStatus={fillingStatus}
             processDetails={processDetails}
-            currentUserId={userMock.id}
+            currentUserId={user.id}
           />
         </div>
       </ModalDialog.Body>

@@ -3305,6 +3305,7 @@ class FilesStore {
         external,
         passwordProtected,
         watermark,
+        formFillingStatus,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3483,6 +3484,7 @@ class FilesStore {
         external,
         passwordProtected,
         watermark,
+        formFillingStatus,
       };
     });
   };

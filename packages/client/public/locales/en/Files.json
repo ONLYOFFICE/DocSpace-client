@@ -25,7 +25,6 @@
   "BackToParentFolderButton": "Back to parent folder",
   "BackupNotAllowedInFormRoom": "The backup file cannot be saved to the Form Filling room since this room type can only contain PDF forms.",
   "BadgeAlertDescription": "Several roles are specified in this form. Forms with multiple roles are not available for filling in this type of room",
-  "BadgeMyDraftTitle": "My draft",
   "ByAuthor": "Author",
   "ByCreation": "Created",
   "ByErasure": "Erasure",

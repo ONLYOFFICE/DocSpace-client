@@ -52,6 +52,7 @@ import {
   size,
   classNames,
   injectDefaultTheme,
+  getFillingStatusTitle,
 } from "@docspace/shared/utils";
 import NewFilesBadge from "./NewFilesBadge";
 
@@ -212,8 +213,8 @@ const Badges = ({
     if (!isTrashFolder) openLocationFile();
   };
 
-  const fillingStatus = 5;
-  const fillingStatusColor = FILLING_FORM_STATUS_COLORS[fillingStatus];
+  const fillingStatusColor = FILLING_FORM_STATUS_COLORS[item.formFillingStatus];
+  const fillingStatusTitle = getFillingStatusTitle(item.formFillingStatus, t);
 
   return fileExst ? (
     <div className="badges additional-badges file__badges">
@@ -230,15 +231,15 @@ const Badges = ({
         />
       )} */}
 
-      {fillingStatus ? (
+      {item.formFillingStatus ? (
         <BadgeWrapper isTile={isTile}>
           <Badge
             noHover
             isVersionBadge
             className="badge tablet-badge icons-group"
             backgroundColor={fillingStatusColor}
-            label={t("BadgeMyDraftTitle")}
-            title={t("BadgeMyDraftTitle")}
+            label={fillingStatusTitle}
+            title={fillingStatusTitle}
             {...versionBadgeProps}
             style={{
               width: "max-content",
@@ -254,8 +255,8 @@ const Badges = ({
             isVersionBadge
             className="badge-version badge-version-current tablet-badge icons-group"
             backgroundColor={theme.filesBadges.badgeBackgroundColor}
-            label={t("BadgeMyDraftTitle")}
-            title={t("BadgeMyDraftTitle")}
+            label={t("Common:BadgeMyDraftTitle")}
+            title={t("Common:BadgeMyDraftTitle")}
             {...versionBadgeProps}
             style={{
               width: "max-content",

@@ -248,8 +248,6 @@ class SettingsStore {
 
   externalResources: TExternalResources | null = null;
 
-  bookTrainingEmail = null;
-
   hotkeyPanelVisible = false;
 
   frameConfig: Nullable<TFrameConfig> = null;
@@ -1501,7 +1499,14 @@ class SettingsStore {
     return this.externalResources &&
       this.externalResources?.common.entries?.documentationemail
       ? `${this.externalResources}${this.externalResources?.common.entries?.documentationemail}`
-      : null;
+      : "";
+  }
+
+  get bookTrainingEmail() {
+    return this.externalResources &&
+      this.externalResources?.common.entries?.booktrainingemail
+      ? `${this.externalResources}${this.externalResources?.common.entries?.booktrainingemail}`
+      : "";
   }
 }
 

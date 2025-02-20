@@ -58,7 +58,11 @@ export const TileContainer = ({
     if ((isFolder || itemId === -1) && !fileExst && !isRoom) {
       Folders.push(
         <div
-          className={classNames(styles.tileItemWrapper, styles.folder)}
+          className={classNames(
+            styles.tileItemWrapper,
+            styles.folder,
+            "folder",
+          )}
           key={itemId}
         >
           {item}
@@ -67,7 +71,7 @@ export const TileContainer = ({
     } else if (isRoom) {
       Rooms.push(
         <div
-          className={classNames(styles.tileItemWrapper, styles.room)}
+          className={classNames(styles.tileItemWrapper, styles.room, "room")}
           key={itemId}
         >
           {item}
@@ -76,7 +80,7 @@ export const TileContainer = ({
     } else {
       Files.push(
         <div
-          className={classNames(styles.tileItemWrapper, styles.file)}
+          className={classNames(styles.tileItemWrapper, styles.file, "file")}
           key={itemId}
         >
           {item}
@@ -106,6 +110,7 @@ export const TileContainer = ({
           size={HeadingSize.xsmall}
           id="folder-tile-heading"
           className={headingClassNames}
+          data-type="header"
         >
           {headingFolders}
         </Heading>
@@ -121,7 +126,11 @@ export const TileContainer = ({
       ) : null}
 
       {Files.length > 0 ? (
-        <Heading size={HeadingSize.xsmall} className={headingClassNames}>
+        <Heading
+          size={HeadingSize.xsmall}
+          className={headingClassNames}
+          data-type="header"
+        >
           {headingFiles}
         </Heading>
       ) : null}
@@ -139,7 +148,7 @@ export const TileContainer = ({
 
   return (
     <div
-      className={classNames(styles.tileContainer, className)}
+      className={classNames(className, styles.tileContainer)}
       id={id}
       style={style}
     >

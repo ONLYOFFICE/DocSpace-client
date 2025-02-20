@@ -30,9 +30,12 @@ import React from "react";
 import { makeAutoObservable } from "mobx";
 
 import { Nullable } from "@docspace/shared/types";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import type {
+  TFileItem,
+  TFolderItem,
+} from "@/app/(docspace)/_hooks/useItemList";
 
-const isSame = (a: TFile | TFolder, b: TFile | TFolder) => {
+const isSame = (a: TFileItem | TFolderItem, b: TFileItem | TFolderItem) => {
   if ("fileExst" in a && "fileExst" in b) {
     return a.id === b.id;
   }
@@ -41,34 +44,34 @@ const isSame = (a: TFile | TFolder, b: TFile | TFolder) => {
 };
 
 class FilesSelectionStore {
-  bufferSelection: Nullable<TFile | TFolder> = null;
+  bufferSelection: Nullable<TFileItem | TFolderItem> = null;
 
-  selection: (TFile | TFolder)[] = [];
+  selection: (TFileItem | TFolderItem)[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setSelection = (items?: (TFile | TFolder)[]) => {
+  setSelection = (items?: (TFileItem | TFolderItem)[]) => {
     this.selection = items ? items : [];
   };
 
-  addSelection = (item: TFile | TFolder) => {
+  addSelection = (item: TFileItem | TFolderItem) => {
     if (this.selection.some((i) => isSame(i, item))) {
       return this.removeSelection(item);
     }
     this.selection.push(item);
   };
 
-  removeSelection = (item: TFile | TFolder) => {
+  removeSelection = (item: TFileItem | TFolderItem) => {
     this.selection = this.selection.filter((i) => !isSame(i, item));
   };
 
-  setBufferSelection = (item: Nullable<TFile | TFolder>) => {
+  setBufferSelection = (item: Nullable<TFileItem | TFolderItem>) => {
     this.bufferSelection = item;
   };
 
-  isCheckedItem = (item: TFile | TFolder) => {
+  isCheckedItem = (item: TFileItem | TFolderItem) => {
     return this.selection.some((i) => isSame(i, item));
   };
 }

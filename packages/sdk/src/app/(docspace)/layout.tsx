@@ -39,6 +39,7 @@ import { getFilesSettings, getFolder } from "@/api/files";
 
 import { Layout } from "./_components/layout";
 import { SectionWrapper as Section } from "./_components/section";
+import SelectionArea from "./_components/selection-area";
 import Header, { HeaderProps } from "./_components/header";
 import { Filter, FilterProps } from "./_components/filter";
 
@@ -94,6 +95,7 @@ export default async function DocspaceLayout({
           isEmptyPage={folders.length === 0 && files.length === 0}
           filesFilter={filter!}
         />
+        <SelectionArea />
       </Layout>
     </main>
   );

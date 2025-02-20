@@ -207,7 +207,7 @@ class UsersStore {
     const changeMyType = (value: { id: string; data: TUser }) => {
       console.log(`[WS] ${SocketEvents.ChangeMyType}, id: ${value?.id}`);
 
-      if (!value?.data) return;
+      if (!value) return;
 
       const { fetchTreeFolders } = this.treeFoldersStore;
       const { setUser } = this.userStore;

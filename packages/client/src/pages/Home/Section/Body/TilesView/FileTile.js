@@ -200,12 +200,7 @@ const FileTile = (props) => {
           openUser={onOpenUser}
           showStorageInfo={showStorageInfo}
         >
-          <FilesTileContent
-            t={t}
-            item={item}
-            // sectionWidth={sectionWidth}
-            onFilesClick={onFilesClick}
-          />
+          <FilesTileContent t={t} item={item} onFilesClick={onFilesClick} />
           {badgesComponent}
         </Tile>
       </StyledDragAndDrop>

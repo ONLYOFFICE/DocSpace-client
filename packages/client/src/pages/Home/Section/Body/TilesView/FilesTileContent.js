@@ -34,7 +34,7 @@ import { Text } from "@docspace/shared/components/text";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet } from "@docspace/shared/utils";
-import TileContent from "./sub-components/TileContent";
+import { TileContent } from "@docspace/shared/components/tiles";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 

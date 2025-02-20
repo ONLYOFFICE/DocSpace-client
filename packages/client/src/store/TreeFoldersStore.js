@@ -119,8 +119,7 @@ class TreeFoldersStore {
   setRootFoldersTitles = (treeFolders) => {
     treeFolders.forEach((elem) => {
       this.rootFoldersTitles[elem.rootFolderType] = {
-        id: elem.id,
-        title: elem.title,
+        ...elem,
       };
     });
   };
@@ -181,6 +180,9 @@ class TreeFoldersStore {
   get archiveRoomsId() {
     return this.rootFoldersTitles[FolderType.Archive]?.id;
   }
+
+  get trashFolderInfo() {
+    return this.rootFoldersTitles[FolderType.TRASH];
 
   get personalUserFolderTitle() {
     return this.rootFoldersTitles[FolderType.USER]?.title;

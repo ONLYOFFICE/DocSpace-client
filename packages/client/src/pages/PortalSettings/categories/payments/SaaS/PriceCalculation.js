@@ -89,6 +89,7 @@ const PriceCalculation = ({
   isFreeAfterPaidPeriod,
   managersCount,
   getPaymentLink,
+  isYearTariff,
 }) => {
   const didMountRef = useRef(false);
 
@@ -129,35 +130,29 @@ const PriceCalculation = ({
   const priceInfoPerManager = (
     <div className="payment_price_user">
       <Text
-        noSelect
-        fontSize="13px"
         color={
           isDisabled
             ? theme.client.settings.payment.priceContainer.disablePriceColor
             : theme.client.settings.payment.priceColor
         }
-        fontWeight={600}
       >
-        <Trans t={t} i18nKey="PerUserMonth" ns="Common">
-          ""
-          <Text
-            fontSize="16px"
-            isBold
-            as="span"
-            fontWeight={600}
-            color={
-              isDisabled
-                ? theme.client.settings.payment.priceContainer.disablePriceColor
-                : theme.client.settings.payment.priceColor
-            }
-          >
-            {{ currencySymbol }}
-          </Text>
-          <Text fontSize="16px" isBold as="span" fontWeight={600}>
-            {{ price: priceManagerPerMonth }}
-          </Text>
-          per manager/month
-        </Trans>
+        {isYearTariff ? (
+          <Trans
+            t={t}
+            i18nKey="PerUserYear"
+            ns="Common"
+            values={{ currencySymbol, price: priceManagerPerMonth }}
+            components={{ 1: <strong style={{ fontSize: "16px" }} /> }}
+          />
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="PerUserMonth"
+            ns="Common"
+            values={{ currencySymbol, price: priceManagerPerMonth }}
+            components={{ 1: <strong style={{ fontSize: "16px" }} /> }}
+          />
+        )}
       </Text>
     </div>
   );
@@ -207,6 +202,7 @@ export default inject(
     paymentStore,
     paymentQuotasStore,
     currentTariffStatusStore,
+    currentQuotaStore,
   }) => {
     const {
       tariffsInfo,
@@ -223,6 +219,7 @@ export default inject(
 
     const { planCost } = paymentQuotasStore;
     const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
+    const { isYearTariff } = currentQuotaStore;
 
     return {
       canUpdateTariff,
@@ -241,6 +238,7 @@ export default inject(
       priceManagerPerMonth: planCost.value,
       currencySymbol: planCost.currencySymbol,
       getPaymentLink,
+      isYearTariff,
     };
   },
 )(observer(PriceCalculation));

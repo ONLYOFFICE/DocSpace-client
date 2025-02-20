@@ -49,7 +49,6 @@ const EmptyTrashDialogComponent = (props) => {
   const onEmptyTrash = () => {
     onClose();
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
       successOperation: isArchiveFolder
         ? t("SuccessEmptyArchived")
         : t("SuccessEmptyTrash"),

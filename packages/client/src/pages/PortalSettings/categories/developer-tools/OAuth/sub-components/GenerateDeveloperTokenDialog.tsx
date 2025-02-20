@@ -48,7 +48,7 @@ import { Link } from "@docspace/shared/components/link";
 import { getCorrectDate } from "@docspace/shared/utils";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { StyledGenerateDevelopTokenContainer } from "../OAuth.styled";

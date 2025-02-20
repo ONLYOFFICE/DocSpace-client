@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 // import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg?url";
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import React, { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 

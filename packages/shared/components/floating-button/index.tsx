@@ -24,19 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useMemo } from "react";
 
-import ButtonUploadIcon from "PUBLIC_DIR/images/button.upload.react.svg";
-import ButtonFileIcon from "PUBLIC_DIR/images/button.file.react.svg";
-import ButtonTrashIcon from "PUBLIC_DIR/images/button.trash.react.svg";
-import ButtonMoveIcon from "PUBLIC_DIR/images/button.move.react.svg";
-import ButtonDuplicateIcon from "PUBLIC_DIR/images/button.duplicate.react.svg";
+import UploadIcon from "PUBLIC_DIR/images/icons/24/upload.react.svg";
+import TrashIcon from "PUBLIC_DIR/images/icons/24/trash.react.svg";
 import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
-import ButtonPlusIcon from "PUBLIC_DIR/images/icons/16/button.plus.react.svg";
-import ButtonMinusIcon from "PUBLIC_DIR/images/icons/16/button.minus.react.svg";
+import PlusIcon from "PUBLIC_DIR/images/icons/16/button.plus.react.svg";
+import MinusIcon from "PUBLIC_DIR/images/icons/16/button.minus.react.svg";
 import RefreshIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 import CloseIcon from "PUBLIC_DIR/images/close-icon.react.svg";
-import ExportRoomIndexIcon from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg";
+import ExportRoomIndexIcon from "PUBLIC_DIR/images/icons/24/export-room-index.react.svg";
+import HorizontalDotsIcon from "PUBLIC_DIR/images/icons/16/horizontal-dots.react.svg";
+import ArrowIcon from "PUBLIC_DIR/images/icons/16/top-arrow.react.svg";
+import TickIcon from "PUBLIC_DIR/images/icons/12/tick.react.svg";
+import DeletePermanentlyIcon from "PUBLIC_DIR/images/icons/24/delete-permanently.react.svg";
+import CopyIcon from "PUBLIC_DIR/images/icons/24/copy.react.svg";
+import DownloadIcon from "PUBLIC_DIR/images/icons/24/download.react.svg";
+import DuplicateIcon from "PUBLIC_DIR/images/icons/24/duplicate.react.svg";
+import MarkAsReadIcon from "PUBLIC_DIR/images/icons/24/mark-as-read.react.svg";
+import MoveIcon from "PUBLIC_DIR/images/icons/24/move.react.svg";
+import FileIcon from "PUBLIC_DIR/images/icons/24/file.react.svg";
 
 import { classNames } from "../../utils";
 
@@ -44,69 +51,40 @@ import { FloatingButtonProps } from "./FloatingButton.types";
 import { FloatingButtonIcons } from "./FloatingButton.enums";
 import styles from "./FloatingButton.module.scss";
 
-const MIN_PERCENTAGE_FOR_DISPLAYING_UPLOADING_INDICATOR = 3;
-
-const ANIMATION_DELAY = 1000;
-
 const ICON_COMPONENTS = {
-  [FloatingButtonIcons.upload]: <ButtonUploadIcon data-icon="upload" />,
-  [FloatingButtonIcons.file]: <ButtonFileIcon data-icon="file" />,
-  [FloatingButtonIcons.trash]: <ButtonTrashIcon data-icon="trash" />,
-  [FloatingButtonIcons.move]: <ButtonMoveIcon data-icon="move" />,
-  [FloatingButtonIcons.plus]: <ButtonPlusIcon data-icon="plus" />,
-  [FloatingButtonIcons.minus]: <ButtonMinusIcon data-icon="minus" />,
-  [FloatingButtonIcons.refresh]: <RefreshIcon data-icon="refresh" />,
-  [FloatingButtonIcons.duplicate]: (
-    <ButtonDuplicateIcon data-icon="duplicate" />
-  ),
-  [FloatingButtonIcons.exportIndex]: (
-    <ExportRoomIndexIcon data-icon="exportIndex" />
-  ),
+  [FloatingButtonIcons.upload]: <UploadIcon />,
+  [FloatingButtonIcons.other]: <FileIcon />,
+  [FloatingButtonIcons.trash]: <TrashIcon />,
+  [FloatingButtonIcons.move]: <MoveIcon />,
+  [FloatingButtonIcons.plus]: <PlusIcon />,
+  [FloatingButtonIcons.minus]: <MinusIcon />,
+  [FloatingButtonIcons.refresh]: <RefreshIcon />,
+  [FloatingButtonIcons.duplicate]: <DuplicateIcon />,
+  [FloatingButtonIcons.exportIndex]: <ExportRoomIndexIcon />,
+  [FloatingButtonIcons.dots]: <HorizontalDotsIcon />,
+  [FloatingButtonIcons.arrow]: <ArrowIcon />,
+  [FloatingButtonIcons.deletePermanently]: <DeletePermanentlyIcon />,
+  [FloatingButtonIcons.copy]: <CopyIcon />,
+  [FloatingButtonIcons.download]: <DownloadIcon />,
+  [FloatingButtonIcons.markAsRead]: <MarkAsReadIcon />,
 } as const;
-
-const useProgressAnimation = (percent: number) => {
-  const [animationCompleted, setAnimationCompleted] = useState(false);
-  const timerId = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    timerId.current = setTimeout(
-      () => setAnimationCompleted(percent === 100),
-      ANIMATION_DELAY,
-    );
-
-    return () => {
-      if (timerId.current) clearTimeout(timerId.current);
-    };
-  }, [percent]);
-
-  return animationCompleted;
-};
 
 const FloatingButton = ({
   id,
   className,
   style,
-  icon = FloatingButtonIcons.upload,
+  icon = FloatingButtonIcons.other,
   alert = false,
-  percent = 0,
+  completed = false,
   onClick,
   color,
   clearUploadedFilesHistory,
-  showTwoProgress,
+  withoutProgress,
+  showCancelButton,
+  withoutStatus = false,
 }: FloatingButtonProps) => {
-  const animationCompleted = useProgressAnimation(percent);
-
-  const displayProgress = useMemo(() => {
-    return (
-      !(percent === 100 && animationCompleted) &&
-      icon !== FloatingButtonIcons.minus
-    );
-  }, [percent, animationCompleted, icon]);
-
   const iconComponent = useMemo(() => {
-    return (
-      ICON_COMPONENTS[icon] ?? ICON_COMPONENTS[FloatingButtonIcons.duplicate]
-    );
+    return ICON_COMPONENTS[icon] ?? ICON_COMPONENTS[FloatingButtonIcons.other];
   }, [icon]);
 
   const handleProgressClear = () => {
@@ -121,9 +99,6 @@ const FloatingButton = ({
     <div
       className={classNames(
         styles.floatingButtonWrapper,
-        {
-          [styles.showTwoProgress]: showTwoProgress,
-        },
         "layout-progress-bar_wrapper",
       )}
     >
@@ -132,9 +107,11 @@ const FloatingButton = ({
         onClick={onClick}
         data-testid="floating-button"
         data-role="button"
-        data-display-progress={displayProgress ? "true" : "false"}
         aria-label={`${icon} button`}
-        className={classNames(styles.circleWrap, buttonClassName)}
+        className={classNames(styles.circleWrap, buttonClassName, {
+          [styles.loading]: !completed,
+          [styles.completed]: completed,
+        })}
         style={
           color
             ? ({
@@ -146,59 +123,49 @@ const FloatingButton = ({
       >
         <div
           className={classNames(styles.circle, {
-            [styles.showProgress]:
-              percent > MIN_PERCENTAGE_FOR_DISPLAYING_UPLOADING_INDICATOR &&
-              displayProgress,
-            [styles.loading]:
-              percent <= MIN_PERCENTAGE_FOR_DISPLAYING_UPLOADING_INDICATOR &&
-              displayProgress,
+            [styles.loading]: !completed,
+            [styles.completed]: completed,
           })}
-          style={
-            {
-              "--circle-rotation-angle": `${percent * 1.8}deg`,
-            } as React.CSSProperties
-          }
-          data-testid="floating-button-progress"
         >
-          <div
-            className={classNames(
-              styles.circleMask,
-              "circle__mask circle__full",
-            )}
-          >
-            <div className={classNames(styles.circleFill, "circle__fill")} />
-          </div>
-          <div className={classNames(styles.circleMask, "circle__mask")}>
-            <div className={classNames(styles.circleFill, "circle__fill")} />
-          </div>
-
-          <div
-            className={classNames(
-              styles.floatingButton,
-              styles.circle__background,
-              "circle__background",
-            )}
-            style={
-              { "--floating-button-background": color } as React.CSSProperties
-            }
-          >
-            <div className={classNames(styles.iconBox, "icon-box")}>
+          {withoutProgress ? null : <div className={styles.loader} />}
+          <div className={classNames(styles.floatingButton)}>
+            <div
+              className={classNames(styles.iconBox, "icon-box", {
+                [styles.accentIcon]: [
+                  FloatingButtonIcons.upload,
+                  FloatingButtonIcons.trash,
+                  FloatingButtonIcons.deletePermanently,
+                  FloatingButtonIcons.other,
+                ].includes(icon),
+              })}
+            >
               {iconComponent}
             </div>
-            {alert ? (
+            {!withoutStatus && (alert || completed) ? (
               <div
-                className={styles.alertIcon}
                 data-testid="floating-button-alert"
+                className={classNames(styles.alertIcon, {
+                  [styles.alert]: alert,
+                  [styles.complete]: !alert && completed,
+                })}
               >
-                <ButtonAlertIcon
-                  style={{ overflow: "hidden", verticalAlign: "middle" }}
-                />
+                {alert ? (
+                  <ButtonAlertIcon
+                    style={{ overflow: "hidden", verticalAlign: "middle" }}
+                  />
+                ) : (
+                  <TickIcon
+                    className="tick-icon"
+                    style={{ overflow: "hidden", verticalAlign: "middle" }}
+                  />
+                )}
               </div>
             ) : null}
           </div>
         </div>
       </div>
-      {clearUploadedFilesHistory && percent === 100 ? (
+
+      {showCancelButton ? (
         <CloseIcon
           className="layout-progress-bar_close-icon"
           onClick={handleProgressClear}

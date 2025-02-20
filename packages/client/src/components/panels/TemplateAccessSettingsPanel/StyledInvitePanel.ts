@@ -235,6 +235,13 @@ const StyledDropDown = styled(DropDown)<{
     .list-item_content {
       text-overflow: ellipsis;
       overflow: hidden;
+
+      .list-item_content-box {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
     }
 
     .email-list_avatar {

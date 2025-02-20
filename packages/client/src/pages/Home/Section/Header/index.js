@@ -285,8 +285,23 @@ const SectionHeaderContent = (props) => {
   const isContactsInsideGroupPage =
     contactsView === "inside_group" && !!groupId;
 
-  const buttonRef = React.useRef(null);
-  const addButtonRef = React.useRef(null);
+  const addButtonRefCallback = React.useCallback(
+    (ref) => {
+      if (ref) {
+        setRefMap(GuidanceRefKey.Uploading, ref);
+      }
+    },
+    [setRefMap],
+  );
+
+  const buttonRefCallback = React.useCallback(
+    (ref) => {
+      if (ref) {
+        setRefMap(GuidanceRefKey.Share, ref);
+      }
+    },
+    [setRefMap],
+  );
 
   const { getContactsMenuItems, onContactsChange } = useContactsHeader({
     setUsersSelected,
@@ -603,17 +618,11 @@ const SectionHeaderContent = (props) => {
   ];
 
   React.useEffect(() => {
-    if (buttonRef?.current) {
-      setRefMap(GuidanceRefKey.Share, buttonRef);
-    }
-    if (addButtonRef?.current) {
-      setRefMap(GuidanceRefKey.Uploading, addButtonRef);
-    }
-
     return () => {
       deleteRefMap(GuidanceRefKey.Share);
+      deleteRefMap(GuidanceRefKey.Uploading);
     };
-  }, [buttonRef.current, addButtonRef.current]);
+  }, [deleteRefMap]);
 
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
@@ -746,8 +755,8 @@ const SectionHeaderContent = (props) => {
                 badgeLabel={badgeLabel}
                 onContextOptionsClick={onContextOptionsClick}
                 onLogoClick={onLogoClick}
-                buttonRef={buttonRef}
-                addButtonRef={addButtonRef}
+                buttonRef={buttonRefCallback}
+                addButtonRef={addButtonRefCallback}
                 contextButtonAnimation={contextButtonAnimation}
                 guidAnimationVisible={guidAnimationVisible}
               />

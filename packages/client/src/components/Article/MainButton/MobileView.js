@@ -59,7 +59,6 @@ const MobileView = ({
   isRoomsFolder,
   mainButtonMobileVisible,
   setRefMap,
-  deleteRefMap,
 }) => {
   const [isOpenButton, setIsOpenButton] = React.useState(false);
   const mainButtonRef = React.useRef(null);
@@ -77,11 +76,7 @@ const MobileView = ({
     if (buttonElement) {
       setRefMap(GuidanceRefKey.Uploading, buttonElement);
     }
-
-    return () => {
-      deleteRefMap(GuidanceRefKey.Uploading);
-    };
-  }, [setRefMap, deleteRefMap]);
+  }, [setRefMap]);
 
   return (
     mainButtonMobileVisible && (
@@ -108,12 +103,11 @@ export default inject(
     const { isRoomsFolder } = treeFoldersStore;
     const { setUploadPanelVisible } = uploadDataStore;
 
-    const { setRefMap, deleteRefMap } = guidanceStore;
+    const { setRefMap } = guidanceStore;
     return {
       setUploadPanelVisible,
       isRoomsFolder,
       setRefMap,
-      deleteRefMap,
     };
   },
 )(observer(MobileView));

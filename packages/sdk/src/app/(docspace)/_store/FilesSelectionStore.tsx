@@ -36,9 +36,7 @@ import type {
 } from "@/app/(docspace)/_hooks/useItemList";
 
 const isSame = (a: TFileItem | TFolderItem, b: TFileItem | TFolderItem) => {
-  if ("fileExst" in a && "fileExst" in b) {
-    return a.id === b.id;
-  }
+  if (a.isFolder !== b.isFolder) return false;
 
   return a.id === b.id;
 };

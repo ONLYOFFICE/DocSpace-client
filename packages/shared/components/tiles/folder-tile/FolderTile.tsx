@@ -24,24 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "@docspace/shared/components/context-menu-button";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
-import { Link } from "@docspace/shared/components/link";
-import { Tags } from "@docspace/shared/components/tags";
 import { isMobile } from "react-device-detect";
 import styles from "./FolderTile.module.scss";
 import { FolderTileProps } from "./FolderTile.types";
 import classNames from "classnames";
-import { hasOwnProperty } from "../../utils/object";
-import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { hasOwnProperty } from "../../../utils/object";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 import { useTranslation } from "react-i18next";
-import { HeaderType } from "../context-menu/ContextMenu.types";
-import { Loader, LoaderTypes } from "../loader";
+import { HeaderType } from "../../context-menu/ContextMenu.types";
+import { Loader, LoaderTypes } from "../../loader";
 
 export const FolderTile = ({
   item,

@@ -43,7 +43,7 @@ import { TileContent } from "../tile-content/TileContent";
 
 const element = (
   <ReactSVG
-    className="room-icon-empty"
+    className="icon-empty"
     src={File32ReactSvgUrl}
     data-testid="empty-icon"
   />

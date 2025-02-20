@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useRef } from "react";
-import { ReactSVG } from "react-svg";
 import { isMobile } from "react-device-detect";
 import classNames from "classnames";
 

@@ -35,7 +35,12 @@ import {
 } from "@docspace/shared/api/people/types";
 import { TThirdPartyProvider } from "@docspace/shared/api/settings/types";
 
-import { EmployeeStatus, EmployeeType, Events } from "@docspace/shared/enums";
+import {
+  EmployeeStatus,
+  EmployeeType,
+  Events,
+  RoomSearchArea,
+} from "@docspace/shared/enums";
 import { getUserType } from "@docspace/shared/utils/common";
 import { Nullable } from "@docspace/shared/types";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
@@ -53,6 +58,7 @@ import {
   terminateReassignment,
 } from "@docspace/shared/api/people";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
@@ -79,6 +85,8 @@ import TargetUserStore from "./TargetUserStore";
 import GroupsStore from "./GroupsStore";
 import ContactsHotkeysStore from "./ContactsHotkeysStore";
 import DialogStore from "./DialogStore";
+
+import FilesStore from "../FilesStore";
 
 class UsersStore {
   filter = Filter.getDefault();
@@ -127,6 +135,7 @@ class UsersStore {
     public dialogStore: DialogStore,
     public clientLoadingStore: ClientLoadingStore,
     public treeFoldersStore: TreeFoldersStore,
+    public filesStore: FilesStore,
   ) {
     this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
@@ -139,6 +148,7 @@ class UsersStore {
     this.clientLoadingStore = clientLoadingStore;
     this.treeFoldersStore = treeFoldersStore;
     this.contactsTab = getContactsView();
+    this.filesStore = filesStore;
 
     makeAutoObservable(this);
 
@@ -202,7 +212,7 @@ class UsersStore {
       const { fetchTreeFolders } = this.treeFoldersStore;
       const { setUser } = this.userStore;
 
-      const { data } = value;
+      const { data, id } = value;
       const { isAdmin, isRoomAdmin, isCollaborator, isVisitor } = data;
       const { pathname } = window.location;
 
@@ -217,6 +227,18 @@ class UsersStore {
       if ((isAdmin || isRoomAdmin) && pathname.includes("accounts/people")) {
         this.getUsersList();
       }
+
+      const isArchive = pathname.includes("rooms/archived");
+      if (isArchive || pathname.includes("rooms/shared")) {
+        const { fetchRooms } = this.filesStore;
+
+        const filter = RoomsFilter.getDefault(
+          id,
+          isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
+        );
+        fetchRooms(filter);
+      }
+
       setUser(data);
       fetchTreeFolders();
     };

@@ -213,6 +213,7 @@ const peopleStore = new PeopleStore(
   currentQuotaStore,
   treeFoldersStore,
   setupStore,
+  filesStore,
 );
 
 const uploadDataStore = new UploadDataStore(

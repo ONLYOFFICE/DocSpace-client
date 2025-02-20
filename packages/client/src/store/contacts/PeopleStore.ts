@@ -52,6 +52,7 @@ import HeaderMenuStore from "./HeaderMenuStore";
 import InviteLinksStore from "./InviteLinksStore";
 import DialogStore from "./DialogStore";
 import ContactsConextOptionsStore from "./ContactsContextOptionsStore";
+import FilesStore from "../FilesStore";
 
 class PeopleStore {
   viewAs: TContactsViewAs = isDesktop() ? "table" : "row";
@@ -86,6 +87,7 @@ class PeopleStore {
     public currentQuotaStore: CurrentQuotasStore,
     public treeFoldersStore: TreeFoldersStore,
     public setup: SettingsSetupStore,
+    public filesStore: FilesStore,
   ) {
     this.infoPanelStore = infoPanelStore;
     this.accessRightsStore = accessRightsStore;
@@ -98,7 +100,7 @@ class PeopleStore {
     this.currentQuotaStore = currentQuotaStore;
     this.treeFoldersStore = treeFoldersStore;
     this.setup = setup;
-
+    this.filesStore = filesStore;
 
     this.dialogStore = new DialogStore();
     this.contactsHotkeysStore = new ContactsHotkeysStore(this);
@@ -125,6 +127,7 @@ class PeopleStore {
       this.dialogStore,
       clientLoadingStore,
       treeFoldersStore,
+      this.filesStore,
     );
 
     this.contextOptionsStore = new ContactsConextOptionsStore(

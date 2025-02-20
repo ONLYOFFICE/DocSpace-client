@@ -74,8 +74,6 @@ export default function useFilesSelection() {
           );
 
           if (selectableFolder) {
-            selectableFolder.isFolder = true;
-
             newSelections.push(selectableFolder);
           }
         }

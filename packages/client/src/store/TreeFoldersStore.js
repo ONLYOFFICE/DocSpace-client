@@ -183,6 +183,7 @@ class TreeFoldersStore {
 
   get trashFolderInfo() {
     return this.rootFoldersTitles[FolderType.TRASH];
+  }
 
   get personalUserFolderTitle() {
     return this.rootFoldersTitles[FolderType.USER]?.title;

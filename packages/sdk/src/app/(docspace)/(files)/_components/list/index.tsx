@@ -33,6 +33,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { PAGE_COUNT } from "@/utils/constants";
 
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
+import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 
 import useItemIcon from "@/app/(docspace)/_hooks/useItemIcon";
 import useItemList, {
@@ -45,6 +46,7 @@ import RowView from "../row-view";
 import EmptyView from "../empty-view";
 
 import { ListProps } from "./List.types";
+import useResetSelectionClick from "./hooks/useResetSelectionClick";
 
 const List = ({
   folders,
@@ -63,6 +65,9 @@ const List = ({
 
   const settingsStore = useSettingsStore();
   const { setItems } = useFilesListStore();
+  const { setSelection, setBufferSelection } = useFilesSelectionStore();
+
+  useResetSelectionClick({ setSelection, setBufferSelection });
 
   const { getIcon } = useItemIcon({
     filesSettings,

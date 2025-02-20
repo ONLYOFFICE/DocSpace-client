@@ -41,7 +41,7 @@ const isSame = (a: TFileItem | TFolderItem, b: TFileItem | TFolderItem) => {
   return a.id === b.id;
 };
 
-class FilesSelectionStore {
+export class FilesSelectionStore {
   bufferSelection: Nullable<TFileItem | TFolderItem> = null;
 
   selection: (TFileItem | TFolderItem)[] = [];

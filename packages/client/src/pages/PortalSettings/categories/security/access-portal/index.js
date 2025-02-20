@@ -95,9 +95,7 @@ const AccessPortal = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
 
       <PasswordStrengthSection />
@@ -125,9 +123,7 @@ const AccessPortal = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
 
       <TfaSection />
@@ -153,9 +149,7 @@ const AccessPortal = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
 
       <TrustedMailSection />
@@ -178,9 +172,7 @@ const AccessPortal = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
 
       <IpSecuritySection />
@@ -218,9 +210,7 @@ const AccessPortal = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
 
       <AdminMessageSection />
@@ -245,9 +235,7 @@ const AccessPortal = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
 
       <SessionLifetimeSection />

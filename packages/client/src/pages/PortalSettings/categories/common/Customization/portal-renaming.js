@@ -349,9 +349,7 @@ const PortalRenamingComponent = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
       {settingsBlock}
       <SaveCancelButtons

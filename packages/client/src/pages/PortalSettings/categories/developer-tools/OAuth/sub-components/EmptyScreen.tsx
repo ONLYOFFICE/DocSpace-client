@@ -92,9 +92,7 @@ const OAuthEmptyScreen = ({
           >
             {t("OAuth:OAuth")} {t("Common:Guide")}
           </ColorTheme>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </p>
 
       <RegisterNewButton />

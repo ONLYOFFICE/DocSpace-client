@@ -153,9 +153,7 @@ const ContactContainer = (props) => {
               </Trans>
             </Text>
           </div>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </StyledContactComponent>
     </>
   );

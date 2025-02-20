@@ -97,9 +97,7 @@ const DataManagementWrapper = (props) => {
                 >
                   {t("Common:LearnMore")}
                 </Link>
-              ) : (
-                <></>
-              )}
+              ) : null}
             </span>
           </Text>
         }

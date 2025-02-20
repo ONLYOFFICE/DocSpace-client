@@ -318,9 +318,7 @@ const DNSSettingsComponent = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
       {settingsBlock}
       <div className="send-request-container">{buttonContainer}</div>

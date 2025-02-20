@@ -248,9 +248,7 @@ const SessionLifetime = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup

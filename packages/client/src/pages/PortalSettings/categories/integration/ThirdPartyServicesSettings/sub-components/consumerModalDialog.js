@@ -115,9 +115,7 @@ class ConsumerModalDialog extends React.Component {
         </Text>
       ) : feedbackAndSupportUrl && !this.thirdPartyServicesUrl() ? (
         <Text as="div">{this.supportTeamDescription}</Text>
-      ) : (
-        <></>
-      );
+      ) : null;
   }
 
   componentDidMount() {

@@ -366,9 +366,7 @@ const WelcomePageSettingsComponent = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
       {settingsBlock}
       <SaveCancelButtons

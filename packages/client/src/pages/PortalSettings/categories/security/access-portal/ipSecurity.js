@@ -254,9 +254,7 @@ const IpSecurity = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup

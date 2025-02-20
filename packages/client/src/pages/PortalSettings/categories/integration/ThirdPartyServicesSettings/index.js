@@ -216,9 +216,7 @@ class ThirdPartyServices extends React.Component {
               >
                 {t("Common:LearnMore")}
               </Link>
-            ) : (
-              <></>
-            )}
+            ) : null}
           </div>
           <div className="consumer-item-wrapper request-block">
             <img

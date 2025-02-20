@@ -242,9 +242,7 @@ const CSP = ({
                 >
                   {t("Common:LearnMore")}
                 </Link>
-              ) : (
-                <></>
-              )}
+              ) : null}
             </div>
           </div>
         </InfoBar>

@@ -343,9 +343,7 @@ class ManualBackup extends React.Component {
               >
                 {t("Common:LearnMore")}
               </Link>
-            ) : (
-              <></>
-            )
+            ) : null
           ) : null}
         </div>
 

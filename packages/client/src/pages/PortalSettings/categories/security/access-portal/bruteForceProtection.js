@@ -265,9 +265,7 @@ const BruteForceProtection = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
 
       <FieldContainer

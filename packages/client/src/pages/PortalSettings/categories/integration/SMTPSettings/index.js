@@ -101,9 +101,7 @@ const SMTPSettings = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
 
       <CustomSettings t={t} />

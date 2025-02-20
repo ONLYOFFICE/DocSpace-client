@@ -149,9 +149,7 @@ const GuestReleaseTip = ({
               >
                 {t("Translations:GuestReleaseTipLink")}
               </ColorTheme>
-            ) : (
-              <></>
-            )}
+            ) : null}
           </StyledBody>
 
           <ReactSVG src={icon} alt="tip" />

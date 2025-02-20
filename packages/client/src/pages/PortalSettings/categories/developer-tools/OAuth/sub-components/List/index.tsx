@@ -94,9 +94,7 @@ const List = ({
         >
           {t("OAuth:OAuth")} {t("Common:Guide")}
         </ColorTheme>
-      ) : (
-        <></>
-      )}
+      ) : null}
       <RegisterNewButton currentDeviceType={currentDeviceType} />
       <Consumer>
         {(context) =>

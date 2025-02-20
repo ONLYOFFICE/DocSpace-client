@@ -48,9 +48,7 @@ const Description = ({ t, dataReassignmentUrl }) => {
         >
           {t("DataReassignmentDialog:MoreAboutDataTransfer")}
         </Link>
-      ) : (
-        <></>
-      )}
+      ) : null}
     </StyledAvailableList>
   );
 };

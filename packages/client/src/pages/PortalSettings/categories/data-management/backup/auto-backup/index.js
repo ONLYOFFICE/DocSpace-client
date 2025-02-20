@@ -518,9 +518,7 @@ class AutomaticBackup extends React.PureComponent {
               >
                 {t("Common:LearnMore")}
               </Link>
-            ) : (
-              <></>
-            )
+            ) : null
           ) : null}
         </div>
 

@@ -182,9 +182,7 @@ const DocumentService = ({
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </Styled.LocationHeader>
 
       <Styled.LocationForm onSubmit={onSubmit}>

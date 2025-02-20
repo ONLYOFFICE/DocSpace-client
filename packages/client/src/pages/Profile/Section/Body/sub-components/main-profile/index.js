@@ -206,9 +206,7 @@ const MainProfile = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
     </Text>
   );

@@ -328,25 +328,23 @@ const VersionRow = (props) => {
           </Text> */}
         </div>
         <div>
-          <>
-            {showEditPanel ? (
-              <Textarea
-                className="version_edit-comment"
-                wrapperClassName="textarea-wrapper"
-                onChange={onChange}
-                fontSize={12}
-                heightTextArea="54px"
-                value={commentValue}
-                isDisabled={isSavingComment}
-                autoFocus
-                areaSelect
-              />
-            ) : null}
+          {showEditPanel ? (
+            <Textarea
+              className="version_edit-comment"
+              wrapperClassName="textarea-wrapper"
+              onChange={onChange}
+              fontSize={12}
+              heightTextArea="54px"
+              value={commentValue}
+              isDisabled={isSavingComment}
+              autoFocus
+              areaSelect
+            />
+          ) : null}
 
-            <Text className="version_text" truncate>
-              {info.comment}
-            </Text>
-          </>
+          <Text className="version_text" truncate>
+            {info.comment}
+          </Text>
         </div>
         {showEditPanel ? (
           <div className="version_edit-comment">

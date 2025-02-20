@@ -29,7 +29,6 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { inject, observer } from "mobx-react";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
-import { TTranslation } from "@docspace/shared/types";
 import { useTranslation } from "react-i18next";
 import ZoomIcon from "PUBLIC_DIR/images/zoom.integration.react.svg?url";
 import WordpressIcon from "PUBLIC_DIR/images/wordpress.integration.react.svg?url";

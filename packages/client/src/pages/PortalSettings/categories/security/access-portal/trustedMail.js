@@ -234,9 +234,7 @@ const TrustedMail = (props) => {
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup

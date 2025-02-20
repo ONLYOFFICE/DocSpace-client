@@ -73,9 +73,7 @@ const WebhookInfo = (props) => {
         >
           {t("WebhooksGuide")}
         </ColorTheme>
-      ) : (
-        <></>
-      )}
+      ) : null}
     </InfoWrapper>
   );
 };

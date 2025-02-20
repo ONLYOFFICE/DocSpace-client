@@ -86,9 +86,7 @@ const LDAP = ({
           >
             {t("Common:LearnMore")}
           </Link>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </div>
 
       {isMobileView ? (

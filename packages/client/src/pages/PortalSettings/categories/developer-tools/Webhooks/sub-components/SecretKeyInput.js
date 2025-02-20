@@ -139,9 +139,7 @@ const SecretKeyInput = (props) => {
                 >
                   {t("ReadMore")}
                 </Link>
-              ) : (
-                <></>
-              )}
+              ) : null}
             </Text>
           }
           place="bottom"

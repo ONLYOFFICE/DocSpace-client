@@ -4,7 +4,7 @@ import { fakeFormFillingList } from "@docspace/shared/utils/formFillingTourData"
 
 interface InjectedProps {
   filesStore?: {
-    filesList: any[];
+    filesList: unknown[];
   };
   dialogsStore?: {
     formFillingTipsVisible: boolean;
@@ -13,7 +13,7 @@ interface InjectedProps {
 }
 
 interface WithContainerProps {
-  list: any[];
+  list: unknown[];
   isTutorialEnabled: boolean;
 }
 

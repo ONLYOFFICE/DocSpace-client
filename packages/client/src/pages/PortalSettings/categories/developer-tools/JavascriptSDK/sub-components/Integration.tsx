@@ -62,10 +62,6 @@ const Integration: React.FC<{
   drupalUrl,
 }) => {
   const { t } = useTranslation();
-  const allConnectors = allConnectorsUrl;
-  const zoom = zoomUrl;
-  const wordPress = wordPressUrl;
-  const drupal = drupalUrl;
 
   return (
     <IntegrationContainer
@@ -84,7 +80,7 @@ const Integration: React.FC<{
           <ReactSVG
             className="icon-zoom"
             src={ZoomIcon}
-            onClick={() => window.open(zoom, "_blank")}
+            onClick={() => window.open(zoomUrl, "_blank")}
           />
         </div>
 
@@ -92,7 +88,7 @@ const Integration: React.FC<{
           <ReactSVG
             className="icon-wordpress"
             src={WordpressIcon}
-            onClick={() => window.open(wordPress, "_blank")}
+            onClick={() => window.open(wordPressUrl, "_blank")}
           />
         </div>
 
@@ -100,7 +96,7 @@ const Integration: React.FC<{
           <ReactSVG
             className="icon-drupal"
             src={DrupalIcon}
-            onClick={() => window.open(drupal, "_blank")}
+            onClick={() => window.open(drupalUrl, "_blank")}
           />
         </div>
       </div>
@@ -109,7 +105,7 @@ const Integration: React.FC<{
           className="link"
           noHover
           color={currentColorScheme.main?.accent}
-          onClick={() => window.open(allConnectors, "_blank")}
+          onClick={() => window.open(allConnectorsUrl, "_blank")}
         >
           {t("SeeAllConnectors")}
         </Link>
@@ -118,7 +114,7 @@ const Integration: React.FC<{
           <ReactSVG
             className="icon-arrow"
             src={ArrowIcon}
-            onClick={() => window.open(allConnectors, "_blank")}
+            onClick={() => window.open(allConnectorsUrl, "_blank")}
           />
         </div>
       </div>

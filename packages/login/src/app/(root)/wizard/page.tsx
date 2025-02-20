@@ -79,14 +79,14 @@ async function Page() {
             portalCultures={portalCultures}
             portalTimeZones={portalTimeZones}
             licenseUrl={
-              objectSettings?.externalResources.common.entries.license
+              objectSettings?.externalResources.common?.entries.license
             }
             culture={objectSettings?.culture}
             forumLinkUrl={objectSettings?.externalResources.forum.domain}
             wizardToken={objectSettings?.wizardToken}
             passwordHash={objectSettings?.passwordHash}
             documentationEmail={
-              objectSettings?.externalResources.common.entries
+              objectSettings?.externalResources.common?.entries
                 .documentationemail
             }
             isAmi={objectSettings?.isAmi}

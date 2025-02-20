@@ -100,7 +100,14 @@ export default async function RootLayout({
       <body className={themeClass}>
         <StyledComponentsRegistry>
           <Providers
-            contextData={{ user, settings, systemTheme, colorTheme, locale }}
+            contextData={{
+              initialTheme: theme,
+              user,
+              settings,
+              systemTheme,
+              colorTheme,
+              locale,
+            }}
           >
             {children}
           </Providers>

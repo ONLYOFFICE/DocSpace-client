@@ -157,7 +157,7 @@ export default function useItemList({}) {
       );
     });
 
-    return dropdownItems;
+    return <>{dropdownItems}</>;
   }, [
     isArtchive,
     isDocument,

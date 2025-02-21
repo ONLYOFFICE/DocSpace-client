@@ -272,6 +272,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       ? 0
       : 1;
 
+  // Todo: Add support advancedOptions === Array
   const withAdvancedOptions =
     React.isValidElement(advancedOptions) && !!advancedOptions?.props.children;
 

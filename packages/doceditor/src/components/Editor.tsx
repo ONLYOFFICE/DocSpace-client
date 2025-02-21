@@ -280,7 +280,7 @@ const Editor = ({
     newConfig.events.onRequestSharingSettings = onSDKRequestSharingSettings;
   }
 
-  if (!fileInfo?.providerKey) {
+  if (!fileInfo?.providerKey && user) {
     newConfig.events.onRequestReferenceData = onSDKRequestReferenceData;
 
     if (!IS_ZOOM) {

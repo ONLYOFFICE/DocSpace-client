@@ -182,7 +182,11 @@ async function Page({ searchParams }: RootPageProps) {
     <>
       <Root {...data} shareKey={share} />
       {url && (
-        <Script id="editor-api" strategy="beforeInteractive" src={docApiUrl} />
+        <Script
+          id="onlyoffice-api-script"
+          strategy="beforeInteractive"
+          src={docApiUrl}
+        />
       )}
     </>
   );

@@ -29,52 +29,50 @@
 
 import { observer } from "mobx-react";
 
-// import {
-//   SelectionArea as SelectionAreaComponent,
-//   type TArrayTypes,
-//   type TOnMove,
-// } from "@docspace/shared/components/selection-area";
+import {
+  SelectionArea as SelectionAreaComponent,
+  type TArrayTypes,
+  type TOnMove,
+} from "@docspace/shared/components/selection-area";
 import { checkIsSSR } from "@docspace/shared/utils";
 import useFilesSelection from "@/app/(docspace)/_hooks/useFilesSelection";
 
 const SelectionArea = observer(() => {
   const { setSelections } = useFilesSelection();
 
-  // const arrayTypes: TArrayTypes[] = [
-  //   {
-  //     type: "file",
-  //     rowGap: 14,
-  //     itemHeight: 0,
-  //   },
-  //   {
-  //     type: "folder",
-  //     rowGap: 12,
-  //     itemHeight: 0,
-  //   },
-  // ];
-  //
-  // const onMove = ({ added, removed, clear }: TOnMove) => {
-  //   setSelections(added, removed, clear);
-  // };
+  const arrayTypes: TArrayTypes[] = [
+    {
+      type: "file",
+      rowGap: 14,
+      itemHeight: 0,
+    },
+    {
+      type: "folder",
+      rowGap: 12,
+      itemHeight: 0,
+    },
+  ];
 
-  // return checkIsSSR() ? null : (
-  //   <SelectionAreaComponent
-  //     containerClass="section-scroll"
-  //     selectableClass="window-item"
-  //     scrollClass="section-scroll"
-  //     viewAs="row"
-  //     itemsContainerClass="ReactVirtualized__Grid__innerScrollContainer"
-  //     arrayTypes={arrayTypes}
-  //     itemClass="files-item"
-  //     onMove={onMove}
-  //     // Todo: configure tiles
-  //     folderHeaderHeight={0}
-  //     countTilesInRow={0}
-  //     defaultHeaderHeight={0}
-  //   />
-  // );
+  const onMove = ({ added, removed, clear }: TOnMove) => {
+    setSelections(added, removed, clear);
+  };
 
-  return null;
+  return checkIsSSR() ? null : (
+    <SelectionAreaComponent
+      containerClass="section-scroll"
+      selectableClass="window-item"
+      scrollClass="section-scroll"
+      viewAs="row"
+      itemsContainerClass="ReactVirtualized__Grid__innerScrollContainer"
+      arrayTypes={arrayTypes}
+      itemClass="files-item"
+      onMove={onMove}
+      // Todo: configure tiles
+      folderHeaderHeight={0}
+      countTilesInRow={0}
+      defaultHeaderHeight={0}
+    />
+  );
 });
 
 export default SelectionArea;

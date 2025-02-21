@@ -52,13 +52,7 @@ export const getI18NInstance = (lng: string, portalLng: string) => {
 
   Array.from(translations).forEach(([lng, nsList]) => {
     Array.from(nsList).forEach((value) => {
-      i18n.addResourceBundle(
-        lng,
-        (value as [string])[0],
-        (value as [string, string])[1],
-        true,
-        true,
-      );
+      i18n.addResourceBundle(lng, value[0], value[1], true, true);
     });
   });
 

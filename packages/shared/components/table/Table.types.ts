@@ -156,7 +156,7 @@ interface TableGroupmenuBased {
   isChecked: boolean;
   isIndeterminate: boolean;
   headerMenu: TGroupMenuItem[];
-  checkboxOptions: React.ReactNode[];
+  checkboxOptions: React.ReactNode;
   onClick: () => void;
   onChange: (isChecked: boolean) => void;
   checkboxMargin?: string;

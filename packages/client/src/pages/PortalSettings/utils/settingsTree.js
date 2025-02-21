@@ -527,6 +527,14 @@ export const settingsTree = [
         tKey: "OAuth:OAuth",
         isCategory: true,
       },
+      {
+        id: "portal-settings_catalog-onlyflow",
+        key: "7-5",
+        icon: "",
+        link: "onlyflow",
+        tKey: "Onlyflow:Onlyflow",
+        isCategory: true,
+      },
     ],
   },
   {

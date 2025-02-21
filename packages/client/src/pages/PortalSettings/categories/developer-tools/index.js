@@ -42,6 +42,7 @@ import Webhooks from "./Webhooks";
 import Api from "./Api";
 import PluginSDK from "./PluginSDK";
 import OAuth from "./OAuth";
+import OnlyFlow from "./OnlyFlow";
 
 import SSOLoader from "./sub-components/ssoLoader";
 
@@ -105,6 +106,12 @@ const DeveloperToolsWrapper = (props) => {
       content: <OAuth />,
     });
   }
+
+  data.push({
+    id: "onlyflow",
+    name: t("OnlyFlow"),
+    content: <OnlyFlow />,
+  });
 
   // const load = async () => {
   //   // await loadBaseInfo();

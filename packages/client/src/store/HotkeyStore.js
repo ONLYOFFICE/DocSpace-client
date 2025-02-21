@@ -127,7 +127,13 @@ class HotkeyStore {
 
     const { isViewerOpen } = this.filesActionsStore.mediaViewerDataStore;
 
-    const someDialogIsOpen = checkDialogsOpen() || isViewerOpen;
+    const temp = checkDialogsOpen() || isViewerOpen;
+
+    if (temp) {
+      console.log("temp", temp);
+    }
+
+    const someDialogIsOpen = true;
 
     if (
       someDialogIsOpen ||

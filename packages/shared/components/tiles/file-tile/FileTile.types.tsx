@@ -55,6 +55,13 @@ export type FileItemType = {
     /** Logo cover image URL */
     cover?: string;
   };
+  /** View accessibility settings for the file */
+  viewAccessibility?: {
+    /** Whether image view is enabled */
+    ImageView: boolean;
+    /** Whether media view is enabled */
+    MediaView: boolean;
+  };
   /** Context menu options for this file */
   contextOptions?: ContextMenuModel[];
 };

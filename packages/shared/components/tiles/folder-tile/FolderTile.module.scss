@@ -60,6 +60,10 @@
     border-color: var(--secondary-text);
   }
 
+  @include mobile {
+    margin-inline-start: 2px;
+  }
+
   &.checked,
   &:hover {
     background: #f3f4f4; //change

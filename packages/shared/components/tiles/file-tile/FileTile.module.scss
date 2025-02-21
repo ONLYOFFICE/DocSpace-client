@@ -49,6 +49,10 @@
   border: 1px solid #d0d5da; //change
   border-radius: 6px; //change
 
+  @include mobile {
+    margin-inline-start: 2px;
+  }
+
   &:hover {
     .fileTileBottom {
       background: #f3f4f4; //change
@@ -251,18 +255,22 @@
     position: relative;
     border-radius: 6px 6px 0 0;
 
-    .thumbnail-image {
+    .thumbnailImage {
       pointer-events: none;
       position: absolute;
       height: 100%;
       width: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: top;
       z-index: 0;
       border-radius: 6px 6px 0 0;
+
+      .isImageOrMedia {
+        object-position: center;
+      }
     }
 
-    .temporary-icon > div > .injected-svg {
+    .temporaryIcon > div > :global(.injected-svg) {
       position: absolute;
       width: 100%;
       bottom: 16px;
@@ -292,22 +300,6 @@
           background: none;
         }
       }
-    }
-  }
-
-  .thumbnailImage {
-    width: var(--thumbnail-width);
-    height: var(--thumbnail-height);
-    object-fit: cover;
-  }
-
-  .temporaryIcon {
-    width: var(--thumbnail-width);
-    height: var(--thumbnail-height);
-
-    div {
-      width: var(--thumbnail-width);
-      height: var(--thumbnail-height);
     }
   }
 }

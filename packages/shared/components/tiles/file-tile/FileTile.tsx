@@ -192,6 +192,9 @@ const FileTile = ({
     onSelect && onSelect(e.target.checked, item);
   };
 
+  const isImageOrMedia =
+    item?.viewAccessibility?.ImageView || item?.viewAccessibility?.MediaView;
+
   const fileTileClassNames = classNames(styles.fileTile, {
     [styles.isBlocked]: isBlockingOperation,
     [styles.showHotkeyBorder]: showHotkeyBorder,
@@ -205,6 +208,10 @@ const FileTile = ({
     [styles.checked]: checked,
   });
 
+  const fileTileTopClassNames = classNames(styles.fileTileTop, {
+    [styles.isImageOrMedia]: isImageOrMedia,
+  });
+
   const fileTileBottomClassNames = classNames(styles.fileTileBottom, {
     [styles.isHighlight]: isHighlight,
   });
@@ -216,7 +223,7 @@ const FileTile = ({
       className={fileTileClassNames}
       onClick={onFileClick}
     >
-      <div className={styles.fileTileTop}>{icon}</div>
+      <div className={fileTileTopClassNames}>{icon}</div>
 
       <div className={classNames(styles.icons, styles.isBadges)}>{badges}</div>
       {contentElement ? (

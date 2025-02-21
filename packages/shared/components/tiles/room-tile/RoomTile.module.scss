@@ -47,6 +47,10 @@
   align-content: center;
   gap: 16px;
 
+  @include mobile {
+    margin-inline-start: 2px;
+  }
+
   .topContent {
     width: 100%;
     box-sizing: border-box;

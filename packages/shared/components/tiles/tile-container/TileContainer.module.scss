@@ -36,7 +36,7 @@
   position: relative;
   overflow: hidden;
 
-  @include tablet {
+  @include tablet-and-below {
     margin-top: 16px;
     margin-inline-end: -3px;
   }

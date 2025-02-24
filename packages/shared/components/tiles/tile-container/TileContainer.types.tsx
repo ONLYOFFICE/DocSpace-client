@@ -24,29 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface TileItem {
+/** Base tile item data structure */
+export type TileItem = {
+  /** Indicates if the item is a folder */
   isFolder?: boolean;
+  /** Indicates if the item is a room */
   isRoom?: boolean;
+  /** File extension */
   fileExst?: string;
+  /** Unique identifier for the item */
   id: number | string;
-}
+};
 
-export interface TileItemProps {
+/** Props for individual tile items */
+export type TileItemProps = {
+  /** The tile item data */
   item: TileItem;
+  /** Additional properties that can be passed to the tile */
   [key: string]: any;
-}
+};
 
 export type TileContainerProps = {
+  /** Child elements to be rendered within the container */
   children: React.ReactNode;
+  /** Additional CSS class names */
   className?: string;
+  /** Container's HTML id attribute */
   id?: string;
+  /** Inline styles for the container */
   style?: React.CSSProperties;
+  /** Flag to enable React Window for virtualization */
   useReactWindow?: boolean;
+  /** Component for rendering infinite grid layout */
   infiniteGrid?: React.ComponentType<{
     children: React.ReactNode;
     isRooms: boolean;
   }>;
+  /** Custom heading for folders section */
   headingFolders?: React.ReactNode;
+  /** Custom heading for files section */
   headingFiles?: React.ReactNode;
+  /** Flag to indicate descending order */
   isDesc?: boolean;
 };

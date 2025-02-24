@@ -48,7 +48,7 @@ const FilesTileContainer = ({ filesList, isDesc }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
-  const [thumbSize, setThumbSize] = useState("");
+  const [thumbSize, setThumbSize] = useState(null);
   const [columnCount, setColumnCount] = useState(null);
 
   const { sectionWidth } = useContext(Context);

@@ -61,7 +61,6 @@ const FileTile = (props) => {
     className,
     isDragging,
     value,
-    displayShareButton,
     checkedProps,
     getIcon,
     onFilesClick,
@@ -152,7 +151,6 @@ const FileTile = (props) => {
     dragging: dragging ? isDragging : null,
     checked: checkedProps,
     contextOptions: item.contextOptions,
-    contextButtonSpacerWidth: displayShareButton,
     isActive,
     inProgress,
     isBlockingOperation,
@@ -172,11 +170,8 @@ const FileTile = (props) => {
     <FileTileComponent
       {...commonProps}
       temporaryIcon={temporaryIcon}
-      thumbnail={
-        thumbnailUrl && thumbSize
-          ? `${thumbnailUrl}&size=${thumbSize}`
-          : thumbnailUrl
-      }
+      thumbnail={thumbnailUrl}
+      thumbSize={thumbSize}
       contentElement={quickButtonsComponent}
       thumbnailClick={onFilesClick}
     />

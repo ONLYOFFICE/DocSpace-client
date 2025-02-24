@@ -747,12 +747,19 @@ class UploadDataStore {
               const hFile = this.uploadedFilesHistory.find(
                 (f) => f.fileId === fileId,
               );
+              const fileIndex = this.uploadedFilesHistory.findIndex(
+                (f) => f.fileId === fileId,
+              );
 
               if (hFile) {
                 hFile.error = error;
                 hFile.inConversion = false;
                 if (fileInfo === "password") hFile.needPassword = true;
               }
+
+              const operationObject = this.uploadedFilesHistory[fileIndex];
+
+              Object.assign(operationObject, hFile);
             });
 
             // this.refreshFiles(toFolderId, false);
@@ -866,11 +873,12 @@ class UploadDataStore {
   };
 
   convertUploadedFiles = (t, createNewIfExist = true) => {
-    this.files = [...this.files, ...this.tempConversionFiles];
+    //  this.files = [...this.files, ...this.tempConversionFiles];
     this.uploadedFilesHistory = [
       ...this.uploadedFilesHistory,
       ...this.tempConversionFiles,
     ];
+    this.tempConversionFiles = [];
 
     if (this.uploaded) {
       const newUploadData = {
@@ -882,12 +890,9 @@ class UploadDataStore {
         // converted: false,
       };
 
-      this.tempConversionFiles = [];
-
       this.setUploadData(newUploadData);
       this.startUploadFiles(t, createNewIfExist);
     }
-    this.tempConversionFiles = [];
   };
 
   cancelUploadAction = (items) => {
@@ -926,7 +931,7 @@ class UploadDataStore {
   };
 
   handleFilesUpload = (newUploadData, t, createNewIfExist = true) => {
-    this.uploadedFilesHistory = newUploadData.files;
+    // this.uploadedFilesHistory = newUploadData.files;
 
     this.setUploadData(newUploadData);
 
@@ -935,7 +940,8 @@ class UploadDataStore {
 
   handleUploadAndOptionalConversion = (uploadData, t, createNewIfExist) => {
     const newUploadData = { ...uploadData };
-    newUploadData.files = newUploadData.filesWithoutConversion;
+    // newUploadData.files = newUploadData.filesWithoutConversion;
+
     const onlyConversion =
       !!this.tempConversionFiles.length &&
       newUploadData.newFilesWithoutConversion.length === 0;
@@ -995,20 +1001,20 @@ class UploadDataStore {
     const toFolderId = folderId || this.selectedFolderStore.id;
 
     if (this.uploaded) {
-      this.files = this.uploadedFilesHistory;
+      this.files = [...this.uploadedFilesHistory];
       this.filesSize = 0;
       this.uploadToFolder = null;
       this.percent = 0;
     }
     if (this.uploaded && this.converted) {
-      this.files = this.uploadedFilesHistory;
+      this.files = [...this.uploadedFilesHistory];
       this.filesToConversion = [];
       this.uploadedFilesSize = 0;
       this.asyncUploadObj = {};
     }
 
-    const newFiles = this.files;
-    const allFiles = [];
+    const newFiles = [];
+    const allFiles = this.files;
     let filesSize = 0;
     let convertSize = 0;
 
@@ -1060,8 +1066,6 @@ class UploadDataStore {
     }
     this.convertFilesSize = convertSize;
 
-    // console.log("this.tempConversionFiles", this.tempConversionFiles);
-
     const clearArray = removeDuplicate([
       ...newFiles,
       ...this.uploadedFilesHistory,
@@ -1070,7 +1074,7 @@ class UploadDataStore {
     this.uploadedFilesHistory = clearArray;
 
     const newUploadData = {
-      filesWithoutConversion: removeDuplicate([...this.files, ...newFiles]),
+      // filesWithoutConversion: removeDuplicate([...this.files, ...newFiles]),
       newFilesWithoutConversion: newFiles,
       conversionFiles: removeDuplicate(this.tempConversionFiles),
       files: removeDuplicate(allFiles),
@@ -1268,6 +1272,16 @@ class UploadDataStore {
 
     if (needConvert) {
       runInAction(() => (currentFile.action = "convert"));
+      const historyIndex = this.uploadedFilesHistory.findIndex(
+        (f) => f.uniqueId === currentFile.uniqueId,
+      );
+
+      if (historyIndex > -1) {
+        this.uploadedFilesHistory[historyIndex] = {
+          ...this.uploadedFilesHistory[historyIndex],
+          ...currentFile,
+        };
+      }
 
       if (!this.filesToConversion.length || this.converted) {
         this.filesToConversion.push(currentFile);

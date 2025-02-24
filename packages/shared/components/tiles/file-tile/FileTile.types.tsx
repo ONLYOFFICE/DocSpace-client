@@ -76,8 +76,6 @@ export type FileTileProps = {
   contextButtonSpacerWidth?: number;
   /** Array of context menu options to display when the context menu is opened */
   contextOptions: ContextMenuModel[];
-  /** Indicates if the tile is currently being dragged */
-  dragging?: boolean;
   /** Indicates if the tile is in a loading/progress state */
   inProgress?: boolean;
   /** The file item data associated with this tile */
@@ -106,9 +104,22 @@ export type FileTileProps = {
   sideColor?: string;
   /** Function to set the selection state of the tile */
   setSelection?: (checked: boolean) => void;
+  /** Custom content element to be rendered in the tile */
   contentElement?: ReactElement;
+  /** Custom badges to be displayed on the tile */
   badges?: ReactElement;
+  /** Flag indicating if the tile should be highlighted */
   isHighlight?: boolean;
+  /** Indicates if the file is in a blocking operation state */
   isBlockingOperation?: boolean;
+  /** Flag to show hotkey border around the tile */
   showHotkeyBorder?: boolean;
+  /** Indicates if the file is currently being dragged */
+  isDragging?: boolean;
+  /** Size of the thumbnail in pixels */
+  thumbSize?: number;
+  /** Indicates if the file is in active state */
+  isActive?: boolean;
+  /** Flag for edit mode */
+  isEdit?: boolean;
 };

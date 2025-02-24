@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React, { useRef, useState } from "react";
+import { ReactSVG } from "react-svg";
+import { useTranslation } from "react-i18next";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import {
   ContextMenuButton,
@@ -34,16 +37,15 @@ import {
   ContextMenuRefType,
 } from "@docspace/shared/components/context-menu";
 import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
-import React, { useRef, useState } from "react";
-import { ReactSVG } from "react-svg";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 import classNames from "classnames";
-import styles from "./FileTile.module.scss";
-import { FileTileProps } from "./FileTile.types";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { useTranslation } from "react-i18next";
 import { isMobile as isMobileUtils } from "@docspace/shared/utils";
+
+import { FileTileProps } from "./FileTile.types";
+
+import styles from "./FileTile.module.scss";
 
 const svgLoader = () => <div style={{ width: "96px" }} />;
 
@@ -52,7 +54,6 @@ const FileTile = ({
   children,
   contextButtonSpacerWidth,
   contextOptions,
-  dragging,
   contentElement,
   inProgress,
   item,
@@ -62,9 +63,12 @@ const FileTile = ({
   sideColor,
   temporaryIcon,
   thumbnail,
+  thumbSize,
   isHighlight,
   isBlockingOperation,
   showHotkeyBorder,
+  isDragging,
+  isActive,
   thumbnailClick,
   withCtrlSelect,
   withShiftSelect,
@@ -72,6 +76,7 @@ const FileTile = ({
   getContextModel,
   hideContextMenu,
   badges,
+  isEdit,
   ...rest
 }: FileTileProps) => {
   const childrenArray = React.Children.toArray(children);
@@ -83,7 +88,6 @@ const FileTile = ({
 
   const cm = useRef<ContextMenuRefType>(null);
   const tile = useRef(null);
-  const checkboxContainerRef = useRef(null);
 
   const renderContext =
     hasOwnProperty(item, "contextOptions") &&
@@ -129,12 +133,20 @@ const FileTile = ({
     return (
       <Link type={LinkType.page} onClick={thumbnailClick}>
         {thumbnail && !errorLoadSrc ? (
-          <img
-            src={thumbnail}
-            className={styles.thumbnailImage}
-            alt="Thumbnail-img"
-            onError={onError}
-          />
+          thumbSize !== null ? (
+            <img
+              src={thumbnail}
+              className={styles.thumbnailImage}
+              alt="Thumbnail-img"
+              onError={onError}
+            />
+          ) : (
+            <ReactSVG
+              className={styles.temporaryIcon}
+              src={""}
+              loading={svgLoader}
+            />
+          )
         ) : (
           <ReactSVG
             className={styles.temporaryIcon}
@@ -172,8 +184,7 @@ const FileTile = ({
         (e.target as HTMLElement).nodeName !== "INPUT" &&
         (e.target as HTMLElement).nodeName !== "rect" &&
         (e.target as HTMLElement).nodeName !== "path" &&
-        (e.target as HTMLElement).nodeName !== "svg" &&
-        checkboxContainerRef.current?.contains(e.target as Node)
+        (e.target as HTMLElement).nodeName !== "svg"
       ) {
         setSelection && setSelection([]);
       }
@@ -198,10 +209,19 @@ const FileTile = ({
   const fileTileClassNames = classNames(styles.fileTile, {
     [styles.isBlocked]: isBlockingOperation,
     [styles.showHotkeyBorder]: showHotkeyBorder,
+    [styles.isDragging]: isDragging,
+    [styles.isActive]: isActive,
+    [styles.checked]: checked,
+    [styles.isEdit]: isEdit,
   });
 
   const iconClassNames = classNames(styles.icon, {
     [styles.checked]: checked,
+  });
+
+  const iconContainerClassNames = classNames(styles.iconContainer, {
+    [styles.isDragging]: isDragging,
+    [styles.inProgress]: inProgress,
   });
 
   const checkboxClassNames = classNames(styles.checkbox, {
@@ -233,25 +253,27 @@ const FileTile = ({
       ) : null}
 
       <div className={fileTileBottomClassNames}>
-        {!inProgress ? (
-          <div className={styles.iconContainer}>
-            <div className={iconClassNames} onClick={onFileIconClick}>
-              {element}
+        {element && !isEdit ? (
+          !inProgress ? (
+            <div className={iconContainerClassNames}>
+              <div className={iconClassNames} onClick={onFileIconClick}>
+                {element}
+              </div>
+              <Checkbox
+                isChecked={checked}
+                onChange={onCheckboxClick}
+                className={checkboxClassNames}
+              />
             </div>
-            <Checkbox
-              isChecked={checked}
-              onChange={onCheckboxClick}
-              className={checkboxClassNames}
+          ) : (
+            <Loader
+              className={styles.loader}
+              color=""
+              size="20px"
+              type={LoaderTypes.track}
             />
-          </div>
-        ) : (
-          <Loader
-            className={styles.loader}
-            color=""
-            size="20px"
-            type={LoaderTypes.track}
-          />
-        )}
+          )
+        ) : null}
 
         <div className={styles.content}>{FilesTileContent}</div>
 

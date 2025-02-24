@@ -87,8 +87,10 @@ import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 import OAuthStore from "./OAuthStore";
 
 import BrandingStore from "./portal-settings/BrandingStore";
+import FlowStore from "./FlowStore";
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
+const flowStore = new FlowStore();
 
 const pluginStore = new PluginStore(
   settingsStore,
@@ -396,6 +398,7 @@ const store = {
   avatarEditorDialogStore,
 
   brandingStore,
+  flowStore,
 };
 
 export default store;

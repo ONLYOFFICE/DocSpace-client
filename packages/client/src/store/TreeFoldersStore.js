@@ -313,6 +313,10 @@ class TreeFoldersStore {
     );
   }
 
+  get isFlowsFolder() {
+    return window.location.pathname.includes("/flows");
+  }
+
   get isRoomsFolder() {
     return (
       this.roomsFolder && this.selectedFolderStore.id === this.roomsFolder.id

@@ -291,6 +291,7 @@ const SectionHeaderContent = (props) => {
   });
 
   const isSettingsPage = location.pathname.includes("/settings");
+  const isFlowsPage = location.pathname.includes("/flows");
 
   const onFileChange = React.useCallback(
     async (e) => {
@@ -545,18 +546,21 @@ const SectionHeaderContent = (props) => {
       isIndexEditingMode || isPublicRoom;
   }
 
-  const currentTitle = isSettingsPage
-    ? t("Common:Settings")
-    : isContactsPage
-      ? isContactsInsideGroupPage
-        ? getInsideGroupTitle()
-        : t("Common:Contacts")
-      : isLoading && stateTitle
-        ? stateTitle
-        : title;
+  const currentTitle = isFlowsPage
+    ? t("Common:Flows")
+    : isSettingsPage
+      ? t("Common:Settings")
+      : isContactsPage
+        ? isContactsInsideGroupPage
+          ? getInsideGroupTitle()
+          : t("Common:Contacts")
+        : isLoading && stateTitle
+          ? stateTitle
+          : title;
 
-  const currentCanCreate =
-    isLoading && hasOwnProperty(location?.state, "canCreate")
+  const currentCanCreate = isFlowsPage
+    ? false
+    : isLoading && hasOwnProperty(location?.state, "canCreate")
       ? stateCanCreate
       : security?.Create;
 

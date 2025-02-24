@@ -82,6 +82,9 @@ import DefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.default.folder
 import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
 import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 
+import EmptyFlowsLightIcon from "PUBLIC_DIR/images/emptyview/empty.flows.light.svg";
+import EmptyFlowsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.flows.dark.svg";
+
 import {
   FilesSelectorFilterTypes,
   FilterType,
@@ -309,6 +312,7 @@ export const getRootTitle = (
     .with([FolderType.Recent, P._], () => t("Files:NoFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
     .with([FolderType.TRASH, P._], () => t("Files:EmptyScreenFolder"))
+    .with([FolderType.Flows, P._], () => t("Files:NoFlowsHereYet"))
     .otherwise(() => "");
 };
 
@@ -492,6 +496,9 @@ export const getRootIcon = (
     )
     .with([FolderType.TRASH, P._], () =>
       isBaseTheme ? <EmptyTrashLightIcon /> : <EmptyTrashDarkIcon />,
+    )
+    .with([FolderType.Flows, P._], () =>
+      isBaseTheme ? <EmptyFlowsLightIcon /> : <EmptyFlowsDarkIcon />,
     )
     .otherwise(() => <div />);
 };

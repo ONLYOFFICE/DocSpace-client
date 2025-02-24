@@ -70,6 +70,7 @@ const FilterInput = React.memo(
     isContactsGroupsPage,
     isContactsInsideGroupPage,
     isContactsGuestsPage,
+    isFlowsPage,
     isIndexing,
     isIndexEditingMode,
 
@@ -186,7 +187,7 @@ const FilterInput = React.memo(
       <div className={styles.filterInput}>
         <div className="filter-input_filter-row">
           {searchComponent}
-          {!isIndexEditingMode ? (
+          {!isIndexEditingMode && !isFlowsPage ? (
             <FilterButton
               id="filter-button"
               onFilter={onFilter}
@@ -206,7 +207,7 @@ const FilterInput = React.memo(
             />
           ) : null}
 
-          {!isIndexing ? (
+          {!isIndexing && !isFlowsPage ? (
             <SortButton
               id="sort-by-button"
               onSort={onSort}
@@ -227,6 +228,7 @@ const FilterInput = React.memo(
           ) : null}
           {viewSettings &&
           !isIndexing &&
+          !isFlowsPage &&
           currentDeviceType === DeviceType.desktop &&
           viewSelectorVisible ? (
             <ViewSelector

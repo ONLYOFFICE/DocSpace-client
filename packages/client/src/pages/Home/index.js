@@ -174,6 +174,8 @@ const PureHome = (props) => {
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
+  const isFlowsPage = location.pathname.includes("flows");
+
   const contactsView = getContactsView(location);
   const isContactsPage = !!contactsView;
   const isContactsEmptyView =
@@ -373,9 +375,11 @@ const PureHome = (props) => {
           </Section.SectionHeader>
         ) : null}
 
-        <Section.SectionSubmenu>
-          <SectionSubmenuContent />
-        </Section.SectionSubmenu>
+        {isFlowsPage ? null : (
+          <Section.SectionSubmenu>
+            <SectionSubmenuContent />
+          </Section.SectionSubmenu>
+        )}
 
         {isRecycleBinFolder && !isEmptyPage ? (
           <Section.SectionWarning>

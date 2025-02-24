@@ -188,6 +188,7 @@ const ArticleMainButtonContent = (props) => {
 
   const isAccountsPage = location.pathname.includes("/accounts");
   const isSettingsPage = location.pathname.includes("settings");
+  const isFlowsPage = location.pathname.includes("flows");
 
   const inputFilesElement = React.useRef(null);
   const inputPDFFilesElement = React.useRef(null);
@@ -711,8 +712,7 @@ const ArticleMainButtonContent = (props) => {
     setMainButtonVisible(mainButtonVisible);
   }, [mainButtonVisible]);
 
-  const mainButtonText =
-    isRoomAdmin && isAccountsPage ? t("Common:Invite") : t("Common:Actions");
+  let mainButtonText = t("Common:Actions");
 
   let isDisabled = false;
   if (isFrame) {
@@ -721,6 +721,13 @@ const ArticleMainButtonContent = (props) => {
     isDisabled = isSettingsPage;
   } else if (isAccountsPage) {
     isDisabled = !contactsCanCreate;
+    if (isRoomAdmin) mainButtonText = t("Common:Invite");
+  } else if (isFlowsPage) {
+    isDisabled = true;
+    mainButtonText = t("Common:Actions");
+  } else if (isRoomsFolder) {
+    isDisabled = !security?.Create;
+    mainButtonText = t("Common:NewRoom");
   } else {
     isDisabled = !security?.Create;
   }
@@ -747,14 +754,14 @@ const ArticleMainButtonContent = (props) => {
         <StyledButton
           className="create-room-button"
           id="rooms-shared_create-room-button"
-          label={t("Common:NewRoom")}
+          label={mainButtonText}
           onClick={onCreateRoom}
           $currentColorScheme={currentColorScheme}
           isDisabled={isDisabled}
           size="small"
           primary
           scale
-          title={t("Common:NewRoom")}
+          title={mainButtonText}
         />
       ) : (
         <MainButton

@@ -179,6 +179,7 @@ const TagPure = ({
         [styles.isDeleted]: isDeleted,
         [styles.isClickable]: !!onClick,
         [styles.isLast]: isLast,
+        [styles.thirdPartyTag]: icon,
       })}
       style={{ ...style, maxWidth: tagMaxWidth }}
       data-tag={label}

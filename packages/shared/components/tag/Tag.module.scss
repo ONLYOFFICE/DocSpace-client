@@ -6,22 +6,41 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  padding: var(--tag-padding);
-  margin-inline-end: var(--tag-margin-end);
+  padding: 1px 7px;
+  margin-inline-end: 4px;
   background: var(--tag-background);
 
   border-radius: var(--tag-border-radius);
   border: var(--tag-border);
 
-  &:last-child {
-    margin-inline-end: 0;
+  &.thirdPartyTag {
+    padding: 0;
   }
 
   &::after {
     content: "";
     position: absolute;
+    height: 28px;
     inset-block: -3px;
     inset-inline: -3px;
+  }
+
+  .thirdPartyTag {
+    padding: 4px 12px;
+    width: 16px;
+    height: 16px;
+
+    [data-theme="Dark"] & {
+      svg {
+        path[fill] {
+          fill: $white;
+        }
+
+        path[stroke] {
+          stroke: $white;
+        }
+      }
+    }
   }
 
   &:active {
@@ -53,7 +72,7 @@
   }
 
   &.isLast {
-    margin-inline-end: 4px;
+    margin-inline-end: 0;
   }
 
   &.isClickable:not(.isDisabled):not(.isDeleted) {
@@ -85,24 +104,6 @@
   margin-inline-start: var(--tag-icon-margin-start);
   cursor: pointer;
   z-index: 1;
-}
-
-.thirdPartyTag {
-  padding: var(--tag-third-party-padding);
-  width: var(--tag-third-party-size);
-  height: var(--tag-third-party-size);
-
-  [data-theme="Dark"] & {
-    svg {
-      path[fill] {
-        fill: $white;
-      }
-
-      path[stroke] {
-        stroke: $white;
-      }
-    }
-  }
 }
 
 .dropdownIcon {

@@ -402,6 +402,8 @@ class UploadDataStore {
     if (shouldUpdateExistingFile) {
       const updatedFile = this.displayedConversionFiles[fileIndex];
 
+      updatedFile.fileInfo.fileExst = file.fileInfo.fileExst;
+
       this.displayedConversionFiles[fileIndex] = {
         ...updatedFile,
         action: "convert",
@@ -563,7 +565,10 @@ class UploadDataStore {
       });
 
       const data = await res;
-      if (!data || !data[0]) break;
+      if (!data || !data[0]) {
+        index++;
+        break;
+      }
 
       let progress = data[0].progress;
       let fileInfo = null;
@@ -599,41 +604,41 @@ class UploadDataStore {
 
           break;
         }
+      }
 
-        if (progress === 100) {
-          if (!error) error = data[0].error;
+      if (progress === 100) {
+        if (!error) error = data[0].error;
 
-          if (!error && isOpen && data && data[0]) {
-            this.filesStore.openDocEditor(fileInfo.id);
-          }
-
-          runInAction(() => {
-            historyFile.error = error;
-            historyFile.convertProgress = progress;
-            historyFile.inConversion = false;
-
-            if (error.indexOf("password") !== -1) {
-              historyFile.needPassword = true;
-            } else historyFile.action = "converted";
-
-            if (fileInfo && fileInfo !== "password") {
-              historyFile.fileInfo = fileInfo;
-            }
-
-            const operationObject = this.displayedConversionFiles[fileIndex];
-            Object.assign(operationObject, historyFile);
-          });
-
-          if (!historyFile?.error && historyFile?.fileInfo?.version > 2) {
-            this.filesStore.setHighlightFile({
-              highlightFileId: historyFile.fileInfo.id,
-              isFileHasExst: !historyFile.fileInfo.fileExst,
-            });
-          }
+        if (!error && isOpen && data && data[0]) {
+          this.filesStore.openDocEditor(fileInfo.id);
         }
 
-        index++;
+        runInAction(() => {
+          historyFile.error = error;
+          historyFile.convertProgress = progress;
+          historyFile.inConversion = false;
+
+          if (error.indexOf("password") !== -1) {
+            historyFile.needPassword = true;
+          } else historyFile.action = "converted";
+
+          if (fileInfo && fileInfo !== "password") {
+            historyFile.fileInfo = fileInfo;
+          }
+
+          const operationObject = this.displayedConversionFiles[fileIndex];
+          Object.assign(operationObject, historyFile);
+        });
+
+        if (!historyFile?.error && historyFile?.fileInfo?.version > 2) {
+          this.filesStore.setHighlightFile({
+            highlightFileId: historyFile.fileInfo.id,
+            isFileHasExst: !historyFile.fileInfo.fileExst,
+          });
+        }
       }
+
+      index++;
     }
 
     this.primaryProgressDataStore.setPrimaryProgressBarData({
@@ -755,11 +760,10 @@ class UploadDataStore {
                 hFile.error = error;
                 hFile.inConversion = false;
                 if (fileInfo === "password") hFile.needPassword = true;
+
+                const operationObject = this.uploadedFilesHistory[fileIndex];
+                Object.assign(operationObject, hFile);
               }
-
-              const operationObject = this.uploadedFilesHistory[fileIndex];
-
-              Object.assign(operationObject, hFile);
             });
 
             // this.refreshFiles(toFolderId, false);

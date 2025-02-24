@@ -95,10 +95,11 @@ const InfiniteGrid = (props) => {
     filesLength,
     className,
     currentFolderId,
+    isRooms,
     ...rest
   } = props;
 
-  const [countTilesInRow, setCountTilesInRow] = useState(getCountTilesInRow());
+  const [countTilesInRow, setCountTilesInRow] = useState();
 
   let cards = [];
   const list = [];
@@ -132,7 +133,8 @@ const InfiniteGrid = (props) => {
   };
 
   const setTilesCount = () => {
-    const newCount = getCountTilesInRow();
+    if (isRooms === undefined) return;
+    const newCount = getCountTilesInRow(isRooms);
     if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
   };
 
@@ -141,7 +143,8 @@ const InfiniteGrid = (props) => {
   };
 
   useEffect(() => {
-    setTilesCount();
+    onResize();
+
     window.addEventListener("resize", onResize);
 
     return () => {
@@ -194,7 +197,6 @@ const InfiniteGrid = (props) => {
     if (cards.length === countTilesInRow) {
       addItemToList("loaded-row", type, true);
     }
-
     // Added line of loaders
     while (countTilesInRow > cards.length && cards.length !== countTilesInRow) {
       const key = `tiles-loader_${countTilesInRow - cards.length}`;
@@ -214,9 +216,6 @@ const InfiniteGrid = (props) => {
     const listKey = uniqueid("list-item_");
     addItemToList(listKey, type);
   }
-
-  // console.log("InfiniteGrid render", list);
-
   return (
     <StyledInfiniteLoader
       viewAs="tile"

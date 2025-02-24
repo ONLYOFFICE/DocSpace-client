@@ -36,6 +36,7 @@ const paddingCss = css`
 
   @media ${tablet} {
     margin-inline-start: -1px;
+    margin-inline-end: 3px;
   }
 `;
 

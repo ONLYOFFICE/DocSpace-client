@@ -55,7 +55,7 @@ interface ProgressListProps {
     operation: string,
   ) => void;
   onCancel?: () => void;
-  onOpenPanel?: () => void;
+  onOpenPanel: () => void;
   withoutStatus?: boolean;
 }
 
@@ -94,8 +94,14 @@ const ProgressList = observer(
     clearPrimaryProgressData,
     onCancel,
     onOpenPanel,
-    withoutStatus,
   }: ProgressListProps) => {
+    const onOpenPanelOperation = (item: Operation) => {
+      if (!item.showPanel) return;
+
+      item.showPanel(true);
+      onOpenPanel();
+    };
+
     return (
       <div className="progress-container">
         {secondaryOperations.map((item) => (
@@ -119,7 +125,7 @@ const ProgressList = observer(
         {primaryOperations.map((item) => (
           <div
             key={`${item.operation}`}
-            className={`progress-list ${onOpenPanel ? "withHover" : ""}`}
+            className={`progress-list ${item.showPanel ? "withHover" : ""}`}
           >
             <ProgressBar
               completed={item.completed}
@@ -132,9 +138,9 @@ const ProgressList = observer(
               onClearProgress={clearPrimaryProgressData}
               operation={item.operation}
               onCancel={onCancel}
-              onOpenPanel={onOpenPanel}
-              withoutStatus={withoutStatus}
-              withoutProgress={item.isSingleConversion}
+              onOpenPanel={() => onOpenPanelOperation(item)}
+              withoutStatus={item.withoutStatus}
+              withoutProgress={item.withoutProgress}
             />
           </div>
         ))}

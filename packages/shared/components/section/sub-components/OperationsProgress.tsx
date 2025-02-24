@@ -75,7 +75,6 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   clearSecondaryProgressData,
   clearPrimaryProgressData,
   cancelUpload,
-  onOpenPanel,
   mainButtonVisible,
   needErrorChecking,
   showCancelButton,
@@ -159,7 +158,8 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     if (primaryActiveOperations.length) {
       setIsHideTooltip(true);
 
-      onOpenPanel?.();
+
+      primaryActiveOperations[0].showPanel?.(true);
       clearTimers();
 
       resetTimerRef.current = setTimeout(() => {
@@ -175,8 +175,6 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     resetTimerRef.current = setTimeout(() => {
       setIsHideTooltip(false);
     }, 100);
-
-    onOpenPanel?.();
   };
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -215,10 +213,6 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     const operation = secondaryActiveOperations.length
       ? secondaryActiveOperations[0].operation
       : primaryActiveOperations[0].operation;
-
-    if (!isSecondaryActive && primaryActiveOperations[0].isSingleConversion) {
-      return operationToIconMap[OPERATIONS_NAME.convert];
-    }
 
     return (
       operationToIconMap[operation as OperationName] ||
@@ -262,7 +256,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
 
   const disableOpenPanel =
     primaryActiveOperations.length === 1 &&
-    primaryActiveOperations[0].disableOpenPanel;
+    !primaryActiveOperations[0].showPanel;
 
   const withoutStatus =
     disableOpenPanel && primaryActiveOperations[0].withoutStatus;
@@ -343,8 +337,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
                 clearPrimaryProgressData?.(operationName)
               }
               onCancel={onCancelOperation}
-              {...(!disableOpenPanel && { onOpenPanel: handleOperationClick })}
-              withoutStatus={withoutStatus}
+              onOpenPanel={handleOperationClick}
             />
           </DropDown>
         ) : null}

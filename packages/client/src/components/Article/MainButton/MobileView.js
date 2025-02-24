@@ -52,8 +52,6 @@ const MobileView = ({
   buttonOptions,
   withoutButton,
   withMenu,
-
-  setUploadPanelVisible,
   onMainButtonClick,
   isRoomsFolder,
   mainButtonMobileVisible,
@@ -63,10 +61,6 @@ const MobileView = ({
   const openButtonToggler = React.useCallback(() => {
     setIsOpenButton((prevState) => !prevState);
   }, []);
-
-  const showUploadPanel = React.useCallback(() => {
-    setUploadPanelVisible && setUploadPanelVisible(true);
-  }, [setUploadPanelVisible]);
 
   return (
     mainButtonMobileVisible && (
@@ -80,7 +74,6 @@ const MobileView = ({
         withoutButton={withoutButton}
         withMenu={withMenu}
         onClick={onMainButtonClick}
-        onAlertClick={showUploadPanel}
         withAlertClick={isRoomsFolder}
       />
     )

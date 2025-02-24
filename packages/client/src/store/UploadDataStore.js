@@ -1266,6 +1266,11 @@ class UploadDataStore {
 
     if (!currentFile.fileId) return;
 
+    const historyIndex = this.uploadedFilesHistory.findIndex(
+      (f) => f.uniqueId === currentFile.uniqueId,
+    );
+    const historyCurrentFile = this.uploadedFilesHistory[historyIndex];
+
     currentFile.path = path;
 
     const { needConvert } = currentFile;
@@ -1275,17 +1280,16 @@ class UploadDataStore {
     if (isXML) return resolve();
 
     if (needConvert) {
-      runInAction(() => (currentFile.action = "convert"));
-      const historyIndex = this.uploadedFilesHistory.findIndex(
-        (f) => f.uniqueId === currentFile.uniqueId,
-      );
+      runInAction(() => {
+        currentFile.action = "convert";
 
-      if (historyIndex > -1) {
-        this.uploadedFilesHistory[historyIndex] = {
-          ...this.uploadedFilesHistory[historyIndex],
-          ...currentFile,
-        };
-      }
+        if (historyIndex > -1) {
+          this.uploadedFilesHistory[historyIndex] = {
+            ...historyCurrentFile,
+            ...currentFile,
+          };
+        }
+      });
 
       if (!this.filesToConversion.length || this.converted) {
         this.filesToConversion.push(currentFile);
@@ -1295,6 +1299,14 @@ class UploadDataStore {
       }
       return resolve();
     }
+
+    if (historyIndex > -1) {
+      this.uploadedFilesHistory[historyIndex] = {
+        ...historyCurrentFile,
+        ...currentFile,
+      };
+    }
+
     if (currentFile.action === "uploaded") {
       this.refreshFiles(currentFile);
     }

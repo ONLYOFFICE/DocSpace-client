@@ -213,11 +213,10 @@ export const connectedCloudsTypeIcon = (key) => {
 };
 
 // Used to update the number of tiles in a row after the window is resized.
-export const getCountTilesInRow = () => {
+export const getCountTilesInRow = (isRooms) => {
   const isDesktopView = isDesktop();
   const isMobileView = isMobile();
   const tileGap = isDesktopView ? 16 : 14;
-  const minTileWidth = 275 + tileGap;
 
   const elem = document.getElementsByClassName("section-wrapper-content")[0];
   let containerWidth = 0;
@@ -240,6 +239,13 @@ export const getCountTilesInRow = () => {
   containerWidth += tileGap;
   if (!isMobileView) containerWidth -= 1;
   if (!isDesktopView) containerWidth += 3; // tablet tile margin -3px (TileContainer.js)
+
+  let minTileWidth;
+  if (isRooms) {
+    minTileWidth = 275 + tileGap;
+  } else {
+    minTileWidth = 216 + tileGap;
+  }
 
   return Math.floor(containerWidth / minTileWidth);
 };

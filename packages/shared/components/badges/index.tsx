@@ -211,17 +211,17 @@ const Badges = ({
     if (!isTrashFolder) openLocationFile?.();
   };
 
+  const wrapperCommonClasses = classNames(styles.badges, className, "badges", {
+    [styles.tableView]: viewAs === "table",
+    [styles.rowView]: viewAs === "row",
+    [styles.tileView]: viewAs === "tile",
+  });
+
   return fileExst ? (
     <div
       className={classNames(
-        styles.badges,
-        className,
-        "badges additional-badges file__badges",
-        {
-          [styles.tableView]: viewAs === "table",
-          [styles.rowView]: viewAs === "row",
-          [styles.tileView]: viewAs === "tile",
-        },
+        wrapperCommonClasses,
+        "additional-badges file__badges",
       )}
     >
       {/* {startFilling && (
@@ -331,7 +331,7 @@ const Badges = ({
     </div>
   ) : (
     <div
-      className={classNames("badges", {
+      className={classNames(wrapperCommonClasses, {
         folder__badges: isFolder && !isRoom,
         room__badges: isRoom,
       })}

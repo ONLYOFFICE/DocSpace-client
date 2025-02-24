@@ -80,6 +80,7 @@ const getIcon = (icon: string): string => {
     case OPERATIONS_NAME.upload:
       return UploadIconUrl;
     case OPERATIONS_NAME.trash:
+    case OPERATIONS_NAME.deleteVersionFile:
       return TrashReactSvgUrl;
     default:
       return OtherOperationsIconUrl;

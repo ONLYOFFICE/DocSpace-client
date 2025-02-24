@@ -55,6 +55,7 @@
   "DeleteSharedCustomPublic": "The link will be deleted permanently. You will not be able to undo this action.",
   "DeleteSharedLink": "The previous link will become unavailable. A new shared link will be created.",
   "DeleteTemplate": "Delete template",
+  "DeletingVersion": "Deleting version",
   "DisableDownload": "Restrict file content copy, file download and printing",
   "DisableNotifications": "Disable notifications",
   "Document": "Document",

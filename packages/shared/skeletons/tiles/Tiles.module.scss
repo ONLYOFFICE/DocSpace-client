@@ -87,14 +87,27 @@
 .tilesSkeleton {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
   grid-gap: 16px;
 
   @include tablet-and-below {
-    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));  }
+    grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  }
 
   @include mobile {
-    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  }
+
+  .tilesSkeletonRooms {
+    grid-template-columns: repeat(auto-fill, minmax(275mpx, 1fr));
+
+    @include tablet-and-below {
+      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    }
+
+    @include mobile {
+      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    }
   }
 }
 

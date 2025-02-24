@@ -25,22 +25,48 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export type FolderTileProps = {
+  /** Folder data object */
   item: any;
+  /** Indicates if the folder is selected */
   checked?: boolean;
+  /** Flag to show hotkey border */
   showHotkeyBorder?: boolean;
+  /** Indicates if folder is in progress state */
   inProgress?: boolean;
+  /** Callback when folder is selected */
   onSelect?: (checked: boolean, item: any) => void;
+  /** Callback when thumbnail is clicked */
   thumbnailClick?: (e: React.MouseEvent) => void;
+  /** Function to get context menu model */
   getContextModel?: () => any;
+  /** Function to set selected items */
   setSelection?: (items: any[]) => void;
+  /** Handler for Ctrl + Click selection */
   withCtrlSelect?: (item: any) => void;
+  /** Handler for Shift + Click selection */
   withShiftSelect?: (item: any) => void;
+  /** Additional React element */
   element?: React.ReactNode;
+  /** Child elements */
   children?: React.ReactNode;
+  /** Callback to hide context menu */
   hideContextMenu?: () => void;
+  /** Custom header for context menu */
   contextMenuHeader?: React.ReactNode;
+  /** Callback when context menu is clicked */
   tileContextClick?: () => void;
+  /** Folder badges */
   badges?: React.ReactNode;
+  /** Context menu options */
   contextOptions: ContextMenuModel[];
+  /** Checkbox indeterminate state flag */
   indeterminate?: boolean;
+  /** Indicates if folder is being dragged */
+  isDragging?: boolean;
+  /** Alternative flag for drag state */
+  dragging?: boolean;
+  /** Indicates if folder is in active state */
+  isActive?: boolean;
+  /** Flag for edit mode */
+  isEdit?: boolean;
 };

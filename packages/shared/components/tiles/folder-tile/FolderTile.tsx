@@ -25,21 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef } from "react";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
+import { isMobile } from "react-device-detect";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "@docspace/shared/components/context-menu-button";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
-import { isMobile } from "react-device-detect";
-import styles from "./FolderTile.module.scss";
 import { FolderTileProps } from "./FolderTile.types";
-import classNames from "classnames";
 import { hasOwnProperty } from "../../../utils/object";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
-import { useTranslation } from "react-i18next";
 import { HeaderType } from "../../context-menu/ContextMenu.types";
 import { Loader, LoaderTypes } from "../../loader";
+
+import styles from "./FolderTile.module.scss";
 
 export const FolderTile = ({
   item,
@@ -58,6 +59,9 @@ export const FolderTile = ({
   tileContextClick,
   hideContextMenu,
   showHotkeyBorder,
+  isDragging,
+  isActive,
+  isEdit,
 }: FolderTileProps) => {
   const childrenArray = React.Children.toArray(children);
   const [FolderTileContent] = childrenArray;
@@ -65,7 +69,6 @@ export const FolderTile = ({
   const { t } = useTranslation(["Translations"]);
 
   const cmRef = useRef<any>(null);
-  const checkboxContainerRef = useRef<HTMLDivElement>(null);
 
   const { isRTL } = useInterfaceDirection();
   const contextMenuDirection = isRTL ? "left" : "right";
@@ -127,8 +130,7 @@ export const FolderTile = ({
         (e.target as HTMLElement).nodeName !== "INPUT" &&
         (e.target as HTMLElement).nodeName !== "rect" &&
         (e.target as HTMLElement).nodeName !== "path" &&
-        (e.target as HTMLElement).nodeName !== "svg" &&
-        checkboxContainerRef.current?.contains(e.target as Node)
+        (e.target as HTMLElement).nodeName !== "svg"
       ) {
         setSelection && setSelection([]);
       }
@@ -145,6 +147,14 @@ export const FolderTile = ({
   const folderTileClassNames = classNames(styles.folderTile, {
     [styles.checked]: checked,
     [styles.showHotkeyBorder]: showHotkeyBorder,
+    [styles.isDragging]: isDragging,
+    [styles.isActive]: isActive,
+    [styles.isEdit]: isEdit,
+  });
+
+  const iconContainerClassNames = classNames(styles.iconContainer, {
+    [styles.isDragging]: isDragging,
+    [styles.inProgress]: inProgress,
   });
 
   const iconClassNames = classNames(styles.icon, {
@@ -157,26 +167,28 @@ export const FolderTile = ({
 
   return (
     <div className={folderTileClassNames} onClick={onFolderClick}>
-      {!inProgress ? (
-        <div className={styles.iconContainer}>
-          <div className={iconClassNames} onClick={onFolderIconClick}>
-            {element}
+      {element && !isEdit ? (
+        !inProgress ? (
+          <div className={iconContainerClassNames}>
+            <div className={iconClassNames} onClick={onFolderIconClick}>
+              {element}
+            </div>
+            <Checkbox
+              isChecked={checked}
+              onChange={changeCheckbox}
+              className={checkboxClassNames}
+              isIndeterminate={indeterminate}
+            />
           </div>
-          <Checkbox
-            isChecked={checked}
-            onChange={changeCheckbox}
-            className={checkboxClassNames}
-            isIndeterminate={indeterminate}
+        ) : (
+          <Loader
+            className={styles.loader}
+            color=""
+            size="20px"
+            type={LoaderTypes.track}
           />
-        </div>
-      ) : (
-        <Loader
-          className={styles.loader}
-          color=""
-          size="20px"
-          type={LoaderTypes.track}
-        />
-      )}
+        )
+      ) : null}
 
       <div className={styles.content}>
         {FolderTileContent}

@@ -1158,8 +1158,6 @@
   --tag-disabled-border: 1px dashed #{$gray-strong};
   --tag-border: 1px solid #{$gray-strong};
 
-  --tag-padding: 1px 7px;
-  --tag-margin-end: 4px;
   --tag-border-radius: 6px;
   --tag-icon-margin-start: 12px;
   --tag-dropdown-text-margin: 8px;
@@ -1923,33 +1921,28 @@
   --toast-transform: translate3d(-150%, 0, 0);
 }
 
-.light{
-  --cursor-pointer: pointer;
-  --cursor-default: default;
-  --opacity-disabled: 0.5;
-
-  --tile-upper-border-radius: 6px;
-  --tile-bottom-border-radius: 6px;
-  --tile-checked-background: #{$light-gray-selected};
+.light {
   --tile-background-color: #{$white};
-  --tile-bottom-height: 24px;
-  --tile-bottom-padding: 16px;
-  --thumbnail-width: 96px;
-  --thumbnail-height: 96px;
-  --checkbox-margin: 8px;
+  --tile-border: 1px solid #{$gray-strong};
+  --tile-checked-background: #{$light-gray-hover};
+  --tile-icon-button-color: #{$gray};
+  --tile-background-badge-color: #{$white};
+
+  --tile-show-hotkey-border: #{$light-second-main};
+  --tile-border-radius: 6px;
+  --tile-room-border-radius: 12px;
+  --tile-badge-shadow: 0px 2px 4px #{$badge-shadow};
 }
 
 .dark {
-  --tile-upper-border-radius: 6px;
-  --tile-bottom-border-radius: 6px;
+  --tile-background-color: #{$black};
+  --tile-border: 1px solid #{$gray-dark-strong};
   --tile-checked-background: #{$light-dark-gray-hover};
-  --tile-background-color: #{$gray-dark};
-  --tile-bottom-height: 24px;
-  --tile-bottom-padding: 16px;
-  --thumbnail-width: 96px;
-  --thumbnail-height: 96px;
-  --checkbox-margin: 8px;
-  --cursor-pointer: pointer;
-  --cursor-default: default;
-  --opacity-disabled: 0.5;
+  --tile-icon-button-color: #{$gray-dark};
+  --tile-background-badge-color: #{$black};
+
+  --tile-show-hotkey-border: #{$light-second-main};
+  --tile-border-radius: 6px;
+  --tile-room-border-radius: 12px;
+  --tile-badge-shadow: 0px 2px 4px #{$badge-shadow};
 }

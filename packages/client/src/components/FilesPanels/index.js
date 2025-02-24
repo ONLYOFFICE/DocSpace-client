@@ -42,6 +42,7 @@ import {
   InvitePanel,
   EditLinkPanel,
   EmbeddingPanel,
+  ConversionPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -149,6 +150,7 @@ const Panels = (props) => {
     passwordEntryDialogDate,
     guestReleaseTipDialogVisible,
     closeEditIndexDialogVisible,
+    conversionVisible,
     deleteVersionDialogVisible,
     operationCancelVisible,
   } = props;
@@ -237,6 +239,7 @@ const Panels = (props) => {
       <GuestReleaseTipDialog key="guest-release-tip-dialog" />
     ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
+    conversionVisible && <ConversionPanel key="conversion-panel" />,
     (moveToPanelVisible ||
       copyPanelVisible ||
       restorePanelVisible ||
@@ -445,7 +448,7 @@ export default inject(
     const { preparationPortalDialogVisible } = backup;
     const { copyFromTemplateForm } = filesActionsStore;
 
-    const { uploadPanelVisible } = uploadDataStore;
+    const { uploadPanelVisible, conversionVisible } = uploadDataStore;
     const {
       isVisible: versionHistoryPanelVisible,
       deleteVersionDialogVisible,
@@ -538,6 +541,7 @@ export default inject(
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
+      conversionVisible,
       deleteVersionDialogVisible,
       operationCancelVisible,
     };

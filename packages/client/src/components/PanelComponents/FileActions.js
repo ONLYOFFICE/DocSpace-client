@@ -25,39 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled, { keyframes } from "styled-components";
-
-import { IconButton } from "@docspace/shared/components/icon-button";
-
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
+import { StyledIconButton } from "./StyledComponents";
 
-const circularRotate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  40% {
-    transform: rotate(-180deg);
-  }
-  50% {
-    transform: rotate(-180deg);
-  }
-  90% {
-    transform: rotate(-360deg);
-  }
-  100% {
-    transform: rotate(-360deg);
-  }
-`;
-
-const StyledIconButton = styled(IconButton)`
-  svg {
-    animation: ${circularRotate} 2s ease-in-out infinite;
-    transform-origin: center;
-  }
-`;
-
-const ActionsUploadedFile = ({ item }) => {
+const FileActions = ({ item }) => {
   return (
     <>
       {item.action === "uploaded" || item.action === "converted" ? (
@@ -79,4 +51,4 @@ const ActionsUploadedFile = ({ item }) => {
   );
 };
 
-export default ActionsUploadedFile;
+export default FileActions;

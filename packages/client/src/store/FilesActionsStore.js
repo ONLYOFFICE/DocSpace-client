@@ -3351,8 +3351,7 @@ class FilesActionStore {
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
 
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      secondaryProgressDataStore;
+    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
 
     const {
       setVersionDeletionProcess,

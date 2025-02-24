@@ -24,22 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmbeddingPanel from "./EmbeddingPanel";
-import VersionHistoryPanel from "./VersionHistoryPanel";
-import UploadPanel from "./UploadPanel";
-import HotkeysPanel from "./HotkeysPanel";
-import InvitePanel from "./InvitePanel";
-import EditLinkPanel from "./EditLinkPanel";
-import ConversionPanel from "./ConversionPanel";
+import React from "react";
+import { useTheme } from "styled-components";
+import uniqueid from "lodash/uniqueId";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/shared/components/text";
+import { StyledLoadErrorIcon } from "./StyledComponents";
 
-export {
-  EmbeddingPanel,
-  VersionHistoryPanel,
-  UploadPanel,
-  HotkeysPanel,
-  InvitePanel,
-  EditLinkPanel,
-  ConversionPanel,
+const TooltipContent = ({ content }) => (
+  <Text fontSize="13px" noSelect>
+    {content}
+  </Text>
+);
+
+const ErrorFile = ({ t, item, theme, onTextClick, showPasswordInput }) => {
+  const { interfaceDirection } = useTheme();
+  const placeTooltip = interfaceDirection === "rtl" ? "right" : "left";
+  const tooltipId = uniqueid("uploading_tooltip");
+
+  return (
+    <div className="upload_panel-icon">
+      <StyledLoadErrorIcon
+        size="medium"
+        data-tooltip-id={tooltipId}
+        data-tooltip-content={item.error || t("UploadingError")}
+      />
+      <Tooltip
+        id={tooltipId}
+        getContent={TooltipContent}
+        place={placeTooltip}
+        maxWidth="320"
+        color={theme.tooltip.backgroundColor}
+      />
+      {item.needPassword ? (
+        <Text className="enter-password" fontWeight="600" onClick={onTextClick}>
+          {showPasswordInput ? t("HideInput") : t("EnterPassword")}
+        </Text>
+      ) : null}
+    </div>
+  );
 };
 
-export default ConversionPanel;
+export default ErrorFile;

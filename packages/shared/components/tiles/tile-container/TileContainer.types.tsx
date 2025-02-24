@@ -42,7 +42,10 @@ export type TileContainerProps = {
   id?: string;
   style?: React.CSSProperties;
   useReactWindow?: boolean;
-  infiniteGrid?: React.ComponentType<{ children: React.ReactNode }>;
+  infiniteGrid?: React.ComponentType<{
+    children: React.ReactNode;
+    isRooms: boolean;
+  }>;
   headingFolders?: React.ReactNode;
   headingFiles?: React.ReactNode;
   isDesc?: boolean;

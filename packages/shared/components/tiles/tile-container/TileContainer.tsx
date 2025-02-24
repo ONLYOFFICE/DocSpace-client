@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styles from "./TileContainer.module.scss";
-import { TileContainerProps, TileItemProps } from "./TileContainer.types";
 import classNames from "classnames";
+import { TileContainerProps, TileItemProps } from "./TileContainer.types";
 import { Heading, HeadingSize } from "../../heading";
+
+import styles from "./TileContainer.module.scss";
 
 export const TileContainer = ({
   children,
@@ -40,7 +41,6 @@ export const TileContainer = ({
   headingFiles,
   isDesc,
   style,
-  ...rest
 }: TileContainerProps) => {
   const Rooms: React.ReactElement[] = [];
   const Folders: React.ReactElement[] = [];
@@ -146,6 +146,8 @@ export const TileContainer = ({
     </>
   );
 
+  const isRooms = Rooms.length > 0;
+
   return (
     <div
       className={classNames(className, styles.tileContainer)}
@@ -153,7 +155,7 @@ export const TileContainer = ({
       style={style}
     >
       {useReactWindow && InfiniteGrid ? (
-        <InfiniteGrid>{renderTile}</InfiniteGrid>
+        <InfiniteGrid isRooms={isRooms}>{renderTile}</InfiniteGrid>
       ) : (
         renderTile
       )}

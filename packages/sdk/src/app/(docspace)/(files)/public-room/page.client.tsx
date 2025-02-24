@@ -31,7 +31,6 @@ import { observer } from "mobx-react";
 
 import { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
-import { ThemeKeys } from "@docspace/shared/enums";
 
 import useSDK from "@/hooks/useSDK";
 
@@ -46,7 +45,6 @@ type PublicRoomPageProps = {
   filesSettings: TFilesSettings;
   portalSettings: TSettings;
   filesFilter: string;
-  theme: ThemeKeys.BaseStr | ThemeKeys.DarkStr;
   baseConfig: {
     header?: boolean;
     folder?: string;
@@ -58,7 +56,6 @@ function PublicRoomPage({
   filesSettings,
   filesFilter,
   portalSettings,
-  theme,
   shareKey,
   baseConfig,
 }: PublicRoomPageProps) {
@@ -87,7 +84,6 @@ function PublicRoomPage({
       portalSettings={portalSettings}
       filesFilter={filesFilter}
       current={current}
-      theme={theme}
     />
   );
 }

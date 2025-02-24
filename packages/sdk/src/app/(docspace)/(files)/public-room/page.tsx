@@ -26,7 +26,6 @@
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { TSettings } from "@docspace/shared/api/settings/types";
-import { ThemeKeys } from "@docspace/shared/enums";
 
 import { getFilesSettings, getFolder } from "@/api/files";
 import { getSettings } from "@/api/settings";
@@ -68,10 +67,6 @@ export default async function PublicRoom({
       portalSettings={portalSettings! as TSettings}
       filesFilter={filterStr}
       shareKey={baseConfig.key as string}
-      theme={
-        (baseConfig.theme as ThemeKeys.BaseStr | ThemeKeys.DarkStr) ??
-        ThemeKeys.BaseStr
-      }
       baseConfig={{
         header: baseConfig.header as boolean,
         folder: baseConfig.id as string,

@@ -29,12 +29,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
 import type { TViewAs } from "@docspace/shared/types";
 
-import {
-  FILTER_HEADER,
-  PAGE_COUNT,
-  SHARE_KEY_HEADER,
-  THEME_HEADER,
-} from "@/utils/constants";
+import { FILTER_HEADER, PAGE_COUNT, SHARE_KEY_HEADER } from "@/utils/constants";
 import { getFilesSettings, getFolder } from "@/api/files";
 
 import { Layout } from "./_components/layout";
@@ -52,7 +47,6 @@ export default async function DocspaceLayout({
   const cookieStore = cookies();
 
   const filter = hdrs.get(FILTER_HEADER);
-  const theme = hdrs.get(THEME_HEADER);
   const shareKey = hdrs.get(SHARE_KEY_HEADER);
   const initViewAs = (cookieStore.get("viewAs")?.value || "row") as TViewAs;
 

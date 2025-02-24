@@ -30,7 +30,6 @@ import {
   TFilesSettings,
 } from "@docspace/shared/api/files/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
-import { ThemeKeys } from "@docspace/shared/enums";
 
 export type ListProps = {
   total: number;
@@ -42,5 +41,4 @@ export type ListProps = {
   current: TFolder;
 
   shareKey?: string;
-  theme?: ThemeKeys.BaseStr | ThemeKeys.DarkStr;
 };

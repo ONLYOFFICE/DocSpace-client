@@ -37,6 +37,7 @@ import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import { useNavigationStore } from "../../_store/NavigationStore";
 import { useFilesSelectionStore } from "../../_store/FilesSelectionStore";
@@ -50,12 +51,13 @@ import { useFilesListStore } from "../../_store/FilesListStore";
 
 export type { HeaderProps };
 
-const Header = ({ current, pathParts, isEmptyList, theme }: HeaderProps) => {
+const Header = ({ current, pathParts, isEmptyList }: HeaderProps) => {
   const navigationStore = useNavigationStore();
   const filesSelectionStore = useFilesSelectionStore();
   const filesListStore = useFilesListStore();
   const { getHeaderContextMenuModel } = useContextMenuModel({});
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu({});
+  const { isBase: isBaseTheme } = useTheme();
 
   const tableGroupMenuVisible = filesSelectionStore.selection.length > 0;
   const isChecked =
@@ -69,8 +71,8 @@ const Header = ({ current, pathParts, isEmptyList, theme }: HeaderProps) => {
 
   const isRoomsFolder = pathParts[0].id === rootFolderId;
 
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, theme === "Dark");
-  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, theme === "Dark");
+  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !isBaseTheme);
+  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !isBaseTheme);
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
     const items = pathParts.map((p) => ({

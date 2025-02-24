@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 
-import { ThemeKeys } from "@docspace/shared/enums";
 import { EmptyView as EmptyViewComponent } from "@docspace/shared/components/empty-view";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
 
@@ -18,7 +18,6 @@ import {
 import { EmptyViewProps } from "./EmptyView.types";
 
 const EmptyView = ({
-  theme,
   current,
   folderId,
   isFiltered,
@@ -27,7 +26,7 @@ const EmptyView = ({
   const { t } = useTranslation(["Common"]);
 
   const isRoot = current.parentId === current.rootFolderId;
-  const isBaseTheme = theme.toLowerCase() === ThemeKeys.BaseStr.toLowerCase();
+  const { isBase: isBaseTheme } = useTheme();
 
   const title = isFiltered
     ? t("Common:NoFindingsFound")

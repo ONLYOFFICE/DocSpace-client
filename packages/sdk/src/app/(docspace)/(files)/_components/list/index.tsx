@@ -57,7 +57,6 @@ const List = ({
   shareKey,
   total: totalProp,
   current,
-  theme,
 }: ListProps) => {
   const timezone = portalSettings.timezone;
   const displayFileExtension = filesSettings.displayFileExtension;
@@ -183,7 +182,6 @@ const List = ({
   if (filesList.length === 0) {
     return (
       <EmptyView
-        theme={theme!}
         current={current}
         folderId={filter.folder}
         isFiltered={filter.isFiltered()}

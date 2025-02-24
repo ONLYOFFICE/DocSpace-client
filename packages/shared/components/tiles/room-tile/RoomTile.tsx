@@ -27,6 +27,7 @@
 import React, { useState, useRef } from "react";
 import { isMobile } from "react-device-detect";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import {
@@ -35,13 +36,13 @@ import {
 } from "@docspace/shared/components/context-menu-button";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 import { Tags } from "@docspace/shared/components/tags";
-
-import styles from "./RoomTile.module.scss";
-import { RoomTileProps } from "./RoomTile.types";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { useTranslation } from "react-i18next";
 import { HeaderType } from "components/context-menu/ContextMenu.types";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
+
+import { RoomTileProps } from "./RoomTile.types";
+
+import styles from "./RoomTile.module.scss";
 
 export const RoomTile = ({
   checked,
@@ -64,6 +65,7 @@ export const RoomTile = ({
   inProgress,
   badges,
   showHotkeyBorder,
+  isEdit,
 }: RoomTileProps) => {
   const childrenArray = React.Children.toArray(children);
   const [RoomsTileContent] = childrenArray;
@@ -125,7 +127,8 @@ export const RoomTile = ({
         !e.target.closest(".tags") &&
         !e.target.closest(".advanced-tag") &&
         !e.target.closest(".badges") &&
-        !e.target.closest("#modal-dialog"))
+        !e.target.closest("#modal-dialog") &&
+        !checkboxContainerRef.current?.contains(e.target as Node))
     ) {
       thumbnailClick?.(e);
     }
@@ -172,6 +175,11 @@ export const RoomTile = ({
     [styles.isActive]: isActive,
     [styles.isBlockingOperation]: isBlockingOperation,
     [styles.showHotkeyBorder]: showHotkeyBorder,
+    [styles.isEdit]: isEdit,
+  });
+
+  const iconContainerClassNames = classNames(styles.iconContainer, {
+    [styles.inProgress]: inProgress,
   });
 
   const iconClassNames = classNames(styles.icon, {
@@ -193,31 +201,33 @@ export const RoomTile = ({
       onContextMenu={onContextMenu}
     >
       <div className={styles.topContent}>
-        {!inProgress ? (
-          <div
-            className={styles.iconContainer}
-            ref={checkboxContainerRef}
-            onMouseEnter={onHover}
-            onMouseLeave={onLeave}
-          >
-            <div className={iconClassNames} onClick={onRoomIconClick}>
-              {element}
+        {element && !isEdit ? (
+          !inProgress ? (
+            <div
+              className={iconContainerClassNames}
+              ref={checkboxContainerRef}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              <div className={iconClassNames} onClick={onRoomIconClick}>
+                {element}
+              </div>
+              <Checkbox
+                isChecked={checked}
+                onChange={changeCheckbox}
+                className={checkboxClassNames}
+                isIndeterminate={indeterminate}
+              />
             </div>
-            <Checkbox
-              isChecked={checked}
-              onChange={changeCheckbox}
-              className={checkboxClassNames}
-              isIndeterminate={indeterminate}
+          ) : (
+            <Loader
+              className={styles.loader}
+              color=""
+              size="20px"
+              type={LoaderTypes.track}
             />
-          </div>
-        ) : (
-          <Loader
-            className={styles.loader}
-            color=""
-            size="20px"
-            type={LoaderTypes.track}
-          />
-        )}
+          )
+        ) : null}
 
         <div className={contentClassNames}>
           {RoomsTileContent}

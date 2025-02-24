@@ -28,24 +28,46 @@ import { ContextMenuModel } from "@docspace/shared/components/context-menu/Conte
 import { TFunction } from "i18next";
 
 export type RoomTileProps = {
+  /** Indicates if the room is selected */
   checked?: boolean;
+  /** Indicates if the room is in active state */
   isActive?: boolean;
+  /** Indicates if the room is in a blocking operation state */
   isBlockingOperation?: boolean;
+  /** Room data object */
   item: any;
+  /** Callback when room is selected */
   onSelect?: (checked: boolean, item: any) => void;
+  /** Callback when thumbnail is clicked */
   thumbnailClick?: (e: React.MouseEvent) => void;
+  /** Function to get context menu model */
   getContextModel?: () => any;
+  /** Child elements */
   children?: React.ReactNode;
+  /** Checkbox indeterminate state flag */
   indeterminate?: boolean;
+  /** Additional React element */
   element?: React.ReactNode;
+  /** Context menu options */
   contextOptions: ContextMenuModel[];
+  /** Callback when context menu is clicked */
   tileContextClick?: () => void;
+  /** Callback to hide context menu */
   hideContextMenu?: () => void;
+  /** Number of columns in the grid */
   columnCount: number;
+  /** Callback for tag selection */
   selectTag: (tag: object | undefined) => void;
+  /** Callback for option selection */
   selectOption: (option: object | undefined) => void;
+  /** Function to get room type name */
   getRoomTypeName: (roomType: string, t: TFunction) => string;
+  /** Room badges */
   badges?: React.ReactNode;
+  /** Indicates if room is in progress state */
   inProgress?: boolean;
+  /** Flag to show hotkey border */
   showHotkeyBorder?: boolean;
+  /** Flag for edit mode */
+  isEdit?: boolean;
 };

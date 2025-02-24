@@ -34,9 +34,9 @@
 
   box-sizing: border-box;
 
-  background: white; //change
-  border: 1px solid #d0d5da; //change
-  border-radius: 6px; //change
+  background: var(--tile-background-color);
+  border: var(--tile-border);
+  border-radius: var(--tile-room-border-radius);
 
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@
   justify-content: center;
   align-items: center;
   align-content: center;
-  gap: 16px;
+  gap: 10px;
 
   @include mobile {
     margin-inline-start: 2px;
@@ -53,6 +53,7 @@
 
   .topContent {
     width: 100%;
+    height: 44px;
     box-sizing: border-box;
 
     display: flex;
@@ -62,7 +63,6 @@
     justify-content: flex-start;
     align-items: center;
     align-content: center;
-    //border-radius: var(--roomsUpperBorderRadius);
     border-radius: 12px 12px 0 0;
   }
 
@@ -70,8 +70,8 @@
     width: 100%;
     box-sizing: border-box;
     padding: 0 16px;
-    //border-radius: var(--roomsBottomBorderRadius);
     border-radius: 0 0 12px 12px;
+    height: 24px;
 
     &.isThirdParty {
       display: flex;
@@ -79,12 +79,13 @@
   }
 
   &.checked,
-  &:hover {
-    background: #f3f4f4; //change
+  &.isActive,
+  &:hover:not(.isEdit) {
+    background: var(--tile-checked-background);
 
     .tag,
     .advanced-tag {
-      background: #f3f4f4; //change
+      background: var(--tile-checked-background);
     }
   }
 
@@ -98,16 +99,6 @@
     pointer-events: none;
   }
 
-  //   &.checked,
-  //   &.isActive {
-  //     background: var(--roomsCheckedColor);
-
-  //     .tag,
-  //     .advanced-tag {
-  //       background: var(--roomsBackgroundColor);
-  //     }
-  //   }
-
   .iconContainer {
     width: 32px;
     height: 32px;
@@ -117,7 +108,7 @@
     background: white;
     border-radius: 6px;
 
-    &:hover {
+    &:hover:not(.inProgress) {
       .icon {
         display: none;
       }
@@ -167,11 +158,11 @@
 }
 
 .showHotkeyBorder {
-  border-color: #5299e0; //change
+  border-color: var(--tile-show-hotkey-border);
 
   &:before,
   &:after {
-    border-color: #5299e0; //change
+    border-color: var(--tile-show-hotkey-border);
   }
 }
 
@@ -196,10 +187,17 @@
     word-break: break-word;
   }
 
+  &.isHovered {
+    a {
+      text-decoration: none !important;
+    }
+  }
+
   :global {
     .badges {
       display: flex;
       flex-wrap: nowrap;
+      align-items: center;
       align-items: center;
 
       > .is-pinned {
@@ -210,14 +208,14 @@
 
         svg {
           path {
-            fill: #a3a9ae; //change
+            fill: var(--tile-icon-button-color);
           }
         }
 
         &:hover {
           svg {
             path {
-              fill: #4781d1; //change
+              fill: var(--accent-main);
             }
           }
         }
@@ -237,7 +235,7 @@
 
   .expandButton > div:first-child {
     padding-block: 8px;
-    padding-inline: 0 20px;
+    padding-inline: 0 16px;
   }
 }
 

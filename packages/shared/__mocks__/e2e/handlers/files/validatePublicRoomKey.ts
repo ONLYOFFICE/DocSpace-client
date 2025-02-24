@@ -26,69 +26,21 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { headers } from "next/headers";
+const validateSuccess = {
+  response: {
+    status: 0,
+    id: "24",
+    title: "public room",
+    tenantId: 1,
+    shared: false,
+    linkId: "621124e3-a7d3-4f9b-a123-f5b840a47cab",
+    isAuthenticated: false,
+  },
+  count: 1,
+  status: 0,
+  statusCode: 200,
+};
 
-import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import {
-  TGetRooms,
-  type TValidateShareRoom,
-} from "@docspace/shared/api/rooms/types";
-import { checkFilterInstance } from "@docspace/shared/utils/common";
-import {
-  roomListHandler,
-  validatePublicRoomKeyHandler,
-} from "@docspace/shared/__mocks__/e2e";
-
-const IS_TEST = process.env.E2E_TEST;
-
-export async function getRooms(
-  filter: RoomsFilter,
-  signal?: AbortSignal,
-): Promise<TGetRooms | undefined> {
-  let params;
-
-  if (filter) {
-    params = `?${filter.toApiUrlParams()}`;
-  }
-
-  const [req] = createRequest(
-    [`/files/rooms${params}`],
-    [["", ""]],
-    "GET",
-    undefined,
-    undefined,
-    [signal],
-  );
-
-  const res = IS_TEST
-    ? roomListHandler(headers())
-    : await fetch(req, { next: { revalidate: 300 } });
-
-  if (!res.ok) return;
-
-  const rooms = await res.json();
-
-  return rooms.response;
-}
-
-export async function validatePublicRoomKey(
-  key: string,
-): Promise<TValidateShareRoom> {
-  const [req] = createRequest([`/files/share/${key}`], [["", ""]], "GET");
-
-  const res = IS_TEST
-    ? validatePublicRoomKeyHandler()
-    : await fetch(
-        req,
-        // { next: { revalidate: 300 } }
-      );
-
-  if (!res.ok) {
-    throw new Error("Failed to validate public room key");
-  }
-
-  const validation = await res.json();
-
-  return validation.response;
-}
+export const validatePublicRoomKeyHandler = (): Response => {
+  return new Response(JSON.stringify(validateSuccess));
+};

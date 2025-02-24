@@ -31,3 +31,5 @@ export * from "./filesSettings";
 export * from "./foldersTree";
 
 export * from "./folder";
+
+export * from "./validatePublicRoomKey";

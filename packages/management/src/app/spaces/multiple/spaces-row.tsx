@@ -57,7 +57,8 @@ export const SpacesRow = ({ item, tenantAlias, portals }) => {
   const logoElement = (
     <ReactSVG id={item.key} src={DefaultLogoUrl} className="logo-icon" />
   );
-  const protocol = window?.location?.protocol;
+  const protocol =
+    typeof window !== "undefined" ? window?.location?.protocol : "http:";
 
   const onDelete = () => {
     if (portals.length === 1) {
@@ -103,7 +104,7 @@ export const SpacesRow = ({ item, tenantAlias, portals }) => {
         icon: ChangQuotaReactSvgUrl,
         onClick: () => {
           setIsVisibleDialog(true);
-          isDisableQuota && setIsDisableQuota(false);
+          if (isDisableQuota) setIsDisableQuota(false);
         },
       },
       {
@@ -140,3 +141,4 @@ export const SpacesRow = ({ item, tenantAlias, portals }) => {
     </>
   );
 };
+

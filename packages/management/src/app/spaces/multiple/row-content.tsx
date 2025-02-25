@@ -58,7 +58,8 @@ export const RowContent = ({ item, tenantAlias }) => {
     customQuota >= 0 ? `${usedStorage}/${maxStorage}` : `${usedStorage}`;
 
   const isCurrentPortal = tenantAlias === item.portalName;
-  const protocol = window?.location?.protocol;
+  const protocol =
+    typeof window !== "undefined" ? window?.location?.protocol : "http:";
   const isWizardCompleted = item.wizardSettings.completed;
 
   const onSpaceClick = () => {
@@ -129,3 +130,4 @@ export const RowContent = ({ item, tenantAlias }) => {
     </StyledRowContent>
   );
 };
+

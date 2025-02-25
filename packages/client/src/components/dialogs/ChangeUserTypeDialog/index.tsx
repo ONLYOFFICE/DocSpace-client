@@ -128,13 +128,14 @@ const ChangeUserTypeDialog = ({
         documentsSection: t("Common:Documents"),
       })
     );
-  const onClickReassignData = () => {
+  const onClickReassignData = (currentUserAsDefault?: boolean) => {
     setDialogData({
       user,
       getReassignmentProgress,
       reassignUserData,
       cancelReassignment,
       toType,
+      currentUserAsDefault,
     });
 
     setDataReassignmentDialogVisible(true);
@@ -142,6 +143,14 @@ const ChangeUserTypeDialog = ({
     onClose();
   };
 
+  const onChangeType = () => {
+    if (!needReassignData) {
+      onChangeUserType();
+      return;
+    }
+
+    onClickReassignData(true);
+  };
   const getDowngradeContent = () => {
     if (!isDowngradeType) return;
 
@@ -239,7 +248,7 @@ const ChangeUserTypeDialog = ({
           size={ButtonSize.normal}
           scale
           primary
-          onClick={onChangeUserType}
+          onClick={onChangeType}
           isLoading={isRequestRunning}
         />
         <Button

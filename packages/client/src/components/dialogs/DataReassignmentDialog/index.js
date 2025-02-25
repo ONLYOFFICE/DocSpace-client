@@ -67,10 +67,8 @@ const DataReassignmentDialog = ({
   currentColorScheme,
   currentUser,
   deleteProfile,
-  isDeletingUserWithReassignment,
   t,
   tReady,
-  setIsDeletingUserWithReassignment,
   setDataReassignmentDeleteProfile,
   dataReassignmentUrl,
   needResetUserSelection,
@@ -84,10 +82,12 @@ const DataReassignmentDialog = ({
     cancelReassignment,
     showDeleteProfileCheckbox,
     toType,
+    currentUserAsDefault,
+    showProgressImmediately,
   } = data;
 
   const [selectorVisible, setSelectorVisible] = useState(false);
-  const defaultTargetUser = isDeletingUserWithReassignment ? currentUser : null;
+  const defaultTargetUser = currentUserAsDefault ? currentUser : null;
   const [targetUser, setTargetUser] = useState(defaultTargetUser);
   const [isDeleteProfile, setIsDeleteProfile] = useState(deleteProfile);
   const [showProgress, setShowProgress] = useState(false);
@@ -161,14 +161,13 @@ const DataReassignmentDialog = ({
 
   useEffect(() => {
     // If click Delete user
-    if (isDeletingUserWithReassignment) onReassign();
+    if (currentUserAsDefault && showProgressImmediately) onReassign();
 
     return () => {
-      setIsDeletingUserWithReassignment(false);
       setDataReassignmentDeleteProfile(false);
       clearTimeout(timerId);
     };
-  }, [isDeletingUserWithReassignment]);
+  }, [currentUserAsDefault, showProgressImmediately]);
 
   const onToggleDeleteProfile = () => {
     setIsDeleteProfile((remove) => !remove);
@@ -304,8 +303,6 @@ export default inject(({ settingsStore, peopleStore, userStore }) => {
     setDataReassignmentDialogVisible,
     dataReassignmentDeleteProfile,
     setDataReassignmentDeleteProfile,
-    isDeletingUserWithReassignment,
-    setIsDeletingUserWithReassignment,
   } = peopleStore.dialogStore;
   const { currentColorScheme, dataReassignmentUrl } = settingsStore;
 
@@ -320,8 +317,7 @@ export default inject(({ settingsStore, peopleStore, userStore }) => {
     currentUser,
     deleteProfile: dataReassignmentDeleteProfile,
     setDataReassignmentDeleteProfile,
-    isDeletingUserWithReassignment,
-    setIsDeletingUserWithReassignment,
+
     dataReassignmentUrl,
     needResetUserSelection,
     setSelected,

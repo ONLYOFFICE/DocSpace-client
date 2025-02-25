@@ -130,6 +130,7 @@ export interface TableRowProps {
   badgeUrl: string;
   isIndexEditingMode: boolean;
   onClick?: (e: React.MouseEvent) => void;
+  forwardedRef: React.ForwardedRef<HTMLDivElement>;
 }
 
 export interface TableCellProps {

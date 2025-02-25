@@ -88,8 +88,6 @@ const Members = ({
   membersIsLoading,
   searchValue,
   isMembersPanelUpdating,
-  setGuestReleaseTipDialogVisible,
-  showGuestReleaseTip,
   setRoomShared,
   currentId,
   setPublicRoomKey,
@@ -105,10 +103,6 @@ const Members = ({
   useEffect(() => {
     updateInfoPanelMembers(t);
   }, [infoPanelSelection, searchValue]);
-
-  useEffect(() => {
-    if (showGuestReleaseTip) setGuestReleaseTipDialogVisible(true);
-  }, [showGuestReleaseTip, setGuestReleaseTipDialogVisible]);
 
   useEffect(() => {
     if (isMembersPanelUpdating) return;
@@ -377,7 +371,6 @@ export default inject(
     treeFoldersStore,
     dialogsStore,
     infoPanelStore,
-    settingsStore,
   }) => {
     const {
       infoPanelSelection,
@@ -401,12 +394,10 @@ export default inject(
     const {
       setLinkParams,
       setEditLinkPanelIsVisible,
-      setGuestReleaseTipDialogVisible,
       setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
     } = dialogsStore;
 
     const { id } = selectedFolderStore;
-    const { showGuestReleaseTip } = settingsStore;
 
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
@@ -444,8 +435,6 @@ export default inject(
       membersIsLoading,
       searchValue,
       isMembersPanelUpdating,
-      setGuestReleaseTipDialogVisible,
-      showGuestReleaseTip,
       setRoomShared,
       currentId: id,
       setPublicRoomKey,

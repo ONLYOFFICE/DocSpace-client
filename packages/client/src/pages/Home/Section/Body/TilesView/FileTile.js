@@ -31,15 +31,16 @@ import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 
-import Tile from "./sub-components/Tile";
 import FilesTileContent from "./FilesTileContent";
 import { FileTileContext } from "./FileTile.provider";
 import {
   FileTile as FileTileComponent,
   FolderTile,
   RoomTile,
+  TemplateTile,
 } from "@docspace/shared/components/tiles";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+import SpaceQuota from "@docspace/client/src/components/SpaceQuota";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
@@ -87,6 +88,7 @@ const FileTile = (props) => {
     selectableRef,
     openUser,
     isBlockingOperation,
+    showStorageInfo,
   } = props;
 
   const navigate = useNavigate();
@@ -190,7 +192,18 @@ const FileTile = (props) => {
     />
   );
 
+  const remplateTile = (
+    <TemplateTile
+      {...commonProps}
+      thumbnailClick={onFilesClick}
+      openUser={onOpenUser}
+      showStorageInfo={showStorageInfo}
+      SpaceQuotaComponent={SpaceQuota}
+    />
+  );
+
   const renderTile = () => {
+    if (item.isTemplate) return remplateTile;
     if (item.isRoom) return roomTile;
     if (item.isFolder) return folderTile;
     return fileTile;
@@ -217,7 +230,13 @@ const FileTile = (props) => {
 
 export default inject(
   (
-    { filesSettingsStore, filesStore, treeFoldersStore, infoPanelStore },
+    {
+      filesSettingsStore,
+      filesStore,
+      treeFoldersStore,
+      infoPanelStore,
+      currentQuotaStore,
+    },
     { item },
   ) => {
     const { getIcon } = filesSettingsStore;
@@ -230,6 +249,8 @@ export default inject(
     const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
       treeFoldersStore;
 
+    const { showStorageInfo } = currentQuotaStore;
+
     const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     return {
@@ -240,6 +261,7 @@ export default inject(
       withShiftSelect,
       isHighlight,
       openUser: infoPanelStore.openUser,
+      showStorageInfo,
     };
   },
 )(

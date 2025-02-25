@@ -159,7 +159,6 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     if (primaryActiveOperations.length) {
       setIsHideTooltip(true);
 
-
       primaryActiveOperations[0].showPanel?.(true);
       clearTimers();
 

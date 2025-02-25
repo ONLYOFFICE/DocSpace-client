@@ -175,9 +175,8 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     secondaryActiveOperations: Operation[];
     primaryOperationsArray: Operation[];
     clearSecondaryProgressData: (
-      operationId: string | null,
-      operation: string | null,
-      clearAll?: boolean,
+      operationId?: string | null,
+      operation?: string | null,
     ) => void;
 
     clearPrimaryProgressData: (operation?: string | null) => void;

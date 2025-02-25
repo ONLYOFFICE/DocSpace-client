@@ -569,5 +569,22 @@
   "Yesterday": "Ontem",
   "You": "Você",
   "BadgeMyDraftTitle": "Meu rascunho",
-  "InProgress": "Em andamento"
+  "InProgress": "Em andamento",
+  "RoleRoomAdminFormRoomDescription": "Administradores de sala podem criar e gerenciar salas, convidar novos usuários e atribuir funções de administrador de sala ou inferior. Administradores de sala podem carregar formulários na sala e ter acesso total às pastas Concluído e Em processamento.",
+  "RoleRoomAdminDescription": "Os administradores de sala podem criar e gerenciar as salas atribuídas, convidar novos usuários e atribuir funções de administrador de sala e inferiores. Todos os administradores têm acesso à seção Documentos.",
+  "RoleRoomManagerDescription": "Os gerentes de sala podem gerenciar as salas atribuídas, convidar novos utilizadors e atribuir funções abaixo de seu nível.",
+  "RolePowerUserFormRoomDescription": "Avançados podem carregar formulários na sala e ter acesso total às pastas Concluído e Em processamento.",
+  "RoleNewUserDescription": "Os utilizadors podem criar e editar arquivos na sala, mas não podem criar salas, gerenciar utilizadors ou acessar configurações.",
+  "RoleContentCreatorDescription": "Os criadores de conteúdo podem criar e editar arquivos na sala, mas não podem gerenciar utilizadors ou acessar configurações.",
+  "RoleFormFillerFormRoomDescription": "Os preenchedores de formulários podem preencher formulários e visualizar apenas seus formulários concluídos/iniciados nas pastas Concluído e Em processamento.",
+  "RoleFormFillerDescription": "Operações com ficheiros existentes: visualização, preenchimento de formulários, revisão, comentários.",
+  "RolePortalAdminDescription": "Os administradores do {{productName}} podem aceder às configurações do {{productName}}, gerir e arquivar salas, convidar novos utilizadores e atribuir papéis quem está abaixo do seu nível. Todos os administradores têm acesso à secção Documentos.",
+  "RoleEditorDescription": "Operações com ficheiros existentes: visualização, edição, preenchimento de formulários, revisão, comentários.",
+  "RoleFormFiller": "Preenchimento de formulário",
+  "RoleReviewer": "Revisor",
+  "RoleReviewerDescription": "Operações com ficheiros existentes: visualização, revisão, comentários.",
+  "RoleCommentator": "Comentador",
+  "RoleCommentatorDescription": "Operações com os ficheiros existentes: visualização, comentários.",
+  "RoleViewer": "Visualizador",
+  "RoleViewerDescription": "A ver o ficheiro"
 }

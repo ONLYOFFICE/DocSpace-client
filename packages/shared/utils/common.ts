@@ -1237,13 +1237,13 @@ export const getUserTypeDescription = (
   t: TTranslation,
 ) => {
   if (isPortalAdmin)
-    return t("Translations:RolePortalAdminDescription", {
+    return t("Common:RolePortalAdminDescription", {
       productName: t("Common:ProductName"),
     });
 
-  if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
+  if (isRoomAdmin) return t("Common:RoleRoomAdminDescription");
 
-  if (isCollaborator) return t("Translations:RoleNewUserDescription");
+  if (isCollaborator) return t("Common:RoleNewUserDescription");
 
   return t("Translations:RoleGuestDescriprion");
 };

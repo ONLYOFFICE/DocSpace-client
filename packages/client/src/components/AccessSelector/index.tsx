@@ -33,7 +33,6 @@ import { TTranslation } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
 import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
-
 import StyledAccessSelector from "./AccessSelector.styled";
 
 interface AccessSelectorProps {

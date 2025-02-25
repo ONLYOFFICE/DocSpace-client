@@ -569,5 +569,22 @@
   "Yesterday": "Včera",
   "You": "Vy",
   "BadgeMyDraftTitle": "Môj návrh",
-  "InProgress": "Práve prebieha"
+  "InProgress": "Práve prebieha",
+  "RoleRoomAdminFormRoomDescription": "Administrátori miestnosti môžu vytvárať a spravovať miestnosti, pozývať nových používateľov a prideľovať roly administrátora miestnosti alebo nižšie. Administrátori miestností môžu do miestnosti nahrávať formuláre a majú úplný prístup k priečinkom Vyplnené a V procese.",
+  "RoleRoomAdminDescription": "Administrátori miestností môžu vytvárať a spravovať pridelené miestnosti, pozývať nových používateľov a prideľovať roly administrátora miestnosti a podradené roly. Všetci administrátori majú prístup do sekcie Dokumenti.",
+  "RoleRoomManagerDescription": "Manažéri miestností môžu spravovať pridelené miestnosti, pozývať nových používateľov a prideľovať roly, ktoré sú nižšie ako ich.",
+  "RolePowerUserFormRoomDescription": "Používatelia môžu nahrávať formuláre do miestnosti a majú úplný prístup k priečinkom Vyplnené a V procese.",
+  "RoleNewUserDescription": "Používatelia môžu v miestnosti vytvárať a upravovať súbory, ale nemôžu vytvárať miestnosti, spravovať používateľov ani nastavenia.",
+  "RoleContentCreatorDescription": "Tvorcovia obsahu môžu vytvárať a upravovať súbory v miestnosti, ale nemôžu spravovať používateľov ani nastavenia.",
+  "RoleFormFillerFormRoomDescription": "Používatelia, ktorí vyplňujú formuláre môžu vypĺňať formuláre a prezerať len svoje dokončené/začaté formuláre v priečinkoch Vyplnené a V procese.",
+  "RoleFormFillerDescription": "Operácie s existujúcimi súbormi: prezeranie, vypĺňanie formulárov, kontrola, komentovanie.",
+  "RolePortalAdminDescription": "Administrátori {{productName}} majú prístup k nastaveniam {{productName}}, môžu spravovať a archivovať miestnosti, pozývať nových používateľov a prideľovať role, ktoré sú nižšie ako pozícia administrátora. Všetci administrátori majú prístup do sekcie Dokumenty.",
+  "RoleEditorDescription": "Operácie s existujúcimi súbormi: prezeranie, úprava, vypĺňanie formulárov, kontrola, komentovanie.",
+  "RoleFormFiller": "Vyplnenie formulára",
+  "RoleReviewer": "Recenzent",
+  "RoleReviewerDescription": "Operácie s existujúcimi súbormi: prezeranie, kontrola, komentovanie.",
+  "RoleCommentator": "Komentátor",
+  "RoleCommentatorDescription": "Operácie s existujúcimi súbormi: prezeranie, komentovanie.",
+  "RoleViewer": "Prehliadač",
+  "RoleViewerDescription": "Prezeranie súboru"
 }

@@ -570,5 +570,22 @@
   "Yesterday": "Juče",
   "You": "Vi",
   "BadgeMyDraftTitle": "Moja skica",
-  "InProgress": "U toku"
+  "InProgress": "U toku",
+  "RoleRoomAdminFormRoomDescription": "Administratori prostorija mogu kreirati i upravljati prostorijama, pozivati nove korisnike i dodeljivati uloge administatora prostorije ili niže. Administratori prostorija mogu otpremati formulare u prostoriju i imati pun pristup Završeno i U Procesu folderima.",
+  "RoleRoomAdminDescription": "Administratori sobe mogu kreirati i upravljati dodeljenim sobama, pozvati nove korisnike i dodeliti uloge administratora sobe i niže. Svi administratori imaju pristup Ličnom odeljku.",
+  "RoleRoomManagerDescription": "Menadžeri prostorija mogu upravljati dodeljenim prostorijama, pozivati nove korisnike i dodeljivati uloge nižeg nivoa.",
+  "RolePowerUserFormRoomDescription": "Korisnici mogu otpremiti formulare u prostoriju i imati pun pristup Završeno i U Procesu folderima.",
+  "RoleNewUserDescription": "Korisnici mogu kreirati i uređivati fajlove u prostoriji, ali ne mogu kreirati prostorije, upravljati korisnicima niti pristupiti podešavanjima.",
+  "RoleContentCreatorDescription": "Kreatori sadržaja mogu kreirati i uređivati fajlove u prostoriji, ali ne mogu upravljati korisnicima niti pristupiti podešavanjima.",
+  "RoleFormFillerFormRoomDescription": "Popunjači formulara mogu popuniti formulare i pregledati samo svoje završene/započete formulare unutar foldera Završeno i U Procesu.",
+  "RoleFormFillerDescription": "Operacije sa postojećim datotekama: pregledanje, popunjavanje obrazaca, recenziranje, komentarisanje.",
+  "RolePortalAdminDescription": "Administratori {{productName}}-a mogu pristupiti podešavanjima {{productName}}-a, upravljati i arhivirati sobe, pozivati nove korisnike i dodeljivati uloge ispod njihovih nivoa. Svi administratori imaju pristup Ličnom odeljku.",
+  "RoleEditorDescription": "Operacije sa postojećim datotekama: pregledanje, uređivanje, popunjavanje obrazaca, recenziranje, komentarisanje.",
+  "RoleFormFiller": "Popunjivač obrazaca",
+  "RoleReviewer": "Recenzent",
+  "RoleReviewerDescription": "Operacije sa postojećim datotekama: pregledanje, recenziranje, komentarisanje.",
+  "RoleCommentator": "Komentator",
+  "RoleCommentatorDescription": "Operacije sa postojećim datotekama: pregledanje, komentarisanje.",
+  "RoleViewer": "Pregledač",
+  "RoleViewerDescription": "Pregled datoteka"
 }

@@ -50,32 +50,31 @@ const None = -1 as RoomsType;
 const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
   switch (roomType) {
     case RoomsType.FormRoom:
-      return t("Translations:RoleRoomAdminFormRoomDescription");
+      return t("Common:RoleRoomAdminFormRoomDescription");
     case None:
-      return t("Translations:RoleRoomAdminDescription");
+      return t("Common:RoleRoomAdminDescription");
     default:
-      return t("Translations:RoleRoomManagerDescription");
+      return t("Common:RoleRoomManagerDescription");
   }
 };
 
 const getUserDescription = (roomType: RoomsType, t: TTranslation) => {
   switch (roomType) {
     case RoomsType.FormRoom:
-      return t("Translations:RolePowerUserFormRoomDescription");
+      return t("Common:RolePowerUserFormRoomDescription");
     case None:
-      return t("Translations:RoleNewUserDescription");
+      return t("Common:RoleNewUserDescription");
     default:
-      return t("Translations:RoleContentCreatorDescription");
+      return t("Common:RoleContentCreatorDescription");
   }
 };
 
 const getFormFillerDescription = (roomType: RoomsType, t: TTranslation) => {
   switch (roomType) {
     case RoomsType.FormRoom:
-      return t("Translations:RoleFormFillerFormRoomDescription");
-
+      return t("Common:RoleFormFillerFormRoomDescription");
     default:
-      return t("Translations:RoleFormFillerDescription");
+      return t("Common:RoleFormFillerDescription");
   }
 };
 
@@ -93,7 +92,7 @@ export const getAccessOptions = (
     portalAdmin: {
       key: EmployeeType.Admin,
       label: getUserTypeTranslation(EmployeeType.Admin, t),
-      description: t("Translations:RolePortalAdminDescription", {
+      description: t("Common:RolePortalAdminDescription", {
         productName: t("Common:ProductName"),
       }),
       ...(!standalone && { quota: t("Common:Paid") }),
@@ -145,35 +144,35 @@ export const getAccessOptions = (
     editor: {
       key: "editor",
       label: t("Common:Editor"),
-      description: t("Translations:RoleEditorDescription"),
+      description: t("Common:RoleEditorDescription"),
       access: ShareAccessRights.Editing,
       type: EmployeeType.User,
     },
     formFiller: {
       key: "formFiller",
-      label: t("Translations:RoleFormFiller"),
+      label: t("Common:RoleFormFiller"),
       description: getFormFillerDescription(roomType, t),
       access: ShareAccessRights.FormFilling,
       type: EmployeeType.User,
     },
     reviewer: {
       key: "reviewer",
-      label: t("Translations:RoleReviewer"),
-      description: t("Translations:RoleReviewerDescription"),
+      label: t("Common:RoleReviewer"),
+      description: t("Common:RoleReviewerDescription"),
       access: ShareAccessRights.Review,
       type: EmployeeType.User,
     },
     commentator: {
       key: "commentator",
-      label: t("Translations:RoleCommentator"),
-      description: t("Translations:RoleCommentatorDescription"),
+      label: t("Common:RoleCommentator"),
+      description: t("Common:RoleCommentatorDescription"),
       access: ShareAccessRights.Comment,
       type: EmployeeType.User,
     },
     viewer: {
       key: "viewer",
-      label: t("Translations:RoleViewer"),
-      description: t("Translations:RoleViewerDescription"),
+      label: t("Common:RoleViewer"),
+      description: t("Common:RoleViewerDescription"),
       access: ShareAccessRights.ReadOnly,
       type: EmployeeType.User,
     },

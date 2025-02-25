@@ -570,5 +570,22 @@
   "Yesterday": "Ayer",
   "You": "Usted",
   "BadgeMyDraftTitle": "Mi borrador",
-  "InProgress": "En curso"
+  "InProgress": "En curso",
+  "RoleRoomAdminFormRoomDescription": "Los administradores de sala pueden crear y gestionar salas, invitar a nuevos usuarios y asignar roles de administrador de sala o inferiores. Los administradores de sala pueden subir formularios a la sala y tienen acceso completo a las carpetas Completado y En curso.",
+  "RoleRoomAdminDescription": "Los administradores de sala pueden crear y gestionar las salas asignadas, invitar a nuevos usuarios y asignar roles de administrador de sala e inferiores. Todos los administradores tienen acceso a la sección Documentos.",
+  "RoleRoomManagerDescription": "Los administradores de sala pueden gestionar las salas asignadas, invitar a nuevos usuarios y asignar roles inferiores a su nivel.",
+  "RolePowerUserFormRoomDescription": "Los avanzados pueden cargar formularios en la sala y tienen acceso completo a las carpetas Completado y En curso.",
+  "RoleNewUserDescription": "Los usuarios pueden crear y editar archivos en la sala, pero no pueden crear salas, gestionar usuarios ni acceder a la configuración.",
+  "RoleContentCreatorDescription": "Los creadores de contenido pueden crear y editar archivos en la sala, pero no pueden gestionar usuarios ni acceder a la configuración. ",
+  "RoleFormFillerFormRoomDescription": "Los rellenadores de formularios pueden rellenar formularios y ver solo sus formularios rellenados/iniciados dentro de las carpetas Completado y En curso.",
+  "RoleFormFillerDescription": "Operaciones con archivos existentes: visualización, relleno de formularios, revisión, comentarios.",
+  "RolePortalAdminDescription": "Los administradores de {{productName}} pueden acceder a la configuración de {{productName}}, gestionar y archivar salas, invitar a nuevos usuarios y asignar roles a un nivel inferior al suyo. Todos los administradores tienen acceso a la sección Documentos.",
+  "RoleEditorDescription": "Operaciones con archivos existentes: visualización, edición, relleno de formularios, revisión, comentarios.",
+  "RoleFormFiller": "Rellenador de formularios",
+  "RoleReviewer": "Revisor",
+  "RoleReviewerDescription": "Operaciones con archivos existentes: visualización, revisión, comentarios.",
+  "RoleCommentator": "Comentarista",
+  "RoleCommentatorDescription": "Operaciones con archivos existentes: visualización, comentarios.",
+  "RoleViewer": "Espectador",
+  "RoleViewerDescription": "Visualización de archivos"
 }

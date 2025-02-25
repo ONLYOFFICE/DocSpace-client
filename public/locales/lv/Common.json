@@ -569,5 +569,22 @@
   "Yesterday": "어제",
   "You": "Jūs",
   "BadgeMyDraftTitle": "Mans melnraksts",
-  "InProgress": "Procesā"
+  "InProgress": "Procesā",
+  "RoleRoomAdminFormRoomDescription": "Telpu administratori var izveidot un pārvaldīt telpas, uzaicināt jaunus lietotājus un piešķirt telpas administratora vai zemāka līmeņa lomas. Telpu administratori var augšupielādēt veidlapas telpā, un viņiem ir pilnīga piekļuve mapēm Pabeigts un Nepabeigts.",
+  "RoleRoomAdminDescription": "Telpu administratori var izveidot un pārvaldīt piešķirtās telpas, uzaicināt jaunus lietotājus un piešķirt telpas administratora un zemāka līmeņa funkcijas. Visiem administratoriem ir piekļuve sadaļai Dokumenti.",
+  "RoleRoomManagerDescription": "Administratori var izveidot un pārvaldīt piešķirtās telpas, uzaicināt jaunus lietotājus un piešķirt lomas zem viņu līmeņa.",
+  "RolePowerUserFormRoomDescription": "Lietotāji var augšupielādēt veidlapas telpā un pilnībā piekļūt mapēm Complete (Pabeigts) un In Process (Notiek apstrāde).",
+  "RoleNewUserDescription": "LietotājI var izveidot un rediģēt failus telpā, bet nevar izveidot telpas, pārvaldīt lietotājus un piekļūt iestatījumiem.",
+  "RoleContentCreatorDescription": "Satura veidotāji var izveidot un rediģēt failus telpā, bet nevar pārvaldīt lietotājus vai piekļūt iestatījumiem.",
+  "RoleFormFillerFormRoomDescription": "Veidlapu aizpildītāji var aizpildīt veidlapas un skatīt tikai aizpildītās/sāktās veidlapas mapēs Complete (Pabeigts) un In Process (Notiekošs).",
+  "RoleFormFillerDescription": "Darbības ar esošajiem failiem: skatīšana, veidlapu aizpildīšana, pārskatīšana, komentēšana.",
+  "RolePortalAdminDescription": "{{productName}} administratori var piekļūt {{productName}} iestatījumiem, pārvaldīt un arhivēt telpas, uzaicināt jaunus lietotājus un piešķirt lomas zem viņu līmeņa. Visiem administratoriem ir piekļuve sadaļai Dokumenti.",
+  "RoleEditorDescription": "Darbības ar esošajiem failiem: skatīšana, rediģēšana, veidlapu aizpildīšana, pārskatīšana, komentēšana.",
+  "RoleFormFiller": "Veidlapas aizpildītājs",
+  "RoleReviewer": "Pārskatītājs (-a)",
+  "RoleReviewerDescription": "Darbības ar esošajiem failiem: skatīšana, pārskatīšana, komentēšana.",
+  "RoleCommentator": "Komentētājs",
+  "RoleCommentatorDescription": "Darbības ar esošajiem failiem: skatīšana, komentēšana.",
+  "RoleViewer": "Skatītājs",
+  "RoleViewerDescription": "Failu skatīšana"
 }

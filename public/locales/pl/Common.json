@@ -569,5 +569,22 @@
   "Yesterday": "Wczoraj",
   "You": "Ty",
   "BadgeMyDraftTitle": "Moja wersja robocza",
-  "InProgress": "W toku"
+  "InProgress": "W toku",
+  "RoleRoomAdminFormRoomDescription": "Administratorzy pokoi mogą tworzyć pokoje i zarządzać nimi, zapraszać nowych użytkowników oraz przypisywać im rolę administratora pokoju lub niższą. Administratorzy pokoi mogą przesyłać formularze do pokoju i mają pełen dostęp do katalogów Gotowe oraz W toku.",
+  "RoleRoomAdminDescription": "Administratorzy pokoi mogą tworzyć pokoje i zarządzać nimi, zapraszać nowych użytkowników oraz przypisywać im rolę administratora pokoju lub niższą. Wszyscy administratorzy mają dostęp do sekcji Dokumenty.",
+  "RoleRoomManagerDescription": "Menedżerowie pokoi mogą zarządzać przypisanymi pokojami, zapraszać nowych użytkowników oraz przypisywać im role poniżej swojego poziomu.",
+  "RolePowerUserFormRoomDescription": "Użytkownicy mogą przesyłać formularze do pokoju i mają pełen dostęp do katalogów Gotowe oraz W toku.",
+  "RoleNewUserDescription": "Użytkownicy mogą tworzyć oraz edytować pliki w pokoju, ale nie mogą tworzyć pokoi, zarządzać użytkownikami, ani nie mają dostępu do ustawień.",
+  "RoleContentCreatorDescription": "Twórcy treści mogą tworzyć oraz edytować pliki w pokoju, ale nie mogą zarządzać użytkownikami i nie mają dostępu do ustawień.",
+  "RoleFormFillerFormRoomDescription": "Osoby wypełniające formularze mogą wypełniać formularze i wyświetlać tylko wypełnione/rozpoczęte formularze w katalogach Gotowe oraz W toku.",
+  "RoleFormFillerDescription": "Operacje na istniejących plikach: przeglądanie, wypełnianie formularzy, recenzowanie, komentowanie.",
+  "RolePortalAdminDescription": "Administratorzy {{productName}} mogą uzyskać dostęp do ustawień {{productName}}, zarządzać pokojami i archiwizować je, zapraszać nowych użytkowników oraz przypisywać role poniżej swojego poziomu. Wszyscy administratorzy mają dostęp do sekcji Dokumenty.",
+  "RoleEditorDescription": "Operacje na istniejących plikach: przeglądanie, edytowanie, wypełnianie formularzy, recenzowanie, komentowanie.",
+  "RoleFormFiller": "Wypełniający formularze",
+  "RoleReviewer": "Recenzujący",
+  "RoleReviewerDescription": "Operacje na istniejących plikach: przeglądanie, recenzowanie, komentowanie.",
+  "RoleCommentator": "Komentujący",
+  "RoleCommentatorDescription": "Operacje na istniejących plikach: przeglądanie, komentowanie.",
+  "RoleViewer": "Przeglądający",
+  "RoleViewerDescription": "Odczyt plików"
 }

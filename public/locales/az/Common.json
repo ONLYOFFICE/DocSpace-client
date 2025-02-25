@@ -569,5 +569,22 @@
   "Yesterday": "Dünən",
   "You": "Siz",
   "BadgeMyDraftTitle": "Layihəm",
-  "InProgress": "Davam edir"
+  "InProgress": "Davam edir",
+  "RoleRoomAdminFormRoomDescription": "Otaq administratorları otaqlar yarada və idarə edə, yeni istifadəçiləri dəvət edə və otaq administratoru və ya daha aşağı vəzifələr təyin edə bilər. Otaq administratorları formaları otağa yükləyə, Tamamlanmış və Prosesdə qovluqlarına tam giriş əldə edə bilər.",
+  "RoleRoomAdminDescription": "Otaq administratorları təyin olunmuş otaqlar yarada və idarə edə, yeni istifadəçilər dəvət edə və otaq administratoruna və aşağı səviyyəli şəxslərə rollar təyin edə bilər. Bütün idarəçilərin Sənədlər bölməyə girişi var.",
+  "RoleRoomManagerDescription": "Otaq administratorları təyin olunmuş otaqları idarə edə, yeni istifadəçiləri dəvət edə və səviyyələrindən aşağı rollar təyin edə bilərlər.",
+  "RolePowerUserFormRoomDescription": "Istifadəçilər otağa formalar yükləyə və Tamamlanmış və Prosesdə olan qovluqlara tam giriş əldə edə bilərlər.",
+  "RoleNewUserDescription": "İstifadəçilər otaqda fayllar yarada və redaktə edə bilərlər, lakin otaqlar yarada, istifadəçiləri idarə edə və ya parametrlərə daxil ola bilməzlər.",
+  "RoleContentCreatorDescription": "Məzmun yaradıcıları otaqda fayllar yarada və redaktə edə bilərlər, lakin istifadəçiləri idarə edə və ya parametrlərə daxil ola bilməzlər.",
+  "RoleFormFillerFormRoomDescription": "Forma dolduranlar formaları tamamlaya və yalnız Tamamlanmış və Prosesdə olan qovluqlarda tamamlanmış/başlanmış formalara baxa bilər.",
+  "RoleFormFillerDescription": "Mövcud fayllarla əməliyyatlar: baxmaq, formaları doldurmaq, nəzərdən keçirmək, şərh etmək.",
+  "RolePortalAdminDescription": "{{productName}} adminləri {{productName}} parametrlərinə daxil ola, otaqları idarə edə və arxivləşdirə, yeni istifadəçiləri dəvət edə və öz səviyyələrindən aşağı rollar təyin edə bilərlər. Bütün idarəçilərin Sənədlər bölməyə girişi var.",
+  "RoleEditorDescription": "Mövcud fayllarla əməliyyatlar: baxmaq, redaktə etmək, formaları doldurmaq, nəzərdən keçirmək, şərh etmək.",
+  "RoleFormFiller": "Forma doldurucu",
+  "RoleReviewer": "Rəyçi",
+  "RoleReviewerDescription": "Mövcud fayllarla əməliyyatlar: baxmaq, nəzərdən keçirmək, şərh etmək.",
+  "RoleCommentator": "Şərhçi",
+  "RoleCommentatorDescription": "Mövcud fayllarla əməliyyatlar: baxış, şərh.",
+  "RoleViewer": "İzləyici",
+  "RoleViewerDescription": "Fayla baxış"
 }

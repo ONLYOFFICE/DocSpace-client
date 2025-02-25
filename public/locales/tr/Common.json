@@ -569,5 +569,22 @@
   "Yesterday": "Dün",
   "You": "Siz",
   "BadgeMyDraftTitle": "Taslağım",
-  "InProgress": "Devam ediyor"
+  "InProgress": "Devam ediyor",
+  "RoleRoomAdminFormRoomDescription": "Oda yöneticileri oda oluşturabilir ve yönetebilir, yeni kullanıcılar davet edebilir ve oda yöneticisi veya daha düşük roller atayabilirler. Oda yöneticileri odaya form yükleyebilir ve Tamamlandı ve İşleniyor klasörlerine tam erişime sahip olabilirler.",
+  "RoleRoomAdminDescription": "Oda yöneticileri, atanan odaları oluşturabilir ve yönetebilir, yeni kullanıcılar davet edebilir ve oda yöneticisi ve alt düzey rolleri atayabilir. Tüm yöneticilerin Belgeler bölümüne erişimi vardır.",
+  "RoleRoomManagerDescription": "Oda yöneticileri atanan odaları yönetebilir, yeni kullanıcılar davet edebilir ve kendi seviyelerinin altındaki rolleri atayabilir.",
+  "RolePowerUserFormRoomDescription": "Kullanıcılar odaya form yükleyebilir ve Tamamlandı ve İşleniyor klasörlerine tam erişime sahip olabilir.",
+  "RoleNewUserDescription": "Kullanıcılar odada dosya oluşturabilir ve düzenleyebilir fakat odalar oluşturamaz, kullanıcıları yönetemez veya ayarlara erişemez.",
+  "RoleContentCreatorDescription": "İçerik oluşturucular odada dosya oluşturabilir ve düzenleyebilir fakat kullanıcıları yönetemez veya ayarlara erişemez.",
+  "RoleFormFillerFormRoomDescription": "Form doldurucular formları doldurabilir ve Tamamlandı ve İşleniyor klasörlerinde yalnızca tamamlanmış/başlatılmış formlarını görüntüleyebilirler.",
+  "RoleFormFillerDescription": "Mevcut dosyalarla işlemler: görüntüleme, form doldurma, gözden geçirme, yorum yapma.",
+  "RolePortalAdminDescription": "{{productName}} yöneticileri, {{productName}} ayarlarına erişebilir, odaları yönetebilir ve arşivleyebilir, yeni kullanıcılar davet edebilir ve kendi seviyelerinin altında roller atayabilir. Tüm yöneticilerin Belgeler bölümüne erişimi vardır.",
+  "RoleEditorDescription": "Mevcut dosyalarla işlemler: görüntüleme, düzenleme, form doldurma, gözden geçirme, yorum yapma.",
+  "RoleFormFiller": "Form doldurucu",
+  "RoleReviewer": "İnceleyen",
+  "RoleReviewerDescription": "Mevcut dosyalarla işlemler: görüntüleme, gözden geçirme, yorum yapma.",
+  "RoleCommentator": "Yorumcu",
+  "RoleCommentatorDescription": "Mevcut dosyalarla işlemler: görüntüleme, yorum yapma.",
+  "RoleViewer": "Görüntüleyici",
+  "RoleViewerDescription": "Dosya görüntüleme"
 }

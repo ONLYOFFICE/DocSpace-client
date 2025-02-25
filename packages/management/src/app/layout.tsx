@@ -47,7 +47,7 @@ import { Scripts } from "@/components/Scripts";
 import { ManagementDialogs } from "@/dialogs";
 
 import "@/styles/globals.scss";
-import "../../../shared/styles/theme.scss";
+import "@docspace/shared/styles/theme.scss";
 
 export default async function RootLayout({
   children,

@@ -1927,6 +1927,13 @@
   --tile-checked-background: #{$light-gray-hover};
   --tile-icon-button-color: #{$gray};
   --tile-background-badge-color: #{$white};
+  --tile-sub-text: #{$light-gray-dark};
+
+  --tile-container-sort-fill: #{$black};
+  --tile-container-sort-text: #{$black};
+
+  --tile-container-sort: #{$light-gray-dark};
+  --tile-container-hover-background: #{$gray-light};
 
   --tile-show-hotkey-border: #{$light-second-main};
   --tile-border-radius: 6px;
@@ -1940,6 +1947,13 @@
   --tile-checked-background: #{$light-dark-gray-hover};
   --tile-icon-button-color: #{$gray-dark};
   --tile-background-badge-color: #{$black};
+  --tile-sub-text: #{$gray-dark};
+
+  --tile-container-sort-fill: #{$white};
+  --tile-container-sort-text: #{$white};
+
+  --tile-container-sort: #{$dark-gray-dark};
+  --tile-container-hover-background: #{$black};
 
   --tile-show-hotkey-border: #{$light-second-main};
   --tile-border-radius: 6px;

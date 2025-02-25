@@ -170,6 +170,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     const isAboutPage = location.pathname.includes("about");
 
+    if (location.pathname === "/shared/invalid-link") {
+      return children;
+    }
+
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(

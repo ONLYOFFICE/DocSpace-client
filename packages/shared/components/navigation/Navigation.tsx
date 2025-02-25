@@ -86,6 +86,10 @@ const Navigation = ({
   badgeLabel,
   onContextOptionsClick,
   onLogoClick,
+  buttonRef,
+  addButtonRef,
+  contextButtonAnimation,
+  guidAnimationVisible,
   ...rest
 }: TNavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -306,6 +310,8 @@ const Navigation = ({
             {showTitle ? navigationTitleContainerNode : null}
 
             <ControlButtons
+              buttonRef={buttonRef}
+              addButtonRef={addButtonRef}
               isRootFolder={isRootFolder}
               canCreate={canCreate}
               getContextOptionsFolder={getContextOptionsFolder}
@@ -328,6 +334,8 @@ const Navigation = ({
               isEmptyPage={isEmptyPage}
               onContextOptionsClick={onContextOptionsClick}
               isMobile={currentDeviceType !== DeviceType.desktop}
+              contextButtonAnimation={contextButtonAnimation}
+              guidAnimationVisible={guidAnimationVisible}
             />
           </div>
           {isDesktop && !hideInfoPanel ? (

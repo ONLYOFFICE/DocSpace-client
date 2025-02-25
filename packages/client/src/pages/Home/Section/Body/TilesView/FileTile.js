@@ -24,12 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useContext } from "react";
+import { useContext, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { FolderType } from "@docspace/shared/enums";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+// import { Context } from "@docspace/shared/utils";
 
 import FilesTileContent from "./FilesTileContent";
 import { FileTileContext } from "./FileTile.provider";
@@ -89,9 +92,15 @@ const FileTile = (props) => {
     openUser,
     isBlockingOperation,
     showStorageInfo,
+    setRefMap,
+    deleteRefMap,
   } = props;
 
   const navigate = useNavigate();
+
+  // const { sectionWidth } = useContext(Context);
+
+  const tileRef = useRef(null);
 
   const { columnCount, thumbSize } = useContext(FileTileContext);
 
@@ -106,6 +115,22 @@ const FileTile = (props) => {
   );
 
   const { thumbnailUrl } = item;
+
+  useEffect(() => {
+    if (!tileRef?.current) return;
+
+    if (item?.isPDF) {
+      setRefMap(GuidanceRefKey.Pdf, tileRef);
+    }
+    if (item?.type === FolderType.Done) {
+      setRefMap(GuidanceRefKey.Ready, tileRef);
+    }
+
+    return () => {
+      deleteRefMap(GuidanceRefKey.Pdf);
+      deleteRefMap(GuidanceRefKey.Ready);
+    };
+  }, [setRefMap, deleteRefMap]);
 
   const element = (
     <ItemIcon
@@ -166,6 +191,7 @@ const FileTile = (props) => {
     isHighlight,
     badges: badgesComponent,
     children: tileContent,
+    forvardRef: tileRef,
   };
 
   const fileTile = (
@@ -235,6 +261,7 @@ export default inject(
       filesStore,
       treeFoldersStore,
       infoPanelStore,
+      guidanceStore,
       currentQuotaStore,
     },
     { item },
@@ -242,6 +269,8 @@ export default inject(
     const { getIcon } = filesSettingsStore;
     const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
       filesStore;
+
+    const { setRefMap, deleteRefMap } = guidanceStore;
 
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
@@ -260,6 +289,10 @@ export default inject(
       withCtrlSelect,
       withShiftSelect,
       isHighlight,
+      icon,
+      isDownload,
+      setRefMap,
+      deleteRefMap,
       openUser: infoPanelStore.openUser,
       showStorageInfo,
     };

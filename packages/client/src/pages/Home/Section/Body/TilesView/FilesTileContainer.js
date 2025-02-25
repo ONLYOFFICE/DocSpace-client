@@ -33,7 +33,6 @@ import React, {
   useContext,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 
 import { Context } from "@docspace/shared/utils";
 
@@ -43,8 +42,9 @@ import { elementResizeDetector } from "./FileTile.utils";
 
 import { TileContainer } from "@docspace/shared/components/tiles";
 import InfiniteGrid from "./sub-components/InfiniteGrid";
+import withContainer from "../../../../../HOCs/withContainer";
 
-const FilesTileContainer = ({ filesList, isDesc }) => {
+const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
@@ -105,7 +105,7 @@ const FilesTileContainer = ({ filesList, isDesc }) => {
   );
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => {
+    return list.map((item, index) => {
       return index % 11 == 0 ? (
         <FileTile
           id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
@@ -128,7 +128,7 @@ const FilesTileContainer = ({ filesList, isDesc }) => {
         />
       );
     });
-  }, [filesList, onSetTileRef, sectionWidth]);
+  }, [list, onSetTileRef, sectionWidth, isTutorialEnabled]);
 
   return (
     <FileTileProvider columnCount={columnCount} thumbSize={thumbSize}>
@@ -156,4 +156,4 @@ export default inject(({ filesStore }) => {
     filesList,
     isDesc,
   };
-})(observer(FilesTileContainer));
+})(observer(withContainer(FilesTileContainer)));

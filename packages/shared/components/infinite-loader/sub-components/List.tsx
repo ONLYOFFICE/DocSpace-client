@@ -53,6 +53,8 @@ const ListComponent = ({
   const loaderRef = useRef<InfiniteLoader | null>(null);
   const listRef = useRef<List | null>(null);
 
+  const listItemRef = useRef();
+
   useEffect(() => {
     listRef?.current?.forceUpdate();
   });
@@ -135,6 +137,7 @@ const ListComponent = ({
     return (
       <div
         className="table-list-item window-item"
+        ref={listItemRef}
         style={{
           ...style,
           display: "grid",

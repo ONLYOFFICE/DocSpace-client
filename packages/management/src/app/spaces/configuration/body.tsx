@@ -119,7 +119,6 @@ export const Body = ({ domainValidator }) => {
         }
       } finally {
         setIsLoading(false);
-        router.refresh();
       }
     }
   };

@@ -251,7 +251,20 @@ class DialogsStore {
     onClose: null,
   };
 
+  createPDFFormFileProps = {
+    visible: false,
+    file: null,
+    localKey: "",
+    onClose: null,
+  };
+
   newFilesPanelFolderId = null;
+
+  formFillingTipsVisible = false;
+
+  welcomeFormFillingTipsVisible = false;
+
+  guidAnimationVisible = false;
 
   sortedDownloadFiles = {
     other: [],
@@ -292,6 +305,10 @@ class DialogsStore {
 
   setEditRoomDialogProps = (props) => {
     this.editRoomDialogProps = props;
+  };
+
+  setCreatePDFFormFile = (props) => {
+    this.createPDFFormFileProps = props;
   };
 
   setCreateRoomDialogProps = (props) => {
@@ -839,8 +856,20 @@ class DialogsStore {
     this.closeEditIndexDialogVisible = visible;
   };
 
+  setFormFillingTipsDialog = (visible) => {
+    this.formFillingTipsVisible = visible;
+  };
+
+  setWelcomeFormFillingTipsVisible = (visible) => {
+    this.welcomeFormFillingTipsVisible = visible;
+  };
+
   setCovers = (covers) => {
     this.covers = covers;
+  };
+
+  setguidAnimationVisible = (animation) => {
+    this.guidAnimationVisible = animation;
   };
 
   setRoomCoverDialogProps = (props) => {

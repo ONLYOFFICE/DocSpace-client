@@ -57,6 +57,7 @@ import {
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
@@ -269,6 +270,10 @@ const SectionHeaderContent = (props) => {
     getIndexingArray,
     setCloseEditIndexDialogVisible,
     rootFolderId,
+    guidAnimationVisible,
+    setguidAnimationVisible,
+    setRefMap,
+    deleteRefMap,
   } = props;
 
   const location = useLocation();
@@ -279,6 +284,24 @@ const SectionHeaderContent = (props) => {
   const isContactsGroupsPage = contactsView === "groups";
   const isContactsInsideGroupPage =
     contactsView === "inside_group" && !!groupId;
+
+  const addButtonRefCallback = React.useCallback(
+    (ref) => {
+      if (ref) {
+        setRefMap(GuidanceRefKey.Uploading, ref);
+      }
+    },
+    [setRefMap],
+  );
+
+  const buttonRefCallback = React.useCallback(
+    (ref) => {
+      if (ref) {
+        setRefMap(GuidanceRefKey.Share, ref);
+      }
+    },
+    [setRefMap],
+  );
 
   const { getContactsMenuItems, onContactsChange } = useContactsHeader({
     setUsersSelected,
@@ -311,6 +334,24 @@ const SectionHeaderContent = (props) => {
 
   const onToggleInfoPanel = () => {
     setIsInfoPanelVisible(!isInfoPanelVisible);
+  };
+
+  const contextButtonAnimation = (setAnimationClasses) => {
+    setAnimationClasses(["guid-animation-after"]);
+
+    const beforeTimer = setTimeout(() => {
+      setAnimationClasses(["guid-animation-after", "guid-animation-before"]);
+    }, 1000);
+
+    const removeTimer = setTimeout(() => {
+      setAnimationClasses([]);
+    }, 3000);
+
+    return () => {
+      clearTimeout(beforeTimer);
+      clearTimeout(removeTimer);
+      setguidAnimationVisible(false);
+    };
   };
 
   const getContextOptionsFolder = () => {
@@ -576,6 +617,13 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
+  React.useEffect(() => {
+    return () => {
+      deleteRefMap(GuidanceRefKey.Share);
+      deleteRefMap(GuidanceRefKey.Uploading);
+    };
+  }, [deleteRefMap]);
+
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
 
@@ -707,6 +755,10 @@ const SectionHeaderContent = (props) => {
                 badgeLabel={badgeLabel}
                 onContextOptionsClick={onContextOptionsClick}
                 onLogoClick={onLogoClick}
+                buttonRef={buttonRefCallback}
+                addButtonRef={addButtonRefCallback}
+                contextButtonAnimation={contextButtonAnimation}
+                guidAnimationVisible={guidAnimationVisible}
               />
               {showSignInButton ? (
                 <Button
@@ -765,6 +817,7 @@ export default inject(
     uploadDataStore,
     indexingStore,
     dialogsStore,
+    guidanceStore,
   }) => {
     const { startUpload } = uploadDataStore;
 
@@ -789,6 +842,8 @@ export default inject(
       setBufferSelection,
     } = filesStore;
 
+    const { setRefMap, deleteRefMap } = guidanceStore;
+
     const {
       setIsSectionBodyLoading,
       showHeaderLoader,
@@ -803,8 +858,13 @@ export default inject(
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       treeFoldersStore;
 
-    const { setReorderDialogVisible, setCloseEditIndexDialogVisible } =
-      dialogsStore;
+    const {
+      setReorderDialogVisible,
+      setCloseEditIndexDialogVisible,
+      welcomeFormFillingTipsVisible,
+      setguidAnimationVisible,
+      guidAnimationVisible,
+    } = dialogsStore;
 
     const {
       getHeaderMenu,
@@ -1009,6 +1069,11 @@ export default inject(
       getPublicKey,
       getIndexingArray,
       setCloseEditIndexDialogVisible,
+      welcomeFormFillingTipsVisible,
+      guidAnimationVisible,
+      setguidAnimationVisible,
+      setRefMap,
+      deleteRefMap,
     };
   },
 )(

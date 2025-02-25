@@ -41,6 +41,7 @@ import SettingsSetupStore from "./SettingsSetupStore";
 import ConfirmStore from "./ConfirmStore";
 import BackupStore from "./BackupStore";
 import CommonStore from "./CommonStore";
+import GuidanceStore from "./GuidanceStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
 import SsoFormStore from "./SsoFormStore";
@@ -164,6 +165,8 @@ const filesStore = new FilesStore(
   indexingStore,
 );
 
+const guidanceStore = new GuidanceStore();
+
 publicRoomStore.filesStore = filesStore;
 
 const mediaViewerDataStore = new MediaViewerDataStore(
@@ -269,6 +272,7 @@ const contextOptionsStore = new ContextOptionsStore(
   userStore,
   indexingStore,
   clientLoadingStore,
+  guidanceStore,
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -397,6 +401,8 @@ const store = {
   thirdPartyStore,
 
   brandingStore,
+
+  guidanceStore,
 };
 
 export default store;

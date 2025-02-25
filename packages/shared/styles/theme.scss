@@ -822,6 +822,14 @@
   --navigation-background: #{$white};
   --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-color};
   --navigation-icon-stroke: #{$light-gray-selected};
+  --navigation-guid-animation-small-border: 1px solid
+    var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-border: 2px solid
+    var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-icon-color: var(
+    --accent-main,
+    #{$light-second-main}
+  );
   --navigation-header-icon-fill: #{$light-gray-dark};
 }
 
@@ -1413,6 +1421,20 @@
 .light {
   --text-color: #{$black};
   --text-font-family: "Open Sans", sans-serif, Arial;
+}
+
+.light {
+  --form-filling-tips-circle-selected-background-color: #{$white};
+  --form-filling-tips-circle-background-color: #{$gray-light-mid};
+  --form-filling-tips-circle-border: 3px solid
+    var(--accent-main, #{$light-blue-main});
+}
+
+.dark {
+  --form-filling-tips-circle-selected-background-color: #{$black};
+  --form-filling-tips-circle-background-color: #{$gray-dark-mid};
+  --form-filling-tips-circle-border: 3px solid
+    var(--accent-main, #{$light-second-main});
 }
 
 .light {

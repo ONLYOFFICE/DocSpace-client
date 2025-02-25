@@ -40,6 +40,7 @@ const DragAndDrop = (props: DragAndDropProps) => {
     children,
     dragging,
     className,
+    forwardedRef,
 
     onDragOver,
     onDrop,

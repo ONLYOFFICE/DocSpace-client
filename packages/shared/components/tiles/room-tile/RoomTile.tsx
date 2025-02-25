@@ -24,78 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useRef } from "react";
-import { isMobile } from "react-device-detect";
-import classNames from "classnames";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import {
-  ContextMenuButton,
-  ContextMenuButtonDisplayType,
-} from "@docspace/shared/components/context-menu-button";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
 import { Tags } from "@docspace/shared/components/tags";
-import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { HeaderType } from "components/context-menu/ContextMenu.types";
-import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
-
 import { RoomTileProps } from "./RoomTile.types";
-
+import { BaseTile } from "../base-tile/BaseTile";
 import styles from "./RoomTile.module.scss";
 
 export const RoomTile = ({
-  checked,
-  isActive,
-  isBlockingOperation,
   item,
-  onSelect,
-  thumbnailClick,
-  getContextModel,
-  indeterminate,
   children,
-  element,
-  contextOptions,
-  tileContextClick,
-  hideContextMenu,
   columnCount,
   selectTag,
   selectOption,
   getRoomTypeName,
-  inProgress,
+  thumbnailClick,
   badges,
-  showHotkeyBorder,
-  isEdit,
+  ...rest
 }: RoomTileProps) => {
   const childrenArray = React.Children.toArray(children);
   const [RoomsTileContent] = childrenArray;
 
   const { t } = useTranslation(["Translations"]);
-
-  const [isHovered, setIsHovered] = useState(false);
-
-  const cmRef = useRef<any>(null);
   const checkboxContainerRef = useRef<HTMLDivElement>(null);
 
-  const renderContext =
-    hasOwnProperty(item, "contextOptions") &&
-    contextOptions &&
-    contextOptions?.length > 0;
-
-  const firstChild = childrenArray[0];
-  const contextMenuHeader: HeaderType | undefined =
-    React.isValidElement(firstChild) && firstChild.props?.item
-      ? {
-          title: firstChild.props.item.title,
-          icon: firstChild.props.item.icon,
-          original: firstChild.props.item.logo?.original,
-          large: firstChild.props.item.logo?.large,
-          medium: firstChild.props.item.logo?.medium,
-          small: firstChild.props.item.logo?.small,
-          color: firstChild.props.item.logo?.color,
-          cover: firstChild.props.item.logo?.cover,
-        }
-      : undefined;
+  const [isHovered, setIsHovered] = useState(false);
 
   const onHover = () => {
     setIsHovered(true);
@@ -103,20 +56,6 @@ export const RoomTile = ({
 
   const onLeave = () => {
     setIsHovered(false);
-  };
-
-  const getOptions = () => {
-    tileContextClick && tileContextClick();
-    return contextOptions;
-  };
-
-  const changeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onSelect?.(e.target.checked, item);
-  };
-
-  const onRoomIconClick = () => {
-    if (!isMobile) return;
-    onSelect?.(true, item);
   };
 
   const onRoomClick = (e: React.MouseEvent) => {
@@ -132,11 +71,6 @@ export const RoomTile = ({
     ) {
       thumbnailClick?.(e);
     }
-  };
-
-  const onContextMenu = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    getContextModel && cmRef.current?.show(e);
   };
 
   const tags = [];
@@ -170,114 +104,38 @@ export const RoomTile = ({
     });
   }
 
-  const tileClassName = classNames(styles.roomTile, {
-    [styles.checked]: checked,
-    [styles.isActive]: isActive,
-    [styles.isBlockingOperation]: isBlockingOperation,
-    [styles.showHotkeyBorder]: showHotkeyBorder,
-    [styles.isEdit]: isEdit,
-  });
+  const topContent = (
+    <>
+      {RoomsTileContent}
+      <div onMouseEnter={onHover} onMouseLeave={onLeave}>
+        {badges}
+      </div>
+    </>
+  );
 
-  const iconContainerClassNames = classNames(styles.iconContainer, {
-    [styles.inProgress]: inProgress,
-  });
-
-  const iconClassNames = classNames(styles.icon, {
-    [styles.checked]: checked,
-  });
-
-  const checkboxClassNames = classNames(styles.checkbox, {
-    [styles.checked]: checked,
-  });
-
-  const contentClassNames = classNames(styles.content, {
-    [styles.isHovered]: isHovered,
-  });
+  const bottomContent = (
+    <Tags
+      columnCount={columnCount}
+      onSelectTag={selectTag}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
+      tags={tags}
+      className="room-tags"
+    />
+  );
 
   return (
-    <div
-      className={tileClassName}
-      onClick={onRoomClick}
-      onContextMenu={onContextMenu}
-    >
-      <div className={styles.topContent}>
-        {element && !isEdit ? (
-          !inProgress ? (
-            <div
-              className={iconContainerClassNames}
-              ref={checkboxContainerRef}
-              onMouseEnter={onHover}
-              onMouseLeave={onLeave}
-            >
-              <div className={iconClassNames} onClick={onRoomIconClick}>
-                {element}
-              </div>
-              <Checkbox
-                isChecked={checked}
-                onChange={changeCheckbox}
-                className={checkboxClassNames}
-                isIndeterminate={indeterminate}
-              />
-            </div>
-          ) : (
-            <Loader
-              className={styles.loader}
-              color=""
-              size="20px"
-              type={LoaderTypes.track}
-            />
-          )
-        ) : null}
-
-        <div className={contentClassNames}>
-          {RoomsTileContent}
-          <div onMouseEnter={onHover} onMouseLeave={onLeave}>
-            {badges}
-          </div>
-        </div>
-
-        <div
-          className={styles.optionButton}
-          onMouseEnter={onHover}
-          onMouseLeave={onLeave}
-        >
-          {renderContext ? (
-            <ContextMenuButton
-              isFill
-              className={classNames(styles.expandButton, "expandButton")}
-              directionX="right"
-              getData={getOptions}
-              displayType={ContextMenuButtonDisplayType.toggle}
-              onClick={(e) => {
-                e.stopPropagation();
-                onContextMenu(e);
-              }}
-              title={t("Translations:TitleShowFolderActions")}
-            />
-          ) : (
-            <div className="expandButton" />
-          )}
-          <ContextMenu
-            model={contextOptions}
-            onHide={hideContextMenu}
-            getContextModel={getContextModel}
-            ref={cmRef}
-            header={contextMenuHeader}
-            withBackdrop
-          />
-        </div>
-      </div>
-
-      <div className={styles.bottomContent}>
-        <Tags
-          columnCount={columnCount}
-          onSelectTag={selectTag}
-          onMouseEnter={onHover}
-          onMouseLeave={onLeave}
-          tags={tags}
-          className="room-tags"
-        />
-      </div>
-    </div>
+    <BaseTile
+      {...rest}
+      item={item}
+      isHovered={isHovered}
+      onHover={onHover}
+      onLeave={onLeave}
+      topContent={topContent}
+      bottomContent={bottomContent}
+      className={styles.roomTile}
+      checkboxContainerRef={checkboxContainerRef}
+      onRoomClick={onRoomClick}
+    />
   );
 };

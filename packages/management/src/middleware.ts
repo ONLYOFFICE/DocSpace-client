@@ -52,6 +52,10 @@ export function middleware(request: NextRequest) {
   if (!isAuth) {
     return NextResponse.redirect(`${redirectUrl}/login`);
   }
+
+  if (request.nextUrl.pathname === "/") {
+    return NextResponse.redirect(new URL("/management/spaces", request.url));
+  }
 }
 
 // See "Matching Paths" below to learn more

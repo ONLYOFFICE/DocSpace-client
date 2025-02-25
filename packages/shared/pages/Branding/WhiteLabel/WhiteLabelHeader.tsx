@@ -78,6 +78,7 @@ export const WhiteLabelHeader = ({
 
       <div className="wl-helper">
         <Text
+          as="div"
           className="wl-subtitle wl-helper-label settings_unavailable"
           fontSize="13px"
         >

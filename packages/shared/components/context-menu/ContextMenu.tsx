@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { CSSTransition } from "react-transition-group";
@@ -79,6 +81,8 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       | React.ChangeEvent<HTMLInputElement>
       | Event
     >(null);
+
+    const [root, setRoot] = React.useState<null | HTMLDivElement>(null);
 
     const { isRTL } = useInterfaceDirection();
 
@@ -423,6 +427,10 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       };
     }, [documentResizeListener, onHide, visible]);
 
+    React.useEffect(() => {
+      setRoot(document.getElementById("root") as HTMLDivElement);
+    }, []);
+
     const onMobileItemClick = async (
       e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
       label: string,
@@ -611,7 +619,6 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       </>
     );
 
-    const root = document.getElementById("root");
     if (root && isMobileUtil) {
       const portal = <Portal element={contextMenu} appendTo={root} />;
 

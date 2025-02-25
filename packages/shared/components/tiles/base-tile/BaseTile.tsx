@@ -67,6 +67,7 @@ export const BaseTile = ({
   className,
   onRoomClick,
   checkboxContainerRef,
+  forwardRef,
 }: BaseTileProps) => {
   const childrenArray = React.Children.toArray(topContent);
 
@@ -110,6 +111,11 @@ export const BaseTile = ({
 
   const onContextMenu = (e: React.MouseEvent) => {
     e.stopPropagation();
+
+    tileContextClick && tileContextClick(e.button === 2);
+    if (!cmRef.current?.menuRef.current && forwardRef?.current) {
+      forwardRef.current.click();
+    }
     getContextModel && cmRef.current?.show(e);
   };
 

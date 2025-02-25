@@ -246,7 +246,7 @@ export const getCountTilesInRow = (isRooms) => {
   } else {
     minTileWidth = 216 + tileGap;
   }
-  console.log(containerWidth, minTileWidth);
+
   return Math.floor(containerWidth / minTileWidth);
 };
 

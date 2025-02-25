@@ -32,15 +32,16 @@ import React, {
   useMemo,
   useContext,
 } from "react";
+import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Context } from "@docspace/shared/utils";
+import { TileContainer } from "@docspace/shared/components/tiles";
 
 import FileTile from "./FileTile";
 import { FileTileProvider } from "./FileTile.provider";
 import { elementResizeDetector } from "./FileTile.utils";
 
-import { TileContainer } from "@docspace/shared/components/tiles";
 import InfiniteGrid from "./sub-components/InfiniteGrid";
 import withContainer from "../../../../../HOCs/withContainer";
 

@@ -49,7 +49,7 @@ export type BaseTileProps = {
   /** Context menu options */
   contextOptions: ContextMenuModel[];
   /** Callback when context menu is clicked */
-  tileContextClick?: () => void;
+  tileContextClick?: (isRightClick?: boolean) => void;
   /** Callback to hide context menu */
   hideContextMenu?: () => void;
   /** Indicates if room is in progress state */
@@ -66,4 +66,5 @@ export type BaseTileProps = {
   className?: string;
   onRoomClick?: (e: React.MouseEvent) => void;
   checkboxContainerRef?: React.RefObject<HTMLDivElement>;
+  forwardRef?: React.RefObject<HTMLDivElement>;
 };

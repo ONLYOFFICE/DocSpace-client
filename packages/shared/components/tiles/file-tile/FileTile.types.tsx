@@ -95,7 +95,7 @@ export type FileTileProps = {
   /** Custom element to render within the tile */
   element?: ReactElement;
   /** Function called when the context menu button is clicked */
-  tileContextClick?: () => void;
+  tileContextClick?: (isRightClick?: boolean) => void;
   /** Function to get the context menu model */
   getContextModel?: () => ContextMenuModel[];
   /** Function to hide the context menu */
@@ -122,4 +122,5 @@ export type FileTileProps = {
   isActive?: boolean;
   /** Flag for edit mode */
   isEdit?: boolean;
+  forwardRef?: React.RefObject<HTMLDivElement>;
 };

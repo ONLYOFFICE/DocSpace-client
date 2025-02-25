@@ -62,6 +62,7 @@ export const FolderTile = ({
   isDragging,
   isActive,
   isEdit,
+  forwardRef,
 }: FolderTileProps) => {
   const childrenArray = React.Children.toArray(children);
   const [FolderTileContent] = childrenArray;
@@ -138,9 +139,13 @@ export const FolderTile = ({
       onSelect?.(!checked, item);
     }
   };
-
   const onContextMenu = (e: React.MouseEvent) => {
     e.stopPropagation();
+
+    tileContextClick && tileContextClick(e.button === 2);
+    if (!cmRef.current?.menuRef.current && forwardRef?.current) {
+      forwardRef.current.click();
+    }
     getContextModel && cmRef.current?.show(e);
   };
 

@@ -32,18 +32,18 @@ import { useNavigate } from "react-router";
 import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 import { FolderType } from "@docspace/shared/enums";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
-// import { Context } from "@docspace/shared/utils";
 
-import FilesTileContent from "./FilesTileContent";
-import { FileTileContext } from "./FileTile.provider";
 import {
   FileTile as FileTileComponent,
   FolderTile,
   RoomTile,
   TemplateTile,
 } from "@docspace/shared/components/tiles";
-import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 import SpaceQuota from "@docspace/client/src/components/SpaceQuota";
+import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+
+import FilesTileContent from "./FilesTileContent";
+import { FileTileContext } from "./FileTile.provider";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
@@ -191,7 +191,7 @@ const FileTile = (props) => {
     isHighlight,
     badges: badgesComponent,
     children: tileContent,
-    forvardRef: tileRef,
+    forwardRef: tileRef,
   };
 
   const fileTile = (
@@ -289,8 +289,6 @@ export default inject(
       withCtrlSelect,
       withShiftSelect,
       isHighlight,
-      icon,
-      isDownload,
       setRefMap,
       deleteRefMap,
       openUser: infoPanelStore.openUser,

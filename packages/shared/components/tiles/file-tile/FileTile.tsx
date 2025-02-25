@@ -77,6 +77,7 @@ const FileTile = ({
   hideContextMenu,
   badges,
   isEdit,
+  forwardRef,
   ...rest
 }: FileTileProps) => {
   const childrenArray = React.Children.toArray(children);
@@ -116,6 +117,11 @@ const FileTile = ({
 
   const onContextMenu = (e: React.MouseEvent) => {
     e.stopPropagation();
+
+    tileContextClick && tileContextClick(e.button === 2);
+    if (!cm.current?.menuRef.current && forwardRef?.current) {
+      forwardRef.current.click();
+    }
     getContextModel && cm.current?.show(e);
   };
 

@@ -54,7 +54,7 @@ export type FolderTileProps = {
   /** Custom header for context menu */
   contextMenuHeader?: React.ReactNode;
   /** Callback when context menu is clicked */
-  tileContextClick?: () => void;
+  tileContextClick?: (isRightClick?: boolean) => void;
   /** Folder badges */
   badges?: React.ReactNode;
   /** Context menu options */
@@ -69,4 +69,5 @@ export type FolderTileProps = {
   isActive?: boolean;
   /** Flag for edit mode */
   isEdit?: boolean;
+  forwardRef?: React.RefObject<HTMLDivElement>;
 };

@@ -231,7 +231,7 @@ class FileRow extends Component {
             </div>
           )}
 
-          {item.fileId && !item.error && item.action === "uploaded" ? (
+          {item.fileId && !item.error ? (
             <FileActions item={item} />
           ) : item.error || (!item.fileId && uploaded) ? (
             <ErrorFile

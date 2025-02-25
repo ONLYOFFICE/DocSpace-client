@@ -32,6 +32,8 @@ import { FileAction, Events } from "@docspace/shared/enums";
 import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { toastr } from "@docspace/shared/components/toast";
 
+import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
+
 import CreateEvent from "./CreateEvent";
 import RenameEvent from "./RenameEvent";
 import CreateRoomEvent from "./CreateRoomEvent";
@@ -52,6 +54,10 @@ const GlobalEvents = ({
   createRoomDialogProps,
   setCreateRoomDialogProps,
   setCover,
+
+  setCreatePDFFormFile,
+  createPDFFormFileProps,
+  userId,
 }) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
@@ -100,13 +106,6 @@ const GlobalEvents = ({
   const [saveAsTemplateDialog, setSaveAsTemplateDialog] = useState({
     visible: false,
     props: null,
-    onClose: null,
-  });
-
-  const [createPDFFormFile, setCreatePDFFormFile] = useState({
-    visible: false,
-    file: null,
-    localKey: "",
     onClose: null,
   });
 
@@ -275,8 +274,12 @@ const GlobalEvents = ({
         );
       }
 
+      const closedFormFillingTips = localStorage.getItem(
+        getFormFillingTipsStorageName(userId),
+      );
+
       setCreatePDFFormFile({
-        visible: true,
+        visible: closedFormFillingTips,
         file,
         localKey,
         onClose: () => {
@@ -455,35 +458,42 @@ const GlobalEvents = ({
     changeQuotaDialog.visible && (
       <ChangeQuotaEvent key={Events.CHANGE_QUOTA} {...changeQuotaDialog} />
     ),
-    createPDFFormFile.visible && !createDialogProps.visible && (
+    createPDFFormFileProps.visible && !createDialogProps.visible ? (
       <CreatedPDFFormDialog
         key="created-pdf-form-dialog"
-        {...createPDFFormFile}
+        {...createPDFFormFileProps}
       />
-    ),
+    ) : null,
   ];
 };
 
-export default inject(({ settingsStore, pluginStore, dialogsStore }) => {
-  const { enablePlugins } = settingsStore;
+export default inject(
+  ({ settingsStore, pluginStore, dialogsStore, userStore }) => {
+    const { enablePlugins } = settingsStore;
 
-  const {
-    editRoomDialogProps,
-    setEditRoomDialogProps,
-    createRoomDialogProps,
-    setCreateRoomDialogProps,
-    setCover,
-  } = dialogsStore;
+    const {
+      editRoomDialogProps,
+      setEditRoomDialogProps,
+      createRoomDialogProps,
+      setCreateRoomDialogProps,
+      setCover,
+      setCreatePDFFormFile,
+      createPDFFormFileProps,
+    } = dialogsStore;
 
-  const { eventListenerItemsList } = pluginStore;
+    const { eventListenerItemsList } = pluginStore;
 
-  return {
-    enablePlugins,
-    eventListenerItemsList,
-    editRoomDialogProps,
-    setEditRoomDialogProps,
-    createRoomDialogProps,
-    setCreateRoomDialogProps,
-    setCover,
-  };
-})(observer(GlobalEvents));
+    return {
+      enablePlugins,
+      eventListenerItemsList,
+      editRoomDialogProps,
+      setEditRoomDialogProps,
+      createRoomDialogProps,
+      setCreateRoomDialogProps,
+      setCover,
+      setCreatePDFFormFile,
+      createPDFFormFileProps,
+      userId: userStore?.user?.id,
+    };
+  },
+)(observer(GlobalEvents));

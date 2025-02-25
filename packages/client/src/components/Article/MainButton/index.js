@@ -136,6 +136,7 @@ const ArticleMainButtonContent = (props) => {
     startUpload,
     setAction,
     setSelectFileDialogVisible,
+    setMainButtonVisible,
     selectFileDialogVisible,
     selectFileFormRoomDialogVisible,
     setSelectFileFormRoomDialogVisible,
@@ -180,7 +181,7 @@ const ArticleMainButtonContent = (props) => {
     isWarningRoomsDialog,
     getContactsModel,
     contactsCanCreate,
-    setMainButtonVisible,
+    setRefMap,
   } = props;
 
   const navigate = useNavigate();
@@ -768,6 +769,7 @@ const ArticleMainButtonContent = (props) => {
           text={mainButtonText}
           model={model}
           title={mainButtonText}
+          setRefMap={setRefMap}
         />
       )}
 
@@ -823,9 +825,10 @@ export default inject(
     filesActionsStore,
     currentQuotaStore,
     peopleStore,
+    guidanceStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
-    const { mainButtonMobileVisible, setMainButtonVisible } = filesStore;
+    const { setRefMap } = guidanceStore;
     const {
       isPrivacyFolder,
       isFavoritesFolder,
@@ -853,6 +856,8 @@ export default inject(
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
     const { security } = selectedFolderStore;
+
+    const { mainButtonMobileVisible, setMainButtonVisible } = filesStore;
 
     const currentFolderId = selectedFolderStore.id;
     const currentRoomType = selectedFolderStore.roomType;
@@ -890,6 +895,7 @@ export default inject(
       setSelectFileDialogVisible,
       selectFileDialogVisible,
       setInvitePanelOptions,
+      setMainButtonVisible,
 
       currentFolderId,
       currentRoomType,
@@ -929,7 +935,7 @@ export default inject(
 
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
-      setMainButtonVisible,
+      setRefMap,
     };
   },
 )(

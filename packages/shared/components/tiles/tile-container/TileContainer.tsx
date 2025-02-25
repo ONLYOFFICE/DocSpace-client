@@ -45,6 +45,7 @@ export const TileContainer = ({
   const Rooms: React.ReactElement[] = [];
   const Folders: React.ReactElement[] = [];
   const Files: React.ReactElement[] = [];
+  const Templates: React.ReactElement[] = [];
 
   React.Children.map(children, (item) => {
     if (
@@ -54,7 +55,13 @@ export const TileContainer = ({
     )
       return null;
 
-    const { isFolder, isRoom, fileExst, id: itemId } = item.props.item;
+    const {
+      isFolder,
+      isRoom,
+      isTemplate,
+      fileExst,
+      id: itemId,
+    } = item.props.item;
     if ((isFolder || itemId === -1) && !fileExst && !isRoom) {
       Folders.push(
         <div
@@ -62,6 +69,19 @@ export const TileContainer = ({
             styles.tileItemWrapper,
             styles.folder,
             "folder",
+          )}
+          key={itemId}
+        >
+          {item}
+        </div>,
+      );
+    } else if (isTemplate) {
+      Templates.push(
+        <div
+          className={classNames(
+            styles.tileItemWrapper,
+            styles.template,
+            "template",
           )}
           key={itemId}
         >
@@ -101,6 +121,16 @@ export const TileContainer = ({
         ) : (
           <div className={classNames(styles.gridWrapper, styles.rooms)}>
             {Rooms}
+          </div>
+        )
+      ) : null}
+
+      {Templates.length > 0 ? (
+        useReactWindow ? (
+          Templates
+        ) : (
+          <div className={classNames(styles.gridWrapper, styles.templates)}>
+            {Templates}
           </div>
         )
       ) : null}

@@ -129,6 +129,12 @@ const InfiniteGrid = (props) => {
 
     if (isFolder) return "isFolder";
 
+    const isTemplate = useTempList
+      ? card.props.children.props.className.includes("template")
+      : listItem.props.className.includes("isTemplate");
+
+    if (isTemplate) return "isTemplate";
+
     return "isRoom";
   };
 
@@ -173,7 +179,14 @@ const InfiniteGrid = (props) => {
       } else {
         const isFile = child?.props?.className?.includes("file");
         const isRoom = child?.props?.className?.includes("room");
-        const cls = isFile ? "isFile" : isRoom ? "isRoom" : "isFolder";
+        const isTemplate = child?.props?.className?.includes("template");
+        const cls = isFile
+          ? "isFile"
+          : isRoom
+            ? "isRoom"
+            : isTemplate
+              ? "isTemplate"
+              : "isFolder";
 
         if (cards.length && cards.length === countTilesInRow) {
           const listKey = uniqueid("list-item_");

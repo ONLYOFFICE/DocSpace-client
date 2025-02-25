@@ -115,13 +115,14 @@ const SimpleFilesTileContent = styled(TileContent)`
     color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
   }
 
-  ${({ isRooms }) =>
-    isRooms &&
-    css`
-      .item-file-name {
-        font-size: 16px;
-      }
-    `}
+  ${({ isRooms, isTemplate }) =>
+    isRooms ||
+    (isTemplate &&
+      css`
+        .item-file-name {
+          font-size: 16px;
+        }
+      `)}
 
   @media ${tablet} {
     display: inline-flex;
@@ -160,7 +161,7 @@ const FilesTileContent = ({
         containerWidth="100%"
         type="page"
         title={title}
-        fontWeight="600"
+        fontWeight={isTemplate ? 700 : 600}
         target="_blank"
         {...linkStyles}
         color={theme.filesSection.tilesView.color}

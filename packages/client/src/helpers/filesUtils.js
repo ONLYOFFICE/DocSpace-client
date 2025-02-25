@@ -216,7 +216,7 @@ export const connectedCloudsTypeIcon = (key) => {
 export const getCountTilesInRow = (isRooms) => {
   const isDesktopView = isDesktop();
   const isMobileView = isMobile();
-  const tileGap = isDesktopView ? 16 : 14;
+  const tileGap = isRooms ? 16 : 14;
 
   const elem = document.getElementsByClassName("section-wrapper-content")[0];
   let containerWidth = 0;
@@ -246,7 +246,7 @@ export const getCountTilesInRow = (isRooms) => {
   } else {
     minTileWidth = 216 + tileGap;
   }
-
+  console.log(containerWidth, minTileWidth);
   return Math.floor(containerWidth / minTileWidth);
 };
 

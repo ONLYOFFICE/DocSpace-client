@@ -149,6 +149,7 @@ const GridComponent = ({
       const isFile = itemClassNames?.includes("isFile");
       const isFolder = itemClassNames?.includes("isFolder");
       const isRoom = itemClassNames?.includes("isRoom");
+      const isTemplate = itemClassNames?.includes("isTemplate");
       const isFolderHeader = itemClassNames?.includes("folder_header");
 
       const horizontalGap = 16;
@@ -159,11 +160,13 @@ const GridComponent = ({
       const folderHeight = 64 + verticalGap;
       const roomHeight = 104 + verticalRoomGap;
       const fileHeight = 220 + horizontalGap;
+      const templateHeight = 126 + verticalRoomGap;
       const titleHeight = 20 + headerMargin + (isFolderHeader ? 0 : 11);
 
       if (isRoom) return roomHeight;
       if (isFolder) return folderHeight;
       if (isFile) return fileHeight;
+      if (isTemplate) return templateHeight;
       return titleHeight;
     }
 

@@ -34,6 +34,7 @@ export type TileItem = {
   fileExst?: string;
   /** Unique identifier for the item */
   id: number | string;
+  isTemplate?: boolean;
 };
 
 /** Props for individual tile items */

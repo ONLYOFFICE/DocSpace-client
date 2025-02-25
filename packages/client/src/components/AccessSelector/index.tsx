@@ -31,7 +31,9 @@ import { isMobile } from "@docspace/shared/utils";
 import { AccessRightSelect } from "@docspace/shared/components/access-right-select";
 import { TTranslation } from "@docspace/shared/types";
 import { RoomsType } from "@docspace/shared/enums";
-import { getAccessOptions } from "../panels/InvitePanel/utils";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
+
+
 import StyledAccessSelector from "./AccessSelector.styled";
 
 interface AccessSelectorProps {

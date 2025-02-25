@@ -33,7 +33,10 @@ import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "@docspace/shared/components/context-menu-button";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
+import {
+  ContextMenu,
+  TContextMenuRef,
+} from "@docspace/shared/components/context-menu";
 import { FolderTileProps } from "./FolderTile.types";
 import { hasOwnProperty } from "../../../utils/object";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
@@ -69,7 +72,7 @@ export const FolderTile = ({
 
   const { t } = useTranslation(["Translations"]);
 
-  const cmRef = useRef<any>(null);
+  const cmRef = useRef<TContextMenuRef>(null);
 
   const { isRTL } = useInterfaceDirection();
   const contextMenuDirection = isRTL ? "left" : "right";
@@ -100,23 +103,31 @@ export const FolderTile = ({
 
   const onFolderIconClick = () => {
     if (!isMobile) return;
-    onSelect && onSelect(true, item);
+    if (onSelect) {
+      onSelect(true, item);
+    }
   };
 
   const getOptions = () => {
-    tileContextClick && tileContextClick();
+    if (tileContextClick) {
+      tileContextClick();
+    }
     return contextOptions;
   };
 
   const onFolderClick = (e: React.MouseEvent) => {
     if (e.ctrlKey || e.metaKey) {
-      withCtrlSelect?.(item);
+      if (withCtrlSelect) {
+        withCtrlSelect(item);
+      }
       e.preventDefault();
       return;
     }
 
     if (e.shiftKey) {
-      withShiftSelect?.(item);
+      if (withShiftSelect) {
+        withShiftSelect(item);
+      }
       e.preventDefault();
       return;
     }
@@ -133,20 +144,31 @@ export const FolderTile = ({
         (e.target as HTMLElement).nodeName !== "path" &&
         (e.target as HTMLElement).nodeName !== "svg"
       ) {
-        setSelection && setSelection([]);
+        if (setSelection) {
+          setSelection([]);
+        }
       }
 
-      onSelect?.(!checked, item);
+      if (onSelect) {
+        onSelect(!checked, item);
+      }
     }
   };
+
   const onContextMenu = (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    tileContextClick && tileContextClick(e.button === 2);
+    if (tileContextClick) {
+      tileContextClick(e.button === 2);
+    }
+
     if (!cmRef.current?.menuRef.current && forwardRef?.current) {
       forwardRef.current.click();
     }
-    getContextModel && cmRef.current?.show(e);
+
+    if (getContextModel && cmRef.current) {
+      cmRef.current.show(e);
+    }
   };
 
   const folderTileClassNames = classNames(styles.folderTile, {

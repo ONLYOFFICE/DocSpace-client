@@ -79,7 +79,7 @@ describe("FileTile", () => {
 
   it("shows checkbox when checked prop is provided", () => {
     render(
-      <FileTile {...defaultProps} checked={true}>
+      <FileTile {...defaultProps} checked>
         <FileContent />
       </FileTile>,
     );
@@ -105,7 +105,7 @@ describe("FileTile", () => {
 
   it("shows loader when inProgress is true", () => {
     render(
-      <FileTile {...defaultProps} inProgress={true}>
+      <FileTile {...defaultProps} inProgress>
         <FileContent />
       </FileTile>,
     );
@@ -143,7 +143,7 @@ describe("FileTile", () => {
 
   it("shows hotkey border when showHotkeyBorder is true", () => {
     const { container } = render(
-      <FileTile {...defaultProps} showHotkeyBorder={true}>
+      <FileTile {...defaultProps} showHotkeyBorder>
         <FileContent />
       </FileTile>,
     );

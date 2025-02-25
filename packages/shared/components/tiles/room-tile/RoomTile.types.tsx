@@ -26,6 +26,37 @@
 
 import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
 import { TFunction } from "i18next";
+import { TileItem } from "../tile-container/TileContainer.types";
+
+export interface RoomTag {
+  isThirdParty?: boolean;
+  isDefault?: boolean;
+  icon?: string;
+  label: string;
+  roomType: string;
+  providerType?: string;
+  onClick?: () => void;
+}
+
+export interface RoomItem extends TileItem {
+  title: string;
+  roomType: string;
+  providerType?: string;
+  providerKey?: string;
+  thirdPartyIcon?: string;
+  tags?: RoomTag[];
+  contextOptions?: ContextMenuModel[];
+  logo?: {
+    small?: string;
+    color?: string;
+    cover?: string;
+  };
+}
+
+export interface SelectOption {
+  option: "typeProvider" | "defaultTypeRoom";
+  value: string;
+}
 
 export type RoomTileProps = {
   /** Indicates if the room is selected */
@@ -35,13 +66,13 @@ export type RoomTileProps = {
   /** Indicates if the room is in a blocking operation state */
   isBlockingOperation?: boolean;
   /** Room data object */
-  item: any;
+  item: RoomItem;
   /** Callback when room is selected */
-  onSelect?: (checked: boolean, item: any) => void;
+  onSelect?: (checked: boolean, item: RoomItem) => void;
   /** Callback when thumbnail is clicked */
   thumbnailClick?: (e: React.MouseEvent) => void;
   /** Function to get context menu model */
-  getContextModel?: () => any;
+  getContextModel?: () => ContextMenuModel[];
   /** Child elements */
   children?: React.ReactNode;
   /** Checkbox indeterminate state flag */
@@ -50,18 +81,14 @@ export type RoomTileProps = {
   element?: React.ReactNode;
   /** Context menu options */
   contextOptions: ContextMenuModel[];
-  /** Callback when context menu is clicked */
-  tileContextClick?: () => void;
-  /** Callback to hide context menu */
-  hideContextMenu?: () => void;
-  /** Number of columns in the grid */
+  /** Column count for tags layout */
   columnCount: number;
   /** Callback for tag selection */
-  selectTag: (tag: object | undefined) => void;
+  selectTag: (tag: RoomTag | undefined) => void;
   /** Callback for option selection */
-  selectOption: (option: object | undefined) => void;
+  selectOption: (option: SelectOption) => void;
   /** Function to get room type name */
-  getRoomTypeName: (roomType: string, t: TFunction) => string;
+  getRoomTypeName: (type: string, t: TFunction) => string;
   /** Room badges */
   badges?: React.ReactNode;
   /** Indicates if room is in progress state */

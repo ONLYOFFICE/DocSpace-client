@@ -27,9 +27,16 @@
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Tags } from "@docspace/shared/components/tags";
-import { RoomTileProps } from "./RoomTile.types";
+import { RoomTileProps, RoomTag, RoomItem } from "./RoomTile.types";
 import { BaseTile } from "../base-tile/BaseTile";
+import { TileItem } from "../tile-container/TileContainer.types";
+
 import styles from "./RoomTile.module.scss";
+
+const assertTileItem = (roomItem: RoomItem): TileItem => {
+  const { title, roomType, ...tileItem } = roomItem;
+  return tileItem;
+};
 
 export const RoomTile = ({
   item,
@@ -40,6 +47,7 @@ export const RoomTile = ({
   getRoomTypeName,
   thumbnailClick,
   badges,
+  onSelect,
   ...rest
 }: RoomTileProps) => {
   const childrenArray = React.Children.toArray(children);
@@ -79,23 +87,24 @@ export const RoomTile = ({
     tags.push({
       isThirdParty: true,
       icon: item.thirdPartyIcon,
-      label: item.providerKey,
+      label: item.providerKey || item.providerType,
+      roomType: item.roomType,
       providerType: item.providerType,
       onClick: () =>
         selectOption({
           option: "typeProvider",
-          value: item.providerType,
+          value: item.providerType as string,
         }),
     });
   }
 
-  if (item?.tags?.length > 0) {
-    tags.push(...item.tags);
+  if (item.tags && item?.tags?.length > 0) {
+    tags.push(...(item.tags as RoomTag[]));
   } else {
     tags.push({
       isDefault: true,
-      roomType: item.roomType,
       label: getRoomTypeName(item.roomType, t),
+      roomType: item.roomType,
       onClick: () =>
         selectOption({
           option: "defaultTypeRoom",
@@ -113,10 +122,21 @@ export const RoomTile = ({
     </>
   );
 
+  const handleTagSelect = (tag?: object | undefined) => {
+    if (!tag) {
+      selectTag(undefined);
+      return;
+    }
+    // Ensure the tag has the required RoomTag properties
+    if ("label" in tag && "roomType" in tag) {
+      selectTag(tag as RoomTag);
+    }
+  };
+
   const bottomContent = (
     <Tags
       columnCount={columnCount}
-      onSelectTag={selectTag}
+      onSelectTag={handleTagSelect}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
       tags={tags}
@@ -124,10 +144,18 @@ export const RoomTile = ({
     />
   );
 
+  const onSelectTileItem = onSelect
+    ? (checked: boolean, tileItem: TileItem) => {
+        // We know this is safe because we're only using this for items from this component
+        onSelect(checked, tileItem as RoomItem);
+      }
+    : undefined;
+
   return (
     <BaseTile
       {...rest}
-      item={item}
+      item={assertTileItem(item)}
+      onSelect={onSelectTileItem}
       isHovered={isHovered}
       onHover={onHover}
       onLeave={onLeave}

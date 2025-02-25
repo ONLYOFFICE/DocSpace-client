@@ -24,7 +24,7 @@ jest.mock("@docspace/shared/components/link", () => ({
     children: React.ReactNode;
     onClick?: () => void;
   }) => (
-    <button data-testid="link" onClick={onClick}>
+    <button type="button" data-testid="link" onClick={onClick}>
       {children}
     </button>
   ),
@@ -45,9 +45,15 @@ jest.mock("@docspace/shared/components/text", () => ({
   ),
 }));
 
+interface BaseTileProps {
+  topContent?: React.ReactNode;
+  bottomContent?: React.ReactNode;
+  className?: string;
+}
+
 // Mock BaseTile component
 jest.mock("../base-tile/BaseTile", () => ({
-  BaseTile: ({ item, topContent, bottomContent, className }: any) => (
+  BaseTile: ({ topContent, bottomContent, className }: BaseTileProps) => (
     <div data-testid="base-tile" className={className}>
       <div data-testid="top-content">{topContent}</div>
       <div data-testid="bottom-content">{bottomContent}</div>
@@ -161,7 +167,7 @@ describe("TemplateTile", () => {
   });
 
   it("passes correct props to BaseTile", () => {
-    const { container } = renderTemplateTile();
+    renderTemplateTile();
 
     const baseTile = screen.getByTestId("base-tile");
     const topContent = screen.getByTestId("top-content");

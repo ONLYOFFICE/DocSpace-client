@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { isMobile } from "react-device-detect";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -34,8 +34,10 @@ import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "@docspace/shared/components/context-menu-button";
-import { ContextMenu } from "@docspace/shared/components/context-menu";
-import { Tags } from "@docspace/shared/components/tags";
+import {
+  ContextMenu,
+  ContextMenuRefType,
+} from "@docspace/shared/components/context-menu";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { HeaderType } from "components/context-menu/ContextMenu.types";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
@@ -73,7 +75,7 @@ export const BaseTile = ({
 
   const { t } = useTranslation(["Translations"]);
 
-  const cmRef = useRef<any>(null);
+  const cmRef = useRef<ContextMenuRefType>(null);
 
   const renderContext =
     hasOwnProperty(item, "contextOptions") &&
@@ -96,7 +98,9 @@ export const BaseTile = ({
       : undefined;
 
   const getOptions = () => {
-    tileContextClick && tileContextClick();
+    if (tileContextClick) {
+      tileContextClick();
+    }
     return contextOptions;
   };
 
@@ -112,11 +116,17 @@ export const BaseTile = ({
   const onContextMenu = (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    tileContextClick && tileContextClick(e.button === 2);
+    if (tileContextClick) {
+      tileContextClick(e.button === 2);
+    }
+
     if (!cmRef.current?.menuRef.current && forwardRef?.current) {
       forwardRef.current.click();
     }
-    getContextModel && cmRef.current?.show(e);
+
+    if (getContextModel && cmRef.current) {
+      cmRef.current.show(e);
+    }
   };
 
   const tileClassName = classNames(styles.baseTile, className, {

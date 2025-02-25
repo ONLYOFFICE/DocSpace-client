@@ -26,17 +26,17 @@
 
 import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { RoomTile } from "./RoomTile";
-import { RoomTileProps } from "./RoomTile.types";
 import { ReactSVG } from "react-svg";
 import PublicRoomIconReactSvgUrl from "PUBLIC_DIR/images/icons/32/room/public.svg?url";
+import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import { Link } from "../../link";
-
 import { ColorTheme } from "../../color-theme/ColorTheme";
 import { ThemeId } from "../../color-theme/ColorTheme.enums";
 import { IconSizeType } from "../../../utils";
-import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
+
+import { RoomTile } from "./RoomTile";
+import { RoomTileProps } from "./RoomTile.types";
 import { TileContent } from "../tile-content/TileContent";
 
 const element = (
@@ -100,10 +100,10 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const Template = (args: RoomTileProps) => {
-  const [checked, setChecked] = useState(args.checked);
+const Template = ({ checked: initialChecked, ...args }: RoomTileProps) => {
+  const [checked, setChecked] = useState(initialChecked);
 
-  const onSelect = (isSelected: boolean, item: any) => {
+  const onSelect = (isSelected: boolean) => {
     setChecked(isSelected);
   };
 
@@ -119,7 +119,7 @@ const Template = (args: RoomTileProps) => {
 };
 
 export const Default: Story = {
-  render: (args) => Template(args),
+  render: Template,
   args: {
     item: {
       id: "room-1",
@@ -136,7 +136,7 @@ export const Default: Story = {
     element,
     contextOptions,
     badges,
-    thumbnailClick: (e: React.MouseEvent) => {},
+    thumbnailClick: () => {},
     getContextModel: () => contextOptions,
     selectTag: () => {},
     selectOption: () => {},
@@ -153,7 +153,7 @@ export const Default: Story = {
 };
 
 export const Checked: Story = {
-  render: (args) => Template(args),
+  render: Template,
   args: {
     ...Default.args,
     checked: true,
@@ -168,7 +168,7 @@ export const Checked: Story = {
 };
 
 export const InProgress: Story = {
-  render: (args) => Template(args),
+  render: Template,
   args: {
     ...Default.args,
     inProgress: true,
@@ -183,7 +183,7 @@ export const InProgress: Story = {
 };
 
 export const BlockingOperation: Story = {
-  render: (args) => Template(args),
+  render: Template,
   args: {
     ...Default.args,
     isBlockingOperation: true,

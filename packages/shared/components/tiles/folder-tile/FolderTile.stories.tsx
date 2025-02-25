@@ -26,14 +26,16 @@
 
 import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { FolderTile } from "./FolderTile";
-import { FolderTileProps } from "./FolderTile.types";
 import { ReactSVG } from "react-svg";
 import Folder32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 import { Link } from "../../link";
 import { Badge } from "../../badge";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
+
+import { FolderTile } from "./FolderTile";
+import { FolderTileProps } from "./FolderTile.types";
 import { TileContent } from "../tile-content/TileContent";
+import { TileItem } from "../tile-container/TileContainer.types";
 
 const element = (
   <ReactSVG
@@ -99,10 +101,10 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const Template = (args: FolderTileProps) => {
-  const [checked, setChecked] = useState(args.checked);
+const Template = ({ checked: initialChecked, ...args }: FolderTileProps) => {
+  const [checked, setChecked] = useState(initialChecked);
 
-  const onSelect = (isSelected: boolean, item: any) => {
+  const onSelect = (isSelected: boolean) => {
     setChecked(isSelected);
   };
 
@@ -118,23 +120,22 @@ const Template = (args: FolderTileProps) => {
 };
 
 export const Default: Story = {
-  render: (args) => Template(args),
+  render: Template,
   args: {
     item: {
       id: "folder-1",
       title: "My Folder",
+      isFolder: true,
       contextOptions,
-    },
+    } as TileItem,
     element,
     contextOptions,
     badges,
-    onSelect: (item: any) => {},
-    setSelection: (checked: boolean) => {},
-    withCtrlSelect: (item: any) => {},
-    withShiftSelect: (item: any) => {},
-    getContextModel: () => {
-      return contextOptions;
-    },
+    onSelect: () => {},
+    setSelection: () => {},
+    withCtrlSelect: () => {},
+    withShiftSelect: () => {},
+    getContextModel: () => contextOptions,
   },
   parameters: {
     docs: {
@@ -146,7 +147,7 @@ export const Default: Story = {
 };
 
 export const Checked: Story = {
-  render: (args) => Template(args),
+  render: Template,
   args: {
     ...Default.args,
     checked: true,
@@ -161,7 +162,7 @@ export const Checked: Story = {
 };
 
 export const InProgress: Story = {
-  render: (args) => Template(args),
+  render: Template,
   args: {
     ...Default.args,
     inProgress: true,

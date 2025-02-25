@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TileItem } from "@docspace/shared/components/tiles/tile-container/TileContainer.types";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
-import { TFunction } from "i18next";
 
 export type BaseTileProps = {
   /** Indicates if the room is selected */
@@ -35,13 +35,13 @@ export type BaseTileProps = {
   /** Indicates if the room is in a blocking operation state */
   isBlockingOperation?: boolean;
   /** Room data object */
-  item: any;
+  item: TileItem;
   /** Callback when room is selected */
-  onSelect?: (checked: boolean, item: any) => void;
+  onSelect?: (checked: boolean, item: TileItem) => void;
   /** Callback when thumbnail is clicked */
   thumbnailClick?: (e: React.MouseEvent) => void;
   /** Function to get context menu model */
-  getContextModel?: () => any;
+  getContextModel?: () => ContextMenuModel[];
   /** Checkbox indeterminate state flag */
   indeterminate?: boolean;
   /** Additional React element */

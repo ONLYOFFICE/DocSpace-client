@@ -1,8 +1,8 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
+import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
 import { RoomTile } from "./RoomTile";
 import { RoomTileProps } from "./RoomTile.types";
-import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
 
 // Mock translations
 jest.mock("react-i18next", () => ({
@@ -14,14 +14,19 @@ jest.mock("./RoomTile.module.scss", () => ({
   roomTile: "roomTile",
 }));
 
+interface TagProps {
+  label: string;
+  onClick?: () => void;
+}
+
 // Mock Tags component
 jest.mock("@docspace/shared/components/tags", () => ({
-  Tags: ({ tags }: { tags: any[] }) => (
+  Tags: ({ tags }: { tags: TagProps[] }) => (
     <div data-testid="tags" className="tags">
-      {tags.map((tag, index) => (
+      {tags.map((tag) => (
         <div
-          key={index}
-          data-testid={`tag-${index}`}
+          key={tag.label}
+          data-testid={`tag-${tag.label}`}
           onClick={tag.onClick}
           className="tags"
         >
@@ -32,27 +37,31 @@ jest.mock("@docspace/shared/components/tags", () => ({
   ),
 }));
 
+interface BaseTileProps {
+  onHover?: () => void;
+  onLeave?: () => void;
+  topContent?: React.ReactNode;
+  bottomContent?: React.ReactNode;
+  className?: string;
+}
+
 // Mock BaseTile component
 jest.mock("../base-tile/BaseTile", () => ({
   BaseTile: ({
-    item,
-    isHovered,
     onHover,
     onLeave,
     topContent,
     bottomContent,
-    onRoomClick,
     className,
-  }: any) => (
+  }: BaseTileProps) => (
     <div
       data-testid="base-tile"
       className={className}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
-      onClick={onRoomClick}
     >
-      <div data-testid="top-content">{topContent}</div>
-      <div data-testid="bottom-content">{bottomContent}</div>
+      {topContent}
+      {bottomContent}
     </div>
   ),
 }));
@@ -111,14 +120,14 @@ describe("RoomTile", () => {
 
   it("renders provider tag when providerType exists", () => {
     renderRoomTile();
-    const tag = screen.getByTestId("tag-0");
+    const tag = screen.getByTestId("tag-provider-key");
     expect(tag).toBeTruthy();
     expect(tag.textContent).toBe("provider-key");
   });
 
   it("renders custom tags when provided", () => {
     renderRoomTile();
-    const tag = screen.getByTestId("tag-1");
+    const tag = screen.getByTestId("tag-Custom Tag");
     expect(tag).toBeTruthy();
     expect(tag.textContent).toBe("Custom Tag");
   });
@@ -132,7 +141,7 @@ describe("RoomTile", () => {
       getRoomTypeName,
     });
 
-    const tag = screen.getByTestId("tag-1");
+    const tag = screen.getByTestId("tag-Collaborative Room");
     expect(tag).toBeTruthy();
     expect(tag.textContent).toBe("Collaborative Room");
     expect(getRoomTypeName).toHaveBeenCalledWith(
@@ -155,7 +164,7 @@ describe("RoomTile", () => {
     const selectOption = jest.fn();
     renderRoomTile({ selectOption });
 
-    const providerTag = screen.getByTestId("tag-0");
+    const providerTag = screen.getByTestId("tag-provider-key");
     fireEvent.click(providerTag);
 
     expect(selectOption).toHaveBeenCalledWith({
@@ -173,7 +182,7 @@ describe("RoomTile", () => {
       selectOption,
     });
 
-    const roomTypeTag = screen.getByTestId("tag-1");
+    const roomTypeTag = screen.getByTestId("tag-Collaborative Room");
     fireEvent.click(roomTypeTag);
 
     expect(selectOption).toHaveBeenCalledWith({

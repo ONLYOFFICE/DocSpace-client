@@ -37,12 +37,36 @@ export type TileItem = {
   isTemplate?: boolean;
 };
 
+/** Common properties for tile items */
+export interface CommonTileProps {
+  /** Indicates if the tile is selected */
+  checked?: boolean;
+  /** Indicates if the tile is in active state */
+  isActive?: boolean;
+  /** Indicates if the tile is in a blocking operation state */
+  isBlockingOperation?: boolean;
+  /** Child elements */
+  children?: React.ReactNode;
+  /** Checkbox indeterminate state flag */
+  indeterminate?: boolean;
+  /** Additional React element */
+  element?: React.ReactNode;
+  /** Badges to display */
+  badges?: React.ReactNode;
+  /** Click handler for the thumbnail */
+  thumbnailClick?: (e: React.MouseEvent) => void;
+  /** Selection handler */
+  onSelect?: (checked: boolean) => void;
+  /** Class name for styling */
+  className?: string;
+  /** Style object for inline styling */
+  style?: React.CSSProperties;
+}
+
 /** Props for individual tile items */
-export type TileItemProps = {
+export type TileItemProps = CommonTileProps & {
   /** The tile item data */
   item: TileItem;
-  /** Additional properties that can be passed to the tile */
-  [key: string]: any;
 };
 
 export type TileContainerProps = {

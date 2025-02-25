@@ -25,9 +25,27 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
+import { TileItem } from "../tile-container/TileContainer.types";
+
+export interface TemplateItem extends TileItem {
+  title: string;
+  createdBy?: {
+    displayName: string;
+    id: string;
+  };
+  security?: {
+    EditRoom?: boolean;
+    [key: string]: boolean | undefined;
+  };
+  logo?: {
+    small?: string;
+    color?: string;
+    cover?: string;
+  };
+}
 
 export type SpaceQuotaProps = {
-  item: any;
+  item: TemplateItem;
   type: string;
   isReadOnly?: boolean;
 };
@@ -39,14 +57,14 @@ export type TemplateTileProps = {
   isActive?: boolean;
   /** Indicates if the room is in a blocking operation state */
   isBlockingOperation?: boolean;
-  /** Room data object */
-  item: any;
-  /** Callback when room is selected */
-  onSelect?: (checked: boolean, item: any) => void;
+  /** Template data object */
+  item: TemplateItem;
+  /** Callback when template is selected */
+  onSelect?: (checked: boolean, item: TemplateItem) => void;
   /** Callback when thumbnail is clicked */
   thumbnailClick?: (e: React.MouseEvent) => void;
   /** Function to get context menu model */
-  getContextModel?: () => any;
+  getContextModel?: () => ContextMenuModel[];
   /** Child elements */
   children?: React.ReactNode;
   /** Checkbox indeterminate state flag */

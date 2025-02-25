@@ -26,19 +26,19 @@
 
 import React, { useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { FileTile } from "./FileTile";
-import { FileTileProps } from "./FileTile.types";
 import { ReactSVG } from "react-svg";
 import File32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
 import ImageReactSvgUrl from "PUBLIC_DIR/images/empty_screen_done.svg?url";
+import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import { Link } from "../../link";
 import { Badge } from "../../badge";
 import { ColorTheme } from "../../color-theme/ColorTheme";
 import { ThemeId } from "../../color-theme/ColorTheme.enums";
-
-import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import { IconSizeType } from "../../../utils";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
+
+import { FileTile } from "./FileTile";
+import { FileTileProps } from "./FileTile.types";
 import { TileContent } from "../tile-content/TileContent";
 
 const element = (
@@ -124,10 +124,10 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 
-const Template = (args: FileTileProps) => {
-  const [checked, setChecked] = useState(args.checked);
+const Template = ({ checked: initialChecked, ...args }: FileTileProps) => {
+  const [checked, setChecked] = useState(initialChecked);
 
-  const onSelect = (isSelected: boolean, item: any) => {
+  const onSelect = (isSelected: boolean) => {
     setChecked(isSelected);
   };
 
@@ -143,7 +143,7 @@ const Template = (args: FileTileProps) => {
 };
 
 export const Default: Story = {
-  render: (args) => Template(args),
+  render: Template,
   args: {
     item: {
       id: "file-1",
@@ -155,16 +155,14 @@ export const Default: Story = {
     element,
     contextOptions,
     contentElement,
-    badges: badges,
+    badges,
     temporaryIcon: ImageReactSvgUrl,
-    onSelect: (item: any) => {},
-    thumbnailClick: (e: React.MouseEvent) => {},
-    setSelection: (checked: boolean) => {},
-    withCtrlSelect: (item: any) => {},
-    withShiftSelect: (item: any) => {},
-    getContextModel: () => {
-      return contextOptions;
-    },
+    onSelect: () => {},
+    thumbnailClick: () => {},
+    setSelection: () => {},
+    withCtrlSelect: () => {},
+    withShiftSelect: () => {},
+    getContextModel: () => contextOptions,
   },
   parameters: {
     docs: {
@@ -176,7 +174,7 @@ export const Default: Story = {
 };
 
 export const Checked: Story = {
-  render: (args) => Template(args),
+  render: Template,
   args: {
     ...Default.args,
     checked: true,
@@ -191,7 +189,7 @@ export const Checked: Story = {
 };
 
 export const InProgress: Story = {
-  render: (args) => Template(args),
+  render: Template,
   args: {
     ...Default.args,
     inProgress: true,

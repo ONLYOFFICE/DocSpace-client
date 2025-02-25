@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { RectangleSkeleton } from "../rectangle";
 
 import { TileSkeleton } from "./Tile";
 import type { TilesSkeletonProps } from "./Tiles.types";
 import styles from "./Tiles.module.scss";
-import classNames from "classnames";
 
 export const TilesSkeleton = ({
   foldersCount = 2,

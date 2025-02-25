@@ -32,9 +32,14 @@ jest.mock("@docspace/shared/components/context-menu-button", () => ({
     onClick,
   }: {
     title: string;
-    onClick: (e: any) => void;
+    onClick: (e: React.MouseEvent) => void;
   }) => (
-    <button data-testid="context-menu-button" title={title} onClick={onClick}>
+    <button
+      type="button"
+      data-testid="context-menu-button"
+      title={title}
+      onClick={onClick}
+    >
       Actions
     </button>
   ),
@@ -43,13 +48,19 @@ jest.mock("@docspace/shared/components/context-menu-button", () => ({
   },
 }));
 
-jest.mock("@docspace/shared/components/context-menu", () => ({
-  ContextMenu: React.forwardRef(({ model, onHide }: any, ref) => (
+jest.mock("@docspace/shared/components/context-menu", () => {
+  const ContextMenuComponent = ({
+    model,
+  }: {
+    model?: Array<{ key: string; label: string }>;
+  }) => (
     <div data-testid="context-menu">
-      {model?.map((item: any) => <div key={item.key}>{item.label}</div>)}
+      {model?.map((item) => <div key={item.key}>{item.label}</div>)}
     </div>
-  )),
-}));
+  );
+  ContextMenuComponent.displayName = "ContextMenu";
+  return { ContextMenu: ContextMenuComponent };
+});
 
 // Mock Checkbox component
 jest.mock("@docspace/shared/components/checkbox", () => ({

@@ -24,9 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
+import { TileItem } from "../tile-container/TileContainer.types";
+
+export interface FolderItem extends TileItem {
+  title: string;
+  contextOptions?: ContextMenuModel[];
+  logo?: {
+    small?: string;
+    color?: string;
+    cover?: string;
+  };
+}
+
 export type FolderTileProps = {
   /** Folder data object */
-  item: any;
+  item: FolderItem;
   /** Indicates if the folder is selected */
   checked?: boolean;
   /** Flag to show hotkey border */
@@ -34,17 +47,17 @@ export type FolderTileProps = {
   /** Indicates if folder is in progress state */
   inProgress?: boolean;
   /** Callback when folder is selected */
-  onSelect?: (checked: boolean, item: any) => void;
+  onSelect?: (checked: boolean, item: FolderItem) => void;
   /** Callback when thumbnail is clicked */
   thumbnailClick?: (e: React.MouseEvent) => void;
   /** Function to get context menu model */
-  getContextModel?: () => any;
+  getContextModel?: () => ContextMenuModel[];
   /** Function to set selected items */
-  setSelection?: (items: any[]) => void;
+  setSelection?: (items: FolderItem[]) => void;
   /** Handler for Ctrl + Click selection */
-  withCtrlSelect?: (item: any) => void;
+  withCtrlSelect?: (item: FolderItem) => void;
   /** Handler for Shift + Click selection */
-  withShiftSelect?: (item: any) => void;
+  withShiftSelect?: (item: FolderItem) => void;
   /** Additional React element */
   element?: React.ReactNode;
   /** Child elements */

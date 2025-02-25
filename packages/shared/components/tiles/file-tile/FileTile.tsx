@@ -93,7 +93,7 @@ const FileTile = ({
   const renderContext =
     hasOwnProperty(item, "contextOptions") &&
     contextOptions &&
-    contextOptions?.length > 0;
+    contextOptions.length > 0;
 
   const firstChild = childrenArray[0];
   const contextMenuHeader: HeaderType | undefined =
@@ -111,18 +111,26 @@ const FileTile = ({
       : undefined;
 
   const getOptions = () => {
-    tileContextClick && tileContextClick();
+    if (tileContextClick) {
+      tileContextClick();
+    }
     return contextOptions;
   };
 
   const onContextMenu = (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    tileContextClick && tileContextClick(e.button === 2);
+    if (tileContextClick) {
+      tileContextClick(e.button === 2);
+    }
+
     if (!cm.current?.menuRef.current && forwardRef?.current) {
       forwardRef.current.click();
     }
-    getContextModel && cm.current?.show(e);
+
+    if (getContextModel && cm.current) {
+      cm.current.show(e);
+    }
   };
 
   const onError = () => {
@@ -150,7 +158,7 @@ const FileTile = ({
           ) : (
             <ReactSVG
               className={styles.temporaryIcon}
-              src={""}
+              src=""
               loading={svgLoader}
               data-testid="file-thumbnail"
             />
@@ -171,13 +179,17 @@ const FileTile = ({
 
   const onFileClick = (e: React.MouseEvent) => {
     if (e.ctrlKey || e.metaKey) {
-      withCtrlSelect && withCtrlSelect(item);
+      if (withCtrlSelect) {
+        withCtrlSelect(item);
+      }
       e.preventDefault();
       return;
     }
 
     if (e.shiftKey) {
-      withShiftSelect && withShiftSelect(item);
+      if (withShiftSelect) {
+        withShiftSelect(item);
+      }
       e.preventDefault();
       return;
     }
@@ -195,21 +207,29 @@ const FileTile = ({
         (e.target as HTMLElement).nodeName !== "path" &&
         (e.target as HTMLElement).nodeName !== "svg"
       ) {
-        setSelection && setSelection(false);
+        if (setSelection) {
+          setSelection(false);
+        }
       }
 
-      onSelect && onSelect(!checked, item);
+      if (onSelect) {
+        onSelect(!checked, item);
+      }
     }
   };
 
   const onFileIconClick = () => {
     if (!isMobile()) return;
 
-    onSelect && onSelect(true, item);
+    if (onSelect) {
+      onSelect(true, item);
+    }
   };
 
   const onCheckboxClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onSelect && onSelect(e.target.checked, item);
+    if (onSelect) {
+      onSelect(e.target.checked, item);
+    }
   };
 
   const isImageOrMedia =

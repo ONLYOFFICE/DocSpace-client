@@ -27,15 +27,15 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react";
 
+import ImageReactSvgUrl from "PUBLIC_DIR/images/empty_screen_done.svg?url";
+import File32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
+import { ReactSVG } from "react-svg";
 import { FileTile } from "../file-tile/FileTile";
 import { TileContainerProps } from "./TileContainer.types";
 import { TileContainer } from ".";
 import { TileContent } from "../tile-content/TileContent";
 import { Link } from "../../link";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
-import ImageReactSvgUrl from "PUBLIC_DIR/images/empty_screen_done.svg?url";
-import File32ReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
-import { ReactSVG } from "react-svg";
 
 const element = (
   <ReactSVG

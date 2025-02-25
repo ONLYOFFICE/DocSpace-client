@@ -27,11 +27,15 @@
 import React from "react";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { TemplateTileProps } from "./TemplateTile.types";
-
-import styles from "./TemplateTile.module.scss";
 import { useTranslation } from "react-i18next";
+import { TemplateTileProps, TemplateItem } from "./TemplateTile.types";
+import { TileItem } from "../tile-container/TileContainer.types";
 import { BaseTile } from "../base-tile/BaseTile";
+import styles from "./TemplateTile.module.scss";
+
+const isTemplateItem = (item: TileItem): item is TemplateItem => {
+  return "title" in item && typeof item.title === "string";
+};
 
 export const TemplateTile = ({
   item,
@@ -40,12 +44,21 @@ export const TemplateTile = ({
   openUser,
   badges,
   SpaceQuotaComponent,
+  onSelect,
   ...rest
 }: TemplateTileProps) => {
   const childrenArray = React.Children.toArray(children);
   const [TileContent] = childrenArray;
 
   const { t } = useTranslation(["Common"]);
+
+  const handleSelect = onSelect
+    ? (checked: boolean, baseItem: TileItem) => {
+        if (isTemplateItem(baseItem)) {
+          onSelect(checked, baseItem);
+        }
+      }
+    : undefined;
 
   const topContent = (
     <>
@@ -72,16 +85,18 @@ export const TemplateTile = ({
         ) : null}
       </div>
       <div className={styles.field}>
-        <Link
-          isHovered
-          truncate
-          fontSize="13px"
-          fontWeight={600}
-          className={styles.text}
-          onClick={openUser}
-        >
-          {item.createdBy.displayName}
-        </Link>
+        {item.createdBy ? (
+          <Link
+            isHovered
+            truncate
+            fontSize="13px"
+            fontWeight={600}
+            className={styles.text}
+            onClick={openUser}
+          >
+            {item.createdBy.displayName}
+          </Link>
+        ) : null}
         {showStorageInfo && SpaceQuotaComponent ? (
           <SpaceQuotaComponent
             item={item}
@@ -97,6 +112,7 @@ export const TemplateTile = ({
     <BaseTile
       {...rest}
       item={item}
+      onSelect={handleSelect}
       topContent={topContent}
       bottomContent={bottomContent}
       className={styles.templateTile}

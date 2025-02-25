@@ -159,7 +159,7 @@ const Tags: FC<TagsProps> = ({
     }
   }, [tags, tagsRef, columnCount]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     updateRenderedTags();
   }, [updateRenderedTags]);
 

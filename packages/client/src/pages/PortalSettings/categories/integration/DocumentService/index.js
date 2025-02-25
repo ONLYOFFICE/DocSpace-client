@@ -283,17 +283,18 @@ const DocumentService = ({
           <Styled.LocationSubheader>
             {t("Settings:DocumentServiceAdvancedSettings")}
             <Link
-              className="third-party-link"
+              className="advanced-link"
+              type="action"
               isHovered
               onClick={onChangeIsShowAdvancedSettings}
             >
-              {isShowAdvancedSettings
+              {!isShowAdvancedSettings
                 ? t("Settings:DocumentServiceShow")
                 : t("Settings:DocumentServiceHide")}
             </Link>
           </Styled.LocationSubheader>
 
-          {isShowAdvancedSettings && (
+          {isShowAdvancedSettings ? (
             <>
               <div className="input-wrapper">
                 <Label
@@ -319,7 +320,7 @@ const DocumentService = ({
                 <Label
                   htmlFor="internalAdress"
                   text={t("Settings:DocumentServiceLocationUrlInternal", {
-                    productName: PRODUCT_NAME,
+                    productName: t("Common:ProductName"),
                   })}
                 />
                 <InputBlock
@@ -345,7 +346,7 @@ const DocumentService = ({
                 <Label
                   htmlFor="portalAdress"
                   text={t("Settings:DocumentServiceLocationUrlPortal", {
-                    productName: PRODUCT_NAME,
+                    productName: t("Common:ProductName"),
                   })}
                 />
                 <InputBlock
@@ -368,7 +369,7 @@ const DocumentService = ({
                 </Text>
               </div>
             </>
-          )}
+          ) : null}
         </div>
 
         <SaveCancelButtons

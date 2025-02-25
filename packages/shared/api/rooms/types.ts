@@ -150,6 +150,7 @@ export type TExportRoomIndexTask = {
 };
 
 export type TPublicRoomPassword = {
+  id: string;
   linkId: string;
   shared: boolean;
   status: ValidationStatus;

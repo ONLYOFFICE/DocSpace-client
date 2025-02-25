@@ -33,7 +33,7 @@ import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
 import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
@@ -51,14 +51,13 @@ export const SpacesRow = ({ item, tenantAlias, portals }) => {
   const { spacesStore } = useStores();
   const [isVisibleDialog, setIsVisibleDialog] = useState(false);
   const [isDisableQuota, setIsDisableQuota] = useState(false);
+  const [protocol, setProtocol] = useState("");
 
   const { setDeletePortalDialogVisible, setCurrentPortal } = spacesStore;
 
   const logoElement = (
     <ReactSVG id={item.key} src={DefaultLogoUrl} className="logo-icon" />
   );
-  const protocol =
-    typeof window !== "undefined" ? window?.location?.protocol : "http:";
 
   const onDelete = () => {
     if (portals.length === 1) {
@@ -67,6 +66,10 @@ export const SpacesRow = ({ item, tenantAlias, portals }) => {
     setCurrentPortal(item);
     setDeletePortalDialogVisible(true);
   };
+
+  useEffect(() => {
+    setProtocol(window?.location?.protocol);
+  }, []);
 
   const contextOptionsProps = [
     {

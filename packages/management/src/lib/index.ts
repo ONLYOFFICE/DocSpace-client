@@ -81,20 +81,23 @@ export const getIsDefaultWhiteLabel = (whiteLabelIsDefault: unknown) => {
   return whiteLabelIsDefault.map((item) => item?.default).includes(false);
 };
 
-export const isValidDate = (date: Date) => {
-  return moment(date).tz(window.timezone)?.year() !== 9999;
+export const isValidDate = (date: string | Date, timezone: string) => {
+  return moment(date).tz(timezone)?.year() !== 9999;
 };
 
-export const getIsLicenseDateExpired = (dueDate: string | Date) => {
-  if (!isValidDate(dueDate)) return true;
-  return moment() > moment(dueDate).tz(window.timezone);
+export const getIsLicenseDateExpired = (
+  dueDate: string | Date,
+  timezone: string,
+) => {
+  if (!isValidDate(dueDate, timezone)) return true;
+  return moment() > moment(dueDate).tz(timezone);
 };
 
-export const getPaymentDate = (dueDate: string | Date) => {
-  return moment(dueDate).tz(window.timezone)?.format("LL");
+export const getPaymentDate = (dueDate: string | Date, timezone: string) => {
+  return moment(dueDate).tz(timezone)?.format("LL");
 };
 
-export const getDaysLeft = (dueDate: string | Date) => {
+export const getDaysLeft = (dueDate: string | Date, timezone: string) => {
   return moment(dueDate).startOf("day").diff(moment().startOf("day"), "days");
 };
 

@@ -26,6 +26,7 @@
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
 
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import { useTheme } from "styled-components";
@@ -41,6 +42,7 @@ export const RowContent = ({ item, tenantAlias }) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
   const { currentDeviceType } = useDeviceType();
   const theme = useTheme();
+  const [protocol, setProtocol] = useState("");
 
   const { roomAdminCount, usersCount, roomsCount, usedSize } =
     item?.quotaUsage || {
@@ -58,8 +60,6 @@ export const RowContent = ({ item, tenantAlias }) => {
     customQuota >= 0 ? `${usedStorage}/${maxStorage}` : `${usedStorage}`;
 
   const isCurrentPortal = tenantAlias === item.portalName;
-  const protocol =
-    typeof window !== "undefined" ? window?.location?.protocol : "http:";
   const isWizardCompleted = item.wizardSettings.completed;
 
   const onSpaceClick = () => {
@@ -67,6 +67,10 @@ export const RowContent = ({ item, tenantAlias }) => {
       window.open(`${protocol}//${item.domain}/`, "_blank");
     }
   };
+
+  useEffect(() => {
+    setProtocol(window?.location?.protocol);
+  }, []);
 
   return (
     <StyledRowContent

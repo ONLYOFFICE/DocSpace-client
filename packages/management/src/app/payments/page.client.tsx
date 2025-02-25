@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 
@@ -55,6 +55,9 @@ const PaymentsPage = ({
   const { t } = useTranslation("Common");
   const router = useRouter();
 
+  const [isLicenseDateExpired, setIsLicenseDateExpired] = useState(false);
+  const [paymentDate, setPaymentDate] = useState("");
+  const [trialDaysLeft, setTrialDaysLeft] = useState(0);
   const [isLicenseCorrect, setIsLicenseCorrect] = useState(false);
 
   const setPaymentsLicense = async (confirmKey: string, data: FormData) => {
@@ -87,9 +90,11 @@ const PaymentsPage = ({
     }
   };
 
-  const isLicenseDateExpired = getIsLicenseDateExpired(dueDate);
-  const paymentDate = getPaymentDate(dueDate);
-  const trialDaysLeft = getDaysLeft(dueDate);
+  useEffect(() => {
+    setIsLicenseDateExpired(getIsLicenseDateExpired(dueDate, window.timezone));
+    setPaymentDate(getPaymentDate(dueDate, window.timezone));
+    setTrialDaysLeft(getDaysLeft(dueDate, window.timezone));
+  }, []);
 
   return (
     <StandalonePage

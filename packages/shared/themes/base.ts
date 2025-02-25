@@ -2464,7 +2464,7 @@ export const getBaseTheme = () => {
         tooltipColor: lightToastInfo,
         iconColor: lightErrorStatus,
         positiveStatusColor: lightStatusPositive,
-
+        progressColor: lightGrayDark,
         shareButton: {
           color: gray,
           sharedColor: lightGrayDark,

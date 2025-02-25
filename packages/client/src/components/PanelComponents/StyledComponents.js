@@ -194,6 +194,7 @@ export const StyledFileRow = styled(Row)`
 
     .upload-panel_percent-text {
       margin-left: 16px;
+      color: ${(props) => props.theme.filesPanels.upload.progressColor};
     }
     .upload-panel_close-button,
     .upload-panel_check-button {

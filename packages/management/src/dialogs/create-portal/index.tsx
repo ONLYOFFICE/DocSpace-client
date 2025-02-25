@@ -190,6 +190,7 @@ export const CreatePortalDialog = observer(
               hasError={!!registerError}
               placeholder={t("EnterName")}
               className="create-portal-input"
+              isAutoFocussed
             />
             <div>
               <Text className="error-text" fontSize="12px" fontWeight="400">

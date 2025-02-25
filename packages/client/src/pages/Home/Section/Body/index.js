@@ -30,12 +30,17 @@ import { observer, inject } from "mobx-react";
 
 import {
   clearEdgeScrollingTimer,
+  getFormFillingTipsStorageName,
   isMobile,
   isTablet,
   onEdgeScrolling,
 } from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
-import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
+import {
+  DeviceType,
+  VDRIndexingAction,
+  RoomsType,
+} from "@docspace/shared/enums";
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import RoomNoAccessContainer from "../../../../components/EmptyContainer/RoomNoAccessContainer";
@@ -89,11 +94,26 @@ const SectionBodyContent = (props) => {
     changeIndex,
     isErrorRoomNotAvailable,
     getSelectedFolder,
+    welcomeFormFillingTipsVisible,
+    formFillingTipsVisible,
+    roomType,
+    userId,
+    onEnableFormFillingGuid,
   } = props;
 
   useEffect(() => {
     return () => window?.getSelection()?.removeAllRanges();
   }, []);
+
+  useEffect(() => {
+    const closedFormFillingTips = localStorage.getItem(
+      getFormFillingTipsStorageName(userId),
+    );
+
+    if (roomType === RoomsType.FormRoom && !closedFormFillingTips) {
+      onEnableFormFillingGuid(t, roomType);
+    }
+  }, [roomType, onEnableFormFillingGuid]);
 
   useEffect(() => {
     const customScrollElm = document.querySelector(
@@ -402,7 +422,12 @@ const SectionBodyContent = (props) => {
 
   if (isEmptyFilesList && movingInProgress) return null;
 
-  if (isEmptyFilesList) return <EmptyContainer isEmptyPage={isEmptyPage} />;
+  if (
+    isEmptyFilesList &&
+    !welcomeFormFillingTipsVisible &&
+    !formFillingTipsVisible
+  )
+    return <EmptyContainer isEmptyPage={isEmptyPage} />;
 
   const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
 
@@ -418,6 +443,9 @@ export default inject(
     filesActionsStore,
     uploadDataStore,
     indexingStore,
+    dialogsStore,
+    userStore,
+    contextOptionsStore,
   }) => {
     const {
       isEmptyFilesList,
@@ -441,6 +469,11 @@ export default inject(
       isErrorRoomNotAvailable,
     } = filesStore;
 
+    const { welcomeFormFillingTipsVisible, formFillingTipsVisible } =
+      dialogsStore;
+
+    const { onEnableFormFillingGuid } = contextOptionsStore;
+
     return {
       dragging,
       startDrag,
@@ -449,6 +482,7 @@ export default inject(
       isEmptyFilesList,
       setDragging,
       folderId: selectedFolderStore.id,
+      roomType: selectedFolderStore.roomType,
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
       moveDragItems: filesActionsStore.moveDragItems,
@@ -471,10 +505,14 @@ export default inject(
       isIndexEditingMode: indexingStore.isIndexEditingMode,
       isErrorRoomNotAvailable,
       getSelectedFolder: selectedFolderStore.getSelectedFolder,
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
+      userId: userStore?.user?.id,
+      onEnableFormFillingGuid,
     };
   },
 )(
-  withTranslation(["Files", "Common", "Translations"])(
+  withTranslation(["Files", "Common", "Translations", "FormFillingTipsDialog"])(
     withHotkeys(withLoader(observer(SectionBodyContent))()),
   ),
 );

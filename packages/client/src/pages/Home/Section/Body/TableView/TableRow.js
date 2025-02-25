@@ -24,9 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { classNames } from "@docspace/shared/utils";
+import { FolderType } from "@docspace/shared/enums";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
@@ -80,9 +82,15 @@ const FilesTableRow = (props) => {
     isIndexUpdated,
     displayFileExtension,
     isBlockingOperation,
+
+    isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
+
+  const rowRef = React.useRef();
 
   const element = (
     <ItemIcon
@@ -141,20 +149,36 @@ const FilesTableRow = (props) => {
     setIsDragActive(false);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (index === 0) {
       if (checkedProps || isActive) {
         setFirsElemChecked(true);
       } else {
         setFirsElemChecked(false);
       }
-      if (showHotkeyBorder) {
+      if (showHotkeyBorder && !isTutorialEnabled) {
         setHeaderBorder(true);
       } else {
         setHeaderBorder(false);
       }
     }
-  }, [checkedProps, isActive, showHotkeyBorder]);
+  }, [checkedProps, isActive, showHotkeyBorder, isTutorialEnabled]);
+
+  useEffect(() => {
+    if (!rowRef?.current) return;
+
+    if (item?.isPDF) {
+      setRefMap(GuidanceRefKey.Pdf, rowRef, "firstChildOffset");
+    }
+    if (item?.type === FolderType.Done) {
+      setRefMap(GuidanceRefKey.Ready, rowRef, "firstChildOffset");
+    }
+
+    return () => {
+      deleteRefMap(GuidanceRefKey.Pdf);
+      deleteRefMap(GuidanceRefKey.Ready);
+    };
+  }, [deleteRefMap, setRefMap]);
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
@@ -190,6 +214,7 @@ const FilesTableRow = (props) => {
       <StyledTableRow
         key={item.id}
         className="table-row"
+        forwardedRef={rowRef}
         {...dragStyles}
         isDragging={dragging}
         dragging={dragging ? isDragging : null}
@@ -207,7 +232,7 @@ const FilesTableRow = (props) => {
         checked={checkedProps || isIndexUpdated}
         isIndexing={isIndexing}
         isIndexUpdated={isIndexUpdated}
-        showHotkeyBorder={showHotkeyBorder}
+        showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}
         displayFileExtension={displayFileExtension}
         title={
           item.isFolder

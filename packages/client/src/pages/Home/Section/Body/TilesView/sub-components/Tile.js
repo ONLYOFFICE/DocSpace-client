@@ -502,7 +502,6 @@ class Tile extends React.PureComponent {
     };
 
     this.cm = React.createRef();
-    this.tile = React.createRef();
     this.checkboxContainerRef = React.createRef();
   }
 
@@ -621,6 +620,7 @@ class Tile extends React.PureComponent {
       isHighlight,
       iconProgress,
       isDownload,
+      forwardedRef,
       theme,
       openUser,
       isBlockingOperation,
@@ -642,7 +642,7 @@ class Tile extends React.PureComponent {
     const onContextMenu = (e) => {
       tileContextClick && tileContextClick(e.button === 2);
       if (!this.cm.current.menuRef.current) {
-        this.tile.current.click(e); // TODO: need fix context menu to global
+        forwardedRef.current.click(e); // TODO: need fix context menu to global
       }
       this.cm.current.show(e);
     };
@@ -697,7 +697,7 @@ class Tile extends React.PureComponent {
 
     return (
       <StyledTile
-        ref={this.tile}
+        ref={forwardedRef}
         {...this.props}
         onContextMenu={onContextMenu}
         isDragging={isDragging}

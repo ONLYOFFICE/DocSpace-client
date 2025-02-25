@@ -41,10 +41,12 @@
   display: flex;
   align-self: center;
   margin-inline-end: auto;
+  width: inherit;
 }
 
 .mainContainer {
   height: 20px;
+  width: inherit;
 
   @include tablet {
     white-space: nowrap;

@@ -43,7 +43,7 @@ export const TileContent = ({
       onClick={onClick}
     >
       <div
-        className={styles.mainContainerWrapper}
+        className={`${styles.mainContainerWrapper} row-main-wrapper`}
         style={{
           width:
             (React.isValidElement(children) &&

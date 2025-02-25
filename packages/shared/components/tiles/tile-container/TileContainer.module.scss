@@ -119,7 +119,7 @@
               }
 
               path {
-                fill: #657077; // change
+                fill: var(--tile-container-sort);
               }
             }
 
@@ -131,7 +131,7 @@
           }
 
           .selected-option-item {
-            background: #f8f9f9; // change
+            background: var(--tile-container-hover-background);
             cursor: auto;
 
             .selected-option-item__icon {
@@ -148,13 +148,13 @@
           font-size: 12px;
           font-weight: 600;
 
-          color: #333333; // change
+          color: var(--tile-container-sort-text);
 
           .sort-icon {
             margin-inline-end: 8px;
             svg {
               path {
-                fill: #333333; // change
+                fill: var(--tile-container-sort-fill);
               }
             }
           }

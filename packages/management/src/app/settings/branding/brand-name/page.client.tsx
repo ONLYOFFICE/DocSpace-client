@@ -27,9 +27,13 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
+
+import { toastr } from "@docspace/shared/components/toast";
 
 import { BrandName } from "@docspace/shared/pages/Branding/BrandName";
 import { IWhiteLabelData } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";
+
 import { setBrandName } from "@docspace/shared/api/settings";
 import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveSSRNavigation";
 
@@ -47,6 +51,7 @@ export const BrandNamePage = ({
   brandName: string;
   quota: unknown;
 }) => {
+  const { t } = useTranslation("Common");
   const router = useRouter();
   const pathname = usePathname();
   const { currentDeviceType } = useDeviceType();
@@ -62,8 +67,13 @@ export const BrandNamePage = ({
   });
 
   const onSave = async (data: IWhiteLabelData) => {
-    await setBrandName(data, true);
-    router.refresh();
+    try {
+      await setBrandName(data, true);
+      router.refresh();
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+    } catch (error) {
+      toastr.error(error!);
+    }
   };
 
   return (

@@ -41,7 +41,7 @@ import { Link, LinkType } from "@docspace/shared/components/link";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 import classNames from "classnames";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { isMobile as isMobileUtils } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 
 import { FileTileProps } from "./FileTile.types";
 
@@ -139,12 +139,14 @@ const FileTile = ({
               className={styles.thumbnailImage}
               alt="Thumbnail-img"
               onError={onError}
+              data-testid="file-thumbnail"
             />
           ) : (
             <ReactSVG
               className={styles.temporaryIcon}
               src={""}
               loading={svgLoader}
+              data-testid="file-thumbnail"
             />
           )
         ) : (
@@ -152,6 +154,7 @@ const FileTile = ({
             className={styles.temporaryIcon}
             src={icon ?? ""}
             loading={svgLoader}
+            data-testid="file-thumbnail"
           />
         )}
       </Link>
@@ -186,7 +189,7 @@ const FileTile = ({
         (e.target as HTMLElement).nodeName !== "path" &&
         (e.target as HTMLElement).nodeName !== "svg"
       ) {
-        setSelection && setSelection([]);
+        setSelection && setSelection(false);
       }
 
       onSelect && onSelect(!checked, item);
@@ -194,7 +197,7 @@ const FileTile = ({
   };
 
   const onFileIconClick = () => {
-    if (!isMobile) return;
+    if (!isMobile()) return;
 
     onSelect && onSelect(true, item);
   };
@@ -271,6 +274,7 @@ const FileTile = ({
               color=""
               size="20px"
               type={LoaderTypes.track}
+              data-testid="loader"
             />
           )
         ) : null}
@@ -300,7 +304,7 @@ const FileTile = ({
             getContextModel={getContextModel}
             ref={cm}
             header={contextMenuHeader}
-            withBackdrop={isMobileUtils()}
+            withBackdrop={isMobile()}
           />
         </div>
       </div>

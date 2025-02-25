@@ -78,7 +78,9 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
 
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    !passwordValid && setPasswordValid(true);
+    if (!passwordValid) {
+      setPasswordValid(true);
+    }
   };
 
   const onSubmitAction = async () => {
@@ -113,6 +115,7 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
         // }
         case ValidationStatus.InvalidPassword:
           setErrorMessage(t("Common:IncorrectPassword"));
+          break;
 
         default:
           break;

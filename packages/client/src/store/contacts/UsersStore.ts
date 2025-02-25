@@ -291,6 +291,7 @@ class UsersStore {
       )
         SocketHelper.emit(SocketCommands.Unsubscribe, {
           roomParts: this.roomParts,
+          ...(this.roomParts === "guests" && { individual: true }),
         });
 
       this.roomParts = roomParts;
@@ -298,7 +299,7 @@ class UsersStore {
       if (!SocketHelper.socketSubscribers.has(roomParts))
         SocketHelper.emit(SocketCommands.Subscribe, {
           roomParts,
-          individual: true,
+          ...(roomParts === "guests" && { individual: true }),
         });
     }
 

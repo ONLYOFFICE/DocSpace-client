@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,26 +27,22 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
-import { isArrayEqual } from "@docspace/shared/utils";
-import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
-
 import withLoading from "SRC_DIR/HOCs/withLoading";
-
-import {
-  //getKeyByLink,
-  settingsTree,
-  getSelectedLinkByKey,
-  //selectKeyOfTreeElement,
-  getCurrentSettingsCategory,
-} from "../../../utils";
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
+import {
+  // getKeyByLink,
+  settingsTree,
+  getSelectedLinkByKey,
+  // selectKeyOfTreeElement,
+  getCurrentSettingsCategory,
+} from "../../../utils";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -62,7 +58,6 @@ const ArticleBodyContent = (props) => {
     isCommunity,
     currentDeviceType,
     isProfileLoading,
-    limitedAccessSpace,
     currentColorScheme,
     baseDomain,
   } = props;
@@ -71,7 +66,6 @@ const ArticleBodyContent = (props) => {
 
   const prevLocation = React.useRef(null);
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   // React.useEffect(() => {
@@ -173,26 +167,19 @@ const ArticleBodyContent = (props) => {
     selectedKeys,
   ]);
 
-  const onSelect = (value, e) => {
-    if (isArrayEqual([value], selectedKeys)) {
-      return;
-    }
-
-    const settingsPath = `/portal-settings${getSelectedLinkByKey(
-      value + "-0",
+  const getLinkData = (value) => {
+    const path = `/portal-settings${getSelectedLinkByKey(
+      `${value}-0`,
       settingsTree,
     )}`;
 
-    if (openingNewTab(settingsPath, e)) return;
-    // setSelectedKeys([value + "-0"]);
+    return { path, state: {} };
+  };
 
+  const onSelect = () => {
     if (currentDeviceType === DeviceType.mobile) {
       toggleArticleOpen();
     }
-
-    if (settingsPath === location.pathname) return;
-
-    navigate(`${settingsPath}`);
   };
 
   const mapKeys = (tKey) => {
@@ -287,9 +274,9 @@ const ArticleBodyContent = (props) => {
       }
     }
 
-    if (selectedKeys.length === 0) return <></>;
+    if (selectedKeys.length === 0) return null;
 
-    resultTree.map((item) => {
+    resultTree.forEach((item) => {
       const icon = getCatalogIconUrlByType(item.type, {
         isSettingsCatalog: true,
       });
@@ -297,6 +284,7 @@ const ArticleBodyContent = (props) => {
       const patternSearching = selectedKeys[0].split("-");
       const selectedKey = patternSearching[0];
       const title = mapKeys(item.tKey);
+      const linkData = getLinkData(item.key);
 
       items.push(
         <ArticleItem
@@ -309,6 +297,7 @@ const ArticleBodyContent = (props) => {
           value={item.link}
           isActive={item.key === selectedKey}
           onClick={(e) => onSelect(item.key, e)}
+          linkData={linkData}
           folderId={item.id}
           style={{
             marginTop: `${item.key.includes(9) ? "16px" : "0"}`,
@@ -326,13 +315,12 @@ const ArticleBodyContent = (props) => {
   return !isLoadedArticleBody || isProfileLoading ? (
     <ArticleFolderLoader />
   ) : (
-    <>{items}</>
+    items
   );
 };
 
 export default inject(
   ({
-    authStore,
     settingsStore,
     common,
     clientLoadingStore,

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -178,7 +178,7 @@ const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
                       id="password"
                       inputName="password"
                       placeholder={t("Common:Password")}
-                      type={InputType.password}
+                      inputType={InputType.password}
                       inputValue={password}
                       hasError={!!errorMessage}
                       size={InputSize.large}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,29 +26,28 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";
 import { inject, observer } from "mobx-react";
+import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
+import { useNavigate } from "react-router-dom";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { RoomsType } from "@docspace/shared/enums";
+import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
+import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
+import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.png?url";
+import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
 import { TooltipContent } from "../sub-components/TooltipContent";
-import { useNavigate } from "react-router-dom";
-import FilesFilter from "@docspace/shared/api/files/filter";
-
-import { RoomsType } from "@docspace/shared/enums";
-
-import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
-import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
-
-import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.png?url";
-import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
@@ -56,16 +55,9 @@ import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { SharedLinkHint } from "../sub-components/SharedLinkHint";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
+import { Integration } from "../sub-components/Integration";
 
-import { loadFrame } from "../utils";
-
-import {
-  dataDimensions,
-  defaultWidthDimension,
-  defaultHeightDimension,
-  defaultWidth,
-  defaultHeight,
-} from "../constants";
+import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
 
 import {
   Controls,
@@ -78,8 +70,6 @@ import {
   ControlsSection,
   CheckboxGroup,
 } from "./StyledPresets";
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const SimpleRoom = (props) => {
   const { t, fetchExternalLinks, currentColorScheme, theme } = props;
@@ -92,9 +82,10 @@ const SimpleRoom = (props) => {
   const [selectedLink, setSelectedLink] = useState(null);
 
   const [config, setConfig] = useState({
+    src: window.location.origin,
     mode: "manager",
-    width: `${defaultWidth}${defaultWidthDimension.label}`,
-    height: `${defaultHeight}${defaultHeightDimension.label}`,
+    width: `${defaultSize.width}${defaultDimension.label}`,
+    height: `${defaultSize.height}${defaultDimension.label}`,
     frameId: "ds-frame",
     showHeader: false,
     showTitle: true,
@@ -113,16 +104,18 @@ const SimpleRoom = (props) => {
     },
   });
 
-  const frameId = config.frameId || "ds-frame";
+  const sdk = new SDK();
 
   const destroyFrame = () => {
-    window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
+    sdk.frames[config.frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
+  const initFrame = () => {
+    setTimeout(() => sdk.init(config), 10);
+  };
 
   useEffect(() => {
-    loadCurrentFrame();
+    initFrame();
     return () => destroyFrame();
   });
 
@@ -136,7 +129,7 @@ const SimpleRoom = (props) => {
   const onChangeFolderId = async (rooms) => {
     const publicRoom = rooms[0];
 
-    let newConfig = {
+    const newConfig = {
       id: publicRoom.id,
       requestToken: null,
       rootPath: "/rooms/shared/",
@@ -162,7 +155,7 @@ const SimpleRoom = (props) => {
         return {
           key: id,
           label: title,
-          requestToken: requestToken,
+          requestToken,
           settings: linkSettings,
         };
       });
@@ -174,27 +167,27 @@ const SimpleRoom = (props) => {
     newConfig.requestToken = links[0].sharedTo?.requestToken;
     newConfig.rootPath = "/rooms/share";
 
-    setConfig((config) => {
-      return { ...config, ...newConfig, init: true };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, ...newConfig, init: true };
     });
   };
 
   const onChangeSharedLink = (link) => {
     setSelectedLink(link);
-    setConfig((config) => {
-      return { ...config, requestToken: link.requestToken };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, requestToken: link.requestToken };
     });
   };
 
   const onChangeShowTitle = () => {
-    setConfig((config) => {
-      return { ...config, showTitle: !config.showTitle };
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showTitle: !config.showTitle };
     });
   };
 
-  const onChangeShowFilter = (e) => {
-    setConfig((config) => {
-      return { ...config, showFilter: !config.showFilter };
+  const onChangeShowFilter = () => {
+    setConfig((oldConfig) => {
+      return { ...oldConfig, showFilter: !config.showFilter };
     });
   };
 
@@ -218,10 +211,10 @@ const SimpleRoom = (props) => {
           ? config.height
           : undefined
       }
-      targetId={frameId}
+      targetId={config.frameId}
     >
       {config.id !== undefined ? (
-        <Box id={frameId}></Box>
+        <div id={config.frameId} />
       ) : (
         <EmptyIframeContainer
           text={t("RoomPreview")}
@@ -234,16 +227,16 @@ const SimpleRoom = (props) => {
 
   return (
     <PresetWrapper
-      description={t("PublicRoomDescription")}
+      description={t("JavascriptSdk:PublicRoomPresetInfo")}
       header={t("CreateSamplePublicRoom")}
     >
       <Container>
         <PreviewBlock
           t={t}
-          loadCurrentFrame={loadCurrentFrame}
+          loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
-          frameId={frameId}
+          frameId={config.frameId}
           scriptUrl={SDK_SCRIPT_URL}
           config={config}
           isDisabled={config?.id === undefined}
@@ -273,7 +266,7 @@ const SimpleRoom = (props) => {
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
-            {sharedLinks && (
+            {sharedLinks ? (
               <ControlsGroup>
                 <LabelGroup>
                   <Label
@@ -284,9 +277,7 @@ const SimpleRoom = (props) => {
                     offsetRight={0}
                     size={12}
                     tooltipContent={
-                      <Text fontSize="12px">
-                        {t("Common:PublicRoomDescription")}
-                      </Text>
+                      <Text fontSize="12px">{t("Common:PublicRoomInfo")}</Text>
                     }
                   />
                 </LabelGroup>
@@ -298,16 +289,16 @@ const SimpleRoom = (props) => {
                   displaySelectedOption
                   directionY="bottom"
                 />
-                {selectedLink && (
+                {selectedLink ? (
                   <SharedLinkHint
                     t={t}
                     linkSettings={selectedLink.settings}
                     redirectToSelectedRoom={redirectToSelectedRoom}
                     currentColorScheme={currentColorScheme}
                   />
-                )}
+                ) : null}
               </ControlsGroup>
-            )}
+            ) : null}
           </ControlsSection>
 
           <ControlsSection>
@@ -315,16 +306,16 @@ const SimpleRoom = (props) => {
             <WidthSetter
               t={t}
               setConfig={setConfig}
-              dataDimensions={dataDimensions}
-              defaultDimension={defaultWidthDimension}
-              defaultWidth={defaultWidth}
+              dataDimensions={dimensionsModel}
+              defaultDimension={defaultDimension}
+              defaultWidth={defaultSize.width}
             />
             <HeightSetter
               t={t}
               setConfig={setConfig}
-              dataDimensions={dataDimensions}
-              defaultDimension={defaultHeightDimension}
-              defaultHeight={defaultHeight}
+              dataDimensions={dimensionsModel}
+              defaultDimension={defaultDimension}
+              defaultHeight={defaultSize.height}
             />
             <FrameIdSetter
               t={t}
@@ -379,8 +370,22 @@ const SimpleRoom = (props) => {
               </LabelGroup>
             </CheckboxGroup>
           </ControlsSection>
+
+          <Integration
+            className="integration-examples"
+            t={t}
+            theme={theme}
+            currentColorScheme={currentColorScheme}
+          />
         </Controls>
       </Container>
+
+      <Integration
+        className="integration-examples integration-examples-bottom"
+        t={t}
+        theme={theme}
+        currentColorScheme={currentColorScheme}
+      />
     </PresetWrapper>
   );
 };

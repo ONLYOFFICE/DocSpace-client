@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,13 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useParams } from "react-router-dom";
 import AppLoader from "@docspace/shared/components/app-loader";
 import RoomSelector from "@docspace/shared/selectors/Room";
-import FilesSelector from "../../components/FilesSelector";
 import {
   frameCallEvent,
   frameCallbackData,
@@ -38,11 +37,12 @@ import {
   frameCallCommand,
 } from "@docspace/shared/utils/common";
 import { RoomsType, FilterType } from "@docspace/shared/enums";
+import api from "@docspace/shared/api";
+import FilesSelector from "../../components/FilesSelector";
 
 const Sdk = ({
   t,
   frameConfig,
-  match,
   setFrameConfig,
   login,
   logout,
@@ -50,12 +50,12 @@ const Sdk = ({
   getIcon,
   isLoaded,
   getSettings,
-  user,
+  userId,
   updateProfileCulture,
   getRoomsIcon,
-  fetchExternalLinks,
-  getFilePrimaryLink,
   getFilesSettings,
+  getPrimaryLink,
+  logoText,
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
 
@@ -86,21 +86,13 @@ const Sdk = ({
     }),
     EditorSupportedTypes: t("Common:SelectTypeFiles", {
       type: t("AllTypesAvailableForEditing", {
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
     }),
   };
 
-  useEffect(() => {
-    window.addEventListener("message", handleMessage, false);
-    return () => {
-      window.removeEventListener("message", handleMessage, false);
-      setFrameConfig(null);
-    };
-  }, [handleMessage]);
-
   const callCommand = useCallback(
-    () => frameCallCommand("setConfig"),
+    () => frameCallCommand("setConfig", { src: window.location.origin }),
     [frameCallCommand],
   );
 
@@ -111,17 +103,19 @@ const Sdk = ({
 
   useEffect(() => {
     if (window.parent && !frameConfig?.frameId && isLoaded) {
-      callCommand("setConfig");
+      callCommand();
     }
   }, [callCommand, isLoaded]);
 
   useEffect(() => {
     if (isDataReady) {
-      callCommandLoad("setIsLoaded");
+      callCommandLoad();
     }
   }, [callCommandLoad, isDataReady]);
 
   useEffect(() => {
+    if (window.ClientConfig && window.parent)
+      window.ClientConfig.isFrame = true;
     getFilesSettings();
   }, []);
 
@@ -144,9 +138,9 @@ const Sdk = ({
             {
               const requests = await Promise.all([
                 setFrameConfig(data),
-                user &&
+                userId &&
                   data.locale &&
-                  updateProfileCulture(user.id, data.locale),
+                  updateProfileCulture(userId, data.locale),
               ]);
               res = requests[0];
             }
@@ -178,64 +172,65 @@ const Sdk = ({
             res = await logout();
             break;
           default:
-            res = "Wrong method";
+            res = "Wrong method for this mode";
         }
-      } catch (e) {
-        res = e;
+      } catch (err) {
+        res = err;
       }
       frameCallbackData(res);
     }
   };
 
+  useEffect(() => {
+    window.addEventListener("message", handleMessage, false);
+    return () => {
+      window.removeEventListener("message", handleMessage, false);
+      setFrameConfig(null);
+    };
+  }, [handleMessage]);
+
   const onSelectRoom = useCallback(
     async (data) => {
-      if (data[0].icon === "") {
-        data[0].icon = await getRoomsIcon(data[0].roomType, false, 32);
-      } else {
-        data[0].icon = data[0].iconOriginal;
+      const enrichedData = data[0];
+
+      enrichedData.icon =
+        enrichedData.icon === ""
+          ? await getRoomsIcon(enrichedData.roomType, false, 32)
+          : enrichedData.iconOriginal;
+
+      const isSharedRoom =
+        enrichedData.roomType === RoomsType.PublicRoom ||
+        ((enrichedData.roomType === RoomsType.CustomRoom ||
+          enrichedData.roomType === RoomsType.FormRoom) &&
+          enrichedData.shared);
+
+      if (isSharedRoom) {
+        const { sharedTo } = await getPrimaryLink(enrichedData.id);
+        const { id, title, requestToken, primary } = sharedTo;
+        enrichedData.requestTokens = [{ id, primary, title, requestToken }];
       }
 
-      if (
-        data[0].roomType === RoomsType.PublicRoom ||
-        (data[0].roomType === RoomsType.CustomRoom && data[0].shared) ||
-        (data[0].roomType === RoomsType.FormRoom && data[0].shared)
-      ) {
-        const links = await fetchExternalLinks(data[0].id);
-
-        const requestTokens = links.map((link) => {
-          const { id, title, requestToken, primary } = link.sharedTo;
-
-          return {
-            id,
-            primary,
-            title,
-            requestToken,
-          };
-        });
-
-        data[0].requestTokens = requestTokens;
-      }
-
-      frameCallEvent({ event: "onSelectCallback", data });
+      frameCallEvent({ event: "onSelectCallback", data: [enrichedData] });
     },
-    [frameCallEvent],
+    [frameCallEvent, getRoomsIcon, getPrimaryLink],
   );
 
   const onSelectFile = useCallback(
     async (data) => {
-      data.icon = getIcon(64, data.fileExst);
+      const enrichedData = {
+        ...data,
+        icon: getIcon(64, data.fileExst),
+      };
 
       if (data.inPublic) {
-        const link = await getFilePrimaryLink(data.id);
-
-        const { id, title, requestToken, primary } = link.sharedTo;
-
-        data.requestTokens = [{ id, primary, title, requestToken }];
+        const { sharedTo } = await api.files.getFileLink(data.id);
+        const { id, title, requestToken, primary } = sharedTo;
+        enrichedData.requestTokens = [{ id, primary, title, requestToken }];
       }
 
-      frameCallEvent({ event: "onSelectCallback", data });
+      frameCallEvent({ event: "onSelectCallback", data: enrichedData });
     },
-    [frameCallEvent],
+    [frameCallEvent, getIcon],
   );
 
   const onClose = useCallback(() => {
@@ -252,7 +247,7 @@ const Sdk = ({
     !frameConfig?.id;
 
   switch (mode) {
-    case "room-selector":
+    case "room-selector": {
       const cancelButtonProps = frameConfig?.showSelectorCancel
         ? {
             withCancelButton: true,
@@ -262,8 +257,11 @@ const Sdk = ({
         : {};
 
       const headerProps = frameConfig?.showSelectorHeader
-        ? { withHeader: true, headerProps: { headerLabel: "" } }
-        : {};
+        ? {
+            withHeader: true,
+            headerProps: { headerLabel: "", isCloseable: false },
+          }
+        : { withPadding: false };
 
       component = (
         <RoomSelector
@@ -279,13 +277,14 @@ const Sdk = ({
         />
       );
       break;
+    }
     case "file-selector":
       component = (
         <FilesSelector
-          isPanelVisible={true}
-          embedded={true}
+          isPanelVisible
+          embedded
           withHeader={frameConfig?.showSelectorHeader}
-          isSelect={true}
+          isSelect
           setIsDataReady={setIsDataReady}
           onSelectFile={onSelectFile}
           onClose={onClose}
@@ -301,6 +300,8 @@ const Sdk = ({
           currentFolderId={frameConfig?.id}
           openRoot={selectorOpenRoot}
           descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
+          headerProps={{ isCloseable: false }}
+          withPadding={frameConfig?.showSelectorHeader}
         />
       );
       break;
@@ -317,18 +318,22 @@ export const Component = inject(
     settingsStore,
     filesSettingsStore,
     peopleStore,
-    publicRoomStore,
     userStore,
     filesStore,
   }) => {
     const { login, logout } = authStore;
-    const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
-      settingsStore;
+    const {
+      theme,
+      setFrameConfig,
+      frameConfig,
+      getSettings,
+      isLoaded,
+      logoText,
+    } = settingsStore;
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
     const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
-    const { fetchExternalLinks } = publicRoomStore;
-    const { getFilePrimaryLink } = filesStore;
+    const { getPrimaryLink } = filesStore;
 
     return {
       theme,
@@ -342,10 +347,10 @@ export const Component = inject(
       getRoomsIcon,
       isLoaded,
       updateProfileCulture,
-      user,
-      fetchExternalLinks,
-      getFilePrimaryLink,
+      userId: user?.id,
       getFilesSettings,
+      getPrimaryLink,
+      logoText,
     };
   },
 )(

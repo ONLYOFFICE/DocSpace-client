@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,7 +54,27 @@ export enum OAuth2ErrorKey {
   client_disabled_error = "client_disabled_error",
   client_not_found_error = "client_not_found_error",
   client_permission_denied_error = "client_permission_denied_error",
-  missing_asc_cookie_error = "missing_asc_cookie_error",
+  missing_asc_cookie_error = "missing_asc_signature_error",
   missing_client_id_error = "missing_client_id_error",
   something_went_wrong_error = "something_went_wrong_error",
+}
+
+export const enum AuthenticatedAction {
+  None = 0,
+  Logout = 1,
+  Redirect = 2,
+}
+
+/**
+ * Enum for result of validation confirm link.
+ * @readonly
+ */
+export const enum ValidationResult {
+  Ok = 0,
+  Invalid = 1,
+  Expired = 2,
+  TariffLimit = 3,
+  UserExisted = 4,
+  UserExcluded = 5,
+  QuotaFailed = 6,
 }

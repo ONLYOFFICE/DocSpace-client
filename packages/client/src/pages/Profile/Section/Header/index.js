@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,25 +27,30 @@
 import EmailReactSvgUrl from "PUBLIC_DIR/images/email.react.svg?url";
 import SecurityReactSvgUrl from "PUBLIC_DIR/images/security.react.svg?url";
 import ImageReactSvgUrl from "PUBLIC_DIR/images/image.react.svg?url";
-import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/catalog.trash.react.svg?url";
+import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
+
 import { useState } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
-import { DeleteSelfProfileDialog } from "SRC_DIR/components/dialogs";
-import { DeleteOwnerProfileDialog } from "SRC_DIR/components/dialogs";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import {
+  DeleteSelfProfileDialog,
+  DeleteOwnerProfileDialog,
+} from "SRC_DIR/components/dialogs";
 
-import { StyledHeader } from "./StyledHeader";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { RoomSearchArea } from "@docspace/shared/enums";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import { StyledHeader } from "./StyledHeader";
 
 const Header = (props) => {
   const {
@@ -54,10 +59,6 @@ const Header = (props) => {
     isAdmin,
     isVisitor,
     isCollaborator,
-
-    filter,
-
-    setFilter,
 
     profile,
     isMe,
@@ -72,6 +73,7 @@ const Header = (props) => {
     showProfileLoader,
     setIsLoading,
     userId,
+    enabledHotkeys,
   } = props;
 
   const navigate = useNavigate();
@@ -112,7 +114,7 @@ const Header = (props) => {
         key: "edit-photo",
         label: t("Profile:EditPhoto"),
         onClick: () => setChangeAvatarVisible(true),
-        disabled: false,
+        disabled: true,
         icon: ImageReactSvgUrl,
       },
       { key: "separator", isSeparator: true },
@@ -152,6 +154,11 @@ const Header = (props) => {
     // setFilter(filter);
   };
 
+  useHotkeys("Backspace", onClickBack, {
+    filter: () => !checkDialogsOpen() && enabledHotkeys,
+    filterPreventDefault: false,
+  });
+
   if (showProfileLoader) return <SectionHeaderSkeleton />;
 
   return (
@@ -165,19 +172,19 @@ const Header = (props) => {
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
-        isFill={true}
+        isFill
         onClick={onClickBack}
         className="arrow-button"
       />
 
       <div>
-        <Headline className="header-headline" type="content">
+        <Heading className="header-headline" type="content">
           {t("Profile:MyProfile")}
-        </Headline>
+        </Heading>
       </div>
       <div className="action-button">
-        {((isAdmin && !profile?.isOwner) ||
-          (isMe && !profile?.isLDAP && !profile?.isSSO)) && (
+        {(isAdmin && !profile?.isOwner) ||
+        (isMe && !profile?.isLDAP && !profile?.isSSO) ? (
           <ContextMenuButton
             directionX="right"
             title={t("Common:Actions")}
@@ -185,29 +192,29 @@ const Header = (props) => {
             size={17}
             getData={getUserContextOptions}
             isDisabled={false}
-            usePortal={true}
+            usePortal
           />
-        )}
+        ) : null}
 
         <div className="tariff-bar">
           <TariffBar />
         </div>
       </div>
 
-      {deleteSelfProfileDialog && (
+      {deleteSelfProfileDialog ? (
         <DeleteSelfProfileDialog
           visible={deleteSelfProfileDialog}
           onClose={() => setDeleteSelfProfileDialog(false)}
           email={profile?.email}
         />
-      )}
+      ) : null}
 
-      {deleteOwnerProfileDialog && (
+      {deleteOwnerProfileDialog ? (
         <DeleteOwnerProfileDialog
           visible={deleteOwnerProfileDialog}
           onClose={() => setDeleteOwnerProfileDialog(false)}
         />
-      )}
+      ) : null}
     </StyledHeader>
   );
 };
@@ -219,20 +226,23 @@ export default inject(
     peopleStore,
     clientLoadingStore,
     profileActionsStore,
+    filesStore,
+    mediaViewerDataStore,
   }) => {
     const { isAdmin } = authStore;
 
     const { isVisitor, isCollaborator, user } = userStore.user;
 
-    const { targetUserStore, filterStore, dialogStore } = peopleStore;
-
-    const { filter, setFilterParams } = filterStore;
+    const { targetUserStore, dialogStore } = peopleStore;
 
     const { targetUser, isMe } = targetUserStore;
 
     const { showProfileLoader } = clientLoadingStore;
 
     const { profileClicked } = profileActionsStore;
+
+    const { enabledHotkeys } = filesStore;
+    const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
 
     const { setChangePasswordVisible, setChangeAvatarVisible } =
       targetUserStore;
@@ -243,9 +253,6 @@ export default inject(
       isAdmin,
       isVisitor,
       isCollaborator,
-      filter,
-
-      setFilter: setFilterParams,
 
       profile: targetUser,
       userId: user?.id,
@@ -258,6 +265,8 @@ export default inject(
 
       showProfileLoader,
       profileClicked,
+      enabledHotkeys:
+        enabledHotkeys && !mediaViewerIsVisible && !showProfileLoader,
     };
   },
 )(

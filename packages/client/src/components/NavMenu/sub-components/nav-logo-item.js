@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -51,12 +51,13 @@ const LogoItem = styled.div`
   }
 `;
 
-const NavLogoItem = (props) => {
-  //console.log("NavLogoItem render");
+const NavLogoItem = ({ opened, onClick }) => {
+  // console.log("NavLogoItem render");
   return (
-    <LogoItem opened={props.opened}>
-      <Link className="nav-logo-wrapper" to="/" onClick={props.onClick}>
+    <LogoItem opened={opened}>
+      <Link className="nav-logo-wrapper" to="/" onClick={onClick}>
         <img
+          alt="logo"
           className="nav-logo-icon"
           src={getLogoUrl(WhiteLabelLogoType.LightSmall)}
         />
@@ -70,7 +71,6 @@ NavLogoItem.displayName = "NavLogoItem";
 NavLogoItem.propTypes = {
   opened: PropTypes.bool,
   onClick: PropTypes.func,
-  logoUrl: PropTypes.string,
 };
 
 export default inject(({ settingsStore }) => ({

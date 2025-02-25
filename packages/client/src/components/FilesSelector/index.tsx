@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable no-restricted-syntax */
-import React from "react";
+import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -74,6 +74,7 @@ const FilesSelectorWrapper = ({
   withSearch = true,
   withBreadCrumbs = true,
   withSubtitle = true,
+  withPadding,
 
   isMove,
   isCopy,
@@ -121,8 +122,6 @@ const FilesSelectorWrapper = ({
 
   includeFolder,
 
-  socketHelper,
-  socketSubscribers,
   setMoveToPublicRoomVisible,
   setBackupToPublicRoomVisible,
   setInfoPanelIsMobileHidden,
@@ -140,6 +139,12 @@ const FilesSelectorWrapper = ({
   openRoot,
 
   filesSettings,
+  headerProps,
+
+  withCreate,
+  folderIsShared,
+  checkCreating,
+  logoText,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -185,10 +190,54 @@ const FilesSelectorWrapper = ({
     };
   }, []);
 
+  const formProps = useMemo(() => {
+    let isRoomFormAccessible = true;
+
+    if (isSelect) return;
+
+    if (isCopy || isMove)
+      isRoomFormAccessible = selection.every(
+        (item) => "isPDFForm" in item && item.isPDFForm,
+      );
+
+    // for backup
+    if (!selection.length) {
+      isRoomFormAccessible = false;
+    }
+
+    const getMessage = () => {
+      const several = selection.length > 1;
+
+      // for backup
+      if (!selection.length) return t("Files:BackupNotAllowedInFormRoom");
+
+      const option = { organizationName: logoText };
+
+      if (isCopy)
+        return several
+          ? t("Files:WarningCopyToFormRoomServal", option)
+          : t("Common:WarningCopyToFormRoom", option);
+
+      if (isMove)
+        return several
+          ? t("Files:WarningMoveToFormRoomServal", option)
+          : t("Files:WarningMoveToFormRoom", option);
+
+      return "";
+    };
+
+    const message = getMessage();
+
+    return {
+      message,
+      isRoomFormAccessible,
+    };
+  }, [selection, isCopy, isMove, t]);
+
   const onAccept = async (
     selectedItemId: string | number | undefined,
     folderTitle: string,
-    isPublic: boolean,
+    showMoveToPublicDialog: boolean,
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
@@ -215,18 +264,20 @@ const FilesSelectorWrapper = ({
       if (folderIds.length || fileIds.length) {
         const operationData = {
           destFolderId: selectedItemId,
+          destFolderInfo: selectedTreeNode,
           folderIds,
           fileIds,
           deleteAfter: false,
           isCopy,
           folderTitle,
-          translations: {
-            copy: t("Common:CopyOperation"),
-            move: t("Common:MoveToOperation"),
-          },
+          itemsCount: selection.length,
+          ...(selection.length === 1 && {
+            title: selection[0].title,
+            isFolder: selection[0].isFolder,
+          }),
         };
 
-        if (isPublic) {
+        if (showMoveToPublicDialog) {
           setMoveToPublicRoomVisible(true, operationData);
           return;
         }
@@ -248,7 +299,12 @@ const FilesSelectorWrapper = ({
             const move = !isCopy;
             if (move) setMovingInProgress(move);
             sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
-            await itemOperationToFolder(operationData);
+
+            try {
+              await itemOperationToFolder(operationData);
+            } catch (error) {
+              console.error(error);
+            }
           }
         } catch (e: unknown) {
           toastr.error(e as TData);
@@ -259,7 +315,7 @@ const FilesSelectorWrapper = ({
         toastr.error(t("Common:ErrorEmptyList"));
       }
     } else {
-      if (isRoomBackup && isPublic) {
+      if (isRoomBackup && showMoveToPublicDialog) {
         setBackupToPublicRoomVisible(true, {
           selectedItemId,
           breadCrumbs,
@@ -319,6 +375,7 @@ const FilesSelectorWrapper = ({
       | TRoomSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
   ) => {
     return getIsDisabled(
       isFirstLoad,
@@ -335,6 +392,7 @@ const FilesSelectorWrapper = ({
       !!selectedFileInfo,
       includeFolder,
       isRestore,
+      isDisabledFolder,
     );
   };
 
@@ -343,8 +401,6 @@ const FilesSelectorWrapper = ({
   return (
     <FilesSelector
       openRoot={openRootVar}
-      socketHelper={socketHelper}
-      socketSubscribers={socketSubscribers}
       disabledItems={disabledItems}
       filterParam={filterParam}
       getIcon={getIcon}
@@ -359,6 +415,7 @@ const FilesSelectorWrapper = ({
       currentFolderId={isFormRoom && openRootVar ? "" : currentFolderId}
       parentId={parentId}
       rootFolderType={rootFolderType || FolderType.Rooms}
+      folderIsShared={folderIsShared}
       currentDeviceType={currentDeviceType}
       onCancel={onCloseAction}
       onSubmit={onAccept}
@@ -378,10 +435,11 @@ const FilesSelectorWrapper = ({
       cancelButtonLabel={cancelButtonLabel}
       withBreadCrumbs={withBreadCrumbs}
       withSearch={withSearch}
+      withPadding={withPadding}
       descriptionText={
         !withSubtitle || !filterParam || filterParam === "ALL"
           ? ""
-          : descriptionText ?? t("Common:SelectDOCXFormat")
+          : (descriptionText ?? t("Common:SelectDOCXFormat"))
       }
       submitButtonId={
         isMove || isCopy || isRestore ? "select-file-modal-submit" : ""
@@ -390,8 +448,13 @@ const FilesSelectorWrapper = ({
         isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
       }
       getFilesArchiveError={getFilesArchiveError}
-      withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
+      withCreate={
+        (isMove || isCopy || isRestore || isRestoreAll) ?? withCreate ?? false
+      }
       filesSettings={filesSettings}
+      headerProps={headerProps}
+      formProps={formProps}
+      checkCreating={checkCreating}
     />
   );
 };
@@ -425,15 +488,21 @@ export default inject(
       isPanelVisible,
       id,
       currentFolderId: currentFolderIdProp,
+      isThirdParty,
     }: FilesSelectorProps,
   ) => {
-    const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
+    const {
+      id: selectedId,
+      parentId,
+      rootFolderType,
+      shared,
+    } = selectedFolderStore;
 
     const { setConflictDialogData, checkFileConflicts, setSelectedItems } =
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
-    const { treeFolders, roomsFolderId } = treeFoldersStore;
+    const { treeFolders, roomsFolderId, myFolderId } = treeFoldersStore;
 
     const {
       restorePanelVisible,
@@ -451,9 +520,7 @@ export default inject(
 
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { socketHelper, currentDeviceType } = settingsStore;
-
-    const socketSubscribesId = socketHelper.socketSubscribers;
+    const { currentDeviceType, logoText } = settingsStore;
 
     const {
       selection,
@@ -508,11 +575,13 @@ export default inject(
       (rootFolderType === FolderType.Archive ||
       rootFolderType === FolderType.TRASH
         ? undefined
-        : selectedId === selectionsWithoutEditing[0]?.id &&
-            "isFolder" in selectionsWithoutEditing[0] &&
-            selectionsWithoutEditing[0]?.isFolder
-          ? parentId
-          : selectedId);
+        : rootFolderType === FolderType.Recent
+          ? myFolderId
+          : selectedId === selectionsWithoutEditing[0]?.id &&
+              "isFolder" in selectionsWithoutEditing[0] &&
+              selectionsWithoutEditing[0]?.isFolder
+            ? parentId
+            : selectedId);
 
     const folderId = fromFolderId;
 
@@ -544,16 +613,20 @@ export default inject(
       setSelectedItems,
       setInfoPanelIsMobileHidden,
       includeFolder,
-      socketHelper,
-      socketSubscribers: socketSubscribesId,
+
       setMoveToPublicRoomVisible,
       setBackupToPublicRoomVisible,
       currentDeviceType,
       getIcon,
 
       roomsFolderId,
-      currentFolderId: folderId || currentFolderIdProp,
+      currentFolderId:
+        isThirdParty && currentFolderIdProp
+          ? currentFolderIdProp
+          : folderId || currentFolderIdProp,
       filesSettings,
+      folderIsShared: shared,
+      logoText,
     };
   },
 )(observer(FilesSelectorWrapper));

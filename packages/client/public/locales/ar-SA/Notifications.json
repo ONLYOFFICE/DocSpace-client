@@ -1,7 +1,7 @@
 {
-  "ActionsWithFilesDescription": "سيقوم الشارات بإخطارك بالإجراءات مثل التحميل والإنشاء والتغييرات في الملفات.",
+  "ActionsWithFilesDescription": "ستنبّهك الشارات بشأن إجراءاتك مثل رفع وإنشاء الملفات والتغييرات التي تطرأ عليها.",
   "Badges": "شارات",
-  "DailyFeed": "تغذية يومية لـ {{productName}}",
+  "DailyFeed": "أخبار {{productName}} اليومية",
   "DailyFeedDescription": "اطلع على الأخبار والفعاليات من {{productName}} الخاص بك في ملخص يومي.",
   "ManageNotifications": "إدارة",
   "Notifications": "الإشعارات",

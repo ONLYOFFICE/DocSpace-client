@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,12 +32,8 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
-import ModalDialogContainer from "../ModalDialogContainer";
 
 class DeleteOwnerProfileDialogComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   onClick = () => {
     const { onClose, setChangeOwnerDialogVisible } = this.props;
 
@@ -50,11 +46,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
     const { t, tReady, visible, onClose } = this.props;
 
     return (
-      <ModalDialogContainer
-        isLoading={!tReady}
-        visible={visible}
-        onClose={onClose}
-      >
+      <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
         <ModalDialog.Header>{t("DeleteProfileTitle")}</ModalDialog.Header>
         <ModalDialog.Body>
           <Text fontSize="13px">
@@ -69,7 +61,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
             label={t("Translations:OwnerChange")}
             size="normal"
             scale
-            primary={true}
+            primary
             onClick={this.onClick}
           />
           <Button
@@ -80,7 +72,7 @@ class DeleteOwnerProfileDialogComponent extends React.Component {
             onClick={onClose}
           />
         </ModalDialog.Footer>
-      </ModalDialogContainer>
+      </ModalDialog>
     );
   }
 }

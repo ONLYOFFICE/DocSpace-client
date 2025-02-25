@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,17 +30,18 @@ import Section from "@docspace/shared/components/section";
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import { withTranslation } from "react-i18next";
 
-import { SectionHeaderContent, SectionBodyContent } from "./Section";
 import { inject, observer } from "mobx-react";
 import SectionWrapper from "SRC_DIR/components/Section";
+import { SectionHeaderContent, SectionBodyContent } from "./Section";
+
 class PureVersionHistory extends React.Component {
   render() {
     const { isLoading, versions, showProgressBar } = this.props;
 
     return (
       <SectionWrapper
-        withBodyAutoFocus={true}
-        headerBorderBottom={true}
+        withBodyAutoFocus
+        headerBorderBottom
         showSecondaryProgressBar={showProgressBar}
         secondaryProgressBarIcon="file"
         showSecondaryButtonAlert={false}

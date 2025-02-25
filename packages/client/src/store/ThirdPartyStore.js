@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,7 +50,9 @@ import i18n from "../i18n";
 
 class ThirdPartyStore {
   capabilities = null;
+
   providers = [];
+
   connectingStorages = [];
 
   constructor() {
@@ -70,6 +72,7 @@ class ThirdPartyStore {
   fetchThirdPartyProviders = async () => {
     const list = await api.files.getThirdPartyList();
     this.setThirdPartyProviders(list);
+    return list;
   };
 
   fetchConnectingStorages = async () => {
@@ -84,7 +87,10 @@ class ThirdPartyStore {
       oauthHref: storage.redirectUrl,
       category: storage.name,
       requiredConnectionUrl: storage.requiredConnectionUrl,
+      clientId: storage.clientId,
     }));
+
+    return res;
   };
 
   saveThirdParty = (
@@ -112,7 +118,7 @@ class ThirdPartyStore {
   };
 
   convertServiceName = (serviceName) => {
-    //Docusign, OneDrive, Wordpress
+    // Docusign, OneDrive, Wordpress
     switch (serviceName) {
       case "GoogleDrive":
         return "google";
@@ -135,7 +141,7 @@ class ThirdPartyStore {
     }
 
     try {
-      let params =
+      const params =
         "height=600,width=1020,resizable=0,status=0,toolbar=0,menubar=0,location=1";
       newWindow = modal
         ? newWindow
@@ -212,6 +218,7 @@ class ThirdPartyStore {
       this.capabilities && this.capabilities.find((x) => x[0] === "DropboxV2")
     );
   }
+
   get oneDriveConnectItem() {
     return (
       this.capabilities && this.capabilities.find((x) => x[0] === "OneDrive")
@@ -248,6 +255,7 @@ class ThirdPartyStore {
       this.capabilities && this.capabilities.find((x) => x[0] === "WebDav")
     );
   }
+
   // TODO:remove WebDav get OwnCloud
   get ownCloudConnectItem() {
     return (
@@ -256,8 +264,8 @@ class ThirdPartyStore {
   }
 
   get connectItems() {
-    let nextCloudConnectItem = [],
-      ownCloudConnectItem = [];
+    const nextCloudConnectItem = [];
+    const ownCloudConnectItem = [];
 
     if (this.nextCloudConnectItem) {
       nextCloudConnectItem.push(...this.nextCloudConnectItem, "Nextcloud");

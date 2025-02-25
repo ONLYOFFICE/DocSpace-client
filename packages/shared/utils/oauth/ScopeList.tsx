@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Base } from "../../themes";
 import { ScopeType } from "../../enums";
 import { TTranslation } from "../../types";
 
 import { TFilteredScopes, TScope } from "./types";
 import { filterScopeByGroup } from ".";
+import { injectDefaultTheme } from "../injectDefaultTheme";
 
 const StyledScopeList = styled.div`
   width: 100%;
@@ -17,7 +17,7 @@ const StyledScopeList = styled.div`
   gap: 4px;
 `;
 
-const StyledScopeItem = styled.div`
+const StyledScopeItem = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
 
   display: flex;
@@ -40,8 +40,6 @@ const StyledScopeItem = styled.div`
   }
 `;
 
-StyledScopeItem.defaultProps = { theme: Base };
-
 interface TScopeListProps {
   selectedScopes: string[];
   scopes: TScope[];
@@ -49,15 +47,13 @@ interface TScopeListProps {
   t: TTranslation;
 }
 
-const getRenderedScopes = ({
-  selectedScopes,
-  scopes,
-}: Omit<TScopeListProps, "t">) => {
+const getRenderedScopes = ({ selectedScopes, scopes, t }: TScopeListProps) => {
   const result: string[] = [];
 
   const filteredScopes: TFilteredScopes = filterScopeByGroup(
     selectedScopes,
     scopes,
+    t,
   );
 
   Object.keys(filteredScopes).forEach((key) => {
@@ -78,14 +74,14 @@ const getRenderedScopes = ({
 
 const ScopeList = ({ selectedScopes, scopes, t }: TScopeListProps) => {
   const [renderedScopes, setRenderedScopes] = React.useState<string[]>(
-    getRenderedScopes({ selectedScopes, scopes }),
+    getRenderedScopes({ selectedScopes, scopes, t }),
   );
 
   React.useEffect(() => {
-    const result = getRenderedScopes({ selectedScopes, scopes });
+    const result = getRenderedScopes({ selectedScopes, scopes, t });
 
     setRenderedScopes([...result]);
-  }, [selectedScopes, scopes]);
+  }, [selectedScopes, scopes, t]);
 
   return (
     <StyledScopeList className="scope-list">

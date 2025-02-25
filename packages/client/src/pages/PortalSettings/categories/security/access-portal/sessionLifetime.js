@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,14 +34,15 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
-import { LearnMoreWrapper } from "../StyledSecurity";
 import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import isEqual from "lodash/isEqual";
 
-import SessionLifetimeLoader from "../sub-components/loaders/session-lifetime-loader";
 import { DeviceType } from "@docspace/shared/enums";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import SessionLifetimeLoader from "../sub-components/loaders/session-lifetime-loader";
+import { LearnMoreWrapper } from "../StyledSecurity";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -68,12 +69,13 @@ const SessionLifetime = (props) => {
     lifetime,
     enabled,
     setSessionLifetimeSettings,
-    initSettings,
     isInit,
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    getSessionLifetime,
   } = props;
+
   const [type, setType] = useState(false);
   const [sessionLifetime, setSessionLifetime] = useState("1440");
   const [showReminder, setShowReminder] = useState(false);
@@ -82,6 +84,12 @@ const SessionLifetime = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("lifetime") &&
+      navigate("/portal-settings/security/access-portal");
+  };
 
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage(
@@ -117,7 +125,7 @@ const SessionLifetime = (props) => {
   useEffect(() => {
     checkWidth();
 
-    if (!isInit) initSettings("lifetime").then(() => setIsLoading(true));
+    if (!isInit) getSessionLifetime().then(() => setIsLoading(true));
     else setIsLoading(true);
 
     window.addEventListener("resize", checkWidth);
@@ -125,7 +133,7 @@ const SessionLifetime = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!isInit) return;
+    if (!isLoading) return;
     const currentSettings = getFromSessionStorage(
       "currentSessionLifetimeSettings",
     );
@@ -148,7 +156,7 @@ const SessionLifetime = (props) => {
     );
     const newSettings = {
       lifetime: sessionLifetime?.toString(),
-      type: type,
+      type,
     };
 
     saveToSessionStorage("currentSessionLifetimeSettings", newSettings);
@@ -160,14 +168,8 @@ const SessionLifetime = (props) => {
     }
   }, [type, sessionLifetime]);
 
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("lifetime") &&
-      navigate("/portal-settings/security/access-portal");
-  };
-
   const onSelectType = (e) => {
-    setType(e.target.value === "enable" ? true : false);
+    setType(e.target.value === "enable");
   };
 
   const onChangeInput = (e) => {
@@ -201,7 +203,7 @@ const SessionLifetime = (props) => {
 
       saveToSessionStorage("currentSessionLifetimeSettings", {
         lifetime: sessionValue?.toString(),
-        type: type,
+        type,
       });
     }
 
@@ -210,11 +212,11 @@ const SessionLifetime = (props) => {
         toastr.success(t("SuccessfullySaveSettingsMessage"));
         saveToSessionStorage("defaultSessionLifetimeSettings", {
           lifetime: sessionValue?.toString(),
-          type: type,
+          type,
         });
         setShowReminder(false);
       })
-      .catch((error) => toastr.error(error));
+      .catch((err) => toastr.error(err));
   };
 
   const onCancelClick = () => {
@@ -226,7 +228,7 @@ const SessionLifetime = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
     return <SessionLifetimeLoader />;
   }
 
@@ -270,7 +272,7 @@ const SessionLifetime = (props) => {
         onClick={onSelectType}
       />
 
-      {type && (
+      {type ? (
         <>
           <Text className="lifetime" fontSize="15px" fontWeight="600">
             {t("Lifetime")}
@@ -286,7 +288,7 @@ const SessionLifetime = (props) => {
             hasError={error}
           />
         </>
-      )}
+      ) : null}
 
       <SaveCancelButtons
         className="save-cancel-buttons"
@@ -296,7 +298,7 @@ const SessionLifetime = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         additionalClassSaveButton="session-lifetime-save"
         additionalClassCancelButton="session-lifetime-cancel"
@@ -313,17 +315,18 @@ export const SessionLifetimeSection = inject(({ settingsStore, setup }) => {
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    getSessionLifetime,
   } = settingsStore;
-  const { initSettings, isInit } = setup;
+  const { isInit } = setup;
 
   return {
     enabled: enabledSessionLifetime,
     lifetime: sessionLifetime,
     setSessionLifetimeSettings,
-    initSettings,
     isInit,
     lifetimeSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    getSessionLifetime,
   };
 })(withTranslation(["Settings", "Common"])(observer(SessionLifetime)));

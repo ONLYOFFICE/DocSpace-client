@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,7 +50,7 @@ const PreparationPortalDialog = (props) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <StyledPreparationPortalDialog>
-          <PreparationPortal withoutHeader style={{ padding: "0" }} isDialog />
+          <PreparationPortal withoutHeader isDialog style={{ padding: "0" }} />
         </StyledPreparationPortalDialog>
       </ModalDialog.Body>
     </ModalDialog>
@@ -63,13 +63,17 @@ const PreparationPortalDialogWrapper = inject(({ backup }, { visible }) => {
     setPreparationPortalDialogVisible: setVisible,
   } = backup;
 
-  const preparationPortalVisible = visible
-    ? visible
-    : preparationPortalDialogVisible;
+  const preparationPortalVisible = visible || preparationPortalDialogVisible;
   return {
     preparationPortalVisible,
     setVisible,
   };
 })(withTranslation("PreparationPortal")(observer(PreparationPortalDialog)));
 
-export default (props) => <PreparationPortalDialogWrapper {...props} />;
+const PreparationPortalDialogWrapperWithProps = (props) => (
+  <PreparationPortalDialogWrapper {...props} />
+);
+PreparationPortalDialogWrapperWithProps.displayName =
+  "PreparationPortalDialogWrapperWithProps";
+
+export default PreparationPortalDialogWrapperWithProps;

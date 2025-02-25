@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,10 +26,9 @@
 
 import styled from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
-import { mobile } from "@docspace/shared/utils";
+import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
 
-export const MainContainer = styled.div`
+export const MainContainer = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
 
   .subtitle {
@@ -65,8 +64,6 @@ export const MainContainer = styled.div`
     }
   }
 `;
-
-MainContainer.defaultProps = { theme: Base };
 
 export const StyledCategoryWrapper = styled.div`
   display: flex;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TFolder } from "../api/files/types";
 import type {
   ContextMenuModel,
   SeparatorType,
@@ -46,4 +47,13 @@ export const isSeparator = (arg: ContextMenuModel): arg is SeparatorType => {
 
 export const isNullOrUndefined = (arg: unknown): arg is null | undefined => {
   return arg === undefined || arg === null;
+};
+
+export const isFolder = (item: unknown): item is TFolder => {
+  return (
+    typeof item === "object" &&
+    item !== null &&
+    "parentId" in item &&
+    !isNullOrUndefined(item.parentId)
+  );
 };

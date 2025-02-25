@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,16 +44,16 @@ const ToggleBlock = ({
         <Text fontSize="16px" fontWeight={700}>
           {headerText}
         </Text>
-        {withToggle && (
+        {withToggle ? (
           <ToggleButton
             isDisabled={isLoading}
             isChecked={isChecked}
             onChange={onChange}
             className="edit-link-toggle"
           />
-        )}
+        ) : null}
       </div>
-      {bodyText && (
+      {bodyText ? (
         <Text
           className={
             isExpired
@@ -65,7 +65,7 @@ const ToggleBlock = ({
         >
           {bodyText}
         </Text>
-      )}
+      ) : null}
 
       {children}
     </div>

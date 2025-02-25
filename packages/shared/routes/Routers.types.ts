@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,15 +33,7 @@ import type { CurrentTariffStatusStore } from "../store/CurrentTariffStatusStore
 
 export interface PrivateRouteProps
   extends PropsWithChildren,
-    Pick<
-      AuthStore,
-      | "isAuthenticated"
-      | "isLoaded"
-      | "isAdmin"
-      | "isLogout"
-      | "isCommunity"
-      | "isEnterprise"
-    >,
+    Pick<AuthStore, "isAuthenticated" | "isLoaded" | "isAdmin" | "isLogout">,
     Pick<
       SettingsStore,
       | "wizardCompleted"
@@ -50,6 +42,7 @@ export interface PrivateRouteProps
       | "enablePortalRename"
       | "limitedAccessSpace"
       | "baseDomain"
+      | "displayAbout"
     >,
     Pick<CurrentTariffStatusStore, "isNotPaidPeriod">,
     Pick<UserStore, "user"> {
@@ -57,6 +50,15 @@ export interface PrivateRouteProps
   withManager?: boolean;
   withCollaborator?: boolean;
   identityServerEnabled?: boolean;
+  isCommunity?: boolean;
+  isEnterprise?: boolean;
+  isLoadedUser?: boolean;
+
+  validatePublicRoomKey: ((key: string) => void) | undefined;
+  publicRoomKey: string | null | undefined;
+  roomId: string | undefined;
+  isLoadedPublicRoom: boolean | undefined;
+  isLoadingPublicRoom: boolean | undefined;
 }
 
 export interface PublicRouteProps
@@ -64,5 +66,8 @@ export interface PublicRouteProps
     Pick<AuthStore, "isAuthenticated">,
     Pick<
       SettingsStore,
-      "wizardCompleted" | "tenantStatus" | "isPortalDeactivate"
+      | "wizardCompleted"
+      | "tenantStatus"
+      | "isPortalDeactivate"
+      | "isFirstLoaded"
     > {}

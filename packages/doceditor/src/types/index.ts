@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,13 +38,13 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
-import SocketIOHelper from "@docspace/shared/utils/socket";
 import {
   ConflictResolveType,
   FilesSelectorFilterTypes,
 } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
+import { TFrameConfig } from "@docspace/shared/types/Frame";
 
 export type TGoBack = {
   requestClose: boolean;
@@ -53,7 +53,7 @@ export type TGoBack = {
   url?: string;
 };
 
-export type ActionType = "view" | "edit";
+export type ActionType = "view" | "edit" | "fill";
 
 export type TDocumentInfoSharingSettings = {
   user: string;
@@ -205,6 +205,7 @@ export type TResponse =
       doc?: string;
       fileId?: string;
       hash?: string;
+      shareKey?: string;
     }
   | {
       error: TError;
@@ -217,6 +218,7 @@ export type TResponse =
       doc?: undefined;
       fileId?: string;
       hash?: string;
+      shareKey?: string;
     };
 
 export type EditorProps = {
@@ -226,9 +228,12 @@ export type EditorProps = {
   doc?: string;
   documentserverUrl: string;
   fileInfo?: TFile;
+  sdkConfig?: TFrameConfig | null;
   isSharingAccess?: boolean;
   errorMessage?: string;
   isSkipError?: boolean;
+  filesSettings?: TFilesSettings;
+  organizationName?: string;
 
   onDownloadAs?: (obj: object) => void;
   onSDKRequestSharingSettings?: () => void;
@@ -265,7 +270,6 @@ export interface UseSelectFileDialogProps {
 }
 
 export interface SelectFolderDialogProps {
-  socketHelper: SocketIOHelper;
   titleSelectorFolder: string;
   isVisible: boolean;
   getIsDisabled: (
@@ -295,14 +299,15 @@ export interface SelectFolderDialogProps {
   fileInfo: TFile;
   filesSettings: TFilesSettings;
   fileSaveAsExtension?: string;
+  organizationName: string;
 }
 
 export interface SelectFileDialogProps {
-  socketHelper: SocketIOHelper;
   fileTypeDetection: {
     isSelect: boolean;
     filterParam: FilesSelectorFilterTypes;
   };
+  shareKey?: string;
   getIsDisabled: (
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,
@@ -335,6 +340,7 @@ export interface SelectFileDialogProps {
 export interface UseSocketHelperProps {
   socketUrl: string;
   user?: TUser;
+  shareKey?: string;
 }
 
 export interface UseEventsProps {
@@ -347,6 +353,9 @@ export interface UseEventsProps {
   isSkipError?: boolean;
   openOnNewPage: boolean;
   t: TTranslation;
+
+  sdkConfig?: TFrameConfig | null;
+  organizationName: string;
 }
 
 export interface UseInitProps {
@@ -358,6 +367,7 @@ export interface UseInitProps {
 
   setDocTitle: (value: string) => void;
   documentReady: boolean;
+  organizationName: string;
 }
 
 export type THistoryData =
@@ -406,7 +416,6 @@ export type TCatchError =
   | string;
 
 export type StartFillingSelectorDialogPprops = {
-  socketHelper: SocketIOHelper;
   fileInfo: TFile;
   isVisible: boolean;
   onClose: VoidFunction;

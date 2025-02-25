@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,24 +25,24 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Slider } from "@docspace/shared/components/slider";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { LearnMoreWrapper } from "../StyledSecurity";
 import { toastr } from "@docspace/shared/components/toast";
 import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
-import PasswordLoader from "../sub-components/loaders/password-loader";
 import { DeviceType } from "@docspace/shared/enums";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import PasswordLoader from "../sub-components/loaders/password-loader";
+import { LearnMoreWrapper } from "../StyledSecurity";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -55,6 +55,7 @@ const MainContainer = styled.div`
   }
 
   .checkboxes {
+    box-sizing: border-box;
     display: inline-block;
     margin-top: 18px;
     margin-bottom: 24px;
@@ -63,6 +64,13 @@ const MainContainer = styled.div`
       margin: 8px 0;
     }
   }
+
+  .slider-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 `;
 
 const PasswordStrength = (props) => {
@@ -70,11 +78,11 @@ const PasswordStrength = (props) => {
     t,
     setPortalPasswordSettings,
     passwordSettings,
-    initSettings,
     isInit,
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
+    getPortalPasswordSettings,
   } = props;
 
   const navigate = useNavigate();
@@ -88,6 +96,17 @@ const PasswordStrength = (props) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("password") &&
+      navigate("/portal-settings/security/access-portal");
+  };
+
+  const load = async () => {
+    if (!isInit) await getPortalPasswordSettings();
+    setIsLoading(true);
+  };
 
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage("defaultPasswordSettings");
@@ -124,17 +143,15 @@ const PasswordStrength = (props) => {
   };
 
   useEffect(() => {
+    load();
     checkWidth();
     window.addEventListener("resize", checkWidth);
-
-    if (!isInit) initSettings("password").then(() => setIsLoading(true));
-    else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isInit || !passwordSettings) return;
+    if (!isLoading || !passwordSettings) return;
     const currentSettings = getFromSessionStorage("currentPasswordSettings");
     const defaultSettings = getFromSessionStorage("defaultPasswordSettings");
 
@@ -165,12 +182,6 @@ const PasswordStrength = (props) => {
     }
   }, [passwordLen, useUpperCase, useDigits, useSpecialSymbols]);
 
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("password") &&
-      navigate("/portal-settings/security/access-portal");
-  };
-
   const onSliderChange = (e) => {
     setPasswordLen(Number(e.target.value));
   };
@@ -185,6 +196,8 @@ const PasswordStrength = (props) => {
         break;
       case "special":
         setUseSpecialSymbols(e.target.checked);
+        break;
+      default:
         break;
     }
   };
@@ -210,7 +223,7 @@ const PasswordStrength = (props) => {
       saveToSessionStorage("defaultPasswordSettings", data);
       toastr.success(t("SuccessfullySaveSettingsMessage"));
     } catch (error) {
-      toastr.error(e);
+      toastr.error(error);
     }
 
     setIsSaving(false);
@@ -226,7 +239,7 @@ const PasswordStrength = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
     return <PasswordLoader />;
   }
 
@@ -252,13 +265,13 @@ const PasswordStrength = (props) => {
       <Text fontSize="14px" fontWeight="600" className="length-subtitle">
         {t("PasswordMinLenght")}
       </Text>
-      <Box displayProp="flex" flexDirection="row" alignItems="center">
+      <div className="slider-box">
         <Slider
           className="password-slider"
           min="8"
           max="30"
           step="1"
-          withPouring={true}
+          withPouring
           value={passwordLen}
           onChange={onSliderChange}
         />
@@ -267,8 +280,8 @@ const PasswordStrength = (props) => {
             length: passwordLen,
           })}
         </Text>
-      </Box>
-      <Box className="checkboxes">
+      </div>
+      <div className="checkboxes">
         <Checkbox
           className="use-upper-case"
           onChange={onClickCheckbox}
@@ -290,7 +303,7 @@ const PasswordStrength = (props) => {
           isChecked={useSpecialSymbols}
           value="special"
         />
-      </Box>
+      </div>
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={onSaveClick}
@@ -299,7 +312,7 @@ const PasswordStrength = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         isSaving={isSaving}
         additionalClassSaveButton="password-strength-save"
@@ -316,16 +329,17 @@ export const PasswordStrengthSection = inject(({ settingsStore, setup }) => {
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
+    getPortalPasswordSettings,
   } = settingsStore;
-  const { initSettings, isInit } = setup;
+  const { isInit } = setup;
 
   return {
     setPortalPasswordSettings,
     passwordSettings,
-    initSettings,
     isInit,
     currentColorScheme,
     passwordStrengthSettingsUrl,
     currentDeviceType,
+    getPortalPasswordSettings,
   };
 })(withTranslation(["Settings", "Common"])(observer(PasswordStrength)));

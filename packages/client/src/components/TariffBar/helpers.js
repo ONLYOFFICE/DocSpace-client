@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,12 +36,9 @@ export const getSaasBar = (
   isFreeTariff,
   isGracePeriod,
 ) => {
-  if (
-    isPaymentPageAvailable &&
-    !isNonProfit &&
-    (isFreeTariff || isGracePeriod)
-  ) {
-    if (isFreeTariff) return { label: t("Common:TryBusiness"), color: ORANGE };
+  if (isPaymentPageAvailable) {
+    if (isFreeTariff && !isNonProfit)
+      return { label: t("Common:TryBusiness"), color: ORANGE };
     if (isGracePeriod) return { label: t("Common:LatePayment"), color: RED };
   }
 };
@@ -68,17 +65,16 @@ export const getEnterpriseBar = (
         label: t("Common:TrialDaysLeft", { count: trialDaysLeft }),
         color: ORANGE,
       };
-    } else {
-      if (isLicenseDateExpired)
-        return {
-          label: t("Common:SubscriptionExpiredTitle"),
-          color: RED,
-        };
-      return {
-        label: t("Common:SubscriptionIsExpiring", { date: paymentDate }),
-        color: ORANGE,
-      };
     }
+    if (isLicenseDateExpired)
+      return {
+        label: t("Common:SubscriptionExpiredTitle"),
+        color: RED,
+      };
+    return {
+      label: t("Common:SubscriptionIsExpiring", { date: paymentDate }),
+      color: ORANGE,
+    };
   }
 };
 

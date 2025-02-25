@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,34 +26,29 @@
 
 import React from "react";
 
-import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-
-import { IconButton } from "../../icon-button";
-import { Heading } from "../../heading";
-
-import { StyledHeader } from "../Selector.styled";
 import { HeaderProps } from "../Selector.types";
+import { AsideHeader } from "../../aside-header";
 
 const Header = React.memo(
   ({
     onBackClick,
+    onCloseClick,
     withoutBackButton,
     headerLabel,
     withoutBorder,
+    isCloseable,
   }: HeaderProps) => {
     return (
-      <StyledHeader withoutBorder={withoutBorder}>
-        {!withoutBackButton && typeof withoutBackButton === "boolean" && (
-          <IconButton
-            className="arrow-button"
-            iconName={ArrowPathReactSvgUrl}
-            size={17}
-            onClick={onBackClick}
-          />
-        )}
-
-        <Heading className="heading-text">{headerLabel}</Heading>
-      </StyledHeader>
+      <AsideHeader
+        header={headerLabel}
+        isBackButton={
+          !withoutBackButton ? typeof withoutBackButton === "boolean" : false
+        }
+        onBackClick={onBackClick}
+        onCloseClick={onCloseClick}
+        withoutBorder={withoutBorder}
+        isCloseable={isCloseable}
+      />
     );
   },
 );

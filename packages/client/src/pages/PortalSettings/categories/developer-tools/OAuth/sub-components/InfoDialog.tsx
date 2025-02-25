@@ -1,6 +1,31 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
@@ -20,107 +45,13 @@ import {
   AvatarSize,
 } from "@docspace/shared/components/avatar";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { Base } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
+import { Tag } from "@docspace/shared/components/tag";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 
-const StyledContainer = styled.div<{
-  showDescription: boolean;
-  withShowText: boolean;
-}>`
-  width: 100%;
-  height: 100%;
-
-  box-sizing: border-box;
-
-  padding-top: 8px;
-
-  display: flex;
-  flex-direction: column;
-
-  .client-block {
-    width: 100%;
-    height: 32px;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 12px;
-
-    .client-block__info {
-      width: 100%;
-
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      gap: 8px;
-
-      .client-block__info-logo {
-        width: 32px;
-        height: 32px;
-
-        max-width: 32px;
-        max-height: 32px;
-
-        border-radius: 3px;
-      }
-    }
-  }
-
-  .description {
-    max-height: ${(props) =>
-      props.showDescription ? "100%" : props.withShowText ? "100px" : "100%"};
-
-    overflow: hidden;
-
-    margin-bottom: ${(props) => (props.withShowText ? "4px" : 0)};
-  }
-
-  .desc-link {
-    color: ${(props) => props.theme.oauth.infoDialog.descLinkColor};
-  }
-
-  .block-header {
-    margin-top: 20px;
-    margin-bottom: 12px;
-
-    color: ${(props) => props.theme.oauth.infoDialog.blockHeaderColor};
-  }
-
-  .creator-block {
-    margin: 8px 0;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    gap: 8px;
-  }
-
-  .privacy-block {
-    display: flex;
-
-    .separator {
-      display: inline-block;
-
-      margin-top: 2px;
-
-      height: 16px;
-      width: 1px;
-
-      margin: 0 8px;
-
-      background: ${(props) => props.theme.oauth.infoDialog.separatorColor};
-    }
-  }
-`;
-
-StyledContainer.defaultProps = { theme: Base };
+import { StyledInfoContainer } from "../OAuth.styled";
 
 interface InfoDialogProps {
   visible: boolean;
@@ -188,10 +119,11 @@ const InfoDialog = ({
       visible={visible}
       displayType={ModalDialogType.aside}
       onClose={onClose}
+      withBodyScroll
     >
       <ModalDialog.Header>{t("Common:Info")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledContainer
+        <StyledInfoContainer
           showDescription={showDescription}
           withShowText={withShowText}
         >
@@ -219,7 +151,7 @@ const InfoDialog = ({
               getData={getContextOptions}
             />
           </div>
-          {!isProfile && (
+          {!isProfile ? (
             <>
               <Text
                 className="block-header"
@@ -249,8 +181,8 @@ const InfoDialog = ({
                 </Text>
               </div>
             </>
-          )}
-          {!isProfile && (
+          ) : null}
+          {!isProfile ? (
             <>
               <Text
                 className="block-header"
@@ -273,7 +205,7 @@ const InfoDialog = ({
               >
                 {client?.description}
               </Text>
-              {withShowText && (
+              {withShowText ? (
                 <Link
                   className="desc-link"
                   fontSize="13px"
@@ -285,10 +217,9 @@ const InfoDialog = ({
                 >
                   {showDescription ? "Hide" : "Show more"}
                 </Link>
-              )}
+              ) : null}
             </>
-          )}
-
+          ) : null}
           <Text
             className="block-header"
             fontSize="14px"
@@ -299,7 +230,6 @@ const InfoDialog = ({
           >
             {t("Common:Website")}
           </Text>
-
           <Link
             fontSize="13px"
             lineHeight="15px"
@@ -311,7 +241,6 @@ const InfoDialog = ({
           >
             {client?.websiteUrl}
           </Link>
-
           <Text
             className="block-header"
             fontSize="14px"
@@ -321,13 +250,33 @@ const InfoDialog = ({
             truncate
           >
             {t("Access")}
-          </Text>
+          </Text>{" "}
           <ScopeList
             selectedScopes={client?.scopes || []}
             scopes={scopeList || []}
             t={t}
           />
-          {isProfile && (
+          <Text
+            className="block-header"
+            fontSize="14px"
+            lineHeight="16px"
+            fontWeight="600"
+            noSelect
+            truncate
+          >
+            {t("Scopes")}
+          </Text>
+          <div className="property-tag_list">
+            {client?.scopes.map((scope) => (
+              <Tag
+                key={scope}
+                tag={scope}
+                className="property-tag"
+                label={scope}
+              />
+            ))}
+          </div>
+          {isProfile ? (
             <>
               <Text
                 className="block-header"
@@ -350,8 +299,7 @@ const InfoDialog = ({
                 {modifiedDate}
               </Text>
             </>
-          )}
-
+          ) : null}
           <Text
             className="block-header"
             fontSize="14px"
@@ -362,7 +310,6 @@ const InfoDialog = ({
           >
             {t("SupportAndLegalInfo")}
           </Text>
-
           <Text
             className="privacy-block"
             fontSize="13px"
@@ -393,10 +340,10 @@ const InfoDialog = ({
               type={LinkType.action}
               target={LinkTarget.blank}
             >
-              {t("Terms of Service")}
+              {t("TermsOfService")}
             </Link>
           </Text>
-          {!isProfile && (
+          {!isProfile ? (
             <>
               <Text
                 className="block-header"
@@ -419,14 +366,14 @@ const InfoDialog = ({
                 {modifiedDate}
               </Text>
             </>
-          )}
-        </StyledContainer>
+          ) : null}
+        </StyledInfoContainer>
       </ModalDialog.Body>
     </ModalDialog>
   );
 };
 
-export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
+export default inject(({ oauthStore }: { oauthStore: OAuthStore }) => {
   const {
     setInfoDialogVisible,
     bufferSelection,

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,10 +30,10 @@ import { I18nextProvider } from "react-i18next";
 import { RouterProvider } from "react-router-dom";
 import { Provider as MobxProvider } from "mobx-react";
 
+import store from "SRC_DIR/store";
 import ThemeProvider from "./components/ThemeProviderWrapper";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 
-import store from "client/store";
 import i18n from "./i18n";
 
 import "@docspace/shared/polyfills/broadcastchannel";
@@ -43,6 +43,15 @@ import "@docspace/shared/styles/custom.scss";
 import router from "./router";
 
 const App = () => {
+  React.useEffect(() => {
+    const regex = /(\/){2,}/g;
+    const replaceRegex = /(\/)+/g;
+    const pathname = window.location.pathname;
+
+    if (regex.test(pathname))
+      window.location.replace(pathname.replace(replaceRegex, "$1"));
+  }, []);
+
   return (
     <MobxProvider {...store}>
       <I18nextProvider i18n={i18n}>

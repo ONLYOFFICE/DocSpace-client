@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import IconCropperGridSvgUrl from "PUBLIC_DIR/images/icon-cropper-grid.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
 import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus.react.svg?url";
 import React, { useEffect } from "react";
@@ -36,9 +36,9 @@ import AvatarEditor from "react-avatar-editor";
 
 import { Slider } from "@docspace/shared/components/slider";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledAvatarCropper = styled.div`
+const StyledAvatarCropper = styled.div.attrs(injectDefaultTheme)`
   max-width: 216px;
 
   .icon_cropper-crop_area {
@@ -124,8 +124,6 @@ const StyledAvatarCropper = styled.div`
   }
 `;
 
-StyledAvatarCropper.defaultProps = { theme: Base };
-
 const AvatarCropper = ({
   t,
   avatar,
@@ -141,7 +139,7 @@ const AvatarCropper = ({
     onChangeAvatar({ ...avatar, x: position.x, y: position.y });
 
   const handleSliderChange = (e, newZoom = null) =>
-    onChangeAvatar({ ...avatar, zoom: newZoom ? newZoom : +e.target.value });
+    onChangeAvatar({ ...avatar, zoom: newZoom || +e.target.value });
 
   const handleZoomInClick = () =>
     handleSliderChange({}, avatar.zoom <= 4.5 ? avatar.zoom + 0.5 : 5);
@@ -207,7 +205,7 @@ const AvatarCropper = ({
           size="16"
           onClick={handleZoomOutClick}
           iconName={ZoomMinusReactSvgUrl}
-          isFill={true}
+          isFill
           isClickable={false}
         />
         <Slider
@@ -223,7 +221,7 @@ const AvatarCropper = ({
           size="16"
           onClick={handleZoomInClick}
           iconName={ZoomPlusReactSvgUrl}
-          isFill={true}
+          isFill
           isClickable={false}
         />
       </div>

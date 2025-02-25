@@ -1,4 +1,5 @@
 {
+  "DocumentConverted": "Документ је конвертован у {{title}} како би омогућио уређивање",
   "DocumentsFileType": "документи",
   "ErrorConnectionLost": "Конекција је изгубљена",
   "FileLocation": "Отвори локацију датотеке",

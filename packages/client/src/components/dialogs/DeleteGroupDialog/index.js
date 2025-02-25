@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,6 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
-import ModalDialogContainer from "../ModalDialogContainer";
 
 const DeleteGroupDialog = (props) => {
   const {
@@ -45,19 +44,6 @@ const DeleteGroupDialog = (props) => {
     onDeleteAllGroups,
     isLoading,
   } = props;
-
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
-  };
 
   const hasMoreGroups = selection.length > 1;
 
@@ -74,12 +60,21 @@ const DeleteGroupDialog = (props) => {
     }
   };
 
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onDeleteAction();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, []);
+
   return (
-    <ModalDialogContainer
-      visible={visible}
-      onClose={onClose}
-      displayType="modal"
-    >
+    <ModalDialog visible={visible} onClose={onClose} displayType="modal">
       <ModalDialog.Header>
         {hasMoreGroups
           ? t("DeleteDialog:DeleteAllGroupsTitle")
@@ -117,7 +112,7 @@ const DeleteGroupDialog = (props) => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

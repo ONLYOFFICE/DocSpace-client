@@ -1,3 +1,29 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +36,7 @@ import {
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { getClient } from "@docspace/shared/api/oauth";
+import { addClient, getClient, updateClient } from "@docspace/shared/api/oauth";
 
 import ResetDialog from "../ResetDialog";
 
@@ -36,9 +62,6 @@ const ClientForm = ({
 
   fetchScopes,
 
-  saveClient,
-  updateClient,
-
   resetDialogVisible,
   setResetDialogVisible,
 
@@ -46,6 +69,9 @@ const ClientForm = ({
   setClientSecretProps,
 
   currentDeviceType,
+
+  jwtToken,
+  setJwtToken,
 }: ClientFormProps) => {
   const navigate = useNavigate();
 
@@ -127,9 +153,9 @@ const ClientForm = ({
 
         setIsRequestRunning(true);
 
-        await saveClient?.(form);
+        await addClient?.(form, jwtToken!);
       } else {
-        await updateClient?.(clientId, form);
+        await updateClient?.(clientId, form, jwtToken!);
       }
 
       onCancelClick();
@@ -178,19 +204,18 @@ const ClientForm = ({
   };
 
   const getClientData = React.useCallback(async () => {
-    if (clientId) return;
-
     const actions = [];
 
-    if (id && !client) {
-      actions.push(getClient(id));
-    }
+    setIsLoading(true);
+
+    const token = jwtToken || (await setJwtToken!());
+    if (!token) return;
+
+    if (id || clientId) actions.push(getClient(id ?? clientId, token!));
 
     if (scopeList?.length === 0) actions.push(fetchScopes?.());
 
     try {
-      if (actions.length > 0) setIsLoading(true);
-
       const [fetchedClient] = await Promise.all(actions);
 
       const item = fetchedClient ?? client;
@@ -231,7 +256,7 @@ const ClientForm = ({
 
       toastr.error(e as unknown as TData);
     }
-  }, [clientId, id, client, scopeList?.length, fetchScopes]);
+  }, [clientId, id, client, scopeList?.length, fetchScopes, jwtToken]);
 
   React.useEffect(() => {
     getClientData();
@@ -387,14 +412,14 @@ const ClientForm = ({
               requiredErrorFields={requiredErrorFields}
               onBlur={onBlur}
             />
-            {isEdit && (
+            {isEdit ? (
               <ClientBlock
                 t={t}
                 idValue={clientId}
                 secretValue={clientSecret}
                 onResetClick={onResetClick}
               />
-            )}
+            ) : null}
             <OAuthBlock
               t={t}
               redirectUrisValue={form.redirect_uris}
@@ -409,6 +434,7 @@ const ClientForm = ({
               selectedScopes={form.scopes}
               onAddScope={onChangeForm}
               isEdit={isEdit}
+              requiredErrorFields={requiredErrorFields}
             />
             <SupportBlock
               t={t}
@@ -433,7 +459,7 @@ const ClientForm = ({
           </>
         )}
       </StyledContainer>
-      {resetDialogVisible && <ResetDialog />}
+      {resetDialogVisible ? <ResetDialog /> : null}
     </>
   );
 };
@@ -446,31 +472,32 @@ export default inject(
 
       fetchScopes,
 
-      saveClient,
-      updateClient,
-
       setResetDialogVisible,
       resetDialogVisible,
 
       setClientSecret,
       clientSecret,
+
+      jwtToken,
+      setJwtToken,
     } = oauthStore;
 
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, maxImageUploadSize } = settingsStore;
 
     const props: ClientFormProps = {
       scopeList,
 
       fetchScopes,
 
-      saveClient,
-      updateClient,
-
       setResetDialogVisible,
       currentDeviceType,
       resetDialogVisible,
       setClientSecretProps: setClientSecret,
       clientSecretProps: clientSecret,
+      maxImageUploadSize: maxImageUploadSize ?? undefined,
+
+      jwtToken,
+      setJwtToken,
     };
 
     if (id) {

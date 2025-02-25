@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,24 @@ import { Text } from "@docspace/shared/components/text";
 const StyledText = styled(Text)`
   display: inline-block;
   margin-inline-end: 12px;
+`;
+
+const StyledIndexCell = styled(Text)`
+  display: inline-block;
+  margin-inline: 0;
+  padding-inline-start: 16px;
+
+  overflow: hidden;
+  direction: rtl;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" &&
+    css`
+      padding-inline-start: 0;
+      margin-inline-end: 16px;
+    `}
 `;
 
 const StyledTypeCell = styled(StyledText)`
@@ -70,4 +88,4 @@ const StyledAuthorCell = styled.div`
   }
 `;
 
-export { StyledText, StyledAuthorCell, StyledTypeCell };
+export { StyledText, StyledAuthorCell, StyledTypeCell, StyledIndexCell };

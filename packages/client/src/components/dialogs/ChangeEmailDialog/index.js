@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -34,11 +35,17 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { withTranslation } from "react-i18next";
-import ModalDialogContainer from "../ModalDialogContainer";
 import { sendInstructionsToChangeEmail } from "@docspace/shared/api/people";
 
 import { ErrorKeys } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
+
+const StyledBodyContent = styled.div`
+  .text-body {
+    margin-bottom: 16px;
+  }
+`;
+
 class ChangeEmailDialogComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -79,7 +86,7 @@ class ChangeEmailDialogComponent extends React.Component {
       updateProfileInUsers,
       fromList,
       profile,
-      getUsersList,
+      onClose,
     } = this.props;
     const { id } = user;
     const newProfile = user;
@@ -96,9 +103,7 @@ class ChangeEmailDialogComponent extends React.Component {
         })
         .catch((error) => toastr.error(error))
         .finally(() => {
-          this.setState({ isRequestRunning: false }, () =>
-            this.props.onClose(),
-          );
+          this.setState({ isRequestRunning: false }, () => onClose());
         });
     });
   };
@@ -174,11 +179,11 @@ class ChangeEmailDialogComponent extends React.Component {
 
   render() {
     console.log("ChangeEmailDialog render");
-    const { t, tReady, visible, onClose, isTabletView } = this.props;
+    const { t, tReady, visible, onClose } = this.props;
     const { isRequestRunning, email, errorMessage, hasError } = this.state;
 
     return (
-      <ModalDialogContainer
+      <ModalDialog
         isLoading={!tReady}
         visible={visible}
         onClose={this.onClose}
@@ -186,20 +191,20 @@ class ChangeEmailDialogComponent extends React.Component {
       >
         <ModalDialog.Header>{t("EmailChangeTitle")}</ModalDialog.Header>
         <ModalDialog.Body className="email-dialog-body">
-          <>
+          <StyledBodyContent>
             <Text className="text-body">{t("EmailActivationDescription")}</Text>
             <FieldContainer
               isVertical
               style={{ margin: "0" }}
-              //labelText={t("EnterEmail")}
+              // labelText={t("EnterEmail")}
               errorMessage={errorMessage}
               hasError={hasError}
               labelVisible={false}
             >
               <EmailInput
                 id="new-email"
-                scale={true}
-                isAutoFocussed={true}
+                scale
+                isAutoFocussed
                 value={email}
                 onChange={this.onChangeEmailInput}
                 onValidateInput={this.onValidateEmailInput}
@@ -208,7 +213,7 @@ class ChangeEmailDialogComponent extends React.Component {
                 placeholder={t("EnterEmail")}
               />
             </FieldContainer>
-          </>
+          </StyledBodyContent>
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button
@@ -217,7 +222,7 @@ class ChangeEmailDialogComponent extends React.Component {
             label={t("Common:SendButton")}
             size="normal"
             scale
-            primary={true}
+            primary
             onClick={this.onValidateEmail}
             isLoading={isRequestRunning}
           />
@@ -231,7 +236,7 @@ class ChangeEmailDialogComponent extends React.Component {
             isDisabled={isRequestRunning}
           />
         </ModalDialog.Footer>
-      </ModalDialogContainer>
+      </ModalDialog>
     );
   }
 }

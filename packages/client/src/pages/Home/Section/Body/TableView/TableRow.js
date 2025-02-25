@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,17 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { withTranslation } from "react-i18next";
+import { classNames } from "@docspace/shared/utils";
+import { FolderType } from "@docspace/shared/enums";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withFileActions from "../../../../../HOCs/withFileActions";
 import ItemIcon from "../../../../../components/ItemIcon";
-import { withTranslation } from "react-i18next";
-import { classNames } from "@docspace/shared/utils";
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
 import RecentRowDataComponent from "./sub-components/RecentRowData";
+import IndexRowDataComponent from "./sub-components/IndexRowData";
+import TemplatesRowData from "./sub-components/TemplatesRowData";
 import RowDataComponent from "./sub-components/RowData";
 import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
 
@@ -53,7 +57,6 @@ const FilesTableRow = (props) => {
     onMouseDown,
     isActive,
     onHideContextMenu,
-    onFilesClick,
     onDoubleClick,
     inProgress,
     index,
@@ -64,7 +67,10 @@ const FilesTableRow = (props) => {
     showHotkeyBorder,
     id,
     isRooms,
+    isTemplates,
     isTrashFolder,
+    isIndexEditingMode,
+    isIndexing,
     isHighlight,
     hideColumns,
     onDragOver,
@@ -72,8 +78,19 @@ const FilesTableRow = (props) => {
     badgeUrl,
     isRecentTab,
     canDrag,
+    onEditIndex,
+    isIndexUpdated,
+    displayFileExtension,
+    isBlockingOperation,
+
+    isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
   } = props;
+
   const { acceptBackground, background } = theme.dragAndDrop;
+
+  const rowRef = React.useRef();
 
   const element = (
     <ItemIcon
@@ -82,10 +99,17 @@ const FilesTableRow = (props) => {
       fileExst={item.fileExst}
       isRoom={item.isRoom}
       title={item.title}
+      showDefault={
+        !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
+      }
       logo={item.logo}
       color={item.logo?.color}
       isArchive={item.isArchive}
+      isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
+      className={classNames({
+        "icon-with-index-column": isIndexing,
+      })}
     />
   );
 
@@ -99,12 +123,16 @@ const FilesTableRow = (props) => {
   const dragStyles = {
     style: {
       background:
-        dragging && isDragging
+        dragging && isDragging && !isIndexEditingMode
           ? isDragActive
             ? acceptBackground
             : background
           : "none",
     },
+  };
+
+  const onChangeIndex = (action) => {
+    return onEditIndex(action, item, t);
   };
 
   const onDragOverEvent = (dragActive, e) => {
@@ -121,24 +149,52 @@ const FilesTableRow = (props) => {
     setIsDragActive(false);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (index === 0) {
       if (checkedProps || isActive) {
         setFirsElemChecked(true);
       } else {
         setFirsElemChecked(false);
       }
-      if (showHotkeyBorder) {
+      if (showHotkeyBorder && !isTutorialEnabled) {
         setHeaderBorder(true);
       } else {
         setHeaderBorder(false);
       }
     }
-  }, [checkedProps, isActive, showHotkeyBorder]);
+  }, [checkedProps, isActive, showHotkeyBorder, isTutorialEnabled]);
+
+  useEffect(() => {
+    if (!rowRef?.current) return;
+
+    if (item?.isPDF) {
+      setRefMap(GuidanceRefKey.Pdf, rowRef, "firstChildOffset");
+    }
+    if (item?.type === FolderType.Done) {
+      setRefMap(GuidanceRefKey.Ready, rowRef, "firstChildOffset");
+    }
+
+    return () => {
+      deleteRefMap(GuidanceRefKey.Pdf);
+      deleteRefMap(GuidanceRefKey.Ready);
+    };
+  }, [deleteRefMap, setRefMap]);
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
-    : item.id ?? "";
+    : (item.id ?? "");
+
+  const contextOptionProps = isIndexEditingMode
+    ? {}
+    : {
+        contextOptions: item.contextOptions,
+        getContextModel,
+      };
+
+  const changeIndex = (e, action) => {
+    e.stopPropagation();
+    onChangeIndex(action);
+  };
 
   return (
     <StyledDragAndDrop
@@ -146,34 +202,38 @@ const FilesTableRow = (props) => {
       data-title={item.title}
       value={value}
       className={classNames("files-item", className, idWithFileExst, {
-        ["table-hotkey-border"]: showHotkeyBorder,
-        ["table-row-selected"]: !showHotkeyBorder && (checkedProps || isActive),
+        "table-hotkey-border": showHotkeyBorder,
+        "table-row-selected": !showHotkeyBorder && (checkedProps || isActive),
       })}
       onDrop={onDrop}
       onMouseDown={onMouseDown}
-      dragging={dragging && isDragging}
+      dragging={dragging ? isDragging : null}
       onDragOver={onDragOverEvent}
       onDragLeave={onDragLeaveEvent}
     >
       <StyledTableRow
+        key={item.id}
         className="table-row"
+        forwardedRef={rowRef}
         {...dragStyles}
         isDragging={dragging}
-        dragging={dragging && isDragging}
+        dragging={dragging ? isDragging : null}
         selectionProp={selectionProp}
-        key={item.id}
         fileContextClick={fileContextClick}
-        onClick={onMouseClick}
+        onClick={isIndexEditingMode ? () => {} : onMouseClick}
         isActive={isActive}
+        isIndexEditingMode={isIndexEditingMode}
+        isBlockingOperation={isBlockingOperation}
         inProgress={inProgress}
         isFolder={item.isFolder}
         onHideContextMenu={onHideContextMenu}
         isThirdPartyFolder={item.isThirdPartyFolder}
-        onDoubleClick={onDoubleClick}
-        checked={checkedProps}
-        contextOptions={item.contextOptions}
-        getContextModel={getContextModel}
-        showHotkeyBorder={showHotkeyBorder}
+        onDoubleClick={isIndexEditingMode ? () => {} : onDoubleClick}
+        checked={checkedProps || isIndexUpdated}
+        isIndexing={isIndexing}
+        isIndexUpdated={isIndexUpdated}
+        showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}
+        displayFileExtension={displayFileExtension}
         title={
           item.isFolder
             ? t("Translations:TitleShowFolderActions")
@@ -184,8 +244,16 @@ const FilesTableRow = (props) => {
         hideColumns={hideColumns}
         badgeUrl={badgeUrl}
         canDrag={canDrag}
+        {...contextOptionProps}
       >
-        {isRooms ? (
+        {isTemplates ? (
+          <TemplatesRowData
+            t={t}
+            element={element}
+            dragStyles={dragStyles}
+            {...props}
+          />
+        ) : isRooms ? (
           <RoomsRowDataComponent
             element={element}
             dragStyles={dragStyles}
@@ -204,11 +272,22 @@ const FilesTableRow = (props) => {
             selectionProp={selectionProp}
             {...props}
           />
+        ) : isIndexing ? (
+          <IndexRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            selectionProp={selectionProp}
+            isIndexEditingMode={isIndexEditingMode}
+            changeIndex={changeIndex}
+            {...props}
+          />
         ) : (
           <RowDataComponent
             element={element}
             dragStyles={dragStyles}
             selectionProp={selectionProp}
+            isIndexEditingMode={isIndexEditingMode}
+            changeIndex={changeIndex}
             {...props}
           />
         )}

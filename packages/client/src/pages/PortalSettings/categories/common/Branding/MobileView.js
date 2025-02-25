@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,10 +35,12 @@ const StyledWrapper = styled.div`
   flex-direction: column;
 `;
 
-const MobileView = ({ isSettingPaid, showSettings }) => {
+const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
   const { t } = useTranslation(["Settings"]);
   const navigate = useNavigate();
-  const baseUrl = isManagement() ? "" : "/portal-settings/customization";
+  const baseUrl = isManagement()
+    ? "/management/settings"
+    : "/portal-settings/customization";
 
   const onClickLink = (e) => {
     e.preventDefault();
@@ -48,25 +50,35 @@ const MobileView = ({ isSettingPaid, showSettings }) => {
   return (
     <StyledWrapper>
       <MobileCategoryWrapper
+        title={t("BrandName")}
+        subtitle={t("BrandNameSubtitleMobile")}
+        url={`${baseUrl}/branding/brand-name`}
+        withPaidBadge={!isSettingPaid}
+        badgeLabel={t("Common:Paid")}
+        onClickLink={onClickLink}
+      />
+      <MobileCategoryWrapper
         title={t("WhiteLabel")}
-        subtitle={t("BrandingSubtitle")}
+        subtitle={t("BrandingSubtitleMobile")}
         url={`${baseUrl}/branding/white-label`}
         withPaidBadge={!isSettingPaid}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
       />
-      {showSettings && (
+      {showSettings ? (
         <>
-          <MobileCategoryWrapper
-            title={t("CompanyInfoSettings")}
-            subtitle={t("BrandingSectionDescription", {
-              productName: t("Common:ProductName"),
-            })}
-            url={`${baseUrl}/branding/company-info-settings`}
-            withPaidBadge={!isSettingPaid}
-            badgeLabel={t("Common:Paid")}
-            onClickLink={onClickLink}
-          />
+          {displayAbout ? (
+            <MobileCategoryWrapper
+              title={t("CompanyInfoSettings")}
+              subtitle={t("BrandingSectionDescription", {
+                productName: t("Common:ProductName"),
+              })}
+              url={`${baseUrl}/branding/company-info-settings`}
+              withPaidBadge={!isSettingPaid}
+              badgeLabel={t("Common:Paid")}
+              onClickLink={onClickLink}
+            />
+          ) : null}
           <MobileCategoryWrapper
             title={t("AdditionalResources")}
             subtitle={t("AdditionalResourcesSubtitle")}
@@ -76,7 +88,7 @@ const MobileView = ({ isSettingPaid, showSettings }) => {
             onClickLink={onClickLink}
           />
         </>
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,17 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Box } from "@docspace/shared/components/box";
-import { Base } from "@docspace/shared/themes";
 
-const StyledCertificateDialogBody = styled(Box)`
+import { injectDefaultTheme } from "@docspace/shared/utils";
+
+const StyledCertificateDialogBody = styled.div.attrs(injectDefaultTheme)`
+  box-sizing: border-box;
+
   max-width: 520px;
 
   .ldap-settings-crt-confirmation {
+    box-sizing: border-box;
     padding-bottom: 16px;
   }
 
   .ldap-settings-crt-details {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -60,9 +64,5 @@ const StyledCertificateDialogBody = styled(Box)`
       props.theme.client.settings.integration.ldap.errorColor};
   }
 `;
-
-StyledCertificateDialogBody.defaultProps = {
-  theme: Base,
-};
 
 export default StyledCertificateDialogBody;

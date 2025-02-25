@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,9 +33,9 @@ export const SelectTextInput = ({ t, config, setConfig }) => {
   const [value, setValue] = useState(config.acceptButtonLabel);
 
   const debouncedSetConfig = useCallback(
-    debounce((value) => {
-      setConfig((config) => {
-        return { ...config, acceptButtonLabel: value };
+    debounce((newValue) => {
+      setConfig((oldConfig) => {
+        return { ...oldConfig, acceptButtonLabel: newValue };
       });
     }, 500),
     [setConfig],

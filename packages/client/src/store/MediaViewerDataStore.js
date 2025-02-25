@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,6 +34,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
@@ -47,22 +48,35 @@ class MediaViewerDataStore {
 
   publicRoomStore;
 
+  filesActionsStore;
+
+  autoPlay = true;
+
   id = null;
+
   visible = false;
+
   previewFile = null;
+
   currentItem = null;
+
   prevPostionIndex = 0;
 
-  constructor(filesStore, publicRoomStore) {
+  constructor(filesStore, publicRoomStore, filesActionsStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
-
     this.publicRoomStore = publicRoomStore;
+    this.filesActionsStore = filesActionsStore;
   }
+
+  setAutoPlay = (value) => {
+    this.autoPlay = value;
+  };
 
   setMediaViewerData = (mediaData) => {
     this.id = mediaData.id;
     this.visible = mediaData.visible;
+    this.setAutoPlay(true);
 
     if (!mediaData.visible) this.setCurrentItem(null);
   };
@@ -109,6 +123,7 @@ class MediaViewerDataStore {
     )
       return;
 
+    this.setAutoPlay(false);
     this.previewFile = file;
     this.id = file.id;
     this.visible = visible;
@@ -133,7 +148,7 @@ class MediaViewerDataStore {
     return combineUrl(MEDIA_VIEW_URL, id);
   };
 
-  getFirstUrl = () => {
+  getFirstUrl = async () => {
     if (this.publicRoomStore.isPublicRoom) {
       const key = this.publicRoomStore.publicRoomKey;
       const filterObj = FilesFilter.getFilter(window.location);
@@ -143,7 +158,19 @@ class MediaViewerDataStore {
       return url;
     }
 
+    const { getPublicKey } = this.filesActionsStore;
+    const { bufferSelection } = this.filesStore;
+
     const filter = this.filesStore.filter;
+
+    const shareKey = await getPublicKey({
+      id: bufferSelection.folderId,
+      shared: bufferSelection.shared,
+      rootFolderType: bufferSelection.rootFolderType,
+      type: bufferSelection.type,
+    });
+
+    filter.key = shareKey;
 
     const queryParams = filter.toUrlParams();
 
@@ -156,7 +183,7 @@ class MediaViewerDataStore {
 
   changeUrl = (id) => {
     const url = this.getUrl(id);
-    window.DocSpace.navigate(url, { state: { disableScrollToTop: true } });
+    window.history.pushState("", "", url);
   };
 
   nextMedia = () => {
@@ -167,6 +194,9 @@ class MediaViewerDataStore {
     if (postionIndex === 0) {
       return;
     }
+
+    this.setAutoPlay(false);
+
     const currentFileId = this.playlist[postionIndex].fileId;
 
     const targetFile = files.find((item) => item.id === currentFileId);
@@ -181,11 +211,13 @@ class MediaViewerDataStore {
   prevMedia = () => {
     const { setBufferSelection, files } = this.filesStore;
 
-    let currentPlaylistPos = this.currentPostionIndex - 1;
+    const currentPlaylistPos = this.currentPostionIndex - 1;
 
     if (currentPlaylistPos === -1) {
       return;
     }
+
+    this.setAutoPlay(false);
 
     const currentFileId = this.playlist[currentPlaylistPos].fileId;
 
@@ -230,7 +262,7 @@ class MediaViewerDataStore {
 
     if (this.currentItem) {
       playlist.push({
-        id: id,
+        id,
         fileId: this.currentItem.fileId,
         src: this.currentItem.fileInfo.viewUrl,
         title: this.currentItem.fileInfo.title,
@@ -251,7 +283,7 @@ class MediaViewerDataStore {
 
         if (canOpenPlayer) {
           playlist.push({
-            id: id,
+            id,
             fileId: file.id,
             src: file.viewUrl,
             title: file.title,
@@ -282,7 +314,7 @@ class MediaViewerDataStore {
     } else if (this.previewFile) {
       playlist.push({
         ...this.previewFile,
-        id: id,
+        id,
         fileId: this.previewFile.id,
         src: this.previewFile.viewUrl,
         version: this.previewFile.version,

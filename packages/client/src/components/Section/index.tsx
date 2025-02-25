@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { useLocation } from "react-router-dom";
 
 import Section, { SectionProps } from "@docspace/shared/components/section";
 
@@ -33,7 +34,12 @@ const SectionWrapper = ({
 
   ...rest
 }: SectionProps) => {
-  return <Section {...rest}>{children}</Section>;
+  const location = useLocation();
+  return (
+    <Section {...rest} pathname={location.pathname}>
+      {children}
+    </Section>
+  );
 };
 
 export default inject(
@@ -41,10 +47,12 @@ export default inject(
     settingsStore,
     dialogsStore,
     infoPanelStore,
+    indexingStore,
   }: {
     settingsStore: any;
     dialogsStore: any;
     infoPanelStore: any;
+    indexingStore: any;
   }) => {
     const {
       isDesktopClient: isDesktop,
@@ -59,6 +67,8 @@ export default inject(
     const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
       infoPanelStore;
 
+    const { isIndexEditingMode } = indexingStore;
+
     const { createRoomDialogVisible, invitePanelOptions } = dialogsStore;
 
     const canDisplay = getCanDisplay();
@@ -71,7 +81,7 @@ export default inject(
     return {
       isDesktop,
       currentDeviceType,
-      isInfoPanelVisible: isVisible,
+      isInfoPanelVisible: isVisible && !isIndexEditingMode,
       isMobileHidden,
       setIsInfoPanelVisible: setIsVisible,
       canDisplay,

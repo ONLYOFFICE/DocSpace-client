@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,21 +26,31 @@
 
 import styled, { css } from "styled-components";
 import { TColorScheme, TTheme } from "../../../themes";
-import { Box } from "../../box";
 
 const getDefaultStyles = ({
   $currentColorScheme,
   $isVersion,
+  $isFirst,
 }: {
   $currentColorScheme?: TColorScheme;
   $isVersion?: boolean;
+  $isFirst?: boolean;
   theme: TTheme;
 }) =>
   $currentColorScheme &&
+  $isVersion &&
+  !$isFirst &&
   css`
+    .version-mark-icon {
+      path {
+        fill: ${$currentColorScheme?.main?.accent};
+        stroke: ${$currentColorScheme?.main?.accent};
+      }
+    }
+
     .version_badge-text {
-      color: ${$isVersion && $currentColorScheme.text?.accent};
+      color: ${$currentColorScheme.text?.accent};
     }
   `;
 
-export default styled(Box)(getDefaultStyles);
+export default styled.div(getDefaultStyles);

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,25 +33,25 @@ import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 import { DeviceType } from "@docspace/shared/enums";
 import { Nullable } from "@docspace/shared/types";
-import { getPortalCultures } from "@docspace/shared/api/settings";
 import { TPortalCultures } from "@docspace/shared/api/settings/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 
-const LanguageComboboxWrapper = () => {
+type TLanguageComboboxWrapper = {
+  initialCultures?: TPortalCultures;
+};
+
+const LanguageComboboxWrapper = ({
+  initialCultures,
+}: TLanguageComboboxWrapper) => {
   const { i18n } = useTranslation(["Login", "Common"]);
   const currentCulture = i18n.language;
 
   const [cultures, setCultures] = useState<Nullable<TPortalCultures>>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const cultures = await getPortalCultures();
-      if (cultures) setCultures(cultures);
-    };
-
-    fetchData();
-  }, []);
+    if (initialCultures) setCultures(initialCultures);
+  }, [initialCultures]);
 
   const onLanguageSelect = (culture: { key: string }) => {
     const { key } = culture;

@@ -1,4 +1,5 @@
 {
+  "DocumentConverted": "Документът се преобразува в {{title}}, за да позволи редактирането му",
   "DocumentsFileType": "документи",
   "ErrorConnectionLost": "Връзката е изгубена",
   "FileLocation": "Mестоположението на файла",

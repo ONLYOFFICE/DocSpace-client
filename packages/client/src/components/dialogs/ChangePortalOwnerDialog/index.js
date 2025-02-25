@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CrossReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
@@ -42,6 +42,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import {
   StyledOwnerInfo,
   StyledPeopleSelectorInfo,
@@ -51,8 +52,6 @@ import {
   StyledSelectedOwnerContainer,
   StyledSelectedOwner,
 } from "./StyledDialog";
-
-import { EmployeeActivationStatus } from "@docspace/shared/enums";
 
 const ChangePortalOwnerDialog = ({
   t,
@@ -135,25 +134,25 @@ const ChangePortalOwnerDialog = ({
 
   return (
     <ModalDialog
-      displayType={"aside"}
+      displayType="aside"
       visible={visible}
       onClose={onCloseAction}
       withBodyScroll
-      withFooterBorder
       containerVisible={selectorVisible}
     >
-      {selectorVisible && (
+      {selectorVisible ? (
         <ModalDialog.Container>
           <PeopleSelector
             withCancelButton
             cancelButtonLabel=""
             onCancel={onBackClick}
             excludeItems={[id]}
-            submitButtonLabel={t("Common:SelectAction")}
-            onSubmit={onAccept}
+            submitButtonLabel=""
             disableSubmitButton={false}
+            onSubmit={onAccept}
             withHeader
             headerProps={{
+              onCloseClick: onCloseAction,
               onBackClick,
               withoutBackButton: false,
               headerLabel: "",
@@ -163,16 +162,11 @@ const ChangePortalOwnerDialog = ({
             filter={filter}
           />
         </ModalDialog.Container>
-      )}
+      ) : null}
       <ModalDialog.Header>{t("Translations:OwnerChange")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledOwnerInfo>
-          <Avatar
-            className="avatar"
-            role={"owner"}
-            source={avatar}
-            size={"big"}
-          />
+          <Avatar className="avatar" role="owner" source={avatar} size="big" />
           <div className="info">
             <Text className="display-name" noSelect title={displayName}>
               {displayName}
@@ -204,7 +198,7 @@ const ChangePortalOwnerDialog = ({
             </StyledSelectedOwner>
 
             <Link
-              type={"action"}
+              type="action"
               isHovered
               fontWeight={600}
               onClick={onTogglePeopleSelector}
@@ -278,11 +272,7 @@ export default inject(({ setup, userStore, settingsStore }) => {
 
   return { displayName, avatar, id, sendOwnerChange, currentColorScheme };
 })(
-  withTranslation([
-    "ChangePortalOwner",
-    "Common",
-    "Translations",
-    "ProfileAction",
-    "Settings",
-  ])(observer(ChangePortalOwnerDialog)),
+  withTranslation(["ChangePortalOwner", "Common", "Translations", "Settings"])(
+    observer(ChangePortalOwnerDialog),
+  ),
 );

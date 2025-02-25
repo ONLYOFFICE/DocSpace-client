@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
-import ModalDialogContainer from "../ModalDialogContainer";
 
 const CancelUploadDialog = ({
   isFifthStep,
@@ -56,11 +55,7 @@ const CancelUploadDialog = ({
   };
 
   return (
-    <ModalDialogContainer
-      visible={visible}
-      onClose={onClose}
-      displayType="modal"
-    >
+    <ModalDialog visible={visible} onClose={onClose} displayType="modal">
       <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
       <ModalDialog.Body>{modalBodyText}</ModalDialog.Body>
       <ModalDialog.Footer>
@@ -68,7 +63,7 @@ const CancelUploadDialog = ({
           label={t("Common:Yes")}
           size="normal"
           scale
-          primary={true}
+          primary
           onClick={onCancelProcess}
           isLoading={loading}
         />
@@ -80,7 +75,7 @@ const CancelUploadDialog = ({
           isDisabled={loading}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,15 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TColorScheme } from "../../themes";
+import React from "react";
 
-export interface ArticleItemProps {
-  /** Accepts className */
-  className?: string;
-  /** Accepts id */
+export type TArticleLinkDataState =
+  | {
+      title: string;
+      isRoot: boolean;
+      isPublicRoomType: boolean;
+      rootFolderType: number;
+      canCreate: boolean;
+    }
+  | {};
+
+export type TArticleLinkData = {
+  path: string;
+  state: TArticleLinkDataState;
+};
+
+type PickedDivProps = Pick<
+  React.ComponentProps<"div">,
+  "id" | "className" | "style"
+>;
+
+export interface ArticleItemType {
+  isRoom?: boolean;
+  rootFolderType?: string;
   id?: string;
-  /** Accepts css style */
-  style?: React.CSSProperties;
+  roomType?: string;
+  title?: string;
+  shared?: boolean;
+  external?: boolean;
+  security?: {
+    canCreate: boolean;
+  };
+}
+
+export type ArticleItemProps = PickedDivProps & {
   /** Catalog item icon */
   icon: string;
   /** Catalog item text */
@@ -42,7 +69,7 @@ export interface ArticleItemProps {
   /** Invokes a function upon clicking on a catalog item */
   onClick?: (e: React.MouseEvent, id?: string) => void;
   /** Invokes a function upon dragging and dropping a catalog item */
-  onDrop?: (id?: string, text?: string) => void;
+  onDrop?: (id?: string, text?: string, item?: ArticleItemType) => void;
   /** Tells when the catalog item should display initial on icon, text should be hidden */
   showInitial?: boolean;
   /** Sets the catalog item as end of block */
@@ -67,7 +94,14 @@ export interface ArticleItemProps {
   isFirstHeader?: boolean;
   /** Accepts folder id */
   folderId?: string;
+  /** Title for the badge tooltip */
   badgeTitle?: string;
-  $currentColorScheme?: TColorScheme;
+  /** Custom badge component */
+  badgeComponent?: React.ReactNode;
+  /** Title for the item tooltip */
   title?: string;
-}
+  /** Link data for routing */
+  linkData: TArticleLinkData;
+  /** Item data */
+  item?: ArticleItemType;
+};

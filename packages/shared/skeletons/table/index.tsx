@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,13 +31,16 @@ import { RectangleSkeletonProps } from "../rectangle";
 const TableSkeleton = ({
   count = 25,
   ...props
-}: { count?: number; style: React.CSSProperties } & RectangleSkeletonProps) => {
+}: {
+  count?: number;
+  style?: React.CSSProperties;
+} & RectangleSkeletonProps) => {
   const items = [];
 
   for (let i = 0; i < count; i += 1) {
     items.push(<TableRow key={`row_loader_${i}`} {...props} />);
   }
-  return <div>{items}</div>;
+  return <div data-testid="table-skeleton">{items}</div>;
 };
 
 export { TableSkeleton };

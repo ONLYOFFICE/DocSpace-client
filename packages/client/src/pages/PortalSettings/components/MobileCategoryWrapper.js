@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,17 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+
 import React from "react";
 import styled, { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
-import { Base } from "@docspace/shared/themes";
 import commonIconsStyles from "@docspace/shared/utils/common-icons-style";
 import { globalColors } from "@docspace/shared/themes";
-
-import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import { isManagement } from "@docspace/shared/utils/common";
 
 const StyledArrowRightIcon = styled(ArrowRightIcon)`
   ${commonIconsStyles}
@@ -108,7 +108,7 @@ const MobileCategoryWrapper = (props) => {
         >
           {title}
         </Link>
-        {withPaidBadge && (
+        {withPaidBadge && !isManagement() ? (
           <Badge
             backgroundColor={
               theme.isBase
@@ -116,20 +116,16 @@ const MobileCategoryWrapper = (props) => {
                 : globalColors.favoriteStatusDark
             }
             label={badgeLabel}
-            isPaidBadge={true}
+            isPaidBadge
             className="paid-badge"
             fontWeight="700"
           />
-        )}
+        ) : null}
         <StyledArrowRightIcon className="settings_unavailable" size="small" />
       </div>
       <Text className="category-item-description">{subtitle}</Text>
     </StyledMobileCategoryWrapper>
   );
-};
-
-MobileCategoryWrapper.defaultProps = {
-  theme: Base,
 };
 
 export default MobileCategoryWrapper;

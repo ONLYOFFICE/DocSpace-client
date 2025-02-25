@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,23 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
-import { withTranslation, Trans } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-import { LearnMoreWrapper } from "../StyledSecurity";
 import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
-import TfaLoader from "../sub-components/loaders/tfa-loader";
 import { DeviceType } from "@docspace/shared/enums";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+import TfaLoader from "../sub-components/loaders/tfa-loader";
+import { LearnMoreWrapper } from "../StyledSecurity";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -53,16 +54,16 @@ const MainContainer = styled.div`
 const TwoFactorAuth = (props) => {
   const {
     t,
-    initSettings,
     isInit,
     setIsInit,
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
-    smsAvailable,
     appAvailable,
     tfaSettings,
+    getTfaType,
   } = props;
+
   const [type, setType] = useState("none");
   const [showReminder, setShowReminder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -70,6 +71,12 @@ const TwoFactorAuth = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("tfa") &&
+      navigate("/portal-settings/security/access-portal");
+  };
 
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage("defaultTfaSettings");
@@ -93,14 +100,14 @@ const TwoFactorAuth = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings("tfa").then(() => setIsLoading(true));
+    if (!isInit) getTfaType().then(() => setIsLoading(true));
     else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isInit || !tfaSettings) return;
+    if (!isLoading || !tfaSettings) return;
     const currentSettings = getFromSessionStorage("currentTfaSettings");
     const defaultSettings = getFromSessionStorage("defaultTfaSettings");
 
@@ -124,12 +131,6 @@ const TwoFactorAuth = (props) => {
     }
   }, [type]);
 
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("tfa") &&
-      navigate("/portal-settings/security/access-portal");
-  };
-
   const onSelectTfaType = (e) => {
     if (type !== e.target.value) {
       setType(e.target.value);
@@ -137,7 +138,7 @@ const TwoFactorAuth = (props) => {
   };
 
   const onSaveClick = async () => {
-    const { t, setTfaSettings } = props;
+    const { setTfaSettings } = props;
     setIsSaving(true);
 
     try {
@@ -150,7 +151,7 @@ const TwoFactorAuth = (props) => {
 
       if (res) {
         setIsInit(false);
-        navigate(res.replace(window.location.origin, ""));
+        window.location.replace(res);
       }
     } catch (error) {
       toastr.error(error);
@@ -166,7 +167,7 @@ const TwoFactorAuth = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
     return <TfaLoader />;
   }
 
@@ -202,13 +203,13 @@ const TwoFactorAuth = (props) => {
             label: t("Common:Disabled"),
             value: "none",
           },
-          //TODO: hide while 2fa by sms is not working
-          /*{
+          // TODO: hide while 2fa by sms is not working
+          /* {
             id: "by-sms",
             label: t("BySms"),
             value: "sms",
             disabled: !smsAvailable,
-          },*/
+          }, */
           {
             id: "by-app",
             label: t("ByApp"),
@@ -228,7 +229,7 @@ const TwoFactorAuth = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         isSaving={isSaving}
         additionalClassSaveButton="two-factor-auth-save"
@@ -245,9 +246,10 @@ export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
     tfaSettings,
     smsAvailable,
     appAvailable,
+    getTfaType,
   } = tfaStore;
 
-  const { isInit, initSettings, setIsInit } = setup;
+  const { isInit, setIsInit } = setup;
   const { currentColorScheme, tfaSettingsUrl, currentDeviceType } =
     settingsStore;
 
@@ -258,10 +260,10 @@ export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
     smsAvailable,
     appAvailable,
     isInit,
-    initSettings,
     setIsInit,
     currentColorScheme,
     tfaSettingsUrl,
     currentDeviceType,
+    getTfaType,
   };
 })(withTranslation(["Settings", "Common"])(observer(TwoFactorAuth)));

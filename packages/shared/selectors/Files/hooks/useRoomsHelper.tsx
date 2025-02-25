@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -66,6 +66,7 @@ const useRoomsHelper = ({
   getRootData,
   setSelectedItemType,
   subscribe,
+  setSelectedItemSecurity,
 }: UseRoomsHelperProps) => {
   const { t } = useTranslation(["Common"]);
   const {
@@ -131,7 +132,7 @@ const useRoomsHelper = ({
       filter.pageCount = PAGE_COUNT;
 
       filter.filterValue = filterValue;
-      filter.type = createDefineRoomType;
+      filter.type = (createDefineRoomType as unknown as string) ?? undefined;
 
       const rooms = await getRooms(filter);
 
@@ -153,9 +154,11 @@ const useRoomsHelper = ({
 
         setIsBreadCrumbsLoading(false);
       }
-      const itemList: TSelectorItem[] = convertRoomsToItems(folders);
+      const itemList: TSelectorItem[] = convertRoomsToItems(folders, t);
 
       setHasNextPage(count === PAGE_COUNT);
+
+      setSelectedItemSecurity(current.security);
 
       if (firstLoadRef.current || startIndex === 0) {
         const { security } = current;
@@ -233,6 +236,7 @@ const useRoomsHelper = ({
       setSelectedItemType,
       getRootData,
       subscribe,
+      setSelectedItemSecurity,
     ],
   );
   return { getRoomList };

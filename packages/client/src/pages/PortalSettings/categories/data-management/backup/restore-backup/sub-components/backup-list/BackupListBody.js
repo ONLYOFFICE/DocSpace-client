@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,8 +32,16 @@ import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollb
 import { Text } from "@docspace/shared/components/text";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import TrashIcon from "PUBLIC_DIR/images/delete.react.svg";
+import FileArchive32SvgUrl from "PUBLIC_DIR/images/icons/32/archive.svg?url";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import { StyledBackupList } from "../../../StyledBackup";
-import FileArchive24SvgUrl from "PUBLIC_DIR/images/icons/24/file_archive.svg?url";
+
+const VirtualScroll = (props) => (
+  <CustomScrollbarsVirtualList
+    {...props}
+    paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+  />
+);
 
 const BackupListBody = ({
   filesList,
@@ -64,7 +72,7 @@ const BackupListBody = ({
           <StyledBackupList isChecked={isChecked}>
             <div className="backup-list_item">
               <ReactSVG
-                src={FileArchive24SvgUrl}
+                src={FileArchive32SvgUrl}
                 className="backup-list_icon"
               />
 
@@ -101,7 +109,7 @@ const BackupListBody = ({
           itemSize={48}
           itemCount={filesList.length}
           itemData={filesList}
-          outerElementType={CustomScrollbarsVirtualList}
+          outerElementType={VirtualScroll}
         >
           {Item}
         </List>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,20 +26,12 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
-import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import { inject, observer } from "mobx-react";
 
-import { mobile, tablet } from "@docspace/shared/utils/device";
-import { isMobile } from "react-device-detect";
-
-import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-
-import CSP from "./sub-components/csp";
-import PresetTile from "./sub-components/PresetTile";
 
 import PortalImg from "PUBLIC_DIR/images/sdk-presets_portal.react.svg?url";
 import PublicRoomImg from "PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url";
@@ -57,68 +49,19 @@ import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?u
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
 import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { Integration } from "./sub-components/Integration";
+import PresetTile from "./sub-components/PresetTile";
+import CSP from "./sub-components/csp";
 
-const SDKContainer = styled(Box)`
-  @media ${tablet} {
-    width: 100%;
-  }
-
-  ${isMobile &&
-  css`
-    width: 100%;
-  `}
-
-  .presets-flex {
-    display: flex;
-    flex-direction: column;
-  }
-`;
-
-const CategoryHeader = styled.div`
-  margin-top: 40px;
-  margin-bottom: 16px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22px;
-
-  @media ${tablet} {
-    margin-top: 24px;
-  }
-
-  ${isMobile &&
-  css`
-    margin-top: 24px;
-  `}
-`;
-
-const CategoryDescription = styled(Box)`
-  margin-top: 2px;
-  max-width: 700px;
-  .sdk-description {
-    display: inline;
-    line-height: 20px;
-    color: ${(props) => props.theme.client.settings.common.descriptionColor};
-  }
-`;
-
-const PresetsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, minmax(min(200px, 100%), 1fr));
-  gap: 16px;
-
-  max-width: fit-content;
-
-  margin-top: 16px;
-
-  @media ${mobile} {
-    display: flex;
-    flex-direction: column;
-  }
-`;
+import {
+  SDKContainer,
+  CategoryHeader,
+  CategoryDescription,
+  PresetsContainer,
+} from "./sub-components/StyledPortalIntegration";
 
 const PortalIntegration = (props) => {
-  const { t, currentColorScheme, sdkLink, theme } = props;
+  const { t, currentColorScheme, sdkLink, theme, tReady } = props;
 
   const isSmall = useRef(
     (() => {
@@ -129,8 +72,6 @@ const PortalIntegration = (props) => {
   );
 
   const [isFlex, setIsFlex] = useState(isSmall.current);
-
-  setDocumentTitle(t("JavascriptSdk"));
 
   const navigate = useNavigate();
 
@@ -153,7 +94,7 @@ const PortalIntegration = (props) => {
     },
     {
       title: t("Common:PublicRoom"),
-      description: t("PublicRoomDescription"),
+      description: t("JavascriptSdk:PublicRoomPresetInfo"),
       image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,
       handleOnClick: navigateToPublicRoom,
     },
@@ -191,6 +132,10 @@ const PortalIntegration = (props) => {
     },
   ];
 
+  useEffect(() => {
+    if (tReady) setDocumentTitle(t("JavascriptSdk"));
+  }, [tReady]);
+
   const onResize = (entries) => {
     const belowThreshold = entries[0].contentRect.width <= 600;
     if (belowThreshold !== isSmall.current) {
@@ -200,17 +145,17 @@ const PortalIntegration = (props) => {
   };
 
   useEffect(() => {
-    const observer = new ResizeObserver(onResize);
+    const rObserver = new ResizeObserver(onResize);
     const content = document.querySelector(".section-wrapper-content");
-    observer.observe(content);
+    rObserver.observe(content);
     return () => {
-      observer.unobserve(content);
+      rObserver.unobserve(content);
     };
   }, []);
 
   return (
     <SDKContainer>
-      <CategoryDescription>
+      <CategoryDescription theme={theme}>
         <Text className="sdk-description">
           {t("SDKDescription", { productName: t("Common:ProductName") })}
         </Text>
@@ -223,7 +168,7 @@ const PortalIntegration = (props) => {
           {" "}
           {t("APILink")}.
         </Link>
-        <CSP t={t} />
+        <CSP t={t} theme={theme} />
       </CategoryDescription>
       <CategoryHeader>
         {t("SelectModeEmbedding", { productName: t("Common:ProductName") })}
@@ -243,6 +188,11 @@ const PortalIntegration = (props) => {
           />
         ))}
       </PresetsContainer>
+      <Integration
+        t={t}
+        theme={theme}
+        currentColorScheme={currentColorScheme}
+      />
     </SDKContainer>
   );
 };

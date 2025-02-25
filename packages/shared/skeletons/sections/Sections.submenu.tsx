@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import React from "react";
 
 import { RectangleSkeleton } from "../rectangle";
-import { StyledSubmenu } from "./Sections.styled";
+import styles from "./Sections.module.scss";
 import type { SectionSubmenuSkeletonProps } from "./Sections.types";
 
 export const SectionSubmenuSkeleton = ({
@@ -37,9 +37,14 @@ export const SectionSubmenuSkeleton = ({
   className,
 }: SectionSubmenuSkeletonProps) => {
   return (
-    <StyledSubmenu id={id} className={className} style={style}>
+    <div
+      id={id}
+      className={`${styles.submenu} ${className || ""}`}
+      style={style}
+      data-testid="section-submenu-skeleton"
+    >
       <RectangleSkeleton title={title} width="80" height="32" />
       <RectangleSkeleton title={title} width="115" height="32" />
-    </StyledSubmenu>
+    </div>
   );
 };

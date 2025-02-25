@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,25 +26,26 @@
 
 import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-import { Box } from "@docspace/shared/components/box";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-//import { ComboBox } from "@docspace/shared/components/combobox";
+// import { ComboBox } from "@docspace/shared/components/combobox";
 // import { EmployeeType } from "@docspace/shared/enums";
 
 import AccessSelector from "SRC_DIR/components/AccessSelector";
 import { isMobile } from "@docspace/shared/utils";
+import { Link } from "@docspace/shared/components/link";
 import LdapFieldComponent from "./LdapFieldComponent";
 
-const FIRST_NAME = "firstName",
-  SECOND_NAME = "secondName",
-  MAIL = "mail",
-  AVATAR = "avatarAttribute",
-  QUOTA = "userQuotaLimit";
+const FIRST_NAME = "firstName";
+const SECOND_NAME = "secondName";
+const MAIL = "mail";
+const AVATAR = "avatarAttribute";
+const QUOTA = "userQuotaLimit";
 
 const FIELD_STYLE = { marginBottom: "0px" };
 
@@ -68,9 +69,18 @@ const AttributeMapping = (props) => {
 
     isLdapEnabled,
     isUIDisabled,
+
+    isDefaultUsersQuotaSet,
+
+    currentColorScheme,
+
+    isOwner,
+    isAdmin,
   } = props;
 
   const { t } = useTranslation("Ldap");
+
+  const navigate = useNavigate();
 
   const inputsRef = useRef();
 
@@ -93,6 +103,8 @@ const AttributeMapping = (props) => {
       case QUOTA:
         setUserQuotaLimit(value);
         break;
+      default:
+        break;
     }
   };
 
@@ -100,19 +112,23 @@ const AttributeMapping = (props) => {
     setUserType(option.access);
   };
 
+  const goToStarageManagement = () => {
+    navigate("/portal-settings/management/disk-space");
+  };
+
   return (
     <>
       <div className="ldap_attribute-mapping-text">
-        <Text fontWeight={600} fontSize={"14px"}>
+        <Text fontWeight={600} fontSize="14px">
           {t("LdapAttributeMapping")}
         </Text>
         <HelpButton tooltipContent={t("LdapAdvancedSettingsTooltip")} />
       </div>
-      <Box className="ldap_attribute-mapping">
+      <div className="ldap_attribute-mapping">
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.firstName}
           labelText={t("Common:FirstName")}
@@ -132,7 +148,7 @@ const AttributeMapping = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.secondName}
           labelText={t("LdapSecondName")}
@@ -152,7 +168,7 @@ const AttributeMapping = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.mail}
           labelText={t("LdapMail")}
@@ -172,7 +188,7 @@ const AttributeMapping = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           hasError={errors.avatarAttribute}
           labelText={t("LdapAvatar")}
         >
@@ -190,10 +206,12 @@ const AttributeMapping = (props) => {
         <FieldContainer
           style={FIELD_STYLE}
           isVertical
-          labelVisible={true}
+          labelVisible
           hasError={errors.userQuotaLimit}
           labelText={t("LdapQuota")}
-          tooltipContent={t("LdapUserQuotaTooltip")}
+          tooltipContent={t("LdapUserQuotaTooltip", {
+            contactsName: t("Common:Contacts"),
+          })}
           inlineHelpButton
         >
           <TextInput
@@ -202,33 +220,44 @@ const AttributeMapping = (props) => {
             onChange={onChangeValue}
             value={userQuotaLimit}
             scale
-            isDisabled={!isLdapEnabled || isUIDisabled}
+            isDisabled={
+              !isDefaultUsersQuotaSet || !isLdapEnabled || isUIDisabled
+            }
             tabIndex={11}
           />
+          {!isDefaultUsersQuotaSet ? (
+            <Text as="span" fontWeight={400} fontSize="12px" lineHeight="16px">
+              <Trans
+                t={t}
+                i18nKey="LdapQuotaInfo"
+                ns="Ldap"
+                components={[
+                  <Link
+                    key="link"
+                    type="action"
+                    color={currentColorScheme.main.accent}
+                    onClick={goToStarageManagement}
+                  />,
+                ]}
+              />
+            </Text>
+          ) : null}
         </FieldContainer>
-      </Box>
-      <Box marginProp="24px 0 24px 0">
-        <Box
-          displayProp="flex"
-          flexDirection="column"
-          gapProp="8px"
-          marginProp="0 0 12px 0"
-        >
-          <Box displayProp="flex" flexDirection="row" gapProp="4px">
+      </div>
+      <div className="ldap_users-type-box">
+        <div className="ldap_users-type-box-title">
+          <div className="ldap_users-type-title">
             <Text fontWeight={600} fontSize="15px" lineHeight="16px">
               {t("LdapUsersType")}
             </Text>
-            <HelpButton
-              tooltipContent={t("LdapUserTypeTooltip", {
-                productName: t("Common:ProductName"),
-              })}
-            />
-          </Box>
+          </div>
           <Text fontWeight={400} fontSize="12px" lineHeight="16px">
-            {t("LdapUsersTypeInfo")}
+            {t("LdapUserTypeTooltip", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
-        </Box>
-        <Box className="access-selector-wrapper">
+        </div>
+        <div className="access-selector-wrapper">
           <AccessSelector
             className="add-manually-access"
             t={t}
@@ -237,60 +266,78 @@ const AttributeMapping = (props) => {
             defaultAccess={userType}
             onSelectAccess={onChangeUserType}
             containerRef={inputsRef}
-            isOwner
+            isOwner={isOwner}
+            isAdmin={isAdmin}
             isMobileView={isMobile()}
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={12}
             directionX="left"
+            scaledOptions={!isMobile()}
           />
-          <div></div>
-        </Box>
-      </Box>
+          <div />
+        </div>
+      </div>
     </>
   );
 };
 
-export default inject(({ ldapStore }) => {
-  const {
-    setMail,
-    setFirstName,
-    setSecondName,
-    setAvatarAttribute,
-    setUserQuotaLimit,
-    setUserType,
+export default inject(
+  ({ ldapStore, currentQuotaStore, settingsStore, userStore }) => {
+    const {
+      setMail,
+      setFirstName,
+      setSecondName,
+      setAvatarAttribute,
+      setUserQuotaLimit,
+      setUserType,
 
-    requiredSettings,
-    errors,
-    isLdapEnabled,
-    isUIDisabled,
-  } = ldapStore;
+      requiredSettings,
+      errors,
+      isLdapEnabled,
+      isUIDisabled,
+    } = ldapStore;
 
-  const {
-    firstName,
-    secondName,
-    mail,
-    avatarAttribute,
-    userQuotaLimit,
-    userType,
-  } = requiredSettings;
+    const {
+      firstName,
+      secondName,
+      mail,
+      avatarAttribute,
+      userQuotaLimit,
+      userType,
+    } = requiredSettings;
 
-  return {
-    setFirstName,
-    setSecondName,
-    setMail,
-    setAvatarAttribute,
-    setUserQuotaLimit,
-    setUserType,
+    const { isDefaultUsersQuotaSet } = currentQuotaStore;
 
-    firstName,
-    secondName,
-    mail,
-    avatarAttribute,
-    userQuotaLimit,
-    userType,
+    const { currentColorScheme } = settingsStore;
 
-    errors,
-    isLdapEnabled,
-    isUIDisabled,
-  };
-})(observer(AttributeMapping));
+    const { user } = userStore;
+    const isOwner = user?.isOwner;
+    const isAdmin = user?.isAdmin;
+
+    return {
+      setFirstName,
+      setSecondName,
+      setMail,
+      setAvatarAttribute,
+      setUserQuotaLimit,
+      setUserType,
+
+      firstName,
+      secondName,
+      mail,
+      avatarAttribute,
+      userQuotaLimit,
+      userType,
+
+      errors,
+      isLdapEnabled,
+      isUIDisabled,
+
+      isDefaultUsersQuotaSet,
+      currentColorScheme,
+
+      isOwner,
+      isAdmin,
+    };
+  },
+)(observer(AttributeMapping));

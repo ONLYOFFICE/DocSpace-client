@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,14 +26,13 @@
 
 import styled from "styled-components";
 
+import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
 import SortFilter from "./SortFilter";
-import { mobile, tablet } from "@docspace/shared/utils";
-import { Base } from "@docspace/shared/themes";
 
-export const StyledFilter = styled.div`
+export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -86,9 +85,7 @@ export const StyledFilter = styled.div`
   }
 `;
 
-StyledFilter.defaultProps = { theme: Base };
-
-const SectionFilterContent = ({}) => {
+const SectionFilterContent = () => {
   return (
     <StyledFilter>
       <div className="form-only-filters">

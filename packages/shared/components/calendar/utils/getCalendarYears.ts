@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import moment from "moment";
 export const getCalendarYears = (observedDate: moment.Moment) => {
   const years = [];
   const selectedYear = observedDate.year();
-  const firstYear = selectedYear - (selectedYear % 10) - 1;
+  const firstYear = selectedYear - 1;
 
   for (let i = firstYear; i <= firstYear + 15; i += 1) {
     years.push(moment(i, "YYYY").format("YYYY"));

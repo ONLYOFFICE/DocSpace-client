@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import React, { useRef } from "react";
 
-import { ContextMenu } from "../context-menu";
+import { ContextMenu, ContextMenuRefType } from "../context-menu";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
@@ -36,6 +36,7 @@ import { StyledTableRow } from "./Table.styled";
 import { TableRowProps } from "./Table.types";
 
 import { TableCell } from "./sub-components/TableCell";
+import { hasOwnProperty } from "../../utils/object";
 
 const TableRow = (props: TableRowProps) => {
   const {
@@ -49,20 +50,12 @@ const TableRow = (props: TableRowProps) => {
     title,
     getContextModel,
     badgeUrl,
+    isIndexEditingMode,
+    forwardedRef,
     ...rest
   } = props;
 
-  const cm = useRef<null | {
-    show: (e: React.MouseEvent | MouseEvent) => void;
-    hide: (
-      e:
-        | React.MouseEvent
-        | MouseEvent
-        | Event
-        | React.ChangeEvent<HTMLInputElement>,
-    ) => void;
-    menuRef: { current: HTMLDivElement };
-  }>(null);
+  const cm = useRef<ContextMenuRefType>(null);
   const row = useRef<HTMLDivElement | null>(null);
 
   const onContextMenu = (e: React.MouseEvent) => {
@@ -74,7 +67,7 @@ const TableRow = (props: TableRowProps) => {
   };
 
   const renderContext =
-    Object.prototype.hasOwnProperty.call(props, "contextOptions") &&
+    hasOwnProperty(props, "contextOptions") &&
     contextOptions &&
     contextOptions.length > 0;
 
@@ -86,41 +79,47 @@ const TableRow = (props: TableRowProps) => {
   return (
     <StyledTableRow
       onContextMenu={onContextMenu}
+      isIndexEditingMode={isIndexEditingMode}
       className={`${className} table-container_row`}
+      ref={forwardedRef}
       {...rest}
     >
       {children}
-      <div>
-        <TableCell
-          {...selectionProp}
-          style={style}
-          forwardedRef={row}
-          className={`${selectionProp?.className} table-container_row-context-menu-wrapper`}
-        >
-          <ContextMenu
-            onHide={onHideContextMenu}
-            ref={cm}
-            model={contextOptions || []}
-            getContextModel={getContextModel}
-            withBackdrop
-            badgeUrl={badgeUrl}
-          />
-          {renderContext ? (
-            <ContextMenuButton
-              isFill
-              className="expandButton"
-              getData={getOptions}
-              directionX="right"
-              displayType={ContextMenuButtonDisplayType.toggle}
-              onClick={onContextMenu}
-              onClose={onHideContextMenu}
-              title={title}
-            />
-          ) : (
-            <div className="expandButton"> </div>
-          )}
-        </TableCell>
-      </div>
+      {isIndexEditingMode ? null : (
+        <div className="context-menu-container">
+          <TableCell
+            {...selectionProp}
+            style={style}
+            forwardedRef={row}
+            className={`${selectionProp?.className} table-container_row-context-menu-wrapper`}
+          >
+            <>
+              <ContextMenu
+                onHide={onHideContextMenu}
+                ref={cm}
+                model={contextOptions || []}
+                getContextModel={getContextModel}
+                withBackdrop
+                badgeUrl={badgeUrl}
+              />
+              {renderContext ? (
+                <ContextMenuButton
+                  isFill
+                  className="expandButton"
+                  getData={getOptions}
+                  directionX="right"
+                  displayType={ContextMenuButtonDisplayType.toggle}
+                  onClick={onContextMenu}
+                  onClose={onHideContextMenu}
+                  title={title}
+                />
+              ) : (
+                <div className="expandButton"> </div>
+              )}
+            </>
+          </TableCell>
+        </div>
+      )}
     </StyledTableRow>
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 
 import { StyledContactComponent } from "./StyledComponent";
+
 const ContactContainer = (props) => {
   const { t } = useTranslation("PaymentsEnterprise");
 
@@ -43,7 +44,7 @@ const ContactContainer = (props) => {
 
   return (
     <>
-      {isCommunity && (
+      {isCommunity ? (
         <StyledContactComponent>
           <div className="payments_contact">
             <Text
@@ -54,20 +55,21 @@ const ContactContainer = (props) => {
                 i18nKey="UpgradeToProBannerInformationAboutShort"
                 ns="PaymentsEnterprise"
                 t={t}
-              >
-                Learn more about Enterprise Edition
-                <Link
-                  target="_blank"
-                  tag="a"
-                  fontWeight="600"
-                  href={officialWebsiteUrl}
-                  color={
-                    theme.client.settings.payment.contactContainer.linkColor
-                  }
-                >
-                  on the official website
-                </Link>
-              </Trans>
+                values={{ license: t("Common:EnterpriseLicense") }}
+                components={{
+                  1: (
+                    <Link
+                      target="_blank"
+                      tag="a"
+                      fontWeight="600"
+                      href={officialWebsiteUrl}
+                      color={
+                        theme.client.settings.payment.contactContainer.linkColor
+                      }
+                    />
+                  ),
+                }}
+              />
             </Text>
           </div>
           <div className="payments_contact">
@@ -96,7 +98,7 @@ const ContactContainer = (props) => {
             </Text>
           </div>
         </StyledContactComponent>
-      )}
+      ) : null}
       <StyledContactComponent>
         <div className="payments_contact">
           <Text

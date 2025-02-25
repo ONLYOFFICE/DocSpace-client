@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,8 +27,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { CSSTransition } from "react-transition-group";
-import { useTheme } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
 
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
 
@@ -37,8 +35,8 @@ import {
   DomHelpers,
   trimSeparator,
   isMobile as isMobileUtils,
-  isTablet as isTabletUtils,
 } from "../../utils";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
 import { Portal } from "../portal";
 import { Backdrop } from "../backdrop";
@@ -47,7 +45,6 @@ import { Avatar, AvatarRole, AvatarSize } from "../avatar";
 import { IconButton } from "../icon-button";
 import { RoomIcon } from "../room-icon";
 
-import { StyledContextMenu } from "./ContextMenu.styled";
 import { SubMenu } from "./sub-components/SubMenu";
 import { MobileSubMenu } from "./sub-components/MobileSubMenu";
 
@@ -56,6 +53,9 @@ import {
   ContextMenuProps,
   ContextMenuRefType,
 } from "./ContextMenu.types";
+import styles from "./ContextMenu.module.scss";
+
+const MARGIN_BORDER = 16; // Indentation from the border of the screen
 
 const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
   (props, ref) => {
@@ -65,21 +65,22 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
     const [model, setModel] = React.useState<ContextMenuModel[] | null>(null);
     const [changeView, setChangeView] = React.useState(false);
     const [showMobileMenu, setShowMobileMenu] = React.useState(false);
-    const [onLoad, setOnLoad] = React.useState<
-      undefined | (() => Promise<ContextMenuModel[]>)
-    >(undefined);
-    const [articleWidth, setArticleWidth] = React.useState(0);
+    const [mobileSubMenuItems, setMobileSubMenuItems] = React.useState<
+      ContextMenuModel[] | undefined
+    >([]);
+    const [mobileHeader, setMobileHeader] = React.useState<string>("");
 
     const prevReshow = React.useRef(false);
     const menuRef = React.useRef<null | HTMLDivElement>(null);
-    const currentEvent = React.useRef<null | React.MouseEvent | MouseEvent>(
-      null,
-    );
-    const currentChangeEvent = React.useRef<
-      null | Event | React.ChangeEvent<HTMLInputElement>
+    const currentEvent = React.useRef<
+      | null
+      | React.MouseEvent
+      | MouseEvent
+      | React.ChangeEvent<HTMLInputElement>
+      | Event
     >(null);
 
-    const theme = useTheme();
+    const { isRTL } = useInterfaceDirection();
 
     const {
       getContextModel,
@@ -104,6 +105,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       withBackdrop,
       model: propsModel,
       badgeUrl,
+      headerOnlyMobile = false,
     } = props;
 
     const onMenuClick = () => {
@@ -115,7 +117,13 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
     };
 
     const show = React.useCallback(
-      (e: React.MouseEvent | MouseEvent) => {
+      (
+        e:
+          | React.MouseEvent
+          | MouseEvent
+          | Event
+          | React.ChangeEvent<HTMLInputElement>,
+      ) => {
         if (getContextModel) {
           const m = trimSeparator(getContextModel());
           setModel(m);
@@ -125,6 +133,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
         e.preventDefault();
 
         currentEvent.current = e;
+
         if (visible) {
           if (!isMobileUtils()) {
             setReshow(true);
@@ -146,12 +155,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           | Event
           | React.ChangeEvent<HTMLInputElement>,
       ) => {
-        if (e instanceof Event) {
-          currentChangeEvent.current = e;
-        } else {
-          // @ts-expect-error need fix
-          currentEvent.current = e;
-        }
+        currentEvent.current = e;
 
         onHide?.(e);
 
@@ -160,7 +164,6 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
         prevReshow.current = false;
         setChangeView(false);
         setShowMobileMenu(false);
-        setArticleWidth(0);
       },
       [onHide],
     );
@@ -173,14 +176,12 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           | Event
           | React.ChangeEvent<HTMLInputElement>,
       ) => {
-        if (currentChangeEvent.current === e || currentEvent.current === e)
-          return;
+        if (currentEvent.current === e) return;
 
         if (visible) {
           hide(e);
           return false;
         }
-        // @ts-expect-error fix types
         show(e);
         return true;
       },
@@ -194,7 +195,6 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
         prevReshow.current = false;
         setResetMenu(true);
         setChangeView(false);
-        setArticleWidth(0);
 
         if (currentEvent.current) show(currentEvent.current);
       }
@@ -211,7 +211,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           ? rects.left - currentLeftOffset - currentRightOffset
           : event.pageX + 1;
         let top = rects ? rects.top : event.pageY + 1;
-        const width =
+        let width =
           menuRef.current && menuRef.current.offsetParent
             ? menuRef.current.offsetWidth
             : DomHelpers.getHiddenElementOuterWidth(menuRef.current);
@@ -221,31 +221,37 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
             : DomHelpers.getHiddenElementOuterHeight(menuRef.current);
         const viewport = DomHelpers.getViewport();
 
-        if (theme.interfaceDirection === "rtl" && !rects && left > width) {
+        const borderWidth = menuRef.current
+          ? +window
+              .getComputedStyle(menuRef.current)
+              .borderWidth.replace("px", "")
+          : 0;
+
+        const mobileView =
+          isMobileUtils() && (height > 210 || ignoreChangeView);
+
+        if (!mobileView) {
+          const options =
+            menuRef?.current?.getElementsByClassName("p-menuitem");
+          const optionsWidth: number[] = [];
+
+          if (options) {
+            Array.from(options).forEach((option) =>
+              optionsWidth.push(option.getBoundingClientRect().width),
+            );
+
+            const widthMaxContent = Math.max(...optionsWidth);
+
+            width = Math.ceil(widthMaxContent);
+          }
+        }
+
+        if (isRTL && !rects && left > width) {
           left = event.pageX - width + 1;
         }
 
-        if (
-          isTabletUtils() &&
-          (height > 483 ||
-            (isMobileOnly && window.innerHeight < window.innerWidth))
-        ) {
-          const article = document.getElementById("article-container");
-
-          let currentArticleWidth = 0;
-          if (article) {
-            currentArticleWidth = article.offsetWidth;
-          }
-
+        if (mobileView) {
           setChangeView(true);
-          setArticleWidth(currentArticleWidth);
-
-          return;
-        }
-
-        if (isMobileUtils() && (height > 210 || ignoreChangeView)) {
-          setChangeView(true);
-          setArticleWidth(0);
 
           return;
         }
@@ -267,8 +273,11 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
 
         // fit
         if (top < document.body.scrollTop) {
-          top = document.body.scrollTop;
+          if (document.body.scrollTop === 0) top = MARGIN_BORDER;
+          else top = document.body.scrollTop;
         }
+
+        if (borderWidth) width += borderWidth * 2;
 
         if (containerRef) {
           if (rects) top += rects.height + 4;
@@ -281,8 +290,10 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           }
         }
         if (menuRef.current) {
-          menuRef.current.style.left = `${left}px`;
+          menuRef.current.style.left = `${left || MARGIN_BORDER}px`;
           menuRef.current.style.top = `${top}px`;
+
+          if (!mobileView) menuRef.current.style.width = `${width}px`;
         }
       }
     };
@@ -295,10 +306,9 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
         );
       }
 
-      if (currentChangeEvent.current) {
-        currentChangeEvent.current = null;
+      if (currentEvent.current && "clientX" in currentEvent.current) {
+        position(currentEvent.current);
       }
-      if (currentEvent.current) position(currentEvent.current);
     };
 
     const onExited = () => {
@@ -403,21 +413,26 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           prevReshow.current = false;
           setChangeView(false);
           setShowMobileMenu(false);
-          setArticleWidth(0);
         }
 
         window.removeEventListener("resize", documentResizeListener);
       };
     }, [documentResizeListener, onHide, visible]);
 
-    const onMobileItemClick = (
+    const onMobileItemClick = async (
       e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+      label: string,
+      items?: ContextMenuModel[],
       loadFunc?: () => Promise<ContextMenuModel[]>,
     ) => {
       e.stopPropagation();
 
       setShowMobileMenu(true);
-      if (loadFunc) setOnLoad(loadFunc);
+
+      const res = loadFunc ? await loadFunc() : items;
+      setMobileSubMenuItems(res);
+
+      setMobileHeader(label);
     };
 
     const onBackClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -425,13 +440,9 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       setShowMobileMenu(false);
     };
 
-    React.useImperativeHandle(
-      ref,
-      () => {
-        return { show, hide, toggle, menuRef };
-      },
-      [hide, show, toggle],
-    );
+    React.useImperativeHandle(ref, () => {
+      return { show, hide, toggle, menuRef };
+    }, [hide, show, toggle]);
 
     const renderContextMenu = () => {
       const currentClassName = className
@@ -440,18 +451,21 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
         : "p-contextmenu p-component";
 
       const isIconExist = !!header?.icon;
-      const isAvatarExist = header?.avatar;
-      const withHeader = !!header?.title;
-      const defaultIcon = !!header?.color;
+      const isAvatarExist = header && "avatar" in header && header?.avatar;
+      const withHeader = header && "title" in header && !!header?.title;
+      const defaultIcon = header && "color" in header && !!header?.color;
+      const isCoverExist = header && "cover" in header && !!header?.cover;
+      const isHeaderMobileSubMenu = headerOnlyMobile && showMobileMenu;
 
       return (
-        <StyledContextMenu
-          changeView={changeView}
-          articleWidth={articleWidth}
-          isRoom={isRoom}
-          fillIcon={fillIcon}
-          isIconExist={isIconExist}
+        <div
           data-testid="context-menu"
+          className={classNames(styles.contextMenu, {
+            [styles.isRoom]: isRoom,
+            [styles.coverExist]: isCoverExist,
+            [styles.isIconExist]: isIconExist,
+            [styles.fillIcon]: fillIcon,
+          })}
         >
           <CSSTransition
             nodeRef={menuRef}
@@ -472,10 +486,10 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
               onClick={onMenuClick}
               onMouseEnter={onMenuMouseEnter}
             >
-              {changeView && withHeader && (
+              {changeView && (withHeader || isHeaderMobileSubMenu) ? (
                 <div className="contextmenu-header">
-                  {isIconExist &&
-                    (showMobileMenu ? (
+                  {isIconExist || isHeaderMobileSubMenu ? (
+                    showMobileMenu ? (
                       <IconButton
                         className="edit_icon"
                         iconName={ArrowLeftReactUrl}
@@ -484,28 +498,54 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                       />
                     ) : (
                       <div className="icon-wrapper">
-                        {header.icon ? (
+                        {(header?.icon &&
+                          "color" in header &&
+                          !header?.color) ||
+                        (header && "cover" in header && header?.cover) ||
+                        (header && "logo" in header && header?.logo) ? (
                           <RoomIcon
                             title={header.title}
                             isArchive={isArchive}
-                            showDefault={defaultIcon}
+                            showDefault={false}
                             imgClassName="drop-down-item_icon"
-                            imgSrc={header.icon}
+                            logo={
+                              header && "cover" in header && header?.cover
+                                ? {
+                                    cover: header.cover,
+                                    color: header.color,
+                                    medium: header.medium,
+                                    small: header.small,
+                                    large: header.large,
+                                    original: header.original,
+                                  }
+                                : header && "logo" in header && header?.logo
+                                  ? header?.logo
+                                  : header?.icon
+                            }
                             badgeUrl={badgeUrl}
-                            color={header.color || ""}
+                            color={
+                              (header && "color" in header && header.color) ||
+                              ""
+                            }
                           />
                         ) : (
                           <RoomIcon
-                            color={header.color || ""}
-                            title={header.title}
+                            color={
+                              (header && "color" in header && header.color) ||
+                              ""
+                            }
+                            title={
+                              header && "title" in header ? header.title : ""
+                            }
                             isArchive={isArchive}
-                            showDefault={defaultIcon}
+                            showDefault={defaultIcon ?? false}
                             badgeUrl={badgeUrl}
                           />
                         )}
                       </div>
-                    ))}
-                  {isAvatarExist && (
+                    )
+                  ) : null}
+                  {isAvatarExist ? (
                     <div className="avatar-wrapper">
                       <Avatar
                         role={AvatarRole.none}
@@ -514,20 +554,20 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                         className="drop-down-item_avatar"
                       />
                     </div>
-                  )}
+                  ) : null}
 
                   <Text className="text" truncate dir="auto">
-                    {header.title}
+                    {showMobileMenu ? mobileHeader : (header?.title ?? "")}
                   </Text>
                 </div>
-              )}
+              ) : null}
 
               {showMobileMenu ? (
                 <MobileSubMenu
                   root
                   resetMenu={resetMenu}
                   onLeafClick={onLeafClick}
-                  onLoad={onLoad}
+                  mobileSubMenuItems={mobileSubMenuItems}
                 />
               ) : (
                 <SubMenu
@@ -535,13 +575,14 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                   root
                   resetMenu={resetMenu}
                   onLeafClick={onLeafClick}
-                  changeView={changeView}
                   onMobileItemClick={onMobileItemClick}
+                  changeView={changeView}
+                  withHeader={withHeader}
                 />
               )}
             </div>
           </CSSTransition>
-        </StyledContextMenu>
+        </div>
       );
     };
 
@@ -551,14 +592,14 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
 
     const contextMenu = (
       <>
-        {withBackdrop && (
+        {withBackdrop ? (
           <Backdrop
             visible={(visible && (changeView || ignoreChangeView)) || false}
             withBackground
             withoutBlur={false}
             zIndex={baseZIndex}
           />
-        )}
+        ) : null}
 
         <Portal element={element} appendTo={appendTo} />
       </>

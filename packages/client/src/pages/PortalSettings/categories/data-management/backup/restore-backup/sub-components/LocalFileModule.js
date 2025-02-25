@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import { inject, observer } from "mobx-react";
 import { FileInput } from "@docspace/shared/components/file-input";
 
-const LocalFile = ({ setRestoreResource, isEnableRestore, t }) => {
+const LocalFile = ({ setRestoreResource, isEnableRestore }) => {
   const onClickInput = (file) => {
     setRestoreResource(file);
   };
@@ -43,12 +43,10 @@ const LocalFile = ({ setRestoreResource, isEnableRestore, t }) => {
   );
 };
 
-export default inject(({ currentQuotaStore, backup }) => {
+export default inject(({ backup }) => {
   const { setRestoreResource } = backup;
-  const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
 
   return {
-    isEnableRestore: isRestoreAndAutoBackupAvailable,
     setRestoreResource,
   };
 })(observer(LocalFile));

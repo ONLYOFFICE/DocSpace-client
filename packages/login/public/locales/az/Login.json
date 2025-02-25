@@ -1,15 +1,11 @@
 {
-  "CodeSubtitle": "{{email}} ünvanına 6 rəqəmli kod göndərdik. Kodun etibarlılıq müddəti limitlidir, ona görə onu mümkün olduğu qədər tez daxil edin.",
   "CodeTitle": "Kod e-poçt vasitəsilə göndərilmişdir",
   "ErrorInvalidText": "10 saniyədə <1>{{productName}}</1> yönləndiriləcəksiniz",
-  "ExpiredCode": "Bu kod artıq etibarlı deyil. Yeni kod sorğusu göndərin və yenidən cəhd edin.",
   "ForgotPassword": "Parolunuzu unutmusunuz mu?",
-  "InvalidCode": "Kod etibarsızdır. Yenidən cəhd edin.",
   "LDAPUsernamePlaceholder": "{{ldap_domain}} istifadəçi adı",
   "MessageAuthorize": "Davam etmək üçün daxil olun",
   "MessageEmailConfirmed": "Sizin elektron poçt uğurla aktivləşdirilmişdi.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Xahiş edirik qeydiyyat zamanı istifadə etdiyiniz elektron poçtu qeyd edin. Şifrəni sıfırlamaq üçün təlimat həmin elektron poçta göndəriləcəkdir.",
-  "NotFoundCode": "Kodu tapa bilmirsiniz? «Spam» qutunuzu yoxlayın.",
   "PasswordRecoveryTitle": "Parolun bərpa edilməsi",
   "RecoverAccess": "Girişi bərpa edin",
   "RecoverContactEmailPlaceholder": "Əlaqə üçün e-poçt ünvanı",
@@ -20,7 +16,6 @@
   "RegisterTitle": "Sorğunun qeydiyyatı",
   "RegistrationEmailWatermark": "Elektron poçt",
   "RememberHelper": "Susmaya görə sessiya müddəti 20 dəqiqədir. Müddəti 1 ilə uzatmaq üçün qutunu klikləyin. Digər müddəti təyin etmək üçün, Ayarlar bölməsinə keçin.",
-  "ResendCode": "Kodu yenidən göndərin",
   "SignInLDAP": "Daxil olun: {{ldap_domain}}",
   "SignInLdapHelper": "Korporativ domen üçün etimadnamələrdən istifadə edin",
   "UserIsAlreadyRegistered": "<1>{{email}}</1> istifadəçisi artıq bu {{productName}}-də qeydiyyatdan keçib, parolunuzu daxil edin və ya başqa e-poçtla davam etmək üçün geri qayıdın."

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -83,7 +83,9 @@ export default class DomHelpers {
     return 0;
   }
 
-  static getHiddenElementOuterWidth(element: HTMLElement | null) {
+  static getHiddenElementOuterWidth(elementParam: HTMLElement | null) {
+    const element = elementParam;
+
     if (element) {
       const prevVisibility = element.style.visibility;
       const prevDisplay = element.style.display;
@@ -101,7 +103,8 @@ export default class DomHelpers {
     return 0;
   }
 
-  static getHiddenElementOuterHeight(element: HTMLElement | null) {
+  static getHiddenElementOuterHeight(elementParam: HTMLElement | null) {
+    const element = elementParam;
     if (element) {
       const prevVisibility = element.style.visibility;
       const prevDisplay = element.style.display;

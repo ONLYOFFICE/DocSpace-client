@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.sv
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { StyledNoItemContainer } from "../../styles/noItem";
+import { StyledNoItemContainer } from "../../styles/NoItem";
 
 const NoFileOrFolderItem = ({ t, theme }) => {
   const imgSrc = theme.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl;
@@ -37,7 +37,12 @@ const NoFileOrFolderItem = ({ t, theme }) => {
   return (
     <StyledNoItemContainer>
       <div className="no-thumbnail-img-wrapper">
-        <img size="96px" className="no-thumbnail-img" src={imgSrc} />
+        <img
+          size="96px"
+          className="no-thumbnail-img"
+          src={imgSrc}
+          alt="No item"
+        />
       </div>
 
       <div className="no-item-text">{t("FilesEmptyScreenText")}</div>

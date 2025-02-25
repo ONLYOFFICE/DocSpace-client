@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,16 +28,22 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import elementResizeDetectorMaker from "element-resize-detector";
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+  useContext,
+} from "react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/shared/themes";
-import { TableContainer } from "@docspace/shared/components/table";
-import { TableBody } from "@docspace/shared/components/table";
+import { TableContainer, TableBody } from "@docspace/shared/components/table";
+import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
+import withContainer from "../../../../../HOCs/withContainer";
 
 const fileNameCss = css`
   margin-inline-start: -24px;
@@ -49,9 +55,12 @@ const contextCss = css`
   padding-inline-end: 20px;
 `;
 
-const StyledTableContainer = styled(TableContainer)`
+const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
   .table-row-selected {
     .table-container_file-name-cell {
+      ${fileNameCss}
+    }
+    .table-container_index-cell {
       ${fileNameCss}
     }
 
@@ -59,14 +68,20 @@ const StyledTableContainer = styled(TableContainer)`
       ${contextCss}
     }
   }
+  .table-container_index-cell {
+    margin-inline-end: 0;
+    padding-inline-end: 0;
+  }
 
   .table-row-selected + .table-row-selected {
     .table-row {
       .table-container_file-name-cell,
+      .table-container_index-cell,
       .table-container_row-context-menu-wrapper {
         border-image-slice: 1;
       }
-      .table-container_file-name-cell {
+      .table-container_file-name-cell,
+      .table-container_index-cell {
         ${fileNameCss}
         border-inline: 0; //for Safari macOS
 
@@ -84,7 +99,8 @@ const StyledTableContainer = styled(TableContainer)`
 
   .files-item:not(.table-row-selected) + .table-row-selected {
     .table-row {
-      .table-container_file-name-cell {
+      .table-container_file-name-cell,
+      .table-container_index-cell {
         ${fileNameCss}
       }
 
@@ -93,9 +109,18 @@ const StyledTableContainer = styled(TableContainer)`
       }
     }
   }
-`;
 
-StyledTableContainer.defaultProps = { theme: Base };
+  .resize-handle {
+    ${(props) =>
+      props.isIndexEditingMode &&
+      css`
+        cursor: default;
+        &:hover {
+          border-inline-end: ${({ theme }) => theme.tableContainer.borderRight};
+        }
+      `}
+  }
+`;
 
 const elementResizeDetector = elementResizeDetectorMaker({
   strategy: "scroll",
@@ -103,8 +128,7 @@ const elementResizeDetector = elementResizeDetectorMaker({
 });
 
 const Table = ({
-  filesList,
-  sectionWidth,
+  list,
   viewAs,
   setViewAs,
   setFirsElemChecked,
@@ -116,14 +140,22 @@ const Table = ({
   filterTotal,
   isRooms,
   isTrashFolder,
-  withPaging,
+  isIndexEditingMode,
+  isTemplatesFolder,
   columnStorageName,
   columnInfoPanelStorageName,
   highlightFile,
   currentDeviceType,
+  onEditIndex,
+  isIndexing,
+  isTutorialEnabled,
+  setRefMap,
+  deleteRefMap,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
+
+  const { sectionWidth } = useContext(Context);
 
   const ref = useRef(null);
   const tagRef = useRef(null);
@@ -174,7 +206,7 @@ const Table = ({
   }, [isRooms]);
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => (
+    return list.map((item, index) => (
       <TableRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
         key={
@@ -183,20 +215,29 @@ const Table = ({
         item={item}
         itemIndex={index}
         index={index}
+        onEditIndex={onEditIndex}
+        isIndexEditingMode={isIndexEditingMode}
+        isIndexing={isIndexing}
         setFirsElemChecked={setFirsElemChecked}
         setHeaderBorder={setHeaderBorder}
         theme={theme}
         tagCount={tagCount}
         isRooms={isRooms}
+        isTemplates={isTemplatesFolder}
         isTrashFolder={isTrashFolder}
         hideColumns={hideColumns}
         isHighlight={
-          highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
+          highlightFile.id == item.id
+            ? highlightFile.isExst === !item.fileExst
+            : null
         }
+        isTutorialEnabled={isTutorialEnabled}
+        setRefMap={setRefMap}
+        deleteRefMap={deleteRefMap}
       />
     ));
   }, [
-    filesList,
+    list,
     setFirsElemChecked,
     setHeaderBorder,
     theme,
@@ -206,10 +247,19 @@ const Table = ({
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
+    isIndexEditingMode,
+    isIndexing,
+    isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
   ]);
 
   return (
-    <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
+    <StyledTableContainer
+      useReactWindow
+      forwardedRef={ref}
+      isIndexEditingMode={isIndexEditingMode}
+    >
       <TableHeader
         sectionWidth={sectionWidth}
         containerRef={ref}
@@ -218,17 +268,19 @@ const Table = ({
         navigate={navigate}
         location={location}
         isRooms={isRooms}
-        filesList={filesList}
+        isIndexing={isIndexing}
+        filesList={list}
       />
 
       <TableBody
         fetchMoreFiles={fetchMoreFiles}
         columnStorageName={columnStorageName}
-        filesLength={filesList.length}
+        filesLength={list.length}
         hasMoreFiles={hasMoreFiles}
         itemCount={filterTotal}
-        useReactWindow={!withPaging}
+        useReactWindow
         infoPanelVisible={infoPanelVisible}
+        isIndexEditingMode={isIndexEditingMode}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         itemHeight={48}
       >
@@ -243,35 +295,41 @@ export default inject(
     filesStore,
     infoPanelStore,
     treeFoldersStore,
-
     tableStore,
     userStore,
     settingsStore,
+    guidanceStore,
+    indexingStore,
+    filesActionsStore,
+    selectedFolderStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
+      treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
 
     const {
-      filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
       setHeaderBorder,
       fetchMoreFiles,
       hasMoreFiles,
-      filterTotal,
-      roomsFilterTotal,
+      roomsFilter,
       highlightFile,
+      filter,
     } = filesStore;
 
-    const { withPaging, theme, currentDeviceType } = settingsStore;
+    const { isIndexEditingMode } = indexingStore;
+    const { changeIndex } = filesActionsStore;
+    const { isIndexedFolder } = selectedFolderStore;
+    const { theme, currentDeviceType } = settingsStore;
+    const { setRefMap, deleteRefMap } = guidanceStore;
 
     return {
-      filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
@@ -281,14 +339,19 @@ export default inject(
       infoPanelVisible,
       fetchMoreFiles,
       hasMoreFiles,
-      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      filterTotal: isRooms ? roomsFilter.total : filter.total,
       isRooms,
       isTrashFolder,
-      withPaging,
+      isIndexEditingMode,
+      isIndexing: isIndexedFolder,
+      isTemplatesFolder,
       columnStorageName,
       columnInfoPanelStorageName,
       highlightFile,
       currentDeviceType,
+      onEditIndex: changeIndex,
+      setRefMap,
+      deleteRefMap,
     };
   },
-)(observer(Table));
+)(observer(withContainer(Table)));

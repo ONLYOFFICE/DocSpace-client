@@ -1,4 +1,4 @@
-﻿// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,17 +27,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Box } from "@docspace/shared/components/box";
 import { inject, observer } from "mobx-react";
-import { Base, globalColors } from "@docspace/shared/themes";
-import { mobile, getLogoUrl } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
+import { mobile, getLogoUrl, injectDefaultTheme } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
 
 import i18n from "../../../i18n";
 
-const Header = styled.header`
+const Header = styled.header.attrs(injectDefaultTheme)`
   align-items: start;
   background-color: ${(props) => props.theme.header.backgroundColor};
   display: flex;
@@ -47,6 +46,10 @@ const Header = styled.header`
 
   .header-items-wrapper {
     width: 960px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     @media ${mobile} {
       width: 475px;
@@ -59,6 +62,7 @@ const Header = styled.header`
 
   .header-logo-wrapper {
     -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+    height: 24px;
   }
 
   .header-logo-min_icon {
@@ -70,7 +74,7 @@ const Header = styled.header`
 
   .header-logo-icon {
     width: 100%;
-    height: 100%;
+    height: 24px;
     padding: 12px 0;
     cursor: pointer;
   }
@@ -84,10 +88,7 @@ const Header = styled.header`
   }
 `;
 
-Header.defaultProps = { theme: Base };
-
 const HeaderUnAuth = ({
-  enableAdmMess,
   wizardToken,
   isAuthenticated,
   isLoaded,
@@ -105,24 +106,17 @@ const HeaderUnAuth = ({
 
   return (
     <Header isLoaded={isLoaded} className="navMenuHeaderUnAuth">
-      <Box
-        displayProp="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        className="header-items-wrapper"
-      >
+      <div className="header-items-wrapper">
         {!isAuthenticated && isLoaded ? (
           <div>
             <a className="header-logo-wrapper" href="/">
-              <img className="header-logo-icon" src={logo} />
+              <img className="header-logo-icon" src={logo} alt="Logo" />
             </a>
           </div>
-        ) : (
-          <></>
-        )}
-      </Box>
+        ) : null}
+      </div>
 
-      {!wizardToken && (
+      {!wizardToken ? (
         <LanguageCombobox
           className="language-combo-box"
           onSelectLanguage={onSelect}
@@ -131,7 +125,7 @@ const HeaderUnAuth = ({
           withBorder={false}
           isMobileView
         />
-      )}
+      ) : null}
     </Header>
   );
 };
@@ -139,7 +133,6 @@ const HeaderUnAuth = ({
 HeaderUnAuth.displayName = "Header";
 
 HeaderUnAuth.propTypes = {
-  enableAdmMess: PropTypes.bool,
   wizardToken: PropTypes.string,
   isAuthenticated: PropTypes.bool,
   isLoaded: PropTypes.bool,

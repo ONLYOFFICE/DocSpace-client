@@ -12,7 +12,6 @@ type InjectedProps = Pick<
 >;
 
 type SelectMembersPanelProps = {
-  isVisible: boolean;
   onClose: () => void;
   onParentPanelClose: () => void;
   addMembers: (members: TUser[]) => void;
@@ -21,7 +20,6 @@ type SelectMembersPanelProps = {
 };
 
 const Panel = ({
-  isVisible,
   onClose,
   onParentPanelClose,
   addMembers,
@@ -44,7 +42,6 @@ const Panel = ({
 
   return (
     <MembersSelector
-      isVisible={isVisible}
       onClose={onClose}
       onParentPanelClose={onParentPanelClose}
       addMembers={addMembers}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,8 +44,16 @@ export const GroupMemberRow = styled.div<{}>`
     align-items: flex-start;
     justify-content: center;
     padding: 9px 0;
-    width: 100%;
     overflow: hidden;
+    margin-inline-end: 16px;
+
+    .info-box {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
 
     .name {
       color: ${({ theme }) => theme.sideBarRow.titleColor};
@@ -55,7 +63,6 @@ export const GroupMemberRow = styled.div<{}>`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      width: 100%;
     }
 
     .email {

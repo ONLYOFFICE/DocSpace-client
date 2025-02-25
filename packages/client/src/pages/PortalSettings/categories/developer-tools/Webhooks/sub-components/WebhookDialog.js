@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,22 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
+import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import { toastr } from "@docspace/shared/components/toast";
 import { LabledInput } from "./LabledInput";
-import styled, { css } from "styled-components";
 import { Hint } from "../styled-components";
 import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
-import { useTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components/toast";
-
-const ModalDialogContainer = styled(ModalDialog)`
-  .modal-body {
-    overflow-y: auto;
-  }
-`;
 
 const StyledWebhookForm = styled.form`
   margin-top: 7px;
@@ -62,12 +56,7 @@ const Footer = styled.div`
 `;
 
 function validateUrl(url) {
-  try {
-    new URL(url);
-  } catch (error) {
-    return false;
-  }
-  return true;
+  return URL.canParse(url);
 }
 
 const WebhookDialog = (props) => {
@@ -81,8 +70,10 @@ const WebhookDialog = (props) => {
     additionalId,
   } = props;
 
-  const [isResetVisible, setIsResetVisible] = useState(isSettingsModal);
+  const { t } = useTranslation(["Webhooks", "Common"]);
+  const submitButtonRef = useRef(null);
 
+  const [isResetVisible, setIsResetVisible] = useState(isSettingsModal);
   const [isLoading, setIsLoading] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [isValid, setIsValid] = useState({
@@ -90,9 +81,6 @@ const WebhookDialog = (props) => {
     uri: true,
     secretKey: true,
   });
-
-  const { t } = useTranslation(["Webhooks", "Common"]);
-
   const [webhookInfo, setWebhookInfo] = useState({
     id: webhook ? webhook.id : 0,
     name: webhook ? webhook.name : "",
@@ -101,15 +89,22 @@ const WebhookDialog = (props) => {
     enabled: webhook ? webhook.enabled : true,
     ssl: webhook ? webhook.ssl : true,
   });
-
   const [passwordInputKey, setPasswordInputKey] = useState(0);
-
-  const submitButtonRef = useRef(null);
 
   const onModalClose = () => {
     onClose();
     isSettingsModal && setIsResetVisible(true);
   };
+
+  const onKeyPress = (e) =>
+    (e.key === "Esc" || e.key === "Escape") && onModalClose();
+
+  const cleanUpEvent = () => window.removeEventListener("keyup", onKeyPress);
+
+  useEffect(() => {
+    window.addEventListener("keyup", onKeyPress);
+    return cleanUpEvent;
+  }, []);
 
   const onInputChange = (e) => {
     if (e.target.name) {
@@ -166,13 +161,6 @@ const WebhookDialog = (props) => {
     }
   };
 
-  const cleanUpEvent = () => window.removeEventListener("keyup", onKeyPress);
-
-  useEffect(() => {
-    window.addEventListener("keyup", onKeyPress);
-    return cleanUpEvent;
-  }, []);
-
   useEffect(() => {
     setWebhookInfo({
       id: webhook ? webhook.id : 0,
@@ -184,28 +172,25 @@ const WebhookDialog = (props) => {
     });
   }, [webhook]);
 
-  const onKeyPress = (e) =>
-    (e.key === "Esc" || e.key === "Escape") && onModalClose();
-
   return (
-    <ModalDialogContainer
-      withFooterBorder
+    <ModalDialog
       visible={visible}
       onClose={onModalClose}
       displayType="aside"
+      withBodyScroll
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledWebhookForm onSubmit={onFormSubmit}>
-          {!isSettingsModal && (
+          {!isSettingsModal ? (
             <Hint>
               {t("WebhookCreationHint", {
                 productName: t("Common:ProductName"),
               })}
             </Hint>
-          )}
+          ) : null}
           <LabledInput
-            id={additionalId + "-name-input"}
+            id={`${additionalId}-name-input`}
             label={t("WebhookName")}
             placeholder={t("EnterWebhookName")}
             name="name"
@@ -217,7 +202,7 @@ const WebhookDialog = (props) => {
             required
           />
           <LabledInput
-            id={additionalId + "-payload-url-input"}
+            id={`${additionalId}-payload-url-input`}
             label={t("PayloadUrl")}
             placeholder={t("EnterUrl")}
             name="uri"
@@ -245,7 +230,12 @@ const WebhookDialog = (props) => {
             isDisabled={isLoading}
           />
 
-          <button type="submit" ref={submitButtonRef} hidden></button>
+          <button
+            type="submit"
+            ref={submitButtonRef}
+            hidden
+            aria-label="submit"
+          />
         </StyledWebhookForm>
       </ModalDialog.Body>
 
@@ -257,7 +247,7 @@ const WebhookDialog = (props) => {
               isSettingsModal ? t("Common:SaveButton") : t("Common:Create")
             }
             size="normal"
-            primary={true}
+            primary
             onClick={handleSubmitClick}
             isDisabled={isLoading}
             isLoading={isLoading}
@@ -270,7 +260,7 @@ const WebhookDialog = (props) => {
           />
         </Footer>
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

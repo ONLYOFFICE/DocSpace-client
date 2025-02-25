@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,11 +50,11 @@ newInstance
     lng,
     fallbackLng: "en",
     load: "currentOnly",
-    //debug: true,
+    // debug: true,
 
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
-      format: function (value, format) {
+      format(value, format) {
         if (format === "lowercase") return value.toLowerCase();
         return value;
       },
@@ -71,7 +71,6 @@ newInstance
       "EmptyTrashDialog",
       "ConvertDialog",
       "ConnectDialog",
-      "ConflictResolveDialog",
       "CreateEditRoomDialog",
       "DeleteThirdPartyDialog",
       "PortalUnavailable",
@@ -79,6 +78,7 @@ newInstance
       "Files",
       "Errors",
       "Translations",
+      "FormFillingTipsDialog",
     ],
 
     backend: {

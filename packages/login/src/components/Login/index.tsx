@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,15 +28,10 @@
 
 import { LoginContext } from "./Login.context";
 
-import { LoginContent, LoginFormWrapper } from "./Login.styled";
+import { LoginContent } from "./Login.styled";
 import { LoginValueContext, LoginDispatchContext } from "./Login.context";
 
-export {
-  LoginContent,
-  LoginFormWrapper,
-  LoginValueContext,
-  LoginDispatchContext,
-};
+export { LoginContent, LoginValueContext, LoginDispatchContext };
 
 const Login = ({ children }: { children: React.ReactNode }) => {
   return <LoginContext>{children}</LoginContext>;

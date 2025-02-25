@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,6 +41,7 @@ interface AccessSelectorProps {
   containerRef: React.RefObject<HTMLDivElement>;
   defaultAccess: number;
   isOwner: boolean;
+  isAdmin: boolean;
   withRemove?: boolean;
   filteredAccesses: any[];
   setIsOpenItemAccess: (isOpen: boolean) => void;
@@ -52,6 +53,10 @@ interface AccessSelectorProps {
   isDisabled?: boolean;
   directionX?: string;
   directionY?: string;
+  isSelectionDisabled?: boolean;
+  selectionErrorText: React.ReactNode;
+  availableAccess?: number[];
+  scaledOptions?: boolean;
 }
 
 const AccessSelector: React.FC<AccessSelectorProps> = ({
@@ -61,6 +66,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   containerRef,
   defaultAccess,
   isOwner,
+  isAdmin,
   withRemove = false,
   filteredAccesses,
   setIsOpenItemAccess,
@@ -72,17 +78,23 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   isDisabled,
   directionX = "right",
   directionY = "bottom",
+  isSelectionDisabled,
+  selectionErrorText,
+  availableAccess,
+  scaledOptions,
 }) => {
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [width, setWidth] = useState(manualWidth || 0);
 
   useEffect(() => {
-    if (!containerRef?.current?.offsetWidth) {
+    const offsetWidth = containerRef?.current?.offsetWidth;
+
+    if (typeof offsetWidth !== "number") {
       return;
     }
 
-    setWidth(containerRef?.current?.offsetWidth - 32);
-  }, [containerRef?.current?.offsetWidth]);
+    setWidth(offsetWidth - 32);
+  }, [containerRef, containerRef?.current?.offsetWidth]);
 
   const accessOptions = getAccessOptions(
     t,
@@ -90,11 +102,12 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
     withRemove,
     true,
     isOwner,
+    isAdmin,
     standalone,
   );
 
   const selectedOption = accessOptions.filter(
-    (access) => access.access === +defaultAccess,
+    (access) => access?.access === +defaultAccess,
   )[0];
 
   const checkWidth = () => {
@@ -117,7 +130,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 
   return (
     <StyledAccessSelector className="access-selector">
-      {!(isMobile() && !isMobileHorizontalOrientation) && (
+      {!(isMobile() && !isMobileHorizontalOrientation) ? (
         <AccessRightSelect
           className={className}
           selectedOption={selectedOption}
@@ -133,10 +146,14 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           setIsOpenItemAccess={setIsOpenItemAccess}
           hideMobileView={isMobileHorizontalOrientation}
           isDisabled={isDisabled}
+          isSelectionDisabled={isSelectionDisabled}
+          selectionErrorText={selectionErrorText}
+          availableAccess={availableAccess}
+          scaledOptions={scaledOptions}
         />
-      )}
+      ) : null}
 
-      {isMobile() && !isMobileHorizontalOrientation && (
+      {isMobile() && !isMobileHorizontalOrientation ? (
         <AccessRightSelect
           className={className}
           selectedOption={selectedOption}
@@ -146,7 +163,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           directionX="right"
           directionY="top"
           fixedDirection
-          manualWidth="fit-content"
+          manualWidth="auto"
           isDefaultMode
           isAside={isMobileView}
           setIsOpenItemAccess={setIsOpenItemAccess}
@@ -155,8 +172,12 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           withBackground={!isMobileView}
           withBlur={isMobileView}
           isDisabled={isDisabled}
+          isSelectionDisabled={isSelectionDisabled}
+          selectionErrorText={selectionErrorText}
+          availableAccess={availableAccess}
+          scaledOptions={scaledOptions}
         />
-      )}
+      ) : null}
     </StyledAccessSelector>
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
@@ -36,7 +36,6 @@ import { SelectFolderDialogProps } from "@/types";
 import { TSelectorCancelButton } from "@docspace/shared/components/selector/Selector.types";
 
 const SelectFolderDialog = ({
-  socketHelper,
   onSubmit,
   onClose,
   isVisible,
@@ -46,6 +45,7 @@ const SelectFolderDialog = ({
   filesSettings,
 
   fileSaveAsExtension,
+  organizationName,
 }: SelectFolderDialogProps) => {
   const { t } = useTranslation(["Common", "Editor"]);
   // const sessionPath = sessionStorage.getItem("filesSelectorPath");
@@ -60,11 +60,25 @@ const SelectFolderDialog = ({
   const withFooterCheckbox =
     fileSaveAsExtension !== "zip" && fileInfo.fileExst !== "fb2";
 
+  const formProps = useMemo(() => {
+    return {
+      message: t("Common:WarningCopyToFormRoom", {
+        organizationName,
+      }),
+      isRoomFormAccessible:
+        Boolean(fileInfo.isForm) && fileSaveAsExtension === "pdf",
+    };
+  }, [fileInfo.isForm, t, fileSaveAsExtension, organizationName]);
+
   return (
     <FilesSelectorWrapper
       filesSettings={filesSettings}
       {...cancelButtonProps}
       withHeader
+      headerProps={{
+        headerLabel: t("Common:SaveButton"),
+        onCloseClick: onClose,
+      }}
       withBreadCrumbs
       withSearch
       withoutBackButton
@@ -74,8 +88,6 @@ const SelectFolderDialog = ({
       onSubmit={onSubmit}
       submitButtonLabel={t("Common:SaveHereButton")}
       submitButtonId="select-file-modal-submit"
-      socketHelper={socketHelper}
-      socketSubscribers={socketHelper.socketSubscribers}
       footerInputHeader={t("Editor:FileName")}
       currentFooterInputValue={titleSelectorFolder}
       footerCheckboxLabel={t("Editor:OpenSavedDocument")}
@@ -93,6 +105,7 @@ const SelectFolderDialog = ({
       parentId={0}
       getIsDisabled={getIsDisabled}
       withCreate
+      formProps={formProps}
     />
   );
 };

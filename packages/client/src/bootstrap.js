@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,10 +27,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
-//import { registerSW } from "@docspace/shared/sw/helper";
+// import { registerSW } from "@docspace/shared/sw/helper";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 if (root) root.render(<App />);
 
-//registerSW();
+// registerSW();

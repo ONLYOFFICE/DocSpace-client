@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,12 +30,14 @@ import { inject, observer } from "mobx-react";
 import { SearchInput } from "@docspace/shared/components/search-input";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
+import { searchMigrationUsers } from "SRC_DIR/pages/PortalSettings/utils/importUtils";
 import AccountsTable from "./AccountsTable";
 import AccountsPaging from "../../sub-components/AccountsPaging";
 
 import { Wrapper } from "../../StyledDataImport";
 import { InjectedTypeSelectProps, TypeSelectProps } from "../../types";
 import { MigrationButtons } from "../../sub-components/MigrationButtons";
+import UsersInfoBlock from "../../sub-components/UsersInfoBlock";
 
 const PAGE_SIZE = 25;
 const REFRESH_TIMEOUT = 100;
@@ -79,12 +81,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
     setSearchValue("");
   };
 
-  const filteredAccounts = dataPortion.filter(
-    (data) =>
-      data.firstName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.displayName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email?.toLowerCase().startsWith(searchValue.toLowerCase()),
-  );
+  const filteredAccounts = searchMigrationUsers(dataPortion, searchValue);
 
   const onCancelMigration = () => {
     cancelMigration();
@@ -114,13 +111,15 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
 
   useEffect(() => {
     setDataPortion(filteredUsers.slice(...boundaries));
-  }, [users]);
+  }, [boundaries, filteredUsers, users]);
 
   return (
     <Wrapper>
       {Buttons}
 
-      {filteredUsers.length > 0 && (
+      <UsersInfoBlock />
+
+      {filteredUsers.length > 0 ? (
         <>
           <SearchInput
             id="search-checkedUsers-type-input"
@@ -135,20 +134,20 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
 
           <AccountsTable accountsData={filteredAccounts} />
 
-          {filteredUsers.length > PAGE_SIZE && filteredAccounts.length > 0 && (
+          {filteredUsers.length > PAGE_SIZE && filteredAccounts.length > 0 ? (
             <AccountsPaging
               t={t}
               numberOfItems={filteredUsers.length}
               setDataPortion={handleDataChange}
               pagesPerPage={PAGE_SIZE}
             />
-          )}
+          ) : null}
 
-          {filteredAccounts.length > 0 && Buttons}
+          {filteredAccounts.length > 0 ? Buttons : null}
         </>
-      )}
+      ) : null}
 
-      {cancelUploadDialogVisible && (
+      {cancelUploadDialogVisible ? (
         <CancelUploadDialog
           visible={cancelUploadDialogVisible}
           onClose={hideCancelDialog}
@@ -157,7 +156,7 @@ const SelectUsersTypeStep = (props: TypeSelectProps) => {
           isFifthStep={false}
           isSixthStep={false}
         />
-      )}
+      ) : null}
     </Wrapper>
   );
 };
@@ -176,6 +175,10 @@ export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
     setWorkspace,
     setMigratingWorkspace,
     setMigrationPhase,
+    totalUsedUsers,
+    quota,
+    checkedUsers,
+    withEmailUsers,
   } = importAccountsStore;
   const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
     dialogsStore;
@@ -196,5 +199,9 @@ export default inject<TStore>(({ importAccountsStore, dialogsStore }) => {
 
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
+    totalUsedUsers,
+    quota,
+    checkedUsers,
+    withEmailUsers,
   };
 })(observer(SelectUsersTypeStep));

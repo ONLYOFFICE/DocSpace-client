@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const StyledSsoPage = styled.div`
   max-width: 100%;
@@ -49,16 +49,6 @@ const StyledSsoPage = styled.div`
   .field-label-icon {
     align-items: center;
     margin-bottom: 4px;
-  }
-
-  .field-label {
-    display: flex;
-    align-items: center;
-    height: auto;
-    font-weight: 600;
-    line-height: 20px;
-    overflow: visible;
-    white-space: normal;
   }
 
   .xml-input {
@@ -93,10 +83,12 @@ const StyledSsoPage = styled.div`
   }
 
   .service-provider-settings {
+    box-sizing: border-box;
     display: ${(props) => (!props.hideSettings ? "none" : "block")};
   }
 
   .sp-metadata {
+    box-sizing: border-box;
     display: ${(props) => (!props.hideMetadata ? "none" : "block")};
   }
 

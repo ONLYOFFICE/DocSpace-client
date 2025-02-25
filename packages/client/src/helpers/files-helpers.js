@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CatalogQuestionReactSvgUrl from "PUBLIC_DIR/images/catalog.question.react.svg?url";
+import CatalogQuestionReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.question.react.svg?url";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
@@ -32,9 +32,9 @@ import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?u
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import AccessFormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?url";
-import { EDITOR_PROTOCOL } from "./filesConstants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { homepage } from "PACKAGE_FILE";
+import { EDITOR_PROTOCOL } from "./filesConstants";
 
 export const getAccessIcon = (access) => {
   switch (access) {
@@ -55,19 +55,20 @@ export const getAccessIcon = (access) => {
     case 8:
       return CustomFilterReactSvgUrl;
     default:
-      return;
   }
 };
 
 export const checkProtocol = (fileId, withRedirect) =>
   new Promise((resolve, reject) => {
+    let timeout;
+
     const onBlur = () => {
       clearTimeout(timeout);
       window.removeEventListener("blur", onBlur);
       resolve();
     };
 
-    const timeout = setTimeout(() => {
+    timeout = setTimeout(() => {
       reject();
       window.removeEventListener("blur", onBlur);
       withRedirect &&

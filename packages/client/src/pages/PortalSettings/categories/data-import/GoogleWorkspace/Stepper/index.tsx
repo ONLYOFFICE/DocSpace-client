@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import { Trans } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
+import PeopleIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
@@ -39,7 +39,11 @@ import ImportCompleteStep from "../../components/ImportCompleteStep";
 
 import { TFunciton } from "../../types";
 
-export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
+export const getStepsData = (
+  t: TFunciton,
+  isTypeSelectEmpty: boolean,
+  logoText: string,
+) => {
   return [
     {
       title: t("Common:SelectFiles"),
@@ -57,7 +61,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       title: t("Settings:SelectUsers"),
       description: t("Settings:SelectUsersDescriptionGoogle", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <SelectUsersStep t={t} canDisable shouldSetUsers />,
     },
@@ -125,7 +129,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
           t={t}
           serviceName="Google Workspace"
           usersExportDetails={{
-            name: t("Common:Accounts"),
+            name: t("Common:Contacts"),
             icon: PeopleIcon,
           }}
           personalExportDetails={{
@@ -149,7 +153,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionGoogle", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <ImportCompleteStep t={t} />,
     },

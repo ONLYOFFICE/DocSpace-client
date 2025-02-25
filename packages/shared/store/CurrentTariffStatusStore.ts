@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable no-console */
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable } from "mobx";
 import moment from "moment-timezone";
 
 import { TariffState } from "../enums";
@@ -60,6 +60,10 @@ class CurrentTariffStatusStore {
 
   get isEnterprise() {
     return this.portalTariffStatus?.enterprise;
+  }
+
+  get isDeveloper() {
+    return this.isEnterprise && this.portalTariffStatus?.developer;
   }
 
   get isCommunity() {
@@ -141,7 +145,12 @@ class CurrentTariffStatusStore {
   get gracePeriodEndDate() {
     moment.locale(this.language);
     if (this.delayDueDate === null) return "";
-    return moment(this.delayDueDate).tz(window.timezone).format("LL");
+
+    const endDate = isValidDate(this.delayDueDate)
+      ? this.delayDueDate
+      : this.dueDate;
+
+    return moment(endDate).tz(window.timezone).format("LL");
   }
 
   get delayDaysCount() {

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,12 +31,10 @@ export { getSelectedLinkByKey } from "./getSelectedLinkByKey";
 export { selectKeyOfTreeElement } from "./selectKeyOfTreeElement";
 export { getCurrentSettingsCategory } from "./getCurrentSettingsCategory";
 export { checkPropertyByLink } from "./checkPropertyByLink";
-export { getFromSessionStorage } from "./getFromSessionStorage";
-export { saveToSessionStorage } from "./saveToSessionStorage";
 export { getSettingsIndex } from "./getSettingsIndex";
-export { getFromLocalStorage } from "./getFromLocalStorage.js";
-export { saveToLocalStorage } from "./saveToLocalStorage.js";
-export { removeLocalStorage } from "./removeLocalStorage.js";
+export { getFromLocalStorage } from "./getFromLocalStorage";
+export { saveToLocalStorage } from "./saveToLocalStorage";
+export { removeLocalStorage } from "./removeLocalStorage";
 export { resetSessionStorage } from "./resetSessionStorage";
 export { getStepTitle } from "./getStepTitle";
 export {

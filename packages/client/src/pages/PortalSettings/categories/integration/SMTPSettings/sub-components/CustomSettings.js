@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,9 +33,9 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 
+import { EmailInput } from "@docspace/shared/components/email-input";
 import { StyledComponent } from "../StyledComponent";
 import { SMTPSettingsFields } from "../constants";
-import { EmailInput } from "@docspace/shared/components/email-input";
 import ButtonContainer from "./ButtonContainer";
 
 const {
@@ -86,12 +86,12 @@ const CustomSettings = (props) => {
   };
 
   const onValidateEmailInput = (result) => {
-    const { isValid, errors } = result;
+    const { isValid, errors: newErrors } = result;
 
     setEmailError({
       ...emailError,
       isValid,
-      errors,
+      errors: newErrors,
     });
   };
 
@@ -102,6 +102,10 @@ const CustomSettings = (props) => {
   const requirementColor = {
     color: theme.client.settings.integration.smtp.requirementColor,
   };
+
+  const isPortValid =
+    Number(settings[PORT]) > 0 && Number(settings[PORT]) < 65536;
+
   const enableAuthComponent = (
     <div className="smtp-settings_auth">
       <ToggleButton
@@ -238,7 +242,7 @@ const CustomSettings = (props) => {
       <ButtonContainer
         t={t}
         isEmailValid={emailError.isValid}
-        isPortValid={settings[PORT] !== 0 && settings[PORT] !== "0"}
+        isPortValid={isPortValid}
       />
     </StyledComponent>
   );

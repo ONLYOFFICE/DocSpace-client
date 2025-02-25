@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,7 +35,7 @@ export type TImage = {
 export type TChangeImage = (image: TImage) => void;
 export type TSetPreview = (preview: string) => void;
 
-export interface ImageEditorProps {
+export type ImageEditorProps = {
   t: TTranslation;
   image: TImage;
   onChangeImage: TChangeImage;
@@ -46,9 +46,11 @@ export interface ImageEditorProps {
   className?: string;
   disableImageRescaling?: boolean;
   maxImageSize?: number;
-}
+  editorBorderRadius: number;
+  onChangeFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
-export interface ImageCropperProps {
+export type ImageCropperProps = {
   t: TTranslation;
   image: TImage;
   onChangeImage: TChangeImage;
@@ -57,4 +59,6 @@ export interface ImageCropperProps {
   setPreviewImage: TSetPreview;
   isDisabled: boolean;
   disableImageRescaling?: boolean;
-}
+  editorBorderRadius: number;
+  onChangeFile: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};

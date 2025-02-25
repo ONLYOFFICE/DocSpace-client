@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,8 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import axios, { AxiosRequestConfig } from "axios";
-import { TWhiteLabel } from "../../utils/whiteLabelHelper";
+
+import { Nullable } from "../../types";
+import { ILogo } from "../../pages/Branding/WhiteLabel/WhiteLabel.types";
 import { request } from "../client";
 import {
   TCustomSchema,
@@ -40,6 +45,7 @@ import {
   TVersionBuild,
   TMailDomainSettings,
   TIpRestriction,
+  TIpRestrictionSettings,
   TCookieSettings,
   TLoginSettings,
   TCapabilities,
@@ -77,7 +83,9 @@ export async function getPortalCultures() {
   return res;
 }
 
-export async function getPortalPasswordSettings(confirmKey = null) {
+export async function getPortalPasswordSettings(
+  confirmKey: Nullable<string> = null,
+) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/security/password",
@@ -140,12 +148,15 @@ export async function getIpRestrictions() {
   return res;
 }
 
-export async function setIpRestrictions(data) {
+export async function setIpRestrictions(data: {
+  IpRestrictions: string[];
+  enable: boolean;
+}) {
   const res = (await request({
     method: "put",
     url: "/settings/iprestrictions",
     data,
-  })) as TIpRestriction[];
+  })) as TIpRestrictionSettings;
 
   return res;
 }
@@ -154,16 +165,6 @@ export async function getIpRestrictionsEnable() {
   const res = (await request({
     method: "get",
     url: "/settings/iprestrictions/settings",
-  })) as { enable: boolean };
-
-  return res;
-}
-
-export async function setIpRestrictionsEnable(data) {
-  const res = (await request({
-    method: "put",
-    url: "/settings/iprestrictions/settings",
-    data,
   })) as { enable: boolean };
 
   return res;
@@ -221,6 +222,12 @@ export function setBruteForceProtection(AttemptCount, BlockTime, CheckPeriod) {
   });
 }
 
+export function deleteBruteForceProtection() {
+  return request({
+    method: "delete",
+    url: `settings/security/loginSettings`,
+  });
+}
 export function getLoginHistoryReport() {
   return request({
     method: "post",
@@ -308,15 +315,6 @@ export function deleteAppearanceTheme(id) {
   });
 }
 
-export function getLogoText(isManagement: boolean = false) {
-  const url = "/settings/whitelabel/logotext";
-
-  return request({
-    method: "get",
-    url: isManagement ? `${url}?isDefault=true` : url,
-  });
-}
-
 export async function getLogoUrls(
   headers = null,
   isManagement: boolean = false,
@@ -332,13 +330,31 @@ export async function getLogoUrls(
 
   const skipRedirect = true;
 
-  const res = (await request(options, skipRedirect)) as TWhiteLabel[];
+  const res = (await request(options, skipRedirect)) as ILogo[];
 
   return res;
 }
 
-export function setWhiteLabelSettings(data, isManagement: boolean = false) {
-  const url = "/settings/whitelabel/save";
+export function getIsDefaultWhiteLabelLogos(isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logos/isdefault";
+
+  return request({
+    method: "get",
+    url: isManagement ? `${url}?isDefault=true` : url,
+  });
+}
+
+export function restoreWhiteLabelLogos(isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logos/restore";
+
+  return request({
+    method: "put",
+    url: isManagement ? `${url}?isDefault=true` : url,
+  });
+}
+
+export function setWhiteLabelLogos(data, isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logos/save";
 
   const options = {
     method: "post",
@@ -349,20 +365,23 @@ export function setWhiteLabelSettings(data, isManagement: boolean = false) {
   return request(options);
 }
 
-export function getIsDefaultWhiteLabel(isManagement: boolean = false) {
-  const url = "/settings/whitelabel/logos/isdefault";
+export function setBrandName(data, isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logotext/save";
+
+  const options = {
+    method: "post",
+    url: isManagement ? `${url}?isDefault=true` : url,
+    data,
+  };
+
+  return request(options);
+}
+
+export function getBrandName(isManagement: boolean = false) {
+  const url = "/settings/whitelabel/logotext";
 
   return request({
     method: "get",
-    url: isManagement ? `${url}?isDefault=true` : url,
-  });
-}
-
-export function restoreWhiteLabelSettings(isManagement: boolean = false) {
-  const url = "/settings/whitelabel/restore";
-
-  return request({
-    method: "put",
     url: isManagement ? `${url}?isDefault=true` : url,
   });
 }
@@ -535,7 +554,10 @@ export function dataReassignmentTerminate(userId) {
   });
 }
 
-export function ownerChange(ownerId, confirmKey = null) {
+export function ownerChange(
+  ownerId: string,
+  confirmKey: Nullable<string> = null,
+) {
   const data = { ownerId };
 
   const options = {
@@ -569,17 +591,24 @@ export function setPortalOwner(
   timeZone,
   confirmKey,
   analytics,
+  amiId: string | null = null,
 ) {
+  const data = {
+    email,
+    PasswordHash: hash,
+    lng,
+    timeZone,
+    analytics,
+  };
+
+  if (amiId) {
+    data.amiId = amiId;
+  }
+
   const options = {
     method: "put",
     url: "/settings/wizard/complete",
-    data: {
-      email,
-      PasswordHash: hash,
-      lng,
-      timeZone,
-      analytics,
-    },
+    data,
   };
 
   if (confirmKey) {
@@ -715,7 +744,7 @@ export function getTfaSecretKeyAndQR(confirmKey = null) {
   return request(options);
 }
 
-export function validateTfaCode(code, confirmKey = null) {
+export function validateTfaCode(code, confirmKey: Nullable<string> = null) {
   const data = {
     code,
   };
@@ -732,10 +761,13 @@ export function validateTfaCode(code, confirmKey = null) {
   return request(options);
 }
 
-export function getBackupStorage() {
+export function getBackupStorage(dump: boolean = false) {
   const options = {
     method: "get",
     url: "/settings/storage/backup",
+    params: {
+      dump,
+    },
   };
   return request(options);
 }

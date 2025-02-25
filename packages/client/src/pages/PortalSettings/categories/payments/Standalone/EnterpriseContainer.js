@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,23 +32,27 @@ import { Trans } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
-import { StyledEnterpriseComponent } from "./StyledComponent";
 import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
+import { StyledEnterpriseComponent } from "./StyledComponent";
 import ButtonContainer from "./sub-components/ButtonContainer";
 import TariffTitleContainer from "./sub-components/TariffTitleContainer";
 
 const EnterpriseContainer = (props) => {
-  const { salesEmail, t, isLicenseDateExpired } = props;
+  const { salesEmail, t, isLicenseDateExpired, isDeveloper } = props;
 
   return (
     <StyledEnterpriseComponent>
-      <Text fontWeight={700} fontSize={"16px"}>
-        {t("ActivateRenewSubscriptionHeader")}
+      <Text fontWeight={700} fontSize="16px">
+        {t("ActivateRenewSubscriptionHeader", {
+          license: isDeveloper
+            ? t("Common:DeveloperLicense")
+            : t("Common:EnterpriseLicense"),
+        })}
       </Text>
 
       <TariffTitleContainer />
 
-      {isLicenseDateExpired && <BenefitsContainer t={t} />}
+      {isLicenseDateExpired ? <BenefitsContainer t={t} /> : null}
       <Text fontSize="14px" className="payments_renew-subscription">
         {isLicenseDateExpired
           ? t("ActivatePurchaseBuyLicense")
@@ -80,6 +84,6 @@ const EnterpriseContainer = (props) => {
 export default inject(({ paymentStore, currentTariffStatusStore }) => {
   const { buyUrl, salesEmail } = paymentStore;
 
-  const { isLicenseDateExpired } = currentTariffStatusStore;
-  return { buyUrl, salesEmail, isLicenseDateExpired };
+  const { isLicenseDateExpired, isDeveloper } = currentTariffStatusStore;
+  return { buyUrl, salesEmail, isLicenseDateExpired, isDeveloper };
 })(observer(EnterpriseContainer));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -90,17 +90,17 @@ const useTheme = ({
   const isRequestRunning = React.useRef(false);
 
   const getCurrentColorTheme = React.useCallback(async () => {
-    if (isRequestRunning.current) return;
+    if (isRequestRunning.current || colorTheme) return;
     isRequestRunning.current = true;
     const colorThemes = await getAppearanceTheme();
 
-    const colorTheme = colorThemes.themes.find(
+    const curColorTheme = colorThemes.themes.find(
       (t) => t.id === colorThemes.selected,
     );
 
     isRequestRunning.current = false;
-    if (colorTheme) setCurrentColorTheme(colorTheme);
-  }, []);
+    if (curColorTheme) setCurrentColorTheme(curColorTheme);
+  }, [colorTheme]);
 
   const getUserTheme = React.useCallback(() => {
     const SYSTEM_THEME = getSystemTheme();

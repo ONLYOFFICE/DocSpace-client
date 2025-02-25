@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,29 +41,43 @@ import useTheme from "@/hooks/useTheme";
 import pkgFile from "../../package.json";
 
 import ErrorBoundaryWrapper from "./ErrorBoundary";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export const Providers = ({
   children,
   value,
   redirectURL,
+  user,
 }: {
   children: React.ReactNode;
   value: TDataContext;
   redirectURL: string;
+  user?: TUser;
 }) => {
   const firebaseHelper = new FirebaseHelper(
     value.settings?.firebase ?? ({} as TFirebaseSettings),
   );
+  const confirmType = useSearchParams().get("type");
+
+  let shouldRedirect = true;
+  if (redirectURL === "unavailable" && confirmType === "PortalContinue") {
+    shouldRedirect = false;
+  }
+
+  const pathName = usePathname();
+  const expectedPathName = `/${redirectURL}`;
 
   React.useEffect(() => {
-    if (redirectURL) window.location.replace(redirectURL);
-  }, [redirectURL]);
+    if (shouldRedirect && redirectURL && pathName !== expectedPathName)
+      window.location.replace(expectedPathName);
+  }, [redirectURL, pathName, expectedPathName, shouldRedirect]);
 
   const { i18n } = useI18N({
     settings: value.settings,
   });
 
   const { theme, currentColorTheme } = useTheme({
+    user,
     colorTheme: value.colorTheme,
     systemTheme: value.systemTheme,
     i18n,
@@ -77,7 +91,11 @@ export const Providers = ({
           version={pkgFile.version}
           firebaseHelper={firebaseHelper}
         >
-          {children}
+          {shouldRedirect && redirectURL && expectedPathName !== pathName ? (
+            <></>
+          ) : (
+            children
+          )}
         </ErrorBoundaryWrapper>
       </I18nextProvider>
     </ThemeProvider>

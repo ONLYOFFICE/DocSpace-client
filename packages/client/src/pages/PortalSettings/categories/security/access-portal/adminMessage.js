@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,18 +29,19 @@ import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import isEqual from "lodash/isEqual";
+
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-import { LearnMoreWrapper } from "../StyledSecurity";
-import { size } from "@docspace/shared/utils";
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import isEqual from "lodash/isEqual";
+import { size } from "@docspace/shared/utils";
 
-import AdmMsgLoader from "../sub-components/loaders/admmsg-loader";
-import { DeviceType } from "@docspace/shared/enums";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
+
+import { LearnMoreWrapper } from "../StyledSecurity";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -60,17 +61,20 @@ const AdminMessage = (props) => {
 
     enableAdmMess,
     setMessageSettings,
-    initSettings,
-    isInit,
     currentColorScheme,
     administratorMessageSettingsUrl,
-    currentDeviceType,
   } = props;
   const [type, setType] = useState("");
   const [showReminder, setShowReminder] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
+
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("admin-message") &&
+      navigate("/portal-settings/security/access-portal");
+  };
 
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage(
@@ -99,16 +103,11 @@ const AdminMessage = (props) => {
 
   useEffect(() => {
     checkWidth();
-
-    if (!isInit) initSettings("admin-message").then(() => setIsLoading(true));
-    else setIsLoading(true);
-
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isInit) return;
     const currentSettings = getFromSessionStorage(
       "currentAdminMessageSettings",
     );
@@ -121,11 +120,9 @@ const AdminMessage = (props) => {
     } else {
       getSettingsFromDefault();
     }
-  }, [isLoading, isInit]);
+  }, []);
 
   useEffect(() => {
-    if (!isLoading) return;
-
     const defaultSettings = getFromSessionStorage(
       "defaultAdminMessageSettings",
     );
@@ -138,12 +135,6 @@ const AdminMessage = (props) => {
     }
   }, [type]);
 
-  const checkWidth = () => {
-    window.innerWidth > size.mobile &&
-      location.pathname.includes("admin-message") &&
-      navigate("/portal-settings/security/access-portal");
-  };
-
   const onSelectType = (e) => {
     if (type !== e.target.value) {
       setType(e.target.value);
@@ -151,7 +142,7 @@ const AdminMessage = (props) => {
   };
 
   const onSaveClick = () => {
-    const turnOn = type === "enable" ? true : false;
+    const turnOn = type === "enable";
     setMessageSettings(turnOn);
     toastr.success(t("SuccessfullySaveSettingsMessage"));
     saveToSessionStorage("currentAdminMessageSettings", type);
@@ -166,10 +157,6 @@ const AdminMessage = (props) => {
     setType(defaultSettings || "disabled");
     setShowReminder(false);
   };
-
-  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
-    return <AdmMsgLoader />;
-  }
 
   return (
     <MainContainer>
@@ -225,7 +212,7 @@ const AdminMessage = (props) => {
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
-        displaySettings={true}
+        displaySettings
         hasScroll={false}
         additionalClassSaveButton="admin-message-save"
         additionalClassCancelButton="admin-message-cancel"
@@ -234,23 +221,18 @@ const AdminMessage = (props) => {
   );
 };
 
-export const AdminMessageSection = inject(({ settingsStore, setup }) => {
+export const AdminMessageSection = inject(({ settingsStore }) => {
   const {
     enableAdmMess,
     setMessageSettings,
     currentColorScheme,
     administratorMessageSettingsUrl,
-    currentDeviceType,
   } = settingsStore;
-  const { initSettings, isInit } = setup;
 
   return {
     enableAdmMess,
     setMessageSettings,
-    initSettings,
-    isInit,
     currentColorScheme,
     administratorMessageSettingsUrl,
-    currentDeviceType,
   };
 })(withTranslation(["Settings", "Common"])(observer(AdminMessage)));

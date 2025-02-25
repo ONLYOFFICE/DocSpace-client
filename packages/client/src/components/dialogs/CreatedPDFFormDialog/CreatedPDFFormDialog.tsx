@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -84,7 +84,7 @@ export const CreatedPDFFormDialog = inject<TStore>(
           onClose={onClose}
           displayType={ModalDialogType.modal}
         >
-          <ModalDialog.Header>{t("PDFFormDialogTitle")}</ModalDialog.Header>
+          <ModalDialog.Header>{t("PDFform")}</ModalDialog.Header>
           <ModalDialog.Body>
             <Wrapper>
               {theme.isBase ? <HeaderIcon /> : <HeaderDarkIcon />}
@@ -104,15 +104,12 @@ export const CreatedPDFFormDialog = inject<TStore>(
               size={ButtonSize.normal}
               label={primaryButtonLabel}
               onClick={onSubmit}
-              // isLoading={isLoading}
             />
             <Button
-              scale
               tabIndex={0}
               onClick={onClose}
               size={ButtonSize.normal}
               label={t("Common:Later")}
-              // isDisabled={isLoading}
             />
           </ModalDialog.Footer>
         </ModalDialog>

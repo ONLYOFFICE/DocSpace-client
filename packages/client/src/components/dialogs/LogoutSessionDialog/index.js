@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,8 +27,6 @@
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-import ModalDialogContainer from "../ModalDialogContainer";
-
 const LogoutSessionDialog = ({
   t,
   data,
@@ -42,11 +40,7 @@ const LogoutSessionDialog = ({
   };
 
   return (
-    <ModalDialogContainer
-      visible={visible}
-      onClose={onClose}
-      displayType="modal"
-    >
+    <ModalDialog visible={visible} onClose={onClose} displayType="modal">
       <ModalDialog.Header>
         {t("Profile:LogoutActiveConnection")}
       </ModalDialog.Header>
@@ -62,7 +56,7 @@ const LogoutSessionDialog = ({
           label={t("Profile:LogoutBtn")}
           size="normal"
           scale
-          primary={true}
+          primary
           onClick={onClick}
           isLoading={isLoading}
         />
@@ -75,7 +69,7 @@ const LogoutSessionDialog = ({
           isDisabled={isLoading}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

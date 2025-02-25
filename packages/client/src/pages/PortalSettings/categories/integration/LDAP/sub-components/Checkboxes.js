@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,16 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Box } from "@docspace/shared/components/box";
+
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { RadioButton } from "@docspace/shared/components/radio-button";
+import { Text } from "@docspace/shared/components/text";
+
+const ConnectionType = Object.freeze({
+  Unencrypted: 1,
+  StartTls: 2,
+  SSL: 3,
+});
 
 const Checkboxes = ({
   isTlsEnabled,
@@ -40,6 +47,12 @@ const Checkboxes = ({
   isUIDisabled,
 }) => {
   const { t } = useTranslation("Ldap");
+
+  const onChangeUnencrypted = (e) => {
+    const checked = e.target.checked;
+    isTlsEnabled && checked && setIsTlsEnabled(false);
+    isSslEnabled && checked && setIsSslEnabled(false);
+  };
 
   const onChangeTls = (e) => {
     const checked = e.target.checked;
@@ -54,30 +67,53 @@ const Checkboxes = ({
   };
 
   return (
-    <Box className="ldap_checkbox-container">
-      <div className="ldap_checkbox-header">
-        <Checkbox
-          tabIndex={1}
-          className="ldap_checkbox-starttls"
-          isDisabled={!isLdapEnabled || isUIDisabled}
-          label={t("LdapEnableStartTls")}
-          isChecked={isTlsEnabled}
-          onChange={onChangeTls}
-        />
-        <HelpButton tooltipContent={t("LdapEnableStartTlsTooltip")} />
+    <div className="ldap_checkbox-container">
+      <div className="ldap_connection_type-text">
+        <Text fontWeight={600} fontSize="14px">
+          {t("LdapConnectionType")}
+        </Text>
       </div>
-      <div className="ldap_checkbox-header">
-        <Checkbox
-          tabIndex={2}
-          className="ldap_checkbox-ssl"
-          isDisabled={!isLdapEnabled || isUIDisabled}
-          label={t("LdapEnableSSL")}
-          isChecked={isSslEnabled}
-          onChange={onChangeSsl}
-        />
-        <HelpButton tooltipContent={t("LdapEnableSSLTooltip")} />
+      <div className="ldap_radio_buttons_group">
+        <div className="ldap_checkbox-header">
+          <RadioButton
+            id="ldap-connection-type"
+            tabIndex={1}
+            key={ConnectionType.Unencrypted}
+            value={ConnectionType.Unencrypted}
+            isChecked={!isTlsEnabled ? !isSslEnabled : null}
+            onChange={onChangeUnencrypted}
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            label={t("LdapConnectionTypeUnencrypted")}
+          />
+        </div>
+        <div className="ldap_checkbox-header">
+          <RadioButton
+            id="ldap-connection-type"
+            tabIndex={2}
+            key={ConnectionType.StartTls}
+            value={ConnectionType.StartTls}
+            isChecked={isTlsEnabled}
+            onChange={onChangeTls}
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            label={t("LdapConnectionTypeStartTls")}
+          />
+          <HelpButton tooltipContent={t("LdapConnectionTypeStartTlsTooltip")} />
+        </div>
+        <div className="ldap_checkbox-header">
+          <RadioButton
+            id="ldap-connection-type"
+            tabIndex={3}
+            key={ConnectionType.SSL}
+            value={ConnectionType.SSL}
+            isChecked={isSslEnabled}
+            onChange={onChangeSsl}
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            label={t("LdapConnectionTypeSSL")}
+          />
+          <HelpButton tooltipContent={t("LdapConnectionTypeSSLTooltip")} />
+        </div>
       </div>
-    </Box>
+    </div>
   );
 };
 

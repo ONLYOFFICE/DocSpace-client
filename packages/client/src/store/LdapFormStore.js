@@ -21,10 +21,13 @@ const constants = {
 
 class LdapFormStore {
   isLoaded = false;
+
   isLdapEnabled = false;
 
   isSettingsShown = false;
+
   isTlsEnabled = false;
+
   isSslEnabled = false;
 
   requiredSettings = {
@@ -41,26 +44,41 @@ class LdapFormStore {
   };
 
   login = "";
+
   password = "";
+
   authentication = true;
+
   acceptCertificate = false;
+
   acceptCertificateHash = null;
+
   isSendWelcomeEmail = false;
+
   errors = {};
 
   groupMembership = false;
+
   groupDN = "";
+
   userAttribute = "distinguishedName";
+
   groupFilter = "(objectClass=group)";
+
   groupAttribute = "member";
+
   groupNameAttribute = "cn";
 
   cron = null;
+
   serverCron = null;
 
   inProgress = false;
+
   progressBarIntervalId = null;
+
   alreadyChecking = false;
+
   lastWarning = "";
 
   progressStatus = {
@@ -86,7 +104,9 @@ class LdapFormStore {
   };
 
   defaultSettings = {};
+
   serverData = {};
+
   serverSettings = {};
 
   currentQuotaStore = null;
@@ -151,7 +171,7 @@ class LdapFormStore {
       mail: MailAttribute,
       avatarAttribute: AvatarAttribute,
       userQuotaLimit: UserQuotaLimit,
-      userType: EmployeeType.Guest,
+      userType: EmployeeType.User,
     };
 
     this.authentication = authentication;
@@ -186,6 +206,8 @@ class LdapFormStore {
   };
 
   load = async (t) => {
+    if (this.isLoaded) return;
+
     const [settingsRes, cronRes, defaultRes] = await Promise.allSettled([
       getLdapSettings(),
       getCronLdap(),
@@ -287,6 +309,11 @@ class LdapFormStore {
 
   setIsAuthentication = () => {
     this.authentication = !this.authentication;
+
+    if (!this.authentication) {
+      this.errors.login = false;
+      this.errors.password = false;
+    }
   };
 
   setIsSendWelcomeEmail = (sendWelcomeEmail) => {
@@ -319,6 +346,8 @@ class LdapFormStore {
 
   restoreToDefault = async (t) => {
     const settingsRes = await getLdapDefaultSettings();
+    settingsRes.password = "";
+
     this.mapSettings(settingsRes);
 
     this.save(t, true);
@@ -378,15 +407,16 @@ class LdapFormStore {
     this.errors = {};
 
     if (!toDefault && !turnOff) {
-      for (var key in this.requiredSettings) {
+      const requiredSettingsKeys = Object.keys(this.requiredSettings);
+      requiredSettingsKeys.forEach((key) => {
         if (
-          typeof this.requiredSettings[key] == "string" &&
+          typeof this.requiredSettings[key] === "string" &&
           this.requiredSettings[key].trim() === ""
         ) {
           isErrorExist = true;
           this.errors[key] = true;
         }
-      }
+      });
 
       if (this.groupMembership) {
         const groupFields = [
@@ -397,14 +427,14 @@ class LdapFormStore {
           ["groupNameAttribute", this.groupNameAttribute],
         ];
 
-        for (var key of groupFields) {
-          if (key[1].trim() === "") {
-            this.errors[key[0]] = true;
+        groupFields.forEach(([key, value]) => {
+          if (value.trim() === "") {
+            this.errors[key] = true;
           }
-        }
+        });
       }
 
-      if (this.authentication) {
+      if (this.authentication && !isErrorExist) {
         this.errors.login = this.login.trim() === "";
         this.errors.password = this.password.trim() === "";
 
@@ -421,6 +451,10 @@ class LdapFormStore {
     const respose = await saveLdapSettings(settings);
     this.setServerSettings();
 
+    if (turnOff) {
+      this.password = "";
+    }
+
     if (respose?.id) {
       this.inProgress = true;
       this.progressBarIntervalId = setInterval(
@@ -431,13 +465,15 @@ class LdapFormStore {
   };
 
   scrollToField = () => {
-    for (let key in this.errors) {
-      const element = document.getElementsByName(key)[0];
+    Object.keys(this.errors).every((key) => {
+      const element = document.getElementsByName(key)?.[0];
 
-      element.focus();
-      element.blur();
-      return;
-    }
+      if (!element) return true; // continue loop
+
+      element?.focus();
+      element?.blur();
+      return false; // break loop
+    });
   };
 
   checkStatus = (t, toDefault = false) => {
@@ -450,6 +486,7 @@ class LdapFormStore {
     getLdapStatus()
       .then((data) => this.onGetStatus(t, data, toDefault))
       .catch((e) => {
+        console.error(e);
         this.alreadyChecking = false;
       });
   };
@@ -480,16 +517,16 @@ class LdapFormStore {
         }
       }
 
-      var status = data;
+      let status = data;
       if (
         !data ||
-        (typeof data == "object" && Object.keys(data).length === 0)
+        (typeof data === "object" && Object.keys(data).length === 0)
       ) {
         status = {
           completed: true,
           percents: 100,
           certificateConfirmRequest: null,
-          error: "",
+          error: t("Common:UnexpectedError"),
         };
       }
 
@@ -518,7 +555,6 @@ class LdapFormStore {
         toastr.success(t("Common:SuccessfullyCompletedOperation"));
       }
     } catch (error) {
-      console.error(error);
       toastr.error(error);
       this.endProcess();
     }
@@ -556,15 +592,10 @@ class LdapFormStore {
     if (!status.completed) return false;
 
     if (
-      status.certificateConfirmRequest &&
-      status.certificateConfirmRequest.requested
+      status.error ||
+      (status.certificateConfirmRequest &&
+        status.certificateConfirmRequest.requested)
     ) {
-      setCertificateDetails(status.certificateConfirmRequest);
-      // currentSettings = previousSettings;
-      return true;
-    }
-
-    if (status.error) {
       return true;
     }
 
@@ -630,6 +661,10 @@ class LdapFormStore {
   };
 
   getSettings = () => {
+    const clearServer = this.requiredSettings.server.replace(
+      /((https?|ldaps?):\/\/)/gi,
+      "",
+    );
     return {
       EnableLdapAuthentication: this.isLdapEnabled,
       AcceptCertificate: this.acceptCertificate,
@@ -637,7 +672,7 @@ class LdapFormStore {
       StartTls: this.isTlsEnabled,
       Ssl: this.isSslEnabled,
       SendWelcomeEmail: this.isSendWelcomeEmail,
-      Server: this.requiredSettings.server,
+      Server: clearServer,
       UserDN: this.requiredSettings.userDN,
       PortNumber: this.requiredSettings.portNumber,
       UserFilter: this.requiredSettings.userFilter,

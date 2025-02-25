@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,14 +31,14 @@ import { withTranslation } from "react-i18next";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { inject, observer } from "mobx-react";
+import withLoading from "SRC_DIR/HOCs/withLoading";
+import { DeviceType } from "@docspace/shared/enums";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import Customization from "./customization";
 import Branding from "./branding";
 import Appearance from "./appearance";
-import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderTabs from "./sub-components/loaderTabs";
 import { resetSessionStorage } from "../../utils";
-import { DeviceType } from "@docspace/shared/enums";
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const TabsCommon = (props) => {
   const {
@@ -47,16 +47,55 @@ const TabsCommon = (props) => {
     setIsLoadedSubmenu,
     loadBaseInfo,
     isLoadedSubmenu,
-    getWhiteLabelLogoUrls,
     currentDeviceType,
     isMobileView,
+    isCommunity,
   } = props;
   const navigate = useNavigate();
+
+  const data = [
+    {
+      id: "general",
+      name: t("Common:SettingsGeneral"),
+      content: <Customization />,
+    },
+    {
+      id: "appearance",
+      name: t("Appearance"),
+      content: <Appearance />,
+    },
+  ];
+
+  if (!isCommunity) {
+    data.splice(1, 0, {
+      id: "branding",
+      name: t("Branding"),
+      content: <Branding />,
+    });
+  }
+
+  const getCurrentTabId = () => {
+    const path = window.location.pathname;
+    const currentTab = data.find((item) => path.includes(item.id));
+    return currentTab && data.length ? currentTab.id : data[0].id;
+  };
+
+  const load = async () => {
+    const currentTabId = getCurrentTabId();
+    await loadBaseInfo(
+      !isMobileView
+        ? currentTabId === "general"
+          ? "customization"
+          : currentTabId === "branding"
+            ? "branding"
+            : "appearance"
+        : "customization",
+    );
+  };
 
   useEffect(() => {
     return () => {
       resetSessionStorage();
-      getWhiteLabelLogoUrls();
     };
   }, []);
 
@@ -66,42 +105,6 @@ const TabsCommon = (props) => {
       load();
     }
   }, [tReady, isLoadedSubmenu]);
-
-  const data = [
-    {
-      id: "general",
-      name: t("Common:SettingsGeneral"),
-      content: <Customization />,
-    },
-    {
-      id: "branding",
-      name: t("Branding"),
-      content: <Branding />,
-    },
-    {
-      id: "appearance",
-      name: t("Appearance"),
-      content: <Appearance />,
-    },
-  ];
-
-  const getCurrentTabId = () => {
-    const path = location.pathname;
-    const currentTab = data.find((item) => path.includes(item.id));
-    return currentTab !== -1 && data.length ? currentTab.id : data[0].id;
-  };
-
-  const currentTabId = getCurrentTabId();
-
-  const load = async () => {
-    await loadBaseInfo(
-      !isMobileView
-        ? currentTabId === "general"
-          ? "general"
-          : "branding"
-        : "",
-    );
-  };
 
   const onSelect = (e) => {
     navigate(
@@ -118,34 +121,32 @@ const TabsCommon = (props) => {
   return (
     <Tabs
       items={data}
-      selectedItemId={currentTabId}
+      selectedItemId={getCurrentTabId()}
       onSelect={(e) => onSelect(e)}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );
 };
 
-export const Component = inject(({ settingsStore, common }) => {
-  const {
-    isLoaded,
-    setIsLoadedSubmenu,
-    initSettings,
-    isLoadedSubmenu,
-    getWhiteLabelLogoUrls,
-  } = common;
+export const Component = inject(
+  ({ settingsStore, common, currentTariffStatusStore }) => {
+    const { isLoaded, setIsLoadedSubmenu, initSettings, isLoadedSubmenu } =
+      common;
 
-  const currentDeviceType = settingsStore.currentDeviceType;
+    const { isCommunity } = currentTariffStatusStore;
+    const currentDeviceType = settingsStore.currentDeviceType;
 
-  const isMobileView = settingsStore.deviceType === DeviceType.mobile;
-  return {
-    loadBaseInfo: async (page) => {
-      await initSettings(page);
-    },
-    isLoaded,
-    setIsLoadedSubmenu,
-    isLoadedSubmenu,
-    getWhiteLabelLogoUrls,
-    currentDeviceType,
-    isMobileView,
-  };
-})(withLoading(withTranslation("Settings")(observer(TabsCommon))));
+    const isMobileView = settingsStore.deviceType === DeviceType.mobile;
+    return {
+      loadBaseInfo: async (page) => {
+        await initSettings(page);
+      },
+      isLoaded,
+      setIsLoadedSubmenu,
+      isLoadedSubmenu,
+      currentDeviceType,
+      isMobileView,
+      isCommunity,
+    };
+  },
+)(withLoading(withTranslation("Settings")(observer(TabsCommon))));

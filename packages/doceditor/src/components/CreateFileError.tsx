@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,6 +42,11 @@ const CreateFileError = ({
   const message = error.message ?? error ?? "";
 
   React.useEffect(() => {
+    if ("status" in error && error?.status === 401) {
+      sessionStorage.setItem("referenceUrl", window.location.href);
+
+      return window.location.replace(`${window.location.origin}/login`);
+    }
     if (fromFile && message.includes("password")) {
       const searchParams = new URLSearchParams();
       searchParams.append("createError", JSON.stringify({ fileInfo }));
@@ -52,7 +57,7 @@ const CreateFileError = ({
     } else {
       throw new Error(message);
     }
-  }, [fileInfo, fromFile, message]);
+  }, [fileInfo, fromFile, message, error]);
 
   return null;
 };

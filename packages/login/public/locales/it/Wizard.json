@@ -1,0 +1,13 @@
+{
+  "Desc": "Ti preghiamo di impostare i dati di registrazione di {{productName}}.",
+  "ErrorEmail": "Indirizzo email invalido",
+  "ErrorInstanceId": "Istanza ID non valida",
+  "ErrorLicenseBody": "La licenza non è valida. Assicurati di selezionare il file corretto.",
+  "ErrorPassword": "La password non soddisfa i requisiti richiesti",
+  "ErrorUploadLicenseFile": "Seleziona un file licenza",
+  "License": "Accetta i termini di",
+  "LicenseLink": "Accordi della licenza",
+  "PlaceholderLicense": "Il tuo file di licenza",
+  "Timezone": "Fuso orario:",
+  "WelcomeTitle": "Benvenuto nel tuo {{productName}}!"
+}

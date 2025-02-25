@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,27 +28,27 @@ import React, { useCallback } from "react";
 import { ReactSVG } from "react-svg";
 
 import { Consumer, DomHelpers } from "../../utils";
-import { DeviceType } from "../../enums";
-
 import { Backdrop } from "../backdrop";
 
 import ArrowButton from "./sub-components/ArrowBtn";
-import Text from "./sub-components/Text";
 import ControlButtons from "./sub-components/ControlBtn";
 import ToggleInfoPanelButton from "./sub-components/ToggleInfoPanelBtn";
 import NavigationLogo from "./sub-components/LogoBlock";
 import DropBox from "./sub-components/DropBox";
 
-import { StyledContainer } from "./Navigation.styled";
-import { INavigationProps } from "./Navigation.types";
+import { Tooltip } from "../tooltip";
+import { Text } from "../text";
+import NavigationText from "./sub-components/Text";
+
+import { DeviceType } from "../../enums";
+import styles from "./Navigation.module.scss";
+import { TNavigationProps } from "./Navigation.types";
 
 const Navigation = ({
-  tReady,
   showText,
   isRootFolder,
   title,
   canCreate,
-  isTabletView,
 
   onClickFolder,
   navigationItems,
@@ -75,6 +75,7 @@ const Navigation = ({
   burgerLogo,
   isPublicRoom,
   titleIcon,
+  titleIconTooltip,
   currentDeviceType,
   rootRoomTitle,
   showTitle,
@@ -82,13 +83,18 @@ const Navigation = ({
   onNavigationButtonClick,
   tariffBar,
   showNavigationButton,
+  badgeLabel,
   onContextOptionsClick,
+  onLogoClick,
+  buttonRef,
+  addButtonRef,
+  contextButtonAnimation,
+  guidAnimationVisible,
   ...rest
-}: INavigationProps) => {
+}: TNavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [firstClick, setFirstClick] = React.useState(true);
   const [dropBoxWidth, setDropBoxWidth] = React.useState(0);
-  // const [maxHeight, setMaxHeight] = React.useState("");
 
   const dropBoxRef = React.useRef<HTMLDivElement | null>(null);
   const containerRef = React.useRef<HTMLDivElement | null>(null);
@@ -102,10 +108,6 @@ const Navigation = ({
 
     if (containerRef.current)
       setDropBoxWidth(DomHelpers.getOuterWidth(containerRef.current));
-
-    // const { top } = DomHelpers.getOffset(containerRef.current);
-
-    // setMaxHeight(`calc(100vh - ${top}px)`);
 
     setFirstClick(true);
   }, [isRootFolder, navigationItems?.length]);
@@ -157,6 +159,12 @@ const Navigation = ({
     };
   }, [isOpen, onResize, onMissClick]);
 
+  React.useEffect(() => {
+    if (!navigationItems?.length) {
+      setIsOpen(false);
+    }
+  }, [navigationItems]);
+
   const onBackToParentFolderAction = React.useCallback(() => {
     setIsOpen((val) => !val);
     onBackToParentFolder?.();
@@ -168,16 +176,39 @@ const Navigation = ({
     ((navigationItems && navigationItems.length > 1) || rootRoomTitle) &&
     currentDeviceType !== DeviceType.mobile;
 
+  const getContent = () => (
+    <Text fontSize="12px" fontWeight={400} noSelect>
+      {titleIconTooltip}
+    </Text>
+  );
+
   const navigationTitleNode = (
     <div className="title-block">
-      {titleIcon && <ReactSVG className="title-icon" src={titleIcon} />}
-      <Text
+      {titleIcon && !isRootFolder ? (
+        <ReactSVG
+          data-tooltip-id="iconTooltip"
+          className="title-icon"
+          src={titleIcon}
+        />
+      ) : null}
+
+      {titleIconTooltip ? (
+        <Tooltip
+          id="iconTooltip"
+          place="bottom"
+          getContent={getContent}
+          maxWidth="300px"
+        />
+      ) : null}
+
+      <NavigationText
         className="title-block-text"
         title={title}
-        isOpen={isOpen}
+        isOpen={false}
         isRootFolder={isRootFolder}
         onClick={toggleDropBox}
         isRootFolderTitle={false}
+        badgeLabel={!showRootFolderNavigation ? badgeLabel : ""}
       />
     </div>
   );
@@ -189,7 +220,7 @@ const Navigation = ({
 
   const navigationTitleContainerNode = showRootFolderNavigation ? (
     <div className="title-container">
-      <Text
+      <NavigationText
         className="room-title"
         title={
           rootRoomTitle || navigationItems[navigationItems.length - 2].title
@@ -198,6 +229,7 @@ const Navigation = ({
         isRootFolder={isRootFolder}
         isRootFolderTitle
         onClick={onTextClick}
+        badgeLabel={badgeLabel}
       />
 
       {navigationTitleNode}
@@ -206,11 +238,13 @@ const Navigation = ({
     navigationTitleNode
   );
 
+  const haveItems = !!navigationItems?.length;
+
   return (
     <Consumer>
       {(context) => (
         <>
-          {isOpen && (
+          {isOpen && haveItems ? (
             <>
               <Backdrop
                 visible={isOpen}
@@ -243,35 +277,41 @@ const Navigation = ({
                 onCloseDropBox={onCloseDropBox}
               />
             </>
-          )}
-          <StyledContainer
+          ) : null}
+          <div
             ref={containerRef}
-            width={context.sectionWidth || 0}
-            isRootFolder={isRootFolder}
-            isTrashFolder={isTrashFolder}
-            isDesktop={isDesktop}
-            isDesktopClient={isDesktopClient}
-            isInfoPanelVisible={isInfoPanelVisible}
-            withLogo={!!withLogo}
-            isPublicRoom={isPublicRoom}
-            className="navigation-container"
-            showNavigationButton={showNavigationButton}
+            className={styles.container}
+            data-is-root-folder={isRootFolder ? "true" : "false"}
+            data-is-trash-folder={isTrashFolder ? "true" : "false"}
+            data-is-desktop={isDesktop ? "true" : "false"}
+            data-is-desktop-client={isDesktopClient ? "true" : "false"}
+            data-is-info-panel-visible={isInfoPanelVisible ? "true" : "false"}
+            data-with-logo={withLogo ? "true" : "false"}
+            data-is-frame={isFrame ? "true" : "false"}
+            data-is-public-room={isPublicRoom ? "true" : "false"}
+            data-show-navigation-button={
+              showNavigationButton ? "true" : "false"
+            }
+            data-is-drop-box-component="false"
           >
-            {withLogo && (
+            {withLogo ? (
               <NavigationLogo
                 className="navigation-logo"
                 logo={typeof withLogo === "string" ? withLogo : ""}
                 burgerLogo={burgerLogo}
+                onClick={onLogoClick}
               />
-            )}
+            ) : null}
             <ArrowButton
               isRootFolder={isRootFolder}
               onBackToParentFolder={onBackToParentFolder}
             />
 
-            {showTitle && navigationTitleContainerNode}
+            {showTitle ? navigationTitleContainerNode : null}
 
             <ControlButtons
+              buttonRef={buttonRef}
+              addButtonRef={addButtonRef}
               isRootFolder={isRootFolder}
               canCreate={canCreate}
               getContextOptionsFolder={getContextOptionsFolder}
@@ -293,9 +333,12 @@ const Navigation = ({
               title={title}
               isEmptyPage={isEmptyPage}
               onContextOptionsClick={onContextOptionsClick}
+              isMobile={currentDeviceType !== DeviceType.desktop}
+              contextButtonAnimation={contextButtonAnimation}
+              guidAnimationVisible={guidAnimationVisible}
             />
-          </StyledContainer>
-          {isDesktop && !hideInfoPanel && (
+          </div>
+          {isDesktop && !hideInfoPanel ? (
             <ToggleInfoPanelButton
               id="info-panel-toggle--open"
               isRootFolder={isRootFolder}
@@ -303,7 +346,7 @@ const Navigation = ({
               isInfoPanelVisible={isInfoPanelVisible}
               titles={titles}
             />
-          )}
+          ) : null}
         </>
       )}
     </Consumer>

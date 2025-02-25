@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,12 +39,13 @@ import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
-
-import BonusItem from "./BonusItem";
-import AccountsItem from "./AccountsItem";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
+import { toastr } from "@docspace/shared/components/toast";
+import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
+import AccountsItem from "./AccountsItem";
+import BonusItem from "./BonusItem";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
   display: contents;
@@ -61,24 +62,28 @@ const Item = ({
   getFolderIcon,
   setBufferSelection,
   isActive,
-  getEndOfBlock,
+  isLastItem,
   showText,
   onClick,
   onMoveTo,
-  onBadgeClick,
   showDragItems,
   startUpload,
-  uploadEmptyFolders,
+  createFoldersTree,
   setDragging,
   showBadge,
   labelBadge,
   iconBadge,
   folderId,
   currentColorScheme,
+  isIndexEditingMode,
+  getLinkData,
+  onBadgeClick,
+  roomsFolderId,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
 
-  const isDragging = dragging ? showDragItems(item) : false;
+  const isDragging =
+    dragging && !isIndexEditingMode ? showDragItems(item) : false;
 
   let value = "";
   if (isDragging) value = `${item.id} dragging`;
@@ -86,18 +91,16 @@ const Item = ({
   const onDropZoneUpload = React.useCallback(
     (files, uploadToFolder) => {
       dragging && setDragging(false);
-      const emptyFolders = files.filter((f) => f.isEmptyDirectory);
 
-      if (emptyFolders.length > 0) {
-        uploadEmptyFolders(emptyFolders, uploadToFolder).then(() => {
-          const onlyFiles = files.filter((f) => !f.isEmptyDirectory);
-          if (onlyFiles.length > 0) startUpload(onlyFiles, uploadToFolder, t);
+      createFoldersTree(t, files, uploadToFolder)
+        .then((f) => {
+          if (f.length > 0) startUpload(f, null, t);
+        })
+        .catch((err) => {
+          toastr.error(err);
         });
-      } else {
-        startUpload(files, uploadToFolder, t);
-      }
     },
-    [t, dragging, setDragging, startUpload, uploadEmptyFolders],
+    [t, dragging, setDragging, startUpload, createFoldersTree],
   );
 
   const onDrop = React.useCallback(
@@ -129,19 +132,25 @@ const Item = ({
   }, []);
 
   const onClickAction = React.useCallback(
-    (e, folderId) => {
+    (e, selectedFolderId) => {
       setBufferSelection(null);
 
-      onClick &&
-        onClick(
-          e,
-          folderId,
-          item.title,
-          item.rootFolderType,
-          item.security.Create,
-        );
+      onClick?.(
+        e,
+        selectedFolderId,
+        item.title,
+        item.rootFolderType,
+        item.security.Create,
+      );
     },
     [onClick, item.title, item.rootFolderType],
+  );
+
+  const linkData = getLinkData(
+    item.id,
+    item.title,
+    item.rootFolderType,
+    item.security.Create,
   );
 
   return (
@@ -150,12 +159,13 @@ const Item = ({
       data-title={item.title}
       value={value}
       onDrop={onDrop}
-      dragging={dragging && isDragging}
+      dragging={dragging ? isDragging : null}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
-      className={"document-catalog"}
+      className="document-catalog"
     >
       <ArticleItem
+        item={item}
         key={item.id}
         id={item.id}
         title={item.title}
@@ -167,15 +177,24 @@ const Item = ({
         isActive={isActive}
         onClick={onClickAction}
         onDrop={onMoveTo}
-        isEndOfBlock={getEndOfBlock(item)}
+        isEndOfBlock={isLastItem}
         isDragging={isDragging}
-        isDragActive={isDragActive && isDragging}
+        isDragActive={isDragActive ? isDragging : null}
         value={value}
         showBadge={showBadge}
         labelBadge={labelBadge}
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
         badgeTitle={labelBadge ? "" : t("EmptyRecycleBin")}
+        badgeComponent={
+          <NewFilesBadge
+            newFilesCount={labelBadge}
+            folderId={item.id === roomsFolderId ? "rooms" : item.id}
+            parentDOMId={folderId}
+            onBadgeClick={onBadgeClick}
+          />
+        }
+        linkData={linkData}
         $currentColorScheme={currentColorScheme}
       />
     </StyledDragAndDrop>
@@ -188,17 +207,15 @@ const Items = ({
   showText,
 
   onClick,
-  onBadgeClick,
 
   dragging,
   setDragging,
   startUpload,
-  uploadEmptyFolders,
+  createFoldersTree,
   isVisitor,
   isCollaborator,
   isAdmin,
-  myId,
-  commonId,
+
   currentId,
   draggableItems,
   setBufferSelection,
@@ -221,18 +238,11 @@ const Items = ({
   currentDeviceType,
   folderAccess,
   currentColorScheme,
-}) => {
-  const getEndOfBlock = React.useCallback((item) => {
-    switch (item.key) {
-      case "0-3":
-      case "0-5":
-      case "0-6":
-        return true;
-      default:
-        return false;
-    }
-  }, []);
+  isIndexEditingMode,
 
+  getLinkData,
+  roomsFolderId,
+}) => {
   const getFolderIcon = React.useCallback((item) => {
     return getCatalogIconUrlByType(item.rootFolderType);
   }, []);
@@ -282,22 +292,15 @@ const Items = ({
   );
 
   const onMoveTo = React.useCallback(
-    (destFolderId, title) => {
-      moveDragItems(destFolderId, title, {
-        copy: t("Common:CopyOperation"),
-        move: t("Common:MoveToOperation"),
-      });
+    (destFolderId, title, destFolderInfo) => {
+      moveDragItems(destFolderId, title, destFolderInfo);
     },
-    [moveDragItems, t],
+    [moveDragItems],
   );
 
   const onRemove = React.useCallback(() => {
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
       deleteFromTrash: t("Translations:DeleteFromTrash"),
-      deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-      FileRemoved: t("Files:FileRemoved"),
-      FolderRemoved: t("Files:FolderRemoved"),
     };
 
     deleteAction(translations);
@@ -308,9 +311,13 @@ const Items = ({
     setEmptyTrashDialogVisible(true);
   };
 
+  const onBadgeClick = () => {
+    if (currentDeviceType === DeviceType.mobile) onHide();
+  };
+
   const getItems = React.useCallback(
-    (data) => {
-      const items = data.map((item, index) => {
+    (elm) => {
+      const items = elm.map((item, index) => {
         const isTrash = item.rootFolderType === FolderType.TRASH;
         const showBadge = emptyTrashInProgress
           ? false
@@ -322,19 +329,20 @@ const Items = ({
 
         return (
           <Item
-            key={`${item.id}_${index}`}
+            key={item.id}
             t={t}
             setDragging={setDragging}
             startUpload={startUpload}
-            uploadEmptyFolders={uploadEmptyFolders}
+            createFoldersTree={createFoldersTree}
             item={item}
             setBufferSelection={setBufferSelection}
             dragging={dragging}
             getFolderIcon={getFolderIcon}
             isActive={item.id === activeItemId}
-            getEndOfBlock={getEndOfBlock}
+            isLastItem={index === elm.length - 1}
             showText={showText}
             onClick={onClick}
+            getLinkData={getLinkData}
             onMoveTo={isTrash ? onRemove : onMoveTo}
             onBadgeClick={isTrash ? onEmptyTrashAction : onBadgeClick}
             showDragItems={showDragItems}
@@ -343,20 +351,13 @@ const Items = ({
             iconBadge={iconBadge}
             folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
             currentColorScheme={currentColorScheme}
+            roomsFolderId={roomsFolderId}
+            onHide={onHide}
+            isIndexEditingMode={isIndexEditingMode}
           />
         );
       });
 
-      /*if (!firstLoad && !isVisitor)
-        items.splice(
-          3,
-          0,
-          <SettingsItem
-            key="settings-item"
-            onClick={onClick}
-            isActive={activeItemId === "settings"}
-          />
-        );*/
       if (!isVisitor && !isCollaborator)
         items.splice(
           3,
@@ -364,6 +365,7 @@ const Items = ({
           <AccountsItem
             key="accounts-item"
             onClick={onClick}
+            getLinkData={getLinkData}
             isActive={activeItemId === "accounts"}
           />,
         );
@@ -381,20 +383,20 @@ const Items = ({
       dragging,
       getFolderIcon,
       onClick,
+      getLinkData,
       onMoveTo,
-      getEndOfBlock,
-      onBadgeClick,
       showDragItems,
       showText,
       setDragging,
       startUpload,
-      uploadEmptyFolders,
+      createFoldersTree,
       trashIsEmpty,
       isAdmin,
       isVisitor,
       firstLoad,
       activeItemId,
       emptyTrashInProgress,
+      isIndexEditingMode,
     ],
   );
 
@@ -405,7 +407,6 @@ Items.propTypes = {
   data: PropTypes.array,
   showText: PropTypes.bool,
   onClick: PropTypes.func,
-  onClickBadge: PropTypes.func,
   onHide: PropTypes.func,
 };
 
@@ -421,12 +422,14 @@ export default inject(
     clientLoadingStore,
     userStore,
     settingsStore,
+    indexingStore,
     currentTariffStatusStore,
   }) => {
-    const { isPaymentPageAvailable, currentDeviceType } = authStore;
+    const { isPaymentPageAvailable } = authStore;
+
     const { isCommunity } = currentTariffStatusStore;
 
-    const { showText, currentColorScheme } = settingsStore;
+    const { showText, currentColorScheme, currentDeviceType } = settingsStore;
 
     const {
       selection,
@@ -439,17 +442,24 @@ export default inject(
       startDrag,
     } = filesStore;
 
+    const { isIndexEditingMode } = indexingStore;
+
     const { firstLoad } = clientLoadingStore;
 
     const { startUpload } = uploadDataStore;
 
-    const { treeFolders, myFolderId, commonFolderId, isPrivacyFolder } =
-      treeFoldersStore;
+    const {
+      treeFolders,
+      myFolderId,
+      commonFolderId,
+      isPrivacyFolder,
+      roomsFolderId,
+    } = treeFoldersStore;
 
     const { id, access: folderAccess } = selectedFolderStore;
     const {
       moveDragItems,
-      uploadEmptyFolders,
+      createFoldersTree,
       deleteAction,
       emptyTrashInProgress,
     } = filesActionsStore;
@@ -478,7 +488,7 @@ export default inject(
       setBufferSelection,
       deleteAction,
       startUpload,
-      uploadEmptyFolders,
+      createFoldersTree,
       setEmptyTrashDialogVisible,
       trashIsEmpty,
 
@@ -490,6 +500,8 @@ export default inject(
       currentDeviceType,
       folderAccess,
       currentColorScheme,
+      roomsFolderId,
+      isIndexEditingMode,
     };
   },
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

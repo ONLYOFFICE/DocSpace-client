@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { AxiosRequestConfig } from "axios";
 import AxiosClient, { TReqOption } from "../utils/axiosClient";
 
@@ -33,12 +36,12 @@ export const initSSR = (headers: Record<string, string>) => {
   client.initSSR(headers);
 };
 
-export const request = (
+export const request = <T>(
   options: TReqOption & AxiosRequestConfig,
   skipRedirect = false,
   isOAuth = false,
-) => {
-  return client.request(options, skipRedirect, isOAuth);
+): Promise<T> | undefined => {
+  return client.request<T>(options, skipRedirect, isOAuth);
 };
 
 export const setWithCredentialsStatus = (state: boolean) => {

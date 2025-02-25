@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,25 +29,26 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css, useTheme } from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { TableGroupMenu } from "@docspace/shared/components/table";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import LoaderSectionHeader from "../loaderSectionHeader";
 import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
+import TariffBar from "SRC_DIR/components/TariffBar";
+import { IMPORT_HEADER_CONST } from "SRC_DIR/pages/PortalSettings/utils/settingsTree";
 import {
   getKeyByLink,
   settingsTree,
   getTKeyByKey,
   checkPropertyByLink,
 } from "../../../utils";
-import TariffBar from "SRC_DIR/components/TariffBar";
+import LoaderSectionHeader from "../loaderSectionHeader";
 
 export const HeaderContainer = styled.div`
   position: relative;
@@ -85,11 +86,6 @@ export const HeaderContainer = styled.div`
       ${({ theme }) =>
         theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
-
-    @media ${tablet} {
-      padding-block: 8px;
-      padding-inline: 8px 0;
-    }
   }
 
   @media ${tablet} {
@@ -119,20 +115,25 @@ export const HeaderContainer = styled.div`
 `;
 
 export const StyledContainer = styled.div`
-  .group-button-menu-container {
-    ${(props) =>
-      props.viewAs === "table"
-        ? css`
-            margin: 0px -20px;
-            width: calc(100% + 40px);
-          `
-        : css`
-            margin: 0px -20px;
-            width: calc(100% + 40px);
-          `}
+  .table-container_group-menu {
+    margin-block: 0;
+    margin-inline: -20px 0;
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+
+    width: calc(100% + 40px);
+    height: 68px;
 
     @media ${tablet} {
-      margin: 0 -16px;
+      height: 61px;
+      margin-block: 0;
+      margin-inline: -16px 0;
+      width: calc(100% + 32px);
+    }
+
+    @media ${mobile} {
+      height: 52px !important;
+      margin-block: 0;
+      margin-inline: -16px 0;
       width: calc(100% + 32px);
     }
   }
@@ -140,17 +141,25 @@ export const StyledContainer = styled.div`
 
 const SectionHeaderContent = (props) => {
   const {
-    isBrandingAndCustomizationAvailable,
+    isCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
     tReady,
     setIsLoadedSectionHeader,
     isSSOAvailable,
     workspace,
+    standalone,
+    getHeaderMenuItems,
+    setSelections,
+    selectorIsOpen,
+    toggleSelector,
+    removeAdmins,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
+
+  const isOAuth = location.pathname.includes("oauth");
 
   const [state, setState] = React.useState({
     header: "",
@@ -159,18 +168,30 @@ const SectionHeaderContent = (props) => {
     isHeaderVisible: false,
   });
 
+  const getArrayOfParams = () => {
+    const path = location.pathname;
+    const arrayPath = path.split("/");
+    const arrayOfParams = arrayPath.filter((param) => {
+      return param && param !== "filter" && param !== "portal-settings";
+    });
+
+    return arrayOfParams;
+  };
+
   const isAvailableSettings = (key) => {
     switch (key) {
       case "DNSSettings":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable;
       case "RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
+      case "BrandName":
+        return isCustomizationAvailable || standalone;
       case "WhiteLabel":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "CompanyInfoSettings":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "AdditionalResources":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "SingleSignOn:ServiceProviderSettings":
       case "SingleSignOn:SpMetadata":
         return isSSOAvailable;
@@ -189,6 +210,8 @@ const SectionHeaderContent = (props) => {
     const keysCollection = key.split("-");
 
     const currKey = keysCollection.length >= 3 ? key : keysCollection[0];
+
+    // console.log(settingsTree, currKey);
 
     const header = getTKeyByKey(currKey, settingsTree);
     const isCategory = checkPropertyByLink(
@@ -224,38 +247,22 @@ const SectionHeaderContent = (props) => {
   ]);
 
   const onBackToParent = () => {
-    let newArrayOfParams = getArrayOfParams();
+    const newArrayOfParams = getArrayOfParams();
     newArrayOfParams.splice(-1, 1);
     const newPath = newArrayOfParams.join("/");
     navigate(newPath);
   };
 
-  const getArrayOfParams = () => {
-    const resultPath = location.pathname;
-    const arrayOfParams = resultPath.split("/").filter((param) => {
-      return param !== "filter" && param && param !== "portal-settings";
-    });
-
-    return arrayOfParams;
-  };
-
-  const addUsers = (items) => {
-    const { addUsers } = props;
-    if (!addUsers) return;
-    addUsers(items);
-  };
-
-  const onToggleSelector = (isOpen = !props.selectorIsOpen) => {
-    const { toggleSelector } = props;
+  const onToggleSelector = (isOpen = !selectorIsOpen) => {
     toggleSelector(isOpen);
   };
 
-  const onClose = () => {
-    const { deselectUser } = props;
-    deselectUser();
-  };
-
   const onCheck = (checked) => {
+    if (isOAuth) {
+      setSelections(checked);
+      return;
+    }
+
     const { setSelected } = props;
     setSelected(checked ? "all" : "close");
   };
@@ -265,8 +272,7 @@ const SectionHeaderContent = (props) => {
     setSelected("all");
   };
 
-  const removeAdmins = () => {
-    const { removeAdmins } = props;
+  const onClick = () => {
     if (!removeAdmins) return;
     removeAdmins();
   };
@@ -279,73 +285,81 @@ const SectionHeaderContent = (props) => {
     isHeaderChecked,
     isHeaderVisible,
     selection,
+    addUsers,
+    logoText,
   } = props;
+
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
 
   const menuItems = (
-    <>
-      <DropDownItem
-        key="all"
-        label={t("Common:SelectAll")}
-        data-index={1}
-        onClick={onSelectAll}
-      />
-    </>
+    <DropDownItem
+      key="all"
+      label={t("Common:SelectAll")}
+      data-index={1}
+      onClick={onSelectAll}
+    />
   );
 
-  const headerMenu = [
-    {
-      label: t("Common:Delete"),
-      disabled: !selection || !selection.length > 0,
-      onClick: removeAdmins,
-      iconUrl: DeleteReactSvgUrl,
-    },
-  ];
+  const headerMenu = isOAuth
+    ? getHeaderMenuItems(t, true)
+    : [
+        {
+          label: t("Common:Delete"),
+          disabled: !selection || !selection.length > 0,
+          onClick,
+          iconUrl: DeleteReactSvgUrl,
+        },
+      ];
 
   const translatedHeader =
-    header === "ImportHeader"
+    header === IMPORT_HEADER_CONST
       ? workspace === "GoogleWorkspace"
         ? t("ImportFromGoogle")
         : workspace === "Nextcloud"
           ? t("ImportFromNextcloud")
           : workspace === "Workspace"
             ? t("ImportFromPortal", {
-                organizationName: t("Common:OrganizationName"),
+                organizationName: logoText,
               })
             : t("DataImport")
-      : t(header, { organizationName: t("Common:OrganizationName") });
+      : t(header, {
+          organizationName: logoText,
+          license: t("Common:EnterpriseLicense"),
+        });
+
+  // console.log(translatedHeader, header);
 
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
-        <div className="group-button-menu-container">
-          <TableGroupMenu
-            checkboxOptions={menuItems}
-            onChange={onCheck}
-            isChecked={isHeaderChecked}
-            isIndeterminate={isHeaderIndeterminate}
-            headerMenu={headerMenu}
-            withComboBox
-          />
-        </div>
+        <TableGroupMenu
+          checkboxOptions={menuItems}
+          onChange={onCheck}
+          isChecked={isHeaderChecked}
+          isIndeterminate={isHeaderIndeterminate}
+          headerMenu={headerMenu}
+          withComboBox={false}
+          withoutInfoPanelToggler
+          isMobileView={false}
+        />
       ) : !isLoadedSectionHeader ? (
         <LoaderSectionHeader />
       ) : (
         <HeaderContainer>
           {!isCategoryOrHeader &&
-            arrayOfParams[0] &&
-            (isMobile() ||
-              window.location.href.indexOf("/javascript-sdk/") > -1) && (
-              <IconButton
-                iconName={ArrowPathReactSvgUrl}
-                size="17"
-                isFill={true}
-                onClick={onBackToParent}
-                className="arrow-button"
-              />
-            )}
-          <Headline type="content" truncate={true}>
+          arrayOfParams[0] &&
+          (isMobile() ||
+            window.location.href.indexOf("/javascript-sdk/") > -1) ? (
+            <IconButton
+              iconName={ArrowPathReactSvgUrl}
+              size="17"
+              isFill
+              onClick={onBackToParent}
+              className="arrow-button"
+            />
+          ) : null}
+          <Heading type="content" truncate>
             <div className="settings-section_header">
               <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (
@@ -358,28 +372,30 @@ const SectionHeaderContent = (props) => {
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="settings-section_badge"
-                  isPaidBadge={true}
+                  isPaidBadge
                 />
               ) : (
                 ""
               )}
             </div>
-          </Headline>
-          <div className="tariff-bar">
-            <TariffBar />
-          </div>
+          </Heading>
+          {arrayOfParams[0] !== "payments" ? (
+            <div className="tariff-bar">
+              <TariffBar />
+            </div>
+          ) : null}
 
-          {props.addUsers && (
+          {addUsers ? (
             <div className="action-wrapper">
               <IconButton
                 iconName={ActionsHeaderTouchReactSvgUrl}
                 size="17"
-                isFill={true}
+                isFill
                 onClick={onToggleSelector}
                 className="action-button"
               />
             </div>
-          )}
+          ) : null}
         </HeaderContainer>
       )}
     </StyledContainer>
@@ -387,9 +403,16 @@ const SectionHeaderContent = (props) => {
 };
 
 export default inject(
-  ({ currentQuotaStore, setup, common, importAccountsStore }) => {
+  ({
+    currentQuotaStore,
+    setup,
+    common,
+    importAccountsStore,
+    settingsStore,
+    oauthStore,
+  }) => {
     const {
-      isBrandingAndCustomizationAvailable,
+      isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
     } = currentQuotaStore;
@@ -409,16 +432,19 @@ export default inject(
     const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
     const { workspace } = importAccountsStore;
+    const { standalone, logoText } = settingsStore;
 
+    const { getHeaderMenuItems } = oauthStore;
     return {
       addUsers,
       removeAdmins,
       selected,
       setSelected,
       admins,
-      isHeaderIndeterminate,
-      isHeaderChecked,
-      isHeaderVisible,
+      isHeaderIndeterminate:
+        isHeaderIndeterminate || oauthStore.isHeaderIndeterminate,
+      isHeaderChecked: isHeaderChecked || oauthStore.isHeaderChecked,
+      isHeaderVisible: isHeaderVisible || oauthStore.isHeaderVisible,
       deselectUser,
       selectAll,
       toggleSelector,
@@ -426,16 +452,24 @@ export default inject(
       selection,
       isLoadedSectionHeader,
       setIsLoadedSectionHeader,
-      isBrandingAndCustomizationAvailable,
+      isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
       workspace,
+      standalone,
+      getHeaderMenuItems,
+      setSelections: oauthStore.setSelections,
+      logoText,
     };
   },
 )(
   withLoading(
-    withTranslation(["Settings", "SingleSignOn", "Common", "JavascriptSdk"])(
-      observer(SectionHeaderContent),
-    ),
+    withTranslation([
+      "Settings",
+      "SingleSignOn",
+      "Common",
+      "JavascriptSdk",
+      "OAuth",
+    ])(observer(SectionHeaderContent)),
   ),
 );

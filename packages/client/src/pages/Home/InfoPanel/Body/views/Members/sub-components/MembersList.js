@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,21 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
-  useState,
-  useCallback,
-  useEffect,
-  useRef,
-  useContext,
-} from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
 import { RowLoader } from "@docspace/shared/skeletons/selector";
 
-import { isMobile, mobile } from "@docspace/shared/utils";
+import { mobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
-import { StyledUserTypeHeader } from "../../../styles/members";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
+import { GENERAL_LINK_HEADER_KEY } from "@docspace/shared/constants";
+import { StyledUserTypeHeader } from "../../../styles/members";
 
 const MainStyles = styled.div`
   #members-list-header {
@@ -49,6 +44,10 @@ const MainStyles = styled.div`
     padding: 0;
     z-index: 1;
     background: ${(props) => props.theme.infoPanel.backgroundColor};
+
+    @media ${mobile} {
+      padding-inline-end: 16px;
+    }
   }
 `;
 
@@ -79,6 +78,7 @@ const StyledList = styled(List)`
 
 const itemSize = 48;
 const shareLinkItemSize = 68;
+const GENERAL_LINK_HEADER_HEIGHT = 38;
 
 const MembersList = (props) => {
   const {
@@ -118,7 +118,7 @@ const MembersList = (props) => {
           className="members-list-item members-list-loader-item"
           style={style}
         >
-          <RowLoader isMultiSelect={false} isContainer={true} isUser={true} />
+          <RowLoader isMultiSelect={false} isContainer isUser />
         </div>
       );
     }
@@ -155,6 +155,10 @@ const MembersList = (props) => {
   const getItemSize = ({ index }) => {
     const elem = list[index];
 
+    if (elem?.key === GENERAL_LINK_HEADER_KEY) {
+      return GENERAL_LINK_HEADER_HEIGHT;
+    }
+
     if (elem?.props?.isShareLink) {
       return shareLinkItemSize;
     }
@@ -172,17 +176,23 @@ const MembersList = (props) => {
     const headerTitle = header.children[0];
     const scrollOffset = e.target.scrollTop;
 
-    for (let titleIndex in listOfTitles) {
+    // First item is links header. Its size is different from link item size
+    const linksBlockHeight = linksBlockLength
+      ? GENERAL_LINK_HEADER_HEIGHT + (linksBlockLength - 1) * shareLinkItemSize
+      : 0;
+
+    Object.keys(listOfTitles).forEach((titleIndex) => {
       const title = listOfTitles[titleIndex];
-      const titleOffsetTop = title.index * itemSize;
+      const titleOffsetTop =
+        linksBlockHeight + (title.index - linksBlockLength) * itemSize;
 
       if (scrollOffset > titleOffsetTop) {
         if (title.displayName) headerTitle.innerText = title.displayName;
         header.style.display = "flex";
-      } else if (scrollOffset <= linksBlockLength * itemSize) {
+      } else if (scrollOffset <= linksBlockHeight) {
         header.style.display = "none";
       }
-    }
+    });
   };
 
   useEffect(() => {
@@ -201,14 +211,14 @@ const MembersList = (props) => {
 
   return (
     <MainStyles>
-      {!withoutTitlesAndLinks && (
+      {!withoutTitlesAndLinks ? (
         <StyledUserTypeHeader
           id="members-list-header"
           className="members-list-header"
         >
           <Text className="members-list-header_title title" />
         </StyledUserTypeHeader>
-      )}
+      ) : null}
       <StyledMembersList>
         <InfiniteLoader
           isRowLoaded={isItemLoaded}
@@ -240,6 +250,7 @@ const MembersList = (props) => {
                       scrollTop={scrollTop}
                       // React virtualized sets "LTR" by default.
                       style={{ direction: "inherit" }}
+                      tabIndex={null}
                     />
                   );
                 }}

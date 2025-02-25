@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,9 @@ import { useTranslation } from "react-i18next";
 
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
 import PanelReactSvgUrl from "PUBLIC_DIR/images/panel.react.svg?url";
+import CrossIconSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
+import { Text } from "../text";
 import { Checkbox } from "../checkbox";
 import { ComboBox, TOption } from "../combobox";
 import { IconButton } from "../icon-button";
@@ -59,27 +61,44 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
     isMobileView,
     isBlocked,
     withComboBox = true,
+    headerLabel,
+    isCloseable,
+    onCloseClick,
     ...rest
   } = props;
+
   const onCheckboxChange = () => {
     onChange?.(!isChecked);
   };
   const { t } = useTranslation("Common");
+
   return (
     <StyledTableGroupMenu
       className="table-container_group-menu"
       checkboxMargin={checkboxMargin}
       {...rest}
     >
-      <Checkbox
-        id="menu-checkbox_selected-all-file"
-        className="table-container_group-menu-checkbox"
-        onChange={onCheckboxChange}
-        isChecked={isChecked}
-        isIndeterminate={isIndeterminate}
-        title={t("Common:MainHeaderSelectAll")}
-      />
-      {withComboBox && (
+      {headerLabel ? (
+        <Text
+          fontSize="14px"
+          lineHeight="16px"
+          fontWeight={600}
+          className="table-container_label-element"
+        >
+          {headerLabel}
+        </Text>
+      ) : (
+        <Checkbox
+          id="menu-checkbox_selected-all-file"
+          className="table-container_group-menu-checkbox"
+          onChange={onCheckboxChange}
+          isChecked={isChecked}
+          isIndeterminate={isIndeterminate}
+          title={t("Common:MainHeaderSelectAll")}
+        />
+      )}
+
+      {withComboBox ? (
         <ComboBox
           id="menu-combobox"
           comboIcon={TriangleNavigationDownReactSvgUrl}
@@ -94,7 +113,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
           isMobileView={isMobileView}
           onSelect={() => {}}
         />
-      )}
+      ) : null}
       <div className="table-container_group-menu-separator" />
       <StyledScrollbar>
         {headerMenu.map((item) => (
@@ -105,15 +124,27 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
           />
         ))}
       </StyledScrollbar>
-      {!withoutInfoPanelToggler && (
+      {isCloseable ? (
+        <div className="table-header_icon">
+          <IconButton
+            className="table-header_icon-button"
+            size={16}
+            onClick={onCloseClick}
+            iconName={CrossIconSvgUrl}
+            isFill
+          />
+        </div>
+      ) : null}
+      {!withoutInfoPanelToggler ? (
         <StyledInfoPanelToggleColorThemeWrapper
           themeId={ThemeId.InfoPanelToggle}
           isInfoPanelVisible={isInfoPanelVisible}
+          className="table-header_icon"
         >
           <div className="info-panel-toggle-bg">
             <IconButton
               id="info-panel-toggle--open"
-              className="info-panel-toggle"
+              className="info-panel-toggle table-header_icon-button"
               iconName={PanelReactSvgUrl}
               size={16}
               isFill
@@ -121,7 +152,7 @@ const TableGroupMenu = (props: TableGroupMenuProps) => {
             />
           </div>
         </StyledInfoPanelToggleColorThemeWrapper>
-      )}
+      ) : null}
     </StyledTableGroupMenu>
   );
 };

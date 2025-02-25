@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,13 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { isMacOs } from "react-device-detect";
 import { Heading } from "@docspace/shared/components/heading";
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Aside } from "@docspace/shared/components/aside";
-import { StyledHotkeysPanel, StyledScrollbar } from "./StyledHotkeys";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import Base from "@docspace/shared/themes/base";
+
+import { StyledHotkeysPanel } from "./StyledHotkeys";
 import SelectionBlock from "./SelectionBlock";
 import MoveBlock from "./MoveBlock";
 import ActionsBlock from "./ActionsBlock";
@@ -39,19 +44,15 @@ import PreviewActionsBlock from "./PreviewActionsBlock";
 import NavigationBlock from "./NavigationBlock";
 import CreationBlock from "./CreationBlock";
 import UploadBlock from "./UploadBlock";
-import { isMacOs } from "react-device-detect";
-import Base from "@docspace/shared/themes/base";
 
-const HotkeyPanel = ({
+const HotkeysPanel = ({
   visible,
   setHotkeyPanelVisible,
   t,
-  theme,
+  theme = Base,
   tReady,
   isVisitor,
 }) => {
-  const scrollRef = useRef(null);
-
   const onClose = () => setHotkeyPanelVisible(false);
   const textStyles = {
     fontSize: "13px",
@@ -71,30 +72,22 @@ const HotkeyPanel = ({
     (e.key === "Esc" || e.key === "Escape") && onClose();
 
   useEffect(() => {
-    scrollRef.current && scrollRef?.current?.contentElement.focus();
     document.addEventListener("keyup", onKeyPress);
 
     return () => document.removeEventListener("keyup", onKeyPress);
   });
 
   return (
-    <StyledHotkeysPanel>
-      <Backdrop
-        onClick={onClose}
-        visible={visible}
-        isAside={true}
-        zIndex={210}
-      />
-      <Aside
-        className="hotkeys-panel"
-        visible={visible}
-        onClose={onClose}
-        withoutBodyScroll={true}
-      >
-        <div className="hotkeys_header">
-          <Heading className="hotkeys_heading">{t("Common:Hotkeys")}</Heading>
-        </div>
-        <StyledScrollbar ref={scrollRef}>
+    <ModalDialog
+      isLoading={!tReady}
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.aside}
+      withBodyScroll
+    >
+      <ModalDialog.Header>{t("Common:Hotkeys")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <StyledHotkeysPanel>
           <Heading className="hotkeys_sub-header">
             {t("HotkeysNavigation")}
           </Heading>
@@ -104,7 +97,7 @@ const HotkeyPanel = ({
             keyTextStyles={keyTextStyles}
             AltKey={AltKey}
           />
-          {!isVisitor && (
+          {!isVisitor ? (
             <>
               <Heading className="hotkeys_sub-header">
                 {t("HotkeysCreatingObjects")}
@@ -124,7 +117,7 @@ const HotkeyPanel = ({
                 keyTextStyles={keyTextStyles}
               />
             </>
-          )}
+          ) : null}
           <Heading className="hotkeys_sub-header">
             {t("HotkeysSelection")}
           </Heading>
@@ -167,13 +160,11 @@ const HotkeyPanel = ({
             textStyles={textStyles}
             keyTextStyles={keyTextStyles}
           />
-        </StyledScrollbar>
-      </Aside>
-    </StyledHotkeysPanel>
+        </StyledHotkeysPanel>
+      </ModalDialog.Body>
+    </ModalDialog>
   );
 };
-
-HotkeyPanel.defaultProps = { theme: Base };
 
 export default inject(({ settingsStore, publicRoomStore, userStore }) => {
   const { hotkeyPanelVisible, setHotkeyPanelVisible, theme } = settingsStore;
@@ -186,6 +177,6 @@ export default inject(({ settingsStore, publicRoomStore, userStore }) => {
   };
 })(
   withTranslation(["HotkeysPanel", "Article", "Common", "Files"])(
-    observer(HotkeyPanel),
+    observer(HotkeysPanel),
   ),
 );

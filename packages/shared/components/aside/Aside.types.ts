@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,23 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface AsideProps {
-  visible: boolean;
-  scale?: boolean;
-  className?: string;
-  contentPaddingBottom?: string;
-  zIndex?: number;
-  children: React.ReactNode;
-  withoutBodyScroll?: boolean;
-  onClose: () => void;
-}
+import { AsideHeaderProps } from "../aside-header";
 
-export interface StyledAsideProps {
+/**
+ * Props for the Aside component.
+ */
+export type AsideProps = AsideHeaderProps & {
+  /** Controls the visibility of the aside panel */
   visible: boolean;
+  /** Enables scaling animation */
   scale?: boolean;
+  /** Additional CSS class names */
+  className?: string;
+  /** Sets the z-index of the aside panel */
   zIndex?: number;
-  contentPaddingBottom?: string;
-  forwardRef?: React.LegacyRef<HTMLElement>;
+  /** Content to be rendered inside the aside panel */
   children: React.ReactNode;
-  className: string;
-}
+  /** Disables body scroll when aside is open */
+  withoutBodyScroll?: boolean;
+  /** Callback function when the aside is closed */
+  onClose: () => void;
+  /** Removes the header section if true */
+  withoutHeader?: boolean;
+};

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -47,22 +47,17 @@ const {
   white,
   black,
   darkBlack,
-
-  lightGrayBlackout,
-  darkGrayBlackout,
+  moonstone,
   grayLight,
   darkGrayLight,
   lightGrayHover,
-  lightDarkGrayHover,
   grayLightMid,
   grayDarkMid,
   lightGraySelected,
   grayStrong,
-  grayDarkStrong,
   gray,
   grayDark,
   lightGrayDark,
-  darkGrayDark,
   grayText,
   grayDarkText,
   lightBlueMain,
@@ -74,34 +69,24 @@ const {
   lightSecondMainDisabled,
 
   mainGreen,
+  mainRed,
 
   lightErrorStatus,
-  darkErrorStatus,
   favoritesStatus,
   lightStatusWarning,
-  darkStatusWarning,
   lightStatusPositive,
-  darkStatusPositive,
 
   lightIcons,
-  darkIcon,
   link,
-  darkLink,
   blueLightMid,
 
   lightToastDone,
-  darkToastDone,
   lightToastInfo,
-  darkToastInfo,
   lightToastAlert,
-  darkToastAlert,
   lightToastWarning,
-  darkToastWarning,
 
   dndColor,
-  dndDarkColor,
   dndHoverColor,
-  dndDarkHover,
 
   onWhiteColor,
   boxShadowColor,
@@ -120,8 +105,11 @@ const {
   lightScroll,
   lightScrollHover,
   lightScrollActive,
-  silver,
-  highlandGray,
+
+  blurLight,
+  lightBlueAction,
+  lightActive,
+  lightBlueHover,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -140,6 +128,10 @@ export const getBaseTheme = () => {
       emailColor: gray,
       fontWeight: "normal",
       fontWeightBold: "bold",
+
+      secondary: {
+        color: gray,
+      },
     },
 
     heading: {
@@ -1294,7 +1286,7 @@ export const getBaseTheme = () => {
     },
 
     backdrop: {
-      backgroundColor: lightGrayBlackout,
+      backgroundColor: blurLight,
       unsetBackgroundColor: "unset",
     },
 
@@ -1618,6 +1610,8 @@ export const getBaseTheme = () => {
     },
 
     calendar: {
+      containerBorderColor: white,
+
       color: black,
       disabledColor: lightGraySelected,
       pastColor: gray,
@@ -1787,6 +1781,8 @@ export const getBaseTheme = () => {
       background: white,
       rootFolderTitleColor: gray,
       boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
+      lifetimeIconFill: mainRed,
+      lifetimeIconStroke: mainRed,
 
       icon: {
         fill: link,
@@ -1846,7 +1842,7 @@ export const getBaseTheme = () => {
       sectionHeaderToggleBgActive: grayLight,
 
       backgroundColor: white,
-      blurColor: lightGrayBlackout,
+      blurColor: blurLight,
       borderColor: grayLightMid,
       thumbnailBorderColor: grayLightMid,
       textColor: black,
@@ -1864,6 +1860,7 @@ export const getBaseTheme = () => {
         iconColor: lightIcons,
         iconErrorColor: lightErrorStatus,
         primaryColor: grayText,
+        barIconColor: lightGrayDark,
       },
 
       members: {
@@ -1875,7 +1872,7 @@ export const getBaseTheme = () => {
         roleSelectorColor: gray,
         disabledRoleSelectorColor: gray,
         roleSelectorArrowColor: gray,
-        createLink: gray,
+        createLink: black,
         linkAccessComboboxExpired: gray,
         crossFill: lightGrayDark,
       },
@@ -1890,6 +1887,8 @@ export const getBaseTheme = () => {
         renamedItemColor: gray,
         oldRoleColor: lightGrayDark,
         messageColor: black,
+        itemBorderColor: grayLightMid,
+        fileBackgroundColor: lightGraySelected,
       },
 
       details: {
@@ -1910,6 +1909,10 @@ export const getBaseTheme = () => {
       groups: {
         textColor: gray,
         tagColor: grayStrong,
+      },
+
+      expired: {
+        color: grayText,
       },
     },
 
@@ -1999,6 +2002,8 @@ export const getBaseTheme = () => {
       hoverBorderColor: lightGrayDark,
       tableCellBorder: `1px solid ${grayLightMid}`,
 
+      indexingSeparator: lightBlueMain,
+
       groupMenu: {
         background: white,
         borderBottom: "1px solid transparent",
@@ -2057,6 +2062,7 @@ export const getBaseTheme = () => {
           linkColor: black,
           textColor: gray,
         },
+        fileExstColor: gray,
 
         row: {
           checkboxChecked: `linear-gradient(to right, ${lightGrayHover} 24px, ${grayLightMid} 24px)`,
@@ -2068,6 +2074,11 @@ export const getBaseTheme = () => {
           contextMenuWrapperDraggingHover: `linear-gradient(to left, ${dndHoverColor} 24px,${grayLightMid} 24px)`,
 
           backgroundActive: lightGrayHover,
+          indexUpdate: lightActive,
+          indexActive: lightBlueAction,
+
+          indexBackgroundButtonHover: lightBlueHover,
+          indexArrowButtonHover: lightBlueMain,
 
           borderImageCheckbox: `linear-gradient(to right, ${white} 24px, ${grayLightMid} 24px)`,
           borderImageContextMenu: `linear-gradient(to left, ${white} 24px, ${grayLightMid} 24px)`,
@@ -2108,6 +2119,7 @@ export const getBaseTheme = () => {
         sideColor: black,
         color: black,
         textColor: gray,
+        subTextColor: "#657077",
       },
 
       animationColor: lightSecondMain,
@@ -2170,45 +2182,6 @@ export const getBaseTheme = () => {
       alert: {
         fill: "",
         path: "",
-      },
-    },
-
-    mediaViewer: {
-      color: grayStrong,
-      backgroundColor: highlandGray,
-      fill: white,
-      titleColor: white,
-      iconColor: white,
-
-      controlBtn: {
-        backgroundColor: silver,
-      },
-
-      imageViewer: {
-        backgroundColor: silver,
-        inactiveBackgroundColor: highlandGray,
-        fill: white,
-      },
-
-      progressBar: {
-        background: grayStrong,
-        backgroundColor: silver,
-      },
-
-      scrollButton: {
-        backgroundColor: highlandGray,
-        background: silver,
-        border: `solid ${white}`,
-      },
-
-      videoViewer: {
-        fill: white,
-        stroke: white,
-        color: grayStrong,
-        colorError: white,
-        backgroundColorError: darkBlack,
-        backgroundColor: highlandGray,
-        background: silver,
       },
     },
 
@@ -2295,13 +2268,14 @@ export const getBaseTheme = () => {
       },
 
       iconCropper: {
-        gridColor: black,
+        gridColor: grayStrong,
         deleteButton: {
           background: grayLight,
           hoverBackground: lightGrayHover,
           borderColor: grayLight,
           hoverBorderColor: lightGrayHover,
           color: grayText,
+          hoverColor: grayText,
           iconColor: lightGrayDark,
         },
       },
@@ -2372,6 +2346,13 @@ export const getBaseTheme = () => {
     },
 
     emptyView: {
+      link: {
+        color: lightBlueMain,
+        background: white,
+        hoverBackground: lightGrayHover,
+        PressedBackground: lightGraySelected,
+      },
+
       items: {
         hoverColor: grayLight,
         pressColor: lightGraySelected,
@@ -2482,6 +2463,7 @@ export const getBaseTheme = () => {
         color: gray,
         tooltipColor: lightToastInfo,
         iconColor: lightErrorStatus,
+        positiveStatusColor: lightStatusPositive,
 
         shareButton: {
           color: gray,
@@ -2511,9 +2493,8 @@ export const getBaseTheme = () => {
       },
       separator: {
         borderBottom: `1px solid ${grayLightMid} !important`,
-        margin: "6px 16px 6px 16px !important",
+        margin: "6px 16px !important",
         height: "1px !important",
-        width: "calc(100% - 32px) !important",
       },
       text: {
         header: {
@@ -2534,7 +2515,7 @@ export const getBaseTheme = () => {
       background: "none",
       svgFill: black,
       header: {
-        height: "49px",
+        height: "55px",
         borderBottom: `1px solid ${grayLightMid}`,
         marginBottom: "6px",
       },
@@ -2544,7 +2525,7 @@ export const getBaseTheme = () => {
       padding: "0 12px",
       mobile: {
         height: "36px",
-        padding: "0 16px 6px",
+        padding: "6px 16px",
       },
     },
     newContextMenu: {
@@ -2552,7 +2533,6 @@ export const getBaseTheme = () => {
       borderRadius: "6px",
       mobileBorderRadius: "6px 6px 0 0",
       boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
-      padding: "6px 0px",
       border: "none",
       devices: {
         maxHeight: "calc(100vh - 64px)",
@@ -2648,6 +2628,14 @@ export const getBaseTheme = () => {
         stroke: grayStrong,
         color: grayStrong,
       },
+
+      versionDisabled: {
+        fillDisabled: grayStrong,
+      },
+
+      versionLink: {
+        color: gray,
+      },
       commentColor: gray,
     },
 
@@ -2711,6 +2699,7 @@ export const getBaseTheme = () => {
       background: grayLight,
       textColor: gray,
       iconFill: black,
+      warningColor: lightErrorStatus,
     },
 
     client: {
@@ -2836,6 +2825,9 @@ export const getBaseTheme = () => {
 
             dataFontColor: white,
             dataFontColorBlack: black,
+            notAvailableBackground: grayLight,
+            textColor: black,
+            paidBadgeBackground: favoritesStatus,
           },
 
           companyInfo: {
@@ -2854,6 +2846,7 @@ export const getBaseTheme = () => {
           textColor: gray,
           sso: {
             textColor: gray,
+            errorColor: lightErrorStatus,
             toggleContentBackground: grayLight,
             iconButton: black,
             iconButtonDisabled: gray,
@@ -2961,7 +2954,7 @@ export const getBaseTheme = () => {
           linkColor: link,
           spanBackground: lightBlueMain,
           filterBorder: `1px solid ${grayStrong}`,
-          toastBackground: lightToastWarning,
+
           background: grayLight,
         },
       },
@@ -2971,6 +2964,10 @@ export const getBaseTheme = () => {
         generatePasswordColor: lightGrayDark,
         textColor: gray,
       },
+    },
+
+    statusMessage: {
+      toastBackground: lightToastWarning,
     },
 
     tileLoader: {
@@ -3091,6 +3088,7 @@ export const getBaseTheme = () => {
 
     itemIcon: {
       borderColor: grayLightMid,
+      editIconColor: grayLightMid,
     },
 
     invitePage: {
@@ -3124,6 +3122,7 @@ export const getBaseTheme = () => {
         color: gray,
         errorColor: lightErrorStatus,
       },
+      editInputColor: grayText,
       requiredColor: lightErrorStatus,
     },
 
@@ -3154,6 +3153,13 @@ export const getBaseTheme = () => {
     roomIcon: {
       backgroundArchive: gray,
       opacityBackground: "1",
+      plusIcon: white,
+      emptyBorder: `2px dashed ${grayStrong}`,
+
+      linkIcon: {
+        background: white,
+        path: moonstone,
+      },
     },
 
     plugins: {
@@ -3216,10 +3222,42 @@ export const getBaseTheme = () => {
       errorColor: lightErrorStatus,
       sideColor: gray,
       nameColor: grayStrong,
+      barBackground: grayLight,
     },
 
     publicRoom: {
       border: `1px solid ${lightGraySelected}`,
+      linkColor: lightBlueMain,
+    },
+
+    newFilesPanel: {
+      borderColor: globalColors.grayLightMid,
+
+      borderRadius: "6px",
+      boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
+
+      fileItem: {
+        borderColor: globalColors.grayLightMid,
+        fileExstColor: globalColors.gray,
+      },
+    },
+    logoCover: {
+      selectColor: {
+        backgroundColor: lightGrayHover,
+      },
+
+      iconColor: lightGrayDark,
+      textColor: lightGrayDark,
+      selectedBackgroundColor: grayLightMid,
+      selectedBorderColor: grayLightMid,
+      backgroundColor: white,
+      borderColor: grayLightMid,
+    },
+
+    formFillingTips: {
+      circleColor: grayLightMid,
+      selectedColor: white,
+      circleBorder: `3px solid ${lightSecondMain}`,
     },
   };
 };

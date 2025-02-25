@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,14 +27,14 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import LdapFieldComponent from "./LdapFieldComponent";
 
-const LOGIN = "login",
-  PASSWORD = "password";
+const LOGIN = "login";
+const PASSWORD = "password";
 
 const AuthenticationContainer = ({
   login,
@@ -61,6 +61,8 @@ const AuthenticationContainer = ({
       case PASSWORD:
         setPassword(value);
         break;
+      default:
+        break;
     }
   };
 
@@ -76,13 +78,13 @@ const AuthenticationContainer = ({
         />
         <HelpButton tooltipContent={t("LdapAuthenticationTooltip")} />
       </div>
-      <Box className="ldap_authentication">
+      <div className="ldap_authentication">
         <FieldContainer
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.login}
-          labelText={"Login"}
+          labelText="Login"
           tooltipContent={t("LdapLoginTooltip")}
           inlineHelpButton
           isRequired
@@ -100,7 +102,7 @@ const AuthenticationContainer = ({
 
         <FieldContainer
           isVertical
-          labelVisible={true}
+          labelVisible
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.password}
           labelText={t("Common:Password")}
@@ -109,6 +111,7 @@ const AuthenticationContainer = ({
           isRequired
         >
           <LdapFieldComponent
+            isPassword
             name={PASSWORD}
             type="password"
             hasError={errors.password}
@@ -117,9 +120,14 @@ const AuthenticationContainer = ({
             isDisabled={!isLdapEnabled || isUIDisabled || !authentication}
             scale
             tabIndex={19}
+            simpleView
+            size={InputSize.small}
+            autoComplete="current-password"
+            inputType={InputType.password}
+            isDisableTooltip
           />
         </FieldContainer>
-      </Box>
+      </div>
     </>
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import { Trans } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
+import PeopleIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import AddEmailsStep from "../../components/AddEmailsStep";
@@ -40,7 +40,11 @@ import ImportCompleteStep from "../../components/ImportCompleteStep";
 
 import { TFunciton } from "../../types";
 
-export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
+export const getStepsData = (
+  t: TFunciton,
+  isTypeSelectEmpty: boolean,
+  logoText: string,
+) => {
   return [
     {
       title: t("Common:SelectFile"),
@@ -58,7 +62,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       title: t("Settings:SelectUsersWithEmail"),
       description: t("Settings:SelectUsersDescriptionNextcloud", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: (
         <SelectUsersStep t={t} canDisable={false} shouldSetUsers={false} />
@@ -68,7 +72,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       title: t("Settings:AddEmails"),
       description: t("Settings:AddEmailsDescription", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <AddEmailsStep t={t} />,
     },
@@ -133,7 +137,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
           t={t}
           serviceName="Nextcloud"
           usersExportDetails={{
-            name: t("Common:Accounts"),
+            name: t("Common:Contacts"),
             icon: PeopleIcon,
           }}
           personalExportDetails={{
@@ -157,7 +161,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionNextcloud", {
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }),
       component: <ImportCompleteStep t={t} />,
     },

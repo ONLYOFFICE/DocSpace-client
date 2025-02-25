@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,12 +31,11 @@ import Section from "@docspace/shared/components/section";
 import { Loader } from "@docspace/shared/components/loader";
 import { ValidationStatus } from "@docspace/shared/enums";
 import SectionWrapper from "SRC_DIR/components/Section";
-import RoomPassword from "./sub-components/RoomPassword";
-import RoomErrors from "./sub-components/RoomErrors";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import PublicRoomPage from "./PublicRoomPage";
-
-import FilesFilter from "@docspace/shared/api/files/filter";
+import RoomErrors from "./sub-components/RoomErrors";
+import RoomPassword from "./sub-components/RoomPassword";
 
 const PublicRoom = (props) => {
   const {

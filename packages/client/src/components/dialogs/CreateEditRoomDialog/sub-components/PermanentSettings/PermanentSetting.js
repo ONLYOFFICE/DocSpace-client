@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,10 +28,11 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { ReactSVG } from "react-svg";
 
-import SecondaryInfoButton from "../SecondaryInfoButton";
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledPermanentSetting = styled.div`
+import SecondaryInfoButton from "../SecondaryInfoButton";
+
+const StyledPermanentSetting = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
   display: flex;
   flex-direction: ${(props) => (props.isFull ? "column" : "row")};
@@ -72,9 +73,8 @@ const StyledPermanentSetting = styled.div`
           props.type === "privacy" &&
           css`
             path {
-              fill: ${(props) =>
-                props.theme.createEditRoomDialog.permanentSettings
-                  .isPrivateIcon};
+              fill: ${({ theme }) =>
+                theme.createEditRoomDialog.permanentSettings.isPrivateIcon};
             }
           `}
       }
@@ -101,8 +101,6 @@ const StyledPermanentSetting = styled.div`
     white-space: pre-line;
   }
 `;
-
-StyledPermanentSetting.defaultProps = { theme: Base };
 
 const PermanentSetting = ({ isFull, type, icon, title, content }) => {
   return (

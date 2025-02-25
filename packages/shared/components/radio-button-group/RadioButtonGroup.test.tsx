@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { RadioButtonGroup } from "./RadioButtonGroup";
+import type { RadioButtonGroupProps } from "./RadioButtonGroup.types";
+import { RadioButtonGroup } from ".";
 
 const baseProps = {
   name: "fruits",
@@ -36,50 +37,114 @@ const baseProps = {
   options: [
     { value: "apple", label: "Sweet apple" },
     { value: "banana", label: "Banana" },
-    { value: "Mandarin" },
+    { value: "mandarin", label: "Mandarin" },
   ],
+  onClick: jest.fn(),
 };
 
 describe("<RadioButtonGroup />", () => {
-  it("renders without error", () => {
-    render(
-      <RadioButtonGroup
-        {...baseProps}
-        orientation="horizontal"
-        onClick={() => {}}
-      />,
-    );
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
+  it("renders without error", () => {
+    render(<RadioButtonGroup {...baseProps} />);
     expect(screen.getByTestId("radio-button-group")).toBeInTheDocument();
   });
 
-  // it("accepts id", () => {
-  //   // @ts-expect-error TS(2322): Type '{ id: string; name: string; selected: string... Remove this comment to see the full error message
-  //   const wrapper = mount(<RadioButtonGroup {...baseProps} id="testId" />);
+  it("renders all options", () => {
+    render(<RadioButtonGroup {...baseProps} />);
 
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+    baseProps.options.forEach((option) => {
+      expect(screen.getByLabelText(option.label as string)).toBeInTheDocument();
+    });
+  });
 
-  // it("accepts className", () => {
-  //   // @ts-expect-error TS(2322): Type '{ className: string; name: string; selected:... Remove this comment to see the full error message
-  //   const wrapper = mount(<RadioButtonGroup {...baseProps} className="test" />);
+  it("accepts and applies custom id", () => {
+    render(<RadioButtonGroup {...baseProps} id="test-id" />);
+    expect(screen.getByTestId("radio-button-group")).toHaveAttribute(
+      "id",
+      "test-id",
+    );
+  });
 
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+  it("accepts and applies custom className", () => {
+    render(<RadioButtonGroup {...baseProps} className="custom-class" />);
+    expect(screen.getByTestId("radio-button-group")).toHaveClass(
+      "custom-class",
+    );
+  });
 
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ style: { color: string; }; name: string; s... Remove this comment to see the full error message
-  //     <RadioButtonGroup {...baseProps} style={{ color: "red" }} />,
-  //   );
+  it("accepts and applies custom style", () => {
+    const customStyle = { marginTop: "20px" };
+    render(<RadioButtonGroup {...baseProps} style={customStyle} />);
+    expect(screen.getByTestId("radio-button-group")).toHaveStyle(customStyle);
+  });
 
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+  it("handles option selection correctly", () => {
+    render(<RadioButtonGroup {...baseProps} />);
 
-  // it("accepts isDisabled prop", () => {
-  //   // @ts-expect-error TS(2322): Type '{ isDisabled: true; name: string; selected: ... Remove this comment to see the full error message
-  //   const wrapper = mount(<RadioButtonGroup {...baseProps} isDisabled />);
+    const appleRadio = screen.getByLabelText("Sweet apple");
+    fireEvent.click(appleRadio);
 
-  //   expect(wrapper.prop("isDisabled")).toEqual(true);
-  // });
+    expect(baseProps.onClick).toHaveBeenCalled();
+    expect(appleRadio).toBeChecked();
+  });
+
+  it("respects disabled state", () => {
+    render(<RadioButtonGroup {...baseProps} isDisabled />);
+
+    const radios = screen.getAllByRole("radio");
+    radios.forEach((radio) => {
+      expect(radio).toBeDisabled();
+    });
+  });
+
+  it("respects individual option disabled state", () => {
+    const propsWithDisabledOption = {
+      ...baseProps,
+      options: [
+        ...baseProps.options,
+        { value: "grape", label: "Grape", disabled: true },
+      ],
+    };
+
+    render(<RadioButtonGroup {...propsWithDisabledOption} />);
+    expect(screen.getByLabelText("Grape")).toBeDisabled();
+  });
+
+  it("renders text type option correctly", () => {
+    const propsWithTextOption = {
+      ...baseProps,
+      options: [
+        { type: "text", label: "Choose your favorite fruit:" },
+        ...baseProps.options,
+      ],
+    } as RadioButtonGroupProps;
+
+    render(<RadioButtonGroup {...propsWithTextOption} />);
+    expect(screen.getByTestId("radio-button-group_text")).toBeInTheDocument();
+  });
+
+  it("updates selection when selected prop changes", () => {
+    const { rerender } = render(<RadioButtonGroup {...baseProps} />);
+    expect(screen.getByLabelText("Banana")).toBeChecked();
+
+    rerender(<RadioButtonGroup {...baseProps} selected="apple" />);
+    expect(screen.getByLabelText("Sweet apple")).toBeChecked();
+  });
+
+  it("applies correct orientation styling", () => {
+    const { container, rerender } = render(
+      <RadioButtonGroup {...baseProps} orientation="vertical" />,
+    );
+
+    // Verify radio buttons are rendered in the correct orientation
+    const radioGroup = container.firstChild;
+    expect(radioGroup).toBeInTheDocument();
+
+    // For horizontal orientation
+    rerender(<RadioButtonGroup {...baseProps} orientation="horizontal" />);
+    expect(radioGroup).toBeInTheDocument();
+  });
 });

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,9 +29,9 @@ import React from "react";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledPrivacyLimitationsWarning = styled.div`
+const StyledPrivacyLimitationsWarning = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
   width: 100%;
   display: flex;
@@ -88,8 +88,6 @@ const StyledPrivacyLimitationsWarning = styled.div`
     text-underline-offset: 1px;
   }
 `;
-
-StyledPrivacyLimitationsWarning.defaultProps = { theme: Base };
 
 const PrivacyLimitationsWarning = ({ t }) => {
   return (

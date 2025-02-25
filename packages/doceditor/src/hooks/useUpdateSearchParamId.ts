@@ -10,6 +10,8 @@ const useUpdateSearchParamId = (
     const url = new URL(window.location.href);
     const id = url.searchParams.get("fileId");
 
+    const urlHash = hash ?? url.hash;
+
     if (url.searchParams.has("fileid")) url.searchParams.delete("fileid");
 
     if (id !== fileId) {
@@ -17,7 +19,7 @@ const useUpdateSearchParamId = (
       history.pushState(
         {},
         "",
-        `${url.pathname}${url.search}${hash ? hash : ""}`,
+        `${url.pathname}${url.search}${urlHash ? urlHash : ""}`,
       );
     }
   }, [fileId, hash]);

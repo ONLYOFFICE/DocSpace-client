@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,11 +26,11 @@
 
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Text } from "@docspace/shared/components/text";
-import CodeBlock from "../sub-components/CodeBlock";
+import CodeBlock from "./CodeBlock";
 
 import { CategorySubHeader, CodeWrapper } from "../presets/StyledPresets";
 
-export const CodeToInsert = ({ t, codeBlock, config }) => (
+export const CodeToInsert = ({ t, codeBlock, config, theme }) => (
   <CodeWrapper height="fit-content">
     <CategorySubHeader className="copy-window-code">
       {`HTML ${t("CodeTitle")}`}
@@ -38,13 +38,13 @@ export const CodeToInsert = ({ t, codeBlock, config }) => (
     <Text lineHeight="20px" className="preview-description">
       {t("HtmlCodeDescription", { productName: t("Common:ProductName") })}
     </Text>
-    <Textarea value={codeBlock} heightTextArea={153} />
+    <Textarea value={codeBlock} heightTextArea={153} isReadOnly enableCopy />
     <CategorySubHeader className="copy-window-code">
       {`JavaScript ${t("CodeTitle")}`}
     </CategorySubHeader>
     <Text lineHeight="20px" className="preview-description">
       {t("JavaScriptCodeDescription", { productName: t("Common:ProductName") })}
     </Text>
-    <CodeBlock config={config} />
+    <CodeBlock config={config} theme={theme} />
   </CodeWrapper>
 );

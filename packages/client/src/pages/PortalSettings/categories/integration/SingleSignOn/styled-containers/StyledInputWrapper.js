@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,6 +56,10 @@ const StyledInputWrapper = styled.div`
     line-height: 20px;
     overflow: visible;
     white-space: normal;
+  }
+
+  .access-selector {
+    margin-top: 16px;
   }
 `;
 

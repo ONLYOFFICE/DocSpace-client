@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -108,9 +108,11 @@ export const getIsDisabled = (
   isFileSelected?: boolean,
   includeFolder?: boolean,
   isRestore?: boolean,
+  isDisabledFolder?: boolean,
 ) => {
   if (isFirstLoad) return true;
   if (isRequestRunning) return true;
+  if (isDisabledFolder) return true;
   if (filterParam) return !isFileSelected;
   if (sameId && !isCopy) return true;
   if (sameId && isCopy && includeFolder) return true;

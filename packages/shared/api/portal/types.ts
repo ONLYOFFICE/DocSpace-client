@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,12 +39,12 @@ export type TPortalTariff = {
   portalStatus?: number;
   quotas: TQuotas[];
   enterprise: boolean;
+  developer: boolean;
   openSource: boolean;
 };
 
-export type TPaymentFeature = {
+export type TBasePaymentFeature = {
   id: string;
-  value: number;
   type: string;
   priceTitle?: string;
   image?: string;
@@ -53,6 +53,16 @@ export type TPaymentFeature = {
     title?: string;
   };
 };
+
+export type TNumericPaymentFeature = TBasePaymentFeature & {
+  value: number;
+};
+
+export type TBooleanPaymentFeature = TBasePaymentFeature & {
+  value: boolean;
+};
+
+export type TPaymentFeature = TNumericPaymentFeature | TBooleanPaymentFeature;
 
 export type TPaymentQuota = {
   id: number;
@@ -108,15 +118,6 @@ export type TTariff = {
   licenseDate: Date;
   customerId: string;
   quotas: TQuotas[];
-};
-
-export type TTenantExtraRes = {
-  customMode: boolean;
-  opensource: boolean;
-  enterprise: boolean;
-  notPaid: boolean;
-  licenseAccept: Date;
-  enableTariffPage: boolean;
 };
 
 export type TRestoreProgress = {

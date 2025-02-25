@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,12 +39,15 @@ import {
   TGroup,
   TGroupMemberInvitedInRoom,
 } from "@docspace/shared/api/groups/types";
+import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector.constants";
 
 import EmptyContainer from "./EmptyContainer";
 import GroupMembersList from "./sub-components/GroupMembersList/GroupMembersList";
-import { StyledModalDialog } from "./EditGroupMembersDialog.styled";
+import {
+  StyledBodyContent,
+  StyledHeaderText,
+} from "./EditGroupMembersDialog.styled";
 import { ModalBodyLoader } from "./sub-components/ModalBodyLoader/ModalBodyLoader";
-import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector.constants";
 
 interface EditGroupMembersProps {
   visible: boolean;
@@ -126,44 +129,57 @@ const EditGroupMembers = ({
   }
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.aside}
+      withoutPadding
     >
-      <ModalDialog.Header>{group.name}</ModalDialog.Header>
+      <ModalDialog.Header>
+        <StyledHeaderText
+          fontSize="21px"
+          fontWeight={700}
+          dir="auto"
+          truncate
+          noSelect
+        >
+          {group.name}
+        </StyledHeaderText>
+      </ModalDialog.Header>
 
       <ModalDialog.Body>
-        {!groupMembers ? (
-          <ModalBodyLoader withSearch />
-        ) : (
-          <>
-            <SearchInput
-              className="search-input"
-              placeholder={t("PeopleTranslations:SearchByGroupMembers")}
-              value={searchValue}
-              onChange={onChangeSearchValue}
-              onClearSearch={onClearSearch}
-              size={InputSize.base}
-            />
-
-            {isSearchResultLoading ? (
-              <ModalBodyLoader withSearch={false} />
-            ) : !groupMembers.length ? (
-              <EmptyContainer />
-            ) : (
-              <GroupMembersList
-                members={groupMembers}
-                loadNextPage={loadNextPage}
-                hasNextPage={groupMembers.length < total}
-                total={total}
-                isNextPageLoading={isNextPageLoading}
+        <StyledBodyContent>
+          {!groupMembers ? (
+            <ModalBodyLoader withSearch />
+          ) : (
+            <>
+              <SearchInput
+                className="search-input"
+                placeholder={t("PeopleTranslations:SearchByGroupMembers")}
+                value={searchValue}
+                onChange={onChangeSearchValue}
+                onClearSearch={onClearSearch}
+                size={InputSize.base}
               />
-            )}
-          </>
-        )}
+
+              {isSearchResultLoading ? (
+                <ModalBodyLoader withSearch={false} />
+              ) : !groupMembers.length ? (
+                <EmptyContainer />
+              ) : (
+                <GroupMembersList
+                  members={groupMembers}
+                  loadNextPage={loadNextPage}
+                  hasNextPage={groupMembers.length < total}
+                  total={total}
+                  isNextPageLoading={isNextPageLoading}
+                />
+              )}
+            </>
+          )}
+        </StyledBodyContent>
       </ModalDialog.Body>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

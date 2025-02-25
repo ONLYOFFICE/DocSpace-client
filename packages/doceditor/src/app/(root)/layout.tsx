@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,12 +30,17 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
+import "@docspace/shared/styles/theme.scss";
+
 import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
 import StyledComponentsRegistry from "@/utils/registry";
 import { getColorTheme, getSettings, getUser } from "@/utils/actions";
+import { logger } from "@/../logger.mjs";
 
 import "@/styles/globals.scss";
+
+const log = logger.child({ module: "Root layout" });
 
 export default async function RootLayout({
   children,
@@ -51,21 +56,17 @@ export default async function RootLayout({
     | undefined;
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
-    console.log("is health check");
+    log.info("get health check and return empty layout");
     return <></>;
   }
 
-  const startDate = new Date();
   const [user, settings, colorTheme] = await Promise.all([
     getUser(),
     getSettings(),
     getColorTheme(),
   ]);
-  const timer = new Date().getTime() - startDate.getTime();
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-
-  const api_host = process.env.API_HOST?.trim();
 
   return (
     <html lang="en" translate="no">
@@ -80,13 +81,11 @@ export default async function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
-      <body>
+      <body
+        className={`${systemTheme === ThemeKeys.DarkStr ? "dark" : "light"}`}
+      >
         <StyledComponentsRegistry>
-          <Providers
-            contextData={{ user, settings, systemTheme, colorTheme }}
-            api_host={api_host}
-            timer={timer}
-          >
+          <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
             {children}
           </Providers>
         </StyledComponentsRegistry>

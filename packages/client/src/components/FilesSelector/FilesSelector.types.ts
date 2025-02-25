@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,12 +29,14 @@ import {
   TFilesSettings,
   TFolder,
 } from "@docspace/shared/api/files/types";
-import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import {
+  TBreadCrumb,
+  TSelectorHeader,
+} from "@docspace/shared/components/selector/Selector.types";
 import { DeviceType } from "@docspace/shared/enums";
 import { TTheme } from "@docspace/shared/themes";
-import SocketIOHelper from "@docspace/shared/utils/socket";
 
-export type FilesSelectorProps = {
+export type FilesSelectorProps = TSelectorHeader & {
   isPanelVisible: boolean;
   // withoutImmediatelyClose: boolean;
   isThirdParty: boolean;
@@ -44,6 +46,7 @@ export type FilesSelectorProps = {
   isUserOnly: boolean;
   isRoomBackup: boolean;
   isEditorDialog: boolean;
+  currentDeviceType: DeviceType;
   setMoveToPublicRoomVisible: (visible: boolean, operationData: object) => void;
   setBackupToPublicRoomVisible: (visible: boolean, data: object) => void;
   getIcon: (size: number, fileExst: string) => string;
@@ -54,10 +57,12 @@ export type FilesSelectorProps = {
   withSearch: boolean;
   withBreadCrumbs: boolean;
   withSubtitle: boolean;
+  withPadding?: boolean;
 
   isMove?: boolean;
   isCopy?: boolean;
   isRestore: boolean;
+  isTemplate: boolean;
   isRestoreAll?: boolean;
   isSelect?: boolean;
   isFormRoom?: boolean;
@@ -68,6 +73,7 @@ export type FilesSelectorProps = {
   fromFolderId?: number;
   parentId: number;
   rootFolderType: number;
+  folderIsShared?: boolean;
 
   treeFolders?: TFolder[];
 
@@ -133,10 +139,6 @@ export type FilesSelectorProps = {
 
   includeFolder?: boolean;
 
-  socketHelper: SocketIOHelper;
-  socketSubscribers: Set<string>;
-  currentDeviceType: DeviceType;
-
   embedded: boolean;
   withHeader: boolean;
   withCancelButton: boolean;
@@ -148,4 +150,8 @@ export type FilesSelectorProps = {
   openRoot?: boolean;
 
   filesSettings: TFilesSettings;
+
+  withCreate?: boolean;
+  checkCreating?: boolean;
+  logoText: string;
 };

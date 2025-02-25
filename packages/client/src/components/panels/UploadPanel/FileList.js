@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,30 +29,32 @@ import { CustomScrollbarsVirtualListWithAutoFocus } from "@docspace/shared/compo
 import AutoSizer from "react-virtualized-auto-sizer";
 import { VariableSizeList as List } from "react-window";
 import { inject, observer } from "mobx-react";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import FileRow from "./FileRow";
-import { isDesktop } from "@docspace/shared/utils";
 
-const mobileRowHeight = 48;
-const desktopRowHeight = 48;
-const mobileRowIncreasedHeight = 92;
-const desktopRowIncreasedHeight = 88;
+const rowHeight = 52;
+const rowIncreasedHeight = 88;
+
+const VirtualScroll = (props) => (
+  <CustomScrollbarsVirtualListWithAutoFocus
+    {...props}
+    paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+  />
+);
 
 const FileList = ({ uploadDataFiles }) => {
   const [rowSizes, setRowSizes] = useState({});
   const listRef = useRef(null);
 
   const onUpdateHeight = (i, showInput) => {
-    const mobileHeight = showInput ? mobileRowIncreasedHeight : mobileRowHeight;
-    const desktopHeight = showInput
-      ? desktopRowIncreasedHeight
-      : desktopRowHeight;
+    const updatedHiaght = showInput ? rowIncreasedHeight : rowHeight;
 
     if (listRef.current) {
       listRef.current.resetAfterIndex(i, false);
     }
 
     const updatedValues = {
-      [i]: !isDesktop() ? mobileHeight : desktopHeight,
+      [i]: updatedHiaght,
     };
 
     setRowSizes((prevState) => ({
@@ -62,9 +64,7 @@ const FileList = ({ uploadDataFiles }) => {
   };
 
   const getSize = (i) => {
-    const standardHeight = !isDesktop() ? mobileRowHeight : desktopRowHeight;
-
-    return rowSizes[i] ? rowSizes[i] : standardHeight;
+    return rowSizes[i] ? rowSizes[i] : rowHeight;
   };
 
   const renderRow = useCallback(({ data, index, style }) => {
@@ -79,20 +79,18 @@ const FileList = ({ uploadDataFiles }) => {
 
   const renderList = ({ height, width }) => {
     return (
-      <>
-        <List
-          ref={listRef}
-          className="List"
-          height={height}
-          width={width}
-          itemSize={getSize}
-          itemCount={uploadDataFiles.length}
-          itemData={uploadDataFiles}
-          outerElementType={CustomScrollbarsVirtualListWithAutoFocus}
-        >
-          {renderRow}
-        </List>
-      </>
+      <List
+        ref={listRef}
+        className="List"
+        height={height}
+        width={width}
+        itemSize={getSize}
+        itemCount={uploadDataFiles.length}
+        itemData={uploadDataFiles}
+        outerElementType={VirtualScroll}
+      >
+        {renderRow}
+      </List>
     );
   };
 

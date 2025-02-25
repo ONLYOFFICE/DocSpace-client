@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,19 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { Link } from "@docspace/shared/components/link";
+import { getOAuthToken } from "@docspace/shared/utils/common";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import { StyledParam } from "../Params/StyledParam";
 import ToggleParam from "../Params/ToggleParam";
 import ThirdPartyComboBox from "./ThirdPartyComboBox";
 
 import FolderInput from "./FolderInput";
-import { getOAuthToken } from "@docspace/shared/utils/common";
-import { Checkbox } from "@docspace/shared/components/checkbox";
 
 const StyledThirdPartyStorage = styled(StyledParam)`
   flex-direction: column;
@@ -66,11 +66,11 @@ const ThirdPartyStorage = ({
   deleteThirdParty,
   openConnectWindow,
   setConnectItem,
-  getOAuthToken,
 
   isDisabled,
   currentColorScheme,
   isRoomAdmin,
+  isAdmin,
   createNewFolderIsChecked,
   onCreateFolderChange,
 
@@ -117,7 +117,7 @@ const ThirdPartyStorage = ({
   };
 
   const onChangeProvider = async (provider) => {
-    if (!!storageLocation.thirdpartyAccount) {
+    if (storageLocation.thirdpartyAccount) {
       onChangeStorageLocation({
         ...storageLocation,
         provider,
@@ -150,7 +150,7 @@ const ThirdPartyStorage = ({
         onCheckedChange={onChangeIsThirdparty}
       />
 
-      {storageLocation.isThirdparty && (
+      {storageLocation.isThirdparty ? (
         <ThirdPartyComboBox
           t={t}
           storageLocation={storageLocation}
@@ -168,10 +168,11 @@ const ThirdPartyStorage = ({
           setIsScrollLocked={setIsScrollLocked}
           setIsOauthWindowOpen={setIsOauthWindowOpen}
           isDisabled={isDisabled}
+          isAdmin={isAdmin}
         />
-      )}
+      ) : null}
 
-      {storageLocation.isThirdparty && storageLocation.thirdpartyAccount && (
+      {storageLocation.isThirdparty && storageLocation.thirdpartyAccount ? (
         <>
           <FolderInput
             t={t}
@@ -189,7 +190,7 @@ const ThirdPartyStorage = ({
             onChange={onCreateFolderChange}
           />
         </>
-      )}
+      ) : null}
     </StyledThirdPartyStorage>
   );
 };
@@ -213,7 +214,7 @@ export default inject(
 
     const connectItems = thirdPartyStore.connectingStorages;
 
-    const { isRoomAdmin } = authStore;
+    const { isRoomAdmin, isAdmin } = authStore;
 
     return {
       connectItems,
@@ -229,9 +230,9 @@ export default inject(
 
       openConnectWindow,
       setConnectItem,
-      getOAuthToken,
       currentColorScheme,
       isRoomAdmin,
+      isAdmin,
       fetchConnectingStorages: thirdPartyStore.fetchConnectingStorages,
     };
   },

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Textarea } from "@docspace/shared/components/textarea";
+import { PasswordInput } from "@docspace/shared/components/password-input";
 
 const LdapFieldComponent = (props) => {
   const {
@@ -37,27 +38,28 @@ const LdapFieldComponent = (props) => {
     setErrorField,
     name,
     onChange,
-    ...prop
+    isPassword,
+    ...rest
   } = props;
 
   const onChangeFn = (e) => {
-    const { value, name } = e.target;
+    const { value, name: inputName } = e.target;
 
     if (value.trim() !== "") {
-      removeErrorField(name);
+      removeErrorField(inputName);
     } else {
-      setErrorField(name);
+      setErrorField(inputName);
     }
 
     onChange && onChange(e);
   };
 
-  const onFocus = (e) => {
-    const name = e.target.name;
-    if (errors[name]) {
-      removeErrorField(name);
-    }
-  };
+  // const onFocus = (e) => {
+  //   const name = e.target.name;
+  //   if (errors[name]) {
+  //     removeErrorField(name);
+  //   }
+  // };
 
   const onBlur = (e) => {
     if (e.target.value.trim() === "") {
@@ -66,15 +68,28 @@ const LdapFieldComponent = (props) => {
   };
 
   if (isTextArea)
-    return <Textarea name={name} onChange={onChangeFn} {...prop} />;
+    return <Textarea name={name} onChange={onChangeFn} {...rest} />;
+
+  if (isPassword) {
+    return (
+      <PasswordInput
+        inputName={name}
+        inputValue={rest?.value || ""}
+        onBlur={onBlur}
+        // onFocus={onFocus}
+        onChange={onChangeFn}
+        {...rest}
+      />
+    );
+  }
 
   return (
     <TextInput
       name={name}
       onBlur={onBlur}
-      onFocus={onFocus}
+      // onFocus={onFocus}
       onChange={onChangeFn}
-      {...prop}
+      {...rest}
     />
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,10 +26,11 @@
 
 import styled from "styled-components";
 
-import { mobile } from "../../utils";
-import { Base } from "../../themes";
+import { injectDefaultTheme, mobile } from "../../utils";
 
-const StyledDropzone = styled.div<{ $isLoading?: boolean }>`
+const StyledDropzone = styled.div.attrs(injectDefaultTheme)<{
+  $isLoading?: boolean;
+}>`
   cursor: pointer;
   box-sizing: border-box;
   width: 100%;
@@ -95,7 +96,5 @@ const StyledDropzone = styled.div<{ $isLoading?: boolean }>`
     }
   }
 `;
-
-StyledDropzone.defaultProps = { theme: Base };
 
 export default StyledDropzone;

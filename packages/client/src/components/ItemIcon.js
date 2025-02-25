@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
-import { NoUserSelect } from "@docspace/shared/utils";
+import { injectDefaultTheme, NoUserSelect } from "@docspace/shared/utils";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.div.attrs(injectDefaultTheme)`
   ${(props) =>
     props.isRoom &&
     css`
@@ -42,7 +42,7 @@ const IconWrapper = styled.div`
         content: "";
         position: absolute;
         inset: 0;
-        /* border: ${(props) => props.theme.itemIcon.borderColor}; */
+        /* border: ${({ theme }) => theme.itemIcon.borderColor}; */
         border: 1px solid transparent;
         border-radius: 5px;
         overflow: hidden;
@@ -54,13 +54,10 @@ const IconWrapper = styled.div`
     ${(props) =>
       props.isRoom &&
       css`
-        border-radius: 6px;
         vertical-align: middle;
       `}
   }
 `;
-
-IconWrapper.defaultProps = { theme: Base };
 
 const EncryptedFileIcon = styled.div`
   background: url(${SecuritySvgUrl}) no-repeat 0 0 / 16px 16px transparent;
@@ -81,8 +78,17 @@ const ItemIcon = ({
   color,
   isArchive,
   badgeUrl,
+  size,
+  radius,
+  withEditing,
+  showDefault,
+  imgClassName,
+  model,
+  onChangeFile,
+  className,
+  isTemplate,
 }) => {
-  const isLoadedRoomIcon = !!logo?.medium;
+  const isLoadedRoomIcon = !!logo;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
 
   return (
@@ -91,20 +97,26 @@ const ItemIcon = ({
         <RoomIcon
           color={color}
           title={title}
+          size={size}
+          radius={radius}
           isArchive={isArchive}
-          showDefault={showDefaultRoomIcon}
-          imgClassName="react-svg-icon"
+          showDefault={showDefault || showDefaultRoomIcon}
+          imgClassName={imgClassName || "react-svg-icon"}
+          logo={isRoom ? logo : icon}
+          badgeUrl={badgeUrl || ""}
+          isTemplate={isTemplate}
           imgSrc={isRoom ? logo?.medium : icon}
-          badgeUrl={badgeUrl ? badgeUrl : ""}
+          withEditing={withEditing}
+          model={model}
+          onChangeFile={onChangeFile}
+          className={className}
         />
       </IconWrapper>
-      {isPrivacy && fileExst && <EncryptedFileIcon isEdit={false} />}
+      {isPrivacy && fileExst ? <EncryptedFileIcon isEdit={false} /> : null}
     </>
   );
 };
 
 export default inject(({ treeFoldersStore }) => {
-  return {
-    isPrivacy: treeFoldersStore.isPrivacyFolder,
-  };
+  return { isPrivacy: treeFoldersStore.isPrivacyFolder };
 })(observer(ItemIcon));

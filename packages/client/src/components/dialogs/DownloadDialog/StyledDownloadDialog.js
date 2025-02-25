@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,21 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-const StyledDownloadDialog = styled(ModalDialog)`
-  .download-dialog-description {
-    margin-bottom: 16px;
-    line-height: 20px;
-    min-height: 40px;
-  }
+const StyledBodyContent = styled.div`
+  margin-top: 24px;
+  margin-bottom: 16px;
+  line-height: 20px;
+  min-height: 40px;
 
   .download-dialog-convert-message {
     margin-top: 16px;
-  }
-
-  .modal-header {
-    margin-bottom: 24px;
   }
 `;
 
@@ -88,6 +82,14 @@ const StyledDownloadContent = styled.div`
     gap: 12px;
     height: 48px;
 
+    .remove-icon {
+      padding-right: 8px;
+    }
+    .enter-password {
+      text-decoration: underline dashed;
+      cursor: pointer;
+    }
+
     .download-dialog-main-content {
       min-width: 0;
       display: flex;
@@ -96,7 +98,6 @@ const StyledDownloadContent = styled.div`
       justify-content: start;
       width: 100%;
 
-      .checkbox,
       svg {
         margin: 0 !important;
       }
@@ -113,6 +114,12 @@ const StyledDownloadContent = styled.div`
         width: 100%;
       }
     }
+    .password-content {
+      cursor: pointer;
+      .password-title {
+        margin-left: 8px;
+      }
+    }
 
     .download-dialog-actions {
       .download-dialog-link {
@@ -121,6 +128,12 @@ const StyledDownloadContent = styled.div`
           padding-inline-end: 0;
           text-underline-offset: 1px;
         }
+
+        .expander {
+          svg {
+            padding-bottom: 2px;
+          }
+        }
       }
       .download-dialog-other-text {
         text-align: end;
@@ -128,6 +141,54 @@ const StyledDownloadContent = styled.div`
       }
     }
   }
+
+  .password-input {
+    display: flex;
+  }
+  #conversion-button {
+    margin-inline-start: 8px;
+    width: 100%;
+    max-width: 78px;
+  }
 `;
 
-export { StyledDownloadDialog, StyledDownloadContent };
+const StyledPasswordContent = styled.div`
+  margin-top: 16px;
+
+  .password-row-wrapper {
+    .password-info-text {
+      display: flex;
+      height: 36px;
+      align-items: center;
+    }
+    .warning-color {
+      p {
+        color: ${(props) => props.theme.downloadDialog.warningColor};
+      }
+    }
+  }
+`;
+
+const StyledSinglePasswordFile = styled.div`
+  .single-password_content {
+    display: flex;
+    justify-content: space-between;
+    background: ${(props) => props.theme.downloadDialog.background};
+    height: 48px;
+    align-items: center;
+    border-radius: 6px;
+    padding: 0 16px;
+    margin: 16px 0;
+
+    .single-password_row {
+      display: flex;
+      align-items: center;
+    }
+  }
+`;
+export {
+  StyledDownloadContent,
+  StyledBodyContent,
+  StyledPasswordContent,
+  StyledSinglePasswordFile,
+};

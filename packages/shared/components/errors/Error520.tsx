@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,14 +28,14 @@ import React, { useState, useEffect } from "react";
 import { i18n } from "i18next";
 import { I18nextProvider, useTranslation } from "react-i18next";
 
-import { getCrashReport } from "@docspace/shared/utils/crashReport";
+import { getCrashReport } from "../../utils/crashReport";
 
 import { Link, LinkType } from "../link";
 import ReportDialog from "../report-dialog";
 import ErrorContainer from "../error-container/ErrorContainer";
 import { zendeskAPI } from "../zendesk/Zendesk.utils";
 
-import { Error520Wrapper } from "./Errors.styled";
+import styles from "./Errors.module.scss";
 import type { Error520Props } from "./Errors.types";
 
 const Error520 = ({
@@ -49,6 +49,7 @@ const Error520 = ({
   const { t } = useTranslation(["Common"]);
 
   const [reportDialogVisible, setReportDialogVisible] = useState(false);
+  const [customErrorLog, setCustomErrorLog] = useState<Error>({} as Error);
 
   const autoSendReport = async () => {
     const report = getCrashReport(user.id, version, user.cultureName, errorLog);
@@ -59,13 +60,22 @@ const Error520 = ({
   };
 
   useEffect(() => {
-    if (firebaseHelper.isEnabledDB) autoSendReport();
+    if (firebaseHelper?.isEnabledDB) autoSendReport();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const showDialog = () => {
-  //   setReportDialogVisible(true);
-  // };
+  useEffect(() => {
+    const errorString = window.sessionStorage.getItem("errorLog");
+
+    if (!errorString) return;
+
+    const error = JSON.parse(errorString) as Error;
+
+    if (error) {
+      setCustomErrorLog(error);
+      console.log(error.stack);
+    }
+  }, []);
 
   const closeDialog = () => {
     setReportDialogVisible(false);
@@ -77,21 +87,21 @@ const Error520 = ({
 
   zendeskAPI.addChanges("webWidget", "show");
 
-  if (!firebaseHelper.isEnabledDB)
+  if (!firebaseHelper?.isEnabledDB)
     return (
       <ErrorContainer
         headerText={t("SomethingWentWrong")}
-        customizedBodyText={errorLog?.message}
+        customizedBodyText={errorLog?.message ?? customErrorLog?.message}
       />
     );
 
   return (
-    <Error520Wrapper>
+    <div className={styles.error520Wrapper}>
       <ErrorContainer
         className="container"
         isPrimaryButton={false}
         headerText={t("SomethingWentWrong")}
-        customizedBodyText={errorLog?.message}
+        customizedBodyText={errorLog?.message ?? customErrorLog?.message}
       />
       <Link
         isHovered
@@ -105,14 +115,14 @@ const Error520 = ({
       </Link>
       <ReportDialog
         user={user}
-        error={errorLog}
+        error={errorLog ?? customErrorLog}
         version={version}
         onClose={closeDialog}
         visible={reportDialogVisible}
         firebaseHelper={firebaseHelper}
         currentDeviceType={currentDeviceType}
       />
-    </Error520Wrapper>
+    </div>
   );
 };
 
@@ -131,15 +141,3 @@ export const Error520SSR = ({
     </I18nextProvider>
   );
 };
-
-// const Error520Wrapper = inject(({ authStore, settingsStore, userStore }) => {
-//   const { currentColorScheme, firebaseHelper } = settingsStore;
-//   const { user } = userStore;
-
-//   return {
-//     currentColorScheme,
-//     FirebaseHelper: firebaseHelper,
-//     user,
-//     version: authStore.version,
-//   };
-// })(observer(Error520));

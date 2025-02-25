@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,13 +29,23 @@ import { inject, observer } from "mobx-react";
 import { FixedSizeList as List } from "react-window";
 import { CustomScrollbarsVirtualList } from "@docspace/shared/components/scrollbar";
 import useResizeObserver from "use-resize-observer";
+import { useTheme } from "styled-components";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import Item from "./Item";
 
-import { StyledRow, ScrollList } from "../StyledInvitePanel";
-import { useTheme } from "styled-components";
+import { ScrollList } from "../StyledInvitePanel";
 
-const FOOTER_HEIGHT = 73;
 const USER_ITEM_HEIGHT = 48;
+
+const VirtualScroll = React.forwardRef((props, ref) => (
+  <CustomScrollbarsVirtualList
+    {...props}
+    ref={ref}
+    paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+  />
+));
+
+VirtualScroll.displayName = "VirtualScroll";
 
 const Row = memo(({ data, index, style }) => {
   const {
@@ -46,41 +56,42 @@ const Row = memo(({ data, index, style }) => {
     setHasErrors,
     roomType,
     isOwner,
+    isAdmin,
     inputsRef,
     setIsOpenItemAccess,
     isMobileView,
     standalone,
   } = data;
 
+  const theme = useTheme();
+
   if (inviteItems === undefined) return;
 
   const item = inviteItems[index];
 
   return (
-    <StyledRow
+    <Item
+      t={t}
+      item={item}
       key={item.id}
       style={style}
-      className="row-item"
-      hasWarning={!!item.warning}
-    >
-      <Item
-        t={t}
-        item={item}
-        theme={theme}
-        setInviteItems={setInviteItems}
-        changeInviteItem={changeInviteItem}
-        inviteItems={inviteItems}
-        setHasErrors={setHasErrors}
-        roomType={roomType}
-        isOwner={isOwner}
-        inputsRef={inputsRef}
-        setIsOpenItemAccess={setIsOpenItemAccess}
-        isMobileView={isMobileView}
-        standalone={standalone}
-      />
-    </StyledRow>
+      theme={theme}
+      setInviteItems={setInviteItems}
+      changeInviteItem={changeInviteItem}
+      inviteItems={inviteItems}
+      setHasErrors={setHasErrors}
+      roomType={roomType}
+      isOwner={isOwner}
+      isAdmin={isAdmin}
+      inputsRef={inputsRef}
+      setIsOpenItemAccess={setIsOpenItemAccess}
+      isMobileView={isMobileView}
+      standalone={standalone}
+    />
   );
 });
+
+Row.displayName = "Row";
 
 const ItemsList = ({
   t,
@@ -90,6 +101,7 @@ const ItemsList = ({
   setHasErrors,
   roomType,
   isOwner,
+  isAdmin,
   externalLinksVisible,
   scrollAllPanelContent,
   inputsRef,
@@ -107,7 +119,7 @@ const ItemsList = ({
 
   const onBodyResize = useCallback(() => {
     const scrollHeight = bodyRef?.current?.firstChild.scrollHeight;
-    const heightList = height ? height : bodyRef.current.offsetHeight;
+    const heightList = height || bodyRef.current.offsetHeight;
     const totalHeightItems = inviteItems.length * USER_ITEM_HEIGHT;
     const listAreaHeight = heightList;
     const heightBody = invitePanelBodyRef?.current?.clientHeight;
@@ -120,7 +132,7 @@ const ItemsList = ({
           listAreaHeight,
           isOpenItemAccess ? heightWitchOpenItemAccess : 0,
         )
-      : heightList - FOOTER_HEIGHT;
+      : heightList;
 
     const finalHeight = scrollAllPanelContent
       ? isOpenItemAccess
@@ -180,13 +192,14 @@ const ItemsList = ({
           setHasErrors,
           roomType,
           isOwner,
+          isAdmin,
           inputsRef,
           setIsOpenItemAccess,
           isMobileView,
           t,
           standalone,
         }}
-        outerElementType={!scrollAllPanelContent && CustomScrollbarsVirtualList}
+        outerElementType={!scrollAllPanelContent ? VirtualScroll : null}
       >
         {Row}
       </List>
@@ -196,15 +209,15 @@ const ItemsList = ({
 
 export default inject(({ userStore, dialogsStore, settingsStore }) => {
   const { setInviteItems, inviteItems, changeInviteItem } = dialogsStore;
-  const { isOwner } = userStore.user;
-  const { theme, standalone } = settingsStore;
+  const { isOwner, isAdmin } = userStore.user;
+  const { standalone } = settingsStore;
 
   return {
     setInviteItems,
     inviteItems,
     changeInviteItem,
     isOwner,
+    isAdmin,
     standalone,
-    theme,
   };
 })(observer(ItemsList));

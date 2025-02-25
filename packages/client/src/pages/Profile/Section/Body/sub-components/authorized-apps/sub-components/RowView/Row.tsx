@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "./RowView.types";
@@ -35,6 +35,7 @@ export const OAuthRow = (props: RowProps) => {
       onSelect={() => setSelection && setSelection(item.clientId)}
       onRowClick={() => {}}
       className={`oauth2-row${isChecked ? " oauth2-row-selected" : ""}`}
+      isIndexEditingMode={false}
     >
       <RowContent
         sectionWidth={sectionWidth}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -49,6 +49,10 @@ const StyledLinks = styled.div`
       }
     }
   }
+`;
+
+const Strong = styled.strong`
+  font-weight: 600;
 `;
 
 const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
@@ -112,6 +116,10 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
       `};
   }
 
+  .link-options-title-room {
+    margin-inline-start: 0px;
+  }
+
   .expired-options {
     padding: 0px;
 
@@ -133,6 +141,14 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
     color: ${({ theme }) => theme.infoPanel.links.primaryColor};
   }
 
+  .expire-text-room {
+    margin-inline-start: 0px;
+  }
+
+  .link-time-info {
+    color: ${({ theme }) => theme.infoPanel.links.primaryColor};
+  }
+
   .link-actions {
     display: flex;
     gap: 16px;
@@ -140,6 +156,11 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
     margin-inline-start: auto;
 
     .link-row_copy-icon {
+      min-width: 16px;
+      min-height: 16px;
+    }
+
+    .link-actions_copy-icon {
       min-width: 16px;
       min-height: 16px;
     }
@@ -182,4 +203,4 @@ const StyledDropDown = styled(DropDown)`
   }
 `;
 
-export { StyledLinks, StyledLinkRow, StyledSquare, StyledDropDown };
+export { StyledLinks, StyledLinkRow, StyledSquare, StyledDropDown, Strong };

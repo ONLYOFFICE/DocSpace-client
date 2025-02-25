@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,9 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import StyledRow from "./History.styled";
 
 import { RectangleSkeleton } from "../rectangle";
+
+import styles from "./History.module.scss";
+
 import type { HistoryProps } from "./History.types";
 
 const History = ({ id, className, style, ...rest }: HistoryProps) => {
@@ -43,7 +45,12 @@ const History = ({ id, className, style, ...rest }: HistoryProps) => {
   } = rest;
 
   return (
-    <StyledRow id={id} className={className} style={style}>
+    <div
+      id={id}
+      className={`${className || ""} ${styles.row}`}
+      style={style}
+      data-testid="history-row"
+    >
       <RectangleSkeleton
         className="history-loader-file-link"
         title={title}
@@ -123,7 +130,7 @@ const History = ({ id, className, style, ...rest }: HistoryProps) => {
         speed={speed}
         animate={animate}
       />
-    </StyledRow>
+    </div>
   );
 };
 const HistoryRowsSkeleton = (props: HistoryProps) => {

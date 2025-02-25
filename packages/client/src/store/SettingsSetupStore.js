@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,6 @@
 
 import api from "@docspace/shared/api";
 import { makeAutoObservable } from "mobx";
-const { Filter } = api;
-import SelectionStore from "./SelectionStore";
-//import CommonStore from "./CommonStore";
 
 import {
   getSMTPSettings,
@@ -39,17 +36,30 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import { isDesktop } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
+import SelectionStore from "./SelectionStore";
+
+const { Filter } = api;
 
 class SettingsSetupStore {
   selectionStore = null;
+
   authStore = null;
+
   settingsStore = null;
+
   tfaStore = null;
+
   thirdPartyStore = null;
+
   filesSettingsStore = null;
+
   isInit = false;
+
   logoutDialogVisible = false;
+
   logoutAllDialogVisible = false;
+
   viewAs = isDesktop() ? "table" : "row";
 
   isLoadingDownloadReport = false;
@@ -108,8 +118,11 @@ class SettingsSetupStore {
   securityLifetime = [];
 
   sessionsIsInit = false;
+
   sessions = [];
+
   currentSession = [];
+
   platformModalData = {};
 
   constructor(
@@ -128,53 +141,23 @@ class SettingsSetupStore {
     makeAutoObservable(this);
   }
 
-  initSettings = async (page) => {
+  initSettings = async () => {
     const isMobileView =
       this.settingsStore.currentDeviceType === DeviceType.mobile;
 
     if (this.isInit && isMobileView) return;
 
-    if (this.authStore.isAuthenticated) {
-      if (isMobileView) {
-        switch (page) {
-          case "password":
-            await this.settingsStore.getPortalPasswordSettings();
-            break;
-          case "tfa":
-            await this.tfaStore.getTfaType();
-            break;
-          case "trusted-mail":
-            break;
-          case "ip":
-            await this.settingsStore.getIpRestrictionsEnable();
-            await this.settingsStore.getIpRestrictions();
-            break;
-          case "brute-force-protection":
-            await this.settingsStore.getBruteForceProtection();
-            break;
-          case "admin-message":
-            break;
-          case "lifetime":
-            await this.settingsStore.getSessionLifetime();
-
-            break;
-
-          default:
-            break;
-        }
-      } else {
-        await Promise.all([
-          this.settingsStore.getPortalPasswordSettings(),
-          this.tfaStore.getTfaType(),
-          this.settingsStore.getIpRestrictionsEnable(),
-          this.settingsStore.getIpRestrictions(),
-          this.settingsStore.getSessionLifetime(),
-          this.settingsStore.getBruteForceProtection(),
-        ]);
-      }
+    if (this.authStore.isAuthenticated && !isMobileView) {
+      await Promise.all([
+        this.settingsStore.getPortalPasswordSettings(),
+        this.tfaStore.getTfaType(),
+        this.settingsStore.getIpRestrictionsEnable(),
+        this.settingsStore.getIpRestrictions(),
+        this.settingsStore.getSessionLifetime(),
+        this.settingsStore.getBruteForceProtection(),
+      ]);
+      this.setIsInit(true);
     }
-
-    this.isInit = true;
   };
 
   setIsLoadingDownloadReport = (state) => {
@@ -243,14 +226,15 @@ class SettingsSetupStore {
 
     this.integration.smtpSettings.isDefaultSettings = isDefaultSettings;
 
-    for (var key in settings) {
-      if (settings[key] === null) continue;
+    Object.keys(settings).forEach((key) => {
+      if (settings[key] === null) return;
       storeSettings[key] = settings[key];
-    }
+    });
 
     this.integration.smtpSettings.errors = {};
     this.integration.smtpSettings.initialSettings = { ...storeSettings };
   };
+
   setInitSMTPSettings = async () => {
     const result = await getSMTPSettings();
 
@@ -308,12 +292,13 @@ class SettingsSetupStore {
   };
 
   setCommonThirdPartyList = (commonThirdPartyList) => {
-    commonThirdPartyList.map((currentValue, index) => {
+    commonThirdPartyList.forEach((_, index) => {
       commonThirdPartyList[index].key = `0-${index}`;
     });
 
     this.dataManagement.commonThirdPartyList = commonThirdPartyList;
   };
+
   setSelectedConsumer = (selectedConsumerName) => {
     this.integration.selectedConsumer =
       this.integration.consumers.find((c) => c.name === selectedConsumerName) ||
@@ -327,7 +312,7 @@ class SettingsSetupStore {
       combineUrl(
         window.ClientConfig?.proxy?.url,
         `${config.homepage}/portal-settings/security/access-rights/admins`,
-        `/filter?page=${filter.page}`, //TODO: Change url by category
+        `/filter?page=${filter.page}`, // TODO: Change url by category
       ),
     );
   };
@@ -406,6 +391,7 @@ class SettingsSetupStore {
 
   setDNSSettings = async (dnsName, enable) => {
     const res = await api.settings.setMailDomainSettings(dnsName, enable);
+    return res;
   };
 
   getLifetimeAuditSettings = async (data) => {
@@ -442,9 +428,18 @@ class SettingsSetupStore {
 
   getLoginHistoryReport = async () => {
     const { openOnNewPage } = this.filesSettingsStore;
-    const res = await api.settings.getLoginHistoryReport();
-    setTimeout(() => window.open(res, openOnNewPage ? "_blank" : "_self"), 100); //hack for ios
-    return this.setAuditTrailReport(res);
+
+    try {
+      const res = await api.settings.getLoginHistoryReport();
+      setTimeout(
+        () => window.open(res, openOnNewPage ? "_blank" : "_self"),
+        100,
+      ); // hack for ios
+      return this.setAuditTrailReport(res);
+    } catch (error) {
+      console.error(error);
+      toastr.error(error);
+    }
   };
 
   getAuditTrailReport = async () => {
@@ -455,10 +450,11 @@ class SettingsSetupStore {
       setTimeout(
         () => window.open(res, openOnNewPage ? "_blank" : "_self"),
         100,
-      ); //hack for ios
+      ); // hack for ios
       return this.setAuditTrailReport(res);
     } catch (error) {
       console.error(error);
+      toastr.error(error);
     } finally {
       this.setIsLoadingDownloadReport(false);
     }
@@ -527,10 +523,10 @@ class SettingsSetupStore {
       api.files.getThirdPartyCapabilities(),
       api.files.getThirdPartyList(),
     ]).then(([capabilities, providers]) => {
-      for (let item of capabilities) {
+      capabilities.forEach((item) => {
         item.splice(1, 1);
-      }
-      this.thirdPartyStore.setThirdPartyCapabilities(capabilities); //TODO: Out of bounds read: 1
+      });
+      this.thirdPartyStore.setThirdPartyCapabilities(capabilities); // TODO: Out of bounds read: 1
       this.thirdPartyStore.setThirdPartyProviders(providers);
     });
   };

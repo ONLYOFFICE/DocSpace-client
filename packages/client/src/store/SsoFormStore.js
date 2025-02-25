@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import isEqual from "lodash/isEqual";
 import {
   generateCerts,
   getCurrentSsoSettings,
@@ -35,6 +36,8 @@ import {
   validateCerts,
 } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
+import { EmployeeType } from "@docspace/shared/enums";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 import {
   BINDING_POST,
   BINDING_REDIRECT,
@@ -49,7 +52,6 @@ import {
   SSO_ENCRYPT,
   SSO_SIGNING_ENCRYPT,
 } from "../helpers/constants";
-import isEqual from "lodash/isEqual";
 
 class SsoFormStore {
   isSsoEnabled = false;
@@ -64,96 +66,149 @@ class SsoFormStore {
 
   // idpSettings
   entityId = "";
+
   ssoUrlPost = "";
+
   ssoUrlRedirect = "";
+
   ssoBinding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
+
   sloUrlPost = "";
+
   sloUrlRedirect = "";
+
   sloBinding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
+
   nameIdFormat = SSO_NAME_ID_FORMAT[0];
 
   idpCertificate = "";
+
   idpPrivateKey = null;
+
   idpAction = SSO_SIGNING;
+
   idpCertificates = [];
 
   // idpCertificateAdvanced
   idpDecryptAlgorithm = "http://www.w3.org/2001/04/xmlenc#aes128-cbc";
+
   // no checkbox for that
   ipdDecryptAssertions = false;
+
   idpVerifyAlgorithm = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
+
   idpVerifyAuthResponsesSign = false;
+
   idpVerifyLogoutRequestsSign = false;
+
   idpVerifyLogoutResponsesSign = false;
 
   spCertificate = "";
+
   spPrivateKey = "";
+
   spAction = SSO_SIGNING;
+
   spCertificates = [];
 
   // spCertificateAdvanced
   // null for some reason and no checkbox
   spDecryptAlgorithm = "http://www.w3.org/2001/04/xmlenc#aes128-cbc";
+
   spEncryptAlgorithm = "http://www.w3.org/2001/04/xmlenc#aes128-cbc";
+
   spEncryptAssertions = false;
+
   spSignAuthRequests = false;
+
   spSignLogoutRequests = false;
+
   spSignLogoutResponses = false;
+
   spSigningAlgorithm = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
   // spVerifyAlgorithm = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
 
   // Field mapping
   firstName = SSO_GIVEN_NAME;
+
   lastName = SSO_SN;
+
   email = SSO_EMAIL;
+
   location = SSO_LOCATION;
+
   title = SSO_TITLE;
+
   phone = SSO_PHONE;
+
+  usersType = EmployeeType.User;
 
   hideAuthPage = false;
 
   // sp metadata
   spEntityId = "";
+
   spAssertionConsumerUrl = "";
+
   spSingleLogoutUrl = "";
 
   // hide parts of form
   serviceProviderSettings = false;
+
   idpShowAdditionalParameters = true;
+
   spShowAdditionalParameters = true;
+
   spMetadata = false;
+
   idpIsModalVisible = false;
+
   spIsModalVisible = false;
+
   confirmationResetModal = false;
 
   // errors
   uploadXmlUrlHasError = false;
+
   spLoginLabelHasError = false;
 
   entityIdHasError = false;
+
   ssoUrlPostHasError = false;
+
   ssoUrlRedirectHasError = false;
+
   sloUrlPostHasError = false;
+
   sloUrlRedirectHasError = false;
 
   firstNameHasError = false;
+
   lastNameHasError = false;
+
   emailHasError = false;
+
   locationHasError = false;
+
   titleHasError = false;
+
   phoneHasError = false;
 
   // error messages
-  //uploadXmlUrlErrorMessage = null;
+  // uploadXmlUrlErrorMessage = null;
 
   errorMessage = null;
 
   isSubmitLoading = false;
+
   isGeneratedCertificate = false;
+
   isCertificateLoading = false;
 
   defaultSettings = null;
+
   editIndex = 0;
+
   isEdit = false;
 
   isInit = false;
@@ -190,9 +245,9 @@ class SsoFormStore {
       this.hideErrors();
     }
 
-    for (let key in this) {
+    Object.keys(this).forEach((key) => {
       if (key.includes("ErrorMessage")) this[key] = null;
-    }
+    });
   };
 
   setInput = (e) => {
@@ -209,6 +264,10 @@ class SsoFormStore {
 
   setCheckbox = (e) => {
     this[e.target.name] = e.target.checked;
+  };
+
+  setUsersType = (usersType) => {
+    this.usersType = usersType;
   };
 
   openIdpModal = () => {
@@ -343,9 +402,9 @@ class SsoFormStore {
       spLoginLabel: this.spLoginLabel,
       idpSettings: {
         entityId: this.entityId,
-        ssoUrl: ssoUrl,
+        ssoUrl,
         ssoBinding: this.ssoBinding,
-        sloUrl: sloUrl,
+        sloUrl,
         sloBinding: this.sloBinding,
         nameIdFormat: this.nameIdFormat,
       },
@@ -377,8 +436,10 @@ class SsoFormStore {
         phone: this.phone,
       },
       hideAuthPage: this.hideAuthPage,
+      usersType: this.usersType,
     };
   };
+
   saveSsoSettings = async (t) => {
     this.checkRequiredFields();
 
@@ -391,9 +452,7 @@ class SsoFormStore {
       await submitSsoForm(data);
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       this.isSubmitLoading = false;
-      this.setSpMetadata(true);
-      this.setDefaultSettings(settings);
-      this.setIsSsoEnabled(settings.enableSso);
+      this.load();
     } catch (err) {
       toastr.error(err);
       console.error(err);
@@ -406,6 +465,7 @@ class SsoFormStore {
       const config = await resetSsoForm();
 
       this.setFields(config);
+      this.hideErrors();
     } catch (err) {
       toastr.error(err);
       console.error(err);
@@ -424,6 +484,7 @@ class SsoFormStore {
       spCertificateAdvanced,
       fieldMapping,
       hideAuthPage,
+      usersType,
     } = config;
     const { entityId, ssoBinding, sloBinding, nameIdFormat } = idpSettings;
     const {
@@ -458,10 +519,10 @@ class SsoFormStore {
 
     this.nameIdFormat = nameIdFormat;
 
-    //idpCertificates
+    // idpCertificates
     this.idpCertificates = [...idpCertificates];
 
-    //idpCertificateAdvanced
+    // idpCertificateAdvanced
     this.idpVerifyAlgorithm = verifyAlgorithm;
     this.idpVerifyAuthResponsesSign = verifyAuthResponsesSign;
     this.idpVerifyLogoutRequestsSign = verifyLogoutRequestsSign;
@@ -474,10 +535,10 @@ class SsoFormStore {
 
     this.serviceProviderSettings = false;
 
-    //spCertificates
+    // spCertificates
     this.spCertificates = [...spCertificates];
 
-    //spCertificateAdvanced
+    // spCertificateAdvanced
     this.spSigningAlgorithm = signingAlgorithm;
     this.spSignAuthRequests = signAuthRequests;
     this.spSignLogoutRequests = signLogoutRequests;
@@ -486,7 +547,7 @@ class SsoFormStore {
     this.spDecryptAlgorithm = spDecryptAlgorithm;
     this.spEncryptAssertions = encryptAssertions;
 
-    //fieldMapping
+    // fieldMapping
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -495,6 +556,7 @@ class SsoFormStore {
     this.phone = phone;
 
     this.hideAuthPage = hideAuthPage;
+    this.usersType = usersType || EmployeeType.User;
   };
 
   setSsoUrls = (o) => {
@@ -504,6 +566,9 @@ class SsoFormStore {
         break;
       case BINDING_REDIRECT:
         this.ssoUrlRedirect = o.ssoUrl;
+        break;
+      default:
+        break;
     }
   };
 
@@ -514,6 +579,9 @@ class SsoFormStore {
         break;
       case BINDING_REDIRECT:
         this.sloUrlRedirect = o.sloUrl;
+        break;
+      default:
+        break;
     }
   };
 
@@ -522,29 +590,28 @@ class SsoFormStore {
 
     if (!obj) return value;
 
-    if (obj.hasOwnProperty(propName)) return obj[propName];
+    if (hasOwnProperty(obj, propName)) return obj[propName];
 
     if (
-      obj.hasOwnProperty("binding") &&
-      obj.hasOwnProperty("location") &&
-      obj["binding"] == propName
+      hasOwnProperty(obj, "binding") &&
+      hasOwnProperty(obj, "location") &&
+      obj.binding == propName
     )
-      return obj["location"];
+      return obj.location;
 
     if (Array.isArray(obj)) {
-      obj.forEach(function (item) {
-        if (item.hasOwnProperty(propName)) {
+      obj.forEach((item) => {
+        if (hasOwnProperty(item, propName)) {
           value = item[propName];
           return;
         }
 
         if (
-          item.hasOwnProperty("binding") &&
-          item.hasOwnProperty("location") &&
-          item["binding"] == propName
+          hasOwnProperty(item, "binding") &&
+          hasOwnProperty(item, "location") &&
+          item.binding == propName
         ) {
-          value = item["location"];
-          return;
+          value = item.location;
         }
       });
     }
@@ -553,7 +620,7 @@ class SsoFormStore {
   };
 
   includePropertyValue = (obj, value) => {
-    let props = Object.getOwnPropertyNames(obj);
+    const props = Object.getOwnPropertyNames(obj);
     for (let i = 0; i < props.length; i++) {
       if (obj[props[i]] === value) return true;
     }
@@ -595,21 +662,21 @@ class SsoFormStore {
 
     if (meta.nameIDFormat) {
       if (Array.isArray(meta.nameIDFormat)) {
-        let formats = meta.nameIDFormat.filter((format) => {
+        const formats = meta.nameIDFormat.filter((format) => {
           return this.includePropertyValue(SSO_NAME_ID_FORMAT, format);
         });
         if (formats.length) {
           this.nameIdFormat = formats[0];
         }
-      } else {
-        if (this.includePropertyValue(SSO_NAME_ID_FORMAT, meta.nameIDFormat)) {
-          this.nameIdFormat = meta.nameIDFormat;
-        }
+      } else if (
+        this.includePropertyValue(SSO_NAME_ID_FORMAT, meta.nameIDFormat)
+      ) {
+        this.nameIdFormat = meta.nameIDFormat;
       }
     }
 
     if (meta.certificate) {
-      let data = [];
+      const data = [];
 
       if (meta.certificate.signing) {
         if (Array.isArray(meta.certificate.signing)) {
@@ -635,7 +702,7 @@ class SsoFormStore {
       const newCertificates = await this.validateCertificate(data);
       this.idpCertificates = [];
 
-      newCertificates.data.map((cert) => {
+      newCertificates.data.forEach((cert) => {
         if (newCertificates.data.length > 1) {
           this.idpCertificates = [...this.idpCertificates, cert];
         } else {
@@ -658,8 +725,10 @@ class SsoFormStore {
     }
   };
 
-  getUniqueItems = (array) => {
-    return array.filter((item, index, array) => array.indexOf(item) == index);
+  getUniqueItems = (inputArray) => {
+    return inputArray.filter(
+      (item, index) => inputArray.indexOf(item) === index,
+    );
   };
 
   setSpCertificate = (certificate, index, isEdit) => {
@@ -760,7 +829,7 @@ class SsoFormStore {
         this.spCertificates[this.editIndex] = newCertificates[0];
         this.checkedSpBoxes(newCertificates[0]);
       } else {
-        newCertificates.map((cert) => {
+        newCertificates.forEach((cert) => {
           this.spCertificates = [...this.spCertificates, cert];
           this.checkedSpBoxes(cert);
         });
@@ -821,7 +890,7 @@ class SsoFormStore {
         this.idpCertificates[this.editIndex] = newCertificates[0];
         this.checkedIdpBoxes(newCertificates[0]);
       } else {
-        newCertificates.map((cert) => {
+        newCertificates.forEach((cert) => {
           this.idpCertificates = [...this.idpCertificates, cert];
           this.checkedIdpBoxes(cert);
         });
@@ -858,7 +927,7 @@ class SsoFormStore {
   getError = (field) => {
     const fieldError = `${field}HasError`;
     console.log("getError", fieldError);
-    return this[fieldError] !== null ? true : false;
+    return this[fieldError] !== null;
   };
 
   setError = (field, value) => {
@@ -883,12 +952,12 @@ class SsoFormStore {
   };
 
   hideErrors = () => {
-    for (let key in this) {
+    Object.keys(this).forEach((key) => {
       if (key.includes("HasError") && this[key] !== false) {
         console.log("key", key);
         this[key] = false;
       }
-    }
+    });
   };
 
   validate = (string) => {
@@ -901,9 +970,16 @@ class SsoFormStore {
   };
 
   checkRequiredFields = () => {
+    this.setError("spLoginLabel", this.spLoginLabel);
     this.setError("entityId", this.entityId);
-    this.setError("ssoUrlPost", this.ssoUrlPost);
-    this.setError("sloUrlPost", this.sloUrlPost);
+    this.ssoBinding === BINDING_POST &&
+      this.setError("ssoUrlPost", this.ssoUrlPost);
+    this.ssoBinding === BINDING_REDIRECT &&
+      this.setError("ssoUrlRedirect", this.ssoUrlRedirect);
+    this.sloBinding === BINDING_POST &&
+      this.setError("sloUrlPost", this.sloUrlPost);
+    this.sloBinding === BINDING_REDIRECT &&
+      this.setError("sloUrlRedirect", this.sloUrlRedirect);
     this.setError("firstName", this.firstName);
     this.setError("lastName", this.lastName);
     this.setError("email", this.email);
@@ -914,10 +990,9 @@ class SsoFormStore {
   };
 
   get hasErrors() {
-    for (let key in this) {
-      if (key.includes("HasError") && this[key] !== false) return true;
-    }
-    return false;
+    return Object.keys(this).some(
+      (key) => key.includes("HasError") && this[key] !== false,
+    );
   }
 
   get hasChanges() {
@@ -946,16 +1021,47 @@ class SsoFormStore {
     );
   }
 
+  get isDisabledSaveButton() {
+    return (
+      !this.enableSso ||
+      this.hasErrors ||
+      !this.hasChanges ||
+      this.isLoadingXml ||
+      this.isRequiredFieldsEmpty
+    );
+  }
+
+  get isRequiredFieldsEmpty() {
+    return (
+      this.spLoginLabel.trim().length === 0 ||
+      this.entityId.trim().length === 0 ||
+      (this.ssoBinding === BINDING_POST &&
+        this.ssoUrlPost.trim().length === 0) ||
+      (this.sloBinding === BINDING_POST &&
+        this.sloUrlPost.trim().length === 0) ||
+      (this.ssoBinding === BINDING_REDIRECT &&
+        this.ssoUrlRedirect.trim().length === 0) ||
+      (this.sloBinding === BINDING_REDIRECT &&
+        this.sloUrlRedirect.trim().length === 0) ||
+      this.firstName.trim().length === 0 ||
+      this.lastName.trim().length === 0 ||
+      this.email.trim().length === 0
+    );
+  }
+
   scrollToField = () => {
-    for (let key in this) {
+    Object.keys(this).every((key) => {
       if (key.includes("HasError") && this[key] !== false) {
         const name = key.replace("HasError", "");
-        const element = document.getElementsByName(name)[0];
-        element.focus();
-        element.blur();
-        return;
+        const element = document.getElementsByName(name)?.[0];
+        if (element) {
+          element.focus();
+          element.blur();
+        }
+        return false;
       }
-    }
+      return true;
+    });
   };
 }
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,41 +28,38 @@
 
 import React from "react";
 
-import SocketIOHelper from "@docspace/shared/utils/socket";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getRestoreProgress } from "@docspace/shared/api/portal";
-import { getUser } from "@docspace/shared/api/people";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
 import { UseSocketHelperProps } from "@/types";
 
-const useSocketHelper = ({ socketUrl, user }: UseSocketHelperProps) => {
-  const [socketHelper, setSocketHelper] = React.useState<SocketIOHelper | null>(
-    null,
-  );
+const useSocketHelper = ({
+  socketUrl,
+  user,
+  shareKey,
+}: UseSocketHelperProps) => {
+  React.useEffect(() => {
+    SocketHelper?.connect(socketUrl, shareKey ?? "");
+  }, [shareKey, socketUrl]);
 
   React.useEffect(() => {
-    if (socketHelper) return;
-    const socketIOHelper = new SocketIOHelper(socketUrl, "");
-
-    socketIOHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "backup-restore" },
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "restore",
     });
 
-    socketIOHelper.emit({
-      command: "subscribe",
-      data: { roomParts: user?.id || "" },
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: user?.id || "",
     });
+  }, [user?.id]);
 
-    socketIOHelper.on("restore-backup", async () => {
+  React.useEffect(() => {
+    const callback = async () => {
       try {
-        const response = await getRestoreProgress();
-
-        if (!response) {
-          console.log("Skip denyEditingRights - empty progress response");
-          return;
-        }
         // const message = t("Common:PreparationPortalTitle");
         const message = "Preparation portal title";
 
@@ -74,30 +71,44 @@ const useSocketHelper = ({ socketUrl, user }: UseSocketHelperProps) => {
       } catch (e) {
         console.error("getRestoreProgress", e);
       }
-    });
+    };
 
-    socketIOHelper.on("s:logout-session", async (loginEventId) => {
+    SocketHelper?.on(SocketEvents.RestoreBackup, callback);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.RestoreBackup, callback);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    const callback = async (loginEventId: unknown) => {
       console.log(`[WS] "logout-session"`, loginEventId, user?.loginEventId);
 
       if (
         Number(loginEventId) === user?.loginEventId ||
         Number(loginEventId) === 0
       ) {
+        sessionStorage.setItem("referenceUrl", window.location.href);
+        if (user) sessionStorage.setItem("loggedOutUserId", user.id);
+
         const docEditor =
           typeof window !== "undefined" &&
           window.DocEditor?.instances[EDITOR_ID];
 
         docEditor?.requestClose();
+
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         );
       }
-    });
+    };
 
-    setSocketHelper(socketIOHelper);
-  }, [socketHelper, socketUrl]);
+    SocketHelper?.on(SocketEvents.LogoutSession, callback);
 
-  return { socketHelper };
+    return () => {
+      SocketHelper?.off(SocketEvents.LogoutSession, callback);
+    };
+  }, [user, user?.loginEventId]);
 };
 
 export default useSocketHelper;

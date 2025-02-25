@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,6 @@
 
 import moment from "moment";
 import { TCreatedBy, TPathParts } from "../../types";
-import { TUser } from "../people/types";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,
@@ -36,6 +35,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "../../enums";
+import { TUser } from "../people/types";
 
 export type TFileViewAccessibility = {
   CanConvert: boolean;
@@ -81,6 +81,7 @@ export type TAvailableExternalRights = {
 };
 
 export type TFile = {
+  isFile: boolean;
   access: ShareAccessRights;
   canShare: boolean;
   comment: string;
@@ -114,6 +115,9 @@ export type TFile = {
   providerKey?: string;
   providerItem?: boolean;
   thumbnailUrl?: string;
+  expired?: string;
+  isForm?: boolean;
+  isFolder?: boolean;
 };
 
 export type TOpenEditRequest = {
@@ -188,6 +192,7 @@ export type TFolder = {
   roomType?: RoomsType;
   path?: TPathParts[];
   type?: FolderType;
+  isFolder?: boolean;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -298,6 +303,7 @@ export type TFilesSettings = {
   templatesSection: boolean;
   updateIfExist: boolean;
   openEditorInSameTab: boolean;
+  displayFileExtension: boolean;
 };
 
 export type TPresignedUri = {
@@ -428,6 +434,12 @@ export type TConnectingStorage = {
   connected: boolean;
   oauth: boolean;
   redirectUrl: string;
+};
+
+export type TIndexItems = {
+  order: string;
+  entryType: number;
+  entryId: number;
 };
 
 export type TConnectingStorages = TConnectingStorage[];

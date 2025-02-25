@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,8 +29,6 @@ export const globalColors = {
   black: "#333333",
   darkBlack: "#000",
 
-  lightGrayBlackout: "rgba(6, 22, 38, 0.2)",
-  darkGrayBlackout: "rgba(27, 27, 27, 0.4)",
   grayLight: "#F8F9F9",
   darkGrayLight: "#282828",
   lightGrayHover: "#F3F4F4",
@@ -54,13 +52,20 @@ export const globalColors = {
   lightSecondMain: "#5299E0",
   lightSecondMainHover: "rgba(82, 153, 224, 0.85)",
   lightSecondMainDisabled: "rgba(82, 153, 224, 0.6)",
+  lightBlueAction: "#E4ECF8",
+  darkGreyAction: "#515151",
+  lightBlueHover: "#BED3EF",
+  darkGreyHover: "#7B7B7B",
+
+  lightActive: "#F2F6FC",
+  darkActive: "#414141",
 
   mainGreen: "#2DB482",
   secondGreen: "#22C386",
   secondGreenDark: "#2E5E4C",
   mainOrange: "#F97A0B",
   secondOrange: "#FF9933",
-  mainRed: "#F2665A",
+  mainRed: " #F2675A",
   mainPurple: "#533ED1",
   purple: "#6D4EC2",
   secondPurple: "#8570BD",
@@ -68,6 +73,9 @@ export const globalColors = {
   mainBlueLight: "#13B7EC",
   secondBlue: "#11A3D4",
   mainYellow: "#FFD30F",
+
+  blurLight: "rgba(6, 22, 38, 0.2)",
+  blurDark: "rgba(27, 27, 27, 0.6)",
 
   lightErrorStatus: "#F24724",
   darkErrorStatus: "#E06451",
@@ -110,12 +118,12 @@ export const globalColors = {
 
   editorGreenColor: "#40865C",
   editorBlueColor: "#446995",
-  editorOrangeColor: "#AA5252",
+  editorOrangeColor: "#B26A54",
   editorRedColor: "#AA5251",
   windowsColor: "#4C83CD",
   linuxColor: "#F4BB40",
   androidColor: "#A8D548",
-  twitterColor: "#2AA3EF",
+  moonstone: "#35A5D2",
   //
 
   tickColor: "#20D21F",
@@ -140,4 +148,16 @@ export const globalColors = {
   alphaGreenDark: "rgba(59, 164, 32, 0.1)",
   alphaRedLight: "rgba(242, 28, 14, 0.1)",
   alphaRedDark: "rgba(224, 100, 81, 0.1)",
+
+  logoColors: [
+    "#FF6680",
+    "#FF8F40",
+    "#F2D230",
+    "#61C059",
+    "#1FCECB",
+    "#5CC3F7",
+    "#6191F2",
+    "#7757D9",
+    "#FF7FD4",
+  ],
 };

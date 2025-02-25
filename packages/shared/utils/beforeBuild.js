@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,18 +28,44 @@
 /* eslint-disable no-console */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable global-require */
+/* eslint-disable import/no-unresolved */
+
 const path = require("path");
 const fs = require("fs");
 const { readdir } = require("fs").promises;
-// @ts-expect-error path is correct
-const appSettings = require("../../../../buildtools/config/appsettings.json");
 
+let appSettings = null;
+
+try {
+  // @ts-expect-error path is correct
+  const appSettingsPath = path.resolve(
+    __dirname,
+    "../../../../buildtools/config/appsettings.json",
+  );
+  appSettings = fs.existsSync(appSettingsPath)
+    ? require("../../../../buildtools/config/appsettings.json")
+    : null;
+} catch (e) {
+  console.log(e);
+}
 const beforeBuild = async (
   pathsToLocales,
   pathToFile,
   additionalPath,
   isSSR = false,
 ) => {
+  async function getCultures() {
+    const fileInDir = await readdir(pathsToLocales[0], {
+      withFileTypes: true,
+    });
+
+    const cultures = fileInDir
+      .filter((dirent) => dirent.isDirectory())
+      .map((d) => d.name);
+
+    return cultures;
+  }
   async function* getFiles(dir) {
     const dirents = await readdir(dir, { withFileTypes: true });
     for (const dirent of dirents) {
@@ -74,7 +100,7 @@ const beforeBuild = async (
 
   const localesFiles = await getLocalesFiles();
 
-  const cultures = appSettings.web.cultures;
+  const cultures = appSettings ? appSettings.web.cultures : await getCultures();
 
   const collectionByLng = new Map();
   const truthLng = new Map();
@@ -84,7 +110,7 @@ const beforeBuild = async (
   localesFiles.forEach((file) => {
     const splitPath = file.path.split(path.sep);
 
-    const length = splitPath.length;
+    const { length } = splitPath;
 
     const url = [
       splitPath[length - 3],
@@ -105,7 +131,7 @@ const beforeBuild = async (
     const splitted = lng.split("-");
 
     if (splitted.length === 2 && splitted[0] === splitted[1].toLowerCase()) {
-      language = splitted[0];
+      [language] = splitted;
     }
 
     truthLng.set(language, language.replaceAll("-", ""));

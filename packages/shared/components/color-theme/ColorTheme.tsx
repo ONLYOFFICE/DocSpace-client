@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,12 +32,10 @@ import { ThemeContext } from "styled-components";
 import { ColorThemeProps } from "./ColorTheme.types";
 import { ThemeId } from "./ColorTheme.enums";
 
-import FilterBlockItemTagTheme from "./styled-components/filterBlockItemTag";
 import IconButtonTheme from "./styled-components/iconButton";
 import IconButtonMuteTheme from "./styled-components/iconButtonMute";
 import IconButtonPinTheme from "./styled-components/iconButtonPin";
 import IconWrapperTheme from "./styled-components/iconWrapper";
-import IndicatorFilterButtonTheme from "./styled-components/indicatorFilterButton";
 import IndicatorLoaderTheme from "./styled-components/indicatorLoader";
 import InfoPanelToggleTheme from "./styled-components/infoPanelToggle";
 import LinkTheme from "./styled-components/link";
@@ -46,6 +44,7 @@ import LoadingButton from "./styled-components/loadingButton";
 import ProgressColorTheme from "./styled-components/progress";
 import VersionBadgeTheme from "./styled-components/versionBadge";
 import SubmenuTextTheme from "./styled-components/submenuText";
+import StyledIndexWrapper from "./sub-components/StyledIndexWrapper";
 
 const ColorTheme = forwardRef<
   HTMLDivElement,
@@ -57,16 +56,6 @@ const ColorTheme = forwardRef<
 
   const getElement = () => {
     switch (themeId) {
-      case ThemeId.FilterBlockItemTag: {
-        return (
-          <FilterBlockItemTagTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-
       case ThemeId.IconButton: {
         return (
           <IconButtonTheme
@@ -74,6 +63,26 @@ const ColorTheme = forwardRef<
             themeId={themeId}
             $currentColorScheme={currentColorScheme}
           />
+        );
+      }
+      case ThemeId.IndexIconButton: {
+        const onClickAction = (e: React.MouseEvent<Element>) => {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          if ("onClick" in props) props.onClick?.(e);
+        };
+
+        return (
+          <StyledIndexWrapper
+            $currentColorScheme={currentColorScheme}
+            onClick={onClickAction}
+          >
+            <IconButtonTheme
+              {...props}
+              themeId={themeId}
+              $currentColorScheme={currentColorScheme}
+            />
+          </StyledIndexWrapper>
         );
       }
 
@@ -99,16 +108,6 @@ const ColorTheme = forwardRef<
       case ThemeId.IconWrapper: {
         return (
           <IconWrapperTheme
-            {...props}
-            $currentColorScheme={currentColorScheme}
-            ref={ref}
-          />
-        );
-      }
-
-      case ThemeId.IndicatorFilterButton: {
-        return (
-          <IndicatorFilterButtonTheme
             {...props}
             $currentColorScheme={currentColorScheme}
             ref={ref}

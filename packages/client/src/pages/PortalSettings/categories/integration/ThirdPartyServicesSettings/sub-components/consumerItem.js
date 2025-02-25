@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,26 +28,34 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
-import ConsumerToggle from "./consumerToggle";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { thirdpartiesLogo } from "@docspace/shared/utils/image-thirdparties";
+import { injectDefaultTheme } from "@docspace/shared/utils";
+import ConsumerToggle from "./consumerToggle";
 
-const StyledItem = styled.div`
+const StyledItem = styled.div.attrs(injectDefaultTheme)`
   .consumer-description {
     ${(props) =>
       !props.isThirdPartyAvailable &&
       !props.isSet &&
       css`
-        color: ${(props) => props.theme.client.settings.integration.textColor};
+        color: ${({ theme }) => theme.client.settings.integration.textColor};
       `}
+  }
+
+  .item-box {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
 `;
 
-StyledItem.defaultProps = { theme: Base };
+const StyledBox = styled.div.attrs(injectDefaultTheme)`
+  box-sizing: border-box;
 
-const StyledBox = styled(Box)`
   .consumer-icon {
     ${(props) =>
       !props.theme.isBase &&
@@ -80,63 +88,48 @@ const StyledBox = styled(Box)`
   }
 `;
 
-StyledBox.defaultProps = { theme: Base };
+const ConsumerItem = ({
+  consumer,
+  onModalOpen,
+  setConsumer,
+  updateConsumerProps,
+  t,
+  isThirdPartyAvailable,
+}) => {
+  const logo = thirdpartiesLogo?.get(`${consumer.name.toLowerCase()}.svg`);
+  const isSet = !!(!consumer.canSet || consumer.props.find((p) => p.value));
 
-class ConsumerItem extends React.Component {
-  render() {
-    const {
-      consumer,
-      onModalOpen,
-      setConsumer,
-      updateConsumerProps,
-      t,
-      isThirdPartyAvailable,
-    } = this.props;
-
-    const logo = thirdpartiesLogo?.get(`${consumer.name.toLowerCase()}.svg`);
-
-    const isSet =
-      !consumer.canSet || consumer.props.find((p) => p.value) ? true : false;
-
-    return (
-      <StyledItem isThirdPartyAvailable={isThirdPartyAvailable} isSet={isSet}>
-        <Box
-          displayProp="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          widthProp="100%"
+  return (
+    <StyledItem isThirdPartyAvailable={isThirdPartyAvailable} isSet={isSet}>
+      <div className="item-box">
+        <StyledBox
+          canSet={consumer.canSet}
+          isLinkedIn={consumer.name === "linkedin"}
+          isThirdPartyAvailable={isThirdPartyAvailable}
         >
-          <StyledBox
-            canSet={consumer.canSet}
-            isLinkedIn={consumer.name === "linkedin"}
-            isThirdPartyAvailable={isThirdPartyAvailable}
-          >
-            {logo && (
-              <ReactSVG
-                src={logo}
-                className={"consumer-icon"}
-                alt={consumer.name}
-              />
-            )}
-          </StyledBox>
-          <Box onClick={setConsumer} data-consumer={consumer.name}>
-            <ConsumerToggle
-              consumer={consumer}
-              onModalOpen={onModalOpen}
-              updateConsumerProps={updateConsumerProps}
-              t={t}
-              isDisabled={!isThirdPartyAvailable}
+          {logo ? (
+            <ReactSVG
+              src={logo}
+              className="consumer-icon"
+              alt={consumer.name}
             />
-          </Box>
-        </Box>
+          ) : null}
+        </StyledBox>
+        <div onClick={setConsumer} data-consumer={consumer.name}>
+          <ConsumerToggle
+            consumer={consumer}
+            onModalOpen={onModalOpen}
+            updateConsumerProps={updateConsumerProps}
+            t={t}
+            isDisabled={!isThirdPartyAvailable}
+          />
+        </div>
+      </div>
 
-        <Text className="consumer-description">{consumer.description}</Text>
-      </StyledItem>
-    );
-  }
-}
-
-export default ConsumerItem;
+      <Text className="consumer-description">{consumer.description}</Text>
+    </StyledItem>
+  );
+};
 
 ConsumerItem.propTypes = {
   consumer: PropTypes.shape({
@@ -151,3 +144,5 @@ ConsumerItem.propTypes = {
   setConsumer: PropTypes.func.isRequired,
   updateConsumerProps: PropTypes.func.isRequired,
 };
+
+export default ConsumerItem;

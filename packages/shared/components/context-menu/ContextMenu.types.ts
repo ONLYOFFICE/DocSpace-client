@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { TLogo } from "../../api/rooms/types";
 
 export type ContextMenuRefType = {
   show: (e: React.MouseEvent | MouseEvent) => void;
@@ -43,15 +44,18 @@ export type ContextMenuRefType = {
   menuRef: React.RefObject<HTMLDivElement | null>;
 };
 
+export type TContextMenuValueTypeOnClick =
+  | {
+      originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>;
+      action?: string | boolean;
+      item?: ContextMenuType;
+    }
+  | React.MouseEvent
+  | React.ChangeEvent<HTMLInputElement>;
+
 export type ContextMenuTypeOnClick = (
-  value:
-    | {
-        originalEvent: React.MouseEvent | React.ChangeEvent<HTMLInputElement>;
-        action?: string | boolean;
-        item?: ContextMenuType;
-      }
-    | React.MouseEvent
-    | React.ChangeEvent<HTMLInputElement>,
+  value: TContextMenuValueTypeOnClick,
+
   item?: ContextMenuType,
 ) => void;
 
@@ -64,7 +68,7 @@ export type ContextMenuType = {
   onClick?: ContextMenuTypeOnClick;
   isSeparator?: undefined;
   url?: string;
-  items?: ContextMenuType[];
+  items?: ContextMenuModel[];
   action?: string;
   className?: string;
   disableColor?: string;
@@ -73,11 +77,11 @@ export type ContextMenuType = {
   isLoader?: boolean;
   isHeader?: boolean;
   onLoad?: () => Promise<ContextMenuModel[]>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  template?: any;
+  template?: unknown;
   isOutsideLink?: boolean;
   withToggle?: boolean;
   checked?: boolean;
+  badgeLabel?: string;
 };
 
 export type SeparatorType = {
@@ -88,14 +92,17 @@ export type SeparatorType = {
   className?: string;
   disableColor?: string;
   isLoader?: boolean;
+  style?: React.CSSProperties;
 };
 
-export type HeaderType = {
-  title: string;
-  icon?: string;
-  avatar?: string;
-  color?: string;
-};
+export type HeaderType =
+  | (TLogo & {
+      title: string;
+      avatar?: string;
+      logo?: string;
+      icon?: string;
+    })
+  | { title: string; icon: string };
 
 export type ContextMenuModel = ContextMenuType | SeparatorType;
 
@@ -155,6 +162,7 @@ export interface ContextMenuProps {
   isArchive?: boolean;
   ref?: React.RefObject<HTMLDivElement>;
   badgeUrl?: string;
+  headerOnlyMobile?: boolean;
 }
 
 export type TContextMenuRef = {

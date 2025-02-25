@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -69,13 +69,6 @@ const StyledLoader = styled.div`
 const Loader = () => {
   const [viewMobile, setViewMobile] = useState(false);
 
-  useEffect(() => {
-    onCheckView();
-    window.addEventListener("resize", onCheckView);
-
-    return () => window.removeEventListener("resize", onCheckView);
-  }, []);
-
   const onCheckView = () => {
     if (isMobile()) {
       setViewMobile(true);
@@ -83,6 +76,13 @@ const Loader = () => {
       setViewMobile(false);
     }
   };
+
+  useEffect(() => {
+    onCheckView();
+    window.addEventListener("resize", onCheckView);
+
+    return () => window.removeEventListener("resize", onCheckView);
+  }, [onCheckView]);
 
   return (
     <StyledLoader>

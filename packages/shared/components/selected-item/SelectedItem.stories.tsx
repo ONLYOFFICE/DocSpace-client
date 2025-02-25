@@ -31,7 +31,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { SelectedItem } from "./SelectedItem";
 
 const meta = {
-  title: "Components/SelectedItem",
+  title: "Base UI Components/SelectedItem",
   component: SelectedItem,
   argTypes: {
     onClose: { action: "onClose" },

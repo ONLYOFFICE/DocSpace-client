@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,10 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { Tags } from "../../tags";
 import { Tag } from "../../tag";
-import { StyledPreviewTile } from "../ImageEditor.styled";
+
+import styles from "./PreviewTile.module.scss";
 
 const PreviewTile = ({
   title,
@@ -42,24 +44,30 @@ const PreviewTile = ({
   defaultTagLabel: string;
 }) => {
   return (
-    <StyledPreviewTile>
-      <div className="tile-header">
-        <img className="tile-header-icon" src={previewIcon} alt={title} />
-        <div className="tile-header-title">{title}</div>
+    <div className={styles.previewTile}>
+      <div className={styles.tileHeader}>
+        <div
+          className={classNames(styles.tileHeaderIcon, {
+            [styles.isGeneratedPreview]: !previewIcon,
+          })}
+        >
+          <img src={previewIcon} alt={title} />
+        </div>
+        <div className={styles.tileHeaderTitle}>{title}</div>
       </div>
-      <div className="tile-tags">
+      <div className={styles.tileTags}>
         {tags.length ? (
-          <Tags columnCount={2} tags={tags} />
+          <Tags columnCount={2} tags={tags} onSelectTag={() => {}} />
         ) : (
           <Tag
-            className="type_tag"
+            className={styles.typeTag}
             tag="script"
             label={defaultTagLabel}
             isDefault
           />
         )}
       </div>
-    </StyledPreviewTile>
+    </div>
   );
 };
 

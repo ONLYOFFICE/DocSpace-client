@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,14 +30,13 @@ import { useTranslation } from "react-i18next";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
-import ModalDialogContainer from "../ModalDialogContainer";
 
 const PortalRenamingDialog = (props) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
   const { visible, onClose, onSave, isSaving } = props;
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       isLoading={!ready}
       visible={visible}
       onClose={onClose}
@@ -57,7 +56,7 @@ const PortalRenamingDialog = (props) => {
           label={t("Common:ContinueButton")}
           size="normal"
           scale
-          primary={true}
+          primary
           onClick={onSave}
           isLoading={isSaving}
           tabIndex={3}
@@ -72,7 +71,7 @@ const PortalRenamingDialog = (props) => {
           tabIndex={4}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

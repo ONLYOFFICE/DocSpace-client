@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,18 +27,17 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 
-import { WebhookRowContent } from "./WebhookRowContent";
-
-import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
+import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import HistoryIcon from "PUBLIC_DIR/images/history.react.svg?url";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { WebhookRowContent } from "./WebhookRowContent";
 
-export const WebhookRow = (props) => {
+const WebhookRow = (props) => {
   const {
     webhook,
     sectionWidth,
@@ -58,7 +57,7 @@ export const WebhookRow = (props) => {
   };
 
   const redirectToHistory = () => {
-    navigate(window.location.pathname + `/${webhook.id}`);
+    navigate(`${window.location.pathname}/${webhook.id}`);
   };
   const handleRowClick = (e) => {
     if (
@@ -111,22 +110,20 @@ export const WebhookRow = (props) => {
   ];
 
   return (
-    <>
-      <Row
+    <Row
+      sectionWidth={sectionWidth}
+      key={webhook.id}
+      data={webhook}
+      contextOptions={contextOptions}
+      onClick={handleRowClick}
+    >
+      <WebhookRowContent
         sectionWidth={sectionWidth}
-        key={webhook.id}
-        data={webhook}
-        contextOptions={contextOptions}
-        onClick={handleRowClick}
-      >
-        <WebhookRowContent
-          sectionWidth={sectionWidth}
-          webhook={webhook}
-          isChecked={isChecked}
-          handleToggleEnabled={handleToggleEnabled}
-        />
-      </Row>
-    </>
+        webhook={webhook}
+        isChecked={isChecked}
+        handleToggleEnabled={handleToggleEnabled}
+      />
+    </Row>
   );
 };
 

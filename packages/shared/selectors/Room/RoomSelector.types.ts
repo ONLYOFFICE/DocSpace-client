@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,7 +30,7 @@ import {
   TSelectorItem,
 } from "../../components/selector/Selector.types";
 
-import { RoomsType } from "../../enums";
+import { RoomSearchArea, RoomsType } from "../../enums";
 
 export type RoomSelectorProps = TSelectorHeader &
   TSelectorCancelButton & {
@@ -41,11 +41,17 @@ export type RoomSelectorProps = TSelectorHeader &
     isMultiSelect: boolean;
 
     onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
-    roomType?: RoomsType;
+    roomType?: RoomsType | RoomsType[];
+    searchArea?: RoomSearchArea | string;
     excludeItems?: (number | string | undefined)[];
     setIsDataReady?: (value: boolean) => void;
     submitButtonLabel?: string;
     withSearch?: boolean;
 
     disableThirdParty?: boolean;
+
+    withPadding?: boolean;
+
+    emptyScreenHeader?: string;
+    emptyScreenDescription?: string;
   };

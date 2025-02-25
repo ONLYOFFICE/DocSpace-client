@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 
 import { classNames } from "@docspace/shared/utils";
@@ -35,6 +34,7 @@ const EmptyFolderWrapper = styled.div`
     .empty-folder_container-links {
       display: flex;
       .flex-wrapper_container {
+        box-sizing: border-box;
         display: flex;
         flex-wrap: wrap;
         row-gap: 16px;

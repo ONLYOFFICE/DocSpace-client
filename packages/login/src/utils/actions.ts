@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,24 +26,55 @@
 
 "use server";
 
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 import {
   createRequest,
   getBaseUrl,
 } from "@docspace/shared/utils/next-ssr-helper";
 import { TUser } from "@docspace/shared/api/people/types";
+import { TPortal } from "@docspace/shared/api/portal/types";
 import {
   TCapabilities,
+  TCompanyInfo,
   TGetColorTheme,
   TGetSsoSettings,
+  TPasswordSettings,
   TPortalCultures,
   TSettings,
   TThirdPartyProvider,
+  TTimeZone,
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
+import { Encoder } from "@docspace/shared/utils/encoder";
+import {
+  TConfirmLinkParams,
+  TConfirmLinkResult,
+  TTfaSecretKeyAndQR,
+} from "@/types";
 import { TScope } from "@docspace/shared/utils/oauth/types";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
+import {
+  licenseRequiredHandler,
+  settingsHandler,
+  colorThemeHandler,
+  portalCulturesHandler,
+  portalPasswordSettingHandler,
+  machineNameHandler,
+  portalTimeZoneHandler,
+  capabilitiesHandler,
+  ssoHandler,
+  selfHandler,
+  thirdPartyProviderHandler,
+  getClientHandler,
+  confirmHandler,
+  tfaAppHandler,
+  scopesHandler,
+  companyInfoHandler,
+  oauthSignInHelper,
+} from "@docspace/shared/__mocks__/e2e";
+
+const IS_TEST = process.env.E2E_TEST;
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
@@ -64,7 +95,9 @@ export async function getSettings() {
     "GET",
   );
 
-  const settingsRes = await fetch(getSettings);
+  const settingsRes = IS_TEST
+    ? settingsHandler(headers())
+    : await fetch(getSettings);
 
   if (settingsRes.status === 403) return `access-restricted`;
 
@@ -94,13 +127,13 @@ export async function getVersionBuild() {
 }
 
 export async function getColorTheme() {
-  const [getSettings] = createRequest(
+  const [getColorTheme] = createRequest(
     [`/settings/colortheme`],
     [["", ""]],
     "GET",
   );
 
-  const res = await fetch(getSettings);
+  const res = IS_TEST ? colorThemeHandler() : await fetch(getColorTheme);
 
   if (!res.ok) return;
 
@@ -116,7 +149,9 @@ export async function getThirdPartyProviders() {
     "GET",
   );
 
-  const res = await fetch(getThirdParty);
+  const res = IS_TEST
+    ? thirdPartyProviderHandler(headers())
+    : await fetch(getThirdParty);
 
   if (!res.ok) return;
 
@@ -128,7 +163,9 @@ export async function getThirdPartyProviders() {
 export async function getCapabilities() {
   const [getCapabilities] = createRequest([`/capabilities`], [["", ""]], "GET");
 
-  const res = await fetch(getCapabilities);
+  const res = IS_TEST
+    ? capabilitiesHandler(headers())
+    : await fetch(getCapabilities);
 
   if (!res.ok) return;
 
@@ -140,7 +177,7 @@ export async function getCapabilities() {
 export async function getSSO() {
   const [getSSO] = createRequest([`/settings/ssov2`], [["", ""]], "GET");
 
-  const res = await fetch(getSSO);
+  const res = IS_TEST ? ssoHandler() : await fetch(getSSO);
 
   if (!res.ok) return;
 
@@ -156,7 +193,7 @@ export async function getUser() {
   const [getUser] = createRequest([`/people/@self`], [["", ""]], "GET");
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
-  const userRes = await fetch(getUser);
+  const userRes = IS_TEST ? selfHandler() : await fetch(getUser);
 
   if (userRes.status === 401) return undefined;
 
@@ -167,10 +204,14 @@ export async function getUser() {
   return user.response as TUser;
 }
 
-export async function getScopeList() {
-  const [getScopeList] = createRequest([`/scopes`], [["", ""]], "GET");
+export async function getScopeList(jwtToken: string) {
+  const [getScopeList] = createRequest(
+    [`/scopes`],
+    [["X-Signature", jwtToken]],
+    "GET",
+  );
 
-  const scopeList = await fetch(getScopeList);
+  const scopeList = IS_TEST ? scopesHandler() : await fetch(getScopeList);
 
   if (!scopeList.ok) return;
 
@@ -180,19 +221,21 @@ export async function getScopeList() {
 }
 
 export async function getOAuthClient(clientId: string) {
-  const [getOAuthClient] = createRequest(
-    [`/clients/${clientId}/public/info`],
-    [["", ""]],
-    "GET",
-  );
+  try {
+    const route = `/clients/${clientId}/public/info`;
 
-  const oauthClient = await fetch(getOAuthClient);
+    const oauthClient = IS_TEST
+      ? getClientHandler()
+      : await fetch(createRequest([route], [["", ""]], "GET")[0]);
 
-  if (!oauthClient.ok) return;
+    if (!oauthClient) return;
 
-  const client = await oauthClient.json();
+    const client = await oauthClient.json();
 
-  return transformToClientProps(client);
+    return { client: transformToClientProps(client) };
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 export async function getPortalCultures() {
@@ -202,7 +245,9 @@ export async function getPortalCultures() {
     "GET",
   );
 
-  const res = await fetch(getPortalCultures);
+  const res = IS_TEST
+    ? portalCulturesHandler()
+    : await fetch(getPortalCultures);
 
   if (!res.ok) return;
 
@@ -211,35 +256,249 @@ export async function getPortalCultures() {
   return cultures.response as TPortalCultures;
 }
 
-export async function gitAvailablePortals(data: {
-  email: string;
-  passwordHash: string;
-}) {
-  const [gitAvailablePortals] = createRequest(
-    [`/portal/signin`],
+export async function getConfig() {
+  const baseUrl = getBaseUrl();
+
+  const config = IS_TEST
+    ? new Response(JSON.stringify({}))
+    : await (await fetch(`${baseUrl}/static/scripts/config.json`)).json();
+
+  return config;
+}
+
+export async function getCompanyInfoSettings() {
+  const [getCompanyInfoSettings] = createRequest(
+    [`/settings/rebranding/company`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? companyInfoHandler()
+    : await fetch(getCompanyInfoSettings);
+
+  if (!res.ok) return;
+
+  const passwordSettings = await res.json();
+
+  return passwordSettings.response as TCompanyInfo;
+}
+
+export async function getPortalPasswordSettings(
+  confirmKey: string | null = null,
+) {
+  const [getPortalPasswordSettings] = createRequest(
+    [`/settings/security/password`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+  const res = IS_TEST
+    ? portalPasswordSettingHandler()
+    : await fetch(getPortalPasswordSettings);
+
+  if (!res.ok) return;
+
+  const passwordSettings = await res.json();
+
+  return passwordSettings.response as TPasswordSettings;
+}
+
+export async function getUserFromConfirm(
+  userId: string,
+  confirmKey: string | null = null,
+) {
+  const [getUserFromConfirm] = createRequest(
+    [`/people/${userId}`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? selfHandler(null, headers())
+    : await fetch(getUserFromConfirm);
+
+  if (!res.ok) return;
+
+  const user = await res.json();
+
+  if (user.response && user.response.displayName) {
+    user.response.displayName = Encoder.htmlDecode(user.response.displayName);
+  }
+
+  return user.response as TUser;
+}
+
+export async function getMachineName(confirmKey: string | null = null) {
+  const [getMachineName] = createRequest(
+    [`/settings/machine`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST ? machineNameHandler() : await fetch(getMachineName);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const machineName = await res.json();
+
+  return machineName.response as string;
+}
+
+export async function getIsLicenseRequired() {
+  const [getIsLicenseRequired] = createRequest(
+    [`/settings/license/required`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? licenseRequiredHandler(headers())
+    : await fetch(getIsLicenseRequired);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const isLicenseRequire = await res.json();
+
+  return isLicenseRequire.response as boolean;
+}
+
+export async function getPortalTimeZones(confirmKey: string | null = null) {
+  const [getPortalTimeZones] = createRequest(
+    [`/settings/timezones`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? portalTimeZoneHandler()
+    : await fetch(getPortalTimeZones);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const portalTimeZones = await res.json();
+
+  return portalTimeZones.response as TTimeZone[];
+}
+
+export async function getPortal() {
+  const [getPortal] = createRequest([`/portal`], [["", ""]], "GET");
+
+  const res = IS_TEST ? portalTimeZoneHandler() : await fetch(getPortal);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const portal = await res.json();
+
+  return { ...portal.response, tenantAlias: portal.links[0].href } as TPortal;
+}
+
+export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
+  const [getTfaSecretKeyAndQR] = createRequest(
+    [`/settings/tfaapp/setup`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST ? tfaAppHandler() : await fetch(getTfaSecretKeyAndQR);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const tfaSecretKeyAndQR = await res.json();
+
+  return tfaSecretKeyAndQR.response as TTfaSecretKeyAndQR;
+}
+
+export async function checkConfirmLink(data: TConfirmLinkParams) {
+  const [checkConfirmLink] = createRequest(
+    [`/authentication/confirm`],
     [["Content-Type", "application/json"]],
     "POST",
     JSON.stringify(data),
-    true,
   );
 
-  console.log(gitAvailablePortals.url);
+  const response = IS_TEST
+    ? confirmHandler(headers())
+    : await fetch(checkConfirmLink);
 
-  const response = await fetch(gitAvailablePortals);
-  if (!response.ok) return null;
+  if (!response.ok) throw new Error(response.statusText);
 
-  const { response: portals } = await response.json();
+  const result = await response.json();
 
-  console.log(portals);
-
-  // return config;
+  return result.response as TConfirmLinkResult;
 }
 
-export async function getConfig() {
-  const baseUrl = getBaseUrl();
-  const config = await (
-    await fetch(`${baseUrl}/static/scripts/config.json`)
-  ).json();
+export async function getAvailablePortals(data: {
+  Email: string;
+  PasswordHash: string;
+  recaptchaResponse?: string | null | undefined;
+  recaptchaType?: unknown | undefined;
+}) {
+  const config = await getConfig();
 
-  return config;
+  const path = `/portal/signin`;
+
+  if (config?.oauth2?.apiSystem.length) {
+    const urls: string[] = config.oauth2.apiSystem.map(
+      (url: string) => `https://${url}/apisystem${path}`,
+    );
+
+    const actions = await Promise.allSettled(
+      urls.map((url: string) =>
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+            ...new Headers(headers()),
+          },
+        }),
+      ),
+    );
+
+    const fullFiledActions = actions.filter(
+      (action) => action.status === "fulfilled",
+    );
+
+    if (fullFiledActions.length) {
+      const portalsRes = fullFiledActions
+        .filter((action) => {
+          return action.value.ok;
+        })
+        .map((action) => action.value);
+
+      if (!portalsRes.length) {
+        const portals = await fullFiledActions[0].value.json();
+
+        return { ...portals, status: fullFiledActions[0].status };
+      }
+
+      const portals = (await Promise.all(portalsRes.map((res) => res.json())))
+        .map(
+          (portals: {
+            tenants: { portalLink: string; portalName: string }[];
+          }) => portals.tenants,
+        )
+        .flat();
+
+      return portals;
+    }
+  }
+
+  const portalsRes = IS_TEST
+    ? oauthSignInHelper()
+    : await fetch(
+        createRequest(
+          [path],
+          [["Content-Type", "application/json"]],
+          "POST",
+          JSON.stringify(data),
+          true,
+        )[0],
+      );
+
+  const portals = await portalsRes.json();
+
+  if (portals.error) return portals;
+
+  return portals.tenants as { portalLink: string; portalName: string }[];
 }

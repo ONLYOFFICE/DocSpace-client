@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,7 +37,7 @@ export const Card = ({
   title,
   description,
   buttonLabel,
-  onCick,
+  onClick,
 }: CardProps) => {
   return (
     <Wrapper>
@@ -50,7 +50,7 @@ export const Card = ({
       <Button
         scale
         isClicked
-        onClick={onCick}
+        onClick={onClick}
         label={buttonLabel}
         icon={<ArrowIcon />}
         size={ButtonSize.normal}

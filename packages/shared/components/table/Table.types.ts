@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,6 +50,7 @@ export type TTableColumn = {
   defaultSize?: number;
   default?: boolean;
   resizable?: boolean;
+  isShort?: boolean;
   checkbox?: {
     value: boolean;
     isIndeterminate: boolean;
@@ -79,6 +80,7 @@ export interface TableHeaderProps {
     | React.ForwardedRef<HTMLDivElement>
     | ((node: HTMLDivElement) => void);
   theme: TTheme;
+  isIndexEditingMode?: boolean;
 }
 
 export interface TableHeaderCellProps {
@@ -112,6 +114,7 @@ export interface TableBodyProps {
   useReactWindow: boolean;
   onScroll?: () => void;
   infoPanelVisible?: boolean;
+  isIndexEditingMode: boolean;
 }
 
 export interface TableRowProps {
@@ -124,8 +127,10 @@ export interface TableRowProps {
   style?: React.CSSProperties;
   title?: string;
   getContextModel: () => ContextMenuModel[];
+  badgeUrl: string;
+  isIndexEditingMode: boolean;
   onClick?: (e: React.MouseEvent) => void;
-  badgeUrl?: string;
+  forwardedRef: React.ForwardedRef<HTMLDivElement>;
 }
 
 export interface TableCellProps {
@@ -148,7 +153,7 @@ export type TGroupMenuItem = {
   id: string;
 };
 
-export interface TableGroupMenuProps {
+interface TableGroupmenuBased {
   isChecked: boolean;
   isIndeterminate: boolean;
   headerMenu: TGroupMenuItem[];
@@ -162,4 +167,11 @@ export interface TableGroupMenuProps {
   isBlocked?: boolean;
   toggleInfoPanel: () => void;
   withComboBox?: boolean;
+  headerLabel?: string;
 }
+export type TableGroupMenuProps =
+  | (TableGroupmenuBased & {
+      isCloseable?: undefined;
+      onCloseClick?: undefined;
+    })
+  | (TableGroupmenuBased & { isCloseable: boolean; onCloseClick: () => void });

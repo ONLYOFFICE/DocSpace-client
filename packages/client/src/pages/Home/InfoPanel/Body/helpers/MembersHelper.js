@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,11 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  ShareAccessRights,
-  EmployeeType,
-  RoomsType,
-} from "@docspace/shared/enums";
+import { ShareAccessRights, RoomsType } from "@docspace/shared/enums";
 
 class MembersHelper {
   constructor(props) {
@@ -45,13 +41,13 @@ class MembersHelper {
       },
       roomAdmin: {
         key: "roomAdmin",
-        label: this.t("Common:RoomAdmin"),
+        label: this.t("Common:RoomManager"),
         access: ShareAccessRights.RoomManager,
         type: "manager",
       },
       collaborator: {
         key: "collaborator",
-        label: this.t("Common:PowerUser"),
+        label: this.t("Common:ContentCreator"),
         access: ShareAccessRights.Collaborator,
         type: "collaborator",
       },
@@ -142,7 +138,6 @@ class MembersHelper {
           options.roomAdmin,
           options.collaborator,
           options.editor,
-          options.formFiller,
           options.reviewer,
           options.commentator,
           options.viewer,
@@ -158,6 +153,14 @@ class MembersHelper {
         ];
       case RoomsType.PublicRoom:
         return [options.roomAdmin, options.collaborator, ...deleteOption];
+      case RoomsType.VirtualDataRoom:
+        return [
+          options.roomAdmin,
+          options.collaborator,
+          options.editor,
+          options.viewer,
+          ...deleteOption,
+        ];
       default:
         return [];
     }

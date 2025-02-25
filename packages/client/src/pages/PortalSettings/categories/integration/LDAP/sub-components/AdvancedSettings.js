@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,11 +28,15 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-const AdvancedSettings = ({ isSendWelcomeEmail, setIsSendWelcomeEmail }) => {
+const AdvancedSettings = ({
+  isLdapEnabled,
+  isUIDisabled,
+  isSendWelcomeEmail,
+  setIsSendWelcomeEmail,
+}) => {
   const { t } = useTranslation("Ldap");
 
   const onChange = (e) => {
@@ -42,8 +46,8 @@ const AdvancedSettings = ({ isSendWelcomeEmail, setIsSendWelcomeEmail }) => {
   };
 
   return (
-    <Box className="ldap_advanced-settings">
-      <Text fontWeight={600} fontSize={"14px"}>
+    <div className="ldap_advanced-settings">
+      <Text fontWeight={600} fontSize="14px">
         {t("LdapAdvancedSettings")}
       </Text>
 
@@ -52,17 +56,25 @@ const AdvancedSettings = ({ isSendWelcomeEmail, setIsSendWelcomeEmail }) => {
           className="ldap_checkbox-send-welcome-email"
           label={t("LdapSendWelcomeLetter")}
           isChecked={isSendWelcomeEmail}
+          isDisabled={!isLdapEnabled || isUIDisabled}
           onChange={onChange}
         />
         <HelpButton tooltipContent={t("LdapSendWelcomeLetterTooltip")} />
       </div>
-    </Box>
+    </div>
   );
 };
 
 export default inject(({ ldapStore }) => {
-  const { setIsSendWelcomeEmail, isSendWelcomeEmail } = ldapStore;
+  const {
+    isLdapEnabled,
+    isUIDisabled,
+    setIsSendWelcomeEmail,
+    isSendWelcomeEmail,
+  } = ldapStore;
   return {
+    isLdapEnabled,
+    isUIDisabled,
     setIsSendWelcomeEmail,
     isSendWelcomeEmail,
   };

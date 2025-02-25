@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,6 +44,10 @@ type TOwner = {
   id: string;
 };
 
+type TWizardSettings = {
+  completed: boolean;
+};
+
 export type TPortals = {
   created: string;
   domain: string;
@@ -59,6 +63,7 @@ export type TPortals = {
   quotaUsage: TQuotaUsage;
   customQuota: number;
   usedSize: number;
+  wizardSettings: TWizardSettings;
 };
 
 export type TNewPortalData = {

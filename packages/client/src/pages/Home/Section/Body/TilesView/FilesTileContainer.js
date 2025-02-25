@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,53 +30,29 @@ import React, {
   useCallback,
   useState,
   useMemo,
+  useContext,
 } from "react";
-import { inject, observer } from "mobx-react";
-import elementResizeDetectorMaker from "element-resize-detector";
-import TileContainer from "./sub-components/TileContainer";
+import { useTranslation } from "react-i18next";
+
+import { Context } from "@docspace/shared/utils";
+
 import FileTile from "./FileTile";
+import { FileTileProvider } from "./FileTile.provider";
+import { elementResizeDetector } from "./FileTile.utils";
 
-const getThumbSize = (width) => {
-  let imgWidth = 216;
+import TileContainer from "./sub-components/TileContainer";
+import withContainer from "../../../../../HOCs/withContainer";
 
-  if (width >= 240 && width < 264) {
-    imgWidth = 240;
-  } else if (width >= 264 && width < 288) {
-    imgWidth = 264;
-  } else if (width >= 288 && width < 312) {
-    imgWidth = 288;
-  } else if (width >= 312 && width < 336) {
-    imgWidth = 312;
-  } else if (width >= 336 && width < 360) {
-    imgWidth = 336;
-  } else if (width >= 360 && width < 400) {
-    imgWidth = 360;
-  } else if (width >= 400 && width < 440) {
-    imgWidth = 400;
-  } else if (width >= 440) {
-    imgWidth = 440;
-  }
-
-  return `${imgWidth}x156`;
-};
-
-const elementResizeDetector = elementResizeDetectorMaker({
-  strategy: "scroll",
-  callOnAdd: false,
-});
-
-const FilesTileContainer = ({
-  filesList,
-  t,
-  sectionWidth,
-  withPaging,
-  thumbnails1280x720,
-}) => {
+const FilesTileContainer = ({ list, isTutorialEnabled }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
   const [thumbSize, setThumbSize] = useState("");
   const [columnCount, setColumnCount] = useState(null);
+
+  const { sectionWidth } = useContext(Context);
+
+  const { t } = useTranslation(["Translations"]);
 
   useEffect(() => {
     return () => {
@@ -95,7 +71,7 @@ const FilesTileContainer = ({
 
       if (width === 0) return;
 
-      const size = thumbnails1280x720 ? "1280x720" : getThumbSize(width);
+      const size = "1280x720";
 
       const widthWithoutPadding = width - 32;
 
@@ -111,7 +87,7 @@ const FilesTileContainer = ({
 
       setThumbSize(size);
     },
-    [columnCount, thumbSize, thumbnails1280x720],
+    [columnCount, thumbSize],
   );
 
   const onSetTileRef = React.useCallback((node) => {
@@ -130,7 +106,7 @@ const FilesTileContainer = ({
   }, []);
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => {
+    return list.map((item, index) => {
       return index % 11 == 0 ? (
         <FileTile
           id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
@@ -139,11 +115,8 @@ const FilesTileContainer = ({
           }
           item={item}
           itemIndex={index}
-          sectionWidth={sectionWidth}
           selectableRef={onSetTileRef}
-          thumbSize={thumbSize}
-          columnCount={columnCount}
-          withRef={true}
+          withRef
         />
       ) : (
         <FileTile
@@ -153,35 +126,24 @@ const FilesTileContainer = ({
           }
           item={item}
           itemIndex={index}
-          sectionWidth={sectionWidth}
-          thumbSize={thumbSize}
-          columnCount={columnCount}
         />
       );
     });
-  }, [filesList, sectionWidth, onSetTileRef, thumbSize, columnCount]);
+  }, [list, onSetTileRef, sectionWidth, isTutorialEnabled]);
 
   return (
-    <TileContainer
-      className="tile-container"
-      draggable
-      useReactWindow={!withPaging}
-      headingFolders={t("Translations:Folders")}
-      headingFiles={t("Translations:Files")}
-    >
-      {filesListNode}
-    </TileContainer>
+    <FileTileProvider columnCount={columnCount} thumbSize={thumbSize}>
+      <TileContainer
+        className="tile-container"
+        draggable
+        useReactWindow
+        headingFolders={t("Translations:Folders")}
+        headingFiles={t("Translations:Files")}
+      >
+        {filesListNode}
+      </TileContainer>
+    </FileTileProvider>
   );
 };
 
-export default inject(({ settingsStore, filesStore, filesSettingsStore }) => {
-  const { filesList } = filesStore;
-  const { withPaging } = settingsStore;
-  const { thumbnails1280x720 } = filesSettingsStore;
-
-  return {
-    filesList,
-    withPaging,
-    thumbnails1280x720,
-  };
-})(observer(FilesTileContainer));
+export default withContainer(FilesTileContainer);

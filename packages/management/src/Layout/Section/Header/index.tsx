@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,9 +32,23 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 
 import { getItemByLink } from "SRC_DIR/utils";
+import Bar from "SRC_DIR/components/Bar";
+import { tablet } from "@docspace/shared/utils";
+
+const StyledWrapper = styled.div`
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  @media ${tablet} {
+    .bar {
+      display: none;
+    }
+  }
+`;
 
 const StyledHeader = styled.div`
   display: flex;
@@ -56,29 +70,29 @@ const SectionHeaderContent = () => {
   const navigate = useNavigate();
   const path = location.pathname;
   const item = React.useMemo(() => getItemByLink(path), [path]);
-  const isBackup = path.includes("backup");
 
   const onBackToParent = () => {
     navigate(-1);
   };
 
-  const headerText = isBackup ? t("Backup") : t(item?.tKey);
-
   return (
-    <StyledHeader>
-      {item && !item?.isHeader && (
-        <IconButton
-          iconName={ArrowPathReactSvgUrl}
-          size={17}
-          isFill={true}
-          onClick={onBackToParent}
-          className="arrow-button"
-        />
-      )}
-      <Headline type="content" truncate={true}>
-        <div className="header">{headerText}</div>
-      </Headline>
-    </StyledHeader>
+    <StyledWrapper>
+      <StyledHeader>
+        {!item?.isHeader && (
+          <IconButton
+            iconName={ArrowPathReactSvgUrl}
+            size={17}
+            isFill={true}
+            onClick={onBackToParent}
+            className="arrow-button"
+          />
+        )}
+        <Heading type="content" truncate={true}>
+          <div className="header">{t(item?.tKey)}</div>
+        </Heading>
+      </StyledHeader>
+      <Bar />
+    </StyledWrapper>
   );
 };
 

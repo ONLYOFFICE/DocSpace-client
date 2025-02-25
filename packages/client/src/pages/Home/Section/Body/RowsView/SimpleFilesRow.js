@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,29 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { withTranslation } from "react-i18next";
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
-import { Row } from "@docspace/shared/components/row";
-import FilesRowContent from "./FilesRowContent";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { Row } from "@docspace/shared/components/rows";
 import { isMobile, isMobileOnly } from "react-device-detect";
-
 import {
   isMobile as isMobileUtile,
   mobile,
   tablet,
   classNames,
+  injectDefaultTheme,
 } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
+import { FolderType } from "@docspace/shared/enums";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
+import FilesRowContent from "./FilesRowContent";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
 import withBadges from "../../../../../HOCs/withBadges";
 import ItemIcon from "../../../../../components/ItemIcon";
 import marginStyles from "./CommonStyles";
-import { Base, globalColors } from "@docspace/shared/themes";
-
-import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 
 const checkedStyle = css`
   background: ${(props) => props.theme.filesSection.rowView.checkedBackground};
@@ -67,22 +68,54 @@ const StyledWrapper = styled.div`
     `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
   margin-top: -1px;
 
-  ${(props) => (props.checked || props.isActive) && checkedStyle};
+  ${(props) =>
+    (props.checked || props.isActive) &&
+    !props.isIndexEditingMode &&
+    checkedStyle};
   ${(props) =>
     (props.checked || props.isActive) &&
     props.isFirstElem &&
     css`
-      border-top-color: ${(props) =>
-        `${props.theme.filesSection.tableView.row.borderColor} !important`};
+      border-top-color: ${({ theme }) =>
+        `${theme.filesSection.tableView.row.borderColor} !important`};
     `};
+
+  ${(props) =>
+    props.isIndexUpdated &&
+    css`
+      background: ${({ theme, isIndexEditingMode }) =>
+        isIndexEditingMode
+          ? `${theme.filesSection.tableView.row.indexUpdate} !important`
+          : `${theme.filesSection.tableView.row.backgroundActive} !important`};
+
+      &:hover {
+        background: ${({ theme }) =>
+          `${theme.filesSection.tableView.row.indexActive} !important`};
+      }
+
+      ${marginStyles}
+    `}
 
   ${(props) =>
     !isMobile &&
     !props.isDragging &&
+    !props.isIndexEditingMode &&
     css`
       :hover {
         cursor: pointer;
         ${checkedStyle}
+      }
+    `};
+
+  ${(props) =>
+    !isMobile &&
+    props.isIndexEditingMode &&
+    css`
+      :hover {
+        cursor: pointer;
+        background: ${({ theme }) =>
+          theme.filesSection.tableView.row.indexActive};
+        ${marginStyles}
       }
     `};
 
@@ -105,7 +138,7 @@ const StyledWrapper = styled.div`
 
       @keyframes Highlight {
         0% {
-          background: ${(props) => props.theme.filesSection.animationColor};
+          background: ${({ theme }) => theme.filesSection.animationColor};
         }
 
         100% {
@@ -115,7 +148,7 @@ const StyledWrapper = styled.div`
     `}
 `;
 
-const StyledSimpleFilesRow = styled(Row)`
+const StyledSimpleFilesRow = styled(Row).attrs(injectDefaultTheme)`
   height: 56px;
 
   position: unset;
@@ -125,7 +158,7 @@ const StyledSimpleFilesRow = styled(Row)`
     props.canDrag &&
     `url(${CursorPalmReactSvgUrl}) 8 0, auto`};
   ${(props) =>
-    props.inProgress &&
+    props.isBlockingOperation &&
     css`
       pointer-events: none;
       /* cursor: wait; */
@@ -165,12 +198,14 @@ const StyledSimpleFilesRow = styled(Row)`
     }
   }
 
-  .tablet-row-copy-link {
+  .tablet-row-copy-link,
+  .tablet-row-create-room {
     display: none;
   }
 
   @media ${tablet} {
-    .tablet-row-copy-link {
+    .tablet-row-copy-link,
+    .tablet-row-create-room {
       display: block;
     }
 
@@ -180,11 +215,13 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   @media ${mobile} {
-    .tablet-row-copy-link {
+    .tablet-row-copy-link,
+    .tablet-row-create-room {
       display: none;
     }
 
-    .row-copy-link {
+    .row-copy-link,
+    .tablet-row-create-room {
       display: block;
 
       ${isMobileOnly &&
@@ -294,10 +331,9 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 `;
 
-StyledSimpleFilesRow.defaultProps = { theme: Base };
-
 const SimpleFilesRow = (props) => {
   const {
+    t,
     item,
     sectionWidth,
     dragging,
@@ -318,7 +354,6 @@ const SimpleFilesRow = (props) => {
     isEdit,
     isActive,
     inProgress,
-    isAdmin,
     getContextModel,
     showHotkeyBorder,
     id,
@@ -331,14 +366,44 @@ const SimpleFilesRow = (props) => {
     itemIndex,
     badgeUrl,
     canDrag,
+    isIndexEditingMode,
+    changeIndex,
+    isIndexUpdated,
+    isFolder,
+    isBlockingOperation,
+    isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
   } = props;
 
   const isMobileDevice = isMobileUtile();
 
   const [isDragActive, setIsDragActive] = React.useState(false);
 
+  const rowRef = React.useRef(null);
+
   const withAccess = item.security?.Lock;
   const isSmallContainer = sectionWidth <= 500;
+
+  const onChangeIndex = (action) => {
+    return changeIndex(action, item, t);
+  };
+
+  React.useEffect(() => {
+    if (!rowRef?.current) return;
+
+    if (item?.isPDF) {
+      setRefMap(GuidanceRefKey.Pdf, rowRef);
+    }
+    if (item?.type === FolderType.Done) {
+      setRefMap(GuidanceRefKey.Ready, rowRef);
+    }
+
+    return () => {
+      deleteRefMap(GuidanceRefKey.Pdf);
+      deleteRefMap(GuidanceRefKey.Ready);
+    };
+  }, [setRefMap, deleteRefMap]);
 
   const element = (
     <ItemIcon
@@ -348,8 +413,12 @@ const SimpleFilesRow = (props) => {
       isRoom={item.isRoom}
       title={item.title}
       logo={item.logo}
+      showDefault={
+        !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
+      }
       color={item.logo?.color}
       isArchive={item.isArchive}
+      isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
     />
   );
@@ -378,10 +447,11 @@ const SimpleFilesRow = (props) => {
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
-    : item.id ?? "";
+    : (item.id ?? "");
 
   return (
     <StyledWrapper
+      ref={rowRef}
       id={id}
       onDragOver={onDragOver}
       className={`row-wrapper ${
@@ -393,7 +463,9 @@ const SimpleFilesRow = (props) => {
       }`}
       checked={checkedProps}
       isActive={isActive}
-      showHotkeyBorder={showHotkeyBorder}
+      showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}
+      isIndexEditingMode={isIndexEditingMode}
+      isIndexUpdated={isIndexUpdated}
       isFirstElem={itemIndex === 0}
       isHighlight={isHighlight}
     >
@@ -403,7 +475,7 @@ const SimpleFilesRow = (props) => {
         className={classNames("files-item", className, idWithFileExst)}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
-        dragging={dragging && isDragging}
+        dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
         style={dragStyles}
@@ -413,12 +485,14 @@ const SimpleFilesRow = (props) => {
           data={item}
           isEdit={isEdit}
           element={element}
-          mode={"modern"}
+          mode="modern"
           sectionWidth={sectionWidth}
           contentElement={
             isMobileDevice || isRooms ? null : quickButtonsComponent
           }
-          badgesComponent={!isMobileDevice && badgesComponent}
+          badgesComponent={
+            !isMobileDevice || item.isTemplate ? badgesComponent : null
+          }
           onSelect={onContentFileSelect}
           onContextClick={fileContextClick}
           isPrivacy={isPrivacy}
@@ -427,9 +501,12 @@ const SimpleFilesRow = (props) => {
           checked={checkedProps}
           contextOptions={item.contextOptions}
           contextButtonSpacerWidth={displayShareButton}
-          dragging={dragging && isDragging}
+          dragging={dragging ? isDragging : null}
           isDragging={dragging}
+          isIndexEditingMode={isIndexEditingMode}
+          onChangeIndex={onChangeIndex}
           isActive={isActive}
+          isBlockingOperation={isBlockingOperation}
           inProgress={inProgress}
           isThirdPartyFolder={item.isThirdPartyFolder}
           className="files-row"
@@ -441,10 +518,11 @@ const SimpleFilesRow = (props) => {
           isSmallContainer={isSmallContainer}
           isRooms={isRooms}
           folderCategory={folderCategory}
-          withoutBorder={true}
+          withoutBorder
           isHighlight={isHighlight}
           badgeUrl={badgeUrl}
           canDrag={canDrag}
+          isFolder={isFolder}
         >
           <FilesRowContent
             item={item}
@@ -454,7 +532,9 @@ const SimpleFilesRow = (props) => {
               isMobileDevice || isRooms ? quickButtonsComponent : null
             }
             isRooms={isRooms}
-            badgesComponent={isMobileDevice && badgesComponent}
+            badgesComponent={
+              isMobileDevice && !item.isTemplate ? badgesComponent : null
+            }
           />
         </StyledSimpleFilesRow>
       </DragAndDrop>

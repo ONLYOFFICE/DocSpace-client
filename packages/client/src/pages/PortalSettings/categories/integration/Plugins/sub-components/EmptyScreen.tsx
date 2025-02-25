@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,9 +28,10 @@ import React from "react";
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
+import { mobile } from "@docspace/shared/utils";
 
-import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/empty_screen_plugins.svg?url";
-import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/empty_screen_plugins_dark.svg?url";
+import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.light.svg?url";
+import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.dark.svg?url";
 
 import EmptyFolderContainer from "SRC_DIR/components/EmptyContainer/EmptyContainer";
 import { PluginsEmptyScreen } from "../Plugins.types";
@@ -40,6 +41,18 @@ import Dropzone from "./Dropzone";
 const StyledEmptyScreen = styled(EmptyFolderContainer)`
   .ec-buttons {
     width: 100%;
+  }
+
+  .ec-image {
+    width: 200px;
+    height: 140px;
+  }
+
+  @media ${mobile} {
+    .ec-image {
+      width: 150px;
+      height: 105px;
+    }
   }
 `;
 
@@ -53,21 +66,22 @@ const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
       headerText={t("NoPlugins")}
       descriptionText={
         <Text>
-          {withUpload &&
-            t("UploadDescription", { productName: t("Common:ProductName") })}
+          {withUpload
+            ? t("UploadDescription", { productName: t("Common:ProductName") })
+            : null}
         </Text>
       }
       style={{ gridColumnGap: "39px" }}
       buttonStyle={{ marginTop: "16px" }}
       imageSrc={imageSrc}
       buttons={
-        withUpload && (
+        withUpload ? (
           <Dropzone
             isDisabled={!withUpload}
             isLoading={false}
             onDrop={onDrop}
           />
-        )
+        ) : null
       }
     />
   );

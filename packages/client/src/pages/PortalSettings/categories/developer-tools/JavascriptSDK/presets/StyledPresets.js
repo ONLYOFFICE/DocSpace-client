@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,13 +25,30 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { isMobile, mobile, tablet } from "@docspace/shared/utils/device";
-import { Box } from "@docspace/shared/components/box";
-import Base from "@docspace/shared/themes/base";
+import {
+  isMobile,
+  mobile,
+  tablet,
+  desktop,
+} from "@docspace/shared/utils/device";
+import { injectDefaultTheme } from "@docspace/shared/utils";
+import { showPreviewThreshold } from "../constants";
 
-export const SDKContainer = styled(Box)`
+export const SDKContainer = styled.div`
+  box-sizing: border-box;
+  .integration-examples-bottom {
+    display: none;
+  }
+
   @media ${tablet} {
     width: 100%;
+
+    @media (min-width: ${showPreviewThreshold}px) {
+      .integration-examples-bottom {
+        display: block;
+        margin-top: 40px;
+      }
+    }
   }
 
   ${isMobile() &&
@@ -40,8 +57,10 @@ export const SDKContainer = styled(Box)`
   `}
 
   .tabs-body {
-    height: calc(100lvh - 260px);
     display: block;
+    @media ${desktop} {
+      height: calc(100lvh - 260px);
+    }
   }
 
   .linkHelp {
@@ -50,7 +69,8 @@ export const SDKContainer = styled(Box)`
   }
 `;
 
-export const Controls = styled(Box)`
+export const Controls = styled.div`
+  box-sizing: border-box;
   max-width: 350px;
   min-width: 350px;
   width: 100%;
@@ -74,6 +94,20 @@ export const Controls = styled(Box)`
 
   .checkbox {
     max-width: fit-content;
+  }
+
+  .integration-examples {
+    .integration-header {
+      margin-top: 0px;
+    }
+  }
+
+  @media ${tablet} {
+    @media (min-width: ${showPreviewThreshold}px) {
+      .integration-examples {
+        display: none;
+      }
+    }
   }
 `;
 
@@ -121,7 +155,8 @@ export const CategorySubHeader = styled.div`
   }
 `;
 
-export const CategoryDescription = styled(Box)`
+export const CategoryDescription = styled.div`
+  box-sizing: border-box;
   max-width: 700px;
   .sdk-description {
     line-height: 20px;
@@ -129,7 +164,8 @@ export const CategoryDescription = styled(Box)`
   }
 `;
 
-export const ControlsGroup = styled(Box)`
+export const ControlsGroup = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -148,25 +184,29 @@ export const ControlsGroup = styled(Box)`
   `}
 `;
 
-export const CheckboxGroup = styled(Box)`
+export const CheckboxGroup = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 10px;
 `;
 
-export const LabelGroup = styled(Box)`
+export const LabelGroup = styled.div`
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   gap: 4px;
 `;
 
-export const ControlsSection = styled(Box)`
+export const ControlsSection = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 16px;
 `;
 
-export const Frame = styled(Box)`
+export const Frame = styled.div.attrs(injectDefaultTheme)`
+  box-sizing: border-box;
   margin-top: 16px;
   position: relative;
 
@@ -194,6 +234,10 @@ export const Frame = styled(Box)`
     css`
       min-height: 400px;
       max-height: 600px;
+
+      @media ${tablet} {
+        height: calc(-260px + 100lvh);
+      }
     `}
 
 
@@ -215,9 +259,8 @@ export const Frame = styled(Box)`
   }
 `;
 
-Frame.defaultProps = { theme: Base };
-
-export const Container = styled(Box)`
+export const Container = styled.div`
+  box-sizing: border-box;
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
@@ -236,7 +279,8 @@ export const Container = styled(Box)`
   `}
 `;
 
-export const RowContainer = styled(Box)`
+export const RowContainer = styled.div`
+  box-sizing: border-box;
   flex-direction: row;
   display: flex;
   gap: 8px;
@@ -249,7 +293,8 @@ export const RowContainer = styled(Box)`
     `}
 `;
 
-export const ColumnContainer = styled(Box)`
+export const ColumnContainer = styled.div`
+  box-sizing: border-box;
   flex-direction: column;
   display: flex;
   gap: 8px;
@@ -268,9 +313,9 @@ export const ColumnContainer = styled(Box)`
   `}
 `;
 
-export const Preview = styled(Box)`
+export const Preview = styled.div`
+  box-sizing: border-box;
   width: 100%;
-  min-width: 660px;
   flex-direction: row;
 
   .preview-description {
@@ -321,7 +366,7 @@ export const CodeWrapper = styled.div`
 
   margin-top: 16px;
 
-  width: calc(${(props) => (props.width ? props.width : "100%")} + 2px);
+  width: 100%;
   max-width: 800px;
   height: calc(${(props) => (props.height ? props.height : "400px")} + 2px);
 `;

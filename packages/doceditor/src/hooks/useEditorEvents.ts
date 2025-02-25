@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -59,6 +59,8 @@ import { Nullable } from "@docspace/shared/types";
 
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 
+import { isMobile } from "react-device-detect";
+
 import { getCurrentDocumentVersion, setDocumentTitle } from "@/utils";
 
 import {
@@ -83,6 +85,8 @@ const useEditorEvents = ({
   isSkipError,
   openOnNewPage,
   t,
+  sdkConfig,
+  organizationName,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -142,8 +146,26 @@ const useEditorEvents = ({
     [fileInfo?.id, t],
   );
 
+  const fixSize = React.useCallback(() => {
+    try {
+      // fix the editor sizes - bug 57099
+      if (config?.type === "mobile") {
+        const wrapEl = document.getElementsByTagName("iframe");
+        if (wrapEl.length) {
+          wrapEl[0].style.height = screen.availHeight + "px";
+          window.scrollTo(0, -1);
+          wrapEl[0].style.height = window.innerHeight + "px";
+        }
+      }
+    } catch (e) {
+      console.error("fixSize failed", e);
+    }
+  }, [config?.type]);
+
   const onSDKAppReady = React.useCallback(() => {
     docEditor = window.DocEditor.instances[EDITOR_ID];
+
+    fixSize();
 
     frameCallCommand("setIsLoaded");
 
@@ -184,11 +206,24 @@ const useEditorEvents = ({
 
       history.pushState({}, "", `${pathname}${search}`);
     }
-  }, [config?.Error, errorMessage, isSkipError, searchParams, pathname, t]);
+  }, [
+    config?.Error,
+    errorMessage,
+    isSkipError,
+    searchParams,
+    pathname,
+    t,
+    fixSize,
+  ]);
 
   const onDocumentReady = React.useCallback(() => {
     // console.log("onDocumentReady", { docEditor });
     setDocumentReady(true);
+
+    frameCallEvent({
+      event: "onAppReady",
+      data: { frameId: sdkConfig?.frameId },
+    });
 
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 
@@ -204,7 +239,7 @@ const useEditorEvents = ({
         docEditor,
       ); //Do not remove: it's for Back button on Mobile App
     }
-  }, [config?.errorMessage]);
+  }, [config?.errorMessage, sdkConfig?.frameId]);
 
   const getBackUrl = React.useCallback(() => {
     if (!fileInfo) return;
@@ -216,7 +251,7 @@ const useEditorEvents = ({
 
     if (fileInfo.rootFolderType === FolderType.Rooms) {
       if (key) {
-        backUrl = `/rooms/share?key=${key}`;
+        backUrl = `/rooms/share?key=${key}&folder=${fileInfo.folderId}`;
       } else {
         backUrl = `/rooms/shared/${fileInfo.folderId}/filter?folder=${fileInfo.folderId}`;
       }
@@ -235,8 +270,7 @@ const useEditorEvents = ({
   }, [fileInfo]);
 
   const onSDKRequestClose = React.useCallback(() => {
-    const search = window.location.search;
-    const editorGoBack = new URLSearchParams(search).get("editorGoBack");
+    const editorGoBack = sdkConfig?.editorGoBack;
 
     if (editorGoBack === "event") {
       frameCallEvent({ event: "onEditorCloseCallback" });
@@ -244,7 +278,7 @@ const useEditorEvents = ({
       const backUrl = getBackUrl();
       if (backUrl) window.location.replace(backUrl);
     }
-  }, [getBackUrl]);
+  }, [getBackUrl, sdkConfig?.editorGoBack]);
 
   const getDefaultFileName = React.useCallback(
     (withExt = false) => {
@@ -563,6 +597,7 @@ const useEditorEvents = ({
               config?.document.fileType ?? "",
               documentReady,
               successAuth ?? false,
+              organizationName,
               setDocTitle,
             )
           : setDocumentTitle(
@@ -571,6 +606,7 @@ const useEditorEvents = ({
               config?.document.fileType ?? "",
               documentReady,
               successAuth ?? false,
+              organizationName,
               setDocTitle,
             );
       }, 500);
@@ -582,6 +618,7 @@ const useEditorEvents = ({
       docTitle,
       documentReady,
       successAuth,
+      organizationName,
     ],
   );
 
@@ -597,12 +634,20 @@ const useEditorEvents = ({
           config?.document.fileType ?? "",
           documentReady,
           successAuth ?? false,
+          organizationName,
           setDocTitle,
         );
         setDocTitle(newTitle);
       }
     },
-    [t, config?.document.fileType, docTitle, documentReady, successAuth],
+    [
+      t,
+      config?.document.fileType,
+      docTitle,
+      documentReady,
+      successAuth,
+      organizationName,
+    ],
   );
 
   const onMakeActionLink = React.useCallback((event: object) => {
@@ -655,6 +700,31 @@ const useEditorEvents = ({
     url.searchParams.append("title", defaultFileName ?? "");
     setCreateUrl(url.toString());
   }, [config?.documentType, getDefaultFileName, openOnNewPage]);
+
+  const onOrientationChange = React.useCallback(() => {
+    fixSize();
+  }, [fixSize]);
+
+  React.useEffect(() => {
+    if (isMobile) {
+      if (window.screen?.orientation) {
+        window.screen.orientation.addEventListener(
+          "change",
+          onOrientationChange,
+        );
+      } else {
+        window.addEventListener("orientationchange", onOrientationChange);
+      }
+    }
+
+    return () => {
+      window.removeEventListener("orientationchange", onOrientationChange);
+      window.screen?.orientation?.removeEventListener(
+        "change",
+        onOrientationChange,
+      );
+    };
+  }, [onOrientationChange]);
 
   return {
     events,

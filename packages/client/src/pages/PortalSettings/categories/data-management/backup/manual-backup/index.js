@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,12 +34,7 @@ import { startBackup } from "@docspace/shared/api/portal";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { toastr } from "@docspace/shared/components/toast";
 import { BackupStorageType, FolderType } from "@docspace/shared/enums";
-import ThirdPartyModule from "./sub-components/ThirdPartyModule";
-import RoomsModule from "./sub-components/RoomsModule";
-import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
-import { StyledModules, StyledManualBackup } from "./../StyledBackup";
-import { getFromLocalStorage, saveToLocalStorage } from "../../../../utils";
-//import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
+// import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
 import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
 import {
   getBackupStorage,
@@ -47,8 +42,19 @@ import {
 } from "@docspace/shared/api/settings";
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
+import StatusMessage from "@docspace/shared/components/status-message";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { isManagement } from "@docspace/shared/utils/common";
+import {
+  isManagement,
+  getBackupProgressInfo,
+} from "@docspace/shared/utils/common";
+import { getFromLocalStorage, saveToLocalStorage } from "../../../../utils";
+import { StyledModules, StyledManualBackup } from "../StyledBackup";
+import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
+import RoomsModule from "./sub-components/RoomsModule";
+import ThirdPartyModule from "./sub-components/ThirdPartyModule";
+
 let selectedStorageType = "";
 
 class ManualBackup extends React.Component {
@@ -70,13 +76,11 @@ class ManualBackup extends React.Component {
 
     this.timerId = null;
 
-    const { t } = props;
+    const { t, tReady } = props;
 
-    setDocumentTitle(t("DataBackup"));
+    if (tReady) setDocumentTitle(t("DataBackup"));
 
     this.state = {
-      selectedFolder: "",
-      isPanelVisible: false,
       isInitialLoading: false,
       isEmptyContentBeforeLoader: true,
       isCheckedTemporaryStorage: checkedTemporary,
@@ -92,48 +96,31 @@ class ManualBackup extends React.Component {
     ];
   }
 
-  setBasicSettings = async () => {
-    const {
-      getProgress,
-      // setCommonThirdPartyList,
-      t,
-      setThirdPartyStorage,
-      setStorageRegions,
-      setConnectedThirdPartyAccount,
-    } = this.props;
-    try {
-      getProgress(t);
-
-      //if (isDocSpace) {
-      const [account, backupStorage, storageRegions] = await Promise.all([
-        getSettingsThirdParty(),
-        getBackupStorage(),
-        getStorageRegions(),
-      ]);
-
-      setConnectedThirdPartyAccount(account);
-      setThirdPartyStorage(backupStorage);
-      setStorageRegions(storageRegions);
-      //   } else {
-      //    const commonThirdPartyList = await getThirdPartyCommonFolderTree();
-      // commonThirdPartyList && setCommonThirdPartyList(commonThirdPartyList);
-      //   }
-    } catch (error) {
-      toastr.error(error);
-      //this.clearLocalStorage();
-    }
-
-    clearTimeout(this.timerId);
-    this.timerId = null;
-
-    this.setState({
-      isInitialLoading: false,
-      isEmptyContentBeforeLoader: false,
-    });
-  };
-
   componentDidMount() {
-    const { fetchTreeFolders, rootFoldersTitles, isNotPaidPeriod } = this.props;
+    const {
+      fetchTreeFolders,
+      rootFoldersTitles,
+      isNotPaidPeriod,
+      setDownloadingProgress,
+      setTemporaryLink,
+      t,
+    } = this.props;
+
+    SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
+      const options = getBackupProgressInfo(
+        opt,
+        t,
+        setDownloadingProgress,
+        setTemporaryLink,
+      );
+
+      if (!options) return;
+
+      const { error, success } = options;
+
+      if (error) toastr.error(error);
+      if (success) toastr.success(success);
+    });
 
     if (isNotPaidPeriod) {
       this.setState({
@@ -150,50 +137,101 @@ class ManualBackup extends React.Component {
     this.setBasicSettings();
   }
 
+  componentDidUpdate(prevProps) {
+    const { t, tReady } = this.props;
+
+    if (prevProps.tReady !== tReady && tReady)
+      setDocumentTitle(t("DataBackup"));
+  }
+
   componentWillUnmount() {
-    const { clearProgressInterval } = this.props;
+    const { resetDownloadingProgress } = this.props;
     clearTimeout(this.timerId);
     this.timerId = null;
 
-    clearProgressInterval();
+    resetDownloadingProgress();
+
+    SocketHelper.off(SocketEvents.BackupProgress);
   }
+
+  setBasicSettings = async () => {
+    const {
+      getProgress,
+      // setCommonThirdPartyList,
+      t,
+      setThirdPartyStorage,
+      setStorageRegions,
+      setConnectedThirdPartyAccount,
+    } = this.props;
+    try {
+      getProgress(t);
+
+      const [account, backupStorage, storageRegions] = await Promise.all([
+        getSettingsThirdParty(),
+        getBackupStorage(),
+        getStorageRegions(),
+      ]);
+
+      setConnectedThirdPartyAccount(account);
+      setThirdPartyStorage(backupStorage);
+      setStorageRegions(storageRegions);
+      //   } else {
+      //    const commonThirdPartyList = await getThirdPartyCommonFolderTree();
+      // commonThirdPartyList && setCommonThirdPartyList(commonThirdPartyList);
+      //   }
+    } catch (error) {
+      toastr.error(error);
+      // this.clearLocalStorage();
+    }
+
+    clearTimeout(this.timerId);
+    this.timerId = null;
+
+    this.setState({
+      isInitialLoading: false,
+      isEmptyContentBeforeLoader: false,
+    });
+  };
 
   onMakeTemporaryBackup = async () => {
     const {
-      getIntervalProgress,
       setDownloadingProgress,
-      t,
       clearLocalStorage,
+      setErrorInformation,
+      t,
     } = this.props;
     const { TemporaryModuleType } = BackupStorageType;
+
+    setErrorInformation("");
 
     clearLocalStorage();
     saveToLocalStorage("LocalCopyStorageType", "TemporaryStorage");
     try {
       await startBackup(`${TemporaryModuleType}`, null, false, isManagement());
       setDownloadingProgress(1);
-      getIntervalProgress(t);
-    } catch (e) {
-      toastr.error(t("BackupCreatedError"));
-      console.error(err);
+    } catch (err) {
+      setErrorInformation(err, t);
     }
   };
+
   onClickDownloadBackup = () => {
     const { temporaryLink } = this.props;
     const url = window.location.origin;
-    const downloadUrl = `${url}` + `${temporaryLink}`;
+    const downloadUrl = `${url}${temporaryLink}`;
     window.open(downloadUrl, "_self");
   };
+
   onClickShowStorage = (e) => {
-    let newStateObj = {};
+    const newStateObj = {};
     const name = e.target.name;
     newStateObj[name] = true;
     const newState = this.switches.filter((el) => el !== name);
-    newState.forEach((name) => (newStateObj[name] = false));
+    newState.forEach((key) => (newStateObj[key] = false));
     this.setState({
       ...newStateObj,
     });
   };
+
   onMakeCopy = async (
     selectedFolder,
     moduleName,
@@ -203,16 +241,16 @@ class ManualBackup extends React.Component {
   ) => {
     const { isCheckedThirdPartyStorage } = this.state;
     const {
-      t,
-      getIntervalProgress,
       setDownloadingProgress,
       clearLocalStorage,
       setTemporaryLink,
       getStorageParams,
-      saveToLocalStorage,
+      setErrorInformation,
+      t,
     } = this.props;
 
     clearLocalStorage();
+    setErrorInformation("");
 
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
@@ -235,25 +273,26 @@ class ManualBackup extends React.Component {
       await startBackup(moduleType, storageParams, false, isManagement());
       setDownloadingProgress(1);
       setTemporaryLink("");
-      getIntervalProgress(t);
     } catch (err) {
-      toastr.error(t("BackupCreatedError"));
-      console.error(err);
-      //clearLocalStorage();
+      setErrorInformation(err, t);
     }
   };
+
   render() {
     const {
       t,
       temporaryLink,
       downloadingProgress,
-      //commonThirdPartyList,
+      // commonThirdPartyList,
       buttonSize,
-      //isDocSpace,
+
       rootFoldersTitles,
       isNotPaidPeriod,
       dataBackupUrl,
       currentColorScheme,
+      pageIsDisabled,
+      isBackupProgressVisible,
+      errorInformation,
     } = this.props;
     const {
       isInitialLoading,
@@ -266,13 +305,9 @@ class ManualBackup extends React.Component {
 
     const isMaxProgress = downloadingProgress === 100;
 
-    // const isDisabledThirdParty = isDocSpace
-    //   ? false
-    //   : commonThirdPartyList?.length === 0;
-
     const commonRadioButtonProps = {
       fontSize: "13px",
-      fontWeight: "400",
+      fontWeight: "600",
       value: "value",
       className: "backup_radio-button",
       onClick: this.onClickShowStorage,
@@ -285,136 +320,140 @@ class ManualBackup extends React.Component {
 
     const roomName = rootFoldersTitles[FolderType.USER]?.title;
 
-    return isEmptyContentBeforeLoader && !isInitialLoading ? (
-      <></>
-    ) : isInitialLoading ? (
+    return isEmptyContentBeforeLoader &&
+      !isInitialLoading ? null : isInitialLoading ? (
       <DataBackupLoader />
     ) : (
-      <StyledManualBackup>
+      <StyledManualBackup pageIsDisabled={pageIsDisabled}>
+        <StatusMessage message={errorInformation} />
+
         <div className="backup_modules-header_wrapper">
-          <Text className="backup_modules-description">
+          <Text className="backup_modules-description settings_unavailable">
             {t("ManualBackupDescription")}
           </Text>
-          <Link
-            className="link-learn-more"
-            href={dataBackupUrl}
-            target="_blank"
-            fontSize="13px"
-            color={currentColorScheme.main?.accent}
-            isHovered
-          >
-            {t("Common:LearnMore")}
-          </Link>
+          {!isManagement() ? (
+            <Link
+              className="link-learn-more"
+              href={dataBackupUrl}
+              target="_blank"
+              fontSize="13px"
+              color={currentColorScheme.main?.accent}
+              isHovered
+            >
+              {t("Common:LearnMore")}
+            </Link>
+          ) : null}
         </div>
 
-        <StyledModules>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="temporary-storage"
             label={t("TemporaryStorage")}
-            name={"isCheckedTemporaryStorage"}
+            name="isCheckedTemporaryStorage"
             key={0}
             isChecked={isCheckedTemporaryStorage}
-            isDisabled={!isMaxProgress}
+            isDisabled={!isMaxProgress || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description">
+          <Text className="backup-description settings_unavailable">
             {t("TemporaryStorageDescription")}
           </Text>
-          {isCheckedTemporaryStorage && (
+          {isCheckedTemporaryStorage ? (
             <div className="manual-backup_buttons">
               <Button
                 id="create-button"
                 label={t("Common:Create")}
                 onClick={this.onMakeTemporaryBackup}
                 primary
-                isDisabled={!isMaxProgress}
+                isDisabled={!isMaxProgress || pageIsDisabled}
                 size={buttonSize}
               />
-              {temporaryLink?.length > 0 && isMaxProgress && (
+              {temporaryLink?.length > 0 && isMaxProgress ? (
                 <Button
                   id="download-copy"
                   label={t("DownloadCopy")}
                   onClick={this.onClickDownloadBackup}
-                  isDisabled={false}
+                  isDisabled={pageIsDisabled}
                   size={buttonSize}
                   style={{ marginInlineStart: "8px" }}
                 />
-              )}
-              {!isMaxProgress && (
+              ) : null}
+              {!isMaxProgress ? (
                 <Button
-                  label={t("Common:CopyOperation") + "..."}
-                  isDisabled={true}
+                  label={`${t("Common:CopyOperation")}...`}
+                  isDisabled
                   size={buttonSize}
                   style={{ marginInlineStart: "8px" }}
                 />
-              )}
+              ) : null}
             </div>
-          )}
+          ) : null}
         </StyledModules>
-        <StyledModules isDisabled={isNotPaidPeriod}>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="backup-room"
             label={t("RoomsModule")}
-            name={"isCheckedDocuments"}
+            name="isCheckedDocuments"
             key={1}
             isChecked={isCheckedDocuments}
-            isDisabled={!isMaxProgress || isNotPaidPeriod}
+            isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description module-documents">
+          <Text className="backup-description module-documents settings_unavailable">
             <Trans t={t} i18nKey="RoomsModuleDescription" ns="Settings">
               {{ roomName }}
             </Trans>
           </Text>
-          {isCheckedDocuments && (
+          {isCheckedDocuments ? (
             <RoomsModule
               {...commonModulesProps}
               isCheckedDocuments={isCheckedDocuments}
             />
-          )}
+          ) : null}
         </StyledModules>
 
-        <StyledModules isDisabled={isNotPaidPeriod}>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="third-party-resource"
             label={t("ThirdPartyResource")}
-            name={"isCheckedThirdParty"}
+            name="isCheckedThirdParty"
             key={2}
             isChecked={isCheckedThirdParty}
-            isDisabled={!isMaxProgress || isNotPaidPeriod}
+            isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description">
+          <Text className="backup-description settings_unavailable">
             {t("ThirdPartyResourceDescription")}
           </Text>
-          {isCheckedThirdParty && <ThirdPartyModule {...commonModulesProps} />}
+          {isCheckedThirdParty ? (
+            <ThirdPartyModule {...commonModulesProps} />
+          ) : null}
         </StyledModules>
-        <StyledModules isDisabled={isNotPaidPeriod}>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="third-party-storage"
             label={t("Common:ThirdPartyStorage")}
-            name={"isCheckedThirdPartyStorage"}
+            name="isCheckedThirdPartyStorage"
             key={3}
             isChecked={isCheckedThirdPartyStorage}
-            isDisabled={!isMaxProgress || isNotPaidPeriod}
+            isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description">
+          <Text className="backup-description settings_unavailable">
             {t("ThirdPartyStorageDescription")}
           </Text>
-          {isCheckedThirdPartyStorage && (
+          {isCheckedThirdPartyStorage ? (
             <ThirdPartyStorageModule {...commonModulesProps} />
-          )}
+          ) : null}
         </StyledModules>
 
-        {downloadingProgress > 0 && downloadingProgress !== 100 && (
+        {isBackupProgressVisible ? (
           <FloatingButton
             className="layout-progress-bar"
-            icon="file"
             alert={false}
             percent={downloadingProgress}
           />
-        )}
+        ) : null}
       </StyledManualBackup>
     );
   }
@@ -423,12 +462,12 @@ class ManualBackup extends React.Component {
 export default inject(
   ({ settingsStore, backup, treeFoldersStore, currentTariffStatusStore }) => {
     const {
-      clearProgressInterval,
+      resetDownloadingProgress,
       clearLocalStorage,
       // commonThirdPartyList,
       downloadingProgress,
       getProgress,
-      getIntervalProgress,
+
       setDownloadingProgress,
       setTemporaryLink,
       // setCommonThirdPartyList,
@@ -436,23 +475,27 @@ export default inject(
       getStorageParams,
       setThirdPartyStorage,
       setStorageRegions,
-      saveToLocalStorage,
       setConnectedThirdPartyAccount,
+      isBackupProgressVisible,
+      errorInformation,
+      setErrorInformation,
     } = backup;
 
-    const { currentColorScheme, dataBackupUrl } = settingsStore;
+    const { currentColorScheme, dataBackupUrl, portals } = settingsStore;
     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
+
+    const pageIsDisabled = isManagement() && portals?.length === 1;
 
     return {
       isNotPaidPeriod,
       setThirdPartyStorage,
-      clearProgressInterval,
+      resetDownloadingProgress,
       clearLocalStorage,
       // commonThirdPartyList,
       downloadingProgress,
       getProgress,
-      getIntervalProgress,
+      errorInformation,
       setDownloadingProgress,
       setTemporaryLink,
       setStorageRegions,
@@ -461,11 +504,13 @@ export default inject(
       getStorageParams,
       rootFoldersTitles,
       fetchTreeFolders,
-      saveToLocalStorage,
       setConnectedThirdPartyAccount,
 
       dataBackupUrl,
       currentColorScheme,
+      pageIsDisabled,
+      isBackupProgressVisible,
+      setErrorInformation,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

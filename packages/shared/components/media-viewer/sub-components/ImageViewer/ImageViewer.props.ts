@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,21 +32,23 @@ import type { DevicesType } from "../../MediaViewer.types";
 interface ImageViewerProps {
   src?: string;
   thumbnailSrc?: string;
-  isTiff?: boolean;
+  isDecodedImage?: boolean;
   imageId: number;
   version: number;
   errorTitle: string;
   isFistImage: boolean;
   isLastImage: boolean;
   panelVisible: boolean;
+  backgroundBlack: boolean;
   isPublicFile?: boolean;
-  mobileDetails: JSX.Element;
+  mobileDetails?: JSX.Element;
   toolbar: ReturnType<typeof getCustomToolbar>;
   devices: DevicesType;
 
   onPrev?: VoidFunction;
   onNext?: VoidFunction;
   onMask?: VoidFunction;
+  setBackgroundBlack: Dispatch<SetStateAction<boolean>>;
   contextModel: (isError?: boolean) => ContextMenuModel[];
   resetToolbarVisibleTimer: VoidFunction;
   setIsOpenContextMenu: Dispatch<SetStateAction<boolean>>;
@@ -54,7 +56,7 @@ interface ImageViewerProps {
     isOpen: boolean,
     right?: string,
     bottom?: string,
-  ) => JSX.Element;
+  ) => JSX.Element | null;
 }
 
 export default ImageViewerProps;

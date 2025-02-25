@@ -1,0 +1,9 @@
+{
+  "AllowButton": "Позволи",
+  "ConsentDescription": "Данните, споделени с <strong>{{displayName}}</strong>, ще се уреждат от <6>политиката за поверителност</6> и <6>условията за ползване</6 > на <strong>{{nameApp}}</strong>. Можете да оттеглите това съгласие по всяко време в настройките на вашия профил в {{productName}}.",
+  "ConsentSubHeader": "<1>{{nameApp}}</1> би желал достъп до следните данни във <strong>вашия профил в {{productName}}</strong>:",
+  "DenyButton": "Отказ",
+  "NotYou": "Не сте Вие?",
+  "SignedInAs": "Вписан като",
+  "ToContinue": "Да продължите да"
+}

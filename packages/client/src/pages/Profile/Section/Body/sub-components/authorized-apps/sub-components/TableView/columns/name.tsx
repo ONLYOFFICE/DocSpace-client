@@ -56,8 +56,9 @@ const NameCell = ({
       {inProgress ? (
         <Loader
           className="table-container_row-loader"
-          type={LoaderTypes.oval}
-          size="16px"
+          color=""
+          size="20px"
+          type={LoaderTypes.track}
         />
       ) : (
         <TableCell
@@ -67,7 +68,7 @@ const NameCell = ({
         >
           <StyledContainer className="table-container_element-container">
             <div className="table-container_element">
-              {icon && <StyledImage src={icon} alt="App icon" />}
+              {icon ? <StyledImage src={icon} alt="App icon" /> : null}
             </div>
             <Checkbox
               className="table-container_row-checkbox"

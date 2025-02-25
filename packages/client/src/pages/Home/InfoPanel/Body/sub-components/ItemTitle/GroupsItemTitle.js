@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,31 +26,30 @@
 
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 import { matchPath } from "react-router";
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
-import { StyledAccountsItemTitle } from "../../styles/accounts";
 import { inject, observer } from "mobx-react";
 import { decode } from "he";
 import { Badge } from "@docspace/shared/components/badge";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { globalColors } from "@docspace/shared/themes";
+import { StyledUsersTitle } from "../../styles/Users";
 
 const GroupsItemTitle = ({
   t,
   isRoomAdmin,
+  isUser,
   isSeveralItems,
   infoPanelSelection,
   getGroupContextOptions,
 }) => {
   const itemTitleRef = useRef();
-  const theme = useTheme();
 
   const isInsideGroup = matchPath(
     "/accounts/groups/:groupId/filter",
-    location.pathname,
+    window.location.pathname,
   );
 
   const getContextOptions = () =>
@@ -63,34 +62,29 @@ const GroupsItemTitle = ({
   if (isSeveralItems) return null;
 
   return (
-    <StyledAccountsItemTitle ref={itemTitleRef}>
+    <StyledUsersTitle ref={itemTitleRef}>
       <Avatar
         className="avatar"
         size={AvatarSize.big}
         userName={infoPanelSelection.name}
-        isGroup={true}
+        isGroup
       />
 
       <div className="info-panel__info-text">
         <div className="info-panel__info-wrapper">
-          <Text
-            className={"info-text__name"}
-            noSelect
-            title={groupName}
-            truncate
-          >
+          <Text className="info-text__name" noSelect title={groupName} truncate>
             {groupName}
           </Text>
         </div>
-        {!!groupName && (
-          <Text className={"info-text__email"} title={infoPanelSelection.email}>
+        {groupName ? (
+          <Text className="info-text__email" title={infoPanelSelection.email}>
             {t("PeopleTranslations:PeopleCount", {
               count: infoPanelSelection.membersCount,
             })}
           </Text>
-        )}
+        ) : null}
 
-        {infoPanelSelection?.isLDAP && (
+        {infoPanelSelection?.isLDAP ? (
           <>
             <Badge
               id="ldap-badge-info-panel"
@@ -98,31 +92,32 @@ const GroupsItemTitle = ({
               label={t("Common:LDAP")}
               color={globalColors.white}
               backgroundColor={globalColors.secondPurple}
-              fontSize={"9px"}
+              fontSize="9px"
               fontWeight={800}
               noHover
-              lineHeight={"13px"}
+              lineHeight="13px"
             />
             <Tooltip anchorSelect={`div[id='ldap-badge-info-panel'] div`}>
               {t("PeopleTranslations:LDAPGroupTooltip")}
             </Tooltip>
           </>
-        )}
+        ) : null}
       </div>
 
-      {!isRoomAdmin && !infoPanelSelection.isLDAP && (
+      {!isRoomAdmin && !isUser && !infoPanelSelection.isLDAP ? (
         <ContextMenuButton
           id="info-accounts-options"
           className="context-button"
           getData={getContextOptions}
         />
-      )}
-    </StyledAccountsItemTitle>
+      ) : null}
+    </StyledUsersTitle>
   );
 };
 
 export default inject(({ peopleStore }) => ({
   isRoomAdmin: peopleStore.userStore.user.isRoomAdmin,
+  isUser: peopleStore.userStore.user.isUser,
 }))(
   withTranslation([
     "People",

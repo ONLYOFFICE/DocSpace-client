@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -46,7 +46,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
   return (
     <StyledComponent>
       <div className="official-documentation">
-        {"—"}
+        —
         <Text fontWeight={600}>
           {t("UpgradeToProBannerInstructionItemDocker")}{" "}
           <ColorTheme
@@ -60,8 +60,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
             {t("UpgradeToProBannerInstructionReadNow")}
           </ColorTheme>
         </Text>
-
-        {"—"}
+        —
         <Text fontWeight={600}>
           {t("UpgradeToProBannerInstructionItemLinux")}{" "}
           <ColorTheme
@@ -75,8 +74,7 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
             {t("UpgradeToProBannerInstructionReadNow")}
           </ColorTheme>
         </Text>
-
-        {"—"}
+        —
         <Text fontWeight={600}>
           {t("UpgradeToProBannerInstructionItemWindows")}{" "}
           <ColorTheme

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,12 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { RoomsType, ShareAccessRights } from "../../enums";
+import {
+  EmployeeStatus,
+  EmployeeType,
+  RoomsType,
+  ShareAccessRights,
+} from "../../enums";
 import { MergeTypes, Nullable } from "../../types";
 
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
-import { TRoomSecurity } from "../../api/rooms/types";
-import { TGroup } from "../../api/groups/types";
+import { TRoomSecurity, ICover } from "../../api/rooms/types";
+import { TUserGroup } from "../../api/people/types";
 
 import { AvatarRole } from "../avatar";
 import { TTabItem } from "../tabs";
@@ -43,7 +48,7 @@ type THeaderBackButton =
   | {
       onBackClick: () => void;
       withoutBackButton: false;
-      withoutBorder: false;
+      withoutBorder: boolean;
     }
   | {
       onBackClick?: undefined;
@@ -73,6 +78,8 @@ export type BreadCrumbsProps = {
 
 export type HeaderProps = {
   headerLabel: string;
+  onCloseClick: () => void;
+  isCloseable?: boolean;
 } & THeaderBackButton;
 
 export type TSelectorHeader =
@@ -99,6 +106,7 @@ export type TBreadCrumb = {
   isRoom?: boolean;
   minWidth?: string;
   roomType?: RoomsType;
+  shared?: boolean;
   onClick?: TOnBreadCrumbClick;
 };
 
@@ -158,8 +166,8 @@ export type TSelectorSearch =
       isSearchLoading: boolean;
       searchPlaceholder?: string;
       searchValue?: string;
-      onSearch: (value: string, callback?: Function) => void;
-      onClearSearch: (callback?: Function) => void;
+      onSearch: (value: string, callback?: VoidFunction) => void;
+      onClearSearch: (callback?: VoidFunction) => void;
     }
   | {
       withSearch?: undefined;
@@ -190,7 +198,7 @@ export type TSelectorEmptyScreen = {
 };
 
 // submit button
-type TOnSubmit = (
+export type TOnSubmit = (
   selectedItems: TSelectorItem[],
   access: TAccessRight | null,
   fileName: string,
@@ -249,6 +257,20 @@ type TWithoutAccessRightsProps = {
   accessRightsMode?: undefined;
 };
 
+export type TSelectorWithAside =
+  | {
+      useAside: true;
+      onClose: VoidFunction;
+      withoutBackground?: boolean;
+      withBlur?: boolean;
+    }
+  | {
+      useAside?: undefined;
+      onClose?: undefined;
+      withoutBackground?: undefined;
+      withBlur?: undefined;
+    };
+
 export type TSelectorAccessRights =
   | TWithAccessRightsProps
   | TWithoutAccessRightsProps;
@@ -297,14 +319,19 @@ export type TSelectorFooterCheckbox = TSelectorCheckbox & {
 };
 
 export type TSelectorInfo =
-  | { withInfo: true; infoText: string }
-  | { withInfo?: undefined; infoText?: undefined };
+  | { withInfo: true; infoText: string; withInfoBadge?: boolean }
+  | {
+      withInfo?: undefined;
+      infoText?: undefined;
+      withInfoBadge?: undefined;
+    };
 
 export type TRenderCustomItem = (
   label: string,
   role?: string,
   email?: string,
   isGroup?: boolean,
+  status?: EmployeeStatus,
 ) => React.ReactNode | null;
 
 export type SelectorProps = TSelectorHeader &
@@ -319,7 +346,8 @@ export type SelectorProps = TSelectorHeader &
   TSelectorCancelButton &
   TSelectorAccessRights &
   TSelectorInput &
-  TSelectorCheckbox & {
+  TSelectorCheckbox &
+  TSelectorWithAside & {
     id?: string;
     className?: string;
     style?: React.CSSProperties;
@@ -347,11 +375,14 @@ export type SelectorProps = TSelectorHeader &
 
     alwaysShowFooter?: boolean;
     descriptionText?: string;
+
+    withPadding?: boolean;
   };
 
 export type BodyProps = TSelectorInfo & {
   footerVisible: boolean;
   withHeader?: boolean;
+  withPadding?: boolean;
 
   value?: string;
 
@@ -375,6 +406,7 @@ export type BodyProps = TSelectorInfo & {
   withFooterInput?: boolean;
   withFooterCheckbox?: boolean;
   descriptionText?: string;
+  withInfoBadge?: boolean;
 };
 
 export type FooterProps = TSelectorFooterSubmitButton &
@@ -395,12 +427,13 @@ type TSelectorItemEmpty = {
   iconOriginal?: undefined;
   role?: undefined;
   email?: undefined;
-  groups?: TGroup[];
+  groups?: undefined;
   isOwner?: undefined;
   isAdmin?: undefined;
   isVisitor?: undefined;
   isCollaborator?: undefined;
   isRoomAdmin?: undefined;
+  status?: undefined;
   access?: undefined;
   fileExst?: undefined;
   shared?: undefined;
@@ -423,6 +456,8 @@ type TSelectorItemEmpty = {
   onAcceptInput?: undefined;
   onCancelInput?: undefined;
   placeholder?: undefined;
+  cover?: undefined;
+  userType?: undefined;
 
   isRoomsOnly?: undefined;
   createDefineRoomType?: undefined;
@@ -440,8 +475,9 @@ export type TSelectorItemUser = MergeTypes<
     avatar: string;
     hasAvatar: boolean;
     role: AvatarRole;
-    groups?: TGroup[];
-
+    userType: EmployeeType;
+    groups?: TUserGroup[];
+    status: EmployeeStatus;
     access?: ShareAccessRights | string | number;
   }
 >;
@@ -485,6 +521,7 @@ export type TSelectorItemRoom = MergeTypes<
     icon?: string;
     color?: string;
     iconOriginal?: string;
+    cover?: ICover;
   }
 >;
 
@@ -518,6 +555,7 @@ export type TSelectorItemInput = MergeTypes<
     icon?: string;
     color?: string;
     roomType?: RoomsType;
+    cover?: ICover;
     placeholder?: string;
 
     onAcceptInput: (value: string) => void;
@@ -543,6 +581,9 @@ export type TSelectorItem = TSelectorItemType & {
   isSelected?: boolean;
   isDisabled?: boolean;
   disabledText?: string;
+  lifetimeTooltip?: string | null;
+  viewUrl?: string;
+  isTemplate?: boolean;
 };
 
 export type Data = {
@@ -556,6 +597,7 @@ export type Data = {
   inputItemVisible: boolean;
   savedInputValue: Nullable<string>;
   setSavedInputValue: (value: Nullable<string>) => void;
+  listHeight: number;
 };
 
 export interface ItemProps {
@@ -563,3 +605,15 @@ export interface ItemProps {
   style: React.CSSProperties;
   data: Data;
 }
+
+export type ProvidersProps = {
+  emptyScreenProps: TSelectorEmptyScreen;
+  breadCrumbsProps: TSelectorBreadCrumbs;
+  infoBarProps: TInfoBar;
+  searchProps: TSelectorSearch;
+  selectAllProps: TSelectorSelectAll & {
+    isAllChecked: boolean;
+    isAllIndeterminate: boolean;
+  };
+  tabsProps: TSelectorTabs;
+};

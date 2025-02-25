@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,24 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import Filter from "./filter";
 
 import { request } from "../client";
 import { checkFilterInstance, toUrlParams } from "../../utils/common";
+import { Encoder } from "../../utils/encoder";
+
 import {
+  TGetGroupList,
   TGetGroupMembersInRoom,
   TGetGroupMembersInRoomFilter,
   TGroup,
 } from "./types";
 
+const decodeGroup = (group: TGroup) => {
+  const newGroup = { ...group };
+  if (newGroup.manager)
+    newGroup.manager = {
+      ...newGroup.manager,
+      displayName: Encoder.htmlDecode(newGroup.manager?.displayName ?? ""),
+    };
+
+  if (newGroup.members)
+    newGroup.members = newGroup.members.map((m) => ({
+      ...m,
+      displayName: Encoder.htmlDecode(m.displayName),
+    }));
+
+  return newGroup;
+};
+
+const decodeGroups = (groups: TGroup[]) => {
+  return groups.map((group) => decodeGroup(group));
+};
+
 // * Create
 
-export const createGroup = (
+export const createGroup = async (
   groupName: string,
   groupManager: string | undefined,
   members: string[],
 ) => {
-  return request({
+  const res = (await request({
     method: "post",
     url: "/group",
     data: {
@@ -49,12 +76,14 @@ export const createGroup = (
       groupManager,
       members,
     },
-  }) as Promise<TGroup>;
+  })) as TGroup;
+
+  return decodeGroup(res);
 };
 
 // * Read
 
-export const getGroups = (filter = Filter.getDefault()) => {
+export const getGroups = async (filter = Filter.getDefault()) => {
   let params = "";
 
   if (filter) {
@@ -63,22 +92,40 @@ export const getGroups = (filter = Filter.getDefault()) => {
     params = `?${filter.toApiUrlParams()}`;
   }
 
-  return request({
+  const res = (await request({
     method: "get",
     url: `/group${params}`,
-  });
+  })) as TGetGroupList;
+
+  res.items = decodeGroups(res.items);
+
+  return res;
 };
 
-export const getGroupById = (
+export const getGroupById = async (
   groupId: string,
   includeMembers: boolean = false,
   signal?: AbortSignal,
 ) => {
-  return request({
+  const res = (await request({
     method: "get",
     url: `/group/${groupId}?includeMembers=${includeMembers}`,
     signal,
-  }) as Promise<TGroup>;
+  })) as TGroup;
+
+  if (res.manager)
+    res.manager = {
+      ...res.manager,
+      displayName: Encoder.htmlDecode(res.manager?.displayName ?? ""),
+    };
+
+  if (res.members)
+    res.members = res.members.map((m) => ({
+      ...m,
+      displayName: Encoder.htmlDecode(m.displayName),
+    }));
+
+  return res;
 };
 
 export const getGroupsByName = async (
@@ -91,6 +138,8 @@ export const getGroupsByName = async (
     url: `/group?filterValue=${groupName}&startIndex=${startIndex}&count=${pageCount}`,
     data: { groupName },
   })) as { items: TGroup[]; total: number };
+
+  res.items = decodeGroups(res.items);
 
   return res;
 };
@@ -109,33 +158,37 @@ export const getGroupsByUserId = (userId: string) => {
   });
 };
 
-export const getGroupMembersInRoom = (
+export const getGroupMembersInRoom = async (
   folderId: string | number,
   groupId: string,
   filter: TGetGroupMembersInRoomFilter,
 ) => {
   const url = `/files/folder/${folderId}/group/${groupId}/share?${toUrlParams(filter, false)}`;
 
-  return request({
+  const res = (await request({
     method: "get",
     url,
-  }) as Promise<TGetGroupMembersInRoom>;
+  })) as TGetGroupMembersInRoom;
+
+  return res;
 };
 
 // * Update
 
-export const updateGroup = (
+export const updateGroup = async (
   groupId: string,
   groupName: string,
   groupManager: string | undefined,
   membersToAdd: string[],
   membersToRemove: string[],
 ) => {
-  return request({
+  const res = (await request({
     method: "put",
     url: `/group/${groupId}`,
     data: { groupName, groupManager, membersToAdd, membersToRemove },
-  }) as Promise<TGroup>;
+  })) as TGroup;
+
+  return decodeGroup(res);
 };
 
 export const addGroupMembers = (groupId: string, members: string) => {
@@ -144,6 +197,14 @@ export const addGroupMembers = (groupId: string, members: string) => {
     url: `/group/${groupId}/members`,
     data: { members },
   });
+};
+
+export const removeGroupMembers = (groupId: string, membersIds: string[]) => {
+  return request({
+    method: "delete",
+    url: `/group/${groupId}/members`,
+    data: { id: groupId, members: membersIds },
+  }) as Promise<TGroup>;
 };
 
 // * Delete

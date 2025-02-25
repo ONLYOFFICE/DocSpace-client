@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,7 +53,8 @@ class ChangePhoneDialogComponent extends React.Component {
   };
 
   render() {
-    console.log("ChangePhoneDialog render");
+    // console.log("ChangePhoneDialog render");
+
     const { t, tReady, visible, onClose } = this.props;
     const { isRequestRunning } = this.state;
 
@@ -69,7 +70,7 @@ class ChangePhoneDialogComponent extends React.Component {
             label={t("Common:SendButton")}
             size="normal"
             scale
-            primary={true}
+            primary
             onClick={this.onChangePhone}
             isLoading={isRequestRunning}
           />

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,12 +26,12 @@
 
 import React from "react";
 
+import styles from "./CreateEditRoom.module.scss";
 import { RectangleSkeleton } from "../rectangle";
-import { StyledRoomTypeListLoader } from "./CreateEditRoom.styled";
 
 const RoomTypeListLoader = () => {
   return (
-    <StyledRoomTypeListLoader>
+    <div className={styles.roomTypeListLoader}>
       {[...Array(5).keys()].map((key) => (
         <RectangleSkeleton
           key={key}
@@ -40,7 +40,7 @@ const RoomTypeListLoader = () => {
           borderRadius="6"
         />
       ))}
-    </StyledRoomTypeListLoader>
+    </div>
   );
 };
 export default RoomTypeListLoader;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,19 +28,19 @@ import React from "react";
 import { RoomsType } from "../../../enums";
 import { RectangleSkeleton } from "../../rectangle";
 
-import { StyledBlock, StyledContainer } from "./FilterBlock.styled";
 import { FilterBlockProps } from "./FilterBlock.types";
+import styles from "../Filter.module.scss";
 
 const FilterBlockLoader = ({
   id,
   className,
   style,
   isRooms,
-  isAccounts,
-  isPeopleAccounts,
-  isGroupsAccounts,
-  isInsideGroup,
-
+  isContactsPage,
+  isContactsPeoplePage,
+  isContactsGroupsPage,
+  isContactsInsideGroupPage,
+  isContactsGuestsPage,
   ...rest
 }: FilterBlockProps) => {
   const roomTypeLoader = isRooms ? (
@@ -63,9 +63,15 @@ const FilterBlockLoader = ({
   ) : null;
 
   return (
-    <StyledContainer id={id} className={className} style={style} {...rest}>
-      {!isRooms && !isAccounts && (
-        <StyledBlock>
+    <div
+      id={id}
+      className={`${styles.filterContainer} ${className || ""}`}
+      style={style}
+      {...rest}
+      data-testid="filter-block-loader"
+    >
+      {!isRooms && !isContactsPage ? (
+        <div className={styles.filterBlock} data-is-last="false">
           <RectangleSkeleton
             width="50"
             height="16"
@@ -92,11 +98,11 @@ const FilterBlockLoader = ({
               className="loader-item"
             />
           </div>
-        </StyledBlock>
-      )}
+        </div>
+      ) : null}
 
-      {!isInsideGroup && (
-        <StyledBlock isLast={isGroupsAccounts}>
+      {!isContactsInsideGroupPage ? (
+        <div className={styles.filterBlock} data-is-last="true">
           <RectangleSkeleton
             width="51"
             height="16"
@@ -105,7 +111,7 @@ const FilterBlockLoader = ({
           />
           <div className="row-loader">
             <RectangleSkeleton
-              width={isPeopleAccounts ? "120" : "51"}
+              width={isContactsPeoplePage ? "120" : "51"}
               height="28"
               borderRadius="16"
               className="loader-item"
@@ -117,7 +123,7 @@ const FilterBlockLoader = ({
               className="loader-item"
             />
           </div>
-          {(isRooms || isGroupsAccounts) && (
+          {isRooms || isContactsGroupsPage ? (
             <div className="row-loader">
               <RectangleSkeleton
                 width="16"
@@ -126,18 +132,18 @@ const FilterBlockLoader = ({
                 className="loader-item"
               />
               <RectangleSkeleton
-                width={isGroupsAccounts ? "150" : "137"}
+                width={isContactsGroupsPage ? "150" : "137"}
                 height="20"
                 borderRadius="3"
                 className="loader-item"
               />
             </div>
-          )}
-        </StyledBlock>
-      )}
+          ) : null}
+        </div>
+      ) : null}
 
-      {(isRooms || isPeopleAccounts || isInsideGroup) && (
-        <StyledBlock>
+      {isRooms || isContactsPeoplePage || isContactsInsideGroupPage ? (
+        <div className={styles.filterBlock} data-is-last="false">
           <RectangleSkeleton
             width="50"
             height="16"
@@ -145,7 +151,7 @@ const FilterBlockLoader = ({
             className="loader-item"
           />
           <div className="row-loader">
-            {isPeopleAccounts || isInsideGroup ? (
+            {isContactsPeoplePage || isContactsInsideGroupPage ? (
               <>
                 <RectangleSkeleton
                   width="67"
@@ -170,11 +176,13 @@ const FilterBlockLoader = ({
               roomTypeLoader
             ) : null}
           </div>
-        </StyledBlock>
-      )}
+        </div>
+      ) : null}
 
-      {(isPeopleAccounts || isInsideGroup) && (
-        <StyledBlock>
+      {isContactsPeoplePage ||
+      isContactsGuestsPage ||
+      isContactsInsideGroupPage ? (
+        <div className={styles.filterBlock} data-is-last="false">
           <RectangleSkeleton
             width="50"
             height="16"
@@ -207,11 +215,11 @@ const FilterBlockLoader = ({
               className="loader-item tag-item"
             />
           </div>
-        </StyledBlock>
-      )}
+        </div>
+      ) : null}
 
-      {!isGroupsAccounts && (
-        <StyledBlock isLast>
+      {!isContactsGroupsPage ? (
+        <div className={styles.filterBlock} data-is-last="true">
           <RectangleSkeleton
             width="50"
             height="16"
@@ -219,7 +227,7 @@ const FilterBlockLoader = ({
             className="loader-item"
           />
           <div className="row-loader">
-            {isAccounts ? (
+            {isContactsPage ? (
               <>
                 <RectangleSkeleton
                   width="57"
@@ -332,9 +340,9 @@ const FilterBlockLoader = ({
               </>
             )}
           </div>
-        </StyledBlock>
-      )}
-    </StyledContainer>
+        </div>
+      ) : null}
+    </div>
   );
 };
 

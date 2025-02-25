@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -1090,7 +1090,9 @@ export const Encoder = {
     }
     return d;
   },
-  htmlEncode(s: string, dbl: boolean) {
+  htmlEncode(sParam: string, dblParam: boolean) {
+    let s = sParam;
+    let dbl = dblParam;
     if (this.isEmpty(s)) return "";
     dbl = dbl || false;
     if (dbl) {
@@ -1123,7 +1125,9 @@ export const Encoder = {
     }
     return s;
   },
-  XSSEncode(s: string, en: boolean) {
+  XSSEncode(sParam: string, enParam: boolean) {
+    let s = sParam;
+    let en = enParam;
     if (!this.isEmpty(s)) {
       en = en || true;
       if (en) {
@@ -1159,7 +1163,8 @@ export const Encoder = {
   correctEncoding(s: string) {
     return s.replace(/(&amp;)(amp;)+/, "$1");
   },
-  swapArrayVals(s: string, arr1: string[], arr2: string[]) {
+  swapArrayVals(sParam: string, arr1: string[], arr2: string[]) {
+    let s = sParam;
     if (this.isEmpty(s)) return "";
     let re;
     if (arr1 && arr2) {

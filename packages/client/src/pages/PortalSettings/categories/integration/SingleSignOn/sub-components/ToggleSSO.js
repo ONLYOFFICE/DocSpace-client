@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled, { css, useTheme } from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
@@ -71,13 +71,17 @@ const StyledWrapper = styled.div`
 const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
   const { t } = useTranslation("SingleSignOn");
 
+  const onChangeToggle = React.useCallback(() => {
+    ssoToggle(t);
+  }, [ssoToggle, t]);
+
   const theme = useTheme();
   return (
     <StyledWrapper isSSOAvailable={isSSOAvailable}>
       <ToggleButton
         className="enable-sso toggle"
         isChecked={enableSso}
-        onChange={() => ssoToggle(t)}
+        onChange={onChangeToggle}
         isDisabled={!isSSOAvailable}
       />
 
@@ -91,7 +95,7 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
           >
             {t("TurnOnSSO")}
           </Text>
-          {!isSSOAvailable && (
+          {!isSSOAvailable ? (
             <Badge
               backgroundColor={
                 theme.isBase
@@ -101,9 +105,9 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
               label={t("Common:Paid")}
               fontWeight="700"
               className="toggle-caption_title_badge"
-              isPaidBadge={true}
+              isPaidBadge
             />
-          )}
+          ) : null}
         </div>
         <Text
           fontSize="12px"

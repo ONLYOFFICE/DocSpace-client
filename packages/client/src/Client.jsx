@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -49,21 +49,11 @@ import {
 import ArticleWrapper from "./components/ArticleWrapper";
 
 const ClientArticle = React.memo(
-  ({
-    withMainButton,
-    setIsHeaderLoading,
-    setIsFilterLoading,
-    showArticleLoader,
-    isInfoPanelVisible,
-  }) => {
+  ({ withMainButton, showArticleLoader, isInfoPanelVisible }) => {
     return (
       <ArticleWrapper
         isInfoPanelVisible={isInfoPanelVisible}
         withMainButton={withMainButton}
-        onLogoClickAction={() => {
-          setIsFilterLoading(true, false);
-          setIsHeaderLoading(true, false);
-        }}
         showArticleLoader={showArticleLoader}
       >
         <Article.Header>
@@ -81,6 +71,8 @@ const ClientArticle = React.memo(
     );
   },
 );
+
+ClientArticle.displayName = "ClientArticle";
 
 const ClientContent = (props) => {
   const {
@@ -183,9 +175,7 @@ const ClientContent = (props) => {
             showArticleLoader={showArticleLoader}
           />
         )
-      ) : (
-        <></>
-      )}
+      ) : null}
       <Outlet />
     </>
   );
@@ -196,7 +186,6 @@ export const Client = inject(
     authStore,
     clientLoadingStore,
     filesStore,
-    peopleStore,
     pluginStore,
     userStore,
     settingsStore,
@@ -216,7 +205,7 @@ export const Client = inject(
 
     if (!userStore.user) return;
 
-    const { isVisitor } = userStore.user;
+    // const { isVisitor } = userStore.user;
 
     const {
       isLoading,
@@ -225,7 +214,7 @@ export const Client = inject(
       showArticleLoader,
     } = clientLoadingStore;
 
-    const withMainButton = !isVisitor;
+    const withMainButton = true; // !isVisitor; // Allways true for any type of users
 
     const { isInit: isInitPlugins, initPlugins } = pluginStore;
 
@@ -240,7 +229,7 @@ export const Client = inject(
       showMenu: frameConfig?.showMenu,
       user: userStore.user,
       isAuthenticated: authStore.isAuthenticated,
-      encryptionKeys: encryptionKeys,
+      encryptionKeys,
       isEncryption: isEncryptionSupport,
       isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
@@ -249,12 +238,11 @@ export const Client = inject(
       setIsFilterLoading: setIsSectionFilterLoading,
       setIsHeaderLoading: setIsSectionHeaderLoading,
       isLoading,
-      setEncryptionKeys: setEncryptionKeys,
+      setEncryptionKeys,
       showArticleLoader,
       loadClientInfo: async () => {
         const actions = [];
         actions.push(filesStore.initFiles());
-        actions.push(peopleStore.init());
 
         if (enablePlugins && !isInitPlugins) actions.push(initPlugins());
         await Promise.all(actions);

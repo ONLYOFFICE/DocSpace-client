@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,16 +27,18 @@
 /* eslint-disable class-methods-use-this */
 import { makeAutoObservable } from "mobx";
 
-import {
-  setDefaultUserQuota,
-  setDefaultRoomQuota,
-} from "@docspace/shared/api/settings";
+import { setDefaultUserQuota, setDefaultRoomQuota } from "../api/settings";
 
 import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
-import { PortalFeaturesLimitations } from "../enums";
+import { EmployeeType, PortalFeaturesLimitations } from "../enums";
 import api from "../api";
-import { TPaymentFeature, TPaymentQuota } from "../api/portal/types";
+import {
+  TPaymentFeature,
+  TPaymentQuota,
+  TNumericPaymentFeature,
+  TBooleanPaymentFeature,
+} from "../api/portal/types";
 import {
   MANAGER,
   TOTAL_SIZE,
@@ -46,27 +48,39 @@ import {
   USERS_IN_ROOM,
   COUNT_FOR_SHOWING_BAR,
   PERCENTAGE_FOR_SHOWING_BAR,
+  YEAR_KEY,
 } from "../constants";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
+import { CurrentTariffStatusStore } from "./CurrentTariffStatusStore";
 
 class CurrentQuotasStore {
   currentPortalQuota: Nullable<TPaymentQuota> = null;
 
   userStore: UserStore | null = null;
 
-  currentPortalQuotaFeatures: TPaymentFeature[] = [];
+  currentTariffStatusStore: CurrentTariffStatusStore | null = null;
+
+  currentPortalQuotaFeatures: Map<string, TPaymentFeature> = new Map();
 
   isLoaded = false;
 
-  constructor(userStoreConst: UserStore) {
+  constructor(
+    userStoreConst: UserStore,
+    currentTariffStatusStore: CurrentTariffStatusStore,
+  ) {
     makeAutoObservable(this);
     this.userStore = userStoreConst;
+    this.currentTariffStatusStore = currentTariffStatusStore;
   }
 
   setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
   };
+
+  get currentQuotaId() {
+    return this.currentPortalQuota?.id;
+  }
 
   get isFreeTariff() {
     return this.currentPortalQuota?.free;
@@ -83,131 +97,124 @@ class CurrentQuotasStore {
   }
 
   get maxCountManagersByQuota() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === MANAGER,
-    );
-
+    const result = this.currentPortalQuotaFeatures.get(
+      MANAGER,
+    ) as TNumericPaymentFeature;
     return result?.value || 0;
   }
 
   get addedManagersCount() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === MANAGER,
-    );
-
+    const result = this.currentPortalQuotaFeatures.get(
+      MANAGER,
+    ) as TNumericPaymentFeature;
     return result?.used?.value || 0;
   }
 
   get maxTotalSizeByQuota() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === TOTAL_SIZE,
-    );
-
+    const result = this.currentPortalQuotaFeatures.get(
+      TOTAL_SIZE,
+    ) as TNumericPaymentFeature;
     if (!result?.value) return PortalFeaturesLimitations.Limitless;
-
-    return result?.value;
+    return result.value;
   }
 
   get usedTotalStorageSizeCount() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === TOTAL_SIZE,
-    );
+    const result = this.currentPortalQuotaFeatures.get(
+      TOTAL_SIZE,
+    ) as TNumericPaymentFeature;
     return result?.used?.value || 0;
   }
 
   get maxFileSizeByQuota() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === FILE_SIZE,
-    );
-
+    const result = this.currentPortalQuotaFeatures.get(
+      FILE_SIZE,
+    ) as TNumericPaymentFeature;
     return result?.value;
   }
 
   get maxCountUsersByQuota() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === USERS,
-    );
+    const result = this.currentPortalQuotaFeatures.get(
+      USERS,
+    ) as TNumericPaymentFeature;
     if (!result || !result?.value) return PortalFeaturesLimitations.Limitless;
     return result?.value;
   }
 
   get maxCountRoomsByQuota() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === ROOM,
-    );
+    const result = this.currentPortalQuotaFeatures.get(
+      ROOM,
+    ) as TNumericPaymentFeature;
     if (!result || !result?.value) return PortalFeaturesLimitations.Limitless;
     return result?.value;
   }
 
   get usedRoomsCount() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === ROOM,
-    );
-
+    const result = this.currentPortalQuotaFeatures.get(
+      ROOM,
+    ) as TNumericPaymentFeature;
     return result?.used?.value || 0;
   }
 
-  get isBrandingAndCustomizationAvailable() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "whitelabel",
-    );
+  get isYearTariff() {
+    const result = this.currentPortalQuotaFeatures.get(
+      YEAR_KEY,
+    ) as TBooleanPaymentFeature;
+    return result?.value;
+  }
 
+  get isCustomizationAvailable() {
+    const result = this.currentPortalQuotaFeatures.get(
+      "customization",
+    ) as TBooleanPaymentFeature;
     return result?.value;
   }
 
   get isOAuthAvailable() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "oauth",
-    );
-
+    const result = this.currentPortalQuotaFeatures.get(
+      "oauth",
+    ) as TBooleanPaymentFeature;
     return result?.value;
   }
 
   get isThirdPartyAvailable() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "thirdparty",
-    );
-
+    const result = this.currentPortalQuotaFeatures.get(
+      "thirdparty",
+    ) as TBooleanPaymentFeature;
     return result?.value;
   }
 
   get isSSOAvailable() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "sso",
-    );
-
+    const result = this.currentPortalQuotaFeatures.get(
+      "sso",
+    ) as TBooleanPaymentFeature;
     return result?.value;
   }
 
   get isLdapAvailable() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "ldap",
-    );
-
+    const result = this.currentPortalQuotaFeatures.get(
+      "ldap",
+    ) as TBooleanPaymentFeature;
     return result?.value;
   }
 
   get isStatisticsAvailable() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "statistic",
-    );
-
+    const result = this.currentPortalQuotaFeatures.get(
+      "statistic",
+    ) as TBooleanPaymentFeature;
     return result?.value;
   }
 
   get isRestoreAndAutoBackupAvailable() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "restore",
-    );
-
+    const result = this.currentPortalQuotaFeatures.get(
+      "restore",
+    ) as TBooleanPaymentFeature;
     return result?.value;
   }
 
   get isAuditAvailable() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "audit",
-    );
-
+    const result = this.currentPortalQuotaFeatures.get(
+      "audit",
+    ) as TBooleanPaymentFeature;
     return result?.value;
   }
 
@@ -217,43 +224,70 @@ class CurrentQuotasStore {
 
   get quotaCharacteristics() {
     const result: TPaymentFeature[] = [];
+    const roomFeature = this.currentPortalQuotaFeatures.get(ROOM);
+    const managerFeature = this.currentPortalQuotaFeatures.get(MANAGER);
+    const totalSizeFeature = this.currentPortalQuotaFeatures.get(TOTAL_SIZE);
 
-    this.currentPortalQuotaFeatures.forEach((elem) => {
-      if (elem.id === ROOM) result?.splice(0, 0, elem);
-      if (elem.id === MANAGER) result?.splice(1, 0, elem);
-      if (elem.id === TOTAL_SIZE) result?.splice(2, 0, elem);
-    });
+    if (roomFeature) result.push(roomFeature);
+    if (managerFeature) result.push(managerFeature);
+    if (totalSizeFeature) result.push(totalSizeFeature);
 
     return result;
   }
 
   get maxUsersCountInRoom() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === USERS_IN_ROOM,
-    );
+    const result = this.currentPortalQuotaFeatures.get(USERS_IN_ROOM);
 
     if (!result || !result?.value) return PortalFeaturesLimitations.Limitless;
 
     return result?.value;
   }
 
-  get showRoomQuotaBar() {
+  get isRoomsTariffAlmostLimit() {
+    if (this.maxCountRoomsByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
+    return (
+      this.maxCountRoomsByQuota - this.usedRoomsCount <=
+        COUNT_FOR_SHOWING_BAR && this.usedRoomsCount < this.maxCountRoomsByQuota
+    );
+  }
+
+  get isRoomsTariffLimit() {
+    if (this.maxCountRoomsByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
     return (
       this.maxCountRoomsByQuota - this.usedRoomsCount <=
         COUNT_FOR_SHOWING_BAR &&
-      this.maxCountRoomsByQuota > 0 &&
-      this.maxCountRoomsByQuota >= this.usedRoomsCount
+      this.usedRoomsCount >= this.maxCountRoomsByQuota
     );
   }
 
-  get showStorageQuotaBar() {
+  get isStorageTariffAlmostLimit() {
+    if (this.maxTotalSizeByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
     return (
       (this.usedTotalStorageSizeCount / this.maxTotalSizeByQuota) * 100 >=
-      PERCENTAGE_FOR_SHOWING_BAR
+        PERCENTAGE_FOR_SHOWING_BAR &&
+      this.usedTotalStorageSizeCount < this.maxTotalSizeByQuota
     );
   }
 
-  get showTenantCustomQuotaBar() {
+  get isStorageTariffLimit() {
+    if (this.maxTotalSizeByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
+    return (
+      (this.usedTotalStorageSizeCount / this.maxTotalSizeByQuota) * 100 >=
+        PERCENTAGE_FOR_SHOWING_BAR &&
+      this.usedTotalStorageSizeCount >= this.maxTotalSizeByQuota
+    );
+  }
+
+  // For standalone mode
+  get isStorageQuotaAlmostLimit() {
     if (!this.isTenantCustomQuotaSet || this.tenantCustomQuota === undefined)
       return false;
 
@@ -261,20 +295,62 @@ class CurrentQuotasStore {
 
     return (
       (this.usedTotalStorageSizeCount / this.tenantCustomQuota) * 100 >=
-      PERCENTAGE_FOR_SHOWING_BAR
+        PERCENTAGE_FOR_SHOWING_BAR &&
+      this.tenantCustomQuota > this.usedTotalStorageSizeCount
     );
   }
 
-  get showUserQuotaBar() {
+  get isStorageQuotaLimit() {
+    if (!this.isTenantCustomQuotaSet || this.tenantCustomQuota === undefined)
+      return false;
+
+    if (+this.tenantCustomQuota === -1) return false;
+
+    return (
+      (this.usedTotalStorageSizeCount / this.tenantCustomQuota) * 100 >=
+        PERCENTAGE_FOR_SHOWING_BAR &&
+      this.tenantCustomQuota <= this.usedTotalStorageSizeCount
+    );
+  }
+
+  get isUserTariffAlmostLimit() {
+    if (this.maxCountManagersByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
     return (
       this.addedManagersCount > 1 &&
       this.maxCountManagersByQuota - this.addedManagersCount <=
         COUNT_FOR_SHOWING_BAR &&
-      this.maxCountManagersByQuota >= this.addedManagersCount
+      this.maxCountManagersByQuota > this.addedManagersCount
     );
   }
 
-  get showUserPersonalQuotaBar() {
+  get isUserTariffLimit() {
+    if (this.maxCountManagersByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
+    return this.addedManagersCount >= this.maxCountManagersByQuota;
+  }
+
+  showWarningDialog = (type: number) => {
+    if (
+      type &&
+      this.isUserTariffLimit &&
+      type !== EmployeeType.Guest &&
+      type !== EmployeeType.User
+    )
+      return true;
+
+    return this.currentTariffStatusStore?.isGracePeriod;
+  };
+
+  get isWarningRoomsDialog() {
+    return (
+      this.currentTariffStatusStore?.isGracePeriod || this.isRoomsTariffLimit
+    );
+  }
+
+  get isPersonalQuotaLimit() {
     const personalQuotaLimitReached = this.userStore?.personalQuotaLimitReached;
 
     if (!this.isDefaultUsersQuotaSet) return false;
@@ -329,21 +405,21 @@ class CurrentQuotasStore {
 
   setPortalQuotaValue = (res: TPaymentQuota) => {
     this.currentPortalQuota = res;
-    this.currentPortalQuotaFeatures = res.features;
+    res.features.forEach((feature) => {
+      this.currentPortalQuotaFeatures.set(feature.id, feature);
+    });
 
     this.setIsLoaded(true);
   };
 
   updateQuotaUsedValue = (featureId: string, value: number) => {
-    this.currentPortalQuotaFeatures.forEach((elem) => {
-      if (elem.id === featureId && elem.used) elem.used.value = value;
-    });
+    const feature = this.currentPortalQuotaFeatures.get(featureId);
+    if (feature && feature.used) feature.used.value = value;
   };
 
   updateQuotaFeatureValue = (featureId: string, value: number) => {
-    this.currentPortalQuotaFeatures.forEach((elem) => {
-      if (elem.id === featureId) elem.value = value;
-    });
+    const feature = this.currentPortalQuotaFeatures.get(featureId);
+    if (feature) feature.value = value;
   };
 
   fetchPortalQuota = async (refresh?: boolean) => {
@@ -360,8 +436,8 @@ class CurrentQuotasStore {
     try {
       await setDefaultUserQuota(isEnable, +quota);
       const toastrText = isEnable
-        ? t("MemoryQuotaEnabled")
-        : t("MemoryQuotaDisabled");
+        ? t("UserQuotaEnabled")
+        : t("UserQuotaDisabled");
 
       toastr.success(toastrText);
     } catch (e: unknown) {
@@ -375,8 +451,8 @@ class CurrentQuotasStore {
     try {
       await setDefaultRoomQuota(isEnable, +quota);
       const toastrText = isEnable
-        ? t("MemoryQuotaEnabled")
-        : t("MemoryQuotaDisabled");
+        ? t("RoomQuotaEnabled")
+        : t("RoomQuotaDisabled");
 
       toastr.success(toastrText);
     } catch (e: unknown) {

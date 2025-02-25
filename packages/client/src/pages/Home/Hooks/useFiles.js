@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,11 +26,10 @@
 
 import React from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { getGroup } from "@docspace/shared/api/groups";
 import { getUserById } from "@docspace/shared/api/people";
 import { CREATED_FORM_KEY, MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
@@ -41,10 +40,11 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
-import { useParams } from "react-router-dom";
+import { hasOwnProperty } from "@docspace/shared/utils/object";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import { toastr } from "@docspace/shared/components/toast";
 
 const useFiles = ({
   t,
@@ -52,14 +52,14 @@ const useFiles = ({
   dragging,
   setDragging,
   disableDrag,
-  uploadEmptyFolders,
+  createFoldersTree,
   startUpload,
 
   fetchFiles,
   fetchRooms,
   setIsLoading,
 
-  isAccountsPage,
+  isContactsPage,
   isSettingsPage,
 
   location,
@@ -92,16 +92,29 @@ const useFiles = ({
   };
 
   const fetchDefaultRooms = () => {
-    const filter = RoomsFilter.getDefault();
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
 
     const categoryType = getCategoryType(location);
 
     const url = getCategoryUrl(categoryType);
 
-    filter.searchArea =
-      categoryType === CategoryType.Shared
-        ? RoomSearchArea.Active
-        : RoomSearchArea.Archive;
+    let searchArea;
+
+    switch (categoryType) {
+      case CategoryType.Shared:
+        searchArea = RoomSearchArea.Shared;
+        break;
+
+      case CategoryType.Archive:
+        searchArea = RoomSearchArea.Archive;
+        break;
+
+      default:
+        searchArea = RoomSearchArea.Archive;
+        break;
+    }
+
+    filter.searchArea = searchArea;
 
     navigate(`${url}?${filter.toUrlParams()}`);
   };
@@ -109,7 +122,7 @@ const useFiles = ({
   const onDrop = (files, uploadToFolder) => {
     if (
       folderSecurity &&
-      folderSecurity.hasOwnProperty("Create") &&
+      hasOwnProperty(folderSecurity, "Create") &&
       !folderSecurity.Create
     )
       return;
@@ -118,29 +131,17 @@ const useFiles = ({
 
     if (disableDrag) return;
 
-    const emptyFolders = files.filter((f) => f.isEmptyDirectory);
-
-    if (emptyFolders.length > 0) {
-      uploadEmptyFolders(emptyFolders, uploadToFolder).then(() => {
-        const onlyFiles = files.filter((f) => !f.isEmptyDirectory);
-        if (onlyFiles.length > 0) startUpload(onlyFiles, uploadToFolder, t);
+    createFoldersTree(t, files, uploadToFolder)
+      .then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      })
+      .catch((err) => {
+        toastr.error(err, null, 0, true);
       });
-    } else {
-      startUpload(files, uploadToFolder, t);
-    }
   };
 
   React.useEffect(() => {
-    if (location.state?.fromMediaViewer) {
-      const { fromMediaViewer, ...state } = location.state;
-      // remove fromMediaViewer from location state
-      return navigate(location.pathname + location.search, {
-        replace: true,
-        state,
-      });
-    }
-
-    if (isAccountsPage || isSettingsPage) return;
+    if (isContactsPage || isSettingsPage) return;
 
     if (location.pathname === "/") setIsLoading(true, true, true);
     else setIsLoading(true, false, false);
@@ -244,7 +245,7 @@ const useFiles = ({
     if (!dataObj) return;
 
     const { filter, itemId, type } = dataObj;
-    const newFilter = filter
+    let newFilter = filter
       ? filter.clone()
       : isRooms
         ? RoomsFilter.getDefault(userId, filterObj.searchArea)
@@ -257,52 +258,51 @@ const useFiles = ({
 
     axios
       .all(requests)
-      .catch((err) => {
+      .catch(() => {
         if (isRooms) {
           Promise.resolve(RoomsFilter.getDefault(userId, filterObj.searchArea));
         } else {
           Promise.resolve(FilesFilter.getDefault());
         }
 
-        //console.warn("Filter restored by default", err);
+        // console.warn("Filter restored by default", err);
       })
       .then((data) => {
-        const filter = data[0];
+        newFilter = data[0];
         const result = data[1];
         if (result) {
-          const type = result.displayName ? "user" : "group";
+          const newType = result.displayName ? "user" : "group";
           const selectedItem = {
             key: result.id,
-            label: type === "user" ? result.displayName : result.name,
-            type,
+            label: newType === "user" ? result.displayName : result.name,
+            type: newType,
           };
           if (!isRooms) {
-            filter.selectedItem = selectedItem;
+            newFilter.selectedItem = selectedItem;
           }
         }
 
-        if (filter) {
+        if (newFilter) {
           if (isRooms) {
             return fetchRooms(
               null,
-              filter,
+              newFilter,
               undefined,
               undefined,
               undefined,
               true,
             );
-          } else {
-            const folderId = filter.folder;
-            return fetchFiles(folderId, filter)?.finally(() => {
-              const data = sessionStorage.getItem(CREATED_FORM_KEY);
-              if (data) {
-                wsCreatedPDFForm({
-                  data,
-                });
-                sessionStorage.removeItem(CREATED_FORM_KEY);
-              }
-            });
           }
+          const folderId = newFilter.folder;
+          return fetchFiles(folderId, newFilter)?.finally(() => {
+            const itemData = sessionStorage.getItem(CREATED_FORM_KEY);
+            if (itemData) {
+              wsCreatedPDFForm({
+                data: itemData,
+              });
+              sessionStorage.removeItem(CREATED_FORM_KEY);
+            }
+          });
         }
 
         return Promise.resolve();
@@ -335,7 +335,7 @@ const useFiles = ({
         scrollToTop();
         setIsLoading(false);
       });
-  }, [isAccountsPage, isSettingsPage, location.pathname, location.search]);
+  }, [isContactsPage, isSettingsPage, location.pathname, location.search]);
 
   return { onDrop };
 };

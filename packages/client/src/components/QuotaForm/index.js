@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,8 +38,8 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { Text } from "@docspace/shared/components/text";
 
-import StyledBody from "./StyledComponent";
 import { Checkbox } from "@docspace/shared/components/checkbox";
+import StyledBody from "./StyledComponent";
 
 const isDefaultValue = (initPower, initSize, power, value, initialSize) => {
   if (!initialSize && initialSize !== 0) return false;
@@ -93,19 +93,20 @@ const QuotaForm = ({
   checkboxLabel,
   description,
   isAutoFocussed = false,
+  tabIndex,
 }) => {
   const initPower = getInitialPower(initialSize);
   const initSize = getInitialSize(initialSize, initPower);
-
-  useEffect(() => {
-    setSize(initSize);
-    setPower(initPower);
-  }, [initialSize]);
 
   const [power, setPower] = useState(initPower);
   const [size, setSize] = useState(initSize);
   const [hasError, setHasError] = useState(false);
   const [isChecked, setIsChecked] = useState(initialSize === -1);
+
+  useEffect(() => {
+    setSize(initSize);
+    setPower(initPower);
+  }, [initialSize]);
 
   const { t } = useTranslation(["Settings", "Common"]);
   const options = getOptions(t);
@@ -148,6 +149,15 @@ const QuotaForm = ({
 
     return false;
   };
+
+  const onSaveClick = async () => {
+    if (isSizeError()) return;
+
+    onSave & onSave(conversionToBytes(size, power));
+
+    setHasError(false);
+  };
+
   const onKeyDownInput = (e) => {
     if (e.keyCode === 13 || e.which === 13) {
       if (isButtonsEnable) {
@@ -156,17 +166,8 @@ const QuotaForm = ({
         onSaveClick();
 
         setHasError(false);
-
-        return;
       }
     }
-  };
-  const onSaveClick = async () => {
-    if (isSizeError()) return;
-
-    onSave & onSave(conversionToBytes(size, power));
-
-    setHasError(false);
   };
 
   const onCancelClick = () => {
@@ -191,12 +192,12 @@ const QuotaForm = ({
       isLabel={!!label}
       isCheckbox={!!checkboxLabel}
     >
-      {label && <Text fontWeight={600}>{label}</Text>}
-      {description && (
+      {label ? <Text fontWeight={600}>{label}</Text> : null}
+      {description ? (
         <Text fontSize="12px" className="quota_description">
           {description}
         </Text>
-      )}
+      ) : null}
       <div className="quota-container">
         <TextInput
           className="quota_limit"
@@ -206,9 +207,10 @@ const QuotaForm = ({
           isDisabled={isDisable}
           onKeyDown={onKeyDownInput}
           hasError={isError || hasError}
-          pattern="^[ 0-9]+$"
+          pattern="^\d+(?:\.\d{0,2})?"
           scale
           withBorder
+          tabIndex={tabIndex}
         />
         <ComboBox
           className="quota_value"
@@ -218,11 +220,11 @@ const QuotaForm = ({
           size="content"
           onSelect={onSelectComboBox}
           showDisabledItems
-          manualWidth={"fit-content"}
+          manualWidth="auto"
           directionY="both"
         />
       </div>
-      {checkboxLabel && (
+      {checkboxLabel ? (
         <Checkbox
           label={checkboxLabel}
           isChecked={isChecked}
@@ -230,9 +232,9 @@ const QuotaForm = ({
           onChange={onChangeCheckbox}
           isDisabled={isLoading || isDisabled}
         />
-      )}
+      ) : null}
 
-      {isButtonsEnable && (
+      {isButtonsEnable ? (
         <SaveCancelButtons
           isSaving={isLoading}
           onSaveClick={onSaveClick}
@@ -245,7 +247,7 @@ const QuotaForm = ({
           disableRestoreToDefault={isDefaultQuota}
           showReminder={!isDefaultQuota}
         />
-      )}
+      ) : null}
     </StyledBody>
   );
 };
@@ -257,7 +259,6 @@ QuotaForm.propTypes = {
   isButtonsEnable: PropTypes.bool,
   onSetQuotaBytesSize: PropTypes.func,
   initialSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  initialPower: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default QuotaForm;

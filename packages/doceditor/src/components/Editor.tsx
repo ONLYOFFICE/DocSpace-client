@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 "use client";
 
 import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
@@ -51,7 +51,6 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
-import useFilesSettings from "@/hooks/useFilesSettings";
 
 type IConfigType = IConfig & {
   events?: {
@@ -77,6 +76,10 @@ const Editor = ({
   errorMessage,
   isSkipError,
 
+  sdkConfig,
+  organizationName = "",
+  filesSettings,
+
   onDownloadAs,
   onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
@@ -88,9 +91,7 @@ const Editor = ({
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const { filesSettings } = useFilesSettings({});
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
@@ -123,6 +124,8 @@ const Editor = ({
     isSkipError,
     openOnNewPage,
     t,
+    sdkConfig,
+    organizationName,
   });
 
   useInit({
@@ -133,6 +136,7 @@ const Editor = ({
     documentReady,
     setDocTitle,
     t,
+    organizationName,
   });
 
   const newConfig: IConfigType = config
@@ -153,7 +157,7 @@ const Editor = ({
   let goBack: TGoBack = {} as TGoBack;
 
   if (fileInfo) {
-    const editorGoBack = new URLSearchParams(search).get("editorGoBack");
+    const editorGoBack = sdkConfig?.editorGoBack;
     const openFileLocationText = (
       (
         i18n.getDataByLanguage(i18n.language) as unknown as {
@@ -164,7 +168,12 @@ const Editor = ({
       }
     )?.["FileLocation"]; // t("FileLocation");
 
-    if (editorGoBack === "false" || user?.isVisitor || !user) {
+    if (
+      editorGoBack === "false" ||
+      editorGoBack === false ||
+      user?.isVisitor ||
+      !user
+    ) {
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
@@ -175,7 +184,7 @@ const Editor = ({
       goBack = {
         requestClose:
           typeof window !== "undefined"
-            ? window.ClientConfig?.editor?.requestClose ?? false
+            ? (window.ClientConfig?.editor?.requestClose ?? false)
             : false,
         text: openFileLocationText,
         blank: openOnNewPage,
@@ -189,11 +198,9 @@ const Editor = ({
     }
   }
 
-  const customization = new URLSearchParams(search).get("customization");
-
   const sdkCustomization: NonNullable<
     IConfig["editorConfig"]
-  >["customization"] = JSON.parse(customization || "{}");
+  >["customization"] = sdkConfig?.editorCustomization;
 
   const theme = sdkCustomization?.uiTheme || user?.theme;
 
@@ -232,7 +239,7 @@ const Editor = ({
     onDocumentReady,
     onRequestHistoryClose: onSDKRequestHistoryClose,
     onRequestEditRights: () =>
-      onSDKRequestEditRights(fileInfo, newConfig.documentType),
+      onSDKRequestEditRights(t, fileInfo, newConfig.documentType),
     onAppReady: onSDKAppReady,
     onInfo: onSDKInfo,
     onWarning: onSDKWarning,
@@ -275,7 +282,7 @@ const Editor = ({
     newConfig.events.onRequestSharingSettings = onSDKRequestSharingSettings;
   }
 
-  if (!fileInfo?.providerKey) {
+  if (!fileInfo?.providerKey && user) {
     newConfig.events.onRequestReferenceData = onSDKRequestReferenceData;
 
     if (!IS_ZOOM) {
@@ -305,7 +312,7 @@ const Editor = ({
     newConfig.events.onRequestClose = onSDKRequestClose;
   }
 
-  if (config?.startFilling) {
+  if (config?.startFilling && !IS_ZOOM) {
     newConfig.events.onRequestStartFilling = () =>
       onSDKRequestStartFilling?.(t("Common:ShareAndCollect"));
   }

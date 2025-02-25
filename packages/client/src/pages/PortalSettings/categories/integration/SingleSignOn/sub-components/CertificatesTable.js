@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,17 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
-import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/catalog.trash.react.svg?url";
+import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 import FileSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import moment from "moment-timezone";
+import { ReactSVG } from "react-svg";
 
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 
 import StyledCertificatesTable from "../styled-containers/StyledCertificatesTable";
-import { ReactSVG } from "react-svg";
 
 const CertificatesTable = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Common"]);
@@ -50,7 +51,6 @@ const CertificatesTable = (props) => {
   } = props;
 
   const renderRow = (certificate, index) => {
-    console.log(prefix, index);
     const onEdit = () => {
       prefix === "sp"
         ? setSpCertificate(certificate, index, true)
@@ -86,6 +86,8 @@ const CertificatesTable = (props) => {
       return `${new Date(date).toLocaleDateString()}`;
     };
 
+    const isExpired = moment().isAfter(moment(certificate.expiredDate));
+
     return (
       <div key={`certificate-${index}`} className="row">
         <ReactSVG src={FileSvgUrl} />
@@ -97,7 +99,7 @@ const CertificatesTable = (props) => {
           </div>
           <div className="column-row">
             <Text
-              className="description"
+              className={isExpired ? "error-description" : "description"}
               fontSize="12px"
               fontWeight={600}
               lineHeight="16px"
@@ -114,7 +116,7 @@ const CertificatesTable = (props) => {
         <ContextMenuButton
           className="context-btn"
           getData={getOptions}
-          usePortal={true}
+          usePortal
         />
       </div>
     );
@@ -123,11 +125,13 @@ const CertificatesTable = (props) => {
   return (
     <StyledCertificatesTable>
       <div className="body">
-        {prefix === "idp" &&
-          idpCertificates.map((cert, index) => renderRow(cert, index))}
+        {prefix === "idp"
+          ? idpCertificates.map((cert, index) => renderRow(cert, index))
+          : null}
 
-        {prefix === "sp" &&
-          spCertificates.map((cert, index) => renderRow(cert, index))}
+        {prefix === "sp"
+          ? spCertificates.map((cert, index) => renderRow(cert, index))
+          : null}
       </div>
     </StyledCertificatesTable>
   );

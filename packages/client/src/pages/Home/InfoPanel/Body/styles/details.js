@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,10 @@
 
 import styled from "styled-components";
 import { isMobile, isTablet } from "react-device-detect";
-import { Base } from "@docspace/shared/themes";
 
-const StyledThumbnail = styled.div`
+import { injectDefaultTheme } from "@docspace/shared/utils";
+
+const StyledThumbnail = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,7 +46,7 @@ const StyledThumbnail = styled.div`
   }
 `;
 
-const StyledNoThumbnail = styled.div`
+const StyledNoThumbnail = styled.div.attrs(injectDefaultTheme)`
   height: auto;
   width: 100%;
   display: flex;
@@ -69,7 +70,25 @@ const StyledNoThumbnail = styled.div`
   }
 `;
 
-StyledThumbnail.defaultProps = { theme: Base };
-StyledNoThumbnail.defaultProps = { theme: Base };
+const StyledPublicRoomBar = styled.div`
+  display: contents;
 
-export { StyledThumbnail, StyledNoThumbnail };
+  .room-template_bar {
+    margin-top: 0;
+    margin-bottom: 1px;
+  }
+
+  .room-template_button {
+    margin-top: 10px;
+  }
+
+  .room-template_text {
+    color: ${({ theme }) => theme.infoPanel.links.primaryColor};
+  }
+
+  svg path {
+    fill: ${({ theme }) => theme.infoPanel.links.barIconColor};
+  }
+`;
+
+export { StyledThumbnail, StyledNoThumbnail, StyledPublicRoomBar };

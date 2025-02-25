@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,7 +44,6 @@ export default function withContent(WrappedContent) {
       resetSelections,
       openGroupAction,
 
-      theme,
       getModel,
       itemIndex,
     } = props;
@@ -52,18 +51,18 @@ export default function withContent(WrappedContent) {
     const { mobilePhone, email, role, displayName, avatar } = item;
 
     const onContentRowSelect = useCallback(
-      (checked, user) => {
+      (isChecked, user) => {
         setBufferSelection(null);
-        checked ? selectUser(user) : deselectUser(user);
+        isChecked ? selectUser(user) : deselectUser(user);
       },
       [setBufferSelection, selectUser, deselectUser],
     );
 
     const onContextClick = useCallback(
-      (item, isSingleMenu) => {
+      (elm, isSingleMenu) => {
         isSingleMenu
-          ? singleContextMenuAction(item)
-          : multipleContextMenuAction(item);
+          ? singleContextMenuAction(elm)
+          : multipleContextMenuAction(elm);
       },
       [singleContextMenuAction, multipleContextMenuAction],
     );
@@ -157,7 +156,7 @@ export default function withContent(WrappedContent) {
     const { theme, standalone } = settingsStore;
 
     const { getTargetUser } = peopleStore.targetUserStore;
-    const { selectionStore, contextOptionsStore } = peopleStore;
+    const { contextOptionsStore, usersStore } = peopleStore;
     const { openGroupAction } = peopleStore.groupsStore;
 
     const { getModel } = contextOptionsStore;
@@ -172,7 +171,7 @@ export default function withContent(WrappedContent) {
       singleContextMenuAction,
       multipleContextMenuAction,
       resetSelections,
-    } = selectionStore;
+    } = usersStore;
 
     return {
       theme,

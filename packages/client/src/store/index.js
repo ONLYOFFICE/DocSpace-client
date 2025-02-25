@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@ import {
   authStore,
   userStore,
   tfaStore,
-  bannerStore,
   currentTariffStatusStore,
   currentQuotaStore,
   paymentQuotasStore,
@@ -42,6 +41,7 @@ import SettingsSetupStore from "./SettingsSetupStore";
 import ConfirmStore from "./ConfirmStore";
 import BackupStore from "./BackupStore";
 import CommonStore from "./CommonStore";
+import GuidanceStore from "./GuidanceStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
 import SsoFormStore from "./SsoFormStore";
@@ -65,7 +65,7 @@ import ContextOptionsStore from "./ContextOptionsStore";
 import HotkeyStore from "./HotkeyStore";
 
 import TagsStore from "./TagsStore";
-import PeopleStore from "./PeopleStore";
+import PeopleStore from "./contacts/PeopleStore";
 import OformsStore from "./OformsStore";
 
 import AccessRightsStore from "./AccessRightsStore";
@@ -80,11 +80,14 @@ import ImportAccountsStore from "./ImportAccountsStore";
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
-import EditGroupStore from "./EditGroupStore";
+import IndexingStore from "./IndexingStore";
+import EditGroupStore from "./contacts/EditGroupStore";
+
+import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 
 import OAuthStore from "./OAuthStore";
 
-const oauthStore = new OAuthStore(userStore);
+import BrandingStore from "./portal-settings/BrandingStore";
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -102,7 +105,7 @@ const paymentStore = new PaymentStore(
 );
 const wizardStore = new WizardStore();
 const confirmStore = new ConfirmStore();
-const backupStore = new BackupStore();
+const backupStore = new BackupStore(authStore, thirdPartyStore);
 const commonStore = new CommonStore(settingsStore);
 
 const ssoStore = new SsoFormStore();
@@ -114,6 +117,7 @@ const clientLoadingStore = new ClientLoadingStore();
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
 const infoPanelStore = new InfoPanelStore(userStore);
+const indexingStore = new IndexingStore(infoPanelStore, selectedFolderStore);
 
 const treeFoldersStore = new TreeFoldersStore(
   selectedFolderStore,
@@ -158,16 +162,25 @@ const filesStore = new FilesStore(
   userStore,
   currentTariffStatusStore,
   settingsStore,
+  indexingStore,
 );
+
+const guidanceStore = new GuidanceStore();
+
+publicRoomStore.filesStore = filesStore;
 
 const mediaViewerDataStore = new MediaViewerDataStore(
   filesStore,
   publicRoomStore,
+  selectedFolderStore,
 );
 
 const oformsStore = new OformsStore(settingsStore, infoPanelStore, userStore);
 
-const secondaryProgressDataStore = new SecondaryProgressDataStore();
+const secondaryProgressDataStore = new SecondaryProgressDataStore(
+  treeFoldersStore,
+  mediaViewerDataStore,
+);
 const primaryProgressDataStore = new PrimaryProgressDataStore();
 const versionHistoryStore = new VersionHistoryStore(filesStore, settingsStore);
 
@@ -180,16 +193,27 @@ const dialogsStore = new DialogsStore(
   infoPanelStore,
 );
 
-const peopleStore = new PeopleStore(
+const profileActionsStore = new ProfileActionsStore(
   authStore,
-  setupStore,
+  filesStore,
+  treeFoldersStore,
+  selectedFolderStore,
+  pluginStore,
+  userStore,
+  settingsStore,
+  currentTariffStatusStore,
+);
+
+const peopleStore = new PeopleStore(
   accessRightsStore,
-  dialogsStore,
   infoPanelStore,
   userStore,
   tfaStore,
   settingsStore,
   clientLoadingStore,
+  profileActionsStore,
+  dialogsStore,
+  currentQuotaStore,
 );
 
 const uploadDataStore = new UploadDataStore(
@@ -221,7 +245,12 @@ const filesActionsStore = new FilesActionsStore(
   currentTariffStatusStore,
   peopleStore,
   currentQuotaStore,
+  indexingStore,
+  versionHistoryStore,
 );
+
+mediaViewerDataStore.filesActionsStore = filesActionsStore;
+secondaryProgressDataStore.filesActionsStore = filesActionsStore;
 
 const contextOptionsStore = new ContextOptionsStore(
   settingsStore,
@@ -239,8 +268,11 @@ const contextOptionsStore = new ContextOptionsStore(
   pluginStore,
   infoPanelStore,
   currentTariffStatusStore,
+  currentQuotaStore,
   userStore,
+  indexingStore,
   clientLoadingStore,
+  guidanceStore,
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -251,27 +283,17 @@ const hotkeyStore = new HotkeyStore(
   treeFoldersStore,
   uploadDataStore,
   selectedFolderStore,
+  indexingStore,
 );
-
-const profileActionsStore = new ProfileActionsStore(
-  authStore,
-  filesStore,
-  peopleStore,
-  treeFoldersStore,
-  selectedFolderStore,
-  pluginStore,
-  userStore,
-  settingsStore,
-  currentTariffStatusStore,
-);
-
-peopleStore.profileActionsStore = profileActionsStore;
 
 const tableStore = new TableStore(
   authStore,
   treeFoldersStore,
   userStore,
   settingsStore,
+  indexingStore,
+  selectedFolderStore,
+  peopleStore,
 );
 
 infoPanelStore.filesSettingsStore = filesSettingsStore;
@@ -280,6 +302,12 @@ infoPanelStore.peopleStore = peopleStore;
 infoPanelStore.selectedFolderStore = selectedFolderStore;
 infoPanelStore.treeFoldersStore = treeFoldersStore;
 infoPanelStore.publicRoomStore = publicRoomStore;
+
+const avatarEditorDialogStore = new AvatarEditorDialogStore(
+  filesStore,
+  settingsStore,
+  infoPanelStore,
+);
 
 const createEditRoomStore = new CreateEditRoomStore(
   filesStore,
@@ -291,10 +319,12 @@ const createEditRoomStore = new CreateEditRoomStore(
   infoPanelStore,
   currentQuotaStore,
   clientLoadingStore,
+  dialogsStore,
+  avatarEditorDialogStore,
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
-const importAccountsStore = new ImportAccountsStore();
+const importAccountsStore = new ImportAccountsStore(currentQuotaStore);
 const storageManagement = new StorageManagement(
   filesStore,
   peopleStore,
@@ -303,15 +333,18 @@ const storageManagement = new StorageManagement(
   settingsStore,
 );
 
+const oauthStore = new OAuthStore(userStore, storageManagement);
+
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
 const editGroupStore = new EditGroupStore(peopleStore);
+
+const brandingStore = new BrandingStore(settingsStore);
 
 const store = {
   authStore,
   userStore,
   tfaStore,
-  bannerStore,
   currentTariffStatusStore,
   currentQuotaStore,
   paymentQuotasStore,
@@ -362,7 +395,13 @@ const store = {
   pluginStore,
   storageManagement,
   campaignsStore,
+  indexingStore,
   editGroupStore,
+  avatarEditorDialogStore,
+
+  brandingStore,
+
+  guidanceStore,
 };
 
 export default store;

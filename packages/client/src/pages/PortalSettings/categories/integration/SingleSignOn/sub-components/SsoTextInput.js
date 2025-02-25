@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,9 +56,9 @@ const SsoTextInput = (props) => {
 
   const onBlur = (e) => {
     const field = e.target.name;
-    const value = e.target.value;
+    const newValue = e.target.value;
 
-    setError(field, value);
+    setError(field, newValue);
   };
 
   return (

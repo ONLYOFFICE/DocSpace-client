@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,15 +44,8 @@ const TranslationProvider = ({
   children,
   settings,
   user,
-  api_host,
-  timer,
 }: TTranslationProvider) => {
   const { i18n } = useI18N({ settings, user });
-
-  React.useEffect(() => {
-    console.log("API_HOST: ", api_host);
-    console.log("LAYOUT API timer:", timer);
-  }, [api_host, timer]);
 
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 };

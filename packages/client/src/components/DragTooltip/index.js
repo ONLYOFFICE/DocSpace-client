@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import DragTooltip from "./DragTooltip";
 
-const Tooltip = ({ dragging }) => (dragging ? <DragTooltip /> : <></>);
+const Tooltip = ({ dragging }) => (dragging ? <DragTooltip /> : null);
 
 export default inject(({ filesStore }) => {
   const { dragging, selection, startDrag, bufferSelection } = filesStore;

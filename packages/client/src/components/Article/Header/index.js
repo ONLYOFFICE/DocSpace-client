@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,11 +28,11 @@ import React from "react";
 
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import withLoader from "../../../HOCs/withLoader";
 import { ArticleHeaderLoader } from "@docspace/shared/skeletons/article";
+import withLoader from "../../../HOCs/withLoader";
 
 const ArticleHeaderContent = ({ currentModuleName }) => {
-  return <>{currentModuleName}</>;
+  return currentModuleName;
 };
 
 export default inject(({ authStore }) => {

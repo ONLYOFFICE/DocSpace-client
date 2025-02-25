@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,6 +42,7 @@ import { Selector, TSelectorItem } from "../../components/selector";
 import { Aside } from "../../components/aside";
 import { Backdrop } from "../../components/backdrop";
 import { Portal } from "../../components/portal";
+import { toastr } from "../../components/toast";
 import {
   RowLoader,
   SearchLoader,
@@ -66,10 +67,9 @@ import useSocketHelper from "./hooks/useSocketHelper";
 import { FilesSelectorProps } from "./FilesSelector.types";
 import { SettingsContextProvider } from "./contexts/Settings";
 import { LoadersContext, LoadersContextProvider } from "./contexts/Loaders";
+import { createFolder, deleteFolder } from "../../api/files";
 
 const FilesSelectorComponent = ({
-  socketHelper,
-  socketSubscribers,
   disabledItems,
   filterParam,
 
@@ -114,6 +114,13 @@ const FilesSelectorComponent = ({
   createDefineRoomType,
   withInfoBar,
   infoBarData,
+  headerProps,
+  shareKey,
+  formProps,
+
+  withPadding,
+  folderIsShared,
+  checkCreating,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -143,6 +150,7 @@ const FilesSelectorComponent = ({
     title: string;
     path?: string[];
     fileExst?: string;
+    viewUrl?: string;
     inPublic?: boolean;
   } | null>(null);
   const [total, setTotal] = React.useState<number>(0);
@@ -150,14 +158,18 @@ const FilesSelectorComponent = ({
   const [isSelectedParentFolder, setIsSelectedParentFolder] =
     React.useState<boolean>(false);
   const [searchValue, setSearchValue] = React.useState<string>("");
+  const [isDisabledFolder, setIsDisabledFolder] = React.useState<
+    boolean | undefined
+  >(checkCreating);
 
   const afterSearch = React.useRef(false);
+  const currentSelectedItemId = React.useRef<undefined | number | string>(
+    undefined,
+  );
 
   const [isInit, setIsInit] = React.useState(true);
 
   const { subscribe, unsubscribe } = useSocketHelper({
-    socketHelper,
-    socketSubscribers,
     disabledItems,
     filterParam,
     withCreate,
@@ -188,6 +200,7 @@ const FilesSelectorComponent = ({
     getRootData,
     setSelectedItemType,
     subscribe,
+    setSelectedItemSecurity,
 
     searchValue,
     isRoomsOnly,
@@ -225,6 +238,7 @@ const FilesSelectorComponent = ({
     roomsFolderId,
     isInit,
     withCreate,
+    shareKey,
   });
 
   const onClickBreadCrumb = React.useCallback(
@@ -276,6 +290,7 @@ const FilesSelectorComponent = ({
           });
 
           setSelectedItemId(item.id);
+          setSelectedFileInfo(null);
           if (item.isRoom) {
             setSelectedItemType("rooms");
           } else {
@@ -293,13 +308,22 @@ const FilesSelectorComponent = ({
     ],
   );
 
+  const translation = t("Common:NewFolder");
+
   const onSelectAction = React.useCallback(
-    (
+    async (
       item: TSelectorItem,
       isDoubleClick: boolean,
       doubleClickCallback: () => Promise<void>,
     ) => {
       if (item.isFolder) {
+        if (isDoubleClick) return;
+
+        const isFormRoom = item.roomType === RoomsType.FormRoom;
+
+        if (isFormRoom && formProps?.isRoomFormAccessible === false)
+          return toastr.warning(formProps.message);
+
         setIsFirstLoad(true);
 
         // setItems([]);
@@ -323,15 +347,30 @@ const FilesSelectorComponent = ({
         } else {
           setSelectedItemType("files");
         }
+
+        if (checkCreating && breadCrumbs.length === 1 && item.id) {
+          try {
+            const folderInfo = await createFolder(item.id, translation);
+            await deleteFolder(folderInfo.id, true, true);
+            setIsDisabledFolder(false);
+          } catch (e) {
+            setIsDisabledFolder(true);
+          }
+        }
       } else if (item.id && item.label) {
         const inPublic =
-          breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) >
-          -1;
+          breadCrumbs.findIndex(
+            (f) =>
+              f.roomType === RoomsType.PublicRoom ||
+              f.roomType === RoomsType.FormRoom ||
+              (f.roomType === RoomsType.CustomRoom && f.shared),
+          ) > -1;
 
         setSelectedFileInfo({
           id: item.id,
           title: item.label,
           fileExst: item.fileExst,
+          viewUrl: item.viewUrl,
           inPublic,
         });
 
@@ -340,7 +379,14 @@ const FilesSelectorComponent = ({
         }
       }
     },
-    [breadCrumbs, setIsFirstLoad],
+    [
+      breadCrumbs,
+      setIsFirstLoad,
+      formProps?.isRoomFormAccessible,
+      formProps?.message,
+      translation,
+      checkCreating,
+    ],
   );
 
   React.useEffect(() => {
@@ -349,6 +395,10 @@ const FilesSelectorComponent = ({
 
     subscribe(+selectedItemId);
   }, [selectedItemId, isRoot, unsubscribe, subscribe]);
+
+  React.useEffect(() => {
+    setSelectedItemId(currentFolderId);
+  }, [currentFolderId]);
 
   React.useEffect(() => {
     setIsFirstLoad(true);
@@ -364,8 +414,7 @@ const FilesSelectorComponent = ({
       setSelectedItemType("rooms");
       return;
     }
-
-    setSelectedItemId(currentFolderId);
+    // setSelectedItemId(currentFolderId);
 
     if (
       needRoomList ||
@@ -390,21 +439,31 @@ const FilesSelectorComponent = ({
     setIsFirstLoad,
   ]);
 
-  const onSearchAction = React.useCallback(
-    (value: string, callback?: Function) => {
+  React.useEffect(() => {
+    currentSelectedItemId.current = selectedItemId;
+  }, [selectedItemId]);
+
+  const onSearchAction = (value: string, callback?: VoidFunction) => {
+    if (selectedItemId !== currentSelectedItemId.current) {
+      return;
+    }
+    setSearchValue(value);
+
+    callback?.();
+    afterSearch.current = true;
+  };
+
+  React.useEffect(() => {
+    if (!selectedItemType) return;
+
+    if (searchValue) {
       setIsFirstLoad(true);
       setItems([]);
-
-      setSearchValue(value);
-
-      callback?.();
-      afterSearch.current = true;
-    },
-    [setIsFirstLoad],
-  );
+    }
+  }, [searchValue, selectedItemType, setIsFirstLoad]);
 
   const onClearSearchAction = React.useCallback(
-    (callback?: Function) => {
+    (callback?: VoidFunction) => {
       if (!searchValue) return;
       setIsFirstLoad(true);
       setItems([]);
@@ -428,16 +487,15 @@ const FilesSelectorComponent = ({
       fileName: string,
       isChecked: boolean,
     ) => {
-      const isPublic =
-        breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) >
-          -1 && rootFolderType !== FolderType.Rooms;
+      const inPublicRoom = breadCrumbs.findIndex((f) => f.shared) > -1;
+      const showMoveToPublicDialog = inPublicRoom && !folderIsShared;
 
       const folderTitle = breadCrumbs[breadCrumbs.length - 1].label;
 
       await onSubmit(
         selectedItemId,
         folderTitle,
-        isPublic,
+        showMoveToPublicDialog,
         breadCrumbs,
         fileName,
         isChecked,
@@ -447,11 +505,11 @@ const FilesSelectorComponent = ({
     },
     [
       breadCrumbs,
-      rootFolderType,
       onSubmit,
       selectedItemId,
       selectedTreeNode,
       selectedFileInfo,
+      folderIsShared,
     ],
   );
 
@@ -464,7 +522,8 @@ const FilesSelectorComponent = ({
       getRootData();
       return;
     }
-    if (selectedItemType === "files" && typeof selectedItemId !== "undefined")
+
+    if (selectedItemType === "files" && (selectedItemId || isUserOnly))
       getFileList(0);
   }, [
     getFileList,
@@ -473,10 +532,18 @@ const FilesSelectorComponent = ({
     selectedItemId,
     getRootData,
     openRoot,
+    isUserOnly,
   ]);
 
-  const headerProps: TSelectorHeader = withHeader
-    ? { withHeader, headerProps: { headerLabel } }
+  const headerSelectorProps: TSelectorHeader = withHeader
+    ? {
+        withHeader,
+        headerProps: {
+          ...headerProps,
+          headerLabel,
+          onCloseClick: onCancel,
+        },
+      }
     : {};
 
   const withSearch = withSearchProp
@@ -513,6 +580,7 @@ const FilesSelectorComponent = ({
       isRoot,
       selectedItemSecurity,
       selectedFileInfo,
+      isDisabledFolder,
     ),
   };
 
@@ -553,7 +621,7 @@ const FilesSelectorComponent = ({
 
   const SelectorBody = (
     <Selector
-      {...headerProps}
+      {...headerSelectorProps}
       {...searchProps}
       {...submitButtonProps}
       {...cancelButtonProps}
@@ -598,6 +666,7 @@ const FilesSelectorComponent = ({
       disableFirstFetch
       withInfoBar={withInfoBar}
       infoBarData={infoBarData}
+      withPadding={withPadding}
     />
   );
 
@@ -617,6 +686,7 @@ const FilesSelectorComponent = ({
         withoutBodyScroll
         zIndex={310}
         onClose={onCancel}
+        withoutHeader
       >
         {SelectorBody}
       </Aside>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,10 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
+import { Aside } from "@docspace/shared/components/aside";
+import { Backdrop } from "@docspace/shared/components/backdrop";
 import { FileInput } from "@docspace/shared/components/file-input";
+import { Portal } from "@docspace/shared/components/portal";
 
 import FilesSelector from "../FilesSelector";
 import { StyledBodyWrapper } from "./StyledComponents";
@@ -60,6 +63,9 @@ const FilesSelectorInput = (props) => {
     isSelect,
     isRoomBackup,
     isDocumentIcon,
+    withCreate,
+    checkCreating,
+    openRoot,
   } = props;
 
   const isFilesSelection = !!filterParam;
@@ -97,15 +103,51 @@ const FilesSelectorInput = (props) => {
   };
 
   const filesSelectionProps = {
-    onSelectFile: onSelectFile,
-    filterParam: filterParam,
+    onSelectFile,
+    filterParam,
   };
 
   const foldersSelectionProps = {
-    onSelectFolder: onSelectFolder,
+    onSelectFolder,
     onSetBaseFolderPath: onSetBasePath,
   };
 
+  const selectorComponent = (
+    <>
+      <Backdrop
+        visible={isPanelVisible}
+        isAside
+        withBackground
+        zIndex={309}
+        onClick={onClose}
+      />
+      <Aside
+        visible={isPanelVisible}
+        withoutBodyScroll
+        zIndex={310}
+        onClose={onClose}
+        withoutHeader
+      >
+        <FilesSelector
+          isRoomBackup={isRoomBackup}
+          descriptionText={descriptionText}
+          filterParam={filterParam}
+          rootThirdPartyId={rootThirdPartyId}
+          isThirdParty={isThirdParty}
+          isRoomsOnly={isRoomsOnly}
+          isSelectFolder={isSelectFolder}
+          id={id}
+          onClose={onClose}
+          isPanelVisible={isPanelVisible}
+          isSelect={isSelect}
+          withCreate={withCreate}
+          {...(isFilesSelection ? filesSelectionProps : foldersSelectionProps)}
+          checkCreating={checkCreating}
+          openRoot={openRoot}
+        />
+      </Aside>
+    </>
+  );
   return (
     <StyledBodyWrapper maxWidth={maxWidth} className={className}>
       <FileInput
@@ -120,19 +162,9 @@ const FilesSelectorInput = (props) => {
         placeholder={t("SelectAction")}
       />
 
-      <FilesSelector
-        isRoomBackup={isRoomBackup}
-        descriptionText={descriptionText}
-        filterParam={filterParam}
-        rootThirdPartyId={rootThirdPartyId}
-        isThirdParty={isThirdParty}
-        isRoomsOnly={isRoomsOnly}
-        isSelectFolder={isSelectFolder}
-        id={id}
-        onClose={onClose}
-        isPanelVisible={isPanelVisible}
-        isSelect={isSelect}
-        {...(isFilesSelection ? filesSelectionProps : foldersSelectionProps)}
+      <Portal
+        visible={isPanelVisible}
+        element={<div>{selectorComponent}</div>}
       />
     </StyledBodyWrapper>
   );

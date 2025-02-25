@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,18 +30,22 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 
-import { StyledEnterpriseComponent } from "./StyledComponent";
 import BenefitsContainer from "SRC_DIR/components/StandaloneComponents/BenefitsContainer";
+import { StyledEnterpriseComponent } from "./StyledComponent";
 import ButtonContainer from "./sub-components/ButtonContainer";
 import TariffTitleContainer from "./sub-components/TariffTitleContainer";
 
 const TrialContainer = (props) => {
-  const { t } = props;
+  const { t, isDeveloper } = props;
 
   return (
     <StyledEnterpriseComponent>
-      <Text fontWeight={700} fontSize={"16px"}>
-        {t("ActivateSwithToProHeader")}
+      <Text fontWeight={700} fontSize="16px">
+        {t("ActivateSwithToProHeader", {
+          license: isDeveloper
+            ? t("Common:DeveloperLicense")
+            : t("Common:EnterpriseLicense"),
+        })}
       </Text>
       <TariffTitleContainer t={t} />
 
@@ -55,7 +59,7 @@ const TrialContainer = (props) => {
 };
 
 export default inject(({ currentTariffStatusStore }) => {
-  const { isLicenseDateExpired } = currentTariffStatusStore;
+  const { isLicenseDateExpired, isDeveloper } = currentTariffStatusStore;
 
-  return { isLicenseDateExpired };
+  return { isLicenseDateExpired, isDeveloper };
 })(observer(TrialContainer));

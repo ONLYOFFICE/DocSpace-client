@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,13 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import * as Styled from "./index.styled";
 
 import { Link } from "@docspace/shared/components/link";
-import { Button } from "@docspace/shared/components/button";
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
@@ -38,9 +36,9 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { toastr } from "@docspace/shared/components/toast";
 import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
-import { DeviceType } from "@docspace/shared/enums";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import * as Styled from "./index.styled";
 
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
@@ -52,7 +50,6 @@ const DocumentService = ({
   changeDocumentServiceLocation,
   currentColorScheme,
   integrationSettingsUrl,
-  currentDeviceType,
 }) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
@@ -158,7 +155,7 @@ const DocumentService = ({
         setInitInternalUrl(result?.docServiceUrlInternal);
         setInitDocServiceUrl(result?.docServiceUrl);
       })
-      .catch((e) => toastr.error(e))
+      .catch((err) => toastr.error(err))
       .finally(() => setSaveIsLoading(false));
   };
 
@@ -235,7 +232,7 @@ const DocumentService = ({
               autoComplete="off"
               tabIndex={1}
               scale
-              iconButtonClassName={"icon-button"}
+              iconButtonClassName="icon-button"
               value={docServiceUrl}
               onChange={onChangeDocServiceUrl}
               placeholder={EDITOR_URL_PLACEHOLDER}
@@ -384,7 +381,7 @@ const DocumentService = ({
           disableRestoreToDefault={
             isDefaultSettings || isSaveLoading || isResetLoading
           }
-          displaySettings={true}
+          displaySettings
           isSaving={isSaveLoading || isResetLoading}
           showReminder={!saveButtonDisabled}
         />

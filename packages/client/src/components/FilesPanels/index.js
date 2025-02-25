@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,12 +35,13 @@ import {
   FilterType,
 } from "@docspace/shared/enums";
 
+import { Guidance } from "@docspace/shared/components/guidance";
+import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
+
 import {
   UploadPanel,
   VersionHistoryPanel,
-  ChangeOwnerPanel,
-  NewFilesPanel,
-  HotkeyPanel,
+  HotkeysPanel,
   InvitePanel,
   EditLinkPanel,
   EmbeddingPanel,
@@ -53,10 +54,8 @@ import {
   DownloadDialog,
   ConflictResolveDialog,
   ConvertDialog,
-  CreateRoomDialog,
-  InviteUsersWarningDialog,
+  InviteQuotaWarningDialog,
   CreateRoomConfirmDialog,
-  ChangeUserTypeDialog,
   SubmitToFormGallery,
   EditGroupMembersDialog,
   ChangeQuotaDialog,
@@ -68,35 +67,44 @@ import {
   PluginDialog,
   DeletePluginDialog,
   ShareFolderDialog,
+  RoomLogoCoverDialog,
+  GuestReleaseTipDialog,
+  FormFillingTipsDialog,
+  DeleteVersionDialog,
+  CancelOperationDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
 import RestoreRoomDialog from "../dialogs/RestoreRoomDialog";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
+import CreateRoomTemplateDialog from "../dialogs/CreateRoomTemplate/CreateRoomTemplate";
 import FilesSelector from "../FilesSelector";
 
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
-import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
+import ReorderIndexDialog from "../dialogs/ReorderIndexDialog";
+import LifetimeDialog from "../dialogs/LifetimeDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { ShareCollectSelector } from "../ShareCollectSelector";
 
+import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
+import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
+import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
+
 const Panels = (props) => {
   const {
     uploadPanelVisible,
-    ownerPanelVisible,
     copyPanelVisible,
     moveToPanelVisible,
     restorePanelVisible,
-    thirdPartyMoveDialogVisible,
     connectDialogVisible,
     deleteThirdPartyDialogVisible,
     versionHistoryPanelVisible,
     deleteDialogVisible,
+    lifetimeDialogVisible,
     downloadDialogVisible,
     emptyTrashDialogVisible,
-    newFilesPanelVisible,
     conflictResolveDialogVisible,
     convertDialogVisible,
     createMasterForm,
@@ -109,14 +117,12 @@ const Panels = (props) => {
     hotkeyPanelVisible,
     invitePanelVisible,
     convertPasswordDialogVisible,
-    createRoomDialogVisible,
     createRoomConfirmDialogVisible,
     confirmDialogIsLoading,
     restoreAllPanelVisible,
     archiveDialogVisible,
-    inviteUsersWarningDialogVisible,
+    inviteQuotaWarningDialogVisible,
     preparationPortalDialogVisible,
-    changeUserTypeDialogVisible,
     restoreRoomDialogVisible,
     submitToGalleryDialogVisible,
     editGroupMembersDialogVisible,
@@ -133,10 +139,29 @@ const Panels = (props) => {
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
     shareFolderDialogVisible,
-    pdfFormEditVisible,
     selectFileFormRoomOpenRoot,
+    reorderDialogVisible,
     fillPDFDialogData,
     shareCollectSelector,
+    createRoomTemplateDialogVisible,
+    templateAccessSettingsVisible,
+
+    setQuotaWarningDialogVisible,
+    resetQuotaItem,
+    isShowWarningDialog,
+    roomLogoCoverDialogVisible,
+    welcomeFormFillingTipsVisible,
+    passwordEntryDialogDate,
+    guestReleaseTipDialogVisible,
+    closeEditIndexDialogVisible,
+    deleteVersionDialogVisible,
+    operationCancelVisible,
+    setFormFillingTipsDialog,
+    formFillingTipsVisible,
+    viewAs,
+    userId,
+    getRefElement,
+    config,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -192,24 +217,42 @@ const Panels = (props) => {
     };
   }, [handleSharePDFForm]);
 
+  useEffect(() => {
+    if (isShowWarningDialog) {
+      setQuotaWarningDialogVisible(true);
+
+      resetQuotaItem();
+    }
+    return () => {
+      resetQuotaItem();
+    };
+  }, [isShowWarningDialog]);
+
+  const onCloseGuidance = () => {
+    setFormFillingTipsDialog(false);
+    window.localStorage.setItem(getFormFillingTipsStorageName(userId), "true");
+  };
+
   return [
     settingsPluginDialogVisible && (
       <SettingsPluginDialog
         isVisible={settingsPluginDialogVisible}
-        key={"settings-plugin-dialog"}
+        key="settings-plugin-dialog"
       />
     ),
     deletePluginDialogVisible && (
       <DeletePluginDialog
         isVisible={deletePluginDialogVisible}
-        key={"delete-plugin-dialog"}
+        key="delete-plugin-dialog"
       />
     ),
     pluginDialogVisible && (
-      <PluginDialog isVisible={pluginDialogVisible} key={"plugin-dialog"} />
+      <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
+    ),
+    guestReleaseTipDialogVisible && (
+      <GuestReleaseTipDialog key="guest-release-tip-dialog" />
     ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
-    ownerPanelVisible && <ChangeOwnerPanel key="change-owner-panel" />,
     (moveToPanelVisible ||
       copyPanelVisible ||
       restorePanelVisible ||
@@ -230,17 +273,15 @@ const Panels = (props) => {
       <VersionHistoryPanel key="version-history-panel" />
     ),
     deleteDialogVisible && <DeleteDialog key="delete-dialog" />,
+    lifetimeDialogVisible && <LifetimeDialog key="delete-dialog" />,
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
 
-    newFilesPanelVisible && <NewFilesPanel key="new-files-panel" />,
     conflictResolveDialogVisible && (
       <ConflictResolveDialog key="conflict-resolve-dialog" />
     ),
     convertDialogVisible && <ConvertDialog key="convert-dialog" />,
-    changeUserTypeDialogVisible && (
-      <ChangeUserTypeDialog key="change-user-type-dialog" />
-    ),
+
     // createRoomDialogVisible && <CreateRoomDialog key="create-room-dialog" />,
     (createRoomConfirmDialogVisible || confirmDialogIsLoading) && (
       <CreateRoomConfirmDialog key="create-room-confirm-dialog" />
@@ -268,15 +309,15 @@ const Panels = (props) => {
       />
     ),
 
-    hotkeyPanelVisible && <HotkeyPanel key="hotkey-panel" />,
+    hotkeyPanelVisible && <HotkeysPanel key="hotkey-panel" />,
     invitePanelVisible && <InvitePanel key="invite-panel" />,
     convertPasswordDialogVisible && (
       <ConvertPasswordDialog key="convert-password-dialog" />
     ),
     archiveDialogVisible && <ArchiveDialog key="archive-dialog" />,
     restoreRoomDialogVisible && <RestoreRoomDialog key="archive-dialog" />,
-    inviteUsersWarningDialogVisible && (
-      <InviteUsersWarningDialog key="invite-users-warning-dialog" />
+    inviteQuotaWarningDialogVisible && (
+      <InviteQuotaWarningDialog key="invite-users-warning-dialog" />
     ),
     preparationPortalDialogVisible && (
       <PreparationPortalDialog key="preparation-portal-dialog" />
@@ -305,7 +346,13 @@ const Panels = (props) => {
       <ChangeRoomOwnerPanel key="change-room-owner" />
     ),
     shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
-    pdfFormEditVisible && <PDFFormEditingDialog key="pdf-form-edit-dialog" />,
+    reorderDialogVisible && <ReorderIndexDialog key="reorder-index-dialog" />,
+    createRoomTemplateDialogVisible && (
+      <CreateRoomTemplateDialog key="create-room-template-dialog" />
+    ),
+    templateAccessSettingsVisible && (
+      <TemplateAccessSettingsPanel key="template-access-settings" />
+    ),
     sharePDFForm.visible && (
       <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
     ),
@@ -318,6 +365,37 @@ const Panels = (props) => {
         {...shareCollectSelector}
       />
     ),
+    roomLogoCoverDialogVisible && (
+      <RoomLogoCoverDialog key="room-logo-cover-dialog" />
+    ),
+    passwordEntryDialogDate.visible && (
+      <PasswordEntryDialog
+        key="password-entry-dialog"
+        item={passwordEntryDialogDate.item}
+        isDownload={passwordEntryDialogDate.isDownload}
+      />
+    ),
+    closeEditIndexDialogVisible && (
+      <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
+    ),
+    deleteVersionDialogVisible && (
+      <DeleteVersionDialog key="delete-version-dialog" />
+    ),
+    operationCancelVisible && (
+      <CancelOperationDialog key="cancel-operation-dialog" />
+    ),
+    welcomeFormFillingTipsVisible ? (
+      <FormFillingTipsDialog key="form-filling_tips_dialog" />
+    ) : null,
+
+    formFillingTipsVisible ? (
+      <Guidance
+        viewAs={viewAs}
+        onClose={onCloseGuidance}
+        getRefElement={getRefElement}
+        config={config}
+      />
+    ) : null,
   ];
 };
 
@@ -330,30 +408,32 @@ export default inject(
     backup,
     createEditRoomStore,
     pluginStore,
-    filesStore,
+    currentQuotaStore,
     filesActionsStore,
+    filesStore,
+    userStore,
+    guidanceStore,
   }) => {
     const {
-      ownerPanelVisible,
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
-      thirdPartyMoveDialogVisible,
       connectDialogVisible,
       deleteThirdPartyDialogVisible,
       deleteDialogVisible,
+      lifetimeDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
-      newFilesPanelVisible,
       conflictResolveDialogVisible,
       convertDialogVisible,
       createRoomDialogVisible,
       createRoomConfirmDialogVisible,
       convertPasswordDialogVisible,
-      connectItem, //TODO:
+      connectItem, // TODO:
       restoreAllPanelVisible,
       archiveDialogVisible,
       restoreRoomDialogVisible,
+      welcomeFormFillingTipsVisible,
 
       unsavedChangesDialogVisible,
       createMasterForm,
@@ -363,8 +443,7 @@ export default inject(
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
       invitePanelOptions,
-      inviteUsersWarningDialogVisible,
-      changeUserTypeDialogVisible,
+      inviteQuotaWarningDialogVisible,
       changeQuotaDialogVisible,
       submitToGalleryDialogVisible,
       editGroupMembersDialogVisible,
@@ -376,19 +455,42 @@ export default inject(
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
-      pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
+      reorderDialogVisible,
       fillPDFDialogData,
       shareCollectSelector,
+      roomLogoCoverDialogVisible,
+      createRoomTemplateDialogVisible,
+      templateAccessSettingsVisible,
+
+      setQuotaWarningDialogVisible,
+      setIsNewRoomByCurrentUser,
+      setIsNewUserByCurrentUser,
+      isNewUserByCurrentUser,
+      isNewRoomByCurrentUser,
+      passwordEntryDialogDate,
+      guestReleaseTipDialogVisible,
+      closeEditIndexDialogVisible,
+      operationCancelVisible,
+
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
     } = dialogsStore;
+
+    const { viewAs } = filesStore;
 
     const { preparationPortalDialogVisible } = backup;
     const { copyFromTemplateForm } = filesActionsStore;
 
     const { uploadPanelVisible } = uploadDataStore;
-    const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
+    const {
+      isVisible: versionHistoryPanelVisible,
+      deleteVersionDialogVisible,
+    } = versionHistoryStore;
     const { hotkeyPanelVisible } = settingsStore;
     const { confirmDialogIsLoading } = createEditRoomStore;
+    const { isRoomsTariffAlmostLimit, isUserTariffAlmostLimit } =
+      currentQuotaStore;
 
     const {
       settingsPluginDialogVisible,
@@ -396,21 +498,37 @@ export default inject(
       pluginDialogVisible,
     } = pluginStore;
 
+    const { getRefElement, config } = guidanceStore;
+
+    const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
+    const resetQuotaItem = () => {
+      if (isNewUserByCurrentUser) setIsNewUserByCurrentUser(false);
+      if (isNewRoomByCurrentUser) setIsNewRoomByCurrentUser(false);
+    };
+
+    const closeItems = JSON.parse(localStorage.getItem("warning-dialog")) || [];
+
+    const isShowWarningDialog = isAccounts
+      ? isUserTariffAlmostLimit &&
+        !closeItems.includes("user-quota") &&
+        isNewUserByCurrentUser
+      : isRoomsTariffAlmostLimit &&
+        !closeItems.includes("room-quota") &&
+        isNewRoomByCurrentUser;
+
     return {
       preparationPortalDialogVisible,
       uploadPanelVisible,
-      ownerPanelVisible,
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
-      thirdPartyMoveDialogVisible,
-      connectDialogVisible: connectDialogVisible || !!connectItem, //TODO:
+      connectDialogVisible: connectDialogVisible || !!connectItem, // TODO:
       deleteThirdPartyDialogVisible,
       versionHistoryPanelVisible,
       deleteDialogVisible,
+      lifetimeDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
-      newFilesPanelVisible,
       conflictResolveDialogVisible,
       convertDialogVisible,
       createRoomDialogVisible,
@@ -427,9 +545,8 @@ export default inject(
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,
       archiveDialogVisible,
-      inviteUsersWarningDialogVisible,
+      inviteQuotaWarningDialogVisible,
       confirmDialogIsLoading,
-      changeUserTypeDialogVisible,
       restoreRoomDialogVisible,
       submitToGalleryDialogVisible,
       editGroupMembersDialogVisible,
@@ -446,10 +563,29 @@ export default inject(
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
       shareFolderDialogVisible,
-      pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
+      reorderDialogVisible,
       fillPDFDialogData,
       shareCollectSelector,
+      roomLogoCoverDialogVisible,
+      createRoomTemplateDialogVisible,
+      templateAccessSettingsVisible,
+
+      setQuotaWarningDialogVisible,
+      welcomeFormFillingTipsVisible,
+      resetQuotaItem,
+      isShowWarningDialog,
+      passwordEntryDialogDate,
+      guestReleaseTipDialogVisible,
+      closeEditIndexDialogVisible,
+      deleteVersionDialogVisible,
+      operationCancelVisible,
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
+      viewAs,
+      userId: userStore?.user?.id,
+      getRefElement,
+      config,
     };
   },
 )(observer(Panels));

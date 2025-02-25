@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,48 +29,48 @@ import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import { StyledUser } from "../../styles/members";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
-import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
+import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
-import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
+import {
+  getUserType,
+  getUserTypeTranslation,
+} from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
-import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Link } from "@docspace/shared/components/link";
+import api from "@docspace/shared/api";
+import { FolderType } from "@docspace/shared/enums";
+import { StyledUserTypeHeader, StyledUser } from "../../styles/members";
 
 const User = ({
   t,
   user,
   membersHelper,
   currentMember,
-  updateRoomMemberRole,
   infoPanelSelection,
-  changeUserType,
-  setIsScrollLocked,
   membersFilter,
   setMembersFilter,
   fetchMembers,
   hasNextPage,
-  showTooltip,
   infoPanelMembers,
   setInfoPanelMembers,
   searchValue,
-  resendEmailInvitations,
   setEditMembersGroup,
   setEditGroupMembersDialogVisible,
 }) => {
+  const theme = useTheme();
+
+  const [isLoading, setIsLoading] = useState(false);
+
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.name && !user.email) return null;
-
-  const theme = useTheme();
 
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const isExpect = user.isExpect;
@@ -78,8 +78,8 @@ const User = ({
   const showInviteIcon = canInviteUserInRoomAbility && isExpect;
   const canChangeUserRole = user.canEditAccess;
   const withoutTitles = !!searchValue;
-
-  const [isLoading, setIsLoading] = useState(false);
+  const hideUserRole =
+    infoPanelSelection.rootFolderType === FolderType.RoomTemplates;
 
   const fullRoomRoleOptions = membersHelper.getOptionsByRoomType(
     infoPanelSelection.roomType,
@@ -87,12 +87,14 @@ const User = ({
   );
 
   const userRole = membersHelper.getOptionByUserAccess(user.access, user);
-  const userRoleOptions = user.isGroup
-    ? filterGroupRoleOptions(fullRoomRoleOptions)
-    : filterUserRoleOptions(fullRoomRoleOptions, user);
+  const userRoleOptions =
+    user.isGroup || (!user.isAdmin && !user.isOwner && !user.isRoomAdmin)
+      ? filterPaidRoleOptions(fullRoomRoleOptions)
+      : fullRoomRoleOptions;
 
   const onRepeatInvitation = async () => {
-    resendEmailInvitations(infoPanelSelection.id, true)
+    api.rooms
+      .resendEmailInvitations(infoPanelSelection.id, true)
       .then(() =>
         toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
       )
@@ -100,11 +102,12 @@ const User = ({
   };
 
   const updateRole = (option) => {
-    return updateRoomMemberRole(infoPanelSelection.id, {
-      invitations: [{ id: user.id, access: option.access }],
-      notify: false,
-      sharingMessage: "",
-    })
+    return api.rooms
+      .updateRoomMemberRole(infoPanelSelection.id, {
+        invitations: [{ id: user.id, access: option.access }],
+        notify: false,
+        sharingMessage: "",
+      })
       .then(async () => {
         setIsLoading(false);
 
@@ -120,6 +123,7 @@ const User = ({
               (m) => m.id !== user.id,
             ),
             groups: infoPanelMembers.groups?.filter((m) => m.id !== user.id),
+            guests: infoPanelMembers.guests?.filter((m) => m.id !== user.id),
           };
 
           const roomId = infoPanelSelection.id;
@@ -137,12 +141,16 @@ const User = ({
           const newGroups =
             newMembers.groups.length > minItemsCount ? newMembers?.groups : [];
 
+          const newGuests =
+            newMembers.guests.length > minItemsCount ? newMembers?.guests : [];
+
           setInfoPanelMembers({
             roomId,
             users: newUsers,
             administrators: newAdministrators,
             expected: newExpected,
             groups: newGroups,
+            guests: newGuests,
           });
 
           newMembersFilter.total -= 1;
@@ -162,7 +170,7 @@ const User = ({
               newMembersFilter,
             );
 
-            const newMembers = {
+            const newData = {
               administrators: [
                 ...newAdministrators,
                 ...fetchedMembers.administrators,
@@ -170,11 +178,12 @@ const User = ({
               users: [...newUsers, ...fetchedMembers.users],
               expected: [...newExpected, ...fetchedMembers.expected],
               groups: [...newGroups, ...fetchedMembers.groups],
+              guests: [...newMembersFilter.guests],
             };
 
             setInfoPanelMembers({
               roomId: infoPanelSelection.id,
-              ...newMembers,
+              ...newData,
             });
 
             newMembersFilter.startIndex = oldStartIndex;
@@ -197,6 +206,9 @@ const User = ({
             groups: infoPanelMembers.groups?.map((m) =>
               m.id === user.id ? { ...m, access: option.access } : m,
             ),
+            guests: infoPanelMembers.guests?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m,
+            ),
           });
         }
       })
@@ -206,74 +218,15 @@ const User = ({
       });
   };
 
-  const abortCallback = () => {
-    setIsLoading(false);
-  };
-
   const onOptionClick = (option) => {
     if (option.access === userRole.access) return;
 
-    const userType =
-      option.key === "owner"
-        ? "admin"
-        : option.key === "roomAdmin"
-          ? "manager"
-          : option.key === "collaborator"
-            ? "collaborator"
-            : "user";
-
-    const successCallback = () => {
-      updateRole(option);
-    };
-
     setIsLoading(true);
-
-    const needChangeUserType =
-      ((user.isVisitor || user.isCollaborator) && userType === "manager") ||
-      (user.isVisitor && userType === "collaborator");
-
-    if (needChangeUserType) {
-      changeUserType(userType, [user], successCallback, abortCallback);
-    } else {
-      updateRole(option);
-    }
-  };
-
-  const getUserType = (item) => {
-    if (item.isOwner) return "owner";
-    if (item.isAdmin) return "admin";
-    if (item.isRoomAdmin) return "manager";
-    if (item.isCollaborator) return "collaborator";
-    return "user";
+    updateRole(option);
   };
 
   const type = getUserType(user);
-  const role = getUserRole(user, userRole?.type);
-
-  const typeLabel =
-    (type === "user" && userRole?.type !== type) ||
-    (userRole?.type === "manager" && type !== "admin" && type !== "owner")
-      ? getUserTypeLabel(userRole?.type, t)
-      : getUserTypeLabel(type, t);
-
-  const getTooltipContent = () => (
-    <div>
-      <Text fontSize="14px" fontWeight={600} noSelect truncate>
-        {decode(user.displayName)}
-      </Text>
-      <Text
-        className="label"
-        fontWeight={400}
-        fontSize="12px"
-        noSelect
-        truncate
-        color={theme.infoPanel.members.subtitleColor}
-        dir="auto"
-      >
-        {`${typeLabel} | ${user.email}`}
-      </Text>
-    </div>
-  );
+  const typeLabel = getUserTypeTranslation(type, t);
 
   const onOpenGroup = (group) => {
     setEditMembersGroup(group);
@@ -300,21 +253,21 @@ const User = ({
     <StyledUserTypeHeader isExpect={isExpect}>
       <Text className="title">{user.displayName}</Text>
 
-      {showInviteIcon && (
+      {showInviteIcon ? (
         <IconButton
-          className={"icon"}
+          className="icon"
           title={t("Common:RepeatInvitation")}
           iconName={EmailPlusReactSvgUrl}
-          isFill={true}
+          isFill
           onClick={onRepeatInvitation}
           size={16}
         />
-      )}
+      ) : null}
     </StyledUserTypeHeader>
   ) : (
     <StyledUser isExpect={isExpect} key={user.id}>
       <Avatar
-        role={role}
+        role={type}
         className="avatar"
         size="min"
         source={isExpect ? AtReactSvgUrl : userAvatar || ""}
@@ -331,12 +284,13 @@ const User = ({
               className="name"
               type="action"
               onClick={() => onOpenGroup(user)}
+              title={decode(user.name)}
             >
               {decode(user.name)}
             </Link>
           ) : (
             <Text className="name" data-tooltip-id={uniqueTooltipId}>
-              {user?.displayName && decode(user.displayName)}
+              {user?.displayName ? decode(user.displayName) : null}
             </Text>
           )}
           {/* TODO: uncomment when information about online statuses appears */}
@@ -348,17 +302,16 @@ const User = ({
               place="bottom"
             />
           )} */}
-          {currentMember?.id === user.id && (
+          {currentMember?.id === user.id ? (
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
-          )}
+          ) : null}
         </div>
-        {!user.isGroup && (
+        {!user.isGroup ? (
           <div className="role-email" style={{ display: "flex" }}>
             <Text
               className="label"
               fontWeight={400}
               fontSize="12px"
-              noSelect
               truncate
               color={theme.infoPanel.members.subtitleColor}
               dir="auto"
@@ -366,10 +319,10 @@ const User = ({
               {`${typeLabel} | ${user.email}`}
             </Text>
           </div>
-        )}
+        ) : null}
       </div>
 
-      {userRole && userRoleOptions && (
+      {userRole && userRoleOptions && !hideUserRole ? (
         <div className="role-wrapper">
           {canChangeUserRole ? (
             <ComboBox
@@ -382,7 +335,7 @@ const User = ({
               size="content"
               modernView
               title={t("Common:Role")}
-              manualWidth={"fit-content"}
+              manualWidth="auto"
               isLoading={isLoading}
               isMobileView={isMobileOnly}
               directionY="both"
@@ -394,7 +347,7 @@ const User = ({
             </div>
           )}
         </div>
-      )}
+      ) : null}
     </StyledUser>
   );
 };
@@ -410,14 +363,9 @@ export default inject(
       searchValue,
     } = infoPanelStore;
 
-    const {
-      updateRoomMemberRole,
-      resendEmailInvitations,
-      membersFilter,
-      setMembersFilter,
-    } = filesStore;
+    const { membersFilter, setMembersFilter } = filesStore;
 
-    const { changeType: changeUserType } = peopleStore;
+    const { changeType: changeUserType } = peopleStore.usersStore;
 
     const { setEditMembersGroup, setEditGroupMembersDialogVisible } =
       dialogsStore;
@@ -425,8 +373,6 @@ export default inject(
     return {
       infoPanelSelection,
       setIsScrollLocked,
-      updateRoomMemberRole,
-      resendEmailInvitations,
       changeUserType,
       membersFilter,
       setMembersFilter,

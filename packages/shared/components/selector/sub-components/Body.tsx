@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 
@@ -54,9 +54,10 @@ import { VirtualScroll } from "./VirtualScroll";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
-const TABS_HEIGHT = 40;
+const TABS_HEIGHT = 33;
 const BREAD_CRUMBS_HEIGHT = 38;
 const SEARCH_HEIGHT = 44;
+const INFO_BLOCK_MARGIN = 12;
 const BODY_DESCRIPTION_TEXT_HEIGHT = 32;
 const SELECT_ALL_HEIGHT = 61;
 const FOOTER_HEIGHT = 73;
@@ -82,12 +83,17 @@ const Body = ({
   withFooterCheckbox,
   descriptionText,
   withHeader,
+  withPadding,
 
   withInfo,
   infoText,
+  withInfoBadge,
   setInputItemVisible,
   inputItemVisible,
 }: BodyProps) => {
+  const infoBarRef = useRef<HTMLDivElement>(null);
+  const [infoBarHeight, setInfoBarHeight] = useState(0);
+
   const { withSearch } = React.useContext(SearchContext);
   const isSearch = React.useContext(SearchValueContext);
   const { withInfoBar } = React.useContext(InfoBarContext);
@@ -104,6 +110,9 @@ const Body = ({
 
   const bodyRef = React.useRef<HTMLDivElement>(null);
   const listOptionsRef = React.useRef<null | InfiniteLoader>(null);
+  const resizeTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
 
   const isEmptyInput =
     items.length === 2 && items[1].isInputItem && items[0].isCreateNewItem;
@@ -124,7 +133,11 @@ const Body = ({
 
   const onBodyResize = React.useCallback(() => {
     if (bodyRef && bodyRef.current) {
-      setBodyHeight(bodyRef.current.offsetHeight);
+      resizeTimerRef.current = setTimeout(() => {
+        if (bodyRef.current) {
+          setBodyHeight(bodyRef.current.offsetHeight);
+        }
+      }, 20);
     }
   }, []);
 
@@ -158,6 +171,14 @@ const Body = ({
   }, [isLoading, footerVisible, onBodyResize]);
 
   React.useEffect(() => {
+    return () => {
+      if (resizeTimerRef.current) {
+        clearTimeout(resizeTimerRef.current);
+      }
+    };
+  }, []);
+
+  React.useEffect(() => {
     resetCache();
   }, [resetCache, hasNextPage]);
 
@@ -171,7 +192,18 @@ const Body = ({
     }
   }, [withTabs, activeTabId]);
 
-  let listHeight = bodyHeight - CONTAINER_PADDING;
+  useLayoutEffect(() => {
+    if (withInfoBar && itemsCount !== 0) {
+      const infoEl = infoBarRef.current;
+
+      if (infoEl) {
+        const { height } = infoEl.getBoundingClientRect();
+        setInfoBarHeight(height + CONTAINER_PADDING);
+      }
+    }
+  }, [withInfoBar, itemsCount]);
+
+  let listHeight = bodyHeight - CONTAINER_PADDING - infoBarHeight;
 
   const showSearch = withSearch && (isSearch || itemsCount > 0);
   const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
@@ -181,15 +213,7 @@ const Body = ({
   if (withInfo) {
     const infoEl = document.getElementById("selector-info-text");
     if (infoEl) {
-      const height = infoEl.getClientRects()[0].height;
-      listHeight -= height;
-    }
-  }
-
-  if (withInfoBar) {
-    const infoEl = document.querySelector(".selector_info-bar");
-    if (infoEl) {
-      const height = infoEl.getClientRects()[0].height + CONTAINER_PADDING;
+      const height = infoEl.getClientRects()[0].height + INFO_BLOCK_MARGIN;
       listHeight -= height;
     }
   }
@@ -222,23 +246,28 @@ const Body = ({
       footerVisible={footerVisible}
       withHeader={withHeader}
       withTabs={withTabs}
+      withPadding={withPadding}
     >
-      <InfoBar visible={itemsCount !== 0} />
+      <InfoBar ref={infoBarRef} visible={itemsCount !== 0} />
       <BreadCrumbs visible={!isShareFormEmpty} />
 
-      {withTabs && tabsData && (
+      {withTabs && tabsData ? (
         <StyledTabs
           items={tabsData}
           selectedItemId={activeTabId}
           className="selector_body_tabs"
         />
-      )}
+      ) : null}
 
       <Search isSearch={itemsCount > 0 || isSearch} />
 
-      {withInfo && !isLoading && (
-        <Info withInfo={withInfo} infoText={infoText} />
-      )}
+      {withInfo && !isLoading ? (
+        <Info
+          withInfo={withInfo}
+          infoText={infoText}
+          withInfoBadge={withInfoBadge}
+        />
+      ) : null}
 
       {isLoading ? (
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
@@ -250,9 +279,9 @@ const Body = ({
         />
       ) : (
         <>
-          {!!descriptionText && (
+          {descriptionText ? (
             <Text className="body-description-text">{descriptionText}</Text>
-          )}
+          ) : null}
 
           <SelectAll
             show={showSelectAll}
@@ -260,7 +289,7 @@ const Body = ({
             rowLoader={rowLoader}
           />
 
-          {bodyHeight && (
+          {bodyHeight ? (
             <InfiniteLoader
               ref={listOptionsRef}
               isItemLoaded={isItemLoaded}
@@ -284,6 +313,7 @@ const Body = ({
                     inputItemVisible,
                     savedInputValue,
                     setSavedInputValue,
+                    listHeight,
                   }}
                   itemSize={48}
                   onItemsRendered={onItemsRendered}
@@ -294,7 +324,7 @@ const Body = ({
                 </List>
               )}
             </InfiniteLoader>
-          )}
+          ) : null}
         </>
       )}
     </StyledBody>

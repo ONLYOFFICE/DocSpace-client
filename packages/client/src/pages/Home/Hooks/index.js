@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,9 +27,7 @@
 export { default as useFiles } from "./useFiles";
 export { default as useSDK } from "./useSDK";
 export { default as useOperations } from "./useOperations";
-export { default as useAccounts } from "./useAccounts";
-export { default as useGroups } from "./useGroups";
+export { default as useContacts } from "./useContacts";
 export { default as useSettings } from "./useSettings";
 export { default as usePublic } from "./usePublic";
-export { default as useInsideGroup } from "./useInsideGroup";
 export { default as useAccountsHotkeys } from "./useAccountsHotkeys";

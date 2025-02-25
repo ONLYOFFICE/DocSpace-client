@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,25 +25,33 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { ModalDialogFormWrapperProps } from "../ModalDialog.types";
+import styles from "../ModalDialog.module.scss";
 
-function FormWrapper({
+const FormWrapper = ({
   withForm,
   children,
   className,
-}: ModalDialogFormWrapperProps) {
+  onSubmit,
+}: ModalDialogFormWrapperProps) => {
   if (!withForm) return children;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    onSubmit?.(event);
   };
 
   return (
-    <form className={className} onSubmit={handleSubmit}>
+    <form
+      className={classNames(styles.formWrapper, className)}
+      onSubmit={handleSubmit}
+    >
       {children}
     </form>
   );
-}
+};
 
 export { FormWrapper };

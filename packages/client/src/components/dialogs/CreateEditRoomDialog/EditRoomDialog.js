@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,14 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
-
-import TagHandler from "./handlers/TagHandler";
-import SetRoomParams from "./sub-components/SetRoomParams";
-import DialogHeader from "./sub-components/DialogHeader";
-
+import { useState, useEffect, useRef } from "react";
+import isEqual from "lodash/isEqual";
+import cloneDeep from "lodash/cloneDeep";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
+import { ShareAccessRights } from "@docspace/shared/enums";
+import TagHandler from "./handlers/TagHandler";
+import SetRoomParams from "./sub-components/SetRoomParams";
+import TemplateAccessSelector from "../../TemplateAccessSelector";
+import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
+import TemplateAccessSettingsPanel from "../../panels/TemplateAccessSettingsPanel";
 
 const EditRoomDialog = ({
   t,
@@ -42,11 +45,22 @@ const EditRoomDialog = ({
   fetchedRoomParams,
   fetchedTags,
   fetchedImage,
+  isInitLoading,
+  isTemplate,
+  cover,
+  item,
+  accessItems,
+  templateIsAvailable,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isValidTitle, setIsValidTitle] = useState(true);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
-
+  const [changeRoomOwnerIsVisible, setChangeRoomOwnerIsVisible] =
+    useState(false);
+  const [accessSettingsIsVisible, setAccessSettingsIsVisible] = useState(false);
+  const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
+  const [inviteItems, setInviteItems] = useState([]);
+  const [isAvailable, setIsAvailable] = useState(templateIsAvailable);
   const [roomParams, setRoomParams] = useState({
     ...fetchedRoomParams,
   });
@@ -58,16 +72,28 @@ const EditRoomDialog = ({
   );
 
   const compareRoomParams = (prevParams, currentParams) => {
+    let prevInviteItems = prevParams.inviteItems;
+    let currentInviteItems = inviteItems;
+
+    if (prevParams.inviteItems && inviteItems) {
+      prevInviteItems = prevParams.inviteItems.map((x) => {
+        return { id: x.id, access: x.access };
+      });
+      currentInviteItems = inviteItems.map((x) => {
+        return { id: x.id, access: x.access };
+      });
+    }
+
     return (
       prevParams.title === currentParams.title &&
       prevParams.roomOwner.id === currentParams.roomOwner.id &&
       prevParams.tags
-        .map((t) => t.name)
+        .map((tag) => tag.name)
         .sort()
         .join("|")
         .toLowerCase() ===
         currentParams.tags
-          .map((t) => t.name)
+          .map((tag) => tag.name)
           .sort()
           .join("|")
           .toLowerCase() &&
@@ -75,7 +101,13 @@ const EditRoomDialog = ({
         (currentParams.icon.uploadedFile === null ||
           currentParams.icon.uploadedFile === undefined)) ||
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
-      prevParams.quota === currentParams.quota
+      prevParams.quota === currentParams.quota &&
+      prevParams.indexing === currentParams.indexing &&
+      prevParams.denyDownload === currentParams.denyDownload &&
+      isEqual(prevParams.lifetime, currentParams.lifetime) &&
+      isEqual(prevParams.watermark, currentParams.watermark) &&
+      isEqual(prevInviteItems, currentInviteItems) &&
+      isAvailable === templateIsAvailable
     );
   };
 
@@ -90,18 +122,24 @@ const EditRoomDialog = ({
       type: newRoomType,
     }));
 
-  const onKeyUpHandler = (e) => {
-    if (isWrongTitle) return;
-    if (e.keyCode === 13) onEditRoom();
-  };
-
   const onEditRoom = () => {
     if (!roomParams.title.trim()) {
       setIsValidTitle(false);
       return;
     }
 
-    onSave(roomParams);
+    let params = roomParams;
+
+    if (isAvailable !== templateIsAvailable) {
+      params = { ...roomParams, isAvailable };
+    }
+
+    onSave(params);
+  };
+
+  const onKeyUpHandler = (e) => {
+    if (isWrongTitle) return;
+    if (e.keyCode === 13) onEditRoom();
   };
 
   useEffect(() => {
@@ -117,10 +155,88 @@ const EditRoomDialog = ({
     }
   }, [fetchedImage]);
 
+  useEffect(() => {
+    if (accessItems) {
+      setInviteItems(accessItems);
+
+      prevRoomParams.current = {
+        ...roomParams,
+        inviteItems: accessItems,
+      };
+    }
+  }, [accessItems]);
+
+  useEffect(() => {
+    setIsAvailable(templateIsAvailable);
+  }, [templateIsAvailable]);
+
   const onCloseAction = () => {
     if (isLoading) return;
 
     onClose && onClose();
+  };
+
+  const onOwnerChange = () => {
+    setChangeRoomOwnerIsVisible(true);
+  };
+
+  const onSetNewOwner = (roomOwner) => {
+    setChangeRoomOwnerIsVisible(false);
+    setRoomParams({ ...roomParams, roomOwner });
+  };
+
+  const onCloseRoomOwnerPanel = () => {
+    setChangeRoomOwnerIsVisible(false);
+  };
+
+  const onOpenAccessSettings = () => {
+    setAccessSettingsIsVisible(true);
+  };
+
+  const onCloseAccessSettings = () => {
+    setAccessSettingsIsVisible(false);
+  };
+
+  const onCloseAddUsersPanel = () => {
+    setAddUsersPanelVisible(false);
+  };
+
+  const onSubmitItems = (users) => {
+    const newUsers = cloneDeep(users);
+    const items = inviteItems.map((i) => {
+      const userIndex = users.findIndex((u) => u.id === i.id);
+      if (userIndex > -1) {
+        newUsers.filter((x) => x.id === i.id);
+        return { ...users[userIndex], access: ShareAccessRights.ReadOnly };
+      }
+      return i;
+    });
+
+    setInviteItems([...items, ...newUsers]);
+    onCloseAddUsersPanel();
+  };
+
+  const checkIfUserInvited = (user) => {
+    return (
+      inviteItems.findIndex(
+        (x) => x.id === user.id && x.access !== ShareAccessRights.None,
+      ) > -1
+    );
+  };
+
+  const onSetAccessSettings = () => {
+    onCloseAccessSettings();
+
+    const invitations = inviteItems
+      .filter((i) => !i.isOwner)
+      .map((inviteItem) => {
+        return {
+          id: inviteItem.id,
+          access: inviteItem.access ?? ShareAccessRights.ReadOnly,
+        };
+      });
+
+    setRoomParams({ ...roomParams, invitations });
   };
 
   return (
@@ -130,10 +246,57 @@ const EditRoomDialog = ({
       visible={visible}
       onClose={onCloseAction}
       isScrollLocked={isScrollLocked}
-      withFooterBorder
+      isLoading={isInitLoading}
+      containerVisible={
+        changeRoomOwnerIsVisible ||
+        accessSettingsIsVisible ||
+        addUsersPanelVisible
+      }
     >
+      {changeRoomOwnerIsVisible ? (
+        <ModalDialog.Container>
+          <ChangeRoomOwnerPanel
+            useModal={false}
+            roomOwner={roomParams.roomOwner}
+            onOwnerChange={onSetNewOwner}
+            showBackButton
+            onClose={onCloseRoomOwnerPanel}
+          />
+        </ModalDialog.Container>
+      ) : null}
+
+      <ModalDialog.Container>
+        {addUsersPanelVisible ? (
+          <TemplateAccessSelector
+            roomId={item.id}
+            onSubmit={onSubmitItems}
+            onClose={onClose}
+            onBackClick={onCloseAddUsersPanel}
+            checkIfUserInvited={checkIfUserInvited}
+            onCloseClick={onClose}
+          />
+        ) : (
+          <TemplateAccessSettingsPanel
+            templateItem={item}
+            usersPanelIsVisible={addUsersPanelVisible}
+            setUsersPanelIsVisible={setAddUsersPanelVisible}
+            onCloseAccessSettings={onCloseAccessSettings}
+            onClosePanels={onClose}
+            isContainer
+            inviteItems={inviteItems}
+            templateIsAvailable={isAvailable}
+            setTemplateIsAvailable={setIsAvailable}
+            setInviteItems={setInviteItems}
+            setIsVisible={setAccessSettingsIsVisible}
+            onSetAccessSettings={onSetAccessSettings}
+          />
+        )}
+      </ModalDialog.Container>
+
       <ModalDialog.Header>
-        <DialogHeader isEdit />
+        {isTemplate
+          ? t("Files:EditTemplate")
+          : t("CreateEditRoomDialog:RoomEditing")}
       </ModalDialog.Header>
 
       <ModalDialog.Body>
@@ -151,6 +314,12 @@ const EditRoomDialog = ({
           setIsValidTitle={setIsValidTitle}
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
+          onOwnerChange={onOwnerChange}
+          onOpenAccessSettings={onOpenAccessSettings}
+          canChangeOwner={roomParams?.security?.ChangeOwner}
+          isTemplate={isTemplate}
+          inviteItems={inviteItems}
+          templateIsAvailable={isAvailable}
         />
       </ModalDialog.Body>
 
@@ -163,8 +332,10 @@ const EditRoomDialog = ({
           scale
           onClick={onEditRoom}
           isDisabled={
-            isWrongTitle ||
-            compareRoomParams(prevRoomParams.current, roomParams)
+            !cover
+              ? isWrongTitle ||
+                compareRoomParams(prevRoomParams.current, roomParams)
+              : null
           }
           isLoading={isLoading}
         />

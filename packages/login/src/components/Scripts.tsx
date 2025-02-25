@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,14 @@
 
 import Script from "next/script";
 
-import runtime from "../../../runtime.json";
+let runtime = null;
 
-const hashDate = runtime?.date;
+try {
+  runtime = require("../../../runtime.json");
+} catch (e) {
+  console.log(e);
+}
+const hashDate = runtime ? runtime?.date : new Date().getTime();
 
 const Scripts = () => {
   return (

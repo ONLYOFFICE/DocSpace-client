@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,10 +26,12 @@
 
 import React from "react";
 
+import { getRoomCreationAdditionalParams } from "../../../utils/rooms";
 import { createFolder } from "../../../api/files";
 import { createRoom } from "../../../api/rooms";
 import { RoomsType } from "../../../enums";
 import { TSelectorItem } from "../../../components/selector/Selector.types";
+import { toastr } from "../../../components/toast";
 
 import { TUseInputItemHelper } from "../FilesSelector.types";
 
@@ -60,9 +62,15 @@ const useInputItemHelper = ({
     async (value: string, roomType?: RoomsType) => {
       if (!withCreate || (!selectedItemId && !roomType)) return;
 
-      if (selectedItemId) createFolder(selectedItemId, value);
-      else if (roomType) {
-        createRoom({ roomType, title: value });
+      try {
+        if (selectedItemId) await createFolder(selectedItemId, value);
+        else if (roomType) {
+          const additionalParams = getRoomCreationAdditionalParams(roomType);
+          await createRoom({ roomType, title: value, ...additionalParams });
+        }
+      } catch (e) {
+        console.log(e);
+        toastr.error(e as string);
       }
     },
     [withCreate, selectedItemId],

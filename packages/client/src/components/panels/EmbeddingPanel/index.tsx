@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import copy from "copy-to-clipboard";
 import isEqual from "lodash/isEqual";
 import { objectToGetParams } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import config from "PACKAGE_FILE";
+import pkg from "PACKAGE_FILE";
 
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
@@ -50,15 +50,15 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
-import { StyledModalDialog, StyledBody } from "./StyledEmbeddingPanel";
+import { StyledBody } from "./StyledEmbeddingPanel";
 
 import { DisplayBlock } from "./sub-components/DisplayBlock";
 import { CheckboxElement } from "./sub-components/CheckboxElement";
@@ -155,7 +155,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   );
 
   const fileConfig = {
-    mode: "viewer",
+    mode: "editor",
     width: `${widthValue}${dataDimensions[0].label}`,
     height: `${heightValue}${dataDimensions[1].label}`,
     frameId: "ds-frame",
@@ -293,7 +293,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
     const url = combineUrl(
       window.location.origin,
       window.ClientConfig?.proxy?.url,
-      config.homepage,
+      pkg.homepage,
       "/portal-settings/developer-tools",
     );
 
@@ -396,16 +396,17 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   );
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       visible={visible}
       onClose={onClose}
       withBodyScroll
       displayType={ModalDialogType.aside}
+      withoutPadding
     >
       <ModalDialog.Header>{t("Files:EmbeddingSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledBody>
-          {barIsVisible && (
+          {barIsVisible ? (
             <div className="embedding-panel_banner">
               <Text fontSize="12px" fontWeight={400}>
                 {isAdmin ? (
@@ -438,9 +439,9 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                 onClick={onCloseBar}
               />
             </div>
-          )}
+          ) : null}
           <div className="embedding-panel_body">
-            {sharedLinksOptions && sharedLinksOptions.length > 1 && (
+            {sharedLinksOptions && sharedLinksOptions.length > 1 ? (
               <>
                 <Text
                   className="embedding-panel_header-link"
@@ -460,16 +461,17 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   withLabel={false}
                 />
               </>
-            )}
+            ) : null}
 
-            {showLinkBar && (
+            {showLinkBar ? (
               <PublicRoomBar
                 className="embedding-panel_bar"
                 headerText={barTitle}
                 bodyText={barSubTitle}
                 iconName={TabletLinkReactSvgUrl}
+                barIsVisible={barIsVisible}
               />
-            )}
+            ) : null}
 
             <Text
               className="embedding-panel_header-text"
@@ -496,7 +498,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
               />
             </div>
 
-            {!isFile && (
+            {!isFile ? (
               <>
                 <Text
                   className="embedding-panel_header-text"
@@ -527,7 +529,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   />
                 </div>
               </>
-            )}
+            ) : null}
 
             <div className="embedding-panel_code-container">
               <Text
@@ -567,7 +569,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
           isLoading={isLoading}
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

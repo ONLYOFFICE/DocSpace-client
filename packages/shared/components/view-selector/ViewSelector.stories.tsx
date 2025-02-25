@@ -24,85 +24,121 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import ViewRowsReactSvg from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 import EyeReactSvg from "PUBLIC_DIR/images/eye.react.svg?url";
 
-import { Box } from "../box";
-import { ViewSelector } from "./ViewSelector";
+import { ViewSelector } from ".";
 import { ViewSelectorProps } from "./ViewSelector.types";
 
-const meta = {
-  title: "Components/ViewSelector",
+const meta: Meta<typeof ViewSelector> = {
+  title: "Interactive elements/ViewSelector",
   component: ViewSelector,
   parameters: {
     docs: {
       description: {
-        component: "Actions with a button.",
+        component:
+          "A component that allows users to switch between different view modes (e.g., row, tile, some).",
       },
     },
   },
   argTypes: {
-    onChangeView: {
-      action: "onChangeView",
+    viewAs: {
+      control: "select",
+      options: ["row", "tile", "some"],
+      description: "The currently active view mode",
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "Whether the view selector is disabled",
+    },
+    isFilter: {
+      control: "boolean",
+      description: "Whether to show only one view option at a time",
+    },
+    className: {
+      control: "text",
+      description: "Additional CSS class name",
+    },
+    style: {
+      control: "object",
+      description: "Additional CSS styles",
     },
   },
-} satisfies Meta<typeof ViewSelector>;
-type Story = StoryObj<typeof meta>;
+  decorators: [
+    (Story) => (
+      <div style={{ padding: "16px" }}>
+        <Story />
+      </div>
+    ),
+  ],
+};
 
 export default meta;
+type Story = StoryObj<typeof ViewSelector>;
 
-const Template = ({
-  onChangeView,
-  viewAs,
-  viewSettings,
-  isDisabled,
-  isFilter,
+const defaultViewSettings = [
+  {
+    value: "row",
+    icon: ViewRowsReactSvg,
+    id: "row-view",
+  },
+  {
+    value: "tile",
+    icon: ViewTilesReactSvg,
+    id: "tile-view",
+  },
+  {
+    value: "some",
+    icon: EyeReactSvg,
+    id: "some-view",
+  },
+];
+
+const InteractiveTemplate = ({
+  viewAs: argsViewAs,
   ...rest
 }: ViewSelectorProps) => {
-  const [view, setView] = useState(viewAs);
+  const [viewAs, setViewAs] = useState(argsViewAs);
+
+  useEffect(() => {
+    setViewAs(argsViewAs);
+  }, [argsViewAs]);
 
   return (
-    <Box paddingProp="16px">
-      <ViewSelector
-        {...rest}
-        isDisabled={isDisabled}
-        viewSettings={viewSettings}
-        viewAs={view}
-        isFilter={isFilter}
-        onChangeView={(v) => {
-          onChangeView(v);
-          setView(v);
-        }}
-      />
-    </Box>
+    <ViewSelector
+      {...rest}
+      viewAs={viewAs}
+      onChangeView={(view) => setViewAs(view)}
+    />
   );
 };
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
+  render: InteractiveTemplate,
   args: {
-    viewSettings: [
-      {
-        value: "row",
-        icon: ViewRowsReactSvg,
-      },
-      {
-        value: "tile",
-        icon: ViewTilesReactSvg,
-        callback: () => {},
-      },
-      {
-        value: "some",
-        icon: EyeReactSvg,
-        callback: () => {},
-      },
-    ],
+    viewSettings: defaultViewSettings,
     viewAs: "row",
     isDisabled: false,
     isFilter: false,
+  },
+};
+
+export const Disabled: Story = {
+  render: InteractiveTemplate,
+  args: {
+    ...Default.args,
+    isDisabled: true,
+  },
+};
+
+export const FilterMode: Story = {
+  render: InteractiveTemplate,
+  args: {
+    ...Default.args,
+    isFilter: true,
   },
 };

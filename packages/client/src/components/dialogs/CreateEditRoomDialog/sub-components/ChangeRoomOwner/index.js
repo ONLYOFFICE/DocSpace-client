@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { decode } from "he";
 
-import { Avatar } from "@docspace/shared/components/avatar";
+import { Avatar, AvatarRole } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import * as Styled from "./index.styled";
@@ -39,6 +39,7 @@ const ChangeRoomOwner = ({
   roomOwner,
   onOwnerChange,
   currentColorScheme,
+  canChangeOwner,
 }) => {
   const userName = useMemo(
     () => decode(roomOwner.displayName ?? roomOwner.label),
@@ -47,40 +48,49 @@ const ChangeRoomOwner = ({
 
   return (
     <Styled.ChangeRoomOwner>
-      <Text className="change-owner-label" fontWeight={600} fontSize="13px">
+      <Text
+        className="change-owner-label"
+        fontWeight={600}
+        fontSize="13px"
+        noSelect
+      >
         {t("Files:RoomOwner")}
       </Text>
 
-      <div className="change-owner-display">
-        <Avatar
-          className={"change-owner-display-avatar"}
-          size="min"
-          role={""}
-          isDefaultSource={roomOwner.hasAvatar}
-          source={roomOwner.avatarSmall ?? roomOwner.avatar}
-          userName={userName}
-        />
-        <div className="change-owner-display-name">
-          <Text fontWeight={600} fontSize="13px">
-            {userName}
-          </Text>
-          {roomOwner.id === currentUserId && (
-            <Text className="me-label">({t("Common:MeLabel")})</Text>
-          )}
+      <div className="change-owner-display-wrapper">
+        <div className="change-owner-display">
+          <Avatar
+            className="change-owner-display-avatar"
+            size="base"
+            role={AvatarRole.none}
+            isDefaultSource={roomOwner.hasAvatar}
+            source={roomOwner.avatarSmall ?? roomOwner.avatar}
+            userName={userName}
+          />
+          <div className="change-owner-display-name">
+            <Text fontWeight={600} fontSize="13px" noSelect>
+              {userName}
+            </Text>
+            {roomOwner.id === currentUserId ? (
+              <Text className="me-label">({t("Common:MeLabel")})</Text>
+            ) : null}
+          </div>
         </div>
-      </div>
 
-      <Link
-        className="change-owner-link"
-        isHovered
-        type="action"
-        fontWeight={600}
-        fontSize="13px"
-        color={currentColorScheme.main?.accent}
-        onClick={onOwnerChange}
-      >
-        {t("Common:ChangeButton")}
-      </Link>
+        {canChangeOwner ? (
+          <Link
+            className="change-owner-link"
+            isHovered
+            type="action"
+            fontWeight={600}
+            fontSize="13px"
+            color={currentColorScheme.main?.accent}
+            onClick={onOwnerChange}
+          >
+            {t("Common:ChangeButton")}
+          </Link>
+        ) : null}
+      </div>
     </Styled.ChangeRoomOwner>
   );
 };

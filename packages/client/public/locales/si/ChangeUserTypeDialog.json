@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "වර්ගය සංශෝධනය",
   "ChangeUserTypeHeader": "පරිශ්‍රීලක වර්ගය සංශෝධනය",
-  "ChangeUserTypeMessage": "'{{ firstType }}' වර්ගය වන පරිශ්‍රීලකයින් '{{ secondType }}' වර්ගයට ගෙන යනු ඇත.",
-  "ChangeUserTypeMessageMulti": "තෝරාගත් පරිශ්‍රීලකයින් '{{ secondType }}' වර්ගයට ගෙන යනු ඇත.",
+  "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> වර්ගය වන පරිශ්‍රීලකයින් <strong>'{{ secondType }}'</strong> වර්ගයට ගෙන යනු ඇත.",
+  "ChangeUserTypeMessageMulti": "තෝරාගත් පරිශ්‍රීලකයින් <strong>'{{ secondType }}'</strong> වර්ගයට ගෙන යනු ඇත.",
   "ChangeUserTypeMessageWarning": "ඔබට {{productName}} පරිපාලකයින් සඳහා සහ ඔබ වෙනුවෙන් වර්ගය වෙනස් කිරීමට නොහැකිය.",
   "SuccessChangeUserType": "පරිශ්‍රීලකයාගේ වර්ගය වෙනස් වී ඇත"
 }

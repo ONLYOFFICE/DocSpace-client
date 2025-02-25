@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,16 +35,19 @@ import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import AppLoader from "@docspace/shared/components/app-loader";
-import config from "../../../../../package.json";
-import ManualBackup from "./backup/manual-backup";
-import AutoBackup from "./backup/auto-backup";
 import { DeviceType } from "@docspace/shared/enums";
 import { isManagement } from "@docspace/shared/utils/common";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
+
+import config from "../../../../../package.json";
+import ManualBackup from "./backup/manual-backup";
+import AutoBackup from "./backup/auto-backup";
 
 const DataManagementWrapper = (props) => {
   const {
@@ -61,7 +64,7 @@ const DataManagementWrapper = (props) => {
   const location = useLocation();
 
   const [currentTabId, setCurrentTabId] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const { interfaceDirection } = useTheme();
   const directionTooltip = interfaceDirection === "rtl" ? "left" : "right";
@@ -71,34 +74,32 @@ const DataManagementWrapper = (props) => {
       "portal-settings/backup/auto-backup",
     );
     return (
-      <>
-        <HelpButton
-          size={12}
-          offsetRight={5}
-          place={directionTooltip}
-          className={className}
-          iconName={HelpReactSvgUrl}
-          tooltipContent={
-            <Text fontSize="12px">
-              <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
-                {helpInfo}
-              </Trans>
-              <Box as={"span"} marginProp="10px 0 0">
-                <Link
-                  id="link-tooltip"
-                  fontSize="13px"
-                  href={isAutoBackupPage ? automaticBackupUrl : dataBackupUrl}
-                  target="_blank"
-                  isBold
-                  isHovered
-                >
-                  {t("Common:LearnMore")}
-                </Link>
-              </Box>
-            </Text>
-          }
-        />
-      </>
+      <HelpButton
+        size={12}
+        offsetRight={5}
+        place={directionTooltip}
+        className={className}
+        iconName={HelpReactSvgUrl}
+        tooltipContent={
+          <Text fontSize="12px">
+            <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
+              {helpInfo}
+            </Trans>
+            <span style={{ margin: "10px 0 0" }}>
+              <Link
+                id="link-tooltip"
+                fontSize="13px"
+                href={isAutoBackupPage ? automaticBackupUrl : dataBackupUrl}
+                target="_blank"
+                isBold
+                isHovered
+              >
+                {t("Common:LearnMore")}
+              </Link>
+            </span>
+          </Text>
+        }
+      />
     );
   };
 
@@ -124,18 +125,36 @@ const DataManagementWrapper = (props) => {
     const currentTab = data.find((item) => path.includes(item.id));
     if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
 
-    setIsLoading(true);
+    setIsLoaded(true);
   }, [location.pathname]);
+
+  useEffect(() => {
+    const { socketSubscribers } = SocketHelper;
+
+    if (!socketSubscribers.has("backup")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "backup",
+      });
+    }
+
+    return () => {
+      SocketHelper.off(SocketEvents.BackupProgress);
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: "backup",
+      });
+    };
+  }, []);
 
   const onSelect = (e) => {
     const url = isManagement()
-      ? `/backup/${e.id}`
+      ? `/management/settings/backup/${e.id}`
       : `/portal-settings/backup/${e.id}`;
-    navigate(combineUrl(window.ClientConfig?.proxy?.url, config.homepage, url));
-    setCurrentTabId(e.id);
+    navigate(
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
+    );
   };
 
-  if (!isLoading) return <AppLoader />;
+  if (!isLoaded) return null;
 
   return isNotPaidPeriod ? (
     <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />
@@ -150,7 +169,7 @@ const DataManagementWrapper = (props) => {
 };
 
 export const Component = inject(
-  ({ settingsStore, setup, backup, currentTariffStatusStore }) => {
+  ({ settingsStore, setup, currentTariffStatusStore }) => {
     const { initSettings } = setup;
 
     const { isNotPaidPeriod } = currentTariffStatusStore;

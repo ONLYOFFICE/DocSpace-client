@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React, { useContext } from "react";
 import { useTheme } from "styled-components";
-import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
-import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
+import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 import FormRoomEmptyDarkImageUrl from "PUBLIC_DIR/images/emptyview/selector.form.room.empty.screen.dark.svg?url";
 import FormRoomEmptyLightImageUrl from "PUBLIC_DIR/images/emptyview/selector.form.room.empty.screen.light.svg?url";
@@ -50,7 +50,7 @@ import useCreateDropDown from "../hooks/useCreateDropDown";
 import { EmptyScreenContext } from "../contexts/EmptyScreen";
 
 import NewItemDropDown from "./NewItemDropDown";
-import { SearchContext } from "../contexts/Search";
+import { SearchContext, SearchDispatchContext } from "../contexts/Search";
 
 const linkStyles = {
   isHovered: true,
@@ -78,6 +78,7 @@ const EmptyScreen = ({
   const { t } = useTranslation(["Common"]);
 
   const { onClearSearch } = useContext(SearchContext);
+  const setIsSearch = useContext(SearchDispatchContext);
   const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
     useCreateDropDown();
 
@@ -153,7 +154,7 @@ const EmptyScreen = ({
       <Text className="empty-description" noSelect>
         {currentDescription}
       </Text>
-      {createItem && (
+      {createItem ? (
         <div className="buttons">
           <div className="empty-folder_container-links">
             <IconButton
@@ -166,20 +167,22 @@ const EmptyScreen = ({
             <Link {...linkStyles} onClick={onCreateClickAction}>
               {items[0].label}
             </Link>
-            {isOpenDropDown && createItem && createItem.dropDownItems && (
+            {isOpenDropDown && createItem && createItem.dropDownItems ? (
               <NewItemDropDown
                 dropDownItems={createItem.dropDownItems}
                 isEmpty
                 onCloseDropDown={onCloseDropDown}
               />
-            )}
+            ) : null}
           </div>
           <div className="empty-folder_container-links">
             <IconButton
               className="empty-folder_container-icon"
               size={12}
               onClick={
-                withSearch ? () => onClearSearch?.() : createItem.onBackClick
+                withSearch
+                  ? () => onClearSearch?.(() => setIsSearch(false))
+                  : createItem.onBackClick
               }
               iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
               isFill
@@ -187,14 +190,16 @@ const EmptyScreen = ({
             <Link
               {...linkStyles}
               onClick={
-                withSearch ? () => onClearSearch?.() : createItem.onBackClick
+                withSearch
+                  ? () => onClearSearch?.(() => setIsSearch(false))
+                  : createItem.onBackClick
               }
             >
               {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
             </Link>
           </div>
         </div>
-      )}
+      ) : null}
     </StyledEmptyScreen>
   );
 };

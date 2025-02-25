@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -64,6 +64,8 @@ const RoomSelector = ({
   withHeader,
   headerProps,
 
+  withPadding,
+
   setIsDataReady,
 
   withCancelButton,
@@ -71,8 +73,11 @@ const RoomSelector = ({
   onCancel,
 
   roomType,
+  searchArea,
 
   disableThirdParty,
+  emptyScreenHeader,
+  emptyScreenDescription,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -109,7 +114,7 @@ const RoomSelector = ({
   }, [setIsDataReady]);
 
   const onSearchAction = React.useCallback(
-    (value: string, callback?: Function) => {
+    (value: string, callback?: VoidFunction) => {
       isFirstLoad.current = true;
       afterSearch.current = true;
       setSearchValue(() => {
@@ -120,7 +125,7 @@ const RoomSelector = ({
     [],
   );
 
-  const onClearSearchAction = React.useCallback((callback?: Function) => {
+  const onClearSearchAction = React.useCallback((callback?: VoidFunction) => {
     isFirstLoad.current = true;
     afterSearch.current = true;
     setSearchValue(() => {
@@ -139,10 +144,12 @@ const RoomSelector = ({
 
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
-      filter.type = roomType;
+      filter.type = roomType as unknown as string | string[];
       filter.filterValue = searchValue || null;
+      filter.searchArea = searchArea || "";
 
-      if (disableThirdParty) filter.storageFilter = RoomsStorageFilter.internal;
+      if (disableThirdParty)
+        filter.storageFilter = RoomsStorageFilter.internal as unknown as string;
 
       const {
         folders,
@@ -174,7 +181,14 @@ const RoomSelector = ({
 
       setIsNextPageLoading(false);
     },
-    [disableThirdParty, excludeItems, roomType, searchValue, setIsDataReady],
+    [
+      disableThirdParty,
+      excludeItems,
+      roomType,
+      searchValue,
+      searchArea,
+      setIsDataReady,
+    ],
   );
 
   const headerSelectorProps: TSelectorHeader = withHeader
@@ -216,14 +230,17 @@ const RoomSelector = ({
       {...headerSelectorProps}
       {...cancelButtonSelectorProps}
       {...searchSelectorProps}
+      withPadding={withPadding}
       onSelect={onSelect}
       items={items}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
       isMultiSelect={isMultiSelect}
       emptyScreenImage={EmptyScreenCorporateSvgUrl}
-      emptyScreenHeader={t("Common:EmptyRoomsHeader")}
-      emptyScreenDescription={t("Common:EmptyRoomsDescription")}
+      emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyRoomsHeader")}
+      emptyScreenDescription={
+        emptyScreenDescription ?? t("Common:EmptyRoomsDescription")
+      }
       searchEmptyScreenImage={EmptyScreenCorporateSvgUrl}
       searchEmptyScreenHeader={t("Common:NotFoundTitle")}
       searchEmptyScreenDescription={t("Common:SearchEmptyRoomsDescription")}

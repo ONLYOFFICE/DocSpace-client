@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,6 +33,7 @@ export const enum ScopeType {
 export const enum ScopeGroup {
   files = "files",
   accounts = "accounts",
+  contacts = "contacts",
   profiles = "profiles",
   rooms = "rooms",
   openid = "openid",
@@ -67,15 +68,11 @@ export const enum EmployeeStatus {
  * @readonly
  */
 export const enum EmployeeType {
-  User = 1,
+  RoomAdmin = 1,
   Guest = 2,
   Admin = 3,
-  Collaborator = 4,
-  UserString = "user",
-  RoomAdmin = "manager",
-  PortalAdmin = "admin",
-  Owner = "Owner",
-  CollaboratorString = "collaborator",
+  User = 4,
+  Owner = "owner",
 }
 /**
  * Enum for user payments type.
@@ -195,6 +192,7 @@ export const enum RoomSearchArea {
   Any = "Any",
   Active = "Active",
   Archive = "Archive",
+  Templates = "Templates",
 }
 /**
  * Enum for file action.
@@ -247,11 +245,13 @@ export const enum FolderType {
   ReadOnlyRoom = 18,
   CustomRoom = 19,
   Archive = 20,
-
+  PublicRoom = 22,
   Done = 25,
   InProgress = 26,
   SubFolderDone = 27,
   SubFolderInProgress = 28,
+  VirtualDataRoom = 29,
+  RoomTemplates = 30,
 }
 
 export const enum ShareAccessRights {
@@ -366,6 +366,7 @@ export const enum Events {
   CHANGE_QUOTA = "change_quota",
   CREATE_PLUGIN_FILE = "create_plugin_file",
   CREATE_PDF_FORM_FILE = "create_pdf_form_file",
+  SAVE_AS_TEMPLATE = "save_as_template",
   Share_PDF_Form = "share_pdf_form",
 }
 
@@ -441,6 +442,12 @@ export const enum FilterGroups {
   filterGroup = "filter-group",
   groupsFilterMember = "filter-group-member",
   groupsFilterManager = "filter-group-manager",
+
+  filterLoginType = "filter-login-type",
+  filterStatus = "filter-status",
+  filterAccount = "filter-account",
+  filterOther = "filter-other",
+  filterInviter = "filter-inviter",
 }
 
 export const enum FilterKeys {
@@ -467,7 +474,7 @@ export const enum FilterSelectorTypes {
   groups = "groups-selector",
 }
 
-export const enum DeviceType {
+export enum DeviceType {
   mobile = "mobile",
   tablet = "tablet",
   desktop = "desktop",
@@ -480,7 +487,8 @@ export const enum ParseErrorTypes {
 }
 
 export const enum ButtonKeys {
-  enter = "enter",
+  enter = "Enter",
+  numpadEnter = "NumpadEnter",
   esc = "Escape",
   tab = "Tab",
 }
@@ -506,6 +514,7 @@ export enum RoomsType {
   EditingRoom = 2,
   // ReviewRoom: 3, //TODO: Restore when certs will be done
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
+  VirtualDataRoom = 8,
   CustomRoom = 5,
 }
 
@@ -574,9 +583,27 @@ export const enum EditorConfigErrorType {
   TenantQuotaException = "ASC.Core.Tenants.TenantQuotaException",
 }
 
+/**
+ * Enum for watermarks.
+ * @readonly
+ */
+export const enum WatermarkAdditions {
+  UserName = 1,
+  UserEmail = 2,
+  UserIpAdress = 4,
+  CurrentDate = 8,
+  RoomName = 16,
+}
+
 export const enum RoomsStorageFilter {
   internal = 1,
   thirdparty = 2,
+}
+
+export const enum VDRIndexingAction {
+  HigherIndex = "HigherIndex",
+  LowerIndex = "LowerIndex",
+  MoveIndex = "MoveIndex",
 }
 
 export const enum LDAPOperation {
@@ -604,6 +631,14 @@ export const enum LDAPCertificateProblem {
   CertUnrecognizedError = -2146762477,
 }
 
+export const enum ExportRoomIndexTaskStatus {
+  Created = 0,
+  Running = 1,
+  Completed = 2,
+  Canceled = 3,
+  Failed = 4,
+}
+
 export enum FileExtensions {
   PDF = "pdf",
   DOC = "doc",
@@ -620,4 +655,12 @@ export enum ValidationStatus {
   Password = 3,
   InvalidPassword = 4,
   ExternalAccessDenied = 5,
+}
+
+export enum FormFillingTipsState {
+  Starting = 1,
+  Sharing = 2,
+  Submitting = 3,
+  Complete = 4,
+  Uploading = 5,
 }

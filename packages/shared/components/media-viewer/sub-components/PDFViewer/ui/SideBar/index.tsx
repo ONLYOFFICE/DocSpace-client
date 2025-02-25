@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,15 +27,13 @@
 import React, { useState } from "react";
 import ViewRowsIcon from "PUBLIC_DIR/images/view-rows.react.svg";
 import ViewTilesIcon from "PUBLIC_DIR/images/view-tiles.react.svg";
+import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.react.svg";
+import classNames from "classnames";
 import { Bookmarks } from "../Bookmarks";
-
+import styles from "../../PDFViewer.module.scss";
 import SidebarProps from "./Sidebar.props";
-import {
-  HideSidebarIcon,
-  SidebarContainer,
-  SidebarHeader,
-  Thumbnails,
-} from "./Sidebar.styled";
+
+import { useInterfaceDirection } from "../../../../../../hooks/useInterfaceDirection";
 
 export const Sidebar = ({
   bookmarks,
@@ -44,7 +42,7 @@ export const Sidebar = ({
   navigate,
 }: SidebarProps) => {
   const [toggle, setToggle] = useState<boolean>(false);
-
+  const { isRTL } = useInterfaceDirection();
   const handleToggle = () => {
     setToggle((prev) => !prev);
   };
@@ -52,16 +50,40 @@ export const Sidebar = ({
   const closeSidebar = () => setIsPDFSidebarOpen(false);
 
   return (
-    <SidebarContainer isPanelOpen={isPanelOpen}>
-      <SidebarHeader>
-        {bookmarks.length > 0 &&
-          React.createElement(toggle ? ViewTilesIcon : ViewRowsIcon, {
-            onClick: handleToggle,
-          })}
-        <HideSidebarIcon onClick={closeSidebar} />
-      </SidebarHeader>
-      {toggle && <Bookmarks bookmarks={bookmarks} navigate={navigate} />}
-      <Thumbnails id="viewer-thumbnail" visible={!toggle} />
-    </SidebarContainer>
+    <aside
+      className={classNames(styles.sidebarContainer, {
+        [styles.isPanelOpen]: isPanelOpen,
+      })}
+      data-testid="pdf-sidebar"
+      aria-label="PDF sidebar"
+    >
+      <div className={styles.sidebarHeader} data-testid="sidebar-header">
+        {bookmarks.length > 0
+          ? React.createElement(toggle ? ViewTilesIcon : ViewRowsIcon, {
+              onClick: handleToggle,
+            })
+          : null}
+        <ArticleShowMenuReactSvgUrl
+          className={styles.hideSidebarIcon}
+          onClick={closeSidebar}
+          data-interface-dir={isRTL ? "rtl" : "ltr"}
+          data-testid="close-sidebar-button"
+          aria-label="Close sidebar"
+        />
+      </div>
+      {toggle ? (
+        <Bookmarks
+          bookmarks={bookmarks}
+          navigate={navigate}
+          data-testid="bookmarks-component"
+        />
+      ) : null}
+      <section
+        id="viewer-thumbnail"
+        className={classNames(styles.thumbnails, { [styles.visible]: !toggle })}
+        data-testid="viewer-thumbnail"
+        aria-label="PDF thumbnails"
+      />
+    </aside>
   );
 };

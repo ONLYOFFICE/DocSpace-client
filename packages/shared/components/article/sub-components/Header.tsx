@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,22 +32,22 @@ import { getLogoUrl } from "../../../utils";
 import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { ArticleHeaderLoader } from "../../../skeletons/article";
 
-import {
-  StyledArticleHeader,
-  StyledHeading,
-  StyledIconBox,
-} from "../Article.styled";
+import { AsideHeader } from "../../aside-header";
+
+import styles from "../Article.module.scss";
+
 import { ArticleHeaderProps } from "../Article.types";
 
 const ArticleHeader = ({
   showText,
   children,
-  onClick,
   onLogoClickAction,
   isBurgerLoading,
 
   withCustomArticleHeader,
   currentDeviceType,
+  onIconClick,
+
   ...rest
 }: ArticleHeaderProps) => {
   const navigate = useNavigate();
@@ -61,7 +61,15 @@ const ArticleHeader = ({
   const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
-  if (currentDeviceType === DeviceType.mobile) return null;
+  if (currentDeviceType === DeviceType.mobile)
+    return (
+      <AsideHeader
+        headerHeight="49px"
+        isCloseable
+        withoutBorder
+        onCloseClick={onIconClick}
+      />
+    );
 
   const isLoadingComponent =
     currentDeviceType === DeviceType.tablet ? (
@@ -76,17 +84,23 @@ const ArticleHeader = ({
 
   const mainComponent = (
     <>
-      {currentDeviceType === DeviceType.tablet && (
-        <StyledIconBox showText={showText}>
+      {currentDeviceType === DeviceType.tablet ? (
+        <div
+          className={styles.iconBox}
+          data-show-text={showText ? "true" : "false"}
+        >
           <img
             src={burgerLogo}
             className="burger-logo"
             alt="burger-logo"
             onClick={onLogoClick}
           />
-        </StyledIconBox>
-      )}
-      <StyledHeading showText={showText}>
+        </div>
+      ) : null}
+      <div
+        className={styles.heading}
+        data-show-text={showText ? "true" : "false"}
+      >
         {currentDeviceType === DeviceType.tablet ? (
           <img
             className="logo-icon_svg"
@@ -99,18 +113,22 @@ const ArticleHeader = ({
             <img className="logo-icon_svg" alt="burger-logo" src={logo} />
           </Link>
         )}
-      </StyledHeading>
+      </div>
     </>
   );
 
   return (
-    <StyledArticleHeader showText={showText} {...rest}>
+    <div
+      className={styles.articleHeader}
+      data-show-text={showText ? "true" : "false"}
+      {...rest}
+    >
       {withCustomArticleHeader && children
         ? children
         : isBurgerLoading
           ? isLoadingComponent
           : mainComponent}
-    </StyledArticleHeader>
+    </div>
   );
 };
 

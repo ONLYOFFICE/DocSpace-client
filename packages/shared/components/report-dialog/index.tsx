@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,15 +27,15 @@
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import FileReactSvgUrl from "PUBLIC_DIR/images/icons/24/file.svg?url";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import FileReactSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 
 import {
   getCrashReport,
   downloadJson,
   getCurrentDate,
-} from "@docspace/shared/utils/crashReport";
-import { DeviceType } from "@docspace/shared/enums";
+} from "../../utils/crashReport";
+import { DeviceType } from "../../enums";
 
 import { Text } from "../text";
 import { toastr } from "../toast";
@@ -44,7 +44,7 @@ import { Textarea } from "../textarea";
 import { IconButton } from "../icon-button";
 import { ModalDialogType, ModalDialog } from "../modal-dialog";
 
-import { ModalDialogContainer } from "./ReportDialog.styled";
+import styles from "./ReportDialog.module.scss";
 import type { ReportDialogProps } from "./ReportDialog.types";
 import { globalColors } from "../../themes";
 
@@ -100,41 +100,59 @@ const ReportDialog = (props: ReportDialogProps) => {
   };
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       isLoading={!ready}
       visible={visible}
       onClose={onCloseAction}
       displayType={ModalDialogType.modal}
+      isLarge
+      aria-labelledby="report-dialog-title"
+      data-id="report-dialog"
     >
       <ModalDialog.Header>{t("ErrorReport")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text className="report-description" noSelect>
-          {t("ErrorReportDescription")}
-        </Text>
-        <Textarea
-          placeholder={t("RecoverDescribeYourProblemPlaceholder")}
-          value={description}
-          onChange={onChangeTextareaValue}
-          autoFocus
-          areaSelect
-          heightTextArea="72px"
-          fontSize={13}
-        />
-        <div className="report-wrapper">
-          <img src={FileReactSvgUrl} className="file-icon" alt="" />
-          <Text as="div" fontWeight={600} noSelect className="report-filename">
-            {fileTitle}
-            <Text fontWeight={600} noSelect color={globalColors.gray}>
-              .json
-            </Text>
+        <div className={styles.bodyContent}>
+          <Text className={styles.reportDescription} noSelect>
+            {t("ErrorReportDescription")}
           </Text>
-          <IconButton
-            isFill
-            size={16}
-            className="icon-button"
-            onClick={onClickDownload}
-            iconName={DownloadReactSvgUrl}
+          <Textarea
+            placeholder={t("RecoverDescribeYourProblemPlaceholder")}
+            value={description}
+            onChange={onChangeTextareaValue}
+            autoFocus
+            areaSelect
+            heightTextArea="72px"
+            fontSize={13}
+            aria-label="Report description"
+            data-id="report-description"
           />
+          <div className={styles.reportWrapper} data-id="report-file">
+            <img
+              src={FileReactSvgUrl}
+              className={styles.fileIcon}
+              alt="report-file"
+            />
+            <Text
+              as="div"
+              fontWeight={600}
+              noSelect
+              className={styles.reportFilename}
+            >
+              {fileTitle}
+              <Text fontWeight={600} noSelect color={globalColors.gray}>
+                .json
+              </Text>
+            </Text>
+            <IconButton
+              isFill
+              size={16}
+              className={styles.iconButton}
+              onClick={onClickDownload}
+              iconName={DownloadReactSvgUrl}
+              aria-label="download-report"
+              data-id="download-report"
+            />
+          </div>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -145,6 +163,7 @@ const ReportDialog = (props: ReportDialogProps) => {
           label={t("SendButton")}
           size={ButtonSize.normal}
           scale={currentDeviceType === DeviceType.mobile}
+          data-id="send-report"
         />
         <Button
           key="CancelButton"
@@ -152,21 +171,11 @@ const ReportDialog = (props: ReportDialogProps) => {
           size={ButtonSize.normal}
           label={t("CancelButton")}
           scale={currentDeviceType === DeviceType.mobile}
+          data-id="cancel-report"
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 
 export default ReportDialog;
-
-// export default inject(({ authStore, settingsStore, userStore }) => {
-//   const { user } = userStore;
-//   const { firebaseHelper } = settingsStore;
-
-//   return {
-//     user,
-//     version: authStore.version,
-//     FirebaseHelper: firebaseHelper,
-//   };
-// })(observer(ReportDialog));

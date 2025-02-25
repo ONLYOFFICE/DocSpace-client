@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,17 +32,18 @@ import React, {
   useRef,
 } from "react";
 
-import { isMobile as isMobileUtils, isTablet } from "@docspace/shared/utils";
-import { getFileExtension } from "@docspace/shared/utils/common";
-import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
-import { decodeTiff } from "@docspace/shared/utils/decodeTiff";
-import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+import { isMobile as isMobileUtils, isTablet } from "../../utils";
+import { getFileExtension } from "../../utils/common";
+import { checkDialogsOpen } from "../../utils/checkDialogsOpen";
+import { decodeTiff } from "../../utils/decodeTiff";
+import { isNullOrUndefined } from "../../utils/typeGuards";
 
 import { ViewerWrapper } from "./sub-components/ViewerWrapper";
 
 import { mapSupplied, mediaTypes } from "./MediaViewer.constants";
 import type { MediaViewerProps } from "./MediaViewer.types";
 import { KeyboardEventKeys } from "./MediaViewer.enums";
+import { isHeic, isTiff } from "./MediaViewer.utils";
 
 import {
   getDesktopMediaContextModel,
@@ -64,6 +65,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     pluginContextMenuItems,
     currentDeviceType,
     isPublicFile = false,
+    autoPlay = false,
 
     t,
     getIcon,
@@ -81,6 +83,8 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   } = props;
 
   const TiffAbortSignalRef = useRef<AbortController>();
+  const HeicAbortSignalRef = useRef<AbortController>();
+
   const isWillUnmountRef = useRef(false);
   const lastRemovedFileIdRefRef = useRef<number>();
 
@@ -98,7 +102,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
   const ext = useMemo(() => getFileExtension(title), [title]);
   const audioIcon = useMemo(() => getIcon(96, ext), [ext, getIcon]);
-  const headerIcon = useMemo(() => getIcon(24, ext), [ext, getIcon]);
+  const headerIcon = useMemo(() => getIcon(32, ext), [ext, getIcon]);
 
   let isVideo = false;
   let isAudio = false;
@@ -347,6 +351,29 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       });
   }, []);
 
+  const fetchAndSetHeicDataURL = useCallback(async (src: string) => {
+    HeicAbortSignalRef.current?.abort();
+    HeicAbortSignalRef.current = new AbortController();
+
+    try {
+      const { default: heic2any } = await import("heic2any");
+      const response = await fetch(src, {
+        signal: HeicAbortSignalRef.current.signal,
+      });
+      const blob = await response.blob();
+      const conversionResult = await heic2any({ blob });
+
+      if (conversionResult && !Array.isArray(conversionResult)) {
+        setFileUrl(URL.createObjectURL(conversionResult));
+      }
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        return;
+      }
+      console.error(error);
+    }
+  }, []);
+
   const onSetSelectionFile = useCallback(() => {
     setBufferSelection?.(targetFile);
   }, [setBufferSelection, targetFile]);
@@ -358,13 +385,13 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     };
   });
 
-  useEffect(() => {
-    const fileId = playlist[playlistPos]?.fileId;
+  const { src, title: currentTitle, fileId } = playlist[playlistPos];
 
+  useEffect(() => {
     if (!isNullOrUndefined(fileId) && currentFileId !== fileId) {
       onChangeUrl?.(fileId);
     }
-  }, [playlistPos, onChangeUrl, playlist, currentFileId]);
+  }, [fileId, onChangeUrl, currentFileId]);
 
   useEffect(() => {
     return () => {
@@ -373,17 +400,21 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
   }, []);
 
   useEffect(() => {
-    const { src, title: currentTitle, fileId } = playlist[playlistPos];
     const extension = getFileExtension(currentTitle);
 
     if (!src) return onEmptyPlaylistError?.();
 
-    if (extension !== ".tif" && extension !== ".tiff") {
+    if (!isTiff(extension) && !isHeic(extension)) {
       TiffAbortSignalRef.current?.abort();
+      HeicAbortSignalRef.current?.abort();
       setFileUrl(src);
     }
 
-    if (extension === ".tiff" || extension === ".tif") {
+    if (isHeic(extension)) {
+      setFileUrl(undefined);
+      fetchAndSetHeicDataURL(src);
+    }
+    if (isTiff(extension)) {
       setFileUrl(undefined);
       fetchAndSetTiffDataURL(src);
     }
@@ -397,12 +428,14 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
 
     setTitle(currentTitle);
   }, [
+    src,
     files,
-    playlist,
-    playlistPos,
+    fileId,
+    currentTitle,
     setBufferSelection,
     onEmptyPlaylistError,
     fetchAndSetTiffDataURL,
+    fetchAndSetHeicDataURL,
   ]);
 
   useEffect(() => {
@@ -453,6 +486,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       playlistPos={playlistPos}
       isPublicFile={isPublicFile}
       isPreviewFile={isPreviewFile}
+      autoPlay={autoPlay}
       currentDeviceType={currentDeviceType}
       onClose={onClose}
       onPrevClick={prevMedia}

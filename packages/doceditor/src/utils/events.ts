@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,10 @@
 
 import { TFile } from "@docspace/shared/api/files/types";
 import { frameCallCommand } from "@docspace/shared/utils/common";
+import { updateFile } from "@docspace/shared/api/files";
+import { TTranslation } from "@docspace/shared/types";
 
 import { convertDocumentUrl } from ".";
-import { updateFile } from "@docspace/shared/api/files";
 
 export type TInfoEvent = { data: { mode: string } };
 
@@ -73,6 +74,7 @@ export const onSDKRequestHistoryClose = () => {
 };
 
 export const onSDKRequestEditRights = async (
+  t: TTranslation,
   fileInfo?: TFile,
   documentType?: string,
 ) => {
@@ -82,6 +84,7 @@ export const onSDKRequestEditRights = async (
   const isPDF = documentType === "pdf";
 
   let newURL = new URL(url);
+  let title = "";
 
   if (
     !isPDF &&
@@ -90,7 +93,9 @@ export const onSDKRequestEditRights = async (
   ) {
     try {
       const response = await convertDocumentUrl(fileInfo.id);
+
       if (response && response.webUrl) {
+        title = response.title;
         newURL = new URL(response.webUrl);
       } else {
         throw new Error("Invalid response data");
@@ -105,7 +110,13 @@ export const onSDKRequestEditRights = async (
     newURL.searchParams.append("action", "edit");
   }
 
-  history.pushState({}, "", newURL.toString());
+  const messageAfterConversion = t("Editor:DocumentConverted", { title });
+  const stringURL = newURL.toString();
+  const concatURL = title
+    ? stringURL.concat(`#message/${messageAfterConversion}`)
+    : stringURL;
+
+  history.pushState({}, "", concatURL);
   document.location.reload();
 };
 

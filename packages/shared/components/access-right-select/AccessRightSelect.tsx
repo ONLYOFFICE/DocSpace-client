@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,6 +29,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { DropDownItem } from "../drop-down-item";
 import { Badge } from "../badge";
 import { TOption } from "../combobox";
+import { toastr } from "../toast";
 
 import {
   StyledItemTitle,
@@ -47,6 +48,9 @@ export const AccessRightSelectPure = ({
   selectedOption,
   className,
   type,
+  isSelectionDisabled,
+  selectionErrorText,
+  availableAccess,
   ...props
 }: AccessRightSelectProps) => {
   const [currentItem, setCurrentItem] = useState(selectedOption);
@@ -58,11 +62,31 @@ export const AccessRightSelectPure = ({
   const onSelectCurrentItem = useCallback(
     (option: TOption) => {
       if (option) {
+        if (isSelectionDisabled) {
+          let isError =
+            option.access && option.access !== selectedOption.access;
+
+          if (availableAccess && option.access) {
+            isError = availableAccess.every((item) => item !== option.access);
+          }
+
+          if (isError) {
+            toastr.error(selectionErrorText);
+            return;
+          }
+        }
+
         setCurrentItem(option);
         onSelect?.(option);
       }
     },
-    [onSelect],
+    [
+      availableAccess,
+      isSelectionDisabled,
+      onSelect,
+      selectedOption.access,
+      selectionErrorText,
+    ],
   );
 
   const formatToAccessRightItem = (data: TOption[]) => {
@@ -77,16 +101,16 @@ export const AccessRightSelectPure = ({
           onClick={() => onSelectCurrentItem(item)}
         >
           <StyledItem>
-            {item.icon && (
+            {item.icon ? (
               <StyledItemIcon
                 src={item.icon}
                 isShortenIcon={type === "onlyIcon"}
               />
-            )}
+            ) : null}
             <StyledItemContent>
               <StyledItemTitle>
                 {item.label}
-                {item.quota && (
+                {item.quota ? (
                   <Badge
                     label={item.quota}
                     backgroundColor={item.color}
@@ -94,7 +118,7 @@ export const AccessRightSelectPure = ({
                     isPaidBadge
                     noHover
                   />
-                )}
+                ) : null}
               </StyledItemTitle>
               <StyledItemDescription>{item.description}</StyledItemDescription>
             </StyledItemContent>
@@ -124,6 +148,7 @@ export const AccessRightSelectPure = ({
           default: true,
           key: currentItem?.key,
           label: type === "onlyIcon" ? "" : currentItem?.label,
+          description: type === "onlyIcon" ? "" : currentItem?.description,
         } as TOption
       }
       forceCloseClickOutside

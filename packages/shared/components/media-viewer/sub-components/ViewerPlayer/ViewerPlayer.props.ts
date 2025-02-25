@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,6 +39,7 @@ interface ViewerPlayerProps {
   isFullScreen: boolean;
   panelVisible: boolean;
   isPreviewFile?: boolean;
+  autoPlay: boolean;
   isOpenContextMenu: boolean;
   isThirdParty?: boolean;
   mobileDetails: JSX.Element;
@@ -60,7 +61,7 @@ interface ViewerPlayerProps {
     isOpen: boolean,
     right?: string,
     bottom?: string,
-  ) => JSX.Element;
+  ) => JSX.Element | null;
 }
 
 export default ViewerPlayerProps;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,13 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
+
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 
 import { IconButton } from "../../icon-button";
-import { ColorTheme, ThemeId } from "../../color-theme";
 
 import { FilterButtonProps } from "../Filter.types";
-import { StyledButton } from "../Filter.styled";
+
+import styles from "../Filter.module.scss";
 
 import FilterBlock from "./FilterBlock";
 
@@ -42,10 +44,11 @@ const FilterButton = ({
   filterHeader,
   selectorLabel,
   isRooms,
-  isAccounts,
-  isPeopleAccounts,
-  isGroupsAccounts,
-  isInsideGroup,
+  isContactsPage,
+  isContactsPeoplePage,
+  isContactsGroupsPage,
+  isContactsInsideGroupPage,
+  isContactsGuestsPage,
   id,
   title,
   userId,
@@ -59,19 +62,22 @@ const FilterButton = ({
 
   return (
     <>
-      <StyledButton
+      <div
         id={id}
-        isOpen={showFilterBlock}
         onClick={changeShowFilterBlock}
         title={title}
+        className={classNames({
+          [styles.button]: true,
+          [styles.isOpen]: showFilterBlock,
+        })}
       >
         <IconButton iconName={FilterReactSvrUrl} size={16} />
-        {selectedFilterValue && selectedFilterValue.length > 0 && (
-          <ColorTheme themeId={ThemeId.IndicatorFilterButton} />
-        )}
-      </StyledButton>
+        {selectedFilterValue && selectedFilterValue.size > 0 ? (
+          <div className={styles.indicator} />
+        ) : null}
+      </div>
 
-      {showFilterBlock && (
+      {showFilterBlock ? (
         <FilterBlock
           filterHeader={filterHeader}
           selectedFilterValue={selectedFilterValue}
@@ -80,14 +86,15 @@ const FilterButton = ({
           onFilter={onFilter}
           selectorLabel={selectorLabel}
           isRooms={isRooms}
-          isAccounts={isAccounts}
-          isPeopleAccounts={isPeopleAccounts}
-          isGroupsAccounts={isGroupsAccounts}
-          isInsideGroup={isInsideGroup}
+          isContactsPage={isContactsPage}
+          isContactsPeoplePage={isContactsPeoplePage}
+          isContactsGroupsPage={isContactsGroupsPage}
+          isContactsInsideGroupPage={isContactsInsideGroupPage}
+          isContactsGuestsPage={isContactsGuestsPage}
           userId={userId}
           disableThirdParty={disableThirdParty}
         />
-      )}
+      ) : null}
     </>
   );
 };

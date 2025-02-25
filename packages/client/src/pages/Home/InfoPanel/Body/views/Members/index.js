@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,35 +25,44 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useContext, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { toastr } from "@docspace/shared/components/toast";
 
-import { RoomsType } from "@docspace/shared/enums";
-import { LINKS_LIMIT_COUNT } from "@docspace/shared/constants";
-import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import MembersHelper from "../../helpers/MembersHelper";
-import MembersList from "./sub-components/MembersList";
-import User from "./User";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { isDesktop } from "@docspace/shared/utils";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
+import { copyShareLink } from "@docspace/shared/utils/copy";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
+import {
+  GENERAL_LINK_HEADER_KEY,
+  LINKS_LIMIT_COUNT,
+} from "@docspace/shared/constants";
+import FilesFilter from "@docspace/shared/api/files/filter";
+
+import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
+import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
+
+import MembersHelper from "../../helpers/MembersHelper";
+
+import MembersList from "./sub-components/MembersList";
+import EmptyContainer from "./sub-components/EmptyContainer";
+import LinkRow from "./sub-components/LinkRow";
 import {
   LinksBlock,
   StyledLinkRow,
   StyledPublicRoomBarContainer,
 } from "./sub-components/Styled";
-import EmptyContainer from "./sub-components/EmptyContainer";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import { isDesktop } from "@docspace/shared/utils";
-import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
-import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
-import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
+import User from "./User";
 
-import { copyShareLink } from "@docspace/shared/utils/copy";
-import LinkRow from "./sub-components/LinkRow";
+const TooltipContent = ({ content }) => <Text fontSize="12px">{content}</Text>;
 
 const Members = ({
   t,
@@ -79,11 +88,17 @@ const Members = ({
   membersIsLoading,
   searchValue,
   isMembersPanelUpdating,
+  setRoomShared,
+  currentId,
+  setPublicRoomKey,
+  setAccessSettingsIsVisible,
+  templateAvailable,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
 
   const scrollContext = useContext(ScrollbarContext);
+  const [, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     updateInfoPanelMembers(t);
@@ -99,27 +114,35 @@ const Members = ({
   };
 
   if (membersIsLoading) return <InfoPanelViewLoader view="members" />;
-  else if (!infoPanelMembers) return <></>;
+  if (!infoPanelMembers) return null;
 
   const [currentMember] = infoPanelMembers.administrators.filter(
     (member) => member.id === selfId,
   );
 
-  const { administrators, users, expected, groups } = infoPanelMembers;
+  const { administrators, users, expected, groups, guests } = infoPanelMembers;
 
-  const membersList = [...administrators, ...groups, ...users, ...expected];
+  const membersList = [
+    ...administrators,
+    ...groups,
+    ...users,
+    ...guests,
+    ...expected,
+  ];
 
   const adminsTitleCount = administrators.length ? 1 : 0;
   const usersTitleCount = users.length ? 1 : 0;
   const expectedTitleCount = expected.length ? 1 : 0;
   const groupsTitleCount = groups.length ? 1 : 0;
+  const guestsTitleCount = guests.length ? 1 : 0;
 
   const headersCount = withoutTitlesAndLinks
     ? 0
     : adminsTitleCount +
       usersTitleCount +
       expectedTitleCount +
-      groupsTitleCount;
+      groupsTitleCount +
+      guestsTitleCount;
 
   const onAddNewLink = async () => {
     if (isPublicRoom || primaryLink) {
@@ -130,21 +153,44 @@ const Members = ({
         setExternalLink(link);
         copyShareLink(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+
+        const filterObj = FilesFilter.getFilter(window.location);
+
+        if (isPublicRoomType && !filterObj.key) {
+          setRoomShared(currentId, true);
+          setPublicRoomKey(link.sharedTo.requestToken);
+          setSearchParams((prev) => {
+            prev.set("key", link.sharedTo.requestToken);
+            return prev;
+          });
+        }
       });
     }
   };
 
+  const onOpenAccessSettings = () => {
+    setAccessSettingsIsVisible(true);
+  };
+
   const publicRoomItems = [];
 
-  if (isPublicRoomType && withPublicRoomBlock && !withoutTitlesAndLinks) {
+  const isTemplate =
+    infoPanelSelection?.rootFolderType === FolderType.RoomTemplates;
+
+  if (
+    isPublicRoomType &&
+    withPublicRoomBlock &&
+    !withoutTitlesAndLinks &&
+    !isTemplate
+  ) {
     if (!isArchiveFolder || primaryLink) {
       publicRoomItems.push(
-        <LinksBlock key="general-link_header">
-          <Text fontSize="14px" fontWeight={600}>
+        <LinksBlock key={GENERAL_LINK_HEADER_KEY}>
+          <Text fontSize="14px" fontWeight={600} lineHeight="16px">
             {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
           </Text>
 
-          {!isArchiveFolder && !isFormRoom && (
+          {!isArchiveFolder && !isFormRoom ? (
             <div
               data-tooltip-id="emailTooltip"
               data-tooltip-content={t(
@@ -160,18 +206,16 @@ const Members = ({
                 title={t("Files:AddNewLink")}
               />
 
-              {additionalLinks.length >= LINKS_LIMIT_COUNT && (
+              {additionalLinks.length >= LINKS_LIMIT_COUNT ? (
                 <Tooltip
                   float={isDesktop()}
                   id="emailTooltip"
-                  getContent={({ content }) => (
-                    <Text fontSize="12px">{content}</Text>
-                  )}
+                  getContent={TooltipContent}
                   place="bottom"
                 />
-              )}
+              ) : null}
             </div>
-          )}
+          ) : null}
         </LinksBlock>,
       );
     }
@@ -189,7 +233,7 @@ const Members = ({
     }
 
     if (additionalLinks.length && !withoutTitlesAndLinks) {
-      additionalLinks.map((link) => {
+      additionalLinks.forEach((link) => {
         publicRoomItems.push(
           <LinkRow
             link={link}
@@ -229,7 +273,35 @@ const Members = ({
     ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
     withPublicRoomBlock &&
     !withoutTitlesAndLinks;
+
   const publicRoomItemsLength = publicRoomItems.length;
+
+  if (isTemplate && templateAvailable) {
+    return (
+      <PublicRoomBar
+        headerText={t("Files:TemplateAvailable")}
+        bodyText={
+          <>
+            <div className="template-access_description">
+              {t("Files:TemplateAvailableDescription", {
+                productName: t("Common:ProductName"),
+              })}
+            </div>
+            <Link
+              className="template-access_link"
+              isHovered
+              type="action"
+              fontWeight={600}
+              fontSize="13px"
+              onClick={onOpenAccessSettings}
+            >
+              {t("Files:AccessSettings")}
+            </Link>
+          </>
+        }
+      />
+    );
+  }
 
   if (!membersList.length) {
     return <EmptyContainer />;
@@ -237,7 +309,7 @@ const Members = ({
 
   return (
     <>
-      {showPublicRoomBar && (
+      {showPublicRoomBar ? (
         <StyledPublicRoomBarContainer>
           <PublicRoomBar
             headerText={
@@ -252,13 +324,14 @@ const Members = ({
             }
           />
         </StyledPublicRoomBarContainer>
-      )}
+      ) : null}
 
       <MembersList
         loadNextPage={loadNextPage}
         hasNextPage={
-          !isMembersPanelUpdating &&
-          membersList.length - headersCount < membersFilter.total
+          !isMembersPanelUpdating
+            ? membersList.length - headersCount < membersFilter.total
+            : null
         }
         itemCount={membersFilter.total + headersCount + publicRoomItemsLength}
         showPublicRoomBar={showPublicRoomBar}
@@ -277,8 +350,9 @@ const Members = ({
               membersHelper={membersHelper}
               currentMember={currentMember}
               hasNextPage={
-                !isMembersPanelUpdating &&
-                membersList.length - headersCount < membersFilter.total
+                !isMembersPanelUpdating
+                  ? membersList.length - headersCount < membersFilter.total
+                  : null
               }
             />
           );
@@ -308,28 +382,34 @@ export default inject(
       withPublicRoomBlock,
       searchValue,
       isMembersPanelUpdating,
+      templateAvailableToEveryone,
     } = infoPanelStore;
-    const { membersFilter } = filesStore;
+    const { membersFilter, setRoomShared } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
 
-    const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
+    const { primaryLink, additionalLinks, setExternalLink, setPublicRoomKey } =
+      publicRoomStore;
+
     const { isArchiveFolderRoot } = treeFoldersStore;
-    const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
+    const {
+      setLinkParams,
+      setEditLinkPanelIsVisible,
+      setTemplateAccessSettingsVisible: setAccessSettingsIsVisible,
+    } = dialogsStore;
+
+    const { id } = selectedFolderStore;
 
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
 
-    const isFormRoom = roomType === RoomsType.FormRoom;
-
-    const isPublicRoomType =
-      roomType === RoomsType.PublicRoom ||
-      roomType === RoomsType.CustomRoom ||
-      isFormRoom;
-
-    const isPublicRoom = roomType === RoomsType.PublicRoom;
-
     const infoSelection =
       infoPanelSelection?.length > 1 ? null : infoPanelSelection;
+
+    const isFormRoom = roomType === RoomsType.FormRoom;
+    const isPublicRoom = roomType === RoomsType.PublicRoom;
+    const isCustomRoom = roomType === RoomsType.CustomRoom;
+
+    const isPublicRoomType = isPublicRoom || isCustomRoom || isFormRoom;
 
     return {
       infoPanelSelection: infoSelection,
@@ -345,7 +425,7 @@ export default inject(
       primaryLink,
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
-      additionalLinks: additionalLinks,
+      additionalLinks,
       setLinkParams,
       setEditLinkPanelIsVisible,
       getPrimaryLink: filesStore.getPrimaryLink,
@@ -355,6 +435,11 @@ export default inject(
       membersIsLoading,
       searchValue,
       isMembersPanelUpdating,
+      setRoomShared,
+      currentId: id,
+      setPublicRoomKey,
+      setAccessSettingsIsVisible,
+      templateAvailable: templateAvailableToEveryone,
     };
   },
 )(

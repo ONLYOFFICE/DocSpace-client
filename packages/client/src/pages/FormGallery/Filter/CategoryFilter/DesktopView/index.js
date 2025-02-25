@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,12 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import * as Styled from "./index.styled";
-
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import * as Styled from "./index.styled";
 import SubList from "./SubList";
 
 const CategoryFilterDesktop = ({
@@ -44,8 +43,13 @@ const CategoryFilterDesktop = ({
   ...rest
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [hoveredSub, setHoveredSub] = useState(null);
+
   const onOpenDropdown = () => setIsOpen(true);
-  const onCloseDropdown = () => setIsOpen(false);
+  const onCloseDropdown = () => {
+    setIsOpen(false);
+    setHoveredSub(null);
+  };
 
   const onBackdropClick = (e) => {
     if (
@@ -55,8 +59,6 @@ const CategoryFilterDesktop = ({
       onCloseDropdown();
   };
 
-  const [hoveredSub, setHoveredSub] = useState(null);
-
   const onViewAllTemplates = () => filterOformsByCategory("", "");
 
   return (
@@ -64,24 +66,25 @@ const CategoryFilterDesktop = ({
       <Styled.CategoryFilter
         id="comboBoxLanguage"
         tabIndex={1}
-        className={"combobox"}
+        className="combobox"
         opened={isOpen}
         onToggle={onOpenDropdown}
         onBackdropClick={onBackdropClick}
         onSelect={onCloseDropdown}
         isDisabled={false}
-        showDisabledItems={true}
+        showDisabledItems
         options={[]}
-        directionX={"right"}
-        directionY={"both"}
-        scaled={true}
-        size={"content"}
+        directionX="right"
+        directionY="both"
+        scaled
+        size="content"
         withoutBackground
         withBackdrop
         disableIconClick={false}
         disableItemClick={false}
         isDefaultMode={false}
-        fixedDirection={true}
+        fixedDirection
+        disableItemClickFirstLevel
         advancedOptionsCount={5}
         selectedOption={{
           label:
@@ -90,8 +93,8 @@ const CategoryFilterDesktop = ({
         advancedOptions={
           <>
             <Styled.CategoryFilterItem
-              id={"ViewAllTemplates"}
-              key={"ViewAllTemplates"}
+              id="ViewAllTemplates"
+              key="ViewAllTemplates"
               title={t("FormGallery:ViewAllTemplates")}
               className="dropdown-item"
               label={t("FormGallery:ViewAllTemplates")}
@@ -104,10 +107,9 @@ const CategoryFilterDesktop = ({
                 id={item.key}
                 key={item.key}
                 title={item.label}
-                className={`item-by-${item.key}`}
+                className={`item-by-${item.key} item-by-first-level`}
                 label={item.label}
                 onMouseEnter={() => setHoveredSub(item.key)}
-                onMouseLeave={() => setHoveredSub(null)}
                 isSubMenu
               />
             ))}

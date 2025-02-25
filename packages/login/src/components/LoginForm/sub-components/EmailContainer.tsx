@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -52,6 +52,7 @@ interface IEmailContainer {
 
   onChangeLogin: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlurEmail: () => void;
+  handleAnimationStart: (e: React.AnimationEvent<HTMLInputElement>) => void;
   onValidateEmail: (res: TValidate) => undefined;
   isLdapLogin: boolean;
   ldapDomain?: string;
@@ -69,6 +70,7 @@ const EmailContainer = ({
   onValidateEmail,
   isLdapLogin,
   ldapDomain,
+  handleAnimationStart,
 }: IEmailContainer) => {
   const { t } = useTranslation(["Login", "Common"]);
 
@@ -98,8 +100,8 @@ const EmailContainer = ({
             defaults={DEFAULT_EMAIL_TEXT}
             values={{
               email: emailFromInvitation,
+              productName: t("Common:ProductName"),
             }}
-            productName={t("Common:ProductName")}
             components={{
               1: (
                 <Link
@@ -148,7 +150,6 @@ const EmailContainer = ({
         <EmailInput
           id="login_username"
           name="login"
-          type={InputType.email}
           hasError={isEmailErrorShow}
           value={identifier}
           placeholder={t("RegistrationEmailWatermark")}
@@ -161,6 +162,7 @@ const EmailContainer = ({
           onChange={onChangeLogin}
           onBlur={onBlurEmail}
           onValidateInput={onValidateEmail}
+          handleAnimationStart={handleAnimationStart}
         />
       )}
     </FieldContainer>

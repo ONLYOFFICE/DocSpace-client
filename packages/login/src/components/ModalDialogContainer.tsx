@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,27 +26,9 @@
 
 import styled from "styled-components";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { tablet } from "@docspace/shared/utils";
+export const ModalDialogContainer = styled.div`
+  display: contents;
 
-const ModalDialogContainer = styled(ModalDialog)`
-  .modal-dialog-aside {
-    padding: 0;
-  }
-
-  .modal-dialog-aside-body {
-    padding: 0;
-    margin: 0;
-  }
-
-  .modal-dialog-aside-footer {
-    @media ${tablet} {
-      width: 90%;
-    }
-  }
-  .modal-dialog-button {
-    display: inline-block;
-  }
   .field-body {
     margin-top: 16px;
   }

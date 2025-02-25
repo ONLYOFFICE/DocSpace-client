@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -100,10 +100,19 @@ const StyledAboutBody = styled.div`
 `;
 
 const AboutContent = (props) => {
-  const { buildVersionInfo, theme, companyInfoSettingsData, previewData } =
-    props;
-  const { t } = useTranslation("About");
-  const license = "AGPL-3.0";
+  const {
+    buildVersionInfo,
+    theme,
+    companyInfoSettingsData,
+    previewData,
+    standalone,
+    licenseUrl,
+    isEnterprise,
+    logoText,
+  } = props;
+  const { t } = useTranslation(["About", "Common"]);
+  const isCommercial = !standalone || isEnterprise;
+  const license = isCommercial ? t("Common:Commercial") : "AGPL-3.0";
   const linkRepo = "https://github.com/ONLYOFFICE/DocSpace";
   const linkDocs = "https://github.com/ONLYOFFICE/DocumentServer";
 
@@ -125,7 +134,7 @@ const AboutContent = (props) => {
     ? previewData.address
     : companyInfoSettingsData?.address;
 
-  const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !theme.isBase);
+  const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !theme.isBase, true);
 
   return (
     companyInfoSettingsData && (
@@ -152,14 +161,14 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;{t("Common:OrganizationName")} {t("Common:ProductName")}&nbsp;
+            &nbsp;{logoText} {t("Common:ProductName")}&nbsp;
           </ColorTheme>
 
           <Text
             className="row-el select-el"
             fontSize="13px"
             fontWeight="600"
-            title={`${BUILD_AT}`}
+            title={`${BUILD_AT}`} // eslint-disable-line no-undef
           >
             v.
             <span className="version-document-management">
@@ -183,8 +192,7 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;{t("Common:OrganizationName")}{" "}
-            {t("Common:ProductEditorsName")}&nbsp;
+            &nbsp;{logoText} {t("Common:ProductEditorsName")}&nbsp;
           </ColorTheme>
           <Text className="row-el select-el" fontSize="13px" fontWeight="600">
             v.
@@ -198,9 +206,25 @@ const AboutContent = (props) => {
           <Text className="row-el" fontSize="13px">
             {t("SoftwareLicense")}:{" "}
           </Text>
-          <Text className="row-el" fontSize="13px" fontWeight="600">
-            &nbsp;{license}
-          </Text>
+          {isCommercial ? (
+            <ColorTheme
+              {...props}
+              tag="a"
+              themeId={ThemeId.Link}
+              className="row-el"
+              fontSize="13px"
+              fontWeight="600"
+              href={licenseUrl}
+              target="_blank"
+              enableUserSelect
+            >
+              &nbsp;{license}
+            </ColorTheme>
+          ) : (
+            <Text className="row-el" fontSize="13px" fontWeight="600">
+              &nbsp;{license}
+            </Text>
+          )}
         </div>
 
         <Text className="copyright" fontSize="14px" fontWeight="600">
@@ -268,11 +292,17 @@ const AboutContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => {
-  const { theme, companyInfoSettingsData } = settingsStore;
+export default inject(({ settingsStore, currentTariffStatusStore }) => {
+  const { theme, companyInfoSettingsData, standalone, licenseUrl, logoText } =
+    settingsStore;
+  const { isEnterprise } = currentTariffStatusStore;
 
   return {
     theme,
     companyInfoSettingsData,
+    standalone,
+    licenseUrl,
+    isEnterprise,
+    logoText,
   };
 })(observer(AboutContent));

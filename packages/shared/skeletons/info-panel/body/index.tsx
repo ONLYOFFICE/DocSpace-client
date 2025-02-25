@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import React from "react";
 import MembersLoader from "./views/MembersLoader";
 import HistoryLoader from "./views/HistoryLoader";
 import DetailsLoader from "./views/DetailsLoader";
-import AccountsLoader from "./views/AccountsLoader";
+import UsersLoading from "./views/UsersLoader";
 import GalleryLoader from "./views/GalleryLoader";
 import NoItemLoader from "./views/NoItemLoader";
 import SeveralItemsLoader from "./views/SeveralItemsLoader";
@@ -46,8 +46,8 @@ const InfoPanelViewLoader = ({ view }: InfoPanelViewLoaderProps) => {
       return <DetailsLoader />;
     case "gallery":
       return <GalleryLoader />;
-    case "accounts":
-      return <AccountsLoader />;
+    case "users":
+      return <UsersLoading />;
     case "groups":
       return <GroupsLoader />;
     case "noItem":

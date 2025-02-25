@@ -26,13 +26,13 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import { InfoBadge } from "./InfoBadge";
+import { InfoBadge } from ".";
 
 type InfoBadgeType = typeof InfoBadge;
 type Story = StoryObj<InfoBadgeType>;
 
 const meta: Meta<InfoBadgeType> = {
-  title: "Components/InfoBadge",
+  title: "Data Display/InfoBadge",
   component: InfoBadge,
 };
 
@@ -45,5 +45,25 @@ export const Default: Story = {
     place: "bottom",
     tooltipTitle: "Title",
     tooltipDescription: "Description",
+  },
+};
+
+export const TooltipOnTop: Story = {
+  args: {
+    offset: 10,
+    label: "Top",
+    place: "top",
+    tooltipTitle: "Top Title",
+    tooltipDescription: "This tooltip appears on top of the badge.",
+  },
+};
+
+export const CustomOffset: Story = {
+  args: {
+    offset: 20,
+    label: "Custom",
+    place: "bottom",
+    tooltipTitle: "Custom Offset Title",
+    tooltipDescription: "This tooltip has a custom offset.",
   },
 };

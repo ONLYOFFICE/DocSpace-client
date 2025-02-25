@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,14 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import { useContext, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
+import { useNavigate } from "react-router";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
+import { FolderType } from "@docspace/shared/enums";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
+// import { Context } from "@docspace/shared/utils";
 
 import Tile from "./sub-components/Tile";
 import FilesTileContent from "./FilesTileContent";
+import { FileTileContext } from "./FileTile.provider";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
@@ -45,7 +50,6 @@ const StyledDragAndDrop = styled(DragAndDrop)`
 const FileTile = (props) => {
   const {
     item,
-    sectionWidth,
     dragging,
     onContentFileSelect,
     fileContextClick,
@@ -60,7 +64,7 @@ const FileTile = (props) => {
     getIcon,
     onFilesClick,
     onDoubleClick,
-    onMouseClick,
+
     isActive,
     isEdit,
     inProgress,
@@ -70,21 +74,36 @@ const FileTile = (props) => {
     t,
     getContextModel,
     onHideContextMenu,
-    thumbSize,
+    // thumbSize,
     setSelection,
     id,
     onSelectTag,
     onSelectOption,
-    columnCount,
+    // columnCount,
     isRooms,
     withCtrlSelect,
     withShiftSelect,
     isHighlight,
-    thumbnails1280x720,
     onDragOver,
     onDragLeave,
     badgeUrl,
+    selectableRef,
+    openUser,
+    showStorageInfo,
+    isBlockingOperation,
+    icon,
+    isDownload,
+    setRefMap,
+    deleteRefMap,
   } = props;
+
+  const navigate = useNavigate();
+
+  // const { sectionWidth } = useContext(Context);
+
+  const tileRef = useRef(null);
+
+  const { columnCount, thumbSize } = useContext(FileTileContext);
 
   const temporaryExtension =
     item.id === -1 ? `.${item.fileExst}` : item.fileExst;
@@ -98,16 +117,36 @@ const FileTile = (props) => {
 
   const { thumbnailUrl } = item;
 
+  useEffect(() => {
+    if (!tileRef?.current) return;
+
+    if (item?.isPDF) {
+      setRefMap(GuidanceRefKey.Pdf, tileRef);
+    }
+    if (item?.type === FolderType.Done) {
+      setRefMap(GuidanceRefKey.Ready, tileRef);
+    }
+
+    return () => {
+      deleteRefMap(GuidanceRefKey.Pdf);
+      deleteRefMap(GuidanceRefKey.Ready);
+    };
+  }, [setRefMap, deleteRefMap]);
+
   const element = (
     <ItemIcon
       id={item.id}
       icon={item.icon}
       fileExst={item.fileExst}
       isRoom={item.isRoom}
+      showDefault={
+        !(!!item?.logo?.cover || !!item?.logo?.medium) ? item.isRoom : null
+      }
       title={item.title}
       logo={item.logo}
       color={item.logo?.color}
       isArchive={item.isArchive}
+      isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
     />
   );
@@ -122,21 +161,26 @@ const FileTile = (props) => {
     onDragLeave && onDragLeave(e);
   };
 
+  const onOpenUser = () => {
+    openUser(item.createdBy, navigate);
+  };
+
   return (
-    <div ref={props.selectableRef} id={id}>
+    <div ref={selectableRef} id={id}>
       <StyledDragAndDrop
         data-title={item.title}
         value={value}
         className={`files-item ${className} ${activeClass} ${item.id}_${item.fileExst}`}
         onDrop={onDrop}
         onMouseDown={onMouseDown}
-        dragging={dragging && isDragging}
+        dragging={dragging ? isDragging : null}
         onDragOver={onDragOverEvent}
         onDragLeave={onDragLeaveEvent}
         contextOptions={item.contextOptions}
       >
         <Tile
           key={item.id}
+          forwardedRef={tileRef}
           item={item}
           temporaryIcon={temporaryIcon}
           thumbnail={
@@ -145,13 +189,13 @@ const FileTile = (props) => {
               : thumbnailUrl
           }
           element={element}
-          sectionWidth={sectionWidth}
+          // sectionWidth={sectionWidth}
           contentElement={quickButtonsComponent}
           onSelect={onContentFileSelect}
           tileContextClick={fileContextClick}
           isPrivacy={isPrivacy}
           isDragging={dragging}
-          dragging={dragging && isDragging}
+          dragging={dragging ? isDragging : null}
           // onClick={onMouseClick}
           thumbnailClick={onFilesClick}
           onDoubleClick={onDoubleClick}
@@ -160,6 +204,7 @@ const FileTile = (props) => {
           contextButtonSpacerWidth={displayShareButton}
           isActive={isActive}
           inProgress={inProgress}
+          isBlockingOperation={isBlockingOperation}
           isEdit={isEdit}
           getContextModel={getContextModel}
           hideContextMenu={onHideContextMenu}
@@ -173,11 +218,15 @@ const FileTile = (props) => {
           withCtrlSelect={withCtrlSelect}
           withShiftSelect={withShiftSelect}
           isHighlight={isHighlight}
-          thumbnails1280x720={thumbnails1280x720}
+          iconProgress={icon}
+          isDownload={isDownload}
+          openUser={onOpenUser}
+          showStorageInfo={showStorageInfo}
         >
           <FilesTileContent
+            t={t}
             item={item}
-            sectionWidth={sectionWidth}
+            // sectionWidth={sectionWidth}
             onFilesClick={onFilesClick}
           />
           {badgesComponent}
@@ -188,17 +237,34 @@ const FileTile = (props) => {
 };
 
 export default inject(
-  ({ filesSettingsStore, filesStore, treeFoldersStore }, { item }) => {
-    const { getIcon, thumbnails1280x720 } = filesSettingsStore;
+  (
+    {
+      filesSettingsStore,
+      filesStore,
+      treeFoldersStore,
+      uploadDataStore,
+      infoPanelStore,
+      guidanceStore,
+      currentQuotaStore,
+    },
+    { item },
+  ) => {
+    const { getIcon } = filesSettingsStore;
     const { setSelection, withCtrlSelect, withShiftSelect, highlightFile } =
       filesStore;
+    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
+
+    const { setRefMap, deleteRefMap } = guidanceStore;
 
     const isHighlight =
       highlightFile.id == item?.id && highlightFile.isExst === !item?.fileExst;
 
-    const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
+      treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const { showStorageInfo } = currentQuotaStore;
+
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     return {
       getIcon,
@@ -207,7 +273,12 @@ export default inject(
       withCtrlSelect,
       withShiftSelect,
       isHighlight,
-      thumbnails1280x720,
+      icon,
+      isDownload,
+      setRefMap,
+      deleteRefMap,
+      openUser: infoPanelStore.openUser,
+      showStorageInfo,
     };
   },
 )(

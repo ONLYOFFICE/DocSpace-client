@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,8 +32,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 
-import ModalDialogContainer from "../ModalDialogContainer";
-
 const DeletePluginDialog = (props) => {
   const { t, ready } = useTranslation(["WebPlugins", "Common"]);
   const { isVisible, onClose, onDelete } = props;
@@ -54,7 +52,7 @@ const DeletePluginDialog = (props) => {
   };
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       isLoading={!ready}
       visible={isVisible}
       onClose={onClose}
@@ -71,7 +69,7 @@ const DeletePluginDialog = (props) => {
           label={t("Common:OkButton")}
           size="normal"
           scale
-          primary={true}
+          primary
           isLoading={isRequestRunning}
           onClick={onDeleteClick}
         />
@@ -85,7 +83,7 @@ const DeletePluginDialog = (props) => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,99 +30,108 @@ import { useTranslation } from "react-i18next";
 import { isMobile, isMobileOnly } from "react-device-detect";
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import { Avatar } from "@docspace/shared/components/avatar";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
+import {
+  ComboBox,
+  ComboBoxSize,
+  type TOption,
+} from "@docspace/shared/components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { decode } from "he";
-import { filterUserRoleOptions } from "SRC_DIR/helpers";
 import { Text } from "@docspace/shared/components/text";
-import { getUserRoleOptionsByUserAccess } from "@docspace/shared/utils/room-members/getUserRoleOptionsByUserAccess";
-import { getUserRoleOptionsByRoomType } from "@docspace/shared/utils/room-members/getUserRoleOptionsByRoomType";
 import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
-import { ShareAccessRights } from "@docspace/shared/enums";
-import { getUserRole } from "@docspace/shared/utils/common";
+import { EmployeeStatus } from "@docspace/shared/enums";
+import {
+  getUserAvatarRoleByType,
+  getUserType,
+  getUserTypeTranslation,
+} from "@docspace/shared/utils/common";
 import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
+
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
+import { getAccessOptions } from "SRC_DIR/components/panels/InvitePanel/utils";
+import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
 import * as Styled from "./index.styled";
 
 interface GroupMemberProps {
   member: TGroupMemberInvitedInRoom;
-  infoPanelSelection: any;
+  infoPanelSelection?: TRoom; // Todo: Change to InfoPanelStore["infoPanelSelection"] when store has types
+  standalone?: SettingsStore["standalone"];
 }
 
-const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
+const GroupMember = ({
+  member,
+  infoPanelSelection,
+  standalone,
+}: GroupMemberProps) => {
   const { user } = member;
+  const isExpect = user.status === EmployeeStatus.Pending;
 
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation("Common");
 
-  const userRole = user.isOwner
+  const fullRoomRoleOptions = getAccessOptions(
+    t,
+    infoPanelSelection?.roomType,
+    false,
+    false,
+    member.owner,
+    user.isAdmin,
+    standalone,
+  );
+
+  const userRoleOptions =
+    user.isAdmin || user.isOwner || user.isRoomAdmin
+      ? fullRoomRoleOptions
+      : filterPaidRoleOptions(fullRoomRoleOptions);
+
+  const userRole = member.owner
     ? getUserRoleOptions(t).portalAdmin
-    : getUserRoleOptionsByUserAccess(
-        t,
-        member.userAccess || member.groupAccess,
+    : fullRoomRoleOptions.find(
+        (option) => option.access === (member.userAccess || member.groupAccess),
       );
 
-  const fullRoomRoleOptions = getUserRoleOptionsByRoomType(
-    t,
-    infoPanelSelection.roomType,
-    false,
-  );
+  const hasIndividualRightsInRoom =
+    member.owner ||
+    (member.userAccess && member.userAccess !== member.groupAccess);
 
-  const userRoleOptions = filterUserRoleOptions(fullRoomRoleOptions, user);
+  const type = getUserType(user);
 
-  let type;
-  if (user.isOwner) type = "owner";
-  else if (user.isAdmin) type = "admin";
-  else if (user.isRoomAdmin) type = "manager";
-  else if (user.isCollaborator) type = "collaborator";
-  else type = "user";
+  const avatarRole = getUserAvatarRoleByType(type);
 
-  const role = getUserRole(user, userRole?.type);
+  const typeLabel = getUserTypeTranslation(type, t);
 
-  let selectedUserRoleCBOption;
-  if (user.isOwner)
-    selectedUserRoleCBOption = {
-      key: "owner",
-      label: t("Common:Owner"),
-      access: ShareAccessRights.FullAccess,
-      type: "owner",
-    };
-  else
-    selectedUserRoleCBOption = getUserRoleOptionsByUserAccess(
-      t,
-      member.userAccess || member.groupAccess,
-    );
-
-  const availableUserRoleCBOptions = filterUserRoleOptions(
-    fullRoomRoleOptions,
-    user,
-  );
-
-  const onChangeRole = async (userRoleOption) => {
+  const onChangeRole = async (userRoleOption: TOption) => {
     setIsLoading(true);
-    updateRoomMemberRole(infoPanelSelection.id, {
+    updateRoomMemberRole(infoPanelSelection?.id, {
       invitations: [{ id: user.id, access: userRoleOption.access }],
       notify: false,
       sharingMessage: "",
     })
-      .then(() => (member.userAccess = userRoleOption.access))
+      .then(() => {
+        if (userRoleOption.access) {
+          member.userAccess = userRoleOption.access;
+        }
+      })
       .catch((err) => toastr.error(err))
       .finally(() => setIsLoading(false));
   };
 
   return (
-    <Styled.GroupMember isExpect={user.isExpect} key={user.id}>
+    <Styled.GroupMember isExpect={isExpect} key={user.id}>
       <Avatar
-        role={role}
+        role={avatarRole}
         className="avatar"
-        size="min"
-        userName={user.isExpect ? "" : user.displayName || user.name}
+        size={AvatarSize.min}
+        userName={isExpect ? "" : user.displayName}
         source={
-          user.isExpect
+          isExpect
             ? AtReactSvgUrl
             : user.hasAvatar
               ? user.avatar
@@ -132,49 +141,51 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
 
       <div className="user_body-wrapper">
         <div className="info">
-          <Text
-            className="name"
-            data-tooltip-id={`userTooltip_${Math.random()}`}
-            noSelect
-          >
-            {decode(user.displayName)}
-          </Text>
+          <div className="info-box">
+            <Text
+              className="name"
+              data-tooltip-id={`userTooltip_${Math.random()}`}
+              noSelect
+            >
+              {decode(user.displayName)}
+            </Text>
+            {isExpect ? <StyledSendClockIcon /> : null}
+          </div>
           <Text className="email" noSelect>
-            {user.email}
+            <span dir="auto">{typeLabel}</span> |{" "}
+            <span dir="ltr">{user.email}</span>
           </Text>
         </div>
       </div>
 
       <div className="individual-rights-tooltip">
-        {member.userAccess &&
-          member.userAccess !== member.groupAccess &&
-          !user.isOwner && (
-            <HelpButton
-              place="left"
-              offsetRight={0}
-              openOnClick={false}
-              tooltipContent={
-                <Text fontSize="12px" fontWeight={600}>
-                  {t("PeopleTranslations:IndividualRights")}
-                </Text>
-              }
-            />
-          )}
+        {hasIndividualRightsInRoom ? (
+          <HelpButton
+            place="left"
+            offsetRight={0}
+            openOnClick={false}
+            tooltipContent={
+              <Text fontSize="12px" fontWeight={600}>
+                {t("PeopleTranslations:IndividualRights")}
+              </Text>
+            }
+          />
+        ) : null}
       </div>
 
-      {userRole && userRoleOptions && (
+      {userRole && userRoleOptions ? (
         <div className="role-wrapper">
-          {member.canEditAccess && !user.isOwner ? (
+          {member.canEditAccess ? (
             <ComboBox
               className="role-combobox"
               selectedOption={userRole}
-              options={availableUserRoleCBOptions}
+              options={userRoleOptions}
               scaled={false}
               withBackdrop={isMobile}
-              size="content"
+              size={ComboBoxSize.content}
               modernView
               title={t("Common:Role")}
-              manualWidth={"fit-content"}
+              manualWidth="auto"
               isMobileView={isMobileOnly}
               directionY="both"
               displaySelectedOption
@@ -182,16 +193,27 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
               isLoading={isLoading}
             />
           ) : (
-            <div className="disabled-role-combobox" title={t("Common:Role")}>
+            <Text
+              className="disabled-role-combobox"
+              title={t("Common:Role")}
+              fontWeight={600}
+              noSelect
+            >
               {userRole.label}
-            </div>
+            </Text>
           )}
         </div>
-      )}
+      ) : null}
     </Styled.GroupMember>
   );
 };
 
-export default inject(({ infoPanelStore }: any) => ({
-  infoPanelSelection: infoPanelStore.infoPanelSelection,
-}))(observer(GroupMember));
+export default inject(({ infoPanelStore, settingsStore }: TStore) => {
+  const { infoPanelSelection } = infoPanelStore;
+  const { standalone } = settingsStore;
+
+  return {
+    infoPanelSelection,
+    standalone,
+  };
+})(observer(GroupMember));

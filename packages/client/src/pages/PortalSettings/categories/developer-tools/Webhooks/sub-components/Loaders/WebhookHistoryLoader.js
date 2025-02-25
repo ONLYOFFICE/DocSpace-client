@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -58,18 +58,18 @@ const HistoryRowWrapper = styled.div`
   }
 `;
 
-export const WebhookHistoryLoader = () => {
-  const HistoryRowLoader = () => (
-    <HistoryRowWrapper>
-      <RectangleSkeleton
-        width="20px"
-        height="20px"
-        className="historyIconLoader"
-      />
-      <RectangleSkeleton height="20px" className="historyContentLoader" />
-    </HistoryRowWrapper>
-  );
+const HistoryRowLoader = () => (
+  <HistoryRowWrapper>
+    <RectangleSkeleton
+      width="20px"
+      height="20px"
+      className="historyIconLoader"
+    />
+    <RectangleSkeleton height="20px" className="historyContentLoader" />
+  </HistoryRowWrapper>
+);
 
+export const WebhookHistoryLoader = () => {
   return (
     <LoaderWrapper>
       <NavContainerLoader>

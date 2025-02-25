@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,16 +32,16 @@ import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
-import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
-import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
-import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
-import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
-import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
-import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
-import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
+// import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
+// import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
+// import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";
+// import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
+// import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
+// import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
+// import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { inject, observer } from "mobx-react";
 
@@ -50,13 +50,9 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 
 import { withTranslation } from "react-i18next";
-import { encryptionUploadDialog } from "../../../helpers/desktop";
 import { useNavigate, useLocation } from "react-router-dom";
-import MobileView from "./MobileView";
-
 import {
   Events,
-  EmployeeType,
   DeviceType,
   RoomsType,
   FilesSelectorFilterTypes,
@@ -66,69 +62,72 @@ import {
 
 import styled, { css } from "styled-components";
 
-import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
+import MobileView from "./MobileView";
+import { encryptionUploadDialog } from "../../../helpers/desktop";
 
 const StyledButton = styled(Button)`
-  font-weight: 700;
-  font-size: 16px;
-  padding: 0;
-  opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
+  && {
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    padding: 0;
+    opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
+    background-color: ${({ $currentColorScheme }) =>
+      $currentColorScheme.main?.accent} !important;
+    background: ${({ $currentColorScheme }) =>
+      $currentColorScheme.main?.accent};
+    border: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
 
-  background-color: ${({ $currentColorScheme }) =>
-    $currentColorScheme.main?.accent} !important;
-  background: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
-  border: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
+    ${(props) =>
+      !props.isDisabled &&
+      css`
+        :hover {
+          background-color: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          opacity: 0.85;
+          background: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          border: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+        }
 
-  ${(props) =>
-    !props.isDisabled &&
-    css`
-      :hover {
-        background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        opacity: 0.85;
-        background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        border: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-      }
+        :active {
+          background-color: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          background: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          border: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          opacity: 1;
+          filter: brightness(90%);
+          cursor: pointer;
+        }
+      `}
 
-      :active {
-        background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        border: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        opacity: 1;
-        filter: brightness(90%);
-        cursor: pointer;
-      }
-    `}
+    .button-content {
+      color: ${({ $currentColorScheme }) => $currentColorScheme.text?.accent};
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      vertical-align: middle;
+      box-sizing: border-box;
+      padding-block: 5px;
+      padding-inline: 12px 14px;
+      line-height: 22px;
+      border-radius: 3px;
 
-  .button-content {
-    color: ${({ $currentColorScheme }) => $currentColorScheme.text?.accent};
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    vertical-align: middle;
-    box-sizing: border-box;
-    padding-block: 5px;
-    padding-inline: 12px 14px;
-    line-height: 22px;
-    border-radius: 3px;
-
-    user-select: none;
-    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+      user-select: none;
+      -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+    }
   }
 `;
 
 const ArticleMainButtonContent = (props) => {
   const {
     t,
-    tReady,
     isMobileArticle,
 
     isPrivacy,
@@ -137,6 +136,7 @@ const ArticleMainButtonContent = (props) => {
     startUpload,
     setAction,
     setSelectFileDialogVisible,
+    setMainButtonVisible,
     selectFileDialogVisible,
     selectFileFormRoomDialogVisible,
     setSelectFileFormRoomDialogVisible,
@@ -162,8 +162,6 @@ const ArticleMainButtonContent = (props) => {
     isAdmin,
     isRoomAdmin,
 
-    setInvitePanelOptions,
-
     mainButtonMobileVisible,
     versionHistoryPanelVisible,
     moveToPanelVisible,
@@ -171,8 +169,7 @@ const ArticleMainButtonContent = (props) => {
     copyPanelVisible,
 
     security,
-    isGracePeriod,
-    setInviteUsersWarningDialogVisible,
+    setQuotaWarningDialogVisible,
     currentDeviceType,
 
     isFrame,
@@ -180,6 +177,11 @@ const ArticleMainButtonContent = (props) => {
 
     parentRoomType,
     isFolder,
+    createFoldersTree,
+    isWarningRoomsDialog,
+    getContactsModel,
+    contactsCanCreate,
+    setRefMap,
   } = props;
 
   const navigate = useNavigate();
@@ -205,6 +207,11 @@ const ArticleMainButtonContent = (props) => {
 
       const isPDF = format === "pdf";
 
+      if (isPDF && isMobile) {
+        toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+        return;
+      }
+
       const payload = {
         extension: format,
         id: -1,
@@ -218,16 +225,20 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onCreateRoom = React.useCallback(() => {
-    if (isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    if (isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
     const event = new Event(Events.ROOM_CREATE);
     window.dispatchEvent(event);
-  }, []);
+  }, [isWarningRoomsDialog]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
+    if (isMobile) {
+      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      return;
+    }
     setSelectFileDialogVisible(true);
   }, [setSelectFileDialogVisible]);
 
@@ -239,17 +250,25 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onFileChange = React.useCallback(
-    (e) => {
-      startUpload(e.target.files, null, t);
+    async (e) => {
+      const files = await getFilesFromEvent(e);
+
+      createFoldersTree(t, files)
+        .then((f) => {
+          if (f.length > 0) startUpload(f, null, t);
+        })
+        .catch((err) => {
+          toastr.error(err, null, 0, true);
+        });
     },
     [startUpload, t],
   );
 
   const onUploadFileClick = React.useCallback(() => {
     if (isPrivacy) {
-      encryptionUploadDialog((encryptedFile, encrypted) => {
-        encryptedFile.encrypted = encrypted;
-        startUpload([encryptedFile], null, t);
+      encryptionUploadDialog((f, isEncrypted) => {
+        f.encrypted = isEncrypted;
+        startUpload([f], null, t); // TODO: createFoldersTree
       });
     } else {
       inputFilesElement.current.click();
@@ -273,41 +292,17 @@ const ArticleMainButtonContent = (props) => {
   const onInputClick = React.useCallback((e) => (e.target.value = null), []);
 
   const onShowGallery = () => {
+    if (isMobile) {
+      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      return;
+    }
+
     const initOformFilter = (
       oformsFilter || oformsFilter.getDefault()
     ).toUrlParams();
     setOformFromFolderId(currentFolderId);
     navigate(`/form-gallery/${currentFolderId}/filter?${initOformFilter}`);
   };
-
-  const onInvite = React.useCallback((e) => {
-    const type = e.action;
-
-    if (isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
-      return;
-    }
-
-    setInvitePanelOptions({
-      visible: true,
-      roomId: -1,
-      hideSelector: true,
-      defaultAccess: type,
-    });
-  }, []);
-
-  const onInviteAgain = React.useCallback(() => {
-    resendInvitesAgain()
-      .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
-      )
-      .catch((err) => toastr.error(err));
-  }, [resendInvitesAgain]);
-
-  const onCreateGroup = React.useCallback(() => {
-    const event = new Event(Events.GROUP_CREATE);
-    window.dispatchEvent(event);
-  }, []);
 
   React.useEffect(() => {
     const isFolderHiddenDropdown =
@@ -331,7 +326,7 @@ const ArticleMainButtonContent = (props) => {
   ]);
 
   const createActionsForFormRoom = React.useCallback(
-    (actions) => {
+    (actionList) => {
       const {
         formGallery,
         // uploadActions,
@@ -341,7 +336,7 @@ const ArticleMainButtonContent = (props) => {
         // createTemplateBlankDocxf,
         // createNewPresentationPptx,
         // createNewSpreadsheetXlsx,
-      } = actions;
+      } = actionList;
 
       const createNewFolder = {
         id: "actions_new-folder",
@@ -467,6 +462,15 @@ const ArticleMainButtonContent = (props) => {
   React.useEffect(() => {
     if (isRoomsFolder || isSettingsPage) return;
 
+    if (isAccountsPage) {
+      const contactsModel = getContactsModel(t);
+
+      setModel(contactsModel);
+      setActions(contactsModel);
+
+      return;
+    }
+
     const pluginItems = [];
 
     if (mainButtonItemsList && enablePlugins && !isAccountsPage) {
@@ -494,16 +498,6 @@ const ArticleMainButtonContent = (props) => {
       icon: FormFileReactSvgUrl,
       label: t("Translations:SubNewFormFile"),
       onClick: onShowSelectFileDialog,
-      disabled: isPrivacy,
-      key: "form-file",
-    };
-
-    const showSelectorFormRoomDocx = {
-      id: "actions_from-room_template_from-file",
-      className: "main-button_drop-down_sub",
-      icon: FormFileReactSvgUrl,
-      label: t("Translations:SubNewFormFile"),
-      onClick: () => onShowFormRoomSelectFileDialog(),
       disabled: isPrivacy,
       key: "form-file",
     };
@@ -557,7 +551,7 @@ const ArticleMainButtonContent = (props) => {
       key: "pptx",
     };
 
-    const uploadActions = [
+    const newUploadActions = [
       {
         id: "actions_upload-files",
         className: "main-button_drop-down",
@@ -569,7 +563,7 @@ const ArticleMainButtonContent = (props) => {
     ];
 
     if (!(isMobile || isTablet)) {
-      uploadActions.push({
+      newUploadActions.push({
         id: "actions_upload-folders",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
@@ -587,7 +581,7 @@ const ArticleMainButtonContent = (props) => {
       const { formRoomActions, mobileFormRoomActions, mobileMoreActions } =
         createActionsForFormRoom({
           formGallery,
-          uploadActions,
+          newUploadActions,
           // createNewFolder,
           // showSelectorFormRoomDocx,
           // createNewDocumentDocx,
@@ -616,99 +610,13 @@ const ArticleMainButtonContent = (props) => {
       },
     ];
 
-    const accountsUserActions = [
-      ...(isOwner
-        ? [
-            {
-              id: "invite_portal-administrator",
-              className: "main-button_drop-down",
-              icon: PersonAdminReactSvgUrl,
-              label: t("Common:PortalAdmin", {
-                productName: t("Common:ProductName"),
-              }),
-              onClick: onInvite,
-              action: EmployeeType.Admin,
-              key: "administrator",
-            },
-          ]
-        : []),
-      {
-        id: "invite_room-admin",
-        className: "main-button_drop-down",
-        icon: PersonManagerReactSvgUrl,
-        label: t("Common:RoomAdmin"),
-        onClick: onInvite,
-        action: EmployeeType.User,
-        key: "manager",
-      },
-      {
-        id: "invite_room-collaborator",
-        className: "main-button_drop-down",
-        icon: PersonDefaultReactSvgUrl,
-        label: t("Common:PowerUser"),
-        onClick: onInvite,
-        action: EmployeeType.Collaborator,
-        key: "collaborator",
-      },
-      {
-        id: "invite_user",
-        className: "main-button_drop-down",
-        icon: PersonDefaultReactSvgUrl,
-        label: t("Common:User"),
-        onClick: onInvite,
-        action: EmployeeType.Guest,
-        key: "user",
-      },
-      ...(!isMobileArticle
-        ? [
-            {
-              isSeparator: true,
-              key: "invite-users-separator",
-            },
-          ]
-        : []),
-      {
-        id: "invite_again",
-        className: "main-button_drop-down",
-        icon: InviteAgainReactSvgUrl,
-        label: t("People:LblInviteAgain"),
-        onClick: onInviteAgain,
-        action: "invite-again",
-        key: "invite-again",
-      },
+    const newActions = [
+      createNewDocumentDocx,
+      createNewSpreadsheetXlsx,
+      createNewPresentationPptx,
+      ...formActions,
+      createNewFolder,
     ];
-
-    const accountsFullActions = [
-      {
-        id: "actions_invite_user",
-        className: "main-button_drop-down",
-        icon: PersonUserReactSvgUrl,
-        label: t("Common:Invite"),
-        key: "new-user",
-        items: accountsUserActions,
-      },
-      {
-        id: "create_group",
-        className: "main-button_drop-down",
-        icon: GroupReactSvgUrl,
-        label: t("PeopleTranslations:CreateGroup"),
-        onClick: onCreateGroup,
-        action: "group",
-        key: "group",
-      },
-    ];
-
-    const actions = isAccountsPage
-      ? isRoomAdmin
-        ? accountsUserActions
-        : accountsFullActions
-      : [
-          createNewDocumentDocx,
-          createNewSpreadsheetXlsx,
-          createNewPresentationPptx,
-          ...formActions,
-          createNewFolder,
-        ];
 
     if (pluginItems.length > 0) {
       // menuModel.push({
@@ -721,7 +629,7 @@ const ArticleMainButtonContent = (props) => {
       //   items: pluginItems,
       // });
 
-      actions.push({
+      newActions.push({
         id: "actions_more-plugins",
         className: "main-button_drop-down",
         icon: PluginMoreReactSvgUrl,
@@ -732,20 +640,18 @@ const ArticleMainButtonContent = (props) => {
       });
     }
 
-    const menuModel = [...actions];
+    const menuModel = [...newActions];
 
-    if (!isAccountsPage) {
-      menuModel.push({
-        isSeparator: true,
-        key: "separator",
-      });
+    menuModel.push({
+      isSeparator: true,
+      key: "separator",
+    });
 
-      menuModel.push(...uploadActions);
-      setUploadActions(uploadActions);
-    }
+    menuModel.push(...newUploadActions);
+    setUploadActions(newUploadActions);
 
     setModel(menuModel);
-    setActions(actions);
+    setActions(newActions);
   }, [
     t,
     isPrivacy,
@@ -765,8 +671,7 @@ const ArticleMainButtonContent = (props) => {
 
     onCreate,
     onCreateRoom,
-    onInvite,
-    onInviteAgain,
+    getContactsModel,
     onShowSelectFileDialog,
     onShowFormRoomSelectFileDialog,
     onUploadFileClick,
@@ -775,30 +680,50 @@ const ArticleMainButtonContent = (props) => {
     isMobileArticle,
   ]);
 
-  const mainButtonText = t("Common:Actions");
-
-  const isDisabled = isFrame
-    ? disableActionButton
-    : isSettingsPage
-      ? isSettingsPage
-      : isAccountsPage
-        ? !isAccountsPage
-        : !security?.Create;
-
   const isProfile = location.pathname.includes("/profile");
 
-  let mainButtonVisible = true;
+  const getMainButtonVisible = () => {
+    let visibilityValue = true;
 
-  if (currentDeviceType === DeviceType.mobile) {
-    mainButtonVisible =
-      moveToPanelVisible ||
-      restorePanelVisible ||
-      copyPanelVisible ||
-      selectFileDialogVisible ||
-      selectFileFormRoomDialogVisible ||
-      versionHistoryPanelVisible
-        ? false
-        : true;
+    if (currentDeviceType === DeviceType.mobile) {
+      visibilityValue = !(
+        moveToPanelVisible ||
+        restorePanelVisible ||
+        copyPanelVisible ||
+        selectFileDialogVisible ||
+        selectFileFormRoomDialogVisible ||
+        versionHistoryPanelVisible
+      );
+    }
+
+    if (isProfile || (isAccountsPage && !contactsCanCreate)) {
+      visibilityValue = false;
+    }
+
+    if (!isAccountsPage) visibilityValue = security?.Create;
+
+    if (!isMobileArticle) visibilityValue = false;
+    return visibilityValue;
+  };
+
+  const mainButtonVisible = getMainButtonVisible();
+
+  useEffect(() => {
+    setMainButtonVisible(mainButtonVisible);
+  }, [mainButtonVisible]);
+
+  const mainButtonText =
+    isRoomAdmin && isAccountsPage ? t("Common:Invite") : t("Common:Actions");
+
+  let isDisabled = false;
+  if (isFrame) {
+    isDisabled = disableActionButton;
+  } else if (isSettingsPage) {
+    isDisabled = isSettingsPage;
+  } else if (isAccountsPage) {
+    isDisabled = !contactsCanCreate;
+  } else {
+    isDisabled = !security?.Create;
   }
 
   if (showArticleLoader)
@@ -807,22 +732,18 @@ const ArticleMainButtonContent = (props) => {
   return (
     <>
       {isMobileArticle ? (
-        <>
-          {!isProfile && (security?.Create || isAccountsPage) && (
-            <MobileView
-              t={t}
-              titleProp={t("Upload")}
-              actionOptions={actions}
-              buttonOptions={!isAccountsPage && uploadActions}
-              withoutButton={isRoomsFolder || isAccountsPage}
-              withMenu={!isRoomsFolder}
-              mainButtonMobileVisible={
-                mainButtonMobileVisible && mainButtonVisible
-              }
-              onMainButtonClick={onCreateRoom}
-            />
-          )}
-        </>
+        <MobileView
+          t={t}
+          titleProp={t("Upload")}
+          actionOptions={actions}
+          buttonOptions={!isAccountsPage ? uploadActions : null}
+          withoutButton={isRoomsFolder || isAccountsPage}
+          withMenu={!isRoomsFolder}
+          mainButtonMobileVisible={
+            mainButtonMobileVisible ? mainButtonVisible : null
+          }
+          onMainButtonClick={onCreateRoom}
+        />
       ) : isRoomsFolder ? (
         <StyledButton
           className="create-room-button"
@@ -848,12 +769,13 @@ const ArticleMainButtonContent = (props) => {
           text={mainButtonText}
           model={model}
           title={mainButtonText}
+          setRefMap={setRefMap}
         />
       )}
 
       <input
         id="customFileInput"
-        className="custom-file-input"
+        className="custom-file-input custom-file-input-article"
         multiple
         type="file"
         onChange={onFileChange}
@@ -876,7 +798,7 @@ const ArticleMainButtonContent = (props) => {
         id="customFolderInput"
         className="custom-file-input"
         webkitdirectory=""
-        mozdirectory=""
+        mozdirectory="" // eslint-disable-line react/no-unknown-property
         type="file"
         onChange={onFileChange}
         onClick={onInputClick}
@@ -900,10 +822,13 @@ export default inject(
     pluginStore,
     versionHistoryStore,
     userStore,
-    currentTariffStatusStore,
+    filesActionsStore,
+    currentQuotaStore,
+    peopleStore,
+    guidanceStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
-    const { mainButtonMobileVisible } = filesStore;
+    const { setRefMap } = guidanceStore;
     const {
       isPrivacyFolder,
       isFavoritesFolder,
@@ -917,7 +842,7 @@ export default inject(
     const {
       setSelectFileDialogVisible,
       setInvitePanelOptions,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
@@ -930,24 +855,28 @@ export default inject(
       settingsStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
-    const security = selectedFolderStore.security;
+    const { security } = selectedFolderStore;
+
+    const { mainButtonMobileVisible, setMainButtonVisible } = filesStore;
 
     const currentFolderId = selectedFolderStore.id;
     const currentRoomType = selectedFolderStore.roomType;
-    const parentRoomType = selectedFolderStore.parentRoomType;
-    const isFolder = selectedFolderStore.isFolder;
+    const { parentRoomType } = selectedFolderStore;
+    const { isFolder } = selectedFolderStore;
 
-    const { isAdmin, isOwner, isRoomAdmin } = userStore.user;
-    const { isGracePeriod } = currentTariffStatusStore;
+    const { isAdmin, isOwner, isRoomAdmin, isCollaborator } = userStore.user;
+
+    const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
     const { setOformFromFolderId, oformsFilter } = oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
     const { frameConfig, isFrame } = settingsStore;
 
+    const { createFoldersTree } = filesActionsStore;
+
     return {
-      isGracePeriod,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       showText: settingsStore.showText,
       isMobileArticle: settingsStore.isMobileArticle,
 
@@ -966,6 +895,7 @@ export default inject(
       setSelectFileDialogVisible,
       selectFileDialogVisible,
       setInvitePanelOptions,
+      setMainButtonVisible,
 
       currentFolderId,
       currentRoomType,
@@ -981,6 +911,7 @@ export default inject(
       isAdmin,
       isOwner,
       isRoomAdmin,
+      isCollaborator,
 
       mainButtonMobileVisible,
       moveToPanelVisible,
@@ -997,6 +928,14 @@ export default inject(
       isFolder,
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
+      createFoldersTree,
+
+      showWarningDialog,
+      isWarningRoomsDialog,
+
+      getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
+      contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
+      setRefMap,
     };
   },
 )(

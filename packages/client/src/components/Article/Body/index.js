@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,36 +28,31 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { DeviceType, RoomSearchArea } from "@docspace/shared/enums";
-import Items from "./Items";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 
-import Banner from "./Banner";
-
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { showProgress } from "@docspace/shared/utils/common";
-import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import Banner from "./Banner";
+import Items from "./Items";
 
 const ArticleBodyContent = (props) => {
   const {
     isDesktopClient,
     firstLoad,
-    FirebaseHelper,
-    theme,
 
     showText,
     toggleArticleOpen,
 
     roomsFolderId,
+    roomsFilter,
     archiveFolderId,
     myFolderId,
     recycleBinFolderId,
@@ -75,20 +70,18 @@ const ArticleBodyContent = (props) => {
     campaigns,
     userId,
     isFrame,
+    setContactsTab,
   } = props;
 
-  const navigate = useNavigate();
   const location = useLocation();
 
-  const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
+  const getHashDate = () => new Date().getTime();
+
   const [activeItemId, setActiveItemId] = React.useState(null);
+  const [hashDate, setHashDate] = React.useState(getHashDate);
 
-  const isAccounts = location.pathname.includes("accounts/filter");
-
-  const onClick = React.useCallback(
-    (e, folderId, title, rootFolderType, canCreate) => {
-      const { toggleArticleOpen } = props;
-
+  const getLinkData = React.useCallback(
+    (folderId, title, rootFolderType, canCreate) => {
       let params = null;
       let path = ``;
 
@@ -100,10 +93,8 @@ const ArticleBodyContent = (props) => {
         canCreate,
       };
 
-      let withTimer = !!selectedFolderId;
-
       switch (folderId) {
-        case myFolderId:
+        case myFolderId: {
           const myFilter = FilesFilter.getDefault();
           myFilter.folder = folderId;
 
@@ -122,7 +113,8 @@ const ArticleBodyContent = (props) => {
           path = getCategoryUrl(CategoryType.Personal);
 
           break;
-        case archiveFolderId:
+        }
+        case archiveFolderId: {
           const archiveFilter = RoomsFilter.getDefault(
             userId,
             RoomSearchArea.Archive,
@@ -132,7 +124,8 @@ const ArticleBodyContent = (props) => {
           path = getCategoryUrl(CategoryType.Archive);
 
           break;
-        case recycleBinFolderId:
+        }
+        case recycleBinFolderId: {
           const recycleBinFilter = FilesFilter.getDefault();
           recycleBinFilter.folder = folderId;
 
@@ -150,46 +143,65 @@ const ArticleBodyContent = (props) => {
           path = getCategoryUrl(CategoryType.Trash);
 
           break;
-        case "accounts":
+        }
+        case "accounts": {
           const accountsFilter = AccountsFilter.getDefault();
           params = accountsFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Accounts);
 
-          withTimer = false;
-
           break;
-        case "settings":
-          path = getCategoryUrl(CategoryType.Settings);
-          navigate(path);
-
-          if (currentDeviceType === DeviceType.mobile) {
-            toggleArticleOpen();
-          }
-          return;
-        case roomsFolderId:
-        default:
-          const roomsFilter = RoomsFilter.getDefault(
+        }
+        default: {
+          const newRoomsFilter = RoomsFilter.getDefault(
             userId,
             RoomSearchArea.Active,
           );
-          roomsFilter.searchArea = RoomSearchArea.Active;
-          params = roomsFilter.toUrlParams(userId, true);
+          newRoomsFilter.searchArea = RoomSearchArea.Active;
+          params = newRoomsFilter.toUrlParams(userId, true);
           path = getCategoryUrl(CategoryType.Shared);
 
           break;
+        }
       }
 
-      path += `?${params}&date=${new Date().getTime()}`;
+      path += `?${params}&date=${hashDate}`;
 
-      if (openingNewTab(path, e)) return;
+      return { path, state };
+    },
+    [
+      roomsFolderId,
+      archiveFolderId,
+      myFolderId,
+      recycleBinFolderId,
+      activeItemId,
+      hashDate,
+      roomsFilter,
+    ],
+  );
 
-      if (folderId === "accounts" || folderId === "settings") clearFiles();
+  const onClick = React.useCallback(
+    (e, folderId) => {
+      if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
 
-      setSelection && setSelection([]);
+      const isAccountsClick = folderId === "accounts";
+
+      const withTimer = isAccountsClick
+        ? window.location.pathname.includes("accounts") &&
+          !window.location.pathname.includes("groups")
+        : !!selectedFolderId;
+
+      if (isAccountsClick) {
+        clearFiles();
+        setContactsTab("people");
+      } else {
+        setContactsTab(false);
+      }
+
+      setHashDate(getHashDate);
+
+      setSelection?.([]);
 
       setIsLoading(true, withTimer);
-
-      navigate(path, { state });
 
       if (currentDeviceType === DeviceType.mobile) {
         toggleArticleOpen();
@@ -202,22 +214,9 @@ const ArticleBodyContent = (props) => {
       recycleBinFolderId,
       activeItemId,
       selectedFolderId,
-      isAccounts,
+      setContactsTab,
       setSelection,
     ],
-  );
-
-  const onShowNewFilesPanel = React.useCallback(
-    async (folderId) => {
-      if (disableBadgeClick) return;
-
-      setDisableBadgeClick(true);
-
-      await props.setNewFilesPanelVisible(true, [`${folderId}`]);
-
-      setDisableBadgeClick(false);
-    },
-    [disableBadgeClick],
   );
 
   React.useEffect(() => {
@@ -280,17 +279,19 @@ const ArticleBodyContent = (props) => {
     <>
       <Items
         onClick={onClick}
-        onBadgeClick={onShowNewFilesPanel}
+        getLinkData={getLinkData}
         showText={showText}
         onHide={toggleArticleOpen}
         activeItemId={activeItemId}
       />
 
       {!isDesktopClient &&
-        showText &&
-        !firstLoad &&
-        campaigns.length > 0 &&
-        !isFrame && <Banner />}
+      showText &&
+      !firstLoad &&
+      campaigns.length > 0 &&
+      !isFrame ? (
+        <Banner />
+      ) : null}
     </>
   );
 };
@@ -300,30 +301,28 @@ export default inject(
     settingsStore,
     filesStore,
     treeFoldersStore,
-    dialogsStore,
     selectedFolderStore,
     clientLoadingStore,
     userStore,
     campaignsStore,
+    peopleStore,
   }) => {
-    const { clearFiles, setSelection } = filesStore;
+    const { clearFiles, setSelection, roomsFilter } = filesStore;
     const {
       showArticleLoader,
 
-      setIsSectionFilterLoading,
+      setIsSectionBodyLoading,
       firstLoad,
     } = clientLoadingStore;
 
     const setIsLoading = (param, withTimer) => {
-      setIsSectionFilterLoading(param, withTimer);
+      setIsSectionBodyLoading(param, withTimer);
 
-      if (param && withTimer) showProgress();
+      // if (param && withTimer) showProgress();
     };
 
     const { roomsFolderId, archiveFolderId, myFolderId, recycleBinFolderId } =
       treeFoldersStore;
-
-    const { setNewFilesPanelVisible } = dialogsStore;
 
     const selectedFolderId = selectedFolderStore.id;
 
@@ -351,8 +350,6 @@ export default inject(
       isVisitor: userStore.user.isVisitor,
       userId: userStore.user?.id,
 
-      setNewFilesPanelVisible,
-
       firstLoad,
       isDesktopClient,
       FirebaseHelper,
@@ -367,12 +364,14 @@ export default inject(
       setIsLoading,
 
       clearFiles,
+      roomsFilter,
       selectedFolderId,
       setIsBurgerLoading,
       setSelection,
       currentDeviceType,
       campaigns,
       isFrame,
+      setContactsTab: peopleStore.usersStore.setContactsTab,
     };
   },
 )(withTranslation([])(observer(ArticleBodyContent)));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,15 +29,21 @@ import styled from "styled-components";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import { tablet } from "@docspace/shared/utils";
+
 import { getMinifyTitle } from "SRC_DIR/utils";
 import { useStore } from "SRC_DIR/store";
 
 const StyledHeader = styled.h1`
-  padding: 12px 4px;
+  padding: 0px;
   font-size: 17px;
   font-style: normal;
   font-weight: 700;
   line-height: 22px;
+
+  @media ${tablet} {
+    padding: 0 12px;
+  }
 `;
 
 const ArticleHeaderContent = () => {

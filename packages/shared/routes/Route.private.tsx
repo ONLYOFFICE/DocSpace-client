@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,12 +26,13 @@
 
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 
-import AppLoader from "@docspace/shared/components/app-loader";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import AppLoader from "../components/app-loader";
 
-import { TenantStatus } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { TenantStatus } from "../enums";
+import { combineUrl } from "../utils/combineUrl";
 
 import type { PrivateRouteProps } from "./Routers.types";
 
@@ -51,6 +52,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     wizardCompleted,
 
     user,
+    isLoadedUser,
     children,
     restricted,
     tenantStatus,
@@ -58,11 +60,48 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     identityServerEnabled,
     baseDomain,
+    limitedAccessSpace,
+    displayAbout,
+
+    validatePublicRoomKey,
+    publicRoomKey,
+    roomId,
+    isLoadedPublicRoom,
+    isLoadingPublicRoom,
   } = props;
 
   const location = useLocation();
+  const [searchParams] = useSearchParams();
 
   const renderComponent = () => {
+    const key = searchParams.get("key");
+
+    if (isLoadedUser && !user) {
+      const filter = FilesFilter.getDefault();
+      const subFolder = new URLSearchParams(window.location.search).get(
+        "folder",
+      );
+      const path = "/rooms/share";
+
+      filter.folder = subFolder || roomId || "";
+      if (key) {
+        filter.key = key;
+      }
+
+      window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`);
+    }
+
+    if (
+      key &&
+      (!publicRoomKey || publicRoomKey !== key) &&
+      location.pathname.includes("/rooms/shared") &&
+      !isLoadedPublicRoom &&
+      !isLoadingPublicRoom &&
+      validatePublicRoomKey
+    ) {
+      validatePublicRoomKey(key);
+    }
+
     if (!user && isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(
@@ -73,10 +112,25 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       }
 
       // console.log("PrivateRoute returned null");
+
       return null;
     }
 
-    const isPortalUrl = location.pathname === "/preparation-portal";
+    if (user && isAuthenticated && !isLogout) {
+      const loggedOutUserId = sessionStorage.getItem("loggedOutUserId");
+      const redirectPath = sessionStorage.getItem("referenceUrl");
+
+      if (loggedOutUserId && redirectPath && loggedOutUserId === user.id) {
+        window.location.href = redirectPath;
+      }
+
+      sessionStorage.removeItem("referenceUrl");
+      sessionStorage.removeItem("loggedOutUserId");
+    }
+
+    const isPortalUrl =
+      location.pathname === "/preparation-portal" ||
+      location.pathname === "/management/preparation-portal";
 
     const isPaymentsUrl =
       location.pathname === "/portal-settings/payments/portal-payments";
@@ -99,6 +153,22 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       "portal-settings/developer-tools/oauth",
     );
     const isAuthorizedAppsPage = location.pathname.includes("authorized-apps");
+
+    const isBrandingPage = location.pathname.includes(
+      "portal-settings/customization/branding",
+    );
+
+    const isPortalManagement = location.pathname.includes(
+      "/portal-settings/management",
+    );
+    const isFileManagement = location.pathname.includes("file-management");
+    const isManagement = location.pathname.includes("management");
+    const isPaymentPageUnavailable =
+      location.pathname.includes("payments") && isCommunity;
+    const isBonusPageUnavailable =
+      location.pathname.includes("bonus") && !isCommunity;
+
+    const isAboutPage = location.pathname.includes("about");
 
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
@@ -203,27 +273,31 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       );
     }
 
+    if (isAboutPage && !displayAbout) {
+      return <Navigate replace to="/error/404" />;
+    }
+
+    if (isManagement && !isPortalManagement && !isFileManagement) {
+      if (isLoaded && !isAuthenticated) return <Navigate replace to="/" />;
+      if ((user && !user?.isAdmin) || limitedAccessSpace)
+        return <Navigate replace to="/error/403" />;
+
+      if (isPaymentPageUnavailable)
+        return <Navigate replace to="/management/bonus" />;
+      if (isBonusPageUnavailable)
+        return <Navigate replace to="/management/payments" />;
+
+      return children;
+    }
+
     if (!isLoaded) {
       return <AppLoader />;
     }
 
-    // const userLoaded = !isEmpty(user);
-    // if (!userLoaded) {
-    //   return <Component {...props} />;
-    // }
-
-    // if (!userLoaded) {
-    //   console.log("PrivateRoute render Loader", rest);
-    //   return (
-    //     <Section>
-    //       <Section.SectionBody>
-    //         <Loader className="pageLoader" type="rombs" size="40px" />
-    //       </Section.SectionBody>
-    //     </Section>
-    //   );
-    // }
-
-    if (isPortalRenameUrl && !enablePortalRename) {
+    if (
+      (isPortalRenameUrl && !enablePortalRename) ||
+      (isCommunity && isBrandingPage)
+    ) {
       return <Navigate replace to="/error/404" />;
     }
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,18 +28,19 @@ import React from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 
 import { useTranslation } from "react-i18next";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { LinkTarget, LinkType } from "@docspace/shared/components/link";
 
 const InfoWrapper = styled.div`
   margin-bottom: 25px;
 `;
 
-const InfoText = styled(Text)`
+const InfoText = styled(Text).attrs(injectDefaultTheme)`
   max-width: 660px;
   white-space: break-spaces;
   margin: 0 0 8px;
@@ -47,48 +48,39 @@ const InfoText = styled(Text)`
   color: ${(props) => props.theme.client.settings.common.descriptionColor};
 `;
 
-InfoText.defaultProps = { theme: Base };
-
-const StyledGuideLink = styled(Link)`
-  color: ${(props) => props.theme.client.settings.webhooks.linkColor};
-
-  &:hover {
-    color: ${(props) => props.theme.client.settings.webhooks.linkColor};
-  }
-`;
-
-StyledGuideLink.defaultProps = { theme: Base };
-
 const WebhookInfo = (props) => {
   const { t } = useTranslation(["Webhooks"]);
-  const { webhooksGuideUrl } = props;
+  const { webhooksGuideUrl, logoText } = props;
 
   return (
     <InfoWrapper>
       <InfoText as="p">
         {t("WebhooksInfo", {
           productName: t("Common:ProductName"),
-          organizationName: t("Common:OrganizationName"),
+          organizationName: logoText,
         })}
       </InfoText>
-      <StyledGuideLink
+      <ColorTheme
         id="webhooks-info-link"
+        tag="a"
+        themeId={ThemeId.Link}
         fontWeight={600}
-        isHovered
-        type="page"
         href={webhooksGuideUrl}
-        target="_blank"
+        target={LinkTarget.blank}
+        type={LinkType.page}
+        isHovered
       >
         {t("WebhooksGuide")}
-      </StyledGuideLink>
+      </ColorTheme>
     </InfoWrapper>
   );
 };
 
 export default inject(({ settingsStore }) => {
-  const { webhooksGuideUrl } = settingsStore;
+  const { webhooksGuideUrl, logoText } = settingsStore;
 
   return {
     webhooksGuideUrl,
+    logoText,
   };
 })(observer(WebhookInfo));

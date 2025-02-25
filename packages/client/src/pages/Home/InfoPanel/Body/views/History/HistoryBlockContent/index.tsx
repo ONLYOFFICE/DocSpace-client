@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,20 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-
 import HistoryUserList from "./UserList";
 import HistoryMainText from "./MainText";
 import HistoryItemList from "./ItemList";
-import HistoryMainTextFolderInfo from "./MainTextFolderInfo";
-import HistoryRoomExternalLink from "./RoomExternalLink";
 import HistoryGroupList from "./GroupList";
 import HistoryUserGroupRoleChange from "./UserGroupRoleChange";
 import HistoryRoomTagList from "./RoomTagList";
 import { getFeedInfo } from "../FeedInfo";
 
-interface HistoryBlockContentProps {
-  feed: any;
-}
+import { HistoryBlockContentProps } from "./HistoryBlockContent.types";
 
 const HistoryBlockContent = ({
   feed,
@@ -47,52 +42,45 @@ const HistoryBlockContent = ({
   const { actionType, targetType } = getFeedInfo(feed);
 
   return (
-    <>
-      {targetType === "user" && actionType === "update" && (
-        <HistoryUserList feed={feed} />
-      )}
-
-      {targetType === "group" && actionType === "update" && (
-        <HistoryGroupList feed={feed} />
-      )}
+    <div className="info-panel_history-block">
+      {(targetType === "user" || targetType === "group") &&
+      actionType === "update" ? (
+        <HistoryUserGroupRoleChange feed={feed} />
+      ) : null}
 
       <HistoryMainText feed={feed} />
 
       {(targetType === "file" || targetType === "folder") &&
-        actionType !== "delete" && <HistoryMainTextFolderInfo feed={feed} />}
+      (actionType === "rename" ||
+        historyWithFileList ||
+        actionType === "changeIndex") ? (
+        <HistoryItemList
+          feed={feed}
+          actionType={actionType}
+          targetType={targetType}
+        />
+      ) : null}
 
-      {(targetType === "file" || targetType === "folder") &&
-        (actionType === "rename" || historyWithFileList) && (
-          <HistoryItemList
-            feed={feed}
-            actionType={actionType}
-            targetType={targetType}
-          />
-        )}
-
-      {targetType === "roomTag" && (
-        <HistoryRoomTagList feed={feed} actionType={actionType} />
-      )}
-
-      {targetType === "roomExternalLink" && actionType === "create" && (
-        <HistoryRoomExternalLink feedData={feed.data} />
-      )}
-
-      {targetType === "user" && actionType !== "update" && (
-        <HistoryUserList feed={feed} />
-      )}
-
-      {targetType === "group" && actionType !== "update" && (
+      {feed.related.length > 0 &&
+      targetType === "group" &&
+      actionType !== "update" ? (
         <HistoryGroupList feed={feed} />
-      )}
+      ) : null}
 
-      {(targetType === "user" || targetType === "group") &&
-        actionType === "update" && <HistoryUserGroupRoleChange feed={feed} />}
-    </>
+      {feed.related.length > 0 &&
+      targetType === "user" &&
+      actionType !== "update" ? (
+        <HistoryUserList feed={feed} />
+      ) : null}
+
+      {targetType === "roomTag" ? (
+        <HistoryRoomTagList feed={feed} actionType={actionType} />
+      ) : null}
+    </div>
   );
 };
 
-export default inject(({ infoPanelStore }) => {
+export default inject<TStore>(({ infoPanelStore }) => {
   const { historyWithFileList } = infoPanelStore;
   return { historyWithFileList };
 })(observer(HistoryBlockContent));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,6 +31,7 @@ import uniqueid from "lodash/uniqueId";
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
 
+import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
 import { StyledCard, StyledItem, StyledHeaderItem } from "./StyledInfiniteGrid";
 
 const HeaderItem = ({ children, className, ...rest }) => {
@@ -87,7 +88,7 @@ const InfiniteGrid = (props) => {
     fetchMoreFiles,
     filesLength,
     className,
-    getCountTilesInRow,
+    currentFolderId,
     ...rest
   } = props;
 
@@ -96,9 +97,9 @@ const InfiniteGrid = (props) => {
   let cards = [];
   const list = [];
 
-  const addItemToList = (key, className, clear) => {
+  const addItemToList = (key, cls, clear) => {
     list.push(
-      <Item key={key} className={className}>
+      <Item key={key} className={cls}>
         {cards}
       </Item>,
     );
@@ -163,11 +164,11 @@ const InfiniteGrid = (props) => {
       } else {
         const isFile = child?.props?.className?.includes("file");
         const isRoom = child?.props?.className?.includes("room");
-        const className = isFile ? "isFile" : isRoom ? "isRoom" : "isFolder";
+        const cls = isFile ? "isFile" : isRoom ? "isRoom" : "isFolder";
 
         if (cards.length && cards.length === countTilesInRow) {
           const listKey = uniqueid("list-item_");
-          addItemToList(listKey, className, true);
+          addItemToList(listKey, cls, true);
         }
 
         const cardKey = uniqueid("card-item_");
@@ -219,6 +220,7 @@ const InfiniteGrid = (props) => {
       itemCount={hasMoreFiles ? list.length + 1 : list.length}
       loadMoreItems={fetchMoreFiles}
       className={`TileList ${className}`}
+      currentFolderId={currentFolderId}
       {...rest}
     >
       {list}
@@ -227,15 +229,14 @@ const InfiniteGrid = (props) => {
 };
 
 export default inject(
-  ({ filesStore, treeFoldersStore, clientLoadingStore }) => {
-    const {
-      filesList,
-      hasMoreFiles,
-      filterTotal,
-      fetchMoreFiles,
-      getCountTilesInRow,
-      roomsFilterTotal,
-    } = filesStore;
+  ({
+    filesStore,
+    treeFoldersStore,
+    clientLoadingStore,
+    selectedFolderStore,
+  }) => {
+    const { filesList, hasMoreFiles, filter, fetchMoreFiles, roomsFilter } =
+      filesStore;
 
     const { isLoading } = clientLoadingStore;
     const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
@@ -243,14 +244,16 @@ export default inject(
     const filesLength = filesList.length;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
+    const currentFolderId = selectedFolderStore.id;
+
     return {
       filesList,
       hasMoreFiles,
-      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      filterTotal: isRooms ? roomsFilter.total : filter.total,
       fetchMoreFiles,
       filesLength,
-      getCountTilesInRow,
       isLoading,
+      currentFolderId,
     };
   },
 )(observer(InfiniteGrid));

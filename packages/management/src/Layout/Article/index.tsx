@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { BannerStore } from "@docspace/shared/store/BannerStore";
 
 import Article from "@docspace/shared/components/article";
 
@@ -54,7 +53,6 @@ const ArticleWrapper = ({
   setArticleOpen,
   withSendAgain,
   mainBarVisible,
-  isBannerVisible,
 
   isLiveChatAvailable,
 
@@ -81,7 +79,6 @@ const ArticleWrapper = ({
       setArticleOpen={setArticleOpen}
       withSendAgain={withSendAgain}
       mainBarVisible={mainBarVisible}
-      isBannerVisible={isBannerVisible}
       isLiveChatAvailable={isLiveChatAvailable}
       currentDeviceType={currentDeviceType}
       isAdmin={isAdmin}
@@ -105,20 +102,16 @@ export default inject(
     authStore,
     uploadDataStore,
     userStore,
-    bannerStore,
     settingsStore,
   }: {
     authStore: any;
     uploadDataStore: any;
     userStore: UserStore;
-    bannerStore: BannerStore;
     settingsStore: any;
   }) => {
     const { languageBaseName, isLiveChatAvailable } = authStore;
 
     const { withSendAgain, user } = userStore;
-
-    const { isBannerVisible } = bannerStore;
 
     const isAdmin = user?.isAdmin;
 
@@ -130,12 +123,10 @@ export default inject(
     const { primaryProgressDataStore, secondaryProgressDataStore } =
       uploadDataStore;
 
-    const { visible: primaryProgressDataVisible } = primaryProgressDataStore;
-    const { visible: secondaryProgressDataStoreVisible } =
-      secondaryProgressDataStore;
+    const { isPrimaryProgressVisbile } = primaryProgressDataStore;
+    const { isSecondaryProgressVisbile } = secondaryProgressDataStore;
 
-    const showProgress =
-      primaryProgressDataVisible || secondaryProgressDataStoreVisible;
+    const showProgress = isPrimaryProgressVisbile || isSecondaryProgressVisbile;
 
     const {
       showText,
@@ -170,7 +161,6 @@ export default inject(
       setArticleOpen,
       withSendAgain,
       mainBarVisible,
-      isBannerVisible,
 
       isLiveChatAvailable,
 

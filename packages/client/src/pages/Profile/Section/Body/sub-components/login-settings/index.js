@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,15 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import { unlinkTfaApp } from "@docspace/shared/api/settings";
+import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
 import {
   ResetApplicationDialog,
   BackupCodesDialog,
@@ -50,15 +50,15 @@ const LoginSettings = (props) => {
     backupCodesCount,
     setBackupCodes,
   } = props;
-  const location = useLocation();
 
   const [resetAppDialogVisible, setResetAppDialogVisible] = useState(false);
   const [backupCodesDialogVisible, setBackupCodesDialogVisible] =
     useState(false);
 
   useEffect(() => {
-    if (location?.state?.openBackupCodesDialog) {
+    if (sessionStorage.getItem(OPEN_BACKUP_CODES_DIALOG)) {
       setBackupCodesDialogVisible(true);
+      sessionStorage.removeItem(OPEN_BACKUP_CODES_DIALOG);
     }
   }, []);
 
@@ -87,15 +87,15 @@ const LoginSettings = (props) => {
         </Link>
       </div>
 
-      {resetAppDialogVisible && (
+      {resetAppDialogVisible ? (
         <ResetApplicationDialog
           visible={resetAppDialogVisible}
           onClose={() => setResetAppDialogVisible(false)}
           resetTfaApp={unlinkTfaApp}
           id={profile.id}
         />
-      )}
-      {backupCodesDialogVisible && (
+      ) : null}
+      {backupCodesDialogVisible ? (
         <BackupCodesDialog
           visible={backupCodesDialogVisible}
           onClose={() => setBackupCodesDialogVisible(false)}
@@ -103,7 +103,7 @@ const LoginSettings = (props) => {
           backupCodesCount={backupCodesCount}
           setBackupCodes={setBackupCodes}
         />
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

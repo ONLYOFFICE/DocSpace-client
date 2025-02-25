@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,12 +38,32 @@ const LeaveRoomDialog = (props) => {
     visible,
     setIsVisible,
     setChangeRoomOwnerIsVisible,
-    isOwner,
+    isRoomOwner,
     onLeaveRoomAction,
     updateInfoPanelSelection,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const onClose = () => setIsVisible(false);
+
+  const onLeaveRoom = async () => {
+    if (isRoomOwner) {
+      setChangeRoomOwnerIsVisible(true);
+      onClose();
+    } else {
+      setIsLoading(true);
+      await onLeaveRoomAction(t, isRoomOwner);
+      setIsLoading(false);
+      updateInfoPanelSelection();
+      onClose();
+    }
+  };
+
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onLeaveRoom();
+  };
 
   useEffect(() => {
     document.addEventListener("keyup", onKeyUp, false);
@@ -53,33 +73,13 @@ const LeaveRoomDialog = (props) => {
     };
   }, []);
 
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onLeaveRoom();
-  };
-
-  const onLeaveRoom = async () => {
-    if (isOwner) {
-      setChangeRoomOwnerIsVisible(true);
-      onClose();
-    } else {
-      setIsLoading(true);
-      await onLeaveRoomAction(t, isOwner);
-      setIsLoading(false);
-      updateInfoPanelSelection();
-      onClose();
-    }
-  };
-
-  const onClose = () => setIsVisible(false);
-
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{t("Files:LeaveTheRoom")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
           <Text noSelect>
-            {isOwner
+            {isRoomOwner
               ? t("Files:LeaveRoomDescription")
               : t("Files:WantLeaveRoom")}
           </Text>
@@ -88,7 +88,7 @@ const LeaveRoomDialog = (props) => {
       <ModalDialog.Footer>
         <Button
           key="OkButton"
-          label={isOwner ? t("Files:AssignOwner") : t("Common:OKButton")}
+          label={isRoomOwner ? t("Files:AssignOwner") : t("Common:OKButton")}
           size="normal"
           primary
           scale
@@ -135,7 +135,7 @@ export default inject(
       visible,
       setIsVisible,
       setChangeRoomOwnerIsVisible,
-      isOwner: isRoomOwner,
+      isRoomOwner,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,
       updateInfoPanelSelection,
     };

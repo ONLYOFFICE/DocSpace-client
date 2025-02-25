@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,6 +32,7 @@ import api from "../api";
 import { TUser } from "../api/people/types";
 import { EmployeeActivationStatus, ThemeKeys } from "../enums";
 import { TI18n } from "../types";
+import { getUserType } from "../utils/common";
 
 class UserStore {
   user: TUser | null = null;
@@ -54,9 +55,9 @@ class UserStore {
       user = window.__ASC_INITIAL_EDITOR_STATE__.user;
     else user = await api.people.getUser();
 
-    this.setUser(user);
+    this.setUser(user as TUser);
 
-    return user;
+    return user as TUser;
   };
 
   init = async (i18n?: TI18n, portalCultureName?: string) => {
@@ -196,11 +197,7 @@ class UserStore {
   }
 
   get userType() {
-    if (this.user?.isOwner) return "owner";
-    if (this.user?.isAdmin) return "admin";
-    if (this.user?.isRoomAdmin) return "roomAdmin";
-    if (this.user?.isCollaborator) return "powerUser";
-    if (this.user?.isVisitor) return "user";
+    return getUserType(this.user!);
   }
 }
 

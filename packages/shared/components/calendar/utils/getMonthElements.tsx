@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,8 +26,9 @@
 
 import React from "react";
 import moment from "moment";
+import classNames from "classnames";
 
-import { StyledDateItemTheme } from "../Calendar.styled";
+import styles from "../Calendar.module.scss";
 
 export const getMonthElements = (
   months: {
@@ -39,15 +40,14 @@ export const getMonthElements = (
   selectedDate: moment.Moment,
   minDate: moment.Moment,
   maxDate: moment.Moment,
-  isMobile: boolean,
 ) => {
   const onDateClick = (dateString: string) => {
-    setObservedDate((prevObservedDate) =>
+    setObservedDate(() =>
       moment(
         `${moment(dateString, "YYYY-M").format("YYYY")}-${moment(
           dateString,
           "YYYY-M",
-        ).format("MM")}-${prevObservedDate.format("DD")}`,
+        ).format("MM")}-01`,
         "YYYY-MM-DD",
       ),
     );
@@ -57,38 +57,46 @@ export const getMonthElements = (
   const dateFormat = "YYYY-M";
 
   const monthsElements = months.map((month) => (
-    <StyledDateItemTheme
-      className="month"
-      big
+    <button
+      type="button"
+      className={classNames(styles.dateItem, "month", {
+        [styles.disabled]:
+          moment(month.key, dateFormat).endOf("month") < minDate,
+        [styles.disabled]:
+          moment(month.key, dateFormat).startOf("month") > maxDate,
+        [styles.big]: true,
+      })}
       key={month.key}
       onClick={() => onDateClick(month.key)}
       disabled={
         moment(month.key, dateFormat).endOf("month") < minDate ||
         moment(month.key, dateFormat).startOf("month") > maxDate
       }
-      isMobile={isMobile}
-      focused={false}
     >
       {month.value}
-    </StyledDateItemTheme>
+    </button>
   ));
   for (let i = 12; i < 16; i += 1) {
     monthsElements[i] = (
-      <StyledDateItemTheme
-        className="month"
-        isSecondary
-        big
+      <button
+        type="button"
+        className={classNames(styles.dateItem, "month", {
+          [styles.disabled]:
+            moment(months[i].key, dateFormat).endOf("month") < minDate,
+          [styles.disabled]:
+            moment(months[i].key, dateFormat).startOf("month") > maxDate,
+          [styles.big]: true,
+          [styles.isSecondary]: true,
+        })}
         key={months[i].key}
         onClick={() => onDateClick(months[i].key)}
         disabled={
           moment(months[i].key, dateFormat).endOf("month") < minDate ||
           moment(months[i].key, dateFormat).startOf("month") > maxDate
         }
-        isMobile={isMobile}
-        focused={false}
       >
         {months[i].value}
-      </StyledDateItemTheme>
+      </button>
     );
   }
 
@@ -100,38 +108,47 @@ export const getMonthElements = (
   months.forEach((month, index) => {
     if (month.key === currentDate) {
       monthsElements[index] = (
-        <StyledDateItemTheme
-          className="month"
-          isCurrent
-          big
+        <button
+          type="button"
+          className={classNames(styles.dateItem, "month", {
+            [styles.disabled]:
+              moment(month.key, dateFormat).endOf("month") < minDate,
+            [styles.disabled]:
+              moment(month.key, dateFormat).startOf("month") > maxDate,
+            [styles.big]: true,
+            [styles.isCurrent]: true,
+          })}
           key={month.key}
           onClick={() => onDateClick(month.key)}
           disabled={
             moment(month.key, dateFormat).endOf("month") < minDate ||
             moment(month.key, dateFormat).startOf("month") > maxDate
           }
-          isMobile={isMobile}
-          focused={false}
         >
           {month.value}
-        </StyledDateItemTheme>
+        </button>
       );
     } else if (month.key === formattedDate) {
       monthsElements[index] = (
-        <StyledDateItemTheme
-          className="month"
-          big
+        <button
+          type="button"
+          className={classNames(styles.dateItem, "month", {
+            [styles.disabled]:
+              moment(month.key, dateFormat).endOf("month") < minDate,
+            [styles.disabled]:
+              moment(month.key, dateFormat).startOf("month") > maxDate,
+            [styles.big]: true,
+            [styles.focused]: true,
+          })}
           key={month.key}
-          focused
           onClick={() => onDateClick(month.key)}
           disabled={
             moment(month.key, dateFormat).endOf("month") < minDate ||
             moment(month.key, dateFormat).startOf("month") > maxDate
           }
-          isMobile={isMobile}
         >
           {month.value}
-        </StyledDateItemTheme>
+        </button>
       );
     }
   });

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,9 +28,7 @@ import { observer, inject } from "mobx-react";
 import React, { useEffect, useMemo } from "react";
 import { withTranslation } from "react-i18next";
 
-import { getCookie, setCookie } from "@docspace/shared/utils/cookie";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
-import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 import { mapCulturesToArray } from "@docspace/shared/utils/common";
 import i18n from "../i18n";
 

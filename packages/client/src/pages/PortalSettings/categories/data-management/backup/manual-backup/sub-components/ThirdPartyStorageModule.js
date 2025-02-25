@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,17 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
+
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { ReactSVG } from "react-svg";
+
 import { ComboBox } from "@docspace/shared/components/combobox";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { Text } from "@docspace/shared/components/text";
+
 import { BackupStorageType, ThirdPartyStorages } from "@docspace/shared/enums";
+
 import GoogleCloudStorage from "./storages/GoogleCloudStorage";
 import RackspaceStorage from "./storages/RackspaceStorage";
 import SelectelStorage from "./storages/SelectelStorage";
 import AmazonStorage from "./storages/AmazonStorage";
 import { getOptions } from "../../common-container/GetThirdPartyStoragesOptions";
 import { getFromLocalStorage } from "../../../../../utils";
-import { StyledManualBackup } from "../../StyledBackup";
+import { StyledManualBackup, StyledComboBoxItem } from "../../StyledBackup";
 
 let storageTitle = "";
 let storageId = "";
@@ -52,9 +60,8 @@ class ThirdPartyStorageModule extends React.PureComponent {
       selectedId: storageId || "",
       isStartCopy: false,
     };
-
-    this.isFirstSet = false;
   }
+
   componentDidMount() {
     const { thirdPartyStorage } = this.props;
 
@@ -77,11 +84,21 @@ class ThirdPartyStorageModule extends React.PureComponent {
     }
   }
 
-  onSelect = (option) => {
-    const selectedStorageId = option.key;
+  onSelect = (event) => {
+    const data = event.target.dataset;
+
+    const selectedStorageId = data.thirdPartyKey;
     const { storagesInfo } = this.state;
 
     const selectedStorage = storagesInfo[selectedStorageId];
+
+    if (!selectedStorage.isSet) {
+      return window.open(
+        `/portal-settings/integration/third-party-services?service=${data.thirdPartyKey}`,
+        "_blank",
+      );
+    }
+
     this.setState({
       selectedStorageTitle: selectedStorage.title,
       selectedId: selectedStorage.id,
@@ -132,29 +149,67 @@ class ThirdPartyStorageModule extends React.PureComponent {
     };
 
     const { GoogleId, RackspaceId, SelectelId, AmazonId } = ThirdPartyStorages;
+
+    const advancedOptions = comboBoxOptions?.map((item) => {
+      return (
+        <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+          <DropDownItem
+            onClick={this.onSelect}
+            className={item.className}
+            data-third-party-key={item.key}
+            disabled={item.disabled}
+          >
+            <Text className="drop-down-item_text" fontWeight={600}>
+              {item.label}
+            </Text>
+
+            {!item.disabled && !item.connected ? (
+              <ReactSVG
+                src={ExternalLinkReactSvgUrl}
+                className="drop-down-item_icon"
+              />
+            ) : null}
+          </DropDownItem>
+        </StyledComboBoxItem>
+      );
+    });
+
     return (
       <StyledManualBackup>
         <div className="manual-backup_storages-module">
           <ComboBox
-            options={comboBoxOptions}
+            options={[]}
+            advancedOptions={advancedOptions}
             selectedOption={{ key: 0, label: selectedStorageTitle }}
             onSelect={this.onSelect}
-            isDisabled={!isMaxProgress || isStartCopy || !!!thirdPartyStorage}
+            isDisabled={!isMaxProgress || isStartCopy || !thirdPartyStorage}
+            size="content"
+            manualWidth="400px"
+            directionY="both"
+            displaySelectedOption
             noBorder={false}
-            scaled
+            isDefaultMode
+            hideMobileView={false}
+            forceCloseClickOutside
             scaledOptions
-            dropDownMaxHeight={400}
-            className="backup_combo"
             showDisabledItems
+            displayArrow
+            className="backup_combo"
           />
 
-          {selectedId === GoogleId && <GoogleCloudStorage {...commonProps} />}
+          {selectedId === GoogleId ? (
+            <GoogleCloudStorage {...commonProps} />
+          ) : null}
 
-          {selectedId === RackspaceId && <RackspaceStorage {...commonProps} />}
+          {selectedId === RackspaceId ? (
+            <RackspaceStorage {...commonProps} />
+          ) : null}
 
-          {selectedId === SelectelId && <SelectelStorage {...commonProps} />}
+          {selectedId === SelectelId ? (
+            <SelectelStorage {...commonProps} />
+          ) : null}
 
-          {selectedId === AmazonId && <AmazonStorage {...commonProps} />}
+          {selectedId === AmazonId ? <AmazonStorage {...commonProps} /> : null}
         </div>
       </StyledManualBackup>
     );

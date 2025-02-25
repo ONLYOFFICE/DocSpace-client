@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,12 +26,12 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import CategoryFilterDesktop from "./DesktopView";
-import CategoryFilterMobile from "./MobileView";
 import { mobile } from "@docspace/shared/utils";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import styled, { css } from "styled-components";
+import CategoryFilterMobile from "./MobileView";
+import CategoryFilterDesktop from "./DesktopView";
 
 export const StyledCategoryFilterWrapper = styled.div`
   width: 100%;
@@ -94,6 +94,7 @@ const CategoryFilter = ({
 
   useEffect(() => {
     (async () => {
+      if (!oformsFilter.locale) return;
       let newMenuItems = await fetchCategoryTypes();
       if (!newMenuItems) {
         filterOformsByLocaleIsLoading &&
@@ -103,9 +104,9 @@ const CategoryFilter = ({
 
       const categoryPromises = newMenuItems.map(
         (item) =>
-          new Promise((res) =>
-            res(fetchCategoriesOfCategoryType(item.attributes.categoryId)),
-          ),
+          new Promise((resolve) => {
+            resolve(fetchCategoriesOfCategoryType(item.attributes.categoryId));
+          }),
       );
 
       Promise.all(categoryPromises)

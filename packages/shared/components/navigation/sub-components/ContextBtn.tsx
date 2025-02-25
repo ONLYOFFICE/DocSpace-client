@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/17/vertical-dots.react.svg?url";
 
 import { IconButton } from "../../icon-button";
-import { ContextMenu, TContextMenuRef } from "../../context-menu";
+import { ContextMenu, ContextMenuRefType } from "../../context-menu";
 
-import { IContextButtonProps } from "../Navigation.types";
+import { TContextButtonProps } from "../Navigation.types";
 
 const ContextButton = ({
   className,
@@ -40,13 +40,23 @@ const ContextButton = ({
   isTrashFolder,
   isMobile,
   id,
+  title,
   onCloseDropBox,
   onContextOptionsClick,
+  contextButtonAnimation,
+  guidAnimationVisible,
   ...rest
-}: IContextButtonProps) => {
+}: TContextButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [animationClasses, setAnimationClasses] = useState<string[]>([]);
   const ref = useRef<HTMLDivElement | null>(null);
-  const menuRef = useRef<TContextMenuRef | null>(null);
+  const menuRef = useRef<ContextMenuRefType>(null);
+
+  useEffect(() => {
+    if (guidAnimationVisible) {
+      return contextButtonAnimation?.(setAnimationClasses);
+    }
+  }, [guidAnimationVisible]);
 
   const toggle = (e: React.MouseEvent<HTMLDivElement>, open: boolean) => {
     if (open) {
@@ -71,7 +81,11 @@ const ContextButton = ({
   const model = getData();
 
   return (
-    <div ref={ref} className={className} {...rest}>
+    <div
+      ref={ref}
+      className={`${className} ${animationClasses.join(" ")}`}
+      {...rest}
+    >
       <IconButton
         onClick={onClick}
         iconName={VerticalDotsReactSvgUrl}
@@ -81,10 +95,10 @@ const ContextButton = ({
       />
       <ContextMenu
         model={model}
-        // containerRef={ref}
         ref={menuRef}
         onHide={onHide}
         scaled={false}
+        withBackdrop
         leftOffset={isTrashFolder ? 188 : isMobile ? 150 : 0}
       />
     </div>

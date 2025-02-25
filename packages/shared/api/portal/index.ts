@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
@@ -33,30 +36,33 @@ import {
   TPortalTariff,
   TRestoreProgress,
 } from "./types";
+import { Nullable } from "../../types";
 
-export function getShortenedLink(link: string) {
-  return request({
+export async function getShortenedLink(link: string) {
+  const shortLink = (await request({
     method: "put",
     url: "/portal/getshortenlink",
     data: { link },
-  });
+  })) as string;
+
+  return shortLink;
 }
 
 export async function getInvitationLink(type: EmployeeType) {
-  const res = await request({
+  const res = (await request({
     method: "get",
     url: `/portal/users/invite/${type}`,
-  });
+  })) as string;
 
   return res;
 }
 
 export function getInvitationLinks() {
   return Promise.all([
-    getInvitationLink(EmployeeType.User),
+    getInvitationLink(EmployeeType.RoomAdmin),
     getInvitationLink(EmployeeType.Guest),
     getInvitationLink(EmployeeType.Admin),
-    getInvitationLink(EmployeeType.Collaborator),
+    getInvitationLink(EmployeeType.User),
   ]).then(
     ([
       userInvitationLinkResp,
@@ -110,10 +116,13 @@ export function deleteBackupSchedule() {
   return request(options);
 }
 
-export function getBackupSchedule() {
+export function getBackupSchedule(dump: boolean = false) {
   const options = {
     method: "get",
     url: "/portal/getbackupschedule",
+    params: {
+      dump,
+    },
   };
   return request(options);
 }
@@ -161,7 +170,13 @@ export function getBackupHistory() {
   return request({ method: "get", url: "/portal/getbackuphistory" });
 }
 
-export function startRestore(backupId, storageType, storageParams, notify) {
+export function startRestore(
+  backupId,
+  storageType,
+  storageParams,
+  notify,
+  dump = false,
+) {
   return request({
     method: "post",
     url: `/portal/startrestore`,
@@ -170,6 +185,7 @@ export function startRestore(backupId, storageType, storageParams, notify) {
       storageType,
       storageParams,
       notify,
+      dump,
     },
   });
 }
@@ -213,7 +229,7 @@ export function sendDeletePortalEmail() {
   });
 }
 
-export function suspendPortal(confirmKey = null) {
+export function suspendPortal(confirmKey: Nullable<string> = null) {
   const options = {
     method: "put",
     url: "/portal/suspend",
@@ -224,7 +240,7 @@ export function suspendPortal(confirmKey = null) {
   return request(options);
 }
 
-export function continuePortal(confirmKey = null) {
+export function continuePortal(confirmKey: Nullable<string> = null) {
   const options = {
     method: "put",
     url: "/portal/continue",
@@ -235,7 +251,7 @@ export function continuePortal(confirmKey = null) {
   return request(options);
 }
 
-export function deletePortal(confirmKey = null) {
+export function deletePortal(confirmKey: Nullable<string> = null) {
   const options = {
     method: "delete",
     url: "/portal/delete",
@@ -306,12 +322,14 @@ export async function getPaymentLink(
   return res;
 }
 
-export function updatePayment(adminCount) {
+export function updatePayment(adminCount, isYearTariff) {
+  const data = isYearTariff ? { adminyear: adminCount } : { admin: adminCount };
+
   return request({
     method: "put",
     url: `/portal/payment/update`,
     data: {
-      quantity: { admin: adminCount },
+      quantity: data,
     },
   });
 }

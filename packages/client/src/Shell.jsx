@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,17 +33,22 @@ import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import { toast as toastify } from "react-toastify";
 
+import SocketHelper, {
+  SocketEvents,
+  SocketCommands,
+} from "@docspace/shared/utils/socket";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
 import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
-import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { updateTempContent } from "@docspace/shared/utils/common";
 import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import "@docspace/shared/styles/theme.scss";
 
 import config from "PACKAGE_FILE";
 
@@ -57,9 +62,9 @@ import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import useCreateFileError from "./Hooks/useCreateFileError";
 
-// import ReactSmartBanner from "./components/SmartBanner";
+import ReactSmartBanner from "./components/SmartBanner";
 
-const Shell = ({ items = [], page = "home", ...rest }) => {
+const Shell = ({ page = "home", ...rest }) => {
   const {
     isLoaded,
     loadBaseInfo,
@@ -68,20 +73,15 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     language,
     FirebaseHelper,
     setCheckedMaintenance,
-    socketHelper,
     setPreparationPortalDialogVisible,
     isBase,
     setTheme,
     setMaintenanceExist,
-    roomsMode,
     setSnackbarExist,
     userTheme,
-    //user,
     userId,
     userLoginEventId,
     currentDeviceType,
-    timezone,
-    showArticleLoader,
     setPortalTariff,
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
@@ -89,6 +89,14 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     pagesWithoutNavMenu,
     isFrame,
     barTypeInFrame,
+    setShowGuestReleaseTip,
+
+    isOwner,
+    isAdmin,
+    releaseDate,
+    registrationDate,
+    logoText,
+    setLogoText,
   } = rest;
 
   const theme = useTheme();
@@ -99,15 +107,11 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setConvertPasswordDialogVisible,
   });
 
-  useEffect(() => {
-    const regex = /(\/){2,}/g;
-    const replaceRegex = /(\/)+/g;
-    const pathname = window.location.pathname;
+  const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
-    if (regex.test(pathname)) {
-      window.location.replace(pathname.replace(replaceRegex, "$1"));
-    }
-  }, []);
+  useEffect(() => {
+    if (!logoText) setLogoText(t("Common:OrganizationName"));
+  }, [logoText, setLogoText]);
 
   useEffect(() => {
     try {
@@ -133,70 +137,63 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "backup-restore" },
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "restore",
     });
 
-    socketHelper.on("restore-backup", () => {
-      getRestoreProgress()
-        .then((response) => {
-          if (!response) {
-            console.log(
-              "Skip show <PreparationPortalDialog /> - empty progress response",
-            );
-            return;
-          }
-          setPreparationPortalDialogVisible(true);
-        })
-        .catch((e) => {
-          console.error("getRestoreProgress", e);
-        });
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "quota",
     });
 
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "quota" },
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "QUOTA",
+      individual: true,
+    });
+  }, []);
+
+  useEffect(() => {
+    SocketHelper.emit(SocketCommands.Subscribe, { roomParts: userId });
+  }, [userId]);
+
+  useEffect(() => {
+    SocketHelper.on(SocketEvents.RestoreBackup, () => {
+      setPreparationPortalDialogVisible(true);
     });
 
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "QUOTA", individual: true },
-    });
+    return () => {
+      SocketHelper.off(SocketEvents.RestoreBackup, () => {
+        setPreparationPortalDialogVisible(false);
+      });
+    };
+  }, [setPreparationPortalDialogVisible]);
 
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: userId },
-    });
-
-    socketHelper.on("s:logout-session", (loginEventId) => {
+  useEffect(() => {
+    const callback = (loginEventId) => {
       console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
 
       if (userLoginEventId === loginEventId || loginEventId === 0) {
+        sessionStorage.setItem("referenceUrl", window.location.href);
+        sessionStorage.setItem("loggedOutUserId", userId);
+
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         );
       }
-    });
-  }, [
-    socketHelper,
-    userLoginEventId,
-    setPreparationPortalDialogVisible,
-    userId,
-  ]);
+    };
 
-  const { t, ready } = useTranslation(["Common"]); //TODO: if enable banner ["Common", "SmartBanner"]
+    SocketHelper.on(SocketEvents.LogoutSession, callback);
+
+    return () => {
+      SocketHelper.off(SocketEvents.LogoutSession, callback);
+    };
+  }, [userLoginEventId]);
 
   let snackTimer = null;
   let fbInterval = null;
-  let lastCampaignStr = null;
+  // let lastCampaignStr = null;
   const LS_CAMPAIGN_DATE = "maintenance_to_date";
   const DATE_FORMAT = "YYYY-MM-DD";
   const SNACKBAR_TIMEOUT = 10000;
-
-  const setSnackBarTimer = (campaign) => {
-    snackTimer = setTimeout(() => showSnackBar(campaign), SNACKBAR_TIMEOUT);
-  };
 
   const clearSnackBarTimer = () => {
     if (!snackTimer) return;
@@ -206,7 +203,13 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   };
 
   const showSnackBar = (campaign) => {
-    clearSnackBarTimer();
+    const setSnackBarTimer = (campaignItem) => {
+      clearSnackBarTimer();
+      snackTimer = setTimeout(
+        () => showSnackBar(campaignItem),
+        SNACKBAR_TIMEOUT,
+      );
+    };
 
     let skipMaintenance;
 
@@ -263,14 +266,14 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     if (!document.getElementById("main-bar")) return;
 
-    const campaignStr = JSON.stringify(campaign);
+    // const campaignStr = JSON.stringify(campaign);
     // let skipRender = lastCampaignStr === campaignStr;
 
     const hasChild = document.getElementById("main-bar").hasChildNodes();
 
     if (hasChild) return;
 
-    lastCampaignStr = campaignStr;
+    // lastCampaignStr = campaignStr;
 
     const targetDate = to.locale(language).format("LL");
 
@@ -278,8 +281,8 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       parentElementId: "main-bar",
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
-        targetDate: targetDate,
-        productName: `${t("Common:OrganizationName")} ${t("Common:ProductName")}`,
+        targetDate,
+        productName: `${logoText} ${t("Common:ProductName")}`,
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
       onAction: () => {
@@ -300,25 +303,22 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     SnackBar.show(barConfig);
   };
 
-  const fetchMaintenance = () => {
+  const fetchMaintenance = async () => {
     try {
       if (!FirebaseHelper.isEnabled) return;
 
-      FirebaseHelper.checkMaintenance()
-        .then((campaign) => {
-          console.log("checkMaintenance", campaign);
-          if (!campaign) {
-            setCheckedMaintenance(true);
-            clearSnackBarTimer();
-            SnackBar.close();
-            return;
-          }
+      const campaign = await FirebaseHelper.checkMaintenance();
 
-          setTimeout(() => showSnackBar(campaign), 1000);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      console.log("checkMaintenance", campaign);
+
+      if (!campaign) {
+        setCheckedMaintenance(true);
+        clearSnackBarTimer();
+        SnackBar.close();
+        return;
+      }
+
+      setTimeout(() => showSnackBar(campaign), 1000);
     } catch (e) {
       console.log(e);
     }
@@ -433,11 +433,36 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     });
   }, [isLoaded]);
 
+  useEffect(() => {
+    if (isFrame) return setShowGuestReleaseTip(false);
+
+    if (!releaseDate || !registrationDate) return;
+
+    if (!isAdmin && !isOwner) return setShowGuestReleaseTip(false);
+
+    const closed = localStorage.getItem(`closedGuestReleaseTip-${userId}`);
+
+    if (closed) return setShowGuestReleaseTip(false);
+
+    const regDate = new Date(registrationDate).getTime();
+    const release = new Date(releaseDate).getTime();
+
+    setShowGuestReleaseTip(regDate < release);
+  }, [
+    isFrame,
+    userId,
+    setShowGuestReleaseTip,
+    isAdmin,
+    isOwner,
+    releaseDate,
+    registrationDate,
+  ]);
+
   const rootElement = document.getElementById("root");
 
   const toast =
     currentDeviceType === DeviceType.mobile ? (
-      <Portal element={<Toast />} appendTo={rootElement} visible={true} />
+      <Portal element={<Toast />} appendTo={rootElement} visible />
     ) : (
       <Toast />
     );
@@ -448,17 +473,24 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     pagesWithoutNavMenu ||
     location.pathname === "/access-restricted";
 
+  const isMobileOnly = currentDeviceType === DeviceType.mobile;
+
   return (
     <Layout>
       {toast}
-      {/* <ReactSmartBanner t={t} ready={ready} /> */}
-      {withoutNavMenu ? <></> : <NavMenu />}
+      {isMobileOnly && !isFrame ? (
+        <ReactSmartBanner t={t} ready={ready} />
+      ) : null}
+      {withoutNavMenu ? null : <NavMenu />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
-        {barTypeInFrame !== "none" && <MainBar />}
+        {!isMobileOnly && !isFrame ? (
+          <ReactSmartBanner t={t} ready={ready} />
+        ) : null}
+        {barTypeInFrame !== "none" ? <MainBar /> : null}
         <div className="main-container">
           <Outlet />
         </div>
@@ -496,13 +528,16 @@ const ShellWrapper = inject(
       setCheckedMaintenance,
       setMaintenanceExist,
       setSnackbarExist,
-      socketHelper,
       setTheme,
       currentDeviceType,
       isFrame,
       frameConfig,
       isPortalDeactivate,
       isPortalRestoring,
+      setShowGuestReleaseTip,
+      buildVersionInfo,
+      logoText,
+      setLogoText,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -520,6 +555,8 @@ const ShellWrapper = inject(
 
     const {
       setConvertPasswordDialogVisible,
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
 
       setFormCreationInfo,
     } = dialogsStore;
@@ -549,8 +586,9 @@ const ShellWrapper = inject(
       FirebaseHelper: firebaseHelper,
       setCheckedMaintenance,
       setMaintenanceExist,
-      socketHelper,
       setPreparationPortalDialogVisible,
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
       isBase,
       setTheme,
       roomsMode,
@@ -558,6 +596,10 @@ const ShellWrapper = inject(
       userTheme: isFrame ? frameConfig?.theme : userTheme,
       userId: userStore?.user?.id,
       userLoginEventId: userStore?.user?.loginEventId,
+      isOwner: userStore?.user?.isOwner,
+      isAdmin: userStore?.user?.isAdmin,
+      registrationDate: userStore?.user?.registrationDate,
+
       currentDeviceType,
       showArticleLoader: clientLoadingStore.showArticleLoader,
       setPortalTariff,
@@ -567,6 +609,10 @@ const ShellWrapper = inject(
       pagesWithoutNavMenu,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
+      setShowGuestReleaseTip,
+      releaseDate: buildVersionInfo.releaseDate,
+      logoText,
+      setLogoText,
     };
   },
 )(observer(Shell));

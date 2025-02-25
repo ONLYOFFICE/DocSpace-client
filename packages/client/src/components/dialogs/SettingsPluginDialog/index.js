@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -51,8 +51,6 @@ const SettingsPluginDialog = ({
   onClose,
   onDelete,
   updatePlugin,
-
-  ...rest
 }) => {
   const { t } = useTranslation(["WebPlugins", "Common", "Files", "People"]);
 
@@ -97,36 +95,37 @@ const SettingsPluginDialog = ({
       displayType="aside"
       onClose={onCloseAction}
       withBodyScroll
-      withFooterBorder
     >
       <ModalDialog.Header>
         <Header t={t} name={plugin?.name} />
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <WrappedComponent
-          pluginName={plugin.name}
-          component={{
-            component: PluginComponents.box,
-            props: customSettingsProps,
-          }}
-          saveButton={saveButton}
-          setSaveButtonProps={setSaveButtonProps}
-          setModalRequestRunning={setModalRequestRunning}
-        />
-        <Info
-          t={t}
-          plugin={plugin}
-          withDelete={withDelete}
-          withSeparator={!!customSettingsProps?.children}
-        />
-        {withDelete && (
-          <Button
-            label={t("DeletePlugin")}
-            onClick={onDeleteAction}
-            scale
-            size={"normal"}
+        <div style={{ marginTop: "16px" }}>
+          <WrappedComponent
+            pluginName={plugin.name}
+            component={{
+              component: PluginComponents.box,
+              props: customSettingsProps,
+            }}
+            saveButton={saveButton}
+            setSaveButtonProps={setSaveButtonProps}
+            setModalRequestRunning={setModalRequestRunning}
           />
-        )}
+          <Info
+            t={t}
+            plugin={plugin}
+            withDelete={withDelete}
+            withSeparator={!!customSettingsProps?.children}
+          />
+          {withDelete ? (
+            <Button
+              label={t("DeletePlugin")}
+              onClick={onDeleteAction}
+              scale
+              size="normal"
+            />
+          ) : null}
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Footer
@@ -161,7 +160,7 @@ export default inject(({ settingsStore, pluginStore }) => {
 
   const plugin = pluginList.find((p) => p.name === pluginName);
 
-  const withDelete = pluginOptions.delete && !plugin.system;
+  const withDelete = pluginOptions.delete && !plugin?.system;
 
   const pluginSettings = plugin?.getAdminPluginSettings();
 

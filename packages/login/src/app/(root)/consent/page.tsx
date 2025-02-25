@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,10 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { IClientProps } from "@docspace/shared/utils/oauth/types";
+import { cookies, headers } from "next/headers";
 
-import Consent from "@/components/Consent";
-import { getOAuthClient, getScopeList, getUser } from "@/utils/actions";
+import { IClientProps } from "@docspace/shared/utils/oauth/types";
+import generateJwt from "@docspace/shared/utils/oauth/generate-jwt";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { LANGUAGE } from "@docspace/shared/constants";
+
+import {
+  getConfig,
+  getOAuthClient,
+  getPortal,
+  getScopeList,
+  getSettings,
+  getUser,
+} from "@/utils/actions";
+import { GreetingLoginContainer } from "@/components/GreetingContainer";
+
+import Consent from "./page.client";
 
 async function Page({
   searchParams,
@@ -35,17 +49,68 @@ async function Page({
   searchParams: { [key: string]: string };
 }) {
   const clientId = searchParams.clientId ?? searchParams.client_id;
-  const [client, scopes, user] = await Promise.all([
-    getOAuthClient(clientId),
-    getScopeList(),
+
+  const [user, settings, config, portal] = await Promise.all([
     getUser(),
+    getSettings(),
+    getConfig(),
+    getPortal(),
   ]);
+
+  const jwtToken = generateJwt(
+    user!.id,
+    user!.displayName,
+    user!.email,
+    portal.tenantId,
+    portal.tenantAlias,
+    user?.isAdmin || user?.isOwner || false,
+    config?.oauth2?.secret ?? "empty",
+  );
+
+  const [data, scopes] = await Promise.all([
+    getOAuthClient(clientId),
+    getScopeList(jwtToken),
+  ]);
+
+  const redirect_url = cookies().get("x-redirect-authorization-uri")!.value;
+
+  const client = data?.client as IClientProps;
 
   if (!client || (client && !("clientId" in client)) || !scopes || !user)
     return "";
 
+  const isRegisterContainerVisible =
+    typeof settings === "string" ? undefined : settings?.enabledJoin;
+
+  const settingsCulture =
+    typeof settings === "string" ? undefined : settings?.culture;
+
+  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+
   return (
-    <Consent client={client as IClientProps} scopes={scopes} user={user} />
+    <>
+      {settings && typeof settings !== "string" && (
+        <ColorTheme
+          themeId={ThemeId.LinkForgotPassword}
+          isRegisterContainerVisible={isRegisterContainerVisible}
+        >
+          <>
+            <GreetingLoginContainer
+              greetingSettings={settings?.greetingSettings}
+              culture={culture}
+            />
+            <Consent
+              client={client}
+              scopes={scopes}
+              user={user}
+              baseUrl={config?.oauth2?.origin}
+              token={jwtToken}
+              redirect_url={redirect_url}
+            />
+          </>
+        </ColorTheme>
+      )}
+    </>
   );
 }
 

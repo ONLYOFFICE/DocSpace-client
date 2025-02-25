@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,19 +26,29 @@
 
 import React from "react";
 import styled from "styled-components";
-import { StyledParam } from "./StyledParam";
 
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Label } from "@docspace/shared/components/label";
 import { TextInput } from "@docspace/shared/components/text-input";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
+
+import { StyledParam } from "./StyledParam";
+
 const StyledInputParam = styled(StyledParam)`
   flex-direction: column;
   gap: 4px;
   max-height: 54px;
 
-  .input-label {
-    cursor: pointer;
-    user-select: none;
+  .input-label-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .input-label {
+      cursor: pointer;
+      user-select: none;
+    }
   }
 `;
 
@@ -53,31 +63,45 @@ const InputParam = React.forwardRef(
       onFocus,
       onBlur,
       isDisabled,
-      isValidTitle,
+      isValidTitle = true,
       isWrongTitle,
       errorMessage,
       isAutoFocussed,
       onKeyUp,
       onKeyDown,
+      name,
+      tooltipLabel,
     },
     ref,
   ) => {
     return (
       <StyledInputParam>
-        <Label
-          title={title}
-          className="input-label"
-          display="display"
-          htmlFor={id}
-          text={title}
-        />
+        <div className="input-label-wrapper">
+          <Label
+            title={title}
+            className="input-label"
+            display="display"
+            htmlFor={id}
+            text={title}
+          />
+          {tooltipLabel ? (
+            <HelpButton
+              place="right"
+              tooltipContent={
+                <Text fontSize="12px" fontWeight={400}>
+                  {tooltipLabel}
+                </Text>
+              }
+            />
+          ) : null}
+        </div>
 
         <FieldContainer
-          isVertical={true}
+          isVertical
           labelVisible={false}
           hasError={!isValidTitle || isWrongTitle}
           errorMessage={errorMessage}
-          errorMessageWidth={"100%"}
+          errorMessageWidth="100%"
         >
           <TextInput
             forwardedRef={ref}
@@ -95,6 +119,7 @@ const InputParam = React.forwardRef(
             onKeyUp={onKeyUp}
             onKeyDown={onKeyDown}
             maxLength={170}
+            name={name}
           />
         </FieldContainer>
       </StyledInputParam>
@@ -102,8 +127,6 @@ const InputParam = React.forwardRef(
   },
 );
 
-InputParam.defaultProps = {
-  isValidTitle: true,
-};
+InputParam.displayName = "InputParam";
 
 export default InputParam;

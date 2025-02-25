@@ -6,6 +6,7 @@
     "paths": {
       "PUBLIC_DIR/*": ["../../public/*"],
       "SRC_DIR/*": ["./src/*"],
-    },
-  },
+      "PACKAGE_FILE": ["./package.json"]
+    }
+  }
 }

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,7 +40,6 @@ import DeleteOwnerProfileDialog from "./DeleteOwnerProfileDialog";
 import SendInviteDialog from "./SendInviteDialog";
 import ChangeUserStatusDialog from "./ChangeUserStatusDialog";
 import ChangeUserTypeDialog from "./ChangeUserTypeDialog";
-import DataLossWarningDialog from "./DataLossWarningDialog";
 import ResetApplicationDialog from "./ResetApplicationDialog";
 import BackupCodesDialog from "./BackupCodesDialog";
 import CreateRoomDialog from "./CreateEditRoomDialog/CreateRoomDialog";
@@ -49,7 +48,7 @@ import ChangePortalOwnerDialog from "./ChangePortalOwnerDialog";
 import ChangeNameDialog from "./ChangeNameDialog";
 import AvatarEditorDialog from "./AvatarEditorDialog";
 import DeletePortalDialog from "./DeletePortalDialog";
-import InviteUsersWarningDialog from "./InviteUsersWarningDialog";
+import InviteQuotaWarningDialog from "./InviteQuotaWarningDialog";
 import LogoutSessionDialog from "./LogoutSessionDialog";
 import LogoutAllSessionDialog from "./LogoutAllSessionDialog";
 import CreateRoomConfirmDialog from "./CreateRoomConfirmDialog";
@@ -69,6 +68,12 @@ import ShareFolderDialog from "./ShareFolderDialog";
 import EditGroupMembersDialog from "./EditGroupMembersDialog";
 import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
 import DeleteGroupDialog from "./DeleteGroupDialog";
+import RoomLogoCoverDialog from "./RoomLogoCoverDialog";
+import RemoveGuestDialog from "./RemoveGuest";
+import GuestReleaseTipDialog from "./GuestReleaseTip";
+import DeleteVersionDialog from "./DeleteVersionDialog";
+import CancelOperationDialog from "./CancelOperationDialog";
+import FormFillingTipsDialog from "./FormFillingTipsDialog";
 
 export {
   EmptyTrashDialog,
@@ -87,7 +92,6 @@ export {
   SendInviteDialog,
   ChangeUserStatusDialog,
   ChangeUserTypeDialog,
-  DataLossWarningDialog,
   ResetApplicationDialog,
   BackupCodesDialog,
   CreateRoomDialog,
@@ -98,7 +102,7 @@ export {
   AvatarEditorDialog,
   DeletePortalDialog,
   LogoutSessionDialog,
-  InviteUsersWarningDialog,
+  InviteQuotaWarningDialog,
   LogoutAllSessionDialog,
   PortalRenamingDialog,
   DataReassignmentDialog,
@@ -116,4 +120,10 @@ export {
   ChangeQuotaDialog,
   ChangeStorageQuotaDialog,
   DeleteGroupDialog,
+  RoomLogoCoverDialog,
+  RemoveGuestDialog,
+  GuestReleaseTipDialog,
+  DeleteVersionDialog,
+  CancelOperationDialog,
+  FormFillingTipsDialog,
 };

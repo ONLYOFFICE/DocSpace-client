@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,12 +26,13 @@
 
 import { RectangleSkeletonProps } from "../../rectangle";
 
-export interface FilterBlockProps extends RectangleSkeletonProps {
+export type FilterBlockProps = RectangleSkeletonProps & {
   id?: string;
   className?: string;
   isRooms?: boolean;
-  isAccounts?: boolean;
-  isPeopleAccounts?: boolean;
-  isGroupsAccounts?: boolean;
-  isInsideGroup?: boolean;
-}
+  isContactsPage?: boolean;
+  isContactsPeoplePage?: boolean;
+  isContactsGroupsPage?: boolean;
+  isContactsInsideGroupPage?: boolean;
+  isContactsGuestsPage?: boolean;
+};

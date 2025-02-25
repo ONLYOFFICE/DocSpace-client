@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Гостя <strong>{{userName}}</strong> буде переміщено до розділу {{membersSection}}, йому буде призначено тип «Користувач». Користувачі мають власний розділ {{documentsSection}}, можуть створювати та редагувати файли, але не можуть створювати кімнати.",
+  "ChangeGuestsTypeMessageMulti": "Вибраних гостей буде переміщено до розділу {{membersSection}}, їм буде призначено тип «Користувач». Користувачі мають власний розділ {{documentsSection}}, можуть створювати та редагувати файли, але не можуть створювати кімнати.",
   "ChangeUserTypeButton": "Змінити тип",
   "ChangeUserTypeHeader": "Змінити тип користувача",
-  "ChangeUserTypeMessage": "Користувачів типу \"{{ firstType }}\" буде переміщено до типу \"{{ secondType }}\".",
-  "ChangeUserTypeMessageMulti": "Вибраних користувачів буде переміщено до типу '{{ secondType }}'.",
+  "ChangeUserTypeMessage": "Користувачів типу <strong>\"{{ firstType }}\"</strong> буде переміщено до типу <strong>\"{{ secondType }}\"</strong>.",
+  "ChangeUserTypeMessageMulti": "Вибраних користувачів буде переміщено до типу <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageWarning": "Ви не можете змінити тип адміністраторів {{productName}} та свій тип.",
+  "SuccessChangeGuestType": "Тип гостя успішно змінено",
   "SuccessChangeUserType": "Тип користувача успішно змінено"
 }

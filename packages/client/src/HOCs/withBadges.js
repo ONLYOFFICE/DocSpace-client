@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,13 +27,11 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { ShareAccessRights, FileStatus } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-import Badges from "../components/Badges";
 import config from "PACKAGE_FILE";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
-import { isMobileOnly } from "react-device-detect";
+import Badges from "../components/Badges";
 
 export default function withBadges(WrappedComponent) {
   class WithBadges extends React.Component {
@@ -45,8 +43,6 @@ export default function withBadges(WrappedComponent) {
 
     onShowVersionHistory = () => {
       const {
-        homepage,
-        isTabletView,
         item,
         setIsVerHistoryPanel,
         fetchFileVersions,
@@ -54,14 +50,15 @@ export default function withBadges(WrappedComponent) {
         isTrashFolder,
       } = this.props;
       if (isTrashFolder) return;
-      fetchFileVersions(item.id + "", item.security);
+      fetchFileVersions(`${item.id}`, item.security);
       setIsVerHistoryPanel(true);
     };
 
     onBadgeClick = () => {
-      if (this.state.disableBadgeClick) return;
+      const { disableBadgeClick } = this.state;
+      if (disableBadgeClick) return;
 
-      const { item, markAsRead, setNewFilesPanelVisible } = this.props;
+      const { item, markAsRead } = this.props;
       this.setState(() => ({
         disableBadgeClick: true,
       }));
@@ -74,15 +71,12 @@ export default function withBadges(WrappedComponent) {
         markAsRead([], [item.id], item).then(() => {
           enableBadgeClick();
         });
-      } else {
-        setNewFilesPanelVisible(true, null, item).then(() => {
-          enableBadgeClick();
-        });
       }
     };
 
     onUnpinClick = (e) => {
-      if (this.state.disableUnpinClick) return;
+      const { disableUnpinClick } = this.state;
+      if (disableUnpinClick) return;
 
       this.setState({ disableUnpinClick: true });
 
@@ -111,8 +105,18 @@ export default function withBadges(WrappedComponent) {
     };
 
     setConvertDialogVisible = () => {
-      this.props.setConvertItem(this.props.item);
-      this.props.setConvertDialogVisible(true);
+      const {
+        setConvertItem,
+        setConvertDialogVisible,
+        setConvertDialogData,
+        item,
+      } = this.props;
+
+      setConvertItem(item);
+      setConvertDialogVisible(true);
+      setConvertDialogData({
+        files: item,
+      });
     };
 
     onCopyPrimaryLink = async () => {
@@ -140,6 +144,12 @@ export default function withBadges(WrappedComponent) {
       checkAndOpenLocationAction?.(file);
     };
 
+    onCreateRoom = () => {
+      const { item, onCreateRoomFromTemplate } = this.props;
+
+      onCreateRoomFromTemplate(item);
+    };
+
     render() {
       const {
         t,
@@ -157,6 +167,7 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolder,
         isPublicRoom,
         isRecentTab,
+        isTemplatesFolder,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -198,6 +209,8 @@ export default function withBadges(WrappedComponent) {
           isArchiveFolder={isArchiveFolder}
           isRecentTab={isRecentTab}
           canEditing={canEditing}
+          onCreateRoom={this.onCreateRoom}
+          isTemplatesFolder={isTemplatesFolder}
         />
       );
 
@@ -228,20 +241,19 @@ export default function withBadges(WrappedComponent) {
         isArchiveFolderRoot,
         isArchiveFolder,
         isRecentTab,
+        isTemplatesFolder,
       } = treeFoldersStore;
       const {
         markAsRead,
         setPinAction,
         setMuteAction,
         checkAndOpenLocationAction,
+        onCreateRoomFromTemplate,
       } = filesActionsStore;
       const { isTabletView, isDesktopClient, theme } = settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
-      const {
-        setNewFilesPanelVisible,
-        setConvertDialogVisible,
-        setConvertItem,
-      } = dialogsStore;
+      const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
+        dialogsStore;
       const { setIsLoading, isMuteCurrentRoomNotifications, getPrimaryLink } =
         filesStore;
       const { roomType, mute } = item;
@@ -261,9 +273,9 @@ export default function withBadges(WrappedComponent) {
         setIsVerHistoryPanel,
         fetchFileVersions,
         markAsRead,
-        setNewFilesPanelVisible,
         setIsLoading,
         setConvertDialogVisible,
+        setConvertDialogData,
         setConvertItem,
         isDesktopClient,
         setPinAction,
@@ -274,6 +286,8 @@ export default function withBadges(WrappedComponent) {
         isPublicRoom: publicRoomStore.isPublicRoom,
         isRecentTab,
         checkAndOpenLocationAction,
+        isTemplatesFolder,
+        onCreateRoomFromTemplate,
       };
     },
   )(observer(WithBadges));

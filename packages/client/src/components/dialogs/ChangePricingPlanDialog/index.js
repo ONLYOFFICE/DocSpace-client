@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
@@ -36,14 +35,13 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { inject, observer } from "mobx-react";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 
-const ModalDialogContainer = styled(ModalDialog)`
+const StyledBodyContent = styled.div`
+  display: contents;
+
   .cannot-downgrade-plan {
     margin-bottom: 16px;
   }
 
-  .downgrade-plan-wrapper {
-    display: flex;
-  }
   .save-or-change {
     margin-top: 16px;
   }
@@ -71,7 +69,7 @@ const ChangePricingPlanDialog = ({
       <Trans t={t} i18nKey="PlanUsersLimit" ns="DowngradePlanDialog">
         You wish to downgrade the team to
         <strong>{{ usersCount: managersCount }}</strong>
-        admins/power users, and current number of such users in your
+        admins, and current number of such users in your
         {{ productName: t("Common:ProductName") }} is
         <strong>{{ currentUsersCount: addedManagersCount }}</strong>
       </Trans>
@@ -90,41 +88,39 @@ const ChangePricingPlanDialog = ({
   );
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       visible={visible}
       onClose={onCloseModal}
       autoMaxHeight
       isLarge
       isLoading={!ready}
     >
-      <ModalDialog.Header>
-        <Text isBold fontSize="21px">
-          {t("ChangePricingPlan")}
-        </Text>
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("ChangePricingPlan")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text fontSize="13px" isBold className="cannot-downgrade-plan">
-          {t("CannotChangePlan")}
-        </Text>
-        {planUsersLimitations}
-        <br />
-        {storagePlanLimitations}
+        <StyledBodyContent>
+          <Text fontSize="13px" isBold className="cannot-downgrade-plan">
+            {t("CannotChangePlan")}
+          </Text>
+          {planUsersLimitations}
+          <br />
+          {storagePlanLimitations}
 
-        <Text fontSize="13px" className="save-or-change">
-          {t("SaveOrChange")}
-        </Text>
+          <Text fontSize="13px" className="save-or-change">
+            {t("SaveOrChange")}
+          </Text>
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           className="ok-button"
           label={t("Common:OKButton")}
           size="normal"
-          primary={true}
+          primary
           onClick={onCloseModal}
           tabIndex={3}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

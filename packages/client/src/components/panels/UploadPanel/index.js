@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,67 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
+import ClearReactSvgUrl from "PUBLIC_DIR/images/icons/17/clear.react.svg?url";
 import ButtonCancelReactSvgUrl from "PUBLIC_DIR/images/button.cancel.react.svg?url";
 
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import React from "react";
-import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { IconButton } from "@docspace/shared/components/icon-button";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
 
-import { StyledUploadHeader, StyledUploadBody } from "../StyledPanels";
+import { StyledUploadBody } from "../StyledPanels";
 import FileList from "./FileList";
 import withLoader from "../../../HOCs/withLoader";
 
-const StyledModal = styled(ModalDialog)`
-  .heading {
-    width: 100%;
-  }
-`;
-
 class UploadPanelComponent extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.ref = React.createRef();
-    this.scrollRef = React.createRef();
-  }
-
-  onClose = () => {
-    const {
-      uploaded,
-      converted,
-      clearUploadData,
-      uploadPanelVisible,
-      clearUploadedFiles,
-      setUploadPanelVisible,
-      clearPrimaryProgressData,
-    } = this.props;
-
-    setUploadPanelVisible(!uploadPanelVisible);
-
-    if (uploaded) {
-      if (converted) {
-        clearUploadData();
-        clearPrimaryProgressData();
-      } else {
-        clearUploadedFiles();
-      }
-    }
-  };
   componentDidMount() {
+    const { setNeedErrorChecking } = this.props;
+
     document.addEventListener("keyup", this.onKeyPress);
+    setNeedErrorChecking(true);
   }
+
   componentWillUnmount() {
     document.removeEventListener("keyup", this.onKeyPress);
   }
+
+  onClose = () => {
+    const { uploadPanelVisible, setUploadPanelVisible, setNeedErrorChecking } =
+      this.props;
+
+    setUploadPanelVisible(!uploadPanelVisible);
+    setNeedErrorChecking(false);
+  };
 
   onKeyPress = (event) => {
     if (event.key === "Esc" || event.key === "Escape") {
@@ -93,30 +69,31 @@ class UploadPanelComponent extends React.Component {
   };
 
   clearUploadPanel = () => {
-    this.props.clearUploadData();
+    const { clearUploadData, clearPrimaryProgressData } = this.props;
+    clearUploadData();
+    clearPrimaryProgressData(OPERATIONS_NAME.upload);
     this.onClose();
   };
 
   onCancelUpload = () => {
-    this.props.cancelUpload(this.props.t);
+    const { cancelUpload, t } = this.props;
+    cancelUpload(t);
   };
 
   render() {
-    //console.log("UploadPanel render");
+    // console.log("UploadPanel render");
     const {
       t,
       uploadPanelVisible,
       uploaded,
       converted,
-      uploadDataFiles,
       cancelConversion,
       isUploading,
       isUploadingAndConversion,
-      theme,
+      hideHeaderButton,
     } = this.props;
 
     const visible = uploadPanelVisible;
-    const zIndex = 310;
 
     const title = isUploading
       ? t("Uploads")
@@ -124,40 +101,32 @@ class UploadPanelComponent extends React.Component {
         ? t("UploadAndConvert")
         : t("Files:Convert");
 
+    const url =
+      uploaded && converted ? ClearReactSvgUrl : ButtonCancelReactSvgUrl;
+
+    const clickEvent =
+      uploaded && converted
+        ? this.clearUploadPanel
+        : uploaded
+          ? cancelConversion
+          : this.onCancelUpload;
+
     return (
-      <StyledModal
+      <ModalDialog
         visible={visible}
         onClose={this.onClose}
         displayType={ModalDialogType.aside}
+        {...(!hideHeaderButton && {
+          headerIcons: [{ key: "upload-panel", url, onClick: clickEvent }],
+        })}
       >
-        <ModalDialog.Header>
-          <StyledUploadHeader>
-            <div>{title}</div>
-            <div>
-              {uploaded && converted ? (
-                <IconButton
-                  size={17}
-                  iconName={ClearReactSvgUrl}
-                  isClickable
-                  onClick={this.clearUploadPanel}
-                />
-              ) : (
-                <IconButton
-                  size="20"
-                  iconName={ButtonCancelReactSvgUrl}
-                  isClickable
-                  onClick={uploaded ? cancelConversion : this.onCancelUpload}
-                />
-              )}
-            </div>
-          </StyledUploadHeader>
-        </ModalDialog.Header>
+        <ModalDialog.Header>{title}</ModalDialog.Header>
         <ModalDialog.Body>
           <StyledUploadBody>
             <FileList />
           </StyledUploadBody>
         </ModalDialog.Body>
-      </StyledModal>
+      </ModalDialog>
     );
   }
 }
@@ -173,16 +142,24 @@ export default inject(({ settingsStore, uploadDataStore }) => {
     clearUploadData,
     cancelUpload,
     cancelConversion,
-    clearUploadedFiles,
     uploadPanelVisible,
     setUploadPanelVisible,
     files,
     primaryProgressDataStore,
     isUploading,
     isUploadingAndConversion,
+    uploadedFilesHistory,
   } = uploadDataStore;
 
-  const { clearPrimaryProgressData } = primaryProgressDataStore;
+  const { clearPrimaryProgressData, setNeedErrorChecking } =
+    primaryProgressDataStore;
+
+  const filesWithConvert = uploadedFilesHistory.filter(
+    (file) => file.action === "convert",
+  );
+  const hideHeaderButton =
+    filesWithConvert.length > 0 &&
+    filesWithConvert.every((file) => file.inConversion);
 
   return {
     uploadPanelVisible,
@@ -193,12 +170,13 @@ export default inject(({ settingsStore, uploadDataStore }) => {
     clearUploadData,
     cancelUpload,
     cancelConversion,
-    clearUploadedFiles,
     uploadDataFiles: files,
     clearPrimaryProgressData,
     isUploading,
     isUploadingAndConversion,
 
     theme: settingsStore.theme,
+    setNeedErrorChecking,
+    hideHeaderButton,
   };
 })(observer(UploadPanel));

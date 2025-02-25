@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,8 @@
 
 (function () {
   const FRAME_NAME = "frameDocSpace";
+
+  const version = "1.0.0";
 
   const defaultConfig = {
     src: new URL(document.currentScript.src).origin,
@@ -76,7 +78,6 @@
     },
     editorCustomization: {},
     keysForReload: [
-      "src",
       "rootPath",
       "width",
       "height",

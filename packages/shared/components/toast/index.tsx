@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,74 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { Toast } from "./Toast";
-export { toastr } from "./sub-components/Toastr";
+"use client";
 
-export { ToastType } from "./Toast.enums";
+import React, { useEffect } from "react";
+import { cssTransition, ToastContainer } from "react-toastify";
+import classNames from "classnames";
+
+import { useIsServer } from "../../hooks/useIsServer";
+
+import { Portal } from "../portal";
+
+import type { ToastProps, TData } from "./Toast.type";
+import { toastr } from "./sub-components/Toastr";
+import { ToastType } from "./Toast.enums";
+import styles from "./Toast.module.scss";
+import { useMobileViewport } from "./hooks/useMobileViewport";
+import { getToastClassName } from "./utils/getToastClassName";
+
+export { ToastType, TData, toastr };
+export type { ToastProps };
+
+const Slide = cssTransition({
+  enter: "SlideIn",
+  exit: "SlideOut",
+});
+
+const Toast = ({ className, style, isSSR }: ToastProps) => {
+  const isServer = useIsServer();
+  const offset = useMobileViewport();
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    root.style.setProperty("--toast-top-offset", `${offset}px`);
+  }, [offset]);
+
+  const handleToastClick = React.useCallback(() => {
+    const toasts = document.getElementsByClassName("Toastify__toast");
+    Array.from(toasts).forEach((toast) => {
+      (toast as HTMLElement).style.setProperty("position", "static");
+    });
+  }, []);
+
+  if (isServer && isSSR) return null;
+
+  const element = (
+    <ToastContainer
+      containerId="toast-container"
+      className={classNames(className, styles.toast)}
+      draggable
+      position="top-right"
+      toastClassName={getToastClassName}
+      rtl
+      hideProgressBar
+      newestOnTop
+      pauseOnFocusLoss={false}
+      style={style}
+      icon={false}
+      transition={Slide}
+      onClick={handleToastClick}
+      data-testid="toast"
+    />
+  );
+
+  const rootElement = document?.getElementById("root");
+
+  return (
+    <Portal element={element} appendTo={rootElement || undefined} visible />
+  );
+};
+
+export { Toast };

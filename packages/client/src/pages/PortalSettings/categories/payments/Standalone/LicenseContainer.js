@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -42,6 +42,7 @@ const LicenseContainer = (props) => {
     isLicenseCorrect,
     setIsLoading,
     isLoading,
+    isTrial,
   } = props;
 
   const [isLicenseUploading, setIsLicenseUploading] = useState(false);
@@ -56,7 +57,7 @@ const LicenseContainer = (props) => {
       setIsLicenseUploading(true);
     }, [100]);
 
-    let fd = new FormData();
+    const fd = new FormData();
     fd.append("files", file);
 
     await setPaymentsLicense(null, fd);
@@ -89,7 +90,7 @@ const LicenseContainer = (props) => {
         fontSize="14px"
         className="payments_license-description"
       >
-        {t("ActivateUploadDescr")}
+        {!isTrial ? t("ActivateRenewalDescr") : t("ActivateUploadDescr")}
       </Text>
       <FileInput
         className="payments_file-input"
@@ -115,7 +116,7 @@ const LicenseContainer = (props) => {
   );
 };
 
-export default inject(({ paymentStore }) => {
+export default inject(({ paymentStore, currentQuotaStore }) => {
   const {
     setPaymentsLicense,
     acceptPaymentsLicense,
@@ -124,11 +125,14 @@ export default inject(({ paymentStore }) => {
     isLoading,
   } = paymentStore;
 
+  const { isTrial } = currentQuotaStore;
+
   return {
     setPaymentsLicense,
     acceptPaymentsLicense,
     isLicenseCorrect,
     setIsLoading,
     isLoading,
+    isTrial,
   };
 })(observer(LicenseContainer));

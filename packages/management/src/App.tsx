@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,17 +26,18 @@
 
 import { observer } from "mobx-react";
 import React, { useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { isMobileOnly } from "react-device-detect";
+import { useTranslation } from "react-i18next";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { Toast } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import AppLoader from "@docspace/shared/components/app-loader";
-import { Error403 } from "@docspace/shared/components/errors/Error403";
-
-import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
-
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 import "@docspace/shared/styles/custom.scss";
 
 import { useStore } from "./store";
@@ -53,17 +54,13 @@ declare global {
   }
 }
 
-let isPaymentPageUnavailable = true;
-let isBonusPageUnavailable = true;
-
 const App = observer(() => {
-  const { authStore, userStore, settingsStore, currentTariffStatusStore } =
-    useStore();
-  const location = useLocation();
+  const { authStore, userStore, settingsStore } = useStore();
 
   const { init, isLoaded } = authStore;
-  const { isCommunity } = currentTariffStatusStore;
-  const { setTheme, limitedAccessSpace, timezone } = settingsStore;
+  const { setTheme, timezone, logoText, setLogoText } = settingsStore;
+
+  const { t } = useTranslation(["Common", "Settings"]);
 
   window.timezone = timezone;
 
@@ -83,20 +80,35 @@ const App = observer(() => {
     if (userTheme) setTheme(userTheme);
   }, [userTheme]);
 
-  isPaymentPageUnavailable = location.pathname === "/payments" && isCommunity;
-  isBonusPageUnavailable = location.pathname === "/bonus" && !isCommunity;
+  useEffect(() => {
+    if (!logoText) setLogoText(t("Common:OrganizationName"));
+  }, [logoText, setLogoText]);
 
   useEffect(() => {
-    if (!isLoaded) return;
+    const { socketSubscribers } = SocketHelper;
 
-    if (isPaymentPageUnavailable) {
-      window.location.replace("/management/bonus");
-    }
+    if (!SocketHelper.isReady) return;
 
-    if (isBonusPageUnavailable) {
-      window.location.replace("/management/payments");
+    if (!socketSubscribers.has("restore")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "restore",
+      });
     }
-  }, [isLoaded]);
+    if (!socketSubscribers.has("backup")) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: "backup",
+      });
+    }
+  }, [SocketHelper.isReady]);
+
+  useEffect(() => {
+    return () => {
+      SocketHelper.off(SocketEvents.BackupProgress);
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: "backup",
+      });
+    };
+  }, []);
 
   const rootElement = document.getElementById("root") as HTMLElement;
 
@@ -106,14 +118,7 @@ const App = observer(() => {
     <Toast />
   );
 
-  if (!isLoaded || isPaymentPageUnavailable || isBonusPageUnavailable)
-    return <AppLoader />;
-
-  if ((userStore?.user && !userStore?.user?.isAdmin) || limitedAccessSpace)
-    return <Error403 />;
-
-  if (userStore?.isLoaded && !userStore?.user)
-    return tryRedirectTo(window.location.origin);
+  if (!isLoaded) return <AppLoader />;
 
   return (
     <Layout>

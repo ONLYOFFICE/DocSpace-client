@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -259,7 +259,9 @@ const checkErrors = (
     options.allowStrictLocalPart &&
     "local" in parsedAddress &&
     (!/^[\x00-\x7F]+$/.test(parsedAddress.local) ||
-      !/^([a-zA-Z0-9]+)([_\-\.\+][a-zA-Z0-9]+)*$/.test(parsedAddress.local))
+      !/^[_]?([a-zA-Z0-9]+)([_\-\.\+][a-zA-Z0-9]+)*[_]?$/.test(
+        parsedAddress.local,
+      ))
   ) {
     errors.push({
       message: "Incorrect localpart",

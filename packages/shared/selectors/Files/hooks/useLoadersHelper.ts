@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -71,6 +71,11 @@ const useLoadersHelper = () => {
         startLoader.current.getTime() - currentDate.getTime(),
       );
 
+      if (loaderTimeout.current) {
+        window.clearTimeout(loaderTimeout.current);
+        loaderTimeout.current = null;
+      }
+
       if (ms >= MIN_LOADER_TIMER) {
         startLoader.current = null;
         return setShowLoader(false);
@@ -82,8 +87,6 @@ const useLoadersHelper = () => {
           setShowLoader(false);
         }
       }, MIN_LOADER_TIMER - ms);
-
-      loaderTimeout.current = null;
     } else if (loaderTimeout.current) {
       clearTimeout(loaderTimeout.current);
       loaderTimeout.current = null;

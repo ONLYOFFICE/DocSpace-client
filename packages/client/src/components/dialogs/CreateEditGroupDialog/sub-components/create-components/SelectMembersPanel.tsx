@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,6 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { MembersSelector } from "../MembersSelector/MembersSelector";
 
 type SelectMembersPanelProps = {
-  isVisible: boolean;
   onClose: () => void;
   onParentPanelClose: () => void;
   groupManager: TUser | null;
@@ -40,7 +39,6 @@ type SelectMembersPanelProps = {
 };
 
 export const SelectMembersPanel = ({
-  isVisible,
   onClose,
   onParentPanelClose,
   groupManager,
@@ -56,7 +54,6 @@ export const SelectMembersPanel = ({
 
   return (
     <MembersSelector
-      isVisible={isVisible}
       onClose={onClose}
       onParentPanelClose={onParentPanelClose}
       addMembers={addMembers}

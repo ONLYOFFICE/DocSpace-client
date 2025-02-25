@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -55,6 +55,7 @@ const TableHeaderCell = ({
     withTagRef,
     default: isDefault,
     checkbox,
+    isShort,
   } = column;
 
   const isActive = (sortBy && column.sortBy === sortBy) || active;
@@ -76,12 +77,14 @@ const TableHeaderCell = ({
     <StyledTableHeaderCell
       sorted={sorted}
       isActive={isActive}
+      isShort={isShort}
       showIcon={!!column.onClick}
       className="table-container_header-cell"
       id={`column_${index}`}
       data-default={isDefault}
       data-enable={enable}
       data-min-width={minWidth}
+      data-short-colum={isShort}
       data-default-size={defaultSize}
       sortingVisible={sortingVisible}
       ref={tagRef}
@@ -92,23 +95,23 @@ const TableHeaderCell = ({
             {enable ? title : ""}
           </Text>
 
-          {sortingVisible && (
+          {sortingVisible ? (
             <IconButton
               onClick={column.onIconClick ? onIconClick : onClick}
               iconName={SortDescReactSvgUrl}
               className="header-container-text-icon"
               size={12}
-              color={isActive ? globalColors.grayMain : globalColors.gray}
+              color={isActive ? globalColors.gray : globalColors.gray}
             />
-          )}
+          ) : null}
         </div>
-        {resizable && (
+        {resizable ? (
           <div
             data-column={`${index}`}
             className="resize-handle not-selectable"
             onMouseDown={onMouseDown}
           />
-        )}
+        ) : null}
       </div>
     </StyledTableHeaderCell>
   ) : (
@@ -120,41 +123,42 @@ const TableHeaderCell = ({
       id={`column_${index}`}
       data-enable={enable}
       data-default={isDefault}
+      data-short-colum={isShort}
       data-min-width={minWidth}
       data-default-size={defaultSize}
       sortingVisible={sortingVisible}
     >
       <div className="table-container_header-item">
         <div className="header-container-text-wrapper" onClick={onClick}>
-          {checkbox && (checkbox.isIndeterminate || checkbox.value) && (
+          {checkbox && (checkbox.isIndeterminate || checkbox.value) ? (
             <Checkbox
               onChange={checkbox.onChange}
               isChecked={checkbox.value}
               isIndeterminate={checkbox.isIndeterminate}
             />
-          )}
+          ) : null}
 
           <Text fontWeight={600} className="header-container-text">
             {enable ? title : ""}
           </Text>
 
-          {sortingVisible && (
+          {sortingVisible ? (
             <IconButton
               onClick={column.onIconClick ? onIconClick : onClick}
               iconName={SortDescReactSvgUrl}
               className="header-container-text-icon"
               size={12}
-              color={isActive ? globalColors.grayMain : globalColors.gray}
+              color={globalColors.gray}
             />
-          )}
+          ) : null}
         </div>
-        {resizable && (
+        {resizable ? (
           <div
             data-column={`${index}`}
             className="resize-handle not-selectable"
             onMouseDown={onMouseDown}
           />
-        )}
+        ) : null}
       </div>
     </StyledTableHeaderCell>
   );

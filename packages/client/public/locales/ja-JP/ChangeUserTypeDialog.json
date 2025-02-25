@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "ゲスト <strong>{{userName}}</strong> は「{{membersSection}}」セクションに移動され、「ユーザー」タイプに割り当てられます。ユーザーには「{{documentsSection}}」セクションがあり、ファイルの作成や編集は可能ですが、ルームを作成することはできません。",
+  "ChangeGuestsTypeMessageMulti": "選択されたゲストは「{{membersSection}}」セクションに移動され、「ユーザー」タイプに割り当てられます。ユーザーには「{{documentsSection}}」セクションが割り当てられ、ファイルの作成や編集は可能ですが、ルームを作成することはできません。",
   "ChangeUserTypeButton": "タイプの変更",
   "ChangeUserTypeHeader": "ユーザータイプの変更",
-  "ChangeUserTypeMessage": "「{{ firstType }}」タイプのユーザーは、「{{ secondType }}」タイプに移動します。",
-  "ChangeUserTypeMessageMulti": "選択されたユーザーは「'{{ secondType }}'」タイプに移動します。",
+  "ChangeUserTypeMessage": "<strong>「{{ firstType }}」</strong>タイプのユーザーは、<strong>「{{ secondType }}」</strong>タイプに移動します。",
+  "ChangeUserTypeMessageMulti": "選択されたユーザーは<strong>「'{{ secondType }}'」</strong>タイプに移動します。",
   "ChangeUserTypeMessageWarning": "{{productName}}の管理者用と自分用のタイプを変更することはできません。",
+  "SuccessChangeGuestType": "ゲストタイプの変更に成功しました",
   "SuccessChangeUserType": "ユーザータイプの変更に成功しました。"
 }

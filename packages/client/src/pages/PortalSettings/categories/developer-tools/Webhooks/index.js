@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,24 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Button } from "@docspace/shared/components/button";
-import React, { useState, useEffect, useTransition, Suspense } from "react";
-import WebhookDialog from "./sub-components/WebhookDialog";
-import WebhookInfo from "./sub-components/WebhookInfo";
-import WebhooksTable from "./sub-components/WebhooksTable";
+import { useState, useEffect, useTransition, Suspense } from "react";
 
 import { inject, observer } from "mobx-react";
 
 import styled from "styled-components";
-import { WebhookConfigsLoader } from "./sub-components/Loaders";
-import { Base } from "@docspace/shared/themes";
 
-import { isMobile } from "@docspace/shared/utils";
+import { injectDefaultTheme, isMobile } from "@docspace/shared/utils";
 
 import { useTranslation } from "react-i18next";
 
-import { DeleteWebhookDialog } from "./sub-components/DeleteWebhookDialog";
 import { toastr } from "@docspace/shared/components/toast";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { DeleteWebhookDialog } from "./sub-components/DeleteWebhookDialog";
+import { WebhookConfigsLoader } from "./sub-components/Loaders";
+import WebhooksTable from "./sub-components/WebhooksTable";
+import WebhookInfo from "./sub-components/WebhookInfo";
+import WebhookDialog from "./sub-components/WebhookDialog";
 
 const MainWrapper = styled.div`
   width: 100%;
@@ -53,7 +52,7 @@ const MainWrapper = styled.div`
   }
 `;
 
-const ButtonSeating = styled.div`
+const ButtonSeating = styled.div.attrs(injectDefaultTheme)`
   position: fixed;
   z-index: 2;
   width: 100vw;
@@ -67,8 +66,6 @@ const ButtonSeating = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-ButtonSeating.defaultProps = { theme: Base };
 
 const StyledCreateButton = styled(Button)`
   width: calc(100% - 32px);
@@ -86,7 +83,7 @@ const Webhooks = (props) => {
 
   const { t, ready } = useTranslation(["Webhooks", "Common"]);
 
-  const [isPending, startTranslation] = useTransition();
+  const [, startTranslation] = useTransition();
 
   setDocumentTitle(t("Webhooks"));
 
@@ -127,7 +124,7 @@ const Webhooks = (props) => {
             <StyledCreateButton
               label={t("CreateWebhook")}
               primary
-              size={"normal"}
+              size="normal"
               onClick={openCreateModal}
             />
           </ButtonSeating>
@@ -136,17 +133,17 @@ const Webhooks = (props) => {
             id="create-webhook-button"
             label={t("CreateWebhook")}
             primary
-            size={"small"}
+            size="small"
             onClick={openCreateModal}
           />
         )}
 
-        {!isWebhooksEmpty && (
+        {!isWebhooksEmpty ? (
           <WebhooksTable
             openSettingsModal={openSettingsModal}
             openDeleteModal={openDeleteModal}
           />
-        )}
+        ) : null}
         <WebhookDialog
           visible={isCreateOpened}
           onClose={closeCreateModal}
@@ -175,7 +172,7 @@ const Webhooks = (props) => {
   );
 };
 
-export default inject(({ webhooksStore, authStore }) => {
+export default inject(({ webhooksStore }) => {
   const {
     state,
     loadWebhooks,

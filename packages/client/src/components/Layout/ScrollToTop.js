@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
-function ScrollToTop({ currentDeviceType }) {
+const ScrollToTop = ({ currentDeviceType }) => {
   const { pathname, state } = useLocation();
   const scrollRef = useRef();
 
@@ -47,7 +47,7 @@ function ScrollToTop({ currentDeviceType }) {
   }, [pathname]);
 
   return null;
-}
+};
 
 export default inject(({ settingsStore }) => ({
   currentDeviceType: settingsStore.currentDeviceType,

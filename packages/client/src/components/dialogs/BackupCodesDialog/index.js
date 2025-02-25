@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,18 +33,18 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { getTfaNewBackupCodes } from "@docspace/shared/api/settings";
-
 import { withTranslation } from "react-i18next";
-import ModalDialogContainer from "../ModalDialogContainer";
-
-import { DeviceType } from "@docspace/shared/enums";
 import { isDesktop } from "@docspace/shared/utils";
 
-const StyledModal = styled(ModalDialogContainer)`
+const StyledBodyContent = styled.div`
   .backup-codes-counter {
     margin-top: 16px;
     color: ${(props) => props.theme.client.settings.security.tfa.textColor};
   }
+`;
+
+const StyledFooterContent = styled.div`
+  display: contents;
 
   .backup-codes-print-link-wrapper {
     display: flex;
@@ -55,10 +55,6 @@ const StyledModal = styled(ModalDialogContainer)`
 `;
 
 class BackupCodesDialogComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   getNewBackupCodes = async () => {
     const { setBackupCodes } = this.props;
     try {
@@ -86,12 +82,12 @@ class BackupCodesDialogComponent extends React.Component {
   };
 
   render() {
-    //console.log("Render BackupCodesDialog");
+    // console.log("Render BackupCodesDialog");
     const { t, tReady, visible, onClose, backupCodes, backupCodesCount } =
       this.props;
 
     return (
-      <StyledModal
+      <ModalDialog
         isLoading={!tReady}
         visible={visible}
         onClose={onClose}
@@ -100,7 +96,7 @@ class BackupCodesDialogComponent extends React.Component {
       >
         <ModalDialog.Header>{t("BackupCodesTitle")}</ModalDialog.Header>
         <ModalDialog.Body>
-          <div id="backup-codes-print-content">
+          <StyledBodyContent id="backup-codes-print-content">
             <Text className="backup-codes-description-one">
               {t("BackupCodesDescription")}
             </Text>
@@ -112,49 +108,52 @@ class BackupCodesDialogComponent extends React.Component {
               {backupCodesCount} {t("CodesCounter")}
             </Text>
 
-            <Text className="backup-codes-codes" isBold={true}>
-              {backupCodes.length > 0 &&
-                backupCodes.map((item) => {
-                  if (!item.isUsed) {
-                    return (
-                      <strong key={item.code} dir="auto">
-                        {item.code} <br />
-                      </strong>
-                    );
-                  }
-                })}
+            <Text className="backup-codes-codes" isBold>
+              {backupCodes.length > 0
+                ? backupCodes.forEach((item) => {
+                    if (!item.isUsed) {
+                      return (
+                        <strong key={item.code} dir="auto">
+                          {item.code} <br />
+                        </strong>
+                      );
+                    }
+                  })
+                : null}
             </Text>
-          </div>
+          </StyledBodyContent>
         </ModalDialog.Body>
         <ModalDialog.Footer>
-          <Button
-            key="RequestNewBtn"
-            label={t("RequestNewButton")}
-            size="normal"
-            primary
-            onClick={this.getNewBackupCodes}
-          />
-          <Button
-            key="PrintBtn"
-            label={t("Common:CancelButton")}
-            size="normal"
-            onClick={this.props.onClose}
-          />
-          {isDesktop() && (
-            <div className="backup-codes-print-link-wrapper">
-              <Link
-                type="action"
-                fontSize="13px"
-                fontWeight={600}
-                isHovered={true}
-                onClick={this.printPage}
-              >
-                {t("PrintButton")}
-              </Link>
-            </div>
-          )}
+          <StyledFooterContent>
+            <Button
+              key="RequestNewBtn"
+              label={t("RequestNewButton")}
+              size="normal"
+              primary
+              onClick={this.getNewBackupCodes}
+            />
+            <Button
+              key="PrintBtn"
+              label={t("Common:CancelButton")}
+              size="normal"
+              onClick={onClose}
+            />
+            {isDesktop() ? (
+              <div className="backup-codes-print-link-wrapper">
+                <Link
+                  type="action"
+                  fontSize="13px"
+                  fontWeight={600}
+                  isHovered
+                  onClick={this.printPage}
+                >
+                  {t("PrintButton")}
+                </Link>
+              </div>
+            ) : null}
+          </StyledFooterContent>
         </ModalDialog.Footer>
-      </StyledModal>
+      </ModalDialog>
     );
   }
 }

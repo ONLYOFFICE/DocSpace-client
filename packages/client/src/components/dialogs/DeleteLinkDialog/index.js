@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,19 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
-
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { StyledDeleteLinkDialog } from "./StyledDeleteLinkDialog";
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { withTranslation } from "react-i18next";
-
-import { inject, observer } from "mobx-react";
-import { RoomsType } from "@docspace/shared/enums";
+import { DeleteLinkDialogContainer } from "./DeleteLinkDialog.styled";
 
 const DeleteLinkDialogComponent = (props) => {
   const {
@@ -49,23 +48,14 @@ const DeleteLinkDialogComponent = (props) => {
     deleteExternalLink,
     editExternalLink,
     isPublicRoomType,
+    isFormRoom,
+    isCustomRoom,
     setRoomShared,
+    setPublicRoomKey,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onDelete();
-  };
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const onClose = () => {
     setIsVisible(false);
@@ -82,43 +72,94 @@ const DeleteLinkDialogComponent = (props) => {
         setRoomShared(roomId, !!res);
         deleteExternalLink(res, newLink.sharedTo.id);
 
-        if (link.sharedTo.primary && isPublicRoomType) {
+        if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
           toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
         } else toastr.success(t("Files:LinkDeletedSuccessfully"));
+
+        const filterObj = FilesFilter.getFilter(window.location);
+
+        if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
+          if (filterObj.key !== res.sharedTo.requestToken) {
+            setPublicRoomKey(res.sharedTo.requestToken);
+            setSearchParams((prev) => {
+              prev.set("key", res.sharedTo.requestToken);
+              return prev;
+            });
+          }
+        }
+
+        if (isCustomRoom && filterObj.key) {
+          setPublicRoomKey(null);
+          searchParams.delete("key");
+          setSearchParams(searchParams);
+        }
       })
-      .catch((err) => toastr.error(err?.message))
+      .catch((err) => toastr.error(err.response?.data?.error.message))
       .finally(() => {
         setIsLoading(false);
         onClose();
       });
   };
 
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onDelete();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
+
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, []);
+
+  const getDescription = () => {
+    if (link.sharedTo.primary) {
+      if (isCustomRoom) return t("Files:RevokeSharedLinkDescriptionCustomRoom");
+
+      if (isFormRoom) return t("Files:RevokeSharedLinkDescriptionFormRoom");
+
+      if (isPublicRoomType)
+        return t("Files:RevokeSharedLinkDescriptionPublicRoom");
+    }
+
+    if (isPublicRoomType || isCustomRoom)
+      return t("Files:DeleteSharedCustomPublic");
+
+    return t("Files:DeleteSharedLink");
+  };
+
+  console.debug({
+    primary: link.sharedTo.primary,
+    isPublicRoomType,
+  });
+
   return (
-    <StyledDeleteLinkDialog
-      isLoading={!tReady}
-      visible={visible}
-      onClose={onClose}
-    >
+    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>
-        {link.sharedTo.primary && isPublicRoomType
+        {link.sharedTo.primary && (isPublicRoomType || isFormRoom)
           ? t("Files:RevokeLink")
           : t("Files:DeleteLink")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <div className="modal-dialog-content-body">
-          <Text noSelect>
-            {link.sharedTo.primary && isPublicRoomType
-              ? t("Files:DeleteSharedLink")
-              : t("Files:DeleteLinkNote")}
+        <DeleteLinkDialogContainer className="modal-dialog-content-body">
+          <Text lineHeight="20px" noSelect>
+            {getDescription()}
           </Text>
-        </div>
+          {link.sharedTo.primary ? (
+            <Text lineHeight="20px" noSelect>
+              {t("Files:ActionCannotUndone")}
+            </Text>
+          ) : null}
+        </DeleteLinkDialogContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           id="delete-file-modal_submit"
           key="OkButton"
           label={
-            link.sharedTo.primary && isPublicRoomType
+            link.sharedTo.primary && (isPublicRoomType || isFormRoom)
               ? t("Files:RevokeLink")
               : t("Files:DeleteLink")
           }
@@ -138,7 +179,7 @@ const DeleteLinkDialogComponent = (props) => {
           isDisabled={isLoading}
         />
       </ModalDialog.Footer>
-    </StyledDeleteLinkDialog>
+    </ModalDialog>
   );
 };
 
@@ -152,16 +193,22 @@ export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
     setDeleteLinkDialogVisible: setIsVisible,
     linkParams,
   } = dialogsStore;
-  const { editExternalLink, deleteExternalLink } = publicRoomStore;
+  const { editExternalLink, deleteExternalLink, setPublicRoomKey } =
+    publicRoomStore;
+  const { isFormRoom, isCustomRoom } = linkParams;
 
   return {
+    linkParams,
     visible,
     setIsVisible,
     roomId: linkParams.roomId,
     link: linkParams.link,
     editExternalLink,
     deleteExternalLink,
+    isFormRoom,
+    isCustomRoom,
     isPublicRoomType: linkParams.isPublic,
     setRoomShared: filesStore.setRoomShared,
+    setPublicRoomKey,
   };
 })(observer(DeleteLinkDialog));

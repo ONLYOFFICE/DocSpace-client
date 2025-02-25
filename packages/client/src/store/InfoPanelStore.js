@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,10 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
-import moment from "moment";
-
+import clone from "lodash/clone";
 import { getUserById } from "@docspace/shared/api/people";
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserType } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   EmployeeActivationStatus,
@@ -40,13 +39,18 @@ import {
 } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 import Filter from "@docspace/shared/api/people/filter";
-import { getRoomInfo } from "@docspace/shared/api/rooms";
+import {
+  getCreateShareLinkKey,
+  getExpirationDate,
+} from "@docspace/shared/components/share/Share.helpers";
+import { getRoomInfo, getTemplateAvailable } from "@docspace/shared/api/rooms";
 import {
   getPrimaryLink,
   getExternalLinks,
   editExternalLink,
   addExternalLink,
   checkIsPDFForm,
+  getPrimaryLinkIfNotExistCreate,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
@@ -54,6 +58,8 @@ import {
   addLinksToHistory,
   parseHistory,
 } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
+import api from "@docspace/shared/api";
 
 const observedKeys = [
   "id",
@@ -69,40 +75,68 @@ const observedKeys = [
 const infoMembers = "info_members";
 const infoHistory = "info_history";
 const infoDetails = "info_details";
+const infoShare = "info_share";
+// const infoPlugin = "info_plugin"; // Useless?
 
 class InfoPanelStore {
   userStore = null;
 
   isVisible = false;
+
   isMobileHidden = false;
 
   infoPanelSelection = null;
+
   selectionHistory = null;
 
+  selectionHistoryTotal = null;
+
   roomsView = infoMembers;
+
   fileView = infoHistory;
 
   isScrollLocked = false;
+
   historyWithFileList = false;
 
   filesSettingsStore = null;
+
   peopleStore = null;
+
   filesStore = null;
+
   selectedFolderStore = null;
+
   treeFoldersStore = null;
+
   publicRoomStore = null;
 
   infoPanelMembers = null;
+
+  templateAvailableToEveryone = false;
+
   infoPanelRoom = null;
+
   membersIsLoading = false;
+
   isMembersPanelUpdating = false;
 
   shareChanged = false;
 
+  calendarDay = null;
+
   showSearchBlock = false;
+
   searchValue = "";
 
   infoPanelSelectedGroup = null;
+
+  historyFilter = {
+    page: 0,
+    pageCount: 100,
+    total: 0,
+    startIndex: 0,
+  };
 
   constructor(userStore) {
     this.userStore = userStore;
@@ -117,15 +151,29 @@ class InfoPanelStore {
   };
 
   setIsVisible = (bool) => {
-    if (
+    const selectedFolderIsRoomOrFolderInRoom =
+      this.selectedFolderStore &&
+      !this.selectedFolderStore.isRootFolder &&
+      this.selectedFolderStore?.parentRoomType;
+
+    const archivedFolderIsRoomOrFolderInRoom =
+      this.selectedFolderStore &&
+      !this.selectedFolderStore.isRootFolder &&
+      this.selectedFolderStore?.rootFolderType === FolderType.Archive;
+
+    const isFolderOpenedThroughSectionHeader =
       (this.infoPanelSelectedItems.length &&
-        !this.infoPanelSelectedItems[0]?.isRoom &&
-        !this.infoPanelSelectedItems[0]?.inRoom) ||
-      (this.selectedFolderStore && !this.selectedFolderStore?.inRoom)
+        this.infoPanelSelectedItems[0].id === this.selectedFolderStore.id) ||
+      this.infoPanelSelectedItems.length === 0;
+
+    if (
+      (selectedFolderIsRoomOrFolderInRoom ||
+        archivedFolderIsRoomOrFolderInRoom) &&
+      isFolderOpenedThroughSectionHeader
     ) {
-      this.setView(infoDetails);
-    } else {
       this.setView(infoMembers);
+    } else {
+      this.setView(infoDetails);
     }
 
     this.isVisible = bool;
@@ -145,10 +193,10 @@ class InfoPanelStore {
     this.setSearchValue("");
   };
 
-  setSelectionHistory = (obj) => (this.selectionHistory = obj);
-
-  setSelectionHistory = (obj) => {
+  setSelectionHistory = (obj, total) => {
     this.selectionHistory = obj;
+    this.selectionHistoryTotal = total;
+
     if (obj)
       this.historyWithFileList =
         this.infoPanelSelection.isFolder || this.infoPanelSelection.isRoom;
@@ -159,6 +207,10 @@ class InfoPanelStore {
     this.fileView = infoHistory;
   };
 
+  /**
+   * @param {infoMembers | infoHistory | infoDetails | infoShare | infoPlugin} view
+   * @returns {void}
+   */
   setView = (view) => {
     this.roomsView = view;
     this.fileView = view === infoMembers ? infoDetails : view;
@@ -185,19 +237,23 @@ class InfoPanelStore {
     const {
       selection: peopleSelection,
       bufferSelection: peopleBufferSelection,
-    } = this.peopleStore.selectionStore;
+    } = this.peopleStore.usersStore;
 
     const {
       selection: groupsSelection,
       bufferSelection: groupsBufferSelection,
     } = this.peopleStore.groupsStore;
 
-    if (this.getIsPeople() || this.getIsGroups()) {
+    const contactsTab = this.peopleStore.usersStore.contactsTab;
+
+    const isGroups = contactsTab === "groups";
+
+    if (!isGroups && contactsTab) {
       if (peopleSelection.length) return [...peopleSelection];
       if (peopleBufferSelection) return [peopleBufferSelection];
     }
 
-    if (this.getIsGroups()) {
+    if (isGroups) {
       if (groupsSelection.length) return [...groupsSelection];
       if (groupsBufferSelection) return [groupsBufferSelection];
     }
@@ -212,7 +268,7 @@ class InfoPanelStore {
     const isRooms = this.getIsRooms();
     const { currentGroup } = this.peopleStore.groupsStore;
 
-    if (this.getIsGroups()) {
+    if (this.getIsContacts() === "groups") {
       return {
         ...currentGroup,
         isGroup: true,
@@ -231,9 +287,7 @@ class InfoPanelStore {
       ? this.infoPanelSelection
       : selection.length
         ? selection[0]
-        : bufferSelection
-          ? bufferSelection
-          : null;
+        : bufferSelection || null;
   }
 
   get isRoomMembersPanelOpen() {
@@ -241,11 +295,7 @@ class InfoPanelStore {
   }
 
   get withPublicRoomBlock() {
-    return (
-      this.infoPanelCurrentSelection?.access ===
-        ShareAccessRights.RoomManager ||
-      this.infoPanelCurrentSelection?.access === ShareAccessRights.None
-    );
+    return this.infoPanelCurrentSelection?.security?.EditAccess;
   }
 
   getViewItem = () => {
@@ -262,13 +312,12 @@ class InfoPanelStore {
       // if (!this.infoPanelSelection?.id) {
       return this.getInfoPanelSelectedFolder();
       // }
-    } else {
-      return this.infoPanelSelectedItems[0];
     }
+    return this.infoPanelSelectedItems[0];
   };
 
   setNewInfoPanelSelection = () => {
-    const selectedItems = this.infoPanelSelectedItems; //files list
+    const selectedItems = this.infoPanelSelectedItems; // files list
     const selectedFolder = this.getInfoPanelSelectedFolder(); // root or current folder
     let newInfoPanelSelection = this.infoPanelSelection;
 
@@ -283,7 +332,7 @@ class InfoPanelStore {
     }
 
     if (!selectedItems.length && !newInfoPanelSelection.parentId) {
-      this.setSelectionHistory(null);
+      this.setSelectionHistory(null, null);
       this.setInfoPanelSelectedGroup(null);
     }
 
@@ -304,10 +353,10 @@ class InfoPanelStore {
     this.setInfoPanelSelection({
       ...this.infoPanelSelection,
       logo: {
-        small: logo.small.split("?")[0] + "?" + new Date().getTime(),
-        medium: logo.medium.split("?")[0] + "?" + new Date().getTime(),
-        large: logo.large.split("?")[0] + "?" + new Date().getTime(),
-        original: logo.original.split("?")[0] + "?" + new Date().getTime(),
+        small: `${logo.small.split("?")[0]}?${new Date().getTime()}`,
+        medium: `${logo.medium.split("?")[0]}?${new Date().getTime()}`,
+        large: `${logo.large.split("?")[0]}?${new Date().getTime()}`,
+        original: `${logo.original.split("?")[0]}?${new Date().getTime()}`,
       },
     });
   };
@@ -318,9 +367,9 @@ class InfoPanelStore {
       if (this.infoPanelRoom?.id === room?.id) {
         this.setInfoPanelRoom(this.normalizeSelection(room));
       }
-    } else {
-      this.setNewInfoPanelSelection();
+      return;
     }
+    this.setNewInfoPanelSelection();
 
     if (!this.getIsRooms) return;
 
@@ -354,30 +403,32 @@ class InfoPanelStore {
   // Icon helpers //
 
   getInfoPanelItemIcon = (item, size) => {
-    return item.isRoom || !!item.roomType
-      ? item.rootFolderType === FolderType.Archive
+    return item?.isRoom || !!item?.roomType
+      ? item.rootFolderType === FolderType.Archive && !item?.logo?.cover
         ? item.logo && item.logo.medium
-        : this.filesSettingsStore.getIcon(
-              size,
-              null,
-              null,
-              null,
-              item.roomType,
-              true,
-            )
-          ? item.logo?.medium
-          : item.icon
-            ? item.icon
-            : this.filesSettingsStore.getIcon(
+        : item?.logo?.cover
+          ? item.logo
+          : this.filesSettingsStore.getIcon(
                 size,
                 null,
                 null,
                 null,
                 item.roomType,
+                true,
               )
-      : item.isFolder
+            ? item.logo?.medium
+            : item.icon
+              ? item.icon
+              : this.filesSettingsStore.getIcon(
+                  size,
+                  null,
+                  null,
+                  null,
+                  item.roomType,
+                )
+      : item?.isFolder
         ? this.filesSettingsStore.getIconByFolderType(item.type, size)
-        : this.filesSettingsStore.getIcon(size, item.fileExst || ".file");
+        : this.filesSettingsStore.getIcon(size, item?.fileExst || ".file");
   };
 
   // User link actions //
@@ -400,7 +451,7 @@ class InfoPanelStore {
     const path = [
       window.ClientConfig?.proxy?.url,
       config.homepage,
-      "/accounts/people",
+      user.isVisitor ? "/accounts/guests" : "/accounts/people",
     ];
 
     const newFilter = Filter.getDefault();
@@ -420,7 +471,7 @@ class InfoPanelStore {
     const { getUserContextOptions } = this.peopleStore.usersStore;
 
     const fetchedUser = await getUserById(userId);
-    fetchedUser.role = getUserRole(fetchedUser);
+    fetchedUser.role = getUserType(fetchedUser);
     fetchedUser.statusType = getUserStatus(fetchedUser);
     fetchedUser.options = getUserContextOptions(
       false,
@@ -438,7 +489,7 @@ class InfoPanelStore {
     const pathname = window.location.pathname.toLowerCase();
     const isFiles = this.getIsFiles(pathname);
     const isRooms = this.getIsRooms(pathname);
-    const isAccounts = this.getIsAccounts(pathname);
+    const isAccounts = this.getIsContacts(pathname);
     const isGallery = this.getIsGallery(pathname);
     return isRooms || isFiles || isGallery || isAccounts;
   };
@@ -459,30 +510,9 @@ class InfoPanelStore {
     );
   };
 
-  getIsAccounts = (givenPathName) => {
+  getIsContacts = (givenPathName) => {
     const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return (
-      pathname.indexOf("accounts") !== -1 && !(pathname.indexOf("view") !== -1)
-    );
-  };
-
-  getIsPeople = (givenPathName) => {
-    const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return pathname.indexOf("accounts/people") !== -1;
-  };
-
-  getIsGroups = (givenPathName) => {
-    const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return pathname.indexOf("accounts/groups") !== -1;
-  };
-
-  getIsInsideGroup = (givenPathName) => {
-    const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return (
-      pathname.indexOf("accounts") !== -1 &&
-      pathname.indexOf("groups/filter") === -1 &&
-      pathname.indexOf("people/filter") === -1
-    );
+    return getContactsView({ pathname });
   };
 
   getIsGallery = (givenPathName) => {
@@ -499,16 +529,20 @@ class InfoPanelStore {
     this.infoPanelMembers = infoPanelMembers;
   };
 
+  setTemplateAvailableToEveryone = (isAvailable) => {
+    this.templateAvailableToEveryone = isAvailable;
+  };
+
   setInfoPanelSelection = (infoPanelSelection) => {
     if (isEqual(infoPanelSelection, this.infoPanelSelection)) {
       return;
     }
 
     if (
-      this.getIsPeople() &&
-      (!infoPanelSelection.email || !infoPanelSelection.displayName)
+      this.getIsContacts() &&
+      (!infoPanelSelection?.email || !infoPanelSelection?.displayName)
     ) {
-      this.infoPanelSelection = infoPanelSelection.length
+      this.infoPanelSelection = !infoPanelSelection?.length
         ? infoPanelSelection
         : null;
       return;
@@ -535,8 +569,15 @@ class InfoPanelStore {
       : false;
   };
 
-  addMembersTitle = (t, administrators, users, expectedMembers, groups) => {
-    let hasPrevAdminsTitle = this.getHasPrevTitle(
+  addMembersTitle = (
+    t,
+    administrators,
+    users,
+    expectedMembers,
+    groups,
+    guests,
+  ) => {
+    const hasPrevAdminsTitle = this.getHasPrevTitle(
       administrators,
       "administration",
     );
@@ -549,7 +590,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevGroupsTitle = this.getHasPrevTitle(groups, "groups");
+    const hasPrevGroupsTitle = this.getHasPrevTitle(groups, "groups");
 
     if (groups.length && !hasPrevGroupsTitle) {
       groups.unshift({
@@ -559,7 +600,7 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevUsersTitle = this.getHasPrevTitle(users, "user");
+    const hasPrevUsersTitle = this.getHasPrevTitle(users, "user");
 
     if (users.length && !hasPrevUsersTitle) {
       users.unshift({
@@ -569,7 +610,17 @@ class InfoPanelStore {
       });
     }
 
-    let hasPrevExpectedTitle = this.getHasPrevTitle(
+    const hasPrevGuestsTitle = this.getHasPrevTitle(users, "guest");
+
+    if (guests?.length && !hasPrevGuestsTitle) {
+      guests.unshift({
+        id: "guest",
+        displayName: t("Common:Guests"),
+        isTitle: true,
+      });
+    }
+
+    const hasPrevExpectedTitle = this.getHasPrevTitle(
       expectedMembers,
       "expected",
     );
@@ -589,8 +640,9 @@ class InfoPanelStore {
     const administrators = [];
     const expectedMembers = [];
     const groups = [];
+    const guests = [];
 
-    members?.map((fetchedMember) => {
+    members?.forEach((fetchedMember) => {
       const member = {
         access: fetchedMember.access,
         canEditAccess: fetchedMember.canEditAccess,
@@ -607,41 +659,59 @@ class InfoPanelStore {
         administrators.push(member);
       } else if (member.isGroup) {
         groups.push(member);
+      } else if (member.isVisitor) {
+        guests.push(member);
       } else {
         users.push(member);
       }
     });
 
     if (clearFilter && !withoutTitles) {
-      this.addMembersTitle(t, administrators, users, expectedMembers, groups);
+      this.addMembersTitle(
+        t,
+        administrators,
+        users,
+        expectedMembers,
+        groups,
+        guests,
+      );
     }
 
-    return { administrators, users, expectedMembers, groups };
+    return { administrators, users, expectedMembers, groups, guests };
   };
 
   fetchMembers = async (
     t,
     clearFilter = true,
     withoutTitlesAndLinks = false,
-    membersFilter,
+    membersFilter = null,
   ) => {
     if (this.membersIsLoading) return;
     const roomId = this.infoPanelSelection.id;
+    const roomType = this.infoPanelSelection.roomType;
+    const isTemplate = this.infoPanelSelection.isTemplate;
 
-    const isPublic =
-      this.infoPanelSelection?.roomType ?? this.infoPanelSelection?.roomType;
+    const isPublicRoomType =
+      roomType === RoomsType.PublicRoom ||
+      roomType === RoomsType.CustomRoom ||
+      roomType === RoomsType.FormRoom;
 
     const requests = [
       this.filesStore.getRoomMembers(roomId, clearFilter, membersFilter),
     ];
 
     if (
-      isPublic &&
+      isPublicRoomType &&
       clearFilter &&
       this.withPublicRoomBlock &&
-      !withoutTitlesAndLinks
+      !withoutTitlesAndLinks &&
+      !isTemplate
     ) {
-      requests.push(this.filesStore.getRoomLinks(roomId));
+      requests.push(
+        api.rooms
+          .getRoomMembers(roomId, { filterType: 2 }) // 2 (External link)
+          .then((res) => res.items),
+      );
     }
 
     let timerId;
@@ -652,9 +722,9 @@ class InfoPanelStore {
     clearFilter && this.setMembersIsLoading(false);
     clearTimeout(timerId);
 
-    links && this.publicRoomStore.setExternalLinks(links);
+    this.publicRoomStore.setExternalLinks(links ?? []);
 
-    const { administrators, users, expectedMembers, groups } =
+    const { administrators, users, expectedMembers, groups, guests } =
       this.convertMembers(t, data, clearFilter, withoutTitlesAndLinks);
 
     return {
@@ -663,6 +733,7 @@ class InfoPanelStore {
       expected: expectedMembers,
       groups,
       roomId,
+      guests,
     };
   };
 
@@ -675,7 +746,7 @@ class InfoPanelStore {
     const newMembers = this.convertMembers(t, data, false, true);
 
     const mergedMembers = {
-      roomId: roomId,
+      roomId,
       administrators: [
         ...oldMembers.administrators,
         ...newMembers.administrators,
@@ -683,6 +754,7 @@ class InfoPanelStore {
       users: [...oldMembers.users, ...newMembers.users],
       expected: [...oldMembers.expected, ...newMembers.expectedMembers],
       groups: [...oldMembers.groups, ...newMembers.groups],
+      guests: [...oldMembers.guests, ...newMembers.guests],
     };
 
     if (!withoutTitles) {
@@ -692,6 +764,7 @@ class InfoPanelStore {
         mergedMembers.users,
         mergedMembers.expected,
         mergedMembers.groups,
+        mergedMembers.guests,
       );
     }
 
@@ -709,14 +782,24 @@ class InfoPanelStore {
 
     this.setIsMembersPanelUpdating(true);
 
+    if (this.infoPanelSelection.isTemplate) {
+      const templateAvailable = await getTemplateAvailable(
+        this.infoPanelSelection.id,
+      );
+      this.setTemplateAvailableToEveryone(templateAvailable);
+    }
+
     const fetchedMembers = await this.fetchMembers(t, true, !!this.searchValue);
     this.setInfoPanelMembers(fetchedMembers);
 
     this.setIsMembersPanelUpdating(false);
   };
 
+  setHistoryFilter = (historyFilter) => {
+    this.historyFilter = historyFilter;
+  };
+
   fetchHistory = async (abortControllerSignal = null) => {
-    const { getHistory, getRoomLinks } = this.filesStore;
     const { setExternalLinks } = this.publicRoomStore;
 
     let selectionType = "file";
@@ -729,24 +812,41 @@ class InfoPanelStore {
         this.infoPanelSelection.roomType,
       );
 
-    return getHistory(
-      selectionType,
-      this.infoPanelSelection.id,
-      abortControllerSignal,
-      this.infoPanelSelection?.requestToken,
-    )
+    this.setHistoryFilter({
+      page: 0,
+      pageCount: 100,
+      total: 0,
+      startIndex: 0,
+    });
+
+    const filter = {
+      startIndex: 0,
+      count: this.historyFilter.pageCount,
+    };
+
+    return api.rooms
+      .getHistory(
+        selectionType,
+        this.infoPanelSelection.id,
+        this.infoPanelSelection?.requestToken,
+        filter,
+        abortControllerSignal,
+      )
       .then(async (data) => {
         if (withLinks) {
-          const links = await getRoomLinks(this.infoPanelSelection.id);
+          const links = await api.rooms
+            .getRoomMembers(this.infoPanelSelection.id, { filterType: 2 }) // 2 (External link)
+            .then((res) => res.items);
           const historyWithLinks = addLinksToHistory(data, links);
           setExternalLinks(links);
           return historyWithLinks;
         }
+        setExternalLinks([]);
         return data;
       })
       .then((data) => {
         const parsedSelectionHistory = parseHistory(data);
-        this.setSelectionHistory(parsedSelectionHistory);
+        this.setSelectionHistory(parsedSelectionHistory, data.total);
         return parsedSelectionHistory;
       })
       .catch((err) => {
@@ -754,8 +854,97 @@ class InfoPanelStore {
       });
   };
 
+  fetchMoreHistory = async (abortControllerSignal = null) => {
+    const { setExternalLinks } = this.publicRoomStore;
+    const oldHistory = this.selectionHistory;
+
+    let selectionType = "file";
+
+    if (this.infoPanelSelection.isRoom || this.infoPanelSelection.isFolder)
+      selectionType = "folder";
+
+    const withLinks =
+      this.infoPanelSelection.isRoom &&
+      [RoomsType.FormRoom, RoomsType.CustomRoom, RoomsType.PublicRoom].includes(
+        this.infoPanelSelection.roomType,
+      );
+
+    const newFilter = clone(this.historyFilter);
+
+    newFilter.page += 1;
+    newFilter.startIndex = newFilter.page * newFilter.pageCount;
+
+    this.setHistoryFilter(newFilter);
+
+    const filter = {
+      startIndex: newFilter.startIndex,
+      count: this.historyFilter.pageCount,
+    };
+
+    return api.rooms
+      .getHistory(
+        selectionType,
+        this.infoPanelSelection.id,
+        this.infoPanelSelection?.requestToken,
+        filter,
+        abortControllerSignal,
+      )
+      .then(async (data) => {
+        if (withLinks) {
+          const links = await api.rooms
+            .getRoomMembers(this.infoPanelSelection.id, { filterType: 2 }) // 2 (External link)
+            .then((res) => res.items);
+          const historyWithLinks = addLinksToHistory(data, links);
+          setExternalLinks(links);
+          return historyWithLinks;
+        }
+        setExternalLinks([]);
+        return data;
+      })
+      .then((data) => {
+        const parsedSelectionHistory = parseHistory(data);
+
+        const lastOldDay = oldHistory[oldHistory.length - 1].day;
+        const newDay = parsedSelectionHistory[0].day;
+
+        const newHistory = JSON.parse(JSON.stringify(oldHistory));
+
+        let mergedHistory = [];
+
+        if (lastOldDay === newDay) {
+          const lastIndexNewHistory = newHistory.length - 1;
+          const mergedFeeds = newHistory[lastIndexNewHistory].feeds.concat(
+            parsedSelectionHistory[0].feeds,
+          );
+
+          newHistory[lastIndexNewHistory].feeds = mergedFeeds;
+
+          const newParsedSelectionHistory = JSON.parse(
+            JSON.stringify(parsedSelectionHistory),
+          );
+          newParsedSelectionHistory.splice(0, 1);
+
+          mergedHistory = newHistory.concat(newParsedSelectionHistory);
+        } else {
+          mergedHistory = newHistory.concat(parsedSelectionHistory);
+        }
+
+        this.setSelectionHistory(mergedHistory, data.total);
+
+        return mergedHistory;
+      })
+      .catch((err) => {
+        if (err.message !== "canceled") console.error(err);
+      });
+  };
+
   openShareTab = () => {
-    this.setView("info_share");
+    this.setView(infoShare);
+    this.isVisible = true;
+  };
+
+  openMembersTab = () => {
+    this.setView(infoMembers);
     this.isVisible = true;
   };
 
@@ -782,10 +971,28 @@ class InfoPanelStore {
       }
     }
 
+    /**
+     *  @type {import("@docspace/shared/components/share/Share.types").DefaultCreatePropsType | null}
+     */
+    const value = JSON.parse(
+      localStorage.getItem(
+        getCreateShareLinkKey(this.userStore.user?.id ?? "", file?.fileType),
+      ) ?? "null",
+    );
+
     const { getFileInfo } = this.filesStore;
 
-    const res = await getPrimaryLink(fileId);
+    const res = await (value
+      ? getPrimaryLinkIfNotExistCreate(
+          fileId,
+          value.access,
+          value.internal,
+          getExpirationDate(value.diffExpirationDate),
+        )
+      : getPrimaryLink(fileId));
+
     await getFileInfo(fileId);
+
     return res;
   };
 
@@ -816,16 +1023,26 @@ class InfoPanelStore {
     return res;
   };
 
-  addFileLink = async (fileId, access, primary, internal) => {
+  addFileLink = async (fileId, access, primary, internal, expirationDate) => {
     const { getFileInfo } = this.filesStore;
 
-    const res = await addExternalLink(fileId, access, primary, internal);
+    const res = await addExternalLink(
+      fileId,
+      access,
+      primary,
+      internal,
+      expirationDate,
+    );
     await getFileInfo(fileId);
     return res;
   };
 
   setShareChanged = (shareChanged) => {
     this.shareChanged = shareChanged;
+  };
+
+  setCalendarDay = (calendarDay) => {
+    this.calendarDay = calendarDay;
   };
 }
 

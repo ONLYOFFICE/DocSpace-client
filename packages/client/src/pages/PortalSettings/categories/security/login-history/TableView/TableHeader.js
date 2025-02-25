@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,6 @@ import { withTranslation } from "react-i18next";
 
 const TABLE_VERSION = "3";
 const TABLE_COLUMNS = `historyTableColumns_ver-${TABLE_VERSION}`;
-const COLUMNS_SIZE = `historyColumnsSize_ver-${TABLE_VERSION}`;
 
 class PeopleTableHeader extends React.Component {
   constructor(props) {
@@ -72,28 +71,25 @@ class PeopleTableHeader extends React.Component {
   }
 
   getColumns = (defaultColumns) => {
-    const storageColumns = localStorage.getItem(
-      `${TABLE_COLUMNS}=${this.props.userId}`,
-    );
-    const columns = [];
+    const { userId } = this.props;
+
+    const storageColumns = localStorage.getItem(`${TABLE_COLUMNS}=${userId}`);
 
     if (storageColumns) {
       const splitColumns = storageColumns.split(",");
 
-      for (let col of defaultColumns) {
+      const columns = defaultColumns.map((col) => {
         const column = splitColumns.find((key) => key === col.key);
-        column ? (col.enable = true) : (col.enable = false);
-
-        columns.push(col);
-      }
+        return { ...(col || {}), enable: !!column };
+      });
       return columns;
-    } else {
-      return defaultColumns;
     }
+    return defaultColumns;
   };
 
-  onColumnChange = (key, e) => {
+  onColumnChange = (key) => {
     const { columns } = this.state;
+    const { userId } = this.props;
     const columnIndex = columns.findIndex((c) => c.key === key);
 
     if (columnIndex === -1) return;
@@ -102,33 +98,25 @@ class PeopleTableHeader extends React.Component {
     this.setState({ columns });
 
     const tableColumns = columns.map((c) => c.enable && c.key);
-    localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
-  };
-
-  onIconClick = () => {
-    const { filter, setIsLoading, fetchPeople } = this.props;
-    const newFilter = filter.clone();
-
-    if (newFilter.sortOrder === "ascending") {
-      newFilter.sortOrder = "descending";
-    } else {
-      newFilter.sortOrder = "ascending";
-    }
-
-    setIsLoading(true);
-    fetchPeople(newFilter).finally(() => setIsLoading(false));
+    localStorage.setItem(`${TABLE_COLUMNS}=${userId}`, tableColumns);
   };
 
   render() {
     const { columns } = this.state;
-    const { containerRef, sectionWidth, userId } = this.props;
+    const {
+      containerRef,
+      sectionWidth,
+      columnStorageName,
+      columnInfoPanelStorageName,
+    } = this.props;
 
     return (
       <TableHeader
         checkboxSize="48px"
         containerRef={containerRef}
         columns={columns}
-        columnStorageName={`${COLUMNS_SIZE}=${userId}`}
+        columnStorageName={columnStorageName}
+        columnInfoPanelStorageName={columnInfoPanelStorageName}
         sectionWidth={sectionWidth}
         checkboxMargin="12px"
         showSettings={false}
@@ -141,8 +129,4 @@ export default inject(({ userStore }) => {
   return {
     userId: userStore.user.id,
   };
-})(
-  withTranslation(["Home", "Common", "Translations"])(
-    observer(PeopleTableHeader),
-  ),
-);
+})(withTranslation(["Common", "Translations"])(observer(PeopleTableHeader)));

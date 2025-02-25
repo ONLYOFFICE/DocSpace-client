@@ -1,0 +1,13 @@
+{
+  "Desc": "Skonfiguruj dane rejestracyjne {{productName}}.",
+  "ErrorEmail": "Nieprawidłowy adres e-mail",
+  "ErrorInstanceId": "Nieprawidłowy identyfikator instancji",
+  "ErrorLicenseBody": "Licencja jest nieważna. Upewnij się, że wybrano właściwy plik.",
+  "ErrorPassword": "Hasło nie spełnia wymogów",
+  "ErrorUploadLicenseFile": "Wybierz plik licencyjny",
+  "License": "Zaakceptuj warunki ",
+  "LicenseLink": "Umowy licencyjne",
+  "PlaceholderLicense": "Twój plik licencyjny",
+  "Timezone": "Strefa czasowa:",
+  "WelcomeTitle": "Witaj w Twoim {{productName}}!"
+}

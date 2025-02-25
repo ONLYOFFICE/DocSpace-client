@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -332,5 +332,11 @@ export const StyledLabel = styled(Text)`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  margin-top: ${({ marginTopProp }) => (marginTopProp ? marginTopProp : 0)};
+  margin-top: ${({ marginTopProp }) => marginTopProp || 0};
+
+  .tooltip-link-box {
+    box-sizing: border-box;
+    display: block;
+    margin: 10px 0 0;
+  }
 `;

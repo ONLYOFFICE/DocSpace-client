@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,17 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useRef } from "react";
+import classNames from "classnames";
 
 import { DeviceType } from "../../../enums";
 import { Portal } from "../../portal";
 
-import {
-  StyledInfoPanelWrapper,
-  StyledInfoPanel,
-  StyledControlContainer,
-  StyledCrossIcon,
-} from "../Section.styled";
 import { InfoPanelProps } from "../Section.types";
+import styles from "../Section.module.scss";
 
 const InfoPanel = ({
   children,
@@ -48,8 +44,6 @@ const InfoPanel = ({
   currentDeviceType,
 }: InfoPanelProps) => {
   const infoPanelRef = useRef<null | HTMLDivElement>(null);
-
-  const closeInfoPanel = () => setIsVisible?.(false);
 
   useEffect(() => {
     const onMouseDown = (e: MouseEvent) => {
@@ -69,19 +63,13 @@ const InfoPanel = ({
   }, [currentDeviceType, isVisible, setIsVisible, viewAs]);
 
   const infoPanelComponent = (
-    <StyledInfoPanelWrapper
-      className="info-panel"
+    <div
+      className={classNames("info-panel", styles.infoPanelWrapper)}
       id="InfoPanelWrapper"
       ref={infoPanelRef}
     >
-      <StyledInfoPanel>
-        <StyledControlContainer onClick={closeInfoPanel}>
-          <StyledCrossIcon />
-        </StyledControlContainer>
-
-        {children}
-      </StyledInfoPanel>
-    </StyledInfoPanelWrapper>
+      <div className={styles.infoPanel}>{children}</div>
+    </div>
   );
 
   const renderPortalInfoPanel = () => {
@@ -91,17 +79,21 @@ const InfoPanel = ({
       <Portal
         element={infoPanelComponent}
         appendTo={rootElement || undefined}
-        visible={isVisible && !isMobileHidden && !anotherDialogOpen}
+        visible={isVisible && !isMobileHidden ? !anotherDialogOpen : false}
       />
     );
   };
+
+  const isMobileView =
+    currentDeviceType === DeviceType.mobile ||
+    currentDeviceType === DeviceType.tablet;
 
   return !isVisible ||
     !canDisplay ||
     (anotherDialogOpen && currentDeviceType !== DeviceType.desktop) ||
     (currentDeviceType !== DeviceType.desktop && isMobileHidden)
     ? null
-    : currentDeviceType === DeviceType.mobile
+    : isMobileView
       ? renderPortalInfoPanel()
       : infoPanelComponent;
 };

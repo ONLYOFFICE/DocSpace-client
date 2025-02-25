@@ -1,0 +1,13 @@
+{
+  "Desc": "{{productName}} 등록 데이터를 설정해주세요.",
+  "ErrorEmail": "유효하지 않은 이메일 주소입니다",
+  "ErrorInstanceId": "잘못된 인스턴스 ID입니다",
+  "ErrorLicenseBody": "유효하지 않은 라이센스입니다. 올바른 파일을 선택해주세요",
+  "ErrorPassword": "비밀번호가 조건에 부합하지 않습니다",
+  "ErrorUploadLicenseFile": "라이센스 파일을 선택해주세요",
+  "License": "다음 약관에 동의합니다: ",
+  "LicenseLink": "라이센스 계약",
+  "PlaceholderLicense": "라이센스 파일",
+  "Timezone": "시간대:",
+  "WelcomeTitle": "{{productName}}에 오신 것을 환영합니다!"
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,14 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import queryString from "query-string";
 
 import { ApplyFilterOption, FilterType } from "../../enums";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
-import { TViewAs } from "../../types";
-
-export type TSortOrder = "descending" | "ascending";
-export type TSortBy = "DateAndTime" | "Tags" | "AZ";
+import { TViewAs, TSortOrder, TSortBy } from "../../types";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 25;
@@ -51,6 +51,7 @@ const DEFAULT_EXCLUDE_SUBJECT: boolean | null = null;
 const DEFAULT_APPLY_FILTER_OPTION: ApplyFilterOption | null = null;
 const DEFAULT_EXTENSION: string | null = null;
 const DEFAULT_SEARCH_AREA: number | null = 3;
+const DEFAULT_KEY: string | null = null;
 
 const SEARCH_TYPE = "withSubfolders";
 const AUTHOR_TYPE = "authorType";
@@ -69,6 +70,7 @@ const EXCLUDE_SUBJECT = "excludeSubject";
 const APPLY_FILTER_OPTION = "applyFilterOption";
 const EXTENSION = "extension";
 const SEARCH_AREA = "searchArea";
+const KEY = "key";
 
 // TODO: add next params
 // subjectGroup bool
@@ -112,6 +114,8 @@ class FilesFilter {
   startIndex: number | null = null;
 
   searchArea: number | null = null;
+
+  key: string | null = null;
 
   static getDefault(total = DEFAULT_TOTAL) {
     return new FilesFilter(DEFAULT_PAGE, DEFAULT_PAGE_COUNT, total);
@@ -159,6 +163,7 @@ class FilesFilter {
     const searchArea =
       (urlFilter[SEARCH_AREA] && urlFilter[SEARCH_AREA]) ||
       defaultFilter.searchArea;
+    const key = (urlFilter[KEY] && urlFilter[KEY]) || defaultFilter.key;
 
     const newFilter = new FilesFilter(
       page,
@@ -179,6 +184,7 @@ class FilesFilter {
       applyFilterOption,
       extension,
       searchArea,
+      key,
     );
 
     return newFilter;
@@ -203,6 +209,7 @@ class FilesFilter {
     applyFilterOption = DEFAULT_APPLY_FILTER_OPTION,
     extension = DEFAULT_EXTENSION,
     searchArea = DEFAULT_SEARCH_AREA,
+    key = DEFAULT_KEY,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -222,6 +229,7 @@ class FilesFilter {
     this.applyFilterOption = applyFilterOption;
     this.extension = extension;
     this.searchArea = searchArea;
+    this.key = key;
   }
 
   getStartIndex = () => {
@@ -307,6 +315,7 @@ class FilesFilter {
       applyFilterOption,
       extension,
       searchArea,
+      key,
     } = this;
 
     const dtoFilter: { [key: string]: unknown } = {};
@@ -326,6 +335,7 @@ class FilesFilter {
     if (applyFilterOption) dtoFilter[APPLY_FILTER_OPTION] = applyFilterOption;
     if (extension) dtoFilter[EXTENSION] = extension;
     if (searchArea) dtoFilter[SEARCH_AREA] = searchArea;
+    if (key) dtoFilter[KEY] = key;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -359,6 +369,7 @@ class FilesFilter {
       this.applyFilterOption,
       this.extension,
       this.searchArea,
+      this.key,
     );
   }
 

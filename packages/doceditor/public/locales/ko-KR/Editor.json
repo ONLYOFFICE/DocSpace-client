@@ -1,4 +1,5 @@
 {
+  "DocumentConverted": "문서를 편집할 수 있도록 {{title}}(으)로 변환했습니다",
   "DocumentsFileType": "문서",
   "ErrorConnectionLost": "연결이 끊어졌습니다",
   "FileLocation": "파일 위치 열기",

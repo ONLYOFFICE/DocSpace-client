@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -81,6 +81,7 @@ const CancelMigrationButton = styled.span`
 
   text-decoration-line: underline;
   text-decoration-style: dashed;
+  text-underline-offset: 0.1em;
 
   @media ${mobile} {
     padding: 0 16px;

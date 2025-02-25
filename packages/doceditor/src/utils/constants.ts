@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { ActionType } from "@/types";
+
 export const IS_ZOOM =
   typeof window !== "undefined" &&
   (window?.navigator?.userAgent?.includes("ZoomWebKit") ||
@@ -43,3 +45,9 @@ export const SHOW_CLOSE =
   typeof document !== "undefined" &&
   document.referrer !== "" &&
   window.history.length > 1;
+
+export const availableActions: Record<ActionType, boolean> = {
+  edit: true,
+  fill: true,
+  view: true,
+};

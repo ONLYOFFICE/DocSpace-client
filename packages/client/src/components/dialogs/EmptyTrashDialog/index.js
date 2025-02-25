@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,24 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import ModalDialogContainer from "../ModalDialogContainer";
+import { useEffect } from "react";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-
-const StyledModal = styled(ModalDialogContainer)`
-  max-width: 400px;
-
-  .cancel-btn {
-    display: inline-block;
-
-    margin-inline-start: 8px;
-  }
-`;
 
 const EmptyTrashDialogComponent = (props) => {
   const {
@@ -56,18 +44,11 @@ const EmptyTrashDialogComponent = (props) => {
     isArchiveFolder,
   } = props;
 
-  useEffect(() => {
-    window.addEventListener("keydown", onKeyPress);
-
-    return () => window.removeEventListener("keydown", onKeyPress);
-  }, []);
-
   const onClose = () => setEmptyTrashDialogVisible(false);
 
   const onEmptyTrash = () => {
     onClose();
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
       successOperation: isArchiveFolder
         ? t("SuccessEmptyArchived")
         : t("SuccessEmptyTrash"),
@@ -86,8 +67,14 @@ const EmptyTrashDialogComponent = (props) => {
     }
   };
 
+  useEffect(() => {
+    window.addEventListener("keydown", onKeyPress);
+
+    return () => window.removeEventListener("keydown", onKeyPress);
+  }, []);
+
   return (
-    <StyledModal
+    <ModalDialog
       isLoading={!tReady}
       visible={visible}
       onClose={onClose}
@@ -122,7 +109,7 @@ const EmptyTrashDialogComponent = (props) => {
           scale
         />
       </ModalDialog.Footer>
-    </StyledModal>
+    </ModalDialog>
   );
 };
 

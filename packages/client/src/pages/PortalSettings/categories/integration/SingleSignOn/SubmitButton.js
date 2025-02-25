@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,13 +41,11 @@ const SubmitResetButtons = (props) => {
     resetForm,
     confirmationResetModal,
     isSubmitLoading,
-    hasErrors,
-    hasChanges,
     isLoadingXml,
-    enableSso,
     isSSOAvailable,
     closeResetModal,
     confirmReset,
+    isDisabledSaveButton,
   } = props;
 
   return (
@@ -56,28 +54,26 @@ const SubmitResetButtons = (props) => {
         className="save-cancel-buttons"
         onSaveClick={() => saveSsoSettings(t)}
         onCancelClick={isSsoEnabled ? openResetModal : resetForm}
-        showReminder={true}
+        showReminder
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Settings:DefaultSettings")}
-        displaySettings={true}
-        hasScroll={true}
+        displaySettings
+        hasScroll
         isSaving={isSubmitLoading}
-        saveButtonDisabled={
-          !enableSso || hasErrors || !hasChanges || isLoadingXml
-        }
+        saveButtonDisabled={isDisabledSaveButton}
         disableRestoreToDefault={
           isSubmitLoading || isLoadingXml || !isSSOAvailable
         }
         additionalClassSaveButton="save-button"
         additionalClassCancelButton="restore-button"
       />
-      {confirmationResetModal && (
+      {confirmationResetModal ? (
         <ResetConfirmationModal
           closeResetModal={closeResetModal}
           confirmReset={confirmReset}
           confirmationResetModal={confirmationResetModal}
         />
-      )}
+      ) : null}
     </>
   );
 };
@@ -90,12 +86,10 @@ export default inject(({ ssoStore, currentQuotaStore }) => {
     resetForm,
     confirmationResetModal,
     isSubmitLoading,
-    hasErrors,
-    hasChanges,
     isLoadingXml,
-    enableSso,
     closeResetModal,
     confirmReset,
+    isDisabledSaveButton,
   } = ssoStore;
   const { isSSOAvailable } = currentQuotaStore;
 
@@ -106,12 +100,10 @@ export default inject(({ ssoStore, currentQuotaStore }) => {
     resetForm,
     confirmationResetModal,
     isSubmitLoading,
-    hasErrors,
-    hasChanges,
     isLoadingXml,
-    enableSso,
     isSSOAvailable,
     closeResetModal,
     confirmReset,
+    isDisabledSaveButton,
   };
 })(observer(SubmitResetButtons));

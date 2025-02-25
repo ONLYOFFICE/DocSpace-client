@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,15 +27,14 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { DeviceType, RoomsType } from "@docspace/shared/enums";
-import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
+import { DeviceType } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
+import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
+import { isMobile } from "react-device-detect";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-
     onContentFileSelect = (checked, file) => {
       const { selectRowAction } = this.props;
       if (!file || file.id === -1) return;
@@ -50,44 +49,41 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onFileContextClick = (withSelect) => {
-      const { onSelectItem } = this.props;
-      const { id, isFolder } = this.props.item;
+      const { onSelectItem, item } = this.props;
+      const { id, isFolder } = item;
 
       id !== -1 && onSelectItem({ id, isFolder }, false, false, !withSelect);
     };
 
     onHideContextMenu = () => {
-      //this.props.setSelected("none");
-      this.props.setEnabledHotkeys(true);
+      const { setEnabledHotkeys } = this.props;
+      // this.props.setSelected("none");
+      setEnabledHotkeys(true);
     };
 
     onDropZoneUpload = (files, uploadToFolder) => {
-      const { t, dragging, setDragging, startUpload, uploadEmptyFolders } =
+      const { t, dragging, setDragging, startUpload, createFoldersTree } =
         this.props;
 
       dragging && setDragging(false);
 
-      const emptyFolders = files.filter((f) => f.isEmptyDirectory);
-
-      if (emptyFolders.length > 0) {
-        uploadEmptyFolders(emptyFolders, uploadToFolder).then(() => {
-          const onlyFiles = files.filter((f) => !f.isEmptyDirectory);
-          if (onlyFiles.length > 0) startUpload(onlyFiles, uploadToFolder, t);
+      createFoldersTree(t, files, uploadToFolder)
+        .then((f) => {
+          if (f.length > 0) startUpload(f, null, t);
+        })
+        .catch((err) => {
+          toastr.error(err, null, 0, true);
         });
-      } else {
-        startUpload(files, uploadToFolder, t);
-      }
     };
 
     onDrop = (items) => {
-      const { isTrashFolder, dragging, setDragging, isDisabledDropItem } =
+      const { isTrashFolder, dragging, setDragging, isDisabledDropItem, item } =
         this.props;
-      const { fileExst, id } = this.props.item;
+      const { fileExst, isFolder, id } = item;
 
       if (isTrashFolder || isDisabledDropItem)
         return dragging && setDragging(false);
-
-      if (!fileExst) {
+      if (!fileExst && isFolder) {
         this.onDropZoneUpload(items, id);
       } else {
         this.onDropZoneUpload(items);
@@ -108,7 +104,22 @@ export default function withFileActions(WrappedFileItem) {
         setSelection,
         canDrag,
         viewAs,
+        isIndexEditingMode,
       } = this.props;
+
+      if (isIndexEditingMode) {
+        if (
+          e.target.closest(".change-index_icon") ||
+          e.target.querySelector(".change-index_icon") ||
+          isMobile
+        ) {
+          return;
+        }
+
+        setBufferSelection(item);
+        setStartDrag(true);
+        return;
+      }
 
       const { isThirdPartyFolder } = item;
 
@@ -167,7 +178,7 @@ export default function withFileActions(WrappedFileItem) {
 
       if (
         e.target?.tagName === "INPUT" ||
-        e.target?.tagName === "SPAN" ||
+        // e.target?.tagName === "SPAN" ||
         e.target?.tagName === "A" ||
         e.target.closest(".checkbox") ||
         e.target.closest(".table-container_row-checkbox") ||
@@ -196,15 +207,8 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onFilesClick = (e) => {
-      const {
-        t,
-        item,
-        openFileAction,
-        setParentId,
-        setRoomType,
-        isTrashFolder,
-        isArchiveFolder,
-      } = this.props;
+      const { t, item, openFileAction, setParentId, isTrashFolder } =
+        this.props;
 
       if (
         (e && e.target?.tagName === "INPUT") ||
@@ -231,11 +235,13 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onSelectTag = (tag) => {
-      this.props.selectTag(tag);
+      const { selectTag } = this.props;
+      selectTag(tag);
     };
 
     onSelectOption = (selectedOption) => {
-      this.props.selectOption(selectedOption);
+      const { selectOption } = this.props;
+      selectOption(selectedOption);
     };
 
     getContextModel = () => {
@@ -244,17 +250,19 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDragOver = (e) => {
+      const { setDragging } = this.props;
       if (
         e.dataTransfer.items.length > 0 &&
         e.dataTransfer.dropEffect !== "none"
       ) {
-        this.props.setDragging(true);
+        setDragging(true);
       }
     };
 
     onDragLeave = (e) => {
+      const { setDragging } = this.props;
       if (!e.relatedTarget || !e.dataTransfer.items.length) {
-        this.props.setDragging(false);
+        setDragging(false);
       }
     };
 
@@ -266,7 +274,6 @@ export default function withFileActions(WrappedFileItem) {
         allowShareIn,
         isPrivacy,
 
-        sectionWidth,
         isSelected,
         dragging,
         isFolder,
@@ -276,13 +283,15 @@ export default function withFileActions(WrappedFileItem) {
         isDisabledDropItem,
         isRecentTab,
         canDrag,
+        isIndexUpdated,
       } = this.props;
-      const { access, id } = item;
+
+      const { id, security } = item;
 
       const isDragging =
         !isDisabledDropItem &&
         isFolder &&
-        access < 2 &&
+        security?.MoveTo &&
         !isTrashFolder &&
         !isPrivacy;
 
@@ -310,13 +319,7 @@ export default function withFileActions(WrappedFileItem) {
 
       const checkedProps = id <= 0 ? false : isSelected;
 
-      const showPlanetIcon =
-        (item.roomType === RoomsType.PublicRoom ||
-          item.roomType === RoomsType.FormRoom ||
-          item.roomType === RoomsType.CustomRoom) &&
-        item.shared;
-
-      const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
+      const badgeUrl = getRoomBadgeUrl(item);
 
       return (
         <WrappedFileItem
@@ -336,6 +339,7 @@ export default function withFileActions(WrappedFileItem) {
           value={value}
           displayShareButton={displayShareButton}
           isPrivacy={isPrivacy}
+          isIndexUpdated={isIndexUpdated}
           checkedProps={checkedProps}
           dragging={dragging}
           getContextModel={this.getContextModel}
@@ -361,6 +365,7 @@ export default function withFileActions(WrappedFileItem) {
         filesStore,
         uploadDataStore,
         contextOptionsStore,
+        indexingStore,
       },
       { item, t },
     ) => {
@@ -369,11 +374,12 @@ export default function withFileActions(WrappedFileItem) {
         selectTag,
         selectOption,
         onSelectItem,
-        //setNewBadgeCount,
+        // setNewBadgeCount,
         openFileAction,
-        uploadEmptyFolders,
+        createFoldersTree,
       } = filesActionsStore;
       const { setSharingPanelVisible } = dialogsStore;
+      const { updateSelection, isIndexEditingMode } = indexingStore;
       const {
         isPrivacyFolder,
         isRecycleBinFolder,
@@ -402,10 +408,16 @@ export default function withFileActions(WrappedFileItem) {
         withShiftSelect,
       } = filesStore;
       const { id } = selectedFolderStore;
-      const { startUpload } = uploadDataStore;
+      const { startUpload, secondaryProgressDataStore } = uploadDataStore;
+
+      const { findOperationById } = secondaryProgressDataStore;
 
       const selectedItem = selection.find(
         (x) => x.id === item.id && x.fileExst === item.fileExst,
+      );
+
+      const isIndexUpdated = !!updateSelection.find(
+        (x) => x.id === item.id && x.fileExst === item?.fileExst,
       );
 
       const isDisabledDropItem = item.security?.Create === false;
@@ -413,7 +425,7 @@ export default function withFileActions(WrappedFileItem) {
       const draggable =
         !isRecycleBinFolder && selectedItem && !isDisabledDropItem;
 
-      const isFolder = selectedItem ? false : !item.isFolder ? false : true;
+      const isFolder = selectedItem ? false : !!item.isFolder;
 
       const isProgress = (index, items) => {
         if (index === -1) return false;
@@ -439,6 +451,17 @@ export default function withFileActions(WrappedFileItem) {
       const isFolderProgress = isProgress(activeFolderIndex, activeFolders);
 
       const inProgress = isFileProgress || isFolderProgress;
+
+      let isBlockingOperation = inProgress;
+
+      if (inProgress && activeFolderIndex !== -1) {
+        const operationInfo = findOperationById(item.id);
+        const { operation } = operationInfo;
+        isBlockingOperation =
+          operation !== OPERATIONS_NAME.duplicate &&
+          operation !== OPERATIONS_NAME.download &&
+          operation !== OPERATIONS_NAME.copy;
+      }
 
       const dragIsDisabled =
         isPrivacyFolder ||
@@ -475,7 +498,7 @@ export default function withFileActions(WrappedFileItem) {
         dragging,
         setDragging,
         startUpload,
-        uploadEmptyFolders,
+        createFoldersTree,
         draggable,
         setTooltipPosition,
         setStartDrag,
@@ -483,13 +506,13 @@ export default function withFileActions(WrappedFileItem) {
         allowShareIn: filesStore.canShare,
 
         isSelected: !!selectedItem,
-        //parentFolder: selectedFolderStore.parentId,
+        // parentFolder: selectedFolderStore.parentId,
         setParentId: selectedFolderStore.setParentId,
         setRoomType: selectedFolderStore.setRoomType,
         isTrashFolder: isRecycleBinFolder,
         getFolderInfo,
         viewAs,
-        //setNewBadgeCount,
+        // setNewBadgeCount,
         isActive,
         inProgress,
         setBufferSelection,
@@ -505,8 +528,11 @@ export default function withFileActions(WrappedFileItem) {
         currentDeviceType: settingsStore.currentDeviceType,
         isDisabledDropItem,
         isRecentTab,
+        isIndexUpdated,
 
         canDrag: !dragIsDisabled,
+        isIndexEditingMode,
+        isBlockingOperation,
       };
     },
   )(observer(WithFileActions));

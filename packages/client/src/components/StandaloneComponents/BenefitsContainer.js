@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,11 +38,15 @@ import ScalabilityReactSvgUrl from "PUBLIC_DIR/images/scalability.react.svg?url"
 
 import { StyledBenefitsBody } from "./StyledComponent";
 
-const BenefitsContainer = ({ isTrial, isEnterprise }) => {
+const BenefitsContainer = ({ isTrial, isEnterprise, isDeveloper }) => {
   const { t } = useTranslation("PaymentsEnterprise");
 
   const title = isEnterprise
-    ? t("ActivateToProBannerHeaderTrial")
+    ? t("ActivateToProBannerHeaderTrial", {
+        license: isDeveloper
+          ? t("Common:DeveloperLicense")
+          : t("Common:EnterpriseLicense"),
+      })
     : t("UpgradeToProBannerHeader");
 
   const features = () => {
@@ -85,9 +89,9 @@ const BenefitsContainer = ({ isTrial, isEnterprise }) => {
       featuresArray.push(scalabilityClustering, mobileEditing, techSupport);
     }
 
-    return featuresArray.map((item, index) => {
+    return featuresArray.map((item) => {
       return (
-        <div className="payments-benefits" key={index}>
+        <div className="payments-benefits" key={item.title}>
           <ReactSVG src={item.imag} className="benefits-svg" />
           <div className="benefits-description">
             <Text fontWeight={600}>{item.title}</Text>
@@ -100,7 +104,7 @@ const BenefitsContainer = ({ isTrial, isEnterprise }) => {
 
   return (
     <StyledBenefitsBody className="benefits-container">
-      <Text fontSize={"16px"} fontWeight={600} className="benefits-title">
+      <Text fontSize="16px" fontWeight={600} className="benefits-title">
         {title}
       </Text>
       {features()}
@@ -111,13 +115,14 @@ const BenefitsContainer = ({ isTrial, isEnterprise }) => {
 export default inject(
   ({ currentTariffStatusStore, currentQuotaStore, paymentQuotasStore }) => {
     const { portalPaymentQuotasFeatures } = paymentQuotasStore;
-    const { isEnterprise } = currentTariffStatusStore;
+    const { isEnterprise, isDeveloper } = currentTariffStatusStore;
 
     const { isTrial } = currentQuotaStore;
     return {
       features: portalPaymentQuotasFeatures,
       isTrial,
       isEnterprise,
+      isDeveloper,
     };
   },
 )(observer(BenefitsContainer));

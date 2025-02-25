@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,27 +56,17 @@ const StyledTagInput = styled.div`
 
 const TagInput = ({
   t,
+  title,
   tagHandler,
   setIsScrollLocked,
   isDisabled,
+  tooltipLabel,
   onFocus,
   onBlur,
 }) => {
   const inputRef = useRef();
   const [tagInput, setTagInput] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const onTagInputChange = (e) => {
-    const text = e.target.value;
-
-    if (text.trim().length > 0 && !isDropdownOpen) {
-      openDropdown();
-    } else if (text.length === 0 && isDropdownOpen) {
-      closeDropdown();
-    }
-
-    setTagInput(text);
-  };
 
   const openDropdown = () => {
     if (isDisabled) return;
@@ -89,17 +79,29 @@ const TagInput = ({
     setIsDropdownOpen(false);
   };
 
+  const onTagInputChange = (e) => {
+    const text = e.target.value;
+
+    if (text.trim().length > 0 && !isDropdownOpen) {
+      openDropdown();
+    } else if (text.trim().length === 0 && isDropdownOpen) {
+      closeDropdown();
+    }
+
+    setTagInput(text);
+  };
+
   const handleFocus = (event) => {
     const text = event.target.value;
     if (text.trim().length > 0) {
       openDropdown();
     }
-    onFocus();
+    onFocus && onFocus();
   };
 
   const handleBlur = () => {
     closeDropdown();
-    onBlur();
+    onBlur && onBlur();
   };
 
   const handleKeyDown = (event) => {
@@ -121,7 +123,7 @@ const TagInput = ({
       <InputParam
         ref={inputRef}
         id="shared_tags-input"
-        title={`${t("Common:Tags")}:`}
+        title={title ? `${title}:` : `${t("Common:Tags")}:`}
         placeholder={t("TagsPlaceholder")}
         value={tagInput}
         onChange={onTagInputChange}
@@ -129,6 +131,8 @@ const TagInput = ({
         onBlur={handleBlur}
         isDisabled={isDisabled}
         onKeyDown={handleKeyDown}
+        name="tagInput"
+        tooltipLabel={tooltipLabel}
       />
 
       <TagDropdown
@@ -143,7 +147,7 @@ const TagInput = ({
 
       <TagList
         tagHandler={tagHandler}
-        defaultTagLabel={""}
+        defaultTagLabel=""
         isDisabled={isDisabled}
       />
     </StyledTagInput>

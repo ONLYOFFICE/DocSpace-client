@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,18 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { cookies, headers } from "next/headers";
-import { redirect } from "next/navigation";
 
 import { Toast } from "@docspace/shared/components/toast";
-import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
 import { LANGUAGE, SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
 import StyledComponentsRegistry from "@/utils/registry";
 import { Providers } from "@/providers";
-import { getColorTheme, getConfig, getSettings } from "@/utils/actions";
+import {
+  getColorTheme,
+  getConfig,
+  getSettings,
+  getUser,
+} from "@/utils/actions";
 
 import "../styles/globals.scss";
+import "../../../shared/styles/theme.scss";
+import Scripts from "@/components/Scripts";
 
 export default async function RootLayout({
   children,
@@ -50,8 +55,6 @@ export default async function RootLayout({
     return <></>;
   }
 
-  const baseUrl = getBaseUrl();
-
   const cookieStore = cookies();
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
@@ -59,18 +62,17 @@ export default async function RootLayout({
 
   let redirectUrl = "";
 
-  const [settings, colorTheme] = await Promise.all([
+  const [settings, colorTheme, user] = await Promise.all([
     getSettings(),
     getColorTheme(),
+    getUser(),
   ]);
 
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
 
   if (settings === "portal-not-found") {
     const hdrs = headers();
-    const config = await (
-      await fetch(`${baseUrl}/static/scripts/config.json`)
-    ).json();
+    const config = await getConfig();
 
     const host = hdrs.get("host");
 
@@ -85,7 +87,7 @@ export default async function RootLayout({
   }
 
   if (typeof settings !== "string" && settings?.wizardToken) {
-    redirect(`wizard`);
+    redirectUrl = `wizard`;
   }
 
   if (
@@ -111,6 +113,11 @@ export default async function RootLayout({
       <head>
         <link rel="icon" type="image/x-icon" href="/logo.ashx?logotype=3" />
         <link rel="mask-icon" href="/logo.ashx?logotype=3" />
+        <link
+          rel="apple-touch-icon"
+          sizes="32x32"
+          href="/logo.ashx?logotype=3"
+        />
         <meta charSet="utf-8" />
         <meta
           name="viewport"
@@ -118,7 +125,9 @@ export default async function RootLayout({
         />
         <meta name="google" content="notranslate" />
       </head>
-      <body>
+      <body
+        className={`${systemTheme?.value === ThemeKeys.DarkStr ? "dark" : "light"}`}
+      >
         <StyledComponentsRegistry>
           <Providers
             value={{
@@ -127,11 +136,13 @@ export default async function RootLayout({
               systemTheme: systemTheme?.value as ThemeKeys,
             }}
             redirectURL={redirectUrl}
+            user={user}
           >
             <Toast isSSR />
             {children}
           </Providers>
         </StyledComponentsRegistry>
+        <Scripts />
       </body>
     </html>
   );

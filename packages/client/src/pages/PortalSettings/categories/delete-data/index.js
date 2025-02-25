@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,10 +29,10 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { inject, observer } from "mobx-react";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import PortalDeactivationSection from "./portalDeactivation";
 import PortalDeletionSection from "./portalDeletion";
 import DeleteDataLoader from "./DeleteDataLoader";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "../../../../../package.json";
 
 const DeleteData = (props) => {

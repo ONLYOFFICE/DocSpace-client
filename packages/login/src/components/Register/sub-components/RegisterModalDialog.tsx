@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -90,52 +90,49 @@ const RegisterModalDialog = ({
   };
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       id="registration-modal"
       displayType={ModalDialogType.modal}
       visible={visible}
       onClose={onRegisterModalClose}
       isLarge
     >
-      <ModalDialog.Header>
-        <Text isBold fontSize="21px">
-          {t("RegisterTitle")}
-        </Text>
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("RegisterTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text key="text-body" isBold={false} fontSize="13px" noSelect>
-          {getDomainsBlock()}
-          {t("RegisterTextBodyAfterDomainsList")}
-        </Text>
+        <ModalDialogContainer>
+          <Text key="text-body" isBold={false} fontSize="13px" noSelect>
+            {getDomainsBlock()}
+            {t("RegisterTextBodyAfterDomainsList")}
+          </Text>
 
-        <FieldContainer
-          className="email-reg-field"
-          key="e-mail"
-          isVertical
-          hasError={isShowError && emailErr}
-          labelVisible={false}
-          errorMessage={
-            errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
-          }
-        >
-          <EmailInput
+          <FieldContainer
+            className="email-reg-field"
+            key="e-mail"
+            isVertical
             hasError={isShowError && emailErr}
-            placeholder={t("Common:RegistrationEmail")}
-            isAutoFocussed
-            id="registration-modal_email"
-            name="e-mail"
-            type={InputType.email}
-            size={InputSize.base}
-            scale
-            tabIndex={1}
-            isDisabled={loading}
-            value={email}
-            onChange={onChangeEmail}
-            onValidateInput={onValidateEmail}
-            onBlur={onBlurEmail}
-            autoComplete="username"
-          />
-        </FieldContainer>
+            labelVisible={false}
+            errorMessage={
+              errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
+            }
+          >
+            <EmailInput
+              hasError={isShowError && emailErr}
+              placeholder={t("Common:RegistrationEmail")}
+              isAutoFocussed
+              id="registration-modal_email"
+              name="e-mail"
+              size={InputSize.base}
+              scale
+              tabIndex={1}
+              isDisabled={loading}
+              value={email ?? ""}
+              onChange={onChangeEmail}
+              onValidateInput={onValidateEmail}
+              onBlur={onBlurEmail}
+              autoComplete="username"
+            />
+          </FieldContainer>
+        </ModalDialogContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -166,7 +163,7 @@ const RegisterModalDialog = ({
           tabIndex={2}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

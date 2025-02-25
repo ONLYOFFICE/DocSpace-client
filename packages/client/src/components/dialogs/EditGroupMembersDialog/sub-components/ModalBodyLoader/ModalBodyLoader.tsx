@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,7 +35,7 @@ interface ModalBodyLoaderProps {
 export const ModalBodyLoader = ({ withSearch }: ModalBodyLoaderProps) => {
   return (
     <div style={{ paddingTop: withSearch ? "16px" : "0" }}>
-      {withSearch && <SearchLoader />}
+      {withSearch ? <SearchLoader /> : null}
       <div style={{ paddingInline: "16px" }}>
         <MemberLoader count={25} />
       </div>

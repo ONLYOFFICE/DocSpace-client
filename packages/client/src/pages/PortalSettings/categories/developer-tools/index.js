@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState } from "react";
 
 import { Tabs } from "@docspace/shared/components/tabs";
 
@@ -34,7 +34,6 @@ import config from "PACKAGE_FILE";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
@@ -46,8 +45,6 @@ import OAuth from "./OAuth";
 
 import SSOLoader from "./sub-components/ssoLoader";
 
-import { globalColors } from "@docspace/shared/themes";
-
 const DeveloperToolsWrapper = (props) => {
   const { currentDeviceType, identityServerEnabled } = props;
   const navigate = useNavigate();
@@ -56,7 +53,7 @@ const DeveloperToolsWrapper = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentTabId, setCurrentTabId] = useState();
 
-  const { t, ready } = useTranslation([
+  const { t } = useTranslation([
     "JavascriptSdk",
     "Webhooks",
     "Settings",
@@ -64,18 +61,18 @@ const DeveloperToolsWrapper = (props) => {
     "Common",
     "OAuth",
   ]);
-  const [isPending, startTransition] = useTransition();
+  // const [, startTransition] = useTransition();
 
   const sdkLabel = (
-    <Box displayProp="flex" style={{ gap: "8px" }}>
+    <div style={{ boxSizing: "border-box", display: "flex", gap: "8px" }}>
       {t("JavascriptSdk")}
-    </Box>
+    </div>
   );
 
   const pluginLabel = (
-    <Box displayProp="flex" style={{ gap: "8px" }}>
+    <div style={{ boxSizing: "border-box", display: "flex", gap: "8px" }}>
       {t("WebPlugins:PluginSDK")}
-    </Box>
+    </div>
   );
 
   const data = [
@@ -109,9 +106,9 @@ const DeveloperToolsWrapper = (props) => {
     });
   }
 
-  const load = async () => {
-    //await loadBaseInfo();
-  };
+  // const load = async () => {
+  //   // await loadBaseInfo();
+  // };
 
   useEffect(() => {
     const path = location.pathname;
@@ -123,9 +120,9 @@ const DeveloperToolsWrapper = (props) => {
     setIsLoading(true);
   }, [location.pathname]);
 
-  useEffect(() => {
-    ready && startTransition(load);
-  }, [ready]);
+  // useEffect(() => {
+  //   ready && startTransition(load);
+  // }, [ready]);
 
   const onSelect = (e) => {
     navigate(

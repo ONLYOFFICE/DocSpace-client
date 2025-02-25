@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,9 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
-import { StyledMoveToPublicRoomDialog } from "./StyledMoveToPublicRoomDialog";
-import { toastr } from "@docspace/shared/components/toast";
+import { useEffect, useState } from "react";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
@@ -58,24 +56,8 @@ const MoveToPublicRoomComponent = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timerId);
-      timerId = null;
-    };
-  });
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onMoveTo();
+  const onClose = () => {
+    setIsVisible(false);
   };
 
   const onClosePanels = () => {
@@ -86,10 +68,6 @@ const MoveToPublicRoomComponent = (props) => {
     setRestorePanelVisible(false);
     setCopyPanelVisible(false);
     setRestoreAllPanelVisible(false);
-  };
-
-  const onClose = () => {
-    setIsVisible(false);
   };
 
   const onMoveTo = () => {
@@ -114,8 +92,7 @@ const MoveToPublicRoomComponent = (props) => {
           await itemOperationToFolder(moveToPublicRoomData);
         }
       })
-      .catch((e) => {
-        toastr.error(e);
+      .catch(() => {
         setIsLoading(false);
         clearActiveOperations(fileIds, folderIds);
       })
@@ -125,12 +102,27 @@ const MoveToPublicRoomComponent = (props) => {
       });
   };
 
+  const onKeyUp = (e) => {
+    if (e.keyCode === 27) onClose();
+    if (e.keyCode === 13 || e.which === 13) onMoveTo();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keyup", onKeyUp, false);
+    return () => {
+      document.removeEventListener("keyup", onKeyUp, false);
+    };
+  }, [onKeyUp]);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timerId);
+      timerId = null;
+    };
+  });
+
   return (
-    <StyledMoveToPublicRoomDialog
-      isLoading={!tReady}
-      visible={visible}
-      onClose={onClose}
-    >
+    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>
         {t("Files:MoveToPublicRoomTitle")}
       </ModalDialog.Header>
@@ -160,7 +152,7 @@ const MoveToPublicRoomComponent = (props) => {
           isLoading={isLoading}
         />
       </ModalDialog.Footer>
-    </StyledMoveToPublicRoomDialog>
+    </ModalDialog>
   );
 };
 

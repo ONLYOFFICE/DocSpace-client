@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,9 +32,9 @@ import { useTranslation } from "react-i18next";
 import { setDocumentTitle } from "@docspace/client/src/helpers/utils";
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
 
+import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
 import LicenseContainer from "./LicenseContainer";
 import { StyledComponent } from "./StyledComponent";
-import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
 import EnterpriseContainer from "./EnterpriseContainer";
 import TrialContainer from "./TrialContainer";
 

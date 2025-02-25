@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -35,7 +34,7 @@ import Section from "@docspace/shared/components/section";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
-import Dialogs from "SRC_DIR/pages/Home/Section/AccountsBody/Dialogs";
+import Dialogs from "SRC_DIR/pages/Home/Section/ContactsBody/Dialogs";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
 import { SectionHeaderContent, SectionBodyContent } from "./Section";
@@ -86,14 +85,14 @@ class Profile extends React.Component {
     }
 
     if (!profile && this.documentElement) {
-      for (var i = 0; i < this.documentElement.length; i++) {
+      for (let i = 0; i < this.documentElement.length; i++) {
         this.documentElement[i].style.transition = "none";
       }
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { fetchProfile, profile } = this.props;
+  componentDidUpdate() {
+    const { profile } = this.props;
     // const { userId } = match.params;
     // const prevUserId = prevProps.match.params.userId;
 
@@ -103,7 +102,7 @@ class Profile extends React.Component {
     // }
 
     if (profile && this.documentElement) {
-      for (var i = 0; i < this.documentElement.length; i++) {
+      for (let i = 0; i < this.documentElement.length; i++) {
         this.documentElement[i].style.transition = "";
       }
     }
@@ -112,7 +111,7 @@ class Profile extends React.Component {
   render() {
     // console.log("Profile render");
 
-    const { profile, showCatalog, setIsLoading } = this.props;
+    const { profile, setIsLoading } = this.props;
 
     return (
       <>
@@ -137,7 +136,6 @@ class Profile extends React.Component {
 Profile.propTypes = {
   fetchProfile: PropTypes.func.isRequired,
   profile: PropTypes.object,
-  language: PropTypes.string,
 };
 
 const ComponentPure = inject(
@@ -198,12 +196,8 @@ const ComponentPure = inject(
 )(observer(withTranslation(["Profile", "Common"])(withCultureNames(Profile))));
 
 export const Component = () => {
-  const location = useLocation();
-
-  const fileManagement = location.pathname.includes("file-management");
-
   return (
-    <PrivateRoute withCollaborator={fileManagement} restricted={fileManagement}>
+    <PrivateRoute>
       <ComponentPure />
     </PrivateRoute>
   );

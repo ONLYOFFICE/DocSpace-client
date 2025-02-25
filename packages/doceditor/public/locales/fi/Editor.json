@@ -1,4 +1,5 @@
 {
+  "DocumentConverted": "Asiakirja on muutettu {{title}}, jotta sitä voidaan muokata",
   "DocumentsFileType": "asiakirjat",
   "ErrorConnectionLost": "Yhteys on katkennut",
   "FileLocation": "Siirry asiakirjoihin",

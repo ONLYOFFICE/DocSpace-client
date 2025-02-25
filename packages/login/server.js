@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,7 +30,7 @@ const next = require("next");
 
 const dev = process.env.NODE_ENV === "development";
 
-const port = 5011;
+const port = process.env.PORT ?? 5011;
 const hostname = "0.0.0.0";
 
 // when using middleware `hostname` and `port` must be provided below

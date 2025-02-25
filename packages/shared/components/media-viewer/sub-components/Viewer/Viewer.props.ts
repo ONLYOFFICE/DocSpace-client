@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TFile } from "@docspace/shared/api/files/types";
-import type { DeviceType } from "@docspace/shared/enums";
+import type { TFile } from "../../../../api/files/types";
+import type { DeviceType } from "../../../../enums";
 import type { getCustomToolbar } from "../../MediaViewer.helpers";
 import type { PlaylistType } from "../../MediaViewer.types";
 
@@ -38,7 +38,7 @@ interface ViewerProps {
   visible: boolean;
   isImage: boolean;
   isPdf: boolean;
-
+  autoPlay: boolean;
   playlist: PlaylistType[];
 
   audioIcon: string;
@@ -60,7 +60,7 @@ interface ViewerProps {
     isOpen: boolean,
     right?: string,
     bottom?: string,
-  ) => JSX.Element;
+  ) => JSX.Element | null;
   onSetSelectionFile: VoidFunction;
 }
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,16 +27,23 @@
 import { makeAutoObservable } from "mobx";
 import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
 import { FolderType } from "@docspace/shared/enums";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 class TreeFoldersStore {
   selectedFolderStore;
+
   settingsStore;
+
   publicRoomStore;
 
   treeFolders = [];
+
   selectedTreeNode = [];
+
   expandedPanelKeys = null;
+
   rootFoldersTitles = {};
+
   isLoadingNodes = false;
 
   constructor(selectedFolderStore, settingsStore, publicRoomStore) {
@@ -58,23 +65,19 @@ class TreeFoldersStore {
   };
 
   listenTreeFolders = (treeFolders) => {
-    const { socketHelper } = this.settingsStore;
+    const roomParts = treeFolders
+      .map((f) => `DIR-${f.id}`)
+      .filter((f) => !SocketHelper.socketSubscribers.has(f));
 
-    if (treeFolders.length > 0) {
-      socketHelper.emit({
-        command: "unsubscribe",
-        data: {
-          roomParts: treeFolders.map((f) => `DIR-${f.id}`),
-          individual: true,
-        },
-      });
+    if (roomParts.length > 0) {
+      // SocketHelper.emit(SocketCommands.Unsubscribe, {
+      //   roomParts: treeFolders.map((f) => `DIR-${f.id}`),
+      //   individual: true,
+      // });
 
-      socketHelper.emit({
-        command: "subscribe",
-        data: {
-          roomParts: treeFolders.map((f) => `DIR-${f.id}`),
-          individual: true,
-        },
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts,
+        individual: true,
       });
     }
   };
@@ -116,8 +119,7 @@ class TreeFoldersStore {
   setRootFoldersTitles = (treeFolders) => {
     treeFolders.forEach((elem) => {
       this.rootFoldersTitles[elem.rootFolderType] = {
-        id: elem.id,
-        title: elem.title,
+        ...elem,
       };
     });
   };
@@ -135,6 +137,7 @@ class TreeFoldersStore {
   setIsLoadingNodes = (isLoadingNodes) => {
     this.isLoadingNodes = isLoadingNodes;
   };
+
   setSelectedNode = (node) => {
     if (node[0]) {
       this.selectedTreeNode = node;
@@ -157,8 +160,11 @@ class TreeFoldersStore {
   // };
 
   isMy = (myType) => myType === FolderType.USER;
+
   isCommon = (commonType) => commonType === FolderType.COMMON;
+
   isShare = (shareType) => shareType === FolderType.SHARE;
+
   isRoomRoot = (type) => type === FolderType.Rooms;
 
   getRootFolder = (rootFolderType) => {
@@ -175,10 +181,13 @@ class TreeFoldersStore {
     return this.rootFoldersTitles[FolderType.Archive]?.id;
   }
 
-  get recycleBinFolderId() {
-    return this.rootFoldersTitles[FolderType.TRASH]?.id;
+  get trashFolderInfo() {
+    return this.rootFoldersTitles[FolderType.TRASH];
   }
 
+  /**
+   * @type {import("@docspace/shared/api/files/types").TFolder=}
+   */
   get myFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.USER);
   }
@@ -197,6 +206,9 @@ class TreeFoldersStore {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Recent);
   }
 
+  /**
+   * @type {import("@docspace/shared/api/rooms/types").TRoom=}
+   */
   get roomsFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Rooms);
   }
@@ -204,6 +216,12 @@ class TreeFoldersStore {
   get archiveFolder() {
     return this.treeFolders.find(
       (x) => x.rootFolderType === FolderType.Archive,
+    );
+  }
+
+  get templatesFolder() {
+    return this.treeFolders.find(
+      (x) => x.rootFolderType === FolderType.Templates,
     );
   }
 
@@ -240,23 +258,6 @@ class TreeFoldersStore {
   get recycleBinFolderId() {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
   }
-
-  getIsAccountsPeople = () => {
-    return window.location.pathname.includes("accounts/people");
-  };
-
-  getIsAccountsInsideGroup = () => {
-    const insideGroupPattern = /accounts\/groups\/.*\/filter/;
-
-    return insideGroupPattern.test(window.location.pathname);
-  };
-
-  getIsAccountsGroups = () => {
-    return (
-      window.location.pathname.includes("accounts/groups") &&
-      !this.getIsAccountsInsideGroup()
-    );
-  };
 
   get isPersonalRoom() {
     return (
@@ -333,11 +334,26 @@ class TreeFoldersStore {
     );
   }
 
+  get isTemplatesFolderRoot() {
+    return FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType;
+  }
+
+  get isTemplatesFolder() {
+    return (
+      FolderType.RoomTemplates === this.selectedFolderStore.rootFolderType &&
+      this.selectedFolderStore.isRootFolder
+    );
+  }
+
+  get isRoomsFolderRoot() {
+    return FolderType.Rooms === this.selectedFolderStore.rootFolderType;
+  }
+
   get isArchiveFolderRoot() {
     return FolderType.Archive === this.selectedFolderStore.rootFolderType;
   }
 
-  get isPersonalFolderRoot() {
+  get isDocumentsFolder() {
     return FolderType.USER === this.selectedFolderStore.rootFolderType;
   }
 
@@ -355,7 +371,7 @@ class TreeFoldersStore {
       this.selectedTreeNode[0] !== "@my" &&
       this.selectedTreeNode[0] !== "@common"
         ? this.selectedTreeNode
-        : [this.selectedFolderStore.id + ""];
+        : [`${this.selectedFolderStore.id}`];
     return selectedKeys;
   }
 }

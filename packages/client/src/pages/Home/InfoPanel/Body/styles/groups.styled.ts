@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,10 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const GroupsContent = styled.div<{}>`
-  padding-top: 128px;
   margin-inline-start: auto;
 
   .group-member {
@@ -45,13 +44,16 @@ export const GroupsContent = styled.div<{}>`
       display: flex;
       flex-direction: column;
       justify-content: start;
+      width: 100%;
+      overflow: hidden;
 
       .name-wrapper {
         display: flex;
         flex-direction: row;
-        gap: 4px;
+        align-items: center;
+        gap: 8px;
+
         .name {
-          max-width: 180px;
           font-size: 14px;
           font-weight: 600;
           line-height: 16px;
@@ -64,7 +66,6 @@ export const GroupsContent = styled.div<{}>`
       }
 
       .email {
-        max-width: 180px;
         color: ${(props) => props.theme.infoPanel.groups.textColor};
         font-size: 12px;
         line-height: 16px;
@@ -80,7 +81,7 @@ export const GroupsContent = styled.div<{}>`
       display: flex;
       flex-direction: row;
       gap: 16px;
-      margin-inline-start: auto;
+      margin-inline-start: 8px;
       .group-manager-tag {
         white-space: nowrap;
         color: ${(props) => props.theme.infoPanel.groups.tagColor};
@@ -88,6 +89,10 @@ export const GroupsContent = styled.div<{}>`
         font-weight: 600;
         line-height: 16px;
       }
+    }
+
+    .context-btn-wrapper:empty {
+      display: none;
     }
   }
 `;

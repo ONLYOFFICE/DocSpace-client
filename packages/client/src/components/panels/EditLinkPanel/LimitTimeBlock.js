@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import ToggleBlock from "./ToggleBlock";
+import { useTranslation } from "react-i18next";
 import { DateTimePicker } from "@docspace/shared/components/date-time-picker";
+import ToggleBlock from "./ToggleBlock";
 
 const LimitTimeBlock = (props) => {
   const {
@@ -36,16 +37,31 @@ const LimitTimeBlock = (props) => {
     setIsExpired,
     isExpired,
     language,
+    isPrimary,
+    headerText,
+    bodyText,
   } = props;
 
+  const { t } = useTranslation(["Common"]);
+
   const onChange = (date) => {
-    const isExpired = date
+    const expired = date
       ? new Date(date).getTime() <= new Date().getTime()
       : false;
 
     setExpirationDate(date);
-    setIsExpired(isExpired);
+    setIsExpired(expired);
   };
+
+  if (isPrimary) {
+    return (
+      <ToggleBlock
+        headerText={headerText}
+        bodyText={bodyText}
+        withToggle={false}
+      />
+    );
+  }
 
   // const minDate = new Date(new Date().getTime());
   // minDate.setDate(new Date().getDate() - 1);
@@ -63,6 +79,7 @@ const LimitTimeBlock = (props) => {
         openDate={new Date()}
         hasError={isExpired}
         locale={language}
+        selectDateText={t("Common:SelectDate")}
       />
     </ToggleBlock>
   );

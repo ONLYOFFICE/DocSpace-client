@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { withTranslation } from "react-i18next";
@@ -34,16 +33,16 @@ import { useNavigate } from "react-router-dom";
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
 import { Tabs } from "@docspace/shared/components/tabs";
 
+import { tablet } from "@docspace/shared/utils";
+
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/LoginContent";
 import Notifications from "./sub-components/notifications";
 import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 
-import { tablet } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/shared/enums";
 import AuthorizedApps from "./sub-components/authorized-apps";
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const Wrapper = styled.div`
   display: flex;
@@ -65,13 +64,8 @@ const StyledTabs = styled(Tabs)`
 `;
 
 const SectionBodyContent = (props) => {
-  const {
-    showProfileLoader,
-    profile,
-    currentDeviceType,
-    identityServerEnabled,
-    t,
-  } = props;
+  const { showProfileLoader, currentDeviceType, identityServerEnabled, t } =
+    props;
   const navigate = useNavigate();
 
   const data = [
@@ -100,23 +94,22 @@ const SectionBodyContent = (props) => {
     });
   }
 
-  if (!profile?.isVisitor)
-    data.splice(2, 0, {
-      id: "file-management",
-      name: t("FileManagement"),
-      content: <FileManagement />,
-    });
+  data.splice(2, 0, {
+    id: "file-management",
+    name: t("FileManagement"),
+    content: <FileManagement />,
+  });
 
   const getCurrentTabId = () => {
-    const path = location.pathname;
+    const path = window.location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    return currentTab !== -1 && data.length ? currentTab.id : data[0].id;
+    return currentTab && data.length ? currentTab.id : data[0].id;
   };
 
   const currentTabId = getCurrentTabId();
 
   const onSelect = (e) => {
-    const arrayPaths = location.pathname.split("/");
+    const arrayPaths = window.location.pathname.split("/");
     arrayPaths.splice(arrayPaths.length - 1);
     const path = arrayPaths.join("/");
     navigate(`${path}/${e.id}`, { state: { disableScrollToTop: true } });
@@ -136,27 +129,22 @@ const SectionBodyContent = (props) => {
   );
 };
 
-export default inject(
-  ({ settingsStore, peopleStore, clientLoadingStore, authStore }) => {
-    const { showProfileLoader } = clientLoadingStore;
-    const { targetUser: profile } = peopleStore.targetUserStore;
+export default inject(({ settingsStore, clientLoadingStore, authStore }) => {
+  const { showProfileLoader } = clientLoadingStore;
 
-    const { identityServerEnabled } = authStore.capabilities;
+  const { identityServerEnabled } = authStore.capabilities;
 
-    return {
-      profile,
-      currentDeviceType: settingsStore.currentDeviceType,
-      showProfileLoader,
-      identityServerEnabled,
-    };
-  },
-)(
+  return {
+    currentDeviceType: settingsStore.currentDeviceType,
+    showProfileLoader,
+    identityServerEnabled,
+  };
+})(
   observer(
     withTranslation([
       "Profile",
       "Common",
       "PeopleTranslations",
-      "ProfileAction",
       "ResetApplicationDialog",
       "BackupCodesDialog",
       "DeleteSelfProfileDialog",

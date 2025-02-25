@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,20 +38,23 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import { StyledContainer } from "./StyledPluginSDK";
 
-const LEARN_MORE_LINK = "https://api.onlyoffice.com/docspace/pluginssdk/";
-
 const PluginSDK = ({
   systemPluginList,
   currentDeviceType,
   isLoading,
   isEmptyList,
   theme,
+  apiPluginSDKLink,
 }) => {
-  const { t } = useTranslation(["WebPlugins", "VersionHistory", "Common"]);
+  const { t, ready } = useTranslation([
+    "WebPlugins",
+    "VersionHistory",
+    "Common",
+  ]);
 
   React.useEffect(() => {
-    setDocumentTitle(t("WebPlugins:PluginSDK"));
-  }, []);
+    if (ready) setDocumentTitle(t("WebPlugins:PluginSDK"));
+  }, [ready]);
 
   const isMobile = currentDeviceType === "mobile";
 
@@ -61,22 +64,22 @@ const PluginSDK = ({
     if (isLoading) {
       return [
         <RectangleSkeleton
-          key={"plugin-1"}
-          width={"100%"}
-          height={"164px"}
-          borderRadius={"6px"}
+          key="plugin-1"
+          width="100%"
+          height="164px"
+          borderRadius="6px"
         />,
         <RectangleSkeleton
-          key={"plugin-2"}
-          width={"100%"}
-          height={"164px"}
-          borderRadius={"6px"}
+          key="plugin-2"
+          width="100%"
+          height="164px"
+          borderRadius="6px"
         />,
         <RectangleSkeleton
-          key={"plugin-3"}
-          width={"100%"}
-          height={"164px"}
-          borderRadius={"6px"}
+          key="plugin-3"
+          width="100%"
+          height="164px"
+          borderRadius="6px"
         />,
       ];
     }
@@ -84,15 +87,19 @@ const PluginSDK = ({
     const list = systemPluginList.map((p) => (
       <div key={p.name} className="plugin-list__item">
         <div className="plugin-list__item-info">
-          <img className="plugin-logo" src={`${p.iconUrl}/assets/${p.image}`} />
+          <img
+            className="plugin-logo"
+            src={`${p.iconUrl}/assets/${p.image}`}
+            alt="Plugin logo"
+          />
           <div className="plugin-info-container">
             <Text>{p.name}</Text>
-            <Text className={"description"}>
+            <Text className="description">
               {t("VersionHistory:Version")} {p.version}
             </Text>
           </div>
         </div>
-        <Text className={"description-text"} title={p.description}>
+        <Text className="description-text" title={p.description}>
           {p.description}
         </Text>
         <Button
@@ -100,7 +107,7 @@ const PluginSDK = ({
           onClick={() => window.open(p.homePage, "_blank")}
           scale
           label={t("GoToRepo")}
-          size={"small"}
+          size="small"
         />
       </div>
     ));
@@ -110,52 +117,57 @@ const PluginSDK = ({
 
   const list = getPluginList();
 
-  console.log(list, isEmptyList);
-
   return (
     <StyledContainer>
-      <Text fontSize={"16px"} fontWeight={700} lineHeight={"22px"}>
+      <Text fontSize="16px" fontWeight={700} lineHeight="22px">
         {t("ExpandFunctionality")}
       </Text>
       <Text
-        className={"description"}
-        fontSize={"13px"}
+        className="description"
+        fontSize="13px"
         fontWeight={400}
-        lineHeight={"20px"}
+        lineHeight="20px"
       >
-        {t("PluginSDKDescription")}
+        {t("PluginSDKDescription", { productName: t("Common:ProductName") })}
       </Text>
       <Text
-        className={"description"}
-        fontSize={"13px"}
+        className="description"
+        fontSize="13px"
         fontWeight={400}
-        lineHeight={"20px"}
+        lineHeight="20px"
       >
-        {t("PluginSDKInstruction", { productName: t("Common:ProductName") })}
+        {t("PluginSDKInstruction")}
       </Text>
       <Button
-        className={"read-instructions-button"}
+        className="read-instructions-button"
         label={t("Common:ReadInstructions")}
         primary
         scale={isMobile}
         size={isMobile ? "normal" : "small"}
-        onClick={() => window.open(LEARN_MORE_LINK, "_blank")}
-      ></Button>
-      {!isEmptyList && list.length > 0 && (
+        onClick={() => window.open(apiPluginSDKLink, "_blank")}
+      />
+      {!isEmptyList && list.length > 0 ? (
         <>
-          <Text fontSize={"16px"} fontWeight={700} lineHeight={"22px"}>
+          <Text fontSize="16px" fontWeight={700} lineHeight="22px">
             {t("PluginSamples")}
           </Text>
           <div className="plugin-list">{list}</div>
         </>
-      )}
+      ) : null}
     </StyledContainer>
   );
 };
 
 export default inject(({ pluginStore, settingsStore }) => {
-  const { currentDeviceType, theme } = settingsStore;
+  const { currentDeviceType, theme, apiPluginSDKLink } = settingsStore;
   const { systemPluginList, isLoading, isEmptyList } = pluginStore;
 
-  return { currentDeviceType, systemPluginList, theme, isLoading, isEmptyList };
+  return {
+    currentDeviceType,
+    systemPluginList,
+    theme,
+    isLoading,
+    isEmptyList,
+    apiPluginSDKLink,
+  };
 })(observer(PluginSDK));

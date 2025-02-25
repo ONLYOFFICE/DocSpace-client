@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,128 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useMemo } from "react";
+import { ReactSVG } from "react-svg";
+import classNames from "classnames";
 
-import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../themes";
+import EditPenSvgUrl from "PUBLIC_DIR/images/icons/12/pen-edit.react.svg?url";
+import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
+import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
+import TemplateRoomIcon from "PUBLIC_DIR/images/template-room-icon.react.svg?url";
+
+import { useClickOutside } from "../../utils/useClickOutside";
+import { getTextColor } from "../../utils";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
+import { useTheme } from "../../hooks/useTheme";
+import { globalColors } from "../../themes/globalColors";
+
+import { DropDown } from "../drop-down";
+import { DropDownItem } from "../drop-down-item";
+
 import { Text } from "../text";
-
 import { IconButton } from "../icon-button";
-import { classNames } from "../../utils";
 
-const StyledIcon = styled.div<{
-  size: string;
-  radius: string;
-  isArchive?: boolean;
-  color?: string;
-  wrongImage: boolean;
-}>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: ${(props) => props.size};
-
-  width: ${(props) => props.size};
-
-  .room-background {
-    height: ${(props) => props.size};
-
-    width: ${(props) => props.size};
-
-    border-radius: ${(props) => props.radius};
-    vertical-align: middle;
-    background: ${(props) =>
-      props.isArchive
-        ? props.theme.roomIcon.backgroundArchive
-        : `#${props.color}`};
-    position: absolute;
-    opacity: ${(props) => props.theme.roomIcon.opacityBackground};
-  }
-
-  .room-title {
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 16px;
-    color: ${(props) =>
-      props.wrongImage && props.theme.isBase
-        ? globalColors.black
-        : globalColors.white};
-    position: relative;
-    ${(props) =>
-      !props.theme.isBase &&
-      !props.isArchive &&
-      css`
-        color: ${`#${props.color}`};
-      `};
-  }
-
-  .room-icon_badge {
-    position: absolute;
-    margin-block: 24px 0;
-    margin-inline: 24px 0;
-
-    .room-icon-button {
-      width: 12px;
-      height: 12px;
-      border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
-      border-radius: 50%;
-
-      svg {
-        path {
-          fill: ${(props) => props.theme.backgroundColor};
-        }
-        rect {
-          stroke: ${(props) => props.theme.backgroundColor};
-        }
-      }
-    }
-  }
-`;
-
-StyledIcon.defaultProps = { theme: Base };
-
-// interface RoomIconProps {
-//   title: string;
-//   isArchive?: boolean;
-//   color: string;
-//   size?: string;
-//   radius?: string;
-//   showDefault: boolean;
-//   imgClassName?: string;
-//   imgSrc?: string;
-
-// }
-
-type RoomIconDefault = {
-  title: string;
-  isArchive?: boolean;
-  size?: string;
-  radius?: string;
-  showDefault: boolean;
-  imgClassName?: string;
-  className?: string;
-};
-
-type RoomIconColor = {
-  color: string;
-  imgSrc?: undefined;
-  imgClassName?: undefined;
-};
-
-type RoomIconImage = {
-  color?: string | undefined;
-  imgSrc: string;
-  imgClassName?: string;
-};
-
-type RoomIconBadge = { badgeUrl?: string; onBadgeClick?: () => void };
-
-type RoomIconNonBadge = { badgeUrl?: undefined; onBadgeClick?: undefined };
-
-type RoomIconProps = RoomIconDefault &
-  (RoomIconColor | RoomIconImage) &
-  (RoomIconBadge | RoomIconNonBadge);
+import { getRoomTitle } from "./RoomIcon.utils";
+import styles from "./RoomIcon.module.scss";
+import type { RoomIconProps } from "./RoomIcon.types";
+import { Tooltip } from "../tooltip";
 
 const RoomIcon = ({
   title,
@@ -155,27 +58,85 @@ const RoomIcon = ({
   radius = "6px",
   showDefault,
   imgClassName,
-  imgSrc,
+  logo,
   badgeUrl,
   onBadgeClick,
   className,
+  withEditing,
+  hoverSrc,
+  model,
+  onChangeFile,
+  isEmptyIcon,
+  dropDownManualX,
+  tooltipContent,
+  tooltipId,
+  isTemplate = false,
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
+  const [openEditLogo, setOpenLogoEdit] = React.useState(false);
 
-  const titleWithoutNumberDuplicate = title?.replace(/\(\d+\)/, "");
-  const titleWithoutSpaces = titleWithoutNumberDuplicate
-    ?.replace(/\s+/g, " ")
-    ?.trim();
-  const indexAfterLastSpace = titleWithoutSpaces?.lastIndexOf(" ");
-  const secondCharacter =
-    !titleWithoutSpaces || indexAfterLastSpace === -1
-      ? ""
-      : titleWithoutSpaces[indexAfterLastSpace + 1];
+  const onToggleOpenEditLogo = () => setOpenLogoEdit(!openEditLogo);
 
-  const roomTitle = title && (title[0] + secondCharacter).toUpperCase();
+  const iconRef = React.useRef<HTMLDivElement>(null);
+  const inputFilesElement = React.useRef<HTMLInputElement>(null);
+
+  const { isBase } = useTheme();
+
+  const onInputClick = () => {
+    if (inputFilesElement.current) {
+      inputFilesElement.current.value = "";
+    }
+  };
+
+  useClickOutside(iconRef, () => {
+    setOpenLogoEdit(false);
+  });
+
+  const { isRTL } = useInterfaceDirection();
+
+  const roomTitle = useMemo(() => getRoomTitle(title ?? ""), [title]);
+
+  const imgSrc = logo
+    ? typeof logo === "string"
+      ? logo
+      : logo.cover
+        ? `data:image/svg+xml;base64, ${window.btoa(logo?.cover?.data)}`
+        : typeof logo === "object" && logo.medium
+          ? logo.medium
+          : undefined
+    : undefined;
+
+  const dropdownElement = (
+    <DropDown
+      manualX={dropDownManualX || "-10px"}
+      open={openEditLogo}
+      clickOutsideAction={() => setOpenLogoEdit(false)}
+      withBackdrop={false}
+      isDefaultMode={false}
+    >
+      {model?.map((option) => {
+        const optionOnClickAction = () => {
+          setOpenLogoEdit(false);
+          if (option.key === "upload") {
+            return option.onClick(inputFilesElement);
+          }
+          option.onClick();
+        };
+        return (
+          <DropDownItem
+            key={option.key}
+            label={option.label}
+            icon={option.icon}
+            onClick={optionOnClickAction}
+          />
+        );
+      })}
+    </DropDown>
+  );
 
   const prefetchImage = React.useCallback(() => {
-    if (!imgSrc) return;
+    if (!imgSrc || typeof imgSrc !== "string") return;
+    setCorrectImage(true);
     const img = new Image();
 
     img.src = imgSrc;
@@ -185,45 +146,227 @@ const RoomIcon = ({
     };
   }, [imgSrc]);
 
+  const getContent = () => (
+    <Text fontSize="12px" fontWeight={400} noSelect>
+      {tooltipContent}
+    </Text>
+  );
+
   React.useEffect(() => {
     prefetchImage();
   }, [prefetchImage]);
 
-  return (
-    <StyledIcon
-      color={color}
-      size={size}
-      radius={radius}
-      isArchive={isArchive}
-      wrongImage={!correctImage}
-      className={className}
-      data-testid="room-icon"
-    >
-      {showDefault || !correctImage ? (
-        <>
-          <div className="room-background" />
-          <Text className="room-title">{roomTitle}</Text>
-        </>
-      ) : (
-        <img
-          className={classNames([imgClassName, "not-selectable"])}
-          src={imgSrc}
-          alt="room icon"
-        />
-      )}
+  const isBigSize = size === "96px";
 
-      {badgeUrl && (
-        <div className="room-icon_badge">
-          <IconButton
-            onClick={onBadgeClick}
-            iconName={badgeUrl}
-            size={12}
-            className="room-icon-button"
-            isFill
+  const coverSize = +size.replace("px", "") * 0.625;
+  const textColor = color && getTextColor(`#${color}`, 202);
+
+  const isWrongImage =
+    !correctImage &&
+    imgSrc &&
+    typeof imgSrc !== "string" &&
+    logo &&
+    typeof logo !== "string" &&
+    !logo?.color;
+
+  const roomTitleText = (
+    <Text
+      className={classNames("room-title", styles.roomTitle)}
+      noSelect
+      data-testid="room-title"
+      style={
+        {
+          "--room-icon-text-color":
+            isBase && isWrongImage
+              ? globalColors.black
+              : !isBase && !isArchive
+                ? `#${color}`
+                : textColor,
+        } as React.CSSProperties
+      }
+    >
+      {roomTitle}
+    </Text>
+  );
+
+  return (
+    <>
+      <div
+        ref={iconRef}
+        className={classNames(
+          {
+            [styles.withHover]: !!hoverSrc && !isArchive,
+            [styles.withEditing]: withEditing,
+            [styles.isEmptyIcon]: isEmptyIcon,
+            [styles.isArchive]: isArchive,
+            [styles.wrongImage]: isWrongImage,
+          },
+          className,
+          styles.roomIcon,
+        )}
+        style={
+          {
+            "--room-icon-size": size,
+            "--room-icon-radius": radius,
+            "--room-icon-color": color ? `#${color}` : null,
+            "--room-icon-text-color": textColor,
+            "--room-icon-cover-size": coverSize / 20,
+          } as React.CSSProperties
+        }
+        data-testid="room-icon"
+        data-is-archive={isArchive}
+        data-has-editing={withEditing}
+        data-is-template={isTemplate}
+        data-is-empty={isEmptyIcon}
+        onClick={onToggleOpenEditLogo}
+      >
+        {isTemplate ? (
+          <div className="template-icon-container">
+            <ReactSVG className="template-icon-svg" src={TemplateRoomIcon} />
+            {showDefault || !correctImage ? (
+              roomTitleText
+            ) : (
+              <img
+                className={classNames([imgClassName, "room-image"])}
+                src={imgSrc}
+                alt="room icon"
+              />
+            )}
+          </div>
+        ) : isEmptyIcon ? (
+          <>
+            <ReactSVG
+              className="room-icon-empty"
+              src={Camera10ReactSvgUrl}
+              data-testid="empty-icon"
+            />
+            <div
+              className={classNames(styles.editWrapper, styles.size20, {
+                [styles.rtl]: isRTL,
+              })}
+            >
+              <IconButton
+                className="open-plus-logo-icon"
+                size={12}
+                iconName={PlusSvgUrl}
+                onClick={onToggleOpenEditLogo}
+                isFill
+              />
+              {dropdownElement}
+            </div>
+          </>
+        ) : showDefault || !correctImage ? (
+          <>
+            <div className="room-background hover-class" />
+            {roomTitleText}
+          </>
+        ) : logo &&
+          typeof logo !== "string" &&
+          logo?.cover &&
+          typeof imgSrc === "string" &&
+          imgSrc ? (
+          <>
+            <div className="room-background hover-class" />
+            <ReactSVG
+              className={classNames("room-icon-cover", styles.roomIconCover)}
+              style={
+                {
+                  "--room-icon--text-color": isBase ? textColor : `#${color}`,
+                } as React.CSSProperties
+              }
+              src={imgSrc}
+              data-testid="room-icon-cover"
+            />
+          </>
+        ) : (
+          <img
+            className={classNames([
+              imgClassName,
+              "hover-class",
+              "not-selectable",
+            ])}
+            src={imgSrc as string}
+            alt="room icon"
+            data-testid="room-icon-image"
           />
-        </div>
-      )}
-    </StyledIcon>
+        )}
+
+        {hoverSrc && !isArchive ? (
+          <div
+            className={styles.roomIconContainer}
+            onClick={onToggleOpenEditLogo}
+            data-testid="hover-container"
+          >
+            <img
+              className={styles.roomIconHover}
+              src={hoverSrc}
+              alt="room icon hover"
+              data-testid="hover-image"
+            />
+            {dropdownElement}
+          </div>
+        ) : null}
+
+        {badgeUrl && !withEditing ? (
+          <div
+            className={classNames(styles.roomIconBadge, {
+              [styles.isBig]: isBigSize,
+            })}
+            data-testid="badge-container"
+          >
+            <IconButton
+              data-tooltip-id={tooltipId}
+              onClick={onBadgeClick}
+              iconName={badgeUrl}
+              size={isBigSize ? 28 : 12}
+              className={classNames(
+                styles.roomIconButton,
+                {
+                  [styles.isBig]: isBigSize,
+                  [styles.isHovered]: !!tooltipContent,
+                },
+                "room-icon_button",
+              )}
+              isFill
+            />
+
+            {tooltipContent ? (
+              <Tooltip id={tooltipId} getContent={getContent} place="bottom" />
+            ) : null}
+          </div>
+        ) : null}
+
+        {withEditing && !isArchive ? (
+          <div
+            className={classNames(styles.editWrapper, styles.size20, {
+              [styles.rtl]: isRTL,
+            })}
+          >
+            <IconButton
+              className="open-edit-logo-icon"
+              size={12}
+              iconName={EditPenSvgUrl}
+              onClick={onToggleOpenEditLogo}
+              isFill
+            />
+            {dropdownElement}
+          </div>
+        ) : null}
+      </div>
+      {onChangeFile ? (
+        <input
+          id="customFileInput"
+          data-testid="customFileInput"
+          className="custom-file-input"
+          type="file"
+          onChange={onChangeFile}
+          accept="image/png, image/jpeg"
+          onClick={onInputClick}
+          ref={inputFilesElement}
+          style={{ display: "none" }}
+        />
+      ) : null}
+    </>
   );
 };
 

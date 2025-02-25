@@ -1,17 +1,18 @@
 {
   "AddManually": "Přidat ručně",
-  "AddManuallyDescriptionAccounts": "Pozvěte osobně nové uživatele do {{productName}} prostřednictvím e-mailu",
-  "AddManuallyDescriptionRoom": "Přidat stávající uživatele {{productName}} do místnosti pomocí jmen nebo osobní pozvání nových uživatelů prostřednictvím e-mailu",
-  "EmailErrorMessage": "E-mailová adresa není platná. E-mailovou adresu můžete upravit kliknutím na tuto adresu.",
+  "EmailErrorMessage": "E-mailová adresa není platná. E-mailovou adresu můžete upravit že na něj dvakrát kliknete.",
   "GroupMaxAvailableRoleWarning": "Skupiny lze do místnosti přidat maximálně s rolí {{roleName}}. Role jednotlivých uživatelů ve skupině však můžete změnit až po jejím úspěšném přidání.",
   "InvitationLanguage": "Jazyk pozvánky",
-  "InviteAccountSearchPlaceholder": "Pozvat lidi e-mailem",
-  "InviteRoomSearchPlaceholder": "Pozvat lidi podle jména nebo e-mailu",
+  "InviteMembersManuallyDescription": "Osobně pozvěte nové členy do {{productName}} prostřednictvím e-mailu",
+  "InviteMembersSearchPlaceholder": "Pozvěte nové členy prostřednictvím e-mailu",
+  "InviteToRoomManuallyInfo": "Přidejte stávající kontakty {{productName}}. Nebo pozvěte nové uživatele osobně prostřednictvím e-mailu. Noví uživatelé budou přidáni do seznamu hostů.",
+  "InviteToRoomSearchPlaceholder": "Vyhledávání a pozvání podle jména nebo e-mailu",
   "InviteViaLink": "Pozvání prostřednictvím odkazu",
   "InviteViaLinkDescriptionAccounts": "Vytvoření univerzálního odkazu pro samoautorizaci v {{productName}}",
   "InviteViaLinkDescriptionRoom": "Vytvoření univerzálního odkazu pro sebeautorizaci v místnosti",
   "LinkCopySuccess": "Odkaz byl zkopírován",
   "ResetChange": "Obnovit změnu",
   "SendInvitation": "Odeslat pozvánku",
+  "UserMaxAvailableRoleWarning": "Hosty a uživatele nelze přiřadit jako správce místnosti. Pro zadanou roli jsou vhodní pouze správci místností a {{productName}}.",
   "UsersAlreadyAdded": "Někteří uživatelé již byli přidáni"
 }

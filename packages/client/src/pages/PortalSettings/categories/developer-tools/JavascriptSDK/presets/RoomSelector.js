@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,17 +26,16 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import debounce from "lodash.debounce";
-import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { inject, observer } from "mobx-react";
+import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { RoomsType } from "@docspace/shared/enums";
 
-import { toastr } from "@docspace/shared/components/toast";
-
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
@@ -45,16 +44,9 @@ import { SelectTextInput } from "../sub-components/SelectTextInput";
 import { CancelTextInput } from "../sub-components/CancelTextInput";
 import { MainElementParameter } from "../sub-components/MainElementParameter";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
+import { Integration } from "../sub-components/Integration";
 
-import { loadFrame } from "../utils";
-
-import {
-  dataDimensions,
-  defaultWidthDimension,
-  defaultHeightDimension,
-  defaultWidth,
-  defaultHeight,
-} from "../constants";
+import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
 
 import {
   Controls,
@@ -63,11 +55,9 @@ import {
   Frame,
   Container,
 } from "./StyledPresets";
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const RoomSelector = (props) => {
-  const { t, theme } = props;
+  const { t, theme, currentColorScheme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -102,14 +92,11 @@ const RoomSelector = (props) => {
 
   const [roomType, setRoomType] = useState(roomTypeOptions[0]);
 
-  const debouncedOnSelect = debounce((items) => {
-    // toastr.success(items[0].label);
-  }, 0);
-
   const [config, setConfig] = useState({
+    src: window.location.origin,
     mode: "room-selector",
-    width: `${defaultWidth}${defaultWidthDimension.label}`,
-    height: `${defaultHeight}${defaultHeightDimension.label}`,
+    width: `${defaultSize.width}${defaultDimension.label}`,
+    height: `${defaultSize.height}${defaultDimension.label}`,
     frameId: "ds-frame",
     init: true,
     showSelectorCancel: true,
@@ -120,7 +107,9 @@ const RoomSelector = (props) => {
     isButtonMode: false,
     buttonWithLogo: true,
     events: {
-      onSelectCallback: debouncedOnSelect,
+      onSelectCallback: (items) => {
+        console.log("onSelectCallback", items);
+      },
       onCloseCallback: null,
       onAppReady: null,
       onAppError: (e) => console.log("onAppError", e),
@@ -130,17 +119,19 @@ const RoomSelector = (props) => {
     },
   });
 
-  const frameId = config.frameId || "ds-frame";
+  const sdk = new SDK();
 
   const destroyFrame = () => {
-    window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
+    sdk.frames[config.frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
+  const initFrame = () => {
+    setTimeout(() => sdk.init(config), 10);
+  };
 
   useEffect(() => {
-    loadCurrentFrame();
-    return destroyFrame;
+    initFrame();
+    return () => destroyFrame();
   });
 
   useEffect(() => {
@@ -152,11 +143,14 @@ const RoomSelector = (props) => {
 
   const changeRoomType = (option) => {
     setRoomType(option);
-    setConfig((config) => ({ ...config, roomType: option.roomType }));
+    setConfig((oldConfig) => ({ ...oldConfig, roomType: option.roomType }));
   };
 
   const toggleWithSearch = () => {
-    setConfig((config) => ({ ...config, withSearch: !config.withSearch }));
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      withSearch: !config.withSearch,
+    }));
   };
 
   const preview = (
@@ -171,9 +165,9 @@ const RoomSelector = (props) => {
           ? config.height
           : undefined
       }
-      targetId={frameId}
+      targetId={config.frameId}
     >
-      <Box id={frameId}></Box>
+      <div id={config.frameId} />
     </Frame>
   );
 
@@ -185,10 +179,10 @@ const RoomSelector = (props) => {
       <Container>
         <PreviewBlock
           t={t}
-          loadCurrentFrame={loadCurrentFrame}
+          loadCurrentFrame={initFrame}
           preview={preview}
           theme={theme}
-          frameId={frameId}
+          frameId={config.frameId}
           scriptUrl={SDK_SCRIPT_URL}
           config={config}
         />
@@ -205,16 +199,16 @@ const RoomSelector = (props) => {
             <WidthSetter
               t={t}
               setConfig={setConfig}
-              dataDimensions={dataDimensions}
-              defaultDimension={defaultWidthDimension}
-              defaultWidth={defaultWidth}
+              dataDimensions={dimensionsModel}
+              defaultDimension={defaultDimension}
+              defaultWidth={defaultSize.width}
             />
             <HeightSetter
               t={t}
               setConfig={setConfig}
-              dataDimensions={dataDimensions}
-              defaultDimension={defaultHeightDimension}
-              defaultHeight={defaultHeight}
+              dataDimensions={dimensionsModel}
+              defaultDimension={defaultDimension}
+              defaultHeight={defaultSize.height}
             />
             <FrameIdSetter
               t={t}
@@ -248,17 +242,32 @@ const RoomSelector = (props) => {
               directionY="top"
             />
           </ControlsSection>
+
+          <Integration
+            className="integration-examples"
+            t={t}
+            theme={theme}
+            currentColorScheme={currentColorScheme}
+          />
         </Controls>
       </Container>
+
+      <Integration
+        className="integration-examples integration-examples-bottom"
+        t={t}
+        theme={theme}
+        currentColorScheme={currentColorScheme}
+      />
     </PresetWrapper>
   );
 };
 
 export const Component = inject(({ settingsStore }) => {
-  const { theme } = settingsStore;
+  const { theme, currentColorScheme } = settingsStore;
 
   return {
     theme,
+    currentColorScheme,
   };
 })(
   withTranslation([

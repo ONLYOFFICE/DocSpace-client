@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,24 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AddUsersPanel from "./AddUsersPanel";
 import EmbeddingPanel from "./EmbeddingPanel";
-import NewFilesPanel from "./NewFilesPanel";
 import VersionHistoryPanel from "./VersionHistoryPanel";
-import ChangeOwnerPanel from "./ChangeOwnerPanel";
 import UploadPanel from "./UploadPanel";
-import HotkeyPanel from "./HotkeysPanel";
+import HotkeysPanel from "./HotkeysPanel";
 import InvitePanel from "./InvitePanel";
 import EditLinkPanel from "./EditLinkPanel";
 
 export {
-  AddUsersPanel,
   EmbeddingPanel,
-  NewFilesPanel,
   VersionHistoryPanel,
-  ChangeOwnerPanel,
   UploadPanel,
-  HotkeyPanel,
+  HotkeysPanel,
   InvitePanel,
   EditLinkPanel,
 };

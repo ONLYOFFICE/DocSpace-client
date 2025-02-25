@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,9 +33,15 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
+import {
+  getUserType,
+  getUserTypeTranslation,
+} from "@docspace/shared/utils/common";
 import { TUser } from "@docspace/shared/api/people/types";
+import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
+
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 import * as Styled from "./index.styled";
 
@@ -47,19 +53,19 @@ interface GroupMemberRowProps {
 const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const role = getUserRole(groupMember);
+  const type = getUserType(groupMember);
   let avatarRole = AvatarRole.user;
-  switch (role) {
-    case "owner":
+  switch (type) {
+    case EmployeeType.Owner:
       avatarRole = AvatarRole.owner;
       break;
-    case "admin":
+    case EmployeeType.Admin:
       avatarRole = AvatarRole.admin;
       break;
-    case "manager":
+    case EmployeeType.RoomAdmin:
       avatarRole = AvatarRole.manager;
       break;
-    case "collaborator":
+    case EmployeeType.User:
       avatarRole = AvatarRole.collaborator;
       break;
     default:
@@ -78,8 +84,13 @@ const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
         source={groupMember.avatarSmall ?? groupMember.avatar}
       />
       <div className="info">
-        <div className="name">{groupMember.displayName}</div>
-        <div className="email">{`${getUserTypeLabel(role, t)} | ${groupMember.email}`}</div>
+        <div className="info-box">
+          <div className="name">{groupMember.displayName}</div>
+          {groupMember.status === EmployeeStatus.Pending ? (
+            <StyledSendClockIcon />
+          ) : null}
+        </div>
+        <div className="email">{`${getUserTypeTranslation(type, t)} | ${groupMember.email}`}</div>
       </div>
       <ReactSVG
         className="remove-icon"

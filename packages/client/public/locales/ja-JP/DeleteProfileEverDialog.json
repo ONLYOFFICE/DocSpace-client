@@ -1,16 +1,22 @@
 {
   "ActionCannotBeUndone": "選択された無効なユーザーは{{productName}}から削除されます。この操作は取り消すことができません。",
+  "ActionCannotBeUndoneGuests": "選択された障害のあるゲストは、{{productName}}から削除されます。この操作は元に戻すことはできません。",
   "CannotReassignFiles": "複数のユーザーを一度に削除した場合、そのユーザーのファイルを他のユーザーに再割り当てすることはできません。",
+  "DeleteGroupGuestsSuccessMessage": "ゲストは正常に削除されました。",
   "DeleteGroupUsersSuccessMessage": "ユーザーが正常に削除されました。",
+  "DeleteGuest": "ゲストの削除",
+  "DeleteGuests": "ゲストの削除",
   "DeleteMyDocumentsUser": "このユーザーの「私の文書」セクションにあるすべての個人ファイルおよびフォルダは永久に削除されます。",
   "DeletePersonalData": "選択したユーザーの個人データ、すべての個人ファイル、およびドキュメントとゴミ箱セクション*のフォルダは永久に削除されます。選択したユーザーのルームなどの共通セクション*にあるファイルやフォルダは{{productName}}に残ります。",
   "DeletePersonalDataApplicable": "*そのようなファイルやフォルダを持っている選択したユーザーに適用されます。",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} このユーザが作成したルームとそのルームに保存されているドキュメントは、削除を実行する管理者に自動的に再割り当てされます： <strong>{{userPerformedDeletion}} ({{userYou}})</strong>。手動でデータを再割り当てする場合は、別の割り当て先ユーザーを選択することができます。",
+  "DeleteReqassignDescriptionGuest": "招待されたすべてのルームから、{{userCaption}}が削除されます。この{{userCaption}}がルームで作成したドキュメントは、自動的にルームオーナーに再割り当てされます。",
   "DeleteUser": "ユーザーを削除します",
   "DeleteUserMessage": "{{userCaption}}<strong>{{user}}</strong>は削除されます。このアクションは元に戻せません。",
   "DeletingUsers": "ユーザーの削除",
   "PleaseNote": "ご注意ください：",
   "ReassignDataToAnotherUser": "データを別のユーザーに再割り当てする",
+  "SuccessfullyDeleteGuestInfoMessage": "ゲストは正常に削除されました",
   "SuccessfullyDeleteUserInfoMessage": "ユーザーの削除に成功しました。",
   "ToBeAbleToReassignData": "データを再割り当てするためには、一度に一人のユーザーを削除してください。"
 }

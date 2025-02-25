@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
+import PlusSvgUrl from "PUBLIC_DIR/images/icons/12/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 
 import { inject, observer } from "mobx-react";
@@ -33,7 +33,6 @@ import { withTranslation } from "react-i18next";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
 import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
@@ -49,7 +48,7 @@ const OptionsComponent = (props) => {
   return (
     <>
       <div className="empty-folder_container-links">
-        <Box className="flex-wrapper_container">
+        <div className="flex-wrapper_container">
           <div className="first-button">
             <IconButton
               data-format="docx"
@@ -72,7 +71,7 @@ const OptionsComponent = (props) => {
           <Link data-format="pdf" onClick={onCreate} {...linkStyles}>
             {t("Translations:NewForm")}
           </Link>
-        </Box>
+        </div>
       </div>
 
       <div className="empty-folder_container-links">
@@ -139,9 +138,7 @@ const ButtonsComponent = (props) => {
         {...props}
         onInviteUsersClick={onInviteUsersClick}
       />
-    ) : (
-      <></>
-    );
+    ) : null;
   }
 
   if (!isRoot) {
@@ -161,7 +158,7 @@ const ButtonsComponent = (props) => {
     );
   }
 
-  return <></>;
+  return null;
 };
 
 const CommonButtons = (props) => {
@@ -253,7 +250,7 @@ const CommonButtons = (props) => {
     );
   }
 
-  return <></>;
+  return null;
 };
 
 export default inject(
@@ -287,10 +284,10 @@ export default inject(
 
     const { onClickInviteUsers } = contextOptionsStore;
 
-    const { setIsSectionFilterLoading, isLoading } = clientLoadingStore;
+    const { setIsSectionBodyLoading, isLoading } = clientLoadingStore;
 
     const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
+      setIsSectionBodyLoading(param);
     };
 
     return {

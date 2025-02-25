@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,6 +26,10 @@
 
 import styled from "styled-components";
 
+import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
+
+import { commonIconsStyles } from "../../utils";
+
 const StyledUserTooltip = styled.div`
   width: 233px;
   min-height: 63px;
@@ -41,6 +45,15 @@ const StyledUserTooltip = styled.div`
     .email-text {
       padding-bottom: 8px;
     }
+  }
+`;
+
+export const StyledSendClockIcon = styled(SendClockIcon)`
+  min-width: 12px;
+
+  ${commonIconsStyles}
+  path {
+    fill: ${(props) => props.theme.accountsBadges.pendingColor};
   }
 `;
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 import { mobile } from "@docspace/shared/utils";
 
@@ -154,7 +154,7 @@ const StyledFolderTagSection = styled.div`
     props.width !== 0 &&
     `border-inline-end: 1px solid ${props.theme.client.settings.payment.backgroundColor}`};
   background: ${(props) => props.color};
-  width: ${(props) => props.width + "%"};
+  width: ${(props) => `${props.width}%`};
 
   &:first-of-type {
     border-start-start-radius: 46px;

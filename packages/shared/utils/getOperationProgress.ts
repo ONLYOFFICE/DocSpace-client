@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,8 +39,9 @@ export const getOperationProgress = async (
           }
 
           const currentItem = res.find((x) => x.id === id);
+
           if (currentItem?.error) {
-            reject(currentItem.error);
+            reject(currentItem);
           }
           resolve(currentItem);
         });

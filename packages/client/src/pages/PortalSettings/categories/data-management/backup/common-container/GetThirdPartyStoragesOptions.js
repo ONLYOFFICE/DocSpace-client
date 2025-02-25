@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,8 +29,8 @@ import { ThirdPartyStorages } from "@docspace/shared/enums";
 export const getOptions = (storageBackup, needDefaultParameter = false) => {
   if (!storageBackup) return;
 
-  let googleStorageId = ThirdPartyStorages.GoogleId;
-  let comboBoxOptions = [];
+  const googleStorageId = ThirdPartyStorages.GoogleId;
+  const comboBoxOptions = [];
   let storagesInfo = {};
   let isDefaultStorageExist = false;
   let isFirstSet = false;
@@ -46,15 +46,16 @@ export const getOptions = (storageBackup, needDefaultParameter = false) => {
       key: id,
       label: title,
       disabled: false,
+      connected: isSet,
     });
 
     storagesInfo = {
       ...storagesInfo,
       [id]: {
-        isSet: isSet,
-        properties: properties,
-        title: title,
-        id: id,
+        isSet,
+        properties,
+        title,
+        id,
       },
     };
 

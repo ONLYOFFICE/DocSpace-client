@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,15 +32,17 @@ import PeopleSelector from "@docspace/shared/selectors/People";
 import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { useNavigate } from "react-router-dom";
 
-import Body from "./sub-components/Body";
-import Footer from "./sub-components/Footer";
 import api from "@docspace/shared/api";
 import { EmployeeType } from "@docspace/shared/enums";
+import Body from "./sub-components/Body";
+import Footer from "./sub-components/Footer";
+
 const { Filter } = api;
 
-const StyledModalDialog = styled(ModalDialog)`
+const StyledBodyContent = styled.div`
+  display: contents;
+
   .avatar-name,
   .delete-profile-container {
     display: flex;
@@ -72,7 +74,6 @@ const DataReassignmentDialog = ({
   isDeletingUserWithReassignment,
   t,
   tReady,
-  getUsersList,
   setIsDeletingUserWithReassignment,
   setDataReassignmentDeleteProfile,
   dataReassignmentUrl,
@@ -91,14 +92,64 @@ const DataReassignmentDialog = ({
 
   const [percent, setPercent] = useState(0);
 
-  const updateAccountsAfterDeleteUser = () => {
-    const filter = Filter.getDefault();
-    getUsersList(filter, true);
-    return;
+  // const updateAccountsAfterDeleteUser = () => {
+  //   const filter = Filter.getDefault();
+
+  //   filter.area = "people";
+
+  //   getUsersList(filter, true);
+  // };
+
+  const checkReassignCurrentUser = () => {
+    setIsReassignCurrentUser(currentUser.id === selectedUser.id);
+  };
+
+  const checkProgress = () => {
+    dataReassignmentProgress(user.id)
+      .then((res) => {
+        // If the task has already been interrupted and killed
+        if (!res) return;
+
+        if (res.error) {
+          toastr.error(res.error);
+          return;
+        }
+
+        setPercent(res.percentage);
+
+        if (!res.isCompleted) {
+          timerId = setTimeout(checkProgress, 500);
+          return;
+        }
+
+        clearTimeout(timerId);
+        if (res.status === statusTerminateCompleted) return;
+
+        toastr.success(t("Common:ChangesSavedSuccessfully"));
+      })
+      .catch((error) => {
+        toastr.error(error?.response?.data?.error?.message);
+      });
+  };
+
+  const onReassign = () => {
+    checkReassignCurrentUser();
+    setShowProgress(true);
+
+    dataReassignment(user.id, selectedUser.id, isDeleteProfile)
+      .then(() => checkProgress())
+      .catch((error) => {
+        toastr.error(error?.response?.data?.error?.message);
+      })
+      .finally(() => {
+        if (isDeleteProfile || needResetUserSelection) {
+          setSelected("close");
+        }
+      });
   };
 
   useEffect(() => {
-    //If click Delete user
+    // If click Delete user
     if (isDeletingUserWithReassignment) onReassign();
 
     return () => {
@@ -135,81 +186,16 @@ const DataReassignmentDialog = ({
     setSelectedUser({ ...item[0] });
   };
 
-  const checkReassignCurrentUser = () => {
-    setIsReassignCurrentUser(currentUser.id === selectedUser.id);
-  };
-
-  const checkProgress = () => {
-    dataReassignmentProgress(user.id)
-      .then((res) => {
-        //If the task has already been interrupted and killed
-        if (!res) return;
-
-        if (res.error) {
-          toastr.error(res.error);
-          return;
-        }
-
-        setPercent(res.percentage);
-
-        if (!res.isCompleted) {
-          timerId = setTimeout(checkProgress, 500);
-          return;
-        }
-
-        clearTimeout(timerId);
-        if (res.status === statusTerminateCompleted) return;
-
-        toastr.success(t("Common:ChangesSavedSuccessfully"));
-        isDeleteProfile && updateAccountsAfterDeleteUser();
-      })
-      .catch((error) => {
-        toastr.error(error?.response?.data?.error?.message);
-      });
-  };
-
-  const onReassign = () => {
-    checkReassignCurrentUser();
-    setShowProgress(true);
-
-    dataReassignment(user.id, selectedUser.id, isDeleteProfile)
-      .then(() => checkProgress())
-      .catch((error) => {
-        toastr.error(error?.response?.data?.error?.message);
-      })
-      .finally(() => {
-        if (isDeleteProfile || needResetUserSelection) {
-          setSelected("close");
-        }
-      });
-  };
-
-  const onTerminate = () => {
-    clearTimeout(timerId);
-
-    dataReassignmentTerminate(user.id)
-      .then((res) => {
-        setPercent(res.percentage);
-        setIsAbortTransfer(true);
-        toastr.success(t("Common:ChangesSavedSuccessfully"));
-        isDeleteProfile && updateAccountsAfterDeleteUser();
-      })
-      .catch((error) => {
-        toastr.error(error?.response?.data?.error?.message);
-      });
-  };
-
-  const filter = new Filter();
-  filter.role = [EmployeeType.Admin, EmployeeType.User];
+  const filter = Filter.getDefault();
+  filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
 
   if (selectorVisible) {
     return (
-      <StyledModalDialog
+      <ModalDialog
         displayType="aside"
         visible={visible}
         onClose={onClosePeopleSelector}
         containerVisible={selectorVisible}
-        withFooterBorder
         withBodyScroll
       >
         <Backdrop
@@ -219,54 +205,66 @@ const DataReassignmentDialog = ({
         />
         <ModalDialog.Container>
           <PeopleSelector
-            submitButtonLabel={t("Common:SelectAction")}
-            onSubmit={onAccept}
+            submitButtonLabel=""
             disableSubmitButton={false}
+            onSubmit={onAccept}
             excludeItems={[user.id]}
             currentUserId={user.id}
             withCancelButton
+            onCancel={onClosePeopleSelector}
             cancelButtonLabel=""
+            withHeader
             headerProps={{
+              onCloseClick: onClose,
               onBackClick: onClosePeopleSelector,
               withoutBackButton: false,
               headerLabel: "",
             }}
-            onBackClick={onTogglePeopleSelector}
             filter={filter}
-            withHeader
             disableDisabledUsers
           />
         </ModalDialog.Container>
-      </StyledModalDialog>
+      </ModalDialog>
     );
   }
 
+  const onTerminate = () => {
+    dataReassignmentTerminate(user.id)
+      .then(() => {
+        toastr.success(t("Common:ChangesSavedSuccessfully"));
+      })
+      .catch((error) => {
+        toastr.error(error?.response?.data?.error?.message);
+      });
+  };
+
   return (
-    <StyledModalDialog
+    <ModalDialog
       displayType="aside"
       visible={visible}
       onClose={onClose}
       containerVisible={selectorVisible}
-      withFooterBorder
       withBodyScroll
     >
       <ModalDialog.Header>
         {t("DataReassignmentDialog:DataReassignment")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Body
-          t={t}
-          tReady={tReady}
-          showProgress={showProgress}
-          isReassignCurrentUser={isReassignCurrentUser}
-          user={user}
-          selectedUser={selectedUser}
-          percent={percent}
-          isAbortTransfer={isAbortTransfer}
-          dataReassignmentUrl={dataReassignmentUrl}
-          currentColorScheme={currentColorScheme}
-          onTogglePeopleSelector={onTogglePeopleSelector}
-        />
+        <StyledBodyContent>
+          <Body
+            t={t}
+            tReady={tReady}
+            showProgress={showProgress}
+            isReassignCurrentUser={isReassignCurrentUser}
+            user={user}
+            selectedUser={selectedUser}
+            percent={percent}
+            isAbortTransfer={isAbortTransfer}
+            dataReassignmentUrl={dataReassignmentUrl}
+            currentColorScheme={currentColorScheme}
+            onTogglePeopleSelector={onTogglePeopleSelector}
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
@@ -284,7 +282,7 @@ const DataReassignmentDialog = ({
           onStartAgain={onStartAgain}
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 
@@ -297,7 +295,6 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
     setIsDeletingUserWithReassignment,
   } = peopleStore.dialogStore;
   const { currentColorScheme, dataReassignmentUrl } = settingsStore;
-  const { setSelected } = peopleStore.selectionStore;
   const {
     dataReassignment,
     dataReassignmentProgress,
@@ -306,7 +303,7 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
 
   const { user: currentUser } = userStore;
 
-  const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
+  const { needResetUserSelection, setSelected } = peopleStore.usersStore;
 
   return {
     setDataReassignmentDialogVisible,
@@ -318,7 +315,6 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
     dataReassignmentTerminate,
     deleteProfile: dataReassignmentDeleteProfile,
     setDataReassignmentDeleteProfile,
-    getUsersList,
     isDeletingUserWithReassignment,
     setIsDeletingUserWithReassignment,
     dataReassignmentUrl,

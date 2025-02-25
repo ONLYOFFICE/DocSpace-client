@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,9 +28,11 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { FileAction } from "@docspace/shared/enums";
-import { Events } from "@docspace/shared/enums";
+import { FileAction, Events } from "@docspace/shared/enums";
+import { getStartRoomParams } from "@docspace/shared/utils/rooms";
 import { toastr } from "@docspace/shared/components/toast";
+
+import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
 
 import CreateEvent from "./CreateEvent";
 import RenameEvent from "./RenameEvent";
@@ -41,9 +43,22 @@ import EditGroupEvent from "./GroupEvents/EditGroupEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
+import SaveAsTemplateEvent from "./SaveAsTemplateEvent";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 
-const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
+const GlobalEvents = ({
+  enablePlugins,
+  eventListenerItemsList,
+  editRoomDialogProps,
+  setEditRoomDialogProps,
+  createRoomDialogProps,
+  setCreateRoomDialogProps,
+  setCover,
+
+  setCreatePDFFormFile,
+  createPDFFormFileProps,
+  userId,
+}) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
     id: null,
@@ -57,18 +72,6 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   });
 
   const [renameDialogProps, setRenameDialogProps] = useState({
-    visible: false,
-    item: null,
-    onClose: null,
-  });
-
-  const [createRoomDialogProps, setCreateRoomDialogProps] = useState({
-    title: "",
-    visible: false,
-    onClose: null,
-  });
-
-  const [editRoomDialogProps, setEditRoomDialogProps] = useState({
     visible: false,
     item: null,
     onClose: null,
@@ -100,11 +103,9 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     props: null,
     onClose: null,
   });
-
-  const [createPDFFormFile, setCreatePDFFormFile] = useState({
+  const [saveAsTemplateDialog, setSaveAsTemplateDialog] = useState({
     visible: false,
-    file: null,
-    localKey: "",
+    props: null,
     onClose: null,
   });
 
@@ -113,10 +114,10 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   const onCreate = useCallback((e) => {
     const { payload } = e;
 
-    const visible = payload.id ? true : false;
+    const visible = !!payload.id;
 
     setCreateDialogProps({
-      visible: visible,
+      visible,
       id: payload.id,
       type: FileAction.Create,
       extension: payload.extension,
@@ -149,10 +150,10 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   }, []);
 
   const onRename = useCallback((e) => {
-    const visible = e.item ? true : false;
+    const visible = !!e.item;
 
     setRenameDialogProps({
-      visible: visible,
+      visible,
       type: FileAction.Rename,
       item: e.item,
       onClose: () => {
@@ -166,10 +167,14 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   }, []);
 
   const onCreateRoom = useCallback((e) => {
+    const startRoomParams = getStartRoomParams(
+      e?.payload?.startRoomType,
+      e?.title,
+    );
     setCreateRoomDialogProps({
-      title: e?.title,
+      ...startRoomParams,
+      item: e.item,
       visible: true,
-      startRoomType: e?.payload?.startRoomType,
       onClose: () =>
         setCreateRoomDialogProps({
           visible: false,
@@ -183,9 +188,10 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     const visible = !!e.item;
 
     setEditRoomDialogProps({
-      visible: visible,
+      visible,
       item: e.item,
       onClose: () => {
+        setCover();
         setEditRoomDialogProps({
           visible: false,
           item: null,
@@ -208,7 +214,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     const visible = !!e.item;
 
     setEditGroupDialogProps({
-      visible: visible,
+      visible,
       item: e.item,
       onClose: () => {
         setEditGroupDialogProps({
@@ -220,7 +226,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     });
   }, []);
 
-  const onChangeUserType = useCallback((e) => {
+  const onChangeUserType = useCallback(() => {
     setChangeUserTypeDialogProps({
       visible: true,
       onClose: () => {
@@ -268,8 +274,12 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
         );
       }
 
+      const closedFormFillingTips = localStorage.getItem(
+        getFormFillingTipsStorageName(userId),
+      );
+
       setCreatePDFFormFile({
-        visible: true,
+        visible: closedFormFillingTips,
         file,
         localKey,
         onClose: () => {
@@ -311,6 +321,22 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     });
   }, []);
 
+  const onSaveAsTemplate = (e) => {
+    const visible = !!e.item;
+
+    setSaveAsTemplateDialog({
+      visible,
+      item: e.item,
+      onClose: () => {
+        setCover();
+        setSaveAsTemplateDialog({
+          visible: false,
+          item: null,
+        });
+      },
+    });
+  };
+
   useEffect(() => {
     window.addEventListener(
       Events.CREATE_PDF_FORM_FILE,
@@ -334,6 +360,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     window.addEventListener(Events.GROUP_CREATE, onCreateGroup);
     window.addEventListener(Events.GROUP_EDIT, onEditGroup);
     window.addEventListener(Events.CHANGE_QUOTA, onChangeQuota);
+    window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
     if (enablePlugins) {
       window.addEventListener(
         Events.CREATE_PLUGIN_FILE,
@@ -361,6 +388,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       window.removeEventListener(Events.CHANGE_USER_TYPE, onChangeUserType);
       window.removeEventListener(Events.GROUP_CREATE, onCreateGroup);
       window.removeEventListener(Events.GROUP_EDIT, onEditGroup);
+      window.addEventListener(Events.SAVE_AS_TEMPLATE, onSaveAsTemplate);
 
       if (enablePlugins) {
         window.removeEventListener(
@@ -421,22 +449,51 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
         {...createPluginFileDialog}
       />
     ),
+    saveAsTemplateDialog.visible && (
+      <SaveAsTemplateEvent
+        key={Events.SAVE_AS_TEMPLATE}
+        {...saveAsTemplateDialog}
+      />
+    ),
     changeQuotaDialog.visible && (
       <ChangeQuotaEvent key={Events.CHANGE_QUOTA} {...changeQuotaDialog} />
     ),
-    createPDFFormFile.visible && !createDialogProps.visible && (
+    createPDFFormFileProps.visible && !createDialogProps.visible ? (
       <CreatedPDFFormDialog
         key="created-pdf-form-dialog"
-        {...createPDFFormFile}
+        {...createPDFFormFileProps}
       />
-    ),
+    ) : null,
   ];
 };
 
-export default inject(({ settingsStore, pluginStore }) => {
-  const { enablePlugins } = settingsStore;
+export default inject(
+  ({ settingsStore, pluginStore, dialogsStore, userStore }) => {
+    const { enablePlugins } = settingsStore;
 
-  const { eventListenerItemsList } = pluginStore;
+    const {
+      editRoomDialogProps,
+      setEditRoomDialogProps,
+      createRoomDialogProps,
+      setCreateRoomDialogProps,
+      setCover,
+      setCreatePDFFormFile,
+      createPDFFormFileProps,
+    } = dialogsStore;
 
-  return { enablePlugins, eventListenerItemsList };
-})(observer(GlobalEvents));
+    const { eventListenerItemsList } = pluginStore;
+
+    return {
+      enablePlugins,
+      eventListenerItemsList,
+      editRoomDialogProps,
+      setEditRoomDialogProps,
+      createRoomDialogProps,
+      setCreateRoomDialogProps,
+      setCover,
+      setCreatePDFFormFile,
+      createPDFFormFileProps,
+      userId: userStore?.user?.id,
+    };
+  },
+)(observer(GlobalEvents));

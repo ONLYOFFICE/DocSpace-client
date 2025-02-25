@@ -1,0 +1,13 @@
+{
+  "Desc": "Molimo postavite {{productName}} podatke za registraciju.",
+  "ErrorEmail": "Nevažeća email adresa",
+  "ErrorInstanceId": "Nevažeći ID instance",
+  "ErrorLicenseBody": "Licenca nije važeća. Uverite se da ste izabrali ispravnu datoteku.",
+  "ErrorPassword": "Lozinka ne ispunjava zahteve",
+  "ErrorUploadLicenseFile": "Izaberi datoteku licence",
+  "License": "Prihvatite uslove",
+  "LicenseLink": "Ugovori licence",
+  "PlaceholderLicense": "Vaša datoteka licence",
+  "Timezone": "Vremenska zona",
+  "WelcomeTitle": "Dobrodošli na vaš {{productName}}!"
+}

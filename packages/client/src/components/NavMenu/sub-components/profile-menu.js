@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,8 +34,7 @@ import { DropDown } from "@docspace/shared/components/drop-down";
 import styled, { css, withTheme } from "styled-components";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
-import { Base } from "@docspace/shared/themes";
-import { mobile, tablet } from "@docspace/shared/utils";
+import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 import { Portal } from "@docspace/shared/components/portal";
 
@@ -67,7 +66,7 @@ const StyledDropDown = styled(DropDown)`
   }
 `;
 
-const StyledControlContainer = styled.div`
+const StyledControlContainer = styled.div.attrs(injectDefaultTheme)`
   width: 24px;
   height: 24px;
   position: absolute;
@@ -85,17 +84,13 @@ const StyledControlContainer = styled.div`
   }
 `;
 
-StyledControlContainer.defaultProps = { theme: Base };
-
-const StyledCrossIcon = styled(CrossIcon)`
+const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
   width: 17px;
   height: 17px;
   path {
     stroke: ${(props) => props.theme.catalog.control.fill};
   }
 `;
-
-StyledCrossIcon.defaultProps = { theme: Base };
 
 const commonStyle = css`
   font-family: ${(props) => props.theme.fontFamily};
@@ -120,7 +115,7 @@ export const StyledProfileMenu = styled(DropDownItem)`
   max-width: 600px;
 `;
 
-export const MenuContainer = styled.div`
+export const MenuContainer = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -132,8 +127,6 @@ export const MenuContainer = styled.div`
   padding: 16px;
   cursor: default;
   box-sizing: border-box;
-
-  background: red;
 
   @media ${mobile} {
     max-width: 100vw;
@@ -148,9 +141,7 @@ export const MenuContainer = styled.div`
   }
 `;
 
-MenuContainer.defaultProps = { theme: Base };
-
-export const MainLabelContainer = styled.div`
+export const MainLabelContainer = styled.div.attrs(injectDefaultTheme)`
   font-size: 16px;
   line-height: 28px;
 
@@ -163,9 +154,7 @@ export const MainLabelContainer = styled.div`
   ${commonStyle}
 `;
 
-MainLabelContainer.defaultProps = { theme: Base };
-
-export const LabelContainer = styled.div`
+export const LabelContainer = styled.div.attrs(injectDefaultTheme)`
   font-weight: normal;
   font-size: 11px;
   line-height: 16px;
@@ -173,12 +162,7 @@ export const LabelContainer = styled.div`
   ${commonStyle}
 `;
 
-LabelContainer.defaultProps = { theme: Base };
-
 class ProfileMenu extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   renderDropDown = () => {
     const {
       avatarRole,
@@ -201,9 +185,9 @@ class ProfileMenu extends React.Component {
         clickOutsideAction={clickOutsideAction}
         forwardedRef={forwardedRef}
         isDefaultMode={false}
-        withBlur={true}
+        withBlur
         isBannerVisible={isBannerVisible}
-        withPortal={true}
+        withPortal
       >
         <StyledProfileMenu>
           <MenuContainer>
@@ -237,7 +221,7 @@ class ProfileMenu extends React.Component {
 
     const wrapper = <StyledWrapper>{element}</StyledWrapper>;
 
-    return <>{<Portal element={wrapper} appendTo={root} visible={open} />}</>;
+    return <Portal element={wrapper} appendTo={root} visible={open} />;
   }
 }
 
@@ -249,14 +233,12 @@ ProfileMenu.propTypes = {
   children: PropTypes.any,
   className: PropTypes.string,
   displayName: PropTypes.string,
-  id: PropTypes.string,
   open: PropTypes.bool,
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   clickOutsideAction: PropTypes.func,
 };
 
-export default inject(({ bannerStore }) => {
-  const { isBannerVisible } = bannerStore;
+export default inject(({ settingsStore }) => {
+  const { isBannerVisible } = settingsStore;
 
   return { isBannerVisible };
 })(observer(withTheme(ProfileMenu)));

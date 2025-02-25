@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,15 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject } from "mobx-react";
+
 import { Consumer } from "@docspace/shared/utils";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+
+import EmptyScreenRecentUrl from "PUBLIC_DIR/images/empty_screen_recent.svg?url";
+import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/empty_screen_recent_dark.svg?url";
 import { Table } from "./TableView/TableView";
 import AuditRowContainer from "./RowView/AuditRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";
 
+import AuditTrailLoader from "./AuditTrailLoader";
+
+let timerId = null;
 const AuditTrail = (props) => {
   const {
     t,
@@ -46,14 +54,30 @@ const AuditTrail = (props) => {
     securityLifetime,
     isAuditAvailable,
     isLoadingDownloadReport,
+    resetIsInit,
   } = props;
+
+  const [isLoading, setIsLoading] = useState(!auditTrailUsers.length);
+  const [isShowLoader, setIShowLoader] = useState(false);
+  const initAudit = async () => {
+    timerId = setTimeout(() => {
+      if (!auditTrailUsers.length) setIShowLoader(true);
+    }, 500);
+
+    await getAuditTrail();
+
+    clearTimeout(timerId);
+    timerId = null;
+    setIShowLoader(false);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     setDocumentTitle(t("AuditTrailNav"));
-
-    getAuditTrail();
-
+    initAudit();
     getLifetimeAuditSettings();
+
+    return () => resetIsInit();
   }, []);
 
   const getContent = () => {
@@ -62,51 +86,67 @@ const AuditTrail = (props) => {
         <Consumer>
           {(context) =>
             viewAs === "table" ? (
-              <>
-                <Table
-                  theme={theme}
-                  auditTrailUsers={auditTrailUsers}
-                  sectionWidth={context.sectionWidth}
-                  isSettingNotPaid={!isAuditAvailable}
-                />
-              </>
+              <Table
+                theme={theme}
+                auditTrailUsers={auditTrailUsers}
+                sectionWidth={context.sectionWidth}
+                isSettingNotPaid={!isAuditAvailable}
+              />
             ) : (
-              <>
-                <AuditRowContainer
-                  sectionWidth={context.sectionWidth}
-                  isSettingNotPaid={!isAuditAvailable}
-                />
-              </>
+              <AuditRowContainer
+                sectionWidth={context.sectionWidth}
+                isSettingNotPaid={!isAuditAvailable}
+              />
             )
           }
         </Consumer>
       </div>
     );
   };
+
+  if (isShowLoader) {
+    return <AuditTrailLoader />;
+  }
+
+  if (isLoading) return null;
+
+  if (auditTrailUsers.length === 0) {
+    return (
+      <EmptyScreenContainer
+        descriptionText={t("AuditSubheader", {
+          productName: t("Common:ProductName"),
+        })}
+        imageSrc={
+          theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl
+        }
+        headerText={t("NoEventsHereYet")}
+      />
+    );
+  }
+
   return (
-    <>
-      {securityLifetime && securityLifetime.auditTrailLifeTime && (
-        <HistoryMainContent
-          t={t}
-          subHeader={t("AuditSubheader", {
-            productName: t("Common:ProductName"),
-          })}
-          latestText={t("LoginLatestText")}
-          storagePeriod={t("StoragePeriod")}
-          saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Common:CancelButton")}
-          securityLifetime={securityLifetime}
-          lifetime={securityLifetime.auditTrailLifeTime}
-          setLifetimeAuditSettings={setLifetimeAuditSettings}
-          content={getContent()}
-          downloadReport={t("DownloadReportBtnText")}
-          downloadReportDescription={t("DownloadReportDescription")}
-          getReport={getAuditTrailReport}
-          isSettingNotPaid={!isAuditAvailable}
-          isLoadingDownloadReport={isLoadingDownloadReport}
-        />
-      )}
-    </>
+    securityLifetime &&
+    securityLifetime.auditTrailLifeTime && (
+      <HistoryMainContent
+        t={t}
+        subHeader={t("AuditSubheader", {
+          productName: t("Common:ProductName"),
+        })}
+        latestText={t("LoginLatestText")}
+        storagePeriod={t("StoragePeriod")}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:CancelButton")}
+        securityLifetime={securityLifetime}
+        lifetime={securityLifetime.auditTrailLifeTime}
+        setLifetimeAuditSettings={setLifetimeAuditSettings}
+        content={getContent()}
+        downloadReport={t("DownloadReportBtnText")}
+        downloadReportDescription={t("DownloadReportDescription")}
+        getReport={getAuditTrailReport}
+        isSettingNotPaid={!isAuditAvailable}
+        isLoadingDownloadReport={isLoadingDownloadReport}
+      />
+    )
   );
 };
 
@@ -120,6 +160,7 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     getAuditTrailReport,
     securityLifetime,
     isLoadingDownloadReport,
+    resetIsInit,
   } = setup;
 
   const { theme } = settingsStore;
@@ -135,5 +176,6 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     securityLifetime,
     isAuditAvailable,
     isLoadingDownloadReport,
+    resetIsInit,
   };
 })(withTranslation("Settings")(AuditTrail));

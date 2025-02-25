@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -63,7 +63,7 @@ const ShareCollectSelector = inject<TStore>(
     infoPanelStore,
     filesStore,
   }) => {
-    const { socketHelper, currentDeviceType } = settingsStore;
+    const { currentDeviceType } = settingsStore;
     const { setShareCollectSelector, conflictResolveDialogVisible } =
       dialogsStore;
     const { checkFileConflicts, setConflictDialogData, openFileAction } =
@@ -75,7 +75,6 @@ const ShareCollectSelector = inject<TStore>(
 
     const { getIcon } = filesSettingsStore;
     return {
-      socketHelper,
       currentDeviceType,
       conflictResolveDialogVisible,
       getIcon,
@@ -94,7 +93,6 @@ const ShareCollectSelector = inject<TStore>(
     ({
       file,
       visible,
-      socketHelper,
       currentDeviceType,
       conflictResolveDialogVisible,
       getIcon,
@@ -150,14 +148,15 @@ const ShareCollectSelector = inject<TStore>(
 
         const operationData = {
           destFolderId: selectedItemId,
+          destFolderInfo: selectedTreeNode,
+          title: file.title,
+          isFolder: file.isFolder,
+          itemsCount: 1,
           folderIds,
           fileIds,
           deleteAfter: false,
           isCopy: true,
           folderTitle,
-          translations: {
-            copy: t("Common:CopyOperation"),
-          },
           selectedFolder,
           fromShareCollectSelector: true,
         };
@@ -179,7 +178,11 @@ const ShareCollectSelector = inject<TStore>(
             onCloseAndDeselectAction();
 
             openFileAction(selectedFolder, t);
-            await itemOperationToFolder(operationData);
+            try {
+              await itemOperationToFolder(operationData);
+            } catch (error) {
+              console.error(error);
+            }
           }
         } catch (e: unknown) {
           toastr.error(e as TData);
@@ -242,9 +245,7 @@ const ShareCollectSelector = inject<TStore>(
           currentFolderId=""
           rootFolderType={file.rootFolderType}
           createDefineRoomType={RoomsType.FormRoom}
-          isPanelVisible={visible && !conflictResolveDialogVisible}
-          socketHelper={socketHelper}
-          socketSubscribers={socketHelper.socketSubscribers}
+          isPanelVisible={visible ? !conflictResolveDialogVisible : null}
           currentDeviceType={currentDeviceType}
           headerLabel={t("Common:ShareAndCollect")}
           createDefineRoomLabel={t("Common:CreateFormFillingRoom")}

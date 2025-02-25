@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,12 +28,13 @@ import { Navigate } from "react-router-dom";
 
 import componentLoader from "@docspace/shared/utils/component-loader";
 
+import Error404 from "@docspace/shared/components/errors/Error404";
 import PrivateRoute from "../components/PrivateRouteWrapper";
 import PublicRoute from "../components/PublicRouteWrapper";
-import Error404 from "@docspace/shared/components/errors/Error404";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
 import { generalRoutes } from "./general";
+import { contanctsRoutes } from "./contacts";
 
 const ClientRoutes = [
   {
@@ -88,6 +89,14 @@ const ClientRoutes = [
             ),
           },
           {
+            path: "templates",
+            element: (
+              <PrivateRoute>
+                <Navigate to="/rooms/templates" replace />
+              </PrivateRoute>
+            ),
+          },
+          {
             path: "rooms/personal",
             async lazy() {
               const { FilesView } = await componentLoader(
@@ -132,7 +141,7 @@ const ClientRoutes = [
 
               const Component = () => {
                 return (
-                  <PrivateRoute restricted withManager withCollaborator>
+                  <PrivateRoute>
                     <FilesView />
                   </PrivateRoute>
                 );
@@ -150,7 +159,7 @@ const ClientRoutes = [
 
               const Component = () => {
                 return (
-                  <PrivateRoute restricted withManager withCollaborator>
+                  <PrivateRoute>
                     <FilesView />
                   </PrivateRoute>
                 );
@@ -304,7 +313,8 @@ const ClientRoutes = [
             },
           },
           {
-            path: "media/view/:id",
+            path: "rooms/templates",
+
             async lazy() {
               const { FilesView } = await componentLoader(
                 () => import("SRC_DIR/pages/Home/View/Files"),
@@ -322,52 +332,16 @@ const ClientRoutes = [
             },
           },
           {
-            path: "accounts",
-            element: (
-              <PrivateRoute restricted withManager>
-                <Navigate to="/accounts/people/filter" replace />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "accounts/filter",
-            element: (
-              <PrivateRoute restricted withManager>
-                <Navigate to="/accounts/people/filter" replace />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "accounts/changeOwner",
-            element: (
-              <PrivateRoute restricted withManager>
-                <Navigate
-                  to="/accounts/people/filter"
-                  state={{ openChangeOwnerDialog: true }}
-                  replace
-                />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "accounts/people",
-            element: (
-              <PrivateRoute restricted withManager>
-                <Navigate to="/accounts/people/filter" replace />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "accounts/people/filter",
+            path: "rooms/templates/filter",
             async lazy() {
-              const { AccountsView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Accounts"),
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
                 return (
-                  <PrivateRoute restricted withManager>
-                    <AccountsView />
+                  <PrivateRoute>
+                    <FilesView />
                   </PrivateRoute>
                 );
               };
@@ -376,24 +350,16 @@ const ClientRoutes = [
             },
           },
           {
-            path: "accounts/groups",
-            element: (
-              <PrivateRoute restricted withManager>
-                <Navigate to="/accounts/groups/filter" replace />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "accounts/groups/filter",
+            path: "rooms/templates/:room",
             async lazy() {
-              const { AccountsView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Accounts"),
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
                 return (
-                  <PrivateRoute restricted withManager>
-                    <AccountsView />
+                  <PrivateRoute>
+                    <FilesView />
                   </PrivateRoute>
                 );
               };
@@ -402,24 +368,16 @@ const ClientRoutes = [
             },
           },
           {
-            path: "accounts/groups/:groupId",
-            element: (
-              <PrivateRoute restricted withManager>
-                <Navigate to="filter" replace />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "accounts/groups/:groupId/filter",
+            path: "rooms/templates/:room/filter",
             async lazy() {
-              const { AccountsView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Accounts"),
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
               );
 
               const Component = () => {
                 return (
-                  <PrivateRoute restricted withManager>
-                    <AccountsView />
+                  <PrivateRoute>
+                    <FilesView />
                   </PrivateRoute>
                 );
               };
@@ -427,6 +385,25 @@ const ClientRoutes = [
               return { Component };
             },
           },
+          {
+            path: "media/view/:id",
+            async lazy() {
+              const { FilesView } = await componentLoader(
+                () => import("SRC_DIR/pages/Home/View/Files"),
+              );
+
+              const Component = () => {
+                return (
+                  <PrivateRoute>
+                    <FilesView />
+                  </PrivateRoute>
+                );
+              };
+
+              return { Component };
+            },
+          },
+          ...contanctsRoutes,
         ],
       },
       {
@@ -573,24 +550,6 @@ const ClientRoutes = [
         },
       },
     ],
-  },
-  {
-    path: "/wizard",
-    async lazy() {
-      const { WrappedComponent } = await componentLoader(
-        () => import("SRC_DIR/pages/Wizard"),
-      );
-
-      const Component = () => (
-        <PublicRoute>
-          <ErrorBoundary>
-            <WrappedComponent />
-          </ErrorBoundary>
-        </PublicRoute>
-      );
-
-      return { Component };
-    },
   },
   {
     path: "/sdk/:mode",

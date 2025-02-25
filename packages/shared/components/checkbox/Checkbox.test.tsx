@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,74 +25,110 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-import { Checkbox } from "./Checkbox";
+import { CheckboxProps } from "./Checkbox.types";
+import { Checkbox } from ".";
+
+const defaultProps: CheckboxProps = {
+  name: "checkbox",
+  isIndeterminate: false,
+};
 
 describe("<Checkbox />", () => {
   it("renders without error", () => {
-    render(<Checkbox isIndeterminate={false} name="checkbox" />);
-
+    render(<Checkbox {...defaultProps} />);
     expect(screen.getByTestId("checkbox")).toBeInTheDocument();
   });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts id", () => {
-  //   const wrapper = mount(<Checkbox {...baseProps} id="testId" />);
+  it("renders with label", () => {
+    const label = "Test Label";
+    render(<Checkbox {...defaultProps} label={label} />);
+    expect(screen.getByText(label)).toBeInTheDocument();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+  it("applies custom className and style", () => {
+    const className = "custom-class";
+    const style = { margin: "10px" };
+    render(<Checkbox {...defaultProps} className={className} style={style} />);
+    const checkbox = screen.getByTestId("checkbox");
+    expect(checkbox).toHaveClass(className);
+    expect(checkbox).toHaveStyle(style);
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts className", () => {
-  //   const wrapper = mount(<Checkbox {...baseProps} className="test" />);
+  it("handles checked state correctly", async () => {
+    const handleChange = jest.fn();
+    render(<Checkbox {...defaultProps} onChange={handleChange} />);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+    const checkbox = screen.getByRole("checkbox");
+    await userEvent.click(checkbox);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts style", () => {
-  //   const wrapper = mount(<Checkbox {...baseProps} style={{ color: "red" }} />);
+    expect(handleChange).toHaveBeenCalled();
+    expect(checkbox).toBeChecked();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+  it("handles disabled state correctly", async () => {
+    const handleChange = jest.fn();
+    render(<Checkbox {...defaultProps} isDisabled onChange={handleChange} />);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts isDisabled", () => {
-  //   const wrapper = mount(<Checkbox {...baseProps} isDisabled />);
+    const checkbox = screen.getByRole("checkbox");
+    await userEvent.click(checkbox);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isDisabled")).toEqual(true);
-  // });
+    expect(handleChange).not.toHaveBeenCalled();
+    expect(checkbox).toBeDisabled();
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts isIndeterminate", () => {
-  //   const wrapper = mount(<Checkbox {...baseProps} isIndeterminate />);
+  it("handles indeterminate state correctly", () => {
+    render(<Checkbox {...defaultProps} isIndeterminate />);
+    const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
+    expect(checkbox.indeterminate).toBe(true);
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isIndeterminate")).toEqual(true);
-  // });
+  it("updates checked state when isChecked prop changes", () => {
+    const { rerender } = render(
+      <Checkbox {...defaultProps} isChecked={false} />,
+    );
+    const checkbox = screen.getByRole("checkbox");
+    expect(checkbox).not.toBeChecked();
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts isChecked", () => {
-  //   const wrapper = mount(<Checkbox {...baseProps} isChecked />);
+    rerender(<Checkbox {...defaultProps} isChecked />);
+    expect(checkbox).toBeChecked();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isChecked")).toEqual(true);
-  // });
+  it("displays help button when provided", () => {
+    const helpButton = <button type="button">Help</button>;
+    render(<Checkbox {...defaultProps} helpButton={helpButton} />);
+    expect(screen.getByRole("button", { name: "Help" })).toBeInTheDocument();
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts isChecked and isDisabled", () => {
-  //   const wrapper = mount(<Checkbox {...baseProps} isChecked isDisabled />);
+  it("maintains accessibility attributes", () => {
+    const title = "Checkbox Title";
+    render(<Checkbox {...defaultProps} title={title} />);
+    const checkbox = screen.getByTestId("checkbox");
+    expect(checkbox).toHaveAttribute("title", title);
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isChecked")).toEqual(true);
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("isDisabled")).toEqual(true);
-  // });
+  it("prevents checkbox state change on help button click", async () => {
+    const handleChange = jest.fn();
+    const helpButton = <button type="button">Help</button>;
+
+    render(
+      <Checkbox
+        {...defaultProps}
+        onChange={handleChange}
+        isChecked={false}
+        helpButton={helpButton}
+      />,
+    );
+
+    const helpButtonWrapper = screen.getByTestId("checkbox-help-button");
+    const checkbox = screen.getByRole("checkbox");
+
+    await userEvent.click(helpButtonWrapper);
+
+    expect(handleChange).not.toHaveBeenCalled();
+    expect(checkbox).not.toBeChecked();
+  });
 });

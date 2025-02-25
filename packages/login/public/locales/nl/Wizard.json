@@ -1,0 +1,13 @@
+{
+  "Desc": "Stel de {{productName}} registratiegegevens in.",
+  "ErrorEmail": "Ongeldig e-mailadres",
+  "ErrorInstanceId": "Ongeldig instance ID",
+  "ErrorLicenseBody": "De licentie is ongeldig. Zorg ervoor dat u het juiste bestand selecteert.",
+  "ErrorPassword": "Wachtwoord voldoet niet aan de eisen",
+  "ErrorUploadLicenseFile": "Selecteer een licentiebestand",
+  "License": "Accepteer de voorwaarden van de ",
+  "LicenseLink": "licentieovereenkomsten",
+  "PlaceholderLicense": "Uw licentiebestand",
+  "Timezone": "Tijdzone:",
+  "WelcomeTitle": "Welkom bij uw {{productName}}!"
+}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,10 +28,10 @@ import React, { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
+import { Trans } from "react-i18next";
 import SelectUsersCountContainer from "./sub-components/SelectUsersCountContainer";
 import TotalTariffContainer from "./sub-components/TotalTariffContainer";
 import ButtonContainer from "./sub-components/ButtonContainer";
-import { Trans } from "react-i18next";
 import CurrentUsersCountContainer from "./sub-components/CurrentUsersCount";
 
 const StyledBody = styled.div`
@@ -72,8 +72,9 @@ const StyledBody = styled.div`
   }
 `;
 
-let timeout = null,
-  controller;
+let timeout = null;
+let controller;
+
 const PriceCalculation = ({
   t,
   theme,
@@ -82,27 +83,15 @@ const PriceCalculation = ({
   canUpdateTariff,
   isGracePeriod,
   isNotPaidPeriod,
-
   priceManagerPerMonth,
   currencySymbol,
   isAlreadyPaid,
   isFreeAfterPaidPeriod,
   managersCount,
   getPaymentLink,
+  isYearTariff,
 }) => {
   const didMountRef = useRef(false);
-
-  useEffect(() => {
-    didMountRef.current && !isAlreadyPaid && setShoppingLink();
-  }, [managersCount]);
-
-  useEffect(() => {
-    didMountRef.current = true;
-    return () => {
-      timeout && clearTimeout(timeout);
-      timeout = null;
-    };
-  }, []);
 
   const setShoppingLink = () => {
     if (managersCount > maxAvailableManagersCount) {
@@ -124,40 +113,46 @@ const PriceCalculation = ({
     }, 1000);
   };
 
+  useEffect(() => {
+    didMountRef.current && !isAlreadyPaid && setShoppingLink();
+  }, [managersCount]);
+
+  useEffect(() => {
+    didMountRef.current = true;
+    return () => {
+      timeout && clearTimeout(timeout);
+      timeout = null;
+    };
+  }, []);
+
   const isDisabled = !canUpdateTariff;
 
   const priceInfoPerManager = (
     <div className="payment_price_user">
       <Text
-        noSelect
-        fontSize={"13px"}
         color={
           isDisabled
             ? theme.client.settings.payment.priceContainer.disablePriceColor
             : theme.client.settings.payment.priceColor
         }
-        fontWeight={600}
       >
-        <Trans t={t} i18nKey="PerUserMonth" ns="Common">
-          ""
-          <Text
-            fontSize="16px"
-            isBold
-            as="span"
-            fontWeight={600}
-            color={
-              isDisabled
-                ? theme.client.settings.payment.priceContainer.disablePriceColor
-                : theme.client.settings.payment.priceColor
-            }
-          >
-            {{ currencySymbol }}
-          </Text>
-          <Text fontSize="16px" isBold as="span" fontWeight={600}>
-            {{ price: priceManagerPerMonth }}
-          </Text>
-          per manager/month
-        </Trans>
+        {isYearTariff ? (
+          <Trans
+            t={t}
+            i18nKey="PerUserYear"
+            ns="Common"
+            values={{ currencySymbol, price: priceManagerPerMonth }}
+            components={{ 1: <strong style={{ fontSize: "16px" }} /> }}
+          />
+        ) : (
+          <Trans
+            t={t}
+            i18nKey="PerUserMonth"
+            ns="Common"
+            values={{ currencySymbol, price: priceManagerPerMonth }}
+            components={{ 1: <strong style={{ fontSize: "16px" }} /> }}
+          />
+        )}
       </Text>
     </div>
   );
@@ -207,6 +202,7 @@ export default inject(
     paymentStore,
     paymentQuotasStore,
     currentTariffStatusStore,
+    currentQuotaStore,
   }) => {
     const {
       tariffsInfo,
@@ -223,6 +219,7 @@ export default inject(
 
     const { planCost } = paymentQuotasStore;
     const { isNotPaidPeriod, isGracePeriod } = currentTariffStatusStore;
+    const { isYearTariff } = currentQuotaStore;
 
     return {
       canUpdateTariff,
@@ -241,6 +238,7 @@ export default inject(
       priceManagerPerMonth: planCost.value,
       currencySymbol: planCost.currencySymbol,
       getPaymentLink,
+      isYearTariff,
     };
   },
 )(observer(PriceCalculation));

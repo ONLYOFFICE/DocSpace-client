@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,29 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { authStore } from "@docspace/shared/store";
+import { authStore, settingsStore } from "@docspace/shared/store";
 import { toCommunityHostname } from "@docspace/shared/utils/common";
-import { CategoryType } from "./constants";
 import { FolderType } from "@docspace/shared/enums";
+import { CategoryType } from "./constants";
 
-// import router from "SRC_DIR/router";
-import i18n from "../i18n";
+import { PEOPLE_ROUTE_WITH_FILTER } from "./contacts";
 
 export const setDocumentTitle = (subTitle = "") => {
   const { isAuthenticated, product: currentModule } = authStore;
-  const organizationName = i18n.t("Common:OrganizationName");
+  const { logoText } = settingsStore;
 
   let title;
   if (subTitle) {
     if (isAuthenticated && currentModule) {
-      title = subTitle + " - " + currentModule.title;
+      title = `${subTitle} - ${currentModule.title}`;
     } else {
-      title = subTitle + " - " + organizationName;
+      title = `${subTitle} - ${logoText}`;
     }
-  } else if (currentModule && organizationName) {
-    title = currentModule.title + " - " + organizationName;
+  } else if (currentModule && logoText) {
+    title = `${currentModule.title} - ${logoText}`;
   } else {
-    title = organizationName;
+    title = logoText;
   }
 
   document.title = title;
@@ -60,9 +59,8 @@ export const checkIfModuleOld = (link) => {
     link.includes("settings")
   ) {
     return false;
-  } else {
-    return true;
   }
+  return true;
 };
 
 export const getLink = (link) => {
@@ -136,6 +134,7 @@ export const getCategoryType = (location) => {
 export const getCategoryTypeByFolderType = (folderType, parentId) => {
   switch (folderType) {
     case FolderType.Rooms:
+    case FolderType.RoomTemplates:
       return parentId > 0 ? CategoryType.SharedRoom : CategoryType.Shared;
 
     case FolderType.Archive:
@@ -185,7 +184,7 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
       return "/rooms/share";
 
     case CategoryType.Accounts:
-      return "/accounts";
+      return PEOPLE_ROUTE_WITH_FILTER;
 
     case CategoryType.Settings:
       return "/settings/personal";
@@ -193,4 +192,11 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
     default:
       throw new Error("Unknown category type");
   }
+};
+
+export const removeEmojiCharacters = (value) => {
+  const regexpEmoji = /(\p{Extended_Pictographic}|\p{Emoji_Presentation})/gu;
+  const replaceEmojiCharacters = value.replaceAll(regexpEmoji, "");
+
+  return replaceEmojiCharacters.replace(/\u200D/g, "");
 };

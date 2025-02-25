@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -108,6 +108,7 @@ export type TSettings = {
   bookTrainingEmail: string;
   documentationEmail: string;
   legalTerms: string;
+  licenseUrl: string;
   cookieSettingsEnabled: boolean;
   userNameRegex: string;
   plugins: {
@@ -128,6 +129,8 @@ export type TSettings = {
   recaptchaPublicKey?: string;
   recaptchaType?: RecaptchaType;
   maxImageUploadSize: number;
+  isAmi: boolean;
+  logoText: string;
 };
 
 export type TCustomSchema = {
@@ -205,6 +208,14 @@ export type TIpRestriction = {
   ip: string;
 };
 
+export type TIpRestrictionSettings = {
+  ipRestrictions: {
+    ip: string;
+    forAdmin: boolean;
+  }[];
+  enable: boolean;
+};
+
 export type TCookieSettings = {
   lifeTime: number;
   enabled: boolean;
@@ -214,6 +225,7 @@ export type TLoginSettings = {
   attemptCount: number;
   blockTime: number;
   checkPeriod: number;
+  isDefault: boolean;
 };
 
 export type TCapabilities = {
@@ -267,6 +279,7 @@ export type TMigrationUser = {
   email: string;
   displayName: string;
   firstName: string;
+  lastName: string;
   userType: string;
   migratingFiles: {
     foldersCount: number;

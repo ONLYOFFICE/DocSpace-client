@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,17 +29,16 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { Button } from "@docspace/shared/components/button";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
+import PropTypes from "prop-types";
 import AddIdpCertificateModal from "./sub-components/AddIdpCertificateModal";
 import AddSpCertificateModal from "./sub-components/AddSpCertificateModal";
 import CertificatesTable from "./sub-components/CertificatesTable";
 import CheckboxSet from "./sub-components/CheckboxSet";
 import HideButton from "./sub-components/HideButton";
-import PropTypes from "prop-types";
 import SsoComboBox from "./sub-components/SsoComboBox";
 import {
   decryptAlgorithmsOptions,
@@ -49,6 +48,21 @@ import {
 const StyledWrapper = styled.div`
   .icon-button {
     padding: 0 5px;
+  }
+
+  .certificates-box {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 40px 0 12px 0;
+  }
+
+  .certificates-buttons-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
   }
 `;
 
@@ -87,16 +101,13 @@ const Certificates = (props) => {
       additionalParameters = spShowAdditionalParameters;
       certificates = spCertificates;
       break;
+    default:
+      break;
   }
 
   return (
     <StyledWrapper>
-      <Box
-        alignItems="center"
-        displayProp="flex"
-        flexDirection="row"
-        marginProp="40px 0 12px 0"
-      >
+      <div className="certificates-box">
         <Text as="h2" fontSize="15px" fontWeight={600} noSelect>
           {prefix === "idp" ? t("idpCertificates") : t("spCertificates")}
         </Text>
@@ -116,12 +127,12 @@ const Certificates = (props) => {
               : "sp-certificates-tooltip icon-button"
           }
         />
-      </Box>
+      </div>
 
-      {certificates.length > 0 && <CertificatesTable prefix={prefix} />}
+      {certificates.length > 0 ? <CertificatesTable prefix={prefix} /> : null}
 
-      <Box alignItems="center" displayProp="flex" flexDirection="row">
-        {prefix === "idp" && (
+      <div className="certificates-buttons-box">
+        {prefix === "idp" ? (
           <>
             <Button
               id="idp-add-certificate"
@@ -133,9 +144,9 @@ const Certificates = (props) => {
             />
             <AddIdpCertificateModal />
           </>
-        )}
+        ) : null}
 
-        {prefix === "sp" && (
+        {prefix === "sp" ? (
           <>
             <Button
               id="sp-add-certificate"
@@ -147,7 +158,7 @@ const Certificates = (props) => {
             />
             <AddSpCertificateModal />
           </>
-        )}
+        ) : null}
 
         <HideButton
           id={prefix === "idp" ? "idp-hide-button" : "sp-hide-button"}
@@ -159,26 +170,24 @@ const Certificates = (props) => {
           }
           isAdditionalParameters
         />
-      </Box>
+      </div>
 
-      {additionalParameters && (
+      {additionalParameters ? (
         <>
           <CheckboxSet prefix={prefix} />
 
-          {provider === "IdentityProvider" && (
-            <>
-              <SsoComboBox
-                isDisabled={isDisabledIdpSigning}
-                labelText={t("idpSigningAlgorithm")}
-                name="idpVerifyAlgorithm"
-                options={verifyAlgorithmsOptions}
-                tabIndex={14}
-                value={idpVerifyAlgorithm}
-              />
-            </>
-          )}
+          {provider === "IdentityProvider" ? (
+            <SsoComboBox
+              isDisabled={isDisabledIdpSigning}
+              labelText={t("idpSigningAlgorithm")}
+              name="idpVerifyAlgorithm"
+              options={verifyAlgorithmsOptions}
+              tabIndex={14}
+              value={idpVerifyAlgorithm}
+            />
+          ) : null}
 
-          {provider === "ServiceProvider" && (
+          {provider === "ServiceProvider" ? (
             <>
               <SsoComboBox
                 isDisabled={isDisabledSpSigning}
@@ -192,15 +201,15 @@ const Certificates = (props) => {
               <SsoComboBox
                 isDisabled={isDisabledSpEncrypt}
                 labelText={t("StandardDecryptionAlgorithm")}
-                name={"spEncryptAlgorithm"}
+                name="spEncryptAlgorithm"
                 options={decryptAlgorithmsOptions}
                 tabIndex={15}
                 value={spEncryptAlgorithm}
               />
             </>
-          )}
+          ) : null}
         </>
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

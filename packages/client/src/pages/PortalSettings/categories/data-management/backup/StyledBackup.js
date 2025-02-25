@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+
+import { tablet, mobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 import {
   commonSettingsStyles,
   UnavailableStyles,
 } from "../../../utils/commonSettingsStyles";
-
-import { tablet, mobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
 
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";
@@ -57,15 +57,12 @@ const commonStyles = css`
     }
     .link-learn-more {
       display: inline-block;
-      margin-bottom: 20px;
       font-weight: 600;
     }
   }
 
   .radio-button_text {
     margin-inline-end: 7px;
-    font-size: 13px;
-    font-weight: 600;
   }
 
   .backup_radio-button {
@@ -183,9 +180,6 @@ const StyledAutoBackup = styled.div`
   }
   .automatic-backup_main {
     margin-bottom: 30px;
-    .radio-button_text {
-      font-size: 13px;
-    }
   }
   .backup_toggle-btn {
     position: static;
@@ -216,6 +210,7 @@ const StyledAutoBackup = styled.div`
   }
   .backup_toggle-wrapper {
     display: flex;
+    margin-top: 20px;
     margin-bottom: 16px;
     border-radius: 6px;
     background-color: ${(props) =>
@@ -238,7 +233,7 @@ const StyledAutoBackup = styled.div`
     }
   }
 
-  ${(props) => !props.isEnableAuto && UnavailableStyles}
+  ${(props) => props.pageIsDisabled && UnavailableStyles}
 `;
 const StyledStoragesModule = styled.div`
   .backup_storages-buttons {
@@ -249,6 +244,8 @@ const StyledStoragesModule = styled.div`
 const StyledRestoreBackup = styled.div`
   ${commonStyles}
   ${floatingButtonStyles}
+
+  max-width: ${TEXT_LENGTH};
 
   .restore-backup_third-party-module {
     margin-top: 16px;
@@ -344,11 +341,13 @@ const StyledRestoreBackup = styled.div`
   ${(props) => !props.isEnableRestore && UnavailableStyles}
 `;
 const StyledModules = styled.div`
+  margin-top: 20px;
   margin-bottom: 24px;
+
   .backup-description {
-    ${(props) => props.isDisabled && `color: ${globalColors.gray};`};
     margin-inline-start: 25px;
     max-width: 700px;
+    color: ${(props) => props.isDisabled && props.theme.text.disableColor};
   }
 `;
 
@@ -496,6 +495,12 @@ const StyledBackup = styled.div`
   }
   .backup_third-party-context {
     margin-top: 4px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      padding: 7px;
+    }
   }
 `;
 const StyledBackupList = styled.div`
@@ -559,8 +564,8 @@ const StyledBackupList = styled.div`
     ${(props) =>
       props.isChecked &&
       css`
-        background: ${(props) =>
-          props.theme.client.settings.backup.backupCheckedListItemBackground};
+        background: ${({ theme }) =>
+          theme.client.settings.backup.backupCheckedListItemBackground};
       `}
     padding-inline: 16px;
   }
@@ -603,6 +608,31 @@ const StyledSettingsHeader = styled.div`
     margin: auto 0;
   }
 `;
+
+const StyledComboBoxItem = styled.div`
+  display: flex;
+
+  .drop-down-item_text {
+    color: ${({ theme, isDisabled }) =>
+      isDisabled ? theme.dropDownItem.disableColor : theme.dropDownItem.color};
+  }
+  .drop-down-item_icon {
+    display: flex;
+    align-items: center;
+
+    div {
+      display: flex;
+    }
+
+    margin-inline-start: auto;
+
+    svg {
+      min-height: 16px;
+      min-width: 16px;
+    }
+  }
+`;
+
 export {
   StyledModules,
   StyledRestoreBackup,
@@ -613,4 +643,5 @@ export {
   StyledAutoBackup,
   StyledStoragesModule,
   StyledSettingsHeader,
+  StyledComboBoxItem,
 };

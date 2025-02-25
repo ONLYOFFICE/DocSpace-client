@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,9 +32,11 @@ import { getConvertedQuota } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { toastr } from "@docspace/shared/components/toast";
+import api from "@docspace/shared/api";
 
-import { StyledBody, StyledText } from "./StyledComponent";
 import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";
+import { changeUserQuota } from "SRC_DIR/helpers/contacts";
+import { StyledBody, StyledText } from "./StyledComponent";
 
 const getOptions = (t, item, spaceLimited) => {
   const items = [
@@ -124,10 +126,10 @@ const SpaceQuota = (props) => {
 
     if (action === "no-quota") {
       try {
-        const items = await updateQuota(-1, [item.id], inRoom);
+        const items = await updateQuota([item.id], -1, inRoom);
 
-        options.map((item) => {
-          if (item.key === "no-quota") item.label = t("Common:Unlimited");
+        options.forEach((o) => {
+          if (o.key === "no-quota") o.label = t("Common:Unlimited");
         });
 
         successCallback(items);
@@ -143,8 +145,8 @@ const SpaceQuota = (props) => {
     try {
       const items = await resetQuota([item.id], inRoom);
 
-      options.map((item) => {
-        if (item.key === "default-quota") item.label = defaultQuotaSize;
+      options.forEach((o) => {
+        if (o.key === "default-quota") o.label = defaultQuotaSize;
       });
 
       successCallback(items);
@@ -196,7 +198,7 @@ const SpaceQuota = (props) => {
         size="content"
         modernView
         isLoading={isLoading}
-        manualWidth="fit-content"
+        manualWidth="auto"
         directionY="both"
       />
     </StyledBody>
@@ -214,8 +216,8 @@ export default inject(
     },
     { type },
   ) => {
-    const { changeUserQuota, usersStore, selectionStore } = peopleStore;
-    const { setCustomUserQuota, resetUserQuota, needResetUserSelection } =
+    const { usersStore } = peopleStore;
+    const { needResetUserSelection, setSelected: setUsersSelected } =
       usersStore;
     const { changeRoomQuota } = filesActionsStore;
     const {
@@ -235,13 +237,12 @@ export default inject(
     const { infoPanelSelection } = infoPanelStore;
     const inRoom = !!infoPanelSelection?.navigationPath;
 
-    const { setSelected: setUsersSelected } = selectionStore;
-
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
     const updateQuota =
-      type === "user" ? setCustomUserQuota : setCustomRoomQuota;
+      type === "user" ? api.people.setCustomUserQuota : setCustomRoomQuota;
 
-    const resetQuota = type === "user" ? resetUserQuota : resetRoomQuota;
+    const resetQuota =
+      type === "user" ? api.people.resetUserQuota : resetRoomQuota;
 
     const withoutLimitQuota =
       type === "user" ? !isDefaultUsersQuotaSet : !isDefaultRoomsQuotaSet;

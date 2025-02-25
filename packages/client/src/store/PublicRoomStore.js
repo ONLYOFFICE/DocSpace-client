@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,32 +30,37 @@ import { makeAutoObservable } from "mobx";
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import {
-  frameCallCommand,
-  isPublicRoom as isPublicRoomUtil,
-} from "@docspace/shared/utils/common";
+import { isPublicRoom as isPublicRoomUtil } from "@docspace/shared/utils/common";
 
-import { CategoryType } from "SRC_DIR/helpers/constants";
+import { CategoryType, LinkType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
-import { LinkType } from "../helpers/constants";
 import { ValidationStatus } from "@docspace/shared/enums";
 
 class PublicRoomStore {
   externalLinks = [];
+
   roomTitle = null;
+
   roomId = null;
+
   roomStatus = null;
+
   roomType = null;
+
   publicRoomKey = null;
 
   isLoaded = false;
+
   isLoading = false;
 
   clientLoadingStore;
 
-  constructor(clientLoadingStore) {
+  filesStore;
+
+  constructor(clientLoadingStore, filesStore) {
     this.clientLoadingStore = clientLoadingStore;
+    this.filesStore = filesStore;
     makeAutoObservable(this);
   }
 
@@ -80,7 +85,7 @@ class PublicRoomStore {
   };
 
   fetchPublicRoom = (fetchFiles) => {
-    let filterObj = FilesFilter.getFilter(window.location);
+    const filterObj = FilesFilter.getFilter(window.location);
 
     if (!filterObj) return;
 
@@ -119,14 +124,15 @@ class PublicRoomStore {
     return axios
       .all(requests)
       .catch((err) => {
+        console.log(err);
         Promise.resolve(FilesFilter.getDefault());
       })
       .then((data) => {
-        const filter = data[0];
+        const resolvedFilter = data[0];
 
-        if (filter) {
-          const folderId = filter.folder;
-          return fetchFiles(folderId, filter).catch((error) => {
+        if (resolvedFilter) {
+          const folderId = resolvedFilter.folder;
+          return fetchFiles(folderId, resolvedFilter).catch((error) => {
             if (error?.response?.status === 403) {
               window.location.replace(
                 combineUrl(window.ClientConfig?.proxy?.url, "/login"),
@@ -139,8 +145,6 @@ class PublicRoomStore {
       })
       .finally(() => {
         this.setIsSectionLoading(false);
-
-        frameCallCommand("setIsLoaded");
       });
   };
 
@@ -167,6 +171,10 @@ class PublicRoomStore {
     }
 
     this.externalLinks = externalLinks;
+  };
+
+  setPublicRoomKey = (key) => {
+    this.publicRoomKey = key;
   };
 
   setExternalLink = (link) => {
@@ -208,23 +216,36 @@ class PublicRoomStore {
     );
   };
 
+  gotoFolder = (res, key) => {
+    const filter = FilesFilter.getDefault();
+
+    const subFolder = new URLSearchParams(window.location.search).get("folder");
+
+    const url = getCategoryUrl(CategoryType.Shared);
+
+    filter.folder = subFolder || res.id;
+    filter.key = key;
+
+    window.location.replace(`${url}?${filter.toUrlParams()}`);
+  };
+
   validatePublicRoomKey = (key) => {
     this.setIsLoading(true);
     api.rooms
       .validatePublicRoomKey(key)
       .then((res) => {
-        if (res?.shared) {
-          const filter = FilesFilter.getDefault();
-          const subFolder = new URLSearchParams(window.location.search).get(
-            "folder",
-          );
-          const url = getCategoryUrl(CategoryType.Shared);
-          filter.folder = subFolder ? subFolder : res.id;
+        this.publicRoomKey = key;
 
-          return window.location.replace(`${url}?${filter.toUrlParams()}`);
+        const currentUrl = window.location.href;
+
+        if (res?.shared && !currentUrl.includes("/rooms/shared")) {
+          return this.gotoFolder(res, key);
         }
 
-        this.publicRoomKey = key;
+        if (res?.isAuthenticated && !currentUrl.includes("/rooms/shared")) {
+          return this.gotoFolder(res, key);
+        }
+
         this.setRoomData(res);
       })
       .finally(() => this.setIsLoading(false));
@@ -246,9 +267,8 @@ class PublicRoomStore {
           !l.sharedTo.isTemplate &&
           l.sharedTo.linkType === LinkType.External,
       );
-    } else {
-      return [];
     }
+    return [];
   }
 
   get primaryLink() {

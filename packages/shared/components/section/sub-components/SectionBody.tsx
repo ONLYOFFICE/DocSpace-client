@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,18 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useLocation } from "react-router-dom";
+import classNames from "classnames";
 
-// import { inject, observer } from "mobx-react";
+import { DragAndDrop } from "../../drag-and-drop";
 
-import { ContextMenu } from "@docspace/shared/components/context-menu";
-
-import {
-  StyledDropZoneBody,
-  StyledSpacer,
-  StyledSectionBody,
-} from "../Section.styled";
+import styles from "../Section.module.scss";
 import { SectionBodyProps } from "../Section.types";
+
+import SectionContextMenu from "./SectionContextMenu";
 
 const SectionBody = React.memo(
   ({
@@ -51,50 +47,10 @@ const SectionBody = React.memo(
     isDesktop,
     settingsStudio = false,
     getContextModel,
+    isIndexEditingMode,
+    pathname,
   }: SectionBodyProps) => {
     const focusRef = React.useRef<HTMLDivElement | null>(null);
-    const cmRef = React.useRef<null | {
-      show: (e: React.MouseEvent | MouseEvent) => void;
-      hide: (e: React.MouseEvent | MouseEvent) => void;
-      toggle: (e: React.MouseEvent | MouseEvent) => boolean;
-      getVisible: () => boolean;
-    }>(null);
-    const location = useLocation();
-
-    const [isOpen, setIsOpen] = React.useState(false);
-
-    const onContextMenu = React.useCallback(
-      (e: MouseEvent | React.MouseEvent<Element, MouseEvent>) => {
-        const bodyElem = document.getElementsByClassName(
-          "section-body",
-        )[0] as HTMLDivElement;
-
-        const target = e.target as Node;
-
-        if (
-          !getContextModel ||
-          !getContextModel() ||
-          !bodyElem ||
-          !bodyElem.contains(target)
-        )
-          return;
-
-        e.stopPropagation();
-        e.preventDefault();
-
-        // if (cmRef.current) cmRef.current.toggle(e);
-        if (cmRef.current) {
-          if (!isOpen) cmRef?.current?.show(e);
-          else cmRef?.current?.hide(e);
-          setIsOpen(!isOpen);
-        }
-      },
-      [getContextModel, isOpen],
-    );
-
-    const onHide = () => {
-      setIsOpen(false);
-    };
 
     const focusSectionBody = React.useCallback(() => {
       if (focusRef.current) focusRef.current.focus({ preventScroll: true });
@@ -109,18 +65,10 @@ const SectionBody = React.memo(
     );
 
     React.useEffect(() => {
-      document.addEventListener("contextmenu", onContextMenu);
-
-      return () => {
-        document.removeEventListener("contextmenu", onContextMenu);
-      };
-    }, [onContextMenu]);
-
-    React.useEffect(() => {
       if (!autoFocus) return;
 
       focusSectionBody();
-    }, [autoFocus, location.pathname, focusSectionBody]);
+    }, [autoFocus, pathname, focusSectionBody]);
 
     React.useEffect(() => {
       if (!autoFocus) return;
@@ -141,67 +89,77 @@ const SectionBody = React.memo(
     const focusProps = autoFocus
       ? {
           ref: focusRef,
-          tabIndex: -1,
         }
       : {};
 
-    const contextBlock = (
-      <ContextMenu
-        ref={cmRef}
-        onHide={onHide}
-        getContextModel={getContextModel}
-        withBackdrop
-        model={[]}
-      />
-    );
-
     return uploadFiles ? (
-      <StyledDropZoneBody
-        isDropZone
+      <DragAndDrop
+        className={classNames(
+          styles.dropzone,
+          {
+            [styles.withScroll]: withScroll,
+            [styles.isDesktop]: isDesktop,
+            [styles.isRowView]: viewAs === "row",
+            [styles.isTile]: viewAs === "tile",
+            [styles.isSettingsView]: viewAs === "settings",
+            [styles.isProfileView]: viewAs === "profile",
+            [styles.isFormGallery]: isFormGallery,
+            [styles.isStudio]: settingsStudio,
+            [styles.common]: true,
+          },
+          "section-body",
+        )}
         onDrop={onDrop}
-        withScroll={withScroll}
-        viewAs={viewAs}
-        isDesktop={isDesktop}
-        settingsStudio={settingsStudio}
-        className="section-body"
+        isDropZone
       >
         {withScroll ? (
           <div className="section-wrapper">
             <div className="section-wrapper-content" {...focusProps}>
               {children}
-              <StyledSpacer />
+              <div className={classNames(styles.spacer)} />
             </div>
           </div>
         ) : (
           <div className="section-wrapper">
             {children}
-            <StyledSpacer />
+            <div className={classNames(styles.spacer)} />
           </div>
         )}
 
-        {contextBlock}
-      </StyledDropZoneBody>
+        {!isIndexEditingMode ? (
+          <SectionContextMenu getContextModel={getContextModel} />
+        ) : null}
+      </DragAndDrop>
     ) : (
-      <StyledSectionBody
-        viewAs={viewAs}
-        withScroll={withScroll}
-        isDesktop={isDesktop}
-        settingsStudio={settingsStudio}
-        isFormGallery={isFormGallery}
-        className="section-body"
+      <div
+        className={classNames(
+          styles.sectionBody,
+          {
+            [styles.withScroll]: withScroll,
+            [styles.isDesktop]: isDesktop,
+            [styles.isRowView]: viewAs === "row",
+            [styles.isTile]: viewAs === "tile",
+            [styles.isSettingsView]: viewAs === "settings",
+            [styles.isProfileView]: viewAs === "profile",
+            [styles.isFormGallery]: isFormGallery,
+            [styles.isStudio]: settingsStudio,
+            [styles.common]: true,
+          },
+          "section-body",
+        )}
       >
         {withScroll ? (
           <div className="section-wrapper">
             <div className="section-wrapper-content" {...focusProps}>
               {children}
-              <StyledSpacer className="settings-mobile" />
+              <div className={classNames(styles.spacer, "settings-mobile")} />
             </div>
           </div>
         ) : (
           <div className="section-wrapper">{children}</div>
         )}
-        {contextBlock}
-      </StyledSectionBody>
+        <SectionContextMenu getContextModel={getContextModel} />
+      </div>
     );
   },
 );

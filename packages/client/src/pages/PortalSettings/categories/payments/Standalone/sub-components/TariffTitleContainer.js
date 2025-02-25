@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,6 +38,8 @@ const TariffTitleContainer = ({
   isTrial,
   trialDaysLeft,
   paymentDate,
+  isDeveloper,
+  logoText,
 }) => {
   const { t } = useTranslation(["PaymentsEnterprise", "Common"]);
   const alertComponent = () => {
@@ -73,14 +75,14 @@ const TariffTitleContainer = ({
   const expiresDate = () => {
     if (isTrial) {
       return getTwoDotsReplacing(
-        t("ActivateTariffEnterpriseTrialExpiration", {
+        t("ActivateTariffLicenseTrialExpiration", {
           date: paymentDate,
         }),
       );
     }
 
     return getTwoDotsReplacing(
-      t("ActivateTariffEnterpriseExpiration", {
+      t("ActivatePaidTariffExpiration", {
         date: paymentDate,
       }),
     );
@@ -96,14 +98,17 @@ const TariffTitleContainer = ({
           <Text fontWeight={600} fontSize="14px" as="span">
             {t("ActivateTariffDescr", {
               productName: t("Common:ProductName"),
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
+              license: isDeveloper
+                ? t("Common:DeveloperLicense")
+                : t("Common:EnterpriseLicense"),
             })}
           </Text>{" "}
-          {!isLicenseDateExpired && (
+          {!isLicenseDateExpired ? (
             <Text fontSize="14px" as="span">
               {expiresDate()}
             </Text>
-          )}
+          ) : null}
         </div>
         {alertComponent()}
       </div>
@@ -111,15 +116,19 @@ const TariffTitleContainer = ({
   );
 };
 
-export default inject(({ currentQuotaStore, currentTariffStatusStore }) => {
-  const { trialDaysLeft, paymentDate, isLicenseDateExpired } =
-    currentTariffStatusStore;
-  const { isTrial } = currentQuotaStore;
-
-  return {
-    isTrial,
-    trialDaysLeft,
-    paymentDate,
-    isLicenseDateExpired,
-  };
-})(observer(TariffTitleContainer));
+export default inject(
+  ({ currentQuotaStore, currentTariffStatusStore, settingsStore }) => {
+    const { trialDaysLeft, paymentDate, isLicenseDateExpired, isDeveloper } =
+      currentTariffStatusStore;
+    const { isTrial } = currentQuotaStore;
+    const { logoText } = settingsStore;
+    return {
+      isTrial,
+      trialDaysLeft,
+      paymentDate,
+      isLicenseDateExpired,
+      isDeveloper,
+      logoText,
+    };
+  },
+)(observer(TariffTitleContainer));

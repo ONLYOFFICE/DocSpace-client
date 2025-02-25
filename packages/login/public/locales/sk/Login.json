@@ -1,15 +1,11 @@
 {
-  "CodeSubtitle": "Na adresu {{email}} sme poslali 6-miestny kód. Kód má obmedzenú dobu platnosti, zadajte ho čo najskôr.",
   "CodeTitle": "Kód vám bol zaslaný na e-mail",
   "ErrorInvalidText": "O 10 sekúnd budete presmerovaní na <1>{{productName}}</1>",
-  "ExpiredCode": "Tento kód už nie je platný. Požiadajte o nový kód a skúste to znova.",
   "ForgotPassword": "Zabudli ste heslo?",
-  "InvalidCode": "Tento kód je neplatný. Skúste to znova.",
   "LDAPUsernamePlaceholder": "Používateľské meno {{ldap_domain}} ",
   "MessageAuthorize": "Prihláste sa, aby ste mohli pokračovať",
   "MessageEmailConfirmed": "Váš email bol úspešne aktivovaný.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Zadajte e-mail, ktorý ste použili pri registrácii. Budú vám naň zaslané pokyny na obnovenie hesla.",
-  "NotFoundCode": "Nemôžete nájsť kód? Skontrolujte priečinok «Spam».",
   "PasswordRecoveryTitle": "Obnova hesla",
   "RecoverAccess": "Obnoviť prístup",
   "RecoverContactEmailPlaceholder": "Kontaktný email",
@@ -20,7 +16,6 @@
   "RegisterTitle": "Požiadavka registrácie",
   "RegistrationEmailWatermark": "E-mail",
   "RememberHelper": "Predvolená doba trvania relácie je 20 minút. Začiarknutím tejto možnosti ju nastavíte na 1 rok. Ak chcete nastaviť vlastnú hodnotu, prejdite do časti Nastavenia.",
-  "ResendCode": "Poslať kód ešte raz",
   "SignInLDAP": "Prihláste sa do: {{ldap_domain}}",
   "SignInLdapHelper": "Použite prihlasovacie údaje pre firemnú doménu",
   "UserIsAlreadyRegistered": "Používateľ <1>{{email}}</1> je už zaregistrovaný v tomto priestore {{productName}}, zadajte svoje heslo alebo sa vráťte späť a pokračujte s iným e-mailom."

@@ -1,4 +1,6 @@
 import { dirname, join } from "path";
+import remarkGfm from "remark-gfm";
+
 module.exports = {
   stories: [
     // "../all/all.stories.js",
@@ -15,8 +17,7 @@ module.exports = {
     getAbsolutePath("@storybook/addon-controls"),
     getAbsolutePath("@storybook/addon-viewport"),
     getAbsolutePath("@storybook/addon-contexts"),
-    getAbsolutePath("@react-theming/storybook-addon"),
-    getAbsolutePath("storybook-addon-designs"),
+    getAbsolutePath("@storybook/addon-designs"),
     {
       name: "@storybook/addon-docs",
       options: {
@@ -31,9 +32,13 @@ module.exports = {
             ],
           ],
         },
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
       },
     },
-    getAbsolutePath("@storybook/addon-mdx-gfm"),
     getAbsolutePath("storybook-dark-mode"),
   ],
 

@@ -143,13 +143,13 @@ export const CreatePortalDialog = observer(
 
             // await settingsStore.getAllPortals();
             onClose();
+            router.refresh();
           })
           .catch((error) => {
             setRegisterError(error?.response?.data?.message);
           })
           .finally(() => {
             setIsLoading(false);
-            router.refresh();
           });
       }
     };

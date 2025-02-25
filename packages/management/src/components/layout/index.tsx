@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import SocketHelper from "@docspace/shared/utils/socket";
@@ -67,3 +67,4 @@ export const LayoutWrapper = ({
     </StyledLayout>
   );
 };
+

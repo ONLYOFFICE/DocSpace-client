@@ -12,15 +12,14 @@ import SocketHelper, {
   SocketEvents,
 } from "@docspace/shared/utils/socket";
 
-import useDeviceType from "@/hooks/useDeviceType";
 import { pathsWithoutTabs } from "@/lib/constants";
+
+import { StyledWrapper } from "./layout.styled";
 
 const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
   const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
   const router = useRouter();
-
-  const { currentDeviceType } = useDeviceType();
 
   const data = [
     {
@@ -71,20 +70,20 @@ const SettingsLayout = ({ children }: { children: React.ReactNode }) => {
     router.push(`/settings/${e.id}`);
   };
 
-  if (
-    currentDeviceType === DeviceType.mobile &&
-    pathsWithoutTabs.some((item) => pathname.includes(item))
-  ) {
-    return children;
-  }
+  const hideTabs = pathsWithoutTabs.some((item) => pathname.includes(item));
 
   return (
-    <Tabs
-      items={data}
-      selectedItemId={getCurrentTab()}
-      onSelect={(e) => onSelect(e)}
-    />
+    <StyledWrapper hideTabs={hideTabs}>
+      <Tabs
+        className="tabs"
+        items={data}
+        selectedItemId={getCurrentTab()}
+        onSelect={(e) => onSelect(e)}
+      />
+      <div className="content">{children}</div>
+    </StyledWrapper>
   );
 };
 
 export default observer(SettingsLayout);
+

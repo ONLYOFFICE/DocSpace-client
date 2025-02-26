@@ -627,7 +627,7 @@ export async function getIsLicenseRequired() {
   return res;
 }
 
-export async function setLicense(confirmKey: string, data: FormData) {
+export async function setLicense(confirmKey: string | null, data: FormData) {
   const options: AxiosRequestConfig = {
     method: "post",
     url: `/settings/license`,

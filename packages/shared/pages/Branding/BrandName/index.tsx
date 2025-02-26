@@ -28,7 +28,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
-import { Nullable } from "types";
+import { Nullable } from "../../../types";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { Text } from "../../../components/text";
 import { Badge } from "../../../components/badge";

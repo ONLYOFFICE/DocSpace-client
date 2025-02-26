@@ -27,14 +27,15 @@
 "use client";
 
 import { useEffect, useCallback } from "react";
-import { DeviceType } from "@docspace/shared/enums";
-import { size } from "@docspace/shared/utils";
+import { useRouter } from "next/navigation";
+
+import { DeviceType } from "../enums";
+import { size } from "../utils";
 
 interface IProps {
   redirectUrl: string;
   currentLocation: string;
   deviceType: DeviceType;
-  router: unknown;
   pathname: string;
 }
 
@@ -42,9 +43,9 @@ export const useResponsiveNavigation = ({
   redirectUrl,
   currentLocation,
   deviceType,
-  router,
   pathname,
 }: IProps) => {
+  const router = useRouter();
   const isMobileView = deviceType === DeviceType.mobile;
 
   const checkWidth = useCallback(() => {

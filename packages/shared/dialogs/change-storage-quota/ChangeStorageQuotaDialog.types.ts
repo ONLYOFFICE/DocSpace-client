@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export interface ChangeStorageQuotaDialogProps {
-  initialSize: string;
+  initialSize?: string;
   portalInfo: unknown;
   isVisible: boolean;
   updateFunction: (quota: unknown) => void;

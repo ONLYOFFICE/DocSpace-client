@@ -79,7 +79,11 @@ import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
-import { TPasswordHash, TTimeZone } from "../api/settings/types";
+import {
+  TDomainValidator,
+  TPasswordHash,
+  TTimeZone,
+} from "../api/settings/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
@@ -183,7 +187,7 @@ export const parseDomain = (
 
 export const validatePortalName = (
   value: string,
-  nameValidator: { minLength: number; maxLength: number; regex: RegExp },
+  nameValidator: TDomainValidator,
   setError: Function,
   t: TTranslation,
 ) => {

@@ -51,7 +51,10 @@ async function Page() {
   const { standalone } = settings;
 
   const isCustomizationAvailable = getIsCustomizationAvailable(quota);
-  const isSettingPaid = getIsSettingsPaid(portals, isCustomizationAvailable);
+  const isSettingPaid = getIsSettingsPaid(
+    isCustomizationAvailable,
+    portals?.tenants,
+  );
 
   return (
     <BrandNamePage

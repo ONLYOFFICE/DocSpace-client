@@ -93,7 +93,7 @@ const PaymentsPage = ({
   useEffect(() => {
     setIsLicenseDateExpired(getIsLicenseDateExpired(dueDate, window.timezone));
     setPaymentDate(getPaymentDate(dueDate, window.timezone));
-    setTrialDaysLeft(getDaysLeft(dueDate, window.timezone));
+    setTrialDaysLeft(getDaysLeft(dueDate));
   }, []);
 
   return (

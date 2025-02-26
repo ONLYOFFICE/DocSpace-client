@@ -44,6 +44,7 @@ import {
   ILogo,
   IWhiteLabelData,
 } from "@docspace/shared/pages/Branding/WhiteLabel/WhiteLabel.types";
+import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import {
@@ -66,8 +67,8 @@ export const WhiteLabelPage = ({
   showAbout: boolean;
   isDefaultWhiteLabel: boolean;
   standalone: boolean;
-  portals: unknown;
-  quota: unknown;
+  portals?: string[];
+  quota?: TPaymentQuota;
 }) => {
   const { t } = useTranslation("Common");
   const { currentDeviceType } = useDeviceType();
@@ -83,7 +84,7 @@ export const WhiteLabelPage = ({
   const [isSaving, startTransition] = useTransition();
 
   const isCustomizationAvailable = getIsCustomizationAvailable(quota);
-  const isSettingPaid = getIsSettingsPaid(portals, isCustomizationAvailable);
+  const isSettingPaid = getIsSettingsPaid(isCustomizationAvailable, portals);
 
   useResponsiveNavigation({
     redirectUrl: "/settings/branding",
@@ -137,7 +138,7 @@ export const WhiteLabelPage = ({
       isSaving={isSaving}
       enableRestoreButton={isDefault}
       setLogoUrls={setLogoUrls}
-      isWhiteLabelLoaded={true}
+      isWhiteLabelLoaded
       defaultWhiteLabelLogoUrls={defaultLogoUrls}
     />
   );

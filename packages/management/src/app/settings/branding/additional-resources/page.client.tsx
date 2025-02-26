@@ -39,6 +39,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveSSRNavigation";
 import { AdditionalResources } from "@docspace/shared/pages/Branding/AdditionalResources";
 import type { TAdditionalResources } from "@docspace/shared/api/settings/types";
+import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { getIsSettingsPaid, getIsCustomizationAvailable } from "@/lib";
@@ -48,8 +49,8 @@ export const AdditionalResourcesPage = ({
   quota,
   additionalResourcesData,
 }: {
-  portals: unknown;
-  quota: unknown;
+  portals?: string[];
+  quota?: TPaymentQuota;
   additionalResourcesData: TAdditionalResources;
 }) => {
   const { t } = useTranslation("Common");
@@ -60,7 +61,7 @@ export const AdditionalResourcesPage = ({
   const [isLoading, startTransition] = useTransition();
 
   const isCustomizationAvailable = getIsCustomizationAvailable(quota);
-  const isSettingPaid = getIsSettingsPaid(portals, isCustomizationAvailable);
+  const isSettingPaid = getIsSettingsPaid(isCustomizationAvailable, portals);
 
   const { feedbackAndSupportEnabled, helpCenterEnabled, isDefault } =
     additionalRes;
@@ -116,3 +117,4 @@ export const AdditionalResourcesPage = ({
     />
   );
 };
+

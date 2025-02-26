@@ -26,6 +26,7 @@
 
 import moment from "moment-timezone";
 import { TTranslation } from "@docspace/shared/types";
+import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
 
 export const getMinifyTitle = (title: string) => {
   const titleArr = title.split(" ");
@@ -67,17 +68,19 @@ export const getHeaderByPathname = (pathname: string, t: TTranslation) => {
 };
 
 export const getIsSettingsPaid = (
-  portals: unknown,
   isCustomizationAvailable: boolean,
+  portals?: string[],
 ) => {
   return portals?.length === 1 ? false : isCustomizationAvailable;
 };
 
-export const getIsCustomizationAvailable = (quota: unknown) => {
+export const getIsCustomizationAvailable = (quota: TPaymentQuota) => {
   return quota.features.find((obj) => obj.id === "customization")?.value;
 };
 
-export const getIsDefaultWhiteLabel = (whiteLabelIsDefault: unknown) => {
+export const getIsDefaultWhiteLabel = (
+  whiteLabelIsDefault: Record<"name" | "default", string | boolean>[],
+) => {
   return whiteLabelIsDefault.map((item) => item?.default).includes(false);
 };
 
@@ -97,7 +100,7 @@ export const getPaymentDate = (dueDate: string | Date, timezone: string) => {
   return moment(dueDate).tz(timezone)?.format("LL");
 };
 
-export const getDaysLeft = (dueDate: string | Date, timezone: string) => {
+export const getDaysLeft = (dueDate: string | Date) => {
   return moment(dueDate).startOf("day").diff(moment().startOf("day"), "days");
 };
 

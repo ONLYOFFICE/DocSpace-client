@@ -40,6 +40,7 @@ import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveSSR
 import { CompanyInfo } from "@docspace/shared/pages/Branding/CompanyInfo";
 import type { ICompanySettings } from "@docspace/shared/pages/Branding/CompanyInfo/CompanyInfo.types";
 import type { IBuildInfo } from "@docspace/shared/components/about-dialog/About.types";
+import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { getIsCustomizationAvailable, getIsSettingsPaid } from "@/lib";
@@ -54,8 +55,8 @@ export const CompanyInfoPage = ({
   isEnterprise,
   logoText,
 }: {
-  portals: unknown;
-  quota: unknown;
+  portals?: string[];
+  quota?: TPaymentQuota;
   companyInfoSettingsData: ICompanySettings;
   standalone: boolean;
   licenseUrl: string;
@@ -72,7 +73,7 @@ export const CompanyInfoPage = ({
   const [isLoading, startTransition] = useTransition();
 
   const isCustomizationAvailable = getIsCustomizationAvailable(quota);
-  const isSettingPaid = getIsSettingsPaid(portals, isCustomizationAvailable);
+  const isSettingPaid = getIsSettingsPaid(isCustomizationAvailable, portals);
 
   useResponsiveNavigation({
     redirectUrl: "/settings/branding",
@@ -130,3 +131,4 @@ export const CompanyInfoPage = ({
     />
   );
 };
+

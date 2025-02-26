@@ -32,7 +32,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter, useSearchParams } from "next/navigation";
 import PublicRoomPasswordForm from "@docspace/shared/forms/PublicRoomPasswordForm";
-import type { TPublicRoomPassword } from "@docspace/shared/api/rooms/types";
 
 export default function PublicRoomPasswordPageClient({
   roomTitle,

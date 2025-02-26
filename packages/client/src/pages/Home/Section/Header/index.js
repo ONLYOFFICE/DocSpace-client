@@ -532,7 +532,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const getTitleIconTooltip = () => {
-    if (sharedType) return t("Files:RecentlyOpenedViaLink");
+    if (sharedType) return t("Files:RecentlyOpenedTooltip");
 
     if (lifetime)
       return `${t("Files:RoomFilesLifetime", {

@@ -309,17 +309,17 @@ class FilesSettingsStore {
 
   changeDocumentServiceLocation = (
     docServiceUrl,
-    jwtSecret,
+    secretKey,
     isDisabledCertificat,
-    jwtHeader,
+    authHeader,
     internalUrl,
     portalUrl,
   ) =>
     api.files.changeDocumentServiceLocation(
       docServiceUrl,
-      jwtSecret,
+      secretKey,
       isDisabledCertificat,
-      jwtHeader,
+      authHeader,
       internalUrl,
       portalUrl,
     );

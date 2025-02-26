@@ -78,6 +78,7 @@ newInstance
       "Files",
       "Errors",
       "Translations",
+      "FormFillingTipsDialog",
     ],
 
     backend: {

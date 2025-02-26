@@ -34,7 +34,6 @@ import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 import React, { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "styled-components";
 import { observer } from "mobx-react";
 
 import { DeviceType } from "@docspace/shared/enums";
@@ -53,7 +52,6 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
   const {
     articleStore: { showText, setShowText, articleOpen, setArticleOpen },
   } = useStores();
-  const theme = useTheme();
   const router = useRouter();
   const pathname = usePathname();
   const { t } = useTranslation("Common");
@@ -91,7 +89,6 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
           onClick={() => onItemClick("spaces")}
           isActive={pathname === "/spaces"}
           folderId="management_catalog-spaces"
-          $currentColorScheme={theme?.currentColorScheme}
           linkData={{ path: "/spaces", state: {} }}
         />
         <ArticleItem
@@ -102,7 +99,6 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
           onClick={() => onItemClick("settings/branding")}
           isActive={pathname.includes("/settings")}
           folderId="management_catalog-settings"
-          $currentColorScheme={theme?.currentColorScheme}
           linkData={{ path: "/settings/branding", state: {} }}
         />
         {!isCommunity ? (
@@ -114,7 +110,6 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
             onClick={() => onItemClick("payments")}
             isActive={pathname === "/payments"}
             folderId="management_catalog-payments"
-            $currentColorScheme={theme?.currentColorScheme}
             linkData={{ path: "/payments", state: {} }}
           />
         ) : (
@@ -126,7 +121,6 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
             onClick={() => onItemClick("bonus")}
             isActive={pathname === "/bonus"}
             folderId="management_catalog-bonus"
-            $currentColorScheme={theme?.currentColorScheme}
             linkData={{ path: "/bonus", state: {} }}
           />
         )}

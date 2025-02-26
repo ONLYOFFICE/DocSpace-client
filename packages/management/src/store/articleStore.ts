@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import { isTablet } from "react-device-detect";
 
 export class ArticleStore {
-  showText = false;
+  showText = !isTablet;
   articleOpen = false;
 
   constructor() {

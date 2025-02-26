@@ -56,6 +56,7 @@ type IConfigType = IConfig & {
   events?: {
     onRequestStartFilling?: (event: object) => void;
     onSubmit?: (event: object) => void;
+    onRequestFillingStatus?: (event: object) => void;
   };
   editorConfig?: {
     customization?: {
@@ -316,6 +317,10 @@ const Editor = ({
     newConfig.events.onRequestStartFilling = () =>
       onSDKRequestStartFilling?.(t("Common:ShareAndCollect"));
   }
+
+  newConfig.events.onRequestFillingStatus = (event: object) => {
+    console.log({ event });
+  };
 
   newConfig.events.onSubmit = () => {
     const origin = window.location.origin;

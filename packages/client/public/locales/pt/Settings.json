@@ -26,7 +26,6 @@
   "AuditTrailNav": "Auditar o Rastro",
   "Backup": "Backup",
   "BackupCreatedError": "Ocorreu um erro. Por favor, contacte o seu administrador.",
-  "BackupCreatedSuccess": "A cópia de segurança foi criada com sucesso.",
   "BackupFile": "Arquivo de backup",
   "BackupFileUploading": "O arquivo de backup está sendo carregado no servidor. Por favor, aguarde.",
   "BackupListWarningText": "Se eliminar qualquer item desta lista, os ficheiros que lhes correspondem serão também eliminados. Esta ação não pode ser anulada. Para eliminar todos os ficheiros utilize o link:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Utilize esta opção para eliminar o seu espaço permanentemente.",
   "PortalDeletionEmailSended": "Um link para confirmar que a operação foi enviada para {{ownerEmail}} (o endereço de email do proprietário do espaço).",
   "PortalDeletionHelper": "Se pensa que não vai utilizar o espaço e gostaria de eliminar o seu espaço permanentemente, submeta o seu pedido utilizando o botão Eliminar. Tenha em mente que não será possível reativar o seu espaço ou recuperar qualquer informação associada ao mesmo.",
-  "PortalNameEmpty": "Não colocou um nome para a conta",
-  "PortalNameIncorrect": "Nome de conta incorreto",
-  "PortalNameLength": "O nome da conta tem de ter entre {{minLength}} e {{maxLength}} caracteres",
   "PortalRenaming": "Renomeação do {{productName}}",
   "PortalRenamingDescriptionText": "Altere o endereço do espaço que aparece ao lado de {{ domain }}.",
   "PortalRenamingLabelText": "Novo nome de espaço",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Deseja cancelar a importação de dados?",
   "WantToCancelUpload": "Deseja cancelar o upload?",
   "WantToContinue": "Deseja continuar ou alterar a cota de armazenamento do utilizador?",
-  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
-  "YourCurrentDomain": "O seu domínio atual"
+  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa."
 }

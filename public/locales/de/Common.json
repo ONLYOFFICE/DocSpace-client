@@ -674,5 +674,10 @@
   "AmazonServiceTip": "Dies ist eine zusätzliche Einstellung; ändern Sie diese nur, wenn Sie einen anderen Dienstendpunkt ausprobieren möchten.",
   "AmazonForcePathStyleTip": "Wenn \"true\", werden Anfragen immer im Pfadstil adressiert.",
   "AmazonHTTPTip": "Wenn diese Eigenschaft auf true gesetzt ist, versucht der Client, das HTTP-Protokoll zu verwenden, wenn der Zielendpunkt es unterstützt. Standardmäßig ist diese Eigenschaft auf false gesetzt.",
-  "AmazonSSETip": "Der serverseitige Verschlüsselungsalgorithmus, der bei der Speicherung dieses Objekts in S3 verwendet wird."
+  "AmazonSSETip": "Der serverseitige Verschlüsselungsalgorithmus, der bei der Speicherung dieses Objekts in S3 verwendet wird.",
+  "YourCurrentDomain": "Ihre aktuelle Domain",
+  "PortalNameEmpty": "Der Kontoname ist leer",
+  "PortalNameLength": "Der Kontoname muss zwischen {{minLength}} und {{maxLength}} Zeichen lang sein",
+  "PortalNameIncorrect": "Inkorrekter Kontoname",
+  "BackupCreatedSuccess": "Die Sicherungskopie wurde erfolgreich erstellt."
 }

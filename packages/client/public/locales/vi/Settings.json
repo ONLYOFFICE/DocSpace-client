@@ -26,7 +26,6 @@
   "AuditTrailNav": "Kiểm tra Truy nguyên",
   "Backup": "Sao lưu",
   "BackupCreatedError": "Xảy ra lỗi. Vui lòng liên hệ với quản trị viên của bạn.",
-  "BackupCreatedSuccess": "Bản sao lưu đã được tạo thành công.",
   "BackupFile": "Tập tin sao lưu",
   "BackupFileUploading": "Tập sao lưu đang được tải lên máy chủ. Xin vui lòng chờ.",
   "BackupListWarningText": "Nếu bạn xóa bất kỳ mục nào trong danh sách, các file tương ứng của chúng cũng sẽ bị xóa. Tác vụ này không thể được hoàn tác. Để xóa tất cả các file này sử dụng liên kết:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Sử dụng tùy chọn này để xóa vĩnh viễn không gian của bạn.",
   "PortalDeletionEmailSended": "Một liên kết để xác nhận hoạt động đã được gửi đến {{ownerEmail}} (địa chỉ email của chủ sở hữu không gian).",
   "PortalDeletionHelper": "Nếu bạn không nghĩ rằng bạn sẽ sử dụng không gian này và muốn xóa vĩnh viễn không gian của mình, hãy gửi yêu cầu của bạn bằng cách dùng nút Xóa. Xin lưu ý rằng bạn sẽ không thể kích hoạt lại không gian của mình hoặc khôi phục bất kỳ thông tin nào liên quan đến nó.",
-  "PortalNameEmpty": "Tên tài khoản trống",
-  "PortalNameIncorrect": "Tên tài khoản không chính xác",
-  "PortalNameLength": "Tên tài khoản phải dài từ {{minLength}} đến {{maxLength}} ký tự",
   "PortalRenaming": "Đang đổi tên {{productName}}",
   "PortalRenamingDescriptionText": "Thay đổi địa chỉ không gian xuất hiện bên cạnh {{ domain }}.",
   "PortalRenamingLabelText": "Tên không gian mới",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Bạn có muốn hủy nhập dữ liệu không?",
   "WantToCancelUpload": "Bạn có muốn hủy tải lên không?",
   "WantToContinue": "Bạn có muốn tiếp tục hoặc thay đổi hạn mức lưu trữ người dùng không?",
-  "WithoutEmailHint": "Bạn không có người dùng không có email. Vui lòng chuyển sang bước tiếp theo.",
-  "YourCurrentDomain": "Tên miền hiện tại của bạn"
+  "WithoutEmailHint": "Bạn không có người dùng không có email. Vui lòng chuyển sang bước tiếp theo."
 }

@@ -26,7 +26,6 @@
   "AuditTrailNav": "Denetim İzleme",
   "Backup": "Yedek",
   "BackupCreatedError": "Bir hata oluştu. Lütfen site yöneticisi ile görüşün.",
-  "BackupCreatedSuccess": "Yedekleme kopyası başarıyla oluşturuldu.",
   "BackupFile": "Yedekleme dosyası",
   "BackupFileUploading": "Yedekleme dosyası sunucuya yükleniyor. Lütfen bekleyin.",
   "BackupListWarningText": "Listeden herhangi bir öğe silerseniz bu öğe ile ilgili dosyalar da silinir. Bu işlem geri alınamaz. Tüm dosyaları silmek için linke tıklayın:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Alanınızı kalıcı olarak silmek için bu seçeneği kullanın.",
   "PortalDeletionEmailSended": "{{ownerEmail}} adresine (alan sahibinin e-posta adresi) işlemi onaylamak için bir bağlantı gönderildi.",
   "PortalDeletionHelper": "Alanı kullanmayı düşünmüyorsanız ve alanınızı kalıcı olarak silmek istiyorsanız Sil düğmesini kullanarak talebinizi iletin. Alanınızı yeniden etkinleştiremeyeceğinizi veya onunla ilişkili herhangi bir bilgiyi kurtaramayacağınızı lütfen unutmayın.",
-  "PortalNameEmpty": "Hesap adı boş",
-  "PortalNameIncorrect": "Yanlış hesap adı",
-  "PortalNameLength": "Hesap adı {{minLength}} ila {{maxLength}} karakter uzunluğunda olmalıdır",
   "PortalRenaming": "{{productName}} Yeniden Adlandırma",
   "PortalRenamingDescriptionText": "{{ domain }} yanında görünen alan adresini değiştirin.",
   "PortalRenamingLabelText": "Yeni alan adı",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Veri içe aktarmayı iptal etmek istiyor musunuz?",
   "WantToCancelUpload": "Yüklemeyi iptal etmek istiyor musunuz?",
   "WantToContinue": "Devam etmek mi yoksa kullanıcı kotasını değiştirmek mi istiyorsunuz?",
-  "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin.",
-  "YourCurrentDomain": "Mevcut alanınız"
+  "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin."
 }

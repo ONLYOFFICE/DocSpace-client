@@ -26,7 +26,6 @@
   "AuditTrailNav": "Tapahtumien seuranta",
   "Backup": "Varmuuskopio",
   "BackupCreatedError": "On tapahtunut jokin outo virhe. Tosi outo. Ota yhteys järjestelmänvalvojaan.",
-  "BackupCreatedSuccess": "Turvatallenteen kopio on luotu onnistuneesti.",
   "BackupFile": "Varmuuskopiotiedosto",
   "BackupFileUploading": "Varmuuskopiotiedostoa ladataan palvelimelle. Ole hyvä ja odota.",
   "BackupListWarningText": "Jos poistat luettelosta kohteita, myös vastaavat tiedostot poistetaan. Tätä toimintoa ei voi kumota. Jos haluat poistaa kaikki tiedostot, käytä linkkiä:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Käytä tätä vaihtoehtoa poistaaksesi tilasi lopullisesti.",
   "PortalDeletionEmailSended": "Toiminnonvahvistuslinkki on lähetetty {{ownerEmail}} (tilan omistajan sähköpostiosoite.",
   "PortalDeletionHelper": "Jos et usko käyttäväsi tilaa ja haluaisit poistaa tilasi lopullisesti, lähetä pyyntösi käyttäen Poista-painiketta. Pidä mielessä, ettet voi aktivoida tilaasi enää uudelleen tai palauttaa mitään siihen liittyviä tietoja.",
-  "PortalNameEmpty": "Tilin nimi on tyhjä",
-  "PortalNameIncorrect": "Virheellinen tilin nimi",
-  "PortalNameLength": "Tilin nimen on oltava {{minLength}}-{{maxLength}} merkkiä pitkä",
   "PortalRenaming": "{{productName}}-n uudelleennimeäminen",
   "PortalRenamingDescriptionText": "Muuta tilan osoite, joka näkyy {{ domain }} vieressä. ",
   "PortalRenamingLabelText": "Uusi tilan nimi",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Haluatko peruuttaa tietojen tuonnin?",
   "WantToCancelUpload": "Haluatko peruuttaa latauksen?",
   "WantToContinue": "Haluatko jatkaa vai muuttaa käyttäjien muistin kiintiötä?",
-  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen.",
-  "YourCurrentDomain": "Nykyinen verkkotunnuksesi"
+  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen."
 }

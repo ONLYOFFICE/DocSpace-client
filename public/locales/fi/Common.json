@@ -673,5 +673,10 @@
   "AmazonServiceTip": "Tämä on vaihtoehtoinen tila; voit vaihtaa sen ainoastaan jos haluat kokeilla erilaista palvelun päätepistettä.",
   "AmazonForcePathStyleTip": "Kun totta, pyynnöt käyttävät aina polkutyylistä osoitusta.",
   "AmazonHTTPTip": "Jos tämä ominaisuus on asetettu todeksi, asiakas yrittää käyttää HTTP-protokollaa, jos kohdepäätepiste tukee sitä. Oletuksena tämä ominaisuus on epätosi",
-  "AmazonSSETip": "Käytössä oleva palvelinpuolen salausalgoritmi tallennettaessa tätä kohdetta S3:ssa."
+  "AmazonSSETip": "Käytössä oleva palvelinpuolen salausalgoritmi tallennettaessa tätä kohdetta S3:ssa.",
+  "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
+  "PortalNameEmpty": "Tilin nimi on tyhjä",
+  "PortalNameLength": "Tilin nimen on oltava {{minLength}}-{{maxLength}} merkkiä pitkä",
+  "PortalNameIncorrect": "Virheellinen tilin nimi",
+  "BackupCreatedSuccess": "Turvatallenteen kopio on luotu onnistuneesti."
 }

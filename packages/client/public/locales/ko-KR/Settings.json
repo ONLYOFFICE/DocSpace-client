@@ -26,7 +26,6 @@
   "AuditTrailNav": "감사 추적",
   "Backup": "백업",
   "BackupCreatedError": "오류가 발생했습니다. 관리자에게 문의하세요.",
-  "BackupCreatedSuccess": "백업 복사본 생성에 성공했습니다.",
   "BackupFile": "백업 파일",
   "BackupFileUploading": "백업 파일이 서버에 업로드되고 있습니다. 잠시만 기다려주세요.",
   "BackupListWarningText": "목록에서 항목을 삭제하면 그에 상응하는 파일도 삭제됩니다. 이 작업은 취소할 수 없습니다. 모든 파일을 삭제하려면 다음 링크를 사용하시기 바랍니다:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "스페이스를 영구적으로 삭제하려면 이 옵션을 사용하세요.",
   "PortalDeletionEmailSended": "작업을 확인하는 링크가 {{ownerEmail}}(스페이스 소유자의 이메일 주소)로 발송되었습니다.",
   "PortalDeletionHelper": "스페이스를 사용하지 않을 예정이라 스페이스를 영구적으로 삭제하려면 삭제 버튼을 사용하여 요청을 제출하세요. 단, 스페이스를 재활성화하거나 스페이스와 관련된 정보를 복구할 수 없음을 명심하시기 바랍니다.",
-  "PortalNameEmpty": "계정 이름이 비어 있습니다",
-  "PortalNameIncorrect": "계정 이름이 잘못되었습니다",
-  "PortalNameLength": "계정 이름은 {{minLength}}~{{maxLength}}글자여야 합니다",
   "PortalRenaming": "{{productName}} 이름 변경",
   "PortalRenamingDescriptionText": "{{ domain }} 옆에 표시되는 공간 주소를 변경하세요.",
   "PortalRenamingLabelText": "새 스페이스 이름",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "데이터 가져오기를 취소하시겠습니까?",
   "WantToCancelUpload": "업로드를 취소하시겠습니까?",
   "WantToContinue": "사용자 스토리지 할당량을 계속 유지하거나 변경하시겠습니까?",
-  "WithoutEmailHint": "이메일이 없는 사용자가 없습니다. 다음 단계를 진행하세요.",
-  "YourCurrentDomain": "내 현재 도메인"
+  "WithoutEmailHint": "이메일이 없는 사용자가 없습니다. 다음 단계를 진행하세요."
 }

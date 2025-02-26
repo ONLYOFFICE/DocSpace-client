@@ -673,5 +673,10 @@
   "AmazonServiceTip": "Bu isteğe bağlı bir özelliktir; yalnızca farklı bir hizmet uç noktası denemek istiyorsanız değiştirin.",
   "AmazonForcePathStyleTip": "“True” olduğunda, istekler her zaman yol tipi adreslemeyi kullanır.",
   "AmazonHTTPTip": "Bu özellik “true” olarak ayarlanırsa, hedef uç nokta destekliyorsa istemci HTTP protokolünü kullanmayı dener. Varsayılan olarak, bu özellik “false” olarak ayarlanmıştır.",
-  "AmazonSSETip": "Bu nesneyi S3'te depolarken kullanılan Sunucu tarafı şifreleme algoritması."
+  "AmazonSSETip": "Bu nesneyi S3'te depolarken kullanılan Sunucu tarafı şifreleme algoritması.",
+  "YourCurrentDomain": "Mevcut alanınız",
+  "PortalNameEmpty": "Hesap adı boş",
+  "PortalNameLength": "Hesap adı {{minLength}} ila {{maxLength}} karakter uzunluğunda olmalıdır",
+  "PortalNameIncorrect": "Yanlış hesap adı",
+  "BackupCreatedSuccess": "Yedekleme kopyası başarıyla oluşturuldu."
 }

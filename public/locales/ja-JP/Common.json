@@ -674,5 +674,10 @@
   "AmazonServiceTip": "このプロパティはオプションです。別のサービスエンドポイントを試したい場合のみ変更してください。",
   "AmazonForcePathStyleTip": "trueの場合、リクエストは常にパススタイルのアドレッシングを使用します。",
   "AmazonHTTPTip": "このプロパティが true に設定されている場合、クライアントはターゲットエンドポイントが HTTP プロトコルをサポートしている場合、そのプロトコルを使用しようとします。デフォルトでは、このプロパティはfalseに設定されています。",
-  "AmazonSSETip": "このオブジェクトをS3に保存する際に使用されるサーバー側の暗号化アルゴリズム。"
+  "AmazonSSETip": "このオブジェクトをS3に保存する際に使用されるサーバー側の暗号化アルゴリズム。",
+  "YourCurrentDomain": "現在お使いのドメイン",
+  "PortalNameEmpty": "アカウント名が空です。",
+  "PortalNameLength": "アカウント名は{{minLength}}～{{maxLength}}文字がある必要です。",
+  "PortalNameIncorrect": "アカウント名が無効です。",
+  "BackupCreatedSuccess": "バックアップ・コピーは正常に作成されました。"
 }

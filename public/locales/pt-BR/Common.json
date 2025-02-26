@@ -674,5 +674,10 @@
   "AmazonServiceTip": "Esta é uma propriedade opcional; altere-o apenas se quiser experimentar um terminal de serviço diferente.",
   "AmazonForcePathStyleTip": "Quando verdadeiro, as solicitações sempre usarão endereçamento de estilo de caminho.",
   "AmazonHTTPTip": "Se esta propriedade for configurada como verdadeiro, o cliente tentará usar o protocolo HTTP, se o terminal de destino for compatível. Por padrão, essa propriedade é definida como falsa.",
-  "AmazonSSETip": "O algoritmo de criptografia do lado do servidor usado ao armazenar este objeto no S3."
+  "AmazonSSETip": "O algoritmo de criptografia do lado do servidor usado ao armazenar este objeto no S3.",
+  "YourCurrentDomain": "Seu domínio atual",
+  "PortalNameEmpty": "Nome da conta está vazio",
+  "PortalNameLength": "O nome da conta deve ter entre {{minLength}} e {{maxLength}} caracteres",
+  "PortalNameIncorrect": "Nome da conta incorreto",
+  "BackupCreatedSuccess": "A cópia de backup foi criada com sucesso."
 }

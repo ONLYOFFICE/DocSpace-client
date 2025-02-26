@@ -26,7 +26,6 @@
   "AuditTrailNav": "Audit Trail",
   "Backup": "Backup",
   "BackupCreatedError": "An error has been encountered. Please contact your administrator.",
-  "BackupCreatedSuccess": "The backup copy has been successfully created.",
   "BackupFile": "Backup file",
   "BackupFileUploading": "Backup file is being uploaded to the server. Please wait.",
   "BackupListWarningText": "If you delete any items from the list, their corresponding files will also be deleted. This action cannot be undone. To delete all the files use the link:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Use this option to delete your space permanently.",
   "PortalDeletionEmailSended": "A link to confirm the operation has been sent to {{ownerEmail}} (the email address of the space owner).",
   "PortalDeletionHelper": "If you do not think you will use the space and would like to delete your space permanently, submit your request using the Delete button. Please, keep in mind that you will not be able to reactivate your space or recover any information associated with it.",
-  "PortalNameEmpty": "Account name is empty",
-  "PortalNameIncorrect": "Incorrect account name",
-  "PortalNameLength": "The account name must be between {{minLength}} and {{maxLength}} characters long",
   "PortalRenaming": "{{productName}} Renaming",
   "PortalRenamingDescriptionText": "Change the space address that appears next to {{ domain }}.",
   "PortalRenamingLabelText": "New space name",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Do you want to cancel data import?",
   "WantToCancelUpload": "Do you want to cancel the upload?",
   "WantToContinue": "Do you want to continue or change the user storage quota?",
-  "WithoutEmailHint": "You don’t have users without emails. Please proceed to the next step.",
-  "YourCurrentDomain": "Your current domain"
+  "WithoutEmailHint": "You don’t have users without emails. Please proceed to the next step."
 }

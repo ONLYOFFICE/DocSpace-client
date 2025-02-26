@@ -672,5 +672,10 @@
   "AmazonServiceTip": "Đây là một thuộc tính tùy chọn; chỉ thay đổi nó nếu bạn muốn thử một điểm cuối dịch vụ khác",
   "AmazonForcePathStyleTip": "Nếu là true, các yêu cầu sẽ luôn sử dụng địa chỉ kiểu đường dẫn.",
   "AmazonHTTPTip": "Nếu thuộc tính này được đặt thành true, máy khách sẽ cố gắng sử dụng giao thức HTTP, nếu điểm cuối đích hỗ trợ nó. Theo mặc định, thuộc tính này được đặt thành false.",
-  "AmazonSSETip": "Thuật toán mã hóa phía máy chủ được sử dụng khi lưu trữ đối tượng này trong S3."
+  "AmazonSSETip": "Thuật toán mã hóa phía máy chủ được sử dụng khi lưu trữ đối tượng này trong S3.",
+  "YourCurrentDomain": "Tên miền hiện tại của bạn",
+  "PortalNameEmpty": "Tên tài khoản trống",
+  "PortalNameLength": "Tên tài khoản phải dài từ {{minLength}} đến {{maxLength}} ký tự",
+  "PortalNameIncorrect": "Tên tài khoản không chính xác",
+  "BackupCreatedSuccess": "Bản sao lưu đã được tạo thành công."
 }

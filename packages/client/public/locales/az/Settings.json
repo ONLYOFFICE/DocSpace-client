@@ -26,7 +26,6 @@
   "AuditTrailNav": "Audit izi",
   "Backup": "Yedəkləmə",
   "BackupCreatedError": "Xəta ilə üzləşdiniz. Administratorunuzla əlaqə saxlayın.",
-  "BackupCreatedSuccess": "Ehtiyat nüsxə uğurla yaradıldı.",
   "BackupFile": "Ehtiyat fayl",
   "BackupFileUploading": "Ehtiyat fayl serverə yüklənir. Zəhmət olmasa, gözləyin.",
   "BackupListWarningText": "Siyahıdan müəyyən elementləri silsəniz, onların müvafiq faylları da silinəcək. Bu əməliyyat geri qaytarıla bilməz. Bütün faylları silmək üçün linkdən istifadə edin:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Domeninizi həmişəlik silmək üçün bu seçimdən istifadə edin.",
   "PortalDeletionEmailSended": "Tranzaksiyanı təsdiqləmək üçün keçid {{ownerEmail}} ünvanına (domen sahibinin e-poçt ünvanı) göndərildi.",
   "PortalDeletionHelper": "Əgər domendən istifadə etməyi planlaşdırmırsınızsa və domeninizi həmişəlik silmək istəyirsinizsə, lütfən, Sil düyməsini istifadə edərək sorğunuzu göndərin. Nəzərə alın ki, siz domeninizi yenidən aktivləşdirə və ya onunla əlaqəli hər hansı məlumatı bərpa edə bilməzsiniz.",
-  "PortalNameEmpty": "Hesab adı boşdur",
-  "PortalNameIncorrect": "Yanlış hesab adı",
-  "PortalNameLength": "Hesab adı ən az {{minLength}}, ən çox {{maxLength}} işarədən ibarət ola bilər",
   "PortalRenaming": "{{productName}} adının dəyişdirilməsi",
   "PortalRenamingDescriptionText": "{{ domain }} yanında görünən domen ünvanını dəyişdirin.",
   "PortalRenamingLabelText": "Yeni sahə adı",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Məlumat idxalını ləğv etmək istəyirsiniz?",
   "WantToCancelUpload": "Yükləməni ləğv etmək istəyirsiniz?",
   "WantToContinue": "İstifadəçi yaddaşı kvotasını davam etdirmək və ya dəyişmək istəyirsiniz?",
-  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin.",
-  "YourCurrentDomain": "Cari domen adınız"
+  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin."
 }

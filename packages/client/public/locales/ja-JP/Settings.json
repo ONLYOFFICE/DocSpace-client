@@ -26,7 +26,6 @@
   "AuditTrailNav": "監査証跡",
   "Backup": "バックアップ",
   "BackupCreatedError": "エラーが発生してしまいました。管理者を連絡ください。",
-  "BackupCreatedSuccess": "バックアップ・コピーは正常に作成されました。",
   "BackupFile": "バックアップファイル",
   "BackupFileUploading": "バックアップファイルをサーバーにアップロード中です。しばらくお待ちください。",
   "BackupListWarningText": "リストからアイテムを削除すると、対応するファイルも削除されます。この操作を元に戻すことができません。すべてのファイルを削除するために次のリンクをクリックしてください：",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "このオプションを使用すると、スペースを永久に削除することができます。",
   "PortalDeletionEmailSended": "{{ownerEmail}}（スペース所有者のメールアドレス）に操作確認用のリンクが送信されました。",
   "PortalDeletionHelper": "スペースを使用する予定がなく、永久に削除したい場合は、「削除」ボタンを使ってリクエストを送信してください。なお、削除されたスペースは再活性化することができませんので、ご注意ください。",
-  "PortalNameEmpty": "アカウント名が空です。",
-  "PortalNameIncorrect": "アカウント名が無効です。",
-  "PortalNameLength": "アカウント名は{{minLength}}～{{maxLength}}文字がある必要です。",
   "PortalRenaming": "{{productName}}の名前変更",
   "PortalRenamingDescriptionText": "{{ domain }}の隣に表示されるスペースアドレスを変更します。",
   "PortalRenamingLabelText": "スペースの新しい名前",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "データのインポートをキャンセルしますか？",
   "WantToCancelUpload": "アップロードをキャンセルしますか？",
   "WantToContinue": "ユーザーストレージ容量制限を継続または変更しますか？",
-  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。",
-  "YourCurrentDomain": "現在お使いのドメイン"
+  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。"
 }

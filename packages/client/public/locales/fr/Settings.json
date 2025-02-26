@@ -26,7 +26,6 @@
   "AuditTrailNav": "Piste d'audit ",
   "Backup": "Sauvegarde",
   "BackupCreatedError": "Une erreur s'est produite. S'il vous plaît contactez votre administrateur.",
-  "BackupCreatedSuccess": "La copie de sauvegarde a été créée avec succès.",
   "BackupFile": "Fichier de sauvegarde",
   "BackupFileUploading": "Le fichier de sauvegarde est en cours de téléchargement sur le serveur. Veuillez patienter.",
   "BackupListWarningText": "Si vous supprimez certains éléments de la liste, leurs fichiers correspondants seront également supprimés. Cette action ne peut être annulée. Pour supprimer tous les fichiers, utilisez le lien:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Utilisez cette option pour supprimer définitivement votre espace.",
   "PortalDeletionEmailSended": "Le lien pour confirmer l’opération a été envoyé à {{ownerEmail}} (l’adresse e-mail du propriétaire de l’espace).",
   "PortalDeletionHelper": "Si vous pensez que vous n’utiliserez pas l’espace et que vous souhaitez le supprimer définitivement, soumettez votre demande en utilisant le bouton Supprimer. N’oubliez pas que vous ne pourrez pas réactiver votre espace ni récupérer les informations qui y sont associées.",
-  "PortalNameEmpty": "Nom de compte est vide",
-  "PortalNameIncorrect": "Nom de compte incorrect",
-  "PortalNameLength": "Le nom du compte doit comporter entre {{minLength}} et {{maxLength}} caractères",
   "PortalRenaming": "Changement de nom de {{productName}}",
   "PortalRenamingDescriptionText": "Modifiez l'adresse de l'espace qui apparaît à côté de {{ domain }}.",
   "PortalRenamingLabelText": "Nouveau nom de l’espace",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Voulez-vous annuler l'importation des données?",
   "WantToCancelUpload": "Voulez-vous annuler le téléchargement?",
   "WantToContinue": "Voulez-vous continuer ou modifier le quota de stockage de l'utilisateur ?",
-  "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante.",
-  "YourCurrentDomain": "Votre domaine actuel"
+  "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante."
 }

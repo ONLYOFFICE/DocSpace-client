@@ -26,7 +26,6 @@
   "AuditTrailNav": "Revizijska pot",
   "Backup": "Varnostna kopija",
   "BackupCreatedError": "Prišlo je do napake. Prosim kontaktirajte svojega administratorja.",
-  "BackupCreatedSuccess": "Varnostna kopija je bila uspešno ustvarjena.",
   "BackupFile": "Datoteka varnostne kopije",
   "BackupFileUploading": "Datoteka varnostne kopije se nalaga na strežnik. Prosimo, počakajte.",
   "BackupListWarningText": "Če izbrišete kateri koli predmet iz seznama, bodo izbrisane tudi ustrezne datoteke. Tega dejanja ni mogoče razveljaviti. Če želite izbrisati vse datoteke, uporabite povezavo:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "S to možnostjo trajno izbrišete svoj prostor.",
   "PortalDeletionEmailSended": "Povezava za potrditev operacije je bila poslana na {{ownerEmail}} (elektronski naslov lastnika prostora).",
   "PortalDeletionHelper": "Če menite, da prostora ne boste uporabljali in bi radi svoj prostor trajno izbrisali, oddajte zahtevo z gumbom Izbriši. Upoštevajte, da ne boste mogli znova aktivirati svojega prostora ali obnoviti nobenih informacij, povezanih z njim.",
-  "PortalNameEmpty": "Ime računa je prazno",
-  "PortalNameIncorrect": "Napačno ime računa",
-  "PortalNameLength": "Ime računa mora imeti dolžino od {{minLength}} do {{maxLength}} znakov",
   "PortalRenaming": "Preimenovanje {{productName}}",
   "PortalRenamingDescriptionText": "Spremenite naslov prostora, ki se pojavi poleg {{ domain }}.",
   "PortalRenamingLabelText": "Novo ime prostora",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Ali želite preklicati uvoz podatkov?",
   "WantToCancelUpload": "Ali želite preklicati nalaganje?",
   "WantToContinue": "Ali želite nadaljevati ali spremeniti uporabniško kvoto prostora za shranjevanje?",
-  "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom.",
-  "YourCurrentDomain": "Vaša trenutna domena"
+  "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom."
 }

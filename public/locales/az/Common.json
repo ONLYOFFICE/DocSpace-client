@@ -673,5 +673,10 @@
   "AmazonServiceTip": "Bu seçilə bilən bir xüsusiyyətdir; onu yalnız başqa xidmətin son nöqtəsini sınamaq istəyirsinizsə dəyişdirin.",
   "AmazonForcePathStyleTip": "Doğru olduqda, sorğular həmişə yol tərzi ünvandan istifadə edəcək.",
   "AmazonHTTPTip": "Bu xüsusiyyət doğru olaraq təyin edilərsə, hədəf son nöqtə onu dəstəklədiyi halda, müştəri HTTP protokolundan istifadə etməyə çalışacaq. Deffolt olaraq, bu xüsusiyyət yanlış olaraq təyin edilmişdir.",
-  "AmazonSSETip": "Bu obyekti S3-də saxlayarkən istifadə edilən server tərəfi şifrələmə alqoritmi."
+  "AmazonSSETip": "Bu obyekti S3-də saxlayarkən istifadə edilən server tərəfi şifrələmə alqoritmi.",
+  "YourCurrentDomain": "Cari domen adınız",
+  "PortalNameEmpty": "Hesab adı boşdur",
+  "PortalNameLength": "Hesab adı ən az {{minLength}}, ən çox {{maxLength}} işarədən ibarət ola bilər",
+  "PortalNameIncorrect": "Yanlış hesab adı",
+  "BackupCreatedSuccess": "Ehtiyat nüsxə uğurla yaradıldı."
 }

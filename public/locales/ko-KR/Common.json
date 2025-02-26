@@ -672,5 +672,10 @@
   "AmazonServiceTip": "선택적 속성입니다. 다른 서비스 엔드포인트을 시도하려는 경우에만 변경하세요.",
   "AmazonForcePathStyleTip": "True인 경우 요청은 항상 경로 스타일 주소 지정을 사용합니다 .",
   "AmazonHTTPTip": "이 속성을 True로 설정하면 클라이언트는 대상 엔드포인트가 지원하는 경우 HTTP 프로토콜을 사용하려고 시도합니다. 기본적으로 이 속성은 False로 설정됩니다.",
-  "AmazonSSETip": "이 객체를 S3에 저장할 때 사용되는 서버 측 암호화 알고리즘."
+  "AmazonSSETip": "이 객체를 S3에 저장할 때 사용되는 서버 측 암호화 알고리즘.",
+  "YourCurrentDomain": "내 현재 도메인",
+  "PortalNameEmpty": "계정 이름이 비어 있습니다",
+  "PortalNameLength": "계정 이름은 {{minLength}}~{{maxLength}}글자여야 합니다",
+  "PortalNameIncorrect": "계정 이름이 잘못되었습니다",
+  "BackupCreatedSuccess": "백업 복사본 생성에 성공했습니다."
 }

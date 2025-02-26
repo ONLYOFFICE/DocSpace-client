@@ -26,7 +26,6 @@
   "AuditTrailNav": "Registro di controllo",
   "Backup": "Copia di sicurezza",
   "BackupCreatedError": "Si è verificato un errore. Contatta il tuo amministratore.",
-  "BackupCreatedSuccess": "La copia di backup è stata creata con successo.",
   "BackupFile": "File di backup",
   "BackupFileUploading": "Il file di backup è in fase di caricamento sul server. Attendere prego.",
   "BackupListWarningText": "Se si eliminano tutti gli elementi dall'elenco, i relativi file verranno eliminati. Questa azione non può essere annullata. Per eliminare tutti i file, utilizzare il collegamento:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Usa questa opzione per eliminare definitivamente il tuo {{productName}}.",
   "PortalDeletionEmailSended": "Un link per confermare l’operazione è stato inviato a {{ownerEmail}} (l’indirizzo email del proprietario dello spazio).",
   "PortalDeletionHelper": "Se pensi di non utilizzare lo spazio e desideri eliminarlo definitivamente, invia la tua richiesta utilizzando il pulsante Elimina. Tieni presente che non sarai in grado di riattivare il tuo spazio o recuperare alcuna informazione ad esso associata.",
-  "PortalNameEmpty": "Nome account vuoto",
-  "PortalNameIncorrect": "Nome account errato",
-  "PortalNameLength": "Il nome dell'account deve contenere da {{minLength}} a {{maxLength}} caratteri",
   "PortalRenaming": "Ridenominazione di {{productName}}",
   "PortalRenamingDescriptionText": "Modifica l'indirizzo dello spazio visualizzato accanto a {{ domain }}.",
   "PortalRenamingLabelText": "Nome dello spazio nuovo",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Vuoi annullare l'importazione dei dati?",
   "WantToCancelUpload": "Vuoi annullare il caricamento?",
   "WantToContinue": "Vuoi continuare o modificare la quota di archiviazione degli utenti?",
-  "WithoutEmailHint": "Non hai utenti senza email. Ti preghiamo di procedere al passaggio successivo.",
-  "YourCurrentDomain": "Il tuo dominio attuale"
+  "WithoutEmailHint": "Non hai utenti senza email. Ti preghiamo di procedere al passaggio successivo."
 }

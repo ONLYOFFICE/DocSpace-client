@@ -673,5 +673,10 @@
   "AmazonServiceTip": "Dit is een optionele eigenschap; verander het alleen als u een ander service eindpunt wilt proberen.",
   "AmazonForcePathStyleTip": "Indien true, zullen verzoeken altijd gebruik maken van path stijl adressering.",
   "AmazonHTTPTip": "Als deze eigenschap is ingesteld op waar, probeert de client het HTTP-protocol te gebruiken, indien het doel-eindpunt dit ondersteunt. Standaard is deze eigenschap ingesteld op false.",
-  "AmazonSSETip": "Het versleutelingsalgoritme aan de serverzijde dat wordt gebruikt bij het opslaan van dit object in S3."
+  "AmazonSSETip": "Het versleutelingsalgoritme aan de serverzijde dat wordt gebruikt bij het opslaan van dit object in S3.",
+  "YourCurrentDomain": "Uw huidige domein",
+  "PortalNameEmpty": "Accountnaam is leeg",
+  "PortalNameLength": "De naam van de account moet tussen {{minLength}} en {{maxLength}} tekens lang zijn",
+  "PortalNameIncorrect": "Onjuiste accountnaam",
+  "BackupCreatedSuccess": "De back-up kopie is succesvol aangemaakt."
 }

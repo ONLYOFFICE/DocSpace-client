@@ -675,5 +675,10 @@
   "AmazonServiceTip": "这是可选属性。请仅在您想尝试不同服务端点时更改。",
   "AmazonForcePathStyleTip": "为 True 时，请求将总是使用路径类型地址。",
   "AmazonHTTPTip": "如果此属性设置为 True 且目标端点支持，则客户端将尝试使用 HTTP 协议。默认情况下，此属性将被设置为 False。",
-  "AmazonSSETip": "将此对象存储于 S3 中时使用的服务器端加密算法。"
+  "AmazonSSETip": "将此对象存储于 S3 中时使用的服务器端加密算法。",
+  "YourCurrentDomain": "您当前的域",
+  "PortalNameEmpty": "账户名称为空",
+  "PortalNameLength": "账户名称的长度必须在{{minLength}}至{{maxLength}}个字符之间",
+  "PortalNameIncorrect": "账户名称不正确",
+  "BackupCreatedSuccess": "备份副本已成功创建。"
 }

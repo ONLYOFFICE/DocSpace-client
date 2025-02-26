@@ -26,7 +26,6 @@
   "AuditTrailNav": "Audit Trail",
   "Backup": "Back-up",
   "BackupCreatedError": "Er is een fout opgetreden. Neem contact op met de beheerder.",
-  "BackupCreatedSuccess": "De back-up kopie is succesvol aangemaakt.",
   "BackupFile": "Back-up bestand",
   "BackupFileUploading": "Back-up bestand wordt geüpload naar de server. Een moment geduld.",
   "BackupListWarningText": "Als u items uit de lijst verwijdert, worden hun bijbehorende bestanden ook verwijderd. Deze actie kan niet ongedaan gemaakt worden. Om alle bestanden te verwijderen, gebruik de link:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Gebruik deze optie om uw ruimte definitief te verwijderen.",
   "PortalDeletionEmailSended": "Een link om de actie te bevestigen is verzonden naar {{ownerEmail}} (het e-mailadres van de eigenaar van de ruimte).",
   "PortalDeletionHelper": "Als u denkt dat u de ruimte niet gaat gebruiken en u wilt uw ruimte definitief verwijderen, dien dan uw verzoek in via de knop Verwijderen. Houd er rekening mee dat u uw ruimte niet opnieuw kunt activeren of de informatie die ermee verbonden is kunt herstellen.",
-  "PortalNameEmpty": "Accountnaam is leeg",
-  "PortalNameIncorrect": "Onjuiste accountnaam",
-  "PortalNameLength": "De naam van de account moet tussen {{minLength}} en {{maxLength}} tekens lang zijn",
   "PortalRenaming": "{{productName}} Hernoemen",
   "PortalRenamingDescriptionText": "Wijzig het adres van de ruimte die naast {{ domain }} verschijnt.",
   "PortalRenamingLabelText": "Nieuwe ruimtenaam",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Wilt u het importeren van gegevens annuleren?",
   "WantToCancelUpload": "Wilt u het uploaden annuleren?",
   "WantToContinue": "Wilt u doorgaan of de opslagquota voor gebruikers wijzigen?",
-  "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap.",
-  "YourCurrentDomain": "Uw huidige domein"
+  "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap."
 }

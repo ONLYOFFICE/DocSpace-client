@@ -673,5 +673,10 @@
   "AmazonServiceTip": "To je neobvezna lastnost; spremenite le, če želite poskusiti z drugo končno točko storitve.",
   "AmazonForcePathStyleTip": "Če je postavljeno na pravilno, bodo zahteve vedno uporabljale naslavljanje v slogu poti.",
   "AmazonHTTPTip": "Če je ta lastnost nastavljena na pravilno, poskuša odjemalec uporabiti protokol HTTP, če ga ciljna končna točka podpira. Privzeto je ta lastnost nastavljena na napačno.",
-  "AmazonSSETip": "Algoritem za šifriranje na strani strežnika, uporabljen pri shranjevanju tega predmeta v S3."
+  "AmazonSSETip": "Algoritem za šifriranje na strani strežnika, uporabljen pri shranjevanju tega predmeta v S3.",
+  "YourCurrentDomain": "Vaša trenutna domena",
+  "PortalNameEmpty": "Ime računa je prazno",
+  "PortalNameLength": "Ime računa mora imeti dolžino od {{minLength}} do {{maxLength}} znakov",
+  "PortalNameIncorrect": "Napačno ime računa",
+  "BackupCreatedSuccess": "Varnostna kopija je bila uspešno ustvarjena."
 }

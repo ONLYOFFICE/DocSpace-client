@@ -674,5 +674,10 @@
   "AmazonServiceTip": "Aceasta este o proprietate opţională, modificaţi-o numai dacă doriţi să încercaţi un alt punct final al serviciului.",
   "AmazonForcePathStyleTip": "Cu ajutorul cheilor de autentificare, puteţi conecta servicii de la terţi la spaţiul dumneavoastră.",
   "AmazonHTTPTip": "Dacă această proprietate este setată la true, clientul încearcă să utilizeze protocolul HTTP, în cazul în care punctul final îl acceptă. În mod implicit, această proprietate este setată la false.",
-  "AmazonSSETip": "Algoritmul de criptare pe partea de server utilizat pentru stocarea acestui obiect în S3."
+  "AmazonSSETip": "Algoritmul de criptare pe partea de server utilizat pentru stocarea acestui obiect în S3.",
+  "YourCurrentDomain": "Domeniul dvs. actual",
+  "PortalNameEmpty": "Denumirea contului este necompletată",
+  "PortalNameLength": "Denumirea contului trebuie să conțină de la {{minLength}} până la {{maxLength}} de caractere",
+  "PortalNameIncorrect": "Denumirea contului incorectă",
+  "BackupCreatedSuccess": "O copie de rezervă a fost creată cu succes."
 }

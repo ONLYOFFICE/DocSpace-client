@@ -26,7 +26,6 @@
   "AuditTrailNav": "Audit-Trail",
   "Backup": "Backup",
   "BackupCreatedError": "Ein Fehler ist aufgetreten. Bitte kontaktieren Sie Ihren Administrator.",
-  "BackupCreatedSuccess": "Die Sicherungskopie wurde erfolgreich erstellt.",
   "BackupFile": "Sicherungsdatei",
   "BackupFileUploading": "Die Sicherungsdatei wird auf den Server hochgeladen. Bitte warten.",
   "BackupListWarningText": "Falls Sie einige Elemente aus der Liste löschen, werden die entsprechende Dateien auch gelöscht. Dieser Vorgang nicht rückgängig gemacht werden kann. Um alle Dateien zu löschen, verwenden Sie den Link:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Verwenden Sie diese Option, um Ihr Space endgültig zu löschen.",
   "PortalDeletionEmailSended": "Ein Link zur Bestätigung des Vorgangs wurde an {{ownerEmail}} (die E-Mail-Adresse des Raumbesitzers).",
   "PortalDeletionHelper": "Wenn Sie glauben, dass Sie das Space  nicht nutzen werden, und Ihr Space endgültig löschen möchten, übermitteln Sie Ihren Antrag über die Schaltfläche Löschen. Bitte bedenken Sie, dass Sie Ihr Space nicht reaktivieren oder die damit verbundenen Informationen wiederherstellen können. ",
-  "PortalNameEmpty": "Der Kontoname ist leer",
-  "PortalNameIncorrect": "Inkorrekter Kontoname",
-  "PortalNameLength": "Der Kontoname muss zwischen {{minLength}} und {{maxLength}} Zeichen lang sein",
   "PortalRenaming": "Umbenennung von {{productName}}",
   "PortalRenamingDescriptionText": "Ändern Sie die Raumadresse, die neben {{ domain }} erscheint.",
   "PortalRenamingLabelText": "Neuer Bereichsname",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Möchten Sie den Datenimport abbrechen?",
   "WantToCancelUpload": "Möchten Sie den Upload abbrechen?",
   "WantToContinue": "Möchten Sie fortfahren oder das Benutzer-Speicherlimit ändern?",
-  "WithoutEmailHint": "Es gibt keine Benutzer ohne E-Mails. Bitte fahren Sie mit dem nächsten Schritt fort.",
-  "YourCurrentDomain": "Ihre aktuelle Domain"
+  "WithoutEmailHint": "Es gibt keine Benutzer ohne E-Mails. Bitte fahren Sie mit dem nächsten Schritt fort."
 }

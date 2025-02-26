@@ -26,7 +26,6 @@
   "AuditTrailNav": "Audita žurnāls",
   "Backup": "Dublēšana",
   "BackupCreatedError": "Radās kļūda. Lūdzu, sazinieties ar savu administratoru.",
-  "BackupCreatedSuccess": "Rezerves kopija veiksmīgi izveidota.",
   "BackupFile": "Dublējuma fails",
   "BackupFileUploading": "Dublējuma fails tiek augšupielādēts serverī. Uzgaidiet.",
   "BackupListWarningText": "Ja jūs dzēsīsit jebkādus elementus no saraksta, tiem atbilstošie faili arī tiks dzēsti. Šo darbību nevar atsaukt. Lai dzēstu visus failus, izmantojiet saiti:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Izmantojiet šo opciju, lai neatgriezeniski izdzēstu savu telpu.",
   "PortalDeletionEmailSended": "Saite darbības apstiprināšanai ir nosūtīta uz {{ownerEmail}} (telpas īpašnieka e-pasta adresi).",
   "PortalDeletionHelper": "Ja nevēlaties izmantot telpu un vēlaties to neatgriezeniski izdzēst, iesniedziet pieprasījumu, izmantojot pogu Dzēst. Lūdzu, ņemiet vērā, ka nevarēsiet atkārtoti aktivizēt savu telpu vai atgūt ar to saistīto informāciju.",
-  "PortalNameEmpty": "Konta nosaukums ir tukšs",
-  "PortalNameIncorrect": "Nepareizs konta nosaukums",
-  "PortalNameLength": "Konta nosaukumam ir jābūt no {{minLength}} līdz {{maxLength}} rakstzīmēm garam",
   "PortalRenaming": "{{productName}} pārdēvēšana",
   "PortalRenamingDescriptionText": "Mainiet vietas adresi, kas parādās blakus {{ domain }}.",
   "PortalRenamingLabelText": "Jauns portāla nosaukums",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Vai vēlaties atcelt datu importēšanu?",
   "WantToCancelUpload": "Vai vēlaties atcelt augšupielādi?",
   "WantToContinue": "Vai vēlaties turpināt vai mainīt lietotāja krātuves kvotu?",
-  "WithoutEmailHint": "Jums nav lietotāju bez e-pasta ziņojumiem. Turpiniet ar nākamo darbību.",
-  "YourCurrentDomain": "Jūsu pašreizējais domēns"
+  "WithoutEmailHint": "Jums nav lietotāju bez e-pasta ziņojumiem. Turpiniet ar nākamo darbību."
 }

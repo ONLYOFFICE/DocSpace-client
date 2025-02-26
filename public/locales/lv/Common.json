@@ -673,5 +673,10 @@
   "AmazonServiceTip": "Šis ir neobligāts rekvizīts. Mainiet to tikai tad, ja vēlaties izmēģināt citu pakalpojuma galapunktu.",
   "AmazonForcePathStyleTip": "Kad patiess, pieprasījumi vienmēr izmantos ceļa stila adresāciju",
   "AmazonHTTPTip": "Ja šis rekvizīts ir iestatīts uz patiesu, klients mēģina izmantot http protokolu, ja mērķa galapunkts to atbalsta. Pēc noklusējuma šis rekvizīts ir iestatīts kā aplams",
-  "AmazonSSETip": "Servera puses šifrēšanas algoritms, ko izmanto, glabājot šo objektu S3."
+  "AmazonSSETip": "Servera puses šifrēšanas algoritms, ko izmanto, glabājot šo objektu S3.",
+  "YourCurrentDomain": "Jūsu pašreizējais domēns",
+  "PortalNameEmpty": "Konta nosaukums ir tukšs",
+  "PortalNameLength": "Konta nosaukumam ir jābūt no {{minLength}} līdz {{maxLength}} rakstzīmēm garam",
+  "PortalNameIncorrect": "Nepareizs konta nosaukums",
+  "BackupCreatedSuccess": "Rezerves kopija veiksmīgi izveidota."
 }

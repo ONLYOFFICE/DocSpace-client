@@ -26,7 +26,6 @@
   "AuditTrailNav": "Revizorska staza",
   "Backup": "Rezervna kopija",
   "BackupCreatedError": "Naišla je greška. Molimo kontaktirajte vašeg administratora.",
-  "BackupCreatedSuccess": "Rezervna kopija je uspešno kreirana.",
   "BackupFile": "Rezervna datoteka",
   "BackupFileUploading": "Datoteka rezervne kopije se otprema na server. Molimo sačekajte.",
   "BackupListWarningText": "Ako izbrišete bilo koju stavku sa liste, njihove odgovarajuće datoteke će takođe biti izbrisane. Ova radnja se ne može opozvati. Za brisanje svih datoteka koristite link:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Koristi ovu opciju da obrišeš trajno svoj prostor.",
   "PortalDeletionEmailSended": "Link za potvrdu operacije je poslat na {{ownerEmail}} (email adresa vlasnika prostora).",
   "PortalDeletionHelper": "Ako ne planirate koristiti prostor i želite trajno da ga izbrišete, pošaljite zahtev pritiskom na dugme \"Izbriši\". Imajte na umu da nećete moći ponovo aktivirati svoj prostor niti povratiti bilo koje informacije koje su bile povezane s njim.",
-  "PortalNameEmpty": "Ime naloga je prazno",
-  "PortalNameIncorrect": "Netačno ime naloga",
-  "PortalNameLength": "Ime naloga mora biti između {{minLength}} i {{maxLength}} znakova dugačko",
   "PortalRenaming": "Preimenovanje {{productName}}-a",
   "PortalRenamingDescriptionText": "Promeni adresu prostora koje se nalazi pored {{ domain }}.",
   "PortalRenamingLabelText": "Novo ime prostora",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Da li želite da otkažete uvoz podataka?",
   "WantToCancelUpload": "Da li želite da otkažete otpremanje?",
   "WantToContinue": "Da li želite da nastavite ili da promenite korisničku kvotu za skladište?",
-  "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak.",
-  "YourCurrentDomain": "Vaš trenutni domen"
+  "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak."
 }

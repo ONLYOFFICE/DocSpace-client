@@ -673,5 +673,10 @@
   "AmazonServiceTip": "Jest to właściwość opcjonalna; zmień ją, tylko jeśli chcesz wypróbować inny punkt końcowy usługi.",
   "AmazonForcePathStyleTip": "Gdy ma wartość true, żądania zawsze będą używać adresowania w stylu ścieżki.",
   "AmazonHTTPTip": "Jeśli właściwość ma wartość true, klient próbuje użyć protokołu HTTP, jeżeli docelowy punkt końcowy go obsługuje. Domyślnie dana właściwość ma wartość false.",
-  "AmazonSSETip": "Algorytm szyfrowania po stronie serwera używany podczas przechowywania danego obiektu w S3."
+  "AmazonSSETip": "Algorytm szyfrowania po stronie serwera używany podczas przechowywania danego obiektu w S3.",
+  "YourCurrentDomain": "Twoja obecna domena",
+  "PortalNameEmpty": "Nazwa konta jest pusta",
+  "PortalNameLength": "Nazwa konta musi zawierać od {{minLength}} do {{maxLength}} znaków",
+  "PortalNameIncorrect": "Nieprawidłowa nazwa konta",
+  "BackupCreatedSuccess": "Kopia zapasowa została pomyślnie utworzona."
 }

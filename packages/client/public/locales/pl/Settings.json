@@ -26,7 +26,6 @@
   "AuditTrailNav": "Szlak audytu",
   "Backup": "Kopia zapasowa",
   "BackupCreatedError": "Napotkano błąd. Skontaktuj się ze swoim administratorem.",
-  "BackupCreatedSuccess": "Kopia zapasowa została pomyślnie utworzona.",
   "BackupFile": "Plik kopii zapasowej",
   "BackupFileUploading": "Plik kopii zapasowej jest przesyłany na serwer. Proszę czekać.",
   "BackupListWarningText": "Jeśli usuniesz wszystkie elementy z listy, odpowiadające im pliki zostaną również usunięte. Ta czynność nie może zostać cofnięta. Aby usunąć wszystkie pliki, użyj linku:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Użyj tej opcji, aby trwale usunąć swój obszar.",
   "PortalDeletionEmailSended": "Link potwierdzający działanie został wysłany na adres {{ownerEmail}} (adres e-mail właściciela obszaru roboczego).",
   "PortalDeletionHelper": "Jeśli uważasz, że nie będziesz więcej korzystać z danego obszaru i chcesz go trwale usunąć, prześlij swoją prośbę za pomocą przycisku Usuń. Należy pamiętać, że nie będziesz w stanie ponownie aktywować swojego obszaru ani odzyskać żadnych powiązanych z nim informacji.",
-  "PortalNameEmpty": "Nazwa konta jest pusta",
-  "PortalNameIncorrect": "Nieprawidłowa nazwa konta",
-  "PortalNameLength": "Nazwa konta musi zawierać od {{minLength}} do {{maxLength}} znaków",
   "PortalRenaming": "Zmiana nazwy {{productName}}",
   "PortalRenamingDescriptionText": "Zmień adres obszaru widoczny obok {{ domain }}.",
   "PortalRenamingLabelText": "Nowa nazwa portalu",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Czy chcesz anulować import danych?",
   "WantToCancelUpload": "Czy chcesz anulować przesyłanie?",
   "WantToContinue": "Chcesz kontynuować czy zmienić limit pamięci użytkownika?",
-  "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail Przejdź do kolejnego kroku.",
-  "YourCurrentDomain": "Twoja obecna domena"
+  "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail Przejdź do kolejnego kroku."
 }

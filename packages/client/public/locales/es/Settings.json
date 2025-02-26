@@ -26,7 +26,6 @@
   "AuditTrailNav": "Rastro de auditoría",
   "Backup": "Copia de seguridad de datos",
   "BackupCreatedError": "Se ha producido un error. Por favor, póngase en contacto con su administrador.",
-  "BackupCreatedSuccess": "La copia de seguridad se ha creado con éxito.",
   "BackupFile": "Archivo de copia de seguridad",
   "BackupFileUploading": "El archivo de copia de seguridad se está cargando en el servidor. Espere por favor.",
   "BackupListWarningText": "Si elimina cualquier artículo de la lista, también se eliminarán los archivos correspondientes. No se puede cancelar esta acción. Para eliminar todos los archivos use el enlace:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Utilice esta opción para eliminar su espacio de forma permanente.",
   "PortalDeletionEmailSended": "Se ha enviado un enlace para confirmar la operación a {{ownerEmail}} (la dirección de correo electrónico del propietario del espacio).",
   "PortalDeletionHelper": "Si cree que no va a utilizar el espacio y desea eliminarlo definitivamente, envíe su solicitud utilizando el botón Eliminar. Por favor, tenga en cuenta que no podrá reactivar su espacio ni recuperar ninguna información asociada al mismo.",
-  "PortalNameEmpty": "Nombre de cuenta está vacío",
-  "PortalNameIncorrect": "Nombre de cuenta incorrecto",
-  "PortalNameLength": "El nombre de cuenta debe tener entre {{minLength}} y {{maxLength}} caracteres de longitud",
   "PortalRenaming": "Cambio del nombre de {{productName}}",
   "PortalRenamingDescriptionText": "Cambie la dirección del espacio que aparece junto a {{ domain }}.",
   "PortalRenamingLabelText": "Nuevo nombre del espacio",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "¿Desea cancelar la importación de datos?",
   "WantToCancelUpload": "¿Desea cancelar la carga?",
   "WantToContinue": "¿Desea continuar o cambiar la cuota de almacenamiento del usuario?",
-  "WithoutEmailHint": "No tiene usuarios sin correos electrónicos. Continúe con el siguiente paso.",
-  "YourCurrentDomain": "Su dominio actual"
+  "WithoutEmailHint": "No tiene usuarios sin correos electrónicos. Continúe con el siguiente paso."
 }

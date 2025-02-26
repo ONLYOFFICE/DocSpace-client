@@ -26,7 +26,6 @@
   "AuditTrailNav": "Lanţ de audit",
   "Backup": "Copie de siguranță",
   "BackupCreatedError": "S-a produs o eroare. Vă rugăm să contactați administratorul.",
-  "BackupCreatedSuccess": "O copie de rezervă a fost creată cu succes.",
   "BackupFile": "Fișier de rezervă",
   "BackupFileUploading": "Fișier de rezervă este în curs de încărcare pe server. Vă rugăm așteptați.",
   "BackupListWarningText": "Dacă ștergeți un element din lista, se șterg și toate fișierele respective. Această acțiune nu poate fi anulată. Pentru a șterge toate fișierele folosiți link-ul:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Utilizaţi această opţiune pentru a şterge definitiv spaţiul dvs.",
   "PortalDeletionEmailSended": "Linkul de confirmare a operaţiei a fost trimis către {{ownerEmail}} (adresa email a spaţiului proprietarului).",
   "PortalDeletionHelper": "Dacă credeţi că nu veţi mai folosi spaţiul şi doriţi să îl ştergeţi definitiv, trimiteţi o solicitare folosind butonul Ștergere. Rețineți că nu veţi putea să vă reactivaţi spaţiul sau să recuperaţi informaţiile asociate cu acesta.",
-  "PortalNameEmpty": "Denumirea contului este necompletată",
-  "PortalNameIncorrect": "Denumirea contului incorectă",
-  "PortalNameLength": "Denumirea contului trebuie să conțină de la {{minLength}} până la {{maxLength}} de caractere",
   "PortalRenaming": "Redenumire spațiu {{productName}}",
   "PortalRenamingDescriptionText": "Schimbați adresa spațiului afișată pe lângă de {{ domain }}.",
   "PortalRenamingLabelText": "O nouă denumire de spațiu",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Doriți să anulați importul de date?",
   "WantToCancelUpload": "Doriți să anulați încărcarea?",
   "WantToContinue": "Doriți să continuați sau să modificați cotă de stocare pentru utilizatori?",
-  "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare.",
-  "YourCurrentDomain": "Domeniul dvs. actual"
+  "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare."
 }

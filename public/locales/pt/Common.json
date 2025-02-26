@@ -673,5 +673,10 @@
   "AmazonServiceTip": "Esta é uma propriedade opcional; mude-a apenas se quiser experimentar um ponto de chegada de serviço diferente.",
   "AmazonForcePathStyleTip": "Quando verdadeiro, os pedidos usarão sempre o estilo de endereçamento de caminho.",
   "AmazonHTTPTip": "Se esta propriedade for definida como verdadeira, o cliente tenta utilizar o protocolo HTTP, se o ponto final do alvo o suportar. Por defeito, esta propriedade é definida como falsa.",
-  "AmazonSSETip": "O algoritmo de encriptação do lado do servidor utilizado no armazenamento deste objeto em S3."
+  "AmazonSSETip": "O algoritmo de encriptação do lado do servidor utilizado no armazenamento deste objeto em S3.",
+  "YourCurrentDomain": "O seu domínio atual",
+  "PortalNameEmpty": "Não colocou um nome para a conta",
+  "PortalNameLength": "O nome da conta tem de ter entre {{minLength}} e {{maxLength}} caracteres",
+  "PortalNameIncorrect": "Nome de conta incorreto",
+  "BackupCreatedSuccess": "A cópia de segurança foi criada com sucesso."
 }

@@ -26,7 +26,6 @@
   "AuditTrailNav": "Trilha de auditoria",
   "Backup": "Backup",
   "BackupCreatedError": "Um erro foi encontrado. Entre em contato com o seu administrador.",
-  "BackupCreatedSuccess": "A cópia de backup foi criada com sucesso.",
   "BackupFile": "Arquivo de backup",
   "BackupFileUploading": "O arquivo de backup está sendo carregado no servidor. Por favor, aguarde.",
   "BackupListWarningText": "Se você excluir qualquer item da lista, seus arquivos correspondentes também serão excluídos. Esta ação não pode ser desfeita. Para excluir todos os arquivos use o link:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Use esta opção para excluir seu espaço permanentemente.",
   "PortalDeletionEmailSended": "Um link para confirmar a operação foi enviado para {{ownerEmail}} (o endereço de e-mail do proprietário do espaço).",
   "PortalDeletionHelper": "Se você acha que não usará o espaço e gostaria de excluir seu espaço permanentemente, envie sua solicitação usando o botão Excluir. Por favor, tenha em atenção que não poderá reativar o seu espaço nem recuperar qualquer informação associada ao mesmo.",
-  "PortalNameEmpty": "Nome da conta está vazio",
-  "PortalNameIncorrect": "Nome da conta incorreto",
-  "PortalNameLength": "O nome da conta deve ter entre {{minLength}} e {{maxLength}} caracteres",
   "PortalRenaming": "Renomear {{productName}}",
   "PortalRenamingDescriptionText": "Altere o endereço do espaço que aparece ao lado de {{ domain }}.",
   "PortalRenamingLabelText": "Nome do novo espaço",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Deseja cancelar a importação de dados?",
   "WantToCancelUpload": "Deseja cancelar o upload?",
   "WantToContinue": "Você quer continuar ou alterar a cota de armazenamento do usuário?",
-  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
-  "YourCurrentDomain": "Seu domínio atual"
+  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa."
 }

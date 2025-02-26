@@ -26,7 +26,6 @@
   "AuditTrailNav": "Auditné záznamy",
   "Backup": "Záloha",
   "BackupCreatedError": "Vyskytla sa chyba. Prosím kontaktujte svojho správcu.",
-  "BackupCreatedSuccess": "Kópia zálohy bola úspešne vytvorená.",
   "BackupFile": "Zálohovať súbor",
   "BackupFileUploading": "Záložný súbor sa nahráva na server. Počkajte, prosím.",
   "BackupListWarningText": "Ak odstránite niektoré položky zo zoznamu, odstránia sa aj ich príslušné súbory. Táto akcia sa nedá vrátiť späť. Ak chcete odstrániť všetky súbory, použite odkaz:",
@@ -151,9 +150,6 @@
   "PortalDeletionDescription": "Pomocou tejto možnosti natrvalo vymažete svoj priestor.",
   "PortalDeletionEmailSended": "Odkaz na potvrdenie operácie bol odoslaný na adresu {{ownerEmail}} (e-mailová adresa vlastníka priestoru).",
   "PortalDeletionHelper": "Ak si myslíte, že priestor nebudete využívať a chceli by ste ho natrvalo vymazať, odošlite žiadosť kliknutím na tlačidlo „Vymazať“. Upozorňujeme, že nebudete môcť znova aktivovať svoj priestor ani obnoviť žiadne informácie, ktoré sú s ním spojené.",
-  "PortalNameEmpty": "Názov účtu je prázdny",
-  "PortalNameIncorrect": "Nesprávny názov účtu",
-  "PortalNameLength": "Názov účtu musí mať {{minLength}} až {{maxLength}} znakov",
   "PortalRenaming": "Premenovanie {{productName}}",
   "PortalRenamingDescriptionText": "Zmeňte adresu priestoru, ktorá sa zobrazuje vedľa {{ domain }}.",
   "PortalRenamingLabelText": "Nový názov priestoru",
@@ -256,6 +252,5 @@
   "WantToCancelDataImport": "Chcete zrušiť import údajov?",
   "WantToCancelUpload": "Chcete zrušiť nahrávanie?",
   "WantToContinue": "Chcete pokračovať alebo zmeniť kvótu úložiska používateľa?",
-  "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok.",
-  "YourCurrentDomain": "Vaša aktuálna doména"
+  "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok."
 }

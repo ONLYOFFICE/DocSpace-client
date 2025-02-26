@@ -674,5 +674,10 @@
   "AmazonServiceTip": "Si tratta di una proprietà opzionale; cambiala solo se vuoi provare un endpoint di servizio diverso.",
   "AmazonForcePathStyleTip": "Se vero, le richieste utilizzeranno sempre l’indirizzamento in stile percorso.",
   "AmazonHTTPTip": "Se questa proprietà è impostata su true, il client tenta di utilizzare il protocollo HTTP, se l’endpoint di destinazione lo supporta. Per impostazione predefinita, questa proprietà è impostata su false.",
-  "AmazonSSETip": "L’algoritmo di crittografia lato server utilizzato durante l’archiviazione di questo oggetto in S3."
+  "AmazonSSETip": "L’algoritmo di crittografia lato server utilizzato durante l’archiviazione di questo oggetto in S3.",
+  "YourCurrentDomain": "Il tuo dominio attuale",
+  "PortalNameEmpty": "Nome account vuoto",
+  "PortalNameLength": "Il nome dell'account deve contenere da {{minLength}} a {{maxLength}} caratteri",
+  "PortalNameIncorrect": "Nome account errato",
+  "BackupCreatedSuccess": "La copia di backup è stata creata con successo."
 }

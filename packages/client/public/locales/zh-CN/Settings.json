@@ -26,7 +26,6 @@
   "AuditTrailNav": "审计追踪",
   "Backup": "备份",
   "BackupCreatedError": "遇到错误。请联系您的管理员。",
-  "BackupCreatedSuccess": "备份副本已成功创建。",
   "BackupFile": "备份文件",
   "BackupFileUploading": "正在将备份文件上传到服务器。请稍候。",
   "BackupListWarningText": "若您从列表中删除任何项目，其相应的文件也将被删除。此操作无法撤消。若想删除所有文件，请使用以下链接：",
@@ -152,9 +151,6 @@
   "PortalDeletionDescription": "使用此选项以永久删除您的空间。",
   "PortalDeletionEmailSended": "操作确认链接已发送至 {{ownerEmail}}（空间所有者邮件地址）",
   "PortalDeletionHelper": "如果您不再使用此空间并希望永久删除，请点击删除按钮提交您的请求。注意，您将无法重新激活空间，或恢复与之相关的任何信息。",
-  "PortalNameEmpty": "账户名称为空",
-  "PortalNameIncorrect": "账户名称不正确",
-  "PortalNameLength": "账户名称的长度必须在{{minLength}}至{{maxLength}}个字符之间",
   "PortalRenaming": "{{productName}}重命名",
   "PortalRenamingDescriptionText": "更改显示在 {{ domain }} 旁的空间的地址。",
   "PortalRenamingLabelText": "协作空间的新名称",
@@ -257,6 +253,5 @@
   "WantToCancelDataImport": "您是否要取消数据导入？",
   "WantToCancelUpload": "您是否要取消上传？",
   "WantToContinue": "您希望继续还是更改用户存储配额？",
-  "WithoutEmailHint": "的用户全部拥有电子邮件。请继续执行下一步。",
-  "YourCurrentDomain": "您当前的域"
+  "WithoutEmailHint": "的用户全部拥有电子邮件。请继续执行下一步。"
 }

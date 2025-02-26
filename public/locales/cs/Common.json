@@ -673,5 +673,10 @@
   "AmazonServiceTip": "Toto je nepovinná vlastnost; změňte ji pouze v případě, že chcete vyzkoušet jiný koncový bod služby.",
   "AmazonForcePathStyleTip": "Pokud je hodnota true, budou požadavky vždy používat adresování ve stylu cesty.",
   "AmazonHTTPTip": "Pokud je tato vlastnost nastavena na hodnotu true, klient se pokusí použít protokol HTTP, pokud jej cílový koncový bod podporuje. Ve výchozím nastavení je tato vlastnost nastavena na false.",
-  "AmazonSSETip": "Šifrovací algoritmus na straně serveru použitý při ukládání tohoto objektu do S3."
+  "AmazonSSETip": "Šifrovací algoritmus na straně serveru použitý při ukládání tohoto objektu do S3.",
+  "YourCurrentDomain": "Vaše aktuální doména",
+  "PortalNameEmpty": "Název účtu je prázdný",
+  "PortalNameLength": "Název účtu musí mít délku od {{minLength}} do {{maxLength}} znaků",
+  "PortalNameIncorrect": "Nesprávný název účtu",
+  "BackupCreatedSuccess": "Kopie zálohy byla úspěšně vytvořena."
 }

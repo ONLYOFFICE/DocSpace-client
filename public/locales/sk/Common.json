@@ -673,5 +673,10 @@
   "AmazonServiceTip": "Toto je voliteľná vlastnosť; zmeňte to iba vtedy, ak chcete vyskúšať iný koncový bod služby.",
   "AmazonForcePathStyleTip": "Pri nastavení na hodnotu true budú požiadavky vždy používať path-štýle adresovanie.",
   "AmazonHTTPTip": "Ak je táto vlastnosť nastavená na hodnotu true, klient sa pokúsi použiť protokol HTTP, ak to podporuje cieľový koncový bod. Štandardne je táto vlastnosť nastavená na hodnotu false.",
-  "AmazonSSETip": "Algoritmus šifrovania na strane servera použitý pri ukladaní tohto objektu v S3."
+  "AmazonSSETip": "Algoritmus šifrovania na strane servera použitý pri ukladaní tohto objektu v S3.",
+  "YourCurrentDomain": "Vaša aktuálna doména",
+  "PortalNameEmpty": "Názov účtu je prázdny",
+  "PortalNameLength": "Názov účtu musí mať {{minLength}} až {{maxLength}} znakov",
+  "PortalNameIncorrect": "Nesprávny názov účtu",
+  "BackupCreatedSuccess": "Kópia zálohy bola úspešne vytvorená."
 }

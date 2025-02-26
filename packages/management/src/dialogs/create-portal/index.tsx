@@ -47,6 +47,9 @@ import {
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { validatePortalName } from "@docspace/shared/utils/common";
 
+import type { TDomainValidator } from "@docspace/shared/api/settings/types";
+import type { TUser } from "@docspace/shared/api/people/types";
+
 import { useStores } from "@/hooks/useStores";
 
 const StyledModal = styled(ModalDialog)`
@@ -81,7 +84,17 @@ const StyledModal = styled(ModalDialog)`
 `;
 
 export const CreatePortalDialog = observer(
-  ({ tenantAlias, baseDomain, domainValidator, user }) => {
+  ({
+    tenantAlias,
+    baseDomain,
+    domainValidator,
+    user,
+  }: {
+    tenantAlias: string;
+    baseDomain: string;
+    domainValidator: TDomainValidator;
+    user: TUser;
+  }) => {
     const [visit, setVisit] = React.useState<boolean>(false);
     const [restrictAccess, setRestrictAccess] = React.useState<boolean>(false);
     const [registerError, setRegisterError] = React.useState<null | string>(
@@ -102,7 +115,7 @@ export const CreatePortalDialog = observer(
 
     const [name, setName] = React.useState<string>("");
 
-    const onHandleName = (e) => {
+    const onHandleName = (e: React.ChangeEvent<HTMLInputElement>) => {
       setName(toLower(e.target.value));
       if (registerError) setRegisterError(null);
     };
@@ -134,7 +147,7 @@ export const CreatePortalDialog = observer(
         setIsLoading(true);
         await createNewPortal(data)
           .then(async (data) => {
-            const { tenant } = data;
+            const { tenant } = data as TNewPortalResponse;
             if (visit) {
               const portalUrl = `${protocol}//${tenant?.domain}/`;
 

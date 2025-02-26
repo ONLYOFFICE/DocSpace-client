@@ -114,8 +114,8 @@ export default async function RootLayout({
             }}
           >
             <Toast isSSR />
-            <ManagementDialogs settings={settings} user={user} />
-            <LayoutWrapper portals={portals} isCommunity={openSource}>
+            <ManagementDialogs settings={settings!} user={user!} />
+            <LayoutWrapper portals={portals!} isCommunity={openSource}>
               {children}
             </LayoutWrapper>
           </Providers>

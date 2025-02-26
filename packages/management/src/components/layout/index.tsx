@@ -27,7 +27,6 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
 
 import SocketHelper from "@docspace/shared/utils/socket";
 
@@ -35,6 +34,8 @@ import { StyledLayout } from "./layout.styled";
 import { Article } from "../article";
 import { Section } from "../section";
 import { Header } from "../header";
+
+import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 
 import useAppState from "@/hooks/useAppState";
 
@@ -44,11 +45,9 @@ export const LayoutWrapper = ({
   isCommunity,
 }: {
   children: React.ReactNode;
-  portals: unknown;
+  portals: TGetAllPortals;
   isCommunity: boolean;
 }) => {
-  const { i18n } = useTranslation();
-
   const { settings } = useAppState();
 
   const socketUrl = settings?.socketUrl;
@@ -60,11 +59,10 @@ export const LayoutWrapper = ({
   }, [socketUrl]);
 
   return (
-    <StyledLayout style={{ direction: i18n.dir() }}>
+    <StyledLayout>
       <Header />
       <Article isCommunity={isCommunity} />
       <Section portals={portals}>{children}</Section>
     </StyledLayout>
   );
 };
-

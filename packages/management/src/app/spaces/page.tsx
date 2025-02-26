@@ -58,7 +58,8 @@ const SpacesPage = async () => {
         tenantAlias={settings.tenantAlias}
       />
     );
-  return <ConfigurationSpaces domainValidator={domainValidator} />;
+  return <ConfigurationSpaces domainValidator={domainValidator!} />;
 };
 
 export default SpacesPage;
+

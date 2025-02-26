@@ -36,6 +36,8 @@ import { Heading } from "@docspace/shared/components/heading";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
+import type { TGetAllPortals } from "@docspace/shared/api/management/types";
+
 import { getHeaderByPathname } from "@/lib";
 import { Bar } from "@/components/bar";
 import {
@@ -49,7 +51,7 @@ export const Section = ({
   portals,
 }: {
   children: React.ReactNode;
-  portals: unknown;
+  portals: TGetAllPortals;
 }) => {
   const pathname = usePathname();
   const router = useRouter();
@@ -90,3 +92,4 @@ export const Section = ({
     </StyledSection>
   );
 };
+

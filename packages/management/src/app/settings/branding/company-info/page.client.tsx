@@ -41,6 +41,7 @@ import { CompanyInfo } from "@docspace/shared/pages/Branding/CompanyInfo";
 import type { ICompanySettings } from "@docspace/shared/pages/Branding/CompanyInfo/CompanyInfo.types";
 import type { IBuildInfo } from "@docspace/shared/components/about-dialog/About.types";
 import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
+import type { TPortals } from "@docspace/shared/api/management/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { getIsCustomizationAvailable, getIsSettingsPaid } from "@/lib";
@@ -55,7 +56,7 @@ export const CompanyInfoPage = ({
   isEnterprise,
   logoText,
 }: {
-  portals?: string[];
+  portals?: TPortals[];
   quota?: TPaymentQuota;
   companyInfoSettingsData: ICompanySettings;
   standalone: boolean;

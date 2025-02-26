@@ -28,36 +28,44 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+
+import type { TSettings } from "@docspace/shared/api/settings/types";
+import type { TUser } from "@docspace/shared/api/people/types";
+
 import { useStores } from "@/hooks/useStores";
+
 import { ChangeDomainDialog } from "./change-domain";
 import { CreatePortalDialog } from "./create-portal";
 import { DeletePortalDialog } from "./delete-portal";
 import { ConnectDialog } from "./connect-dialog";
 
-export const ManagementDialogs = observer(({ settings, user }) => {
-  const { spacesStore } = useStores();
-  const {
-    domainDialogVisible,
-    createPortalDialogVisible,
-    deletePortalDialogVisible,
-    connectDialogVisible,
-  } = spacesStore;
+export const ManagementDialogs = observer(
+  ({ settings, user }: { settings: TSettings; user: TUser }) => {
+    const { spacesStore } = useStores();
+    const {
+      domainDialogVisible,
+      createPortalDialogVisible,
+      deletePortalDialogVisible,
+      connectDialogVisible,
+    } = spacesStore;
 
-  const { tenantAlias, baseDomain, domainValidator } = settings;
+    const { tenantAlias, baseDomain, domainValidator } = settings;
 
-  return (
-    <>
-      {domainDialogVisible && <ChangeDomainDialog />}
-      {createPortalDialogVisible && (
-        <CreatePortalDialog
-          tenantAlias={tenantAlias}
-          baseDomain={baseDomain}
-          domainValidator={domainValidator}
-          user={user}
-        />
-      )}
-      {deletePortalDialogVisible && <DeletePortalDialog />}
-      {connectDialogVisible && <ConnectDialog />}
-    </>
-  );
-});
+    return (
+      <>
+        {domainDialogVisible && <ChangeDomainDialog />}
+        {createPortalDialogVisible && (
+          <CreatePortalDialog
+            tenantAlias={tenantAlias}
+            baseDomain={baseDomain}
+            domainValidator={domainValidator}
+            user={user}
+          />
+        )}
+        {deletePortalDialogVisible && <DeletePortalDialog />}
+        {connectDialogVisible && <ConnectDialog />}
+      </>
+    );
+  },
+);
+

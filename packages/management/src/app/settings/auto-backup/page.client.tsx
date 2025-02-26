@@ -49,6 +49,7 @@ import { deleteThirdParty as deleteThirdPartyApi } from "@docspace/shared/api/fi
 import type { TError } from "@docspace/shared/utils/axiosClient";
 
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
+import type { TPortals } from "@docspace/shared/api/management/types";
 
 import { useBackup } from "@/hooks/useBackup";
 import { TStorageBackup } from "@docspace/shared/api/settings/types";
@@ -63,7 +64,7 @@ interface AutoBackupProps {
   backupScheduleResponse: TBackupSchedule | undefined;
   backupStorageResponse: TStorageBackup[];
   newStorageRegions: TStorageRegion[];
-  portals: string[];
+  portals: TPortals[];
   features: TPaymentFeature[];
   filesSettings: TFilesSettings;
   foldersTree: TFolder[];
@@ -327,3 +328,4 @@ const AutoBackup = ({
 };
 
 export default observer(AutoBackup);
+

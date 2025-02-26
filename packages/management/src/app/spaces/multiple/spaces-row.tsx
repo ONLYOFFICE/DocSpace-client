@@ -30,7 +30,7 @@ import DefaultLogoUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
 import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
-import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
+import ChangeQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
 
 import { useState, useEffect } from "react";
@@ -41,11 +41,21 @@ import { ReactSVG } from "react-svg";
 import { ChangeStorageQuotaDialog } from "@docspace/shared/dialogs/change-storage-quota";
 import { toastr } from "@docspace/shared/components/toast";
 
+import type { TPortals } from "@docspace/shared/api/management/types";
+
 import { useStores } from "@/hooks/useStores";
 import { RowContent } from "./row-content";
 import { StyledSpaceRow } from "./multiple.styled";
 
-export const SpacesRow = ({ item, tenantAlias, portals }) => {
+export const SpacesRow = ({
+  item,
+  tenantAlias,
+  portals,
+}: {
+  item: TPortals;
+  tenantAlias: string;
+  portals: TPortals[];
+}) => {
   const { t } = useTranslation(["Common", "Management"]);
   const router = useRouter();
   const { spacesStore } = useStores();
@@ -56,7 +66,7 @@ export const SpacesRow = ({ item, tenantAlias, portals }) => {
   const { setDeletePortalDialogVisible, setCurrentPortal } = spacesStore;
 
   const logoElement = (
-    <ReactSVG id={item.key} src={DefaultLogoUrl} className="logo-icon" />
+    <ReactSVG id={item.domain} src={DefaultLogoUrl} className="logo-icon" />
   );
 
   const onDelete = () => {
@@ -65,6 +75,18 @@ export const SpacesRow = ({ item, tenantAlias, portals }) => {
     }
     setCurrentPortal(item);
     setDeletePortalDialogVisible(true);
+  };
+
+  const onChangeQuota = () => {
+    if (isDisableQuota) setIsDisableQuota(false);
+    setIsVisibleDialog(true);
+    return undefined;
+  };
+
+  const onDisableQuota = () => {
+    setIsDisableQuota(true);
+    setIsVisibleDialog(true);
+    return undefined;
   };
 
   useEffect(() => {
@@ -104,23 +126,18 @@ export const SpacesRow = ({ item, tenantAlias, portals }) => {
       {
         label: t("Common:ManageStorageQuota"),
         key: "change_quota",
-        icon: ChangQuotaReactSvgUrl,
-        onClick: () => {
-          setIsVisibleDialog(true);
-          if (isDisableQuota) setIsDisableQuota(false);
-        },
+        icon: ChangeQuotaReactSvgUrl,
+        onClick: onChangeQuota,
       },
       {
         key: "disable_quota",
         label: t("Common:DisableQuota"),
         icon: DisableQuotaReactSvgUrl,
-        onClick: () => {
-          setIsVisibleDialog(true);
-          setIsDisableQuota(true);
-        },
+        onClick: onDisableQuota,
       },
     );
   }
+
   const updateFunction = async () => {
     router.refresh();
   };
@@ -135,7 +152,7 @@ export const SpacesRow = ({ item, tenantAlias, portals }) => {
         isDisableQuota={isDisableQuota}
       />
       <StyledSpaceRow
-        key={item.id}
+        key={item.domain}
         element={logoElement}
         contextOptions={contextOptionsProps}
       >

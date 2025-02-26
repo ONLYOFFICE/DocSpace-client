@@ -49,6 +49,7 @@ import type {
 } from "@docspace/shared/api/portal/types";
 import type { TStorageBackup } from "@docspace/shared/api/settings/types";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
+import type { TPortals } from "@docspace/shared/api/management/types";
 
 import useAppState from "@/hooks/useAppState";
 import { useBackup } from "@/hooks/useBackup";
@@ -63,7 +64,7 @@ interface DataBackupProps {
   backupScheduleResponse: TBackupSchedule | undefined;
   backupStorageResponse: TStorageBackup[];
   newStorageRegions: TStorageRegion[];
-  portals: string[];
+  portals: TPortals[];
   filesSettings: TFilesSettings;
   foldersTree: TFolder[];
   portalTariff: TPortalTariff | undefined;
@@ -253,3 +254,4 @@ const DataBackup = ({
 };
 
 export default observer(DataBackup);
+

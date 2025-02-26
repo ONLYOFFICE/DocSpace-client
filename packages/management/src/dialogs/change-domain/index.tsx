@@ -76,7 +76,7 @@ export const ChangeDomainDialog = observer(() => {
 
   const [domain, setDomain] = React.useState("");
 
-  const onHandleDomain = (e) => {
+  const onHandleDomain = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (domainNameError) setDomainNameError(null);
     setDomain(e.target.value);
   };
@@ -95,7 +95,7 @@ export const ChangeDomainDialog = observer(() => {
       await setDomainName(domain);
       onClose();
     } catch (err) {
-      toastr.error(err);
+      toastr.error(err!);
     } finally {
       setIsLoading(false);
       router.refresh();
@@ -140,7 +140,7 @@ export const ChangeDomainDialog = observer(() => {
                   fontSize="12px"
                   fontWeight="400"
                 >
-                  {err}
+                  {err.toString()}
                 </Text>
               ))}
           </div>

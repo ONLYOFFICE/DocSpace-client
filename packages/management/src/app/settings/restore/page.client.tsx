@@ -56,6 +56,7 @@ import type {
 import type { TError } from "@docspace/shared/utils/axiosClient";
 import type { TStorageBackup } from "@docspace/shared/api/settings/types";
 import type { Nullable, ThirdPartyAccountType } from "@docspace/shared/types";
+import type { TPortals } from "@docspace/shared/api/management/types";
 
 import { useBackup } from "@/hooks/useBackup";
 import useAppState from "@/hooks/useAppState";
@@ -68,7 +69,7 @@ export interface RestoreProps {
   backupScheduleResponse: TBackupSchedule | undefined;
   backupStorageResponse: TStorageBackup[];
   newStorageRegions: TStorageRegion[];
-  portals: string[];
+  portals: TPortals[];
   features: TPaymentFeature[];
   filesSettings: TFilesSettings;
   backupProgress: TBackupProgress | TError | undefined;
@@ -350,3 +351,4 @@ const Restore = ({
 };
 
 export default observer(Restore);
+

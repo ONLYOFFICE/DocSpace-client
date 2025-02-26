@@ -57,10 +57,10 @@ export const DeletePortalDialog = observer(() => {
 
   const { t } = useTranslation(["Management", "Common"]);
 
-  const { owner, domain, wizardSettings } = currentPortal;
+  const { owner, domain, wizardSettings } = currentPortal || {};
 
-  const { email } = owner;
-  const isWizardCompleted = wizardSettings.completed;
+  const { email } = owner || {};
+  const isWizardCompleted = wizardSettings?.completed || false;
 
   const onClose = () => setDeletePortalDialogVisible(false);
 
@@ -89,7 +89,7 @@ export const DeletePortalDialog = observer(() => {
         );
       }
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e!);
     } finally {
       setIsLoading(false);
       onClose();

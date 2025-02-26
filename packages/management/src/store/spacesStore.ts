@@ -30,19 +30,22 @@ import {
   setDomainName,
 } from "@docspace/shared/api/management";
 
+import type { TPortals } from "@docspace/shared/api/management/types";
+import type { Nullable } from "@docspace/shared/types";
+
 export class SpacesStore {
   createPortalDialogVisible = false;
   deletePortalDialogVisible = false;
   domainDialogVisible = false;
   connectDialogVisible = false;
 
-  currentPortal = false;
+  currentPortal: Nullable<TPortals> = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setCurrentPortal = (portal) => {
+  setCurrentPortal = (portal: TPortals) => {
     this.currentPortal = portal;
   };
 

@@ -31,37 +31,37 @@ declare module "*.ico?url" {
   export default content;
 }
 
-declare module "*.svg?url" {
-  const content: string;
-  export default content;
-}
-
-type TPortals = {
-  created: string;
-  domain: string;
-  industry: number;
-  language: string;
-  name: string;
-  ownerId: string;
-  portalName: string;
-  status: string;
-  tenantId: number;
-  owner: TOwner;
-  timeZoneName: string;
-  quotaUsage: TQuotaUsage;
-  customQuota: number;
-  usedSize: number;
-};
-
-type TNewPortalData = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  portalName: string;
-};
-
 declare module "styled-components" {
   export interface DefaultTheme extends TTheme {
     currentColorScheme?: TColorScheme;
   }
 }
+
+declare global {
+  declare module "*.svg?url" {
+    const content: string;
+    export default content;
+  }
+
+  type TDocSpaceConfig = {
+    management?: {
+      checkDomain?: boolean;
+    };
+  };
+
+  type TNewPortalData = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    portalName: string;
+  };
+
+  type TNewPortalResponse = {
+    tenant: TPortals;
+  };
+
+  interface Window {
+    DocSpaceConfig?: TDocSpaceConfig;
+  }
+}
+

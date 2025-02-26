@@ -44,7 +44,11 @@ async function Page() {
     getPaymentSettings(),
   ]);
 
-  const { helpLink } = settings;
+  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+  if (!settings || !quota || !portalTariff || !paymentSettings)
+    redirect(`${getBaseUrl()}/login`);
+
+  const { helpLink, logoText } = settings;
   const { trial } = quota;
   const { enterprise, developer, openSource } = portalTariff;
   const { salesEmail } = paymentSettings;
@@ -63,6 +67,7 @@ async function Page() {
       helpUrl={helpUrl}
       salesEmail={salesEmail}
       dataBackupUrl={dataBackupUrl}
+      logoText={logoText}
     />
   );
 }

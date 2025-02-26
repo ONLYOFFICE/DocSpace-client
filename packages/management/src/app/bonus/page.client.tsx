@@ -27,6 +27,7 @@
 "use client";
 
 import { Bonus } from "@docspace/shared/pages/Payments/Bonus";
+import { IBonusProps } from "@docspace/shared/pages/Payments/Bonus/Bonus.types";
 
 const BonusPage = ({
   isEnterprise,
@@ -36,7 +37,8 @@ const BonusPage = ({
   helpUrl,
   salesEmail,
   dataBackupUrl,
-}) => {
+  logoText,
+}: IBonusProps) => {
   return (
     <Bonus
       isEnterprise={isEnterprise}
@@ -46,6 +48,7 @@ const BonusPage = ({
       helpUrl={helpUrl}
       salesEmail={salesEmail}
       dataBackupUrl={dataBackupUrl}
+      logoText={logoText}
     />
   );
 };

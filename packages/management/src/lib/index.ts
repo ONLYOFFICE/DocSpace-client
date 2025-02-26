@@ -27,6 +27,8 @@
 import moment from "moment-timezone";
 import { TTranslation } from "@docspace/shared/types";
 import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
+import type { TPortals } from "@docspace/shared/api/management/types";
+import type { TDefaultWhiteLabel } from "@/types";
 
 export const getMinifyTitle = (title: string) => {
   const titleArr = title.split(" ");
@@ -69,17 +71,18 @@ export const getHeaderByPathname = (pathname: string, t: TTranslation) => {
 
 export const getIsSettingsPaid = (
   isCustomizationAvailable: boolean,
-  portals?: string[],
+  portals?: TPortals[],
 ) => {
   return portals?.length === 1 ? false : isCustomizationAvailable;
 };
 
-export const getIsCustomizationAvailable = (quota: TPaymentQuota) => {
-  return quota.features.find((obj) => obj.id === "customization")?.value;
+export const getIsCustomizationAvailable = (quota?: TPaymentQuota) => {
+  return quota?.features.find((obj) => obj.id === "customization")
+    ?.value as boolean;
 };
 
 export const getIsDefaultWhiteLabel = (
-  whiteLabelIsDefault: Record<"name" | "default", string | boolean>[],
+  whiteLabelIsDefault: TDefaultWhiteLabel,
 ) => {
   return whiteLabelIsDefault.map((item) => item?.default).includes(false);
 };

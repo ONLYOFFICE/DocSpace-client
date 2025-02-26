@@ -35,10 +35,18 @@ import { Text } from "@docspace/shared/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { DeviceType } from "@docspace/shared/enums";
 
+import type { TPortals } from "@docspace/shared/api/management/types";
+
 import useDeviceType from "@/hooks/useDeviceType";
 import { StyledRowContent } from "./multiple.styled";
 
-export const RowContent = ({ item, tenantAlias }) => {
+export const RowContent = ({
+  item,
+  tenantAlias,
+}: {
+  item: TPortals;
+  tenantAlias: string;
+}) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
   const { currentDeviceType } = useDeviceType();
   const theme = useTheme();

@@ -94,7 +94,7 @@ const PaymentsPage = ({
     setIsLicenseDateExpired(getIsLicenseDateExpired(dueDate, window.timezone));
     setPaymentDate(getPaymentDate(dueDate, window.timezone));
     setTrialDaysLeft(getDaysLeft(dueDate));
-  }, []);
+  }, [dueDate]);
 
   return (
     <StandalonePage

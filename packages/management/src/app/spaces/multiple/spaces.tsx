@@ -24,17 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TPortals } from "@docspace/shared/api/management/types";
+
 import { SpacesRow } from "./spaces-row";
 import { StyledRowContainer } from "./multiple.styled";
 
 interface IProps {
   portals: TPortals[];
-  tenantAlias?: string;
+  tenantAlias: string;
 }
 
 export const Spaces = ({ portals, tenantAlias }: IProps) => {
   return (
-    <StyledRowContainer>
+    <StyledRowContainer useReactWindow={false}>
       {portals.map((item) => (
         <SpacesRow
           key={item.tenantId}
@@ -46,3 +48,4 @@ export const Spaces = ({ portals, tenantAlias }: IProps) => {
     </StyledRowContainer>
   );
 };
+

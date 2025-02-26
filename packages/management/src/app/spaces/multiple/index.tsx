@@ -26,6 +26,8 @@
 
 "use client";
 
+import type { TPortals } from "@docspace/shared/api/management/types";
+
 import { Header } from "./header";
 import { Spaces } from "./spaces";
 import { DomainSettings } from "./domain-settings";
@@ -34,7 +36,7 @@ import { StyledWrapper } from "./multiple.styled";
 interface IProps {
   baseDomain: string;
   portals: TPortals[];
-  tenantAlias?: string;
+  tenantAlias: string;
 }
 
 export const MultipleSpaces = ({

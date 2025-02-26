@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import toLower from "lodash/toLower";
 
@@ -44,23 +43,29 @@ import {
   setPortalName,
   checkDomain,
 } from "@docspace/shared/api/management";
+import type { TDomainValidator } from "@docspace/shared/api/settings/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 
 import { StyledBody } from "./configuration.styled";
 
-export const Body = ({ domainValidator }) => {
+type CheckDomainResponse = {
+  value: boolean;
+};
+
+export const Body = ({
+  domainValidator,
+}: {
+  domainValidator: TDomainValidator;
+}) => {
   const { t } = useTranslation(["Management", "Common"]);
-  const router = useRouter();
   const { currentDeviceType } = useDeviceType();
 
   const [domain, setDomain] = useState<string>("");
   const [name, setName] = useState<string>("");
-  const [portalNameError, setPortalNameError] = useState<string>("");
+  const [portalNameError, setPortalNameError] = useState<string | null>("");
   const [checkDomainError, setCheckDomainError] = useState<string>("");
-  const [domainNameError, setDomainNameError] = useState<null | Array<object>>(
-    null,
-  );
+  const [domainNameError, setDomainNameError] = useState<string[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const domainFieldLabel = (
@@ -87,10 +92,11 @@ export const Body = ({ domainValidator }) => {
   const onConnectClick = async () => {
     if (window?.DocSpaceConfig?.management?.checkDomain) {
       setIsLoading(true);
-      const checkDomainResult = await checkDomain(`${name}.${domain}`).finally(
+      const checkDomainResult = (await checkDomain(`${name}.${domain}`).finally(
         () => setIsLoading(false),
-      );
-      const isValidDomain = checkDomainResult?.value;
+      )) as CheckDomainResponse;
+
+      const isValidDomain = checkDomainResult.value;
 
       if (!isValidDomain) {
         return setCheckDomainError(t("DomainNotFound"));
@@ -123,7 +129,10 @@ export const Body = ({ domainValidator }) => {
     }
   };
 
-  const domainErrorMessage = domainNameError ? domainNameError[0] : "";
+  const domainErrorMessage = (
+    domainNameError ? domainNameError[0] : ""
+  ) as string;
+
   return (
     <StyledBody>
       <FieldContainer

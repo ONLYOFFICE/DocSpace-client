@@ -40,6 +40,7 @@ import { useResponsiveNavigation } from "@docspace/shared/hooks/useResponsiveSSR
 import { AdditionalResources } from "@docspace/shared/pages/Branding/AdditionalResources";
 import type { TAdditionalResources } from "@docspace/shared/api/settings/types";
 import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
+import type { TPortals } from "@docspace/shared/api/management/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { getIsSettingsPaid, getIsCustomizationAvailable } from "@/lib";
@@ -49,7 +50,7 @@ export const AdditionalResourcesPage = ({
   quota,
   additionalResourcesData,
 }: {
-  portals?: string[];
+  portals?: TPortals[];
   quota?: TPaymentQuota;
   additionalResourcesData: TAdditionalResources;
 }) => {

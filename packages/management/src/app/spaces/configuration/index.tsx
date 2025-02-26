@@ -52,11 +52,17 @@
 
 "use client";
 
+import { TDomainValidator } from "@docspace/shared/api/settings/types";
+
 import { Header } from "./header";
 import { Body } from "./body";
 import { StyledWrapper } from "./configuration.styled";
 
-export const ConfigurationSpaces = ({ domainValidator }) => {
+export const ConfigurationSpaces = ({
+  domainValidator,
+}: {
+  domainValidator: TDomainValidator;
+}) => {
   return (
     <StyledWrapper>
       <Header />

@@ -36,6 +36,7 @@ import type { ICompanySettings } from "@docspace/shared/pages/Branding/CompanyIn
 import type { IBuildInfo } from "@docspace/shared/components/about-dialog/About.types";
 import type { TAdditionalResources } from "@docspace/shared/api/settings/types";
 import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
+import type { TPortals } from "@docspace/shared/api/management/types";
 
 import { getIsCustomizationAvailable, getIsSettingsPaid } from "@/lib";
 import useDeviceType from "@/hooks/useDeviceType";
@@ -69,7 +70,7 @@ const BrandingPage = ({
   showAbout: boolean;
   isDefaultWhiteLabel: boolean;
   standalone: boolean;
-  portals?: string[];
+  portals?: TPortals[];
   quota?: TPaymentQuota;
   additionalResources: TAdditionalResources;
   companyInfo: ICompanySettings;

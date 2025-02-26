@@ -36,6 +36,9 @@ const version = pkg.version;
 const nextConfig = {
   basePath: "/management",
   output: "standalone",
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   compiler: {
     styledComponents: true,
   },

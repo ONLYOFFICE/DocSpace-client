@@ -63,3 +63,5 @@ export interface ErrorResponse {
     message: string;
   };
 }
+
+export type TDefaultWhiteLabel = Record<"default" | "name", string | boolean>[];

@@ -33,7 +33,7 @@ import { getMinifyTitle } from "@/lib";
 import { StyledArticleHeader } from "./article.styled";
 
 export const ArticleHeader = observer(() => {
-  const { t } = useTranslation("Common");
+  const { t } = useTranslation(["Common"]);
   const {
     articleStore: { showText },
   } = useStores();

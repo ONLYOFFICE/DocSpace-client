@@ -900,6 +900,15 @@ class UploadDataStore {
   convertUploadedFiles = (t, createNewIfExist = true) => {
     this.files = [...this.files, ...this.tempConversionFiles];
 
+    if (!this.uploaded) {
+      const notUploadedFiles = this.tempConversionFiles.filter(
+        (f) => !f.inAction,
+      );
+      this.parallelUploading(notUploadedFiles);
+    }
+
+    this.tempConversionFiles = [];
+
     if (this.uploaded) {
       const newUploadData = {
         filesSize: this.convertFilesSize,
@@ -909,17 +918,9 @@ class UploadDataStore {
         // converted: false,
       };
 
-      this.tempConversionFiles = [];
-
       this.setUploadData(newUploadData);
       this.startUploadFiles(t, createNewIfExist);
-
-      return;
     }
-
-    this.parallelUploading(this.tempConversionFiles);
-
-    this.tempConversionFiles = [];
   };
 
   cancelUploadAction = (items) => {

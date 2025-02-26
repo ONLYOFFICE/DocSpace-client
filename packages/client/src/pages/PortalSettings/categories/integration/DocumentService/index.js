@@ -256,7 +256,7 @@ const DocumentService = ({
               })}
             </Text>
             <Checkbox
-              id={"isDisabledCertificat"}
+              id="isDisabledCertificat"
               label={t("Settings:DocumentServiceDisableCertificat")}
               className="checkbox"
               isChecked={isDisabledCertificat}
@@ -319,7 +319,7 @@ const DocumentService = ({
                   autoComplete="off"
                   tabIndex={3}
                   scale
-                  iconButtonClassName={"icon-button"}
+                  iconButtonClassName="icon-button"
                   value={authHeader}
                   onChange={onChangeAuthHeader}
                   isDisabled={isSaveLoading || isResetLoading}
@@ -341,7 +341,7 @@ const DocumentService = ({
                   autoComplete="off"
                   tabIndex={4}
                   scale
-                  iconButtonClassName={"icon-button"}
+                  iconButtonClassName="icon-button"
                   value={internalUrl}
                   onChange={onChangeInternalUrl}
                   placeholder={EDITOR_URL_PLACEHOLDER}
@@ -367,7 +367,7 @@ const DocumentService = ({
                   autoComplete="off"
                   tabIndex={5}
                   scale
-                  iconButtonClassName={"icon-button"}
+                  iconButtonClassName="icon-button"
                   value={portalUrl}
                   onChange={onChangePortalUrl}
                   placeholder={DNS_PLACEHOLDER}

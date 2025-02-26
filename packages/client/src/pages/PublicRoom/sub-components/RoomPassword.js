@@ -28,7 +28,7 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import PublicRoomPasswordForm from "@docspace/shared/forms/PublicRoomPasswordForm";
+import { PublicRoomPasswordForm } from "@docspace/shared/pages/PublicRoom";
 
 const RoomPassword = (props) => {
   const { t, roomKey, setRoomData, roomTitle, gotoFolder } = props;

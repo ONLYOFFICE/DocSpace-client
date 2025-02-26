@@ -27,27 +27,30 @@
  */
 
 import React, { useEffect, useRef, useState } from "react";
-import { Text } from "@docspace/shared/components/text";
-import { PasswordInput } from "@docspace/shared/components/password-input";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-// import { createPasswordHash } from "@docspace/shared/utils/common";
-import { frameCallCommand } from "@docspace/shared/utils/common";
-import { toastr } from "@docspace/shared/components/toast";
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
-import { ValidationStatus } from "@docspace/shared/enums";
 
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
+
+import { Text } from "../../../components/text";
+import { PasswordInput } from "../../../components/password-input";
+import { Button, ButtonSize } from "../../../components/button";
+import { FieldContainer } from "../../../components/field-container";
+// import { createPasswordHash } from "@docspace/shared/utils/common";
+import { frameCallCommand } from "../../../utils/common";
+import { toastr } from "../../../components/toast";
+import { FormWrapper } from "../../../components/form-wrapper";
+import PortalLogo from "../../../components/portal-logo/PortalLogo";
+import { ValidationStatus } from "../../../enums";
+
+import type { TTranslation } from "../../../types";
+import { validatePublicRoomPassword } from "../../../api/rooms";
+import { InputSize } from "../../../components/text-input";
+import type { TPublicRoomPassword } from "../../../api/rooms/types";
+
 import {
   StyledBody,
   StyledContent,
   StyledPage,
 } from "./PublicRoomPasswordForm.styled";
-import type { TTranslation } from "../../types";
-import { validatePublicRoomPassword } from "../../api/rooms";
-import { InputSize } from "../../components/text-input";
-import type { TPublicRoomPassword } from "../../api/rooms/types";
 
 type PublicRoomPasswordProps = {
   t: TTranslation;
@@ -58,8 +61,6 @@ type PublicRoomPasswordProps = {
 
 const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
   const { t, roomKey, roomTitle, onSuccessValidationCallback } = props;
-
-  console.log("render");
 
   const [password, setPassword] = useState("");
   const [passwordValid, setPasswordValid] = useState(true);

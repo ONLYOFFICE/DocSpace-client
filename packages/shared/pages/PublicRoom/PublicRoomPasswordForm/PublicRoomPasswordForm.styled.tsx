@@ -30,7 +30,7 @@ import styled from "styled-components";
 
 import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 
-import { mobile, tablet } from "../../utils";
+import { mobile, tablet } from "../../../utils";
 
 export const StyledPage = styled.div`
   box-sizing: border-box;

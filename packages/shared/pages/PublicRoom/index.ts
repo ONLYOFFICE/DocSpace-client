@@ -25,35 +25,6 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
+import PublicRoomPasswordForm from "./PublicRoomPasswordForm";
 
-"use client";
-
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { useRouter, useSearchParams } from "next/navigation";
-import { PublicRoomPasswordForm } from "@docspace/shared/pages/PublicRoom";
-
-export default function PublicRoomPasswordPageClient({
-  roomTitle,
-}: {
-  roomTitle: string;
-}) {
-  const { t } = useTranslation("Common");
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const roomKey = searchParams.get("key");
-
-  const onSuccessValidation = () => {
-    return router.refresh();
-  };
-
-  return (
-    <PublicRoomPasswordForm
-      t={t}
-      roomKey={roomKey || ""}
-      roomTitle={roomTitle}
-      onSuccessValidationCallback={onSuccessValidation}
-    />
-  );
-}
+export { PublicRoomPasswordForm };

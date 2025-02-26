@@ -1228,7 +1228,7 @@ export function setTenantQuotaSettings(data) {
     data,
   };
 
-  return request(options);
+  return request(options) as TPaymentQuota;
 }
 
 export function getLdapStatus() {

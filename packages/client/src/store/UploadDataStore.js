@@ -184,12 +184,6 @@ class UploadDataStore {
   };
 
   setUploadPanelVisible = (uploadPanelVisible) => {
-    if (
-      this.primaryProgressDataStore.disableUploadPanelOpen &&
-      uploadPanelVisible
-    )
-      return;
-
     this.uploadPanelVisible = uploadPanelVisible;
   };
 

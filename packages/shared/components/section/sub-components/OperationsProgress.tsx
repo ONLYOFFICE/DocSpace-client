@@ -201,7 +201,10 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   }, []);
 
   useLayoutEffect(() => {
-    if (isOpenDropdown && !isSeveralOperations) setIsOpenDropdown(false);
+    if (isOpenDropdown && !isSeveralOperations) {
+      setIsOpenDropdown(false);
+      setIsHovered(false);
+    }
   }, [isOpenDropdown, isSeveralOperations]);
 
   const getIcons = () => {

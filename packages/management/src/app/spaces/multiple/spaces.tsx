@@ -34,7 +34,7 @@ interface IProps {
 
 export const Spaces = ({ portals, tenantAlias }: IProps) => {
   return (
-    <StyledRowContainer useReactWindow={false}>
+    <StyledRowContainer>
       {portals.map((item) => (
         <SpacesRow
           key={item.tenantId}

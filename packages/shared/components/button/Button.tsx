@@ -49,6 +49,7 @@ export const Button = React.forwardRef<
     testId = "button",
     type,
     id,
+    minWidth,
     ...rest
   } = props;
 

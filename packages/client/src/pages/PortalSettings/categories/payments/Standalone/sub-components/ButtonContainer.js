@@ -31,9 +31,10 @@ import { Button } from "@docspace/shared/components/button";
 
 import { StyledButtonComponent } from "../StyledComponent";
 
-const ButtonContainer = ({ t, buyUrl }) => {
+const ButtonContainer = ({ t, buyUrl, siteDomain }) => {
   const onClickBuy = () => {
-    window.open(buyUrl, "_blank");
+    const url = buyUrl || siteDomain;
+    url && window.open(url, "_blank");
   };
   return (
     <StyledButtonComponent>
@@ -47,10 +48,11 @@ const ButtonContainer = ({ t, buyUrl }) => {
   );
 };
 
-export default inject(({ paymentStore }) => {
+export default inject(({ paymentStore, settingsStore }) => {
   const { buyUrl } = paymentStore;
-
+  const { siteDomain } = settingsStore;
   return {
     buyUrl,
+    siteDomain,
   };
 })(observer(ButtonContainer));

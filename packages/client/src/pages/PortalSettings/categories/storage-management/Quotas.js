@@ -77,22 +77,18 @@ const QuotasComponent = (props) => {
         ) : null}
       </div>
       <Text className="quotas_description">
+        {t("Settings:QuotasDescription")}{" "}
         {storageManagementUrl ? (
-          <>
-            {t("Settings:QuotasDescription")}{" "}
-            <ColorTheme
-              themeId={ThemeId.Link}
-              tag="a"
-              isHovered={false}
-              target="_blank"
-              href={storageManagementUrl}
-            >
-              {t("Common:HelpCenter")}
-            </ColorTheme>
-          </>
-        ) : (
-          t("Settings:QuotasDescription")
-        )}
+          <ColorTheme
+            themeId={ThemeId.Link}
+            tag="a"
+            isHovered={false}
+            target="_blank"
+            href={storageManagementUrl}
+          >
+            {t("Common:HelpCenter")}
+          </ColorTheme>
+        ) : null}
       </Text>
 
       <QuotaPerItemsComponent isStatisticsAvailable={isStatisticsAvailable} />

@@ -67,6 +67,9 @@ async function Page() {
     getPortalCultures(),
   ]);
 
+  const commonResources = objectSettings?.externalResources.common.entries;
+  const forumLinkUrl = objectSettings?.externalResources.forum.domain;
+
   return (
     <ColorTheme themeId={ThemeId.LinkForgotPassword}>
       <>
@@ -78,17 +81,12 @@ async function Page() {
             isRequiredLicense={isRequiredLicense}
             portalCultures={portalCultures}
             portalTimeZones={portalTimeZones}
-            licenseUrl={
-              objectSettings?.externalResources.common?.entries.license
-            }
+            licenseUrl={commonResources.license}
             culture={objectSettings?.culture}
-            forumLinkUrl={objectSettings?.externalResources.forum.domain}
+            forumLinkUrl={forumLinkUrl}
             wizardToken={objectSettings?.wizardToken}
             passwordHash={objectSettings?.passwordHash}
-            documentationEmail={
-              objectSettings?.externalResources.common?.entries
-                .documentationemail
-            }
+            documentationEmail={commonResources.documentationemail}
             isAmi={objectSettings?.isAmi}
           />
         </FormWrapper>

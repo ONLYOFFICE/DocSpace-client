@@ -71,7 +71,6 @@ export const AdditionalResourcesPage = ({
     redirectUrl: "/settings/branding",
     currentLocation: "additional-resources",
     deviceType: currentDeviceType,
-    router: router,
     pathname: pathname,
   });
 

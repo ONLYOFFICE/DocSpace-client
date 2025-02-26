@@ -80,7 +80,6 @@ export const CompanyInfoPage = ({
     redirectUrl: "/settings/branding",
     currentLocation: "company-info",
     deviceType: currentDeviceType,
-    router: router,
     pathname: pathname,
   });
 

@@ -93,7 +93,6 @@ export const WhiteLabelPage = ({
     redirectUrl: "/settings/branding",
     currentLocation: "white-label",
     deviceType: currentDeviceType,
-    router: router,
     pathname: pathname,
   });
 

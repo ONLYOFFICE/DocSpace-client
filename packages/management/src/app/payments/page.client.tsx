@@ -60,7 +60,10 @@ const PaymentsPage = ({
   const [trialDaysLeft, setTrialDaysLeft] = useState(0);
   const [isLicenseCorrect, setIsLicenseCorrect] = useState(false);
 
-  const setPaymentsLicense = async (confirmKey: string, data: FormData) => {
+  const setPaymentsLicense = async (
+    confirmKey: string | null,
+    data: FormData,
+  ) => {
     try {
       const message = await setLicense(confirmKey, data);
       setIsLicenseCorrect(true);

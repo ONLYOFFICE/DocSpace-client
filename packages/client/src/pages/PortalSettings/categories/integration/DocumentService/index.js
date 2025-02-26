@@ -40,10 +40,10 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import * as Styled from "./index.styled";
 
-const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
+const URL_REGEX =
+  /^(?:https?:\/\/(?:[^\/]+\/)?|^\/)[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
 const EDITOR_URL_PLACEHOLDER = `${window.location.protocol}//<editors-dns-name>/`;
-const AUTHORIZATION_HEADER_INITIAL_STATE = "AuthorizationJwt";
 
 const DocumentService = ({
   getDocumentServiceLocation,
@@ -57,15 +57,16 @@ const DocumentService = ({
   const [isSaveLoading, setSaveIsLoading] = useState(false);
   const [isResetLoading, setResetIsLoading] = useState(false);
 
-  const [portalUrl, setPortalUrl] = useState("");
-  const [portalUrlIsValid, setPortalUrlIsValid] = useState(true);
-  const [jwtSecret, setJwtSecret] = useState("");
-  const [isDisabledCertificat, setIsDisabledCertificat] = useState(false);
-  const [jwtHeader, setJwtHeader] = useState(
-    AUTHORIZATION_HEADER_INITIAL_STATE,
-  );
   const [docServiceUrl, setDocServiceUrl] = useState("");
   const [docServiceUrlIsValid, setDocServiceUrlIsValid] = useState(true);
+
+  const [isDisabledCertificat, setIsDisabledCertificat] = useState(false);
+
+  const [secretKey, setSecretKey] = useState("");
+  const [authHeader, setAuthHeader] = useState("");
+
+  const [portalUrl, setPortalUrl] = useState("");
+  const [portalUrlIsValid, setPortalUrlIsValid] = useState(true);
   const [internalUrl, setInternalUrl] = useState("");
   const [internalUrlIsValid, setInternalUrlIsValid] = useState(true);
 
@@ -73,6 +74,8 @@ const DocumentService = ({
   const [isShowAdvancedSettings, setIsShowAdvancedSettings] = useState(false);
 
   const [initPortalUrl, setInitPortalUrl] = useState("");
+  const [initSecretKey, setInitSecretKey] = useState("");
+  const [initAuthHeader, setInitAuthHeader] = useState("");
   const [initDocServiceUrl, setInitDocServiceUrl] = useState("");
   const [initInternalUrl, setInitInternalUrl] = useState("");
 
@@ -82,14 +85,17 @@ const DocumentService = ({
     getDocumentServiceLocation()
       .then((result) => {
         setIsDefaultSettings(result?.isDefault || false);
-
         setPortalUrl(result?.docServicePortalUrl);
+        setSecretKey(result?.docServiceSignatureSecret);
+        setAuthHeader(result?.docServiceSignatureHeader);
         setInternalUrl(result?.docServiceUrlInternal);
         setDocServiceUrl(result?.docServiceUrl);
 
         setInitPortalUrl(result?.docServicePortalUrl);
-        setInitInternalUrl(result?.docServiceUrlInternal);
+        setInitSecretKey(result?.docServiceSignatureSecret);
+        setInitAuthHeader(result?.docServiceSignatureHeader);
         setInitDocServiceUrl(result?.docServiceUrl);
+        setInitInternalUrl(result?.docServiceUrlInternal);
       })
       .catch((error) => toastr.error(error))
       .finally(() => setIsLoading(false));
@@ -105,16 +111,16 @@ const DocumentService = ({
     setIsDisabledCertificat((prevState) => !prevState);
   };
 
-  const onChangeJwtSecret = (e) => {
-    setJwtSecret(e.target.value);
+  const onChangeAuthHeader = (e) => {
+    setAuthHeader(e.target.value);
+  };
+
+  const onChangeSecretKey = (e) => {
+    setSecretKey(e.target.value);
   };
 
   const onChangeIsShowAdvancedSettings = () => {
     setIsShowAdvancedSettings((prevState) => !prevState);
-  };
-
-  const onChangeJwtHeader = (e) => {
-    setJwtHeader(e.target.value);
   };
 
   const onChangeInternalUrl = (e) => {
@@ -135,9 +141,9 @@ const DocumentService = ({
 
     changeDocumentServiceLocation(
       docServiceUrl,
-      jwtSecret,
+      secretKey,
       isDisabledCertificat,
-      jwtHeader,
+      authHeader ?? initAuthHeader,
       internalUrl,
       portalUrl,
     )
@@ -147,6 +153,8 @@ const DocumentService = ({
         setIsDefaultSettings(result?.isDefault || false);
 
         setPortalUrl(result?.docServicePortalUrl);
+
+        setAuthHeader(result?.docServiceSignatureHeader);
 
         setInternalUrl(result?.docServiceUrlInternal);
         setDocServiceUrl(result?.docServiceUrl);
@@ -183,12 +191,15 @@ const DocumentService = ({
       .finally(() => setResetIsLoading(false));
   };
 
-  const isFormEmpty = !docServiceUrl && !internalUrl && !portalUrl;
+  const isFormEmpty =
+    !docServiceUrl && !internalUrl && !portalUrl && !authHeader && !secretKey;
   const allInputsValid =
     docServiceUrlIsValid && internalUrlIsValid && portalUrlIsValid;
 
   const isValuesInit =
     docServiceUrl == initDocServiceUrl &&
+    secretKey == initSecretKey &&
+    authHeader == initAuthHeader &&
     internalUrl == initInternalUrl &&
     portalUrl == initPortalUrl;
 
@@ -256,25 +267,26 @@ const DocumentService = ({
           <div className="input-wrapper">
             <div className="group-label">
               <Label
-                htmlFor="jwtSecret"
-                text={t("Settings:DocumentServiceJwtSecret")}
+                htmlFor="secretKey"
+                text={t("Settings:DocumentServiceSecretKey")}
               />
               <Text className="label-subtitle">
-                {`(${t("Settings:DocumentServiceJwtSecretSubtitle")})`}
+                {`(${t("Settings:DocumentServiceSecretKeySubtitle")})`}
               </Text>
             </div>
             <PasswordInput
-              id="jwtSecret"
+              id="secretKey"
               type="password"
               simpleView
               tabIndex={2}
               scale
-              inputValue={jwtSecret}
-              onChange={onChangeJwtSecret}
+              inputValue={secretKey}
+              onChange={onChangeSecretKey}
               isDisabled={isSaveLoading || isResetLoading}
+              className="password-input"
             />
             <Text className="subtitle">
-              {t("Settings:DocumentServiceJwtSecretSubtitle")}
+              {t("Settings:DocumentServiceSecretKeySubtitle")}
             </Text>
           </div>
         </div>
@@ -298,22 +310,22 @@ const DocumentService = ({
             <>
               <div className="input-wrapper">
                 <Label
-                  htmlFor="jwtHeader"
-                  text={t("Settings:DocumentServiceJwtHeader")}
+                  htmlFor="authHeader"
+                  text={t("Settings:DocumentServiceAuthHeader")}
                 />
                 <InputBlock
-                  id="jwtHeader"
+                  id="authHeader"
                   type="text"
                   autoComplete="off"
                   tabIndex={3}
                   scale
                   iconButtonClassName={"icon-button"}
-                  value={jwtHeader}
-                  onChange={onChangeJwtHeader}
+                  value={authHeader}
+                  onChange={onChangeAuthHeader}
                   isDisabled={isSaveLoading || isResetLoading}
                 />
                 <Text className="subtitle">
-                  {t("Settings:DocumentServiceJwtHeaderSubtitle")}
+                  {t("Settings:DocumentServiceAuthHeaderSubtitle")}
                 </Text>
               </div>
               <div className="input-wrapper">
@@ -376,7 +388,7 @@ const DocumentService = ({
           onSaveClick={onSubmit}
           onCancelClick={onReset}
           saveButtonLabel={t("Common:SaveButton")}
-          cancelButtonLabel={t("Common:Reset")}
+          cancelButtonLabel={t("Settings:DefaultSettings")}
           reminderText={t("Settings:YouHaveUnsavedChanges")}
           saveButtonDisabled={saveButtonDisabled}
           disableRestoreToDefault={

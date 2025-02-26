@@ -212,6 +212,7 @@
   "RoomTemplate": "Room template",
   "RoomTemplateDescription": "Use this template to quickly create a new room.",
   "RoomUnpinned": "Room unpinned",
+  "RecentlyOpenedViaLink": "Recently opened via the link",
   "SaveAsTemplate": "Save as template",
   "SaveAsTemplateToast": "Room template <1>«{{title}}»</1> saved",
   "SendByEmail": "Send by email",

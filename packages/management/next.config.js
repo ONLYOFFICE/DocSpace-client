@@ -43,13 +43,6 @@ const nextConfig = {
     // This could be anything, using the latest git hash
     return `${pkg.name}-${pkg.version}-${new Date().getTime()}`;
   },
-  typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
-    ignoreBuildErrors: true,
-  },
   logging: {
     fetches: {
       fullUrl: true,

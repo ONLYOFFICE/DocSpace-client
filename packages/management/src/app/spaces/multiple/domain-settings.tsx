@@ -63,7 +63,7 @@ export const DomainSettings = observer(({ baseDomain }: IProps) => {
       <FieldContainer
         className="field-container"
         isVertical
-        labelText={"Your current domain"}
+        labelText={t("Common:YourCurrentDomain")}
         labelVisible
       >
         <TextInput

@@ -56,6 +56,20 @@ async function handlePublicRoomValidation(
         { request: { headers: requestHeaders } },
       );
     }
+
+    if (validation.status === ValidationStatus.Invalid) {
+      return NextResponse.rewrite(
+        new URL(`/sdk/public-room/error/invalid-link`, request.url),
+        { request: { headers: requestHeaders } },
+      );
+    }
+
+    if (validation.status === ValidationStatus.Expired) {
+      return NextResponse.rewrite(
+        new URL(`/sdk/public-room/error/expired-link`, request.url),
+        { request: { headers: requestHeaders } },
+      );
+    }
   }
 
   return null;

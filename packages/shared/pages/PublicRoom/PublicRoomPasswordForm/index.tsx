@@ -26,6 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
 
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";

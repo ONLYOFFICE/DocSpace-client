@@ -26,14 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { headers } from "next/headers";
+import { PublicRoomError } from "@docspace/shared/pages/PublicRoom";
 
-import PublicRoomPasswordPageClient from "@/app/(forms)/public-room/password/page.client";
-import { PUBLIC_ROOM_TITLE_HEADER } from "@/utils/constants";
-
-export default async function PublicRoomPasswordPage() {
-  const hdrs = headers();
-  const roomTitle = hdrs.get(PUBLIC_ROOM_TITLE_HEADER);
-
-  return <PublicRoomPasswordPageClient roomTitle={roomTitle || ""} />;
+export default async function InvalidLinkPage() {
+  return <PublicRoomError isInvalid />;
 }

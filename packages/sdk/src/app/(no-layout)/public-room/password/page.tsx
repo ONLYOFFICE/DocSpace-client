@@ -26,28 +26,14 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-"use client";
+import { headers } from "next/headers";
 
-import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import PublicRoomPasswordPageClient from "@/app/(no-layout)/public-room/password/page.client";
+import { PUBLIC_ROOM_TITLE_HEADER } from "@/utils/constants";
 
-import { frameCallCommand } from "../../../utils/common";
-import ErrorContainer from "../../../components/error-container/ErrorContainer";
+export default async function PublicRoomPasswordPage() {
+  const hdrs = headers();
+  const roomTitle = hdrs.get(PUBLIC_ROOM_TITLE_HEADER);
 
-const PublicRoomError = ({ isInvalid }: { isInvalid?: boolean }) => {
-  const { t, ready } = useTranslation(["Errors", "Common"]);
-  const headerText = isInvalid
-    ? t("Common:InvalidLink")
-    : t("Common:ExpiredLink");
-  const bodyText = isInvalid ? t("LinkDoesNotExist") : t("LinkHasExpired");
-
-  useEffect(() => {
-    frameCallCommand("setIsLoaded");
-  }, []);
-
-  return ready ? (
-    <ErrorContainer headerText={headerText} bodyText={bodyText} />
-  ) : null;
-};
-
-export default PublicRoomError;
+  return <PublicRoomPasswordPageClient roomTitle={roomTitle || ""} />;
+}

@@ -1377,9 +1377,9 @@ export async function getDocumentServiceLocation(version?: number | string) {
 
 export async function changeDocumentServiceLocation(
   docServiceUrl: string,
-  jwtSecret: string,
+  secretKey: string,
   isDisabledCertificat: boolean,
-  jwtHeader: string,
+  authHeader: string,
   internalUrl: string,
   portalUrl: string,
 ) {
@@ -1390,6 +1390,8 @@ export async function changeDocumentServiceLocation(
       DocServiceUrl: docServiceUrl,
       DocServiceUrlInternal: internalUrl,
       DocServiceUrlPortal: portalUrl,
+      DocServiceSignatureSecret: secretKey,
+      DocServiceSignatureHeader: authHeader,
     },
   })) as TDocServiceLocation;
 

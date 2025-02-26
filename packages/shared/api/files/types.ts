@@ -385,6 +385,8 @@ export type TDocServiceLocation = {
   docServiceUrl: string;
   docServiceUrlInternal: string;
   docServicePortalUrl: string;
+  docServiceSignatureHeader: string;
+  docServiceSignatureSecret: string;
   isDefault: boolean;
 };
 

@@ -876,17 +876,32 @@ class UploadDataStore {
     }
   };
 
+  parallelUploading = (notUploadedFiles, t, createNewIfExist) => {
+    const { maxUploadFilesCount } = this.filesSettingsStore;
+
+    const countFiles =
+      notUploadedFiles.length >= maxUploadFilesCount
+        ? maxUploadFilesCount
+        : notUploadedFiles.length;
+
+    for (let i = 0; i < countFiles; i++) {
+      if (this.currentUploadNumber <= maxUploadFilesCount) {
+        const fileIndex = this.files.findIndex(
+          (f) => f.uniqueId === notUploadedFiles[i].uniqueId,
+        );
+        if (fileIndex !== -1) {
+          this.currentUploadNumber += 1;
+          this.startSessionFunc(fileIndex, t, createNewIfExist);
+        }
+      }
+    }
+  };
+
   convertUploadedFiles = (t, createNewIfExist = true) => {
-    //  this.files = [...this.files, ...this.tempConversionFiles];
-    this.uploadedFilesHistory = [
-      ...this.uploadedFilesHistory,
-      ...this.tempConversionFiles,
-    ];
-    this.tempConversionFiles = [];
+    this.files = [...this.files, ...this.tempConversionFiles];
 
     if (this.uploaded) {
       const newUploadData = {
-        files: this.files,
         filesSize: this.convertFilesSize,
         uploadedFiles: this.uploadedFiles,
         percent: this.percent,
@@ -894,14 +909,23 @@ class UploadDataStore {
         // converted: false,
       };
 
+      this.tempConversionFiles = [];
+
       this.setUploadData(newUploadData);
       this.startUploadFiles(t, createNewIfExist);
+
+      return;
     }
+
+    this.parallelUploading(this.tempConversionFiles);
+
+    this.tempConversionFiles = [];
   };
 
   cancelUploadAction = (items) => {
     const files =
-      items ?? this.dialogsStore.conflictResolveDialogData.newUploadData.files;
+      items ??
+      this.dialogsStore.conflictResolveDialogData.newUploadData.allNewFiles;
 
     let i = files.length;
 
@@ -952,13 +976,14 @@ class UploadDataStore {
 
     if (!onlyConversion) {
       this.handleFilesUpload(newUploadData, t, createNewIfExist);
-    } else {
-      newUploadData.uploaded = true;
-      this.uploaded = true;
-      this.asyncUploadObj = {};
-
-      this.setUploadData(newUploadData);
     }
+    // else {
+    //   newUploadData.uploaded = true;
+
+    //   this.asyncUploadObj = {};
+
+    //   this.setUploadData(newUploadData);
+    // }
 
     if (this.tempConversionFiles.length) {
       if (this.filesSettingsStore.hideConfirmConvertSave) {
@@ -1005,20 +1030,20 @@ class UploadDataStore {
     const toFolderId = folderId || this.selectedFolderStore.id;
 
     if (this.uploaded) {
-      this.files = [...this.uploadedFilesHistory];
+      this.files = this.files.filter((f) => f.action !== "upload");
       this.filesSize = 0;
       this.uploadToFolder = null;
       this.percent = 0;
     }
     if (this.uploaded && this.converted) {
-      this.files = [...this.uploadedFilesHistory];
+      this.files = [];
       this.filesToConversion = [];
       this.uploadedFilesSize = 0;
       this.asyncUploadObj = {};
     }
 
-    const newFiles = [];
-    const allFiles = this.files;
+    const newFiles = []; // this.files;
+    const allFiles = [];
     let filesSize = 0;
     let convertSize = 0;
 
@@ -1057,10 +1082,12 @@ class UploadDataStore {
       convertSize += file.size;
     });
 
-    const countUploadingFiles = removeDuplicate([
+    const filesWithoutConversion = removeDuplicate([
       ...this.files,
       ...newFiles,
-    ]).length;
+    ]);
+
+    const countUploadingFiles = filesWithoutConversion.length;
     const countConversionFiles = this.tempConversionFiles.length;
 
     if (countUploadingFiles && !countConversionFiles) {
@@ -1071,17 +1098,18 @@ class UploadDataStore {
     this.convertFilesSize = convertSize;
 
     const clearArray = removeDuplicate([
-      ...newFiles,
+      ...allFiles,
       ...this.uploadedFilesHistory,
     ]);
 
     this.uploadedFilesHistory = clearArray;
 
     const newUploadData = {
-      // filesWithoutConversion: removeDuplicate([...this.files, ...newFiles]),
+      // filesWithoutConversion,
       newFilesWithoutConversion: newFiles,
+      allNewFiles: allFiles,
       conversionFiles: removeDuplicate(this.tempConversionFiles),
-      files: removeDuplicate(allFiles),
+      files: [...filesWithoutConversion],
       filesSize: filesSize + this.filesSize,
       uploadedFiles: this.uploadedFiles,
       percent: this.percent,
@@ -1241,6 +1269,10 @@ class UploadDataStore {
         this.files[indexOfFile].fileId = fileId;
         this.files[indexOfFile].fileInfo = fileInfo;
 
+        this.uploadedFilesHistory[fileIndex].action = "uploaded";
+        this.uploadedFilesHistory[fileIndex].fileId = fileId;
+        this.uploadedFilesHistory[fileIndex].fileInfo = fileInfo;
+
         this.currentUploadNumber -= 1;
 
         const nextFileIndex = this.files.findIndex((f) => !f.inAction);
@@ -1266,11 +1298,6 @@ class UploadDataStore {
 
     if (!currentFile.fileId) return;
 
-    const historyIndex = this.uploadedFilesHistory.findIndex(
-      (f) => f.uniqueId === currentFile.uniqueId,
-    );
-    const historyCurrentFile = this.uploadedFilesHistory[historyIndex];
-
     currentFile.path = path;
 
     const { needConvert } = currentFile;
@@ -1283,11 +1310,8 @@ class UploadDataStore {
       runInAction(() => {
         currentFile.action = "convert";
 
-        if (historyIndex > -1) {
-          this.uploadedFilesHistory[historyIndex] = {
-            ...historyCurrentFile,
-            ...currentFile,
-          };
+        if (fileIndex > -1) {
+          this.uploadedFilesHistory[fileIndex].action = "convert";
         }
       });
 
@@ -1298,13 +1322,6 @@ class UploadDataStore {
         this.filesToConversion.push(currentFile);
       }
       return resolve();
-    }
-
-    if (historyIndex > -1) {
-      this.uploadedFilesHistory[historyIndex] = {
-        ...historyCurrentFile,
-        ...currentFile,
-      };
     }
 
     if (currentFile.action === "uploaded") {
@@ -1541,24 +1558,7 @@ class UploadDataStore {
 
     const notUploadedFiles = this.files.filter((f) => !f.inAction);
 
-    const { maxUploadFilesCount } = this.filesSettingsStore;
-
-    const countFiles =
-      notUploadedFiles.length >= maxUploadFilesCount
-        ? maxUploadFilesCount
-        : notUploadedFiles.length;
-
-    for (let i = 0; i < countFiles; i++) {
-      if (this.currentUploadNumber <= maxUploadFilesCount) {
-        const fileIndex = this.files.findIndex(
-          (f) => f.uniqueId === notUploadedFiles[i].uniqueId,
-        );
-        if (fileIndex !== -1) {
-          this.currentUploadNumber += 1;
-          this.startSessionFunc(fileIndex, t, createNewIfExist);
-        }
-      }
-    }
+    this.parallelUploading(notUploadedFiles, t, createNewIfExist);
   };
 
   startSessionFunc = (indexOfFile, t, createNewIfExist = true) => {

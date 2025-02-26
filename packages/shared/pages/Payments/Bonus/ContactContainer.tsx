@@ -94,41 +94,43 @@ export const ContactContainer = ({
         <div className="payments_contact">
           <Text className="text" fontWeight={600}>
             <Trans
+              t={t}
               i18nKey="UpgradeToProBannerInformationPurchase"
               ns="Common"
-              t={t}
-            >
-              Ask purchase questions at
-              <Link
-                fontWeight="600"
-                target={LinkTarget.blank}
-                tag="a"
-                href={`mailto:${salesEmail}`}
-                className="link"
-              >
-                {{ email: salesEmail }}
-              </Link>
-            </Trans>
+              values={{ email: salesEmail }}
+              components={{
+                1: (
+                  <Link
+                    fontWeight="600"
+                    target={LinkTarget.blank}
+                    tag="a"
+                    href={`mailto:${salesEmail}`}
+                    className="link"
+                  />
+                ),
+              }}
+            />
           </Text>
         </div>
         <div className="payments_contact">
           <Text className="text" fontWeight={600}>
             <Trans
+              t={t}
               i18nKey="UpgradeToProBannerInformationSupport"
               ns="Common"
-              t={t}
-            >
-              Get tech assistance
-              <Link
-                target={LinkTarget.blank}
-                tag="a"
-                fontWeight="600"
-                href={helpUrl}
-                className="link"
-              >
-                {{ helpUrl }}
-              </Link>
-            </Trans>
+              values={{ helpUrl }}
+              components={{
+                1: (
+                  <Link
+                    target={LinkTarget.blank}
+                    tag="a"
+                    fontWeight="600"
+                    href={helpUrl}
+                    className="link"
+                  />
+                ),
+              }}
+            />
           </Text>
         </div>
       </StyledContactComponent>

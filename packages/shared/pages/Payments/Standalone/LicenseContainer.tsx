@@ -35,7 +35,7 @@ import { Button, ButtonSize } from "../../../components/button";
 import { StyledButtonComponent } from "./Payments.styled";
 import { ILicenseProps } from "./Payments.types";
 
-let timerId;
+let timerId: ReturnType<typeof setTimeout> | null = null;
 
 export const LicenseContainer = ({
   setPaymentsLicense,
@@ -49,34 +49,45 @@ export const LicenseContainer = ({
 
   useEffect(() => {
     return () => {
-      clearTimeout(timerId);
-      timerId = null;
+      if (timerId) {
+        clearTimeout(timerId);
+        timerId = null;
+      }
     };
-  });
-  const onLicenseFileHandler = async (file) => {
+  }, []);
+
+  const onLicenseFileHandler = async (file: File | File[]) => {
     timerId = setTimeout(() => {
       setIsLicenseUploading(true);
-    }, [100]);
+    }, 100);
 
     const fd = new FormData();
-    fd.append("files", file);
+    if (Array.isArray(file)) {
+      fd.append("files", file[0]);
+    } else {
+      fd.append("files", file);
+    }
 
     await setPaymentsLicense(null, fd);
 
-    clearTimeout(timerId);
-    timerId = null;
+    if (timerId) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
     setIsLicenseUploading(false);
   };
 
   const onClickUpload = async () => {
     timerId = setTimeout(() => {
       setIsLoading(true);
-    }, [200]);
+    }, 200);
 
     await acceptPaymentsLicense(t);
 
-    clearTimeout(timerId);
-    timerId = null;
+    if (timerId) {
+      clearTimeout(timerId);
+      timerId = null;
+    }
     setIsLoading(false);
   };
 

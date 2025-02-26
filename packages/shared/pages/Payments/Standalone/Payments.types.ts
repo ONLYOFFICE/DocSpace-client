@@ -24,10 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TTranslation } from "../../../types";
+
 export interface IPaymentsProps {
   isTrial: boolean;
-  setPaymentsLicense: (confirmKey: string, data: FormData) => void;
-  acceptPaymentsLicense: () => void;
+  setPaymentsLicense: (confirmKey: string | null, data: FormData) => void;
+  acceptPaymentsLicense: (t: TTranslation) => void;
   isLicenseCorrect: boolean;
   salesEmail: string;
   isLicenseDateExpired: boolean;
@@ -46,8 +48,8 @@ export interface IEnterpriseProps {
 }
 
 export interface ILicenseProps {
-  setPaymentsLicense: (confirmKey: string, data: FormData) => void;
-  acceptPaymentsLicense: () => void;
+  setPaymentsLicense: (confirmKey: string | null, data: FormData) => void;
+  acceptPaymentsLicense: (t: TTranslation) => void;
   isLicenseCorrect: boolean;
   isTrial: boolean;
 }

@@ -30,7 +30,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import { StyledButtonComponent } from "../Payments.styled";
 
-export const ButtonContainer = ({ buyUrl }: { buyUrl: string }) => {
+export const ButtonContainer = ({ buyUrl }: { buyUrl?: string }) => {
   const { t } = useTranslation("Common");
 
   const onClickBuy = () => {

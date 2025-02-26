@@ -89,19 +89,23 @@ export const EnterpriseContainer = ({
 
       <div className="payments_support">
         <Text>
-          <Trans i18nKey="ActivateRenewDescr" ns="Common" t={t}>
-            To get your personal renewal terms, contact your dedicated manager
-            or write us at
-            <ColorTheme
-              fontWeight="600"
-              target={LinkTarget.blank}
-              tag="a"
-              href={`mailto:${salesEmail}`}
-              themeId={ThemeId.Link}
-            >
-              {{ email: salesEmail }}
-            </ColorTheme>
-          </Trans>
+          <Trans
+            t={t}
+            i18nKey="ActivateRenewDescr"
+            ns="Common"
+            values={{ email: salesEmail }}
+            components={{
+              1: (
+                <ColorTheme
+                  fontWeight="600"
+                  target={LinkTarget.blank}
+                  tag="a"
+                  href={`mailto:${salesEmail}`}
+                  themeId={ThemeId.Link}
+                />
+              ),
+            }}
+          />
         </Text>
       </div>
     </StyledEnterpriseComponent>

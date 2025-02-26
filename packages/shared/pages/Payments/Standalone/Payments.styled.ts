@@ -67,8 +67,8 @@ export const StyledEnterpriseComponent = styled.div`
 `;
 
 export const StyledTitleComponent = styled.div<{
-  limitedWidth: boolean;
-  isLicenseDateExpired: boolean;
+  limitedWidth?: boolean;
+  isLicenseDateExpired?: boolean;
 }>`
   .payments_subscription {
     max-width: 660px;

@@ -28,6 +28,7 @@ import React, { useState, useCallback, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 import {
   StyledFileRow,
   ErrorFile,
@@ -160,7 +161,11 @@ const FileRow = observer(
               showPasswordInput={showPasswordInput}
               theme={theme}
             />
-          ) : null}
+          ) : (
+            <div className="actions-wrapper">
+              <CheckReactSvg className="upload-panel_check-button" />
+            </div>
+          )}
 
           {showPasswordInput ? (
             <div className="password-input">

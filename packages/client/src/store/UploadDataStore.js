@@ -587,13 +587,9 @@ class UploadDataStore {
           });
 
           runInAction(() => {
-            const operationObject = this.displayedConversionFiles[fileIndex];
-
-            Object.assign(operationObject, {
-              error,
-              inConversion: false,
-              needPassword: fileInfo === "password",
-            });
+            historyFile.error = error;
+            historyFile.inConversion = false;
+            historyFile.needPassword = fileInfo === "password";
           });
 
           break;
@@ -619,9 +615,6 @@ class UploadDataStore {
           if (fileInfo && fileInfo !== "password") {
             historyFile.fileInfo = fileInfo;
           }
-
-          const operationObject = this.displayedConversionFiles[fileIndex];
-          Object.assign(operationObject, historyFile);
         });
 
         if (!historyFile?.error && historyFile?.fileInfo?.version > 2) {

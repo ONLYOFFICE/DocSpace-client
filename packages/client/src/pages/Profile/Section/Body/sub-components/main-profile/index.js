@@ -195,19 +195,22 @@ const MainProfile = (props) => {
         </Link>
         to take part in the translation and get up to 1 year free of charge."
       </Trans>
-      <div className="tooltip-link-box">
-        {becometranslatorUrl ? (
-          <Link
-            isHovered
-            isBold
-            fontSize="13px"
-            href={becometranslatorUrl}
-            target="_blank"
-          >
-            {t("Common:LearnMore")}
-          </Link>
-        ) : null}
-      </div>
+      {becometranslatorUrl ? (
+        <Link
+          style={{
+            boxSizing: "border-box",
+            display: "block",
+            margin: "10px 0 0",
+          }}
+          isHovered
+          isBold
+          fontSize="13px"
+          href={becometranslatorUrl}
+          target="_blank"
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      ) : null}
     </Text>
   );
 

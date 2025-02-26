@@ -24,13 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { Nullable } from "@docspace/shared/types";
+
 export type BackupDefaultStateType = {
-  weekday: string | null;
+  weekday: Nullable<string>;
   formSettings: Record<string, string>;
   enableSchedule: boolean;
-  storageType: string | null;
-  folderId: string | null;
-  storageId: string | null;
+  storageType: Nullable<string>;
+  folderId: Nullable<string>;
+  storageId: Nullable<string>;
   monthDay: string;
   day: string;
   hour: string;
@@ -45,13 +47,13 @@ export type BackupSelectedStateType = {
   hour: string;
   periodNumber: string;
   maxCopiesNumber: string;
-  storageType: string | null;
-  folderId: string | null;
+  storageType: Nullable<string>;
+  folderId: Nullable<string>;
   monthDay: string;
   periodLabel: string;
-  storageId: string | null;
+  storageId: Nullable<string>;
   weekdayLabel: string;
-  weekday: string | null;
+  weekday: Nullable<string>;
   enableSchedule: boolean;
   formSettings: Record<string, string>;
 };

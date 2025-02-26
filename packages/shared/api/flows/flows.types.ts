@@ -24,11 +24,29 @@ export interface FlowData {
   viewport?: Viewport;
 }
 
+export enum BuildStatus {
+  BUILDING = "BUILDING",
+  TO_BUILD = "TO_BUILD",
+  BUILT = "BUILT",
+  INACTIVE = "INACTIVE",
+  ERROR = "ERROR",
+}
+
+export type NodeDataType = {
+  showNode?: boolean;
+  type: string;
+  node: unknown;
+  id: string;
+  output_types?: string[];
+  selected_output_type?: string;
+  buildStatus?: BuildStatus;
+};
+
 export interface Node {
   id: string;
   type: string;
   position: Position;
-  data: any;
+  data: NodeDataType;
 }
 
 export interface Edge {

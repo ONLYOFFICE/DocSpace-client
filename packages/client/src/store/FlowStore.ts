@@ -4,6 +4,7 @@ import type {
   Flow,
   FlowsFolder,
   FlowFilters,
+  Node,
 } from "@docspace/shared/api/flows/flows.types";
 
 class FlowStore {
@@ -54,6 +55,20 @@ class FlowStore {
   getFolderById = (id: string) => {
     return this.flowsFolders.find((f) => f.id === id);
   };
+
+  isChatAvailable(flow?: Flow) {
+    if (!flow) {
+      return false;
+    }
+
+    return flow?.data?.nodes.some((node: Node) => {
+      if (node.data.type === "ChatInput" || node.data.type === "ChatOutput") {
+        return true;
+      }
+
+      return false;
+    });
+  }
 
   createFlow = async (flow: Partial<Flow>) => {
     try {

@@ -96,8 +96,22 @@ const StyledFlowTile = styled.div`
       /* gap: 14px; */
 
       .flow-tile_bottom-content_field {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr 40px;
+        overflow: hidden;
+        gap: 8px;
+
+        .flow-tile_bottom-content_chat {
+          position: static;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+      }
+
+      .flow-tile_bottom-content_field_no-chat {
+        display: grid;
+        grid-template-columns: 1fr;
         overflow: hidden;
         gap: 8px;
       }
@@ -250,6 +264,7 @@ const FlowTileTemplate = (props) => {
   const {
     flow,
     getFolderById,
+    isChatAvailable,
     isLoading,
     isRunning,
     contextButtonSpacerWidth,
@@ -322,6 +337,8 @@ const FlowTileTemplate = (props) => {
     return contextOptions;
   };
 
+  const displayChat = isChatAvailable(flow);
+
   return (
     <StyledTile {...props} ref={tile}>
       <StyledFlowTile>
@@ -360,7 +377,11 @@ const FlowTileTemplate = (props) => {
             >
               {name}
             </Link>
-            <Text>{getFolderById(folder_id)?.name || t("{no folder}")}</Text>
+            <Text>
+              {folder_id == "00000000-0000-0000-0000-000000000000"
+                ? t("{SYSTEM}")
+                : getFolderById(folder_id)?.name || t("{no folder}")}
+            </Text>
           </StyledContent>
           <StyledOptionButton spacerWidth={contextButtonSpacerWidth}>
             {renderContext ? (
@@ -387,16 +408,34 @@ const FlowTileTemplate = (props) => {
         </div>
         <div className="flow-tile-template_bottom-content">
           <div className="flow-tile_bottom-content-wrapper">
-            <div className="flow-tile_bottom-content_field">
-              <Text
-                fontSize="13px"
-                fontWeight={400}
-                color={theme.filesSection.tilesView.subTextColor}
-                className="flow-description"
-                title={description}
-              >
-                {description}
-              </Text>
+            <div
+              className={
+                displayChat
+                  ? "flow-tile_bottom-content_field"
+                  : "flow-tile_bottom-content_field_no-chat"
+              }
+            >
+              <div>
+                <Text
+                  fontSize="13px"
+                  fontWeight={400}
+                  color={theme.filesSection.tilesView.subTextColor}
+                  className="flow-description"
+                  title={description}
+                >
+                  {description}
+                </Text>
+              </div>
+              {displayChat && (
+                <div className="flow-tile_bottom-content_chat">
+                  <langflow-chat
+                    window_title={`Chat with flow '${name}'`}
+                    flow_id={id}
+                    host_url={`${window.location.origin}/onlyflow/`}
+                    style={{ position: "absolute" }}
+                  ></langflow-chat>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -412,6 +451,7 @@ const SectionBodyContent = ({
   isLoading,
   fetchFlows,
   getFolderById,
+  isChatAvailable,
 }: {
   flows: Flow[];
   isLoading: boolean;
@@ -444,6 +484,7 @@ const SectionBodyContent = ({
           getFolderById={getFolderById}
           isRunning={false}
           renderContext={renderContext}
+          isChatAvailable={isChatAvailable}
         />
       ))}
     </StyledFlowsContainer>
@@ -455,6 +496,7 @@ export default inject(({ flowStore, infoPanelStore }) => ({
   isLoading: flowStore.isLoading,
   fetchFlows: flowStore.fetchFlows,
   getFolderById: flowStore.getFolderById,
+  isChatAvailable: flowStore.isChatAvailable,
   openInfoPanel: (flow: Flow) => {
     infoPanelStore.setFlow(flow);
     infoPanelStore.setVisible(true);

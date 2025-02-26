@@ -174,17 +174,9 @@ class HeaderMenuStore {
         label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
         disabled: isGuests ? !hasUsersToMakeEmployees : !hasUsersToChangeType,
         iconUrl: ChangeToEmployeeReactSvgUrl,
-        onClick: isGuests
-          ? () =>
-              this.usersStore.changeType(
-                EmployeeType.User,
-                getUsersToMakeEmployees,
-              )
-          : () => {},
-        withDropDown: !isGuests,
-        options: !isGuests
-          ? this.contextOptionsStore.getUsersChangeTypeOptions(t)
-          : [],
+
+        withDropDown: true,
+        options: this.contextOptionsStore.getUsersChangeTypeOptions(t),
       },
       {
         id: "menu-info",

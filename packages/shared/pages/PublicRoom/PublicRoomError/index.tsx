@@ -25,7 +25,27 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
-import PublicRoomPasswordForm from "./PublicRoomPasswordForm";
-import PublicRoomError from "./PublicRoomError";
 
-export { PublicRoomPasswordForm, PublicRoomError };
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
+import { frameCallCommand } from "../../../utils/common";
+import ErrorContainer from "../../../components/error-container/ErrorContainer";
+
+const PublicRoomError = ({ isInvalid }: { isInvalid: boolean }) => {
+  const { t, ready } = useTranslation(["Errors", "Common"]);
+  const headerText = isInvalid
+    ? t("Common:InvalidLink")
+    : t("Common:ExpiredLink");
+  const bodyText = isInvalid ? t("LinkDoesNotExist") : t("LinkHasExpired");
+
+  useEffect(() => {
+    frameCallCommand("setIsLoaded");
+  }, []);
+
+  return ready ? (
+    <ErrorContainer headerText={headerText} bodyText={bodyText} />
+  ) : null;
+};
+
+export default PublicRoomError;

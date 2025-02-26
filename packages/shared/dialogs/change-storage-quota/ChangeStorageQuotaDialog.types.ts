@@ -24,11 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TPortals } from "../../api/management/types";
+import type { TPaymentQuota } from "../../api/portal/types";
+
 export interface ChangeStorageQuotaDialogProps {
   initialSize?: string;
-  portalInfo: unknown;
+  portalInfo: TPortals;
   isVisible: boolean;
-  updateFunction: (quota: unknown) => void;
+  updateFunction: (quota: TPaymentQuota) => void;
   onClose: () => void;
   isDisableQuota: boolean;
 }

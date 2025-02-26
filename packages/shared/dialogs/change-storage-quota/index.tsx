@@ -77,7 +77,7 @@ export const ChangeStorageQuotaDialog = ({
 
       if (onClose) onClose();
     } catch (error) {
-      toastr.error(error);
+      toastr.error(error!);
     }
 
     if (onClose) onClose();

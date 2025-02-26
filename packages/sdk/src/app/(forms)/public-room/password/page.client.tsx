@@ -34,23 +34,26 @@ import { useRouter, useSearchParams } from "next/navigation";
 import PublicRoomPasswordForm from "@docspace/shared/forms/PublicRoomPasswordForm";
 import type { TPublicRoomPassword } from "@docspace/shared/api/rooms/types";
 
-export default function PublicRoomPasswordPageClient() {
+export default function PublicRoomPasswordPageClient({
+  roomTitle,
+}: {
+  roomTitle: string;
+}) {
   const { t } = useTranslation("Common");
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const roomKey = searchParams.get("key");
-  const roomTitle = searchParams.get("title");
 
-  const onSuccessValidation = (res: TPublicRoomPassword) => {
-    return router.replace(`/public-room?key=${roomKey}&folder=${res.id}`);
+  const onSuccessValidation = () => {
+    return router.refresh();
   };
 
   return (
     <PublicRoomPasswordForm
       t={t}
       roomKey={roomKey || ""}
-      roomTitle={roomTitle || ""}
+      roomTitle={roomTitle}
       onSuccessValidationCallback={onSuccessValidation}
     />
   );

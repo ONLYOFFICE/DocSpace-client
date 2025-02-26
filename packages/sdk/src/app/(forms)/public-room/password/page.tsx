@@ -26,8 +26,14 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import { headers } from "next/headers";
+
 import PublicRoomPasswordPageClient from "@/app/(forms)/public-room/password/page.client";
+import { PUBLIC_ROOM_TITLE_HEADER } from "@/utils/constants";
 
 export default async function PublicRoomPasswordPage() {
-  return <PublicRoomPasswordPageClient />;
+  const hdrs = headers();
+  const roomTitle = hdrs.get(PUBLIC_ROOM_TITLE_HEADER);
+
+  return <PublicRoomPasswordPageClient roomTitle={roomTitle || ""} />;
 }

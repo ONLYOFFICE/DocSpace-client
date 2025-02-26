@@ -27,15 +27,42 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+import { ValidationStatus } from "@docspace/shared/enums";
+
 import {
   FILTER_HEADER,
   LOCALE_HEADER,
+  PUBLIC_ROOM_TITLE_HEADER,
   SHARE_KEY_HEADER,
   THEME_HEADER,
 } from "@/utils/constants";
+import { validatePublicRoomKey } from "@/api/rooms";
+
+async function handlePublicRoomValidation(
+  request: NextRequest,
+  requestHeaders: Headers,
+  shareKey: string,
+): Promise<NextResponse | null> {
+  if (!request.nextUrl.pathname.includes("public-room/password") && shareKey) {
+    const validation = await validatePublicRoomKey(shareKey);
+
+    if (validation.status === ValidationStatus.Password) {
+      const roomTitle = "title" in validation ? validation.title : "";
+
+      requestHeaders.set(PUBLIC_ROOM_TITLE_HEADER, roomTitle);
+
+      return NextResponse.rewrite(
+        new URL(`/sdk/public-room/password`, request.url),
+        { request: { headers: requestHeaders } },
+      );
+    }
+  }
+
+  return null;
+}
 
 // This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const host = request.headers.get("x-forwarded-host");
   const proto = request.headers.get("x-forwarded-proto");
 
@@ -76,6 +103,14 @@ export function middleware(request: NextRequest) {
   requestHeaders.set(SHARE_KEY_HEADER, shareKey ?? "");
 
   if (request.nextUrl.pathname.includes("public-room")) {
+    const rewrittenNextResponse = await handlePublicRoomValidation(
+      request,
+      requestHeaders,
+      shareKey || "",
+    );
+
+    if (rewrittenNextResponse) return rewrittenNextResponse;
+
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
   }
 
@@ -94,5 +129,6 @@ export const config = {
     "/room-selector",
     "/file-selector",
     "/public-room",
+    "/public-room/password",
   ],
 };

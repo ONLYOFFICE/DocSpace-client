@@ -98,8 +98,6 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
     try {
       const res = await validatePublicRoomPassword(roomKey, password);
 
-      setIsLoading(false);
-
       switch (res?.status) {
         case ValidationStatus.Ok:
           onSuccessValidationCallback(res);
@@ -120,6 +118,8 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
         default:
           break;
       }
+
+      setIsLoading(false);
     } catch (error) {
       toastr.error(error as string);
       setIsLoading(false);
@@ -198,6 +198,7 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
                 tabIndex={5}
                 onClick={onSubmitAction}
                 isDisabled={isLoading}
+                isLoading={isLoading}
               />
             </FormWrapper>
           </StyledBody>

@@ -194,17 +194,17 @@ export const validatePortalName = (
   const validName = new RegExp(nameValidator.regex);
   switch (true) {
     case value === "":
-      return setError(t("Settings:PortalNameEmpty"));
+      return setError(t("Common:PortalNameEmpty"));
     case value.length < nameValidator.minLength ||
       value.length > nameValidator.maxLength:
       return setError(
-        t("Settings:PortalNameLength", {
+        t("Common:PortalNameLength", {
           minLength: nameValidator.minLength.toString(),
           maxLength: nameValidator.maxLength.toString(),
         }),
       );
     case !validName.test(value):
-      return setError(t("Settings:PortalNameIncorrect"));
+      return setError(t("Common:PortalNameIncorrect"));
 
     default:
       setError(null);
@@ -1358,6 +1358,6 @@ export const getBackupProgressInfo = (
       setLink(link);
     }
 
-    return { success: t("Settings:BackupCreatedSuccess") };
+    return { success: t("Common:BackupCreatedSuccess") };
   }
 };

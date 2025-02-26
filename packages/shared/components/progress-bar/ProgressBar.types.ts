@@ -37,4 +37,6 @@ export type ProgressBarProps = {
   status?: string;
   /** Error message to display when the operation encounters a problem */
   error?: string;
+  /** Custom styles to apply to the progress bar */
+  style?: React.CSSProperties;
 };

@@ -106,7 +106,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   };
 
   const handleAnimationEnd = useCallback(
-    (e: AnimationEvent) => {
+    (e: globalThis.AnimationEvent) => {
       const animation = e.animationName;
 
       if (
@@ -178,20 +178,21 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
 
     onOpenPanel?.();
   };
+
   useLayoutEffect(() => {
     const container = containerRef.current;
 
     if (!container) return;
 
-    container.addEventListener<"animationend">(
+    container.addEventListener(
       "animationend",
-      handleAnimationEnd,
+      handleAnimationEnd as EventListener,
     );
 
     return () => {
-      container.removeEventListener<"animationend">(
+      container.removeEventListener(
         "animationend",
-        handleAnimationEnd,
+        handleAnimationEnd as EventListener,
       );
     };
   }, [handleAnimationEnd]);

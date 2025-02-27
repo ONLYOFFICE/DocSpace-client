@@ -46,7 +46,7 @@ const defaultProps = {
   isSettingPaid: true,
   standalone: false,
   onSave,
-  isWhiteLabelLoaded: true,
+  isBrandNameLoaded: true,
   defaultBrandName: "Default Brand",
   brandName: "Current Brand",
   deviceType: DeviceType.desktop,

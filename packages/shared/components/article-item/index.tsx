@@ -63,6 +63,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     badgeComponent,
     title,
     item,
+    iconNode,
   } = props;
 
   const onClickAction = (e: React.MouseEvent) => {
@@ -131,7 +132,11 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
             [styles.active]: isActive,
           })}
         >
-          <ReactSVG className={styles.icon} src={icon} />
+          {iconNode ? (
+            <div className={styles.nodeIcon}>{iconNode}</div>
+          ) : icon ? (
+            <ReactSVG className={styles.icon} src={icon} />
+          ) : null}
           {!showText ? (
             <>
               {showInitial ? (

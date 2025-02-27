@@ -239,6 +239,19 @@
     justify-content: center;
   }
 
+  .nodeIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+
+    @include tablet-and-below {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
   svg {
     width: 16px;
     height: 16px;

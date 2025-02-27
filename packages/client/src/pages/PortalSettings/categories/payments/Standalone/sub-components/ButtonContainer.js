@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-
+import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 
 import { StyledButtonComponent } from "../StyledComponent";
@@ -34,7 +34,9 @@ import { StyledButtonComponent } from "../StyledComponent";
 const ButtonContainer = ({ t, buyUrl, siteDomain }) => {
   const onClickBuy = () => {
     const url = buyUrl || siteDomain;
-    url && window.open(url, "_blank");
+    url
+      ? window.open(url, "_blank")
+      : toastr.error(t("Common:UnexpectedError"));
   };
   return (
     <StyledButtonComponent>

@@ -153,6 +153,10 @@ class ContactsConextOptionsStore {
   };
 
   getUserContextOptions = (t: TTranslation, options: string[], item: TItem) => {
+    const { contactsTab } = this.usersStore;
+    const isGuests = contactsTab === "guests";
+    const { isRoomAdmin } = this.userStore.user!;
+
     const contextMenu = options.map((option) => {
       switch (option) {
         case "separator-1":
@@ -283,8 +287,16 @@ class ContactsConextOptionsStore {
             key: option,
             icon: ChangeToEmployeeReactSvgUrl,
             label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
-            withDropDown: true,
-            items: this.getUsersChangeTypeOptions(t, item),
+            onClick:
+              isGuests && isRoomAdmin
+                ? () =>
+                    this.usersStore.changeType(
+                      EmployeeType.User,
+                      this.usersStore.getUsersToMakeEmployees,
+                    )
+                : null,
+            withDropDown: !isRoomAdmin,
+            items: isRoomAdmin ? null : this.getUsersChangeTypeOptions(t, item),
           };
         case "remove-guest":
           return {
@@ -413,8 +425,16 @@ class ContactsConextOptionsStore {
         label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
         disabled: !hasUsersToMakeEmployees,
         icon: ChangeToEmployeeReactSvgUrl,
-        withDropDown: true,
-        items: options,
+        onClick:
+          isGuests && isRoomAdmin
+            ? () =>
+                this.usersStore.changeType(
+                  EmployeeType.User,
+                  this.usersStore.getUsersToMakeEmployees,
+                )
+            : null,
+        withDropDown: !isRoomAdmin,
+        items: isRoomAdmin ? null : options,
       },
       {
         key: "cm-info",

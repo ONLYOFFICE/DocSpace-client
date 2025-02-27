@@ -26,7 +26,6 @@
 
 import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
-import { FloatingButtonIcons } from "../floating-button";
 import { ContextMenuModel } from "../context-menu";
 
 export type SubInfoPanelHeaderProps = {

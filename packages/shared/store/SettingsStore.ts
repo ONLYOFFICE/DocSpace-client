@@ -371,359 +371,359 @@ class SettingsStore {
   get ldapSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.ldap
       ? `${this.helpCenterDomain}${this.helpCenterEntries.ldap}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get portalSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.settings
       ? `${this.helpCenterDomain}${this.helpCenterEntries.settings}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get integrationSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.integrationsettings
       ? `${this.helpCenterDomain}${this.helpCenterEntries.integrationsettings}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get docuSignUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectdocusign
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectdocusign}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get dropboxUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectdropbox
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectdropbox}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get boxUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectbox
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectbox}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get mailRuUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectmailru
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectmailru}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get oneDriveUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectonedrive
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectonedrive}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get microsoftUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectmicrosoft
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectmicrosoft}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get googleUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectgoogle
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectgoogle}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get facebookUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectfacebook
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectfacebook}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get linkedinUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectlinkedin
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectlinkedin}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get clickatellUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectclickatell
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectclickatell}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get smsclUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectsmsc
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectsmsc}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get firebaseUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectfirebase
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectfirebase}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get appleIDUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectapple
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectapple}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get telegramUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connecttelegram
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connecttelegram}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get wordpressUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectwordpress
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectwordpress}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get awsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectamazon
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectamazon}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get googleCloudUrl() {
     return this.helpCenterDomain &&
       this.helpCenterEntries?.connectgooglecloudstorage
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectgooglecloudstorage}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get rackspaceUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectrackspace
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectrackspace}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get selectelUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectselectel
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectselectel}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get yandexUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectyandex
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectyandex}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get vkUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.connectvk
       ? `${this.helpCenterDomain}${this.helpCenterEntries.connectvk}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get languageAndTimeZoneSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.language
       ? `${this.helpCenterDomain}${this.helpCenterEntries.language}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get welcomePageSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.welcomepage
       ? `${this.helpCenterDomain}${this.helpCenterEntries.welcomepage}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get dnsSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.alternativeurl
       ? `${this.helpCenterDomain}${this.helpCenterEntries.alternativeurl}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get renamingSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.renaming
       ? `${this.helpCenterDomain}${this.helpCenterEntries.renaming}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get passwordStrengthSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.passwordstrength
       ? `${this.helpCenterDomain}${this.helpCenterEntries.passwordstrength}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get tfaSettingsUrl() {
     return this.helpCenterDomain &&
       this.helpCenterEntries?.twofactorauthentication
       ? `${this.helpCenterDomain}${this.helpCenterEntries.twofactorauthentication}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get trustedMailDomainSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.trusteddomain
       ? `${this.helpCenterDomain}${this.helpCenterEntries.trusteddomain}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get ipSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.ipsecurity
       ? `${this.helpCenterDomain}${this.helpCenterEntries.ipsecurity}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get bruteForceProtectionUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.login
       ? `${this.helpCenterDomain}${this.helpCenterEntries.login}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get administratorMessageSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.administratormessage
       ? `${this.helpCenterDomain}${this.helpCenterEntries.administratormessage}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get lifetimeSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.sessionlifetime
       ? `${this.helpCenterDomain}${this.helpCenterEntries.sessionlifetime}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get dataBackupUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.creatingbackup
       ? `${this.helpCenterDomain}${this.helpCenterEntries.creatingbackup}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get automaticBackupUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.autobackup
       ? `${this.helpCenterDomain}${this.helpCenterEntries.autobackup}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get webhooksGuideUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.administrationguides
       ? `${this.helpCenterDomain}${this.helpCenterEntries.administrationguides}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get dataReassignmentUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.managingusers
       ? `${this.helpCenterDomain}${this.helpCenterEntries.managingusers}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get installationGuidesUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.enterpriseinstall
       ? `${this.helpCenterDomain}${this.helpCenterEntries.enterpriseinstall}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get apiOAuthLink() {
     return this.helpCenterDomain && this.helpCenterEntries?.oauth
       ? `${this.helpCenterDomain}${this.helpCenterEntries.oauth}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get accessRightsLink() {
     return this.helpCenterDomain && this.helpCenterEntries?.accessrights
       ? `${this.helpCenterDomain}${this.helpCenterEntries.accessrights}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get sdkLink() {
     return this.apiDomain && this.apiEntries?.["javascript-sdk"]
       ? `${this.apiDomain}${this.apiEntries["javascript-sdk"]}`
-      : `${this.apiDomain}`;
+      : this.apiDomain;
   }
 
   get apiBasicLink() {
     return this.apiDomain && this.apiEntries?.docspace
       ? `${this.apiDomain}${this.apiEntries.docspace}`
-      : `${this.apiDomain}`;
+      : this.apiDomain;
   }
 
   get apiPluginSDKLink() {
     return this.apiDomain && this.apiEntries?.["plugins-sdk"]
       ? `${this.apiDomain}${this.apiEntries["plugins-sdk"]}`
-      : `${this.apiDomain}`;
+      : this.apiDomain;
   }
 
   get forEnterprisesUrl() {
     return this.siteDomain && this.siteEntries?.forenterprises
       ? `${this.siteDomain}${this.siteEntries.forenterprises}`
-      : `${this.siteDomain}`;
+      : this.siteDomain;
   }
 
   get demoOrderUrl() {
     return this.siteDomain && this.siteEntries?.demoorder
       ? `${this.siteDomain}${this.siteEntries.demoorder}`
-      : `${this.siteDomain}`;
+      : this.siteDomain;
   }
 
   get desktopUrl() {
     return this.siteDomain && this.siteEntries?.desktop
       ? `${this.siteDomain}${this.siteEntries.desktop}`
-      : `${this.siteDomain}`;
+      : this.siteDomain;
   }
 
   get privateRoomsUrl() {
     return this.siteDomain && this.siteEntries?.privaterooms
       ? `${this.siteDomain}${this.siteEntries.privaterooms}`
-      : `${this.siteDomain}`;
+      : this.siteDomain;
   }
 
   get allConnectorsUrl() {
     return this.siteDomain && this.siteEntries?.allconnectors
       ? `${this.siteDomain}${this.siteEntries.allconnectors}`
-      : `${this.siteDomain}`;
+      : this.siteDomain;
   }
 
   get zoomUrl() {
     return this.siteDomain && this.siteEntries?.officeforzoom
       ? `${this.siteDomain}${this.siteEntries.officeforzoom}`
-      : `${this.siteDomain}`;
+      : this.siteDomain;
   }
 
   get wordPressUrl() {
     return this.siteDomain && this.siteEntries?.officeforwordpress
       ? `${this.siteDomain}${this.siteEntries.officeforwordpress}`
-      : `${this.siteDomain}`;
+      : this.siteDomain;
   }
 
   get drupalUrl() {
     return this.siteDomain && this.siteEntries?.officefordrupal
       ? `${this.siteDomain}${this.siteEntries.officefordrupal}`
-      : `${this.siteDomain}`;
+      : this.siteDomain;
   }
 
   get storageManagementUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.storagemanagement
       ? `${this.helpCenterDomain}${this.helpCenterEntries.storagemanagement}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get enterpriseInstallScriptUrl() {
     return this.helpCenterDomain &&
       this.helpCenterEntries?.enterpriseinstallscript
       ? `${this.helpCenterDomain}${this.helpCenterEntries.enterpriseinstallscript}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get enterpriseInstallWindowsUrl() {
     return this.helpCenterDomain &&
       this.helpCenterEntries?.enterpriseinstallwindows
       ? `${this.helpCenterDomain}${this.helpCenterEntries.enterpriseinstallwindows}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get downloaddesktopUrl() {
     return this.siteDomain && this.siteEntries?.downloaddesktop
       ? `${this.siteDomain}${this.siteEntries.downloaddesktop}`
-      : `${this.siteDomain}`;
+      : this.siteDomain;
   }
 
   get officeforandroidUrl() {
     return this.siteDomain && this.siteEntries?.officeforandroid
       ? `${this.siteDomain}${this.siteEntries.officeforandroid}`
-      : `${this.siteDomain}`;
+      : this.siteDomain;
   }
 
   get officeforiosUrl() {
     return this.siteDomain && this.siteEntries?.officeforios
       ? `${this.siteDomain}${this.siteEntries.officeforios}`
-      : `${this.siteDomain}`;
+      : this.siteDomain;
   }
 
   get forumLinkUrl() {
@@ -733,7 +733,7 @@ class SettingsStore {
   get becometranslatorUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.becometranslator
       ? `${this.helpCenterDomain}${this.helpCenterEntries.becometranslator}`
-      : `${this.helpCenterDomain}`;
+      : this.helpCenterDomain;
   }
 
   get requestEntriesUrl() {
@@ -743,7 +743,7 @@ class SettingsStore {
   get requestSupportUrl() {
     return this.feedbackAndSupportUrl && this.requestEntriesUrl
       ? `${this.feedbackAndSupportUrl}${this.requestEntriesUrl}`
-      : `${this.feedbackAndSupportUrl}`;
+      : this.feedbackAndSupportUrl;
   }
 
   get documentationEmail() {

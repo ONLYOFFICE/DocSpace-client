@@ -28,6 +28,12 @@
 
 import { PublicRoomError } from "@docspace/shared/pages/PublicRoom";
 
+import ClientOnly from "@/components/ClientOnly";
+
 export default async function ExpiredLinkPage() {
-  return <PublicRoomError />;
+  return (
+    <ClientOnly>
+      <PublicRoomError />
+    </ClientOnly>
+  );
 }

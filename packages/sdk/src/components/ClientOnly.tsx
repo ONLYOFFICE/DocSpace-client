@@ -26,14 +26,8 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { PublicRoomError } from "@docspace/shared/pages/PublicRoom";
+import dynamic from "next/dynamic";
 
-import ClientOnly from "@/components/ClientOnly";
+const ClientOnly = ({ children }: { children: JSX.Element }) => children;
 
-export default async function InvalidLinkPage() {
-  return (
-    <ClientOnly>
-      <PublicRoomError isInvalid />
-    </ClientOnly>
-  );
-}
+export default dynamic(() => Promise.resolve(ClientOnly), { ssr: false });

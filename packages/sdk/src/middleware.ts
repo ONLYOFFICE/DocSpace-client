@@ -27,53 +27,13 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import { ValidationStatus } from "@docspace/shared/enums";
-
 import {
   FILTER_HEADER,
   LOCALE_HEADER,
-  PUBLIC_ROOM_TITLE_HEADER,
   SHARE_KEY_HEADER,
   THEME_HEADER,
 } from "@/utils/constants";
-import { validatePublicRoomKey } from "@/api/rooms";
-
-async function handlePublicRoomValidation(
-  request: NextRequest,
-  requestHeaders: Headers,
-  shareKey: string,
-): Promise<NextResponse | null> {
-  if (!request.nextUrl.pathname.includes("public-room/password") && shareKey) {
-    const validation = await validatePublicRoomKey(shareKey);
-
-    if (validation.status === ValidationStatus.Password) {
-      const roomTitle = "title" in validation ? validation.title : "";
-
-      requestHeaders.set(PUBLIC_ROOM_TITLE_HEADER, roomTitle);
-
-      return NextResponse.rewrite(
-        new URL(`/sdk/public-room/password`, request.url),
-        { request: { headers: requestHeaders } },
-      );
-    }
-
-    if (validation.status === ValidationStatus.Invalid) {
-      return NextResponse.rewrite(
-        new URL(`/sdk/public-room/error/invalid-link`, request.url),
-        { request: { headers: requestHeaders } },
-      );
-    }
-
-    if (validation.status === ValidationStatus.Expired) {
-      return NextResponse.rewrite(
-        new URL(`/sdk/public-room/error/expired-link`, request.url),
-        { request: { headers: requestHeaders } },
-      );
-    }
-  }
-
-  return null;
-}
+import { handlePublicRoomValidation } from "@/utils/middleware/handlePublicRoomValidation";
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {

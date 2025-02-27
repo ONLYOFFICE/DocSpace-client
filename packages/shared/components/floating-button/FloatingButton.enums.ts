@@ -28,7 +28,6 @@ import { OPERATIONS_NAME } from "../../constants";
 
 export const FloatingButtonIcons = {
   upload: OPERATIONS_NAME.upload,
-  file: "file",
   trash: OPERATIONS_NAME.trash,
   move: OPERATIONS_NAME.move,
   duplicate: OPERATIONS_NAME.duplicate,

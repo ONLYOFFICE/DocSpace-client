@@ -99,6 +99,8 @@ export interface LinkForgotPasswordColorTheme extends DefaultColorThemeProps {
 
 export interface LoadingButtonColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.LoadingButton;
+  loaderColor?: React.CSSProperties["color"];
+  onClick?: VoidFunction;
 }
 
 export interface ProgressColorTheme extends DefaultColorThemeProps {

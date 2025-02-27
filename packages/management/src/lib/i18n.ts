@@ -52,6 +52,7 @@ export const getI18NInstance = (lng: string, portalLng: string) => {
     react: {
       useSuspense: false,
     },
+    initImmediate: false,
   });
 
   Array.from(translations).forEach(([lng, nsList]) => {

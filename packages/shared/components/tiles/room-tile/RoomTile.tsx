@@ -27,12 +27,12 @@
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Tags } from "@docspace/shared/components/tags";
+import classNames from "classnames";
 import { RoomTileProps, RoomTag, RoomItem } from "./RoomTile.types";
 import { BaseTile } from "../base-tile/BaseTile";
 import { TileItem } from "../tile-container/TileContainer.types";
 
 import styles from "./RoomTile.module.scss";
-import classNames from "classnames";
 
 const assertTileItem = (roomItem: RoomItem): TileItem => {
   const { title, roomType, ...tileItem } = roomItem;
@@ -148,8 +148,8 @@ export const RoomTile = ({
   );
 
   const onSelectTileItem = onSelect
-    ? (checked: boolean, tileItem: TileItem) => {
-        onSelect(checked, tileItem as RoomItem);
+    ? (isChecked: boolean, tileItem: TileItem) => {
+        onSelect(isChecked, tileItem as RoomItem);
       }
     : undefined;
 

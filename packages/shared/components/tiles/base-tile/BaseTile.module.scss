@@ -189,27 +189,6 @@
       flex-wrap: nowrap;
       align-items: center;
       align-items: center;
-
-      > .is-pinned {
-        margin: 0;
-
-        padding-block: 8px;
-        padding-inline: 0 8px;
-
-        svg {
-          path {
-            fill: var(--tile-icon-button-color);
-          }
-        }
-
-        &:hover {
-          svg {
-            path {
-              fill: var(--accent-main);
-            }
-          }
-        }
-      }
     }
   }
 
@@ -226,6 +205,12 @@
   .expandButton > div:first-child {
     padding-block: 8px;
     padding-inline: 0 16px;
+
+    color: var(--tile-icon-button-color);
+
+    path {
+      fill: var(--tile-icon-button-color);
+    }
   }
 }
 

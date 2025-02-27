@@ -29,14 +29,74 @@
 @import "../../../styles/_mixins.scss";
 
 .roomTile {
-  .iconContainer {
-    background: white;
-    border-radius: 6px;
+  :global {
+    .iconContainer {
+      background: var(--tile-background-color);
+      border-radius: 6px;
+    }
+
+    .checkbox {
+      padding-top: 8px;
+      padding-inline-start: 12px;
+
+      svg {
+        rect {
+          fill: var(--tile-ckeckbox-background);
+          stroke: var(--tile-ckeckbox-border);
+        }
+
+        path {
+          fill: initial;
+        }
+      }
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      align-items: center;
+
+      > .is-pinned {
+        margin: 0;
+
+        padding-block: 8px;
+        padding-inline: 0 8px;
+
+        svg {
+          path {
+            fill: var(--tile-icon-button-color);
+          }
+        }
+
+        &:hover {
+          svg {
+            path {
+              fill: var(--accent-main) !important;
+            }
+          }
+        }
+      }
+    }
+
+    .expandButton > div:first-child {
+      &:hover {
+        path {
+          fill: var(--tile-icon-button-hover-color);
+        }
+      }
+    }
   }
 
-  .checkbox {
-    padding-top: 8px;
-    padding-inline-start: 12px;
+  &.checked,
+  &.isActive,
+  &:hover:not(.isEdit) {
+    :global {
+      .tag,
+      .advanced-tag {
+        background: var(--tile-tag-checked-background);
+      }
+    }
   }
 
   &:hover {

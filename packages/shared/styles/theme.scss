@@ -1951,6 +1951,11 @@
   --tile-background-badge-color: #{$white};
   --tile-sub-text: #{$light-gray-dark};
 
+  --tile-ckeckbox-background: #{$white};
+  --tile-ckeckbox-border: #{$gray-strong};
+
+  --tile-tag-checked-background: #{$white};
+
   --tile-container-sort-fill: #{$black};
   --tile-container-sort-text: #{$black};
 
@@ -1961,6 +1966,9 @@
   --tile-border-radius: 6px;
   --tile-room-border-radius: 12px;
   --tile-badge-shadow: 0px 2px 4px #{$badge-shadow};
+
+  --tile-icon-button-color: #{$gray};
+  --tile-icon-button-hover-color: #{$light-blue-main};
 }
 
 .dark {
@@ -1970,6 +1978,11 @@
   --tile-icon-button-color: #{$gray-dark};
   --tile-background-badge-color: #{$black};
   --tile-sub-text: #{$gray-dark};
+
+  --tile-ckeckbox-background: #{$white};
+  --tile-ckeckbox-border: #{$gray-strong};
+
+  --tile-tag-checked-background: #{$light-dark-gray-hover};
 
   --tile-container-sort-fill: #{$white};
   --tile-container-sort-text: #{$white};
@@ -1981,4 +1994,7 @@
   --tile-border-radius: 6px;
   --tile-room-border-radius: 12px;
   --tile-badge-shadow: 0px 2px 4px #{$badge-shadow};
+
+  --tile-icon-button-color: #{$gray};
+  --tile-icon-button-hover-color: #{$light-blue-main};
 }

@@ -32,6 +32,7 @@ import { BaseTile } from "../base-tile/BaseTile";
 import { TileItem } from "../tile-container/TileContainer.types";
 
 import styles from "./RoomTile.module.scss";
+import classNames from "classnames";
 
 const assertTileItem = (roomItem: RoomItem): TileItem => {
   const { title, roomType, ...tileItem } = roomItem;
@@ -40,6 +41,9 @@ const assertTileItem = (roomItem: RoomItem): TileItem => {
 
 export const RoomTile = ({
   item,
+  checked,
+  isActive,
+  isEdit,
   children,
   columnCount,
   selectTag,
@@ -127,7 +131,6 @@ export const RoomTile = ({
       selectTag(undefined);
       return;
     }
-    // Ensure the tag has the required RoomTag properties
     if ("label" in tag && "roomType" in tag) {
       selectTag(tag as RoomTag);
     }
@@ -146,14 +149,22 @@ export const RoomTile = ({
 
   const onSelectTileItem = onSelect
     ? (checked: boolean, tileItem: TileItem) => {
-        // We know this is safe because we're only using this for items from this component
         onSelect(checked, tileItem as RoomItem);
       }
     : undefined;
 
+  const roomTileClassName = classNames(styles.roomTile, {
+    [styles.checked]: checked,
+    [styles.isActive]: isActive,
+    [styles.isEdit]: isEdit,
+  });
+
   return (
     <BaseTile
       {...rest}
+      checked={checked}
+      isActive={isActive}
+      isEdit={isEdit}
       item={assertTileItem(item)}
       onSelect={onSelectTileItem}
       isHovered={isHovered}
@@ -161,7 +172,7 @@ export const RoomTile = ({
       onLeave={onLeave}
       topContent={topContent}
       bottomContent={bottomContent}
-      className={styles.roomTile}
+      className={roomTileClassName}
       checkboxContainerRef={checkboxContainerRef}
       onRoomClick={onRoomClick}
     />

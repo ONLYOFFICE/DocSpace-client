@@ -45,7 +45,7 @@ interface StorageManagement {
 const Region = ({ region }: RegionProps) => {
   const { t } = useTranslation("Settings");
   const US = "USA (Oregon)";
-  const DEU = "Germany (Frankfurt am Main)"
+  const DEU = "Germany (Frankfurt am Main)";
 
   return (
     <>
@@ -65,11 +65,7 @@ const Region = ({ region }: RegionProps) => {
           lineHeight="20px"
           className={styles.regionСountry}
         >
-          {region === "US"
-            ? US
-            : region === "DEU"
-              ? DEU
-              : null}
+          {region === "US" ? US : region === "DEU" ? DEU : null}
         </Text>
       </div>
 

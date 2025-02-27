@@ -24,7 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useLayoutEffect,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import { isIOS, isMobile } from "react-device-detect";
 
 import ButtonAlertReactSvg from "PUBLIC_DIR/images/button.alert.react.svg";
@@ -44,239 +51,211 @@ import {
   ActionOption,
   ButtonOption,
   MainButtonMobileProps,
+  MainButtonMobileRef,
 } from "./MainButtonMobile.types";
 
-const MainButtonMobile = (props: MainButtonMobileProps) => {
-  const {
-    className,
-    style,
-    opened,
-    actionOptions,
+const MainButtonMobile = forwardRef<MainButtonMobileRef, MainButtonMobileProps>(
+  (props, ref) => {
+    const {
+      className,
+      style,
+      opened,
+      actionOptions,
+      buttonOptions,
+      withoutButton,
+      manualWidth,
+      isOpenButton,
+      onClose,
+      alert,
+      withMenu = true,
+      onClick,
+      onAlertClick,
+      withAlertClick,
+      dropdownStyle,
+    } = props;
 
-    buttonOptions,
+    const [isOpen, setIsOpen] = useState(opened);
 
-    withoutButton,
-    manualWidth,
-    isOpenButton,
-    onClose,
+    const [height, setHeight] = useState(`${window.innerHeight - 48}px`);
+    const [openedSubmenuKey, setOpenedSubmenuKey] = useState("");
 
-    alert,
-    withMenu = true,
-    onClick,
-    onAlertClick,
-    withAlertClick,
-    dropdownStyle,
-  } = props;
+    const divRef = useRef<HTMLDivElement | null>(null);
+    const dropDownRef = useRef(null);
 
-  const [isOpen, setIsOpen] = useState(opened);
+    const scrollElem = useRef<null | HTMLElement>(null);
+    const currentPosition = useRef<null | number>(null);
+    const prevPosition = useRef<null | number>(null);
+    const buttonBackground = useRef<boolean>(false);
 
-  const [height, setHeight] = useState(`${window.innerHeight - 48}px`);
-  const [openedSubmenuKey, setOpenedSubmenuKey] = useState("");
+    const mainButtonRef = useRef<HTMLDivElement | null>(null);
 
-  const divRef = useRef<HTMLDivElement | null>(null);
-  const ref = useRef<HTMLDivElement | null>(null);
-  const dropDownRef = useRef(null);
-
-  const scrollElem = useRef<null | HTMLElement>(null);
-  const currentPosition = useRef<null | number>(null);
-  const prevPosition = useRef<null | number>(null);
-  const buttonBackground = useRef<boolean>(false);
-
-  useEffect(() => {
-    setIsOpen(opened);
-  }, [opened]);
-
-  const usePrevious = (value?: string) => {
-    const prevRef = useRef<string>();
+    useImperativeHandle(ref, () => ({
+      contains: (target: HTMLElement) => {
+        return mainButtonRef.current
+          ? mainButtonRef.current.contains(target)
+          : false;
+      },
+      getButtonElement: () => mainButtonRef,
+    }));
 
     useEffect(() => {
-      prevRef.current = value;
-    });
+      setIsOpen(opened);
+    }, [opened]);
 
-    return prevRef.current;
-  };
+    const usePrevious = (value?: string) => {
+      const prevRef = useRef<string>();
 
-  const currentLocation = window.location.href;
-  const prevLocation = usePrevious(window.location.href);
+      useEffect(() => {
+        prevRef.current = value;
+      });
 
-  useEffect(() => {
-    if (prevLocation !== currentLocation) {
-      setIsOpen(false);
-    }
-  }, [prevLocation, currentLocation]);
+      return prevRef.current;
+    };
 
-  const setDialogBackground = (scrollHeight: number) => {
-    if (!buttonBackground) {
-      document
-        .getElementsByClassName("section-scroll")[0]
-        .classList.add("dialog-background-scroll");
-    }
-    if (currentPosition.current && currentPosition.current < scrollHeight / 3) {
-      buttonBackground.current = false;
-    }
-  };
+    const currentLocation = window.location.href;
+    const prevLocation = usePrevious(window.location.href);
 
-  const setButtonBackground = React.useCallback(() => {
-    buttonBackground.current = true;
-    if (scrollElem.current)
-      scrollElem.current.classList.remove("dialog-background-scroll");
-  }, []);
-
-  const scrollChangingBackground = React.useCallback(() => {
-    if (scrollElem.current) {
-      currentPosition.current = scrollElem.current.scrollTop;
-      const { scrollHeight } = scrollElem.current;
-
-      if (currentPosition < prevPosition) {
-        setDialogBackground(scrollHeight);
-      } else if (
-        currentPosition.current &&
-        prevPosition.current &&
-        currentPosition.current > 0 &&
-        currentPosition.current > prevPosition.current
-      ) {
-        setButtonBackground();
+    useEffect(() => {
+      if (prevLocation !== currentLocation) {
+        setIsOpen(false);
       }
-      prevPosition.current = currentPosition.current;
-    }
-  }, [setButtonBackground]);
+    }, [prevLocation, currentLocation]);
 
-  useEffect(() => {
-    if (!isIOS) return;
+    const setDialogBackground = (scrollHeight: number) => {
+      if (!buttonBackground) {
+        document
+          .getElementsByClassName("section-scroll")[0]
+          .classList.add("dialog-background-scroll");
+      }
+      if (
+        currentPosition.current &&
+        currentPosition.current < scrollHeight / 3
+      ) {
+        buttonBackground.current = false;
+      }
+    };
 
-    scrollElem.current = document.getElementsByClassName(
-      "section-scroll",
-    )[0] as HTMLElement;
-
-    if (scrollElem.current && scrollElem.current.scrollTop === 0) {
-      scrollElem.current.classList.add("dialog-background-scroll");
-    }
-
-    scrollElem.current.addEventListener("scroll", scrollChangingBackground);
-
-    return () => {
+    const setButtonBackground = React.useCallback(() => {
+      buttonBackground.current = true;
       if (scrollElem.current)
-        scrollElem.current.removeEventListener(
-          "scroll",
-          scrollChangingBackground,
-        );
+        scrollElem.current.classList.remove("dialog-background-scroll");
+    }, []);
+
+    const scrollChangingBackground = React.useCallback(() => {
+      if (scrollElem.current) {
+        currentPosition.current = scrollElem.current.scrollTop;
+        const { scrollHeight } = scrollElem.current;
+
+        if (currentPosition < prevPosition) {
+          setDialogBackground(scrollHeight);
+        } else if (
+          currentPosition.current &&
+          prevPosition.current &&
+          currentPosition.current > 0 &&
+          currentPosition.current > prevPosition.current
+        ) {
+          setButtonBackground();
+        }
+        prevPosition.current = currentPosition.current;
+      }
+    }, [setButtonBackground]);
+
+    useEffect(() => {
+      if (!isIOS) return;
+
+      scrollElem.current = document.getElementsByClassName(
+        "section-scroll",
+      )[0] as HTMLElement;
+
+      if (scrollElem.current && scrollElem.current.scrollTop === 0) {
+        scrollElem.current.classList.add("dialog-background-scroll");
+      }
+
+      scrollElem.current.addEventListener("scroll", scrollChangingBackground);
+
+      return () => {
+        if (scrollElem.current)
+          scrollElem.current.removeEventListener(
+            "scroll",
+            scrollChangingBackground,
+          );
+      };
+    }, [scrollChangingBackground]);
+
+    const onAlertClickAction = () => {
+      if (withAlertClick) onAlertClick?.();
     };
-  }, [scrollChangingBackground]);
 
-  const onAlertClickAction = () => {
-    if (withAlertClick) onAlertClick?.();
-  };
+    const recalculateHeight = React.useCallback(() => {
+      if (divRef.current) {
+        const h =
+          divRef?.current?.getBoundingClientRect()?.height ||
+          window.innerHeight;
 
-  const recalculateHeight = React.useCallback(() => {
-    if (divRef.current) {
-      const h =
-        divRef?.current?.getBoundingClientRect()?.height || window.innerHeight;
+        if (h >= window.innerHeight) setHeight(`${window.innerHeight - 48}px`);
+        else setHeight(`${h}px`);
+      }
+    }, []);
 
-      if (h >= window.innerHeight) setHeight(`${window.innerHeight - 48}px`);
-      else setHeight(`${h}px`);
-    }
-  }, []);
+    useLayoutEffect(() => {
+      if (divRef.current) {
+        const { height: h } = divRef.current.getBoundingClientRect();
+        setHeight(`${h}px`);
+      }
+    }, [isOpen]);
 
-  useLayoutEffect(() => {
-    if (divRef.current) {
-      const { height: h } = divRef.current.getBoundingClientRect();
-      setHeight(`${h}px`);
-    }
-  }, [isOpen]);
+    useLayoutEffect(() => {
+      recalculateHeight();
+    }, [isOpen, isOpenButton, recalculateHeight]);
 
-  useLayoutEffect(() => {
-    recalculateHeight();
-  }, [isOpen, isOpenButton, recalculateHeight]);
+    useEffect(() => {
+      window.addEventListener("resize", recalculateHeight);
+      return () => {
+        window.removeEventListener("resize", recalculateHeight);
+      };
+    }, [recalculateHeight]);
 
-  useEffect(() => {
-    window.addEventListener("resize", recalculateHeight);
-    return () => {
-      window.removeEventListener("resize", recalculateHeight);
+    const toggle = (value: boolean) => {
+      if (isOpenButton && onClose) {
+        onClose();
+      }
+
+      return setIsOpen(value);
     };
-  }, [recalculateHeight]);
 
-  const toggle = (value: boolean) => {
-    if (isOpenButton && onClose) {
-      onClose();
-    }
+    const onMainButtonClick = (e: React.MouseEvent) => {
+      if (!withMenu) {
+        onClick?.(e);
+        return;
+      }
 
-    return setIsOpen(value);
-  };
+      toggle(!isOpen);
+    };
 
-  const onMainButtonClick = (e: React.MouseEvent) => {
-    if (!withMenu) {
-      onClick?.(e);
-      return;
-    }
+    const outsideClick = (e: React.MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        isOpen &&
+        mainButtonRef?.current &&
+        mainButtonRef?.current?.contains(target)
+      )
+        return;
+      toggle(false);
+    };
 
-    toggle(!isOpen);
-  };
+    const noHover = isMobile;
 
-  const outsideClick = (e: React.MouseEvent) => {
-    const target = e.target as HTMLElement;
-    if (isOpen && ref.current && ref.current.contains(target)) return;
-    toggle(false);
-  };
-
-  const noHover = isMobile;
-
-  const renderItems = () => {
-    return (
-      <div ref={divRef}>
-        <div className={styles.containerAction}>
-          {actionOptions?.map((option: ActionOption) => {
-            const optionOnClickAction = () => {
-              toggle(false);
-              option.onClick?.({ action: option.action });
-            };
-
-            if (option.items)
-              return (
-                <SubmenuItem
-                  key={option.key}
-                  option={option}
-                  toggle={toggle}
-                  noHover={noHover}
-                  recalculateHeight={recalculateHeight}
-                  openedSubmenuKey={openedSubmenuKey}
-                  setOpenedSubmenuKey={setOpenedSubmenuKey}
-                  openByDefault={option?.openByDefault || false}
-                />
-              );
-
-            return (
-              <DropDownItem
-                id={option.id}
-                key={option.key}
-                label={option.label}
-                className={
-                  classNames(
-                    styles.dropDownItem,
-                    option.className,
-                    option.isSeparator ? "is-separator" : "",
-                  ) || ""
-                }
-                onClick={optionOnClickAction}
-                icon={option.icon ? option.icon : ""}
-                noHover={noHover}
-              />
-            );
-          })}
-        </div>
-
-        {buttonOptions ? (
-          <div
-            className={classNames(styles.buttonOptions, {
-              [styles.withoutButton]: withoutButton,
-            })}
-          >
-            {buttonOptions?.map((option: ButtonOption) => {
+    const renderItems = () => {
+      return (
+        <div ref={divRef}>
+          <div className={styles.containerAction}>
+            {actionOptions?.map((option: ActionOption) => {
               const optionOnClickAction = () => {
                 toggle(false);
-                option.onClick?.();
+                option.onClick?.({ action: option.action });
               };
 
-              if (option.items) {
+              if (option.items)
                 return (
                   <SubmenuItem
                     key={option.key}
@@ -286,92 +265,145 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
                     recalculateHeight={recalculateHeight}
                     openedSubmenuKey={openedSubmenuKey}
                     setOpenedSubmenuKey={setOpenedSubmenuKey}
-                    openByDefault={false}
+                    openByDefault={option?.openByDefault || false}
                   />
-                );
-              }
-
-              if (option.isSeparator)
-                return (
-                  <div key={option.key} className="separator-wrapper">
-                    <div className="is-separator" />
-                  </div>
                 );
 
               return (
                 <DropDownItem
                   id={option.id}
-                  label={option.label}
-                  icon={option.icon ? option.icon : ""}
-                  className={classNames(
-                    styles.dropDownItem,
-                    "drop-down-item-button",
-                  )}
                   key={option.key}
+                  label={option.label}
+                  className={
+                    classNames(
+                      styles.dropDownItem,
+                      option.className,
+                      option.isSeparator ? "is-separator" : "",
+                    ) || ""
+                  }
                   onClick={optionOnClickAction}
+                  icon={option.icon ? option.icon : ""}
+                  noHover={noHover}
                 />
               );
             })}
           </div>
-        ) : null}
-      </div>
-    );
-  };
 
-  const children = renderItems();
-
-  return (
-    <>
-      <Backdrop zIndex={210} visible={isOpen || false} onClick={outsideClick} />
-      <div
-        ref={ref}
-        className={className}
-        style={{ zIndex: `${isOpen ? "211" : "201"}`, ...style }}
-        data-testid="main-button-mobile"
-      >
-        <FloatingButton
-          className={classNames(styles.floatingButton)}
-          icon={isOpen ? FloatingButtonIcons.minus : FloatingButtonIcons.plus}
-          onClick={onMainButtonClick}
-          withoutProgress
-        />
-
-        <DropDown
-          className={classNames(styles.dropDown, "mainBtnDropdown")}
-          style={{ ...dropdownStyle, height }}
-          open={isOpen}
-          withBackdrop={false}
-          directionY="top"
-          directionX="right"
-          isDefaultMode={false}
-          manualWidth={manualWidth || "400px"}
-          data-testid="dropdown"
-        >
-          {isMobile ? (
-            <Scrollbar
-              style={{ position: "absolute" }}
-              scrollClass="section-scroll"
-              ref={dropDownRef}
+          {buttonOptions ? (
+            <div
+              className={classNames(styles.buttonOptions, {
+                [styles.withoutButton]: withoutButton,
+              })}
             >
-              {children}
-            </Scrollbar>
-          ) : (
-            children
-          )}
-        </DropDown>
+              {buttonOptions?.map((option: ButtonOption) => {
+                const optionOnClickAction = () => {
+                  toggle(false);
+                  option.onClick?.();
+                };
 
-        {alert && !isOpen ? (
-          <div className={styles.wrapperAlertIcon}>
-            <ButtonAlertReactSvg
-              className={styles.alertIcon}
-              data-size={IconSizeType.small}
-              onClick={onAlertClickAction}
-            />
-          </div>
-        ) : null}
-      </div>
-    </>
-  );
-};
+                if (option.items) {
+                  return (
+                    <SubmenuItem
+                      key={option.key}
+                      option={option}
+                      toggle={toggle}
+                      noHover={noHover}
+                      recalculateHeight={recalculateHeight}
+                      openedSubmenuKey={openedSubmenuKey}
+                      setOpenedSubmenuKey={setOpenedSubmenuKey}
+                      openByDefault={false}
+                    />
+                  );
+                }
+
+                if (option.isSeparator)
+                  return (
+                    <div key={option.key} className="separator-wrapper">
+                      <div className="is-separator" />
+                    </div>
+                  );
+
+                return (
+                  <DropDownItem
+                    id={option.id}
+                    label={option.label}
+                    icon={option.icon ? option.icon : ""}
+                    className={classNames(
+                      styles.dropDownItem,
+                      "drop-down-item-button",
+                    )}
+                    key={option.key}
+                    onClick={optionOnClickAction}
+                  />
+                );
+              })}
+            </div>
+          ) : null}
+        </div>
+      );
+    };
+
+    const children = renderItems();
+
+    return (
+      <>
+        <Backdrop
+          zIndex={210}
+          visible={isOpen || false}
+          onClick={outsideClick}
+        />
+        <div
+          ref={mainButtonRef}
+          className={className}
+          style={{ zIndex: `${isOpen ? "211" : "201"}`, ...style }}
+          data-testid="main-button-mobile"
+        >
+          <FloatingButton
+            className={classNames(styles.floatingButton)}
+            icon={isOpen ? FloatingButtonIcons.minus : FloatingButtonIcons.plus}
+            onClick={onMainButtonClick}
+            withoutProgress
+          />
+
+          <DropDown
+            className={classNames(styles.dropDown, "mainBtnDropdown")}
+            style={{ ...dropdownStyle, height }}
+            open={isOpen}
+            withBackdrop={false}
+            directionY="top"
+            directionX="right"
+            isDefaultMode={false}
+            manualWidth={manualWidth || "400px"}
+            data-testid="dropdown"
+          >
+            {isMobile ? (
+              <Scrollbar
+                style={{ position: "absolute" }}
+                scrollClass="section-scroll"
+                ref={dropDownRef}
+              >
+                {children}
+              </Scrollbar>
+            ) : (
+              children
+            )}
+          </DropDown>
+
+          {alert && !isOpen ? (
+            <div className={styles.wrapperAlertIcon}>
+              <ButtonAlertReactSvg
+                className={styles.alertIcon}
+                data-size={IconSizeType.small}
+                onClick={onAlertClickAction}
+              />
+            </div>
+          ) : null}
+        </div>
+      </>
+    );
+  },
+);
+
+MainButtonMobile.displayName = "MainButtonMobile";
 
 export { MainButtonMobile };

@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { RefObject, LegacyRef } from "react";
 import { DeviceType } from "../../enums";
 import { TGetContextMenuModel } from "../context-menu";
 
@@ -46,6 +47,10 @@ export type TContextButtonProps = {
   title?: string;
   onCloseDropBox?: () => void;
   onContextOptionsClick?: () => void;
+  contextButtonAnimation?: (
+    setAnimationClasses: (classes: string[]) => void,
+  ) => () => void;
+  guidAnimationVisible?: boolean;
 };
 
 export type TPlusButtonProps = {
@@ -57,6 +62,7 @@ export type TPlusButtonProps = {
   onPlusClick?: VoidFunction;
   isFrame?: boolean;
   onCloseDropBox?: () => void;
+  forwardedRef?: React.RefObject<HTMLDivElement>;
 };
 
 export type TToggleInfoPanelButtonProps = {
@@ -144,6 +150,9 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
     isEmptyPage?: boolean;
 
     isMobile?: boolean;
+    /** Used for guidance */
+    addButtonRef?: RefObject<HTMLDivElement>;
+    buttonRef?: LegacyRef<HTMLButtonElement>;
   };
 
 export type TDropBoxProps = TArrowButtonProps &

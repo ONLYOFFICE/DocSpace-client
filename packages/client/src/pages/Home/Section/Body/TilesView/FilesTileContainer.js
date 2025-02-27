@@ -33,7 +33,6 @@ import React, {
   useContext,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 
 import { Context } from "@docspace/shared/utils";
 
@@ -42,8 +41,9 @@ import { FileTileProvider } from "./FileTile.provider";
 import { elementResizeDetector } from "./FileTile.utils";
 
 import TileContainer from "./sub-components/TileContainer";
+import withContainer from "../../../../../HOCs/withContainer";
 
-const FilesTileContainer = ({ filesList }) => {
+const FilesTileContainer = ({ list, isTutorialEnabled }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
@@ -106,7 +106,7 @@ const FilesTileContainer = ({ filesList }) => {
   }, []);
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => {
+    return list.map((item, index) => {
       return index % 11 == 0 ? (
         <FileTile
           id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
@@ -129,7 +129,7 @@ const FilesTileContainer = ({ filesList }) => {
         />
       );
     });
-  }, [filesList, onSetTileRef, sectionWidth]);
+  }, [list, onSetTileRef, sectionWidth, isTutorialEnabled]);
 
   return (
     <FileTileProvider columnCount={columnCount} thumbSize={thumbSize}>
@@ -146,10 +146,4 @@ const FilesTileContainer = ({ filesList }) => {
   );
 };
 
-export default inject(({ filesStore }) => {
-  const { filesList } = filesStore;
-
-  return {
-    filesList,
-  };
-})(observer(FilesTileContainer));
+export default withContainer(FilesTileContainer);

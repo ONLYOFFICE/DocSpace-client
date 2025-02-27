@@ -42,9 +42,6 @@ class PureVersionHistory extends React.Component {
       <SectionWrapper
         withBodyAutoFocus
         headerBorderBottom
-        showSecondaryProgressBar={showProgressBar}
-        secondaryProgressBarIcon="file"
-        showSecondaryButtonAlert={false}
         withBodyScroll={false}
       >
         <Section.SectionHeader>

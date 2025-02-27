@@ -73,6 +73,12 @@ const ControlButtons = ({
   // Tariff bar
   tariffBar,
   title,
+
+  // Guidance props
+  addButtonRef,
+  buttonRef,
+  contextButtonAnimation,
+  guidAnimationVisible,
 }: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -88,6 +94,7 @@ const ControlButtons = ({
 
     return (
       <Button
+        ref={buttonRef}
         className="navigation_button"
         label={navigationButtonLabel}
         size={ButtonSize.extraSmall}
@@ -110,6 +117,7 @@ const ControlButtons = ({
 
     return (
       <PlusButton
+        forwardedRef={addButtonRef}
         id="header_add-button"
         className="add-button"
         getData={getContextOptionsPlus}
@@ -136,6 +144,8 @@ const ControlButtons = ({
         isMobile={isMobile || false}
         onCloseDropBox={onCloseDropBox}
         onContextOptionsClick={onContextOptionsClick}
+        contextButtonAnimation={contextButtonAnimation}
+        guidAnimationVisible={guidAnimationVisible}
       />
     );
   };

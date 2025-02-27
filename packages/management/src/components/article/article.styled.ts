@@ -159,7 +159,7 @@ export const StyledHideButton = styled.div<{
     }
   }
 
-  .article-hide-menu-icon > div {
+  .article-hide-menu-icon {
     display: flex;
     align-items: center;
   }

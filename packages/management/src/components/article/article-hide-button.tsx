@@ -24,12 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ArticleHideMenuReactSvgUrl from "PUBLIC_DIR/images/article-hide-menu.react.svg?url";
-import ArticleShowMenuReactSvgUrl from "PUBLIC_DIR/images/article-show-menu.react.svg?url";
+import ArticleHideMenuReactSvg from "PUBLIC_DIR/images/article-hide-menu.react.svg";
+import ArticleShowMenuReactSvg from "PUBLIC_DIR/images/article-show-menu.react.svg";
 
 import { useTheme } from "styled-components";
-import { ReactSVG } from "react-svg";
+import { useTranslation } from "react-i18next";
+
 import { Text } from "@docspace/shared/components/text";
+
 import { useStores } from "@/hooks/useStores";
 import {
   StyledHideButtonWrapper,
@@ -42,6 +44,7 @@ export const HideButton = () => {
     articleStore: { showText, setShowText },
   } = useStores();
   const theme = useTheme();
+  const { t } = useTranslation(["Common"]);
 
   return (
     <StyledHideButtonWrapper
@@ -50,14 +53,13 @@ export const HideButton = () => {
     >
       {!showText ? (
         <StyledShowButton>
-          <ReactSVG src={ArticleShowMenuReactSvgUrl} />
+          <ArticleShowMenuReactSvg />
         </StyledShowButton>
       ) : (
         <StyledHideButton currentColorScheme={theme?.currentColorScheme}>
-          <ReactSVG
-            className="article-hide-menu-icon"
-            src={ArticleHideMenuReactSvgUrl}
-          />
+          <div className="article-hide-menu-icon">
+            <ArticleHideMenuReactSvg />
+          </div>
           <Text
             className="article-hide-menu-text"
             fontWeight={600}
@@ -65,7 +67,7 @@ export const HideButton = () => {
             noSelect
             truncate
           >
-            Hide menu
+            {t("HideArticleMenu")}
           </Text>
         </StyledHideButton>
       )}

@@ -26,10 +26,10 @@
 
 "use client";
 
-import SpacesSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
-import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
-import PaymentIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
-import GiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
+import SpacesSvg from "PUBLIC_DIR/images/spaces.react.svg";
+import SettingsReactSvg from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg";
+import PaymentIcon from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg";
+import GiftReactSvg from "PUBLIC_DIR/images/gift.react.svg";
 
 import React, { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
@@ -84,7 +84,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
         <ArticleItem
           key="spaces"
           text={t("Common:Spaces")}
-          icon={SpacesSvgUrl}
+          iconNode={<SpacesSvg />}
           showText={showText}
           onClick={() => onItemClick("spaces")}
           isActive={pathname === "/spaces"}
@@ -94,7 +94,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
         <ArticleItem
           key="settings"
           text={t("Common:Settings")}
-          icon={SettingsReactSvgUrl}
+          iconNode={<SettingsReactSvg />}
           showText={showText}
           onClick={() => onItemClick("settings/branding")}
           isActive={pathname.includes("/settings")}
@@ -105,7 +105,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
           <ArticleItem
             key="payments"
             text={t("Common:PaymentsTitle")}
-            icon={PaymentIconUrl}
+            iconNode={<PaymentIcon />}
             showText={showText}
             onClick={() => onItemClick("payments")}
             isActive={pathname === "/payments"}
@@ -116,7 +116,7 @@ export const Article = observer(({ isCommunity }: { isCommunity: boolean }) => {
           <ArticleItem
             key="bonus"
             text={t("Common:Bonus")}
-            icon={GiftReactSvgUrl}
+            iconNode={<GiftReactSvg />}
             showText={showText}
             onClick={() => onItemClick("bonus")}
             isActive={pathname === "/bonus"}

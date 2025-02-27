@@ -82,8 +82,7 @@ describe("FloatingButton", () => {
   });
 
   it("shows progress indicator when percent > 0", () => {
-    const percent = 50;
-    renderComponent(<FloatingButton {...defaultProps} percent={percent} />);
+    renderComponent(<FloatingButton {...defaultProps} />);
     const progress = screen.getByTestId("floating-button-progress");
     expect(progress).toBeInTheDocument();
   });
@@ -104,7 +103,6 @@ describe("FloatingButton", () => {
       <FloatingButton
         {...defaultProps}
         clearUploadedFilesHistory={clearUploadedFilesHistory}
-        percent={100}
       />,
     );
 

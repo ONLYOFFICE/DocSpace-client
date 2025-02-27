@@ -53,7 +53,7 @@ const ListComponent = ({
   const loaderRef = useRef<InfiniteLoader | null>(null);
   const listRef = useRef<List | null>(null);
 
-  const listItemRef = useRef();
+  const listItemRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     listRef?.current?.forceUpdate();

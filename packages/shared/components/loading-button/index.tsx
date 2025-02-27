@@ -31,9 +31,6 @@ import StyledCircle from "../color-theme/sub-components/StyledCircle";
 import type { LoadingButtonProps } from "./LoadingButton.types";
 
 const LoadingButton: React.FC<LoadingButtonProps> = ({
-  id,
-  className,
-  style,
   percent = 0,
   onClick,
   inConversion = false,
@@ -56,12 +53,9 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
 
   return (
     <ColorTheme
-      id={id}
-      className={className}
-      style={style}
-      onClick={onClick}
       themeId={ThemeId.LoadingButton}
       loaderColor={loaderColor}
+      onClick={onClick}
     >
       <StyledCircle
         percent={percent}

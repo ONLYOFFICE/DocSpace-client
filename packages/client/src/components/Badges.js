@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import React, { useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
@@ -67,9 +67,18 @@ const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
 
 const StyledWrapperNewBadge = styled.div.attrs(injectDefaultTheme)`
   position: absolute;
-  right: -6px;
+
   top: -6px;
   padding: 0;
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          left: -6px;
+        `
+      : css`
+          right: -6px;
+        `}
 
   background: ${(props) => props.theme.filesBadges.backgroundColor};
 

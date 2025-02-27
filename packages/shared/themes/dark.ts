@@ -2926,7 +2926,7 @@ const Dark: TTheme = {
         background: darkGrayLight,
       },
       storageManagement: {
-        grayBackgroundText: grayDark,
+        grayBackgroundText: white,
         descriptionColor: darkGrayDark,
         dividerColor: grayDarkMid,
       },

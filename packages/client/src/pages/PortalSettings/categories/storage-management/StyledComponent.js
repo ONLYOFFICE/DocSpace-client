@@ -29,7 +29,6 @@ import styled from "styled-components";
 import { Row } from "@docspace/shared/components/rows";
 import { Text } from "@docspace/shared/components/text";
 import { mobile } from "@docspace/shared/utils";
-import { globalColors } from "@docspace/shared/themes";
 
 const StyledBaseQuotaComponent = styled.div`
   .quotas_description {
@@ -95,7 +94,6 @@ const StyledDiscSpaceUsedComponent = styled.div`
     display: grid;
     grid-template-columns: 1fr 16px;
 
-    padding: 12px 16px;
     border-radius: 6px;
 
     .disk-space_size-info {
@@ -235,12 +233,10 @@ const StyledMainInfo = styled.div`
 
   column-gap: 24px;
   row-gap: 12px;
-  padding: 12px;
+  padding: 0 12px 16px 0px;
   p {
     color: ${(props) =>
       props.theme.client.settings.storageManagement.grayBackgroundText};
-    font-family: Regular;
-    color: ${globalColors.black};
   }
 `;
 

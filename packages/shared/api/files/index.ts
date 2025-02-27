@@ -68,6 +68,7 @@ import {
   TUploadOperation,
   TConnectingStorages,
   TIndexItems,
+  TFormRoleMappingRequest,
 } from "./types";
 
 export async function openEdit(
@@ -1574,4 +1575,12 @@ export async function deleteVersionFile(fileId: number, versions: number[]) {
   })) as TOperation[];
 
   return res;
+}
+
+export async function formRoleMapping(data: TFormRoleMappingRequest) {
+  return request({
+    method: "post",
+    url: `files/file/${data.formId}/formrolemapping`,
+    data,
+  });
 }

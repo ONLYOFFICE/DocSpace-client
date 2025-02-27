@@ -445,3 +445,8 @@ export type TIndexItems = {
 };
 
 export type TConnectingStorages = TConnectingStorage[];
+
+export type TFormRoleMappingRequest = {
+  formId: number;
+  roles: { userId: string; roleName: string; roleColor: string }[];
+};

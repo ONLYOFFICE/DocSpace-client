@@ -233,7 +233,7 @@ const StyledMainInfo = styled.div`
 
   column-gap: 24px;
   row-gap: 12px;
-  padding: 0 12px 16px 0px;
+  padding-right: 12px;
   p {
     color: ${(props) =>
       props.theme.client.settings.storageManagement.grayBackgroundText};

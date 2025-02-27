@@ -36,8 +36,16 @@ export type RegionProps = {
   region: string;
 };
 
+interface StorageManagement {
+  portalInfo: {
+    region: string;
+  };
+}
+
 const Region = ({ region }: RegionProps) => {
   const { t } = useTranslation("Settings");
+  const US = "USA (Oregon)";
+  const DEU = "Germany (Frankfurt am Main)"
 
   return (
     <>
@@ -58,9 +66,9 @@ const Region = ({ region }: RegionProps) => {
           className={styles.regionСountry}
         >
           {region === "US"
-            ? "USA (Oregon)"
+            ? US
             : region === "DEU"
-              ? "Germany (Frankfurt am Main)"
+              ? DEU
               : null}
         </Text>
       </div>
@@ -77,9 +85,11 @@ const Region = ({ region }: RegionProps) => {
   );
 };
 
-export default inject(({ storageManagement }: TStore) => {
-  const { portalInfo } = storageManagement;
-  return {
-    region: portalInfo.region,
-  };
-})(observer(Region));
+export default inject(
+  ({ storageManagement }: { storageManagement: StorageManagement }) => {
+    const { portalInfo } = storageManagement;
+    return {
+      region: portalInfo.region,
+    };
+  },
+)(observer(Region));

@@ -105,8 +105,8 @@ class OAuthStore {
   }
 
   setJwtToken = async () => {
-    const portalInfo = await api.portal.getPortal();
     if (this.userStore!.user! === null) return;
+    const portalInfo = await api.portal.getPortal();
     const { id, email, displayName } = this.userStore!.user!;
 
     const token = generateJwt(

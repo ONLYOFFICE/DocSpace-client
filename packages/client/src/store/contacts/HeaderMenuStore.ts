@@ -179,7 +179,7 @@ class HeaderMenuStore {
             ? () =>
                 this.usersStore.changeType(
                   EmployeeType.User,
-                  this.usersStore.getUsersToMakeEmployees,
+                  getUsersToMakeEmployees,
                 )
             : null,
         withDropDown: !isRoomAdmin,

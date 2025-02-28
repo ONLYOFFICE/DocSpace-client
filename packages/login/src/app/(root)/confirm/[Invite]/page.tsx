@@ -91,8 +91,8 @@ async function Page({ searchParams, params }: LinkInviteProps) {
               passwordSettings={passwordSettings}
               capabilities={capabilities}
               thirdPartyProviders={thirdParty}
-              legalTerms={settings.legalTerms}
-              licenseUrl={settings.licenseUrl}
+              legalTerms={settings.externalResources.common?.entries.legalterms}
+              licenseUrl={settings.externalResources.common?.entries.license}
               isStandalone={settings.standalone}
               logoText={settings.logoText}
             />

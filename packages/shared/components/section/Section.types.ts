@@ -26,6 +26,7 @@
 
 import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
+
 import { ContextMenuModel } from "../context-menu";
 
 export type SubInfoPanelHeaderProps = {

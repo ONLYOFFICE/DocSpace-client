@@ -56,7 +56,7 @@ const ContextButton = ({
     if (guidAnimationVisible) {
       return contextButtonAnimation?.(setAnimationClasses);
     }
-  }, [guidAnimationVisible]);
+  }, [guidAnimationVisible, contextButtonAnimation]);
 
   const toggle = (e: React.MouseEvent<HTMLDivElement>, open: boolean) => {
     if (open) {

@@ -32,7 +32,7 @@ import { MainContainer } from "../StyledSecurity";
 import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
 const MobileView = (props) => {
-  const { t } = props;
+  const { t, withoutExternalLink } = props;
 
   const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ const MobileView = (props) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer withoutExternalLink={withoutExternalLink}>
       <MobileCategoryWrapper
         title={t("SettingPasswordTittle")}
         subtitle={

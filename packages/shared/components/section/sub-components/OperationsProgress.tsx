@@ -34,6 +34,7 @@ import React, {
 import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
+
 import { isMobile } from "react-device-detect";
 import { FloatingButton } from "../../floating-button";
 import { FloatingButtonIcons } from "../../floating-button/FloatingButton.enums";

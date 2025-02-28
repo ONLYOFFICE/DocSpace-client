@@ -323,6 +323,7 @@ const PortalRenamingComponent = (props) => {
     <StyledSettingsComponent
       hasScroll={hasScroll}
       className="category-item-wrapper"
+      withoutExternalLink={!renamingSettingsUrl}
     >
       {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
@@ -338,15 +339,17 @@ const PortalRenamingComponent = (props) => {
         <Text fontSize="13px" fontWeight={400}>
           <Trans t={t} i18nKey="PortalRenamingNote" />
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={renamingSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {renamingSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={renamingSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       {settingsBlock}
       <SaveCancelButtons

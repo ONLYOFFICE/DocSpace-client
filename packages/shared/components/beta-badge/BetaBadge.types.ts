@@ -28,7 +28,7 @@ import type { PlacesType } from "react-tooltip";
 import type { TColorScheme } from "../../themes";
 
 export type BetaBadgeProps = {
-  forumLink?: string;
+  forumLinkUrl?: string;
   documentationEmail?: string;
   currentColorScheme?: TColorScheme;
   currentDeviceType?: "desktop" | "tablet" | "mobile";

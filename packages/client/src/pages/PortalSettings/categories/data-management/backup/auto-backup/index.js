@@ -507,16 +507,18 @@ class AutomaticBackup extends React.PureComponent {
             })}
           </Text>
           {!isManagement() ? (
-            <Link
-              className="link-learn-more"
-              href={automaticBackupUrl}
-              target="_blank"
-              fontSize="13px"
-              color={currentColorScheme.main?.accent}
-              isHovered
-            >
-              {t("Common:LearnMore")}
-            </Link>
+            automaticBackupUrl ? (
+              <Link
+                className="link-learn-more"
+                href={automaticBackupUrl}
+                target="_blank"
+                fontSize="13px"
+                color={currentColorScheme.main?.accent}
+                isHovered
+              >
+                {t("Common:LearnMore")}
+              </Link>
+            ) : null
           ) : null}
         </div>
 

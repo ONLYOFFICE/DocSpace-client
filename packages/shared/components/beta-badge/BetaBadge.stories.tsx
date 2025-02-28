@@ -91,7 +91,7 @@ export const Default: Story = {
   args: {
     documentationEmail: "support@example.com",
     currentDeviceType: DeviceType.desktop,
-    forumLink: "https://forum.example.com",
+    forumLinkUrl: "https://forum.example.com",
   },
 };
 
@@ -100,7 +100,7 @@ const ThemeTemplate = () => (
     documentationEmail="support@example.com"
     currentDeviceType={DeviceType.desktop}
     currentColorScheme={{ main: { accent: "#4781d1" } }}
-    forumLink="https://forum.example.com"
+    forumLinkUrl="https://forum.example.com"
   />
 );
 

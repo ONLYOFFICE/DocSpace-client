@@ -127,17 +127,19 @@ const SecretKeyInput = (props) => {
           tooltipContent={
             <Text fontSize="12px">
               {t("SecretKeyHint")} <br /> <br />
-              <Link
-                id="read-more-link"
-                type="page"
-                isHovered
-                fontWeight={600}
-                href={webhooksGuideUrl}
-                target="_blank"
-                className="link"
-              >
-                {t("ReadMore")}
-              </Link>
+              {webhooksGuideUrl ? (
+                <Link
+                  id="read-more-link"
+                  type="page"
+                  isHovered
+                  fontWeight={600}
+                  href={webhooksGuideUrl}
+                  target="_blank"
+                  className="link"
+                >
+                  {t("ReadMore")}
+                </Link>
+              ) : null}
             </Text>
           }
           place="bottom"

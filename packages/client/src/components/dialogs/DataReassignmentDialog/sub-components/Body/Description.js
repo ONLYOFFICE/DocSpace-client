@@ -38,15 +38,17 @@ const Description = ({ t, dataReassignmentUrl }) => {
         {t("DataReassignmentDialog:NoteDataReassignment")}
       </Text>
 
-      <Link
-        target="_blank"
-        isHovered
-        fontWeight={600}
-        style={{ textDecoration: "underline" }}
-        href={dataReassignmentUrl}
-      >
-        {t("DataReassignmentDialog:MoreAboutDataTransfer")}
-      </Link>
+      {dataReassignmentUrl ? (
+        <Link
+          target="_blank"
+          isHovered
+          fontWeight={600}
+          style={{ textDecoration: "underline" }}
+          href={dataReassignmentUrl}
+        >
+          {t("DataReassignmentDialog:MoreAboutDataTransfer")}
+        </Link>
+      ) : null}
     </StyledAvailableList>
   );
 };

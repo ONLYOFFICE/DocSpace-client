@@ -79,18 +79,20 @@ const OAuthEmptyScreen = ({
         {descText}
       </Text>
       <p>
-        <ColorTheme
-          target={LinkTarget.blank}
-          type={LinkType.page}
-          fontWeight={600}
-          isHovered
-          href={apiOAuthLink}
-          tag="a"
-          themeId={ThemeId.Link}
-          style={{ marginBottom: "20px" }}
-        >
-          {t("OAuth:OAuth")} {t("Common:Guide")}
-        </ColorTheme>
+        {apiOAuthLink ? (
+          <ColorTheme
+            target={LinkTarget.blank}
+            type={LinkType.page}
+            fontWeight={600}
+            isHovered
+            href={apiOAuthLink}
+            tag="a"
+            themeId={ThemeId.Link}
+            style={{ marginBottom: "20px" }}
+          >
+            {t("OAuth:OAuth")} {t("Common:Guide")}
+          </ColorTheme>
+        ) : null}
       </p>
 
       <RegisterNewButton />

@@ -76,7 +76,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
   const renderComponent = () => {
     const key = searchParams.get("key");
 
-    if (isLoadedUser && !user) {
+    if (isLoadedUser && !user && location.pathname.includes("/rooms/shared")) {
       const filter = FilesFilter.getDefault();
       const subFolder = new URLSearchParams(window.location.search).get(
         "folder",
@@ -169,6 +169,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname.includes("bonus") && !isCommunity;
 
     const isAboutPage = location.pathname.includes("about");
+
+    console.log("isAuthenticated", isAuthenticated);
 
     if (location.pathname === "/shared/invalid-link") {
       return children;

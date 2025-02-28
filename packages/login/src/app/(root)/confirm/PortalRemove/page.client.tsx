@@ -36,21 +36,24 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { TError } from "@/types";
-import { URL_ONLYOFFICE } from "@/utils/constants";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { ButtonsWrapper } from "@/components/Confirm.styled";
 
 type RemovePortalFormProps = {
   siteUrl?: string;
+  onlyofficeUrl: string;
 };
 
-const RemovePortalForm = ({ siteUrl }: RemovePortalFormProps) => {
+const RemovePortalForm = ({
+  onlyofficeUrl,
+  siteUrl,
+}: RemovePortalFormProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const { linkData } = useContext(ConfirmRouteContext);
 
   const [isRemoved, setIsRemoved] = useState(false);
 
-  const url = siteUrl ? siteUrl : URL_ONLYOFFICE;
+  const url = siteUrl ? siteUrl : onlyofficeUrl;
 
   const onDeleteClick = async () => {
     try {

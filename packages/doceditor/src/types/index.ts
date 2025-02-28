@@ -38,9 +38,11 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
-import {
+import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
+  ShareAccessRights,
+  StartFillingMode,
 } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
@@ -103,6 +105,7 @@ export type TDocument = {
     fileKey: string;
     instanceId: string;
     key: string;
+    roomId: string;
   };
   title: string;
   token: string;
@@ -182,7 +185,7 @@ export interface IInitialConfig {
   errorMessage?: string;
   message?: undefined;
   startFilling?: boolean;
-
+  startFillingMode?: StartFillingMode;
   fillingSessionId?: string;
 }
 
@@ -243,6 +246,7 @@ export type EditorProps = {
   onSDKRequestSelectDocument?: (event: object) => void;
   onSDKRequestReferenceSource?: (event: object) => void;
   onSDKRequestStartFilling?: (haederLabel: string) => void;
+  onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
 };
 
 export type TEventData = {
@@ -457,4 +461,9 @@ export type ConflictStateType = {
   reject: (reason?: any) => void;
   fileName: string;
   folderName: string;
+};
+
+export type TFormRole = {
+  name: string;
+  color: string;
 };

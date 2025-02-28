@@ -148,6 +148,7 @@ const Selector = ({
   withBlur,
   withoutBackground,
   withInfoBadge,
+  injectedElement,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
 
@@ -652,6 +653,7 @@ const Selector = ({
           descriptionText={descriptionText}
           inputItemVisible={inputItemVisible}
           setInputItemVisible={setInputItemVisible}
+          injectedElement={injectedElement}
           // info
           {...infoProps}
         />

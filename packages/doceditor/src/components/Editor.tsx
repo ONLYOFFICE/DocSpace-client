@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
-
+import { match, P } from "ts-pattern";
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
@@ -33,11 +33,15 @@ import { useTranslation } from "react-i18next";
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
 
-import { FolderType, ThemeKeys } from "@docspace/shared/enums";
+import {
+  FolderType,
+  StartFillingMode,
+  ThemeKeys,
+} from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
-import { getBackUrl } from "@/utils";
+import { getBackUrl, isFormRole } from "@/utils";
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
@@ -89,6 +93,7 @@ const Editor = ({
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
   onSDKRequestStartFilling,
+  onStartFillingVDRPanel,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
@@ -314,8 +319,23 @@ const Editor = ({
   }
 
   if (config?.startFilling && !IS_ZOOM) {
-    newConfig.events.onRequestStartFilling = () =>
-      onSDKRequestStartFilling?.(t("Common:ShareAndCollect"));
+    newConfig.events.onRequestStartFilling = (event: {}) => {
+      match(config.startFillingMode)
+        .with(StartFillingMode.ShareToFillOut, () =>
+          onSDKRequestStartFilling?.(t("Common:ShareAndCollect")),
+        )
+        .with(StartFillingMode.StartFilling, () => {
+          if (
+            typeof event === "object" &&
+            event !== null &&
+            "data" in event &&
+            isFormRole(event.data)
+          ) {
+            onStartFillingVDRPanel?.(event.data);
+          }
+        })
+        .otherwise(() => {});
+    };
   }
 
   newConfig.events.onRequestFillingStatus = (event: object) => {
@@ -339,8 +359,6 @@ const Editor = ({
       `${origin}/doceditor/completed-form?${combinedSearchParams.toString()}`,
     );
   };
-
-  console.log({ newConfig });
 
   return (
     <DocumentEditor

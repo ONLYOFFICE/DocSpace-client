@@ -672,3 +672,9 @@ export enum RoleStatus {
   Filled = "filled",
   Stopped = "stopped",
 }
+
+export enum StartFillingMode {
+  None,
+  ShareToFillOut,
+  StartFilling,
+}

@@ -49,6 +49,7 @@ import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 import useStartFillingSelectDialog from "@/hooks/useStartFillingSelectDialog";
+import { useStartFillingPanel } from "@/hooks/useStartFillingPanel";
 import useSDK from "@/hooks/useSDK";
 
 import Editor from "./Editor";
@@ -78,6 +79,14 @@ const ConflictResolveDialog = dynamic(() => import("./ConflictResolveDialog"), {
 import { calculateAsideHeight } from "@/utils";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 
+const StartFillingPanel = dynamic(
+  async () =>
+    (await import("@docspace/shared/dialogs/start-filling")).StartFillingPanel,
+  {
+    ssr: false,
+  },
+);
+
 const Root = ({
   settings,
   config,
@@ -98,6 +107,7 @@ const Root = ({
   const fileInfo = config?.file;
 
   const instanceId = config?.document?.referenceData.instanceId;
+  const roomId = config?.document?.referenceData.roomId;
 
   const isSkipError =
     error?.status === "not-found" ||
@@ -171,6 +181,15 @@ const Root = ({
     onCloseSharingDialog,
     onSDKRequestSharingSettings,
   } = useShareDialog(config, onSDKRequestStartFilling);
+
+  const {
+    roles,
+    onStartFilling,
+    inviteUserToRoom,
+    startFillingPanelVisible,
+    setStartFillingPanelVisible,
+    onStartFillingVDRPanel,
+  } = useStartFillingPanel();
 
   useUpdateSearchParamId(fileId, hash);
 
@@ -248,6 +267,7 @@ const Root = ({
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
           onSDKRequestStartFilling={onSDKRequestStartFilling}
           organizationName={organizationName}
+          onStartFillingVDRPanel={onStartFillingVDRPanel}
         />
       )}
 
@@ -299,6 +319,18 @@ const Root = ({
       )}
       {conflictDataDialog.visible && (
         <ConflictResolveDialog {...conflictDataDialog} />
+      )}
+      {user && settings && fileInfo && startFillingPanelVisible && roomId && (
+        <StartFillingPanel
+          user={user}
+          roles={roles}
+          roomId={roomId}
+          settings={settings}
+          fileId={fileInfo.id}
+          onStartFilling={onStartFilling}
+          inviteUserToRoom={inviteUserToRoom}
+          setStartFillingPanelVisible={setStartFillingPanelVisible}
+        />
       )}
     </div>
   );

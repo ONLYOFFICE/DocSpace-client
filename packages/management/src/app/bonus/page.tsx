@@ -48,12 +48,17 @@ async function Page() {
   if (!settings || !quota || !portalTariff || !paymentSettings)
     redirect(`${getBaseUrl()}/login`);
 
-  const { helpLink, logoText } = settings;
+  const {
+    helpLink,
+    logoText,
+    enterpriseInstallScriptUrl,
+    enterpriseInstallWindowsUrl,
+    feedbackAndSupportUrl,
+    salesEmail,
+  } = settings;
   const { trial } = quota;
   const { enterprise, developer, openSource } = portalTariff;
-  const { salesEmail } = paymentSettings;
 
-  const helpUrl = "https://helpdesk.onlyoffice.com";
   const dataBackupUrl = `${helpLink}/administration/docspace-settings.aspx#CreatingBackup_block`;
 
   if (!openSource) return redirect(`${getBaseUrl()}/error/403`);
@@ -64,10 +69,12 @@ async function Page() {
       isTrial={trial}
       isDeveloper={developer}
       isCommunity={openSource}
-      helpUrl={helpUrl}
+      feedbackAndSupportUrl={feedbackAndSupportUrl}
       salesEmail={salesEmail}
       dataBackupUrl={dataBackupUrl}
       logoText={logoText}
+      enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
+      enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
     />
   );
 }

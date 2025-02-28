@@ -52,7 +52,7 @@ async function Page() {
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
   if (!settings || !portalTariff) redirect(`${getBaseUrl()}/login`);
 
-  const { standalone, licenseUrl, logoText } = settings;
+  const { standalone, licenseAgreementsUrl, logoText } = settings;
   const { enterprise } = portalTariff;
 
   return (
@@ -61,7 +61,7 @@ async function Page() {
       quota={quota}
       companyInfoSettingsData={companyInfo}
       standalone={standalone}
-      licenseUrl={licenseUrl}
+      licenseAgreementsUrl={licenseAgreementsUrl}
       buildInfo={buildInfo!}
       isEnterprise={enterprise}
       logoText={logoText}

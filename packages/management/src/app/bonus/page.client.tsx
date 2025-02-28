@@ -34,10 +34,12 @@ const BonusPage = ({
   isTrial,
   isDeveloper,
   isCommunity,
-  helpUrl,
+  feedbackAndSupportUrl,
   salesEmail,
   dataBackupUrl,
   logoText,
+  enterpriseInstallScriptUrl,
+  enterpriseInstallWindowsUrl,
 }: IBonusProps) => {
   return (
     <Bonus
@@ -45,10 +47,12 @@ const BonusPage = ({
       isTrial={isTrial}
       isDeveloper={isDeveloper}
       isCommunity={isCommunity}
-      helpUrl={helpUrl}
+      feedbackAndSupportUrl={feedbackAndSupportUrl}
       salesEmail={salesEmail}
       dataBackupUrl={dataBackupUrl}
       logoText={logoText}
+      enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
+      enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
     />
   );
 };

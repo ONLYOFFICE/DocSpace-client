@@ -51,7 +51,7 @@ export const CompanyInfoPage = ({
   quota,
   companyInfoSettingsData,
   standalone,
-  licenseUrl,
+  licenseAgreementsUrl,
   buildInfo,
   isEnterprise,
   logoText,
@@ -60,7 +60,7 @@ export const CompanyInfoPage = ({
   quota?: TPaymentQuota;
   companyInfoSettingsData: ICompanySettings;
   standalone: boolean;
-  licenseUrl: string;
+  licenseAgreementsUrl: string;
   buildInfo: IBuildInfo;
   isEnterprise: boolean;
   logoText: string;
@@ -124,7 +124,7 @@ export const CompanyInfoPage = ({
       isLoading={isLoading}
       companyInfoSettingsIsDefault={companyData.isDefault}
       standalone={standalone}
-      licenseUrl={licenseUrl}
+      licenseAgreementsUrl={licenseAgreementsUrl}
       buildVersionInfo={buildInfo}
       isEnterprise={isEnterprise}
       logoText={logoText}

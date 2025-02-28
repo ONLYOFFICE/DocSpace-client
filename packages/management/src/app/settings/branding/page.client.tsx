@@ -61,7 +61,7 @@ const BrandingPage = ({
   additionalResources,
   companyInfo,
   buildInfo,
-  licenseUrl,
+  licenseAgreementsUrl,
   isEnterprise,
   logoText,
 }: {
@@ -75,7 +75,7 @@ const BrandingPage = ({
   additionalResources: TAdditionalResources;
   companyInfo: ICompanySettings;
   buildInfo: IBuildInfo;
-  licenseUrl: string;
+  licenseAgreementsUrl: string;
   isEnterprise: boolean;
   logoText: string;
 }) => {
@@ -127,7 +127,7 @@ const BrandingPage = ({
             quota={quota}
             companyInfoSettingsData={companyInfo}
             standalone={standalone}
-            licenseUrl={licenseUrl}
+            licenseAgreementsUrl={licenseAgreementsUrl}
             buildInfo={buildInfo}
             isEnterprise={isEnterprise}
             logoText={logoText}

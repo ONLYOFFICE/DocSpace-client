@@ -616,5 +616,6 @@
   "RoleCommentator": "Commenter",
   "RoleCommentatorDescription": "Operations with existing files: viewing, commenting.",
   "RoleViewer": "Viewer",
-  "RoleViewerDescription": "File viewing"
+  "RoleViewerDescription": "File viewing",
+  "RolesFromTheForm": "Roles from the form:"
 }

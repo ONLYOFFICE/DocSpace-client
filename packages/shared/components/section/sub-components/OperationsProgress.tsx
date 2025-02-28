@@ -34,7 +34,7 @@ import React, {
 import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import type { AnimationEvent } from "react";
+
 import { isMobile } from "react-device-detect";
 import { FloatingButton } from "../../floating-button";
 import { FloatingButtonIcons } from "../../floating-button/FloatingButton.enums";
@@ -106,7 +106,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   };
 
   const handleAnimationEnd = useCallback(
-    (e: AnimationEvent) => {
+    (e: globalThis.AnimationEvent) => {
       const animation = e.animationName;
 
       if (
@@ -176,20 +176,21 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
       setIsHideTooltip(false);
     }, 100);
   };
+
   useLayoutEffect(() => {
     const container = containerRef.current;
 
     if (!container) return;
 
-    container.addEventListener<"animationend">(
+    container.addEventListener(
       "animationend",
-      handleAnimationEnd,
+      handleAnimationEnd as EventListener,
     );
 
     return () => {
-      container.removeEventListener<"animationend">(
+      container.removeEventListener(
         "animationend",
-        handleAnimationEnd,
+        handleAnimationEnd as EventListener,
       );
     };
   }, [handleAnimationEnd]);

@@ -55,6 +55,7 @@ const AccessPortal = (props) => {
     ipSettingsUrl,
     isMobileView,
     resetIsInit,
+    helpCenterDomain,
   } = props;
 
   useEffect(() => {
@@ -67,7 +68,10 @@ const AccessPortal = (props) => {
 
   if (isMobileView) return <MobileView />;
   return (
-    <MainContainer className="desktop-view">
+    <MainContainer
+      className="desktop-view"
+      withoutExternalLink={!helpCenterDomain}
+    >
       <Text className="subtitle">{t("PortalSecurityTitle")}</Text>
 
       <Text fontSize="16px" fontWeight="700">
@@ -81,15 +85,17 @@ const AccessPortal = (props) => {
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
-        <Link
-          className="link-learn-more"
-          target="_blank"
-          isHovered
-          color={currentColorScheme.main?.accent}
-          href={passwordStrengthSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {passwordStrengthSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={passwordStrengthSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <PasswordStrengthSection />
@@ -107,15 +113,17 @@ const AccessPortal = (props) => {
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="TwoFactorAuthSave" />
         </Text>
-        <Link
-          className="link-learn-more"
-          target="_blank"
-          isHovered
-          color={currentColorScheme.main?.accent}
-          href={tfaSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {tfaSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={tfaSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <TfaSection />
@@ -131,15 +139,17 @@ const AccessPortal = (props) => {
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
-        <Link
-          className="link-learn-more"
-          target="_blank"
-          isHovered
-          color={currentColorScheme.main?.accent}
-          href={trustedMailDomainSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {trustedMailDomainSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={trustedMailDomainSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <TrustedMailSection />
@@ -152,15 +162,17 @@ const AccessPortal = (props) => {
           {t("IPSecuritySettingDescription")}
         </Text>
 
-        <Link
-          className="link-learn-more"
-          target="_blank"
-          isHovered
-          color={currentColorScheme.main?.accent}
-          href={ipSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {ipSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={ipSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <IpSecuritySection />
@@ -188,15 +200,17 @@ const AccessPortal = (props) => {
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
 
-        <Link
-          className="link-learn-more"
-          target="_blank"
-          isHovered
-          color={currentColorScheme.main?.accent}
-          href={administratorMessageSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {administratorMessageSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={administratorMessageSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <AdminMessageSection />
@@ -211,15 +225,17 @@ const AccessPortal = (props) => {
           {t("SessionLifetimeSettingDescription")}
         </Text>
 
-        <Link
-          className="link-learn-more"
-          target="_blank"
-          isHovered
-          color={currentColorScheme.main?.accent}
-          href={lifetimeSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {lifetimeSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={lifetimeSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <SessionLifetimeSection />
@@ -237,6 +253,7 @@ export default inject(({ settingsStore, setup }) => {
     lifetimeSettingsUrl,
     ipSettingsUrl,
     currentDeviceType,
+    helpCenterDomain,
   } = settingsStore;
   const { resetIsInit } = setup;
 
@@ -252,5 +269,6 @@ export default inject(({ settingsStore, setup }) => {
     ipSettingsUrl,
     isMobileView,
     resetIsInit,
+    helpCenterDomain,
   };
 })(withTranslation(["Settings", "Profile"])(observer(AccessPortal)));

@@ -26,7 +26,7 @@
 
 import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
-import { FloatingButtonIcons } from "../floating-button";
+
 import { ContextMenuModel } from "../context-menu";
 
 export type SubInfoPanelHeaderProps = {
@@ -151,15 +151,7 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     "children" | "isSectionHeaderAvailable" | "autoFocus" | "withScroll"
   > & {
     children: React.JSX.Element[];
-    showPrimaryProgressBar?: boolean;
-    primaryProgressBarValue?: number;
-    showPrimaryButtonAlert?: boolean;
     progressBarDropDownContent?: React.ReactNode;
-    primaryProgressBarIcon?: FloatingButtonIcons;
-    showSecondaryProgressBar?: boolean;
-    secondaryProgressBarValue?: number;
-    secondaryProgressBarIcon?: FloatingButtonIcons;
-    showSecondaryButtonAlert?: boolean;
     onOpenUploadPanel?: () => void;
     isTabletView?: boolean;
     isHeaderVisible?: boolean;
@@ -178,9 +170,8 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
       operationId?: string | null,
       operation?: string | null,
     ) => void;
-
     clearPrimaryProgressData: (operation?: string | null) => void;
-    cancelUpload: (t: (key: string) => string) => void;
+    cancelUpload?: (t: (key: string) => string) => void;
     secondaryOperationsAlert?: boolean;
     mainButtonVisible?: boolean;
     primaryOperationsAlert?: boolean;

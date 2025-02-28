@@ -518,14 +518,33 @@ const SectionHeaderContent = (props) => {
       : currentGroup?.name;
   };
 
+  const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
+  const sharedType = stateIsExternal && !isPublicRoom;
+
   const getTitleIcon = () => {
-    if (stateIsExternal && !isPublicRoom) return SharedLinkSvgUrl;
+    if (sharedType) return SharedLinkSvgUrl;
 
     if (navigationButtonIsVisible && !isPublicRoom) return PublicRoomIconUrl;
 
     if (isLifetimeEnabled) return LifetimeRoomIconUrl;
 
     return "";
+  };
+
+  const getTitleIconTooltip = () => {
+    if (sharedType) return t("Files:RecentlyOpenedTooltip");
+
+    if (lifetime)
+      return `${t("Files:RoomFilesLifetime", {
+        days: lifetime.value,
+        period: getLifetimePeriodTranslation(lifetime.period, t),
+      })}. ${
+        lifetime.deletePermanently
+          ? t("Files:AfterFilesWillBeDeletedPermanently")
+          : t("Files:AfterFilesWillBeMovedToTrash")
+      }`;
+
+    return null;
   };
 
   const onLogoClick = () => {
@@ -639,18 +658,7 @@ const SectionHeaderContent = (props) => {
 
   const titleIcon = getTitleIcon();
 
-  const lifetime = selectedFolder?.lifetime || infoPanelRoom?.lifetime;
-
-  const titleIconTooltip = lifetime
-    ? `${t("Files:RoomFilesLifetime", {
-        days: lifetime.value,
-        period: getLifetimePeriodTranslation(lifetime.period, t),
-      })}. ${
-        lifetime.deletePermanently
-          ? t("Files:AfterFilesWillBeDeletedPermanently")
-          : t("Files:AfterFilesWillBeMovedToTrash")
-      }`
-    : null;
+  const titleIconTooltip = getTitleIconTooltip();
 
   const navigationButtonLabel = showNavigationButton
     ? t("Files:ShareRoom")

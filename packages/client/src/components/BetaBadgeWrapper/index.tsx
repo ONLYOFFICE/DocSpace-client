@@ -38,7 +38,7 @@ const BetaBadgeWrapper = (props: BetaBadgeProps) => {
 
 export default inject<TStore>(({ settingsStore }) => {
   const {
-    forumLink,
+    forumLinkUrl,
     currentColorScheme,
     documentationEmail,
     currentDeviceType,
@@ -48,6 +48,6 @@ export default inject<TStore>(({ settingsStore }) => {
     documentationEmail,
     currentColorScheme,
     currentDeviceType,
-    forumLink,
+    forumLinkUrl,
   };
 })(observer(BetaBadgeWrapper));

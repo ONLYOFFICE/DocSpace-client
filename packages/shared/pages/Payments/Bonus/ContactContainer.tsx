@@ -35,13 +35,13 @@ import { StyledContactComponent } from "./Bonus.styled";
 import { IBonusProps } from "./Bonus.types";
 
 export const ContactContainer = ({
-  helpUrl,
   salesEmail,
   isCommunity,
+  forEnterprisesUrl,
+  demoOrderUrl,
+  feedbackAndSupportUrl,
 }: Partial<IBonusProps>) => {
   const { t } = useTranslation("Common");
-  const officialWebsiteUrl = "https://www.onlyoffice.com/for-enterprises.aspx";
-  const demonstrationUrl = "https://www.onlyoffice.com/demo-order.aspx";
 
   return (
     <>
@@ -60,7 +60,7 @@ export const ContactContainer = ({
                       target={LinkTarget.blank}
                       tag="a"
                       fontWeight="600"
-                      href={officialWebsiteUrl}
+                      href={forEnterprisesUrl}
                       className="link"
                     />
                   ),
@@ -80,7 +80,7 @@ export const ContactContainer = ({
                   target={LinkTarget.blank}
                   tag="a"
                   fontWeight="600"
-                  href={demonstrationUrl}
+                  href={demoOrderUrl}
                   className="link"
                 >
                   here
@@ -118,14 +118,14 @@ export const ContactContainer = ({
               t={t}
               i18nKey="UpgradeToProBannerInformationSupport"
               ns="Common"
-              values={{ helpUrl }}
+              values={{ helpUrl: feedbackAndSupportUrl }}
               components={{
                 1: (
                   <Link
                     target={LinkTarget.blank}
                     tag="a"
                     fontWeight="600"
-                    href={helpUrl}
+                    href={feedbackAndSupportUrl}
                     className="link"
                   />
                 ),

@@ -35,17 +35,14 @@ import { StyledBonus } from "./Bonus.styled";
 
 export const OfficialDocumentation = ({
   dataBackupUrl,
+  enterpriseInstallScriptUrl,
+  enterpriseInstallWindowsUrl,
 }: {
   dataBackupUrl: string;
+  enterpriseInstallScriptUrl: string;
+  enterpriseInstallWindowsUrl: string;
 }) => {
   const { t } = useTranslation("Common");
-
-  const dockerLink =
-    "https://helpcenter.onlyoffice.com/installation/docspace-enterprise-install-script.aspx";
-  const linuxDocker =
-    "https://helpcenter.onlyoffice.com/installation/docspace-enterprise-install-script.aspx";
-  const windowsDocker =
-    "https://helpcenter.onlyoffice.com/installation/docspace-enterprise-install-windows.aspx";
 
   return (
     <StyledBonus>
@@ -58,7 +55,7 @@ export const OfficialDocumentation = ({
             themeId={ThemeId.Link}
             fontSize="13px"
             fontWeight="600"
-            href={dockerLink}
+            href={enterpriseInstallScriptUrl}
             target={LinkTarget.blank}
           >
             {t("UpgradeToProBannerInstructionReadNow")}
@@ -72,7 +69,7 @@ export const OfficialDocumentation = ({
             themeId={ThemeId.Link}
             fontSize="13px"
             fontWeight="600"
-            href={linuxDocker}
+            href={enterpriseInstallScriptUrl}
             target={LinkTarget.blank}
           >
             {t("UpgradeToProBannerInstructionReadNow")}
@@ -86,7 +83,7 @@ export const OfficialDocumentation = ({
             themeId={ThemeId.Link}
             fontSize="13px"
             fontWeight="600"
-            href={windowsDocker}
+            href={enterpriseInstallWindowsUrl}
             target={LinkTarget.blank}
           >
             {t("UpgradeToProBannerInstructionReadNow")}

@@ -46,6 +46,8 @@ export const Bonus = ({
   salesEmail,
   dataBackupUrl,
   logoText,
+  enterpriseInstallScriptUrl,
+  enterpriseInstallWindowsUrl,
 }: IBonusProps) => {
   const { t, ready } = useTranslation("Common");
 
@@ -66,7 +68,11 @@ export const Bonus = ({
       </Text>
       <Text>{t("UpgradeToProBannerInstructionDescr")}</Text>
 
-      <OfficialDocumentation dataBackupUrl={dataBackupUrl} />
+      <OfficialDocumentation
+        dataBackupUrl={dataBackupUrl}
+        enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
+        enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
+      />
 
       <ContactContainer
         helpUrl={helpUrl}

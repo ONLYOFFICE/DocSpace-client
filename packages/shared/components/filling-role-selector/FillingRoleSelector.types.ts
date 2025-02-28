@@ -24,39 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type TUser = {
+export interface IRoleUser {
   id: string;
-  role: string;
-  name?: string;
-  hasAvatar: boolean;
   avatar?: string;
   displayName: string;
-};
-export type TRole = {
-  everyone?: string;
-  order: number;
-  name: string;
+}
+export interface IRole {
   color: string;
-  id: string;
-};
+  name: string;
+  user?: IRoleUser | null;
+}
 
-export type FillingRoleSelectorProps = {
-  /** Accepts class */
-  className?: string;
-  /** Role description text Everyone */
-  descriptionEveryone: string;
-  /** Tooltip text */
-  descriptionTooltip: string;
-  /** Accepts id */
-  id?: string;
-  /** The function of adding a user to a role */
-  onAddUser: () => void;
-  /** Function to remove a user from a role */
-  onRemoveUser: (id: string) => void;
-  /** Array of roles */
-  roles: TRole[];
-  /** Accepts CSS style */
-  style: React.CSSProperties;
-  /** Array of assigned users per role */
-  users: TUser[];
-};
+export interface IFillingRoleSelectorProps {
+  roles: IRole[];
+  onSelect: (role: number) => void;
+  removeUserFromRole: (role: number) => void;
+  currentUserId: string;
+}

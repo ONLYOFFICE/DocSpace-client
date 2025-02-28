@@ -78,6 +78,8 @@ const DocumentService = ({
   const [initAuthHeader, setInitAuthHeader] = useState("");
   const [initDocServiceUrl, setInitDocServiceUrl] = useState("");
   const [initInternalUrl, setInitInternalUrl] = useState("");
+  const [initIsDisabledCertificat, setInitIsDisabledCertificat] =
+    useState(false);
 
   useEffect(() => {
     setDocumentTitle(t("DocumentService"));
@@ -90,12 +92,16 @@ const DocumentService = ({
         setAuthHeader(result?.docServiceSignatureHeader);
         setInternalUrl(result?.docServiceUrlInternal);
         setDocServiceUrl(result?.docServiceUrl);
+        setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
         setInitPortalUrl(result?.docServicePortalUrl);
         setInitSecretKey(result?.docServiceSignatureSecret);
         setInitAuthHeader(result?.docServiceSignatureHeader);
         setInitDocServiceUrl(result?.docServiceUrl);
         setInitInternalUrl(result?.docServiceUrlInternal);
+        setInitIsDisabledCertificat(
+          !result?.docServiceSslVerification || false,
+        );
       })
       .catch((error) => toastr.error(error))
       .finally(() => setIsLoading(false));
@@ -142,26 +148,30 @@ const DocumentService = ({
     changeDocumentServiceLocation(
       docServiceUrl,
       secretKey,
-      isDisabledCertificat,
       authHeader ?? initAuthHeader,
       internalUrl,
       portalUrl,
+      !isDisabledCertificat,
     )
       .then((result) => {
         toastr.success(t("Common:ChangesSavedSuccessfully"));
 
         setIsDefaultSettings(result?.isDefault || false);
-
         setPortalUrl(result?.docServicePortalUrl);
-
         setAuthHeader(result?.docServiceSignatureHeader);
-
+        setSecretKey(result?.docServiceSignatureSecret);
         setInternalUrl(result?.docServiceUrlInternal);
         setDocServiceUrl(result?.docServiceUrl);
+        setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
         setInitPortalUrl(result?.docServicePortalUrl);
-        setInitInternalUrl(result?.docServiceUrlInternal);
+        setInitSecretKey(result?.docServiceSignatureSecret);
+        setInitAuthHeader(result?.docServiceSignatureHeader);
         setInitDocServiceUrl(result?.docServiceUrl);
+        setInitInternalUrl(result?.docServiceUrlInternal);
+        setInitIsDisabledCertificat(
+          !result?.docServiceSslVerification || false,
+        );
       })
       .catch((err) => toastr.error(err))
       .finally(() => setSaveIsLoading(false));
@@ -173,19 +183,26 @@ const DocumentService = ({
     setPortalUrlIsValid(true);
 
     setResetIsLoading(true);
-    changeDocumentServiceLocation(null, null, null)
+    changeDocumentServiceLocation(null, null, null, null, null, true)
       .then((result) => {
         toastr.success(t("Common:ChangesSavedSuccessfully"));
 
         setIsDefaultSettings(result?.isDefault || false);
-
         setPortalUrl(result?.docServicePortalUrl);
+        setAuthHeader(result?.docServiceSignatureHeader);
+        setSecretKey(result?.docServiceSignatureSecret);
         setInternalUrl(result?.docServiceUrlInternal);
         setDocServiceUrl(result?.docServiceUrl);
+        setIsDisabledCertificat(!result?.docServiceSslVerification || false);
 
         setInitPortalUrl(result?.docServicePortalUrl);
-        setInitInternalUrl(result?.docServiceUrlInternal);
+        setInitSecretKey(result?.docServiceSignatureSecret);
+        setInitAuthHeader(result?.docServiceSignatureHeader);
         setInitDocServiceUrl(result?.docServiceUrl);
+        setInitInternalUrl(result?.docServiceUrlInternal);
+        setInitIsDisabledCertificat(
+          !result?.docServiceSslVerification || false,
+        );
       })
       .catch((e) => toastr.error(e))
       .finally(() => setResetIsLoading(false));
@@ -201,7 +218,8 @@ const DocumentService = ({
     secretKey == initSecretKey &&
     authHeader == initAuthHeader &&
     internalUrl == initInternalUrl &&
-    portalUrl == initPortalUrl;
+    portalUrl == initPortalUrl &&
+    isDisabledCertificat == initIsDisabledCertificat;
 
   if (isLoading || !ready) return <SettingsDSConnectSkeleton />;
 

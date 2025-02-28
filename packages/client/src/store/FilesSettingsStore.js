@@ -310,18 +310,18 @@ class FilesSettingsStore {
   changeDocumentServiceLocation = (
     docServiceUrl,
     secretKey,
-    isDisabledCertificat,
     authHeader,
     internalUrl,
     portalUrl,
+    sslVerification,
   ) =>
     api.files.changeDocumentServiceLocation(
       docServiceUrl,
       secretKey,
-      isDisabledCertificat,
       authHeader,
       internalUrl,
       portalUrl,
+      sslVerification,
     );
 
   setForcesave = (val) => (this.forcesave = val);

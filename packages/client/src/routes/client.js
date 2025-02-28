@@ -682,6 +682,26 @@ const ClientRoutes = [
     },
   },
   {
+    path: "/shared/invalid-link",
+    async lazy() {
+      const { ErrorInvalidLink } = await componentLoader(
+        () => import("@docspace/shared/components/errors/ErrorInvalidLink"),
+      );
+
+      const Component = () => {
+        return (
+          <PrivateRoute>
+            <ErrorBoundary>
+              <ErrorInvalidLink />
+            </ErrorBoundary>
+          </PrivateRoute>
+        );
+      };
+
+      return { Component };
+    },
+  },
+  {
     path: "/error/401",
     async lazy() {
       const { Error401 } = await componentLoader(

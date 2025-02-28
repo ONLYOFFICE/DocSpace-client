@@ -111,6 +111,9 @@ const Article = ({
 
   limitedAccessDevToolsForUsers,
 
+  downloaddesktopUrl,
+  officeforandroidUrl,
+  officeforiosUrl,
   ...rest
 }: ArticleProps) => {
   const [articleHeaderContent, setArticleHeaderContent] =
@@ -280,6 +283,9 @@ const Article = ({
                   withDevTools={!hideDevTools}
                   showText={showText}
                   logoText={logoText}
+                  downloaddesktopUrl={downloaddesktopUrl}
+                  officeforandroidUrl={officeforandroidUrl}
+                  officeforiosUrl={officeforiosUrl}
                 />
               ) : null}
               {!isMobile && isLiveChatAvailable ? (

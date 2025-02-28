@@ -164,6 +164,8 @@ const PureHome = (props) => {
     needErrorChecking,
     setOperationCancelVisible,
     hideConfirmCancelOperation,
+    welcomeFormFillingTipsVisible,
+    formFillingTipsVisible,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -354,6 +356,18 @@ const PureHome = (props) => {
   sectionProps.needErrorChecking = needErrorChecking;
   sectionProps.mainButtonVisible = mainButtonVisible;
 
+  const hasVisibleContent =
+    !isEmptyPage ||
+    welcomeFormFillingTipsVisible ||
+    formFillingTipsVisible ||
+    showFilterLoader;
+
+  const isValidMainContent = hasVisibleContent && !isErrorRoomNotAvailable;
+  const isValidContactsContent = !isContactsEmptyView && isContactsPage;
+
+  const shouldRenderSectionFilter =
+    (isValidMainContent || isValidContactsContent) && !isSettingsPage;
+
   return (
     <>
       {isSettingsPage ? null : isContactsPage ? (
@@ -387,9 +401,7 @@ const PureHome = (props) => {
           </Section.SectionWarning>
         ) : null}
 
-        {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
-          (!isContactsEmptyView && isContactsPage)) &&
-        !isSettingsPage ? (
+        {shouldRenderSectionFilter ? (
           <Section.SectionFilter>
             {isFrame ? (
               showFilter && <SectionFilterContent />
@@ -552,6 +564,12 @@ export const Component = inject(
     const isEmptyGroups =
       !groupsIsFiltered && ((groups && groups.length === 0) || !groups);
 
+    const {
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
+      setGuestReleaseTipDialogVisible,
+    } = dialogsStore;
+
     // if (!firstLoad) {
     //   if (isLoading) {
     //     showLoader();
@@ -652,8 +670,9 @@ export const Component = inject(
       updateProfileCulture,
       isUsersEmptyView: isUsersEmptyView && !isFiltered,
       showGuestReleaseTip,
-      setGuestReleaseTipDialogVisible:
-        dialogsStore.setGuestReleaseTipDialogVisible,
+      setGuestReleaseTipDialogVisible,
+      welcomeFormFillingTipsVisible,
+      formFillingTipsVisible,
 
       secondaryActiveOperations,
       secondaryOperationsCompleted,

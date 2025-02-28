@@ -95,6 +95,17 @@ const FloatingButton = ({
     return classNames([className, "not-selectable"]) || "not-selectable";
   }, [className]);
 
+  const accentIcons = [
+    FloatingButtonIcons.upload,
+    FloatingButtonIcons.trash,
+    FloatingButtonIcons.deletePermanently,
+    FloatingButtonIcons.other,
+  ] as const;
+
+  const isAccentIcon = accentIcons.includes(
+    icon as (typeof accentIcons)[number],
+  );
+
   return (
     <div
       className={classNames(
@@ -131,12 +142,7 @@ const FloatingButton = ({
           <div className={classNames(styles.floatingButton)}>
             <div
               className={classNames(styles.iconBox, "icon-box", {
-                [styles.accentIcon]: [
-                  FloatingButtonIcons.upload,
-                  FloatingButtonIcons.trash,
-                  FloatingButtonIcons.deletePermanently,
-                  FloatingButtonIcons.other,
-                ].includes(icon),
+                [styles.accentIcon]: isAccentIcon,
               })}
             >
               {iconComponent}

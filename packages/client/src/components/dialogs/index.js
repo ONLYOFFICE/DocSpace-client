@@ -73,6 +73,7 @@ import RemoveGuestDialog from "./RemoveGuest";
 import GuestReleaseTipDialog from "./GuestReleaseTip";
 import DeleteVersionDialog from "./DeleteVersionDialog";
 import CancelOperationDialog from "./CancelOperationDialog";
+import FormFillingTipsDialog from "./FormFillingTipsDialog";
 
 export {
   EmptyTrashDialog,
@@ -124,4 +125,5 @@ export {
   GuestReleaseTipDialog,
   DeleteVersionDialog,
   CancelOperationDialog,
+  FormFillingTipsDialog,
 };

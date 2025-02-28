@@ -333,10 +333,4 @@ export const StyledLabel = styled(Text)`
   text-overflow: ellipsis;
 
   margin-top: ${({ marginTopProp }) => marginTopProp || 0};
-
-  .tooltip-link-box {
-    box-sizing: border-box;
-    display: block;
-    margin: 10px 0 0;
-  }
 `;

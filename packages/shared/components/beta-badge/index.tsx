@@ -36,7 +36,7 @@ import { MobileOffset, OtherOffset } from "./BetaBadge.constants";
 
 const BetaBadge = ({
   place,
-  forumLink,
+  forumLinkUrl,
   mobilePlace = "bottom-end",
   currentColorScheme,
   documentationEmail,
@@ -61,7 +61,7 @@ const BetaBadge = ({
           components={{
             1: (
               <Link
-                href={forumLink}
+                href={forumLinkUrl}
                 target={LinkTarget.blank}
                 color={currentColorScheme?.main?.accent}
               />

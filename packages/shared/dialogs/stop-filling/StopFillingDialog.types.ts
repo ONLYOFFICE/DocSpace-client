@@ -27,4 +27,5 @@
 export interface StopFillingDialogProps {
   visible: boolean;
   onClose: VoidFunction;
+  formId: null | string | number;
 }

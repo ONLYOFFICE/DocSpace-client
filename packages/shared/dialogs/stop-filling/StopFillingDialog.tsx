@@ -27,17 +27,30 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { manageformfilling } from "../../api/files";
 import { Button, ButtonSize } from "../../components/button";
-import type { StopFillingDialogProps } from "./StopFillingDialog.types";
+import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { FormFillingManageAction } from "../../enums";
 
-const StopFillingDialog = ({ onClose, visible }: StopFillingDialogProps) => {
+import type { StopFillingDialogProps } from "./StopFillingDialog.types";
+import { toastr } from "../../components/toast";
+
+const StopFillingDialog = ({
+  onClose,
+  visible,
+  formId,
+}: StopFillingDialogProps) => {
   const { t } = useTranslation("Common");
 
   const onSubmit = async () => {
-    await new Promise((resolve) => {
-      setTimeout(resolve, 1000);
-    });
+    if (!formId) return;
+
+    await manageformfilling(formId, FormFillingManageAction.Stop).catch(
+      (error) => {
+        toastr.error(error);
+        console.error(error);
+      },
+    );
 
     onClose();
   };

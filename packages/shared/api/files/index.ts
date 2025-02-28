@@ -32,6 +32,7 @@ import moment from "moment";
 import {
   ConflictResolveType,
   FolderType,
+  type FormFillingManageAction,
   ShareAccessRights,
 } from "../../enums";
 import {
@@ -1582,5 +1583,19 @@ export async function formRoleMapping(data: TFormRoleMappingRequest) {
     method: "post",
     url: `files/file/${data.formId}/formrolemapping`,
     data,
+  });
+}
+
+export async function manageformfilling(
+  formId: string | number,
+  action: FormFillingManageAction,
+) {
+  return request({
+    method: "put",
+    url: `files/file/${formId}/manageformfilling`,
+    data: {
+      formId,
+      action,
+    },
   });
 }

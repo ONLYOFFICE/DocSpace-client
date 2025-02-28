@@ -155,7 +155,7 @@ const Panels = (props) => {
     deleteVersionDialogVisible,
 
     setStopFillingDialogVisible,
-    stopFillingDialogVisible,
+    stopFillingDialogData,
     operationCancelVisible,
   } = props;
 
@@ -377,10 +377,11 @@ const Panels = (props) => {
       <DeleteVersionDialog key="delete-version-dialog" />
     ),
 
-    stopFillingDialogVisible && (
+    stopFillingDialogData.visible && (
       <StopFillingDialog
         key="stop-filling-dialog"
-        visible={stopFillingDialogVisible}
+        visible={stopFillingDialogData.visible}
+        formId={stopFillingDialogData.formId}
         onClose={onCloseStopFillingDialog}
       />
     ),
@@ -460,7 +461,7 @@ export default inject(
       closeEditIndexDialogVisible,
 
       setStopFillingDialogVisible,
-      stopFillingDialogVisible,
+      stopFillingDialogData,
       operationCancelVisible,
     } = dialogsStore;
 
@@ -563,7 +564,7 @@ export default inject(
       deleteVersionDialogVisible,
 
       setStopFillingDialogVisible,
-      stopFillingDialogVisible,
+      stopFillingDialogData,
       operationCancelVisible,
     };
   },

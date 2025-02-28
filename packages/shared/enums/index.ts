@@ -678,3 +678,8 @@ export enum StartFillingMode {
   ShareToFillOut,
   StartFilling,
 }
+
+export enum FormFillingManageAction {
+  Stop,
+  Resume,
+}

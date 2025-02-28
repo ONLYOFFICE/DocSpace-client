@@ -260,7 +260,10 @@ class DialogsStore {
 
   fillingStatusPanel = false;
 
-  stopFillingDialogVisible = false;
+  stopFillingDialogData = {
+    visible: false,
+    formId: null,
+  };
 
   operationCancelVisible = false;
 
@@ -918,8 +921,11 @@ class DialogsStore {
     this.fillingStatusPanel = visible;
   };
 
-  setStopFillingDialogVisible = (visible) => {
-    this.stopFillingDialogVisible = visible;
+  setStopFillingDialogVisible = (visible, formId = null) => {
+    this.stopFillingDialogData = {
+      visible,
+      formId,
+    };
   };
 }
 

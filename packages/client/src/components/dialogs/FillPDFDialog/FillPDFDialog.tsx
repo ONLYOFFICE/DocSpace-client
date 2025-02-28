@@ -63,7 +63,7 @@ const FillPDFDialog = inject<TStore>(
       };
 
       const openEditorFill = () => {
-        gotoDocEditor!(false, data, null, false, true);
+        gotoDocEditor!(data, false, null, false, true);
         onClose();
       };
 

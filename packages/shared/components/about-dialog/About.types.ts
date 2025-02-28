@@ -39,7 +39,7 @@ export interface IDialogProps {
   previewData: TCompanyInfo;
   companyInfoSettingsData: TCompanyInfo;
   standalone: boolean;
-  licenseUrl: string;
+  licenseAgreementsUrl: string;
   isEnterprise: boolean;
   logoText: string;
 }
@@ -49,7 +49,7 @@ export interface IContentProps {
   companyInfoSettingsData: TCompanyInfo;
   previewData: TCompanyInfo;
   standalone: boolean;
-  licenseUrl: string;
+  licenseAgreementsUrl: string;
   isEnterprise: boolean;
   logoText: string;
 }

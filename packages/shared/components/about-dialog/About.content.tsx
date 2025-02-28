@@ -43,7 +43,7 @@ export const AboutContent = ({
   companyInfoSettingsData,
   previewData,
   standalone,
-  licenseUrl,
+  licenseAgreementsUrl,
   isEnterprise,
   logoText,
 }: IContentProps) => {
@@ -144,7 +144,7 @@ export const AboutContent = ({
               className="row-el"
               fontSize="13px"
               fontWeight="600"
-              href={licenseUrl}
+              href={licenseAgreementsUrl}
               target={LinkTarget.blank}
               enableUserSelect
             >

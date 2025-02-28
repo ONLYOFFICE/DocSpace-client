@@ -36,6 +36,7 @@ import { SettingsStoreContextProvider } from "../../_store/SettingsStore";
 import { FilesSettingsStoreContextProvider } from "../../_store/FilesSettingsStore";
 import { FilesSelectionStoreContextProvider } from "../../_store/FilesSelectionStore";
 import { FilesListStoreContextProvider } from "../../_store/FilesListStore";
+import { MediaViewerStoreContextProvider } from "../../_store/MediaViewerStore";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -50,7 +51,9 @@ export const Layout = ({ children, initSettingsStoreData }: LayoutProps) => {
           <FilesListStoreContextProvider>
             <FilesSelectionStoreContextProvider>
               <NavigationStoreContextProvider>
-                {children}
+                <MediaViewerStoreContextProvider>
+                  {children}
+                </MediaViewerStoreContextProvider>
               </NavigationStoreContextProvider>
             </FilesSelectionStoreContextProvider>
           </FilesListStoreContextProvider>

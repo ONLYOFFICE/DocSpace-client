@@ -8,20 +8,31 @@ import { copyShareLink } from "@docspace/shared/utils/copy";
 import { useFilesSettingsStore } from "../_store/FilesSettingsStore";
 import { useSettingsStore } from "../_store/SettingsStore";
 import { TTranslation } from "@docspace/shared/types";
+import type { TFileItem } from "@/app/(docspace)/_hooks/useItemList";
+import { useMediaViewerStore } from "@/app/(docspace)/_store/MediaViewerStore";
 
 type UseFolderActionsProps = { t: TTranslation };
 
 export default function useFolderActions({ t }: UseFolderActionsProps) {
   const { filesSettings } = useFilesSettingsStore();
   const { shareKey } = useSettingsStore();
+  const { setMediaViewerData } = useMediaViewerStore();
 
   const openFile = React.useCallback(
     (
-      fileId: number | string,
+      file: TFileItem,
       preview: boolean = false,
       editForm: boolean = false,
       fillForm: boolean = false,
     ) => {
+      const fileId = file.id;
+      const isMediaOrImage =
+        file.viewAccessibility.ImageView || file.viewAccessibility.MediaView;
+
+      if (isMediaOrImage) {
+        return setMediaViewerData({ id: file.id, visible: true });
+      }
+
       const searchParams = new URLSearchParams();
 
       searchParams.set("fileId", fileId.toString());

@@ -111,7 +111,7 @@ const RowContent = observer(
           onClick={
             item.isFolder
               ? () => openFolder(item.id, item.title)
-              : () => openFile(item.id)
+              : () => openFile(item)
           }
           isTextOverflow
           dir="auto"

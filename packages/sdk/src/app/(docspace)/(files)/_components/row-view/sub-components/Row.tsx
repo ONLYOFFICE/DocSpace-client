@@ -78,7 +78,9 @@ const Row = observer(
         item={item}
         viewAs="row"
         showNew={false}
-        onFilesClick={() => openFile(item.id)}
+        onFilesClick={() => {
+          !item.isFolder && openFile(item);
+        }}
       />
     );
 

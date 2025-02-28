@@ -64,12 +64,12 @@ import {
 
 import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
-import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
 import {
   LOADER_TIMEOUT,
   MEDIA_VIEW_URL,
   PDF_FORM_DIALOG_KEY,
   ROOMS_PROVIDER_TYPE_NAME,
+  thumbnailStatuses,
 } from "@docspace/shared/constants";
 
 import {

@@ -38,6 +38,7 @@ import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
 import StyledComponentsRegistry from "@/utils/registry";
 import Providers from "@/providers";
 import { getSelf } from "@/api/people";
+import Scripts from "@/components/Scripts";
 
 export const metadata: Metadata = {
   title: "ONLYOFFICE",
@@ -126,6 +127,8 @@ export default async function RootLayout({
             {children}
           </Providers>
         </StyledComponentsRegistry>
+
+        <Scripts />
       </body>
     </html>
   );

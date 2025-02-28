@@ -193,3 +193,10 @@ export const ALLOWED_PASSWORD_CHARACTERS =
   "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
 
 export const GENERAL_LINK_HEADER_KEY = "general-link_header";
+
+export const thumbnailStatuses = {
+  WAITING: 0,
+  CREATED: 1,
+  ERROR: 2,
+  NOT_REQUIRED: 3,
+};

@@ -52,7 +52,7 @@ export default function useItemList({ shareKey, getIcon }: useItemListProps) {
       const isEditing =
         (file.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
-      const isFolder = false;
+      const isFolder = false as const;
 
       const previewUrl = canOpenPlayer
         ? getItemUrl(file.id, isFolder, needConvert, canOpenPlayer, shareKey)
@@ -87,7 +87,7 @@ export default function useItemList({ shareKey, getIcon }: useItemListProps) {
 
   const convertFolderToItem = useCallback(
     (folder: TFolder) => {
-      const isFolder = true;
+      const isFolder = true as const;
 
       const folderUrl = getItemUrl(folder.id, isFolder, false, false);
 

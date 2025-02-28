@@ -2256,7 +2256,12 @@ class FilesStore {
         fileOptions = removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || (shouldFillForm && canFillForm) || isRecycleBinFolder) {
+      if (
+        !isPdf ||
+        (shouldFillForm && canFillForm) ||
+        isRecycleBinFolder ||
+        !item.security?.OpenForm
+      ) {
         fileOptions = removeOptions(fileOptions, ["open-pdf"]);
       }
 

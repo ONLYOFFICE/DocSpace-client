@@ -39,13 +39,7 @@ const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {
     return (
       <StyledHistoryBlockTagList>
         {feed.data?.tags.map((tag: string) => (
-          <Tag
-            className="history-tag"
-            key={tag}
-            label={tag}
-            tag={tag}
-            isNewTag
-          />
+          <Tag className="history-tag" key={tag} label={tag} tag={tag} />
         ))}
       </StyledHistoryBlockTagList>
     );

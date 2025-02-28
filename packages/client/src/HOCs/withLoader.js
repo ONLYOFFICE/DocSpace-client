@@ -40,7 +40,7 @@ const withLoader = (WrappedComponent) => (Loader) => {
       tReady,
       firstLoad,
       isLoaded,
-
+      isRooms,
       viewAs,
       showBodyLoader,
       isLoadingFilesFind,
@@ -65,7 +65,7 @@ const withLoader = (WrappedComponent) => (Loader) => {
       !isInit ? (
       Loader ||
         (!showLoader ? null : currentViewAs === "tile" ? (
-          <TilesSkeleton />
+          <TilesSkeleton isRooms={isRooms} />
         ) : currentViewAs === "table" ? (
           <TableSkeleton />
         ) : (
@@ -80,20 +80,24 @@ const withLoader = (WrappedComponent) => (Loader) => {
     ({
       authStore,
       filesStore,
+      treeFoldersStore,
       peopleStore,
       clientLoadingStore,
       publicRoomStore,
       settingsStore,
     }) => {
       const { viewAs, isLoadingFilesFind, isInit } = filesStore;
+      const { isRoomsFolder, isArchiveFolder } = treeFoldersStore;
       const { viewAs: accountsViewAs } = peopleStore;
-
       const { firstLoad, isLoading, showBodyLoader } = clientLoadingStore;
 
       const { setIsBurgerLoading } = settingsStore;
       const { isPublicRoom } = publicRoomStore;
 
+      const isRooms = isRoomsFolder || isArchiveFolder;
+
       return {
+        isRooms,
         firstLoad: isPublicRoom ? false : firstLoad,
         isLoaded: isPublicRoom ? true : authStore.isLoaded,
         isLoading,

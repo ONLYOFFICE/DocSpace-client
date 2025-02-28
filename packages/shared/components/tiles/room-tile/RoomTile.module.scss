@@ -35,7 +35,8 @@
       border-radius: 6px;
     }
 
-    .checkbox {
+    .checkbox,
+    .checkbox:active {
       padding-top: 8px;
       padding-inline-start: 12px;
 

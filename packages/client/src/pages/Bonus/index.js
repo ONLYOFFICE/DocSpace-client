@@ -37,10 +37,12 @@ const Bonus = ({
   isTrial,
   isDeveloper,
   isCommunity,
-  helpUrl,
+  feedbackAndSupportUrl,
   salesEmail,
   dataBackupUrl,
   logoText,
+  enterpriseInstallScriptUrl,
+  enterpriseInstallWindowsUrl,
 }) => {
   useEffect(() => {
     standaloneInit();
@@ -54,10 +56,12 @@ const Bonus = ({
       isTrial={isTrial}
       isDeveloper={isDeveloper}
       isCommunity={isCommunity}
-      helpUrl={helpUrl}
+      feedbackAndSupportUrl={feedbackAndSupportUrl}
       salesEmail={salesEmail}
       dataBackupUrl={dataBackupUrl}
       logoText={logoText}
+      enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
+      enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
     />
   );
 };
@@ -69,11 +73,17 @@ export const Component = inject(
     currentQuotaStore,
     settingsStore,
   }) => {
-    const { standaloneInit, isInitPaymentPage, helpUrl, salesEmail } =
-      paymentStore;
+    const { standaloneInit, isInitPaymentPage } = paymentStore;
     const { isCommunity, isEnterprise, isDeveloper } = currentTariffStatusStore;
     const { isTrial } = currentQuotaStore;
-    const { dataBackupUrl, logoText } = settingsStore;
+    const {
+      dataBackupUrl,
+      logoText,
+      enterpriseInstallScriptUrl,
+      enterpriseInstallWindowsUrl,
+      feedbackAndSupportUrl,
+      salesEmail,
+    } = settingsStore;
 
     return {
       standaloneInit,
@@ -82,10 +92,12 @@ export const Component = inject(
       isEnterprise,
       isTrial,
       isDeveloper,
-      helpUrl,
+      feedbackAndSupportUrl,
       salesEmail,
       dataBackupUrl,
       logoText,
+      enterpriseInstallScriptUrl,
+      enterpriseInstallWindowsUrl,
     };
   },
 )(observer(Bonus));

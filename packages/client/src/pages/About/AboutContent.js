@@ -35,7 +35,7 @@ const AboutContent = (props) => {
     companyInfoSettingsData,
     previewData,
     standalone,
-    licenseUrl,
+    licenseAgreementsUrl,
     isEnterprise,
     logoText,
   } = props;
@@ -46,7 +46,7 @@ const AboutContent = (props) => {
       companyInfoSettingsData={companyInfoSettingsData}
       previewData={previewData}
       standalone={standalone}
-      licenseUrl={licenseUrl}
+      licenseAgreementsUrl={licenseAgreementsUrl}
       isEnterprise={isEnterprise}
       logoText={logoText}
     />
@@ -54,14 +54,18 @@ const AboutContent = (props) => {
 };
 
 export default inject(({ settingsStore, currentTariffStatusStore }) => {
-  const { companyInfoSettingsData, standalone, licenseUrl, logoText } =
-    settingsStore;
+  const {
+    companyInfoSettingsData,
+    standalone,
+    licenseAgreementsUrl,
+    logoText,
+  } = settingsStore;
   const { isEnterprise } = currentTariffStatusStore;
 
   return {
     companyInfoSettingsData,
     standalone,
-    licenseUrl,
+    licenseAgreementsUrl,
     isEnterprise,
     logoText,
   };

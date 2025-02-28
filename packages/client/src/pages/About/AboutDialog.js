@@ -37,7 +37,7 @@ const AboutDialog = (props) => {
     previewData,
     companyInfoSettingsData,
     standalone,
-    licenseUrl,
+    licenseAgreementsUrl,
     isEnterprise,
     logoText,
   } = props;
@@ -49,7 +49,7 @@ const AboutDialog = (props) => {
       previewData={previewData}
       companyInfoSettingsData={companyInfoSettingsData}
       standalone={standalone}
-      licenseUrl={licenseUrl}
+      licenseAgreementsUrl={licenseAgreementsUrl}
       isEnterprise={isEnterprise}
       logoText={logoText}
     />
@@ -57,14 +57,18 @@ const AboutDialog = (props) => {
 };
 
 export default inject(({ settingsStore, currentTariffStatusStore }) => {
-  const { companyInfoSettingsData, standalone, licenseUrl, logoText } =
-    settingsStore;
+  const {
+    companyInfoSettingsData,
+    standalone,
+    licenseAgreementsUrl,
+    logoText,
+  } = settingsStore;
   const { isEnterprise } = currentTariffStatusStore;
 
   return {
     companyInfoSettingsData,
     standalone,
-    licenseUrl,
+    licenseAgreementsUrl,
     isEnterprise,
     logoText,
   };

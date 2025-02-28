@@ -53,7 +53,7 @@ const CompanyInfoSettingsComponent = (props) => {
     deviceType,
     getCompanyInfoSettings,
     standalone,
-    licenseUrl,
+    licenseAgreementsUrl,
     isEnterprise,
   } = props;
 
@@ -115,7 +115,7 @@ const CompanyInfoSettingsComponent = (props) => {
       companyInfoSettingsIsDefault={companyInfoSettingsIsDefault}
       buildVersionInfo={buildVersionInfo}
       standalone={standalone}
-      licenseUrl={licenseUrl}
+      licenseAgreementsUrl={licenseAgreementsUrl}
       isEnterprise={isEnterprise}
     />
   );
@@ -141,7 +141,7 @@ export const CompanyInfoSettings = inject(
       deviceType,
       getCompanyInfoSettings,
       standalone,
-      licenseUrl,
+      licenseAgreementsUrl,
     } = settingsStore;
 
     const { isEnterprise } = currentTariffStatusStore;
@@ -159,7 +159,7 @@ export const CompanyInfoSettings = inject(
       deviceType,
       getCompanyInfoSettings,
       standalone,
-      licenseUrl,
+      licenseAgreementsUrl,
       isEnterprise,
     };
   },

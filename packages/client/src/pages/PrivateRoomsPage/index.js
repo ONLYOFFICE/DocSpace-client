@@ -121,7 +121,7 @@ const StyledPrivacyPage = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const PrivacyPageComponent = ({ t, tReady, logoText }) => {
+const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const location = useLocation();
@@ -210,7 +210,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText }) => {
             className="privacy-rooms-link privacy-rooms-install-text"
             fontSize="16px"
             isHovered
-            href="https://www.onlyoffice.com/desktop.aspx"
+            href={desktopUrl}
           >
             {t("PrivacyInstall")}
           </Link>
@@ -250,9 +250,10 @@ const PrivacyPage = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { logoText } = settingsStore;
+  const { logoText, desktopUrl } = settingsStore;
 
   return {
     logoText,
+    desktopUrl,
   };
 })(observer(PrivacyPage));

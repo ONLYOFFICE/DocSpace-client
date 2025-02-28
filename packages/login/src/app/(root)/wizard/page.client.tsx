@@ -99,7 +99,7 @@ type WizardFormProps = {
   portalTimeZones?: TTimeZone[];
   portalCultures?: TPortalCultures;
 
-  forumLink?: string;
+  forumLinkUrl?: string;
   documentationEmail?: string;
   culture?: string;
   wizardToken?: string;
@@ -122,7 +122,7 @@ function WizardForm(props: WizardFormProps) {
     culture,
     wizardToken,
     passwordHash,
-    forumLink,
+    forumLinkUrl,
     documentationEmail,
     isAmi,
   } = props;
@@ -516,7 +516,7 @@ function WizardForm(props: WizardFormProps) {
             <BetaBadge
               withOutFeedbackLink
               place="bottom"
-              forumLink={forumLink}
+              forumLinkUrl={forumLinkUrl}
               currentDeviceType={currentDeviceType}
               documentationEmail={documentationEmail}
             />

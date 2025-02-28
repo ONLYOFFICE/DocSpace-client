@@ -49,7 +49,7 @@ import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?u
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
 import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { Integration } from "./sub-components/Integration";
+import Integration from "./sub-components/Integration";
 import PresetTile from "./sub-components/PresetTile";
 import CSP from "./sub-components/csp";
 
@@ -188,11 +188,7 @@ const PortalIntegration = (props) => {
           />
         ))}
       </PresetsContainer>
-      <Integration
-        t={t}
-        theme={theme}
-        currentColorScheme={currentColorScheme}
-      />
+      <Integration />
     </SDKContainer>
   );
 };

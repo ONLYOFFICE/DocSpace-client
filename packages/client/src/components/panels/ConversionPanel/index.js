@@ -83,7 +83,7 @@ const ConversionPanelComponent = ({
     cancelConversion(true);
   };
 
-  const title = t("Files:Convert");
+  const title = t("Files:Conversion");
   const url = converted ? ClearReactSvgUrl : ButtonCancelReactSvgUrl;
   const clickEvent = converted ? clearConversionPanel : onCancelConversion;
 

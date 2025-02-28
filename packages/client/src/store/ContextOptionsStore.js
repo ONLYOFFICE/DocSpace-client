@@ -78,6 +78,7 @@ import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
+import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
@@ -89,7 +90,11 @@ import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { isLockedSharedRoom, trimSeparator } from "@docspace/shared/utils";
+import {
+  isMobile as isMobileUtils,
+  isLockedSharedRoom,
+  trimSeparator,
+} from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import {
@@ -97,6 +102,8 @@ import {
   copyDocumentShareLink,
   copyRoomShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
+
+import { getGuidanceConfig } from "@docspace/shared/components/guidance/configs";
 
 import {
   connectedCloudsTypeTitleTranslation,
@@ -176,6 +183,8 @@ class ContextOptionsStore {
 
   linksIsLoading = false;
 
+  guidanceStore;
+
   constructor(
     settingsStore,
     dialogsStore,
@@ -196,6 +205,7 @@ class ContextOptionsStore {
     userStore,
     indexingStore,
     clientLoadingStore,
+    guidanceStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -217,6 +227,7 @@ class ContextOptionsStore {
     this.userStore = userStore;
     this.indexingStore = indexingStore;
     this.clientLoadingStore = clientLoadingStore;
+    this.guidanceStore = guidanceStore;
   }
 
   onOpenFolder = async (item, t) => {
@@ -1075,6 +1086,17 @@ class ContextOptionsStore {
     this.indexingStore.setIsIndexEditingMode(true);
   };
 
+  onEnableFormFillingGuid = (t, roomType) => {
+    const guidanceConfig = getGuidanceConfig(roomType, t);
+
+    if (!guidanceConfig) {
+      return;
+    }
+
+    this.guidanceStore.setConfig(guidanceConfig);
+    this.dialogsStore.setWelcomeFormFillingTipsVisible(true);
+  };
+
   onClickRemoveFromRecent = (item) => {
     this.filesActionsStore.removeFilesFromRecent([item.id]);
   };
@@ -1586,6 +1608,7 @@ class ContextOptionsStore {
     }
 
     const isArchive = item.rootFolderType === FolderType.Archive;
+    const isFormRoom = item.roomType === RoomsType.FormRoom;
 
     const hasShareLinkRights = isPublicRoom
       ? item.security?.Read
@@ -2054,6 +2077,14 @@ class ContextOptionsStore {
         disabled: false,
         "data-action": "archive",
         action: "archive",
+      },
+      {
+        id: "option_short-tour",
+        key: "short-tour",
+        label: t("FormFillingTipsDialog:WelcomeStartTutorial"),
+        icon: HelpCenterReactSvgUrl,
+        onClick: () => this.onEnableFormFillingGuid(t, item.roomType),
+        disabled: !isFormRoom || isMobileUtils(),
       },
       {
         id: "option_leave-room",

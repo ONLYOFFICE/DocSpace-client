@@ -2,7 +2,5 @@
   "CancelUpload": "Lataus on keskeytetty. Joitakin tiedostoja ei ole ladattu.",
   "EnterPassword": "Anna salasana",
   "HideInput": "Piilota",
-  "Ready": "Valmis",
-  "UploadAndConvert": "Lataa ja muunna tiedostoja",
-  "Uploads": "Lataukset"
+  "Ready": "Valmis"
 }

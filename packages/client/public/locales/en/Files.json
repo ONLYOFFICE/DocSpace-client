@@ -33,7 +33,7 @@
   "ChooseExpirationDate": "Limit availability period for this link by setting an expiration date.",
   "Clean": "Clean",
   "ContainsSpecCharacter": "The title can't contain any of the following characters: *+:\"<>?|/",
-  "Convert": "Convert",
+  "Conversion": "Conversion",
   "CopyItem": "<2>{{title}}</2> successfully copied to <1>{{folderName}}</1>",
   "CopyFolderItem": "The folder <2>{{title}}</2> successfully copied to <1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}} elements</2> successfully copied to <1>{{folderName}}</1>",

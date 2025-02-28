@@ -147,8 +147,6 @@ class FilesStore {
 
   dragging = false;
 
-  privacyInstructions = "https://www.onlyoffice.com/private-rooms.aspx";
-
   isInit = false;
 
   isUpdatingRowItem = false;
@@ -2549,6 +2547,7 @@ class FilesStore {
         "mute-room",
         "unmute-room",
         "edit-index",
+        "short-tour",
         "export-room-index",
         "save-as-template",
         "separator1",

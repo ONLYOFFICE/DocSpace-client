@@ -683,3 +683,11 @@ export enum FormFillingManageAction {
   Stop,
   Resume,
 }
+
+export enum FormFillingTipsState {
+  Starting = 1,
+  Sharing = 2,
+  Submitting = 3,
+  Complete = 4,
+  Uploading = 5,
+}

@@ -78,6 +78,7 @@ const defaultProps = {
   zendeskKey: "test-key",
   showProgress: false,
   children: [],
+  logoText: "",
 };
 
 const renderComponent = (props = {}) => {

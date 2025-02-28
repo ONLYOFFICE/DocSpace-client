@@ -35,36 +35,23 @@ import LinuxReactSvgUrl from "PUBLIC_DIR/images/linux.react.svg?url";
 import AndroidReactSvgUrl from "PUBLIC_DIR/images/android.react.svg?url";
 import IOSReactSvgUrl from "PUBLIC_DIR/images/iOS.react.svg?url";
 
-import { LANGUAGE } from "../../../constants";
-import { getLanguage, getCookie } from "../../../utils";
-
 import { Text } from "../../text";
 import { IconButton } from "../../icon-button";
 
 import styles from "../Article.module.scss";
 import { ArticleAppsProps } from "../Article.types";
-import { SUPPORTED_LANGUAGES } from "../Article.constants";
-
-const lng: string[] | string = getCookie(LANGUAGE) || "en";
-const language = getLanguage(typeof lng === "object" ? lng[0] : lng);
-
-const getLink = () => {
-  const currentLng = language.split("-")[0];
-  if (SUPPORTED_LANGUAGES.includes(currentLng)) {
-    return `https://www.onlyoffice.com/${currentLng}`;
-  }
-  return "https://www.onlyoffice.com";
-};
 
 const ArticleApps = React.memo(
-  ({ showText, withDevTools, logoText }: ArticleAppsProps) => {
+  ({
+    showText,
+    withDevTools,
+    logoText,
+    downloaddesktopUrl,
+    officeforandroidUrl,
+    officeforiosUrl,
+  }: ArticleAppsProps) => {
     const { t } = useTranslation(["Translations", "Common"]);
     const theme = useTheme();
-
-    const baseUrl = getLink();
-    const desktopLink = `${baseUrl}/download-desktop.aspx`;
-    const androidLink = `${baseUrl}/office-for-android.aspx`;
-    const iosLink = `${baseUrl}/office-for-ios.aspx`;
 
     if (!showText) return null;
 
@@ -81,7 +68,7 @@ const ArticleApps = React.memo(
         </Text>
         <div className="download-app-list">
           <IconButton
-            onClick={() => window.open(desktopLink)}
+            onClick={() => window.open(downloaddesktopUrl)}
             iconName={WindowsReactSvgUrl}
             size={32}
             isFill
@@ -91,7 +78,7 @@ const ArticleApps = React.memo(
             })}
           />
           <IconButton
-            onClick={() => window.open(desktopLink)}
+            onClick={() => window.open(downloaddesktopUrl)}
             iconName={MacOSReactSvgUrl}
             size={32}
             isFill
@@ -101,7 +88,7 @@ const ArticleApps = React.memo(
             })}
           />
           <IconButton
-            onClick={() => window.open(desktopLink)}
+            onClick={() => window.open(downloaddesktopUrl)}
             iconName={LinuxReactSvgUrl}
             size={32}
             isFill
@@ -111,7 +98,7 @@ const ArticleApps = React.memo(
             })}
           />
           <IconButton
-            onClick={() => window.open(androidLink)}
+            onClick={() => window.open(officeforandroidUrl)}
             iconName={AndroidReactSvgUrl}
             size={32}
             isFill
@@ -123,7 +110,7 @@ const ArticleApps = React.memo(
             })}
           />
           <IconButton
-            onClick={() => window.open(iosLink)}
+            onClick={() => window.open(officeforiosUrl)}
             iconName={IOSReactSvgUrl}
             size={32}
             isFill

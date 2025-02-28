@@ -28,7 +28,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 import TriangleNavigationDownReactSvgUrl from "PUBLIC_DIR/images/triangle.navigation.down.react.svg?url";
-
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import { Text } from "../text";
 import { ContextMenu } from "../context-menu";
 import { MainButtonProps } from "./MainButton.types";
@@ -44,6 +44,7 @@ const MainButton = (props: MainButtonProps) => {
     isDisabled = false,
     className,
     id,
+    setRefMap,
     ...rest
   } = props;
 
@@ -57,13 +58,16 @@ const MainButton = (props: MainButtonProps) => {
       if (buttonRef.current) {
         const rect = buttonRef.current.getBoundingClientRect();
         setButtonWidth(rect.width);
+        if (setRefMap) {
+          setRefMap(GuidanceRefKey.MainButton, buttonRef);
+        }
       }
     };
 
     updateWidth();
     window.addEventListener("resize", updateWidth);
     return () => window.removeEventListener("resize", updateWidth);
-  }, []);
+  }, [setRefMap]);
 
   const onMainButtonClick = (e: React.MouseEvent) => {
     if (!isDisabled) {

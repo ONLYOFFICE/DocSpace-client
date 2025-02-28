@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,14 +23,18 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-export interface LoadingButtonProps {
-  id?: string;
-  className?: string;
-  style?: React.CSSProperties;
-  percent?: number;
-  onClick?: VoidFunction;
-  inConversion?: boolean;
-  loaderColor?: React.CSSProperties["color"];
-  backgroundColor?: React.CSSProperties["color"];
-}
+import ErrorContainer from "../error-container/ErrorContainer";
+
+export const ErrorInvalidLink = () => {
+  const { t, ready } = useTranslation(["Errors", "Common"]);
+
+  return ready ? (
+    <ErrorContainer
+      headerText={t("Common:InvalidLink")}
+      bodyText={t("LinkDoesNotExist")}
+    />
+  ) : null;
+};

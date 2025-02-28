@@ -43,4 +43,5 @@ export interface DragAndDropProps {
   onDragLeave?: (e: React.DragEvent<HTMLElement>) => void;
   targetFile?: Function;
   style?: React.CSSProperties;
+  forwardedRef?: React.RefObject<HTMLDivElement>;
 }

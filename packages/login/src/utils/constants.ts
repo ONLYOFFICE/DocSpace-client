@@ -46,8 +46,6 @@ export const DEFAULT_SELECT_LANGUAGE: TOption = {
   icon: EnUSReactSvgUrl,
 };
 
-export const URL_ONLYOFFICE = "https://onlyoffice.com";
-
 export const TFA_ANDROID_APP_URL =
   "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2";
 export const TFA_IOS_APP_URL =

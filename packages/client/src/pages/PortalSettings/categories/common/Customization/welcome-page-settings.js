@@ -345,6 +345,7 @@ const WelcomePageSettingsComponent = (props) => {
     <StyledSettingsComponent
       hasScroll={state.hasScroll}
       className="category-item-wrapper"
+      withoutExternalLink={!welcomePageSettingsUrl}
     >
       {state.isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
@@ -355,15 +356,17 @@ const WelcomePageSettingsComponent = (props) => {
         <Text fontSize="13px" fontWeight={400}>
           {t("CustomTitlesDescription")}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={welcomePageSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {welcomePageSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={welcomePageSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       {settingsBlock}
       <SaveCancelButtons

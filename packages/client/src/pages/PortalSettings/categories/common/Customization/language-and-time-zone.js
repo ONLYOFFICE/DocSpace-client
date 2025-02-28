@@ -524,6 +524,7 @@ const LanguageAndTimeZoneComponent = (props) => {
     <StyledSettingsComponent
       hasScroll={hasScroll}
       className="category-item-wrapper"
+      withoutExternalLink={!languageAndTimeZoneSettingsUrl}
     >
       {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
@@ -541,15 +542,17 @@ const LanguageAndTimeZoneComponent = (props) => {
         <Text>
           <Trans t={t} i18nKey="TimeLanguageSettingsSave" />
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={languageAndTimeZoneSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {languageAndTimeZoneSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={languageAndTimeZoneSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       {settingsBlock}
       <SaveCancelButtons

@@ -23,7 +23,18 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-export const HEADER_NAME = "Header";
-export const MAIN_BUTTON_NAME = "MainButton";
-export const BODY_NAME = "Body";
+import ErrorContainer from "../error-container/ErrorContainer";
+
+export const ErrorInvalidLink = () => {
+  const { t, ready } = useTranslation(["Errors", "Common"]);
+
+  return ready ? (
+    <ErrorContainer
+      headerText={t("Common:InvalidLink")}
+      bodyText={t("LinkDoesNotExist")}
+    />
+  ) : null;
+};

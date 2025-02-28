@@ -135,19 +135,21 @@ const GuestReleaseTip = ({
                 values={{ productName: t("Common:ProductName") }}
               />
             </Text>
-            <ColorTheme
-              tag="a"
-              themeId={ThemeId.Link}
-              fontSize="12px"
-              fontWeight={400}
-              lineHeight="16px"
-              href={accessRightsLink}
-              target={LinkTarget.blank}
-              type={LinkType.page}
-              isHovered
-            >
-              {t("Translations:GuestReleaseTipLink")}
-            </ColorTheme>
+            {accessRightsLink ? (
+              <ColorTheme
+                tag="a"
+                themeId={ThemeId.Link}
+                fontSize="12px"
+                fontWeight={400}
+                lineHeight="16px"
+                href={accessRightsLink}
+                target={LinkTarget.blank}
+                type={LinkType.page}
+                isHovered
+              >
+                {t("Translations:GuestReleaseTipLink")}
+              </ColorTheme>
+            ) : null}
           </StyledBody>
 
           <ReactSVG src={icon} alt="tip" />

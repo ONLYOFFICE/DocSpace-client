@@ -34,7 +34,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { MainContainer } from "../StyledSecurity";
 
 const MobileView = (props) => {
-  const { t } = props;
+  const { t, withoutExternalLink } = props;
 
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ const MobileView = (props) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer withoutExternalLink={withoutExternalLink}>
       <MobileCategoryWrapper
         title={t("SettingPasswordTittle")}
         subtitle={

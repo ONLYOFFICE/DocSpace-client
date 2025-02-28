@@ -36,7 +36,7 @@ import { SectionHeaderContent, SectionBodyContent } from "./Section";
 
 class PureVersionHistory extends React.Component {
   render() {
-    const { isLoading, versions, showProgressBar } = this.props;
+    const { isLoading, versions } = this.props;
 
     return (
       <SectionWrapper
@@ -71,15 +71,13 @@ export default inject(
   ({ settingsStore, filesStore, clientLoadingStore, versionHistoryStore }) => {
     const { filter } = filesStore;
     const { isLoading } = clientLoadingStore;
-    const { setIsVerHistoryPanel, versions, showProgressBar } =
-      versionHistoryStore;
+    const { setIsVerHistoryPanel, versions } = versionHistoryStore;
 
     return {
       isTabletView: settingsStore.isTabletView,
       isLoading,
       filter,
       versions,
-      showProgressBar,
 
       setIsVerHistoryPanel,
     };

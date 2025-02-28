@@ -77,14 +77,16 @@ const LDAP = ({
     <StyledLdapPage isSmallWindow={isSmallWindow}>
       <Text className="intro-text settings_unavailable">{t("LdapIntro")}</Text>
       <div className="settings_unavailable-box">
-        <Link
-          color={currentColorScheme.main.accent}
-          isHovered
-          target="_blank"
-          href={ldapSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {ldapSettingsUrl ? (
+          <Link
+            color={currentColorScheme.main.accent}
+            isHovered
+            target="_blank"
+            href={ldapSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       {isMobileView ? (

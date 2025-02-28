@@ -248,22 +248,24 @@ const BruteForceProtection = (props) => {
     return <BruteForceProtectionLoader />;
 
   return (
-    <StyledBruteForceProtection>
+    <StyledBruteForceProtection withoutExternalLink={!bruteForceProtectionUrl}>
       <div className="description">
         <Text className="page-subtitle">
           {t("BruteForceProtectionDescription")}
         </Text>
 
-        <Link
-          className="link"
-          fontSize="13px"
-          target="_blank"
-          isHovered
-          href={bruteForceProtectionUrl}
-          color={currentColorScheme.main?.accent}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {bruteForceProtectionUrl ? (
+          <Link
+            className="link"
+            fontSize="13px"
+            target="_blank"
+            isHovered
+            href={bruteForceProtectionUrl}
+            color={currentColorScheme.main?.accent}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
 
       <FieldContainer

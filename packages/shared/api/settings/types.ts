@@ -100,15 +100,11 @@ export type TSettings = {
   socketUrl: string;
   tenantStatus: TenantStatus;
   tenantAlias: string;
-  helpLink: string;
-  forumLink: string;
-  apiDocsLink: string;
   domainValidator: TDomainValidator;
   zendeskKey: string;
   bookTrainingEmail: string;
   documentationEmail: string;
   legalTerms: string;
-  licenseUrl: string;
   cookieSettingsEnabled: boolean;
   userNameRegex: string;
   plugins: {
@@ -133,6 +129,7 @@ export type TSettings = {
   isAmi: boolean;
   logoText: string;
   displayAbout: boolean;
+  externalResources: TExternalResources;
 };
 
 export type TCustomSchema = {
@@ -153,6 +150,173 @@ export type TGetColorTheme = {
   themes: TColorScheme[];
   selected: number;
   limit: 9;
+};
+
+export type TApiEntries = {
+  docspace: string;
+  "javascript-sdk": string;
+  "plugins-sdk": string;
+};
+
+export type TSupportEntries = {
+  request: string;
+};
+
+export type TCommonEntries = {
+  booktrainingemail: string;
+  documentationemail: string;
+  legalterms: string;
+  license: string;
+  paymentemail: string;
+  supportemail: string;
+};
+
+export type THelpCenterEntries = {
+  accessrights: string;
+  administrationguides: string;
+  administratormessage: string;
+  alternativeurl: string;
+  autobackup: string;
+  becometranslator: string;
+  connectamazon: string;
+  connectapple: string;
+  connectbox: string;
+  connectclickatell: string;
+  connectdocusign: string;
+  connectdropbox: string;
+  connectfacebook: string;
+  connectfirebase: string;
+  connectgoogle: string;
+  connectgooglecloudstorage: string;
+  connectlinkedin: string;
+  connectmailru: string;
+  connectmicrosoft: string;
+  connectonedrive: string;
+  connectrackspace: string;
+  connectselectel: string;
+  connectsmsc: string;
+  connecttelegram: string;
+  connectvk: string;
+  connectwordpress: string;
+  connectyandex: string;
+  creatingbackup: string;
+  enterpriseinstall: string;
+  enterpriseinstallscript: string;
+  enterpriseinstallwindows: string;
+  integrationsettings: string;
+  ipsecurity: string;
+  language: string;
+  ldap: string;
+  login: string;
+  managingusers: string;
+  oauth: string;
+  passwordstrength: string;
+  renaming: string;
+  sessionlifetime: string;
+  settings: string;
+  storagemanagement: string;
+  trusteddomain: string;
+  twofactorauthentication: string;
+  userguides: string;
+  welcomepage: string;
+};
+
+export type TIntegrationsEntries = {
+  drupal: string;
+  pipedrive: string;
+  wordpress: string;
+  zapier: string;
+  zoom: string;
+};
+
+export type TSiteEntries = {
+  allconnectors: string;
+  buydeveloper: string;
+  buyenterprise: string;
+  collaborationrooms: string;
+  customrooms: string;
+  demoorder: string;
+  desktop: string;
+  docspace: string;
+  docspaceprices: string;
+  downloaddesktop: string;
+  downloadmobile: string;
+  forenterprises: string;
+  formfillingrooms: string;
+  officeforandroid: string;
+  officefordrupal: string;
+  officeforios: string;
+  officeforwordpress: string;
+  officeforzapier: string;
+  officeforzoom: string;
+  openai: string;
+  privaterooms: string;
+  publicrooms: string;
+  registrationcanceled: string;
+  seamlesscollaboration: string;
+  subscribe: string;
+  wrongportalname: string;
+};
+
+export type TSocialNetworksEntries = {
+  facebook: string;
+  instagram: string;
+  tiktok: string;
+  twitter: string;
+  youtube: string;
+};
+
+export type TVideoGuidesEntries = {
+  activesessions: string;
+  archive: string;
+  backup: string;
+  createfiles: string;
+  fileversions: string;
+  filterfiles: string;
+  full: string;
+  hotkeys: string;
+  operationswithfiles: string;
+  playlist: string;
+  profile: string;
+  roles: string;
+  rooms: string;
+  security: string;
+  whatis: string;
+};
+
+export type TExternalResources = {
+  api: {
+    domain: string;
+    entries: TApiEntries;
+  };
+  common: {
+    entries: TCommonEntries;
+  };
+  forum: {
+    domain: string;
+  };
+  helpcenter: {
+    domain: string;
+    entries: THelpCenterEntries;
+  };
+  integrations: {
+    entries: TIntegrationsEntries;
+  };
+  site: {
+    domain: string;
+    entries: TSiteEntries;
+  };
+  socialNetworks: {
+    entries: TSocialNetworksEntries;
+  };
+  support: {
+    domain: string;
+    entries: TSupportEntries;
+  };
+  videoguides: {
+    domain: string;
+    entries: TVideoGuidesEntries;
+  };
 };
 
 export type TAdditionalResources = {

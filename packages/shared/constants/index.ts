@@ -145,10 +145,6 @@ export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";
 
 export const EDITOR_ID = "portal_editor";
 
-export const WRONG_PORTAL_NAME_URL =
-  (typeof window !== "undefined" && window.ClientConfig?.wrongPortalNameUrl) ||
-  `https://www.onlyoffice.com/wrongportalname.aspx`;
-
 export const MEDIA_VIEW_URL = "/media/view/";
 export const PUBLIC_MEDIA_VIEW_URL = "/rooms/share/media/view";
 

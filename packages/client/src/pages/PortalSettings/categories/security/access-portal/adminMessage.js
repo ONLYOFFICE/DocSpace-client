@@ -160,7 +160,7 @@ const AdminMessage = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!administratorMessageSettingsUrl}>
         <Text>
           {t("AdminsMessageSettingDescription", {
             productName: t("Common:ProductName"),
@@ -170,15 +170,17 @@ const AdminMessage = (props) => {
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
 
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={administratorMessageSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {administratorMessageSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={administratorMessageSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup

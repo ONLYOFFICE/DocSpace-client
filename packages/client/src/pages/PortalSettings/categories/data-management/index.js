@@ -88,16 +88,18 @@ const DataManagementWrapper = (props) => {
               {helpInfo}
             </Trans>
             <span style={{ margin: "10px 0 0" }}>
-              <Link
-                id="link-tooltip"
-                fontSize="13px"
-                href={isAutoBackupPage ? automaticBackupUrl : dataBackupUrl}
-                target="_blank"
-                isBold
-                isHovered
-              >
-                {t("Common:LearnMore")}
-              </Link>
+              {(isAutoBackupPage ? automaticBackupUrl : dataBackupUrl) ? (
+                <Link
+                  id="link-tooltip"
+                  fontSize="13px"
+                  href={isAutoBackupPage ? automaticBackupUrl : dataBackupUrl}
+                  target="_blank"
+                  isBold
+                  isHovered
+                >
+                  {t("Common:LearnMore")}
+                </Link>
+              ) : null}
             </span>
           </Text>
         }

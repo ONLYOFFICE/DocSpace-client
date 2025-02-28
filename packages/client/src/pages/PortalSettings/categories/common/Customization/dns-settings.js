@@ -86,6 +86,7 @@ const DNSSettingsComponent = (props) => {
     isDefaultDNS,
     dnsSettingsUrl,
     currentDeviceType,
+    requestSupportUrl,
   } = props;
 
   const [hasScroll, setHasScroll] = useState(false);
@@ -143,7 +144,7 @@ const DNSSettingsComponent = (props) => {
   }, [isLoadedSetting]);
 
   const onSendRequest = () => {
-    window.open("https://helpdesk.onlyoffice.com/hc/en-us/requests/new");
+    window.open(requestSupportUrl);
   };
 
   const onSaveSettings = async () => {
@@ -283,6 +284,7 @@ const DNSSettingsComponent = (props) => {
       className="category-item-wrapper"
       isSettingPaid={isSettingPaid}
       standalone={standalone}
+      withoutExternalLink={!dnsSettingsUrl}
     >
       {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
@@ -306,15 +308,17 @@ const DNSSettingsComponent = (props) => {
         <Text fontSize="13px" fontWeight={400}>
           {t("DNSSettingsDescription")}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={dnsSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {dnsSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={dnsSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       {settingsBlock}
       <div className="send-request-container">{buttonContainer}</div>
@@ -325,11 +329,11 @@ const DNSSettingsComponent = (props) => {
 export const DNSSettings = inject(
   ({ settingsStore, common, currentQuotaStore }) => {
     const {
-      helpLink,
       currentColorScheme,
       standalone,
       dnsSettingsUrl,
       currentDeviceType,
+      requestSupportUrl,
     } = settingsStore;
     const {
       isLoaded,
@@ -354,7 +358,6 @@ export const DNSSettings = inject(
       setDNSName,
       isLoaded,
       setIsLoadedDNSSettings,
-      helpLink,
       initSettings,
       setIsLoaded,
       isSettingPaid: isCustomizationAvailable,
@@ -364,6 +367,7 @@ export const DNSSettings = inject(
       saveDNSSettings,
       dnsSettingsUrl,
       currentDeviceType,
+      requestSupportUrl,
     };
   },
 )(

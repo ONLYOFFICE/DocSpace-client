@@ -172,16 +172,17 @@ const DocumentService = ({
         <div className="main">
           {t("Settings:DocumentServiceLocationHeaderHelp")}
         </div>
-
-        <Link
-          className="third-party-link"
-          color={currentColorScheme.main?.accent}
-          isHovered
-          target="_blank"
-          href={integrationSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {integrationSettingsUrl ? (
+          <Link
+            className="third-party-link"
+            color={currentColorScheme.main?.accent}
+            isHovered
+            target="_blank"
+            href={integrationSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </Styled.LocationHeader>
 
       <Styled.LocationForm onSubmit={onSubmit}>

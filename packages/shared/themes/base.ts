@@ -2116,6 +2116,12 @@ export const getBaseTheme = () => {
           backgroundColorTop: white,
         },
 
+        tag: {
+          backgroundColor: white,
+          hoverBackgroundColor: grayStrong,
+          activeBackgroundColor: grayLight,
+        },
+
         sideColor: black,
         color: black,
         textColor: gray,

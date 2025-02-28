@@ -96,10 +96,10 @@ class UploadPanelComponent extends React.Component {
     const visible = uploadPanelVisible;
 
     const title = isUploading
-      ? t("Uploads")
+      ? t("Files:Uploading")
       : isUploadingAndConversion
-        ? t("UploadAndConvert")
-        : t("Files:Convert");
+        ? t("UploadingAndConversion")
+        : t("Files:Conversion");
 
     const url =
       uploaded && converted ? ClearReactSvgUrl : ButtonCancelReactSvgUrl;

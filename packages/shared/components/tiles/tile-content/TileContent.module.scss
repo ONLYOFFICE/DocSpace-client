@@ -24,75 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled, { css } from "styled-components";
-import PropTypes from "prop-types";
-import { tablet } from "@docspace/shared/utils";
+@import "../../../styles/variables/devices.scss";
+@import "../../../styles/variables/_colors.scss";
+@import "../../../styles/_mixins.scss";
 
-const truncateCss = css`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
+.tileContent {
+  width: 100%;
+  display: inline-flex;
+}
 
-const commonCss = css`
+.mainContainerWrapper {
   margin: 0;
-  font-family: ${(props) => props.theme.fontFamily};
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
-`;
-
-const StyledTileContent = styled.div`
-  width: 100%;
-  display: inline-flex;
-`;
-
-const MainContainerWrapper = styled.div`
-  ${commonCss};
-
   display: flex;
   align-self: center;
-
   margin-inline-end: auto;
-`;
+  width: inherit;
+}
 
-const MainContainer = styled.div`
+.mainContainer {
   height: 20px;
+  width: inherit;
 
-  @media ${tablet} {
-    ${truncateCss};
+  @include tablet {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-`;
-
-const TileContent = (props) => {
-  const { children, id, className, style, onClick } = props;
-
-  return (
-    <StyledTileContent
-      id={id}
-      className={className}
-      style={style}
-      onClick={onClick}
-    >
-      <MainContainerWrapper
-        className="row-main-container-wrapper"
-        mainContainerWidth={
-          children.props ? children.props.containerWidth : null
-        }
-      >
-        <MainContainer className="row-main-container">{children}</MainContainer>
-      </MainContainerWrapper>
-    </StyledTileContent>
-  );
-};
-
-TileContent.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  id: PropTypes.string,
-  onClick: PropTypes.func,
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-};
-
-export default TileContent;
+}

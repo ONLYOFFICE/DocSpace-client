@@ -46,6 +46,9 @@ export type ArticleAppsProps = {
   showText: boolean;
   withDevTools: boolean;
   logoText: string;
+  downloaddesktopUrl: string;
+  officeforandroidUrl: string;
+  officeforiosUrl: string;
 };
 
 export type ArticleHideMenuButtonProps = {

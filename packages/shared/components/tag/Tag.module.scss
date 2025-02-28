@@ -1,29 +1,60 @@
 @import "../../styles/variables/_colors.scss";
 
 .tag {
+  position: relative;
   width: fit-content;
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  padding: var(--tag-padding);
-  margin-inline-end: var(--tag-margin-end);
+  padding: 1px 7px;
+  margin-inline-end: 4px;
   background: var(--tag-background);
-  border-radius: var(--tag-border-radius);
 
-  &:last-child {
-    margin-inline-end: 0;
+  border-radius: var(--tag-border-radius);
+  border: var(--tag-border);
+
+  &.thirdPartyTag {
+    padding: 0;
   }
 
-  &.isDisabled {
-    background: var(--tag-disabled-background);
+  &::after {
+    content: "";
+    position: absolute;
+    height: 28px;
+    inset-block: -3px;
+    inset-inline: -3px;
+  }
+
+  .thirdPartyTag {
+    padding: 4px 12px;
+    width: 16px;
+    height: 16px;
+
+    [data-theme="Dark"] & {
+      svg {
+        path[fill] {
+          fill: $white;
+        }
+
+        path[stroke] {
+          stroke: $white;
+        }
+      }
+    }
+  }
+
+  &:active {
+    border-color: transparent;
+    background: var(--tag-active-background);
   }
 
   &.isNewTag {
     background: var(--tag-new-background);
+    border-color: transparent;
   }
 
   &.isDeleted {
-    background: var(--tag-deleted-background);
+    border-color: var(--tag-deleted-border);
 
     .tagText {
       text-decoration: line-through;
@@ -31,8 +62,17 @@
     }
   }
 
+  &.isDisabled {
+    border: var(--tag-disabled-border);
+    pointer-events: none;
+
+    .tagText {
+      color: var(--tag-disabled-color);
+    }
+  }
+
   &.isLast {
-    margin-inline-end: 4px;
+    margin-inline-end: 0;
   }
 
   &.isClickable:not(.isDisabled):not(.isDeleted) {
@@ -40,6 +80,7 @@
 
     &:hover {
       background: var(--tag-hover-background);
+      border-color: transparent;
 
       &.isNewTag {
         background: var(--tag-new-hover-background);
@@ -62,24 +103,7 @@
 .tagIcon {
   margin-inline-start: var(--tag-icon-margin-start);
   cursor: pointer;
-}
-
-.thirdPartyTag {
-  padding: var(--tag-third-party-padding);
-  width: var(--tag-third-party-size);
-  height: var(--tag-third-party-size);
-
-  [data-theme="Dark"] & {
-    svg {
-      path[fill] {
-        fill: $white;
-      }
-
-      path[stroke] {
-        stroke: $white;
-      }
-    }
-  }
+  z-index: 1;
 }
 
 .dropdownIcon {

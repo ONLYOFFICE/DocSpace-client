@@ -33,9 +33,8 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { MainContainer } from "../StyledSecurity";
 import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
-const MobileView = () => {
+const MobileView = ({ withoutExternalLink }) => {
   const { t } = useTranslation(["Settings", "Common"]);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,7 +49,7 @@ const MobileView = () => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer withoutExternalLink={withoutExternalLink}>
       <MobileCategoryWrapper
         title={t("SettingPasswordTittle")}
         subtitle={

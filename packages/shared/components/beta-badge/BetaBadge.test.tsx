@@ -52,7 +52,7 @@ jest.mock("react-i18next", () => ({
 const baseProps: BetaBadgeProps = {
   documentationEmail: "support@example.com",
   currentDeviceType: DeviceType.desktop,
-  forumLink: "https://forum.example.com",
+  forumLinkUrl: "https://forum.example.com",
   place: "top-end",
   currentColorScheme: {
     id: 1,

@@ -98,7 +98,7 @@ const Guidance = ({
     return () => {
       window.removeEventListener("resize", updatePositions);
     };
-  }, [currentGuidance, viewAs, isRTL]);
+  }, [currentGuidance, viewAs, isRTL, getRefElement]);
 
   const handleNext = () => {
     if (currentStepIndex < config.length - 1) {

@@ -31,6 +31,7 @@ import ShareTwitterReactSvg from "PUBLIC_DIR/images/thirdparties/twitter.svg";
 import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
+import NextcloudReactSvg from "PUBLIC_DIR/images/thirdparties/nextcloud.svg";
 import { globalColors } from "../themes/globalColors";
 
 export const LOADER_STYLE = Object.freeze({
@@ -84,6 +85,7 @@ export const ROOMS_PROVIDER_TYPE_NAME = Object.freeze({
   6: "SharePoint",
   7: "WebDav",
   8: "Yandex",
+  10: "Nextcloud2",
 });
 
 // extends FolderType keys
@@ -137,6 +139,11 @@ export const PROVIDERS_DATA = Object.freeze({
   zoom: {
     label: "zoom",
     icon: ShareZoomReactSvg,
+    iconOptions: undefined,
+  },
+  nextcloud: {
+    label: "nextcloud",
+    icon: NextcloudReactSvg,
     iconOptions: undefined,
   },
 });

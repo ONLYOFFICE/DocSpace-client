@@ -128,6 +128,8 @@ class ThirdPartyStore {
         return "dropbox";
       case "OneDrive":
         return "onedrive";
+      case "Nextcloud2":
+        return "nextcloud2";
       default:
         return "";
     }

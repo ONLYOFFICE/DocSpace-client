@@ -51,6 +51,7 @@ import WordpressSvgUrl from "PUBLIC_DIR/images/thirdparties/wordpress.svg?url";
 import YahooSvgUrl from "PUBLIC_DIR/images/thirdparties/yahoo.svg?url";
 import YandexSvgUrl from "PUBLIC_DIR/images/thirdparties/yandex.svg?url";
 import ZoomSvgUrl from "PUBLIC_DIR/images/thirdparties/zoom.svg?url";
+import NextcloudSvgUrl from "PUBLIC_DIR/images/thirdparties/nextcloud.svg?url";
 
 export const thirdpartiesLogo = new Map([
   ["appleid.svg", AppleidSvgUrl],
@@ -80,4 +81,5 @@ export const thirdpartiesLogo = new Map([
   ["yahoo.svg", YahooSvgUrl],
   ["yandex.svg", YandexSvgUrl],
   ["zoom.svg", ZoomSvgUrl],
+  ["nextcloud.svg", NextcloudSvgUrl],
 ]);

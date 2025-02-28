@@ -182,6 +182,7 @@ export const enum RoomsProviderType {
   WebDav = 7,
   Yandex = 8,
   Storage = 9,
+  Nextcloud2 = 10,
 }
 
 /**

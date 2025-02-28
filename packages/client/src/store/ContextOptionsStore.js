@@ -83,7 +83,7 @@ import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import copy from "copy-to-clipboard";
 import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
@@ -114,6 +114,7 @@ import {
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
+  formRoleMapping,
   getFileLink,
   getFolderLink,
   removeSharedFolder,
@@ -121,6 +122,7 @@ import {
 
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
+import { createLoader } from "@docspace/shared/utils/createLoader";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -677,8 +679,36 @@ class ContextOptionsStore {
     console.log(item);
   };
 
-  onClickResetAndStartFilling = (item) => {
-    console.log(item);
+  onClickResetAndStartFilling = async (item) => {
+    const { addActiveItems } = this.filesStore;
+    const { clearActiveOperations } = this.uploadDataStore;
+    const { setGroupMenuBlocked } = this.filesActionsStore;
+
+    const { endLoader, startLoader } = createLoader();
+
+    try {
+      startLoader(() => {
+        runInAction(() => {
+          setGroupMenuBlocked(true);
+          addActiveItems([item.id], null);
+        });
+      });
+
+      await formRoleMapping({
+        formId: item.id,
+        roles: [],
+      });
+    } catch (error) {
+      toastr.error(error);
+      console.error(error);
+    } finally {
+      endLoader(() =>
+        runInAction(() => {
+          setGroupMenuBlocked(false);
+          clearActiveOperations([item.id], null);
+        }),
+      );
+    }
   };
 
   onMediaFileClick = (fileId, item) => {
@@ -2078,7 +2108,8 @@ class ContextOptionsStore {
         key: "stop-filling",
         label: t("Common:StopFilling"),
         icon: AccessNoneReactSvgUrl,
-        onClick: () => this.dialogsStore.setStopFillingDialogVisible(true),
+        onClick: () =>
+          this.dialogsStore.setStopFillingDialogVisible(true, item.id),
         disabled: false,
       },
     ];

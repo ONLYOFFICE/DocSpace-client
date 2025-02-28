@@ -172,6 +172,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     console.log("isAuthenticated", isAuthenticated);
 
+    if (location.pathname === "/shared/invalid-link") {
+      return children;
+    }
+
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(

@@ -74,7 +74,7 @@ const MainProfile = (props) => {
     theme,
     profile,
     culture,
-    helpLink,
+    becometranslatorUrl,
     cultureNames,
 
     setChangeEmailVisible,
@@ -195,17 +195,22 @@ const MainProfile = (props) => {
         </Link>
         to take part in the translation and get up to 1 year free of charge."
       </Trans>
-      <div className="tooltip-link-box">
+      {becometranslatorUrl ? (
         <Link
+          style={{
+            boxSizing: "border-box",
+            display: "block",
+            margin: "10px 0 0",
+          }}
           isHovered
           isBold
           fontSize="13px"
-          href={`${helpLink}/guides/become-translator.aspx`}
+          href={becometranslatorUrl}
           target="_blank"
         >
           {t("Common:LearnMore")}
         </Link>
-      </div>
+      ) : null}
     </Text>
   );
 
@@ -638,8 +643,13 @@ const MainProfile = (props) => {
 export default inject(
   ({ settingsStore, peopleStore, userStore, avatarEditorDialogStore }) => {
     const { withActivationBar, sendActivationLink } = userStore;
-    const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
-      settingsStore;
+    const {
+      theme,
+      becometranslatorUrl,
+      culture,
+      currentColorScheme,
+      documentationEmail,
+    } = settingsStore;
 
     const {
       avatarEditorDialogVisible,
@@ -664,7 +674,7 @@ export default inject(
       theme,
       profile,
       culture,
-      helpLink,
+      becometranslatorUrl,
 
       setChangeEmailVisible,
       setChangePasswordVisible,

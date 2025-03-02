@@ -90,6 +90,9 @@ export default inject<TStore>(
       standalone,
       isBurgerLoading,
       logoText,
+      downloaddesktopUrl,
+      officeforandroidUrl,
+      officeforiosUrl,
     } = settingsStore;
 
     const { isFreeTariff, isNonProfit, isTrial, currentTariffPlanTitle } =
@@ -147,6 +150,9 @@ export default inject<TStore>(
       currentDeviceType,
       logoText,
       isAdmin,
+      downloaddesktopUrl,
+      officeforandroidUrl,
+      officeforiosUrl,
     };
   },
 )(observer(ArticleWrapper));

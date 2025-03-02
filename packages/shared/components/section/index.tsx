@@ -221,7 +221,7 @@ const Section = (props: SectionProps) => {
   const showCancelButton =
     primaryOperationsArray.length > 0 &&
     !primaryOperationsCompleted &&
-    !primaryOperationsArray[0].isSingleConversion;
+    primaryOperationsArray.some((op) => op.operation === "upload");
 
   return (
     isSectionAvailable && (

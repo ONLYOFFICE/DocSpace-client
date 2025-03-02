@@ -124,7 +124,7 @@ const beforeBuild = async (
 
     let language = lng === "en-US" || lng === "en-GB" ? "en" : lng;
 
-    if (cultures.indexOf(language) === -1) {
+    if (cultures.includes(language) === -1) {
       return;
     }
 

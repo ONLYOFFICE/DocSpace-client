@@ -26,6 +26,7 @@
 
 import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
+
 import { ContextMenuModel } from "../context-menu";
 
 export type SubInfoPanelHeaderProps = {
@@ -110,8 +111,8 @@ export interface Operation {
   completed: boolean;
   percent?: number;
   withoutStatus?: boolean;
-  disableOpenPanel?: boolean;
-  isSingleConversion?: boolean;
+  showPanel?: (open: boolean) => void;
+  withoutProgress?: boolean;
   items?: Array<{
     operationId: string;
     percent: number;

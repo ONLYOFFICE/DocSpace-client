@@ -60,18 +60,20 @@ const WebhookInfo = (props) => {
           organizationName: logoText,
         })}
       </InfoText>
-      <ColorTheme
-        id="webhooks-info-link"
-        tag="a"
-        themeId={ThemeId.Link}
-        fontWeight={600}
-        href={webhooksGuideUrl}
-        target={LinkTarget.blank}
-        type={LinkType.page}
-        isHovered
-      >
-        {t("WebhooksGuide")}
-      </ColorTheme>
+      {webhooksGuideUrl ? (
+        <ColorTheme
+          id="webhooks-info-link"
+          tag="a"
+          themeId={ThemeId.Link}
+          fontWeight={600}
+          href={webhooksGuideUrl}
+          target={LinkTarget.blank}
+          type={LinkType.page}
+          isHovered
+        >
+          {t("WebhooksGuide")}
+        </ColorTheme>
+      ) : null}
     </InfoWrapper>
   );
 };

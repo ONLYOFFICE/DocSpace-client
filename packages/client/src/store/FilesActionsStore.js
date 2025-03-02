@@ -318,7 +318,7 @@ class FilesActionStore {
 
   createFoldersTree = async (t, files, folderId) => {
     //  console.log("createFoldersTree", files, folderId);
-    const { uploadedFilesHistory, uploaded } = this.uploadDataStore;
+    const { uploaded } = this.uploadDataStore;
 
     const { setPrimaryProgressBarData } =
       this.uploadDataStore.primaryProgressDataStore;
@@ -351,7 +351,6 @@ class FilesActionStore {
           ...pbData,
           completed: uploaded,
           alert: true,
-          disableUploadPanelOpen: uploadedFilesHistory.length === 0,
         });
 
         const size = getConvertedSize(t, roomFolder.quotaLimit);
@@ -377,11 +376,10 @@ class FilesActionStore {
       setPrimaryProgressBarData({
         ...pbData,
         completed: uploaded,
-        disableUploadPanelOpen: uploadedFilesHistory.length === 0,
         withoutStatus: !tree.length,
       });
     } else {
-      setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: false });
+      setPrimaryProgressBarData({ ...pbData });
     }
 
     return filesList;
@@ -3353,8 +3351,7 @@ class FilesActionStore {
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
 
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      secondaryProgressDataStore;
+    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
 
     const {
       setVersionDeletionProcess,
@@ -3368,11 +3365,7 @@ class FilesActionStore {
     const operationId = uniqueid("operation_");
 
     setSecondaryProgressBarData({
-      icon: "file",
-      visible: true,
-      percent: 0,
-      alert: false,
-      filesCount: 1,
+      operation: OPERATIONS_NAME.deleteVersionFile,
       operationId,
     });
 
@@ -3386,7 +3379,7 @@ class FilesActionStore {
           if (result?.error) return Promise.reject(result.error);
           const data = result ?? null;
           const pbData = {
-            icon: "file",
+            operation: OPERATIONS_NAME.deleteVersionFile,
             operationId,
           };
 
@@ -3399,15 +3392,21 @@ class FilesActionStore {
           if (isVisible) fetchFileVersions(fileId, null, null, true);
 
           clearActiveOperations([fileId]);
-          setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
+          setSecondaryProgressBarData({
+            operation: OPERATIONS_NAME.deleteVersionFile,
+            completed: true,
+            operationId,
+          });
         });
     } catch (err) {
       setSecondaryProgressBarData({
-        visible: true,
+        operation: OPERATIONS_NAME.deleteVersionFile,
+        completed: true,
         alert: true,
         operationId,
       });
-      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
       setVersionSelectedForDeletion(null);
       setVersionDeletionProcess(false);
       return toastr.error(err.message ? err.message : err);

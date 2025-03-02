@@ -138,6 +138,16 @@ const StyledSettingsComponent = styled.div`
     @media ${mobile} {
       padding-inline-end: 8px;
     }
+
+    ${(props) =>
+      props.withoutExternalLink &&
+      css`
+        padding-bottom: 16px;
+
+        @media ${mobile} {
+          padding-inline-end: 16px;
+        }
+      `};
   }
 
   @media ${mobile} {

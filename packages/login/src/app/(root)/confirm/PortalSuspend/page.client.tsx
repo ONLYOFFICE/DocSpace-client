@@ -36,21 +36,24 @@ import { toastr } from "@docspace/shared/components/toast";
 import { suspendPortal } from "@docspace/shared/api/portal";
 
 import { TError } from "@/types";
-import { URL_ONLYOFFICE } from "@/utils/constants";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { ButtonsWrapper } from "@/components/Confirm.styled";
 
 type DeactivatePortalProps = {
   siteUrl?: string;
+  onlyofficeUrl: string;
 };
 
-const DeactivatePortalForm = ({ siteUrl }: DeactivatePortalProps) => {
+const DeactivatePortalForm = ({
+  onlyofficeUrl,
+  siteUrl,
+}: DeactivatePortalProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const { linkData } = useContext(ConfirmRouteContext);
 
   const [isDeactivate, setIsDeactivate] = useState(false);
 
-  const url = siteUrl ? siteUrl : URL_ONLYOFFICE;
+  const url = siteUrl ? siteUrl : onlyofficeUrl;
 
   const onDeactivateClick = async () => {
     try {

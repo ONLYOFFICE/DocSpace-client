@@ -30,6 +30,7 @@ import UploadPanel from "./UploadPanel";
 import HotkeysPanel from "./HotkeysPanel";
 import InvitePanel from "./InvitePanel";
 import EditLinkPanel from "./EditLinkPanel";
+import ConversionPanel from "./ConversionPanel";
 
 export {
   EmbeddingPanel,
@@ -38,4 +39,7 @@ export {
   HotkeysPanel,
   InvitePanel,
   EditLinkPanel,
+  ConversionPanel,
 };
+
+export default ConversionPanel;

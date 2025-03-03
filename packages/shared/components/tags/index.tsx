@@ -40,6 +40,8 @@ const Tags: FC<TagsProps> = ({
   columnCount,
   onSelectTag,
   removeTagIcon,
+  onMouseEnter,
+  onMouseLeave,
 }) => {
   const [renderedTags, setRenderedTags] = React.useState<TagType[]>([]);
 
@@ -59,7 +61,7 @@ const Tags: FC<TagsProps> = ({
           const tag = { ...firstTag, maxWidth: `100%` };
           newTags.push(tag);
         } else if (isTagType(firstTag) && firstTag?.isThirdParty) {
-          const tag = { ...firstTag, maxWidth: `36px` };
+          const tag = { ...firstTag, maxWidth: `44px` };
           newTags.push(tag);
         } else {
           const label = isTagType(firstTag) ? firstTag.label : firstTag;
@@ -85,7 +87,7 @@ const Tags: FC<TagsProps> = ({
         const currentTagMaxWidth =
           (containerWidth -
             thirdPartyTagCount * 40 -
-            (tags.length - thirdPartyTagCount) * 4) /
+            (tags.length - thirdPartyTagCount)) /
           (tags.length - thirdPartyTagCount);
 
         const maxWidthPercent = Math.floor(
@@ -97,7 +99,7 @@ const Tags: FC<TagsProps> = ({
           const isTag = isTagType(tag);
 
           if (isTag && tag?.isThirdParty) {
-            const tagNew = { ...tag, maxWidth: `36px` };
+            const tagNew = { ...tag, maxWidth: `44px` };
             newTags.push(tagNew);
           } else if (isTag && tag?.isDefault) {
             const tagNew = { ...tag, maxWidth: `${maxWidthPercent}%` };
@@ -121,7 +123,7 @@ const Tags: FC<TagsProps> = ({
         };
 
         const currentTagMaxWidth =
-          (containerWidth - columnCount * 4 - 35) / columnCount;
+          (containerWidth - columnCount - 35) / columnCount;
 
         const maxWidthPercent = Math.floor(
           (currentTagMaxWidth / containerWidth) * 100,
@@ -133,7 +135,7 @@ const Tags: FC<TagsProps> = ({
             const isTag = isTagType(tag);
 
             if (isTag && tag?.isThirdParty) {
-              const tagNew = { ...tag, maxWidth: `36px` };
+              const tagNew = { ...tag, maxWidth: `44px` };
               newTags.push(tagNew);
             } else if (isTag && tag?.isDefault) {
               const tagNew = { ...tag, maxWidth: `${maxWidthPercent}%` };
@@ -157,7 +159,7 @@ const Tags: FC<TagsProps> = ({
     }
   }, [tags, tagsRef, columnCount]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     updateRenderedTags();
   }, [updateRenderedTags]);
 
@@ -187,6 +189,8 @@ const Tags: FC<TagsProps> = ({
                 isLast={idx === renderedTags.length - 1}
                 removeTagIcon={removeTagIcon}
                 roomType={tag.roomType}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
               />
             );
           })

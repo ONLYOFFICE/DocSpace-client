@@ -82,6 +82,18 @@ export const NewTag: Story = {
   },
 };
 
+export const DeletedTag: Story = {
+  args: {
+    tag: "script",
+    label: "Script",
+    isNewTag: false,
+    isDisabled: false,
+    isDeleted: true,
+    onDelete: () => {},
+    onClick: () => {},
+  },
+};
+
 export const DisabledTag: Story = {
   args: {
     tag: "script",

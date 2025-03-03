@@ -106,7 +106,7 @@ const AboutContent = (props) => {
     companyInfoSettingsData,
     previewData,
     standalone,
-    licenseUrl,
+    licenseAgreementsUrl,
     isEnterprise,
     logoText,
   } = props;
@@ -214,7 +214,7 @@ const AboutContent = (props) => {
               className="row-el"
               fontSize="13px"
               fontWeight="600"
-              href={licenseUrl}
+              href={licenseAgreementsUrl}
               target="_blank"
               enableUserSelect
             >
@@ -293,15 +293,20 @@ const AboutContent = (props) => {
 };
 
 export default inject(({ settingsStore, currentTariffStatusStore }) => {
-  const { theme, companyInfoSettingsData, standalone, licenseUrl, logoText } =
-    settingsStore;
+  const {
+    theme,
+    companyInfoSettingsData,
+    standalone,
+    licenseAgreementsUrl,
+    logoText,
+  } = settingsStore;
   const { isEnterprise } = currentTariffStatusStore;
 
   return {
     theme,
     companyInfoSettingsData,
     standalone,
-    licenseUrl,
+    licenseAgreementsUrl,
     isEnterprise,
     logoText,
   };

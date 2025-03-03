@@ -34,7 +34,7 @@ import React, {
 import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import type { AnimationEvent } from "react";
+
 import { isMobile } from "react-device-detect";
 import { FloatingButton } from "../../floating-button";
 import { FloatingButtonIcons } from "../../floating-button/FloatingButton.enums";
@@ -65,6 +65,7 @@ const operationToIconMap: Record<
   trash: FloatingButtonIcons.trash,
   other: FloatingButtonIcons.other,
   upload: FloatingButtonIcons.upload,
+  deleteVersionFile: FloatingButtonIcons.trash,
 };
 
 const OperationsProgress: React.FC<OperationsProgressProps> = ({
@@ -75,7 +76,6 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   clearSecondaryProgressData,
   clearPrimaryProgressData,
   cancelUpload,
-  onOpenPanel,
   mainButtonVisible,
   needErrorChecking,
   showCancelButton,
@@ -159,7 +159,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     if (primaryActiveOperations.length) {
       setIsHideTooltip(true);
 
-      onOpenPanel?.();
+      primaryActiveOperations[0].showPanel?.(true);
       clearTimers();
 
       resetTimerRef.current = setTimeout(() => {
@@ -175,8 +175,6 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     resetTimerRef.current = setTimeout(() => {
       setIsHideTooltip(false);
     }, 100);
-
-    onOpenPanel?.();
   };
 
   useLayoutEffect(() => {
@@ -204,7 +202,10 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   }, []);
 
   useLayoutEffect(() => {
-    if (isOpenDropdown && !isSeveralOperations) setIsOpenDropdown(false);
+    if (isOpenDropdown && !isSeveralOperations) {
+      setIsOpenDropdown(false);
+      setIsHovered(false);
+    }
   }, [isOpenDropdown, isSeveralOperations]);
 
   const getIcons = () => {
@@ -216,10 +217,6 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     const operation = secondaryActiveOperations.length
       ? secondaryActiveOperations[0].operation
       : primaryActiveOperations[0].operation;
-
-    if (!isSecondaryActive && primaryActiveOperations[0].isSingleConversion) {
-      return operationToIconMap[OPERATIONS_NAME.convert];
-    }
 
     return (
       operationToIconMap[operation as OperationName] ||
@@ -263,7 +260,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
 
   const disableOpenPanel =
     primaryActiveOperations.length === 1 &&
-    primaryActiveOperations[0].disableOpenPanel;
+    !primaryActiveOperations[0].showPanel;
 
   const withoutStatus =
     disableOpenPanel && primaryActiveOperations[0].withoutStatus;
@@ -344,8 +341,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
                 clearPrimaryProgressData?.(operationName)
               }
               onCancel={onCancelOperation}
-              {...(!disableOpenPanel && { onOpenPanel: handleOperationClick })}
-              withoutStatus={withoutStatus}
+              onOpenPanel={handleOperationClick}
             />
           </DropDown>
         ) : null}

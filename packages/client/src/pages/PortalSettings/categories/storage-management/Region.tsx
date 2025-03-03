@@ -33,12 +33,12 @@ import { Text } from "@docspace/shared/components/text";
 import styles from "./Region.module.scss";
 
 export type RegionProps = {
-  region: string;
+  region?: string | null;
 };
 
 interface StorageManagement {
   portalInfo: {
-    region: string;
+    region?: string | null;
   };
 }
 

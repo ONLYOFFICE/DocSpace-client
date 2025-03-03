@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,9 @@ import { inject, observer } from "mobx-react";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Context, injectDefaultTheme } from "@docspace/shared/utils";
-import { RowContainer } from "@docspace/shared/components/row-container";
+import { RowContainer } from "@docspace/shared/components/rows";
+
+import withContainer from "../../../../../HOCs/withContainer";
 
 import SimpleFilesRow from "./SimpleFilesRow";
 
@@ -59,7 +61,7 @@ const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
 `;
 
 const FilesRowContainer = ({
-  filesList,
+  list,
   viewAs,
   setViewAs,
   filterTotal,
@@ -71,8 +73,9 @@ const FilesRowContainer = ({
   currentDeviceType,
   isIndexEditingMode,
   changeIndex,
-  icon,
-  isDownload,
+  isTutorialEnabled,
+  setRefMap,
+  deleteRefMap,
 }) => {
   const { sectionWidth } = useContext(Context);
 
@@ -83,7 +86,7 @@ const FilesRowContainer = ({
   });
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => (
+    return list.map((item, index) => (
       <SimpleFilesRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
         key={
@@ -96,28 +99,30 @@ const FilesRowContainer = ({
         isTrashFolder={isTrashFolder}
         changeIndex={changeIndex}
         isHighlight={
-          highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
+          highlightFile.id == item.id
+            ? highlightFile.isExst === !item.fileExst
+            : null
         }
         isIndexEditingMode={isIndexEditingMode}
-        icon={icon}
-        isDownload={isDownload}
+        isTutorialEnabled={isTutorialEnabled}
+        setRefMap={setRefMap}
+        deleteRefMap={deleteRefMap}
       />
     ));
   }, [
-    filesList,
+    list,
     sectionWidth,
     isRooms,
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
-    icon,
-    isDownload,
+    isTutorialEnabled,
   ]);
 
   return (
     <StyledRowContainer
       className="files-row-container"
-      filesLength={filesList.length}
+      filesLength={list.length}
       itemCount={filterTotal}
       fetchMoreFiles={fetchMoreFiles}
       hasMoreFiles={hasMoreFiles}
@@ -138,10 +143,9 @@ export default inject(
     treeFoldersStore,
     indexingStore,
     filesActionsStore,
-    uploadDataStore,
+    guidanceStore,
   }) => {
     const {
-      filesList,
       viewAs,
       setViewAs,
       filter,
@@ -150,6 +154,8 @@ export default inject(
       roomsFilter,
       highlightFile,
     } = filesStore;
+
+    const { setRefMap, deleteRefMap } = guidanceStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
@@ -157,10 +163,7 @@ export default inject(
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
-    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
-
     return {
-      filesList,
       viewAs,
       setViewAs,
       infoPanelVisible,
@@ -173,8 +176,8 @@ export default inject(
       currentDeviceType,
       isIndexEditingMode,
       changeIndex: filesActionsStore.changeIndex,
-      icon,
-      isDownload,
+      setRefMap,
+      deleteRefMap,
     };
   },
-)(observer(FilesRowContainer));
+)(observer(withContainer(FilesRowContainer)));

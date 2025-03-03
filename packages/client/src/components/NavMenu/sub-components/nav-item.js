@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -173,11 +173,11 @@ const NavItem = React.memo((props) => {
         <ReactSVG src={iconUrl} beforeInjection={() => {}} />
       ) : (
         <>
-          {iconName === "MenuIcon" && <VersionBadge>BETA</VersionBadge>}
+          {iconName === "MenuIcon" ? <VersionBadge>BETA</VersionBadge> : null}
           <StyledMenuIcon active={active} size="big" />
         </>
       )}
-      {children && (
+      {children ? (
         <NavItemLabel
           opened={opened}
           active={active}
@@ -187,7 +187,7 @@ const NavItem = React.memo((props) => {
         >
           {children}
         </NavItemLabel>
-      )}
+      ) : null}
       <NavItemBadge
         opened={opened}
         label={badgeNumber}

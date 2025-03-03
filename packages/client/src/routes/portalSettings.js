@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -64,6 +64,19 @@ const PortalSettingsRoutes = {
         componentLoader(
           () => import("SRC_DIR/pages/PortalSettings/categories/common"),
         ),
+    },
+    {
+      path: "customization/branding/brand-name",
+      async lazy() {
+        const { BrandName } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Branding/brandName"
+            ),
+        );
+
+        return { Component: BrandName };
+      },
     },
     {
       path: "customization/branding/white-label",

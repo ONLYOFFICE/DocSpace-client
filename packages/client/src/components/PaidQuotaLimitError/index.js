@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -58,11 +58,11 @@ const PaidQuotaLimitError = ({
   return (
     <>
       <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
-      {!isRoomAdmin && (
+      {!isRoomAdmin ? (
         <ColorTheme themeId={ThemeId.Link} isHovered onClick={onClickPayments}>
           {t("Common:PaymentsTitle")}
         </ColorTheme>
-      )}
+      ) : null}
     </>
   );
 };

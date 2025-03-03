@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -97,6 +97,7 @@ export const AdditionalResources = ({
       </div>
       <div className="branding-checkbox">
         <Checkbox
+          data-testid="show-feedback-support"
           className="show-feedback-support checkbox"
           isDisabled={!isSettingPaid}
           label={t("ShowFeedbackAndSupport")}
@@ -105,6 +106,7 @@ export const AdditionalResources = ({
         />
 
         <Checkbox
+          data-testid="show-help-center"
           className="show-help-center checkbox"
           isDisabled={!isSettingPaid}
           label={t("ShowHelpCenter")}

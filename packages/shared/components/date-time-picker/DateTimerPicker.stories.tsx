@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
 import { StoryObj, Meta } from "@storybook/react";
 import moment from "moment";
 
@@ -65,17 +64,47 @@ const meta = {
   title: "Components/DateTimePicker",
   component: DateTimePicker,
   argTypes: {
-    minDate: { control: "date" },
-    maxDate: { control: "date" },
-    initialDate: { control: "date" },
-    openDate: { control: "date" },
-    onChange: { action: "onChange" },
-    locale: { control: "select", options: locales },
+    minDate: {
+      control: "date",
+      description: "Minimum selectable date and time",
+    },
+    maxDate: {
+      control: "date",
+      description: "Maximum selectable date and time",
+    },
+    initialDate: {
+      control: "date",
+      description: "Initial selected date and time value",
+    },
+    openDate: {
+      control: "date",
+      description: "Date to display when the calendar initially opens",
+    },
+    onChange: {
+      action: "onChange",
+      description:
+        "Callback function called when the selected date/time changes. Receives a Moment object or null",
+    },
+    locale: {
+      control: "select",
+      options: locales,
+      description:
+        "Locale for date and time formatting (affects calendar and time display)",
+    },
+    hasError: {
+      control: "boolean",
+      description: "Indicates if the picker is in an error state",
+    },
+    className: {
+      control: "text",
+      description: "Additional CSS class for the date-time picker container",
+    },
   },
   parameters: {
     docs: {
       description: {
-        component: "Date-time input",
+        component:
+          "Combined date and time input component that allows users to select both date and time values. Provides calendar for date selection and time input with validation.",
       },
     },
   },
@@ -84,24 +113,26 @@ type Story = StoryObj<typeof DateTimePicker>;
 
 export default meta;
 
-const Wrapper = styled.div`
-  height: 500px;
-`;
-
-const Template = ({ ...args }: DateTimePickerProps) => {
+const Template = (args: DateTimePickerProps) => {
   return (
-    <Wrapper>
+    <div style={{ height: "500px" }}>
       <DateTimePicker {...args} />
-    </Wrapper>
+    </div>
   );
 };
 
 export const Default: Story = {
-  render: (args) => <Template {...args} />,
+  render: Template,
   args: {
     locale: "en",
     maxDate: new Date(`${new Date().getFullYear() + 10}/01/01`),
     minDate: new Date("1970/01/01"),
     openDate: moment(),
+    selectDateText: "Select date",
+    className: "date-time-picker",
+    id: "default-date-time-picker",
+    hasError: false,
+    onChange: (date: null | moment.Moment) =>
+      console.log("Date changed:", date),
   },
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 
@@ -41,13 +40,15 @@ const HideButton = (props) => {
   };
 
   return (
-    <Box
-      alignItems="center"
-      displayProp="flex"
-      flexDirection="row"
-      marginProp={marginProp}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "row",
+        margin: marginProp,
+      }}
     >
-      {!isAdditionalParameters && (
+      {!isAdditionalParameters ? (
         <Text
           as="h2"
           fontSize="16px"
@@ -57,7 +58,7 @@ const HideButton = (props) => {
         >
           {text}
         </Text>
-      )}
+      ) : null}
 
       <Link
         className="hide-button settings_unavailable"
@@ -73,7 +74,7 @@ const HideButton = (props) => {
             ? t("ShowAdditionalParameters")
             : t("Show")}
       </Link>
-    </Box>
+    </div>
   );
 };
 

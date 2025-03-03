@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -133,7 +133,7 @@ const DownloadContent = (props) => {
 
   return (
     <StyledDownloadContent isOpen={showHeader ? isOpen : true} theme={theme}>
-      {showHeader && (
+      {showHeader ? (
         <div className="download-dialog_content-wrapper download-dialog-row">
           <div className="download-dialog-main-content">
             <Checkbox
@@ -155,7 +155,7 @@ const DownloadContent = (props) => {
             </div>
           </div>
           <div className="download-dialog-actions">
-            {(isChecked || isIndeterminate) && !isOther && (
+            {(isChecked || isIndeterminate) && !isOther ? (
               <LinkWithDropdown
                 className="download-dialog-link"
                 dropDownClassName="download-dialog-dropDown"
@@ -172,10 +172,10 @@ const DownloadContent = (props) => {
               >
                 {titleFormat}
               </LinkWithDropdown>
-            )}
+            ) : null}
           </div>
         </div>
-      )}
+      ) : null}
       <div className="download-dialog_hidden-items">
         {items.map((file) => {
           const dropdownItems =

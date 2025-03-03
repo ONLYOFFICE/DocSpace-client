@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -361,11 +361,7 @@ const withHotkeys = (Component) => {
             setDeleteDialogVisible(true);
           } else {
             const translations = {
-              deleteOperation: t("Translations:DeleteOperation"),
               deleteFromTrash: t("Translations:DeleteFromTrash"),
-              deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-              FileRemoved: t("Files:FileRemoved"),
-              FolderRemoved: t("Files:FolderRemoved"),
             };
             deleteAction(translations).catch((err) => toastr.error(err));
           }

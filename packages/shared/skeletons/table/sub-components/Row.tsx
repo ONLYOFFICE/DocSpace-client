@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { RectangleSkeleton, RectangleSkeletonProps } from "../../rectangle";
-
-import { StyledRow, StyledBox1, StyledBox2 } from "../Table.styled";
+import styles from "../Table.module.scss";
 
 const TableRow = ({
   id,
@@ -54,16 +54,20 @@ const TableRow = ({
     animate,
   } = rest;
 
+  const rowClassName = classNames(
+    styles.row,
+    {
+      [styles.withGap8]: isRectangle,
+      [styles.withGap16]: !isRectangle,
+    },
+    className,
+  );
+
   return (
-    <StyledRow
-      id={id}
-      className={className}
-      style={style}
-      gap={isRectangle ? "8px" : "16px"}
-    >
-      <StyledBox1>
+    <div id={id} className={rowClassName} style={style}>
+      <div className={styles.box1}>
         <RectangleSkeleton
-          className="rectangle-content"
+          className={styles.rectangleContent}
           title={title}
           width="100%"
           height="100%"
@@ -75,10 +79,10 @@ const TableRow = ({
           speed={speed}
           animate={animate}
         />
-      </StyledBox1>
-      <StyledBox2 className="row-content">
+      </div>
+      <div className={styles.box2}>
         <RectangleSkeleton
-          className="first-row-content__mobile"
+          className={styles.firstRowContentMobile}
           title={title}
           height="16px"
           borderRadius={borderRadius}
@@ -90,7 +94,7 @@ const TableRow = ({
           animate={animate}
         />
         <RectangleSkeleton
-          className="second-row-content__mobile"
+          className={styles.secondRowContentMobile}
           title={title}
           height="12px"
           borderRadius={borderRadius}
@@ -101,7 +105,7 @@ const TableRow = ({
           speed={speed}
           animate={animate}
         />
-      </StyledBox2>
+      </div>
       <RectangleSkeleton
         title={title}
         width="16"
@@ -114,7 +118,7 @@ const TableRow = ({
         speed={speed}
         animate={animate}
       />
-    </StyledRow>
+    </div>
   );
 };
 

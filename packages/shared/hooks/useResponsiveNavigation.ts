@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,8 +27,8 @@
 import { useEffect, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { DeviceType } from "@docspace/shared/enums";
-import { size } from "@docspace/shared/utils";
+import { DeviceType } from "../enums";
+import { size } from "../utils";
 
 interface IProps {
   redirectUrl: string;

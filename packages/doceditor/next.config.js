@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,9 @@ const version = pkg.version;
 const nextConfig = {
   basePath: "/doceditor",
   output: "standalone",
+  typescript: {
+    ignoreBuildErrors: process.env.TS_ERRORS_IGNORE === "true",
+  },
   experimental: {
     instrumentationHook: true,
     serverComponentsExternalPackages: ["pino", "pino-pretty"],
@@ -50,13 +53,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
-    ignoreBuildErrors: true,
-  },
+
   logging: {
     fetches: {
       fullUrl: true,
@@ -78,6 +75,8 @@ const getBuildYear = () => {
 
 module.exports = {
   webpack(config) {
+    console.log("ENV", { env: process.env });
+
     config.devtool = "source-map";
 
     if (config.mode === "production") {
@@ -92,6 +91,7 @@ module.exports = {
               },
             },
             extractComments: false,
+            parallel: false,
           }),
         ],
       };
@@ -123,7 +123,7 @@ module.exports = {
     };
 
     config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
+      // Asset handling
       {
         type: "asset/resource",
         generator: {
@@ -131,14 +131,13 @@ module.exports = {
           filename: "static/chunks/[path][name][ext]?[hash]",
         },
         test: /\.(svg|png|jpe?g|gif|ico|woff2)$/i,
-        resourceQuery: /url/, // *.svg?url
+        resourceQuery: /url/,
       },
-      // Convert all other *.svg imports to React components
+      // SVG handling
       {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
-        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
-
+        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] },
         loader: "@svgr/webpack",
         options: {
           prettier: false,

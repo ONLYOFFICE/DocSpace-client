@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -252,14 +252,14 @@ const ImageWatermark = ({
       scale={selectedScale.key / 100}
       mainHeight={50}
     >
-      {!selectedImageUrl && (
+      {!selectedImageUrl ? (
         <FileInput
           accept={["image/png", "image/jpeg"]}
           onInput={onInput}
           scale
           isMultiple={false}
         />
-      )}
+      ) : null}
 
       {/* <FilesSelectorInput
         onSelectFile={onSelectFile}
@@ -268,7 +268,7 @@ const ImageWatermark = ({
         scale
       /> */}
 
-      {selectedImageUrl && (
+      {selectedImageUrl ? (
         <div className="image-wrapper">
           <div>
             <div className="image-description">
@@ -329,7 +329,7 @@ const ImageWatermark = ({
             </div>
           </div>
         </div>
-      )}
+      ) : null}
     </StyledWatermark>
   );
 };

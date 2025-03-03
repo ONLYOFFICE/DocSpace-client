@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,7 +34,6 @@ import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { Link } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
@@ -69,7 +68,7 @@ const RootFolderContainer = (props) => {
     isPrivacyFolder,
     isDesktop,
     isEncryptionSupport,
-    privacyInstructions,
+    privateRoomsUrl,
     title,
     onCreate,
     onCreateRoom,
@@ -91,6 +90,7 @@ const RootFolderContainer = (props) => {
     roomsFolder,
     isPublicRoom,
     userId,
+    logoText,
   } = props;
 
   const navigate = useNavigate();
@@ -121,7 +121,7 @@ const RootFolderContainer = (props) => {
       : t("ArchiveEmptyScreen", { productName: t("Common:ProductName") });
 
   const privateRoomHeader = t("PrivateRoomHeader", {
-    organizationName: t("Common:OrganizationName"),
+    organizationName: logoText,
   });
 
   const privacyIcon = <img alt="" src={PrivacySvgUrl} />;
@@ -141,33 +141,36 @@ const RootFolderContainer = (props) => {
     <>
       <Text fontSize="15px" as="div">
         {privateRoomDescTranslations.map((el) => (
-          <Box
-            displayProp="flex"
-            alignItems="center"
-            paddingProp="0 0 13px 0"
+          <div
+            style={{
+              boxSizing: "border-box",
+              display: "flex",
+              alignItems: "center",
+              padding: "0 0 13px 0",
+            }}
             key={el}
           >
-            <Box paddingProp="0 7px 0 0">{privacyIcon}</Box>
-            <Box>{el}</Box>
-          </Box>
+            <div style={{ padding: "0 7px 0 0" }}>{privacyIcon}</div>
+            <div>{el}</div>
+          </div>
         ))}
       </Text>
-      {!isDesktop && (
+      {!isDesktop ? (
         <Text fontSize="12px">
           <Trans t={t} i18nKey="PrivateRoomSupport" ns="Files">
             Work in Private Room is available via{" "}
-            {{ organizationName: t("Common:OrganizationName") }} desktop app.
+            {{ organizationName: logoText }} desktop app.
             <Link
               isBold
               isHovered
               color={theme.filesEmptyContainer.privateRoom.linkColor}
-              href={privacyInstructions}
+              href={privateRoomsUrl}
             >
               Instructions
             </Link>
           </Trans>
         </Text>
-      )}
+      ) : null}
     </>
   );
 
@@ -359,7 +362,13 @@ export default inject(
     userStore,
     publicRoomStore,
   }) => {
-    const { isDesktopClient, isEncryptionSupport, theme } = settingsStore;
+    const {
+      isDesktopClient,
+      isEncryptionSupport,
+      theme,
+      logoText,
+      privateRoomsUrl,
+    } = settingsStore;
 
     const { setIsSectionBodyLoading } = clientLoadingStore;
 
@@ -367,7 +376,7 @@ export default inject(
       setIsSectionBodyLoading(param);
     };
 
-    const { filter, privacyInstructions, isEmptyPage } = filesStore;
+    const { filter, isEmptyPage } = filesStore;
     const { title, rootFolderType, security } = selectedFolderStore;
     const { isPrivacyFolder, myFolderId, myFolder, roomsFolder } =
       treeFoldersStore;
@@ -382,7 +391,7 @@ export default inject(
       userId: userStore?.user?.id,
       isCollaborator: userStore?.user?.isCollaborator,
       isEncryptionSupport,
-      privacyInstructions,
+      privateRoomsUrl,
       title,
       myFolderId,
       filter,
@@ -397,6 +406,7 @@ export default inject(
       myFolder,
       roomsFolder,
       isPublicRoom,
+      logoText,
     };
   },
 )(withTranslation(["Files"])(observer(RootFolderContainer)));

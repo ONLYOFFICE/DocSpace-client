@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,17 +25,35 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Mask } from "react-text-mask";
-
 import { InputSize, InputType } from "./TextInput.enums";
 
-export interface TextInputProps {
+type HTMLInputProps = Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  | "size"
+  | "type"
+  | "value"
+  | "onChange"
+  | "onBlur"
+  | "onFocus"
+  | "onKeyDown"
+  | "onClick"
+  | "onContextMenu"
+  | "disabled"
+  | "readOnly"
+  | "className"
+  | "style"
+  | "dir"
+  | "ref"
+>;
+
+export type TextInputProps = HTMLInputProps & {
   /** Used as HTML `id` property */
   id?: string;
   /** Forwarded ref */
   forwardedRef?: React.Ref<HTMLInputElement>;
   /** Used as HTML `name` property */
   name?: string;
-  /** Supported type of the input fields. */
+  /** Supported type of the input fields */
   type: InputType;
   /** Value of the input */
   value: string;
@@ -45,28 +63,31 @@ export interface TextInputProps {
   placeholder?: string;
   /** Used as HTML `tabindex` property */
   tabIndex?: number;
-  /** input text mask */
+  /** Input text mask */
   mask?: Mask | ((value: string) => Mask);
-  /** Allows to add or delete characters without changing the positions of the existing characters. */
+  /** Allows to add or delete characters without changing the positions of the existing characters */
   keepCharPositions?: boolean;
-  /** When guide is true, Text Mask always shows both placeholder characters and non-placeholder mask characters. */
-  guide?: boolean | string;
-  /** Supported size of the input fields. */
-  size: InputSize;
+  /** When guide is true, Text Mask always shows both placeholder characters and non-placeholder mask characters */
+  guide?: boolean;
+  /** Supported size of the input fields */
+  size?: InputSize;
   /** Indicates the input field has scale */
   scale?: boolean;
-  /** Called with the new value. Required when input is not read only. Parent should pass it back as `value` */
+  /** Called with the new value. Required when input is not read only */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /** Called when field is blurred */
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   /** Called when field is focused */
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  /** Called when a key is pressed */
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  /** Called when clicked */
   onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
+  /** Called when context menu is triggered */
   onContextMenu?: (e: React.MouseEvent<HTMLInputElement>) => void;
   /** Focus the input field on initial render */
   isAutoFocussed?: boolean;
-  /** Indicates that the field cannot be used (e.g not authorised, or changes not saved) */
+  /** Indicates that the field cannot be used */
   isDisabled?: boolean;
   /** Indicates that the field is displaying read-only content */
   isReadOnly?: boolean;
@@ -76,24 +97,28 @@ export interface TextInputProps {
   hasWarning?: boolean;
   /** Used as HTML `autocomplete` property */
   autoComplete?: string;
-  /** Accepts class */
+  /** CSS class name */
   className?: string;
-  /** Accepts css style */
+  /** Inline CSS styles */
   style?: React.CSSProperties;
   /** Sets the font weight */
   fontWeight?: number | string;
   /** Sets font weight value to 600 */
   isBold?: boolean;
-  /** Indicates that component contain border */
+  /** Indicates that component contains border */
   withBorder?: boolean;
+  /** Text direction */
   dir?: string;
+  /** Input mode for virtual keyboard */
   inputMode?:
-    | "text"
-    | "email"
-    | "search"
-    | "tel"
-    | "url"
     | "none"
+    | "text"
+    | "decimal"
     | "numeric"
-    | "decimal";
-}
+    | "tel"
+    | "search"
+    | "email"
+    | "url";
+  /** HTML data-testid attribute */
+  testId?: string;
+};

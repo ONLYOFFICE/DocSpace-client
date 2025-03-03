@@ -1,136 +1,102 @@
 # ComboBox
 
-Custom combo box input
+A versatile and accessible combo box component that combines a text input with a dropdown list. It allows users to either type a value directly or choose from a predefined list of options. The component supports various display types, search functionality, and customizable styling options.
 
-### Usage
+### Features
+
+- Multiple display types (default, badge, onlyIcon, descriptive)
+- Search functionality with customizable placeholder
+- Support for icons and advanced options
+- Accessible keyboard navigation
+- Customizable styling and theming
+- Responsive design with mobile view support
+
+### Installation
 
 ```js
 import { ComboBox } from "@docspace/shared/components/combobox";
-import NavLogoReactSvg from "PUBLIC_DIR/images/nav.logo.react.svg";
-import CatalogEmployeeReactSvg from "PUBLIC_DIR/images/icons/16/catalog.employee.react.svg?url";
 ```
 
-```js
+### Basic Usage
+
+```jsx
 const options = [
   {
     key: 1,
-    icon: CatalogEmployeeReactSvg, // optional item
+    icon: "path/to/icon.svg", // optional
     label: "Option 1",
-    disabled: false, // optional item
-    onClick: clickFunction, // optional item
+    disabled: false, // optional
+    onClick: () => {}, // optional
   },
 ];
+
+<ComboBox
+  options={options}
+  selectedOption={{ key: 1, label: "Option 1" }}
+  onSelect={(option) => console.log("Selected:", option)}
+/>
 ```
+
+### Advanced Usage
 
 ```jsx
 <ComboBox
   options={options}
-  isDisabled={false}
-  selectedOption={{
-    key: 0,
-    label: "Select",
-  }}
+  selectedOption={{ key: 1, label: "Option 1" }}
+  displayType="descriptive"
+  withSearch={true}
+  searchPlaceholder="Search options..."
   dropDownMaxHeight={200}
-  noBorder={false}
-  scale={true}
-  scaledOptions={true}
-  size="content"
-  onSelect={(option) => console.log("selected", option)}
+  advancedOptions={<div>Advanced options content</div>}
+  directionX="right"
+  directionY="bottom"
 />
 ```
 
-Options have options:
+### Props
 
-- key - Item key, may be a string or a number
-- label - Display text
-- icon - Optional name of icon that will be displayed before label
-- disabled - Make option disabled
-- onClick - On click function
+| Prop | Type | Required | Options | Default | Description |
+|------|------|----------|----------|---------|-------------|
+| `options` | `array` | ✅ | - | - | Array of options to display in the dropdown |
+| `selectedOption` | `object` | ✅ | - | - | Currently selected option |
+| `onSelect` | `function` | ✅ | - | - | Callback when an option is selected |
+| `displayType` | `string` | - | `default`, `badge`, `onlyIcon`, `descriptive` | `default` | Display style of the combobox |
+| `withSearch` | `boolean` | - | - | `false` | Enable search functionality |
+| `searchPlaceholder` | `string` | - | - | - | Placeholder text for search input |
+| `dropDownMaxHeight` | `number` | - | - | `200` | Maximum height of dropdown in pixels |
+| `isDisabled` | `boolean` | - | - | `false` | Disable the combobox |
+| `noBorder` | `boolean` | - | - | `false` | Remove border from combobox |
+| `scaled` | `boolean` | - | - | `true` | Enable scaling based on parent |
+| `size` | `string` | - | `base`, `middle`, `big`, `huge`, `content` | `base` | Size of the combobox |
+| `directionX` | `string` | - | `left`, `right` | - | Horizontal direction of dropdown |
+| `directionY` | `string` | - | `top`, `bottom` | - | Vertical direction of dropdown |
+| `advancedOptions` | `node` | - | - | - | Additional content for advanced options |
+| `className` | `string` | - | - | - | Additional CSS class |
 
-ComboBox perceives all property`s for positioning from DropDown!
+### Option Properties
 
-If you need to display a custom list of options, you must use advancedOptions property. Like this:
+Each option in the `options` array can have the following properties:
 
-```js
-const advancedOptions = (
-  <>
-    <DropDownItem>
-      <RadioButton value="asc" name="first" label="A-Z" isChecked={true} />
-    </DropDownItem>
-    <DropDownItem>
-      <RadioButton value="desc" name="first" label="Z-A" />
-    </DropDownItem>
-    <DropDownItem isSeparator />
-    <DropDownItem>
-      <RadioButton value="first" name="second" label="First name" />
-    </DropDownItem>
-    <DropDownItem>
-      <RadioButton
-        value="last"
-        name="second"
-        label="Last name"
-        isChecked={true}
-      />
-    </DropDownItem>
-  </>
-);
-```
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `key` | `string\|number` | ✅ | Unique identifier for the option |
+| `label` | `string` | ✅ | Display text for the option |
+| `icon` | `string` | - | URL or path to option icon |
+| `disabled` | `boolean` | - | Disable the option |
+| `onClick` | `function` | - | Custom click handler for the option |
+| `description` | `string` | - | Additional description (for descriptive display type) |
 
-```jsx
-<ComboBox
-  options={[]} // An empty array will enable advancedOptions
-  advancedOptions={advancedOptions}
-  onSelect={(option) => console.log("Selected option", option)}
-  selectedOption={{
-    key: 0,
-    label: "Select",
-  }}
-  isDisabled={false}
-  scaled={false}
-  size="content"
-  directionX="right"
->
-  <NavLogoReactSvg size="medium" key="comboIcon" />
-</ComboBox>
-```
+### Accessibility
 
-To use Combobox as a toggle button, you must declare it according to the parameters:
+The ComboBox component implements ARIA attributes and keyboard navigation for improved accessibility:
 
-```jsx
-<ComboBox
-  options={[]} // Required to display correctly
-  selectedOption={{
-    key: 0,
-    label: "Selected option",
-  }}
-  scaled={false}
-  size="content"
-  displayType="toggle"
-  onToggle={alert("action")}
->
-  <NavLogoReactSvg size="medium" key="comboIcon" />
-</ComboBox>
-```
+- `aria-expanded`: Indicates dropdown state
+- `aria-haspopup`: Indicates popup presence
+- `aria-label`: Provides component description
+- `role="combobox"`: Identifies the component type
 
-### Properties
-
-| Props               |      Type      | Required |                   Values                   |  Default  | Description                                                                            |
-| ------------------- | :------------: | :------: | :----------------------------------------: | :-------: | -------------------------------------------------------------------------------------- |
-| `advancedOptions`   |   `element`    |    -     |                     -                      |     -     | If you need display options not basic options                                          |
-| `className`         |    `string`    |    -     |                     -                      |     -     | Accepts class                                                                          |
-| `displayType`       |    `oneOf`     |    -     |            `default`, `toggle`             | `default` | Component Display Type                                                                 |
-| `dropDownMaxHeight` |    `number`    |    -     |                     -                      |     -     | Height of Dropdown                                                                     |
-| `id`                |    `string`    |    -     |                     -                      |     -     | Accepts id                                                                             |
-| `isDisabled`        |     `bool`     |    -     |                     -                      |  `false`  | Indicates that component is disabled                                                   |
-| `noBorder`          |     `bool`     |    -     |                     -                      |  `false`  | Indicates that component is displayed without borders                                  |
-| `onSelect`          |     `func`     |    -     |                     -                      |     -     | Will be triggered whenever an ComboBox is selected option                              |
-| `options`           |    `array`     |    ✅    |                     -                      |     -     | Combo box options                                                                      |
-| `scaledOptions`     |     `bool`     |    -     |                     -                      |  `false`  | Indicates that component`s options is scaled by ComboButton                            |
-| `scaled`            |     `bool`     |    -     |                     -                      |  `true`   | Indicates that component is scaled by parent                                           |
-| `selectedOption`    |    `object`    |    ✅    |                     -                      |     -     | Selected option                                                                        |
-| `size`              |    `oneOf`     |    -     | `base`, `middle`, `big`, `huge`, `content` |  `base`   | Select component width, one of default                                                 |
-| `style`             | `obj`, `array` |    -     |                     -                      |     -     | Accepts css style                                                                      |
-| `onToggle`          |     `func`     |    -     |                     -                      |     -     | The event will be raised when using `displayType: toggle` when clicking on a component |
-| `withBackdrop`      |     `bool`     |    -     |                     -                      |  `true`   | Indicates that component contains a backdrop                                           |
-| `onBackdropClick`   |     `func`     |    -     |                     -                      |     -     | The event is triggered by clicking outside the component when `withBackdrop: true`     |
-| `showDisabledItems` |     `bool`     |    -     |                     -                      |  `false`  | Display disabled items or not when displayType !== toggle                              |
+Keyboard support:
+- `Enter/Space`: Open/close dropdown
+- `Arrow Up/Down`: Navigate through options
+- `Escape`: Close dropdown
+- `Tab`: Focus next/previous element

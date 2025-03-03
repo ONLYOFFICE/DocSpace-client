@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -172,12 +172,12 @@ const NavMenu = (props) => {
         withBlur
       />
 
-      {!hideHeader &&
-        (isLoaded && isAuthenticated ? (
+      {!hideHeader ? (
+        isLoaded && isAuthenticated ? (
           <>
-            {!isPreparationPortal && (
+            {!isPreparationPortal ? (
               <HeaderNav hideProfileMenu={hideProfileMenu} />
-            )}
+            ) : null}
             <Header
               customHeader={customHeader}
               isPreparationPortal={isPreparationPortal}
@@ -193,13 +193,14 @@ const NavMenu = (props) => {
           <NavMenuHeaderLoader />
         ) : (
           <HeaderUnAuth />
-        ))}
+        )
+      ) : null}
 
-      {isAsideAvailable && (
+      {isAsideAvailable ? (
         <Aside visible={isAsideVisible} onClick={backdropClick}>
           {asideContent}
         </Aside>
-      )}
+      ) : null}
     </StyledContainer>
   );
 };

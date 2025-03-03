@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -70,7 +70,7 @@ const GuestReleaseTip = ({
   setGuestReleaseTipDialogVisible,
   showBodyLoader,
 }: GuestReleaseTipProps) => {
-  const { t } = useTranslation(["Common", "Translations"]);
+  const { t } = useTranslation(["Common", "Translations", "Files"]);
   const theme = useTheme();
 
   const icon = theme.isBase ? ChangeTypeTipSvgUrl : ChangeTypeTipDarkSvgUrl;
@@ -115,7 +115,7 @@ const GuestReleaseTip = ({
               >
                 {t("Common:Guest")}
               </Text>
-              <Badge label={t("Common:New")} noHover />
+              <Badge label={t("Files:New")} noHover />
             </div>
 
             <IconButton
@@ -135,19 +135,21 @@ const GuestReleaseTip = ({
                 values={{ productName: t("Common:ProductName") }}
               />
             </Text>
-            <ColorTheme
-              tag="a"
-              themeId={ThemeId.Link}
-              fontSize="12px"
-              fontWeight={400}
-              lineHeight="16px"
-              href={accessRightsLink}
-              target={LinkTarget.blank}
-              type={LinkType.page}
-              isHovered
-            >
-              {t("Translations:GuestReleaseTipLink")}
-            </ColorTheme>
+            {accessRightsLink ? (
+              <ColorTheme
+                tag="a"
+                themeId={ThemeId.Link}
+                fontSize="12px"
+                fontWeight={400}
+                lineHeight="16px"
+                href={accessRightsLink}
+                target={LinkTarget.blank}
+                type={LinkType.page}
+                isHovered
+              >
+                {t("Translations:GuestReleaseTipLink")}
+              </ColorTheme>
+            ) : null}
           </StyledBody>
 
           <ReactSVG src={icon} alt="tip" />

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,7 +33,6 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 
 import { LDAPCertificateProblem } from "@docspace/shared/enums";
 import StyledCertificateDialogBody from "../styled-components/StyledCerticateDialog";
@@ -110,12 +109,12 @@ const CertificateDialog = ({
       <ModalDialog.Header>{t("LdapCertificateConfirm")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledCertificateDialogBody hasError={hasError}>
-          <Box className="ldap-settings-crt-confirmation">
+          <div className="ldap-settings-crt-confirmation">
             <Text lineHeight="20px" fontSize="13px" fontWeight="400">
               {t("LdapAddCertificateToStoreConfirmation")}
             </Text>
-          </Box>
-          <Box className="ldap-settings-crt-details">
+          </div>
+          <div className="ldap-settings-crt-details">
             <Text as="p">
               {t("LdapSettingsSerialNumber")}: {cerficateIssue.serialNumber}
             </Text>
@@ -139,16 +138,16 @@ const CertificateDialog = ({
             <Text as="p">
               {t("LdapSettingsUniqueHash")}: {cerficateIssue.uniqueHash}
             </Text>
-          </Box>
-          {hasError && (
-            <Box>
+          </div>
+          {hasError ? (
+            <div>
               {cerficateIssue.errors.map((err) => (
                 <Text className="ldap-error-text" key={`err-${err}`}>
                   {mapError(err)}
                 </Text>
               ))}
-            </Box>
-          )}
+            </div>
+          ) : null}
         </StyledCertificateDialogBody>
       </ModalDialog.Body>
       <ModalDialog.Footer>

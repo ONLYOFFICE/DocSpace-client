@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -83,7 +82,7 @@ import {
   SelectedItemsContainer,
   CheckboxGroup,
 } from "./StyledPresets";
-import { Integration } from "../sub-components/Integration";
+import Integration from "../sub-components/Integration";
 import { TooltipContent } from "../sub-components/TooltipContent";
 
 const Manager = (props) => {
@@ -346,7 +345,7 @@ const Manager = (props) => {
       height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
-      <Box id={config.frameId} />
+      <div id={config.frameId} />
     </Frame>
   );
 
@@ -541,7 +540,7 @@ const Manager = (props) => {
                 />
               </FilesSelectorInputWrapper>
             </ControlsGroup>
-            {sharedLinks && (
+            {sharedLinks ? (
               <ControlsGroup>
                 <LabelGroup>
                   <Label
@@ -565,16 +564,16 @@ const Manager = (props) => {
                   directionY="bottom"
                 />
 
-                {selectedLink && (
+                {selectedLink ? (
                   <SharedLinkHint
                     t={t}
                     linkSettings={selectedLink.settings}
                     redirectToSelectedRoom={redirectToSelectedRoom}
                     currentColorScheme={currentColorScheme}
                   />
-                )}
+                ) : null}
               </ControlsGroup>
-            )}
+            ) : null}
           </ControlsSection>
           <ControlsSection>
             <CategorySubHeader>{t("AdvancedDisplay")}</CategorySubHeader>
@@ -621,7 +620,7 @@ const Manager = (props) => {
               onClick={changeColumnsOption}
               spacing="8px"
             />
-            {columnDisplay === "custom" && (
+            {columnDisplay === "custom" ? (
               <ControlsGroup>
                 <ComboBox
                   onSelect={onColumnSelect}
@@ -653,24 +652,14 @@ const Manager = (props) => {
                   ))}
                 </SelectedItemsContainer>
               </ControlsGroup>
-            )}
+            ) : null}
           </ControlsSection>
 
-          <Integration
-            className="integration-examples"
-            t={t}
-            theme={theme}
-            currentColorScheme={currentColorScheme}
-          />
+          <Integration className="integration-examples" />
         </Controls>
       </Container>
 
-      <Integration
-        className="integration-examples integration-examples-bottom"
-        t={t}
-        theme={theme}
-        currentColorScheme={currentColorScheme}
-      />
+      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };

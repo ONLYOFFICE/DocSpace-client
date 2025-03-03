@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,16 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useRef, useState } from "react";
-import Scrollbar from "react-scrollbars-custom";
 
+import { Scrollbar } from "../../scrollbar";
+import { Scrollbar as CustomScrollbar } from "../../scrollbar/custom-scrollbar";
 import { SubInfoPanelBodyProps } from "../Section.types";
-import { StyledScrollbar } from "../Section.styled";
+import styles from "../Section.module.scss";
 
 const SubInfoPanelBody = ({
   children,
   isInfoPanelScrollLocked,
 }: SubInfoPanelBodyProps) => {
-  const scrollRef = useRef<Scrollbar | null>(null);
+  const scrollRef = useRef<CustomScrollbar>(null);
   const [scrollYPossible, setScrollYPossible] = useState(false);
   const [scrollLocked, setScrollLocked] = useState(
     scrollYPossible && isInfoPanelScrollLocked,
@@ -42,11 +43,11 @@ const SubInfoPanelBody = ({
 
   useEffect(() => {
     const valueScrollYPossible =
-      scrollRef.current.scrollValues?.scrollYPossible;
+      scrollRef.current?.scrollValues?.scrollYPossible;
 
     if (scrollRef.current && valueScrollYPossible !== scrollYPossible)
-      setScrollYPossible(valueScrollYPossible);
-  }, [scrollRef?.current?.scrollValues.scrollYPossible, scrollYPossible]);
+      setScrollYPossible(valueScrollYPossible ?? false);
+  }, [scrollRef?.current?.scrollValues?.scrollYPossible, scrollYPossible]);
 
   useEffect(() => {
     if (scrollYPossible && isInfoPanelScrollLocked !== scrollLocked)
@@ -73,16 +74,15 @@ const SubInfoPanelBody = ({
   }, []);
 
   return (
-    <StyledScrollbar
-      // @ts-expect-error error from custom scrollbar
+    <Scrollbar
       ref={scrollRef}
-      $isScrollLocked={scrollLocked}
       noScrollY={scrollLocked}
       scrollClass="section-scroll info-panel-scroll"
       createContext
+      className={styles.scrollbar}
     >
       {children}
-    </StyledScrollbar>
+    </Scrollbar>
   );
 };
 

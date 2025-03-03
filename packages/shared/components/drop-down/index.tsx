@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 import React from "react";
 import { isMobile } from "react-device-detect";
 
-import { Portal } from "../portal";
 import { Backdrop } from "../backdrop";
 
 import { DropDownProps } from "./DropDown.types";
@@ -82,7 +81,7 @@ const DropDown = (props: DropDownProps) => {
 
   return (
     <>
-      {!usePortalBackdrop && backDrop}
+      {!usePortalBackdrop ? backDrop : null}
       <EnhancedComponent
         {...eventTypesProp}
         showDisabledItems={showDisabledItems}

@@ -1,6 +1,6 @@
 # RadioButtonGroup
 
-RadioButtonGroup allow you to add group radiobutton
+The `RadioButtonGroup` component allows you to create a group of radio buttons with various configurations, including horizontal/vertical layouts, disabled states, and text labels.
 
 ### Usage
 
@@ -15,25 +15,32 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
   options={[
     { value: "apple", label: "Sweet apple" },
     { value: "banana", label: "Banana" },
-    { value: "Mandarin" },
+    { type: "text", label: "Choose your favorite fruit:" },
   ]}
+  onClick={(e) => console.log(e.target.value)}
+  orientation="horizontal"
+  isDisabled={false}
+  fontSize="14px"
+  fontWeight="bold"
+  spacing="10px"
+  width="100%"
 />
 ```
 
 ### Properties
 
-| Props         |       Type       | Required |          Values          |   Default    | Description                                                                                                                                                                                                       |
-| ------------- | :--------------: | :------: | :----------------------: | :----------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `className`   |     `string`     |    -     |            -             |      -       | Accepts class                                                                                                                                                                                                     |
-| `id`          |     `string`     |    -     |            -             |      -       | Accepts id                                                                                                                                                                                                        |
-| `isDisabled`  |      `bool`      |    -     |            -             |   `false`    | Disabling all radiobutton in group                                                                                                                                                                                |
-| `name`        |     `string`     |    ✅    |            -             |      -       | Used as HTML `name` property for `<input>` tag. Used for identification RadioButtonGroup                                                                                                                          |
-| `onClick`     |      `func`      |    -     |            -             |      -       | Allow you to handle clicking events on `<RadioButton />` component                                                                                                                                                |
-| `options`     |    `arrayOf`     |    ✅    |            -             |      -       | Array of objects, contains props for each `<RadioButton />` component                                                                                                                                             |
-| `orientation` |     `oneOf`      |    -     | `vertical`, `horizontal` | `horizontal` | Position of radiobuttons                                                                                                                                                                                          |
-| `selected`    |     `string`     |    ✅    |            -             |      -       | Value of the selected radiobutton                                                                                                                                                                                 |
-| `spacing`     |     `string`     |    -     |            -             |    `15px`    | Margin between radiobutton. If orientation `horizontal`, it is `margin-left`(apply for all radiobuttons, except first), if orientation `vertical`, it is `margin-bottom`(apply for all radiobuttons, except last) |
-| `style`       |  `obj`, `array`  |    -     |            -             |      -       | Accepts css style                                                                                                                                                                                                 |
-| `width`       |     `string`     |    -     |            -             |    `100%`    | Width of RadioButtonGroup container                                                                                                                                                                               |
-| `fontSize`    |     `string`     |    -     |            -             |      -       | Font size of link                                                                                                                                                                                                 |
-| `fontWeight`  | `number, string` |    -     |            -             |      -       | Font weight of link                                                                                                                                                                                               |
+| Props         |          Type          | Required |          Values          |   Default    | Description                                                                                                                                                                           |
+| ------------- | :--------------------: | :------: | :----------------------: | :----------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `className`   |        `string`        |    -     |            -             |      -       | Custom class name for additional styling.                                                                                                                                             |
+| `id`          |        `string`        |    -     |            -             |      -       | Unique identifier for the component.                                                                                                                                                  |
+| `isDisabled`  |       `boolean`        |    -     |            -             |   `false`    | Disables all radio buttons in the group.                                                                                                                                              |
+| `name`        |        `string`        |    ✅    |            -             |      -       | Used as the HTML `name` property for `<input>` tags, facilitating identification of each `RadioButtonGroup`.                                                                          |
+| `onClick`     |       `function`       |    -     |            -             |      -       | Callback function to handle click events on the radio buttons. Receives the event as an argument.                                                                                     |
+| `options`     | `TRadioButtonOption[]` |    ✅    |            -             |      -       | Array of option objects, each containing properties for individual radio buttons. Supports `value`, `label`, `type`, `disabled`, `id`, and `autoFocus`.                               |
+| `orientation` |        `oneOf`         |    -     | `vertical`, `horizontal` | `horizontal` | Position of radiobuttons.                                                                                                                                                             |
+| `selected`    |        `string`        |    -     |            -             |      -       | Value of the currently selected radio button.                                                                                                                                         |
+| `spacing`     |        `string`        |    -     |            -             |    `15px`    | Sets the margin between radio buttons. For horizontal orientation, `margin-left` is applied to all except the first; for vertical, `margin-bottom` is applied to all except the last. |
+| `style`       |    `CSSProperties`     |    -     |            -             |      -       | Inline styles to apply to the container.                                                                                                                                              |
+| `width`       |        `string`        |    -     |            -             |    `100%`    | Width of RadioButtonGroup container.                                                                                                                                                  |
+| `fontSize`    |        `string`        |    -     |            -             |      -       | Font size of link.                                                                                                                                                                    |
+| `fontWeight`  |    `number, string`    |    -     |            -             |      -       | Font weight of link.                                                                                                                                                                  |

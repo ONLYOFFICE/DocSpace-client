@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -126,7 +126,7 @@ const ChangeStorageQuotaDialog = (props) => {
                 productName: t("Common:ProductName"),
               })}
         </Text>
-        {!isDisableQuota && (
+        {!isDisableQuota ? (
           <QuotaForm
             onSetQuotaBytesSize={onSetQuotaBytesSize}
             isLoading={isLoading}
@@ -134,7 +134,7 @@ const ChangeStorageQuotaDialog = (props) => {
             initialSize={initialSize}
             isAutoFocussed
           />
-        )}
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -143,7 +143,7 @@ const ChangeStorageQuotaDialog = (props) => {
           primary
           onClick={onSaveClick}
           isLoading={isLoading}
-          isDisabled={!isDisableQuota && size.trim() === ""}
+          isDisabled={!isDisableQuota ? size.trim() === "" : null}
           scale
         />
         <Button

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -87,6 +87,7 @@ const Body = ({
 
   withInfo,
   infoText,
+  withInfoBadge,
   setInputItemVisible,
   inputItemVisible,
 }: BodyProps) => {
@@ -250,19 +251,23 @@ const Body = ({
       <InfoBar ref={infoBarRef} visible={itemsCount !== 0} />
       <BreadCrumbs visible={!isShareFormEmpty} />
 
-      {withTabs && tabsData && (
+      {withTabs && tabsData ? (
         <StyledTabs
           items={tabsData}
           selectedItemId={activeTabId}
           className="selector_body_tabs"
         />
-      )}
+      ) : null}
 
       <Search isSearch={itemsCount > 0 || isSearch} />
 
-      {withInfo && !isLoading && (
-        <Info withInfo={withInfo} infoText={infoText} />
-      )}
+      {withInfo && !isLoading ? (
+        <Info
+          withInfo={withInfo}
+          infoText={infoText}
+          withInfoBadge={withInfoBadge}
+        />
+      ) : null}
 
       {isLoading ? (
         <Scrollbar style={{ height: listHeight }}>{rowLoader}</Scrollbar>
@@ -274,9 +279,9 @@ const Body = ({
         />
       ) : (
         <>
-          {!!descriptionText && (
+          {descriptionText ? (
             <Text className="body-description-text">{descriptionText}</Text>
-          )}
+          ) : null}
 
           <SelectAll
             show={showSelectAll}
@@ -284,7 +289,7 @@ const Body = ({
             rowLoader={rowLoader}
           />
 
-          {bodyHeight && (
+          {bodyHeight ? (
             <InfiniteLoader
               ref={listOptionsRef}
               isItemLoaded={isItemLoaded}
@@ -319,7 +324,7 @@ const Body = ({
                 </List>
               )}
             </InfiniteLoader>
-          )}
+          ) : null}
         </>
       )}
     </StyledBody>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,6 +34,7 @@ const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const BannerPlugin = require("webpack").BannerPlugin;
 const ESLintPlugin = require("eslint-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -221,30 +222,52 @@ const config = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.module\.s[ac]ss$/i,
         use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
+          MiniCssExtractPlugin.loader,
+
           {
             loader: "css-loader",
             options: {
-              url: {
-                filter: (url, resourcePath) => {
-                  // resourcePath - path to css file
-
-                  // Don't handle `/static` urls
-                  if (url.startsWith("/static") || url.startsWith("data:")) {
-                    return false;
-                  }
-
-                  return true;
-                },
+              modules: {
+                localIdentName: "[name]__[local]--[hash:base64:5]",
               },
             },
           },
-          // Compiles Sass to CSS
-          "sass-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+              implementation: require("sass"),
+              sassOptions: {
+                outputStyle: "compressed",
+              },
+            },
+          },
+        ],
+      },
+      // Regular SCSS files (non-modules)
+      {
+        test: /(?<!\.module)\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true,
+              importLoaders: 2,
+            },
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+              implementation: require("sass"),
+              sassOptions: {
+                outputStyle: "compressed",
+              },
+            },
+          },
         ],
       },
       {
@@ -274,24 +297,10 @@ const config = {
 
   plugins: [
     new CleanWebpackPlugin(),
-    new ESLintPlugin({
-      configType: "eslintrc",
-      cacheLocation: path.resolve(
-        __dirname,
-        "../../node_modules/.cache/.eslint-plugin-cache",
-      ),
-      context: path.resolve(__dirname, "src"),
-      extensions: [".js", ".jsx", ".ts", ".tsx"],
-      emitError: true,
-      emitWarning: true,
-      failOnError: true,
-      failOnWarning: false,
-      quiet: false,
-
-      outputReport: {
-        filePath: "eslint-report.json",
-        formatter: "json",
-      },
+    new MiniCssExtractPlugin({
+      filename: "static/styles/[name].[contenthash].css",
+      chunkFilename: "static/styles/[id].[contenthash].css",
+      ignoreOrder: true,
     }),
     new ExternalTemplateRemotesPlugin(),
 
@@ -324,12 +333,39 @@ const getBuildYear = () => {
 };
 
 module.exports = (env, argv) => {
+  console.log("ENV", { env });
+
   config.devtool = "source-map";
 
-  if (argv.mode === "production") {
+  const isProduction = argv.mode === "production";
+  const styleLoader = isProduction
+    ? MiniCssExtractPlugin.loader
+    : "style-loader";
+
+  // Update CSS loaders based on mode
+  config.module.rules = config.module.rules.map((rule) => {
+    if (
+      rule.test?.toString().includes("css") ||
+      rule.test?.toString().includes("scss")
+    ) {
+      return {
+        ...rule,
+        use: rule.use.map((loader) =>
+          typeof loader === "string" && loader === "style-loader"
+            ? styleLoader
+            : loader,
+        ),
+      };
+    }
+    return rule;
+  });
+
+  if (isProduction) {
     config.mode = "production";
     config.optimization = {
-      splitChunks: { chunks: "all" },
+      splitChunks: {
+        chunks: "all",
+      },
       minimize: !env.minimize,
       minimizer: [
         new TerserPlugin({
@@ -339,6 +375,7 @@ module.exports = (env, argv) => {
             },
           },
           extractComments: false,
+          parallel: false,
         }),
       ],
     };
@@ -360,6 +397,8 @@ module.exports = (env, argv) => {
         "./utils": "./src/helpers/filesUtils.js",
         "./BrandingPage":
           "./src/pages/PortalSettings/categories/common/branding.js",
+        "./BrandNamePage":
+          "./src/pages/PortalSettings/categories/common/Branding/brandName.js",
         "./WhiteLabelPage":
           "./src/pages/PortalSettings/categories/common/Branding/whitelabel.js",
         "./AdditionalResPage":
@@ -447,6 +486,23 @@ module.exports = (env, argv) => {
 */`,
     }),
   );
+
+  if (!env.lint || env.lint == "true") {
+    console.log("Enable eslint");
+    config.plugins.push(
+      new ESLintPlugin({
+        configType: "eslintrc",
+        cacheLocation: path.resolve(
+          __dirname,
+          "../../node_modules/.cache/.eslintcache",
+        ),
+        quiet: true,
+        formatter: "json",
+      }),
+    );
+  } else {
+    console.log("Skip eslint");
+  }
 
   return config;
 };

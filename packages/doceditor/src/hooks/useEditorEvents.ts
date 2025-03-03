@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -86,6 +86,7 @@ const useEditorEvents = ({
   openOnNewPage,
   t,
   sdkConfig,
+  organizationName,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -596,6 +597,7 @@ const useEditorEvents = ({
               config?.document.fileType ?? "",
               documentReady,
               successAuth ?? false,
+              organizationName,
               setDocTitle,
             )
           : setDocumentTitle(
@@ -604,6 +606,7 @@ const useEditorEvents = ({
               config?.document.fileType ?? "",
               documentReady,
               successAuth ?? false,
+              organizationName,
               setDocTitle,
             );
       }, 500);
@@ -615,6 +618,7 @@ const useEditorEvents = ({
       docTitle,
       documentReady,
       successAuth,
+      organizationName,
     ],
   );
 
@@ -630,12 +634,20 @@ const useEditorEvents = ({
           config?.document.fileType ?? "",
           documentReady,
           successAuth ?? false,
+          organizationName,
           setDocTitle,
         );
         setDocTitle(newTitle);
       }
     },
-    [t, config?.document.fileType, docTitle, documentReady, successAuth],
+    [
+      t,
+      config?.document.fileType,
+      docTitle,
+      documentReady,
+      successAuth,
+      organizationName,
+    ],
   );
 
   const onMakeActionLink = React.useCallback((event: object) => {

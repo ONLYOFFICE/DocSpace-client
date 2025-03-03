@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -135,20 +135,22 @@ const CategoryFilterMobile = ({
               style={{ paddingLeft: "0" }}
             />
 
-            {!openedMenuItem && [
-              <Styled.CategoryFilterItemMobile
-                key="view-all"
-                className="dropdown-item"
-                label={t("FormGallery:ViewAllTemplates")}
-                onClick={onViewAllTemplates}
-                style={{ paddingLeft: "0" }}
-              />,
-              <DropDownItem
-                isSeparator
-                key="separator"
-                className="huge-separator"
-              />,
-            ]}
+            {!openedMenuItem
+              ? [
+                  <Styled.CategoryFilterItemMobile
+                    key="view-all"
+                    className="dropdown-item"
+                    label={t("FormGallery:ViewAllTemplates")}
+                    onClick={onViewAllTemplates}
+                    style={{ paddingLeft: "0" }}
+                  />,
+                  <DropDownItem
+                    isSeparator
+                    key="separator"
+                    className="huge-separator"
+                  />,
+                ]
+              : null}
 
             {!openedMenuItem
               ? menuItems.map((item) => (

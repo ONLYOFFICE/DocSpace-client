@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -56,8 +56,11 @@ class PublicRoomStore {
 
   clientLoadingStore;
 
-  constructor(clientLoadingStore) {
+  filesStore;
+
+  constructor(clientLoadingStore, filesStore) {
     this.clientLoadingStore = clientLoadingStore;
+    this.filesStore = filesStore;
     makeAutoObservable(this);
   }
 
@@ -170,6 +173,10 @@ class PublicRoomStore {
     this.externalLinks = externalLinks;
   };
 
+  setPublicRoomKey = (key) => {
+    this.publicRoomKey = key;
+  };
+
   setExternalLink = (link) => {
     const linkIndex = this.externalLinks.findIndex(
       (l) => l.sharedTo.id === link.sharedTo.id,
@@ -227,15 +234,18 @@ class PublicRoomStore {
     api.rooms
       .validatePublicRoomKey(key)
       .then((res) => {
-        if (res?.shared) {
-          return this.gotoFolder(res);
-        }
+        this.publicRoomKey = key;
 
-        if (res?.isAuthenticated) {
+        const currentUrl = window.location.href;
+
+        if (res?.shared && !currentUrl.includes("/rooms/shared")) {
           return this.gotoFolder(res, key);
         }
 
-        this.publicRoomKey = key;
+        if (res?.isAuthenticated && !currentUrl.includes("/rooms/shared")) {
+          return this.gotoFolder(res, key);
+        }
+
         this.setRoomData(res);
       })
       .finally(() => this.setIsLoading(false));

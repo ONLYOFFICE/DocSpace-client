@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import React from "react";
 
 import { HeaderProps } from "../Selector.types";
-import { AsideHeader } from "../../aside";
+import { AsideHeader } from "../../aside-header";
 
 const Header = React.memo(
   ({
@@ -42,7 +42,7 @@ const Header = React.memo(
       <AsideHeader
         header={headerLabel}
         isBackButton={
-          !withoutBackButton && typeof withoutBackButton === "boolean"
+          !withoutBackButton ? typeof withoutBackButton === "boolean" : false
         }
         onBackClick={onBackClick}
         onCloseClick={onCloseClick}

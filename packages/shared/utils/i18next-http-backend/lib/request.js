@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -59,7 +59,8 @@ if (!fetchApi && fetchNode && !XmlHttpRequestApi && !ActiveXObjectApi)
   fetchApi = fetchNode.default || fetchNode; // because of strange export
 if (typeof fetchApi !== "function") fetchApi = undefined;
 
-const addQueryString = (url, params) => {
+const addQueryString = (urlParam, params) => {
+  let url = urlParam;
   if (params && typeof params === "object") {
     let queryString = "";
     // Must encode data
@@ -75,7 +76,8 @@ const addQueryString = (url, params) => {
 };
 
 // fetch api stuff
-const requestWithFetch = (options, url, payload, callback) => {
+const requestWithFetch = (options, urlParam, payload, callback) => {
+  let url = urlParam;
   if (options.queryStringParams) {
     url = addQueryString(url, options.queryStringParams);
   }
@@ -115,7 +117,15 @@ const requestWithFetch = (options, url, payload, callback) => {
 };
 
 // xml http request stuff
-const requestWithXmlHttpRequest = (options, url, payload, callback) => {
+const requestWithXmlHttpRequest = (
+  options,
+  urlParam,
+  payloadParam,
+  callback,
+) => {
+  let payload = payloadParam;
+  let url = urlParam;
+
   if (payload && typeof payload === "object") {
     // if (!cache) payload._t = Date.now()
     // URL encoded form payload must be in querystring format
@@ -164,7 +174,10 @@ const requestWithXmlHttpRequest = (options, url, payload, callback) => {
   }
 };
 
-const request = (options, url, payload, callback) => {
+const request = (options, url, payloadParam, callbackParam) => {
+  let callback = callbackParam;
+  let payload = payloadParam;
+
   if (typeof payload === "function") {
     callback = payload;
     payload = undefined;

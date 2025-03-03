@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -86,14 +86,14 @@ const CustomizationNavbar = ({
         withPaidBadge={!isSettingPaid}
         badgeLabel={t("Common:Paid")}
       />
-      {enablePortalRename && (
+      {enablePortalRename ? (
         <MobileCategoryWrapper
           title={t("PortalRenaming")}
           subtitle={t("PortalRenamingNavDescription")}
           url="/portal-settings/customization/general/portal-renaming"
           onClickLink={onClickLink}
         />
-      )}
+      ) : null}
       <MobileCategoryWrapper
         title={t("ConfigureDeepLink")}
         subtitle={t("ConfigureDeepLinkDescription")}

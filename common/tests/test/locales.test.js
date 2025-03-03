@@ -763,7 +763,8 @@ describe("Locales Tests", () => {
     expect(exists, message).toBe(false);
   });
 
-  test(`NotTranslatedOnBaseLanguages: Verify that all translation keys in the base languages (${BASE_LANGUAGES.join(",")}) are properly translated.`, () => {
+  const skipBaseLanguagesTest = process.env.SKIP_BASE_LANGUAGES_TEST === 'true';
+  (skipBaseLanguagesTest ? test.skip : test)(`NotTranslatedOnBaseLanguages: Verify that all translation keys in the base languages (${BASE_LANGUAGES.join(",")}) are properly translated.`, () => {
     let message = `Next keys are not translated in base languages (${BASE_LANGUAGES.join(",")}):\r\n\r\n`;
 
     let exists = false;

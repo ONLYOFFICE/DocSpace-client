@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -78,9 +78,9 @@ const MainBar = ({
 
   return (
     <StyledContainer id="main-bar" className="main-bar">
-      {isVisibleBar && checkedMaintenance && !snackbarExist && (
+      {isVisibleBar && checkedMaintenance && !snackbarExist ? (
         <Bar firstLoad={firstLoad} setMaintenanceExist={setMaintenanceExist} />
-      )}
+      ) : null}
     </StyledContainer>
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -323,14 +323,15 @@ const PortalRenamingComponent = (props) => {
     <StyledSettingsComponent
       hasScroll={hasScroll}
       className="category-item-wrapper"
+      withoutExternalLink={!renamingSettingsUrl}
     >
-      {isCustomizationView && !isMobileView && (
+      {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">
             {t("PortalRenaming", { productName: t("Common:ProductName") })}
           </div>
         </div>
-      )}
+      ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("PortalRenamingDescriptionText", { domain })}
@@ -338,15 +339,17 @@ const PortalRenamingComponent = (props) => {
         <Text fontSize="13px" fontWeight={400}>
           <Trans t={t} i18nKey="PortalRenamingNote" />
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={renamingSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {renamingSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={renamingSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       {settingsBlock}
       <SaveCancelButtons

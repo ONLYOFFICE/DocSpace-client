@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,7 @@ import {
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { toastr } from "@docspace/shared/components/toast";
 
 import DownloadContent from "./DownloadContent";
 import PasswordContent from "./PasswordContent";
@@ -130,6 +131,7 @@ class DownloadDialogComponent extends React.Component {
     const { downloadItems, isAllPasswordFilesSorted } = this.props;
 
     if (downloadItems.length > 0 && isAllPasswordFilesSorted) {
+      toastr.clear();
       this.onDownloadFunction();
     }
   };
@@ -158,7 +160,7 @@ class DownloadDialogComponent extends React.Component {
 
   onSelectFormat = (e) => {
     const { format, type, fileId } = e.currentTarget.dataset;
-    const files = this.state[type].files; // eslint-disable-line react/destructuring-assignment
+    const { files } = this.state[type]; // eslint-disable-line react/destructuring-assignment
     const { t } = this.props;
 
     this.setState((prevState) => {
@@ -332,7 +334,7 @@ class DownloadDialogComponent extends React.Component {
 
   getItemIcon = (item) => {
     const { getIcon, getFolderIcon } = this.props;
-    const extension = item.fileExst;
+    const extension = item?.fileExst;
     const icon = extension ? getIcon(32, extension) : getFolderIcon(32);
 
     return (
@@ -418,70 +420,70 @@ class DownloadDialogComponent extends React.Component {
       <>
         <StyledBodyContent className="download-dialog-description">
           <Text noSelect>{t("ChooseFormatText")}.</Text>
-          {!isSingleFile && (
+          {!isSingleFile ? (
             <Text noSelect>
               <Trans t={t} i18nKey="ConvertToZip" />
             </Text>
-          )}
+          ) : null}
         </StyledBodyContent>
-        {documents.length > 0 && (
+        {documents.files.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedDocTitle}
             isIndeterminate={indeterminateDocTitle}
-            items={documents}
+            items={documents.files}
             titleFormat={documentsTitleFormat || t("OriginalFormat")}
             type="documents"
             title={t("Common:Documents")}
           />
-        )}
+        ) : null}
 
-        {spreadsheets.length > 0 && (
+        {spreadsheets.files.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedSpreadsheetTitle}
             isIndeterminate={isIndeterminateSpreadsheetTitle}
-            items={spreadsheets}
+            items={spreadsheets.files}
             titleFormat={spreadsheetsTitleFormat || t("OriginalFormat")}
             type="spreadsheets"
             title={t("Translations:Spreadsheets")}
           />
-        )}
+        ) : null}
 
-        {presentations.length > 0 && (
+        {presentations.files.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedPresentationTitle}
             isIndeterminate={indeterminatePresentationTitle}
-            items={presentations}
+            items={presentations.files}
             titleFormat={presentationsTitleFormat || t("OriginalFormat")}
             type="presentations"
             title={t("Translations:Presentations")}
           />
-        )}
+        ) : null}
 
-        {masterForms.length > 0 && (
+        {masterForms.files.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedMasterFormsTitle}
             isIndeterminate={indeterminateMasterFormsTitle}
-            items={masterForms}
+            items={masterForms.files}
             titleFormat={masterFormsTitleFormat || t("OriginalFormat")}
             type="masterForms"
             title={t("Translations:FormTemplates")}
           />
-        )}
+        ) : null}
 
-        {other.length > 0 && (
+        {other.files.length > 0 ? (
           <DownloadContent
             {...downloadContentProps}
             isChecked={checkedOtherTitle}
             isIndeterminate={indeterminateOtherTitle}
-            items={other}
+            items={other.files}
             type="other"
             title={t("Translations:Other")}
           />
-        )}
+        ) : null}
 
         <div className="download-dialog-convert-message">
           <Text noSelect>{t("ConvertMessage")}</Text>
@@ -513,7 +515,7 @@ class DownloadDialogComponent extends React.Component {
         <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
 
         <ModalDialog.Body className="modalDialogToggle">
-          <Scrollbar bodyPadding="0px">
+          <Scrollbar paddingAfterLastItem="0px">
             {needPassword ? (
               <PasswordContent
                 getItemIcon={this.getItemIcon}

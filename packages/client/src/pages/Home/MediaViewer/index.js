@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -180,12 +180,6 @@ const FilesMediaViewer = (props) => {
 
   const onDeleteMediaFile = useCallback(
     (id) => {
-      const translations = {
-        deleteOperation: t("Translations:DeleteOperation"),
-        successRemoveFolder: t("Files:FolderRemoved"),
-        successRemoveFile: t("Files:FileRemoved"),
-      };
-
       if (files.length > 0) {
         const file = files.find((f) => f.id === id);
         if (file) {
@@ -198,7 +192,7 @@ const FilesMediaViewer = (props) => {
           if (isActiveFile || isActiveFolder) return;
 
           setRemoveMediaItem(file);
-          deleteItemAction(file.id, translations, true, file.providerKey);
+          deleteItemAction(file.id, file.title, {}, true, file.providerKey);
         }
       }
     },
@@ -222,7 +216,7 @@ const FilesMediaViewer = (props) => {
     [playlist],
   );
 
-  const onMediaViewerClose = useCallback(() => {
+  const onMediaViewerClose = useCallback(async () => {
     if (isPreview) {
       setIsPreview(false);
       resetUrl();
@@ -234,7 +228,7 @@ const FilesMediaViewer = (props) => {
     }
 
     setMediaViewerData({ visible: false, id: null });
-    const url = getFirstUrl();
+    const url = await getFirstUrl();
 
     if (!url) {
       return;

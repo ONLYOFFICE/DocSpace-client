@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,7 @@ import {
   injectDefaultTheme,
   mobile,
 } from "@docspace/shared/utils";
-import TrashIcon from "PUBLIC_DIR/images/trash.react.svg";
+import TrashIcon from "PUBLIC_DIR/images/icons/16/trash.react.svg";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
 import { Link } from "@docspace/shared/components/link";
 import { TextInput } from "@docspace/shared/components/text-input";
@@ -150,7 +150,7 @@ const UserFields = (props) => {
                   onChange={(e) => onChangeInput(e, index)}
                   onBlur={() => onBlur(index)}
                   onFocus={() => onFocus(index)}
-                  hasError={errors[index] && error}
+                  hasError={errors[index] ? error : null}
                 />
                 <StyledTrashIcon
                   className={`${classNameAdditional}-delete-icon`}

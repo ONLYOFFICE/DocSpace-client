@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -40,7 +40,7 @@ const StyledContactContainer = styled.div`
 const ContactContainer = ({ t, salesEmail }) => {
   return (
     <StyledContactContainer>
-      {salesEmail && (
+      {salesEmail ? (
         <Text as="span" noSelect fontWeight={600}>
           {t("ContactUs")}
           <ColorTheme
@@ -53,7 +53,7 @@ const ContactContainer = ({ t, salesEmail }) => {
             {salesEmail}
           </ColorTheme>
         </Text>
-      )}
+      ) : null}
     </StyledContactContainer>
   );
 };

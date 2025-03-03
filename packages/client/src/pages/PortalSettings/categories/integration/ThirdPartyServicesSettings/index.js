@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,7 +35,6 @@ import styled from "styled-components";
 
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Badge } from "@docspace/shared/components/badge";
@@ -50,12 +49,17 @@ import ConsumerModalDialog from "./sub-components/consumerModalDialog";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
 
-const RootContainer = styled(Box)`
+const RootContainer = styled.div`
+  box-sizing: border-box;
   max-width: 700px;
   width: 100%;
 
   .third-party-link {
     font-weight: 600;
+  }
+
+  .third-party-box {
+    margin: 8px 0 20px 0;
   }
 
   .third-party-description {
@@ -74,6 +78,7 @@ const RootContainer = styled(Box)`
   }
 
   .consumer-item-wrapper {
+    box-sizing: border-box;
     border: ${(props) =>
       props.theme.client.settings.integration.separatorBorder};
 
@@ -178,6 +183,7 @@ class ThirdPartyServices extends React.Component {
       currentColorScheme,
       isThirdPartyAvailable,
       supportEmail,
+      logoText,
     } = this.props;
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
@@ -199,18 +205,20 @@ class ThirdPartyServices extends React.Component {
           <Text className="third-party-description">
             {t("ThirdPartyTitleDescription")}
           </Text>
-          <Box marginProp="8px 0 20px 0">
-            <Link
-              className="third-party-link"
-              color={currentColorScheme.main?.accent}
-              isHovered
-              target="_blank"
-              href={integrationSettingsUrl}
-            >
-              {t("Common:LearnMore")}
-            </Link>
-          </Box>
-          <Box className="consumer-item-wrapper request-block">
+          <div className="third-party-box">
+            {integrationSettingsUrl ? (
+              <Link
+                className="third-party-link"
+                color={currentColorScheme.main?.accent}
+                isHovered
+                target="_blank"
+                href={integrationSettingsUrl}
+              >
+                {t("Common:LearnMore")}
+              </Link>
+            ) : null}
+          </div>
+          <div className="consumer-item-wrapper request-block">
             <img
               className="integration-image"
               src={imgSrc}
@@ -219,7 +227,7 @@ class ThirdPartyServices extends React.Component {
             <Text>
               {t("IntegrationRequest", {
                 productName: t("Common:ProductName"),
-                organizationName: t("Common:OrganizationName"),
+                organizationName: logoText,
               })}
             </Text>
             <Button
@@ -230,13 +238,13 @@ class ThirdPartyServices extends React.Component {
               onClick={submitRequest}
               scale={isMobile()}
             />
-          </Box>
+          </div>
           {!consumers.length ? (
             <ThirdPartyLoader />
           ) : (
             <div className="consumers-list-container">
               {freeConsumers.map((consumer) => (
-                <Box className="consumer-item-wrapper" key={consumer.name}>
+                <div className="consumer-item-wrapper" key={consumer.name}>
                   <ConsumerItem
                     consumer={consumer}
                     dialogVisible={dialogVisible}
@@ -249,9 +257,9 @@ class ThirdPartyServices extends React.Component {
                     t={t}
                     isThirdPartyAvailable={isThirdPartyAvailable}
                   />
-                </Box>
+                </div>
               ))}
-              {!isThirdPartyAvailable && (
+              {!isThirdPartyAvailable ? (
                 <div className="business-plan">
                   <Text fontSize="16px" fontWeight={700}>
                     {t("IncludedInBusiness")}
@@ -268,9 +276,9 @@ class ThirdPartyServices extends React.Component {
                     isPaidBadge
                   />
                 </div>
-              )}
+              ) : null}
               {paidConsumers.map((consumer) => (
-                <Box className="consumer-item-wrapper" key={consumer.name}>
+                <div className="consumer-item-wrapper" key={consumer.name}>
                   <ConsumerItem
                     consumer={consumer}
                     dialogVisible={dialogVisible}
@@ -283,12 +291,12 @@ class ThirdPartyServices extends React.Component {
                     t={t}
                     isThirdPartyAvailable={isThirdPartyAvailable}
                   />
-                </Box>
+                </div>
               ))}
             </div>
           )}
         </RootContainer>
-        {dialogVisible && (
+        {dialogVisible ? (
           <ConsumerModalDialog
             t={t}
             i18n={i18n}
@@ -298,7 +306,7 @@ class ThirdPartyServices extends React.Component {
             onChangeLoading={onChangeLoading}
             updateConsumerProps={updateConsumerProps}
           />
-        )}
+        ) : null}
       </>
     );
   }
@@ -320,6 +328,7 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     theme,
     currentColorScheme,
     companyInfoSettingsData,
+    logoText,
   } = settingsStore;
   const {
     getConsumers,
@@ -342,5 +351,6 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     currentColorScheme,
     isThirdPartyAvailable,
     supportEmail: companyInfoSettingsData?.email,
+    logoText,
   };
 })(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

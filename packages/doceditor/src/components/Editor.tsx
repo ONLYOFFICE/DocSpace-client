@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -77,7 +77,7 @@ const Editor = ({
   isSkipError,
 
   sdkConfig,
-
+  organizationName = "",
   filesSettings,
 
   onDownloadAs,
@@ -125,6 +125,7 @@ const Editor = ({
     openOnNewPage,
     t,
     sdkConfig,
+    organizationName,
   });
 
   useInit({
@@ -135,6 +136,7 @@ const Editor = ({
     documentReady,
     setDocTitle,
     t,
+    organizationName,
   });
 
   const newConfig: IConfigType = config
@@ -280,7 +282,7 @@ const Editor = ({
     newConfig.events.onRequestSharingSettings = onSDKRequestSharingSettings;
   }
 
-  if (!fileInfo?.providerKey) {
+  if (!fileInfo?.providerKey && user) {
     newConfig.events.onRequestReferenceData = onSDKRequestReferenceData;
 
     if (!IS_ZOOM) {

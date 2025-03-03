@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -123,12 +123,10 @@ export default inject(
     const { primaryProgressDataStore, secondaryProgressDataStore } =
       uploadDataStore;
 
-    const { visible: primaryProgressDataVisible } = primaryProgressDataStore;
-    const { visible: secondaryProgressDataStoreVisible } =
-      secondaryProgressDataStore;
+    const { isPrimaryProgressVisbile } = primaryProgressDataStore;
+    const { isSecondaryProgressVisbile } = secondaryProgressDataStore;
 
-    const showProgress =
-      primaryProgressDataVisible || secondaryProgressDataStoreVisible;
+    const showProgress = isPrimaryProgressVisbile || isSecondaryProgressVisbile;
 
     const {
       showText,

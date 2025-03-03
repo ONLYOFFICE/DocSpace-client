@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,34 +25,96 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
-
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { Scrollbar } from ".";
+import { Scrollbar } from "./Scrollbar";
+import styles from "./Scrollbar.module.scss";
+
+jest.useFakeTimers();
 
 describe("<Scrollbar />", () => {
-  it("<Scrollbar />: renders without error", () => {
-    render(<Scrollbar>Some content</Scrollbar>);
-
-    expect(screen.queryByTestId("scrollbar")).toBeInTheDocument();
+  afterEach(() => {
+    jest.clearAllTimers();
   });
 
-  // it("accepts id", () => {
-  //   const wrapper = mount(<Scrollbar id="testId" />);
+  it("renders without error", () => {
+    render(<Scrollbar>Some content</Scrollbar>);
+    expect(screen.getByTestId("scrollbar")).toBeInTheDocument();
+  });
 
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+  it("accepts and applies className", () => {
+    render(<Scrollbar className="test-class">Content</Scrollbar>);
+    expect(screen.getByTestId("scrollbar")).toHaveClass("test-class");
+  });
 
-  // it("accepts className", () => {
-  //   const wrapper = mount(<Scrollbar className="test" />);
+  it("handles scroll events", () => {
+    const onScroll = jest.fn();
+    render(
+      <Scrollbar onScroll={onScroll}>
+        <div style={{ height: "200px" }}>Scrollable content</div>
+      </Scrollbar>,
+    );
 
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+    const scroller = screen.getByTestId("scroller");
+    fireEvent.scroll(scroller);
+    expect(onScroll).toHaveBeenCalled();
+  });
 
-  // it("accepts style", () => {
-  //   const wrapper = mount(<Scrollbar style={{ color: "red" }} />);
+  it("handles autoHide prop correctly", () => {
+    render(
+      <Scrollbar autoHide>
+        <div>Content</div>
+      </Scrollbar>,
+    );
 
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+    const scrollbar = screen.getByTestId("scrollbar");
+    const scrollBody = screen.getByTestId("scroll-body");
+
+    expect(scrollbar).toHaveClass(styles.autoHide);
+
+    // Trigger mouse move to show scrollbar
+    fireEvent.mouseMove(scrollBody);
+    expect(scrollbar).toHaveClass(styles.scrollVisible);
+
+    // Fast forward timers to test auto-hide
+    act(() => {
+      jest.advanceTimersByTime(3000);
+    });
+    expect(scrollbar).not.toHaveClass(styles.scrollVisible);
+  });
+
+  it("applies correct tabIndex", () => {
+    render(<Scrollbar tabIndex={0}>Content</Scrollbar>);
+    const content = screen.getByTestId("scroll-body");
+    expect(content).toHaveAttribute("tabIndex", "0");
+  });
+
+  it("handles autoFocus prop", () => {
+    const focusSpy = jest.spyOn(HTMLElement.prototype, "focus");
+    render(<Scrollbar autoFocus>Content</Scrollbar>);
+
+    expect(focusSpy).toHaveBeenCalled();
+    focusSpy.mockRestore();
+  });
+
+  it("applies paddingAfterLastItem prop", () => {
+    render(<Scrollbar paddingAfterLastItem="50px">Content</Scrollbar>);
+
+    const scrollbar = screen.getByTestId("scrollbar");
+
+    expect(scrollbar).toHaveClass(styles.paddingAfterLastItem);
+  });
+
+  it("handles fixedSize prop", () => {
+    render(
+      <Scrollbar fixedSize style={{ width: "200px", height: "200px" }}>
+        <div style={{ width: "300px", height: "300px" }}>Content</div>
+      </Scrollbar>,
+    );
+
+    const scrollbar = screen.getByTestId("scrollbar");
+
+    expect(scrollbar).toHaveClass(styles.fixedSize);
+  });
 });

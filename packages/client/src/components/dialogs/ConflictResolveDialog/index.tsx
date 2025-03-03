@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -80,6 +80,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     isUploadConflict,
     selectedFolder,
     fromShareCollectSelector,
+    destFolderInfo,
   } = conflictResolveDialogData;
 
   const onClose = () => {
@@ -145,12 +146,18 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
 
     const data = {
       destFolderId,
+      destFolderInfo,
       folderIds,
       fileIds: newFileIds,
       conflictResolveType,
       deleteAfter,
       isCopy,
       translations,
+      itemsCount: items.length,
+      ...(items.length === 1 && {
+        title: items[0].title,
+        isFolder: items[0].isFolder,
+      }),
     };
 
     setSelected("none");
@@ -163,10 +170,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
       sessionStorage.setItem("filesSelectorPath", `${destFolderId}`);
       await itemOperationToFolder(data);
     } catch (error: unknown) {
-      const message = (error as { message: string }).message
-        ? ((error as { message: string }).message as TData)
-        : (error as string);
-      toastr.error(message);
+      console.error(error);
     }
   };
 

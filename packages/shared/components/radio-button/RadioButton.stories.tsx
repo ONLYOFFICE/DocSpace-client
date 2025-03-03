@@ -27,23 +27,63 @@
 import React, { useState, useEffect } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { RadioButton } from "./RadioButton";
+import { RadioButton } from ".";
 import { RadioButtonProps } from "./RadioButton.types";
 
 const meta = {
-  title: "Components/RadioButton",
+  title: "Form Controls/RadioButton",
   component: RadioButton,
   parameters: {
     docs: {
-      description: { component: "RadioButton allow you to add radiobutton" },
+      description: {
+        component: `RadioButton is a form control that allows users to select a single option from a set of options.
+          
+### Features
+- Support for checked and unchecked states
+- Disabled state support
+- Customizable label text and styling
+- Horizontal and vertical orientation options
+- Keyboard accessibility
+- Custom styling support`,
+      },
     },
     design: {
       type: "figma",
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=556-3247&mode=design&t=TBNCKMQKQMxr44IZ-0",
     },
   },
-  argTypes: {},
+  argTypes: {
+    isChecked: {
+      description: "Controls the checked state of the radio button",
+      control: "boolean",
+    },
+    isDisabled: {
+      description: "Disables the radio button when set to true",
+      control: "boolean",
+    },
+    label: {
+      description: "Text label displayed next to the radio button",
+      control: "text",
+    },
+    name: {
+      description: "Name attribute for the radio button input",
+      control: "text",
+    },
+    value: {
+      description: "Value attribute for the radio button input",
+      control: "text",
+    },
+    fontSize: {
+      description: "Font size of the label text",
+      control: "text",
+    },
+    fontWeight: {
+      description: "Font weight of the label text",
+      control: "number",
+    },
+  },
 } satisfies Meta<typeof RadioButton>;
+
 type Story = StoryObj<typeof meta>;
 
 export default meta;
@@ -70,10 +110,49 @@ export const Default: Story = {
   args: {
     value: "value",
     name: "name",
-    label: "Label",
+    label: "Default radio button",
     fontSize: "13px",
     fontWeight: 400,
     isDisabled: false,
     isChecked: false,
+  },
+};
+
+export const Checked: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    label: "Checked radio button",
+    isChecked: true,
+  },
+};
+
+export const Disabled: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    label: "Disabled radio button",
+    isDisabled: true,
+  },
+};
+
+export const DisabledChecked: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    label: "Disabled checked radio button",
+    isDisabled: true,
+    isChecked: true,
+  },
+};
+
+export const CustomStyling: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    label: "Custom styled radio button",
+    fontSize: "16px",
+    fontWeight: 600,
+    style: { marginTop: "10px" },
   },
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -345,25 +345,28 @@ const WelcomePageSettingsComponent = (props) => {
     <StyledSettingsComponent
       hasScroll={state.hasScroll}
       className="category-item-wrapper"
+      withoutExternalLink={!welcomePageSettingsUrl}
     >
-      {state.isCustomizationView && !isMobileView && (
+      {state.isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">{t("CustomTitlesWelcome")}</div>
         </div>
-      )}
+      ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("CustomTitlesDescription")}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={welcomePageSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {welcomePageSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={welcomePageSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       {settingsBlock}
       <SaveCancelButtons

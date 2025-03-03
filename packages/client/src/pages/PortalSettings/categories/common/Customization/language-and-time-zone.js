@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -489,7 +489,7 @@ const LanguageAndTimeZoneComponent = (props) => {
             className="dropdown-item-width combo-box-settings"
             showDisabledItems
           />
-          {isBetaLang && <BetaBadge place="right-start" />}
+          {isBetaLang ? <BetaBadge place="right-start" /> : null}
         </div>
       </FieldContainer>
       <FieldContainer
@@ -522,14 +522,15 @@ const LanguageAndTimeZoneComponent = (props) => {
     <StyledSettingsComponent
       hasScroll={hasScroll}
       className="category-item-wrapper"
+      withoutExternalLink={!languageAndTimeZoneSettingsUrl}
     >
-      {isCustomizationView && !isMobileView && (
+      {isCustomizationView && !isMobileView ? (
         <div className="category-item-heading">
           <div className="category-item-title">
             {t("StudioTimeLanguageSettings")}
           </div>
         </div>
-      )}
+      ) : null}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
           {t("TimeLanguageSettingsDescription", {
@@ -539,15 +540,17 @@ const LanguageAndTimeZoneComponent = (props) => {
         <Text>
           <Trans t={t} i18nKey="TimeLanguageSettingsSave" />
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={languageAndTimeZoneSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {languageAndTimeZoneSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={languageAndTimeZoneSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       {settingsBlock}
       <SaveCancelButtons

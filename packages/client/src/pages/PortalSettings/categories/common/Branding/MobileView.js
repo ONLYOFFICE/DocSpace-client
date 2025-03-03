@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,16 +50,24 @@ const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
   return (
     <StyledWrapper>
       <MobileCategoryWrapper
+        title={t("BrandName")}
+        subtitle={t("BrandNameSubtitleMobile")}
+        url={`${baseUrl}/branding/brand-name`}
+        withPaidBadge={!isSettingPaid}
+        badgeLabel={t("Common:Paid")}
+        onClickLink={onClickLink}
+      />
+      <MobileCategoryWrapper
         title={t("WhiteLabel")}
-        subtitle={t("BrandingSubtitle")}
+        subtitle={t("BrandingSubtitleMobile")}
         url={`${baseUrl}/branding/white-label`}
         withPaidBadge={!isSettingPaid}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
       />
-      {showSettings && (
+      {showSettings ? (
         <>
-          {displayAbout && (
+          {displayAbout ? (
             <MobileCategoryWrapper
               title={t("CompanyInfoSettings")}
               subtitle={t("BrandingSectionDescription", {
@@ -70,7 +78,7 @@ const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
               badgeLabel={t("Common:Paid")}
               onClickLink={onClickLink}
             />
-          )}
+          ) : null}
           <MobileCategoryWrapper
             title={t("AdditionalResources")}
             subtitle={t("AdditionalResourcesSubtitle")}
@@ -80,7 +88,7 @@ const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
             onClickLink={onClickLink}
           />
         </>
-      )}
+      ) : null}
     </StyledWrapper>
   );
 };

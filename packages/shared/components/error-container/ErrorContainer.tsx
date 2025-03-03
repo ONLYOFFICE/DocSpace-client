@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,15 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-
+import classNames from "classnames";
+import { Text } from "../text";
+import { Button, ButtonSize } from "../button";
+import { Heading } from "../heading";
 import PortalLogo from "../portal-logo/PortalLogo";
-import Headline from "../headline/Headline";
-
-import StyledErrorContainer from "./ErrorContainer.styled";
-import type { ErrorContainerProps } from "./ErrorContainer.types";
 import { Scrollbar } from "../scrollbar";
+
+import type { ErrorContainerProps } from "./ErrorContainer.types";
+import styles from "./ErrorContainer.module.scss";
+
 const ErrorContainer = (props: ErrorContainerProps) => {
   const {
     headerText,
@@ -44,18 +45,24 @@ const ErrorContainer = (props: ErrorContainerProps) => {
     customizedBodyText,
     isPrimaryButton = true,
     isEditor = false,
+    className,
+    hideLogo = false,
     ...rest
   } = props;
 
   return (
     <Scrollbar style={{ height: "100dvh" }}>
-      <StyledErrorContainer
+      <div
         {...rest}
-        isEditor={isEditor}
+        className={classNames(
+          styles.container,
+          { [styles.isEditor]: isEditor },
+          className,
+        )}
         data-testid="ErrorContainer"
       >
-        <PortalLogo isResizable />
-        <div id="container">
+        {!hideLogo ? <PortalLogo isResizable /> : null}
+        <div id="container-inner">
           <svg
             id="background"
             width="753"
@@ -368,19 +375,18 @@ const ErrorContainer = (props: ErrorContainerProps) => {
             <ellipse cx="46" cy="46" rx="12" ry="46" fill="#D0E7F9" />
           </svg>
         </div>
-        {headerText && (
-          <Headline id="header" type="header">
+        {headerText ? (
+          <Heading id="header" type="header">
             {headerText}
-          </Headline>
-        )}
-        {bodyText && <Text id="text">{bodyText}</Text>}
-        {customizedBodyText && (
+          </Heading>
+        ) : null}
+        {bodyText ? <Text id="text">{bodyText}</Text> : null}
+        {customizedBodyText ? (
           <Text id="customized-text" fontWeight={600} fontSize="13px">
             {customizedBodyText}
           </Text>
-        )}
-
-        {buttonText && onClickButton && (
+        ) : null}
+        {buttonText && onClickButton ? (
           <div id="button-container">
             <Button
               id="button"
@@ -391,9 +397,9 @@ const ErrorContainer = (props: ErrorContainerProps) => {
               primary={isPrimaryButton}
             />
           </div>
-        )}
+        ) : null}
         {children}
-      </StyledErrorContainer>
+      </div>
     </Scrollbar>
   );
 };

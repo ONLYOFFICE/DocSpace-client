@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -104,13 +104,13 @@ const useFilesSettings = (
 
   const getIcon = React.useCallback(
     (fileExst: string) => {
-      if (getIconProp) return getIconProp(32, fileExst);
+      if (getIconProp) return getIconProp(32, fileExst) ?? "";
       if (!filesSettings) return "";
 
       const path = determineIconPath(fileExst);
       return iconSize32.has(path)
-        ? iconSize32.get(path)
-        : iconSize32.get("file.svg");
+        ? (iconSize32.get(path) ?? "")
+        : (iconSize32.get("file.svg") ?? "");
     },
     [filesSettings, getIconProp, determineIconPath],
   );

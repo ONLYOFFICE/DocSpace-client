@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,14 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface ProgressBarProps {
-  /** Progress value in %. Max value 100% */
+export type ProgressBarProps = {
+  /** Progress value as a percentage between 0 and 100. Values above 100 will be capped at 100% */
   percent: number;
-  /** Text in progress-bar. */
+  /** Custom text label to display alongside the progress bar to describe the ongoing operation */
   label?: string;
-  /** Show infinite progress */
+  /** When true, displays an infinite loading animation instead of percentage-based progress */
   isInfiniteProgress?: boolean;
+  /** Additional CSS class name(s) to customize the progress bar's styling */
   className?: string;
-  status: string;
-  error: string;
-}
+  /** Current status text to display, useful for showing processing states like "uploading", "processing", etc. */
+  status?: string;
+  /** Error message to display when the operation encounters a problem */
+  error?: string;
+  /** Custom styles to apply to the progress bar */
+  style?: React.CSSProperties;
+};

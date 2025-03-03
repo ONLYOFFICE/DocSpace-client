@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -75,18 +75,18 @@ const Banner = ({
   return (
     <StyledWrapper>
       {campaignBackground &&
-        campaignTranslate &&
-        campaignConfig &&
-        currentCampaign && (
-          <CampaignsBanner
-            campaignBackground={campaignBackground}
-            campaignIcon={campaignIcon}
-            campaignTranslate={campaignTranslate}
-            campaignConfig={campaignConfig}
-            onAction={onAction}
-            onClose={onClose}
-          />
-        )}
+      campaignTranslate &&
+      campaignConfig &&
+      currentCampaign ? (
+        <CampaignsBanner
+          campaignBackground={campaignBackground}
+          campaignIcon={campaignIcon}
+          campaignTranslate={campaignTranslate}
+          campaignConfig={campaignConfig}
+          onAction={onAction}
+          onClose={onClose}
+        />
+      ) : null}
     </StyledWrapper>
   );
 };

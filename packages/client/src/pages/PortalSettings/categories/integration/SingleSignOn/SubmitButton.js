@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -67,13 +67,13 @@ const SubmitResetButtons = (props) => {
         additionalClassSaveButton="save-button"
         additionalClassCancelButton="restore-button"
       />
-      {confirmationResetModal && (
+      {confirmationResetModal ? (
         <ResetConfirmationModal
           closeResetModal={closeResetModal}
           confirmReset={confirmReset}
           confirmationResetModal={confirmationResetModal}
         />
-      )}
+      ) : null}
     </>
   );
 };

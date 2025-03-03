@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -176,9 +176,9 @@ class ProfileActionsStore {
   };
 
   onHelpCenterClick = () => {
-    const helpUrl = this.settingsStore.helpLink;
+    const helpCenterDomain = this.settingsStore.helpCenterDomain;
 
-    window.open(helpUrl, "_blank");
+    window.open(helpCenterDomain, "_blank");
   };
 
   onLiveChatClick = (t) => {
@@ -192,8 +192,7 @@ class ProfileActionsStore {
   };
 
   onSupportClick = () => {
-    const supportUrl =
-      this.settingsStore.additionalResourcesData?.feedbackAndSupportUrl;
+    const supportUrl = this.settingsStore.feedbackAndSupportUrl;
 
     window.open(supportUrl, "_blank");
   };

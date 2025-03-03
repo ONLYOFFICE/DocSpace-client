@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -223,7 +223,7 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
   /**
    * @description Current ScrollState (cached)
    */
-  private scrollValues: ScrollState;
+  public scrollValues: ScrollState;
 
   private _scrollDetectionTO: number | null = null;
 

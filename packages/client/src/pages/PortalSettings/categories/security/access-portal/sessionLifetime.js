@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -234,19 +234,21 @@ const SessionLifetime = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!lifetimeSettingsUrl}>
         <Text className="learn-subtitle">
           {t("SessionLifetimeSettingDescription")}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={lifetimeSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {lifetimeSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={lifetimeSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup
@@ -272,7 +274,7 @@ const SessionLifetime = (props) => {
         onClick={onSelectType}
       />
 
-      {type && (
+      {type ? (
         <>
           <Text className="lifetime" fontSize="15px" fontWeight="600">
             {t("Lifetime")}
@@ -288,7 +290,7 @@ const SessionLifetime = (props) => {
             hasError={error}
           />
         </>
-      )}
+      ) : null}
 
       <SaveCancelButtons
         className="save-cancel-buttons"

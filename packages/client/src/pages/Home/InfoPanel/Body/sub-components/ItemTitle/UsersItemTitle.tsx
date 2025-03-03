@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -119,16 +119,16 @@ const UsersItemTitle = ({
           >
             {isPending || !displayName ? infoPanelSelection.email : displayName}
           </Text>
-          {isPending && (
+          {isPending ? (
             <Badges withoutPaid statusType={infoPanelSelection.statusType} />
-          )}
+          ) : null}
         </div>
-        {!isPending && !!displayName && (
+        {!isPending && !!displayName ? (
           <Text className="info-text__email" title={infoPanelSelection.email}>
             {infoPanelSelection.email}
           </Text>
-        )}
-        {isSSO && (
+        ) : null}
+        {isSSO ? (
           <>
             <Badge
               id="sso-badge-info-panel"
@@ -149,9 +149,9 @@ const UsersItemTitle = ({
               {t("PeopleTranslations:SSOAccountTooltip")}
             </Tooltip>
           </>
-        )}
+        ) : null}
 
-        {isLDAP && (
+        {isLDAP ? (
           <>
             <Badge
               id="ldap-badge-info-panel"
@@ -172,15 +172,15 @@ const UsersItemTitle = ({
               {t("PeopleTranslations:LDAPAccountTooltip")}
             </Tooltip>
           </>
-        )}
+        ) : null}
       </div>
-      {!!contextOptions.length && (
+      {contextOptions.length ? (
         <ContextMenuButton
           id="info-accounts-options"
           className="context-button"
           getData={getData}
         />
-      )}
+      ) : null}
     </StyledUsersTitle>
   );
 };

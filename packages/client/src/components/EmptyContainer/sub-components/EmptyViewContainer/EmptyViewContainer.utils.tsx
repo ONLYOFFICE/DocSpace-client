@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -181,6 +181,9 @@ export const getRootDescription = (
     .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
       t("EmptyView:EmptyRootRoomUserDescription"),
     )
+    .with([FolderType.RoomTemplates, P._], () =>
+      t("EmptyView:EmptyTemplatesDescription"),
+    )
     .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (
       <>
         <span>{t("Files:RoomEmptyAtTheMoment")}</span>
@@ -296,6 +299,9 @@ export const getRootTitle = (
     )
     .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
       t("EmptyView:EmptyRootRoomUserTitle"),
+    )
+    .with([FolderType.RoomTemplates, P._], () =>
+      t("EmptyView:EmptyTemplatesTitle"),
     )
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("Files:EmptyScreenFolder"),
@@ -460,6 +466,13 @@ export const getRootIcon = (
         ) : (
           <EmptyRoomsRootUserDarkIcon />
         ),
+    )
+    .with([FolderType.RoomTemplates, P._], () =>
+      isBaseTheme ? (
+        <EmptyRoomsRootUserLightIcon />
+      ) : (
+        <EmptyRoomsRootUserDarkIcon />
+      ),
     )
     .with([FolderType.USER, ShareAccessRights.None], () =>
       isBaseTheme ? <DefaultFolderLight /> : <DefaultFolderDark />,

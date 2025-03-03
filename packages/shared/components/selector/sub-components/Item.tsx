@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -123,6 +123,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       cover,
       userType,
       fileExst: ext,
+      isTemplate,
     } = item;
 
     if (isInputItem) {
@@ -224,10 +225,11 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           <RoomIcon
             color={color}
             title={label}
-            logo={{ cover, large: "", original: "", small: "" }}
+            logo={{ cover, large: "", original: "", small: "", medium: "" }}
             showDefault={false}
             badgeUrl={badgeUrl ?? ""}
             className="item-logo"
+            isTemplate={isTemplate}
           />
         ) : color ? (
           <RoomIcon
@@ -236,6 +238,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             showDefault
             badgeUrl={badgeUrl ?? ""}
             className="item-logo"
+            isTemplate={isTemplate}
           />
         ) : icon ? (
           <RoomIcon
@@ -245,6 +248,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             logo={icon}
             showDefault={false}
             badgeUrl={badgeUrl ?? ""}
+            isTemplate={isTemplate}
           />
         ) : null}
         {renderCustomItem ? (
@@ -260,12 +264,12 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
               dir="auto"
             >
               {label}
-              {displayFileExtension && ext && (
+              {displayFileExtension && ext ? (
                 <span className="item-file-exst">{ext}</span>
-              )}
+              ) : null}
             </Text>
 
-            {lifetimeTooltip && (
+            {lifetimeTooltip ? (
               <>
                 <ReactSVG
                   data-tooltip-id={`${item.id}_iconTooltip`}
@@ -279,7 +283,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
                   maxWidth="300px"
                 />
               </>
-            )}
+            ) : null}
           </div>
         )}
 

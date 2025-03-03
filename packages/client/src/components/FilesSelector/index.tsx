@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -144,6 +144,7 @@ const FilesSelectorWrapper = ({
   withCreate,
   folderIsShared,
   checkCreating,
+  logoText,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -210,7 +211,7 @@ const FilesSelectorWrapper = ({
       // for backup
       if (!selection.length) return t("Files:BackupNotAllowedInFormRoom");
 
-      const option = { organizationName: t("Common:OrganizationName") };
+      const option = { organizationName: logoText };
 
       if (isCopy)
         return several
@@ -263,15 +264,17 @@ const FilesSelectorWrapper = ({
       if (folderIds.length || fileIds.length) {
         const operationData = {
           destFolderId: selectedItemId,
+          destFolderInfo: selectedTreeNode,
           folderIds,
           fileIds,
           deleteAfter: false,
           isCopy,
           folderTitle,
-          translations: {
-            copy: t("Common:CopyOperation"),
-            move: t("Common:MoveToOperation"),
-          },
+          itemsCount: selection.length,
+          ...(selection.length === 1 && {
+            title: selection[0].title,
+            isFolder: selection[0].isFolder,
+          }),
         };
 
         if (showMoveToPublicDialog) {
@@ -296,7 +299,12 @@ const FilesSelectorWrapper = ({
             const move = !isCopy;
             if (move) setMovingInProgress(move);
             sessionStorage.setItem("filesSelectorPath", `${selectedItemId}`);
-            await itemOperationToFolder(operationData);
+
+            try {
+              await itemOperationToFolder(operationData);
+            } catch (error) {
+              console.error(error);
+            }
           }
         } catch (e: unknown) {
           toastr.error(e as TData);
@@ -512,7 +520,7 @@ export default inject(
 
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, logoText } = settingsStore;
 
     const {
       selection,
@@ -618,6 +626,7 @@ export default inject(
           : folderId || currentFolderIdProp,
       filesSettings,
       folderIsShared: shared,
+      logoText,
     };
   },
 )(observer(FilesSelectorWrapper));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -76,7 +76,7 @@ const GalleryItemTitle = ({
       <Text color={currentColorScheme.main?.accent} className="free-label">
         {t("Common:Free")}
       </Text>
-      {gallerySelected && (
+      {gallerySelected ? (
         <StyledGalleryContextOptions>
           <ContextMenu
             ref={contextMenuRef}
@@ -93,7 +93,7 @@ const GalleryItemTitle = ({
             displayType="toggle"
           />
         </StyledGalleryContextOptions>
-      )}
+      ) : null}
     </StyledTitle>
   );
 };

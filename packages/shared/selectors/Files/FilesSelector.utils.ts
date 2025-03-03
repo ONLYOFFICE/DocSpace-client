@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -59,7 +59,6 @@ export const convertFoldersToItems: (
     const {
       id,
       title,
-      //   roomType,
       filesCount,
       foldersCount,
       security,
@@ -84,7 +83,6 @@ export const convertFoldersToItems: (
       parentId,
       rootFolderType,
       isFolder: true,
-      //   roomType,
       isDisabled,
     };
   });
@@ -126,8 +124,8 @@ export const convertFilesToItems: (
 
 export const convertRoomsToItems: (
   rooms: TRoom[],
-  t?: TTranslation,
-) => TSelectorItem[] = (rooms: TRoom[], t?: TTranslation) => {
+  t: TTranslation,
+) => TSelectorItem[] = (rooms: TRoom[], t: TTranslation) => {
   const items = rooms.map((room) => {
     const {
       id,

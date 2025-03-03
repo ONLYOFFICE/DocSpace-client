@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import StyledText from "../../text/Text.styled";
+import { Text } from "../../text";
 import { TColorScheme, TTheme } from "../../../themes";
 import { injectDefaultTheme } from "../../../utils";
 
@@ -51,4 +51,4 @@ const getDefaultStyles = ({
     }
   `;
 
-export default styled(StyledText).attrs(injectDefaultTheme)(getDefaultStyles);
+export default styled(Text).attrs(injectDefaultTheme)(getDefaultStyles);

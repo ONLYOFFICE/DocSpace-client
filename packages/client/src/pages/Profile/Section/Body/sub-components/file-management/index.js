@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,6 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { SettingsCommonSkeleton } from "@docspace/shared/skeletons/settings";
 
@@ -56,6 +55,9 @@ const FileManagement = ({
   displayFileExtension,
   setDisplayFileExtension,
   getFilesSettings,
+  logoText,
+  hideConfirmCancelOperation,
+  setHideConfirmCancelOperation,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
@@ -85,6 +87,10 @@ const FileManagement = ({
     window.DocSpace.displayFileExtension = !displayFileExtension;
   }, [setDisplayFileExtension, displayFileExtension]);
 
+  const onChangeCancellationNotification = React.useCallback(() => {
+    setHideConfirmCancelOperation(!hideConfirmCancelOperation);
+  }, [hideConfirmCancelOperation, setHideConfirmCancelOperation]);
+
   const onChangeOpenEditorInSameTab = React.useCallback(() => {
     setOpenEditorInSameTab(!openEditorInSameTab);
   }, [setOpenEditorInSameTab, openEditorInSameTab]);
@@ -92,7 +98,7 @@ const FileManagement = ({
   if (!ready) return <SettingsCommonSkeleton />;
   return (
     <StyledWrapper showTitle={showTitle} hideAdminSettings={!showAdminSettings}>
-      <Box className="settings-section">
+      <div className="settings-section">
         <div className="toggle-btn-wrapper">
           <ToggleButton
             className="ask-again toggle-btn"
@@ -128,7 +134,7 @@ const FileManagement = ({
           />
           <Text>
             {t("OpenSameTab", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
           </Text>
         </div>
@@ -141,58 +147,74 @@ const FileManagement = ({
           />
           <Text>{t("DisplayFileExtension")}</Text>
         </div>
-      </Box>
+        <div className="toggle-btn-wrapper">
+          <ToggleButton
+            className="cancelletion-notification toggle-btn"
+            onChange={onChangeCancellationNotification}
+            isChecked={hideConfirmCancelOperation}
+          />
+          <Text>{t("CancellaionNotification")}</Text>
+        </div>
+      </div>
     </StyledWrapper>
   );
 };
 
-export default inject(({ filesSettingsStore, treeFoldersStore }) => {
-  const {
-    storeOriginalFiles,
-    confirmDelete,
+export default inject(
+  ({ filesSettingsStore, treeFoldersStore, settingsStore }) => {
+    const {
+      storeOriginalFiles,
+      confirmDelete,
 
-    setStoreOriginal,
+      setStoreOriginal,
 
-    setConfirmDelete,
+      setConfirmDelete,
 
-    favoritesSection,
-    recentSection,
+      favoritesSection,
+      recentSection,
 
-    keepNewFileName,
-    setKeepNewFileName,
+      keepNewFileName,
+      setKeepNewFileName,
 
-    openEditorInSameTab,
-    setOpenEditorInSameTab,
+      openEditorInSameTab,
+      setOpenEditorInSameTab,
 
-    displayFileExtension,
-    setDisplayFileExtension,
-    getFilesSettings,
-  } = filesSettingsStore;
+      displayFileExtension,
+      setDisplayFileExtension,
+      getFilesSettings,
+      hideConfirmCancelOperation,
+      setHideConfirmCancelOperation,
+    } = filesSettingsStore;
+    const { logoText } = settingsStore;
 
-  const { myFolderId, commonFolderId } = treeFoldersStore;
+    const { myFolderId, commonFolderId } = treeFoldersStore;
 
-  return {
-    storeOriginalFiles,
-    confirmDelete,
+    return {
+      storeOriginalFiles,
+      confirmDelete,
 
-    myFolderId,
-    commonFolderId,
+      myFolderId,
+      commonFolderId,
 
-    favoritesSection,
-    recentSection,
+      favoritesSection,
+      recentSection,
 
-    setStoreOriginal,
+      setStoreOriginal,
 
-    setConfirmDelete,
+      setConfirmDelete,
 
-    keepNewFileName,
-    setKeepNewFileName,
+      keepNewFileName,
+      setKeepNewFileName,
 
-    openEditorInSameTab,
-    setOpenEditorInSameTab,
+      openEditorInSameTab,
+      setOpenEditorInSameTab,
 
-    displayFileExtension,
-    setDisplayFileExtension,
-    getFilesSettings,
-  };
-})(observer(FileManagement));
+      displayFileExtension,
+      setDisplayFileExtension,
+      getFilesSettings,
+      logoText,
+      hideConfirmCancelOperation,
+      setHideConfirmCancelOperation,
+    };
+  },
+)(observer(FileManagement));

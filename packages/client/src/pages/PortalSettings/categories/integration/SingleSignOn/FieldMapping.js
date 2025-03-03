@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
@@ -38,6 +37,15 @@ import SsoFormField from "./sub-components/SsoFormField";
 const StyledWrapper = styled.div`
   .icon-button {
     padding: 0 5px;
+  }
+
+  .attribute-matching-box {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    font-size: 14px;
+    margin: 24px 0 16px 0;
   }
 `;
 
@@ -54,13 +62,7 @@ const FieldMapping = (props) => {
 
   return (
     <StyledWrapper>
-      <Box
-        alignItems="center"
-        displayProp="flex"
-        flexDirection="row"
-        fontSize="14px"
-        marginProp="24px 0 16px 0"
-      >
+      <div className="attribute-matching-box">
         <Text as="h2" fontSize="15px" fontWeight={600} noSelect>
           {t("AttributeMatching")}
         </Text>
@@ -72,7 +74,7 @@ const FieldMapping = (props) => {
             <Text fontSize="12px">{t("AttributeMatchingTooltip")}</Text>
           }
         />
-      </Box>
+      </div>
 
       <SsoFormField
         labelText={t("Common:FirstName")}

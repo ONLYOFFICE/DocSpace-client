@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -192,6 +192,7 @@ export const enum RoomSearchArea {
   Any = "Any",
   Active = "Active",
   Archive = "Archive",
+  Templates = "Templates",
 }
 /**
  * Enum for file action.
@@ -250,6 +251,7 @@ export const enum FolderType {
   SubFolderDone = 27,
   SubFolderInProgress = 28,
   VirtualDataRoom = 29,
+  RoomTemplates = 30,
 }
 
 export const enum ShareAccessRights {
@@ -364,6 +366,7 @@ export const enum Events {
   CHANGE_QUOTA = "change_quota",
   CREATE_PLUGIN_FILE = "create_plugin_file",
   CREATE_PDF_FORM_FILE = "create_pdf_form_file",
+  SAVE_AS_TEMPLATE = "save_as_template",
   Share_PDF_Form = "share_pdf_form",
 }
 
@@ -471,7 +474,7 @@ export const enum FilterSelectorTypes {
   groups = "groups-selector",
 }
 
-export const enum DeviceType {
+export enum DeviceType {
   mobile = "mobile",
   tablet = "tablet",
   desktop = "desktop",
@@ -654,8 +657,16 @@ export enum ValidationStatus {
   ExternalAccessDenied = 5,
 }
 
+export enum FormFillingTipsState {
+  Starting = 1,
+  Sharing = 2,
+  Submitting = 3,
+  Complete = 4,
+  Uploading = 5,
+}
+
 export enum DeepLinkType {
-  Choice = "choice",
-  Web = "web",
-  App = "app",
+  Choice = 0,
+  Web = 1,
+  App = 2,
 }

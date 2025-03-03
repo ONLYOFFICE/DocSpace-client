@@ -27,24 +27,58 @@
 import React, { ChangeEvent, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
-import { Textarea } from "./Textarea";
+import { Textarea } from ".";
 import { TextareaProps } from "./Textarea.types";
 
 const meta = {
-  title: "Components/Textarea",
+  title: "Form Controls/Textarea",
   component: Textarea,
   parameters: {
     docs: {
       description: {
-        component: "Textarea is used for displaying custom textarea",
+        component:
+          "A flexible textarea component that supports various features like JSON formatting, copy functionality, and custom styling.",
       },
     },
   },
   argTypes: {
     color: { control: "color" },
     onChange: { action: "onChange" },
+    isDisabled: {
+      control: "boolean",
+      description: "Disables the textarea input",
+    },
+    isReadOnly: {
+      control: "boolean",
+      description: "Makes the textarea read-only",
+    },
+    hasError: {
+      control: "boolean",
+      description: "Displays the textarea in an error state",
+    },
+    enableCopy: {
+      control: "boolean",
+      description: "Shows a copy button to copy the textarea content",
+    },
+    isJSONField: {
+      control: "boolean",
+      description: "Formats the content as JSON with proper indentation",
+    },
+    fontSize: {
+      control: { type: "number", min: 8, max: 24 },
+      description: "Font size of the textarea text",
+    },
+    heightTextArea: {
+      control: "text",
+      description: "Height of the textarea (e.g., '89px', '200px')",
+    },
+    isFullHeight: {
+      control: "boolean",
+      description: "Makes the textarea take full height of its container",
+    },
   },
 } satisfies Meta<typeof Textarea>;
+
 type Story = StoryObj<typeof Textarea>;
 
 export default meta;
@@ -55,10 +89,8 @@ const Template = ({ value, onChange, ...args }: TextareaProps) => {
     <Textarea
       value={val}
       onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
-        if (e.target.value) {
-          onChange?.(e);
-          setValue(e.target.value);
-        }
+        onChange?.(e);
+        setValue(e.target.value);
       }}
       {...args}
     />
@@ -68,50 +100,68 @@ const Template = ({ value, onChange, ...args }: TextareaProps) => {
 export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
-    placeholder: "Add comment",
+    placeholder: "Add your text here...",
+    value: "This is a default textarea with standard configuration.",
     isDisabled: false,
     isReadOnly: false,
     hasError: false,
     maxLength: 1000,
-    id: "",
-    name: "",
-    tabIndex: 1,
     fontSize: 13,
     heightTextArea: "89px",
-    value:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae",
-    isJSONField: false,
-    enableCopy: false,
-    hasNumeration: false,
-    isFullHeight: false,
   },
 };
 
-// Default.parameters = {
-//   design: {
-//     type: "figma",
-//     url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=3399-102679&mode=design&t=TBNCKMQKQMxr44IZ-0",
-//   },
-// };
-
-export const JsonViewer: Story = {
+export const WithCopyButton: Story = {
   render: (args) => <Template {...args} />,
   args: {
-    placeholder: "Input JSON into value prop",
-    isDisabled: false,
-    isReadOnly: true,
-    hasError: false,
-    maxLength: 1000,
-    id: "",
-    name: "",
-    tabIndex: 1,
-    fontSize: 13,
-    heightTextArea: "89px",
-    value:
-      '{"menu": {"id": "file","value": "File","popup": {"menuitem": [{"value": "New", "onclick": "CreateNewDoc()"},{"value": "Open", "onclick": "OpenDoc()"},{"value": "Close", "onclick": "CloseDoc()"}]}}}',
-    isJSONField: true,
+    ...Default.args,
+    value: "This content can be copied using the copy button.",
     enableCopy: true,
-    hasNumeration: true,
-    isFullHeight: true,
+    copyInfoText: "Content copied to clipboard!",
+  },
+};
+
+export const JSONFormatter: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    value: JSON.stringify({
+      name: "DocSpace",
+      version: "1.0.0",
+      features: ["JSON formatting", "Copy button", "Custom styling"],
+      active: true,
+    }),
+    isJSONField: true,
+    heightTextArea: "200px",
+    enableCopy: true,
+  },
+};
+
+export const ReadOnly: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    value: "This is a read-only textarea. You cannot edit this content.",
+    isReadOnly: true,
+  },
+};
+
+export const WithError: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    value: "This textarea is in an error state.",
+    hasError: true,
+  },
+};
+
+export const CustomStyling: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    ...Default.args,
+    value: "This textarea has custom styling with larger font and height.",
+    fontSize: 16,
+    heightTextArea: "150px",
+    color: "#2B4C7F",
   },
 };

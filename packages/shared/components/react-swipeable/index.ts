@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -148,6 +148,7 @@ function getHandlers(
       //   document.addEventListener(mouseMove, onMove);
       //   document.addEventListener(mouseUp, onUp);
       // }
+      const stateLet = state;
 
       const { clientX, clientY } = isTouch ? event.touches[0] : event;
       const xy = rotateXYByAngle([clientX, clientY], props.rotationAngle);
@@ -157,55 +158,57 @@ function getHandlers(
       const time = new Date().getTime();
 
       if (event.touches.length > 1) {
-        state.lastTouchStart = 0;
+        stateLet.lastTouchStart = 0;
       }
 
       if (time - state.lastTouchStart < 300) {
-        state.isDoubleTap = true;
+        stateLet.isDoubleTap = true;
         props.onDoubleTap?.(event);
         // console.log("Double Click");
       } else {
-        state.isDoubleTap = false;
+        stateLet.isDoubleTap = false;
       }
 
       if (event.touches.length === 1) {
-        state.lastTouchStart = time;
+        stateLet.lastTouchStart = time;
       }
 
       return {
-        ...state,
+        ...stateLet,
         ...initialState,
         lastTouchStart: state.lastTouchStart,
         initial: xy.slice() as Vector2,
         xy,
         start: event.timeStamp || 0,
         fingers: isTouch ? event.touches.length : 0,
-        isDoubleTap: state.isDoubleTap,
+        isDoubleTap: stateLet.isDoubleTap,
       };
     });
   };
 
   const onMove = (event: HandledEvents) => {
     set((state, props) => {
+      const stateLet = state;
+
       const isTouch = "touches" in event;
 
-      if (state.isDoubleTap || !isTouch) {
-        return state;
+      if (stateLet.isDoubleTap || !isTouch) {
+        return stateLet;
       }
 
-      if (state.first) {
-        state.startTouches = [...event.touches].map((touch) =>
+      if (stateLet.first) {
+        stateLet.startTouches = [...event.touches].map((touch) =>
           getPointByPageCoordinates(touch),
         );
 
         const fingers = event.touches.length;
 
         if (fingers === 2) {
-          state.interaction = "zoom";
+          stateLet.interaction = "zoom";
         } else if (fingers === 1) {
-          state.interaction = "drag";
+          stateLet.interaction = "drag";
         } else {
-          state.interaction = null;
+          stateLet.interaction = null;
         }
       }
 
@@ -227,22 +230,22 @@ function getHandlers(
             { x: touchSecond.clientX, y: touchSecond.clientY },
           );
 
-          if (state.lastDistance === 0) {
-            state.lastDistance = distance;
+          if (stateLet.lastDistance === 0) {
+            stateLet.lastDistance = distance;
           }
 
-          const scale = distance / state.lastDistance;
+          const scale = distance / stateLet.lastDistance;
           // console.log("move", move);
 
           props.onZoom?.({ event, scale, middleSegment });
           return {
-            ...state,
+            ...stateLet,
             first: false,
             lastDistance: distance,
           };
         }
 
-        return state;
+        return stateLet;
       }
 
       // if swipe has exceeded duration stop tracking

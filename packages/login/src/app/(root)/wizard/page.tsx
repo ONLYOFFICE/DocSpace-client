@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -67,6 +67,9 @@ async function Page() {
     getPortalCultures(),
   ]);
 
+  const commonResources = objectSettings?.externalResources.common.entries;
+  const forumLinkUrl = objectSettings?.externalResources.forum.domain;
+
   return (
     <ColorTheme themeId={ThemeId.LinkForgotPassword}>
       <>
@@ -78,12 +81,12 @@ async function Page() {
             isRequiredLicense={isRequiredLicense}
             portalCultures={portalCultures}
             portalTimeZones={portalTimeZones}
-            licenseUrl={objectSettings?.licenseUrl}
+            licenseUrl={commonResources.license}
             culture={objectSettings?.culture}
-            forumLink={objectSettings?.forumLink}
+            forumLinkUrl={forumLinkUrl}
             wizardToken={objectSettings?.wizardToken}
             passwordHash={objectSettings?.passwordHash}
-            documentationEmail={objectSettings?.documentationEmail}
+            documentationEmail={commonResources.documentationemail}
             isAmi={objectSettings?.isAmi}
           />
         </FormWrapper>

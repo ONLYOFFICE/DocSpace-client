@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -53,6 +53,7 @@ export const FILE_SIZE = "file_size";
 export const ROOM = "room";
 export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
+export const YEAR_KEY = "year";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
 export const PUBLIC_STORAGE_KEY = "public-auth";
@@ -144,10 +145,6 @@ export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";
 
 export const EDITOR_ID = "portal_editor";
 
-export const WRONG_PORTAL_NAME_URL =
-  (typeof window !== "undefined" && window.ClientConfig?.wrongPortalNameUrl) ||
-  `https://www.onlyoffice.com/wrongportalname.aspx`;
-
 export const MEDIA_VIEW_URL = "/media/view/";
 export const PUBLIC_MEDIA_VIEW_URL = "/rooms/share/media/view";
 
@@ -193,3 +190,18 @@ export const ALLOWED_PASSWORD_CHARACTERS =
   "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
 
 export const GENERAL_LINK_HEADER_KEY = "general-link_header";
+
+export const OPERATIONS_NAME = Object.freeze({
+  trash: "trash",
+  deletePermanently: "deletePermanently",
+  download: "download",
+  duplicate: "duplicate",
+  exportIndex: "exportIndex",
+  markAsRead: "markAsRead",
+  copy: "copy",
+  move: "move",
+  convert: "convert",
+  other: "other",
+  upload: "upload",
+  deleteVersionFile: "deleteVersionFile",
+});

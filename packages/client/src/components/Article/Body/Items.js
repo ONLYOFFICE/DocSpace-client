@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -39,7 +39,7 @@ import { FOLDER_NAMES } from "@docspace/shared/constants";
 import { getCatalogIconUrlByType } from "@docspace/shared/utils/catalogIconHelper";
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
-import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
+import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
@@ -159,12 +159,13 @@ const Item = ({
       data-title={item.title}
       value={value}
       onDrop={onDrop}
-      dragging={dragging && isDragging}
+      dragging={dragging ? isDragging : null}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
       className="document-catalog"
     >
       <ArticleItem
+        item={item}
         key={item.id}
         id={item.id}
         title={item.title}
@@ -178,7 +179,7 @@ const Item = ({
         onDrop={onMoveTo}
         isEndOfBlock={isLastItem}
         isDragging={isDragging}
-        isDragActive={isDragActive && isDragging}
+        isDragActive={isDragActive ? isDragging : null}
         value={value}
         showBadge={showBadge}
         labelBadge={labelBadge}
@@ -291,22 +292,15 @@ const Items = ({
   );
 
   const onMoveTo = React.useCallback(
-    (destFolderId, title) => {
-      moveDragItems(destFolderId, title, {
-        copy: t("Common:CopyOperation"),
-        move: t("Common:MoveToOperation"),
-      });
+    (destFolderId, title, destFolderInfo) => {
+      moveDragItems(destFolderId, title, destFolderInfo);
     },
-    [moveDragItems, t],
+    [moveDragItems],
   );
 
   const onRemove = React.useCallback(() => {
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
       deleteFromTrash: t("Translations:DeleteFromTrash"),
-      deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-      FileRemoved: t("Files:FileRemoved"),
-      FolderRemoved: t("Files:FolderRemoved"),
     };
 
     deleteAction(translations);

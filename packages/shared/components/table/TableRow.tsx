@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -51,6 +51,7 @@ const TableRow = (props: TableRowProps) => {
     getContextModel,
     badgeUrl,
     isIndexEditingMode,
+    forwardedRef,
     ...rest
   } = props;
 
@@ -80,12 +81,11 @@ const TableRow = (props: TableRowProps) => {
       onContextMenu={onContextMenu}
       isIndexEditingMode={isIndexEditingMode}
       className={`${className} table-container_row`}
+      ref={forwardedRef}
       {...rest}
     >
       {children}
-      {isIndexEditingMode ? (
-        <></>
-      ) : (
+      {isIndexEditingMode ? null : (
         <div className="context-menu-container">
           <TableCell
             {...selectionProp}

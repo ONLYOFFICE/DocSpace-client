@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -214,7 +214,7 @@ const CSP = ({
           tooltipContent={<Text fontSize="12px">{t("CSPHelp")}</Text>}
         />
       </Container>
-      {standalone && window.location.protocol !== "https:" && (
+      {standalone && window.location.protocol !== "https:" ? (
         <InfoBar>
           <div className="text-container">
             <div className="header-body">
@@ -233,18 +233,20 @@ const CSP = ({
               {t("CSPInfoBarDescription", {
                 productName: t("Common:ProductName"),
               })}{" "}
-              <Link
-                color={currentColorScheme?.main?.accent}
-                fontSize="13px"
-                fontWeight="400"
-                onClick={() => window.open(installationGuidesUrl, "_blank")}
-              >
-                {t("Common:LearnMore")}
-              </Link>
+              {installationGuidesUrl ? (
+                <Link
+                  color={currentColorScheme?.main?.accent}
+                  fontSize="13px"
+                  fontWeight="400"
+                  onClick={() => window.open(installationGuidesUrl, "_blank")}
+                >
+                  {t("Common:LearnMore")}
+                </Link>
+              ) : null}
             </div>
           </div>
         </InfoBar>
-      )}
+      ) : null}
       <Container className="input-holder">
         <TextInput
           onChange={onChangeDomain}

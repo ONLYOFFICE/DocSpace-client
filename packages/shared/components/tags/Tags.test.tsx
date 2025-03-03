@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,7 @@ import React from "react";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 
-import { Tags } from "./Tags";
+import { Tags } from ".";
 import type { TagsProps } from "./Tags.types";
 
 const baseProps: TagsProps = {
@@ -40,7 +40,29 @@ const baseProps: TagsProps = {
 describe("<Tags />", () => {
   it("renders without error", () => {
     render(<Tags {...baseProps} />);
+    expect(screen.getByTestId("tags")).toBeInTheDocument();
+    expect(screen.getByTestId("tags")).toHaveAttribute(
+      "aria-label",
+      "Tags container",
+    );
+  });
 
-    expect(screen.getByTestId("tags"));
+  it("renders with no tags", () => {
+    render(<Tags {...baseProps} tags={[]} />);
+    expect(screen.getByTestId("tags")).toBeEmptyDOMElement();
+  });
+
+  it("renders with a single tag", () => {
+    render(<Tags {...baseProps} tags={["tag1"]} />);
+    expect(screen.getByText("tag1")).toBeInTheDocument();
+  });
+
+  it("calls onSelectTag when a tag is clicked", () => {
+    const onSelectTagMock = jest.fn();
+    render(
+      <Tags {...baseProps} tags={["tag1"]} onSelectTag={onSelectTagMock} />,
+    );
+    screen.getByText("tag1").click();
+    expect(onSelectTagMock).toHaveBeenCalledTimes(1);
   });
 });

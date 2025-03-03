@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,12 +50,14 @@ type SharingDialogProps = {
   fileInfo: TFile;
   onCancel: () => void;
   isVisible: boolean;
+  selfId?: string;
 };
 
 const SharingDialog = ({
   fileInfo,
   onCancel,
   isVisible,
+  selfId,
 }: SharingDialogProps) => {
   const { t, i18n } = useTranslation(["Common"]);
 
@@ -74,7 +76,7 @@ const SharingDialog = ({
       <ModalDialog.Body>
         <StyledWrapper>
           <div className="share-file_body">
-            <Share infoPanelSelection={fileInfo} />
+            <Share infoPanelSelection={fileInfo} selfId={selfId ?? ""} />
           </div>
         </StyledWrapper>
       </ModalDialog.Body>

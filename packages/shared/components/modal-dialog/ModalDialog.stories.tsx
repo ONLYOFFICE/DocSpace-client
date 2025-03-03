@@ -24,24 +24,74 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { Button, ButtonSize } from "../button";
 
-import { ModalDialog } from "./ModalDialog";
+import { ModalDialog } from ".";
 import { ModalDialogType } from "./ModalDialog.enums";
 import { ModalDialogProps } from "./ModalDialog.types";
-import { globalColors } from "../../themes";
 
 const meta = {
-  title: "Components/ModalDialog",
+  title: "Layout components/ModalDialog",
   component: ModalDialog,
   parameters: {
     docs: {
       description: {
-        component: "ModalDialog is used for displaying modal dialogs",
+        component: "Modal dialog component",
       },
+    },
+  },
+  argTypes: {
+    displayType: {
+      control: "select",
+      options: [ModalDialogType.modal, ModalDialogType.aside],
+      description: "Type of modal display (modal or aside)",
+    },
+    withFooterBorder: {
+      control: "boolean",
+      description: "Adds border to the footer",
+      if: { arg: "displayType", eq: ModalDialogType.modal },
+    },
+    isLarge: {
+      control: "boolean",
+      description: "Makes the modal larger (only for modal type)",
+      if: { arg: "displayType", eq: ModalDialogType.modal },
+    },
+    isHuge: {
+      control: "boolean",
+      description:
+        "Makes the modal huge size (only for modal type and autoMaxWidth)",
+      if: { arg: "displayType", eq: ModalDialogType.modal },
+    },
+    autoMaxHeight: {
+      control: "boolean",
+      description: "Automatically adjusts max height",
+      if: { arg: "displayType", eq: ModalDialogType.modal },
+    },
+    autoMaxWidth: {
+      control: "boolean",
+      description: "Automatically adjusts max width",
+      if: { arg: "displayType", eq: ModalDialogType.modal },
+    },
+    visible: {
+      control: "boolean",
+      description: "Controls modal visibility",
+    },
+    withBodyScroll: {
+      control: "boolean",
+      description: "Enables body scrolling",
+      if: { arg: "displayType", eq: ModalDialogType.aside },
+    },
+    isScrollLocked: {
+      control: "boolean",
+      description: "Locks scrolling",
+      if: { arg: "displayType", eq: ModalDialogType.aside },
+    },
+    zIndex: {
+      control: "number",
+      description: "Sets z-index for modal",
     },
   },
 } satisfies Meta<typeof ModalDialog>;
@@ -55,6 +105,16 @@ const Template = ({ ...args }: ModalDialogProps) => {
   const openModal = () => setIsVisible(true);
   const closeModal = () => setIsVisible(false);
 
+  const blocksCount = args.displayType === ModalDialogType.modal ? 1 : 20;
+
+  useEffect(() => {
+    setIsVisible(!!args.visible);
+  }, [args.visible]);
+
+  useEffect(() => {
+    document.body.style.overflow = isVisible ? "hidden" : "auto";
+  }, [isVisible]);
+
   return (
     <>
       <Button
@@ -67,16 +127,20 @@ const Template = ({ ...args }: ModalDialogProps) => {
         <ModalDialog.Header>Change password</ModalDialog.Header>
 
         <ModalDialog.Body>
-          <span>
-            Send the password change instruction to the{" "}
-            <a
-              style={{ color: globalColors.lightSecondMain }}
-              href="mailto:asc@story.book"
-            >
-              asc@story.book
-            </a>{" "}
-            email address
-          </span>
+          {Array(blocksCount)
+            .fill(null)
+            .map((_, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <div key={index}>
+                <h3>Section 1</h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+              </div>
+            ))}
         </ModalDialog.Body>
 
         <ModalDialog.Footer>
@@ -84,26 +148,20 @@ const Template = ({ ...args }: ModalDialogProps) => {
             key="SendBtn"
             label="Send"
             primary
-            scale
             size={ButtonSize.normal}
             onClick={() => {
               closeModal();
             }}
+            scale
           />
           <Button
             key="CloseBtn"
             label="Cancel"
-            scale
             size={ButtonSize.normal}
             onClick={closeModal}
+            scale
           />
         </ModalDialog.Footer>
-
-        <ModalDialog.Container>
-          <div style={{ width: "100%", height: "100%", background: "red" }}>
-            123
-          </div>
-        </ModalDialog.Container>
       </ModalDialog>
     </>
   );
@@ -112,12 +170,109 @@ const Template = ({ ...args }: ModalDialogProps) => {
 export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
+    displayType: ModalDialogType.modal,
+    children: <>test</>,
+  },
+};
+
+export const AsideDefault: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
     displayType: ModalDialogType.aside,
-    // displayTypeDetailed: {
-    //   desktop: ModalDialogType.aside,
-    //   tablet: ModalDialogType.aside,
-    //   mobile: ModalDialogType.aside,
-    // },
-    children: <>123</>,
+    children: <>test</>,
+  },
+};
+
+export const Loading: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    displayType: ModalDialogType.modal,
+    isLoading: true,
+    children: <>test</>,
+  },
+};
+
+export const AsideLoading: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    displayType: ModalDialogType.aside,
+    isLoading: true,
+    children: <>test</>,
+  },
+};
+
+export const AsideScrollLocked: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    displayType: ModalDialogType.aside,
+    withBodyScroll: true,
+    isScrollLocked: true,
+    children: <>test</>,
+  },
+};
+
+export const AsideWithBodyScroll: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    displayType: ModalDialogType.aside,
+    withBodyScroll: true,
+    children: <>test</>,
+  },
+};
+
+export const ModalLarge: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    displayType: ModalDialogType.modal,
+    isLarge: true,
+    children: <>test</>,
+  },
+};
+
+export const ModalHuge: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    displayType: ModalDialogType.modal,
+    isHuge: true,
+    autoMaxWidth: true,
+    autoMaxHeight: true,
+    children: <>test</>,
+  },
+};
+
+export const ModalAutoSize: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    displayType: ModalDialogType.modal,
+    autoMaxWidth: true,
+    autoMaxHeight: true,
+    children: <>test</>,
+  },
+};
+
+export const ModalWithFooterBorder: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    displayType: ModalDialogType.modal,
+    withFooterBorder: true,
+    children: <>test</>,
+  },
+};
+
+export const NonCloseable: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    displayType: ModalDialogType.modal,
+    isCloseable: false,
+    children: <>test</>,
+  },
+};
+
+export const AsideNonCloseable: Story = {
+  render: (args) => <Template {...args} />,
+  args: {
+    displayType: ModalDialogType.aside,
+    isCloseable: false,
+    children: <>test</>,
   },
 };

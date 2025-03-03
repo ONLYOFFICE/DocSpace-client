@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -160,7 +160,7 @@ const ColorSchemeDialog = (props) => {
               onClick={onClickColor}
             />
 
-            {!viewMobile && nodeHexColorPickerAccent}
+            {!viewMobile ? nodeHexColorPickerAccent : null}
           </div>
 
           <div className="flex relative">
@@ -171,7 +171,7 @@ const ColorSchemeDialog = (props) => {
               onClick={onClickColor}
             />
 
-            {!viewMobile && nodeHexColorPickerButtons}
+            {!viewMobile ? nodeHexColorPickerButtons : null}
           </div>
         </StyledBodyContent>
       </ModalDialog.Body>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,9 @@ import styled from "styled-components";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Label } from "@docspace/shared/components/label";
 import { TextInput } from "@docspace/shared/components/text-input";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Text } from "@docspace/shared/components/text";
+
 import { StyledParam } from "./StyledParam";
 
 const StyledInputParam = styled(StyledParam)`
@@ -37,9 +40,15 @@ const StyledInputParam = styled(StyledParam)`
   gap: 4px;
   max-height: 54px;
 
-  .input-label {
-    cursor: pointer;
-    user-select: none;
+  .input-label-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .input-label {
+      cursor: pointer;
+      user-select: none;
+    }
   }
 `;
 
@@ -61,18 +70,31 @@ const InputParam = React.forwardRef(
       onKeyUp,
       onKeyDown,
       name,
+      tooltipLabel,
     },
     ref,
   ) => {
     return (
       <StyledInputParam>
-        <Label
-          title={title}
-          className="input-label"
-          display="display"
-          htmlFor={id}
-          text={title}
-        />
+        <div className="input-label-wrapper">
+          <Label
+            title={title}
+            className="input-label"
+            display="display"
+            htmlFor={id}
+            text={title}
+          />
+          {tooltipLabel ? (
+            <HelpButton
+              place="right"
+              tooltipContent={
+                <Text fontSize="12px" fontWeight={400}>
+                  {tooltipLabel}
+                </Text>
+              }
+            />
+          ) : null}
+        </div>
 
         <FieldContainer
           isVertical

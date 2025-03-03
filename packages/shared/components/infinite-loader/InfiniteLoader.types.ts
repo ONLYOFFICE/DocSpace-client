@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,13 +27,13 @@
 import { IndexRange } from "react-virtualized";
 import { TViewAs } from "../../types";
 
-export interface InfiniteLoaderProps {
+export type InfiniteLoaderProps = {
   viewAs: TViewAs;
   hasMoreFiles: boolean;
   filesLength: number;
   itemCount: number;
   loadMoreItems: (params: IndexRange) => Promise<void>;
-  itemSize?: number;
+  itemSize: number;
   children: React.ReactNode[];
   onScroll?: () => void;
   isLoading?: boolean;
@@ -44,12 +44,12 @@ export interface InfiniteLoaderProps {
   countTilesInRow?: number;
   showSkeleton?: boolean;
   currentFolderId?: string | number;
-}
+};
 
-export interface ListComponentProps extends InfiniteLoaderProps {
+export type ListComponentProps = InfiniteLoaderProps & {
   scroll: Element | (Window & typeof globalThis);
-}
+};
 
-export interface GridComponentProps extends InfiniteLoaderProps {
+export type GridComponentProps = InfiniteLoaderProps & {
   scroll: Element | (Window & typeof globalThis);
-}
+};

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,62 +25,24 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
-
 import { Text } from "../../components/text";
 import { TTranslation } from "../../types";
 import { RectangleSkeleton, CircleSkeleton } from "../index";
-import { globalColors } from "../../themes";
-
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  .title {
-    padding-top: 20px;
-    padding-bottom: 12px;
-  }
-
-  .title-link {
-    margin-bottom: 12px;
-    line-height: 16px;
-    color: ${globalColors.gray};
-  }
-`;
-
-const StyledRow = styled.div`
-  padding: 16px 0;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-
-  .row {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .actions {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    margin-inline-start: auto;
-  }
-`;
+import styles from "./Share.module.scss";
 
 export const RowSkeleton = () => {
   return (
-    <StyledRow>
+    <div className={styles.row}>
       <CircleSkeleton x="16" y="16" radius="16" width="32" height="32" />
-      <div className="row">
+      <div className={styles.content}>
         <RectangleSkeleton width="161px" height="16px" />
         <RectangleSkeleton width="119px" height="16px" />
       </div>
-      <div className="actions">
+      <div className={styles.actions}>
         <RectangleSkeleton width="16px" height="16px" />
         <RectangleSkeleton width="42px" height="28px" />
       </div>
-    </StyledRow>
+    </div>
   );
 };
 
@@ -90,16 +52,16 @@ interface ShareSkeletonProps {
 
 const ShareSkeleton = ({ t }: ShareSkeletonProps) => {
   return (
-    <StyledWrapper>
-      <Text fontSize="14px" fontWeight={600} className="title-link">
-        {t("Files:SharedLinks")}
+    <div className={styles.wrapper}>
+      <Text fontSize="14px" fontWeight={600} className={styles.titleLink}>
+        {t("Common:SharedLinks")}
       </Text>
       <RowSkeleton />
-      <div className="title">
+      <div className={styles.title}>
         <RectangleSkeleton width="154px" height="16px" />
       </div>
       <RowSkeleton />
-    </StyledWrapper>
+    </div>
   );
 };
 

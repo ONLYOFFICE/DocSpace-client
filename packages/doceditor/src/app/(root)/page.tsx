@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -182,7 +182,11 @@ async function Page({ searchParams }: RootPageProps) {
     <>
       <Root {...data} shareKey={share} />
       {url && (
-        <Script id="editor-api" strategy="beforeInteractive" src={docApiUrl} />
+        <Script
+          id="onlyoffice-api-script"
+          strategy="beforeInteractive"
+          src={docApiUrl}
+        />
       )}
     </>
   );

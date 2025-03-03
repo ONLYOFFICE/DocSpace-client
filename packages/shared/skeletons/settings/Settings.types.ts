@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,18 +26,17 @@
 
 import type { RectangleSkeletonProps } from "../rectangle";
 
-export interface SettingProps {
+export type SettingProps = {
   width?: string;
-}
-export interface SectionTitleProps extends SettingProps {
+};
+export type SectionTitleProps = SettingProps & {
   height?: string;
-}
+};
 
-export interface SettingsSectionProps {
+export type SettingsSectionProps = {
   width1: string;
   width2: string;
   withTitle?: boolean;
-}
+};
 
-export interface SettingsStorageManagementSkeletonProps
-  extends RectangleSkeletonProps {}
+export type SettingsStorageManagementSkeletonProps = RectangleSkeletonProps;

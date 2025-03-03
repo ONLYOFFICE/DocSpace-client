@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 /* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents, TOptSocket } from "../utils/socket";
 
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";
@@ -35,13 +35,7 @@ import { loginWithTfaCode } from "../api/user";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
 import { logout as logoutDesktop } from "../utils/desktop";
-import {
-  frameCallEvent,
-  isAdmin,
-  isPublicRoom,
-  insertDataLayer,
-  isPublicPreview,
-} from "../utils/common";
+import { frameCallEvent, isAdmin, insertDataLayer } from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
@@ -97,54 +91,63 @@ class AuthStore {
 
     makeAutoObservable(this);
 
-    SocketHelper.on(SocketEvents.ChangedQuotaUsedValue, (res) => {
-      console.log(
-        `[WS] change-quota-used-value ${res?.featureId}:${res?.value}`,
-      );
+    SocketHelper?.on(
+      SocketEvents.ChangedQuotaUsedValue,
+      (res: { featureId: string; value: number }) => {
+        console.log(
+          `[WS] change-quota-used-value ${res?.featureId}:${res?.value}`,
+        );
 
-      if (!res || !res?.featureId) return;
-      const { featureId, value } = res;
+        if (!res || !res?.featureId) return;
+        const { featureId, value } = res;
 
-      runInAction(() => {
-        this.currentQuotaStore?.updateQuotaUsedValue(featureId, value);
-      });
-    });
+        runInAction(() => {
+          this.currentQuotaStore?.updateQuotaUsedValue(featureId, value);
+        });
+      },
+    );
 
-    SocketHelper.on(SocketEvents.ChangedQuotaFeatureValue, (res) => {
-      console.log(
-        `[WS] change-quota-feature-value ${res?.featureId}:${res?.value}`,
-      );
+    SocketHelper?.on(
+      SocketEvents.ChangedQuotaFeatureValue,
+      (res: { featureId: string; value: number }) => {
+        console.log(
+          `[WS] change-quota-feature-value ${res?.featureId}:${res?.value}`,
+        );
 
-      if (!res || !res?.featureId) return;
-      const { featureId, value } = res;
+        if (!res || !res?.featureId) return;
+        const { featureId, value } = res;
 
-      runInAction(() => {
-        if (featureId === "free") {
-          this.updateTariff();
-          return;
-        }
+        runInAction(() => {
+          if (featureId === "free") {
+            this.updateTariff();
+            return;
+          }
 
-        this.currentQuotaStore?.updateQuotaFeatureValue(featureId, value);
-      });
-    });
-    SocketHelper.on(SocketEvents.ChangedQuotaUserUsedValue, (options) => {
-      console.log(`[WS] change-user-quota-used-value`, options);
+          this.currentQuotaStore?.updateQuotaFeatureValue(featureId, value);
+        });
+      },
+    );
+    SocketHelper?.on(
+      SocketEvents.ChangedQuotaUserUsedValue,
+      (options: TOptSocket) => {
+        console.log(`[WS] change-user-quota-used-value`, options);
 
-      runInAction(() => {
-        if (options.customQuotaFeature === "user_custom_quota") {
-          this.userStore?.updateUserQuota(
-            options.usedSpace,
-            options.quotaLimit,
-          );
+        runInAction(() => {
+          if (options.customQuotaFeature === "user_custom_quota") {
+            this.userStore?.updateUserQuota(
+              options.usedSpace,
+              options.quotaLimit,
+            );
 
-          return;
-        }
+            return;
+          }
 
-        const { customQuotaFeature, ...updatableObject } = options;
+          const { customQuotaFeature, ...updatableObject } = options;
 
-        this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);
-      });
-    });
+          this.currentQuotaStore?.updateTenantCustomQuota(updatableObject);
+        });
+      },
+    );
   }
 
   setIsUpdatingTariff = (isUpdatingTariff: boolean) => {
@@ -166,7 +169,9 @@ class AuthStore {
 
     this.skipRequest = skipRequest ?? false;
 
-    await Promise.all([this.settingsStore?.init(), this.getCapabilities()]);
+    if (window.location.pathname === "/shared/invalid-link") return;
+
+    await this.settingsStore?.init();
 
     const requests = [];
 
@@ -175,17 +180,19 @@ class AuthStore {
     const isPortalRestore =
       this.settingsStore?.tenantStatus === TenantStatus.PortalRestore;
 
+    if (!isPortalRestore) requests.push(this.getCapabilities());
+
     if (
       this.settingsStore?.isLoaded &&
       this.settingsStore?.socketUrl &&
-      !isPublicPreview() &&
-      !isPublicRoom() &&
       !isPortalDeactivated
     ) {
       requests.push(
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
-          if (!isPortalRestore) {
+          if (!isPortalRestore && this.userStore?.isAuthenticated) {
             this.getPaymentInfo();
+          } else {
+            this.isPortalInfoLoaded = true;
           }
         }),
       );
@@ -193,22 +200,22 @@ class AuthStore {
       this.userStore?.setIsLoaded(true);
     }
 
-    if (this.isAuthenticated && !skipRequest) {
-      if (!isPortalRestore && !isPortalDeactivated)
-        requests.push(this.settingsStore?.getAdditionalResources());
-
-      if (!this.settingsStore?.passwordSettings) {
-        if (!isPortalRestore && !isPortalDeactivated) {
-          requests.push(this.settingsStore?.getCompanyInfoSettings());
-        }
-      }
-    }
-
     return Promise.all(requests).then(() => {
       const user = this.userStore?.user;
 
       if (user?.id) {
         insertDataLayer(user.id);
+      }
+
+      if (this.isAuthenticated && !skipRequest && user) {
+        if (!isPortalRestore && !isPortalDeactivated)
+          requests.push(this.settingsStore?.getAdditionalResources());
+
+        if (!this.settingsStore?.passwordSettings) {
+          if (!isPortalRestore && !isPortalDeactivated) {
+            requests.push(this.settingsStore?.getCompanyInfoSettings());
+          }
+        }
       }
 
       if (
@@ -448,10 +455,9 @@ class AuthStore {
 
   get isAuthenticated() {
     return (
-      this.settingsStore?.isLoaded &&
-      !!this.settingsStore?.socketUrl &&
-      !isPublicRoom()
-      // || //this.userStore.isAuthenticated
+      this.settingsStore?.isLoaded && !!this.settingsStore?.socketUrl
+      // !isPublicRoom()
+      //  this.userStore?.isAuthenticated
     );
   }
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,7 @@ import { TColorScheme } from "../../themes";
 import { IconButtonProps } from "../icon-button/IconButton.types";
 import { LinkProps } from "../link/Link.types";
 import { TextProps } from "../text/Text.types";
-
+import type { TTheme } from "../../themes";
 import { ThemeId } from "./ColorTheme.enums";
 
 export interface DefaultColorThemeProps {
@@ -77,7 +77,9 @@ export interface IndicatorFilterButtonColorTheme
   themeId: ThemeId.IndicatorFilterButton;
 }
 
-export interface IndexIconButton extends DefaultColorThemeProps {
+export interface IndexIconButton
+  extends IconButtonProps,
+    DefaultColorThemeProps {
   themeId: ThemeId.IndexIconButton;
 }
 
@@ -97,12 +99,15 @@ export interface LinkForgotPasswordColorTheme extends DefaultColorThemeProps {
 
 export interface LoadingButtonColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.LoadingButton;
+  loaderColor?: React.CSSProperties["color"];
+  onClick?: VoidFunction;
 }
 
 export interface ProgressColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.Progress;
   percent?: number;
   $currentColorScheme?: TColorScheme;
+  theme: TTheme;
 }
 
 export interface VersionBadgeTheme extends DefaultColorThemeProps {
@@ -117,6 +122,7 @@ export interface LinkColorTheme extends LinkProps, DefaultColorThemeProps {
   truncate?: boolean;
   $currentColorScheme?: TColorScheme;
   onClick?: (e: React.MouseEvent<Element>) => void;
+  $isUnderline?: boolean;
 }
 
 export interface SubmenuTextTheme extends TextProps, DefaultColorThemeProps {

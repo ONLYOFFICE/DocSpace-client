@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,14 +33,14 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { TextInput } from "@docspace/shared/components/text-input";
-import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 import { mobile } from "@docspace/shared/utils";
 import styled from "styled-components";
 
-const StyledBox = styled(Box)`
+const StyledBox = styled.div`
+  box-sizing: border-box;
   padding: 20px 0 8px;
   @media ${mobile} {
     padding-top: 0;
@@ -61,11 +61,14 @@ class ConsumerModalDialog extends React.Component {
     required.current = [];
     this.requiredRef = required.current;
 
-    const { selectedConsumer, t, theme, urlSupport } = this.props;
+    const { selectedConsumer, t, theme, feedbackAndSupportUrl } = this.props;
 
     this.consumerInstruction =
       selectedConsumer.instruction &&
-      format(selectedConsumer.instruction, <Box marginProp="0" />);
+      format(
+        selectedConsumer.instruction,
+        <div style={{ boxSizing: "border-box", margin: 0 }} />,
+      );
 
     this.helpCenterDescription = (
       <Trans t={t} i18nKey="ThirdPartyBodyDescription" ns="Settings">
@@ -92,13 +95,27 @@ class ConsumerModalDialog extends React.Component {
             color={theme.client.settings.integration.linkColor}
             isHovered={false}
             target="_blank"
-            href={urlSupport}
+            href={feedbackAndSupportUrl}
           >
             Support Team
           </Link>
         </Trans>
       </StyledBox>
     );
+
+    this.description =
+      feedbackAndSupportUrl && this.thirdPartyServicesUrl() ? (
+        <>
+          <Text as="div">{this.supportTeamDescription}</Text>
+          <Text as="div">{this.helpCenterDescription}</Text>
+        </>
+      ) : !feedbackAndSupportUrl && this.thirdPartyServicesUrl() ? (
+        <Text as="div">
+          <StyledBox>{this.helpCenterDescription}</StyledBox>
+        </Text>
+      ) : feedbackAndSupportUrl && !this.thirdPartyServicesUrl() ? (
+        <Text as="div">{this.supportTeamDescription}</Text>
+      ) : null;
   }
 
   componentDidMount() {
@@ -251,17 +268,18 @@ class ConsumerModalDialog extends React.Component {
 
     return (
       <React.Fragment key={item.name}>
-        <Box
-          displayProp="flex"
-          flexDirection="column"
-          marginProp={
-            selectedConsumer.props.length == index + 1 ? "0" : "0 0 16px 0"
-          }
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            margin:
+              selectedConsumer.props.length == index + 1 ? "0" : "0 0 16px 0",
+          }}
         >
-          <Box marginProp="0 0 4px 0">
+          <div style={{ margin: "0 0 4px 0" }}>
             <Text isBold>{item.title}:</Text>
-          </Box>
-          <Box>
+          </div>
+          <div>
             <TextInput
               scale
               id={item.name}
@@ -274,8 +292,8 @@ class ConsumerModalDialog extends React.Component {
               onChange={onChangeHandler}
               maxLength={maxLength[item.name] ?? defaultMaxLength}
             />
-          </Box>
-        </Box>
+          </div>
+        </div>
       </React.Fragment>
     );
   };
@@ -287,9 +305,8 @@ class ConsumerModalDialog extends React.Component {
       state,
       updateConsumerValues,
       consumerInstruction,
-      helpCenterDescription,
-      supportTeamDescription,
       requiredRef,
+      description,
     } = this;
 
     const isDisabled = requiredRef.some((name) => state[name].trim() === "");
@@ -303,14 +320,13 @@ class ConsumerModalDialog extends React.Component {
       >
         <ModalDialog.Header>{selectedConsumer.title}</ModalDialog.Header>
         <ModalDialog.Body>
-          <Box paddingProp="16px 0 16px">{consumerInstruction}</Box>
+          <div style={{ padding: "16px 0 16px" }}>{consumerInstruction}</div>
           <>
             {selectedConsumer.props.map((prop, i) =>
               this.inputsRender(prop, i),
             )}
           </>
-          <Text as="div">{supportTeamDescription}</Text>
-          <Text as="div">{helpCenterDescription}</Text>
+          {description}
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button
@@ -346,13 +362,13 @@ ConsumerModalDialog.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   onChangeLoading: PropTypes.func.isRequired,
   updateConsumerProps: PropTypes.func.isRequired,
-  urlSupport: PropTypes.string,
+  feedbackAndSupportUrl: PropTypes.string,
 };
 
 export default inject(({ setup, settingsStore }) => {
   const {
     theme,
-    urlSupport,
+    feedbackAndSupportUrl,
     portalSettingsUrl,
     docuSignUrl,
     dropboxUrl,
@@ -382,7 +398,7 @@ export default inject(({ setup, settingsStore }) => {
   return {
     theme,
     selectedConsumer,
-    urlSupport,
+    feedbackAndSupportUrl,
     portalSettingsUrl,
     docuSignUrl,
     dropboxUrl,

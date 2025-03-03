@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -41,7 +41,7 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 // import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 // import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { inject, observer } from "mobx-react";
 
@@ -65,61 +65,63 @@ import styled, { css } from "styled-components";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
-import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
+import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 import MobileView from "./MobileView";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 
 const StyledButton = styled(Button)`
-  font-weight: 700;
-  font-size: 16px;
-  padding: 0;
-  opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
+  && {
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    padding: 0;
+    opacity: ${(props) => (props.isDisabled ? 0.6 : 1)};
+    background-color: ${({ $currentColorScheme }) =>
+      $currentColorScheme.main?.accent} !important;
+    background: ${({ $currentColorScheme }) =>
+      $currentColorScheme.main?.accent};
+    border: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
 
-  background-color: ${({ $currentColorScheme }) =>
-    $currentColorScheme.main?.accent} !important;
-  background: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
-  border: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
+    ${(props) =>
+      !props.isDisabled &&
+      css`
+        :hover {
+          background-color: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          opacity: 0.85;
+          background: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          border: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+        }
 
-  ${(props) =>
-    !props.isDisabled &&
-    css`
-      :hover {
-        background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        opacity: 0.85;
-        background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        border: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-      }
+        :active {
+          background-color: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          background: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          border: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent};
+          opacity: 1;
+          filter: brightness(90%);
+          cursor: pointer;
+        }
+      `}
 
-      :active {
-        background-color: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        background: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        border: ${({ $currentColorScheme }) =>
-          $currentColorScheme.main?.accent};
-        opacity: 1;
-        filter: brightness(90%);
-        cursor: pointer;
-      }
-    `}
+    .button-content {
+      color: ${({ $currentColorScheme }) => $currentColorScheme.text?.accent};
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      vertical-align: middle;
+      box-sizing: border-box;
+      padding-block: 5px;
+      padding-inline: 12px 14px;
+      line-height: 22px;
+      border-radius: 3px;
 
-  .button-content {
-    color: ${({ $currentColorScheme }) => $currentColorScheme.text?.accent};
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    vertical-align: middle;
-    box-sizing: border-box;
-    padding-block: 5px;
-    padding-inline: 12px 14px;
-    line-height: 22px;
-    border-radius: 3px;
-
-    user-select: none;
-    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+      user-select: none;
+      -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+    }
   }
 `;
 
@@ -134,6 +136,7 @@ const ArticleMainButtonContent = (props) => {
     startUpload,
     setAction,
     setSelectFileDialogVisible,
+    setMainButtonVisible,
     selectFileDialogVisible,
     selectFileFormRoomDialogVisible,
     setSelectFileFormRoomDialogVisible,
@@ -178,6 +181,7 @@ const ArticleMainButtonContent = (props) => {
     isWarningRoomsDialog,
     getContactsModel,
     contactsCanCreate,
+    setRefMap,
   } = props;
 
   const navigate = useNavigate();
@@ -254,7 +258,7 @@ const ArticleMainButtonContent = (props) => {
           if (f.length > 0) startUpload(f, null, t);
         })
         .catch((err) => {
-          toastr.error(err);
+          toastr.error(err, null, 0, true);
         });
     },
     [startUpload, t],
@@ -676,6 +680,38 @@ const ArticleMainButtonContent = (props) => {
     isMobileArticle,
   ]);
 
+  const isProfile = location.pathname.includes("/profile");
+
+  const getMainButtonVisible = () => {
+    let visibilityValue = true;
+
+    if (currentDeviceType === DeviceType.mobile) {
+      visibilityValue = !(
+        moveToPanelVisible ||
+        restorePanelVisible ||
+        copyPanelVisible ||
+        selectFileDialogVisible ||
+        selectFileFormRoomDialogVisible ||
+        versionHistoryPanelVisible
+      );
+    }
+
+    if (isProfile || (isAccountsPage && !contactsCanCreate)) {
+      visibilityValue = false;
+    }
+
+    if (!isAccountsPage) visibilityValue = security?.Create;
+
+    if (!isMobileArticle) visibilityValue = false;
+    return visibilityValue;
+  };
+
+  const mainButtonVisible = getMainButtonVisible();
+
+  useEffect(() => {
+    setMainButtonVisible(mainButtonVisible);
+  }, [mainButtonVisible]);
+
   const mainButtonText =
     isRoomAdmin && isAccountsPage ? t("Common:Invite") : t("Common:Actions");
 
@@ -690,46 +726,24 @@ const ArticleMainButtonContent = (props) => {
     isDisabled = !security?.Create;
   }
 
-  const isProfile = location.pathname.includes("/profile");
-
-  let mainButtonVisible = true;
-
-  if (currentDeviceType === DeviceType.mobile) {
-    mainButtonVisible = !(
-      moveToPanelVisible ||
-      restorePanelVisible ||
-      copyPanelVisible ||
-      selectFileDialogVisible ||
-      selectFileFormRoomDialogVisible ||
-      versionHistoryPanelVisible
-    );
-  }
-
-  if (isAccountsPage && !contactsCanCreate) {
-    mainButtonVisible = false;
-  }
-
   if (showArticleLoader)
     return isMobileArticle ? null : <ArticleButtonLoader height="32px" />;
 
   return (
     <>
       {isMobileArticle ? (
-        !isProfile &&
-        (security?.Create || isAccountsPage) && (
-          <MobileView
-            t={t}
-            titleProp={t("Upload")}
-            actionOptions={actions}
-            buttonOptions={!isAccountsPage && uploadActions}
-            withoutButton={isRoomsFolder || isAccountsPage}
-            withMenu={!isRoomsFolder}
-            mainButtonMobileVisible={
-              mainButtonMobileVisible && mainButtonVisible
-            }
-            onMainButtonClick={onCreateRoom}
-          />
-        )
+        <MobileView
+          t={t}
+          titleProp={t("Upload")}
+          actionOptions={actions}
+          buttonOptions={!isAccountsPage ? uploadActions : null}
+          withoutButton={isRoomsFolder || isAccountsPage}
+          withMenu={!isRoomsFolder}
+          mainButtonMobileVisible={
+            mainButtonMobileVisible ? mainButtonVisible : null
+          }
+          onMainButtonClick={onCreateRoom}
+        />
       ) : isRoomsFolder ? (
         <StyledButton
           className="create-room-button"
@@ -755,6 +769,7 @@ const ArticleMainButtonContent = (props) => {
           text={mainButtonText}
           model={model}
           title={mainButtonText}
+          setRefMap={setRefMap}
         />
       )}
 
@@ -810,9 +825,10 @@ export default inject(
     filesActionsStore,
     currentQuotaStore,
     peopleStore,
+    guidanceStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
-    const { mainButtonMobileVisible } = filesStore;
+    const { setRefMap } = guidanceStore;
     const {
       isPrivacyFolder,
       isFavoritesFolder,
@@ -839,12 +855,14 @@ export default inject(
       settingsStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
 
-    const security = selectedFolderStore.security;
+    const { security } = selectedFolderStore;
+
+    const { mainButtonMobileVisible, setMainButtonVisible } = filesStore;
 
     const currentFolderId = selectedFolderStore.id;
     const currentRoomType = selectedFolderStore.roomType;
-    const parentRoomType = selectedFolderStore.parentRoomType;
-    const isFolder = selectedFolderStore.isFolder;
+    const { parentRoomType } = selectedFolderStore;
+    const { isFolder } = selectedFolderStore;
 
     const { isAdmin, isOwner, isRoomAdmin, isCollaborator } = userStore.user;
 
@@ -877,6 +895,7 @@ export default inject(
       setSelectFileDialogVisible,
       selectFileDialogVisible,
       setInvitePanelOptions,
+      setMainButtonVisible,
 
       currentFolderId,
       currentRoomType,
@@ -916,6 +935,7 @@ export default inject(
 
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
+      setRefMap,
     };
   },
 )(

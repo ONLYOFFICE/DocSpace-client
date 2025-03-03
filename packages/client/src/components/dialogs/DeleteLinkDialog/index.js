@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,11 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
+
+import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { withTranslation } from "react-i18next";
 import { DeleteLinkDialogContainer } from "./DeleteLinkDialog.styled";
@@ -48,9 +51,11 @@ const DeleteLinkDialogComponent = (props) => {
     isFormRoom,
     isCustomRoom,
     setRoomShared,
+    setPublicRoomKey,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const onClose = () => {
     setIsVisible(false);
@@ -70,6 +75,24 @@ const DeleteLinkDialogComponent = (props) => {
         if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
           toastr.success(t("Files:GeneralLinkDeletedSuccessfully"));
         } else toastr.success(t("Files:LinkDeletedSuccessfully"));
+
+        const filterObj = FilesFilter.getFilter(window.location);
+
+        if (link.sharedTo.primary && (isPublicRoomType || isFormRoom)) {
+          if (filterObj.key !== res.sharedTo.requestToken) {
+            setPublicRoomKey(res.sharedTo.requestToken);
+            setSearchParams((prev) => {
+              prev.set("key", res.sharedTo.requestToken);
+              return prev;
+            });
+          }
+        }
+
+        if (isCustomRoom && filterObj.key) {
+          setPublicRoomKey(null);
+          searchParams.delete("key");
+          setSearchParams(searchParams);
+        }
       })
       .catch((err) => toastr.error(err.response?.data?.error.message))
       .finally(() => {
@@ -124,11 +147,11 @@ const DeleteLinkDialogComponent = (props) => {
           <Text lineHeight="20px" noSelect>
             {getDescription()}
           </Text>
-          {link.sharedTo.primary && (
+          {link.sharedTo.primary ? (
             <Text lineHeight="20px" noSelect>
               {t("Files:ActionCannotUndone")}
             </Text>
-          )}
+          ) : null}
         </DeleteLinkDialogContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -170,10 +193,12 @@ export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
     setDeleteLinkDialogVisible: setIsVisible,
     linkParams,
   } = dialogsStore;
-  const { editExternalLink, deleteExternalLink } = publicRoomStore;
+  const { editExternalLink, deleteExternalLink, setPublicRoomKey } =
+    publicRoomStore;
   const { isFormRoom, isCustomRoom } = linkParams;
 
   return {
+    linkParams,
     visible,
     setIsVisible,
     roomId: linkParams.roomId,
@@ -184,5 +209,6 @@ export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
     isCustomRoom,
     isPublicRoomType: linkParams.isPublic,
     setRoomShared: filesStore.setRoomShared,
+    setPublicRoomKey,
   };
 })(observer(DeleteLinkDialog));

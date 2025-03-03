@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -319,8 +319,12 @@ export type TSelectorFooterCheckbox = TSelectorCheckbox & {
 };
 
 export type TSelectorInfo =
-  | { withInfo: true; infoText: string }
-  | { withInfo?: undefined; infoText?: undefined };
+  | { withInfo: true; infoText: string; withInfoBadge?: boolean }
+  | {
+      withInfo?: undefined;
+      infoText?: undefined;
+      withInfoBadge?: undefined;
+    };
 
 export type TRenderCustomItem = (
   label: string,
@@ -402,6 +406,7 @@ export type BodyProps = TSelectorInfo & {
   withFooterInput?: boolean;
   withFooterCheckbox?: boolean;
   descriptionText?: string;
+  withInfoBadge?: boolean;
 };
 
 export type FooterProps = TSelectorFooterSubmitButton &
@@ -516,6 +521,7 @@ export type TSelectorItemRoom = MergeTypes<
     icon?: string;
     color?: string;
     iconOriginal?: string;
+    cover?: ICover;
   }
 >;
 
@@ -577,6 +583,7 @@ export type TSelectorItem = TSelectorItemType & {
   disabledText?: string;
   lifetimeTooltip?: string | null;
   viewUrl?: string;
+  isTemplate?: boolean;
 };
 
 export type Data = {
@@ -598,3 +605,15 @@ export interface ItemProps {
   style: React.CSSProperties;
   data: Data;
 }
+
+export type ProvidersProps = {
+  emptyScreenProps: TSelectorEmptyScreen;
+  breadCrumbsProps: TSelectorBreadCrumbs;
+  infoBarProps: TInfoBar;
+  searchProps: TSelectorSearch;
+  selectAllProps: TSelectorSelectAll & {
+    isAllChecked: boolean;
+    isAllIndeterminate: boolean;
+  };
+  tabsProps: TSelectorTabs;
+};

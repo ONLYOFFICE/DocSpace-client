@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,7 +35,7 @@ import { useTranslation } from "react-i18next";
 import CompletedFormDarkIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.dark.svg?url";
 import CompletedFormLightIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.light.svg?url";
 import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg";
-import DownloadIconUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import DownloadIconUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import LinkIconUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import MailIcon from "PUBLIC_DIR/images/icons/12/mail.svg";
 

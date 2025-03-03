@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,99 +26,96 @@
 
 import React from "react";
 import { render, screen } from "@testing-library/react";
-
+import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-import { ToggleButton } from "./ToggleButton";
+import { ToggleButton } from ".";
 
 describe("<ToggleButton />", () => {
-  test("renders without error", () => {
-    render(<ToggleButton isChecked={false} onChange={() => {}} label="Text" />);
+  const defaultProps = {
+    isChecked: false,
+    onChange: jest.fn(),
+    label: "Toggle me",
+  };
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("renders without error", () => {
+    render(<ToggleButton {...defaultProps} />);
     expect(screen.getByTestId("toggle-button")).toBeInTheDocument();
   });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("Toggle button componentDidUpdate() test", () => {
-  //   const wrapper = mount(
-  //     // @ts-expect-error TS(2322): Type '{ isChecked: boolean; onChange: () => any; }... Remove this comment to see the full error message
-  //     <ToggleButton isChecked={false} onChange={() => jest.fn()} />
-  //   ).instance();
-  //   wrapper.componentDidUpdate(wrapper.props);
+  test("renders with label", () => {
+    render(<ToggleButton {...defaultProps} />);
+    const label = screen.getByTestId("toggle-button-label");
+    expect(label).toBeInTheDocument();
+    expect(label).toHaveTextContent("Toggle me");
+  });
 
-  //   const wrapper2 = mount(
-  //     // @ts-expect-error TS(2322): Type '{ isChecked: boolean; onChange: () => any; }... Remove this comment to see the full error message
-  //     <ToggleButton isChecked={true} onChange={() => jest.fn()} />
-  //   ).instance();
-  //   wrapper2.componentDidUpdate(wrapper2.props);
+  test("renders without label when not provided", () => {
+    render(<ToggleButton {...defaultProps} label={undefined} />);
+    expect(screen.queryByTestId("toggle-button-label")).not.toBeInTheDocument();
+  });
 
-  //   const wrapper3 = shallow(
-  //     // @ts-expect-error TS(2322): Type '{ isChecked: boolean; onChange: () => any; }... Remove this comment to see the full error message
-  //     <ToggleButton isChecked={false} onChange={() => jest.fn()} />
-  //   );
-  //   wrapper3.setState({ isOpen: true });
-  //   wrapper3.instance().componentDidUpdate(wrapper3.props());
+  test("handles checked state correctly", () => {
+    render(<ToggleButton {...defaultProps} isChecked />);
+    const input = screen.getByTestId("toggle-button-input") as HTMLInputElement;
+    expect(input.checked).toBe(true);
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.props).toBe(wrapper.props);
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.state.checked).toBe(wrapper.props.isChecked);
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper2.props).toBe(wrapper2.props);
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper2.state.checked).toBe(wrapper2.props.isChecked);
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper3.state()).toBe(wrapper3.state());
-  // });
+  test("calls onChange when clicked", async () => {
+    const onChange = jest.fn();
+    render(<ToggleButton {...defaultProps} onChange={onChange} />);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts id", () => {
-  //   const wrapper = mount(
-  //     <ToggleButton
-  //       // @ts-expect-error TS(2322): Type '{ label: string; onChange: () => any; isChec... Remove this comment to see the full error message
-  //       label="text"
-  //       // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //       onChange={() => jest.fn()}
-  //       isChecked={false}
-  //       id="testId"
-  //     />
-  //   );
+    const toggle = screen.getByTestId("toggle-button-input");
+    await userEvent.click(toggle);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+    expect(onChange).toHaveBeenCalledTimes(1);
+  });
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts className", () => {
-  //   const wrapper = mount(
-  //     <ToggleButton
-  //       // @ts-expect-error TS(2322): Type '{ label: string; onChange: () => any; isChec... Remove this comment to see the full error message
-  //       label="text"
-  //       // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //       onChange={() => jest.fn()}
-  //       isChecked={false}
-  //       className="test"
-  //     />
-  //   );
+  test("respects disabled state", () => {
+    render(<ToggleButton {...defaultProps} isDisabled />);
+    const input = screen.getByTestId("toggle-button-input");
+    expect(input).toBeDisabled();
+  });
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+  test("prevents interaction when disabled", async () => {
+    const onChange = jest.fn();
+    render(<ToggleButton {...defaultProps} onChange={onChange} isDisabled />);
 
-  // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     <ToggleButton
-  //       // @ts-expect-error TS(2322): Type '{ label: string; onChange: () => any; isChec... Remove this comment to see the full error message
-  //       label="text"
-  //       // @ts-expect-error TS(2708): Cannot use namespace 'jest' as a value.
-  //       onChange={() => jest.fn()}
-  //       isChecked={false}
-  //       style={{ color: "red" }}
-  //     />
-  //   );
+    const toggle = screen.getByTestId("toggle-button-input");
+    await userEvent.click(toggle);
 
-  //   // @ts-expect-error TS(2304): Cannot find name 'expect'.
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  test("applies custom className", () => {
+    render(<ToggleButton {...defaultProps} className="custom-class" />);
+    const container = screen.getByTestId("toggle-button-container");
+    expect(container).toHaveClass("custom-class");
+  });
+
+  test("applies custom styles", () => {
+    const customStyle = { marginTop: "10px" };
+    render(<ToggleButton {...defaultProps} style={customStyle} />);
+    const container = screen.getByTestId("toggle-button-container");
+    expect(container).toHaveStyle(customStyle);
+  });
+
+  test("sets name attribute correctly", () => {
+    render(<ToggleButton {...defaultProps} name="toggle-name" />);
+    const input = screen.getByTestId("toggle-button-input");
+    expect(input).toHaveAttribute("name", "toggle-name");
+  });
+
+  test("applies font styling correctly", () => {
+    render(<ToggleButton {...defaultProps} fontWeight={600} fontSize="16px" />);
+    const label = screen.getByTestId("toggle-button-label");
+    expect(label).toHaveStyle({
+      fontWeight: "600",
+      fontSize: "16px",
+    });
+  });
 });

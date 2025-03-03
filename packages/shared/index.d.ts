@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -46,7 +46,12 @@ declare module "*.svg" {
 }
 
 declare module "external-remotes-plugin" {}
-declare module "csvjson-json_beautifier" {}
+declare module "csvjson-json_beautifier" {
+  export default function jsonBeautifier(
+    json: string,
+    options?: unknown,
+  ): string;
+}
 declare module "react-values" {
   const StringValue: React.ReactNode;
   const BooleanValue: React.ReactNode;
@@ -77,4 +82,9 @@ declare module "resize-image" {
 
   const value: ResizeImage;
   export default value;
+}
+
+declare module "*.scss" {
+  const content: { [className: string]: string };
+  export default content;
 }

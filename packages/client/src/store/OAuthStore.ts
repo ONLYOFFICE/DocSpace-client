@@ -218,11 +218,11 @@ class OAuthStore {
         .map((c) => c.createdBy);
 
       const users = await Promise.all(
-        newUsers.map((u) => api.people.getUserByEmail(u)),
+        newUsers.map((u) => api.people.getUserById(u)),
       );
 
       clientList.data.forEach((client) => {
-        const user = users.find((u) => u.email === client.createdBy);
+        const user = users.find((u) => u.id === client.createdBy);
 
         if (user) {
           client.createdBy = user.email;

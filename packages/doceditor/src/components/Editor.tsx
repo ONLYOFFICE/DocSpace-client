@@ -360,6 +360,8 @@ const Editor = ({
     );
   };
 
+  console.log({ newConfig });
+
   return (
     <DocumentEditor
       id={EDITOR_ID}

@@ -230,6 +230,8 @@ const Root = ({
 
   const organizationName = settings?.logoText || t("Common:OrganizationName");
 
+  console.log({ globalConfig: config });
+
   return isShowDeepLink ? (
     <DeepLink
       fileInfo={fileInfo}

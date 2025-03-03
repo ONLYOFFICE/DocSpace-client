@@ -505,7 +505,7 @@ export async function getAvailablePortals(data: {
 
 export async function getOauthJWTToken() {
   const [getJWTToken] = createRequest(
-    [`/settings/tfaapp/setup`],
+    [`/security/oauth2/token`],
     [["", ""]],
     "GET",
   );
@@ -517,6 +517,9 @@ export async function getOauthJWTToken() {
   if (!res.ok) throw new Error(res.statusText);
 
   const jwtToken = await res.json();
+
+  console.log("=+=+");
+  console.log(jwtToken.response);
 
   return jwtToken.response as string;
 }

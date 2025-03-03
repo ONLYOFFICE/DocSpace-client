@@ -195,6 +195,7 @@
   }
 }
 
+.roleContainer[data-process-status="5"] ~ .roleContainer,
 .roleContainer[data-process-status="5"] {
   .roleTitle {
     color: $main-red;

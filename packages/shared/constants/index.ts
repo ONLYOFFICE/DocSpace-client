@@ -215,4 +215,5 @@ export const OPERATIONS_NAME = Object.freeze({
   convert: "convert",
   other: "other",
   upload: "upload",
+  deleteVersionFile: "deleteVersionFile",
 });

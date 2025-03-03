@@ -267,7 +267,7 @@ const paddingCss = css`
 
 const StyledGridWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
   width: 100%;
   margin-bottom: ${(props) => (props.isFolders ? "23px" : 0)};
   box-sizing: border-box;

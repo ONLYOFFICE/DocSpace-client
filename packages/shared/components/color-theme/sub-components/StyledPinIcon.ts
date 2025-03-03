@@ -31,13 +31,13 @@ import { IconButton } from "../../icon-button";
 const StyledPinIcon = styled(IconButton)`
   ${commonIconsStyles}
 
-  svg {
+  && svg {
     path {
       fill: ${(props) => props.theme.filesSection.rowView.pinColor};
     }
   }
 
-  :hover {
+  &&:hover:not(.disabled) {
     svg {
       path {
         fill: ${(props) => props.theme.filesSection.rowView.pinColor};

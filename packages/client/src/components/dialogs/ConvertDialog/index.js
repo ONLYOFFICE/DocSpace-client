@@ -61,7 +61,7 @@ const ConvertDialogComponent = (props) => {
     tReady,
     visible,
     folderId,
-    convertFile,
+    convertFileFromFiles,
     convertItem,
     setStoreOriginal,
     hideConfirmConvert,
@@ -144,7 +144,7 @@ const ConvertDialogComponent = (props) => {
       }
 
       item.fileInfo = convertItem;
-      convertFile(item, t, convertItem.isOpen);
+      convertFileFromFiles(item, t, convertItem.isOpen, true);
     } else {
       hideMessage && hideConfirmConvert();
       convertUploadedFiles(t, createNewIfExist);
@@ -265,7 +265,7 @@ export default inject(
     } = treeFoldersStore;
     const {
       convertUploadedFiles,
-      convertFile,
+      convertFileFromFiles,
 
       cancelUploadAction,
     } = uploadDataStore;
@@ -285,7 +285,7 @@ export default inject(
     return {
       visible,
       folderId,
-      convertFile,
+      convertFileFromFiles,
       convertItem,
       setStoreOriginal,
       hideConfirmConvert,

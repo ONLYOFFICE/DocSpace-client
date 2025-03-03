@@ -428,7 +428,12 @@ class SocketHelper {
    */
   private tryConnect() {
     try {
-      if (!this.connectionSettings || !this.connectionSettings.url) return;
+      if (
+        !this.connectionSettings ||
+        !this.connectionSettings.url ||
+        (this.client && this.client.connected)
+      )
+        return;
 
       const { url, publicRoomKey } = this.connectionSettings;
 

@@ -34,14 +34,17 @@ import isEqual from "lodash/isEqual";
 import { Text } from "@docspace/shared/components/text";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { toastr } from "@docspace/shared/components/toast";
+
 import { DeviceType, DeepLinkType } from "@docspace/shared/enums";
+import { saveDeepLinkSettings } from "@docspace/shared/api/settings";
 
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 
 interface Props {
   isMobileView: boolean;
-  deepLinkType: DeepLinkType;
+  deepLinkSettings: DeepLinkType;
 }
 
 const StyledWrapper = styled.div`
@@ -61,24 +64,24 @@ const StyledWrapper = styled.div`
 `;
 
 const ConfigureDeepLinkComponent = (props: Props) => {
-  const { isMobileView, deepLinkType } = props;
+  const { isMobileView, deepLinkSettings } = props;
 
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [type, setType] = useState("");
+  const [type, setType] = useState(0);
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
   const getSettings = () => {
     const currentSettings = getFromSessionStorage("currentConfigureDeepLink");
-    saveToSessionStorage("defaultConfigureDeepLink", deepLinkType);
+    saveToSessionStorage("defaultConfigureDeepLink", deepLinkSettings);
 
     if (currentSettings) {
       setType(currentSettings);
     } else {
-      setType(deepLinkType);
+      setType(deepLinkSettings);
     }
   };
 
@@ -91,7 +94,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
   useEffect(() => {
     const defaultSettings = getFromSessionStorage("defaultConfigureDeepLink");
 
-    if (isEqual(defaultSettings, type)) {
+    if (isEqual(Number(defaultSettings), type)) {
       setShowReminder(false);
     } else {
       setShowReminder(true);
@@ -99,25 +102,42 @@ const ConfigureDeepLinkComponent = (props: Props) => {
   }, [type]);
 
   useEffect(() => {
-    getSettings();
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
+  useEffect(() => {
+    if (!deepLinkSettings) return;
+    getSettings();
+  }, [deepLinkSettings]);
+
   const onSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (type !== e.target.value) {
-      saveToSessionStorage("currentConfigureDeepLink", e.target.value);
-      setType(e.target.value);
+    if (type !== Number(e.target.value)) {
+      saveToSessionStorage("currentConfigureDeepLink", Number(e.target.value));
+      setType(Number(e.target.value));
     }
   };
 
-  const onSave = () => {};
+  const onSave = async () => {
+    try {
+      setIsSaving(true);
+      await saveDeepLinkSettings(type);
+      setShowReminder(false);
+      saveToSessionStorage("defaultConfigureDeepLink", type);
+      saveToSessionStorage("currentConfigureDeepLink", type);
+      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+    } catch (e) {
+      toastr.error(e!);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const onCancel = () => {
     const defaultSettings = getFromSessionStorage("defaultConfigureDeepLink");
     const defaultType = defaultSettings || DeepLinkType.Choice;
-    setType(defaultType);
+    setType(Number(defaultType));
     saveToSessionStorage("currentConfigureDeepLink", defaultType);
     setShowReminder(false);
   };
@@ -140,17 +160,17 @@ const ConfigureDeepLinkComponent = (props: Props) => {
           {
             id: "provide-a-choice",
             label: t("ProvideChoice"),
-            value: "choice",
+            value: 0,
           },
           {
             id: "by-web",
             label: t("OpenInWebOnly"),
-            value: "web",
+            value: 1,
           },
           {
             id: "by-app",
             label: t("OpenInAppOnly"),
-            value: "app",
+            value: 2,
           },
         ]}
         selected={type}
@@ -172,11 +192,11 @@ const ConfigureDeepLinkComponent = (props: Props) => {
   );
 };
 
-export const ConfigureDeepLink = inject<TStore>(({ settingsStore }) => {
+export const ConfigureDeepLink = inject<TStore>(({ settingsStore, common }) => {
   const isMobileView = settingsStore.currentDeviceType === DeviceType.mobile;
-  const { deepLinkType } = settingsStore;
+  const { deepLinkSettings } = common;
   return {
     isMobileView,
-    deepLinkType,
+    deepLinkSettings,
   };
 })(observer(ConfigureDeepLinkComponent));

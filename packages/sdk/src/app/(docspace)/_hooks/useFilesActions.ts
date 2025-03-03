@@ -59,7 +59,7 @@ export default function useFolderActions({ t }: UseFolderActionsProps) {
 
       window.open(url, !isSameTab ? "_blank" : "_self");
     },
-    [filesSettings?.openEditorInSameTab, shareKey],
+    [filesSettings?.openEditorInSameTab, setMediaViewerData, shareKey],
   );
 
   const copyFileLink = React.useCallback(

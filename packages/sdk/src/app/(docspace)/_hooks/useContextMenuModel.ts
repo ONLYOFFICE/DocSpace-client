@@ -62,13 +62,13 @@ export default function useContextMenuModel({
   );
 
   const getPreviewItem = useCallback(
-    (item: TFileItem | TFolderItem) => {
+    (item: TFileItem) => {
       return {
         id: "option_preview",
         key: "preview",
         label: t("Common:Preview"),
         icon: EyeReactSvgUrl,
-        onClick: () => openFile(item.id, true),
+        onClick: () => openFile(item, true),
         disabled: false,
       };
     },
@@ -92,13 +92,13 @@ export default function useContextMenuModel({
   );
 
   const getOpenPDFItem = useCallback(
-    (item: TFileItem | TFolderItem) => {
+    (item: TFileItem) => {
       return {
         id: "option_open-pdf",
         key: "open-pdf",
         label: t("Common:Open"),
         icon: EyeReactSvgUrl,
-        onClick: () => openFile(item.id, false),
+        onClick: () => openFile(item, false),
         disabled: false,
       };
     },
@@ -161,7 +161,7 @@ export default function useContextMenuModel({
           }
 
           // TODO: check convert
-          openFile(item.id);
+          openFile(item);
         },
         disabled: false,
       };
@@ -176,7 +176,7 @@ export default function useContextMenuModel({
         key: "fill-form",
         label: t("Common:FillFormButton"),
         icon: FormFillRectSvgUrl,
-        onClick: () => openFile(item.id, false, false, false),
+        onClick: () => openFile(item, false, false, false),
         disabled: false,
       };
     },
@@ -244,7 +244,7 @@ export default function useContextMenuModel({
         model.push(getViewItem(item!));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.openPDF))
-        model.push(getOpenPDFItem(item!));
+        model.push(getOpenPDFItem(item as TFileItem));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.fillForm))
         model.push(getFillFormItem(item as TFileItem));
@@ -253,7 +253,7 @@ export default function useContextMenuModel({
         model.push(getEditItem(item as TFileItem));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.preview))
-        model.push(getPreviewItem(item!));
+        model.push(getPreviewItem(item as TFileItem));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.copyLink))
         model.push(getLinkForRoomMembersItem(item!));

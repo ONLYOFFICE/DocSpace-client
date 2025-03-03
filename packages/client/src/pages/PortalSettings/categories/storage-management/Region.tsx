@@ -47,7 +47,7 @@ const Region = ({ region }: RegionProps) => {
   const US = "USA (Oregon)";
   const DEU = "Germany (Frankfurt am Main)";
 
-  if (!region) return <></>;
+  if (!region) return null;
 
   return (
     <>

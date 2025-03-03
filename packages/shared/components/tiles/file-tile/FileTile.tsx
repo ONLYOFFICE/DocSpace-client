@@ -88,7 +88,6 @@ const FileTile = ({
   const [errorLoadSrc, setErrorLoadSrc] = useState(false);
 
   const cm = useRef<ContextMenuRefType>(null);
-  const tile = useRef(null);
 
   const renderContext =
     hasOwnProperty(item, "contextOptions") &&

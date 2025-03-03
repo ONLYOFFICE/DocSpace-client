@@ -39,6 +39,7 @@ import type {
   FillPDFDialogProps,
   InjectFillPDFDialogProps,
 } from "./FillPDFDialog.types";
+import { RoomsType } from "@docspace/shared/enums";
 
 const FillPDFDialog = inject<TStore>(
   ({ dialogsStore, contextOptionsStore }) => {
@@ -68,7 +69,7 @@ const FillPDFDialog = inject<TStore>(
       };
 
       const openSelector = () => {
-        setShareCollectSelector(true, data);
+        setShareCollectSelector(true, data, RoomsType.VirtualDataRoom);
         onClose();
       };
 
@@ -93,6 +94,12 @@ const FillPDFDialog = inject<TStore>(
               <Card
                 title={t("FillPDFDialog:ShareCollectTitle")}
                 description={t("FillPDFDialog:ShareCollectDescription")}
+                buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
+                onClick={openSelector}
+              />
+              <Card
+                title={t("FillPDFDialog:ShareCollectVDRTitle")}
+                description={t("FillPDFDialog:ShareCollectVDRDescription")}
                 buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
                 onClick={openSelector}
               />

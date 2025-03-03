@@ -29,6 +29,7 @@ import {
   FilesSelectorFilterTypes,
   ShareAccessRights,
   Events,
+  RoomsType,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -212,6 +213,7 @@ class DialogsStore {
   shareCollectSelector = {
     visible: false,
     file: null,
+    createDefineRoomType: RoomsType.FormRoom,
   };
 
   warningQuotaDialogVisible = false;
@@ -822,12 +824,18 @@ class DialogsStore {
   /**
    * @param {boolean} visible
    * @param {import("@docspace/shared/api/files/types").TFile} [file = null]
+   * @param {import("@docspace/shared/enums").RoomsType} [createDefineRoomType = RoomsType.FormRoom]
    * @returns {void}
    */
-  setShareCollectSelector = (visible, file = null) => {
+  setShareCollectSelector = (
+    visible,
+    file = null,
+    createDefineRoomType = RoomsType.FormRoom,
+  ) => {
     this.shareCollectSelector = {
       visible,
       file,
+      createDefineRoomType,
     };
   };
 

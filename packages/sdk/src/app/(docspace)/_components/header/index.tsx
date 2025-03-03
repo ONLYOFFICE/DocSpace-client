@@ -34,20 +34,21 @@ import Navigation, {
   TNavigationItem,
 } from "@docspace/shared/components/navigation";
 import { TableGroupMenu } from "@docspace/shared/components/table";
-import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 import { useTheme } from "@docspace/shared/hooks/useTheme";
 
 import { useNavigationStore } from "../../_store/NavigationStore";
 import { useFilesSelectionStore } from "../../_store/FilesSelectionStore";
+import { useFilesListStore } from "../../_store/FilesListStore";
+import { useSettingsStore } from "../../_store/SettingsStore";
 
 import useFolderActions from "../../_hooks/useFolderActions";
 import useContextMenuModel from "../../_hooks/useContextMenuModel";
 import useHeaderMenu from "../../_hooks/useHeaderMenu";
 
 import type { HeaderProps } from "./Header.types";
-import { useFilesListStore } from "../../_store/FilesListStore";
 
 export type { HeaderProps };
 
@@ -55,6 +56,7 @@ const Header = ({ current, pathParts, isEmptyList }: HeaderProps) => {
   const navigationStore = useNavigationStore();
   const filesSelectionStore = useFilesSelectionStore();
   const filesListStore = useFilesListStore();
+  const { currentDeviceType } = useSettingsStore();
   const { getHeaderContextMenuModel } = useContextMenuModel({});
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu({});
   const { isBase: isBaseTheme } = useTheme();
@@ -159,7 +161,7 @@ const Header = ({ current, pathParts, isEmptyList }: HeaderProps) => {
             withLogo={logo}
             burgerLogo={burgerLogo}
             withMenu={!isRoomsFolder}
-            currentDeviceType={DeviceType.desktop}
+            currentDeviceType={currentDeviceType}
             titleIcon=""
             titleIconTooltip=""
             showNavigationButton={false}

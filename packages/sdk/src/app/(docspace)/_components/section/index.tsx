@@ -79,6 +79,7 @@ export const SectionWrapper = observer(
         settingsStudio={false}
         viewAs="row"
         isEmptyPage={isEmptyList}
+        currentDeviceType={settingsStore.currentDeviceType}
       >
         <Section.SectionHeader>
           {showHeader ? sectionHeaderContent : null}

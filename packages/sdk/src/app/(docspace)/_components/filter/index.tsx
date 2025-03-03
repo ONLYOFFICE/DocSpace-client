@@ -30,8 +30,6 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
 import FilterComponent from "@docspace/shared/components/filter";
-import { TSortDataItem } from "@docspace/shared/components/filter/Filter.types";
-import { DeviceType } from "@docspace/shared/enums";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
 import type { FilterProps } from "./Filter.types";
@@ -42,7 +40,8 @@ export type { FilterProps };
 export const Filter = observer(
   ({ filesFilter, shareKey, filesSettings }: FilterProps) => {
     const { t } = useTranslation(["Common"]);
-    const { filesViewAs, setFilesViewAs } = useSettingsStore();
+    const { filesViewAs, setFilesViewAs, currentDeviceType } =
+      useSettingsStore();
 
     const {
       getFilterData,
@@ -97,7 +96,7 @@ export const Filter = observer(
         getFilterData={getFilterData}
         userId=""
         isRecentFolder
-        currentDeviceType={DeviceType.desktop}
+        currentDeviceType={currentDeviceType}
         filterHeader={t("Common:AdvancedFilter")}
         placeholder={t("Common:Search")}
         view={t("Common:View")}

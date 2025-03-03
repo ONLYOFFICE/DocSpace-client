@@ -25,61 +25,26 @@
  * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
+
 "use client";
 
-import { observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
-import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
-import { Portal } from "@docspace/shared/components/portal";
-import { TFilesSettings } from "@docspace/shared/api/files/types";
+import { getDeviceTypeByWidth } from "@docspace/shared/utils";
 
-import { useMediaViewer } from "@/app/(docspace)/_components/FilesMediaViewer/hooks/useMediaViewer";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
-type FilesMediaViewerProps = {
-  filesSettings: TFilesSettings;
+export const DeviceTypeObserver = () => {
+  const { setCurrentDeviceType } = useSettingsStore();
+
+  useEffect(() => {
+    const onResize = () => {
+      setCurrentDeviceType(getDeviceTypeByWidth(window.innerWidth));
+    };
+
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [setCurrentDeviceType]);
+
+  return null;
 };
-
-function FilesMediaViewer({ filesSettings }: FilesMediaViewerProps) {
-  const { t } = useTranslation("Common");
-  const {
-    visible,
-    mediaId,
-    files,
-    onClose,
-    extsImagePreviewed,
-    playlist,
-    playlistPos,
-    onNextClick,
-    onPrevClick,
-    autoPlay,
-    getIcon,
-  } = useMediaViewer({ filesSettings });
-  const { currentDeviceType } = useSettingsStore();
-
-  return visible && mediaId ? (
-    <Portal
-      visible
-      element={
-        <MediaViewer
-          autoPlay={autoPlay}
-          t={t}
-          files={files}
-          visible={visible}
-          playlist={playlist}
-          playlistPos={playlistPos}
-          extsImagePreviewed={extsImagePreviewed}
-          currentFileId={mediaId}
-          getIcon={getIcon}
-          onClose={onClose}
-          currentDeviceType={currentDeviceType}
-          nextMedia={onNextClick}
-          prevMedia={onPrevClick}
-        />
-      }
-    />
-  ) : null;
-}
-
-export default observer(FilesMediaViewer);

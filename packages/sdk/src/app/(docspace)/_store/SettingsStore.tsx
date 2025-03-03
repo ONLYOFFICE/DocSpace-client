@@ -31,6 +31,8 @@ import { makeAutoObservable } from "mobx";
 
 import { TViewAs } from "@docspace/shared/types";
 import { setCookie } from "@docspace/shared/utils/cookie";
+import { DeviceType } from "@docspace/shared/enums";
+import { getDeviceTypeByWidth } from "@docspace/shared/utils";
 
 type TSettingsStoreInitData = {
   viewAs: TViewAs;
@@ -45,9 +47,17 @@ class SettingsStore {
 
   shareKey: string = "";
 
+  // NOTE: `currentDeviceType` is correctly set only on the client (depends on `window.innerWidth`).
+  // Use CSS media queries for SSR components.
+  currentDeviceType: DeviceType = DeviceType.desktop;
+
   constructor(initData?: TSettingsStoreInitData) {
     if (initData?.viewAs) {
       this.filesViewAs = initData.viewAs;
+    }
+
+    if (typeof window !== "undefined") {
+      this.setCurrentDeviceType(getDeviceTypeByWidth(window.innerWidth));
     }
 
     makeAutoObservable(this);
@@ -69,6 +79,10 @@ class SettingsStore {
 
   setItemsCount = (itemsCount: number) => {
     this.itemsCount = itemsCount;
+  };
+
+  setCurrentDeviceType = (value: DeviceType) => {
+    this.currentDeviceType = value;
   };
 }
 

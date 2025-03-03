@@ -76,7 +76,7 @@ const GenerateDeveloperTokenDialog = ({
     if (!token || !isValidToken || !client || requestRunning) return;
 
     try {
-      const { clientId, clientSecret } = client;
+      const { clientId } = client;
 
       setRequestRunning(true);
 

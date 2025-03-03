@@ -82,6 +82,7 @@ export type ContextMenuType = {
   withToggle?: boolean;
   checked?: boolean;
   badgeLabel?: string;
+  isPaidBadge?: boolean;
 };
 
 export type SeparatorType = {

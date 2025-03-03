@@ -392,15 +392,22 @@ const SubMenu = (props: SubMenuProps) => {
         {item.isOutsideLink ? (
           <OutsdideIcon className={subMenuIconClassName} />
         ) : null}
-        {item.badgeLabel ? (
+        {item.badgeLabel || item.isPaidBadge ? (
           <Badge
             label={item.badgeLabel}
             className={`${subMenuIconClassName} p-submenu-badge`}
-            backgroundColor={globalColors.lightBlueMain}
+            backgroundColor={
+              item.isPaidBadge
+                ? theme.isBase
+                  ? globalColors.favoritesStatus
+                  : globalColors.favoriteStatusDark
+                : globalColors.lightBlueMain
+            }
             fontSize="9px"
             fontWeight={700}
             borderRadius="50px"
             noHover
+            isPaidBadge={item.isPaidBadge}
             isHovered={false}
           />
         ) : null}

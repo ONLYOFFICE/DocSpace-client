@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import React, { useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
@@ -63,6 +63,27 @@ const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   padding: 6px;
   border-radius: 4px;
   box-shadow: 0px 2px 4px ${globalColors.badgeShadow};
+`;
+
+const StyledWrapperNewBadge = styled.div.attrs(injectDefaultTheme)`
+  position: absolute;
+
+  top: -6px;
+  padding: 0;
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          left: -6px;
+        `
+      : css`
+          right: -6px;
+        `}
+
+  background: ${(props) => props.theme.filesBadges.backgroundColor};
+
+  border-radius: 11px;
+  border: 1px solid ${(props) => props.theme.filesBadges.backgroundColor};
 `;
 
 const BadgeWrapper = ({ onClick, isTile, children: badge }) => {
@@ -333,7 +354,7 @@ const Badges = ({
         />
       ) : null}
 
-      {isRoom && mute ? (
+      {isRoom && mute && !isTile ? (
         <ColorTheme
           themeId={ThemeId.IconButtonMute}
           onClick={onUnmuteClick}
@@ -363,7 +384,7 @@ const Badges = ({
           title={t("Files:CreateRoom")}
         />
       ) : null}
-      {showNew ? (
+      {showNew && ((isTile && !isRoom) || !isTile) ? (
         <NewFilesBadge
           className="tablet-badge"
           newFilesCount={newItems}
@@ -371,6 +392,17 @@ const Badges = ({
           mute={mute}
           isRoom={isRoom}
         />
+      ) : null}
+      {showNew && isTile && isRoom ? (
+        <StyledWrapperNewBadge>
+          <NewFilesBadge
+            className="tablet-badge"
+            newFilesCount={newItems}
+            folderId={id}
+            mute={mute}
+            isRoom={isRoom}
+          />
+        </StyledWrapperNewBadge>
       ) : null}
     </div>
   );

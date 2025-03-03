@@ -47,7 +47,7 @@ class UploadPanelComponent extends React.Component {
     const { setNeedErrorChecking } = this.props;
 
     document.addEventListener("keyup", this.onKeyPress);
-    setNeedErrorChecking(true);
+    setNeedErrorChecking(true, OPERATIONS_NAME.upload);
   }
 
   componentWillUnmount() {
@@ -59,7 +59,7 @@ class UploadPanelComponent extends React.Component {
       this.props;
 
     setUploadPanelVisible(!uploadPanelVisible);
-    setNeedErrorChecking(false);
+    setNeedErrorChecking(false, OPERATIONS_NAME.upload);
   };
 
   onKeyPress = (event) => {
@@ -96,10 +96,10 @@ class UploadPanelComponent extends React.Component {
     const visible = uploadPanelVisible;
 
     const title = isUploading
-      ? t("Uploads")
+      ? t("Files:Uploading")
       : isUploadingAndConversion
-        ? t("UploadAndConvert")
-        : t("Files:Convert");
+        ? t("UploadingAndConversion")
+        : t("Files:Conversion");
 
     const url =
       uploaded && converted ? ClearReactSvgUrl : ButtonCancelReactSvgUrl;

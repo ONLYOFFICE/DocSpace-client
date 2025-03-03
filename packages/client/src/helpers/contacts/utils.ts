@@ -42,7 +42,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import type UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import config from "PACKAGE_FILE";
 
-import { showEmailActivationToast } from "../people-helpers";
+import {
+  showEmailActivationToast,
+  showSuccessCopyContantLink,
+} from "../people-helpers";
 
 import {
   CONTACTS_ROUTE,
@@ -248,6 +251,10 @@ export const onInviteMultipleAgain = (t: TTranslation) => {
       toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
     )
     .catch((err) => toastr.error(err));
+};
+
+export const shareGuest = (t: TTranslation) => {
+  return showSuccessCopyContantLink(t);
 };
 
 export const getContactsView = (location?: Location): TContactsTab => {

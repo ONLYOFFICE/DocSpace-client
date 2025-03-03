@@ -518,8 +518,5 @@ export async function getOauthJWTToken() {
 
   const jwtToken = await res.json();
 
-  console.log("=+=+");
-  console.log(jwtToken.response);
-
   return jwtToken.response as string;
 }

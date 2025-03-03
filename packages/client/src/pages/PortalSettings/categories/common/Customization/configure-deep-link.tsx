@@ -36,7 +36,8 @@ import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { DeviceType, DeepLinkType } from "@docspace/shared/enums";
 
-import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 
 interface Props {
   isMobileView: boolean;
@@ -123,11 +124,11 @@ const ConfigureDeepLinkComponent = (props: Props) => {
 
   return (
     <StyledWrapper>
-      {!isMobileView && (
+      {!isMobileView ? (
         <Text fontSize="16px" fontWeight={700}>
           {t("ConfigureDeepLink")}
         </Text>
-      )}
+      ) : null}
       <Text>{t("ConfigureDeepLinkDescription")}</Text>
       <RadioButtonGroup
         className="radio-button-group"

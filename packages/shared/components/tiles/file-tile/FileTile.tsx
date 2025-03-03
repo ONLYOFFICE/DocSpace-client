@@ -268,7 +268,7 @@ const FileTile = ({
   return (
     <div
       {...rest}
-      ref={tile}
+      ref={forwardRef}
       className={fileTileClassNames}
       onClick={onFileClick}
     >

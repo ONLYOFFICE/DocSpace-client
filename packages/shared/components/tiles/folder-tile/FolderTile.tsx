@@ -193,7 +193,11 @@ export const FolderTile = ({
   });
 
   return (
-    <div className={folderTileClassNames} onClick={onFolderClick}>
+    <div
+      className={folderTileClassNames}
+      onClick={onFolderClick}
+      ref={forwardRef}
+    >
       {element && !isEdit ? (
         !inProgress ? (
           <div className={iconContainerClassNames}>

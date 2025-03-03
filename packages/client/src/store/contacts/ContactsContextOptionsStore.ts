@@ -64,6 +64,7 @@ import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url
 import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
+import PersonShareReactSvgUrl from "PUBLIC_DIR/images/person.share.react.svg?url";
 import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -73,6 +74,7 @@ import {
   onDeletePersonalDataClick,
   onInviteAgainClick,
   onInviteMultipleAgain,
+  shareGuest,
 } from "SRC_DIR/helpers/contacts";
 
 import InfoPanelStore from "../InfoPanelStore";
@@ -157,6 +159,8 @@ class ContactsConextOptionsStore {
         case "separator-1":
           return { key: option, isSeparator: true };
         case "separator-2":
+          return { key: option, isSeparator: true };
+        case "separator-3":
           return { key: option, isSeparator: true };
 
         case "profile":
@@ -275,6 +279,14 @@ class ContactsConextOptionsStore {
             label: t("PeopleTranslations:ResetAuth"),
             onClick: () => this.onResetAuth(item),
             disabled: this.tfaStore.tfaSettings !== "app",
+          };
+        case "share-guest":
+          return {
+            id: "option_share-guest",
+            key: option,
+            icon: PersonShareReactSvgUrl,
+            label: t("PeopleTranslations:ShareGuest"),
+            onClick: () => shareGuest(t),
           };
         case "change-type":
           return {

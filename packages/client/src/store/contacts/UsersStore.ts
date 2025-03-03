@@ -533,7 +533,11 @@ class UsersStore {
             options.push("change-email");
             options.push("change-password");
 
-            if (isGuest) options.push("change-type");
+            if (isGuest) {
+              options.push("share-guest");
+              options.push("separator-3");
+              options.push("change-type");
+            }
           }
 
           options.push("reset-auth");
@@ -544,6 +548,7 @@ class UsersStore {
           }
         } else if (isRoomAdmin && userRole === EmployeeType.Guest) {
           options.push("room-list");
+          options.push("share-guest");
           options.push("separator-1");
           options.push("change-type");
           options.push("separator-2");

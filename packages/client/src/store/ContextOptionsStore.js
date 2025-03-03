@@ -2015,7 +2015,10 @@ class ContextOptionsStore {
         label: t("FormFillingTipsDialog:WelcomeStartTutorial"),
         icon: HelpCenterReactSvgUrl,
         onClick: () => this.onEnableFormFillingGuid(t, item.roomType),
-        disabled: !isFormRoom || isMobileUtils(),
+        disabled:
+          !isFormRoom ||
+          isMobileUtils() ||
+          item.id !== this.selectedFolderStore.id,
       },
       {
         id: "option_leave-room",

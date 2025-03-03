@@ -300,14 +300,6 @@
     }
   }
 
-  &.isTile {
-    :global {
-      .section-wrapper-content {
-        padding-inline-start: 20px;
-      }
-    }
-  }
-
   &.isSettingsView,
   &.isProfileView {
     :global {

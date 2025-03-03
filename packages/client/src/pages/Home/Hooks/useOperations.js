@@ -27,25 +27,21 @@
 import React from "react";
 
 const useOperations = ({
-  setUploadPanelVisible,
-  disableUploadPanelOpen,
   clearUploadData,
   clearUploadedFiles,
   primaryOperationsArray,
+  clearConversionData,
 }) => {
+  const prevArrayLength = React.useRef(null);
+
   React.useEffect(() => {
-    if (primaryOperationsArray?.length === 0) {
+    if (primaryOperationsArray.length === 0 && prevArrayLength.current > 0) {
       clearUploadData();
       clearUploadedFiles();
+      clearConversionData();
     }
+    prevArrayLength.current = primaryOperationsArray.length;
   }, [primaryOperationsArray.length]);
-
-  const showUploadPanel = () => {
-    if (disableUploadPanelOpen) return;
-    setUploadPanelVisible(true);
-  };
-
-  return { showUploadPanel };
 };
 
 export default useOperations;

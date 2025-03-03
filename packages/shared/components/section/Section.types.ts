@@ -111,8 +111,8 @@ export interface Operation {
   completed: boolean;
   percent?: number;
   withoutStatus?: boolean;
-  disableOpenPanel?: boolean;
-  isSingleConversion?: boolean;
+  showPanel?: (open: boolean) => void;
+  withoutProgress?: boolean;
   items?: Array<{
     operationId: string;
     percent: number;

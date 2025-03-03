@@ -66,20 +66,26 @@ const ChangeUserTypeDialog = ({
   const { t } = useTranslation(["ChangeUserTypeDialog", "People", "Common"]);
 
   const isSingleUser = userNames.length === 1;
-  const translationKey = getChangeTypeKey(toType, isSingleUser);
+  const translationValues = {
+    userName: isSingleUser ? userNames[0] : undefined,
+    membersSection: t("Common:Members"),
+    documentsSection: t("Common:Documents"),
+    productName: t("Common:ProductName"),
+    secondType,
+  };
+  const translationKey = getChangeTypeKey(
+    toType,
+    isSingleUser,
+    t,
+    translationValues,
+  );
 
   const guestBody = (
     <Trans
       i18nKey={translationKey}
       ns="ChangeUserTypeDialog"
       t={t}
-      values={{
-        userName: isSingleUser ? userNames[0] : undefined,
-        membersSection: t("Common:Members"),
-        documentsSection: t("Common:Documents"),
-        productName: t("Common:ProductName"),
-        secondType,
-      }}
+      values={translationValues}
     />
   );
 

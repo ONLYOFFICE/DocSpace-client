@@ -685,3 +685,28 @@ export async function getColorTheme() {
 
   return colorTheme.response as TGetColorTheme;
 }
+
+export async function getDeepLinkSettings() {
+  log.debug(`Start GET /settings/deeplink`);
+
+  const [getSettings] = createRequest(
+    [`/settings/deeplink`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getSettings);
+
+  if (!res.ok) {
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: res, url: hostname }, "GET /settings/deeplink failed");
+    return;
+  }
+
+  const deepLinkSettings = await res.json();
+
+  return deepLinkSettings.response;
+}

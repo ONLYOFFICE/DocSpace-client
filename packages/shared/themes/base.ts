@@ -2944,7 +2944,7 @@ export const getBaseTheme = () => {
           background: grayLight,
         },
         storageManagement: {
-          grayBackgroundText: grayText,
+          grayBackgroundText: black,
           descriptionColor: lightGrayDark,
           dividerColor: grayLightMid,
         },

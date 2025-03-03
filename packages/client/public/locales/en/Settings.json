@@ -256,6 +256,7 @@
   "StatisticDescription": "Here, you can view the detailed storage usage data in this {{productName}}.",
   "Statistics": "Statistics",
   "StorageManagement": "Storage management",
+  "StorageManagementRegion": "Your data is stored on a secure server that complies with security standards.",
   "StoragePeriod": "Storage period",
   "StorageQuotaWarningDescription": "Storage quota is enabled for this {{productName}}: {{quotaLimits}}. Limitations can occur during data import.",
   "StudioTimeLanguageSettings": "Language and Time Zone Settings",

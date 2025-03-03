@@ -93,9 +93,7 @@ const StyledDiscSpaceUsedComponent = styled.div`
   .disk-space_content {
     display: grid;
     grid-template-columns: 1fr 16px;
-    background: ${(props) =>
-      props.theme.client.settings.payment.backgroundColor};
-    padding: 12px 16px;
+
     border-radius: 6px;
 
     .disk-space_size-info {
@@ -230,12 +228,12 @@ const StyledSimpleFilesRow = styled(Row)`
 const StyledMainInfo = styled.div`
   display: flex;
   flex-wrap: wrap;
-  background: ${(props) => props.theme.client.settings.payment.backgroundColor};
+
   border-radius: 6px;
 
   column-gap: 24px;
   row-gap: 12px;
-  padding: 12px;
+  padding-right: 12px;
   p {
     color: ${(props) =>
       props.theme.client.settings.storageManagement.grayBackgroundText};

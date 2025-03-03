@@ -65,7 +65,7 @@ const Region = ({ region }: RegionProps) => {
           fontSize="13px"
           fontWeight={400}
           lineHeight="20px"
-          className={styles.regionСountry}
+          className={styles.regionCountry}
         >
           {region === "US" ? US : region === "DEU" ? DEU : null}
         </Text>

@@ -133,11 +133,11 @@ const QuotaForm = ({
   };
 
   const onChangeCheckbox = () => {
-    const changeСheckbox = !isChecked;
+    const changeCheckbox = !isChecked;
 
-    setIsChecked(changeСheckbox);
+    setIsChecked(changeCheckbox);
 
-    const sizeValue = changeСheckbox ? -1 : getConvertedSize(size, power);
+    const sizeValue = changeCheckbox ? -1 : getConvertedSize(size, power);
 
     onSetQuotaBytesSize && onSetQuotaBytesSize(sizeValue);
   };

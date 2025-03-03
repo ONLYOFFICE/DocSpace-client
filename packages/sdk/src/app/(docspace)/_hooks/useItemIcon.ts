@@ -10,7 +10,7 @@ import {
   iconSize96,
 } from "@docspace/shared/utils/image-helpers";
 
-type TItemIconSizes = 24 | 32 | 64 | 96;
+export type TItemIconSizes = 24 | 32 | 64 | 96;
 
 type UseItemIconProps = {
   filesSettings: TFilesSettings;

@@ -91,7 +91,7 @@ export default async function DocspaceLayout({
           filesFilter={filter!}
         />
         <SelectionArea />
-        <FilesMediaViewer />
+        <FilesMediaViewer filesSettings={filesSettings as TFilesSettings} />
       </Layout>
     </main>
   );

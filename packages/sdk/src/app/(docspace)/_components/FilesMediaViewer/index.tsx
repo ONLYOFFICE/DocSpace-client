@@ -33,10 +33,15 @@ import { useTranslation } from "react-i18next";
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import { Portal } from "@docspace/shared/components/portal";
 import { DeviceType } from "@docspace/shared/enums";
+import { TFilesSettings } from "@docspace/shared/api/files/types";
 
-import { useMediaViewer } from "@/app/(docspace)/_components/FilesMediaViewer/hooks/useMediaViewerData";
+import { useMediaViewer } from "@/app/(docspace)/_components/FilesMediaViewer/hooks/useMediaViewer";
 
-function FilesMediaViewer() {
+type FilesMediaViewerProps = {
+  filesSettings: TFilesSettings;
+};
+
+function FilesMediaViewer({ filesSettings }: FilesMediaViewerProps) {
   const { t } = useTranslation("Common");
   const {
     visible,
@@ -49,7 +54,8 @@ function FilesMediaViewer() {
     onNextClick,
     onPrevClick,
     autoPlay,
-  } = useMediaViewer();
+    getIcon,
+  } = useMediaViewer({ filesSettings });
 
   return visible && mediaId ? (
     <Portal
@@ -64,7 +70,7 @@ function FilesMediaViewer() {
           playlistPos={playlistPos}
           extsImagePreviewed={extsImagePreviewed}
           currentFileId={mediaId}
-          getIcon={() => ""}
+          getIcon={getIcon}
           onClose={onClose}
           currentDeviceType={DeviceType.desktop}
           nextMedia={onNextClick}

@@ -31,11 +31,18 @@ import { useCallback, useMemo } from "react";
 import { isVideo } from "@docspace/shared/components/media-viewer/MediaViewer.utils";
 import type { PlaylistType } from "@docspace/shared/components/media-viewer/MediaViewer.types";
 import { thumbnailStatuses } from "@docspace/shared/constants";
+import type { TFilesSettings } from "@docspace/shared/api/files/types";
 
 import { useMediaViewerStore } from "@/app/(docspace)/_store/MediaViewerStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
-import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import type { TFileItem } from "@/app/(docspace)/_hooks/useItemList";
+import useItemIcon, {
+  type TItemIconSizes,
+} from "@/app/(docspace)/_hooks/useItemIcon";
+
+type UseMediaViewerProps = {
+  filesSettings: TFilesSettings;
+};
 
 const getPlayList = (files: TFileItem[]) => {
   const filesList = [...files];
@@ -78,7 +85,7 @@ const getPlayList = (files: TFileItem[]) => {
   return playlist;
 };
 
-export function useMediaViewer() {
+export function useMediaViewer({ filesSettings }: UseMediaViewerProps) {
   const {
     visible,
     setMediaViewerData,
@@ -88,7 +95,7 @@ export function useMediaViewer() {
     setAutoPlay,
   } = useMediaViewerStore();
   const { items } = useFilesListStore();
-  const { filesSettings } = useFilesSettingsStore();
+  const { getIcon: getIconFromHook } = useItemIcon({ filesSettings });
 
   const onClose = useCallback(() => {
     setMediaViewerData({ id: null, visible: false });
@@ -126,6 +133,13 @@ export function useMediaViewer() {
     setMediaId(fileId);
   }, [playlist, playlistPos, setAutoPlay, setMediaId]);
 
+  const getIcon = useCallback(
+    (size: number, ext: string) => {
+      return getIconFromHook(ext, size as TItemIconSizes);
+    },
+    [getIconFromHook],
+  );
+
   return {
     onClose,
     visible,
@@ -137,5 +151,6 @@ export function useMediaViewer() {
     onNextClick,
     onPrevClick,
     autoPlay,
+    getIcon,
   };
 }

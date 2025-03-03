@@ -24,20 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { FileFillingFormStatus, RoleStatus } from "../../enums";
-import type { TUser } from "../../api/people/types";
-import type { RoleHistory } from "./sub-components/role-histories/RoleHistories.types";
-
-export type ProcessDetails = {
-  id: string;
-  user: TUser;
-  processStatus: RoleStatus;
-  roleName: string;
-  histories: RoleHistory[];
-};
+import type { FileFillingFormStatus } from "../../enums";
+import type { TFileFillingFormStatus } from "../../api/files/types";
 
 export interface FillingRoleProcessProps {
-  processDetails: ProcessDetails[];
+  processDetails: TFileFillingFormStatus[];
   fileStatus: FileFillingFormStatus;
   currentUserId: string;
 }

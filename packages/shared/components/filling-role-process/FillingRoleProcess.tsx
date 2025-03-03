@@ -37,16 +37,20 @@ const FillingRoleProcess = ({
 }: FillingRoleProcessProps) => {
   return (
     <section className={styles.fillingRoleProcess}>
-      {processDetails.map((detail) => (
-        <RoleStep
-          key={detail.id}
-          user={detail.user}
-          currentUserId={currentUserId}
-          processStatus={detail.processStatus}
-          roleName={detail.roleName}
-          histories={detail.histories}
-        />
-      ))}
+      {processDetails.map((detail) => {
+        const histories = detail.history ? Object.entries(detail.history) : [];
+
+        return (
+          <RoleStep
+            key={detail.sequence}
+            user={detail.user}
+            currentUserId={currentUserId}
+            processStatus={detail.roleStatus}
+            roleName={detail.roleName}
+            histories={histories}
+          />
+        );
+      })}
       <StatusIndicator status={fileStatus} />
     </section>
   );

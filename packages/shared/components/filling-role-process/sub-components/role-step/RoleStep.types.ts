@@ -25,13 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { TUser } from "../../../../api/people/types";
-import type { RoleStatus } from "../../../../enums";
-import type { RoleHistory } from "../role-histories/RoleHistories.types";
+import type { FileFillingFormStatus } from "../../../../enums";
 
 export interface RoleStepProps {
   user: TUser;
-  processStatus: RoleStatus;
+  processStatus: FileFillingFormStatus;
   roleName: string;
-  histories: RoleHistory[];
+  histories: [string, string][];
   currentUserId: string;
 }

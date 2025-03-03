@@ -27,7 +27,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { manageformfilling } from "../../api/files";
+import { manageFormFilling } from "../../api/files";
 import { Button, ButtonSize } from "../../components/button";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import { FormFillingManageAction } from "../../enums";
@@ -45,7 +45,7 @@ const StopFillingDialog = ({
   const onSubmit = async () => {
     if (!formId) return;
 
-    await manageformfilling(formId, FormFillingManageAction.Stop).catch(
+    await manageFormFilling(formId, FormFillingManageAction.Stop).catch(
       (error) => {
         toastr.error(error);
         console.error(error);

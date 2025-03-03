@@ -33,4 +33,14 @@ export type FillingStatusPanelProps = {
 
   user: TUser;
   file: TFile;
+
+  onFill: (item: TFile) => void;
+  onStopFilling: (item: TFile) => void;
+};
+
+export type FillingStatusPanelBodyProps = {
+  file: TFile;
+  user: TUser;
+
+  getFormFillingStatus: () => Promise<void>;
 };

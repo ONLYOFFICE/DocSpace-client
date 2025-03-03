@@ -27,6 +27,8 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
+import { useCallback, useEffect, useState } from "react";
+import { match } from "ts-pattern";
 
 import PDFIcon from "PUBLIC_DIR/images/icons/24/pdf.svg";
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
@@ -34,15 +36,18 @@ import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import { getFillingStatusTitle, getTitleWithoutExtension } from "../../utils";
 import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { FileFillingFormStatus } from "../../enums";
 
 import { Text } from "../../components/text";
+import { toastr } from "../../components/toast";
 import PublicRoomBar from "../../components/public-room-bar";
 import { Heading, HeadingLevel } from "../../components/heading";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import { FillingRoleProcess } from "../../components/filling-role-process";
-import type { ProcessDetails } from "../../components/filling-role-process/FillingRoleProcess.types";
-import { RoleStatus } from "../../enums";
 import { Button, ButtonSize } from "../../components/button";
+import { getFormFillingStatus as getFormFillingStatusApi } from "../../api/files";
+import type { TFileFillingFormStatus } from "../../api/files/types";
+import { createLoader } from "../../utils/createLoader";
 
 import styles from "./FillingStatusPanel.module.scss";
 import type { FillingStatusPanelProps } from "./FillingStatusPanel.types";
@@ -50,6 +55,8 @@ import type { FillingStatusPanelProps } from "./FillingStatusPanel.types";
 export const FillingStatusPanel = ({
   visible,
   onClose,
+  onFill,
+  onStopFilling,
   file,
   user,
 }: FillingStatusPanelProps) => {
@@ -58,6 +65,11 @@ export const FillingStatusPanel = ({
     `fillingStatusBarPanel-${user.id}`,
     true,
   );
+  const [formFillingStatus, setFormFillingStatus] = useState<
+    TFileFillingFormStatus[]
+  >([]);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const fileName = getTitleWithoutExtension(file, false);
   const fillingStatus = file.formFillingStatus!;
@@ -65,47 +77,31 @@ export const FillingStatusPanel = ({
   const color = FILLING_FORM_STATUS_COLORS[fillingStatus];
   const fileStatusText = getFillingStatusTitle(fillingStatus, t);
 
-  const processDetails: ProcessDetails[] = [
-    {
-      id: "1",
-      user: { ...user, id: "1", userName: "User #1" },
-      processStatus: RoleStatus.Filled,
-      roleName: "Role #1",
-      histories: [
-        {
-          id: "1",
-          action: "Opened the form to fill out",
-          date: new Date().toISOString(),
-        },
-        {
-          id: "2",
-          action: "Submitted their part. The form was sent to the next role.",
-          date: new Date().toISOString(),
-        },
-      ],
-    },
-    {
-      id: "2",
-      user,
-      processStatus: RoleStatus.YourTurn,
-      roleName: "Role #2",
-      histories: [],
-    },
-    {
-      id: "3",
-      user: { ...user, id: "3", userName: "User #3" },
-      processStatus: RoleStatus.Waiting,
-      roleName: "Role #3",
-      histories: [],
-    },
-  ];
+  const getFormFillingStatus = useCallback(async () => {
+    const { startLoader, endLoader } = createLoader();
+
+    startLoader(() => setIsLoading(true));
+
+    const res = await getFormFillingStatusApi(file.id).catch((err) => {
+      console.log(err);
+      toastr.error(err);
+    });
+    setFormFillingStatus(res ?? []);
+
+    endLoader(() => setIsLoading(false));
+  }, [file.id]);
+
+  useEffect(() => {
+    getFormFillingStatus();
+  }, [getFormFillingStatus]);
 
   return (
     <ModalDialog
+      withBodyScroll
       visible={visible}
       onClose={onClose}
+      isLoading={isLoading}
       displayType={ModalDialogType.aside}
-      withBodyScroll
     >
       <ModalDialog.Header>{t("Common:FillingStatus")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -134,28 +130,51 @@ export const FillingStatusPanel = ({
           </Heading>
           <FillingRoleProcess
             fileStatus={fillingStatus}
-            processDetails={processDetails}
+            processDetails={formFillingStatus}
             currentUserId={user.id}
           />
         </div>
       </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          id="shared_move-to-archived-modal_submit"
-          key="OkButton"
-          label={t("Common:OKButton")}
-          size={ButtonSize.normal}
-          primary
-          scale
-        />
-        <Button
-          id="shared_move-to-archived-modal_cancel"
-          key="CancelButton"
-          label={t("Common:CancelButton")}
-          size={ButtonSize.normal}
-          scale
-        />
-      </ModalDialog.Footer>
+
+      {match(fillingStatus)
+        .with(FileFillingFormStatus.YourTurn, () => (
+          <ModalDialog.Footer>
+            <Button
+              scale
+              primary
+              onClick={() => onFill(file)}
+              id="panel_button_fill"
+              key="panel_button_fill"
+              label={t("Common:FillFormButton")}
+              size={ButtonSize.normal}
+            />
+            {file.security.StopFilling ? (
+              <Button
+                id="panel_button_stop"
+                key="panel_button_stop"
+                onClick={() => onStopFilling(file)}
+                label={t("Common:StopFilling")}
+                size={ButtonSize.normal}
+                scale
+              />
+            ) : null}
+          </ModalDialog.Footer>
+        ))
+        .with(FileFillingFormStatus.Completed, () => null)
+        .otherwise(() => {
+          return file.security.StopFilling ? (
+            <ModalDialog.Footer>
+              <Button
+                id="panel_button_stop"
+                key="panel_button_stop"
+                label={t("Common:CancelButton")}
+                size={ButtonSize.normal}
+                scale
+                onClick={() => onStopFilling(file)}
+              />
+            </ModalDialog.Footer>
+          ) : null;
+        })}
     </ModalDialog>
   );
 };

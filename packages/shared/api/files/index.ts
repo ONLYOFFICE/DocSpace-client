@@ -70,6 +70,7 @@ import {
   TConnectingStorages,
   TIndexItems,
   TFormRoleMappingRequest,
+  TFileFillingFormStatus,
 } from "./types";
 
 export async function openEdit(
@@ -1586,7 +1587,7 @@ export async function formRoleMapping(data: TFormRoleMappingRequest) {
   });
 }
 
-export async function manageformfilling(
+export async function manageFormFilling(
   formId: string | number,
   action: FormFillingManageAction,
 ) {
@@ -1598,4 +1599,15 @@ export async function manageformfilling(
       action,
     },
   });
+}
+
+export async function getFormFillingStatus(
+  formId: string | number,
+): Promise<TFileFillingFormStatus[]> {
+  const res = (await request({
+    method: "get",
+    url: `/files/file/${formId}/formroles`,
+  })) as TFileFillingFormStatus[];
+
+  return res;
 }

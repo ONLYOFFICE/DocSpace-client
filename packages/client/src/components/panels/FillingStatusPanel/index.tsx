@@ -37,6 +37,8 @@ export interface FillingStatusPanelWrapperProps {
   setFillingStatusPanelVisible: (visible: boolean) => void;
   file: TFile | null;
   user: TUser | null;
+  setStopFillingDialogVisible: (visible: boolean, formId?: number) => void;
+  onClickLinkFillForm: (item: TFile) => void;
 }
 
 const FillingStatusPanelWrapper = ({
@@ -44,12 +46,24 @@ const FillingStatusPanelWrapper = ({
   setFillingStatusPanelVisible,
   file,
   user,
+  setStopFillingDialogVisible,
+  onClickLinkFillForm,
 }: FillingStatusPanelWrapperProps) => {
   const onClose = () => {
     setFillingStatusPanelVisible(false);
   };
 
-  if (!file || !user) return null;
+  const handleFill = (item: TFile) => {
+    onClickLinkFillForm(item);
+    onClose();
+  };
+
+  const handleStopFilling = (item: TFile) => {
+    setStopFillingDialogVisible(true, item.id);
+    onClose();
+  };
+
+  if (!file || !user || !fillingStatusPanel) return null;
 
   return (
     <FillingStatusPanel
@@ -57,13 +71,21 @@ const FillingStatusPanelWrapper = ({
       file={file}
       visible={fillingStatusPanel}
       onClose={onClose}
+      onFill={handleFill}
+      onStopFilling={handleStopFilling}
     />
   );
 };
 
 export default inject<TStore, React.FC, FillingStatusPanelWrapperProps>(
-  ({ dialogsStore, filesStore, userStore }) => {
-    const { fillingStatusPanel, setFillingStatusPanelVisible } = dialogsStore;
+  ({ dialogsStore, filesStore, userStore, contextOptionsStore }) => {
+    const {
+      fillingStatusPanel,
+      setFillingStatusPanelVisible,
+      setStopFillingDialogVisible,
+    } = dialogsStore;
+
+    const { onClickLinkFillForm } = contextOptionsStore;
 
     const { user } = userStore;
     const { bufferSelection } = filesStore;
@@ -75,6 +97,8 @@ export default inject<TStore, React.FC, FillingStatusPanelWrapperProps>(
       setFillingStatusPanelVisible,
       file,
       user,
+      setStopFillingDialogVisible,
+      onClickLinkFillForm,
     };
   },
 )(observer(FillingStatusPanelWrapper as React.FC));

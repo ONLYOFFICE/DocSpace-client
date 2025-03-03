@@ -658,6 +658,7 @@ export enum ValidationStatus {
 }
 
 export enum FileFillingFormStatus {
+  None = 0,
   Draft = 1,
   YourTurn = 2,
   InProgress = 3,
@@ -690,4 +691,10 @@ export enum FormFillingTipsState {
   Submitting = 3,
   Complete = 4,
   Uploading = 5,
+}
+
+export enum FillingFormStatusHistory {
+  OpenedAtDate = 0,
+  SubmissionDate = 1,
+  StopDate = 2,
 }

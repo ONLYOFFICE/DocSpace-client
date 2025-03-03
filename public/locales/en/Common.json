@@ -617,5 +617,8 @@
   "RoleCommentatorDescription": "Operations with existing files: viewing, commenting.",
   "RoleViewer": "Viewer",
   "RoleViewerDescription": "File viewing",
-  "RolesFromTheForm": "Roles from the form:"
+  "RolesFromTheForm": "Roles from the form:",
+  "HistoryOpenedAtDate": "Opened the form to fill out",
+  "HistorySubmissionDate": "Submitted their part. The form was sent to the next role.",
+  "HistoryStopDate": "Filling was stopped by <1>{{userName}}</1>"
 }

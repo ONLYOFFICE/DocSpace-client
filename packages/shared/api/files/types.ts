@@ -32,6 +32,7 @@ import type {
   FileFillingFormStatus,
   FileStatus,
   FileType,
+  FillingFormStatusHistory,
   FolderType,
   RoomsType,
   ShareAccessRights,
@@ -69,6 +70,7 @@ export type TFileSecurity = {
   Rename: boolean;
   Review: boolean;
   SubmitToFormGallery: boolean;
+  StopFilling?: boolean;
 };
 
 export type TAvailableExternalRights = {
@@ -449,4 +451,15 @@ export type TConnectingStorages = TConnectingStorage[];
 export type TFormRoleMappingRequest = {
   formId: number;
   roles: { userId: string; roleName: string; roleColor: string }[];
+};
+
+export type TFileFillingFormStatus = {
+  user: TUser;
+  stopedBy: string;
+  roleName: string;
+  roleColor: string;
+  roleStatus: FileFillingFormStatus;
+  sequence: number;
+  submitted: boolean;
+  history?: Record<FillingFormStatusHistory, string>;
 };

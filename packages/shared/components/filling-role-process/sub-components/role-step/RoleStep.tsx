@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { decode } from "he";
 import { useState } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -66,8 +67,10 @@ const RoleStep = ({
 
   const hasAvatar = user.hasAvatar;
 
+  const userName = decode(user.displayName);
+
   return (
-    <div className={classNames(styles.roleContainer, styles[processStatus])}>
+    <div data-process-status={processStatus} className={styles.roleContainer}>
       <div className={styles.role}>
         <picture className={styles.avatarContainer}>
           <img
@@ -84,7 +87,7 @@ const RoleStep = ({
         </picture>
         <h5 className={styles.roleTitle}>{roleName}</h5>
         <p className={styles.userName}>
-          {user.userName}{" "}
+          {userName}{" "}
           {currentUserId === user.id ? `(${t("Common:MeLabel")})` : null}
         </p>
         {hasMoreThanOneHistory ? (
@@ -96,7 +99,11 @@ const RoleStep = ({
           />
         ) : null}
       </div>
-      <RoleHistories className={styles.roleHistories} histories={history} />
+      <RoleHistories
+        className={styles.roleHistories}
+        histories={history}
+        userName={userName}
+      />
     </div>
   );
 };

@@ -145,7 +145,8 @@
   font-weight: 400;
 }
 
-.waiting {
+.roleContainer[data-process-status="0"],
+.roleContainer[data-process-status="1"] {
   .avatarContainer {
     border: 2px dotted var(--avatar-border-color);
   }
@@ -155,7 +156,7 @@
   }
 }
 
-.yourTurn {
+.roleContainer[data-process-status="2"] {
   .roleTitle {
     color: $light-blue-main;
   }
@@ -168,7 +169,7 @@
   }
 }
 
-.filling {
+.roleContainer[data-process-status="3"] {
   .roleTitle {
     color: $light-blue-main;
   }
@@ -181,7 +182,7 @@
   }
 }
 
-.filled {
+.roleContainer[data-process-status="4"] {
   .roleTitle {
     color: var(--role-step-filled-color);
   }
@@ -194,7 +195,7 @@
   }
 }
 
-.stopped {
+.roleContainer[data-process-status="5"] {
   .roleTitle {
     color: $main-red;
   }

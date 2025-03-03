@@ -27,26 +27,52 @@
 import React from "react";
 import { DateTime } from "luxon";
 import classNames from "classnames";
+import { Trans, useTranslation } from "react-i18next";
 
 import styles from "./RoleHistories.module.scss";
 import type { RoleHistoryProps } from "./RoleHistories.types";
+import { FillingFormStatusHistory } from "../../../../enums";
 
-const RoleHistories = ({ histories, className }: RoleHistoryProps) => {
+const RoleHistories = ({
+  histories,
+  className,
+  userName,
+}: RoleHistoryProps) => {
+  const { t } = useTranslation("Common");
+
+  const historyTexts = {
+    [FillingFormStatusHistory.OpenedAtDate.toString()]: t(
+      "Common:HistoryOpenedAtDate",
+    ),
+    [FillingFormStatusHistory.SubmissionDate.toString()]: t(
+      "Common:HistorySubmissionDate",
+    ),
+    [FillingFormStatusHistory.StopDate.toString()]: (
+      <Trans
+        t={t}
+        i18nKey="HistoryStopDate"
+        ns="Common"
+        values={{ userName }}
+        components={{ 1: <strong title={userName} /> }}
+      />
+    ),
+  };
+
   return (
     <ul className={classNames(styles.roleHistory, className)}>
       {histories.map((history) => {
-        const date = DateTime.fromISO(history.date).toLocaleString(
+        const [key, value] = history;
+
+        const date = DateTime.fromISO(value).toLocaleString(
           DateTime.DATETIME_SHORT,
         );
 
+        const text = historyTexts[key];
+
         return (
-          <li
-            aria-label={history.action}
-            key={history.id}
-            className={styles.roleHistoryItem}
-          >
-            <span className={styles.action}>{history.action}</span>
-            <time className={styles.date} dateTime={history.date}>
+          <li aria-label={text} key={value} className={styles.roleHistoryItem}>
+            <span className={styles.action}>{text}</span>
+            <time className={styles.date} dateTime={value}>
               {date}
             </time>
           </li>

@@ -193,6 +193,7 @@ export const ALLOWED_PASSWORD_CHARACTERS =
 export const GENERAL_LINK_HEADER_KEY = "general-link_header";
 
 export const FILLING_FORM_STATUS_COLORS = Object.freeze({
+  [FileFillingFormStatus.None]: globalColors.mainRed,
   [FileFillingFormStatus.Draft]: globalColors.mainRed,
   [FileFillingFormStatus.YourTurn]: globalColors.lightBlueMain,
   [FileFillingFormStatus.InProgress]: globalColors.gray,

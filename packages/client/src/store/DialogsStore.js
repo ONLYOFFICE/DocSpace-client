@@ -950,6 +950,10 @@ class DialogsStore {
     this.fillingStatusPanel = visible;
   };
 
+  /**
+   * @param {boolean} visible
+   * @param {number=} formId
+   */
   setStopFillingDialogVisible = (visible, formId = null) => {
     this.stopFillingDialogData = {
       visible,

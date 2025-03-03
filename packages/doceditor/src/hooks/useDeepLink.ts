@@ -67,7 +67,7 @@ const useDeepLink = ({
       deepLinkUrl &&
       !withoutRedirect &&
       !isAndroidWebView &&
-      deepLinkSettings === DeepLinkType.Web
+      deepLinkSettings !== DeepLinkType.Web
     ) {
       setIsShowDeepLink(true);
     }

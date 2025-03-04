@@ -31,6 +31,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { RoomsType } from "@docspace/shared/enums";
 
 import { Card } from "./sub-components/Card";
 
@@ -39,7 +40,6 @@ import type {
   FillPDFDialogProps,
   InjectFillPDFDialogProps,
 } from "./FillPDFDialog.types";
-import { RoomsType } from "@docspace/shared/enums";
 
 const FillPDFDialog = inject<TStore>(
   ({ dialogsStore, contextOptionsStore }) => {

@@ -25,12 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import { FillingStatusPanel } from "@docspace/shared/dialogs/FillingStatusPanel";
 
 import type { TFile } from "@docspace/shared/api/files/types";
 
 import type { TUser } from "@docspace/shared/api/people/types";
+import type { TTranslation } from "@docspace/shared/types";
 
 export interface FillingStatusPanelWrapperProps {
   fillingStatusPanel: boolean;
@@ -39,6 +41,8 @@ export interface FillingStatusPanelWrapperProps {
   user: TUser | null;
   setStopFillingDialogVisible: (visible: boolean, formId?: number) => void;
   onClickLinkFillForm: (item: TFile) => void;
+  onDelete: (item: TFile, t: TTranslation) => void;
+  onClickResetAndStartFilling: (item: TFile) => void;
 }
 
 const FillingStatusPanelWrapper = ({
@@ -48,7 +52,11 @@ const FillingStatusPanelWrapper = ({
   user,
   setStopFillingDialogVisible,
   onClickLinkFillForm,
+  onDelete,
+  onClickResetAndStartFilling,
 }: FillingStatusPanelWrapperProps) => {
+  const { t } = useTranslation(["Common"]);
+
   const onClose = () => {
     setFillingStatusPanelVisible(false);
   };
@@ -63,6 +71,16 @@ const FillingStatusPanelWrapper = ({
     onClose();
   };
 
+  const handleDelete = (item: TFile) => {
+    onDelete(item, t);
+    onClose();
+  };
+
+  const handleResetFilling = (item: TFile) => {
+    onClickResetAndStartFilling(item);
+    onClose();
+  };
+
   if (!file || !user || !fillingStatusPanel) return null;
 
   return (
@@ -73,6 +91,8 @@ const FillingStatusPanelWrapper = ({
       onClose={onClose}
       onFill={handleFill}
       onStopFilling={handleStopFilling}
+      onDelete={handleDelete}
+      onResetFilling={handleResetFilling}
     />
   );
 };
@@ -85,7 +105,8 @@ export default inject<TStore, React.FC, FillingStatusPanelWrapperProps>(
       setStopFillingDialogVisible,
     } = dialogsStore;
 
-    const { onClickLinkFillForm } = contextOptionsStore;
+    const { onClickLinkFillForm, onDelete, onClickResetAndStartFilling } =
+      contextOptionsStore;
 
     const { user } = userStore;
     const { bufferSelection } = filesStore;
@@ -99,6 +120,8 @@ export default inject<TStore, React.FC, FillingStatusPanelWrapperProps>(
       user,
       setStopFillingDialogVisible,
       onClickLinkFillForm,
+      onDelete,
+      onClickResetAndStartFilling,
     };
   },
 )(observer(FillingStatusPanelWrapper as React.FC));

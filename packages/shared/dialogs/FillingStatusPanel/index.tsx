@@ -59,6 +59,8 @@ export const FillingStatusPanel = ({
   onStopFilling,
   file,
   user,
+  onDelete,
+  onResetFilling,
 }: FillingStatusPanelProps) => {
   const { t } = useTranslation(["Common"]);
   const [value, setValue] = useLocalStorage(
@@ -160,6 +162,36 @@ export const FillingStatusPanel = ({
             ) : null}
           </ModalDialog.Footer>
         ))
+        .with(FileFillingFormStatus.Stopped, () => {
+          if (!(file.security?.ResetFilling || file.security?.Delete))
+            return null;
+
+          return (
+            <ModalDialog.Footer>
+              {file.security?.ResetFilling ? (
+                <Button
+                  scale
+                  primary
+                  onClick={() => onResetFilling(file)}
+                  id="panel_button_reset-and-start"
+                  key="panel_button_reset-and-start"
+                  label={t("Common:ResetAndStartFilling")}
+                  size={ButtonSize.normal}
+                />
+              ) : null}
+              {file.security?.Delete ? (
+                <Button
+                  id="panel_button_file-delete"
+                  key="panel_button_file-delete"
+                  onClick={() => onDelete(file)}
+                  label={t("Common:DeleteFile")}
+                  size={ButtonSize.normal}
+                  scale
+                />
+              ) : null}
+            </ModalDialog.Footer>
+          );
+        })
         .with(FileFillingFormStatus.Completed, () => null)
         .otherwise(() => {
           return file.security.StopFilling ? (

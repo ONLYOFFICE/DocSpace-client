@@ -835,6 +835,21 @@ class ContextOptionsStore {
     this.filesStore.openDocEditor(id, false, null, true);
   };
 
+  /**
+   * @param {import("@docspace/shared/api/files/types").TFile} item - The item to delete.
+   * @param {import("@docspace/shared/types").TTranslation} t - The translation function.
+   * @returns {void}
+   */
+  onDelete = (item, t) => {
+    const { isGroupMenuBlocked } = this.filesActionsStore;
+
+    if (item.isEditing) return this.onShowEditingToast(t);
+
+    if (isGroupMenuBlocked) return this.onShowWaitOperationToast(t);
+
+    this.onClickDelete(item, t);
+  };
+
   filterModel = (model, filter) => {
     const options = [];
     let index = 0;
@@ -1459,8 +1474,6 @@ class ContextOptionsStore {
 
     // const emailSendIsDisabled = true;
     const showSeparator0 = hasInfoPanel || !isMedia; // || !emailSendIsDisabled;
-
-    const { isGroupMenuBlocked } = this.filesActionsStore;
 
     const separator0 = showSeparator0
       ? {
@@ -2114,12 +2127,7 @@ class ContextOptionsStore {
             ? t("DeleteTemplate")
             : t("Common:Delete"),
         icon: TrashReactSvgUrl,
-        onClick: () =>
-          isEditing
-            ? this.onShowEditingToast(t)
-            : isGroupMenuBlocked
-              ? this.onShowWaitOperationToast(t)
-              : this.onClickDelete(item, t),
+        onClick: () => this.onDelete(item, t),
         disabled: false,
       },
       {

@@ -36,6 +36,8 @@ export type FillingStatusPanelProps = {
 
   onFill: (item: TFile) => void;
   onStopFilling: (item: TFile) => void;
+  onDelete: (item: TFile) => void;
+  onResetFilling: (item: TFile) => void;
 };
 
 export type FillingStatusPanelBodyProps = {

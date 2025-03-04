@@ -53,24 +53,6 @@ const ChatFooter = ({
   const [isOpen, setIsOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<FileType | null>(null);
 
-  const fakeFilesList = [
-    {
-      id: 15,
-      title:
-        "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW.docx",
-    },
-    { id: 5, title: "Изменения к выпуску develop - Copy (6).docx" },
-    { id: 6, title: "Изменения к выпуску develop - Copy (3).docx" },
-    { id: 7, title: "Изменения к выпуску develop - Copy (4).docx" },
-    { id: 8, title: "Изменения к выпуску develop - Copy (2).docx" },
-    { id: 9, title: "Изменения к выпуску develop - Copy (5).docx" },
-    { id: 10, title: "Изменения к выпуску develop - Copy (7).docx" },
-    { id: 11, title: "Изменения к выпуску develop - Copy (8).docx" },
-    { id: 12, title: "Изменения к выпуску develop - Copy (9).docx" },
-    { id: 13, title: "Изменения к выпуску develop - Copy.docx" },
-    { id: 14, title: "Изменения к выпуску develop.docx" },
-  ];
-
   const [sortedFiles, setSortedFiles] = useState<FileType[]>(filesList);
 
   const itemsHeight = sortedFiles.length * DROPDOWN_ITEM_HEIGHT;
@@ -162,7 +144,17 @@ const ChatFooter = ({
   const onSelectItem = (file: FileType) => {
     setSelectedFile(file);
 
-    setMessage((prev) => prev.substring(0, message.indexOf("@") + 1) + file.id);
+    if (file.isFolder) {
+      setMessage(
+        (prev) =>
+          prev.substring(0, message.indexOf("@") + 1) + "folder-" + file.id
+      );
+    } else {
+      setMessage(
+        (prev) => prev.substring(0, message.indexOf("@") + 1) + file.id
+      );
+    }
+
     onCloseDropDown();
   };
 
@@ -174,37 +166,6 @@ const ChatFooter = ({
   return (
     <div className="chat-panel-footer-container">
       <div ref={inputBlockRef} className="chat-panel-footer_input-block">
-        {/* width: 161px;
-          font-size: 8px;
-          overflow: hidden;
-          align-items: center;
-          justify-content: center;
-          display: flex;
-          padding-left: 8px;
-          background: antiquewhite;
-        */}
-        {/* <div className="chat-panel-footer_input-prepend">
-          <p>{selectedFile?.title}</p>
-        </div> */}
-        {/* white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        */}
-
-        {/* <div
-          ref={textAreaRef}
-          className="chat-panel-footer_input"
-          // onChange={onChangeMessage}
-          placeholder="Message ChatGPT..."
-          onFocus={onFocus}
-          onKeyDown={onKeyDownAction}
-          contentEditable
-          onInput={onChangeMessage}
-          suppressContentEditableWarning
-        >
-          {message}
-        </div> */}
-
         <textarea
           className="chat-panel-footer_input"
           value={message}

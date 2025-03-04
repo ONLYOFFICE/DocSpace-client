@@ -27,7 +27,7 @@
 // import { useEffect } from "react";
 import { memo } from "react";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
-import { TFile } from "../../../api/files/types";
+import { TFile, TFolder } from "../../../api/files/types";
 import { DeviceType } from "../../../enums";
 import { Portal } from "../../portal";
 import { IconButton } from "../../icon-button";
@@ -47,13 +47,18 @@ export const ChatWidget = memo(
     anotherDialogOpen?: boolean;
     // viewAs,
     currentDeviceType?: DeviceType;
-    chatFiles: TFile[];
+    chatFiles: (TFile | TFolder)[];
   }) => {
     const toChatFiles = () => {
-      const files = chatFiles.filter((f) => f.fileExst === ".docx");
+      const files = chatFiles.filter((f) => {
+        if ("fileExst" in f) {
+          return f.fileExst === ".docx" || !f.fileExst;
+        }
+        return true;
+      });
 
       return files.map((f) => {
-        return { id: f.id, title: f.title };
+        return { id: f.id, title: f.title, isFolder: f.isFolder };
       });
     };
 

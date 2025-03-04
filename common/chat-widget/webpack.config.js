@@ -9,7 +9,7 @@ module.exports = {
       .map((f) => path.resolve(__dirname, f)),
   },
   output: {
-    filename: "build/static/js/bundle.min.js",
+    filename: "build/static/js/chatWidget.js",
   },
   module: {
     rules: [
@@ -17,18 +17,6 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
-
-      // {
-      //   loader: "css-loader",
-      //   options: {
-      //     importLoaders: 1,
-      //     modules: {
-      //       namedExport: false,
-      //       exportLocalsConvention: "camelCase",
-      //     },
-      //     esModule: true,
-      //   },
-      // },
 
       {
         test: /\.svg$/i,

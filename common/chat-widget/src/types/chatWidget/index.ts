@@ -14,4 +14,5 @@ export type ChatMessagePlaceholderType = {
 export type FileType = {
   id: number | string;
   title: string;
+  isFolder: boolean;
 };

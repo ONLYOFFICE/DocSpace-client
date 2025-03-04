@@ -691,7 +691,7 @@ export const Component = inject(
       setOperationCancelVisible,
       hideConfirmCancelOperation,
 
-      chatFiles: filesStore.files,
+      chatFiles: filesStore.filesList,
     };
   },
 )(observer(Home));

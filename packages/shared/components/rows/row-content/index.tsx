@@ -74,8 +74,12 @@ const RowContent = (props: RowContentProps) => {
       data-testid="row-content"
     >
       <div className={styles.mainContainerWrapper} style={mainContainerStyle}>
-        <div className={styles.mainContainer}>{children[0]}</div>
-        <div className={styles.mainIcons}>{children[1]}</div>
+        <div className={classNames(styles.mainContainer, "rowMainContainer")}>
+          {children[0]}
+        </div>
+        <div className={classNames(styles.mainIcons, "mainIcons")}>
+          {children[1]}
+        </div>
       </div>
       {children.map((element: React.ReactNode, index: number) => {
         if (index > 1 && React.isValidElement(element)) {

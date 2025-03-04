@@ -80,7 +80,7 @@ export const ChatWidget = memo(
 
     const onClose = () => setIsVisible(false);
 
-    const infoPanelComponent = (
+    const chatWidgetComponent = (
       <div className={styles.chatWrapper}>
         <IconButton
           style={{
@@ -110,12 +110,12 @@ export const ChatWidget = memo(
       </div>
     );
 
-    const renderPortalInfoPanel = () => {
+    const renderPortal = () => {
       const rootElement = document.getElementById("root");
 
       return (
         <Portal
-          element={infoPanelComponent}
+          element={chatWidgetComponent}
           appendTo={rootElement || undefined}
           visible={isVisible ? !anotherDialogOpen : false}
         />
@@ -130,8 +130,8 @@ export const ChatWidget = memo(
       (anotherDialogOpen && currentDeviceType !== DeviceType.desktop)
       ? null
       : isMobileView
-        ? renderPortalInfoPanel()
-        : infoPanelComponent;
+        ? renderPortal()
+        : chatWidgetComponent;
   },
 );
 

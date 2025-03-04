@@ -93,6 +93,7 @@ const withHotkeys = (Component) => {
       isFormRoom,
       isParentFolderFormRoom,
       isIndexEditingMode,
+      aiChatIsVisible,
     } = props;
 
     const navigate = useNavigate();
@@ -105,7 +106,11 @@ const withHotkeys = (Component) => {
       filterPreventDefault: false,
       enableOnTags: ["INPUT"],
       enabled:
-        enabledHotkeys && !mediaViewerIsVisible && !filesIsLoading && isEnabled,
+        enabledHotkeys &&
+        !mediaViewerIsVisible &&
+        !filesIsLoading &&
+        isEnabled &&
+        !aiChatIsVisible,
       // keyup: true,
       // keydown: false,
     };
@@ -442,6 +447,7 @@ const withHotkeys = (Component) => {
       userStore,
       indexingStore,
       currentQuotaStore,
+      pluginStore,
     }) => {
       const {
         setSelected,
@@ -492,6 +498,7 @@ const withHotkeys = (Component) => {
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
       const { setHotkeyPanelVisible } = settingsStore;
+      const { aiChatIsVisible } = pluginStore;
 
       const isVisitor = userStore.user?.isVisitor;
 
@@ -571,6 +578,7 @@ const withHotkeys = (Component) => {
         isGroupMenuBlocked,
         isFormRoom,
         isParentFolderFormRoom,
+        aiChatIsVisible,
       };
     },
   )(observer(WithHotkeys));

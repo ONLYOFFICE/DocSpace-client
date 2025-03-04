@@ -96,8 +96,9 @@ export const StyledRowContainer = styled(RowContainer)`
 `;
 
 export const StyledRowContent = styled(RowContent)`
-  display: flex;
+  display: flex !important;
   padding-bottom: 10px;
+  box-sizing: border-box;
 
   .rowMainContainer {
     height: 100%;

@@ -231,7 +231,7 @@ export const isLockedSharedRoom = (item?: TRoom) => {
 };
 
 export const addLog = (log: string, category: "socket") => {
-  if (!window.ClientConfig?.logs.enableLogs) return;
+  if (!window.ClientConfig?.logs?.enableLogs) return;
 
   if (window.ClientConfig.logs.logsToConsole) console.log(log);
   else {

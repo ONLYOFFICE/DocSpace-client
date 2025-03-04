@@ -128,7 +128,7 @@ const FieldContainer = ({
         )
       ) : null}
 
-      <div className={styles.fieldBody}>
+      <div className={`${styles.fieldBody} field-body`}>
         {children}
         {hasError && errorMessage ? (
           <Text

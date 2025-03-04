@@ -187,6 +187,7 @@ export interface IInitialConfig {
   startFilling?: boolean;
   startFillingMode?: StartFillingMode;
   fillingSessionId?: string;
+  fillingStatus?: boolean;
 }
 
 export type TError = {

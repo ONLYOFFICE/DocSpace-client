@@ -71,6 +71,7 @@ export type TFileSecurity = {
   Review: boolean;
   SubmitToFormGallery: boolean;
   StopFilling?: boolean;
+  ResetFilling?: boolean;
 };
 
 export type TAvailableExternalRights = {

@@ -1933,6 +1933,16 @@
   --preview-tile-icon-border: 1px solid #{$gray-light-mid};
 }
 
+.light {
+  --storage-management-region-country-color: #{$black};
+  --storage-management-region-description-color: #{$light-gray-dark};
+}
+
+.dark {
+  --storage-management-region-country-color: #{$white};
+  --storage-management-region-description-color: #{$dark-gray-dark};
+}
+
 :global(.rtl) {
   --input-text-align: right;
   --input-direction: rtl;

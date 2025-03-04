@@ -40,13 +40,12 @@ const files: TFile[] = [
     pureContentLength: 5253550,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=34",
-    webUrl: "http://192.168.178.23/media/view/34",
+    viewUrl: "",
+    webUrl: "",
     fileType: 4,
     fileExst: ".png",
     comment: "Uploaded",
-    thumbnailUrl:
-      "http://192.168.178.23/filehandler.ashx?action=thumb&fileid=34&version=1&hash=39802703",
+    thumbnailUrl: "",
     thumbnailStatus: 1,
     viewAccessibility: {
       ImageView: true,
@@ -114,8 +113,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -134,8 +132,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -148,13 +145,12 @@ const files: TFile[] = [
     pureContentLength: 5253550,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=35",
-    webUrl: "http://192.168.178.23/media/view/35",
+    viewUrl: "",
+    webUrl: "",
     fileType: 4,
     fileExst: ".png",
     comment: "Uploaded",
-    thumbnailUrl:
-      "http://192.168.178.23/filehandler.ashx?action=thumb&fileid=35&version=1&hash=1248873649",
+    thumbnailUrl: "",
     thumbnailStatus: 1,
     viewAccessibility: {
       ImageView: true,
@@ -222,8 +218,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -242,8 +237,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -256,13 +250,12 @@ const files: TFile[] = [
     pureContentLength: 5253550,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=36",
-    webUrl: "http://192.168.178.23/media/view/36",
+    viewUrl: "",
+    webUrl: "",
     fileType: 4,
     fileExst: ".png",
     comment: "Uploaded",
-    thumbnailUrl:
-      "http://192.168.178.23/filehandler.ashx?action=thumb&fileid=36&version=1&hash=1322053809",
+    thumbnailUrl: "",
     thumbnailStatus: 1,
     viewAccessibility: {
       ImageView: true,
@@ -330,8 +323,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -350,8 +342,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -364,8 +355,8 @@ const files: TFile[] = [
     pureContentLength: 101216495,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=43",
-    webUrl: "http://192.168.178.23/media/view/43",
+    viewUrl: "",
+    webUrl: "",
     fileType: 2,
     fileExst: ".mp4",
     comment: "Uploaded",
@@ -436,8 +427,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -456,8 +446,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -470,8 +459,8 @@ const files: TFile[] = [
     pureContentLength: 58193,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=42",
-    webUrl: "http://192.168.178.23/doceditor?fileid=42&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -542,8 +531,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -562,8 +550,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -576,8 +563,8 @@ const files: TFile[] = [
     pureContentLength: 58193,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=41",
-    webUrl: "http://192.168.178.23/doceditor?fileid=41&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -648,8 +635,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -668,8 +654,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -682,8 +667,8 @@ const files: TFile[] = [
     pureContentLength: 19236,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=40",
-    webUrl: "http://192.168.178.23/doceditor?fileid=40&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -754,8 +739,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -774,8 +758,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -788,8 +771,8 @@ const files: TFile[] = [
     pureContentLength: 19236,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=38",
-    webUrl: "http://192.168.178.23/doceditor?fileid=38&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -860,8 +843,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -880,8 +862,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -894,8 +875,8 @@ const files: TFile[] = [
     pureContentLength: 19236,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=39",
-    webUrl: "http://192.168.178.23/doceditor?fileid=39&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -966,8 +947,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -986,8 +966,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1000,8 +979,8 @@ const files: TFile[] = [
     pureContentLength: 19236,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=37",
-    webUrl: "http://192.168.178.23/doceditor?fileid=37&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1072,8 +1051,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1092,8 +1070,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1106,8 +1083,8 @@ const files: TFile[] = [
     pureContentLength: 144165,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=4",
-    webUrl: "http://192.168.178.23/doceditor?fileid=4&version=2",
+    viewUrl: "",
+    webUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1178,8 +1155,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1198,8 +1174,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1212,8 +1187,8 @@ const files: TFile[] = [
     pureContentLength: 144165,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=33",
-    webUrl: "http://192.168.178.23/doceditor?fileid=33&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1284,8 +1259,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1304,8 +1278,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1318,8 +1291,8 @@ const files: TFile[] = [
     pureContentLength: 144165,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=32",
-    webUrl: "http://192.168.178.23/doceditor?fileid=32&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1390,8 +1363,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1410,8 +1382,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1424,8 +1395,8 @@ const files: TFile[] = [
     pureContentLength: 144165,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=31",
-    webUrl: "http://192.168.178.23/doceditor?fileid=31&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1496,8 +1467,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1516,8 +1486,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1530,8 +1499,8 @@ const files: TFile[] = [
     pureContentLength: 144165,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=30",
-    webUrl: "http://192.168.178.23/doceditor?fileid=30&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1602,8 +1571,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1622,8 +1590,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1636,8 +1603,8 @@ const files: TFile[] = [
     pureContentLength: 1132381,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=27",
-    webUrl: "http://192.168.178.23/doceditor?fileid=27&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -1708,8 +1675,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1728,8 +1694,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1742,8 +1707,8 @@ const files: TFile[] = [
     pureContentLength: 144165,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=28",
-    webUrl: "http://192.168.178.23/doceditor?fileid=28&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -1814,8 +1779,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1834,8 +1798,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1848,8 +1811,8 @@ const files: TFile[] = [
     pureContentLength: 1132381,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=3",
-    webUrl: "http://192.168.178.23/doceditor?fileid=3&version=2",
+    viewUrl: "",
+    webUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -1920,8 +1883,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1940,8 +1902,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -1954,8 +1915,8 @@ const files: TFile[] = [
     pureContentLength: 144165,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=29",
-    webUrl: "http://192.168.178.23/doceditor?fileid=29&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 5,
     fileExst: ".xlsx",
     comment: "Uploaded",
@@ -2026,8 +1987,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2046,8 +2006,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2060,8 +2019,8 @@ const files: TFile[] = [
     pureContentLength: 1132381,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=26",
-    webUrl: "http://192.168.178.23/doceditor?fileid=26&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -2132,8 +2091,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2152,8 +2110,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2166,8 +2123,8 @@ const files: TFile[] = [
     pureContentLength: 1132381,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=25",
-    webUrl: "http://192.168.178.23/doceditor?fileid=25&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -2238,8 +2195,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2258,8 +2214,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2272,8 +2227,8 @@ const files: TFile[] = [
     pureContentLength: 1132381,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=24",
-    webUrl: "http://192.168.178.23/doceditor?fileid=24&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -2344,8 +2299,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2364,8 +2318,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2378,8 +2331,8 @@ const files: TFile[] = [
     pureContentLength: 1132381,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=23",
-    webUrl: "http://192.168.178.23/doceditor?fileid=23&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -2450,8 +2403,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2470,8 +2422,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2484,8 +2435,8 @@ const files: TFile[] = [
     pureContentLength: 1320840,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=2",
-    webUrl: "http://192.168.178.23/doceditor?fileid=2&version=2",
+    viewUrl: "",
+    webUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -2558,8 +2509,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2578,8 +2528,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2592,8 +2541,8 @@ const files: TFile[] = [
     pureContentLength: 1320840,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=20",
-    webUrl: "http://192.168.178.23/doceditor?fileid=20&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -2666,8 +2615,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2686,8 +2634,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2700,8 +2647,8 @@ const files: TFile[] = [
     pureContentLength: 1320840,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=16",
-    webUrl: "http://192.168.178.23/doceditor?fileid=16&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -2774,8 +2721,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2794,8 +2740,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2808,8 +2753,8 @@ const files: TFile[] = [
     pureContentLength: 1320840,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=17",
-    webUrl: "http://192.168.178.23/doceditor?fileid=17&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -2882,8 +2827,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2902,8 +2846,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -2916,8 +2859,8 @@ const files: TFile[] = [
     pureContentLength: 1320840,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=18",
-    webUrl: "http://192.168.178.23/doceditor?fileid=18&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -2990,8 +2933,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3010,8 +2952,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3024,8 +2965,8 @@ const files: TFile[] = [
     pureContentLength: 1320840,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=19",
-    webUrl: "http://192.168.178.23/doceditor?fileid=19&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -3098,8 +3039,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3118,8 +3058,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3132,8 +3071,8 @@ const files: TFile[] = [
     pureContentLength: 1320840,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=21",
-    webUrl: "http://192.168.178.23/doceditor?fileid=21&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 10,
     fileExst: ".pdf",
     comment: "Uploaded",
@@ -3206,8 +3145,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3226,8 +3164,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3240,8 +3177,8 @@ const files: TFile[] = [
     pureContentLength: 1132381,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=22",
-    webUrl: "http://192.168.178.23/doceditor?fileid=22&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 6,
     fileExst: ".pptx",
     comment: "Uploaded",
@@ -3312,8 +3249,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3332,8 +3268,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3346,8 +3281,8 @@ const files: TFile[] = [
     pureContentLength: 58193,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=1",
-    webUrl: "http://192.168.178.23/doceditor?fileid=1&version=2",
+    viewUrl: "",
+    webUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -3418,8 +3353,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3438,8 +3372,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3452,8 +3385,8 @@ const files: TFile[] = [
     pureContentLength: 58193,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=15",
-    webUrl: "http://192.168.178.23/doceditor?fileid=15&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -3524,8 +3457,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3544,8 +3476,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3558,8 +3489,8 @@ const files: TFile[] = [
     pureContentLength: 58193,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=14",
-    webUrl: "http://192.168.178.23/doceditor?fileid=14&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -3630,8 +3561,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3650,8 +3580,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3664,8 +3593,8 @@ const files: TFile[] = [
     pureContentLength: 58193,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=13",
-    webUrl: "http://192.168.178.23/doceditor?fileid=13&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -3736,8 +3665,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3756,8 +3684,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3770,8 +3697,8 @@ const files: TFile[] = [
     pureContentLength: 58193,
     fileStatus: 0,
     mute: false,
-    viewUrl: "http://192.168.178.23/filehandler.ashx?action=download&fileid=12",
-    webUrl: "http://192.168.178.23/doceditor?fileid=12&version=1",
+    viewUrl: "",
+    webUrl: "",
     fileType: 7,
     fileExst: ".docx",
     comment: "Uploaded",
@@ -3842,8 +3769,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3862,8 +3788,7 @@ const files: TFile[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3925,8 +3850,7 @@ const folders: TFolder[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -3945,8 +3869,7 @@ const folders: TFolder[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -4005,8 +3928,7 @@ const folders: TFolder[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -4025,8 +3947,7 @@ const folders: TFolder[] = [
         "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
       avatarSmall:
         "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-      profileUrl:
-        "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+      profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
     },
@@ -4099,8 +4020,7 @@ const getFolder = (filtered?: boolean): TGetFolder => {
           "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
         avatarSmall:
           "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-        profileUrl:
-          "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+        profileUrl: "",
         hasAvatar: false,
         isAnonim: false,
       },
@@ -4119,8 +4039,7 @@ const getFolder = (filtered?: boolean): TGetFolder => {
           "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
         avatarSmall:
           "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-        profileUrl:
-          "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+        profileUrl: "",
         hasAvatar: false,
         isAnonim: false,
       },
@@ -4197,8 +4116,7 @@ const getEmptyFolder = () => {
           "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
         avatarSmall:
           "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-        profileUrl:
-          "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+        profileUrl: "",
         hasAvatar: false,
         isAnonim: false,
       },
@@ -4217,8 +4135,7 @@ const getEmptyFolder = () => {
           "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
         avatarSmall:
           "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-        profileUrl:
-          "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+        profileUrl: "",
         hasAvatar: false,
         isAnonim: false,
       },

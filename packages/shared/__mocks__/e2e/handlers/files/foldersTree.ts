@@ -87,8 +87,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
               "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
             avatarSmall:
               "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-            profileUrl:
-              "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+            profileUrl: "",
             hasAvatar: false,
             isAnonim: false,
           },
@@ -107,8 +106,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
               "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
             avatarSmall:
               "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-            profileUrl:
-              "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+            profileUrl: "",
             hasAvatar: false,
             isAnonim: false,
           },
@@ -168,8 +166,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
             "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
           avatarSmall:
             "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-          profileUrl:
-            "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+          profileUrl: "",
           hasAvatar: false,
           isAnonim: false,
         },
@@ -188,8 +185,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
             "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
           avatarSmall:
             "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-          profileUrl:
-            "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+          profileUrl: "",
           hasAvatar: false,
           isAnonim: false,
         },
@@ -262,8 +258,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
             "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
           avatarSmall:
             "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-          profileUrl:
-            "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+          profileUrl: "",
           hasAvatar: false,
           isAnonim: false,
         },
@@ -282,8 +277,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
             "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
           avatarSmall:
             "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-          profileUrl:
-            "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+          profileUrl: "",
           hasAvatar: false,
           isAnonim: false,
         },
@@ -367,8 +361,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
               "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
             avatarSmall:
               "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-            profileUrl:
-              "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+            profileUrl: "",
             hasAvatar: false,
             isAnonim: false,
           },
@@ -387,8 +380,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
               "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
             avatarSmall:
               "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-            profileUrl:
-              "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+            profileUrl: "",
             hasAvatar: false,
             isAnonim: false,
           },
@@ -448,8 +440,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
             "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
           avatarSmall:
             "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-          profileUrl:
-            "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+          profileUrl: "",
           hasAvatar: false,
           isAnonim: false,
         },
@@ -469,8 +460,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
             "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
           avatarSmall:
             "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-          profileUrl:
-            "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+          profileUrl: "",
           hasAvatar: false,
           isAnonim: false,
         },
@@ -543,8 +533,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
             "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
           avatarSmall:
             "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-          profileUrl:
-            "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+          profileUrl: "",
           hasAvatar: false,
           isAnonim: false,
         },
@@ -563,8 +552,7 @@ const getFoldersTree = (): TGetRootFolder[] => {
             "/static/images/default_user_photo_size_48-48.png?hash=1976880553",
           avatarSmall:
             "/static/images/default_user_photo_size_32-32.png?hash=1976880553",
-          profileUrl:
-            "http://192.168.178.23/accounts/people/filter?search=sanyalu97%40gmail.com",
+          profileUrl: "",
           hasAvatar: false,
           isAnonim: false,
         },

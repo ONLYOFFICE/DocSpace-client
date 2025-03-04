@@ -118,13 +118,13 @@ const DiskSpaceUsedComponent = (props) => {
       <div className="disk-space_content">
         <div className="disk-space_size-info">
           {!standalone || (standalone && isTenantCustomQuotaSet) ? (
-            <Text fontWeight={700} fontSize="14px" className="disk-space_title">
+            <Text fontWeight={400} fontSize="14px" className="disk-space_title">
               {t("TotalStorage", {
                 size: totalSize,
               })}
             </Text>
           ) : null}
-          <Text fontWeight={700} fontSize="14px" className="disk-space_title">
+          <Text fontWeight={400} fontSize="14px" className="disk-space_title">
             {t("UsedStorage", {
               size: usedSize,
             })}
@@ -132,7 +132,7 @@ const DiskSpaceUsedComponent = (props) => {
           {standalone && !isTenantCustomQuotaSet ? (
             <ColorTheme
               themeId={ThemeId.Link}
-              fontWeight={700}
+              fontWeight={600}
               onClick={onChangeDialogClick}
               className="disk-space_link"
             >

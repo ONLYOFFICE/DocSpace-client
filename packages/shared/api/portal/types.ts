@@ -99,6 +99,7 @@ export type TPortal = {
   lastModified: Date;
   name: string;
   ownerId: string;
+  region?: string | null;
   paymentId: string;
   spam: boolean;
   status: number;

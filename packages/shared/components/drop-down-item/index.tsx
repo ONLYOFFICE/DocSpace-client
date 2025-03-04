@@ -28,6 +28,7 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
+import { useTheme } from "styled-components";
 
 import RightArrowReactSvgUrl from "PUBLIC_DIR/images/right.arrow.react.svg?url";
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
@@ -99,10 +100,13 @@ const DropDownItem = ({
   minWidth,
   isModern,
   style,
+  isPaidBadge,
   ...rest
 }: DropDownItemProps) => {
   const { t } = useTranslation(["Common"]);
   const { isRTL } = useInterfaceDirection();
+
+  const theme = useTheme();
 
   const handleClick = (
     e: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLInputElement>,
@@ -211,6 +215,24 @@ const DropDownItem = ({
             borderRadius="50px"
             backgroundColor={globalColors.mainPurple}
             label={t("Common:BetaLabel")}
+          />
+        </div>
+      ) : null}
+      {isPaidBadge ? (
+        <div className={styles.wrapperBadge}>
+          <Badge
+            noHover
+            fontSize="9px"
+            isHovered={false}
+            borderRadius="50px"
+            style={{ marginInlineStart: "10px" }}
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
+            label={t("Common:Paid")}
+            isPaidBadge
           />
         </div>
       ) : null}

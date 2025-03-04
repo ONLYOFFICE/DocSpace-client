@@ -23,9 +23,78 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { withTranslation } from "react-i18next";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Text } from "@docspace/shared/components/text";
+import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import styles from "./InvitationSettings.module.scss";
+import { LearnMoreWrapper } from "../StyledSecurity";
+const InvitationSettings = (props) => {
+  const { t } = props;
 
-const InvitationSettings = () => {
-  return <div>InvitationSettings</div>;
+  return (
+    <div className={styles.wrapper}>
+      <LearnMoreWrapper>
+        <Text fontSize="13px" fontWeight="400">
+          Configure the invitation options for internal members and external
+          guests of your DocSpace. These settings can help you comply with your
+          company's security guidelines, for example, if you use LDAP or other
+          user management systems.
+        </Text>
+      </LearnMoreWrapper>
+
+      <div className={styles.content}>
+        <div>
+          <Checkbox
+            className={styles.checkbox}
+            label={"Invite DocSpace members via Contacts"}
+          />
+          <Text
+            fontSize="12px"
+            fontWeight="400"
+            lineHeight="16px"
+            className={styles.checkboxDescription}
+          >
+            Enable this option to allow invitations to be sent to new DocSpace
+            members through the Contacts section. Disable this option in case
+            you want to invite new members through LDAP only.
+          </Text>
+        </div>
+
+        <div>
+          <Checkbox
+            className={styles.checkbox}
+            label={"Allow inviting guests"}
+          />
+          <Text
+            fontSize="12px"
+            fontWeight="400"
+            lineHeight="16px"
+            className={styles.checkboxDescription}
+          >
+            Enable this option to allow all DocSpace members to invite external
+            guests to rooms.
+          </Text>
+        </div>
+      </div>
+
+      <SaveCancelButtons
+        className={styles.saveCancelButtons}
+        // onSaveClick={onSaveClick}
+        // onCancelClick={onCancelClick}
+        // showReminder={showReminder}
+        reminderText={t("YouHaveUnsavedChanges")}
+        saveButtonLabel={t("Common:SaveButton")}
+        cancelButtonLabel={t("Common:CancelButton")}
+        displaySettings
+        hasScroll={false}
+        // isSaving={isSaving}
+      />
+    </div>
+  );
 };
 
-export default InvitationSettings;
+export const InvitationSettingsSection = withTranslation([
+  "Settings",
+  "Common",
+])(InvitationSettings);

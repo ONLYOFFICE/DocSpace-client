@@ -77,12 +77,7 @@ export async function validatePublicRoomKey(
 ): Promise<TValidateShareRoom> {
   const [req] = createRequest([`/files/share/${key}`], [["", ""]], "GET");
 
-  const res = IS_TEST
-    ? validatePublicRoomKeyHandler()
-    : await fetch(
-        req,
-        // { next: { revalidate: 300 } }
-      );
+  const res = IS_TEST ? validatePublicRoomKeyHandler() : await fetch(req);
 
   if (!res.ok) {
     throw new Error("Failed to validate public room key");

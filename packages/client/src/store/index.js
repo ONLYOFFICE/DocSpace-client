@@ -118,7 +118,7 @@ const tagsStore = new TagsStore();
 const clientLoadingStore = new ClientLoadingStore();
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
-const infoPanelStore = new InfoPanelStore(userStore);
+const infoPanelStore = new InfoPanelStore(userStore, pluginStore);
 const indexingStore = new IndexingStore(infoPanelStore, selectedFolderStore);
 
 const treeFoldersStore = new TreeFoldersStore(
@@ -204,6 +204,7 @@ const profileActionsStore = new ProfileActionsStore(
   userStore,
   settingsStore,
   currentTariffStatusStore,
+  infoPanelStore,
 );
 
 const peopleStore = new PeopleStore(

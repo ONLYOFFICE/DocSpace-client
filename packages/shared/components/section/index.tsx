@@ -57,6 +57,7 @@ import {
 } from "./Section.constants";
 import { parseChildren } from "./Section.utils";
 import OperationsProgress from "./sub-components/OperationsProgress";
+import { ChatWidget } from "./sub-components/ChatWidget";
 
 export type { SectionProps };
 
@@ -119,6 +120,10 @@ const Section = (props: SectionProps) => {
 
     primaryOperationsAlert,
     needErrorChecking,
+    chatFiles,
+
+    aiChatIsVisible,
+    setAiChatIsVisible,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -319,6 +324,14 @@ const Section = (props: SectionProps) => {
             />
           ) : null}
         </SectionContainer>
+
+        <ChatWidget
+          isVisible={aiChatIsVisible}
+          setIsVisible={setAiChatIsVisible}
+          chatFiles={chatFiles}
+          anotherDialogOpen={anotherDialogOpen}
+          currentDeviceType={currentDeviceType}
+        />
 
         {isInfoPanelAvailable ? (
           <InfoPanel

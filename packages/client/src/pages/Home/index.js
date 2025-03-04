@@ -166,6 +166,7 @@ const PureHome = (props) => {
     hideConfirmCancelOperation,
     welcomeFormFillingTipsVisible,
     formFillingTipsVisible,
+    chatFiles,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -321,6 +322,7 @@ const PureHome = (props) => {
       isLoaded: !firstLoad,
       viewAs: contactsViewAs,
       isAccounts: isContactsPage,
+      chatFiles,
     };
 
     if (!isContactsPage) {
@@ -688,6 +690,8 @@ export const Component = inject(
       needErrorChecking,
       setOperationCancelVisible,
       hideConfirmCancelOperation,
+
+      chatFiles: filesStore.files,
     };
   },
 )(observer(Home));

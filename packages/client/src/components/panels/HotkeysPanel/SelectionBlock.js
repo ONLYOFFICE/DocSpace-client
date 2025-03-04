@@ -89,7 +89,7 @@ const SelectionBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
         <>
           <Text {...textStyles}>{t("HotkeysSelectAll")}</Text>
           <Text {...keyTextStyles}>
-            {CtrlKey} + a {t("Common:Or")} Shift + а
+            {CtrlKey} + a {t("Common:Or")} Shift + a
           </Text>
         </>
       </Row>

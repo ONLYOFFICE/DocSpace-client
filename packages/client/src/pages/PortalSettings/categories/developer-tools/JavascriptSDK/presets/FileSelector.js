@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -46,7 +45,7 @@ import SearchUrlDark from "PUBLIC_DIR/images/sdk-presets_files-search_dark.png?u
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { TooltipContent } from "../sub-components/TooltipContent";
-import { Integration } from "../sub-components/Integration";
+import Integration from "../sub-components/Integration";
 
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
@@ -71,7 +70,7 @@ import {
 } from "./StyledPresets";
 
 const FileSelector = (props) => {
-  const { t, fetchExternalLinks, theme, currentColorScheme, logoText } = props;
+  const { t, fetchExternalLinks, theme, logoText } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -257,7 +256,7 @@ const FileSelector = (props) => {
       height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
-      <Box id={config.frameId} />
+      <div id={config.frameId} />
     </Frame>
   );
 
@@ -428,32 +427,21 @@ const FileSelector = (props) => {
             ) : null}
           </ControlsSection>
 
-          <Integration
-            className="integration-examples"
-            t={t}
-            theme={theme}
-            currentColorScheme={currentColorScheme}
-          />
+          <Integration className="integration-examples" />
         </Controls>
       </Container>
 
-      <Integration
-        className="integration-examples integration-examples-bottom"
-        t={t}
-        theme={theme}
-        currentColorScheme={currentColorScheme}
-      />
+      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };
 
 export const Component = inject(({ settingsStore, publicRoomStore }) => {
-  const { theme, currentColorScheme, logoText } = settingsStore;
+  const { theme, logoText } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
-    currentColorScheme,
     fetchExternalLinks,
     logoText,
   };

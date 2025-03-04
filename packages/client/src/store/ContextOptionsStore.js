@@ -27,7 +27,7 @@
 import FileActionsOwnerReactSvgUrl from "PUBLIC_DIR/images/file.actions.owner.react.svg?url";
 import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
-import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
+import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
@@ -35,15 +35,15 @@ import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.rea
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import TickRoundedSvgUrl from "PUBLIC_DIR/images/tick.rounded.svg?url";
 import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import CircleCrossSvgUrl from "PUBLIC_DIR/images/icons/16/circle.cross.svg?url";
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import DuplicateReactSvgUrl from "PUBLIC_DIR/images/duplicate.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
+import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
@@ -76,6 +76,7 @@ import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
+import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
@@ -87,7 +88,11 @@ import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { isLockedSharedRoom, trimSeparator } from "@docspace/shared/utils";
+import {
+  isMobile as isMobileUtils,
+  isLockedSharedRoom,
+  trimSeparator,
+} from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import {
@@ -95,6 +100,8 @@ import {
   copyDocumentShareLink,
   copyRoomShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
+
+import { getGuidanceConfig } from "@docspace/shared/components/guidance/configs";
 
 import {
   connectedCloudsTypeTitleTranslation,
@@ -172,6 +179,8 @@ class ContextOptionsStore {
 
   linksIsLoading = false;
 
+  guidanceStore;
+
   constructor(
     settingsStore,
     dialogsStore,
@@ -192,6 +201,7 @@ class ContextOptionsStore {
     userStore,
     indexingStore,
     clientLoadingStore,
+    guidanceStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -213,6 +223,7 @@ class ContextOptionsStore {
     this.userStore = userStore;
     this.indexingStore = indexingStore;
     this.clientLoadingStore = clientLoadingStore;
+    this.guidanceStore = guidanceStore;
   }
 
   onOpenFolder = async (item, t) => {
@@ -707,10 +718,7 @@ class ContextOptionsStore {
       );
     } else {
       translations = {
-        deleteOperation: t("Translations:DeleteOperation"),
         deleteFromTrash: t("Translations:DeleteFromTrash"),
-        deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-        FolderRemoved: t("Files:FolderRemoved"),
       };
 
       const selectedFolder = getSelectedFolder();
@@ -742,17 +750,10 @@ class ContextOptionsStore {
       return;
     }
 
-    const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
-      successRemoveFile: t("Files:FileRemoved"),
-      successRemoveFolder: t("Files:FolderRemoved"),
-      successRemoveRoom: t("Files:RoomRemoved"),
-      successRemoveRooms: t("Files:RoomsRemoved"),
-    };
-
     this.filesActionsStore.deleteItemAction(
       id,
-      translations,
+      title,
+      {},
       !isFolder,
       providerKey,
       isRoom,
@@ -1038,6 +1039,17 @@ class ContextOptionsStore {
 
   onEditIndex = () => {
     this.indexingStore.setIsIndexEditingMode(true);
+  };
+
+  onEnableFormFillingGuid = (t, roomType) => {
+    const guidanceConfig = getGuidanceConfig(roomType, t);
+
+    if (!guidanceConfig) {
+      return;
+    }
+
+    this.guidanceStore.setConfig(guidanceConfig);
+    this.dialogsStore.setWelcomeFormFillingTipsVisible(true);
   };
 
   onClickRemoveFromRecent = (item) => {
@@ -1551,6 +1563,7 @@ class ContextOptionsStore {
     }
 
     const isArchive = item.rootFolderType === FolderType.Archive;
+    const isFormRoom = item.roomType === RoomsType.FormRoom;
 
     const hasShareLinkRights = isPublicRoom
       ? item.security?.Read
@@ -1997,6 +2010,17 @@ class ContextOptionsStore {
         action: "archive",
       },
       {
+        id: "option_short-tour",
+        key: "short-tour",
+        label: t("FormFillingTipsDialog:WelcomeStartTutorial"),
+        icon: HelpCenterReactSvgUrl,
+        onClick: () => this.onEnableFormFillingGuid(t, item.roomType),
+        disabled:
+          !isFormRoom ||
+          isMobileUtils() ||
+          item.id !== this.selectedFolderStore.id,
+      },
+      {
         id: "option_leave-room",
         key: "leave-room",
         label: t("LeaveTheRoom"),
@@ -2305,11 +2329,7 @@ class ContextOptionsStore {
                 setDeleteDialogVisible(true);
               } else {
                 const translations = {
-                  deleteOperation: t("Translations:DeleteOperation"),
                   deleteFromTrash: t("Translations:DeleteFromTrash"),
-                  deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-                  FileRemoved: t("Files:FileRemoved"),
-                  FolderRemoved: t("Files:FolderRemoved"),
                 };
 
                 this.filesActionsStore

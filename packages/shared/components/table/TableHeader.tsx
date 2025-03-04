@@ -921,7 +921,7 @@ class TableHeaderComponent extends React.Component<
 
               if (percent === 100) {
                 const enableColumnsLength = columns.filter(
-                  (с) => !с.defaultSize && с.enable,
+                  (c) => !c.defaultSize && c.enable,
                 ).length;
 
                 if (enableColumnsLength !== 1) {
@@ -1216,6 +1216,8 @@ class TableHeaderComponent extends React.Component<
       } else {
         localStorage.setItem(columnInfoPanelStorageName || "", str);
       }
+
+      this.updateTableRows(str);
     }
 
     // Only call onResize if not already resized and container width has changed

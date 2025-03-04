@@ -30,7 +30,6 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 
@@ -77,16 +76,18 @@ const LDAP = ({
   return (
     <StyledLdapPage isSmallWindow={isSmallWindow}>
       <Text className="intro-text settings_unavailable">{t("LdapIntro")}</Text>
-      <Box marginProp="8px 0 24px 0">
-        <Link
-          color={currentColorScheme.main.accent}
-          isHovered
-          target="_blank"
-          href={ldapSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
-      </Box>
+      <div className="settings_unavailable-box">
+        {ldapSettingsUrl ? (
+          <Link
+            color={currentColorScheme.main.accent}
+            isHovered
+            target="_blank"
+            href={ldapSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
 
       {isMobileView ? (
         <LdapMobileView

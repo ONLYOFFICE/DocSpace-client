@@ -35,7 +35,6 @@ import { inject, observer } from "mobx-react";
 import { Avatar } from "@docspace/shared/components/avatar";
 
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -75,7 +74,7 @@ const MainProfile = (props) => {
     theme,
     profile,
     culture,
-    helpLink,
+    becometranslatorUrl,
     cultureNames,
 
     setChangeEmailVisible,
@@ -196,17 +195,22 @@ const MainProfile = (props) => {
         </Link>
         to take part in the translation and get up to 1 year free of charge."
       </Trans>
-      <Box displayProp="block" marginProp="10px 0 0">
+      {becometranslatorUrl ? (
         <Link
+          style={{
+            boxSizing: "border-box",
+            display: "block",
+            margin: "10px 0 0",
+          }}
           isHovered
           isBold
           fontSize="13px"
-          href={`${helpLink}/guides/become-translator.aspx`}
+          href={becometranslatorUrl}
           target="_blank"
         >
           {t("Common:LearnMore")}
         </Link>
-      </Box>
+      ) : null}
     </Text>
   );
 
@@ -639,8 +643,13 @@ const MainProfile = (props) => {
 export default inject(
   ({ settingsStore, peopleStore, userStore, avatarEditorDialogStore }) => {
     const { withActivationBar, sendActivationLink } = userStore;
-    const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
-      settingsStore;
+    const {
+      theme,
+      becometranslatorUrl,
+      culture,
+      currentColorScheme,
+      documentationEmail,
+    } = settingsStore;
 
     const {
       avatarEditorDialogVisible,
@@ -665,7 +674,7 @@ export default inject(
       theme,
       profile,
       culture,
-      helpLink,
+      becometranslatorUrl,
 
       setChangeEmailVisible,
       setChangePasswordVisible,

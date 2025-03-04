@@ -34,10 +34,12 @@ import { RowContainer } from "@docspace/shared/components/rows";
 
 import styles from "@docspace/shared/styles/FilesRowContainer.module.scss";
 
+import withContainer from "../../../../../HOCs/withContainer";
+
 import SimpleFilesRow from "./SimpleFilesRow";
 
 const FilesRowContainer = ({
-  filesList,
+  list,
   viewAs,
   setViewAs,
   filterTotal,
@@ -49,8 +51,9 @@ const FilesRowContainer = ({
   currentDeviceType,
   isIndexEditingMode,
   changeIndex,
-  icon,
-  isDownload,
+  isTutorialEnabled,
+  setRefMap,
+  deleteRefMap,
 }) => {
   const { sectionWidth } = useContext(Context);
 
@@ -61,7 +64,7 @@ const FilesRowContainer = ({
   });
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => (
+    return list.map((item, index) => (
       <SimpleFilesRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
         key={
@@ -79,25 +82,25 @@ const FilesRowContainer = ({
             : null
         }
         isIndexEditingMode={isIndexEditingMode}
-        icon={icon}
-        isDownload={isDownload}
+        isTutorialEnabled={isTutorialEnabled}
+        setRefMap={setRefMap}
+        deleteRefMap={deleteRefMap}
       />
     ));
   }, [
-    filesList,
+    list,
     sectionWidth,
     isRooms,
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
-    icon,
-    isDownload,
+    isTutorialEnabled,
   ]);
 
   return (
     <RowContainer
       className={`files-row-container ${styles.filesRowContainer}`}
-      filesLength={filesList.length}
+      filesLength={list.length}
       itemCount={filterTotal}
       fetchMoreFiles={fetchMoreFiles}
       hasMoreFiles={hasMoreFiles}
@@ -118,10 +121,9 @@ export default inject(
     treeFoldersStore,
     indexingStore,
     filesActionsStore,
-    uploadDataStore,
+    guidanceStore,
   }) => {
     const {
-      filesList,
       viewAs,
       setViewAs,
       filter,
@@ -130,6 +132,8 @@ export default inject(
       roomsFilter,
       highlightFile,
     } = filesStore;
+
+    const { setRefMap, deleteRefMap } = guidanceStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const { currentDeviceType } = settingsStore;
@@ -137,10 +141,7 @@ export default inject(
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
-    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
-
     return {
-      filesList,
       viewAs,
       setViewAs,
       infoPanelVisible,
@@ -153,8 +154,8 @@ export default inject(
       currentDeviceType,
       isIndexEditingMode,
       changeIndex: filesActionsStore.changeIndex,
-      icon,
-      isDownload,
+      setRefMap,
+      deleteRefMap,
     };
   },
-)(observer(FilesRowContainer));
+)(observer(withContainer(FilesRowContainer)));

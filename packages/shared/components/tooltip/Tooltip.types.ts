@@ -79,4 +79,5 @@ export type TooltipProps = Pick<
   maxWidth?: string;
   /** Whether to allow fallback to the perpendicular axis of the preferred placement */
   fallbackAxisSideDirection?: TFallbackAxisSideDirection;
+  noUserSelect?: boolean;
 };

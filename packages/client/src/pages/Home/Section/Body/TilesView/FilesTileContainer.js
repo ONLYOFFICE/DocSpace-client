@@ -32,22 +32,24 @@ import React, {
   useMemo,
   useContext,
 } from "react";
-import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import { Context } from "@docspace/shared/utils";
+import { TileContainer } from "@docspace/shared/components/tiles";
 
 import FileTile from "./FileTile";
 import { FileTileProvider } from "./FileTile.provider";
 import { elementResizeDetector } from "./FileTile.utils";
 
-import TileContainer from "./sub-components/TileContainer";
+import InfiniteGrid from "./sub-components/InfiniteGrid";
+import withContainer from "../../../../../HOCs/withContainer";
 
-const FilesTileContainer = ({ filesList }) => {
+const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
-  const [thumbSize, setThumbSize] = useState("");
+  const [thumbSize, setThumbSize] = useState(null);
   const [columnCount, setColumnCount] = useState(null);
 
   const { sectionWidth } = useContext(Context);
@@ -65,48 +67,46 @@ const FilesTileContainer = ({ filesList }) => {
 
   const onResize = useCallback(
     (node) => {
-      if (!node || !isMountedRef.current) return;
+      if (!node?.getBoundingClientRect || !isMountedRef.current) return;
 
-      const { width } = node.getBoundingClientRect();
+      try {
+        const { width } = node.getBoundingClientRect();
 
-      if (width === 0) return;
+        if (width === 0) return;
 
-      const size = "1280x720";
+        const size = "1280x720";
+        const widthWithoutPadding = width - 32;
+        const columns = Math.floor(widthWithoutPadding / 80);
 
-      const widthWithoutPadding = width - 32;
-
-      const columns = Math.floor(widthWithoutPadding / 80);
-
-      if (columns != columnCount) setColumnCount(columns);
-
-      // console.log(
-      //   `Body width: ${document.body.clientWidth} Tile width: ${width} ThumbSize: ${size}`
-      // );
-
-      if (size === thumbSize) return;
-
-      setThumbSize(size);
+        if (columns !== columnCount) setColumnCount(columns);
+        if (size !== thumbSize) setThumbSize(size);
+      } catch (err) {
+        console.error("Error measuring tile container:", err);
+      }
     },
     [columnCount, thumbSize],
   );
 
-  const onSetTileRef = React.useCallback((node) => {
-    if (node) {
+  const onSetTileRef = useCallback(
+    (node) => {
+      if (!node) return;
+
       clearTimeout(timerRef.current);
       timerRef.current = setTimeout(() => {
-        onResize(node);
-
-        if (tileRef?.current) elementResizeDetector.uninstall(tileRef.current);
+        if (tileRef.current) {
+          elementResizeDetector.uninstall(tileRef.current);
+        }
 
         tileRef.current = node;
-
+        onResize(node);
         elementResizeDetector.listenTo(node, onResize);
       }, 100);
-    }
-  }, []);
+    },
+    [onResize],
+  );
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => {
+    return list.map((item, index) => {
       return index % 11 == 0 ? (
         <FileTile
           id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
@@ -129,14 +129,15 @@ const FilesTileContainer = ({ filesList }) => {
         />
       );
     });
-  }, [filesList, onSetTileRef, sectionWidth]);
+  }, [list, onSetTileRef, sectionWidth, isTutorialEnabled]);
 
   return (
     <FileTileProvider columnCount={columnCount} thumbSize={thumbSize}>
       <TileContainer
+        isDesc={isDesc}
         className="tile-container"
-        draggable
         useReactWindow
+        infiniteGrid={InfiniteGrid}
         headingFolders={t("Translations:Folders")}
         headingFiles={t("Translations:Files")}
       >
@@ -148,8 +149,12 @@ const FilesTileContainer = ({ filesList }) => {
 
 export default inject(({ filesStore }) => {
   const { filesList } = filesStore;
+  const { filter } = filesStore;
+
+  const isDesc = filter?.sortOrder === "desc";
 
   return {
     filesList,
+    isDesc,
   };
-})(observer(FilesTileContainer));
+})(observer(withContainer(FilesTileContainer)));

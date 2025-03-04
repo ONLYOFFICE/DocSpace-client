@@ -147,8 +147,6 @@ class FilesStore {
 
   dragging = false;
 
-  privacyInstructions = "https://www.onlyoffice.com/private-rooms.aspx";
-
   isInit = false;
 
   isUpdatingRowItem = false;
@@ -252,6 +250,8 @@ class FilesStore {
   });
 
   hotkeysClipboard = [];
+
+  mainButtonVisible = false;
 
   constructor(
     authStore,
@@ -2519,6 +2519,7 @@ class FilesStore {
         "mute-room",
         "unmute-room",
         "edit-index",
+        "short-tour",
         "export-room-index",
         "save-as-template",
         "separator1",
@@ -4257,6 +4258,10 @@ class FilesStore {
 
     return true;
   }
+
+  setMainButtonVisible = (mainButtonVisible) => {
+    this.mainButtonVisible = mainButtonVisible;
+  };
 }
 
 export default FilesStore;

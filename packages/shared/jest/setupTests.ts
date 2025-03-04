@@ -1,7 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-/* @ts-nocheck */
+// @ts-nocheck
+// eslint-disable @typescript-eslint/no-unused-vars
 
 class MockDOMRect {
   static fromRect(other?: DOMRectInit): DOMRect {

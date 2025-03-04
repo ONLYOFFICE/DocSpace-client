@@ -30,6 +30,7 @@ export type TilesSkeletonProps = RectangleSkeletonProps & {
   foldersCount?: number;
   filesCount?: number;
   withTitle?: boolean;
+  isRooms?: boolean;
 };
 
 export type StyledBottomProps = {

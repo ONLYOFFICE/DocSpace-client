@@ -27,9 +27,9 @@
 import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
 import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
-import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/downloadAs.react.svg?url";
-import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
+import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
@@ -101,7 +101,9 @@ import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
+import { createFolderNavigation } from "SRC_DIR/helpers/createFolderNavigation";
 
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { checkProtocol } from "../helpers/files-helpers";
 
 class FilesActionStore {
@@ -199,8 +201,9 @@ class FilesActionStore {
     folderIds,
     clearSelection,
     operationId,
+    operation,
   ) => {
-    const { clearSecondaryProgressData } =
+    const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
     const { fetchFiles, fetchRooms, filter, roomsFilter, scrollToTop } =
@@ -248,7 +251,12 @@ class FilesActionStore {
     } finally {
       scrollToTop();
       this.dialogsStore.setIsFolderActions(false);
-      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
+      setSecondaryProgressBarData({
+        operation,
+        completed: true,
+        operationId,
+      });
     }
   };
 
@@ -309,9 +317,10 @@ class FilesActionStore {
   };
 
   createFoldersTree = async (t, files, folderId) => {
-    // console.log("createFoldersTree", files, folderId);
+    //  console.log("createFoldersTree", files, folderId);
+    const { uploaded } = this.uploadDataStore;
 
-    const { setPrimaryProgressBarData, clearPrimaryProgressData } =
+    const { setPrimaryProgressBarData } =
       this.uploadDataStore.primaryProgressDataStore;
 
     const roomFolder =
@@ -324,6 +333,12 @@ class FilesActionStore {
       return !isHidden;
     });
 
+    const pbData = {
+      operation: OPERATIONS_NAME.upload,
+      percent: 0,
+      completed: false,
+    };
+
     if (roomFolder && roomFolder.quotaLimit && roomFolder.quotaLimit !== -1) {
       const freeSpace = roomFolder.quotaLimit - roomFolder.usedSpace;
 
@@ -332,7 +347,11 @@ class FilesActionStore {
       }, 0);
 
       if (filesSize > freeSpace) {
-        clearPrimaryProgressData();
+        setPrimaryProgressBarData({
+          ...pbData,
+          completed: uploaded,
+          alert: true,
+        });
 
         const size = getConvertedSize(t, roomFolder.quotaLimit);
 
@@ -346,14 +365,6 @@ class FilesActionStore {
 
     const toFolderId = folderId || this.selectedFolderStore.id;
 
-    const pbData = {
-      icon: "upload",
-      visible: true,
-      percent: 0,
-      label: "",
-      alert: false,
-    };
-
     setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
 
     const tree = this.convertToTree(withoutHiddenFiles);
@@ -362,28 +373,38 @@ class FilesActionStore {
     await this.createFolderTree(tree, toFolderId, filesList);
 
     if (!filesList.length) {
-      setTimeout(() => clearPrimaryProgressData(), TIMEOUT);
+      setPrimaryProgressBarData({
+        ...pbData,
+        completed: uploaded,
+        withoutStatus: !tree.length,
+      });
     } else {
-      setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: false });
+      setPrimaryProgressBarData({ ...pbData });
     }
 
     return filesList;
   };
 
-  updateFilesAfterDelete = (operationId) => {
+  updateFilesAfterDelete = (operationId, operationName) => {
     const { setSelected } = this.filesStore;
-    const { clearSecondaryProgressData } =
+    const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
     setSelected("close");
 
     this.dialogsStore.setIsFolderActions(false);
-    setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
+    setSecondaryProgressBarData({
+      operation: operationName,
+      completed: true,
+      operationId,
+    });
   };
 
   deleteAction = async (translations, newSelection = null) => {
     const { isRecycleBinFolder, isPrivacyFolder, recycleBinFolderId } =
       this.treeFoldersStore;
+
     const {
       addActiveItems,
       getIsEmptyTrash,
@@ -393,8 +414,7 @@ class FilesActionStore {
     } = this.filesStore;
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      secondaryProgressDataStore;
+    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
 
     let selection =
       newSelection ||
@@ -404,7 +424,7 @@ class FilesActionStore {
 
     selection = selection.filter((item) => item.security.Delete);
 
-    const isThirdPartyFile = selection.some((f) => f.providerKey);
+    //  const isThirdPartyFile = selection.some((f) => f.providerKey);
 
     const currentFolderId = this.selectedFolderStore.id;
 
@@ -435,16 +455,22 @@ class FilesActionStore {
     }
 
     if (!folderIds.length && !fileIds.length) return;
-    const filesCount = folderIds.length + fileIds.length;
+
+    const operationName = OPERATIONS_NAME.trash;
+    const itemsLength = folderIds.length + fileIds.length;
 
     setSecondaryProgressBarData({
-      icon: "trash",
-      visible: true,
+      operation: operationName,
       percent: 0,
-      label: translations.deleteOperation,
-      alert: false,
-      filesCount,
       operationId,
+      ...(!immediately && {
+        destFolderInfo: this.treeFoldersStore.trashFolderInfo,
+        itemsCount: itemsLength,
+        ...(itemsLength === 1 && {
+          title: selection[0].title,
+          isFolder: selection[0].isFolder,
+        }),
+      }),
     });
 
     const destFolderId = immediately ? null : recycleBinFolderId;
@@ -457,34 +483,40 @@ class FilesActionStore {
         this.setGroupMenuBlocked(true);
         await removeFiles(folderIds, fileIds, deleteAfter, immediately)
           .then(async (res) => {
-            if (res[0]?.error) return Promise.reject(res[0].error);
-            const data = res[0] ? res[0] : null;
+            const result = res[res.length - 1];
+
+            if (result?.error) return Promise.reject(result.error);
+
+            const data = result ?? null;
+
+            if (!data) {
+              return Promise.reject();
+            }
+
             const pbData = {
-              icon: "trash",
-              label: translations.deleteOperation,
+              operation: operationName,
               operationId,
             };
+
             await this.uploadDataStore.loopFilesOperations(data, pbData);
 
             const showToast = () => {
               if (isRecycleBinFolder) {
                 return toastr.success(translations.deleteFromTrash);
               }
-
-              if (selection.length > 1 || isThirdPartyFile) {
-                return toastr.success(translations.deleteSelectedElem);
-              }
-              if (selection[0].fileExst) {
-                return toastr.success(translations.FileRemoved);
-              }
-              return toastr.success(translations.FolderRemoved);
             };
 
             if (this.dialogsStore.isFolderActions) {
-              this.updateCurrentFolder(fileIds, folderIds, false, operationId);
+              this.updateCurrentFolder(
+                fileIds,
+                folderIds,
+                false,
+                operationId,
+                operationName,
+              );
               showToast();
             } else {
-              this.updateFilesAfterDelete(operationId);
+              this.updateFilesAfterDelete(operationId, operationName);
 
               this.filesStore.removeFiles(
                 fileIds,
@@ -507,12 +539,12 @@ class FilesActionStore {
       } catch (err) {
         clearActiveOperations(fileIds, folderIds);
         setSecondaryProgressBarData({
-          visible: true,
+          operation: operationName,
+          completed: true,
           alert: true,
           operationId,
+          error: err,
         });
-        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-        return toastr.error(err.message ? err.message : err);
       } finally {
         this.setGroupMenuBlocked(false);
       }
@@ -525,8 +557,7 @@ class FilesActionStore {
       loopFilesOperations,
       clearActiveOperations,
     } = this.uploadDataStore;
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      secondaryProgressDataStore;
+    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
     const { isRecycleBinFolder } = this.treeFoldersStore;
     const { addActiveItems, files, folders, getIsEmptyTrash } = this.filesStore;
 
@@ -541,39 +572,44 @@ class FilesActionStore {
 
     this.emptyTrashInProgress = true;
 
-    setSecondaryProgressBarData({
-      icon: "trash",
-      visible: true,
-      percent: 0,
-      label: translations.deleteOperation,
-      alert: false,
+    const pbData = {
+      operation: OPERATIONS_NAME.deletePermanently,
       operationId,
+    };
+
+    setSecondaryProgressBarData({
+      percent: 0,
+      ...pbData,
     });
 
     try {
       await emptyTrash().then(async (res) => {
-        if (res[0]?.error) return Promise.reject(res[0].error);
-        const data = res[0] ? res[0] : null;
-        const pbData = {
-          icon: "trash",
-          label: translations.deleteOperation,
-          operationId,
-        };
+        const result = res[res.length - 1];
+
+        if (result?.error) return Promise.reject(result.error);
+        const data = result ?? null;
+
         await loopFilesOperations(data, pbData);
         toastr.success(translations.successOperation);
-        this.updateCurrentFolder(fileIds, folderIds, null, operationId);
+        this.updateCurrentFolder(
+          fileIds,
+          folderIds,
+          null,
+          pbData.operationId,
+          pbData.operation,
+        );
         getIsEmptyTrash();
         clearActiveOperations(fileIds, folderIds);
       });
     } catch (err) {
       clearActiveOperations(fileIds, folderIds);
       setSecondaryProgressBarData({
-        visible: true,
+        completed: true,
         alert: true,
-        operationId,
+        ...pbData,
       });
-      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-      return toastr.error(err.message ? err.message : err);
+
+      return toastr.error(err.message ? err.message : err, null, 0, true);
     } finally {
       this.emptyTrashInProgress = false;
     }
@@ -585,8 +621,7 @@ class FilesActionStore {
       loopFilesOperations,
       clearActiveOperations,
     } = this.uploadDataStore;
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      secondaryProgressDataStore;
+    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
     const { isArchiveFolder } = this.treeFoldersStore;
     const { addActiveItems, roomsForDelete } = this.filesStore;
 
@@ -595,38 +630,42 @@ class FilesActionStore {
 
     const operationId = uniqueid("operation_");
 
-    setSecondaryProgressBarData({
-      icon: "trash",
-      visible: true,
-      percent: 0,
-      label: translations.deleteOperation,
-      alert: false,
+    const pbData = {
+      operation: OPERATIONS_NAME.deletePermanently,
       operationId,
+    };
+
+    setSecondaryProgressBarData({
+      percent: 0,
+      ...pbData,
     });
 
     try {
       await removeFiles(folderIds, [], true, true).then(async (res) => {
-        if (res[0]?.error) return Promise.reject(res[0].error);
-        const data = res[0] ? res[0] : null;
-        const pbData = {
-          icon: "trash",
-          label: translations.deleteOperation,
-          operationId,
-        };
+        const result = res[res.length - 1];
+
+        if (result?.error) return Promise.reject(result.error);
+        const data = result ?? null;
+
         await loopFilesOperations(data, pbData);
         toastr.success(translations.successOperation);
-        this.updateCurrentFolder(null, folderIds, null, operationId);
+        this.updateCurrentFolder(
+          null,
+          folderIds,
+          null,
+          pbData.operationId,
+          pbData.operation,
+        );
         // getIsEmptyTrash();
         clearActiveOperations(null, folderIds);
       });
     } catch (err) {
       clearActiveOperations(null, folderIds);
       setSecondaryProgressBarData({
-        visible: true,
+        completed: true,
         alert: true,
-        operationId,
+        ...pbData,
       });
-      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
 
       return toastr.error(err.message ? err.message : err);
     }
@@ -635,8 +674,8 @@ class FilesActionStore {
   downloadFiles = async (fileConvertIds, folderIds, translations) => {
     const { clearActiveOperations, secondaryProgressDataStore } =
       this.uploadDataStore;
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      secondaryProgressDataStore;
+
+    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
     const { openUrl } = this.settingsStore;
 
     const { addActiveItems } = this.filesStore;
@@ -650,14 +689,13 @@ class FilesActionStore {
 
     const operationId = uniqueid("operation_");
 
+    const operationName = OPERATIONS_NAME.download;
+
     setSecondaryProgressBarData({
-      icon: "file",
-      visible: true,
+      operation: operationName,
       percent: 0,
-      label,
-      alert: false,
       operationId,
-      isDownload: true,
+      operationIds: [...fileConvertIds, ...folderIds],
     });
 
     const fileIds = fileConvertIds.map((f) => f.key || f);
@@ -668,9 +706,16 @@ class FilesActionStore {
     try {
       await downloadFiles(fileConvertIds, folderIds, shareKey).then(
         async (res) => {
-          const data = res[0] ? res[0] : null;
+          const result = res[res.length - 1];
+
+          if (result?.error) return Promise.reject(result.error);
+          const data = result ?? null;
+
+          if (!data) {
+            return Promise.reject();
+          }
           const pbData = {
-            icon: "file",
+            operation: operationName,
             label,
             operationId,
           };
@@ -678,26 +723,22 @@ class FilesActionStore {
           const item =
             data?.finished && data?.url
               ? data
-              : await this.uploadDataStore.loopFilesOperations(
-                  data,
-                  pbData,
-                  true,
-                );
+              : await this.uploadDataStore.loopFilesOperations(data, pbData);
 
           clearActiveOperations(fileIds, folderIds);
           setDownloadItems([]);
 
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
-          } else {
-            setSecondaryProgressBarData({
-              visible: true,
-              alert: true,
-              operationId,
-            });
           }
 
-          setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+          setSecondaryProgressBarData({
+            operation: operationName,
+            alert: !item.url,
+            completed: true,
+            operationId,
+          });
+
           !item.url && toastr.error(translations.error, null, 0, true);
         },
       );
@@ -705,13 +746,12 @@ class FilesActionStore {
       clearActiveOperations(fileIds, folderIds);
 
       setSecondaryProgressBarData({
-        visible: true,
+        operation: operationName,
         alert: true,
+        completed: true,
         operationId,
       });
-      const error = err.error;
-
-      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+      const error = err?.error;
 
       if (error?.includes("password")) {
         const filesIds = error.match(/\d+/g)?.map(Number) ?? [
@@ -728,13 +768,13 @@ class FilesActionStore {
           });
         });
 
-        toastr.error(passwordError);
+        toastr.error(passwordError, null, 0, true);
         setSortedPasswordFiles({ other: [...passwordArray] });
         setDownloadDialogVisible(true);
         return;
       }
 
-      return toastr.error(err);
+      return toastr.error(err, null, 0, true);
     }
   };
 
@@ -811,12 +851,11 @@ class FilesActionStore {
       setHotkeyCaretStart,
       setHotkeyCaret,
       setEnabledHotkeys,
-      filesList,
     } = this.filesStore;
 
     if (!id) return;
 
-    const item = filesList.find(
+    const item = this.filesStore.filesList.find(
       (elm) => elm.id === id && elm.isFolder === isFolder,
     );
 
@@ -853,15 +892,14 @@ class FilesActionStore {
 
   deleteItemAction = async (
     itemId,
+    itemTitle,
     translations,
     isFile,
     isThirdParty,
     isRoom,
   ) => {
-    const { secondaryProgressDataStore, clearActiveOperations } =
-      this.uploadDataStore;
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      secondaryProgressDataStore;
+    const { secondaryProgressDataStore } = this.uploadDataStore;
+    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
     if (
       this.filesSettingsStore.confirmDelete ||
       this.treeFoldersStore.isPrivacyFolder ||
@@ -872,17 +910,19 @@ class FilesActionStore {
       this.dialogsStore.setDeleteDialogVisible(true);
     } else {
       const operationId = uniqueid("operation_");
+      const operationName = OPERATIONS_NAME.trash;
 
       setSecondaryProgressBarData({
-        icon: "trash",
-        visible: true,
+        operation: operationName,
         percent: 0,
-        label: translations?.deleteOperation,
-        alert: false,
         operationId,
+        title: itemTitle,
+        destFolderInfo: this.treeFoldersStore.trashFolderInfo,
+        itemsCount: 1,
+        isFolder: !isFile,
       });
 
-      const id = Array.isArray(itemId) ? itemId : [itemId];
+      // const id = Array.isArray(itemId) ? itemId : [itemId];
 
       try {
         await this.deleteItemOperation(
@@ -891,50 +931,48 @@ class FilesActionStore {
           translations,
           isRoom,
           operationId,
+          operationName,
         );
       } catch (err) {
         setSecondaryProgressBarData({
-          visible: true,
+          operation: operationName,
+          completed: true,
           alert: true,
           operationId,
+          error: err,
         });
-        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-        return toastr.error(err.message ? err.message : err);
-      } finally {
-        setTimeout(
-          () => clearActiveOperations(isFile && id, !isFile && id),
-          TIMEOUT,
-        );
       }
     }
   };
 
-  deleteItemOperation = (isFile, itemId, translations, isRoom, operationId) => {
+  deleteItemOperation = (
+    isFile,
+    itemId,
+    translations,
+    isRoom,
+    operationId,
+    operation,
+  ) => {
     const { addActiveItems, getIsEmptyTrash } = this.filesStore;
     const { isRecycleBinFolder, recycleBinFolderId } = this.treeFoldersStore;
-
-    const pbData = {
-      icon: "trash",
-      label: translations?.deleteOperation,
-      operationId,
-    };
 
     const destFolderId = isRecycleBinFolder ? null : recycleBinFolderId;
 
     if (isFile) {
       addActiveItems([itemId], null, destFolderId);
       return deleteFile(itemId).then(async (res) => {
-        if (res[0]?.error) return Promise.reject(res[0].error);
-        const data = res[0] ? res[0] : null;
-        await this.uploadDataStore.loopFilesOperations(data, pbData);
+        const result = res[res.length - 1];
 
-        this.updateFilesAfterDelete(operationId);
-        this.filesStore.removeFiles(
-          [itemId],
-          null,
-          () => toastr.success(translations.successRemoveFile),
-          destFolderId,
-        );
+        if (result?.error) return Promise.reject(result.error);
+        const data = result ?? null;
+
+        await this.uploadDataStore.loopFilesOperations(data, {
+          operationId,
+          operation,
+        });
+
+        this.updateFilesAfterDelete(operationId, operation);
+        this.filesStore.removeFiles([itemId], null, null, destFolderId);
       });
     }
     if (isRoom) {
@@ -944,10 +982,21 @@ class FilesActionStore {
       this.setGroupMenuBlocked(true);
       return removeFiles(items, [], false, true)
         .then(async (res) => {
-          if (res[0]?.error) return Promise.reject(res[0].error);
-          const data = res[0] ? res[0] : null;
-          await this.uploadDataStore.loopFilesOperations(data, pbData);
-          this.updateCurrentFolder(null, [itemId], null, operationId);
+          const result = res[res.length - 1];
+
+          if (result?.error) return Promise.reject(result.error);
+          const data = result ?? null;
+          await this.uploadDataStore.loopFilesOperations(data, {
+            operation,
+            operationId,
+          });
+          this.updateCurrentFolder(
+            null,
+            [itemId],
+            null,
+            operationId,
+            operation,
+          );
         })
         .then(() =>
           toastr.success(
@@ -962,19 +1011,20 @@ class FilesActionStore {
           this.setGroupMenuBlocked(false);
         });
     }
+
     addActiveItems(null, [itemId], destFolderId);
     return deleteFolder(itemId).then(async (res) => {
-      if (res[0]?.error) return Promise.reject(res[0].error);
-      const data = res[0] ? res[0] : null;
-      await this.uploadDataStore.loopFilesOperations(data, pbData);
+      const result = res[res.length - 1];
 
-      this.updateFilesAfterDelete(operationId);
-      this.filesStore.removeFiles(
-        null,
-        [itemId],
-        () => toastr.success(translations.successRemoveFolder),
-        destFolderId,
-      );
+      if (result?.error) return Promise.reject(result.error);
+      const data = result ?? null;
+      await this.uploadDataStore.loopFilesOperations(data, {
+        operationId,
+        operation,
+      });
+
+      this.updateFilesAfterDelete(operationId, operation);
+      this.filesStore.removeFiles(null, [itemId], null, destFolderId);
 
       getIsEmptyTrash();
     });
@@ -1011,9 +1061,10 @@ class FilesActionStore {
   };
 
   duplicateAction = async (item) => {
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+    const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
     const { clearActiveOperations } = this.uploadDataStore;
+    const selectedFolder = this.selectedFolderStore.getSelectedFolder();
 
     this.setSelectedItems();
 
@@ -1021,27 +1072,36 @@ class FilesActionStore {
     const fileIds = [];
     item.fileExst ? fileIds.push(item.id) : folderIds.push(item.id);
 
-    const icon = item.isRoom ? "duplicate-room" : "duplicate";
     const operationId = uniqueid("operation_");
 
+    const operationName = OPERATIONS_NAME.duplicate;
+
     setSecondaryProgressBarData({
-      icon,
-      visible: true,
+      operation: operationName,
       percent: 0,
-      alert: false,
       operationId,
+      itemsCount: 1,
+      title: item.title,
+      isFolder: item.isFolder,
+      operationIds: [item.id],
+      destFolderInfo: selectedFolder,
+      alert: false,
     });
 
     this.filesStore.addActiveItems(fileIds, folderIds);
 
     return duplicate(folderIds, fileIds)
       .then(async (res) => {
-        const lastResult = res && res[res.length - 1];
+        const lastResult = res[res.length - 1];
 
         if (lastResult?.error) return Promise.reject(lastResult.error);
 
-        const pbData = { icon, operationId };
-        const data = lastResult || null;
+        const pbData = { operation: operationName, operationId };
+        const data = lastResult ?? null;
+
+        if (!data) {
+          return Promise.reject();
+        }
 
         const operationData = await this.uploadDataStore.loopFilesOperations(
           data,
@@ -1054,21 +1114,22 @@ class FilesActionStore {
           );
         }
 
-        return setTimeout(
-          () => clearSecondaryProgressData(operationId),
-          TIMEOUT,
-        );
+        setSecondaryProgressBarData({
+          operation: operationName,
+          operationId,
+          completed: true,
+        });
       })
       .catch((err) => {
         clearActiveOperations(fileIds, folderIds);
+
         setSecondaryProgressBarData({
-          icon,
-          visible: true,
-          alert: true,
+          operation: operationName,
           operationId,
+          alert: true,
+          completed: true,
+          error: err,
         });
-        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-        return toastr.error(err.message ? err.message : err);
       })
       .finally(() => {
         clearActiveOperations(fileIds, folderIds);
@@ -1223,8 +1284,7 @@ class FilesActionStore {
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
 
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      secondaryProgressDataStore;
+    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
 
     if (!myRoomsId || !archiveRoomsId) {
       console.error("Default categories not found");
@@ -1237,36 +1297,32 @@ class FilesActionStore {
       ? folders.map((x) => (x?.id ? x.id : x))
       : [folders.id];
 
+    const operation = OPERATIONS_NAME.move;
+
     setSecondaryProgressBarData({
-      icon: "move",
-      visible: true,
+      operation,
       percent: 0,
-      label: "Archive room",
-      alert: false,
       operationId,
     });
 
     const destFolder = action === "archive" ? archiveRoomsId : myRoomsId;
 
     addActiveItems(null, items, destFolder);
+    const pbData = {
+      operation,
+      operationId,
+    };
 
     switch (action) {
       case "archive":
         this.setGroupMenuBlocked(true);
         return moveToFolder(archiveRoomsId, items)
           .then(async (res) => {
-            const lastResult = res && res[res.length - 1];
+            const lastResult = res[res.length - 1];
 
             if (lastResult?.error) return Promise.reject(lastResult.error);
 
-            const pbData = {
-              icon: "move",
-              label: "Archive rooms operation",
-              operationId,
-            };
-            const data = lastResult || null;
-
-            console.log(pbData.label, { data, res });
+            const data = lastResult ?? null;
 
             const operationData =
               await this.uploadDataStore.loopFilesOperations(data, pbData);
@@ -1287,10 +1343,11 @@ class FilesActionStore {
             }
 
             this.dialogsStore.setIsFolderActions(false);
-            return setTimeout(
-              () => clearSecondaryProgressData(operationId),
-              TIMEOUT,
-            );
+
+            setSecondaryProgressBarData({
+              completed: true,
+              ...pbData,
+            });
           })
 
           .then(() => {
@@ -1311,14 +1368,14 @@ class FilesActionStore {
           })
           .catch((err) => {
             clearActiveOperations(null, items);
+
             setSecondaryProgressBarData({
-              icon: "move",
-              visible: true,
+              completed: true,
               alert: true,
-              operationId,
+              ...pbData,
             });
-            setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-            return toastr.error(err.message ? err.message : err);
+
+            return toastr.error(err.message ? err.message : err, null, 0, true);
           })
           .finally(() => {
             clearActiveOperations(null, items);
@@ -1328,26 +1385,22 @@ class FilesActionStore {
         this.setGroupMenuBlocked(true);
         return moveToFolder(myRoomsId, items)
           .then(async (res) => {
-            const lastResult = res && res[res.length - 1];
+            const lastResult = res[res.length - 1];
 
             if (lastResult?.error) return Promise.reject(lastResult.error);
 
-            const pbData = {
-              icon: "move",
-              label: "Restore rooms from archive operation",
-              operationId,
-            };
-            const data = lastResult || null;
+            const data = lastResult ?? null;
 
             console.log(pbData.label, { data, res });
 
             await this.uploadDataStore.loopFilesOperations(data, pbData);
 
             this.dialogsStore.setIsFolderActions(false);
-            return setTimeout(
-              () => clearSecondaryProgressData(operationId),
-              TIMEOUT,
-            );
+
+            setSecondaryProgressBarData({
+              completed: true,
+              ...pbData,
+            });
           })
 
           .then(() => {
@@ -1365,12 +1418,12 @@ class FilesActionStore {
           .catch((err) => {
             clearActiveOperations(null, items);
             setSecondaryProgressBarData({
-              visible: true,
+              completed: true,
               alert: true,
-              operationId,
+              ...pbData,
             });
-            setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-            return toastr.error(err.message ? err.message : err);
+
+            return toastr.error(err.message ? err.message : err, null, 0, true);
           })
           .finally(() => {
             clearActiveOperations(null, items);
@@ -1621,23 +1674,23 @@ class FilesActionStore {
   // };
 
   markAsRead = (folderIds, fileIds, item) => {
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+    const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
     const operationId = uniqueid("operation_");
+    const pbData = { operation: OPERATIONS_NAME.markAsRead, operationId };
 
     setSecondaryProgressBarData({
-      icon: "file",
-      label: "", // TODO: add translation if need "MarkAsRead": "Mark all as read",
       percent: 0,
-      visible: true,
-      operationId,
+      ...pbData,
     });
 
     return markAsRead(folderIds, fileIds)
       .then(async (res) => {
-        const data = res[0] ? res[0] : null;
-        const pbData = { icon: "file", operationId };
+        const result = res[res.length - 1];
+
+        const data = result ?? null;
+
         await this.uploadDataStore.loopFilesOperations(data, pbData);
       })
       .then(() => {
@@ -1650,13 +1703,17 @@ class FilesActionStore {
         const index = getFileIndex(item.id);
         updateFileStatus(index, item.fileStatus & ~FileStatus.IsNew);
       })
-      .catch((err) => toastr.error(err))
+      .catch((err) => toastr.error(err, null, 0, true))
       .finally(() =>
-        setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT),
+        setSecondaryProgressBarData({
+          operation: OPERATIONS_NAME.markAsRead,
+          completed: true,
+          operationId,
+        }),
       );
   };
 
-  moveDragItems = (destFolderId, folderTitle, translations) => {
+  moveDragItems = (destFolderId, folderTitle, destFolderInfo) => {
     const folderIds = [];
     const fileIds = [];
     const deleteAfter = false;
@@ -1676,12 +1733,17 @@ class FilesActionStore {
 
     const operationData = {
       destFolderId,
+      destFolderInfo,
       folderIds,
       fileIds,
       deleteAfter,
-      translations,
       folderTitle,
       isCopy,
+      itemsCount: selection.length,
+      ...(selection.length === 1 && {
+        title: selection[0].title,
+        isFolder: selection[0].isFolder,
+      }),
     };
 
     selection.forEach((item) => {
@@ -1749,7 +1811,6 @@ class FilesActionStore {
         await this.uploadDataStore.itemOperationToFolder(operationData);
       } catch (err) {
         setBufferSelection(null);
-        return toastr.error(err.message ? err.message : err);
       }
     }
   };
@@ -1889,32 +1950,28 @@ class FilesActionStore {
     });
 
     const translations = {
-      deleteOperation: t("Translations:DeleteOperation"),
-      successRemoveFile: t("Files:FileRemoved"),
-      successRemoveFolder: t("Files:FolderRemoved"),
       successRemoveRoom: t("Files:RoomRemoved"),
       successRemoveRooms: t("Files:RoomsRemoved"),
     };
 
-    this.deleteItemAction(items, translations, null, null, true);
+    this.deleteItemAction(items, "", translations, null, null, true);
   };
 
   deleteRoomsAction = async (itemId, translations) => {
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
 
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      secondaryProgressDataStore;
+    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
 
     const operationId = uniqueid("operation_");
 
-    setSecondaryProgressBarData({
-      icon: "trash",
-      visible: true,
-      percent: 0,
-      label: translations?.deleteOperation,
-      alert: false,
+    const pbData = {
+      operation: OPERATIONS_NAME.deletePermanently,
       operationId,
+    };
+    setSecondaryProgressBarData({
+      percent: 0,
+      ...pbData,
     });
 
     const id = Array.isArray(itemId) ? itemId : [itemId];
@@ -1926,18 +1983,17 @@ class FilesActionStore {
         itemId,
         translations,
         true,
-        operationId,
+        pbData.operationId,
+        pbData.operation,
       );
     } catch (err) {
-      console.log(err);
-
       setSecondaryProgressBarData({
-        visible: true,
+        completed: true,
         alert: true,
-        operationId,
+        ...pbData,
       });
-      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
-      return toastr.error(err.message ? err.message : err);
+
+      return toastr.error(err.message ? err.message : err, null, 0, true);
     } finally {
       this.setGroupMenuBlocked(false);
       setTimeout(() => clearActiveOperations(null, id), TIMEOUT);
@@ -2171,11 +2227,7 @@ class FilesActionStore {
               setDeleteDialogVisible(true);
             } else {
               const translations = {
-                deleteOperation: t("Translations:DeleteOperation"),
                 deleteFromTrash: t("Translations:DeleteFromTrash"),
-                deleteSelectedElem: t("Translations:DeleteSelectedElem"),
-                FileRemoved: t("Files:FileRemoved"),
-                FolderRemoved: t("Files:FolderRemoved"),
               };
 
               this.deleteAction(translations).catch((err) => toastr.error(err));
@@ -2501,68 +2553,18 @@ class FilesActionStore {
     if (isRecycleBinFolder || isLoading) return;
 
     if (isFolder) {
-      const { isRoom, rootFolderType, title, roomType: itemRoomType } = item;
-
-      const path = getCategoryUrl(
-        getCategoryTypeByFolderType(rootFolderType, id),
-        id,
+      const { url, state } = await createFolderNavigation(
+        item,
+        categoryType,
+        this.userStore.user?.id,
+        roomType,
+        currentTitle,
+        this.getPublicKey,
       );
-
-      const filter = FilesFilter.getDefault();
-
-      const filterObj = FilesFilter.getFilter(window.location);
-
-      if (isRoom) {
-        const key =
-          categoryType === CategoryType.Archive
-            ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
-            : `UserFilterSharedRoom=${this.userStore.user?.id}`;
-
-        const filterStorageSharedRoom =
-          this.userStore.user?.id && localStorage.getItem(key);
-
-        if (filterStorageSharedRoom) {
-          const splitFilter = filterStorageSharedRoom.split(",");
-
-          filter.sortBy = splitFilter[0];
-          filter.sortOrder = splitFilter[1];
-        }
-      } else {
-        // For the document section at all levels there is one sorting
-        filter.sortBy = filterObj.sortBy;
-        filter.sortOrder = filterObj.sortOrder;
-      }
-
-      filter.folder = id;
-
-      const shareKey = await this.getPublicKey(item);
-      if (shareKey) filter.key = shareKey;
-
-      const url = `${path}?${filter.toUrlParams()}`;
 
       if (openingNewTab(url, e)) return;
 
       setIsLoading(true);
-
-      const isShared =
-        item.shared || item.navigationPath?.findIndex((r) => r.shared) > -1;
-
-      const isExternal =
-        item.external || item.navigationPath?.findIndex((r) => r.external) > -1;
-
-      const state = {
-        title,
-        isRoot: false,
-        rootFolderType,
-        isRoom,
-        rootRoomTitle: roomType ? currentTitle : "",
-        isPublicRoomType: itemRoomType === RoomsType.PublicRoom || false,
-        isShared,
-        isExternal,
-        canCreate: item.security?.canCreate,
-        isLifetimeEnabled:
-          itemRoomType === RoomsType.VirtualDataRoom && !!item?.lifetime,
-      };
 
       setSelection([]);
 
@@ -2846,7 +2848,7 @@ class FilesActionStore {
     this.isGroupMenuBlocked = blocked;
   };
 
-  preparingDataForCopyingToRoom = async (destFolderId, selections, t) => {
+  preparingDataForCopyingToRoom = async (destFolderId, selections) => {
     const fileIds = [];
     let folderIds = [];
 
@@ -2889,10 +2891,9 @@ class FilesActionStore {
       fileIds,
       deleteAfter: false,
       isCopy: true,
-      translations: {
-        copy: t("Common:CopyOperation"),
-      },
       content: oneFolder,
+      itemsCount: selections.length,
+      ...(selections.length === 1 && { title: selections[0].title }),
     };
 
     return this.uploadDataStore.itemOperationToFolder(operationData);
@@ -3001,7 +3002,7 @@ class FilesActionStore {
     window.dispatchEvent(event);
   };
 
-  copyFromTemplateForm = async (fileInfo, t) => {
+  copyFromTemplateForm = async (fileInfo) => {
     const selectedItemId = this.selectedFolderStore.id;
     const fileIds = [fileInfo.id];
 
@@ -3012,9 +3013,6 @@ class FilesActionStore {
       deleteAfter: false,
       isCopy: true,
       folderTitle: this.selectedFolderStore.title,
-      translations: {
-        copy: t("Common:CopyOperation"),
-      },
     };
 
     this.uploadDataStore.secondaryProgressDataStore.setItemsSelectionTitle(
@@ -3230,13 +3228,10 @@ class FilesActionStore {
 
       if (res?.percentage) {
         setSecondaryProgressBarData({
-          icon: pbData.icon,
-          visible: true,
+          operation: pbData.operation,
           percent: res.percentage,
-          label: "",
           alert: false,
           operationId: pbData.operationId,
-          filesCount: pbData.filesCount,
         });
       }
     }
@@ -3273,23 +3268,19 @@ class FilesActionStore {
       return toastr.error(t("Files:ExportRoomIndexAlreadyInProgressError"));
     }
 
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+    const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
+    const operationName = OPERATIONS_NAME.exportIndex;
+
     const pbData = {
-      icon: "exportIndex",
+      operation: operationName,
       operationId: uniqueid("operation_"),
-      filesCount: 1,
     };
 
     setSecondaryProgressBarData({
-      icon: pbData.icon,
-      visible: true,
-      percent: 0,
-      label: "",
-      alert: false,
+      operation: pbData.operation,
       operationId: pbData.operationId,
-      filesCount: pbData.filesCount,
     });
 
     this.alreadyExportingRoomIndex = true;
@@ -3303,18 +3294,30 @@ class FilesActionStore {
 
       if (res.status === ExportRoomIndexTaskStatus.Failed) {
         toastr.error(res.error);
+
+        setSecondaryProgressBarData({
+          operation: pbData.operation,
+          completed: true,
+          alert: true,
+          operationId: pbData.operationId,
+        });
+
         return;
       }
 
       if (res.status === ExportRoomIndexTaskStatus.Completed) {
         this.onSuccessExportRoomIndex(t, res.resultFileName, res.resultFileUrl);
       }
+
+      setSecondaryProgressBarData({
+        operation: pbData.operation,
+        completed: true,
+        operationId: pbData.operationId,
+      });
     } catch (e) {
-      toastr.error(e);
+      toastr.error(e, null, 0, true);
     } finally {
       this.alreadyExportingRoomIndex = false;
-
-      setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
     }
   };
 
@@ -3348,8 +3351,7 @@ class FilesActionStore {
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
 
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      secondaryProgressDataStore;
+    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
 
     const {
       setVersionDeletionProcess,
@@ -3363,11 +3365,7 @@ class FilesActionStore {
     const operationId = uniqueid("operation_");
 
     setSecondaryProgressBarData({
-      icon: "file",
-      visible: true,
-      percent: 0,
-      alert: false,
-      filesCount: 1,
+      operation: OPERATIONS_NAME.deleteVersionFile,
       operationId,
     });
 
@@ -3376,10 +3374,12 @@ class FilesActionStore {
     try {
       await deleteVersionFile(fileId, versions)
         .then(async (res) => {
-          if (res[0]?.error) return Promise.reject(res[0].error);
-          const data = res[0] ? res[0] : null;
+          const result = res[res.length - 1];
+
+          if (result?.error) return Promise.reject(result.error);
+          const data = result ?? null;
           const pbData = {
-            icon: "file",
+            operation: OPERATIONS_NAME.deleteVersionFile,
             operationId,
           };
 
@@ -3392,19 +3392,233 @@ class FilesActionStore {
           if (isVisible) fetchFileVersions(fileId, null, null, true);
 
           clearActiveOperations([fileId]);
-          setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
+          setSecondaryProgressBarData({
+            operation: OPERATIONS_NAME.deleteVersionFile,
+            completed: true,
+            operationId,
+          });
         });
     } catch (err) {
       setSecondaryProgressBarData({
-        visible: true,
+        operation: OPERATIONS_NAME.deleteVersionFile,
+        completed: true,
         alert: true,
         operationId,
       });
-      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+
       setVersionSelectedForDeletion(null);
       setVersionDeletionProcess(false);
       return toastr.error(err.message ? err.message : err);
     }
+  };
+
+  runOperations = (operations = []) => {
+    const { files, folders, activeFiles, activeFolders, addActiveItems } =
+      this.filesStore;
+
+    const { itemOperationToFolder, clearActiveOperations } =
+      this.uploadDataStore;
+    if (!operations || operations.length === 0) {
+      return "No operations specified";
+    }
+
+    // Count operations that need files (all except emptyTrash)
+    const fileOperations = ["delete", "duplicate", "copy", "move"];
+
+    const totalFilesNeeded =
+      operations.filter((op) => fileOperations.includes(op)).length +
+      (operations.includes("download") ? 2 : 0);
+
+    const needsFolder =
+      operations.includes("copy") || operations.includes("move");
+
+    if (totalFilesNeeded > 0 && (!files || files.length < totalFilesNeeded)) {
+      return `Need at least ${totalFilesNeeded} files`;
+    }
+
+    if (needsFolder && (!folders || folders.length < 1)) {
+      return "Need at least 1 folder for copy and move operations";
+    }
+
+    const availableFiles = files
+      ? files.filter(
+          (file) => !activeFiles.some((active) => active.id === file.id),
+        )
+      : [];
+
+    const availableFolders = folders
+      ? folders.filter(
+          (folder) => !activeFolders.some((active) => active.id === folder.id),
+        )
+      : [];
+
+    if (totalFilesNeeded > 0 && availableFiles.length < totalFilesNeeded) {
+      return `Need ${totalFilesNeeded} available files. Found only ${availableFiles.length} files that are not in active operations`;
+    }
+
+    if (needsFolder && availableFolders.length < 1) {
+      return "Need at least 1 available folder. Found no folders that are not in active operations";
+    }
+
+    let currentFileIndex = 0;
+    const operationResults = [];
+    let errorMessage = null;
+
+    operations.forEach((op) => {
+      if (errorMessage) return;
+
+      const filesToProcess =
+        op === "download"
+          ? availableFiles.slice(currentFileIndex, currentFileIndex + 2)
+          : availableFiles.slice(currentFileIndex, currentFileIndex + 1);
+
+      switch (op) {
+        case "delete": {
+          const hasDeletePermissions = filesToProcess.every(
+            (file) => file.security?.Delete,
+          );
+
+          if (!hasDeletePermissions) {
+            errorMessage = "No delete permission for one or more files";
+            return;
+          }
+
+          this.deleteAction(null, filesToProcess)
+            .then(() => {
+              console.log(
+                `Delete operation started for file: ${filesToProcess[0].title}`,
+              );
+            })
+            .catch((err) => {
+              console.log(
+                `Error deleting file ${filesToProcess[0].title}: ${err}`,
+              );
+            });
+
+          currentFileIndex += 1;
+          operationResults.push(`deleting file: ${filesToProcess[0].title}`);
+          break;
+        }
+        case "download": {
+          const translations = {
+            error: "Downloading error",
+          };
+
+          this.downloadFiles(
+            filesToProcess.map((file) => file.id),
+            [],
+            translations,
+          )
+            .then(() => {
+              console.log(
+                `Download started for files: ${filesToProcess
+                  .map((file) => file.title)
+                  .join(", ")}`,
+              );
+            })
+            .catch((err) => {
+              console.log(
+                `Error downloading files ${filesToProcess
+                  .map((file) => file.title)
+                  .join(", ")}: ${err}`,
+              );
+            });
+
+          currentFileIndex += 2;
+          operationResults.push(
+            `downloading files: ${filesToProcess
+              .map((file) => file.title)
+              .join(", ")}`,
+          );
+          break;
+        }
+        case "duplicate": {
+          const fileToDuplicate = filesToProcess[0];
+
+          this.duplicateAction(fileToDuplicate)
+            .then(() => {
+              console.log(
+                `Duplication started for file: ${fileToDuplicate.title}`,
+              );
+            })
+            .catch((err) => {
+              console.log(
+                `Error duplicating file ${fileToDuplicate.title}: ${err}`,
+              );
+            });
+
+          currentFileIndex += 1;
+          operationResults.push(`duplicating file: ${fileToDuplicate.title}`);
+          break;
+        }
+        case "copy":
+        case "move": {
+          const fileToProcess = filesToProcess[0];
+          const targetFolder = availableFolders[0];
+
+          const operationData = {
+            destFolderId: targetFolder.id,
+            destFolderInfo: targetFolder,
+            fileIds: [fileToProcess.id],
+            folderIds: [],
+            deleteAfter: false,
+            isCopy: op === "copy",
+            content: false,
+            itemsCount: 1,
+            title: fileToProcess.title,
+          };
+
+          addActiveItems(
+            operationData.fileIds,
+            operationData.folderIds,
+            operationData.destFolderId,
+          );
+
+          itemOperationToFolder(operationData)
+            .then(() => {
+              console.log(
+                `${op === "copy" ? "Copy" : "Move"} operation initiated for file: ${fileToProcess.title} to folder: ${targetFolder.title}`,
+              );
+            })
+            .catch((err) => {
+              clearActiveOperations(
+                operationData.fileIds,
+                operationData.folderIds,
+              );
+              console.log(
+                `Error ${op === "copy" ? "copying" : "moving"} file ${fileToProcess.title}: ${err}`,
+              );
+            });
+
+          currentFileIndex += 1;
+          operationResults.push(
+            `${op === "copy" ? "copying" : "moving"} file: ${fileToProcess.title} to folder: ${targetFolder.title}`,
+          );
+          break;
+        }
+        case "emptyTrash": {
+          const translations = {
+            successOperation: "Trash emptied",
+          };
+
+          this.emptyTrash(translations)
+            .then(() => {
+              console.log("Empty trash operation started");
+            })
+            .catch((err) => {
+              console.log(`Error in empty trash operation: ${err}`);
+            });
+
+          operationResults.push("emptying trash");
+          break;
+        }
+        default:
+          errorMessage = `Unknown operation: ${op}`;
+      }
+    });
+
+    return errorMessage || `Started ${operationResults.join(" and ")}`;
   };
 }
 

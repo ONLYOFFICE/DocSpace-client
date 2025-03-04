@@ -44,52 +44,53 @@ import { DeviceType } from "../../enums";
 import styles from "./Navigation.module.scss";
 import { TNavigationProps } from "./Navigation.types";
 
-const Navigation = (props: TNavigationProps) => {
-  const {
-    showText,
-    isRootFolder,
-    title,
-    canCreate,
-
-    onClickFolder,
-    navigationItems,
-    getContextOptionsPlus,
-    getContextOptionsFolder,
-    onBackToParentFolder,
-    isTrashFolder,
-    isEmptyFilesList,
-    clearTrash,
-    showFolderInfo,
-    isCurrentFolderInfo,
-    toggleInfoPanel,
-    isInfoPanelVisible,
-    titles,
-    withMenu,
-    onPlusClick,
-    isEmptyPage,
-    isDesktop: isDesktopClient,
-    isRoom,
-    isFrame,
-    hideInfoPanel,
-    showRootFolderTitle,
-    withLogo,
-    burgerLogo,
-    isPublicRoom,
-    titleIcon,
-    titleIconTooltip,
-    currentDeviceType,
-    rootRoomTitle,
-    showTitle,
-    navigationButtonLabel,
-    onNavigationButtonClick,
-    tariffBar,
-    showNavigationButton,
-    onContextOptionsClick,
-    onLogoClick,
-    badgeLabel,
-    ...rest
-  } = props;
-
+const Navigation = ({
+  showText,
+  isRootFolder,
+  title,
+  canCreate,
+  onClickFolder,
+  navigationItems,
+  getContextOptionsPlus,
+  getContextOptionsFolder,
+  onBackToParentFolder,
+  isTrashFolder,
+  isEmptyFilesList,
+  clearTrash,
+  showFolderInfo,
+  isCurrentFolderInfo,
+  toggleInfoPanel,
+  isInfoPanelVisible,
+  titles,
+  withMenu,
+  onPlusClick,
+  isEmptyPage,
+  isDesktop: isDesktopClient,
+  isRoom,
+  isFrame,
+  hideInfoPanel,
+  showRootFolderTitle,
+  withLogo,
+  burgerLogo,
+  isPublicRoom,
+  titleIcon,
+  titleIconTooltip,
+  currentDeviceType,
+  rootRoomTitle,
+  showTitle,
+  navigationButtonLabel,
+  onNavigationButtonClick,
+  tariffBar,
+  showNavigationButton,
+  badgeLabel,
+  onContextOptionsClick,
+  onLogoClick,
+  buttonRef,
+  addButtonRef,
+  contextButtonAnimation,
+  guidAnimationVisible,
+  ...rest
+}: TNavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [firstClick, setFirstClick] = React.useState(true);
   const [dropBoxWidth, setDropBoxWidth] = React.useState(0);
@@ -308,6 +309,8 @@ const Navigation = (props: TNavigationProps) => {
             {showTitle ? navigationTitleContainerNode : null}
 
             <ControlButtons
+              buttonRef={buttonRef}
+              addButtonRef={addButtonRef}
               isRootFolder={isRootFolder}
               canCreate={canCreate}
               getContextOptionsFolder={getContextOptionsFolder}
@@ -330,6 +333,8 @@ const Navigation = (props: TNavigationProps) => {
               isEmptyPage={isEmptyPage}
               onContextOptionsClick={onContextOptionsClick}
               isMobile={currentDeviceType !== DeviceType.desktop}
+              contextButtonAnimation={contextButtonAnimation}
+              guidAnimationVisible={guidAnimationVisible}
             />
           </div>
           {isDesktop && !hideInfoPanel ? (

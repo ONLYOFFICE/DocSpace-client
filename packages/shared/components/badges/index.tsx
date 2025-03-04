@@ -362,7 +362,7 @@ const Badges = ({
         />
       ) : null}
 
-      {isRoom && mute ? (
+      {isRoom && mute && !isTile ? (
         <ColorTheme
           themeId={ThemeId.IconButtonMute}
           onClick={onUnmuteClick}
@@ -399,7 +399,7 @@ const Badges = ({
           title={t("Files:CreateRoom")}
         />
       ) : null}
-      {showNew ? newFilesBadge : null}
+      {showNew && isTile && isRoom ? newFilesBadge : null}
     </div>
   );
 };

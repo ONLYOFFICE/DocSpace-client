@@ -35,6 +35,9 @@ import {
   FilterType,
 } from "@docspace/shared/enums";
 
+import { Guidance } from "@docspace/shared/components/guidance";
+import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
+
 import {
   UploadPanel,
   VersionHistoryPanel,
@@ -42,6 +45,7 @@ import {
   InvitePanel,
   EditLinkPanel,
   EmbeddingPanel,
+  ConversionPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -66,7 +70,9 @@ import {
   ShareFolderDialog,
   RoomLogoCoverDialog,
   GuestReleaseTipDialog,
+  FormFillingTipsDialog,
   DeleteVersionDialog,
+  CancelOperationDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -145,10 +151,19 @@ const Panels = (props) => {
     resetQuotaItem,
     isShowWarningDialog,
     roomLogoCoverDialogVisible,
+    welcomeFormFillingTipsVisible,
     passwordEntryDialogDate,
     guestReleaseTipDialogVisible,
     closeEditIndexDialogVisible,
+    conversionVisible,
     deleteVersionDialogVisible,
+    operationCancelVisible,
+    setFormFillingTipsDialog,
+    formFillingTipsVisible,
+    viewAs,
+    userId,
+    getRefElement,
+    config,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -215,6 +230,11 @@ const Panels = (props) => {
     };
   }, [isShowWarningDialog]);
 
+  const onCloseGuidance = () => {
+    setFormFillingTipsDialog(false);
+    window.localStorage.setItem(getFormFillingTipsStorageName(userId), "true");
+  };
+
   return [
     settingsPluginDialogVisible && (
       <SettingsPluginDialog
@@ -235,6 +255,7 @@ const Panels = (props) => {
       <GuestReleaseTipDialog key="guest-release-tip-dialog" />
     ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
+    conversionVisible && <ConversionPanel key="conversion-panel" />,
     (moveToPanelVisible ||
       copyPanelVisible ||
       restorePanelVisible ||
@@ -363,6 +384,21 @@ const Panels = (props) => {
     deleteVersionDialogVisible && (
       <DeleteVersionDialog key="delete-version-dialog" />
     ),
+    operationCancelVisible && (
+      <CancelOperationDialog key="cancel-operation-dialog" />
+    ),
+    welcomeFormFillingTipsVisible ? (
+      <FormFillingTipsDialog key="form-filling_tips_dialog" />
+    ) : null,
+
+    formFillingTipsVisible ? (
+      <Guidance
+        viewAs={viewAs}
+        onClose={onCloseGuidance}
+        getRefElement={getRefElement}
+        config={config}
+      />
+    ) : null,
   ];
 };
 
@@ -377,6 +413,9 @@ export default inject(
     pluginStore,
     currentQuotaStore,
     filesActionsStore,
+    filesStore,
+    userStore,
+    guidanceStore,
   }) => {
     const {
       copyPanelVisible,
@@ -397,6 +436,7 @@ export default inject(
       restoreAllPanelVisible,
       archiveDialogVisible,
       restoreRoomDialogVisible,
+      welcomeFormFillingTipsVisible,
 
       unsavedChangesDialogVisible,
       createMasterForm,
@@ -434,12 +474,18 @@ export default inject(
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
+      operationCancelVisible,
+
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
     } = dialogsStore;
+
+    const { viewAs } = filesStore;
 
     const { preparationPortalDialogVisible } = backup;
     const { copyFromTemplateForm } = filesActionsStore;
 
-    const { uploadPanelVisible } = uploadDataStore;
+    const { uploadPanelVisible, conversionVisible } = uploadDataStore;
     const {
       isVisible: versionHistoryPanelVisible,
       deleteVersionDialogVisible,
@@ -454,6 +500,8 @@ export default inject(
       deletePluginDialogVisible,
       pluginDialogVisible,
     } = pluginStore;
+
+    const { getRefElement, config } = guidanceStore;
 
     const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
     const resetQuotaItem = () => {
@@ -527,12 +575,21 @@ export default inject(
       templateAccessSettingsVisible,
 
       setQuotaWarningDialogVisible,
+      welcomeFormFillingTipsVisible,
       resetQuotaItem,
       isShowWarningDialog,
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
+      conversionVisible,
       deleteVersionDialogVisible,
+      operationCancelVisible,
+      setFormFillingTipsDialog,
+      formFillingTipsVisible,
+      viewAs,
+      userId: userStore?.user?.id,
+      getRefElement,
+      config,
     };
   },
 )(observer(Panels));

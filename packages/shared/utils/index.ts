@@ -43,6 +43,7 @@ import { trimSeparator } from "./trimSeparator";
 import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
 import { getTextColor } from "./getTextColor";
+import { getFormFillingTipsStorageName } from "./getFormFillingTipsStorageName";
 
 import DomHelpers from "./domHelpers";
 import ObjectUtils from "./objectUtils";
@@ -85,6 +86,7 @@ import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
 import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
+import { fakeFormFillingList } from "./formFillingTourData";
 
 export {
   isBetaLanguage,
@@ -142,6 +144,8 @@ export {
   getTextColor,
   getFromSessionStorage,
   saveToSessionStorage,
+  getFormFillingTipsStorageName,
+  fakeFormFillingList,
 };
 
 export const getModalType = () => {

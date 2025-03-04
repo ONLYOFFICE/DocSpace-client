@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
@@ -56,7 +55,7 @@ import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { SharedLinkHint } from "../sub-components/SharedLinkHint";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
-import { Integration } from "../sub-components/Integration";
+import Integration from "../sub-components/Integration";
 
 import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
 
@@ -215,7 +214,7 @@ const SimpleRoom = (props) => {
       targetId={config.frameId}
     >
       {config.id !== undefined ? (
-        <Box id={config.frameId} />
+        <div id={config.frameId} />
       ) : (
         <EmptyIframeContainer
           text={t("RoomPreview")}
@@ -372,21 +371,11 @@ const SimpleRoom = (props) => {
             </CheckboxGroup>
           </ControlsSection>
 
-          <Integration
-            className="integration-examples"
-            t={t}
-            theme={theme}
-            currentColorScheme={currentColorScheme}
-          />
+          <Integration className="integration-examples" />
         </Controls>
       </Container>
 
-      <Integration
-        className="integration-examples integration-examples-bottom"
-        t={t}
-        theme={theme}
-        currentColorScheme={currentColorScheme}
-      />
+      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };

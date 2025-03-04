@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
 import { RectangleSkeleton } from "../rectangle";
 
@@ -36,6 +37,7 @@ export const TilesSkeleton = ({
   foldersCount = 2,
   filesCount = 8,
   withTitle = true,
+  isRooms = false,
   ...rest
 }: TilesSkeletonProps) => {
   const folders = [];
@@ -49,6 +51,10 @@ export const TilesSkeleton = ({
     files.push(<TileSkeleton key={`files-loader-${i}`} {...rest} />);
   }
 
+  const tilesClassNames = classNames(styles.tilesSkeleton, {
+    [styles.tilesSkeletonRooms]: isRooms,
+  });
+
   return (
     <div className={styles.tilesWrapper}>
       {foldersCount > 0 ? (
@@ -60,7 +66,7 @@ export const TilesSkeleton = ({
           {...rest}
         />
       ) : null}
-      <div className={styles.tilesSkeleton}>{folders}</div>
+      <div className={tilesClassNames}>{folders}</div>
 
       {filesCount > 0
         ? withTitle && (
@@ -73,7 +79,7 @@ export const TilesSkeleton = ({
             />
           )
         : null}
-      <div className={styles.tilesSkeleton}>{files}</div>
+      <div className={tilesClassNames}>{files}</div>
     </div>
   );
 };

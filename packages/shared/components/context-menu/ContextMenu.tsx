@@ -389,6 +389,10 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       unbindDocumentListeners();
     };
 
+    const onClickBackdrop = () => {
+      setVisible(false);
+    };
+
     React.useEffect(() => {
       if (global)
         document.addEventListener("contextmenu", documentContextMenuListener);
@@ -465,6 +469,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
             [styles.coverExist]: isCoverExist,
             [styles.isIconExist]: isIconExist,
             [styles.fillIcon]: fillIcon,
+            [styles.changeView]: changeView,
           })}
         >
           <CSSTransition
@@ -598,6 +603,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
             withBackground
             withoutBlur={false}
             zIndex={baseZIndex}
+            onClick={onClickBackdrop}
           />
         ) : null}
 

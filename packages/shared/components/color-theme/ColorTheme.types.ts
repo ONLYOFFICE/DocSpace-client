@@ -99,6 +99,8 @@ export interface LinkForgotPasswordColorTheme extends DefaultColorThemeProps {
 
 export interface LoadingButtonColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.LoadingButton;
+  loaderColor?: React.CSSProperties["color"];
+  onClick?: VoidFunction;
 }
 
 export interface ProgressColorTheme extends DefaultColorThemeProps {
@@ -120,6 +122,7 @@ export interface LinkColorTheme extends LinkProps, DefaultColorThemeProps {
   truncate?: boolean;
   $currentColorScheme?: TColorScheme;
   onClick?: (e: React.MouseEvent<Element>) => void;
+  $isUnderline?: boolean;
 }
 
 export interface SubmenuTextTheme extends TextProps, DefaultColorThemeProps {

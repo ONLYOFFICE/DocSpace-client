@@ -43,6 +43,7 @@ import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
+import withContainer from "../../../../../HOCs/withContainer";
 
 const fileNameCss = css`
   margin-inline-start: -24px;
@@ -127,7 +128,7 @@ const elementResizeDetector = elementResizeDetectorMaker({
 });
 
 const Table = ({
-  filesList,
+  list,
   viewAs,
   setViewAs,
   setFirsElemChecked,
@@ -147,8 +148,9 @@ const Table = ({
   currentDeviceType,
   onEditIndex,
   isIndexing,
-  icon,
-  isDownload,
+  isTutorialEnabled,
+  setRefMap,
+  deleteRefMap,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -204,7 +206,7 @@ const Table = ({
   }, [isRooms]);
 
   const filesListNode = useMemo(() => {
-    return filesList.map((item, index) => (
+    return list.map((item, index) => (
       <TableRow
         id={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
         key={
@@ -229,12 +231,13 @@ const Table = ({
             ? highlightFile.isExst === !item.fileExst
             : null
         }
-        icon={icon}
-        isDownload={isDownload}
+        isTutorialEnabled={isTutorialEnabled}
+        setRefMap={setRefMap}
+        deleteRefMap={deleteRefMap}
       />
     ));
   }, [
-    filesList,
+    list,
     setFirsElemChecked,
     setHeaderBorder,
     theme,
@@ -246,8 +249,9 @@ const Table = ({
     isTrashFolder,
     isIndexEditingMode,
     isIndexing,
-    icon,
-    isDownload,
+    isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
   ]);
 
   return (
@@ -265,13 +269,13 @@ const Table = ({
         location={location}
         isRooms={isRooms}
         isIndexing={isIndexing}
-        filesList={filesList}
+        filesList={list}
       />
 
       <TableBody
         fetchMoreFiles={fetchMoreFiles}
         columnStorageName={columnStorageName}
-        filesLength={filesList.length}
+        filesLength={list.length}
         hasMoreFiles={hasMoreFiles}
         itemCount={filterTotal}
         useReactWindow
@@ -291,15 +295,13 @@ export default inject(
     filesStore,
     infoPanelStore,
     treeFoldersStore,
-
     tableStore,
     userStore,
     settingsStore,
-
+    guidanceStore,
     indexingStore,
     filesActionsStore,
     selectedFolderStore,
-    uploadDataStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -309,10 +311,7 @@ export default inject(
 
     const { columnStorageName, columnInfoPanelStorageName } = tableStore;
 
-    const { icon, isDownload } = uploadDataStore.secondaryProgressDataStore;
-
     const {
-      filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
@@ -328,9 +327,9 @@ export default inject(
     const { changeIndex } = filesActionsStore;
     const { isIndexedFolder } = selectedFolderStore;
     const { theme, currentDeviceType } = settingsStore;
+    const { setRefMap, deleteRefMap } = guidanceStore;
 
     return {
-      filesList,
       viewAs,
       setViewAs,
       setFirsElemChecked,
@@ -351,8 +350,8 @@ export default inject(
       highlightFile,
       currentDeviceType,
       onEditIndex: changeIndex,
-      icon,
-      isDownload,
+      setRefMap,
+      deleteRefMap,
     };
   },
-)(observer(Table));
+)(observer(withContainer(Table)));

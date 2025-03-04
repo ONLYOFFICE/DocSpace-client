@@ -96,8 +96,6 @@ export type MainButtonMobileProps = {
   style?: React.CSSProperties;
   /** Drop down items options */
   actionOptions?: ActionOption[];
-  /** Displays progress bar components */
-  progressOptions?: ProgressOption[];
   /** Menu that opens by clicking on the button */
   buttonOptions?: ButtonOption[];
   /** The function called after the button is clicked */
@@ -134,29 +132,8 @@ export type MainButtonMobileProps = {
   onClick?: (e: React.MouseEvent) => void;
   /** Custom styles for the dropdown */
   dropdownStyle?: React.CSSProperties;
-};
-
-export type ProgressBarMobileProps = {
-  /** Display text for the progress bar */
-  label?: string;
-  /** Status text to display */
-  status?: string;
-  /** Progress completion percentage */
-  percent: number;
-  /** Controls visibility of the progress bar */
-  open: boolean;
-  /** Handler for canceling the operation */
-  onCancel?: () => void;
-  /** Icon URL or component */
-  icon: string;
-  /** The function called after the progress header is clicked */
-  onClickAction?: () => void;
-  /** The function that facilitates hiding the button */
-  hideButton?: () => void;
-  /** Changes the progress bar color, if set to true */
-  error?: boolean;
-  /** Additional CSS classes */
-  className?: string;
+  /** Main button ref, used for guidance */
+  mainButtonRef?: React.RefObject<HTMLDivElement>;
 };
 
 export type SubmenuItemProps = {
@@ -175,3 +152,10 @@ export type SubmenuItemProps = {
   /** If true, submenu is open by default */
   openByDefault: boolean;
 };
+
+export interface MainButtonMobileRef {
+  /** Checks if the given target element is contained within the main button component */
+  contains: (target: HTMLElement) => boolean;
+  /** Returns the ref object pointing to the main button DOM element */
+  getButtonElement: () => React.MutableRefObject<HTMLDivElement | null>;
+}

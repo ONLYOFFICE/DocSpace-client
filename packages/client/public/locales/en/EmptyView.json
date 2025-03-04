@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Your last viewed or edited docs will be displayed in this section.",
   "EmptyRootRoomUserDescription": "The shared room will appear here.",
   "EmptyRootRoomUserTitle": "There are no rooms here yet",
+  "EmptyTemplatesDescription": "You can create a template from a room in the Room section",
+  "EmptyTemplatesTitle": "No templates here yet",
   "FormFolderDefaultDescription": "Drop PDF forms here or upload from {{productName}} or device.",
   "FormFolderDefaultTitle": "No forms here yet",
   "FormFolderDefaultUserDescription": "The forms uploaded by the administrators will be appeared here.",
@@ -46,7 +48,5 @@
   "UploadFromPortalTitle": "Upload from {{productName}}",
   "UploadPDFFormOptionDescription": "Select a ready PDF form available in {{productName}} and upload it to the room.",
   "UserEmptyDescription": "Files and folders uploaded by admins will appeared here.",
-  "VirtualDataRoomEmptyTitle": "Welcome to the Virtual Data Room",
-  "EmptyTemplatesTitle": "No templates here yet",
-  "EmptyTemplatesDescription": "You can create a template from a room in the Room section"
+  "VirtualDataRoomEmptyTitle": "Welcome to the Virtual Data Room"
 }

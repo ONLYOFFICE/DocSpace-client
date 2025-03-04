@@ -123,6 +123,7 @@ export type TFile = {
   thumbnailUrl?: string;
   expired?: string;
   isForm?: boolean;
+  isFolder?: boolean;
   startFilling?: boolean;
   fileEntryType: number;
   hasDraft?: boolean;
@@ -206,6 +207,7 @@ export type TFolder = {
   roomType?: RoomsType;
   path?: TPathParts[];
   type?: FolderType;
+  isFolder?: boolean;
   indexing: boolean;
   denyDownload: boolean;
   fileEntryType: number;

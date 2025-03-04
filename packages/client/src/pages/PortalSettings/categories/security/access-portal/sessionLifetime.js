@@ -234,19 +234,21 @@ const SessionLifetime = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!lifetimeSettingsUrl}>
         <Text className="learn-subtitle">
           {t("SessionLifetimeSettingDescription")}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={lifetimeSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {lifetimeSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={lifetimeSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup

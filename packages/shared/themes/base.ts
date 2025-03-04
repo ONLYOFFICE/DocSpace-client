@@ -2116,6 +2116,12 @@ export const getBaseTheme = () => {
           backgroundColorTop: white,
         },
 
+        tag: {
+          backgroundColor: white,
+          hoverBackgroundColor: grayStrong,
+          activeBackgroundColor: grayLight,
+        },
+
         sideColor: black,
         color: black,
         textColor: gray,
@@ -2463,7 +2469,8 @@ export const getBaseTheme = () => {
         color: gray,
         tooltipColor: lightToastInfo,
         iconColor: lightErrorStatus,
-
+        positiveStatusColor: lightStatusPositive,
+        progressColor: lightGrayDark,
         shareButton: {
           color: gray,
           sharedColor: lightGrayDark,
@@ -2937,7 +2944,7 @@ export const getBaseTheme = () => {
           background: grayLight,
         },
         storageManagement: {
-          grayBackgroundText: grayText,
+          grayBackgroundText: black,
           descriptionColor: lightGrayDark,
           dividerColor: grayLightMid,
         },
@@ -3251,6 +3258,12 @@ export const getBaseTheme = () => {
       selectedBorderColor: grayLightMid,
       backgroundColor: white,
       borderColor: grayLightMid,
+    },
+
+    formFillingTips: {
+      circleColor: grayLightMid,
+      selectedColor: white,
+      circleBorder: `3px solid ${lightSecondMain}`,
     },
   };
 };

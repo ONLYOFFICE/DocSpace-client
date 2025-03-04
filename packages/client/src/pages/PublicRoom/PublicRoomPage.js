@@ -56,10 +56,6 @@ const PublicRoomPage = (props) => {
     fetchFiles,
     isEmptyPage,
 
-    showSecondaryProgressBar,
-    secondaryProgressBarValue,
-    secondaryProgressBarIcon,
-    showSecondaryButtonAlert,
     fetchPublicRoom,
     fetchPreviewMediaFile,
 
@@ -70,6 +66,12 @@ const PublicRoomPage = (props) => {
     access,
     roomType,
     parentRoomType,
+
+    isSecondaryProgressVisbile,
+    secondaryOperationsCompleted,
+    clearSecondaryProgressData,
+    secondaryActiveOperations,
+    secondaryOperationsAlert,
   } = props;
 
   const location = useLocation();
@@ -193,10 +195,11 @@ const PublicRoomPage = (props) => {
   }, [access, ready, roomType, parentRoomType]);
 
   const sectionProps = {
-    showSecondaryProgressBar,
-    secondaryProgressBarValue,
-    secondaryProgressBarIcon,
-    showSecondaryButtonAlert,
+    isSecondaryProgressVisbile,
+    secondaryOperationsCompleted,
+    clearSecondaryProgressData,
+    secondaryActiveOperations,
+    secondaryOperationsAlert,
   };
 
   return (
@@ -257,10 +260,11 @@ export default inject(
     const { access, roomType, parentRoomType } = selectedFolderStore;
 
     const {
-      visible: showSecondaryProgressBar,
-      percent: secondaryProgressBarValue,
-      icon: secondaryProgressBarIcon,
-      alert: showSecondaryButtonAlert,
+      isSecondaryProgressVisbile,
+      secondaryOperationsCompleted,
+      clearSecondaryProgressData,
+      secondaryActiveOperations,
+      secondaryOperationsAlert,
     } = uploadDataStore.secondaryProgressDataStore;
 
     const { fetchPreviewMediaFile } = mediaViewerDataStore;
@@ -272,10 +276,11 @@ export default inject(
       fetchFiles,
       getFilesSettings,
 
-      showSecondaryProgressBar,
-      secondaryProgressBarValue,
-      secondaryProgressBarIcon,
-      showSecondaryButtonAlert,
+      isSecondaryProgressVisbile,
+      secondaryOperationsCompleted,
+      clearSecondaryProgressData,
+      secondaryActiveOperations,
+      secondaryOperationsAlert,
 
       isAuthenticated: authStore.isAuthenticated,
       isEmptyPage,

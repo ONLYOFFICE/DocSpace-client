@@ -102,7 +102,6 @@ const SectionFilterContent = ({
   setClearSearch,
   setMainButtonMobileVisible,
   isArchiveFolder,
-  canSearchByContent,
 
   // contacts
   contactsViewAs,
@@ -570,22 +569,6 @@ const SectionFilterContent = ({
         });
       }
     } else if (!isContactsPage) {
-      if (filter.withSubfolders === "true") {
-        filterValues.push({
-          key: FilterKeys.withSubfolders,
-          label: t("WithSubfolders"),
-          group: FilterGroups.filterFolders,
-        });
-      }
-
-      if (filter.searchInContent) {
-        filterValues.push({
-          key: "true",
-          label: t("FileContents"),
-          group: FilterGroups.filterContent,
-        });
-      }
-
       if (filter.filterType) {
         let label = "";
 
@@ -710,11 +693,9 @@ const SectionFilterContent = ({
 
     return currentFilterValues;
   }, [
-    filter.withSubfolders,
     filter.authorType,
     filter.roomId,
     filter.filterType,
-    filter.searchInContent,
     filter.excludeSubject,
     roomsFilter.provider,
     roomsFilter.type,
@@ -1076,57 +1057,6 @@ const SectionFilterContent = ({
         isDefaultRoomsQuotaSet &&
         filterOptions.push(...quotaFilter);
     } else {
-      if (!isRecentTab && !isFavoritesFolder && !isTrash) {
-        const foldersOptions = [
-          {
-            key: FilterGroups.filterFolders,
-            group: FilterGroups.filterFolders,
-            label: t("Common:Search"),
-            isHeader: true,
-            withoutSeparator: true,
-          },
-          {
-            id: "filter_folders",
-            key: "folders",
-            group: FilterGroups.filterFolders,
-            label: "",
-            withOptions: true,
-            options: [
-              {
-                id: "filter_folders_exclude-subfolders",
-                key: FilterKeys.excludeSubfolders,
-                label: t("ExcludeSubfolders"),
-              },
-              {
-                id: "filter_folders_with-subfolders",
-                key: FilterKeys.withSubfolders,
-                label: t("WithSubfolders"),
-              },
-            ],
-          },
-        ];
-
-        const contentOptions = [
-          {
-            key: FilterGroups.filterContent,
-            group: FilterGroups.filterContent,
-            isHeader: true,
-            withoutHeader: true,
-          },
-        ];
-        canSearchByContent &&
-          contentOptions.push({
-            id: "filter_search-by-file-contents",
-            key: "true",
-            group: FilterGroups.filterContent,
-            label: t("SearchByContent"),
-            isCheckbox: true,
-          });
-
-        filterOptions.push(...foldersOptions);
-        filterOptions.push(...contentOptions);
-      }
-
       const authorOption = [
         {
           key: FilterGroups.filterAuthor,
@@ -1391,12 +1321,6 @@ const SectionFilterContent = ({
           newFilter.authorType = null;
           newFilter.excludeSubject = null;
         }
-        if (group === FilterGroups.filterFolders) {
-          newFilter.withSubfolders = null;
-        }
-        if (group === FilterGroups.filterContent) {
-          newFilter.searchInContent = null;
-        }
         if (group === FilterGroups.filterRoom) {
           newFilter.roomId = null;
         }
@@ -1527,7 +1451,6 @@ export default inject(
       clearSearch,
       setClearSearch,
       isLoadedEmptyPage,
-      filesSettingsStore,
       setRoomsFilter,
     } = filesStore;
 
@@ -1566,8 +1489,6 @@ export default inject(
     } = usersStore;
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
-
-    const { canSearchByContent } = filesSettingsStore;
 
     return {
       isRoomAdmin,
@@ -1608,8 +1529,6 @@ export default inject(
       setClearSearch,
 
       setMainButtonMobileVisible,
-
-      canSearchByContent,
 
       contactsViewAs,
       contactsTab,

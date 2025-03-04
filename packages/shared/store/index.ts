@@ -34,12 +34,13 @@ import { SettingsStore } from "./SettingsStore";
 
 export const userStore = new UserStore();
 export const tfaStore = new TfaStore();
-export const paymentQuotasStore = new PaymentQuotasStore();
+
 export const currentTariffStatusStore = new CurrentTariffStatusStore();
 export const currentQuotaStore = new CurrentQuotasStore(
   userStore,
   currentTariffStatusStore,
 );
+export const paymentQuotasStore = new PaymentQuotasStore(currentQuotaStore);
 export const settingsStore = new SettingsStore();
 export const authStore = new AuthStore(
   userStore,

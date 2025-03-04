@@ -41,6 +41,7 @@ import SettingsSetupStore from "./SettingsSetupStore";
 import ConfirmStore from "./ConfirmStore";
 import BackupStore from "./BackupStore";
 import CommonStore from "./CommonStore";
+import GuidanceStore from "./GuidanceStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
 import SsoFormStore from "./SsoFormStore";
@@ -164,6 +165,8 @@ const filesStore = new FilesStore(
   indexingStore,
 );
 
+const guidanceStore = new GuidanceStore();
+
 publicRoomStore.filesStore = filesStore;
 
 const mediaViewerDataStore = new MediaViewerDataStore(
@@ -174,7 +177,10 @@ const mediaViewerDataStore = new MediaViewerDataStore(
 
 const oformsStore = new OformsStore(settingsStore, infoPanelStore, userStore);
 
-const secondaryProgressDataStore = new SecondaryProgressDataStore();
+const secondaryProgressDataStore = new SecondaryProgressDataStore(
+  treeFoldersStore,
+  mediaViewerDataStore,
+);
 const primaryProgressDataStore = new PrimaryProgressDataStore();
 const versionHistoryStore = new VersionHistoryStore(filesStore, settingsStore);
 
@@ -244,6 +250,7 @@ const filesActionsStore = new FilesActionsStore(
 );
 
 mediaViewerDataStore.filesActionsStore = filesActionsStore;
+secondaryProgressDataStore.filesActionsStore = filesActionsStore;
 
 const contextOptionsStore = new ContextOptionsStore(
   settingsStore,
@@ -265,6 +272,7 @@ const contextOptionsStore = new ContextOptionsStore(
   userStore,
   indexingStore,
   clientLoadingStore,
+  guidanceStore,
 );
 
 const hotkeyStore = new HotkeyStore(
@@ -392,6 +400,8 @@ const store = {
   avatarEditorDialogStore,
 
   brandingStore,
+
+  guidanceStore,
 };
 
 export default store;

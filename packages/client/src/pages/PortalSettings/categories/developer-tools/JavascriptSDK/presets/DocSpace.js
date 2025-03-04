@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
 import { inject, observer } from "mobx-react";
 import SDK from "@onlyoffice/docspace-sdk-js";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
@@ -37,7 +36,7 @@ import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
-import { Integration } from "../sub-components/Integration";
+import Integration from "../sub-components/Integration";
 
 import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
 
@@ -105,7 +104,7 @@ const DocSpace = (props) => {
       height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
-      <Box id={config.frameId} />
+      <div id={config.frameId} />
     </Frame>
   );
 
@@ -153,21 +152,11 @@ const DocSpace = (props) => {
             />
           </ControlsSection>
 
-          <Integration
-            className="integration-examples"
-            t={t}
-            theme={theme}
-            currentColorScheme={currentColorScheme}
-          />
+          <Integration className="integration-examples" />
         </Controls>
       </Container>
 
-      <Integration
-        className="integration-examples integration-examples-bottom"
-        t={t}
-        theme={theme}
-        currentColorScheme={currentColorScheme}
-      />
+      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };

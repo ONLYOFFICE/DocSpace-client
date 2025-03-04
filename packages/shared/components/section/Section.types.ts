@@ -124,7 +124,7 @@ export interface OperationsProgressProps {
   secondaryActiveOperations?: Operation[];
   operationsAlert?: boolean;
   operationsCompleted?: boolean;
-  clearSecondaryProgressData: (
+  clearSecondaryProgressData?: (
     operationId?: string | null,
     operation?: string | null,
   ) => void;

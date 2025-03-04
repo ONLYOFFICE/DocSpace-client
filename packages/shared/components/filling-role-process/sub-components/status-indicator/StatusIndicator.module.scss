@@ -27,17 +27,21 @@
 
 :global(.dark) {
   :local {
-    --color-completed-icon: #{$black};
-    --color-stopped-icon: #{$black};
-    --color-in-progress-icon: #{$gray-dark};
+    .statusIndicator {
+      --color-completed-icon: #{$black};
+      --color-stopped-icon: #{$black};
+      --color-in-progress-icon: #{$gray-dark};
+    }
   }
 }
 
 :global(.light) {
   :local {
-    --color-completed-icon: #{$white};
-    --color-stopped-icon: #{$white};
-    --color-in-progress-icon: #{$gray};
+    .statusIndicator {
+      --color-completed-icon: #{$white};
+      --color-stopped-icon: #{$white};
+      --color-in-progress-icon: #{$gray};
+    }
   }
 }
 

@@ -27,8 +27,9 @@
 
 :global(.dark) {
   :local {
-    --role-histories-border-color: #{$gray-dark};
-
+    .roleHistory {
+      --role-histories-border-color: #{$gray-dark};
+    }
     .action {
       --history-action-color: #{$white};
     }
@@ -40,7 +41,9 @@
 
 :global(.light) {
   :local {
-    --role-histories-border-color: #{$gray};
+    .roleHistory {
+      --role-histories-border-color: #{$gray};
+    }
     .action {
       --history-action-color: #{$black};
     }

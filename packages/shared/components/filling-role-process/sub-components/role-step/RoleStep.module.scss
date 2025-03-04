@@ -27,10 +27,17 @@
 
 :global(.dark) {
   :local {
-    --role-step-filled-color: #{$gray-dark-text};
+    .roleHistories {
+      --role-histories-border-color: #{$gray-dark};
+    }
 
-    --avatar-border-color: #{$gray-dark};
-    --role-histories-border-color: #{$gray-dark};
+    .roleTitle {
+      --role-step-filled-color: #{$gray-dark-text};
+    }
+
+    .avatarContainer {
+      --avatar-border-color: #{$gray-dark};
+    }
 
     .arrow {
       --icon-arrow-color: #{$gray-dark};
@@ -49,9 +56,17 @@
 
 :global(.light) {
   :local {
-    --role-step-filled-color: #{$gray-text};
-    --avatar-border-color: #{$gray};
-    --role-histories-border-color: #{$gray};
+    .roleHistories {
+      --role-histories-border-color: #{$gray};
+    }
+
+    .avatarContainer {
+      --avatar-border-color: #{$gray};
+    }
+
+    .roleTitle {
+      --role-step-filled-color: #{$gray-text};
+    }
 
     .arrow {
       --icon-arrow-color: #{$gray};

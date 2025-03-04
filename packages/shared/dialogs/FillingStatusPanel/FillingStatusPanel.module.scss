@@ -27,13 +27,17 @@
 
 :global(.dark) {
   :local {
-    --file-status-color: #{$dark-gray-light};
+    .fileStatus {
+      --file-status-color: #{$dark-gray-light};
+    }
   }
 }
 
 :global(.light) {
   :local {
-    --file-status-color: #{$white};
+    .fileStatus {
+      --file-status-color: #{$white};
+    }
   }
 }
 

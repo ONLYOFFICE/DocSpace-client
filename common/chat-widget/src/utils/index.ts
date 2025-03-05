@@ -39,7 +39,7 @@ export function classNames(...args: (string | undefined | number | {})[]) {
           const objClasses = Array.isArray(className)
             ? className
             : Object.entries(className).map(([key, value]) =>
-                value ? key : null,
+                value ? key : null
               );
 
           classes = objClasses.length
@@ -54,3 +54,9 @@ export function classNames(...args: (string | undefined | number | {})[]) {
 
   return "";
 }
+
+export const isTouchDevice = !!(
+  typeof window !== "undefined" &&
+  typeof navigator !== "undefined" &&
+  ("ontouchstart" in window || navigator.maxTouchPoints > 0)
+);

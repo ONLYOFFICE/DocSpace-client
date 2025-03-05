@@ -49,7 +49,6 @@ export default function ChatWidget({
 }) {
   const sessionId = useRef(session_id ?? uuidv4());
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
-  const [footerHeight, setFooterHeight] = useState(62); // TODO: 62
 
   const addMessage = (message: ChatMessageType) => {
     setMessages((prev) => [...prev, message]);
@@ -167,10 +166,8 @@ export default function ChatWidget({
       });
   };
 
-  const bodyHeight = `calc(100vh - 48px - 54px - ${footerHeight}px)`; // 48 = 44(padding)22+22 + 2 border + 54 header
-
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <style
         dangerouslySetInnerHTML={{
           __html: styles,
@@ -179,31 +176,20 @@ export default function ChatWidget({
       <div className="chat-panel-wrapper">
         <div className="chat-panel">
           <ChatHeader />
-          <div
-            className="scrollbar"
-            style={{
-              position: "relative",
-              width: "100%",
-              minWidth: "100%",
-              height: bodyHeight,
-              minHeight: bodyHeight,
-              maxHeight: bodyHeight,
-            }}
-          >
-            <ChatBody
-              messages={messages}
-              providerImage={provider_image}
-              providerIconImage={provider_icon_image}
-              userIconImage={user_icon_image}
-            />
-            {sendingMessage && (
-              <div className="chat-panel-loading-placeholder">
-                <h1 className="chat-panel-loading-placeholder-ellipsis"> </h1>
-              </div>
-            )}
-          </div>
+
+          <ChatBody
+            messages={messages}
+            providerImage={provider_image}
+            providerIconImage={provider_icon_image}
+            userIconImage={user_icon_image}
+          />
+          {sendingMessage && (
+            <div className="chat-panel-loading-placeholder">
+              <h1 className="chat-panel-loading-placeholder-ellipsis"> </h1>
+            </div>
+          )}
+
           <ChatFooter
-            setFooterHeight={setFooterHeight}
             addMessage={addMessage}
             sendMessage={sendMessageFn}
             filesList={list_files}

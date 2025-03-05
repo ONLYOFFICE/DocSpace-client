@@ -36,13 +36,11 @@ const DROPDOWN_ITEM_HEIGHT = 50;
 const ChatFooter = ({
   addMessage,
   sendMessage,
-  setFooterHeight,
   filesList = [],
   sendIconImage,
 }: {
   addMessage: Function;
   sendMessage: Function;
-  setFooterHeight: Function;
   filesList?: FileType[];
   sendIconImage?: string;
 }) => {
@@ -80,7 +78,6 @@ const ChatFooter = ({
     const isOverflowY = textAreaScrollHeight > TEXTAREA_MAX_HEIGHT;
 
     const height = isOverflowY ? TEXTAREA_MAX_HEIGHT : textAreaScrollHeight;
-    setFooterHeight(height);
 
     elem.currentTarget.style.height = `${height}px`;
     if (isOverflowY) elem.currentTarget.style.overflowY = "scroll";

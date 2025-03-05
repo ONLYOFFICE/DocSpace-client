@@ -1,4 +1,4 @@
-export const styles = `
+const pageStyles = `
   html {
       font-family: "Open Sans", sans-serif, Arial;
     }
@@ -26,6 +26,14 @@ export const styles = `
     
         --chat-panel-border: #474747;
         --ai-chat-text-color: #adadad;
+
+        --scrollbar-padding-inline-end: 17px;
+        --scrollbar-padding-inline-end-mobile: 8px;
+        --scrollbar-padding-after-last-item: unset;
+
+        --scrollbar-bg-color: rgba(136, 136, 136, 0.4);
+        --scrollbar-hover-bg-color: rgba(136, 136, 136, 0.64);
+        --scrollbar-press-bg-color: rgba(136, 136, 136, 0.8);
       }
     }
     
@@ -37,11 +45,21 @@ export const styles = `
     
         --chat-panel-border: #eceef1;
         --ai-chat-text-color: #657077;
+
+        --scrollbar-padding-inline-end: 17px;
+        --scrollbar-padding-inline-end-mobile: 8px;
+        --scrollbar-padding-after-last-item: unset;
+
+        --scrollbar-bg-color: rgba(6, 22, 38, 0.16);
+        --scrollbar-hover-bg-color: rgba(6, 22, 38, 0.32);
+        --scrollbar-press-bg-color: rgba(6, 22, 38, 0.5);
+
+        
       }
     }
     
     .chat-panel-wrapper {
-      height: auto;
+      height: 100%;
       width: auto;
       position: relative;
       z-index: 300;
@@ -435,3 +453,193 @@ export const styles = `
       100% { content: ''; }
     }
 `;
+
+const scrollStyles = `
+
+  :global(.rtl) {
+    :local {
+      .track-horizontal {
+        left: unset !important;
+        right: 0 !important;
+      }
+    }
+  }
+
+  .scrollbar {
+    &:global(.trackYVisible.trackXVisible) {
+      .track-vertical {
+        height: calc(100% - 16px) !important;
+      }
+
+      .track-horizontal {
+        width: calc(100% - 16px) !important;
+      }
+    }
+
+    &.noScrollY {
+      .track-vertical {
+        height: 0 !important;
+      }
+    }
+
+    // fix when iframe breaks dragging scroll
+    &:has(> .track > :global(.dragging)) {
+      iframe {
+        pointer-events: none;
+      }
+    }
+  }
+
+  .scroller {
+    &.ios::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .scroll-body {
+    padding-inline-end: var(--scrollbar-padding-inline-end) !important;
+    position: relative;
+    outline: none;
+
+    // @include mobile {
+    //   padding-inline-end: var(--scrollbar-padding-inline-end-mobile) !important;
+    // }
+  }
+
+  .track {
+    box-sizing: border-box;
+    display: flex;
+    padding: 4px;
+    border-radius: 8px !important;
+    background: transparent !important;
+    z-index: 201;
+
+    @media (min-width: 1025px) {
+      &:hover {
+        .thumb-vertical {
+          width: 8px !important;
+        }
+
+        .thumb-horizontal {
+          height: 8px !important;
+        }
+      }
+    }
+
+    @media (max-width: $tablet: 1024px;) {
+      pointer-events: none;
+
+      .thumb {
+        pointer-events: all;
+      }
+    }
+  }
+
+  .track-vertical {
+    direction: var(--interface-direction);
+    height: 100% !important;
+    width: 16px !important;
+    top: 0 !important;
+    justify-content: flex-end;
+  }
+
+  .track-horizontal {
+    width: 100% !important;
+    height: 16px !important;
+    align-items: flex-end;
+    direction: ltr;
+    left: 0 !important;
+  }
+
+  .thumb {
+    touch-action: none;
+    background-color: var(--scrollbar-bg-color) !important;
+    position: relative;
+    cursor: default !important;
+
+    &:hover {
+      background-color: var(--scrollbar-hover-bg-color) !important;
+    }
+
+    &:active,
+    &:global(.dragging) {
+      touch-action: none;
+      background-color: var(--scrollbar-press-bg-color) !important;
+    }
+  }
+
+  .thumb-vertical {
+    width: 4px !important;
+    transition: width linear 0.1s;
+
+    @media (min-width: 1025px) {
+      &:active {
+        width: 8px !important;
+      }
+    }
+      
+    @media (min-width: 1024px) {
+      width: 4px !important;
+    }
+  }
+
+  .thumb-horizontal {
+    height: 4px !important;
+    transition: height linear 0.1s;
+
+    @media (min-width: 1025px) {
+      &:active {
+        height: 8px !important;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      height: 4px !important;
+    }
+  }
+
+  .fixed-size {
+    @include desktop {
+      .thumb-vertical {
+        width: 8px !important;
+      }
+      .thumb-horizontal {
+        height: 8px !important;
+      }
+    }
+  }
+
+  .padding-after-last-item {
+    .scroll-body {
+      padding-bottom: var(--scrollbar-padding-after-last-item) !important;
+    }
+  }
+
+  .track {
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+
+  .track:is(:hover, :has(> :global(.dragging))) {
+    opacity: 1;
+  }
+
+
+  .scroll-visible:hover:not(
+      :has(.trackYVisible .trackXVisible .dragging .backdrop-active)
+    ) {
+    > .track {
+      opacity: 1;
+    }
+  }
+
+  @media (hover: none) {
+    &.scroll-visible:not(:has(:global(.backdrop-active))) {
+      .track {
+        opacity: 1;
+      }
+    }
+  }
+`;
+
+export const styles = pageStyles + scrollStyles;

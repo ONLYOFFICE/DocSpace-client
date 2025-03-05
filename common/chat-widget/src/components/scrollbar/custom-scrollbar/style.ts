@@ -24,55 +24,63 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Scrollbar } from "../components/scrollbar";
-import { ChatMessageType } from "../types/chatWidget";
-import ChatEmptyScreen from "./ChatEmptyScreen";
-import ChatMessage from "./ChatMessage";
-// import styles from "./AIChat.module.scss";
-// import AIChatMessage from "./AIChatMessage";
-// import { AIChatBodyProps } from "./AIChat.types";
+import * as React from "react";
 
-type ChatBodyProps = {
-  messages: ChatMessageType[];
-  providerImage?: string;
-  providerIconImage?: string;
-  userIconImage?: string;
+export const style = {
+  holder: {
+    position: "relative",
+    width: "100%",
+    height: "100%",
+  } as React.CSSProperties,
+
+  wrapper: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  } as React.CSSProperties,
+
+  content: {
+    boxSizing: "border-box",
+  } as React.CSSProperties,
+
+  track: {
+    common: {
+      position: "absolute",
+      overflow: "hidden",
+      borderRadius: 4,
+      background: "rgba(0,0,0,.1)",
+      userSelect: "none",
+    } as React.CSSProperties,
+    x: {
+      height: 10,
+      width: "calc(100% - 20px)",
+      bottom: 0,
+      left: 10,
+    } as React.CSSProperties,
+    y: {
+      width: 10,
+      height: "calc(100% - 20px)",
+      top: 10,
+    } as React.CSSProperties,
+  },
+
+  thumb: {
+    common: {
+      cursor: "pointer",
+      borderRadius: 4,
+      background: "rgba(0,0,0,.4)",
+    } as React.CSSProperties,
+    x: {
+      height: "100%",
+      width: 0,
+    } as React.CSSProperties,
+    y: {
+      width: "100%",
+      height: 0,
+    } as React.CSSProperties,
+  },
 };
 
-const ChatBody = ({
-  messages,
-  providerImage,
-  providerIconImage,
-  userIconImage,
-}: //   AIChatUser,
-ChatBodyProps) => {
-  const chatIsEmpty = messages.length === 0;
-
-  return (
-    <Scrollbar>
-      <div className="chat-panel-body-container">
-        {chatIsEmpty ? (
-          <>
-            <ChatEmptyScreen providerImage={providerImage} />
-          </>
-        ) : (
-          <>
-            {messages.map((message, index) => (
-              <ChatMessage
-                key={index}
-                userData={{
-                  displayName: "User name",
-                }}
-                message={message}
-                userIconImage={userIconImage}
-                providerIconImage={providerIconImage}
-              />
-            ))}
-          </>
-        )}
-      </div>
-    </Scrollbar>
-  );
-};
-
-export default ChatBody;
+export default style;

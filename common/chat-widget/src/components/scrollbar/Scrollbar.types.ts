@@ -24,55 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Scrollbar } from "../components/scrollbar";
-import { ChatMessageType } from "../types/chatWidget";
-import ChatEmptyScreen from "./ChatEmptyScreen";
-import ChatMessage from "./ChatMessage";
-// import styles from "./AIChat.module.scss";
-// import AIChatMessage from "./AIChatMessage";
-// import { AIChatBodyProps } from "./AIChat.types";
+import { ScrollbarProps as ScrollbarLibraryProps } from "./custom-scrollbar";
 
-type ChatBodyProps = {
-  messages: ChatMessageType[];
-  providerImage?: string;
-  providerIconImage?: string;
-  userIconImage?: string;
+type PickedScrollbarLibraryProps = Pick<
+  ScrollbarLibraryProps,
+  "id" | "className" | "style" | "noScrollY" | "noScrollX" | "createContext"
+>;
+
+export type ScrollbarProps = PickedScrollbarLibraryProps & {
+  /** This class will be placed on scroller element */
+  scrollClass?: string;
+  /** Enable tracks auto hiding.  */
+  autoHide?: boolean;
+  /** Fix scrollbar size. */
+  fixedSize?: boolean;
+  /** Set focus on scroll content element after first render */
+  autoFocus?: boolean;
+  /** Set scroll body tabindex */
+  tabIndex?: number | null;
+  /** Add padding bottom to scroll-body */
+  paddingAfterLastItem?: string;
+  /** Add custom padding-inline-end to scroll-body. */
+  paddingInlineEnd?: string;
+  /** Add onScroll handler */
+  onScroll?: React.UIEventHandler<HTMLDivElement>;
+  /** Add children */
+  children?: React.ReactNode;
 };
 
-const ChatBody = ({
-  messages,
-  providerImage,
-  providerIconImage,
-  userIconImage,
-}: //   AIChatUser,
-ChatBodyProps) => {
-  const chatIsEmpty = messages.length === 0;
-
-  return (
-    <Scrollbar>
-      <div className="chat-panel-body-container">
-        {chatIsEmpty ? (
-          <>
-            <ChatEmptyScreen providerImage={providerImage} />
-          </>
-        ) : (
-          <>
-            {messages.map((message, index) => (
-              <ChatMessage
-                key={index}
-                userData={{
-                  displayName: "User name",
-                }}
-                message={message}
-                userIconImage={userIconImage}
-                providerIconImage={providerIconImage}
-              />
-            ))}
-          </>
-        )}
-      </div>
-    </Scrollbar>
-  );
+export type CustomScrollbarsVirtualListProps = Pick<
+  ScrollbarProps,
+  | "style"
+  | "onScroll"
+  | "children"
+  | "className"
+  | "autoFocus"
+  | "scrollClass"
+  | "paddingAfterLastItem"
+> & {
+  forwardedRef?: React.ForwardedRef<unknown>;
+  contentRef?: React.MutableRefObject<HTMLDivElement | null>;
 };
-
-export default ChatBody;

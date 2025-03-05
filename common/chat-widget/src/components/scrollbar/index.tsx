@@ -24,55 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Scrollbar } from "../components/scrollbar";
-import { ChatMessageType } from "../types/chatWidget";
-import ChatEmptyScreen from "./ChatEmptyScreen";
-import ChatMessage from "./ChatMessage";
-// import styles from "./AIChat.module.scss";
-// import AIChatMessage from "./AIChatMessage";
-// import { AIChatBodyProps } from "./AIChat.types";
+"use client";
 
-type ChatBodyProps = {
-  messages: ChatMessageType[];
-  providerImage?: string;
-  providerIconImage?: string;
-  userIconImage?: string;
-};
+import { Scrollbar } from "./Scrollbar";
+import type { ScrollbarProps } from "./Scrollbar.types";
+import {
+  CustomScrollbarsVirtualList,
+  CustomScrollbarsVirtualListWithAutoFocus,
+} from "./sub-components";
 
-const ChatBody = ({
-  messages,
-  providerImage,
-  providerIconImage,
-  userIconImage,
-}: //   AIChatUser,
-ChatBodyProps) => {
-  const chatIsEmpty = messages.length === 0;
-
-  return (
-    <Scrollbar>
-      <div className="chat-panel-body-container">
-        {chatIsEmpty ? (
-          <>
-            <ChatEmptyScreen providerImage={providerImage} />
-          </>
-        ) : (
-          <>
-            {messages.map((message, index) => (
-              <ChatMessage
-                key={index}
-                userData={{
-                  displayName: "User name",
-                }}
-                message={message}
-                userIconImage={userIconImage}
-                providerIconImage={providerIconImage}
-              />
-            ))}
-          </>
-        )}
-      </div>
-    </Scrollbar>
-  );
-};
-
-export default ChatBody;
+export { Scrollbar, ScrollbarProps, CustomScrollbarsVirtualListWithAutoFocus };

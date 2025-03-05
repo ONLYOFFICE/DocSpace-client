@@ -8,6 +8,7 @@ import React, {
 import { VariableSizeList } from "react-window";
 import { Row } from "./Row";
 import { VirtualListProps } from "./types";
+import { Scrollbar } from "../scrollbar";
 
 export const VirtualList = ({
   width,
@@ -110,7 +111,7 @@ export const VirtualList = ({
         isActive: currentIndex,
         handleMouseMove,
       }}
-      //   outerElementType={Scrollbar}
+      outerElementType={Scrollbar}
     >
       {Row}
     </VariableSizeList>

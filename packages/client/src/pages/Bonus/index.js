@@ -43,6 +43,8 @@ const Bonus = ({
   logoText,
   enterpriseInstallScriptUrl,
   enterpriseInstallWindowsUrl,
+  forEnterprisesUrl,
+  demoOrderUrl,
 }) => {
   useEffect(() => {
     standaloneInit();
@@ -62,6 +64,8 @@ const Bonus = ({
       logoText={logoText}
       enterpriseInstallScriptUrl={enterpriseInstallScriptUrl}
       enterpriseInstallWindowsUrl={enterpriseInstallWindowsUrl}
+      forEnterprisesUrl={forEnterprisesUrl}
+      demoOrderUrl={demoOrderUrl}
     />
   );
 };
@@ -83,6 +87,8 @@ export const Component = inject(
       enterpriseInstallWindowsUrl,
       feedbackAndSupportUrl,
       salesEmail,
+      forEnterprisesUrl,
+      demoOrderUrl,
     } = settingsStore;
 
     return {
@@ -98,6 +104,8 @@ export const Component = inject(
       logoText,
       enterpriseInstallScriptUrl,
       enterpriseInstallWindowsUrl,
+      forEnterprisesUrl,
+      demoOrderUrl,
     };
   },
 )(observer(Bonus));

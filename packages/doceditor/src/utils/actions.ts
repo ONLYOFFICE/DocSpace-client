@@ -231,6 +231,8 @@ export async function createFile(
 
     const fileRes = await fetch(createFile);
 
+    if (!fileRes.ok) console.log("fileRes", fileRes);
+
     if (fileRes.status === 401) {
       log.debug(`POST /files/${parentId}/file user auth failed`);
 

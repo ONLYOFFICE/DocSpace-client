@@ -23,6 +23,10 @@ export default function ChatWidget({
   additional_headers,
   session_id,
   list_files,
+  provider_image,
+  send_icon_image,
+  user_icon_image,
+  provider_icon_image,
 }: {
   api_key?: string;
   input_value: string;
@@ -38,6 +42,10 @@ export default function ChatWidget({
   additional_headers?: { [key: string]: string };
   session_id?: string;
   list_files?: FileType[];
+  provider_image?: string;
+  send_icon_image?: string;
+  user_icon_image?: string;
+  provider_icon_image?: string;
 }) {
   const sessionId = useRef(session_id ?? uuidv4());
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
@@ -182,7 +190,12 @@ export default function ChatWidget({
               maxHeight: bodyHeight,
             }}
           >
-            <ChatBody messages={messages} />
+            <ChatBody
+              messages={messages}
+              providerImage={provider_image}
+              providerIconImage={provider_icon_image}
+              userIconImage={user_icon_image}
+            />
             {sendingMessage && (
               <div className="chat-panel-loading-placeholder">
                 <h1 className="chat-panel-loading-placeholder-ellipsis"> </h1>
@@ -194,6 +207,7 @@ export default function ChatWidget({
             addMessage={addMessage}
             sendMessage={sendMessageFn}
             filesList={list_files}
+            sendIconImage={send_icon_image}
           />
         </div>
       </div>

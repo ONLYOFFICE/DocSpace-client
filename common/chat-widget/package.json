@@ -11,7 +11,7 @@
     "@types/node": "^16.18.37",
     "axios": "^1.4.0",
     "lodash": "^4.17.21",
-    "lucide-react": "^0.256.0",
+    "lucide-react": "^0.477.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.7",
@@ -60,8 +60,8 @@
     "@types/react-window": "^1.8.8",
     "file-loader": "^6.2.0",
     "sass": "^1.85.1",
-    "webpack-cli": "^5.1.4",
-    "shx": "0.3.4"
+    "shx": "0.3.4",
+    "webpack-cli": "^5.1.4"
   },
   "resolutions": {
     "@types/react": "18.2.14",

@@ -27,23 +27,34 @@
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeMathjax from "rehype-mathjax";
+import { CircleUserRound, LoaderPinwheel } from "lucide-react";
 
-import AIChatImage from "../images/ai.bot32.svg";
 import { ChatMessageType } from "../types/chatWidget";
 
 type AIChatMessageProps = {
   message: ChatMessageType;
-  userData: { displayName: string; avatarImg: string };
+  userData: { displayName: string };
+  userIconImage?: string;
+  providerIconImage?: string;
 };
 
-const ChatMessage = ({ message, userData }: AIChatMessageProps) => {
+const ChatMessage = ({
+  message,
+  userData,
+  userIconImage,
+  providerIconImage,
+}: AIChatMessageProps) => {
   return (
     <div className="chat-message-container">
       {message.isSend ? (
         <>
           <div className="chat-message-user">
             <div className="chat-message-user-avatar-wrapper">
-              <img src={userData.avatarImg} alt="" />
+              {userIconImage ? (
+                <img src={userIconImage} alt="user avatar" />
+              ) : (
+                <CircleUserRound color="#A3A9AE" />
+              )}
             </div>
 
             <p className="chat-message-user-name">{userData.displayName}</p>
@@ -54,7 +65,16 @@ const ChatMessage = ({ message, userData }: AIChatMessageProps) => {
       ) : (
         <>
           <div className="chat-message-user">
-            <img className="no-thumbnail-img" src={AIChatImage} alt="No item" />
+            {providerIconImage ? (
+              <img
+                className="no-thumbnail-img"
+                src={providerIconImage}
+                alt="No item"
+              />
+            ) : (
+              <LoaderPinwheel color="#74ab9c" />
+            )}
+
             <p className="chat-message-user-name">ChatGPT</p>
           </div>
 

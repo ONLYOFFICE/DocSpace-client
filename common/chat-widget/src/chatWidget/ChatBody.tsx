@@ -31,12 +31,18 @@ import ChatMessage from "./ChatMessage";
 // import AIChatMessage from "./AIChatMessage";
 // import { AIChatBodyProps } from "./AIChat.types";
 
-import UserImage from "../images/avatar.base.react.svg";
-
-type ChatBodyProps = { messages: ChatMessageType[] };
+type ChatBodyProps = {
+  messages: ChatMessageType[];
+  providerImage?: string;
+  providerIconImage?: string;
+  userIconImage?: string;
+};
 
 const ChatBody = ({
   messages,
+  providerImage,
+  providerIconImage,
+  userIconImage,
 }: //   AIChatUser,
 ChatBodyProps) => {
   const chatIsEmpty = messages.length === 0;
@@ -45,15 +51,19 @@ ChatBodyProps) => {
     <div className="chat-panel-body-container">
       {chatIsEmpty ? (
         <>
-          <ChatEmptyScreen />
+          <ChatEmptyScreen providerImage={providerImage} />
         </>
       ) : (
         <>
           {messages.map((message, index) => (
             <ChatMessage
               key={index}
-              userData={{ displayName: "User name", avatarImg: UserImage }}
+              userData={{
+                displayName: "User name",
+              }}
               message={message}
+              userIconImage={userIconImage}
+              providerIconImage={providerIconImage}
             />
           ))}
         </>

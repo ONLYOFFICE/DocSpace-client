@@ -27,6 +27,10 @@
 // import { useEffect } from "react";
 import { memo } from "react";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
+import SendIconReactSvgUrl from "PUBLIC_DIR/images/send-message.svg?url";
+import ProviderIconImageUrl from "PUBLIC_DIR/images/icons/32/ai.bot32.svg?url";
+import UserIconImageUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
+import ProviderImageUrl from "PUBLIC_DIR/images/ai.bot.svg?url";
 import { TFile, TFolder } from "../../../api/files/types";
 import { DeviceType } from "../../../enums";
 import { Portal } from "../../portal";
@@ -111,6 +115,10 @@ export const ChatWidget = memo(
           // flow_id: "string",
           // tweaks: "json",
           list_files={JSON.stringify(files)}
+          provider_image={ProviderImageUrl}
+          user_icon_image={UserIconImageUrl}
+          provider_icon_image={ProviderIconImageUrl}
+          send_icon_image={SendIconReactSvgUrl}
         />
       </div>
     );

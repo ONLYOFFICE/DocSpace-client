@@ -19,6 +19,11 @@ customElements.define(
       // additional_headers: "json",
       // session_id: "string",
       list_files: "json",
+
+      provider_image: "string",
+      send_icon_image: "string",
+      user_icon_image: "string",
+      provider_icon_image: "string",
     },
   })
 );

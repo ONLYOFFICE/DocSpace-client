@@ -25,8 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ReactSVG } from "react-svg";
-import SendMessageReactSvgUrl from "../images/send-message.svg";
+import { Send } from "lucide-react";
 import { FileType } from "../types/chatWidget";
 import { DropDown } from "../components/dropdown";
 
@@ -39,11 +38,13 @@ const ChatFooter = ({
   sendMessage,
   setFooterHeight,
   filesList = [],
+  sendIconImage,
 }: {
   addMessage: Function;
   sendMessage: Function;
   setFooterHeight: Function;
   filesList?: FileType[];
+  sendIconImage?: string;
 }) => {
   const inputBlockRef = useRef<HTMLDivElement>(null);
 
@@ -182,7 +183,11 @@ const ChatFooter = ({
             onClick={onSendMessage}
           >
             <div className="chat-panel-footer_icon-wrapper">
-              <ReactSVG src={SendMessageReactSvgUrl} />
+              {sendIconImage ? (
+                <img src={sendIconImage} alt="send icon" />
+              ) : (
+                <Send color="#A3A9AE" />
+              )}
             </div>
           </div>
         </div>

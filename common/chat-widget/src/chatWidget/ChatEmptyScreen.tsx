@@ -24,15 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AIChatImageUrl from "../images/ai.bot48.svg";
+import { LoaderPinwheel } from "lucide-react";
 
-const ChatEmptyScreen = () => {
+const ChatEmptyScreen = ({ providerImage }: { providerImage?: string }) => {
   const emptyAIChatText = "How can I help you today?"; // TODO: AI
 
   return (
     <div className="chat-panel-body_empty-container">
       <div className="chat-panel-body_empty-container-image-wrapper">
-        <img className="no-thumbnail-img" src={AIChatImageUrl} alt="No item" />
+        {providerImage ? (
+          <img className="no-thumbnail-img" src={providerImage} alt="No item" />
+        ) : (
+          <LoaderPinwheel color="#74ab9c" size={48} />
+        )}
       </div>
       <p className="chat-panel-body_empty-container-text">{emptyAIChatText}</p>
     </div>

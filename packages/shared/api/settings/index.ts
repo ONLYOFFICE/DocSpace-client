@@ -1276,3 +1276,22 @@ export function getCronLdap() {
 
   return request(options);
 }
+
+export function getDeepLinkSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/deeplink",
+  };
+
+  return request(options);
+}
+
+export function saveDeepLinkSettings(handlingMode: number) {
+  const options = {
+    method: "post",
+    url: "/settings/deeplink",
+    data: { deepLinkSettings: { handlingMode } },
+  };
+
+  return request(options);
+}

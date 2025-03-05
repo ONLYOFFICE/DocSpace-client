@@ -95,6 +95,12 @@ const CustomizationNavbar = ({
           onClickLink={onClickLink}
         />
       ) : null}
+      <MobileCategoryWrapper
+        title={t("ConfigureDeepLink")}
+        subtitle={t("ConfigureDeepLinkDescription")}
+        url="/portal-settings/customization/general/configure-deep-link"
+        onClickLink={onClickLink}
+      />
     </StyledComponent>
   );
 };

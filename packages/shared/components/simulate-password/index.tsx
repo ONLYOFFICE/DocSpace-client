@@ -26,7 +26,7 @@
 
 import React, { memo, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
+import classNames from "classnames";
 
 import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
@@ -35,24 +35,12 @@ import { globalColors } from "../../themes";
 import { InputBlock } from "../input-block";
 import { InputType } from "../text-input";
 
+import styles from "./SimulatePassword.module.scss";
 import type { SimulatePasswordProps } from "./SimulatePassword.types";
 
 const iconColor = globalColors.gray;
 
 const bulletsFont = "•";
-
-const StyledBody = styled.div<{ inputMaxWidth?: string }>`
-  width: 100%;
-
-  .conversion-input {
-    text-align: start;
-
-    max-width: ${(props) =>
-      props.inputMaxWidth ? props.inputMaxWidth : "382px"};
-    width: 100%;
-    margin: 0;
-  }
-`;
 
 export const SimulatePassword = memo(
   ({
@@ -151,14 +139,20 @@ export const SimulatePassword = memo(
       }
     }, [inputValue]);
 
+    const inputBlockStyle = inputMaxWidth
+      ? ({ maxWidth: inputMaxWidth } as React.CSSProperties)
+      : undefined;
+
     return (
-      <StyledBody
-        className="conversation-password-wrapper"
-        inputMaxWidth={inputMaxWidth}
+      <div
+        className={classNames(
+          styles.simulatePassword,
+          "conversation-password-wrapper",
+        )}
       >
         <InputBlock
           id="conversion-password"
-          className="conversion-input"
+          className={classNames(styles.conversionInput)}
           type={InputType.text}
           hasError={hasError}
           isDisabled={isDisabled}
@@ -174,8 +168,9 @@ export const SimulatePassword = memo(
           placeholder={t("UploadPanel:EnterPassword")}
           forwardedRef={forwardedRef}
           isAutoFocussed
+          style={inputBlockStyle}
         />
-      </StyledBody>
+      </div>
     );
   },
 );

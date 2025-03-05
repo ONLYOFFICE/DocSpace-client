@@ -31,7 +31,7 @@ type PicketRadioButtonPropsForOption = Pick<
 >;
 
 export type TRadioButtonOption = {
-  value: string;
+  value: string | number;
   disabled?: boolean;
   type?: "text" | "radio";
   autoFocus?: boolean;
@@ -53,7 +53,7 @@ export type RadioButtonGroupProps = {
   /** Array of objects, contains props for each `<RadioButton />` component */
   options: TRadioButtonOption[];
   /** Value of the selected radio button */
-  selected?: string;
+  selected?: string | number;
   /** Position of radio buttons  */
   width?: string;
 } & PickedDivProps &

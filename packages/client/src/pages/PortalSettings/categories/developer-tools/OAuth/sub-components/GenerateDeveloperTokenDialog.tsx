@@ -86,6 +86,7 @@ const GenerateDeveloperTokenDialog = ({
     expires: getDate(new Date(), i18nParam),
   });
   const [requestRunning, setRequestRunning] = React.useState(false);
+  const [secret, setSecret] = React.useState("");
 
   const onCopyClick = React.useCallback(async () => {
     copy(token);
@@ -106,7 +107,7 @@ const GenerateDeveloperTokenDialog = ({
     await api.oauth.revokeDeveloperToken(
       token,
       client!.clientId,
-      client!.clientSecret,
+      secret,
       jwtToken!,
     );
 
@@ -169,6 +170,19 @@ const GenerateDeveloperTokenDialog = ({
         toastr.error(e as TData);
       });
   };
+
+  React.useEffect(() => {
+    const fecthClient = async () => {
+      const { clientSecret } = await api.oauth.getClient(
+        client!.clientId,
+        jwtToken!,
+      );
+
+      setSecret(clientSecret);
+    };
+
+    fecthClient();
+  }, [client?.clientId, jwtToken]);
 
   return (
     <ModalDialog
@@ -256,7 +270,7 @@ const GenerateDeveloperTokenDialog = ({
           scale
           onClick={token ? onRevoke : onClose}
           size={ButtonSize.normal}
-          isDisabled={requestRunning}
+          isDisabled={requestRunning || !secret}
         />
       </ModalDialog.Footer>
     </ModalDialog>

@@ -114,6 +114,10 @@ const StyledInputGroup = styled.div.attrs(injectDefaultTheme)`
     display: flex;
     align-items: center;
     gap: 0px;
+
+    .icon-button {
+      padding: 0 8px;
+    }
   }
 
   .public_client {

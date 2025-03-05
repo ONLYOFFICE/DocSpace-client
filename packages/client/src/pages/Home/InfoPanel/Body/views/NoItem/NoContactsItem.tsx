@@ -34,13 +34,13 @@ import { TTranslation } from "@docspace/shared/types";
 
 import { StyledNoItemContainer } from "../../styles/NoItem";
 
-type NoСontactsItemProps = {
+type NoContactsItemProps = {
   t: TTranslation;
   isGroups: boolean;
   isGuests: boolean;
 };
 
-const NoСontactsItem = ({ t, isGroups, isGuests }: NoСontactsItemProps) => {
+const NoContactsItem = ({ t, isGroups, isGuests }: NoContactsItemProps) => {
   const theme = useTheme();
 
   const imgSrc = theme.isBase
@@ -63,4 +63,4 @@ const NoСontactsItem = ({ t, isGroups, isGuests }: NoСontactsItemProps) => {
   );
 };
 
-export default NoСontactsItem;
+export default NoContactsItem;

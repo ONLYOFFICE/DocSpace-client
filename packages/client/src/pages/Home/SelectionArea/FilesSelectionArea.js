@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
@@ -42,18 +42,19 @@ const SelectionArea = (props) => {
     isIndexEditingMode,
   } = props;
 
-  const [countTilesInRow, setCountTilesInRow] = useState(getCountTilesInRow());
+  const [countTilesInRow, setCountTilesInRow] = useState();
 
   const setTilesCount = () => {
-    const newCount = getCountTilesInRow();
-    setCountTilesInRow(newCount);
+    if (isRooms === undefined) return;
+    const newCount = getCountTilesInRow(isRooms);
+    if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
   };
 
   const onResize = () => {
     setTilesCount();
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setTilesCount();
     window.addEventListener("resize", onResize);
 

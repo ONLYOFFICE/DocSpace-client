@@ -7,5 +7,9 @@
   "ChangeUserTypeMessageMulti": "The selected users will be moved to <strong>'{{ secondType }}'</strong> type.",
   "ChangeUserTypeMessageWarning": "You can't change the type for the {{productName}} administrators and for yourself.",
   "SuccessChangeGuestType": "The guest type was successfully changed",
-  "SuccessChangeUserType": "The user type was successfully changed"
+  "SuccessChangeUserType": "The user type was successfully changed",
+  "ChangeGuestsTypeToAdmin": "Guest <strong>{{userName}}</strong> will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. {{productName}} admins have access to the {{documentsSection}} section.",
+  "ChangeGuestsTypeToAdminMulti": "The selected guests will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. {{productName}} admins have access to the {{documentsSection}} section.",
+  "ChangeGuestsTypeToManager": "Guest <strong>{{userName}}</strong> will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. Room admins can create and manage the assigned rooms, invite new users, and assign roles of Room admin and lower. Room admins have access to the {{documentsSection}} section.",
+  "ChangeGuestsTypeToManagerMulti": "The selected guests will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. Room admins can create and manage the assigned rooms, invite new users, and assign roles of Room admin and lower. Room admins have access to the {{documentsSection}} section."
 }

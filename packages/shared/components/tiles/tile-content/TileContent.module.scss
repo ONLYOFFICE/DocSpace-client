@@ -24,57 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import LoadErrorIcon from "PUBLIC_DIR/images/load.error.react.svg";
-import styled, { useTheme } from "styled-components";
-import { Text } from "@docspace/shared/components/text";
-import React from "react";
-import uniqueid from "lodash/uniqueId";
+@import "../../../styles/variables/devices.scss";
+@import "../../../styles/variables/_colors.scss";
+@import "../../../styles/_mixins.scss";
 
-const StyledLoadErrorIcon = styled(LoadErrorIcon)`
-  outline: none !important;
-  path {
-    fill: ${(props) => props.theme.filesPanels.upload.iconColor};
+.tileContent {
+  width: 100%;
+  display: inline-flex;
+}
+
+.mainContainerWrapper {
+  margin: 0;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  display: flex;
+  align-self: center;
+  margin-inline-end: auto;
+  width: inherit;
+}
+
+.mainContainer {
+  height: 20px;
+  width: inherit;
+
+  @include tablet {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-`;
-
-const TooltipContent = ({ content }) => (
-  <Text fontSize="13px" noSelect>
-    {content}
-  </Text>
-);
-
-const ErrorFileUpload = ({
-  t,
-  item,
-  theme,
-  onTextClick,
-  showPasswordInput,
-}) => {
-  const { interfaceDirection } = useTheme();
-  const placeTooltip = interfaceDirection === "rtl" ? "right" : "left";
-  const tooltipId = uniqueid("uploading_tooltip");
-
-  return (
-    <div className="upload_panel-icon">
-      <StyledLoadErrorIcon
-        size="medium"
-        data-tooltip-id={tooltipId}
-        data-tooltip-content={item.error || t("UploadingError")}
-      />
-      <Tooltip
-        id={tooltipId}
-        getContent={TooltipContent}
-        place={placeTooltip}
-        maxWidth="320"
-        color={theme.tooltip.backgroundColor}
-      />
-      {item.needPassword ? (
-        <Text className="enter-password" fontWeight="600" onClick={onTextClick}>
-          {showPasswordInput ? t("HideInput") : t("EnterPassword")}
-        </Text>
-      ) : null}
-    </div>
-  );
-};
-export default ErrorFileUpload;
+}

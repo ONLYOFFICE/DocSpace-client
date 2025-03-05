@@ -90,6 +90,8 @@ const Root = ({
   fileId,
   hash,
   shareKey,
+
+  deepLinkSettings,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
   const [sdkConfig, setSdkConfig] = React.useState<TFrameConfig | null>(null);
@@ -124,6 +126,7 @@ const Root = ({
     settings,
     fileInfo,
     email: user?.email,
+    deepLinkSettings,
   });
   const { filesSettings } = useFilesSettings({});
   useSocketHelper({

@@ -61,4 +61,6 @@ export type TagProps = {
   roomType?: number;
   /** Indicates the type of provider associated with the tag */
   providerType?: number;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };

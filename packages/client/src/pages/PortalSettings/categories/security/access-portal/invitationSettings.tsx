@@ -29,11 +29,12 @@ import { Text } from "@docspace/shared/components/text";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import styles from "./InvitationSettings.module.scss";
 import { LearnMoreWrapper } from "../StyledSecurity";
+
 const InvitationSettings = (props) => {
   const { t } = props;
 
   return (
-    <div className={styles.wrapper}>
+    <>
       <LearnMoreWrapper>
         <Text fontSize="13px" fontWeight="400">
           Configure the invitation options for internal members and external
@@ -90,7 +91,7 @@ const InvitationSettings = (props) => {
         hasScroll={false}
         // isSaving={isSaving}
       />
-    </div>
+    </>
   );
 };
 

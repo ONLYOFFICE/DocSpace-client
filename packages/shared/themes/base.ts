@@ -2116,6 +2116,12 @@ export const getBaseTheme = () => {
           backgroundColorTop: white,
         },
 
+        tag: {
+          backgroundColor: white,
+          hoverBackgroundColor: grayStrong,
+          activeBackgroundColor: grayLight,
+        },
+
         sideColor: black,
         color: black,
         textColor: gray,
@@ -2464,7 +2470,7 @@ export const getBaseTheme = () => {
         tooltipColor: lightToastInfo,
         iconColor: lightErrorStatus,
         positiveStatusColor: lightStatusPositive,
-
+        progressColor: lightGrayDark,
         shareButton: {
           color: gray,
           sharedColor: lightGrayDark,
@@ -2938,7 +2944,7 @@ export const getBaseTheme = () => {
           background: grayLight,
         },
         storageManagement: {
-          grayBackgroundText: grayText,
+          grayBackgroundText: black,
           descriptionColor: lightGrayDark,
           dividerColor: grayLightMid,
         },

@@ -90,7 +90,6 @@ const PureHome = (props) => {
     dragging,
     createFoldersTree,
     disableDrag,
-    setUploadPanelVisible,
     clearPrimaryProgressData,
     isPrimaryProgressVisbile,
 
@@ -145,7 +144,6 @@ const PureHome = (props) => {
     scrollToTop,
     isEmptyGroups,
     wsCreatedPDFForm,
-    disableUploadPanelOpen,
     setContactsTab,
     isUsersEmptyView,
     showGuestReleaseTip,
@@ -161,7 +159,8 @@ const PureHome = (props) => {
     clearUploadedFiles,
     mainButtonVisible,
     primaryOperationsAlert,
-    needErrorChecking,
+    clearConversionData,
+    isErrorChecking,
     setOperationCancelVisible,
     hideConfirmCancelOperation,
     welcomeFormFillingTipsVisible,
@@ -226,12 +225,11 @@ const PureHome = (props) => {
     wsCreatedPDFForm,
   });
 
-  const { showUploadPanel } = useOperations({
-    setUploadPanelVisible,
-    disableUploadPanelOpen,
+  useOperations({
     clearUploadData,
     clearUploadedFiles,
     primaryOperationsArray,
+    clearConversionData,
   });
 
   useContacts({
@@ -340,7 +338,8 @@ const PureHome = (props) => {
     }
   }
 
-  sectionProps.onOpenUploadPanel = showUploadPanel;
+  // sectionProps.onOpenUploadPanel = showUploadPanel;
+
   sectionProps.getContextModel = getContextModel;
   sectionProps.isIndexEditingMode = isIndexEditingMode;
 
@@ -353,7 +352,7 @@ const PureHome = (props) => {
   sectionProps.cancelUpload = onCancelUpload;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
   sectionProps.primaryOperationsAlert = primaryOperationsAlert;
-  sectionProps.needErrorChecking = needErrorChecking;
+  sectionProps.needErrorChecking = isErrorChecking;
   sectionProps.mainButtonVisible = mainButtonVisible;
 
   const hasVisibleContent =
@@ -455,6 +454,7 @@ export const Component = inject(
       cancelUpload,
       clearUploadData,
       clearUploadedFiles,
+      clearConversionData,
     } = uploadDataStore;
 
     const {
@@ -515,12 +515,11 @@ export const Component = inject(
     } = treeFoldersStore;
 
     const {
-      disableUploadPanelOpen,
       clearPrimaryProgressData,
       primaryOperationsArray,
       primaryOperationsCompleted,
       primaryOperationsAlert,
-      needErrorChecking,
+      isErrorChecking,
       isPrimaryProgressVisbile,
     } = primaryProgressDataStore;
 
@@ -532,7 +531,7 @@ export const Component = inject(
       secondaryOperationsAlert,
     } = secondaryProgressDataStore;
 
-    const { setUploadPanelVisible, startUpload } = uploadDataStore;
+    const { startUpload } = uploadDataStore;
 
     const { createFoldersTree, onClickBack } = filesActionsStore;
 
@@ -590,7 +589,6 @@ export const Component = inject(
       folderSecurity,
 
       clearPrimaryProgressData,
-      disableUploadPanelOpen,
 
       isSecondaryProgressVisbile,
       isPrimaryProgressVisbile,
@@ -614,7 +612,6 @@ export const Component = inject(
       fetchFiles,
       fetchRooms,
 
-      setUploadPanelVisible,
       startUpload,
       createFoldersTree,
 
@@ -685,7 +682,8 @@ export const Component = inject(
       clearUploadedFiles,
       mainButtonVisible,
       primaryOperationsAlert,
-      needErrorChecking,
+      clearConversionData,
+      isErrorChecking,
       setOperationCancelVisible,
       hideConfirmCancelOperation,
     };

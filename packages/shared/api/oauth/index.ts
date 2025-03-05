@@ -393,3 +393,10 @@ export const introspectDeveloperToken = (token: string) => {
     true,
   );
 };
+
+export const getJWTToken = () => {
+  return request<string>({
+    method: "get",
+    url: "/security/oauth2/token",
+  });
+};

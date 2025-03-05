@@ -2094,10 +2094,10 @@ const Dark: TTheme = {
         draggingColor: dndDarkColor,
         draggingHoverColor: dndDarkHover,
         checkedColor: lightDarkGrayHover,
-        roomsCheckedColor: black,
+        roomsCheckedColor: lightDarkGrayHover,
         border: `1px solid ${grayDarkStrong}`,
         backgroundBadgeColor: black,
-        backgroundColor: darkGrayLight,
+        backgroundColor: black,
         borderRadius: "6px",
         roomsBorderRadius: "12px",
         bottomBorderRadius: "0 0 6px 6px",
@@ -2105,6 +2105,12 @@ const Dark: TTheme = {
         upperBorderRadius: "6px 6px 0 0",
         roomsUpperBorderRadius: "12px 12px 0 0",
         backgroundColorTop: black,
+      },
+
+      tag: {
+        backgroundColor: black,
+        hoverBackgroundColor: grayStrong,
+        activeBackgroundColor: grayLight,
       },
 
       sideColor: white,
@@ -2454,7 +2460,7 @@ const Dark: TTheme = {
       tooltipColor: darkToastInfo,
       iconColor: darkErrorStatus,
       positiveStatusColor: darkStatusPositive,
-
+      progressColor: lightGrayDark,
       shareButton: {
         color: gray,
         sharedColor: lightGrayDark,
@@ -2926,7 +2932,7 @@ const Dark: TTheme = {
         background: darkGrayLight,
       },
       storageManagement: {
-        grayBackgroundText: grayDark,
+        grayBackgroundText: white,
         descriptionColor: darkGrayDark,
         dividerColor: grayDarkMid,
       },

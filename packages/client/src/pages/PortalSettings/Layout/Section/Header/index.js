@@ -247,12 +247,7 @@ const SectionHeaderContent = (props) => {
   ]);
 
   const onBackToParent = () => {
-    const newArrayOfParams = getArrayOfParams();
-    const filteredParams = newArrayOfParams.filter(
-      (param) => param !== "developer-tools",
-    );
-    const newPath = filteredParams[0];
-    navigate(newPath);
+    navigate(-1);
   };
 
   const onToggleSelector = (isOpen = !selectorIsOpen) => {

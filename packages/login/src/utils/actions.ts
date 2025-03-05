@@ -502,3 +502,21 @@ export async function getAvailablePortals(data: {
 
   return portals.tenants as { portalLink: string; portalName: string }[];
 }
+
+export async function getOauthJWTToken() {
+  const [getJWTToken] = createRequest(
+    [`/security/oauth2/token`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? new Response(JSON.stringify({ response: "123456" }))
+    : await fetch(getJWTToken);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const jwtToken = await res.json();
+
+  return jwtToken.response as string;
+}

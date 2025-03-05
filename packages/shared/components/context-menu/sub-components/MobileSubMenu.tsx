@@ -1,12 +1,15 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { ReactSVG } from "react-svg";
 import { CSSTransition } from "react-transition-group";
+import { useTheme } from "styled-components";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import { DomHelpers, classNames } from "../../../utils";
 import { ContextMenuSkeleton } from "../../../skeletons/context-menu";
 import { Scrollbar } from "../../scrollbar";
+import { Badge } from "../../badge";
 import { ContextMenuModel, ContextMenuType } from "../ContextMenu.types";
+import { globalColors } from "../../../themes";
 
 interface MobileSubMenuProps {
   onLeafClick: (e: React.MouseEvent) => void;
@@ -24,7 +27,11 @@ const MenuItem = ({
   onClick: (e: React.MouseEvent) => void;
   style: React.CSSProperties;
 }) => {
+  const theme = useTheme();
+
   if (item.disabled) return null;
+
+  const subMenuIconClassName = "p-submenu-icon";
 
   const className = classNames(
     "p-menuitem",
@@ -74,6 +81,26 @@ const MenuItem = ({
           <span className="p-menuitem-text not-selectable">{item.label}</span>
         ) : null}
         {item.items ? <ArrowIcon className="p-submenu-icon" /> : null}
+        {item.isPaidBadge ? (
+          <Badge
+            label={item.badgeLabel}
+            className={`${subMenuIconClassName} p-submenu-badge`}
+            style={{ marginInlineStart: "10px" }}
+            backgroundColor={
+              item.isPaidBadge
+                ? theme.isBase
+                  ? globalColors.favoritesStatus
+                  : globalColors.favoriteStatusDark
+                : globalColors.lightBlueMain
+            }
+            fontSize="9px"
+            fontWeight={700}
+            borderRadius="50px"
+            noHover
+            isPaidBadge={item.isPaidBadge}
+            isHovered={false}
+          />
+        ) : null}
       </a>
     </li>
   );

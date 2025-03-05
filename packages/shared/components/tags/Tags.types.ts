@@ -61,4 +61,6 @@ export type TagsProps = {
   /** Accepts the function that is called when the tag is selected */
   onSelectTag: (tag?: object) => void;
   removeTagIcon?: boolean;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 };

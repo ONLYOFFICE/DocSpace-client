@@ -68,7 +68,8 @@ const AccessPortal = (props) => {
     return () => resetIsInit();
   }, []);
 
-  if (isMobileView) return <MobileView />;
+  if (isMobileView)
+    return <MobileView withoutExternalLink={!helpCenterDomain} />;
   return (
     <MainContainer
       className="desktop-view"

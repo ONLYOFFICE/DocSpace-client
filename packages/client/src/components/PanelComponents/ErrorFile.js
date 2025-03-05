@@ -24,50 +24,45 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import { useState } from "react";
-// import { options } from "./options";
-// import InputPhone from "./index";
+import React from "react";
+import { useTheme } from "styled-components";
+import uniqueid from "lodash/uniqueId";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/shared/components/text";
+import { StyledLoadErrorIcon } from "./StyledComponents";
 
-// export default {
-//   title: "Components/InputPhone",
-//   component: InputPhone,
-//   argTypes: {
-//     onChange: { control: "onChange" },
-//   },
-// };
+const TooltipContent = ({ content }) => (
+  <Text fontSize="13px" noSelect>
+    {content}
+  </Text>
+);
 
-// const Template = ({
-//   onChange,
-//   value,
-//   ...args
-// }: any) => {
-//   const [val, setValue] = useState(value);
+const ErrorFile = ({ t, item, theme, onTextClick, showPasswordInput }) => {
+  const { interfaceDirection } = useTheme();
+  const placeTooltip = interfaceDirection === "rtl" ? "right" : "left";
+  const tooltipId = uniqueid("uploading_tooltip");
 
-//   return (
-//     <div style={{ height: "300px" }}>
-//       <InputPhone
-//         {...args}
-//         value={val}
-//         onChange={(e) => {
-//           setValue(e.target.value), onChange(e.target.value);
-//         }}
-//       />
-//     </div>
-//   );
-// };
+  return (
+    <div className="upload_panel-icon">
+      <StyledLoadErrorIcon
+        size="medium"
+        data-tooltip-id={tooltipId}
+        data-tooltip-content={item.error || t("UploadingError")}
+      />
+      <Tooltip
+        id={tooltipId}
+        getContent={TooltipContent}
+        place={placeTooltip}
+        maxWidth="320"
+        color={theme.tooltip.backgroundColor}
+      />
+      {item.needPassword ? (
+        <Text className="enter-password" fontWeight="600" onClick={onTextClick}>
+          {showPasswordInput ? t("HideInput") : t("EnterPassword")}
+        </Text>
+      ) : null}
+    </div>
+  );
+};
 
-// export const Default = Template.bind({});
-// // @ts-expect-error TS(2339): Property 'args' does not exist on type '({ onChang... Remove this comment to see the full error message
-// Default.args = {
-//   defaultCountry: {
-//     locale: options[236].code, // default locale US
-//     dialCode: options[236].dialCode, // default dialCode +1
-//     mask: options[236].mask, // default US mask
-//     icon: options[236].flag, // default US flag
-//   },
-//   phonePlaceholderText: "1 XXX XXX-XXXX",
-//   searchPlaceholderText: "Search",
-//   scaled: false,
-//   searchEmptyMessage: "Nothing found",
-//   errorMessage: "Country code is invalid",
-// };
+export default ErrorFile;

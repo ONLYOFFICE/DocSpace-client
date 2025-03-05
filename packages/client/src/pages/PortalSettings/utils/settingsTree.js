@@ -78,6 +78,13 @@ export const settingsTree = [
             link: "portal-renaming",
             tKey: "PortalRenaming",
           },
+          {
+            id: "portal-settings_catalog-configure-deep-link",
+            key: "0-0-4",
+            icon: "",
+            link: "configure-deep-link",
+            tKey: "ConfigureDeepLink",
+          },
         ],
       },
       {

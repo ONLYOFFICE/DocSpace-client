@@ -404,6 +404,7 @@ export const getOperationsProgressTitle = (type) => {
     deletePermanently,
     upload,
     convert,
+    deleteVersionFile,
   } = OPERATIONS_NAME;
   switch (type) {
     case trash:
@@ -426,6 +427,8 @@ export const getOperationsProgressTitle = (type) => {
       return i18n.t("Files:Uploading");
     case convert:
       return i18n.t("Files:Converting");
+    case deleteVersionFile:
+      return i18n.t("Files:DeletingVersion");
     default:
       return i18n.t("Files:OtherProcesses");
   }

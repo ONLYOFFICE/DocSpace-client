@@ -24,50 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import { useState } from "react";
-// import { options } from "./options";
-// import InputPhone from "./index";
+import React from "react";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
+import { StyledIconButton } from "./StyledComponents";
 
-// export default {
-//   title: "Components/InputPhone",
-//   component: InputPhone,
-//   argTypes: {
-//     onChange: { control: "onChange" },
-//   },
-// };
+const FileActions = ({ item }) => {
+  return (
+    <>
+      {item.action === "uploaded" || item.action === "converted" ? (
+        <div className="actions-wrapper">
+          <CheckReactSvg className="upload-panel_check-button" />
+        </div>
+      ) : null}
+      {item.action === "convert" ? (
+        <div
+          className="upload_panel-icon"
+          data-id={item.uniqueId}
+          data-file-id={item.fileId}
+          data-action={item.action}
+        >
+          <StyledIconButton iconName={RefreshReactSvgUrl} isDisabled />
+        </div>
+      ) : null}
+    </>
+  );
+};
 
-// const Template = ({
-//   onChange,
-//   value,
-//   ...args
-// }: any) => {
-//   const [val, setValue] = useState(value);
-
-//   return (
-//     <div style={{ height: "300px" }}>
-//       <InputPhone
-//         {...args}
-//         value={val}
-//         onChange={(e) => {
-//           setValue(e.target.value), onChange(e.target.value);
-//         }}
-//       />
-//     </div>
-//   );
-// };
-
-// export const Default = Template.bind({});
-// // @ts-expect-error TS(2339): Property 'args' does not exist on type '({ onChang... Remove this comment to see the full error message
-// Default.args = {
-//   defaultCountry: {
-//     locale: options[236].code, // default locale US
-//     dialCode: options[236].dialCode, // default dialCode +1
-//     mask: options[236].mask, // default US mask
-//     icon: options[236].flag, // default US flag
-//   },
-//   phonePlaceholderText: "1 XXX XXX-XXXX",
-//   searchPlaceholderText: "Search",
-//   scaled: false,
-//   searchEmptyMessage: "Nothing found",
-//   errorMessage: "Country code is invalid",
-// };
+export default FileActions;

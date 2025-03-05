@@ -24,43 +24,70 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTheme } from "styled-components";
-
-import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
-
+import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
+import { inject, observer } from "mobx-react";
+import EnUSReactSvgUrl from "PUBLIC_DIR/images/flags/en-US.react.svg?url";
+import DeReactSvgUrl from "PUBLIC_DIR/images/flags/de.react.svg?url";
 import { Text } from "@docspace/shared/components/text";
-import { TTranslation } from "@docspace/shared/types";
+import styles from "./Region.module.scss";
 
-import { StyledNoItemContainer } from "../../styles/NoItem";
-
-type NoContactsItemProps = {
-  t: TTranslation;
-  isGroups: boolean;
-  isGuests: boolean;
+export type RegionProps = {
+  region?: string | null;
 };
 
-const NoContactsItem = ({ t, isGroups, isGuests }: NoContactsItemProps) => {
-  const theme = useTheme();
+interface StorageManagement {
+  portalInfo: {
+    region?: string | null;
+  };
+}
 
-  const imgSrc = theme.isBase
-    ? EmptyScreenPersonSvgUrl
-    : EmptyScreenPersonSvgDarkUrl;
+const Region = ({ region }: RegionProps) => {
+  const { t } = useTranslation("Settings");
+  const US = "USA (Oregon)";
+  const DEU = "Germany (Frankfurt am Main)";
+
+  if (!region) return null;
 
   return (
-    <StyledNoItemContainer>
-      <div className="no-thumbnail-img-wrapper">
-        <img src={imgSrc} alt="empty screen" />
+    <>
+      <div className={styles.regionIcon}>
+        <ReactSVG
+          src={
+            region === "US"
+              ? EnUSReactSvgUrl
+              : region === "DEU"
+                ? DeReactSvgUrl
+                : ""
+          }
+        />
+        <Text
+          fontSize="13px"
+          fontWeight={400}
+          lineHeight="20px"
+          className={styles.regionCountry}
+        >
+          {region === "US" ? US : region === "DEU" ? DEU : null}
+        </Text>
       </div>
-      <Text className="no-item-text" textAlign="center">
-        {isGuests
-          ? t("InfoPanel:GuestsEmptyScreenText")
-          : isGroups
-            ? t("InfoPanel:GroupsEmptyScreenText")
-            : t("InfoPanel:MembersEmptyScreenText")}
+
+      <Text
+        fontSize="12px"
+        fontWeight={400}
+        lineHeight="16px"
+        className={styles.regionDescription}
+      >
+        {t("StorageManagementRegion")}
       </Text>
-    </StyledNoItemContainer>
+    </>
   );
 };
 
-export default NoContactsItem;
+export default inject(
+  ({ storageManagement }: { storageManagement: StorageManagement }) => {
+    const { portalInfo } = storageManagement;
+    return {
+      region: portalInfo.region,
+    };
+  },
+)(observer(Region));

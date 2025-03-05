@@ -2460,7 +2460,7 @@ const Dark: TTheme = {
       tooltipColor: darkToastInfo,
       iconColor: darkErrorStatus,
       positiveStatusColor: darkStatusPositive,
-
+      progressColor: lightGrayDark,
       shareButton: {
         color: gray,
         sharedColor: lightGrayDark,
@@ -2932,7 +2932,7 @@ const Dark: TTheme = {
         background: darkGrayLight,
       },
       storageManagement: {
-        grayBackgroundText: grayDark,
+        grayBackgroundText: white,
         descriptionColor: darkGrayDark,
         dividerColor: grayDarkMid,
       },

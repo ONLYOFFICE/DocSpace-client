@@ -24,59 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled, { keyframes } from "styled-components";
-
-import { IconButton } from "@docspace/shared/components/icon-button";
-
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
-
-const circularRotate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  40% {
-    transform: rotate(-180deg);
-  }
-  50% {
-    transform: rotate(-180deg);
-  }
-  90% {
-    transform: rotate(-360deg);
-  }
-  100% {
-    transform: rotate(-360deg);
-  }
-`;
-
-const StyledIconButton = styled(IconButton)`
-  svg {
-    animation: ${circularRotate} 2s ease-in-out infinite;
-    transform-origin: center;
-  }
-`;
-
-const ActionsUploadedFile = ({ item }) => {
-  return (
-    <>
-      {item.action === "uploaded" || item.action === "converted" ? (
-        <div className="actions-wrapper">
-          <CheckReactSvg className="upload-panel_check-button" />
-        </div>
-      ) : null}
-      {item.action === "convert" ? (
-        <div
-          className="upload_panel-icon"
-          data-id={item.uniqueId}
-          data-file-id={item.fileId}
-          data-action={item.action}
-        >
-          <StyledIconButton iconName={RefreshReactSvgUrl} isDisabled />
-        </div>
-      ) : null}
-    </>
-  );
-};
-
-export default ActionsUploadedFile;
+export {
+  StyledLoadErrorIcon,
+  StyledFileRow,
+  StyledIconButton,
+} from "./StyledComponents";
+export { default as ErrorFile } from "./ErrorFile";
+export { default as FileActions } from "./FileActions";

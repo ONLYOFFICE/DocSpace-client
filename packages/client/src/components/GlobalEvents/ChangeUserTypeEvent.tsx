@@ -176,6 +176,7 @@ const ChangeUserTypeEvent = ({
     <ChangeUserTypeDialog
       visible
       isGuestsDialog={isGuestsDialog}
+      toType={toType}
       firstType={firstType ?? ""}
       secondType={secondType}
       userNames={userNames}

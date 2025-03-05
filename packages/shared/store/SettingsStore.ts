@@ -73,6 +73,7 @@ import {
   TenantStatus,
   UrlActionType,
   RecaptchaType,
+  DeepLinkType,
 } from "../enums";
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR, MEDIA_VIEW_URL } from "../constants";
 import { Dark, Base, TColorScheme } from "../themes";
@@ -309,6 +310,8 @@ class SettingsStore {
   recaptchaType: RecaptchaType | null = null;
 
   displayAbout: boolean = false;
+
+  deepLinkType: DeepLinkType = DeepLinkType.Choice;
 
   isDefaultPasswordProtection: boolean = false;
 

@@ -90,6 +90,8 @@ const Root = ({
   fileId,
   hash,
   shareKey,
+
+  deepLinkSettings,
   baseSdkConfig,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
@@ -121,6 +123,7 @@ const Root = ({
     settings,
     fileInfo,
     email: user?.email,
+    deepLinkSettings,
   });
 
   const { filesSettings } = useFilesSettings({});

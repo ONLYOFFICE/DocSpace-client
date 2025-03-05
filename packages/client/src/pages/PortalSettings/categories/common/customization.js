@@ -36,6 +36,7 @@ import { LanguageAndTimeZoneSettings } from "./Customization/language-and-time-z
 import { WelcomePageSettings } from "./Customization/welcome-page-settings";
 import { PortalRenaming } from "./Customization/portal-renaming";
 import { DNSSettings } from "./Customization/dns-settings";
+import { ConfigureDeepLink } from "./Customization/configure-deep-link";
 import CustomizationNavbar from "./customization-navbar";
 import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
 
@@ -139,6 +140,8 @@ const Customization = (props) => {
           <PortalRenaming isMobileView={viewMobile} />
         </>
       ) : null}
+      <StyledSettingsSeparator />
+      <ConfigureDeepLink />
     </StyledComponent>
   );
 };

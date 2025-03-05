@@ -215,6 +215,7 @@ export type TResponse =
       fileId?: string;
       hash?: string;
       shareKey?: string;
+      deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
     }
   | {
@@ -229,6 +230,7 @@ export type TResponse =
       fileId?: string;
       hash?: string;
       shareKey?: string;
+      deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
     };
 

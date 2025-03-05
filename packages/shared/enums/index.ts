@@ -665,6 +665,12 @@ export enum FormFillingTipsState {
   Uploading = 5,
 }
 
+export enum DeepLinkType {
+  Choice = 0,
+  Web = 1,
+  App = 2,
+}
+
 /**
  * Enum for sort by field name
  * @readonly

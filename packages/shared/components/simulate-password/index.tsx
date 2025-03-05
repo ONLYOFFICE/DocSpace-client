@@ -24,24 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
-import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
-import React, { useState, useEffect, memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import PropTypes from "prop-types";
+
+import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
+import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
+
+import { globalColors } from "../../themes";
 import { InputBlock } from "../input-block";
-import { globalColors } from "../../themes/globalColors";
+import { InputType } from "../text-input";
+
+import type { SimulatePasswordProps } from "./SimulatePassword.types";
 
 const iconColor = globalColors.gray;
 
 const bulletsFont = "•";
 
-const StyledBody = styled.div`
+const StyledBody = styled.div<{ inputMaxWidth?: string }>`
   width: 100%;
 
   .conversion-input {
-    width: 100%;
     text-align: start;
 
     max-width: ${(props) =>
@@ -50,6 +53,7 @@ const StyledBody = styled.div`
     margin: 0;
   }
 `;
+
 export const SimulatePassword = memo(
   ({
     onChange,
@@ -59,19 +63,19 @@ export const SimulatePassword = memo(
     hasError = false,
     forwardedRef,
     inputValue,
-  }) => {
+  }: SimulatePasswordProps) => {
     const [password, setPassword] = useState(inputValue ?? "");
-    const [caretPosition, setCaretPosition] = useState();
+    const [caretPosition, setCaretPosition] = useState(0);
     const [inputType, setInputType] = useState("password");
 
     const { t } = useTranslation("UploadPanel");
 
-    const setPasswordSettings = (newPassword) => {
+    const setPasswordSettings = (newPassword: string) => {
       let newValue;
 
       const oldPassword = password;
       const oldPasswordLength = oldPassword.length;
-      const position = forwardedRef.current.selectionStart;
+      const position = forwardedRef.current?.selectionStart ?? 0;
 
       setCaretPosition(position);
       const newCharactersUntilCaret = newPassword.substring(0, position);
@@ -101,17 +105,19 @@ export const SimulatePassword = memo(
       setPassword(newValue);
     };
 
-    const onChangePassword = (e) => {
+    const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newPassword = e.target.value;
 
-      inputType == "password"
-        ? setPasswordSettings(newPassword)
-        : setPassword(newPassword);
+      if (inputType === "password") {
+        setPasswordSettings(newPassword);
+      } else {
+        setPassword(newPassword);
+      }
     };
 
-    const onKeyDownAction = (e) => {
+    const onKeyDownAction = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter") {
-        onKeyDown && onKeyDown(e);
+        onKeyDown?.(e);
       }
     };
 
@@ -126,16 +132,18 @@ export const SimulatePassword = memo(
       inputType === "password" ? EyeOffReactSvgUrl : EyeReactSvgUrl;
 
     useEffect(() => {
-      onChange && onChange(password);
+      onChange?.(password);
 
-      caretPosition &&
-        inputType === "password" &&
+      if (caretPosition && inputType === "password") {
         forwardedRef.current?.setSelectionRange(caretPosition, caretPosition);
-    }, [password]);
+      }
+    }, [caretPosition, forwardedRef, inputType, onChange, password]);
 
     useEffect(() => {
-      isDisabled && inputType !== "password" && setInputType("password");
-    }, [isDisabled]);
+      if (isDisabled && inputType !== "password") {
+        setInputType("password");
+      }
+    }, [inputType, isDisabled]);
 
     useEffect(() => {
       if (inputValue !== undefined) {
@@ -151,7 +159,7 @@ export const SimulatePassword = memo(
         <InputBlock
           id="conversion-password"
           className="conversion-input"
-          type="text"
+          type={InputType.text}
           hasError={hasError}
           isDisabled={isDisabled}
           iconName={iconName}
@@ -173,9 +181,3 @@ export const SimulatePassword = memo(
 );
 
 SimulatePassword.displayName = "SimulatePassword";
-
-SimulatePassword.propTypes = {
-  inputMaxWidth: PropTypes.string,
-  hasError: PropTypes.bool,
-  onChange: PropTypes.func,
-};

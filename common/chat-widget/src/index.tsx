@@ -24,6 +24,8 @@ customElements.define(
       send_icon_image: "string",
       user_icon_image: "string",
       provider_icon_image: "string",
+
+      interface_theme: "string",
     },
   })
 );

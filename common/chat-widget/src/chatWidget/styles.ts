@@ -1,5 +1,133 @@
+const themeStyles = `
+
+  .chat-panel-wrapper[data-theme="light"] {
+    --fill-color: rgb(255, 255, 255);
+    --input-border-color: rgb(208, 213, 218);
+    --text-color: #333;
+    
+    --drop-down-box-shadow-color :rgba(0, 0, 0, 0.25);
+    --dropdown-item-background-active: #f8f9f9;
+    --dropdown-item-background-hover: #f8f9f9;
+    --dropdown-item-border-color: rgb(208, 213, 218);
+    --text-input-placeholder: #555;
+
+    --icon-button-color: #a3a9ae;
+    --icon-button-hover-color: #657077;
+    --icon-button-size: 28px;
+
+    --tap-highlight: rgba(0, 0, 0, 0);
+
+    --chat-panel-border: #eceef1;
+    --ai-chat-text-color: #657077;
+
+    --scrollbar-padding-inline-end: 17px;
+    --scrollbar-padding-inline-end-mobile: 8px;
+    --scrollbar-padding-after-last-item: unset;
+
+    --scrollbar-bg-color: rgba(6, 22, 38, 0.16);
+    --scrollbar-hover-bg-color: rgba(6, 22, 38, 0.32);
+    --scrollbar-press-bg-color: rgba(6, 22, 38, 0.5);
+  }
+  
+  .chat-panel-wrapper[data-theme="dark"] {
+    --fill-color: #333;
+    --input-border-color: rgb(208, 213, 218);
+    --text-color: #fff;
+    
+    --drop-down-box-shadow-color :rgba(0, 0, 0, 0.25);
+    --dropdown-item-background-active: #f8f9f9;
+    --dropdown-item-background-hover: #f8f9f9;
+    --dropdown-item-border-color: rgb(208, 213, 218);
+    --text-input-placeholder: #555;
+
+    --icon-button-color: #a3a9ae;
+    --icon-button-hover-color: #657077;
+    --icon-button-size: 28px;
+
+    --tap-highlight: rgba(0, 0, 0, 0);
+
+    --chat-panel-border: #474747;
+    --ai-chat-text-color: #adadad;
+
+    --scrollbar-padding-inline-end: 17px;
+    --scrollbar-padding-inline-end-mobile: 8px;
+    --scrollbar-padding-after-last-item: unset;
+
+    --scrollbar-bg-color: rgba(136, 136, 136, 0.4);
+    --scrollbar-hover-bg-color: rgba(136, 136, 136, 0.64);
+    --scrollbar-press-bg-color: rgba(136, 136, 136, 0.8);
+  }
+
+  @media (prefers-color-scheme: light) {
+    .chat-panel-wrapper{
+      color-scheme: light;
+
+      --fill-color: rgb(255, 255, 255);
+      --input-border-color: rgb(208, 213, 218);
+      --text-color: #333;
+      
+      --drop-down-box-shadow-color :rgba(0, 0, 0, 0.25);
+      --dropdown-item-background-active: #f8f9f9;
+      --dropdown-item-background-hover: #f8f9f9;
+      --dropdown-item-border-color: rgb(208, 213, 218);
+      --text-input-placeholder: #555;
+
+      --icon-button-color: #a3a9ae;
+      --icon-button-hover-color: #657077;
+      --icon-button-size: 28px;
+
+      --tap-highlight: rgba(0, 0, 0, 0);
+
+      --chat-panel-border: #eceef1;
+      --ai-chat-text-color: #657077;
+
+      --scrollbar-padding-inline-end: 17px;
+      --scrollbar-padding-inline-end-mobile: 8px;
+      --scrollbar-padding-after-last-item: unset;
+
+      --scrollbar-bg-color: rgba(6, 22, 38, 0.16);
+      --scrollbar-hover-bg-color: rgba(6, 22, 38, 0.32);
+      --scrollbar-press-bg-color: rgba(6, 22, 38, 0.5);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .chat-panel-wrapper,
+    [data-theme="dark"] {
+      color-scheme: dark;
+
+      --fill-color: #333;
+      --input-border-color: rgb(208, 213, 218);
+      --text-color: #fff;
+      
+      --drop-down-box-shadow-color :rgba(0, 0, 0, 0.25);
+      --dropdown-item-background-active: #f8f9f9;
+      --dropdown-item-background-hover: #f8f9f9;
+      --dropdown-item-border-color: rgb(208, 213, 218);
+      --text-input-placeholder: #555;
+
+      --icon-button-color: #a3a9ae;
+      --icon-button-hover-color: #657077;
+      --icon-button-size: 28px;
+
+      --tap-highlight: rgba(0, 0, 0, 0);
+  
+      --chat-panel-border: #474747;
+      --ai-chat-text-color: #adadad;
+
+      --scrollbar-padding-inline-end: 17px;
+      --scrollbar-padding-inline-end-mobile: 8px;
+      --scrollbar-padding-after-last-item: unset;
+
+      --scrollbar-bg-color: rgba(136, 136, 136, 0.4);
+      --scrollbar-hover-bg-color: rgba(136, 136, 136, 0.64);
+      --scrollbar-press-bg-color: rgba(136, 136, 136, 0.8);
+    }
+  }
+`;
+
 const pageStyles = `
-  html {
+    html {
       font-family: "Open Sans", sans-serif, Arial;
     }
     
@@ -17,47 +145,7 @@ const pageStyles = `
       font-family: "Open Sans", sans-serif, Arial;
       margin: 0;
     }
-    
-    @media (prefers-color-scheme: dark) {
-      .chat-panel-wrapper,
-      [data-theme="dark"] {
-        /*dark*/
-        color-scheme: dark;
-    
-        --chat-panel-border: #474747;
-        --ai-chat-text-color: #adadad;
 
-        --scrollbar-padding-inline-end: 17px;
-        --scrollbar-padding-inline-end-mobile: 8px;
-        --scrollbar-padding-after-last-item: unset;
-
-        --scrollbar-bg-color: rgba(136, 136, 136, 0.4);
-        --scrollbar-hover-bg-color: rgba(136, 136, 136, 0.64);
-        --scrollbar-press-bg-color: rgba(136, 136, 136, 0.8);
-      }
-    }
-    
-    @media (prefers-color-scheme: light) {
-      .chat-panel-wrapper,
-      [data-theme="light"] {
-        /*light*/
-        color-scheme: light;
-    
-        --chat-panel-border: #eceef1;
-        --ai-chat-text-color: #657077;
-
-        --scrollbar-padding-inline-end: 17px;
-        --scrollbar-padding-inline-end-mobile: 8px;
-        --scrollbar-padding-after-last-item: unset;
-
-        --scrollbar-bg-color: rgba(6, 22, 38, 0.16);
-        --scrollbar-hover-bg-color: rgba(6, 22, 38, 0.32);
-        --scrollbar-press-bg-color: rgba(6, 22, 38, 0.5);
-
-        
-      }
-    }
-    
     .chat-panel-wrapper {
       height: 100%;
       width: auto;
@@ -76,7 +164,7 @@ const pageStyles = `
     .chat-panel {
       height: 100%;
       width: 400px;
-      background-color: var(--chat-panel-bg);
+      background-color: var(--fill-color);
       display: flex;
       flex-direction: column;
     
@@ -133,6 +221,7 @@ const pageStyles = `
     .chat-panel-header_text {
       font-size: 18px;
       font-weight: 700;
+      color: var(--text-color);
     }
     
     .chat-panel-body-container {
@@ -140,7 +229,7 @@ const pageStyles = `
       padding-inline: 20px;
     
       color: var(--info-panel-text-color);
-      background-color: var(--info-panel-bg);
+      background-color: var(--fill-color);
     
       //   @include mobile {
       //     padding-block: 0;
@@ -167,6 +256,7 @@ const pageStyles = `
         font-weight: 700;
         font-size: 23px;
         text-align: center;
+        color: var(--text-color);
       }
     
       .chat-panel-body_empty-container-image-wrapper {
@@ -182,7 +272,7 @@ const pageStyles = `
     .chat-panel-footer-container {
       width: calc(100% - 32px);
       padding: 22px 16px;
-      background-color: var(--info-panel-bg);
+      background-color: var(--fill-color);
     
       .input-component {
         width: 100%;
@@ -198,18 +288,17 @@ const pageStyles = `
     .chat-panel-footer_input-block {
       display: flex;
       width: 100%;
-      background-color: rgb(255, 255, 255);
-      color: rgb(51, 51, 51);
+      background-color: var(--fill-color);
       border-radius: 3px;
       box-shadow: none;
-      border: 1px solid rgb(208, 213, 218);
+      border: 1px solid var(--input-border-color);
       cursor: text;
     }
 
     .chat-panel-footer_input-dropdown {
       position: absolute;
       z-index: 9999;
-      box-shadow: 0px -3px 8px rgba(0, 0, 0, 0.25);
+      box-shadow: 0px -3px 8px var(--drop-down-box-shadow-color);
       border-bottom: 0px;
       border-radius: 8px 8px 0 0;
       padding: 8px 0;
@@ -227,7 +316,7 @@ const pageStyles = `
       cursor: pointer;
 
       p {
-        color: #333;
+        color: var(--text-color);
         font-size: 13px;
         font-weight: 400;
         white-space: nowrap;
@@ -237,15 +326,15 @@ const pageStyles = `
     }
 
     .chat-panel-footer_input-dropdown-item_active {
-      background: #f8f9f9;
+      background: var(--dropdown-item-background-active);
     }
 
     .chat-panel-footer_input-dropdown-item:hover {
-      background: #f8f9f9;
+      background: var(--dropdown-item-background-hover);
     }
 
     .chat-panel-footer_input-dropdown-item:not(:last-child) {
-      border-bottom: 1px solid rgb(208, 213, 218);
+      border-bottom: 1px solid var(--dropdown-item-border-color);
     }
 
     .chat-panel-footer_input-backdrop {
@@ -259,13 +348,13 @@ const pageStyles = `
     }
     
     .chat-panel-footer_input {
-      color: rgb(51, 51, 51);
+      color: var(--text-color);
       border-radius: 3px;
       box-sizing: border-box;
       cursor: text;
       appearance: none;
-      background-color: rgb(255, 255, 255);
-      caret-color: rgb(51, 51, 51);
+      background-color: var(--fill-color);
+      caret-color: var(--text-color);
       display: flex;
       line-height: 20px;
       font-size: 13px;
@@ -278,8 +367,7 @@ const pageStyles = `
       padding: 5px 6px;
       border: none;
       background-clip: text !important;
-      -webkit-text-fill-color: rgb(163, 169, 174) !important;
-      box-shadow: rgb(255, 255, 255) 0px 0px 0px 30px inset !important;
+      box-shadow: var(--fill-color) 0px 0px 0px 30px inset !important;
       resize: none;
       max-height: 200px;
     
@@ -291,7 +379,7 @@ const pageStyles = `
 
     // .chat-panel-footer_input[placeholder]:empty:before {
     //   content: attr(placeholder);
-    //   color: #555; 
+    //   color: var(--text-input-placeholder); 
     // }
 
     // .chat-panel-footer_input[placeholder]:empty:focus:before {
@@ -305,12 +393,8 @@ const pageStyles = `
     }
     
     .chat-panel-footer_icon-wrapper {
-      --icon-button-color: #{$gray};
-      --icon-button-hover-color: #{$light-gray-dark};
-      --icon-button-size: 28px;
-    
       line-height: 0;
-      -webkit-tap-highlight-color: $tap-highlight;
+      -webkit-tap-highlight-color: var(--tap-highlight);
       cursor: pointer;
     
       color: var(--icon-button-color);
@@ -526,7 +610,7 @@ const scrollStyles = `
       }
     }
 
-    @media (max-width: $tablet: 1024px;) {
+    @media (max-width: 1024px;) {
       pointer-events: none;
 
       .thumb {
@@ -642,4 +726,4 @@ const scrollStyles = `
   }
 `;
 
-export const styles = pageStyles + scrollStyles;
+export const styles = pageStyles + themeStyles + scrollStyles;

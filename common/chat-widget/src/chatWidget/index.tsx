@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { ChatMessageType, FileType } from "../types/chatWidget";
+import { ChatMessageType, FileType, ThemeType } from "../types/chatWidget";
 import ChatHeader from "./ChatHeader";
 import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
@@ -27,6 +27,7 @@ export default function ChatWidget({
   send_icon_image,
   user_icon_image,
   provider_icon_image,
+  interface_theme = "",
 }: {
   api_key?: string;
   input_value: string;
@@ -46,6 +47,7 @@ export default function ChatWidget({
   send_icon_image?: string;
   user_icon_image?: string;
   provider_icon_image?: string;
+  interface_theme?: ThemeType;
 }) {
   const sessionId = useRef(session_id ?? uuidv4());
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
@@ -173,7 +175,7 @@ export default function ChatWidget({
           __html: styles,
         }}
       ></style>
-      <div className="chat-panel-wrapper">
+      <div data-theme={interface_theme} className="chat-panel-wrapper">
         <div className="chat-panel">
           <ChatHeader />
 

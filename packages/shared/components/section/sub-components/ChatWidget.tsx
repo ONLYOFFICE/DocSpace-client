@@ -26,6 +26,7 @@
 
 // import { useEffect } from "react";
 import { memo } from "react";
+import { useTheme } from "styled-components";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import SendIconReactSvgUrl from "PUBLIC_DIR/images/send-message.svg?url";
 import ProviderIconImageUrl from "PUBLIC_DIR/images/icons/32/ai.bot32.svg?url";
@@ -44,7 +45,7 @@ export const ChatWidget = memo(
     anotherDialogOpen,
     // viewAs,
     currentDeviceType,
-    chatFiles,
+    chatFiles = [],
   }: {
     isVisible: boolean;
     setIsVisible: (isVisible: boolean) => void;
@@ -53,6 +54,8 @@ export const ChatWidget = memo(
     currentDeviceType?: DeviceType;
     chatFiles: (TFile | TFolder)[];
   }) => {
+    const theme = useTheme();
+
     const toChatFiles = () => {
       const files = chatFiles.filter((f) => {
         if ("fileExst" in f) {
@@ -119,6 +122,7 @@ export const ChatWidget = memo(
           user_icon_image={UserIconImageUrl}
           provider_icon_image={ProviderIconImageUrl}
           send_icon_image={SendIconReactSvgUrl}
+          interface_theme={theme.isBase ? "light" : "dark"}
         />
       </div>
     );

@@ -16,3 +16,5 @@ export type FileType = {
   title: string;
   isFolder: boolean;
 };
+
+export type ThemeType = "light" | "dark" | "";

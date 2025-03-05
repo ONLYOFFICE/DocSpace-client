@@ -28,7 +28,7 @@ import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
 
 import { ContextMenuModel } from "../context-menu";
-import { TFile } from "../../api/files/types";
+import { TFile, TFolder } from "../../api/files/types";
 
 export type SubInfoPanelHeaderProps = {
   children: React.JSX.Element | null;
@@ -178,7 +178,7 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     primaryOperationsAlert?: boolean;
     needErrorChecking?: boolean;
     onCancelOperation?: (callback: () => void) => void;
-    chatFiles: TFile[];
+    chatFiles: (TFile | TFolder)[];
   };
 
 export type SectionContextMenuProps = {

@@ -47,7 +47,6 @@ const defaultProps = {
   defaultBrandName: "Default Brand",
   brandName: "Current Brand",
   isEqualText: false,
-  isBrandNameLoaded: true,
 };
 
 const renderComponent = (props = {}) => {

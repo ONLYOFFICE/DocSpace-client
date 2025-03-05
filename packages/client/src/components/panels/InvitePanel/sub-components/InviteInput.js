@@ -82,6 +82,7 @@ const minSearchValue = 2;
 const filterSeparator = ";";
 const regex =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+const noAllowInvitingGuests = false;
 
 const InviteInput = ({
   defaultAccess,
@@ -487,7 +488,9 @@ const InviteInput = ({
       prevDropDownContent.current = usersList.map((user) =>
         getItemContent(user),
       );
-    } else {
+    } else if (roomId !== -1 && noAllowInvitingGuests)
+      setIsAddEmailPanelBlocked(true);
+    else {
       prevDropDownContent.current = (
         <DropDownItem
           className="list-item"
@@ -571,54 +574,59 @@ const InviteInput = ({
           </StyledLink>
         ) : null}
       </StyledSubHeader>
-      <StyledDescription noSelect>
+      <StyledDescription
+        noSelect
+        noAllowInvitingGuests={roomId !== -1 ? noAllowInvitingGuests : null}
+      >
         {roomId === -1
           ? t("InviteMembersManuallyDescription", {
               productName: t("Common:ProductName"),
             })
-          : t("InviteToRoomManuallyInfo", {
-              productName: t("Common:ProductName"),
-            })}
+          : noAllowInvitingGuests
+            ? "Add existing DocSpace members to the room."
+            : "Add existing DocSpace contacts. Or invite new users personally via email. New users will be added to your Guests list."}
       </StyledDescription>
-      <StyledInviteLanguage>
-        <Text className="invitation-language" noSelect>
-          {t("InvitationLanguage")}:
-        </Text>
-        <div className="language-combo-box-wrapper">
-          <ComboBox
-            className="language-combo-box"
-            directionY="both"
-            options={cultureNamesNew}
-            selectedOption={culture}
-            onSelect={onLanguageSelect}
-            isDisabled={false}
-            scaled={isMobileView}
-            scaledOptions={false}
-            size="content"
-            manualWidth="280px"
-            showDisabledItems
-            dropDownMaxHeight={364}
-            withBlur={isMobileView}
-            isDefaultMode={!isMobileView}
-            fillIcon={false}
-            modernView
-          />
-          {culture?.isBeta ? (
-            <BetaBadge place="bottom-end" mobilePlace="bottom" />
+      {roomId === -1 || !noAllowInvitingGuests ? (
+        <StyledInviteLanguage>
+          <Text className="invitation-language" noSelect>
+            {t("InvitationLanguage")}:
+          </Text>
+          <div className="language-combo-box-wrapper">
+            <ComboBox
+              className="language-combo-box"
+              directionY="both"
+              options={cultureNamesNew}
+              selectedOption={culture}
+              onSelect={onLanguageSelect}
+              isDisabled={false}
+              scaled={isMobileView}
+              scaledOptions={false}
+              size="content"
+              manualWidth="280px"
+              showDisabledItems
+              dropDownMaxHeight={364}
+              withBlur={isMobileView}
+              isDefaultMode={!isMobileView}
+              fillIcon={false}
+              modernView
+            />
+            {culture?.isBeta ? (
+              <BetaBadge place="bottom-end" mobilePlace="bottom" />
+            ) : null}
+          </div>
+          {isChangeLangMail && !isMobileView ? (
+            <StyledLink
+              className="list-link"
+              fontWeight="600"
+              type="action"
+              isHovered
+              onClick={onResetLangMail}
+            >
+              {t("ResetChange")}
+            </StyledLink>
           ) : null}
-        </div>
-        {isChangeLangMail && !isMobileView ? (
-          <StyledLink
-            className="list-link"
-            fontWeight="600"
-            type="action"
-            isHovered
-            onClick={onResetLangMail}
-          >
-            {t("ResetChange")}
-          </StyledLink>
-        ) : null}
-      </StyledInviteLanguage>
+        </StyledInviteLanguage>
+      ) : null}
       {isChangeLangMail && isMobileView ? (
         <ResetLink
           className="reset-link"
@@ -640,7 +648,9 @@ const InviteInput = ({
             placeholder={
               roomId === -1
                 ? t("InviteMembersSearchPlaceholder")
-                : t("InviteToRoomSearchPlaceholder")
+                : noAllowInvitingGuests
+                  ? "Add people by name or email"
+                  : t("InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
             isAutoFocussed

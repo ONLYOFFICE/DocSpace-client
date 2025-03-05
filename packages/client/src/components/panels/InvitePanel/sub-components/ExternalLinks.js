@@ -59,6 +59,8 @@ import {
   getFreeUsersTypeArray,
 } from "../utils";
 
+const noAllowInvitingGuests = false;
+
 const ExternalLinks = ({
   t,
   roomId,
@@ -279,7 +281,9 @@ const ExternalLinks = ({
           ? t("InviteViaLinkDescriptionAccounts", {
               productName: t("Common:ProductName"),
             })
-          : t("InviteViaLinkDescriptionRoom")}
+          : noAllowInvitingGuests
+            ? "Create a universal link for DocSpace members for self-authorization in the room."
+            : "Create a universal link for self-authorization in the room as a guest."}
       </StyledDescription>
       {externalLinksVisible ? (
         <StyledInviteInputContainer key={activeLink.id}>

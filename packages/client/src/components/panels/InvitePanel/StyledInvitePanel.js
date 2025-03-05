@@ -152,6 +152,12 @@ const StyledDescription = styled(Text).attrs(injectDefaultTheme)`
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
+
+  ${(props) =>
+    props.noAllowInvitingGuests &&
+    css`
+      margin-bottom: 12px;
+    `};
 `;
 
 const StyledRow = styled.div`

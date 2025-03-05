@@ -30,8 +30,8 @@ import React, { useState, useEffect, memo } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { InputBlock } from "@docspace/shared/components/input-block";
-import { globalColors } from "@docspace/shared/themes/globalColors";
+import { InputBlock } from "../input-block";
+import { globalColors } from "../../themes/globalColors";
 
 const iconColor = globalColors.gray;
 
@@ -50,7 +50,7 @@ const StyledBody = styled.div`
     margin: 0;
   }
 `;
-const SimulatePassword = memo(
+export const SimulatePassword = memo(
   ({
     onChange,
     onKeyDown,
@@ -179,5 +179,3 @@ SimulatePassword.propTypes = {
   hasError: PropTypes.bool,
   onChange: PropTypes.func,
 };
-
-export default SimulatePassword;

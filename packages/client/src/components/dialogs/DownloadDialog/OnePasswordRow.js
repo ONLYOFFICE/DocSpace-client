@@ -65,9 +65,9 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
+import { SimulatePassword } from "@docspace/shared/components/simulate-password";
 
 import { StyledSinglePasswordFile } from "./StyledDownloadDialog";
-import SimulatePassword from "../../SimulatePassword";
 
 const OnePasswordRow = ({
   item,

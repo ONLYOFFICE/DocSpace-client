@@ -56,13 +56,18 @@ import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
 import { StyledPasswordContent } from "@docspace/shared/dialogs/download-dialog/StyledDownloadDialog";
+import PasswordRow from "@docspace/shared/dialogs/download-dialog/PasswordRow";
 
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import PasswordRow from "./PasswordRow";
-
 const PasswordContent = (props) => {
-  const { getItemIcon, sortedDownloadFiles } = props;
+  const {
+    getItemIcon,
+    sortedDownloadFiles,
+    resetDownloadedFileFormat,
+    discardDownloadedFile,
+    updateDownloadedFilePassword,
+  } = props;
   const { t } = useTranslation(["DownloadDialog", "Common"]);
 
   const [barIsVisible, setBarIsVisible] = useState(true);
@@ -89,6 +94,9 @@ const PasswordContent = (props) => {
                 item={item}
                 type={type}
                 getItemIcon={getItemIcon}
+                resetDownloadedFileFormat={resetDownloadedFileFormat}
+                discardDownloadedFile={discardDownloadedFile}
+                updateDownloadedFilePassword={updateDownloadedFilePassword}
               />
             );
           })}
@@ -133,11 +141,15 @@ export default inject(({ dialogsStore }) => {
     updateDownloadedFilePassword,
     sortedDownloadFiles,
     sortedPasswordFiles,
+    resetDownloadedFileFormat,
+    discardDownloadedFile,
   } = dialogsStore;
 
   return {
     sortedPasswordFiles,
     updateDownloadedFilePassword,
     sortedDownloadFiles,
+    resetDownloadedFileFormat,
+    discardDownloadedFile,
   };
 })(observer(PasswordContent));

@@ -30,13 +30,18 @@ import React, { useState } from "react";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 
-import { Text } from "../../components/text";
-import { Checkbox } from "../../components/checkbox";
-import { LinkWithDropdown } from "../../components/link-with-dropdown";
-import { StyledDownloadContent } from "./StyledDownloadDialog";
-import { DownloadRow } from "./sub-components/DownloadRow";
+import { Text } from "../../../components/text";
+import { Checkbox } from "../../../components/checkbox";
+import { LinkWithDropdown } from "../../../components/link-with-dropdown";
 
-const DownloadContent = (props) => {
+import { StyledDownloadContent } from "../StyledDownloadDialog";
+import type {
+  DownloadContentProps,
+  TDownloadedFile,
+} from "../DownloadDialog.types";
+import { DownloadRow } from "./DownloadRow";
+
+export const DownloadContent = (props: DownloadContentProps) => {
   const {
     t,
     items,
@@ -48,12 +53,11 @@ const DownloadContent = (props) => {
     title,
     isChecked,
     isIndeterminate,
-    theme,
     getItemIcon,
   } = props;
 
   const getTitleExtensions = () => {
-    let arr = [];
+    let arr: string[] = [];
     items.forEach((item) => {
       const exst = item.fileExst;
       arr = [...arr, ...extsConvertible[exst]];
@@ -85,7 +89,7 @@ const DownloadContent = (props) => {
     return formats;
   };
 
-  const getFormats = (item) => {
+  const getFormats = (item: TDownloadedFile) => {
     const arrayFormats = item ? extsConvertible[item.fileExst] : [];
     const formats = [
       {
@@ -124,7 +128,7 @@ const DownloadContent = (props) => {
 
   const isOther = type === "other";
 
-  const titleData = !isOther && getTitleExtensions();
+  const titleData = !isOther ? getTitleExtensions() : undefined;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -135,7 +139,7 @@ const DownloadContent = (props) => {
   const showHeader = items.length > 1;
 
   return (
-    <StyledDownloadContent isOpen={showHeader ? isOpen : true} theme={theme}>
+    <StyledDownloadContent isOpen={showHeader ? isOpen : true}>
       {showHeader ? (
         <div className="download-dialog_content-wrapper download-dialog-row">
           <div className="download-dialog-main-content">
@@ -162,15 +166,11 @@ const DownloadContent = (props) => {
               <LinkWithDropdown
                 className="download-dialog-link"
                 dropDownClassName="download-dialog-dropDown"
-                containerMinWidth="fit-content"
                 data={titleData}
-                directionX="left"
                 directionY="bottom"
                 dropdownType="alwaysDashed"
                 fontSize="13px"
                 fontWeight={600}
-                isAside
-                withoutBackground
                 withExpander
               >
                 {titleFormat}
@@ -181,9 +181,9 @@ const DownloadContent = (props) => {
       ) : null}
       <div className="download-dialog_hidden-items">
         {items.map((file) => {
-          const dropdownItems =
-            !isOther &&
-            getFormats(file).filter((x) => x.label !== file.fileExst);
+          const dropdownItems = !isOther
+            ? getFormats(file).filter((x) => x.label !== file.fileExst)
+            : undefined;
 
           return (
             <DownloadRow
@@ -203,5 +203,3 @@ const DownloadContent = (props) => {
     </StyledDownloadContent>
   );
 };
-
-export default DownloadContent;

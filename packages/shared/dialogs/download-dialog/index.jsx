@@ -37,7 +37,7 @@ import { Scrollbar } from "../../components/scrollbar";
 import { toastr } from "../../components/toast";
 
 import { StyledBodyContent } from "./StyledDownloadDialog";
-import DownloadContent from "./DownloadContent";
+import { DownloadContent } from "./sub-components/DownloadContent";
 import PasswordContent from "./PasswordContent";
 import OnePasswordRow from "./OnePasswordRow";
 

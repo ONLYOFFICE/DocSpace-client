@@ -30,6 +30,7 @@ import type { TTranslation } from "../../types";
 import type { TFile } from "../../api/files/types";
 import type { LinkWithDropDownProps } from "../../components/link-with-dropdown";
 import type { DownloadedDocumentType } from "./DownloadDialog.enums";
+import type { ContextMenuTypeOnClick } from "../../components/context-menu";
 
 export type TDownloadedFile = TFile & { checked?: boolean; format?: string };
 
@@ -40,6 +41,20 @@ export type DownloadRowProps = {
   type: DownloadedDocumentType;
   dropdownItems: LinkWithDropDownProps["data"];
   isOther: boolean;
-  isChecked: boolean;
+  isChecked?: boolean;
+  getItemIcon: (item: TDownloadedFile) => React.ReactNode;
+};
+
+export type DownloadContentProps = {
+  t: TTranslation;
+  items: TDownloadedFile[];
+  onSelectFormat: ContextMenuTypeOnClick;
+  onRowSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  titleFormat: string;
+  type: DownloadedDocumentType;
+  extsConvertible: Record<string, string[]>;
+  title: string;
+  isChecked?: boolean;
+  isIndeterminate: boolean;
   getItemIcon: (item: TDownloadedFile) => React.ReactNode;
 };

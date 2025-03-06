@@ -37,7 +37,7 @@ const StyledBodyContent = styled.div`
   }
 `;
 
-const StyledDownloadContent = styled.div`
+const StyledDownloadContent = styled.div<{ isOpen?: boolean }>`
   .download-dialog_content-wrapper {
     ${({ isOpen }) =>
       isOpen &&

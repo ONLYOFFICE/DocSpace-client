@@ -19,14 +19,16 @@ customElements.define(
       // additional_headers: "json",
       // session_id: "string",
       list_files: "json",
-
       provider_image: "string",
       send_icon_image: "string",
       user_icon_image: "string",
       provider_icon_image: "string",
-
       interface_theme: "string",
       interface_direction: "string",
+      header_text: "string",
+      empty_screen_text: "string",
+      placeholder_text: "string",
+      chat_user_name: "string",
     },
   })
 );

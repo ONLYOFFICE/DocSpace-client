@@ -38,6 +38,8 @@ type ChatBodyProps = {
   providerIconImage?: string;
   userIconImage?: string;
   isRTL: boolean;
+  emptyScreenText?: string;
+  userName?: string;
 };
 
 const ChatBody = ({
@@ -46,6 +48,8 @@ const ChatBody = ({
   providerIconImage,
   userIconImage,
   isRTL,
+  emptyScreenText,
+  userName,
 }: //   AIChatUser,
 ChatBodyProps) => {
   const chatIsEmpty = messages.length === 0;
@@ -55,16 +59,17 @@ ChatBodyProps) => {
       <div className="chat-panel-body-container">
         {chatIsEmpty ? (
           <>
-            <ChatEmptyScreen providerImage={providerImage} />
+            <ChatEmptyScreen
+              providerImage={providerImage}
+              emptyScreenText={emptyScreenText}
+            />
           </>
         ) : (
           <>
             {messages.map((message, index) => (
               <ChatMessage
                 key={index}
-                userData={{
-                  displayName: "User name",
-                }}
+                userName={userName}
                 message={message}
                 userIconImage={userIconImage}
                 providerIconImage={providerIconImage}

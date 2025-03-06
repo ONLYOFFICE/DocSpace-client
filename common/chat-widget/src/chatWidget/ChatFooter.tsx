@@ -38,12 +38,15 @@ const ChatFooter = ({
   sendMessage,
   filesList = [],
   sendIconImage,
+  placeholderText,
 }: {
   addMessage: Function;
   sendMessage: Function;
   filesList?: FileType[];
   sendIconImage?: string;
+  placeholderText?: string;
 }) => {
+  const chatPlaceholder = placeholderText ?? "Message AI...";
   const inputBlockRef = useRef<HTMLDivElement>(null);
 
   const [windowPosition, setWindowPosition] = useState({ left: "0", top: "0" });
@@ -168,7 +171,7 @@ const ChatFooter = ({
           className="chat-panel-footer_input"
           value={message}
           onChange={onChangeMessage}
-          placeholder="Message ChatGPT..."
+          placeholder={chatPlaceholder}
           onFocus={onFocus}
           onKeyDown={onKeyDownAction}
           onInput={onInput}

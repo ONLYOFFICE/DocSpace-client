@@ -24,13 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import { Text } from "../components/text";
-// import { AIChatHeaderProps } from "./AIChat.types";
-
-type ChatHeaderProps = {};
-
-const ChatHeader = ({}: /* setIsVisible */ ChatHeaderProps) => {
-  const headerLabel = "ChatGPT"; // TODO: AI name
+const ChatHeader = ({ headerText }: { headerText?: string }) => {
+  const headerLabel = headerText ?? "Chat";
 
   return (
     <div className="chat-panel-header-container">

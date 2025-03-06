@@ -33,17 +33,19 @@ import { ChatMessageType } from "../types/chatWidget";
 
 type AIChatMessageProps = {
   message: ChatMessageType;
-  userData: { displayName: string };
+  userName?: string;
   userIconImage?: string;
   providerIconImage?: string;
 };
 
 const ChatMessage = ({
   message,
-  userData,
+  userName,
   userIconImage,
   providerIconImage,
 }: AIChatMessageProps) => {
+  const chatUserName = userName ?? "Me";
+
   return (
     <div className="chat-message-container">
       {message.isSend ? (
@@ -57,7 +59,7 @@ const ChatMessage = ({
               )}
             </div>
 
-            <p className="chat-message-user-name">{userData.displayName}</p>
+            <p className="chat-message-user-name">{chatUserName}</p>
           </div>
 
           <p className="chat-message-user-message">{message.message}</p>

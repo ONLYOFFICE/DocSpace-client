@@ -26,8 +26,14 @@
 
 import { LoaderPinwheel } from "lucide-react";
 
-const ChatEmptyScreen = ({ providerImage }: { providerImage?: string }) => {
-  const emptyAIChatText = "How can I help you today?"; // TODO: AI
+const ChatEmptyScreen = ({
+  providerImage,
+  emptyScreenText,
+}: {
+  providerImage?: string;
+  emptyScreenText?: string;
+}) => {
+  const emptyAIChatText = emptyScreenText ?? "How can I help you today?";
 
   return (
     <div className="chat-panel-body_empty-container">

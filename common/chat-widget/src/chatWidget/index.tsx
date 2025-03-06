@@ -34,6 +34,10 @@ export default function ChatWidget({
   provider_icon_image,
   interface_theme = "",
   interface_direction = "ltr",
+  header_text,
+  empty_screen_text,
+  placeholder_text,
+  chat_user_name,
 }: {
   api_key?: string;
   input_value: string;
@@ -55,6 +59,10 @@ export default function ChatWidget({
   provider_icon_image?: string;
   interface_theme?: ThemeType;
   interface_direction?: DirectionType;
+  header_text?: string;
+  empty_screen_text?: string;
+  placeholder_text?: string;
+  chat_user_name?: string;
 }) {
   const sessionId = useRef(session_id ?? uuidv4());
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
@@ -188,7 +196,7 @@ export default function ChatWidget({
         className="chat-panel-wrapper"
       >
         <div className="chat-panel">
-          <ChatHeader />
+          <ChatHeader headerText={header_text} />
 
           <ChatBody
             messages={messages}
@@ -196,6 +204,8 @@ export default function ChatWidget({
             providerIconImage={provider_icon_image}
             userIconImage={user_icon_image}
             isRTL={interface_direction === "rtl"}
+            emptyScreenText={empty_screen_text}
+            userName={chat_user_name}
           />
           {sendingMessage && (
             <div className="chat-panel-loading-placeholder">
@@ -208,6 +218,7 @@ export default function ChatWidget({
             sendMessage={sendMessageFn}
             filesList={list_files}
             sendIconImage={send_icon_image}
+            placeholderText={placeholder_text}
           />
         </div>
       </div>

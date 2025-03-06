@@ -398,6 +398,12 @@ const StyledDropDown = styled(DropDown)`
       }
     }
   }
+
+  .no-users-list {
+    height: 23px;
+    padding-left: 8px;
+    padding-top: 2px;
+  }
 `;
 
 const SearchItemText = styled(Text).attrs(injectDefaultTheme)`

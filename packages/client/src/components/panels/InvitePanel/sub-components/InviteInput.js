@@ -489,7 +489,13 @@ const InviteInput = ({
         getItemContent(user),
       );
     } else if (roomId !== -1 && noAllowInvitingGuests)
-      setIsAddEmailPanelBlocked(true);
+      prevDropDownContent.current = (
+        <DropDownItem disabled className="no-users-list">
+          <Text truncate fontSize="13px" fontWeight={400} lineHeight="20px">
+            No users found
+          </Text>
+        </DropDownItem>
+      );
     else {
       prevDropDownContent.current = (
         <DropDownItem

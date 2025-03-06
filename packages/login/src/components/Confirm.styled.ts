@@ -170,6 +170,29 @@ export const StyledBody = styled.div`
   .app-code-text {
     margin-bottom: 8px;
   }
+
+  .guest-avatar {
+    margin-bottom: 8px;
+  }
+
+  .guest-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    margin-bottom: 16px;
+  }
+
+  .guest-email {
+    color: ${(props) => props.theme.login.orTextColor};
+  }
+
+  .guest-info {
+    text-align: center;
+    margin-top: 24px;
+    line-height: 16px;
+  }
 `;
 
 export const ButtonsWrapper = styled.div`

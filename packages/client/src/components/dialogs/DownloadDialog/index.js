@@ -38,8 +38,8 @@ import { Button } from "@docspace/shared/components/button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { toastr } from "@docspace/shared/components/toast";
 import { StyledBodyContent } from "@docspace/shared/dialogs/download-dialog/StyledDownloadDialog";
+import DownloadContent from "@docspace/shared/dialogs/download-dialog/DownloadContent";
 
-import DownloadContent from "./DownloadContent";
 import PasswordContent from "./PasswordContent";
 import OnePasswordRow from "./OnePasswordRow";
 

@@ -26,7 +26,6 @@
   "LdapGroupNameAttribute": "グループ名属性",
   "LdapGroupNameAttributeTooltip": "グループ名に対応するオブジェクト属性を指定してください。",
   "LdapGroupUserAttributeTooltip": "このユーザがグループのメンバであるかどうかを判断するために使用されるユー ザオブジェクト属性を入力してください。",
-  "LdapIntro": "LDAPは、LDAPサーバーからユーザーとグループをインポートし、LDAPサーバーに保存されているログイン/パスワードを使用してポータル上でユーザー認証を提供する方法です。ユーザは、設定が保存された直後にインポートされます。後から追加されたユーザは、ポータルでの最初の認証時にインポートされます。",
   "LdapLoginAttribute": "ログイン属性",
   "LdapLoginAttributeTooltip": "ユーザーログインに対応するオブジェクト属性を入力してください。",
   "LdapLoginTooltip": "LDAPサーバーの読み取り権限を持つログインユーザーを指定してください。",

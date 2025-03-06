@@ -26,7 +26,6 @@
   "LdapGroupNameAttribute": "Grup Adı Özelliği",
   "LdapGroupNameAttributeTooltip": "Lütfen grup adına karşılık gelen nesne özelliğini belirtin.",
   "LdapGroupUserAttributeTooltip": "Bu kullanıcının gruplara üye olup olmadığını belirlemek için kullanılan kullanıcı nesnesi özelliğini girin.",
-  "LdapIntro": "LDAP, bir LDAP sunucusundan kullanıcıları ve grupları içe aktarmanın yanı sıra LDAP sunucusunda depolanan oturum açma bilgilerini/parolaları kullanarak portalda kullanıcı kimlik doğrulaması sağlamanın bir yoludur. Kullanıcılar, ayarlar kaydedildikten hemen sonra içe aktarılacaktır. Daha sonra eklenen kullanıcılar portaldaki ilk kimlik doğrulamaları esnasında içe aktarılacaktır.",
   "LdapLoginAttribute": "Oturum Açma Özelliği",
   "LdapLoginAttributeTooltip": "Kullanıcı oturumuna karşılık gelen nesne özelliğini girin.",
   "LdapLoginTooltip": "Lütfen LDAP sunucusu okuma erişim haklarına sahip Login kullanıcısını belirtin.",

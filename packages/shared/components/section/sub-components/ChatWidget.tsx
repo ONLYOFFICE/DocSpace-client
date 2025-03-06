@@ -54,7 +54,7 @@ export const ChatWidget = memo(
     currentDeviceType?: DeviceType;
     chatFiles: (TFile | TFolder)[];
   }) => {
-    const theme = useTheme();
+    const { interfaceDirection, isBase } = useTheme();
 
     const toChatFiles = () => {
       const files = chatFiles.filter((f) => {
@@ -115,7 +115,8 @@ export const ChatWidget = memo(
             user_icon_image={UserIconImageUrl}
             provider_icon_image={ProviderIconImageUrl}
             send_icon_image={SendIconReactSvgUrl}
-            interface_theme={theme.isBase ? "light" : "dark"}
+            interface_theme={isBase ? "light" : "dark"}
+            interface_direction={interfaceDirection}
           />
         </div>
       </div>

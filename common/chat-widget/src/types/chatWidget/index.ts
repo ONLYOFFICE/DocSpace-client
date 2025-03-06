@@ -18,3 +18,4 @@ export type FileType = {
 };
 
 export type ThemeType = "light" | "dark" | "";
+export type DirectionType = "ltr" | "rtl";

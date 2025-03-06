@@ -37,6 +37,7 @@ type ChatBodyProps = {
   providerImage?: string;
   providerIconImage?: string;
   userIconImage?: string;
+  isRTL: boolean;
 };
 
 const ChatBody = ({
@@ -44,12 +45,13 @@ const ChatBody = ({
   providerImage,
   providerIconImage,
   userIconImage,
+  isRTL,
 }: //   AIChatUser,
 ChatBodyProps) => {
   const chatIsEmpty = messages.length === 0;
 
   return (
-    <Scrollbar>
+    <Scrollbar isRTL={isRTL}>
       <div className="chat-panel-body-container">
         {chatIsEmpty ? (
           <>

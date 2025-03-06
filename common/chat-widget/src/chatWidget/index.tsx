@@ -1,5 +1,10 @@
 import { useRef, useState } from "react";
-import { ChatMessageType, FileType, ThemeType } from "../types/chatWidget";
+import {
+  ChatMessageType,
+  DirectionType,
+  FileType,
+  ThemeType,
+} from "../types/chatWidget";
 import ChatHeader from "./ChatHeader";
 import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
@@ -28,6 +33,7 @@ export default function ChatWidget({
   user_icon_image,
   provider_icon_image,
   interface_theme = "",
+  interface_direction = "ltr",
 }: {
   api_key?: string;
   input_value: string;
@@ -48,6 +54,7 @@ export default function ChatWidget({
   user_icon_image?: string;
   provider_icon_image?: string;
   interface_theme?: ThemeType;
+  interface_direction?: DirectionType;
 }) {
   const sessionId = useRef(session_id ?? uuidv4());
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
@@ -175,7 +182,11 @@ export default function ChatWidget({
           __html: styles,
         }}
       ></style>
-      <div data-theme={interface_theme} className="chat-panel-wrapper">
+      <div
+        data-theme={interface_theme}
+        data-direction={interface_direction}
+        className="chat-panel-wrapper"
+      >
         <div className="chat-panel">
           <ChatHeader />
 
@@ -184,6 +195,7 @@ export default function ChatWidget({
             providerImage={provider_image}
             providerIconImage={provider_icon_image}
             userIconImage={user_icon_image}
+            isRTL={interface_direction === "rtl"}
           />
           {sendingMessage && (
             <div className="chat-panel-loading-placeholder">

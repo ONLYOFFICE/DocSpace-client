@@ -50,10 +50,9 @@ const Scrollbar = React.forwardRef<CustomScrollbar, ScrollbarProps>(
       tabIndex = -1,
       paddingAfterLastItem,
       paddingInlineEnd,
+      isRTL,
       ...rest
     } = props;
-
-    const isRTL = false; // TODO:
 
     const [scrollVisible, setScrollVisible] = useState(false);
     const timerId = useRef<null | ReturnType<typeof setTimeout>>(null);

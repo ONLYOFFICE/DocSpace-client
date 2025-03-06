@@ -50,6 +50,8 @@ export type ScrollbarProps = PickedScrollbarLibraryProps & {
   onScroll?: React.UIEventHandler<HTMLDivElement>;
   /** Add children */
   children?: React.ReactNode;
+  /** Indicates whether display direction is right-to-left */
+  isRTL?: boolean;
 };
 
 export type CustomScrollbarsVirtualListProps = Pick<

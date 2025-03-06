@@ -1,5 +1,13 @@
 const themeStyles = `
 
+  .chat-panel-wrapper[data-direction="rtl"] {
+    --interface-direction: rtl;
+  }
+
+  .chat-panel-wrapper[data-direction="ltr"] {
+    --interface-direction: ltr;
+  }
+
   .chat-panel-wrapper[data-theme="light"] {
     --fill-color: rgb(255, 255, 255);
     --input-border-color: rgb(208, 213, 218);
@@ -147,6 +155,8 @@ const pageStyles = `
     }
 
     .chat-panel-wrapper {
+      direction: var(--interface-direction);
+      background: attr(data-back);
       height: 100%;
       width: auto;
       position: relative;
@@ -218,6 +228,7 @@ const pageStyles = `
     .chat-panel-body-container {
       height: auto;
       padding-inline: 20px;
+      direction: var(--interface-direction);
     
       color: var(--info-panel-text-color);
       background-color: var(--fill-color);
@@ -466,7 +477,10 @@ const pageStyles = `
     .chat-message-user-message {
       font-size: 13px;
       font-weight: 400;
-      margin: 4px 0 0 44px;
+
+      margin-top: 4px;
+      margin-inline-start: 44px;
+
       color: var(--ai-chat-text-color);
     
       p {

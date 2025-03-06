@@ -26,6 +26,7 @@ customElements.define(
       provider_icon_image: "string",
 
       interface_theme: "string",
+      interface_direction: "string",
     },
   })
 );

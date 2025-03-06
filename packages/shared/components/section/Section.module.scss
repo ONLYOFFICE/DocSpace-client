@@ -759,7 +759,7 @@
 
 .closeChatPanel {
   position: absolute;
-  right: 16px;
+  inset-inline-end: 16px;
   top: 16px;
   z-index: 9999;
 }

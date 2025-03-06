@@ -35,9 +35,9 @@ const themeStyles = `
     --text-color: #fff;
     
     --drop-down-box-shadow-color :rgba(0, 0, 0, 0.25);
-    --dropdown-item-background-active: #f8f9f9;
-    --dropdown-item-background-hover: #f8f9f9;
-    --dropdown-item-border-color: rgb(208, 213, 218);
+    --dropdown-item-background-active: #3d3d3d;
+    --dropdown-item-background-hover: #3d3d3d;
+    --dropdown-item-border-color: #474747;
     --text-input-placeholder: #555;
 
     --icon-button-color: #a3a9ae;
@@ -101,9 +101,9 @@ const themeStyles = `
       --text-color: #fff;
       
       --drop-down-box-shadow-color :rgba(0, 0, 0, 0.25);
-      --dropdown-item-background-active: #f8f9f9;
-      --dropdown-item-background-hover: #f8f9f9;
-      --dropdown-item-border-color: rgb(208, 213, 218);
+      --dropdown-item-background-active: #3d3d3d;
+      --dropdown-item-background-hover: #3d3d3d;
+      --dropdown-item-border-color: #474747;
       --text-input-placeholder: #555;
 
       --icon-button-color: #a3a9ae;

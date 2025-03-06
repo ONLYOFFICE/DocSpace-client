@@ -28,9 +28,9 @@ import React, { useState } from "react";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
+import { StyledDownloadContent } from "@docspace/shared/dialogs/download-dialog/StyledDownloadDialog";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
-import { StyledDownloadContent } from "./StyledDownloadDialog";
 import DownloadRow from "./DownloadRow";
 
 const DownloadContent = (props) => {

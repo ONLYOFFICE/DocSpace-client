@@ -37,10 +37,10 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { toastr } from "@docspace/shared/components/toast";
+import { StyledBodyContent } from "@docspace/shared/dialogs/download-dialog/StyledDownloadDialog";
 
 import DownloadContent from "./DownloadContent";
 import PasswordContent from "./PasswordContent";
-import { StyledBodyContent } from "./StyledDownloadDialog";
 import OnePasswordRow from "./OnePasswordRow";
 
 const LoadingPlaceholder = () => <div style={{ width: "96px" }} />;

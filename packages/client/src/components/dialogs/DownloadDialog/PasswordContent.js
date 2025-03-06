@@ -55,11 +55,11 @@ import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import PublicRoomBar from "@docspace/shared/components/public-room-bar";
+import { StyledPasswordContent } from "@docspace/shared/dialogs/download-dialog/StyledDownloadDialog";
 
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import PasswordRow from "./PasswordRow";
-import { StyledPasswordContent } from "./StyledDownloadDialog";
 
 const PasswordContent = (props) => {
   const { getItemIcon, sortedDownloadFiles } = props;

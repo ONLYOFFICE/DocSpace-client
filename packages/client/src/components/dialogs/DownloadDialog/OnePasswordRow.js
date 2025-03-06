@@ -66,8 +66,7 @@ import {
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { SimulatePassword } from "@docspace/shared/components/simulate-password";
-
-import { StyledSinglePasswordFile } from "./StyledDownloadDialog";
+import { StyledSinglePasswordFile } from "@docspace/shared/dialogs/download-dialog/StyledDownloadDialog";
 
 const OnePasswordRow = ({
   item,

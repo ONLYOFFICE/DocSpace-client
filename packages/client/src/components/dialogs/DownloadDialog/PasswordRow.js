@@ -38,7 +38,7 @@ import { Button } from "@docspace/shared/components/button";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { SimulatePassword } from "@docspace/shared/components/simulate-password";
-import { StyledDownloadContent } from "./StyledDownloadDialog";
+import { StyledDownloadContent } from "@docspace/shared/dialogs/download-dialog/StyledDownloadDialog";
 
 const PasswordRow = ({
   item,

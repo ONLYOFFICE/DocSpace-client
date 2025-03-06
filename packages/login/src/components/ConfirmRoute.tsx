@@ -78,7 +78,7 @@ function ConfirmRoute(props: ConfirmRouteProps) {
     }
   }, [doAuthenticated, isAuthenticated, defaultPage, socketUrl]);
 
-  if (!stateData) {
+  if (!stateData && confirmLinkParams.type !== "GuestInvite") {
     switch (confirmLinkResult.result) {
       case ValidationResult.Ok:
         const confirmHeader = searchParams.toString();

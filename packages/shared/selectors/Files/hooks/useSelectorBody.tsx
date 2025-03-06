@@ -139,7 +139,7 @@ const useSelectorBody = ({
         withHeader,
         headerProps: {
           ...headerProps,
-          headerLabel: headerProps?.headerLabel || t("Common:Select"),
+          headerLabel: headerProps?.headerLabel || t("Common:SelectAction"),
           onCloseClick: onCancel,
         },
       }

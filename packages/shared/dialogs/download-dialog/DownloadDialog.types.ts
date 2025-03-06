@@ -29,8 +29,12 @@
 import type { TTranslation } from "../../types";
 import type { TFile } from "../../api/files/types";
 import type { LinkWithDropDownProps } from "../../components/link-with-dropdown";
-import type { DownloadedDocumentType } from "./DownloadDialog.enums";
 import type { ContextMenuTypeOnClick } from "../../components/context-menu";
+
+import {
+  type DownloadedDocumentType,
+  ProtectedFileCategoryType,
+} from "./DownloadDialog.enums";
 
 export type TDownloadedFile = TFile & { checked?: boolean; format?: string };
 
@@ -57,4 +61,21 @@ export type DownloadContentProps = {
   isChecked?: boolean;
   isIndeterminate: boolean;
   getItemIcon: (item: TDownloadedFile) => React.ReactNode;
+};
+
+export type PasswordRowProps = {
+  item: TDownloadedFile;
+  resetDownloadedFileFormat: (
+    id: number,
+    fileExst: string,
+    type: ProtectedFileCategoryType,
+  ) => void;
+  discardDownloadedFile: (id: number, type: ProtectedFileCategoryType) => void;
+  updateDownloadedFilePassword: (
+    id: number,
+    password: string,
+    type: ProtectedFileCategoryType,
+  ) => void;
+  getItemIcon: (item: TDownloadedFile) => React.ReactNode;
+  type: ProtectedFileCategoryType;
 };

@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useState, useRef, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import RemoveIcon from "PUBLIC_DIR/images/remove.react.svg?url";
@@ -34,21 +34,24 @@ import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.re
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import ProtectedReactSvgUrl from "PUBLIC_DIR/images/icons/16/protected.react.svg?url";
 
-import { Text } from "../../components/text";
-import { Button } from "../../components/button";
-import { IconButton } from "../../components/icon-button";
-import { ContextMenuButton } from "../../components/context-menu-button";
-import { SimulatePassword } from "../../components/simulate-password";
-import { StyledDownloadContent } from "./StyledDownloadDialog";
+import type { ContextMenuModel } from "../../../components/context-menu";
+import { Text } from "../../../components/text";
+import { Button, ButtonSize } from "../../../components/button";
+import { IconButton } from "../../../components/icon-button";
+import { ContextMenuButton } from "../../../components/context-menu-button";
+import { SimulatePassword } from "../../../components/simulate-password";
 
-const PasswordRow = ({
+import { StyledDownloadContent } from "../StyledDownloadDialog";
+import type { PasswordRowProps } from "../DownloadDialog.types";
+
+export const PasswordRow = ({
   item,
   resetDownloadedFileFormat,
   discardDownloadedFile,
   updateDownloadedFilePassword,
   getItemIcon,
   type,
-}) => {
+}: PasswordRowProps) => {
   const [showPasswordInput, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
 
@@ -60,18 +63,18 @@ const PasswordRow = ({
   ]);
   const inputRef = useRef(null);
 
-  const onInputClick = () => {
+  const onInputClick = useCallback(() => {
     const newState = !showPasswordInput;
 
     setShowPassword(newState);
-  };
+  }, [showPasswordInput]);
 
-  const onButtonClick = () => {
+  const onButtonClick = useCallback(() => {
     onInputClick();
     updateDownloadedFilePassword(item.id, password, type);
-  };
+  }, [item.id, onInputClick, password, type, updateDownloadedFilePassword]);
 
-  const onChangePassword = (pwd) => {
+  const onChangePassword = (pwd: string) => {
     setPassword(pwd);
   };
 
@@ -83,16 +86,19 @@ const PasswordRow = ({
     discardDownloadedFile(item.id, type);
   };
 
-  const onKeyUp = (event) => {
-    if ((!showPasswordInput && type === "password") || !password) return;
+  const onKeyUp = useCallback(
+    (event: KeyboardEvent) => {
+      if ((!showPasswordInput && type === "password") || !password) return;
 
-    event.stopPropagation();
-    event.preventDefault();
+      event.stopPropagation();
+      event.preventDefault();
 
-    if (event.key === "Enter") {
-      onButtonClick();
-    }
-  };
+      if (event.key === "Enter") {
+        onButtonClick();
+      }
+    },
+    [onButtonClick, password, showPasswordInput, type],
+  );
 
   useEffect(() => {
     window.addEventListener("keyup", onKeyUp, true);
@@ -103,33 +109,35 @@ const PasswordRow = ({
   }, [onKeyUp]);
 
   const getOptions = () => {
-    const options = [
-      {
-        ...(type !== "original" && {
-          key: "original-format",
-          label: t("DownloadDialog:OriginalFormat"),
-          onClick: onChangeInOriginal,
-          disabled: false,
-          icon: DownloadAsReactSvgUrl,
-        }),
-      },
-      {
+    const options: ContextMenuModel[] = [];
+
+    if (type !== "original") {
+      options.push({
         key: "original-format",
-        label: t("EnterPassword"),
-        onClick: onInputClick,
+        label: t("DownloadDialog:OriginalFormat"),
+        onClick: onChangeInOriginal,
         disabled: false,
-        icon: ProtectedReactSvgUrl,
-      },
-      {
-        ...(type !== "remove" && {
-          key: "remove",
-          label: t("Files:RemoveFromList"),
-          onClick: removeFromList,
-          disabled: false,
-          icon: RemoveIcon,
-        }),
-      },
-    ];
+        icon: DownloadAsReactSvgUrl,
+      });
+    }
+
+    options.push({
+      key: "enter-password",
+      label: t("EnterPassword"),
+      onClick: onInputClick,
+      disabled: false,
+      icon: ProtectedReactSvgUrl,
+    });
+
+    if (type !== "remove") {
+      options.push({
+        key: "remove",
+        label: t("Files:RemoveFromList"),
+        onClick: removeFromList,
+        disabled: false,
+        icon: RemoveIcon,
+      });
+    }
 
     return options;
   };
@@ -176,7 +184,7 @@ const PasswordRow = ({
           <Button
             id="conversion-button"
             className="conversion-password_button"
-            size="small"
+            size={ButtonSize.small}
             scale
             primary
             label={t("Common:SaveButton")}
@@ -188,4 +196,3 @@ const PasswordRow = ({
     </StyledDownloadContent>
   );
 };
-export default PasswordRow;

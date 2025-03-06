@@ -34,7 +34,7 @@ import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import { Text } from "../../components/text";
 import PublicRoomBar from "../../components/public-room-bar";
 import { StyledPasswordContent } from "./StyledDownloadDialog";
-import PasswordRow from "./PasswordRow";
+import { PasswordRow } from "./sub-components/PasswordRow";
 
 const PasswordContent = (props) => {
   const {

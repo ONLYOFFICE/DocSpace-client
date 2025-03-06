@@ -33,3 +33,10 @@ export const enum DownloadedDocumentType {
   MasterForms = "masterForms",
   Other = "other",
 }
+
+export const enum ProtectedFileCategoryType {
+  Original = "original",
+  Password = "password",
+  Remove = "remove",
+  Other = "other",
+}

@@ -40,8 +40,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { StyledBodyContent } from "@docspace/shared/dialogs/download-dialog/StyledDownloadDialog";
 import DownloadContent from "@docspace/shared/dialogs/download-dialog/DownloadContent";
 import PasswordContent from "@docspace/shared/dialogs/download-dialog/PasswordContent";
-
-import OnePasswordRow from "./OnePasswordRow";
+import OnePasswordRow from "@docspace/shared/dialogs/download-dialog/OnePasswordRow";
 
 const LoadingPlaceholder = () => <div style={{ width: "96px" }} />;
 
@@ -363,6 +362,8 @@ class DownloadDialogComponent extends React.Component {
       sortedDownloadFiles,
       resetDownloadedFileFormat,
       discardDownloadedFile,
+      setDownloadItems,
+      downloadItems,
     } = this.props;
 
     const { documents, spreadsheets, presentations, masterForms, other } =
@@ -502,6 +503,11 @@ class DownloadDialogComponent extends React.Component {
           getItemIcon={this.getItemIcon}
           onDownload={this.onDownloadFunction}
           onClosePanel={this.onClosePanel}
+          item={sortedPasswordFiles[0]}
+          setDownloadItems={setDownloadItems}
+          downloadItems={downloadItems}
+          sortedPasswordFiles={sortedPasswordFiles}
+          visible={visible}
         />
       );
     }

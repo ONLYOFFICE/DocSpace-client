@@ -24,8 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { GreetingCreateUserContainer } from "./GreetingCreateUserContainer";
-export { GreetingLoginContainer } from "./GreetingLoginContainer";
-export { GreetingContainer } from "./GreetingContainer";
-export { GreetingUserContainer } from "./GreetingUserContainer";
-export { GreetingGuestContainer } from "./GreetingGuestContainer";
+"use client";
+
+import { Trans, useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
+
+import { Text } from "@docspace/shared/components/text";
+import { getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
+
+import { DEFAULT_GUEST_TEXT } from "@/utils/constants";
+import { GreetingContainer } from "./GreetingCreateUserContainer/GreetingCreateUserContainer.styled";
+
+type GreetingGuestContainerProps = {
+  firstName?: string;
+  lastName?: string;
+  culture?: string;
+};
+
+export const GreetingGuestContainer = ({
+  firstName,
+  lastName,
+  culture,
+}: GreetingGuestContainerProps) => {
+  const { t } = useTranslation(["Common"]);
+  const theme = useTheme();
+
+  const logoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    !theme.isBase,
+    false,
+    culture,
+  );
+
+  return (
+    <GreetingContainer>
+      <img src={logoUrl} className="portal-logo" alt="greeting-logo" />
+      <div className="tooltip">
+        <Text fontSize="16px">
+          <Trans
+            t={t}
+            i18nKey="GuestInvitation"
+            ns="Common"
+            defaults={DEFAULT_GUEST_TEXT}
+            values={{
+              firstName,
+              lastName,
+            }}
+            components={{
+              1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+            }}
+          />
+        </Text>
+      </div>
+    </GreetingContainer>
+  );
+};

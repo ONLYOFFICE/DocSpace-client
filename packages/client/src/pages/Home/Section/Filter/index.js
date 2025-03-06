@@ -577,16 +577,16 @@ const SectionFilterContent = ({
             label = t("Common:Documents");
             break;
           case FilterType.FoldersOnly.toString():
-            label = t("Translations:Folders");
+            label = t("Common:Folders");
             break;
           case FilterType.SpreadsheetsOnly.toString():
-            label = t("Translations:Spreadsheets");
+            label = t("Common:Spreadsheets");
             break;
           case FilterType.ArchiveOnly.toString():
             label = t("Archives");
             break;
           case FilterType.PresentationsOnly.toString():
-            label = t("Translations:Presentations");
+            label = t("Common:Presentations");
             break;
           case FilterType.ImagesOnly.toString():
             label = t("Images");
@@ -595,7 +595,7 @@ const SectionFilterContent = ({
             label = t("Media");
             break;
           case FilterType.FilesOnly.toString():
-            label = t("Translations:Files");
+            label = t("Common:Files");
             break;
           case FilterType.Pdf.toString():
             label = t("Forms");
@@ -767,7 +767,7 @@ const SectionFilterContent = ({
               id: "filter_type-folders",
               key: FilterType.FoldersOnly.toString(),
               group: FilterGroups.filterType,
-              label: t("Translations:Folders").toLowerCase(),
+              label: t("Common:Folders").toLowerCase(),
             },
           ]
         : "";
@@ -883,7 +883,7 @@ const SectionFilterContent = ({
             id: "filter_type-all-files",
             key: FilterType.FilesOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("Translations:Files").toLowerCase(),
+            label: t("Common:Files").toLowerCase(),
           },
           {
             id: "filter_type-documents",
@@ -895,13 +895,13 @@ const SectionFilterContent = ({
             id: "filter_type-spreadsheets",
             key: FilterType.SpreadsheetsOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("Translations:Spreadsheets").toLowerCase(),
+            label: t("Common:Spreadsheets").toLowerCase(),
           },
           {
             id: "filter_type-presentations",
             key: FilterType.PresentationsOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("Translations:Presentations").toLowerCase(),
+            label: t("Common:Presentations").toLowerCase(),
           },
           {
             id: "filter_type-forms",

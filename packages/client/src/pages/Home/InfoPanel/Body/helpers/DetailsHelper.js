@@ -298,8 +298,8 @@ class DetailsHelper {
 
   getItemContent = () => {
     return text(
-      `${this.t("Translations:Folders")}: ${this.item.foldersCount} | ${this.t(
-        "Translations:Files",
+      `${this.t("Common:Folders")}: ${this.item.foldersCount} | ${this.t(
+        "Common:Files",
       )}: ${this.item.filesCount}`,
     );
   };

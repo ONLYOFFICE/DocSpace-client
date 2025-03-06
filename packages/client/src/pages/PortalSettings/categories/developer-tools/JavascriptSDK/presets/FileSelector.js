@@ -88,7 +88,7 @@ const FileSelector = (props) => {
   const fileOptions = [
     {
       key: FilterType.FoldersOnly,
-      label: t(`Translations:Folders`),
+      label: t(`Common:Folders`),
     },
     {
       key: FilterType.DocumentsOnly,
@@ -96,11 +96,11 @@ const FileSelector = (props) => {
     },
     {
       key: FilterType.PresentationsOnly,
-      label: t(`Translations:Presentations`),
+      label: t(`Common:Presentations`),
     },
     {
       key: FilterType.SpreadsheetsOnly,
-      label: t(`Translations:Spreadsheets`),
+      label: t(`Common:Spreadsheets`),
     },
     {
       key: FilterType.Pdf,
@@ -108,19 +108,19 @@ const FileSelector = (props) => {
     },
     {
       key: FilterType.ArchiveOnly,
-      label: t(`Files:Archives`),
+      label: t(`Common:Archives`),
     },
     {
       key: FilterType.ImagesOnly,
-      label: t(`Files:Images`),
+      label: t(`Common:Images`),
     },
     {
       key: FilterType.MediaOnly,
-      label: t(`Files:Media`),
+      label: t(`Common:Media`),
     },
     {
       key: FilterType.FilesOnly,
-      label: t(`Translations:Files`),
+      label: t(`Common:Files`),
     },
   ];
 

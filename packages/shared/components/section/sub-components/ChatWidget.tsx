@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// import { useEffect } from "react";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import { useTheme } from "styled-components";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import SendIconReactSvgUrl from "PUBLIC_DIR/images/send-message.svg?url";
@@ -37,20 +36,21 @@ import { DeviceType } from "../../../enums";
 import { Portal } from "../../portal";
 import { IconButton } from "../../icon-button";
 import styles from "../Section.module.scss";
+import { TViewAs } from "../../../types";
 
 export const ChatWidget = memo(
   ({
     isVisible,
     setIsVisible,
     anotherDialogOpen,
-    // viewAs,
+    viewAs,
     currentDeviceType,
     chatFiles = [],
   }: {
     isVisible: boolean;
     setIsVisible: (isVisible: boolean) => void;
     anotherDialogOpen?: boolean;
-    // viewAs,
+    viewAs?: TViewAs;
     currentDeviceType?: DeviceType;
     chatFiles: (TFile | TFolder)[];
   }) => {
@@ -69,61 +69,55 @@ export const ChatWidget = memo(
       });
     };
 
-    const files = toChatFiles();
-
-    // console.log("files", files);
-
-    // useEffect(() => {
-    //   const onMouseDown = (e: MouseEvent) => {
-    //     const target = e.target as HTMLElement;
-    //     if (target?.id === "InfoPanelWrapper") setIsVisible?.(false);
-    //   };
-
-    //   if (viewAs === "row" || currentDeviceType !== DeviceType.desktop)
-    //     document.addEventListener("mousedown", onMouseDown);
-
-    //   window.onpopstate = () => {
-    //     if (currentDeviceType !== DeviceType.desktop && isVisible)
-    //       setIsVisible?.(false);
-    //   };
-
-    //   return () => document.removeEventListener("mousedown", onMouseDown);
-    // }, [currentDeviceType, isVisible, setIsVisible, viewAs]);
-
     const onClose = () => setIsVisible(false);
 
+    useEffect(() => {
+      const onMouseDown = (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (target?.id === "chatPanelWrapper") setIsVisible?.(false);
+      };
+
+      if (viewAs === "row" || currentDeviceType !== DeviceType.desktop)
+        document.addEventListener("mousedown", onMouseDown);
+
+      window.onpopstate = () => {
+        if (currentDeviceType !== DeviceType.desktop && isVisible)
+          setIsVisible?.(false);
+      };
+
+      return () => document.removeEventListener("mousedown", onMouseDown);
+    }, [currentDeviceType, isVisible, setIsVisible, viewAs]);
+
+    const files = toChatFiles();
+
     const chatWidgetComponent = (
-      <div className={styles.chatWrapper}>
-        <IconButton
-          style={{
-            position: "absolute",
-            right: "16px",
-            top: "16px",
-            zIndex: 9999,
-          }}
-          size={17}
-          // className={styles.closeButton}
-          iconName={CrossReactSvgUrl}
-          onClick={onClose}
-          isClickable
-          isStroke
-          aria-label="close"
-        />
-        <langflow-chat-widget
-          // api_key: "string",
-          // output_type: "string",
-          // input_type: "string",
-          // output_component: "string",
-          // host_url: "string",
-          // flow_id: "string",
-          // tweaks: "json",
-          list_files={JSON.stringify(files)}
-          provider_image={ProviderImageUrl}
-          user_icon_image={UserIconImageUrl}
-          provider_icon_image={ProviderIconImageUrl}
-          send_icon_image={SendIconReactSvgUrl}
-          interface_theme={theme.isBase ? "light" : "dark"}
-        />
+      <div className={styles.chatWrapper} id="chatPanelWrapper">
+        <div className={styles.chatPanel}>
+          <IconButton
+            size={17}
+            className={styles.closeChatPanel}
+            iconName={CrossReactSvgUrl}
+            onClick={onClose}
+            isClickable
+            isStroke
+            aria-label="close"
+          />
+          <langflow-chat-widget
+            // api_key: "string",
+            // output_type: "string",
+            // input_type: "string",
+            // output_component: "string",
+            // host_url: "string",
+            // flow_id: "string",
+            // tweaks: "json",
+            list_files={JSON.stringify(files)}
+            provider_image={ProviderImageUrl}
+            user_icon_image={UserIconImageUrl}
+            provider_icon_image={ProviderIconImageUrl}
+            send_icon_image={SendIconReactSvgUrl}
+            interface_theme={theme.isBase ? "light" : "dark"}
+          />
+        </div>
       </div>
     );
 

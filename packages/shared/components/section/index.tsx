@@ -326,6 +326,7 @@ const Section = (props: SectionProps) => {
         </SectionContainer>
 
         <ChatWidget
+          viewAs={viewAs}
           isVisible={aiChatIsVisible}
           setIsVisible={setAiChatIsVisible}
           chatFiles={chatFiles}

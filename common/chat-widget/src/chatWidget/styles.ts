@@ -150,20 +150,11 @@ const pageStyles = `
       height: 100%;
       width: auto;
       position: relative;
-      z-index: 300;
-    
-      //   @include no-user-select;
-    
-      //   @include tablet-and-below {
-      //     z-index: 309;
-      //     position: fixed;
-      //     inset: 0;
-      //   }
     }
     
     .chat-panel {
       height: 100%;
-      width: 400px;
+      width: 100%;
       background-color: var(--fill-color);
       display: flex;
       flex-direction: column;
@@ -235,12 +226,6 @@ const pageStyles = `
       //     padding-block: 0;
       //     padding-inline: 16px 8px;
       //   }
-    
-      &:not(.sectionIsVisible) {
-        width: 100%;
-        margin: 0 auto;
-        max-width: 726px;
-      }
     }
     
     .chat-panel-body_empty-container {
@@ -270,18 +255,12 @@ const pageStyles = `
     }
     
     .chat-panel-footer-container {
-      width: calc(100% - 32px);
+      width: 100%;
       padding: 22px 16px;
       background-color: var(--fill-color);
     
       .input-component {
         width: 100%;
-      }
-    
-      &:not(.sectionIsVisible) {
-        width: 100%;
-        margin: 0 auto;
-        max-width: 726px;
       }
     }
     

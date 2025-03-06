@@ -29,9 +29,9 @@ import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { LinkWithDropdown } from "@docspace/shared/components/link-with-dropdown";
 import { StyledDownloadContent } from "@docspace/shared/dialogs/download-dialog/StyledDownloadDialog";
+import DownloadRow from "@docspace/shared/dialogs/download-dialog/DownloadRow";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
-import DownloadRow from "./DownloadRow";
 
 const DownloadContent = (props) => {
   const {

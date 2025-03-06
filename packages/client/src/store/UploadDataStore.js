@@ -1659,7 +1659,14 @@ class UploadDataStore {
           errorMessage = error;
         }
 
-        this.files[indexOfFile].error = errorMessage;
+        runInAction(() => {
+          this.files[indexOfFile].error = errorMessage;
+          const fileIndex = this.uploadedFilesHistory.findIndex(
+            (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
+          );
+          if (fileIndex > -1)
+            this.uploadedFilesHistory[fileIndex].error = errorMessage;
+        });
 
         const index = error?.chunkIndex ?? 0;
 

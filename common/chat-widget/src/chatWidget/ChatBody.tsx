@@ -24,13 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useEffect, useRef } from "react";
 import { Scrollbar } from "../components/scrollbar";
 import { ChatMessageType } from "../types/chatWidget";
 import ChatEmptyScreen from "./ChatEmptyScreen";
 import ChatMessage from "./ChatMessage";
-// import styles from "./AIChat.module.scss";
-// import AIChatMessage from "./AIChatMessage";
-// import { AIChatBodyProps } from "./AIChat.types";
 
 type ChatBodyProps = {
   messages: ChatMessageType[];
@@ -51,7 +49,13 @@ const ChatBody = ({
   emptyScreenText,
   userName,
 }: ChatBodyProps) => {
+  const lastMessage = useRef<HTMLDivElement>(null);
   const chatIsEmpty = messages.length === 0;
+
+  useEffect(() => {
+    if (lastMessage.current)
+      lastMessage.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <Scrollbar isRTL={isRTL}>
@@ -74,6 +78,7 @@ const ChatBody = ({
                 providerIconImage={providerIconImage}
               />
             ))}
+            <div ref={lastMessage}></div>
           </>
         )}
       </div>

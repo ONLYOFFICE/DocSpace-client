@@ -11,6 +11,8 @@ const themeStyles = `
   .chat-panel-wrapper[data-theme="light"] {
     --fill-color: rgb(255, 255, 255);
     --input-border-color: rgb(208, 213, 218);
+    --input-border-hover-color: #a3a9ae;
+    --input-border-focus-color: #5299e0;
     --text-color: #333;
     
     --drop-down-box-shadow-color :rgba(0, 0, 0, 0.25);
@@ -38,7 +40,9 @@ const themeStyles = `
   
   .chat-panel-wrapper[data-theme="dark"] {
     --fill-color: #333;
-    --input-border-color: rgb(208, 213, 218);
+    --input-border-color: #474747;
+    --input-border-hover-color: #858585;
+    --input-border-focus-color: #fff;
     --text-color: #fff;
     
     --drop-down-box-shadow-color :rgba(0, 0, 0, 0.25);
@@ -70,6 +74,8 @@ const themeStyles = `
 
       --fill-color: rgb(255, 255, 255);
       --input-border-color: rgb(208, 213, 218);
+      --input-border-hover-color: #a3a9ae;
+      --input-border-focus-color: #5299e0;
       --text-color: #333;
       
       --drop-down-box-shadow-color :rgba(0, 0, 0, 0.25);
@@ -102,7 +108,9 @@ const themeStyles = `
       color-scheme: dark;
 
       --fill-color: #333;
-      --input-border-color: rgb(208, 213, 218);
+      --input-border-color: #474747;
+      --input-border-hover-color: #858585;
+      --input-border-focus-color: #fff;
       --text-color: #fff;
       
       --drop-down-box-shadow-color :rgba(0, 0, 0, 0.25);
@@ -279,6 +287,14 @@ const pageStyles = `
       box-shadow: none;
       border: 1px solid var(--input-border-color);
       cursor: text;
+    }
+
+    .chat-panel-footer_input-block:hover {
+      border-color: var(--input-border-hover-color);
+    }
+
+    .chat-panel-footer_input-block:focus-within {
+      border-color: var(--input-border-focus-color);
     }
 
     .chat-panel-footer_input-dropdown {

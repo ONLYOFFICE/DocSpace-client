@@ -167,9 +167,8 @@ const ChatFooter = ({
   }, [sortedFiles.length, setDropdownPosition]);
 
   useEffect(() => {
-    console.log("SET filesList", filesList);
-    setSortedFiles(filesList);
-  }, [filesList]);
+    if (isOpen) setSortedFiles(filesList);
+  }, [filesList, isOpen]);
 
   return (
     <div className="chat-panel-footer-container">

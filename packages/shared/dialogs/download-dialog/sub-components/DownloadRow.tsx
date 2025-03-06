@@ -26,12 +26,14 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { LinkWithDropdown } from "../../components/link-with-dropdown";
-import { Text } from "../../components/text";
-import { Checkbox } from "../../components/checkbox";
-import { isMobile } from "../../utils";
+import { LinkWithDropdown } from "../../../components/link-with-dropdown";
+import { Text } from "../../../components/text";
+import { Checkbox } from "../../../components/checkbox";
+import { isMobile } from "../../../utils";
 
-const DownloadRow = (props) => {
+import type { DownloadRowProps } from "../DownloadDialog.types";
+
+export const DownloadRow = (props: DownloadRowProps) => {
   const {
     t,
     file,
@@ -42,8 +44,6 @@ const DownloadRow = (props) => {
     isChecked,
     getItemIcon,
   } = props;
-
-  // console.log("DownloadRow render");
 
   const element = getItemIcon(file);
 
@@ -61,7 +61,6 @@ const DownloadRow = (props) => {
         <Text
           className="download-dialog-title"
           truncate
-          type="page"
           title={file.title}
           fontSize="14px"
           fontWeight={600}
@@ -78,15 +77,11 @@ const DownloadRow = (props) => {
             dropDownClassName="download-dialog-dropDown"
             isOpen={false}
             dropdownType="alwaysDashed"
-            containerMinWidth="fit-content"
             data={dropdownItems}
-            directionX="left"
             directionY={isMobile() ? "both" : "bottom"}
             fontSize="13px"
             fontWeight={600}
             hasScroll={isMobile()}
-            isAside
-            withoutBackground
             withExpander
             manualWidth={isMobile() ? "148px" : undefined}
           >
@@ -97,7 +92,6 @@ const DownloadRow = (props) => {
           <Text
             className="download-dialog-other-text"
             truncate
-            type="page"
             title={file.title}
             fontSize="13px"
             fontWeight={600}
@@ -110,5 +104,3 @@ const DownloadRow = (props) => {
     </div>
   );
 };
-
-export default DownloadRow;

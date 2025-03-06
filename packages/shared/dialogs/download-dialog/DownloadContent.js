@@ -34,7 +34,7 @@ import { Text } from "../../components/text";
 import { Checkbox } from "../../components/checkbox";
 import { LinkWithDropdown } from "../../components/link-with-dropdown";
 import { StyledDownloadContent } from "./StyledDownloadDialog";
-import DownloadRow from "./DownloadRow";
+import { DownloadRow } from "./sub-components/DownloadRow";
 
 const DownloadContent = (props) => {
   const {

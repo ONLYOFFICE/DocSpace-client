@@ -1,26 +1,43 @@
 import { memo } from "react";
 
-export const Row = memo(({ data, index, style }: any) => {
-  // TODO: types
-  const { children, isActive, handleMouseMove } = data;
+type RowData = {
+  children?: React.ReactNode;
+  activeIndex?: number;
+  activedescendant?: number;
+  handleMouseMove?: (index: number) => void;
+  isActive?: number;
+};
 
-  const option = Array.isArray(children) ? children[index] : null;
+export const Row = memo(
+  ({
+    data,
+    index,
+    style,
+  }: {
+    data: RowData;
+    index: number;
+    style: React.CSSProperties;
+  }) => {
+    const { children, isActive, handleMouseMove } = data;
 
-  const optionStyle = option?.props?.style ?? {};
+    const option = Array.isArray(children) ? children[index] : null;
 
-  const newStyle = { ...style, ...optionStyle };
+    const optionStyle = option?.props?.style ?? {};
 
-  const className =
-    isActive === index ? " chat-panel-footer_input-dropdown-item_active" : "";
+    const newStyle = { ...style, ...optionStyle };
 
-  return (
-    <div
-      {...option?.props}
-      className={option.props.className + className}
-      style={newStyle}
-      onMouseMove={() => {
-        handleMouseMove?.(index);
-      }}
-    />
-  );
-});
+    const className =
+      isActive === index ? " chat-panel-footer_input-dropdown-item_active" : "";
+
+    return (
+      <div
+        {...option?.props}
+        className={option.props.className + className}
+        style={newStyle}
+        onMouseMove={() => {
+          handleMouseMove?.(index);
+        }}
+      />
+    );
+  }
+);

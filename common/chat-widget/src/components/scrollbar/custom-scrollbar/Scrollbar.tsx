@@ -456,7 +456,6 @@ export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
     const { props } = this;
 
     if (!props.native && !props.mobileNative) {
-      // ToDo: move native state to the state so it can be synchronized
       if (!this.holderElement) {
         this.setState(() => {
           throw new Error(

@@ -50,8 +50,7 @@ const ChatBody = ({
   isRTL,
   emptyScreenText,
   userName,
-}: //   AIChatUser,
-ChatBodyProps) => {
+}: ChatBodyProps) => {
   const chatIsEmpty = messages.length === 0;
 
   return (

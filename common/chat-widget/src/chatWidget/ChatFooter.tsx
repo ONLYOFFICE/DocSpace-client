@@ -32,6 +32,7 @@ import { DropDown } from "../components/dropdown";
 const MAX_DROPDOWN_HEIGHT = 200;
 const TEXTAREA_MAX_HEIGHT = 200;
 const DROPDOWN_ITEM_HEIGHT = 50;
+const DROPDOWN_INPUT_MIN_HEIGHT = 62;
 
 const ChatFooter = ({
   addMessage,
@@ -72,11 +73,12 @@ const ChatFooter = ({
   const onKeyDownAction = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !isOpen) {
       onSendMessage();
+      e.preventDefault();
     }
   };
 
   const onInput = (elem: React.ChangeEvent<HTMLTextAreaElement>) => {
-    elem.currentTarget.style.height = "62px"; // TODO: 62px
+    elem.currentTarget.style.height = `${DROPDOWN_INPUT_MIN_HEIGHT}px`;
     const textAreaScrollHeight = elem.currentTarget.scrollHeight;
     const isOverflowY = textAreaScrollHeight > TEXTAREA_MAX_HEIGHT;
 
@@ -164,6 +166,11 @@ const ChatFooter = ({
     setDropdownPosition();
   }, [sortedFiles.length, setDropdownPosition]);
 
+  useEffect(() => {
+    console.log("SET filesList", filesList);
+    setSortedFiles(filesList);
+  }, [filesList]);
+
   return (
     <div className="chat-panel-footer-container">
       <div ref={inputBlockRef} className="chat-panel-footer_input-block">
@@ -211,7 +218,7 @@ const ChatFooter = ({
                     className="chat-panel-footer_input-dropdown-item"
                     key={file.id}
                   >
-                    <p>{file.id}</p>
+                    {/* <p>{file.id}</p> */}
                     <p>{file.title}</p>
                   </div>
                 );

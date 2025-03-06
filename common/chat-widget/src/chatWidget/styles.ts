@@ -21,7 +21,6 @@ const themeStyles = `
 
     --icon-button-color: #a3a9ae;
     --icon-button-hover-color: #657077;
-    --icon-button-size: 28px;
 
     --tap-highlight: rgba(0, 0, 0, 0);
 
@@ -50,7 +49,6 @@ const themeStyles = `
 
     --icon-button-color: #a3a9ae;
     --icon-button-hover-color: #657077;
-    --icon-button-size: 28px;
 
     --tap-highlight: rgba(0, 0, 0, 0);
 
@@ -82,7 +80,6 @@ const themeStyles = `
 
       --icon-button-color: #a3a9ae;
       --icon-button-hover-color: #657077;
-      --icon-button-size: 28px;
 
       --tap-highlight: rgba(0, 0, 0, 0);
 
@@ -116,7 +113,6 @@ const themeStyles = `
 
       --icon-button-color: #a3a9ae;
       --icon-button-hover-color: #657077;
-      --icon-button-size: 28px;
 
       --tap-highlight: rgba(0, 0, 0, 0);
   
@@ -367,6 +363,10 @@ const pageStyles = `
       padding: 11px 12px;
     }
 
+    .chat-panel-footer_input::-webkit-scrollbar {
+      display: none;
+    }
+
     // .chat-panel-footer_input[placeholder]:empty:before {
     //   content: attr(placeholder);
     //   color: var(--text-input-placeholder); 
@@ -389,8 +389,8 @@ const pageStyles = `
     
       color: var(--icon-button-color);
     
-      width: var(--icon-button-size);
-      height: var(--icon-button-size);
+      width: 24px;
+      height: 24px;
     
       &.disabled {
         cursor: default;
@@ -453,7 +453,7 @@ const pageStyles = `
       display: flex;
       align-items: center;
       height: 100%;
-      padding-inline-end: 8px;
+      padding-inline-end: 16px;
       padding-inline-start: 1px;
       background-color: inherit;
     }

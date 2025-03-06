@@ -7,7 +7,7 @@ export const DropDown = ({
   itemHeight = 50,
   dropdownWidth,
 }: {
-  children: any; // TODO: types
+  children: React.ReactElement | React.ReactNode;
   maxHeight: number;
   itemHeight: number;
   dropdownWidth: number;

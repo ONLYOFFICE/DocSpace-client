@@ -96,13 +96,13 @@ const Scrollbar = React.forwardRef<CustomScrollbar, ScrollbarProps>(
       []
     );
 
-    const refSetter = (elementRef: CustomScrollbar) => {
+    const refSetter = (elementRef: CustomScrollbar | HTMLDivElement | null) => {
       if (typeof ref === "function") {
-        ref(elementRef);
+        ref(elementRef as CustomScrollbar);
       } else if (ref) {
-        ref.current = elementRef;
+        ref.current = elementRef as CustomScrollbar;
       }
-      scrollRef.current = elementRef;
+      scrollRef.current = elementRef as CustomScrollbar;
     };
 
     const autoHideContainerProps = autoHide ? { onScroll: showTracks } : {};
@@ -195,7 +195,7 @@ const Scrollbar = React.forwardRef<CustomScrollbar, ScrollbarProps>(
         trackXProps={{
           className: classNames("track", "track-horizontal"),
         }}
-        ref={refSetter as any} // TODO:
+        ref={refSetter}
         {...autoHideContainerProps}
       />
     );

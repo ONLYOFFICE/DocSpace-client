@@ -54,7 +54,7 @@ export const VirtualList = ({
           event.preventDefault();
           return (
             Array.isArray(children) &&
-            React.isValidElement(children?.[index]) && // TODO:
+            React.isValidElement(children?.[index]) &&
             children?.[index]?.props?.onClick()
           );
         default:

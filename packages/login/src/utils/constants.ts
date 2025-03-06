@@ -34,6 +34,8 @@ export const DEFAULT_ROOM_TEXT =
   "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
 export const DEFAULT_PORTAL_TEXT =
   "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
+export const DEFAULT_GUEST_TEXT =
+  "<strong>{{firstName}} {{lastName}}</strong> wants to share with you the contact of the guest.";
 
 export const DEFAULT_SELECT_TIMEZONE: TTimeZoneOption = {
   key: "UTC",

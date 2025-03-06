@@ -39,8 +39,8 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { toastr } from "@docspace/shared/components/toast";
 import { StyledBodyContent } from "@docspace/shared/dialogs/download-dialog/StyledDownloadDialog";
 import DownloadContent from "@docspace/shared/dialogs/download-dialog/DownloadContent";
+import PasswordContent from "@docspace/shared/dialogs/download-dialog/PasswordContent";
 
-import PasswordContent from "./PasswordContent";
 import OnePasswordRow from "./OnePasswordRow";
 
 const LoadingPlaceholder = () => <div style={{ width: "96px" }} />;
@@ -358,6 +358,11 @@ class DownloadDialogComponent extends React.Component {
       needPassword,
       isAllPasswordFilesSorted,
       isOnePasswordFile,
+      sortedPasswordFiles,
+      updateDownloadedFilePassword,
+      sortedDownloadFiles,
+      resetDownloadedFileFormat,
+      discardDownloadedFile,
     } = this.props;
 
     const { documents, spreadsheets, presentations, masterForms, other } =
@@ -520,6 +525,11 @@ class DownloadDialogComponent extends React.Component {
               <PasswordContent
                 getItemIcon={this.getItemIcon}
                 onReDownload={this.onReDownload}
+                sortedPasswordFiles={sortedPasswordFiles}
+                updateDownloadedFilePassword={updateDownloadedFilePassword}
+                sortedDownloadFiles={sortedDownloadFiles}
+                resetDownloadedFileFormat={resetDownloadedFileFormat}
+                discardDownloadedFile={discardDownloadedFile}
               />
             ) : (
               mainContent
@@ -585,6 +595,9 @@ export default inject(
       setDownloadItems,
       sortedPasswordFiles,
       downloadItems,
+      updateDownloadedFilePassword,
+      resetDownloadedFileFormat,
+      discardDownloadedFile,
     } = dialogsStore;
 
     const { downloadFiles } = filesActionsStore;
@@ -622,6 +635,11 @@ export default inject(
       getFolderIcon,
       isOnePasswordFile,
       needPassword,
+
+      updateDownloadedFilePassword,
+      sortedDownloadFiles,
+      resetDownloadedFileFormat,
+      discardDownloadedFile,
     };
   },
 )(observer(DownloadDialog));

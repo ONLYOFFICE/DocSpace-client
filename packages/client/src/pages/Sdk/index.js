@@ -64,22 +64,22 @@ const Sdk = ({
       type: t("Common:Documents").toLowerCase(),
     }),
     [FilterType.SpreadsheetsOnly]: t("Common:SelectTypeFiles", {
-      type: t("Translations:Spreadsheets").toLowerCase(),
+      type: t("Common:Spreadsheets").toLowerCase(),
     }),
     [FilterType.PresentationsOnly]: t("Common:SelectTypeFiles", {
-      type: t("Translations:Presentations").toLowerCase(),
+      type: t("Common:Presentations").toLowerCase(),
     }),
     [FilterType.ImagesOnly]: t("Common:SelectTypeFiles", {
-      type: t("Files:Images").toLowerCase(),
+      type: t("Common:Images").toLowerCase(),
     }),
     [FilterType.MediaOnly]: t("Common:SelectExtensionFiles", {
-      extension: t("Files:Media").toLowerCase(),
+      extension: t("Common:Media").toLowerCase(),
     }),
     [FilterType.ArchiveOnly]: t("Common:SelectTypeFiles", {
-      type: t("Files:Archives").toLowerCase(),
+      type: t("Common:Archives").toLowerCase(),
     }),
     [FilterType.FoldersOnly]: t("Common:SelectTypeFiles", {
-      type: t("Translations:Folders").toLowerCase(),
+      type: t("Common:Folders").toLowerCase(),
     }),
     [FilterType.Pdf]: t("Common:SelectTypeFiles", {
       type: t("Files:Forms").toLowerCase(),

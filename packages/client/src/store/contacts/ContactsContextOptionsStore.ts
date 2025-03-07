@@ -42,7 +42,6 @@ import { UserStore } from "@docspace/shared/store/UserStore";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
-import { reassignmentNecessary } from "@docspace/shared/api/people";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import ChangeMailReactSvgUrl from "PUBLIC_DIR/images/email.react.svg?url";

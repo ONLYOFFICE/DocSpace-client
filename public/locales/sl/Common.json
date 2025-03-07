@@ -586,5 +586,8 @@
   "RoleCommentator": "Komentator",
   "RoleCommentatorDescription": "Operacije z obstoječimi datotekami: ogledovanje, komentiranje.",
   "RoleViewer": "Opazovalec",
-  "RoleViewerDescription": "Ogled datoteke"
+  "RoleViewerDescription": "Ogled datoteke",
+  "DeleteFile": "Izbrisali boste to datoteko. ",
+  "FilePermanentlyDeleted": "Datoteka bo v 30 dneh trajno izbrisana.",
+  "MoveToTrashTitle": "Premakni v Koš?"
 }

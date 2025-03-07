@@ -586,5 +586,8 @@
   "RoleCommentator": "Comentador",
   "RoleCommentatorDescription": "Operações com os ficheiros existentes: visualização, comentários.",
   "RoleViewer": "Visualizador",
-  "RoleViewerDescription": "A ver o ficheiro"
+  "RoleViewerDescription": "A ver o ficheiro",
+  "DeleteFile": "Este está prestes a apagar este ficheiro. ",
+  "FilePermanentlyDeleted": "O arquivo será excluído permanentemente em 30 dias.",
+  "MoveToTrashTitle": "Mover para o Lixo?"
 }

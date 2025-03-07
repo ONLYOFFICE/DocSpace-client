@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
-import { match, P } from "ts-pattern";
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
@@ -94,6 +93,7 @@ const Editor = ({
   onSDKRequestReferenceSource,
   onSDKRequestStartFilling,
   onStartFillingVDRPanel,
+  setFillingStatusDialogVisible,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
@@ -320,11 +320,13 @@ const Editor = ({
 
   if (config?.startFilling && !IS_ZOOM) {
     newConfig.events.onRequestStartFilling = (event: {}) => {
-      match(config.startFillingMode)
-        .with(StartFillingMode.ShareToFillOut, () =>
-          onSDKRequestStartFilling?.(t("Common:ShareAndCollect")),
-        )
-        .with(StartFillingMode.StartFilling, () => {
+
+      switch (config.startFillingMode) {
+        case StartFillingMode.ShareToFillOut:
+          onSDKRequestStartFilling?.(t("Common:ShareAndCollect"));
+          break;
+      
+        case StartFillingMode.StartFilling :
           if (
             typeof event === "object" &&
             event !== null &&
@@ -333,14 +335,18 @@ const Editor = ({
           ) {
             onStartFillingVDRPanel?.(event.data);
           }
-        })
-        .otherwise(() => {});
+          break;
+        default:
+          break;
+      }
     };
   }
 
-  newConfig.events.onRequestFillingStatus = (event: object) => {
-    console.log({ event });
-  };
+  if (config?.fillingStatus) {
+    newConfig.events.onRequestFillingStatus = (event: object) => {
+      setFillingStatusDialogVisible?.(true);
+    };
+  }
 
   newConfig.events.onSubmit = () => {
     const origin = window.location.origin;

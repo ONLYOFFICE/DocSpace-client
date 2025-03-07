@@ -587,5 +587,8 @@
   "RoleCommentator": "Коментатор",
   "RoleCommentatorDescription": "Операције са постојећим датотекама: прегледање, коментарисање.",
   "RoleViewer": "Прегледач",
-  "RoleViewerDescription": "Преглед датотека"
+  "RoleViewerDescription": "Преглед датотека",
+  "DeleteFile": "Спремате се да обришете ову датотеку.",
+  "FilePermanentlyDeleted": "Датотека ће бити трајно обрисана за 30 дана.",
+  "MoveToTrashTitle": "Помери у Отпад?"
 }

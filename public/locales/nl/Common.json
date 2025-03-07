@@ -586,5 +586,8 @@
   "RoleCommentator": "Reageerder",
   "RoleCommentatorDescription": "Bewerkingen met bestaande bestanden: bekijken, opmerkingen plaatsen.",
   "RoleViewer": "Kijker",
-  "RoleViewerDescription": "Bestand bekijken"
+  "RoleViewerDescription": "Bestand bekijken",
+  "DeleteFile": "U staat op het punt dit bestand te verwijderen. ",
+  "FilePermanentlyDeleted": "Het bestand wordt na 30 dagen definitief verwijderd.",
+  "MoveToTrashTitle": "Verplaatsen naar de Prullenbak?"
 }

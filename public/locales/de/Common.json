@@ -587,5 +587,8 @@
   "RoleCommentator": "Kommentator",
   "RoleCommentatorDescription": "Vorgänge mit bestehenden Dateien: Anzeigen, Kommentieren.",
   "RoleViewer": "Betrachter",
-  "RoleViewerDescription": "Datei anzeigen"
+  "RoleViewerDescription": "Datei anzeigen",
+  "DeleteFile": "Sie möchten diese Datei löschen.",
+  "FilePermanentlyDeleted": "Die Datei wird nach 30 Tagen endgültig gelöscht.",
+  "MoveToTrashTitle": "In Papierkorb verschieben?"
 }

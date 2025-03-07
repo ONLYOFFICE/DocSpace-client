@@ -586,5 +586,8 @@
   "RoleCommentator": "Yorumcu",
   "RoleCommentatorDescription": "Mevcut dosyalarla işlemler: görüntüleme, yorum yapma.",
   "RoleViewer": "Görüntüleyici",
-  "RoleViewerDescription": "Dosya görüntüleme"
+  "RoleViewerDescription": "Dosya görüntüleme",
+  "DeleteFile": "Bu dosyayı silmek üzeresiniz. ",
+  "FilePermanentlyDeleted": "Dosya 30 gün içinde kalıcı olarak silinecek.",
+  "MoveToTrashTitle": "Çöp kutusuna taşı?"
 }

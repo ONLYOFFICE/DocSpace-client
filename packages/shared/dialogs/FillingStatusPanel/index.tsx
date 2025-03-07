@@ -139,29 +139,35 @@ export const FillingStatusPanel = ({
       </ModalDialog.Body>
 
       {match(fillingStatus)
-        .with(FileFillingFormStatus.YourTurn, () => (
-          <ModalDialog.Footer>
-            <Button
-              scale
-              primary
-              onClick={() => onFill(file)}
-              id="panel_button_fill"
-              key="panel_button_fill"
-              label={t("Common:FillFormButton")}
-              size={ButtonSize.normal}
-            />
-            {file.security.StopFilling ? (
-              <Button
-                id="panel_button_stop"
-                key="panel_button_stop"
-                onClick={() => onStopFilling(file)}
-                label={t("Common:StopFilling")}
-                size={ButtonSize.normal}
-                scale
-              />
-            ) : null}
-          </ModalDialog.Footer>
-        ))
+        .with(FileFillingFormStatus.YourTurn, () => {
+          if (!(onFill || file.security.StopFilling)) return null;
+
+          return (
+            <ModalDialog.Footer>
+              {onFill ? (
+                <Button
+                  scale
+                  primary
+                  onClick={() => onFill?.(file)}
+                  id="panel_button_fill"
+                  key="panel_button_fill"
+                  label={t("Common:FillFormButton")}
+                  size={ButtonSize.normal}
+                />
+              ) : null}
+              {file.security.StopFilling ? (
+                <Button
+                  id="panel_button_stop"
+                  key="panel_button_stop"
+                  onClick={() => onStopFilling(file)}
+                  label={t("Common:StopFilling")}
+                  size={ButtonSize.normal}
+                  scale
+                />
+              ) : null}
+            </ModalDialog.Footer>
+          );
+        })
         .with(FileFillingFormStatus.Stopped, () => {
           if (!(file.security?.ResetFilling || file.security?.Delete))
             return null;
@@ -184,7 +190,7 @@ export const FillingStatusPanel = ({
                   id="panel_button_file-delete"
                   key="panel_button_file-delete"
                   onClick={() => onDelete(file)}
-                  label={t("Common:DeleteFile")}
+                  label={t("Common:ButtonDeleteFile")}
                   size={ButtonSize.normal}
                   scale
                 />
@@ -199,7 +205,7 @@ export const FillingStatusPanel = ({
               <Button
                 id="panel_button_stop"
                 key="panel_button_stop"
-                label={t("Common:CancelButton")}
+                label={t("Common:StopFilling")}
                 size={ButtonSize.normal}
                 scale
                 onClick={() => onStopFilling(file)}

@@ -586,5 +586,8 @@
   "RoleCommentator": "Komentujący",
   "RoleCommentatorDescription": "Operacje na istniejących plikach: przeglądanie, komentowanie.",
   "RoleViewer": "Przeglądający",
-  "RoleViewerDescription": "Odczyt plików"
+  "RoleViewerDescription": "Odczyt plików",
+  "DeleteFile": "Zamierzasz usunąć ten plik. ",
+  "FilePermanentlyDeleted": "Plik zostanie trwale usunięty za 30 dni.",
+  "MoveToTrashTitle": "Przenieść do kosza?"
 }

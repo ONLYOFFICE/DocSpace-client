@@ -585,5 +585,8 @@
   "RoleCommentator": "Người nhận xét",
   "RoleCommentatorDescription": "Hoạt động với các tập tin hiện có: xem, nhận xét.",
   "RoleViewer": "Người xem",
-  "RoleViewerDescription": "Xem tập tin"
+  "RoleViewerDescription": "Xem tập tin",
+  "DeleteFile": "Bạn sắp xóa tập tin này. ",
+  "FilePermanentlyDeleted": "Tập tin sẽ bị xóa vĩnh viễn trong 30 ngày. ",
+  "MoveToTrashTitle": "Chuyển đến thùng rác?"
 }

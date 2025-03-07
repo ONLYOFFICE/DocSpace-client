@@ -587,5 +587,8 @@
   "RoleCommentator": "コメンテーター",
   "RoleCommentatorDescription": "既存ファイルに対する操作：閲覧、コメント。",
   "RoleViewer": "閲覧用",
-  "RoleViewerDescription": "ファイル閲覧"
+  "RoleViewerDescription": "ファイル閲覧",
+  "DeleteFile": "このファイルを削除しようとしています。",
+  "FilePermanentlyDeleted": "ファイルは30日で永久に削除されます。",
+  "MoveToTrashTitle": "ゴミ箱に移動しますか？"
 }

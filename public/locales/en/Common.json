@@ -622,5 +622,8 @@
   "HistoryOpenedAtDate": "Opened the form to fill out",
   "HistorySubmissionDate": "Submitted their part. The form was sent to the next role.",
   "HistoryStopDate": "Filling was stopped by <1>{{userName}}</1>",
-  "DeleteFile": "Delete file"
+  "ButtonDeleteFile": "Delete file",
+  "DeleteFile": "You are about to delete this file.",
+  "FilePermanentlyDeleted": "The file will be permanently deleted in 30 days.",
+  "MoveToTrashTitle": "Move to Trash?"
 }

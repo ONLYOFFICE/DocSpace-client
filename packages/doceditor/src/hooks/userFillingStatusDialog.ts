@@ -24,9 +24,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface StopFillingDialogProps {
-  visible: boolean;
-  onClose: VoidFunction;
-  formId: null | string | number;
-  onSubmit?: VoidFunction;
-}
+import { useState } from "react";
+import type { TFile } from "@docspace/shared/api/files/types";
+import { formRoleMapping } from "@docspace/shared/api/files";
+import { toastr } from "@docspace/shared/components/toast";
+
+type TFillingStatusDialogProps = {
+  openStopFillingDialog: (formId: string | number) => void;
+  openDeleteFileDialog: (file: TFile) => void;
+};
+
+export const useFillingStatusDialog = ({
+  openStopFillingDialog,
+  openDeleteFileDialog,
+}: TFillingStatusDialogProps) => {
+  const [fillingStatusDialogVisible, setFillingStatusDialogVisible] =
+    useState(true);
+
+  const onCloseFillingStatusDialog = () => {
+    setFillingStatusDialogVisible(false);
+  };
+
+  const onStopFilling = (item: TFile) => {
+    openStopFillingDialog(item.id);
+    onCloseFillingStatusDialog();
+  };
+
+  const onDelete = (item: TFile) => {
+    openDeleteFileDialog(item);
+  };
+
+  const onResetFilling = async (item: TFile) => {
+    try {
+      await formRoleMapping({
+        formId: item.id,
+        roles: [],
+      });
+      window.location.reload();
+    } catch (err) {
+      toastr.error(err as Error);
+      console.log(err);
+    }
+  };
+
+  return {
+    fillingStatusDialogVisible,
+    setFillingStatusDialogVisible,
+    onCloseFillingStatusDialog,
+    onStopFilling,
+    onDelete,
+    onResetFilling,
+  };
+};

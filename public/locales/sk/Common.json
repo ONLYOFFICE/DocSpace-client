@@ -586,5 +586,8 @@
   "RoleCommentator": "Komentátor",
   "RoleCommentatorDescription": "Operácie s existujúcimi súbormi: prezeranie, komentovanie.",
   "RoleViewer": "Prehliadač",
-  "RoleViewerDescription": "Prezeranie súboru"
+  "RoleViewerDescription": "Prezeranie súboru",
+  "DeleteFile": "Chystáte sa vymazať tento súbor. ",
+  "FilePermanentlyDeleted": "Súbor bude natrvalo vymazaný do 30 dní.",
+  "MoveToTrashTitle": "Presunúť do koša?"
 }

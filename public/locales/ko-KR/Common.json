@@ -585,5 +585,8 @@
   "RoleCommentator": "주석자",
   "RoleCommentatorDescription": "기존 파일 작업: 보기, 주석 달기.",
   "RoleViewer": "확인자",
-  "RoleViewerDescription": "파일 보기"
+  "RoleViewerDescription": "파일 보기",
+  "DeleteFile": "이 파일을 삭제하려고 합니다. ",
+  "FilePermanentlyDeleted": "파일은 30일 후에 영구적으로 삭제됩니다.",
+  "MoveToTrashTitle": "휴지통으로 이동하시겠습니까?"
 }

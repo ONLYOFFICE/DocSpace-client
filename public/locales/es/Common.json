@@ -587,5 +587,8 @@
   "RoleCommentator": "Comentarista",
   "RoleCommentatorDescription": "Operaciones con archivos existentes: visualización, comentarios.",
   "RoleViewer": "Espectador",
-  "RoleViewerDescription": "Visualización de archivos"
+  "RoleViewerDescription": "Visualización de archivos",
+  "DeleteFile": "Está a punto de eliminar este archivo.",
+  "FilePermanentlyDeleted": "El archivo se eliminará definitivamente dentro de 30 días.",
+  "MoveToTrashTitle": "ver a la papelera?"
 }

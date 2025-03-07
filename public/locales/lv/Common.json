@@ -586,5 +586,8 @@
   "RoleCommentator": "Komentētājs",
   "RoleCommentatorDescription": "Darbības ar esošajiem failiem: skatīšana, komentēšana.",
   "RoleViewer": "Skatītājs",
-  "RoleViewerDescription": "Failu skatīšana"
+  "RoleViewerDescription": "Failu skatīšana",
+  "DeleteFile": "Jūs gatavojaties izdzēst šo failu. ",
+  "FilePermanentlyDeleted": "Fails tiks neatgriezeniski izdzēsts 30 dienu laikā.",
+  "MoveToTrashTitle": "Izdzēst?"
 }

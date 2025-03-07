@@ -587,5 +587,8 @@
   "RoleCommentator": "Մեկնաբան",
   "RoleCommentatorDescription": "Գործողություններ գոյություն ունեցող ֆայլերով՝ դիտում, մեկնաբանում։",
   "RoleViewer": "Դիտորդ",
-  "RoleViewerDescription": "Ֆայլը դիտվում է"
+  "RoleViewerDescription": "Ֆայլը դիտվում է",
+  "DeleteFile": "Դուք պատրաստվում եք ջնջել այս ֆայլը:",
+  "FilePermanentlyDeleted": "Ֆայլը ընդմիշտ կջնջվի 30 օրվա ընթացքում:",
+  "MoveToTrashTitle": "Տեղափոխե՞լ աղբարկղ"
 }

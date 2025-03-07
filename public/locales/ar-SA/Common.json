@@ -585,5 +585,8 @@
   "RoleCommentator": "معلّق",
   "RoleCommentatorDescription": "العمليات المتاحة على الملفات الحالية: العرض والتعليق.",
   "RoleViewer": "عارض",
-  "RoleViewerDescription": "عرض الملفات"
+  "RoleViewerDescription": "عرض الملفات",
+  "DeleteFile": "أنت على وشك حذف هذا الملف.",
+  "FilePermanentlyDeleted": "سيتم حذف الملف بشكل دائم خلال 30 يوم.",
+  "MoveToTrashTitle": "هل تريد نقله الى سلة المهملات؟"
 }

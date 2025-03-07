@@ -24,9 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface StopFillingDialogProps {
+import type { TFile } from "@docspace/shared/api/files/types";
+import type { TUser } from "@docspace/shared/api/people/types";
+
+export interface FillingStatusDialogProps {
+  user: TUser;
+  file: TFile;
   visible: boolean;
-  onClose: VoidFunction;
-  formId: null | string | number;
-  onSubmit?: VoidFunction;
+  onClose: () => void;
+  onStopFilling: (item: TFile) => void;
+  onDelete: (item: TFile) => void;
+  onResetFilling: (item: TFile) => void;
 }

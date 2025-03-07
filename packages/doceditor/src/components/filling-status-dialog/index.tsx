@@ -23,10 +23,30 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React from "react";
+import type { FillingStatusDialogProps } from "./FillingStatusDialog.types";
+import { FillingStatusPanel } from "@docspace/shared/dialogs/FillingStatusPanel";
 
-export interface StopFillingDialogProps {
-  visible: boolean;
-  onClose: VoidFunction;
-  formId: null | string | number;
-  onSubmit?: VoidFunction;
-}
+const FillingStatusDialog = ({
+  file,
+  user,
+  onClose,
+  visible,
+  onStopFilling,
+  onDelete,
+  onResetFilling,
+}: FillingStatusDialogProps) => {
+  return (
+    <FillingStatusPanel
+      user={user}
+      file={file}
+      visible={visible}
+      onClose={onClose}
+      onStopFilling={onStopFilling}
+      onDelete={onDelete}
+      onResetFilling={onResetFilling}
+    />
+  );
+};
+
+export default FillingStatusDialog;

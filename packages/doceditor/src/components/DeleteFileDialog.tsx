@@ -23,10 +23,55 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React from "react";
+import { useTranslation } from "react-i18next";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-export interface StopFillingDialogProps {
-  visible: boolean;
+type DeleteFileDialogProps = {
+  onSubmit: VoidFunction;
   onClose: VoidFunction;
-  formId: null | string | number;
-  onSubmit?: VoidFunction;
-}
+};
+
+const DeleteFileDialog = ({ onSubmit, onClose }: DeleteFileDialogProps) => {
+  const { t } = useTranslation(["Common"]);
+
+  return (
+    <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
+      <ModalDialog.Header>{t("Common:MoveToTrashTitle")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <span>
+          <>{t("Common:DeleteFile")} </>
+          <>{t("Common:FilePermanentlyDeleted")} </>
+          <>{t("Common:WantToContinue")}</>
+        </span>
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          id="delete-file-button_submit"
+          key="OkButton"
+          label={t("Common:MoveToTrash")}
+          size={ButtonSize.normal}
+          primary
+          scale
+          onClick={onSubmit}
+          aria-label={t("Common:MoveToTrash")}
+        />
+        <Button
+          id="delete-file-button_cancel"
+          key="CancelButton"
+          label={t("Common:CancelButton")}
+          size={ButtonSize.normal}
+          scale
+          onClick={onClose}
+          aria-label={t("Common:CancelButton")}
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
+};
+
+export default DeleteFileDialog;

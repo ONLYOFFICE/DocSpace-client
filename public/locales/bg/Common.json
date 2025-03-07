@@ -586,5 +586,8 @@
   "RoleCommentator": "Коментатор",
   "RoleCommentatorDescription": "Операции със съществуващи файлове: преглед, коментари.",
   "RoleViewer": "Зрител",
-  "RoleViewerDescription": "Преглед на файлове"
+  "RoleViewerDescription": "Преглед на файлове",
+  "DeleteFile": "На път сте да изтриете този файл.",
+  "FilePermanentlyDeleted": "Файлът ще бъде изтрит завинаги след 30 дни.",
+  "MoveToTrashTitle": "Преместване в кошчето?"
 }

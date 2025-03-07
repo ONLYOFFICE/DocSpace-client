@@ -586,5 +586,8 @@
   "RoleCommentator": "Kommentaattori",
   "RoleCommentatorDescription": "Toimenpiteet olemassa olevien tiedostojen kanssa: katselu, kommentointi.",
   "RoleViewer": "Katselija",
-  "RoleViewerDescription": "Tiedoston katseleminen"
+  "RoleViewerDescription": "Tiedoston katseleminen",
+  "DeleteFile": "Olet poistamassa tätä tiedostoa.",
+  "FilePermanentlyDeleted": "Tiedosto poistetaan pysyvästi 30 päivän päästä. ",
+  "MoveToTrashTitle": "Siirretäänkö roskiin?"
 }

@@ -54,6 +54,16 @@ import useSDK from "@/hooks/useSDK";
 
 import Editor from "./Editor";
 
+import { calculateAsideHeight } from "@/utils";
+import { TFrameConfig } from "@docspace/shared/types/Frame";
+import { useFillingStatusDialog } from "@/hooks/userFillingStatusDialog";
+import FillingStatusDialog from "./filling-status-dialog";
+import { DialogAsideSkeleton } from "@docspace/shared/skeletons";
+import { useStopFillingDialog } from "@/hooks/useStopFillingDialog";
+import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
+import DeleteFileDialog from "./DeleteFileDialog";
+import { useDeleteFileDialog } from "@/hooks/useDeleteFileDialog";
+
 const DeepLink = dynamic(() => import("./deep-link"), {
   ssr: false,
 });
@@ -76,14 +86,14 @@ const ConflictResolveDialog = dynamic(() => import("./ConflictResolveDialog"), {
   ssr: false,
 });
 
-import { calculateAsideHeight } from "@/utils";
-import { TFrameConfig } from "@docspace/shared/types/Frame";
-
 const StartFillingPanel = dynamic(
   async () =>
     (await import("@docspace/shared/dialogs/start-filling")).StartFillingPanel,
   {
     ssr: false,
+    loading: () => {
+      return <DialogAsideSkeleton isPanel withFooterBorder={false} />;
+    },
   },
 );
 
@@ -193,6 +203,33 @@ const Root = ({
 
   useUpdateSearchParamId(fileId, hash);
 
+  const {
+    deleteFileDialogVisible,
+    onCloseDeleteFileDialog,
+    onSubmitDeleteFile,
+    openDeleteFileDialog,
+  } = useDeleteFileDialog();
+
+  const {
+    stopFillingDialogVisible,
+    formId,
+    onCloseStopFillingDialog,
+    openStopFillingDialog,
+    onSubmitStopFilling,
+  } = useStopFillingDialog();
+
+  const {
+    fillingStatusDialogVisible,
+    setFillingStatusDialogVisible,
+    onCloseFillingStatusDialog,
+    onStopFilling,
+    onDelete,
+    onResetFilling,
+  } = useFillingStatusDialog({
+    openStopFillingDialog,
+    openDeleteFileDialog,
+  });
+
   React.useEffect(() => {
     if (
       error &&
@@ -270,6 +307,7 @@ const Root = ({
           onSDKRequestStartFilling={onSDKRequestStartFilling}
           organizationName={organizationName}
           onStartFillingVDRPanel={onStartFillingVDRPanel}
+          setFillingStatusDialogVisible={setFillingStatusDialogVisible}
         />
       )}
 
@@ -332,6 +370,32 @@ const Root = ({
           onStartFilling={onStartFilling}
           inviteUserToRoom={inviteUserToRoom}
           setStartFillingPanelVisible={setStartFillingPanelVisible}
+        />
+      )}
+      {fillingStatusDialogVisible && fileInfo && user ? (
+        <FillingStatusDialog
+          file={fileInfo}
+          user={user}
+          visible={fillingStatusDialogVisible}
+          onClose={onCloseFillingStatusDialog}
+          onStopFilling={onStopFilling}
+          onDelete={onDelete}
+          onResetFilling={onResetFilling}
+        />
+      ) : null}
+      {stopFillingDialogVisible && (
+        <StopFillingDialog
+          formId={formId}
+          visible={stopFillingDialogVisible}
+          onClose={onCloseStopFillingDialog}
+          onSubmit={onSubmitStopFilling}
+        />
+      )}
+
+      {deleteFileDialogVisible && (
+        <DeleteFileDialog
+          onClose={onCloseDeleteFileDialog}
+          onSubmit={onSubmitDeleteFile}
         />
       )}
     </div>

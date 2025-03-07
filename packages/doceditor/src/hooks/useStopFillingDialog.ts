@@ -24,9 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface StopFillingDialogProps {
-  visible: boolean;
-  onClose: VoidFunction;
-  formId: null | string | number;
-  onSubmit?: VoidFunction;
-}
+import { useState } from "react";
+
+export const useStopFillingDialog = () => {
+  const [stopFillingDialogVisible, setStopFillingDialogVisible] =
+    useState(false);
+
+  const [formId, setFormId] = useState<string | number | null>(null);
+
+  const onCloseStopFillingDialog = () => {
+    setStopFillingDialogVisible(false);
+    setFormId(null);
+  };
+
+  const openStopFillingDialog = (formId: string | number) => {
+    setStopFillingDialogVisible(true);
+    setFormId(formId);
+  };
+  const onSubmitStopFilling = () => {
+    window.location.reload();
+  };
+  return {
+    formId,
+    onSubmitStopFilling,
+    stopFillingDialogVisible,
+    onCloseStopFillingDialog,
+    openStopFillingDialog,
+  };
+};

@@ -248,6 +248,7 @@ export type EditorProps = {
   onSDKRequestReferenceSource?: (event: object) => void;
   onSDKRequestStartFilling?: (haederLabel: string) => void;
   onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
+  setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type TEventData = {

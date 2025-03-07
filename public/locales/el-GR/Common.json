@@ -586,5 +586,8 @@
   "RoleCommentator": "Σχολιαστής",
   "RoleCommentatorDescription": "Λειτουργίες με υπάρχοντα αρχεία: προβολή, σχολιασμός.",
   "RoleViewer": "Θεατής",
-  "RoleViewerDescription": "Προβολή αρχείου"
+  "RoleViewerDescription": "Προβολή αρχείου",
+  "DeleteFile": "Πρόκειται να διαγράψετε αυτό το αρχείο.",
+  "FilePermanentlyDeleted": "Το αρχείο θα διαγραφεί οριστικά σε 30 ημέρες.",
+  "MoveToTrashTitle": "Μετακίνηση στον κάδο απορριμμάτων;"
 }

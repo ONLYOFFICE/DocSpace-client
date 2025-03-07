@@ -34,4 +34,5 @@ export type DialogAsideSkeletonProps = {
   withoutAside?: boolean;
   withFooterBorder: boolean;
   isInvitePanelLoader?: boolean;
+  onClose?: VoidFunction;
 };

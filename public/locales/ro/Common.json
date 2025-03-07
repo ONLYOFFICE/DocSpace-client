@@ -587,5 +587,8 @@
   "RoleCommentator": "Comentator",
   "RoleCommentatorDescription": "Operaţii cu fişiere existente: vizualizare, comentare.",
   "RoleViewer": "Vizualizator",
-  "RoleViewerDescription": "Vizualizare fişier"
+  "RoleViewerDescription": "Vizualizare fişier",
+  "DeleteFile": "Sunteţi pe cale să ştergeţi acest fişier. ",
+  "FilePermanentlyDeleted": "Fișierul va fi șters definitiv după 30 de zile.",
+  "MoveToTrashTitle": "Mutare la Coşul de gunoi?"
 }

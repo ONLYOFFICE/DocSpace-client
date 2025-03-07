@@ -39,10 +39,11 @@ const StopFillingDialog = ({
   onClose,
   visible,
   formId,
+  onSubmit,
 }: StopFillingDialogProps) => {
   const { t } = useTranslation("Common");
 
-  const onSubmit = async () => {
+  const handleSubmit = async () => {
     if (!formId) return;
 
     await manageFormFilling(formId, FormFillingManageAction.Stop).catch(
@@ -51,7 +52,7 @@ const StopFillingDialog = ({
         console.error(error);
       },
     );
-
+    onSubmit?.();
     onClose();
   };
 
@@ -75,7 +76,7 @@ const StopFillingDialog = ({
           primary
           scale
           type="submit"
-          onClick={onSubmit}
+          onClick={handleSubmit}
           aria-label={t("Common:StopFilling")}
         />
         <Button

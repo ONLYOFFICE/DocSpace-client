@@ -586,5 +586,8 @@
   "RoleCommentator": "Şərhçi",
   "RoleCommentatorDescription": "Mövcud fayllarla əməliyyatlar: baxış, şərh.",
   "RoleViewer": "İzləyici",
-  "RoleViewerDescription": "Fayla baxış"
+  "RoleViewerDescription": "Fayla baxış",
+  "DeleteFile": "Bu faylı silmək üzrəsiniz.",
+  "FilePermanentlyDeleted": "Fayl 30 gün ərzində həmişəlik silinəcək.",
+  "MoveToTrashTitle": "Zibil qutusuna atılsın?"
 }

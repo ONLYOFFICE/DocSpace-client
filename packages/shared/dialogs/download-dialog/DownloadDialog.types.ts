@@ -79,3 +79,19 @@ export type PasswordRowProps = {
   getItemIcon: (item: TDownloadedFile) => React.ReactNode;
   type: ProtectedFileCategoryType;
 };
+
+export type PasswordContentProps = {
+  getItemIcon: (item: TDownloadedFile) => React.ReactNode;
+  sortedDownloadFiles: Record<ProtectedFileCategoryType, TDownloadedFile[]>;
+  resetDownloadedFileFormat: (
+    id: number,
+    fileExst: string,
+    type: ProtectedFileCategoryType,
+  ) => void;
+  discardDownloadedFile: (id: number, type: ProtectedFileCategoryType) => void;
+  updateDownloadedFilePassword: (
+    id: number,
+    password: string,
+    type: ProtectedFileCategoryType,
+  ) => void;
+};

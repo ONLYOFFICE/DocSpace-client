@@ -31,12 +31,18 @@ import { useTranslation } from "react-i18next";
 
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import { Text } from "../../components/text";
-import PublicRoomBar from "../../components/public-room-bar";
-import { StyledPasswordContent } from "./StyledDownloadDialog";
-import { PasswordRow } from "./sub-components/PasswordRow";
+import { Text } from "../../../components/text";
+import PublicRoomBar from "../../../components/public-room-bar";
 
-const PasswordContent = (props) => {
+import { StyledPasswordContent } from "../StyledDownloadDialog";
+import { ProtectedFileCategoryType } from "../DownloadDialog.enums";
+import type {
+  PasswordContentProps,
+  TDownloadedFile,
+} from "../DownloadDialog.types";
+import { PasswordRow } from "./PasswordRow";
+
+export const PasswordContent = (props: PasswordContentProps) => {
   const {
     getItemIcon,
     sortedDownloadFiles,
@@ -54,7 +60,12 @@ const PasswordContent = (props) => {
 
   const { original, other, remove, password } = sortedDownloadFiles;
 
-  const passwordRow = (items, text, type, className) => {
+  const passwordRow = (
+    items: TDownloadedFile[],
+    text: string,
+    type: ProtectedFileCategoryType,
+    className?: string,
+  ) => {
     return (
       <div className="password-row-wrapper">
         <div className={`password-info-text ${className}`}>
@@ -95,21 +106,31 @@ const PasswordContent = (props) => {
         ? passwordRow(
             other,
             t("Common:PasswordRequired"),
-            "other",
+            ProtectedFileCategoryType.Other,
             "warning-color",
           )
         : null}
       {original?.length > 0
-        ? passwordRow(original, t("DownloadOriginalFormat"), "original")
+        ? passwordRow(
+            original,
+            t("DownloadOriginalFormat"),
+            ProtectedFileCategoryType.Original,
+          )
         : null}
       {password?.length > 0
-        ? passwordRow(password, t("PasswordEntered"), "password")
+        ? passwordRow(
+            password,
+            t("PasswordEntered"),
+            ProtectedFileCategoryType.Password,
+          )
         : null}
       {remove?.length > 0
-        ? passwordRow(remove, t("RemovedFromList"), "remove")
+        ? passwordRow(
+            remove,
+            t("RemovedFromList"),
+            ProtectedFileCategoryType.Remove,
+          )
         : null}
     </StyledPasswordContent>
   );
 };
-
-export default PasswordContent;

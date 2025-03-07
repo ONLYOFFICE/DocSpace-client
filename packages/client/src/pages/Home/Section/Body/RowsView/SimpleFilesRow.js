@@ -38,6 +38,8 @@ import {
   injectDefaultTheme,
 } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
+import { FolderType } from "@docspace/shared/enums";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import CursorPalmReactSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
 import FilesRowContent from "./FilesRowContent";
 
@@ -369,11 +371,16 @@ const SimpleFilesRow = (props) => {
     isIndexUpdated,
     isFolder,
     isBlockingOperation,
+    isTutorialEnabled,
+    setRefMap,
+    deleteRefMap,
   } = props;
 
   const isMobileDevice = isMobileUtile();
 
   const [isDragActive, setIsDragActive] = React.useState(false);
+
+  const rowRef = React.useRef(null);
 
   const withAccess = item.security?.Lock;
   const isSmallContainer = sectionWidth <= 500;
@@ -381,6 +388,22 @@ const SimpleFilesRow = (props) => {
   const onChangeIndex = (action) => {
     return changeIndex(action, item, t);
   };
+
+  React.useEffect(() => {
+    if (!rowRef?.current) return;
+
+    if (item?.isPDF) {
+      setRefMap(GuidanceRefKey.Pdf, rowRef);
+    }
+    if (item?.type === FolderType.Done) {
+      setRefMap(GuidanceRefKey.Ready, rowRef);
+    }
+
+    return () => {
+      deleteRefMap(GuidanceRefKey.Pdf);
+      deleteRefMap(GuidanceRefKey.Ready);
+    };
+  }, [setRefMap, deleteRefMap]);
 
   const element = (
     <ItemIcon
@@ -428,6 +451,7 @@ const SimpleFilesRow = (props) => {
 
   return (
     <StyledWrapper
+      ref={rowRef}
       id={id}
       onDragOver={onDragOver}
       className={`row-wrapper ${
@@ -439,7 +463,7 @@ const SimpleFilesRow = (props) => {
       }`}
       checked={checkedProps}
       isActive={isActive}
-      showHotkeyBorder={showHotkeyBorder}
+      showHotkeyBorder={showHotkeyBorder ? !isTutorialEnabled : false}
       isIndexEditingMode={isIndexEditingMode}
       isIndexUpdated={isIndexUpdated}
       isFirstElem={itemIndex === 0}

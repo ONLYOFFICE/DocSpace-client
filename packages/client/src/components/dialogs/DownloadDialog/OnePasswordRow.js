@@ -54,14 +54,15 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { toastr } from "@docspace/shared/components/toast";
-
+import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
+import ProtectedReactSvgUrl from "PUBLIC_DIR/images/icons/16/protected.react.svg?url";
 
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { IconButton } from "@docspace/shared/components/icon-button";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 
@@ -136,6 +137,27 @@ const OnePasswordRow = ({
 
   const element = getItemIcon(item);
 
+  const getOptions = () => {
+    const options = [
+      {
+        key: "original-format",
+        label: t("DownloadDialog:OriginalFormat"),
+        onClick: onDowloadInOriginal,
+        disabled: false,
+        icon: DownloadAsReactSvgUrl,
+      },
+      {
+        key: "cancel-action",
+        label: t("DownloadDialog:CancelDownload"),
+        onClick: onRemoveFromDowload,
+        disabled: false,
+        icon: ProtectedReactSvgUrl,
+      },
+    ];
+
+    return options;
+  };
+
   return (
     <ModalDialog
       visible={visible}
@@ -154,10 +176,13 @@ const OnePasswordRow = ({
                 {item.title}
               </Text>
             </div>
-            <IconButton
-              size={16}
-              iconName={DownloadAsReactSvgUrl}
-              onClick={onDowloadInOriginal}
+            <ContextMenuButton
+              directionX="right"
+              getData={getOptions}
+              title={t("Common:Actions")}
+              isDisabled={false}
+              usePortal
+              iconName={VerticalDotsReactSvgUrl}
             />
           </div>
           <SimulatePassword

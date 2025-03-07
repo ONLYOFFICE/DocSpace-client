@@ -169,6 +169,8 @@ class AuthStore {
 
     this.skipRequest = skipRequest ?? false;
 
+    if (window.location.pathname === "/shared/invalid-link") return;
+
     await this.settingsStore?.init();
 
     const requests = [];

@@ -31,7 +31,6 @@ export default {
     setIsMobileArticle: { action: "setIsMobileArticle" },
     setArticleOpen: { action: "setArticleOpen" },
     onLogoClickAction: { action: "onLogoClickAction" },
-    onArticleHeaderClick: { action: "onArticleHeaderClick" },
     onProfileClick: { action: "onProfileClick" },
   },
 } as Meta;
@@ -47,10 +46,14 @@ const defaultProps: ArticleProps = {
   withSendAgain: false,
   mainBarVisible: true,
   hideProfileBlock: false,
-  hideAppsBlock: false,
-  isLiveChatAvailable: true,
+  logoText: "",
   isShowLiveChat: false,
+  hideAppsBlock: false,
+  isLiveChatAvailable: false,
   isAdmin: false,
+  currentDeviceType: DeviceType.desktop,
+  onLogoClickAction: () => {},
+  onProfileClick: () => {},
   withCustomArticleHeader: false,
   isBurgerLoading: false,
   languageBaseName: "en",
@@ -59,7 +62,6 @@ const defaultProps: ArticleProps = {
   isMobileArticle: false,
   zendeskKey: "your-zendesk-key",
   showProgress: false,
-  currentDeviceType: DeviceType.desktop,
   children: [
     <Article.Header key="header">
       <h2>Article Header</h2>

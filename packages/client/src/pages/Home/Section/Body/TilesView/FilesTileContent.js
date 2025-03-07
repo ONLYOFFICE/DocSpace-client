@@ -34,7 +34,7 @@ import { Text } from "@docspace/shared/components/text";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { tablet } from "@docspace/shared/utils";
-import TileContent from "./sub-components/TileContent";
+import { TileContent } from "@docspace/shared/components/tiles";
 import withContent from "../../../../../HOCs/withContent";
 import withBadges from "../../../../../HOCs/withBadges";
 
@@ -95,7 +95,7 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   .item-file-name {
     max-height: 100%;
-    line-height: 20px;
+    line-height: ${(props) => (props.isRooms ? "22px" : "20px")};
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -103,19 +103,26 @@ const SimpleFilesTileContent = styled(TileContent)`
     display: -webkit-box;
     -webkit-box-orient: vertical;
     text-align: start;
+
+    font-size: ${(props) =>
+      (props.isRooms && "16px") ||
+      (!props.isRooms && props.currentDeviceType === DeviceType.desktop
+        ? "13px"
+        : "14px")};
   }
 
   .item-file-exst {
     color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
   }
 
-  ${({ isRooms }) =>
-    isRooms &&
-    css`
-      .item-file-name {
-        font-size: 16px;
-      }
-    `}
+  ${({ isRooms, isTemplate }) =>
+    isRooms ||
+    (isTemplate &&
+      css`
+        .item-file-name {
+          font-size: 16px;
+        }
+      `)}
 
   @media ${tablet} {
     display: inline-flex;
@@ -147,14 +154,14 @@ const FilesTileContent = ({
       isFile={fileExst}
       isRooms={isRooms}
       isTemplate={isTemplate}
+      currentDeviceType={currentDeviceType}
     >
       <Link
         className="item-file-name"
         containerWidth="100%"
         type="page"
         title={title}
-        fontWeight="600"
-        fontSize={currentDeviceType === DeviceType.desktop ? "13px" : "14px"}
+        fontWeight={isTemplate ? 700 : 600}
         target="_blank"
         {...linkStyles}
         color={theme.filesSection.tilesView.color}

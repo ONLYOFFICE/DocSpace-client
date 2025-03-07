@@ -245,22 +245,24 @@ const PasswordStrength = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!passwordStrengthSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("SettingPasswordDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={passwordStrengthSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {passwordStrengthSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={passwordStrengthSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
       <Text fontSize="14px" fontWeight="600" className="length-subtitle">
         {t("PasswordMinLenght")}

@@ -19,7 +19,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
-import generateJwt from "@docspace/shared/utils/oauth/generate-jwt";
 
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
@@ -31,7 +30,6 @@ import GenerateIconUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import RevokeIconUrl from "PUBLIC_DIR/images/revoke.react.svg?url";
 import DeleteIconUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import SettingsIconUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
-import StorageManagement from "./StorageManagement";
 
 const PAGE_LIMIT = 50;
 
@@ -39,8 +37,6 @@ export type ViewAsType = "table" | "row";
 
 class OAuthStore {
   userStore: Nullable<UserStore> = null;
-
-  storageManagement: Nullable<StorageManagement> = null;
 
   viewAs: ViewAsType = "table";
 
@@ -94,29 +90,14 @@ class OAuthStore {
 
   jwtToken: string = "";
 
-  constructor(userStore: UserStore, storageManagement: StorageManagement) {
+  constructor(userStore: UserStore) {
     this.userStore = userStore;
-    this.storageManagement = storageManagement;
 
     makeAutoObservable(this);
-
-    const searchParams = new URLSearchParams(window.location.search);
-    if (!searchParams.get("key")) this.setJwtToken();
   }
 
   setJwtToken = async () => {
-    const portalInfo = await api.portal.getPortal();
-    if (this.userStore!.user! === null) return;
-    const { id, email, displayName } = this.userStore!.user!;
-
-    const token = generateJwt(
-      id,
-      displayName,
-      email,
-      portalInfo.tenantId,
-      window.location.origin,
-      this.userStore!.user!.isAdmin || this.userStore!.user!.isOwner,
-    );
+    const token = await api.oauth.getJWTToken()!;
 
     this.jwtToken = token;
 
@@ -237,11 +218,11 @@ class OAuthStore {
         .map((c) => c.createdBy);
 
       const users = await Promise.all(
-        newUsers.map((u) => api.people.getUserByEmail(u)),
+        newUsers.map((u) => api.people.getUserById(u)),
       );
 
       clientList.data.forEach((client) => {
-        const user = users.find((u) => u.email === client.createdBy);
+        const user = users.find((u) => u.id === client.createdBy);
 
         if (user) {
           client.createdBy = user.email;

@@ -656,3 +656,17 @@ export enum ValidationStatus {
   InvalidPassword = 4,
   ExternalAccessDenied = 5,
 }
+
+export enum FormFillingTipsState {
+  Starting = 1,
+  Sharing = 2,
+  Submitting = 3,
+  Complete = 4,
+  Uploading = 5,
+}
+
+export enum DeepLinkType {
+  Choice = 0,
+  Web = 1,
+  App = 2,
+}

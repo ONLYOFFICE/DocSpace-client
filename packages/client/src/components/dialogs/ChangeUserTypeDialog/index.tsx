@@ -38,6 +38,7 @@ import styled from "styled-components";
 
 import DialogStore from "SRC_DIR/store/contacts/DialogStore";
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
+import { getChangeTypeKey } from "./getChangeTypeKey";
 
 interface TStore {
   peopleStore: {
@@ -110,24 +111,21 @@ const ChangeUserTypeDialog = ({
 
   const { t } = useTranslation(["ChangeUserTypeDialog", "People", "Common"]);
 
-  const guestBody =
-    userNames.length === 1 ? (
-      <Trans
-        i18nKey="ChangeGuestsTypeMessage"
-        ns="ChangeUserTypeDialog"
-        t={t}
-        values={{
-          userName: userNames[0],
-          membersSection: t("Common:Members"),
-          documentsSection: t("Common:Documents"),
-        }}
-      />
-    ) : (
-      t("ChangeGuestsTypeMessageMulti", {
-        membersSection: t("Common:Members"),
-        documentsSection: t("Common:Documents"),
-      })
-    );
+  const isSingleUser = userNames.length === 1;
+  const translationValues = {
+    userName: isSingleUser ? userNames[0] : undefined,
+    membersSection: t("Common:Members"),
+    documentsSection: t("Common:Documents"),
+    productName: t("Common:ProductName"),
+    secondType,
+  };
+  const translationKey = getChangeTypeKey(
+    toType,
+    isSingleUser,
+    t,
+    translationValues,
+  );
+
   const onClickReassignData = (currentUserAsDefault?: boolean) => {
     setDialogData({
       user,
@@ -199,7 +197,15 @@ const ChangeUserTypeDialog = ({
   };
 
   const getBody = () => {
-    if (isGuestsDialog) return guestBody;
+    if (isGuestsDialog)
+      return (
+        <Trans
+          i18nKey={translationKey}
+          ns="ChangeUserTypeDialog"
+          t={t}
+          values={translationValues}
+        />
+      );
 
     return (
       <StyledBody>

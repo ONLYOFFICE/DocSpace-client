@@ -41,10 +41,10 @@ const PlusButton = ({
   isFrame,
   id,
   onCloseDropBox,
+  forwardedRef,
   ...rest
 }: TPlusButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
   const menuRef = useRef<ContextMenuRefType>(null);
 
   const toggle = (e: React.MouseEvent<HTMLDivElement>, open: boolean) => {
@@ -70,7 +70,7 @@ const PlusButton = ({
   const model = getData();
 
   return (
-    <div ref={ref} className={className} {...rest}>
+    <div ref={forwardedRef} className={className} {...rest}>
       <IconButton
         onClick={onClick}
         iconName={PlusReactSvgUrl}
@@ -80,7 +80,7 @@ const PlusButton = ({
       />
       <ContextMenu
         model={model}
-        containerRef={ref}
+        containerRef={forwardedRef}
         ref={menuRef}
         onHide={onHide}
         scaled={false}

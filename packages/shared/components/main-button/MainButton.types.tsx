@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { RefObject } from "react";
+import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import { ContextMenuModel } from "../context-menu";
 
 export type MainButtonProps = {
@@ -45,4 +47,6 @@ export type MainButtonProps = {
   style?: React.CSSProperties;
   /** Data model menu */
   model: ContextMenuModel[];
+  /** Function to set reference map */
+  setRefMap?: (key: GuidanceRefKey, ref: RefObject<HTMLDivElement>) => void;
 };

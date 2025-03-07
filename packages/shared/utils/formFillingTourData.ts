@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2025
+// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,59 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled, { keyframes } from "styled-components";
+import moment from "moment";
 
-import { IconButton } from "@docspace/shared/components/icon-button";
+import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg?url";
 
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
+import { getIconPathByFolderType } from "@docspace/shared/utils/common";
+import { iconSize32 } from "@docspace/shared/utils/image-helpers";
+import { FolderType } from "@docspace/shared/enums";
 
-const circularRotate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  40% {
-    transform: rotate(-180deg);
-  }
-  50% {
-    transform: rotate(-180deg);
-  }
-  90% {
-    transform: rotate(-360deg);
-  }
-  100% {
-    transform: rotate(-360deg);
-  }
-`;
-
-const StyledIconButton = styled(IconButton)`
-  svg {
-    animation: ${circularRotate} 2s ease-in-out infinite;
-    transform-origin: center;
-  }
-`;
-
-const ActionsUploadedFile = ({ item }) => {
-  return (
-    <>
-      {item.action === "uploaded" || item.action === "converted" ? (
-        <div className="actions-wrapper">
-          <CheckReactSvg className="upload-panel_check-button" />
-        </div>
-      ) : null}
-      {item.action === "convert" ? (
-        <div
-          className="upload_panel-icon"
-          data-id={item.uniqueId}
-          data-file-id={item.fileId}
-          data-action={item.action}
-        >
-          <StyledIconButton iconName={RefreshReactSvgUrl} isDisabled />
-        </div>
-      ) : null}
-    </>
-  );
-};
-
-export default ActionsUploadedFile;
+export const fakeFormFillingList = [
+  {
+    title: "In process",
+    type: 26,
+    updated: moment().format(),
+    isFolder: true,
+    icon: iconSize32.get(getIconPathByFolderType(FolderType.InProgress)),
+    contextOptions: ["select"],
+  },
+  {
+    title: "Complete",
+    type: 25,
+    updated: moment().format(),
+    isFolder: true,
+    icon: iconSize32.get(getIconPathByFolderType(FolderType.Done)),
+    contextOptions: ["select"],
+  },
+  {
+    title: "ONLYOFFICE Sample PDF form",
+    updated: moment().format(),
+    icon: PDFIcon,
+    isFolder: false,
+    isPDF: true,
+    contextOptions: ["select"],
+    fileExst: ".pdf",
+    security: {
+      Lock: false,
+    },
+  },
+];

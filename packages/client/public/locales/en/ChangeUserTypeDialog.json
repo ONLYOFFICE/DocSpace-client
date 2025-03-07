@@ -10,5 +10,9 @@
   "DataReassignmentWithFilesDeletion": "All personal files and folders in the {{sectionName}} section of this user will be <1>permanently deleted</1>. All shared files as well as rooms created by this user will be automatically assigned to you. To reassign the rooms/shared files to another person, click the corresponding link below.",
   "DataReassignmentInfo": "Rooms created by this user will be automatically assigned to you. To reassign the rooms to another person, click the corresponding link below.",
   "SuccessChangeGuestType": "The guest type was successfully changed",
-  "SuccessChangeUserType": "The user type was successfully changed"
+  "SuccessChangeUserType": "The user type was successfully changed",
+  "ChangeGuestsTypeToAdmin": "Guest <strong>{{userName}}</strong> will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. {{productName}} admins have access to the {{documentsSection}} section.",
+  "ChangeGuestsTypeToAdminMulti": "The selected guests will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. {{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. {{productName}} admins have access to the {{documentsSection}} section.",
+  "ChangeGuestsTypeToManager": "Guest <strong>{{userName}}</strong> will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. Room admins can create and manage the assigned rooms, invite new users, and assign roles of Room admin and lower. Room admins have access to the {{documentsSection}} section.",
+  "ChangeGuestsTypeToManagerMulti": "The selected guests will be moved to the {{membersSection}} section and assigned the <strong>'{{ secondType }}'</strong> type. Room admins can create and manage the assigned rooms, invite new users, and assign roles of Room admin and lower. Room admins have access to the {{documentsSection}} section."
 }

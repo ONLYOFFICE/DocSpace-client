@@ -66,6 +66,7 @@ import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg
 import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
 import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
+import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -155,6 +156,10 @@ class ContactsConextOptionsStore {
   };
 
   getUserContextOptions = (t: TTranslation, options: string[], item: TItem) => {
+    const { contactsTab } = this.usersStore;
+    const isGuests = contactsTab === "guests";
+    const { isRoomAdmin } = this.userStore.user!;
+
     const contextMenu = options.map((option) => {
       switch (option) {
         case "separator-1":
@@ -285,11 +290,16 @@ class ContactsConextOptionsStore {
             key: option,
             icon: ChangeToEmployeeReactSvgUrl,
             label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
-            onClick: () =>
-              this.usersStore.changeType(
-                EmployeeType.User,
-                this.usersStore.getUsersToMakeEmployees,
-              ),
+            onClick:
+              isGuests && isRoomAdmin
+                ? () =>
+                    this.usersStore.changeType(
+                      EmployeeType.User,
+                      this.usersStore.getUsersToMakeEmployees,
+                    )
+                : null,
+            withDropDown: !isRoomAdmin,
+            items: isRoomAdmin ? null : this.getUsersChangeTypeOptions(t, item),
           };
         case "remove-guest":
           return {
@@ -313,7 +323,10 @@ class ContactsConextOptionsStore {
     t: TTranslation,
     item?: ReturnType<UsersStore["getPeopleListItem"]>,
   ) => {
-    const { userSelectionRole, selectionUsersRights } = this.usersStore;
+    const { userSelectionRole, selectionUsersRights, contactsTab } =
+      this.usersStore;
+
+    const isGuests = contactsTab === "guests";
 
     const { isOwner: isUserOwner, isAdmin: isUserAdmin } = this.userStore.user!;
 
@@ -327,6 +340,9 @@ class ContactsConextOptionsStore {
       className: "group-menu_drop-down",
       label: getUserTypeTranslation(EmployeeType.Admin, t),
       title: getUserTypeTranslation(EmployeeType.Admin, t),
+      icon: isGuests ? PersonAdminReactSvgUrl : null,
+      badgeLabel: isGuests ? t("Common:Paid") : undefined,
+      isPaidBadge: isGuests,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.Admin,
       action: EmployeeType.Admin,
@@ -339,6 +355,9 @@ class ContactsConextOptionsStore {
       className: "group-menu_drop-down",
       label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+      icon: isGuests ? PersonManagerReactSvgUrl : null,
+      badgeLabel: isGuests ? t("Common:Paid") : undefined,
+      isPaidBadge: isGuests,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.RoomAdmin,
       action: EmployeeType.RoomAdmin,
@@ -353,6 +372,7 @@ class ContactsConextOptionsStore {
       key: EmployeeType.User,
       label: getUserTypeTranslation(EmployeeType.User, t),
       title: getUserTypeTranslation(EmployeeType.User, t),
+      icon: isGuests ? CatalogUserReactSvgUrl : null,
       "data-action": EmployeeType.User,
       action: EmployeeType.User,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
@@ -414,14 +434,16 @@ class ContactsConextOptionsStore {
         label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
         disabled: !hasUsersToMakeEmployees,
         icon: ChangeToEmployeeReactSvgUrl,
-        onClick: isGuests
-          ? () =>
-              this.usersStore.changeType(
-                EmployeeType.User,
-                this.usersStore.getUsersToMakeEmployees,
-              )
-          : null,
-        items: isGuests ? null : options,
+        onClick:
+          isGuests && isRoomAdmin
+            ? () =>
+                this.usersStore.changeType(
+                  EmployeeType.User,
+                  this.usersStore.getUsersToMakeEmployees,
+                )
+            : null,
+        withDropDown: !isRoomAdmin,
+        items: isRoomAdmin ? null : options,
       },
       {
         key: "cm-info",

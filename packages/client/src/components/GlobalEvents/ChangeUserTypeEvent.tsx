@@ -182,6 +182,7 @@ const ChangeUserTypeEvent = ({
     <ChangeUserTypeDialog
       visible
       isGuestsDialog={isGuestsDialog}
+      toType={toType}
       firstType={firstType ?? ""}
       secondType={secondType}
       onClose={onCloseAction}

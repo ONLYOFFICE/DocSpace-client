@@ -45,10 +45,6 @@ const meta = {
       options: Object.values(FloatingButtonIcons),
       description: "The icon to display in the button",
     },
-    percent: {
-      control: { type: "range", min: 0, max: 100, step: 1 },
-      description: "Progress percentage (0-100)",
-    },
     alert: {
       control: "boolean",
       description: "Show alert indicator",
@@ -81,14 +77,12 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     icon: FloatingButtonIcons.upload,
-    percent: 0,
   },
 };
 
 export const WithProgress: Story = {
   args: {
     icon: FloatingButtonIcons.upload,
-    percent: 45,
   },
 };
 
@@ -96,21 +90,19 @@ export const WithAlert: Story = {
   args: {
     icon: FloatingButtonIcons.upload,
     alert: true,
-    percent: 0,
   },
 };
 
 export const Completed: Story = {
   args: {
     icon: FloatingButtonIcons.upload,
-    percent: 100,
   },
 };
 
 export const WithCloseButton: Story = {
   args: {
     icon: FloatingButtonIcons.upload,
-    percent: 100,
+
     clearUploadedFilesHistory: () => alert("Clear history clicked"),
   },
 };

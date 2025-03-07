@@ -7,7 +7,7 @@
   "ChangeUserTypeMessageMulti": "The selected users will be moved to <strong>'{{ secondType }}'</strong> type.",
   "ChangeUserTypeMessageWarning": "You can't change the type for the {{productName}} administrators and for yourself.",
   "ChangeUserTypeNote": "<1>Note:</1> you cannot change the type for the {{productName}} admin and for yourself.",
-  "DataReassignmentWithFilesDeletion": "All personal files and folders in the {{sectionName}} section of this user will be <1>permanently deleted</1>. All shared files as well as rooms created by this user will be automatically assigned to you. To reassign the rooms/shared files to another person, click the corresponding link below.",
+  "DataReassignmentWithFilesDeletion": "All files and folders in the {{sectionName}} section of this contact will be <1>permanently deleted in 30 days</1>. All shared files by this contact will be automatically assigned to you. To reassign the shared files to another person, click the corresponding link below. ",
   "DataReassignmentInfo": "Rooms created by this user will be automatically assigned to you. To reassign the rooms to another person, click the corresponding link below.",
   "SuccessChangeGuestType": "The guest type was successfully changed",
   "SuccessChangeUserType": "The user type was successfully changed",

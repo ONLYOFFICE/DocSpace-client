@@ -58,7 +58,7 @@ export type DownloadContentProps = {
   items: TDownloadedFile[];
   onSelectFormat: ContextMenuTypeOnClick;
   onRowSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  titleFormat: string;
+  titleFormat?: string;
   type: DownloadedDocumentType;
   extsConvertible: Record<string, string[]>;
   title: string;
@@ -107,4 +107,51 @@ export type OnePasswordRowProps = {
   downloadItems: TDownloadedFile[];
   onClosePanel: VoidFunction;
   visible: boolean;
+};
+
+type TFileConvertId = { key: number; value: string; password?: string };
+
+type TTranslationsForDownload = {
+  label: string;
+  error: string;
+  passwordError: JSX.Element;
+};
+
+export type DownloadDialogProps = {
+  sortedFiles: Record<DownloadedDocumentType, TDownloadedFile[]>;
+  setDownloadItems: (items: TDownloadedFile[]) => void;
+  downloadItems: TDownloadedFile[];
+  downloadFiles: (
+    fileConvertIds: TFileConvertId[],
+    folderIds: number[],
+    translations: TTranslationsForDownload,
+  ) => void;
+  getDownloadItems: (
+    itemList: TDownloadedFile[],
+    t: TTranslation,
+  ) => [TFileConvertId[], number[], string | null];
+  isAllPasswordFilesSorted: boolean;
+  needPassword: boolean;
+  isOnePasswordFile: boolean;
+  sortedPasswordFiles: TDownloadedFile[];
+  updateDownloadedFilePassword: (
+    id: number,
+    password: string,
+    type: ProtectedFileCategoryType,
+  ) => void;
+  sortedDownloadFiles: Record<ProtectedFileCategoryType, TDownloadedFile[]>;
+  resetDownloadedFileFormat: (
+    id: number,
+    fileExst: string,
+    type: ProtectedFileCategoryType,
+  ) => void;
+  discardDownloadedFile: (id: number, type: ProtectedFileCategoryType) => void;
+  visible: boolean;
+  setDownloadDialogVisible: (value: boolean) => void;
+  setSortedPasswordFiles: (
+    value: Record<ProtectedFileCategoryType, TDownloadedFile[]>,
+  ) => void;
+  getIcon: (size: number, extension?: string) => string;
+  getFolderIcon: (size: number) => string;
+  extsConvertible: Record<string, string[]>;
 };

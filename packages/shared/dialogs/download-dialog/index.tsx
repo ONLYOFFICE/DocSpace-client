@@ -32,18 +32,26 @@ import { Trans, useTranslation } from "react-i18next";
 
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import { Text } from "../../components/text";
-import { Button } from "../../components/button";
+import { Button, ButtonSize } from "../../components/button";
 import { Scrollbar } from "../../components/scrollbar";
 import { toastr } from "../../components/toast";
+import type { TContextMenuValueTypeOnClick } from "../../components/context-menu/ContextMenu.types";
 
 import { StyledBodyContent } from "./StyledDownloadDialog";
 import { DownloadContent } from "./sub-components/DownloadContent";
 import { PasswordContent } from "./sub-components/PasswordContent";
 import { OnePasswordRow } from "./sub-components/OnePasswordRow";
+import type {
+  DownloadDialogProps,
+  TDownloadedFile,
+} from "./DownloadDialog.types";
+import { DownloadedDocumentType } from "./DownloadDialog.enums";
 
 const LoadingPlaceholder = () => <div style={{ width: "96px" }} />;
 
-const getInitialState = (sortedFiles) => {
+const getInitialState = (
+  sortedFiles: Record<DownloadedDocumentType, TDownloadedFile[]>,
+) => {
   return {
     documents: {
       isChecked: true,
@@ -78,7 +86,7 @@ const getInitialState = (sortedFiles) => {
   };
 };
 
-const DownloadDialog = (props) => {
+const DownloadDialog = (props: DownloadDialogProps) => {
   const {
     sortedFiles,
     setDownloadItems,
@@ -137,7 +145,7 @@ const DownloadDialog = (props) => {
     setDownloadDialogVisible(false);
   };
 
-  const onDownloadFunction = (itemList) => {
+  const onDownloadFunction = (itemList?: TDownloadedFile[]) => {
     const files = itemList ?? downloadItems;
     const [fileConvertIds, folderIds] = getDownloadItems(files, t);
     downloadFiles(fileConvertIds, folderIds, getErrorsTranslation());
@@ -169,7 +177,11 @@ const DownloadDialog = (props) => {
     }
   };
 
-  const getNewArrayFiles = (fileId, array, format) => {
+  const getNewArrayFiles = (
+    fileId: number,
+    array: TDownloadedFile[],
+    format: string,
+  ) => {
     // Set all documents format
     if (!fileId) {
       array.forEach((file) => {
@@ -182,14 +194,22 @@ const DownloadDialog = (props) => {
     }
     // Set single document format
     const newDoc = array.find((x) => x.id === fileId);
-    if (newDoc.format !== format) {
+
+    if (newDoc && newDoc.format !== format) {
       newDoc.format = format;
     }
     return array;
   };
 
-  const onSelectFormat = (e) => {
-    const { format, type, fileId } = e.currentTarget.dataset;
+  const onSelectFormat = (e: TContextMenuValueTypeOnClick) => {
+    if (!("currentTarget" in e)) return;
+    if (!("dataset" in e.currentTarget)) return;
+
+    const { format, type, fileId } = e.currentTarget.dataset as unknown as {
+      format: string;
+      type: DownloadedDocumentType;
+      fileId: string;
+    };
     const { files } = state[type];
 
     setState((prevState) => {
@@ -209,7 +229,10 @@ const DownloadDialog = (props) => {
     });
   };
 
-  const updateDocsState = (fieldStateName, itemId) => {
+  const updateDocsState = (
+    fieldStateName: DownloadedDocumentType,
+    itemId: number | "All",
+  ) => {
     const { isChecked, isIndeterminate, files } = state[fieldStateName];
 
     if (itemId === "All") {
@@ -227,7 +250,10 @@ const DownloadDialog = (props) => {
       });
     } else {
       const file = files.find((x) => x.id === itemId);
-      file.checked = !file.checked;
+
+      if (file) {
+        file.checked = !file.checked;
+      }
 
       const disableFiles = files.find((x) => x.checked === false);
       const activeFiles = files.find((x) => x.checked === true);
@@ -246,25 +272,34 @@ const DownloadDialog = (props) => {
     }
   };
 
-  const onRowSelect = (e) => {
-    const { itemId, type } = e.currentTarget.dataset;
+  const onRowSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { itemId, type } = e.currentTarget.dataset as unknown as {
+      itemId: number | "All";
+      type: DownloadedDocumentType;
+    };
+
+    let id = itemId;
+
+    if (id !== "All") {
+      id = +id;
+    }
 
     switch (type) {
       case "documents":
-        updateDocsState("documents", +itemId);
+        updateDocsState(DownloadedDocumentType.Documents, id);
 
         break;
       case "spreadsheets":
-        updateDocsState("spreadsheets", +itemId);
+        updateDocsState(DownloadedDocumentType.Spreadsheets, id);
         break;
       case "presentations":
-        updateDocsState("presentations", +itemId);
+        updateDocsState(DownloadedDocumentType.Presentations, id);
         break;
       case "masterForms":
-        updateDocsState("masterForms", +itemId);
+        updateDocsState(DownloadedDocumentType.MasterForms, id);
         break;
       case "other":
-        updateDocsState("other", +itemId);
+        updateDocsState(DownloadedDocumentType.Other, id);
         break;
 
       default:
@@ -285,7 +320,7 @@ const DownloadDialog = (props) => {
     );
   };
 
-  const handleKeyUp = (event) => {
+  const handleKeyUp = (event: KeyboardEvent) => {
     if (event.key === "Enter" && needPassword) {
       if (!isAllPasswordFilesSorted) return;
 
@@ -315,7 +350,7 @@ const DownloadDialog = (props) => {
     setDownloadDialogVisible(false);
   };
 
-  const getItemIcon = (item) => {
+  const getItemIcon = (item: TDownloadedFile) => {
     const extension = item?.fileExst;
     const icon = extension ? getIcon(32, extension) : getFolderIcon(32);
 
@@ -348,11 +383,11 @@ const DownloadDialog = (props) => {
     state.presentations.files.length +
     state.masterForms.files.length +
     state.other.files.length +
-    (state.documents.files.length > 1 && 1) +
-    (state.spreadsheets.files.length > 1 && 1) +
-    (state.presentations.files.length > 1 && 1) +
-    (state.masterForms.files.length > 1 && 1) +
-    (state.other.files.length > 1 && 1);
+    (state.documents.files.length > 1 ? 1 : 0) +
+    (state.spreadsheets.files.length > 1 ? 1 : 0) +
+    (state.presentations.files.length > 1 ? 1 : 0) +
+    (state.masterForms.files.length > 1 ? 1 : 0) +
+    (state.other.files.length > 1 ? 1 : 0);
 
   useEffect(() => {
     document.addEventListener("keyup", handleKeyUp);
@@ -378,7 +413,7 @@ const DownloadDialog = (props) => {
           isIndeterminate={state.documents.isIndeterminate}
           items={state.documents.files}
           titleFormat={state.documents.format || t("OriginalFormat")}
-          type="documents"
+          type={DownloadedDocumentType.Documents}
           title={t("Common:Documents")}
         />
       ) : null}
@@ -390,7 +425,7 @@ const DownloadDialog = (props) => {
           isIndeterminate={state.spreadsheets.isIndeterminate}
           items={state.spreadsheets.files}
           titleFormat={state.spreadsheets.format || t("OriginalFormat")}
-          type="spreadsheets"
+          type={DownloadedDocumentType.Spreadsheets}
           title={t("Translations:Spreadsheets")}
         />
       ) : null}
@@ -402,7 +437,7 @@ const DownloadDialog = (props) => {
           isIndeterminate={state.presentations.isIndeterminate}
           items={state.presentations.files}
           titleFormat={state.presentations.format || t("OriginalFormat")}
-          type="presentations"
+          type={DownloadedDocumentType.Presentations}
           title={t("Translations:Presentations")}
         />
       ) : null}
@@ -414,7 +449,7 @@ const DownloadDialog = (props) => {
           isIndeterminate={state.masterForms.isIndeterminate}
           items={state.masterForms.files}
           titleFormat={state.masterForms.format || t("OriginalFormat")}
-          type="masterForms"
+          type={DownloadedDocumentType.MasterForms}
           title={t("Translations:FormTemplates")}
         />
       ) : null}
@@ -425,7 +460,7 @@ const DownloadDialog = (props) => {
           isChecked={state.other.isChecked}
           isIndeterminate={state.other.isIndeterminate}
           items={state.other.files}
-          type="other"
+          type={DownloadedDocumentType.Other}
           title={t("Translations:Other")}
         />
       ) : null}
@@ -443,9 +478,7 @@ const DownloadDialog = (props) => {
         onDownload={onDownloadFunction}
         onClosePanel={onClosePanel}
         item={sortedPasswordFiles[0]}
-        setDownloadItems={setDownloadItems}
         downloadItems={downloadItems}
-        sortedPasswordFiles={sortedPasswordFiles}
         visible={visible}
       />
     );
@@ -464,13 +497,11 @@ const DownloadDialog = (props) => {
     >
       <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
 
-      <ModalDialog.Body className="modalDialogToggle">
+      <ModalDialog.Body>
         <Scrollbar paddingAfterLastItem="0px">
           {needPassword ? (
             <PasswordContent
               getItemIcon={getItemIcon}
-              onReDownload={onReDownload}
-              sortedPasswordFiles={sortedPasswordFiles}
               updateDownloadedFilePassword={updateDownloadedFilePassword}
               sortedDownloadFiles={sortedDownloadFiles}
               resetDownloadedFileFormat={resetDownloadedFileFormat}
@@ -489,7 +520,7 @@ const DownloadDialog = (props) => {
           label={
             needPassword ? t("Common:ContinueButton") : t("Common:Download")
           }
-          size="normal"
+          size={ButtonSize.normal}
           primary
           onClick={needPassword ? onReDownload : onDownload}
           isDisabled={
@@ -501,7 +532,7 @@ const DownloadDialog = (props) => {
           key="CancelButton"
           className="cancel-button"
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           onClick={onClose}
           scale
         />

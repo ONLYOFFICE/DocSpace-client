@@ -26,9 +26,9 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import { Text } from "../../components/text";
@@ -43,242 +43,72 @@ import { OnePasswordRow } from "./sub-components/OnePasswordRow";
 
 const LoadingPlaceholder = () => <div style={{ width: "96px" }} />;
 
-class DownloadDialog extends React.Component {
-  constructor(props) {
-    super(props);
-
-    const { sortedFiles } = this.props;
-    const { documents, spreadsheets, presentations, masterForms, other } =
-      sortedFiles;
-
-    this.state = {
-      documents: {
-        isChecked: true,
-        isIndeterminate: false,
-        format: null,
-        files: documents,
-      },
-      spreadsheets: {
-        isChecked: true,
-        isIndeterminate: false,
-        format: null,
-        files: spreadsheets,
-      },
-      presentations: {
-        isChecked: true,
-        isIndeterminate: false,
-        format: null,
-        files: presentations,
-      },
-      masterForms: {
-        isChecked: true,
-        isIndeterminate: false,
-        format: null,
-        files: masterForms,
-      },
-      other: {
-        isChecked: true,
-        isIndeterminate: false,
-        files: other,
-      },
-      modalDialogToggle: "modalDialogToggle",
-    };
-  }
-
-  componentDidMount() {
-    document.addEventListener("keyup", this.handleKeyUp);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keyup", this.handleKeyUp);
-  }
-
-  onDownload = () => {
-    const { setDownloadItems } = this.props;
-    const { documents, spreadsheets, presentations, masterForms, other } =
-      this.state;
-
-    const itemList = [
-      ...documents.files,
-      ...spreadsheets.files,
-      ...presentations.files,
-      ...masterForms.files,
-      ...other.files,
-    ];
-
-    if (itemList.length) {
-      setDownloadItems(itemList);
-
-      this.onDownloadFunction(itemList);
-    }
+const getInitialState = (sortedFiles) => {
+  return {
+    documents: {
+      isChecked: true,
+      isIndeterminate: false,
+      format: null,
+      files: sortedFiles.documents,
+    },
+    spreadsheets: {
+      isChecked: true,
+      isIndeterminate: false,
+      format: null,
+      files: sortedFiles.spreadsheets,
+    },
+    presentations: {
+      isChecked: true,
+      isIndeterminate: false,
+      format: null,
+      files: sortedFiles.presentations,
+    },
+    masterForms: {
+      isChecked: true,
+      isIndeterminate: false,
+      format: null,
+      files: sortedFiles.masterForms,
+    },
+    other: {
+      isChecked: true,
+      isIndeterminate: false,
+      format: null,
+      files: sortedFiles.other,
+    },
   };
+};
 
-  onDownloadFunction = (itemList) => {
-    const { downloadItems, downloadFiles, getDownloadItems, t } = this.props;
+const DownloadDialog = (props) => {
+  const {
+    sortedFiles,
+    setDownloadItems,
+    downloadItems,
+    downloadFiles,
+    getDownloadItems,
+    isAllPasswordFilesSorted,
+    needPassword,
+    isOnePasswordFile,
+    sortedPasswordFiles,
+    updateDownloadedFilePassword,
+    sortedDownloadFiles,
+    resetDownloadedFileFormat,
+    discardDownloadedFile,
+    visible,
+    setDownloadDialogVisible,
+    setSortedPasswordFiles,
+    getIcon,
+    getFolderIcon,
+    extsConvertible,
+  } = props;
 
-    const files = itemList ?? downloadItems;
+  const [state, setState] = useState(getInitialState(sortedFiles));
+  const { t, ready: tReady } = useTranslation([
+    "DownloadDialog",
+    "Common",
+    "Translations",
+  ]);
 
-    const [fileConvertIds, folderIds] = getDownloadItems(files, t);
-
-    downloadFiles(fileConvertIds, folderIds, this.getErrorsTranslation());
-
-    this.onClose();
-  };
-
-  onReDownload = () => {
-    const { downloadItems, isAllPasswordFilesSorted } = this.props;
-
-    if (downloadItems.length > 0 && isAllPasswordFilesSorted) {
-      toastr.clear();
-      this.onDownloadFunction();
-    }
-  };
-
-  getNewArrayFiles = (fileId, array, format) => {
-    // Set all documents format
-    const { t } = this.props;
-
-    if (!fileId) {
-      array.forEach((file) => {
-        file.format =
-          format === t("CustomFormat") || file.fileExst === format
-            ? t("OriginalFormat")
-            : format;
-      });
-
-      return array;
-    }
-    // Set single document format
-    const newDoc = array.find((x) => x.id == fileId);
-    if (newDoc.format !== format) {
-      newDoc.format = format;
-    }
-    return array;
-  };
-
-  onSelectFormat = (e) => {
-    const { format, type, fileId } = e.currentTarget.dataset;
-    const { files } = this.state[type]; // eslint-disable-line react/destructuring-assignment
-    const { t } = this.props;
-
-    this.setState((prevState) => {
-      const newState = { ...prevState };
-      newState[type].files = this.getNewArrayFiles(fileId, files, format);
-      newState[type].format = !fileId ? format : t("CustomFormat");
-
-      const index = newState[type].files.findIndex(
-        (f) => f.format && f.format !== t("OriginalFormat"),
-      );
-
-      if (index === -1) {
-        newState[type].format = t("OriginalFormat");
-      }
-
-      return { ...prevState, ...newState };
-    });
-  };
-
-  updateDocsState = (fieldStateName, itemId) => {
-    const { isChecked, isIndeterminate, files } = this.state[fieldStateName]; // eslint-disable-line react/destructuring-assignment
-
-    if (itemId === "All") {
-      const checked = isIndeterminate ? false : !isChecked;
-      files.forEach((file) => {
-        file.checked = checked;
-      });
-
-      this.setState((prevState) => {
-        const newState = { ...prevState };
-
-        newState[fieldStateName].files = files;
-        newState[fieldStateName].isIndeterminate = false;
-        newState[fieldStateName].isChecked = checked;
-
-        return { ...prevState, ...newState };
-      });
-    } else {
-      const file = files.find((x) => x.id == itemId);
-      file.checked = !file.checked;
-
-      const disableFiles = files.find((x) => x.checked === false);
-      const activeFiles = files.find((x) => x.checked === true);
-
-      this.setState((prevState) => {
-        const newState = { ...prevState };
-
-        newState[fieldStateName].files = files;
-        newState[fieldStateName].isIndeterminate = !activeFiles
-          ? false
-          : !!disableFiles;
-        newState[fieldStateName].isChecked = !disableFiles;
-
-        return { ...prevState, ...newState };
-      });
-    }
-  };
-
-  onRowSelect = (e) => {
-    const { itemId, type } = e.currentTarget.dataset;
-
-    switch (type) {
-      case "documents":
-        this.updateDocsState("documents", itemId);
-
-        break;
-      case "spreadsheets":
-        this.updateDocsState("spreadsheets", itemId);
-        break;
-      case "presentations":
-        this.updateDocsState("presentations", itemId);
-        break;
-      case "masterForms":
-        this.updateDocsState("masterForms", itemId);
-        break;
-      case "other":
-        this.updateDocsState("other", itemId);
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  /**
-   * @returns {number}
-   */
-  getCheckedFileLength = () => {
-    const { documents, spreadsheets, presentations, masterForms, other } =
-      this.state;
-
-    return (
-      documents.files.filter((f) => f.checked).length +
-      spreadsheets.files.filter((f) => f.checked).length +
-      presentations.files.filter((f) => f.checked).length +
-      masterForms.files.filter((f) => f.checked).length +
-      other.files.filter((f) => f.checked).length
-    );
-  };
-
-  /**
-   * @param {KeyboardEvent} event
-   */
-  handleKeyUp = (event) => {
-    const { isAllPasswordFilesSorted, needPassword } = this.props;
-
-    if (event.key === "Enter" && needPassword) {
-      if (!isAllPasswordFilesSorted) return;
-
-      this.onReDownload();
-      return;
-    }
-
-    if (event.key === "Enter" && this.getCheckedFileLength() > 0) {
-      this.onDownload();
-    }
-  };
-
-  getErrorsTranslation = () => {
-    const { t } = this.props;
+  const getErrorsTranslation = () => {
     const passwordError = (
       <Trans
         t={t}
@@ -296,9 +126,7 @@ class DownloadDialog extends React.Component {
     return translations;
   };
 
-  onClose = () => {
-    const { setDownloadDialogVisible, setSortedPasswordFiles } = this.props;
-
+  const onClose = () => {
     setSortedPasswordFiles({
       other: [],
       password: [],
@@ -309,17 +137,168 @@ class DownloadDialog extends React.Component {
     setDownloadDialogVisible(false);
   };
 
-  onClosePanel = () => {
-    const { setDownloadDialogVisible } = this.props;
-
-    this.interruptingConversion();
-
-    setDownloadDialogVisible(false);
+  const onDownloadFunction = (itemList) => {
+    const files = itemList ?? downloadItems;
+    const [fileConvertIds, folderIds] = getDownloadItems(files, t);
+    downloadFiles(fileConvertIds, folderIds, getErrorsTranslation());
+    onClose();
   };
 
-  interruptingConversion = () => {
-    const { setSortedPasswordFiles, setDownloadItems } = this.props;
+  const onDownload = () => {
+    const { documents, spreadsheets, presentations, masterForms, other } =
+      state;
 
+    const itemList = [
+      ...documents.files,
+      ...spreadsheets.files,
+      ...presentations.files,
+      ...masterForms.files,
+      ...other.files,
+    ];
+
+    if (itemList.length) {
+      setDownloadItems(itemList);
+      onDownloadFunction(itemList);
+    }
+  };
+
+  const onReDownload = () => {
+    if (downloadItems.length > 0 && isAllPasswordFilesSorted) {
+      toastr.clear();
+      onDownloadFunction();
+    }
+  };
+
+  const getNewArrayFiles = (fileId, array, format) => {
+    // Set all documents format
+    if (!fileId) {
+      array.forEach((file) => {
+        file.format =
+          format === t("CustomFormat") || file.fileExst === format
+            ? t("OriginalFormat")
+            : format;
+      });
+      return array;
+    }
+    // Set single document format
+    const newDoc = array.find((x) => x.id === fileId);
+    if (newDoc.format !== format) {
+      newDoc.format = format;
+    }
+    return array;
+  };
+
+  const onSelectFormat = (e) => {
+    const { format, type, fileId } = e.currentTarget.dataset;
+    const { files } = state[type];
+
+    setState((prevState) => {
+      const newState = { ...prevState };
+      newState[type].files = getNewArrayFiles(+fileId, files, format);
+      newState[type].format = !fileId ? format : t("CustomFormat");
+
+      const index = newState[type].files.findIndex(
+        (f) => f.format && f.format !== t("OriginalFormat"),
+      );
+
+      if (index === -1) {
+        newState[type].format = t("OriginalFormat");
+      }
+
+      return newState;
+    });
+  };
+
+  const updateDocsState = (fieldStateName, itemId) => {
+    const { isChecked, isIndeterminate, files } = state[fieldStateName];
+
+    if (itemId === "All") {
+      const checked = isIndeterminate ? false : !isChecked;
+      files.forEach((file) => {
+        file.checked = checked;
+      });
+
+      setState((prevState) => {
+        const newState = { ...prevState };
+        newState[fieldStateName].files = files;
+        newState[fieldStateName].isIndeterminate = false;
+        newState[fieldStateName].isChecked = checked;
+        return newState;
+      });
+    } else {
+      const file = files.find((x) => x.id === itemId);
+      file.checked = !file.checked;
+
+      const disableFiles = files.find((x) => x.checked === false);
+      const activeFiles = files.find((x) => x.checked === true);
+
+      setState((prevState) => {
+        const newState = { ...prevState };
+
+        newState[fieldStateName].files = files;
+        newState[fieldStateName].isIndeterminate = !activeFiles
+          ? false
+          : !!disableFiles;
+        newState[fieldStateName].isChecked = !disableFiles;
+
+        return newState;
+      });
+    }
+  };
+
+  const onRowSelect = (e) => {
+    const { itemId, type } = e.currentTarget.dataset;
+
+    switch (type) {
+      case "documents":
+        updateDocsState("documents", +itemId);
+
+        break;
+      case "spreadsheets":
+        updateDocsState("spreadsheets", +itemId);
+        break;
+      case "presentations":
+        updateDocsState("presentations", +itemId);
+        break;
+      case "masterForms":
+        updateDocsState("masterForms", +itemId);
+        break;
+      case "other":
+        updateDocsState("other", +itemId);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const getCheckedFileLength = () => {
+    const { documents, spreadsheets, presentations, masterForms, other } =
+      state;
+
+    return (
+      documents.files.filter((f) => f.checked).length +
+      spreadsheets.files.filter((f) => f.checked).length +
+      presentations.files.filter((f) => f.checked).length +
+      masterForms.files.filter((f) => f.checked).length +
+      other.files.filter((f) => f.checked).length
+    );
+  };
+
+  const handleKeyUp = (event) => {
+    if (event.key === "Enter" && needPassword) {
+      if (!isAllPasswordFilesSorted) return;
+
+      onReDownload();
+      return;
+    }
+
+    if (event.key === "Enter" && getCheckedFileLength() > 0) {
+      onDownload();
+    }
+  };
+
+  const interruptingConversion = () => {
     setSortedPasswordFiles({
       other: [],
       password: [],
@@ -330,8 +309,13 @@ class DownloadDialog extends React.Component {
     setDownloadItems([]);
   };
 
-  getItemIcon = (item) => {
-    const { getIcon, getFolderIcon } = this.props;
+  const onClosePanel = () => {
+    interruptingConversion();
+
+    setDownloadDialogVisible(false);
+  };
+
+  const getItemIcon = (item) => {
     const extension = item?.fileExst;
     const icon = extension ? getIcon(32, extension) : getFolderIcon(32);
 
@@ -346,229 +330,184 @@ class DownloadDialog extends React.Component {
     );
   };
 
-  render() {
-    const {
-      t,
-      tReady,
-      visible,
-      extsConvertible,
-      theme,
-      needPassword,
-      isAllPasswordFilesSorted,
-      isOnePasswordFile,
-      sortedPasswordFiles,
-      updateDownloadedFilePassword,
-      sortedDownloadFiles,
-      resetDownloadedFileFormat,
-      discardDownloadedFile,
-      setDownloadItems,
-      downloadItems,
-    } = this.props;
+  const checkedLength = getCheckedFileLength();
 
-    const { documents, spreadsheets, presentations, masterForms, other } =
-      this.state;
-    const {
-      isChecked: checkedDocTitle,
-      isIndeterminate: indeterminateDocTitle,
-      format: documentsTitleFormat,
-    } = documents;
+  const isSingleFile = checkedLength <= 1;
 
-    const {
-      isChecked: checkedSpreadsheetTitle,
-      isIndeterminate: isIndeterminateSpreadsheetTitle,
-      format: spreadsheetsTitleFormat,
-    } = spreadsheets;
+  const downloadContentProps = {
+    t,
+    extsConvertible,
+    onSelectFormat,
+    onRowSelect,
+    getItemIcon,
+  };
 
-    const {
-      isChecked: checkedPresentationTitle,
-      isIndeterminate: indeterminatePresentationTitle,
-      format: presentationsTitleFormat,
-    } = presentations;
+  const totalItemsNum =
+    state.documents.files.length +
+    state.spreadsheets.files.length +
+    state.presentations.files.length +
+    state.masterForms.files.length +
+    state.other.files.length +
+    (state.documents.files.length > 1 && 1) +
+    (state.spreadsheets.files.length > 1 && 1) +
+    (state.presentations.files.length > 1 && 1) +
+    (state.masterForms.files.length > 1 && 1) +
+    (state.other.files.length > 1 && 1);
 
-    const {
-      isChecked: checkedMasterFormsTitle,
-      isIndeterminate: indeterminateMasterFormsTitle,
-      format: masterFormsTitleFormat,
-    } = masterForms;
-
-    const {
-      isChecked: checkedOtherTitle,
-      isIndeterminate: indeterminateOtherTitle,
-    } = other;
-
-    const isCheckedLength = this.getCheckedFileLength();
-
-    const isSingleFile = isCheckedLength <= 1;
-
-    const downloadContentProps = {
-      t,
-      theme,
-      extsConvertible,
-      onSelectFormat: this.onSelectFormat,
-      onRowSelect: this.onRowSelect,
-      getItemIcon: this.getItemIcon,
+  useEffect(() => {
+    document.addEventListener("keyup", handleKeyUp);
+    return () => {
+      document.removeEventListener("keyup", handleKeyUp);
     };
+  }, []);
 
-    const totalItemsNum =
-      documents.files.length +
-      spreadsheets.files.length +
-      presentations.files.length +
-      masterForms.files.length +
-      other.files.length +
-      (documents.files.length > 1 && 1) +
-      (spreadsheets.files.length > 1 && 1) +
-      (presentations.files.length > 1 && 1) +
-      (masterForms.files.length > 1 && 1) +
-      (other.files.length > 1 && 1);
-
-    const mainContent = (
-      <>
-        <StyledBodyContent className="download-dialog-description">
-          <Text noSelect>{t("ChooseFormatText")}.</Text>
-          {!isSingleFile ? (
-            <Text noSelect>
-              <Trans t={t} i18nKey="ConvertToZip" />
-            </Text>
-          ) : null}
-        </StyledBodyContent>
-        {documents.files.length > 0 ? (
-          <DownloadContent
-            {...downloadContentProps}
-            isChecked={checkedDocTitle}
-            isIndeterminate={indeterminateDocTitle}
-            items={documents.files}
-            titleFormat={documentsTitleFormat || t("OriginalFormat")}
-            type="documents"
-            title={t("Common:Documents")}
-          />
+  const mainContent = (
+    <>
+      <StyledBodyContent className="download-dialog-description">
+        <Text noSelect>{t("ChooseFormatText")}.</Text>
+        {!isSingleFile ? (
+          <Text noSelect>
+            <Trans t={t} i18nKey="ConvertToZip" />
+          </Text>
         ) : null}
-
-        {spreadsheets.files.length > 0 ? (
-          <DownloadContent
-            {...downloadContentProps}
-            isChecked={checkedSpreadsheetTitle}
-            isIndeterminate={isIndeterminateSpreadsheetTitle}
-            items={spreadsheets.files}
-            titleFormat={spreadsheetsTitleFormat || t("OriginalFormat")}
-            type="spreadsheets"
-            title={t("Translations:Spreadsheets")}
-          />
-        ) : null}
-
-        {presentations.files.length > 0 ? (
-          <DownloadContent
-            {...downloadContentProps}
-            isChecked={checkedPresentationTitle}
-            isIndeterminate={indeterminatePresentationTitle}
-            items={presentations.files}
-            titleFormat={presentationsTitleFormat || t("OriginalFormat")}
-            type="presentations"
-            title={t("Translations:Presentations")}
-          />
-        ) : null}
-
-        {masterForms.files.length > 0 ? (
-          <DownloadContent
-            {...downloadContentProps}
-            isChecked={checkedMasterFormsTitle}
-            isIndeterminate={indeterminateMasterFormsTitle}
-            items={masterForms.files}
-            titleFormat={masterFormsTitleFormat || t("OriginalFormat")}
-            type="masterForms"
-            title={t("Translations:FormTemplates")}
-          />
-        ) : null}
-
-        {other.files.length > 0 ? (
-          <DownloadContent
-            {...downloadContentProps}
-            isChecked={checkedOtherTitle}
-            isIndeterminate={indeterminateOtherTitle}
-            items={other.files}
-            type="other"
-            title={t("Translations:Other")}
-          />
-        ) : null}
-
-        <div className="download-dialog-convert-message">
-          <Text noSelect>{t("ConvertMessage")}</Text>
-        </div>
-      </>
-    );
-
-    if (isOnePasswordFile) {
-      return (
-        <OnePasswordRow
-          getItemIcon={this.getItemIcon}
-          onDownload={this.onDownloadFunction}
-          onClosePanel={this.onClosePanel}
-          item={sortedPasswordFiles[0]}
-          setDownloadItems={setDownloadItems}
-          downloadItems={downloadItems}
-          sortedPasswordFiles={sortedPasswordFiles}
-          visible={visible}
+      </StyledBodyContent>
+      {state.documents.files.length > 0 ? (
+        <DownloadContent
+          {...downloadContentProps}
+          isChecked={state.documents.isChecked}
+          isIndeterminate={state.documents.isIndeterminate}
+          items={state.documents.files}
+          titleFormat={state.documents.format || t("OriginalFormat")}
+          type="documents"
+          title={t("Common:Documents")}
         />
-      );
-    }
+      ) : null}
 
+      {state.spreadsheets.files.length > 0 ? (
+        <DownloadContent
+          {...downloadContentProps}
+          isChecked={state.spreadsheets.isChecked}
+          isIndeterminate={state.spreadsheets.isIndeterminate}
+          items={state.spreadsheets.files}
+          titleFormat={state.spreadsheets.format || t("OriginalFormat")}
+          type="spreadsheets"
+          title={t("Translations:Spreadsheets")}
+        />
+      ) : null}
+
+      {state.presentations.files.length > 0 ? (
+        <DownloadContent
+          {...downloadContentProps}
+          isChecked={state.presentations.isChecked}
+          isIndeterminate={state.presentations.isIndeterminate}
+          items={state.presentations.files}
+          titleFormat={state.presentations.format || t("OriginalFormat")}
+          type="presentations"
+          title={t("Translations:Presentations")}
+        />
+      ) : null}
+
+      {state.masterForms.files.length > 0 ? (
+        <DownloadContent
+          {...downloadContentProps}
+          isChecked={state.masterForms.isChecked}
+          isIndeterminate={state.masterForms.isIndeterminate}
+          items={state.masterForms.files}
+          titleFormat={state.masterForms.format || t("OriginalFormat")}
+          type="masterForms"
+          title={t("Translations:FormTemplates")}
+        />
+      ) : null}
+
+      {state.other.files.length > 0 ? (
+        <DownloadContent
+          {...downloadContentProps}
+          isChecked={state.other.isChecked}
+          isIndeterminate={state.other.isIndeterminate}
+          items={state.other.files}
+          type="other"
+          title={t("Translations:Other")}
+        />
+      ) : null}
+
+      <div className="download-dialog-convert-message">
+        <Text noSelect>{t("ConvertMessage")}</Text>
+      </div>
+    </>
+  );
+
+  if (isOnePasswordFile) {
     return (
-      <ModalDialog
+      <OnePasswordRow
+        getItemIcon={getItemIcon}
+        onDownload={onDownloadFunction}
+        onClosePanel={onClosePanel}
+        item={sortedPasswordFiles[0]}
+        setDownloadItems={setDownloadItems}
+        downloadItems={downloadItems}
+        sortedPasswordFiles={sortedPasswordFiles}
         visible={visible}
-        displayType={ModalDialogType.aside}
-        onClose={this.onClosePanel}
-        autoMaxHeight
-        autoMaxWidth
-        isLarge
-        isLoading={!tReady}
-        withBodyScroll={totalItemsNum > 11}
-      >
-        <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
-
-        <ModalDialog.Body className="modalDialogToggle">
-          <Scrollbar paddingAfterLastItem="0px">
-            {needPassword ? (
-              <PasswordContent
-                getItemIcon={this.getItemIcon}
-                onReDownload={this.onReDownload}
-                sortedPasswordFiles={sortedPasswordFiles}
-                updateDownloadedFilePassword={updateDownloadedFilePassword}
-                sortedDownloadFiles={sortedDownloadFiles}
-                resetDownloadedFileFormat={resetDownloadedFileFormat}
-                discardDownloadedFile={discardDownloadedFile}
-              />
-            ) : (
-              mainContent
-            )}
-          </Scrollbar>
-        </ModalDialog.Body>
-
-        <ModalDialog.Footer>
-          <Button
-            key="DownloadButton"
-            className="download-button"
-            label={
-              needPassword ? t("Common:ContinueButton") : t("Common:Download")
-            }
-            size="normal"
-            primary
-            onClick={needPassword ? this.onReDownload : this.onDownload}
-            isDisabled={
-              needPassword ? !isAllPasswordFilesSorted : isCheckedLength === 0
-            }
-            scale
-          />
-          <Button
-            key="CancelButton"
-            className="cancel-button"
-            label={t("Common:CancelButton")}
-            size="normal"
-            onClick={this.onClose}
-            scale
-          />
-        </ModalDialog.Footer>
-      </ModalDialog>
+      />
     );
   }
-}
+
+  return (
+    <ModalDialog
+      visible={visible}
+      displayType={ModalDialogType.aside}
+      onClose={onClosePanel}
+      autoMaxHeight
+      autoMaxWidth
+      isLarge
+      isLoading={!tReady}
+      withBodyScroll={totalItemsNum > 11}
+    >
+      <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
+
+      <ModalDialog.Body className="modalDialogToggle">
+        <Scrollbar paddingAfterLastItem="0px">
+          {needPassword ? (
+            <PasswordContent
+              getItemIcon={getItemIcon}
+              onReDownload={onReDownload}
+              sortedPasswordFiles={sortedPasswordFiles}
+              updateDownloadedFilePassword={updateDownloadedFilePassword}
+              sortedDownloadFiles={sortedDownloadFiles}
+              resetDownloadedFileFormat={resetDownloadedFileFormat}
+              discardDownloadedFile={discardDownloadedFile}
+            />
+          ) : (
+            mainContent
+          )}
+        </Scrollbar>
+      </ModalDialog.Body>
+
+      <ModalDialog.Footer>
+        <Button
+          key="DownloadButton"
+          className="download-button"
+          label={
+            needPassword ? t("Common:ContinueButton") : t("Common:Download")
+          }
+          size="normal"
+          primary
+          onClick={needPassword ? onReDownload : onDownload}
+          isDisabled={
+            needPassword ? !isAllPasswordFilesSorted : checkedLength === 0
+          }
+          scale
+        />
+        <Button
+          key="CancelButton"
+          className="cancel-button"
+          label={t("Common:CancelButton")}
+          size="normal"
+          onClick={onClose}
+          scale
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
+};
 
 export default DownloadDialog;

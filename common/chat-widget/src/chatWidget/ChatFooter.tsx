@@ -28,6 +28,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Send } from "lucide-react";
 import { FileType } from "../types/chatWidget";
 import { DropDown } from "../components/dropdown";
+import { getCurrentWordAtCursor } from "./utils";
 
 const MAX_DROPDOWN_HEIGHT = 200;
 const TEXTAREA_MAX_HEIGHT = 200;
@@ -49,6 +50,7 @@ const ChatFooter = ({
 }) => {
   const chatPlaceholder = placeholderText ?? "Message AI...";
   const inputBlockRef = useRef<HTMLDivElement>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const [windowPosition, setWindowPosition] = useState({ left: "0", top: "0" });
   const [dropdownWidth, setDropdownWidth] = useState(0);
@@ -110,20 +112,21 @@ const ChatFooter = ({
   };
 
   const checkAtSymbol = (str: string) => {
-    const regex = /(^|\s)+@/gm;
+    const regex = /(?:^|\s)@(?:|[a-zA-Z0-9]*$)/g;
 
     return str.search(regex) > -1;
   };
 
   const onChangeMessage = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const msg = e.target.value;
-    // const msg = e.currentTarget.innerText;
+
+    const { currentWord } = getCurrentWordAtCursor(textAreaRef.current!);
 
     setMessage(msg);
 
-    if (checkAtSymbol(msg) && filesList.length) {
+    if (checkAtSymbol(currentWord) && filesList.length) {
       const newFiles = filesList.filter((f) =>
-        f.title.startsWith(msg.slice(msg.indexOf("@") + 1))
+        f.title.startsWith(currentWord.substring(1))
       );
 
       if (newFiles.length) {
@@ -145,16 +148,21 @@ const ChatFooter = ({
   };
 
   const onSelectItem = (file: FileType) => {
+    const { startPos, endPos } = getCurrentWordAtCursor(textAreaRef.current!);
+
     setSelectedFile(file);
 
     if (file.isFolder) {
       setMessage(
         (prev) =>
-          prev.substring(0, message.indexOf("@") + 1) + "folder-" + file.id
+          prev.substring(0, startPos) +
+          `@folder-${file.id} ` +
+          prev.substring(endPos)
       );
     } else {
       setMessage(
-        (prev) => prev.substring(0, message.indexOf("@") + 1) + file.id
+        (prev) =>
+          prev.substring(0, startPos) + `@${file.id} ` + prev.substring(endPos)
       );
     }
 
@@ -174,6 +182,7 @@ const ChatFooter = ({
     <div className="chat-panel-footer-container">
       <div ref={inputBlockRef} className="chat-panel-footer_input-block">
         <textarea
+          ref={textAreaRef}
           className="chat-panel-footer_input"
           value={message}
           onChange={onChangeMessage}

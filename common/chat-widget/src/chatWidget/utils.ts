@@ -33,3 +33,29 @@ export function extractMessageFromOutput(output: {
   if (type === "object") return message.text;
   return "Unknown message structure";
 }
+
+export function getCurrentWordAtCursor(textarea: HTMLTextAreaElement) {
+  // Get the text and cursor position
+  const text = textarea.value;
+  const cursorPos = textarea.selectionStart;
+
+  // Define word boundaries (spaces, punctuation, etc.)
+  const wordBoundaries = /\s|[.,!?;:()[\]{}'"]/;
+
+  // Find the start of the current word
+  let startPos = cursorPos;
+  while (startPos > 0 && !wordBoundaries.test(text.charAt(startPos - 1))) {
+    startPos--;
+  }
+
+  // Find the end of the current word
+  let endPos = cursorPos;
+  while (endPos < text.length && !wordBoundaries.test(text.charAt(endPos))) {
+    endPos++;
+  }
+
+  // Extract the word
+  const currentWord = text.substring(startPos, endPos);
+
+  return { currentWord, startPos, endPos };
+}

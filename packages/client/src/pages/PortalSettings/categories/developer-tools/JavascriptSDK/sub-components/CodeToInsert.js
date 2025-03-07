@@ -26,25 +26,111 @@
 
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Text } from "@docspace/shared/components/text";
+import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 import CodeBlock from "./CodeBlock";
 
 import { CategorySubHeader, CodeWrapper } from "../presets/StyledPresets";
 
-export const CodeToInsert = ({ t, codeBlock, config, theme }) => (
-  <CodeWrapper height="fit-content">
-    <CategorySubHeader className="copy-window-code">
-      {`HTML ${t("CodeTitle")}`}
-    </CategorySubHeader>
-    <Text lineHeight="20px" className="preview-description">
-      {t("HtmlCodeDescription", { productName: t("Common:ProductName") })}
-    </Text>
-    <Textarea value={codeBlock} heightTextArea={153} isReadOnly enableCopy />
-    <CategorySubHeader className="copy-window-code">
-      {`JavaScript ${t("CodeTitle")}`}
-    </CategorySubHeader>
-    <Text lineHeight="20px" className="preview-description">
-      {t("JavaScriptCodeDescription", { productName: t("Common:ProductName") })}
-    </Text>
-    <CodeBlock config={config} theme={theme} />
-  </CodeWrapper>
-);
+export const CodeToInsert = ({ t, codeBlock, config, theme }) => {
+  const html = (
+    <CodeWrapper height="fit-content">
+      <CategorySubHeader className="copy-window-code">
+        {`HTML ${t("CodeTitle")}`}
+      </CategorySubHeader>
+      <Text lineHeight="20px" className="preview-description">
+        {t("HtmlCodeDescription", { productName: t("Common:ProductName") })}
+      </Text>
+      <Textarea value={codeBlock} heightTextArea={153} isReadOnly enableCopy />
+    </CodeWrapper>
+  );
+  const js = (
+    <CodeWrapper height="fit-content">
+      <CategorySubHeader className="copy-window-code">
+        {`JavaScript ${t("CodeTitle")}`}
+      </CategorySubHeader>
+      <Text lineHeight="20px" className="preview-description">
+        {t("JavaScriptCodeDescription", {
+          productName: t("Common:ProductName"),
+        })}
+      </Text>
+      <CodeBlock config={config} theme={theme} />
+    </CodeWrapper>
+  );
+
+  const npm = (
+    <CodeWrapper height="fit-content">
+      <CategorySubHeader className="copy-window-code">NPM</CategorySubHeader>
+      <Text lineHeight="20px" className="preview-description">
+        NPM package description
+      </Text>
+      <Text lineHeight="20px" className="preview-description">
+        Install package from npm and save it to the package.json file with
+        --save:
+      </Text>
+      <Textarea
+        value="npm install --save @onlyoffice/docspace-sdk-js"
+        heightTextArea={32}
+        isReadOnly
+        enableCopy
+      />
+      <Text lineHeight="20px" className="preview-description">
+        Import SDK inside your application:
+      </Text>
+      <Textarea
+        value="import { SDK } from '@onlyoffice/docspace-sdk-js';"
+        heightTextArea={32}
+        isReadOnly
+        enableCopy
+      />
+      <Text lineHeight="20px" className="preview-description">
+        Create HTML element with id from config and inser it indide document
+        body for place SDK frame:
+      </Text>
+      <Textarea
+        value={`const container = document.createElement('div');
+        container.id = '${config.frameId}';
+        document.body.appendChild(container);`}
+        heightTextArea={68}
+        isReadOnly
+        enableCopy
+      />
+      <Text lineHeight="20px" className="preview-description">
+        Initialize SDK:
+      </Text>
+      <Textarea
+        value="const sdk = new SDK();"
+        heightTextArea={32}
+        isReadOnly
+        enableCopy
+      />
+      <Text lineHeight="20px" className="preview-description">
+        Create frame with following config:
+      </Text>
+      <Textarea
+        value={`sdk.init({${JSON.stringify(config)}})`}
+        heightTextArea={118}
+        isReadOnly
+        enableCopy
+      />
+    </CodeWrapper>
+  );
+
+  const tabs = [
+    {
+      id: "html",
+      name: "HTML",
+      content: html,
+    },
+    {
+      id: "js",
+      name: "JavaScript",
+      content: js,
+    },
+    {
+      id: "npm",
+      name: "NPM",
+      content: npm,
+    },
+  ];
+  return <Tabs type={TabsTypes.Secondary} items={tabs} />;
+};

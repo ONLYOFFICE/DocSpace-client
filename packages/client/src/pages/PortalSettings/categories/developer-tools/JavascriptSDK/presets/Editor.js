@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { Label } from "@docspace/shared/components/label";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
@@ -33,6 +33,12 @@ import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import SDK from "@onlyoffice/docspace-sdk-js";
 
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { loadScript } from "@docspace/shared/utils/common";
+import { ViewSelector } from "@docspace/shared/components/view-selector";
+
+import FromScriptUrl from "PUBLIC_DIR/images/code.react.svg?url";
+import FromLibUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
+
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import api from "@docspace/shared/api";
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
@@ -62,6 +68,8 @@ const Editor = (props) => {
 
   setDocumentTitle(t("JavascriptSdk"));
 
+  const [fromPackage, setFromPackage] = useState(true);
+
   const [config, setConfig] = useState({
     src: window.location.origin,
     mode: "editor",
@@ -71,19 +79,37 @@ const Editor = (props) => {
     init: false,
   });
 
-  const sdk = new SDK();
+  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
 
   const destroyFrame = () => {
-    sdk.frames[config.frameId]?.destroyFrame();
+    sdk?.frames[config.frameId]?.destroyFrame();
   };
 
   const initFrame = () => {
-    setTimeout(() => sdk.init(config), 10);
+    setTimeout(() => sdk?.init(config), 0);
   };
 
   useEffect(() => {
+    const script = document.getElementById("sdk-script");
+
+    if (!fromPackage && !script) {
+      loadScript(SDK_SCRIPT_URL, "sdk-script");
+    } else {
+      script?.remove();
+    }
+
+    return () => {
+      destroyFrame();
+      setTimeout(() => script?.remove(), 10);
+    };
+  }, [fromPackage]);
+
+  useEffect(() => {
     initFrame();
-    return () => destroyFrame();
+
+    return () => {
+      destroyFrame();
+    };
   });
 
   useEffect(() => {
@@ -112,6 +138,23 @@ const Editor = (props) => {
     });
   };
 
+  const surceSelectorData = [
+    {
+      id: "sdk-source-script",
+      value: "script",
+      icon: FromScriptUrl,
+    },
+    {
+      id: "sdk-source-lib",
+      value: "lib",
+      icon: FromLibUrl,
+    },
+  ];
+
+  const onChangeView = useCallback((view) => {
+    setFromPackage(view === "lib");
+  }, []);
+
   const preview = (
     <Frame
       width={
@@ -126,6 +169,12 @@ const Editor = (props) => {
       }
       targetId={config.frameId}
     >
+      <ViewSelector
+        onChangeView={onChangeView}
+        viewAs={fromPackage}
+        viewSettings={surceSelectorData}
+        style={{ position: "absolute", right: "8px", top: "8px", zIndex: 10 }}
+      />
       {config.id !== undefined ? (
         <div id={config.frameId} />
       ) : (

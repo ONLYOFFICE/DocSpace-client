@@ -36,7 +36,11 @@ import {
   ProtectedFileCategoryType,
 } from "./DownloadDialog.enums";
 
-export type TDownloadedFile = TFile & { checked?: boolean; format?: string };
+export type TDownloadedFile = TFile & {
+  checked?: boolean;
+  format?: string;
+  password?: string;
+};
 
 export type DownloadRowProps = {
   t: TTranslation;
@@ -94,4 +98,13 @@ export type PasswordContentProps = {
     password: string,
     type: ProtectedFileCategoryType,
   ) => void;
+};
+
+export type OnePasswordRowProps = {
+  item: TDownloadedFile;
+  getItemIcon: (item: TDownloadedFile) => React.ReactNode;
+  onDownload: (files: TDownloadedFile[]) => void;
+  downloadItems: TDownloadedFile[];
+  onClosePanel: VoidFunction;
+  visible: boolean;
 };

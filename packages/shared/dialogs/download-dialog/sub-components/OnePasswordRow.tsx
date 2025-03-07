@@ -26,51 +26,59 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useState, useRef, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 import ProtectedReactSvgUrl from "PUBLIC_DIR/images/icons/16/protected.react.svg?url";
 
-import { toastr } from "../../components/toast";
-import { ContextMenuButton } from "../../components/context-menu-button";
-import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
-import { Button } from "../../components/button";
-import { Text } from "../../components/text";
-import { SimulatePassword } from "../../components/simulate-password";
+import { toastr } from "../../../components/toast";
+import { ContextMenuButton } from "../../../components/context-menu-button";
+import { ModalDialog, ModalDialogType } from "../../../components/modal-dialog";
+import { Button, ButtonSize } from "../../../components/button";
+import { Text } from "../../../components/text";
+import { SimulatePassword } from "../../../components/simulate-password";
 
-import { StyledSinglePasswordFile } from "./StyledDownloadDialog";
+import { StyledSinglePasswordFile } from "../StyledDownloadDialog";
+import type { OnePasswordRowProps } from "../DownloadDialog.types";
 
-const OnePasswordRow = ({
+export const OnePasswordRow = ({
   item,
   getItemIcon,
   onDownload,
   downloadItems,
   onClosePanel,
   visible,
-}) => {
+}: OnePasswordRowProps) => {
   const [password, setPassword] = useState("");
   const { t } = useTranslation(["DownloadDialog", "Files", "Common"]);
   const inputRef = useRef(null);
 
-  const onChangePassword = (pwd) => {
+  const onChangePassword = (pwd: string) => {
     setPassword(pwd);
   };
 
-  const updateDownloadItem = (fileId, updates) => {
-    const files = [...downloadItems];
-    const itemToUpdate = files.find((f) => f.id === fileId);
-    Object.assign(itemToUpdate, updates);
-    return files;
-  };
+  const updateDownloadItem = useCallback(
+    (fileId: number, updates: { format?: string; password?: string }) => {
+      const files = [...downloadItems];
+      const itemToUpdate = files.find((f) => f.id === fileId);
+
+      if (itemToUpdate) {
+        Object.assign(itemToUpdate, updates);
+      }
+
+      return files;
+    },
+    [downloadItems],
+  );
 
   const onDowloadInOriginal = () => {
     const files = updateDownloadItem(item.id, { format: item.fileExst });
     onDownload(files);
   };
 
-  const onDownloadWithPassword = () => {
+  const onDownloadWithPassword = useCallback(() => {
     if (!password.trim().length) return;
 
     const files = updateDownloadItem(item.id, {
@@ -78,9 +86,9 @@ const OnePasswordRow = ({
     });
     toastr.clear();
     onDownload(files);
-  };
+  }, [item.id, onDownload, password, updateDownloadItem]);
 
-  const onRemoveFromDowload = () => {
+  const onRemoveFromDownload = () => {
     const fileId = item.id;
 
     const files = downloadItems.filter((f) => f.id !== fileId);
@@ -91,14 +99,17 @@ const OnePasswordRow = ({
     onDownload(files);
   };
 
-  const onKeyUp = (event) => {
-    event.stopPropagation();
-    event.preventDefault();
+  const onKeyUp = useCallback(
+    (event: KeyboardEvent) => {
+      event.stopPropagation();
+      event.preventDefault();
 
-    if (event.key === "Enter") {
-      onDownloadWithPassword();
-    }
-  };
+      if (event.key === "Enter") {
+        onDownloadWithPassword();
+      }
+    },
+    [onDownloadWithPassword],
+  );
 
   useEffect(() => {
     window.addEventListener("keyup", onKeyUp, true);
@@ -122,7 +133,7 @@ const OnePasswordRow = ({
       {
         key: "cancel-action",
         label: t("DownloadDialog:CancelDownload"),
-        onClick: onRemoveFromDowload,
+        onClick: onRemoveFromDownload,
         disabled: false,
         icon: ProtectedReactSvgUrl,
       },
@@ -167,7 +178,7 @@ const OnePasswordRow = ({
       <ModalDialog.Footer>
         <Button
           label={t("Common:ContinueButton")}
-          size="normal"
+          size={ButtonSize.normal}
           primary
           onClick={onDownloadWithPassword}
           isDisabled={!password.trim().length}
@@ -175,12 +186,11 @@ const OnePasswordRow = ({
         />
         <Button
           label={t("Common:CancelButton")}
-          size="normal"
-          onClick={onRemoveFromDowload}
+          size={ButtonSize.normal}
+          onClick={onRemoveFromDownload}
           scale
         />
       </ModalDialog.Footer>
     </ModalDialog>
   );
 };
-export default OnePasswordRow;

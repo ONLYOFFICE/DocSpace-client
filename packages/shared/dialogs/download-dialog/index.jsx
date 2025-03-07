@@ -39,7 +39,7 @@ import { toastr } from "../../components/toast";
 import { StyledBodyContent } from "./StyledDownloadDialog";
 import { DownloadContent } from "./sub-components/DownloadContent";
 import { PasswordContent } from "./sub-components/PasswordContent";
-import OnePasswordRow from "./OnePasswordRow";
+import { OnePasswordRow } from "./sub-components/OnePasswordRow";
 
 const LoadingPlaceholder = () => <div style={{ width: "96px" }} />;
 

@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -116,7 +116,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     "Translations",
   ]);
 
-  const getErrorsTranslation = () => {
+  const getErrorsTranslation = useCallback(() => {
     const passwordError = (
       <Trans
         t={t}
@@ -132,9 +132,9 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     };
 
     return translations;
-  };
+  }, [t]);
 
-  const onClose = () => {
+  const onClose = useCallback(() => {
     setSortedPasswordFiles({
       other: [],
       password: [],
@@ -143,16 +143,26 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     });
 
     setDownloadDialogVisible(false);
-  };
+  }, [setDownloadDialogVisible, setSortedPasswordFiles]);
 
-  const onDownloadFunction = (itemList?: TDownloadedFile[]) => {
-    const files = itemList ?? downloadItems;
-    const [fileConvertIds, folderIds] = getDownloadItems(files, t);
-    downloadFiles(fileConvertIds, folderIds, getErrorsTranslation());
-    onClose();
-  };
+  const onDownloadFunction = useCallback(
+    (itemList?: TDownloadedFile[]) => {
+      const files = itemList ?? downloadItems;
+      const [fileConvertIds, folderIds] = getDownloadItems(files, t);
+      downloadFiles(fileConvertIds, folderIds, getErrorsTranslation());
+      onClose();
+    },
+    [
+      downloadFiles,
+      downloadItems,
+      getDownloadItems,
+      getErrorsTranslation,
+      onClose,
+      t,
+    ],
+  );
 
-  const onDownload = () => {
+  const onDownload = useCallback(() => {
     const { documents, spreadsheets, presentations, masterForms, other } =
       state;
 
@@ -168,14 +178,14 @@ const DownloadDialog = (props: DownloadDialogProps) => {
       setDownloadItems(itemList);
       onDownloadFunction(itemList);
     }
-  };
+  }, [onDownloadFunction, setDownloadItems, state]);
 
-  const onReDownload = () => {
+  const onReDownload = useCallback(() => {
     if (downloadItems.length > 0 && isAllPasswordFilesSorted) {
       toastr.clear();
       onDownloadFunction();
     }
-  };
+  }, [downloadItems.length, isAllPasswordFilesSorted, onDownloadFunction]);
 
   const getNewArrayFiles = (
     fileId: number,
@@ -307,7 +317,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     }
   };
 
-  const getCheckedFileLength = () => {
+  const getCheckedFileLength = useCallback(() => {
     const { documents, spreadsheets, presentations, masterForms, other } =
       state;
 
@@ -318,20 +328,29 @@ const DownloadDialog = (props: DownloadDialogProps) => {
       masterForms.files.filter((f) => f.checked).length +
       other.files.filter((f) => f.checked).length
     );
-  };
+  }, [state]);
 
-  const handleKeyUp = (event: KeyboardEvent) => {
-    if (event.key === "Enter" && needPassword) {
-      if (!isAllPasswordFilesSorted) return;
+  const handleKeyUp = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Enter" && needPassword) {
+        if (!isAllPasswordFilesSorted) return;
 
-      onReDownload();
-      return;
-    }
+        onReDownload();
+        return;
+      }
 
-    if (event.key === "Enter" && getCheckedFileLength() > 0) {
-      onDownload();
-    }
-  };
+      if (event.key === "Enter" && getCheckedFileLength() > 0) {
+        onDownload();
+      }
+    },
+    [
+      getCheckedFileLength,
+      isAllPasswordFilesSorted,
+      needPassword,
+      onDownload,
+      onReDownload,
+    ],
+  );
 
   const interruptingConversion = () => {
     setSortedPasswordFiles({
@@ -394,7 +413,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     return () => {
       document.removeEventListener("keyup", handleKeyUp);
     };
-  }, []);
+  }, [handleKeyUp]);
 
   const mainContent = (
     <>

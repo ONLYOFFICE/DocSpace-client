@@ -385,7 +385,10 @@ export type TDocServiceLocation = {
   docServiceUrl: string;
   docServiceUrlInternal: string;
   docServicePortalUrl: string;
+  docServiceSignatureHeader: string;
+  docServiceSignatureSecret: string;
   isDefault: boolean;
+  docServiceSslVerification: boolean;
 };
 
 export type TFileLink = {

@@ -77,7 +77,7 @@ export const CodeToInsert = ({ t, codeBlock, config, theme }) => {
         Import SDK inside your application:
       </Text>
       <Textarea
-        value="import { SDK } from '@onlyoffice/docspace-sdk-js';"
+        value="import SDK from '@onlyoffice/docspace-sdk-js';"
         heightTextArea={32}
         isReadOnly
         enableCopy

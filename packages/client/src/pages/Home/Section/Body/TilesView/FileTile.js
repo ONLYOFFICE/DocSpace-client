@@ -169,7 +169,6 @@ const FileTile = (props) => {
   );
 
   const commonProps = {
-    key: item.id,
     item,
     element,
     onSelect: onContentFileSelect,
@@ -197,6 +196,7 @@ const FileTile = (props) => {
   const fileTile = (
     <FileTileComponent
       {...commonProps}
+      key={item.id}
       temporaryIcon={temporaryIcon}
       thumbnail={thumbnailUrl}
       thumbSize={thumbSize}
@@ -210,6 +210,7 @@ const FileTile = (props) => {
   const roomTile = (
     <RoomTile
       {...commonProps}
+      key={item.id}
       selectTag={onSelectTag}
       selectOption={onSelectOption}
       columnCount={columnCount}
@@ -221,6 +222,7 @@ const FileTile = (props) => {
   const remplateTile = (
     <TemplateTile
       {...commonProps}
+      key={item.id}
       thumbnailClick={onFilesClick}
       openUser={onOpenUser}
       showStorageInfo={showStorageInfo}

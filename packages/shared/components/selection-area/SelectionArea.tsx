@@ -447,19 +447,24 @@ const SelectionArea = ({
       const itemsContainer =
         document.getElementsByClassName(itemsContainerClass);
 
-      if (!itemsContainer) return;
+      if (!itemsContainer?.length) return;
 
-      const itemsContainerRect = itemsContainer[0].getBoundingClientRect();
+      try {
+        const itemsContainerRect = itemsContainer[0].getBoundingClientRect();
 
-      if (scroll instanceof Element) {
-        if (!isRooms && viewAs === "tile") {
-          elemRect.current.top =
-            scroll.scrollTop + itemsContainerRect.top + folderHeaderHeight;
-          elemRect.current.left = scroll.scrollLeft + itemsContainerRect.left;
-        } else {
-          elemRect.current.top = scroll.scrollTop + itemsContainerRect.top;
-          elemRect.current.left = scroll.scrollLeft + itemsContainerRect.left;
+        if (scroll instanceof Element) {
+          if (!isRooms && viewAs === "tile") {
+            elemRect.current.top =
+              scroll.scrollTop + itemsContainerRect.top + folderHeaderHeight;
+            elemRect.current.left = scroll.scrollLeft + itemsContainerRect.left;
+          } else {
+            elemRect.current.top = scroll.scrollTop + itemsContainerRect.top;
+            elemRect.current.left = scroll.scrollLeft + itemsContainerRect.left;
+          }
         }
+      } catch (err) {
+        console.error("Error getting container bounds:", err);
+        return;
       }
 
       const newElemRect = itemsContainer[0]

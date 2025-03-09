@@ -86,7 +86,7 @@
   --badge-overflow: hidden;
   --badge-color: #{$white};
   --badge-background-color: var(--accent-main, #{$light-status-warning});
-  --badge-disable-background-color: var(--accent-main, #{$gray});
+  --badge-disable-background-color: #{$gray};
 
   --button-color-base: #{$black};
   --button-color-base-hover: #{$black};
@@ -424,7 +424,7 @@
   --backdrop-background-color: #{$blur-dark};
 
   --badge-background-color: var(--accent-main, #{$dark-status-warning});
-  --badge-disable-background-color: var(--accent-main, #{$gray-dark});
+  --badge-disable-background-color: #{$gray-dark-strong};
 
   --button-color-base: #{$white};
   --button-color-base-hover: #{$white};
@@ -1153,18 +1153,19 @@
 }
 
 .light {
-  --tag-background: #{$gray-light-mid};
+  --tag-background: #{$white};
   --tag-hover-background: #{$light-gray-selected};
-  --tag-disabled-background: #{$gray-light-mid};
+  --tag-active-background: #{$gray-light};
   --tag-new-background: #{$gray-light-mid};
   --tag-new-hover-background: #{$light-gray-hover};
-  --tag-deleted-background: #{$gray-light};
+  --tag-deleted-border: #{$gray-light-mid};
   --tag-color: #{$black};
   --tag-default-color: #{$black};
   --tag-deleted-color: #{$gray};
+  --tag-disabled-color: #{$gray};
+  --tag-disabled-border: 1px dashed #{$gray-strong};
+  --tag-border: 1px solid #{$gray-strong};
 
-  --tag-padding: 2px 10px;
-  --tag-margin-end: 4px;
   --tag-border-radius: 6px;
   --tag-icon-margin-start: 12px;
   --tag-dropdown-text-margin: 8px;
@@ -1178,15 +1179,18 @@
 }
 
 .dark {
-  --tag-background: #{$gray-dark-strong};
-  --tag-hover-background: #{$dark-gray-light};
-  --tag-disabled-background: #{$gray-dark};
+  --tag-background: #{$black};
+  --tag-hover-background: #{$gray-dark-strong};
+  --tag-active-background: #{$light-dark-gray-hover};
   --tag-new-background: #{$gray-dark-mid};
   --tag-new-hover-background: #{$light-dark-gray-hover};
-  --tag-deleted-background: #{$dark-gray-light};
+  --tag-deleted-border: #{$gray-dark-strong};
   --tag-color: #{$white};
   --tag-default-color: #{$gray};
-  --tag-deleted-color: #{$gray};
+  --tag-deleted-color: #{$gray-dark};
+  --tag-disabled-color: #{$gray-dark};
+  --tag-disabled-border: 1px dashed #{$gray-dark-strong};
+  --tag-border: 1px solid #{$gray-dark-strong};
 }
 
 .light {
@@ -1202,7 +1206,7 @@
 }
 
 .dark {
-  --tag-padding: 2px 10px;
+  --tag-padding: 1px 7px;
   --tag-margin-end: 4px;
   --tag-border-radius: 6px;
   --tag-icon-margin-start: 12px;
@@ -1929,6 +1933,16 @@
   --preview-tile-icon-border: 1px solid #{$gray-light-mid};
 }
 
+.light {
+  --storage-management-region-country-color: #{$black};
+  --storage-management-region-description-color: #{$light-gray-dark};
+}
+
+.dark {
+  --storage-management-region-country-color: #{$white};
+  --storage-management-region-description-color: #{$dark-gray-dark};
+}
+
 :global(.rtl) {
   --input-text-align: right;
   --input-direction: rtl;
@@ -1937,4 +1951,60 @@
 :global(.rtl) {
   --modal-dialog-content-transform-x: -100%;
   --toast-transform: translate3d(-150%, 0, 0);
+}
+
+.light {
+  --tile-background-color: #{$white};
+  --tile-border: 1px solid #{$gray-strong};
+  --tile-checked-background: #{$light-gray-hover};
+  --tile-icon-button-color: #{$gray};
+  --tile-background-badge-color: #{$white};
+  --tile-sub-text: #{$light-gray-dark};
+
+  --tile-ckeckbox-background: #{$white};
+  --tile-ckeckbox-border: #{$gray-strong};
+
+  --tile-tag-checked-background: #{$white};
+
+  --tile-container-sort-fill: #{$black};
+  --tile-container-sort-text: #{$black};
+
+  --tile-container-sort: #{$light-gray-dark};
+  --tile-container-hover-background: #{$gray-light};
+
+  --tile-show-hotkey-border: #{$light-second-main};
+  --tile-border-radius: 6px;
+  --tile-room-border-radius: 12px;
+  --tile-badge-shadow: 0px 2px 4px #{$badge-shadow};
+
+  --tile-icon-button-color: #{$gray};
+  --tile-icon-button-hover-color: #{$light-blue-main};
+}
+
+.dark {
+  --tile-background-color: #{$black};
+  --tile-border: 1px solid #{$gray-dark-strong};
+  --tile-checked-background: #{$light-dark-gray-hover};
+  --tile-icon-button-color: #{$gray-dark};
+  --tile-background-badge-color: #{$black};
+  --tile-sub-text: #{$gray-dark};
+
+  --tile-ckeckbox-background: #{$white};
+  --tile-ckeckbox-border: #{$gray-strong};
+
+  --tile-tag-checked-background: #{$light-dark-gray-hover};
+
+  --tile-container-sort-fill: #{$white};
+  --tile-container-sort-text: #{$white};
+
+  --tile-container-sort: #{$dark-gray-dark};
+  --tile-container-hover-background: #{$black};
+
+  --tile-show-hotkey-border: #{$light-second-main};
+  --tile-border-radius: 6px;
+  --tile-room-border-radius: 12px;
+  --tile-badge-shadow: 0px 2px 4px #{$badge-shadow};
+
+  --tile-icon-button-color: #{$gray};
+  --tile-icon-button-hover-color: #{$light-blue-main};
 }

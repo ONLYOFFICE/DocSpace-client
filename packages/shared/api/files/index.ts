@@ -1380,8 +1380,11 @@ export async function getDocumentServiceLocation(version?: number | string) {
 
 export async function changeDocumentServiceLocation(
   docServiceUrl: string,
+  secretKey: string,
+  authHeader: string,
   internalUrl: string,
   portalUrl: string,
+  sslVerification: boolean,
 ) {
   const res = (await request({
     method: "put",
@@ -1390,6 +1393,9 @@ export async function changeDocumentServiceLocation(
       DocServiceUrl: docServiceUrl,
       DocServiceUrlInternal: internalUrl,
       DocServiceUrlPortal: portalUrl,
+      DocServiceSignatureSecret: secretKey,
+      DocServiceSignatureHeader: authHeader,
+      DocServiceSslVerification: sslVerification,
     },
   })) as TDocServiceLocation;
 

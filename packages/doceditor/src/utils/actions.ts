@@ -231,6 +231,8 @@ export async function createFile(
 
     const fileRes = await fetch(createFile);
 
+    if (!fileRes.ok) console.log("fileRes", fileRes);
+
     if (fileRes.status === 401) {
       log.debug(`POST /files/${parentId}/file user auth failed`);
 
@@ -684,4 +686,29 @@ export async function getColorTheme() {
   const colorTheme = await res.json();
 
   return colorTheme.response as TGetColorTheme;
+}
+
+export async function getDeepLinkSettings() {
+  log.debug(`Start GET /settings/deeplink`);
+
+  const [getSettings] = createRequest(
+    [`/settings/deeplink`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getSettings);
+
+  if (!res.ok) {
+    const hdrs = headers();
+
+    const hostname = hdrs.get("x-forwarded-host");
+
+    log.error({ error: res, url: hostname }, "GET /settings/deeplink failed");
+    return;
+  }
+
+  const deepLinkSettings = await res.json();
+
+  return deepLinkSettings.response;
 }

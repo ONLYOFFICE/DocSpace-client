@@ -698,3 +698,9 @@ export enum FillingFormStatusHistory {
   SubmissionDate = 1,
   StopDate = 2,
 }
+
+export enum DeepLinkType {
+  Choice = 0,
+  Web = 1,
+  App = 2,
+}

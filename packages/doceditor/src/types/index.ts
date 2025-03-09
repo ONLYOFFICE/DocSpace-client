@@ -210,6 +210,7 @@ export type TResponse =
       fileId?: string;
       hash?: string;
       shareKey?: string;
+      deepLinkSettings?: number;
     }
   | {
       error: TError;
@@ -223,6 +224,7 @@ export type TResponse =
       fileId?: string;
       hash?: string;
       shareKey?: string;
+      deepLinkSettings?: number;
     };
 
 export type EditorProps = {

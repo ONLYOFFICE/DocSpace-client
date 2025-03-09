@@ -24,14 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { makeAutoObservable } from "mobx";
 import { getOperationsProgressTitle } from "SRC_DIR/helpers/filesUtils";
 
 class PrimaryProgressDataStore {
   disableUploadPanelOpen = false;
 
-  needErrorChecking = false;
+  needErrorChecking = [];
 
   primaryOperationsArray = [];
 
@@ -39,20 +38,16 @@ class PrimaryProgressDataStore {
     makeAutoObservable(this);
   }
 
+  get isErrorChecking() {
+    return this.needErrorChecking.length > 0;
+  }
+
   get isPrimaryProgressVisbile() {
     return this.primaryOperationsArray.length > 0;
   }
 
   setPrimaryProgressBarData = (primaryProgressData) => {
-    const {
-      operation,
-      disableUploadPanelOpen,
-      isSingleConversion,
-      ...progressInfo
-    } = primaryProgressData;
-
-    if (typeof disableUploadPanelOpen !== "undefined")
-      this.disableUploadPanelOpen = disableUploadPanelOpen;
+    const { operation, ...progressInfo } = primaryProgressData;
 
     const operationIndex = this.primaryOperationsArray.findIndex(
       (object) => object.operation === operation,
@@ -61,32 +56,20 @@ class PrimaryProgressDataStore {
     if (operationIndex !== -1) {
       const operationObject = this.primaryOperationsArray[operationIndex];
 
-      if (progressInfo.alert && !disableUploadPanelOpen) {
-        this.setNeedErrorChecking(true);
+      if (progressInfo.alert) {
+        this.setNeedErrorChecking(true, operation);
       }
 
       this.primaryOperationsArray[operationIndex] = {
         ...operationObject,
         ...progressInfo,
-        disableOpenPanel: disableUploadPanelOpen,
-        ...(operationObject.isSingleConversion !== isSingleConversion && {
-          label: isSingleConversion
-            ? getOperationsProgressTitle(OPERATIONS_NAME.convert)
-            : getOperationsProgressTitle(operation),
-        }),
-        isSingleConversion,
       };
     } else {
       const progress = {
         operation,
-        alert: progressInfo.alert,
         items: [progressInfo],
-        label: isSingleConversion
-          ? getOperationsProgressTitle(OPERATIONS_NAME.convert)
-          : getOperationsProgressTitle(operation),
-        completed: progressInfo.completed,
-        disableOpenPanel: disableUploadPanelOpen,
-        isSingleConversion,
+        label: getOperationsProgressTitle(operation),
+        ...progressInfo,
       };
 
       this.primaryOperationsArray = [...this.primaryOperationsArray, progress];
@@ -133,8 +116,22 @@ class PrimaryProgressDataStore {
     return this.primaryOperationsArray.some((op) => op.alert);
   }
 
-  setNeedErrorChecking = (needErrorChecking) => {
-    this.needErrorChecking = needErrorChecking;
+  setNeedErrorChecking = (needErrorChecking, operation) => {
+    if (operation) {
+      const existingErrorIndex = this.needErrorChecking.findIndex(
+        (err) => err === operation,
+      );
+
+      if (needErrorChecking && existingErrorIndex === -1) {
+        this.needErrorChecking.push(operation);
+      }
+
+      if (!needErrorChecking && existingErrorIndex !== -1) {
+        this.needErrorChecking.splice(existingErrorIndex, 1);
+      }
+    } else {
+      this.needErrorChecking = [];
+    }
   };
 }
 

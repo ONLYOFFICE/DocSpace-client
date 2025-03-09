@@ -27,8 +27,6 @@
   width: var(--main-container-width);
   min-width: 140px;
 
-  @include truncate;
-
   min-width: var(--row-content-main-wrapper-min-width);
   margin-top: var(--row-content-main-wrapper-margin-top);
   width: var(--row-content-main-wrapper-width);
@@ -75,11 +73,9 @@
 
 .tabletSideInfo {
   display: none;
-  display: block;
-  min-width: var(--row-content-side-info-min-width);
   @include truncate;
 
-  @include tablet {
+  @include tablet-and-below {
     display: block;
   }
 }

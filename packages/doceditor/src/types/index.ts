@@ -36,12 +36,15 @@ import {
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
-import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import {
+  HeaderProps,
+  TBreadCrumb,
+} from "@docspace/shared/components/selector/Selector.types";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
-  ShareAccessRights,
+  RoomsType,
   StartFillingMode,
 } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
@@ -242,13 +245,13 @@ export type EditorProps = {
   organizationName?: string;
 
   onDownloadAs?: (obj: object) => void;
+  openShareFormDialog?: () => void;
   onSDKRequestSharingSettings?: () => void;
   onSDKRequestSaveAs?: (event: object) => void;
   onSDKRequestInsertImage?: (event: object) => void;
   onSDKRequestSelectSpreadsheet?: (event: object) => void;
   onSDKRequestSelectDocument?: (event: object) => void;
   onSDKRequestReferenceSource?: (event: object) => void;
-  onSDKRequestStartFilling?: (haederLabel: string) => void;
   onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -423,10 +426,11 @@ export type TCatchError =
   | { message: string }
   | string;
 
-export type StartFillingSelectorDialogPprops = {
+export type StartFillingSelectorDialogProps = {
   fileInfo: TFile;
   isVisible: boolean;
   onClose: VoidFunction;
+  header: HeaderProps;
   headerLabel: string;
 
   getIsDisabled: (
@@ -455,6 +459,7 @@ export type StartFillingSelectorDialogPprops = {
   ) => Promise<void>;
 
   filesSettings: TFilesSettings;
+  createDefineRoomType: RoomsType;
 };
 
 export type ConflictStateType = {

@@ -43,6 +43,8 @@ const ShareFormDialog: FC<ShareFormDialogProps> = ({
   onClickVirtualDataRoom,
   visible,
   onClose,
+  container,
+  visibleContainer,
 }) => {
   const { t } = useTranslation("Common");
 
@@ -51,7 +53,9 @@ const ShareFormDialog: FC<ShareFormDialogProps> = ({
       visible={visible}
       displayType={ModalDialogType.aside}
       onClose={onClose}
+      containerVisible={visibleContainer}
     >
+      <ModalDialog.Container>{container}</ModalDialog.Container>
       <ModalDialog.Header>{t("Common:ShareToFillOut")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.container}>

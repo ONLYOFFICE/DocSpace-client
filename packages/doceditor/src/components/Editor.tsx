@@ -91,9 +91,9 @@ const Editor = ({
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
-  onSDKRequestStartFilling,
   onStartFillingVDRPanel,
   setFillingStatusDialogVisible,
+  openShareFormDialog,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
@@ -320,13 +320,12 @@ const Editor = ({
 
   if (config?.startFilling && !IS_ZOOM) {
     newConfig.events.onRequestStartFilling = (event: {}) => {
-
       switch (config.startFillingMode) {
         case StartFillingMode.ShareToFillOut:
-          onSDKRequestStartFilling?.(t("Common:ShareAndCollect"));
+          openShareFormDialog?.();
           break;
-      
-        case StartFillingMode.StartFilling :
+
+        case StartFillingMode.StartFilling:
           if (
             typeof event === "object" &&
             event !== null &&

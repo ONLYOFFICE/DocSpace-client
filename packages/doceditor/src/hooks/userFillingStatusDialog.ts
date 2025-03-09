@@ -39,7 +39,7 @@ export const useFillingStatusDialog = ({
   openDeleteFileDialog,
 }: TFillingStatusDialogProps) => {
   const [fillingStatusDialogVisible, setFillingStatusDialogVisible] =
-    useState(true);
+    useState(false);
 
   const onCloseFillingStatusDialog = () => {
     setFillingStatusDialogVisible(false);

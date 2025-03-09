@@ -63,6 +63,7 @@ import { useStopFillingDialog } from "@/hooks/useStopFillingDialog";
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import DeleteFileDialog from "./DeleteFileDialog";
 import { useDeleteFileDialog } from "@/hooks/useDeleteFileDialog";
+import { useShareFormDialog } from "@/hooks/useShareFormDialog";
 
 const DeepLink = dynamic(() => import("./deep-link"), {
   ssr: false,
@@ -76,15 +77,6 @@ const SelectFolderDialog = dynamic(() => import("./SelectFolderDialog"), {
 const SharingDialog = dynamic(() => import("./ShareDialog"), {
   ssr: false,
 });
-const StartFillingSelectorDialog = dynamic(
-  () => import("./StartFillingSelectDialog"),
-  {
-    ssr: false,
-  },
-);
-const ConflictResolveDialog = dynamic(() => import("./ConflictResolveDialog"), {
-  ssr: false,
-});
 
 const StartFillingPanel = dynamic(
   async () =>
@@ -96,6 +88,13 @@ const StartFillingPanel = dynamic(
     },
   },
 );
+
+const ShareFormDialog = dynamic(() => import("./ShareFormDialog"), {
+  ssr: false,
+  loading: () => {
+    return <DialogAsideSkeleton isPanel withFooterBorder={false} />;
+  },
+});
 
 const Root = ({
   settings,
@@ -178,22 +177,27 @@ const Root = ({
   } = useSelectFileDialog({ instanceId: instanceId ?? "" });
 
   const {
+    onCloseShareFormDialog,
+    openShareFormDialog,
+    shareFormDialogVisible,
+    onClickFormRoom,
+    onClickVirtualDataRoom,
+
     getIsDisabledStartFillingSelectDialog,
     isVisibleStartFillingSelectDialog,
     onCloseStartFillingSelectDialog,
     onSubmitStartFillingSelectDialog,
-    onSDKRequestStartFilling,
-    conflictDataDialog,
     headerLabelSFSDialog,
     onDownloadAs,
-  } = useStartFillingSelectDialog(fileInfo);
+    createDefineRoomType,
+  } = useShareFormDialog(fileInfo);
 
   const {
     isSharingDialogVisible,
 
     onCloseSharingDialog,
     onSDKRequestSharingSettings,
-  } = useShareDialog(config, onSDKRequestStartFilling);
+  } = useShareDialog(config, openShareFormDialog);
 
   const {
     roles,
@@ -307,10 +311,10 @@ const Root = ({
           onSDKRequestReferenceSource={onSDKRequestReferenceSource}
           onSDKRequestSelectDocument={onSDKRequestSelectDocument}
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
-          onSDKRequestStartFilling={onSDKRequestStartFilling}
           organizationName={organizationName}
           onStartFillingVDRPanel={onStartFillingVDRPanel}
           setFillingStatusDialogVisible={setFillingStatusDialogVisible}
+          openShareFormDialog={openShareFormDialog}
         />
       )}
 
@@ -347,22 +351,7 @@ const Root = ({
           onCancel={onCloseSharingDialog}
         />
       )}
-      {isVisibleStartFillingSelectDialog && fileInfo && (
-        <StartFillingSelectorDialog
-          fileInfo={fileInfo}
-          filesSettings={filesSettings}
-          headerLabel={headerLabelSFSDialog}
-          isVisible={
-            isVisibleStartFillingSelectDialog && !conflictDataDialog.visible
-          }
-          onClose={onCloseStartFillingSelectDialog}
-          onSubmit={onSubmitStartFillingSelectDialog}
-          getIsDisabled={getIsDisabledStartFillingSelectDialog}
-        />
-      )}
-      {conflictDataDialog.visible && (
-        <ConflictResolveDialog {...conflictDataDialog} />
-      )}
+
       {user && settings && fileInfo && startFillingPanelVisible && roomId && (
         <StartFillingPanel
           user={user}
@@ -399,6 +388,23 @@ const Root = ({
         <DeleteFileDialog
           onClose={onCloseDeleteFileDialog}
           onSubmit={onSubmitDeleteFile}
+        />
+      )}
+      {shareFormDialogVisible && fileInfo && (
+        <ShareFormDialog
+          file={fileInfo}
+          filesSettings={filesSettings}
+          createDefineRoomType={createDefineRoomType}
+          headerLabelSFSDialog={headerLabelSFSDialog}
+          onClose={onCloseShareFormDialog}
+          onClickFormRoom={onClickFormRoom}
+          onClickVirtualDataRoom={onClickVirtualDataRoom}
+          getIsDisabledStartFillingSelectDialog={
+            getIsDisabledStartFillingSelectDialog
+          }
+          onCloseStartFillingSelectDialog={onCloseStartFillingSelectDialog}
+          onSubmitStartFillingSelectDialog={onSubmitStartFillingSelectDialog}
+          isVisibleStartFillingSelectDialog={isVisibleStartFillingSelectDialog}
         />
       )}
     </div>

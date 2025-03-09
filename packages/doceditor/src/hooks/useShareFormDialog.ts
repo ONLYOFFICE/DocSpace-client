@@ -24,32 +24,62 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import useStartFillingSelectDialog from "./useStartFillingSelectDialog";
+import type { TFile } from "@docspace/shared/api/files/types";
+import { RoomsType } from "@docspace/shared/enums";
 
-import type { IInitialConfig } from "@/types";
+export const useShareFormDialog = (fileInfo: TFile | undefined) => {
+  const { t } = useTranslation(["Common"]);
 
-const useShareDialog = (
-  config: IInitialConfig | undefined,
-  openShareFormDialog: () => void,
-) => {
-  const [isVisible, setIsVisible] = React.useState(false);
+  const {
+    getIsDisabledStartFillingSelectDialog,
+    isVisibleStartFillingSelectDialog,
+    onCloseStartFillingSelectDialog,
+    onSubmitStartFillingSelectDialog,
+    onSDKRequestStartFilling,
+    conflictDataDialog,
+    headerLabelSFSDialog,
+    onDownloadAs,
+    createDefineRoomType,
+  } = useStartFillingSelectDialog(fileInfo);
 
-  const onSDKRequestSharingSettings = React.useCallback(() => {
-    if (config?.startFilling) return openShareFormDialog();
+  const [shareFormDialogVisible, setShareFormDialogVisible] = useState(false);
 
-    setIsVisible(true);
-  }, [config?.startFilling, openShareFormDialog]);
+  const onCloseShareFormDialog = () => {
+    setShareFormDialogVisible(false);
+  };
 
-  const onClose = React.useCallback(() => {
-    setIsVisible(false);
-  }, []);
+  const openShareFormDialog = () => {
+    setShareFormDialogVisible(true);
+  };
+
+  const onClickFormRoom = () => {
+    onSDKRequestStartFilling(t("Common:ShareAndCollect"));
+  };
+
+  const onClickVirtualDataRoom = () => {
+    onSDKRequestStartFilling(
+      t("Common:ShareAndCollect"),
+      RoomsType.VirtualDataRoom,
+    );
+  };
 
   return {
-    isSharingDialogVisible: isVisible,
-    onSDKRequestSharingSettings,
-    onCloseSharingDialog: onClose,
+    onClickFormRoom,
+    onClickVirtualDataRoom,
+    openShareFormDialog,
+    shareFormDialogVisible,
+    onCloseShareFormDialog,
+
+    getIsDisabledStartFillingSelectDialog,
+    isVisibleStartFillingSelectDialog,
+    onCloseStartFillingSelectDialog,
+    onSubmitStartFillingSelectDialog,
+    headerLabelSFSDialog,
+    onDownloadAs,
+    conflictDataDialog,
+    createDefineRoomType,
   };
 };
-
-export default useShareDialog;

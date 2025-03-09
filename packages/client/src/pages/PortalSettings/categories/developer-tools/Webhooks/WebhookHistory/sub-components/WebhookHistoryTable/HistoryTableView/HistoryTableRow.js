@@ -139,7 +139,7 @@ const HistoryTableRow = (props) => {
     ) {
       return;
     }
-    toggleEventId(item.id);
+    redirectToDetails();
   };
 
   const onCheckboxClick = () => {

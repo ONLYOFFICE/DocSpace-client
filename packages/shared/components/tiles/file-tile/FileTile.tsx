@@ -207,7 +207,7 @@ const FileTile = ({
         (e.target as HTMLElement).nodeName !== "svg"
       ) {
         if (setSelection) {
-          setSelection(false);
+          setSelection([]);
         }
       }
 

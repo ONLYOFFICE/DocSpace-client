@@ -54,7 +54,17 @@ export default async function Page({
   );
 
   const folderId = +(baseConfig.id ?? 0) || null;
-  const isRoomView = !folderId;
+
+  const [foldersTree, filesSettings] = await Promise.all([
+    getFoldersTree(),
+    getFilesSettings(),
+  ]);
+
+  const roomsID = foldersTree.find(
+    (i) => i.rootFolderType === FolderType.Rooms,
+  )?.id;
+
+  const isRoomView = folderId === roomsID;
 
   const filter = isRoomView
     ? { ...RoomsFilter.getDefault(), searchArea: RoomSearchArea.Active }
@@ -63,13 +73,9 @@ export default async function Page({
   filter.page = 0;
   filter.pageCount = PAGE_COUNT;
 
-  const [foldersTree, filesSettings, itemsList] = await Promise.all([
-    getFoldersTree(),
-    getFilesSettings(),
-    isRoomView
-      ? getRooms(filter as RoomsFilter)
-      : getFolder(folderId!, filter as FilesFilter),
-  ]);
+  const itemsList = isRoomView
+    ? await getRooms(filter as RoomsFilter)
+    : await getFolder(folderId!, filter as FilesFilter);
 
   const {
     folders = [],
@@ -90,7 +96,7 @@ export default async function Page({
     label: part.title,
     roomType: part?.roomType,
     isRoom: !folderId
-      ? true
+      ? part.id === roomsID
       : Boolean(index === 0 && part?.roomType !== undefined) ||
         roomsFolderId === part.id,
   }));
@@ -109,7 +115,7 @@ export default async function Page({
     rootFolderType,
     searchValue: "search" in filter ? filter.search : filter.filterValue,
     selectedItemId: current.id,
-    selectedItemType: (folderId ? "files" : "rooms") as "files" | "rooms",
+    selectedItemType: (isRoomView ? "rooms" : "files") as "files" | "rooms",
     total,
   };
 

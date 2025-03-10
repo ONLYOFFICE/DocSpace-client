@@ -20,6 +20,18 @@ jobs:
           services: tests-ci
           test-container: tests-ci
           test-command: npx playwright test
+  playwright:
+    name: "SDK e2e tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: adambirds/docker-compose-action@v1.5.0
+        with:
+          compose-file: packages/sdk/compose.yaml
+          up-flags: --build --force-recreate
+          services: tests-ci
+          test-container: tests-ci
+          test-command: npx playwright test
   eslint:
     name: "Lint tests"
     runs-on: ubuntu-latest

@@ -233,6 +233,7 @@ export const getConsentList = async (
 
   consentList.data.forEach(
     ({ client, invalidated, modified_at }: TConsentData) => {
+      if (!client) return;
       const consentClient: IClientResDTO = {
         ...client,
         client_secret: "",

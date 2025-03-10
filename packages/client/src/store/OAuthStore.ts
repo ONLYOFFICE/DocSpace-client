@@ -239,13 +239,11 @@ class OAuthStore {
         const user = users.find((u) => u.id === client.createdBy);
 
         if (user) {
-          client.createdBy = user.id;
           client.creatorAvatar = user.avatarSmall;
           client.creatorDisplayName = user.displayName;
         }
 
         if (client.createdBy === id) {
-          client.createdBy = id;
           client.creatorAvatar = avatarSmall;
           client.creatorDisplayName = displayName;
         }
@@ -288,23 +286,24 @@ class OAuthStore {
       PAGE_LIMIT,
     );
 
-    const { email, displayName, avatarSmall } = this.userStore!.user!;
+    const { id, displayName, avatarSmall } = this.userStore!.user!;
 
     const newUsers = clientList.data
       .filter(
         (c) =>
-          c.createdBy !== email ||
+          c.createdBy !== id ||
           !this.clientList.find((cl) => cl.createdBy === c.createdBy),
       )
-      .map((c) => c.createdBy);
+      .map((c) => c.createdBy)
+      .filter((c, idx, arr) => arr.indexOf(c) === idx);
 
     const users = await Promise.all(
-      newUsers.map((u) => api.people.getUserByEmail(u)),
+      newUsers.map((u) => api.people.getUserById(u)),
     );
 
     clientList.data.forEach((client) => {
       const user =
-        users.find((u) => u.email === client.createdBy) ??
+        users.find((u) => u.id === client.createdBy) ??
         this.clientList.find((cl) => cl.createdBy === client.createdBy);
 
       if (user) {
@@ -314,8 +313,7 @@ class OAuthStore {
           "displayName" in user ? user.displayName : user.creatorDisplayName;
       }
 
-      if (client.createdBy === email) {
-        client.createdBy = email;
+      if (client.createdBy === id) {
         client.creatorAvatar = avatarSmall;
         client.creatorDisplayName = displayName;
       }

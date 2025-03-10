@@ -33,7 +33,6 @@ import { Trans, useTranslation } from "react-i18next";
 import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 import { Text } from "../../components/text";
 import { Button, ButtonSize } from "../../components/button";
-import { Scrollbar } from "../../components/scrollbar";
 import { toastr } from "../../components/toast";
 import type { TContextMenuValueTypeOnClick } from "../../components/context-menu/ContextMenu.types";
 
@@ -396,18 +395,6 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     getItemIcon,
   };
 
-  const totalItemsNum =
-    state.documents.files.length +
-    state.spreadsheets.files.length +
-    state.presentations.files.length +
-    state.masterForms.files.length +
-    state.other.files.length +
-    (state.documents.files.length > 1 ? 1 : 0) +
-    (state.spreadsheets.files.length > 1 ? 1 : 0) +
-    (state.presentations.files.length > 1 ? 1 : 0) +
-    (state.masterForms.files.length > 1 ? 1 : 0) +
-    (state.other.files.length > 1 ? 1 : 0);
-
   useEffect(() => {
     document.addEventListener("keyup", handleKeyUp);
     return () => {
@@ -512,12 +499,13 @@ const DownloadDialog = (props: DownloadDialogProps) => {
       autoMaxWidth
       isLarge
       isLoading={!tReady}
-      withBodyScroll={totalItemsNum > 11}
+      withBodyScroll
+      withoutPadding
     >
       <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
 
       <ModalDialog.Body>
-        <Scrollbar paddingAfterLastItem="0px">
+        <div className={styles.modalBody}>
           {needPassword ? (
             <PasswordContent
               getItemIcon={getItemIcon}
@@ -529,7 +517,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           ) : (
             mainContent
           )}
-        </Scrollbar>
+        </div>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>

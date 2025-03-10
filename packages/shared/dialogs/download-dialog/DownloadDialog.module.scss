@@ -28,6 +28,10 @@
 
 @import "../../styles/variables/index.scss";
 
+.modalBody {
+  padding-inline-start: 16px;
+}
+
 .downloadDialogBodyContent {
   margin-top: 24px;
   margin-bottom: 16px;

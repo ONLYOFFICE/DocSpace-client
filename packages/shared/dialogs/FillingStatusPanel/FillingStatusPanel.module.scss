@@ -58,14 +58,22 @@
 }
 
 .fileStatus {
-  font-size: 9px;
-  line-height: 12.5px;
-  padding: 0px 5px;
+  display: flex;
+  align-items: center;
+
+  height: 16px;
+  padding: 2px 5px;
   border-radius: 50px;
-  font-weight: 800;
+
+  box-sizing: border-box;
+
+  margin-inline-start: auto;
 
   span {
-    color: var(--file-status-color);
+    font-size: 9px;
+    line-height: 12px;
+    font-weight: 800;
+    color: white;
   }
 }
 

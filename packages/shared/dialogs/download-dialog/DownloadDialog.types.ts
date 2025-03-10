@@ -130,9 +130,6 @@ export type DownloadDialogProps = {
     itemList: TDownloadedFile[],
     t: TTranslation,
   ) => [TFileConvertId[], number[], string | null];
-  isAllPasswordFilesSorted: boolean;
-  needPassword: boolean;
-  isOnePasswordFile: boolean;
   sortedPasswordFiles: TDownloadedFile[];
   updateDownloadedFilePassword: (
     id: number,

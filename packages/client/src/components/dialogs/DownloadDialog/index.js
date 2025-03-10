@@ -59,14 +59,6 @@ export default inject(
 
     const { clearActiveOperations } = uploadDataStore;
 
-    const isAllPasswordFilesSorted = sortedDownloadFiles.other?.length === 0;
-    const needPassword = sortedPasswordFiles?.length > 0;
-
-    const isSortedFile =
-      sortedDownloadFiles?.remove?.length === 1 && downloadItems?.length === 1;
-
-    const isOnePasswordFile = !isSortedFile && downloadItems?.length === 1;
-
     return {
       sortedFiles,
       visible,
@@ -81,15 +73,12 @@ export default inject(
       sortedPasswordFiles,
 
       setSortedPasswordFiles,
-      isAllPasswordFilesSorted,
       clearActiveOperations,
       getDownloadItems,
       setDownloadItems,
       downloadItems,
       getIcon,
       getFolderIcon,
-      isOnePasswordFile,
-      needPassword,
 
       updateDownloadedFilePassword,
       sortedDownloadFiles,

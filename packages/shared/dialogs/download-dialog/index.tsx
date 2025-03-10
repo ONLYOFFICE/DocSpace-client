@@ -92,9 +92,6 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     downloadItems,
     downloadFiles,
     getDownloadItems,
-    isAllPasswordFilesSorted,
-    needPassword,
-    isOnePasswordFile,
     sortedPasswordFiles,
     updateDownloadedFilePassword,
     sortedDownloadFiles,
@@ -114,6 +111,12 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     "Common",
     "Translations",
   ]);
+
+  const isAllPasswordFilesSorted = sortedDownloadFiles.other?.length === 0;
+  const needPassword = sortedPasswordFiles?.length > 0;
+  const isLastItemSorted =
+    sortedDownloadFiles?.remove?.length === 1 && downloadItems?.length === 1;
+  const isOnePasswordFile = !isLastItemSorted && downloadItems?.length === 1;
 
   const getErrorsTranslation = useCallback(() => {
     const passwordError = (

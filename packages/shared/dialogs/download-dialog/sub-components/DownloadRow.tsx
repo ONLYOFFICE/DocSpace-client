@@ -58,7 +58,7 @@ export const DownloadRow = (props: DownloadRowProps) => {
           onChange={onRowSelect}
           isChecked={isChecked}
         />
-        <div className={styles.downloadDialogIconContatiner}>{element}</div>
+        <div className={styles.downloadDialogIconContainer}>{element}</div>
         <Text
           className={styles.downloadDialogTitle}
           truncate

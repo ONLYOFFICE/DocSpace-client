@@ -44,7 +44,7 @@ import {
   getOAuthJWTSignature,
   setOAuthJWTSignature,
 } from "@docspace/shared/api/oauth";
-import { getCookie, deleteCookie } from "@docspace/shared/utils";
+import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";

@@ -552,7 +552,7 @@ const ClientRoutes = [
     ],
   },
   {
-    path: "/sdk/:mode",
+    path: "/old-sdk/:mode",
     lazy: () => import("SRC_DIR/pages/Sdk"),
   },
   {

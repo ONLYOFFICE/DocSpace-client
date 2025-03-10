@@ -59,6 +59,18 @@ import {
   SUSPEND_PATH,
   suspendHandler,
 } from "./portal";
+import {
+  folderHandler,
+  PATH_FOLDER,
+  PATH_ROOMS_LIST,
+  roomListHandler,
+} from "./files";
+import {
+  HEADER_EMPTY_FOLDER,
+  HEADER_FILTERED_FOLDER,
+  HEADER_FILTERED_ROOMS_LIST,
+  HEADER_ROOMS_LIST,
+} from "../utils";
 
 export type TEndpoint = {
   url: string;
@@ -159,5 +171,35 @@ export const endpoints: TEndpoints = {
   deletePortal: {
     url: `${BASE_URL}${DELETE_PATH}`,
     dataHandler: deletePortalHandler,
+  },
+
+  roomList: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [HEADER_ROOMS_LIST]: "true" })),
+  },
+  filteredRoomList: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: () =>
+      roomListHandler(new Headers({ [HEADER_FILTERED_ROOMS_LIST]: "true" })),
+  },
+  emptyRoomList: {
+    url: `${BASE_URL}${PATH_ROOMS_LIST}`,
+    dataHandler: roomListHandler,
+  },
+
+  folder: {
+    url: `${BASE_URL}${PATH_FOLDER}`,
+    dataHandler: folderHandler,
+  },
+  filteredFolder: {
+    url: `${BASE_URL}${PATH_FOLDER}`,
+    dataHandler: () =>
+      folderHandler(new Headers({ [HEADER_FILTERED_FOLDER]: "true" })),
+  },
+  emptyFolder: {
+    url: `${BASE_URL}${PATH_FOLDER}`,
+    dataHandler: () =>
+      folderHandler(new Headers({ [HEADER_EMPTY_FOLDER]: "true" })),
   },
 };

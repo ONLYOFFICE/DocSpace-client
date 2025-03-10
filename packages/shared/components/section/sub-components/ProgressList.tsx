@@ -44,13 +44,13 @@ import { Operation } from "../Section.types";
 import { OPERATIONS_NAME } from "../../../constants";
 
 interface ProgressListProps {
-  secondaryOperations: Operation[];
-  primaryOperations: Operation[];
-  clearSecondaryProgressData: (
+  secondaryOperations?: Operation[];
+  primaryOperations?: Operation[];
+  clearSecondaryProgressData?: (
     operationId: string | null,
     operation: string,
   ) => void;
-  clearPrimaryProgressData: (
+  clearPrimaryProgressData?: (
     operationId: string | null,
     operation: string,
   ) => void;
@@ -105,7 +105,7 @@ const ProgressList = observer(
 
     return (
       <div className="progress-container">
-        {secondaryOperations.map((item) => (
+        {secondaryOperations?.map((item) => (
           <div
             key={`${item.operation}-${item.items?.[0]?.operationId ?? ""}-${item.completed}`}
             className="progress-list"
@@ -123,7 +123,7 @@ const ProgressList = observer(
             />
           </div>
         ))}
-        {primaryOperations.map((item) => (
+        {primaryOperations?.map((item) => (
           <div
             key={`${item.operation}`}
             className={`progress-list ${item.showPanel ? "withHover" : ""}`}

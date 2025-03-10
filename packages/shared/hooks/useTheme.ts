@@ -31,5 +31,5 @@ import { ThemeContext } from "../context/ThemeContext";
 export const useTheme = () => {
   const theme = useContext(ThemeContext);
 
-  return { theme, isBase: theme === "base" };
+  return { theme, isBase: theme === "Base" };
 };

@@ -26,14 +26,14 @@
 
 import React, { createContext } from "react";
 
-type TTheme = "base" | "dark";
+type TTheme = "Base" | "Dark";
 
 type ThemeProviderProps = {
   theme: TTheme;
   children: React.ReactNode;
 };
 
-export const ThemeContext = createContext<TTheme>("base");
+export const ThemeContext = createContext<TTheme>("Base");
 
 export const ThemeProvider = ({ theme, children }: ThemeProviderProps) => {
   return (

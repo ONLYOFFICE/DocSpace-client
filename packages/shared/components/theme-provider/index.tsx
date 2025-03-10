@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import React, { useEffect } from "react";
 import { ThemeProvider as Provider } from "styled-components";
 
@@ -98,7 +100,7 @@ export const ThemeProvider = ({
 
   return (
     <InterfaceDirectionProvider interfaceDirection={theme.interfaceDirection}>
-      <CustomThemeProvider theme={theme.isBase ? "base" : "dark"}>
+      <CustomThemeProvider theme={theme.isBase ? "Base" : "Dark"}>
         <Provider theme={{ ...theme, currentColorScheme }}>{children}</Provider>
       </CustomThemeProvider>
     </InterfaceDirectionProvider>

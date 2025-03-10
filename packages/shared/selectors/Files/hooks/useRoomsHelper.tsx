@@ -72,8 +72,9 @@ const useRoomsHelper = ({
   const {
     setIsNextPageLoading,
     setIsBreadCrumbsLoading,
-    isFirstLoad,
     setIsFirstLoad,
+
+    isFirstLoad,
   } = useContext(LoadersContext);
 
   const { addInputItem } = useInputItemHelper({ withCreate, setItems });
@@ -141,7 +142,6 @@ const useRoomsHelper = ({
       if (initRef.current) {
         const { title, id } = current;
 
-        // TODO: need unsubcribe
         if (isRoomsOnly) subscribe(id);
 
         const breadCrumbs: TBreadCrumb[] = [{ label: title, id, isRoom: true }];
@@ -218,27 +218,28 @@ const useRoomsHelper = ({
       setIsNextPageLoading,
       withCreate,
       searchValue,
+      createDefineRoomType,
+      t,
       setHasNextPage,
+      setSelectedItemSecurity,
       setIsRoot,
       setIsInit,
       setIsFirstLoad,
       isRoomsOnly,
+      subscribe,
       onSetBaseFolderPath,
       setBreadCrumbs,
       setIsBreadCrumbsLoading,
       setItems,
       setTotal,
       createDefineRoomLabel,
-      t,
-      createDefineRoomType,
       createDropDownItems,
-      addInputItem,
       setSelectedItemType,
       getRootData,
-      subscribe,
-      setSelectedItemSecurity,
+      addInputItem,
     ],
   );
+
   return { getRoomList };
 };
 

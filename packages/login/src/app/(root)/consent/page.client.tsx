@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { useRouter } from "next/navigation";
@@ -90,18 +90,10 @@ interface IConsentProps {
   scopes: TScope[];
   user: TUser;
   baseUrl?: string;
-  token: string;
   redirect_url: string;
 }
 
-const Consent = ({
-  client,
-  scopes,
-  user,
-  baseUrl,
-  token,
-  redirect_url,
-}: IConsentProps) => {
+const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
   const { t } = useTranslation(["Consent", "Common"]);
   const router = useRouter();
 
@@ -128,16 +120,10 @@ const Consent = ({
         clientState = c.replace("client_state=", "").trim();
     });
 
-    await api.oauth.onOAuthSubmit(clientId, clientState, scope, token);
+    await api.oauth.onOAuthSubmit(clientId, clientState, scope);
 
     setIsAllowRunning(false);
   };
-
-  useEffect(() => {
-    fetch(redirect_url, {
-      headers: { "X-Signature": token, "X-Disable-Redirect": "true" },
-    });
-  }, [redirect_url, token]);
 
   const onDenyClick = async () => {
     if (!("clientId" in client)) return;
@@ -159,7 +145,7 @@ const Consent = ({
 
     deleteCookie("client_state");
 
-    await api.oauth.onOAuthCancel(clientId, clientState, token);
+    await api.oauth.onOAuthCancel(clientId, clientState);
 
     setIsDenyRunning(false);
   };

@@ -204,12 +204,8 @@ export async function getUser() {
   return user.response as TUser;
 }
 
-export async function getScopeList(jwtToken: string) {
-  const [getScopeList] = createRequest(
-    [`/scopes`],
-    [["X-Signature", jwtToken]],
-    "GET",
-  );
+export async function getScopeList() {
+  const [getScopeList] = createRequest([`/scopes`], [["", ""]], "GET");
 
   const scopeList = IS_TEST ? scopesHandler() : await fetch(getScopeList);
 

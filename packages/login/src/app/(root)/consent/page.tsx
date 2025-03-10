@@ -33,8 +33,6 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import {
   getConfig,
   getOAuthClient,
-  getOauthJWTToken,
-  getPortal,
   getScopeList,
   getSettings,
   getUser,
@@ -50,16 +48,15 @@ async function Page({
 }) {
   const clientId = searchParams.clientId ?? searchParams.client_id;
 
-  const [user, settings, config, jwtToken] = await Promise.all([
+  const [user, settings, config] = await Promise.all([
     getUser(),
     getSettings(),
     getConfig(),
-    getOauthJWTToken(),
   ]);
 
   const [data, scopes] = await Promise.all([
     getOAuthClient(clientId),
-    getScopeList(jwtToken),
+    getScopeList(),
   ]);
 
   const redirect_url = cookies().get("x-redirect-authorization-uri")!.value;
@@ -94,7 +91,6 @@ async function Page({
               scopes={scopes}
               user={user}
               baseUrl={config?.oauth2?.origin}
-              token={jwtToken}
               redirect_url={redirect_url}
             />
           </>

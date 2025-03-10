@@ -107,6 +107,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
   );
   const afterSearch = React.useRef(false);
   const ssrRendered = React.useRef(false);
+  const ssrTypeRendered = React.useRef(false);
 
   const withInitProps = withInit
     ? {
@@ -406,8 +407,8 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
   }, [currentFolderId, initSelectedItemId, setSelectedItemId]);
 
   React.useEffect(() => {
-    if (!ssrRendered.current) {
-      ssrRendered.current = true;
+    if (withInit && !ssrTypeRendered.current) {
+      ssrTypeRendered.current = true;
       return;
     }
 

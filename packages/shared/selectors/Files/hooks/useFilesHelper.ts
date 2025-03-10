@@ -124,7 +124,6 @@ const useFilesHelper = ({
 
   const getFileList = React.useCallback(
     async (sIndex: number) => {
-      console.log("call");
       if (requestRunning.current || filesSettingsLoading) return;
 
       requestRunning.current = true;

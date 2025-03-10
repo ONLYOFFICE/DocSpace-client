@@ -85,6 +85,9 @@ export const DownloadRow = (props: DownloadRowProps) => {
             hasScroll={isMobile()}
             withExpander
             manualWidth={isMobile() ? "148px" : undefined}
+            directionX="left"
+            isAside
+            withoutBackground
           >
             {file.format || t("OriginalFormat")}
           </LinkWithDropdown>

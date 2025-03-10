@@ -185,6 +185,9 @@ export const DownloadContent = (props: DownloadContentProps) => {
                 fontSize="13px"
                 fontWeight={600}
                 withExpander
+                directionX="left"
+                isAside
+                withoutBackground
               >
                 {titleFormat}
               </LinkWithDropdown>

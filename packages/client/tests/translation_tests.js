@@ -31,7 +31,7 @@ const ignoringCultures = require("./ignoringCultures.json");
 
 const isModel = !!process.env.MODEL;
 
-const cultures = isModel ? ["en"] : config.web.cultures.split(",");
+const cultures = isModel ? ["en"] : config.web.cultures;
 
 const settingsTranslationFile = `settingsTranslation`;
 

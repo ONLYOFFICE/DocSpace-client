@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -172,7 +172,7 @@ const SubmitToFormGallery = ({
           </Trans>
         </div>
 
-        {formItem && (
+        {formItem ? (
           <Styled.FormItem>
             <ReactSVG className="icon" src={getIcon(32, formItem.fileExst)} />
             <div className="item-title">
@@ -192,7 +192,7 @@ const SubmitToFormGallery = ({
               )}
             </div>
           </Styled.FormItem>
-        )}
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         {!formItem ? (

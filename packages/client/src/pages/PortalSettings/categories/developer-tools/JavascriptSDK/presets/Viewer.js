@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,6 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
 import { Label } from "@docspace/shared/components/label";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { inject, observer } from "mobx-react";
@@ -56,10 +55,10 @@ import {
   Container,
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
-import { Integration } from "../sub-components/Integration";
+import Integration from "../sub-components/Integration";
 
 const Viewer = (props) => {
-  const { t, theme, currentColorScheme } = props;
+  const { t, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -129,7 +128,7 @@ const Viewer = (props) => {
       targetId={config.frameId}
     >
       {config.id !== undefined ? (
-        <Box id={config.frameId} />
+        <div id={config.frameId} />
       ) : (
         <EmptyIframeContainer
           text={t("FilePreview")}
@@ -197,31 +196,20 @@ const Viewer = (props) => {
             />
           </ControlsSection>
 
-          <Integration
-            className="integration-examples"
-            t={t}
-            theme={theme}
-            currentColorScheme={currentColorScheme}
-          />
+          <Integration className="integration-examples" />
         </Controls>
       </Container>
 
-      <Integration
-        className="integration-examples integration-examples-bottom"
-        t={t}
-        theme={theme}
-        currentColorScheme={currentColorScheme}
-      />
+      <Integration className="integration-examples integration-examples-bottom" />
     </PresetWrapper>
   );
 };
 
 export const Component = inject(({ settingsStore }) => {
-  const { theme, currentColorScheme } = settingsStore;
+  const { theme } = settingsStore;
 
   return {
     theme,
-    currentColorScheme,
   };
 })(
   withTranslation([

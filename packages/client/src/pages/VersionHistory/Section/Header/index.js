@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,7 +26,7 @@
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import styled from "styled-components";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { desktop, tablet } from "@docspace/shared/utils";
 
@@ -71,9 +71,9 @@ const SectionHeaderContent = (props) => {
         className="arrow-button"
       />
 
-      <Headline className="headline-header" type="content" truncate>
+      <Heading className="headline-header" type="content" truncate>
         {title}
-      </Headline>
+      </Heading>
     </StyledContainer>
   );
 };

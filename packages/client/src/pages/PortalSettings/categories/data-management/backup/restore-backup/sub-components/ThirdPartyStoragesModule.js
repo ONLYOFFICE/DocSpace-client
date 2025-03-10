@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -164,18 +164,18 @@ class ThirdPartyStoragesModule extends React.PureComponent {
           className="backup_combo"
         />
 
-        {selectedStorageId === GoogleId && (
+        {selectedStorageId === GoogleId ? (
           <GoogleCloudStorage {...commonProps} {...this.props} />
-        )}
-        {selectedStorageId === RackspaceId && (
+        ) : null}
+        {selectedStorageId === RackspaceId ? (
           <RackspaceStorage {...commonProps} {...this.props} />
-        )}
-        {selectedStorageId === SelectelId && (
+        ) : null}
+        {selectedStorageId === SelectelId ? (
           <SelectelStorage {...commonProps} {...this.props} />
-        )}
-        {selectedStorageId === AmazonId && (
+        ) : null}
+        {selectedStorageId === AmazonId ? (
           <AmazonStorage {...commonProps} {...this.props} />
-        )}
+        ) : null}
       </>
     );
   }

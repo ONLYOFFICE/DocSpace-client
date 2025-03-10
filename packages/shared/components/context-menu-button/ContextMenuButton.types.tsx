@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,9 +32,9 @@ export interface ContextMenuButtonProps {
   /** Sets the button to present an opened state */
   opened?: boolean;
   /** Array of options for display */
-  data: ContextMenuModel[];
+  data?: ContextMenuModel[];
   /** Function for converting to inner data */
-  getData: () => ContextMenuModel[];
+  getData?: () => ContextMenuModel[];
   /** Specifies the icon title */
   title?: string;
   /** Specifies the icon name */

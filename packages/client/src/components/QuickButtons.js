@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,11 +27,12 @@
 import { isTablet as isTabletDevice } from "react-device-detect";
 
 import FileActionsLockedReactSvgUrl from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
-import FileActionsDownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import FileActionsDownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
 import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
+import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 
 import { useMemo } from "react";
 import styled from "styled-components";
@@ -83,6 +84,8 @@ const QuickButtons = (props) => {
     expiredDate,
     currentColorScheme,
     roomLifetime,
+    onCreateRoom,
+    isTemplatesFolder,
   } = props;
 
   const isMobile = currentDeviceType === DeviceType.mobile;
@@ -151,9 +154,9 @@ const QuickButtons = (props) => {
 
   return (
     <StyledQuickButtons className="badges additional-badges badges__quickButtons">
-      {!isIndexEditingMode && (
+      {!isIndexEditingMode ? (
         <>
-          {showLifetimeIcon && (
+          {showLifetimeIcon ? (
             <>
               <ColorTheme
                 themeId={ThemeId.IconButton}
@@ -173,9 +176,9 @@ const QuickButtons = (props) => {
                 maxWidth="300px"
               />
             </>
-          )}
+          ) : null}
 
-          {isAvailableLockFile && (
+          {isAvailableLockFile ? (
             <ColorTheme
               themeId={ThemeId.IconButton}
               iconName={iconLock}
@@ -189,8 +192,8 @@ const QuickButtons = (props) => {
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("UnblockVersion")}
             />
-          )}
-          {isAvailableDownloadFile && (
+          ) : null}
+          {isAvailableDownloadFile ? (
             <ColorTheme
               themeId={ThemeId.IconButton}
               iconName={FileActionsDownloadReactSvgUrl}
@@ -202,8 +205,21 @@ const QuickButtons = (props) => {
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("Common:Download")}
             />
-          )}
-          {showCopyLinkIcon && (
+          ) : null}
+          {isTemplatesFolder ? (
+            <ColorTheme
+              themeId={ThemeId.IconButton}
+              iconName={CreateRoomReactSvgUrl}
+              className="badge create-room icons-group"
+              size="medium"
+              onClick={onCreateRoom}
+              color={colorLock}
+              isDisabled={isDisabled}
+              hoverColor={theme.filesQuickButtons.sharedColor}
+              title={t("Files:CreateRoom")}
+            />
+          ) : null}
+          {showCopyLinkIcon ? (
             <ColorTheme
               themeId={ThemeId.IconButton}
               iconName={LinkReactSvgUrl}
@@ -215,8 +231,8 @@ const QuickButtons = (props) => {
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("Files:CopySharedLink")}
             />
-          )}
-          {isAvailableShareFile && (
+          ) : null}
+          {isAvailableShareFile ? (
             <ColorTheme
               themeId={ThemeId.IconButton}
               iconName={LinkReactSvgUrl}
@@ -230,23 +246,26 @@ const QuickButtons = (props) => {
               hoverColor={theme.filesQuickButtons.sharedColor}
               title={t("Files:CopySharedLink")}
             />
-          )}
+          ) : null}
           {/* {fileExst && !isTrashFolder && displayBadges && (
         <ColorTheme
           themeId={ThemeId.IconButton}
-          iconName={iconFavorite}
-          isFavorite={isFavorite}
-          className="favorite badge icons-group"
+          iconName={iconLock}
+          className="badge lock-file icons-group"
           size={sizeQuickButton}
           data-id={id}
-          data-title={title}
-          color={colorFavorite}
-          onClick={setFavorite}
-          hoverColor={theme.filesQuickButtons.hoverColor}
+          data-locked={locked ? true : false}
+          onClick={onClickLock}
+          color={colorLock}
+          isDisabled={isDisabled}
+          hoverColor={theme.filesQuickButtons.sharedColor}
+          title={t("UnblockVersion")}
         />
-      )} */}
-        </>
       )}
+
+ */}
+        </>
+      ) : null}
     </StyledQuickButtons>
   );
 };

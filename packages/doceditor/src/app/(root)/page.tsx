@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,7 +35,11 @@ import { getSelectorsByUserAgent } from "react-device-detect";
 
 import { ValidationStatus } from "@docspace/shared/enums";
 
-import { getData, validatePublicRoomKey } from "@/utils/actions";
+import {
+  getData,
+  validatePublicRoomKey,
+  getDeepLinkSettings,
+} from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
 
 import { RootPageProps } from "@/types";
@@ -145,6 +149,8 @@ async function Page({ searchParams }: RootPageProps) {
     type,
   );
 
+  const deepLinkSettings = await getDeepLinkSettings();
+
   if (data.error?.status === "not-found" && error) {
     data.error.message = error;
   }
@@ -180,9 +186,17 @@ async function Page({ searchParams }: RootPageProps) {
 
   return (
     <>
-      <Root {...data} shareKey={share} />
+      <Root
+        {...data}
+        shareKey={share}
+        deepLinkSettings={deepLinkSettings?.handlingMode}
+      />
       {url && (
-        <Script id="editor-api" strategy="beforeInteractive" src={docApiUrl} />
+        <Script
+          id="onlyoffice-api-script"
+          strategy="beforeInteractive"
+          src={docApiUrl}
+        />
       )}
     </>
   );

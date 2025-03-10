@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -55,9 +55,9 @@ class UserStore {
       user = window.__ASC_INITIAL_EDITOR_STATE__.user;
     else user = await api.people.getUser();
 
-    this.setUser(user);
+    this.setUser(user as TUser);
 
-    return user;
+    return user as TUser;
   };
 
   init = async (i18n?: TI18n, portalCultureName?: string) => {

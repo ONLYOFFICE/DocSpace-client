@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,18 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TUser } from "@docspace/shared/api/people/types";
-import type FirebaseHelper from "@docspace/shared/utils/firebase";
-import type { TColorScheme } from "@docspace/shared/themes";
-import type { DeviceType } from "@docspace/shared/enums";
+import type { TUser } from "../../api/people/types";
+import type FirebaseHelper from "../../utils/firebase";
+import type { TColorScheme } from "../../themes";
+import type { DeviceType } from "../../enums";
 
-export interface ErrorUnavailableProps {}
+export type ErrorUnavailableProps = Record<string, never>;
 
-export interface Error520Props {
+export type Error520Props = {
+  /** Error object containing details about the error that occurred */
   errorLog: Error;
+  /** Current user information */
   user: TUser;
+  /** Current version of the application */
   version: string;
+  /** Firebase helper instance for crash reporting */
   firebaseHelper: FirebaseHelper;
+  /** Optional color scheme for theming */
   currentColorScheme?: TColorScheme;
+  /** Current device type (desktop, mobile, etc.) */
   currentDeviceType: DeviceType;
-}
+};

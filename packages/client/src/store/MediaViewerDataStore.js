@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -48,6 +48,8 @@ class MediaViewerDataStore {
 
   publicRoomStore;
 
+  filesActionsStore;
+
   autoPlay = true;
 
   id = null;
@@ -60,11 +62,11 @@ class MediaViewerDataStore {
 
   prevPostionIndex = 0;
 
-  constructor(filesStore, publicRoomStore) {
+  constructor(filesStore, publicRoomStore, filesActionsStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
-
     this.publicRoomStore = publicRoomStore;
+    this.filesActionsStore = filesActionsStore;
   }
 
   setAutoPlay = (value) => {
@@ -146,7 +148,7 @@ class MediaViewerDataStore {
     return combineUrl(MEDIA_VIEW_URL, id);
   };
 
-  getFirstUrl = () => {
+  getFirstUrl = async () => {
     if (this.publicRoomStore.isPublicRoom) {
       const key = this.publicRoomStore.publicRoomKey;
       const filterObj = FilesFilter.getFilter(window.location);
@@ -156,7 +158,19 @@ class MediaViewerDataStore {
       return url;
     }
 
+    const { getPublicKey } = this.filesActionsStore;
+    const { bufferSelection } = this.filesStore;
+
     const filter = this.filesStore.filter;
+
+    const shareKey = await getPublicKey({
+      id: bufferSelection.folderId,
+      shared: bufferSelection.shared,
+      rootFolderType: bufferSelection.rootFolderType,
+      type: bufferSelection.type,
+    });
+
+    filter.key = shareKey;
 
     const queryParams = filter.toUrlParams();
 

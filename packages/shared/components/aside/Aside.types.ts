@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,66 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { AsideHeaderProps } from "../aside-header";
+
+/**
+ * Props for the Aside component.
+ */
 export type AsideProps = AsideHeaderProps & {
+  /** Controls the visibility of the aside panel */
   visible: boolean;
+  /** Enables scaling animation */
   scale?: boolean;
+  /** Additional CSS class names */
   className?: string;
-  contentPaddingBottom?: string;
+  /** Sets the z-index of the aside panel */
   zIndex?: number;
+  /** Content to be rendered inside the aside panel */
   children: React.ReactNode;
+  /** Disables body scroll when aside is open */
   withoutBodyScroll?: boolean;
+  /** Callback function when the aside is closed */
   onClose: () => void;
-
-  withoutHeader: boolean;
+  /** Removes the header section if true */
+  withoutHeader?: boolean;
 };
-
-interface AsideBased {
-  header?: string | React.ReactNode;
-  className?: string;
-  id?: string;
-  headerIcons?: { key: string; url: string; onClick: () => void }[];
-  style?: React.CSSProperties;
-  isLoading?: boolean;
-  withoutBorder?: boolean;
-  headerHeight?: string;
-}
-
-export type AsideHeaderProps =
-  | (AsideBased & {
-      isCloseable?: never;
-      onCloseClick?: never;
-
-      isBackButton?: never;
-      onBackClick?: never;
-    })
-  | (AsideBased & {
-      isCloseable: boolean;
-      onCloseClick: () => void;
-
-      isBackButton: boolean;
-      onBackClick: () => void;
-    })
-  | (AsideBased & {
-      isCloseable?: never;
-      onCloseClick?: never;
-
-      isBackButton: boolean;
-      onBackClick: () => void;
-    })
-  | (AsideBased & {
-      isCloseable: boolean;
-      onCloseClick: () => void;
-
-      isBackButton?: never;
-      onBackClick?: never;
-    });
-
-export interface StyledAsideProps {
-  visible: boolean;
-  scale?: boolean;
-  zIndex?: number;
-  contentPaddingBottom?: string;
-  forwardRef?: React.LegacyRef<HTMLElement>;
-  children: React.ReactNode;
-  className: string;
-}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,6 +32,8 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { EmployeeType } from "@docspace/shared/enums";
+import { getChangeTypeKey } from "./getChangeTypeKey";
 
 type ChangeUserTypeDialogProps = {
   visible: boolean;
@@ -47,6 +49,7 @@ type ChangeUserTypeDialogProps = {
 
   onClose: VoidFunction;
   onChangeUserType: VoidFunction;
+  toType: EmployeeType;
 };
 
 const ChangeUserTypeDialog = ({
@@ -58,27 +61,33 @@ const ChangeUserTypeDialog = ({
   userNames,
   onClose,
   onChangeUserType,
+  toType,
 }: ChangeUserTypeDialogProps) => {
   const { t } = useTranslation(["ChangeUserTypeDialog", "People", "Common"]);
 
-  const guestBody =
-    userNames.length === 1 ? (
-      <Trans
-        i18nKey="ChangeGuestsTypeMessage"
-        ns="ChangeUserTypeDialog"
-        t={t}
-        values={{
-          userName: userNames[0],
-          membersSection: t("Common:Members"),
-          documentsSection: t("Common:Documents"),
-        }}
-      />
-    ) : (
-      t("ChangeGuestsTypeMessageMulti", {
-        membersSection: t("Common:Members"),
-        documentsSection: t("Common:Documents"),
-      })
-    );
+  const isSingleUser = userNames.length === 1;
+  const translationValues = {
+    userName: isSingleUser ? userNames[0] : undefined,
+    membersSection: t("Common:Members"),
+    documentsSection: t("Common:Documents"),
+    productName: t("Common:ProductName"),
+    secondType,
+  };
+  const translationKey = getChangeTypeKey(
+    toType,
+    isSingleUser,
+    t,
+    translationValues,
+  );
+
+  const guestBody = (
+    <Trans
+      i18nKey={translationKey}
+      ns="ChangeUserTypeDialog"
+      t={t}
+      values={translationValues}
+    />
+  );
 
   return (
     <ModalDialog
@@ -109,10 +118,11 @@ const ChangeUserTypeDialog = ({
               values={{ secondType }}
             />
           )}{" "}
-          {!isGuestsDialog &&
-            t("ChangeUserTypeMessageWarning", {
-              productName: t("Common:ProductName"),
-            })}
+          {!isGuestsDialog
+            ? t("ChangeUserTypeMessageWarning", {
+                productName: t("Common:ProductName"),
+              })
+            : null}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>

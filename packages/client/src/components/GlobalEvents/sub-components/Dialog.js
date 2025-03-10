@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -33,7 +33,6 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Button } from "@docspace/shared/components/button";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Box } from "@docspace/shared/components/box";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 
 import { removeEmojiCharacters } from "SRC_DIR/helpers/utils";
@@ -174,25 +173,32 @@ const Dialog = ({
             maxLength={165}
           />
         </FieldContainer>
-        {isCreateDialog && extension && (
-          <Box displayProp="flex" alignItems="center" paddingProp="16px 0 0">
+        {isCreateDialog && extension ? (
+          <div
+            style={{
+              boxSizing: "border-box",
+              display: "flex",
+              alignItems: "center",
+              padding: "16px 0 0",
+            }}
+          >
             <Checkbox
               className="dont-ask-again"
               label={t("Common:DontAskAgain")}
               isChecked={isChecked}
               onChange={onChangeCheckbox}
             />
-          </Box>
-        )}
+          </div>
+        ) : null}
 
-        {options && (
+        {options ? (
           <ComboBox
             style={{ marginTop: "16px" }}
             options={options}
             selectedOption={selectedOption}
             onSelect={onSelect}
           />
-        )}
+        ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

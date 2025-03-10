@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -86,6 +86,7 @@ const ItemIcon = ({
   model,
   onChangeFile,
   className,
+  isTemplate,
 }) => {
   const isLoadedRoomIcon = !!logo;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
@@ -103,13 +104,15 @@ const ItemIcon = ({
           imgClassName={imgClassName || "react-svg-icon"}
           logo={isRoom ? logo : icon}
           badgeUrl={badgeUrl || ""}
+          isTemplate={isTemplate}
+          imgSrc={isRoom ? logo?.medium : icon}
           withEditing={withEditing}
           model={model}
           onChangeFile={onChangeFile}
           className={className}
         />
       </IconWrapper>
-      {isPrivacy && fileExst && <EncryptedFileIcon isEdit={false} />}
+      {isPrivacy && fileExst ? <EncryptedFileIcon isEdit={false} /> : null}
     </>
   );
 };

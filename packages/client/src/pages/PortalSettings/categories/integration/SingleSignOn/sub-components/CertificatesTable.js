@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -125,11 +125,13 @@ const CertificatesTable = (props) => {
   return (
     <StyledCertificatesTable>
       <div className="body">
-        {prefix === "idp" &&
-          idpCertificates.map((cert, index) => renderRow(cert, index))}
+        {prefix === "idp"
+          ? idpCertificates.map((cert, index) => renderRow(cert, index))
+          : null}
 
-        {prefix === "sp" &&
-          spCertificates.map((cert, index) => renderRow(cert, index))}
+        {prefix === "sp"
+          ? spCertificates.map((cert, index) => renderRow(cert, index))
+          : null}
       </div>
     </StyledCertificatesTable>
   );

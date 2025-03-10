@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,29 +26,43 @@
 
 import React from "react";
 
-export interface LabelProps {
-  /** Indicates that the field to which the label is attached is required to fill */
+export type LabelProps = {
+  /** Indicates if the field associated with this label is required */
   isRequired?: boolean;
-  /** Indicates that the field to which the label is attached is incorrect */
+
+  /** Indicates if the field associated with this label has an error state */
   error?: boolean;
-  /** Sets the 'display: inline-block' property */
+
+  /** When true, sets the label to display inline */
   isInline?: boolean;
-  /** Title */
+
+  /** Tooltip text shown on hover. Also used for accessibility */
   title?: string;
-  /** Disables word wrapping */
+
+  /** When true, truncates text that overflows with an ellipsis */
   truncate?: boolean;
-  /** The field ID to which the label is attached */
-  htmlFor: string;
-  /** Text or element */
+
+  /** HTML 'for' attribute that associates the label with a form control */
+  htmlFor?: string;
+
+  /** The label's text content. Can be a string or a React node */
   text?: string | React.ReactNode;
-  /** Sets the 'display' property */
+
+  /** CSS display property value */
   display?: string;
-  /** Class name */
+
+  /** Additional CSS class names */
   className?: string;
-  /** Accepts id */
+
+  /** HTML id attribute */
   id?: string;
-  /** Accepts css style */
+
+  /** Custom CSS styles */
   style?: React.CSSProperties;
+
+  /** Child elements to render inside the label */
   children?: React.ReactNode;
+
+  /** Maximum width for the tooltip */
   tooltipMaxWidth?: string;
-}
+};

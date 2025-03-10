@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -49,7 +49,6 @@ import {
   getUserTypeTranslation,
 } from "@docspace/shared/utils/common";
 import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
-import { Box } from "@docspace/shared/components/box";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
@@ -142,7 +141,7 @@ const GroupMember = ({
 
       <div className="user_body-wrapper">
         <div className="info">
-          <Box displayProp="flex" alignItems="center" gapProp="8px">
+          <div className="info-box">
             <Text
               className="name"
               data-tooltip-id={`userTooltip_${Math.random()}`}
@@ -150,8 +149,8 @@ const GroupMember = ({
             >
               {decode(user.displayName)}
             </Text>
-            {isExpect && <StyledSendClockIcon />}
-          </Box>
+            {isExpect ? <StyledSendClockIcon /> : null}
+          </div>
           <Text className="email" noSelect>
             <span dir="auto">{typeLabel}</span> |{" "}
             <span dir="ltr">{user.email}</span>
@@ -160,7 +159,7 @@ const GroupMember = ({
       </div>
 
       <div className="individual-rights-tooltip">
-        {hasIndividualRightsInRoom && (
+        {hasIndividualRightsInRoom ? (
           <HelpButton
             place="left"
             offsetRight={0}
@@ -171,10 +170,10 @@ const GroupMember = ({
               </Text>
             }
           />
-        )}
+        ) : null}
       </div>
 
-      {userRole && userRoleOptions && (
+      {userRole && userRoleOptions ? (
         <div className="role-wrapper">
           {member.canEditAccess ? (
             <ComboBox
@@ -204,7 +203,7 @@ const GroupMember = ({
             </Text>
           )}
         </div>
-      )}
+      ) : null}
     </Styled.GroupMember>
   );
 };

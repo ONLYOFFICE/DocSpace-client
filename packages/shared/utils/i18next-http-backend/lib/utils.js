@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,9 +28,10 @@
 /* eslint-disable no-restricted-syntax */
 const arr = [];
 const each = arr.forEach;
-const slice = arr.slice;
+const { slice } = arr;
 
-export function defaults(obj) {
+export function defaults(objProp) {
+  const obj = { ...objProp };
   each.call(slice.call(arguments, 1), (source) => {
     if (source) {
       for (const prop in source) {

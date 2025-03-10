@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,9 @@
 
 import React from "react";
 
-import { StyledRow, StyledBox } from "../Rows.styled";
 import { RectangleSkeleton, RectangleSkeletonProps } from "../../rectangle";
 import { CircleSkeleton } from "../../circle";
+import styles from "../Rows.module.scss";
 
 const RowSkeleton = ({
   id,
@@ -55,7 +55,12 @@ const RowSkeleton = ({
   } = rest;
 
   return (
-    <StyledRow id={id} className={className} style={style}>
+    <div
+      id={id}
+      className={`${className || ""} ${styles.row}`}
+      style={style}
+      data-testid="row-skeleton"
+    >
       {isRectangle ? (
         <RectangleSkeleton
           className="rectangle-content"
@@ -87,7 +92,7 @@ const RowSkeleton = ({
         />
       )}
 
-      <StyledBox className="row-content">
+      <div className={`${styles.box} row-content`}>
         <RectangleSkeleton
           className="first-row-content__mobile"
           title={title}
@@ -111,7 +116,7 @@ const RowSkeleton = ({
           speed={speed}
           animate={animate}
         />
-      </StyledBox>
+      </div>
 
       <RectangleSkeleton
         title={title}
@@ -125,7 +130,7 @@ const RowSkeleton = ({
         speed={speed}
         animate={animate}
       />
-    </StyledRow>
+    </div>
   );
 };
 

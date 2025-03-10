@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -117,6 +117,7 @@ export type TFile = {
   thumbnailUrl?: string;
   expired?: string;
   isForm?: boolean;
+  isFolder?: boolean;
 };
 
 export type TOpenEditRequest = {
@@ -191,6 +192,7 @@ export type TFolder = {
   roomType?: RoomsType;
   path?: TPathParts[];
   type?: FolderType;
+  isFolder?: boolean;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -383,7 +385,10 @@ export type TDocServiceLocation = {
   docServiceUrl: string;
   docServiceUrlInternal: string;
   docServicePortalUrl: string;
+  docServiceSignatureHeader: string;
+  docServiceSignatureSecret: string;
   isDefault: boolean;
+  docServiceSslVerification: boolean;
 };
 
 export type TFileLink = {

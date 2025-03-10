@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -143,6 +143,10 @@ class FilesSettingsStore {
 
   canSearchByContent = false;
 
+  hideConfirmRoomLifetime = false;
+
+  hideConfirmCancelOperation = false;
+
   constructor(
     thirdPartyStore,
     treeFoldersStore,
@@ -249,6 +253,13 @@ class FilesSettingsStore {
 
   setStoreForcesave = (val) => (this.storeForcesave = val);
 
+  setHideConfirmCancelOperation = (data) => {
+    api.files
+      .changeHideConfirmCancelOperation(data)
+      .then((res) => this.setFilesSetting("hideConfirmCancelOperation", res))
+      .catch((e) => toastr.error(e));
+  };
+
   setKeepNewFileName = (data) => {
     api.files
       .changeKeepNewFileName(data)
@@ -296,11 +307,21 @@ class FilesSettingsStore {
 
   getDocumentServiceLocation = () => api.files.getDocumentServiceLocation();
 
-  changeDocumentServiceLocation = (docServiceUrl, internalUrl, portalUrl) =>
+  changeDocumentServiceLocation = (
+    docServiceUrl,
+    secretKey,
+    authHeader,
+    internalUrl,
+    portalUrl,
+    sslVerification,
+  ) =>
     api.files.changeDocumentServiceLocation(
       docServiceUrl,
+      secretKey,
+      authHeader,
       internalUrl,
       portalUrl,
+      sslVerification,
     );
 
   setForcesave = (val) => (this.forcesave = val);
@@ -531,6 +552,15 @@ class FilesSettingsStore {
     const extension = ext.toLowerCase();
 
     return this.getIconUrl(extension, size);
+  };
+
+  hideConfirmRoomLifetimeSetting = (set) => {
+    return api.rooms
+      .hideConfirmRoomLifetime(set)
+      .then((res) => {
+        this.setFilesSetting("hideConfirmRoomLifetime", res);
+      })
+      .catch((e) => toastr.error(e));
   };
 
   get openOnNewPage() {

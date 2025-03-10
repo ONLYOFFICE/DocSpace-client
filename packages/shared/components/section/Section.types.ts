@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,19 +27,18 @@
 import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
 
-import { FloatingButtonIcons } from "../floating-button";
 import { ContextMenuModel } from "../context-menu";
 
-export interface SubInfoPanelHeaderProps {
+export type SubInfoPanelHeaderProps = {
   children: React.JSX.Element | null;
-}
+};
 
-export interface SubInfoPanelBodyProps {
+export type SubInfoPanelBodyProps = {
   children: React.JSX.Element | null;
   isInfoPanelScrollLocked?: boolean;
-}
+};
 
-export interface InfoPanelProps {
+export type InfoPanelProps = {
   children: React.ReactNode;
   isVisible?: boolean;
   isMobileHidden?: boolean;
@@ -48,15 +47,15 @@ export interface InfoPanelProps {
   anotherDialogOpen?: boolean;
   viewAs?: TViewAs;
   currentDeviceType?: DeviceType;
-}
+};
 
-export interface SectionBodyContentProps {
+export type SectionBodyContentProps = {
   children: React.ReactNode;
-}
+};
 
 export type TOnDrop = (acceptedFiles: File[]) => void;
 
-export interface SectionBodyProps {
+export type SectionBodyProps = {
   withScroll: boolean;
   autoFocus: boolean;
   onDrop?: TOnDrop;
@@ -66,88 +65,158 @@ export interface SectionBodyProps {
   settingsStudio: boolean;
   isFormGallery?: boolean;
   isDesktop?: boolean;
-  isIndexEditingMode?: boolean;
   currentDeviceType?: DeviceType;
   getContextModel?: () => ContextMenuModel[];
-}
+  pathname?: string;
+  isIndexEditingMode?: boolean;
+};
 
-export interface SectionContainerProps {
-  showTwoProgress?: boolean;
+export type SectionContainerProps = {
   isSectionHeaderAvailable: boolean;
   isInfoPanelVisible?: boolean;
   viewAs?: TViewAs;
   children: React.ReactNode;
   withBodyScroll: boolean;
   currentDeviceType?: DeviceType;
-}
+};
 
-export interface SectionFilterProps {
+export type SectionFilterProps = {
   children: React.ReactNode;
   className?: string;
   viewAs?: TViewAs;
-}
+};
 
-export interface SectionFooterProps {
+export type SectionFooterProps = {
   children: React.ReactNode;
-}
+};
 
-export interface SectionHeaderProps {
+export type SectionHeaderProps = {
   className: string;
   isFormGallery?: boolean;
   children: React.ReactNode;
-}
+};
 
-export interface SectionWarningProps {
+export type SectionWarningProps = {
   children: React.ReactNode;
-}
+};
 
-export interface SectionPagingProps {
+export type SectionSubmenuProps = {
   children: React.ReactNode;
+};
+
+export interface Operation {
+  operation: string;
+  label: string;
+  alert: boolean;
+  completed: boolean;
+  percent?: number;
+  withoutStatus?: boolean;
+  showPanel?: (open: boolean) => void;
+  withoutProgress?: boolean;
+  items?: Array<{
+    operationId: string;
+    percent: number;
+  }>;
 }
 
-export interface SectionSubmenuProps {
-  children: React.ReactNode;
+export interface OperationsProgressProps {
+  primaryActiveOperations?: Operation[];
+  secondaryActiveOperations?: Operation[];
+  operationsAlert?: boolean;
+  operationsCompleted?: boolean;
+  clearSecondaryProgressData: (
+    operationId?: string | null,
+    operation?: string | null,
+  ) => void;
+  clearPrimaryProgressData?: (operation?: string | null) => void;
+  cancelUpload?: (t: (key: string) => string) => void;
+  onOpenPanel?: () => void;
+  mainButtonVisible?: boolean;
+  needErrorChecking?: boolean;
+  showCancelButton?: boolean;
+  onCancelOperation?: (callback: () => void) => void;
 }
 
-export interface SectionProps {
-  children: React.JSX.Element[];
-  withBodyScroll?: boolean;
-  showPrimaryProgressBar?: boolean;
-  primaryProgressBarValue?: number;
-  showPrimaryButtonAlert?: boolean;
-  progressBarDropDownContent?: React.ReactNode;
-  primaryProgressBarIcon?: FloatingButtonIcons;
-  showSecondaryProgressBar?: boolean;
-  secondaryProgressBarValue?: number;
-  secondaryProgressBarIcon?: FloatingButtonIcons;
-  showSecondaryButtonAlert?: boolean;
-  onDrop?: TOnDrop;
-  uploadFiles?: boolean;
-  viewAs?: TViewAs;
-  onOpenUploadPanel?: () => void;
-  isTabletView?: boolean;
-  isHeaderVisible?: boolean;
-  isInfoPanelAvailable?: boolean;
-  settingsStudio?: boolean;
-  isEmptyPage?: boolean;
-  maintenanceExist?: boolean;
-  snackbarExist?: boolean;
-  showText?: boolean;
-  clearUploadedFilesHistory?: () => void;
-  isInfoPanelScrollLocked?: boolean;
-  isTrashFolder?: boolean;
-  isFormGallery?: boolean;
-  currentDeviceType?: DeviceType;
-  isInfoPanelVisible?: boolean;
-  setIsInfoPanelVisible?: (value: boolean) => void;
-  isMobileHidden?: boolean;
-  canDisplay?: boolean;
-  anotherDialogOpen?: boolean;
-  isDesktop?: boolean;
+export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
+  Omit<SectionSubmenuProps, "children"> &
+  Omit<SubInfoPanelBodyProps, "children"> &
+  Omit<SectionWarningProps, "children"> &
+  Omit<SectionFooterProps, "children"> &
+  Omit<SectionFilterProps, "children" | "className"> &
+  Omit<InfoPanelProps, "children" | "setIsVisible" | "isVisible"> &
+  Omit<SectionHeaderProps, "children" | "className"> &
+  Omit<SectionContainerProps, "children" | "isSectionHeaderAvailable"> &
+  Omit<
+    SectionBodyProps,
+    "children" | "isSectionHeaderAvailable" | "autoFocus" | "withScroll"
+  > & {
+    children: React.JSX.Element[];
+    progressBarDropDownContent?: React.ReactNode;
+    onOpenUploadPanel?: () => void;
+    isTabletView?: boolean;
+    isHeaderVisible?: boolean;
+    isInfoPanelAvailable?: boolean;
+    isEmptyPage?: boolean;
+    maintenanceExist?: boolean;
+    snackbarExist?: boolean;
+    showText?: boolean;
+    isTrashFolder?: boolean;
+    setIsInfoPanelVisible?: (value: boolean) => void;
+    secondaryOperationsCompleted?: boolean;
+    primaryOperationsCompleted?: boolean;
+    secondaryActiveOperations: Operation[];
+    primaryOperationsArray: Operation[];
+    clearSecondaryProgressData: (
+      operationId?: string | null,
+      operation?: string | null,
+    ) => void;
+    clearPrimaryProgressData: (operation?: string | null) => void;
+    cancelUpload?: (t: (key: string) => string) => void;
+    secondaryOperationsAlert?: boolean;
+    mainButtonVisible?: boolean;
+    primaryOperationsAlert?: boolean;
+    needErrorChecking?: boolean;
+    onCancelOperation?: (callback: () => void) => void;
+  };
+
+export type SectionContextMenuProps = {
   getContextModel?: () => ContextMenuModel[];
-  isIndexEditingMode?: boolean;
-}
+};
 
-export interface SectionContextMenuProps {
-  getContextModel: () => ContextMenuModel[];
+export interface ProgressBarMobileProps {
+  /** Display text for the progress bar */
+  label?: string;
+  /** Alert status */
+  alert?: boolean;
+  /** Status text to display */
+  status?: string;
+  /** Progress completion percentage */
+  percent?: number;
+  /** Controls visibility of the progress bar */
+  open?: boolean;
+  /** The function that facilitates hiding the button */
+  onCancel?: () => void;
+  /** Icon URL or component */
+  icon?: React.ReactNode;
+  /** The function called after the progress header is clicked */
+  onClickAction?: () => void;
+  /** The function that facilitates hiding the button */
+  hideButton?: () => void;
+  /** Changes the progress bar color, if set to true */
+  error?: boolean;
+  /** Hides the progress bar */
+  withoutProgress?: boolean;
+  /** Icon URL */
+  iconUrl?: string;
+  /** Indicates if the operation is completed */
+  completed?: boolean;
+  /** Callback function for clearing progress */
+  onClearProgress?: (operationId: string | null, operation: string) => void;
+  /** Unique identifier for the operation */
+  operationId?: string;
+  /** Type of operation */
+  operation?: string;
+  /** The function called after the progress header is clicked */
+  onOpenPanel?: () => void;
+  withoutStatus?: boolean;
 }

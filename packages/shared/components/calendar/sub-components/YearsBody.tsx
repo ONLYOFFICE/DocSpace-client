@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,10 @@
 
 import React from "react";
 
-import { CalendarContainer } from "../Calendar.styled";
+import classNames from "classnames";
 import { getCalendarYears, getYearElements } from "../utils";
 import { YearsProps } from "../Calendar.types";
+import styles from "../Calendar.module.scss";
 
 export const YearsBody = ({
   observedDate,
@@ -37,7 +38,6 @@ export const YearsBody = ({
   selectedDate,
   minDate,
   maxDate,
-  isMobile,
   isScroll,
 }: YearsProps) => {
   const years = getCalendarYears(observedDate);
@@ -48,12 +48,16 @@ export const YearsBody = ({
     selectedDate,
     minDate,
     maxDate,
-    isMobile,
   );
 
   return (
-    <CalendarContainer big isMobile={isMobile} isScroll={isScroll}>
+    <div
+      className={classNames(styles.calendarContainer, {
+        [styles.big]: true,
+        [styles.isScroll]: isScroll,
+      })}
+    >
       {yearElements}
-    </CalendarContainer>
+    </div>
   );
 };

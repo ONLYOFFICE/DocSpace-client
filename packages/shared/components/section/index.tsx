@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,7 +37,6 @@ import SubSectionHeader from "./sub-components/SectionHeader";
 import SubSectionFilter from "./sub-components/SectionFilter";
 import SubSectionBody from "./sub-components/SectionBody";
 import SubSectionBodyContent from "./sub-components/SectionBodyContent";
-import SubSectionPaging from "./sub-components/SectionPaging";
 import InfoPanel from "./sub-components/InfoPanel";
 import SubInfoPanelBody from "./sub-components/InfoPanelBody";
 import SubInfoPanelHeader from "./sub-components/InfoPanelHeader";
@@ -53,11 +52,11 @@ import {
   SECTION_HEADER_NAME,
   SECTION_INFO_PANEL_BODY_NAME,
   SECTION_INFO_PANEL_HEADER_NAME,
-  SECTION_PAGING_NAME,
   SECTION_WARNING_NAME,
   SECTION_SUBMENU_NAME,
 } from "./Section.constants";
 import { parseChildren } from "./Section.utils";
+import OperationsProgress from "./sub-components/OperationsProgress";
 
 export type { SectionProps };
 
@@ -72,9 +71,6 @@ SectionBody.displayName = SECTION_BODY_NAME;
 
 const SectionFooter = ({ children }: { children: React.ReactNode }) => null;
 SectionFooter.displayName = SECTION_FOOTER_NAME;
-
-const SectionPaging = ({ children }: { children: React.ReactNode }) => null;
-SectionPaging.displayName = SECTION_PAGING_NAME;
 
 const InfoPanelBody = ({ children }: { children: React.ReactNode }) => null;
 InfoPanelBody.displayName = SECTION_INFO_PANEL_BODY_NAME;
@@ -91,14 +87,6 @@ SectionSubmenu.displayName = SECTION_SUBMENU_NAME;
 const Section = (props: SectionProps) => {
   const {
     onDrop,
-    showPrimaryProgressBar,
-    primaryProgressBarIcon,
-    primaryProgressBarValue,
-    showPrimaryButtonAlert,
-    showSecondaryProgressBar,
-    secondaryProgressBarValue,
-    secondaryProgressBarIcon,
-    showSecondaryButtonAlert,
     uploadFiles,
     viewAs,
     withBodyScroll = true,
@@ -106,7 +94,6 @@ const Section = (props: SectionProps) => {
     onOpenUploadPanel,
     isInfoPanelAvailable = true,
     settingsStudio = false,
-    clearUploadedFilesHistory,
     isInfoPanelScrollLocked,
     isFormGallery,
     currentDeviceType,
@@ -118,6 +105,20 @@ const Section = (props: SectionProps) => {
     anotherDialogOpen,
     getContextModel,
     isIndexEditingMode,
+
+    pathname,
+    secondaryOperationsCompleted,
+    secondaryActiveOperations = [],
+    clearSecondaryProgressData,
+    primaryOperationsArray = [],
+    clearPrimaryProgressData,
+    primaryOperationsCompleted,
+    cancelUpload,
+    secondaryOperationsAlert,
+    mainButtonVisible,
+
+    primaryOperationsAlert,
+    needErrorChecking,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -133,7 +134,6 @@ const Section = (props: SectionProps) => {
     sectionFilterContent,
     sectionBodyContent,
     sectionFooterContent,
-    sectionPagingContent,
     sectionWarningContent,
     infoPanelBodyContent,
     infoPanelHeaderContent,
@@ -142,17 +142,13 @@ const Section = (props: SectionProps) => {
 
   const isSectionHeaderAvailable = !!sectionHeaderContent;
   const isSectionFilterAvailable = !!sectionFilterContent;
-  const isSectionPagingAvailable = !!sectionPagingContent;
   const isSectionSubmenuAvailable = !!sectionSubmenuContent;
   const isSectionBodyAvailable =
-    !!sectionBodyContent ||
-    isSectionFilterAvailable ||
-    isSectionPagingAvailable;
+    !!sectionBodyContent || isSectionFilterAvailable;
   const isSectionAvailable =
     isSectionHeaderAvailable ||
     isSectionFilterAvailable ||
-    isSectionBodyAvailable ||
-    isSectionPagingAvailable;
+    isSectionBodyAvailable;
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -197,8 +193,6 @@ const Section = (props: SectionProps) => {
     };
   }, [onResize]);
 
-  const showTwoProgress = showPrimaryProgressBar && showSecondaryProgressBar;
-
   const providerValue = useMemo(
     () => ({
       sectionWidth: sectionSize.width,
@@ -206,6 +200,28 @@ const Section = (props: SectionProps) => {
     }),
     [sectionSize.width, sectionSize.height],
   );
+
+  const isShowOperationButton =
+    secondaryActiveOperations?.length || primaryOperationsArray?.length;
+
+  const isCompletedOperations = () => {
+    if (
+      secondaryActiveOperations?.length > 0 &&
+      primaryOperationsArray?.length > 0 &&
+      secondaryActiveOperations.length + primaryOperationsArray.length > 1
+    )
+      return secondaryOperationsCompleted && primaryOperationsCompleted;
+
+    if (secondaryActiveOperations?.length > 0)
+      return secondaryOperationsCompleted;
+
+    return primaryOperationsCompleted;
+  };
+
+  const showCancelButton =
+    primaryOperationsArray.length > 0 &&
+    !primaryOperationsCompleted &&
+    primaryOperationsArray.some((op) => op.operation === "upload");
 
   return (
     isSectionAvailable && (
@@ -215,38 +231,34 @@ const Section = (props: SectionProps) => {
           ref={containerRef}
           isSectionHeaderAvailable={isSectionHeaderAvailable}
           isInfoPanelVisible={isInfoPanelVisible}
-          showTwoProgress={showTwoProgress}
           withBodyScroll={withBodyScroll}
           currentDeviceType={currentDeviceType}
         >
-          {currentDeviceType !== DeviceType.mobile && (
+          {currentDeviceType !== DeviceType.mobile ? (
             <div className="section-sticky-container">
-              {isSectionHeaderAvailable && (
+              {isSectionHeaderAvailable ? (
                 <SubSectionHeader
                   className="section-header_header"
                   isFormGallery={isFormGallery}
                 >
                   {sectionHeaderContent}
                 </SubSectionHeader>
-              )}
+              ) : null}
 
-              {isSectionSubmenuAvailable && (
+              {isSectionSubmenuAvailable ? (
                 <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
-              )}
+              ) : null}
 
               {isSectionFilterAvailable &&
-                currentDeviceType === DeviceType.desktop && (
-                  <SubSectionFilter
-                    className="section-header_filter"
-                    viewAs={viewAs}
-                  >
-                    {sectionFilterContent}
-                  </SubSectionFilter>
-                )}
+              currentDeviceType === DeviceType.desktop ? (
+                <SubSectionFilter className="section-header_filter">
+                  {sectionFilterContent}
+                </SubSectionFilter>
+              ) : null}
             </div>
-          )}
+          ) : null}
 
-          {isSectionBodyAvailable && (
+          {isSectionBodyAvailable ? (
             <SubSectionBody
               onDrop={onDrop}
               uploadFiles={uploadFiles}
@@ -258,86 +270,57 @@ const Section = (props: SectionProps) => {
               currentDeviceType={currentDeviceType}
               getContextModel={getContextModel}
               isIndexEditingMode={isIndexEditingMode}
+              pathname={pathname}
             >
               {isSectionHeaderAvailable &&
-                currentDeviceType === DeviceType.mobile && (
-                  <SubSectionHeader
-                    className="section-body_header"
-                    isFormGallery={isFormGallery}
-                  >
-                    {sectionHeaderContent}
-                  </SubSectionHeader>
-                )}
-              {currentDeviceType !== DeviceType.desktop && (
+              currentDeviceType === DeviceType.mobile ? (
+                <SubSectionHeader
+                  className="section-body_header"
+                  isFormGallery={isFormGallery}
+                >
+                  {sectionHeaderContent}
+                </SubSectionHeader>
+              ) : null}
+              {currentDeviceType !== DeviceType.desktop ? (
                 <SubSectionWarning>{sectionWarningContent}</SubSectionWarning>
-              )}
+              ) : null}
               {isSectionSubmenuAvailable &&
-                currentDeviceType === DeviceType.mobile && (
-                  <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
-                )}
+              currentDeviceType === DeviceType.mobile ? (
+                <SubSectionSubmenu>{sectionSubmenuContent}</SubSectionSubmenu>
+              ) : null}
               {isSectionFilterAvailable &&
-                currentDeviceType !== DeviceType.desktop && (
-                  <SubSectionFilter
-                    className="section-body_filter"
-                    viewAs={viewAs}
-                  >
-                    {sectionFilterContent}
-                  </SubSectionFilter>
-                )}
+              currentDeviceType !== DeviceType.desktop ? (
+                <SubSectionFilter className="section-body_filter">
+                  {sectionFilterContent}
+                </SubSectionFilter>
+              ) : null}
               <SubSectionBodyContent>
                 {sectionBodyContent}
               </SubSectionBodyContent>
               <SubSectionFooter>{sectionFooterContent}</SubSectionFooter>
-              {isSectionPagingAvailable && (
-                <SubSectionPaging>{sectionPagingContent}</SubSectionPaging>
-              )}
             </SubSectionBody>
-          )}
+          ) : null}
 
-          {currentDeviceType === DeviceType.desktop ? (
-            showTwoProgress ? (
-              <div className="progress-bar_container">
-                <FloatingButton
-                  className="layout-progress-bar"
-                  icon={primaryProgressBarIcon}
-                  percent={primaryProgressBarValue}
-                  alert={showPrimaryButtonAlert}
-                  onClick={onOpenUploadPanel}
-                  clearUploadedFilesHistory={clearUploadedFilesHistory}
-                />
-                <FloatingButton
-                  className="layout-progress-second-bar"
-                  icon={secondaryProgressBarIcon}
-                  percent={secondaryProgressBarValue}
-                  alert={showSecondaryButtonAlert}
-                  showTwoProgress={showTwoProgress}
-                />
-              </div>
-            ) : showPrimaryProgressBar && !showSecondaryProgressBar ? (
-              <div className="progress-bar_container">
-                <FloatingButton
-                  className="layout-progress-bar"
-                  icon={primaryProgressBarIcon}
-                  percent={primaryProgressBarValue}
-                  alert={showPrimaryButtonAlert}
-                  onClick={onOpenUploadPanel}
-                  clearUploadedFilesHistory={clearUploadedFilesHistory}
-                />
-              </div>
-            ) : !showPrimaryProgressBar && showSecondaryProgressBar ? (
-              <div className="progress-bar_container">
-                <FloatingButton
-                  className="layout-progress-bar"
-                  icon={secondaryProgressBarIcon}
-                  percent={secondaryProgressBarValue}
-                  alert={showSecondaryButtonAlert}
-                />
-              </div>
-            ) : null
+          {isShowOperationButton ? (
+            <OperationsProgress
+              clearSecondaryProgressData={clearSecondaryProgressData}
+              secondaryActiveOperations={secondaryActiveOperations}
+              operationsCompleted={isCompletedOperations()}
+              clearPrimaryProgressData={clearPrimaryProgressData}
+              operationsAlert={
+                primaryOperationsAlert || secondaryOperationsAlert
+              }
+              needErrorChecking={needErrorChecking}
+              primaryActiveOperations={primaryOperationsArray}
+              cancelUpload={cancelUpload}
+              onOpenPanel={onOpenUploadPanel}
+              mainButtonVisible={mainButtonVisible}
+              showCancelButton={showCancelButton}
+            />
           ) : null}
         </SectionContainer>
 
-        {isInfoPanelAvailable && (
+        {isInfoPanelAvailable ? (
           <InfoPanel
             isVisible={isInfoPanelVisible}
             setIsVisible={setIsInfoPanelVisible}
@@ -352,7 +335,7 @@ const Section = (props: SectionProps) => {
               {infoPanelBodyContent}
             </SubInfoPanelBody>
           </InfoPanel>
-        )}
+        ) : null}
       </Provider>
     )
   );
@@ -362,7 +345,6 @@ Section.SectionHeader = SectionHeader;
 Section.SectionFilter = SectionFilter;
 Section.SectionBody = SectionBody;
 Section.SectionFooter = SectionFooter;
-Section.SectionPaging = SectionPaging;
 Section.InfoPanelBody = InfoPanelBody;
 Section.InfoPanelHeader = InfoPanelHeader;
 Section.SectionWarning = SectionWarning;

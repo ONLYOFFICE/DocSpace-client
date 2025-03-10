@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,6 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import LdapFieldComponent from "./LdapFieldComponent";
 
@@ -85,7 +84,7 @@ const ConnectionSettings = (props) => {
   };
 
   return (
-    <Box className="ldap_connection-container">
+    <div className="ldap_connection-container">
       <div>
         <FieldContainer
           style={FIELD_STYLE}
@@ -198,7 +197,7 @@ const ConnectionSettings = (props) => {
           />
         </FieldContainer>
       </div>
-    </Box>
+    </div>
   );
 };
 

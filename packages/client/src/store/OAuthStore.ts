@@ -1,5 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
+import api from "@docspace/shared/api";
 import {
   changeClientStatus,
   regenerateSecret,
@@ -8,6 +9,8 @@ import {
   getScopeList,
   getConsentList,
   revokeUserClient,
+  getOAuthJWTSignature,
+  setOAuthJWTSignature,
 } from "@docspace/shared/api/oauth";
 import {
   IClientListProps,
@@ -30,7 +33,7 @@ import RevokeIconUrl from "PUBLIC_DIR/images/revoke.react.svg?url";
 import DeleteIconUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import SettingsIconUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 
-const PAGE_LIMIT = 100;
+const PAGE_LIMIT = 50;
 
 export type ViewAsType = "table" | "row";
 
@@ -87,10 +90,38 @@ class OAuthStore {
 
   revokeDialogVisible: boolean = false;
 
+  setJwtTokenRunning: boolean = false;
+
   constructor(userStore: UserStore) {
     this.userStore = userStore;
+
     makeAutoObservable(this);
   }
+
+  setJwtToken = async () => {
+    let cookieToken = getOAuthJWTSignature();
+
+    if (cookieToken) return;
+
+    if (this.setJwtTokenRunning) {
+      await new Promise((resolve) => {
+        setInterval(() => {
+          cookieToken = getOAuthJWTSignature();
+          if (cookieToken) resolve(cookieToken);
+        }, 100);
+      });
+
+      this.setJwtTokenRunning = false;
+
+      return;
+    }
+
+    this.setJwtTokenRunning = true;
+
+    await setOAuthJWTSignature();
+
+    this.setJwtTokenRunning = false;
+  };
 
   setRevokeDialogVisible = (value: boolean) => {
     this.revokeDialogVisible = value;
@@ -187,9 +218,36 @@ class OAuthStore {
   };
 
   fetchClients = async () => {
+    await this.setJwtToken();
+
     try {
       this.setClientsIsLoading(true);
       const clientList: IClientListProps = await getClientList(0, PAGE_LIMIT);
+
+      const { id, displayName, avatarSmall } = this.userStore!.user!;
+
+      const newUsers = clientList.data
+        .filter((c) => c.createdBy !== id)
+        .map((c) => c.createdBy)
+        .filter((c, idx, arr) => arr.indexOf(c) === idx);
+
+      const users = await Promise.all(
+        newUsers.map((u) => api.people.getUserById(u)),
+      );
+
+      clientList.data.forEach((client) => {
+        const user = users.find((u) => u.id === client.createdBy);
+
+        if (user) {
+          client.creatorAvatar = user.avatarSmall;
+          client.creatorDisplayName = user.displayName;
+        }
+
+        if (client.createdBy === id) {
+          client.creatorAvatar = avatarSmall;
+          client.creatorDisplayName = displayName;
+        }
+      });
 
       runInAction(() => {
         this.clients = [...clientList.data];
@@ -211,6 +269,8 @@ class OAuthStore {
   };
 
   fetchNextClients = async (startIndex: number) => {
+    await this.setJwtToken();
+
     if (this.clientsIsLoading) return;
 
     this.setClientsIsLoading(true);
@@ -226,6 +286,39 @@ class OAuthStore {
       PAGE_LIMIT,
     );
 
+    const { id, displayName, avatarSmall } = this.userStore!.user!;
+
+    const newUsers = clientList.data
+      .filter(
+        (c) =>
+          c.createdBy !== id ||
+          !this.clientList.find((cl) => cl.createdBy === c.createdBy),
+      )
+      .map((c) => c.createdBy)
+      .filter((c, idx, arr) => arr.indexOf(c) === idx);
+
+    const users = await Promise.all(
+      newUsers.map((u) => api.people.getUserById(u)),
+    );
+
+    clientList.data.forEach((client) => {
+      const user =
+        users.find((u) => u.id === client.createdBy) ??
+        this.clientList.find((cl) => cl.createdBy === client.createdBy);
+
+      if (user) {
+        client.creatorAvatar =
+          "avatarSmall" in user ? user.avatarSmall : user.creatorAvatar;
+        client.creatorDisplayName =
+          "displayName" in user ? user.displayName : user.creatorDisplayName;
+      }
+
+      if (client.createdBy === id) {
+        client.creatorAvatar = avatarSmall;
+        client.creatorDisplayName = displayName;
+      }
+    });
+
     runInAction(() => {
       this.currentPage = clientList.page;
       this.nextPage = clientList.next || null;
@@ -239,6 +332,8 @@ class OAuthStore {
 
   fetchConsents = async () => {
     try {
+      await this.setJwtToken();
+
       this.setClientsIsLoading(true);
       const consentList = await getConsentList(0, PAGE_LIMIT);
 
@@ -262,6 +357,8 @@ class OAuthStore {
   };
 
   fetchNextConsents = async (startIndex: number) => {
+    await this.setJwtToken();
+
     if (this.consentsIsLoading) return;
 
     this.setConsentsIsLoading(true);
@@ -286,6 +383,8 @@ class OAuthStore {
   };
 
   changeClientStatus = async (clientId: string, status: boolean) => {
+    await this.setJwtToken();
+
     try {
       await changeClientStatus(clientId, status);
 
@@ -303,6 +402,8 @@ class OAuthStore {
   };
 
   regenerateSecret = async (clientId: string) => {
+    await this.setJwtToken();
+
     try {
       const { client_secret: clientSecret } = await regenerateSecret(clientId);
 
@@ -316,6 +417,8 @@ class OAuthStore {
   };
 
   deleteClient = async (clientsId: string[]) => {
+    await this.setJwtToken();
+
     try {
       const requests: Promise<void>[] = [];
 
@@ -340,6 +443,8 @@ class OAuthStore {
   };
 
   fetchScopes = async () => {
+    await this.setJwtToken();
+
     try {
       const scopes = await getScopeList();
 
@@ -351,11 +456,12 @@ class OAuthStore {
   };
 
   revokeClient = async (clientsId: string[]) => {
+    await this.setJwtToken();
+
     try {
       const requests: Promise<void>[] = [];
 
       clientsId.forEach((id) => {
-        // this.setActiveClient(id);
         requests.push(revokeUserClient(id));
       });
 
@@ -366,8 +472,6 @@ class OAuthStore {
           (c) => !clientsId.includes(c.clientId),
         );
       });
-
-      // this.setActiveClient("");
     } catch (e) {
       const err = e as TData;
       toastr.error(err);

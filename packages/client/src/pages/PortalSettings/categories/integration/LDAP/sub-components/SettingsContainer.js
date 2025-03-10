@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,6 @@ import { useNavigate } from "react-router-dom";
 import { isMobile } from "@docspace/shared/utils/device";
 
 import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -81,18 +80,18 @@ const SettingsContainer = ({
 
   const renderBody = () => (
     <>
-      {!isMobileView && (
+      {!isMobileView ? (
         <HideButton text={t("Settings:LDAP")} value={isSettingsShown} />
-      )}
+      ) : null}
 
-      {isMobileView && <ToggleLDAP />}
+      {isMobileView ? <ToggleLDAP /> : null}
 
-      {(isMobileView || isSettingsShown) && (
+      {isMobileView || isSettingsShown ? (
         <>
-          <Box>
+          <div>
             <Text className="ldap-disclaimer">{t("LdapDisclaimer")}</Text>
             <Checkboxes />
-          </Box>
+          </div>
 
           <ConnectionSettings />
           <AttributeMapping />
@@ -101,13 +100,13 @@ const SettingsContainer = ({
           <AdvancedSettings />
           <ButtonsContainer />
 
-          {!isMobileView && (
+          {!isMobileView ? (
             <ProgressContainer operation={LDAPOperation.SaveAndSync} />
-          )}
+          ) : null}
 
-          {isCertificateDialogVisible && <CertificateDialog />}
+          {isCertificateDialogVisible ? <CertificateDialog /> : null}
         </>
-      )}
+      ) : null}
     </>
   );
 

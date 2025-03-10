@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -133,11 +133,11 @@ const QuotaForm = ({
   };
 
   const onChangeCheckbox = () => {
-    const changeСheckbox = !isChecked;
+    const changeCheckbox = !isChecked;
 
-    setIsChecked(changeСheckbox);
+    setIsChecked(changeCheckbox);
 
-    const sizeValue = changeСheckbox ? -1 : getConvertedSize(size, power);
+    const sizeValue = changeCheckbox ? -1 : getConvertedSize(size, power);
 
     onSetQuotaBytesSize && onSetQuotaBytesSize(sizeValue);
   };
@@ -192,12 +192,12 @@ const QuotaForm = ({
       isLabel={!!label}
       isCheckbox={!!checkboxLabel}
     >
-      {label && <Text fontWeight={600}>{label}</Text>}
-      {description && (
+      {label ? <Text fontWeight={600}>{label}</Text> : null}
+      {description ? (
         <Text fontSize="12px" className="quota_description">
           {description}
         </Text>
-      )}
+      ) : null}
       <div className="quota-container">
         <TextInput
           className="quota_limit"
@@ -224,7 +224,7 @@ const QuotaForm = ({
           directionY="both"
         />
       </div>
-      {checkboxLabel && (
+      {checkboxLabel ? (
         <Checkbox
           label={checkboxLabel}
           isChecked={isChecked}
@@ -232,9 +232,9 @@ const QuotaForm = ({
           onChange={onChangeCheckbox}
           isDisabled={isLoading || isDisabled}
         />
-      )}
+      ) : null}
 
-      {isButtonsEnable && (
+      {isButtonsEnable ? (
         <SaveCancelButtons
           isSaving={isLoading}
           onSaveClick={onSaveClick}
@@ -247,7 +247,7 @@ const QuotaForm = ({
           disableRestoreToDefault={isDefaultQuota}
           showReminder={!isDefaultQuota}
         />
-      )}
+      ) : null}
     </StyledBody>
   );
 };

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,6 +30,7 @@ import UploadPanel from "./UploadPanel";
 import HotkeysPanel from "./HotkeysPanel";
 import InvitePanel from "./InvitePanel";
 import EditLinkPanel from "./EditLinkPanel";
+import ConversionPanel from "./ConversionPanel";
 
 export {
   EmbeddingPanel,
@@ -38,4 +39,7 @@ export {
   HotkeysPanel,
   InvitePanel,
   EditLinkPanel,
+  ConversionPanel,
 };
+
+export default ConversionPanel;

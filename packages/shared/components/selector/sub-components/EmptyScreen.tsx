@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -154,7 +154,7 @@ const EmptyScreen = ({
       <Text className="empty-description" noSelect>
         {currentDescription}
       </Text>
-      {createItem && (
+      {createItem ? (
         <div className="buttons">
           <div className="empty-folder_container-links">
             <IconButton
@@ -167,13 +167,13 @@ const EmptyScreen = ({
             <Link {...linkStyles} onClick={onCreateClickAction}>
               {items[0].label}
             </Link>
-            {isOpenDropDown && createItem && createItem.dropDownItems && (
+            {isOpenDropDown && createItem && createItem.dropDownItems ? (
               <NewItemDropDown
                 dropDownItems={createItem.dropDownItems}
                 isEmpty
                 onCloseDropDown={onCloseDropDown}
               />
-            )}
+            ) : null}
           </div>
           <div className="empty-folder_container-links">
             <IconButton
@@ -199,7 +199,7 @@ const EmptyScreen = ({
             </Link>
           </div>
         </div>
-      )}
+      ) : null}
     </StyledEmptyScreen>
   );
 };

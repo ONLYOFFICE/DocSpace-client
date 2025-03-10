@@ -1,6 +1,6 @@
+import { DeviceType } from "@docspace/shared/enums";
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 
-import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 
 export interface AuthorizedAppsProps {
@@ -10,7 +10,7 @@ export interface AuthorizedAppsProps {
   viewAs: ViewAsType;
   setViewAs: (value: string) => void;
 
-  currentDeviceType: DeviceUnionType;
+  currentDeviceType: DeviceType;
 
   infoDialogVisible: boolean;
   fetchScopes?: () => Promise<void>;
@@ -20,6 +20,7 @@ export interface AuthorizedAppsProps {
   selection: string[];
   bufferSelection: IClientProps;
   revokeClient: (value: string[]) => Promise<void>;
+  logoText: string;
 }
 
 export interface RevokeDialogProps {
@@ -29,5 +30,6 @@ export interface RevokeDialogProps {
   selection: string[];
   bufferSelection: IClientProps;
   onRevoke: (value: string[]) => Promise<void>;
-  currentDeviceType: DeviceUnionType;
+  currentDeviceType: DeviceType;
+  logoText: string;
 }

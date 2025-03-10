@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -37,7 +37,7 @@ const IconButtonMuteTheme = styled(StyledMuteIcon).attrs(injectDefaultTheme)<
   IconButtonMuteColorTheme & { $currentColorScheme?: TColorScheme }
 >`
   ${commonIconsStyles}
-  svg {
+  && svg {
     path:first-child {
       stroke: ${(props) =>
         props.theme.isBase && props.$currentColorScheme?.main?.accent};
@@ -52,7 +52,7 @@ const IconButtonMuteTheme = styled(StyledMuteIcon).attrs(injectDefaultTheme)<
     }
   }
 
-  &:hover {
+  &&:hover:not(.disabled) {
     svg {
       path {
         fill: ${(props) =>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -196,23 +196,24 @@ const Progress = ({
       <div className="data-start"> {reassigningDataStart}</div>
       <div className="progress-container">
         <div className="progress-section">
-          {!noRooms && (
+          {!noRooms ? (
             <Text className="progress-section-text" noSelect>
               {t("Common:Rooms")}
             </Text>
-          )}
+          ) : null}
           <Text className="progress-section-text" noSelect>
             {t("Common:Documents")}
           </Text>
         </div>
 
         <div className="progress-status">
-          {!noRooms &&
-            (percent < percentRoomReassignment
+          {!noRooms
+            ? percent < percentRoomReassignment
               ? isAbortTransfer && percent !== percentAllReassignment
                 ? interruptedNode
                 : inProgressNode
-              : allDataTransferredNode)}
+              : allDataTransferredNode
+            : null}
 
           {isAbortTransfer && percent !== percentAllReassignment
             ? interruptedNode

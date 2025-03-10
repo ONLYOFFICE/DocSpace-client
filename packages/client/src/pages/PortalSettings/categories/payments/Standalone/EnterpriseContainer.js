@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -52,7 +52,7 @@ const EnterpriseContainer = (props) => {
 
       <TariffTitleContainer />
 
-      {isLicenseDateExpired && <BenefitsContainer t={t} />}
+      {isLicenseDateExpired ? <BenefitsContainer t={t} /> : null}
       <Text fontSize="14px" className="payments_renew-subscription">
         {isLicenseDateExpired
           ? t("ActivatePurchaseBuyLicense")
@@ -82,8 +82,8 @@ const EnterpriseContainer = (props) => {
 };
 
 export default inject(({ paymentStore, currentTariffStatusStore }) => {
-  const { buyUrl, salesEmail } = paymentStore;
+  const { salesEmail } = paymentStore;
 
   const { isLicenseDateExpired, isDeveloper } = currentTariffStatusStore;
-  return { buyUrl, salesEmail, isLicenseDateExpired, isDeveloper };
+  return { salesEmail, isLicenseDateExpired, isDeveloper };
 })(observer(EnterpriseContainer));

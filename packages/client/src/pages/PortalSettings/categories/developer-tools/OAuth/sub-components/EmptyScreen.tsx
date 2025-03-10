@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,7 +38,13 @@ import EmptyScreenOauthDarkSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.da
 
 import RegisterNewButton from "./RegisterNewButton";
 
-const OAuthEmptyScreen = ({ apiOAuthLink }: { apiOAuthLink: string }) => {
+const OAuthEmptyScreen = ({
+  apiOAuthLink,
+  logoText,
+}: {
+  apiOAuthLink: string;
+  logoText: string;
+}) => {
   const { t } = useTranslation(["OAuth", "Common"]);
   const theme = useTheme();
 
@@ -55,7 +61,7 @@ const OAuthEmptyScreen = ({ apiOAuthLink }: { apiOAuthLink: string }) => {
       i18nKey="OAuthAppDescription"
       values={{
         productName: t("Common:ProductName"),
-        organizationName: t("Common:OrganizationName"),
+        organizationName: logoText,
       }}
     />
   );
@@ -73,18 +79,20 @@ const OAuthEmptyScreen = ({ apiOAuthLink }: { apiOAuthLink: string }) => {
         {descText}
       </Text>
       <p>
-        <ColorTheme
-          target={LinkTarget.blank}
-          type={LinkType.page}
-          fontWeight={600}
-          isHovered
-          href={apiOAuthLink}
-          tag="a"
-          themeId={ThemeId.Link}
-          style={{ marginBottom: "20px" }}
-        >
-          {t("OAuth:OAuth")} {t("Common:Guide")}
-        </ColorTheme>
+        {apiOAuthLink ? (
+          <ColorTheme
+            target={LinkTarget.blank}
+            type={LinkType.page}
+            fontWeight={600}
+            isHovered
+            href={apiOAuthLink}
+            tag="a"
+            themeId={ThemeId.Link}
+            style={{ marginBottom: "20px" }}
+          >
+            {t("OAuth:OAuth")} {t("Common:Guide")}
+          </ColorTheme>
+        ) : null}
       </p>
 
       <RegisterNewButton />

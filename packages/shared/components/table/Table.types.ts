@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -80,6 +80,7 @@ export interface TableHeaderProps {
     | React.ForwardedRef<HTMLDivElement>
     | ((node: HTMLDivElement) => void);
   theme: TTheme;
+  isIndexEditingMode?: boolean;
 }
 
 export interface TableHeaderCellProps {
@@ -129,6 +130,7 @@ export interface TableRowProps {
   badgeUrl: string;
   isIndexEditingMode: boolean;
   onClick?: (e: React.MouseEvent) => void;
+  forwardedRef?: React.ForwardedRef<HTMLDivElement>;
 }
 
 export interface TableCellProps {

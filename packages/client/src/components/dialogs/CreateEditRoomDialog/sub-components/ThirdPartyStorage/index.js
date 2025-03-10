@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -150,7 +150,7 @@ const ThirdPartyStorage = ({
         onCheckedChange={onChangeIsThirdparty}
       />
 
-      {storageLocation.isThirdparty && (
+      {storageLocation.isThirdparty ? (
         <ThirdPartyComboBox
           t={t}
           storageLocation={storageLocation}
@@ -170,9 +170,9 @@ const ThirdPartyStorage = ({
           isDisabled={isDisabled}
           isAdmin={isAdmin}
         />
-      )}
+      ) : null}
 
-      {storageLocation.isThirdparty && storageLocation.thirdpartyAccount && (
+      {storageLocation.isThirdparty && storageLocation.thirdpartyAccount ? (
         <>
           <FolderInput
             t={t}
@@ -190,7 +190,7 @@ const ThirdPartyStorage = ({
             onChange={onCreateFolderChange}
           />
         </>
-      )}
+      ) : null}
     </StyledThirdPartyStorage>
   );
 };

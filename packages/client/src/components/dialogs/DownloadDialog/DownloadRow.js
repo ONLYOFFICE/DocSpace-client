@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -72,7 +72,7 @@ const DownloadRow = (props) => {
       </div>
 
       <div className="download-dialog-actions">
-        {file.checked && !isOther && (
+        {file.checked && !isOther ? (
           <LinkWithDropdown
             className="download-dialog-link"
             dropDownClassName="download-dialog-dropDown"
@@ -92,8 +92,8 @@ const DownloadRow = (props) => {
           >
             {file.format || t("OriginalFormat")}
           </LinkWithDropdown>
-        )}
-        {isOther && file.fileExst && (
+        ) : null}
+        {isOther && file.fileExst ? (
           <Text
             className="download-dialog-other-text"
             truncate
@@ -105,7 +105,7 @@ const DownloadRow = (props) => {
           >
             {t("OriginalFormat")}
           </Text>
-        )}
+        ) : null}
       </div>
     </div>
   );

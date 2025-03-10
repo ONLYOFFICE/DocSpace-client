@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -99,27 +99,31 @@ const PasswordContent = (props) => {
 
   return (
     <StyledPasswordContent>
-      {barIsVisible && (
+      {barIsVisible ? (
         <PublicRoomBar
           headerText={t("ProtectedFiles")}
           bodyText={t("FileProtectionMessage")}
           iconName={InfoSvgUrl}
           onClose={onClose}
         />
-      )}
-      {other?.length > 0 &&
-        passwordRow(
-          other,
-          t("Common:PasswordRequired"),
-          "other",
-          "warning-color",
-        )}
-      {original?.length > 0 &&
-        passwordRow(original, t("DownloadOriginalFormat"), "original")}
-      {password?.length > 0 &&
-        passwordRow(password, t("PasswordEntered"), "password")}
-      {remove?.length > 0 &&
-        passwordRow(remove, t("RemovedFromList"), "remove")}
+      ) : null}
+      {other?.length > 0
+        ? passwordRow(
+            other,
+            t("Common:PasswordRequired"),
+            "other",
+            "warning-color",
+          )
+        : null}
+      {original?.length > 0
+        ? passwordRow(original, t("DownloadOriginalFormat"), "original")
+        : null}
+      {password?.length > 0
+        ? passwordRow(password, t("PasswordEntered"), "password")
+        : null}
+      {remove?.length > 0
+        ? passwordRow(remove, t("RemovedFromList"), "remove")
+        : null}
     </StyledPasswordContent>
   );
 };

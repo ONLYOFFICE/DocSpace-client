@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -70,6 +70,8 @@ class DialogsStore {
   deleteDialogVisible = false;
 
   lifetimeDialogVisible = false;
+
+  lifetimeDialogCB = null;
 
   downloadDialogVisible = false;
 
@@ -192,6 +194,12 @@ class DialogsStore {
     isDownload: false,
   };
 
+  createRoomTemplateDialogVisible = false;
+
+  templateAccessSettingsVisible = false;
+
+  templateEventVisible = false;
+
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
 
   selectFileFormRoomOpenRoot = false;
@@ -239,7 +247,20 @@ class DialogsStore {
     onClose: null,
   };
 
+  createPDFFormFileProps = {
+    visible: false,
+    file: null,
+    localKey: "",
+    onClose: null,
+  };
+
   newFilesPanelFolderId = null;
+
+  formFillingTipsVisible = false;
+
+  welcomeFormFillingTipsVisible = false;
+
+  guidAnimationVisible = false;
 
   sortedDownloadFiles = {
     other: [],
@@ -249,6 +270,8 @@ class DialogsStore {
   };
 
   downloadItems = [];
+
+  operationCancelVisible = false;
 
   constructor(
     authStore,
@@ -280,6 +303,10 @@ class DialogsStore {
     this.editRoomDialogProps = props;
   };
 
+  setCreatePDFFormFile = (props) => {
+    this.createPDFFormFileProps = props;
+  };
+
   setCreateRoomDialogProps = (props) => {
     this.createRoomDialogProps = props;
   };
@@ -306,6 +333,10 @@ class DialogsStore {
 
   setIsFolderActions = (isFolderActions) => {
     this.isFolderActions = isFolderActions;
+  };
+
+  setOperationCancelVisible = (operationCancelVisible) => {
+    this.operationCancelVisible = operationCancelVisible;
   };
 
   setMoveToPanelVisible = (visible) => {
@@ -377,8 +408,9 @@ class DialogsStore {
     this.deleteDialogVisible = deleteDialogVisible;
   };
 
-  setLifetimeDialogVisible = (lifetimeDialogVisible) => {
+  setLifetimeDialogVisible = (lifetimeDialogVisible, cb) => {
     this.lifetimeDialogVisible = lifetimeDialogVisible;
+    this.lifetimeDialogCB = cb;
   };
 
   setEventDialogVisible = (eventDialogVisible) => {
@@ -792,6 +824,18 @@ class DialogsStore {
     };
   };
 
+  setCreateRoomTemplateDialogVisible = (visible) => {
+    this.createRoomTemplateDialogVisible = visible;
+  };
+
+  setTemplateAccessSettingsVisible = (isVisible) => {
+    this.templateAccessSettingsVisible = isVisible;
+  };
+
+  setTemplateEventVisible = (isVisible) => {
+    this.templateEventVisible = isVisible;
+  };
+
   setWarningQuotaDialogVisible = (visible) => {
     this.warningQuotaDialogVisible = visible;
   };
@@ -804,8 +848,20 @@ class DialogsStore {
     this.closeEditIndexDialogVisible = visible;
   };
 
+  setFormFillingTipsDialog = (visible) => {
+    this.formFillingTipsVisible = visible;
+  };
+
+  setWelcomeFormFillingTipsVisible = (visible) => {
+    this.welcomeFormFillingTipsVisible = visible;
+  };
+
   setCovers = (covers) => {
     this.covers = covers;
+  };
+
+  setguidAnimationVisible = (animation) => {
+    this.guidAnimationVisible = animation;
   };
 
   setRoomCoverDialogProps = (props) => {

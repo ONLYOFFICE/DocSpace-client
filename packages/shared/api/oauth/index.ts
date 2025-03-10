@@ -1,6 +1,36 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { request } from "../client";
 
-import { transformToClientProps } from "../../utils/oauth/index";
+import { transformToClientProps } from "../../utils/oauth";
+import { getCookie, setCookie } from "../../utils/cookie";
 
 import {
   IClientProps,
@@ -52,7 +82,10 @@ export const getClientList = async (
   return clients;
 };
 
-export const addClient = async (data: IClientReqDTO): Promise<IClientProps> => {
+export const addClient = async (
+  dataParam: IClientReqDTO,
+): Promise<IClientProps> => {
+  const data = { ...dataParam };
   data.logout_redirect_uri = data.website_url;
 
   const client = (await request(
@@ -147,9 +180,32 @@ export const getScopeList = async (): Promise<TScope[]> => {
   return scopeList;
 };
 
+export const getJWTToken = () => {
+  return request<string>({
+    method: "get",
+    url: "/security/oauth2/token",
+  });
+};
+
+export function getOAuthJWTSignature() {
+  return getCookie("x-signature");
+}
+
+export async function setOAuthJWTSignature() {
+  const token = await getJWTToken()!;
+
+  // Parse the token payload to extract information
+  const tokenPayload = JSON.parse(window.atob(token!.split(".")[1]));
+
+  // Get the token's original expiration time
+  const tokenExpDate = new Date(tokenPayload.exp * 1000); // Convert seconds to milliseconds
+
+  setCookie("x-signature", token, { expires: tokenExpDate });
+}
+
 export const getConsentList = async (
   page: number = 0,
-  limit: number = 100,
+  limit: number = 50,
 ): Promise<TConsentList & { consents: IClientProps[] }> => {
   const consentList = (await request(
     {
@@ -164,6 +220,7 @@ export const getConsentList = async (
 
   consentList.data.forEach(
     ({ client, invalidated, modified_at }: TConsentData) => {
+      if (!client) return;
       const consentClient: IClientResDTO = {
         ...client,
         client_secret: "",
@@ -190,12 +247,16 @@ export const revokeUserClient = async (clientId: string): Promise<void> => {
   );
 };
 
-export const onOAuthSubmit = (
+export const onOAuthSubmit = async (
   clientId: string,
   clientState: string,
   scope: string[],
 ) => {
   const formData = new FormData();
+
+  const token = getOAuthJWTSignature();
+
+  if (!token) await setOAuthJWTSignature();
 
   formData.append("client_id", clientId);
   formData.append("state", clientState);
@@ -219,8 +280,12 @@ export const onOAuthSubmit = (
   );
 };
 
-export const onOAuthCancel = (clientId: string, clientState: string) => {
+export const onOAuthCancel = async (clientId: string, clientState: string) => {
   const formData = new FormData();
+
+  const token = getOAuthJWTSignature();
+
+  if (!token) await setOAuthJWTSignature();
 
   formData.append("client_id", clientId);
   formData.append("state", clientState);
@@ -252,7 +317,14 @@ export const generateDevelopToken = (
   params.append("scope", scopes.join(" "));
 
   return request<TGenerateDeveloperToken>(
-    { method: "post", url: "/oauth2/token", data: params },
+    {
+      method: "post",
+      url: "/oauth2/token",
+      data: params,
+      headers: {
+        "X-Disable-Redirect": "true",
+      },
+    },
     false,
     true,
   );
@@ -269,7 +341,11 @@ export const revokeDeveloperToken = (
   params.append("client_secret", client_secret);
 
   return request(
-    { method: "post", url: "/oauth2/revoke", data: params },
+    {
+      method: "post",
+      url: "/oauth2/revoke",
+      data: params,
+    },
     false,
     true,
   );

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -34,13 +34,13 @@ import { TTranslation } from "@docspace/shared/types";
 
 import { StyledNoItemContainer } from "../../styles/NoItem";
 
-type NoСontactsItemProps = {
+type NoContactsItemProps = {
   t: TTranslation;
   isGroups: boolean;
   isGuests: boolean;
 };
 
-const NoСontactsItem = ({ t, isGroups, isGuests }: NoСontactsItemProps) => {
+const NoContactsItem = ({ t, isGroups, isGuests }: NoContactsItemProps) => {
   const theme = useTheme();
 
   const imgSrc = theme.isBase
@@ -63,4 +63,4 @@ const NoСontactsItem = ({ t, isGroups, isGuests }: NoСontactsItemProps) => {
   );
 };
 
-export default NoСontactsItem;
+export default NoContactsItem;

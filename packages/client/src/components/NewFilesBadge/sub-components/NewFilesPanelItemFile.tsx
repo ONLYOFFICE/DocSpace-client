@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -98,9 +98,9 @@ const NewFilesPanelItemFileComponent = ({
           lineHeight="16px"
         >
           {item.title.replace(item.fileExst, "")}
-          {displayFileExtension && (
+          {displayFileExtension ? (
             <span className="file-exst">{item.fileExst}</span>
-          )}
+          ) : null}
         </Text>
       </div>
       <IconButton

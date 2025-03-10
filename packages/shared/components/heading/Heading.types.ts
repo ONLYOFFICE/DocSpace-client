@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,24 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+import { TextProps } from "../text/Text.types";
 import { HeadingLevel, HeadingSize } from "./Heading.enums";
 
-export interface HeadingProps {
-  id?: string;
+export type HeadingType = "header" | "menu" | "content";
+
+export type HeadingProps = TextProps & {
   /** The heading level. It corresponds to the number after the 'H' for the DOM tag. Sets the level for semantic accuracy and accessibility. */
   level?: HeadingLevel;
-  /** Specifies the headline color */
-  color?: string;
-  /** Title */
-  title?: string;
-  /** Disables word wrapping */
-  truncate?: boolean;
-  /** Sets the 'display: inline-block' property */
-  isInline?: boolean;
   /** Sets the size of headline */
   size?: HeadingSize;
-  /** Accepts css class */
-  className?: string;
-  children: React.ReactNode;
-  style?: React.CSSProperties;
-}
+  /** Sets the type of headline */
+  type?: HeadingType;
+} & React.AriaAttributes &
+  React.HTMLAttributes<HTMLHeadingElement>;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -52,10 +52,10 @@ const Spaces = () => {
     deletePortalDialogVisible,
   } = spacesStore;
 
-  const { portals } = settingsStore;
+  const { portals, logoText } = settingsStore;
 
   React.useEffect(() => {
-    setDocumentTitle(t("Common:Spaces"));
+    setDocumentTitle(t("Common:Spaces"), logoText);
   }, []);
 
   if (!(portals.length > 0))

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -99,7 +99,7 @@ type WizardFormProps = {
   portalTimeZones?: TTimeZone[];
   portalCultures?: TPortalCultures;
 
-  forumLink?: string;
+  forumLinkUrl?: string;
   documentationEmail?: string;
   culture?: string;
   wizardToken?: string;
@@ -122,7 +122,7 @@ function WizardForm(props: WizardFormProps) {
     culture,
     wizardToken,
     passwordHash,
-    forumLink,
+    forumLinkUrl,
     documentationEmail,
     isAmi,
   } = props;
@@ -380,7 +380,6 @@ function WizardForm(props: WizardFormProps) {
         <EmailInput
           name="wizard-email"
           tabIndex={1}
-          type={InputType.email}
           size={InputSize.large}
           scale={true}
           value={email}
@@ -412,7 +411,6 @@ function WizardForm(props: WizardFormProps) {
           isDisabled={isCreated}
           placeholder={t("Common:Password")}
           isDisableTooltip={true}
-          isTextTooltipVisible={false}
           hasError={hasErrorPass}
           onChange={onChangePassword}
           autoComplete="current-password"
@@ -518,7 +516,7 @@ function WizardForm(props: WizardFormProps) {
             <BetaBadge
               withOutFeedbackLink
               place="bottom"
-              forumLink={forumLink}
+              forumLinkUrl={forumLinkUrl}
               currentDeviceType={currentDeviceType}
               documentationEmail={documentationEmail}
             />
@@ -561,6 +559,7 @@ function WizardForm(props: WizardFormProps) {
           onChange={onAgreeTermsChange}
           isDisabled={isCreated}
           hasError={hasErrorAgree}
+          truncate={false}
         />
         <Link
           type={LinkType.page}

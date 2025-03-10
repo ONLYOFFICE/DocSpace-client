@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -131,7 +131,7 @@ class ThirdPartyModule extends React.Component {
           isSelectFolder
         />
 
-        {connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount && (
+        {connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount ? (
           <Button
             label={t("Common:CreateCopy")}
             onClick={this.onMakeCopy}
@@ -139,7 +139,7 @@ class ThirdPartyModule extends React.Component {
             isDisabled={isModuleDisabled || selectedFolder === ""}
             size={buttonSize}
           />
-        )}
+        ) : null}
       </div>
     );
   }

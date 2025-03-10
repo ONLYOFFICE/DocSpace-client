@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,17 +31,21 @@ import StyledCircleWrap from "../sub-components/StyledCircleWrap";
 
 const getDefaultStyles = ({
   $currentColorScheme,
+  loaderColor,
 }: {
   $currentColorScheme?: TColorScheme;
+  loaderColor?: React.CSSProperties["color"];
 }) =>
   $currentColorScheme &&
   css`
-    .circle__mask .circle__fill {
-      background-color: ${$currentColorScheme.main?.accent} !important;
+    --circle-fill-color: ${loaderColor || $currentColorScheme.main?.accent};
+
+    & .circle__mask .circle__fill {
+      background-color: var(--circle-fill-color);
     }
 
     .loading-button {
-      color: ${$currentColorScheme.main?.accent};
+      color: ${loaderColor || $currentColorScheme.main?.accent};
     }
   `;
 

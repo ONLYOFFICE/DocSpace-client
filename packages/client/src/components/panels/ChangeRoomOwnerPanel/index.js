@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -133,7 +133,7 @@ const ChangeRoomOwner = (props) => {
         headerLabel: t("Files:ChangeTheRoomOwner"),
       }}
       filter={filter}
-      withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
+      withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
       footerCheckboxLabel={t("Files:LeaveTheRoom")}
       isChecked={!showBackButton}
       withOutCurrentAuthorizedUser
@@ -162,7 +162,7 @@ const ChangeRoomOwner = (props) => {
     >
       <ModalDialog.Body>
         <StyledChangeRoomOwner
-          withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
+          withFooterCheckbox={!showBackButton ? ownerIsCurrentUser : null}
         >
           {selectorComponent}
         </StyledChangeRoomOwner>

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -45,8 +45,6 @@ export const DEFAULT_SELECT_LANGUAGE: TOption = {
   label: "English (United States)",
   icon: EnUSReactSvgUrl,
 };
-
-export const URL_ONLYOFFICE = "https://onlyoffice.com";
 
 export const TFA_ANDROID_APP_URL =
   "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2";

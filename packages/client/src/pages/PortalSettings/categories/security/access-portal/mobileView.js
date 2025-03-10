@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -32,7 +32,7 @@ import { MainContainer } from "../StyledSecurity";
 import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
 const MobileView = (props) => {
-  const { t } = props;
+  const { t, withoutExternalLink } = props;
 
   const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ const MobileView = (props) => {
   };
 
   return (
-    <MainContainer>
+    <MainContainer withoutExternalLink={withoutExternalLink}>
       <MobileCategoryWrapper
         title={t("SettingPasswordTittle")}
         subtitle={

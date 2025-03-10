@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,8 @@ import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.web
 import { FileType, FilterType, RoomsType } from "@docspace/shared/enums";
 
 import { isDesktop, isMobile } from "@docspace/shared/utils";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
+
 import i18n from "../i18n";
 
 export const getFileTypeName = (fileType) => {
@@ -211,11 +213,10 @@ export const connectedCloudsTypeIcon = (key) => {
 };
 
 // Used to update the number of tiles in a row after the window is resized.
-export const getCountTilesInRow = () => {
+export const getCountTilesInRow = (isRooms) => {
   const isDesktopView = isDesktop();
   const isMobileView = isMobile();
-  const tileGap = isDesktopView ? 16 : 14;
-  const minTileWidth = 216 + tileGap;
+  const tileGap = isRooms ? 16 : 14;
 
   const elem = document.getElementsByClassName("section-wrapper-content")[0];
   let containerWidth = 0;
@@ -238,6 +239,13 @@ export const getCountTilesInRow = () => {
   containerWidth += tileGap;
   if (!isMobileView) containerWidth -= 1;
   if (!isDesktopView) containerWidth += 3; // tablet tile margin -3px (TileContainer.js)
+
+  let minTileWidth;
+  if (isRooms) {
+    minTileWidth = 275 + tileGap;
+  } else {
+    minTileWidth = 216 + tileGap;
+  }
 
   return Math.floor(containerWidth / minTileWidth);
 };
@@ -382,4 +390,46 @@ export const mappingActiveItems = (items, destFolderId) => {
         },
   );
   return arrayFormation;
+};
+
+export const getOperationsProgressTitle = (type) => {
+  const {
+    trash,
+    move,
+    copy,
+    download,
+    duplicate,
+    exportIndex,
+    markAsRead,
+    deletePermanently,
+    upload,
+    convert,
+    deleteVersionFile,
+  } = OPERATIONS_NAME;
+  switch (type) {
+    case trash:
+      return i18n.t("Files:MovingToTrash");
+    case move:
+      return i18n.t("Common:MoveToOperation");
+    case copy:
+      return i18n.t("Common:CopyOperation");
+    case download:
+      return i18n.t("Files:Downloading");
+    case duplicate:
+      return i18n.t("Files:Duplicating");
+    case exportIndex:
+      return i18n.t("Files:ExportingIndex");
+    case markAsRead:
+      return i18n.t("Files:MarkingRead");
+    case deletePermanently:
+      return i18n.t("Files:DeletingPermanently");
+    case upload:
+      return i18n.t("Files:Uploading");
+    case convert:
+      return i18n.t("Files:Converting");
+    case deleteVersionFile:
+      return i18n.t("Files:DeletingVersion");
+    default:
+      return i18n.t("Files:OtherProcesses");
+  }
 };

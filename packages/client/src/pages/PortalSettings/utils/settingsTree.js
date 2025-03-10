@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -78,6 +78,13 @@ export const settingsTree = [
             link: "portal-renaming",
             tKey: "PortalRenaming",
           },
+          {
+            id: "portal-settings_catalog-configure-deep-link",
+            key: "0-0-4",
+            icon: "",
+            link: "configure-deep-link",
+            tKey: "ConfigureDeepLink",
+          },
         ],
       },
       {
@@ -89,22 +96,29 @@ export const settingsTree = [
         isCategory: true,
         children: [
           {
-            id: "portal-settings_catalog-white-label",
+            id: "portal-settings_catalog-brand-name",
             key: "0-1-0",
+            icon: "",
+            link: "brand-name",
+            tKey: "BrandName",
+          },
+          {
+            id: "portal-settings_catalog-white-label",
+            key: "0-1-1",
             icon: "",
             link: "white-label",
             tKey: "WhiteLabel",
           },
           {
             id: "portal-settings_catalog-company-info-settings",
-            key: "0-1-1",
+            key: "0-1-2",
             icon: "",
             link: "company-info-settings",
             tKey: "CompanyInfoSettings",
           },
           {
             id: "portal-settings_catalog-additional-resources",
-            key: "0-1-2",
+            key: "0-1-3",
             icon: "",
             link: "additional-resources",
             tKey: "AdditionalResources",

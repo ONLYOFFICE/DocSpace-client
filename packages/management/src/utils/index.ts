@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -89,11 +89,10 @@ export function loadLanguagePath(homepage: string, fixedNS = null) {
   };
 }
 
-export const setDocumentTitle = (subTitle = null) => {
+export const setDocumentTitle = (subTitle = null, organizationName = "") => {
   let title;
 
   // const currentModule = this.settingsStore?.product;
-  const organizationName = i18n.t("Common:OrganizationName");
 
   if (subTitle) {
     title = `${subTitle} - ${organizationName}`;

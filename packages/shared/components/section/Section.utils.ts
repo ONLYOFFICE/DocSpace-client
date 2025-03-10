@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,7 +30,6 @@ import {
   SECTION_FILTER_NAME,
   SECTION_BODY_NAME,
   SECTION_FOOTER_NAME,
-  SECTION_PAGING_NAME,
   SECTION_INFO_PANEL_BODY_NAME,
   SECTION_INFO_PANEL_HEADER_NAME,
   SECTION_WARNING_NAME,
@@ -40,7 +39,6 @@ import {
 export const parseChildren = (children: React.JSX.Element[]) => {
   let sectionHeaderContent: React.JSX.Element | null = null;
   let sectionFilterContent: React.JSX.Element | null = null;
-  let sectionPagingContent: React.JSX.Element | null = null;
   let sectionBodyContent: React.JSX.Element | null = null;
   let sectionFooterContent: React.JSX.Element | null = null;
   let infoPanelBodyContent: React.JSX.Element | null = null;
@@ -70,9 +68,6 @@ export const parseChildren = (children: React.JSX.Element[]) => {
       case SECTION_FOOTER_NAME:
         sectionFooterContent = props.children;
         break;
-      case SECTION_PAGING_NAME:
-        sectionPagingContent = props.children;
-        break;
       case SECTION_INFO_PANEL_BODY_NAME:
         infoPanelBodyContent = props.children;
         break;
@@ -95,7 +90,6 @@ export const parseChildren = (children: React.JSX.Element[]) => {
     sectionFilterContent,
     sectionBodyContent,
     sectionFooterContent,
-    sectionPagingContent,
     sectionWarningContent,
     infoPanelBodyContent,
     infoPanelHeaderContent,

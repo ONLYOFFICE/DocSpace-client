@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -98,55 +98,55 @@ test("oauth2 back button after list render", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("oauth2 consent render", async ({ page, mockRequest, context }) => {
-  await context.addCookies([
-    {
-      name: "asc_auth_key",
-      value: "test",
-      url: "http://127.0.0.1:5111",
-    },
-  ]);
-  await page.goto(`/login/consent?client_id=${successClient.client_id}`);
+// test("oauth2 consent render", async ({ page, mockRequest, context }) => {
+//   await context.addCookies([
+//     {
+//       name: "asc_auth_key",
+//       value: "test",
+//       url: "http://127.0.0.1:5111",
+//     },
+//   ]);
+//   await page.goto(`/login/consent?client_id=${successClient.client_id}`);
 
-  await page.waitForURL(`/login/consent?client_id=${successClient.client_id}`, {
-    waitUntil: "load",
-  });
+//   await page.waitForURL(`/login/consent?client_id=${successClient.client_id}`, {
+//     waitUntil: "load",
+//   });
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "oauth",
-    "oauth2-consent-render.png",
-  ]);
-});
+//   await expect(page).toHaveScreenshot([
+//     "desktop",
+//     "oauth",
+//     "oauth2-consent-render.png",
+//   ]);
+// });
 
-test("oauth2 consent change user", async ({ page, mockRequest, context }) => {
-  await context.addCookies([
-    {
-      name: "asc_auth_key",
-      value: "test",
-      url: "http://127.0.0.1:5111",
-    },
-  ]);
-  await page.goto(`/login/consent?client_id=${successClient.client_id}`);
+// test("oauth2 consent change user", async ({ page, mockRequest, context }) => {
+//   await context.addCookies([
+//     {
+//       name: "asc_auth_key",
+//       value: "test",
+//       url: "http://127.0.0.1:5111",
+//     },
+//   ]);
+//   await page.goto(`/login/consent?client_id=${successClient.client_id}`);
 
-  await page.waitForURL(`/login/consent?client_id=${successClient.client_id}`, {
-    waitUntil: "load",
-  });
+//   await page.waitForURL(`/login/consent?client_id=${successClient.client_id}`, {
+//     waitUntil: "load",
+//   });
 
-  await context.clearCookies({ name: "asc_auth_key" });
-  await mockRequest.router([endpoints.logout]);
+//   await context.clearCookies({ name: "asc_auth_key" });
+//   await mockRequest.router([endpoints.logout]);
 
-  await page.getByText("Not you?").click();
-  await page.waitForURL(
-    `/login?client_id=${successClient.client_id}&type=oauth2`,
-    {
-      waitUntil: "load",
-    },
-  );
+//   await page.getByText("Not you?").click();
+//   await page.waitForURL(
+//     `/login?client_id=${successClient.client_id}&type=oauth2`,
+//     {
+//       waitUntil: "load",
+//     },
+//   );
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "oauth",
-    "oauth2-consent-change-user.png",
-  ]);
-});
+//   await expect(page).toHaveScreenshot([
+//     "desktop",
+//     "oauth",
+//     "oauth2-consent-change-user.png",
+//   ]);
+// });

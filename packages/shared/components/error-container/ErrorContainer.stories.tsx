@@ -32,8 +32,19 @@ import ErrorContainer from "./ErrorContainer";
 type ErrorContainerType = FC<ErrorContainerProps>;
 
 const meta: Meta<ErrorContainerType> = {
-  title: "Components/ErrorContainer",
+  title: "Layout components/ErrorContainer",
   component: ErrorContainer,
+  argTypes: {
+    onClickButton: { action: "clicked" },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Error container component that displays error messages with optional button and customizable styles",
+      },
+    },
+  },
 };
 
 export default meta;
@@ -41,8 +52,35 @@ export default meta;
 export const Default: StoryObj<ErrorContainerType> = {
   args: {
     bodyText: "Try again later",
-    buttonText: "Go back",
     headerText: "Some error has happened",
     customizedBodyText: "Customized body",
+  },
+};
+
+export const WithPrimaryButton: StoryObj<ErrorContainerType> = {
+  args: {
+    bodyText: "An error occurred while processing your request",
+    headerText: "Some error has happened",
+    buttonText: "Retry",
+    isPrimaryButton: true,
+  },
+};
+
+export const InEditorMode: StoryObj<ErrorContainerType> = {
+  args: {
+    isEditor: true,
+    bodyText: "Editor mode error message",
+    buttonText: "Close Editor",
+  },
+};
+
+export const WithChildren: StoryObj<ErrorContainerType> = {
+  args: {
+    children: (
+      <div style={{ padding: "16px", textAlign: "center" }}>
+        <p>Custom child content</p>
+        <small>Additional details can be placed here</small>
+      </div>
+    ),
   },
 };

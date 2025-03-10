@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -35,6 +35,7 @@ import { TenantStatus } from "@docspace/shared/enums";
 import { startRestore } from "@docspace/shared/api/portal";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr } from "@docspace/shared/components/toast";
+import { isManagement } from "@docspace/shared/utils/common";
 
 const ButtonContainer = (props) => {
   const {
@@ -55,6 +56,7 @@ const ButtonContainer = (props) => {
     getStorageParams,
     uploadLocalFile,
     isBackupProgressVisible,
+    setErrorInformation,
   } = props;
 
   const navigate = useNavigate();
@@ -99,8 +101,16 @@ const ButtonContainer = (props) => {
       }
     }
 
+    setErrorInformation("");
+
     try {
-      await startRestore(backupId, storageType, storageParams, isNotification);
+      await startRestore(
+        backupId,
+        storageType,
+        storageParams,
+        isNotification,
+        isManagement(),
+      );
       setTenantStatus(TenantStatus.PortalRestore);
 
       SocketHelper.emit(SocketCommands.RestoreBackup);
@@ -108,13 +118,12 @@ const ButtonContainer = (props) => {
       navigate(
         combineUrl(
           window.ClientConfig?.proxy?.url,
-          config.homepage,
+          isManagement() ? "management" : config.homepage,
           "/preparation-portal",
         ),
       );
-    } catch (e) {
-      toastr.error(e);
-
+    } catch (err) {
+      setErrorInformation(err, t);
       setIsLoading(false);
     }
   };
@@ -140,14 +149,13 @@ const ButtonContainer = (props) => {
         tabIndex={10}
       />
 
-      {isBackupProgressVisible && (
+      {isBackupProgressVisible ? (
         <FloatingButton
           className="layout-progress-bar"
-          icon="file"
           alert={false}
           percent={downloadingProgress}
         />
-      )}
+      ) : null}
     </div>
   );
 };
@@ -161,6 +169,7 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
     restoreResource,
     uploadLocalFile,
     isBackupProgressVisible,
+    setErrorInformation,
   } = backup;
 
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
@@ -175,5 +184,6 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
     getStorageParams,
     restoreResource,
     isBackupProgressVisible,
+    setErrorInformation,
   };
 })(observer(ButtonContainer));

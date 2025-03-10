@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -217,22 +217,24 @@ const TrustedMail = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!trustedMailDomainSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("TrustedMailSettingDescription")}
         </Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={trustedMailDomainSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {trustedMailDomainSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={trustedMailDomainSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup
@@ -263,7 +265,7 @@ const TrustedMail = (props) => {
         onClick={onSelectDomainType}
       />
 
-      {type === "1" && (
+      {type === "1" ? (
         <UserFields
           inputs={domains}
           buttonLabel={t("AddTrustedDomain")}
@@ -273,7 +275,7 @@ const TrustedMail = (props) => {
           regexp={regexp}
           classNameAdditional="add-trusted-domain"
         />
-      )}
+      ) : null}
 
       <SaveCancelButtons
         className="save-cancel-buttons"
@@ -298,7 +300,6 @@ export const TrustedMailSection = inject(({ settingsStore }) => {
     trustedDomainsType,
     trustedDomains,
     setMailDomainSettings,
-    helpLink,
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,
@@ -308,7 +309,6 @@ export const TrustedMailSection = inject(({ settingsStore }) => {
     trustedDomainsType,
     trustedDomains,
     setMailDomainSettings,
-    helpLink,
     currentColorScheme,
     trustedMailDomainSettingsUrl,
     currentDeviceType,

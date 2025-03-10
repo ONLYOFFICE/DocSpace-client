@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -90,6 +90,8 @@ const Root = ({
   fileId,
   hash,
   shareKey,
+
+  deepLinkSettings,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
   const [sdkConfig, setSdkConfig] = React.useState<TFrameConfig | null>(null);
@@ -124,6 +126,7 @@ const Root = ({
     settings,
     fileInfo,
     email: user?.email,
+    deepLinkSettings,
   });
   const { filesSettings } = useFilesSettings({});
   useSocketHelper({
@@ -209,6 +212,8 @@ const Root = ({
     selectFileDialogVisible,
   ]);
 
+  const organizationName = settings?.logoText || t("Common:OrganizationName");
+
   return isShowDeepLink ? (
     <DeepLink
       fileInfo={fileInfo}
@@ -245,6 +250,7 @@ const Root = ({
           onSDKRequestSelectDocument={onSDKRequestSelectDocument}
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
           onSDKRequestStartFilling={onSDKRequestStartFilling}
+          organizationName={organizationName}
         />
       )}
 
@@ -258,6 +264,7 @@ const Root = ({
           getIsDisabled={getIsDisabledSelectFolderDialog}
           filesSettings={filesSettings}
           fileSaveAsExtension={extensionSelectorFolderDialog}
+          organizationName={organizationName}
         />
       )}
       {selectFileDialogVisible && fileInfo && (
@@ -276,6 +283,7 @@ const Root = ({
         <SharingDialog
           isVisible={isSharingDialogVisible}
           fileInfo={fileInfo}
+          selfId={user?.id}
           onCancel={onCloseSharingDialog}
         />
       )}

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,7 +28,6 @@ import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
@@ -54,6 +53,7 @@ const SingleSignOn = (props) => {
     isSSOAvailable,
     isInit,
     currentDeviceType,
+    logoText,
   } = props;
   const { t, ready } = useTranslation(["SingleSignOn", "Settings"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
@@ -78,7 +78,7 @@ const SingleSignOn = (props) => {
       </Text>
 
       {isMobileView ? (
-        <MobileView isSSOAvailable={isSSOAvailable} />
+        <MobileView isSSOAvailable={isSSOAvailable} logoText={logoText} />
       ) : (
         <>
           <ToggleSSO />
@@ -86,7 +86,7 @@ const SingleSignOn = (props) => {
           <HideButton
             id="sp-settings-hide-button"
             text={t("ServiceProviderSettings", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
             label={SERVICE_PROVIDER_SETTINGS}
             value={serviceProviderSettings}
@@ -99,16 +99,16 @@ const SingleSignOn = (props) => {
           <HideButton
             id="sp-metadata-hide-button"
             text={t("SpMetadata", {
-              organizationName: t("Common:OrganizationName"),
+              organizationName: logoText,
             })}
             label={SP_METADATA}
             value={spMetadata}
             // isDisabled={!isSSOAvailable}
           />
 
-          <Box className="sp-metadata">
+          <div className="sp-metadata">
             <ProviderMetadataSection />
-          </Box>
+          </div>
         </>
       )}
     </StyledSsoPage>
@@ -117,7 +117,7 @@ const SingleSignOn = (props) => {
 
 export default inject(({ settingsStore, ssoStore, currentQuotaStore }) => {
   const { isSSOAvailable } = currentQuotaStore;
-  const { currentDeviceType } = settingsStore;
+  const { currentDeviceType, logoText } = settingsStore;
 
   const { init, serviceProviderSettings, spMetadata, isInit } = ssoStore;
 
@@ -128,5 +128,6 @@ export default inject(({ settingsStore, ssoStore, currentQuotaStore }) => {
     isSSOAvailable,
     isInit,
     currentDeviceType,
+    logoText,
   };
 })(observer(SingleSignOn));

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -57,10 +57,7 @@ class PaymentStore {
 
   salesEmail = "";
 
-  helpUrl = "https://helpdesk.onlyoffice.com";
-
-  buyUrl =
-    "https://www.onlyoffice.com/enterprise-edition.aspx?type=buyenterprise";
+  buyUrl = "";
 
   standaloneMode = true;
 
@@ -277,13 +274,11 @@ class PaymentStore {
         salesEmail,
         currentLicense,
         standalone: standaloneMode,
-        feedbackAndSupportUrl: helpUrl,
         max,
       } = newSettings;
 
       this.buyUrl = buyUrl;
       this.salesEmail = salesEmail;
-      this.helpUrl = helpUrl;
       this.standaloneMode = standaloneMode;
       this.maxAvailableManagersCount = max;
 

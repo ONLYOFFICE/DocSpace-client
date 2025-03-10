@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,8 +31,10 @@ import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { getCookie } from "@docspace/shared/utils";
-import { deleteCookie } from "@docspace/shared/utils/cookie";
+import {
+  getOAuthJWTSignature,
+  setOAuthJWTSignature,
+} from "@docspace/shared/api/oauth";
 import AppLoader from "@docspace/shared/components/app-loader";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -70,17 +72,14 @@ const AuthHandler = () => {
         //console.log("Login with confirm key success", res);
         frameCallEvent({ event: "onAuthSuccess" });
 
-        // const redirectUrl = getCookie("x-redirect-authorization-uri");
-
-        // // deleteCookie("x-redirect-authorization-uri");
-
-        // if (redirectUrl) {
-        //   window.location.replace(redirectUrl);
-        //   return;
-        // }
-
         if (referenceUrl && referenceUrl.includes("oauth2")) {
           const newUrl = location.search.split("referenceUrl=")[1];
+
+          const token = getOAuthJWTSignature();
+
+          if (!token) {
+            await setOAuthJWTSignature();
+          }
 
           window.location.replace(newUrl);
           return;

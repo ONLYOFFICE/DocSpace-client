@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -121,12 +121,11 @@ const RegisterModalDialog = ({
               isAutoFocussed
               id="registration-modal_email"
               name="e-mail"
-              type={InputType.email}
               size={InputSize.base}
               scale
               tabIndex={1}
               isDisabled={loading}
-              value={email}
+              value={email ?? ""}
               onChange={onChangeEmail}
               onValidateInput={onValidateEmail}
               onBlur={onBlurEmail}

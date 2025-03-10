@@ -1,5 +1,4 @@
-import { AvatarRole } from "./../components/avatar/Avatar.enums";
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -38,8 +37,6 @@ import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
 import resizeImage from "resize-image";
 
-import { flagsIcons } from "@docspace/shared/utils/image-flags";
-
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
 import LeftMenuSvgUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
@@ -56,12 +53,16 @@ import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.patter
 import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
 import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
 import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
+
+import { AvatarRole } from "../components/avatar/Avatar.enums";
+
+import { flagsIcons } from "./image-flags";
+
 import { parseAddress } from "./email";
 
 import {
   FolderType,
   RoomsType,
-  ShareAccessRights,
   ThemeKeys,
   ErrorKeys,
   WhiteLabelLogoType,
@@ -559,10 +560,11 @@ export function isElementInViewport(el: HTMLElement) {
 }
 
 export function assign(
-  obj: { [key: string]: {} },
+  objParam: { [key: string]: {} },
   keyPath: string[],
   value: {},
 ) {
+  let obj = objParam;
   const lastKeyIndex = keyPath.length - 1;
   for (let i = 0; i < lastKeyIndex; ++i) {
     const key = keyPath[i];
@@ -753,7 +755,8 @@ export const getDaysRemaining = (autoDelete: Date) => {
   return `${daysRemaining}`;
 };
 
-export const getFileExtension = (fileTitle: string) => {
+export const getFileExtension = (fileTitleParam: string) => {
+  let fileTitle = fileTitleParam;
   if (!fileTitle) {
     return "";
   }
@@ -1030,17 +1033,18 @@ export const getSystemTheme = () => {
 };
 
 export const getEditorTheme = (theme?: ThemeKeys) => {
+  const systemTheme =
+    getSystemTheme() === ThemeKeys.DarkStr ? "default-dark" : "default-light";
+
   switch (theme) {
     case ThemeKeys.BaseStr:
       return "default-light";
     case ThemeKeys.DarkStr:
       return "default-dark";
-    case ThemeKeys.SystemStr: {
-      const uiTheme = getSystemTheme();
-      return uiTheme === ThemeKeys.DarkStr ? "default-dark" : "default-light";
-    }
+    case ThemeKeys.SystemStr:
+      return systemTheme;
     default:
-      return "default-dark";
+      return systemTheme;
   }
 };
 
@@ -1271,8 +1275,8 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
   const maxImageSize = maxSize ?? ONE_MEGABYTE;
   const imageBitMap = await createImageBitmap(file);
 
-  const width = imageBitMap.width;
-  const height = imageBitMap.height;
+  const { width } = imageBitMap;
+  const { height } = imageBitMap;
 
   // @ts-expect-error imageBitMap
   const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);
@@ -1324,4 +1328,32 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
     { width, height },
     file.size > maxImageSize ? COMPRESSION_RATIO : NO_COMPRESSION_RATIO,
   );
+};
+
+export const getBackupProgressInfo = (
+  opt: {
+    progress: number;
+    isCompleted?: boolean;
+    link?: string;
+    error?: string;
+  },
+  t: TTranslation,
+  setBackupProgress: (progress: number) => void,
+  setLink: (link: string) => void,
+) => {
+  const { isCompleted, link, error, progress } = opt;
+  setBackupProgress(progress);
+
+  if (isCompleted) {
+    if (error) {
+      setBackupProgress(100);
+      return { error };
+    }
+
+    if (link && link.slice(0, 1) === "/") {
+      setLink(link);
+    }
+
+    return { success: t("Settings:BackupCreatedSuccess") };
+  }
 };

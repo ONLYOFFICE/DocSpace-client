@@ -31,27 +31,98 @@ import Dropzone from ".";
 const meta = {
   title: "Components/Dropzone",
   component: Dropzone,
-  argTypes: {},
+  argTypes: {
+    isLoading: {
+      control: "boolean",
+      description: "Shows loading state of the dropzone",
+      defaultValue: false,
+    },
+    isDisabled: {
+      control: "boolean",
+      description: "Disables the dropzone",
+      defaultValue: false,
+    },
+    linkMainText: {
+      control: "text",
+      description: "Main text displayed in the dropzone",
+    },
+    linkSecondaryText: {
+      control: "text",
+      description: "Secondary text displayed in the dropzone",
+    },
+    exstsText: {
+      control: "text",
+      description: "Text displaying supported file types",
+    },
+    accept: {
+      control: "object",
+      description: "Accepted file types (string or array of strings)",
+    },
+    maxFiles: {
+      control: "number",
+      description: "Maximum number of files allowed (0 for unlimited)",
+      defaultValue: 0,
+    },
+    onDrop: { action: "dropped" },
+  },
   parameters: {
-    docs: {},
+    docs: {
+      description: {
+        component:
+          "A component for handling file uploads through drag and drop or file selection.",
+      },
+    },
   },
 } satisfies Meta<typeof Dropzone>;
+
 type Story = StoryObj<typeof Dropzone>;
 
 export default meta;
 
+const defaultArgs = {
+  isLoading: false,
+  isDisabled: false,
+  linkMainText: "Click to upload",
+  linkSecondaryText: "or drag and drop files here",
+  exstsText: "Supported file types: PDF, DOC, DOCX",
+  accept: [".pdf", ".doc", ".docx"],
+  maxFiles: 0,
+  onDrop: () => {},
+};
+
 export const Default: Story = {
+  args: defaultArgs,
+};
+
+export const Loading: Story = {
   args: {
-    isLoading: false,
-    isDisabled: false,
+    ...defaultArgs,
+    isLoading: true,
+  },
+};
 
-    accept: ["zip"],
-    maxFiles: 0,
+export const Disabled: Story = {
+  args: {
+    ...defaultArgs,
+    isDisabled: true,
+  },
+};
 
-    onDrop: () => {},
+export const SingleFileUpload: Story = {
+  args: {
+    ...defaultArgs,
+    maxFiles: 1,
+    linkMainText: "Upload single file",
+    linkSecondaryText: "or drag it here",
+  },
+};
 
-    linkMainText: "Upload",
-    linkSecondaryText: "or drop file here",
-    exstsText: "(ZIP)",
+export const ImageUpload: Story = {
+  args: {
+    ...defaultArgs,
+    accept: [".png", ".jpg", ".jpeg", ".gif"],
+    linkMainText: "Upload images",
+    linkSecondaryText: "or drag them here",
+    exstsText: "Supported file types: PNG, JPG, JPEG, GIF",
   },
 };

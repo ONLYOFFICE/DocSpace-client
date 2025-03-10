@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,7 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 
-import { Row } from "@docspace/shared/components/row";
+import { Row } from "@docspace/shared/components/rows";
 
 import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import HistoryIcon from "PUBLIC_DIR/images/history.react.svg?url";

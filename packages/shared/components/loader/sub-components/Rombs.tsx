@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -111,7 +111,7 @@ const Romb = styled.div<{ size: string }>`
 
 const Rombs = ({ size = "40px" }: { size?: string }) => (
   <>
-    <Romb color="blue" size={size} />
+    <Romb color="blue" size={size} data-testid="rombs-loader" />
 
     <Romb color="green" size={size} />
 

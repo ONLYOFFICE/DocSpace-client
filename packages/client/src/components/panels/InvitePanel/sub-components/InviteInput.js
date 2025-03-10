@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -55,7 +55,6 @@ import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
-import { Box } from "@docspace/shared/components/box";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
 import {
@@ -382,15 +381,17 @@ const InviteInput = ({
           isGroup={isGroup}
         />
         <div className="list-item_content">
-          <Box displayProp="flex" alignItems="center" gapProp="8px">
+          <div className="list-item_content-box">
             <SearchItemText primary disabled={shared}>
               {displayName || groupName}
             </SearchItemText>
-            {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
-          </Box>
+            {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
+          </div>
           <SearchItemText>{email}</SearchItemText>
         </div>
-        {shared && <SearchItemText info>{t("Common:Invited")}</SearchItemText>}
+        {shared ? (
+          <SearchItemText info>{t("Common:Invited")}</SearchItemText>
+        ) : null}
       </DropDownItem>
     );
   };
@@ -558,7 +559,7 @@ const InviteInput = ({
     <>
       <StyledSubHeader>
         {t("AddManually")}
-        {!hideSelector && (
+        {!hideSelector ? (
           <StyledLink
             className="link-list"
             fontWeight="600"
@@ -568,7 +569,7 @@ const InviteInput = ({
           >
             {t("Translations:ChooseFromList")}
           </StyledLink>
-        )}
+        ) : null}
       </StyledSubHeader>
       <StyledDescription noSelect>
         {roomId === -1
@@ -602,11 +603,11 @@ const InviteInput = ({
             fillIcon={false}
             modernView
           />
-          {culture?.isBeta && (
+          {culture?.isBeta ? (
             <BetaBadge place="bottom-end" mobilePlace="bottom" />
-          )}
+          ) : null}
         </div>
-        {isChangeLangMail && !isMobileView && (
+        {isChangeLangMail && !isMobileView ? (
           <StyledLink
             className="list-link"
             fontWeight="600"
@@ -616,9 +617,9 @@ const InviteInput = ({
           >
             {t("ResetChange")}
           </StyledLink>
-        )}
+        ) : null}
       </StyledInviteLanguage>
-      {isChangeLangMail && isMobileView && (
+      {isChangeLangMail && isMobileView ? (
         <ResetLink
           className="reset-link"
           fontWeight="600"
@@ -628,7 +629,7 @@ const InviteInput = ({
         >
           {t("ResetChange")}
         </ResetLink>
-      )}
+      ) : null}
 
       <StyledInviteInputContainer ref={inputsRef}>
         <StyledInviteInput ref={searchRef} isShowCross={!!inputValue}>

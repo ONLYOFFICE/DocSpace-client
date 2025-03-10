@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -86,7 +86,6 @@ const EmailInputForm = ({
         <EmailInput
           id="login"
           name="login"
-          type={InputType.email}
           size={InputSize.large}
           hasError={isEmailErrorShow && !emailValid}
           value={email}
@@ -104,6 +103,7 @@ const EmailInputForm = ({
         />
       </FieldContainer>
       <Button
+        id="email-continue"
         className="login-button"
         primary
         size={ButtonSize.medium}

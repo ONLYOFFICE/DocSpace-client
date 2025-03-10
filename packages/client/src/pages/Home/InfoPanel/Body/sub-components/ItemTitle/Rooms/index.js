@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -62,6 +62,7 @@ const RoomsItemHeader = ({
   displayFileExtension,
   getLogoCoverModel,
   onChangeFile,
+  setTemplateAccessSettingsVisible,
 }) => {
   const itemTitleRef = useRef();
 
@@ -72,10 +73,14 @@ const RoomsItemHeader = ({
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
+  const isTemplate = selection.isTemplate;
 
   const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
 
   const badgeUrl = getRoomBadgeUrl(selection);
+  const tooltipContent = selection?.external
+    ? t("Files:RecentlyOpenedTooltip")
+    : null;
 
   const isFile = !!selection.fileExst;
   let title = selection.title;
@@ -111,16 +116,21 @@ const RoomsItemHeader = ({
     });
   };
 
+  const onOpenTemplateAccessOptions = () => {
+    setTemplateAccessSettingsVisible(true);
+  };
+
   const onSearchClick = () => setShowSearchBlock(true);
   const hasImage = selection?.logo?.original;
   const model = getLogoCoverModel(t, hasImage);
 
   return (
     <StyledTitle ref={itemTitleRef}>
-      {isRoomMembersPanel && showSearchBlock && <Search />}
+      {isRoomMembersPanel && showSearchBlock ? <Search /> : null}
 
       <div className="item-icon">
         <RoomIcon
+          isTemplate={isTemplate}
           color={selection.logo?.color}
           title={title}
           isArchive={isArchive}
@@ -128,13 +138,15 @@ const RoomsItemHeader = ({
           imgClassName={`icon ${selection.isRoom && "is-room"}`}
           logo={icon}
           badgeUrl={badgeUrl || ""}
+          tooltipContent={tooltipContent}
           hoverSrc={
-            selection.isRoom &&
-            selection.security?.EditRoom &&
-            Camera10ReactSvgUrl
+            selection.isRoom && selection.security?.EditRoom
+              ? Camera10ReactSvgUrl
+              : null
           }
           model={model}
           onChangeFile={onChangeFileContext}
+          tooltipId="info-panel-title_icon-tooltip"
         />
       </div>
 
@@ -147,13 +159,13 @@ const RoomsItemHeader = ({
         truncate
       >
         {title}
-        {isFile && displayFileExtension && (
+        {isFile && displayFileExtension ? (
           <span className="file-extension">{selection.fileExst}</span>
-        )}
+        ) : null}
       </Text>
 
       <div className="info_title-icons">
-        {isRoomMembersPanel && (
+        {isRoomMembersPanel ? (
           <IconButton
             id="info_search"
             className="icon"
@@ -162,19 +174,25 @@ const RoomsItemHeader = ({
             onClick={onSearchClick}
             size={16}
           />
-        )}
+        ) : null}
 
-        {canInviteUserInRoomAbility && isRoomMembersPanel && (
+        {canInviteUserInRoomAbility && isRoomMembersPanel ? (
           <IconButton
             id="info_add-user"
             className="icon"
-            title={t("Common:InviteContacts")}
+            title={
+              isTemplate
+                ? t("Files:AccessSettings")
+                : t("Common:InviteContacts")
+            }
             iconName={PersonPlusReactSvgUrl}
             isFill
-            onClick={onClickInviteUsers}
+            onClick={
+              isTemplate ? onOpenTemplateAccessOptions : onClickInviteUsers
+            }
             size={16}
           />
-        )}
+        ) : null}
         {/* Show after adding a calendar request
         {openHistory && (
           <CalendarComponent
@@ -219,7 +237,8 @@ export default inject(
 
     const { displayFileExtension } = filesSettingsStore;
     const { externalLinks } = publicRoomStore;
-    const { setCoverSelection } = dialogsStore;
+    const { setCoverSelection, setTemplateAccessSettingsVisible } =
+      dialogsStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
@@ -258,6 +277,7 @@ export default inject(
       maxImageUploadSize: settingsStore.maxImageUploadSize,
       updateInfoPanelSelection,
       onChangeFile,
+      setTemplateAccessSettingsVisible,
     };
   },
 )(

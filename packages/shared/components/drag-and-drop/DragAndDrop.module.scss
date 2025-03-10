@@ -1,0 +1,31 @@
+@import "../../styles/variables/colors";
+@import "../../styles/variables/devices";
+@import "../../styles/mixins";
+
+.dragAndDrop {
+  height: var(--drag-and-drop-height);
+  border: var(--drag-and-drop-border);
+  margin-inline-start: -2px;
+  position: relative;
+  outline: none;
+
+  @include tablet {
+    margin-inline-start: 0;
+  }
+
+  &.dragging {
+    background: var(--drag-and-drop-bg);
+
+    &.dragAccept {
+      background: var(--drag-and-drop-accept-bg);
+    }
+  }
+
+  &:not(.dragging) {
+    background: none !important;
+  }
+}
+
+.droppableHover {
+  background: var(--drag-and-drop-accept-bg);
+}

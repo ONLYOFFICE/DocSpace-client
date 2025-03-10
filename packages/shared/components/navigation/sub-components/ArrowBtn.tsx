@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,12 +30,12 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 
 import { IconButton } from "../../icon-button";
 
-import { IArrowButtonProps } from "../Navigation.types";
+import { TArrowButtonProps } from "../Navigation.types";
 
 const ArrowButton = ({
   isRootFolder,
   onBackToParentFolder,
-}: IArrowButtonProps) => {
+}: TArrowButtonProps) => {
   return !isRootFolder ? (
     <div className="navigation-arrow-container">
       <IconButton

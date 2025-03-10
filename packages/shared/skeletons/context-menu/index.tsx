@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -30,14 +30,13 @@ import { isDesktop } from "../../utils";
 
 import { RectangleSkeletonProps, RectangleSkeleton } from "../rectangle";
 
-import { StyledContextMenu } from "./ContextMenu.styled";
+import styles from "./ContextMenu.module.scss";
 import { ContextMenuSkeletonProps } from "./ContextMenu.types";
 
 const ContextMenuSkeleton = ({
   id,
   className,
   style,
-  isRectangle = true,
   ...rest
 }: ContextMenuSkeletonProps & RectangleSkeletonProps) => {
   const {
@@ -54,7 +53,11 @@ const ContextMenuSkeleton = ({
   const isDesktopView = isDesktop();
 
   return (
-    <StyledContextMenu id={id} className={className} style={style}>
+    <div
+      id={id}
+      className={`${styles.container} ${className || ""}`}
+      style={style}
+    >
       <RectangleSkeleton
         className="rectangle-content"
         title={title}
@@ -69,7 +72,7 @@ const ContextMenuSkeleton = ({
         animate={animate}
       />
       <RectangleSkeleton
-        className="context-menu-rectangle"
+        className={styles.rectangle}
         title={title}
         width={isDesktopView ? "97px" : "102px"}
         height={isDesktopView ? "16px" : "20px"}
@@ -81,7 +84,7 @@ const ContextMenuSkeleton = ({
         speed={speed}
         animate={animate}
       />
-    </StyledContextMenu>
+    </div>
   );
 };
 

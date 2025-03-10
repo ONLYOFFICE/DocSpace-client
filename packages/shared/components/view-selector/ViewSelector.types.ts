@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -31,7 +31,12 @@ export type TViewSelectorOption = {
   callback?: () => void;
 };
 
-export interface ViewSelectorProps {
+type PickedDivProps = Pick<
+  React.ComponentPropsWithRef<"div">,
+  "className" | "id" | "style"
+>;
+
+export type ViewSelectorProps = PickedDivProps & {
   /** Disables the button default functionality */
   isDisabled?: boolean;
   /** Sets a callback function that is triggered when the button is clicked */
@@ -42,7 +47,4 @@ export interface ViewSelectorProps {
   viewAs: string;
   /** Displays only available selector options  */
   isFilter?: boolean;
-  className?: string;
-  id?: string;
-  style?: React.CSSProperties;
-}
+};

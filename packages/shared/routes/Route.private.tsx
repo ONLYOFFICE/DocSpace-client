@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,12 +26,13 @@
 
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 
-import AppLoader from "@docspace/shared/components/app-loader";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import AppLoader from "../components/app-loader";
 
-import { TenantStatus } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { TenantStatus } from "../enums";
+import { combineUrl } from "../utils/combineUrl";
 
 import type { PrivateRouteProps } from "./Routers.types";
 
@@ -51,6 +52,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     wizardCompleted,
 
     user,
+    isLoadedUser,
     children,
     restricted,
     tenantStatus,
@@ -60,11 +62,46 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     baseDomain,
     limitedAccessSpace,
     displayAbout,
+
+    validatePublicRoomKey,
+    publicRoomKey,
+    roomId,
+    isLoadedPublicRoom,
+    isLoadingPublicRoom,
   } = props;
 
   const location = useLocation();
+  const [searchParams] = useSearchParams();
 
   const renderComponent = () => {
+    const key = searchParams.get("key");
+
+    if (isLoadedUser && !user && location.pathname.includes("/rooms/shared")) {
+      const filter = FilesFilter.getDefault();
+      const subFolder = new URLSearchParams(window.location.search).get(
+        "folder",
+      );
+      const path = "/rooms/share";
+
+      filter.folder = subFolder || roomId || "";
+      if (key) {
+        filter.key = key;
+      }
+
+      window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`);
+    }
+
+    if (
+      key &&
+      (!publicRoomKey || publicRoomKey !== key) &&
+      location.pathname.includes("/rooms/shared") &&
+      !isLoadedPublicRoom &&
+      !isLoadingPublicRoom &&
+      validatePublicRoomKey
+    ) {
+      validatePublicRoomKey(key);
+    }
+
     if (!user && isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(
@@ -91,7 +128,9 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       sessionStorage.removeItem("loggedOutUserId");
     }
 
-    const isPortalUrl = location.pathname === "/preparation-portal";
+    const isPortalUrl =
+      location.pathname === "/preparation-portal" ||
+      location.pathname === "/management/preparation-portal";
 
     const isPaymentsUrl =
       location.pathname === "/portal-settings/payments/portal-payments";
@@ -130,6 +169,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname.includes("bonus") && !isCommunity;
 
     const isAboutPage = location.pathname.includes("about");
+
+    if (location.pathname === "/shared/invalid-link") {
+      return children;
+    }
 
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
@@ -254,22 +297,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (!isLoaded) {
       return <AppLoader />;
     }
-
-    // const userLoaded = !isEmpty(user);
-    // if (!userLoaded) {
-    //   return <Component {...props} />;
-    // }
-
-    // if (!userLoaded) {
-    //   console.log("PrivateRoute render Loader", rest);
-    //   return (
-    //     <Section>
-    //       <Section.SectionBody>
-    //         <Loader className="pageLoader" type="rombs" size="40px" />
-    //       </Section.SectionBody>
-    //     </Section>
-    //   );
-    // }
 
     if (
       (isPortalRenameUrl && !enablePortalRename) ||

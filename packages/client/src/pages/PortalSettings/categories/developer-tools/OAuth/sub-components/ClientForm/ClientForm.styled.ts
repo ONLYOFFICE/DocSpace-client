@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -114,6 +114,10 @@ const StyledInputGroup = styled.div.attrs(injectDefaultTheme)`
     display: flex;
     align-items: center;
     gap: 0px;
+
+    .icon-button {
+      padding: 0 8px;
+    }
   }
 
   .public_client {

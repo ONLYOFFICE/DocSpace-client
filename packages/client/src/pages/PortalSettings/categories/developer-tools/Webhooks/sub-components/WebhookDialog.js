@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -182,13 +182,13 @@ const WebhookDialog = (props) => {
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledWebhookForm onSubmit={onFormSubmit}>
-          {!isSettingsModal && (
+          {!isSettingsModal ? (
             <Hint>
               {t("WebhookCreationHint", {
                 productName: t("Common:ProductName"),
               })}
             </Hint>
-          )}
+          ) : null}
           <LabledInput
             id={`${additionalId}-name-input`}
             label={t("WebhookName")}

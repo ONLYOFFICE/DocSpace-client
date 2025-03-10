@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -29,7 +29,6 @@ import { useTranslation } from "react-i18next";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { Box } from "@docspace/shared/components/box";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 
 import LdapFieldComponent from "./LdapFieldComponent";
@@ -104,7 +103,7 @@ const GroupMembership = (props) => {
           })}
         />
       </div>
-      <Box className="group_membership-container">
+      <div className="group_membership-container">
         <FieldContainer
           isVertical
           labelVisible
@@ -211,7 +210,7 @@ const GroupMembership = (props) => {
             tabIndex={17}
           />
         </FieldContainer>
-      </Box>
+      </div>
     </>
   );
 };

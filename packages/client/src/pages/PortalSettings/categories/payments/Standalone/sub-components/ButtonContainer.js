@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,14 +26,17 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-
+import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 
 import { StyledButtonComponent } from "../StyledComponent";
 
-const ButtonContainer = ({ t, buyUrl }) => {
+const ButtonContainer = ({ t, buyUrl, siteDomain }) => {
   const onClickBuy = () => {
-    window.open(buyUrl, "_blank");
+    const url = buyUrl || siteDomain;
+    url
+      ? window.open(url, "_blank")
+      : toastr.error(t("Common:UnexpectedError"));
   };
   return (
     <StyledButtonComponent>
@@ -47,10 +50,11 @@ const ButtonContainer = ({ t, buyUrl }) => {
   );
 };
 
-export default inject(({ paymentStore }) => {
+export default inject(({ paymentStore, settingsStore }) => {
   const { buyUrl } = paymentStore;
-
+  const { siteDomain } = settingsStore;
   return {
     buyUrl,
+    siteDomain,
   };
 })(observer(ButtonContainer));

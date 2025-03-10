@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -151,7 +151,20 @@ export const StyledBody = styled.div`
   }
 
   .app-code-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     width: 100%;
+  }
+
+  .app-code-description {
+    box-sizing: border-box;
+    margin: 0 0 32px 0;
+  }
+
+  .app-code-input,
+  .app-code-continue-btn {
+    box-sizing: border-box;
   }
 
   .app-code-text {

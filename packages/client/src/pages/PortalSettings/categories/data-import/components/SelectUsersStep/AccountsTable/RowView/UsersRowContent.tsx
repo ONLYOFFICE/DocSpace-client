@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,8 +27,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
-import { Box } from "@docspace/shared/components/box";
-import { RowContent } from "@docspace/shared/components/row-content";
+import { RowContent } from "@docspace/shared/components/rows";
 import { UsersRowContentProps } from "../../../../types";
 
 const StyledRowContent = styled(RowContent)`
@@ -44,6 +43,11 @@ const StyledRowContent = styled(RowContent)`
     font-size: 14px;
     font-weight: 600;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};
+  }
+
+  .content-data-box {
+    box-sizing: border-box;
+    display: flex;
   }
 
   .user-email {
@@ -66,14 +70,14 @@ const UsersRowContent = (props: UsersRowContentProps) => {
 
   const contentData = [
     <div key={data.key}>
-      <Box displayProp="flex">
+      <div className="content-data-box">
         <Text className="username">{displayName}</Text>
-        {isDuplicate && (
+        {isDuplicate ? (
           <Text className="user-existing">
             ({t("Settings:AccountAlreadyExists")})
           </Text>
-        )}
-      </Box>
+        ) : null}
+      </div>
 
       <Text className="user-email">{email}</Text>
     </div>,

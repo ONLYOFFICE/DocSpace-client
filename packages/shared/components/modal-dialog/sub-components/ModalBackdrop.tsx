@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,48 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
-import { TTheme } from "@docspace/shared/themes";
+import classNames from "classnames";
 
-import { mobile } from "../../../utils";
 import { ModalDialogBackdropProps } from "../ModalDialog.types";
-
-const backdropBackground = (props: {
-  theme: TTheme;
-  modalSwipeOffset?: number;
-}) => {
-  const { r, g, b, a } = props.theme.modalDialog.backdrop.backgroundRGBA;
-  const swipeOffset = props.modalSwipeOffset;
-
-  if (!swipeOffset) return `rgba(${r}, ${g}, ${b}, ${a})`;
-  return `rgba(${r}, ${g}, ${b}, ${a + swipeOffset * (a / 120)})`;
-};
-
-const StyledModalBackdrop = styled.div<{ zIndex?: number }>`
-  display: block;
-  height: 100%;
-  min-height: fill-available;
-  max-height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  position: fixed;
-  // doesn't require mirroring for RTL
-  left: 0;
-  top: 0;
-
-  background: ${(props) => props.theme.backdrop.backgroundColor};
-  z-index: ${(props) => props.zIndex};
-
-  @media ${mobile} {
-    position: absolute;
-  }
-
-  transition: opacity 0.2s;
-  opacity: 0;
-  &.modal-backdrop-active {
-    opacity: 1;
-  }
-`;
+import styles from "../ModalDialog.module.scss";
 
 const ModalBackdrop = ({
   className,
@@ -74,9 +36,12 @@ const ModalBackdrop = ({
   children,
 }: ModalDialogBackdropProps) => {
   return (
-    <StyledModalBackdrop zIndex={zIndex} className={className}>
+    <div
+      style={{ zIndex }}
+      className={classNames(styles.modalBackdrop, className)}
+    >
       {children}
-    </StyledModalBackdrop>
+    </div>
   );
 };
 

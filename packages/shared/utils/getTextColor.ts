@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,9 +26,9 @@
 import hexRgb from "hex-rgb";
 import { globalColors } from "../themes";
 
-export const getTextColor = (color, brightnessDiff = 128) => {
-  const black = globalColors.black;
-  const white = globalColors.white;
+export const getTextColor = (color: string, brightnessDiff: number = 128) => {
+  const { black } = globalColors;
+  const { white } = globalColors;
 
   const rgba = hexRgb(color);
 

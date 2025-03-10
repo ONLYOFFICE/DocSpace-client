@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,26 +25,40 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import {
-  CustomScrollbarsVirtualList,
-  ScrollbarType,
-} from "@docspace/shared/components/scrollbar";
+
+import { CustomScrollbarsVirtualList } from "../../../../../scrollbar";
 
 import BookmarksProps from "./Bookmarks.props";
-import { Item, List, Text } from "./Bookmarks.styled";
+import styles from "./Bookmarks.module.scss";
 
 export const Bookmarks = ({ bookmarks, navigate }: BookmarksProps) => {
   return (
-    <CustomScrollbarsVirtualList stype={ScrollbarType.mediumBlack}>
-      <List>
+    <CustomScrollbarsVirtualList>
+      <ul
+        className={styles.list}
+        aria-label="PDF bookmarks"
+        data-testid="bookmarks-list"
+      >
         {bookmarks.map((item, index) => {
           return (
-            <Item key={item.page}>
-              <Text onClick={() => navigate(index)}>{item.description}</Text>
-            </Item>
+            <li
+              key={item.page}
+              className={styles.item}
+              data-testid={`bookmark-item-${index}`}
+            >
+              <p
+                className={styles.text}
+                onClick={() => navigate(index)}
+                aria-label={`Go to bookmark: ${item.description}`}
+                data-testid={`bookmark-button-${index}`}
+                data-page={item.page}
+              >
+                {item.description}
+              </p>
+            </li>
           );
         })}
-      </List>
+      </ul>
     </CustomScrollbarsVirtualList>
   );
 };

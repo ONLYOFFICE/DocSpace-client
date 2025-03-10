@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -130,7 +130,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 
   return (
     <StyledAccessSelector className="access-selector">
-      {!(isMobile() && !isMobileHorizontalOrientation) && (
+      {!(isMobile() && !isMobileHorizontalOrientation) ? (
         <AccessRightSelect
           className={className}
           selectedOption={selectedOption}
@@ -151,9 +151,9 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
         />
-      )}
+      ) : null}
 
-      {isMobile() && !isMobileHorizontalOrientation && (
+      {isMobile() && !isMobileHorizontalOrientation ? (
         <AccessRightSelect
           className={className}
           selectedOption={selectedOption}
@@ -177,7 +177,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           availableAccess={availableAccess}
           scaledOptions={scaledOptions}
         />
-      )}
+      ) : null}
     </StyledAccessSelector>
   );
 };

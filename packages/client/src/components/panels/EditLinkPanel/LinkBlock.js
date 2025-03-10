@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -54,7 +54,7 @@ const LinkBlock = (props) => {
         isDisabled={isLoading}
       />
 
-      {isEdit && (
+      {isEdit ? (
         <TextInput
           scale
           size="base"
@@ -65,7 +65,7 @@ const LinkBlock = (props) => {
           value={linkValue}
           placeholder={t("LinkName")}
         />
-      )}
+      ) : null}
     </div>
   );
 };

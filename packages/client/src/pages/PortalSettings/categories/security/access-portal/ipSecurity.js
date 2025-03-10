@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -240,19 +240,21 @@ const IpSecurity = (props) => {
 
   return (
     <MainContainer>
-      <LearnMoreWrapper>
+      <LearnMoreWrapper withoutExternalLink={!ipSettingsUrl}>
         <Text className="page-subtitle">
           {t("IPSecuritySettingDescription")}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target="_blank"
-          isHovered
-          href={ipSettingsUrl}
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {ipSettingsUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target="_blank"
+            isHovered
+            href={ipSettingsUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup
@@ -278,7 +280,7 @@ const IpSecurity = (props) => {
         onClick={onSelectType}
       />
 
-      {enable && (
+      {enable ? (
         <UserFields
           className="user-fields"
           inputs={ips}
@@ -290,9 +292,9 @@ const IpSecurity = (props) => {
           classNameAdditional="add-allowed-ip-address"
           isAutoFocussed={autoFocus}
         />
-      )}
+      ) : null}
 
-      {enable && (
+      {enable ? (
         <>
           <Text fontSize="16px" fontWeight="700" className="warning-text">
             {t("Common:Warning")}
@@ -301,7 +303,7 @@ const IpSecurity = (props) => {
             {t("IPSecurityWarningHelper")}
           </Text>
         </>
-      )}
+      ) : null}
 
       <SaveCancelButtons
         className="save-cancel-buttons"

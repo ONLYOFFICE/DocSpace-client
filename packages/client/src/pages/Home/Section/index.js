@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,6 +28,5 @@ export { default as SectionHeaderContent } from "./Header";
 export { default as SectionBodyContent } from "./Body";
 export { default as ContactsSectionBodyContent } from "./ContactsBody";
 export { default as SectionFilterContent } from "./Filter";
-export { default as SectionPagingContent } from "./Paging";
 export { default as SectionWarningContent } from "./Warning";
 export { default as SectionSubmenuContent } from "./Tabs";

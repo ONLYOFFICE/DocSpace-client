@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -573,6 +573,11 @@ const StyledInfo = styled.div.attrs(injectDefaultTheme)`
 
   .text {
     color: ${(props) => props.theme.selector.info.color};
+  }
+
+  .selector-info-text-wrapper {
+    display: flex;
+    gap: 8px;
   }
 `;
 

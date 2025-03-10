@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -27,7 +27,8 @@
 // Override default variables before the import
 $font-family-base: "Open Sans", sans-serif;
 
-@import url(../../../public/css/fonts.css);
+@import "../../../public/css/fonts.css";
+@import "./variables/_colors.scss";
 
 html,
 body {

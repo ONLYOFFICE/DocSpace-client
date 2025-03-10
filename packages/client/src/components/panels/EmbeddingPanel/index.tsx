@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -50,7 +50,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
-import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
+import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
@@ -406,7 +406,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
       <ModalDialog.Header>{t("Files:EmbeddingSettings")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledBody>
-          {barIsVisible && (
+          {barIsVisible ? (
             <div className="embedding-panel_banner">
               <Text fontSize="12px" fontWeight={400}>
                 {isAdmin ? (
@@ -439,9 +439,9 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                 onClick={onCloseBar}
               />
             </div>
-          )}
+          ) : null}
           <div className="embedding-panel_body">
-            {sharedLinksOptions && sharedLinksOptions.length > 1 && (
+            {sharedLinksOptions && sharedLinksOptions.length > 1 ? (
               <>
                 <Text
                   className="embedding-panel_header-link"
@@ -461,9 +461,9 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   withLabel={false}
                 />
               </>
-            )}
+            ) : null}
 
-            {showLinkBar && (
+            {showLinkBar ? (
               <PublicRoomBar
                 className="embedding-panel_bar"
                 headerText={barTitle}
@@ -471,7 +471,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                 iconName={TabletLinkReactSvgUrl}
                 barIsVisible={barIsVisible}
               />
-            )}
+            ) : null}
 
             <Text
               className="embedding-panel_header-text"
@@ -498,7 +498,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
               />
             </div>
 
-            {!isFile && (
+            {!isFile ? (
               <>
                 <Text
                   className="embedding-panel_header-text"
@@ -529,7 +529,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   />
                 </div>
               </>
-            )}
+            ) : null}
 
             <div className="embedding-panel_code-container">
               <Text

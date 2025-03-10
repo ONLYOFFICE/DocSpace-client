@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -140,7 +140,7 @@ const PayerInformationContainer = ({
         {unknownPayerDescription()}
       </Text>
       <div>
-        {isStripePortalAvailable && (
+        {isStripePortalAvailable ? (
           <ColorTheme
             noSelect
             fontWeight={600}
@@ -152,7 +152,7 @@ const PayerInformationContainer = ({
           >
             {t("ChooseNewPayer")}
           </ColorTheme>
-        )}
+        ) : null}
       </div>
     </div>
   );

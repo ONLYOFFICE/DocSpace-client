@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -140,7 +140,7 @@ const ChangePortalOwnerDialog = ({
       withBodyScroll
       containerVisible={selectorVisible}
     >
-      {selectorVisible && (
+      {selectorVisible ? (
         <ModalDialog.Container>
           <PeopleSelector
             withCancelButton
@@ -162,7 +162,7 @@ const ChangePortalOwnerDialog = ({
             filter={filter}
           />
         </ModalDialog.Container>
-      )}
+      ) : null}
       <ModalDialog.Header>{t("Translations:OwnerChange")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledOwnerInfo>

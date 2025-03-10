@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -104,8 +104,6 @@ const {
   darkScroll,
   darkScrollHover,
   darkScrollActive,
-  silver,
-  highlandGray,
 
   blurDark,
   darkGreyAction,
@@ -417,7 +415,7 @@ const Dark: TTheme = {
     float: "left",
     height: "19px",
     overflow: "hidden",
-    padding: "0px",
+    padding: "",
 
     separator: {
       border: `1px solid ${grayDarkStrong}`,
@@ -1854,6 +1852,7 @@ const Dark: TTheme = {
       iconColor: grayDark,
       iconErrorColor: darkErrorStatus,
       primaryColor: darkGrayDark,
+      barIconColor: darkGrayDark,
     },
 
     members: {
@@ -2095,10 +2094,10 @@ const Dark: TTheme = {
         draggingColor: dndDarkColor,
         draggingHoverColor: dndDarkHover,
         checkedColor: lightDarkGrayHover,
-        roomsCheckedColor: black,
+        roomsCheckedColor: lightDarkGrayHover,
         border: `1px solid ${grayDarkStrong}`,
         backgroundBadgeColor: black,
-        backgroundColor: darkGrayLight,
+        backgroundColor: black,
         borderRadius: "6px",
         roomsBorderRadius: "12px",
         bottomBorderRadius: "0 0 6px 6px",
@@ -2108,9 +2107,16 @@ const Dark: TTheme = {
         backgroundColorTop: black,
       },
 
+      tag: {
+        backgroundColor: black,
+        hoverBackgroundColor: grayStrong,
+        activeBackgroundColor: grayLight,
+      },
+
       sideColor: white,
       color: white,
       textColor: grayDark,
+      subTextColor: "#858585",
     },
 
     animationColor: lightSecondMain,
@@ -2172,45 +2178,6 @@ const Dark: TTheme = {
     alert: {
       fill: mainOrange,
       path: black,
-    },
-  },
-
-  mediaViewer: {
-    color: grayDarkStrong,
-    backgroundColor: highlandGray,
-    fill: white,
-    titleColor: white,
-    iconColor: white,
-
-    controlBtn: {
-      backgroundColor: silver,
-    },
-
-    imageViewer: {
-      backgroundColor: silver,
-      inactiveBackgroundColor: highlandGray,
-      fill: white,
-    },
-
-    progressBar: {
-      background: grayDarkStrong,
-      backgroundColor: silver,
-    },
-
-    scrollButton: {
-      backgroundColor: highlandGray,
-      background: silver,
-      border: `solid ${white}`,
-    },
-
-    videoViewer: {
-      fill: white,
-      stroke: white,
-      color: grayDarkStrong,
-      colorError: white,
-      backgroundColorError: darkBlack,
-      backgroundColor: highlandGray,
-      background: silver,
     },
   },
 
@@ -2304,7 +2271,7 @@ const Dark: TTheme = {
         borderColor: gray,
         hoverBorderColor: lightDarkGrayHover,
         hoverColor: white,
-        color: darkGrayDark,
+        color: white,
         iconColor: darkGrayDark,
       },
     },
@@ -2492,7 +2459,8 @@ const Dark: TTheme = {
       color: white,
       tooltipColor: darkToastInfo,
       iconColor: darkErrorStatus,
-
+      positiveStatusColor: darkStatusPositive,
+      progressColor: lightGrayDark,
       shareButton: {
         color: gray,
         sharedColor: lightGrayDark,
@@ -2656,6 +2624,15 @@ const Dark: TTheme = {
       stroke: white,
       color: white,
     },
+
+    versionDisabled: {
+      fillDisabled: grayDarkStrong,
+    },
+
+    versionLink: {
+      color: grayDark,
+    },
+
     commentColor: grayDark,
   },
 
@@ -2955,7 +2932,7 @@ const Dark: TTheme = {
         background: darkGrayLight,
       },
       storageManagement: {
-        grayBackgroundText: grayDark,
+        grayBackgroundText: white,
         descriptionColor: darkGrayDark,
         dividerColor: grayDarkMid,
       },
@@ -2971,7 +2948,6 @@ const Dark: TTheme = {
         linkColor: lightBlueMain,
         spanBackground: lightBlueMain,
         filterBorder: `1px solid ${black}`,
-        toastBackground: darkToastWarning,
         background: darkGrayLight,
       },
     },
@@ -2981,6 +2957,10 @@ const Dark: TTheme = {
       generatePasswordColor: darkGrayDark,
       textColor: grayDark,
     },
+  },
+
+  statusMessage: {
+    toastBackground: darkToastWarning,
   },
 
   tileLoader: {
@@ -3265,6 +3245,12 @@ const Dark: TTheme = {
     selectedBorderColor: grayDarkMid,
     backgroundColor: black,
     borderColor: grayDarkStrong,
+  },
+
+  formFillingTips: {
+    circleColor: grayDarkMid,
+    selectedColor: black,
+    circleBorder: `3px solid ${lightSecondMain}`,
   },
 };
 

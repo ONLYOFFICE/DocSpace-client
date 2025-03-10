@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import React from "react";
 import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
@@ -40,6 +43,7 @@ import { AvatarRole } from "../avatar";
 import { Selector } from "./Selector";
 import { SelectorProps, TSelectorItem } from "./Selector.types";
 import { globalColors } from "../../themes";
+import { EmployeeStatus, EmployeeType } from "../../enums";
 
 const StyledRowLoader = styled.div`
   width: 100%;
@@ -61,21 +65,7 @@ const StyledBreadCrumbsLoader = styled.div`
 const meta = {
   title: "Components/Selector",
   component: Selector,
-  parameters: {
-    docs: {
-      description: {
-        component:
-          "Selector for displaying items list of people or room selector",
-      },
-    },
-  },
-  // argTypes: {
-  //   height: {
-  //     table: {
-  //       disable: true,
-  //     },
-  //   },
-  // },
+  parameters: {},
 } satisfies Meta<typeof Selector>;
 type Story = StoryObj<typeof meta>;
 
@@ -142,6 +132,8 @@ const getItems = (count: number) => {
       avatar: "",
       role: AvatarRole.owner,
       hasAvatar: false,
+      userType: EmployeeType.Admin,
+      status: EmployeeStatus.Active,
     });
   }
 

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -26,8 +26,8 @@
 
 import type { RectangleSkeletonProps } from "../rectangle";
 
-export interface ProfileFooterLoaderProps extends RectangleSkeletonProps {
+export type ProfileFooterLoaderProps = RectangleSkeletonProps & {
   id?: string;
-}
+};
 
-export interface ProfileViewLoaderProps extends ProfileFooterLoaderProps {}
+export type ProfileViewLoaderProps = ProfileFooterLoaderProps;

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -25,49 +25,99 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
 import { InputSize } from "../text-input";
 import { FileInput } from "./FileInput";
 
-describe("<FileInput />", () => {
-  it("renders without error", () => {
-    render(<FileInput size={InputSize.base} onInput={jest.fn()} />);
+// Mock images
+jest.mock(
+  "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url",
+  () => "test-file-stub",
+);
+jest.mock("PUBLIC_DIR/images/document.react.svg?url", () => "test-file-stub");
 
-    expect(screen.getByTestId("file-input")).toBeInTheDocument();
+// Mock react-i18next
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({ t: (key: string) => key }),
+}));
+
+// Mock toastr
+jest.mock("../toast", () => ({
+  toastr: {
+    error: jest.fn(),
+  },
+}));
+
+describe("<FileInput />", () => {
+  const mockOnInput = jest.fn();
+  const defaultProps = {
+    size: InputSize.base,
+    onInput: mockOnInput,
+  };
+
+  beforeEach(() => {
+    mockOnInput.mockClear();
+    jest.clearAllMocks();
   });
 
-  // it("not re-render test", () => {
-  //   const onInput = jest.fn();
+  it("renders without error", () => {
+    render(<FileInput {...defaultProps} />);
+    expect(screen.getByTestId("file-input")).toBeInTheDocument();
+    expect(screen.getByTestId("icon-button")).toBeInTheDocument();
+  });
 
-  //   const wrapper = shallow(<FileInput onInput={onInput} />).instance();
+  it("handles file input correctly", async () => {
+    render(<FileInput {...defaultProps} />);
+    const fileInput = screen.getByRole("button");
+    const file = new File(["test"], "test.txt", { type: "text/plain" });
 
-  //   const shouldUpdate = wrapper.shouldComponentUpdate(
-  //     wrapper.props,
-  //     wrapper.state,
-  //   );
+    await act(async () => {
+      fireEvent.drop(fileInput, {
+        dataTransfer: {
+          files: [file],
+          types: ["Files"],
+        },
+      });
+    });
+  });
 
-  //   expect(shouldUpdate).toBe(false);
-  // });
+  it("applies correct size class", () => {
+    render(<FileInput {...defaultProps} size={InputSize.base} />);
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("data-size", "base");
+  });
 
-  // it("accepts id", () => {
-  //   const wrapper = mount(<FileInput onInput={jest.fn()} id="testId" />);
+  it("handles disabled state correctly", () => {
+    render(<FileInput {...defaultProps} isDisabled />);
+    const fileInput = screen.getByTestId("file-input");
 
-  //   expect(wrapper.prop("id")).toEqual("testId");
-  // });
+    // Check for disabled class
+    expect(fileInput).toHaveClass("disabled");
 
-  // it("accepts className", () => {
-  //   const wrapper = mount(<FileInput onInput={jest.fn()} className="test" />);
+    // Check that the TextInput is disabled
+    const textInput = screen.getByRole("textbox");
+    expect(textInput).toBeDisabled();
 
-  //   expect(wrapper.prop("className")).toEqual("test");
-  // });
+    // Verify dropzone is disabled via noClick prop
+    expect(fileInput).toHaveAttribute("aria-disabled", "true");
+  });
 
-  // it("accepts style", () => {
-  //   const wrapper = mount(
-  //     <FileInput onInput={jest.fn()} style={{ color: "red" }} />,
-  //   );
+  it("handles loading state correctly", () => {
+    render(<FileInput {...defaultProps} isLoading />);
+    expect(screen.getByTestId("loader")).toBeInTheDocument();
+    expect(screen.queryByTestId("icon-button")).not.toBeInTheDocument();
+  });
 
-  //   expect(wrapper.getDOMNode().style).toHaveProperty("color", "red");
-  // });
+  it("handles error state correctly", () => {
+    render(<FileInput {...defaultProps} hasError />);
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("data-error", "true");
+  });
+
+  it("handles warning state correctly", () => {
+    render(<FileInput {...defaultProps} hasWarning />);
+    const input = screen.getByTestId("text-input");
+    expect(input).toHaveAttribute("data-warning", "true");
+  });
 });

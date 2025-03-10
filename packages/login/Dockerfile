@@ -12,7 +12,7 @@ COPY  packages/login/package.json packages/login/package.json
 COPY  packages/shared/package.json packages/shared/package.json
 COPY  packages/client/package.json packages/client/package.json
 
-RUN yarn install
+RUN yarn install --no-immutable 
 RUN npx playwright install chromium --with-deps
 
 COPY  packages/shared packages/shared

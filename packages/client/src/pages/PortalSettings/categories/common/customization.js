@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -36,6 +36,7 @@ import { LanguageAndTimeZoneSettings } from "./Customization/language-and-time-z
 import { WelcomePageSettings } from "./Customization/welcome-page-settings";
 import { PortalRenaming } from "./Customization/portal-renaming";
 import { DNSSettings } from "./Customization/dns-settings";
+import { ConfigureDeepLink } from "./Customization/configure-deep-link";
 import CustomizationNavbar from "./customization-navbar";
 import LoaderDescriptionCustomization from "./sub-components/loaderDescriptionCustomization";
 
@@ -133,12 +134,14 @@ const Customization = (props) => {
       <StyledSettingsSeparator />
       <DNSSettings isMobileView={viewMobile} />
 
-      {enablePortalRename && (
+      {enablePortalRename ? (
         <>
           <StyledSettingsSeparator />
           <PortalRenaming isMobileView={viewMobile} />
         </>
-      )}
+      ) : null}
+      <StyledSettingsSeparator />
+      <ConfigureDeepLink />
     </StyledComponent>
   );
 };

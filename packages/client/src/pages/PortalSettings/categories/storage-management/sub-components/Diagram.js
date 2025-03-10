@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -111,16 +111,17 @@ const Diagram = (props) => {
 
   return (
     <StyledDiagramComponent maxWidth={maxWidth}>
-      <div className="diagram_slider">
-        {!hidingSlider &&
-          elementsTags.map((tag) => (
+      {!hidingSlider ? (
+        <div className="diagram_slider">
+          {elementsTags.map((tag) => (
             <StyledFolderTagSection
               width={tag.percentageSize}
               key={tag.name}
               color={tag.color}
             />
           ))}
-      </div>
+        </div>
+      ) : null}
       <div className="diagram_description">
         {elementsTags.map((tag) => (
           <div className="diagram_folder-tag" key={tag.name}>

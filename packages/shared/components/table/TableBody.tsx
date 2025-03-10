@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -44,7 +44,6 @@ const TableBodyPure = (props: TableBodyProps) => {
     useReactWindow = true,
     onScroll,
     infoPanelVisible = false,
-    isIndexEditingMode = false,
   } = props;
 
   if (!columnStorageName || !columnInfoPanelStorageName) return <div />;
@@ -67,7 +66,6 @@ const TableBodyPure = (props: TableBodyProps) => {
         itemSize={itemHeight}
         onScroll={onScroll}
         infoPanelVisible={infoPanelVisible}
-        isIndexEditingMode={isIndexEditingMode}
       >
         {children}
       </InfiniteLoaderComponent>

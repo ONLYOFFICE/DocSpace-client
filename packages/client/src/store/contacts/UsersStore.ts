@@ -213,17 +213,18 @@ class UsersStore {
       const { setUser } = this.userStore;
 
       const { data, id } = value;
-      const { isAdmin, isRoomAdmin, isCollaborator, isVisitor } = data;
+      const { isAdmin, isRoomAdmin } = data; // isCollaborator, isVisitor
       const { pathname } = window.location;
 
-      if (
-        (isCollaborator && pathname.includes("accounts/people")) ||
-        (isVisitor && pathname.includes("rooms/personal"))
-      ) {
-        window.DocSpace.navigate(
-          combineUrl(window.ClientConfig?.proxy?.url, "/"),
-        );
-      }
+      // if (
+      //   (isCollaborator && pathname.includes("accounts/people")) ||
+      //   (isVisitor && pathname.includes("rooms/personal"))
+      // ) {
+      //   window.DocSpace.navigate(
+      //     combineUrl(window.ClientConfig?.proxy?.url, "/"),
+      //   );
+      // }
+
       if ((isAdmin || isRoomAdmin) && pathname.includes("accounts/people")) {
         this.getUsersList();
       }

@@ -179,6 +179,7 @@
   "PrivateRoomSupport": "Work in Private Room is available via {{organizationName}} desktop app. <3>Instructions</3>",
   "Protected": "protected",
   "Processes": "Processes: {{count}}",
+  "PersonalFolderErasureWarning": "Your user type has been changed to Guest. Personal files will be deleted in 30 days.",
   "RecentlyAccessible": "Recently accessible via link",
   "RecentlyOpenedTooltip": "Recently opened via the link",
   "RecentViaLinkEmptyContainerDescription": "Here you will find a list of the recently opened files shared with you via an external link.",

@@ -274,6 +274,7 @@ const SectionHeaderContent = (props) => {
     setguidAnimationVisible,
     setRefMap,
     deleteRefMap,
+    personalFolderWarning,
   } = props;
 
   const location = useLocation();
@@ -674,6 +675,12 @@ const SectionHeaderContent = (props) => {
 
   const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
 
+  const warningText = isRecycleBinFolder
+    ? t("TrashErasureWarning")
+    : personalFolderWarning
+      ? t("PersonalFolderErasureWarning")
+      : "";
+
   return (
     <Consumer key="header">
       {(context) => (
@@ -726,8 +733,7 @@ const SectionHeaderContent = (props) => {
                 toggleInfoPanel={onToggleInfoPanel}
                 isInfoPanelVisible={isInfoPanelVisible}
                 titles={{
-                  trash: t("EmptyRecycleBin"),
-                  trashWarning: t("TrashErasureWarning"),
+                  warningText,
                   actions: isRoomsFolder
                     ? t("Common:NewRoom")
                     : t("Common:Actions"),
@@ -831,6 +837,7 @@ export default inject(
 
     const isRoomAdmin = userStore.user?.isRoomAdmin;
     const isCollaborator = userStore.user?.isCollaborator;
+    const isVisitor = userStore.user?.isVisitor;
 
     const {
       setSelected,
@@ -863,8 +870,12 @@ export default inject(
       setIsSectionBodyLoading(param);
     };
 
-    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
-      treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isRoomsFolder,
+      isArchiveFolder,
+      isPersonalRoom,
+    } = treeFoldersStore;
 
     const {
       setReorderDialogVisible,
@@ -980,6 +991,8 @@ export default inject(
       ? navigationPath[navigationPath.length - 1]?.id
       : selectedFolder.id;
 
+    const personalFolderWarning = isVisitor && isPersonalRoom && security.Read;
+
     return {
       showText: settingsStore.showText,
       isDesktop: settingsStore.isDesktopClient,
@@ -1008,6 +1021,7 @@ export default inject(
       getHeaderMenu,
 
       isRecycleBinFolder,
+      personalFolderWarning,
       isEmptyFilesList,
       isEmptyArchive,
       isArchiveFolder,

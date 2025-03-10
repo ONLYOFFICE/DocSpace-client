@@ -243,9 +243,7 @@ const ChangeUserTypeDialog = ({
       autoMaxHeight
       isLarge={needReassignData}
     >
-      <ModalDialog.Header>
-        {isGuestsDialog ? t("ChangeUserTypeButton") : t("ChangeUserTypeHeader")}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("ChangeContactType")}</ModalDialog.Header>
       <ModalDialog.Body>{getBody()}</ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

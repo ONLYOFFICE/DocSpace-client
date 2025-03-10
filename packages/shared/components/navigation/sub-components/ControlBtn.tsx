@@ -36,7 +36,7 @@ import { TControlButtonProps } from "../Navigation.types";
 import ToggleInfoPanelButton from "./ToggleInfoPanelBtn";
 import PlusButton from "./PlusBtn";
 import ContextButton from "./ContextBtn";
-import TrashWarning from "./TrashWarning";
+import WarningComponent from "./WarningComponent";
 
 const ControlButtons = ({
   isRootFolder,
@@ -163,10 +163,10 @@ const ControlButtons = ({
     );
   };
 
-  const renderTrashWarning = () => {
-    if (!isDesktop || !isTrashFolder || isEmptyPage) return null;
+  const renderWarning = () => {
+    if (!titles?.warningText) return null;
 
-    return <TrashWarning title={titles?.trashWarning} />;
+    return <WarningComponent title={titles?.warningText} />;
   };
 
   return (
@@ -181,7 +181,7 @@ const ControlButtons = ({
       )}
       {renderToggleInfoPanel()}
       {renderContextButton((isPublicRoom && containVisible) ?? false)}
-      {renderTrashWarning()}
+      {renderWarning()}
       {!isTabletView ? renderNavigationButton() : null}
       {renderTariffBar()}
       {isTabletView ? renderNavigationButton() : null}

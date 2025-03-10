@@ -27,12 +27,12 @@
 import React from "react";
 import styles from "../Navigation.module.scss";
 
-const TrashWarning = ({ title }: { title?: string }) => {
+const WarningComponent = ({ title }: { title?: string }) => {
   return (
-    <div className={`${styles.trashWarning} trash-warning`} title={title}>
+    <div className={`${styles.warningText}`} title={title}>
       <div className="warning-text">{title}</div>
     </div>
   );
 };
 
-export default TrashWarning;
+export default WarningComponent;

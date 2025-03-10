@@ -190,7 +190,11 @@ class TreeFoldersStore {
   }
 
   get personalFolderReadAccess() {
-    return this.rootFoldersTitles[FolderType.USER]?.security?.Read ?? true;
+    return (
+      (this.treeFolders[FolderType.USER]?.security?.Read &&
+        !this.treeFolders[FolderType.USER]?.security?.CreateRoomFrom) ??
+      true
+    );
   }
 
   /**

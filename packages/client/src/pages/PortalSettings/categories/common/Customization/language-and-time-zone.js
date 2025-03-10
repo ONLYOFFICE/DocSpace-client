@@ -324,6 +324,7 @@ const LanguageAndTimeZoneComponent = (props) => {
         newCultureNames[0];
 
       const selectedLanguageDefault =
+        languageDefaultFromSessionStorage ||
         findSelectedItemByKey(newCultureNames, portalLanguage) ||
         newCultureNames[0];
 

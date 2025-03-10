@@ -26,7 +26,6 @@
 
 import type { PropsWithChildren } from "react";
 import { i18n } from "i18next";
-
 import type { DeviceType } from "../../enums";
 import type { TUser } from "../../api/people/types";
 import type FirebaseHelper from "../../utils/firebase";

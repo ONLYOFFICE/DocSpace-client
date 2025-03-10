@@ -43,6 +43,7 @@ import {
   TGetRooms,
   TExportRoomIndexTask,
   TPublicRoomPassword,
+  TValidateShareRoom,
   TRoom,
 } from "./types";
 
@@ -461,7 +462,7 @@ export function getPrimaryLink(roomId) {
 }
 
 export function validatePublicRoomKey(key) {
-  return request({
+  return request<TValidateShareRoom>({
     method: "get",
     url: `files/share/${key}`,
   });

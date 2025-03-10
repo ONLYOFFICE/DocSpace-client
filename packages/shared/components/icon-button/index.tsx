@@ -98,12 +98,6 @@ const IconButton = ({
       "--icon-button-hover-color",
       currentIcon.color ?? "",
     );
-
-    if (size)
-      buttonRef.current.style.setProperty(
-        "--icon-button-size",
-        typeof size === "number" ? `${size}px` : size,
-      );
   }, [currentIcon.color, size]);
 
   // Helper function to update icon state
@@ -220,6 +214,11 @@ const IconButton = ({
     "icon-button_svg",
   );
 
+  const buttonStyle = {
+    "--icon-button-size": typeof size === "number" ? `${size}px` : size,
+    ...style,
+  } as React.CSSProperties;
+
   return (
     <div
       ref={buttonRef}
@@ -234,19 +233,23 @@ const IconButton = ({
       data-event="click focus"
       data-for={id}
       id={id}
-      style={style}
+      style={buttonStyle}
       data-testid="icon-button"
       data-iconname={currentIcon.name}
       {...rest}
     >
-      {iconNode || (
+      {iconNode ? (
+        <div className={classNames(styles.notSelectable, "icon-button_svg")}>
+          {iconNode}
+        </div>
+      ) : (
         <ReactSVG
           className={classNames(
             styles.notSelectable,
             "icon-button",
             "icon-button_svg",
           )}
-          src={currentIcon.name || ""}
+          src={iconName || ""}
           data-testid="icon-button-svg"
         />
       )}

@@ -446,7 +446,7 @@ class DownloadDialogComponent extends React.Component {
             items={spreadsheets.files}
             titleFormat={spreadsheetsTitleFormat || t("OriginalFormat")}
             type="spreadsheets"
-            title={t("Translations:Spreadsheets")}
+            title={t("Common:Spreadsheets")}
           />
         ) : null}
 
@@ -458,7 +458,7 @@ class DownloadDialogComponent extends React.Component {
             items={presentations.files}
             titleFormat={presentationsTitleFormat || t("OriginalFormat")}
             type="presentations"
-            title={t("Translations:Presentations")}
+            title={t("Common:Presentations")}
           />
         ) : null}
 

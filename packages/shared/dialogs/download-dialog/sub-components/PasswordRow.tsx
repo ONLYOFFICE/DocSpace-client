@@ -166,6 +166,7 @@ export const PasswordRow = ({
             fontWeight="600"
             fontSize="14px"
             className={styles.passwordTitle}
+            dir="auto"
           >
             {item.title}
           </Text>

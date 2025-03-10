@@ -83,7 +83,7 @@ export const CodeToInsert = ({ t, codeBlock, config, theme }) => {
         enableCopy
       />
       <Text lineHeight="20px" className="preview-description">
-        Create HTML element with id from config and inser it indide document
+        Create HTML element with id from config and insert it inside document
         body for place SDK frame:
       </Text>
       <Textarea

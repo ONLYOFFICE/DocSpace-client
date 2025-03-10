@@ -17,7 +17,6 @@ COPY  packages/client/package.json packages/client/package.json
 COPY  packages/client/onlyoffice-docspace-sdk-js-2.0.0.tgz packages/client/onlyoffice-docspace-sdk-js-2.0.0.tgz
 
 RUN yarn install --no-immutable
-#RUN yarn ./common/scripts/before-build.js
 RUN npx playwright install chromium --with-deps
 
 COPY  packages/login packages/login
@@ -26,8 +25,6 @@ COPY  public public
 
 # remove after clearing packages for shared
 COPY  packages/client packages/client
-
-#COPY  packages/runtime.json packages/runtime.json
 
 WORKDIR /app/packages/login
 

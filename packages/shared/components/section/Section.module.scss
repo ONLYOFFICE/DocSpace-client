@@ -760,6 +760,10 @@
 .closeChatPanel {
   position: absolute;
   inset-inline-end: 16px;
-  top: 16px;
+  top: 18px;
   z-index: 9999;
+
+  &.withBar {
+    top: 81px;
+  }
 }

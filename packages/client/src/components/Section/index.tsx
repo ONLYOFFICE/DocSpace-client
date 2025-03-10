@@ -64,6 +64,7 @@ export default inject(
       maintenanceExist,
       snackbarExist,
       showText,
+      mainBarVisible,
     } = settingsStore;
 
     const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
@@ -97,6 +98,7 @@ export default inject(
       isInfoPanelScrollLocked,
       aiChatIsVisible,
       setAiChatIsVisible,
+      mainBarVisible,
     };
   },
 )(observer(SectionWrapper));

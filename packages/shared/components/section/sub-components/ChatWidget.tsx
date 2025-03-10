@@ -37,6 +37,7 @@ import { Portal } from "../../portal";
 import { IconButton } from "../../icon-button";
 import styles from "../Section.module.scss";
 import { TViewAs } from "../../../types";
+import { classNames } from "../../../utils";
 
 export const ChatWidget = memo(
   ({
@@ -46,6 +47,7 @@ export const ChatWidget = memo(
     viewAs,
     currentDeviceType,
     chatFiles = [],
+    mainBarVisible,
   }: {
     isVisible: boolean;
     setIsVisible: (isVisible: boolean) => void;
@@ -53,6 +55,7 @@ export const ChatWidget = memo(
     viewAs?: TViewAs;
     currentDeviceType?: DeviceType;
     chatFiles: (TFile | TFolder)[];
+    mainBarVisible: boolean;
   }) => {
     const { interfaceDirection, isBase } = useTheme();
 
@@ -95,7 +98,9 @@ export const ChatWidget = memo(
         <div className={styles.chatPanel}>
           <IconButton
             size={17}
-            className={styles.closeChatPanel}
+            className={classNames(styles.closeChatPanel, {
+              [styles.withBar]: mainBarVisible,
+            })}
             iconName={CrossReactSvgUrl}
             onClick={onClose}
             isClickable

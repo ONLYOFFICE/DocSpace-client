@@ -124,6 +124,7 @@ const Section = (props: SectionProps) => {
 
     aiChatIsVisible,
     setAiChatIsVisible,
+    mainBarVisible,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -332,6 +333,7 @@ const Section = (props: SectionProps) => {
           chatFiles={chatFiles}
           anotherDialogOpen={anotherDialogOpen}
           currentDeviceType={currentDeviceType}
+          mainBarVisible={mainBarVisible}
         />
 
         {isInfoPanelAvailable ? (

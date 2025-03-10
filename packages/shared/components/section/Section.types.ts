@@ -179,6 +179,9 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     needErrorChecking?: boolean;
     onCancelOperation?: (callback: () => void) => void;
     chatFiles: (TFile | TFolder)[];
+    aiChatIsVisible?: boolean;
+    setAiChatIsVisible?: () => void;
+    mainBarVisible?: boolean;
   };
 
 export type SectionContextMenuProps = {

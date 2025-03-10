@@ -93,7 +93,6 @@ const withHotkeys = (Component) => {
       isFormRoom,
       isParentFolderFormRoom,
       isIndexEditingMode,
-      aiChatIsVisible,
     } = props;
 
     const navigate = useNavigate();
@@ -106,18 +105,15 @@ const withHotkeys = (Component) => {
       filterPreventDefault: false,
       enableOnTags: ["INPUT"],
       enabled:
-        enabledHotkeys &&
-        !mediaViewerIsVisible &&
-        !filesIsLoading &&
-        isEnabled &&
-        !aiChatIsVisible,
+        enabledHotkeys && !mediaViewerIsVisible && !filesIsLoading && isEnabled,
       // keyup: true,
       // keydown: false,
     };
 
     const onKeyDown = (e) => {
       const someDialogIsOpen = checkDialogsOpen();
-      setIsEnabled(!someDialogIsOpen);
+      const isChatWidget = !!e.target.closest("langflow-chat-widget");
+      setIsEnabled(!someDialogIsOpen && !isChatWidget);
 
       if (isIndexEditingMode) return;
 
@@ -447,7 +443,6 @@ const withHotkeys = (Component) => {
       userStore,
       indexingStore,
       currentQuotaStore,
-      pluginStore,
     }) => {
       const {
         setSelected,
@@ -498,7 +493,6 @@ const withHotkeys = (Component) => {
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
       const { setHotkeyPanelVisible } = settingsStore;
-      const { aiChatIsVisible } = pluginStore;
 
       const isVisitor = userStore.user?.isVisitor;
 
@@ -578,7 +572,6 @@ const withHotkeys = (Component) => {
         isGroupMenuBlocked,
         isFormRoom,
         isParentFolderFormRoom,
-        aiChatIsVisible,
       };
     },
   )(observer(WithHotkeys));

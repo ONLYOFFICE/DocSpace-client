@@ -29,6 +29,7 @@ customElements.define(
       empty_screen_text: "string",
       placeholder_text: "string",
       chat_user_name: "string",
+      popup_view: "string",
     },
   })
 );

@@ -11,6 +11,8 @@ import ChatFooter from "./ChatFooter";
 import { sendMessage } from "../controllers";
 import { extractMessageFromOutput } from "./utils";
 import { styles } from "./styles";
+import ChatTrigger from "../chatTrigger";
+import ChatWidgetWrapper from "./ChatWidgetWrapper";
 
 const { v4: uuidv4 } = require("uuid");
 
@@ -38,6 +40,7 @@ export default function ChatWidget({
   empty_screen_text,
   placeholder_text,
   chat_user_name,
+  popup_view,
 }: {
   api_key?: string;
   input_value: string;
@@ -63,15 +66,19 @@ export default function ChatWidget({
   empty_screen_text?: string;
   placeholder_text?: string;
   chat_user_name?: string;
+  popup_view?: string;
 }) {
   const sessionId = useRef(session_id ?? uuidv4());
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
+  const [sendingMessage, setSendingMessage] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const isPopupView = popup_view === "true";
 
   const addMessage = (message: ChatMessageType) => {
     setMessages((prev) => [...prev, message]);
   };
-
-  const [sendingMessage, setSendingMessage] = useState(false);
 
   const updateLastMessage = (message: ChatMessageType) => {
     setMessages((prev) => {
@@ -190,38 +197,46 @@ export default function ChatWidget({
           __html: styles,
         }}
       ></style>
-      <div
+      {isPopupView ? (
+        <ChatTrigger
+          triggerRef={triggerRef}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
+      ) : null}
+
+      <ChatWidgetWrapper
         data-theme={interface_theme}
         data-direction={interface_direction}
-        className="chat-panel-wrapper"
+        triggerRef={triggerRef}
+        isOpen={isOpen}
+        isPopupView={isPopupView}
       >
-        <div className="chat-panel">
-          <ChatHeader headerText={header_text} />
+        <ChatHeader headerText={header_text} />
 
-          <ChatBody
-            messages={messages}
-            providerImage={provider_image}
-            providerIconImage={provider_icon_image}
-            userIconImage={user_icon_image}
-            isRTL={interface_direction === "rtl"}
-            emptyScreenText={empty_screen_text}
-            userName={chat_user_name}
-          />
-          {sendingMessage && (
-            <div className="chat-panel-loading-placeholder">
-              <h1 className="chat-panel-loading-placeholder-ellipsis"> </h1>
-            </div>
-          )}
+        <ChatBody
+          messages={messages}
+          providerImage={provider_image}
+          providerIconImage={provider_icon_image}
+          userIconImage={user_icon_image}
+          isRTL={interface_direction === "rtl"}
+          emptyScreenText={empty_screen_text}
+          userName={chat_user_name}
+        />
+        {sendingMessage && (
+          <div className="chat-panel-loading-placeholder">
+            <h1 className="chat-panel-loading-placeholder-ellipsis"> </h1>
+          </div>
+        )}
 
-          <ChatFooter
-            addMessage={addMessage}
-            sendMessage={sendMessageFn}
-            filesList={list_files}
-            sendIconImage={send_icon_image}
-            placeholderText={placeholder_text}
-          />
-        </div>
-      </div>
+        <ChatFooter
+          addMessage={addMessage}
+          sendMessage={sendMessageFn}
+          filesList={list_files}
+          sendIconImage={send_icon_image}
+          placeholderText={placeholder_text}
+        />
+      </ChatWidgetWrapper>
     </div>
   );
 }

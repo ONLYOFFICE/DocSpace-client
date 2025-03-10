@@ -158,6 +158,99 @@ const pageStyles = `
       margin: 0;
     }
 
+    .cl-trigger {
+      display: flex;
+      height: 3rem;
+      width: 3rem;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: rgb(59 130 246);
+      font-weight: 700;
+      color: rgb(255 255 255);
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+      border-width: 0;
+      cursor: pointer;
+    }
+
+    .cl-trigger:hover {
+      background-color: rgb(29 78 216);
+    }
+
+    .cl-window {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      --tw-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      --tw-shadow-colored: 0 0 10px var(--tw-shadow-color);
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    }
+
+    .cl-scale-100 {
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      -webkit-transform: translate(0, 0) rotate(0) skewX(0) skewY(0) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+              transform: translate(0, 0) rotate(0) skewX(0) skewY(0) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    }
+
+    .cl-scale-0 {
+      --tw-scale-x: 0;
+      --tw-scale-y: 0;
+      -webkit-transform: translate(0, 0) rotate(0) skewX(0) skewY(0) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+              transform: translate(0, 0) rotate(0) skewX(0) skewY(0) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    }
+
+    .cl-trigger-icon {
+      position: absolute;
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 500ms;
+    }
+
+    .cl-chat-window {
+      position: absolute !important;
+      transition-property: all;
+      transition-duration: 300ms;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .origin-bottom {
+      -webkit-transform-origin: bottom;
+              transform-origin: bottom;
+    }
+
+    .origin-bottom-left {
+      -webkit-transform-origin: bottom left;
+              transform-origin: bottom left;
+    }
+
+    .origin-bottom-right {
+      -webkit-transform-origin: bottom right;
+              transform-origin: bottom right;
+    }
+
+    .origin-center {
+      -webkit-transform-origin: center;
+              transform-origin: center;
+    }
+
+    .origin-top {
+      -webkit-transform-origin: top;
+              transform-origin: top;
+    }
+
+    .origin-top-left {
+      -webkit-transform-origin: top left;
+              transform-origin: top left;
+    }
+
+    .origin-top-right {
+      -webkit-transform-origin: top right;
+              transform-origin: top right;
+    }
+
     .chat-panel-wrapper {
       direction: var(--interface-direction);
       background: attr(data-back);
@@ -178,21 +271,6 @@ const pageStyles = `
           padding-bottom: 20px;
         }
       }
-    
-      // @include tablet-and-below {
-      //   position: absolute;
-      //   border: none;
-      //   inset-inline-end: 0;
-      //   width: 480px;
-      //   max-width: calc(100vw - 69px);
-      // }
-    
-      // @include mobile {
-      //   bottom: 0;
-      //   height: calc(100% - 64px);
-      //   width: 100vw;
-      //   max-width: 100vw;
-      // }
     }
     
     .chat-panel-header-container {
@@ -236,11 +314,6 @@ const pageStyles = `
     
       color: var(--info-panel-text-color);
       background-color: var(--fill-color);
-    
-      //   @include mobile {
-      //     padding-block: 0;
-      //     padding-inline: 16px 8px;
-      //   }
     }
     
     .chat-panel-body_empty-container {
@@ -382,15 +455,6 @@ const pageStyles = `
     .chat-panel-footer_input::-webkit-scrollbar {
       display: none;
     }
-
-    // .chat-panel-footer_input[placeholder]:empty:before {
-    //   content: attr(placeholder);
-    //   color: var(--text-input-placeholder); 
-    // }
-
-    // .chat-panel-footer_input[placeholder]:empty:focus:before {
-    //   content: "";
-    // }
     
     .chat-panel-footer_input-append {
       align-items: center;
@@ -459,10 +523,6 @@ const pageStyles = `
           }
         }
       }
-    
-      //   .notSelectable {
-      //     @include no-user-select;
-      //   }
     }
     
     .chat-panel-footer_input-block-icon {
@@ -575,7 +635,6 @@ const scrollStyles = `
       }
     }
 
-    // fix when iframe breaks dragging scroll
     &:has(> .track > :global(.dragging)) {
       iframe {
         pointer-events: none;
@@ -593,10 +652,6 @@ const scrollStyles = `
     padding-inline-end: var(--scrollbar-padding-inline-end) !important;
     position: relative;
     outline: none;
-
-    // @include mobile {
-    //   padding-inline-end: var(--scrollbar-padding-inline-end-mobile) !important;
-    // }
   }
 
   .track {

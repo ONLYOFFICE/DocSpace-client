@@ -40,7 +40,12 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { deleteCookie } from "@docspace/shared/utils/cookie";
+import {
+  deleteCookie,
+  getCookie,
+  getOAuthJWTSignature,
+  setOAuthJWTSignature,
+} from "@docspace/shared/utils/cookie";
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";
@@ -90,7 +95,6 @@ interface IConsentProps {
   scopes: TScope[];
   user: TUser;
   baseUrl?: string;
-  redirect_url: string;
 }
 
 const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
@@ -99,6 +103,26 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
 
   const [isAllowRunning, setIsAllowRunning] = React.useState(false);
   const [isDenyRunning, setIsDenyRunning] = React.useState(false);
+
+  React.useEffect(() => {
+    const validateToken = async () => {
+      const token = getOAuthJWTSignature();
+
+      if (token) return;
+
+      await setOAuthJWTSignature();
+
+      const redirect_url = getCookie("x-redirect-authorization-uri");
+
+      if (!redirect_url) {
+        return;
+      }
+
+      window.location.replace(redirect_url);
+    };
+
+    validateToken();
+  }, []);
 
   const onAllowClick = async () => {
     if (!("clientId" in client)) return;

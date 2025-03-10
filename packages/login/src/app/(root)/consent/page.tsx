@@ -33,6 +33,7 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import {
   getConfig,
   getOAuthClient,
+  getOauthJWTToken,
   getScopeList,
   getSettings,
   getUser,
@@ -54,12 +55,19 @@ async function Page({
     getConfig(),
   ]);
 
+  const cookieStore = cookies();
+
+  let token = cookieStore.get("x-signature")?.value;
+  let new_token = "";
+
+  if (!token) {
+    new_token = await getOauthJWTToken();
+  }
+
   const [data, scopes] = await Promise.all([
     getOAuthClient(clientId),
-    getScopeList(),
+    getScopeList(new_token),
   ]);
-
-  const redirect_url = cookies().get("x-redirect-authorization-uri")!.value;
 
   const client = data?.client as IClientProps;
 
@@ -72,7 +80,7 @@ async function Page({
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = cookieStore.get(LANGUAGE)?.value ?? settingsCulture;
 
   return (
     <>
@@ -91,7 +99,6 @@ async function Page({
               scopes={scopes}
               user={user}
               baseUrl={config?.oauth2?.origin}
-              redirect_url={redirect_url}
             />
           </>
         </ColorTheme>

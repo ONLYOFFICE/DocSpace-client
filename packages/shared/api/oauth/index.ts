@@ -29,7 +29,8 @@
 
 import { request } from "../client";
 
-import { transformToClientProps } from "../../utils/oauth/index";
+import { transformToClientProps } from "../../utils/oauth";
+import { getOAuthJWTSignature, setOAuthJWTSignature } from "../../utils/cookie";
 
 import {
   IClientProps,
@@ -222,12 +223,16 @@ export const revokeUserClient = async (clientId: string): Promise<void> => {
   );
 };
 
-export const onOAuthSubmit = (
+export const onOAuthSubmit = async (
   clientId: string,
   clientState: string,
   scope: string[],
 ) => {
   const formData = new FormData();
+
+  const token = getOAuthJWTSignature();
+
+  if (!token) await setOAuthJWTSignature();
 
   formData.append("client_id", clientId);
   formData.append("state", clientState);
@@ -251,8 +256,12 @@ export const onOAuthSubmit = (
   );
 };
 
-export const onOAuthCancel = (clientId: string, clientState: string) => {
+export const onOAuthCancel = async (clientId: string, clientState: string) => {
   const formData = new FormData();
+
+  const token = getOAuthJWTSignature();
+
+  if (!token) await setOAuthJWTSignature();
 
   formData.append("client_id", clientId);
   formData.append("state", clientState);

@@ -144,8 +144,10 @@ class SsoFormStore {
   usersType = EmployeeType.User;
 
   hideAuthPage = false;
+
   disableEmailVerification = false;
   // sp metadata
+
   spEntityId = "";
 
   spAssertionConsumerUrl = "";

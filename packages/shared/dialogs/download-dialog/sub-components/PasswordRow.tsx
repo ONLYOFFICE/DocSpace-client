@@ -173,7 +173,7 @@ export const PasswordRow = ({
         <div className={styles.downloadDialogActions}>
           <ContextMenuButton
             className="expandButton"
-            directionX="right"
+            directionX="left"
             getData={getOptions}
             title={t("Common:Actions")}
             isDisabled={false}

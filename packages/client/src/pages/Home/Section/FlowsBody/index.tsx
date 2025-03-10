@@ -447,20 +447,23 @@ const FlowTileTemplate = (props) => {
 const FlowTile = withTheme(FlowTileTemplate);
 
 const SectionBodyContent = ({
+  autoLogin,
   flows,
   isLoading,
   fetchFlows,
   getFolderById,
   isChatAvailable,
 }: {
+  autoLogin: () => void;
   flows: Flow[];
   isLoading: boolean;
   fetchFlows: () => void;
   getFolderById: (id: string) => void;
+  isChatAvailable: boolean;
 }) => {
   useEffect(() => {
-    fetchFlows();
-  }, [fetchFlows]);
+    autoLogin().then(() => fetchFlows());
+  }, [autoLogin, fetchFlows]);
 
   const renderContext = true;
   // hasOwnProperty(item, "contextOptions") && contextOptions.length > 0;
@@ -492,6 +495,7 @@ const SectionBodyContent = ({
 };
 
 export default inject(({ flowStore, infoPanelStore }) => ({
+  autoLogin: flowStore.autoLogin,
   flows: flowStore.flows,
   isLoading: flowStore.isLoading,
   fetchFlows: flowStore.fetchFlows,

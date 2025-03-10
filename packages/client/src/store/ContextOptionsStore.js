@@ -1264,11 +1264,25 @@ class ContextOptionsStore {
     setRestoreRoomDialogVisible(true);
   };
 
-  getHeaderOptions = (t, item) => {
-    const { isRecycleBinFolder, isArchiveFolder, isTemplatesFolder } =
-      this.treeFoldersStore;
-    const { roomsForDelete, roomsForRestore } = this.filesStore;
+  onDownloadAllAction = () => {
+    const { getSelectedFolder } = this.selectedFolderStore;
+    const { downloadAction } = this.filesActionsStore;
 
+    const selectedFolder = getSelectedFolder();
+
+    downloadAction("", selectedFolder).catch((err) => toastr.error(err));
+  };
+
+  getHeaderOptions = (t, item) => {
+    const {
+      isRecycleBinFolder,
+      isArchiveFolder,
+      isTemplatesFolder,
+      isPersonalRoom,
+      personalUserFolderTitle,
+    } = this.treeFoldersStore;
+    const { roomsForDelete, roomsForRestore } = this.filesStore;
+    const { security } = this.selectedFolderStore;
     const canRestoreAll = roomsForRestore.length > 0;
     const canDeleteAll = roomsForDelete.length > 0;
 
@@ -1345,6 +1359,29 @@ class ContextOptionsStore {
 
     if (isTemplatesFolder) {
       return [];
+    }
+
+    if (isPersonalRoom && security.Read && !security.CreateRoomFrom) {
+      return [
+        {
+          id: "header_option_download-all",
+          key: "download-all",
+          label: t("Files:DownloadAll"),
+          onClick: this.onDownloadAllAction,
+          icon: MoveReactSvgUrl,
+          disabled: false,
+        },
+        {
+          id: "header_option_empty-section",
+          key: "empty-section",
+          label: t("Files:EmptySection", {
+            sectionName: personalUserFolderTitle,
+          }),
+          //  onClick: this.onEmptySectionAction,
+          icon: ClearTrashReactSvgUrl,
+          disabled: false,
+        },
+      ];
     }
 
     return this.getFilesContextOptions(item, t, false, true);

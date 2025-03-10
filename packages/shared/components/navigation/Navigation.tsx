@@ -56,7 +56,6 @@ const Navigation = ({
   getContextOptionsFolder,
   onBackToParentFolder,
   isTrashFolder,
-  isEmptyFilesList,
   clearTrash,
   showFolderInfo,
   isCurrentFolderInfo,
@@ -90,6 +89,7 @@ const Navigation = ({
   addButtonRef,
   contextButtonAnimation,
   guidAnimationVisible,
+  isContextButtonVisible,
   ...rest
 }: TNavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -316,7 +316,6 @@ const Navigation = ({
               canCreate={canCreate}
               getContextOptionsFolder={getContextOptionsFolder}
               getContextOptionsPlus={getContextOptionsPlus}
-              isEmptyFilesList={isEmptyFilesList}
               toggleInfoPanel={toggleInfoPanel}
               isInfoPanelVisible={isInfoPanelVisible}
               isDesktop={isDesktop}
@@ -336,6 +335,7 @@ const Navigation = ({
               isMobile={currentDeviceType !== DeviceType.desktop}
               contextButtonAnimation={contextButtonAnimation}
               guidAnimationVisible={guidAnimationVisible}
+              isContextButtonVisible={isContextButtonVisible}
             />
           </div>
           {isDesktop && !hideInfoPanel ? (

@@ -153,6 +153,7 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
     /** Used for guidance */
     addButtonRef?: RefObject<HTMLDivElement>;
     buttonRef?: LegacyRef<HTMLButtonElement>;
+    isContextButtonVisible?: boolean;
   };
 
 export type TDropBoxProps = TArrowButtonProps &

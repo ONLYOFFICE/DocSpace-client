@@ -680,6 +680,10 @@ const SectionHeaderContent = (props) => {
     : personalFolderWarning
       ? t("PersonalFolderErasureWarning")
       : "";
+  const isContextButtonVisible =
+    (isRecycleBinFolder && !isEmptyFilesList) ||
+    personalFolderWarning ||
+    !isRootFolder;
 
   return (
     <Consumer key="header">
@@ -773,6 +777,7 @@ const SectionHeaderContent = (props) => {
                 addButtonRef={addButtonRefCallback}
                 contextButtonAnimation={contextButtonAnimation}
                 guidAnimationVisible={guidAnimationVisible}
+                isContextButtonVisible={isContextButtonVisible}
               />
               {showSignInButton ? (
                 <Button

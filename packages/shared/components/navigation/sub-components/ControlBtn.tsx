@@ -66,9 +66,7 @@ const ControlButtons = ({
 
   // Visibility controls
   isDesktop,
-  isEmptyFilesList,
   showTitle,
-  isEmptyPage,
 
   // Tariff bar
   tariffBar,
@@ -79,6 +77,7 @@ const ControlButtons = ({
   buttonRef,
   contextButtonAnimation,
   guidAnimationVisible,
+  isContextButtonVisible,
 }: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
     toggleInfoPanel?.();
@@ -176,9 +175,7 @@ const ControlButtons = ({
       data-show-title={showTitle}
     >
       {renderPlusButton()}
-      {renderContextButton(
-        (!isRootFolder || (isTrashFolder && !isEmptyFilesList)) ?? false,
-      )}
+      {renderContextButton(isContextButtonVisible ?? false)}
       {renderToggleInfoPanel()}
       {renderContextButton((isPublicRoom && containVisible) ?? false)}
       {renderWarning()}

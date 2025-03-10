@@ -64,7 +64,7 @@ export default async function Page({
     (i) => i.rootFolderType === FolderType.Rooms,
   )?.id;
 
-  const isRoomView = folderId === roomsID;
+  const isRoomView = folderId === roomsID || !folderId;
 
   const filter = isRoomView
     ? { ...RoomsFilter.getDefault(), searchArea: RoomSearchArea.Active }

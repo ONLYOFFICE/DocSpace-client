@@ -37,7 +37,6 @@ import { Scrollbar } from "../../components/scrollbar";
 import { toastr } from "../../components/toast";
 import type { TContextMenuValueTypeOnClick } from "../../components/context-menu/ContextMenu.types";
 
-import { StyledBodyContent } from "./StyledDownloadDialog";
 import { DownloadContent } from "./sub-components/DownloadContent";
 import { PasswordContent } from "./sub-components/PasswordContent";
 import { OnePasswordRow } from "./sub-components/OnePasswordRow";
@@ -46,6 +45,7 @@ import type {
   TDownloadedFile,
 } from "./DownloadDialog.types";
 import { DownloadedDocumentType } from "./DownloadDialog.enums";
+import styles from "./DownloadDialog.module.scss";
 
 const LoadingPlaceholder = () => <div style={{ width: "96px" }} />;
 
@@ -417,14 +417,14 @@ const DownloadDialog = (props: DownloadDialogProps) => {
 
   const mainContent = (
     <>
-      <StyledBodyContent className="download-dialog-description">
+      <div className={styles.downloadDialogBodyContent}>
         <Text noSelect>{t("ChooseFormatText")}.</Text>
         {!isSingleFile ? (
           <Text noSelect>
             <Trans t={t} i18nKey="ConvertToZip" />
           </Text>
         ) : null}
-      </StyledBodyContent>
+      </div>
       {state.documents.files.length > 0 ? (
         <DownloadContent
           {...downloadContentProps}
@@ -484,7 +484,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
         />
       ) : null}
 
-      <div className="download-dialog-convert-message">
+      <div className={styles.downloadDialogConvertMessage}>
         <Text noSelect>{t("ConvertMessage")}</Text>
       </div>
     </>
@@ -535,7 +535,6 @@ const DownloadDialog = (props: DownloadDialogProps) => {
       <ModalDialog.Footer>
         <Button
           key="DownloadButton"
-          className="download-button"
           label={
             needPassword ? t("Common:ContinueButton") : t("Common:Download")
           }
@@ -549,7 +548,6 @@ const DownloadDialog = (props: DownloadDialogProps) => {
         />
         <Button
           key="CancelButton"
-          className="cancel-button"
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           onClick={onClose}

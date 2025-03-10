@@ -28,13 +28,14 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { Text } from "../../../components/text";
 import PublicRoomBar from "../../../components/public-room-bar";
 
-import { StyledPasswordContent } from "../StyledDownloadDialog";
+import styles from "../DownloadDialog.module.scss";
 import { ProtectedFileCategoryType } from "../DownloadDialog.enums";
 import type {
   PasswordContentProps,
@@ -67,8 +68,8 @@ export const PasswordContent = (props: PasswordContentProps) => {
     className?: string,
   ) => {
     return (
-      <div className="password-row-wrapper">
-        <div className={`password-info-text ${className}`}>
+      <div className={styles.passwordRowWrapper}>
+        <div className={classNames(styles.passwordInfoText, className)}>
           <Text fontWeight={600} fontSize="14px">
             {text}
           </Text>
@@ -93,7 +94,7 @@ export const PasswordContent = (props: PasswordContentProps) => {
   };
 
   return (
-    <StyledPasswordContent>
+    <div className={styles.downloadDialogPasswordContent}>
       {barIsVisible ? (
         <PublicRoomBar
           headerText={t("ProtectedFiles")}
@@ -107,7 +108,7 @@ export const PasswordContent = (props: PasswordContentProps) => {
             other,
             t("Common:PasswordRequired"),
             ProtectedFileCategoryType.Other,
-            "warning-color",
+            styles.warningColor,
           )
         : null}
       {original?.length > 0
@@ -131,6 +132,6 @@ export const PasswordContent = (props: PasswordContentProps) => {
             ProtectedFileCategoryType.Remove,
           )
         : null}
-    </StyledPasswordContent>
+    </div>
   );
 };

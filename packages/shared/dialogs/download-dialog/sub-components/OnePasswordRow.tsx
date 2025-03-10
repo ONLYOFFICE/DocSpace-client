@@ -40,7 +40,7 @@ import { Button, ButtonSize } from "../../../components/button";
 import { Text } from "../../../components/text";
 import { SimulatePassword } from "../../../components/simulate-password";
 
-import { StyledSinglePasswordFile } from "../StyledDownloadDialog";
+import styles from "../DownloadDialog.module.scss";
 import type { OnePasswordRowProps } from "../DownloadDialog.types";
 
 export const OnePasswordRow = ({
@@ -151,12 +151,16 @@ export const OnePasswordRow = ({
     >
       <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledSinglePasswordFile>
+        <div className={styles.singlePasswordFile}>
           <Text>{t("AccessPasswordMessage")}</Text>
-          <div className="single-password_content">
-            <div className="single-password_row">
+          <div className={styles.singlePasswordContent}>
+            <div className={styles.singlePasswordRow}>
               {element}
-              <Text fontWeight="600" fontSize="14px" className="password-title">
+              <Text
+                fontWeight="600"
+                fontSize="14px"
+                className={styles.passwordTitle}
+              >
                 {item.title}
               </Text>
             </div>
@@ -173,7 +177,7 @@ export const OnePasswordRow = ({
             onChange={onChangePassword}
             forwardedRef={inputRef}
           />
-        </StyledSinglePasswordFile>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

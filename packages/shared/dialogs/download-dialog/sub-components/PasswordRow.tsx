@@ -28,6 +28,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import RemoveIcon from "PUBLIC_DIR/images/remove.react.svg?url";
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
@@ -41,8 +42,8 @@ import { IconButton } from "../../../components/icon-button";
 import { ContextMenuButton } from "../../../components/context-menu-button";
 import { SimulatePassword } from "../../../components/simulate-password";
 
-import { StyledDownloadContent } from "../StyledDownloadDialog";
 import type { PasswordRowProps } from "../DownloadDialog.types";
+import styles from "../DownloadDialog.module.scss";
 
 export const PasswordRow = ({
   item,
@@ -145,24 +146,31 @@ export const PasswordRow = ({
   const element = getItemIcon(item);
 
   return (
-    <StyledDownloadContent>
-      <div className="download-dialog-row">
+    <div className={styles.downloadContent}>
+      <div className={styles.downloadDialogRow}>
         <div
-          className="download-dialog-main-content password-content"
+          className={classNames(
+            styles.downloadDialogMainContent,
+            styles.passwordContent,
+          )}
           onClick={onInputClick}
         >
           <IconButton
-            className="remove-icon"
+            className={styles.removeIcon}
             size={16}
             iconName={ProtectedReactSvgUrl}
             onClick={onInputClick}
           />
           <div>{element}</div>
-          <Text fontWeight="600" fontSize="14px" className="password-title">
+          <Text
+            fontWeight="600"
+            fontSize="14px"
+            className={styles.passwordTitle}
+          >
             {item.title}
           </Text>
         </div>
-        <div className="download-dialog-actions">
+        <div className={styles.downloadDialogActions}>
           <ContextMenuButton
             className="expandButton"
             directionX="right"
@@ -175,7 +183,7 @@ export const PasswordRow = ({
         </div>
       </div>
       {showPasswordInput ? (
-        <div className="password-input">
+        <div className={styles.passwordInput}>
           <SimulatePassword
             onChange={onChangePassword}
             forwardedRef={inputRef}
@@ -183,7 +191,6 @@ export const PasswordRow = ({
           />
           <Button
             id="conversion-button"
-            className="conversion-password_button"
             size={ButtonSize.small}
             scale
             primary
@@ -193,6 +200,6 @@ export const PasswordRow = ({
           />
         </div>
       ) : null}
-    </StyledDownloadContent>
+    </div>
   );
 };

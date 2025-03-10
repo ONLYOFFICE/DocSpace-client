@@ -27,6 +27,7 @@
  */
 
 import React, { useState } from "react";
+import classNames from "classnames";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 
@@ -34,7 +35,7 @@ import { Text } from "../../../components/text";
 import { Checkbox } from "../../../components/checkbox";
 import { LinkWithDropdown } from "../../../components/link-with-dropdown";
 
-import { StyledDownloadContent } from "../StyledDownloadDialog";
+import styles from "../DownloadDialog.module.scss";
 import type {
   DownloadContentProps,
   TDownloadedFile,
@@ -139,32 +140,44 @@ export const DownloadContent = (props: DownloadContentProps) => {
   const showHeader = items.length > 1;
 
   return (
-    <StyledDownloadContent isOpen={showHeader ? isOpen : true}>
+    <div
+      className={classNames(styles.downloadContent, {
+        [styles.isOpen]: showHeader ? isOpen : true,
+      })}
+    >
       {showHeader ? (
-        <div className="download-dialog_content-wrapper download-dialog-row">
-          <div className="download-dialog-main-content">
+        <div
+          className={classNames(
+            styles.downloadDialogContentWrapper,
+            styles.downloadDialogRow,
+          )}
+        >
+          <div className={styles.downloadDialogMainContent}>
             <Checkbox
               data-item-id="All"
               data-type={type}
               isChecked={isChecked}
               isIndeterminate={isIndeterminate}
               onChange={onRowSelect}
-              className="download-dialog-checkbox"
+              className={styles.downloadDialogCheckbox}
             />
             <div
               onClick={onOpen}
-              className="download-dialog-heading download-dialog-title"
+              className={classNames(
+                styles.downloadDialogHeading,
+                styles.downloadDialogTitle,
+              )}
             >
               <Text noSelect fontSize="16px" fontWeight={600}>
                 {title}
               </Text>
-              <ArrowIcon className="download-dialog-icon" />
+              <ArrowIcon className={styles.downloadDialogIcon} />
             </div>
           </div>
-          <div className="download-dialog-actions">
+          <div className={styles.downloadDialogActions}>
             {(isChecked || isIndeterminate) && !isOther ? (
               <LinkWithDropdown
-                className="download-dialog-link"
+                className={styles.downloadDialogLink}
                 dropDownClassName="download-dialog-dropDown"
                 data={titleData}
                 directionY="bottom"
@@ -179,7 +192,7 @@ export const DownloadContent = (props: DownloadContentProps) => {
           </div>
         </div>
       ) : null}
-      <div className="download-dialog_hidden-items">
+      <div className={styles.downloadDialogHiddenItems}>
         {items.map((file) => {
           const dropdownItems = !isOther
             ? getFormats(file).filter((x) => x.label !== file.fileExst)
@@ -200,6 +213,6 @@ export const DownloadContent = (props: DownloadContentProps) => {
           );
         })}
       </div>
-    </StyledDownloadContent>
+    </div>
   );
 };

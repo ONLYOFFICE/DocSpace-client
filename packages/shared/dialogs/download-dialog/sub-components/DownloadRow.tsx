@@ -32,6 +32,7 @@ import { Checkbox } from "../../../components/checkbox";
 import { isMobile } from "../../../utils";
 
 import type { DownloadRowProps } from "../DownloadDialog.types";
+import styles from "../DownloadDialog.module.scss";
 
 export const DownloadRow = (props: DownloadRowProps) => {
   const {
@@ -48,18 +49,18 @@ export const DownloadRow = (props: DownloadRowProps) => {
   const element = getItemIcon(file);
 
   return (
-    <div className="download-dialog-row">
-      <div className="download-dialog-main-content">
+    <div className={styles.downloadDialogRow}>
+      <div className={styles.downloadDialogMainContent}>
         <Checkbox
-          className="download-dialog-checkbox"
+          className={styles.downloadDialogCheckbox}
           data-item-id={file.id}
           data-type={type}
           onChange={onRowSelect}
           isChecked={isChecked}
         />
-        <div className="download-dialog-icon-contatiner">{element}</div>
+        <div className={styles.downloadDialogIconContatiner}>{element}</div>
         <Text
-          className="download-dialog-title"
+          className={styles.downloadDialogTitle}
           truncate
           title={file.title}
           fontSize="14px"
@@ -70,10 +71,10 @@ export const DownloadRow = (props: DownloadRowProps) => {
         </Text>
       </div>
 
-      <div className="download-dialog-actions">
+      <div className={styles.downloadDialogActions}>
         {file.checked && !isOther ? (
           <LinkWithDropdown
-            className="download-dialog-link"
+            className={styles.downloadDialogLink}
             dropDownClassName="download-dialog-dropDown"
             isOpen={false}
             dropdownType="alwaysDashed"
@@ -90,7 +91,7 @@ export const DownloadRow = (props: DownloadRowProps) => {
         ) : null}
         {isOther && file.fileExst ? (
           <Text
-            className="download-dialog-other-text"
+            className={styles.downloadDialogOtherText}
             truncate
             title={file.title}
             fontSize="13px"

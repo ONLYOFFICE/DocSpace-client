@@ -145,7 +145,7 @@ const Header = ({ current, pathParts, isEmptyList }: HeaderProps) => {
             isFrame
             navigationItems={currentNavigationItems}
             getContextOptionsPlus={() => []}
-            getContextOptionsFolder={() => [{ key: "test", label: "test" }]}
+            getContextOptionsFolder={() => []}
             onClickFolder={(id) => {
               openFolder(
                 id,

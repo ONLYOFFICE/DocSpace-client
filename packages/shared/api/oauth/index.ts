@@ -192,7 +192,7 @@ export function getOAuthJWTSignature() {
 }
 
 export async function setOAuthJWTSignature() {
-  const token = await api.oauth.getJWTToken()!;
+  const token = await getJWTToken()!;
 
   // Parse the token payload to extract information
   const tokenPayload = JSON.parse(window.atob(token!.split(".")[1]));
@@ -200,20 +200,7 @@ export async function setOAuthJWTSignature() {
   // Get the token's original expiration time
   const tokenExpDate = new Date(tokenPayload.exp * 1000); // Convert seconds to milliseconds
 
-  // Create a new date with current date but time from token
-  const currentDate = new Date();
-  const expirationDate = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth(),
-    currentDate.getDate(),
-    tokenExpDate.getHours(),
-    tokenExpDate.getMinutes(),
-    tokenExpDate.getSeconds(),
-  );
-
-  console.log("Setting token with expiration:", expirationDate);
-
-  setCookie("x-signature", token, { expires: expirationDate });
+  setCookie("x-signature", token, { expires: tokenExpDate });
 }
 
 export const getConsentList = async (

@@ -41,14 +41,19 @@ const ChatFooter = ({
   filesList = [],
   sendIconImage,
   placeholderText,
+  placeholderSending,
+  sendingMessage,
 }: {
   addMessage: Function;
   sendMessage: Function;
   filesList?: FileType[];
   sendIconImage?: string;
   placeholderText?: string;
+  placeholderSending?: string;
+  sendingMessage?: boolean;
 }) => {
   const chatPlaceholder = placeholderText ?? "Message AI...";
+  const chatPlaceholderSending = placeholderSending ?? "Thinking...";
   const inputBlockRef = useRef<HTMLDivElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -65,6 +70,7 @@ const ChatFooter = ({
     itemsHeight < MAX_DROPDOWN_HEIGHT ? itemsHeight + 16 : 216; // 16 padding 8up + 8down
 
   const onSendMessage = () => {
+    if (sendingMessage) return;
     if (message && message.trim() !== "") {
       addMessage({ message, isSend: true });
       setMessage("");
@@ -186,10 +192,13 @@ const ChatFooter = ({
           className="chat-panel-footer_input"
           value={message}
           onChange={onChangeMessage}
-          placeholder={chatPlaceholder}
+          placeholder={
+            sendingMessage ? chatPlaceholderSending : chatPlaceholder
+          }
           onFocus={onFocus}
           onKeyDown={onKeyDownAction}
           onInput={onInput}
+          disabled={sendingMessage}
         />
 
         <div className="chat-panel-footer_input-append">

@@ -39,6 +39,7 @@ export default function ChatWidget({
   header_text,
   empty_screen_text,
   placeholder_text,
+  placeholder_sending,
   chat_user_name,
   popup_view,
 }: {
@@ -65,6 +66,7 @@ export default function ChatWidget({
   header_text?: string;
   empty_screen_text?: string;
   placeholder_text?: string;
+  placeholder_sending?: string;
   chat_user_name?: string;
   popup_view?: string;
 }) {
@@ -88,6 +90,7 @@ export default function ChatWidget({
   };
 
   const sendMessageFn = (message: string) => {
+    setSendingMessage(true);
     sendMessage(
       host_url,
       flow_id,
@@ -223,11 +226,11 @@ export default function ChatWidget({
           emptyScreenText={empty_screen_text}
           userName={chat_user_name}
         />
-        {sendingMessage && (
+        {/* {sendingMessage && (
           <div className="chat-panel-loading-placeholder">
             <h1 className="chat-panel-loading-placeholder-ellipsis"> </h1>
           </div>
-        )}
+        )} */}
 
         <ChatFooter
           addMessage={addMessage}
@@ -235,6 +238,8 @@ export default function ChatWidget({
           filesList={list_files}
           sendIconImage={send_icon_image}
           placeholderText={placeholder_text}
+          placeholderSending={placeholder_sending}
+          sendingMessage={sendingMessage}
         />
       </ChatWidgetWrapper>
     </div>

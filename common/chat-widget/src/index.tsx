@@ -28,6 +28,7 @@ customElements.define(
       header_text: "string",
       empty_screen_text: "string",
       placeholder_text: "string",
+      placeholder_sending: "string",
       chat_user_name: "string",
       popup_view: "string",
     },

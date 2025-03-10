@@ -151,7 +151,10 @@ export const OnePasswordRow = ({
     >
       <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div className={styles.singlePasswordFile}>
+        <div
+          className={styles.singlePasswordFile}
+          data-testid="one-password-row-body"
+        >
           <Text>{t("AccessPasswordMessage")}</Text>
           <div className={styles.singlePasswordContent}>
             <div className={styles.singlePasswordRow}>

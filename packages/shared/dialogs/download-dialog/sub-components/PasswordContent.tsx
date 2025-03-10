@@ -94,7 +94,10 @@ export const PasswordContent = (props: PasswordContentProps) => {
   };
 
   return (
-    <div className={styles.downloadDialogPasswordContent}>
+    <div
+      className={styles.downloadDialogPasswordContent}
+      data-testid="password-content"
+    >
       {barIsVisible ? (
         <PublicRoomBar
           headerText={t("ProtectedFiles")}
@@ -103,7 +106,7 @@ export const PasswordContent = (props: PasswordContentProps) => {
           onClose={onClose}
         />
       ) : null}
-      {other?.length > 0
+      {other && other?.length > 0
         ? passwordRow(
             other,
             t("Common:PasswordRequired"),
@@ -111,21 +114,21 @@ export const PasswordContent = (props: PasswordContentProps) => {
             styles.warningColor,
           )
         : null}
-      {original?.length > 0
+      {original && original?.length > 0
         ? passwordRow(
             original,
             t("DownloadOriginalFormat"),
             ProtectedFileCategoryType.Original,
           )
         : null}
-      {password?.length > 0
+      {password && password?.length > 0
         ? passwordRow(
             password,
             t("PasswordEntered"),
             ProtectedFileCategoryType.Password,
           )
         : null}
-      {remove?.length > 0
+      {remove && remove?.length > 0
         ? passwordRow(
             remove,
             t("RemovedFromList"),

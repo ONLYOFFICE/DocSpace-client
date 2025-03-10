@@ -38,9 +38,15 @@ import {
 
 export type TDownloadedFile = TFile & {
   checked?: boolean;
-  format?: string;
+  format?: string | null;
   password?: string;
 };
+
+export type TSortedFiles = Record<DownloadedDocumentType, TDownloadedFile[]>;
+
+export type TSortedDownloadFiles = Partial<
+  Record<ProtectedFileCategoryType, TDownloadedFile[]>
+>;
 
 export type DownloadRowProps = {
   t: TTranslation;
@@ -86,7 +92,7 @@ export type PasswordRowProps = {
 
 export type PasswordContentProps = {
   getItemIcon: (item: TDownloadedFile) => React.ReactNode;
-  sortedDownloadFiles: Record<ProtectedFileCategoryType, TDownloadedFile[]>;
+  sortedDownloadFiles: TSortedDownloadFiles;
   resetDownloadedFileFormat: (
     id: number,
     fileExst: string,
@@ -109,7 +115,7 @@ export type OnePasswordRowProps = {
   visible: boolean;
 };
 
-type TFileConvertId = { key: number; value: string; password?: string };
+export type TFileConvertId = { key: number; value: string; password?: string };
 
 type TTranslationsForDownload = {
   label: string;
@@ -118,7 +124,7 @@ type TTranslationsForDownload = {
 };
 
 export type DownloadDialogProps = {
-  sortedFiles: Record<DownloadedDocumentType, TDownloadedFile[]>;
+  sortedFiles: TSortedFiles;
   setDownloadItems: (items: TDownloadedFile[]) => void;
   downloadItems: TDownloadedFile[];
   downloadFiles: (
@@ -136,7 +142,7 @@ export type DownloadDialogProps = {
     password: string,
     type: ProtectedFileCategoryType,
   ) => void;
-  sortedDownloadFiles: Record<ProtectedFileCategoryType, TDownloadedFile[]>;
+  sortedDownloadFiles: TSortedDownloadFiles;
   resetDownloadedFileFormat: (
     id: number,
     fileExst: string,

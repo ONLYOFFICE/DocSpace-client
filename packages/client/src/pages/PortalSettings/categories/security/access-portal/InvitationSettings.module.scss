@@ -37,18 +37,23 @@
   }
 }
 
+.checkboxContainer {
+  display: flex;
+
+  max-width: 676px;
+  width: max-content;
+
+  &:hover {
+    p {
+      cursor: pointer;
+    }
+  }
+}
+
 .checkbox {
   svg {
     margin-inline-end: 8px !important;
   }
-
-  span {
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 20px;
-  }
-
-  max-width: 676px;
 }
 
 .checkboxDescription {

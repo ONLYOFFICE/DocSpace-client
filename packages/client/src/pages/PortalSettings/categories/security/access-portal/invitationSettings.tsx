@@ -24,14 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { withTranslation } from "react-i18next";
+import { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { size } from "@docspace/shared/utils";
+
 import styles from "./InvitationSettings.module.scss";
 import { LearnMoreWrapper } from "../StyledSecurity";
 
-const InvitationSettings = (props) => {
+const InvitationSettings = (props: { t: any }) => {
   const { t } = props;
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const checkWidth = () => {
+    window.innerWidth > size.mobile &&
+      location.pathname.includes("invitation-settings") &&
+      navigate("/portal-settings/security/access-portal");
+  };
+
+  useEffect(() => {
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
 
   return (
     <>
@@ -46,10 +66,13 @@ const InvitationSettings = (props) => {
 
       <div className={styles.content}>
         <div>
-          <Checkbox
-            className={styles.checkbox}
-            label={"Invite DocSpace members via Contacts"}
-          />
+          <div className={styles.checkboxContainer}>
+            <Checkbox className={styles.checkbox} />
+            <Text fontSize="13px" fontWeight="600" lineHeight="20px">
+              Invite DocSpace members via Contacts
+            </Text>
+          </div>
+
           <Text
             fontSize="12px"
             fontWeight="400"
@@ -63,10 +86,13 @@ const InvitationSettings = (props) => {
         </div>
 
         <div>
-          <Checkbox
-            className={styles.checkbox}
-            label={"Allow inviting guests"}
-          />
+          <div className={styles.checkboxContainer}>
+            <Checkbox className={styles.checkbox} />
+            <Text fontSize="13px" fontWeight="600" lineHeight="20px">
+              Allow inviting guests
+            </Text>
+          </div>
+
           <Text
             fontSize="12px"
             fontWeight="400"

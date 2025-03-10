@@ -157,7 +157,7 @@ const AccessPortal = (props) => {
       <StyledSettingsSeparator />
 
       <Text fontSize="16px" fontWeight="700">
-        Invitation Settings
+        {t("InvitationSettings")}
       </Text>
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">

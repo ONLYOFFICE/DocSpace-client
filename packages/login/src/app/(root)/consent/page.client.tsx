@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { useRouter } from "next/navigation";
@@ -40,7 +40,11 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { deleteCookie } from "@docspace/shared/utils/cookie";
+import {
+  getOAuthJWTSignature,
+  setOAuthJWTSignature,
+} from "@docspace/shared/api/oauth";
+import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";
@@ -90,23 +94,34 @@ interface IConsentProps {
   scopes: TScope[];
   user: TUser;
   baseUrl?: string;
-  token: string;
-  redirect_url: string;
 }
 
-const Consent = ({
-  client,
-  scopes,
-  user,
-  baseUrl,
-  token,
-  redirect_url,
-}: IConsentProps) => {
+const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
   const { t } = useTranslation(["Consent", "Common"]);
   const router = useRouter();
 
   const [isAllowRunning, setIsAllowRunning] = React.useState(false);
   const [isDenyRunning, setIsDenyRunning] = React.useState(false);
+
+  React.useEffect(() => {
+    const validateToken = async () => {
+      const token = getOAuthJWTSignature();
+
+      if (token) return;
+
+      await setOAuthJWTSignature();
+
+      const redirect_url = getCookie("x-redirect-authorization-uri");
+
+      if (!redirect_url) {
+        return;
+      }
+
+      window.location.replace(redirect_url);
+    };
+
+    validateToken();
+  }, []);
 
   const onAllowClick = async () => {
     if (!("clientId" in client)) return;
@@ -128,16 +143,10 @@ const Consent = ({
         clientState = c.replace("client_state=", "").trim();
     });
 
-    await api.oauth.onOAuthSubmit(clientId, clientState, scope, token);
+    await api.oauth.onOAuthSubmit(clientId, clientState, scope);
 
     setIsAllowRunning(false);
   };
-
-  useEffect(() => {
-    fetch(redirect_url, {
-      headers: { "X-Signature": token, "X-Disable-Redirect": "true" },
-    });
-  }, [redirect_url, token]);
 
   const onDenyClick = async () => {
     if (!("clientId" in client)) return;
@@ -159,7 +168,7 @@ const Consent = ({
 
     deleteCookie("client_state");
 
-    await api.oauth.onOAuthCancel(clientId, clientState, token);
+    await api.oauth.onOAuthCancel(clientId, clientState);
 
     setIsDenyRunning(false);
   };

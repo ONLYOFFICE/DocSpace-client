@@ -114,7 +114,7 @@ const AdvancedSettings = (props: InjectedProps) => {
   );
 };
 
-export default inject(({ ssoStore }) => {
+export default inject<TStore>(({ ssoStore }) => {
   const {
     hideAuthPage,
     disableEmailVerification,

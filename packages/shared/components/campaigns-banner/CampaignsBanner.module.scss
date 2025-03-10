@@ -76,20 +76,19 @@
   flex-direction: column;
   gap: 8px;
 
-  .header {
-    max-width: 167px;
+  @include mobile {
+    max-width: 75%;
   }
+}
+
+.header {
+  max-width: 167px;
 
   @include tablet {
-    .header {
-      max-width: 180px;
-    }
+    max-width: 180px;
   }
 
   @include mobile {
-    .header {
-      max-width: 75%;
-    }
     max-width: 75%;
   }
 }

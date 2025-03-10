@@ -189,6 +189,10 @@ class TreeFoldersStore {
     return this.rootFoldersTitles[FolderType.USER]?.title;
   }
 
+  get personalFolderReadAccess() {
+    return this.rootFoldersTitles[FolderType.USER]?.security?.Read ?? true;
+  }
+
   /**
    * @type {import("@docspace/shared/api/files/types").TFolder=}
    */

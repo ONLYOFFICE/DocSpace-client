@@ -53,6 +53,7 @@ export interface PrivateRouteProps
   isCommunity?: boolean;
   isEnterprise?: boolean;
   isLoadedUser?: boolean;
+  readAccess?: boolean;
 
   validatePublicRoomKey: ((key: string) => void) | undefined;
   publicRoomKey: string | null | undefined;

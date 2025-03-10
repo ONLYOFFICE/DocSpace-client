@@ -56,6 +56,7 @@ const PrivateRouteWrapper = ({
   roomId,
   isLoadedPublicRoom,
   isLoadingPublicRoom,
+  readAccess,
 }: Partial<PrivateRouteProps>) => {
   return (
     <PrivateRoute
@@ -84,6 +85,7 @@ const PrivateRouteWrapper = ({
       roomId={roomId}
       isLoadedPublicRoom={isLoadedPublicRoom}
       isLoadingPublicRoom={isLoadingPublicRoom}
+      readAccess={readAccess}
     >
       {children}
     </PrivateRoute>
@@ -97,6 +99,7 @@ export default inject<TStore>(
     userStore,
     currentTariffStatusStore,
     publicRoomStore,
+    treeFoldersStore,
   }) => {
     const { isAuthenticated, isLoaded, isAdmin, isLogout, capabilities } =
       authStore;
@@ -126,6 +129,8 @@ export default inject<TStore>(
       isLoading: isLoadingPublicRoom,
     } = publicRoomStore;
 
+    const { personalFolderReadAccess } = treeFoldersStore;
+
     return {
       isPortalDeactivate,
       isCommunity,
@@ -149,6 +154,7 @@ export default inject<TStore>(
       roomId,
       isLoadedPublicRoom,
       isLoadingPublicRoom,
+      readAccess: personalFolderReadAccess,
     };
   },
 )(observer(PrivateRouteWrapper));

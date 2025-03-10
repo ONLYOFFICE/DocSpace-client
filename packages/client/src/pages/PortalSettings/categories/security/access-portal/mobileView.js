@@ -78,9 +78,9 @@ const MobileView = (props) => {
         onClickLink={onClickLink}
       />
       <MobileCategoryWrapper
-        title="Invitation Settings"
+        title={t("InvitationSettings")}
         subtitle={
-          "Configure the invitation options for internal members and external guests of your DocSpace."
+          <Trans i18nKey="InvitationSettingsMobile" ns="Settings" t={t} />
         }
         url="/portal-settings/security/access-portal/invitation-settings"
         onClickLink={onClickLink}

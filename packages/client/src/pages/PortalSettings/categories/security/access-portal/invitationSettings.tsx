@@ -57,10 +57,7 @@ const InvitationSettings = (props: { t: any }) => {
     <>
       <LearnMoreWrapper>
         <Text fontSize="13px" fontWeight="400">
-          Configure the invitation options for internal members and external
-          guests of your DocSpace. These settings can help you comply with your
-          company's security guidelines, for example, if you use LDAP or other
-          user management systems.
+          {t("InvitationSettingsDescription")}
         </Text>
       </LearnMoreWrapper>
 
@@ -69,7 +66,7 @@ const InvitationSettings = (props: { t: any }) => {
           <div className={styles.checkboxContainer}>
             <Checkbox className={styles.checkbox} />
             <Text fontSize="13px" fontWeight="600" lineHeight="20px">
-              Invite DocSpace members via Contacts
+              {t("InvitationSettingsContacts")}
             </Text>
           </div>
 
@@ -79,9 +76,7 @@ const InvitationSettings = (props: { t: any }) => {
             lineHeight="16px"
             className={styles.checkboxDescription}
           >
-            Enable this option to allow invitations to be sent to new DocSpace
-            members through the Contacts section. Disable this option in case
-            you want to invite new members through LDAP only.
+            {t("InvitationSettingsContactsDescription")}
           </Text>
         </div>
 
@@ -89,7 +84,7 @@ const InvitationSettings = (props: { t: any }) => {
           <div className={styles.checkboxContainer}>
             <Checkbox className={styles.checkbox} />
             <Text fontSize="13px" fontWeight="600" lineHeight="20px">
-              Allow inviting guests
+              {t("InvitationSettingsGuests")}
             </Text>
           </div>
 
@@ -99,8 +94,7 @@ const InvitationSettings = (props: { t: any }) => {
             lineHeight="16px"
             className={styles.checkboxDescription}
           >
-            Enable this option to allow all DocSpace members to invite external
-            guests to rooms.
+            {t("InvitationSettingsGuestsDescription")}
           </Text>
         </div>
       </div>

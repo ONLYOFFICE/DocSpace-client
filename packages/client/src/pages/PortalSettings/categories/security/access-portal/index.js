@@ -161,10 +161,7 @@ const AccessPortal = (props) => {
       </Text>
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">
-          Configure the invitation options for internal members and external
-          guests of your DocSpace. These settings can help you comply with your
-          company's security guidelines, for example, if you use LDAP or other
-          user management systems.
+          {t("InvitationSettingsDescription")}
         </Text>
       </div>
       <InvitationSettingsSection />

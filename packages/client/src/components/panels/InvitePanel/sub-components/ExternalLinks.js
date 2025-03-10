@@ -282,8 +282,10 @@ const ExternalLinks = ({
               productName: t("Common:ProductName"),
             })
           : noAllowInvitingGuests
-            ? "Create a universal link for DocSpace members for self-authorization in the room."
-            : "Create a universal link for self-authorization in the room as a guest."}
+            ? t("InviteViaLinkDescriptionRoomMembers", {
+                productName: t("Common:ProductName"),
+              })
+            : t("InviteViaLinkDescriptionRoomGuest")}
       </StyledDescription>
       {externalLinksVisible ? (
         <StyledInviteInputContainer key={activeLink.id}>

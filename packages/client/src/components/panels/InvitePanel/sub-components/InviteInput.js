@@ -492,7 +492,7 @@ const InviteInput = ({
       prevDropDownContent.current = (
         <DropDownItem disabled className="no-users-list">
           <Text truncate fontSize="13px" fontWeight={400} lineHeight="20px">
-            No users found
+            {t("Common:NotFoundUsers")}
           </Text>
         </DropDownItem>
       );
@@ -589,8 +589,10 @@ const InviteInput = ({
               productName: t("Common:ProductName"),
             })
           : noAllowInvitingGuests
-            ? "Add existing DocSpace members to the room."
-            : "Add existing DocSpace contacts. Or invite new users personally via email. New users will be added to your Guests list."}
+            ? t("InviteToRoomManuallyInfoMembers")
+            : t("InviteToRoomManuallyInfoGuest", {
+                productName: t("Common:ProductName"),
+              })}
       </StyledDescription>
       {roomId === -1 || !noAllowInvitingGuests ? (
         <StyledInviteLanguage>
@@ -655,7 +657,7 @@ const InviteInput = ({
               roomId === -1
                 ? t("InviteMembersSearchPlaceholder")
                 : noAllowInvitingGuests
-                  ? "Add people by name or email"
+                  ? t("InviteToRoomAddPlaceholder")
                   : t("InviteToRoomSearchPlaceholder")
             }
             value={inputValue}

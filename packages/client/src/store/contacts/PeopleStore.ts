@@ -128,6 +128,7 @@ class PeopleStore {
       clientLoadingStore,
       treeFoldersStore,
       this.filesStore,
+      this.dialogsStore,
     );
 
     this.contextOptionsStore = new ContactsConextOptionsStore(
@@ -139,7 +140,7 @@ class PeopleStore {
       this.usersStore,
       this.dialogStore,
       this.targetUserStore,
-      dialogsStore,
+      this.dialogsStore,
       currentQuotaStore,
       this.setup,
     );

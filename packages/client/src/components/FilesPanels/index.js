@@ -73,6 +73,7 @@ import {
   FormFillingTipsDialog,
   DeleteVersionDialog,
   CancelOperationDialog,
+  ReducedRightsDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -164,6 +165,7 @@ const Panels = (props) => {
     userId,
     getRefElement,
     config,
+    reducedRightsVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -399,6 +401,10 @@ const Panels = (props) => {
         config={config}
       />
     ) : null,
+
+    reducedRightsVisible ? (
+      <ReducedRightsDialog key="reduced-rights-dialog" />
+    ) : null,
   ];
 };
 
@@ -478,6 +484,7 @@ export default inject(
 
       setFormFillingTipsDialog,
       formFillingTipsVisible,
+      reducedRightsVisible,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
@@ -590,6 +597,7 @@ export default inject(
       userId: userStore?.user?.id,
       getRefElement,
       config,
+      reducedRightsVisible,
     };
   },
 )(observer(Panels));

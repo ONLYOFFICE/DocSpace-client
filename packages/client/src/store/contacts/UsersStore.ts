@@ -87,6 +87,7 @@ import ContactsHotkeysStore from "./ContactsHotkeysStore";
 import DialogStore from "./DialogStore";
 
 import FilesStore from "../FilesStore";
+import DialogsStore from "../DialogsStore";
 
 class UsersStore {
   filter = Filter.getDefault();
@@ -136,6 +137,7 @@ class UsersStore {
     public clientLoadingStore: ClientLoadingStore,
     public treeFoldersStore: TreeFoldersStore,
     public filesStore: FilesStore,
+    public dialogsStore: DialogsStore,
   ) {
     this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
@@ -145,6 +147,7 @@ class UsersStore {
     this.contactsHotkeysStore = contactsHotkeysStore;
     this.accessRightsStore = accessRightsStore;
     this.dialogStore = dialogStore;
+    this.dialogsStore = dialogsStore;
     this.clientLoadingStore = clientLoadingStore;
     this.treeFoldersStore = treeFoldersStore;
     this.contactsTab = getContactsView();
@@ -211,19 +214,15 @@ class UsersStore {
 
       const { fetchTreeFolders } = this.treeFoldersStore;
       const { setUser } = this.userStore;
+      const { setReducedRightsVisible } = this.dialogsStore;
 
       const { data, id } = value;
-      const { isAdmin, isRoomAdmin } = data; // isCollaborator, isVisitor
+      const { isAdmin, isRoomAdmin, isVisitor } = data; // isCollaborator,
       const { pathname } = window.location;
 
-      // if (
-      //   (isCollaborator && pathname.includes("accounts/people")) ||
-      //   (isVisitor && pathname.includes("rooms/personal"))
-      // ) {
-      //   window.DocSpace.navigate(
-      //     combineUrl(window.ClientConfig?.proxy?.url, "/"),
-      //   );
-      // }
+      if (isVisitor) {
+        setReducedRightsVisible(true);
+      }
 
       if ((isAdmin || isRoomAdmin) && pathname.includes("accounts/people")) {
         this.getUsersList();

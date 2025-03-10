@@ -71,6 +71,8 @@ class DialogsStore {
 
   lifetimeDialogVisible = false;
 
+  reducedRightsVisible = false;
+
   lifetimeDialogCB = null;
 
   downloadDialogVisible = false;
@@ -411,6 +413,10 @@ class DialogsStore {
   setLifetimeDialogVisible = (lifetimeDialogVisible, cb) => {
     this.lifetimeDialogVisible = lifetimeDialogVisible;
     this.lifetimeDialogCB = cb;
+  };
+
+  setReducedRightsVisible = (reducedRightsVisible) => {
+    this.reducedRightsVisible = reducedRightsVisible;
   };
 
   setEventDialogVisible = (eventDialogVisible) => {

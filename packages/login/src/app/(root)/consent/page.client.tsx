@@ -41,11 +41,10 @@ import {
   AvatarSize,
 } from "@docspace/shared/components/avatar";
 import {
-  deleteCookie,
-  getCookie,
   getOAuthJWTSignature,
   setOAuthJWTSignature,
-} from "@docspace/shared/utils/cookie";
+} from "@docspace/shared/api/oauth";
+import { getCookie, deleteCookie } from "@docspace/shared/utils";
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";

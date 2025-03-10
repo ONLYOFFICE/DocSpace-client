@@ -34,7 +34,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import {
   getOAuthJWTSignature,
   setOAuthJWTSignature,
-} from "@docspace/shared/utils/cookie";
+} from "@docspace/shared/api/oauth";
 import AppLoader from "@docspace/shared/components/app-loader";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

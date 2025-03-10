@@ -9,6 +9,8 @@ import {
   getScopeList,
   getConsentList,
   revokeUserClient,
+  getOAuthJWTSignature,
+  setOAuthJWTSignature,
 } from "@docspace/shared/api/oauth";
 import {
   IClientListProps,
@@ -19,12 +21,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
-import {
-  getCookie,
-  getOAuthJWTSignature,
-  setCookie,
-  setOAuthJWTSignature,
-} from "@docspace/shared/utils/cookie";
 
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";

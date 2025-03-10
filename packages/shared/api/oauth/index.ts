@@ -30,7 +30,7 @@
 import { request } from "../client";
 
 import { transformToClientProps } from "../../utils/oauth";
-import { getOAuthJWTSignature, setOAuthJWTSignature } from "../../utils/cookie";
+import { getCookie, setCookie } from "../../utils/cookie";
 
 import {
   IClientProps,
@@ -179,6 +179,42 @@ export const getScopeList = async (): Promise<TScope[]> => {
 
   return scopeList;
 };
+
+export const getJWTToken = () => {
+  return request<string>({
+    method: "get",
+    url: "/security/oauth2/token",
+  });
+};
+
+export function getOAuthJWTSignature() {
+  return getCookie("x-signature");
+}
+
+export async function setOAuthJWTSignature() {
+  const token = await api.oauth.getJWTToken()!;
+
+  // Parse the token payload to extract information
+  const tokenPayload = JSON.parse(window.atob(token!.split(".")[1]));
+
+  // Get the token's original expiration time
+  const tokenExpDate = new Date(tokenPayload.exp * 1000); // Convert seconds to milliseconds
+
+  // Create a new date with current date but time from token
+  const currentDate = new Date();
+  const expirationDate = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    currentDate.getDate(),
+    tokenExpDate.getHours(),
+    tokenExpDate.getMinutes(),
+    tokenExpDate.getSeconds(),
+  );
+
+  console.log("Setting token with expiration:", expirationDate);
+
+  setCookie("x-signature", token, { expires: expirationDate });
+}
 
 export const getConsentList = async (
   page: number = 0,
@@ -336,11 +372,4 @@ export const introspectDeveloperToken = (token: string) => {
     false,
     true,
   );
-};
-
-export const getJWTToken = () => {
-  return request<string>({
-    method: "get",
-    url: "/security/oauth2/token",
-  });
 };

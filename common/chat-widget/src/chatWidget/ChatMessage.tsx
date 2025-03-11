@@ -34,6 +34,7 @@ import { ChatMessageType } from "../types/chatWidget";
 type AIChatMessageProps = {
   message: ChatMessageType;
   userName?: string;
+  providerName?: string;
   userIconImage?: string;
   providerIconImage?: string;
 };
@@ -41,10 +42,12 @@ type AIChatMessageProps = {
 const ChatMessage = ({
   message,
   userName,
+  providerName,
   userIconImage,
   providerIconImage,
 }: AIChatMessageProps) => {
   const chatUserName = userName ?? "Me";
+  const chatProviderName = providerName ?? "AI";
 
   return (
     <div className="chat-message-container">
@@ -77,7 +80,7 @@ const ChatMessage = ({
               <LoaderPinwheel color="#74ab9c" />
             )}
 
-            <p className="chat-message-user-name">ChatGPT</p>
+            <p className="chat-message-user-name">{chatProviderName}</p>
           </div>
 
           <div className="chat-message-user-message">

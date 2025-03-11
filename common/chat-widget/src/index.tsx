@@ -30,6 +30,7 @@ customElements.define(
       placeholder_text: "string",
       placeholder_sending: "string",
       chat_user_name: "string",
+      chat_provider_name: "string",
       popup_view: "string",
     },
   })

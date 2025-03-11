@@ -126,6 +126,7 @@ export const ChatWidget = memo(
             empty_screen_text="How can I help you today?" // TODO: AI tranlstion
             placeholder_text="Message Langflow..." // TODO: AI tranlstion
             chat_user_name="Me" // TODO: AI tranlstion
+            chat_provider_name="Langflow" // TODO: AI tranlstion
           />
         </div>
       </div>

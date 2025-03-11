@@ -152,8 +152,6 @@ const ChangeUserTypeDialog = ({
   const getDowngradeContent = () => {
     if (!isDowngradeType) return;
 
-    if (!needReassignData) return;
-
     return (
       <>
         {!isDowngradeToUser ? (
@@ -170,28 +168,44 @@ const ChangeUserTypeDialog = ({
               t={t}
             />
           ) : (
-            <Trans
-              i18nKey="DataReassignmentWithFilesDeletion"
-              ns="ChangeUserTypeDialog"
-              t={t}
-              values={{ sectionName: personalUserFolderTitle }}
-              components={{
-                1: <span style={{ fontWeight: 600 }} />,
-              }}
-            />
+            <>
+              <Trans
+                i18nKey="PersonalDataDeletion"
+                ns="ChangeUserTypeDialog"
+                t={t}
+                values={{ sectionName: personalUserFolderTitle }}
+                components={{
+                  1: <span style={{ fontWeight: 600 }} />,
+                }}
+              />
+              &nbsp;
+              {needReassignData ? (
+                <Trans
+                  i18nKey="DataReassignmentWithFilesDeletion"
+                  ns="ChangeUserTypeDialog"
+                  t={t}
+                  values={{ sectionName: personalUserFolderTitle }}
+                  components={{
+                    1: <span style={{ fontWeight: 600 }} />,
+                  }}
+                />
+              ) : null}
+            </>
           )}
         </Text>
 
-        <Link
-          className="body-link"
-          type={LinkType.action}
-          fontSize="13px"
-          fontWeight={600}
-          isHovered
-          onClick={onClickReassignData}
-        >
-          {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
-        </Link>
+        {needReassignData && (
+          <Link
+            className="body-link"
+            type={LinkType.action}
+            fontSize="13px"
+            fontWeight={600}
+            isHovered
+            onClick={onClickReassignData}
+          >
+            {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
+          </Link>
+        )}
       </>
     );
   };

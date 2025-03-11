@@ -68,7 +68,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     roomId,
     isLoadedPublicRoom,
     isLoadingPublicRoom,
-    readAccess,
   } = props;
 
   const location = useLocation();
@@ -327,9 +326,9 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (
       !restricted ||
       isAdmin ||
-      readAccess ||
       (withManager && !user?.isVisitor && !user?.isCollaborator) ||
-      (withCollaborator && !user?.isVisitor)
+      (withCollaborator &&
+        (!user?.isVisitor || (user?.isVisitor && user?.hasPersonalFolder)))
     ) {
       return children;
     }

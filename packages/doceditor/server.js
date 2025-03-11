@@ -34,8 +34,17 @@ import("./logger.mjs").then(({ logger }) => {
   const log = logger.child({ module: "server" });
   const dev = process.env.NODE_ENV === "development";
 
-  const port = config.PORT ?? 5013;
-  const hostname = config.HOSTNAME ?? "localhost";
+  const argv = (key) => {
+    if (process.argv.includes(`--${key}`)) return true;
+
+    return (
+      process.argv.find((arg) => arg.startsWith(`--${key}=`))?.split("=")[1] ||
+      null
+    );
+  };
+
+  const port = (argv("app.port") || config.PORT) ?? 5013;
+  const hostname = config.HOSTNAME ?? "0.0.0.0";
 
   // when using middleware `hostname` and `port` must be provided below
   const app = next({ dev, hostname, port });

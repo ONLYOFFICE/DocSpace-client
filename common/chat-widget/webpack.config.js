@@ -9,7 +9,7 @@ module.exports = {
       .map((f) => path.resolve(__dirname, f)),
   },
   output: {
-    filename: "build/static/js/bundle.min.js",
+    filename: "build/static/js/chatWidget.js",
   },
   module: {
     rules: [

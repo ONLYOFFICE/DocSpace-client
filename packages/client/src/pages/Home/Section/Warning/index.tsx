@@ -32,13 +32,13 @@ import WarningComponent from "@docspace/shared/components/navigation/sub-compone
 import { DeviceType } from "@docspace/shared/enums";
 
 type InjectedProps = {
-  personalFolderWarning: boolean;
+  isPersonalReadOnly: boolean;
   isRecycleBinFolder: boolean;
   currentDeviceType: DeviceType;
 };
 
 const Warning = ({
-  personalFolderWarning = false,
+  isPersonalReadOnly = false,
   isRecycleBinFolder = false,
   currentDeviceType = DeviceType.desktop,
 }: InjectedProps) => {
@@ -48,19 +48,21 @@ const Warning = ({
 
   const warningText = isRecycleBinFolder
     ? t("TrashErasureWarning")
-    : personalFolderWarning
+    : isPersonalReadOnly
       ? t("PersonalFolderErasureWarning")
       : "";
+
+  if (!warningText) return null;
 
   return <WarningComponent title={warningText} />;
 };
 
 export default inject(({ treeFoldersStore, settingsStore }: TStore) => {
-  const { isRecycleBinFolder, personalFolderReadAccess } = treeFoldersStore;
+  const { isRecycleBinFolder, isPersonalReadOnly } = treeFoldersStore;
   const { currentDeviceType } = settingsStore;
 
   return {
-    personalFolderWarning: personalFolderReadAccess,
+    isPersonalReadOnly,
     isRecycleBinFolder,
     currentDeviceType,
   };

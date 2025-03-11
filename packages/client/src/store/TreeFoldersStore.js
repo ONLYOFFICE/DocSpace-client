@@ -193,7 +193,7 @@ class TreeFoldersStore {
     return this.rootFoldersTitles[FolderType.USER]?.title;
   }
 
-  get personalFolderReadAccess() {
+  get isPersonalReadOnly() {
     return (
       this.rootFoldersTitles[FolderType.USER]?.security?.Read &&
       !this.rootFoldersTitles[FolderType.USER]?.security?.Create

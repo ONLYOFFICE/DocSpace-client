@@ -172,6 +172,7 @@ const FilesRowContent = ({
   isDefaultRoomsQuotaSet,
   isIndexing,
   displayFileExtension,
+  isPersonalReadOnly,
 }) => {
   const {
     contentLength,
@@ -225,7 +226,7 @@ const FilesRowContent = ({
         );
 
       default:
-        if (isTrashFolder)
+        if (isTrashFolder || isPersonalReadOnly)
           return t("Files:DaysRemaining", {
             daysRemaining,
           });
@@ -306,6 +307,7 @@ export default inject(
       isRoomsFolder,
       isArchiveFolder,
       isTemplatesFolder,
+      isPersonalReadOnly,
     } = treeFoldersStore;
     const { isIndexedFolder } = selectedFolderStore;
 
@@ -320,6 +322,7 @@ export default inject(
       isTrashFolder: isRecycleBinFolder,
       isDefaultRoomsQuotaSet,
       isIndexing: isIndexedFolder,
+      isPersonalReadOnly,
     };
   },
 )(

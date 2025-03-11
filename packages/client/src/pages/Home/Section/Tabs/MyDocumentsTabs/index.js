@@ -40,11 +40,11 @@ const MyDocumentsTabs = ({
   isRoot,
   user,
   setChangeDocumentsTabs,
-  personalFolderReadAccess,
+  isPersonalReadOnly,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
 
-  if (personalFolderReadAccess) return null;
+  if (isPersonalReadOnly) return null;
 
   const tabs = [
     {
@@ -108,7 +108,7 @@ export default inject(
     userStore,
     selectedFolderStore,
   }) => {
-    const { isPersonalRoom, isRecentTab, isRoot, personalFolderReadAccess } =
+    const { isPersonalRoom, isRecentTab, isRoot, isPersonalReadOnly } =
       treeFoldersStore;
     const { setFilter } = filesStore;
     const { showTabsLoader } = clientLoadingStore;
@@ -123,7 +123,7 @@ export default inject(
       isRoot,
       user,
       setChangeDocumentsTabs,
-      personalFolderReadAccess,
+      isPersonalReadOnly,
     };
   },
 )(observer(MyDocumentsTabs));

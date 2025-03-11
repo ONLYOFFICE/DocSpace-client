@@ -274,7 +274,7 @@ const SectionHeaderContent = (props) => {
     setguidAnimationVisible,
     setRefMap,
     deleteRefMap,
-    personalFolderWarning,
+    isPersonalReadOnly,
   } = props;
 
   const location = useLocation();
@@ -677,12 +677,12 @@ const SectionHeaderContent = (props) => {
 
   const warningText = isRecycleBinFolder
     ? t("TrashErasureWarning")
-    : personalFolderWarning
+    : isPersonalReadOnly
       ? t("PersonalFolderErasureWarning")
       : "";
   const isContextButtonVisible =
     (isRecycleBinFolder && !isEmptyFilesList) ||
-    personalFolderWarning ||
+    isPersonalReadOnly ||
     !isRootFolder;
 
   return (
@@ -878,7 +878,7 @@ export default inject(
       isRecycleBinFolder,
       isRoomsFolder,
       isArchiveFolder,
-      personalFolderReadAccess,
+      isPersonalReadOnly,
     } = treeFoldersStore;
 
     const {
@@ -1023,7 +1023,7 @@ export default inject(
       getHeaderMenu,
 
       isRecycleBinFolder,
-      personalFolderWarning: personalFolderReadAccess,
+      isPersonalReadOnly,
       isEmptyFilesList,
       isEmptyArchive,
       isArchiveFolder,

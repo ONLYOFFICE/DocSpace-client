@@ -842,7 +842,6 @@ export default inject(
 
     const isRoomAdmin = userStore.user?.isRoomAdmin;
     const isCollaborator = userStore.user?.isCollaborator;
-    const isVisitor = userStore.user?.isVisitor;
 
     const {
       setSelected,
@@ -879,7 +878,7 @@ export default inject(
       isRecycleBinFolder,
       isRoomsFolder,
       isArchiveFolder,
-      isPersonalRoom,
+      personalFolderReadAccess,
     } = treeFoldersStore;
 
     const {
@@ -996,8 +995,6 @@ export default inject(
       ? navigationPath[navigationPath.length - 1]?.id
       : selectedFolder.id;
 
-    const personalFolderWarning = isVisitor && isPersonalRoom && security.Read;
-
     return {
       showText: settingsStore.showText,
       isDesktop: settingsStore.isDesktopClient,
@@ -1026,7 +1023,7 @@ export default inject(
       getHeaderMenu,
 
       isRecycleBinFolder,
-      personalFolderWarning,
+      personalFolderWarning: personalFolderReadAccess,
       isEmptyFilesList,
       isEmptyArchive,
       isArchiveFolder,

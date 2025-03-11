@@ -40,18 +40,24 @@ const MyDocumentsTabs = ({
   isRoot,
   user,
   setChangeDocumentsTabs,
+  personalFolderReadAccess,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
+  const recentTab = personalFolderReadAccess
+    ? []
+    : [
+        {
+          id: "recent",
+          name: t("Files:RecentlyAccessible"),
+        },
+      ];
 
   const tabs = [
     {
       id: "my",
       name: t("Common:MyDocuments"),
     },
-    {
-      id: "recent",
-      name: t("Files:RecentlyAccessible"),
-    },
+    ...recentTab,
   ];
 
   const onSelect = (e) => {
@@ -105,7 +111,8 @@ export default inject(
     userStore,
     selectedFolderStore,
   }) => {
-    const { isPersonalRoom, isRecentTab, isRoot } = treeFoldersStore;
+    const { isPersonalRoom, isRecentTab, isRoot, personalFolderReadAccess } =
+      treeFoldersStore;
     const { setFilter } = filesStore;
     const { showTabsLoader } = clientLoadingStore;
     const { user } = userStore;
@@ -119,6 +126,7 @@ export default inject(
       isRoot,
       user,
       setChangeDocumentsTabs,
+      personalFolderReadAccess,
     };
   },
 )(observer(MyDocumentsTabs));

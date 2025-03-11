@@ -327,9 +327,9 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (
       !restricted ||
       isAdmin ||
+      readAccess ||
       (withManager && !user?.isVisitor && !user?.isCollaborator) ||
-      (withCollaborator && !user?.isVisitor) ||
-      readAccess
+      (withCollaborator && !user?.isVisitor)
     ) {
       return children;
     }

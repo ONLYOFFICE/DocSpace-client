@@ -1280,9 +1280,10 @@ class ContextOptionsStore {
       isTemplatesFolder,
       isPersonalRoom,
       personalUserFolderTitle,
+      personalFolderReadAccess,
     } = this.treeFoldersStore;
     const { roomsForDelete, roomsForRestore } = this.filesStore;
-    const { security } = this.selectedFolderStore;
+
     const canRestoreAll = roomsForRestore.length > 0;
     const canDeleteAll = roomsForDelete.length > 0;
 
@@ -1361,7 +1362,7 @@ class ContextOptionsStore {
       return [];
     }
 
-    if (isPersonalRoom && security.Read && !security.CreateRoomFrom) {
+    if (isPersonalRoom && personalFolderReadAccess) {
       return [
         {
           id: "header_option_download-all",

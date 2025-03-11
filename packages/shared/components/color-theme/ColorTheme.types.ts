@@ -67,6 +67,12 @@ export interface IconButtonPinColorTheme
   themeId: ThemeId.IconButtonPin;
 }
 
+export interface IconButtonCustomFilterColorTheme
+  extends IconButtonProps,
+    DefaultColorThemeProps {
+  themeId: ThemeId.IconButtonCustomFilter;
+}
+
 export interface IconWrapperColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.IconWrapper;
   isRoot?: boolean;
@@ -135,6 +141,7 @@ export type ColorThemeProps =
   | FilterBlockItemTagColorTheme
   | IconButtonMuteColorTheme
   | IconButtonPinColorTheme
+  | IconButtonCustomFilterColorTheme
   | IconWrapperColorTheme
   | IndicatorFilterButtonColorTheme
   | IndicatorLoaderColorTheme

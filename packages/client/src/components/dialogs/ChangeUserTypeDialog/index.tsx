@@ -201,7 +201,7 @@ const ChangeUserTypeDialog = ({
             fontSize="13px"
             fontWeight={600}
             isHovered
-            onClick={onClickReassignData}
+            onClick={() => onClickReassignData()}
           >
             {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
           </Link>

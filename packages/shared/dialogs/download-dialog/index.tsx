@@ -42,15 +42,14 @@ import { OnePasswordRow } from "./sub-components/OnePasswordRow";
 import type {
   DownloadDialogProps,
   TDownloadedFile,
+  TSortedFiles,
 } from "./DownloadDialog.types";
 import { DownloadedDocumentType } from "./DownloadDialog.enums";
 import styles from "./DownloadDialog.module.scss";
 
 const LoadingPlaceholder = () => <div style={{ width: "96px" }} />;
 
-const getInitialState = (
-  sortedFiles: Record<DownloadedDocumentType, TDownloadedFile[]>,
-) => {
+const getInitialState = (sortedFiles: TSortedFiles) => {
   return {
     documents: {
       isChecked: true,

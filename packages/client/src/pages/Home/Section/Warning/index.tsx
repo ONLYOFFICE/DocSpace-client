@@ -24,9 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { default as SectionHeaderContent } from "./Header";
-export { default as SectionBodyContent } from "./Body";
-export { default as ContactsSectionBodyContent } from "./ContactsBody";
-export { default as SectionFilterContent } from "./Filter";
-export { default as SectionWarningContent } from "./Warning";
-export { default as SectionSubmenuContent } from "./Tabs";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
+import WarningComponent from "@docspace/shared/components/navigation/sub-components/WarningComponent";
+import { DeviceType } from "@docspace/shared/enums";
+
+type InjectedProps = {
+  personalFolderWarning: boolean;
+  isRecycleBinFolder: boolean;
+  currentDeviceType: DeviceType;
+};
+
+const Warning = ({
+  personalFolderWarning = false,
+  isRecycleBinFolder = false,
+  currentDeviceType = DeviceType.desktop,
+}: InjectedProps) => {
+  const { t } = useTranslation("Files");
+
+  if (currentDeviceType === DeviceType.desktop) return null;
+
+  const warningText = isRecycleBinFolder
+    ? t("TrashErasureWarning")
+    : personalFolderWarning
+      ? t("PersonalFolderErasureWarning")
+      : "";
+
+  return <WarningComponent title={warningText} />;
+};
+
+export default inject(({ treeFoldersStore, settingsStore }: TStore) => {
+  const { isRecycleBinFolder, personalFolderReadAccess } = treeFoldersStore;
+  const { currentDeviceType } = settingsStore;
+
+  return {
+    personalFolderWarning: personalFolderReadAccess,
+    isRecycleBinFolder,
+    currentDeviceType,
+  };
+})(observer(Warning));

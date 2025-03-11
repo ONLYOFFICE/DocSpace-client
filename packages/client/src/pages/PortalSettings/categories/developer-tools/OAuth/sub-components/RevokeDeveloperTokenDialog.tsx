@@ -52,14 +52,12 @@ import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 type GenerateDeveloperTokenDialogProps = {
   client?: IClientProps;
-  jwtToken?: string;
 
   setRevokeDeveloperTokenDialogVisible?: (value: boolean) => void;
 };
 
 const GenerateDeveloperTokenDialog = ({
   client,
-  jwtToken,
   setRevokeDeveloperTokenDialogVisible,
 }: GenerateDeveloperTokenDialogProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
@@ -80,7 +78,7 @@ const GenerateDeveloperTokenDialog = ({
 
       setRequestRunning(true);
 
-      await api.oauth.revokeDeveloperToken(token, clientId, secret, jwtToken!);
+      await api.oauth.revokeDeveloperToken(token, clientId, secret);
 
       setRequestRunning(false);
 
@@ -141,16 +139,13 @@ const GenerateDeveloperTokenDialog = ({
 
   React.useEffect(() => {
     const fecthClient = async () => {
-      const { clientSecret } = await api.oauth.getClient(
-        client!.clientId,
-        jwtToken!,
-      );
+      const { clientSecret } = await api.oauth.getClient(client!.clientId);
 
       setSecret(clientSecret);
     };
 
     fecthClient();
-  }, [client?.clientId, jwtToken]);
+  }, [client?.clientId]);
 
   return (
     <ModalDialog
@@ -216,7 +211,7 @@ export default inject(
     oauthStore: OAuthStore;
     userStore: UserStore;
   }) => {
-    const { setRevokeDeveloperTokenDialogVisible, jwtToken, bufferSelection } =
+    const { setRevokeDeveloperTokenDialogVisible, bufferSelection } =
       oauthStore;
 
     const { user } = userStore;
@@ -224,7 +219,6 @@ export default inject(
     return {
       setRevokeDeveloperTokenDialogVisible,
       client: bufferSelection,
-      jwtToken,
       email: user?.email,
     };
   },

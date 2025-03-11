@@ -38,14 +38,16 @@ type TTranslationProvider = {
   children: React.ReactNode;
   settings: TSettings | undefined;
   user: TUser | undefined;
+  locale?: string;
 };
 
 const TranslationProvider = ({
   children,
   settings,
   user,
+  locale,
 }: TTranslationProvider) => {
-  const { i18n } = useI18N({ settings, user });
+  const { i18n } = useI18N({ settings, user, locale });
 
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 };

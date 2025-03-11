@@ -26,7 +26,7 @@
 
 "use server";
 
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 
 import {
   createRequest,
@@ -204,12 +204,12 @@ export async function getUser() {
   return user.response as TUser;
 }
 
-export async function getScopeList(jwtToken: string) {
-  const [getScopeList] = createRequest(
-    [`/scopes`],
-    [["X-Signature", jwtToken]],
-    "GET",
-  );
+export async function getScopeList(token?: string) {
+  const headers: [string, string][] = token
+    ? [["Cookie", `x-signature=${token}`]]
+    : [["", ""]];
+
+  const [getScopeList] = createRequest([`/scopes`], headers, "GET");
 
   const scopeList = IS_TEST ? scopesHandler() : await fetch(getScopeList);
 

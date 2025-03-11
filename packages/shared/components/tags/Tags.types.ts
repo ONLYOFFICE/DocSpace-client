@@ -45,6 +45,7 @@ export type TagType = {
   icon?: string;
   /** Indicates the type of provider associated with the tag. */
   providerType?: number;
+  onClick?: () => void;
 };
 
 export type TagsProps = {

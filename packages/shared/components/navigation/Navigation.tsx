@@ -49,7 +49,6 @@ const Navigation = ({
   isRootFolder,
   title,
   canCreate,
-
   onClickFolder,
   navigationItems,
   getContextOptionsPlus,

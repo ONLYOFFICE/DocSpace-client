@@ -92,7 +92,7 @@ const Layout = (props) => {
     runOperations,
   };
 
-  const isSDKPath = window.DocSpace.location.pathname.includes("/sdk/");
+  const isSDKPath = window.DocSpace.location.pathname.includes("/old-sdk/");
 
   let intervalHandler;
   let timeoutHandler;

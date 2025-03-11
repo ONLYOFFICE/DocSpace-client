@@ -1,5 +1,32 @@
+// (c) Copyright Ascensio System SIA 2009-2025
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
 import { RoomTile } from "./RoomTile";
 import { RoomTileProps } from "./RoomTile.types";
@@ -17,22 +44,44 @@ jest.mock("./RoomTile.module.scss", () => ({
 interface TagProps {
   label: string;
   onClick?: () => void;
+  isDefault?: boolean;
+  isThirdParty?: boolean;
+  icon?: string;
+  roomType?: number | string;
+  providerType?: number | string;
 }
 
 // Mock Tags component
 jest.mock("@docspace/shared/components/tags", () => ({
-  Tags: ({ tags }: { tags: TagProps[] }) => (
+  Tags: ({
+    tags,
+    onSelectTag,
+  }: {
+    tags: TagProps[];
+    onSelectTag?: (tag: TagProps) => void;
+  }) => (
     <div data-testid="tags" className="tags">
-      {tags.map((tag) => (
-        <div
-          key={tag.label}
-          data-testid={`tag-${tag.label}`}
-          onClick={tag.onClick}
-          className="tags"
-        >
-          {tag.label}
-        </div>
-      ))}
+      {tags.map((tag) => {
+        const label = typeof tag === "string" ? tag : tag.label;
+        const onClick =
+          typeof tag === "string"
+            ? undefined
+            : () => {
+                if (tag.onClick) tag.onClick();
+                if (onSelectTag) onSelectTag(tag);
+              };
+
+        return (
+          <div
+            key={label}
+            data-testid={`tag-${label}`}
+            onClick={onClick}
+            className="tags"
+          >
+            {label}
+          </div>
+        );
+      })}
     </div>
   ),
 }));
@@ -43,6 +92,7 @@ interface BaseTileProps {
   topContent?: React.ReactNode;
   bottomContent?: React.ReactNode;
   className?: string;
+  onRoomClick?: () => void;
 }
 
 // Mock BaseTile component
@@ -53,12 +103,14 @@ jest.mock("../base-tile/BaseTile", () => ({
     topContent,
     bottomContent,
     className,
+    onRoomClick,
   }: BaseTileProps) => (
     <div
       data-testid="base-tile"
       className={className}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
+      onClick={onRoomClick}
     >
       {topContent}
       {bottomContent}
@@ -77,7 +129,7 @@ describe("RoomTile", () => {
     providerType: mockProviderType,
     providerKey: "provider-key",
     thirdPartyIcon: "icon-url",
-    tags: [{ label: "Custom Tag", id: "1" }],
+    tags: [{ label: "Custom Tag" }],
   };
 
   const mockContextOptions: ContextMenuModel[] = [
@@ -133,7 +185,12 @@ describe("RoomTile", () => {
   });
 
   it("renders default room type tag when no custom tags", () => {
-    const itemWithoutTags = { ...mockItem, tags: [] };
+    const itemWithoutTags = {
+      ...mockItem,
+      tags: [],
+      providerType: undefined,
+      providerKey: undefined,
+    };
     const getRoomTypeName = jest.fn().mockReturnValue("Collaborative Room");
 
     renderRoomTile({
@@ -175,11 +232,13 @@ describe("RoomTile", () => {
 
   it("calls selectOption with room type when default tag is clicked", () => {
     const selectOption = jest.fn();
+    const getRoomTypeName = jest.fn().mockReturnValue("Collaborative Room");
     const itemWithoutTags = { ...mockItem, tags: [] };
 
     renderRoomTile({
       item: itemWithoutTags,
       selectOption,
+      getRoomTypeName,
     });
 
     const roomTypeTag = screen.getByTestId("tag-Collaborative Room");

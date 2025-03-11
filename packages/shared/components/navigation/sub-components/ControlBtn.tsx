@@ -131,7 +131,7 @@ const ControlButtons = ({
   };
 
   const renderContextButton = (visible: boolean) => {
-    if (!visible) return null;
+    if (!visible || isFrame) return null;
 
     return (
       <ContextButton

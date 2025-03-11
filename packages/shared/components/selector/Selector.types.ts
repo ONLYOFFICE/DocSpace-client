@@ -377,6 +377,8 @@ export type SelectorProps = TSelectorHeader &
     descriptionText?: string;
 
     withPadding?: boolean;
+
+    isSSR?: boolean;
   };
 
 export type BodyProps = TSelectorInfo & {
@@ -407,6 +409,8 @@ export type BodyProps = TSelectorInfo & {
   withFooterCheckbox?: boolean;
   descriptionText?: string;
   withInfoBadge?: boolean;
+
+  isSSR?: boolean;
 };
 
 export type FooterProps = TSelectorFooterSubmitButton &

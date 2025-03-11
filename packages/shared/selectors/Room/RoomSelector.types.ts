@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TRoom } from "../../api/rooms/types";
 import {
   TSelectorCancelButton,
   TSelectorHeader,
@@ -31,6 +32,22 @@ import {
 } from "../../components/selector/Selector.types";
 
 import { RoomSearchArea, RoomsType } from "../../enums";
+
+export type TInitValue =
+  | {
+      withInit: true;
+      initItems: TRoom[];
+      initTotal: number;
+      initHasNextPage: boolean;
+      initSearchValue?: string;
+    }
+  | {
+      withInit?: never;
+      initItems?: never;
+      initTotal?: never;
+      initHasNextPage?: never;
+      initSearchValue?: never;
+    };
 
 export type RoomSelectorProps = TSelectorHeader &
   TSelectorCancelButton & {
@@ -54,4 +71,4 @@ export type RoomSelectorProps = TSelectorHeader &
 
     emptyScreenHeader?: string;
     emptyScreenDescription?: string;
-  };
+  } & TInitValue;

@@ -107,6 +107,17 @@ const config = {
       CLIENT_PUBLIC_DIR: path.resolve(__dirname, "../client/public"),
       PACKAGE_FILE: path.resolve(__dirname, "package.json"),
       COMMON_DIR: path.resolve(__dirname, "../common"),
+      "@docspace/shared": path.resolve(__dirname, "../shared"),
+      "@docspace/shared/utils": path.resolve(__dirname, "../shared/utils"),
+      "@docspace/shared/components": path.resolve(
+        __dirname,
+        "../shared/components"
+      ),
+      "@docspace/shared/skeletons": path.resolve(
+        __dirname,
+        "../shared/skeletons"
+      ),
+      "@docspace/shared/enums": path.resolve(__dirname, "../shared/enums"),
     },
     fallback: {
       crypto: false,

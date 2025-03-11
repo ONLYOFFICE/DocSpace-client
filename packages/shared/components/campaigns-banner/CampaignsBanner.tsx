@@ -81,7 +81,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
       <div ref={ref} className={styles.content}>
         {hasTitle ? (
           <TextComponent
-            className="header"
+            className={styles.header}
             color={title?.color ?? globalColors.black}
             fontSize={title?.fontSize ?? "13px"}
             fontWeight={title?.fontWeight ?? "normal"}

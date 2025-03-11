@@ -1,6 +1,8 @@
 @import "./variables/_colors.scss";
 
 .light {
+  --row-side-color: #{$gray};
+
   --background-color: #{$white};
   --text-color: #{$black};
   --interface-direction: ltr;
@@ -281,6 +283,7 @@
 }
 
 .dark {
+  --row-side-color: #{$gray-dark};
   --accent-main: var(--color-scheme-main-accent, #{$light-blue-main});
   --accent-text: var(--color-scheme-text-accent, #{$light-blue-main});
   --accent-button: var(--color-scheme-main-buttons, #{$light-blue-main});
@@ -836,6 +839,8 @@
     #{$light-second-main}
   );
   --navigation-header-icon-fill: #{$light-gray-dark};
+  --navigation-lifetime-enabled-fill: #{$main-red};
+  --navigation-lifetime-enabled-stroke: #{$main-red};
 }
 
 .dark {
@@ -848,6 +853,8 @@
   --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
   --navigation-icon-stroke: #{$gray-dark-strong};
   --navigation-header-icon-fill: #{$dark-gray-dark};
+  --navigation-lifetime-enabled-fill: none;
+  --navigation-lifetime-enabled-stroke: #{$main-red};
 }
 
 .light {
@@ -1421,10 +1428,14 @@
 
 .light {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-strong};
+
+  --files-badges-bg-color: #{$white};
 }
 
 .dark {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-dark-strong};
+
+  --files-badges-bg-color: #{$black};
 }
 
 .light {
@@ -2012,4 +2023,12 @@
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
+}
+
+:global(.rtl) {
+  --context-menu-header-text-margin: 0 8px 0 0;
+  --context-menu-submenu-list-margin: -4px;
+
+  --context-menu-submenu-transoform: scaleX(-1);
+  --context-menu-submenu-transoform-box: content-box;
 }

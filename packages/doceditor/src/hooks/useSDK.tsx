@@ -33,8 +33,10 @@ import {
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 
-const useSDK = () => {
-  const [sdkConfig, setSdkConfig] = useState<TFrameConfig | null>(null);
+const useSDK = (baseSdkConfig?: TFrameConfig) => {
+  const [sdkConfig, setSdkConfig] = useState<TFrameConfig | undefined>(
+    baseSdkConfig,
+  );
   const handleMessage = useCallback(
     (e: MessageEvent) => {
       const eventData =
@@ -88,7 +90,7 @@ const useSDK = () => {
     }
   }, [sdkConfig?.frameId, callSetConfig]);
 
-  return { sdkFrameConfig: sdkConfig };
+  return { sdkConfig };
 };
 
 export default useSDK;

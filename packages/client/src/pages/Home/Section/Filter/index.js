@@ -29,8 +29,6 @@ import { inject, observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { withTranslation } from "react-i18next";
-import find from "lodash/find";
-import result from "lodash/result";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
@@ -38,8 +36,22 @@ import FilterInput from "@docspace/shared/components/filter";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
 import { getUser } from "@docspace/shared/api/people";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-
 import FilesFilter from "@docspace/shared/api/files/filter";
+
+import {
+  getFilterType,
+  getSubjectFilter,
+  getAuthorType,
+  getRoomId,
+  getSearchParams,
+  getType,
+  getProviderType,
+  getSubjectId,
+  getFilterContent,
+  getTags,
+  getQuotaFilter,
+} from "@docspace/shared/components/filter/Filter.utils";
+
 import {
   DeviceType,
   FilterGroups,
@@ -49,12 +61,11 @@ import {
   RoomSearchArea,
   RoomsProviderType,
   RoomsType,
+  SortByFieldName,
 } from "@docspace/shared/enums";
 import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
-
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
@@ -63,124 +74,6 @@ import { getRoomInfo } from "@docspace/shared/api/rooms";
 import { FilterLoader } from "@docspace/shared/skeletons/filter";
 
 import { useContactsFilter } from "./useContacts";
-
-const getFilterType = (filterValues) => {
-  const filterType = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterType;
-    }),
-    "key",
-  );
-
-  return filterType?.toString() ? +filterType : null;
-};
-
-const getSubjectFilter = (filterValues) => {
-  const subjectFilter = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.roomFilterOwner;
-    }),
-    "key",
-  );
-
-  return subjectFilter?.toString() ? subjectFilter?.toString() : null;
-};
-
-const getAuthorType = (filterValues) => {
-  const authorType = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterAuthor;
-    }),
-    "key",
-  );
-
-  return authorType || null;
-};
-
-const getRoomId = (filterValues) => {
-  const filterRoomId = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterRoom;
-    }),
-    "key",
-  );
-
-  return filterRoomId || null;
-};
-
-const getSearchParams = (filterValues) => {
-  const searchParams = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterFolders;
-    }),
-    "key",
-  );
-
-  return searchParams || FilterKeys.excludeSubfolders;
-};
-
-const getType = (filterValues) => {
-  const filterType = filterValues.find(
-    (value) => value.group === FilterGroups.roomFilterType,
-  )?.key;
-
-  const type = filterType;
-
-  return type;
-};
-
-const getProviderType = (filterValues) => {
-  const filterType = filterValues.find(
-    (value) => value.group === FilterGroups.roomFilterProviderType,
-  )?.key;
-
-  const type = filterType;
-
-  return type;
-};
-
-const getSubjectId = (filterValues) => {
-  const filterOwner = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.roomFilterSubject;
-    }),
-    "key",
-  );
-
-  return filterOwner || null;
-};
-
-const getFilterContent = (filterValues) => {
-  const filterContent = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterContent;
-    }),
-    "key",
-  );
-
-  return filterContent || null;
-};
-
-const getTags = (filterValues) => {
-  const filterTags = filterValues.find(
-    (value) => value.group === FilterGroups.roomFilterTags,
-  )?.key;
-
-  const tags = filterTags?.length > 0 ? filterTags : null;
-
-  return tags;
-};
-
-const getQuotaFilter = (filterValues) => {
-  const filterType = result(
-    find(filterValues, (value) => {
-      return value.group === FilterGroups.filterQuota;
-    }),
-    "key",
-  );
-
-  return filterType?.toString() ? +filterType : null;
-};
 
 const SectionFilterContent = ({
   t,
@@ -685,16 +578,16 @@ const SectionFilterContent = ({
             label = t("Common:Documents");
             break;
           case FilterType.FoldersOnly.toString():
-            label = t("Translations:Folders");
+            label = t("Common:Folders");
             break;
           case FilterType.SpreadsheetsOnly.toString():
-            label = t("Translations:Spreadsheets");
+            label = t("Common:Spreadsheets");
             break;
           case FilterType.ArchiveOnly.toString():
             label = t("Archives");
             break;
           case FilterType.PresentationsOnly.toString():
-            label = t("Translations:Presentations");
+            label = t("Common:Presentations");
             break;
           case FilterType.ImagesOnly.toString():
             label = t("Images");
@@ -703,7 +596,7 @@ const SectionFilterContent = ({
             label = t("Media");
             break;
           case FilterType.FilesOnly.toString():
-            label = t("Translations:Files");
+            label = t("Common:Files");
             break;
           case FilterType.Pdf.toString():
             label = t("Forms");
@@ -875,7 +768,7 @@ const SectionFilterContent = ({
               id: "filter_type-folders",
               key: FilterType.FoldersOnly.toString(),
               group: FilterGroups.filterType,
-              label: t("Translations:Folders").toLowerCase(),
+              label: t("Common:Folders").toLowerCase(),
             },
           ]
         : "";
@@ -991,7 +884,7 @@ const SectionFilterContent = ({
             id: "filter_type-all-files",
             key: FilterType.FilesOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("Translations:Files").toLowerCase(),
+            label: t("Common:Files").toLowerCase(),
           },
           {
             id: "filter_type-documents",
@@ -1003,13 +896,13 @@ const SectionFilterContent = ({
             id: "filter_type-spreadsheets",
             key: FilterType.SpreadsheetsOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("Translations:Spreadsheets").toLowerCase(),
+            label: t("Common:Spreadsheets").toLowerCase(),
           },
           {
             id: "filter_type-presentations",
             key: FilterType.PresentationsOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("Translations:Presentations").toLowerCase(),
+            label: t("Common:Presentations").toLowerCase(),
           },
           {
             id: "filter_type-forms",

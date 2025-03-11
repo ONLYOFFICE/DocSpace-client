@@ -29,9 +29,9 @@ import { makeAutoObservable, runInAction } from "mobx";
 import {
   MEDIA_VIEW_URL,
   PUBLIC_MEDIA_VIEW_URL,
+  thumbnailStatuses,
 } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { thumbnailStatuses } from "SRC_DIR/helpers/filesConstants";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { toastr } from "@docspace/shared/components/toast";

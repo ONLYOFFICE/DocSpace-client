@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { withTranslation } from "react-i18next";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
@@ -35,6 +35,13 @@ import { SelectedItem } from "@docspace/shared/components/selected-item";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { inject, observer } from "mobx-react";
 import SDK from "@onlyoffice/docspace-sdk-js";
+
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { loadScript } from "@docspace/shared/utils/common";
+import { ViewSelector } from "@docspace/shared/components/view-selector";
+
+import FromScriptUrl from "PUBLIC_DIR/images/code.react.svg?url";
+import FromLibUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 
@@ -54,7 +61,6 @@ import ActionButtonDarkUrl from "PUBLIC_DIR/images/sdk-presets_action-button_dar
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { FilterBlock } from "../sub-components/FilterBlock";
 import { WidthSetter } from "../sub-components/WidthSetter";
@@ -115,6 +121,8 @@ const Manager = (props) => {
     { key: "Activity", label: t("Files:LastActivity") },
   ]);
 
+  const [fromPackage, setFromPackage] = useState(true);
+
   const [sortBy, setSortBy] = useState(dataSortBy[0]);
   const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
   const [sharedLinks, setSharedLinks] = useState(null);
@@ -154,19 +162,37 @@ const Manager = (props) => {
     },
   });
 
-  const sdk = new SDK();
+  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
 
   const destroyFrame = () => {
-    sdk.frames[config.frameId]?.destroyFrame();
+    sdk?.frames[config.frameId]?.destroyFrame();
   };
 
   const initFrame = () => {
-    setTimeout(() => sdk.init(config), 10);
+    setTimeout(() => sdk?.init(config), 0);
   };
 
   useEffect(() => {
+    const script = document.getElementById("sdk-script");
+
+    if (!fromPackage && !script) {
+      loadScript(SDK_SCRIPT_URL, "sdk-script");
+    } else {
+      script?.remove();
+    }
+
+    return () => {
+      destroyFrame();
+      setTimeout(() => script?.remove(), 10);
+    };
+  }, [fromPackage]);
+
+  useEffect(() => {
     initFrame();
-    return () => destroyFrame();
+
+    return () => {
+      destroyFrame();
+    };
   });
 
   useEffect(() => {
@@ -211,6 +237,7 @@ const Manager = (props) => {
 
       newConfig.requestToken = links[0].sharedTo?.requestToken;
       newConfig.rootPath = "/rooms/share";
+      newConfig.mode = "public-room";
     } else {
       setSelectedLink(null);
       setSharedLinks(null);
@@ -339,12 +366,35 @@ const Manager = (props) => {
 
   const redirectToSelectedRoom = () => navigateRoom(config.id);
 
+  const surceSelectorData = [
+    {
+      id: "sdk-source-script",
+      value: "script",
+      icon: FromScriptUrl,
+    },
+    {
+      id: "sdk-source-lib",
+      value: "lib",
+      icon: FromLibUrl,
+    },
+  ];
+
+  const onChangeView = useCallback((view) => {
+    setFromPackage(view === "lib");
+  }, []);
+
   const preview = (
     <Frame
       width={config.width.includes("px") ? config.width : undefined}
       height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
+      <ViewSelector
+        onChangeView={onChangeView}
+        viewAs={fromPackage}
+        viewSettings={surceSelectorData}
+        style={{ position: "absolute", right: "8px", top: "8px", zIndex: 10 }}
+      />
       <div id={config.frameId} />
     </Frame>
   );

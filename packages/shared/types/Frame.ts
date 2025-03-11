@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ThemeKeys } from "../enums";
+import { RoomsType, ThemeKeys } from "../enums";
 
 export type TFrameType = "desktop" | "mobile";
 
@@ -149,4 +149,7 @@ export type TFrameConfig = {
   withBreadCrumbs?: boolean;
   withSearch?: boolean;
   withSubtitle?: boolean;
+  cancelButtonLabel?: string;
+  acceptButtonLabel?: string;
+  roomType?: RoomsType | RoomsType[];
 };

@@ -3,14 +3,6 @@
 
 @import "../../styles/mixins";
 
-:global(.rtl) {
-  --context-menu-header-text-margin: 0 8px 0 0;
-  --context-menu-submenu-list-margin: -4px;
-
-  --context-menu-submenu-transoform: scaleX(-1);
-  --context-menu-submenu-transoform-box: content-box;
-}
-
 .contextMenu {
   :global {
     .p-contextmenu {

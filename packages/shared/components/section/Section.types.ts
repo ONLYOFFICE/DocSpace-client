@@ -124,7 +124,7 @@ export interface OperationsProgressProps {
   secondaryActiveOperations?: Operation[];
   operationsAlert?: boolean;
   operationsCompleted?: boolean;
-  clearSecondaryProgressData: (
+  clearSecondaryProgressData?: (
     operationId?: string | null,
     operation?: string | null,
   ) => void;
@@ -164,13 +164,13 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     setIsInfoPanelVisible?: (value: boolean) => void;
     secondaryOperationsCompleted?: boolean;
     primaryOperationsCompleted?: boolean;
-    secondaryActiveOperations: Operation[];
-    primaryOperationsArray: Operation[];
-    clearSecondaryProgressData: (
+    secondaryActiveOperations?: Operation[];
+    primaryOperationsArray?: Operation[];
+    clearSecondaryProgressData?: (
       operationId?: string | null,
       operation?: string | null,
     ) => void;
-    clearPrimaryProgressData: (operation?: string | null) => void;
+    clearPrimaryProgressData?: (operation?: string | null) => void;
     cancelUpload?: (t: (key: string) => string) => void;
     secondaryOperationsAlert?: boolean;
     mainButtonVisible?: boolean;

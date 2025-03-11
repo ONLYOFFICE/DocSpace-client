@@ -76,6 +76,38 @@ const KEY = "key";
 // subjectGroup bool
 // subjectID
 
+const getOtherSearchParams = () => {
+  const searchParams = new URLSearchParams(window.location.search);
+
+  const filterSearchParams = [
+    SEARCH_TYPE,
+    AUTHOR_TYPE,
+    FILTER_TYPE,
+    ROOM_ID,
+    SEARCH,
+    SORT_BY,
+    SORT_ORDER,
+    VIEW_AS,
+    PAGE,
+    PAGE_COUNT,
+    FOLDER,
+    SEARCH_IN_CONTENT,
+    EXCLUDE_SUBJECT,
+    APPLY_FILTER_OPTION,
+    EXTENSION,
+    SEARCH_AREA,
+    KEY,
+  ];
+
+  filterSearchParams.forEach((param) => {
+    if (searchParams.get(param)) {
+      searchParams.delete(param);
+    }
+  });
+
+  return searchParams.toString();
+};
+
 class FilesFilter {
   page: number;
 
@@ -341,12 +373,28 @@ class FilesFilter {
     dtoFilter[SORT_BY] = sortBy;
     dtoFilter[SORT_ORDER] = sortOrder;
 
+    const otherSearchParams = getOtherSearchParams();
+
     const str = toUrlParams(dtoFilter, true);
-    return str;
+    return `${str}&${otherSearchParams}`;
   };
 
   getLastPage() {
     return Math.ceil(this.total / this.pageCount) - 1;
+  }
+
+  isFiltered() {
+    return Boolean(
+      this.filterType ||
+        this.withSubfolders ||
+        this.search ||
+        this.roomId ||
+        this.authorType ||
+        this.searchInContent ||
+        this.excludeSubject ||
+        this.applyFilterOption ||
+        this.extension,
+    );
   }
 
   clone() {

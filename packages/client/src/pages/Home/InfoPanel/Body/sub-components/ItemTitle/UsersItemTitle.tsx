@@ -31,7 +31,14 @@ import { decode } from "he";
 
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
-import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
+import {
+  ContextMenuButton,
+  ContextMenuButtonDisplayType,
+} from "@docspace/shared/components/context-menu-button";
+import {
+  ContextMenu,
+  ContextMenuRefType,
+} from "@docspace/shared/components/context-menu";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { Badge } from "@docspace/shared/components/badge";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
@@ -66,7 +73,15 @@ const UsersItemTitle = ({
   ]);
 
   const theme = useTheme();
-  const itemTitleRef = useRef<HTMLDivElement>(null);
+  const itemTitleRef = useRef<HTMLDivElement | null>(null);
+  const contextMenuRef = useRef<ContextMenuRefType>(null);
+
+  const onClickContextMenu = (e: React.MouseEvent) => {
+    if (contextMenuRef.current && !contextMenuRef.current.menuRef.current) {
+      itemTitleRef.current?.click();
+    }
+    if (contextMenuRef.current) contextMenuRef.current.show(e);
+  };
 
   if (isSeveralItems) {
     return null;
@@ -174,13 +189,23 @@ const UsersItemTitle = ({
           </>
         ) : null}
       </div>
-      {contextOptions.length ? (
-        <ContextMenuButton
-          id="info-accounts-options"
-          className="context-button"
-          getData={getData}
+      <>
+        <ContextMenu
+          ref={contextMenuRef}
+          model={contextOptions || []}
+          getContextModel={getData}
+          withBackdrop
         />
-      ) : null}
+        {contextOptions.length ? (
+          <ContextMenuButton
+            id="info-accounts-options"
+            className="context-button"
+            onClick={onClickContextMenu}
+            getData={getData}
+            displayType={ContextMenuButtonDisplayType.toggle}
+          />
+        ) : null}
+      </>
     </StyledUsersTitle>
   );
 };

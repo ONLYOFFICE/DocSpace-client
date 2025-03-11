@@ -664,3 +664,27 @@ export enum FormFillingTipsState {
   Complete = 4,
   Uploading = 5,
 }
+
+export enum DeepLinkType {
+  Choice = 0,
+  Web = 1,
+  App = 2,
+}
+
+/**
+ * Enum for sort by field name
+ * @readonly
+ */
+export const enum SortByFieldName {
+  Name = "AZ",
+  ModifiedDate = "DateAndTime",
+  CreationDate = "DateAndTimeCreation",
+  Author = "Author",
+  Size = "Size",
+  Type = "Type",
+  Room = "Room",
+  Tags = "Tags",
+  RoomType = "roomType",
+  LastOpened = "LastOpened",
+  UsedSpace = "usedspace",
+}

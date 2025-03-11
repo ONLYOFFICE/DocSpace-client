@@ -267,6 +267,7 @@ const TrustedMail = (props) => {
 
       {type === "1" ? (
         <UserFields
+          isAutoFocussed
           inputs={domains}
           buttonLabel={t("AddTrustedDomain")}
           onChangeInput={onChangeInput}

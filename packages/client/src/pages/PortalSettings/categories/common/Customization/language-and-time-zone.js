@@ -144,6 +144,8 @@ const LanguageAndTimeZoneComponent = (props) => {
   };
 
   const checkChanges = () => {
+    if (!state.timezoneDefault || !state.languageDefault) return;
+
     let hasChanged = false;
 
     settingNames.forEach((settingName) => {
@@ -183,7 +185,9 @@ const LanguageAndTimeZoneComponent = (props) => {
       isLoaded &&
       tReady &&
       timezoneFromSessionStorage &&
-      languageFromSessionStorage;
+      languageFromSessionStorage &&
+      state.timezoneDefault &&
+      state.languageDefault;
 
     if (isLoadedSetting) {
       setIsLoadedLngTZSettings(isLoadedSetting);
@@ -275,7 +279,12 @@ const LanguageAndTimeZoneComponent = (props) => {
       state.timezone !== prevState.current.timezone
     ) {
       const isLoadedSetting =
-        isLoaded && tReady && state.timezone && state.language;
+        isLoaded &&
+        tReady &&
+        state.timezone &&
+        state.language &&
+        timezoneDefault &&
+        languageDefault;
 
       if (isLoadedSetting) {
         setIsLoadedLngTZSettings(isLoadedSetting);
@@ -315,6 +324,7 @@ const LanguageAndTimeZoneComponent = (props) => {
         newCultureNames[0];
 
       const selectedLanguageDefault =
+        languageDefaultFromSessionStorage ||
         findSelectedItemByKey(newCultureNames, portalLanguage) ||
         newCultureNames[0];
 
@@ -400,23 +410,22 @@ const LanguageAndTimeZoneComponent = (props) => {
   };
 
   const onSaveClick = () => {
-    const { translate, selectedLanguage, selectedTimezone } = state;
     const { setLanguageAndTime, user, language: lng } = props;
 
     setState((val) => ({ ...val, isLoading: true }));
-    setLanguageAndTime(selectedLanguage.key, selectedTimezone.key)
+    setLanguageAndTime(state.language.key, state.timezone.key)
       .then(() => {
         !user.cultureName &&
-          setCookie(LANGUAGE, selectedLanguage.key || "en", {
+          setCookie(LANGUAGE, state.language.key || "en", {
             "max-age": COOKIE_EXPIRATION_YEAR,
           });
-        window.timezone = selectedTimezone.key;
+        window.timezone = state.timezone.key;
       })
-      .then(() => toastr.success(translate("SuccessfullySaveSettingsMessage")))
+      .then(() => toastr.success(t("SuccessfullySaveSettingsMessage")))
       .then(
         () =>
           !user.cultureName &&
-          lng !== selectedLanguage.key &&
+          lng !== state.language.key &&
           window.location.reload(),
       )
       .catch((error) => toastr.error(error))
@@ -429,8 +438,8 @@ const LanguageAndTimeZoneComponent = (props) => {
       languageDefault: state.language,
     }));
 
-    saveToSessionStorage("languageDefault", selectedLanguage);
-    saveToSessionStorage("timezoneDefault", selectedTimezone);
+    saveToSessionStorage("languageDefault", state.language);
+    saveToSessionStorage("timezoneDefault", state.timezone);
   };
 
   const onCancelClick = () => {

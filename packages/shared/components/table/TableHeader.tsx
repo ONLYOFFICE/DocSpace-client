@@ -921,7 +921,7 @@ class TableHeaderComponent extends React.Component<
 
               if (percent === 100) {
                 const enableColumnsLength = columns.filter(
-                  (с) => !с.defaultSize && с.enable,
+                  (c) => !c.defaultSize && c.enable,
                 ).length;
 
                 if (enableColumnsLength !== 1) {

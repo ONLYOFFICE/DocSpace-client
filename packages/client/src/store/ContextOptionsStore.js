@@ -80,7 +80,7 @@ import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
-import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
@@ -106,7 +106,7 @@ import { getGuidanceConfig } from "@docspace/shared/components/guidance/configs"
 import {
   connectedCloudsTypeTitleTranslation,
   removeOptions,
-} from "@docspace/client/src/helpers/filesUtils";
+} from "SRC_DIR/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import {
   RoomsType,
@@ -2015,7 +2015,10 @@ class ContextOptionsStore {
         label: t("FormFillingTipsDialog:WelcomeStartTutorial"),
         icon: HelpCenterReactSvgUrl,
         onClick: () => this.onEnableFormFillingGuid(t, item.roomType),
-        disabled: !isFormRoom || isMobileUtils(),
+        disabled:
+          !isFormRoom ||
+          isMobileUtils() ||
+          item.id !== this.selectedFolderStore.id,
       },
       {
         id: "option_leave-room",

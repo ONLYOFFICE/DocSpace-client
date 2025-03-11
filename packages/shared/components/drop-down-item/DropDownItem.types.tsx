@@ -76,6 +76,8 @@ export type DropDownItemProps = {
   isSubMenu?: boolean;
   /** Whether to show a beta badge next to the item */
   isBeta?: boolean;
+  /** Whether to show a paid badge next to the item */
+  isPaidBadge?: boolean;
 
   // Toggle Props
   /** Whether to show a toggle switch at the end of the item */

@@ -73,6 +73,7 @@ import {
   TenantStatus,
   UrlActionType,
   RecaptchaType,
+  DeepLinkType,
 } from "../enums";
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR, MEDIA_VIEW_URL } from "../constants";
 import { Dark, Base, TColorScheme } from "../themes";
@@ -80,8 +81,6 @@ import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
 import { version } from "../package.json";
 import { Nullable } from "../types";
-
-// import { getFromLocalStorage } from "@docspace/client/src/pages/PortalSettings/utils";
 
 const themes = {
   Dark,
@@ -311,6 +310,8 @@ class SettingsStore {
   recaptchaType: RecaptchaType | null = null;
 
   displayAbout: boolean = false;
+
+  deepLinkType: DeepLinkType = DeepLinkType.Choice;
 
   isDefaultPasswordProtection: boolean = false;
 

@@ -87,7 +87,7 @@ const ViewSelector = ({
           }
           data-testid="view-selector-icon"
         >
-          <ReactSVG src={icon} />
+          {typeof icon === "string" ? <ReactSVG src={icon} /> : icon}
         </div>
       );
     });
@@ -116,7 +116,7 @@ const ViewSelector = ({
           }
           data-testid="view-selector-icon"
         >
-          <ReactSVG src={icon} />
+          {typeof icon === "string" ? <ReactSVG src={icon} /> : icon}
         </div>
       );
     }

@@ -30,7 +30,7 @@ import throttle from "lodash/throttle";
 import { isTablet as Tablet } from "react-device-detect";
 import classNames from "classnames";
 
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
+import VerticalDotsReactSvg from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 
 import { isTablet, isMobile } from "../../utils";
 
@@ -76,7 +76,7 @@ const ContextMenuButtonPure = ({
   columnCount,
   zIndex,
   usePortal = true,
-  iconName = VerticalDotsReactSvgUrl,
+  iconName,
 }: ContextMenuButtonProps) => {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const throttledResize = React.useRef<null | DebouncedFunc<() => void>>(null);
@@ -195,6 +195,7 @@ const ContextMenuButtonPure = ({
   };
 
   const iconButtonName = state.isOpen && iconOpenName ? iconOpenName : iconName;
+  const iconButtonNode = !iconButtonName ? <VerticalDotsReactSvg /> : undefined;
 
   return (
     <div
@@ -214,6 +215,7 @@ const ContextMenuButtonPure = ({
         clickColor={clickColor}
         size={size}
         iconName={iconButtonName}
+        iconNode={iconButtonNode}
         iconHoverName={iconHoverName}
         iconClickName={iconClickName}
         isFill={isFill}

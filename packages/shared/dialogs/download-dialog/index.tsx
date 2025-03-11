@@ -435,7 +435,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           items={state.spreadsheets.files}
           titleFormat={state.spreadsheets.format || t("OriginalFormat")}
           type={DownloadedDocumentType.Spreadsheets}
-          title={t("Translations:Spreadsheets")}
+          title={t("Common:Spreadsheets")}
         />
       ) : null}
 
@@ -447,7 +447,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           items={state.presentations.files}
           titleFormat={state.presentations.format || t("OriginalFormat")}
           type={DownloadedDocumentType.Presentations}
-          title={t("Translations:Presentations")}
+          title={t("Common:Presentations")}
         />
       ) : null}
 

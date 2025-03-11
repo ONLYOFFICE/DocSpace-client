@@ -32,12 +32,12 @@ import type {
   TSortedFiles,
 } from "./DownloadDialog.types";
 
-export const files = [
+export const files: TDownloadedFile[] = [
   {
     access: 0,
     comment: "Uploaded",
     contentLength: "56.83 KB",
-    created: new Date("2025-01-20T12:23:50.0000000+01:00"),
+    created: "2025-01-20T12:23:50.0000000+01:00",
     createdBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
@@ -61,7 +61,7 @@ export const files = [
     rootFolderId: 2,
     shared: true,
     title: "ONLYOFFICE Sample Document.docx",
-    updated: new Date("2025-03-04T16:00:00.0000000+01:00"),
+    updated: "2025-03-04T16:00:00.0000000+01:00",
     updatedBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
@@ -95,6 +95,11 @@ export const files = [
       Rename: false,
       Review: false,
       SubmitToFormGallery: false,
+      Comment: false,
+      CopyLink: false,
+      CreateRoomFrom: false,
+      EditForm: false,
+      Embed: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -112,12 +117,13 @@ export const files = [
     isForm: false,
     checked: true,
     format: null,
+    fileEntryType: 2,
   },
   {
     access: 0,
     comment: "The file is unlocked",
     contentLength: "136 KB",
-    created: new Date("2025-01-20T12:23:50.0000000+01:00"),
+    created: "2025-01-20T12:23:50.0000000+01:00",
     createdBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
@@ -141,7 +147,7 @@ export const files = [
     rootFolderId: 2,
     shared: true,
     title: "password protected.xlsx",
-    updated: new Date("2025-03-05T12:07:19.0000000+01:00"),
+    updated: "2025-03-05T12:07:19.0000000+01:00",
     updatedBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
@@ -175,6 +181,11 @@ export const files = [
       Rename: false,
       Review: false,
       SubmitToFormGallery: false,
+      Comment: false,
+      CopyLink: false,
+      CreateRoomFrom: false,
+      EditForm: false,
+      Embed: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -192,12 +203,13 @@ export const files = [
     isForm: false,
     checked: true,
     format: null,
+    fileEntryType: 2,
   },
   {
     access: 0,
     comment: "Uploaded",
     contentLength: "56.83 KB",
-    created: new Date("2025-01-20T12:23:50.0000000+01:00"),
+    created: "2025-01-20T12:23:50.0000000+01:00",
     createdBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
@@ -221,7 +233,7 @@ export const files = [
     rootFolderId: 2,
     shared: true,
     title: "ONLYOFFICE Sample Document - Copy.docx",
-    updated: new Date("2025-03-04T16:00:00.0000000+01:00"),
+    updated: "2025-03-04T16:00:00.0000000+01:00",
     updatedBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
@@ -255,6 +267,11 @@ export const files = [
       Rename: false,
       Review: false,
       SubmitToFormGallery: false,
+      Comment: false,
+      CopyLink: false,
+      CreateRoomFrom: false,
+      EditForm: false,
+      Embed: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -272,12 +289,13 @@ export const files = [
     isForm: false,
     checked: true,
     format: null,
+    fileEntryType: 2,
   },
   {
     access: 0,
     comment: "Uploaded",
     contentLength: "140.79 KB",
-    created: new Date("2025-01-20T12:23:50.0000000+01:00"),
+    created: "2025-01-20T12:23:50.0000000+01:00",
     createdBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
@@ -301,7 +319,7 @@ export const files = [
     rootFolderId: 2,
     shared: true,
     title: "ONLYOFFICE Sample Spreadsheets -.xlsx",
-    updated: new Date("2025-03-05T16:24:04.0000000+01:00"),
+    updated: "2025-03-05T16:24:04.0000000+01:00",
     updatedBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
@@ -335,6 +353,11 @@ export const files = [
       Rename: false,
       Review: false,
       SubmitToFormGallery: false,
+      Comment: false,
+      CopyLink: false,
+      CreateRoomFrom: false,
+      EditForm: false,
+      Embed: false,
     },
     viewAccessibility: {
       ImageView: false,
@@ -352,6 +375,7 @@ export const files = [
     isForm: false,
     checked: true,
     format: null,
+    fileEntryType: 2,
   },
 ];
 

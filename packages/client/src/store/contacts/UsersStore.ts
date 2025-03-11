@@ -245,7 +245,8 @@ class UsersStore {
 
       if (
         (isCollaborator || isVisitor) &&
-        pathname.includes("accounts/people")
+        (pathname.includes("accounts/people") ||
+          pathname.includes("portal-settings"))
       ) {
         window.DocSpace.navigate(
           combineUrl(window.ClientConfig?.proxy?.url, "/"),

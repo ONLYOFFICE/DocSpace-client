@@ -77,6 +77,7 @@ import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
+import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
@@ -655,6 +656,8 @@ class ContextOptionsStore {
   onClickDownloadAs = () => {
     this.dialogsStore.setDownloadDialogVisible(true);
   };
+
+  onSetUpCustomFilter = () => {};
 
   onDuplicate = (item) => {
     if (item.isRoom && this.currentQuotaStore.isWarningRoomsDialog) {
@@ -1856,6 +1859,14 @@ class ContextOptionsStore {
         label: t("Common:Info"),
         icon: InfoOutlineReactSvgUrl,
         onClick: () => this.onShowInfoPanel(item),
+        disabled: false,
+      },
+      {
+        id: "option_custom-filter",
+        key: "custom-filter",
+        label: t("Files:CustomFilterEnable"),
+        icon: CustomFilterReactSvgUrl,
+        onClick: () => this.onSetUpCustomFilter(item),
         disabled: false,
       },
       {

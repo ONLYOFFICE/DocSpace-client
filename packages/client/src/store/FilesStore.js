@@ -2138,6 +2138,7 @@ class FilesStore {
     const canDuplicate = item.security?.Duplicate;
     const canDownload = item.security?.Download || isLockedSharedRoom(item);
     const canEmbed = item.security?.Embed;
+    const canSetUpCustomFilter = item.security?.CustomFilter;
 
     if (isFile) {
       const shouldFillForm = item.viewAccessibility.WebRestrictedEditing;
@@ -2158,6 +2159,7 @@ class FilesStore {
       const isOldForm =
         item.fileExst === ".docxf" || item.fileExst === ".oform"; // TODO: Remove after change security options
       const isPdf = item.fileExst === ".pdf";
+      const isXlsx = item.fileExst === ".xlsx";
 
       let fileOptions = [
         // "open",
@@ -2184,6 +2186,7 @@ class FilesStore {
         "version", // category
         //   "finalize-version",
         "show-version-history",
+        "custom-filter",
         "show-info",
         "block-unblock-version", // need split
         "separator1",
@@ -2225,6 +2228,10 @@ class FilesStore {
           "remove-from-recent",
           "copy-general-link",
         ]);
+      }
+
+      if (!canSetUpCustomFilter && !isXlsx) {
+        fileOptions = removeOptions(fileOptions, ["custom-filter"]);
       }
 
       if (!canDownload) {

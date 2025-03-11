@@ -177,9 +177,7 @@ describe("DownloadDialog", () => {
 
     render(<DownloadDialog {...newProps} />);
 
-    expect(
-      screen.getByPlaceholderText("UploadPanel:EnterPassword"),
-    ).toHaveValue("");
+    expect(screen.getByPlaceholderText("Common:EnterPassword")).toHaveValue("");
     expect(screen.getByLabelText("Common:ContinueButton")).toBeDisabled();
   });
 
@@ -192,7 +190,7 @@ describe("DownloadDialog", () => {
 
     render(<DownloadDialog {...newProps} />);
 
-    const input = screen.getByPlaceholderText("UploadPanel:EnterPassword");
+    const input = screen.getByPlaceholderText("Common:EnterPassword");
     await userEvent.type(input, "1234");
 
     const continueButton = screen.getByLabelText("Common:ContinueButton");

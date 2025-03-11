@@ -106,11 +106,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
   } = props;
 
   const [state, setState] = useState(getInitialState(sortedFiles));
-  const { t, ready: tReady } = useTranslation([
-    "DownloadDialog",
-    "Common",
-    "Translations",
-  ]);
+  const { t, ready: tReady } = useTranslation(["Common"]);
 
   const isAllPasswordFilesSorted = sortedDownloadFiles.other?.length === 0;
   const needPassword = sortedPasswordFiles?.length > 0;
@@ -122,13 +118,13 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     const passwordError = (
       <Trans
         t={t}
-        ns="Files"
+        ns="Common"
         i18nKey="PasswordProtectedFiles"
         components={{ 1: <span /> }}
       />
     );
     const translations = {
-      label: t("Translations:ArchivingData"),
+      label: t("Common:ArchivingData"),
       error: t("Common:ErrorInternalServer"),
       passwordError,
     };
@@ -198,8 +194,8 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     if (!fileId) {
       array.forEach((file) => {
         file.format =
-          format === t("CustomFormat") || file.fileExst === format
-            ? t("OriginalFormat")
+          format === t("Common:CustomFormat") || file.fileExst === format
+            ? t("Common:OriginalFormat")
             : format;
       });
       return array;
@@ -227,14 +223,14 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     setState((prevState) => {
       const newState = { ...prevState };
       newState[type].files = getNewArrayFiles(+fileId, files, format);
-      newState[type].format = !fileId ? format : t("CustomFormat");
+      newState[type].format = !fileId ? format : t("Common:CustomFormat");
 
       const index = newState[type].files.findIndex(
-        (f) => f.format && f.format !== t("OriginalFormat"),
+        (f) => f.format && f.format !== t("Common:OriginalFormat"),
       );
 
       if (index === -1) {
-        newState[type].format = t("OriginalFormat");
+        newState[type].format = t("Common:OriginalFormat");
       }
 
       return newState;
@@ -408,10 +404,10 @@ const DownloadDialog = (props: DownloadDialogProps) => {
   const mainContent = (
     <>
       <div className={styles.downloadDialogBodyContent}>
-        <Text noSelect>{t("ChooseFormatText")}.</Text>
+        <Text noSelect>{t("Common:ChooseFormatText")}.</Text>
         {!isSingleFile ? (
           <Text noSelect>
-            <Trans t={t} i18nKey="ConvertToZip" />
+            <Trans t={t} ns="Common" i18nKey="ConvertToZip" />
           </Text>
         ) : null}
       </div>
@@ -421,7 +417,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           isChecked={state.documents.isChecked}
           isIndeterminate={state.documents.isIndeterminate}
           items={state.documents.files}
-          titleFormat={state.documents.format || t("OriginalFormat")}
+          titleFormat={state.documents.format || t("Common:OriginalFormat")}
           type={DownloadedDocumentType.Documents}
           title={t("Common:Documents")}
         />
@@ -433,7 +429,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           isChecked={state.spreadsheets.isChecked}
           isIndeterminate={state.spreadsheets.isIndeterminate}
           items={state.spreadsheets.files}
-          titleFormat={state.spreadsheets.format || t("OriginalFormat")}
+          titleFormat={state.spreadsheets.format || t("Common:OriginalFormat")}
           type={DownloadedDocumentType.Spreadsheets}
           title={t("Common:Spreadsheets")}
         />
@@ -445,7 +441,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           isChecked={state.presentations.isChecked}
           isIndeterminate={state.presentations.isIndeterminate}
           items={state.presentations.files}
-          titleFormat={state.presentations.format || t("OriginalFormat")}
+          titleFormat={state.presentations.format || t("Common:OriginalFormat")}
           type={DownloadedDocumentType.Presentations}
           title={t("Common:Presentations")}
         />
@@ -457,9 +453,9 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           isChecked={state.masterForms.isChecked}
           isIndeterminate={state.masterForms.isIndeterminate}
           items={state.masterForms.files}
-          titleFormat={state.masterForms.format || t("OriginalFormat")}
+          titleFormat={state.masterForms.format || t("Common:OriginalFormat")}
           type={DownloadedDocumentType.MasterForms}
-          title={t("Translations:FormTemplates")}
+          title={t("Common:FormTemplates")}
         />
       ) : null}
 
@@ -470,12 +466,12 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           isIndeterminate={state.other.isIndeterminate}
           items={state.other.files}
           type={DownloadedDocumentType.Other}
-          title={t("Translations:Other")}
+          title={t("Common:Other")}
         />
       ) : null}
 
       <div className={styles.downloadDialogConvertMessage}>
-        <Text noSelect>{t("ConvertMessage")}</Text>
+        <Text noSelect>{t("Common:ConvertMessage")}</Text>
       </div>
     </>
   );
@@ -505,7 +501,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
       withBodyScroll
       withoutPadding
     >
-      <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:DownloadAs")}</ModalDialog.Header>
 
       <ModalDialog.Body>
         <div className={styles.modalBody}>

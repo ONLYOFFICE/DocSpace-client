@@ -56,12 +56,7 @@ export const PasswordRow = ({
   const [showPasswordInput, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
 
-  const { t } = useTranslation([
-    "UploadPanel",
-    "DownloadDialog",
-    "Files",
-    "Common",
-  ]);
+  const { t } = useTranslation(["Common"]);
   const inputRef = useRef(null);
 
   const onInputClick = useCallback(() => {
@@ -115,7 +110,7 @@ export const PasswordRow = ({
     if (type !== "original") {
       options.push({
         key: "original-format",
-        label: t("DownloadDialog:OriginalFormat"),
+        label: t("Common:OriginalFormat"),
         onClick: onChangeInOriginal,
         disabled: false,
         icon: DownloadAsReactSvgUrl,
@@ -124,7 +119,7 @@ export const PasswordRow = ({
 
     options.push({
       key: "enter-password",
-      label: t("EnterPassword"),
+      label: t("Common:EnterPassword"),
       onClick: onInputClick,
       disabled: false,
       icon: ProtectedReactSvgUrl,
@@ -133,7 +128,7 @@ export const PasswordRow = ({
     if (type !== "remove") {
       options.push({
         key: "remove",
-        label: t("Files:RemoveFromList"),
+        label: t("Common:RemoveFromList"),
         onClick: removeFromList,
         disabled: false,
         icon: RemoveIcon,

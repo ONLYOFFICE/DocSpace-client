@@ -70,9 +70,9 @@ export const DownloadContent = (props: DownloadContentProps) => {
     const formats = [
       {
         key: "original",
-        label: t("OriginalFormat"),
+        label: t("Common:OriginalFormat"),
         onClick: onSelectFormat,
-        "data-format": t("OriginalFormat"),
+        "data-format": t("Common:OriginalFormat"),
         "data-type": type,
       },
     ];
@@ -95,9 +95,9 @@ export const DownloadContent = (props: DownloadContentProps) => {
     const formats = [
       {
         key: "original",
-        label: t("OriginalFormat"),
+        label: t("Common:OriginalFormat"),
         onClick: onSelectFormat,
-        "data-format": t("OriginalFormat"),
+        "data-format": t("Common:OriginalFormat"),
         "data-type": type,
         "data-file-id": item.id,
       },

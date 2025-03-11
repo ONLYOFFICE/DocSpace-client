@@ -52,7 +52,7 @@ export const OnePasswordRow = ({
   visible,
 }: OnePasswordRowProps) => {
   const [password, setPassword] = useState("");
-  const { t } = useTranslation(["DownloadDialog", "Files", "Common"]);
+  const { t } = useTranslation(["Common"]);
   const inputRef = useRef(null);
 
   const onChangePassword = (pwd: string) => {
@@ -125,14 +125,14 @@ export const OnePasswordRow = ({
     const options = [
       {
         key: "original-format",
-        label: t("DownloadDialog:OriginalFormat"),
+        label: t("Common:OriginalFormat"),
         onClick: onDowloadInOriginal,
         disabled: false,
         icon: DownloadAsReactSvgUrl,
       },
       {
         key: "cancel-action",
-        label: t("DownloadDialog:CancelDownload"),
+        label: t("Common:CancelDownload"),
         onClick: onRemoveFromDownload,
         disabled: false,
         icon: ProtectedReactSvgUrl,
@@ -149,13 +149,13 @@ export const OnePasswordRow = ({
       onClose={onClosePanel}
       autoMaxHeight
     >
-      <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:DownloadAs")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div
           className={styles.singlePasswordFile}
           data-testid="one-password-row-body"
         >
-          <Text>{t("AccessPasswordMessage")}</Text>
+          <Text>{t("Common:AccessPasswordMessage")}</Text>
           <div className={styles.singlePasswordContent}>
             <div className={styles.singlePasswordRow}>
               {element}

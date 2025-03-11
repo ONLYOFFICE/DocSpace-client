@@ -90,7 +90,7 @@ export const DownloadRow = (props: DownloadRowProps) => {
             isAside
             withoutBackground
           >
-            {file.format || t("OriginalFormat")}
+            {file.format || t("Common:OriginalFormat")}
           </LinkWithDropdown>
         ) : null}
         {isOther && file.fileExst ? (
@@ -102,7 +102,7 @@ export const DownloadRow = (props: DownloadRowProps) => {
             fontWeight={600}
             noSelect
           >
-            {t("OriginalFormat")}
+            {t("Common:OriginalFormat")}
           </Text>
         ) : null}
       </div>

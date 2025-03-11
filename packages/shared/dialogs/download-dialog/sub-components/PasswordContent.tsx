@@ -51,7 +51,7 @@ export const PasswordContent = (props: PasswordContentProps) => {
     discardDownloadedFile,
     updateDownloadedFilePassword,
   } = props;
-  const { t } = useTranslation(["DownloadDialog", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const [barIsVisible, setBarIsVisible] = useState(true);
 
@@ -100,8 +100,8 @@ export const PasswordContent = (props: PasswordContentProps) => {
     >
       {barIsVisible ? (
         <PublicRoomBar
-          headerText={t("ProtectedFiles")}
-          bodyText={t("FileProtectionMessage")}
+          headerText={t("Common:ProtectedFiles")}
+          bodyText={t("Common:FileProtectionMessage")}
           iconName={InfoSvgUrl}
           onClose={onClose}
         />
@@ -117,21 +117,21 @@ export const PasswordContent = (props: PasswordContentProps) => {
       {original && original?.length > 0
         ? passwordRow(
             original,
-            t("DownloadOriginalFormat"),
+            t("Common:DownloadOriginalFormat"),
             ProtectedFileCategoryType.Original,
           )
         : null}
       {password && password?.length > 0
         ? passwordRow(
             password,
-            t("PasswordEntered"),
+            t("Common:PasswordEntered"),
             ProtectedFileCategoryType.Password,
           )
         : null}
       {remove && remove?.length > 0
         ? passwordRow(
             remove,
-            t("RemovedFromList"),
+            t("Common:RemovedFromList"),
             ProtectedFileCategoryType.Remove,
           )
         : null}

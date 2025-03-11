@@ -2116,7 +2116,7 @@ class FilesActionStore {
           id: "menu-download",
           label: t("Common:Download"),
           onClick: () =>
-            this.downloadAction(t("Translations:ArchivingData")).catch((err) =>
+            this.downloadAction(t("Common:ArchivingData")).catch((err) =>
               toastr.error(err),
             ),
           iconUrl: DownloadReactSvgUrl,
@@ -2126,7 +2126,7 @@ class FilesActionStore {
         if (!this.isAvailableOption("downloadAs")) return null;
         return {
           id: "menu-download-as",
-          label: t("Translations:DownloadAs"),
+          label: t("Common:DownloadAs"),
           onClick: () => setDownloadDialogVisible(true),
           iconUrl: DownloadAsReactSvgUrl,
         };
@@ -2238,7 +2238,7 @@ class FilesActionStore {
       case "remove-from-recent":
         return {
           id: "menu-remove-from-recent",
-          label: t("RemoveFromList"),
+          label: t("Common:RemoveFromList"),
           onClick: () => this.onClickRemoveFromRecent(selection),
           iconUrl: RemoveOutlineSvgUrl,
         };
@@ -2343,7 +2343,7 @@ class FilesActionStore {
       .set("downloadAs", downloadAs)
       .set("copy", copy)
       .set("delete", {
-        label: t("RemoveFromList"),
+        label: t("Common:RemoveFromList"),
         onClick: () => {
           setUnsubscribe(true);
           setDeleteDialogVisible(true);

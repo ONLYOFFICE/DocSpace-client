@@ -56,7 +56,7 @@ export const SimulatePassword = memo(
     const [caretPosition, setCaretPosition] = useState(0);
     const [inputType, setInputType] = useState("password");
 
-    const { t } = useTranslation("UploadPanel");
+    const { t } = useTranslation("Common");
 
     const setPasswordSettings = (newPassword: string) => {
       let newValue;
@@ -165,7 +165,7 @@ export const SimulatePassword = memo(
           iconSize={16}
           iconColor={iconColor}
           hoverColor={iconColor}
-          placeholder={t("UploadPanel:EnterPassword")}
+          placeholder={t("Common:EnterPassword")}
           forwardedRef={forwardedRef}
           isAutoFocussed
           style={inputBlockStyle}

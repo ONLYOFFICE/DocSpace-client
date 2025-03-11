@@ -139,7 +139,7 @@ const PasswordEntryDialog = ({
       onClose={handleClose}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("UploadPanel:EnterPassword")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:EnterPassword")}</ModalDialog.Header>
       <ModalDialog.Body>
         <ModalContentContainer>
           <span>{t("Common:NeedPassword")}:</span>

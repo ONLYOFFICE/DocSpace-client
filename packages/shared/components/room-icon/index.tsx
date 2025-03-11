@@ -60,6 +60,7 @@ const RoomIcon = ({
   imgClassName,
   logo,
   badgeUrl,
+  badgeIconNode,
   onBadgeClick,
   className,
   withEditing,
@@ -307,7 +308,7 @@ const RoomIcon = ({
           </div>
         ) : null}
 
-        {badgeUrl && !withEditing ? (
+        {(badgeUrl || badgeIconNode) && !withEditing ? (
           <div
             className={classNames(styles.roomIconBadge, {
               [styles.isBig]: isBigSize,
@@ -318,6 +319,7 @@ const RoomIcon = ({
               data-tooltip-id={tooltipId}
               onClick={onBadgeClick}
               iconName={badgeUrl}
+              iconNode={badgeIconNode}
               size={isBigSize ? 28 : 12}
               className={classNames(
                 styles.roomIconButton,

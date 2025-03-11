@@ -88,6 +88,7 @@ const useFilesHelper = ({
   shareKey,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
+
   const {
     isFirstLoad,
     setIsFirstLoad,

@@ -138,8 +138,8 @@ const FilesTileContainer = ({ list, isTutorialEnabled, isDesc }) => {
         className="tile-container"
         useReactWindow
         infiniteGrid={InfiniteGrid}
-        headingFolders={t("Translations:Folders")}
-        headingFiles={t("Translations:Files")}
+        headingFolders={t("Common:Folders")}
+        headingFiles={t("Common:Files")}
       >
         {filesListNode}
       </TileContainer>

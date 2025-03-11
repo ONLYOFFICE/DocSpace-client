@@ -29,7 +29,7 @@ import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { setDocumentTitle } from "@docspace/client/src/helpers/utils";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
 import { StandalonePage as StandalonePageComponent } from "@docspace/shared/pages/Payments/Standalone";
 

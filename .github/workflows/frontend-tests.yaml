@@ -8,7 +8,7 @@ on:
     branches: [develop, release/v*, hotfix/v*]
     paths: [packages/**, common/**]
 jobs:
-  playwright:
+  playwright-login:
     name: "Login e2e tests"
     runs-on: ubuntu-latest
     steps:
@@ -16,6 +16,18 @@ jobs:
       - uses: adambirds/docker-compose-action@v1.5.0
         with:
           compose-file: packages/login/compose.yaml
+          up-flags: --build --force-recreate
+          services: tests-ci
+          test-container: tests-ci
+          test-command: npx playwright test
+  playwright-sdk:
+    name: "SDK e2e tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: adambirds/docker-compose-action@v1.5.0
+        with:
+          compose-file: packages/sdk/compose.yaml
           up-flags: --build --force-recreate
           services: tests-ci
           test-container: tests-ci

@@ -44,6 +44,7 @@ import { logger } from "@/../logger.mjs";
 
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
+import { TFrameConfig } from "@docspace/shared/types/Frame";
 
 const FilePassword = dynamic(() => import("@/components/file-password"), {
   ssr: false,
@@ -62,8 +63,34 @@ const initialSearchParams: RootPageProps["searchParams"] = {
 };
 
 async function Page({ searchParams }: RootPageProps) {
-  const { fileId, fileid, version, doc, action, share, editorType, error } =
-    searchParams ?? initialSearchParams;
+  const {
+    fileId,
+    fileid,
+    version,
+    doc,
+    action,
+    share,
+    editorType,
+    error,
+    locale,
+    theme,
+    is_file,
+    editorGoBack,
+  } = searchParams ?? initialSearchParams;
+
+  const baseSdkConfig: TFrameConfig & { is_file?: boolean } = {
+    frameId: "",
+    mode: "",
+    src: "",
+    editorCustomization: { uiTheme: theme },
+    editorGoBack,
+    editorType,
+    id: fileId,
+    locale,
+    requestToken: share,
+    theme,
+    is_file,
+  };
 
   const cookieStore = cookies();
   const hdrs = headers();
@@ -186,11 +213,6 @@ async function Page({ searchParams }: RootPageProps) {
 
   return (
     <>
-      <Root
-        {...data}
-        shareKey={share}
-        deepLinkSettings={deepLinkSettings?.handlingMode}
-      />
       {url && (
         <Script
           id="onlyoffice-api-script"
@@ -198,6 +220,7 @@ async function Page({ searchParams }: RootPageProps) {
           src={docApiUrl}
         />
       )}
+      <Root {...data} shareKey={share} baseSdkConfig={baseSdkConfig} deepLinkSettings={deepLinkSettings?.handlingMode}/>
     </>
   );
 }

@@ -375,6 +375,29 @@ module.exports = (env, argv) => {
     };
   }
 
+  config.plugins.push(
+    new ModuleFederationPlugin({
+      name: "client",
+      filename: "remoteEntry.js",
+      remotes: [],
+      exposes: {},
+      shared: {
+        ...Object.entries(deps).reduce((acc, [key, value]) => {
+          if (key !== "@onlyoffice/docspace-sdk-js") {
+            acc[key] = value;
+          }
+          return acc;
+        }, {}),
+        ...sharedDeps,
+        "@onlyoffice/docspace-sdk-js": {
+          singleton: true,
+          eager: true,
+          requiredVersion: deps["@onlyoffice/docspace-sdk-js"],
+        },
+      },
+    }),
+  );
+
   const htmlTemplate = {
     title: title,
     template: "./public/index.html",

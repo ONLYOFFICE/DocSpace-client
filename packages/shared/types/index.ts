@@ -73,7 +73,14 @@ export type ThirdPartyAccountType = {
 };
 
 export type TSortOrder = "descending" | "ascending";
-export type TSortBy = "DateAndTime" | "Tags" | "AZ";
+export type TSortBy =
+  | "DateAndTimeCreation"
+  | "Tags"
+  | "AZ"
+  | "Author"
+  | "Type"
+  | "usedspace"
+  | "Size";
 
 export type TTranslation = (
   key: string,
@@ -101,10 +108,15 @@ export type TPathParts = {
 
 export type TCreatedBy = {
   avatarSmall: string;
+  avatar?: string;
+  avatarOriginal?: string;
+  avatarMax?: string;
+  avatarMedium?: string;
   displayName: string;
   hasAvatar: boolean;
   id: string;
   profileUrl: string;
+  isAnonim?: boolean;
 };
 export type ConnectingStoragesType = {
   id: string;

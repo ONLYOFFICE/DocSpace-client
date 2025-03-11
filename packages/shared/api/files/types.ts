@@ -36,6 +36,7 @@ import {
   ShareAccessRights,
 } from "../../enums";
 import { TUser } from "../people/types";
+import type { TRoom } from "../rooms/types";
 
 export type TFileViewAccessibility = {
   CanConvert: boolean;
@@ -68,6 +69,11 @@ export type TFileSecurity = {
   Rename: boolean;
   Review: boolean;
   SubmitToFormGallery: boolean;
+  EditForm: boolean;
+  Comment: boolean;
+  CreateRoomFrom: boolean;
+  CopyLink: boolean;
+  Embed: boolean;
 };
 
 export type TAvailableExternalRights = {
@@ -81,15 +87,15 @@ export type TAvailableExternalRights = {
 };
 
 export type TFile = {
-  isFile: boolean;
+  isFile?: boolean;
   access: ShareAccessRights;
   canShare: boolean;
   comment: string;
   contentLength: string;
-  created: Date;
+  created: string;
   createdBy: TCreatedBy;
-  denyDownload: boolean;
-  denySharing: boolean;
+  denyDownload?: boolean;
+  denySharing?: boolean;
   fileExst: string;
   fileStatus: FileStatus;
   fileType: FileType;
@@ -103,7 +109,7 @@ export type TFile = {
   shared: boolean;
   thumbnailStatus: number;
   title: string;
-  updated: Date;
+  updated: string;
   updatedBy: TCreatedBy;
   version: number;
   versionGroup: number;
@@ -118,6 +124,9 @@ export type TFile = {
   expired?: string;
   isForm?: boolean;
   isFolder?: boolean;
+  startFilling?: boolean;
+  fileEntryType: number;
+  hasDraft?: boolean;
 };
 
 export type TOpenEditRequest = {
@@ -166,6 +175,12 @@ export type TFolderSecurity = {
   Duplicate: boolean;
   Download: boolean;
   CopySharedLink: boolean;
+  Reconnect: boolean;
+  CreateRoomFrom: boolean;
+  CopyLink: boolean;
+  Embed: boolean;
+  ChangeOwner: boolean;
+  IndexExport: boolean;
 };
 
 export type TFolder = {
@@ -183,9 +198,9 @@ export type TFolder = {
   title: string;
   access: ShareAccessRights;
   shared: boolean;
-  created: Date;
+  created: string;
   createdBy: TCreatedBy;
-  updated: Date;
+  updated: string;
   updatedBy: TCreatedBy;
   rootFolderType: FolderType;
   isArchive?: boolean;
@@ -193,6 +208,10 @@ export type TFolder = {
   path?: TPathParts[];
   type?: FolderType;
   isFolder?: boolean;
+  indexing: boolean;
+  denyDownload: boolean;
+  fileEntryType: number;
+  parentRoomType?: number;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -200,6 +219,17 @@ export type TGetFolderPath = TFolder[];
 export type TGetFolder = {
   files: TFile[];
   folders: TFolder[];
+  current: TFolder;
+  pathParts: TPathParts[];
+  startIndex: number;
+  count: number;
+  total: number;
+  new: number;
+};
+
+export type TGetRootFolder = {
+  files: TFile[];
+  folders: (TFolder | TRoom)[];
   current: TFolder;
   pathParts: TPathParts[];
   startIndex: number;
@@ -247,10 +277,10 @@ export type TFilesSettings = {
   canSearchByContent: boolean;
   chunkUploadSize: number;
   maxUploadThreadCount: number;
-  maxUploadFilesCount: number;
+  maxUploadFilesCount?: number;
   confirmDelete: boolean;
   convertNotify: boolean;
-  defaultOrder: { is_asc: boolean; property: 1 };
+  defaultOrder: { is_asc: boolean; property: number };
   defaultSharingAccessRights: ShareAccessRights[];
   downloadTarGz: boolean;
   enableThirdParty: boolean;
@@ -259,7 +289,7 @@ export type TFilesSettings = {
   extsArchive: string[];
   extsAudio: string[];
   extsCoAuthoring: string[];
-  extsConvertible: string[];
+  extsConvertible: Record<string, string[]>;
   extsDocument: string[];
   extsImage: string[];
   extsImagePreviewed: string[];
@@ -292,6 +322,7 @@ export type TFilesSettings = {
     Document: string;
     Presentation: string;
     Spreadsheet: string;
+    Pdf: string;
   };
   keepNewFileName: boolean;
   masterFormExtension: string;
@@ -301,7 +332,7 @@ export type TFilesSettings = {
   storeForcesave: boolean;
   storeOriginalFiles: boolean;
   templatesSection: boolean;
-  updateIfExist: boolean;
+  updateIfExist?: boolean;
   openEditorInSameTab: boolean;
   displayFileExtension: boolean;
 };
@@ -385,7 +416,10 @@ export type TDocServiceLocation = {
   docServiceUrl: string;
   docServiceUrlInternal: string;
   docServicePortalUrl: string;
+  docServiceSignatureHeader: string;
+  docServiceSignatureSecret: string;
   isDefault: boolean;
+  docServiceSslVerification: boolean;
 };
 
 export type TFileLink = {

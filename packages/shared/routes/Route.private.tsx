@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable react/prop-types */
-import React from "react";
+
 import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 
 import FilesFilter from "@docspace/shared/api/files/filter";

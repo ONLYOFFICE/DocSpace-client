@@ -43,21 +43,18 @@ const MyDocumentsTabs = ({
   personalFolderReadAccess,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
-  const recentTab = personalFolderReadAccess
-    ? []
-    : [
-        {
-          id: "recent",
-          name: t("Files:RecentlyAccessible"),
-        },
-      ];
+
+  if (personalFolderReadAccess) return null;
 
   const tabs = [
     {
       id: "my",
       name: t("Common:MyDocuments"),
     },
-    ...recentTab,
+    {
+      id: "recent",
+      name: t("Files:RecentlyAccessible"),
+    },
   ];
 
   const onSelect = (e) => {

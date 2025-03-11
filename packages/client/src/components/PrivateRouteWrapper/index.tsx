@@ -127,8 +127,6 @@ export default inject<TStore>(
       isLoading: isLoadingPublicRoom,
     } = publicRoomStore;
 
-    const { personalFolderReadAccess } = treeFoldersStore;
-
     return {
       isPortalDeactivate,
       isCommunity,

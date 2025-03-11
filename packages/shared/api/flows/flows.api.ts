@@ -11,6 +11,7 @@ import {
   Tweaks,
   Node,
 } from "./flows.types";
+import { getCookie } from "../../utils/cookie";
 
 class FlowsApi {
   private api: AxiosInstance;
@@ -37,6 +38,34 @@ class FlowsApi {
     this.api = axios.create(config);
   }
 
+  getHeaders(): Record<string, string> {
+    // Get the access token from cookies using a traditional approach
+    const accessToken = getCookie("access_token_lf");
+    if (!accessToken) {
+      throw new Error("Access token not found in cookies");
+    }
+
+    const headers: Record<string, string> = {};
+
+    // Safely copy existing headers if they exist
+    if (this.api.defaults.headers) {
+      Object.assign(
+        headers,
+        this.api.defaults.headers as Record<string, string>,
+      );
+    }
+
+    // Add authorization header
+    headers.Authorization = `Bearer ${accessToken}`;
+
+    return headers;
+  }
+
+  async autoLogin(): Promise<void> {
+    const { data } = await this.api.get("/auto_login");
+    console.log("autoLogin", { data });
+  }
+
   async getFolders(): Promise<FlowsFolder[]> {
     const { data } = await this.api.get("/folders/");
     return data;
@@ -45,71 +74,91 @@ class FlowsApi {
   async getFlows(filters?: FlowFilters): Promise<Flow[]> {
     const { data } = await this.api.get("/flows/", {
       params: filters,
+      headers: this.getHeaders(),
     });
     return data;
   }
 
   async getFlow(id: string): Promise<Flow> {
-    const { data } = await this.api.get(`/flows/${id}`);
+    const { data } = await this.api.get(`/flows/${id}`, {
+      headers: this.getHeaders(),
+    });
     return data;
   }
 
   async createFlow(params: CreateFlowParams): Promise<Flow> {
-    const { data } = await this.api.post("/flows/", params);
-    return data;
+    const { data } = await this.api.post("/flows/", params, {
+      headers: this.getHeaders(),
+    });
+    return data as Flow;
   }
 
   async updateFlow(params: UpdateFlowParams): Promise<Flow> {
     const { id, ...updateData } = params;
-    const { data } = await this.api.patch(`/flows/${id}`, updateData);
-    return data;
+    const { data } = await this.api.patch(`/flows/${id}`, updateData, {
+      headers: this.getHeaders(),
+    });
+    return data as Flow;
   }
 
   async deleteFlow(id: string): Promise<void> {
-    await this.api.delete(`/flows/${id}`);
+    await this.api.delete(`/flows/${id}`, {
+      headers: this.getHeaders(),
+    });
   }
 
   async createFlows(flows: CreateFlowParams[]): Promise<Flow[]> {
-    const { data } = await this.api.post("/flows/batch", { flows });
-    return data;
+    const { data } = await this.api.post(
+      "/flows/batch",
+      { flows },
+      {
+        headers: this.getHeaders(),
+      },
+    );
+    return data as Flow[];
   }
 
   async deleteFlows(flowIds: string[]): Promise<{ deleted: number }> {
     const { data } = await this.api.delete("/flows/batch", {
-      data: { flow_ids: flowIds },
+      headers: this.getHeaders(),
+      data: { flowIds },
     });
-    return data;
+    return data as { deleted: number };
   }
 
   async uploadFlows(file: File, folderId?: string): Promise<Flow[]> {
     const formData = new FormData();
     formData.append("file", file);
     if (folderId) {
-      formData.append("folder_id", folderId);
+      formData.append("folderId", folderId);
     }
 
     const { data } = await this.api.post("/flows/upload", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
+        ...this.getHeaders(),
       },
     });
-    return data;
+    return data as Flow[];
   }
 
   async downloadFlows(flowIds: string[]): Promise<Blob> {
     const { data } = await this.api.get("/flows/download", {
-      params: { flow_ids: flowIds },
+      params: { flowIds },
       responseType: "blob",
+      headers: this.getHeaders(),
     });
-    return data;
+    return data as Blob;
   }
 
   async getExampleFlows(): Promise<Flow[]> {
-    const { data } = await this.api.get("/flows/examples");
-    return data;
+    const { data } = await this.api.get("/flows/examples", {
+      headers: this.getHeaders(),
+    });
+    return data as Flow[];
   }
 
-  private extractTweaksFromFlow(flow: Flow): Tweaks {
+  private static extractTweaksFromFlow(flow: Flow): Tweaks {
     const tweaks: Tweaks = {};
 
     // Extract tweaks from all nodes
@@ -120,51 +169,47 @@ class FlowsApi {
     return tweaks;
   }
 
-  private findNodesByType(flow: Flow, type: string): Node[] {
-    return flow.data.nodes.filter((node) =>
-      node.type.toLowerCase().includes(type.toLowerCase()),
-    );
+  private static findNodesByType(flow: Flow, type: string): Node[] {
+    return flow.data.nodes.filter((node) => node.type === type);
   }
 
-  private determineIOTypes(flow: Flow): {
-    input_type: string;
-    output_type: string;
+  private static determineIOTypes(flow: Flow): {
+    inputType: string;
+    outputType: string;
   } {
-    // Find input and output nodes
-    const inputNodes = this.findNodesByType(flow, "input");
-    const outputNodes = this.findNodesByType(flow, "output");
+    // Default IO types
+    let inputType = "string";
+    let outputType = "string";
 
-    // Determine input type
-    let input_type = "chat"; // default value
+    // Find nodes for I/O
+    const inputNodes = FlowsApi.findNodesByType(flow, "input");
+
+    // Determine input type from the first input node
     if (inputNodes.length > 0) {
       const inputNode = inputNodes[0];
-      // Determine input type based on node type or data
-      if (inputNode.type.toLowerCase().includes("text")) {
-        input_type = "text";
-      } else if (inputNode.type.toLowerCase().includes("file")) {
-        input_type = "file";
+      if (inputNode.data && inputNode.data.type) {
+        inputType = inputNode.data.type;
       }
-      // Add more types as needed
     }
 
-    // Determine output type
-    let output_type = "chat"; // default value
+    // Determine output type from the first output node
+    const outputNodes = FlowsApi.findNodesByType(flow, "output");
     if (outputNodes.length > 0) {
       const outputNode = outputNodes[0];
-      if (outputNode.type.toLowerCase().includes("text")) {
-        output_type = "text";
-      } else if (outputNode.type.toLowerCase().includes("file")) {
-        output_type = "file";
+      if (outputNode.data && outputNode.data.type) {
+        outputType = outputNode.data.type;
       }
-      // Add more types as needed
     }
 
-    return { input_type, output_type };
+    return {
+      inputType,
+      outputType,
+    };
   }
 
   async runFlow(
     flow: Flow,
-    input_value: string | unknown = "",
+    inputValue: string | unknown = "",
     options: Partial<RunFlowOptions> = {},
   ): Promise<RunFlowResponse> {
     try {
@@ -173,10 +218,10 @@ class FlowsApi {
       }
 
       // Extract tweaks from flow
-      const defaultTweaks = this.extractTweaksFromFlow(flow);
+      const defaultTweaks = FlowsApi.extractTweaksFromFlow(flow);
 
       // Determine input and output types
-      const { input_type, output_type } = this.determineIOTypes(flow);
+      const { inputType, outputType } = FlowsApi.determineIOTypes(flow);
 
       // Merge default values with options
       const { tweaks = defaultTweaks, stream = false } = options;
@@ -184,9 +229,9 @@ class FlowsApi {
       const endpoint = `/run/${flow.id}?stream=${stream}`;
 
       const payload = {
-        input_value,
-        output_type,
-        input_type,
+        inputValue,
+        outputType,
+        inputType,
         tweaks,
       };
 
@@ -199,15 +244,21 @@ class FlowsApi {
       return response.data.result as RunFlowResponse;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        throw new Error(
-          `API request failed: ${error.response?.data?.error || error.message}`,
-        );
+        // Type assertion for error response data
+        const errorMessage =
+          error.response?.data &&
+          typeof error.response.data === "object" &&
+          "error" in error.response.data
+            ? (error.response.data as { error: string }).error
+            : error.message;
+
+        throw new Error(`API request failed: ${errorMessage}`);
       }
       throw error;
     }
   }
 
-  setErrorHandler(handler: (error: any) => void): void {
+  setErrorHandler(handler: (error: unknown) => void): void {
     this.api.interceptors.response.use(
       (response) => response,
       (error) => {

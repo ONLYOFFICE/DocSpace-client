@@ -23,6 +23,22 @@ class FlowStore {
     makeAutoObservable(this);
   }
 
+  autoLogin = async () => {
+    try {
+      this.isLoading = true;
+      await this.api.autoLogin();
+    } catch (error) {
+      runInAction(() => {
+        this.error = error as Error;
+      });
+    } finally {
+      runInAction(() => {
+        this.isLoading = false;
+      });
+    }
+
+  }
+
   fetchFlows = async () => {
     try {
       this.isLoading = true;

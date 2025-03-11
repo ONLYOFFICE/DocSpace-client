@@ -26,6 +26,7 @@
 
 import { ReactElement } from "react";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
+import { FolderItem } from "../folder-tile/FolderTile.types";
 
 export type FileItemType = {
   /** Unique identifier for the file */
@@ -103,7 +104,7 @@ export type FileTileProps = {
   /** Color for the left border of the tile */
   sideColor?: string;
   /** Function to set the selection state of the tile */
-  setSelection?: (checked: boolean) => void;
+  setSelection?: (items: FolderItem[]) => void;
   /** Custom content element to be rendered in the tile */
   contentElement?: ReactElement;
   /** Custom badges to be displayed on the tile */

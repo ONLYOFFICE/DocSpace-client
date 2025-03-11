@@ -92,8 +92,10 @@ const VersionBadge = ({
     <ColorTheme
       themeId={ThemeId.VersionBadge}
       className={className}
-      marginProp="0 8px"
-      displayProp="flex"
+      style={{
+        boxSizing: "border-box",
+        display: "flex",
+      }}
       $isVersion
       theme={theme}
       $isFirst={index === 0}

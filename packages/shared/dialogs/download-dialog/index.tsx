@@ -105,7 +105,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
   } = props;
 
   const [state, setState] = useState(getInitialState(sortedFiles));
-  const { t, ready: tReady } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const isAllPasswordFilesSorted = sortedDownloadFiles.other?.length === 0;
   const needPassword = sortedPasswordFiles?.length > 0;
@@ -496,7 +496,6 @@ const DownloadDialog = (props: DownloadDialogProps) => {
       autoMaxHeight
       autoMaxWidth
       isLarge
-      isLoading={!tReady}
       withBodyScroll
       withoutPadding
     >

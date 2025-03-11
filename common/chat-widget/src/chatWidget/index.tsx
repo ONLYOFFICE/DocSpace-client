@@ -41,6 +41,7 @@ export default function ChatWidget({
   placeholder_text,
   placeholder_sending,
   chat_user_name,
+  chat_provider_name,
   popup_view,
 }: {
   api_key?: string;
@@ -68,6 +69,7 @@ export default function ChatWidget({
   placeholder_text?: string;
   placeholder_sending?: string;
   chat_user_name?: string;
+  chat_provider_name?: string;
   popup_view?: string;
 }) {
   const sessionId = useRef(session_id ?? uuidv4());
@@ -225,6 +227,7 @@ export default function ChatWidget({
           isRTL={interface_direction === "rtl"}
           emptyScreenText={empty_screen_text}
           userName={chat_user_name}
+          providerName={chat_provider_name}
         />
         {/* {sendingMessage && (
           <div className="chat-panel-loading-placeholder">

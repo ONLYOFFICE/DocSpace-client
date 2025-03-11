@@ -38,6 +38,7 @@ type ChatBodyProps = {
   isRTL: boolean;
   emptyScreenText?: string;
   userName?: string;
+  providerName?: string;
 };
 
 const ChatBody = ({
@@ -48,6 +49,7 @@ const ChatBody = ({
   isRTL,
   emptyScreenText,
   userName,
+  providerName,
 }: ChatBodyProps) => {
   const lastMessage = useRef<HTMLDivElement>(null);
   const chatIsEmpty = messages.length === 0;
@@ -73,6 +75,7 @@ const ChatBody = ({
               <ChatMessage
                 key={index}
                 userName={userName}
+                providerName={providerName}
                 message={message}
                 userIconImage={userIconImage}
                 providerIconImage={providerIconImage}

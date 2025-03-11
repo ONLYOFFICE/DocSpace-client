@@ -36,11 +36,15 @@ import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?u
 import Mute12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/mute.react.svg?url";
 import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
+import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/12/custom-filter.react.svg?url";
 
 import { isMobile as isMobileDevice } from "react-device-detect";
 
 import { Badge } from "@docspace/shared/components/badge";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
 
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/shared/themes";
@@ -153,6 +157,9 @@ const Badges = ({
 
   const isTile = viewAs === "tile";
 
+  const customFilterEnabled = true;
+  const isXlsx = item.fileExst === ".xlsx";
+
   const countVersions = versionGroup > 999 ? "999+" : versionGroup;
 
   const isLargeTabletDevice =
@@ -176,6 +183,7 @@ const Badges = ({
   const iconPin = UnpinReactSvgUrl;
   const iconMute =
     sizeBadge === "medium" ? Mute16ReactSvgUrl : Mute12ReactSvgUrl;
+  const iconCustomFilter = CustomFilterReactSvgUrl;
 
   const unpinIconProps = {
     "data-id": id,
@@ -232,6 +240,17 @@ const Badges = ({
     if (!isTrashFolder) openLocationFile();
   };
 
+  const getTooltipContent = () => (
+    <>
+      <Text fontSize="12px" fontWeight={400} noSelect>
+        {t("CustomFilterEnableDiscription")}
+      </Text>
+      <Link type="action" fontSize="13px" fontWeight={600} isHovered>
+        {t("LearnMore")}
+      </Link>
+    </>
+  );
+
   return fileExst ? (
     <div className="badges additional-badges file__badges">
       {/* {startFilling && (
@@ -263,6 +282,26 @@ const Badges = ({
             onClick={onDraftClick}
           />
         </BadgeWrapper>
+      ) : null}
+
+      {customFilterEnabled && !isRoom && isXlsx ? (
+        <>
+          <ColorTheme
+            themeId={ThemeId.IconButtonCustomFilter}
+            iconName={iconCustomFilter}
+            size={sizeBadge}
+            isClickable
+            data-tooltip-id="customFilterTooltip"
+            className="badge is-custom-filter tablet-badge"
+          />
+
+          <Tooltip
+            id="customFilterTooltip"
+            place="bottom"
+            getContent={getTooltipContent}
+            maxWidth="238px"
+          />
+        </>
       ) : null}
 
       {isEditing && !(isRecentTab && !canEditing) ? (

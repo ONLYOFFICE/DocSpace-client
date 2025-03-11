@@ -589,5 +589,6 @@
   "RoleViewerDescription": "Dosya görüntüleme",
   "DeleteFile": "Bu dosyayı silmek üzeresiniz. ",
   "FilePermanentlyDeleted": "Dosya 30 gün içinde kalıcı olarak silinecek.",
-  "MoveToTrashTitle": "Çöp kutusuna taşı?"
+  "MoveToTrashTitle": "Çöp kutusuna taşı?",
+  "CopyLink": "Bağlantıyı kopyala"
 }

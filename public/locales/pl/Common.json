@@ -589,5 +589,6 @@
   "RoleViewerDescription": "Odczyt plików",
   "DeleteFile": "Zamierzasz usunąć ten plik. ",
   "FilePermanentlyDeleted": "Plik zostanie trwale usunięty za 30 dni.",
-  "MoveToTrashTitle": "Przenieść do kosza?"
+  "MoveToTrashTitle": "Przenieść do kosza?",
+  "CopyLink": "Kopiuj link"
 }

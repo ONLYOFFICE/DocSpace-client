@@ -589,5 +589,6 @@
   "RoleViewerDescription": "Ogled datoteke",
   "DeleteFile": "Izbrisali boste to datoteko. ",
   "FilePermanentlyDeleted": "Datoteka bo v 30 dneh trajno izbrisana.",
-  "MoveToTrashTitle": "Premakni v Koš?"
+  "MoveToTrashTitle": "Premakni v Koš?",
+  "CopyLink": "Kopiraj povezavo"
 }

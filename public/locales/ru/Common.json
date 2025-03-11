@@ -591,5 +591,6 @@
   "RoleViewerDescription": "Просмотр файлов",
   "DeleteFile": "Вы собираетесь удалить этот файл. ",
   "FilePermanentlyDeleted": "Файл будет удален окончательно через 30 дней.",
-  "MoveToTrashTitle": "Переместить в Корзину?"
+  "MoveToTrashTitle": "Переместить в Корзину?",
+  "CopyLink": "Скопировать ссылку"
 }

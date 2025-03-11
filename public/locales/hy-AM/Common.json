@@ -590,5 +590,6 @@
   "RoleViewerDescription": "Ֆայլը դիտվում է",
   "DeleteFile": "Դուք պատրաստվում եք ջնջել այս ֆայլը:",
   "FilePermanentlyDeleted": "Ֆայլը ընդմիշտ կջնջվի 30 օրվա ընթացքում:",
-  "MoveToTrashTitle": "Տեղափոխե՞լ աղբարկղ"
+  "MoveToTrashTitle": "Տեղափոխե՞լ աղբարկղ",
+  "CopyLink": "Պատճենել հղումը"
 }

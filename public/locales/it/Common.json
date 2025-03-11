@@ -590,5 +590,6 @@
   "RoleViewerDescription": "Visualizzazione file",
   "DeleteFile": "Stai per eliminare questo file.",
   "FilePermanentlyDeleted": "Il file verrà eliminato definitivamente entro 30 giorni.",
-  "MoveToTrashTitle": "Spostare nel Cestino?"
+  "MoveToTrashTitle": "Spostare nel Cestino?",
+  "CopyLink": " Copia il link"
 }

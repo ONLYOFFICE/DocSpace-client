@@ -588,5 +588,6 @@
   "RoleViewerDescription": "파일 보기",
   "DeleteFile": "이 파일을 삭제하려고 합니다. ",
   "FilePermanentlyDeleted": "파일은 30일 후에 영구적으로 삭제됩니다.",
-  "MoveToTrashTitle": "휴지통으로 이동하시겠습니까?"
+  "MoveToTrashTitle": "휴지통으로 이동하시겠습니까?",
+  "CopyLink": "링크 복사"
 }

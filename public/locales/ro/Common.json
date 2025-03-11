@@ -590,5 +590,6 @@
   "RoleViewerDescription": "Vizualizare fişier",
   "DeleteFile": "Sunteţi pe cale să ştergeţi acest fişier. ",
   "FilePermanentlyDeleted": "Fișierul va fi șters definitiv după 30 de zile.",
-  "MoveToTrashTitle": "Mutare la Coşul de gunoi?"
+  "MoveToTrashTitle": "Mutare la Coşul de gunoi?",
+  "CopyLink": "Copiere link"
 }

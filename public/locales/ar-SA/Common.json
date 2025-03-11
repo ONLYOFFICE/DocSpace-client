@@ -588,5 +588,6 @@
   "RoleViewerDescription": "عرض الملفات",
   "DeleteFile": "أنت على وشك حذف هذا الملف.",
   "FilePermanentlyDeleted": "سيتم حذف الملف بشكل دائم خلال 30 يوم.",
-  "MoveToTrashTitle": "هل تريد نقله الى سلة المهملات؟"
+  "MoveToTrashTitle": "هل تريد نقله الى سلة المهملات؟",
+  "CopyLink": "نسخ الرابط"
 }

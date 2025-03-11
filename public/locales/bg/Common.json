@@ -589,5 +589,6 @@
   "RoleViewerDescription": "Преглед на файлове",
   "DeleteFile": "На път сте да изтриете този файл.",
   "FilePermanentlyDeleted": "Файлът ще бъде изтрит завинаги след 30 дни.",
-  "MoveToTrashTitle": "Преместване в кошчето?"
+  "MoveToTrashTitle": "Преместване в кошчето?",
+  "CopyLink": "Копиране на линка"
 }

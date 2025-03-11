@@ -589,5 +589,6 @@
   "RoleViewerDescription": "Tiedoston katseleminen",
   "DeleteFile": "Olet poistamassa tätä tiedostoa.",
   "FilePermanentlyDeleted": "Tiedosto poistetaan pysyvästi 30 päivän päästä. ",
-  "MoveToTrashTitle": "Siirretäänkö roskiin?"
+  "MoveToTrashTitle": "Siirretäänkö roskiin?",
+  "CopyLink": "Kopioi linkki"
 }

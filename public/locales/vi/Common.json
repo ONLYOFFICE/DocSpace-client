@@ -588,5 +588,6 @@
   "RoleViewerDescription": "Xem tập tin",
   "DeleteFile": "Bạn sắp xóa tập tin này. ",
   "FilePermanentlyDeleted": "Tập tin sẽ bị xóa vĩnh viễn trong 30 ngày. ",
-  "MoveToTrashTitle": "Chuyển đến thùng rác?"
+  "MoveToTrashTitle": "Chuyển đến thùng rác?",
+  "CopyLink": "Sao chép liên kết"
 }

@@ -590,5 +590,6 @@
   "RoleViewerDescription": "Pregled datoteka",
   "DeleteFile": "Spremate se da obrišete ovu datoteku.",
   "FilePermanentlyDeleted": "Datoteka će biti trajno obrisana za 30 dana.",
-  "MoveToTrashTitle": "Pomeri u Otpad?"
+  "MoveToTrashTitle": "Pomeri u Otpad?",
+  "CopyLink": "Kopiraj link"
 }

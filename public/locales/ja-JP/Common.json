@@ -590,5 +590,6 @@
   "RoleViewerDescription": "ファイル閲覧",
   "DeleteFile": "このファイルを削除しようとしています。",
   "FilePermanentlyDeleted": "ファイルは30日で永久に削除されます。",
-  "MoveToTrashTitle": "ゴミ箱に移動しますか？"
+  "MoveToTrashTitle": "ゴミ箱に移動しますか？",
+  "CopyLink": "リンクをコピーする"
 }

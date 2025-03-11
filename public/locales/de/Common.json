@@ -590,5 +590,6 @@
   "RoleViewerDescription": "Datei anzeigen",
   "DeleteFile": "Sie möchten diese Datei löschen.",
   "FilePermanentlyDeleted": "Die Datei wird nach 30 Tagen endgültig gelöscht.",
-  "MoveToTrashTitle": "In Papierkorb verschieben?"
+  "MoveToTrashTitle": "In Papierkorb verschieben?",
+  "CopyLink": "Link kopieren"
 }

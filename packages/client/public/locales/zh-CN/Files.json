@@ -25,7 +25,6 @@
   "ChooseExpirationDate": "通过设置失效日期，限制此链接的有效期。",
   "Clean": "清理",
   "ContainsSpecCharacter": "标题中不得包含任意以下字符：*+:\"<>?|/",
-  "CopyLink": "复制链接",
   "CopyLinkPassword": "复制链接密码",
   "CopyPassword": "复制密码",
   "CopySharedLink": "复制共享链接",

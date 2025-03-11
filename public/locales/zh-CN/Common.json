@@ -591,5 +591,6 @@
   "RoleViewerDescription": "查看文件",
   "DeleteFile": "您即将删除此文件。",
   "FilePermanentlyDeleted": "30 天后，文件会被永久删除。",
-  "MoveToTrashTitle": "要移动到回收站吗？"
+  "MoveToTrashTitle": "要移动到回收站吗？",
+  "CopyLink": "复制链接"
 }

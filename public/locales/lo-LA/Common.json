@@ -375,5 +375,6 @@
   "RoleViewerDescription": "ການເບິ່ງໄຟລ໌",
   "DeleteFile": "ທ່ານກຳລັງຈະລຶບໄຟລ໌ນີ້. ",
   "FilePermanentlyDeleted": "ໄຟລ໌ດັ່ງກ່າວຈະຖືກລຶບອອກຖາວອນໃນ 30 ມື້.",
-  "MoveToTrashTitle": "ຍ້າຍໄປຖັງຂີ້ເຫຍື້ອບໍ?"
+  "MoveToTrashTitle": "ຍ້າຍໄປຖັງຂີ້ເຫຍື້ອບໍ?",
+  "CopyLink": "ສຳເນົາລິ້ງ"
 }

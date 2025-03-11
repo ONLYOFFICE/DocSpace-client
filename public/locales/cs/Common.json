@@ -589,5 +589,6 @@
   "RoleViewerDescription": "Prohlížení souborů",
   "DeleteFile": "Chystáte se odstranit tento soubor.",
   "FilePermanentlyDeleted": "Soubor bude za 30 dní trvale smazán.",
-  "MoveToTrashTitle": "Přesunout do koše?"
+  "MoveToTrashTitle": "Přesunout do koše?",
+  "CopyLink": "Kopírovat odkaz"
 }

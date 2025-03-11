@@ -53,6 +53,7 @@ import InviteLinksStore from "./InviteLinksStore";
 import DialogStore from "./DialogStore";
 import ContactsConextOptionsStore from "./ContactsContextOptionsStore";
 import FilesStore from "../FilesStore";
+import SelectedFolderStore from "../SelectedFolderStore";
 
 class PeopleStore {
   viewAs: TContactsViewAs = isDesktop() ? "table" : "row";
@@ -88,6 +89,7 @@ class PeopleStore {
     public treeFoldersStore: TreeFoldersStore,
     public setup: SettingsSetupStore,
     public filesStore: FilesStore,
+    public selectedFolderStore: SelectedFolderStore,
   ) {
     this.infoPanelStore = infoPanelStore;
     this.accessRightsStore = accessRightsStore;
@@ -101,6 +103,7 @@ class PeopleStore {
     this.treeFoldersStore = treeFoldersStore;
     this.setup = setup;
     this.filesStore = filesStore;
+    this.selectedFolderStore = selectedFolderStore;
 
     this.dialogStore = new DialogStore();
     this.contactsHotkeysStore = new ContactsHotkeysStore(this);
@@ -129,6 +132,7 @@ class PeopleStore {
       treeFoldersStore,
       this.filesStore,
       this.dialogsStore,
+      this.selectedFolderStore,
     );
 
     this.contextOptionsStore = new ContactsConextOptionsStore(

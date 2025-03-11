@@ -59,6 +59,7 @@ import {
 } from "@docspace/shared/api/people";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { getPersonalFolderTree } from "@docspace/shared/api/files";
 
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
@@ -88,6 +89,7 @@ import DialogStore from "./DialogStore";
 
 import FilesStore from "../FilesStore";
 import DialogsStore from "../DialogsStore";
+import SelectedFolderStore from "../SelectedFolderStore";
 
 class UsersStore {
   filter = Filter.getDefault();
@@ -138,6 +140,7 @@ class UsersStore {
     public treeFoldersStore: TreeFoldersStore,
     public filesStore: FilesStore,
     public dialogsStore: DialogsStore,
+    public selectedFolderStore: SelectedFolderStore,
   ) {
     this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
@@ -152,6 +155,7 @@ class UsersStore {
     this.treeFoldersStore = treeFoldersStore;
     this.contactsTab = getContactsView();
     this.filesStore = filesStore;
+    this.selectedFolderStore = selectedFolderStore;
 
     makeAutoObservable(this);
 
@@ -207,21 +211,45 @@ class UsersStore {
       });
     };
 
-    const changeMyType = (value: { id: string; data: TUser }) => {
+    const changeMyType = async (value: { id: string; data: TUser }) => {
       console.log(`[WS] ${SocketEvents.ChangeMyType}, id: ${value?.id}`);
 
       if (!value) return;
 
-      const { fetchTreeFolders } = this.treeFoldersStore;
+      const { fetchTreeFolders, personalFolderId } = this.treeFoldersStore;
       const { setUser } = this.userStore;
       const { setReducedRightsVisible } = this.dialogsStore;
+      const { setSecurity } = this.selectedFolderStore;
+      const { fetchFiles, filter } = this.filesStore;
 
       const { data, id } = value;
-      const { isAdmin, isRoomAdmin, isVisitor } = data; // isCollaborator,
+      const { isAdmin, isRoomAdmin, isVisitor, isCollaborator } = data;
       const { pathname } = window.location;
 
       if (isVisitor) {
         setReducedRightsVisible(true);
+      }
+
+      if (pathname.includes("rooms/personal")) {
+        try {
+          const [personalFolder] = await Promise.all([
+            getPersonalFolderTree(),
+            fetchFiles(personalFolderId, filter),
+          ]);
+
+          setSecurity(personalFolder[0].security);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      if (
+        (isCollaborator || isVisitor) &&
+        pathname.includes("accounts/people")
+      ) {
+        window.DocSpace.navigate(
+          combineUrl(window.ClientConfig?.proxy?.url, "/"),
+        );
       }
 
       if ((isAdmin || isRoomAdmin) && pathname.includes("accounts/people")) {
@@ -232,11 +260,11 @@ class UsersStore {
       if (isArchive || pathname.includes("rooms/shared")) {
         const { fetchRooms } = this.filesStore;
 
-        const filter = RoomsFilter.getDefault(
+        const roomsFilter = RoomsFilter.getDefault(
           id,
           isArchive ? RoomSearchArea.Archive : RoomSearchArea.Active,
         );
-        fetchRooms(filter);
+        fetchRooms(roomsFilter);
       }
 
       setUser(data);

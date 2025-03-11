@@ -185,6 +185,10 @@ class TreeFoldersStore {
     return this.rootFoldersTitles[FolderType.TRASH];
   }
 
+  get personalFolderId() {
+    return this.rootFoldersTitles[FolderType.USER]?.id;
+  }
+
   get personalUserFolderTitle() {
     return this.rootFoldersTitles[FolderType.USER]?.title;
   }

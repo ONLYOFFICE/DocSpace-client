@@ -159,7 +159,7 @@ class WebhooksStore {
       count: 1,
     });
 
-    this.configName = historyData.items[0].configName;
+    this.configName = historyData.items[0]?.configName || "";
   };
 
   clearConfigName = () => {

@@ -106,7 +106,7 @@ const WebhookTableHeader = (props) => {
 
   useEffect(() => {
     setColumns(getColumns(defaultColumns, userId));
-  }, [userId, defaultColumns]);
+  }, []);
 
   return (
     <TableHeader

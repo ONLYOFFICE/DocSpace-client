@@ -34,9 +34,9 @@ import ErrorBoundary from "SRC_DIR/components/ErrorBoundaryWrapper";
 import SectionWrapper from "SRC_DIR/components/Section";
 
 import SectionHeaderContent from "../../Layout/Section/Header";
-import HistoryHeader from "../../categories/developer-tools/Webhooks/WebhookHistory/sub-components/HistoryHeader";
-import DetailsNavigationHeader from "../../categories/developer-tools/Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
-import OAuthSectionHeader from "../../categories/developer-tools/OAuth/OAuthSectionHeader";
+import HistoryHeader from "./Webhooks/WebhookHistory/sub-components/HistoryHeader";
+import DetailsNavigationHeader from "./Webhooks/WebhookEventDetails/sub-components/DetailsNavigationHeader";
+import OAuthSectionHeader from "./OAuth/OAuthSectionHeader";
 
 export const Component = () => {
   const { id, eventId } = useParams();

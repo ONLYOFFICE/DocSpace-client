@@ -1002,7 +1002,7 @@ export function updateWebhook(id, name, uri, secretKey, ssl) {
 export function toggleEnabledWebhook(webhook) {
   return request({
     method: "put",
-    url: `/settings/webhook`,
+    url: `/settings/webhook/enable`,
     data: {
       id: webhook.id,
       name: webhook.name,

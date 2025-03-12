@@ -28,6 +28,7 @@
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import isUndefined from "lodash/isUndefined";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
@@ -352,8 +353,26 @@ const Editor = ({
 
     const otherSearchParams = new URLSearchParams();
 
+    const roomId = config?.document?.referenceData.roomId;
+    const fileId = fileInfo?.id;
+
     if (config?.fillingSessionId)
       otherSearchParams.append("fillingSessionId", config.fillingSessionId);
+
+    if (config?.startFillingMode === StartFillingMode.StartFilling) {
+      otherSearchParams.append(
+        "type",
+        StartFillingMode.StartFilling.toString(),
+      );
+
+      if (!isUndefined(fileId)) {
+        otherSearchParams.append("formId", fileId.toString());
+      }
+
+      if (!isUndefined(roomId)) {
+        otherSearchParams.append("roomId", roomId);
+      }
+    }
 
     const combinedSearchParams = new URLSearchParams({
       ...Object.fromEntries(searchParams),

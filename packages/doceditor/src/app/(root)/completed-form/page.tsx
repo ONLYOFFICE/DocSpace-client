@@ -26,7 +26,15 @@
 import { CompletedForm } from "@/components/completed-form";
 import { logger } from "@/../logger.mjs";
 
-import { getFillingSession } from "@/utils/actions";
+import {
+  getFileById,
+  getFileLink,
+  getFillingSession,
+  getFormFillingStatus,
+  getUser,
+} from "@/utils/actions";
+import { CompletedVDRForm } from "@/components/completed-form/CompletedVDRForm";
+import { StartFillingMode } from "@docspace/shared/enums";
 
 const log = logger.child({ module: "Create page" });
 
@@ -35,9 +43,27 @@ interface PageProps {
 }
 
 async function Page({ searchParams }: PageProps) {
-  const { share, fillingSessionId, is_file } = searchParams;
+  const { share, fillingSessionId, roomId, is_file, formId, type } =
+    searchParams;
 
   log.info("Open completed form page");
+
+  if (type && type === StartFillingMode.StartFilling.toString()) {
+    const [formFillingStatus, file, user] = await Promise.all([
+      getFormFillingStatus(formId!),
+      getFileById(formId!),
+      getUser(formId!),
+    ]);
+
+    return (
+      <CompletedVDRForm
+        file={file}
+        user={user}
+        roomId={roomId}
+        formFillingStatus={formFillingStatus}
+      />
+    );
+  }
 
   const session = await getFillingSession(fillingSessionId!, share);
 

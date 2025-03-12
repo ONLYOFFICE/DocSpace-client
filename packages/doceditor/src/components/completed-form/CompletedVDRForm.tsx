@@ -62,10 +62,11 @@ import {
 } from "./CompletedForm.styled";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { InputBlock } from "@docspace/shared/components/input-block";
-import { InputType } from "@docspace/shared/components/text-input";
+import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import {
   FillingRoleProcess,
   RoleStep,
+  StatusIndicator,
 } from "@docspace/shared/components/filling-role-process";
 import type { CompletedVDRFormProps } from "./CompletedForm.types";
 import { getFolderUrl } from "./CompletedForm.helper";
@@ -95,7 +96,6 @@ export const CompletedVDRForm = ({
     return `${origin}${pathname}?fileId=${file.id}&action=fill`;
   }, [file]);
 
-  console.log({ file });
   if (!file || !formFillingStatus || !roomId) return;
 
   const isYournTurn = file.formFillingStatus === FileFillingFormStatus.YourTurn;
@@ -145,6 +145,8 @@ export const CompletedVDRForm = ({
     return t("CompletedForm:FormVDRSectionCompletedDescription");
   };
 
+  const isTurnToFill = isYournTurn && isStartFilling;
+
   return (
     <ContainerCompletedForm bgPattern={bgPattern}>
       <Scrollbar fixedSize>
@@ -155,7 +157,7 @@ export const CompletedVDRForm = ({
               <source media={mobileMore} srcSet={logoUrl} />
               <img src={logoUrl} alt="logo" />
             </picture>
-            <TextWrapper>
+            <TextWrapper className="completed-form__text-wrapper">
               <Heading level={HeadingLevel.h1}>{getHeader()}</Heading>
               <Text noSelect>{getHeaderDescription()}</Text>
             </TextWrapper>
@@ -183,8 +185,10 @@ export const CompletedVDRForm = ({
               <InputBlock
                 id="form-link"
                 isReadOnly
+                size={InputSize.middle}
                 type={InputType.text}
                 value={url}
+                className="input__copy-link"
                 iconButtonClassName="input__copy-link-icon"
                 iconName={CopyReactSvgUrl}
                 onIconClick={copyLinkFile}
@@ -201,11 +205,14 @@ export const CompletedVDRForm = ({
                       processStatus={roleStatus}
                       roleName={roleName}
                       histories={[]}
-                      withHistory={index !== arr.length - 1}
+                      withHistory={index !== arr.length - 1 || completed}
                     />
                   );
                 },
               )}
+              {completed ? (
+                <StatusIndicator status={FileFillingFormStatus.Completed} />
+              ) : null}
             </Box>
           </VDRMainContent>
           <Footer>
@@ -214,28 +221,32 @@ export const CompletedVDRForm = ({
               scale
               primary
               size={ButtonSize.medium}
-              label={t("Common:CopyLink")}
-              onClick={copyLinkFile}
+              label={
+                isTurnToFill
+                  ? t("CompletedForm:FillOutForm")
+                  : t("Common:CopyLink")
+              }
+              onClick={isTurnToFill ? handleFillForm : copyLinkFile}
             />
             <Button
               className="secondary-button"
               scale
               size={ButtonSize.medium}
               label={
-                isYournTurn
+                isTurnToFill
                   ? t("Common:CopyLink")
-                  : t("CompletedForm:BackToRoom")
+                  : t("CompletedForm:GoToRoom")
               }
-              onClick={isYournTurn ? copyLinkFile : handleBackToRoom}
+              onClick={isTurnToFill ? copyLinkFile : handleBackToRoom}
             />
-            {isYournTurn && isStartFilling ? (
+            {isTurnToFill ? (
               <Link
                 href=""
                 className="link"
                 onClick={handleBackToRoom}
                 prefetch={false}
               >
-                {t("CompletedForm:BackToRoom")}
+                {t("CompletedForm:GoToRoom")}
               </Link>
             ) : null}
           </Footer>

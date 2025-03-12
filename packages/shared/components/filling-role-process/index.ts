@@ -26,3 +26,4 @@
 
 export { default as FillingRoleProcess } from "./FillingRoleProcess";
 export { RoleStep } from "./sub-components/role-step";
+export { StatusIndicator } from "./sub-components/status-indicator";

@@ -27,7 +27,7 @@
 
 import styled from "styled-components";
 
-import { mobile, mobileMore } from "@docspace/shared/utils";
+import { mobile, mobileMore, tablet } from "@docspace/shared/utils";
 
 import type { CompletedFormLayoutProps } from "./CompletedForm.types";
 
@@ -109,6 +109,12 @@ export const CompletedFormLayout = styled.div`
     }
   }
 
+  @media ${tablet} {
+    &.completed-form__vdr-layout {
+      max-width: 600px;
+    }
+  }
+
   @media ${mobile} {
     padding-top: 0px;
 
@@ -183,6 +189,12 @@ export const TextWrapper = styled.section`
     color: ${(props) => props.theme.completedForm.descriptionColor};
     text-align: center;
     max-width: 600px;
+  }
+
+  &.completed-form__text-wrapper {
+    p {
+      max-width: 100%;
+    }
   }
 `;
 
@@ -424,6 +436,21 @@ export const VDRMainContent = styled.main`
     }
   }
 
+  .input__copy-link input {
+    width: 100%;
+    font-size: 16px;
+    line-height: 22px;
+    padding: 11px 12px;
+  }
+
+  @media ${mobile} {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "form-file"
+      "form-link "
+      "form-roles";
+  }
+
   .input__copy-link-icon {
     /* padding: 0; */
 
@@ -470,5 +497,14 @@ export const Footer = styled.footer`
   }
   .secondary-button {
     grid-area: secondary-button;
+  }
+
+  @media ${mobile} {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "primary-button"
+    "secondary-button"
+    "link";
+    gap: 8px;
   }
 `;

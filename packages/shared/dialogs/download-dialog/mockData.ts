@@ -41,8 +41,7 @@ export const files: TDownloadedFile[] = [
     createdBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=963508509",
+      avatarSmall: "",
       profileUrl: "",
       hasAvatar: false,
     },
@@ -65,8 +64,7 @@ export const files: TDownloadedFile[] = [
     updatedBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=963508509",
+      avatarSmall: "",
       profileUrl: "",
       hasAvatar: false,
     },
@@ -127,8 +125,7 @@ export const files: TDownloadedFile[] = [
     createdBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=963508509",
+      avatarSmall: "",
       profileUrl: "",
       hasAvatar: false,
     },
@@ -151,8 +148,7 @@ export const files: TDownloadedFile[] = [
     updatedBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=963508509",
+      avatarSmall: "",
       profileUrl: "",
       hasAvatar: false,
     },
@@ -213,8 +209,7 @@ export const files: TDownloadedFile[] = [
     createdBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=963508509",
+      avatarSmall: "",
       profileUrl: "",
       hasAvatar: false,
     },
@@ -237,8 +232,7 @@ export const files: TDownloadedFile[] = [
     updatedBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=963508509",
+      avatarSmall: "",
       profileUrl: "",
       hasAvatar: false,
     },
@@ -299,8 +293,7 @@ export const files: TDownloadedFile[] = [
     createdBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=963508509",
+      avatarSmall: "",
       profileUrl: "",
       hasAvatar: false,
     },
@@ -323,8 +316,7 @@ export const files: TDownloadedFile[] = [
     updatedBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=963508509",
+      avatarSmall: "",
       profileUrl: "",
       hasAvatar: false,
     },
@@ -386,15 +378,11 @@ export const files: TDownloadedFile[] = [
     createdBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
-      avatar: "/static/images/default_user_photo_size_82-82.png?hash=963508509",
-      avatarOriginal:
-        "/static/images/default_user_photo_size_200-200.png?hash=963508509",
-      avatarMax:
-        "/static/images/default_user_photo_size_200-200.png?hash=963508509",
-      avatarMedium:
-        "/static/images/default_user_photo_size_48-48.png?hash=963508509",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=963508509",
+      avatar: "",
+      avatarOriginal: "",
+      avatarMax: "",
+      avatarMedium: "",
+      avatarSmall: "",
       profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
@@ -415,15 +403,11 @@ export const files: TDownloadedFile[] = [
     updatedBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
-      avatar: "/static/images/default_user_photo_size_82-82.png?hash=963508509",
-      avatarOriginal:
-        "/static/images/default_user_photo_size_200-200.png?hash=963508509",
-      avatarMax:
-        "/static/images/default_user_photo_size_200-200.png?hash=963508509",
-      avatarMedium:
-        "/static/images/default_user_photo_size_48-48.png?hash=963508509",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=963508509",
+      avatar: "",
+      avatarOriginal: "",
+      avatarMax: "",
+      avatarMedium: "",
+      avatarSmall: "",
       profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
@@ -483,15 +467,11 @@ export const files: TDownloadedFile[] = [
     createdBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
-      avatar: "/static/images/default_user_photo_size_82-82.png?hash=963508509",
-      avatarOriginal:
-        "/static/images/default_user_photo_size_200-200.png?hash=963508509",
-      avatarMax:
-        "/static/images/default_user_photo_size_200-200.png?hash=963508509",
-      avatarMedium:
-        "/static/images/default_user_photo_size_48-48.png?hash=963508509",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=963508509",
+      avatar: "",
+      avatarOriginal: "",
+      avatarMax: "",
+      avatarMedium: "",
+      avatarSmall: "",
       profileUrl: "",
       hasAvatar: false,
       isAnonim: false,
@@ -512,15 +492,11 @@ export const files: TDownloadedFile[] = [
     updatedBy: {
       id: "66faa6e4-f133-11ea-b126-00ffeec8b4ef",
       displayName: "Administrator ",
-      avatar: "/static/images/default_user_photo_size_82-82.png?hash=963508509",
-      avatarOriginal:
-        "/static/images/default_user_photo_size_200-200.png?hash=963508509",
-      avatarMax:
-        "/static/images/default_user_photo_size_200-200.png?hash=963508509",
-      avatarMedium:
-        "/static/images/default_user_photo_size_48-48.png?hash=963508509",
-      avatarSmall:
-        "/static/images/default_user_photo_size_32-32.png?hash=963508509",
+      avatar: "",
+      avatarOriginal: "",
+      avatarMax: "",
+      avatarMedium: "",
+      avatarSmall: "",
       profileUrl: "",
       hasAvatar: false,
       isAnonim: false,

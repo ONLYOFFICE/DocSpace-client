@@ -17,7 +17,7 @@ customElements.define(
       // window_title: "string",
       // placeholder: "string",
       // additional_headers: "json",
-      // session_id: "string",
+      session_id: "string",
       list_files: "json",
       provider_image: "string",
       send_icon_image: "string",

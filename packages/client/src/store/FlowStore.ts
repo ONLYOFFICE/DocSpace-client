@@ -36,8 +36,7 @@ class FlowStore {
         this.isLoading = false;
       });
     }
-
-  }
+  };
 
   fetchFlows = async () => {
     try {

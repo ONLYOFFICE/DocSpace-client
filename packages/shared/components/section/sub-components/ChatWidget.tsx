@@ -40,29 +40,6 @@ import styles from "../Section.module.scss";
 import { TViewAs } from "../../../types";
 import { classNames } from "../../../utils";
 
-// Replace namespace with module augmentation
-declare module "react" {
-  interface IntrinsicElements {
-    "langflow-chat-widget": React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLElement> & {
-        list_files?: string;
-        provider_image?: string;
-        user_icon_image?: string;
-        provider_icon_image?: string;
-        send_icon_image?: string;
-        interface_theme?: string;
-        interface_direction?: string;
-        header_text?: string;
-        empty_screen_text?: string;
-        placeholder_text?: string;
-        chat_user_name?: string;
-        chat_provider_name?: string;
-      },
-      HTMLElement
-    >;
-  }
-}
-
 export const ChatWidget = memo(
   ({
     isVisible,

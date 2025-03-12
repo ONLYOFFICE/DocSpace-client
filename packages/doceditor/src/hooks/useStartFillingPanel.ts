@@ -65,9 +65,9 @@ export const useStartFillingPanel = (
     docEditor?.startFilling(true);
     const origin = window.location.origin;
 
-    // window.location.replace(
-    //   `${origin}/doceditor/start-filling?${searchParams.toString()}`,
-    // );
+    window.location.replace(
+      `${origin}/doceditor/start-filling?${searchParams.toString()}`,
+    );
   };
 
   const onStartFillingVDRPanel = (roles: TFormRole[]) => {

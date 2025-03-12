@@ -126,14 +126,9 @@ class HotkeyStore {
     }
 
     const { isViewerOpen } = this.filesActionsStore.mediaViewerDataStore;
+    const isChatWidget = !!e.target.closest("langflow-chat-widget");
 
-    const temp = checkDialogsOpen() || isViewerOpen;
-
-    if (temp) {
-      console.log("temp", temp);
-    }
-
-    const someDialogIsOpen = true;
+    const someDialogIsOpen = checkDialogsOpen() || isViewerOpen || isChatWidget;
 
     if (
       someDialogIsOpen ||

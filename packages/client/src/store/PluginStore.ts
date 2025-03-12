@@ -117,6 +117,8 @@ class PluginStore {
 
   needPageReload = false;
 
+  aiChatIsVisible = false;
+
   constructor(
     settingsStore: SettingsStore,
     selectedFolderStore: SelectedFolderStore,
@@ -1153,6 +1155,10 @@ class PluginStore {
     Array.from(items).forEach(([key]) => {
       this.fileItems.delete(key);
     });
+  };
+
+  setAiChatIsVisible = (visible: boolean) => {
+    this.aiChatIsVisible = visible;
   };
 
   get pluginList() {

@@ -65,6 +65,8 @@ class ProfileActionsStore {
 
   userStore = null;
 
+  infoPanelStore = null;
+
   settingsStore = null;
 
   filesStore = null;
@@ -92,6 +94,7 @@ class ProfileActionsStore {
     userStore,
     settingsStore,
     currentTariffStatusStore,
+    infoPanelStore,
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
@@ -101,6 +104,7 @@ class ProfileActionsStore {
     this.userStore = userStore;
     this.settingsStore = settingsStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.infoPanelStore = infoPanelStore;
 
     this.isShowLiveChat = this.getStateLiveChat();
 
@@ -406,6 +410,18 @@ class ProfileActionsStore {
         onClick: this.onVideoGuidesClick,
       }, */
       hotkeys,
+      {
+        key: "user-menu-ai-chat",
+        icon: HelpCenterReactSvgUrl, // TODO: AI icon
+        label: "Open chat", // TODO: AI translation
+        onClick: () => {
+          this.infoPanelStore.setIsVisible(false);
+          this.pluginStore.setAiChatIsVisible(
+            !this.pluginStore.aiChatIsVisible,
+          );
+        },
+      },
+
       !isMobile && {
         isSeparator: true,
         key: "separator2",

@@ -45,6 +45,7 @@ const RoleStep = ({
   roleName,
   histories,
   currentUserId,
+  withHistory = true,
 }: RoleStepProps) => {
   const [collapsed, setCollapsed] = useState(true);
   const { isBase } = useTheme();
@@ -99,11 +100,13 @@ const RoleStep = ({
           />
         ) : null}
       </div>
-      <RoleHistories
-        className={styles.roleHistories}
-        histories={history}
-        userName={userName}
-      />
+      {withHistory ? (
+        <RoleHistories
+          className={styles.roleHistories}
+          histories={history}
+          userName={userName}
+        />
+      ) : null}
     </div>
   );
 };

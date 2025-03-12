@@ -42,7 +42,6 @@ import MailIcon from "PUBLIC_DIR/images/icons/12/mail.svg";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
-import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
@@ -58,8 +57,6 @@ import {
   AvatarSize,
 } from "@docspace/shared/components/avatar";
 
-import FilesFilter from "@docspace/shared/api/files/filter";
-
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 
 import {
@@ -74,6 +71,7 @@ import {
 } from "./CompletedForm.styled";
 
 import type { CompletedFormProps } from "./CompletedForm.types";
+import { getFolderUrl } from "./CompletedForm.helper";
 
 const BIG_FORM_NUMBER = 9_999_999;
 
@@ -134,22 +132,6 @@ export const CompletedForm = ({
 
   const isAnonym = Boolean(share) && !isRoomMember;
 
-  const getFolderUrl = (folderId: number, isAnonym: boolean): string => {
-    if (isNullOrUndefined(folderId)) return "";
-
-    const origin = window.location.origin;
-
-    const filter = FilesFilter.getDefault();
-
-    filter.folder = folderId.toString();
-
-    const path = isAnonym
-      ? `/rooms/share?key=${share}&`
-      : `/rooms/shared/${roomId}?`;
-
-    return `${origin}${path}${filter.toUrlParams()}`;
-  };
-
   const copyLinkFile = async () => {
     const origin = window.location.origin;
 
@@ -169,7 +151,7 @@ export const CompletedForm = ({
   };
 
   const handleBackToRoom = () => {
-    const url = getFolderUrl(roomId, isAnonym);
+    const url = getFolderUrl(roomId, isAnonym, share);
     window.location.assign(url);
   };
 

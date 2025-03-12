@@ -33,4 +33,5 @@ export interface RoleStepProps {
   roleName: string;
   histories: [string, string][];
   currentUserId: string;
+  withHistory?: boolean;
 }

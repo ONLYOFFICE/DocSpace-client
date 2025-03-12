@@ -24,35 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type {
-  TFile,
-  TFileFillingFormStatus,
-} from "@docspace/shared/api/files/types";
-import type { TUser } from "@docspace/shared/api/people/types";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
-export type CompletedFormLayoutProps = {
-  bgPattern: string;
-};
+export const getFolderUrl = (
+  folderId: number | string,
+  isAnonym: boolean,
+  share?: string,
+): string => {
+  if (isNullOrUndefined(folderId)) return "";
 
-export type CompletedFormProps = {
-  session?: {
-    response: {
-      completedForm: TFile;
-      manager: TUser;
-      originalForm: TFile;
-      formNumber: number;
-      roomId: number;
-      isRoomMember: boolean;
-    };
-  };
-  isShareFile: boolean;
-  share?: string;
-};
+  const origin = window.location.origin;
 
-export type CompletedVDRFormProps = {
-  file: TFile | null;
-  isStartFilling?: boolean;
-  formFillingStatus: TFileFillingFormStatus[];
-  user: TUser | undefined;
-  roomId: string | undefined;
+  const filter = FilesFilter.getDefault();
+
+  filter.folder = folderId.toString();
+
+  const path = isAnonym
+    ? `/rooms/share?key=${share}&`
+    : `/rooms/shared/${folderId}?`;
+
+  return `${origin}${path}${filter.toUrlParams()}`;
 };

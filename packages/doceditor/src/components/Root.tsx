@@ -206,7 +206,7 @@ const Root = ({
     startFillingPanelVisible,
     setStartFillingPanelVisible,
     onStartFillingVDRPanel,
-  } = useStartFillingPanel();
+  } = useStartFillingPanel(fileInfo, roomId);
 
   useUpdateSearchParamId(fileId, hash);
 

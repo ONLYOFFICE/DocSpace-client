@@ -30,8 +30,12 @@ import { EDITOR_ID } from "@docspace/shared/constants";
 import { setRoomSecurity } from "@docspace/shared/api/rooms";
 import type { Invitation } from "@docspace/shared/dialogs/start-filling/StartFillingPanel.types";
 import type { TFormRole } from "../types";
+import type { TFile } from "@docspace/shared/api/files/types";
 
-export const useStartFillingPanel = () => {
+export const useStartFillingPanel = (
+  file: TFile | undefined,
+  roomId: string | undefined,
+) => {
   const [roles, setRoles] = useState<TFormRole[]>([]);
   const [startFillingPanelVisible, setStartFillingPanelVisible] =
     useState(false);
@@ -53,7 +57,17 @@ export const useStartFillingPanel = () => {
     const docEditor =
       typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
+    const searchParams = new URLSearchParams();
+
+    if (file) searchParams.append("formId", file.id.toString());
+    if (roomId) searchParams.append("roomId", roomId);
+
     docEditor?.startFilling(true);
+    const origin = window.location.origin;
+
+    // window.location.replace(
+    //   `${origin}/doceditor/start-filling?${searchParams.toString()}`,
+    // );
   };
 
   const onStartFillingVDRPanel = (roles: TFormRole[]) => {

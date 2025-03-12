@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useMemo } from "react";
 import { DateTime } from "luxon";
 import classNames from "classnames";
 import { Trans, useTranslation } from "react-i18next";
@@ -40,23 +40,25 @@ const RoleHistories = ({
 }: RoleHistoryProps) => {
   const { t } = useTranslation("Common");
 
-  const historyTexts = {
-    [FillingFormStatusHistory.OpenedAtDate.toString()]: t(
-      "Common:HistoryOpenedAtDate",
-    ),
-    [FillingFormStatusHistory.SubmissionDate.toString()]: t(
-      "Common:HistorySubmissionDate",
-    ),
-    [FillingFormStatusHistory.StopDate.toString()]: (
-      <Trans
-        t={t}
-        i18nKey="HistoryStopDate"
-        ns="Common"
-        values={{ userName }}
-        components={{ 1: <strong title={userName} /> }}
-      />
-    ),
-  };
+  const historyTexts = useMemo(() => {
+    return {
+      [FillingFormStatusHistory.OpenedAtDate.toString()]: t(
+        "Common:HistoryOpenedAtDate",
+      ),
+      [FillingFormStatusHistory.SubmissionDate.toString()]: t(
+        "Common:HistorySubmissionDate",
+      ),
+      [FillingFormStatusHistory.StopDate.toString()]: (
+        <Trans
+          t={t}
+          i18nKey="HistoryStopDate"
+          ns="Common"
+          values={{ userName }}
+          components={{ 1: <strong title={userName} /> }}
+        />
+      ),
+    };
+  }, [t, userName]);
 
   return (
     <ul className={classNames(styles.roleHistory, className)}>

@@ -23,36 +23,17 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React, { PropsWithChildren } from "react";
 
-import type {
-  TFile,
-  TFileFillingFormStatus,
-} from "@docspace/shared/api/files/types";
-import type { TUser } from "@docspace/shared/api/people/types";
+async function Layout({ children }: PropsWithChildren) {
+  return (
+    <>
+      <link rel="mask-icon" href="/logo.ashx?logotype=3" />
+      <link rel="icon" type="image/x-icon" href="/logo.ashx?logotype=3" />
+      <link rel="apple-touch-icon" sizes="32x32" href="/logo.ashx?logotype=3" />
+      {children}
+    </>
+  );
+}
 
-export type CompletedFormLayoutProps = {
-  bgPattern: string;
-};
-
-export type CompletedFormProps = {
-  session?: {
-    response: {
-      completedForm: TFile;
-      manager: TUser;
-      originalForm: TFile;
-      formNumber: number;
-      roomId: number;
-      isRoomMember: boolean;
-    };
-  };
-  isShareFile: boolean;
-  share?: string;
-};
-
-export type CompletedVDRFormProps = {
-  file: TFile | null;
-  isStartFilling?: boolean;
-  formFillingStatus: TFileFillingFormStatus[];
-  user: TUser | undefined;
-  roomId: string | undefined;
-};
+export default Layout;

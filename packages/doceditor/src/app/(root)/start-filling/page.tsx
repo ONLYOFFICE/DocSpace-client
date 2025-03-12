@@ -23,36 +23,44 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { CompletedForm } from "@/components/completed-form";
+import { logger } from "@/../logger.mjs";
 
-import type {
-  TFile,
-  TFileFillingFormStatus,
-} from "@docspace/shared/api/files/types";
-import type { TUser } from "@docspace/shared/api/people/types";
+import {
+  getFileById,
+  getFileLink,
+  getFillingSession,
+  getFormFillingStatus,
+  getUser,
+} from "@/utils/actions";
+import { CompletedVDRForm } from "@/components/completed-form/CompletedVDRForm";
 
-export type CompletedFormLayoutProps = {
-  bgPattern: string;
-};
+const log = logger.child({ module: "Create page" });
 
-export type CompletedFormProps = {
-  session?: {
-    response: {
-      completedForm: TFile;
-      manager: TUser;
-      originalForm: TFile;
-      formNumber: number;
-      roomId: number;
-      isRoomMember: boolean;
-    };
-  };
-  isShareFile: boolean;
-  share?: string;
-};
+interface PageProps {
+  searchParams: Record<string, string | undefined>;
+}
 
-export type CompletedVDRFormProps = {
-  file: TFile | null;
-  isStartFilling?: boolean;
-  formFillingStatus: TFileFillingFormStatus[];
-  user: TUser | undefined;
-  roomId: string | undefined;
-};
+async function Page({ searchParams }: PageProps) {
+  const { formId, roomId } = searchParams;
+
+  log.info("Open start filling form page");
+
+  const [formFillingStatus, file, user] = await Promise.all([
+    getFormFillingStatus(formId!),
+    getFileById(formId!),
+    getUser(),
+  ]);
+
+  return (
+    <CompletedVDRForm
+      file={file}
+      user={user}
+      roomId={roomId}
+      isStartFilling
+      formFillingStatus={formFillingStatus}
+    />
+  );
+}
+
+export default Page;

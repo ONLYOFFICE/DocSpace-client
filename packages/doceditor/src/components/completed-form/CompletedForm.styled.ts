@@ -58,9 +58,6 @@ export const ContainerCompletedForm = styled.section<CompletedFormLayoutProps>`
 
   .completed-form__default-layout {
     padding: clamp(42px, 8vh, 100px) 16px 16px;
-
-    picture {
-    }
   }
 
   @media ${mobile} {
@@ -79,7 +76,7 @@ export const CompletedFormLayout = styled.div`
 
   padding: clamp(42px, 8vh, 100px) 0px 16px 16px;
 
-  picture {
+  .completed-form__logo {
     margin-bottom: clamp(40px, 8vh, 125px);
     user-select: none;
     img {
@@ -99,6 +96,12 @@ export const CompletedFormLayout = styled.div`
     margin-top: 24px;
   }
 
+  &.completed-form__vdr-layout {
+    max-width: 785px;
+    width: 100%;
+    align-self: center;
+  }
+
   @media ${mobileMore} and (max-height: 650px) {
     padding-top: 42px;
     .completed-form__logo {
@@ -114,7 +117,7 @@ export const CompletedFormLayout = styled.div`
       height: auto;
     }
 
-    picture {
+    .completed-form__logo {
       display: flex;
       align-self: center;
       justify-content: center;
@@ -363,5 +366,109 @@ export const ManagerWrapper = styled.div`
         justify-content: center;
       }
     }
+  }
+`;
+
+export const VDRMainContent = styled.main`
+  display: grid;
+  gap: 16px;
+
+  align-items: start;
+
+  width: 100%;
+
+  grid-template-columns: 397fr 372fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "form-file form-roles"
+    "form-link form-roles"
+    "_ form-roles";
+  margin: 32px 0;
+
+  .completed-form__file {
+    grid-area: form-file;
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    .completed-form__file-name {
+      margin: 0px;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: 0px;
+    }
+
+    .completed-form_icon {
+      margin-inline-start: auto;
+      cursor: pointer;
+      path {
+        fill: ${(props) => props.theme.inputBlock.iconColor};
+      }
+    }
+  }
+
+  .completed-form__form-link {
+    grid-area: form-link;
+  }
+
+  .completed-form__roles {
+    grid-area: form-roles;
+    flex-direction: column;
+    align-items: flex-start;
+
+    ul {
+      min-height: 20px;
+      margin-block-start: 8px;
+    }
+  }
+
+  .input__copy-link-icon {
+    /* padding: 0; */
+
+    @media (hover: hover) {
+      &:hover {
+        svg path {
+          fill: ${(props) => props.theme.inputBlock.hoverIconColor} !important;
+        }
+      }
+    }
+
+    svg {
+      cursor: pointer;
+      path {
+        fill: ${(props) => props.theme.inputBlock.iconColor} !important;
+      }
+    }
+  }
+`;
+
+export const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Footer = styled.footer`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "primary-button secondary-button"
+    "link link";
+  justify-items: center;
+
+  gap: 16px 8px;
+  width: 100%;
+
+  .link {
+    grid-area: link;
+  }
+
+  .primary-button {
+    grid-area: primary-button;
+  }
+  .secondary-button {
+    grid-area: secondary-button;
   }
 `;

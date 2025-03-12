@@ -38,7 +38,7 @@ import { Base } from "@docspace/shared/themes";
 import { getRoomTitle } from "@docspace/shared/components/room-icon/RoomIcon.utils";
 import TemplateRoomIcon from "PUBLIC_DIR/images/template-room-icon.react.svg?url";
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
-import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+// import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 // import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 const StyledFlowsContainer = withTheme(styled.div`

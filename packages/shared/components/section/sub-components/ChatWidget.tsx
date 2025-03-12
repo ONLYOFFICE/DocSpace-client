@@ -24,13 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { memo, useEffect } from "react";
+import { memo, useEffect, createElement } from "react";
 import { useTheme } from "styled-components";
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import SendIconReactSvgUrl from "PUBLIC_DIR/images/send-message.svg?url";
 import ProviderIconImageUrl from "PUBLIC_DIR/images/icons/32/ai.bot32.svg?url";
 import UserIconImageUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import ProviderImageUrl from "PUBLIC_DIR/images/ai.bot.svg?url";
+
 import { TFile, TFolder } from "../../../api/files/types";
 import { DeviceType } from "../../../enums";
 import { Portal } from "../../portal";
@@ -38,6 +39,29 @@ import { IconButton } from "../../icon-button";
 import styles from "../Section.module.scss";
 import { TViewAs } from "../../../types";
 import { classNames } from "../../../utils";
+
+// Replace namespace with module augmentation
+declare module "react" {
+  interface IntrinsicElements {
+    "langflow-chat-widget": React.DetailedHTMLProps<
+      React.HTMLAttributes<HTMLElement> & {
+        list_files?: string;
+        provider_image?: string;
+        user_icon_image?: string;
+        provider_icon_image?: string;
+        send_icon_image?: string;
+        interface_theme?: string;
+        interface_direction?: string;
+        header_text?: string;
+        empty_screen_text?: string;
+        placeholder_text?: string;
+        chat_user_name?: string;
+        chat_provider_name?: string;
+      },
+      HTMLElement
+    >;
+  }
+}
 
 export const ChatWidget = memo(
   ({
@@ -49,13 +73,13 @@ export const ChatWidget = memo(
     chatFiles = [],
     mainBarVisible,
   }: {
-    isVisible: boolean;
-    setIsVisible: (isVisible: boolean) => void;
+    isVisible?: boolean;
+    setIsVisible?: (isVisible: boolean) => void;
     anotherDialogOpen?: boolean;
     viewAs?: TViewAs;
     currentDeviceType?: DeviceType;
-    chatFiles: (TFile | TFolder)[];
-    mainBarVisible: boolean;
+    chatFiles?: (TFile | TFolder)[];
+    mainBarVisible?: boolean;
   }) => {
     const { interfaceDirection, isBase } = useTheme();
 
@@ -72,7 +96,7 @@ export const ChatWidget = memo(
       });
     };
 
-    const onClose = () => setIsVisible(false);
+    const onClose = () => setIsVisible && setIsVisible(false);
 
     useEffect(() => {
       const onMouseDown = (e: MouseEvent) => {
@@ -93,6 +117,28 @@ export const ChatWidget = memo(
 
     const files = toChatFiles();
 
+    const chat = createElement("langflow-chat-widget", {
+      // api_key: "string",
+      // output_type: "string",
+      // input_type: "string",
+      // output_component: "string",
+      // host_url: "string",
+      // flow_id: "string",
+      // tweaks: "json",
+      list_files: JSON.stringify(files),
+      provider_image: ProviderImageUrl,
+      user_icon_image: UserIconImageUrl,
+      provider_icon_image: ProviderIconImageUrl,
+      send_icon_image: SendIconReactSvgUrl,
+      interface_theme: isBase ? "light" : "dark",
+      interface_direction: interfaceDirection,
+      header_text: "Langflow chat", // TODO: AI tranlstion
+      empty_screen_text: "How can I help you today?", // TODO: AI tranlstion
+      placeholder_text: "Message Langflow...", // TODO: AI tranlstion
+      chat_user_name: "Me", // TODO: AI tranlstion
+      chat_provider_name: "Langflow", // TODO: AI tranlstion
+    });
+
     const chatWidgetComponent = (
       <div className={styles.chatWrapper} id="chatPanelWrapper">
         <div className={styles.chatPanel}>
@@ -107,27 +153,7 @@ export const ChatWidget = memo(
             isStroke
             aria-label="close"
           />
-          <langflow-chat-widget
-            // api_key: "string",
-            // output_type: "string",
-            // input_type: "string",
-            // output_component: "string",
-            // host_url: "string",
-            // flow_id: "string",
-            // tweaks: "json",
-            list_files={JSON.stringify(files)}
-            provider_image={ProviderImageUrl}
-            user_icon_image={UserIconImageUrl}
-            provider_icon_image={ProviderIconImageUrl}
-            send_icon_image={SendIconReactSvgUrl}
-            interface_theme={isBase ? "light" : "dark"}
-            interface_direction={interfaceDirection}
-            header_text="Langflow chat" // TODO: AI tranlstion
-            empty_screen_text="How can I help you today?" // TODO: AI tranlstion
-            placeholder_text="Message Langflow..." // TODO: AI tranlstion
-            chat_user_name="Me" // TODO: AI tranlstion
-            chat_provider_name="Langflow" // TODO: AI tranlstion
-          />
+          {chat}
         </div>
       </div>
     );

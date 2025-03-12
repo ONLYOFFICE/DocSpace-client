@@ -43,6 +43,7 @@ const Body = ({
   dataReassignmentUrl,
   onTogglePeopleSelector,
   onTerminate,
+  noRoomFilesToMove,
 }) => {
   if (!tReady) return <DialogReassignmentSkeleton />;
 
@@ -55,6 +56,7 @@ const Body = ({
           targetUser.displayName ? targetUser.displayName : targetUser.label
         }
         noRooms={user.isCollaborator || user.isVisitor}
+        noRoomFilesToMove={noRoomFilesToMove}
         percent={percent}
         isAbortTransfer={isAbortTransfer}
         onTerminate={onTerminate}
@@ -70,7 +72,10 @@ const Body = ({
         currentColorScheme={currentColorScheme}
         onTogglePeopleSelector={onTogglePeopleSelector}
       />
-      <Description t={t} dataReassignmentUrl={dataReassignmentUrl} />
+      <Description
+        dataReassignmentUrl={dataReassignmentUrl}
+        noRoomFilesToMove={noRoomFilesToMove}
+      />
     </>
   );
 };

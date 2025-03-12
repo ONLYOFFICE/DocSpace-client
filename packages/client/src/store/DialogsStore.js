@@ -71,7 +71,7 @@ class DialogsStore {
 
   lifetimeDialogVisible = false;
 
-  reducedRightsData = { visible: true, adminName: "" };
+  reducedRightsData = { visible: false, adminName: "" };
 
   lifetimeDialogCB = null;
 

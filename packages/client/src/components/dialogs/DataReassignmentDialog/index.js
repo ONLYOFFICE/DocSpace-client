@@ -83,6 +83,7 @@ const DataReassignmentDialog = ({
     showDeleteProfileCheckbox,
     toType,
     currentUserAsDefault,
+    noRoomFilesToMove,
   } = data;
 
   const [selectorVisible, setSelectorVisible] = useState(false);
@@ -273,6 +274,7 @@ const DataReassignmentDialog = ({
             dataReassignmentUrl={dataReassignmentUrl}
             currentColorScheme={currentColorScheme}
             onTogglePeopleSelector={onTogglePeopleSelector}
+            noRoomFilesToMove={noRoomFilesToMove}
           />
         </StyledBodyContent>
       </ModalDialog.Body>

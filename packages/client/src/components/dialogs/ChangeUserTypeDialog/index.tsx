@@ -134,6 +134,7 @@ const ChangeUserTypeDialog = ({
       cancelReassignment,
       toType,
       currentUserAsDefault,
+      noRoomFilesToMove: true,
     });
 
     setDataReassignmentDialogVisible(true);

@@ -195,6 +195,7 @@ class TreeFoldersStore {
 
   get isPersonalReadOnly() {
     return (
+      this.isPersonalRoom &&
       this.rootFoldersTitles[FolderType.USER]?.security?.Read &&
       !this.rootFoldersTitles[FolderType.USER]?.security?.Create
     );

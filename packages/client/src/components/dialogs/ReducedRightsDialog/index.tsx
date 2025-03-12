@@ -14,19 +14,21 @@ const StyledText = styled(Text)`
 
 type ReducedRightsDialogProps = {
   visible: boolean;
+  adminName: string;
+  setReducedRightsData: (visible: boolean, admin?: string) => void;
   personalUserFolderTitle?: string;
-  setReducedRightsVisible: (visible: boolean) => void;
 };
 
 const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
   visible,
+  adminName,
   personalUserFolderTitle,
-  setReducedRightsVisible,
+  setReducedRightsData,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
 
   const onCloseDialog = () => {
-    setReducedRightsVisible(false);
+    setReducedRightsData(false);
   };
 
   const onRedirect = () => {
@@ -48,7 +50,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
           values={{
             userType: t("Common:Guest"),
             productName: t("Common:ProductName"),
-            adminName: "Name",
+            adminName,
           }}
           components={{ 1: <span style={{ fontWeight: 600 }} /> }}
         />
@@ -89,14 +91,14 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
 };
 
 export default inject(({ dialogsStore, treeFoldersStore }: TStore) => {
-  const { reducedRightsVisible: visible, setReducedRightsVisible } =
-    dialogsStore;
+  const { reducedRightsData, setReducedRightsData } = dialogsStore;
 
   const { personalUserFolderTitle } = treeFoldersStore;
 
   return {
-    visible,
-    setReducedRightsVisible,
+    visible: reducedRightsData.visible,
+    adminName: reducedRightsData.adminName,
+    setReducedRightsData,
     personalUserFolderTitle,
   };
 })(observer(ReducedRightsDialog));

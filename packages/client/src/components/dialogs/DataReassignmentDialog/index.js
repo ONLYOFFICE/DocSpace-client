@@ -83,7 +83,6 @@ const DataReassignmentDialog = ({
     showDeleteProfileCheckbox,
     toType,
     currentUserAsDefault,
-    showProgressImmediately,
   } = data;
 
   const [selectorVisible, setSelectorVisible] = useState(false);
@@ -161,13 +160,13 @@ const DataReassignmentDialog = ({
 
   useEffect(() => {
     // If click Delete user
-    if (currentUserAsDefault && showProgressImmediately) onReassign();
+    if (currentUserAsDefault) onReassign();
 
     return () => {
       setDataReassignmentDeleteProfile(false);
       clearTimeout(timerId);
     };
-  }, [currentUserAsDefault, showProgressImmediately]);
+  }, [currentUserAsDefault]);
 
   const onToggleDeleteProfile = () => {
     setIsDeleteProfile((remove) => !remove);

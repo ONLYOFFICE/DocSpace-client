@@ -204,7 +204,6 @@ const DeleteProfileEverDialogComponent = ({
       getReassignmentProgress: dataReassignmentProgress,
       cancelReassignment: dataReassignmentTerminate,
       currentUserAsDefault: true,
-      showProgressImmediately: true,
     });
 
     setDataReassignmentDialogVisible(true);

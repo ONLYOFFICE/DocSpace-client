@@ -211,23 +211,30 @@ class UsersStore {
       });
     };
 
-    const changeMyType = async (value: { id: string; data: TUser }) => {
+    const changeMyType = async (value: {
+      id: string;
+      data: TUser;
+      admin: string;
+    }) => {
       console.log(`[WS] ${SocketEvents.ChangeMyType}, id: ${value?.id}`);
 
       if (!value) return;
 
       const { fetchTreeFolders, personalFolderId } = this.treeFoldersStore;
       const { setUser } = this.userStore;
-      const { setReducedRightsVisible } = this.dialogsStore;
+      const { setReducedRightsData } = this.dialogsStore;
       const { setSecurity } = this.selectedFolderStore;
       const { fetchFiles, filter } = this.filesStore;
 
-      const { data, id } = value;
+      const { data, id, admin } = value;
       const { isAdmin, isRoomAdmin, isVisitor, isCollaborator } = data;
       const { pathname } = window.location;
 
+      setUser(data);
+      fetchTreeFolders();
+
       if (isVisitor) {
-        setReducedRightsVisible(true);
+        setReducedRightsData(true, admin);
       }
 
       if (pathname.includes("rooms/personal")) {
@@ -267,9 +274,6 @@ class UsersStore {
         );
         fetchRooms(roomsFilter);
       }
-
-      setUser(data);
-      fetchTreeFolders();
     };
 
     SocketHelper.on(SocketEvents.AddUser, addUser);

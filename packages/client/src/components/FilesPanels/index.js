@@ -484,7 +484,7 @@ export default inject(
 
       setFormFillingTipsDialog,
       formFillingTipsVisible,
-      reducedRightsVisible,
+      reducedRightsData,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
@@ -597,7 +597,7 @@ export default inject(
       userId: userStore?.user?.id,
       getRefElement,
       config,
-      reducedRightsVisible,
+      reducedRightsVisible: reducedRightsData.visible,
     };
   },
 )(observer(Panels));

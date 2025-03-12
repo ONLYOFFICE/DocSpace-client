@@ -71,7 +71,7 @@ class DialogsStore {
 
   lifetimeDialogVisible = false;
 
-  reducedRightsVisible = false;
+  reducedRightsData = { visible: true, adminName: "" };
 
   lifetimeDialogCB = null;
 
@@ -415,8 +415,11 @@ class DialogsStore {
     this.lifetimeDialogCB = cb;
   };
 
-  setReducedRightsVisible = (reducedRightsVisible) => {
-    this.reducedRightsVisible = reducedRightsVisible;
+  setReducedRightsData = (reducedRightsVisible, adminName = "") => {
+    this.reducedRightsData = {
+      visible: reducedRightsVisible,
+      adminName,
+    };
   };
 
   setEventDialogVisible = (eventDialogVisible) => {

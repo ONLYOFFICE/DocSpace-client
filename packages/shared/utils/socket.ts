@@ -248,7 +248,11 @@ export type TListenEventCallbackMap = {
     isCompleted: boolean;
     error: string;
   }) => void;
-  [SocketEvents.ChangeMyType]: (data: { id: string; data: TUser }) => void;
+  [SocketEvents.ChangeMyType]: (data: {
+    id: string;
+    data: TUser;
+    admin: string;
+  }) => void;
 };
 
 /**

@@ -46,6 +46,7 @@ import { request } from "../client";
 
 import Filter from "./filter";
 import { TChangeTheme, TGetUserList, TUser } from "./types";
+import { TOperation } from "../files/filter";
 
 export async function getUserList(
   filter = Filter.getDefault(),
@@ -158,6 +159,22 @@ export function getUserPhoto(userId) {
     method: "get",
     url: `/people/${userId}/photo`,
   });
+}
+
+export async function startEmptyPersonal() {
+  const res = (await request({
+    method: "post",
+    url: "/people/delete/personal/start",
+  })) as TOperation[];
+  return res;
+}
+
+export async function getEmptyPersonalProgress() {
+  const res = (await request({
+    method: "get",
+    url: "/people/delete/personal/progress",
+  })) as TOperation[];
+  return res;
 }
 
 export function createUser(data, confirmKey: Nullable<string> = null) {

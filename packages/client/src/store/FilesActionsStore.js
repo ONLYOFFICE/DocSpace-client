@@ -97,7 +97,10 @@ import { createLoader } from "@docspace/shared/utils/createLoader";
 
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
-
+import {
+  getEmptyPersonalProgress,
+  startEmptyPersonal,
+} from "@docspace/shared/api/people";
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
@@ -612,6 +615,103 @@ class FilesActionStore {
       return toastr.error(err.message ? err.message : err, null, 0, true);
     } finally {
       this.emptyTrashInProgress = false;
+    }
+  };
+
+  loopEmptyOperation = async (data, pbData) => {
+    const { secondaryProgressDataStore } = this.uploadDataStore;
+    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
+
+    if (!data) {
+      setSecondaryProgressBarData({
+        operation: pbData.operation,
+        alert: false,
+        completed: true,
+        operationId: pbData.operationId,
+      });
+
+      return;
+    }
+
+    let progress = data.progress;
+
+    let operationItem = data;
+    let finished = data.finished;
+
+    while (!finished) {
+      const item = await getEmptyPersonalProgress();
+      operationItem = item;
+
+      progress = item ? item.progress : 100;
+      finished = item ? item.finished : true;
+
+      setSecondaryProgressBarData({
+        operation: pbData.operation,
+        percent: progress,
+        alert: false,
+        currentFile: item,
+        operationId: pbData.operationId,
+      });
+    }
+
+    return operationItem;
+  };
+
+  emptyPersonalFolder = async () => {
+    const { secondaryProgressDataStore, clearActiveOperations } =
+      this.uploadDataStore;
+    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
+    // debugger;
+    const { addActiveItems, files, folders } = this.filesStore;
+
+    const fileIds = files.map((f) => f.id);
+    const folderIds = folders.map((f) => f.id);
+
+    addActiveItems(fileIds, folderIds);
+
+    const operationId = uniqueid("operation_");
+
+    // this.emptyTrashInProgress = true;
+
+    const pbData = {
+      operation: OPERATIONS_NAME.deletePermanently,
+      operationId,
+    };
+
+    setSecondaryProgressBarData({
+      percent: 0,
+      ...pbData,
+    });
+
+    try {
+      await startEmptyPersonal().then(async (result) => {
+        if (result?.error) return Promise.reject(result.error);
+        const data = result ?? null;
+
+        await this.loopEmptyOperation(data, pbData);
+
+        this.updateCurrentFolder(
+          fileIds,
+          folderIds,
+          null,
+          pbData.operationId,
+          pbData.operation,
+        );
+
+        clearActiveOperations(fileIds, folderIds);
+      });
+    } catch (err) {
+      debugger;
+      clearActiveOperations(fileIds, folderIds);
+      setSecondaryProgressBarData({
+        completed: true,
+        alert: true,
+        ...pbData,
+      });
+
+      return toastr.error(err.message ? err.message : err, null, 0, true);
+    } finally {
+      // this.emptyTrashInProgress = false;
     }
   };
 

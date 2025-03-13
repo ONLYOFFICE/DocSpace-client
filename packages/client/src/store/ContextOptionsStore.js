@@ -1234,6 +1234,12 @@ class ContextOptionsStore {
     this.dialogsStore.setEmptyTrashDialogVisible(true);
   };
 
+  onEmptyPersonalAction = () => {
+    const { emptyPersonalFolder } = this.filesActionsStore;
+
+    emptyPersonalFolder();
+  };
+
   onRestoreAllAction = () => {
     const { activeFiles, activeFolders } = this.filesStore;
     const isExistActiveItems = [...activeFiles, ...activeFolders].length > 0;
@@ -1278,9 +1284,8 @@ class ContextOptionsStore {
       isRecycleBinFolder,
       isArchiveFolder,
       isTemplatesFolder,
-      isPersonalRoom,
       personalUserFolderTitle,
-      personalFolderReadAccess,
+      isPersonalReadOnly,
     } = this.treeFoldersStore;
     const { roomsForDelete, roomsForRestore } = this.filesStore;
 
@@ -1362,7 +1367,7 @@ class ContextOptionsStore {
       return [];
     }
 
-    if (isPersonalRoom && personalFolderReadAccess) {
+    if (isPersonalReadOnly) {
       return [
         {
           id: "header_option_download-all",
@@ -1378,7 +1383,7 @@ class ContextOptionsStore {
           label: t("Files:EmptySection", {
             sectionName: personalUserFolderTitle,
           }),
-          //  onClick: this.onEmptySectionAction,
+          onClick: this.onEmptyPersonalAction,
           icon: ClearTrashReactSvgUrl,
           disabled: false,
         },

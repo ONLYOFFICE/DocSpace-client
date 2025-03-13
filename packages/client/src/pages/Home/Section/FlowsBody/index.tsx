@@ -38,7 +38,7 @@ import { Base } from "@docspace/shared/themes";
 import { getRoomTitle } from "@docspace/shared/components/room-icon/RoomIcon.utils";
 import TemplateRoomIcon from "PUBLIC_DIR/images/template-room-icon.react.svg?url";
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
-import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
+// import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 // import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 const StyledFlowsContainer = withTheme(styled.div`
@@ -265,7 +265,6 @@ const FlowTileTemplate = (props) => {
     flow,
     getFolderById,
     isChatAvailable,
-    isLoading,
     isRunning,
     contextButtonSpacerWidth,
     hideContextMenu,
@@ -338,6 +337,13 @@ const FlowTileTemplate = (props) => {
   };
 
   const displayChat = isChatAvailable(flow);
+
+  const chat = React.createElement("langflow-chat", {
+    window_title: `Chat with flow '${name}'`,
+    flow_id: id,
+    host_url: `${window.location.origin}/onlyflow/`,
+    style: { position: "absolute" },
+  });
 
   return (
     <StyledTile {...props} ref={tile}>
@@ -426,16 +432,9 @@ const FlowTileTemplate = (props) => {
                   {description}
                 </Text>
               </div>
-              {displayChat && (
-                <div className="flow-tile_bottom-content_chat">
-                  <langflow-chat
-                    window_title={`Chat with flow '${name}'`}
-                    flow_id={id}
-                    host_url={`${window.location.origin}/onlyflow/`}
-                    style={{ position: "absolute" }}
-                  ></langflow-chat>
-                </div>
-              )}
+              {displayChat ? (
+                <div className="flow-tile_bottom-content_chat">{chat}</div>
+              ) : null}
             </div>
           </div>
         </div>

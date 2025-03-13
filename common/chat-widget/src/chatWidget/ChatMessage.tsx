@@ -26,7 +26,7 @@
 
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import rehypeMathjax from "rehype-mathjax";
+// import rehypeMathjax from "rehype-mathjax";
 import { CircleUserRound, LoaderPinwheel } from "lucide-react";
 
 import { ChatMessageType } from "../types/chatWidget";
@@ -86,7 +86,7 @@ const ChatMessage = ({
           <div className="chat-message-user-message">
             <Markdown
               remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeMathjax]}
+              // rehypePlugins={[rehypeMathjax]}
             >
               {message.message}
             </Markdown>

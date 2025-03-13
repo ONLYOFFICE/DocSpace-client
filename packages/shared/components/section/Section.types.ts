@@ -178,7 +178,7 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     primaryOperationsAlert?: boolean;
     needErrorChecking?: boolean;
     onCancelOperation?: (callback: () => void) => void;
-    chatFiles: (TFile | TFolder)[];
+    chatFiles?: (TFile | TFolder)[];
     aiChatIsVisible?: boolean;
     setAiChatIsVisible?: () => void;
     mainBarVisible?: boolean;

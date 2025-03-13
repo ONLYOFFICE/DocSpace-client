@@ -51,13 +51,13 @@ export const ChatWidget = memo(
     chatFiles = [],
     mainBarVisible,
   }: {
-    isVisible: boolean;
-    setIsVisible: (isVisible: boolean) => void;
+    isVisible?: boolean;
+    setIsVisible?: (isVisible: boolean) => void;
     anotherDialogOpen?: boolean;
     viewAs?: TViewAs;
     currentDeviceType?: DeviceType;
-    chatFiles: (TFile | TFolder)[];
-    mainBarVisible: boolean;
+    chatFiles?: (TFile | TFolder)[];
+    mainBarVisible?: boolean;
   }) => {
     const { interfaceDirection, isBase } = useTheme();
 
@@ -67,7 +67,7 @@ export const ChatWidget = memo(
       });
     };
 
-    const onClose = () => setIsVisible(false);
+    const onClose = () => setIsVisible && setIsVisible(false);
 
     useEffect(() => {
       const onMouseDown = (e: MouseEvent) => {

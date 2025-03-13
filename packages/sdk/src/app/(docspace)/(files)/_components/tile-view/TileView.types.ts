@@ -26,12 +26,18 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
+import type { IndexRange } from "react-virtualized";
+
 import { TFileItem, TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
 import type { TGetIcon } from "@/app/(docspace)/_hooks/useItemIcon";
 
 export type TileViewProps = {
   items: (TFolderItem | TFileItem)[];
   getIcon: TGetIcon;
+  hasMoreFiles: boolean;
+  fetchMoreFiles: (params: IndexRange) => Promise<void>;
+  currentFolderId: string | number;
+  filesLength: number;
 };
 
 export type TileProps = {
@@ -43,4 +49,13 @@ export type TileContentProps = {
   item: TFolderItem | TFileItem;
   displayFileExtension: boolean;
   onTitleClick?: (e: React.MouseEvent) => void;
+};
+
+export type InfiniteGridProps = {
+  className?: string;
+  children: React.ReactNode;
+  hasMoreFiles: boolean;
+  fetchMoreFiles: (params: IndexRange) => Promise<void>;
+  filesLength: number;
+  currentFolderId?: string | number;
 };

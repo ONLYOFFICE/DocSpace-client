@@ -1,4 +1,4 @@
-/*
+/*!
  * (c) Copyright Ascensio System SIA 2009-2025
  *
  * This program is a free software product.
@@ -26,53 +26,38 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useTranslation } from "react-i18next";
+@import "@docspace/shared/styles/variables/devices.scss";
+@import "@docspace/shared/styles/mixins";
 
-import { TileContainer } from "@docspace/shared/components/tiles";
-import { useIsServer } from "@docspace/shared/hooks/useIsServer";
+.infiniteLoader {
+  overflow: visible !important;
 
-import type { TileViewProps } from "./TileView.types";
-import Tile from "./sub-components/Tile";
-import InfiniteGrid from "./sub-components/infinite-grid/InfiniteGrid";
+  & > div {
+    overflow: visible !important;
+  }
+}
 
-const TileView = ({
-  items,
-  getIcon,
-  fetchMoreFiles,
-  hasMoreFiles,
-  currentFolderId,
-  filesLength,
-}: TileViewProps) => {
-  const { t } = useTranslation();
-  const isServer = useIsServer();
+.headerItem {
+  height: 20px;
+  grid-column: -1 / 1;
+}
 
-  return (
-    <TileContainer
-      // isDesc={isDesc}
-      className="tile-container"
-      useReactWindow={!isServer}
-      infiniteGrid={({ children }) => (
-        <InfiniteGrid
-          fetchMoreFiles={fetchMoreFiles}
-          hasMoreFiles={hasMoreFiles}
-          currentFolderId={currentFolderId}
-          filesLength={filesLength}
-        >
-          {children}
-        </InfiniteGrid>
-      )}
-      headingFolders={t("Common:Folders")}
-      headingFiles={t("Common:Files")}
-    >
-      {items.map((item) => (
-        <Tile
-          key={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
-          item={item}
-          getIcon={getIcon}
-        />
-      ))}
-    </TileContainer>
-  );
-};
+.item {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  gap: 16px;
 
-export default TileView;
+  @include desktop {
+    margin-inline-start: 1px;
+    padding-inline-end: 0;
+  }
+
+  @include tablet-and-below {
+    margin-inline-start: -1px;
+    margin-inline-end: 3px;
+  }
+}
+
+.card {
+  display: block;
+}

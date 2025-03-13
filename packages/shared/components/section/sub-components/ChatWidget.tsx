@@ -173,11 +173,11 @@ export const ChatWidget = memo(
             send_icon_image={SendIconReactSvgUrl}
             interface_theme={isBase ? "light" : "dark"}
             interface_direction={interfaceDirection}
-            header_text="Langflow chat" // TODO: AI tranlstion
+            header_text="DocSpace AI chat" // TODO: AI tranlstion
             empty_screen_text="How can I help you today?" // TODO: AI tranlstion
-            placeholder_text="Message Langflow..." // TODO: AI tranlstion
+            placeholder_text="Message ..." // TODO: AI tranlstion
             chat_user_name="Me" // TODO: AI tranlstion
-            chat_provider_name="Langflow" // TODO: AI tranlstion
+            chat_provider_name="AI" // TODO: AI tranlstion
           />
         </div>
       </div>

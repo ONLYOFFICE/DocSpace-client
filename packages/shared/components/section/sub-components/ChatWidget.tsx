@@ -95,7 +95,7 @@ export const ChatWidget = memo(
       : "";
 
     const [flowId, setFlowId] = useState<string>(
-      "6652b94b-c725-4c89-8287-a1e3141f8c14",
+      "8b865d2e-b2b6-4158-9d57-d3465998e304",
     );
 
     useEffect(() => {

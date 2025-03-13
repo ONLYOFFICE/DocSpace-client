@@ -33,6 +33,6 @@ export interface FillingStatusDialogProps {
   visible: boolean;
   onClose: () => void;
   onStopFilling: (item: TFile) => void;
-  onDelete: (item: TFile) => void;
+  onDelete?: (item: TFile) => void;
   onResetFilling: (item: TFile) => void;
 }

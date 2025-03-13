@@ -31,12 +31,11 @@ import { toastr } from "@docspace/shared/components/toast";
 
 type TFillingStatusDialogProps = {
   openStopFillingDialog: (formId: string | number) => void;
-  openDeleteFileDialog: (file: TFile) => void;
+  // openDeleteFileDialog: (file: TFile) => void;
 };
 
 export const useFillingStatusDialog = ({
   openStopFillingDialog,
-  openDeleteFileDialog,
 }: TFillingStatusDialogProps) => {
   const [fillingStatusDialogVisible, setFillingStatusDialogVisible] =
     useState(false);
@@ -50,9 +49,9 @@ export const useFillingStatusDialog = ({
     onCloseFillingStatusDialog();
   };
 
-  const onDelete = (item: TFile) => {
-    openDeleteFileDialog(item);
-  };
+  // const onDelete = (item: TFile) => {
+  //   openDeleteFileDialog(item);
+  // };
 
   const onResetFilling = async (item: TFile) => {
     try {
@@ -72,7 +71,7 @@ export const useFillingStatusDialog = ({
     setFillingStatusDialogVisible,
     onCloseFillingStatusDialog,
     onStopFilling,
-    onDelete,
+    // onDelete,
     onResetFilling,
   };
 };

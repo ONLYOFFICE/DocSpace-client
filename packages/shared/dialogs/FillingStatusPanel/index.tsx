@@ -169,7 +169,12 @@ export const FillingStatusPanel = ({
           );
         })
         .with(FileFillingFormStatus.Stopped, () => {
-          if (!(file.security?.ResetFilling || file.security?.Delete))
+          if (
+            !(
+              file.security?.ResetFilling ||
+              (file.security?.Delete && onDelete)
+            )
+          )
             return null;
 
           return (
@@ -185,7 +190,7 @@ export const FillingStatusPanel = ({
                   size={ButtonSize.normal}
                 />
               ) : null}
-              {file.security?.Delete ? (
+              {file.security?.Delete && onDelete ? (
                 <Button
                   id="panel_button_file-delete"
                   key="panel_button_file-delete"

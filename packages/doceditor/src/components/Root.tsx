@@ -61,8 +61,6 @@ import FillingStatusDialog from "./filling-status-dialog";
 import { DialogAsideSkeleton } from "@docspace/shared/skeletons";
 import { useStopFillingDialog } from "@/hooks/useStopFillingDialog";
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
-import DeleteFileDialog from "./DeleteFileDialog";
-import { useDeleteFileDialog } from "@/hooks/useDeleteFileDialog";
 import { useShareFormDialog } from "@/hooks/useShareFormDialog";
 
 const DeepLink = dynamic(() => import("./deep-link"), {
@@ -209,14 +207,6 @@ const Root = ({
   } = useStartFillingPanel(fileInfo, roomId);
 
   useUpdateSearchParamId(fileId, hash);
-
-  const {
-    deleteFileDialogVisible,
-    onCloseDeleteFileDialog,
-    onSubmitDeleteFile,
-    openDeleteFileDialog,
-  } = useDeleteFileDialog();
-
   const {
     stopFillingDialogVisible,
     formId,
@@ -230,11 +220,10 @@ const Root = ({
     setFillingStatusDialogVisible,
     onCloseFillingStatusDialog,
     onStopFilling,
-    onDelete,
+    // onDelete,
     onResetFilling,
   } = useFillingStatusDialog({
     openStopFillingDialog,
-    openDeleteFileDialog,
   });
 
   React.useEffect(() => {
@@ -371,7 +360,7 @@ const Root = ({
           visible={fillingStatusDialogVisible}
           onClose={onCloseFillingStatusDialog}
           onStopFilling={onStopFilling}
-          onDelete={onDelete}
+          // onDelete={onDelete}
           onResetFilling={onResetFilling}
         />
       ) : null}
@@ -384,12 +373,6 @@ const Root = ({
         />
       )}
 
-      {deleteFileDialogVisible && (
-        <DeleteFileDialog
-          onClose={onCloseDeleteFileDialog}
-          onSubmit={onSubmitDeleteFile}
-        />
-      )}
       {shareFormDialogVisible && fileInfo && (
         <ShareFormDialog
           file={fileInfo}

@@ -238,12 +238,13 @@ const StartFillingPanel = ({
             roomId={roomId}
             useAside
             withHeader
+            withGuests
             withCancelButton
             onSubmit={onSelectUser}
             onCancel={closeUsersPanel}
             onClose={closeUsersPanel}
-            submitButtonLabel={t("Common:Start")}
-            cancelButtonLabel={t("Common:Cancel")}
+            submitButtonLabel={t("Common:SelectAction")}
+            cancelButtonLabel={t("Common:CancelButton")}
             disableDisabledUsers={false}
             disableSubmitButton={false}
             disableInvitedUsers={[]}
@@ -268,6 +269,7 @@ const StartFillingPanel = ({
             roomId={roomId}
             useAside
             withHeader
+            withGuests
             isMultiSelect
             withAccessRights
             accessRights={accessOptions as TAccessRight[]}

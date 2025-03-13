@@ -42,6 +42,8 @@ const EmptyTrashDialogComponent = (props) => {
     emptyArchive,
 
     isArchiveFolder,
+    emptyPersonalRoom,
+    isPersonalReadOnly,
   } = props;
 
   const onClose = () => setEmptyTrashDialogVisible(false);
@@ -51,8 +53,16 @@ const EmptyTrashDialogComponent = (props) => {
     const translations = {
       successOperation: isArchiveFolder
         ? t("SuccessEmptyArchived")
-        : t("SuccessEmptyTrash"),
+        : isPersonalReadOnly
+          ? t("SuccessEmptyPersonal")
+          : t("SuccessEmptyTrash"),
     };
+
+    if (isPersonalReadOnly) {
+      emptyPersonalRoom();
+
+      return;
+    }
 
     if (isArchiveFolder) {
       emptyArchive(translations);
@@ -73,6 +83,12 @@ const EmptyTrashDialogComponent = (props) => {
     return () => window.removeEventListener("keydown", onKeyPress);
   }, []);
 
+  const description = isArchiveFolder
+    ? t("DeleteForeverNoteArchive")
+    : isPersonalReadOnly
+      ? t("DeleteForeverNoteDocument")
+      : t("DeleteForeverNote");
+
   return (
     <ModalDialog
       isLoading={!tReady}
@@ -82,11 +98,7 @@ const EmptyTrashDialogComponent = (props) => {
     >
       <ModalDialog.Header>{t("DeleteForeverTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>
-          {isArchiveFolder
-            ? t("DeleteForeverNoteArchive")
-            : t("DeleteForeverNote")}
-        </Text>
+        <Text noSelect>{description}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -122,9 +134,9 @@ const EmptyTrashDialog = withTranslation([
 export default inject(
   ({ filesStore, filesActionsStore, treeFoldersStore, dialogsStore }) => {
     const { isLoading } = filesStore;
-    const { emptyTrash, emptyArchive } = filesActionsStore;
+    const { emptyTrash, emptyArchive, emptyPersonalRoom } = filesActionsStore;
 
-    const { isArchiveFolder } = treeFoldersStore;
+    const { isArchiveFolder, isPersonalReadOnly } = treeFoldersStore;
 
     const { emptyTrashDialogVisible: visible, setEmptyTrashDialogVisible } =
       dialogsStore;
@@ -139,6 +151,8 @@ export default inject(
       emptyArchive,
 
       isArchiveFolder,
+      isPersonalReadOnly,
+      emptyPersonalRoom,
     };
   },
 )(observer(EmptyTrashDialog));

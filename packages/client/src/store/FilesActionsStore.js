@@ -657,12 +657,13 @@ class FilesActionStore {
     return operationItem;
   };
 
-  emptyPersonalFolder = async () => {
+  emptyPersonalRoom = async (translations) => {
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
     const { setSecondaryProgressBarData } = secondaryProgressDataStore;
-    // debugger;
+
     const { addActiveItems, files, folders } = this.filesStore;
+    const { fetchTreeFolders } = this.treeFoldersStore;
 
     const fileIds = files.map((f) => f.id);
     const folderIds = folders.map((f) => f.id);
@@ -690,18 +691,17 @@ class FilesActionStore {
 
         await this.loopEmptyOperation(data, pbData);
 
-        this.updateCurrentFolder(
-          fileIds,
-          folderIds,
-          null,
-          pbData.operationId,
-          pbData.operation,
+        toastr.success(translations.successOperation);
+
+        window.DocSpace.navigate(
+          combineUrl(window.ClientConfig?.proxy?.url, "/"),
         );
+
+        fetchTreeFolders();
 
         clearActiveOperations(fileIds, folderIds);
       });
     } catch (err) {
-      debugger;
       clearActiveOperations(fileIds, folderIds);
       setSecondaryProgressBarData({
         completed: true,

@@ -1235,9 +1235,7 @@ class ContextOptionsStore {
   };
 
   onEmptyPersonalAction = () => {
-    const { emptyPersonalFolder } = this.filesActionsStore;
-
-    emptyPersonalFolder();
+    this.dialogsStore.setEmptyTrashDialogVisible(true);
   };
 
   onRestoreAllAction = () => {

@@ -252,6 +252,7 @@ export type TListenEventCallbackMap = {
     id: string;
     data: TUser;
     admin: string;
+    hasPersonalFolder: boolean;
   }) => void;
 };
 

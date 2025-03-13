@@ -215,6 +215,7 @@ class UsersStore {
       id: string;
       data: TUser;
       admin: string;
+      hasPersonalFolder: boolean;
     }) => {
       console.log(`[WS] ${SocketEvents.ChangeMyType}, id: ${value?.id}`);
 
@@ -226,11 +227,14 @@ class UsersStore {
       const { setSecurity } = this.selectedFolderStore;
       const { fetchFiles, filter } = this.filesStore;
 
-      const { data, id, admin } = value;
+      const { data, id, admin, hasPersonalFolder } = value;
       const { isAdmin, isRoomAdmin, isVisitor, isCollaborator } = data;
       const { pathname } = window.location;
 
-      setUser(data);
+      const userData = { ...data, hasPersonalFolder };
+
+      setUser(userData);
+
       fetchTreeFolders();
 
       if (isVisitor) {

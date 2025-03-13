@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useState, createElement } from "react";
 import { useTheme } from "styled-components";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
@@ -141,6 +141,38 @@ export const ChatWidget = memo(
         })
       : "";
 
+    const chat = createElement("langflow-chat-widget", {
+      // api_key: "string",
+      // output_type: "string",
+      // input_type: "string",
+      // output_component: "string",
+      // host_url: "string",
+      // flow_id: "string",
+      // tweaks: "json",
+      // output_type: "string",
+      // input_type: "string",
+      // output_component: "string",
+      tweaks: tweaks || undefined,
+      host_url: window.location.origin,
+      bearer_token: getCookie("access_token_lf"),
+      // additional_headers={undefined}
+      session_id: "",
+      // api_key="string"
+      flow_id: flowId,
+      list_files: JSON.stringify(files),
+      provider_image: ProviderImageUrl,
+      user_icon_image: UserIconImageUrl,
+      provider_icon_image: ProviderIconImageUrl,
+      send_icon_image: SendIconReactSvgUrl,
+      interface_theme: isBase ? "light" : "dark",
+      interface_direction: interfaceDirection,
+      header_text: "DocSpace AI chat", // TODO: AI tranlstion
+      empty_screen_text: "How can I help you today?", // TODO: AI tranlstion
+      placeholder_text: "Message ...", // TODO: AI tranlstion
+      chat_user_name: "Me", // TODO: AI tranlstion
+      chat_provider_name: "AI", // TODO: AI tranlstion
+    });
+
     const chatWidgetComponent = (
       <div className={styles.chatWrapper} id="chatPanelWrapper">
         <div className={styles.chatPanel}>
@@ -155,30 +187,7 @@ export const ChatWidget = memo(
             isStroke
             aria-label="close"
           />
-          <langflow-chat-widget
-            // output_type: "string",
-            // input_type: "string",
-            // output_component: "string",
-            tweaks={tweaks || undefined}
-            host_url={window.location.origin}
-            bearer_token={getCookie("access_token_lf")}
-            // additional_headers={undefined}
-            session_id=""
-            // api_key="string"
-            flow_id={flowId}
-            list_files={JSON.stringify(files)}
-            provider_image={ProviderImageUrl}
-            user_icon_image={UserIconImageUrl}
-            provider_icon_image={ProviderIconImageUrl}
-            send_icon_image={SendIconReactSvgUrl}
-            interface_theme={isBase ? "light" : "dark"}
-            interface_direction={interfaceDirection}
-            header_text="DocSpace AI chat" // TODO: AI tranlstion
-            empty_screen_text="How can I help you today?" // TODO: AI tranlstion
-            placeholder_text="Message ..." // TODO: AI tranlstion
-            chat_user_name="Me" // TODO: AI tranlstion
-            chat_provider_name="AI" // TODO: AI tranlstion
-          />
+          {chat}
         </div>
       </div>
     );

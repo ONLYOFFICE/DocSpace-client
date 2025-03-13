@@ -327,7 +327,7 @@ const VersionRow = (props) => {
             {info.contentLength}
           </Text> */}
         </div>
-        <div>
+        <div className="version-comment-wrapper">
           {showEditPanel ? (
             <Textarea
               className="version_edit-comment"
@@ -347,7 +347,12 @@ const VersionRow = (props) => {
           </Text>
         </div>
         {showEditPanel ? (
-          <div className="version_edit-comment">
+          <div
+            className="version_edit-comment"
+            style={{
+              margin: "8px 0 2px 70px",
+            }}
+          >
             <div className="version_edit-comment-button-primary">
               <Button
                 isDisabled={isSavingComment}

@@ -2202,6 +2202,7 @@ class FilesStore {
         "restore",
         "rename",
         "edit-index",
+        "vectorize",
         "separator2",
         // "unsubscribe",
         "delete",

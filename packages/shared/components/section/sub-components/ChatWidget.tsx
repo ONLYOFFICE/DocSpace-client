@@ -26,18 +26,20 @@
 
 import { memo, useEffect } from "react";
 import { useTheme } from "styled-components";
+
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import SendIconReactSvgUrl from "PUBLIC_DIR/images/send-message.svg?url";
 import ProviderIconImageUrl from "PUBLIC_DIR/images/icons/32/ai.bot32.svg?url";
 import UserIconImageUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import ProviderImageUrl from "PUBLIC_DIR/images/ai.bot.svg?url";
+
 import { TFile, TFolder } from "../../../api/files/types";
 import { DeviceType } from "../../../enums";
 import { Portal } from "../../portal";
 import { IconButton } from "../../icon-button";
-import styles from "../Section.module.scss";
 import { TViewAs } from "../../../types";
-import { classNames } from "../../../utils";
+import { classNames, getCookie } from "../../../utils";
+import styles from "../Section.module.scss";
 
 export const ChatWidget = memo(
   ({
@@ -60,14 +62,7 @@ export const ChatWidget = memo(
     const { interfaceDirection, isBase } = useTheme();
 
     const toChatFiles = () => {
-      const files = chatFiles.filter((f) => {
-        if ("fileExst" in f) {
-          return f.fileExst === ".docx" || !f.fileExst;
-        }
-        return true;
-      });
-
-      return files.map((f) => {
+      return chatFiles.map((f) => {
         return { id: f.id, title: f.title, isFolder: f.isFolder };
       });
     };
@@ -93,6 +88,44 @@ export const ChatWidget = memo(
 
     const files = toChatFiles();
 
+    const parentId = chatFiles.length
+      ? "parentId" in chatFiles[0]
+        ? chatFiles[0].parentId
+        : chatFiles[0].folderId
+      : "";
+
+    const tweaks = parentId
+      ? JSON.stringify({
+          tweaks: {
+            "ChatInput-hcS64": {},
+            "TogetherAIModel-Qfvv7": {},
+            "ChatOutput-tjfon": {},
+            "InputParser-6wAPc": {},
+            "ConditionalRouter-CUNeM": {},
+            "RunFlow-TnxpB": {},
+            "ParseReferences-wn59Q": {},
+            "ConditionalRouter-4jjfR": {},
+            "TextInput-OvpRl": {},
+            "GetFilesFromFolders-BWaG7": {},
+            "TextInput-z5Y8m": {
+              current_folder: parentId,
+            },
+            "RagPrompt-vGvXR": {},
+            "SystemPrompt-cM1BX": {},
+            "GetFoldersContent-APjkO": {},
+            "ToolCallingAgent-U12uF": {},
+            "OnlyofficeDocspaceFolderListDocuments-6gGL6": {},
+            "TogetherAIModel-i6idC": {},
+            "RunFlow-PBB3K": {},
+            "RagPrompt-uEtrv": {},
+            "CustomComponent-TPR8t": {},
+            "TogetherAIModel-YLhJ2": {},
+            "ChatOutput-4t5Zg": {},
+            "EnvExtractor-picCE": {},
+          },
+        })
+      : "";
+
     const chatWidgetComponent = (
       <div className={styles.chatWrapper} id="chatPanelWrapper">
         <div className={styles.chatPanel}>
@@ -108,13 +141,16 @@ export const ChatWidget = memo(
             aria-label="close"
           />
           <langflow-chat-widget
-            // api_key: "string",
             // output_type: "string",
             // input_type: "string",
             // output_component: "string",
-            // host_url: "string",
-            // flow_id: "string",
-            // tweaks: "json",
+            tweaks={tweaks || undefined}
+            host_url={window.location.origin}
+            bearer_token={getCookie("access_token_lf")}
+            // additional_headers={undefined}
+            session_id=""
+            // api_key="string"
+            flow_id="6652b94b-c725-4c89-8287-a1e3141f8c14"
             list_files={JSON.stringify(files)}
             provider_image={ProviderImageUrl}
             user_icon_image={UserIconImageUrl}

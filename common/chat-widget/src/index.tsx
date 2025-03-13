@@ -1,4 +1,5 @@
 import r2wc from "@r2wc/react-to-web-component";
+
 import ChatWidget from "./chatWidget";
 
 customElements.define(
@@ -16,8 +17,8 @@ customElements.define(
       // online: "boolean",
       // window_title: "string",
       // placeholder: "string",
-      // additional_headers: "json",
-      // session_id: "string",
+      additional_headers: "json",
+      session_id: "string",
       list_files: "json",
       provider_image: "string",
       send_icon_image: "string",
@@ -32,6 +33,7 @@ customElements.define(
       chat_user_name: "string",
       chat_provider_name: "string",
       popup_view: "string",
+      bearer_token: "string",
     },
   })
 );

@@ -25,8 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useRef } from "react";
+
 import { Scrollbar } from "../components/scrollbar";
 import { ChatMessageType } from "../types/chatWidget";
+
 import ChatEmptyScreen from "./ChatEmptyScreen";
 import ChatMessage from "./ChatMessage";
 

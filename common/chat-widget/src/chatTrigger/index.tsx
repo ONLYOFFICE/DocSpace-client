@@ -1,4 +1,5 @@
 import { MessageSquare, X } from "lucide-react";
+
 export default function ChatTrigger({
   isOpen,
   setIsOpen,

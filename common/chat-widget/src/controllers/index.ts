@@ -10,10 +10,15 @@ export async function sendMessage(
   output_component?: string,
   tweaks?: Object,
   api_key?: string,
-  additional_headers?: { [key: string]: string }
+  additional_headers?: { [key: string]: string },
+  bearer_token?: string
 ) {
-  let data: any;
-  data = { input_type, input_value: message, output_type };
+  const data: { [key: string]: unknown } = {
+    input_type,
+    input_value: message,
+    output_type,
+  };
+
   if (tweaks) {
     data["tweaks"] = tweaks;
   }
@@ -23,17 +28,27 @@ export async function sendMessage(
   let headers: { [key: string]: string } = {
     "Content-Type": "application/json",
   };
+
+  if (bearer_token) {
+    headers["Authorization"] = `Bearer ${bearer_token}`;
+  }
+
   if (api_key) {
     headers["x-api-key"] = api_key;
   }
   if (additional_headers) {
     headers = Object.assign(headers, additional_headers);
   }
-  if (sessionId.current && sessionId.current != "") {
+  if (sessionId.current && sessionId.current !== "") {
     data.session_id = sessionId.current;
   }
-  let response = axios.post(`${baseUrl}/api/v1/run/${flowId}`, data, {
-    headers,
-  });
+  const response = await axios.post(
+    `${baseUrl}/onlyflow/api/v1/run/${flowId}`,
+    data,
+    {
+      headers,
+    }
+  );
+
   return response;
 }

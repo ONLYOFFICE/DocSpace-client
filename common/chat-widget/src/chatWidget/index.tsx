@@ -43,6 +43,7 @@ export default function ChatWidget({
   chat_user_name,
   chat_provider_name,
   popup_view,
+  bearer_token,
 }: {
   api_key?: string;
   input_value: string;
@@ -71,6 +72,7 @@ export default function ChatWidget({
   chat_user_name?: string;
   chat_provider_name?: string;
   popup_view?: string;
+  bearer_token?: string;
 }) {
   const sessionId = useRef(session_id ?? uuidv4());
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -103,7 +105,8 @@ export default function ChatWidget({
       output_component,
       tweaks,
       api_key,
-      additional_headers
+      additional_headers,
+      bearer_token
     )
       .then((res) => {
         if (

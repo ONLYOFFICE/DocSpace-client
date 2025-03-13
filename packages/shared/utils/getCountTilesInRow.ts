@@ -32,7 +32,7 @@ import { isDesktop, isMobile } from "./device";
 export const getCountTilesInRow = (isRooms?: boolean) => {
   const isDesktopView = isDesktop();
   const isMobileView = isMobile();
-  const tileGap = isRooms ? 16 : 14;
+  const tileGap = 16;
 
   const elem = document.getElementsByClassName("section-wrapper-content")[0];
   let containerWidth = 0;

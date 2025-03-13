@@ -224,7 +224,7 @@ class UsersStore {
       const { fetchTreeFolders, personalFolderId } = this.treeFoldersStore;
       const { setUser } = this.userStore;
       const { setReducedRightsData } = this.dialogsStore;
-      const { setSecurity } = this.selectedFolderStore;
+      const { setSecurity, getSelectedFolder } = this.selectedFolderStore;
       const { fetchFiles, filter } = this.filesStore;
 
       const { data, id, admin, hasPersonalFolder } = value;
@@ -243,9 +243,11 @@ class UsersStore {
 
       if (pathname.includes("rooms/personal")) {
         try {
+          const selectedFolder = getSelectedFolder();
+
           const [personalFolder] = await Promise.all([
             getPersonalFolderTree(),
-            fetchFiles(personalFolderId, filter),
+            fetchFiles(selectedFolder.id, filter),
           ]);
 
           setSecurity(personalFolder[0].security);

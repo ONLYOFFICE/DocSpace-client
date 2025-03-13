@@ -193,6 +193,14 @@ class TreeFoldersStore {
     return this.rootFoldersTitles[FolderType.USER]?.title;
   }
 
+  get trashFolderTitle() {
+    return this.rootFoldersTitles[FolderType.TRASH]?.title;
+  }
+
+  get archiveFolderTitle() {
+    return this.rootFoldersTitles[FolderType.Archive]?.title;
+  }
+
   get isPersonalReadOnly() {
     return (
       this.isPersonalRoom &&

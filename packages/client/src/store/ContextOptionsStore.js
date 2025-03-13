@@ -1235,6 +1235,8 @@ class ContextOptionsStore {
   };
 
   onEmptyPersonalAction = () => {
+    if (this.filesActionsStore.emptyPersonalRoomInProgress) return;
+
     this.dialogsStore.setEmptyTrashDialogVisible(true);
   };
 

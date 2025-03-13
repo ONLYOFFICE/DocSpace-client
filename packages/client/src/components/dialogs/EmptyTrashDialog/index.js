@@ -44,22 +44,28 @@ const EmptyTrashDialogComponent = (props) => {
     isArchiveFolder,
     emptyPersonalRoom,
     isPersonalReadOnly,
+    personalUserFolderTitle,
+    trashFolderTitle,
+    archiveFolderTitle,
   } = props;
 
   const onClose = () => setEmptyTrashDialogVisible(false);
 
+  const sectionName = isArchiveFolder
+    ? archiveFolderTitle
+    : isPersonalReadOnly
+      ? personalUserFolderTitle
+      : trashFolderTitle;
+
   const onEmptyTrash = () => {
     onClose();
+
     const translations = {
-      successOperation: isArchiveFolder
-        ? t("SuccessEmptyArchived")
-        : isPersonalReadOnly
-          ? t("SuccessEmptyPersonal")
-          : t("SuccessEmptyTrash"),
+      successOperation: t("SuccessEmptyAction", { sectionName }),
     };
 
     if (isPersonalReadOnly) {
-      emptyPersonalRoom();
+      emptyPersonalRoom(translations);
 
       return;
     }
@@ -83,11 +89,7 @@ const EmptyTrashDialogComponent = (props) => {
     return () => window.removeEventListener("keydown", onKeyPress);
   }, []);
 
-  const description = isArchiveFolder
-    ? t("DeleteForeverNoteArchive")
-    : isPersonalReadOnly
-      ? t("DeleteForeverNoteDocument")
-      : t("DeleteForeverNote");
+  const description = t("DeleteForeverNote", { sectionName });
 
   return (
     <ModalDialog
@@ -136,7 +138,13 @@ export default inject(
     const { isLoading } = filesStore;
     const { emptyTrash, emptyArchive, emptyPersonalRoom } = filesActionsStore;
 
-    const { isArchiveFolder, isPersonalReadOnly } = treeFoldersStore;
+    const {
+      isArchiveFolder,
+      isPersonalReadOnly,
+      personalUserFolderTitle,
+      trashFolderTitle,
+      archiveFolderTitle,
+    } = treeFoldersStore;
 
     const { emptyTrashDialogVisible: visible, setEmptyTrashDialogVisible } =
       dialogsStore;
@@ -153,6 +161,9 @@ export default inject(
       isArchiveFolder,
       isPersonalReadOnly,
       emptyPersonalRoom,
+      personalUserFolderTitle,
+      trashFolderTitle,
+      archiveFolderTitle,
     };
   },
 )(observer(EmptyTrashDialog));

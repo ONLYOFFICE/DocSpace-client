@@ -152,6 +152,8 @@ class FilesActionStore {
 
   emptyTrashInProgress = false;
 
+  emptyPersonalRoomInProgress = false;
+
   processCreatingRoomFromData = false;
 
   alreadyExportingRoomIndex = false;
@@ -618,45 +620,6 @@ class FilesActionStore {
     }
   };
 
-  loopEmptyOperation = async (data, pbData) => {
-    const { secondaryProgressDataStore } = this.uploadDataStore;
-    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
-
-    if (!data) {
-      setSecondaryProgressBarData({
-        operation: pbData.operation,
-        alert: false,
-        completed: true,
-        operationId: pbData.operationId,
-      });
-
-      return;
-    }
-
-    let progress = data.progress;
-
-    let operationItem = data;
-    let finished = data.finished;
-
-    while (!finished) {
-      const item = await getEmptyPersonalProgress();
-      operationItem = item;
-
-      progress = item ? item.progress : 100;
-      finished = item ? item.finished : true;
-
-      setSecondaryProgressBarData({
-        operation: pbData.operation,
-        percent: progress,
-        alert: false,
-        currentFile: item,
-        operationId: pbData.operationId,
-      });
-    }
-
-    return operationItem;
-  };
-
   emptyPersonalRoom = async (translations) => {
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
@@ -672,7 +635,7 @@ class FilesActionStore {
 
     const operationId = uniqueid("operation_");
 
-    // this.emptyTrashInProgress = true;
+    this.emptyPersonalRoomInProgress = true;
 
     const pbData = {
       operation: OPERATIONS_NAME.deletePermanently,
@@ -689,13 +652,42 @@ class FilesActionStore {
         if (result?.error) return Promise.reject(result.error);
         const data = result ?? null;
 
-        await this.loopEmptyOperation(data, pbData);
+        if (!data) {
+          setSecondaryProgressBarData({
+            operation: pbData.operation,
+            alert: true,
+            completed: true,
+            operationId: pbData.operationId,
+          });
+
+          return;
+        }
+
+        let progress = data.percentage;
+        let finished = data.isCompleted;
+
+        while (!finished) {
+          const item = await getEmptyPersonalProgress();
+
+          progress = item ? item.percentage : 100;
+          finished = item ? item.isCompleted : true;
+
+          setSecondaryProgressBarData({
+            operation: pbData.operation,
+            percent: progress,
+            alert: false,
+            currentFile: item,
+            operationId: pbData.operationId,
+          });
+        }
 
         toastr.success(translations.successOperation);
 
-        window.DocSpace.navigate(
-          combineUrl(window.ClientConfig?.proxy?.url, "/"),
-        );
+        setSecondaryProgressBarData({
+          completed: true,
+          alert: false,
+          ...pbData,
+        });
 
         fetchTreeFolders();
 
@@ -711,7 +703,7 @@ class FilesActionStore {
 
       return toastr.error(err.message ? err.message : err, null, 0, true);
     } finally {
-      // this.emptyTrashInProgress = false;
+      this.emptyPersonalRoomInProgress = false;
     }
   };
 

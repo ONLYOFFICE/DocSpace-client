@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { memo, useEffect } from "react";
+import { memo, useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
@@ -94,6 +94,21 @@ export const ChatWidget = memo(
         : chatFiles[0].folderId
       : "";
 
+    const [flowId, setFlowId] = useState<string>(
+      "6652b94b-c725-4c89-8287-a1e3141f8c14",
+    );
+
+    useEffect(() => {
+      try {
+        const storedFlowId = localStorage.getItem("x-chat-flow-id");
+        if (storedFlowId) {
+          setFlowId(storedFlowId);
+        }
+      } catch (error) {
+        console.error("Error reading flowId from localStorage:", error);
+      }
+    }, []);
+
     const tweaks = parentId
       ? JSON.stringify({
           tweaks: {
@@ -150,7 +165,7 @@ export const ChatWidget = memo(
             // additional_headers={undefined}
             session_id=""
             // api_key="string"
-            flow_id="6652b94b-c725-4c89-8287-a1e3141f8c14"
+            flow_id={flowId}
             list_files={JSON.stringify(files)}
             provider_image={ProviderImageUrl}
             user_icon_image={UserIconImageUrl}

@@ -43,6 +43,7 @@ import useItemList, {
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import RowView from "../row-view";
+import TileView from "../tile-view";
 import EmptyView from "../empty-view";
 
 import { ListProps } from "./List.types";
@@ -190,7 +191,9 @@ const List = ({
     );
   }
 
-  return (
+  return settingsStore.filesViewAs === "tile" ? (
+    <TileView items={filesList} getIcon={getIcon} />
+  ) : (
     <RowView
       total={total}
       items={filesList}

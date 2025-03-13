@@ -158,6 +158,7 @@ class MembersHelper {
           options.roomAdmin,
           options.collaborator,
           options.editor,
+          options.formFiller,
           options.viewer,
           ...deleteOption,
         ];

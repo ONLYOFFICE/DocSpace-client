@@ -335,6 +335,7 @@ export const enum FileStatus {
 export const enum TenantStatus {
   PortalDeactivate = 1,
   PortalRestore = 4,
+  EncryptionProcess = 6,
 }
 
 /**
@@ -687,4 +688,11 @@ export const enum SortByFieldName {
   RoomType = "roomType",
   LastOpened = "LastOpened",
   UsedSpace = "usedspace",
+}
+
+export enum EncryptionStatus {
+  Decrypted = 0,
+  EncryptionStarted = 1,
+  Encrypted = 2,
+  DecryptionStarted = 3,
 }

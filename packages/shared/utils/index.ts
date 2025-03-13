@@ -87,6 +87,7 @@ import { injectDefaultTheme } from "./injectDefaultTheme";
 import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
 import { fakeFormFillingList } from "./formFillingTourData";
+import { getCountTilesInRow } from "./getCountTilesInRow";
 
 export {
   isBetaLanguage,
@@ -146,6 +147,7 @@ export {
   saveToSessionStorage,
   getFormFillingTipsStorageName,
   fakeFormFillingList,
+  getCountTilesInRow,
 };
 
 export const getModalType = () => {

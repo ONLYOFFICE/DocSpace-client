@@ -1,0 +1,18 @@
+{
+  "AddManually": "Shtoni manualisht",
+  "EmailErrorMessage": "Adresa e emailit nuk është e vlefshme. Ju mund ta modifikoni emailin duke klikuar dy herë mbi të.",
+  "GroupMaxAvailableRoleWarning": "Grupet mund të shtohen në një dhomë me rolin {{roleName}} si maksimum. Megjithatë, ju mund të ndryshoni rolin e përdoruesve individualë në grup pasi të jetë shtuar me sukses.",
+  "InvitationLanguage": "Gjuha e ftesës",
+  "InviteMembersManuallyDescription": "Ftoni anëtarë të rinj në {{productName}} personalisht me email",
+  "InviteMembersSearchPlaceholder": "Ftoni anëtarët me email",
+  "InviteToRoomManuallyInfo": "Shto kontaktet ekzistuese të {{productName}}. Ose ftoni mysafirë të rinj personalisht me email. Të ftuar të rinj do të shtohen në listën tuaj të të ftuarve.",
+  "InviteToRoomSearchPlaceholder": "Kërkoni dhe ftoni me emër ose email",
+  "InviteViaLink": "Ftoni përmes lidhjes",
+  "InviteViaLinkDescriptionAccounts": "Krijo një lidhje universale për vetëautorizim në {{productName}}",
+  "InviteViaLinkDescriptionRoom": "Krijo një lidhje universale për vetë-autorizimin në dhomë",
+  "LinkCopySuccess": "Lidhja është kopjuar",
+  "ResetChange": "Rivendos ndryshimin",
+  "SendInvitation": "Dërgoni ftesë",
+  "UserMaxAvailableRoleWarning": "Vizitorët dhe përdoruesit nuk mund të caktohen si menaxherë të dhomës. Vetëm administratorët e dhomës dhe {{productName}} janë të përshtatshëm për rolin e specifikuar.",
+  "UsersAlreadyAdded": "Disa përdorues janë shtuar tashmë"
+}

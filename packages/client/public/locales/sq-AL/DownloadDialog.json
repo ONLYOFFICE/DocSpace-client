@@ -1,0 +1,13 @@
+{
+  "AccessPasswordMessage": "Ky skedar është i mbrojtur, ju lutem shkruani fjalëkalimin për të hyrë në të ose për ta shkarkuar në formatin origjinal.",
+  "ChooseFormatText": "Zgjidhni formatin për çdo skedar që do të shkarkohet",
+  "ConvertMessage": "Në qoftë se zgjidhni ta konvertoni skedarin në një format të ndryshëm nga origjinali, disa të dhëna mund të humbasin.",
+  "ConvertToZip": "Skedarët do të kompesohen në <strong>.zip skedar</strong>",
+  "CustomFormat": "Format i personalizuar",
+  "DownloadOriginalFormat": "Në formatin origjinal",
+  "FileProtectionMessage": "Këto skedarë janë të mbrojtur. Ju lutem provoni të vendosni fjalëkalimin për të gjithë skedarët. Nëse nuk e mbani mend fjalëkalimin, por ju nevojiten këta skedarë, mund të i shkarkoni në formatin e tyre origjinal ose mundeni thjesht t'i hiqni nga lista.",
+  "OriginalFormat": "Formati origjinal",
+  "PasswordEntered": "Fjalëkalimi është futur",
+  "ProtectedFiles": "Skedarë të mbrojtur",
+  "RemovedFromList": "Fshirë nga lista"
+}

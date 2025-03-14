@@ -28,6 +28,7 @@ import type { Dispatch, SetStateAction } from "react";
 import type { TUser } from "../../api/people/types";
 import type { TSettings } from "../../api/settings/types";
 import type { IRole } from "../../components/filling-role-selector";
+import type { TFormRoleMappingRequest } from "../../api/files/types";
 
 export type Invitation = { id: string | number; access: string | number };
 
@@ -37,8 +38,8 @@ export interface IStartFillingPanelProps {
   settings: TSettings;
   fileId: number;
   roomId: string;
-  onStartFilling: VoidFunction;
   setStartFillingPanelVisible: Dispatch<SetStateAction<boolean>>;
+  onSubmit: (data: TFormRoleMappingRequest) => Promise<void>;
   inviteUserToRoom: (
     roomId: string,
     invitations: Invitation[],

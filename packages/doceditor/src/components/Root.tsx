@@ -204,6 +204,7 @@ const Root = ({
     startFillingPanelVisible,
     setStartFillingPanelVisible,
     onStartFillingVDRPanel,
+    onSubmitStartFilling,
   } = useStartFillingPanel(fileInfo, roomId);
 
   useUpdateSearchParamId(fileId, hash);
@@ -304,6 +305,7 @@ const Root = ({
           onStartFillingVDRPanel={onStartFillingVDRPanel}
           setFillingStatusDialogVisible={setFillingStatusDialogVisible}
           openShareFormDialog={openShareFormDialog}
+          onStartFilling={onStartFilling}
         />
       )}
 
@@ -348,7 +350,7 @@ const Root = ({
           roomId={roomId}
           settings={settings}
           fileId={fileInfo.id}
-          onStartFilling={onStartFilling}
+          onSubmit={onSubmitStartFilling}
           inviteUserToRoom={inviteUserToRoom}
           setStartFillingPanelVisible={setStartFillingPanelVisible}
         />

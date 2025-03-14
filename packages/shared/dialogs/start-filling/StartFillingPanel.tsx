@@ -54,7 +54,6 @@ import type { TUser } from "../../api/people/types";
 import type { TGroup } from "../../api/groups/types";
 import { getAccessOptions } from "../../utils/getAccessOptions";
 import { RoomsType, ShareAccessRights } from "../../enums";
-import { formRoleMapping } from "../../api/files";
 
 import type {
   Invitation,
@@ -66,7 +65,6 @@ const StartFillingPanel = ({
   fileId,
   roomId,
   settings,
-  onStartFilling,
   inviteUserToRoom,
   setStartFillingPanelVisible,
   ...props
@@ -125,20 +123,20 @@ const StartFillingPanel = ({
 
   const onSubmit = async () => {
     startTransition(async () => {
-      await formRoleMapping({
-        formId: fileId,
-        roles: roles.map((role) => ({
-          userId: role.user!.id,
-          roleName: role.name,
-          roleColor: role.color.split("#")[1],
-        })),
-      }).catch((err) => {
-        console.log(err);
-      });
-
+      await props
+        .onSubmit({
+          formId: fileId,
+          roles: roles.map((role) => ({
+            userId: role.user!.id,
+            roleName: role.name,
+            roleColor: role.color.split("#")[1],
+          })),
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       startTransition(() => {
         closeStartFillingPanel();
-        onStartFilling();
       });
     });
   };

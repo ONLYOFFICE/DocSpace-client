@@ -24,13 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, startTransition } from "react";
 
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { setRoomSecurity } from "@docspace/shared/api/rooms";
 import type { Invitation } from "@docspace/shared/dialogs/start-filling/StartFillingPanel.types";
+import type {
+  TFile,
+  TFormRoleMappingRequest,
+} from "@docspace/shared/api/files/types";
+import { formRoleMapping } from "@docspace/shared/api/files";
+import { toastr } from "@docspace/shared/components/toast";
+
 import type { TFormRole } from "../types";
-import type { TFile } from "@docspace/shared/api/files/types";
 
 export const useStartFillingPanel = (
   file: TFile | undefined,
@@ -39,6 +45,8 @@ export const useStartFillingPanel = (
   const [roles, setRoles] = useState<TFormRole[]>([]);
   const [startFillingPanelVisible, setStartFillingPanelVisible] =
     useState(false);
+
+  const resolveRef = useRef<() => void>();
 
   const inviteUserToRoom = useCallback(
     (roomId: string, invitations: Invitation[]) => {
@@ -53,21 +61,39 @@ export const useStartFillingPanel = (
     [],
   );
 
+  const onSubmitStartFilling = async (data: TFormRoleMappingRequest) => {
+    try {
+      await formRoleMapping(data);
+      const docEditor =
+        typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+
+      await new Promise<void>((resolve, reject) => {
+        resolveRef.current = resolve;
+        docEditor?.startFilling(true);
+      });
+
+      const searchParams = new URLSearchParams();
+
+      if (file) searchParams.append("formId", file.id.toString());
+      if (roomId) searchParams.append("roomId", roomId);
+      const origin = window.location.origin;
+
+      setTimeout(() => {
+        window.location.assign(
+          `${origin}/doceditor/start-filling?${searchParams.toString()}`,
+        );
+      });
+    } catch (error) {
+      console.error(error);
+      toastr.error(error as Error);
+    }
+  };
+
   const onStartFilling = () => {
-    const docEditor =
-      typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+    console.log("onStartFilling");
 
-    const searchParams = new URLSearchParams();
-
-    if (file) searchParams.append("formId", file.id.toString());
-    if (roomId) searchParams.append("roomId", roomId);
-
-    docEditor?.startFilling(true);
-    const origin = window.location.origin;
-
-    window.location.replace(
-      `${origin}/doceditor/start-filling?${searchParams.toString()}`,
-    );
+    resolveRef.current?.();
+    resolveRef.current = undefined;
   };
 
   const onStartFillingVDRPanel = (roles: TFormRole[]) => {
@@ -79,6 +105,7 @@ export const useStartFillingPanel = (
     roles,
     onStartFilling,
     inviteUserToRoom,
+    onSubmitStartFilling,
     onStartFillingVDRPanel,
     startFillingPanelVisible,
     setStartFillingPanelVisible,

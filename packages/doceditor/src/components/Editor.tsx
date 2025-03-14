@@ -61,6 +61,7 @@ type IConfigType = IConfig & {
     onRequestStartFilling?: (event: object) => void;
     onSubmit?: (event: object) => void;
     onRequestFillingStatus?: (event: object) => void;
+    onStartFilling?: (data: object) => void;
   };
   editorConfig?: {
     customization?: {
@@ -95,6 +96,7 @@ const Editor = ({
   onStartFillingVDRPanel,
   setFillingStatusDialogVisible,
   openShareFormDialog,
+  onStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
@@ -339,6 +341,10 @@ const Editor = ({
         default:
           break;
       }
+    };
+
+    newConfig.events.onStartFilling = () => {
+      onStartFilling?.();
     };
   }
 

@@ -603,5 +603,17 @@
   "DeleteFile": "Stai per eliminare questo file.",
   "FilePermanentlyDeleted": "Il file verrà eliminato definitivamente entro 30 giorni.",
   "MoveToTrashTitle": "Spostare nel Cestino?",
-  "CopyLink": " Copia il link"
+  "CopyLink": " Copia il link",
+  "ArchivingData": "Archiviazione dei dati",
+  "FormTemplates": "Modelli di moduli",
+  "Other": "Altro",
+  "DownloadAs": "Scaricare come",
+  "CustomFormat": "Formato personalizzato",
+  "OriginalFormat": "Formato originale",
+  "ChooseFormatText": "Scegli il formato per ogni file da scaricare",
+  "ConvertMessage": "Se scegli di convertire il file in un formato diverso dall'originale, alcuni dati potrebbero andare persi.",
+  "ConvertToZip": "I file verranno compressi in un <strong>file .zip</strong>",
+  "RemoveFromList": "Rimuovere dalla lista",
+  "PasswordProtectedFiles": "Sei pregato di <0>inserire la password</0> dei file protetti per continuare",
+  "EnterPassword": "Inserisci la Password"
 }

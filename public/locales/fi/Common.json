@@ -602,5 +602,17 @@
   "DeleteFile": "Olet poistamassa tätä tiedostoa.",
   "FilePermanentlyDeleted": "Tiedosto poistetaan pysyvästi 30 päivän päästä. ",
   "MoveToTrashTitle": "Siirretäänkö roskiin?",
-  "CopyLink": "Kopioi linkki"
+  "CopyLink": "Kopioi linkki",
+  "ArchivingData": "Tietojen arkistointi",
+  "FormTemplates": "Lomakepohjat",
+  "Other": "Muu",
+  "DownloadAs": "Lataa nimellä",
+  "CustomFormat": "Muokattu muoto",
+  "OriginalFormat": "Alkuperäinen muoto",
+  "ChooseFormatText": "Valitse kunkin ladattavan tiedoston muoto",
+  "ConvertMessage": "Jos päätät muuntaa tiedoston muuhun muotoon kuin alkuperäinen, jotkut tiedot saattavat kadota.",
+  "ConvertToZip": "Tiedostot pakataan <strong>.zip -tiedostoon</strong>",
+  "RemoveFromList": "Poista listalta",
+  "PasswordProtectedFiles": "<0>Syötä salasana<0> suojatuille tiedostoille jatkaaksesi",
+  "EnterPassword": "Anna salasana"
 }

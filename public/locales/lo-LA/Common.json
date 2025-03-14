@@ -388,5 +388,16 @@
   "DeleteFile": "ທ່ານກຳລັງຈະລຶບໄຟລ໌ນີ້. ",
   "FilePermanentlyDeleted": "ໄຟລ໌ດັ່ງກ່າວຈະຖືກລຶບອອກຖາວອນໃນ 30 ມື້.",
   "MoveToTrashTitle": "ຍ້າຍໄປຖັງຂີ້ເຫຍື້ອບໍ?",
-  "CopyLink": "ສຳເນົາລິ້ງ"
+  "CopyLink": "ສຳເນົາລິ້ງ",
+  "ArchivingData": "ການເກັບກໍາຂໍ້ມູນ",
+  "FormTemplates": "ຮູບແບບແບບຟອມ",
+  "Other": "ອື່ນໆ",
+  "DownloadAs": "ດາວໂຫລດທີ່",
+  "CustomFormat": "ຮູບແບບທີ່ກຳນົດເອງ",
+  "OriginalFormat": "ຮູບແບບຕົ້ນສະບັບ",
+  "ChooseFormatText": "ເລືອກຮູບແບບສຳລັບແຕ່ລະເອກະສານທີ່ຈະດາວໂຫລດ",
+  "ConvertMessage": "ຖ້າທ່ານເລືອກທີ່ຈະປ່ຽນໄຟລ໌ເປັນຮູບແບບທີ່ແຕກຕ່າງຈາກຕົ້ນສະບັບ, ຂໍ້ມູນບາງຢ່າງອາດຈະສູນເສຍໄປ.",
+  "ConvertToZip": "ໄຟລ໌ຕ່າງໆຈະຖືກບີບອັດເຂົ້າໃນ<strong>ແຟ້ມ.zip</strong>",
+  "RemoveFromList": "ລຶບອອກຈາກລາຍການ",
+  "EnterPassword": "ໃສ່ລະຫັດຜ່ານ"
 }

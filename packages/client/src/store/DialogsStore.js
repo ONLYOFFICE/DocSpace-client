@@ -439,7 +439,7 @@ class DialogsStore {
       if (item.checked) {
         if (!!item.fileExst || item.contentLength) {
           const format =
-            !item.format || item.format === t("OriginalFormat")
+            !item.format || item.format === t("Common:OriginalFormat")
               ? item.fileExst
               : item.format;
           if (!singleFileUrl) {

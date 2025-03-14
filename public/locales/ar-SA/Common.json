@@ -601,5 +601,17 @@
   "DeleteFile": "أنت على وشك حذف هذا الملف.",
   "FilePermanentlyDeleted": "سيتم حذف الملف بشكل دائم خلال 30 يوم.",
   "MoveToTrashTitle": "هل تريد نقله الى سلة المهملات؟",
-  "CopyLink": "نسخ الرابط"
+  "CopyLink": "نسخ الرابط",
+  "ArchivingData": "أرشفة البيانات",
+  "FormTemplates": "قوالب جاهزة",
+  "Other": "آخر",
+  "DownloadAs": "تحميل بصيغة",
+  "CustomFormat": "تنسيق مخصص",
+  "OriginalFormat": "التنسيق الأصلي",
+  "ChooseFormatText": "اختر تنسيق كل ملف ليتم تنزيله",
+  "ConvertMessage": "إذا اخترت تحويل الملف إلى تنسيق مختلف عن التنسيق الأصلي، فقد يتم فقد بعض البيانات.",
+  "ConvertToZip": "سيتم ضغط الملفات في <strong> ملف مضغوط </strong>",
+  "RemoveFromList": "قم بإزالته من القائمة",
+  "PasswordProtectedFiles": "الرجاء <0>أدخل كلمة مرور</0> للملفات المحمية للمتابعة ",
+  "EnterPassword": "أدخل كلمة المرور"
 }

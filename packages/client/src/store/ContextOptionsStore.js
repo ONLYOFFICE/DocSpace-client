@@ -652,7 +652,7 @@ class ContextOptionsStore {
 
     isFile
       ? openUrl(viewUrl, UrlActionType.Download)
-      : downloadAction(t("Translations:ArchivingData"), item).catch((err) =>
+      : downloadAction(t("Common:ArchivingData"), item).catch((err) =>
           toastr.error(err),
         );
   };
@@ -2032,7 +2032,7 @@ class ContextOptionsStore {
       {
         id: "option_remove-shared-room",
         key: "remove-shared-room",
-        label: t("Files:RemoveFromList"),
+        label: t("Common:RemoveFromList"),
         icon: CircleCrossSvgUrl,
         onClick: () => this.onRemoveSharedRooms([item]),
         disabled: !item.external,
@@ -2040,7 +2040,7 @@ class ContextOptionsStore {
       {
         id: "option_download-as",
         key: "download-as",
-        label: t("Translations:DownloadAs"),
+        label: t("Common:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
         onClick: this.onClickDownloadAs,
         disabled: !item.security?.Download,
@@ -2070,7 +2070,7 @@ class ContextOptionsStore {
       {
         id: "option_unsubscribe",
         key: "unsubscribe",
-        label: t("RemoveFromList"),
+        label: t("Common:RemoveFromList"),
         icon: RemoveSvgUrl,
         onClick: this.onClickUnsubscribe,
         disabled: false,
@@ -2146,7 +2146,7 @@ class ContextOptionsStore {
       {
         id: "option_remove-from-recent",
         key: "remove-from-recent",
-        label: t("RemoveFromList"),
+        label: t("Common:RemoveFromList"),
         icon: RemoveOutlineSvgUrl,
         onClick: () => this.onClickRemoveFromRecent(item),
         disabled: !this.treeFoldersStore.isRecentTab,
@@ -2371,13 +2371,13 @@ class ContextOptionsStore {
         icon: DownloadReactSvgUrl,
         onClick: () =>
           this.filesActionsStore
-            .downloadAction(t("Translations:ArchivingData"))
+            .downloadAction(t("Common:ArchivingData"))
             .catch((err) => toastr.error(err)),
         disabled: !hasDownloadAccess,
       },
       {
         key: "download-as",
-        label: t("Translations:DownloadAs"),
+        label: t("Common:DownloadAs"),
         icon: DownloadAsReactSvgUrl,
         onClick: this.onClickDownloadAs,
         disabled: !hasDownloadAccess || !canConvertSelected,
@@ -2412,7 +2412,7 @@ class ContextOptionsStore {
       },
       {
         key: "remove-from-recent",
-        label: t("RemoveFromList"),
+        label: t("Common:RemoveFromList"),
         icon: RemoveOutlineSvgUrl,
         onClick: () =>
           this.filesActionsStore.onClickRemoveFromRecent(selection),

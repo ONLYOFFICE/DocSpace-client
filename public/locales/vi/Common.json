@@ -601,5 +601,17 @@
   "DeleteFile": "Bạn sắp xóa tập tin này. ",
   "FilePermanentlyDeleted": "Tập tin sẽ bị xóa vĩnh viễn trong 30 ngày. ",
   "MoveToTrashTitle": "Chuyển đến thùng rác?",
-  "CopyLink": "Sao chép liên kết"
+  "CopyLink": "Sao chép liên kết",
+  "ArchivingData": "Lưu trữ dữ liệu",
+  "FormTemplates": "Mẫu biểu mẫu",
+  "Other": "Khác",
+  "DownloadAs": "Tải xuống dưới dạng",
+  "CustomFormat": "Định dạng tùy chỉnh",
+  "OriginalFormat": "Định dạng ban đầu",
+  "ChooseFormatText": "Chọn định dạng cho từng tệp được tải xuống",
+  "ConvertMessage": "Nếu bạn chọn chuyển đổi tệp sang định dạng khác với định dạng gốc, một số dữ liệu có thể bị mất.",
+  "ConvertToZip": "Các tệp sẽ được nén thành <strong>tệp .zip</strong>",
+  "RemoveFromList": "Xóa khỏi danh sách",
+  "PasswordProtectedFiles": "Vui lòng <0>nhập mật khẩu</0> cho các tập tin được bảo vệ để tiếp tục",
+  "EnterPassword": "Nhập mật khẩu"
 }

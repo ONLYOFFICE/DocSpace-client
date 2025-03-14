@@ -602,5 +602,17 @@
   "DeleteFile": "Bu faylı silmək üzrəsiniz.",
   "FilePermanentlyDeleted": "Fayl 30 gün ərzində həmişəlik silinəcək.",
   "MoveToTrashTitle": "Zibil qutusuna atılsın?",
-  "CopyLink": "Linki kopyalayın"
+  "CopyLink": "Linki kopyalayın",
+  "ArchivingData": "Məlumatların arxivləşdirilməsi",
+  "FormTemplates": "Anket şablonları",
+  "Other": "Digər",
+  "DownloadAs": "Kimi yüklə",
+  "CustomFormat": "Fərdi format",
+  "OriginalFormat": "Orijinal format",
+  "ChooseFormatText": "Yüklənəcək hər bir faylın formatını seçin ",
+  "ConvertMessage": "Əgər faylın konvertasiyasını seçsəz, bəzi məlumatlar itə bilər.",
+  "ConvertToZip": "<strong>Fayllar .zip</strong> formatına sıxlaşdırılacaq",
+  "RemoveFromList": "Siyahıdan sil",
+  "PasswordProtectedFiles": "Qorunan faylları saxlamaq üçün <0>şifrə daxil edin</0>",
+  "EnterPassword": "Şifrəni daxil edin"
 }

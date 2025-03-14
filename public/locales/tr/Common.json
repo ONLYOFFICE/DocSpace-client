@@ -602,5 +602,17 @@
   "DeleteFile": "Bu dosyayı silmek üzeresiniz. ",
   "FilePermanentlyDeleted": "Dosya 30 gün içinde kalıcı olarak silinecek.",
   "MoveToTrashTitle": "Çöp kutusuna taşı?",
-  "CopyLink": "Bağlantıyı kopyala"
+  "CopyLink": "Bağlantıyı kopyala",
+  "ArchivingData": "Veriler arşivleniyor",
+  "FormTemplates": "Form şablonları",
+  "Other": "Diğer",
+  "DownloadAs": "Olarak indir",
+  "CustomFormat": "Özel tür",
+  "OriginalFormat": "Orijinal tür",
+  "ChooseFormatText": "İndirilecek her bir dosyanın türünü seçin",
+  "ConvertMessage": "Dosyayı orijinalinden farklı bir türe dönüştürmeyi seçerseniz, bazı veriler kaybolabilir.",
+  "ConvertToZip": "<strong>Dosyalar .zip</strong> dosyasına sıkıştırılacak",
+  "RemoveFromList": "Listeden kaldır",
+  "PasswordProtectedFiles": "Devam etmek için lütfen korunan dosyalar için <0>bir şifre girin</0>",
+  "EnterPassword": "Parola giriniz"
 }

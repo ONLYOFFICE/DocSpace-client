@@ -602,5 +602,17 @@
   "DeleteFile": "Este está prestes a apagar este ficheiro. ",
   "FilePermanentlyDeleted": "O arquivo será excluído permanentemente em 30 dias.",
   "MoveToTrashTitle": "Mover para o Lixo?",
-  "CopyLink": "Link de cópia"
+  "CopyLink": "Link de cópia",
+  "ArchivingData": "Arquivar dados",
+  "FormTemplates": "Modelos de formulário",
+  "Other": "Outros",
+  "DownloadAs": "Descarregar como",
+  "CustomFormat": "Formato personalizado",
+  "OriginalFormat": "Formato original",
+  "ChooseFormatText": "Escolha o formato para cada ficheiro a ser transferido",
+  "ConvertMessage": "Se optar por converter o ficheiro para um formato diferente do original, alguns dados poderão perder-se.",
+  "ConvertToZip": "Os ficheiros serão comprimidos para o <strong>ficheiro .zip</strong>",
+  "RemoveFromList": "Remover da lista",
+  "PasswordProtectedFiles": "Para continuar, <0>introduza uma palavra-passe</0> para os ficheiros protegidos",
+  "EnterPassword": "Introduzir palavra-passe"
 }

@@ -603,5 +603,17 @@
   "DeleteFile": "Está a punto de eliminar este archivo.",
   "FilePermanentlyDeleted": "El archivo se eliminará definitivamente dentro de 30 días.",
   "MoveToTrashTitle": "ver a la papelera?",
-  "CopyLink": "Copiar enlace"
+  "CopyLink": "Copiar enlace",
+  "ArchivingData": "Archivando datos",
+  "FormTemplates": "Plantillas de formulario",
+  "Other": "Otro",
+  "DownloadAs": "Descargar como",
+  "CustomFormat": "Formato personalizado",
+  "OriginalFormat": "Formato original",
+  "ChooseFormatText": "Elija el formato de cada archivo que desea descargar",
+  "ConvertMessage": "Si usted decide convertir el archivo en un formato diferente al original, es posible que se pierdan algunos datos.",
+  "ConvertToZip": "Los archivos se comprimirán en el <strong>archivo .zip</strong>",
+  "RemoveFromList": "Quitar de la lista",
+  "PasswordProtectedFiles": "Por favor <0>introduzca una contraseña</0> para los archivos protegidos para continuar",
+  "EnterPassword": "Introduzca Contraseña"
 }

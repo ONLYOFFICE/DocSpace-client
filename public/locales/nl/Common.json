@@ -602,5 +602,17 @@
   "DeleteFile": "U staat op het punt dit bestand te verwijderen. ",
   "FilePermanentlyDeleted": "Het bestand wordt na 30 dagen definitief verwijderd.",
   "MoveToTrashTitle": "Verplaatsen naar de Prullenbak?",
-  "CopyLink": "Kopieer link"
+  "CopyLink": "Kopieer link",
+  "ArchivingData": "Gegevens archiveren",
+  "FormTemplates": "Formulier sjablonen",
+  "Other": "Overige",
+  "DownloadAs": "Download als",
+  "CustomFormat": "Aangepast formaat",
+  "OriginalFormat": "Oorspronkelijk formaat",
+  "ChooseFormatText": "Kies het formaat voor elk te downloaden bestand",
+  "ConvertMessage": "Als u ervoor kiest het bestand om te zetten naar een ander formaat dan het origineel, kunnen sommige gegevens verloren gaan.",
+  "ConvertToZip": "De bestanden zullen gecomprimeerd worden in het <strong>.zip bestand</strong>",
+  "RemoveFromList": "Verwijder uit de lijst",
+  "PasswordProtectedFiles": "Voer <0>een wachtwoord</0> in voor de beveiligde bestanden om verder te gaan",
+  "EnterPassword": "Voer wachtwoord in"
 }

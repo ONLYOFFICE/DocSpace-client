@@ -111,7 +111,7 @@ export const getPDFContextModel = (
     {
       id: "option_download-as",
       key: "download-as",
-      label: t("Translations:DownloadAs"),
+      label: t("Common:DownloadAs"),
       icon: DownloadAsReactSvgUrl,
       onClick: funcs.onClickDownloadAs,
       disabled: !item.security.Download,

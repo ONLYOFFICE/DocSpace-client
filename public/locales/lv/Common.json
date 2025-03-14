@@ -602,5 +602,17 @@
   "DeleteFile": "Jūs gatavojaties izdzēst šo failu. ",
   "FilePermanentlyDeleted": "Fails tiks neatgriezeniski izdzēsts 30 dienu laikā.",
   "MoveToTrashTitle": "Izdzēst?",
-  "CopyLink": "Kopēt saiti"
+  "CopyLink": "Kopēt saiti",
+  "ArchivingData": "Datu arhivēšana",
+  "FormTemplates": "Veidlapu veidnes",
+  "Other": "Cits",
+  "DownloadAs": "Lejupielādēt kā",
+  "CustomFormat": "Pielāgots formāts",
+  "OriginalFormat": "Oriģināls formāts",
+  "ChooseFormatText": "Izvēlieties katra lejupielādējamā faila formātu",
+  "ConvertMessage": "Ja izvēlaties konvertēt failu citā formātā nekā sākotnējais, daži dati var tikt zaudēti.",
+  "ConvertToZip": "Faili tiks saspiesti <strong>.zip failā</strong>",
+  "RemoveFromList": "Noņemt no saraksta",
+  "PasswordProtectedFiles": "Lai faili turpinātu būt aizsargāti, <0>ievadiet paroli</0>",
+  "EnterPassword": "Ievadiet paroli"
 }

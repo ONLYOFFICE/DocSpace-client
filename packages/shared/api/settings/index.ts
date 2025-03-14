@@ -57,6 +57,7 @@ import {
   TMigrationData,
   TSendWelcomeEmailData,
   TPortalCultures,
+  TEncryptionSettings,
 } from "./types";
 
 export async function getSettings(withPassword = false, headers = null) {
@@ -1312,4 +1313,13 @@ export function getEncryptionProgress() {
   };
 
   return request(options);
+}
+
+export function getEncryptionSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/encryption/settings",
+  };
+
+  return request(options) as TEncryptionSettings;
 }

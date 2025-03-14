@@ -729,7 +729,7 @@ class FilesStore {
 
         const includePathPart = pathParts.some(({ id }) => id === removedId);
 
-        if (includePathPart) {
+        if (includePathPart && !this.treeFoldersStore.isPersonalReadOnly) {
           window.DocSpace.navigate("/");
         }
 

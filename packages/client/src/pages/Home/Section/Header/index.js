@@ -680,10 +680,14 @@ const SectionHeaderContent = (props) => {
     : isPersonalReadOnly
       ? t("PersonalFolderErasureWarning")
       : "";
-  const isContextButtonVisible =
-    (isRecycleBinFolder && !isEmptyFilesList) ||
-    isPersonalReadOnly ||
-    !isRootFolder;
+
+  const isContextButtonVisible = () => {
+    if (isPersonalReadOnly) {
+      return isRootFolder;
+    }
+
+    return (isRecycleBinFolder && !isEmptyFilesList) || !isRootFolder;
+  };
 
   return (
     <Consumer key="header">
@@ -777,7 +781,7 @@ const SectionHeaderContent = (props) => {
                 addButtonRef={addButtonRefCallback}
                 contextButtonAnimation={contextButtonAnimation}
                 guidAnimationVisible={guidAnimationVisible}
-                isContextButtonVisible={isContextButtonVisible}
+                isContextButtonVisible={isContextButtonVisible()}
               />
               {showSignInButton ? (
                 <Button

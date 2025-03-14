@@ -1,28 +1,30 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * (c) Copyright Ascensio System SIA 2009-2025
+ *
+ * This program is a free software product.
+ * You can redistribute it and/or modify it under the terms
+ * of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+ * Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+ * to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+ * any third-party rights.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+ * the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+ *
+ * The  interactive user interfaces in modified source and object code versions of the Program must
+ * display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+ *
+ * Pursuant to Section 7(b) of the License you must retain the original Product logo when
+ * distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+ * trademark law for use of our trademarks.
+ *
+ * All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+ * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+ * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+ */
 
 import { isTablet as isTabletDevice } from "react-device-detect";
 
@@ -35,39 +37,20 @@ import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 
 import { useMemo } from "react";
-import styled from "styled-components";
+import { useTheme } from "styled-components";
 
-import { isTablet, classNames } from "@docspace/shared/utils";
-import {
-  DeviceType,
-  RoomsType,
-  ShareAccessRights,
-} from "@docspace/shared/enums";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import { Text } from "@docspace/shared/components/text";
+import { classNames, IconSizeType, isTablet } from "../../utils";
+import { DeviceType, RoomsType, ShareAccessRights } from "../../enums";
+import { Tooltip } from "../tooltip";
+import { Text } from "../text";
+import { ColorTheme, ThemeId } from "../color-theme";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import type { QuickButtonsProps } from "./QuickButtons.types";
 
-const StyledQuickButtons = styled.div`
-  .file-lifetime {
-    svg {
-      rect {
-        fill: ${({ theme }) => theme.filesQuickButtons.lifeTimeColor};
-      }
-
-      circle,
-      path {
-        stroke: ${({ theme }) => theme.filesQuickButtons.lifeTimeColor};
-      }
-    }
-  }
-`;
-
-const QuickButtons = (props) => {
+export const QuickButtons = (props: QuickButtonsProps) => {
   const {
     t,
     item,
-    theme,
     onClickLock,
     onClickDownload,
     onCopyPrimaryLink,
@@ -88,12 +71,17 @@ const QuickButtons = (props) => {
     isTemplatesFolder,
   } = props;
 
+  const theme = useTheme();
+
   const isMobile = currentDeviceType === DeviceType.mobile;
 
-  const { id, locked, shared, fileExst } = item;
+  const { id, shared } = item;
+
+  const fileExst = "fileExst" in item ? item.fileExst : undefined;
+  const locked = "locked" in item ? item.locked : undefined;
 
   const isTile = viewAs === "tile";
-  const isRow = viewAs == "row";
+  const isRow = viewAs === "row";
 
   const iconLock = useMemo(() => {
     if (isMobile) {
@@ -113,7 +101,8 @@ const QuickButtons = (props) => {
 
   const tabletViewQuickButton = isTablet() || isTabletDevice;
 
-  const sizeQuickButton = isTile || tabletViewQuickButton ? "medium" : "small";
+  const sizeQuickButton: IconSizeType =
+    isTile || tabletViewQuickButton ? IconSizeType.medium : IconSizeType.small;
   const displayBadges =
     viewAs === "table" ||
     (isRow && locked && isMobile) ||
@@ -121,17 +110,22 @@ const QuickButtons = (props) => {
     tabletViewQuickButton;
 
   const isAvailableLockFile =
-    !folderCategory && fileExst && displayBadges && item.security.Lock;
+    !folderCategory &&
+    fileExst &&
+    displayBadges &&
+    "Lock" in item.security &&
+    item.security.Lock;
 
   const isAvailableDownloadFile =
-    isPublicRoom && item.security.Download && viewAs === "tile";
+    isPublicRoom && item.security?.Download && viewAs === "tile";
 
   const isAvailableShareFile = isPersonalRoom && item.canShare;
 
   const isPublicRoomType =
-    item.roomType === RoomsType.PublicRoom ||
-    item.roomType === RoomsType.FormRoom ||
-    item.roomType === RoomsType.CustomRoom;
+    "roomType" in item &&
+    (item.roomType === RoomsType.PublicRoom ||
+      item.roomType === RoomsType.FormRoom ||
+      item.roomType === RoomsType.CustomRoom);
 
   const haveLinksRight =
     item?.access === ShareAccessRights.RoomManager ||
@@ -147,13 +141,13 @@ const QuickButtons = (props) => {
   const getTooltipContent = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>
       {roomLifetime?.deletePermanently
-        ? t("Files:FileWillBeDeletedPermanently", { date: expiredDate })
-        : t("Files:FileWillBeMovedToTrash", { date: expiredDate })}
+        ? t("Files:FileWillBeDeletedPermanently", { date: expiredDate || "" })
+        : t("Files:FileWillBeMovedToTrash", { date: expiredDate || "" })}
     </Text>
   );
 
   return (
-    <StyledQuickButtons className="badges additional-badges badges__quickButtons">
+    <div className="badges additional-badges badges__quickButtons">
       {!isIndexEditingMode ? (
         <>
           {showLifetimeIcon ? (
@@ -166,7 +160,6 @@ const QuickButtons = (props) => {
                 isClickable
                 isDisabled={isDisabled}
                 data-tooltip-id="lifetimeTooltip"
-                color={theme.filesQuickButtons.lifeTimeColor}
               />
 
               <Tooltip
@@ -211,7 +204,7 @@ const QuickButtons = (props) => {
               themeId={ThemeId.IconButton}
               iconName={CreateRoomReactSvgUrl}
               className="badge create-room icons-group"
-              size="medium"
+              size={IconSizeType.medium}
               onClick={onCreateRoom}
               color={colorLock}
               isDisabled={isDisabled}
@@ -266,8 +259,6 @@ const QuickButtons = (props) => {
  */}
         </>
       ) : null}
-    </StyledQuickButtons>
+    </div>
   );
 };
-
-export default QuickButtons;

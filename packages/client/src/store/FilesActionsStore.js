@@ -1853,7 +1853,7 @@ class FilesActionStore {
       case "archive": {
         const canArchive = selection.every((s) => s.security?.Move);
 
-        return canArchive;
+        return hasSelection && canArchive;
       }
       case "unarchive": {
         const canUnArchive = selection.some((s) => s.security?.Move);

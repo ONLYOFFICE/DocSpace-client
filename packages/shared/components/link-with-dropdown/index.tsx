@@ -25,3 +25,4 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export { LinkWithDropdown } from "./LinkWithDropdown";
+export type { LinkWithDropDownProps } from "./LinkWithDropdown.types";

@@ -579,5 +579,17 @@
   "Years": "Roky",
   "Yes": "Ano",
   "Yesterday": "Včera",
-  "You": "Vy"
+  "You": "Vy",
+  "ArchivingData": "Archivace dat",
+  "FormTemplates": "Šablony formulářů",
+  "Other": "Jiný",
+  "DownloadAs": "Stáhnout jako",
+  "CustomFormat": "Vlastní formát",
+  "OriginalFormat": "Původní formát",
+  "ChooseFormatText": "Zvolte formát každého stahovaného souboru",
+  "ConvertMessage": "Pokud zvolíte převod souboru do jiného formátu než původního, může dojít ke ztrátě některých dat.",
+  "ConvertToZip": "Soubory budou zkomprimovány do <strong>souboru .zip</strong>",
+  "RemoveFromList": "Odebrat ze seznamu",
+  "PasswordProtectedFiles": "Chcete-li pokračovat, zadejte prosím <0>heslo</0> pro chráněné soubory.",
+  "EnterPassword": "Zadat heslo"
 }

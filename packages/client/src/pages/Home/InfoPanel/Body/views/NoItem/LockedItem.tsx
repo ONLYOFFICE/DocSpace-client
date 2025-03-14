@@ -74,7 +74,7 @@ const LockedItem = ({ t, item, setPasswordEntryDialog }: LockedItemProps) => {
       </Text>
       <LockedSharedRoomButton onClick={openModal}>
         <LockIcon />
-        <span>{t("UploadPanel:EnterPassword")}</span>
+        <span>{t("Common:EnterPassword")}</span>
       </LockedSharedRoomButton>
     </StyledNoItemContainer>
   );

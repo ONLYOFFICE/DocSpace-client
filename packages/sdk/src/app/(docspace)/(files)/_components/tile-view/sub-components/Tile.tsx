@@ -29,6 +29,7 @@
 import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
+import { observer } from "mobx-react";
 
 import { FileTile, FolderTile } from "@docspace/shared/components/tiles";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
@@ -47,6 +48,8 @@ import type { TileProps } from "../TileView.types";
 import TileContent from "./TileContent";
 import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
+import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
+import classNames from "classnames";
 
 const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   if (item.isFolder) return undefined;
@@ -63,12 +66,14 @@ const Tile = ({ item, getIcon }: TileProps) => {
   const theme = useTheme();
   const { filesSettings } = useFilesSettingsStore();
   const { currentDeviceType } = useSettingsStore();
+  const { isCheckedItem, addSelection } = useFilesSelectionStore();
 
   const { openFile } = useFilesActions({ t });
   const { openFolder } = useFolderActions({ t });
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
   const temporaryIcon = getTemporaryIcon(item, getIcon);
+  const isChecked = isCheckedItem(item);
 
   const openItem = (e: React.MouseEvent) => {
     const { target } = e;
@@ -126,14 +131,14 @@ const Tile = ({ item, getIcon }: TileProps) => {
     item,
     contextOptions: [],
     isHighlight: false,
-    checked: false,
+    checked: isChecked,
     isActive: false,
     inProgress: false,
     isBlockingOperation: false,
     isEdit: false,
     showHotkeyBorder: false,
 
-    onSelect: () => {},
+    onSelect: () => addSelection(item),
     tileContextClick: () => {},
     getContextModel: () => [],
     hideContextMenu: () => {},
@@ -149,8 +154,11 @@ const Tile = ({ item, getIcon }: TileProps) => {
 
   return (
     <div>
-      {/*Todo: add DND*/}
-      <div className="DND">
+      <div
+        className={classNames("files-item", {
+          "tile-selected": isChecked,
+        })}
+      >
         {item.isFolder ? (
           <FolderTile {...commonTileProps} />
         ) : (
@@ -167,4 +175,4 @@ const Tile = ({ item, getIcon }: TileProps) => {
   );
 };
 
-export default Tile;
+export default observer(Tile);

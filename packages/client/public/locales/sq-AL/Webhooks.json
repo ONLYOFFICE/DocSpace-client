@@ -52,6 +52,6 @@
   "WebhookRedilivered": "Webhook u ridorëzuar",
   "WebhookRemoved": "Webhook-u u fshi",
   "Webhooks": "Webhooks",
-  "WebhooksGuide": "Guida e Webhook-ave\"",
+  "WebhooksGuide": "Guida e Webhook-ave",
   "WebhooksInfo": "Përdorni webhook për të kryer veprime të personalizuara në anën e çdo aplikacioni ose faqe interneti që po përdorni bazuar në ngjarje të ndryshme në {{organizationName}} {{productName}}.\nKëtu, ju mund të krijoni dhe menaxhoni të gjitha lidhjet tuaja në internet, t'i konfiguroni ato dhe të shfletoni historikun e çdo webhook për të audituar performancën e tyre."
 }

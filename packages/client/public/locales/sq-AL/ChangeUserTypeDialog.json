@@ -1,5 +1,5 @@
 {
-  "ChangeGuestsTypeMessage": "Mysafiri <i fortë>{{userName}}</i fortë> do të transferohet në seksionin {{membersSection}} dhe do të caktohet tipi Përdorues. Përdoruesit kanë seksionin e tyre {{documentsSection}}, mund të krijojnë dhe redaktojnë skedarë, por nuk mund të krijojnë dhoma.",
+  "ChangeGuestsTypeMessage": "Mysafiri <strong>{{userName}}</strong> do të transferohet në seksionin {{membersSection}} dhe do të caktohet tipi Përdorues. Përdoruesit kanë seksionin e tyre {{documentsSection}}, mund të krijojnë dhe redaktojnë skedarë, por nuk mund të krijojnë dhoma.",
   "ChangeGuestsTypeMessageMulti": "Mysafiri i zgjedhur do të transferohet në seksionin {{membersSection}} dhe do të caktohet tipi Përdorues. Përdoruesit kanë seksionin e tyre {{documentsSection}}, mund të krijojnë dhe redaktojnë skedar, por nuk mund të krijojnë dhoma.",
   "ChangeUserTypeButton": "Nryshoni llojin",
   "ChangeUserTypeHeader": "Ndryshoni llojin e përdoruesit",

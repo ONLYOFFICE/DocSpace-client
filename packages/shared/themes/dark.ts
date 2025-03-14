@@ -2947,7 +2947,7 @@ const Dark: TTheme = {
         color: grayDark,
         linkColor: lightBlueMain,
         spanBackground: lightBlueMain,
-        filterBorder: `1px solid ${black}`,
+        filterBorder: `1px solid ${grayDarkStrong}`,
         background: darkGrayLight,
       },
     },

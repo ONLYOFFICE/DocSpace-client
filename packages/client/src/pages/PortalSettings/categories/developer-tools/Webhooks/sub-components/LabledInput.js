@@ -67,6 +67,7 @@ export const LabledInput = ({
         required={required}
         hasError={hasError}
         isDisabled={isDisabled}
+        scale
         {...(mask ? { mask } : {})}
       />
     </StyledLabel>

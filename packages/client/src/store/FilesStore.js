@@ -2040,8 +2040,8 @@ class FilesStore {
   };
 
   setCustomRoomQuota = async (
-    quotaSize,
     itemsIDs,
+    quotaSize,
     inRoom = false,
     filter = null,
   ) => {

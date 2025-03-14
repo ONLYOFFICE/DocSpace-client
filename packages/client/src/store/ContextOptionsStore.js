@@ -130,6 +130,7 @@ import {
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { createLoader } from "@docspace/shared/utils/createLoader";
+import { FILLING_STATUS_ID } from "@docspace/shared/constants";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -687,7 +688,16 @@ class ContextOptionsStore {
   };
 
   onClickStartFilling = (item) => {
-    console.log(item);
+    const refPage = this.filesStore.openDocEditor(
+      item.id,
+      false,
+      null,
+      true,
+      false,
+    );
+
+    refPage[FILLING_STATUS_ID] = true;
+    console.log("refPage", refPage);
   };
 
   onClickResetAndStartFilling = async (item) => {

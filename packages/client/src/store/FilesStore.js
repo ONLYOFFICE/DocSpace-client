@@ -3852,7 +3852,7 @@ class FilesStore {
       `/doceditor?${searchParams.toString()}`,
     );
 
-    window.open(url, openOnNewPage ? "_blank" : "_self");
+    return window.open(url, openOnNewPage ? "_blank" : "_self");
   };
 
   createThumbnails = async (files = null) => {

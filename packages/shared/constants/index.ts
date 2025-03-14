@@ -146,6 +146,8 @@ export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";
 
 export const EDITOR_ID = "portal_editor";
 
+export const FILLING_STATUS_ID = "fillingStatusDialog" as const;
+
 export const MEDIA_VIEW_URL = "/media/view/";
 export const PUBLIC_MEDIA_VIEW_URL = "/rooms/share/media/view";
 

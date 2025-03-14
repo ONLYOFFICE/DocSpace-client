@@ -408,6 +408,7 @@ export type TDocEditor = {
   setActionLink: (link: string) => void;
   setUsers?: ({ c, users }: { c: string; users: TSharedUsers[] }) => void;
   startFilling?: VoidFunction;
+  requestRoles?: VoidFunction;
 };
 
 export type TCatchError =

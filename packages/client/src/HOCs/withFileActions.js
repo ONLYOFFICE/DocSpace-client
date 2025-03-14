@@ -148,6 +148,7 @@ export default function withFileActions(WrappedFileItem) {
           : false;
       const label = e.currentTarget.getAttribute("label");
       if (mouseButton || e.currentTarget.tagName !== "DIV" || label) {
+        if (item.isPlugin) return this.onFilesClick(e);
         return e;
       }
 

@@ -5,7 +5,5 @@
   "FillPDFDialogTitle": "Fill in as",
   "ShareCollectButtonLabel": "Copy to room",
   "ShareCollectDescription": "Share your form and collect responses via a Form filling room.",
-  "ShareCollectTitle": "Share",
-  "ShareCollectVDRTitle": "In Virtual Data room",
-  "ShareCollectVDRDescription": "Fill out the original form by roles with other participants. "
+  "ShareCollectTitle": "Share"
 }

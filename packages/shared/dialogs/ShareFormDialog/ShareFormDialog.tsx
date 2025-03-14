@@ -83,11 +83,11 @@ const ShareFormDialog: FC<ShareFormDialogProps> = ({
             <div className={styles.cardHeader}>
               <VirtualDataRoomRoomSvg />
               <Text as="h5" fontSize="14px" lineHeight="16px" isBold>
-                {t("Common:InFormFillingRoomTitle")}
+                {t("Common:InVirtualDataRoomTitle")}
               </Text>
             </div>
             <Text fontSize="12px" lineHeight="16px">
-              {t("Common:InFormFillingRoomDescription")}
+              {t("Common:InVirtualDataRoomDescription")}
             </Text>
             <Button
               scale

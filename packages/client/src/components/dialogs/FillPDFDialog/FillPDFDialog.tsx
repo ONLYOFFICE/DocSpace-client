@@ -98,8 +98,8 @@ const FillPDFDialog = inject<TStore>(
                 onClick={openSelector}
               />
               <Card
-                title={t("FillPDFDialog:ShareCollectVDRTitle")}
-                description={t("FillPDFDialog:ShareCollectVDRDescription")}
+                title={t("Common:InVirtualDataRoomTitle")}
+                description={t("Common:InVirtualDataRoomDescription")}
                 buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
                 onClick={openSelector}
               />

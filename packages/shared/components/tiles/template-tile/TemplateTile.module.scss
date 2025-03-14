@@ -101,7 +101,6 @@
   .field {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     gap: 8px;
   }
 
@@ -111,6 +110,11 @@
 
   .spaceQuota {
     margin-top: -5px;
-    margin-bottom: -8px;
+
+    :global {
+      .combobobox-space-quota .combo-button {
+        height: 25px;
+      }
+    }
   }
 }

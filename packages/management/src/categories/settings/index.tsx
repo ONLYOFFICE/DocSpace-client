@@ -26,7 +26,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { observer } from "mobx-react";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -43,6 +43,8 @@ import EncryptDataPage from "../encrypt-data";
 const Settings = () => {
   const { t } = useTranslation(["Common", "Settings"]);
   const navigate = useNavigate();
+  const location = useLocation();
+
   const { dialogsStore, currentTariffStatusStore, settingsStore } = useStore();
   const { connectDialogVisible } = dialogsStore;
   const { isCommunity } = currentTariffStatusStore;
@@ -67,7 +69,7 @@ const Settings = () => {
     {
       id: "encrypt-data",
       name: t("Common:Storage"),
-      content: <EncryptDataPage />,
+      content: <EncryptDataPage logoText={logoText} />,
     },
   ];
 

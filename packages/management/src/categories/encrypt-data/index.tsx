@@ -38,16 +38,26 @@ import { toastr } from "@docspace/shared/components/toast";
 import { EncryptionStatus } from "@docspace/shared/enums";
 import { getEncryptionSettings } from "@docspace/shared/api/settings";
 
+import { setDocumentTitle } from "SRC_DIR/utils";
+
 import { EncryptWarningDialog } from "./EncryptWarningDialog";
 import { StyledWrapper } from "./EncryptData.styles";
 
-const EncryptDataPage = () => {
+type EncryptDataPageProps = {
+  logoText: string;
+};
+
+const EncryptDataPage = ({ logoText }: EncryptDataPageProps) => {
   const { t } = useTranslation(["Management", "Common"]);
   const { currentColorScheme } = useTheme();
   const [encryptWarningDialogVisible, setEncryptWarningDialogVisible] =
     useState(false);
   const [isNotifyChecked, setIsNotifyChecked] = useState(false);
   const [status, setStatus] = useState(0);
+
+  useEffect(() => {
+    setDocumentTitle(t("Branding"), logoText);
+  }, []);
 
   useEffect(() => {
     const fetchSettings = async () => {

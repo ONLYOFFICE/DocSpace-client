@@ -594,5 +594,7 @@
   "Years": "Years",
   "Yes": "Yes",
   "Yesterday": "Yesterday",
-  "You": "You"
+  "You": "You",
+  "EncryptionPortalTitle": "The encryption process in progress",
+  "EncryptionPortalSubtitle": "As soon as the process is over, the portal data will be avallable for work."
 }

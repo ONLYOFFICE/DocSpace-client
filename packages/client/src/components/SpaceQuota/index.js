@@ -186,7 +186,11 @@ const SpaceQuota = (props) => {
   }
 
   return (
-    <StyledBody hideColumns={hideColumns} className={className}>
+    <StyledBody
+      hideColumns={hideColumns}
+      className={className}
+      isLoading={isLoading}
+    >
       <Text fontWeight={600}>{usedQuota} / </Text>
 
       <ComboBox

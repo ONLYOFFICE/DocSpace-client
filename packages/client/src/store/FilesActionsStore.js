@@ -2818,9 +2818,11 @@ class FilesActionStore {
 
     filter.folder = id;
 
-    const currentFolder = await this.filesStore.getFolderInfo(id);
-    const shareKey = await this.getPublicKey(currentFolder);
-    if (shareKey) filter.key = shareKey;
+    if (!this.selectedFolderStore.isRootFolder && navigationPath[0]?.shared) {
+      const currentFolder = await this.filesStore.getFolderInfo(id);
+      const shareKey = await this.getPublicKey(currentFolder);
+      if (shareKey) filter.key = shareKey;
+    }
 
     const categoryType = getCategoryType(window.DocSpace.location);
     const path = getCategoryUrl(categoryType, id);

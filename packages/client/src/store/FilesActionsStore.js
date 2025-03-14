@@ -2818,7 +2818,7 @@ class FilesActionStore {
 
     filter.folder = id;
 
-    if (id) {
+    if (!this.selectedFolderStore.isRootFolder && navigationPath[0]?.shared) {
       const currentFolder = await this.filesStore.getFolderInfo(id);
       const shareKey = await this.getPublicKey(currentFolder);
       if (shareKey) filter.key = shareKey;

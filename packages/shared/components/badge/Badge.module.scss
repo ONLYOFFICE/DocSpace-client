@@ -64,7 +64,11 @@
 
 .text {
   white-space: nowrap;
-  color: var(--badge-color) !important;
+  color: var(--badge-color);
+
+  &[data-color="false"] {
+    color: var(--badge-color) !important;
+  }
 }
 
 .themed {

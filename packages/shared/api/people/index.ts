@@ -630,10 +630,10 @@ export async function getMembersList(
   return res;
 }
 
-export async function setCustomUserQuota(userIds: string[], quota: number) {
+export async function setCustomUserQuota(userIds: string[], quota: string) {
   const data = {
     userIds,
-    quota,
+    quota: +quota,
   };
   const options: AxiosRequestConfig = {
     method: "put",

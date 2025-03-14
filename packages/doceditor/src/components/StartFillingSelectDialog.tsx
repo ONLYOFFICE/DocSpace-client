@@ -82,7 +82,6 @@ function StartFillingSelectorDialog({
       isPanelVisible={isVisible}
       filesSettings={filesSettings}
       currentDeviceType={DeviceType.desktop}
-      headerLabel={headerLabel}
       submitButtonLabel={t("Common:CopyHere")}
       onSubmit={onSubmit}
       getIsDisabled={getIsDisabled}

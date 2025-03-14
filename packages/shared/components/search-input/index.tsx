@@ -31,11 +31,10 @@ import React, {
   useState,
   ChangeEvent,
 } from "react";
-import { ReactSVG } from "react-svg";
 import classNames from "classnames";
 
-import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
-import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
+import CrossIconReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg";
+import SearchIconReactSvg from "PUBLIC_DIR/images/search.react.svg";
 
 import { useDebounce } from "../../hooks/useDebounce";
 
@@ -122,11 +121,11 @@ const SearchInput = ({
 
   const getIconNode = () => {
     const showCrossIcon = !!inputValue || showClearButton;
+
     const iconNode = (
-      <ReactSVG
-        className="icon-button_svg not-selectable"
-        src={showCrossIcon ? CrossIconReactSvgUrl : SearchIconReactSvgUrl}
-      />
+      <div className="icon-button_svg not-selectable">
+        {showCrossIcon ? <CrossIconReactSvg /> : <SearchIconReactSvg />}
+      </div>
     );
 
     return iconNode;

@@ -61,7 +61,8 @@ RUN yarn workspace @docspace/management build --env lint=false
 # Run build next apps
 RUN TS_ERRORS_IGNORE=true yarn workspace @docspace/login build 
 RUN TS_ERRORS_IGNORE=true yarn workspace @docspace/doceditor build
+RUN TS_ERRORS_IGNORE=true yarn workspace @docspace/sdk build
 
-EXPOSE 5001 5011 5013 5015
+EXPOSE 5001 5011 5013 5015 5099
 
 CMD [ "yarn", "start-prod" ]

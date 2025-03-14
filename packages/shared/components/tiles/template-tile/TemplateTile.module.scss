@@ -52,7 +52,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        width: inherit;
 
         span {
           overflow: hidden;
@@ -102,11 +101,20 @@
   .field {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     gap: 8px;
   }
 
   .text {
     color: var(--tile-sub-text);
+  }
+
+  .spaceQuota {
+    margin-top: -5px;
+
+    :global {
+      .combobobox-space-quota .combo-button {
+        height: 25px;
+      }
+    }
   }
 }

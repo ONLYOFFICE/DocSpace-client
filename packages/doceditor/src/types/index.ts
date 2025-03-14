@@ -59,6 +59,14 @@ export type TDocumentInfoSharingSettings = {
   user: string;
   permissions: string;
 };
+
+export type SdkSearchParams = {
+  locale?: string | null | undefined;
+  theme?: string | undefined;
+  editorGoBack?: boolean | "event";
+  is_file?: boolean;
+};
+
 export type RootPageProps = {
   searchParams: Partial<{
     fileId: string;
@@ -69,7 +77,8 @@ export type RootPageProps = {
     share: string;
     editorType: string;
     error?: string;
-  }>;
+  }> &
+    SdkSearchParams;
 };
 export type TDocumentInfo = {
   favorite: boolean;
@@ -207,6 +216,7 @@ export type TResponse =
       hash?: string;
       shareKey?: string;
       deepLinkSettings?: number;
+      baseSdkConfig?: TFrameConfig;
     }
   | {
       error: TError;
@@ -221,6 +231,7 @@ export type TResponse =
       hash?: string;
       shareKey?: string;
       deepLinkSettings?: number;
+      baseSdkConfig?: TFrameConfig;
     };
 
 export type EditorProps = {
@@ -228,7 +239,7 @@ export type EditorProps = {
   successAuth?: boolean;
   user?: TUser;
   doc?: string;
-  documentserverUrl: string;
+  documentServerUrl: string;
   fileInfo?: TFile;
   sdkConfig?: TFrameConfig | null;
   isSharingAccess?: boolean;

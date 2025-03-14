@@ -27,7 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
+import FilterReactSvg from "PUBLIC_DIR/images/filter.react.svg";
 
 import { IconButton } from "../../icon-button";
 
@@ -71,7 +71,7 @@ const FilterButton = ({
           [styles.isOpen]: showFilterBlock,
         })}
       >
-        <IconButton iconName={FilterReactSvrUrl} size={16} />
+        <IconButton iconNode={<FilterReactSvg />} size={16} />
         {selectedFilterValue && selectedFilterValue.size > 0 ? (
           <div className={styles.indicator} />
         ) : null}

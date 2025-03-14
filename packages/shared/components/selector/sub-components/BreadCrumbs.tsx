@@ -45,6 +45,113 @@ import {
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 import { SearchDispatchContext } from "../contexts/Search";
 
+const calculateDisplayedItems = (
+  items: TBreadCrumb[],
+  onClickItem: ({ item }: { item: TBreadCrumb }) => void,
+) => {
+  const itemsLength = items.length;
+  const oldItems: TBreadCrumb[] = [];
+
+  items.forEach((item) =>
+    oldItems.push({
+      ...item,
+      id: item.id?.toString(),
+    }),
+  );
+  if (itemsLength > 0) {
+    const newItems: TDisplayedItem[] = [];
+
+    if (itemsLength <= 3) {
+      oldItems.forEach((item, index) => {
+        newItems.push({
+          ...item,
+          isArrow: false,
+          isList: false,
+          listItems: [],
+        });
+
+        if (index !== oldItems.length - 1) {
+          newItems.push({
+            id: `arrow-${index}`,
+            label: "",
+            isArrow: true,
+            isList: false,
+            listItems: [],
+          });
+        }
+      });
+    } else {
+      newItems.push({
+        ...oldItems[0],
+        isArrow: false,
+        isList: false,
+        listItems: [],
+      });
+
+      newItems.push({
+        id: "arrow-1",
+        label: "",
+        isArrow: true,
+        isList: false,
+        listItems: [],
+      });
+
+      newItems.push({
+        id: "drop-down-item",
+        label: "",
+        isArrow: false,
+        isList: true,
+        listItems: [],
+      });
+
+      newItems.push({
+        id: "arrow-2",
+        label: "",
+        isArrow: true,
+        isList: false,
+        listItems: [],
+      });
+
+      newItems.push({
+        ...oldItems[itemsLength - 2],
+        isArrow: false,
+        isList: false,
+        listItems: [],
+      });
+
+      newItems.push({
+        id: "arrow-3",
+        label: "",
+        isArrow: true,
+        isList: false,
+        listItems: [],
+      });
+
+      newItems.push({
+        ...oldItems[itemsLength - 1],
+        isArrow: false,
+        isList: false,
+        listItems: [],
+      });
+
+      oldItems.splice(0, 1);
+      oldItems.splice(oldItems.length - 2, 2);
+
+      oldItems.forEach((item) => {
+        newItems[2].listItems?.push({
+          ...item,
+          minWidth: "150px",
+          onClick: onClickItem,
+        });
+      });
+    }
+
+    return newItems;
+  }
+
+  return [];
+};
+
 const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
   const {
     withBreadCrumbs,
@@ -55,10 +162,6 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
   } = React.useContext(BreadCrumbsContext);
   const setIsSearch = React.useContext(SearchDispatchContext);
 
-  const [displayedItems, setDisplayedItems] = React.useState<TDisplayedItem[]>(
-    [],
-  );
-
   const onClickItem = React.useCallback(
     ({ item }: { item: TBreadCrumb }) => {
       if (isBreadCrumbsLoading) return;
@@ -68,116 +171,16 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
     [isBreadCrumbsLoading, onSelectBreadCrumb, setIsSearch],
   );
 
-  const calculateDisplayedItems = React.useCallback(
-    (items: TBreadCrumb[]) => {
-      const itemsLength = items.length;
-      const oldItems: TBreadCrumb[] = [];
-
-      items.forEach((item) =>
-        oldItems.push({
-          ...item,
-          id: item.id?.toString(),
-        }),
-      );
-      if (itemsLength > 0) {
-        const newItems: TDisplayedItem[] = [];
-
-        if (itemsLength <= 3) {
-          oldItems.forEach((item, index) => {
-            newItems.push({
-              ...item,
-              isArrow: false,
-              isList: false,
-              listItems: [],
-            });
-
-            if (index !== oldItems.length - 1) {
-              newItems.push({
-                id: `arrow-${index}`,
-                label: "",
-                isArrow: true,
-                isList: false,
-                listItems: [],
-              });
-            }
-          });
-        } else {
-          newItems.push({
-            ...oldItems[0],
-            isArrow: false,
-            isList: false,
-            listItems: [],
-          });
-
-          newItems.push({
-            id: "arrow-1",
-            label: "",
-            isArrow: true,
-            isList: false,
-            listItems: [],
-          });
-
-          newItems.push({
-            id: "drop-down-item",
-            label: "",
-            isArrow: false,
-            isList: true,
-            listItems: [],
-          });
-
-          newItems.push({
-            id: "arrow-2",
-            label: "",
-            isArrow: true,
-            isList: false,
-            listItems: [],
-          });
-
-          newItems.push({
-            ...oldItems[itemsLength - 2],
-            isArrow: false,
-            isList: false,
-            listItems: [],
-          });
-
-          newItems.push({
-            id: "arrow-3",
-            label: "",
-            isArrow: true,
-            isList: false,
-            listItems: [],
-          });
-
-          newItems.push({
-            ...oldItems[itemsLength - 1],
-            isArrow: false,
-            isList: false,
-            listItems: [],
-          });
-
-          oldItems.splice(0, 1);
-          oldItems.splice(oldItems.length - 2, 2);
-
-          oldItems.forEach((item) => {
-            newItems[2].listItems?.push({
-              ...item,
-              minWidth: "150px",
-              onClick: onClickItem,
-            });
-          });
-        }
-
-        return setDisplayedItems(newItems);
-      }
-    },
-    [onClickItem],
+  const [displayedItems, setDisplayedItems] = React.useState<TDisplayedItem[]>(
+    breadCrumbs ? calculateDisplayedItems(breadCrumbs, onClickItem) : [],
   );
 
   React.useEffect(() => {
     if (breadCrumbs && breadCrumbs.length > 0) {
-      calculateDisplayedItems(breadCrumbs);
+      const items = calculateDisplayedItems(breadCrumbs, onClickItem);
+      setDisplayedItems(items);
     }
-  }, [breadCrumbs, calculateDisplayedItems]);
+  }, [breadCrumbs, onClickItem]);
 
   let gridTemplateColumns = "minmax(1px, max-content)";
 

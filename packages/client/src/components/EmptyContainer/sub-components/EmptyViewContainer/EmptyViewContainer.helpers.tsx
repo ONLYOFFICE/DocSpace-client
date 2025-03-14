@@ -157,7 +157,6 @@ export const getIcon = (
   rootFolderType: Nullable<FolderType>,
 ): JSX.Element => {
   if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
-
   return isFolder
     ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
     : getRoomIcon(type, isBaseTheme, access);
@@ -309,13 +308,13 @@ export const getOptions = (
         model: [
           {
             key: "upload-files",
-            label: t("Translations:Files"),
+            label: t("Common:Files"),
             icon: FormBlankIcon,
             onClick: () => actions.onUploadAction("file"),
           },
           {
             key: "upload-folder",
-            label: t("Files:Folder"),
+            label: t("Common:Folder"),
             icon: FolderReactSvgUrl,
             onClick: () => actions.onUploadAction("folder"),
           },
@@ -343,19 +342,19 @@ export const getOptions = (
     model: [
       {
         key: "create-Document",
-        label: t("Files:Document"),
+        label: t("Common:Document"),
         icon: DocumentsReactSvgUrl,
         onClick: () => actions.onCreate("docx"),
       },
       {
         key: "create-spreadsheet",
-        label: t("Files:Spreadsheet"),
+        label: t("Common:Spreadsheet"),
         icon: SpreadsheetReactSvgUrl,
         onClick: () => actions.onCreate("xlsx"),
       },
       {
         key: "create-presentation",
-        label: t("Files:Presentation"),
+        label: t("Common:Presentation"),
         icon: PresentationReactSvgUrl,
         onClick: () => actions.onCreate("pptx"),
       },
@@ -368,7 +367,7 @@ export const getOptions = (
       { isSeparator: true, key: "separator" },
       {
         key: "create-folder",
-        label: t("Files:Folder"),
+        label: t("Common:Folder"),
         icon: FolderReactSvgUrl,
         onClick: () => actions.onCreate(undefined),
       },

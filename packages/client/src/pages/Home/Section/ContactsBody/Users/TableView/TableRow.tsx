@@ -198,6 +198,7 @@ const PeopleTableRow = ({
           color={sideInfoColor}
           onClick={() => onOpenGroupClick({ action: groups[0].id } as TOption)}
           isTextOverflow
+          truncate
         >
           {groups[0].name}
         </Link>
@@ -356,6 +357,7 @@ const PeopleTableRow = ({
               onClick={onEmailClick}
               isTextOverflow
               enableUserSelect
+              truncate
             >
               {email}
             </Link>

@@ -48,6 +48,7 @@ export type SpaceQuotaProps = {
   item: TemplateItem;
   type: string;
   isReadOnly?: boolean;
+  className?: string;
 };
 
 export type TemplateTileProps = {

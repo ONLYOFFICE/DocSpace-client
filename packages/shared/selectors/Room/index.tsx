@@ -78,20 +78,36 @@ const RoomSelector = ({
   disableThirdParty,
   emptyScreenHeader,
   emptyScreenDescription,
+
+  withInit,
+  initItems,
+  initTotal,
+  initHasNextPage,
+  initSearchValue,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
-  const [searchValue, setSearchValue] = React.useState("");
-  const [hasNextPage, setHasNextPage] = React.useState(false);
+  const [searchValue, setSearchValue] = React.useState(() =>
+    withInit ? initSearchValue : "",
+  );
+  const [hasNextPage, setHasNextPage] = React.useState(() =>
+    withInit ? initHasNextPage : false,
+  );
   const [isNextPageLoading, setIsNextPageLoading] = React.useState(false);
   const [selectedItem, setSelectedItem] = React.useState<TSelectorItem | null>(
     null,
   );
-  const [total, setTotal] = React.useState(-1);
+  const [total, setTotal] = React.useState(() => (withInit ? initTotal : -1));
+  const [items, setItems] = React.useState<TSelectorItem[]>(
+    withInit
+      ? convertToItems(initItems).filter((x) =>
+          excludeItems ? !excludeItems.includes(x.id) : true,
+        )
+      : [],
+  );
 
-  const [items, setItems] = React.useState<TSelectorItem[]>([]);
-
-  const isFirstLoad = React.useRef(true);
+  const withInitRef = React.useRef<boolean>(withInit ?? false);
+  const isFirstLoad = React.useRef(!withInit);
   const afterSearch = React.useRef(false);
 
   const onSelect = (
@@ -136,6 +152,11 @@ const RoomSelector = ({
 
   const onLoadNextPage = React.useCallback(
     async (startIndex: number) => {
+      if (withInitRef.current && startIndex === 0) {
+        withInitRef.current = false;
+        isFirstLoad.current = false;
+        return;
+      }
       setIsNextPageLoading(true);
 
       const page = startIndex / PAGE_COUNT;
@@ -163,7 +184,7 @@ const RoomSelector = ({
 
       setHasNextPage(count === PAGE_COUNT);
 
-      if (isFirstLoad) {
+      if (isFirstLoad.current) {
         setTotal(totalCount);
 
         setItems([...rooms]);
@@ -258,6 +279,7 @@ const RoomSelector = ({
           isUser={false}
         />
       }
+      isSSR={withInit}
     />
   );
 };

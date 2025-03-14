@@ -582,7 +582,7 @@
     grid-template-columns: 29px auto 1fr;
 
     &[data-is-root-folder="true"] {
-      grid-template-columns: auto 1fr;
+      grid-template-columns: auto 1fr !important;
     }
   }
 }

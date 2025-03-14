@@ -59,7 +59,6 @@ const useSocketHelper = ({
   const folderSubscribers = React.useRef(new Set<string>());
 
   const initRef = React.useRef(false);
-
   const subscribedId = React.useRef<null | number>(null);
 
   const unsubscribe = React.useCallback((id?: number | string) => {

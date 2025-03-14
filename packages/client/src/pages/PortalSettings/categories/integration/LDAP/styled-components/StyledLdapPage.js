@@ -216,6 +216,10 @@ const StyledLdapPage = styled.div`
       margin-bottom: 16px;
     }
 
+    .ldap_checkbox-send-welcome-email {
+      margin-bottom: 8px;
+    }
+
     margin-bottom: ${(props) => (props.isMobileView ? "40" : "28")}px;
   }
 

@@ -209,7 +209,6 @@ const StyledVersionRow = styled(Row).attrs(injectDefaultTheme)`
 
   .version_edit-comment {
     display: block;
-    margin: 8px 0 2px 70px;
   }
 
   .textarea-wrapper {

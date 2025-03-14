@@ -45,6 +45,8 @@ import type { TGetIcon } from "@/app/(docspace)/_hooks/useItemIcon";
 
 import type { TileProps } from "../TileView.types";
 import TileContent from "./TileContent";
+import { QuickButtons } from "@docspace/shared/components/quick-buttons";
+import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
 const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   if (item.isFolder) return undefined;
@@ -57,9 +59,10 @@ const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
 
 const Tile = ({ item, getIcon }: TileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
-  const { filesSettings } = useFilesSettingsStore();
   const { t } = useTranslation("Common");
   const theme = useTheme();
+  const { filesSettings } = useFilesSettingsStore();
+  const { currentDeviceType } = useSettingsStore();
 
   const { openFile } = useFilesActions({ t });
   const { openFolder } = useFolderActions({ t });
@@ -107,6 +110,18 @@ const Tile = ({ item, getIcon }: TileProps) => {
     />
   );
 
+  const quickButtonsComponent = (
+    <QuickButtons
+      t={t}
+      item={item}
+      viewAs="tile"
+      currentDeviceType={currentDeviceType}
+      currentColorScheme={theme.currentColorScheme}
+      isPublicRoom
+      // TODO: Add download
+    />
+  );
+
   const commonTileProps = {
     item,
     contextOptions: [],
@@ -144,6 +159,7 @@ const Tile = ({ item, getIcon }: TileProps) => {
             thumbnailClick={openItem}
             temporaryIcon={temporaryIcon}
             thumbnail={item.thumbnailUrl}
+            contentElement={quickButtonsComponent}
           />
         )}
       </div>

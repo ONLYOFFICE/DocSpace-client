@@ -39,7 +39,7 @@ export type QuickButtonsProps = {
   item: TQuickButtonItem;
   viewAs: TViewAs;
   currentDeviceType: DeviceType;
-  currentColorScheme: TColorScheme;
+  currentColorScheme?: TColorScheme;
   roomLifetime?: TRoomLifetime;
   expiredDate?: string | null;
 

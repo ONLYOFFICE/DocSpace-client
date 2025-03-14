@@ -28,12 +28,12 @@
 
 import { isTablet as isTabletDevice } from "react-device-detect";
 
-import FileActionsLockedReactSvgUrl from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
-import FileActionsDownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
+import FileActionsLockedReactSvg from "PUBLIC_DIR/images/file.actions.locked.react.svg";
+import FileActionsDownloadReactSvg from "PUBLIC_DIR/images/icons/16/download.react.svg";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
-import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
+import LockedReactSvg from "PUBLIC_DIR/images/icons/16/locked.react.svg";
 import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
-import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
+import LockedReact12Svg from "PUBLIC_DIR/images/icons/12/lock.react.svg";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 
 import { useMemo } from "react";
@@ -83,12 +83,12 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const isTile = viewAs === "tile";
   const isRow = viewAs === "row";
 
-  const iconLock = useMemo(() => {
+  const IconLock = useMemo(() => {
     if (isMobile) {
-      return LockedReact12SvgUrl;
+      return LockedReact12Svg;
     }
 
-    return locked ? FileActionsLockedReactSvgUrl : LockedReactSvgUrl;
+    return locked ? FileActionsLockedReactSvg : LockedReactSvg;
   }, [locked, isMobile]);
 
   const colorLock = locked
@@ -96,7 +96,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     : theme.filesQuickButtons.color;
 
   const colorShare = shared
-    ? currentColorScheme.main?.accent
+    ? currentColorScheme?.main?.accent
     : theme.filesQuickButtons.color;
 
   const tabletViewQuickButton = isTablet() || isTabletDevice;
@@ -174,7 +174,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
           {isAvailableLockFile ? (
             <ColorTheme
               themeId={ThemeId.IconButton}
-              iconName={iconLock}
+              iconNode={<IconLock />}
               className="badge lock-file icons-group"
               size={sizeQuickButton}
               data-id={id}
@@ -189,7 +189,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
           {isAvailableDownloadFile ? (
             <ColorTheme
               themeId={ThemeId.IconButton}
-              iconName={FileActionsDownloadReactSvgUrl}
+              iconNode={<FileActionsDownloadReactSvg />}
               className="badge download-file icons-group"
               size={sizeQuickButton}
               onClick={onClickDownload}

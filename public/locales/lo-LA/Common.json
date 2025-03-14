@@ -371,5 +371,16 @@
   "WantToContinue": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່?",
   "Warning": "ແຈ້ງເຕືອນ",
   "Website": "ເວັບໄຊທ໌",
-  "Yesterday": "ມື້ວານນີ້"
+  "Yesterday": "ມື້ວານນີ້",
+  "ArchivingData": "ການເກັບກໍາຂໍ້ມູນ",
+  "FormTemplates": "ຮູບແບບແບບຟອມ",
+  "Other": "ອື່ນໆ",
+  "DownloadAs": "ດາວໂຫລດທີ່",
+  "CustomFormat": "ຮູບແບບທີ່ກຳນົດເອງ",
+  "OriginalFormat": "ຮູບແບບຕົ້ນສະບັບ",
+  "ChooseFormatText": "ເລືອກຮູບແບບສຳລັບແຕ່ລະເອກະສານທີ່ຈະດາວໂຫລດ",
+  "ConvertMessage": "ຖ້າທ່ານເລືອກທີ່ຈະປ່ຽນໄຟລ໌ເປັນຮູບແບບທີ່ແຕກຕ່າງຈາກຕົ້ນສະບັບ, ຂໍ້ມູນບາງຢ່າງອາດຈະສູນເສຍໄປ.",
+  "ConvertToZip": "ໄຟລ໌ຕ່າງໆຈະຖືກບີບອັດເຂົ້າໃນ<strong>ແຟ້ມ.zip</strong>",
+  "RemoveFromList": "ລຶບອອກຈາກລາຍການ",
+  "EnterPassword": "ໃສ່ລະຫັດຜ່ານ"
 }

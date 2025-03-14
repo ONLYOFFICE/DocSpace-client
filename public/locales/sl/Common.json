@@ -579,5 +579,17 @@
   "Years": "Let",
   "Yes": "Da",
   "Yesterday": "Včeraj",
-  "You": "Vi"
+  "You": "Vi",
+  "ArchivingData": "Arhiviraj podatke",
+  "FormTemplates": "Predloge obrazcev",
+  "Other": "Drugo",
+  "DownloadAs": "Prenesi kot",
+  "CustomFormat": "Poljuben format",
+  "OriginalFormat": "Izvirni format",
+  "ChooseFormatText": "Izberite format za vsako datoteko, ki jo želite prenesti",
+  "ConvertMessage": "Če se odločite za pretvorbo datoteke v obliko, ki je drugačna od izvirne, se lahko nekateri podatki izgubijo.",
+  "ConvertToZip": "Datoteke bodo kompresirane v <strong>.zip datoteko</strong>",
+  "RemoveFromList": "Odstrani iz seznama",
+  "PasswordProtectedFiles": "Za nadaljevanje <0>vnesite geslo</0> za zaščitene datoteke",
+  "EnterPassword": "Vnesi geslo"
 }

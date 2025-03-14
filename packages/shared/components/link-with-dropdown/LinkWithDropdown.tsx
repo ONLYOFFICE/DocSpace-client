@@ -54,6 +54,7 @@ const LinkWithDropdown = ({
   id,
   style,
   isDisabled = false,
+  directionX,
   directionY,
   hasScroll = false,
   withExpander = false,
@@ -61,6 +62,8 @@ const LinkWithDropdown = ({
   isOpen = false,
   children,
   manualWidth,
+  isAside,
+  withoutBackground,
   ...rest
 }: LinkWithDropDownProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -222,8 +225,11 @@ const LinkWithDropdown = ({
         }
         open={state.isOpen}
         forwardedRef={ref}
+        directionX={directionX}
         directionY={directionY}
         clickOutsideAction={onClose}
+        isAside={isAside}
+        withoutBackground={withoutBackground}
         {...rest}
       >
         {showScroll ? (

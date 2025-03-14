@@ -27,21 +27,23 @@
 import React from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
-import App from "./App";
+import Error404 from "@docspace/shared/components/errors/Error404";
+import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
 
-import Spaces from "./categories/spaces";
-import Settings from "./categories/settings";
 import { WhiteLabel } from "client/WhiteLabelPage";
 import { BrandName } from "client/BrandNamePage";
 import { CompanyInfoSettings } from "client/CompanyInfoPage";
 import { AdditionalResources } from "client/AdditionalResPage";
+
+import App from "./App";
+
+import Spaces from "./categories/spaces";
+import Settings from "./categories/settings";
 import Payments from "./categories/payments";
 import Bonus from "./categories/bonus";
+
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import PrivateRouteWrapper from "./components/PrivateRouterWrapper";
-
-import Error404 from "@docspace/shared/components/errors/Error404";
-import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
 
 const routes = [
   {
@@ -94,6 +96,10 @@ const routes = [
       },
       {
         path: "/management/settings/restore",
+        element: <Settings />,
+      },
+      {
+        path: "/management/settings/encrypt-data",
         element: <Settings />,
       },
       {

@@ -48,7 +48,6 @@ function StartFillingSelectorDialog({
   filesSettings,
   header,
   createDefineRoomType,
-  headerLabel,
 }: StartFillingSelectorDialogProps) {
   const { t } = useTranslation(["Common", "Editor"]);
   const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
@@ -88,7 +87,6 @@ function StartFillingSelectorDialog({
       isPanelVisible={isVisible}
       filesSettings={filesSettings}
       currentDeviceType={currentDeviceType}
-      headerLabel={headerLabel}
       submitButtonLabel={t("Common:CopyHere")}
       onSubmit={onSubmit}
       getIsDisabled={getIsDisabled}

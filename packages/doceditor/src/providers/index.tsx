@@ -39,8 +39,10 @@ import ErrorProvider from "./ErrorProvider";
 export type TContextData = {
   user: TUser | undefined;
   settings: TSettings | undefined;
+  initialTheme: ThemeKeys | undefined;
   systemTheme: ThemeKeys | undefined;
   colorTheme: TGetColorTheme | undefined;
+  locale?: string;
 };
 
 export type TProviders = {

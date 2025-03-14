@@ -182,7 +182,7 @@ export const EBOOK_EXST = [".fb2", ".pb2", ".ibk", ".prc", ".epub", ".djvu"];
 
 export const SYSTEM_THEME_KEY = "system_theme";
 
-const SDK_VERSION = "1.0.1";
+const SDK_VERSION = "2.0.0";
 
 export const SDK_SCRIPT_URL =
   typeof window !== "undefined"
@@ -217,3 +217,10 @@ export const OPERATIONS_NAME = Object.freeze({
   upload: "upload",
   deleteVersionFile: "deleteVersionFile",
 });
+
+export const thumbnailStatuses = {
+  WAITING: 0,
+  CREATED: 1,
+  ERROR: 2,
+  NOT_REQUIRED: 3,
+};

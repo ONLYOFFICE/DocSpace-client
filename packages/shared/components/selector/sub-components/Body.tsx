@@ -91,6 +91,8 @@ const Body = ({
   setInputItemVisible,
   inputItemVisible,
   injectedElement,
+
+  isSSR,
 }: BodyProps) => {
   const infoBarRef = useRef<HTMLDivElement>(null);
   const injectedElementRef = useRef<HTMLElement>(null);
@@ -216,13 +218,18 @@ const Body = ({
     }
   }, [injectedElement, itemsCount]);
 
-  let listHeight =
-    bodyHeight - CONTAINER_PADDING - infoBarHeight - injectedElementHeight;
+  let listHeight = bodyHeight - infoBarHeight - injectedElementHeight;
 
   const showSearch = withSearch && (isSearch || itemsCount > 0);
   const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
 
-  if (showSearch) listHeight -= SEARCH_HEIGHT;
+  if (!withTabs && withPadding) {
+    listHeight -= CONTAINER_PADDING;
+  }
+
+  if (showSearch) {
+    listHeight -= SEARCH_HEIGHT;
+  }
   if (withTabs) listHeight -= TABS_HEIGHT;
   if (withInfo) {
     const infoEl = document.getElementById("selector-info-text");
@@ -307,7 +314,39 @@ const Body = ({
             rowLoader={rowLoader}
           />
 
-          {bodyHeight ? (
+          {isSSR && !bodyHeight ? (
+            <Scrollbar
+              style={{
+                height: `calc(100% - ${Math.abs(listHeight)}px)`,
+                overflow: "hidden",
+              }}
+            >
+              {items.map((item, index) => (
+                <div
+                  key={item.id}
+                  style={{ height: 48, display: "flex", alignItems: "center" }}
+                >
+                  <Item
+                    index={index}
+                    style={{}}
+                    data={{
+                      items,
+                      onSelect,
+                      isMultiSelect: isMultiSelect || false,
+                      rowLoader,
+                      isItemLoaded,
+                      renderCustomItem,
+                      setInputItemVisible,
+                      inputItemVisible,
+                      savedInputValue,
+                      setSavedInputValue,
+                      listHeight,
+                    }}
+                  />
+                </div>
+              ))}
+            </Scrollbar>
+          ) : (
             <InfiniteLoader
               ref={listOptionsRef}
               isItemLoaded={isItemLoaded}
@@ -342,7 +381,7 @@ const Body = ({
                 </List>
               )}
             </InfiniteLoader>
-          ) : null}
+          )}
         </>
       )}
     </StyledBody>

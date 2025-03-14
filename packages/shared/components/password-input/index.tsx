@@ -35,8 +35,8 @@ import React, {
 import { TooltipRefProps } from "react-tooltip";
 import classNames from "classnames";
 
-import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
-import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
+import EyeReactSvg from "PUBLIC_DIR/images/eye.react.svg";
+import EyeOffReactSvg from "PUBLIC_DIR/images/eye.off.react.svg";
 
 import { InputBlock } from "../input-block";
 import { Link, LinkType } from "../link";
@@ -151,6 +151,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       checkPassword,
       setState,
       onChange,
+      state.value,
     );
     const { onGeneratePassword } = usePasswordGenerator(
       generatorSpecial,
@@ -365,7 +366,8 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
 
     const renderInputGroup = () => {
       const { type, value } = state;
-      const iconName = type === "password" ? EyeOffReactSvgUrl : EyeReactSvgUrl;
+      const iconNode =
+        type === "password" ? <EyeOffReactSvg /> : <EyeReactSvg />;
       const iconButtonClassName = `password_eye--${
         type === "password" ? "close" : "open"
       }`;
@@ -381,7 +383,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
             name={inputName}
             hasError={hasError}
             isDisabled={isDisabled}
-            iconName={iconName}
+            iconNode={iconNode}
             iconButtonClassName={iconButtonClassName}
             value={
               isSimulateType && type === "password" ? bullets : (value ?? "")

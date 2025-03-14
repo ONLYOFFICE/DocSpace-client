@@ -379,6 +379,8 @@ export type SelectorProps = TSelectorHeader &
 
     withPadding?: boolean;
     injectedElement?: React.ReactElement;
+
+    isSSR?: boolean;
   };
 
 export type BodyProps = TSelectorInfo & {
@@ -410,6 +412,8 @@ export type BodyProps = TSelectorInfo & {
   descriptionText?: string;
   withInfoBadge?: boolean;
   injectedElement?: React.ReactElement;
+
+  isSSR?: boolean;
 };
 
 export type FooterProps = TSelectorFooterSubmitButton &

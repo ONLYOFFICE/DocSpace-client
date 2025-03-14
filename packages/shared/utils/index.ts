@@ -27,6 +27,7 @@
 "use client";
 
 import moment from "moment-timezone";
+import { TTranslation } from "../types";
 
 import { isArrayEqual } from "./array";
 import * as email from "./email";
@@ -78,14 +79,18 @@ import {
   isBetaLanguage,
   getLogoUrl,
 } from "./common";
-import { DeviceType, FileFillingFormStatus } from "../enums";
+import {
+  DeviceType,
+  FilterType,
+  RoomsType,
+  FileFillingFormStatus,
+} from "../enums";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
 import { injectDefaultTheme } from "./injectDefaultTheme";
 import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
-import type { TTranslation } from "../types";
 import { fakeFormFillingList } from "./formFillingTourData";
 
 export {
@@ -231,7 +236,7 @@ export const isLockedSharedRoom = (item?: TRoom) => {
 };
 
 export const addLog = (log: string, category: "socket") => {
-  if (!window.ClientConfig?.logs.enableLogs) return;
+  if (!window.ClientConfig?.logs?.enableLogs) return;
 
   if (window.ClientConfig.logs.logsToConsole) console.log(log);
   else {
@@ -244,7 +249,7 @@ export const addLog = (log: string, category: "socket") => {
 };
 
 export const getFillingStatusTitle = (
-  status: FileFillingFormStatus,
+  status: FileFillingFormStatus | undefined,
   t: TTranslation,
 ) => {
   switch (status) {
@@ -258,6 +263,84 @@ export const getFillingStatusTitle = (
       return t("Common:Stopped");
     case FileFillingFormStatus.Completed:
       return t("Common:Complete");
+    default:
+      return "";
+  }
+};
+
+export const getCheckboxItemId = (key: string | FilterType | RoomsType) => {
+  switch (key) {
+    case "all":
+      return "selected-all";
+    case FilterType.FoldersOnly:
+      return "selected-only-folders";
+    case FilterType.DocumentsOnly:
+      return "selected-only-documents";
+    case FilterType.PresentationsOnly:
+      return "selected-only-presentations";
+    case FilterType.SpreadsheetsOnly:
+      return "selected-only-spreadsheets";
+    case FilterType.ImagesOnly:
+      return "selected-only-images";
+    case FilterType.MediaOnly:
+      return "selected-only-media";
+    case FilterType.ArchiveOnly:
+      return "selected-only-archives";
+    case FilterType.FilesOnly:
+      return "selected-only-files";
+
+    case `room-${RoomsType.CustomRoom}`:
+      return "selected-only-custom-room";
+    case `room-${RoomsType.EditingRoom}`:
+      return "selected-only-collaboration-rooms";
+
+    case `room-${RoomsType.PublicRoom}`:
+      return "selected-only-public-rooms";
+    case `room-${RoomsType.VirtualDataRoom}`:
+      return "selected-only-vdr-rooms";
+
+    default:
+      return "";
+  }
+};
+
+export const getCheckboxItemLabel = (
+  t: TTranslation,
+  key: FilterType | RoomsType | string,
+) => {
+  switch (key) {
+    case "all":
+      return t("Common:All");
+    case FilterType.FoldersOnly:
+      return t("Common:Folders");
+    case FilterType.DocumentsOnly:
+      return t("Common:Documents");
+    case FilterType.PresentationsOnly:
+      return t("Common:Presentations");
+    case FilterType.SpreadsheetsOnly:
+      return t("Common:Spreadsheets");
+    case FilterType.ImagesOnly:
+      return t("Common:Images");
+    case FilterType.MediaOnly:
+      return t("Common:Media");
+    case FilterType.ArchiveOnly:
+      return t("Common:Archives");
+    case FilterType.FilesOnly:
+      return t("Common:Files");
+
+    case `room-${RoomsType.CustomRoom}`:
+      return t("Common:CustomRooms");
+    case `room-${RoomsType.EditingRoom}`:
+      return t("Common:CollaborationRooms");
+
+    case `room-${RoomsType.FormRoom}`:
+      return t("Common:FormRoom");
+
+    case `room-${RoomsType.PublicRoom}`:
+      return t("Common:PublicRoomLabel");
+    case `room-${RoomsType.VirtualDataRoom}`:
+      return t("Common:VirtualDataRoom");
+
     default:
       return "";
   }

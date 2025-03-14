@@ -28,8 +28,7 @@ import React from "react";
 import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Events, RoomsType } from "@docspace/shared/enums";
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { Events, SortByFieldName, RoomsType } from "@docspace/shared/enums";
 
 class FilesTableHeader extends React.Component {
   constructor(props) {

@@ -34,7 +34,6 @@ import {
   getConfig,
   getOAuthClient,
   getOauthJWTToken,
-  getPortal,
   getScopeList,
   getSettings,
   getUser,
@@ -50,19 +49,25 @@ async function Page({
 }) {
   const clientId = searchParams.clientId ?? searchParams.client_id;
 
-  const [user, settings, config, jwtToken] = await Promise.all([
+  const [user, settings, config] = await Promise.all([
     getUser(),
     getSettings(),
     getConfig(),
-    getOauthJWTToken(),
   ]);
+
+  const cookieStore = cookies();
+
+  let token = cookieStore.get("x-signature")?.value;
+  let new_token = "";
+
+  if (!token) {
+    new_token = await getOauthJWTToken();
+  }
 
   const [data, scopes] = await Promise.all([
     getOAuthClient(clientId),
-    getScopeList(jwtToken),
+    getScopeList(new_token),
   ]);
-
-  const redirect_url = cookies().get("x-redirect-authorization-uri")!.value;
 
   const client = data?.client as IClientProps;
 
@@ -75,7 +80,7 @@ async function Page({
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+  const culture = cookieStore.get(LANGUAGE)?.value ?? settingsCulture;
 
   return (
     <>
@@ -94,8 +99,6 @@ async function Page({
               scopes={scopes}
               user={user}
               baseUrl={config?.oauth2?.origin}
-              token={jwtToken}
-              redirect_url={redirect_url}
             />
           </>
         </ColorTheme>

@@ -91,7 +91,6 @@ const ShareFormDialog = ({
             headerLabel: headerLabelSFSDialog,
             onBackClick: onCloseStartFillingSelectDialog,
           }}
-          headerLabel={headerLabelSFSDialog}
           onClose={handleClose}
           createDefineRoomType={createDefineRoomType}
           getIsDisabled={getIsDisabledStartFillingSelectDialog}

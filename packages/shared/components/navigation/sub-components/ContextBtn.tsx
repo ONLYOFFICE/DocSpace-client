@@ -26,7 +26,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/17/vertical-dots.react.svg?url";
+import VerticalDotsReactSvg from "PUBLIC_DIR/images/icons/17/vertical-dots.react.svg";
 
 import { IconButton } from "../../icon-button";
 import { ContextMenu, ContextMenuRefType } from "../../context-menu";
@@ -88,7 +88,7 @@ const ContextButton = ({
     >
       <IconButton
         onClick={onClick}
-        iconName={VerticalDotsReactSvgUrl}
+        iconNode={<VerticalDotsReactSvg />}
         id={id}
         size={17}
         isFill

@@ -57,7 +57,6 @@ type GenerateDeveloperTokenDialogProps = {
   client?: IClientProps;
 
   email?: string;
-  jwtToken?: string;
 
   setGenerateDeveloperTokenDialogVisible?: (value: boolean) => void;
 };
@@ -69,7 +68,6 @@ const getDate = (date: Date, i18nArg: i18n) => {
 const GenerateDeveloperTokenDialog = ({
   client,
   email,
-  jwtToken,
   setGenerateDeveloperTokenDialogVisible,
 }: GenerateDeveloperTokenDialogProps) => {
   const { i18n: i18nParam, t } = useTranslation([
@@ -104,12 +102,7 @@ const GenerateDeveloperTokenDialog = ({
 
     setRequestRunning(true);
 
-    await api.oauth.revokeDeveloperToken(
-      token,
-      client!.clientId,
-      secret,
-      jwtToken!,
-    );
+    await api.oauth.revokeDeveloperToken(token, client!.clientId, secret);
 
     setRequestRunning(false);
 
@@ -132,18 +125,10 @@ const GenerateDeveloperTokenDialog = ({
 
     setRequestRunning(true);
 
-    const { clientSecret } = await api.oauth.getClient(
-      client.clientId,
-      jwtToken!,
-    );
+    const { clientSecret } = await api.oauth.getClient(client.clientId);
 
     api.oauth
-      .generateDevelopToken(
-        client.clientId,
-        clientSecret,
-        client.scopes,
-        jwtToken!,
-      )
+      .generateDevelopToken(client.clientId, clientSecret, client.scopes)
       ?.then((data) => {
         setRequestRunning(false);
 
@@ -173,16 +158,13 @@ const GenerateDeveloperTokenDialog = ({
 
   React.useEffect(() => {
     const fecthClient = async () => {
-      const { clientSecret } = await api.oauth.getClient(
-        client!.clientId,
-        jwtToken!,
-      );
+      const { clientSecret } = await api.oauth.getClient(client!.clientId);
 
       setSecret(clientSecret);
     };
 
     fecthClient();
-  }, [client?.clientId, jwtToken]);
+  }, [client?.clientId]);
 
   return (
     <ModalDialog
@@ -285,18 +267,14 @@ export default inject(
     oauthStore: OAuthStore;
     userStore: UserStore;
   }) => {
-    const {
-      setGenerateDeveloperTokenDialogVisible,
-      bufferSelection,
-      jwtToken,
-    } = oauthStore;
+    const { setGenerateDeveloperTokenDialogVisible, bufferSelection } =
+      oauthStore;
 
     const { user } = userStore;
 
     return {
       setGenerateDeveloperTokenDialogVisible,
       client: bufferSelection,
-      jwtToken,
       email: user?.email,
     };
   },

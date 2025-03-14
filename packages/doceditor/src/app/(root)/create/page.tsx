@@ -138,10 +138,10 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
       { fileTitle, parentId, templateId, open, action },
       "File create failed, open empty editor",
     );
-    const documentserverUrl = await getEditorUrl();
+    const documentServerUrl = await getEditorUrl();
 
     return (
-      <Editor documentserverUrl={documentserverUrl?.docServiceUrl ?? ""} />
+      <Editor documentServerUrl={documentServerUrl?.docServiceUrl ?? ""} />
     );
   }
 
@@ -159,7 +159,7 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     (error.statusCode === 403 ||
       error.type === EditorConfigErrorType.TenantQuotaException)
   ) {
-    const documentserverUrl = await getEditorUrl();
+    const documentServerUrl = await getEditorUrl();
 
     log.debug(
       { fileTitle, parentId, templateId, open, action, error },
@@ -168,7 +168,7 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 
     return (
       <Editor
-        documentserverUrl={documentserverUrl?.docServiceUrl ?? ""}
+        documentServerUrl={documentServerUrl?.docServiceUrl ?? ""}
         errorMessage={error.message}
       />
     );

@@ -149,6 +149,8 @@ const Selector = ({
   withoutBackground,
   withInfoBadge,
   injectedElement,
+
+  isSSR,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
 
@@ -638,7 +640,11 @@ const Selector = ({
           withHeader={withHeader}
           withPadding={withPadding}
           footerVisible={footerVisible || !!alwaysShowFooter}
-          items={[...renderedItems]}
+          items={
+            isSSR && renderedItems.length === 0
+              ? items.map((x) => ({ ...x, isSelected: false }))
+              : [...renderedItems]
+          }
           isMultiSelect={isMultiSelect}
           onSelect={onSelectAction}
           hasNextPage={hasNextPage}
@@ -654,6 +660,7 @@ const Selector = ({
           inputItemVisible={inputItemVisible}
           setInputItemVisible={setInputItemVisible}
           injectedElement={injectedElement}
+          isSSR={isSSR}
           // info
           {...infoProps}
         />

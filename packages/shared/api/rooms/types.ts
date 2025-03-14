@@ -40,7 +40,7 @@ export type ICover = {
 };
 
 export type TLogo = {
-  cover: ICover;
+  cover?: ICover;
   original: string;
   large: string;
   medium: string;
@@ -99,19 +99,21 @@ export type TRoom = {
   private: boolean;
   inRoom: boolean;
   id: number;
+  usedSpace?: number;
+  fileEntryType: number;
   rootFolderId: number;
   canShare: boolean;
   title: string;
   access: ShareAccessRights;
   shared: boolean;
-  created: Date;
+  created: string;
   createdBy: TCreatedBy;
-  updated: Date;
+  updated: string;
   rootFolderType: FolderType;
   updatedBy: TCreatedBy;
   isArchive?: boolean;
   security: TRoomSecurity;
-  lifetime: TRoomLifetime;
+  lifetime?: TRoomLifetime;
   external?: boolean;
   passwordProtected?: boolean;
   requestToken?: string;
@@ -148,6 +150,7 @@ export type TExportRoomIndexTask = {
 };
 
 export type TPublicRoomPassword = {
+  id: string;
   linkId: string;
   shared: boolean;
   status: ValidationStatus;
@@ -160,3 +163,21 @@ export type TNewFiles = {
   date: string;
   items: TNewFilesItem[];
 };
+
+export type TValidateShareRoom =
+  | {
+      id: string;
+      isAuthenticated: boolean;
+      linkId: string;
+      shared: boolean;
+      status: number;
+      tenantId: number;
+      title: string;
+    }
+  | {
+      isAuthenticated: boolean;
+      linkId: string;
+      shared: boolean;
+      status: number;
+      tenantId: number;
+    };

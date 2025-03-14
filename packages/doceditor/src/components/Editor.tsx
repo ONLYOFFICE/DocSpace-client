@@ -76,7 +76,7 @@ const Editor = ({
   user,
 
   doc,
-  documentserverUrl,
+  documentServerUrl,
   fileInfo,
   isSharingAccess,
   errorMessage,
@@ -177,12 +177,7 @@ const Editor = ({
       }
     )?.["FileLocation"]; // t("FileLocation");
 
-    if (
-      editorGoBack === "false" ||
-      editorGoBack === false ||
-      user?.isVisitor ||
-      !user
-    ) {
+    if (!editorGoBack || user?.isVisitor || !user) {
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
@@ -395,7 +390,7 @@ const Editor = ({
   return (
     <DocumentEditor
       id={EDITOR_ID}
-      documentServerUrl={documentserverUrl}
+      documentServerUrl={documentServerUrl}
       config={
         errorMessage || isSkipError
           ? {

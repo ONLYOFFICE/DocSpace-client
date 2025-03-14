@@ -108,13 +108,12 @@ const Root = ({
   shareKey,
 
   deepLinkSettings,
+  baseSdkConfig,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
-  const [sdkConfig, setSdkConfig] = React.useState<TFrameConfig | null>(null);
 
-  const documentserverUrl = config?.editorUrl ?? error?.editorUrl;
+  const documentServerUrl = config?.editorUrl ?? error?.editorUrl;
   const fileInfo = config?.file;
-
   const instanceId = config?.document?.referenceData.instanceId;
   const roomId = config?.document?.referenceData.roomId;
 
@@ -130,13 +129,11 @@ const Root = ({
     documentType: config?.documentType,
   });
 
-  const { sdkFrameConfig } = useSDK();
-
-  React.useEffect(() => setSdkConfig(sdkFrameConfig), [sdkFrameConfig]);
+  const { sdkConfig } = useSDK(baseSdkConfig);
 
   const { getErrorMessage } = useError({
     error,
-    editorUrl: documentserverUrl,
+    editorUrl: documentServerUrl,
   });
 
   const { isShowDeepLink, setIsShowDeepLink } = useDeepLink({
@@ -145,12 +142,15 @@ const Root = ({
     email: user?.email,
     deepLinkSettings,
   });
+
   const { filesSettings } = useFilesSettings({});
+
   useSocketHelper({
     socketUrl: user ? (settings?.socketUrl ?? "") : "",
     user,
     shareKey,
   });
+
   const {
     onSDKRequestSaveAs,
     onCloseSelectFolderDialog,
@@ -161,6 +161,7 @@ const Root = ({
     titleSelectorFolderDialog,
     extensionSelectorFolderDialog,
   } = useSelectFolderDialog({});
+
   const {
     onSDKRequestInsertImage,
     onSDKRequestReferenceSource,
@@ -281,14 +282,14 @@ const Root = ({
     />
   ) : (
     <div style={{ width: "100%", height: "100%" }}>
-      {documentserverUrl && (
+      {documentServerUrl && (
         <Editor
           config={config}
           user={user}
           successAuth={successAuth}
           doc={doc}
           isSharingAccess={isSharingAccess}
-          documentserverUrl={documentserverUrl}
+          documentServerUrl={documentServerUrl}
           fileInfo={fileInfo}
           sdkConfig={sdkConfig}
           errorMessage={error?.message}

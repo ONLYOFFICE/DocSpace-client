@@ -30,9 +30,8 @@ import { withTranslation } from "react-i18next";
 
 import { TFilterSortBy } from "@docspace/shared/api/people/types";
 import { TableHeader, TTableColumn } from "@docspace/shared/components/table";
-import { Events } from "@docspace/shared/enums";
 
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { Events, SortByFieldName } from "@docspace/shared/enums";
 
 import {
   TableHeaderColumn,

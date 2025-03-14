@@ -64,11 +64,12 @@ const TileView = ({
       headingFolders={t("Common:Folders")}
       headingFiles={t("Common:Files")}
     >
-      {items.map((item) => (
+      {items.map((item, index) => (
         <Tile
           key={`${item?.isFolder ? "folder" : "file"}_${item.id}`}
           item={item}
           getIcon={getIcon}
+          index={index}
         />
       ))}
     </TileContainer>

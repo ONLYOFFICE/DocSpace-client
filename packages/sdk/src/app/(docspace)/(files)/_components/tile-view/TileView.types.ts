@@ -43,6 +43,7 @@ export type TileViewProps = {
 export type TileProps = {
   item: TFolderItem | TFileItem;
   getIcon: TGetIcon;
+  index: number;
 };
 
 export type TileContentProps = {

@@ -43,7 +43,7 @@ import Badges from "@docspace/shared/components/badges";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
-import { generateFilesRowValue } from "../../../_utils";
+import { generateFilesItemValue } from "../../../_utils";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "../RowView.types";
@@ -88,7 +88,7 @@ const Row = observer(
 
     const isChecked = filesSelectionStore.isCheckedItem(item);
 
-    const value = generateFilesRowValue(item, false, index);
+    const value = generateFilesItemValue(item, false, index);
 
     return (
       <StyledWrapper

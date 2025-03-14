@@ -50,6 +50,7 @@ import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import classNames from "classnames";
+import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 
 const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   if (item.isFolder) return undefined;
@@ -60,7 +61,7 @@ const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   return getIcon(temporaryExtension, 96, item.contentLength);
 };
 
-const Tile = ({ item, getIcon }: TileProps) => {
+const Tile = ({ item, getIcon, index }: TileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("Common");
   const theme = useTheme();
@@ -74,6 +75,7 @@ const Tile = ({ item, getIcon }: TileProps) => {
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
   const temporaryIcon = getTemporaryIcon(item, getIcon);
   const isChecked = isCheckedItem(item);
+  const value = generateFilesItemValue(item, false, index);
 
   const openItem = (e: React.MouseEvent) => {
     const { target } = e;
@@ -158,6 +160,8 @@ const Tile = ({ item, getIcon }: TileProps) => {
         className={classNames("files-item", {
           "tile-selected": isChecked,
         })}
+        // @ts-expect-error: value required for SelectionArea
+        value={value}
       >
         {item.isFolder ? (
           <FolderTile {...commonTileProps} />

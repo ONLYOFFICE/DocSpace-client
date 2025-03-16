@@ -34,4 +34,5 @@ export interface RoleStepProps {
   histories: [string, string][];
   currentUserId: string;
   withHistory?: boolean;
+  stoppedBy?: TUser;
 }

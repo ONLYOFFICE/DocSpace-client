@@ -45,6 +45,7 @@ const RoleStep = ({
   roleName,
   histories,
   currentUserId,
+  stoppedBy,
   withHistory = true,
 }: RoleStepProps) => {
   const [collapsed, setCollapsed] = useState(true);
@@ -104,7 +105,7 @@ const RoleStep = ({
         <RoleHistories
           className={styles.roleHistories}
           histories={history}
-          userName={userName}
+          stoppedBy={stoppedBy}
         />
       ) : null}
     </div>

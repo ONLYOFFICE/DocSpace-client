@@ -490,7 +490,7 @@ export type TFormRoleMappingRequest = {
 
 export type TFileFillingFormStatus = {
   user: TUser;
-  stopedBy: string;
+  stopedBy?: TUser;
   roleName: string;
   roleColor: string;
   roleStatus: FileFillingFormStatus;

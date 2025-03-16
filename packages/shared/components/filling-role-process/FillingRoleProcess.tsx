@@ -48,6 +48,7 @@ const FillingRoleProcess = ({
             processStatus={detail.roleStatus}
             roleName={detail.roleName}
             histories={histories}
+            stoppedBy={detail.stopedBy}
           />
         );
       })}

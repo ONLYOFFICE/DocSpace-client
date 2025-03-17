@@ -51,6 +51,7 @@ import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import classNames from "classnames";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
+import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
 
 const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   if (item.isFolder) return undefined;
@@ -71,6 +72,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
 
   const { openFile } = useFilesActions({ t });
   const { openFolder } = useFolderActions({ t });
+  const { getContextMenuModel } = useContextMenuModel({ item });
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
   const temporaryIcon = getTemporaryIcon(item, getIcon);
@@ -91,6 +93,8 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
 
     item.isFolder ? openFolder(item.id, item.title) : openFile(item);
   };
+
+  const contextMenuModel = getContextMenuModel(true);
 
   const element = (
     <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
@@ -131,7 +135,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
 
   const commonTileProps = {
     item,
-    contextOptions: [],
+    contextOptions: contextMenuModel,
     isHighlight: false,
     checked: isChecked,
     isActive: false,
@@ -141,13 +145,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
     showHotkeyBorder: false,
 
     onSelect: () => addSelection(item),
-    tileContextClick: () => {},
-    getContextModel: () => [],
-    hideContextMenu: () => {},
-    setSelection: () => {},
-    withCtrlSelect: () => {},
-    withShiftSelect: () => {},
-
+    getContextModel: getContextMenuModel,
     element,
     badges: badgesComponent,
     children: tileContent,

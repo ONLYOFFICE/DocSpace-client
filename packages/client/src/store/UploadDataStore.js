@@ -1735,7 +1735,7 @@ class UploadDataStore {
         if (f.error.indexOf("password") > -1) {
           toastr.warning(
             <Trans
-              i18nKey="Files:PasswordProtectedFiles"
+              i18nKey="Common:PasswordProtectedFiles"
               t={t}
               components={[
                 <ColorTheme

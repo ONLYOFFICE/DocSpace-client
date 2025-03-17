@@ -148,7 +148,7 @@ const HistoryTableRow = (props) => {
 
   const isChecked = isIdChecked(item.id);
 
-  const webhookTrigger = WebhookTriggers[item.trigger];
+  const webhookTrigger = t(WebhookTriggers[item.trigger]);
 
   return (
     <StyledWrapper

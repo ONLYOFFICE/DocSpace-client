@@ -16,7 +16,6 @@
   "FormVDRConfirmationOfStartTitle": "Form is ready for filling in room",
   "FormVDRSectionCompletedDescription": "The assigned portion of the PDF form has been successfully completed. The filling status of the form can be monitored in the room and via the Filling status panel. An email notification will be sent once the form is fully completed.",
   "FormVDRYourTurnDescription": "You are assigned to fill out the form as the first role. A notification has been sent to your email. You can start filling it out now or copy the filling link and return later.",
-  "GoToRoom": "Go to room",
   "LinkToFillOutForm": "Link to fill out form:",
   "LinkToForm": "Link to form:",
   "LinkToViewOnlyForm": "Link to view-only form:",

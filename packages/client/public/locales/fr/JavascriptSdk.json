@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Afficher le type de fichier",
   "FrameId": "ID du cadre",
   "GetCode": "Obtenir le code d'insertion",
-  "GoToRoom": "passer à la salle",
   "Header": "En-tête",
   "HeaderDescription": "Vous pouvez désactiver l'en-tête dans la version mobile pour limiter l'accès aux sections de {{productName}} (identique à la désactivation du menu de gauche dans la version de bureau).",
   "HtmlCodeDescription": "Intégrez {{productName}} ou sa partie à l'aide de la balise <script>. Copiez le code HTML ci-dessous et insérez-le dans votre fichier HTML.",

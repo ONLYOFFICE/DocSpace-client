@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Hiển thị kiểu tập tin",
   "FrameId": "Id khung",
   "GetCode": "Nhận mã để chèn",
-  "GoToRoom": "vào phòng",
   "Header": "Tiêu đề",
   "HeaderDescription": "Bạn có thể tắt tiêu đề trong phiên bản dành cho thiết bị di động để hạn chế quyền truy cập vào các phần {{productName}} (giống như tắt menu bên trái trong phiên bản dành cho máy tính để bàn).",
   "HtmlCodeDescription": "Nhúng {{productName}} hoặc một phần của nó bằng thẻ <script>. Hãy sao chép mã HTML bên dưới và chèn nó vào tập tin HTML của bạn.",

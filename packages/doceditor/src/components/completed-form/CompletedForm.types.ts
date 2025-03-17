@@ -50,9 +50,9 @@ export type CompletedFormProps = {
 };
 
 export type CompletedVDRFormProps = {
-  file: TFile | null;
+  file: TFile;
   isStartFilling?: boolean;
   formFillingStatus: TFileFillingFormStatus[];
-  user: TUser | undefined;
-  roomId: string | undefined;
+  user: TUser;
+  roomId: string;
 };

@@ -5,6 +5,7 @@
   "DescriptionForAnonymous": "Your submitted PDF form was assigned a unique form number. To check the status, please contact the form owner.",
   "DescriptionForRegisteredUser": "Your submitted PDF form available to you in the Complete folder.",
   "FillItOutAgain": "Fill it out again",
+  "FillOutForm": "Fill out form",
   "FormCompletedSuccessfully": "Form completed successfully",
   "FormFinalized": "Form Finalized",
   "FormNumber": "Form number",
@@ -17,6 +18,7 @@
   "FormVDRYourTurnDescription": "You are assigned to fill out the form as the first role. A notification has been sent to your email. You can start filling it out now or copy the filling link and return later.",
   "GoToRoom": "Go to room",
   "LinkToFillOutForm": "Link to fill out form:",
-  "Title": "The form is completed",
-  "FillOutForm": "Fill out form"
+  "LinkToForm": "Link to form:",
+  "LinkToViewOnlyForm": "Link to view-only form:",
+  "Title": "The form is completed"
 }

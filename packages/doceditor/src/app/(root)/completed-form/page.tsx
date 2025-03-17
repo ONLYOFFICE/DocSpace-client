@@ -23,18 +23,19 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { CompletedForm } from "@/components/completed-form";
+import { StartFillingMode } from "@docspace/shared/enums";
+
 import { logger } from "@/../logger.mjs";
+import { CompletedForm } from "@/components/completed-form";
 
 import {
   getFileById,
-  getFileLink,
   getFillingSession,
   getFormFillingStatus,
   getUser,
 } from "@/utils/actions";
 import { CompletedVDRForm } from "@/components/completed-form/CompletedVDRForm";
-import { StartFillingMode } from "@docspace/shared/enums";
+import { CompletedFormEmpty } from "@/components/completed-form/CompletedForm.empty";
 
 const log = logger.child({ module: "Create page" });
 
@@ -54,6 +55,8 @@ async function Page({ searchParams }: PageProps) {
       getFileById(formId!),
       getUser(formId!),
     ]);
+
+    if (!file || !user || !roomId) return <CompletedFormEmpty />;
 
     return (
       <CompletedVDRForm

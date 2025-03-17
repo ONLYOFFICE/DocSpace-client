@@ -400,6 +400,8 @@ export const VDRMainContent = styled.main`
   .completed-form__file {
     grid-area: form-file;
 
+    cursor: pointer;
+
     svg {
       flex-shrink: 0;
     }
@@ -423,6 +425,7 @@ export const VDRMainContent = styled.main`
 
   .completed-form__form-link {
     grid-area: form-link;
+    color: ${(props) => props.theme.completedForm.descriptionColor};
   }
 
   .completed-form__roles {
@@ -490,6 +493,19 @@ export const Footer = styled.footer`
 
   .link {
     grid-area: link;
+    color: ${({ theme }) =>
+      theme.currentColorScheme?.main.buttons ?? "#4781d1"};
+    text-underline-offset: 2px;
+
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.85;
+      }
+    }
+
+    :active {
+      filter: brightness(82%);
+    }
   }
 
   .primary-button {
@@ -502,9 +518,9 @@ export const Footer = styled.footer`
   @media ${mobile} {
     grid-template-columns: 1fr;
     grid-template-areas:
-    "primary-button"
-    "secondary-button"
-    "link";
+      "primary-button"
+      "secondary-button"
+      "link";
     gap: 8px;
   }
 `;

@@ -88,18 +88,53 @@ export const CompletedVDRForm = ({
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
   const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
-  const url = useMemo(() => {
-    if (!file) return "";
-
-    const { origin, pathname } = new URL(file.webUrl);
-
-    return `${origin}${pathname}?fileId=${file.id}&action=fill`;
-  }, [file]);
-
-  if (!file || !formFillingStatus || !roomId) return;
-
   const isYournTurn = file.formFillingStatus === FileFillingFormStatus.YourTurn;
   const completed = file.formFillingStatus === FileFillingFormStatus.Completed;
+  const isTurnToFill = isYournTurn && isStartFilling;
+
+  const url = useMemo(() => {
+    const { origin, pathname } = new URL(file.webUrl);
+
+    const query = new URLSearchParams();
+
+    query.set("fileId", file.id.toString());
+
+    if (!completed) query.set("action", "fill");
+
+    return `${origin}${pathname}?${query.toString()}`;
+  }, [completed, file]);
+
+  const label = useMemo(() => {
+    if (isStartFilling) return t("CompletedForm:LinkToFillOutForm");
+
+    if (completed) return t("CompletedForm:LinkToViewOnlyForm");
+
+    return t("CompletedForm:LinkToForm");
+  }, [t, isStartFilling, completed]);
+
+  const header = useMemo(() => {
+    if (isStartFilling) {
+      return t("CompletedForm:FormVDRConfirmationOfStartTitle");
+    }
+
+    if (completed) return t("CompletedForm:FormFinalized");
+
+    return t("CompletedForm:FormSectionCompleted");
+  }, [t, isStartFilling, completed]);
+
+  const headerDescription = useMemo(() => {
+    if (isStartFilling) {
+      return isYournTurn
+        ? t("CompletedForm:FormVDRYourTurnDescription")
+        : t("CompletedForm:FormVDRConfirmationOfStartDescription");
+    }
+
+    if (completed) return t("CompletedForm:FormVDRCompletedDescription");
+
+    return t("CompletedForm:FormVDRSectionCompletedDescription");
+  }, [t, isStartFilling, completed, isYournTurn]);
+
+  const title = useMemo(() => getTitleWithoutExtension(file, false), [file]);
 
   const handleBackToRoom = () => {
     const url = getFolderUrl(roomId, false);
@@ -123,29 +158,10 @@ export const CompletedVDRForm = ({
     toastr.success(t("Common:LinkCopySuccess"));
   };
 
-  const getHeader = () => {
-    if (isStartFilling) {
-      return t("CompletedForm:FormVDRConfirmationOfStartTitle");
-    }
-
-    if (completed) return t("CompletedForm:FormFinalized");
-
-    return t("CompletedForm:FormSectionCompleted");
+  const handleClickFile = () => {
+    if (isYournTurn) handleFillForm();
+    else handleViewForm();
   };
-
-  const getHeaderDescription = () => {
-    if (isStartFilling) {
-      return isYournTurn
-        ? t("CompletedForm:FormVDRYourTurnDescription")
-        : t("CompletedForm:FormVDRConfirmationOfStartDescription");
-    }
-
-    if (completed) return t("CompletedForm:FormVDRCompletedDescription");
-
-    return t("CompletedForm:FormVDRSectionCompletedDescription");
-  };
-
-  const isTurnToFill = isYournTurn && isStartFilling;
 
   return (
     <ContainerCompletedForm bgPattern={bgPattern}>
@@ -158,30 +174,22 @@ export const CompletedVDRForm = ({
               <img src={logoUrl} alt="logo" />
             </picture>
             <TextWrapper className="completed-form__text-wrapper">
-              <Heading level={HeadingLevel.h1}>{getHeader()}</Heading>
-              <Text noSelect>{getHeaderDescription()}</Text>
+              <Heading level={HeadingLevel.h1}>{header}</Heading>
+              <Text noSelect>{headerDescription}</Text>
             </TextWrapper>
           </Header>
           <VDRMainContent>
-            <Box className="completed-form__file">
+            <Box className="completed-form__file" onClick={handleClickFile}>
               <PDFIcon />
-              <h5 className="completed-form__file-name">
-                {getTitleWithoutExtension(file, false)}
-              </h5>
+              <h5 className="completed-form__file-name">{title}</h5>
               {isYournTurn ? (
-                <FormFillIcon
-                  onClick={handleFillForm}
-                  className="completed-form_icon"
-                />
+                <FormFillIcon className="completed-form_icon" />
               ) : (
-                <EyeIcon
-                  onClick={handleViewForm}
-                  className="completed-form_icon"
-                />
+                <EyeIcon className="completed-form_icon" />
               )}
             </Box>
             <label htmlFor="form-link" className="completed-form__form-link">
-              {t("CompletedForm:LinkToFillOutForm")}
+              {label}
               <InputBlock
                 id="form-link"
                 isReadOnly

@@ -79,5 +79,7 @@
   "SubmenuHistory": "History",
   "UserFileUpdated": "File updated.",
   "Users": "Users",
-  "Versions": "Versions"
+  "Versions": "Versions",
+  "FileCustomFilterEnabled": "Custom filter enabled.",
+  "FileCustomFilterDisabled": "Custom filter disabled."
 }

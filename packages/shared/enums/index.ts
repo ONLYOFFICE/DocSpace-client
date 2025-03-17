@@ -658,12 +658,46 @@ export enum ValidationStatus {
   ExternalAccessDenied = 5,
 }
 
+export enum FileFillingFormStatus {
+  None = 0,
+  Draft = 1,
+  YourTurn = 2,
+  InProgress = 3,
+  Completed = 4,
+  Stopped = 5,
+}
+
+export enum RoleStatus {
+  Waiting = "waiting",
+  YourTurn = "yourTurn",
+  Filling = "filling",
+  Filled = "filled",
+  Stopped = "stopped",
+}
+
+export enum StartFillingMode {
+  None,
+  ShareToFillOut,
+  StartFilling,
+}
+
+export enum FormFillingManageAction {
+  Stop,
+  Resume,
+}
+
 export enum FormFillingTipsState {
   Starting = 1,
   Sharing = 2,
   Submitting = 3,
   Complete = 4,
   Uploading = 5,
+}
+
+export enum FillingFormStatusHistory {
+  OpenedAtDate = 0,
+  SubmissionDate = 1,
+  StopDate = 2,
 }
 
 export enum DeepLinkType {

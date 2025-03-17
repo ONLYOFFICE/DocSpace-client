@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Zobrazení typu souboru",
   "FrameId": "Id rámu",
   "GetCode": "Získejte kód pro vložení",
-  "GoToRoom": "jít do pokoje",
   "Header": "Záhlaví",
   "HeaderDescription": "V mobilní verzi můžete zakázat záhlaví a omezit tak přístup k sekcím {{productName}} (stejně jako při zakázání levého menu v desktopové verzi).",
   "HtmlCodeDescription": "Vložení {{productName}} nebo jeho části pomocí značky <script>. Zkopírujte níže uvedený kód HTML a vložte jej do svého souboru HTML.",

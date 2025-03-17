@@ -59,6 +59,8 @@ const StyledList = styled(List)`
   width: calc(100% + 20px) !important;
   margin-bottom: 24px;
 
+  overflow: visible !important;
+
   .members-list-item {
     // doesn't require mirroring for RTL
     left: unset !important;

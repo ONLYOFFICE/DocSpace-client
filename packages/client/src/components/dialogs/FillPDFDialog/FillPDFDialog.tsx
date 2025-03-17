@@ -31,6 +31,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { RoomsType } from "@docspace/shared/enums";
 
 import { Card } from "./sub-components/Card";
 
@@ -63,12 +64,12 @@ const FillPDFDialog = inject<TStore>(
       };
 
       const openEditorFill = () => {
-        gotoDocEditor!(false, data, null, false, true);
+        gotoDocEditor!(data, false, null, false, true);
         onClose();
       };
 
       const openSelector = () => {
-        setShareCollectSelector(true, data);
+        setShareCollectSelector(true, data, RoomsType.VirtualDataRoom);
         onClose();
       };
 
@@ -93,6 +94,12 @@ const FillPDFDialog = inject<TStore>(
               <Card
                 title={t("FillPDFDialog:ShareCollectTitle")}
                 description={t("FillPDFDialog:ShareCollectDescription")}
+                buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
+                onClick={openSelector}
+              />
+              <Card
+                title={t("Common:InVirtualDataRoomTitle")}
+                description={t("Common:InVirtualDataRoomDescription")}
                 buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
                 onClick={openSelector}
               />

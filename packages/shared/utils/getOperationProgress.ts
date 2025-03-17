@@ -24,13 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import type { TOperation } from "../api/files/types";
 import { getProgress } from "../api/files";
 
 export const getOperationProgress = async (
   id: string,
   errorMessage: string,
 ) => {
-  const promise = new Promise((resolve, reject) => {
+  const promise = new Promise<TOperation | undefined>((resolve, reject) => {
     setTimeout(async () => {
       try {
         await getProgress().then((res) => {

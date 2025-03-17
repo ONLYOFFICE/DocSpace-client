@@ -378,6 +378,21 @@
       }
     },
     {
+      "label": "Frontend | build:lite",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn build:lite",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | start",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn start",
@@ -396,6 +411,21 @@
       "label": "Frontend | start-prod",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn start-prod",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | start-prod:lite",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn start-prod:lite",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -441,6 +471,21 @@
       "label": "Frontend | build-and-start-prod",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; yarn build ; yarn start-prod",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | build-and-start-prod:lite",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn build:lite ; yarn start-prod:lite",
       "group": {
         "kind": "build",
         "isDefault": true

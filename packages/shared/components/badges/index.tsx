@@ -115,6 +115,7 @@ const Badges = ({
   onCreateRoom,
   newFilesBadge,
   className,
+  isExtsCustomFilter,
 }: BadgesProps) => {
   const {
     id,
@@ -134,8 +135,7 @@ const Badges = ({
 
   const isTile = viewAs === "tile";
 
-  const customFilterEnabled = true;
-  const isXlsx = item.fileExst === ".xlsx";
+  const customFilterEnabled = item.customFilterEnabled;
 
   const countVersions =
     versionGroup && versionGroup > 999 ? "999+" : versionGroup;
@@ -277,7 +277,7 @@ const Badges = ({
         </BadgeWrapper>
       ) : null}
 
-      {customFilterEnabled && !isRoom && isXlsx ? (
+      {customFilterEnabled && !isRoom && isExtsCustomFilter ? (
         <>
           <ColorTheme
             themeId={ThemeId.IconButtonCustomFilter}

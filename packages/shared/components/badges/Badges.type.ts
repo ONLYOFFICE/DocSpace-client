@@ -53,6 +53,7 @@ type ItemData = {
   security?: TRoomSecurity | TFileSecurity | TFolderSecurity;
   shared?: boolean;
   viewAccessibility?: TFileViewAccessibility;
+  customFilterEnabled?: boolean;
 };
 
 export type BadgesProps = {
@@ -79,6 +80,7 @@ export type BadgesProps = {
   onCreateRoom?: () => void;
   newFilesBadge?: React.ReactElement;
   className?: string;
+  isExtsCustomFilter?: boolean;
 };
 
 export type BadgeWrapperProps = {

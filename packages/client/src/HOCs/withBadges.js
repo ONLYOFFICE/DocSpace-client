@@ -170,6 +170,7 @@ export default function withBadges(WrappedComponent) {
         isPublicRoom,
         isRecentTab,
         isTemplatesFolder,
+        isExtsCustomFilter,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -213,6 +214,7 @@ export default function withBadges(WrappedComponent) {
           canEditing={canEditing}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
+          isExtsCustomFilter={isExtsCustomFilter}
           newFilesBadge={
             <NewFilesBadge
               className="tablet-badge"
@@ -243,6 +245,7 @@ export default function withBadges(WrappedComponent) {
         publicRoomStore,
         userStore,
         settingsStore,
+        filesSettingsStore,
       },
       { item },
     ) => {
@@ -272,6 +275,10 @@ export default function withBadges(WrappedComponent) {
       const isRoom = !!roomType;
       const isMutedBadge = isRoom ? mute : isMuteCurrentRoomNotifications;
 
+      const extsCustomFilter =
+        filesSettingsStore.filesSettings.extsWebCustomFilterEditing;
+      const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
+
       return {
         isArchiveFolderRoot,
         theme,
@@ -299,6 +306,7 @@ export default function withBadges(WrappedComponent) {
         checkAndOpenLocationAction,
         isTemplatesFolder,
         onCreateRoomFromTemplate,
+        isExtsCustomFilter,
       };
     },
   )(observer(WithBadges));

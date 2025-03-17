@@ -2159,7 +2159,10 @@ class FilesStore {
       const isOldForm =
         item.fileExst === ".docxf" || item.fileExst === ".oform"; // TODO: Remove after change security options
       const isPdf = item.fileExst === ".pdf";
-      const isXlsx = item.fileExst === ".xlsx";
+
+      const extsCustomFilter =
+        this.filesSettingsStore.filesSettings.extsWebCustomFilterEditing;
+      const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
 
       let fileOptions = [
         // "open",
@@ -2230,7 +2233,7 @@ class FilesStore {
         ]);
       }
 
-      if (!canSetUpCustomFilter && !isXlsx) {
+      if (!canSetUpCustomFilter || !isExtsCustomFilter) {
         fileOptions = removeOptions(fileOptions, ["custom-filter"]);
       }
 
@@ -3299,6 +3302,7 @@ class FilesStore {
         external,
         passwordProtected,
         watermark,
+        customFilterEnabled,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3477,6 +3481,7 @@ class FilesStore {
         external,
         passwordProtected,
         watermark,
+        customFilterEnabled,
       };
     });
   };

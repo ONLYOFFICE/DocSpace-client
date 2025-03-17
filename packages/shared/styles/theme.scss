@@ -921,6 +921,7 @@
   --room-icon-background-color-archive: #{$gray};
   --room-icon-button-color: #{$gray};
   --room-icon-opacity: 1;
+  --room-icon-edit-icon-background: #{$gray-light-mid};
 }
 
 .dark {
@@ -932,6 +933,7 @@
   --room-icon-background-color-archive: #{$white};
   --room-icon-button-color: #{$gray-dark};
   --room-icon-opacity: 0.1;
+  --room-icon-edit-icon-background: #{$gray-dark-mid};
 }
 
 .light {

@@ -162,6 +162,7 @@ const ExpiredComboBox = ({
           fontSize="12px"
           fontWeight={400}
           isDisabled={isDisabled}
+          directionY="both"
         >
           {/* @ts-expect-error pass object as children for correct work link component */}
           {{ date }}

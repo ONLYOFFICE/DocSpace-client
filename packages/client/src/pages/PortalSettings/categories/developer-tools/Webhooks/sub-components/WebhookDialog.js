@@ -34,6 +34,7 @@ import { LabledInput } from "./LabledInput";
 import { Hint } from "../styled-components";
 import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
+import TriggersForm from "./TriggersForm";
 
 const StyledWebhookForm = styled.form`
   margin-top: 7px;
@@ -88,8 +89,12 @@ const WebhookDialog = (props) => {
     secretKey: "",
     enabled: webhook ? webhook.enabled : true,
     ssl: webhook ? webhook.ssl : true,
+    triggers: webhook ? webhook.triggers : 0,
   });
   const [passwordInputKey, setPasswordInputKey] = useState(0);
+  const [triggerAll, setTriggerAll] = useState(
+    webhook ? webhook.triggers === 0 : true,
+  );
 
   const onModalClose = () => {
     onClose();
@@ -120,6 +125,13 @@ const WebhookDialog = (props) => {
     }
   };
 
+  const toggleTrigger = (triggerValue) => {
+    setWebhookInfo((prev) => ({
+      ...prev,
+      triggers: prev.triggers ^ triggerValue,
+    }));
+  };
+
   const validateForm = () => {
     const isUrlValid = validateUrl(webhookInfo.uri);
     setIsValid(() => ({
@@ -133,6 +145,10 @@ const WebhookDialog = (props) => {
 
   const handleSubmitClick = () => {
     validateForm() && submitButtonRef.current.click();
+  };
+
+  const handleOnChangeTriggerAll = (value) => {
+    setTriggerAll(value === "true");
   };
 
   const onFormSubmit = async (e) => {
@@ -150,6 +166,7 @@ const WebhookDialog = (props) => {
         uri: "",
         secretKey: "",
         enabled: true,
+        triggers: 0,
       });
       setIsPasswordValid(false);
       setPasswordInputKey((prevKey) => prevKey + 1);
@@ -169,7 +186,9 @@ const WebhookDialog = (props) => {
       secretKey: "",
       enabled: webhook ? webhook.enabled : true,
       ssl: webhook ? webhook.ssl : true,
+      triggers: webhook ? webhook.triggers : 0,
     });
+    setTriggerAll(webhook ? webhook.triggers === 0 : true);
   }, [webhook]);
 
   return (
@@ -229,7 +248,13 @@ const WebhookDialog = (props) => {
             onChange={onInputChange}
             isDisabled={isLoading}
           />
-
+          <TriggersForm
+            isDisabled={isLoading}
+            triggers={webhookInfo.triggers}
+            toggleTrigger={toggleTrigger}
+            triggerAll={triggerAll}
+            onChange={handleOnChangeTriggerAll}
+          />
           <button
             type="submit"
             ref={submitButtonRef}

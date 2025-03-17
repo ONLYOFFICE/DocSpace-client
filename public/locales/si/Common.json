@@ -445,5 +445,16 @@
   "Website": "අඩවිය",
   "Yes": "ඔව්",
   "Yesterday": "ඊයේ",
-  "You": "ඔබ"
+  "You": "ඔබ",
+  "ArchivingData": "දත්ත සංරක්‍ෂණය වෙමින්",
+  "FormTemplates": "ආකෘතිපත්‍ර අච්චු",
+  "Other": "වෙනත්",
+  "DownloadAs": "මෙලෙස බාගන්න",
+  "CustomFormat": "අභිරුචි ආකෘතිය",
+  "OriginalFormat": "මුල් ආකෘතිය",
+  "ChooseFormatText": "එක් එක් ගොනුව බාගැනීමට වුවමනා ආකෘතිය තෝරන්න",
+  "ConvertMessage": "මුල් පිටපතට වඩා වෙනස් ආකෘතියකට ගොනුව හැරවීමට තෝරා ගන්නේ නම්, ඇතැම් දත්ත නැති වීමට ඉඩ තිබේ.",
+  "ConvertToZip": "ගොනු <strong>.zip ගොනුවකට</strong> හැකිළීම සිදුවේ",
+  "RemoveFromList": "ලැයිස්තුවෙන් ඉවත් කරන්න",
+  "EnterPassword": "මුරපදය යොදන්න"
 }

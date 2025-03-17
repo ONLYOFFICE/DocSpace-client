@@ -38,7 +38,7 @@ import {
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Button } from "@docspace/shared/components/button";
-import SimulatePassword from "../../SimulatePassword";
+import { SimulatePassword } from "@docspace/shared/components/simulate-password";
 
 const FileRow = observer(
   ({

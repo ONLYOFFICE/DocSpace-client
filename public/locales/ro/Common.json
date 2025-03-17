@@ -580,5 +580,17 @@
   "Years": "Ani",
   "Yes": "Da",
   "Yesterday": "Ieri",
-  "You": "Dvs"
+  "You": "Dvs",
+  "ArchivingData": "Se arhivează datele",
+  "FormTemplates": "Șabloane formular",
+  "Other": "Altă",
+  "DownloadAs": "Descărcare ca",
+  "CustomFormat": "Format particularizat",
+  "OriginalFormat": "Formatul original",
+  "ChooseFormatText": "Selectați formatul pentru fiecare fișier de încărcat",
+  "ConvertMessage": "Dacă doriți să convertiți fișierul într-un alt format decât cel de origine, unele date se pot pierde.",
+  "ConvertToZip": "Fișiere vor fi comprimate în format <strong>.zip</strong>",
+  "RemoveFromList": "Șterge din lista",
+  "PasswordProtectedFiles": "Introduceți <0>parola</0> pentru fișiere protejate pentru a continua",
+  "EnterPassword": "Introduceți parola"
 }

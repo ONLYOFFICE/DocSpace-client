@@ -58,7 +58,7 @@ const ErrorFile = ({ t, item, theme, onTextClick, showPasswordInput }) => {
       />
       {item.needPassword ? (
         <Text className="enter-password" fontWeight="600" onClick={onTextClick}>
-          {showPasswordInput ? t("HideInput") : t("EnterPassword")}
+          {showPasswordInput ? t("HideInput") : t("Common:EnterPassword")}
         </Text>
       ) : null}
     </div>

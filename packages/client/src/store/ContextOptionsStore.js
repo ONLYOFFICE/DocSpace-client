@@ -247,20 +247,7 @@ class ContextOptionsStore {
   };
 
   onClickLinkFillForm = (item) => {
-    const isFormRoom =
-      this.selectedFolderStore?.roomType === RoomsType.FormRoom ||
-      this.selectedFolderStore?.parentRoomType === FolderType.FormRoom;
-
-    if (
-      !item.startFilling &&
-      item.isPDFForm &&
-      !isFormRoom &&
-      !this.publicRoomStore.isPublicRoom &&
-      item?.security?.Copy
-    )
-      return this.dialogsStore.setFillPDFDialogData(true, item);
-
-    return this.gotoDocEditor(item, false, null, false, !isFormRoom);
+    return this.gotoDocEditor(item, false, null, false, item.isPDFForm);
   };
 
   onClickReconnectStorage = async (item, t) => {
@@ -595,7 +582,7 @@ class ContextOptionsStore {
       });
       setConvertDialogVisible(true);
     } else {
-      this.gotoDocEditor(item, false);
+      this.gotoDocEditor(item, false, null, item.isPDFForm);
     }
   };
 

@@ -2589,11 +2589,14 @@ class FilesActionStore {
 
         const isPDF = item.fileExst === ".pdf";
 
-        const canEditForm =
-          isPDF &&
-          item.isPDFForm &&
-          item.security?.EditForm &&
-          !item.startFilling;
+        const { isPersonalRoom } = this.treeFoldersStore;
+
+        const canEditForm = isPersonalRoom
+          ? item.isPDFForm
+          : isPDF &&
+            item.isPDFForm &&
+            item.security?.EditForm &&
+            !item.startFilling;
 
         return openDocEditor(id, false, shareKey, canEditForm);
       }

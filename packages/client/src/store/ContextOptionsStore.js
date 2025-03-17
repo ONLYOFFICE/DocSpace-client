@@ -657,7 +657,9 @@ class ContextOptionsStore {
     this.dialogsStore.setDownloadDialogVisible(true);
   };
 
-  onSetUpCustomFilter = () => {};
+  onSetUpCustomFilter = (item, t) => {
+    this.filesActionsStore.changeCustomFilter(item, t);
+  };
 
   onDuplicate = (item) => {
     if (item.isRoom && this.currentQuotaStore.isWarningRoomsDialog) {
@@ -1864,9 +1866,11 @@ class ContextOptionsStore {
       {
         id: "option_custom-filter",
         key: "custom-filter",
-        label: t("Files:CustomFilterEnable"),
+        label: item.customFilterEnabled
+          ? t("Files:CustomFilterDisable")
+          : t("Files:CustomFilterEnable"),
         icon: CustomFilterReactSvgUrl,
-        onClick: () => this.onSetUpCustomFilter(item),
+        onClick: () => this.onSetUpCustomFilter(item, t),
         disabled: false,
       },
       {

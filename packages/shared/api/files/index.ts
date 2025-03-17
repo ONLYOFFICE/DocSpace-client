@@ -566,6 +566,16 @@ export async function emptyTrash() {
   return res;
 }
 
+export async function enableCustomFilter(fileId: number, enabled: boolean) {
+  const data = { enabled };
+  const res = (await request({
+    method: "put",
+    url: `/files/file/${fileId}/customfilter`,
+    data,
+  })) as TOperation[];
+  return res;
+}
+
 export async function removeFiles(
   folderIds: number[],
   fileIds: number[],

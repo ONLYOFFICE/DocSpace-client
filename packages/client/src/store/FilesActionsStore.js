@@ -57,6 +57,7 @@ import {
   changeIndex,
   reorderIndex,
   deleteVersionFile,
+  enableCustomFilter,
 } from "@docspace/shared/api/files";
 import {
   Events,
@@ -1058,6 +1059,20 @@ class FilesActionStore {
     } finally {
       clearTimeout(timer);
     }
+  };
+
+  changeCustomFilter = async (item, t) => {
+    return enableCustomFilter(item.id, !item.customFilterEnabled)
+      .then((res) => {
+        if (res.customFilterEnabled) {
+          toastr.success(t("CustomFilterEnabled"));
+        } else {
+          toastr.success(t("CustomFilterDisabled"));
+        }
+      })
+      .catch((err) => {
+        toastr.error(err);
+      });
   };
 
   duplicateAction = async (item) => {

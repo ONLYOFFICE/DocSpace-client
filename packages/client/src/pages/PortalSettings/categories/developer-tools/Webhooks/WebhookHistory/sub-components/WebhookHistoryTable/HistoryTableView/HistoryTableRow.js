@@ -40,11 +40,11 @@ import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { toastr } from "@docspace/shared/components/toast";
-import { WebhookTriggers } from "@docspace/shared/enums";
 
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 
 import StatusBadge from "../../../../sub-components/StatusBadge";
+import { getTriggerTranslate } from "../../../../Webhooks.helpers";
 
 const StyledTableRow = styled(TableRow)`
   .textOverflow {
@@ -148,7 +148,7 @@ const HistoryTableRow = (props) => {
 
   const isChecked = isIdChecked(item.id);
 
-  const webhookTrigger = t(WebhookTriggers[item.trigger]);
+  const webhookTrigger = getTriggerTranslate(item.trigger, t);
 
   return (
     <StyledWrapper

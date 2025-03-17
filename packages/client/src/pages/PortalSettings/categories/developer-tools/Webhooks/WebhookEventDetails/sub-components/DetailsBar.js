@@ -32,9 +32,9 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { mobile, injectDefaultTheme } from "@docspace/shared/utils";
-import { WebhookTriggers } from "@docspace/shared/enums";
 
 import StatusBadge from "../../sub-components/StatusBadge";
+import { getTriggerTranslate } from "../../Webhooks.helpers";
 
 const BarWrapper = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
@@ -88,6 +88,8 @@ const DetailsBar = ({ eventDetails }) => {
   const formattedDelivery = formatDate(eventDetails.delivery);
   const formattedCreationTime = formatDate(eventDetails.creationTime);
 
+  const trigger = getTriggerTranslate(eventDetails.trigger, t);
+
   return (
     <BarWrapper>
       <BarItem>
@@ -105,7 +107,7 @@ const DetailsBar = ({ eventDetails }) => {
       <BarItem>
         <BarItemHeader>Trigger</BarItemHeader>
         <Text isInline fontWeight={600}>
-          {t(WebhookTriggers[eventDetails.trigger])}
+          {trigger}
         </Text>
       </BarItem>
       <BarItem>

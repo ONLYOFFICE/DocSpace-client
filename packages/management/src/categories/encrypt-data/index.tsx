@@ -29,7 +29,6 @@ import { useTranslation, Trans } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { HelpButton } from "@docspace/shared/components/help-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Link } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -88,15 +87,6 @@ const EncryptDataPage = ({ logoText }: EncryptDataPageProps) => {
           <Text fontSize="16px" fontWeight={700}>
             {t("EncryptData")}
           </Text>
-          <HelpButton
-            place="right"
-            offsetRight={0}
-            tooltipContent={
-              <Text fontSize="12px" fontWeight={600}>
-                {t("EncryptData")} {/* TODO: add translate */}
-              </Text>
-            }
-          />
           {status === EncryptionStatus.Encrypted ? (
             <div className="badge">
               <Text fontSize="14px" fontWeight={600}>

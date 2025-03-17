@@ -78,6 +78,12 @@ export type TArrowButtonProps = {
   onBackToParentFolder: TOnBackToParenFolder;
 };
 
+export type TBadgesProps = {
+  titleIcon: string;
+  isRootFolder: boolean;
+  titleIconTooltip?: string;
+};
+
 export type TTextProps = {
   title: string;
   isOpen: boolean;

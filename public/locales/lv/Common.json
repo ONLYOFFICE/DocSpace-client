@@ -579,5 +579,17 @@
   "Years": "Gadi",
   "Yes": "Jā",
   "Yesterday": "어제",
-  "You": "Jūs"
+  "You": "Jūs",
+  "ArchivingData": "Datu arhivēšana",
+  "FormTemplates": "Veidlapu veidnes",
+  "Other": "Cits",
+  "DownloadAs": "Lejupielādēt kā",
+  "CustomFormat": "Pielāgots formāts",
+  "OriginalFormat": "Oriģināls formāts",
+  "ChooseFormatText": "Izvēlieties katra lejupielādējamā faila formātu",
+  "ConvertMessage": "Ja izvēlaties konvertēt failu citā formātā nekā sākotnējais, daži dati var tikt zaudēti.",
+  "ConvertToZip": "Faili tiks saspiesti <strong>.zip failā</strong>",
+  "RemoveFromList": "Noņemt no saraksta",
+  "PasswordProtectedFiles": "Lai faili turpinātu būt aizsargāti, <0>ievadiet paroli</0>",
+  "EnterPassword": "Ievadiet paroli"
 }

@@ -580,5 +580,17 @@
   "Years": "Anos",
   "Yes": "Sim",
   "Yesterday": "Ontem",
-  "You": "Você"
+  "You": "Você",
+  "ArchivingData": "Arquivando dados",
+  "FormTemplates": "Modelos de formulário",
+  "Other": "Outro",
+  "DownloadAs": "Baixar como",
+  "CustomFormat": "Personalizar formato",
+  "OriginalFormat": "Formato Original",
+  "ChooseFormatText": "Escolha o formato para cada arquivo a ser baixado",
+  "ConvertMessage": "Se você optar por converter o arquivo para um formato diferente do original, alguns dados poderão ser perdidos.",
+  "ConvertToZip": "Os arquivos serão compactados no <strong>arquivo .zip</strong>",
+  "RemoveFromList": "Remover da lista",
+  "PasswordProtectedFiles": "Por favor, <0>digite uma senha</0> para que os arquivos protegidos continuem",
+  "EnterPassword": "Inserir senha"
 }

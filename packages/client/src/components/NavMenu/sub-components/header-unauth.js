@@ -94,6 +94,7 @@ const HeaderUnAuth = ({
   isLoaded,
   theme,
   cultures,
+  isPublicRoom,
 }) => {
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
@@ -107,7 +108,7 @@ const HeaderUnAuth = ({
   return (
     <Header isLoaded={isLoaded} className="navMenuHeaderUnAuth">
       <div className="header-items-wrapper">
-        {!isAuthenticated && isLoaded ? (
+        {(!isAuthenticated || isPublicRoom) && isLoaded ? (
           <div>
             <a className="header-logo-wrapper" href="/">
               <img className="header-logo-icon" src={logo} alt="Logo" />
@@ -138,9 +139,10 @@ HeaderUnAuth.propTypes = {
   isLoaded: PropTypes.bool,
 };
 
-export default inject(({ authStore, settingsStore }) => {
+export default inject(({ authStore, settingsStore, publicRoomStore }) => {
   const { isAuthenticated, isLoaded } = authStore;
   const { enableAdmMess, wizardToken, theme, cultures } = settingsStore;
+  const { isPublicRoom } = publicRoomStore;
 
   return {
     enableAdmMess,
@@ -149,5 +151,6 @@ export default inject(({ authStore, settingsStore }) => {
     isLoaded,
     theme,
     cultures,
+    isPublicRoom,
   };
 })(observer(HeaderUnAuth));

@@ -151,6 +151,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       checkPassword,
       setState,
       onChange,
+      state.value,
     );
     const { onGeneratePassword } = usePasswordGenerator(
       generatorSpecial,

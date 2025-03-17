@@ -256,6 +256,10 @@ export const useFeedTranslation = (
       return t("InfoPanel:FilledOutForm");
     case "FormOpenedForFilling":
       return t("InfoPanel:StartedFillingItOut");
+    case "FileCustomFilterEnabled":
+      return t("InfoPanel:FileCustomFilterEnabled");
+    case "FileCustomFilterDisabled":
+      return t("InfoPanel:FileCustomFilterDisabled");
 
     default:
       return null;

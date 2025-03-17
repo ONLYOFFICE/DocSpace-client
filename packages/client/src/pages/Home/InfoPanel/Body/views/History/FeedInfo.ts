@@ -47,6 +47,8 @@ export enum FeedAction {
   CHANGE_COLOR = "changeColor",
   CHANGE_COVER = "changeCover",
   DeleteVersion = "deleteVersion",
+  CustomFilterDisabled = "customFilterDisabled",
+  CustomFilterEnabled = "customFilterEnabled",
 }
 
 enum FeedTarget {
@@ -148,6 +150,16 @@ export const feedInfo = [
     key: "FileVersionRemoved",
     targetType: `${FeedTarget.File}`,
     actionType: `${FeedAction.DeleteVersion}`,
+  },
+  {
+    key: "FileCustomFilterDisabled",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.CustomFilterDisabled}`,
+  },
+  {
+    key: "FileCustomFilterEnabled",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.CustomFilterEnabled}`,
   },
   // FOLDER
   {

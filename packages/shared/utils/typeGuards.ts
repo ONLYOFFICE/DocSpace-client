@@ -38,8 +38,7 @@ export const isNumber = (value: unknown): value is number => {
 export const includesMethod = <T extends object, MethodName extends string>(
   obj: T,
   method: MethodName,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-): obj is T & Record<MethodName, Function> => {
+): obj is T & Record<MethodName, (...args: unknown[]) => unknown> => {
   return method in obj && typeof obj[method as keyof object] === "function";
 };
 

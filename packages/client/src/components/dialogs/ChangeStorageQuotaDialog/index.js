@@ -32,6 +32,7 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { setTenantQuotaSettings } from "@docspace/shared/api/settings";
+import StyledBodyContent from "./StyledComponent";
 
 import QuotaForm from "../../QuotaForm";
 
@@ -117,24 +118,26 @@ const ChangeStorageQuotaDialog = (props) => {
           : t("Common:ManageStorageQuota")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Text noSelect>
-          {isDisableQuota
-            ? t("Common:TurnOffDiskSpaceLimit", {
-                productName: t("Common:ProductName"),
-              })
-            : t("Common:SetDiskSpaceQuota", {
-                productName: t("Common:ProductName"),
-              })}
-        </Text>
-        {!isDisableQuota ? (
-          <QuotaForm
-            onSetQuotaBytesSize={onSetQuotaBytesSize}
-            isLoading={isLoading}
-            isError={isError}
-            initialSize={initialSize}
-            isAutoFocussed
-          />
-        ) : null}
+        <StyledBodyContent>
+          <Text noSelect>
+            {isDisableQuota
+              ? t("Common:TurnOffDiskSpaceLimit", {
+                  productName: t("Common:ProductName"),
+                })
+              : t("Common:SetDiskSpaceQuota", {
+                  productName: t("Common:ProductName"),
+                })}
+          </Text>
+          {!isDisableQuota ? (
+            <QuotaForm
+              onSetQuotaBytesSize={onSetQuotaBytesSize}
+              isLoading={isLoading}
+              isError={isError}
+              initialSize={initialSize}
+              isAutoFocussed
+            />
+          ) : null}
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

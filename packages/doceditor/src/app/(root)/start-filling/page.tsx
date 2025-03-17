@@ -34,6 +34,7 @@ import {
   getUser,
 } from "@/utils/actions";
 import { CompletedVDRForm } from "@/components/completed-form/CompletedVDRForm";
+import { CompletedFormEmpty } from "@/components/completed-form/CompletedForm.empty";
 
 const log = logger.child({ module: "Create page" });
 
@@ -51,6 +52,8 @@ async function Page({ searchParams }: PageProps) {
     getFileById(formId!),
     getUser(),
   ]);
+
+  if (!file || !user || !roomId || !formId) return <CompletedFormEmpty />;
 
   return (
     <CompletedVDRForm

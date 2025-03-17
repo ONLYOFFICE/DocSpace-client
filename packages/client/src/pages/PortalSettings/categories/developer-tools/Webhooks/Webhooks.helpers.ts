@@ -74,7 +74,7 @@ export const getTriggerTranslate = (trigger: number, t: TTranslation) => {
     case WebhookTriggers.FolderMoved:
       return t("FolderMoved");
     case WebhookTriggers.RoomCreated:
-      return t("RoomCreated");
+      return t("Files:RoomCreated");
     case WebhookTriggers.RoomUpdated:
       return t("RoomUpdated");
     case WebhookTriggers.RoomArchived:

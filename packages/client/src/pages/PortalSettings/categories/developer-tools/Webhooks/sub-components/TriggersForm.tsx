@@ -55,7 +55,7 @@ const TriggersForm = ({
   triggerAll,
   onChange,
 }: TProps) => {
-  const { t } = useTranslation(["Webhooks", "Common"]);
+  const { t } = useTranslation(["Webhooks", "Files", "Common"]);
 
   return (
     <div style={{ marginTop: "22px" }}>

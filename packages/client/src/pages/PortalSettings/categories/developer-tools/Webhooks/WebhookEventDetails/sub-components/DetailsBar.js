@@ -76,7 +76,7 @@ const FlexWrapper = styled.div`
 `;
 
 const DetailsBar = ({ eventDetails }) => {
-  const { t, i18n } = useTranslation("Webhooks");
+  const { t, i18n } = useTranslation(["Webhooks", "Files", "Common"]);
 
   const formatDate = (date) => {
     return `${moment(date)

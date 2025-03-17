@@ -88,7 +88,7 @@ const HistoryTableRow = (props) => {
     historyFilters,
     isRetryPending,
   } = props;
-  const { t, i18n } = useTranslation(["Webhooks", "Common"]);
+  const { t, i18n } = useTranslation(["Webhooks", "Files", "Common"]);
   const navigate = useNavigate();
   const { id } = useParams();
 

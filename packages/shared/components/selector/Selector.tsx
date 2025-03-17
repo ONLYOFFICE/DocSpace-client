@@ -148,6 +148,7 @@ const Selector = ({
   withBlur,
   withoutBackground,
   withInfoBadge,
+  injectedElement,
 
   isSSR,
 }: SelectorProps) => {
@@ -658,6 +659,7 @@ const Selector = ({
           descriptionText={descriptionText}
           inputItemVisible={inputItemVisible}
           setInputItemVisible={setInputItemVisible}
+          injectedElement={injectedElement}
           isSSR={isSSR}
           // info
           {...infoProps}

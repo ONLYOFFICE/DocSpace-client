@@ -55,7 +55,6 @@
   "FileTypeDisplay": "文件类型显示",
   "FrameId": "帧 ID",
   "GetCode": "获取要插入的代码",
-  "GoToRoom": "前往房间",
   "Header": "页眉",
   "HeaderDescription": "您可以在移动版本中禁用标题以限制对{{productName}}部分的访问（就像在桌面版本中禁用左侧菜单一样）。",
   "HtmlCodeDescription": "使用 <script> 标签嵌入{{productName}}或其部分。复制以下 HTML 代码并将其插入到您的 HTML 文件中。",

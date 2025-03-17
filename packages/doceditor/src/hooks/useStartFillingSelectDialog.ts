@@ -26,12 +26,12 @@
 "use client";
 import { useCallback, useRef, useState } from "react";
 
-import { ConflictResolveType } from "@docspace/shared/enums";
-import {
-  checkFileConflicts,
-  copyToFolder,
-  getProgress,
-} from "@docspace/shared/api/files";
+import { ConflictResolveType, RoomsType } from "@docspace/shared/enums";
+// import {
+//   checkFileConflicts,
+//   copyToFolder,
+//   getProgress,
+// } from "@docspace/shared/api/files";
 // import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 import { toastr } from "@docspace/shared/components/toast";
 import { CREATED_FORM_KEY, EDITOR_ID } from "@docspace/shared/constants";
@@ -87,6 +87,10 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
   // const { t } = useTranslation(["Common"]);
   const resolveRef = useRef<(value: string | PromiseLike<string>) => void>();
 
+  const [createDefineRoomType, setCreateDefineRoomType] = useState<RoomsType>(
+    RoomsType.FormRoom,
+  );
+
   const [headerLabelSFSDialog, setHeaderLabelSFSDialog] = useState("");
 
   const [isVisible, setIsVisible] = useState(false);
@@ -96,10 +100,14 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
 
   const requestRunning = useRef(false);
 
-  const onSDKRequestStartFilling = useCallback((headerLabel: string) => {
-    setHeaderLabelSFSDialog(headerLabel);
-    setIsVisible(true);
-  }, []);
+  const onSDKRequestStartFilling = useCallback(
+    (headerLabel: string, formType: RoomsType = RoomsType.FormRoom) => {
+      setHeaderLabelSFSDialog(headerLabel);
+      setIsVisible(true);
+      setCreateDefineRoomType(formType);
+    },
+    [],
+  );
 
   const onClose = () => {
     if (requestRunning.current) return;
@@ -269,6 +277,7 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
   };
 
   return {
+    createDefineRoomType,
     onSDKRequestStartFilling,
     onSubmitStartFillingSelectDialog: onSubmit,
     onCloseStartFillingSelectDialog: onClose,

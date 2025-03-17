@@ -28,7 +28,6 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
@@ -38,7 +37,6 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 
 import { startEncryption } from "@docspace/shared/api/settings";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 export const EncryptWarningDialog = ({
   encryptWarningDialogVisible,
@@ -50,15 +48,12 @@ export const EncryptWarningDialog = ({
   isNotifyChecked: boolean;
 }) => {
   const { t } = useTranslation(["Management", "Common"]);
-  const navigate = useNavigate();
 
   const onConfirm = async () => {
     try {
       await startEncryption(isNotifyChecked);
       setEncryptWarningDialogVisible(false);
-      navigate(
-        combineUrl(window.ClientConfig?.proxy?.url, "/encryption-portal")
-      );
+      window.location.href = "/encryption-portal";
     } catch (error) {
       toastr.error(error!);
     }

@@ -133,7 +133,7 @@ const CSP = ({
   standalone,
   t,
   theme,
-  disableCSPInput,
+  disableCSP,
 }) => {
   const [domain, changeDomain] = useState("");
   const [error, setError] = useState(null);
@@ -192,6 +192,7 @@ const CSP = ({
             label={item}
             onClose={() => deleteDomain(item)}
             title={item}
+            hideCross={disableCSP}
           />
         ))
       : null;
@@ -255,7 +256,7 @@ const CSP = ({
           placeholder={t("CSPInputPlaceholder")}
           tabIndex={1}
           hasError={error}
-          isDisabled={disableCSPInput}
+          isDisabled={disableCSP}
         />
         <SelectorAddButton isDisabled={!domain.trim()} onClick={addDomain} />
       </Container>
@@ -280,7 +281,9 @@ export default inject(({ settingsStore, userStore }) => {
     standalone,
   } = settingsStore;
 
-  const disableCSPInput = userStore.user.isCollaborator;
+  const { user } = userStore;
+
+  const disableCSP = user.isCollaborator || user.isRoomAdmin;
 
   return {
     cspDomains,
@@ -289,6 +292,6 @@ export default inject(({ settingsStore, userStore }) => {
     installationGuidesUrl,
     setCSPSettings,
     standalone,
-    disableCSPInput,
+    disableCSP,
   };
 })(observer(CSP));

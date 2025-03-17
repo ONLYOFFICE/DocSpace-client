@@ -23,16 +23,9 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { CompletedForm } from "@/components/completed-form";
 import { logger } from "@/../logger.mjs";
 
-import {
-  getFileById,
-  getFileLink,
-  getFillingSession,
-  getFormFillingStatus,
-  getUser,
-} from "@/utils/actions";
+import { getFileById, getFormFillingStatus, getUser } from "@/utils/actions";
 import { CompletedVDRForm } from "@/components/completed-form/CompletedVDRForm";
 import { CompletedFormEmpty } from "@/components/completed-form/CompletedForm.empty";
 

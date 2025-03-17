@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Zobrazenie typu súboru",
   "FrameId": "ID rámu",
   "GetCode": "Získať kód na vloženie",
-  "GoToRoom": "prejsť do miestnosti",
   "Header": "Hlavička",
   "HeaderDescription": "V mobilnej verzii môžete vypnúť hlavičku a obmedziť tak prístup k sekciám {{productName}} (rovnako ako keď vypnete ľavé menu v počítačovej verzii).",
   "HtmlCodeDescription": "Vloženie {{productName}} alebo jeho časti pomocou tagu <script>. Skopírujte nižšie uvedený kód HTML a vložte ho do svojho súboru HTML.",

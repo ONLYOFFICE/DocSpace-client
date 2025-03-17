@@ -55,7 +55,6 @@
   "FileTypeDisplay": "ファイルタイプの表示",
   "FrameId": "フレームID",
   "GetCode": "挿入するコードを取得する",
-  "GoToRoom": "ルームへ移動する",
   "Header": "ヘッダー",
   "HeaderDescription": "モバイル版でヘッダーを無効にして、{{productName}}セクションへのアクセスを制限することができます。デスクトップ版で左メニューを無効にするのと同じです。",
   "HtmlCodeDescription": "<script>タグを使用して、{{productName}}またはその一部を埋め込みます。以下のHTMLコードをコピーして、HTMLファイルに挿入してください。",

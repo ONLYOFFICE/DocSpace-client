@@ -45,7 +45,7 @@ import {
   TGetReferenceData,
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
-import { EDITOR_ID } from "@docspace/shared/constants";
+import { EDITOR_ID, FILLING_STATUS_ID } from "@docspace/shared/constants";
 import {
   assign,
   frameCallCommand,
@@ -171,6 +171,11 @@ const useEditorEvents = ({
 
     if (errorMessage || isSkipError)
       return docEditor?.showMessage?.(errorMessage || t("Common:InvalidLink"));
+
+    if (window && FILLING_STATUS_ID in window && window[FILLING_STATUS_ID]) {
+      docEditor?.requestRoles?.();
+      delete window[FILLING_STATUS_ID];
+    }
 
     console.log("ONLYOFFICE Document Editor is ready", docEditor);
     const url = window.location.href;

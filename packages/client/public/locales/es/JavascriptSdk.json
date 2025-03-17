@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Visualización del tipo de archivo",
   "FrameId": "Id del marco",
   "GetCode": "Obtener código para insertar",
-  "GoToRoom": "ir a la sala",
   "Header": "Encabezado",
   "HeaderDescription": "Puede desactivar el encabezado en la versión móvil para limitar el acceso a las secciones de {{productName}} (al igual que desactivar el menú de la izquierda en la versión de escritorio).",
   "HtmlCodeDescription": "Incrustación de {{productName}} o parte de él utilizando la etiqueta <script>. Copie el código HTML siguiente e insértelo en su archivo HTML. ",

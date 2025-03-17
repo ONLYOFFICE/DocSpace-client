@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Fayl növü görüntüsü",
   "FrameId": "Çərçivə ID",
   "GetCode": "Əlavə etmək üçün kodu əldə edin",
-  "GoToRoom": "otağa keçid edin",
   "Header": "Başlıq",
   "HeaderDescription": "{{productName}} bölmələrinə girişi məhdudlaşdırmaq üçün mobil versiyada başlığı deaktiv edə bilərsiniz (masaüstü versiyada sol menyunu söndürmək kimi).",
   "HtmlCodeDescription": "<script> teqindən istifadə edərək {{productName}}-in və ya onun bir hissəsinin yerləşdirilməsi. Aşağıdakı HTML kodunu kopyalayın və HTML faylınıza əlavə edin.",

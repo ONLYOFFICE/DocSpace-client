@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Tiedostotyypin näyttäminen",
   "FrameId": "Kehyksen tunnus",
   "GetCode": "Hanki koodi lisättäväksi",
-  "GoToRoom": "Mene huoneeseen",
   "Header": "Ylätunniste",
   "HeaderDescription": "Voit poistaa ylätunnisteen käytöstä mobiiliversiossa rajoittaaksesi pääsyä {{productName}}-osioihin (samoin kuin vasemman valikon poistaminen työpöytäversiossa).",
   "HtmlCodeDescription": "{{productName}}-n tai sen osan upotus käyttäen <script> tagia. Kopioi alla oleva HTML-koodi ja syötä se HTML-tiedostoosi.\",",

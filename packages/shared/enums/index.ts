@@ -693,7 +693,7 @@ export const enum SortByFieldName {
  * Enum for webhook triggers
  * @readonly
  */
-export const enum WebhookTriggers {
+export enum WebhookTriggers {
   All = 0,
   UserCreated = 1,
   UserInvited = 2,

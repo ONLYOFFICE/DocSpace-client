@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import FormRoomSvg from "PUBLIC_DIR/images/icons/32/room/form.svg";
 import VirtualDataRoomRoomSvg from "PUBLIC_DIR/images/icons/32/room/virtual-data.svg";
+import ShareSvg from "PUBLIC_DIR/images/icons/32/share.svg";
 import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg";
 
 import { Text } from "../../components/text";
@@ -41,6 +42,7 @@ import { ShareFormDialogProps } from "./ShareFormDialog.types";
 const ShareFormDialog: FC<ShareFormDialogProps> = ({
   onClickFormRoom,
   onClickVirtualDataRoom,
+  onClickShareFile,
   visible,
   onClose,
   container,
@@ -59,6 +61,26 @@ const ShareFormDialog: FC<ShareFormDialogProps> = ({
       <ModalDialog.Header>{t("Common:ShareToFillOut")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.container}>
+          <div className={styles.card}>
+            <div className={styles.cardHeader}>
+              <ShareSvg />
+              <Text as="h5" fontSize="14px" lineHeight="16px" isBold>
+                {t("Common:QuickSharing")}
+              </Text>
+            </div>
+            <Text fontSize="12px" lineHeight="16px">
+              {t("Common:ShareTheOriginalFormForFillingOut")}
+            </Text>
+            <Button
+              scale
+              isClicked
+              className={styles.button}
+              onClick={onClickShareFile}
+              label={t("Common:Share")}
+              icon={<ArrowIcon />}
+              size={ButtonSize.normal}
+            />
+          </div>
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <FormRoomSvg />

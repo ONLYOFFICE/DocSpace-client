@@ -24,13 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface ShareFormDialogProps {
-  visible: boolean;
-  onClose: () => void;
+import React from "react";
+import { ShareFormDialog } from "@docspace/shared/dialogs/ShareFormDialog";
+import { inject, observer } from "mobx-react";
 
-  onClickFormRoom?: () => void;
-  onClickVirtualDataRoom?: () => void;
-  onClickShareFile?: () => void;
-  container?: React.ReactNode;
-  visibleContainer?: boolean;
-}
+const ShareFormPanel = ({
+  visible,
+  setIsShareFormData,
+  callbackFunction,
+  fileId,
+  files,
+  setShareCollectSelector,
+}) => {
+  const onClose = () => {
+    setIsShareFormData(false);
+  };
+
+  const onClickShareFile = () => {
+    callbackFunction();
+    setIsShareFormData(false);
+  };
+
+  const onClickFormRoom = () => {
+    const file = files.find((item) => item.id === fileId);
+
+    setShareCollectSelector(true, file);
+
+    setIsShareFormData(false);
+  };
+
+  console.log("ShareFormPanel");
+
+  return (
+    <ShareFormDialog
+      visible={visible}
+      onClose={onClose}
+      onClickShareFile={onClickShareFile}
+      onClickFormRoom={onClickFormRoom}
+    />
+  );
+};
+
+export default inject(({ dialogsStore, filesStore }) => {
+  const { setIsShareFormData, setShareCollectSelector } = dialogsStore;
+  const { files } = filesStore;
+
+  return {
+    setIsShareFormData,
+    files,
+    setShareCollectSelector,
+  };
+})(observer(ShareFormPanel));

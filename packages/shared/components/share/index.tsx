@@ -78,6 +78,7 @@ const Share = (props: ShareProps) => {
     addFileLink,
     shareChanged,
     setShareChanged,
+    onOpenPanel,
   } = props;
   const { t } = useTranslation(["Common"]);
   const [fileLinks, setFileLinks] = useState<TLink[]>([]);
@@ -287,51 +288,60 @@ const Share = (props: ShareProps) => {
   };
 
   const changeAccessOption = async (item: AccessItem, link: TFileLink) => {
-    try {
-      setLoadingLinks([...loadingLinks, link.sharedTo.id]);
+    setLoadingLinks([...loadingLinks, link.sharedTo.id]);
 
-      const expDate = moment(link.sharedTo.expirationDate);
+    const expDate = moment(link.sharedTo.expirationDate);
 
-      const res = editFileLink
-        ? await editFileLink(
-            infoPanelSelection.id,
-            link.sharedTo.id,
-            item.access ?? ({} as ShareAccessRights),
-            link.sharedTo.primary,
-            link.sharedTo.internal || false,
-            expDate,
-          )
-        : await editExternalLink(
-            infoPanelSelection.id,
-            link.sharedTo.id,
-            item.access ?? ({} as ShareAccessRights),
-            link.sharedTo.primary,
-            link.sharedTo.internal || false,
-            expDate,
-          );
+    const updateAccessLink = async () => {
+      try {
+        const res = editFileLink
+          ? await editFileLink(
+              infoPanelSelection.id,
+              link.sharedTo.id,
+              item.access ?? ({} as ShareAccessRights),
+              link.sharedTo.primary,
+              link.sharedTo.internal || false,
+              expDate,
+            )
+          : await editExternalLink(
+              infoPanelSelection.id,
+              link.sharedTo.id,
+              item.access ?? ({} as ShareAccessRights),
+              link.sharedTo.primary,
+              link.sharedTo.internal || false,
+              expDate,
+            );
 
-      if (item.access === ShareAccessRights.None) {
-        deleteLink(link.sharedTo.id);
-        toastr.success(t("Common:LinkRemoved"));
-      } else {
-        updateLink(link, res);
-        if (item.access === ShareAccessRights.DenyAccess) {
-          toastr.success(t("Common:LinkAccessDenied"));
+        if (item.access === ShareAccessRights.None) {
+          deleteLink(link.sharedTo.id);
+          toastr.success(t("Common:LinkRemoved"));
         } else {
-          copyDocumentShareLink(res, t);
-          updateDefaultCreate(
-            (prev) => ({
-              ...prev,
-              access: res.access ?? prev.access,
-              internal: res.sharedTo.internal ?? prev.internal,
-            }),
-            res,
-          );
+          updateLink(link, res);
+          if (item.access === ShareAccessRights.DenyAccess) {
+            toastr.success(t("Common:LinkAccessDenied"));
+          } else {
+            copyDocumentShareLink(res, t);
+            updateDefaultCreate(
+              (prev) => ({
+                ...prev,
+                access: res.access ?? prev.access,
+                internal: res.sharedTo.internal ?? prev.internal,
+              }),
+              res,
+            );
+          }
         }
+      } catch (e) {
+        toastr.error(e as TData);
       }
-    } catch (e) {
-      toastr.error(e as TData);
+    };
+
+    if (item.access === ShareAccessRights.FormFilling && onOpenPanel) {
+      onOpenPanel(true, updateAccessLink, infoPanelSelection.id);
+      return;
     }
+
+    updateAccessLink();
   };
 
   const changeExpirationOption = async (

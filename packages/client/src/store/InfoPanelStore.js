@@ -31,8 +31,8 @@ import { getUserType } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   EmployeeActivationStatus,
-  Events,
-  FileType,
+  // Events,
+  // FileType,
   FolderType,
   RoomsType,
   ShareAccessRights,
@@ -49,7 +49,7 @@ import {
   getExternalLinks,
   editExternalLink,
   addExternalLink,
-  checkIsPDFForm,
+  // checkIsPDFForm,
   getPrimaryLinkIfNotExistCreate,
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
@@ -951,25 +951,25 @@ class InfoPanelStore {
   getPrimaryFileLink = async (fileId) => {
     const file = this.filesStore.files.find((item) => item.id === fileId);
 
-    if (file && !file.shared && file.fileType === FileType.PDF) {
-      try {
-        this.filesStore.addActiveItems([file.id], null);
-        const result = await checkIsPDFForm(fileId);
+    // if (file && !file.shared && file.fileType === FileType.PDF) {
+    //   try {
+    //     this.filesStore.addActiveItems([file.id], null);
+    //     const result = await checkIsPDFForm(fileId);
 
-        if (result) {
-          const event = new CustomEvent(Events.Share_PDF_Form, {
-            detail: { file },
-          });
+    //     if (result) {
+    //       const event = new CustomEvent(Events.Share_PDF_Form, {
+    //         detail: { file },
+    //       });
 
-          window.dispatchEvent(event);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.filesStore.removeActiveItem(file);
-      }
-    }
+    //       window.dispatchEvent(event);
+    //       return;
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //   } finally {
+    //     this.filesStore.removeActiveItem(file);
+    //   }
+    // }
 
     /**
      *  @type {import("@docspace/shared/components/share/Share.types").DefaultCreatePropsType | null}

@@ -31,6 +31,7 @@ import HotkeysPanel from "./HotkeysPanel";
 import InvitePanel from "./InvitePanel";
 import EditLinkPanel from "./EditLinkPanel";
 import ConversionPanel from "./ConversionPanel";
+import ShareFormPanel from "./ShareFormPanel";
 
 export {
   EmbeddingPanel,
@@ -40,6 +41,7 @@ export {
   InvitePanel,
   EditLinkPanel,
   ConversionPanel,
+  ShareFormPanel,
 };
 
 export default ConversionPanel;

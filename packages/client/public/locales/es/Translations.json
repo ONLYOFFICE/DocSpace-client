@@ -20,7 +20,6 @@
   "LinkValidTime": "Este enlace solo es válido durante {{days_count}} días.",
   "NewForm": "Formulario PDF",
   "OwnerChange": "Cambiar propietario",
-  "Presentations": "Presentaciones",
   "RoleGuestDescriprion": "Los invitados pueden acceder a las salas a las que se les ha invitado, así como crear y editar documentos si se les han asignado los roles adecuados en la sala.",
   "SearchByHeadOfGroup": "Buscar por Jefe de grupo",
   "SearchByOwner": "Búsqueda por propietarios",

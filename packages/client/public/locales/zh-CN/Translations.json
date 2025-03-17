@@ -20,7 +20,6 @@
   "LinkValidTime": "该链接仅在{{days_count}}天内有效。",
   "NewForm": "PDF 表单",
   "OwnerChange": "变更所有者",
-  "Presentations": "演示文稿",
   "RoleGuestDescriprion": "访客可以访问他们被邀请的房间，如果他们被分配了适当的角色，还可以创建和编辑文档。",
   "SearchByHeadOfGroup": "按组长进行搜索",
   "SearchByOwner": "按所有者搜索",

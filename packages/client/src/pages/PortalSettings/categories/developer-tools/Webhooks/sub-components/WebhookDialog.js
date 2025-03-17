@@ -156,6 +156,7 @@ const WebhookDialog = (props) => {
     if (!validateForm()) return;
     setIsLoading(true);
     try {
+      if (triggerAll) webhookInfo.triggers = 0;
       await onSubmit(webhookInfo);
       isSettingsModal
         ? toastr.success(t("WebhookEditedSuccessfully"))

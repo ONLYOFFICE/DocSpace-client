@@ -31,7 +31,6 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import { LabledInput } from "./LabledInput";
-import { Hint } from "../styled-components";
 import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
 import TriggersForm from "./TriggersForm";
@@ -202,13 +201,6 @@ const WebhookDialog = (props) => {
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledWebhookForm onSubmit={onFormSubmit}>
-          {!isSettingsModal ? (
-            <Hint>
-              {t("WebhookCreationHint", {
-                productName: t("Common:ProductName"),
-              })}
-            </Hint>
-          ) : null}
           <LabledInput
             id={`${additionalId}-name-input`}
             label={t("WebhookName")}

@@ -44,7 +44,6 @@
   "URL": "Adresa URL",
   "ViewRawPayload": "Vizualizare sarcina neprelucrată",
   "WebhookCreated": "Webhook creat",
-  "WebhookCreationHint": "Acest webhook va fi atribuit tuturor evenimentelor din {{productName}}",
   "WebhookDetails": "Detalii Webhook",
   "WebhookEditedSuccessfully": "Configurația Webhook a fost modificată cu succes",
   "WebhookHistory": "Istoricul Webhook",

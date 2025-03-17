@@ -73,7 +73,6 @@
   "RoomCopied": "Room copied",
   "ViewRawPayload": "View raw payload",
   "WebhookCreated": "Webhook created",
-  "WebhookCreationHint": "This webhook will be assigned to all events in {{productName}}",
   "WebhookDetails": "Webhook details",
   "WebhookEditedSuccessfully": "Webhook configuration edited successfully",
   "WebhookHistory": "Webhook history",

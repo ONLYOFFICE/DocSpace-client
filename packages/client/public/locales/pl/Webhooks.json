@@ -44,7 +44,6 @@
   "URL": "URL",
   "ViewRawPayload": "Zobacz nieprzetworzone dane właściwe",
   "WebhookCreated": "Webhook został utworzony",
-  "WebhookCreationHint": "Dany webhook zostanie przypisany do wszystkich zdarzeń w {{productName}}",
   "WebhookDetails": "Szczegóły webhooka",
   "WebhookEditedSuccessfully": "Konfiguracja webhooka została pomyślnie zmieniona",
   "WebhookHistory": "Historia webhooka",

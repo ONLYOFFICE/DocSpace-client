@@ -44,7 +44,6 @@
   "URL": "URL",
   "ViewRawPayload": "Դիտեք չմշակված ծանրաբեռնվածությունը",
   "WebhookCreated": "Webhook-ը ստեղծվել է",
-  "WebhookCreationHint": "Այս webhook-ը կհատկացվի {{productName}}-ի բոլոր իրադարձություններին",
   "WebhookDetails": "Webhook մանրամասները",
   "WebhookEditedSuccessfully": "Webhook-ի կոնֆիգուրացիան հաջողությամբ խմբագրվել է",
   "WebhookHistory": "Webhook պատմություն",

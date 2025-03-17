@@ -248,7 +248,7 @@ export const addLog = (log: string, category: "socket") => {
   }
 };
 
-export const getFillingStatusTitle = (
+export const getFillingStatusLabel = (
   status: FileFillingFormStatus | undefined,
   t: TTranslation,
 ) => {
@@ -263,6 +263,25 @@ export const getFillingStatusTitle = (
       return t("Common:Stopped");
     case FileFillingFormStatus.Completed:
       return t("Common:Complete");
+    default:
+      return "";
+  }
+};
+export const getFillingStatusTitle = (
+  status: FileFillingFormStatus | undefined,
+  t: TTranslation,
+) => {
+  switch (status) {
+    case FileFillingFormStatus.Draft:
+      return t("Common:BadgeDraftTitle");
+    case FileFillingFormStatus.YourTurn:
+      return t("Common:BadgeYourTurnTitle");
+    case FileFillingFormStatus.InProgress:
+      return t("Common:BadgeInProgressTitle");
+    case FileFillingFormStatus.Stopped:
+      return t("Common:BadgeStoppedTitle");
+    case FileFillingFormStatus.Completed:
+      return t("Common:BadgeCompletedTitle");
     default:
       return "";
   }

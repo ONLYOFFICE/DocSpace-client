@@ -27,13 +27,17 @@
 "use client";
 
 import { useTranslation } from "react-i18next";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { match } from "ts-pattern";
 
 import PDFIcon from "PUBLIC_DIR/images/icons/24/pdf.svg";
 import InfoSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
-import { getFillingStatusTitle, getTitleWithoutExtension } from "../../utils";
+import {
+  getFillingStatusLabel,
+  getFillingStatusTitle,
+  getTitleWithoutExtension,
+} from "../../utils";
 import { FILLING_FORM_STATUS_COLORS } from "../../constants";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { FileFillingFormStatus } from "../../enums";
@@ -77,7 +81,16 @@ export const FillingStatusPanel = ({
   const fillingStatus = file.formFillingStatus!;
 
   const color = FILLING_FORM_STATUS_COLORS[fillingStatus];
-  const fileStatusText = getFillingStatusTitle(fillingStatus, t);
+
+  const { fileStatusTitle, fileStatusLabel } = useMemo(() => {
+    const label = getFillingStatusLabel(fillingStatus, t);
+    const title = getFillingStatusTitle(fillingStatus, t);
+
+    return {
+      fileStatusTitle: title,
+      fileStatusLabel: label,
+    };
+  }, [fillingStatus, t]);
 
   const getFormFillingStatus = useCallback(async () => {
     const { startLoader, endLoader } = createLoader();
@@ -118,8 +131,12 @@ export const FillingStatusPanel = ({
         <div className={styles.fileInfo}>
           <PDFIcon />
           <Text className={styles.fileName}>{fileName}</Text>
-          <div className={styles.fileStatus} style={{ backgroundColor: color }}>
-            <span>{fileStatusText}</span>
+          <div
+            title={fileStatusTitle}
+            className={styles.fileStatus}
+            style={{ backgroundColor: color }}
+          >
+            <span>{fileStatusLabel}</span>
           </div>
         </div>
         <div className={styles.processContainer}>

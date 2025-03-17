@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
@@ -41,7 +41,11 @@ import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
 import { FILLING_FORM_STATUS_COLORS } from "@docspace/shared/constants";
-import { classNames, getFillingStatusTitle } from "@docspace/shared/utils";
+import {
+  classNames,
+  getFillingStatusLabel,
+  getFillingStatusTitle,
+} from "@docspace/shared/utils";
 
 import { Badge } from "../badge";
 import { ColorTheme, ThemeId } from "../color-theme";
@@ -208,7 +212,13 @@ const Badges = ({
     if (!isTrashFolder) openLocationFile?.();
   };
 
-  const fillingStatusTitle = getFillingStatusTitle(item.formFillingStatus, t);
+  const { fillingStatusLabel, fillingStatusTitle } = useMemo(
+    () => ({
+      fillingStatusLabel: getFillingStatusLabel(item.formFillingStatus, t),
+      fillingStatusTitle: getFillingStatusTitle(item.formFillingStatus, t),
+    }),
+    [item.formFillingStatus, t],
+  );
 
   const wrapperCommonClasses = classNames(styles.badges, className, "badges", {
     [styles.tableView]: viewAs === "table",
@@ -243,7 +253,7 @@ const Badges = ({
             isVersionBadge
             className="badge tablet-badge icons-group"
             backgroundColor={FILLING_FORM_STATUS_COLORS[item.formFillingStatus]}
-            label={fillingStatusTitle}
+            label={fillingStatusLabel}
             title={fillingStatusTitle}
             {...versionBadgeProps}
             style={{

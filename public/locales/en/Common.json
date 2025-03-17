@@ -662,5 +662,10 @@
   "ConvertToZip": "Files will be compressed into the <strong>.zip file</strong>",
   "RemoveFromList": "Remove from list",
   "PasswordProtectedFiles": "Please <0>enter a password</0> for the protected files to continue",
-  "EnterPassword": "Enter password"
+  "EnterPassword": "Enter password",
+  "BadgeDraftTitle": "Assign users to roles to begin filling out form",
+  "BadgeYourTurnTitle": "This form requires your completion",
+  "BadgeInProgressTitle": "Your completion is recorded, keep follow up of form.",
+  "BadgeStoppedTitle": "Filling out the form was forcibly stopped",
+  "BadgeCompletedTitle": "Form is completely filled out by all members"
 }

@@ -51,12 +51,10 @@ import { Text } from "@docspace/shared/components/text";
 
 import {
   Box,
-  ButtonWrapper,
   CompletedFormLayout,
   ContainerCompletedForm,
   Footer,
   Header,
-  MainContent,
   TextWrapper,
   VDRMainContent,
 } from "./CompletedForm.styled";
@@ -64,7 +62,6 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import {
-  FillingRoleProcess,
   RoleStep,
   StatusIndicator,
 } from "@docspace/shared/components/filling-role-process";

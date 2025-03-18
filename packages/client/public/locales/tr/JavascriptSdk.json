@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Dosya türü ekranı",
   "FrameId": "Çerçeve kimliği",
   "GetCode": "Eklenecek kodu alın",
-  "GoToRoom": "odaya git",
   "Header": "Üst Bilgi",
   "HeaderDescription": "{{productName}} bölümlerine erişimi sınırlamak için mobil sürümde başlığı devre dışı bırakabilirsiniz (masaüstü sürümünde sol menüyü devre dışı bırakmak gibi).",
   "HtmlCodeDescription": "<script> etiketini kullanarak {{productName}}'i veya bir parçasını gömme. Aşağıdaki HTML kodunu kopyalayın ve HTML dosyanıza ekleyin.",

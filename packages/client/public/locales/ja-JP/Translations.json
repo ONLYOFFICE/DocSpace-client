@@ -20,7 +20,6 @@
   "LinkValidTime": "このリンクは {{days_count}} 日間のみ有効です。",
   "NewForm": "PDFフォーム",
   "OwnerChange": "オーナー変更",
-  "Presentations": "プレゼンテーション",
   "RoleGuestDescriprion": "ゲストは招待されたルームにアクセスでき、ルームで適切な役割が割り当てられている場合は、文書の作成や編集も可能です。",
   "SearchByHeadOfGroup": "グループ代表で検索",
   "SearchByOwner": "所有者で検索する",

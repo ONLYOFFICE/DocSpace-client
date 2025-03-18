@@ -20,7 +20,6 @@
   "LinkValidTime": "This link is valid for {{days_count}} days only.",
   "NewForm": "PDF Form",
   "OwnerChange": "Change owner",
-  "Presentations": "Presentations",
   "RoleGuestDescriprion": "Guests can access the rooms they have been invited to, as well as create and edit documents if they have been assigned the appropriate roles in the room.",
   "SearchByHeadOfGroup": "Search by Head of group",
   "SearchByOwner": "Search by Owners",

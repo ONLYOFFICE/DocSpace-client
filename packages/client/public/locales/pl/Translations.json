@@ -20,7 +20,6 @@
   "LinkValidTime": "Link jest ważny tylko przez {{days_count}} dni.",
   "NewForm": "Formularz PDF",
   "OwnerChange": "Zmień właściciela",
-  "Presentations": "Prezentacje",
   "RoleGuestDescriprion": "Goście mają dostęp do pokoi, do których zostali zaproszeni i mogą tworzyć oraz edytować dokumenty, jeśli przypisano im odpowiednie role w pokoju.",
   "SearchByHeadOfGroup": "Szukaj według lidera grupy",
   "SearchByOwner": "Szukaj wg Właścicieli",

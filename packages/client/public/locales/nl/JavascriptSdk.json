@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Weergave bestandstype",
   "FrameId": "Frame ID",
   "GetCode": "Haal code om in te voegen",
-  "GoToRoom": "ga naar de kamer",
   "Header": "Koptekst",
   "HeaderDescription": "U kunt de koptekst uitschakelen in de mobiele versie om de toegang tot de {{productName}} secties te beperken (net zoals u het linkermenu uitschakelt in de desktopversie).",
   "HtmlCodeDescription": "{{productName}} of een deel ervan insluiten met de <script> tag. Kopieer de onderstaande HTML code en voeg deze toe aan uw HTML bestand.",

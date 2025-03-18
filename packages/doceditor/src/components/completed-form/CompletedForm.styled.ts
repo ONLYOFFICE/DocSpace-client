@@ -494,7 +494,7 @@ export const Footer = styled.footer`
   .link {
     grid-area: link;
     color: ${({ theme }) =>
-      theme.currentColorScheme?.main.buttons ?? "#4781d1"};
+      theme.currentColorScheme?.main.buttons ?? `#{$light-blue-main}`};
     text-underline-offset: 2px;
 
     @media (hover: hover) {

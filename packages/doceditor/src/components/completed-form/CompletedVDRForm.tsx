@@ -237,11 +237,7 @@ export const CompletedVDRForm = ({
               className="secondary-button"
               scale
               size={ButtonSize.medium}
-              label={
-                isTurnToFill
-                  ? t("Common:CopyLink")
-                  : t("CompletedForm:GoToRoom")
-              }
+              label={isTurnToFill ? t("Common:CopyLink") : t("Common:GoToRoom")}
               onClick={isTurnToFill ? copyLinkFile : handleBackToRoom}
             />
             {isTurnToFill ? (
@@ -251,7 +247,7 @@ export const CompletedVDRForm = ({
                 onClick={handleBackToRoom}
                 prefetch={false}
               >
-                {t("CompletedForm:GoToRoom")}
+                {t("Common:GoToRoom")}
               </Link>
             ) : null}
           </Footer>

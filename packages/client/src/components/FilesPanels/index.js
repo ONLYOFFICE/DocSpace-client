@@ -35,6 +35,7 @@ import {
   FilterType,
 } from "@docspace/shared/enums";
 
+import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { Guidance } from "@docspace/shared/components/guidance";
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
 
@@ -92,6 +93,7 @@ import { ShareCollectSelector } from "../ShareCollectSelector";
 
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
+import FillingStatusPanel from "../panels/FillingStatusPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 
 const Panels = (props) => {
@@ -158,6 +160,9 @@ const Panels = (props) => {
     closeEditIndexDialogVisible,
     conversionVisible,
     deleteVersionDialogVisible,
+
+    setStopFillingDialogVisible,
+    stopFillingDialogData,
     operationCancelVisible,
     setFormFillingTipsDialog,
     formFillingTipsVisible,
@@ -173,6 +178,10 @@ const Panels = (props) => {
     data: null,
     onClose: null,
   });
+
+  const onCloseStopFillingDialog = () => {
+    setStopFillingDialogVisible(false);
+  };
 
   const { t } = useTranslation(["Translations", "Common", "PDFFormDialog"]);
 
@@ -383,8 +392,18 @@ const Panels = (props) => {
     closeEditIndexDialogVisible && (
       <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
     ),
+    <FillingStatusPanel key="filling-status-panel" />,
     deleteVersionDialogVisible && (
       <DeleteVersionDialog key="delete-version-dialog" />
+    ),
+
+    stopFillingDialogData.visible && (
+      <StopFillingDialog
+        key="stop-filling-dialog"
+        visible={stopFillingDialogData.visible}
+        formId={stopFillingDialogData.formId}
+        onClose={onCloseStopFillingDialog}
+      />
     ),
     operationCancelVisible && (
       <CancelOperationDialog key="cancel-operation-dialog" />
@@ -480,6 +499,9 @@ export default inject(
       passwordEntryDialogDate,
       guestReleaseTipDialogVisible,
       closeEditIndexDialogVisible,
+
+      setStopFillingDialogVisible,
+      stopFillingDialogData,
       operationCancelVisible,
 
       setFormFillingTipsDialog,
@@ -590,6 +612,9 @@ export default inject(
       closeEditIndexDialogVisible,
       conversionVisible,
       deleteVersionDialogVisible,
+
+      setStopFillingDialogVisible,
+      stopFillingDialogData,
       operationCancelVisible,
       setFormFillingTipsDialog,
       formFillingTipsVisible,

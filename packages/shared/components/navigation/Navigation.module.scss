@@ -493,7 +493,16 @@
       .room-title {
         cursor: pointer;
         min-height: 33px;
+        overflow: hidden;
       }
+    }
+
+    .badges-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      @include truncate;
     }
 
     .navigation-header-separator {
@@ -579,7 +588,7 @@
       }
     }
 
-    grid-template-columns: 29px auto 1fr;
+    grid-template-columns: 29px auto 1fr !important;
 
     &[data-is-root-folder="true"] {
       grid-template-columns: auto 1fr !important;

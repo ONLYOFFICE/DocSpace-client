@@ -342,6 +342,7 @@ const RoomIcon = ({
           <div
             className={classNames(styles.editWrapper, styles.size20, {
               [styles.rtl]: isRTL,
+              [styles.isEditIcon]: withEditing,
             })}
           >
             <IconButton

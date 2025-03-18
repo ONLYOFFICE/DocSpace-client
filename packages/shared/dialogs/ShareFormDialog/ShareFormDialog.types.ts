@@ -29,4 +29,6 @@ export interface ShareFormDialogProps {
   onClickVirtualDataRoom?: () => void;
   visible: boolean;
   onClose: () => void;
+  container?: React.ReactNode;
+  visibleContainer?: boolean;
 }

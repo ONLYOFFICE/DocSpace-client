@@ -38,6 +38,7 @@ import { InputBlock } from "@docspace/shared/components/input-block";
 // import { DropDown } from "@docspace/shared/components/drop-down";
 // import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 // import { globalColors } from "@docspace/shared/themes";
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
@@ -53,11 +54,7 @@ import {
   StyledExternalLink,
 } from "../StyledInvitePanel";
 
-import {
-  getAccessOptions,
-  getFreeUsersRoleArray,
-  getFreeUsersTypeArray,
-} from "../utils";
+import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 
 const ExternalLinks = ({
   t,

@@ -14,8 +14,12 @@
   --app-loader-background-color: #{$white};
 
   --files-article-body-download-app-list-text-color: #{$gray};
-  --files-article-body-dev-tools-border: 1px solid #{$light-gray-selected};
-  --files-article-body-dev-tools-color: #{$gray};
+  --files-article-body-dev-tools-background-color: var(
+    --accent-main,
+    #{$light-blue-main}
+  );
+  --files-article-body-dev-tools-background-opacity: 0.17;
+  --files-article-body-dev-tools-color: #{$gray-text};
   --article-catalog-background: #{$gray-light};
   --article-catalog-show-text: #{$light-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-light-mid};
@@ -363,8 +367,9 @@
   --app-loader-background-color: #{$black};
 
   --files-article-body-download-app-list-text-color: #{$gray-dark};
-  --files-article-body-dev-tools-border: 1px solid #{$gray-dark-strong};
-  --files-article-body-dev-tools-color: #{$gray-dark};
+  --files-article-body-dev-tools-background-color: #{$dark-gray-dark};
+  --files-article-body-dev-tools-background-opacity: 1;
+  --files-article-body-dev-tools-color: #{$black};
   --article-catalog-background: #{$dark-gray-light};
   --article-catalog-show-text: #{$dark-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-dark-strong};

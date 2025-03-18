@@ -44,7 +44,6 @@
   "URL": "URL адрес",
   "ViewRawPayload": "Виж необработен полезен товар",
   "WebhookCreated": "Създадена Уеб кука",
-  "WebhookCreationHint": "Тази уеб кука ще бъде назначена на всички събития в {{productName}}",
   "WebhookDetails": "Подробности за Уеб кука",
   "WebhookEditedSuccessfully": "Конфигурацията на Уеб куката е редактирана успешно",
   "WebhookHistory": "История на Уеб кука",

@@ -44,7 +44,6 @@
   "URL": "URL",
   "ViewRawPayload": "生のペイロードを見る",
   "WebhookCreated": "ウェブフックが作成されました",
-  "WebhookCreationHint": "このWebhookは{{productName}}のすべてのイベントに割り当てられます",
   "WebhookDetails": "ウェブフックの詳細",
   "WebhookEditedSuccessfully": "ウェブフックの設定が正常に編集されました",
   "WebhookHistory": "ウェブフック履歴",

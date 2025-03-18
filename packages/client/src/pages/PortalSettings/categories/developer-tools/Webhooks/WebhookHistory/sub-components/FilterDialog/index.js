@@ -119,16 +119,11 @@ const FilterDialog = (props) => {
           status: [],
         });
       }
-      isLoaded && navigate(`/portal-settings/developer-tools/webhooks/${id}`);
+      isLoaded && navigate(`/developer-tools/webhooks/${id}`);
     } else {
       setFilters(historyFilters);
       setIsApplied(true);
-      navigate(
-        constructUrl(
-          `/portal-settings/developer-tools/webhooks/${id}`,
-          historyFilters,
-        ),
-      );
+      navigate(constructUrl(`/developer-tools/webhooks/${id}`, historyFilters));
     }
     setIsLoaded(true);
   }, [historyFilters, visible]);

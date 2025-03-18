@@ -174,6 +174,7 @@
   "PrivateRoomHeader": "Welcome to {{organizationName}} private room where every symbol you type is encrypted",
   "PrivateRoomSupport": "Work in Private Room is available via {{organizationName}} desktop app. <3>Instructions</3>",
   "Processes": "Processes: {{count}}",
+  "Protected": "protected",
   "PersonalFolderErasureWarning": "Your user type has been changed to Guest. Personal files will be deleted in 30 days.",
   "PersonalFolderErasureWarningInfo": "Your personal files and folders in the {{sectionName}} section will be <1>deleted</1> since Guests don't have access to this section. Files remain available for viewing and downloading <1>for 30 days</1>.",
   "RecentlyAccessible": "Recently accessible via link",

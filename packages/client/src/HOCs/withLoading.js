@@ -49,6 +49,7 @@ const withLoading = (WrappedComponent) => {
     const viewMobile = deviceType === DeviceType.mobile;
 
     useEffect(() => {
+      if (window.location.pathname.includes("developer-tools")) return;
       if (window.location.pathname.includes("profile")) {
         if (!isLoadedArticleBody) {
           setIsBurgerLoading(true);

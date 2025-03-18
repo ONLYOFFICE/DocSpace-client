@@ -5,7 +5,6 @@
   "DeleteProfileIsFinished": "Delete profile when reassignment is finished",
   "DescriptionDataReassignment": "We will transfer rooms created by user and documents stored in user’s rooms.",
   "RoomsOnlyReassignment": "We will transfer rooms created by contact.",
-  "InProgress": "In progress",
   "Interrupted": "Interrupted, some data could not be transferred",
   "MoreAboutDataTransfer": "More about data transfer",
   "NewDataOwner": "New data owner",

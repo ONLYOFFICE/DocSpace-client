@@ -321,6 +321,8 @@ class SettingsStore {
 
   logoText = "";
 
+  invitationSettings = null;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -1280,6 +1282,24 @@ class SettingsStore {
   getIpRestrictionsEnable = async () => {
     const res = await api.settings.getIpRestrictionsEnable();
     this.ipRestrictionEnable = res.enable;
+  };
+
+  getInvitationSettings = async () => {
+    const res = await api.settings.getInvitationSettings();
+    this.invitationSettings = res;
+  };
+
+  setInvitationSettings = async (
+    allowInvitingGuests: boolean,
+    allowInvitingMembers: boolean,
+  ) => {
+    const data = {
+      allowInvitingGuests,
+      allowInvitingMembers,
+    };
+    const res = await api.settings.setInvitationSettings(data);
+
+    this.invitationSettings = res;
   };
 
   setMessageSettings = async (turnOn: boolean) => {

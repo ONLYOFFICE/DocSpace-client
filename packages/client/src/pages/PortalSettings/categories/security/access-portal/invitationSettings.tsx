@@ -23,9 +23,10 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
@@ -35,8 +36,17 @@ import { size } from "@docspace/shared/utils";
 import styles from "./InvitationSettings.module.scss";
 import { LearnMoreWrapper } from "../StyledSecurity";
 
-const InvitationSettings = (props: { t: any }) => {
-  const { t } = props;
+const InvitationSettings = (props) => {
+  const {
+    t,
+    isInit,
+    getInvitationSettings,
+    loadSettings,
+    setInvitationSettings,
+  } = props;
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isCheckedContacts, setIsCheckedContacts] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,8 +60,20 @@ const InvitationSettings = (props: { t: any }) => {
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
+
+    if (!isInit) loadSettings().then(() => setIsLoading(true));
+    else setIsLoading(true);
+
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
+
+  // const onChange = () => {
+  //   setIsCheckedContacts(!isCheckedContacts);
+  // };
+
+  const onSaveClick = () => {
+    // setInvitationSettings(true, false);
+  };
 
   return (
     <>
@@ -64,7 +86,11 @@ const InvitationSettings = (props: { t: any }) => {
       <div className={styles.content}>
         <div>
           <div className={styles.checkboxContainer}>
-            <Checkbox className={styles.checkbox} />
+            <Checkbox
+              className={styles.checkbox}
+              // isChecked={isChecked}
+              // onChange={onChange}
+            />
             <Text fontSize="13px" fontWeight="600" lineHeight="20px">
               {t("InvitationSettingsContacts")}
             </Text>
@@ -101,7 +127,7 @@ const InvitationSettings = (props: { t: any }) => {
 
       <SaveCancelButtons
         className={styles.saveCancelButtons}
-        // onSaveClick={onSaveClick}
+        onSaveClick={onSaveClick}
         // onCancelClick={onCancelClick}
         // showReminder={showReminder}
         reminderText={t("YouHaveUnsavedChanges")}
@@ -115,7 +141,21 @@ const InvitationSettings = (props: { t: any }) => {
   );
 };
 
-export const InvitationSettingsSection = withTranslation([
-  "Settings",
-  "Common",
-])(InvitationSettings);
+export const InvitationSettingsSection = inject(
+  ({ settingsStore, setup }: TStore) => {
+    const { getInvitationSettings, setInvitationSettings } = settingsStore;
+
+    const { isInit } = setup;
+
+    const loadSettings = async () => {
+      await getInvitationSettings();
+    };
+
+    return {
+      isInit,
+      getInvitationSettings,
+      loadSettings,
+      setInvitationSettings,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(InvitationSettings)));

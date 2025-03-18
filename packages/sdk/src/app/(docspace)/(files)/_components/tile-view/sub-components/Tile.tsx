@@ -30,10 +30,12 @@ import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 import { observer } from "mobx-react";
+import classNames from "classnames";
 
 import { FileTile, FolderTile } from "@docspace/shared/components/tiles";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import Badges from "@docspace/shared/components/badges";
+import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import useFolderActions from "@/app/(docspace)/_hooks/useFolderActions";
@@ -43,15 +45,15 @@ import type {
   TFolderItem,
 } from "@/app/(docspace)/_hooks/useItemList";
 import type { TGetIcon } from "@/app/(docspace)/_hooks/useItemIcon";
-
-import type { TileProps } from "../TileView.types";
-import TileContent from "./TileContent";
-import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
-import classNames from "classnames";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
+import useDownloadData from "@/app/(docspace)/_hooks/useDownloadData";
+
+import type { TileProps } from "../TileView.types";
+
+import TileContent from "./TileContent";
 
 const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   if (item.isFolder) return undefined;
@@ -73,6 +75,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const { openFile } = useFilesActions({ t });
   const { openFolder } = useFolderActions({ t });
   const { getContextMenuModel } = useContextMenuModel({ item });
+  const { downloadAction } = useDownloadData();
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
   const temporaryIcon = getTemporaryIcon(item, getIcon);
@@ -129,7 +132,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
       currentDeviceType={currentDeviceType}
       currentColorScheme={theme.currentColorScheme}
       isPublicRoom
-      // TODO: Add download
+      onClickDownload={() => downloadAction(item)}
     />
   );
 

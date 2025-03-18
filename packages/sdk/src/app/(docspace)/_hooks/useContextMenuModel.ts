@@ -2,6 +2,8 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
+import { toastr } from "@docspace/shared/components/toast";
+
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
@@ -12,12 +14,12 @@ import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
-import useFolderActions from "./useFolderActions";
+import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
 
 import { TFileItem, TFolderItem } from "./useItemList";
-import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
+import useFolderActions from "./useFolderActions";
 import useFilesActions from "./useFilesActions";
-import { toastr } from "@docspace/shared/components/toast";
+import useDownloadData from "./useDownloadData";
 
 type UseContextMenuModelProps = {
   item?: TFileItem | TFolderItem;
@@ -32,6 +34,7 @@ export default function useContextMenuModel({
 
   const { openFolder, copyFolderLink } = useFolderActions({ t });
   const { openFile, copyFileLink } = useFilesActions({ t });
+  const { downloadAction } = useDownloadData();
 
   const getSelectItem = useCallback(
     (item: TFileItem | TFolderItem) => {
@@ -107,16 +110,20 @@ export default function useContextMenuModel({
 
   const getDownloadItem = useCallback(
     (item?: TFileItem | TFolderItem) => {
+      const isDisabled = item
+        ? !item.security.Download
+        : filesSelectionStore.selection.some((k) => !k.security.Download);
+
       return {
         id: "option_download",
         key: "download",
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
-        onClick: () => {},
-        disabled: false,
+        onClick: () => downloadAction(item),
+        disabled: isDisabled,
       };
     },
-    [t],
+    [t, filesSelectionStore.selection, downloadAction],
   );
 
   const getDownloadAsItem = useCallback(

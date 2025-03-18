@@ -31,17 +31,15 @@ import type { IInitialConfig } from "@/types";
 
 const useShareDialog = (
   config: IInitialConfig | undefined,
-  onSDKRequestStartFilling: (headerLabel: string) => void,
+  openShareFormDialog: () => void,
 ) => {
-  const { t } = useTranslation(["Common"]);
   const [isVisible, setIsVisible] = React.useState(false);
 
   const onSDKRequestSharingSettings = React.useCallback(() => {
-    if (config?.startFilling)
-      return onSDKRequestStartFilling(t("Common:ShareToFillOut"));
+    if (config?.startFilling) return openShareFormDialog();
 
     setIsVisible(true);
-  }, [config?.startFilling, onSDKRequestStartFilling, t]);
+  }, [config?.startFilling, openShareFormDialog]);
 
   const onClose = React.useCallback(() => {
     setIsVisible(false);

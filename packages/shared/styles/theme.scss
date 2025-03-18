@@ -5,7 +5,6 @@
 
   --background-color: #{$white};
   --text-color: #{$black};
-  --interface-direction: ltr;
 
   --accent-main: var(--color-scheme-main-accent, #{$light-blue-main});
   --accent-text: var(--color-scheme-text-accent, #{$light-blue-main});
@@ -917,6 +916,7 @@
   --room-icon-background-color-archive: #{$gray};
   --room-icon-button-color: #{$gray};
   --room-icon-opacity: 1;
+  --room-icon-edit-icon-background: #{$gray-light-mid};
 }
 
 .dark {
@@ -928,6 +928,7 @@
   --room-icon-background-color-archive: #{$white};
   --room-icon-button-color: #{$gray-dark};
   --room-icon-opacity: 0.1;
+  --room-icon-edit-icon-background: #{$gray-dark-mid};
 }
 
 .light {
@@ -2026,4 +2027,16 @@
 
   --context-menu-submenu-transoform: scaleX(-1);
   --context-menu-submenu-transoform-box: content-box;
+}
+
+.light {
+  --download-dialog-bg: #{$gray-light};
+  --download-dialog-text-color: #{$gray};
+  --download-dialog-warning-color: #{$light-error-status};
+}
+
+.dark {
+  --download-dialog-bg: #{$dark-gray-light};
+  --download-dialog-text-color: #{$gray-dark};
+  --download-dialog-warning-color: #{$dark-error-status};
 }

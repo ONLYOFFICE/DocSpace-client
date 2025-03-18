@@ -38,6 +38,7 @@ const DialogAsideSkeleton = ({
   withoutAside,
   withFooterBorder = false,
   isInvitePanelLoader,
+  onClose,
 }: DialogAsideSkeletonProps) => {
   const zIndex = 310;
 
@@ -69,7 +70,7 @@ const DialogAsideSkeleton = ({
     renderClearDialogAsideLoader()
   ) : (
     <>
-      <Backdrop visible isAside zIndex={zIndex} />
+      <Backdrop visible isAside zIndex={zIndex} onClick={onClose} />
 
       <div
         className={styles.dialogAsideLoader}
@@ -80,7 +81,7 @@ const DialogAsideSkeleton = ({
           className="dialog-aside-loader"
           visible
           zIndex={zIndex}
-          onClose={() => {}}
+          onClose={() => onClose?.()}
         >
           {renderClearDialogAsideLoader()}
         </Aside>

@@ -47,6 +47,7 @@ import {
   RoomsType,
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
@@ -66,7 +67,6 @@ import {
   StyledRow,
 } from "../StyledInvitePanel";
 import {
-  getAccessOptions,
   getFreeUsersRoleArray,
   getFreeUsersTypeArray,
   getTopFreeRole,

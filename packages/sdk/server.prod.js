@@ -34,7 +34,16 @@ const dir = path.join(__dirname);
 
 const dev = process.env.NODE_ENV === "development";
 
-const currentPort = config.PORT ?? 5099;
+const argv = (key) => {
+  if (process.argv.includes(`--${key}`)) return true;
+
+  return (
+    process.argv.find((arg) => arg.startsWith(`--${key}=`))?.split("=")[1] ||
+    null
+  );
+};
+
+const currentPort = (argv("app.port") || config.PORT) ?? 5099;
 const hostname = config.HOSTNAME ?? "localhost";
 
 // Make sure commands gracefully respect termination signals (e.g. from Docker)

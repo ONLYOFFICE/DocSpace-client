@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ContextMenuModel } from "../context-menu";
-import { TDirectionY } from "../../types";
+import { type TDirectionX, TDirectionY } from "../../types";
 
 export type TDropdownType = "alwaysDashed" | "appearDashedAfterHover";
 
@@ -69,10 +69,16 @@ export type LinkWithDropDownProps = SimpleLinkWithDropdownProps & {
   id?: string;
   /** Additional inline styles */
   style?: React.CSSProperties;
-  /** Sets the dropdown opening direction */
+  /** Sets the dropdown opening horizontal direction */
+  directionX?: TDirectionX;
+  /** Sets the dropdown opening vertical direction */
   directionY?: TDirectionY;
   /** Enables scrollbar in dropdown */
   hasScroll?: boolean;
   /** Manual width for the dropdown */
   manualWidth?: string;
+  /** Is aside */
+  isAside?: boolean;
+  /** Without blur background */
+  withoutBackground?: boolean;
 };

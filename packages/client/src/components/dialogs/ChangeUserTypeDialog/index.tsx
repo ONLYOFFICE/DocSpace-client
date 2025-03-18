@@ -195,7 +195,7 @@ const ChangeUserTypeDialog = ({
           )}
         </Text>
 
-        {needReassignData && (
+        {needReassignData ? (
           <Link
             className="body-link"
             type={LinkType.action}
@@ -206,7 +206,7 @@ const ChangeUserTypeDialog = ({
           >
             {t("DeleteProfileEverDialog:ReassignDataToAnotherUser")}
           </Link>
-        )}
+        ) : null}
       </>
     );
   };

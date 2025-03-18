@@ -221,7 +221,7 @@ class UsersStore {
 
       if (!value) return;
 
-      const { fetchTreeFolders, personalFolderId } = this.treeFoldersStore;
+      const { fetchTreeFolders } = this.treeFoldersStore;
       const { setUser } = this.userStore;
       const { setReducedRightsData } = this.dialogsStore;
       const { setSecurity, getSelectedFolder } = this.selectedFolderStore;

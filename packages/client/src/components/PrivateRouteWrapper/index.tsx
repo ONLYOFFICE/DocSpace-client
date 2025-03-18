@@ -97,7 +97,6 @@ export default inject<TStore>(
     userStore,
     currentTariffStatusStore,
     publicRoomStore,
-    treeFoldersStore,
   }) => {
     const { isAuthenticated, isLoaded, isAdmin, isLogout, capabilities } =
       authStore;

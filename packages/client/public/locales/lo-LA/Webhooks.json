@@ -44,7 +44,6 @@
   "URL": "URL",
   "ViewRawPayload": "ເບິ່ງ payload ດິບ",
   "WebhookCreated": "Webhook ສ້າງ",
-  "WebhookCreationHint": "webhook ນີ້ຈະຖືກມອບຫມາຍໃຫ້ທຸກເຫດການໃນ {{productName}}",
   "WebhookDetails": "ລາຍລະອຽດ Webhook",
   "WebhookEditedSuccessfully": "ແກ້ໄຂການຕັ້ງຄ່າ Webhook ສຳເລັດແລ້ວ",
   "WebhookHistory": "ປະຫວັດ Webhook",

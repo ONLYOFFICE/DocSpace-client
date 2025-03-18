@@ -96,6 +96,16 @@ declare module "styled-components" {
     currentColorScheme?: TColorScheme;
   }
 }
+
+export interface StaticImageData {
+  src: string;
+  height: number;
+  width: number;
+  blurDataURL?: string;
+  blurWidth?: number;
+  blurHeight?: number;
+}
+
 declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;

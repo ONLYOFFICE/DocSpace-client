@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
@@ -40,18 +40,19 @@ import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
 
 import { isMobile as isMobileDevice } from "react-device-detect";
 
+import { FILLING_FORM_STATUS_COLORS } from "@docspace/shared/constants";
+import {
+  classNames,
+  getFillingStatusLabel,
+  getFillingStatusTitle,
+} from "@docspace/shared/utils";
+
 import { Badge } from "../badge";
 import { ColorTheme, ThemeId } from "../color-theme";
 
 import { RoomsType, ShareAccessRights } from "../../enums";
 
-import {
-  classNames,
-  IconSizeType,
-  isDesktop,
-  isTablet,
-  size,
-} from "../../utils";
+import { IconSizeType, isDesktop, isTablet, size } from "../../utils";
 
 import styles from "./Badges.module.scss";
 import type { BadgesProps, BadgeWrapperProps } from "./Badges.type";
@@ -211,6 +212,14 @@ const Badges = ({
     if (!isTrashFolder) openLocationFile?.();
   };
 
+  const { fillingStatusLabel, fillingStatusTitle } = useMemo(
+    () => ({
+      fillingStatusLabel: getFillingStatusLabel(item.formFillingStatus, t),
+      fillingStatusTitle: getFillingStatusTitle(item.formFillingStatus, t),
+    }),
+    [item.formFillingStatus, t],
+  );
+
   const wrapperCommonClasses = classNames(styles.badges, className, "badges", {
     [styles.tableView]: viewAs === "table",
     [styles.rowView]: viewAs === "row",
@@ -237,6 +246,23 @@ const Badges = ({
         />
       )} */}
 
+      {item.formFillingStatus ? (
+        <BadgeWrapper isTile={isTile}>
+          <Badge
+            noHover
+            isVersionBadge
+            className="badge tablet-badge icons-group"
+            backgroundColor={FILLING_FORM_STATUS_COLORS[item.formFillingStatus]}
+            label={fillingStatusLabel}
+            title={fillingStatusTitle}
+            {...versionBadgeProps}
+            style={{
+              width: "max-content",
+            }}
+          />
+        </BadgeWrapper>
+      ) : null}
+
       {hasDraft ? (
         <BadgeWrapper isTile={isTile}>
           <Badge
@@ -247,8 +273,8 @@ const Badges = ({
               "badge-version badge-version-current tablet-badge icons-group",
             )}
             backgroundColor={theme.filesBadges.badgeBackgroundColor}
-            label={t("BadgeMyDraftTitle")}
-            title={t("BadgeMyDraftTitle")}
+            label={t("Common:BadgeMyDraftTitle")}
+            title={t("Common:BadgeMyDraftTitle")}
             {...versionBadgeProps}
             style={{
               width: "max-content",

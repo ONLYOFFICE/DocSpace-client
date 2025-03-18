@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Prikaz tipa datoteke",
   "FrameId": "ID okvira",
   "GetCode": "Uzmi kod za umetanje",
-  "GoToRoom": "idi u sobu",
   "Header": "Zaglavlje",
   "HeaderDescription": "Možete da onemogućite zaglavlje u mobilnoj verziji da biste ograničili pristup odeljcima {{productName}}-a (baš kao da onemogućite levi meni u verziji za desktop).",
   "HtmlCodeDescription": "Ugrađivanje {{productName}}-a ili njegovog dela pomoću <script> taga. Kopirajte HTML kod ispod i umetnite ga u svoju HTML datoteku.",

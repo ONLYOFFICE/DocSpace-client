@@ -94,7 +94,7 @@
   }
 
   @media (hover: hover) {
-    :hover:not(:active) {
+    &:hover:not(:active) {
       background: var(--empty-view-link-bg-color-hover);
       & > * {
         opacity: 0.86;

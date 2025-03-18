@@ -122,6 +122,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
           style={textStyle}
           textAlign="center"
           data-testid="badge-text"
+          data-color={!!color}
         >
           {label}
         </Text>

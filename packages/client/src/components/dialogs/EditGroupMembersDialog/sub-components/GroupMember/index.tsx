@@ -52,9 +52,9 @@ import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
 import type { TRoom } from "@docspace/shared/api/rooms/types";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
-import { getAccessOptions } from "SRC_DIR/components/panels/InvitePanel/utils";
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
 import * as Styled from "./index.styled";

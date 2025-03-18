@@ -137,7 +137,7 @@ const Progress = ({
   const inProgressNode = (
     <div className="in-progress">
       <Loader className="in-progress-loader" size="20px" type="track" />
-      <Text className="status">{t("DataReassignmentDialog:InProgress")}</Text>
+      <Text className="status">{t("Common:InProgress")}</Text>
     </div>
   );
 

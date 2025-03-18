@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Prikaz tipa datoteke",
   "FrameId": "ID okvirja",
   "GetCode": "Pridobite kodo za vstavljanje",
-  "GoToRoom": "pojdi na sobo",
   "Header": "Glava",
   "HeaderDescription": "V mobilni različici lahko onemogočite glavo, da omejite dostop do razdelkov {{productName}} (tako kot onemogočite levi meni v namizni različici).",
   "HtmlCodeDescription": "Vdelava {{productName}} ali njegovega dela z oznako <script>. Kopirajte spodnjo kodo HTML in jo vstavite v svojo datoteko HTML.",

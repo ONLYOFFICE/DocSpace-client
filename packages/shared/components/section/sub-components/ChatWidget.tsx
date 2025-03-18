@@ -100,12 +100,23 @@ export const ChatWidget = memo(
 
     useEffect(() => {
       try {
+        // First check if the chat_id_key cookie exists
+        const cookieFlowId = getCookie("chat_id_key");
+        if (cookieFlowId) {
+          setFlowId(cookieFlowId);
+          return;
+        }
+
+        // Then fallback to localStorage
         const storedFlowId = localStorage.getItem("x-chat-flow-id");
         if (storedFlowId) {
           setFlowId(storedFlowId);
         }
       } catch (error) {
-        console.error("Error reading flowId from localStorage:", error);
+        console.error(
+          "Error reading flowId from cookie or localStorage:",
+          error,
+        );
       }
     }, []);
 
@@ -157,7 +168,7 @@ export const ChatWidget = memo(
       bearer_token: getCookie("access_token_lf"),
       // additional_headers={undefined}
       session_id: "",
-      // api_key="string"
+      api_key: getCookie("chat_api_key") || undefined,
       flow_id: flowId,
       list_files: JSON.stringify(files),
       provider_image: ProviderImageUrl,

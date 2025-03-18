@@ -36,16 +36,20 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { toastr } from "@docspace/shared/components/toast";
 
+import { EncryptionStatus } from "@docspace/shared/enums";
+
 import { startEncryption } from "@docspace/shared/api/settings";
 
 export const EncryptWarningDialog = ({
   encryptWarningDialogVisible,
   setEncryptWarningDialogVisible,
   isNotifyChecked,
+  status,
 }: {
   encryptWarningDialogVisible: boolean;
   setEncryptWarningDialogVisible: (visible: boolean) => void;
   isNotifyChecked: boolean;
+  status: number;
 }) => {
   const { t } = useTranslation(["Management", "Common"]);
 
@@ -70,7 +74,11 @@ export const EncryptWarningDialog = ({
     >
       <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text>{t("EncryptWarningDialogContent")}</Text>
+        <Text>
+          {status === EncryptionStatus.Decrypted
+            ? t("EncryptWarningDialogContent")
+            : t("DecryptWarningDialogContent")}
+        </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

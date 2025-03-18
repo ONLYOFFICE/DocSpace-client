@@ -80,6 +80,7 @@ const EncryptDataPage = ({ logoText }: EncryptDataPageProps) => {
           encryptWarningDialogVisible={encryptWarningDialogVisible}
           setEncryptWarningDialogVisible={setEncryptWarningDialogVisible}
           isNotifyChecked={isNotifyChecked}
+          status={status}
         />
       ) : null}
       <StyledWrapper>

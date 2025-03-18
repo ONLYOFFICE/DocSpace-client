@@ -7,6 +7,7 @@
   "CreatingPortal": "Creating new {{productName}}",
   "CurrentSpace": "Current space",
   "DecryptStorage": "Decrypt storage",
+  "DecryptWarningDialogContent": "All spaces will become unavailable during the decryption process. Are you sure you want to continue?",
   "DeleteEmptyPortalText": "You are going to permanently delete the <1>{{domain}}</1> space. This action cannot be undone.",
   "DeleteRequestSuccess": "Deletion request successfully sent to the {{productName}} owner's email address <1>{{email}}</1> ",
   "DeleteSetupPortalText": "You are going to permanently delete the <1>{{domain}}</1> space with all the data and accounts.  A request to delete <1>{{domain}}</1> will be sent to the {{productName}} owner to the email address <1>{{email}}</1>.",

@@ -83,7 +83,7 @@ export const EncryptWarningDialog = ({
       <ModalDialog.Footer>
         <Button
           key="CreateButton"
-          label={t("Common:OK")}
+          label={t("Common:OKButton")}
           size={ButtonSize.normal}
           scale
           primary

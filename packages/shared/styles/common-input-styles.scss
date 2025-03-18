@@ -116,12 +116,12 @@
     cursor: default;
   }
 
+  &:placeholder-shown {
+    direction: var(--interface-direction);
+  }
+
   // RTL Support
   [dir="rtl"] & {
-    &:placeholder-shown {
-      direction: rtl;
-    }
-
     &::placeholder {
       text-align: right;
     }

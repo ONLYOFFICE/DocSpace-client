@@ -16,7 +16,7 @@
   "DomainNotFound": "Domain not found, please check in DNS settings",
   "DomainSettings": "Domain settings",
   "EncryptData": "Encrypt data at rest",
-  "EncryptDataDescription": "ONLYOFFICE uses AES-256 encryption to protect data at rest in storage.",
+  "EncryptDataDescription": "{{organizationName}} uses AES-256 encryption to protect data at rest in storage.",
   "EncryptDataWarningDescription": "Storage encryption may take time. The spaces will be unavailable during the process. Make sure that you have enough storage and that your data is backed up. Don't forget to disable automatic backups and stop all the running ones. Otherwise, it will be done automatically.",
   "EncryptStorage": "Encrypt storage",
   "EncryptWarningDialogContent": "All spaces will become unavailable during the encryption process. Are you sure you want to continue?",

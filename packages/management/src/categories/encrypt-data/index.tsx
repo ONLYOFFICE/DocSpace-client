@@ -96,7 +96,11 @@ const EncryptDataPage = ({ logoText }: EncryptDataPageProps) => {
             </div>
           ) : null}
         </div>
-        <Text>{t("EncryptDataDescription")}</Text>
+        <Text>
+          {t("EncryptDataDescription", {
+            organizationName: t("Common:OrganizationName"),
+          })}
+        </Text>
         <div className="wrapper-block">
           <Text fontSize="16px" fontWeight={700}>
             {t("Common:Warning")}!

@@ -179,6 +179,7 @@ const Root = ({
     onCloseShareFormDialog,
     openShareFormDialog,
     shareFormDialogVisible,
+    shareFormDialogData,
     onClickFormRoom,
     onClickVirtualDataRoom,
 
@@ -341,6 +342,7 @@ const Root = ({
           fileInfo={fileInfo}
           selfId={user?.id}
           onCancel={onCloseSharingDialog}
+          onOpenPanel={openShareFormDialog}
         />
       )}
 
@@ -391,6 +393,7 @@ const Root = ({
           onCloseStartFillingSelectDialog={onCloseStartFillingSelectDialog}
           onSubmitStartFillingSelectDialog={onSubmitStartFillingSelectDialog}
           isVisibleStartFillingSelectDialog={isVisibleStartFillingSelectDialog}
+          updateAccessLink={shareFormDialogData.updateAccessLink}
         />
       )}
     </div>

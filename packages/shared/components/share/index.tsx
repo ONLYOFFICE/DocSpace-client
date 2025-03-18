@@ -337,7 +337,11 @@ const Share = (props: ShareProps) => {
     };
 
     if (item.access === ShareAccessRights.FormFilling && onOpenPanel) {
-      onOpenPanel(true, updateAccessLink, infoPanelSelection.id);
+      onOpenPanel({
+        visible: true,
+        updateAccessLink,
+        fileId: infoPanelSelection.id,
+      });
       return;
     }
 

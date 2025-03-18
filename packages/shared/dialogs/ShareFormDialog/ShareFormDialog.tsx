@@ -61,66 +61,72 @@ const ShareFormDialog: FC<ShareFormDialogProps> = ({
       <ModalDialog.Header>{t("Common:ShareToFillOut")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div className={styles.container}>
-          <div className={styles.card}>
-            <div className={styles.cardHeader}>
-              <ShareSvg />
-              <Text as="h5" fontSize="14px" lineHeight="16px" isBold>
-                {t("Common:QuickSharing")}
+          {onClickShareFile ? (
+            <div className={styles.card}>
+              <div className={styles.cardHeader}>
+                <ShareSvg />
+                <Text as="h5" fontSize="14px" lineHeight="16px" isBold>
+                  {t("Common:QuickSharing")}
+                </Text>
+              </div>
+              <Text fontSize="12px" lineHeight="16px">
+                {t("Common:ShareTheOriginalFormForFillingOut")}
               </Text>
+              <Button
+                scale
+                isClicked
+                className={styles.button}
+                onClick={onClickShareFile}
+                label={t("Common:Share")}
+                icon={<ArrowIcon />}
+                size={ButtonSize.normal}
+              />
             </div>
-            <Text fontSize="12px" lineHeight="16px">
-              {t("Common:ShareTheOriginalFormForFillingOut")}
-            </Text>
-            <Button
-              scale
-              isClicked
-              className={styles.button}
-              onClick={onClickShareFile}
-              label={t("Common:Share")}
-              icon={<ArrowIcon />}
-              size={ButtonSize.normal}
-            />
-          </div>
-          <div className={styles.card}>
-            <div className={styles.cardHeader}>
-              <FormRoomSvg />
-              <Text as="h5" fontSize="14px" lineHeight="16px" isBold>
-                {t("Common:InFormFillingRoomTitle")}
+          ) : null}
+          {onClickFormRoom ? (
+            <div className={styles.card}>
+              <div className={styles.cardHeader}>
+                <FormRoomSvg />
+                <Text as="h5" fontSize="14px" lineHeight="16px" isBold>
+                  {t("Common:InFormFillingRoomTitle")}
+                </Text>
+              </div>
+              <Text fontSize="12px" lineHeight="16px">
+                {t("Common:InFormFillingRoomDescription")}
               </Text>
+              <Button
+                scale
+                isClicked
+                className={styles.button}
+                onClick={onClickFormRoom}
+                label={t("Common:ShareInTheRoom")}
+                icon={<ArrowIcon />}
+                size={ButtonSize.normal}
+              />
             </div>
-            <Text fontSize="12px" lineHeight="16px">
-              {t("Common:InFormFillingRoomDescription")}
-            </Text>
-            <Button
-              scale
-              isClicked
-              className={styles.button}
-              onClick={onClickFormRoom}
-              label={t("Common:ShareInTheRoom")}
-              icon={<ArrowIcon />}
-              size={ButtonSize.normal}
-            />
-          </div>
-          <div className={styles.card}>
-            <div className={styles.cardHeader}>
-              <VirtualDataRoomRoomSvg />
-              <Text as="h5" fontSize="14px" lineHeight="16px" isBold>
-                {t("Common:InVirtualDataRoomTitle")}
+          ) : null}
+          {onClickVirtualDataRoom ? (
+            <div className={styles.card}>
+              <div className={styles.cardHeader}>
+                <VirtualDataRoomRoomSvg />
+                <Text as="h5" fontSize="14px" lineHeight="16px" isBold>
+                  {t("Common:InVirtualDataRoomTitle")}
+                </Text>
+              </div>
+              <Text fontSize="12px" lineHeight="16px">
+                {t("Common:InVirtualDataRoomDescription")}
               </Text>
+              <Button
+                scale
+                isClicked
+                className={styles.button}
+                onClick={onClickVirtualDataRoom}
+                label={t("Common:ShareInTheRoom")}
+                icon={<ArrowIcon />}
+                size={ButtonSize.normal}
+              />
             </div>
-            <Text fontSize="12px" lineHeight="16px">
-              {t("Common:InVirtualDataRoomDescription")}
-            </Text>
-            <Button
-              scale
-              isClicked
-              className={styles.button}
-              onClick={onClickVirtualDataRoom}
-              label={t("Common:ShareInTheRoom")}
-              icon={<ArrowIcon />}
-              size={ButtonSize.normal}
-            />
-          </div>
+          ) : null}
         </div>
       </ModalDialog.Body>
     </ModalDialog>

@@ -282,7 +282,7 @@ class DialogsStore {
 
   operationCancelVisible = false;
 
-  isShareFormData = { visible: false, callbackFunction: null };
+  isShareFormData = { visible: false, updateAccessLink: null, fileId: null };
 
   constructor(
     authStore,
@@ -302,8 +302,8 @@ class DialogsStore {
     this.infoPanelStore = infoPanelStore;
   }
 
-  setIsShareFormData = (visible, callbackFunction, fileId) => {
-    this.isShareFormData = { visible, callbackFunction, fileId };
+  setIsShareFormData = ({ visible, updateAccessLink, fileId }) => {
+    this.isShareFormData = { visible, updateAccessLink, fileId };
   };
 
   setNewFilesPanelFolderId = (folderId) => {

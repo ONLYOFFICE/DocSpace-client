@@ -89,7 +89,7 @@ import ReorderIndexDialog from "../dialogs/ReorderIndexDialog";
 import LifetimeDialog from "../dialogs/LifetimeDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 // import { FillPDFDialog } from "../dialogs/FillPDFDialog";
-import { ShareCollectSelector } from "../ShareCollectSelector";
+// import { ShareCollectSelector } from "../ShareCollectSelector";
 
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
@@ -146,7 +146,7 @@ const Panels = (props) => {
     selectFileFormRoomOpenRoot,
     reorderDialogVisible,
     //  fillPDFDialogData,
-    shareCollectSelector,
+    // shareCollectSelector,
     createRoomTemplateDialogVisible,
     templateAccessSettingsVisible,
 
@@ -373,12 +373,12 @@ const Panels = (props) => {
     // fillPDFDialogData.visible && (
     //   <FillPDFDialog key="fill-pdf-form-dialog" {...fillPDFDialogData} />
     // ),
-    shareCollectSelector.visible && (
-      <ShareCollectSelector
-        key="share-collect-dialog"
-        {...shareCollectSelector}
-      />
-    ),
+    // shareCollectSelector.visible && (
+    //   <ShareCollectSelector
+    //     key="share-collect-dialog"
+    //     {...shareCollectSelector}
+    //   />
+    // ),
     roomLogoCoverDialogVisible && (
       <RoomLogoCoverDialog key="room-logo-cover-dialog" />
     ),
@@ -486,7 +486,7 @@ export default inject(
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
       // fillPDFDialogData,
-      shareCollectSelector,
+      // shareCollectSelector,
       roomLogoCoverDialogVisible,
       createRoomTemplateDialogVisible,
       templateAccessSettingsVisible,
@@ -598,7 +598,7 @@ export default inject(
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
       // fillPDFDialogData,
-      shareCollectSelector,
+      // shareCollectSelector,
       roomLogoCoverDialogVisible,
       createRoomTemplateDialogVisible,
       templateAccessSettingsVisible,

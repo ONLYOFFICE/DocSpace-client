@@ -105,6 +105,8 @@ const ShareCollectSelector = inject<TStore>(
       setSelected,
       openFileAction,
       createDefineRoomType,
+      headerProps,
+      onClose,
     }: ShareCollectSelectorProps & InjectShareCollectSelectorProps) => {
       const { t } = useTranslation(["Common", "Editor"]);
       const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
@@ -115,11 +117,11 @@ const ShareCollectSelector = inject<TStore>(
         requestRunning.current = arg;
       };
 
-      const onClose = () => {
-        if (requestRunning.current) return;
+      // const onClose = () => {
+      //   if (requestRunning.current) return;
 
-        setShareCollectSelector(false);
-      };
+      //   setShareCollectSelector(false);
+      // };
 
       const onCloseAction = () => {
         setIsMobileHidden(false);
@@ -246,18 +248,14 @@ const ShareCollectSelector = inject<TStore>(
           withSearch
           isRoomsOnly
           withBreadCrumbs
-          withoutBackButton
+          withoutBackButton={false}
           withCancelButton
           currentFolderId=""
-          headerProps={{
-            headerLabel: t("Common:ShareAndCollect"),
-            onCloseClick: onClose,
-          }}
+          headerProps={headerProps}
           rootFolderType={file.rootFolderType}
           createDefineRoomType={createDefineRoomType}
           isPanelVisible={visible ? !conflictResolveDialogVisible : false}
           currentDeviceType={currentDeviceType}
-          headerLabel={t("Common:ShareAndCollect")}
           createDefineRoomLabel={
             createDefineRoomLabels[createDefineRoomType] ?? ""
           }

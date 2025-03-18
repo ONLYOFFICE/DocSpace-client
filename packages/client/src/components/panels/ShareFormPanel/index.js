@@ -24,35 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 import { ShareFormDialog } from "@docspace/shared/dialogs/ShareFormDialog";
 import { inject, observer } from "mobx-react";
+import { ShareCollectSelector } from "SRC_DIR/components/ShareCollectSelector";
+import { useTranslation } from "react-i18next";
+import { RoomsType } from "@docspace/shared/enums";
 
 const ShareFormPanel = ({
   visible,
   setIsShareFormData,
-  callbackFunction,
+  updateAccessLink,
   fileId,
   files,
-  setShareCollectSelector,
 }) => {
+  const [isVisibleSelectFormRoomDialog, setIsVisibleSelectFormRoomDialog] =
+    useState(false);
+  const { t } = useTranslation("Common");
+
   const onClose = () => {
     setIsShareFormData(false);
   };
 
   const onClickShareFile = () => {
-    callbackFunction();
+    updateAccessLink();
     setIsShareFormData(false);
   };
+
+  const file = files.find((item) => item.id === fileId);
 
   const onClickFormRoom = () => {
-    const file = files.find((item) => item.id === fileId);
-
-    setShareCollectSelector(true, file);
-
-    setIsShareFormData(false);
+    setIsVisibleSelectFormRoomDialog(true);
   };
 
+  const onCloseSelectionFormRoom = () => {
+    setIsVisibleSelectFormRoomDialog(false);
+  };
   console.log("ShareFormPanel");
 
   return (
@@ -61,17 +68,32 @@ const ShareFormPanel = ({
       onClose={onClose}
       onClickShareFile={onClickShareFile}
       onClickFormRoom={onClickFormRoom}
+      visibleContainer={isVisibleSelectFormRoomDialog}
+      container={
+        <ShareCollectSelector
+          file={file}
+          visible={isVisibleSelectFormRoomDialog}
+          headerProps={{
+            withoutBorder: false,
+            onCloseClick: onClose,
+            withoutBackButton: false,
+            headerLabel: t("Common:ShareAndCollect"),
+            onBackClick: onCloseSelectionFormRoom,
+          }}
+          onClose={onCloseSelectionFormRoom}
+          createDefineRoomType={RoomsType.FormRoom}
+        />
+      }
     />
   );
 };
 
 export default inject(({ dialogsStore, filesStore }) => {
-  const { setIsShareFormData, setShareCollectSelector } = dialogsStore;
+  const { setIsShareFormData } = dialogsStore;
   const { files } = filesStore;
 
   return {
     setIsShareFormData,
     files,
-    setShareCollectSelector,
   };
 })(observer(ShareFormPanel));

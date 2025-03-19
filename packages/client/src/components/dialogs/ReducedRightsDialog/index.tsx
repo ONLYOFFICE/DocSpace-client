@@ -72,7 +72,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
       <ModalDialog.Footer>
         <Button
           key="OkButton"
-          label={t("Common:OK")}
+          label={t("Common:OKButton")}
           size={ButtonSize.normal}
           primary
           onClick={onCloseDialog}

@@ -292,7 +292,9 @@ const Badges = ({
             id="customFilterTooltip"
             place="bottom"
             getContent={getTooltipContent}
+            openOnClick
             maxWidth="238px"
+            className="custom-filter-tooltip"
           />
         </>
       ) : null}

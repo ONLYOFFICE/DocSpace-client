@@ -38,6 +38,12 @@ const IconButtonCustomFilterTheme = styled(StyledCustomFilterIcon).attrs(
 )<IconButtonCustomFilterColorTheme & { $currentColorScheme?: TColorScheme }>`
   ${commonIconsStyles}
 
+  svg {
+    path {
+      fill: ${globalColors.mainGreen} !important;
+    }
+  }
+
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       svg {

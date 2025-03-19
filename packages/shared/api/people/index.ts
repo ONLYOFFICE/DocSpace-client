@@ -505,7 +505,6 @@ export async function addGuest(
 
   const res = await request(options);
 
-  console.log("res", res);
   return res;
 }
 

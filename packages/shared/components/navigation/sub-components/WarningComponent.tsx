@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTranslation } from "react-i18next";
+import styles from "../Navigation.module.scss";
 
-import TrashWarning from "@docspace/shared/components/navigation/sub-components/TrashWarning";
-
-const Warning = () => {
-  const { t } = useTranslation("Files");
-
-  return <TrashWarning title={t("TrashErasureWarning")} />;
+const WarningComponent = ({ title }: { title?: string }) => {
+  return (
+    <div className={`${styles.warningText}`} title={title}>
+      <div className="warning-text">{title}</div>
+    </div>
+  );
 };
 
-export default Warning;
+export default WarningComponent;

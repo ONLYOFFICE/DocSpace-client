@@ -25,14 +25,45 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styles from "../Navigation.module.scss";
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
-const TrashWarning = ({ title }: { title?: string }) => {
-  return (
-    <div className={`${styles.trashWarning} trash-warning`} title={title}>
-      <div className="warning-text">{title}</div>
-    </div>
-  );
+import WarningComponent from "@docspace/shared/components/navigation/sub-components/WarningComponent";
+import { DeviceType } from "@docspace/shared/enums";
+
+type InjectedProps = {
+  isPersonalReadOnly: boolean;
+  isRecycleBinFolder: boolean;
+  currentDeviceType: DeviceType;
 };
 
-export default TrashWarning;
+const Warning = ({
+  isPersonalReadOnly = false,
+  isRecycleBinFolder = false,
+  currentDeviceType = DeviceType.desktop,
+}: InjectedProps) => {
+  const { t } = useTranslation("Files");
+
+  if (currentDeviceType === DeviceType.desktop) return null;
+
+  const warningText = isRecycleBinFolder
+    ? t("TrashErasureWarning")
+    : isPersonalReadOnly
+      ? t("PersonalFolderErasureWarning")
+      : "";
+
+  if (!warningText) return null;
+
+  return <WarningComponent title={warningText} />;
+};
+
+export default inject(({ treeFoldersStore, settingsStore }: TStore) => {
+  const { isRecycleBinFolder, isPersonalReadOnly } = treeFoldersStore;
+  const { currentDeviceType } = settingsStore;
+
+  return {
+    isPersonalReadOnly,
+    isRecycleBinFolder,
+    currentDeviceType,
+  };
+})(observer(Warning));

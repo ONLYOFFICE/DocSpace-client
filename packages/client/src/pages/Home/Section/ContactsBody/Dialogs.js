@@ -139,7 +139,7 @@ const Dialogs = ({
       {dataReassignmentDialogVisible ? (
         <DataReassignmentDialog
           visible={dataReassignmentDialogVisible}
-          user={data}
+          data={data}
         />
       ) : null}
 

@@ -41,6 +41,7 @@ import {
 } from "@docspace/shared/components/combobox";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -84,6 +85,7 @@ const PeopleTableRow = ({
 
   isGuests,
   isRoomAdmin,
+  inProgress,
 }: TableRowProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["People", "Common", "Settings"]);
@@ -289,12 +291,22 @@ const PeopleTableRow = ({
             className="table-container_row-checkbox-wrapper"
             checked={isChecked}
           >
-            <div className="table-container_element">{element}</div>
-            <Checkbox
-              className="table-container_row-checkbox"
-              onChange={onChange}
-              isChecked={isChecked}
-            />
+            {inProgress ? (
+              <Loader
+                className="table-container_row-loader"
+                size="20px"
+                type={LoaderTypes.track}
+              />
+            ) : (
+              <>
+                <div className="table-container_element">{element}</div>
+                <Checkbox
+                  className="table-container_row-checkbox"
+                  onChange={onChange}
+                  isChecked={isChecked}
+                />
+              </>
+            )}
           </TableCell>
 
           <Text

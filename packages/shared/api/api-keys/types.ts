@@ -1,6 +1,15 @@
 export type TApiKey = {
   id: number;
-  createBy: string;
+  createBy: {
+    avatarMax: string;
+    avatarMedium: string;
+    avatarOriginal: string;
+    avatarSmall: string;
+    displayName: string;
+    hasAvatar: boolean;
+    id: string;
+    isAnonim: boolean;
+  };
   createOn: string;
   isActive: boolean;
   keyPrefix: string;

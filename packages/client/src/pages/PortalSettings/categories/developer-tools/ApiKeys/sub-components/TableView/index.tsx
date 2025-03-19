@@ -83,6 +83,7 @@ const TableView = (props: TableViewProps) => {
     currentDeviceType,
     onDeleteApiKey,
     onChangeApiKeyStatus,
+    culture,
   } = props;
 
   const tableRef = useRef(null);
@@ -119,6 +120,7 @@ const TableView = (props: TableViewProps) => {
         {items.map((item) => (
           <TableRow
             key={item.id}
+            culture={culture}
             item={item}
             hideColumns={hideColumns}
             onDeleteApiKey={onDeleteApiKey}
@@ -132,12 +134,13 @@ const TableView = (props: TableViewProps) => {
 
 export default inject(({ setup, settingsStore, userStore }: TStore) => {
   const { viewAs, setViewAs } = setup;
-  const { currentDeviceType } = settingsStore;
+  const { currentDeviceType, culture } = settingsStore;
 
   return {
     viewAs,
     setViewAs,
     userId: userStore.user!.id,
     currentDeviceType,
+    culture,
   };
 })(observer(TableView));

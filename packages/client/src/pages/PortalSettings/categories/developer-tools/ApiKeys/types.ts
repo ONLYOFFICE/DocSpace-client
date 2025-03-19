@@ -25,6 +25,7 @@ export type TableViewProps = {
   currentDeviceType?: DeviceType;
   onDeleteApiKey: (id: TApiKey["id"]) => void;
   onChangeApiKeyStatus: (id: TApiKey["id"]) => void;
+  culture?: string;
 };
 
 export type TableHeaderProps = {
@@ -41,6 +42,7 @@ export type TableRowProps = {
   hideColumns: boolean;
   onDeleteApiKey: (id: TApiKey["id"]) => void;
   onChangeApiKeyStatus: (id: TApiKey["id"]) => void;
+  culture: string;
 };
 
 export type TableHeaderColumn = {

@@ -27,13 +27,21 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 import {
   TableRow as TableRowComponent,
   TableCell,
 } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
 import { TableRowProps } from "../../types";
+import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -59,10 +67,23 @@ const StyledTableRow = styled(TableRowComponent)`
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .author-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .author-avatar-cell {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+  }
 `;
 
 const TableRow = (props: TableRowProps) => {
-  const { item, hideColumns, onChangeApiKeyStatus, onDeleteApiKey } = props;
+  const { item, hideColumns, onChangeApiKeyStatus, onDeleteApiKey, culture } =
+    props;
 
   const { t } = useTranslation(["Common"]);
 
@@ -74,6 +95,20 @@ const TableRow = (props: TableRowProps) => {
       onClick: () => onDeleteApiKey(item.id),
     },
   ];
+
+  const avatarSource = item.createBy?.hasAvatar
+    ? item.createBy?.avatarSmall
+    : DefaultUserPhotoSize32PngUrl;
+
+  const getStatusByDate = () => {
+    const locale = getCookie(LANGUAGE) || culture;
+
+    const dateLabel = getCorrectDate(locale, item.createOn);
+
+    return dateLabel;
+  };
+
+  const date = getStatusByDate();
 
   return (
     <StyledWrapper>
@@ -94,15 +129,23 @@ const TableRow = (props: TableRowProps) => {
             className="api-keys_text api-keys_text-overflow"
             fontWeight={600}
           >
-            {item.createOn}
+            {date}
           </Text>
         </TableCell>
-        <TableCell>
+        <TableCell className="author-cell">
+          <Avatar
+            source={avatarSource}
+            className="author-avatar-cell"
+            role={AvatarRole.user}
+            size={AvatarSize.small}
+          />
           <Text
-            className="api-keys_text api-keys_text-overflow"
+            fontSize="12px"
             fontWeight={600}
+            title={item.createBy?.displayName}
+            truncate
           >
-            {item.createBy}
+            {item.createBy?.displayName}
           </Text>
         </TableCell>
         <TableCell>

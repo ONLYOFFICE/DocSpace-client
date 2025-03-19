@@ -91,6 +91,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
             placeholder={t("Settings:CreateNewSecretKeyDialogPlaceholder")}
             value={inputValue}
             type={InputType.text}
+            isAutoFocussed
             onChange={(e) => {
               setIsValid(true);
               setInputValue(e.target.value);

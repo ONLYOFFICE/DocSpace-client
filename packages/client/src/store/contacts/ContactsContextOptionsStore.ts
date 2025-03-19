@@ -328,6 +328,7 @@ class ContactsConextOptionsStore {
     const isGuests = contactsTab === "guests";
 
     const { isOwner: isUserOwner, isAdmin: isUserAdmin } = this.userStore.user!;
+    const { standalone } = this.settingsStore;
 
     const { isCollaborator, isRoomAdmin, isAdmin, isVisitor } =
       item ?? selectionUsersRights;
@@ -341,7 +342,7 @@ class ContactsConextOptionsStore {
       title: getUserTypeTranslation(EmployeeType.Admin, t),
       icon: isGuests ? PersonAdminReactSvgUrl : null,
       badgeLabel: isGuests ? t("Common:Paid") : undefined,
-      isPaidBadge: isGuests,
+      isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.Admin,
       action: EmployeeType.Admin,
@@ -356,7 +357,7 @@ class ContactsConextOptionsStore {
       title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       icon: isGuests ? PersonManagerReactSvgUrl : null,
       badgeLabel: isGuests ? t("Common:Paid") : undefined,
-      isPaidBadge: isGuests,
+      isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.RoomAdmin,
       action: EmployeeType.RoomAdmin,

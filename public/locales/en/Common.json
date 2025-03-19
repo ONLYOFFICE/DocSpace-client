@@ -261,6 +261,7 @@
   "FormFilingRoomTitle": "Form Filling Room",
   "FormRoom": "Form room",
   "FormTemplates": "Form templates",
+  "ForQuestionsContactPortalAdmin": "For any questions, please contact your {{productName}} admin.",
   "Free": "Free",
   "FreeAccessToLicensedVersion": "Free access to {{license}} solution",
   "FromDevice": "From device",

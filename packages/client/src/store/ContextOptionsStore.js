@@ -1304,6 +1304,12 @@ class ContextOptionsStore {
     this.dialogsStore.setEmptyTrashDialogVisible(true);
   };
 
+  onEmptyPersonalAction = () => {
+    if (this.filesActionsStore.emptyPersonalRoomInProgress) return;
+
+    this.dialogsStore.setEmptyTrashDialogVisible(true);
+  };
+
   onRestoreAllAction = () => {
     const { activeFiles, activeFolders } = this.filesStore;
     const isExistActiveItems = [...activeFiles, ...activeFolders].length > 0;
@@ -1334,9 +1340,23 @@ class ContextOptionsStore {
     setRestoreRoomDialogVisible(true);
   };
 
+  onDownloadAllAction = () => {
+    const { getSelectedFolder } = this.selectedFolderStore;
+    const { downloadAction } = this.filesActionsStore;
+
+    const selectedFolder = getSelectedFolder();
+
+    downloadAction("", selectedFolder).catch((err) => toastr.error(err));
+  };
+
   getHeaderOptions = (t, item) => {
-    const { isRecycleBinFolder, isArchiveFolder, isTemplatesFolder } =
-      this.treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isArchiveFolder,
+      isTemplatesFolder,
+      personalUserFolderTitle,
+      isPersonalReadOnly,
+    } = this.treeFoldersStore;
     const { roomsForDelete, roomsForRestore } = this.filesStore;
 
     const canRestoreAll = roomsForRestore.length > 0;
@@ -1415,6 +1435,29 @@ class ContextOptionsStore {
 
     if (isTemplatesFolder) {
       return [];
+    }
+
+    if (isPersonalReadOnly) {
+      return [
+        {
+          id: "header_option_download-all",
+          key: "download-all",
+          label: t("Files:DownloadAll"),
+          onClick: this.onDownloadAllAction,
+          icon: MoveReactSvgUrl,
+          disabled: false,
+        },
+        {
+          id: "header_option_empty-section",
+          key: "empty-section",
+          label: t("Files:EmptySection", {
+            sectionName: personalUserFolderTitle,
+          }),
+          onClick: this.onEmptyPersonalAction,
+          icon: ClearTrashReactSvgUrl,
+          disabled: false,
+        },
+      ];
     }
 
     return this.getFilesContextOptions(item, t, false, true);

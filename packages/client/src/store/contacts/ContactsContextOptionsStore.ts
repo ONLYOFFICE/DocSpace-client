@@ -81,6 +81,7 @@ import {
 import InfoPanelStore from "../InfoPanelStore";
 import ProfileActionsStore from "../ProfileActionsStore";
 import DialogsStore from "../DialogsStore";
+import SettingsSetupStore from "../SettingsSetupStore";
 
 import UsersStore from "./UsersStore";
 import DialogStore from "./DialogStore";
@@ -102,6 +103,7 @@ class ContactsConextOptionsStore {
     public targetUserStore: TargetUserStore,
     public dialogsStore: DialogsStore,
     public currentQuotaStore: CurrentQuotasStore,
+    public setup: SettingsSetupStore,
   ) {
     this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
@@ -113,7 +115,7 @@ class ContactsConextOptionsStore {
     this.targetUserStore = targetUserStore;
     this.dialogsStore = dialogsStore;
     this.currentQuotaStore = currentQuotaStore;
-
+    this.setup = setup;
     makeAutoObservable(this);
   }
 
@@ -338,6 +340,7 @@ class ContactsConextOptionsStore {
     const isGuests = contactsTab === "guests";
 
     const { isOwner: isUserOwner, isAdmin: isUserAdmin } = this.userStore.user!;
+    const { standalone } = this.settingsStore;
 
     const { isCollaborator, isRoomAdmin, isAdmin, isVisitor } =
       item ?? selectionUsersRights;
@@ -351,7 +354,7 @@ class ContactsConextOptionsStore {
       title: getUserTypeTranslation(EmployeeType.Admin, t),
       icon: isGuests ? PersonAdminReactSvgUrl : null,
       badgeLabel: isGuests ? t("Common:Paid") : undefined,
-      isPaidBadge: isGuests,
+      isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.Admin,
       action: EmployeeType.Admin,
@@ -366,7 +369,7 @@ class ContactsConextOptionsStore {
       title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       icon: isGuests ? PersonManagerReactSvgUrl : null,
       badgeLabel: isGuests ? t("Common:Paid") : undefined,
-      isPaidBadge: isGuests,
+      isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.RoomAdmin,
       action: EmployeeType.RoomAdmin,
@@ -388,19 +391,25 @@ class ContactsConextOptionsStore {
       isActive: item ? isCollaborator : userSelectionRole === EmployeeType.User,
     };
 
-    if (
-      (isRoomAdmin || isCollaborator || isAdmin || isVisitor) &&
-      isUserOwner
-    ) {
-      options.push(adminOption);
+    const guestOption = {
+      id: "menu_change-guest",
+      key: EmployeeType.Guest,
+      label: getUserTypeTranslation(EmployeeType.Guest, t),
+      title: getUserTypeTranslation(EmployeeType.Guest, t),
+      "data-action": EmployeeType.Guest,
+      action: EmployeeType.Guest,
+      onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
+      isActive: item ? isVisitor : userSelectionRole === EmployeeType.Guest,
+    };
 
-      if ((isAdmin || isRoomAdmin) && !isCollaborator)
-        options.push(roomAdminOption);
-    }
+    if (isUserAdmin) {
+      if (isUserOwner) {
+        options.push(adminOption);
+      }
 
-    if ((isCollaborator || isVisitor) && isUserAdmin) {
       options.push(roomAdminOption);
       options.push(userOption);
+      if (!isVisitor) options.push(guestOption);
     }
 
     return options;
@@ -577,6 +586,15 @@ class ContactsConextOptionsStore {
   toggleDataReassignmentDialog = (item: TItem) => {
     const { setDialogData, setDataReassignmentDialogVisible, closeDialogs } =
       this.dialogStore;
+
+    if (!this.setup) return;
+
+    const {
+      dataReassignment,
+      dataReassignmentProgress,
+      dataReassignmentTerminate,
+    } = this.setup;
+
     const {
       id,
       displayName,
@@ -590,13 +608,18 @@ class ContactsConextOptionsStore {
     closeDialogs();
 
     setDialogData({
-      id,
-      avatar,
-      displayName,
-      statusType,
-      userName,
-      isCollaborator,
-      isVisitor,
+      user: {
+        id,
+        avatar,
+        displayName,
+        statusType,
+        userName,
+        isCollaborator,
+        isVisitor,
+      },
+      reassignUserData: dataReassignment,
+      getReassignmentProgress: dataReassignmentProgress,
+      cancelReassignment: dataReassignmentTerminate,
     });
 
     setDataReassignmentDialogVisible(true);

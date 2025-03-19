@@ -39,7 +39,7 @@ describe("Navigation Component", () => {
       infoPanel: "Info Panel",
       actions: "Actions",
       contextMenu: "Context Menu",
-      trashWarning: "Warning",
+      warningText: "Warning",
     },
     withMenu: true,
     onPlusClick: jest.fn(),

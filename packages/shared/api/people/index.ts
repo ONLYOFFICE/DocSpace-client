@@ -46,6 +46,7 @@ import { request } from "../client";
 
 import Filter from "./filter";
 import { TChangeTheme, TGetUserList, TUser } from "./types";
+import { TOperation } from "../files/filter";
 
 export async function getUserList(
   filter = Filter.getDefault(),
@@ -158,6 +159,22 @@ export function getUserPhoto(userId) {
     method: "get",
     url: `/people/${userId}/photo`,
   });
+}
+
+export async function startEmptyPersonal() {
+  const res = (await request({
+    method: "post",
+    url: "/people/delete/personal/start",
+  })) as TOperation[];
+  return res;
+}
+
+export async function getEmptyPersonalProgress() {
+  const res = (await request({
+    method: "get",
+    url: "/people/delete/personal/progress",
+  })) as TOperation[];
+  return res;
 }
 
 export function createUser(data, confirmKey: Nullable<string> = null) {
@@ -422,6 +439,43 @@ export async function updateUserType(type: EmployeeType, userIds: string[]) {
   return res;
 }
 
+export async function downgradeUserType(
+  type: EmployeeType,
+  userId: number | string,
+  reassignUserId?: number | string,
+) {
+  return request({
+    method: "post",
+    url: "people/type",
+    data: { type, userId, reassignUserId },
+  });
+}
+
+export async function getReassignmentProgress(userId: number | string) {
+  return request({
+    method: "get",
+    url: `people/type/progress/${userId}`,
+  });
+}
+
+export async function terminateReassignment(userId: number | string) {
+  return request({
+    method: "put",
+    url: `people/type/terminate`,
+    data: { userId },
+  });
+}
+
+export async function reassignmentNecessary(
+  userId: number | string,
+  type: EmployeeType,
+) {
+  return request({
+    method: "get",
+    url: "people/reassign/necessary",
+    params: { userId, type },
+  });
+}
 export function linkOAuth(serializedProfile) {
   return request({
     method: "put",

@@ -214,6 +214,10 @@ const peopleStore = new PeopleStore(
   profileActionsStore,
   dialogsStore,
   currentQuotaStore,
+  treeFoldersStore,
+  setupStore,
+  filesStore,
+  selectedFolderStore,
 );
 
 const uploadDataStore = new UploadDataStore(

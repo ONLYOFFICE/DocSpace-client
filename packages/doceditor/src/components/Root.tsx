@@ -49,9 +49,19 @@ import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 import useStartFillingSelectDialog from "@/hooks/useStartFillingSelectDialog";
+import { useStartFillingPanel } from "@/hooks/useStartFillingPanel";
 import useSDK from "@/hooks/useSDK";
 
 import Editor from "./Editor";
+
+import { calculateAsideHeight } from "@/utils";
+import { TFrameConfig } from "@docspace/shared/types/Frame";
+import { useFillingStatusDialog } from "@/hooks/userFillingStatusDialog";
+import FillingStatusDialog from "./filling-status-dialog";
+import { DialogAsideSkeleton } from "@docspace/shared/skeletons";
+import { useStopFillingDialog } from "@/hooks/useStopFillingDialog";
+import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
+import { useShareFormDialog } from "@/hooks/useShareFormDialog";
 
 const DeepLink = dynamic(() => import("./deep-link"), {
   ssr: false,
@@ -65,18 +75,24 @@ const SelectFolderDialog = dynamic(() => import("./SelectFolderDialog"), {
 const SharingDialog = dynamic(() => import("./ShareDialog"), {
   ssr: false,
 });
-const StartFillingSelectorDialog = dynamic(
-  () => import("./StartFillingSelectDialog"),
+
+const StartFillingPanel = dynamic(
+  async () =>
+    (await import("@docspace/shared/dialogs/start-filling")).StartFillingPanel,
   {
     ssr: false,
+    loading: () => {
+      return <DialogAsideSkeleton isPanel withFooterBorder={false} />;
+    },
   },
 );
-const ConflictResolveDialog = dynamic(() => import("./ConflictResolveDialog"), {
-  ssr: false,
-});
 
-import { calculateAsideHeight } from "@/utils";
-import { TFrameConfig } from "@docspace/shared/types/Frame";
+const ShareFormDialog = dynamic(() => import("./ShareFormDialog"), {
+  ssr: false,
+  loading: () => {
+    return <DialogAsideSkeleton isPanel withFooterBorder={false} />;
+  },
+});
 
 const Root = ({
   settings,
@@ -90,14 +106,16 @@ const Root = ({
   fileId,
   hash,
   shareKey,
+
+  deepLinkSettings,
+  baseSdkConfig,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
-  const [sdkConfig, setSdkConfig] = React.useState<TFrameConfig | null>(null);
 
-  const documentserverUrl = config?.editorUrl ?? error?.editorUrl;
+  const documentServerUrl = config?.editorUrl ?? error?.editorUrl;
   const fileInfo = config?.file;
-
   const instanceId = config?.document?.referenceData.instanceId;
+  const roomId = config?.document?.referenceData.roomId;
 
   const isSkipError =
     error?.status === "not-found" ||
@@ -111,26 +129,28 @@ const Root = ({
     documentType: config?.documentType,
   });
 
-  const { sdkFrameConfig } = useSDK();
-
-  React.useEffect(() => setSdkConfig(sdkFrameConfig), [sdkFrameConfig]);
+  const { sdkConfig } = useSDK(baseSdkConfig);
 
   const { getErrorMessage } = useError({
     error,
-    editorUrl: documentserverUrl,
+    editorUrl: documentServerUrl,
   });
 
   const { isShowDeepLink, setIsShowDeepLink } = useDeepLink({
     settings,
     fileInfo,
     email: user?.email,
+    deepLinkSettings,
   });
+
   const { filesSettings } = useFilesSettings({});
+
   useSocketHelper({
     socketUrl: user ? (settings?.socketUrl ?? "") : "",
     user,
     shareKey,
   });
+
   const {
     onSDKRequestSaveAs,
     onCloseSelectFolderDialog,
@@ -141,6 +161,7 @@ const Root = ({
     titleSelectorFolderDialog,
     extensionSelectorFolderDialog,
   } = useSelectFolderDialog({});
+
   const {
     onSDKRequestInsertImage,
     onSDKRequestReferenceSource,
@@ -155,24 +176,57 @@ const Root = ({
   } = useSelectFileDialog({ instanceId: instanceId ?? "" });
 
   const {
+    onCloseShareFormDialog,
+    openShareFormDialog,
+    shareFormDialogVisible,
+    onClickFormRoom,
+    onClickVirtualDataRoom,
+
     getIsDisabledStartFillingSelectDialog,
     isVisibleStartFillingSelectDialog,
     onCloseStartFillingSelectDialog,
     onSubmitStartFillingSelectDialog,
-    onSDKRequestStartFilling,
-    conflictDataDialog,
     headerLabelSFSDialog,
     onDownloadAs,
-  } = useStartFillingSelectDialog(fileInfo);
+    createDefineRoomType,
+  } = useShareFormDialog(fileInfo);
 
   const {
     isSharingDialogVisible,
 
     onCloseSharingDialog,
     onSDKRequestSharingSettings,
-  } = useShareDialog(config, onSDKRequestStartFilling);
+  } = useShareDialog(config, openShareFormDialog);
+
+  const {
+    roles,
+    onStartFilling,
+    inviteUserToRoom,
+    startFillingPanelVisible,
+    setStartFillingPanelVisible,
+    onStartFillingVDRPanel,
+    onSubmitStartFilling,
+  } = useStartFillingPanel(fileInfo, roomId);
 
   useUpdateSearchParamId(fileId, hash);
+  const {
+    stopFillingDialogVisible,
+    formId,
+    onCloseStopFillingDialog,
+    openStopFillingDialog,
+    onSubmitStopFilling,
+  } = useStopFillingDialog();
+
+  const {
+    fillingStatusDialogVisible,
+    setFillingStatusDialogVisible,
+    onCloseFillingStatusDialog,
+    onStopFilling,
+    // onDelete,
+    onResetFilling,
+  } = useFillingStatusDialog({
+    openStopFillingDialog,
+  });
 
   React.useEffect(() => {
     if (
@@ -211,6 +265,8 @@ const Root = ({
 
   const organizationName = settings?.logoText || t("Common:OrganizationName");
 
+  console.log({ globalConfig: config });
+
   return isShowDeepLink ? (
     <DeepLink
       fileInfo={fileInfo}
@@ -226,14 +282,14 @@ const Root = ({
     />
   ) : (
     <div style={{ width: "100%", height: "100%" }}>
-      {documentserverUrl && (
+      {documentServerUrl && (
         <Editor
           config={config}
           user={user}
           successAuth={successAuth}
           doc={doc}
           isSharingAccess={isSharingAccess}
-          documentserverUrl={documentserverUrl}
+          documentServerUrl={documentServerUrl}
           fileInfo={fileInfo}
           sdkConfig={sdkConfig}
           errorMessage={error?.message}
@@ -246,8 +302,11 @@ const Root = ({
           onSDKRequestReferenceSource={onSDKRequestReferenceSource}
           onSDKRequestSelectDocument={onSDKRequestSelectDocument}
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
-          onSDKRequestStartFilling={onSDKRequestStartFilling}
           organizationName={organizationName}
+          onStartFillingVDRPanel={onStartFillingVDRPanel}
+          setFillingStatusDialogVisible={setFillingStatusDialogVisible}
+          openShareFormDialog={openShareFormDialog}
+          onStartFilling={onStartFilling}
         />
       )}
 
@@ -284,21 +343,55 @@ const Root = ({
           onCancel={onCloseSharingDialog}
         />
       )}
-      {isVisibleStartFillingSelectDialog && fileInfo && (
-        <StartFillingSelectorDialog
-          fileInfo={fileInfo}
-          filesSettings={filesSettings}
-          headerLabel={headerLabelSFSDialog}
-          isVisible={
-            isVisibleStartFillingSelectDialog && !conflictDataDialog.visible
-          }
-          onClose={onCloseStartFillingSelectDialog}
-          onSubmit={onSubmitStartFillingSelectDialog}
-          getIsDisabled={getIsDisabledStartFillingSelectDialog}
+
+      {user && settings && fileInfo && startFillingPanelVisible && roomId && (
+        <StartFillingPanel
+          user={user}
+          roles={roles}
+          roomId={roomId}
+          settings={settings}
+          fileId={fileInfo.id}
+          onSubmit={onSubmitStartFilling}
+          inviteUserToRoom={inviteUserToRoom}
+          setStartFillingPanelVisible={setStartFillingPanelVisible}
         />
       )}
-      {conflictDataDialog.visible && (
-        <ConflictResolveDialog {...conflictDataDialog} />
+      {fillingStatusDialogVisible && fileInfo && user ? (
+        <FillingStatusDialog
+          file={fileInfo}
+          user={user}
+          visible={fillingStatusDialogVisible}
+          onClose={onCloseFillingStatusDialog}
+          onStopFilling={onStopFilling}
+          // onDelete={onDelete}
+          onResetFilling={onResetFilling}
+        />
+      ) : null}
+      {stopFillingDialogVisible && (
+        <StopFillingDialog
+          formId={formId}
+          visible={stopFillingDialogVisible}
+          onClose={onCloseStopFillingDialog}
+          onSubmit={onSubmitStopFilling}
+        />
+      )}
+
+      {shareFormDialogVisible && fileInfo && (
+        <ShareFormDialog
+          file={fileInfo}
+          filesSettings={filesSettings}
+          createDefineRoomType={createDefineRoomType}
+          headerLabelSFSDialog={headerLabelSFSDialog}
+          onClose={onCloseShareFormDialog}
+          onClickFormRoom={onClickFormRoom}
+          onClickVirtualDataRoom={onClickVirtualDataRoom}
+          getIsDisabledStartFillingSelectDialog={
+            getIsDisabledStartFillingSelectDialog
+          }
+          onCloseStartFillingSelectDialog={onCloseStartFillingSelectDialog}
+          onSubmitStartFillingSelectDialog={onSubmitStartFillingSelectDialog}
+          isVisibleStartFillingSelectDialog={isVisibleStartFillingSelectDialog}
+        />
       )}
     </div>
   );

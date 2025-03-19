@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable react/prop-types */
-import React from "react";
+
 import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -68,6 +68,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     roomId,
     isLoadedPublicRoom,
     isLoadingPublicRoom,
+
+    limitedAccessDevToolsForUsers,
   } = props;
 
   const location = useLocation();
@@ -149,9 +151,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname ===
       "/portal-settings/customization/general/portal-renaming";
 
-    const isOAuthPage = location.pathname.includes(
-      "portal-settings/developer-tools/oauth",
-    );
+    const isOAuthPage = location.pathname.includes("/developer-tools/oauth");
     const isAuthorizedAppsPage = location.pathname.includes("authorized-apps");
 
     const isBrandingPage = location.pathname.includes(
@@ -169,6 +169,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname.includes("bonus") && !isCommunity;
 
     const isAboutPage = location.pathname.includes("about");
+    const isDeveloperToolsPage = location.pathname.includes("/developer-tools");
 
     if (location.pathname === "/shared/invalid-link") {
       return children;
@@ -306,12 +307,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     }
 
     if (isOAuthPage && !identityServerEnabled) {
-      return (
-        <Navigate
-          replace
-          to="/portal-settings/developer-tools/javascript-sdk"
-        />
-      );
+      return <Navigate replace to="/developer-tools/javascript-sdk" />;
     }
 
     if (isAuthorizedAppsPage && !identityServerEnabled) {
@@ -321,6 +317,11 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
           to={location.pathname.replace("authorized-apps", "login")}
         />
       );
+    }
+
+    if (isDeveloperToolsPage) {
+      if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin))
+        return <Navigate replace to="/error/403" />;
     }
 
     if (

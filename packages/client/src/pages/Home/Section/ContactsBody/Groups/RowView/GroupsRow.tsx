@@ -130,6 +130,7 @@ const GroupsRowComponent = ({
               lineHeight="20px"
               isTextOverflow
               onClick={onOpenGroup}
+              truncate
             >
               {item.name}
             </Link>

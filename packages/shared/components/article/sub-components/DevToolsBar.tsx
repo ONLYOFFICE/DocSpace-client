@@ -51,7 +51,7 @@ const ArticleDevToolsBar = ({
   const navigate = useNavigate();
 
   const onClick = (e: React.MouseEvent) => {
-    const path = "/portal-settings/developer-tools";
+    const path = "/developer-tools";
 
     if (openingNewTab(path, e)) return;
 

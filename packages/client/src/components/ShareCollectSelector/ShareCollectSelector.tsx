@@ -104,6 +104,7 @@ const ShareCollectSelector = inject<TStore>(
       setIsMobileHidden,
       setSelected,
       openFileAction,
+      createDefineRoomType,
     }: ShareCollectSelectorProps & InjectShareCollectSelectorProps) => {
       const { t } = useTranslation(["Common", "Editor"]);
       const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
@@ -233,6 +234,11 @@ const ShareCollectSelector = inject<TStore>(
         onClose: onCloseInfoBar,
       };
 
+      const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {
+        [RoomsType.VirtualDataRoom]: t("Common:CreateVirtualDataRoom"),
+        [RoomsType.FormRoom]: t("Common:CreateFormFillingRoom"),
+      };
+
       return (
         <FilesSelectorWrapper
           withCreate
@@ -243,12 +249,18 @@ const ShareCollectSelector = inject<TStore>(
           withoutBackButton
           withCancelButton
           currentFolderId=""
+          headerProps={{
+            headerLabel: t("Common:ShareAndCollect"),
+            onCloseClick: onClose,
+          }}
           rootFolderType={file.rootFolderType}
-          createDefineRoomType={RoomsType.FormRoom}
-          isPanelVisible={visible ? !conflictResolveDialogVisible : null}
+          createDefineRoomType={createDefineRoomType}
+          isPanelVisible={visible ? !conflictResolveDialogVisible : false}
           currentDeviceType={currentDeviceType}
           headerLabel={t("Common:ShareAndCollect")}
-          createDefineRoomLabel={t("Common:CreateFormFillingRoom")}
+          createDefineRoomLabel={
+            createDefineRoomLabels[createDefineRoomType] ?? ""
+          }
           submitButtonLabel={t("Common:CopyHere")}
           cancelButtonLabel={t("Common:CancelButton")}
           cancelButtonId="share-collect-selector-cancel"

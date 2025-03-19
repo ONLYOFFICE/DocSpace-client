@@ -62,6 +62,56 @@
   }
 }
 
+.dsConnect {
+  max-width: 700px;
+
+  :global {
+    .rectangle-loader_description {
+      margin-bottom: 10px;
+    }
+
+    .rectangle-loader_link {
+      margin-bottom: 4px;
+    }
+
+    .rectangle-loader_field-wrapper {
+      margin-top: 16px;
+      display: flex;
+      gap: 4px;
+      flex-direction: column;
+
+      .rectangle-loader_input {
+        width: 350px;
+      }
+
+      @include mobile {
+        .rectangle-loader_input {
+          width: 100%;
+        }
+      }
+    }
+
+    .rectangle-loader_checkbox {
+      margin-top: 8px;
+    }
+
+    .rectangle-loader_title {
+      margin: 20px 0;
+    }
+
+    .rectangle-loader_buttons {
+      max-width: 404px;
+      display: grid;
+      grid-template-columns: 86px 86px 1fr;
+      gap: 8px;
+
+      @include mobile {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+}
+
 .storageManagementLoader {
   max-width: 660px;
 

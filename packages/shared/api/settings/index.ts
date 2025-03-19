@@ -976,11 +976,11 @@ export function getQuotaSettings() {
   });
 }
 
-export function createWebhook(name, uri, secretKey, ssl) {
+export function createWebhook(name, uri, secretKey, ssl, triggers) {
   return request({
     method: "post",
     url: `/settings/webhook`,
-    data: { name, uri, secretKey, ssl },
+    data: { name, uri, secretKey, enabled: true, ssl, triggers },
   });
 }
 
@@ -991,23 +991,22 @@ export function getAllWebhooks() {
   });
 }
 
-export function updateWebhook(id, name, uri, secretKey, ssl) {
+export function updateWebhook(id, name, uri, secretKey, ssl, triggers) {
   return request({
     method: "put",
     url: `/settings/webhook`,
-    data: { id, name, uri, secretKey, ssl },
+    data: { id, name, uri, secretKey, enabled: true, ssl, triggers },
   });
 }
 
 export function toggleEnabledWebhook(webhook) {
   return request({
     method: "put",
-    url: `/settings/webhook`,
+    url: `/settings/webhook/enable`,
     data: {
       id: webhook.id,
       name: webhook.name,
       uri: webhook.uri,
-      secretKey: webhook.secretKey,
       enabled: !webhook.enabled,
     },
   });
@@ -1271,6 +1270,36 @@ export function getCronLdap() {
   const options = {
     method: "get",
     url: "/settings/ldap/cron",
+  };
+
+  return request(options);
+}
+
+export function setLimitedAccessForUsers(enable: boolean) {
+  const data = { limitedAccessForUsers: enable };
+  const options = {
+    method: "post",
+    url: "/settings/devtoolsaccess",
+    data,
+  };
+
+  return request(options);
+}
+
+export function getDeepLinkSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/deeplink",
+  };
+
+  return request(options);
+}
+
+export function saveDeepLinkSettings(handlingMode: number) {
+  const options = {
+    method: "post",
+    url: "/settings/deeplink",
+    data: { deepLinkSettings: { handlingMode } },
   };
 
   return request(options);

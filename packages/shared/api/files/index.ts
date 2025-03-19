@@ -32,6 +32,7 @@ import moment from "moment";
 import {
   ConflictResolveType,
   FolderType,
+  type FormFillingManageAction,
   ShareAccessRights,
 } from "../../enums";
 import {
@@ -68,6 +69,8 @@ import {
   TUploadOperation,
   TConnectingStorages,
   TIndexItems,
+  TFormRoleMappingRequest,
+  TFileFillingFormStatus,
 } from "./types";
 
 export async function openEdit(
@@ -1377,8 +1380,11 @@ export async function getDocumentServiceLocation(version?: number | string) {
 
 export async function changeDocumentServiceLocation(
   docServiceUrl: string,
+  secretKey: string,
+  authHeader: string,
   internalUrl: string,
   portalUrl: string,
+  sslVerification: boolean,
 ) {
   const res = (await request({
     method: "put",
@@ -1387,6 +1393,9 @@ export async function changeDocumentServiceLocation(
       DocServiceUrl: docServiceUrl,
       DocServiceUrlInternal: internalUrl,
       DocServiceUrlPortal: portalUrl,
+      DocServiceSignatureSecret: secretKey,
+      DocServiceSignatureHeader: authHeader,
+      DocServiceSslVerification: sslVerification,
     },
   })) as TDocServiceLocation;
 
@@ -1572,6 +1581,39 @@ export async function deleteVersionFile(fileId: number, versions: number[]) {
     url: "/files/fileops/deleteversion",
     data,
   })) as TOperation[];
+
+  return res;
+}
+
+export async function formRoleMapping(data: TFormRoleMappingRequest) {
+  return request({
+    method: "post",
+    url: `files/file/${data.formId}/formrolemapping`,
+    data,
+  });
+}
+
+export async function manageFormFilling(
+  formId: string | number,
+  action: FormFillingManageAction,
+) {
+  return request({
+    method: "put",
+    url: `files/file/${formId}/manageformfilling`,
+    data: {
+      formId,
+      action,
+    },
+  });
+}
+
+export async function getFormFillingStatus(
+  formId: string | number,
+): Promise<TFileFillingFormStatus[]> {
+  const res = (await request({
+    method: "get",
+    url: `/files/file/${formId}/formroles`,
+  })) as TFileFillingFormStatus[];
 
   return res;
 }

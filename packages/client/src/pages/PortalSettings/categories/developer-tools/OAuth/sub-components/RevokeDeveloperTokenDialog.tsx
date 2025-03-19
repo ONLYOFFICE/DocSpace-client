@@ -52,14 +52,12 @@ import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 type GenerateDeveloperTokenDialogProps = {
   client?: IClientProps;
-  jwtToken?: string;
 
   setRevokeDeveloperTokenDialogVisible?: (value: boolean) => void;
 };
 
 const GenerateDeveloperTokenDialog = ({
   client,
-  jwtToken,
   setRevokeDeveloperTokenDialogVisible,
 }: GenerateDeveloperTokenDialogProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
@@ -67,7 +65,7 @@ const GenerateDeveloperTokenDialog = ({
   const [token, setToken] = React.useState("");
   const [isValidToken, setIsValidToken] = React.useState(false);
   const [tokenError, setTokenError] = React.useState("");
-
+  const [secret, setSecret] = React.useState("");
   const [requestRunning, setRequestRunning] = React.useState(false);
 
   const timerRef = React.useRef<null | NodeJS.Timeout>(null);
@@ -76,16 +74,11 @@ const GenerateDeveloperTokenDialog = ({
     if (!token || !isValidToken || !client || requestRunning) return;
 
     try {
-      const { clientId, clientSecret } = client;
+      const { clientId } = client;
 
       setRequestRunning(true);
 
-      await api.oauth.revokeDeveloperToken(
-        token,
-        clientId,
-        clientSecret,
-        jwtToken!,
-      );
+      await api.oauth.revokeDeveloperToken(token, clientId, secret);
 
       setRequestRunning(false);
 
@@ -144,6 +137,16 @@ const GenerateDeveloperTokenDialog = ({
     setRevokeDeveloperTokenDialogVisible?.(false);
   };
 
+  React.useEffect(() => {
+    const fecthClient = async () => {
+      const { clientSecret } = await api.oauth.getClient(client!.clientId);
+
+      setSecret(clientSecret);
+    };
+
+    fecthClient();
+  }, [client?.clientId]);
+
   return (
     <ModalDialog
       visible
@@ -184,7 +187,7 @@ const GenerateDeveloperTokenDialog = ({
           primary
           scale
           onClick={onRevoke}
-          isDisabled={!token || !isValidToken}
+          isDisabled={!token || !isValidToken || !secret}
           isLoading={requestRunning}
           size={ButtonSize.normal}
         />
@@ -208,7 +211,7 @@ export default inject(
     oauthStore: OAuthStore;
     userStore: UserStore;
   }) => {
-    const { setRevokeDeveloperTokenDialogVisible, jwtToken, bufferSelection } =
+    const { setRevokeDeveloperTokenDialogVisible, bufferSelection } =
       oauthStore;
 
     const { user } = userStore;
@@ -216,7 +219,6 @@ export default inject(
     return {
       setRevokeDeveloperTokenDialogVisible,
       client: bufferSelection,
-      jwtToken,
       email: user?.email,
     };
   },

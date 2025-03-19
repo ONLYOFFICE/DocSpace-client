@@ -69,5 +69,5 @@
 //   searchPlaceholderText: "Search",
 //   scaled: false,
 //   searchEmptyMessage: "Nothing found",
-//   errorMessage: "Сountry code is invalid",
+//   errorMessage: "Country code is invalid",
 // };

@@ -90,9 +90,14 @@ const Body = ({
   withInfoBadge,
   setInputItemVisible,
   inputItemVisible,
+  injectedElement,
+
+  isSSR,
 }: BodyProps) => {
   const infoBarRef = useRef<HTMLDivElement>(null);
+  const injectedElementRef = useRef<HTMLElement>(null);
   const [infoBarHeight, setInfoBarHeight] = useState(0);
+  const [injectedElementHeight, setInjectedElementHeight] = useState(0);
 
   const { withSearch } = React.useContext(SearchContext);
   const isSearch = React.useContext(SearchValueContext);
@@ -202,13 +207,29 @@ const Body = ({
       }
     }
   }, [withInfoBar, itemsCount]);
+  useLayoutEffect(() => {
+    if (injectedElement) {
+      const element = injectedElementRef.current;
 
-  let listHeight = bodyHeight - CONTAINER_PADDING - infoBarHeight;
+      if (element) {
+        const { height } = element.getBoundingClientRect();
+        setInjectedElementHeight(height);
+      }
+    }
+  }, [injectedElement, itemsCount]);
+
+  let listHeight = bodyHeight - infoBarHeight - injectedElementHeight;
 
   const showSearch = withSearch && (isSearch || itemsCount > 0);
   const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
 
-  if (showSearch) listHeight -= SEARCH_HEIGHT;
+  if (!withTabs && withPadding) {
+    listHeight -= CONTAINER_PADDING;
+  }
+
+  if (showSearch) {
+    listHeight -= SEARCH_HEIGHT;
+  }
   if (withTabs) listHeight -= TABS_HEIGHT;
   if (withInfo) {
     const infoEl = document.getElementById("selector-info-text");
@@ -251,6 +272,10 @@ const Body = ({
       <InfoBar ref={infoBarRef} visible={itemsCount !== 0} />
       <BreadCrumbs visible={!isShareFormEmpty} />
 
+      {injectedElement
+        ? React.cloneElement(injectedElement, { ref: injectedElementRef })
+        : null}
+
       {withTabs && tabsData ? (
         <StyledTabs
           items={tabsData}
@@ -289,7 +314,39 @@ const Body = ({
             rowLoader={rowLoader}
           />
 
-          {bodyHeight ? (
+          {isSSR && !bodyHeight ? (
+            <Scrollbar
+              style={{
+                height: `calc(100% - ${Math.abs(listHeight)}px)`,
+                overflow: "hidden",
+              }}
+            >
+              {items.map((item, index) => (
+                <div
+                  key={item.id}
+                  style={{ height: 48, display: "flex", alignItems: "center" }}
+                >
+                  <Item
+                    index={index}
+                    style={{}}
+                    data={{
+                      items,
+                      onSelect,
+                      isMultiSelect: isMultiSelect || false,
+                      rowLoader,
+                      isItemLoaded,
+                      renderCustomItem,
+                      setInputItemVisible,
+                      inputItemVisible,
+                      savedInputValue,
+                      setSavedInputValue,
+                      listHeight,
+                    }}
+                  />
+                </div>
+              ))}
+            </Scrollbar>
+          ) : (
             <InfiniteLoader
               ref={listOptionsRef}
               isItemLoaded={isItemLoaded}
@@ -324,7 +381,7 @@ const Body = ({
                 </List>
               )}
             </InfiniteLoader>
-          ) : null}
+          )}
         </>
       )}
     </StyledBody>

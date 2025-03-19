@@ -1,9 +1,10 @@
 @import "./variables/_colors.scss";
 
 .light {
+  --row-side-color: #{$gray};
+
   --background-color: #{$white};
   --text-color: #{$black};
-  --interface-direction: ltr;
 
   --accent-main: var(--color-scheme-main-accent, #{$light-blue-main});
   --accent-text: var(--color-scheme-text-accent, #{$light-blue-main});
@@ -13,8 +14,12 @@
   --app-loader-background-color: #{$white};
 
   --files-article-body-download-app-list-text-color: #{$gray};
-  --files-article-body-dev-tools-border: 1px solid #{$light-gray-selected};
-  --files-article-body-dev-tools-color: #{$gray};
+  --files-article-body-dev-tools-background-color: var(
+    --accent-main,
+    #{$light-blue-main}
+  );
+  --files-article-body-dev-tools-background-opacity: 0.17;
+  --files-article-body-dev-tools-color: #{$gray-text};
   --article-catalog-background: #{$gray-light};
   --article-catalog-show-text: #{$light-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-light-mid};
@@ -277,6 +282,7 @@
 }
 
 .dark {
+  --row-side-color: #{$gray-dark};
   --accent-main: var(--color-scheme-main-accent, #{$light-blue-main});
   --accent-text: var(--color-scheme-text-accent, #{$light-blue-main});
   --accent-button: var(--color-scheme-main-buttons, #{$light-blue-main});
@@ -361,8 +367,9 @@
   --app-loader-background-color: #{$black};
 
   --files-article-body-download-app-list-text-color: #{$gray-dark};
-  --files-article-body-dev-tools-border: 1px solid #{$gray-dark-strong};
-  --files-article-body-dev-tools-color: #{$gray-dark};
+  --files-article-body-dev-tools-background-color: #{$dark-gray-dark};
+  --files-article-body-dev-tools-background-opacity: 1;
+  --files-article-body-dev-tools-color: #{$black};
   --article-catalog-background: #{$dark-gray-light};
   --article-catalog-show-text: #{$dark-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-dark-strong};
@@ -831,6 +838,8 @@
     #{$light-second-main}
   );
   --navigation-header-icon-fill: #{$light-gray-dark};
+  --navigation-lifetime-enabled-fill: #{$main-red};
+  --navigation-lifetime-enabled-stroke: #{$main-red};
 }
 
 .dark {
@@ -843,6 +852,8 @@
   --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
   --navigation-icon-stroke: #{$gray-dark-strong};
   --navigation-header-icon-fill: #{$dark-gray-dark};
+  --navigation-lifetime-enabled-fill: none;
+  --navigation-lifetime-enabled-stroke: #{$main-red};
 }
 
 .light {
@@ -910,6 +921,7 @@
   --room-icon-background-color-archive: #{$gray};
   --room-icon-button-color: #{$gray};
   --room-icon-opacity: 1;
+  --room-icon-edit-icon-background: #{$gray-light-mid};
 }
 
 .dark {
@@ -921,6 +933,7 @@
   --room-icon-background-color-archive: #{$white};
   --room-icon-button-color: #{$gray-dark};
   --room-icon-opacity: 0.1;
+  --room-icon-edit-icon-background: #{$gray-dark-mid};
 }
 
 .light {
@@ -1416,10 +1429,14 @@
 
 .light {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-strong};
+
+  --files-badges-bg-color: #{$white};
 }
 
 .dark {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-dark-strong};
+
+  --files-badges-bg-color: #{$black};
 }
 
 .light {
@@ -1933,6 +1950,16 @@
   --preview-tile-icon-border: 1px solid #{$gray-light-mid};
 }
 
+.light {
+  --storage-management-region-country-color: #{$black};
+  --storage-management-region-description-color: #{$light-gray-dark};
+}
+
+.dark {
+  --storage-management-region-country-color: #{$white};
+  --storage-management-region-description-color: #{$dark-gray-dark};
+}
+
 :global(.rtl) {
   --input-text-align: right;
   --input-direction: rtl;
@@ -1997,4 +2024,24 @@
 
   --tile-icon-button-color: #{$gray};
   --tile-icon-button-hover-color: #{$light-blue-main};
+}
+
+:global(.rtl) {
+  --context-menu-header-text-margin: 0 8px 0 0;
+  --context-menu-submenu-list-margin: -4px;
+
+  --context-menu-submenu-transoform: scaleX(-1);
+  --context-menu-submenu-transoform-box: content-box;
+}
+
+.light {
+  --download-dialog-bg: #{$gray-light};
+  --download-dialog-text-color: #{$gray};
+  --download-dialog-warning-color: #{$light-error-status};
+}
+
+.dark {
+  --download-dialog-bg: #{$dark-gray-light};
+  --download-dialog-text-color: #{$gray-dark};
+  --download-dialog-warning-color: #{$dark-error-status};
 }

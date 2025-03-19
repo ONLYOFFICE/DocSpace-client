@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EditGroupDialog from "@docspace/client/src/components/dialogs/CreateEditGroupDialog/EditGroupDialog";
+import EditGroupDialog from "SRC_DIR/components/dialogs/CreateEditGroupDialog/EditGroupDialog";
 
 interface CreateGroupEventProps {
   visible: boolean;

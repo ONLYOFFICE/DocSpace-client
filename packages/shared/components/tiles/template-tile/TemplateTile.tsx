@@ -99,6 +99,7 @@ export const TemplateTile = ({
         ) : null}
         {showStorageInfo && SpaceQuotaComponent ? (
           <SpaceQuotaComponent
+            className={styles.spaceQuota}
             item={item}
             type="room"
             isReadOnly={!item?.security?.EditRoom}

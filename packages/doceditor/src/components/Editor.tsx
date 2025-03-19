@@ -25,19 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
-
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import isUndefined from "lodash/isUndefined";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
 
-import { FolderType, ThemeKeys } from "@docspace/shared/enums";
+import {
+  FolderType,
+  StartFillingMode,
+  ThemeKeys,
+} from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
-import { getBackUrl } from "@/utils";
+import { getBackUrl, isFormRole } from "@/utils";
 import { IS_DESKTOP_EDITOR, IS_ZOOM, SHOW_CLOSE } from "@/utils/constants";
 import { EditorProps, TGoBack } from "@/types";
 import {
@@ -56,6 +60,8 @@ type IConfigType = IConfig & {
   events?: {
     onRequestStartFilling?: (event: object) => void;
     onSubmit?: (event: object) => void;
+    onRequestFillingStatus?: (event: object) => void;
+    onStartFilling?: (data: object) => void;
   };
   editorConfig?: {
     customization?: {
@@ -70,7 +76,7 @@ const Editor = ({
   user,
 
   doc,
-  documentserverUrl,
+  documentServerUrl,
   fileInfo,
   isSharingAccess,
   errorMessage,
@@ -87,7 +93,10 @@ const Editor = ({
   onSDKRequestSelectSpreadsheet,
   onSDKRequestSelectDocument,
   onSDKRequestReferenceSource,
-  onSDKRequestStartFilling,
+  onStartFillingVDRPanel,
+  setFillingStatusDialogVisible,
+  openShareFormDialog,
+  onStartFilling,
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
@@ -168,12 +177,7 @@ const Editor = ({
       }
     )?.["FileLocation"]; // t("FileLocation");
 
-    if (
-      editorGoBack === "false" ||
-      editorGoBack === false ||
-      user?.isVisitor ||
-      !user
-    ) {
+    if (!editorGoBack || user?.isVisitor || !user) {
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,
@@ -313,8 +317,36 @@ const Editor = ({
   }
 
   if (config?.startFilling && !IS_ZOOM) {
-    newConfig.events.onRequestStartFilling = () =>
-      onSDKRequestStartFilling?.(t("Common:ShareAndCollect"));
+    newConfig.events.onRequestStartFilling = (event: {}) => {
+      switch (config.startFillingMode) {
+        case StartFillingMode.ShareToFillOut:
+          openShareFormDialog?.();
+          break;
+
+        case StartFillingMode.StartFilling:
+          if (
+            typeof event === "object" &&
+            event !== null &&
+            "data" in event &&
+            isFormRole(event.data)
+          ) {
+            onStartFillingVDRPanel?.(event.data);
+          }
+          break;
+        default:
+          break;
+      }
+    };
+
+    newConfig.events.onStartFilling = () => {
+      onStartFilling?.();
+    };
+  }
+
+  if (config?.fillingStatus) {
+    newConfig.events.onRequestFillingStatus = (event: object) => {
+      setFillingStatusDialogVisible?.(true);
+    };
   }
 
   newConfig.events.onSubmit = () => {
@@ -322,8 +354,26 @@ const Editor = ({
 
     const otherSearchParams = new URLSearchParams();
 
+    const roomId = config?.document?.referenceData.roomId;
+    const fileId = fileInfo?.id;
+
     if (config?.fillingSessionId)
       otherSearchParams.append("fillingSessionId", config.fillingSessionId);
+
+    if (config?.startFillingMode === StartFillingMode.StartFilling) {
+      otherSearchParams.append(
+        "type",
+        StartFillingMode.StartFilling.toString(),
+      );
+
+      if (!isUndefined(fileId)) {
+        otherSearchParams.append("formId", fileId.toString());
+      }
+
+      if (!isUndefined(roomId)) {
+        otherSearchParams.append("roomId", roomId);
+      }
+    }
 
     const combinedSearchParams = new URLSearchParams({
       ...Object.fromEntries(searchParams),
@@ -335,10 +385,12 @@ const Editor = ({
     );
   };
 
+  console.log({ newConfig });
+
   return (
     <DocumentEditor
       id={EDITOR_ID}
-      documentServerUrl={documentserverUrl}
+      documentServerUrl={documentServerUrl}
       config={
         errorMessage || isSkipError
           ? {

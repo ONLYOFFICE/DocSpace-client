@@ -92,6 +92,7 @@ export type TUser = {
   title?: string;
   registrationDate?: string;
   createdBy?: TCreatedBy;
+  isAnonim: boolean;
 };
 
 export type TGetUserList = {

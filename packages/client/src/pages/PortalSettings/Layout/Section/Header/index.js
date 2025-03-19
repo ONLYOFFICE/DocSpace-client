@@ -247,10 +247,7 @@ const SectionHeaderContent = (props) => {
   ]);
 
   const onBackToParent = () => {
-    const newArrayOfParams = getArrayOfParams();
-    newArrayOfParams.splice(-1, 1);
-    const newPath = newArrayOfParams.join("/");
-    navigate(newPath);
+    navigate(-1);
   };
 
   const onToggleSelector = (isOpen = !selectorIsOpen) => {

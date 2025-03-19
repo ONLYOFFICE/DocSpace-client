@@ -26,7 +26,7 @@
 
 "use server";
 
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 
 import {
   createRequest,
@@ -226,12 +226,12 @@ export async function getUserByName() {
   return user.response as TUser;
 }
 
-export async function getScopeList(jwtToken: string) {
-  const [getScopeList] = createRequest(
-    [`/scopes`],
-    [["X-Signature", jwtToken]],
-    "GET",
-  );
+export async function getScopeList(token?: string) {
+  const headers: [string, string][] = token
+    ? [["Cookie", `x-signature=${token}`]]
+    : [["", ""]];
+
+  const [getScopeList] = createRequest([`/scopes`], headers, "GET");
 
   const scopeList = IS_TEST ? scopesHandler() : await fetch(getScopeList);
 
@@ -350,31 +350,6 @@ export async function getUserFromConfirm(
   return user.response as TUser;
 }
 
-export async function getUserByEmail(
-  userEmail: string,
-  confirmKey: string | null = null,
-) {
-  const [getUserByEmai] = createRequest(
-    [`/people/email?email=${userEmail}`],
-    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
-    "GET",
-  );
-
-  const res = IS_TEST
-    ? selfHandler(null, headers())
-    : await fetch(getUserByEmai);
-
-  if (!res.ok) return;
-
-  const user = await res.json();
-
-  if (user.response && user.response.displayName) {
-    user.response.displayName = Encoder.htmlDecode(user.response.displayName);
-  }
-
-  return user.response as TUser;
-}
-
 export async function getMachineName(confirmKey: string | null = null) {
   const [getMachineName] = createRequest(
     [`/settings/machine`],
@@ -467,7 +442,7 @@ export async function checkConfirmLink(data: TConfirmLinkParams) {
     ? confirmHandler(headers())
     : await fetch(checkConfirmLink);
 
-  // if (!response.ok) throw new Error(response.statusText);
+  if (!response.ok) throw new Error(response.statusText);
 
   const result = await response.json();
 
@@ -548,4 +523,22 @@ export async function getAvailablePortals(data: {
   if (portals.error) return portals;
 
   return portals.tenants as { portalLink: string; portalName: string }[];
+}
+
+export async function getOauthJWTToken() {
+  const [getJWTToken] = createRequest(
+    [`/security/oauth2/token`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? new Response(JSON.stringify({ response: "123456" }))
+    : await fetch(getJWTToken);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const jwtToken = await res.json();
+
+  return jwtToken.response as string;
 }

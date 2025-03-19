@@ -454,6 +454,10 @@ export const isLanguageRtl = (lng: string) => {
   return RTL_LANGUAGES.includes(splittedLng[0]);
 };
 
+export const getDirectionByLanguage = (lng: string) => {
+  return isLanguageRtl(lng) ? "rtl" : "ltr";
+};
+
 // temporary function needed to replace rtl language in Editor to ltr
 export const getLtrLanguageForEditor = (
   userLng: string | undefined,
@@ -1238,13 +1242,13 @@ export const getUserTypeDescription = (
   t: TTranslation,
 ) => {
   if (isPortalAdmin)
-    return t("Translations:RolePortalAdminDescription", {
+    return t("Common:RolePortalAdminDescription", {
       productName: t("Common:ProductName"),
     });
 
-  if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
+  if (isRoomAdmin) return t("Common:RoleRoomAdminDescription");
 
-  if (isCollaborator) return t("Translations:RoleNewUserDescription");
+  if (isCollaborator) return t("Common:RoleNewUserDescription");
 
   return t("Translations:RoleGuestDescriprion");
 };

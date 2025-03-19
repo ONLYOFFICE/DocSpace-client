@@ -27,27 +27,26 @@
 import React from "react";
 import moment from "moment-timezone";
 import styled from "styled-components";
-
-import { Text } from "@docspace/shared/components/text";
-
 import { inject, observer } from "mobx-react";
-
 import { useTranslation } from "react-i18next";
 
-import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
+import { Text } from "@docspace/shared/components/text";
+import { mobile, injectDefaultTheme } from "@docspace/shared/utils";
+
 import StatusBadge from "../../sub-components/StatusBadge";
+import { getTriggerTranslate } from "../../Webhooks.helpers";
 
 const BarWrapper = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   max-width: 1200px;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   margin-top: 25px;
 
   background: ${(props) => props.theme.client.settings.webhooks.barBackground};
   border-radius: 3px;
-  flex-wrap: wrap;
 
   .barItemHeader {
     margin-bottom: 10px;
@@ -59,11 +58,7 @@ const BarItem = styled.div`
   box-sizing: border-box;
   min-height: 76px;
   padding: 16px;
-  flex-basis: 25%;
 
-  @media ${tablet} {
-    flex-basis: 50%;
-  }
   @media ${mobile} {
     flex-basis: 100%;
   }
@@ -81,7 +76,7 @@ const FlexWrapper = styled.div`
 `;
 
 const DetailsBar = ({ eventDetails }) => {
-  const { t, i18n } = useTranslation("Webhooks");
+  const { t, i18n } = useTranslation(["Webhooks", "Files", "Common"]);
 
   const formatDate = (date) => {
     return `${moment(date)
@@ -92,6 +87,8 @@ const DetailsBar = ({ eventDetails }) => {
 
   const formattedDelivery = formatDate(eventDetails.delivery);
   const formattedCreationTime = formatDate(eventDetails.creationTime);
+
+  const trigger = getTriggerTranslate(eventDetails.trigger, t);
 
   return (
     <BarWrapper>
@@ -105,6 +102,12 @@ const DetailsBar = ({ eventDetails }) => {
         <BarItemHeader>Event ID</BarItemHeader>
         <Text isInline fontWeight={600}>
           {eventDetails.id}
+        </Text>
+      </BarItem>
+      <BarItem>
+        <BarItemHeader>Trigger</BarItemHeader>
+        <Text isInline fontWeight={600}>
+          {trigger}
         </Text>
       </BarItem>
       <BarItem>

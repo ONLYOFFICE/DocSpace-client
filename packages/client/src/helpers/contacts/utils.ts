@@ -34,6 +34,7 @@ import { EmployeeStatus, Events } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { TTranslation } from "@docspace/shared/types";
 import {
+  getLinkToShareGuest,
   resendInvitesAgain,
   resendUserInvites,
 } from "@docspace/shared/api/people";
@@ -58,6 +59,7 @@ import {
   PEOPLE_ROUTE_WITH_FILTER,
 } from "./constants";
 import { TContactsSelected, TContactsMenuItemdId, TContactsTab } from "./types";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 
 export const getContactsUrl = (contactsTab: TContactsTab, groupId?: string) => {
   let url = "";
@@ -253,8 +255,14 @@ export const onInviteMultipleAgain = (t: TTranslation) => {
     .catch((err) => toastr.error(err));
 };
 
-export const shareGuest = (t: TTranslation) => {
-  return showSuccessCopyContantLink(t);
+export const shareGuest = (
+  item: ReturnType<UsersStore["getPeopleListItem"]>,
+  t: TTranslation,
+) => {
+  getLinkToShareGuest(item.id).then((link) => {
+    copyShareLink(link);
+    showSuccessCopyContantLink(t);
+  });
 };
 
 export const getContactsView = (location?: Location): TContactsTab => {

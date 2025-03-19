@@ -75,7 +75,7 @@ export const Providers = ({
         `/confirm/${confirmType}?${searchParams.toString()}`,
       );
     }
-  }, []);
+  }, [redirectURL, searchParams, confirmType]);
 
   React.useEffect(() => {
     if (shouldRedirect && redirectURL && pathName !== expectedPathName)

@@ -286,7 +286,7 @@ class ContactsConextOptionsStore {
             key: option,
             icon: PersonShareReactSvgUrl,
             label: t("PeopleTranslations:ShareGuest"),
-            onClick: () => shareGuest(t),
+            onClick: () => shareGuest(item, t),
           };
         case "change-type":
           return {

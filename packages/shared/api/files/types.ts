@@ -484,6 +484,7 @@ export type TIndexItems = {
 export type TConnectingStorages = TConnectingStorage[];
 
 export type TFormRoleMappingRequest = {
+  roomId: number;
   formId: number;
   roles: { userId: string; roleName: string; roleColor: string }[];
 };

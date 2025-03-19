@@ -166,8 +166,7 @@ export interface ConfirmRouteProps {
 
 export type GreetingCreateUserContainerProps = {
   type: string;
-  firstName?: string;
-  lastName?: string;
+  displayName?: string;
   culture?: string;
   hostName?: string;
 };

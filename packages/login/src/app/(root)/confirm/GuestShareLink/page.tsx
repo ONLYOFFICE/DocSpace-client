@@ -61,14 +61,12 @@ async function Page({ searchParams }: GuestShareLinkProps) {
   return (
     <>
       <GreetingGuestContainer
-        firstName={initiator?.firstName}
-        lastName={initiator?.lastName}
+        displayName={initiator?.displayName}
         culture={culture}
       />
       {settings && typeof settings !== "string" && (
         <GuestShareLinkForm
-          guestFirstName={guest?.firstName}
-          guestLastName={guest?.lastName}
+          guestDisplayName={guest?.displayName}
           guestAvatar={guest?.avatar}
         />
       )}

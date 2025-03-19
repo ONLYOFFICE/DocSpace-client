@@ -40,13 +40,12 @@ import { GreetingContainer } from "./GreetingCreateUserContainer/GreetingCreateU
 
 type GreetingGuestContainerProps = {
   firstName?: string;
-  lastName?: string;
+  displayName?: string;
   culture?: string;
 };
 
 export const GreetingGuestContainer = ({
-  firstName,
-  lastName,
+  displayName,
   culture,
 }: GreetingGuestContainerProps) => {
   const { t } = useTranslation(["Common"]);
@@ -70,8 +69,7 @@ export const GreetingGuestContainer = ({
             ns="Common"
             defaults={DEFAULT_GUEST_TEXT}
             values={{
-              firstName,
-              lastName,
+              displayName,
             }}
             components={{
               1: <Text fontWeight={600} as="strong" fontSize="16px" />,

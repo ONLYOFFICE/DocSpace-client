@@ -46,14 +46,12 @@ import { addGuest } from "@docspace/shared/api/people";
 import Filter from "@docspace/shared/api/people/filter";
 
 type GuestShareLinkFormProps = {
-  guestFirstName?: string;
-  guestLastName?: string;
+  guestDisplayName?: string;
   guestAvatar?: string;
 };
 
 const GuestShareLinkForm = ({
-  guestFirstName,
-  guestLastName,
+  guestDisplayName,
   guestAvatar,
 }: GuestShareLinkFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
@@ -112,7 +110,7 @@ const GuestShareLinkForm = ({
         />
         <div className="guest-info-wrapper">
           <Text fontSize="16px" fontWeight="700" className="guest-name">
-            {guestFirstName} {guestLastName}
+            {guestDisplayName}
           </Text>
           <Text fontSize="13px" fontWeight="400" className="guest-email">
             {email}

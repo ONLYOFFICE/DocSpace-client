@@ -42,19 +42,22 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
+import { addGuest } from "@docspace/shared/api/people";
+import Filter from "@docspace/shared/api/people/filter";
 
-type GuestInviteFormProps = {
-  guestFirstName: string;
-  guestLastName: string;
-  guestEmail: string;
+type GuestShareLinkFormProps = {
+  guestFirstName?: string;
+  guestLastName?: string;
+  guestAvatar?: string;
 };
 
-const GuestInviteForm = ({
+const GuestShareLinkForm = ({
   guestFirstName,
   guestLastName,
-  guestEmail,
-}: GuestInviteFormProps) => {
+  guestAvatar,
+}: GuestShareLinkFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
+  const { confirmHeader = "", email = "" } = linkData;
   const { t } = useTranslation(["Confirm", "Common"]);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -64,7 +67,15 @@ const GuestInviteForm = ({
 
     try {
       setIsLoading(false);
-      setTimeout(() => (location.href = "/accounts/guests"), 1000);
+
+      await addGuest(email, confirmHeader);
+      const newFilter = Filter.getDefault();
+      newFilter.area = "guests";
+      newFilter.group = null;
+
+      window.location.replace(
+        `/accounts/guests/filter?${newFilter.toUrlParams()}`,
+      );
     } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;
@@ -86,7 +97,7 @@ const GuestInviteForm = ({
   };
 
   const onDenyInvite = () => {
-    location.href = "/";
+    window.location.replace("/");
   };
 
   return (
@@ -95,7 +106,7 @@ const GuestInviteForm = ({
         <Avatar
           className="guest-avatar"
           role={AvatarRole.guest}
-          source={""}
+          source={guestAvatar ?? ""}
           size={AvatarSize.big}
           isDefaultSource
         />
@@ -104,25 +115,25 @@ const GuestInviteForm = ({
             {guestFirstName} {guestLastName}
           </Text>
           <Text fontSize="13px" fontWeight="400" className="guest-email">
-            {guestEmail}
+            {email}
           </Text>
         </div>
-        <ButtonsWrapper>
+        <ButtonsWrapper className="buttons-guest">
           <Button
             primary
             scale
             size={ButtonSize.medium}
-            label={"Approve"}
+            label={t("Common:Approve")}
             tabIndex={2}
-            isDisabled={false}
+            isDisabled={isLoading}
             onClick={onApproveInvite}
           />
           <Button
             scale
             size={ButtonSize.medium}
-            label={"Deny"}
+            label={t("Common:Deny")}
             tabIndex={2}
-            isDisabled={false}
+            isDisabled={isLoading}
             onClick={onDenyInvite}
           />
         </ButtonsWrapper>
@@ -134,4 +145,4 @@ const GuestInviteForm = ({
   );
 };
 
-export default GuestInviteForm;
+export default GuestShareLinkForm;

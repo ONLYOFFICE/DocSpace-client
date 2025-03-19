@@ -24,16 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getSettings } from "@/utils/actions";
+import {
+  getSettings,
+  getUser,
+  getUserByEmail,
+  getUserFromConfirm,
+} from "@/utils/actions";
 import { cookies } from "next/headers";
 
 import { LANGUAGE } from "@docspace/shared/constants";
+import { getStringFromSearchParams } from "@/utils";
 
-import GuestInviteForm from "./page.client";
+import GuestShareLinkForm from "./page.client";
 import { GreetingGuestContainer } from "@/components/GreetingContainer";
 
-async function Page() {
-  const settings = await getSettings();
+type GuestShareLinkProps = {
+  searchParams: { [key: string]: string };
+};
+
+async function Page({ searchParams }: GuestShareLinkProps) {
+  const uid = searchParams.uid;
+  const email = searchParams.email;
+  const confirmKey = getStringFromSearchParams(searchParams);
+
+  const [settings, initiator, guest] = await Promise.all([
+    getSettings(),
+    getUserFromConfirm(uid, confirmKey),
+    getUserByEmail(email, confirmKey),
+  ]);
 
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
@@ -43,15 +61,15 @@ async function Page() {
   return (
     <>
       <GreetingGuestContainer
-        firstName="Haylie"
-        lastName="Herwitz"
+        firstName={initiator?.firstName}
+        lastName={initiator?.lastName}
         culture={culture}
       />
       {settings && typeof settings !== "string" && (
-        <GuestInviteForm
-          guestFirstName="Kierra"
-          guestLastName="Bergson"
-          guestEmail="kierrabergson@gmail.com"
+        <GuestShareLinkForm
+          guestFirstName={guest?.firstName}
+          guestLastName={guest?.lastName}
+          guestAvatar={guest?.avatar}
         />
       )}
     </>

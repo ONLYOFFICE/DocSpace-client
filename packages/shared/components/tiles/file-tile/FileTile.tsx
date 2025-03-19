@@ -144,7 +144,7 @@ const FileTile = ({
         : temporaryIcon;
 
     return (
-      <Link type={LinkType.page} onClick={thumbnailClick}>
+      <Link type={LinkType.page}>
         {thumbnail && !errorLoadSrc ? (
           thumbSize !== null ? (
             <img
@@ -272,7 +272,9 @@ const FileTile = ({
       onContextMenu={onContextMenu}
       onClick={onFileClick}
     >
-      <div className={fileTileTopClassNames}>{icon}</div>
+      <div className={fileTileTopClassNames} onClick={thumbnailClick}>
+        {icon}
+      </div>
 
       <div className={classNames(styles.icons, styles.isBadges)}>{badges}</div>
       {contentElement ? (

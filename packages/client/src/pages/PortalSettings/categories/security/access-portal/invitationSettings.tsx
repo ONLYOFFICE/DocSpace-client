@@ -47,6 +47,7 @@ const InvitationSettings = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isCheckedContacts, setIsCheckedContacts] = useState(false);
+  const [isCheckedGuests, setIsCheckedGuests] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -67,12 +68,16 @@ const InvitationSettings = (props) => {
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
-  // const onChange = () => {
-  //   setIsCheckedContacts(!isCheckedContacts);
-  // };
+  const onChangeContacts = () => {
+    setIsCheckedContacts(!isCheckedContacts);
+  };
+
+  const onChangeGuests = () => {
+    setIsCheckedGuests(!isCheckedGuests);
+  };
 
   const onSaveClick = () => {
-    // setInvitationSettings(true, false);
+    setInvitationSettings(false, true);
   };
 
   return (
@@ -88,8 +93,8 @@ const InvitationSettings = (props) => {
           <div className={styles.checkboxContainer}>
             <Checkbox
               className={styles.checkbox}
-              // isChecked={isChecked}
-              // onChange={onChange}
+              isChecked={isCheckedContacts}
+              onChange={onChangeContacts}
             />
             <Text fontSize="13px" fontWeight="600" lineHeight="20px">
               {t("InvitationSettingsContacts")}
@@ -108,7 +113,11 @@ const InvitationSettings = (props) => {
 
         <div>
           <div className={styles.checkboxContainer}>
-            <Checkbox className={styles.checkbox} />
+            <Checkbox
+              className={styles.checkbox}
+              isChecked={isCheckedGuests}
+              onChange={onChangeGuests}
+            />
             <Text fontSize="13px" fontWeight="600" lineHeight="20px">
               {t("InvitationSettingsGuests")}
             </Text>

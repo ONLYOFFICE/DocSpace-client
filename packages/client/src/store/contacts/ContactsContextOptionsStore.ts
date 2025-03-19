@@ -396,7 +396,7 @@ class ContactsConextOptionsStore {
 
       options.push(roomAdminOption);
       options.push(userOption);
-      options.push(guestOption);
+      if (!isVisitor) options.push(guestOption);
     }
 
     return options;

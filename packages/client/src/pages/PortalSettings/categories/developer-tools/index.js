@@ -44,6 +44,7 @@ import PluginSDK from "./PluginSDK";
 import OAuth from "./OAuth";
 
 import SSOLoader from "./sub-components/ssoLoader";
+import ApiKeys from "./ApiKeys";
 
 const DeveloperToolsWrapper = (props) => {
   const { currentDeviceType, identityServerEnabled } = props;
@@ -82,6 +83,11 @@ const DeveloperToolsWrapper = (props) => {
       content: <Api />,
     },
     {
+      id: "api-keys",
+      name: t("Settings:ApiKeys"),
+      content: <ApiKeys />,
+    },
+    {
       id: "javascript-sdk",
       name: sdkLabel,
       content: <JavascriptSDK />,
@@ -112,7 +118,13 @@ const DeveloperToolsWrapper = (props) => {
 
   useEffect(() => {
     const path = location.pathname;
-    const currentTab = data.find((item) => path.includes(item.id));
+
+    const currentTab = data.find(
+      (item) =>
+        path === `/portal-settings/developer-tools/${item.id}` ||
+        path === `/developer-tools/${item.id}`,
+    );
+
     if (currentTab !== -1 && data.length) {
       setCurrentTabId(currentTab.id);
     }

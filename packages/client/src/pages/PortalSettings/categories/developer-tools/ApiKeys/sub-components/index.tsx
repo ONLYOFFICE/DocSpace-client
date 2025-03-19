@@ -24,45 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
+import TableView from "./TableView";
+import RowView from "./RowView";
+import { ApiKeyViewProps } from "../types";
+import { Consumer } from "@docspace/shared/utils";
 
-import Filter from "./people/filter";
-import FilesFilter from "./files/filter";
-import RoomsFilter from "./rooms/filter";
-import OformsFilter from "./oforms/filter";
-import * as people from "./people";
-import * as user from "./user";
-import * as settings from "./settings";
-import * as modules from "./modules";
-import * as portal from "./portal";
-import * as groups from "./groups";
-import * as files from "./files";
-import * as rooms from "./rooms";
-import * as plugins from "./plugins";
-import * as management from "./management";
-import * as oforms from "./oforms";
-import * as oauth from "./oauth";
-import * as debuginfo from "./debuginfo";
-import * as apiKeys from "./api-keys";
-
-export default {
-  Filter,
-  FilesFilter,
-  RoomsFilter,
-  OformsFilter,
-  people,
-  user,
-  settings,
-  modules,
-  portal,
-  groups,
-  files,
-  rooms,
-  plugins,
-  oforms,
-  oauth,
-  management,
-  debuginfo,
-  apiKeys,
+const ApiKeysView = ({
+  viewAs,
+  items,
+  onDeleteApiKey,
+  onChangeApiKeyStatus,
+}: ApiKeyViewProps) => {
+  return (
+    <Consumer>
+      {(context) =>
+        viewAs === "table" ? (
+          <TableView
+            items={items}
+            sectionWidth={context.sectionWidth!}
+            onDeleteApiKey={onDeleteApiKey}
+            onChangeApiKeyStatus={onChangeApiKeyStatus}
+          />
+        ) : (
+          <RowView
+            items={items}
+            sectionWidth={context.sectionWidth!}
+            onDeleteApiKey={onDeleteApiKey}
+            onChangeApiKeyStatus={onChangeApiKeyStatus}
+          />
+        )
+      }
+    </Consumer>
+  );
 };
+
+export default ApiKeysView;

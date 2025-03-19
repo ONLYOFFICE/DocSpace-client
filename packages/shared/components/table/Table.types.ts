@@ -59,12 +59,11 @@ export type TTableColumn = {
 };
 
 export interface TableHeaderProps {
-  containerRef: { current: HTMLDivElement | null };
+  containerRef: React.Ref<HTMLDivElement>;
   columns: TTableColumn[];
   sortBy?: string;
   sorted?: boolean;
   columnStorageName: string;
-  tableStorageName: string;
   sectionWidth: number;
   onClick?: () => void;
   resetColumnsSize?: boolean;
@@ -114,7 +113,7 @@ export interface TableBodyProps {
   useReactWindow: boolean;
   onScroll?: () => void;
   infoPanelVisible?: boolean;
-  isIndexEditingMode: boolean;
+  isIndexEditingMode?: boolean;
 }
 
 export interface TableRowProps {
@@ -126,15 +125,16 @@ export interface TableRowProps {
   className?: string;
   style?: React.CSSProperties;
   title?: string;
-  getContextModel: () => ContextMenuModel[];
-  badgeUrl: string;
-  isIndexEditingMode: boolean;
+  getContextModel?: () => ContextMenuModel[];
+  badgeUrl?: string;
+  isIndexEditingMode?: boolean;
   onClick?: (e: React.MouseEvent) => void;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
+  hideColumns?: boolean;
 }
 
 export interface TableCellProps {
-  className: string;
+  className?: string;
   hasAccess?: boolean;
   checked?: boolean;
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;

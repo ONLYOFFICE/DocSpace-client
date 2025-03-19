@@ -47,6 +47,7 @@ import {
   TTimeZone,
   TVersionBuild,
   TExternalResources,
+  TInvitationSettings,
 } from "../api/settings/types";
 import { TUser } from "../api/people/types";
 import {
@@ -323,7 +324,10 @@ class SettingsStore {
 
   limitedAccessDevToolsForUsers = false;
 
-  invitationSettings = null;
+  invitationSettings: TInvitationSettings = {
+    allowInvitingGuests: true,
+    allowInvitingMembers: true,
+  };
 
   constructor() {
     makeAutoObservable(this);

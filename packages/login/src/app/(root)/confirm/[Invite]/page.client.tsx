@@ -220,7 +220,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     const headerKey = linkData?.confirmHeader ?? null;
 
     try {
-      await getUserByEmail(email, headerKey);
+      await getUserByEmail(email, headerKey, currentCultureName);
 
       setCookie(LANGUAGE, currentCultureName, {
         "max-age": COOKIE_EXPIRATION_YEAR,

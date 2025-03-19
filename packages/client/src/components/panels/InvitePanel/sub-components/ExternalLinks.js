@@ -56,8 +56,6 @@ import {
 
 import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 
-const noAllowInvitingGuests = false;
-
 const ExternalLinks = ({
   t,
   roomId,
@@ -75,6 +73,7 @@ const ExternalLinks = ({
   getPortalInviteLink,
   isUserTariffLimit,
   standalone,
+  noAllowInvitingGuests,
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
@@ -331,7 +330,7 @@ export default inject(
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
-    const { standalone } = settingsStore;
+    const { standalone, invitationSettings } = settingsStore;
 
     return {
       roomId,
@@ -342,6 +341,7 @@ export default inject(
       getPortalInviteLink,
       isUserTariffLimit,
       standalone,
+      noAllowInvitingGuests: !invitationSettings.allowInvitingGuests,
     };
   },
 )(observer(ExternalLinks));

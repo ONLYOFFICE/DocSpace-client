@@ -82,7 +82,6 @@ const minSearchValue = 2;
 const filterSeparator = ";";
 const regex =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-const noAllowInvitingGuests = false;
 
 const InviteInput = ({
   defaultAccess,
@@ -110,6 +109,7 @@ const InviteInput = ({
   setInputValue,
   usersList,
   setUsersList,
+  noAllowInvitingGuests,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
@@ -722,7 +722,7 @@ export default inject(
       isPaidUserAccess,
     } = dialogsStore;
 
-    const { culture: language } = settingsStore;
+    const { culture: language, invitationSettings } = settingsStore;
     const { isUserTariffLimit } = currentQuotaStore;
     return {
       language,
@@ -737,6 +737,7 @@ export default inject(
       isAdmin,
       isPaidUserAccess,
       isUserTariffLimit,
+      noAllowInvitingGuests: !invitationSettings.allowInvitingGuests,
     };
   },
 )(

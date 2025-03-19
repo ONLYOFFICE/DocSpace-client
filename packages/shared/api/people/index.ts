@@ -110,10 +110,15 @@ export async function getUser(userName = null, headers = null) {
 export async function getUserByEmail(
   userEmail: string,
   confirmKey: Nullable<string> = null,
+  culture?: string,
 ) {
+  const urlEmail = `/people/email?email=${userEmail}`;
+
+  const url = culture ? `${urlEmail}&culture=${culture}` : urlEmail;
+
   const options = {
     method: "get",
-    url: `/people/email?email=${userEmail}`,
+    url,
   };
 
   if (confirmKey) options.headers = { confirm: confirmKey };

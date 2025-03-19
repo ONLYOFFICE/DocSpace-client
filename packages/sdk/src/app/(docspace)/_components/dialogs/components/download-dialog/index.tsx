@@ -29,12 +29,54 @@
 import React from "react";
 import { observer } from "mobx-react";
 
-import { useDialogsStore } from "../../../../_store/DialogsStore";
+import DownloadDialogComponent from "@docspace/shared/dialogs/download-dialog";
 
-export const DownloadDialog: React.FC = () => {
-  const dialogsStore = useDialogsStore();
+import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
+import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 
-  return <div>{/* Dialog content will be implemented here */}</div>;
+const DownloadDialog = () => {
+  const { isDialogOpen, closeDialog, openDialog } = useDialogsStore();
+
+  const isVisible = isDialogOpen(SDKDialogs.DownloadDialog);
+
+  const setDialogVisible = (value: boolean) => {
+    if (value) {
+      openDialog(SDKDialogs.DownloadDialog);
+    } else {
+      closeDialog(SDKDialogs.DownloadDialog);
+    }
+  };
+
+  if (!isVisible) {
+    return null;
+  }
+
+  return (
+    <DownloadDialogComponent
+      sortedFiles={{
+        documents: [],
+        spreadsheets: [],
+        presentations: [],
+        masterForms: [],
+        other: [],
+      }}
+      setDownloadItems={() => {}}
+      downloadItems={[]}
+      downloadFiles={() => {}}
+      getDownloadItems={() => [[], [], ""]}
+      sortedPasswordFiles={[]}
+      updateDownloadedFilePassword={() => {}}
+      sortedDownloadFiles={{ original: [] }}
+      resetDownloadedFileFormat={() => {}}
+      discardDownloadedFile={() => {}}
+      visible={isVisible}
+      setDownloadDialogVisible={setDialogVisible}
+      setSortedPasswordFiles={() => {}}
+      getIcon={() => ""}
+      getFolderIcon={() => ""}
+      extsConvertible={{}}
+    />
+  );
 };
 
 export default observer(DownloadDialog);

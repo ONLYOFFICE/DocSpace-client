@@ -28,7 +28,7 @@
 
 import React from "react";
 
-import { DownloadDialog } from "./components/download-dialog";
+import DownloadDialog from "./components/download-dialog";
 
 export const Dialogs = () => {
   return (

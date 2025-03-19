@@ -28,15 +28,31 @@
 
 import React from "react";
 import { makeAutoObservable } from "mobx";
+import { type SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 
 class DialogsStore {
+  // [[dialogName, visible]]
+  dialogs = new Map<SDKDialogs, boolean>();
+
   constructor() {
     makeAutoObservable(this);
   }
+
+  openDialog = (name: SDKDialogs) => {
+    this.dialogs.set(name, true);
+  };
+
+  closeDialog = (name: SDKDialogs) => {
+    this.dialogs.set(name, false);
+  };
+
+  isDialogOpen = (name: SDKDialogs) => {
+    return this.dialogs.get(name) || false;
+  };
 }
 
 export const DialogsStoreContext = React.createContext<DialogsStore>(
-  new DialogsStore()
+  new DialogsStore(),
 );
 
 export const DialogsStoreContextProvider = ({

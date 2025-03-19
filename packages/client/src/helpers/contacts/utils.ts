@@ -43,6 +43,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import type UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import config from "PACKAGE_FILE";
 
+import { copyShareLink } from "@docspace/shared/utils/copy";
 import {
   showEmailActivationToast,
   showSuccessCopyContantLink,
@@ -59,7 +60,6 @@ import {
   PEOPLE_ROUTE_WITH_FILTER,
 } from "./constants";
 import { TContactsSelected, TContactsMenuItemdId, TContactsTab } from "./types";
-import { copyShareLink } from "@docspace/shared/utils/copy";
 
 export const getContactsUrl = (contactsTab: TContactsTab, groupId?: string) => {
   let url = "";

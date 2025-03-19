@@ -359,6 +359,7 @@ class TableStore {
         isArchiveFolder,
         isTrashFolder,
         isTemplatesFolder,
+        isPersonalReadOnly,
       } = this.treeFoldersStore;
 
       const contactsView = getContactsView();
@@ -462,6 +463,8 @@ class TableStore {
       this.setModifiedColumn(splitColumns.includes("Modified"));
       this.setAuthorColumn(splitColumns.includes("Author"));
       this.setCreatedColumn(splitColumns.includes("Created"));
+      if (isPersonalReadOnly)
+        this.setErasureColumn(splitColumns.includes("Erasure"));
       this.setSizeColumn(splitColumns.includes("Size"));
       this.setTypeColumn(splitColumns.includes("Type"));
       this.setLastOpenedColumn(splitColumns.includes("LastOpened"));

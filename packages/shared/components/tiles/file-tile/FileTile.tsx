@@ -269,6 +269,7 @@ const FileTile = ({
       {...rest}
       ref={forwardRef}
       className={fileTileClassNames}
+      onContextMenu={onContextMenu}
       onClick={onFileClick}
     >
       <div className={fileTileTopClassNames}>{icon}</div>

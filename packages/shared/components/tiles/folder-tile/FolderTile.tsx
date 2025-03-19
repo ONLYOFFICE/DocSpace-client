@@ -197,6 +197,7 @@ export const FolderTile = ({
       className={folderTileClassNames}
       onClick={onFolderClick}
       ref={forwardRef}
+      onContextMenu={onContextMenu}
     >
       {element && !isEdit ? (
         !inProgress ? (

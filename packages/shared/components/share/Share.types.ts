@@ -143,4 +143,5 @@ export type ShareProps = {
     updateAccessLink: () => Promise<void>;
     fileId: string | number;
   }) => void;
+  onlyOneLink?: boolean;
 };

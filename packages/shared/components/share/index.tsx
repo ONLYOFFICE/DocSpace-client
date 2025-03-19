@@ -79,6 +79,7 @@ const Share = (props: ShareProps) => {
     shareChanged,
     setShareChanged,
     onOpenPanel,
+    onlyOneLink,
   } = props;
   const { t } = useTranslation(["Common"]);
   const [fileLinks, setFileLinks] = useState<TLink[]>([]);
@@ -418,7 +419,7 @@ const Share = (props: ShareProps) => {
             <Text fontSize="14px" fontWeight={600} className="title-link">
               {t("Common:SharedLinks")}
             </Text>
-            {fileLinks.length > 0 ? (
+            {fileLinks.length > 0 && !onlyOneLink ? (
               <div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
                 <IconButton
                   className="link-to-viewing-icon"

@@ -32,9 +32,8 @@ import { useTranslation } from "react-i18next";
 
 import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { logout } from "@docspace/shared/api/user";
 
-import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
+import { ValidationResult } from "@/utils/enums";
 import { ConfirmRouteProps, TConfirmRouteContext } from "@/types";
 
 export const ConfirmRouteContext = createContext<TConfirmRouteContext>({
@@ -43,14 +42,8 @@ export const ConfirmRouteContext = createContext<TConfirmRouteContext>({
 });
 
 function ConfirmRoute(props: ConfirmRouteProps) {
-  const {
-    doAuthenticated = AuthenticatedAction.None,
-    defaultPage = "/",
-    socketUrl,
-    children,
-    confirmLinkResult,
-    confirmLinkParams,
-  } = props;
+  const { socketUrl, children, confirmLinkResult, confirmLinkParams, user } =
+    props;
 
   const [stateData, setStateData] = useState<TConfirmRouteContext | undefined>(
     undefined,
@@ -60,6 +53,16 @@ function ConfirmRoute(props: ConfirmRouteProps) {
   const searchParams = useSearchParams();
   const isAuthenticated = !!socketUrl;
 
+  if (
+    confirmLinkParams.type === "GuestShareLink" &&
+    user &&
+    !user.isAdmin &&
+    !user.isOwner &&
+    !user.isRoomAdmin
+  ) {
+    throw new Error(t("Common:AccessDenied"));
+  }
+
   useEffect(() => {
     if (location.search.includes("culture")) return;
     const lng = getCookie(LANGUAGE);
@@ -67,18 +70,7 @@ function ConfirmRoute(props: ConfirmRouteProps) {
     isAuthenticated && i18n.changeLanguage(lng);
   }, [isAuthenticated, i18n]);
 
-  useEffect(() => {
-    if (isAuthenticated) return;
-
-    if (isAuthenticated && doAuthenticated != AuthenticatedAction.None) {
-      if (doAuthenticated == AuthenticatedAction.Redirect)
-        return window.location.replace(defaultPage || "/");
-
-      if (doAuthenticated == AuthenticatedAction.Logout) logout();
-    }
-  }, [doAuthenticated, isAuthenticated, defaultPage, socketUrl]);
-
-  if (!stateData && confirmLinkParams.type !== "GuestInvite") {
+  if (!stateData) {
     switch (confirmLinkResult.result) {
       case ValidationResult.Ok:
         const confirmHeader = searchParams.toString();

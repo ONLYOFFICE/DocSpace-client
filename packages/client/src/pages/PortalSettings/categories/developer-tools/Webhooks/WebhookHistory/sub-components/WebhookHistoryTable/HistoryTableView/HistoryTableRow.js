@@ -127,7 +127,7 @@ const HistoryTableRow = (props) => {
   const formattedDelivery = `${moment(item.delivery)
     .tz(window.timezone)
     .locale(i18n.language)
-    .format("MMM D, YYYY, h:mm:ss A")} ${t("Common:UTC")}`;
+    .format("L, LT")}`;
 
   const onRowClick = (e) => {
     if (

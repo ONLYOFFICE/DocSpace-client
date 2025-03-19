@@ -24,19 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  thirdPartyProvider as thirdPartyProviderHandler,
-  successThirdpartyProviders,
-} from "./thirdPartyProviders";
+import {
+  getSettings,
+  getUser,
+  getUserByEmail,
+  getUserFromConfirm,
+} from "@/utils/actions";
+import { cookies } from "next/headers";
 
-export { self as selfHandler, successSelf } from "./self";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getStringFromSearchParams } from "@/utils";
 
-export {
-  PATH as SELF_PATH,
-  PATH_CHANGE_AUTH_DATA as SELF_PATH_CHANGE_AUTH_DATA,
-  PATH_ACTIVATION_STATUS as SELF_PATH_ACTIVATION_STATUS,
-  PATH_UPDATE_USER as SELF_PATH_UPDATE_USER,
-  PATH_DELETE_USER as SELF_PATH_DELETE_USER,
-  PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
-  PATH_ADD_GUEST,
-} from "./self";
+import GuestShareLinkForm from "./page.client";
+import { GreetingGuestContainer } from "@/components/GreetingContainer";
+
+type GuestShareLinkProps = {
+  searchParams: { [key: string]: string };
+};
+
+async function Page({ searchParams }: GuestShareLinkProps) {
+  const uid = searchParams.uid;
+  const email = searchParams.email;
+  const confirmKey = getStringFromSearchParams(searchParams);
+
+  const [settings, initiator, guest] = await Promise.all([
+    getSettings(),
+    getUserFromConfirm(uid, confirmKey),
+    getUserByEmail(email, confirmKey),
+  ]);
+
+  const settingsCulture =
+    typeof settings === "string" ? undefined : settings?.culture;
+
+  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+
+  return (
+    <>
+      <GreetingGuestContainer
+        displayName={initiator?.displayName}
+        culture={culture}
+      />
+      {settings && typeof settings !== "string" && (
+        <GuestShareLinkForm
+          guestDisplayName={guest?.displayName}
+          guestAvatar={guest?.avatar}
+        />
+      )}
+    </>
+  );
+}
+
+export default Page;

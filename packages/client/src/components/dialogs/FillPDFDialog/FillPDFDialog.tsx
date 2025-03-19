@@ -68,9 +68,16 @@ const FillPDFDialog = inject<TStore>(
         onClose();
       };
 
-      const openSelector = () => {
-        setShareCollectSelector(true, data, RoomsType.VirtualDataRoom);
+      const openSelector = (createDefineRoomType: RoomsType) => {
+        setShareCollectSelector(true, data, createDefineRoomType);
         onClose();
+      };
+
+      const openSelectorInVirtualDataRoom = () => {
+        openSelector(RoomsType.VirtualDataRoom);
+      };
+      const openSelectorFormRoom = () => {
+        openSelector(RoomsType.FormRoom);
       };
 
       return (
@@ -95,13 +102,13 @@ const FillPDFDialog = inject<TStore>(
                 title={t("FillPDFDialog:ShareCollectTitle")}
                 description={t("FillPDFDialog:ShareCollectDescription")}
                 buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
-                onClick={openSelector}
+                onClick={openSelectorFormRoom}
               />
               <Card
                 title={t("Common:InVirtualDataRoomTitle")}
                 description={t("Common:InVirtualDataRoomDescription")}
                 buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
-                onClick={openSelector}
+                onClick={openSelectorInVirtualDataRoom}
               />
             </Container>
           </ModalDialog.Body>

@@ -88,10 +88,12 @@ export const ChatWidget = memo(
 
     const files = toChatFiles();
 
+    console.log(chatFiles[0]);
+
     const parentId = chatFiles.length
-      ? "parentId" in chatFiles[0]
+      ? "parentId" in chatFiles[0] && chatFiles[0].parentId
         ? chatFiles[0].parentId
-        : chatFiles[0].folderId
+        : "folderId" in chatFiles[0] && chatFiles[0].folderId
       : "";
 
     const [flowId, setFlowId] = useState<string>(
@@ -122,32 +124,8 @@ export const ChatWidget = memo(
 
     const tweaks = parentId
       ? JSON.stringify({
-          tweaks: {
-            "ChatInput-hcS64": {},
-            "TogetherAIModel-Qfvv7": {},
-            "ChatOutput-tjfon": {},
-            "InputParser-6wAPc": {},
-            "ConditionalRouter-CUNeM": {},
-            "RunFlow-TnxpB": {},
-            "ParseReferences-wn59Q": {},
-            "ConditionalRouter-4jjfR": {},
-            "TextInput-OvpRl": {},
-            "GetFilesFromFolders-BWaG7": {},
-            "TextInput-z5Y8m": {
-              current_folder: parentId,
-            },
-            "RagPrompt-vGvXR": {},
-            "SystemPrompt-cM1BX": {},
-            "GetFoldersContent-APjkO": {},
-            "ToolCallingAgent-U12uF": {},
-            "OnlyofficeDocspaceFolderListDocuments-6gGL6": {},
-            "TogetherAIModel-i6idC": {},
-            "RunFlow-PBB3K": {},
-            "RagPrompt-uEtrv": {},
-            "CustomComponent-TPR8t": {},
-            "TogetherAIModel-YLhJ2": {},
-            "ChatOutput-4t5Zg": {},
-            "EnvExtractor-picCE": {},
+          "FileID-29xtu": {
+            current_folder: parentId,
           },
         })
       : "";

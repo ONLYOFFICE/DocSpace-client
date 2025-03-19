@@ -27,3 +27,6 @@ export const HEADER_SELF_ERROR_400 = "x-test-data-self-error-400";
 
 export const HEADER_NO_STANDALONE_SETTINGS =
   "x-test-data-no-standalone-settings";
+
+export const HEADER_AUTHENTICATED_SETTINGS =
+  "x-test-data-authenticated-settings";

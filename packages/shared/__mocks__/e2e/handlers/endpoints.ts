@@ -39,6 +39,7 @@ import {
   SELF_PATH_DELETE_USER,
   SELF_PATH_UPDATE_USER,
   SELF_PATH_USER_BY_EMAIL,
+  PATH_ADD_GUEST,
   selfHandler,
 } from "./people";
 import {
@@ -159,5 +160,9 @@ export const endpoints: TEndpoints = {
   deletePortal: {
     url: `${BASE_URL}${DELETE_PATH}`,
     dataHandler: deletePortalHandler,
+  },
+  addGuest: {
+    url: `${BASE_URL}${PATH_ADD_GUEST}`,
+    dataHandler: selfHandler,
   },
 };

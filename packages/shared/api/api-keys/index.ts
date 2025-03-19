@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { request } from "../client";
-import { TApiKey } from "./types";
+import { TApiKey, TApiKeyRequest } from "./types";
 
 export async function getApiKeys() {
   const res = await request({
@@ -36,7 +36,7 @@ export async function getApiKeys() {
   return res as TApiKey[];
 }
 
-export async function createApiKey(data: { name: string }) {
+export async function createApiKey(data: TApiKeyRequest) {
   const res = await request({
     method: "post",
     url: "/keys",

@@ -100,15 +100,15 @@ const TableRow = (props: TableRowProps) => {
     ? item.createBy?.avatarSmall
     : DefaultUserPhotoSize32PngUrl;
 
-  const getStatusByDate = () => {
+  const getStatusByDate = (date: string) => {
     const locale = getCookie(LANGUAGE) || culture;
-
-    const dateLabel = getCorrectDate(locale, item.createOn);
-
+    const dateLabel = getCorrectDate(locale, date);
     return dateLabel;
   };
 
-  const date = getStatusByDate();
+  const createOnDate = getStatusByDate(item.createOn);
+  const lastUsedDate = getStatusByDate(item.lastUsed);
+  const expiresAtDate = getStatusByDate(item.expiresAt);
 
   return (
     <StyledWrapper>
@@ -129,7 +129,7 @@ const TableRow = (props: TableRowProps) => {
             className="api-keys_text api-keys_text-overflow"
             fontWeight={600}
           >
-            {date}
+            {createOnDate}
           </Text>
         </TableCell>
         <TableCell className="author-cell">
@@ -146,6 +146,22 @@ const TableRow = (props: TableRowProps) => {
             truncate
           >
             {item.createBy?.displayName}
+          </Text>
+        </TableCell>
+        <TableCell>
+          <Text
+            className="api-keys_text api-keys_text-overflow"
+            fontWeight={600}
+          >
+            {lastUsedDate}
+          </Text>
+        </TableCell>
+        <TableCell>
+          <Text
+            className="api-keys_text api-keys_text-overflow"
+            fontWeight={600}
+          >
+            {expiresAtDate}
           </Text>
         </TableCell>
         <TableCell>

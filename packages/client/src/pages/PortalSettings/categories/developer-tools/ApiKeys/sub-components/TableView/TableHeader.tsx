@@ -75,6 +75,18 @@ const TableHeader = (props: TableHeaderProps) => {
       resizable: true,
     },
     {
+      key: "LastUsed",
+      title: t("Common:LastUsed"),
+      enable: true,
+      resizable: true,
+    },
+    {
+      key: "ExpiresAt",
+      title: t("Common:ExpiresAt"),
+      enable: true,
+      resizable: true,
+    },
+    {
       key: "State",
       title: t("Webhooks:State"),
       enable: true,

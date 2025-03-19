@@ -14,5 +14,12 @@ export type TApiKey = {
   isActive: boolean;
   keyPrefix: string;
   name: string;
+  lastUsed: string;
+  expiresAt: string;
   //   permissions: [];
+};
+
+export type TApiKeyRequest = {
+  name: string;
+  expiresInDays?: number;
 };

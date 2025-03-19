@@ -1,6 +1,6 @@
 import React from "react";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TApiKey } from "@docspace/shared/api/api-keys/types";
+import { TApiKey, TApiKeyRequest } from "@docspace/shared/api/api-keys/types";
 import { DeviceType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -59,6 +59,6 @@ export type CreateApiKeyDialogProps = {
   tReady: boolean;
   isVisible: boolean;
   setIsVisible: (visible: boolean) => void;
-  onCreateKey: ({ name }: { name: string }) => void;
+  onCreateKey: (obj: TApiKeyRequest) => void;
   isRequestRunning: boolean;
 };

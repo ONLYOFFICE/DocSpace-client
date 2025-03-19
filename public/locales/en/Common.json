@@ -318,6 +318,8 @@
   "LastModifiedDate": "Last modified date",
   "LastName": "Last name",
   "CreatedBy": "Created by",
+  "LastUsed": "Last used",
+  "ExpiresAt": "Expires at",
   "LatePayment": "Late payment",
   "Later": "Later",
   "LDAP": "LDAP",

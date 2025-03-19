@@ -35,7 +35,7 @@ import {
   deleteApiKey,
   getApiKeys,
 } from "@docspace/shared/api/api-keys";
-import { TApiKey } from "@docspace/shared/api/api-keys/types";
+import { TApiKey, TApiKeyRequest } from "@docspace/shared/api/api-keys/types";
 
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -66,7 +66,7 @@ const ApiKeys = (props: ApiKeysProps) => {
     useState(false);
   const [isRequestRunning, setIsRequestRunning] = useState(false);
 
-  const onCreateKey = (newKey: { name: string }) => {
+  const onCreateKey = (newKey: TApiKeyRequest) => {
     setIsRequestRunning(true);
     createApiKey(newKey)
       .then((key) => {

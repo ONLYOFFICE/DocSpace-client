@@ -200,4 +200,8 @@ export const ButtonsWrapper = styled.div`
   flex-direction: row;
   gap: 16px;
   width: 100%;
+
+  &.buttons-guest {
+    gap: 8px;
+  }
 `;

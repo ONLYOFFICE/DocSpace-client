@@ -59,8 +59,8 @@ export const GreetingGuestContainer = ({
 
   return (
     <GreetingContainer>
-      <img src={logoUrl} className="portal-logo" alt="greeting-logo" />
-      <div className="tooltip">
+      <img src={logoUrl} className="portal-logo guest" alt="greeting-logo" />
+      <div className="tooltip guest">
         <Text fontSize="16px">
           <Trans
             t={t}

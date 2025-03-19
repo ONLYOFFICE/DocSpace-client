@@ -38,10 +38,10 @@ import {
 import { TApiKey } from "@docspace/shared/api/api-keys/types";
 
 import { Button } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
 import CreateApiKeyDialog from "./sub-components/CreateApiKeyDialog";
 import ApiKeysView from "./sub-components";
 import { ApiKeysProps } from "./types";
-import { Text } from "@docspace/shared/components/text";
 
 const StyledApiKeys = styled.div`
   width: 100%;
@@ -64,12 +64,16 @@ const ApiKeys = (props: ApiKeysProps) => {
   const [listItems, setListItems] = useState<TApiKey[]>([]);
   const [createKeyDialogIsVisible, setCreateKeyDialogIsVisible] =
     useState(false);
+  const [isRequestRunning, setIsRequestRunning] = useState(false);
 
   const onCreateKey = (newKey: { name: string }) => {
-    createApiKey(newKey).then((key) => {
-      setCreateKeyDialogIsVisible(false);
-      setListItems((prev) => [...prev, key]);
-    });
+    setIsRequestRunning(true);
+    createApiKey(newKey)
+      .then((key) => {
+        setCreateKeyDialogIsVisible(false);
+        setListItems((prev) => [...prev, key]);
+      })
+      .finally(() => setIsRequestRunning(false));
   };
 
   const onDeleteApiKey = (id: TApiKey["id"]) => {
@@ -131,6 +135,7 @@ const ApiKeys = (props: ApiKeysProps) => {
           isVisible={createKeyDialogIsVisible}
           setIsVisible={setCreateKeyDialogIsVisible}
           onCreateKey={onCreateKey}
+          isRequestRunning={isRequestRunning}
         />
       ) : null}
     </StyledApiKeys>

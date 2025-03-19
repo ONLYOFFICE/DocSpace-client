@@ -38,7 +38,8 @@ import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { CreateApiKeyDialogProps } from "../../types";
 
 const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
-  const { t, tReady, isVisible, setIsVisible, onCreateKey } = props;
+  const { t, tReady, isVisible, setIsVisible, onCreateKey, isRequestRunning } =
+    props;
 
   const [inputValue, setInputValue] = useState("");
   const [isValid, setIsValid] = useState(true);
@@ -58,6 +59,9 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   };
 
   const onKeyPress = (e: KeyboardEvent) => {
+    if (e.key === "Enter" && !isRequestRunning) {
+      onCreate();
+    }
     if (e.key === "Escape") {
       onClose();
     }
@@ -66,7 +70,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   useEffect(() => {
     window.addEventListener("keydown", onKeyPress);
     return () => window.removeEventListener("keydown", onKeyPress);
-  }, []);
+  }, [inputValue]);
 
   return (
     <ModalDialog

@@ -58,4 +58,5 @@ export type CreateApiKeyDialogProps = {
   isVisible: boolean;
   setIsVisible: (visible: boolean) => void;
   onCreateKey: ({ name }: { name: string }) => void;
+  isRequestRunning: boolean;
 };

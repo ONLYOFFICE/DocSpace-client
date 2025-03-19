@@ -226,6 +226,31 @@ export async function getUserByName() {
   return user.response as TUser;
 }
 
+export async function getUserByEmail(
+  userEmail: string,
+  confirmKey: string | null = null,
+) {
+  const [getUserByEmai] = createRequest(
+    [`/people/email?email=${userEmail}`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? selfHandler(null, headers())
+    : await fetch(getUserByEmai);
+
+  if (!res.ok) return;
+
+  const user = await res.json();
+
+  if (user.response && user.response.displayName) {
+    user.response.displayName = Encoder.htmlDecode(user.response.displayName);
+  }
+
+  return user.response as TUser;
+}
+
 export async function getScopeList(token?: string) {
   const headers: [string, string][] = token
     ? [["Cookie", `x-signature=${token}`]]

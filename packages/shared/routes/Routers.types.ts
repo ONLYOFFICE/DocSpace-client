@@ -43,6 +43,7 @@ export interface PrivateRouteProps
       | "limitedAccessSpace"
       | "baseDomain"
       | "displayAbout"
+      | "limitedAccessDevToolsForUsers"
     >,
     Pick<CurrentTariffStatusStore, "isNotPaidPeriod">,
     Pick<UserStore, "user"> {

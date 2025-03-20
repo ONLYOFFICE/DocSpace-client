@@ -145,8 +145,8 @@ const WebhooksTableRow = (props) => {
     },
   ];
 
-  const avatarSource = webhook.createdBy.hasAvatar
-    ? webhook.createdBy.avatarSmall
+  const avatarSource = webhook.createdBy?.hasAvatar
+    ? webhook.createdBy?.avatarSmall
     : DefaultUserPhotoSize32PngUrl;
 
   return (
@@ -160,18 +160,20 @@ const WebhooksTableRow = (props) => {
         </TableCell>
         {isAdmin ? (
           <TableCell>
-            <Avatar
-              source={avatarSource}
-              className="author-avatar-cell"
-              role="user"
-            />
+            {webhook.createdBy?.hasAvatar ? (
+              <Avatar
+                source={avatarSource}
+                className="author-avatar-cell"
+                role="user"
+              />
+            ) : null}
             <Text
               fontSize="12px"
               fontWeight={600}
-              title={webhook.createdBy.displayName}
+              title={webhook.createdBy?.displayName}
               truncate
             >
-              {webhook.createdBy.displayName}
+              {webhook.createdBy?.displayName}
             </Text>
           </TableCell>
         ) : (

@@ -57,7 +57,8 @@ export const Providers = ({
   const firebaseHelper = new FirebaseHelper(
     value.settings?.firebase ?? ({} as TFirebaseSettings),
   );
-  const confirmType = useSearchParams().get("type");
+  const searchParams = useSearchParams();
+  const confirmType = searchParams.get("type");
 
   let shouldRedirect = true;
   if (redirectURL === "unavailable" && confirmType === "PortalContinue") {
@@ -66,6 +67,15 @@ export const Providers = ({
 
   const pathName = usePathname();
   const expectedPathName = `/${redirectURL}`;
+
+  React.useEffect(() => {
+    if (redirectURL && confirmType === "GuestShareLink") {
+      sessionStorage.setItem(
+        "referenceUrl",
+        `/confirm/${confirmType}?${searchParams.toString()}`,
+      );
+    }
+  }, [redirectURL, searchParams, confirmType]);
 
   React.useEffect(() => {
     if (shouldRedirect && redirectURL && pathName !== expectedPathName)

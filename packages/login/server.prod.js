@@ -39,7 +39,7 @@ const argv = (key) => {
   );
 };
 
-const port = argv("app.port") ?? 5011;
+const port = (argv("app.port") || process.env.PORT) ?? 5011;
 const hostname = "0.0.0.0";
 
 process.env.NODE_ENV = "production" || process.env.NODE_ENV;

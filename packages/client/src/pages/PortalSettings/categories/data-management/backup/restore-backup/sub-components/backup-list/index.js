@@ -46,12 +46,13 @@ import ListLoader from "@docspace/shared/skeletons/list";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { isManagement } from "@docspace/shared/utils/common";
+
 import config from "PACKAGE_FILE";
 import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
 import { StyledBackupList } from "../../../StyledBackup";
 import BackupListBody from "./BackupListBody";
-import { isManagement } from "@docspace/shared/utils/common";
 
 const StyledFooterContent = styled.div`
   width: 100%;

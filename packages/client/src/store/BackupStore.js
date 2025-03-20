@@ -34,6 +34,7 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
+import { isManagement } from "@docspace/shared/utils/common";
 
 import {
   saveToLocalStorage,
@@ -41,7 +42,6 @@ import {
   removeLocalStorage,
 } from "../pages/PortalSettings/utils";
 import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils";
-import { isManagement } from "@docspace/shared/utils/common";
 
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 

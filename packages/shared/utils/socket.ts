@@ -73,6 +73,7 @@ export const enum SocketEvents {
   DeleteGuest = "s:delete-guest",
   BackupProgress = "s:backup-progress",
   RestoreProgress = "s:restore-progress",
+  ChangeMyType = "s:change-my-type",
 }
 
 /**
@@ -246,6 +247,12 @@ export type TListenEventCallbackMap = {
     progress: number;
     isCompleted: boolean;
     error: string;
+  }) => void;
+  [SocketEvents.ChangeMyType]: (data: {
+    id: string;
+    data: TUser;
+    admin: string;
+    hasPersonalFolder: boolean;
   }) => void;
 };
 

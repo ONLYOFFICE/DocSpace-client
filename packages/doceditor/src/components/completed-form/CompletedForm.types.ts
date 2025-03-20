@@ -24,8 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile } from "@docspace/shared/api/files/types";
-import { TUser } from "@docspace/shared/api/people/types";
+import type {
+  TFile,
+  TFileFillingFormStatus,
+} from "@docspace/shared/api/files/types";
+import type { TUser } from "@docspace/shared/api/people/types";
 
 export type CompletedFormLayoutProps = {
   bgPattern: string;
@@ -44,4 +47,12 @@ export type CompletedFormProps = {
   };
   isShareFile: boolean;
   share?: string;
+};
+
+export type CompletedVDRFormProps = {
+  file: TFile;
+  isStartFilling?: boolean;
+  formFillingStatus: TFileFillingFormStatus[];
+  user: TUser;
+  roomId: string;
 };

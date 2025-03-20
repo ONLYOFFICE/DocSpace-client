@@ -40,6 +40,7 @@ import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
 } from "../StyledTable";
+import ErasureCell from "./ErasureCell";
 
 const RowDataComponent = (props) => {
   const {
@@ -66,6 +67,7 @@ const RowDataComponent = (props) => {
     isIndexEditingMode,
     changeIndex,
     isIndexedFolder,
+    erasureColumnIsEnabled,
   } = props;
 
   const [lastColumn, setLastColumn] = useState(
@@ -226,6 +228,26 @@ const RowDataComponent = (props) => {
         <div />
       )}
 
+      {erasureColumnIsEnabled ? (
+        <TableCell
+          style={
+            !erasureColumnIsEnabled ? { background: "none" } : dragStyles.style
+          }
+          {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Erasure" ? "no-extra-space" : "",
+          )}
+        >
+          <ErasureCell
+            sideColor={theme.filesSection.tableView.row.sideColor}
+            {...props}
+          />
+        </TableCell>
+      ) : (
+        <div />
+      )}
+
       {sizeColumnIsEnabled ? (
         <TableCell
           style={
@@ -284,6 +306,7 @@ export default inject(({ tableStore, selectedFolderStore }) => {
     typeColumnIsEnabled,
     tableStorageName,
     columnStorageName,
+    erasureColumnIsEnabled,
   } = tableStore;
 
   const { isIndexedFolder } = selectedFolderStore;
@@ -298,5 +321,6 @@ export default inject(({ tableStore, selectedFolderStore }) => {
     columnStorageName,
 
     isIndexedFolder,
+    erasureColumnIsEnabled,
   };
 })(observer(RowDataComponent));

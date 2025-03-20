@@ -141,7 +141,7 @@ const CustomSettings = (props) => {
       <TextInput
         className="smtp-settings_input"
         name={HOST_PASSWORD}
-        placeholder={t("UploadPanel:EnterPassword")}
+        placeholder={t("Common:EnterPassword")}
         onChange={onChange}
         value={settings[HOST_PASSWORD]}
         isDisabled={isLoading || !settings[AUTHENTICATION]}

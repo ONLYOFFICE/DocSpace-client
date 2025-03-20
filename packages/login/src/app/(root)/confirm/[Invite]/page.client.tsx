@@ -87,8 +87,7 @@ export type CreateUserFormProps = {
   passwordSettings?: TPasswordSettings;
   capabilities?: TCapabilities;
   thirdPartyProviders?: TThirdPartyProvider[];
-  firstName?: string;
-  lastName?: string;
+  displayName?: string;
   isStandalone: boolean;
   logoText: string;
 };
@@ -101,8 +100,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     passwordSettings,
     capabilities,
     thirdPartyProviders,
-    firstName,
-    lastName,
+    displayName,
     licenseUrl,
     legalTerms,
     isStandalone,
@@ -239,8 +237,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           type: "invitation",
           email,
           roomName,
-          firstName,
-          lastName,
+          displayName,
           spaceAddress: window.location.host,
         },
         true,

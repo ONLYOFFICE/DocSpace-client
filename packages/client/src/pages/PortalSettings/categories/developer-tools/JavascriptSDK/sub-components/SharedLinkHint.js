@@ -65,7 +65,7 @@ export const SharedLinkHint = ({
           onClick={redirectToSelectedRoom}
         >
           {" "}
-          {t("GoToRoom")}.
+          {t("Common:GoToRoom")}.
         </Link>
       </div>
     )

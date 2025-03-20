@@ -34,7 +34,7 @@ export type TTitles = {
   infoPanel?: string;
   actions?: string;
   contextMenu?: string;
-  trashWarning?: string;
+  warningText?: string;
 };
 
 export type TContextButtonProps = {
@@ -76,6 +76,12 @@ export type TToggleInfoPanelButtonProps = {
 export type TArrowButtonProps = {
   isRootFolder: boolean;
   onBackToParentFolder: TOnBackToParenFolder;
+};
+
+export type TBadgesProps = {
+  titleIcon: string;
+  isRootFolder: boolean;
+  titleIconTooltip?: string;
 };
 
 export type TTextProps = {
@@ -156,6 +162,7 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
     /** Used for guidance */
     addButtonRef?: RefObject<HTMLDivElement>;
     buttonRef?: LegacyRef<HTMLButtonElement>;
+    isContextButtonVisible?: boolean;
   };
 
 export type TDropBoxProps = TArrowButtonProps &

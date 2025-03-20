@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Visualizzazione del tipo di file",
   "FrameId": "ID del telaio",
   "GetCode": "Ottieni il codice da inserire",
-  "GoToRoom": "vai nella stanza",
   "Header": "Intestazione",
   "HeaderDescription": "Puoi disabilitare l'intestazione nella versione mobile per limitare l'accesso alle sezioni {{productName}} (proprio come disabilitare il menu a sinistra nella versione desktop).",
   "HtmlCodeDescription": "Incorpora {{productName}} o sue parti utilizzando il tag <script>. Copia il codice HTML qui sotto e inseriscilo nel tuo file HTML.",

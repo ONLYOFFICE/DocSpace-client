@@ -131,6 +131,10 @@
   border-radius: 50%;
   background-color: var(--accent-main);
 
+  &.isEditIcon {
+    background-color: var(--room-icon-edit-icon-background);
+  }
+
   &.size20 {
     width: 20px;
     height: 20px;
@@ -150,8 +154,7 @@
   }
 
   :global {
-    .open-plus-logo-icon,
-    .open-edit-logo-icon {
+    .open-plus-logo-icon {
       svg {
         path {
           fill: var(--room-icon-fill);

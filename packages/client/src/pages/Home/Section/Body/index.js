@@ -110,7 +110,7 @@ const SectionBodyContent = (props) => {
       getFormFillingTipsStorageName(userId),
     );
 
-    if (roomType === RoomsType.FormRoom && !closedFormFillingTips) {
+    if (roomType === RoomsType.FormRoom && !closedFormFillingTips && userId) {
       onEnableFormFillingGuid(t, roomType);
     }
   }, [roomType, onEnableFormFillingGuid]);

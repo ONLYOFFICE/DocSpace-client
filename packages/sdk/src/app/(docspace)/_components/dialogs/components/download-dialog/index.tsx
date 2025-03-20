@@ -50,6 +50,8 @@ const DownloadDialog = () => {
     updateDownloadedFilePassword,
     discardDownloadedFile,
     onDownload,
+    getIcon,
+    getFolderIcon,
   } = useDownloadDialogData();
 
   const isVisible = isDialogOpen(SDKDialogs.DownloadDialog);
@@ -76,8 +78,8 @@ const DownloadDialog = () => {
       extsConvertible={extsConvertible}
       setDownloadItems={setDownloadItems}
       getDownloadItems={getDownloadItems}
-      getIcon={() => ""}
-      getFolderIcon={() => ""}
+      getIcon={getIcon}
+      getFolderIcon={getFolderIcon}
       setDownloadDialogVisible={setDialogVisible}
       setSortedPasswordFiles={setSortedDownloadFiles}
       resetDownloadedFileFormat={resetDownloadedFileFormat}

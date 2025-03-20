@@ -41,6 +41,9 @@ import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 import { getDownloadPasswordError } from "@/app/(docspace)/_utils/getDownloadPasswordError";
+import useItemIcon, {
+  type TItemIconSizes,
+} from "@/app/(docspace)/_hooks/useItemIcon";
 
 export const useDownloadDialogData = () => {
   const { filesSettings } = useFilesSettingsStore();
@@ -59,6 +62,9 @@ export const useDownloadDialogData = () => {
   } = useDownloadDialogStore();
   const { downloadItems: downloadFiles } = useDownloadActions();
   const { openDialog } = useDialogsStore();
+  const { getIcon: getIconFromHook } = useItemIcon({
+    filesSettings: filesSettings || undefined,
+  });
 
   const onDownload = useCallback(
     async (
@@ -84,6 +90,17 @@ export const useDownloadDialogData = () => {
     [downloadFiles, handlePasswordError, openDialog],
   );
 
+  const getIcon = useCallback(
+    (size: number, extension?: string) =>
+      getIconFromHook(extension, size as TItemIconSizes),
+    [getIconFromHook],
+  );
+
+  const getFolderIcon = useCallback(
+    (size: number) => getIconFromHook(undefined, size as TItemIconSizes),
+    [getIconFromHook],
+  );
+
   return {
     sortedFiles,
     sortedPasswordFiles,
@@ -97,5 +114,7 @@ export const useDownloadDialogData = () => {
     updateDownloadedFilePassword,
     discardDownloadedFile,
     onDownload,
+    getIcon,
+    getFolderIcon,
   };
 };

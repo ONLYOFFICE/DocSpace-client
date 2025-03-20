@@ -37,7 +37,6 @@ export const defaultSize = {
 };
 
 export const sdkVersion = {
-  "100": "1.0.0",
   "101": "1.0.1",
   "200": "2.0.0",
 } as const;

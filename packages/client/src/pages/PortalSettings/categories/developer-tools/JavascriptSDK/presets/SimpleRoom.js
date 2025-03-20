@@ -117,6 +117,7 @@ const SimpleRoom = (props) => {
   });
 
   const fromPackage = source === sdkSource.Package;
+
   const sdkScriptUrl = getSdkScriptUrl(version);
 
   const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;

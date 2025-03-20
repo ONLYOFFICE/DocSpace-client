@@ -1361,3 +1361,9 @@ export const getBackupProgressInfo = (
     return { success: t("Settings:BackupCreatedSuccess") };
   }
 };
+
+export const getSdkScriptUrl = (version: string) => {
+  return typeof window !== "undefined"
+    ? `${window.location.origin}/static/scripts/sdk/${version}/api.js`
+    : "";
+};

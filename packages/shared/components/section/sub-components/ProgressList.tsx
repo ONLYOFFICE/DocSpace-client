@@ -53,7 +53,6 @@ interface ProgressListProps {
   ) => void;
   onCancel?: () => void;
   onOpenPanel: () => void;
-  withoutStatus?: boolean;
 }
 
 const getIcon = (icon: string): string => {

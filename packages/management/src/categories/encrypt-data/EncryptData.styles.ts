@@ -24,24 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { observer } from "mobx-react";
+import styled from "styled-components";
+import { globalColors } from "@docspace/shared/themes";
 
-import Section from "./Section";
-import ArticleWrapper from "./Article";
+export const StyledWrapper = styled.div`
+  width: 100%;
+  max-width: 700px;
 
-type TLayoutProps = {
-  children: React.ReactNode;
-  isPortalRestoring: boolean | undefined;
-};
+  .header {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
 
-const MainLayout = ({ children, isPortalRestoring }: TLayoutProps) => {
-  return (
-    <>
-      {!isPortalRestoring ? <ArticleWrapper /> : null}
-      <Section>{children}</Section>
-    </>
-  );
-};
+  .wrapper-block {
+    margin-top: 20px;
 
-export default observer(MainLayout);
+    .description {
+      margin-top: 9px;
+      margin-bottom: 12px;
+    }
+  }
+
+  .checkbox {
+    margin-top: 20px;
+    margin-bottom: 24px;
+  }
+
+  .badge {
+    margin-inline-start: 4px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    border: 1px solid ${globalColors.lightStatusPositive};
+    color: ${globalColors.lightStatusPositive};
+  }
+`;

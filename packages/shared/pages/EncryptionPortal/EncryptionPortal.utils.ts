@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 // (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
@@ -24,24 +25,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { observer } from "mobx-react";
-
-import Section from "./Section";
-import ArticleWrapper from "./Article";
-
-type TLayoutProps = {
-  children: React.ReactNode;
-  isPortalRestoring: boolean | undefined;
+export const returnToPortal = () => {
+  setTimeout(() => {
+    window.location.replace("/");
+  }, 5000);
 };
-
-const MainLayout = ({ children, isPortalRestoring }: TLayoutProps) => {
-  return (
-    <>
-      {!isPortalRestoring ? <ArticleWrapper /> : null}
-      <Section>{children}</Section>
-    </>
-  );
-};
-
-export default observer(MainLayout);

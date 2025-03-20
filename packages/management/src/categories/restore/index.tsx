@@ -27,14 +27,14 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { setDocumentTitle } from "SRC_DIR/utils";
 import { Component } from "client/RestorePage";
+import { setDocumentTitle } from "SRC_DIR/utils";
 
-interface RestoreProps {
+type RestoreProps = {
   logoText: string;
-}
+};
 
-const Restore: React.FC<RestoreProps> = ({ logoText }) => {
+const Restore = ({ logoText }: RestoreProps) => {
   const { t } = useTranslation(["Settings"]);
 
   useEffect(() => {

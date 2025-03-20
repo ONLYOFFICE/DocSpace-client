@@ -24,24 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { observer } from "mobx-react";
+import styled from "styled-components";
+import { globalColors } from "../../themes";
 
-import Section from "./Section";
-import ArticleWrapper from "./Article";
+export const StyledEncryptionPortal = styled.div<{
+  errorMessage?: boolean;
+}>`
+  width: 100%;
 
-type TLayoutProps = {
-  children: React.ReactNode;
-  isPortalRestoring: boolean | undefined;
-};
+  #header {
+    font-size: 23px;
+  }
+  #text {
+    color: ${globalColors.gray};
+    font-size: 13px;
+    line-height: 20px;
+    max-width: 480px;
+  }
 
-const MainLayout = ({ children, isPortalRestoring }: TLayoutProps) => {
-  return (
-    <>
-      {!isPortalRestoring ? <ArticleWrapper /> : null}
-      <Section>{children}</Section>
-    </>
-  );
-};
+  .preparation-portal_body-wrapper {
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: ${(props) => (props.errorMessage ? "560px" : "480px")};
+    box-sizing: border-box;
+    align-items: center;
+    .preparation-portal_error {
+      text-align: center;
+      color: ${(props) => props.theme.preparationPortalProgress.errorTextColor};
+    }
 
-export default observer(MainLayout);
+    .preparation-portal_text {
+      text-align: center;
+      color: ${(props) =>
+        props.theme.preparationPortalProgress.descriptionTextColor};
+    }
+  }
+
+  .restoring-portal {
+    height: 100%;
+  }
+`;

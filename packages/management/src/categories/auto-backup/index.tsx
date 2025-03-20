@@ -27,14 +27,14 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { setDocumentTitle } from "SRC_DIR/utils";
 import AutoBackupPage from "client/AutoBackupPage";
+import { setDocumentTitle } from "SRC_DIR/utils";
 
-interface AutoBackupProps {
+type AutoBackupProps = {
   logoText: string;
-}
+};
 
-const AutoBackup: React.FC<AutoBackupProps> = ({ logoText }) => {
+const AutoBackup = ({ logoText }: AutoBackupProps) => {
   const { t } = useTranslation(["Settings"]);
 
   useEffect(() => {

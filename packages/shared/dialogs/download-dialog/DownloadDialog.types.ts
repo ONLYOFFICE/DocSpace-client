@@ -159,3 +159,9 @@ export type DownloadDialogProps = {
   getFolderIcon: (size: number) => string;
   extsConvertible: Record<string, string[]>;
 };
+
+export function isFile(
+  item: TDownloadedFile,
+): item is Exclude<TDownloadedFile, TFolder> {
+  return "fileExst" in item;
+}

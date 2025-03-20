@@ -39,10 +39,11 @@ import type { TContextMenuValueTypeOnClick } from "../../components/context-menu
 import { DownloadContent } from "./sub-components/DownloadContent";
 import { PasswordContent } from "./sub-components/PasswordContent";
 import { OnePasswordRow } from "./sub-components/OnePasswordRow";
-import type {
-  DownloadDialogProps,
-  TDownloadedFile,
-  TSortedFiles,
+import {
+  type DownloadDialogProps,
+  isFile,
+  type TDownloadedFile,
+  type TSortedFiles,
 } from "./DownloadDialog.types";
 import { DownloadedDocumentType } from "./DownloadDialog.enums";
 import styles from "./DownloadDialog.module.scss";
@@ -193,7 +194,8 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     if (!fileId) {
       array.forEach((file) => {
         file.format =
-          format === t("Common:CustomFormat") || file.fileExst === format
+          format === t("Common:CustomFormat") ||
+          (isFile(file) && file.fileExst === format)
             ? t("Common:OriginalFormat")
             : format;
       });
@@ -367,7 +369,7 @@ const DownloadDialog = (props: DownloadDialogProps) => {
   };
 
   const getItemIcon = (item: TDownloadedFile) => {
-    const extension = item?.fileExst;
+    const extension = "fileExst" in item && item?.fileExst;
     const icon = extension ? getIcon(32, extension) : getFolderIcon(32);
 
     return (

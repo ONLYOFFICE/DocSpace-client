@@ -36,9 +36,10 @@ import { Checkbox } from "../../../components/checkbox";
 import { LinkWithDropdown } from "../../../components/link-with-dropdown";
 
 import styles from "../DownloadDialog.module.scss";
-import type {
-  DownloadContentProps,
-  TDownloadedFile,
+import {
+  type DownloadContentProps,
+  isFile,
+  type TDownloadedFile,
 } from "../DownloadDialog.types";
 import { DownloadRow } from "./DownloadRow";
 
@@ -60,8 +61,11 @@ export const DownloadContent = (props: DownloadContentProps) => {
   const getTitleExtensions = () => {
     let arr: string[] = [];
     items.forEach((item) => {
-      const exst = item.fileExst;
-      arr = [...arr, ...extsConvertible[exst]];
+      const exst = isFile(item) ? item.fileExst : undefined;
+
+      if (exst) {
+        arr = [...arr, ...extsConvertible[exst]];
+      }
     });
 
     arr = arr.filter((x, pos) => arr.indexOf(x) !== pos);
@@ -91,7 +95,8 @@ export const DownloadContent = (props: DownloadContentProps) => {
   };
 
   const getFormats = (item: TDownloadedFile) => {
-    const arrayFormats = item ? extsConvertible[item.fileExst] : [];
+    const arrayFormats =
+      item && isFile(item) ? extsConvertible[item.fileExst] : [];
     const formats = [
       {
         key: "original",
@@ -198,7 +203,9 @@ export const DownloadContent = (props: DownloadContentProps) => {
       <div className={styles.downloadDialogHiddenItems}>
         {items.map((file) => {
           const dropdownItems = !isOther
-            ? getFormats(file).filter((x) => x.label !== file.fileExst)
+            ? getFormats(file).filter(
+                (x) => isFile(file) && x.label !== file.fileExst,
+              )
             : undefined;
 
           return (

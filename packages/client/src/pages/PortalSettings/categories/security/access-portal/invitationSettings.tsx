@@ -43,16 +43,14 @@ const InvitationSettings = (props) => {
     getInvitationSettings,
     loadSettings,
     setInvitationSettings,
-    invitationSettings,
+    allowInvitingMembers,
+    allowInvitingGuests,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-  const [isCheckedContacts, setIsCheckedContacts] = useState(
-    invitationSettings.allowInvitingMembers,
-  );
-  const [isCheckedGuests, setIsCheckedGuests] = useState(
-    invitationSettings.allowInvitingGuests,
-  );
+  const [isCheckedContacts, setIsCheckedContacts] =
+    useState(allowInvitingMembers);
+  const [isCheckedGuests, setIsCheckedGuests] = useState(allowInvitingGuests);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -85,7 +83,11 @@ const InvitationSettings = (props) => {
     setInvitationSettings(isCheckedGuests, isCheckedContacts);
   };
 
-  console.log("invitationSettings", invitationSettings);
+  console.log(
+    "allowInvitingGuests allowInvitingMembers",
+    allowInvitingGuests,
+    allowInvitingMembers,
+  );
 
   return (
     <>
@@ -159,8 +161,12 @@ const InvitationSettings = (props) => {
 
 export const InvitationSettingsSection = inject(
   ({ settingsStore, setup }: TStore) => {
-    const { getInvitationSettings, setInvitationSettings, invitationSettings } =
-      settingsStore;
+    const {
+      getInvitationSettings,
+      setInvitationSettings,
+      allowInvitingMembers,
+      allowInvitingGuests,
+    } = settingsStore;
 
     const { isInit } = setup;
 
@@ -173,7 +179,8 @@ export const InvitationSettingsSection = inject(
       getInvitationSettings,
       loadSettings,
       setInvitationSettings,
-      invitationSettings,
+      allowInvitingMembers,
+      allowInvitingGuests,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(InvitationSettings)));

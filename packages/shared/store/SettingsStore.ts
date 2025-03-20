@@ -324,10 +324,8 @@ class SettingsStore {
 
   limitedAccessDevToolsForUsers = false;
 
-  invitationSettings: TInvitationSettings = {
-    allowInvitingGuests: true,
-    allowInvitingMembers: true,
-  };
+  allowInvitingGuestsSetting: boolean = true;
+  allowInvitingMembersSetting: boolean = true;
 
   constructor() {
     makeAutoObservable(this);
@@ -1292,7 +1290,9 @@ class SettingsStore {
 
   getInvitationSettings = async () => {
     const res = await api.settings.getInvitationSettings();
-    this.invitationSettings = res;
+
+    this.allowInvitingGuestsSetting = res.allowInvitingGuests;
+    this.allowInvitingMembersSetting = res.allowInvitingMembers;
   };
 
   setInvitationSettings = async (
@@ -1304,8 +1304,10 @@ class SettingsStore {
       allowInvitingMembers,
     };
     const res = await api.settings.setInvitationSettings(data);
+    console.log("res", res);
 
-    this.invitationSettings = res;
+    this.allowInvitingGuestsSetting = res.allowInvitingGuests;
+    this.allowInvitingMembersSetting = res.allowInvitingMembers;
   };
 
   setMessageSettings = async (turnOn: boolean) => {
@@ -1499,6 +1501,14 @@ class SettingsStore {
 
   get accessDevToolsForUsers() {
     return this.limitedAccessDevToolsForUsers.toString();
+  }
+
+  get allowInvitingGuests() {
+    return this.allowInvitingGuestsSetting;
+  }
+
+  get allowInvitingMembers() {
+    return this.allowInvitingMembersSetting;
   }
 }
 

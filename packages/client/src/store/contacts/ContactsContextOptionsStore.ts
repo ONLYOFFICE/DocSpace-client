@@ -694,6 +694,14 @@ class ContactsConextOptionsStore {
       },
     ];
 
+    console.log(
+      "this.settingsStore.allowInvitingMembers ",
+      this.settingsStore.allowInvitingMembers,
+    );
+
+    !this.settingsStore.allowInvitingMembers &&
+      accountsFullOptions.splice(0, 1);
+
     return isRoomAdmin ? accountsUserOptions : accountsFullOptions;
   };
 

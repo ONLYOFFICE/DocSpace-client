@@ -109,7 +109,7 @@ const InviteInput = ({
   setInputValue,
   usersList,
   setUsersList,
-  noAllowInvitingGuests,
+  allowInvitingGuests,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
@@ -488,7 +488,7 @@ const InviteInput = ({
       prevDropDownContent.current = usersList.map((user) =>
         getItemContent(user),
       );
-    } else if (roomId !== -1 && noAllowInvitingGuests)
+    } else if (roomId !== -1 && !allowInvitingGuests)
       prevDropDownContent.current = (
         <DropDownItem disabled className="no-users-list">
           <Text truncate fontSize="13px" fontWeight={400} lineHeight="20px">
@@ -582,19 +582,19 @@ const InviteInput = ({
       </StyledSubHeader>
       <StyledDescription
         noSelect
-        noAllowInvitingGuests={roomId !== -1 ? noAllowInvitingGuests : null}
+        noAllowInvitingGuests={roomId !== -1 ? !allowInvitingGuests : null}
       >
         {roomId === -1
           ? t("InviteMembersManuallyDescription", {
               productName: t("Common:ProductName"),
             })
-          : noAllowInvitingGuests
+          : !allowInvitingGuests
             ? t("InviteToRoomManuallyInfoMembers")
             : t("InviteToRoomManuallyInfoGuest", {
                 productName: t("Common:ProductName"),
               })}
       </StyledDescription>
-      {roomId === -1 || !noAllowInvitingGuests ? (
+      {roomId === -1 || allowInvitingGuests ? (
         <StyledInviteLanguage>
           <Text className="invitation-language" noSelect>
             {t("InvitationLanguage")}:
@@ -656,7 +656,7 @@ const InviteInput = ({
             placeholder={
               roomId === -1
                 ? t("InviteMembersSearchPlaceholder")
-                : noAllowInvitingGuests
+                : !allowInvitingGuests
                   ? t("InviteToRoomAddPlaceholder")
                   : t("InviteToRoomSearchPlaceholder")
             }
@@ -722,7 +722,7 @@ export default inject(
       isPaidUserAccess,
     } = dialogsStore;
 
-    const { culture: language, invitationSettings } = settingsStore;
+    const { culture: language, allowInvitingGuests } = settingsStore;
     const { isUserTariffLimit } = currentQuotaStore;
     return {
       language,
@@ -737,7 +737,7 @@ export default inject(
       isAdmin,
       isPaidUserAccess,
       isUserTariffLimit,
-      noAllowInvitingGuests: !invitationSettings.allowInvitingGuests,
+      allowInvitingGuests,
     };
   },
 )(

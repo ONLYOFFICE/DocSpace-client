@@ -36,10 +36,12 @@ import { sdkVersion, sdkSource } from "../constants";
 
 type TVersionSelector = {
   t: (key: string) => ReactNode;
+  onSetVersion: (version: string) => void;
+  onSetSource: (source: string) => void;
 };
 
 export const VersionSelector = (props: TVersionSelector) => {
-  const { t } = props;
+  const { t, onSetVersion, onSetSource } = props;
 
   const versions = Object.keys(sdkVersion).map((key) => ({
     key,
@@ -64,17 +66,20 @@ export const VersionSelector = (props: TVersionSelector) => {
   }, []);
 
   useEffect(() => {
-    if (source.key === "Package") {
+    if (source.label === sdkSource.Package) {
       setDisabled(true);
       setVersion(versions[versions.length - 1]);
     } else {
       setDisabled(false);
     }
-  }, [source.key]);
+
+    onSetVersion(version.label);
+    onSetSource(source.label);
+  }, [source.key, version.key]);
 
   return (
     <ControlsGroup>
-      <Label className="label" text="Connect type" />
+      <Label className="label" text={t("SourceType")} />
       <ComboBox
         scaled
         scaledOptions
@@ -91,9 +96,7 @@ export const VersionSelector = (props: TVersionSelector) => {
             offsetRight={0}
             size={12}
             tooltipContent={
-              <Text fontSize="12px">
-                For connect as package version always latest
-              </Text>
+              <Text fontSize="12px">{t("SdkPackageVersionInfo")}</Text>
             }
           />
         ) : null}

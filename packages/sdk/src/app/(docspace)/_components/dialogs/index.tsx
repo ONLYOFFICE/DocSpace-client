@@ -27,15 +27,19 @@
 "use client";
 
 import React from "react";
+import { observer } from "mobx-react";
+
+import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
+import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 
 import DownloadDialog from "./components/download-dialog";
 
 export const Dialogs = () => {
+  const { isDialogOpen } = useDialogsStore();
+
   return (
-    <>
-      <DownloadDialog />
-    </>
+    <>{isDialogOpen(SDKDialogs.DownloadDialog) ? <DownloadDialog /> : null}</>
   );
 };
 
-export default Dialogs;
+export default observer(Dialogs);

@@ -54,8 +54,6 @@ const DownloadDialog = () => {
     getFolderIcon,
   } = useDownloadDialogData();
 
-  const isVisible = isDialogOpen(SDKDialogs.DownloadDialog);
-
   const setDialogVisible = (value: boolean) => {
     if (value) {
       openDialog(SDKDialogs.DownloadDialog);
@@ -64,13 +62,9 @@ const DownloadDialog = () => {
     }
   };
 
-  if (!isVisible) {
-    return null;
-  }
-
   return (
     <DownloadDialogComponent
-      visible={isVisible}
+      visible
       sortedFiles={sortedFiles}
       sortedPasswordFiles={sortedPasswordFiles}
       sortedDownloadFiles={sortedDownloadFiles}

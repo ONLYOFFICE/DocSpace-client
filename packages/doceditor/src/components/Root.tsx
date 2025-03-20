@@ -197,7 +197,7 @@ const Root = ({
 
     onCloseSharingDialog,
     onSDKRequestSharingSettings,
-  } = useShareDialog(config, openShareFormDialog);
+  } = useShareDialog(config, openShareFormDialog, fileInfo?.rootFolderType);
 
   const {
     roles,

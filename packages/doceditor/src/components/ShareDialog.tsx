@@ -82,6 +82,7 @@ const SharingDialog = ({
               infoPanelSelection={fileInfo}
               selfId={selfId ?? ""}
               onOpenPanel={onOpenPanel}
+              onlyOneLink={fileInfo.isForm}
             />
           </div>
         </StyledWrapper>

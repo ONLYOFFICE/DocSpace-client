@@ -82,7 +82,7 @@ const ShareFormDialog = ({
     <ShareFormDialogComponent
       visible
       onClose={handleClose}
-      onClickShareFile={onClickShareFile}
+      {...(updateAccessLink && { onClickShareFile })}
       onClickFormRoom={onClickFormRoom}
       onClickVirtualDataRoom={onClickVirtualDataRoom}
       visibleContainer={isVisibleStartFillingSelectDialog}

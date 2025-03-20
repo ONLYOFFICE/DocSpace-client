@@ -14,14 +14,12 @@ import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
-import { useDialogsStore } from "../_store/DialogsStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
 
 import { TFileItem, TFolderItem } from "./useItemList";
 import useFolderActions from "./useFolderActions";
 import useFilesActions from "./useFilesActions";
-import useDownloadData from "./useDownloadData";
-import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
+import useDownloadActions from "./useDownloadActions";
 
 type UseContextMenuModelProps = {
   item?: TFileItem | TFolderItem;
@@ -33,11 +31,10 @@ export default function useContextMenuModel({
   const { t } = useTranslation(["Common"]);
 
   const filesSelectionStore = useFilesSelectionStore();
-  const { openDialog } = useDialogsStore();
 
   const { openFolder, copyFolderLink } = useFolderActions({ t });
   const { openFile, copyFileLink } = useFilesActions({ t });
-  const { downloadAction } = useDownloadData();
+  const { downloadAction, downloadAsAction } = useDownloadActions();
 
   const getSelectItem = useCallback(
     (item: TFileItem | TFolderItem) => {
@@ -129,18 +126,15 @@ export default function useContextMenuModel({
     [t, filesSelectionStore.selection, downloadAction],
   );
 
-  const getDownloadAsItem = useCallback(
-    (item?: TFileItem | TFolderItem) => {
-      return {
-        key: "download-as",
-        label: t("Common:DownloadAs"),
-        icon: DownloadAsReactSvgUrl,
-        onClick: () => openDialog(SDKDialogs.DownloadDialog),
-        disabled: false,
-      };
-    },
-    [openDialog, t],
-  );
+  const getDownloadAsItem = useCallback(() => {
+    return {
+      key: "download-as",
+      label: t("Common:DownloadAs"),
+      icon: DownloadAsReactSvgUrl,
+      onClick: downloadAsAction,
+      disabled: false,
+    };
+  }, [downloadAsAction, t]);
 
   const getViewItem = useCallback(
     (item: TFileItem | TFolderItem) => {
@@ -272,7 +266,7 @@ export default function useContextMenuModel({
         model.push(getDownloadItem(item));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.downloadAs))
-        model.push(getDownloadAsItem(item));
+        model.push(getDownloadAsItem());
 
       return model;
     },

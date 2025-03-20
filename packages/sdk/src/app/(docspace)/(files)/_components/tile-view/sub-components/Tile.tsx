@@ -49,7 +49,7 @@ import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 import useContextMenuModel from "@/app/(docspace)/_hooks/useContextMenuModel";
-import useDownloadData from "@/app/(docspace)/_hooks/useDownloadData";
+import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 
 import type { TileProps } from "../TileView.types";
 
@@ -75,7 +75,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const { openFile } = useFilesActions({ t });
   const { openFolder } = useFolderActions({ t });
   const { getContextMenuModel } = useContextMenuModel({ item });
-  const { downloadAction } = useDownloadData();
+  const { downloadAction } = useDownloadActions();
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
   const temporaryIcon = getTemporaryIcon(item, getIcon);

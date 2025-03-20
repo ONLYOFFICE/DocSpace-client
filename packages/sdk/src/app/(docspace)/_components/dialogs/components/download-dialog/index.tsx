@@ -33,9 +33,24 @@ import DownloadDialogComponent from "@docspace/shared/dialogs/download-dialog";
 
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
+import { useDownloadDialogData } from "@/app/(docspace)/_components/dialogs/components/download-dialog/hooks/useDownloadDialogData";
 
 const DownloadDialog = () => {
   const { isDialogOpen, closeDialog, openDialog } = useDialogsStore();
+  const {
+    sortedFiles,
+    sortedPasswordFiles,
+    sortedDownloadFiles,
+    downloadItems,
+    extsConvertible,
+    setDownloadItems,
+    getDownloadItems,
+    setSortedDownloadFiles,
+    resetDownloadedFileFormat,
+    updateDownloadedFilePassword,
+    discardDownloadedFile,
+    onDownload,
+  } = useDownloadDialogData();
 
   const isVisible = isDialogOpen(SDKDialogs.DownloadDialog);
 
@@ -53,28 +68,22 @@ const DownloadDialog = () => {
 
   return (
     <DownloadDialogComponent
-      sortedFiles={{
-        documents: [],
-        spreadsheets: [],
-        presentations: [],
-        masterForms: [],
-        other: [],
-      }}
-      setDownloadItems={() => {}}
-      downloadItems={[]}
-      downloadFiles={() => {}}
-      getDownloadItems={() => [[], [], ""]}
-      sortedPasswordFiles={[]}
-      updateDownloadedFilePassword={() => {}}
-      sortedDownloadFiles={{ original: [] }}
-      resetDownloadedFileFormat={() => {}}
-      discardDownloadedFile={() => {}}
       visible={isVisible}
-      setDownloadDialogVisible={setDialogVisible}
-      setSortedPasswordFiles={() => {}}
+      sortedFiles={sortedFiles}
+      sortedPasswordFiles={sortedPasswordFiles}
+      sortedDownloadFiles={sortedDownloadFiles}
+      downloadItems={downloadItems}
+      extsConvertible={extsConvertible}
+      setDownloadItems={setDownloadItems}
+      getDownloadItems={getDownloadItems}
       getIcon={() => ""}
       getFolderIcon={() => ""}
-      extsConvertible={{}}
+      setDownloadDialogVisible={setDialogVisible}
+      setSortedPasswordFiles={setSortedDownloadFiles}
+      resetDownloadedFileFormat={resetDownloadedFileFormat}
+      updateDownloadedFilePassword={updateDownloadedFilePassword}
+      discardDownloadedFile={discardDownloadedFile}
+      downloadFiles={onDownload}
     />
   );
 };

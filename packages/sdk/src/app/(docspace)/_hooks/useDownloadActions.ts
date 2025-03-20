@@ -35,17 +35,31 @@ import { TData, toastr } from "@docspace/shared/components/toast";
 import { downloadFiles } from "@docspace/shared/api/files";
 import { openUrl } from "@docspace/shared/utils/common";
 import { UrlActionType } from "@docspace/shared/enums";
+import type {
+  TDownloadedFile,
+  TFileConvertId,
+  TSortedFiles,
+} from "@docspace/shared/dialogs/download-dialog/DownloadDialog.types";
 
 import useSDK from "@/hooks/useSDK";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
 import type { TFileItem, TFolderItem } from "./useItemList";
+import useFileType from "./useFileType";
+import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
+import { useDownloadDialogStore } from "@/app/(docspace)/_store/DownloadDialogStore";
+import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
+import { getDownloadPasswordError } from "@/app/(docspace)/_utils/getDownloadPasswordError";
 
-export default function useDownloadData() {
+export default function useDownloadActions() {
   const { sdkConfig } = useSDK();
   const { selection, bufferSelection } = useFilesSelectionStore();
   const { shareKey } = useSettingsStore();
+  const { openDialog } = useDialogsStore();
+  const { setSortedFiles } = useDownloadDialogStore();
+  const { isDocument, isMasterForm, isPresentation, isSpreadsheet } =
+    useFileType();
   const { t } = useTranslation("Common");
 
   const loopFilesOperations = useCallback(
@@ -71,7 +85,7 @@ export default function useDownloadData() {
   );
 
   const downloadItems = useCallback(
-    async (fileIds: number[], folderIds: number[]) => {
+    async (fileIds: number[] | TFileConvertId[], folderIds: number[]) => {
       try {
         const operations = await downloadFiles(fileIds, folderIds, shareKey);
         const operation = operations?.[operations.length - 1];
@@ -101,6 +115,14 @@ export default function useDownloadData() {
           toastr.error(t("Common:ArchivingData"), undefined, 0, true);
         }
       } catch (error) {
+        const passwordError = getDownloadPasswordError(
+          error as Error | TOperation,
+        );
+
+        if (passwordError) {
+          throw new Error(passwordError);
+        }
+
         toastr.error(error as TData, undefined, 0, true);
       }
     },
@@ -150,5 +172,62 @@ export default function useDownloadData() {
     [downloadFromSelection, downloadItems, sdkConfig],
   );
 
-  return { downloadAction };
+  const getSortedFilesFromSelection = useCallback(() => {
+    const newSortedFiles: TSortedFiles = {
+      documents: [],
+      spreadsheets: [],
+      presentations: [],
+      masterForms: [],
+      other: [],
+    };
+
+    let data = selection.length
+      ? selection
+      : bufferSelection
+        ? [bufferSelection]
+        : [];
+
+    data = JSON.parse(JSON.stringify(data));
+
+    data.forEach((item: TDownloadedFile) => {
+      item.checked = true;
+      item.format = null;
+
+      if (
+        "fileExst" in item &&
+        item.fileExst &&
+        item.viewAccessibility?.CanConvert
+      ) {
+        if (isSpreadsheet(item.fileExst)) {
+          newSortedFiles.spreadsheets.push(item);
+        } else if (isPresentation(item.fileExst)) {
+          newSortedFiles.presentations.push(item);
+        } else if (isMasterForm(item.fileExst)) {
+          newSortedFiles.masterForms.push(item);
+        } else if (isDocument(item.fileExst)) {
+          newSortedFiles.documents.push(item);
+        } else {
+          newSortedFiles.other.push(item);
+        }
+      } else {
+        newSortedFiles.other.push(item);
+      }
+    });
+
+    return newSortedFiles;
+  }, [
+    bufferSelection,
+    isDocument,
+    isMasterForm,
+    isPresentation,
+    isSpreadsheet,
+    selection,
+  ]);
+
+  const downloadAsAction = useCallback(() => {
+    setSortedFiles(getSortedFilesFromSelection());
+    openDialog(SDKDialogs.DownloadDialog);
+  }, [getSortedFilesFromSelection, openDialog, setSortedFiles]);
+
+  return { downloadAction, downloadAsAction, downloadItems };
 }

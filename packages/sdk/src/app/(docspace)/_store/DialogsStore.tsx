@@ -28,6 +28,7 @@
 
 import React from "react";
 import { makeAutoObservable } from "mobx";
+
 import { type SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 
 class DialogsStore {

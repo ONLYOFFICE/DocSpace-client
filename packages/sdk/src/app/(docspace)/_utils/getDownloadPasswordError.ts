@@ -26,49 +26,14 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useCallback } from "react";
+import type { TOperation } from "@docspace/shared/api/files/types";
 
-import { presentInArray } from "@docspace/shared/utils";
+export const getDownloadPasswordError = (error: Error | TOperation) => {
+  const errorMessage = error instanceof Error ? error.message : error.error;
 
-import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
+  if (errorMessage) {
+    if (errorMessage.includes("password")) return errorMessage;
+  }
 
-export default function useFileType() {
-  const { filesSettings } = useFilesSettingsStore();
-
-  const isDocument = useCallback(
-    (extension: string) =>
-      presentInArray(filesSettings?.extsDocument ?? [], extension),
-    [filesSettings?.extsDocument],
-  );
-
-  const isPresentation = useCallback(
-    (extension: string) =>
-      presentInArray(filesSettings?.extsPresentation ?? [], extension),
-    [filesSettings?.extsPresentation],
-  );
-
-  const isSpreadsheet = useCallback(
-    (extension: string) =>
-      presentInArray(filesSettings?.extsSpreadsheet ?? [], extension),
-    [filesSettings?.extsSpreadsheet],
-  );
-
-  const isArchive = useCallback(
-    (extension: string) =>
-      presentInArray(filesSettings?.extsArchive ?? [], extension),
-    [filesSettings?.extsArchive],
-  );
-
-  const isMasterForm = useCallback(
-    (extension: string) => filesSettings?.masterFormExtension === extension,
-    [filesSettings?.masterFormExtension],
-  );
-
-  return {
-    isDocument,
-    isPresentation,
-    isSpreadsheet,
-    isArchive,
-    isMasterForm,
-  };
-}
+  return null;
+};

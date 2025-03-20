@@ -31,7 +31,7 @@ import CodeBlock from "./CodeBlock";
 
 import { CategorySubHeader, CodeWrapper } from "../presets/StyledPresets";
 
-export const CodeToInsert = ({ t, codeBlock, config, theme }) => {
+export const CodeToInsert = ({ t, codeBlock, config, theme, scriptUrl }) => {
   const html = (
     <CodeWrapper height="fit-content">
       <CategorySubHeader className="copy-window-code">
@@ -53,7 +53,7 @@ export const CodeToInsert = ({ t, codeBlock, config, theme }) => {
           productName: t("Common:ProductName"),
         })}
       </Text>
-      <CodeBlock config={config} theme={theme} />
+      <CodeBlock config={config} scriptUrl={scriptUrl} theme={theme} />
     </CodeWrapper>
   );
 
@@ -61,11 +61,10 @@ export const CodeToInsert = ({ t, codeBlock, config, theme }) => {
     <CodeWrapper height="fit-content">
       <CategorySubHeader className="copy-window-code">NPM</CategorySubHeader>
       <Text lineHeight="20px" className="preview-description">
-        NPM package description
+        {t("NPMCodeDescription")}
       </Text>
       <Text lineHeight="20px" className="preview-description">
-        Install package from npm and save it to the package.json file with
-        --save:
+        {t("NPMCodeInstallStep")}
       </Text>
       <Textarea
         value="npm install --save @onlyoffice/docspace-sdk-js"
@@ -74,7 +73,7 @@ export const CodeToInsert = ({ t, codeBlock, config, theme }) => {
         enableCopy
       />
       <Text lineHeight="20px" className="preview-description">
-        Import SDK inside your application:
+        {t("NPMCodeImportStep")}
       </Text>
       <Textarea
         value="import SDK from '@onlyoffice/docspace-sdk-js';"
@@ -83,8 +82,7 @@ export const CodeToInsert = ({ t, codeBlock, config, theme }) => {
         enableCopy
       />
       <Text lineHeight="20px" className="preview-description">
-        Create HTML element with id from config and insert it inside document
-        body for place SDK frame:
+        {t("NPMCodeCreateStep")}
       </Text>
       <Textarea
         value={`const container = document.createElement('div');
@@ -95,7 +93,7 @@ export const CodeToInsert = ({ t, codeBlock, config, theme }) => {
         enableCopy
       />
       <Text lineHeight="20px" className="preview-description">
-        Initialize SDK:
+        {t("NPMCodeInitStep")}
       </Text>
       <Textarea
         value="const sdk = new SDK();"
@@ -104,11 +102,21 @@ export const CodeToInsert = ({ t, codeBlock, config, theme }) => {
         enableCopy
       />
       <Text lineHeight="20px" className="preview-description">
-        Create frame with following config:
+        {t("NPMCodeConfigStep")}
       </Text>
       <Textarea
-        value={`sdk.init({${JSON.stringify(config)}})`}
+        value={JSON.stringify(config)}
         heightTextArea={118}
+        isReadOnly
+        enableCopy
+        isJSONField
+      />
+      <Text lineHeight="20px" className="preview-description">
+        {t("NPMCodeUsageStep")}
+      </Text>
+      <Textarea
+        value="sdk.init(config);"
+        heightTextArea={32}
         isReadOnly
         enableCopy
       />

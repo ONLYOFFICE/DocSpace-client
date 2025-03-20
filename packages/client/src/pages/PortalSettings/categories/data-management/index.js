@@ -135,10 +135,13 @@ const DataManagementWrapper = (props) => {
     const { socketSubscribers } = SocketHelper;
 
     if (!socketSubscribers.has("backup")) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: "backup",
-      });
-      if (standalone) {
+      if (!isManagement()) {
+        SocketHelper.emit(SocketCommands.Subscribe, {
+          roomParts: "backup",
+        });
+      }
+
+      if (standalone && isManagement()) {
         SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
           roomParts: "backup",
         });
@@ -147,11 +150,14 @@ const DataManagementWrapper = (props) => {
 
     return () => {
       SocketHelper.off(SocketEvents.BackupProgress);
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
-        roomParts: "backup",
-      });
 
-      if (standalone) {
+      if (!isManagement()) {
+        SocketHelper.emit(SocketCommands.Unsubscribe, {
+          roomParts: "backup",
+        });
+      }
+
+      if (standalone && isManagement()) {
         SocketHelper?.emit(SocketCommands.UnsubscribeInSpaces, {
           roomParts: "backup",
         });

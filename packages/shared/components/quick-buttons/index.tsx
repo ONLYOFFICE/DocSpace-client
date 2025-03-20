@@ -110,6 +110,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     tabletViewQuickButton;
 
   const isAvailableLockFile =
+    !isPublicRoom &&
     !folderCategory &&
     fileExst &&
     displayBadges &&

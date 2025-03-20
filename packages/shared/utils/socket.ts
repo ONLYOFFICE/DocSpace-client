@@ -73,6 +73,7 @@ export const enum SocketEvents {
   DeleteGuest = "s:delete-guest",
   BackupProgress = "s:backup-progress",
   RestoreProgress = "s:restore-progress",
+  EncryptionProgress = "s:encryption-progress",
   ChangeMyType = "s:change-my-type",
 }
 
@@ -246,6 +247,10 @@ export type TListenEventCallbackMap = {
   [SocketEvents.RestoreProgress]: (opt: {
     progress: number;
     isCompleted: boolean;
+    error: string;
+  }) => void;
+  [SocketEvents.EncryptionProgress]: (opt: {
+    percentage: number;
     error: string;
   }) => void;
   [SocketEvents.ChangeMyType]: (data: {

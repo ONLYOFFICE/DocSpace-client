@@ -25,12 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { RowContainer } from "@docspace/shared/components/rows";
-import SpacesRoomRow from "./SpacesRoomRow";
 import styled from "styled-components";
+
+import { RowContainer } from "@docspace/shared/components/rows";
+import { desktop, injectDefaultTheme } from "@docspace/shared/utils";
+
 import { TPortals } from "SRC_DIR/types/spaces";
 
-import { desktop, injectDefaultTheme } from "@docspace/shared/utils";
+import SpacesRoomRow from "./SpacesRoomRow";
 
 const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
   @media ${desktop} {

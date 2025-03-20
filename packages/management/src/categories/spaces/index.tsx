@@ -29,6 +29,9 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 
+import { useStore } from "SRC_DIR/store";
+import { setDocumentTitle } from "SRC_DIR/utils";
+
 import MultipleSpaces from "./sub-components/MultipleSpaces";
 import ConfigurationSection from "./sub-components/ConfigurationSection";
 import ChangeDomainDialog from "./sub-components/dialogs/ChangeDomainDialog";
@@ -36,9 +39,6 @@ import CreatePortalDialog from "./sub-components/dialogs/CreatePortalDialog";
 import DeletePortalDialog from "./sub-components/dialogs/DeletePortalDialog";
 import { SpacesLoader } from "./sub-components/SpacesLoader";
 import { SpaceContainer } from "./StyledSpaces";
-
-import { useStore } from "SRC_DIR/store";
-import { setDocumentTitle } from "SRC_DIR/utils";
 
 const Spaces = () => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
@@ -63,13 +63,15 @@ const Spaces = () => {
 
   return (
     <SpaceContainer>
-      {deletePortalDialogVisible && (
+      {deletePortalDialogVisible ? (
         <DeletePortalDialog key="delete-portal-dialog" />
-      )}
-      {domainDialogVisible && <ChangeDomainDialog key="change-domain-dialog" />}
-      {createPortalDialogVisible && (
+      ) : null}
+      {domainDialogVisible ? (
+        <ChangeDomainDialog key="change-domain-dialog" />
+      ) : null}
+      {createPortalDialogVisible ? (
         <CreatePortalDialog key="create-portal-dialog" />
-      )}
+      ) : null}
       <div className="spaces-header">
         <Text fontSize="12px" fontWeight={400}>
           {t("Subheader")}

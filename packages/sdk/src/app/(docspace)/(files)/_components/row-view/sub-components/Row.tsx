@@ -84,6 +84,15 @@ const Row = observer(
       />
     );
 
+    const onContextClick = (isRightMouseButtonClick?: boolean) => {
+      if (isRightMouseButtonClick && filesSelectionStore.selection.length) {
+        return;
+      }
+
+      filesSelectionStore.setSelection([]);
+      filesSelectionStore.setBufferSelection(item);
+    };
+
     const contextMenuModel = getContextMenuModel(true);
 
     const isChecked = filesSelectionStore.isCheckedItem(item);
@@ -122,6 +131,7 @@ const Row = observer(
             withAccess={false}
             className={`${!isInit ? "row-list-item " : ""} files-row`}
             onSelect={() => filesSelectionStore.addSelection(item)}
+            onContextClick={onContextClick}
             element={element}
             contextOptions={contextMenuModel}
             getContextModel={getContextMenuModel}

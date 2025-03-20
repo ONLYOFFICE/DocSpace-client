@@ -37,13 +37,13 @@ import type {
 
 import { useFilesSettingsStore } from "@/app/(docspace)/_store/FilesSettingsStore";
 import { useDownloadDialogStore } from "@/app/(docspace)/_store/DownloadDialogStore";
-import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
 import { getDownloadPasswordError } from "@/app/(docspace)/_utils/getDownloadPasswordError";
 import useItemIcon, {
   type TItemIconSizes,
 } from "@/app/(docspace)/_hooks/useItemIcon";
+import useDownloadFiles from "@/app/(docspace)/_hooks/useDownloadFiles";
 
 export const useDownloadDialogData = () => {
   const { filesSettings } = useFilesSettingsStore();
@@ -60,7 +60,7 @@ export const useDownloadDialogData = () => {
     discardDownloadedFile,
     handlePasswordError,
   } = useDownloadDialogStore();
-  const { downloadItems: downloadFiles } = useDownloadActions();
+  const { downloadFiles } = useDownloadFiles();
   const { openDialog } = useDialogsStore();
   const { getIcon: getIconFromHook } = useItemIcon({
     filesSettings: filesSettings || undefined,
@@ -82,6 +82,7 @@ export const useDownloadDialogData = () => {
         if (passwordError) {
           handlePasswordError(fileConvertIds, passwordError, translations);
           openDialog(SDKDialogs.DownloadDialog);
+          return;
         }
 
         return toastr.error(error as TData, undefined, 0, true);

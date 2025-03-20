@@ -27,107 +27,30 @@
  */
 
 import { useCallback } from "react";
-import { useTranslation } from "react-i18next";
-
-import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
-import type { TOperation } from "@docspace/shared/api/files/types";
-import { TData, toastr } from "@docspace/shared/components/toast";
-import { downloadFiles } from "@docspace/shared/api/files";
 import { openUrl } from "@docspace/shared/utils/common";
 import { UrlActionType } from "@docspace/shared/enums";
-import type {
-  TDownloadedFile,
-  TFileConvertId,
-  TSortedFiles,
-} from "@docspace/shared/dialogs/download-dialog/DownloadDialog.types";
 
 import useSDK from "@/hooks/useSDK";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
-import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
-import type { TFileItem, TFolderItem } from "./useItemList";
-import useFileType from "./useFileType";
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
 import { useDownloadDialogStore } from "@/app/(docspace)/_store/DownloadDialogStore";
 import { SDKDialogs } from "@/app/(docspace)/_enums/dialogs";
-import { getDownloadPasswordError } from "@/app/(docspace)/_utils/getDownloadPasswordError";
+
+import type { TFileItem, TFolderItem } from "./useItemList";
+import useFileType from "./useFileType";
+import useDownloadFiles from "./useDownloadFiles";
 
 export default function useDownloadActions() {
   const { sdkConfig } = useSDK();
-  const { selection, bufferSelection } = useFilesSelectionStore();
-  const { shareKey } = useSettingsStore();
+  const { selection, bufferSelection, getSortedFilesFromSelection } =
+    useFilesSelectionStore();
+
   const { openDialog } = useDialogsStore();
   const { setSortedFiles } = useDownloadDialogStore();
   const { isDocument, isMasterForm, isPresentation, isSpreadsheet } =
     useFileType();
-  const { t } = useTranslation("Common");
-
-  const loopFilesOperations = useCallback(
-    async (data?: TOperation) => {
-      if (!data) return;
-
-      let operationItem: TOperation | undefined = data;
-      let finished = data.finished;
-
-      while (!finished) {
-        const item = await getOperationProgress(
-          data.id,
-          t("Common:UnexpectedError"),
-        );
-        operationItem = item;
-
-        finished = item ? item.finished : true;
-      }
-
-      return operationItem;
-    },
-    [t],
-  );
-
-  const downloadItems = useCallback(
-    async (fileIds: number[] | TFileConvertId[], folderIds: number[]) => {
-      try {
-        const operations = await downloadFiles(fileIds, folderIds, shareKey);
-        const operation = operations?.[operations.length - 1];
-
-        if (!operation) {
-          return Promise.reject();
-        }
-
-        if (operation.error) {
-          throw new Error(operation.error);
-        }
-
-        const completedOperation =
-          operation.finished && operation.url
-            ? operation
-            : await loopFilesOperations(operation);
-
-        if (completedOperation?.url) {
-          openUrl({
-            url: completedOperation.url,
-            action: UrlActionType.Download,
-            replace: true,
-            isFrame: true,
-            frameConfig: sdkConfig,
-          });
-        } else {
-          toastr.error(t("Common:ArchivingData"), undefined, 0, true);
-        }
-      } catch (error) {
-        const passwordError = getDownloadPasswordError(
-          error as Error | TOperation,
-        );
-
-        if (passwordError) {
-          throw new Error(passwordError);
-        }
-
-        toastr.error(error as TData, undefined, 0, true);
-      }
-    },
-    [loopFilesOperations, sdkConfig, shareKey, t],
-  );
+  const { downloadFiles } = useDownloadFiles();
 
   const downloadFromSelection = useCallback(() => {
     const fileIds: number[] = [];
@@ -149,8 +72,8 @@ export default function useDownloadActions() {
       }
     });
 
-    downloadItems(fileIds, folderIds);
-  }, [bufferSelection, selection, downloadItems]);
+    downloadFiles(fileIds, folderIds);
+  }, [bufferSelection, selection, downloadFiles]);
 
   const downloadAction = useCallback(
     (item?: TFileItem | TFolderItem) => {
@@ -159,7 +82,7 @@ export default function useDownloadActions() {
       }
 
       if (item.isFolder) {
-        return downloadItems([], [item.id]);
+        return downloadFiles([], [item.id]);
       }
 
       return openUrl({
@@ -169,65 +92,28 @@ export default function useDownloadActions() {
         frameConfig: sdkConfig,
       });
     },
-    [downloadFromSelection, downloadItems, sdkConfig],
+    [downloadFromSelection, downloadFiles, sdkConfig],
   );
 
-  const getSortedFilesFromSelection = useCallback(() => {
-    const newSortedFiles: TSortedFiles = {
-      documents: [],
-      spreadsheets: [],
-      presentations: [],
-      masterForms: [],
-      other: [],
-    };
-
-    let data = selection.length
-      ? selection
-      : bufferSelection
-        ? [bufferSelection]
-        : [];
-
-    data = JSON.parse(JSON.stringify(data));
-
-    data.forEach((item: TDownloadedFile) => {
-      item.checked = true;
-      item.format = null;
-
-      if (
-        "fileExst" in item &&
-        item.fileExst &&
-        item.viewAccessibility?.CanConvert
-      ) {
-        if (isSpreadsheet(item.fileExst)) {
-          newSortedFiles.spreadsheets.push(item);
-        } else if (isPresentation(item.fileExst)) {
-          newSortedFiles.presentations.push(item);
-        } else if (isMasterForm(item.fileExst)) {
-          newSortedFiles.masterForms.push(item);
-        } else if (isDocument(item.fileExst)) {
-          newSortedFiles.documents.push(item);
-        } else {
-          newSortedFiles.other.push(item);
-        }
-      } else {
-        newSortedFiles.other.push(item);
-      }
-    });
-
-    return newSortedFiles;
+  const downloadAsAction = useCallback(() => {
+    setSortedFiles(
+      getSortedFilesFromSelection(
+        isDocument,
+        isSpreadsheet,
+        isPresentation,
+        isMasterForm,
+      ),
+    );
+    openDialog(SDKDialogs.DownloadDialog);
   }, [
-    bufferSelection,
+    getSortedFilesFromSelection,
     isDocument,
     isMasterForm,
     isPresentation,
     isSpreadsheet,
-    selection,
+    openDialog,
+    setSortedFiles,
   ]);
 
-  const downloadAsAction = useCallback(() => {
-    setSortedFiles(getSortedFilesFromSelection());
-    openDialog(SDKDialogs.DownloadDialog);
-  }, [getSortedFilesFromSelection, openDialog, setSortedFiles]);
-
-  return { downloadAction, downloadAsAction, downloadItems };
+  return { downloadAction, downloadAsAction };
 }

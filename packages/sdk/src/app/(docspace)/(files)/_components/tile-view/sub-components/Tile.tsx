@@ -70,7 +70,13 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const theme = useTheme();
   const { filesSettings } = useFilesSettingsStore();
   const { currentDeviceType } = useSettingsStore();
-  const { isCheckedItem, addSelection } = useFilesSelectionStore();
+  const {
+    isCheckedItem,
+    addSelection,
+    selection,
+    setSelection,
+    setBufferSelection,
+  } = useFilesSelectionStore();
 
   const { openFile } = useFilesActions({ t });
   const { openFolder } = useFolderActions({ t });
@@ -95,6 +101,15 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
     e.preventDefault();
 
     item.isFolder ? openFolder(item.id, item.title) : openFile(item);
+  };
+
+  const tileContextClick = (isRightMouseButtonClick?: boolean) => {
+    if (isRightMouseButtonClick && selection.length) {
+      return;
+    }
+
+    setSelection([]);
+    setBufferSelection(item);
   };
 
   const contextMenuModel = getContextMenuModel(true);
@@ -149,6 +164,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
 
     onSelect: () => addSelection(item),
     getContextModel: getContextMenuModel,
+    tileContextClick,
     element,
     badges: badgesComponent,
     children: tileContent,

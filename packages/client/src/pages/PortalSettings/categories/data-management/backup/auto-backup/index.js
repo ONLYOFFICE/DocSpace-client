@@ -432,7 +432,7 @@ class AutomaticBackup extends React.PureComponent {
   deleteSchedule = () => {
     const { t, deleteSchedule, setErrorInformation } = this.props;
     this.setState({ isLoadingData: true }, () => {
-      deleteBackupSchedule()
+      deleteBackupSchedule(isManagement())
         .then(() => {
           deleteSchedule(this.weekdaysLabelArray);
           toastr.success(t("SuccessfullySaveSettingsMessage"));

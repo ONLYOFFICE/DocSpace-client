@@ -51,6 +51,7 @@ import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
 import { StyledBackupList } from "../../../StyledBackup";
 import BackupListBody from "./BackupListBody";
+import { isManagement } from "@docspace/shared/utils/common";
 
 const StyledFooterContent = styled.div`
   width: 100%;
@@ -94,7 +95,7 @@ const BackupListModalDialog = (props) => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    getBackupHistory()
+    getBackupHistory(isManagement())
       .then((filesList) =>
         setState((val) => ({ ...val, filesList, isLoading: false })),
       )
@@ -116,8 +117,8 @@ const BackupListModalDialog = (props) => {
 
   const onCleanBackupList = () => {
     setState((val) => ({ ...val, isLoading: true }));
-    deleteBackupHistory()
-      .then(() => getBackupHistory())
+    deleteBackupHistory(isManagement())
+      .then(() => getBackupHistory(isManagement()))
       .then((filesList) =>
         setState((val) => ({ ...val, filesList, isLoading: false })),
       )
@@ -131,7 +132,7 @@ const BackupListModalDialog = (props) => {
 
     setState((val) => ({ ...val, isLoading: true }));
     deleteBackup(backupId)
-      .then(() => getBackupHistory())
+      .then(() => getBackupHistory(isManagement()))
       .then((filesList) =>
         setState((val) => ({
           ...val,

@@ -41,6 +41,7 @@ import {
   removeLocalStorage,
 } from "../pages/PortalSettings/utils";
 import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils";
+import { isManagement } from "@docspace/shared/utils/common";
 
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 
@@ -546,7 +547,7 @@ class BackupStore {
 
   getProgress = async (t) => {
     try {
-      const response = await getBackupProgress();
+      const response = await getBackupProgress(isManagement());
 
       if (response) {
         const { progress, link, error } = response;

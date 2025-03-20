@@ -131,8 +131,8 @@ const StyledInviteUserBody = styled.div`
 `;
 
 const StyledSubHeader = styled(Heading)`
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 700 !important;
+  font-size: 16px !important;
   margin: 16px 0 8px;
 
   ${(props) =>
@@ -249,7 +249,6 @@ const StyledInviteInput = styled.div`
 `;
 
 const StyledEditInput = styled(TextInput)`
-  width: 100%;
   height: 32px;
 `;
 
@@ -411,9 +410,9 @@ const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
 `;
 
 const StyledEditButton = styled(Button)`
-  width: 32px;
-  height: 32px;
-  padding: 0px;
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0px !important;
 `;
 
 const iconStyles = css`

@@ -24,9 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { observer } from "mobx-react";
-
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import DuplicateIconUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
@@ -87,67 +84,65 @@ const getIcon = (icon: string): string => {
   }
 };
 
-const ProgressList = observer(
-  ({
-    secondaryOperations,
-    primaryOperations,
-    clearSecondaryProgressData,
-    clearPrimaryProgressData,
-    onCancel,
-    onOpenPanel,
-  }: ProgressListProps) => {
-    const onOpenPanelOperation = (item: Operation) => {
-      if (!item.showPanel) return;
+const ProgressList = ({
+  secondaryOperations,
+  primaryOperations,
+  clearSecondaryProgressData,
+  clearPrimaryProgressData,
+  onCancel,
+  onOpenPanel,
+}: ProgressListProps) => {
+  const onOpenPanelOperation = (item: Operation) => {
+    if (!item.showPanel) return;
 
-      item.showPanel(true);
-      onOpenPanel();
-    };
+    item.showPanel(true);
+    onOpenPanel();
+  };
 
-    return (
-      <div className="progress-container">
-        {secondaryOperations?.map((item) => (
-          <div
-            key={`${item.operation}-${item.items?.[0]?.operationId ?? ""}-${item.completed}`}
-            className="progress-list"
-          >
-            <ProgressBar
-              completed={item.completed}
-              label={item.label}
-              alert={item.alert}
-              open
-              iconUrl={getIcon(item.operation)}
-              onClickAction={() => {}}
-              withoutProgress
-              onClearProgress={clearSecondaryProgressData}
-              operation={item.operation}
-            />
-          </div>
-        ))}
-        {primaryOperations?.map((item) => (
-          <div
-            key={`${item.operation}`}
-            className={`progress-list ${item.showPanel ? "withHover" : ""}`}
-          >
-            <ProgressBar
-              completed={item.completed}
-              label={item.label}
-              alert={item.alert}
-              percent={item.percent}
-              open
-              iconUrl={getIcon(item.operation)}
-              onClickAction={() => {}}
-              onClearProgress={clearPrimaryProgressData}
-              operation={item.operation}
-              onCancel={onCancel}
-              onOpenPanel={() => onOpenPanelOperation(item)}
-              withoutStatus={item.withoutStatus}
-              withoutProgress={item.withoutProgress}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  },
-);
+  return (
+    <div className="progress-container">
+      {secondaryOperations?.map((item) => (
+        <div
+          key={`${item.operation}-${item.items?.[0]?.operationId ?? ""}-${item.completed}`}
+          className="progress-list"
+        >
+          <ProgressBar
+            completed={item.completed}
+            label={item.label}
+            alert={item.alert}
+            open
+            iconUrl={getIcon(item.operation)}
+            onClickAction={() => {}}
+            withoutProgress
+            onClearProgress={clearSecondaryProgressData}
+            operation={item.operation}
+          />
+        </div>
+      ))}
+      {primaryOperations?.map((item) => (
+        <div
+          key={`${item.operation}`}
+          className={`progress-list ${item.showPanel ? "withHover" : ""}`}
+        >
+          <ProgressBar
+            completed={item.completed}
+            label={item.label}
+            alert={item.alert}
+            percent={item.percent}
+            open
+            iconUrl={getIcon(item.operation)}
+            onClickAction={() => {}}
+            onClearProgress={clearPrimaryProgressData}
+            operation={item.operation}
+            onCancel={onCancel}
+            onOpenPanel={() => onOpenPanelOperation(item)}
+            withoutStatus={item.withoutStatus}
+            withoutProgress={item.withoutProgress}
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default ProgressList;

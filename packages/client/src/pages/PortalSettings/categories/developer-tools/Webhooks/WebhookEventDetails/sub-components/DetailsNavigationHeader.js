@@ -100,13 +100,15 @@ const HeaderContainer = styled.div`
 `;
 
 const DetailsNavigationHeader = () => {
-  const { eventId } = useParams();
+  const { id, eventId } = useParams();
 
   const { t } = useTranslation(["Webhooks", "Common"]);
   const navigate = useNavigate();
+
   const onBack = () => {
-    navigate(-1);
+    navigate(`/developer-tools/webhooks/${id}`);
   };
+
   const handleRetryEvent = async () => {
     await retryWebhook(eventId);
     toastr.success(t("WebhookRedilivered"), <b>{t("Common:Done")}</b>);

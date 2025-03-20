@@ -160,11 +160,13 @@ const WebhooksTableRow = (props) => {
         </TableCell>
         {isAdmin ? (
           <TableCell>
-            <Avatar
-              source={avatarSource}
-              className="author-avatar-cell"
-              role="user"
-            />
+            {webhook.createdBy?.hasAvatar ? (
+              <Avatar
+                source={avatarSource}
+                className="author-avatar-cell"
+                role="user"
+              />
+            ) : null}
             <Text
               fontSize="12px"
               fontWeight={600}

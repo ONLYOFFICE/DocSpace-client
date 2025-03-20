@@ -24,19 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  thirdPartyProvider as thirdPartyProviderHandler,
-  successThirdpartyProviders,
-} from "./thirdPartyProviders";
+/* eslint-disable @next/next/no-img-element */
 
-export { self as selfHandler, successSelf } from "./self";
+"use client";
 
-export {
-  PATH as SELF_PATH,
-  PATH_CHANGE_AUTH_DATA as SELF_PATH_CHANGE_AUTH_DATA,
-  PATH_ACTIVATION_STATUS as SELF_PATH_ACTIVATION_STATUS,
-  PATH_UPDATE_USER as SELF_PATH_UPDATE_USER,
-  PATH_DELETE_USER as SELF_PATH_DELETE_USER,
-  PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
-  PATH_ADD_GUEST,
-} from "./self";
+import { Trans, useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
+
+import { Text } from "@docspace/shared/components/text";
+import { getLogoUrl } from "@docspace/shared/utils";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
+
+import { DEFAULT_GUEST_TEXT } from "@/utils/constants";
+import { GreetingContainer } from "./GreetingCreateUserContainer/GreetingCreateUserContainer.styled";
+
+type GreetingGuestContainerProps = {
+  firstName?: string;
+  displayName?: string;
+  culture?: string;
+};
+
+export const GreetingGuestContainer = ({
+  displayName,
+  culture,
+}: GreetingGuestContainerProps) => {
+  const { t } = useTranslation(["Common"]);
+  const theme = useTheme();
+
+  const logoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    !theme.isBase,
+    false,
+    culture,
+  );
+
+  return (
+    <GreetingContainer>
+      <img src={logoUrl} className="portal-logo guest" alt="greeting-logo" />
+      <div className="tooltip guest">
+        <Text fontSize="16px">
+          <Trans
+            t={t}
+            i18nKey="GuestInvitation"
+            ns="Common"
+            defaults={DEFAULT_GUEST_TEXT}
+            values={{
+              displayName,
+            }}
+            components={{
+              1: <Text fontWeight={600} as="strong" fontSize="16px" />,
+            }}
+          />
+        </Text>
+      </div>
+    </GreetingContainer>
+  );
+};

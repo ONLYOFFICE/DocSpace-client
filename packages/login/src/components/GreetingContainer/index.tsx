@@ -28,3 +28,4 @@ export { GreetingCreateUserContainer } from "./GreetingCreateUserContainer";
 export { GreetingLoginContainer } from "./GreetingLoginContainer";
 export { GreetingContainer } from "./GreetingContainer";
 export { GreetingUserContainer } from "./GreetingUserContainer";
+export { GreetingGuestContainer } from "./GreetingGuestContainer";

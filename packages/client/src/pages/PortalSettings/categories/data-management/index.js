@@ -58,6 +58,7 @@ const DataManagementWrapper = (props) => {
 
     isNotPaidPeriod,
     currentDeviceType,
+    standalone,
   } = props;
 
   const navigate = useNavigate();
@@ -137,6 +138,11 @@ const DataManagementWrapper = (props) => {
       SocketHelper.emit(SocketCommands.Subscribe, {
         roomParts: "backup",
       });
+      if (standalone) {
+        SocketHelper?.emit(SocketCommands.SubscribeInSpaces, {
+          roomParts: "backup",
+        });
+      }
     }
 
     return () => {
@@ -144,6 +150,12 @@ const DataManagementWrapper = (props) => {
       SocketHelper.emit(SocketCommands.Unsubscribe, {
         roomParts: "backup",
       });
+
+      if (standalone) {
+        SocketHelper?.emit(SocketCommands.UnsubscribeInSpaces, {
+          roomParts: "backup",
+        });
+      }
     };
   }, []);
 
@@ -182,6 +194,7 @@ export const Component = inject(
 
       currentColorScheme,
       currentDeviceType,
+      standalone,
     } = settingsStore;
 
     const buttonSize =
@@ -196,6 +209,7 @@ export const Component = inject(
       isNotPaidPeriod,
       currentColorScheme,
       currentDeviceType,
+      standalone,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(DataManagementWrapper)));

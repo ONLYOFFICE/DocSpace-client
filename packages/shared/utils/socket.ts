@@ -87,6 +87,8 @@ export const enum SocketCommands {
   Unsubscribe = "unsubscribe",
   RefreshFolder = "refresh-folder",
   RestoreBackup = "restore-backup",
+  SubscribeInSpaces = "subscribeInSpaces",
+  UnsubscribeInSpaces = "unsubscribeInSpaces",
 }
 
 /**
@@ -140,6 +142,8 @@ export type TSubscribeEmitData = {
 export type TEmitEventsDataMap = {
   [SocketCommands.Subscribe]: TSubscribeEmitData;
   [SocketCommands.Unsubscribe]: TSubscribeEmitData;
+  [SocketCommands.SubscribeInSpaces]: TSubscribeEmitData;
+  [SocketCommands.UnsubscribeInSpaces]: TSubscribeEmitData;
   [SocketCommands.RefreshFolder]: string;
   [SocketCommands.RestoreBackup]: never;
 };
@@ -305,7 +309,9 @@ const isEmitDataValid = (
 ) => {
   if (
     command !== SocketCommands.Subscribe &&
-    command !== SocketCommands.Unsubscribe
+    command !== SocketCommands.Unsubscribe &&
+    command !== SocketCommands.SubscribeInSpaces &&
+    command !== SocketCommands.UnsubscribeInSpaces
   ) {
     return true;
   }

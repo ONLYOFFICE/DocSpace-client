@@ -138,6 +138,10 @@ const Shell = ({ page = "home", ...rest }) => {
 
   useEffect(() => {
     SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "storage-encryption",
+    });
+
+    SocketHelper.emit(SocketCommands.Subscribe, {
       roomParts: "restore",
     });
 

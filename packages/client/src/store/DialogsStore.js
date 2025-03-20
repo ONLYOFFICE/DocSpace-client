@@ -884,7 +884,7 @@ class DialogsStore {
     this.covers = covers;
   };
 
-  setguidAnimationVisible = (animation) => {
+  setGuidAnimationVisible = (animation) => {
     this.guidAnimationVisible = animation;
   };
 

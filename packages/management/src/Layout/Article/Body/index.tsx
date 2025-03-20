@@ -58,7 +58,7 @@ const ArticleBodyContent = () => {
     setIsBurgerLoading(false);
   }, []);
 
-  const onClickItem = (item: TSettingsTreeItem, e: React.MouseEvent) => {
+  const onClickItem = (item: TSettingsTreeItem) => {
     setSelectedKey(item?.key[0]);
 
     if (isMobileOnly || isMobile()) {
@@ -69,7 +69,7 @@ const ArticleBodyContent = () => {
   const catalogItems = () => {
     const items: Array<React.ReactNode> = [];
 
-    let resultTree = settingsTree.filter((item) => item?.isArticle);
+    const resultTree = settingsTree.filter((item) => item?.isArticle);
 
     const deletionTKey = isCommunity ? "Common:PaymentsTitle" : "Common:Bonus";
 
@@ -86,11 +86,11 @@ const ArticleBodyContent = () => {
           key={item.key}
           id={item.key}
           icon={item.icon}
-          showText={true}
+          showText
           text={t(item.tKey)}
           value={item.link}
           isActive={itemKey === selectedKey}
-          onClick={(e) => onClickItem(item, e)}
+          onClick={() => onClickItem(item)}
           folderId={item.id}
           $currentColorScheme={currentColorScheme}
           linkData={{ path: item.link, state: {} }}
@@ -103,7 +103,7 @@ const ArticleBodyContent = () => {
 
   const items = catalogItems();
 
-  return <>{items}</>;
+  return items;
 };
 
 export default observer(ArticleBodyContent);

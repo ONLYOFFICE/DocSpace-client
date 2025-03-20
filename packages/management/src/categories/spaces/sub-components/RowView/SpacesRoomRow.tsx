@@ -39,12 +39,13 @@ import { ReactSVG } from "react-svg";
 
 import { Row } from "@docspace/shared/components/rows";
 import { toastr } from "@docspace/shared/components/toast";
-import { RoomContent } from "./RoomContent";
 
 import ChangeStorageQuotaDialog from "client/ChangeStorageQuotaDialog";
 
 import { TPortals } from "SRC_DIR/types/spaces";
 import { useStore } from "SRC_DIR/store";
+
+import { RoomContent } from "./RoomContent";
 
 const StyledRoomRow = styled(Row)`
   padding: 4px 0;

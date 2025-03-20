@@ -371,7 +371,7 @@ const Item = ({
 
   const editBody = (
     <>
-      <StyledEditInput value={inputValue} onChange={changeValue} />
+      <StyledEditInput value={inputValue} onChange={changeValue} scale />
       <StyledEditButton
         icon={okIcon}
         onClick={saveEdit}

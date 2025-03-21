@@ -88,9 +88,7 @@ import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
 import ReorderIndexDialog from "../dialogs/ReorderIndexDialog";
 import LifetimeDialog from "../dialogs/LifetimeDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
-// import { FillPDFDialog } from "../dialogs/FillPDFDialog";
-// import { ShareCollectSelector } from "../ShareCollectSelector";
-
+import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
 import FillingStatusPanel from "../panels/FillingStatusPanel";
@@ -145,8 +143,7 @@ const Panels = (props) => {
     shareFolderDialogVisible,
     selectFileFormRoomOpenRoot,
     reorderDialogVisible,
-    //  fillPDFDialogData,
-    // shareCollectSelector,
+    fillPDFDialogData,
     createRoomTemplateDialogVisible,
     templateAccessSettingsVisible,
 
@@ -370,15 +367,9 @@ const Panels = (props) => {
     sharePDFForm.visible && (
       <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
     ),
-    // fillPDFDialogData.visible && (
-    //   <FillPDFDialog key="fill-pdf-form-dialog" {...fillPDFDialogData} />
-    // ),
-    // shareCollectSelector.visible && (
-    //   <ShareCollectSelector
-    //     key="share-collect-dialog"
-    //     {...shareCollectSelector}
-    //   />
-    // ),
+    fillPDFDialogData.visible && (
+      <FillPDFDialog key="fill-pdf-form-dialog" {...fillPDFDialogData} />
+    ),
     roomLogoCoverDialogVisible && (
       <RoomLogoCoverDialog key="room-logo-cover-dialog" />
     ),
@@ -485,8 +476,7 @@ export default inject(
       shareFolderDialogVisible,
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
-      // fillPDFDialogData,
-      // shareCollectSelector,
+      fillPDFDialogData,
       roomLogoCoverDialogVisible,
       createRoomTemplateDialogVisible,
       templateAccessSettingsVisible,
@@ -597,8 +587,7 @@ export default inject(
       shareFolderDialogVisible,
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
-      // fillPDFDialogData,
-      // shareCollectSelector,
+      fillPDFDialogData,
       roomLogoCoverDialogVisible,
       createRoomTemplateDialogVisible,
       templateAccessSettingsVisible,

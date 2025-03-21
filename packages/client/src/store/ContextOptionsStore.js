@@ -247,7 +247,20 @@ class ContextOptionsStore {
   };
 
   onClickLinkFillForm = (item) => {
-    return this.gotoDocEditor(item, false, null, false, item.isPDFForm);
+    const isFormRoom =
+      this.selectedFolderStore?.roomType === RoomsType.FormRoom ||
+      this.selectedFolderStore?.parentRoomType === FolderType.FormRoom;
+
+    if (
+      !item.startFilling &&
+      item.isPDFForm &&
+      !isFormRoom &&
+      !this.publicRoomStore.isPublicRoom &&
+      item?.security?.Copy
+    )
+      return this.dialogsStore.setFillPDFDialogData(true, item);
+
+    return this.gotoDocEditor(item, false, null, false, !isFormRoom);
   };
 
   onClickReconnectStorage = async (item, t) => {

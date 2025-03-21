@@ -113,7 +113,7 @@ const InfoPanelBodyContent = ({
     isVDR: selectedItems[0]?.roomType === RoomsType.VirtualDataRoom,
     isLockedSharedRoom,
     onOpenPanel: setIsShareFormData,
-    onlyOneLink: infoPanelSelection.isPDFForm,
+    onlyOneLink: infoPanelSelection?.isPDFForm,
   };
 
   const viewHelper = new ViewHelper({

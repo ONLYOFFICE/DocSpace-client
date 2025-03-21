@@ -28,7 +28,7 @@ import React, { useState } from "react";
 import { ShareFormDialog } from "@docspace/shared/dialogs/ShareFormDialog";
 import { inject, observer } from "mobx-react";
 import { ShareCollectSelector } from "SRC_DIR/components/ShareCollectSelector";
-import { useTranslation } from "react-i18next";
+
 import { RoomsType } from "@docspace/shared/enums";
 
 const ShareFormPanel = ({
@@ -40,7 +40,6 @@ const ShareFormPanel = ({
 }) => {
   const [isVisibleSelectFormRoomDialog, setIsVisibleSelectFormRoomDialog] =
     useState(false);
-  const { t } = useTranslation("Common");
 
   const onClose = () => {
     setIsShareFormData(false);
@@ -60,7 +59,6 @@ const ShareFormPanel = ({
   const onCloseSelectionFormRoom = () => {
     setIsVisibleSelectFormRoomDialog(false);
   };
-  console.log("ShareFormPanel");
 
   return (
     <ShareFormDialog
@@ -77,10 +75,9 @@ const ShareFormPanel = ({
             withoutBorder: false,
             onCloseClick: onClose,
             withoutBackButton: false,
-            headerLabel: t("Common:ShareAndCollect"),
             onBackClick: onCloseSelectionFormRoom,
           }}
-          onClose={onCloseSelectionFormRoom}
+          onCloseActionProp={onCloseSelectionFormRoom}
           createDefineRoomType={RoomsType.FormRoom}
         />
       }

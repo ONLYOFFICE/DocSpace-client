@@ -105,8 +105,8 @@ const ShareCollectSelector = inject<TStore>(
       setSelected,
       openFileAction,
       createDefineRoomType,
-      headerProps,
-      onClose,
+      headerProps = {},
+      onCloseActionProp,
     }: ShareCollectSelectorProps & InjectShareCollectSelectorProps) => {
       const { t } = useTranslation(["Common", "Editor"]);
       const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
@@ -117,12 +117,6 @@ const ShareCollectSelector = inject<TStore>(
         requestRunning.current = arg;
       };
 
-      // const onClose = () => {
-      //   if (requestRunning.current) return;
-
-      //   setShareCollectSelector(false);
-      // };
-
       const onCloseAction = () => {
         setIsMobileHidden(false);
 
@@ -132,6 +126,16 @@ const ShareCollectSelector = inject<TStore>(
       const onCloseAndDeselectAction = () => {
         setSelected("none");
         onCloseAction();
+      };
+
+      const onClose = () => {
+        if (onCloseActionProp) {
+          onCloseActionProp();
+          return;
+        }
+        if (requestRunning.current) return;
+
+        setShareCollectSelector(false);
       };
 
       const onSubmit = async (
@@ -251,7 +255,11 @@ const ShareCollectSelector = inject<TStore>(
           withoutBackButton={false}
           withCancelButton
           currentFolderId=""
-          headerProps={headerProps}
+          headerProps={{
+            headerLabel: t("Common:ShareAndCollect"),
+            onCloseClick: onClose,
+            ...headerProps,
+          }}
           rootFolderType={file.rootFolderType}
           createDefineRoomType={createDefineRoomType}
           isPanelVisible={visible ? !conflictResolveDialogVisible : false}

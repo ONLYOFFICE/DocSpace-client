@@ -57,6 +57,7 @@ import {
   TMigrationData,
   TSendWelcomeEmailData,
   TPortalCultures,
+  TEncryptionSettings,
 } from "./types";
 
 export async function getSettings(withPassword = false, headers = null) {
@@ -1303,4 +1304,32 @@ export function saveDeepLinkSettings(handlingMode: number) {
   };
 
   return request(options);
+}
+
+export function startEncryption(notifyUsers) {
+  const options = {
+    method: "post",
+    url: "/settings/encryption/start",
+    data: { notifyUsers },
+  };
+
+  return request(options);
+}
+
+export function getEncryptionProgress() {
+  const options = {
+    method: "get",
+    url: "/settings/encryption/progress",
+  };
+
+  return request(options);
+}
+
+export function getEncryptionSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/encryption/settings",
+  };
+
+  return request(options) as TEncryptionSettings;
 }

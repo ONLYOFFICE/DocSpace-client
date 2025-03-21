@@ -289,11 +289,10 @@ const Share = (props: ShareProps) => {
   };
 
   const changeAccessOption = async (item: AccessItem, link: TFileLink) => {
-    setLoadingLinks([...loadingLinks, link.sharedTo.id]);
-
-    const expDate = moment(link.sharedTo.expirationDate);
-
     const updateAccessLink = async () => {
+      const expDate = moment(link.sharedTo.expirationDate);
+      setLoadingLinks([...loadingLinks, link.sharedTo.id]);
+
       try {
         const res = editFileLink
           ? await editFileLink(

@@ -32,6 +32,7 @@ import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
 import { globalColors } from "../themes/globalColors";
+import { FileFillingFormStatus } from "../enums";
 
 export const LOADER_STYLE = Object.freeze({
   title: "",
@@ -145,6 +146,8 @@ export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";
 
 export const EDITOR_ID = "portal_editor";
 
+export const FILLING_STATUS_ID = "fillingStatusDialog" as const;
+
 export const MEDIA_VIEW_URL = "/media/view/";
 export const PUBLIC_MEDIA_VIEW_URL = "/rooms/share/media/view";
 
@@ -190,6 +193,15 @@ export const ALLOWED_PASSWORD_CHARACTERS =
   "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
 
 export const GENERAL_LINK_HEADER_KEY = "general-link_header";
+
+export const FILLING_FORM_STATUS_COLORS = Object.freeze({
+  [FileFillingFormStatus.None]: globalColors.mainRed,
+  [FileFillingFormStatus.Draft]: globalColors.mainRed,
+  [FileFillingFormStatus.YourTurn]: globalColors.lightBlueMain,
+  [FileFillingFormStatus.InProgress]: globalColors.gray,
+  [FileFillingFormStatus.Completed]: globalColors.mainGreen,
+  [FileFillingFormStatus.Stopped]: globalColors.mainRed,
+});
 
 export const OPERATIONS_NAME = Object.freeze({
   trash: "trash",

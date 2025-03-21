@@ -132,12 +132,13 @@ const Progress = ({
   percent,
   isAbortTransfer,
   noRooms,
+  noRoomFilesToMove,
   t,
 }) => {
   const inProgressNode = (
     <div className="in-progress">
       <Loader className="in-progress-loader" size="20px" type="track" />
-      <Text className="status">{t("DataReassignmentDialog:InProgress")}</Text>
+      <Text className="status">{t("Common:InProgress")}</Text>
     </div>
   );
 
@@ -201,9 +202,11 @@ const Progress = ({
               {t("Common:Rooms")}
             </Text>
           ) : null}
-          <Text className="progress-section-text" noSelect>
-            {t("Common:Documents")}
-          </Text>
+          {noRoomFilesToMove ? null : (
+            <Text className="progress-section-text" noSelect>
+              {t("Common:Documents")}
+            </Text>
+          )}
         </div>
 
         <div className="progress-status">
@@ -215,13 +218,15 @@ const Progress = ({
               : allDataTransferredNode
             : null}
 
-          {isAbortTransfer && percent !== percentAllReassignment
-            ? interruptedNode
-            : percent < percentRoomReassignment
-              ? pendingNode
-              : percent < percentFilesInRoomsReassignment
-                ? inProgressNode
-                : allDataTransferredNode}
+          {noRoomFilesToMove
+            ? null
+            : isAbortTransfer && percent !== percentAllReassignment
+              ? interruptedNode
+              : percent < percentRoomReassignment
+                ? pendingNode
+                : percent < percentFilesInRoomsReassignment
+                  ? inProgressNode
+                  : allDataTransferredNode}
         </div>
       </div>
 

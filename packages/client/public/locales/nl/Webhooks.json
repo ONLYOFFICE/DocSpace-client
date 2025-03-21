@@ -44,7 +44,6 @@
   "URL": "URL",
   "ViewRawPayload": "Ruwe payload bekijken",
   "WebhookCreated": "Webhook gemaakt",
-  "WebhookCreationHint": "Deze webhook wordt toegewezen aan alle gebeurtenissen in {{productName}}",
   "WebhookDetails": "Webhook details",
   "WebhookEditedSuccessfully": "Webhook configuratie succesvol bewerkt",
   "WebhookHistory": "Webhook geschiedenis",

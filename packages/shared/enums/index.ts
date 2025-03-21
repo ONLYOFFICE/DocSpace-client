@@ -337,6 +337,7 @@ export const enum FileStatus {
 export const enum TenantStatus {
   PortalDeactivate = 1,
   PortalRestore = 4,
+  EncryptionProcess = 6,
 }
 
 /**
@@ -659,12 +660,46 @@ export enum ValidationStatus {
   ExternalAccessDenied = 5,
 }
 
+export enum FileFillingFormStatus {
+  None = 0,
+  Draft = 1,
+  YourTurn = 2,
+  InProgress = 3,
+  Completed = 4,
+  Stopped = 5,
+}
+
+export enum RoleStatus {
+  Waiting = "waiting",
+  YourTurn = "yourTurn",
+  Filling = "filling",
+  Filled = "filled",
+  Stopped = "stopped",
+}
+
+export enum StartFillingMode {
+  None,
+  ShareToFillOut,
+  StartFilling,
+}
+
+export enum FormFillingManageAction {
+  Stop,
+  Resume,
+}
+
 export enum FormFillingTipsState {
   Starting = 1,
   Sharing = 2,
   Submitting = 3,
   Complete = 4,
   Uploading = 5,
+}
+
+export enum FillingFormStatusHistory {
+  OpenedAtDate = 0,
+  SubmissionDate = 1,
+  StopDate = 2,
 }
 
 export enum DeepLinkType {
@@ -689,4 +724,47 @@ export const enum SortByFieldName {
   RoomType = "roomType",
   LastOpened = "LastOpened",
   UsedSpace = "usedspace",
+}
+
+export enum EncryptionStatus {
+  Decrypted = 0,
+  EncryptionStarted = 1,
+  Encrypted = 2,
+  DecryptionStarted = 3,
+}
+
+/**
+ * Enum for webhook triggers
+ * @readonly
+ */
+export enum WebhookTriggers {
+  All = 0,
+  UserCreated = 1,
+  UserInvited = 2,
+  UserUpdated = 4,
+  UserDeleted = 8,
+  GroupCreated = 16,
+  GroupUpdated = 32,
+  GroupDeleted = 64,
+  FileCreated = 128,
+  FileUploaded = 256,
+  FileUpdated = 512,
+  FileTrashed = 1024,
+  FileDeleted = 2048,
+  FileRestored = 4096,
+  FileCopied = 8192,
+  FileMoved = 16384,
+  FolderCreated = 32768,
+  FolderUpdated = 65536,
+  FolderTrashed = 131072,
+  FolderDeleted = 262144,
+  FolderRestored = 524288,
+  FolderCopied = 1048576,
+  FolderMoved = 2097152,
+  RoomCreated = 4194304,
+  RoomUpdated = 8388608,
+  RoomArchived = 16777216,
+  RoomDeleted = 33554432,
+  RoomRestored = 67108864,
+  RoomCopied = 134217728,
 }

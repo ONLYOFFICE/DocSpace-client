@@ -90,11 +90,14 @@ const Body = ({
   withInfoBadge,
   setInputItemVisible,
   inputItemVisible,
+  injectedElement,
 
   isSSR,
 }: BodyProps) => {
   const infoBarRef = useRef<HTMLDivElement>(null);
+  const injectedElementRef = useRef<HTMLElement>(null);
   const [infoBarHeight, setInfoBarHeight] = useState(0);
+  const [injectedElementHeight, setInjectedElementHeight] = useState(0);
 
   const { withSearch } = React.useContext(SearchContext);
   const isSearch = React.useContext(SearchValueContext);
@@ -204,8 +207,18 @@ const Body = ({
       }
     }
   }, [withInfoBar, itemsCount]);
+  useLayoutEffect(() => {
+    if (injectedElement) {
+      const element = injectedElementRef.current;
 
-  let listHeight = bodyHeight - infoBarHeight;
+      if (element) {
+        const { height } = element.getBoundingClientRect();
+        setInjectedElementHeight(height);
+      }
+    }
+  }, [injectedElement, itemsCount]);
+
+  let listHeight = bodyHeight - infoBarHeight - injectedElementHeight;
 
   const showSearch = withSearch && (isSearch || itemsCount > 0);
   const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
@@ -258,6 +271,10 @@ const Body = ({
     >
       <InfoBar ref={infoBarRef} visible={itemsCount !== 0} />
       <BreadCrumbs visible={!isShareFormEmpty} />
+
+      {injectedElement
+        ? React.cloneElement(injectedElement, { ref: injectedElementRef })
+        : null}
 
       {withTabs && tabsData ? (
         <StyledTabs

@@ -43,10 +43,18 @@ export const GreetingContainer = styled.div`
 
   .portal-logo{
     padding-bottom: 40px;
+
+    &.guest {
+      padding-bottom: 20px;
+    }
   }
 
   .tooltip {
-  margin-bottom: 32px;
+    margin-bottom: 32px;
+  
+    &.guest {
+      margin-bottom: 40px;
+    }
 
     p {
       text-align: center;

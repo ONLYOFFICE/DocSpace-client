@@ -69,6 +69,7 @@ export const useEmptyView = (
     isArchiveFolderRoot,
     rootFolderType,
     isPublicRoom,
+    security,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -86,6 +87,7 @@ export const useEmptyView = (
       isRootEmptyPage,
       rootFolderType,
       isPublicRoom,
+      security,
     );
     const title = getTitle(
       type,

@@ -171,7 +171,10 @@ export default function withContent(WrappedContent) {
       singleContextMenuAction,
       multipleContextMenuAction,
       resetSelections,
+      activeUsers,
     } = usersStore;
+
+    const inProgress = activeUsers.some((user) => user.id === item.id);
 
     return {
       theme,
@@ -190,6 +193,7 @@ export default function withContent(WrappedContent) {
       multipleContextMenuAction,
       resetSelections,
       openGroupAction,
+      inProgress,
     };
   })(observer(WithContent));
 }

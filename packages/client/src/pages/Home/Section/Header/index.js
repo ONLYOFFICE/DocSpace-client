@@ -166,9 +166,10 @@ const SectionHeaderContent = (props) => {
     setCloseEditIndexDialogVisible,
     rootFolderId,
     guidAnimationVisible,
-    setguidAnimationVisible,
+    setGuidAnimationVisible,
     setRefMap,
     deleteRefMap,
+    isPersonalReadOnly,
   } = props;
 
   const location = useLocation();
@@ -241,12 +242,12 @@ const SectionHeaderContent = (props) => {
 
     const removeTimer = setTimeout(() => {
       setAnimationClasses([]);
+      setGuidAnimationVisible(false);
     }, 3000);
 
     return () => {
       clearTimeout(beforeTimer);
       clearTimeout(removeTimer);
-      setguidAnimationVisible(false);
     };
   };
 
@@ -573,6 +574,20 @@ const SectionHeaderContent = (props) => {
 
   const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
 
+  const warningText = isRecycleBinFolder
+    ? t("TrashErasureWarning")
+    : isPersonalReadOnly
+      ? t("PersonalFolderErasureWarning")
+      : "";
+
+  const isContextButtonVisible = () => {
+    if (isPersonalReadOnly) {
+      return isRootFolder;
+    }
+
+    return (isRecycleBinFolder && !isEmptyFilesList) || !isRootFolder;
+  };
+
   return (
     <Consumer key="header">
       {(context) => (
@@ -626,8 +641,7 @@ const SectionHeaderContent = (props) => {
                 toggleInfoPanel={onToggleInfoPanel}
                 isInfoPanelVisible={isInfoPanelVisible}
                 titles={{
-                  trash: t("EmptyRecycleBin"),
-                  trashWarning: t("TrashErasureWarning"),
+                  warningText,
                   actions: isRoomsFolder
                     ? t("Common:NewRoom")
                     : t("Common:Actions"),
@@ -667,6 +681,7 @@ const SectionHeaderContent = (props) => {
                 addButtonRef={addButtonRefCallback}
                 contextButtonAnimation={contextButtonAnimation}
                 guidAnimationVisible={guidAnimationVisible}
+                isContextButtonVisible={isContextButtonVisible()}
               />
               {showSignInButton ? (
                 <Button
@@ -763,14 +778,18 @@ export default inject(
       setIsSectionBodyLoading(param);
     };
 
-    const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
-      treeFoldersStore;
+    const {
+      isRecycleBinFolder,
+      isRoomsFolder,
+      isArchiveFolder,
+      isPersonalReadOnly,
+    } = treeFoldersStore;
 
     const {
       setReorderDialogVisible,
       setCloseEditIndexDialogVisible,
       welcomeFormFillingTipsVisible,
-      setguidAnimationVisible,
+      setGuidAnimationVisible,
       guidAnimationVisible,
     } = dialogsStore;
 
@@ -907,6 +926,7 @@ export default inject(
       getHeaderMenu,
 
       isRecycleBinFolder,
+      isPersonalReadOnly,
       isEmptyFilesList,
       isEmptyArchive,
       isArchiveFolder,
@@ -977,7 +997,7 @@ export default inject(
       setCloseEditIndexDialogVisible,
       welcomeFormFillingTipsVisible,
       guidAnimationVisible,
-      setguidAnimationVisible,
+      setGuidAnimationVisible,
       setRefMap,
       deleteRefMap,
     };

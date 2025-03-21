@@ -176,6 +176,7 @@ export const getRootDescription = (
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
+  security: Nullable<TFolderSecurity>,
 ) => {
   return match([rootFolderType, access])
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
@@ -194,7 +195,7 @@ export const getRootDescription = (
         <span>{t("Files:FilesWillAppearHere")}</span>
       </>
     ))
-    .with([FolderType.USER, ShareAccessRights.None], () =>
+    .with([FolderType.USER, P.when(() => security?.Create)], () =>
       t("EmptyView:DefaultFolderDescription"),
     )
     .with([FolderType.Recent, P._], () => t("EmptyView:EmptyRecentDescription"))

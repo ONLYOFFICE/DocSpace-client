@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Afișare tip fișier",
   "FrameId": "ID cadru",
   "GetCode": "Obține codul pentru inserare",
-  "GoToRoom": "accesare sala",
   "Header": "Antet",
   "HeaderDescription": "Puteți dezactiva antetul în versiunea mobilă pentru a limita accesul la secțiunile {{productName}} (la fel ca dezactivarea meniului din stânga în versiunea desktop).",
   "HtmlCodeDescription": "Incorporarea spațiului {{productName}} sau a unei părți a acestuia cu ajutorul etichetei <script>. Copiați codul HTML de mai jos și inserați-l în fișierul dvs HTML.",

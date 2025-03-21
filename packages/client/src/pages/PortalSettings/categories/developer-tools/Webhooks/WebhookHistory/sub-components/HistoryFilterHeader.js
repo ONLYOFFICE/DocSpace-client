@@ -78,8 +78,7 @@ const FilterButton = styled.div.attrs(injectDefaultTheme)`
 
   z-index: ${(props) => (props.isGroupMenuVisible ? 199 : 201)};
 
-  border: 1px solid;
-  border-color: ${(props) => props.theme.client.settings.webhooks.filterBorder};
+  border: ${(props) => props.theme.client.settings.webhooks.filterBorder};
   border-radius: 3px;
   cursor: pointer;
 

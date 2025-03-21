@@ -32,6 +32,7 @@ import moment from "moment";
 import {
   ConflictResolveType,
   FolderType,
+  type FormFillingManageAction,
   ShareAccessRights,
 } from "../../enums";
 import {
@@ -68,6 +69,8 @@ import {
   TUploadOperation,
   TConnectingStorages,
   TIndexItems,
+  TFormRoleMappingRequest,
+  TFileFillingFormStatus,
 } from "./types";
 
 export async function openEdit(
@@ -241,6 +244,27 @@ export async function getFoldersTree() {
       new: newItems,
     } as TFolder;
   });
+}
+
+export async function getPersonalFolderTree() {
+  const res = (await request({
+    method: "get",
+    url: "/files/@my",
+  })) as TGetFolder;
+
+  return [
+    {
+      id: res.current.id,
+      parentId: res.current.parentId,
+      title: res.current.title,
+      rootFolderType: +res.current.rootFolderType,
+      rootFolderName: "@my",
+      pathParts: res.pathParts,
+      foldersCount: res.current.foldersCount,
+      newItems: res.new,
+      security: res.current.security,
+    },
+  ];
 }
 
 export async function getCommonFoldersTree() {
@@ -1578,6 +1602,39 @@ export async function deleteVersionFile(fileId: number, versions: number[]) {
     url: "/files/fileops/deleteversion",
     data,
   })) as TOperation[];
+
+  return res;
+}
+
+export async function formRoleMapping(data: TFormRoleMappingRequest) {
+  return request({
+    method: "post",
+    url: `files/file/${data.formId}/formrolemapping`,
+    data,
+  });
+}
+
+export async function manageFormFilling(
+  formId: string | number,
+  action: FormFillingManageAction,
+) {
+  return request({
+    method: "put",
+    url: `files/file/${formId}/manageformfilling`,
+    data: {
+      formId,
+      action,
+    },
+  });
+}
+
+export async function getFormFillingStatus(
+  formId: string | number,
+): Promise<TFileFillingFormStatus[]> {
+  const res = (await request({
+    method: "get",
+    url: `/files/file/${formId}/formroles`,
+  })) as TFileFillingFormStatus[];
 
   return res;
 }

@@ -44,7 +44,6 @@
   "URL": "URL",
   "ViewRawPayload": "Poglejte neobdelane uporabne podatke",
   "WebhookCreated": "Webhook ustvarjen",
-  "WebhookCreationHint": "Ta webhook bo dodeljen vsem dogodkom v {{productName}}",
   "WebhookDetails": "Webhook podrobnosti",
   "WebhookEditedSuccessfully": "Konfiguracija Webhook je bila uspešno urejena",
   "WebhookHistory": "Webhook zgodovina",

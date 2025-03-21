@@ -68,14 +68,15 @@ const PublicRoom = (props) => {
     const filterObj = FilesFilter.getFilter(window.location);
 
     if (filterObj?.folder && filterObj?.folder !== "@my") {
-      const url = `${location.pathname}?key=${key}&${filterObj.toUrlParams()}`;
+      const url = `${location.pathname}?${filterObj.toUrlParams()}`;
 
       navigate(url);
     } else {
       const newFilter = FilesFilter.getDefault();
       newFilter.folder = roomId;
+      newFilter.key = key;
 
-      const url = `${location.pathname}?key=${key}&${newFilter.toUrlParams()}`;
+      const url = `${location.pathname}?${newFilter.toUrlParams()}`;
 
       navigate(url);
     }

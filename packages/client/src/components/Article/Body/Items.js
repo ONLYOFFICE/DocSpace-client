@@ -408,6 +408,7 @@ const Items = ({
       trashIsEmpty,
       isAdmin,
       isVisitor,
+      isCollaborator,
       firstLoad,
       activeItemId,
       emptyTrashInProgress,

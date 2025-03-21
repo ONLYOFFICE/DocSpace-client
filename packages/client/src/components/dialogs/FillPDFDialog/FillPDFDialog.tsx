@@ -33,6 +33,8 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { RoomsType } from "@docspace/shared/enums";
 
+import { ShareCollectSelector } from "SRC_DIR/components/ShareCollectSelector";
+
 import { Card } from "./sub-components/Card";
 
 import { Container } from "./FillPDFDialog.styled";
@@ -40,7 +42,6 @@ import type {
   FillPDFDialogProps,
   InjectFillPDFDialogProps,
 } from "./FillPDFDialog.types";
-import { ShareCollectSelector } from "SRC_DIR/components/ShareCollectSelector";
 
 const FillPDFDialog = inject<TStore>(
   ({ dialogsStore, contextOptionsStore }) => {

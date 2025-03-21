@@ -27,6 +27,9 @@ const StyledModalDialog = styled(ModalDialog)`
       width: 13px;
       height: 13px;
     }
+    .welcome-tips-image {
+      display: none;
+    }
   }
 `;
 

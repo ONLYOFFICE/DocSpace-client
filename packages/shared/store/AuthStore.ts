@@ -35,7 +35,12 @@ import { loginWithTfaCode } from "../api/user";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
 import { logout as logoutDesktop } from "../utils/desktop";
-import { frameCallEvent, isAdmin, insertDataLayer } from "../utils/common";
+import {
+  frameCallEvent,
+  isAdmin,
+  insertDataLayer,
+  isPublicRoom,
+} from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
@@ -188,9 +193,10 @@ class AuthStore {
 
     if (
       this.settingsStore?.isLoaded &&
-      this.settingsStore?.socketUrl &&
+      !!this.settingsStore?.socketUrl &&
       !isPortalDeactivated &&
-      !isPortalEncryption
+      !isPortalEncryption &&
+      !isPublicRoom()
     ) {
       requests.push(
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {

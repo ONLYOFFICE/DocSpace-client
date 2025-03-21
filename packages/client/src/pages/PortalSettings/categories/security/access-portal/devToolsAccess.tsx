@@ -83,6 +83,7 @@ const DevToolsAccess = ({
       "defaultDevToolsAccessSettings",
     );
     if (defaultSettings) setAccessEnabled(defaultSettings);
+    setIsLoading(true);
   };
 
   const getSettings = async () => {
@@ -123,7 +124,7 @@ const DevToolsAccess = ({
     } else {
       getSettingsFromDefault();
     }
-  }, [isLoading]);
+  }, []);
 
   useEffect(() => {
     if (!isLoading) return;

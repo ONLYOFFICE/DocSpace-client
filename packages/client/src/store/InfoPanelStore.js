@@ -961,11 +961,12 @@ class InfoPanelStore {
       ) ?? "null",
     );
 
-    if (file.isForm) {
+    if (value && file.isForm) {
       value.access = ShareAccessRights.Editing;
     }
 
     if (
+      value &&
       !file.isForm &&
       file.fileType === FileType.PDF &&
       (value.access === ShareAccessRights.Editing ||

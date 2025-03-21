@@ -37,12 +37,14 @@ import { TData, toastr } from "@docspace/shared/components/toast";
 import { getDownloadPasswordError } from "@/app/(docspace)/_utils/getDownloadPasswordError";
 import { useTranslation } from "react-i18next";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
+import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import useSDK from "@/hooks/useSDK";
 
 export default function useDownloadFiles() {
   const { t } = useTranslation("Common");
   const { shareKey } = useSettingsStore();
   const { sdkConfig } = useSDK();
+  const { addActiveItems, removeActiveItems } = useActiveItemsStore();
 
   const loopFilesOperations = useCallback(
     async (data?: TOperation) => {
@@ -68,7 +70,12 @@ export default function useDownloadFiles() {
 
   const downloadFiles = useCallback(
     async (fileIds: number[] | TFileConvertId[], folderIds: number[]) => {
+      const activeFileIds = fileIds.map((f) =>
+        typeof f !== "number" ? f.key : f,
+      );
+
       try {
+        addActiveItems(activeFileIds, folderIds);
         const operations = await downloadFilesApi(fileIds, folderIds, shareKey);
         const operation = operations?.[operations.length - 1];
 
@@ -85,6 +92,8 @@ export default function useDownloadFiles() {
             ? operation
             : await loopFilesOperations(operation);
 
+        removeActiveItems(activeFileIds, folderIds);
+
         if (completedOperation?.url) {
           openUrl({
             url: completedOperation.url,
@@ -97,6 +106,8 @@ export default function useDownloadFiles() {
           toastr.error(t("Common:ArchivingData"), undefined, 0, true);
         }
       } catch (error) {
+        removeActiveItems(activeFileIds, folderIds);
+
         const passwordError = getDownloadPasswordError(
           error as Error | TOperation,
         );
@@ -108,7 +119,14 @@ export default function useDownloadFiles() {
         toastr.error(error as TData, undefined, 0, true);
       }
     },
-    [loopFilesOperations, sdkConfig, shareKey, t],
+    [
+      addActiveItems,
+      loopFilesOperations,
+      removeActiveItems,
+      sdkConfig,
+      shareKey,
+      t,
+    ],
   );
 
   return { downloadFiles };

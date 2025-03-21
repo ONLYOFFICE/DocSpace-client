@@ -50,10 +50,12 @@ import { RowProps } from "../RowView.types";
 
 import styles from "../RowView.module.scss";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
+import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 
 const Row = observer(
   ({ item, index, filterSortBy, timezone, displayFileExtension }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
+    const { isItemActive } = useActiveItemsStore();
 
     const [isInit, setIsInit] = React.useState(false);
     const { t } = useTranslation(["Common"]);
@@ -96,6 +98,7 @@ const Row = observer(
     const contextMenuModel = getContextMenuModel(true);
 
     const isChecked = filesSelectionStore.isCheckedItem(item);
+    const inProgress = isItemActive(item);
 
     const value = generateFilesItemValue(item, false, index);
 
@@ -136,6 +139,7 @@ const Row = observer(
             contextOptions={contextMenuModel}
             getContextModel={getContextMenuModel}
             badgesComponent={badgesComponent}
+            inProgress={inProgress}
           >
             <RowContent
               item={item}

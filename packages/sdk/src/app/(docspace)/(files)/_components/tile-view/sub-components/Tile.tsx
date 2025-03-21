@@ -54,6 +54,7 @@ import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import type { TileProps } from "../TileView.types";
 
 import TileContent from "./TileContent";
+import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 
 const getTemporaryIcon = (item: TFileItem | TFolderItem, getIcon: TGetIcon) => {
   if (item.isFolder) return undefined;
@@ -82,10 +83,12 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const { openFolder } = useFolderActions({ t });
   const { getContextMenuModel } = useContextMenuModel({ item });
   const { downloadAction } = useDownloadActions();
+  const { isItemActive } = useActiveItemsStore();
 
   const displayFileExtension = Boolean(filesSettings?.displayFileExtension);
   const temporaryIcon = getTemporaryIcon(item, getIcon);
   const isChecked = isCheckedItem(item);
+  const inProgress = isItemActive(item);
   const value = generateFilesItemValue(item, false, index);
 
   const openItem = (e: React.MouseEvent) => {
@@ -157,7 +160,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
     isHighlight: false,
     checked: isChecked,
     isActive: false,
-    inProgress: false,
+    inProgress,
     isBlockingOperation: false,
     isEdit: false,
     showHotkeyBorder: false,

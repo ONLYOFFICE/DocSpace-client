@@ -31,8 +31,9 @@ import { useLocation } from "react-router-dom";
 import { DeviceType } from "@docspace/shared/enums";
 import Section from "@docspace/shared/components/section";
 
-import SectionHeaderContent from "./Header";
 import Bar from "SRC_DIR/components/Bar";
+
+import SectionHeaderContent from "./Header";
 
 interface ISectionProps {
   children: React.ReactNode;

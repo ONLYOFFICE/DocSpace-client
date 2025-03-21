@@ -30,11 +30,11 @@ import { useTranslation } from "react-i18next";
 import BackupPage from "client/BackupPage";
 import { setDocumentTitle } from "SRC_DIR/utils";
 
-interface BackupProps {
+type BackupProps = {
   logoText: string;
-}
+};
 
-const Backup: React.FC<BackupProps> = ({ logoText }) => {
+const Backup = ({ logoText }: BackupProps) => {
   const { t } = useTranslation(["Settings"]);
 
   useEffect(() => {

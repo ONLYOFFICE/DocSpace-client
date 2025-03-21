@@ -44,7 +44,6 @@
   "URL": "URL",
   "ViewRawPayload": "Pogledaj sirovi payload",
   "WebhookCreated": "Webhook kreiran",
-  "WebhookCreationHint": "Ovaj webhook će biti dodeljen svim događajima u {{productName}}-u",
   "WebhookDetails": "Webhook detalji",
   "WebhookEditedSuccessfully": "Webhook konfiguracija uspešno uređena",
   "WebhookHistory": "Webhook istorija",

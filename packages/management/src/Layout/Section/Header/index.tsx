@@ -78,16 +78,16 @@ const SectionHeaderContent = () => {
   return (
     <StyledWrapper>
       <StyledHeader>
-        {!item?.isHeader && (
+        {!item?.isHeader ? (
           <IconButton
             iconName={ArrowPathReactSvgUrl}
             size={17}
-            isFill={true}
+            isFill
             onClick={onBackToParent}
             className="arrow-button"
           />
-        )}
-        <Heading type="content" truncate={true}>
+        ) : null}
+        <Heading type="content" truncate>
           <div className="header">{t(item?.tKey)}</div>
         </Heading>
       </StyledHeader>

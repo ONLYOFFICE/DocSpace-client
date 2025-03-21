@@ -75,6 +75,7 @@ import {
   FormFillingTipsDialog,
   DeleteVersionDialog,
   CancelOperationDialog,
+  ReducedRightsDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -168,6 +169,7 @@ const Panels = (props) => {
     getRefElement,
     config,
     isShareFormData,
+    reducedRightsVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -415,6 +417,9 @@ const Panels = (props) => {
     isShareFormData.visible && (
       <ShareFormPanel key="share-form-dialog" {...isShareFormData} />
     ),
+    reducedRightsVisible ? (
+      <ReducedRightsDialog key="reduced-rights-dialog" />
+    ) : null,
   ];
 };
 
@@ -497,6 +502,7 @@ export default inject(
       setFormFillingTipsDialog,
       formFillingTipsVisible,
       isShareFormData,
+      reducedRightsData,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
@@ -612,6 +618,7 @@ export default inject(
       getRefElement,
       config,
       isShareFormData,
+      reducedRightsVisible: reducedRightsData.visible,
     };
   },
 )(observer(Panels));

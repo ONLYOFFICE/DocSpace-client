@@ -44,7 +44,6 @@
   "URL": "URL-адреса",
   "ViewRawPayload": "Подивитися необроблене корисне навантаження",
   "WebhookCreated": "Вебхук створено",
-  "WebhookCreationHint": "Цей вебхук буде призначено всім подіям у {{productName}}",
   "WebhookDetails": "Відомості про вебхук",
   "WebhookEditedSuccessfully": "Конфігурацію вебхуку успішно відредаговано",
   "WebhookHistory": "Історія вебхуку",

@@ -321,6 +321,8 @@ class SettingsStore {
 
   logoText = "";
 
+  limitedAccessDevToolsForUsers = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -336,6 +338,10 @@ class SettingsStore {
   setShowGuestReleaseTip = (showGuestReleaseTip: boolean) => {
     this.showGuestReleaseTip = showGuestReleaseTip;
   };
+
+  get wizardCompleted() {
+    return this.isLoaded && !this.wizardToken;
+  }
 
   get helpCenterDomain() {
     return this.externalResources?.helpcenter?.domain;
@@ -1464,6 +1470,16 @@ class SettingsStore {
   setIsBannerVisible = (visible: boolean) => {
     this.isBannerVisible = visible;
   };
+
+  setDevToolsAccessSettings = async (enable: string) => {
+    const boolEnable = enable === "true";
+    await api.settings.setLimitedAccessForUsers(boolEnable);
+    this.limitedAccessDevToolsForUsers = boolEnable;
+  };
+
+  get accessDevToolsForUsers() {
+    return this.limitedAccessDevToolsForUsers.toString();
+  }
 }
 
 export { SettingsStore };

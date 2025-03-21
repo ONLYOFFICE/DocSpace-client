@@ -56,3 +56,9 @@ export const showEmailActivationToast = (email, t) => {
     />,
   );
 };
+
+export const showSuccessCopyContantLink = (t) => {
+  toastr.success(
+    <Trans t={t} i18nKey="SuccessCopyContantLink" ns="PeopleTranslations" />,
+  );
+};

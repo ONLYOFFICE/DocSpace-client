@@ -56,12 +56,13 @@ const StatusHeader = styled.div`
 `;
 
 export const HistoryRowContent = ({ sectionWidth, historyItem }) => {
-  const { t, i18n } = useTranslation("Webhooks");
+  const { i18n } = useTranslation("Webhooks");
 
   const formattedDelivery = `${moment(historyItem.delivery)
     .tz(window.timezone)
     .locale(i18n.language)
-    .format("MMM D, YYYY, h:mm:ss A")} ${t("Common:UTC")}`;
+    .format("L, LT")}`;
+
   return (
     <StyledRowContent sectionWidth={sectionWidth}>
       <ContentWrapper>

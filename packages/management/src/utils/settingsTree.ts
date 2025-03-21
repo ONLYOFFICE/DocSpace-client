@@ -111,6 +111,14 @@ export const settingsTree = [
     isHeader: true,
   },
   {
+    id: "management-settings_catalog-encrypt",
+    key: "1-5",
+    icon: "",
+    link: "encrypt-data",
+    tKey: "Common:Storage",
+    isHeader: true,
+  },
+  {
     id: "management-settings_catalog-payments",
     key: "2",
     icon: PaymentIconUrl,

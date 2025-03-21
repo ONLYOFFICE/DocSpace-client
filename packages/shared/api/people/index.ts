@@ -536,6 +536,32 @@ export async function deleteGuests(userIds: string[]) {
   });
 }
 
+export async function getLinkToShareGuest(userId: string) {
+  const link = (await request({
+    method: "get",
+    url: `people/guests/${userId}/share`,
+  })) as string;
+
+  return link;
+}
+
+export async function addGuest(
+  email: string,
+  confirmKey: Nullable<string> = null,
+) {
+  const options = {
+    method: "post",
+    url: `/people/guests/share/approve`,
+    data: { email },
+  };
+
+  if (confirmKey) options.headers = { confirm: confirmKey };
+
+  const res = await request(options);
+
+  return res;
+}
+
 export function deleteUsers(userIds: string[]) {
   return request({
     method: "put",
@@ -645,6 +671,7 @@ export async function setCustomUserQuota(userIds: string[], quota: string) {
 
   return users;
 }
+
 export async function resetUserQuota(userIds: string[]) {
   const data = {
     userIds,

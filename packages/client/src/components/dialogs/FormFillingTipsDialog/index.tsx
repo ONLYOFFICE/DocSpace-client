@@ -47,7 +47,7 @@ type FormFillingTipsDialogProps = {
   visible: DialogsStore["welcomeFormFillingTipsVisible"];
   setWelcomeFormFillingTipsVisible: DialogsStore["setWelcomeFormFillingTipsVisible"];
   setFormFillingTipsDialog: DialogsStore["setFormFillingTipsDialog"];
-  setguidAnimationVisible: DialogsStore["setguidAnimationVisible"];
+  setGuidAnimationVisible: DialogsStore["setGuidAnimationVisible"];
   userId: TUser["id"];
 };
 
@@ -56,7 +56,7 @@ const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
     visible,
     setFormFillingTipsDialog,
     setWelcomeFormFillingTipsVisible,
-    setguidAnimationVisible,
+    setGuidAnimationVisible,
     userId,
   } = props;
 
@@ -77,7 +77,7 @@ const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
     const closedFormFillingTips = localStorage.getItem(storageName);
 
     if (!closedFormFillingTips) {
-      setguidAnimationVisible(true);
+      setGuidAnimationVisible(true);
     }
     window.localStorage.setItem(storageName, "true");
   };
@@ -150,14 +150,14 @@ export default inject(
       welcomeFormFillingTipsVisible: visible,
       setWelcomeFormFillingTipsVisible,
       setFormFillingTipsDialog,
-      setguidAnimationVisible,
+      setGuidAnimationVisible,
     } = dialogsStore;
 
     return {
       visible,
       setWelcomeFormFillingTipsVisible,
       setFormFillingTipsDialog,
-      setguidAnimationVisible,
+      setGuidAnimationVisible,
       userId: userStore?.user?.id,
     };
   },

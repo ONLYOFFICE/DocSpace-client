@@ -35,7 +35,6 @@ import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDe
 import { FolderTile } from "./FolderTile";
 import { FolderTileProps } from "./FolderTile.types";
 import { TileContent } from "../tile-content/TileContent";
-import { TileItem } from "../tile-container/TileContainer.types";
 
 const element = (
   <ReactSVG

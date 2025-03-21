@@ -26,6 +26,7 @@
 
 import { TUser } from "../../api/people/types";
 import PeopleFilter from "../../api/people/filter";
+import type { TGroup } from "../../api/groups/types";
 import {
   TSelectorAccessRights,
   TSelectorCancelButton,
@@ -81,5 +82,7 @@ export type PeopleSelectorProps = TSelectorHeader &
     setActiveTab?: (id: string) => void;
 
     checkIfUserInvited?: (user: TUser) => boolean;
+    injectedElement?: React.ReactElement;
+    filterItems?: (user: TUser | TGroup) => boolean;
   } & ContactsSelectorGroups &
   ContactsSelectorGuests;

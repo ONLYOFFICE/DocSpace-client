@@ -24,27 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
+
 import React from "react";
 import moment from "moment-timezone";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
-
 import { useNavigate, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { retryWebhook } from "@docspace/shared/api/settings";
 
 import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-
 import { toastr } from "@docspace/shared/components/toast";
 
-import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
-import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
-
-import { useTranslation } from "react-i18next";
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
+
 import StatusBadge from "../../../../sub-components/StatusBadge";
+import { getTriggerTranslate } from "../../../../Webhooks.helpers";
 
 const StyledTableRow = styled(TableRow)`
   .textOverflow {
@@ -88,7 +88,7 @@ const HistoryTableRow = (props) => {
     historyFilters,
     isRetryPending,
   } = props;
-  const { t, i18n } = useTranslation(["Webhooks", "Common"]);
+  const { t, i18n } = useTranslation(["Webhooks", "Files", "Common"]);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -127,7 +127,7 @@ const HistoryTableRow = (props) => {
   const formattedDelivery = `${moment(item.delivery)
     .tz(window.timezone)
     .locale(i18n.language)
-    .format("MMM D, YYYY, h:mm:ss A")} ${t("Common:UTC")}`;
+    .format("L, LT")}`;
 
   const onRowClick = (e) => {
     if (
@@ -139,7 +139,7 @@ const HistoryTableRow = (props) => {
     ) {
       return;
     }
-    toggleEventId(item.id);
+    redirectToDetails();
   };
 
   const onCheckboxClick = () => {
@@ -147,6 +147,8 @@ const HistoryTableRow = (props) => {
   };
 
   const isChecked = isIdChecked(item.id);
+
+  const webhookTrigger = getTriggerTranslate(item.trigger, t);
 
   return (
     <StyledWrapper
@@ -171,6 +173,11 @@ const HistoryTableRow = (props) => {
         </TableCell>
         <TableCell>
           <StatusBadge status={item.status} />
+        </TableCell>
+        <TableCell>
+          <Text fontWeight={600} fontSize="11px" className="textOverflow">
+            {webhookTrigger}
+          </Text>
         </TableCell>
         <TableCell>
           <Text fontWeight={600} fontSize="11px" className="textOverflow">

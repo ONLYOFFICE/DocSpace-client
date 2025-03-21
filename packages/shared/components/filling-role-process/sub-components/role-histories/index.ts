@@ -23,16 +23,4 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import React from "react";
-import styles from "../Navigation.module.scss";
-
-const TrashWarning = ({ title }: { title?: string }) => {
-  return (
-    <div className={`${styles.trashWarning} trash-warning`} title={title}>
-      <div className="warning-text">{title}</div>
-    </div>
-  );
-};
-
-export default TrashWarning;
+export { default as RoleHistories } from "./RoleHistories";

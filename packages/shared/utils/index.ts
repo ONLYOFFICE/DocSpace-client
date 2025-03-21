@@ -79,7 +79,12 @@ import {
   isBetaLanguage,
   getLogoUrl,
 } from "./common";
-import { DeviceType, FilterType, RoomsType } from "../enums";
+import {
+  DeviceType,
+  FilterType,
+  RoomsType,
+  FileFillingFormStatus,
+} from "../enums";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 import type { TRoom } from "../api/rooms/types";
@@ -242,6 +247,45 @@ export const addLog = (log: string, category: "socket") => {
     if (!window.logs[category]) window.logs[category] = [];
 
     window.logs[category].push(log);
+  }
+};
+
+export const getFillingStatusLabel = (
+  status: FileFillingFormStatus | undefined,
+  t: TTranslation,
+) => {
+  switch (status) {
+    case FileFillingFormStatus.Draft:
+      return t("Common:BadgeMyDraftTitle");
+    case FileFillingFormStatus.YourTurn:
+      return t("Common:YourTurn");
+    case FileFillingFormStatus.InProgress:
+      return t("Common:InProgress");
+    case FileFillingFormStatus.Stopped:
+      return t("Common:Stopped");
+    case FileFillingFormStatus.Completed:
+      return t("Common:Complete");
+    default:
+      return "";
+  }
+};
+export const getFillingStatusTitle = (
+  status: FileFillingFormStatus | undefined,
+  t: TTranslation,
+) => {
+  switch (status) {
+    case FileFillingFormStatus.Draft:
+      return t("Common:BadgeDraftTitle");
+    case FileFillingFormStatus.YourTurn:
+      return t("Common:BadgeYourTurnTitle");
+    case FileFillingFormStatus.InProgress:
+      return t("Common:BadgeInProgressTitle");
+    case FileFillingFormStatus.Stopped:
+      return t("Common:BadgeStoppedTitle");
+    case FileFillingFormStatus.Completed:
+      return t("Common:BadgeCompletedTitle");
+    default:
+      return "";
   }
 };
 

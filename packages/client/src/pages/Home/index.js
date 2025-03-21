@@ -390,11 +390,9 @@ const PureHome = (props) => {
           <SectionSubmenuContent />
         </Section.SectionSubmenu>
 
-        {isRecycleBinFolder && !isEmptyPage ? (
-          <Section.SectionWarning>
-            <SectionWarningContent />
-          </Section.SectionWarning>
-        ) : null}
+        <Section.SectionWarning>
+          <SectionWarningContent />
+        </Section.SectionWarning>
 
         {shouldRenderSectionFilter ? (
           <Section.SectionFilter>

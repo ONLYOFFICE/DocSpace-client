@@ -26,13 +26,44 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
-import TrashWarning from "@docspace/shared/components/navigation/sub-components/TrashWarning";
+import WarningComponent from "@docspace/shared/components/navigation/sub-components/WarningComponent";
+import { DeviceType } from "@docspace/shared/enums";
 
-const Warning = () => {
-  const { t } = useTranslation("Files");
-
-  return <TrashWarning title={t("TrashErasureWarning")} />;
+type InjectedProps = {
+  isPersonalReadOnly: boolean;
+  isRecycleBinFolder: boolean;
+  currentDeviceType: DeviceType;
 };
 
-export default Warning;
+const Warning = ({
+  isPersonalReadOnly = false,
+  isRecycleBinFolder = false,
+  currentDeviceType = DeviceType.desktop,
+}: InjectedProps) => {
+  const { t } = useTranslation("Files");
+
+  if (currentDeviceType === DeviceType.desktop) return null;
+
+  const warningText = isRecycleBinFolder
+    ? t("TrashErasureWarning")
+    : isPersonalReadOnly
+      ? t("PersonalFolderErasureWarning")
+      : "";
+
+  if (!warningText) return null;
+
+  return <WarningComponent title={warningText} />;
+};
+
+export default inject(({ treeFoldersStore, settingsStore }: TStore) => {
+  const { isRecycleBinFolder, isPersonalReadOnly } = treeFoldersStore;
+  const { currentDeviceType } = settingsStore;
+
+  return {
+    isPersonalReadOnly,
+    isRecycleBinFolder,
+    currentDeviceType,
+  };
+})(observer(Warning));

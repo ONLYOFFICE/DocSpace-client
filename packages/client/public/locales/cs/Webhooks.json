@@ -44,7 +44,6 @@
   "URL": "ADRESA URL",
   "ViewRawPayload": "Zobrazit nezpracovaný náklad ",
   "WebhookCreated": "Webhook vytvořen",
-  "WebhookCreationHint": "Tento webhook bude přiřazen ke všem událostem v aplikaci {{productName}}.",
   "WebhookDetails": "Podrobnosti o webhooku",
   "WebhookEditedSuccessfully": "Úspěšná úprava konfigurace webhooku",
   "WebhookHistory": "Historie webhooků",

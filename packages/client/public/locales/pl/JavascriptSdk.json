@@ -55,7 +55,6 @@
   "FileTypeDisplay": "Wyświetlanie typu plików",
   "FrameId": "ID ramki",
   "GetCode": "Uzyskaj kod do wstawienia",
-  "GoToRoom": "przejdź do pokoju",
   "Header": "Nagłówek",
   "HeaderDescription": "Możesz wyłączyć nagłówek w wersji mobilnej, aby ograniczyć dostęp do sekcji {{productName}} (analogicznie do wyłączenia menu po lewej stronie w wersji na komputery stacjonarne).",
   "HtmlCodeDescription": "Osadzanie {{productName}} lub jego części za pomocą znacznika <script>. Skopiuj poniższy kod HTML i wstaw go w swoim pliku HTML.",

@@ -31,9 +31,9 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import { LabledInput } from "./LabledInput";
-import { Hint } from "../styled-components";
 import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
+import TriggersForm from "./TriggersForm";
 
 const StyledWebhookForm = styled.form`
   margin-top: 7px;
@@ -88,8 +88,12 @@ const WebhookDialog = (props) => {
     secretKey: "",
     enabled: webhook ? webhook.enabled : true,
     ssl: webhook ? webhook.ssl : true,
+    triggers: webhook ? webhook.triggers : 0,
   });
   const [passwordInputKey, setPasswordInputKey] = useState(0);
+  const [triggerAll, setTriggerAll] = useState(
+    webhook ? webhook.triggers === 0 : true,
+  );
 
   const onModalClose = () => {
     onClose();
@@ -120,6 +124,13 @@ const WebhookDialog = (props) => {
     }
   };
 
+  const toggleTrigger = (triggerValue) => {
+    setWebhookInfo((prev) => ({
+      ...prev,
+      triggers: prev.triggers ^ triggerValue,
+    }));
+  };
+
   const validateForm = () => {
     const isUrlValid = validateUrl(webhookInfo.uri);
     setIsValid(() => ({
@@ -135,11 +146,16 @@ const WebhookDialog = (props) => {
     validateForm() && submitButtonRef.current.click();
   };
 
+  const handleOnChangeTriggerAll = (value) => {
+    setTriggerAll(value === "true");
+  };
+
   const onFormSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
     setIsLoading(true);
     try {
+      if (triggerAll) webhookInfo.triggers = 0;
       await onSubmit(webhookInfo);
       isSettingsModal
         ? toastr.success(t("WebhookEditedSuccessfully"))
@@ -150,6 +166,7 @@ const WebhookDialog = (props) => {
         uri: "",
         secretKey: "",
         enabled: true,
+        triggers: 0,
       });
       setIsPasswordValid(false);
       setPasswordInputKey((prevKey) => prevKey + 1);
@@ -169,7 +186,9 @@ const WebhookDialog = (props) => {
       secretKey: "",
       enabled: webhook ? webhook.enabled : true,
       ssl: webhook ? webhook.ssl : true,
+      triggers: webhook ? webhook.triggers : 0,
     });
+    setTriggerAll(webhook ? webhook.triggers === 0 : true);
   }, [webhook]);
 
   return (
@@ -182,13 +201,6 @@ const WebhookDialog = (props) => {
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledWebhookForm onSubmit={onFormSubmit}>
-          {!isSettingsModal ? (
-            <Hint>
-              {t("WebhookCreationHint", {
-                productName: t("Common:ProductName"),
-              })}
-            </Hint>
-          ) : null}
           <LabledInput
             id={`${additionalId}-name-input`}
             label={t("WebhookName")}
@@ -229,7 +241,13 @@ const WebhookDialog = (props) => {
             onChange={onInputChange}
             isDisabled={isLoading}
           />
-
+          <TriggersForm
+            isDisabled={isLoading}
+            triggers={webhookInfo.triggers}
+            toggleTrigger={toggleTrigger}
+            triggerAll={triggerAll}
+            onChange={handleOnChangeTriggerAll}
+          />
           <button
             type="submit"
             ref={submitButtonRef}

@@ -42,7 +42,7 @@ import { IconButton } from "../../../components/icon-button";
 import { ContextMenuButton } from "../../../components/context-menu-button";
 import { SimulatePassword } from "../../../components/simulate-password";
 
-import type { PasswordRowProps } from "../DownloadDialog.types";
+import { isFile, type PasswordRowProps } from "../DownloadDialog.types";
 import styles from "../DownloadDialog.module.scss";
 
 export const PasswordRow = ({
@@ -75,6 +75,8 @@ export const PasswordRow = ({
   };
 
   const onChangeInOriginal = () => {
+    if (!isFile(item)) return;
+
     resetDownloadedFileFormat(item.id, item.fileExst, type);
   };
 

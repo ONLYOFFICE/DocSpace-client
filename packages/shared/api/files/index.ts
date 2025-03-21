@@ -72,6 +72,7 @@ import {
   TFormRoleMappingRequest,
   TFileFillingFormStatus,
 } from "./types";
+import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
 
 export async function openEdit(
   fileId: number,
@@ -703,7 +704,7 @@ export function uploadBackup(url: string, data: unknown) {
 }
 
 export async function downloadFiles(
-  fileIds: number[],
+  fileIds: number[] | TFileConvertId[],
   folderIds: number[],
   shareKey: string,
 ) {

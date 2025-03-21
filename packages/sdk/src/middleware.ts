@@ -77,15 +77,37 @@ export async function middleware(request: NextRequest) {
   requestHeaders.set(SHARE_KEY_HEADER, shareKey ?? "");
 
   if (request.nextUrl.pathname.includes("public-room")) {
-    const rewrittenNextResponse = await handlePublicRoomValidation(
+    const validationResult = await handlePublicRoomValidation(
       request,
       requestHeaders,
       shareKey || "",
     );
 
-    if (rewrittenNextResponse) return rewrittenNextResponse;
+    if (validationResult?.redirect) {
+      return NextResponse.rewrite(
+        new URL(validationResult.redirect, request.url),
+        {
+          headers: requestHeaders,
+        },
+      );
+    }
 
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    const response = NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+
+    if (validationResult?.anonymousSessionKeyCookie) {
+      response.headers.append(
+        "Set-Cookie",
+        validationResult.anonymousSessionKeyCookie,
+      );
+    }
+
+    return response;
   }
 
   return NextResponse.next({

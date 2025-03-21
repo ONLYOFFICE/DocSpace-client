@@ -54,7 +54,7 @@ export const SectionWrapper = observer(
     sectionBodyContent,
     isEmptyPage,
     filesFilter,
-    showFilter = false,
+    showFilter = true,
     showHeader = true,
   }: SectionProps) => {
     const searchParams = useSearchParams();

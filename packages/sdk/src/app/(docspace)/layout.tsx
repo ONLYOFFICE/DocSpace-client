@@ -39,6 +39,7 @@ import SelectionArea from "./_components/selection-area";
 import Header, { HeaderProps } from "./_components/header";
 import { Filter, FilterProps } from "./_components/filter";
 import { DeviceTypeObserver } from "./_components/DeviceTypeObserver";
+import Dialogs from "./_components/dialogs";
 
 export default async function DocspaceLayout({
   children,
@@ -94,6 +95,7 @@ export default async function DocspaceLayout({
         <SelectionArea />
         <FilesMediaViewer filesSettings={filesSettings as TFilesSettings} />
         <DeviceTypeObserver />
+        <Dialogs />
       </Layout>
     </main>
   );

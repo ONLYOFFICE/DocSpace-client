@@ -40,6 +40,7 @@ const ShareFormPanel = ({
 }) => {
   const [isVisibleSelectFormRoomDialog, setIsVisibleSelectFormRoomDialog] =
     useState(false);
+  const [roomType, setRoomType] = useState(RoomsType.FormRoom);
 
   const onClose = () => {
     setIsShareFormData(false);
@@ -53,6 +54,12 @@ const ShareFormPanel = ({
   const file = files.find((item) => item.id === fileId);
 
   const onClickFormRoom = () => {
+    setRoomType(RoomsType.FormRoom);
+    setIsVisibleSelectFormRoomDialog(true);
+  };
+
+  const onClickVirtualDataRoom = () => {
+    setRoomType(RoomsType.VirtualDataRoom);
     setIsVisibleSelectFormRoomDialog(true);
   };
 
@@ -66,6 +73,7 @@ const ShareFormPanel = ({
       onClose={onClose}
       onClickShareFile={onClickShareFile}
       onClickFormRoom={onClickFormRoom}
+      onClickVirtualDataRoom={onClickVirtualDataRoom}
       visibleContainer={isVisibleSelectFormRoomDialog}
       container={
         <ShareCollectSelector
@@ -78,7 +86,7 @@ const ShareFormPanel = ({
             onBackClick: onCloseSelectionFormRoom,
           }}
           onCloseActionProp={onCloseSelectionFormRoom}
-          createDefineRoomType={RoomsType.FormRoom}
+          createDefineRoomType={roomType}
         />
       }
     />

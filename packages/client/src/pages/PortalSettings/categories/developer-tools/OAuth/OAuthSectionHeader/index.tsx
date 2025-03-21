@@ -44,7 +44,7 @@ const OAuthSectionHeader = ({ isEdit }: { isEdit: boolean }) => {
   const navigate = useNavigate();
 
   const onBack = () => {
-    navigate("/portal-settings/developer-tools/oauth");
+    navigate("/developer-tools/oauth");
   };
 
   if (!ready) return <LoaderSectionHeader />;

@@ -38,8 +38,8 @@ type TLayoutProps = {
 const MainLayout = ({ children, isPortalRestoring }: TLayoutProps) => {
   return (
     <>
-      {!isPortalRestoring && <ArticleWrapper />}
-      <Section children={children} />
+      {!isPortalRestoring ? <ArticleWrapper /> : null}
+      <Section>{children}</Section>
     </>
   );
 };

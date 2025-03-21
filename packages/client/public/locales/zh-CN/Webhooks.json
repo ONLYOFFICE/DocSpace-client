@@ -44,7 +44,6 @@
   "URL": "URL",
   "ViewRawPayload": "查看原始负载",
   "WebhookCreated": "Webhook 已被创建",
-  "WebhookCreationHint": "此 webhook 将分配给{{productName}}中的所有事件",
   "WebhookDetails": "Webhook 详细信息",
   "WebhookEditedSuccessfully": "Webhook 配置编辑成功",
   "WebhookHistory": "Webhook 历史",

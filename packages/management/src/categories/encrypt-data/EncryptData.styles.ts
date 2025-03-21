@@ -24,15 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+import { globalColors } from "@docspace/shared/themes";
 
-import TrashWarning from "@docspace/shared/components/navigation/sub-components/TrashWarning";
+export const StyledWrapper = styled.div`
+  width: 100%;
+  max-width: 700px;
 
-const Warning = () => {
-  const { t } = useTranslation("Files");
+  .header {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
 
-  return <TrashWarning title={t("TrashErasureWarning")} />;
-};
+  .wrapper-block {
+    margin-top: 20px;
 
-export default Warning;
+    .description {
+      margin-top: 9px;
+      margin-bottom: 12px;
+    }
+  }
+
+  .checkbox {
+    margin-top: 20px;
+    margin-bottom: 24px;
+  }
+
+  .badge {
+    margin-inline-start: 4px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    border: 1px solid ${globalColors.lightStatusPositive};
+    color: ${globalColors.lightStatusPositive};
+  }
+`;

@@ -34,13 +34,14 @@ const Footer = ({
   showProgress,
   isDeleteProfile,
   onToggleDeleteProfile,
-  selectedUser,
+  targetUser,
   onReassign,
   percent,
   isAbortTransfer,
   onClose,
   onTerminate,
   onStartAgain,
+  showDeleteProfileCheckbox,
 }) => {
   if (showProgress) {
     return (
@@ -71,24 +72,25 @@ const Footer = ({
 
   return (
     <StyledFooterWrapper>
-      <div className="delete-profile-container">
-        <Checkbox
-          className="delete-profile-checkbox"
-          isChecked={isDeleteProfile}
-          onClick={onToggleDeleteProfile}
-        />
-        <Text className="info" noSelect>
-          {t("DataReassignmentDialog:DeleteProfileIsFinished")}
-        </Text>
-      </div>
-
+      {showDeleteProfileCheckbox ? (
+        <>
+          <Checkbox
+            className="delete-profile-checkbox"
+            isChecked={isDeleteProfile}
+            onClick={onToggleDeleteProfile}
+          />
+          <Text className="info" noSelect>
+            {t("DataReassignmentDialog:DeleteProfileIsFinished")}
+          </Text>
+        </>
+      ) : null}
       <div className="button-wrapper">
         <Button
           label={t("DataReassignmentDialog:Reassign")}
           size="normal"
           primary
           scale
-          isDisabled={!selectedUser}
+          isDisabled={!targetUser}
           onClick={onReassign}
         />
 

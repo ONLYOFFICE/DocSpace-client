@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-
-import { Tabs } from "@docspace/shared/components/tabs";
-
 import { inject, observer } from "mobx-react";
+
 import config from "PACKAGE_FILE";
 
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
+import { Tabs } from "@docspace/shared/components/tabs";
 
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -129,7 +129,7 @@ const DeveloperToolsWrapper = (props) => {
       combineUrl(
         window.ClientConfig?.proxy?.url,
         config.homepage,
-        `/portal-settings/developer-tools/${e.id}`,
+        `/developer-tools/${e.id}`,
       ),
     );
     setCurrentTabId(e.id);

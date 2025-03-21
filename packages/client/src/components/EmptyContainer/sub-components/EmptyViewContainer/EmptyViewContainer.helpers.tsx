@@ -92,11 +92,18 @@ export const getDescription = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
   isPublicRoom: boolean,
+  security: Nullable<TFolderSecurity>,
 ): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
   if (isRootEmptyPage)
-    return getRootDescription(t, access, rootFolderType, isPublicRoom);
+    return getRootDescription(
+      t,
+      access,
+      rootFolderType,
+      isPublicRoom,
+      security,
+    );
 
   if (isFolder)
     return getFolderDescription(

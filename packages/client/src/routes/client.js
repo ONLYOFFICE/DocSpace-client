@@ -628,6 +628,22 @@ const ClientRoutes = [
     },
   },
   {
+    path: "/encryption-portal",
+    async lazy() {
+      const { EncryptionPortal } = await componentLoader(
+        () => import("@docspace/shared/pages/EncryptionPortal"),
+      );
+
+      const Component = () => (
+        <ErrorBoundary>
+          <EncryptionPortal />
+        </ErrorBoundary>
+      );
+
+      return { Component };
+    },
+  },
+  {
     path: "/preparation-portal",
     async lazy() {
       const { PreparationPortal } = await componentLoader(

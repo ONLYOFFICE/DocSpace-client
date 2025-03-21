@@ -46,6 +46,7 @@ const SimpleUserRow = (props: SimpleUserRowProps) => {
     element,
     isActive,
     value,
+    inProgress,
   } = props;
 
   const isChecked = checkedProps!.checked;
@@ -81,6 +82,7 @@ const SimpleUserRow = (props: SimpleUserRowProps) => {
           getContextModel={getContextModel!}
           onRowClick={() => {}}
           isIndexEditingMode={false}
+          inProgress={inProgress}
         >
           <UserContent {...props} />
         </StyledSimpleUserRow>

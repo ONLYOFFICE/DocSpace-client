@@ -108,6 +108,9 @@ const Article = ({
   getActions,
   onProfileClick,
   logoText,
+
+  limitedAccessDevToolsForUsers,
+
   downloaddesktopUrl,
   officeforandroidUrl,
   officeforiosUrl,
@@ -221,10 +224,11 @@ const Article = ({
     };
   }, [onResize]);
 
-  const withDevTools =
-    !window.location.pathname.includes("portal-settings") &&
-    !window.location.pathname.includes("management") &&
-    isAdmin;
+  const hideDevTools =
+    user?.isVisitor ||
+    (user?.isCollaborator && limitedAccessDevToolsForUsers) ||
+    window.location.pathname.includes("portal-settings") ||
+    window.location.pathname.includes("management");
 
   const articleComponent = (
     <>
@@ -266,7 +270,7 @@ const Article = ({
           {articleBodyContent ? articleBodyContent.props.children : null}
           {!showArticleLoader ? (
             <>
-              {withDevTools ? (
+              {!hideDevTools ? (
                 <ArticleDevToolsBar
                   articleOpen={articleOpen}
                   currentDeviceType={currentDeviceType}
@@ -276,7 +280,7 @@ const Article = ({
               ) : null}
               {!hideAppsBlock ? (
                 <ArticleApps
-                  withDevTools={withDevTools}
+                  withDevTools={!hideDevTools}
                   showText={showText}
                   logoText={logoText}
                   downloaddesktopUrl={downloaddesktopUrl}

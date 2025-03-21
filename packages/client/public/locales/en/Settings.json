@@ -98,6 +98,8 @@
   "DeleteTheme": "Delete theme",
   "DeleteThemeForever": "Delete theme forever?",
   "DeleteThemeNotice": "The theme will be deleted permanently. You will not be able to undo this action.",
+  "DeveloperToolsAccess": "Limited Developer tools access",
+  "DeveloperToolsAccessDescription": "Configure detailed settings to manage and control user access to the Developer Tools page, ensuring that all users can access this page.",
   "DisableEmailDescription": "If this box is checked, {{sectionName}} users will not need to verify their email after the first authorization in {{productName}}.",
   "DisableEmailVerification": "Disable email verification",
   "DiskSpaceUsed": "Disk space used",

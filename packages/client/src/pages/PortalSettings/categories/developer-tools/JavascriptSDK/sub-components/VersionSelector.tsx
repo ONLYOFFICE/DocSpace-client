@@ -77,7 +77,7 @@ export const VersionSelector = (props: TVersionSelector) => {
     onSetSource(source.label);
   }, [source.key, version.key]);
 
-  return (
+  return disabled ? null : (
     <ControlsGroup>
       <Label className="label" text={t("SourceType")} />
       <ComboBox

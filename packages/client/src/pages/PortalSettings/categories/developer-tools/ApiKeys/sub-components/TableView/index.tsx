@@ -82,8 +82,9 @@ const TableView = (props: TableViewProps) => {
     userId,
     currentDeviceType,
     onDeleteApiKey,
-    onChangeApiKeyStatus,
+    onChangeApiKeyParams,
     culture,
+    onRenameApiKey,
   } = props;
 
   const tableRef = useRef(null);
@@ -124,7 +125,8 @@ const TableView = (props: TableViewProps) => {
             item={item}
             hideColumns={hideColumns}
             onDeleteApiKey={onDeleteApiKey}
-            onChangeApiKeyStatus={onChangeApiKeyStatus}
+            onChangeApiKeyParams={onChangeApiKeyParams}
+            onRenameApiKey={onRenameApiKey}
           />
         ))}
       </TableBody>

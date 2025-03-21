@@ -29,9 +29,9 @@
   "Api": "API",
   "ApiKeys": "API keys",
   "CreateNewSecretKey": "Create new secret key",
-  "ApiKeysDescription": "The API Keys section allows developers to generate and manage unique authentication tokens required for accessing our API services. Each key serves as a secure identifier for your application, enabling you to make authorized requests while tracking usage and enforcing rate limits. To create a new API key, simply click on the «Create new secret key» button, and ensure to store it securely. Remember to rotate your keys periodically and revoke any that are no longer in use to maintain the security of your application.",
-  "CreateNewSecretKeyDialogDescription": "This API key is tied to your user and can make requests against the selected project. If you are removed from the organization or project, this key will be disabled.",
-  "CreateNewSecretKeyDialogPlaceholder": "My test key",
+  "ApiKeysDescription": "As an owner/admin you can view and manage all API keys in this DocSpace. Do not share your API key with others or expose it in the browser or other client-side code. To protect your account's security, DocSpace may automatically disable any API key that has leaked publicly.",
+  "CreateNewSecretKeyDialogDescription": "Do not share your API key with anyone or expose it publicly!",
+  "CreateNewSecretKeyDialogPlaceholder": "New secret key",
   "ApiPageDescription": "Create your own productivity platform based on {{organizationName}} {{productName}} and collaborate on documents with teams, clients, and partners.",
   "ApiPageHeader": "Build your own collaboration platform",
   "Appearance": "Appearance",
@@ -339,5 +339,14 @@
   "WithoutEmailHint": "You don’t have users without emails. Please proceed to the next step.",
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
-  "YourLogo": "Your logo"
+  "YourLogo": "Your logo",
+  "KeyLifetime": "Key lifetime",
+  "KeyLifetimeDescription": "Set lifetime to automatically delete the secret key after a defined period. Lifetime begins of creation of the key.",
+  "ApiKeyViewUsage": "View usage per API key on the",
+  "APIGuide": "API Guide",
+  "ApiKeyCopied": "API key copied",
+  "ApiKeyLifetime": "The lifetime is set.",
+  "ApiKeyWillBeDeleted": "The secret key will be deleted after: {{days}} days",
+  "DeleteSecretKey": "Delete secret key",
+  "DeleteSecretKeyDescription": "The secret key will be deleted permanently. You will not be able to undo this action."
 }

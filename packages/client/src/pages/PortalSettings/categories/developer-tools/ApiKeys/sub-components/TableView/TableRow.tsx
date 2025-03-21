@@ -27,6 +27,7 @@
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 import {
   TableRow as TableRowComponent,
@@ -39,9 +40,9 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { TableRowProps } from "../../types";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
+import { TableRowProps } from "../../types";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -82,12 +83,28 @@ const StyledTableRow = styled(TableRowComponent)`
 `;
 
 const TableRow = (props: TableRowProps) => {
-  const { item, hideColumns, onChangeApiKeyStatus, onDeleteApiKey, culture } =
-    props;
+  const {
+    item,
+    hideColumns,
+    onChangeApiKeyParams,
+    onDeleteApiKey,
+    culture,
+    onRenameApiKey,
+  } = props;
 
   const { t } = useTranslation(["Common"]);
 
   const contextOptions = [
+    {
+      key: "Settings dropdownItem",
+      label: t("Common:Rename"),
+      icon: RenameReactSvgUrl,
+      onClick: () => onRenameApiKey(item.id),
+    },
+    {
+      key: "separator",
+      isSeparator: true,
+    },
     {
       key: "Settings dropdownItem",
       label: t("Common:Delete"),
@@ -121,7 +138,7 @@ const TableRow = (props: TableRowProps) => {
             className="api-keys_text api-keys_text-overflow"
             fontWeight={600}
           >
-            {item.keyPrefix}
+            {item.key}
           </Text>
         </TableCell>
         <TableCell>
@@ -130,6 +147,14 @@ const TableRow = (props: TableRowProps) => {
             fontWeight={600}
           >
             {createOnDate}
+          </Text>
+        </TableCell>
+        <TableCell>
+          <Text
+            className="api-keys_text api-keys_text-overflow"
+            fontWeight={600}
+          >
+            {lastUsedDate}
           </Text>
         </TableCell>
         <TableCell className="author-cell">
@@ -148,20 +173,21 @@ const TableRow = (props: TableRowProps) => {
             {item.createBy?.displayName}
           </Text>
         </TableCell>
-        <TableCell>
-          <Text
-            className="api-keys_text api-keys_text-overflow"
-            fontWeight={600}
-          >
-            {lastUsedDate}
-          </Text>
-        </TableCell>
-        <TableCell>
+
+        {/* <TableCell>
           <Text
             className="api-keys_text api-keys_text-overflow"
             fontWeight={600}
           >
             {expiresAtDate}
+          </Text>
+        </TableCell> */}
+        <TableCell>
+          <Text
+            className="api-keys_text api-keys_text-overflow"
+            fontWeight={600}
+          >
+            ALL //TODO:
           </Text>
         </TableCell>
         <TableCell>
@@ -169,7 +195,9 @@ const TableRow = (props: TableRowProps) => {
             <ToggleButton
               className="toggle toggleButton"
               isChecked={item.isActive}
-              onChange={() => onChangeApiKeyStatus(item.id)}
+              onChange={() =>
+                onChangeApiKeyParams(item.id, { isActive: !item.isActive })
+              }
             />
           </div>
         </TableCell>

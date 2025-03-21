@@ -43,7 +43,7 @@ const TableHeader = (props: TableHeaderProps) => {
     sectionWidth,
     columnInfoPanelStorageName,
   } = props;
-  const { t } = useTranslation(["Webhooks", "Common", "Files"]);
+  const { t } = useTranslation(["Webhooks", "Common", "Files", "Settings"]);
 
   const [columns, setColumns] = useState<TableHeaderColumn[]>([]);
 
@@ -58,7 +58,7 @@ const TableHeader = (props: TableHeaderProps) => {
     },
     {
       key: "SecretKey",
-      title: t("Webhooks:SecretKey"),
+      title: t("SecretKey"),
       enable: true,
       resizable: true,
     },
@@ -69,26 +69,32 @@ const TableHeader = (props: TableHeaderProps) => {
       resizable: true,
     },
     {
-      key: "CreatedBy",
-      title: t("Common:CreatedBy"),
-      enable: true,
-      resizable: true,
-    },
-    {
       key: "LastUsed",
       title: t("Common:LastUsed"),
       enable: true,
       resizable: true,
     },
     {
-      key: "ExpiresAt",
-      title: t("Common:ExpiresAt"),
+      key: "CreatedBy",
+      title: t("Common:CreatedBy"),
       enable: true,
       resizable: true,
     },
     {
+      key: "Permissions",
+      title: t("Settings:Permissions"),
+      enable: true,
+      resizable: true,
+    },
+    // {
+    //   key: "ExpiresAt",
+    //   title: t("Common:ExpiresAt"),
+    //   enable: true,
+    //   resizable: true,
+    // },
+    {
       key: "State",
-      title: t("Webhooks:State"),
+      title: t("State"),
       enable: true,
       resizable: true,
     },

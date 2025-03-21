@@ -29,29 +29,14 @@ import TableView from "./TableView";
 import RowView from "./RowView";
 import { ApiKeyViewProps } from "../types";
 
-const ApiKeysView = ({
-  viewAs,
-  items,
-  onDeleteApiKey,
-  onChangeApiKeyStatus,
-}: ApiKeyViewProps) => {
+const ApiKeysView = ({ viewAs, ...rest }: ApiKeyViewProps) => {
   return (
     <Consumer>
       {(context) =>
         viewAs === "table" ? (
-          <TableView
-            items={items}
-            sectionWidth={context.sectionWidth!}
-            onDeleteApiKey={onDeleteApiKey}
-            onChangeApiKeyStatus={onChangeApiKeyStatus}
-          />
+          <TableView sectionWidth={context.sectionWidth!} {...rest} />
         ) : (
-          <RowView
-            items={items}
-            sectionWidth={context.sectionWidth!}
-            onDeleteApiKey={onDeleteApiKey}
-            onChangeApiKeyStatus={onChangeApiKeyStatus}
-          />
+          <RowView sectionWidth={context.sectionWidth!} {...rest} />
         )
       }
     </Consumer>

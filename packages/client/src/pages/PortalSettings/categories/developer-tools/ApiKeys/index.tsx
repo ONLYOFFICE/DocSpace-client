@@ -31,15 +31,21 @@ import styled from "styled-components";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import {
   changeApiKeyStatus,
-  createApiKey,
   deleteApiKey,
   getApiKeys,
 } from "@docspace/shared/api/api-keys";
-import { TApiKey, TApiKeyRequest } from "@docspace/shared/api/api-keys/types";
+import {
+  TApiKey,
+  TApiKeyParamsRequest,
+} from "@docspace/shared/api/api-keys/types";
 
-import { Button } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
 import CreateApiKeyDialog from "./sub-components/CreateApiKeyDialog";
+import RenameApiKeyDialog from "./sub-components/RenameApiKeyDialog";
+import DeleteApiKeyDialog from "./sub-components/DeleteApiKeyDialog";
 import ApiKeysView from "./sub-components";
 import { ApiKeysProps } from "./types";
 
@@ -49,48 +55,94 @@ const StyledApiKeys = styled.div`
   .api-keys_description {
     box-sizing: border-box;
     max-width: 700px;
-    margin-bottom: 24px;
+    margin-bottom: 25px;
+
+    .api-keys_text {
+      color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    }
 
     .api-keys_description-text {
       line-height: 20px;
-      color: ${(props) => props.theme.client.settings.common.descriptionColor};
+      margin-bottom: 20px;
+    }
+
+    .api-keys_usage-text {
+      margin-bottom: 8px;
     }
   }
 `;
 
 const ApiKeys = (props: ApiKeysProps) => {
-  const { t, viewAs } = props;
+  const { t, viewAs, currentColorScheme } = props;
 
   const [listItems, setListItems] = useState<TApiKey[]>([]);
   const [createKeyDialogIsVisible, setCreateKeyDialogIsVisible] =
     useState(false);
+  const [renameKeyDialogIsVisible, setRenameKeyDialogIsVisible] =
+    useState(false);
+  const [deleteKeyDialogIsVisible, setDeleteKeyDialogIsVisible] =
+    useState(false);
+  const [actionItem, setActionItem] = useState<TApiKey | null>(null);
+
   const [isRequestRunning, setIsRequestRunning] = useState(false);
 
-  const onCreateKey = (newKey: TApiKeyRequest) => {
-    setIsRequestRunning(true);
-    createApiKey(newKey)
-      .then((key) => {
-        setCreateKeyDialogIsVisible(false);
-        setListItems((prev) => [...prev, key]);
-      })
-      .finally(() => setIsRequestRunning(false));
+  const onRenameApiKey = (id: TApiKey["id"]) => {
+    const itemIndex = listItems.findIndex((x) => x.id === id);
+    if (itemIndex > -1) {
+      setActionItem(listItems[itemIndex]);
+    }
+
+    setRenameKeyDialogIsVisible(true);
   };
 
   const onDeleteApiKey = (id: TApiKey["id"]) => {
-    deleteApiKey(id).then((res) => {
-      if (res) setListItems((prev) => prev.filter((k) => k.id !== id));
-    });
+    const itemIndex = listItems.findIndex((x) => x.id === id);
+    if (itemIndex > -1) {
+      setActionItem(listItems[itemIndex]);
+    }
+
+    setDeleteKeyDialogIsVisible(true);
   };
 
-  const onChangeApiKeyStatus = (id: TApiKey["id"]) => {
-    changeApiKeyStatus(id).then((res) => {
-      if (res) {
-        const items = listItems.slice();
-        const index = items.findIndex((x) => x.id === id);
-        items[index].isActive = !items[index].isActive;
-        setListItems(items);
-      }
-    });
+  const onDelete = () => {
+    if (!actionItem) return;
+    setIsRequestRunning(true);
+    deleteApiKey(actionItem.id)
+      .then((res) => {
+        if (res)
+          setListItems((prev) => prev.filter((k) => k.id !== actionItem.id));
+      })
+      .catch((err) => toastr.error(err))
+      .finally(() => {
+        setIsRequestRunning(false);
+        setDeleteKeyDialogIsVisible(false);
+      });
+  };
+
+  const onChangeApiKeyParams = (
+    id: TApiKey["id"],
+    params: TApiKeyParamsRequest,
+  ) => {
+    setIsRequestRunning(true);
+    changeApiKeyStatus(id, params)
+      .then((res) => {
+        if (res) {
+          const items = listItems.slice();
+          const index = items.findIndex((x) => x.id === id);
+          if (index > -1) {
+            if (params.isActive) items[index].isActive = params.isActive;
+            if (params.name) items[index].name = params.name;
+          }
+
+          setListItems(items);
+        }
+      })
+      .catch((err) => toastr.error(err))
+      .finally(() => {
+        setIsRequestRunning(false);
+        setRenameKeyDialogIsVisible(false);
+        setActionItem(null);
+      });
   };
 
   const getKeys = async () => {
@@ -109,15 +161,28 @@ const ApiKeys = (props: ApiKeysProps) => {
   return (
     <StyledApiKeys>
       <div className="api-keys_description">
-        <Text className="api-keys_description-text">
+        <Text className="api-keys_text api-keys_description-text">
           {t("Settings:ApiKeysDescription")}
         </Text>
+
+        <Text className="api-keys_text api-keys_usage-text">
+          {t("Settings:ApiKeyViewUsage")}
+        </Text>
+        <Link
+          isHovered
+          color={currentColorScheme?.main?.accent}
+          fontSize="13px"
+          fontWeight={600}
+        >
+          {t("Settings:APIGuide")}
+        </Link>
       </div>
       <div>
         <Button
           onClick={() => setCreateKeyDialogIsVisible(true)}
           label={t("Settings:CreateNewSecretKey")}
           primary
+          size={ButtonSize.small}
         />
         <div>
           {listItems.length ? (
@@ -125,7 +190,8 @@ const ApiKeys = (props: ApiKeysProps) => {
               items={listItems}
               viewAs={viewAs}
               onDeleteApiKey={onDeleteApiKey}
-              onChangeApiKeyStatus={onChangeApiKeyStatus}
+              onChangeApiKeyParams={onChangeApiKeyParams}
+              onRenameApiKey={onRenameApiKey}
             />
           ) : null}
         </div>
@@ -134,7 +200,24 @@ const ApiKeys = (props: ApiKeysProps) => {
         <CreateApiKeyDialog
           isVisible={createKeyDialogIsVisible}
           setIsVisible={setCreateKeyDialogIsVisible}
-          onCreateKey={onCreateKey}
+          setListItems={setListItems}
+        />
+      ) : null}
+      {renameKeyDialogIsVisible && actionItem ? (
+        <RenameApiKeyDialog
+          isVisible={renameKeyDialogIsVisible}
+          setIsVisible={setRenameKeyDialogIsVisible}
+          setListItems={setListItems}
+          item={actionItem}
+          onChangeApiKeyParams={onChangeApiKeyParams}
+          isRequestRunning={isRequestRunning}
+        />
+      ) : null}
+      {deleteKeyDialogIsVisible ? (
+        <DeleteApiKeyDialog
+          isVisible={deleteKeyDialogIsVisible}
+          setIsVisible={setDeleteKeyDialogIsVisible}
+          onDelete={onDelete}
           isRequestRunning={isRequestRunning}
         />
       ) : null}
@@ -142,10 +225,12 @@ const ApiKeys = (props: ApiKeysProps) => {
   );
 };
 
-export default inject(({ setup }: TStore) => {
+export default inject(({ setup, settingsStore }: TStore) => {
   const { viewAs } = setup;
+  const { currentColorScheme } = settingsStore;
 
   return {
     viewAs,
+    currentColorScheme,
   };
 })(withTranslation(["Settings", "Common"])(observer(ApiKeys)));

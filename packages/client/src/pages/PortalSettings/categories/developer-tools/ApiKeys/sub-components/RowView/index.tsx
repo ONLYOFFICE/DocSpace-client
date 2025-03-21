@@ -29,6 +29,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import {
@@ -92,8 +93,9 @@ const RowView = (props: TableViewProps) => {
     setViewAs,
     sectionWidth,
     currentDeviceType,
-    onChangeApiKeyStatus,
+    onChangeApiKeyParams,
     onDeleteApiKey,
+    onRenameApiKey,
   } = props;
 
   useViewEffect({
@@ -111,6 +113,16 @@ const RowView = (props: TableViewProps) => {
           key={item.id}
           // sectionWidth={sectionWidth}
           contextOptions={[
+            {
+              key: "Settings dropdownItem",
+              label: t("Common:Rename"),
+              icon: RenameReactSvgUrl,
+              onClick: () => onRenameApiKey(item.id),
+            },
+            {
+              key: "separator",
+              isSeparator: true,
+            },
             {
               key: "Settings dropdownItem",
               label: t("Common:Delete"),
@@ -136,7 +148,7 @@ const RowView = (props: TableViewProps) => {
                   fontSize="12px"
                   className="row-content_text"
                 >
-                  {item.keyPrefix} | {item.createOn}
+                  {item.key} | {item.createOn}
                 </Text>
               </div>
             </div>
@@ -145,7 +157,9 @@ const RowView = (props: TableViewProps) => {
               <ToggleButton
                 className="toggle toggleButton"
                 isChecked={item.isActive}
-                onChange={() => onChangeApiKeyStatus(item.id)}
+                onChange={() =>
+                  onChangeApiKeyParams(item.id, { isActive: !item.isActive })
+                }
               />
             </ToggleButtonWrapper>
           </StyledRowContent>

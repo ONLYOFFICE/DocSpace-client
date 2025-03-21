@@ -76,16 +76,19 @@ const DeveloperToolsWrapper = (props) => {
     </div>
   );
 
+  const oauthData = identityServerEnabled
+    ? {
+        id: "oauth",
+        name: t("OAuth:OAuth"),
+        content: <OAuth />,
+      }
+    : {};
+
   const data = [
     {
       id: "api",
       name: t("Settings:Api"),
       content: <Api />,
-    },
-    {
-      id: "api-keys",
-      name: t("Settings:ApiKeys"),
-      content: <ApiKeys />,
     },
     {
       id: "javascript-sdk",
@@ -102,15 +105,13 @@ const DeveloperToolsWrapper = (props) => {
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
     },
+    { ...oauthData },
+    {
+      id: "api-keys",
+      name: t("Settings:ApiKeys"),
+      content: <ApiKeys />,
+    },
   ];
-
-  if (identityServerEnabled) {
-    data.push({
-      id: "oauth",
-      name: t("OAuth:OAuth"),
-      content: <OAuth />,
-    });
-  }
 
   // const load = async () => {
   //   // await loadBaseInfo();

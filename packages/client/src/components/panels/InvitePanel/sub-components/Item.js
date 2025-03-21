@@ -123,6 +123,7 @@ const Item = ({
 
   const [searchRequestRunning, setSearchRequestRunning] = useState(false);
   const [isSharedUser, setIsSharedUser] = useState(false);
+  const [userExistsOnPortal, setUserExistsOnPortal] = useState(null);
 
   const searchByQuery = async (value) => {
     if (!value) {
@@ -152,6 +153,8 @@ const Item = ({
     const user = users.items.find((userItem) => userItem.email === value);
 
     setIsSharedUser(user && (roomId === -1 || user?.shared));
+
+    roomId !== -1 && setUserExistsOnPortal(user);
   };
 
   const debouncedSearch = useCallback(
@@ -229,9 +232,18 @@ const Item = ({
     const currentErrors = validationErrors.length ? validationErrors : [];
 
     setParseErrors(currentErrors);
-    changeInviteItem({ id, email: value, errors: currentErrors, access }).then(
-      () => errorsInList(),
-    );
+
+    const newValue = userExistsOnPortal || {
+      id,
+      email: value,
+      errors: currentErrors,
+      access,
+    };
+
+    const addExisting = !!userExistsOnPortal;
+    const oldId = addExisting ? id : null;
+
+    changeInviteItem(newValue, addExisting, oldId).then(() => errorsInList());
   };
 
   const saveEdit = async () => {

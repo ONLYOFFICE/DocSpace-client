@@ -44,6 +44,8 @@ import {
 } from "../FilesSelector.utils";
 import { UseSocketHelperProps } from "../FilesSelector.types";
 import { SettingsContext } from "../contexts/Settings";
+import { getFileInfo, getFolderInfo } from "../../../api/files";
+import { getRoomInfo } from "../../../api/rooms";
 
 const useSocketHelper = ({
   disabledItems,
@@ -114,7 +116,7 @@ const useSocketHelper = ({
   );
 
   const addItem = React.useCallback(
-    (opt: TOptSocket) => {
+    async (opt: TOptSocket) => {
       if (!opt?.data) return;
 
       const data: TFile | TFolder | TRoom = JSON.parse(opt.data);
@@ -129,12 +131,16 @@ const useSocketHelper = ({
       let item: TSelectorItem = {} as TSelectorItem;
 
       if (opt?.type === "file" && "folderId" in data) {
-        [item] = convertFilesToItems([data], getIcon, filterParam);
+        const file = await getFileInfo(data.id);
+        [item] = convertFilesToItems([file], getIcon, filterParam);
       } else if (opt?.type === "folder" && !("folderId" in data)) {
-        item =
-          "roomType" in data && data.roomType && "tags" in data
-            ? convertRoomsToItems([data], t)[0]
-            : convertFoldersToItems([data], disabledItems, filterParam)[0];
+        if ("roomType" in data) {
+          const room = await getRoomInfo(data.id);
+          item = convertRoomsToItems([room], t)[0];
+        } else {
+          const folder = await getFolderInfo(data.id);
+          item = convertFoldersToItems([folder], disabledItems, filterParam)[0];
+        }
       }
 
       setItems((value) => {
@@ -188,7 +194,7 @@ const useSocketHelper = ({
   );
 
   const updateItem = React.useCallback(
-    (opt: TOptSocket) => {
+    async (opt: TOptSocket) => {
       if (!opt?.data) return;
 
       const data: TFile | TFolder | TRoom = JSON.parse(opt.data);
@@ -207,12 +213,16 @@ const useSocketHelper = ({
       let item: TSelectorItem = {} as TSelectorItem;
 
       if (opt?.type === "file" && "folderId" in data) {
-        [item] = convertFilesToItems([data], getIcon, filterParam);
-      } else if (opt?.type === "folder" && "roomType" in data) {
-        [item] =
-          data.roomType && "tags" in data
-            ? convertRoomsToItems([data], t)
-            : convertFoldersToItems([data], disabledItems, filterParam);
+        const file = await getFileInfo(data.id);
+        [item] = convertFilesToItems([file], getIcon, filterParam);
+      } else if (opt?.type === "folder") {
+        if ("roomType" in data) {
+          const room = await getRoomInfo(data.id);
+          item = convertRoomsToItems([room], t)[0];
+        } else {
+          const folder = await getFolderInfo(data.id);
+          item = convertFoldersToItems([folder], disabledItems, filterParam)[0];
+        }
       }
 
       if (item?.id === subscribedId.current) {

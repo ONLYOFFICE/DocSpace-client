@@ -46,6 +46,7 @@ type ShareFormDialogProps = {
   onCloseStartFillingSelectDialog: () => void;
   onSubmitStartFillingSelectDialog: SubmitFn;
   getIsDisabledStartFillingSelectDialog: StartFillingSelectorDialogProps["getIsDisabled"];
+  updateAccessLink?: () => void;
 };
 
 const ShareFormDialog = ({
@@ -60,6 +61,7 @@ const ShareFormDialog = ({
   onSubmitStartFillingSelectDialog,
   isVisibleStartFillingSelectDialog,
   createDefineRoomType,
+  updateAccessLink,
 }: ShareFormDialogProps) => {
   const handleClose = () => {
     onClose();
@@ -71,10 +73,16 @@ const ShareFormDialog = ({
     onClose();
   };
 
+  const onClickShareFile = () => {
+    updateAccessLink?.();
+    handleClose();
+  };
+
   return (
     <ShareFormDialogComponent
       visible
       onClose={handleClose}
+      {...(updateAccessLink && { onClickShareFile })}
       onClickFormRoom={onClickFormRoom}
       onClickVirtualDataRoom={onClickVirtualDataRoom}
       visibleContainer={isVisibleStartFillingSelectDialog}

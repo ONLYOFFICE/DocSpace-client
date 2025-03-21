@@ -24,32 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useCallback } from "react";
-import { withTranslation } from "react-i18next";
-import { Label } from "@docspace/shared/components/label";
-import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
+import { withTranslation } from "react-i18next";
+
+import { Label } from "@docspace/shared/components/label";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
+import api from "@docspace/shared/api";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+
 import SDK from "@onlyoffice/docspace-sdk-js";
 
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
-import { loadScript } from "@docspace/shared/utils/common";
-import { ViewSelector } from "@docspace/shared/components/view-selector";
-
-import FromScriptUrl from "PUBLIC_DIR/images/code.react.svg?url";
-import FromLibUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
-
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import api from "@docspace/shared/api";
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
-
 import { WidthSetter } from "../sub-components/WidthSetter";
 import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
+import { VersionSelector } from "../sub-components/VersionSelector";
+import Integration from "../sub-components/Integration";
 
-import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
+import {
+  dimensionsModel,
+  defaultSize,
+  defaultDimension,
+  sdkSource,
+  sdkVersion,
+} from "../constants";
 
 import {
   Controls,
@@ -61,14 +64,15 @@ import {
   Container,
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
-import Integration from "../sub-components/Integration";
 
 const Viewer = (props) => {
   const { t, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const [fromPackage, setFromPackage] = useState(true);
+  const [version, onSetVersion] = useState(sdkVersion[200]);
+
+  const [source, onSetSource] = useState(sdkSource.Package);
 
   const [config, setConfig] = useState({
     src: window.location.origin,
@@ -79,6 +83,10 @@ const Viewer = (props) => {
     frameId: "ds-frame",
     init: false,
   });
+
+  const fromPackage = source === sdkSource.Package;
+
+  const sdkScriptUrl = getSdkScriptUrl(version);
 
   const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
 
@@ -93,17 +101,20 @@ const Viewer = (props) => {
   useEffect(() => {
     const script = document.getElementById("sdk-script");
 
-    if (!fromPackage && !script) {
-      loadScript(SDK_SCRIPT_URL, "sdk-script");
-    } else {
-      script?.remove();
+    if (script) {
+      script.remove();
+      destroyFrame();
+    }
+
+    if (!fromPackage) {
+      loadScript(sdkScriptUrl, "sdk-script");
     }
 
     return () => {
       destroyFrame();
       setTimeout(() => script?.remove(), 10);
     };
-  }, [fromPackage]);
+  }, [source, version]);
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
@@ -139,23 +150,6 @@ const Viewer = (props) => {
     });
   };
 
-  const surceSelectorData = [
-    {
-      id: "sdk-source-script",
-      value: "script",
-      icon: FromScriptUrl,
-    },
-    {
-      id: "sdk-source-lib",
-      value: "lib",
-      icon: FromLibUrl,
-    },
-  ];
-
-  const onChangeView = useCallback((view) => {
-    setFromPackage(view === "lib");
-  }, []);
-
   const preview = (
     <Frame
       width={
@@ -170,12 +164,6 @@ const Viewer = (props) => {
       }
       targetId={config.frameId}
     >
-      <ViewSelector
-        onChangeView={onChangeView}
-        viewAs={fromPackage}
-        viewSettings={surceSelectorData}
-        style={{ position: "absolute", right: "8px", top: "8px", zIndex: 10 }}
-      />
       {config.id !== undefined ? (
         <div id={config.frameId} />
       ) : (
@@ -200,11 +188,16 @@ const Viewer = (props) => {
           preview={preview}
           theme={theme}
           frameId={config.frameId}
-          scriptUrl={SDK_SCRIPT_URL}
+          scriptUrl={sdkScriptUrl}
           config={config}
           isDisabled={config?.id === undefined}
         />
         <Controls>
+          <VersionSelector
+            t={t}
+            onSetSource={onSetSource}
+            onSetVersion={onSetVersion}
+          />
           <ControlsSection>
             <CategorySubHeader>{t("FileId")}</CategorySubHeader>
             <ControlsGroup>

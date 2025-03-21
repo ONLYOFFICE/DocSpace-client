@@ -595,7 +595,7 @@ class ContextOptionsStore {
       });
       setConvertDialogVisible(true);
     } else {
-      this.gotoDocEditor(item, false);
+      this.gotoDocEditor(item, false, null, item.isPDFForm);
     }
   };
 
@@ -2552,14 +2552,13 @@ class ContextOptionsStore {
       return;
     }
 
-    const { oformsFilter } = this.oformsStore;
+    const { oformsFilter, defaultOformLocale } = this.oformsStore;
+    const initOformFilter = oformsFilter || oformsFilter.getDefault();
 
-    const initOformFilter = (
-      oformsFilter || oformsFilter.getDefault()
-    ).toUrlParams();
+    if (!initOformFilter.locale) initOformFilter.locale = defaultOformLocale;
 
     window.DocSpace.navigate(
-      `/form-gallery/${this.selectedFolderStore.id}/filter?${initOformFilter}`,
+      `/form-gallery/${this.selectedFolderStore.id}/filter?${initOformFilter.toUrlParams()}`,
     );
   };
 

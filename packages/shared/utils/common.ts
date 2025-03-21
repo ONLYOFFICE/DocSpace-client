@@ -1389,3 +1389,9 @@ export const openUrl = ({
         : window.open(url, "_self");
   }
 };
+
+export const getSdkScriptUrl = (version: string) => {
+  return typeof window !== "undefined"
+    ? `${window.location.origin}/static/scripts/sdk/${version}/api.js`
+    : "";
+};

@@ -151,7 +151,7 @@ export type TComboboxProps = {
   /** Set is open item access */
   setIsOpenItemAccess?: (isOpen: boolean) => void;
   /** Size */
-  size?: ComboBoxSize;
+  size?: `${ComboBoxSize}`;
 
   role?: string;
   /** Style */

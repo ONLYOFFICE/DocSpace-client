@@ -88,6 +88,7 @@ export type TAvailableExternalRights = {
   Read: boolean;
   Restrict: boolean;
   Review: boolean;
+  FillForms: boolean;
 };
 
 export type TFile = {

@@ -82,6 +82,16 @@ export const CodeToInsert = ({ t, codeBlock, config, theme, scriptUrl }) => {
         enableCopy
       />
       <Text lineHeight="20px" className="preview-description">
+        {t("NPMCodeConfigStep")}
+      </Text>
+      <Textarea
+        value={JSON.stringify(config)}
+        heightTextArea={118}
+        isReadOnly
+        enableCopy
+        isJSONField
+      />
+      <Text lineHeight="20px" className="preview-description">
         {t("NPMCodeCreateStep")}
       </Text>
       <Textarea
@@ -100,16 +110,6 @@ export const CodeToInsert = ({ t, codeBlock, config, theme, scriptUrl }) => {
         heightTextArea={32}
         isReadOnly
         enableCopy
-      />
-      <Text lineHeight="20px" className="preview-description">
-        {t("NPMCodeConfigStep")}
-      </Text>
-      <Textarea
-        value={JSON.stringify(config)}
-        heightTextArea={118}
-        isReadOnly
-        enableCopy
-        isJSONField
       />
       <Text lineHeight="20px" className="preview-description">
         {t("NPMCodeUsageStep")}

@@ -166,7 +166,7 @@ const SectionHeaderContent = (props) => {
     setCloseEditIndexDialogVisible,
     rootFolderId,
     guidAnimationVisible,
-    setguidAnimationVisible,
+    setGuidAnimationVisible,
     setRefMap,
     deleteRefMap,
     isPersonalReadOnly,
@@ -241,12 +241,12 @@ const SectionHeaderContent = (props) => {
 
     const removeTimer = setTimeout(() => {
       setAnimationClasses([]);
+      setGuidAnimationVisible(false);
     }, 3000);
 
     return () => {
       clearTimeout(beforeTimer);
       clearTimeout(removeTimer);
-      setguidAnimationVisible(false);
     };
   };
 
@@ -785,7 +785,7 @@ export default inject(
       setReorderDialogVisible,
       setCloseEditIndexDialogVisible,
       welcomeFormFillingTipsVisible,
-      setguidAnimationVisible,
+      setGuidAnimationVisible,
       guidAnimationVisible,
     } = dialogsStore;
 
@@ -993,7 +993,7 @@ export default inject(
       setCloseEditIndexDialogVisible,
       welcomeFormFillingTipsVisible,
       guidAnimationVisible,
-      setguidAnimationVisible,
+      setGuidAnimationVisible,
       setRefMap,
       deleteRefMap,
     };

@@ -45,12 +45,13 @@ const ErrorBoundaryWrapper = (props: Partial<ErrorBoundaryProps>) => {
     <ErrorBoundary
       user={user!}
       version={version!}
-      children={children}
       firebaseHelper={firebaseHelper!}
       currentDeviceType={currentDeviceType!}
       currentColorScheme={currentColorScheme}
       onError={onError}
-    />
+    >
+      {children}
+    </ErrorBoundary>
   );
 };
 

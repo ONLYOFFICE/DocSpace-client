@@ -180,12 +180,17 @@ class AuthStore {
     const isPortalRestore =
       this.settingsStore?.tenantStatus === TenantStatus.PortalRestore;
 
-    if (!isPortalRestore) requests.push(this.getCapabilities());
+    const isPortalEncryption =
+      this.settingsStore?.tenantStatus === TenantStatus.EncryptionProcess;
+
+    if (!isPortalRestore && !isPortalEncryption)
+      requests.push(this.getCapabilities());
 
     if (
       this.settingsStore?.isLoaded &&
       this.settingsStore?.socketUrl &&
-      !isPortalDeactivated
+      !isPortalDeactivated &&
+      !isPortalEncryption
     ) {
       requests.push(
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {

@@ -40,13 +40,13 @@ import SocketHelper, {
 } from "@docspace/shared/utils/socket";
 import "@docspace/shared/styles/custom.scss";
 
-import { useStore } from "./store";
-import SimpleHeader from "./SimpleHeader";
-
 import Main from "client/Main";
 import Layout from "client/Layout";
 import NavMenu from "client/NavMenu";
 import MainLayout from "SRC_DIR/Layout";
+
+import { useStore } from "./store";
+import SimpleHeader from "./SimpleHeader";
 
 declare global {
   interface Window {
@@ -117,7 +117,7 @@ const App = observer(() => {
   const rootElement = document.getElementById("root") as HTMLElement;
 
   const toast = isMobileOnly ? (
-    <Portal element={<Toast />} appendTo={rootElement} visible={true} />
+    <Portal element={<Toast />} appendTo={rootElement} visible />
   ) : (
     <Toast />
   );

@@ -27,15 +27,14 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useStore } from "SRC_DIR/store";
 import BrandingPage from "client/BrandingPage";
 import { setDocumentTitle } from "SRC_DIR/utils";
 
-interface BrandingProps {
+type BrandingProps = {
   logoText: string;
-}
+};
 
-const Branding: React.FC<BrandingProps> = ({ logoText }) => {
+const Branding = ({ logoText }: BrandingProps) => {
   const { t } = useTranslation(["Settings"]);
 
   useEffect(() => {

@@ -339,6 +339,10 @@ class SettingsStore {
     this.showGuestReleaseTip = showGuestReleaseTip;
   };
 
+  get wizardCompleted() {
+    return this.isLoaded && !this.wizardToken;
+  }
+
   get helpCenterDomain() {
     return this.externalResources?.helpcenter?.domain;
   }

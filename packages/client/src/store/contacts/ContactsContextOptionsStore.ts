@@ -340,7 +340,7 @@ class ContactsConextOptionsStore {
     const isGuests = contactsTab === "guests";
 
     const { isOwner: isUserOwner, isAdmin: isUserAdmin } = this.userStore.user!;
-    const { standalone } = this.settingsStore;
+    const { standalone, allowInvitingGuests } = this.settingsStore;
 
     const { isCollaborator, isRoomAdmin, isAdmin, isVisitor } =
       item ?? selectionUsersRights;
@@ -409,7 +409,8 @@ class ContactsConextOptionsStore {
 
       options.push(roomAdminOption);
       options.push(userOption);
-      if (!isVisitor) options.push(guestOption);
+
+      if (!isVisitor && allowInvitingGuests) options.push(guestOption);
     }
 
     return options;

@@ -154,7 +154,7 @@ const Details = ({
                 </Text>
 
                 <Button
-                  label={t("Files:CreateRoom")}
+                  label={t("Common:CreateRoom")}
                   className="room-template_button"
                   onClick={onCreateRoom}
                   size="extraSmall"

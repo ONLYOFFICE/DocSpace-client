@@ -45,6 +45,5 @@
   "UploadFromPortalDescription": "Качвайте всякакъв тип файлове от Документи или Стаи",
   "UploadFromPortalTitle": "Качете от {{productName}}",
   "UploadPDFFormOptionDescription": "Изберете готов PDF формуляр, наличен в {{productName}}, и го качете в стаята.",
-  "UserEmptyDescription": "Файлове и папки, качени от администраторите, ще се показват тук.",
   "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни"
 }

@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "응답이 없습니다",
-  "ErrorUnavailableText": "{{productName}} 이용 불가",
-  "LinkDoesNotExist": "열려고 하는 링크가 존재하지 않습니다.",
-  "LinkHasExpired": "팔로우한 링크가 만료되었습니다."
+  "ErrorUnavailableText": "{{productName}} 이용 불가"
 }

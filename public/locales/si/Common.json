@@ -473,5 +473,21 @@
   "Website": "අඩවිය",
   "Yes": "ඔව්",
   "Yesterday": "ඊයේ",
-  "You": "ඔබ"
+  "You": "ඔබ",
+  "RoomSelector": "කාමර තෝරනය",
+  "FileSelector": "ගොනු තෝරනය",
+  "LinkDoesNotExist": "ඔබ විවෘත කිරීමට උත්සාහ කරන සබැඳිය නොපවතී.",
+  "LinkHasExpired": "ඔබ අනුගමනය කළ සබැඳිය කල් ඉකුත් වී ඇත.",
+  "EmptyScreenFolder": "මෙතැන ලේඛන නැත",
+  "RoomEmptyAtTheMoment": "දැනට මෙම කාමරය හිස්ය",
+  "FilesWillAppearHere": "කාමරයට එකතු කරන ලද ගොනු සහ බහාලුම් මෙහි දිස් වනු ඇත.",
+  "EmptyRootRoomHeader": "{{productName}} වෙත පිළිගනිමු",
+  "WithSubfolders": "අනු බහාලුම් සමඟ",
+  "VersionBadge": "අනු.{{version}}",
+  "ShowVersionHistory": "අනුවාද ඉතිහාසය පෙන්වන්න",
+  "New": "නව",
+  "BadgeAlertDescription": "මෙම ආකෘතිපත්‍රයේ භූමිකා කිහිපයක් දක්වා ඇත. මෙම වර්ගයේ කාමරයක භූමිකා කිහිපයක් සහිත ආකෘතිපත්‍ර පිරවීමට නොහැකිය",
+  "CopySharedLink": "බෙදාගත් සබැඳියේ පිටපතක්",
+  "CreateRoom": "කාමරය සාදන්න",
+  "UnblockVersion": "අනවහිර/ඇතුළු-වීම"
 }

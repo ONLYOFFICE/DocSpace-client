@@ -79,7 +79,7 @@ export const getTranslateHeaderKey = (
   const translateHeaderKey: Record<EmptyScreenTypeEnum, string> = {
     [EmptyScreenTypeEnum.Done]: t("EmptyFormFolderDoneHeaderText"),
     [EmptyScreenTypeEnum.InProgress]: t("EmptyFormFolderProgressHeaderText"),
-    [EmptyScreenTypeEnum.Default]: t("EmptyScreenFolder"),
+    [EmptyScreenTypeEnum.Default]: t("Common:EmptyScreenFolder"),
     [EmptyScreenTypeEnum.Corporate]: t("RoomCreated"),
     [EmptyScreenTypeEnum.SubFolderDone]: t("EmptyFormSubFolderHeaderText"),
     [EmptyScreenTypeEnum.SubFolderinProgress]: t(

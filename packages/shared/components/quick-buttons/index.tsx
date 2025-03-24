@@ -142,8 +142,8 @@ export const QuickButtons = (props: QuickButtonsProps) => {
   const getTooltipContent = () => (
     <Text fontSize="12px" fontWeight={400} noSelect>
       {roomLifetime?.deletePermanently
-        ? t("Files:FileWillBeDeletedPermanently", { date: expiredDate || "" })
-        : t("Files:FileWillBeMovedToTrash", { date: expiredDate || "" })}
+        ? t("Common:FileWillBeDeletedPermanently", { date: expiredDate || "" })
+        : t("Common:FileWillBeMovedToTrash", { date: expiredDate || "" })}
     </Text>
   );
 
@@ -184,7 +184,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               color={colorLock}
               isDisabled={isDisabled}
               hoverColor={theme.filesQuickButtons.sharedColor}
-              title={t("UnblockVersion")}
+              title={t("Common:UnblockVersion")}
             />
           ) : null}
           {isAvailableDownloadFile ? (
@@ -210,7 +210,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               color={colorLock}
               isDisabled={isDisabled}
               hoverColor={theme.filesQuickButtons.sharedColor}
-              title={t("Files:CreateRoom")}
+              title={t("Common:CreateRoom")}
             />
           ) : null}
           {showCopyLinkIcon ? (
@@ -223,7 +223,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               color={colorLock}
               isDisabled={isDisabled}
               hoverColor={theme.filesQuickButtons.sharedColor}
-              title={t("Files:CopySharedLink")}
+              title={t("Common:CopySharedLink")}
             />
           ) : null}
           {isAvailableShareFile ? (
@@ -238,7 +238,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
               color={colorShare}
               isDisabled={isDisabled}
               hoverColor={theme.filesQuickButtons.sharedColor}
-              title={t("Files:CopySharedLink")}
+              title={t("Common:CopySharedLink")}
             />
           ) : null}
           {/* {fileExst && !isTrashFolder && displayBadges && (
@@ -253,7 +253,7 @@ export const QuickButtons = (props: QuickButtonsProps) => {
           color={colorLock}
           isDisabled={isDisabled}
           hoverColor={theme.filesQuickButtons.sharedColor}
-          title={t("UnblockVersion")}
+          title={t("Common:UnblockVersion")}
         />
       )}
 

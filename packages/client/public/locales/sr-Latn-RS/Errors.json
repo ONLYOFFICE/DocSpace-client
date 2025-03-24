@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Prazan odgovor",
-  "ErrorUnavailableText": "{{productName}} nedostupan",
-  "LinkDoesNotExist": "Link koji pokušavate da otvorite ne postoji.",
-  "LinkHasExpired": "Link koji ste pratili je istekao."
+  "ErrorUnavailableText": "{{productName}} nedostupan"
 }

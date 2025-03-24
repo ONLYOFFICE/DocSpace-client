@@ -52,7 +52,13 @@ export const PreviewBlock = ({
   const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
   const code = (
-    <CodeToInsert t={t} codeBlock={codeBlock} config={config} theme={theme} />
+    <CodeToInsert
+      t={t}
+      codeBlock={codeBlock}
+      scriptUrl={scriptUrl}
+      config={config}
+      theme={theme}
+    />
   );
   const dataTabs = [
     {

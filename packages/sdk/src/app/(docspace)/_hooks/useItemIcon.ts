@@ -13,25 +13,28 @@ import {
 export type TItemIconSizes = 24 | 32 | 64 | 96;
 
 type UseItemIconProps = {
-  filesSettings: TFilesSettings;
+  filesSettings?: TFilesSettings;
 };
 
 export type TGetIcon = ReturnType<typeof useItemIcon>["getIcon"];
 
 export default function useItemIcon({ filesSettings }: UseItemIconProps) {
   const isArchive = useCallback(
-    (extension: string) => presentInArray(filesSettings.extsArchive, extension),
-    [filesSettings.extsArchive],
+    (extension: string) =>
+      presentInArray(filesSettings?.extsArchive ?? [], extension),
+    [filesSettings?.extsArchive],
   );
 
   const isImage = useCallback(
-    (extension: string) => presentInArray(filesSettings.extsImage, extension),
-    [filesSettings.extsImage],
+    (extension: string) =>
+      presentInArray(filesSettings?.extsImage ?? [], extension),
+    [filesSettings?.extsImage],
   );
 
   const isSound = useCallback(
-    (extension: string) => presentInArray(filesSettings.extsAudio, extension),
-    [filesSettings.extsAudio],
+    (extension: string) =>
+      presentInArray(filesSettings?.extsAudio ?? [], extension),
+    [filesSettings?.extsAudio],
   );
 
   const isHtml = useCallback(

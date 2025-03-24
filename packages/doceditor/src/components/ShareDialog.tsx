@@ -50,6 +50,7 @@ type SharingDialogProps = {
   fileInfo: TFile;
   onCancel: () => void;
   isVisible: boolean;
+  onOpenPanel: () => void;
   selfId?: string;
 };
 
@@ -58,6 +59,7 @@ const SharingDialog = ({
   onCancel,
   isVisible,
   selfId,
+  onOpenPanel,
 }: SharingDialogProps) => {
   const { t, i18n } = useTranslation(["Common"]);
 
@@ -76,7 +78,12 @@ const SharingDialog = ({
       <ModalDialog.Body>
         <StyledWrapper>
           <div className="share-file_body">
-            <Share infoPanelSelection={fileInfo} selfId={selfId ?? ""} />
+            <Share
+              infoPanelSelection={fileInfo}
+              selfId={selfId ?? ""}
+              onOpenPanel={onOpenPanel}
+              onlyOneLink={fileInfo.isForm}
+            />
           </div>
         </StyledWrapper>
       </ModalDialog.Body>

@@ -26,10 +26,11 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import type {
-  TDownloadedFile,
-  TSortedDownloadFiles,
-  TSortedFiles,
+import {
+  isFile,
+  type TDownloadedFile,
+  type TSortedDownloadFiles,
+  type TSortedFiles,
 } from "./DownloadDialog.types";
 
 export const files: TDownloadedFile[] = [
@@ -592,9 +593,9 @@ export const extsConvertible = {
 };
 
 export const sortedFiles: TSortedFiles = {
-  documents: files.filter((f) => f.fileExst === ".docx"),
-  spreadsheets: files.filter((f) => f.fileExst === ".xlsx"),
-  presentations: files.filter((f) => f.fileExst === ".pptx"),
+  documents: files.filter((f) => isFile(f) && f.fileExst === ".docx"),
+  spreadsheets: files.filter((f) => isFile(f) && f.fileExst === ".xlsx"),
+  presentations: files.filter((f) => isFile(f) && f.fileExst === ".pptx"),
   masterForms: [],
   other: [],
 };

@@ -41,7 +41,7 @@ import { Text } from "../../../components/text";
 import { SimulatePassword } from "../../../components/simulate-password";
 
 import styles from "../DownloadDialog.module.scss";
-import type { OnePasswordRowProps } from "../DownloadDialog.types";
+import { isFile, type OnePasswordRowProps } from "../DownloadDialog.types";
 
 export const OnePasswordRow = ({
   item,
@@ -73,7 +73,8 @@ export const OnePasswordRow = ({
     [downloadItems],
   );
 
-  const onDowloadInOriginal = () => {
+  const onDownloadInOriginal = () => {
+    if (!isFile(item)) return;
     const files = updateDownloadItem(item.id, { format: item.fileExst });
     onDownload(files);
   };
@@ -126,7 +127,7 @@ export const OnePasswordRow = ({
       {
         key: "original-format",
         label: t("Common:OriginalFormat"),
-        onClick: onDowloadInOriginal,
+        onClick: onDownloadInOriginal,
         disabled: false,
         icon: DownloadAsReactSvgUrl,
       },

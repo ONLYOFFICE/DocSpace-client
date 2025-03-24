@@ -34,7 +34,6 @@ import {
   TGetRooms,
   type TValidateShareRoom,
 } from "@docspace/shared/api/rooms/types";
-import { checkFilterInstance } from "@docspace/shared/utils/common";
 import {
   roomListHandler,
   validatePublicRoomKeyHandler,
@@ -72,9 +71,10 @@ export async function getRooms(
   return rooms.response;
 }
 
-export async function validatePublicRoomKey(
-  key: string,
-): Promise<TValidateShareRoom> {
+export async function validatePublicRoomKey(key: string): Promise<{
+  response: TValidateShareRoom;
+  anonymousSessionKeyCookie?: string;
+}> {
   const [req] = createRequest([`/files/share/${key}`], [["", ""]], "GET");
 
   const res = IS_TEST ? validatePublicRoomKeyHandler() : await fetch(req);
@@ -84,6 +84,13 @@ export async function validatePublicRoomKey(
   }
 
   const validation = await res.json();
+  const cookies = res.headers.get("set-cookie");
+  const anonymousSessionKeyCookie = cookies
+    ?.split(",")
+    .find((c) => c.trim().startsWith("anonymous_session_key="));
 
-  return validation.response;
+  return {
+    response: validation.response,
+    anonymousSessionKeyCookie,
+  };
 }

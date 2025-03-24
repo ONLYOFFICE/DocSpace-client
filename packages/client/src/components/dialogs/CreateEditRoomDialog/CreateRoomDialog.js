@@ -217,7 +217,7 @@ const CreateRoomDialog = ({
 
   const dialogHeader = !roomParams.type
     ? t("ChooseRoomType")
-    : t("Files:CreateRoom");
+    : t("Common:CreateRoom");
 
   return (
     <ModalDialog

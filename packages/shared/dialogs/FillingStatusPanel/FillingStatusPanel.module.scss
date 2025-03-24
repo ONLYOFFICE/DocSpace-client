@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 @import "../../styles/variables/_colors";
+@import "../../styles/_mixins.scss";
 
 :global(.dark) {
   :local {
@@ -51,6 +52,12 @@
   padding: 8px 15px;
 
   margin-top: 16px;
+
+  @include no-user-select;
+}
+
+.infoBar {
+  @include no-user-select;
 }
 
 .fileName {
@@ -84,6 +91,8 @@
 
   margin-top: 16px;
   padding-top: 8px;
+
+  @include no-user-select;
 }
 
 .processTitle {

@@ -620,5 +620,20 @@
   "RoomSelector": "Селектор собе",
   "FileSelector": "Селектор датотеке",
   "LinkDoesNotExist": "Линк који покушавате да отворите не постоји.",
-  "LinkHasExpired": "Линк који сте пратили је истекао."
+  "LinkHasExpired": "Линк који сте пратили је истекао.",
+  "EmptyScreenFolder": "Нема докумената овде још",
+  "RoomEmptyAtTheMoment": "Ова соба је празна у овом тренутку.",
+  "FilesWillAppearHere": "Датотеке и фолдери додати у собу ће се појавити овде.",
+  "EmptyRootRoomHeader": "Добродошли на {{productName}}",
+  "WithSubfolders": "Са подфолдерима",
+  "MobileEditPdfNotAvailableInfo": "Неподржана акција. Молимо Вас да пређете на десктоп режим да бисте могли да уређујете PDF-ове или креирате PDF обрасце.",
+  "VersionBadge": "В.{{version}}",
+  "ShowVersionHistory": "Прикажи историју верзије",
+  "New": "Ново",
+  "BadgeAlertDescription": "У овом обрасцу је наведено неколико улога. Обрасци са више улога нису доступни за попуњавање ове врсте соба",
+  "CopySharedLink": "Копирај дељени линк",
+  "CreateRoom": "Креирај собу",
+  "FileWillBeDeletedPermanently": "Фајл ће бити трајно избрисан {{date}}",
+  "FileWillBeMovedToTrash": "Фајл ће бити премештен у смеће {{date}}",
+  "UnblockVersion": "Одблокирај/Провери присуство"
 }

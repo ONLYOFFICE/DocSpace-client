@@ -619,5 +619,20 @@
   "RoomSelector": "Selektor pokojów",
   "FileSelector": "Selektor plików",
   "LinkDoesNotExist": "Link, który próbujesz otworzyć, nie istnieje.",
-  "LinkHasExpired": "Dany link wygasł."
+  "LinkHasExpired": "Dany link wygasł.",
+  "EmptyScreenFolder": "Nie ma tu jeszcze dokumentów",
+  "RoomEmptyAtTheMoment": "Dany pokój jest aktualnie pusty.",
+  "FilesWillAppearHere": "Tutaj pojawią się pliki i katalogi dodane do pokoju.",
+  "EmptyRootRoomHeader": "Witamy w {{productName}}",
+  "WithSubfolders": "Z podkatalogami",
+  "MobileEditPdfNotAvailableInfo": "Nieobsługiwane działanie. Włącz tryb pulpitu, aby móc edytować pliki PDF lub tworzyć formularze PDF.",
+  "VersionBadge": "W.{{version}}",
+  "ShowVersionHistory": "Pokaż historię wersji",
+  "New": "Nowe",
+  "BadgeAlertDescription": "W danym formularzu określono kilka ról. Formularze z wieloma rolami nie są dostępne do wypełnienia w tym rodzaju pokoju",
+  "CopySharedLink": "Skopiuj link udostępniania",
+  "CreateRoom": "Utwórz pokój",
+  "FileWillBeDeletedPermanently": "Plik zostanie usunięty {{date}}",
+  "FileWillBeMovedToTrash": "Plik zostanie przeniesiony do kosza {{date}}",
+  "UnblockVersion": "Odblokuj/Check-in"
 }

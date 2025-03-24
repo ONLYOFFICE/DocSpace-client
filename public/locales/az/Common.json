@@ -619,5 +619,20 @@
   "RoomSelector": "Otaq seçici",
   "FileSelector": "Fayl seçici",
   "LinkDoesNotExist": "Açmağa çalışdığınız keçid mövcud deyil.",
-  "LinkHasExpired": "İzlədiyiniz keçidin vaxtı keçib."
+  "LinkHasExpired": "İzlədiyiniz keçidin vaxtı keçib.",
+  "EmptyScreenFolder": "Burada hələ ki, heç bir sənəd yoxdur",
+  "RoomEmptyAtTheMoment": "Bu otaq hazırda boşdur.",
+  "FilesWillAppearHere": "Otağa əlavə edilmiş fayl və qovluqlar burada görünəcək.",
+  "EmptyRootRoomHeader": "{{productName}} xoş gəlmisiniz",
+  "WithSubfolders": "Alt qovluqlarla",
+  "MobileEditPdfNotAvailableInfo": "Dəstəklənməyən əməliyyat. Lütfən, PDF sənədlərini redaktə edə və ya PDF formaları yarada bilmək üçün iş masası rejiminə keçin.",
+  "VersionBadge": "V.{{version}}",
+  "ShowVersionHistory": "Versiya tarixçəsinə bax",
+  "New": "Yeni",
+  "BadgeAlertDescription": "Bu formada müxtəlif rollar göstərilir. Çox rolu olan formalar bu otaq tipində doldurula bilməz",
+  "CopySharedLink": "Paylaşılan linki nüsxələyin",
+  "CreateRoom": "Otaq yaradın",
+  "FileWillBeDeletedPermanently": "Fayl {{date}} tarixində silinəcək",
+  "FileWillBeMovedToTrash": "Fayl {{date}} Zibil qutusuna köçürüləcək",
+  "UnblockVersion": "Blokdan çıxar"
 }

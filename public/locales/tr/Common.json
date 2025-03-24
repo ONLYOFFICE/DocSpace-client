@@ -619,5 +619,20 @@
   "RoomSelector": "Oda seçici",
   "FileSelector": "Dosya seçici",
   "LinkDoesNotExist": "Açmaya çalıştığınız bağlantı mevcut değil.",
-  "LinkHasExpired": "Takip ettiğiniz bağlantının süresi doldu."
+  "LinkHasExpired": "Takip ettiğiniz bağlantının süresi doldu.",
+  "EmptyScreenFolder": "Henüz burada döküman yok",
+  "RoomEmptyAtTheMoment": "Bu oda şu anda boş.",
+  "FilesWillAppearHere": "Odaya eklenen dosyalar ve klasörler burada görünecektir.",
+  "EmptyRootRoomHeader": "{{productName}}'e Hoş Geldiniz!",
+  "WithSubfolders": "Alt klasörler ile",
+  "MobileEditPdfNotAvailableInfo": "Desteklenmeyen işlem. PDF'leri düzenleyebilmek veya PDF formları oluşturabilmek için lütfen masaüstü moduna geçin.",
+  "VersionBadge": "V.{{version}}",
+  "ShowVersionHistory": "Sürüm geçmişini göster",
+  "New": "Yeni",
+  "BadgeAlertDescription": "Bu formda birkaç rol belirtilmiştir. Birden fazla role sahip formlar bu oda türünde doldurulamaz",
+  "CopySharedLink": "Paylaşılan bağlantıyı kopyala",
+  "CreateRoom": "Oda oluştur",
+  "FileWillBeDeletedPermanently": "Dosya silinecek {{date}}",
+  "FileWillBeMovedToTrash": "Dosya Çöp Kutusuna şu tarihte taşınacak {{date}}",
+  "UnblockVersion": "Engellemeyi Kaldır/Giriş Yap"
 }

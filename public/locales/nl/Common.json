@@ -619,5 +619,20 @@
   "RoomSelector": "Kamer selectie",
   "FileSelector": "Bestand selectie",
   "LinkDoesNotExist": "De link die u probeert te openen bestaat niet.",
-  "LinkHasExpired": "De link die u heeft gevolgd is verlopen."
+  "LinkHasExpired": "De link die u heeft gevolgd is verlopen.",
+  "EmptyScreenFolder": "Hier nog geen docs",
+  "RoomEmptyAtTheMoment": "Deze kamer is op dit moment leeg.",
+  "FilesWillAppearHere": "Bestanden en mappen die aan de kamer zijn toegevoegd, verschijnen hier.",
+  "EmptyRootRoomHeader": "Welkom bij {{productName}}!",
+  "WithSubfolders": "Met submappen",
+  "MobileEditPdfNotAvailableInfo": "Niet-ondersteunde handeling. Schakel over naar de desktopmodus om PDF's te bewerken of PDF formulieren te maken.",
+  "VersionBadge": "V.{{version}}",
+  "ShowVersionHistory": "Toon versiegeschiedenis",
+  "New": "Nieuw",
+  "BadgeAlertDescription": "Er worden verschillende rollen gespecificeerd in dit formulier. Formulieren met meerdere rollen kunnen niet worden ingevuld in dit type kamer",
+  "CopySharedLink": "Kopieer gedeelde link",
+  "CreateRoom": "Maak kamer aan",
+  "FileWillBeDeletedPermanently": "Het bestand wordt {{date}} verwijderd",
+  "FileWillBeMovedToTrash": "Het bestand wordt verplaatst naar de Prullenbak {{date}}",
+  "UnblockVersion": "Deblokkeren/inchecken"
 }

@@ -620,5 +620,20 @@
   "RoomSelector": "Selector de salas",
   "FileSelector": "Selector de archivos",
   "LinkDoesNotExist": "El enlace que usted intenta abrir no existe.",
-  "LinkHasExpired": "El enlace que usted ha seguido ha expirado."
+  "LinkHasExpired": "El enlace que usted ha seguido ha expirado.",
+  "EmptyScreenFolder": "Todavía no hay documentos aquí",
+  "RoomEmptyAtTheMoment": "Esta sala está vacía en este momento.",
+  "FilesWillAppearHere": "Los archivos y carpetas añadidos a la sala aparecerán aquí.",
+  "EmptyRootRoomHeader": "Bienvenido/a a {{productName}}",
+  "WithSubfolders": "Con subcarpetas",
+  "MobileEditPdfNotAvailableInfo": "Acción no admitida. Cambie al modo de escritorio para poder editar archivos PDF o crear formularios PDF.",
+  "VersionBadge": "V.{{version}}",
+  "ShowVersionHistory": "Mostrar historial de versiones",
+  "New": "Nuevo",
+  "BadgeAlertDescription": "En este formulario se especifican varios roles. Los formularios con roles múltiples no están disponibles para rellenar en este tipo de sala",
+  "CopySharedLink": "Copiar enlace compartido",
+  "CreateRoom": "Crear sala",
+  "FileWillBeDeletedPermanently": "El archivo se eliminará de forma permanente {{date}}",
+  "FileWillBeMovedToTrash": "El archivo se moverá a la Papelera {{date}}",
+  "UnblockVersion": "Desbloquear/Proteger"
 }

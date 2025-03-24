@@ -619,5 +619,20 @@
   "RoomSelector": "Výběr místnosti",
   "FileSelector": "Výběr souborů",
   "LinkDoesNotExist": "Odkaz, který se snažíte otevřít, neexistuje.",
-  "LinkHasExpired": "Platnost odkazu, který jste použili, vypršela."
+  "LinkHasExpired": "Platnost odkazu, který jste použili, vypršela.",
+  "EmptyScreenFolder": "Zatím zde nejsou žádné dokumenty",
+  "RoomEmptyAtTheMoment": "Tato místnost je momentálně prázdná.",
+  "FilesWillAppearHere": "Zde se zobrazí soubory a složky přidané do místnosti.",
+  "EmptyRootRoomHeader": "Vítejte v {{productName}}",
+  "WithSubfolders": "S podsložkami",
+  "MobileEditPdfNotAvailableInfo": "Nepodporovaná akce. Chcete-li upravovat soubory PDF nebo vytvářet formuláře PDF, přepněte prosím do režimu počítače.",
+  "VersionBadge": "V.{{version}}",
+  "ShowVersionHistory": "Zobrazit historii verzí",
+  "New": "Nový",
+  "BadgeAlertDescription": "V tomto formuláři je uvedeno několik rolí. Formuláře s více rolemi nejsou k dispozici pro vyplnění v tomto typu místnosti.",
+  "CopySharedLink": "Kopírování sdíleného odkazu",
+  "CreateRoom": "Vytvoření místnosti",
+  "FileWillBeDeletedPermanently": "Soubor bude smazán {{date}}",
+  "FileWillBeMovedToTrash": "Soubor bude přesunut do koše {{date}}",
+  "UnblockVersion": "Odblokování/přihlášení"
 }

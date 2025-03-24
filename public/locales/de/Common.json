@@ -620,5 +620,20 @@
   "RoomSelector": "Raumauswahl",
   "FileSelector": "Dateiauswahl",
   "LinkDoesNotExist": "Der Link, den Sie öffnen möchten, existiert nicht.",
-  "LinkHasExpired": "Der von Ihnen verwendete Link ist abgelaufen."
+  "LinkHasExpired": "Der von Ihnen verwendete Link ist abgelaufen.",
+  "EmptyScreenFolder": "Keine Dokumente hier",
+  "RoomEmptyAtTheMoment": "Dieser Raum ist derzeit leer.",
+  "FilesWillAppearHere": "Dem Raum hinzugefügte Dateien und Ordner werden hier angezeigt.",
+  "EmptyRootRoomHeader": "Willkommen in {{productName}}",
+  "WithSubfolders": "Mit Unterordnern",
+  "MobileEditPdfNotAvailableInfo": "Nicht unterstützte Aktion. Bitte wechseln Sie in den Desktopmodus, um PDFs bearbeiten oder PDF-Formulare erstellen zu können.",
+  "VersionBadge": "V.{{version}}",
+  "ShowVersionHistory": "Versionshistorie anzeigen",
+  "New": "Neu",
+  "BadgeAlertDescription": "In diesem Formular werden mehrere Rollen angegeben. Formulare mit mehreren Rollen stehen für das Ausfüllen in diesem Raumtyp nicht zur Verfügung",
+  "CopySharedLink": "Den freigegebenen Link kopieren",
+  "CreateRoom": "Raum erstellen",
+  "FileWillBeDeletedPermanently": "Die Datei wird dauerhaft gelöscht {{date}}",
+  "FileWillBeMovedToTrash": "Die Datei wird in den Papierkorb verschoben {{date}}",
+  "UnblockVersion": "Entsperren/Einchecken"
 }

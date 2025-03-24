@@ -175,7 +175,7 @@ const LinkRow = (props: LinkRowProps) => {
       },
       {
         key: "copy-link-settings-key",
-        label: t("Files:CopySharedLink"),
+        label: t("Common:CopySharedLink"),
         icon: CopyToReactSvgUrl,
         onClick: onCopyExternalLink,
         disabled: isDisabled,

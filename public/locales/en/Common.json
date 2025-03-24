@@ -681,5 +681,20 @@
   "RoomSelector": "Room selector",
   "FileSelector": "File selector",
   "LinkDoesNotExist": "The link you are trying to open does not exist.",
-  "LinkHasExpired": "The link you followed has expired."
+  "LinkHasExpired": "The link you followed has expired.",
+  "EmptyScreenFolder": "No docs here yet",
+  "RoomEmptyAtTheMoment": "This room is empty at the moment.",
+  "FilesWillAppearHere": "Files and folders added to the room will appear here.",
+  "EmptyRootRoomHeader": "Welcome to {{productName}}",
+  "WithSubfolders": "With subfolders",
+  "MobileEditPdfNotAvailableInfo": "Unsupported action. Please switch to the desktop mode to be able to edit PDFs or create PDF forms.",
+  "VersionBadge": "V.{{version}}",
+  "ShowVersionHistory": "Show version history",
+  "New": "New",
+  "BadgeAlertDescription": "Several roles are specified in this form. Forms with multiple roles are not available for filling in this type of room",
+  "CopySharedLink": "Copy shared link",
+  "CreateRoom": "Create room",
+  "FileWillBeDeletedPermanently": "The file will be deleted permanently {{date}}",
+  "FileWillBeMovedToTrash": "The file will be moved to Trash {{date}}",
+  "UnblockVersion": "Unblock/Check-in"
 }

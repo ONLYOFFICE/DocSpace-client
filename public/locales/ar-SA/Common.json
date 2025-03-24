@@ -618,5 +618,20 @@
   "RoomSelector": "محدد الغرفة",
   "FileSelector": "محدد الملف",
   "LinkDoesNotExist": "الرابط الذي تحاول فتحه غير موجود",
-  "LinkHasExpired": "انتهت صلاحية الرابط الذي تحاول فتحه"
+  "LinkHasExpired": "انتهت صلاحية الرابط الذي تحاول فتحه",
+  "EmptyScreenFolder": "لا توجد مستندات هنا حتى الآن",
+  "RoomEmptyAtTheMoment": "هذه الغرفة  فارغة حاليًا.",
+  "FilesWillAppearHere": "ستظهر هنا الملفات والمجلدات التي تمت إضافتها إلى الغرفة.",
+  "EmptyRootRoomHeader": "مرحبًا بك في {{productName}}",
+  "WithSubfolders": "مع المجلدات الفرعية",
+  "MobileEditPdfNotAvailableInfo": "إجراء غير معتمد. يرجى التبديل إلى وضع سطح المكتب لتتمكن من تحرير ملفات PDF أو إنشاء نماذج PDF.",
+  "VersionBadge": "V. {{version}}",
+  "ShowVersionHistory": "عرض سجل الاصدارات",
+  "New": "جديد",
+  "BadgeAlertDescription": "يتم تحديد عدة أدوار في هذا النموذج. النماذج ذات الأدوار المتعددة غير متاحة لملء هذا النوع من الغرف",
+  "CopySharedLink": "انسخ رابط المشاركة",
+  "CreateRoom": "إنشاء غرفة",
+  "FileWillBeDeletedPermanently": "سيتم حذف الملف في {{date}} ",
+  "FileWillBeMovedToTrash": "سيتم نقل الملف إلى سلة المهملات {{date}}",
+  "UnblockVersion": "إلغاء الحظر / تسجيل الوصول"
 }

@@ -156,7 +156,7 @@ const ContactsTabs = ({
       content: null,
       badge: !guestsTabVisited ? (
         <Badge
-          label={t("Files:New")}
+          label={t("Common:New")}
           backgroundColor={globalColors.redRomb}
           noHover
         />

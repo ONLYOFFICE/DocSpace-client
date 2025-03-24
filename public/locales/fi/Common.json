@@ -619,5 +619,20 @@
   "RoomSelector": "Huoneen valitsija",
   "FileSelector": "Tiedoston valitsija",
   "LinkDoesNotExist": "Linkki, jota yrität avata ei ole olemassa.",
-  "LinkHasExpired": "Linkki, jota seurasit on vanhentunut."
+  "LinkHasExpired": "Linkki, jota seurasit on vanhentunut.",
+  "EmptyScreenFolder": "Täällä ei ole vielä asiakirjoja",
+  "RoomEmptyAtTheMoment": "Tämä huone on tällä hetkellä tyhjä.",
+  "FilesWillAppearHere": "Huoneeseen lisätyt tiedostot ja kansiot näkyvät tässä.",
+  "EmptyRootRoomHeader": "Tervetuloa {{productName}} ohjelmiston käyttäjäksi!",
+  "WithSubfolders": "Alikansioilla",
+  "MobileEditPdfNotAvailableInfo": "Tätä toimintoa ei tueta. Ole hyvä ja vaihda työpöytätilaan voidaksesi muokata tai luoda PDF-lomakkeita.",
+  "VersionBadge": "V.{{version}}",
+  "ShowVersionHistory": "Näytä versiohistoria",
+  "New": "Uusi",
+  "BadgeAlertDescription": "Tähän lomakkeeseen on määritelty useita rooleja. Lomakkeet, joilla on useita rooleja eivät ole käytettävissä tämäntyyppisessä huoneessa",
+  "CopySharedLink": "Kopioi jaettu linkki",
+  "CreateRoom": "Luo huone",
+  "FileWillBeDeletedPermanently": "Tiedosto poistetaan {{date}}",
+  "FileWillBeMovedToTrash": "Tiedosto siirretään Roskakoriin {{date}}",
+  "UnblockVersion": "Poista esto/sisäänkirjautuminen"
 }

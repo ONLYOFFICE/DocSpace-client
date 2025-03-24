@@ -620,5 +620,20 @@
   "RoomSelector": "Սենյակի ընտրիչ",
   "FileSelector": "Ֆայլի ընտրիչ",
   "LinkDoesNotExist": "Հղումը, որը փորձում եք բացել, գոյություն չունի:",
-  "LinkHasExpired": "Ձեր հետևած հղումը ժամկետանց է:"
+  "LinkHasExpired": "Ձեր հետևած հղումը ժամկետանց է:",
+  "EmptyScreenFolder": "Այստեղ դեռ փաստաթղթեր չկան",
+  "RoomEmptyAtTheMoment": "Այս սենյակն այս պահին դատարկ է։",
+  "FilesWillAppearHere": "Սենյակում ավելացված ֆայլերն ու թղթապանակները կհայտնվեն այստեղ:",
+  "EmptyRootRoomHeader": "Բարի գալուստ {{productName}}",
+  "WithSubfolders": "Ենթաթղթապանակներով",
+  "MobileEditPdfNotAvailableInfo": "Չաջակցվող գործողություն: Խնդրում ենք անցնել համակարգչային ռեժիմին՝ PDF ֆայլերը խմբագրելու կամ PDF ձևաթղթեր ստեղծելու համար:",
+  "VersionBadge": "Տ.{{version}}",
+  "ShowVersionHistory": "Ցույց տալ տարբերակի պատմությունը",
+  "New": "Նոր",
+  "BadgeAlertDescription": "Այս ձևում նշված են մի քանի դերեր: Այս տեսակի սենյակները լրացնելու համար բազմաթիվ դերերով ձևաթղթերը հասանելի չեն",
+  "CopySharedLink": "Պատճենել ընդհանուր հղումը",
+  "CreateRoom": "Ստեղծեք սենյակ",
+  "FileWillBeDeletedPermanently": "Ֆայլն ընդմիշտ կջնջվի {{date}}",
+  "FileWillBeMovedToTrash": "Ֆայլը կտեղափոխվի աղբարկղ {{date}}",
+  "UnblockVersion": "Արգելահանել/Գրանցվել"
 }

@@ -135,7 +135,8 @@ export const FolderTile = ({
     if (
       e.detail === 1 &&
       !(e.target as HTMLElement).closest(".badges") &&
-      !(e.target as HTMLElement).closest(".item-file-name")
+      !(e.target as HTMLElement).closest(".item-file-name") &&
+      !(e.target as HTMLElement).closest(`.${styles.checkbox}`)
     ) {
       if (
         (e.target as HTMLElement).nodeName !== "IMG" &&
@@ -197,6 +198,7 @@ export const FolderTile = ({
       className={folderTileClassNames}
       onClick={onFolderClick}
       ref={forwardRef}
+      onContextMenu={onContextMenu}
     >
       {element && !isEdit ? (
         !inProgress ? (

@@ -85,7 +85,7 @@ export function getRoomInfo(id) {
   return request(options).then((res) => {
     if (res.rootFolderType === FolderType.Archive) res.isArchive = true;
 
-    return res;
+    return res as TRoom;
   });
 }
 

@@ -72,6 +72,8 @@ class DialogsStore {
 
   lifetimeDialogVisible = false;
 
+  reducedRightsData = { visible: false, adminName: "" };
+
   lifetimeDialogCB = null;
 
   downloadDialogVisible = false;
@@ -282,6 +284,8 @@ class DialogsStore {
 
   operationCancelVisible = false;
 
+  isShareFormData = { visible: false, updateAccessLink: null, fileId: null };
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -299,6 +303,10 @@ class DialogsStore {
     this.versionHistoryStore = versionHistoryStore;
     this.infoPanelStore = infoPanelStore;
   }
+
+  setIsShareFormData = ({ visible, updateAccessLink, fileId }) => {
+    this.isShareFormData = { visible, updateAccessLink, fileId };
+  };
 
   setNewFilesPanelFolderId = (folderId) => {
     this.newFilesPanelFolderId = folderId;
@@ -420,6 +428,13 @@ class DialogsStore {
   setLifetimeDialogVisible = (lifetimeDialogVisible, cb) => {
     this.lifetimeDialogVisible = lifetimeDialogVisible;
     this.lifetimeDialogCB = cb;
+  };
+
+  setReducedRightsData = (reducedRightsVisible, adminName = "") => {
+    this.reducedRightsData = {
+      visible: reducedRightsVisible,
+      adminName,
+    };
   };
 
   setEventDialogVisible = (eventDialogVisible) => {
@@ -881,7 +896,7 @@ class DialogsStore {
     this.covers = covers;
   };
 
-  setguidAnimationVisible = (animation) => {
+  setGuidAnimationVisible = (animation) => {
     this.guidAnimationVisible = animation;
   };
 

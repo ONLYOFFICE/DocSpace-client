@@ -43,7 +43,8 @@ import {
   ThemeKeys,
 } from "@docspace/shared/enums";
 
-import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
+import { ValidationResult } from "@/utils/enums";
+import { TUser } from "@docspace/shared/api/people/types";
 
 export type TError =
   | {
@@ -156,18 +157,16 @@ export type TTfaSecretKeyAndQR = {
 };
 
 export interface ConfirmRouteProps {
-  doAuthenticated?: AuthenticatedAction;
-  defaultPage?: string;
   socketUrl?: string;
   children: ReactNode;
   confirmLinkResult: TConfirmLinkResult;
   confirmLinkParams: TConfirmLinkParams;
+  user?: TUser;
 }
 
 export type GreetingCreateUserContainerProps = {
   type: string;
-  firstName?: string;
-  lastName?: string;
+  displayName?: string;
   culture?: string;
   hostName?: string;
 };

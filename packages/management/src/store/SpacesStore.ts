@@ -39,7 +39,9 @@ class SpacesStore {
   settingsStore: SettingsStore;
 
   createPortalDialogVisible = false;
+
   deletePortalDialogVisible = false;
+
   domainDialogVisible = false;
 
   currentPortal: TPortals | null = null;

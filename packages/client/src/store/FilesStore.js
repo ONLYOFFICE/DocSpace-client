@@ -729,7 +729,7 @@ class FilesStore {
 
         const includePathPart = pathParts.some(({ id }) => id === removedId);
 
-        if (includePathPart) {
+        if (includePathPart && !this.treeFoldersStore.isPersonalReadOnly) {
           window.DocSpace.navigate("/");
         }
 
@@ -1534,12 +1534,17 @@ class FilesStore {
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
     filterData.folder = folderId;
 
-    if (folderId === "@my" && this.userStore.user.isVisitor) {
+    if (
+      folderId === "@my" &&
+      this.userStore.user.isVisitor &&
+      !this.userStore.user.hasPersonalFolder
+    ) {
       const url = getCategoryUrl(CategoryType.Shared);
       return window.DocSpace.navigate(
         `${url}?${RoomsFilter.getDefault().toUrlParams()}`,
       );
     }
+
     this.setIsErrorRoomNotAvailable(false);
     this.setIsLoadedFetchFiles(false);
 

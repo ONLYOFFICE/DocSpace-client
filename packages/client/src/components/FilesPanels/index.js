@@ -47,6 +47,7 @@ import {
   EditLinkPanel,
   EmbeddingPanel,
   ConversionPanel,
+  ShareFormPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -74,6 +75,7 @@ import {
   FormFillingTipsDialog,
   DeleteVersionDialog,
   CancelOperationDialog,
+  ReducedRightsDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -88,8 +90,6 @@ import ReorderIndexDialog from "../dialogs/ReorderIndexDialog";
 import LifetimeDialog from "../dialogs/LifetimeDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { FillPDFDialog } from "../dialogs/FillPDFDialog";
-import { ShareCollectSelector } from "../ShareCollectSelector";
-
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
 import FillingStatusPanel from "../panels/FillingStatusPanel";
@@ -145,7 +145,6 @@ const Panels = (props) => {
     selectFileFormRoomOpenRoot,
     reorderDialogVisible,
     fillPDFDialogData,
-    shareCollectSelector,
     createRoomTemplateDialogVisible,
     templateAccessSettingsVisible,
 
@@ -169,6 +168,8 @@ const Panels = (props) => {
     userId,
     getRefElement,
     config,
+    isShareFormData,
+    reducedRightsVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -371,12 +372,6 @@ const Panels = (props) => {
     fillPDFDialogData.visible && (
       <FillPDFDialog key="fill-pdf-form-dialog" {...fillPDFDialogData} />
     ),
-    shareCollectSelector.visible && (
-      <ShareCollectSelector
-        key="share-collect-dialog"
-        {...shareCollectSelector}
-      />
-    ),
     roomLogoCoverDialogVisible && (
       <RoomLogoCoverDialog key="room-logo-cover-dialog" />
     ),
@@ -417,6 +412,13 @@ const Panels = (props) => {
         getRefElement={getRefElement}
         config={config}
       />
+    ) : null,
+
+    isShareFormData.visible && (
+      <ShareFormPanel key="share-form-dialog" {...isShareFormData} />
+    ),
+    reducedRightsVisible ? (
+      <ReducedRightsDialog key="reduced-rights-dialog" />
     ) : null,
   ];
 };
@@ -480,7 +482,6 @@ export default inject(
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
       fillPDFDialogData,
-      shareCollectSelector,
       roomLogoCoverDialogVisible,
       createRoomTemplateDialogVisible,
       templateAccessSettingsVisible,
@@ -500,6 +501,8 @@ export default inject(
 
       setFormFillingTipsDialog,
       formFillingTipsVisible,
+      isShareFormData,
+      reducedRightsData,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
@@ -591,7 +594,6 @@ export default inject(
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
       fillPDFDialogData,
-      shareCollectSelector,
       roomLogoCoverDialogVisible,
       createRoomTemplateDialogVisible,
       templateAccessSettingsVisible,
@@ -615,6 +617,8 @@ export default inject(
       userId: userStore?.user?.id,
       getRefElement,
       config,
+      isShareFormData,
+      reducedRightsVisible: reducedRightsData.visible,
     };
   },
 )(observer(Panels));

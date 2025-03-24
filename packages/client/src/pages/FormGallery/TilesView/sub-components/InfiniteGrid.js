@@ -30,8 +30,8 @@ import React, { useEffect, useState } from "react";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
 import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
+import { getCountTilesInRow } from "@docspace/shared/utils";
 
-import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
 import { StyledCard, StyledItem } from "../StyledTileView";
 
 const Card = ({ children, countTilesInRow, ...rest }) => {

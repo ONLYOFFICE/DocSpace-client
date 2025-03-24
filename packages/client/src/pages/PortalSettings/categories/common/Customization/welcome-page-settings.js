@@ -143,7 +143,6 @@ const WelcomePageSettingsComponent = (props) => {
     greetingTitleDefaultFromSessionStorage = getFromSessionStorage(
       "greetingTitleDefault",
     );
-    getGreetingSettingsIsDefault();
 
     setDocumentTitle(t("CustomTitlesWelcome"));
 
@@ -160,7 +159,10 @@ const WelcomePageSettingsComponent = (props) => {
         : greetingTitleDefaultFromSessionStorage;
 
     const page = isMobileView ? "language-and-time-zone" : "general";
-    if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
+    if (!isLoaded) {
+      initSettings(page).then(() => setIsLoaded(true));
+      getGreetingSettingsIsDefault();
+    }
 
     checkInnerWidth();
     window.addEventListener("resize", checkInnerWidth);

@@ -27,7 +27,7 @@
  */
 
 import type { TTranslation } from "../../types";
-import type { TFile } from "../../api/files/types";
+import type { TFile, TFolder } from "../../api/files/types";
 import type { LinkWithDropDownProps } from "../../components/link-with-dropdown";
 import type { ContextMenuTypeOnClick } from "../../components/context-menu";
 
@@ -36,9 +36,10 @@ import {
   ProtectedFileCategoryType,
 } from "./DownloadDialog.enums";
 
-export type TDownloadedFile = TFile & {
+export type TDownloadedFile = (TFile | TFolder) & {
   checked?: boolean;
   format?: string | null;
+  oldFormat?: string | null;
   password?: string;
 };
 
@@ -117,7 +118,7 @@ export type OnePasswordRowProps = {
 
 export type TFileConvertId = { key: number; value: string; password?: string };
 
-type TTranslationsForDownload = {
+export type TTranslationsForDownload = {
   label: string;
   error: string;
   passwordError: JSX.Element;
@@ -158,3 +159,9 @@ export type DownloadDialogProps = {
   getFolderIcon: (size: number) => string;
   extsConvertible: Record<string, string[]>;
 };
+
+export function isFile(
+  item: TDownloadedFile,
+): item is Exclude<TDownloadedFile, TFolder> {
+  return "fileExst" in item;
+}

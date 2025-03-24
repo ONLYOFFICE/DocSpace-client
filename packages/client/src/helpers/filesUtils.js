@@ -35,7 +35,6 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
 import { RoomsType } from "@docspace/shared/enums";
 
-import { isDesktop, isMobile } from "@docspace/shared/utils";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 import i18n from "../i18n";
@@ -184,44 +183,6 @@ export const connectedCloudsTypeIcon = (key) => {
       return CloudServicesWebdavReactSvgUrl;
     default:
   }
-};
-
-// Used to update the number of tiles in a row after the window is resized.
-export const getCountTilesInRow = (isRooms) => {
-  const isDesktopView = isDesktop();
-  const isMobileView = isMobile();
-  const tileGap = isRooms ? 16 : 14;
-
-  const elem = document.getElementsByClassName("section-wrapper-content")[0];
-  let containerWidth = 0;
-  if (elem) {
-    const elemPadding = window
-      .getComputedStyle(elem)
-      ?.getPropertyValue("padding");
-
-    if (elemPadding) {
-      const paddingValues = elemPadding.split("px");
-      if (paddingValues.length >= 4) {
-        containerWidth =
-          (elem.clientWidth || 0) -
-          parseInt(paddingValues[1], 10) -
-          parseInt(paddingValues[3], 10);
-      }
-    }
-  }
-
-  containerWidth += tileGap;
-  if (!isMobileView) containerWidth -= 1;
-  if (!isDesktopView) containerWidth += 3; // tablet tile margin -3px (TileContainer.js)
-
-  let minTileWidth;
-  if (isRooms) {
-    minTileWidth = 275 + tileGap;
-  } else {
-    minTileWidth = 216 + tileGap;
-  }
-
-  return Math.floor(containerWidth / minTileWidth);
 };
 
 export const calculateRoomLogoParams = (img, x, y, zoom) => {

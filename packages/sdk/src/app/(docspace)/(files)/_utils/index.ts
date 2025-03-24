@@ -29,7 +29,7 @@
 import { TFileItem, TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
 
 /** Value needs for selection area and DND work*/
-export const generateFilesRowValue = (
+export const generateFilesItemValue = (
   item: TFolderItem | TFileItem,
   draggable: boolean,
   index: number,

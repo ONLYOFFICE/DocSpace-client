@@ -65,8 +65,7 @@ export const GreetingLoginContainer = ({
     getInvitationLinkData(loginData) || {
       email: "",
       roomName: "",
-      firstName: "",
-      lastName: "",
+      displayName: "",
       type: "",
       spaceAddress: "",
     },
@@ -82,8 +81,7 @@ export const GreetingLoginContainer = ({
     setInvitationLinkData(queryParams);
   }, [loginData]);
 
-  const { type, roomName, firstName, lastName, spaceAddress } =
-    invitationLinkData;
+  const { type, roomName, displayName, spaceAddress } = invitationLinkData;
 
   return (
     <>
@@ -110,8 +108,7 @@ export const GreetingLoginContainer = ({
               ns="Common"
               defaults={roomName ? DEFAULT_ROOM_TEXT : DEFAULT_PORTAL_TEXT}
               values={{
-                firstName,
-                lastName,
+                displayName,
                 productName: t("Common:ProductName"),
                 ...(roomName ? { roomName } : { spaceAddress }),
               }}

@@ -48,7 +48,7 @@ const StyledBar = styled.div`
 
 const Bar = () => {
   const { t } = useTranslation(["Management"]);
-  let location = useLocation();
+  const location = useLocation();
   const { settingsStore } = useStore();
   const { portals } = settingsStore;
 

@@ -41,8 +41,8 @@ const argv = (key) => {
   );
 };
 
-const port = (argv("app.port") || config.PORT) ?? 5099;
-const hostname = config.HOSTNAME ?? "localhost";
+const port = (argv("app.port") || process.env.PORT || config.PORT) ?? 5099;
+const hostname = config.HOSTNAME ?? "0.0.0.0";
 
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port });

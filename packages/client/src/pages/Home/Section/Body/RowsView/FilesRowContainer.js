@@ -158,4 +158,4 @@ export default inject(
       deleteRefMap,
     };
   },
-)(observer(withContainer(FilesRowContainer)));
+)(withContainer(observer(FilesRowContainer)));

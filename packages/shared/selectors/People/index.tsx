@@ -613,6 +613,7 @@ const PeopleSelector = ({
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
       disableSubmitButton={disableSubmitButton || !selectedItem}
+      selectedItem={selectedItem}
       submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
       emptyScreenHeader={

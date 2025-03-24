@@ -1304,7 +1304,6 @@ class SettingsStore {
       allowInvitingMembers,
     };
     const res = await api.settings.setInvitationSettings(data);
-    console.log("res", res);
 
     this.allowInvitingGuestsSetting = res.allowInvitingGuests;
     this.allowInvitingMembersSetting = res.allowInvitingMembers;

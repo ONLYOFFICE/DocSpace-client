@@ -92,6 +92,7 @@ export type RenameApiKeyDialogProps = {
   ) => void;
   isRequestRunning: boolean;
 };
+
 export type DeleteApiKeyDialogProps = {
   t: TTranslation;
   tReady: boolean;
@@ -99,4 +100,11 @@ export type DeleteApiKeyDialogProps = {
   setIsVisible: (visible: boolean) => void;
   onDelete: () => void;
   isRequestRunning: boolean;
+};
+
+export type TPermissionsList = {
+  [key: string]: {
+    isRead: { isChecked: boolean; name: string };
+    isWrite: { isChecked: boolean; name: string };
+  };
 };

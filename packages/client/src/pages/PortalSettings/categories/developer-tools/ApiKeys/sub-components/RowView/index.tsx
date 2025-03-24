@@ -148,14 +148,14 @@ const RowView = (props: TableViewProps) => {
                   fontSize="12px"
                   className="row-content_text"
                 >
-                  {item.key} | {item.createOn}
+                  {item.key} | {item.createBy.displayName}
                 </Text>
               </div>
             </div>
 
             <ToggleButtonWrapper>
               <ToggleButton
-                className="toggle toggleButton"
+                className="toggleButton"
                 isChecked={item.isActive}
                 onChange={() =>
                   onChangeApiKeyParams(item.id, { isActive: !item.isActive })

@@ -66,3 +66,12 @@ export async function deleteApiKey(keyId: TApiKey["id"]) {
 
   return res;
 }
+
+export async function getApiKeyPermissions() {
+  const res = await request({
+    method: "get",
+    url: "/keys/permissions",
+  });
+
+  return res as string[];
+}

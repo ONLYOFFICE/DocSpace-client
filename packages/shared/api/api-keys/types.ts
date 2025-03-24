@@ -16,7 +16,7 @@ export type TApiKey = {
   name: string;
   lastUsed: string;
   expiresAt: string;
-  //   permissions: [];
+  permissions: string[];
 };
 
 export type TApiKeyRequest = {
@@ -25,7 +25,7 @@ export type TApiKeyRequest = {
 };
 
 export type TApiKeyParamsRequest = {
-  // permissions?: Array<{}>;
+  permissions?: string[];
   name?: string;
   isActive?: boolean;
 };

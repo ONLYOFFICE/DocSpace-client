@@ -24,14 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import capitalize from "lodash/capitalize";
 import copy from "copy-to-clipboard";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { withTranslation } from "react-i18next";
-import { createApiKey } from "@docspace/shared/api/api-keys";
+import {
+  createApiKey,
+  getApiKeyPermissions,
+} from "@docspace/shared/api/api-keys";
 import { TApiKey, TApiKeyRequest } from "@docspace/shared/api/api-keys/types";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -42,9 +45,16 @@ import {
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { Tabs, TabsTypes, TTabItem } from "@docspace/shared/components/tabs";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import { toastr } from "@docspace/shared/components/toast";
 import { globalColors } from "@docspace/shared/themes";
-import { CreateApiKeyDialogProps } from "../../types";
+import { CreateApiKeyDialogProps, TPermissionsList } from "../../types";
+import {
+  getCategoryTranslation,
+  getFilteredOptions,
+  PermissionGroup,
+} from "./utils";
 
 const StyledBodyContent = styled.div`
   .api-key_name {
@@ -82,6 +92,35 @@ const StyledBodyContent = styled.div`
   .api-key_lifetime-input {
     max-width: 100px;
   }
+
+  .sticky-indent {
+    display: none;
+  }
+
+  .api-key_permission-tab {
+    width: 100%;
+  }
+
+  .api-key_permission-tab-header {
+    display: grid;
+    margin-bottom: 8px;
+    grid-template-columns: 1fr 40px 40px;
+  }
+
+  .api-key_permission-tab-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .api-key_permission-container {
+    display: grid;
+    grid-template-columns: 1fr 40px 40px;
+  }
+
+  .api-key_permission-checkbox {
+    justify-content: center;
+  }
 `;
 
 const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
@@ -90,9 +129,114 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const [isRequestRunning, setIsRequestRunning] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [isValid, setIsValid] = useState(true);
+  const [isValidLifeTime, setIsValidLifeTime] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
   const [secretKey, setSecretKey] = useState<TApiKey>();
   const [expiresInDays, setExpiresInDays] = useState("7");
+  const [permissions, setPermissions] = useState<string[]>([]);
+  const [selectedItemId, setSelectedItemId] = useState("all");
+  const [filteredOpt, setFilteredOpt] = useState<TPermissionsList>();
+
+  const getRestrictedOptions = () => {
+    const list: string[] = [];
+    if (filteredOpt) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      Object.entries(filteredOpt).forEach(([_, value]) => {
+        if (value.isWrite.isChecked) {
+          list.push(value.isWrite.name);
+          list.push(value.isRead.name);
+        } else if (value.isRead.isChecked) list.push(value.isRead.name);
+      });
+    }
+    return list;
+  };
+
+  const getPermissionsList = useCallback(() => {
+    if (!filteredOpt) return [];
+
+    const list: React.ReactNode[] = [];
+    Object.entries(filteredOpt).forEach(([key, value]) => {
+      const category = getCategoryTranslation(key as PermissionGroup, t);
+      const readIsDisabled = value?.isWrite?.isChecked;
+
+      list.push(
+        <div key={key} className="api-key_permission-container">
+          <Text fontSize="13px" fontWeight={600}>
+            {category}
+          </Text>
+
+          {value.isRead ? (
+            <Checkbox
+              className="api-key_permission-checkbox"
+              isChecked={value.isRead.isChecked || readIsDisabled}
+              onChange={() => {
+                const obj = { ...filteredOpt };
+                obj[key].isRead.isChecked = !value.isRead.isChecked;
+                setFilteredOpt(obj);
+              }}
+              isDisabled={readIsDisabled || isRequestRunning}
+            />
+          ) : (
+            <div />
+          )}
+          {value.isWrite ? (
+            <Checkbox
+              className="api-key_permission-checkbox"
+              isChecked={value.isWrite.isChecked}
+              onChange={() => {
+                const obj = { ...filteredOpt };
+                obj[key].isWrite.isChecked = !value.isWrite.isChecked;
+                setFilteredOpt(obj);
+              }}
+              isDisabled={isRequestRunning}
+            />
+          ) : (
+            <div />
+          )}
+        </div>,
+      );
+    });
+
+    return list;
+  }, [filteredOpt]);
+
+  const permissionsList = getPermissionsList();
+
+  const tabsItems = [
+    {
+      id: "all",
+      name: "All",
+      content: null,
+    },
+    {
+      id: "restricted",
+      name: "Restricted",
+      content: (
+        <div className="api-key_permission-tab">
+          <div className="api-key_permission-tab-header">
+            <div />
+            <Text fontSize="13px" fontWeight={600}>
+              {t("OAuth:Read")}
+            </Text>
+            <Text fontSize="13px" fontWeight={600}>
+              {t("OAuth:Write")}
+            </Text>
+          </div>
+          <div className="api-key_permission-tab-body">
+            {permissionsList.map((item) => {
+              return item;
+            })}
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: "readonly",
+      name: "Read only",
+      content: null,
+    },
+  ];
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onClose = () => {
@@ -105,8 +249,33 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
       return;
     }
 
-    const newKey = { name: inputValue } as TApiKeyRequest;
-    if (expiresInDays) newKey.expiresInDays = expiresInDays;
+    if (!expiresInDays) {
+      setIsValidLifeTime(false);
+      return;
+    }
+
+    let selectedPermissions: string[] = ["*"];
+
+    switch (selectedItemId) {
+      case "all":
+        selectedPermissions = ["*"];
+        break;
+      case "restricted":
+        selectedPermissions = getRestrictedOptions();
+        break;
+      case "readonly": {
+        selectedPermissions = permissions.filter((p) => p.includes("read"));
+        break;
+      }
+      default:
+        break;
+    }
+
+    const newKey = {
+      name: inputValue,
+      permissions: selectedPermissions,
+    } as TApiKeyRequest;
+    if (isChecked) newKey.expiresInDays = expiresInDays;
 
     setIsRequestRunning(true);
     createApiKey(newKey)
@@ -126,6 +295,37 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
       onClose();
     }
   };
+
+  const onSelectPermission = (data: TTabItem) => {
+    switch (data.id) {
+      case "all":
+        setSelectedItemId("all");
+        break;
+      case "restricted":
+        setSelectedItemId("restricted");
+        break;
+      case "readonly":
+        setSelectedItemId("readonly");
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const getPermissions = async () => {
+    getApiKeyPermissions()
+      .then((res) => {
+        const filteredOptions = getFilteredOptions(res);
+        setFilteredOpt(filteredOptions);
+        setPermissions(res);
+      })
+      .catch((err) => toastr.error(err));
+  };
+
+  useEffect(() => {
+    getPermissions();
+  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyPress);
@@ -157,6 +357,17 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         />
       </div>
       <div className="api-key_name">
+        <Text fontSize="13px" fontWeight={600}>
+          {t("Common:Permissions")}
+        </Text>
+        <Tabs
+          type={TabsTypes.Secondary}
+          items={tabsItems}
+          onSelect={onSelectPermission}
+          selectedItemId={selectedItemId}
+        />
+      </div>
+      <div className="api-key_name">
         <div className="api-key_lifetime">
           <Text fontSize="13px" fontWeight={600}>
             {t("Settings:KeyLifetime")}
@@ -181,8 +392,12 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
               value={expiresInDays}
               type={InputType.text}
               onChange={(e) => {
+                if (e.target.value && !/^(?:[1-9][0-9]*)$/.test(e.target.value))
+                  return;
                 setExpiresInDays(e.target.value);
+                setIsValidLifeTime(true);
               }}
+              hasError={!isValidLifeTime}
             />
             <Text fontSize="13px" fontWeight={600}>
               {capitalize(t("Common:Days"))}
@@ -279,6 +494,6 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   );
 };
 
-export default withTranslation(["Webhooks", "Files", "Common"])(
+export default withTranslation(["Webhooks", "Files", "Common", "OAuth"])(
   CreateApiKeyDialog,
 );

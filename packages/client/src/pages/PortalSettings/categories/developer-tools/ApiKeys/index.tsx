@@ -130,8 +130,12 @@ const ApiKeys = (props: ApiKeysProps) => {
           const items = listItems.slice();
           const index = items.findIndex((x) => x.id === id);
           if (index > -1) {
-            if (params.isActive) items[index].isActive = params.isActive;
-            if (params.name) items[index].name = params.name;
+            if (params.isActive !== undefined) {
+              items[index].isActive = params.isActive;
+            }
+            if (params.name) {
+              items[index].name = params.name;
+            }
           }
 
           setListItems(items);

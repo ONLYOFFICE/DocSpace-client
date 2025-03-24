@@ -208,13 +208,10 @@ export function startRestore(
   });
 }
 
-export async function getRestoreProgress(dump: boolean = false) {
+export async function getRestoreProgress() {
   const res = (await request({
     method: "get",
     url: "/portal/getrestoreprogress",
-    params: {
-      dump,
-    },
   })) as TRestoreProgress;
 
   return res;

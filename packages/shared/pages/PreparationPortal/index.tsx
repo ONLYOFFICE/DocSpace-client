@@ -62,7 +62,7 @@ export const PreparationPortal = (props: IPreparationPortal) => {
     };
 
     try {
-      const response = await getRestoreProgress(isManagement());
+      const response = await getRestoreProgress();
 
       if (!response) {
         setMessage();

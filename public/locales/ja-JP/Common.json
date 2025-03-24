@@ -635,5 +635,6 @@
   "CreateRoom": "ルームを作成する",
   "FileWillBeDeletedPermanently": "ファイルは{{date}}に完全に削除されます",
   "FileWillBeMovedToTrash": "ファイルは{{date}}にゴミ箱に移動されます",
-  "UnblockVersion": "アンブロック/チェックイン"
+  "UnblockVersion": "アンブロック/チェックイン",
+  "UserEmptyDescription": "管理者がアップロードしたファイルやフォルダはここに表示されます。"
 }

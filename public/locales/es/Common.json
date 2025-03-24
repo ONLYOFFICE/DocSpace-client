@@ -635,5 +635,6 @@
   "CreateRoom": "Crear sala",
   "FileWillBeDeletedPermanently": "El archivo se eliminará de forma permanente {{date}}",
   "FileWillBeMovedToTrash": "El archivo se moverá a la Papelera {{date}}",
-  "UnblockVersion": "Desbloquear/Proteger"
+  "UnblockVersion": "Desbloquear/Proteger",
+  "UserEmptyDescription": "Los archivos y carpetas cargados por los administradores aparecerán aquí."
 }

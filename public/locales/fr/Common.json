@@ -635,5 +635,6 @@
   "CreateRoom": "Créer une salle",
   "FileWillBeDeletedPermanently": "Le fichier sera supprimé définitivement {{date}}",
   "FileWillBeMovedToTrash": "Le fichier sera déplacé dans la corbeille {{date}}",
-  "UnblockVersion": "Débloquer/enregistrer"
+  "UnblockVersion": "Débloquer/enregistrer",
+  "UserEmptyDescription": "Les fichiers et dossiers téléchargés par les administrateurs apparaissent ici."
 }

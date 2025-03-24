@@ -634,5 +634,6 @@
   "CreateRoom": "Створити кімнату",
   "FileWillBeDeletedPermanently": "Файл буде видалено {{date}}",
   "FileWillBeMovedToTrash": "Файл буде переміщено до Кошика {{date}}",
-  "UnblockVersion": "Розблокувати/повернути"
+  "UnblockVersion": "Розблокувати/повернути",
+  "UserEmptyDescription": "Тут з'являться файли та папки, передані адміністраторами."
 }

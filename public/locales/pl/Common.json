@@ -634,5 +634,6 @@
   "CreateRoom": "Utwórz pokój",
   "FileWillBeDeletedPermanently": "Plik zostanie usunięty {{date}}",
   "FileWillBeMovedToTrash": "Plik zostanie przeniesiony do kosza {{date}}",
-  "UnblockVersion": "Odblokuj/Check-in"
+  "UnblockVersion": "Odblokuj/Check-in",
+  "UserEmptyDescription": "Tutaj pojawią się pliki i katalogi przesłane przez administratorów."
 }

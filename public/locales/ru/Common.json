@@ -636,5 +636,6 @@
   "CreateRoom": "Создание комнаты",
   "FileWillBeDeletedPermanently": "Файл будет удален навсегда {{date}}",
   "FileWillBeMovedToTrash": "Файл будет перемещен в Корзину {{date}}",
-  "UnblockVersion": "Заблокировать/Разблокировать"
+  "UnblockVersion": "Заблокировать/Разблокировать",
+  "UserEmptyDescription": "Здесь будут находиться файлы и папки, загруженные администраторами."
 }

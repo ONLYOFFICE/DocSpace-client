@@ -634,5 +634,6 @@
   "CreateRoom": "Vytvoriť miestnosť",
   "FileWillBeDeletedPermanently": "Súbor bude vymazaný {{date}}",
   "FileWillBeMovedToTrash": "Súbor bude presunutý do Koša {{date}}",
-  "UnblockVersion": "Odblokovať/nahlásiť sa"
+  "UnblockVersion": "Odblokovať/nahlásiť sa",
+  "UserEmptyDescription": "Súbory a priečinky nahrané administrátormi sa objavia tu."
 }

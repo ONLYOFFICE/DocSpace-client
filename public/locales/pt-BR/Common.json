@@ -635,5 +635,6 @@
   "CreateRoom": "Criar sala",
   "FileWillBeDeletedPermanently": "O arquivo será excluído permanentemente {{date}}",
   "FileWillBeMovedToTrash": "O arquivo será movido para a Lixeira {{date}}",
-  "UnblockVersion": "Desbloqueio/Check-in"
+  "UnblockVersion": "Desbloqueio/Check-in",
+  "UserEmptyDescription": "Arquivos e pastas enviados por administradores aparecerão aqui."
 }

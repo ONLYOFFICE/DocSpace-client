@@ -633,5 +633,6 @@
   "CreateRoom": "방 생성",
   "FileWillBeDeletedPermanently": "파일이 {{date}}에 삭제됩니다",
   "FileWillBeMovedToTrash": "{{date}}에 파일이 휴지통으로 이동됩니다",
-  "UnblockVersion": "차단 해제/체크인"
+  "UnblockVersion": "차단 해제/체크인",
+  "UserEmptyDescription": "관리자가 업로드한 파일 및 폴더가 여기에 표시됩니다."
 }

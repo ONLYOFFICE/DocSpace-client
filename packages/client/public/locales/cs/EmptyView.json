@@ -45,6 +45,5 @@
   "UploadFromPortalDescription": "Nahrát soubory libovolného typu z Dokumentů nebo Místností",
   "UploadFromPortalTitle": "Nahrát z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte připravený PDF formulář dostupný v {{productName}} a nahrajte jej do místnosti.",
-  "UserEmptyDescription": "Zde se objeví soubory a složky nahrané správci.",
   "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti"
 }

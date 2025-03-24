@@ -634,5 +634,6 @@
   "CreateRoom": "Luo huone",
   "FileWillBeDeletedPermanently": "Tiedosto poistetaan {{date}}",
   "FileWillBeMovedToTrash": "Tiedosto siirretään Roskakoriin {{date}}",
-  "UnblockVersion": "Poista esto/sisäänkirjautuminen"
+  "UnblockVersion": "Poista esto/sisäänkirjautuminen",
+  "UserEmptyDescription": "Pääkäyttäjien lataamat tiedostot ja kansiot ilmestyvät tänne."
 }

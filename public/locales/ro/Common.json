@@ -635,5 +635,6 @@
   "CreateRoom": "Creare sală",
   "FileWillBeDeletedPermanently": "Fișierul va fi ştears definitiv la data de {{date}}",
   "FileWillBeMovedToTrash": "Fișierul va fi mutat în Coșul de gunoi la data de {{date}}",
-  "UnblockVersion": "Deblocare/Blocare"
+  "UnblockVersion": "Deblocare/Blocare",
+  "UserEmptyDescription": "Fişierele şi folderele care au fost încărcate de administratori vor apărea aici."
 }

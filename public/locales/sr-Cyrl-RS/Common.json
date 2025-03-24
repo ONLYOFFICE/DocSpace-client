@@ -635,5 +635,6 @@
   "CreateRoom": "Креирај собу",
   "FileWillBeDeletedPermanently": "Фајл ће бити трајно избрисан {{date}}",
   "FileWillBeMovedToTrash": "Фајл ће бити премештен у смеће {{date}}",
-  "UnblockVersion": "Одблокирај/Провери присуство"
+  "UnblockVersion": "Одблокирај/Провери присуство",
+  "UserEmptyDescription": "Датотеке и фолдери отпремљени од стране администратора ће се појавити овде."
 }

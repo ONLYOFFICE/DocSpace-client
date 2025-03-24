@@ -635,5 +635,6 @@
   "CreateRoom": "Crea una stanza",
   "FileWillBeDeletedPermanently": "Il file verrà eliminato definitivamente {{date}}",
   "FileWillBeMovedToTrash": "Il file verrà spostato nel cestino {{date}}",
-  "UnblockVersion": "Sblocca/Controlla"
+  "UnblockVersion": "Sblocca/Controlla",
+  "UserEmptyDescription": "I file e le cartelle caricati dagli amministratori verranno visualizzati qui."
 }

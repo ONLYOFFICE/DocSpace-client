@@ -634,5 +634,6 @@
   "CreateRoom": "Izveidot telpu",
   "FileWillBeDeletedPermanently": "Fails tiks izdzēsts {{date}}",
   "FileWillBeMovedToTrash": "Fails tiks pārvietots uz Atkritni {{date}}",
-  "UnblockVersion": "Atbloķēt/reģistrēties"
+  "UnblockVersion": "Atbloķēt/reģistrēties",
+  "UserEmptyDescription": "Šeit tiks parādīti administratoru augšupielādētie faili un mapes."
 }

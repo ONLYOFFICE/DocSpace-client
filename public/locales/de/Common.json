@@ -635,5 +635,6 @@
   "CreateRoom": "Raum erstellen",
   "FileWillBeDeletedPermanently": "Die Datei wird dauerhaft gelöscht {{date}}",
   "FileWillBeMovedToTrash": "Die Datei wird in den Papierkorb verschoben {{date}}",
-  "UnblockVersion": "Entsperren/Einchecken"
+  "UnblockVersion": "Entsperren/Einchecken",
+  "UserEmptyDescription": "Von Administratoren hochgeladene Dateien und Ordner werden hier angezeigt."
 }

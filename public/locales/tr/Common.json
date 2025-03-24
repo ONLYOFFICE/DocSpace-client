@@ -634,5 +634,6 @@
   "CreateRoom": "Oda oluştur",
   "FileWillBeDeletedPermanently": "Dosya silinecek {{date}}",
   "FileWillBeMovedToTrash": "Dosya Çöp Kutusuna şu tarihte taşınacak {{date}}",
-  "UnblockVersion": "Engellemeyi Kaldır/Giriş Yap"
+  "UnblockVersion": "Engellemeyi Kaldır/Giriş Yap",
+  "UserEmptyDescription": "Yöneticiler tarafından yüklenen dosya ve klasörler burada görünecektir."
 }

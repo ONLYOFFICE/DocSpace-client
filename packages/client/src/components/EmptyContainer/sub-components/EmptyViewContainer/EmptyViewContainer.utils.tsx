@@ -152,7 +152,7 @@ export const getFolderDescription = (
       t("EmptyView:DefaultFolderDescription"),
     )
     .with([P._, DefaultFolderType, P.when(isUser)], () =>
-      t("EmptyView:UserEmptyDescription"),
+      t("Common:UserEmptyDescription"),
     )
     .otherwise(() => "");
 };
@@ -163,7 +163,7 @@ export const getRoomDescription = (
   isArchiveFolderRoot: boolean,
 ) => {
   if (isNotAdmin || isArchiveFolderRoot)
-    return t("EmptyView:UserEmptyDescription");
+    return t("Common:UserEmptyDescription");
 
   return t("EmptyView:EmptyDescription");
 };

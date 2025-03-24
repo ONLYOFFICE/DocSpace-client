@@ -634,5 +634,6 @@
   "CreateRoom": "Otaq yaradın",
   "FileWillBeDeletedPermanently": "Fayl {{date}} tarixində silinəcək",
   "FileWillBeMovedToTrash": "Fayl {{date}} Zibil qutusuna köçürüləcək",
-  "UnblockVersion": "Blokdan çıxar"
+  "UnblockVersion": "Blokdan çıxar",
+  "UserEmptyDescription": "Administratorlar tərəfindən yüklənmiş fayl və qovluqlar burada görünəcək."
 }

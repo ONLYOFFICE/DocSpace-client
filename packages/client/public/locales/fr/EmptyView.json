@@ -45,6 +45,5 @@
   "UploadFromPortalDescription": "Télécharger n'importe quel type de fichier à partir de Documents ou de salles",
   "UploadFromPortalTitle": "Télécharger à partir de {{productName}}",
   "UploadPDFFormOptionDescription": "Sélectionnez un formulaire PDF prêt à l'emploi disponible dans {{productName}} et téléchargez-le dans la salle.",
-  "UserEmptyDescription": "Les fichiers et dossiers téléchargés par les administrateurs apparaissent ici.",
   "VirtualDataRoomEmptyTitle": "Bienvenue dans la salle de données virtuelle"
 }

@@ -634,5 +634,6 @@
   "CreateRoom": "Ustvari sobo",
   "FileWillBeDeletedPermanently": "Datoteka bo izbrisana {{date}}",
   "FileWillBeMovedToTrash": "Datoteka bo premaknjena v koš {{date}}",
-  "UnblockVersion": "Odblokiraj/Prijavi se"
+  "UnblockVersion": "Odblokiraj/Prijavi se",
+  "UserEmptyDescription": "Tukaj bodo prikazane datoteke in mape, ki so jih naložili skrbniki."
 }

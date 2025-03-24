@@ -634,5 +634,6 @@
   "CreateRoom": "Създайте стая",
   "FileWillBeDeletedPermanently": "Файлът ще бъде изтрит на {{date}}",
   "FileWillBeMovedToTrash": "Файлът ще бъде преместен в Кошчето на {{date}}",
-  "UnblockVersion": "Деблокиране/Настаняване"
+  "UnblockVersion": "Деблокиране/Настаняване",
+  "UserEmptyDescription": "Файлове и папки, качени от администраторите, ще се показват тук."
 }

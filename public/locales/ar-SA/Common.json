@@ -633,5 +633,6 @@
   "CreateRoom": "إنشاء غرفة",
   "FileWillBeDeletedPermanently": "سيتم حذف الملف في {{date}} ",
   "FileWillBeMovedToTrash": "سيتم نقل الملف إلى سلة المهملات {{date}}",
-  "UnblockVersion": "إلغاء الحظر / تسجيل الوصول"
+  "UnblockVersion": "إلغاء الحظر / تسجيل الوصول",
+  "UserEmptyDescription": "ستظهر هنا الملفات والمجلدات التي تم تحميلها بواسطة المسؤولين."
 }

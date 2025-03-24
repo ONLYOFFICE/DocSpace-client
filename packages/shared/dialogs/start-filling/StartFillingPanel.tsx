@@ -239,6 +239,7 @@ const StartFillingPanel = ({
             withHeader
             withGuests
             withCancelButton
+            alwaysShowFooter
             onSubmit={onSelectUser}
             onCancel={closeUsersPanel}
             onClose={closeUsersPanel}
@@ -270,6 +271,7 @@ const StartFillingPanel = ({
             withHeader
             withGuests
             isMultiSelect
+            alwaysShowFooter
             withAccessRights
             accessRights={accessOptions as TAccessRight[]}
             selectedAccessRight={selectedAccessRight as TAccessRight}

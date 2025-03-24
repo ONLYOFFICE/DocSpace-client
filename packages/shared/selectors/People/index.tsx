@@ -218,6 +218,7 @@ const PeopleSelector = ({
   setActiveTab,
   injectedElement,
   filterItems,
+  alwaysShowFooter = false,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -602,7 +603,9 @@ const PeopleSelector = ({
       {...withAside}
       id={id}
       injectedElement={injectedElement}
-      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
+      alwaysShowFooter={
+        itemsList.length !== 0 || Boolean(searchValue) || alwaysShowFooter
+      }
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}

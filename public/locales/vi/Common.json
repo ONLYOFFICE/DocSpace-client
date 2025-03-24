@@ -616,5 +616,7 @@
   "Yesterday": "Hôm qua",
   "You": "Bạn",
   "RoomSelector": "Trình chọn phòng",
-  "FileSelector": "Trình chọn tập tin"
+  "FileSelector": "Trình chọn tập tin",
+  "LinkDoesNotExist": "Liên kết bạn đang cố gắng mở không tồn tại.",
+  "LinkHasExpired": "Liên kết bạn theo dõi đã hết hạn."
 }

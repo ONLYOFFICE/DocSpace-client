@@ -616,5 +616,7 @@
   "Yesterday": "أمس",
   "You": "أنت",
   "RoomSelector": "محدد الغرفة",
-  "FileSelector": "محدد الملف"
+  "FileSelector": "محدد الملف",
+  "LinkDoesNotExist": "الرابط الذي تحاول فتحه غير موجود",
+  "LinkHasExpired": "انتهت صلاحية الرابط الذي تحاول فتحه"
 }

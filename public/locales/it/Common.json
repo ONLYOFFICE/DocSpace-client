@@ -618,5 +618,7 @@
   "Yesterday": "Ieri",
   "You": "Tu",
   "RoomSelector": "Selettore della stanza",
-  "FileSelector": "Selettore di file"
+  "FileSelector": "Selettore di file",
+  "LinkDoesNotExist": "Il link che stai cercando di aprire non esiste.",
+  "LinkHasExpired": "Il link che hai seguito è scaduto."
 }

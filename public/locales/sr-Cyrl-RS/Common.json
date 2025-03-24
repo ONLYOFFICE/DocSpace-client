@@ -618,5 +618,7 @@
   "Yesterday": "Јуче",
   "You": "Ви",
   "RoomSelector": "Селектор собе",
-  "FileSelector": "Селектор датотеке"
+  "FileSelector": "Селектор датотеке",
+  "LinkDoesNotExist": "Линк који покушавате да отворите не постоји.",
+  "LinkHasExpired": "Линк који сте пратили је истекао."
 }

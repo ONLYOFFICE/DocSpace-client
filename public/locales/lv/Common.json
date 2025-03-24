@@ -617,5 +617,7 @@
   "Yesterday": "어제",
   "You": "Jūs",
   "RoomSelector": "Telpu atlasītājs",
-  "FileSelector": "Failu atlasītājs"
+  "FileSelector": "Failu atlasītājs",
+  "LinkDoesNotExist": "Saite, kuru mēģināt atvērt, neeksistē.",
+  "LinkHasExpired": "Saitei, kurai sekojāt, ir beidzies derīguma termiņš."
 }

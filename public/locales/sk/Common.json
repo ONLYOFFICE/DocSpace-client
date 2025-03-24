@@ -617,5 +617,7 @@
   "Yesterday": "Včera",
   "You": "Vy",
   "RoomSelector": "Selektor miestností",
-  "FileSelector": "Výber súboru"
+  "FileSelector": "Výber súboru",
+  "LinkDoesNotExist": "Odkaz, ktorý sa pokúšate otvoriť, neexistuje.",
+  "LinkHasExpired": "Odkaz, ktorý používate, je neplatný."
 }

@@ -617,5 +617,7 @@
   "Yesterday": "Dünən",
   "You": "Siz",
   "RoomSelector": "Otaq seçici",
-  "FileSelector": "Fayl seçici"
+  "FileSelector": "Fayl seçici",
+  "LinkDoesNotExist": "Açmağa çalışdığınız keçid mövcud deyil.",
+  "LinkHasExpired": "İzlədiyiniz keçidin vaxtı keçib."
 }

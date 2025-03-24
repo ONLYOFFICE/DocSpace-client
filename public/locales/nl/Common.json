@@ -617,5 +617,7 @@
   "Yesterday": "Gisteren",
   "You": "U",
   "RoomSelector": "Kamer selectie",
-  "FileSelector": "Bestand selectie"
+  "FileSelector": "Bestand selectie",
+  "LinkDoesNotExist": "De link die u probeert te openen bestaat niet.",
+  "LinkHasExpired": "De link die u heeft gevolgd is verlopen."
 }

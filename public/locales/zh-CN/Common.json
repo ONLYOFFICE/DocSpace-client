@@ -619,5 +619,7 @@
   "Yesterday": "昨天",
   "You": "您",
   "RoomSelector": "房间选择器",
-  "FileSelector": "文件选择器"
+  "FileSelector": "文件选择器",
+  "LinkDoesNotExist": "链接不存在。",
+  "LinkHasExpired": "您关注的链接已过期。"
 }

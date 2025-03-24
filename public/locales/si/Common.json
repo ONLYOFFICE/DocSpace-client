@@ -475,5 +475,7 @@
   "Yesterday": "ඊයේ",
   "You": "ඔබ",
   "RoomSelector": "කාමර තෝරනය",
-  "FileSelector": "ගොනු තෝරනය"
+  "FileSelector": "ගොනු තෝරනය",
+  "LinkDoesNotExist": "ඔබ විවෘත කිරීමට උත්සාහ කරන සබැඳිය නොපවතී.",
+  "LinkHasExpired": "ඔබ අනුගමනය කළ සබැඳිය කල් ඉකුත් වී ඇත."
 }

@@ -402,5 +402,7 @@
   "Website": "ເວັບໄຊທ໌",
   "Yesterday": "ມື້ວານນີ້",
   "RoomSelector": "ຕົວເລືອກຫ້ອງ",
-  "FileSelector": "ຕົວເລືອກໄຟລ໌"
+  "FileSelector": "ຕົວເລືອກໄຟລ໌",
+  "LinkDoesNotExist": "ບໍ່ມີລິ້ງທີ່ເຈົ້າພະຍາຍາມເປີດ.",
+  "LinkHasExpired": "ລິ້ງທີ່ທ່ານຕິດຕາມໄດ້ໝົດອາຍຸແລ້ວ."
 }

@@ -617,5 +617,7 @@
   "Yesterday": "Eilen",
   "You": "Sinä",
   "RoomSelector": "Huoneen valitsija",
-  "FileSelector": "Tiedoston valitsija"
+  "FileSelector": "Tiedoston valitsija",
+  "LinkDoesNotExist": "Linkki, jota yrität avata ei ole olemassa.",
+  "LinkHasExpired": "Linkki, jota seurasit on vanhentunut."
 }

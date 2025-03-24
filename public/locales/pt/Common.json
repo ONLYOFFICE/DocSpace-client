@@ -617,5 +617,7 @@
   "Yesterday": "Ontem",
   "You": "Você",
   "RoomSelector": "Seletor de salas",
-  "FileSelector": "Seletor de arquivos"
+  "FileSelector": "Seletor de arquivos",
+  "LinkDoesNotExist": "O link que você está tentando abrir não existe.",
+  "LinkHasExpired": "O link que você seguiu expirou."
 }

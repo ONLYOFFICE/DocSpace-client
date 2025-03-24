@@ -679,5 +679,7 @@
   "EncryptionPortalSubtitle": "As soon as the process is over, the portal data will be avallable for work.",
   "YourTurn": "Your turn",
   "RoomSelector": "Room selector",
-  "FileSelector": "File selector"
+  "FileSelector": "File selector",
+  "LinkDoesNotExist": "The link you are trying to open does not exist.",
+  "LinkHasExpired": "The link you followed has expired."
 }

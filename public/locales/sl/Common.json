@@ -617,5 +617,7 @@
   "Yesterday": "Včeraj",
   "You": "Vi",
   "RoomSelector": "Izbira sobe",
-  "FileSelector": "Izbira datot"
+  "FileSelector": "Izbira datot",
+  "LinkDoesNotExist": "Povezava, ki jo poskušate odpreti, ne obstaja.",
+  "LinkHasExpired": "Povezava, ki ste ji sledili, je potekla."
 }

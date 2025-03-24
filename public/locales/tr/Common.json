@@ -617,5 +617,7 @@
   "Yesterday": "Dün",
   "You": "Siz",
   "RoomSelector": "Oda seçici",
-  "FileSelector": "Dosya seçici"
+  "FileSelector": "Dosya seçici",
+  "LinkDoesNotExist": "Açmaya çalıştığınız bağlantı mevcut değil.",
+  "LinkHasExpired": "Takip ettiğiniz bağlantının süresi doldu."
 }

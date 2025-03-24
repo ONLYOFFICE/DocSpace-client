@@ -618,5 +618,7 @@
   "Yesterday": "昨日",
   "You": "あなた",
   "RoomSelector": "ルームセレクタ",
-  "FileSelector": "ファイルセレクタ"
+  "FileSelector": "ファイルセレクタ",
+  "LinkDoesNotExist": "開こうとしているリンクは存在しません。",
+  "LinkHasExpired": "リンクの有効期限が切れています。"
 }

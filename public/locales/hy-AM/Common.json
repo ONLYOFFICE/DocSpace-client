@@ -618,5 +618,7 @@
   "Yesterday": "Երեկ",
   "You": "Դու",
   "RoomSelector": "Սենյակի ընտրիչ",
-  "FileSelector": "Ֆայլի ընտրիչ"
+  "FileSelector": "Ֆայլի ընտրիչ",
+  "LinkDoesNotExist": "Հղումը, որը փորձում եք բացել, գոյություն չունի:",
+  "LinkHasExpired": "Ձեր հետևած հղումը ժամկետանց է:"
 }

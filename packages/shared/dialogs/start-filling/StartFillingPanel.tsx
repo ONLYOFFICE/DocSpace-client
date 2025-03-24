@@ -130,8 +130,8 @@ const StartFillingPanel = ({
             userId: role.user!.id,
             roleName: role.name,
             roleColor: role.color.split("#")[1],
+            roomId: Number(roomId),
           })),
-          roomId: Number(roomId),
         })
         .catch((err) => {
           console.log(err);

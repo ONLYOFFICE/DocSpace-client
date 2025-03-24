@@ -95,6 +95,7 @@ import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
 import FillingStatusPanel from "../panels/FillingStatusPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
+import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 
 const Panels = (props) => {
   const {
@@ -171,6 +172,7 @@ const Panels = (props) => {
     getRefElement,
     config,
     reducedRightsVisible,
+    removeUserConfirmation,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -424,6 +426,10 @@ const Panels = (props) => {
     reducedRightsVisible ? (
       <ReducedRightsDialog key="reduced-rights-dialog" />
     ) : null,
+
+    removeUserConfirmation && (
+      <RemoveUserConfirmationDialog key="remove-user-confirmation-dialog" />
+    ),
   ];
 };
 
@@ -507,6 +513,7 @@ export default inject(
       setFormFillingTipsDialog,
       formFillingTipsVisible,
       reducedRightsData,
+      removeUserConfirmation,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
@@ -623,6 +630,7 @@ export default inject(
       getRefElement,
       config,
       reducedRightsVisible: reducedRightsData.visible,
+      removeUserConfirmation: removeUserConfirmation.visible,
     };
   },
 )(observer(Panels));

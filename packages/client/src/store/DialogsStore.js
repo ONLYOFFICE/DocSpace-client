@@ -294,6 +294,8 @@ class DialogsStore {
     callback: null,
   };
 
+  isShareFormData = { visible: false, updateAccessLink: null, fileId: null };
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -311,6 +313,10 @@ class DialogsStore {
     this.versionHistoryStore = versionHistoryStore;
     this.infoPanelStore = infoPanelStore;
   }
+
+  setIsShareFormData = ({ visible, updateAccessLink, fileId }) => {
+    this.isShareFormData = { visible, updateAccessLink, fileId };
+  };
 
   setNewFilesPanelFolderId = (folderId) => {
     this.newFilesPanelFolderId = folderId;
@@ -894,7 +900,7 @@ class DialogsStore {
     this.covers = covers;
   };
 
-  setguidAnimationVisible = (animation) => {
+  setGuidAnimationVisible = (animation) => {
     this.guidAnimationVisible = animation;
   };
 

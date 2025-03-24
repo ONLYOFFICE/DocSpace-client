@@ -257,15 +257,9 @@ const Editor = ({
   };
 
   if (successAuth) {
-    if (
-      fileInfo?.rootFolderType !== FolderType.USER &&
-      fileInfo?.rootFolderType !== FolderType.SHARE &&
-      fileInfo?.rootFolderType !== FolderType.Recent
-    ) {
-      //TODO: remove condition for share in my
-      newConfig.events.onRequestUsers = onSDKRequestUsers;
-      newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
-    }
+    newConfig.events.onRequestUsers = onSDKRequestUsers;
+    newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
+
     if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (

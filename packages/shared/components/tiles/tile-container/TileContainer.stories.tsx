@@ -36,6 +36,7 @@ import { TileContainer } from ".";
 import { TileContent } from "../tile-content/TileContent";
 import { Link } from "../../link";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
+import { FileType } from "../../../enums";
 
 const element = (
   <ReactSVG
@@ -65,19 +66,19 @@ const mockFiles = [
     id: "1",
     title: "Document.docx",
     fileExst: ".docx",
-    fileType: "docx",
+    fileType: FileType.Document,
   },
   {
     id: "2",
     title: "Presentation.pptx",
     fileExst: ".pptx",
-    fileType: "pptx",
+    fileType: FileType.Presentation,
   },
   {
     id: "3",
     title: "Spreadsheet.xlsx",
     fileExst: ".xlsx",
-    fileType: "xlsx",
+    fileType: FileType.Spreadsheet,
   },
 ];
 

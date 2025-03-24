@@ -47,6 +47,7 @@ import {
   EditLinkPanel,
   EmbeddingPanel,
   ConversionPanel,
+  ShareFormPanel,
 } from "../panels";
 import {
   ConnectDialog,
@@ -89,8 +90,6 @@ import ReorderIndexDialog from "../dialogs/ReorderIndexDialog";
 import LifetimeDialog from "../dialogs/LifetimeDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { FillPDFDialog } from "../dialogs/FillPDFDialog";
-import { ShareCollectSelector } from "../ShareCollectSelector";
-
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
 import FillingStatusPanel from "../panels/FillingStatusPanel";
@@ -147,7 +146,6 @@ const Panels = (props) => {
     selectFileFormRoomOpenRoot,
     reorderDialogVisible,
     fillPDFDialogData,
-    shareCollectSelector,
     createRoomTemplateDialogVisible,
     templateAccessSettingsVisible,
 
@@ -171,6 +169,7 @@ const Panels = (props) => {
     userId,
     getRefElement,
     config,
+    isShareFormData,
     reducedRightsVisible,
     removeUserConfirmation,
   } = props;
@@ -375,12 +374,6 @@ const Panels = (props) => {
     fillPDFDialogData.visible && (
       <FillPDFDialog key="fill-pdf-form-dialog" {...fillPDFDialogData} />
     ),
-    shareCollectSelector.visible && (
-      <ShareCollectSelector
-        key="share-collect-dialog"
-        {...shareCollectSelector}
-      />
-    ),
     roomLogoCoverDialogVisible && (
       <RoomLogoCoverDialog key="room-logo-cover-dialog" />
     ),
@@ -423,6 +416,9 @@ const Panels = (props) => {
       />
     ) : null,
 
+    isShareFormData.visible && (
+      <ShareFormPanel key="share-form-dialog" {...isShareFormData} />
+    ),
     reducedRightsVisible ? (
       <ReducedRightsDialog key="reduced-rights-dialog" />
     ) : null,
@@ -492,7 +488,6 @@ export default inject(
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
       fillPDFDialogData,
-      shareCollectSelector,
       roomLogoCoverDialogVisible,
       createRoomTemplateDialogVisible,
       templateAccessSettingsVisible,
@@ -512,6 +507,7 @@ export default inject(
 
       setFormFillingTipsDialog,
       formFillingTipsVisible,
+      isShareFormData,
       reducedRightsData,
       removeUserConfirmation,
     } = dialogsStore;
@@ -605,7 +601,6 @@ export default inject(
       selectFileFormRoomOpenRoot,
       reorderDialogVisible,
       fillPDFDialogData,
-      shareCollectSelector,
       roomLogoCoverDialogVisible,
       createRoomTemplateDialogVisible,
       templateAccessSettingsVisible,
@@ -629,6 +624,7 @@ export default inject(
       userId: userStore?.user?.id,
       getRefElement,
       config,
+      isShareFormData,
       reducedRightsVisible: reducedRightsData.visible,
       removeUserConfirmation: removeUserConfirmation.visible,
     };

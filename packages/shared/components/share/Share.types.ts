@@ -138,4 +138,10 @@ export type ShareProps = {
   ) => Promise<TFileLink>;
 
   selfId: string;
+  onOpenPanel?: (options: {
+    visible: boolean;
+    updateAccessLink: () => Promise<void>;
+    fileId: string | number;
+  }) => void;
+  onlyOneLink?: boolean;
 };

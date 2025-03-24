@@ -37,6 +37,7 @@ export const PATH_ACTIVATION_STATUS = "people/activationstatus/*";
 export const PATH_UPDATE_USER = "people/*";
 export const PATH_DELETE_USER = "people/@self";
 export const PATH_USER_BY_EMAIL = "people/email?email=**";
+export const PATH_ADD_GUEST = "people/guests/share/approve";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 

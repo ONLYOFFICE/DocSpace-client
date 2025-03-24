@@ -64,6 +64,7 @@ const InfoPanelBodyContent = ({
   image,
   onChangeFile,
   templateEventVisible,
+  setIsShareFormData,
   ...props
 }) => {
   const { groupId } = useParams();
@@ -111,6 +112,8 @@ const InfoPanelBodyContent = ({
     isSeveralItems,
     isVDR: selectedItems[0]?.roomType === RoomsType.VirtualDataRoom,
     isLockedSharedRoom,
+    onOpenPanel: setIsShareFormData,
+    onlyOneLink: infoPanelSelection?.isPDFForm,
   };
 
   const viewHelper = new ViewHelper({
@@ -260,8 +263,12 @@ export default inject(
       setShowSearchBlock,
     } = infoPanelStore;
 
-    const { editRoomDialogProps, createRoomDialogProps, templateEventVisible } =
-      dialogsStore;
+    const {
+      editRoomDialogProps,
+      createRoomDialogProps,
+      templateEventVisible,
+      setIsShareFormData,
+    } = dialogsStore;
 
     const selection =
       infoPanelSelection?.length > 1 ? null : infoPanelSelection;
@@ -313,6 +320,7 @@ export default inject(
       setImage,
       image,
       templateEventVisible,
+      setIsShareFormData,
     };
   },
 )(observer(InfoPanelBodyContent));

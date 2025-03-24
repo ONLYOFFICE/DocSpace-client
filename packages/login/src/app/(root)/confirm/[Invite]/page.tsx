@@ -57,10 +57,10 @@ async function Page({ searchParams, params }: LinkInviteProps) {
   const headersList = headers();
   const hostName = headersList.get("x-forwarded-host") ?? "";
 
-  const [settings, user, thirdParty, capabilities, passwordSettings] =
+  const [user, settings, thirdParty, capabilities, passwordSettings] =
     await Promise.all([
-      getSettings(),
       getUserFromConfirm(uid, confirmKey),
+      getSettings(),
       getThirdPartyProviders(),
       getCapabilities(),
       getPortalPasswordSettings(confirmKey),
@@ -77,8 +77,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
         <>
           <GreetingCreateUserContainer
             type={type}
-            firstName={user?.firstName}
-            lastName={user?.lastName}
+            displayName={user?.displayName}
             culture={culture}
             hostName={hostName}
           />
@@ -86,8 +85,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
             <CreateUserForm
               userNameRegex={settings.userNameRegex}
               passwordHash={settings.passwordHash}
-              firstName={user?.firstName}
-              lastName={user?.lastName}
+              displayName={user?.displayName}
               passwordSettings={passwordSettings}
               capabilities={capabilities}
               thirdPartyProviders={thirdParty}

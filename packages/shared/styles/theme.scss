@@ -715,7 +715,7 @@
 }
 
 .dark {
-  --main-button-background-color: #{$light-blue-main};
+  --main-button-background-color: var(--accent-main, #{$light-blue-main});
   --main-button-text-color: #{$white};
   --main-button-text-color-disabled: #{$white};
   --main-button-svg-fill: #{$white};

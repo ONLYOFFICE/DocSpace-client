@@ -111,5 +111,14 @@
   "SubtitleDescription": "Subtitle with additional comments or descriptions for the current directory.",
   "TabPlugins": "Tab Plugins",
   "Viewer": "Viewer",
-  "ViewerDescription": "Embed a viewer to allow users to open a file for viewing from the corresponding room."
+  "ViewerDescription": "Embed a viewer to allow users to open a file for viewing from the corresponding room.",
+  "NPMCodeDescription": "NPM package description",
+  "NPMCodeInstallStep": "Install package from npm and save it to the package.json file with --save:",
+  "NPMCodeImportStep": "Import the package in your project:",
+  "NPMCodeCreateStep": "Create HTML element with id from config and insert it inside document body for place SDK frame:",
+  "NPMCodeInitStep": "Initialize SDK:",
+  "NPMCodeConfigStep": "Create config object with required parameters:",
+  "NPMCodeUsageStep": "Use SDK init method to create SDK frame:",
+  "SourceType": "Connect type",
+  "SdkPackageVersionInfo": "For connect as package version always latest"
 }

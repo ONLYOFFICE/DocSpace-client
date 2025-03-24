@@ -43,8 +43,8 @@ const argv = (key) => {
   );
 };
 
-const currentPort = (argv("app.port") || config.PORT) ?? 5099;
-const hostname = config.HOSTNAME ?? "localhost";
+const port = (argv("app.port") || process.env.PORT || config.PORT) ?? 5099;
+const hostname = config.HOSTNAME ?? "0.0.0.0";
 
 // Make sure commands gracefully respect termination signals (e.g. from Docker)
 // Allow the graceful termination to be manually configurable
@@ -244,7 +244,7 @@ startServer({
   isDev: dev,
   config: nextConfig,
   hostname,
-  port: currentPort,
+  port,
   allowRetry: false,
   keepAliveTimeout,
 }).catch((err) => {

@@ -43,15 +43,16 @@ export async function handlePublicRoomValidation(
   request: NextRequest,
   requestHeaders: Headers,
   shareKey: string,
-): Promise<NextResponse | null> {
+): Promise<{ redirect?: string; anonymousSessionKeyCookie?: string } | null> {
   if (!shareKey || request.nextUrl.pathname.includes("public-room/password")) {
     return null;
   }
 
-  const validation = await validatePublicRoomKey(shareKey);
+  const { response: validation, anonymousSessionKeyCookie } =
+    await validatePublicRoomKey(shareKey);
 
   const redirectPath = redirects[validation.status];
-  if (!redirectPath) return null;
+  if (!redirectPath) return { anonymousSessionKeyCookie };
 
   if (
     validation.status === ValidationStatus.Password &&
@@ -60,7 +61,7 @@ export async function handlePublicRoomValidation(
     requestHeaders.set(PUBLIC_ROOM_TITLE_HEADER, validation.title);
   }
 
-  return NextResponse.rewrite(new URL(redirectPath, request.url), {
-    request: { headers: requestHeaders },
-  });
+  return {
+    redirect: redirectPath,
+  };
 }

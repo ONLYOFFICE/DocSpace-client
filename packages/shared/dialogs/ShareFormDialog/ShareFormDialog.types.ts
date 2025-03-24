@@ -25,10 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export interface ShareFormDialogProps {
-  onClickFormRoom?: () => void;
-  onClickVirtualDataRoom?: () => void;
   visible: boolean;
   onClose: () => void;
+
+  onClickFormRoom?: () => void;
+  onClickVirtualDataRoom?: () => void;
+  onClickShareFile?: () => void;
   container?: React.ReactNode;
   visibleContainer?: boolean;
 }

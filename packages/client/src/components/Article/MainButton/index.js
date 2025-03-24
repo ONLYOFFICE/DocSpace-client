@@ -182,6 +182,7 @@ const ArticleMainButtonContent = (props) => {
     getContactsModel,
     contactsCanCreate,
     setRefMap,
+    defaultOformLocale,
   } = props;
 
   const navigate = useNavigate();
@@ -298,11 +299,14 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
-    const initOformFilter = (
-      oformsFilter || oformsFilter.getDefault()
-    ).toUrlParams();
+    const initOformFilter = oformsFilter || oformsFilter.getDefault();
+    if (!initOformFilter.locale) initOformFilter.locale = defaultOformLocale;
+
     setOformFromFolderId(currentFolderId);
-    navigate(`/form-gallery/${currentFolderId}/filter?${initOformFilter}`);
+
+    navigate(
+      `/form-gallery/${currentFolderId}/filter?${initOformFilter.toUrlParams()}`,
+    );
   };
 
   React.useEffect(() => {
@@ -875,7 +879,8 @@ export default inject(
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
-    const { setOformFromFolderId, oformsFilter } = oformsStore;
+    const { setOformFromFolderId, oformsFilter, defaultOformLocale } =
+      oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
     const { frameConfig, isFrame } = settingsStore;
@@ -943,6 +948,7 @@ export default inject(
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
       setRefMap,
+      defaultOformLocale,
     };
   },
 )(

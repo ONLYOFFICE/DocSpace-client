@@ -43,17 +43,19 @@ import Badges from "@docspace/shared/components/badges";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
-import { generateFilesRowValue } from "../../../_utils";
+import { generateFilesItemValue } from "../../../_utils";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "../RowView.types";
 
 import styles from "../RowView.module.scss";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
+import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 
 const Row = observer(
   ({ item, index, filterSortBy, timezone, displayFileExtension }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
+    const { isItemActive } = useActiveItemsStore();
 
     const [isInit, setIsInit] = React.useState(false);
     const { t } = useTranslation(["Common"]);
@@ -84,11 +86,21 @@ const Row = observer(
       />
     );
 
+    const onContextClick = (isRightMouseButtonClick?: boolean) => {
+      if (isRightMouseButtonClick && filesSelectionStore.selection.length) {
+        return;
+      }
+
+      filesSelectionStore.setSelection([]);
+      filesSelectionStore.setBufferSelection(item);
+    };
+
     const contextMenuModel = getContextMenuModel(true);
 
     const isChecked = filesSelectionStore.isCheckedItem(item);
+    const inProgress = isItemActive(item);
 
-    const value = generateFilesRowValue(item, false, index);
+    const value = generateFilesItemValue(item, false, index);
 
     return (
       <StyledWrapper
@@ -122,10 +134,12 @@ const Row = observer(
             withAccess={false}
             className={`${!isInit ? "row-list-item " : ""} files-row`}
             onSelect={() => filesSelectionStore.addSelection(item)}
+            onContextClick={onContextClick}
             element={element}
             contextOptions={contextMenuModel}
             getContextModel={getContextMenuModel}
             badgesComponent={badgesComponent}
+            inProgress={inProgress}
           >
             <RowContent
               item={item}

@@ -39,7 +39,7 @@ import {
   ContextMenuRefType,
 } from "@docspace/shared/components/context-menu";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { HeaderType } from "components/context-menu/ContextMenu.types";
+import { HeaderType } from "@docspace/shared/components/context-menu/ContextMenu.types";
 import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 
 import { BaseTileProps } from "./BaseTile.types";

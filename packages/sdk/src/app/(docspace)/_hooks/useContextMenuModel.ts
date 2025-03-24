@@ -2,6 +2,8 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
 
+import { toastr } from "@docspace/shared/components/toast";
+
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
@@ -12,12 +14,12 @@ import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
-import useFolderActions from "./useFolderActions";
+import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
 
 import { TFileItem, TFolderItem } from "./useItemList";
-import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
+import useFolderActions from "./useFolderActions";
 import useFilesActions from "./useFilesActions";
-import { toastr } from "@docspace/shared/components/toast";
+import useDownloadActions from "./useDownloadActions";
 
 type UseContextMenuModelProps = {
   item?: TFileItem | TFolderItem;
@@ -32,6 +34,7 @@ export default function useContextMenuModel({
 
   const { openFolder, copyFolderLink } = useFolderActions({ t });
   const { openFile, copyFileLink } = useFilesActions({ t });
+  const { downloadAction, downloadAsAction } = useDownloadActions();
 
   const getSelectItem = useCallback(
     (item: TFileItem | TFolderItem) => {
@@ -107,30 +110,31 @@ export default function useContextMenuModel({
 
   const getDownloadItem = useCallback(
     (item?: TFileItem | TFolderItem) => {
+      const isDisabled = item
+        ? !item.security.Download
+        : filesSelectionStore.selection.some((k) => !k.security.Download);
+
       return {
         id: "option_download",
         key: "download",
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
-        onClick: () => {},
-        disabled: false,
+        onClick: () => downloadAction(item),
+        disabled: isDisabled,
       };
     },
-    [t],
+    [t, filesSelectionStore.selection, downloadAction],
   );
 
-  const getDownloadAsItem = useCallback(
-    (item?: TFileItem | TFolderItem) => {
-      return {
-        key: "download-as",
-        label: t("Common:DownloadAs"),
-        icon: DownloadAsReactSvgUrl,
-        onClick: () => {},
-        disabled: false,
-      };
-    },
-    [t],
-  );
+  const getDownloadAsItem = useCallback(() => {
+    return {
+      key: "download-as",
+      label: t("Common:DownloadAs"),
+      icon: DownloadAsReactSvgUrl,
+      onClick: downloadAsAction,
+      disabled: false,
+    };
+  }, [downloadAsAction, t]);
 
   const getViewItem = useCallback(
     (item: TFileItem | TFolderItem) => {
@@ -262,7 +266,7 @@ export default function useContextMenuModel({
         model.push(getDownloadItem(item));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.downloadAs))
-        model.push(getDownloadAsItem(item));
+        model.push(getDownloadAsItem());
 
       return model;
     },

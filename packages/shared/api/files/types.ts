@@ -88,6 +88,7 @@ export type TAvailableExternalRights = {
   Read: boolean;
   Restrict: boolean;
   Review: boolean;
+  FillForms: boolean;
 };
 
 export type TFile = {
@@ -250,6 +251,7 @@ export type TOperation = {
   id: string;
   processed: string;
   progress: number;
+  url?: string;
 };
 
 export type TUploadOperation = {

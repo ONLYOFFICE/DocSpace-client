@@ -616,5 +616,7 @@
   "Years": "年",
   "Yes": "はい",
   "Yesterday": "昨日",
-  "You": "あなた"
+  "You": "あなた",
+  "RoomSelector": "ルームセレクタ",
+  "FileSelector": "ファイルセレクタ"
 }

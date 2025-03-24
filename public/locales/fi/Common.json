@@ -615,5 +615,7 @@
   "Years": "Vuosia",
   "Yes": "Kyllä",
   "Yesterday": "Eilen",
-  "You": "Sinä"
+  "You": "Sinä",
+  "RoomSelector": "Huoneen valitsija",
+  "FileSelector": "Tiedoston valitsija"
 }

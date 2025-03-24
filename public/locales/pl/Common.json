@@ -615,5 +615,7 @@
   "Years": "Lata",
   "Yes": "Tak",
   "Yesterday": "Wczoraj",
-  "You": "Ty"
+  "You": "Ty",
+  "RoomSelector": "Selektor pokojów",
+  "FileSelector": "Selektor plików"
 }

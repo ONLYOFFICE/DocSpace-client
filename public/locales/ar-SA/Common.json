@@ -614,5 +614,7 @@
   "Years": "سنوات",
   "Yes": "نعم",
   "Yesterday": "أمس",
-  "You": "أنت"
+  "You": "أنت",
+  "RoomSelector": "محدد الغرفة",
+  "FileSelector": "محدد الملف"
 }

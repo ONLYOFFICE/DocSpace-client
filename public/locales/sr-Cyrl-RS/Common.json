@@ -616,5 +616,7 @@
   "Years": "Године",
   "Yes": "Да",
   "Yesterday": "Јуче",
-  "You": "Ви"
+  "You": "Ви",
+  "RoomSelector": "Селектор собе",
+  "FileSelector": "Селектор датотеке"
 }

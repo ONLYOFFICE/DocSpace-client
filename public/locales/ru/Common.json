@@ -617,5 +617,7 @@
   "Years": "Лет",
   "Yes": "Да",
   "Yesterday": "Вчера",
-  "You": "Вы"
+  "You": "Вы",
+  "RoomSelector": "Селектор комнат",
+  "FileSelector": "Селектор файлов"
 }

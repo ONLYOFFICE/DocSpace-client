@@ -615,5 +615,7 @@
   "Years": "Jaren",
   "Yes": "Ja",
   "Yesterday": "Gisteren",
-  "You": "U"
+  "You": "U",
+  "RoomSelector": "Kamer selectie",
+  "FileSelector": "Bestand selectie"
 }

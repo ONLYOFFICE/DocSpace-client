@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios from "axios";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -234,7 +234,9 @@ class PublicRoomStore {
     api.rooms
       .validatePublicRoomKey(key)
       .then((res) => {
-        this.publicRoomKey = key;
+        runInAction(() => {
+          this.publicRoomKey = key;
+        });
 
         const currentUrl = window.location.href;
 

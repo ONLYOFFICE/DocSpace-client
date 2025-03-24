@@ -248,7 +248,8 @@ const Body = ({
   const isShareFormEmpty =
     itemsCount === 0 &&
     Boolean(items?.[0]?.isRoomsOnly) &&
-    Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom);
+    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
+      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
 
   return (
     <StyledBody

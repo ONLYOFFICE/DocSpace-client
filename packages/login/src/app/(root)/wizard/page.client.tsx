@@ -28,6 +28,7 @@
 
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
+import Image from "next/image";
 
 import {
   convertLanguage,
@@ -76,7 +77,7 @@ import {
   TTimeZone,
 } from "@docspace/shared/api/settings/types";
 
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 
 import { TCulturesOption, TError, TTimeZoneOption } from "@/types";
 import {
@@ -421,7 +422,7 @@ function WizardForm(props: WizardFormProps) {
       <StyledLink>
         <IconButton
           size={12}
-          iconName={RefreshReactSvgUrl}
+          iconNode={<RefreshReactSvgUrl />}
           onClick={generatePassword}
         />
         <Link

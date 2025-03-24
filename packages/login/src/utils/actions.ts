@@ -45,6 +45,7 @@ import {
   TThirdPartyProvider,
   TTimeZone,
   TVersionBuild,
+  TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import {
@@ -519,4 +520,20 @@ export async function getOauthJWTToken() {
   const jwtToken = await res.json();
 
   return jwtToken.response as string;
+}
+
+export async function getInvitationSettings() {
+  const [getInvitationSettings] = createRequest(
+    [`/settings/invitationsettings`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getInvitationSettings);
+
+  if (!res.ok) return;
+
+  const invitationSettings = await res.json();
+
+  return invitationSettings.response as TInvitationSettings;
 }

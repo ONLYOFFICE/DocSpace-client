@@ -522,7 +522,11 @@ export async function createFile(
 //   return request(options);
 // }
 
-export async function getFileInfo(fileId: number | string, share?: string) {
+export async function getFileInfo(
+  fileId: number | string,
+  share?: string,
+  skipRedirect = false,
+) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/file/${fileId}`,
@@ -533,7 +537,7 @@ export async function getFileInfo(fileId: number | string, share?: string) {
       : undefined,
   };
 
-  const res = (await request(options)) as TFile;
+  const res = (await request(options, skipRedirect)) as TFile;
 
   return res;
 }

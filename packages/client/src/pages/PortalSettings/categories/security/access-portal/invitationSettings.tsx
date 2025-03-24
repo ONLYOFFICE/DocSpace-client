@@ -27,6 +27,7 @@ import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
+import isEqual from "lodash/isEqual";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { Checkbox } from "@docspace/shared/components/checkbox";
@@ -34,6 +35,8 @@ import { Text } from "@docspace/shared/components/text";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { size } from "@docspace/shared/utils";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 
 import styles from "./InvitationSettings.module.scss";
 import { LearnMoreWrapper } from "../StyledSecurity";
@@ -42,14 +45,16 @@ const InvitationSettings = (props) => {
   const {
     t,
     isInit,
-    getInvitationSettings,
     loadSettings,
     setInvitationSettings,
     allowInvitingMembers,
     allowInvitingGuests,
   } = props;
 
+  const [showReminder, setShowReminder] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
   const [isCheckedContacts, setIsCheckedContacts] =
     useState(allowInvitingMembers);
   const [isCheckedGuests, setIsCheckedGuests] = useState(allowInvitingGuests);
@@ -63,6 +68,37 @@ const InvitationSettings = (props) => {
       navigate("/portal-settings/security/access-portal");
   };
 
+  const getSettingsFromDefault = () => {
+    const defaultSettings = getFromSessionStorage("defaultInvitationSettings");
+    if (defaultSettings) {
+      setIsCheckedContacts(defaultSettings.allowInvitingMembers);
+      setIsCheckedGuests(defaultSettings.allowInvitingGuests);
+    }
+  };
+
+  const getSettings = () => {
+    const currentSettings = getFromSessionStorage("currentInvitationSettings");
+
+    const defaultData = {
+      allowInvitingMembers,
+      allowInvitingGuests,
+    };
+    saveToSessionStorage("defaultInvitationSettings", defaultData);
+
+    setIsCheckedContacts(
+      currentSettings
+        ? currentSettings.allowInvitingMembers
+        : allowInvitingMembers,
+    );
+    setIsCheckedGuests(
+      currentSettings
+        ? currentSettings.allowInvitingGuests
+        : allowInvitingGuests,
+    );
+
+    setIsLoading(true);
+  };
+
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
@@ -73,6 +109,33 @@ const InvitationSettings = (props) => {
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
+  useEffect(() => {
+    const currentSettings = getFromSessionStorage("currentInvitationSettings");
+    const defaultSettings = getFromSessionStorage("defaultInvitationSettings");
+
+    if (isEqual(currentSettings, defaultSettings)) {
+      getSettings();
+    } else {
+      getSettingsFromDefault();
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (!isLoading) return;
+    const defaultSettings = getFromSessionStorage("defaultInvitationSettings");
+    const newSettings = {
+      allowInvitingMembers: isCheckedContacts,
+      allowInvitingGuests: isCheckedGuests,
+    };
+    saveToSessionStorage("currentInvitationSettings", newSettings);
+
+    if (isEqual(defaultSettings, newSettings)) {
+      setShowReminder(false);
+    } else {
+      setShowReminder(true);
+    }
+  }, [isCheckedContacts, isCheckedGuests]);
+
   const onChangeContacts = () => {
     setIsCheckedContacts(!isCheckedContacts);
   };
@@ -82,20 +145,42 @@ const InvitationSettings = (props) => {
   };
 
   const onSaveClick = async () => {
+    setIsSaving(true);
+
     try {
       await setInvitationSettings(isCheckedGuests, isCheckedContacts);
+
+      saveToSessionStorage("currentInvitationSettings", {
+        allowInvitingMembers: isCheckedContacts,
+        allowInvitingGuests: isCheckedGuests,
+      });
+      saveToSessionStorage("defaultInvitationSettings", {
+        allowInvitingMembers: isCheckedContacts,
+        allowInvitingGuests: isCheckedGuests,
+      });
+      setShowReminder(false);
 
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
     } catch (error) {
       toastr.error(error as TData);
     }
+
+    setIsSaving(false);
   };
 
-  console.log(
-    "allowInvitingGuests allowInvitingMembers",
-    allowInvitingGuests,
-    allowInvitingMembers,
-  );
+  const onCancelClick = () => {
+    const defaultSettings = getFromSessionStorage("defaultInvitationSettings");
+    saveToSessionStorage("currentInvitationSettings", defaultSettings);
+
+    setIsCheckedContacts(
+      defaultSettings?.allowInvitingMembers || allowInvitingMembers,
+    );
+    setIsCheckedGuests(
+      defaultSettings?.allowInvitingGuests || allowInvitingGuests,
+    );
+
+    setShowReminder(false);
+  };
 
   return (
     <>
@@ -113,7 +198,12 @@ const InvitationSettings = (props) => {
               isChecked={isCheckedContacts}
               onChange={onChangeContacts}
             />
-            <Text fontSize="13px" fontWeight="600" lineHeight="20px">
+            <Text
+              fontSize="13px"
+              fontWeight="600"
+              lineHeight="20px"
+              onClick={onChangeContacts}
+            >
               {t("InvitationSettingsContacts")}
             </Text>
           </div>
@@ -135,7 +225,12 @@ const InvitationSettings = (props) => {
               isChecked={isCheckedGuests}
               onChange={onChangeGuests}
             />
-            <Text fontSize="13px" fontWeight="600" lineHeight="20px">
+            <Text
+              fontSize="13px"
+              fontWeight="600"
+              lineHeight="20px"
+              onClick={onChangeGuests}
+            >
               {t("InvitationSettingsGuests")}
             </Text>
           </div>
@@ -154,14 +249,14 @@ const InvitationSettings = (props) => {
       <SaveCancelButtons
         className={styles.saveCancelButtons}
         onSaveClick={onSaveClick}
-        // onCancelClick={onCancelClick}
-        // showReminder={showReminder}
+        onCancelClick={onCancelClick}
+        showReminder={showReminder}
         reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Common:CancelButton")}
         displaySettings
         hasScroll={false}
-        // isSaving={isSaving}
+        isSaving={isSaving}
       />
     </>
   );

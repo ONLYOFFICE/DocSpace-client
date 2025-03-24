@@ -91,6 +91,7 @@ const Item = ({
   isUserTariffLimit,
   roomId,
   style,
+  allowInvitingGuests,
 }) => {
   const {
     avatar,
@@ -301,6 +302,8 @@ const Item = ({
   const availableAccess =
     roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
 
+  const hasNotFoundEmail = !allowInvitingGuests && type === EmployeeType.Guest;
+
   const displayBody = (
     <>
       <StyledInviteUserBody>
@@ -326,13 +329,17 @@ const Item = ({
         ) : null}
       </StyledInviteUserBody>
 
-      {hasError ? (
+      {hasError || hasNotFoundEmail ? (
         <ErrorWrapper>
           <StyledHelpButton
             iconName={InfoEditReactSvgUrl}
             displayType="auto"
             offsetRight={0}
-            tooltipContent={t("EmailErrorMessage")}
+            tooltipContent={
+              hasNotFoundEmail
+                ? t("EmailErrorMessageUserNotFound")
+                : t("EmailErrorMessage")
+            }
             openOnClick={false}
             size={16}
             color={theme.infoPanel.errorColor}

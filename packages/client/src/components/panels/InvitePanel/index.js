@@ -80,6 +80,7 @@ const InvitePanel = ({
   standalone,
   hideSelector,
   isUserTariffLimit,
+  allowInvitingGuests,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -224,7 +225,11 @@ const InvitePanel = ({
       return inviteItems.some((item) => !!item.errors?.length);
     };
 
-    setHasErrors(hasValidationErrors());
+    const needRemoveGuests = !allowInvitingGuests
+      ? inviteItems.some((item) => item.userType === EmployeeType.Guest)
+      : false;
+
+    setHasErrors(hasValidationErrors() || needRemoveGuests);
   }, [inviteItems]);
 
   useEffect(() => {
@@ -585,7 +590,7 @@ export default inject(
     currentQuotaStore,
     userStore,
   }) => {
-    const { theme, standalone } = settingsStore;
+    const { theme, standalone, allowInvitingGuests } = settingsStore;
 
     const { getUsersList, filter } = peopleStore.usersStore;
     const {
@@ -635,6 +640,7 @@ export default inject(
       hideSelector: invitePanelOptions.hideSelector,
       isUserTariffLimit,
       isAdmin,
+      allowInvitingGuests,
     };
   },
 )(

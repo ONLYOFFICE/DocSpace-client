@@ -28,10 +28,12 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
+import { toastr } from "@docspace/shared/components/toast";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { size } from "@docspace/shared/utils";
+import { TData } from "@docspace/shared/components/toast/Toast.type";
 
 import styles from "./InvitationSettings.module.scss";
 import { LearnMoreWrapper } from "../StyledSecurity";
@@ -79,8 +81,14 @@ const InvitationSettings = (props) => {
     setIsCheckedGuests(!isCheckedGuests);
   };
 
-  const onSaveClick = () => {
-    setInvitationSettings(isCheckedGuests, isCheckedContacts);
+  const onSaveClick = async () => {
+    try {
+      await setInvitationSettings(isCheckedGuests, isCheckedContacts);
+
+      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+    } catch (error) {
+      toastr.error(error as TData);
+    }
   };
 
   console.log(

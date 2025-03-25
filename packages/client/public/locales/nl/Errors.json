@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Lege reactie",
-  "ErrorUnavailableText": "{{productName}} niet beschikbaar",
-  "LinkDoesNotExist": "De link die u probeert te openen bestaat niet.",
-  "LinkHasExpired": "De link die u heeft gevolgd is verlopen."
+  "ErrorUnavailableText": "{{productName}} niet beschikbaar"
 }

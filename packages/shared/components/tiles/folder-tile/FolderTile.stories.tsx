@@ -35,7 +35,6 @@ import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDe
 import { FolderTile } from "./FolderTile";
 import { FolderTileProps } from "./FolderTile.types";
 import { TileContent } from "../tile-content/TileContent";
-import { TileItem } from "../tile-container/TileContainer.types";
 
 const element = (
   <ReactSVG
@@ -126,8 +125,8 @@ export const Default: Story = {
       id: "folder-1",
       title: "My Folder",
       isFolder: true,
-      contextOptions,
-    } as TileItem,
+      contextOptions: ["copy-to", "move-to"],
+    },
     element,
     contextOptions,
     badges,

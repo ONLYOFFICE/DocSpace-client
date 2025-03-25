@@ -31,7 +31,7 @@ import { Text } from "../../../components/text";
 import { Checkbox } from "../../../components/checkbox";
 import { isMobile } from "../../../utils";
 
-import type { DownloadRowProps } from "../DownloadDialog.types";
+import { type DownloadRowProps, isFile } from "../DownloadDialog.types";
 import styles from "../DownloadDialog.module.scss";
 
 export const DownloadRow = (props: DownloadRowProps) => {
@@ -93,7 +93,7 @@ export const DownloadRow = (props: DownloadRowProps) => {
             {file.format || t("Common:OriginalFormat")}
           </LinkWithDropdown>
         ) : null}
-        {isOther && file.fileExst ? (
+        {isOther && isFile(file) && file.fileExst ? (
           <Text
             className={styles.downloadDialogOtherText}
             truncate

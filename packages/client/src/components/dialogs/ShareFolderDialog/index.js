@@ -63,7 +63,7 @@ const ShareFolderDialog = ({
         <Button
           id="create-room"
           key="OkButton"
-          label={t("Files:CreateRoom")}
+          label={t("Common:CreateRoom")}
           size="normal"
           primary
           onClick={onAction}

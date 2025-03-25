@@ -28,18 +28,21 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import type { IInitialConfig } from "@/types";
+import { FolderType } from "@docspace/shared/enums";
 
 const useShareDialog = (
   config: IInitialConfig | undefined,
   openShareFormDialog: () => void,
+  rootFolderType?: FolderType,
 ) => {
   const [isVisible, setIsVisible] = React.useState(false);
 
   const onSDKRequestSharingSettings = React.useCallback(() => {
-    if (config?.startFilling) return openShareFormDialog();
+    if (config?.startFilling && rootFolderType !== FolderType.USER)
+      return openShareFormDialog();
 
     setIsVisible(true);
-  }, [config?.startFilling, openShareFormDialog]);
+  }, [config?.startFilling, openShareFormDialog, rootFolderType]);
 
   const onClose = React.useCallback(() => {
     setIsVisible(false);

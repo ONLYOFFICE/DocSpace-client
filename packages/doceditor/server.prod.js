@@ -37,8 +37,17 @@ import("./logger.mjs").then(({ logger }) => {
 
   const dev = process.env.NODE_ENV === "development";
 
-  const currentPort = config.PORT ?? 5013;
-  const hostname = config.HOSTNAME ?? "localhost";
+  const argv = (key) => {
+    if (process.argv.includes(`--${key}`)) return true;
+
+    return (
+      process.argv.find((arg) => arg.startsWith(`--${key}=`))?.split("=")[1] ||
+      null
+    );
+  };
+
+  const port = (argv("app.port") || config.PORT) ?? 5013;
+  const hostname = config.HOSTNAME ?? "0.0.0.0";
 
   // Make sure commands gracefully respect termination signals (e.g. from Docker)
   // Allow the graceful termination to be manually configurable
@@ -242,7 +251,7 @@ import("./logger.mjs").then(({ logger }) => {
     isDev: dev,
     config: nextConfig,
     hostname,
-    port: currentPort,
+    port,
     allowRetry: false,
     keepAliveTimeout,
   }).catch((err) => {

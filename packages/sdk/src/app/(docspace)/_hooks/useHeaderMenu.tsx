@@ -31,45 +31,22 @@ import { useTranslation } from "react-i18next";
 import {
   getCheckboxItemId,
   getCheckboxItemLabel,
-  presentInArray,
 } from "@docspace/shared/utils";
 import { FilterType } from "@docspace/shared/enums";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import { useFilesListStore } from "../_store/FilesListStore";
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
-import { useFilesSettingsStore } from "../_store/FilesSettingsStore";
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+
+import useFileType from "./useFileType";
 
 export default function useItemList({}) {
   const { t } = useTranslation(["Common"]);
 
-  const { itemsCount, items } = useFilesListStore();
+  const { items } = useFilesListStore();
   const { setSelection } = useFilesSelectionStore();
-  const { filesSettings } = useFilesSettingsStore();
-
-  const isDocument = useCallback(
-    (extension: string) =>
-      presentInArray(filesSettings?.extsDocument ?? [], extension),
-    [filesSettings?.extsDocument],
-  );
-
-  const isPresentation = useCallback(
-    (extension: string) =>
-      presentInArray(filesSettings?.extsPresentation ?? [], extension),
-    [filesSettings?.extsPresentation],
-  );
-
-  const isSpreadsheet = useCallback(
-    (extension: string) =>
-      presentInArray(filesSettings?.extsSpreadsheet ?? [], extension),
-    [filesSettings?.extsSpreadsheet],
-  );
-
-  const isArtchive = useCallback(
-    (extension: string) =>
-      presentInArray(filesSettings?.extsArchive ?? [], extension),
-    [filesSettings?.extsArchive],
-  );
+  const { isDocument, isPresentation, isSpreadsheet, isArchive } =
+    useFileType();
 
   const onSelect = useCallback(
     (e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +77,7 @@ export default function useItemList({}) {
             type = FilterType.ImagesOnly;
           else if (item.viewAccessibility?.MediaView)
             type = FilterType.MediaOnly;
-          else if (isArtchive(item.fileExst)) type = FilterType.ArchiveOnly;
+          else if (isArchive(item.fileExst)) type = FilterType.ArchiveOnly;
         }
 
         return type === +key;
@@ -108,14 +85,7 @@ export default function useItemList({}) {
 
       setSelection(selectedItems);
     },
-    [
-      isArtchive,
-      isDocument,
-      isPresentation,
-      isSpreadsheet,
-      items,
-      setSelection,
-    ],
+    [isArchive, isDocument, isPresentation, isSpreadsheet, items, setSelection],
   );
 
   const getHeaderMenu = useCallback(() => {
@@ -132,7 +102,7 @@ export default function useItemList({}) {
           menuItems.add(FilterType.ImagesOnly);
         else if (item.viewAccessibility?.MediaView)
           menuItems.add(FilterType.MediaOnly);
-        else if (isArtchive(item.fileExst))
+        else if (isArchive(item.fileExst))
           menuItems.add(FilterType.ArchiveOnly);
 
         menuItems.add(FilterType.FilesOnly);
@@ -159,7 +129,7 @@ export default function useItemList({}) {
 
     return <>{dropdownItems}</>;
   }, [
-    isArtchive,
+    isArchive,
     isDocument,
     isPresentation,
     isSpreadsheet,

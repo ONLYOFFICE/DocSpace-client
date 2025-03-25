@@ -478,14 +478,14 @@ export const settingsTree = [
             key: "7-1-2",
             icon: "",
             link: "room-selector",
-            tKey: "JavascriptSdk:RoomSelector",
+            tKey: "Common:RoomSelector",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_file-selector",
             key: "7-1-3",
             icon: "",
             link: "file-selector",
-            tKey: "JavascriptSdk:FileSelector",
+            tKey: "Common:FileSelector",
           },
           {
             id: "portal-settings_catalog-javascript-sdk_editor",

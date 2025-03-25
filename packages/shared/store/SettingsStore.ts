@@ -61,6 +61,7 @@ import {
   isPublicRoom,
   insertTagManager,
   isManagement,
+  openUrl,
 } from "../utils/common";
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
@@ -1452,15 +1453,13 @@ class SettingsStore {
   }
 
   openUrl = (url: string, action: UrlActionType, replace: boolean = false) => {
-    if (action === UrlActionType.Download) {
-      return this.isFrame &&
-        this.frameConfig?.downloadToEvent &&
-        this.frameConfig?.events?.onDownload
-        ? frameCallEvent({ event: "onDownload", data: url })
-        : replace
-          ? (window.location.href = url)
-          : window.open(url, "_self");
-    }
+    openUrl({
+      url,
+      action,
+      replace,
+      isFrame: this.isFrame,
+      frameConfig: this.frameConfig,
+    });
   };
 
   checkEnablePortalSettings = (isPaid: boolean) => {

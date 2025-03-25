@@ -34,43 +34,82 @@ import {
   type TArrayTypes,
   type TOnMove,
 } from "@docspace/shared/components/selection-area";
-import { checkIsSSR } from "@docspace/shared/utils";
+import { checkIsSSR, getCountTilesInRow } from "@docspace/shared/utils";
 import useFilesSelection from "@/app/(docspace)/_hooks/useFilesSelection";
+import { useLayoutEffect, useMemo, useState } from "react";
+import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
+import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 const SelectionArea = observer(() => {
+  const [countTilesInRow, setCountTilesInRow] = useState(0);
+
   const { setSelections } = useFilesSelection();
+  const { filesViewAs } = useSettingsStore();
+  const { items } = useFilesListStore();
+
+  let foldersLength = useMemo(
+    () => items.filter((item) => item.isFolder).length,
+    [items],
+  );
+  let filesLength = items.length - foldersLength;
+
+  const getCountOfMissingFilesTiles = (itemsLength: number) => {
+    const division = itemsLength % countTilesInRow;
+    return division ? countTilesInRow - division : 0;
+  };
 
   const arrayTypes: TArrayTypes[] = [
     {
       type: "file",
       rowGap: 14,
       itemHeight: 0,
+      rowCount: Math.ceil(filesLength / countTilesInRow),
+      countOfMissingTiles: getCountOfMissingFilesTiles(filesLength),
     },
     {
       type: "folder",
       rowGap: 12,
       itemHeight: 0,
+      rowCount: Math.ceil(foldersLength / countTilesInRow),
+      countOfMissingTiles: getCountOfMissingFilesTiles(foldersLength),
     },
   ];
+
+  const selectableClass = filesViewAs === "tile" ? "files-item" : "window-item";
 
   const onMove = ({ added, removed, clear }: TOnMove) => {
     setSelections(added, removed, clear);
   };
 
+  useLayoutEffect(() => {
+    const setTilesCount = () => {
+      const newCount = getCountTilesInRow();
+      if (countTilesInRow !== newCount) setCountTilesInRow(newCount);
+    };
+
+    const onResize = () => setTilesCount();
+
+    setTilesCount();
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, [countTilesInRow]);
+
   return checkIsSSR() ? null : (
     <SelectionAreaComponent
       containerClass="section-scroll"
-      selectableClass="window-item"
+      selectableClass={selectableClass}
       scrollClass="section-scroll"
-      viewAs="row"
+      viewAs={filesViewAs || "row"}
       itemsContainerClass="ReactVirtualized__Grid__innerScrollContainer"
       arrayTypes={arrayTypes}
       itemClass="files-item"
       onMove={onMove}
-      // Todo: configure tiles
-      folderHeaderHeight={0}
-      countTilesInRow={0}
-      defaultHeaderHeight={0}
+      folderHeaderHeight={35}
+      countTilesInRow={countTilesInRow}
+      defaultHeaderHeight={46}
     />
   );
 });

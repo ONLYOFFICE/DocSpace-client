@@ -34,74 +34,63 @@ import type {
   TFileItem,
   TFolderItem,
 } from "@/app/(docspace)/_hooks/useItemList";
+import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
+import type { TViewAs } from "@docspace/shared/types";
+
+const extractFileInfo = (
+  item: Element | null,
+  filesViewAs: TViewAs,
+): { fileType: string; id: string } | null => {
+  if (!item) return null;
+
+  const value =
+    filesViewAs === "tile"
+      ? item.getAttribute("value")
+      : item.querySelector(".files-item")?.getAttribute("value");
+
+  if (!value) return null;
+
+  const [fileType, ...rest] = value.split("_");
+  const id = rest.slice(0, -3).join("_");
+
+  return { fileType, id };
+};
 
 /** Component must be wrapped in mobx observer to use this hook */
 export default function useFilesSelection() {
   const { items: filesList } = useFilesListStore();
   const { selection, setSelection } = useFilesSelectionStore();
+  const { filesViewAs } = useSettingsStore();
 
   const setSelections = useCallback(
     (added: Element[], removed: Element[], clear: boolean = false) => {
-      if (clear) {
-        setSelection([]);
-      }
+      let newSelections: (TFileItem | TFolderItem)[] = clear
+        ? []
+        : JSON.parse(JSON.stringify(selection));
 
-      let newSelections: (TFileItem | TFolderItem)[] = JSON.parse(
-        JSON.stringify(selection),
-      );
+      const processItem = (item: Element, action: "add" | "remove") => {
+        const fileInfo = extractFileInfo(item, filesViewAs || "row");
+        if (!fileInfo) return;
 
-      added.forEach((item) => {
-        if (!item) return;
+        const { fileType, id } = fileInfo;
+        const isFolder = fileType !== "file";
+        const foundItem = filesList.find(
+          (f) => f.id === +id && f.isFolder === isFolder,
+        );
 
-        const value = item.getElementsByClassName("files-item")
-          ? item.getElementsByClassName("files-item")[0]?.getAttribute("value")
-          : null;
-
-        if (!value) return;
-        const splitValue = value.split("_");
-
-        const fileType = splitValue[0];
-        const id = splitValue.slice(1, -3).join("_");
-
-        if (fileType === "file") {
-          const foundFile = filesList.find((f) => {
-            return f.id === +id && !f.isFolder;
-          });
-          foundFile && newSelections.push(foundFile);
-        } else {
-          const selectableFolder = filesList.find(
-            (f) => f.id === +id && f.isFolder,
-          );
-
-          if (selectableFolder) {
-            newSelections.push(selectableFolder);
+        if (foundItem) {
+          if (action === "add") {
+            newSelections.push(foundItem);
+          } else {
+            newSelections = newSelections.filter(
+              (f) => f.id !== +id || f.isFolder !== isFolder,
+            );
           }
         }
-      });
+      };
 
-      removed.forEach((item) => {
-        if (!item) return;
-
-        const value = item.getElementsByClassName("files-item")
-          ? item.getElementsByClassName("files-item")[0]?.getAttribute("value")
-          : null;
-
-        if (!value) return;
-        const splitValue = value.split("_");
-
-        const fileType = splitValue[0];
-        const id = splitValue.slice(1, -3).join("_");
-
-        if (fileType === "file") {
-          newSelections = newSelections.filter(
-            (f) => !(f.id === +id && !f.isFolder),
-          );
-        } else {
-          newSelections = newSelections.filter(
-            (f) => !(f.id === +id && f.isFolder),
-          );
-        }
-      });
+      added.forEach((item) => processItem(item, "add"));
+      removed.forEach((item) => processItem(item, "remove"));
 
       const removeDuplicate = (items: (TFileItem | TFolderItem)[]) => {
         return items.filter(
@@ -113,7 +102,7 @@ export default function useFilesSelection() {
 
       setSelection(removeDuplicate(newSelections));
     },
-    [filesList, selection, setSelection],
+    [filesList, filesViewAs, selection, setSelection],
   );
 
   return { setSelections };

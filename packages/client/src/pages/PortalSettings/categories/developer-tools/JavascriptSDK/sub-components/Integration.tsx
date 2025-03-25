@@ -61,7 +61,7 @@ const Integration: React.FC<{
   wordPressUrl,
   drupalUrl,
 }) => {
-  const { t } = useTranslation(["JavascriptSDK"]);
+  const { t } = useTranslation(["JavascriptSdk"]);
 
   return (
     <IntegrationContainer

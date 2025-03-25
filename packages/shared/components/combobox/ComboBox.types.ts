@@ -34,7 +34,7 @@ export type TCombobox = null | "badge" | "onlyIcon" | "descriptive";
 
 export type TBaseOption = {
   key: string | number;
-  icon?: string;
+  icon?: string | React.ReactElement;
   label?: string;
   color?: string;
   backgroundColor?: string;
@@ -151,7 +151,7 @@ export type TComboboxProps = {
   /** Set is open item access */
   setIsOpenItemAccess?: (isOpen: boolean) => void;
   /** Size */
-  size?: ComboBoxSize;
+  size?: `${ComboBoxSize}`;
 
   role?: string;
   /** Style */

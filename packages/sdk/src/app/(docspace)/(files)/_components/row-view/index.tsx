@@ -31,6 +31,7 @@ import { observer } from "mobx-react";
 
 import { RowContainer } from "@docspace/shared/components/rows";
 import styles from "@docspace/shared/styles/FilesRowContainer.module.scss";
+import { useIsServer } from "@docspace/shared/hooks/useIsServer";
 
 import { Row } from "./sub-components/Row";
 
@@ -45,11 +46,7 @@ const RowView = ({
   displayFileExtension,
   fetchMoreFiles,
 }: RowViewProps) => {
-  const [isInit, setIsInit] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsInit(true);
-  }, []);
+  const isSSR = useIsServer();
 
   return (
     <RowContainer
@@ -57,7 +54,7 @@ const RowView = ({
       filesLength={items.length}
       itemCount={total}
       hasMoreFiles={hasMoreFiles}
-      useReactWindow={isInit}
+      useReactWindow={!isSSR}
       fetchMoreFiles={fetchMoreFiles}
       itemHeight={58}
       onScroll={() => {}}
@@ -70,6 +67,7 @@ const RowView = ({
           filterSortBy={filterSortBy}
           timezone={timezone}
           displayFileExtension={displayFileExtension}
+          isSSR={isSSR}
         />
       ))}
     </RowContainer>

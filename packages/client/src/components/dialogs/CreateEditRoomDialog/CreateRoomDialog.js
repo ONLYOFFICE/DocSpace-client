@@ -222,7 +222,7 @@ const CreateRoomDialog = ({
   return (
     <ModalDialog
       displayType="aside"
-      withBodyScroll={!isTemplate}
+      withBodyScroll
       visible={visible}
       onClose={onCloseAndDisconnectThirdparty}
       isScrollLocked={isScrollLocked}

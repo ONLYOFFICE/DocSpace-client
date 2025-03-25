@@ -81,10 +81,12 @@ const TableView = (props: TableViewProps) => {
     setViewAs,
     userId,
     currentDeviceType,
+    culture,
     onDeleteApiKey,
     onChangeApiKeyParams,
-    culture,
     onRenameApiKey,
+    onEditApiKey,
+    permissions,
   } = props;
 
   const tableRef = useRef(null);
@@ -127,6 +129,8 @@ const TableView = (props: TableViewProps) => {
             onDeleteApiKey={onDeleteApiKey}
             onChangeApiKeyParams={onChangeApiKeyParams}
             onRenameApiKey={onRenameApiKey}
+            onEditApiKey={onEditApiKey}
+            permissions={permissions}
           />
         ))}
       </TableBody>

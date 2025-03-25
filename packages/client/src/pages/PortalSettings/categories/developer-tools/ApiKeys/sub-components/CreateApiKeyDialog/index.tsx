@@ -31,10 +31,7 @@ import copy from "copy-to-clipboard";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { withTranslation } from "react-i18next";
-import {
-  createApiKey,
-  getApiKeyPermissions,
-} from "@docspace/shared/api/api-keys";
+import { createApiKey } from "@docspace/shared/api/api-keys";
 import { TApiKey, TApiKeyRequest } from "@docspace/shared/api/api-keys/types";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -53,8 +50,9 @@ import { CreateApiKeyDialogProps, TPermissionsList } from "../../types";
 import {
   getCategoryTranslation,
   getFilteredOptions,
+  getItemPermissions,
   PermissionGroup,
-} from "./utils";
+} from "../../utils";
 
 const StyledBodyContent = styled.div`
   .api-key_name {
@@ -124,17 +122,34 @@ const StyledBodyContent = styled.div`
 `;
 
 const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
-  const { t, tReady, isVisible, setIsVisible, setListItems } = props;
+  const {
+    t,
+    tReady,
+    isVisible,
+    setIsVisible,
+    setListItems,
+    actionItem,
+    permissions,
+    setActionItem,
+    onChangeApiKeyParams,
+    isRequestRunning: isRequestRunningProp,
+  } = props;
+
+  const selectedOption = getItemPermissions(
+    permissions,
+    actionItem?.permissions,
+  );
+
+  const isEdit = !!actionItem;
 
   const [isRequestRunning, setIsRequestRunning] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(actionItem?.name ?? "");
   const [isValid, setIsValid] = useState(true);
   const [isValidLifeTime, setIsValidLifeTime] = useState(true);
-  const [isChecked, setIsChecked] = useState(false);
+  const [lifetimeIsChecked, setLifetimeIsChecked] = useState(false);
   const [secretKey, setSecretKey] = useState<TApiKey>();
   const [expiresInDays, setExpiresInDays] = useState("7");
-  const [permissions, setPermissions] = useState<string[]>([]);
-  const [selectedItemId, setSelectedItemId] = useState("all");
+  const [selectedItemId, setSelectedItemId] = useState(selectedOption);
   const [filteredOpt, setFilteredOpt] = useState<TPermissionsList>();
 
   const getRestrictedOptions = () => {
@@ -240,6 +255,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onClose = () => {
+    setActionItem(null);
     setIsVisible(false);
   };
 
@@ -275,16 +291,20 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
       name: inputValue,
       permissions: selectedPermissions,
     } as TApiKeyRequest;
-    if (isChecked) newKey.expiresInDays = expiresInDays;
+    if (lifetimeIsChecked) newKey.expiresInDays = expiresInDays;
 
-    setIsRequestRunning(true);
-    createApiKey(newKey)
-      .then((key) => {
-        setSecretKey(key);
-        setListItems((prev) => [...prev, key]);
-      })
-      .catch((err) => toastr.error(err))
-      .finally(() => setIsRequestRunning(false));
+    if (isEdit) {
+      onChangeApiKeyParams(actionItem.id, newKey);
+    } else {
+      setIsRequestRunning(true);
+      createApiKey(newKey)
+        .then((key) => {
+          setSecretKey(key);
+          setListItems((prev) => [...prev, key]);
+        })
+        .catch((err) => toastr.error(err))
+        .finally(() => setIsRequestRunning(false));
+    }
   };
 
   const onKeyPress = (e: KeyboardEvent) => {
@@ -313,19 +333,13 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     }
   };
 
-  const getPermissions = async () => {
-    getApiKeyPermissions()
-      .then((res) => {
-        const filteredOptions = getFilteredOptions(res);
-        setFilteredOpt(filteredOptions);
-        setPermissions(res);
-      })
-      .catch((err) => toastr.error(err));
-  };
-
   useEffect(() => {
-    getPermissions();
-  }, []);
+    const filteredOptions = getFilteredOptions(
+      permissions,
+      actionItem?.permissions,
+    );
+    setFilteredOpt(filteredOptions);
+  }, [permissions]);
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyPress);
@@ -335,6 +349,10 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   useEffect(() => {
     if (secretKey && inputRef) inputRef.current?.select();
   }, [inputRef, secretKey]);
+
+  useEffect(() => {
+    setIsRequestRunning(isRequestRunningProp);
+  }, [isRequestRunningProp]);
 
   const createBody = (
     <StyledBodyContent>
@@ -367,44 +385,49 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           selectedItemId={selectedItemId}
         />
       </div>
-      <div className="api-key_name">
-        <div className="api-key_lifetime">
-          <Text fontSize="13px" fontWeight={600}>
-            {t("Settings:KeyLifetime")}
-          </Text>
-          <ToggleButton
-            className="api-key_toggle"
-            isChecked={isChecked}
-            onChange={() => setIsChecked(!isChecked)}
-          />
-        </div>
-        <Text
-          fontSize="12px"
-          fontWeight={400}
-          className="api-key_lifetime-description"
-        >
-          {t("Settings:KeyLifetimeDescription")}
-        </Text>
-        {isChecked ? (
-          <div className="api-key_lifetime-input-block">
-            <TextInput
-              className="api-key_lifetime-input"
-              value={expiresInDays}
-              type={InputType.text}
-              onChange={(e) => {
-                if (e.target.value && !/^(?:[1-9][0-9]*)$/.test(e.target.value))
-                  return;
-                setExpiresInDays(e.target.value);
-                setIsValidLifeTime(true);
-              }}
-              hasError={!isValidLifeTime}
-            />
+      {!isEdit ? (
+        <div className="api-key_name">
+          <div className="api-key_lifetime">
             <Text fontSize="13px" fontWeight={600}>
-              {capitalize(t("Common:Days"))}
+              {t("Settings:KeyLifetime")}
             </Text>
+            <ToggleButton
+              className="api-key_toggle"
+              isChecked={lifetimeIsChecked}
+              onChange={() => setLifetimeIsChecked(!lifetimeIsChecked)}
+            />
           </div>
-        ) : null}
-      </div>
+          <Text
+            fontSize="12px"
+            fontWeight={400}
+            className="api-key_lifetime-description"
+          >
+            {t("Settings:KeyLifetimeDescription")}
+          </Text>
+          {lifetimeIsChecked ? (
+            <div className="api-key_lifetime-input-block">
+              <TextInput
+                className="api-key_lifetime-input"
+                value={expiresInDays}
+                type={InputType.text}
+                onChange={(e) => {
+                  if (
+                    e.target.value &&
+                    !/^(?:[1-9][0-9]*)$/.test(e.target.value)
+                  )
+                    return;
+                  setExpiresInDays(e.target.value);
+                  setIsValidLifeTime(true);
+                }}
+                hasError={!isValidLifeTime}
+              />
+              <Text fontSize="13px" fontWeight={600}>
+                {capitalize(t("Common:Days"))}
+              </Text>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
     </StyledBodyContent>
   );
 
@@ -448,7 +471,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     <>
       <Button
         key="OkButton"
-        label={t("Webhooks:Generate")}
+        label={isEdit ? t("Common:EditButton") : t("Webhooks:Generate")}
         size={ButtonSize.normal}
         primary
         onClick={onGenerate}
@@ -484,7 +507,9 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
       autoMaxHeight
     >
       <ModalDialog.Header>
-        {t("Settings:CreateNewSecretKey")}
+        {isEdit
+          ? t("Settings:EditSecretKey")
+          : t("Settings:CreateNewSecretKey")}
       </ModalDialog.Header>
       <ModalDialog.Body>{secretKey ? keyBody : createBody}</ModalDialog.Body>
       <ModalDialog.Footer>

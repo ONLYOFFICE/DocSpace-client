@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import {
@@ -96,6 +97,7 @@ const RowView = (props: TableViewProps) => {
     onChangeApiKeyParams,
     onDeleteApiKey,
     onRenameApiKey,
+    onEditApiKey,
   } = props;
 
   useViewEffect({
@@ -114,7 +116,13 @@ const RowView = (props: TableViewProps) => {
           // sectionWidth={sectionWidth}
           contextOptions={[
             {
-              key: "Settings dropdownItem",
+              key: "api-key_edit",
+              label: t("Common:EditButton"),
+              icon: SettingsReactSvgUrl,
+              onClick: () => onEditApiKey(item.id),
+            },
+            {
+              key: "api-key_rename",
               label: t("Common:Rename"),
               icon: RenameReactSvgUrl,
               onClick: () => onRenameApiKey(item.id),
@@ -124,7 +132,7 @@ const RowView = (props: TableViewProps) => {
               isSeparator: true,
             },
             {
-              key: "Settings dropdownItem",
+              key: "api-key_delete",
               label: t("Common:Delete"),
               icon: CatalogTrashReactSvgUrl,
               onClick: () => onDeleteApiKey(item.id),

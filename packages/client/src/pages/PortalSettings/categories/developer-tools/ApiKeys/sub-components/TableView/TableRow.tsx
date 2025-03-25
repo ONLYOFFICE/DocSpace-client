@@ -28,6 +28,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 import {
   TableRow as TableRowComponent,
@@ -43,6 +44,10 @@ import {
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { TableRowProps } from "../../types";
+import {
+  getItemPermissions,
+  getPermissionsOptionTranslation,
+} from "../../utils";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -86,17 +91,32 @@ const TableRow = (props: TableRowProps) => {
   const {
     item,
     hideColumns,
+    culture,
     onChangeApiKeyParams,
     onDeleteApiKey,
-    culture,
     onRenameApiKey,
+    onEditApiKey,
+    permissions,
   } = props;
 
   const { t } = useTranslation(["Common"]);
 
+  const selectedOption = getItemPermissions(permissions, item.permissions);
+
+  const permissionTranslation = getPermissionsOptionTranslation(
+    selectedOption,
+    t,
+  );
+
   const contextOptions = [
     {
-      key: "Settings dropdownItem",
+      key: "api-key_edit",
+      label: t("Common:EditButton"),
+      icon: SettingsReactSvgUrl,
+      onClick: () => onEditApiKey(item.id),
+    },
+    {
+      key: "api-key_rename",
       label: t("Common:Rename"),
       icon: RenameReactSvgUrl,
       onClick: () => onRenameApiKey(item.id),
@@ -106,7 +126,7 @@ const TableRow = (props: TableRowProps) => {
       isSeparator: true,
     },
     {
-      key: "Settings dropdownItem",
+      key: "api-key_delete",
       label: t("Common:Delete"),
       icon: CatalogTrashReactSvgUrl,
       onClick: () => onDeleteApiKey(item.id),
@@ -118,14 +138,14 @@ const TableRow = (props: TableRowProps) => {
     : DefaultUserPhotoSize32PngUrl;
 
   const getStatusByDate = (date: string) => {
-    const locale = getCookie(LANGUAGE) || culture;
+    const locale = getCookie(LANGUAGE) ?? culture ?? "en";
     const dateLabel = getCorrectDate(locale, date);
     return dateLabel;
   };
 
   const createOnDate = getStatusByDate(item.createOn);
   const lastUsedDate = getStatusByDate(item.lastUsed);
-  const expiresAtDate = getStatusByDate(item.expiresAt);
+  // const expiresAtDate = getStatusByDate(item.expiresAt);
 
   return (
     <StyledWrapper>
@@ -187,7 +207,7 @@ const TableRow = (props: TableRowProps) => {
             className="api-keys_text api-keys_text-overflow"
             fontWeight={600}
           >
-            ALL //TODO:
+            {permissionTranslation}
           </Text>
         </TableCell>
         <TableCell>

@@ -23,6 +23,8 @@ export type ApiKeyViewProps = {
     params: TApiKeyParamsRequest,
   ) => void;
   onRenameApiKey: (id: TApiKey["id"]) => void;
+  onEditApiKey: (id: TApiKey["id"]) => void;
+  permissions: string[];
 };
 
 export type TableViewProps = {
@@ -39,6 +41,8 @@ export type TableViewProps = {
     params: TApiKeyParamsRequest,
   ) => void;
   culture?: string;
+  onEditApiKey: (id: TApiKey["id"]) => void;
+  permissions: string[];
 };
 
 export type TableHeaderProps = {
@@ -58,8 +62,10 @@ export type TableRowProps = {
     id: TApiKey["id"],
     params: TApiKeyParamsRequest,
   ) => void;
-  culture: string;
+  culture?: string;
   onRenameApiKey: (id: TApiKey["id"]) => void;
+  onEditApiKey: (id: TApiKey["id"]) => void;
+  permissions: string[];
 };
 
 export type TableHeaderColumn = {
@@ -77,6 +83,14 @@ export type CreateApiKeyDialogProps = {
   isVisible: boolean;
   setIsVisible: (visible: boolean) => void;
   setListItems: React.Dispatch<React.SetStateAction<TApiKey[]>>;
+  actionItem?: TApiKey | null;
+  permissions: string[];
+  setActionItem: React.Dispatch<React.SetStateAction<TApiKey | null>>;
+  onChangeApiKeyParams: (
+    id: TApiKey["id"],
+    params: TApiKeyParamsRequest,
+  ) => void;
+  isRequestRunning: boolean;
 };
 
 export type RenameApiKeyDialogProps = {

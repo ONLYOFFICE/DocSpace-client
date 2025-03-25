@@ -79,9 +79,7 @@ const RenameApiKeyDialog = (props: RenameApiKeyDialogProps) => {
       displayType={ModalDialogType.modal}
       autoMaxHeight
     >
-      <ModalDialog.Header>
-        {t("Settings:CreateNewSecretKey")}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:Rename")}</ModalDialog.Header>
       <ModalDialog.Body>
         <TextInput
           value={inputValue}

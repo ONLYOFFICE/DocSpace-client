@@ -482,6 +482,7 @@
   "QuotaPaidUserLimitError": "The paid user limit has been reached.",
   "ReadInstructions": "Read instructions",
   "ReadOnly": "Read only",
+  "Restricted": "Restricted",
   "ReadyToFillOut": "Ready to fill out",
   "Reconnect": "Reconnect",
   "ReconnectStorage": "Reconnect storage",

@@ -32,6 +32,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import {
   changeApiKeyStatus,
   deleteApiKey,
+  getApiKeyPermissions,
   getApiKeys,
 } from "@docspace/shared/api/api-keys";
 import {
@@ -76,6 +77,7 @@ const ApiKeys = (props: ApiKeysProps) => {
   const { t, viewAs, currentColorScheme } = props;
 
   const [listItems, setListItems] = useState<TApiKey[]>([]);
+  const [permissions, setPermissions] = useState<string[]>([]);
   const [createKeyDialogIsVisible, setCreateKeyDialogIsVisible] =
     useState(false);
   const [renameKeyDialogIsVisible, setRenameKeyDialogIsVisible] =
@@ -136,6 +138,9 @@ const ApiKeys = (props: ApiKeysProps) => {
             if (params.name) {
               items[index].name = params.name;
             }
+            if (params.permissions?.length) {
+              items[index].permissions = params.permissions;
+            }
           }
 
           setListItems(items);
@@ -145,13 +150,26 @@ const ApiKeys = (props: ApiKeysProps) => {
       .finally(() => {
         setIsRequestRunning(false);
         setRenameKeyDialogIsVisible(false);
+        setCreateKeyDialogIsVisible(false);
         setActionItem(null);
       });
   };
 
+  const onEditApiKey = (id: TApiKey["id"]) => {
+    const itemIndex = listItems.findIndex((x) => x.id === id);
+    if (itemIndex > -1) {
+      setActionItem(listItems[itemIndex]);
+      setCreateKeyDialogIsVisible(true);
+    }
+  };
+
   const getKeys = async () => {
-    const keys = await getApiKeys();
-    setListItems(keys);
+    await Promise.all([getApiKeys(), getApiKeyPermissions()])
+      .then(([keys, permissionsData]) => {
+        setListItems(keys);
+        setPermissions(permissionsData);
+      })
+      .catch((err) => toastr.error(err));
   };
 
   useEffect(() => {
@@ -196,6 +214,8 @@ const ApiKeys = (props: ApiKeysProps) => {
               onDeleteApiKey={onDeleteApiKey}
               onChangeApiKeyParams={onChangeApiKeyParams}
               onRenameApiKey={onRenameApiKey}
+              onEditApiKey={onEditApiKey}
+              permissions={permissions}
             />
           ) : null}
         </div>
@@ -205,6 +225,11 @@ const ApiKeys = (props: ApiKeysProps) => {
           isVisible={createKeyDialogIsVisible}
           setIsVisible={setCreateKeyDialogIsVisible}
           setListItems={setListItems}
+          permissions={permissions}
+          setActionItem={setActionItem}
+          actionItem={actionItem}
+          onChangeApiKeyParams={onChangeApiKeyParams}
+          isRequestRunning={isRequestRunning}
         />
       ) : null}
       {renameKeyDialogIsVisible && actionItem ? (

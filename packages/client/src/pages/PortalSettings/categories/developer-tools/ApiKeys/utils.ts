@@ -1,5 +1,5 @@
 import { TTranslation } from "@docspace/shared/types";
-import { TPermissionsList } from "../../types";
+import { TPermissionsList } from "./types";
 
 export enum PermissionGroup {
   profile = "profile",
@@ -26,14 +26,20 @@ export const getCategoryTranslation = (
   }
 };
 
-export const getFilteredOptions = (permissions: string[]) => {
+export const getFilteredOptions = (
+  permissions: string[],
+  itemPermissions: string[] = [],
+) => {
   const options = {} as TPermissionsList;
   permissions.forEach((permission) => {
-    const obj = { isChecked: false, name: permission };
+    const isChecked = itemPermissions.includes(permission);
+
+    const obj = { isChecked, name: permission };
     const isRead = permission.includes("read");
+
     const defaultObj = {
-      isRead: { isChecked: false, name: "" },
-      isWrite: { isChecked: false, name: "" },
+      isRead: { isChecked, name: "" },
+      isWrite: { isChecked, name: "" },
     };
 
     if (permission.includes("accounts.self")) {
@@ -56,4 +62,42 @@ export const getFilteredOptions = (permissions: string[]) => {
   });
 
   return options;
+};
+
+export const getItemPermissions = (
+  permissions: string[],
+  itemPermissions: string[] = [],
+) => {
+  const hasWriteOption =
+    itemPermissions?.findIndex((p) => p.includes("write")) > -1;
+  const readPermissions = permissions.filter((p) => p.includes("read"));
+  const itemReadPermissions = itemPermissions
+    ? itemPermissions.filter((p) => p.includes("read"))
+    : [];
+
+  const option =
+    !itemPermissions.length || itemPermissions[0] === "*"
+      ? "all"
+      : !hasWriteOption && readPermissions.length === itemReadPermissions.length
+        ? "readonly"
+        : "restricted";
+
+  return option;
+};
+
+export const getPermissionsOptionTranslation = (
+  key: "all" | "readonly" | "restricted",
+  t: TTranslation,
+) => {
+  switch (key) {
+    case "all":
+      return t("Common:All");
+    case "readonly":
+      return t("Common:ReadOnly");
+    case "restricted":
+      return t("Common:Restricted");
+
+    default:
+      return t("Common:All");
+  }
 };

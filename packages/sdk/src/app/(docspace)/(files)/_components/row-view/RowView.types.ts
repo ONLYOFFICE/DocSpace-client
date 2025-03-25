@@ -39,6 +39,7 @@ export type RowContentProps = {
 
 export type RowProps = RowContentProps & {
   index: number;
+  isSSR: boolean;
 };
 
 export type RowViewProps = Pick<

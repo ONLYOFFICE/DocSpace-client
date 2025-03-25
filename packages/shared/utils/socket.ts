@@ -137,6 +137,16 @@ export type TSubscribeEmitData = {
 };
 
 /**
+ * Represents the data to be emitted through a socket connection with restore backup command.
+ *
+ * @typedef {Object} TRestoreBackupEmitData
+ * @property {boolean} dump
+ */
+export type TRestoreBackupEmitData = {
+  dump: boolean;
+};
+
+/**
  * A mapping between socket commands and their respective data types.
  * Each key corresponds to a command from the `SocketCommands` enum,
  */
@@ -146,7 +156,7 @@ export type TEmitEventsDataMap = {
   [SocketCommands.SubscribeInSpaces]: TSubscribeEmitData;
   [SocketCommands.UnsubscribeInSpaces]: TSubscribeEmitData;
   [SocketCommands.RefreshFolder]: string;
-  [SocketCommands.RestoreBackup]: never;
+  [SocketCommands.RestoreBackup]: TRestoreBackupEmitData;
 };
 
 /**

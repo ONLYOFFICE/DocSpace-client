@@ -252,13 +252,14 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       tenantStatus === TenantStatus.PortalRestore &&
       !isPortalUrl
     ) {
+      const url = isManagement
+        ? "management/preparation-portal"
+        : "/preparation-portal";
+
       return (
         <Navigate
           replace
-          to={combineUrl(
-            window.ClientConfig?.proxy?.url,
-            "/preparation-portal",
-          )}
+          to={combineUrl(window.ClientConfig?.proxy?.url, url)}
         />
       );
     }

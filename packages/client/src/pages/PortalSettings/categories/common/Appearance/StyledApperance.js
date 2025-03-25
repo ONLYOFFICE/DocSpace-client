@@ -39,6 +39,9 @@ const StyledComponent = styled.div`
   }
 
   .preview-header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     padding-bottom: 20px;
   }
 

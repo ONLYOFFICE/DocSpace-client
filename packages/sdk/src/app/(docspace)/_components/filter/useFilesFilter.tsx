@@ -261,7 +261,7 @@ export default function useFilesFilter({
           {
             id: "filter_folders_with-subfolders",
             key: FilterKeys.withSubfolders,
-            label: t("WithSubfolders"),
+            label: t("Common:WithSubfolders"),
           },
         ],
       },

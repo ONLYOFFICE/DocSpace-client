@@ -260,7 +260,9 @@ class AuthStore {
 
     await Promise.all(request);
 
-    this.isPortalInfoLoaded = true;
+    runInAction(() => {
+      this.isPortalInfoLoaded = true;
+    });
   };
 
   setLanguage() {

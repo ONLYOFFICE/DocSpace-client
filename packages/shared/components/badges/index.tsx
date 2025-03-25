@@ -324,13 +324,13 @@ const Badges = ({
               "badge-version badge-version-current tablet-badge icons-group",
             )}
             backgroundColor={theme.filesBadges.badgeBackgroundColor}
-            label={t("VersionBadge", {
+            label={t("Common:VersionBadge", {
               version: countVersions as string,
             })}
             {...onShowVersionHistoryProp}
             noHover
             isVersionBadge
-            title={t("ShowVersionHistory")}
+            title={t("Common:ShowVersionHistory")}
           />
         </BadgeWrapper>
       ) : null}
@@ -339,7 +339,7 @@ const Badges = ({
           <Badge
             {...commonBadgeProps}
             className="badge-version badge-new-version tablet-badge icons-group"
-            label={t("Files:New")}
+            label={t("Common:New")}
             onClick={onBadgeClick}
           />
         </BadgeWrapper>
@@ -350,7 +350,7 @@ const Badges = ({
             place="bottom"
             size={isViewTable ? 12 : 16}
             className="bagde_alert icons-group"
-            tooltipContent={t("BadgeAlertDescription")}
+            tooltipContent={t("Common:BadgeAlertDescription")}
           />
         </BadgeWrapper>
       )} */}
@@ -371,7 +371,7 @@ const Badges = ({
             "badge row-copy-link icons-group tablet-badge",
           )}
           onClick={onCopyPrimaryLink}
-          title={t("Files:CopySharedLink")}
+          title={t("Common:CopySharedLink")}
         />
       ) : null}
 
@@ -384,7 +384,7 @@ const Badges = ({
             "badge tablet-row-copy-link icons-group tablet-badge",
           )}
           onClick={onCopyPrimaryLink}
-          title={t("Files:CopySharedLink")}
+          title={t("Common:CopySharedLink")}
         />
       ) : null}
 
@@ -422,7 +422,7 @@ const Badges = ({
           )}
           size={IconSizeType.medium}
           onClick={onCreateRoom}
-          title={t("Files:CreateRoom")}
+          title={t("Common:CreateRoom")}
         />
       ) : null}
       {showNew && isTile && isRoom ? newFilesBadge : null}

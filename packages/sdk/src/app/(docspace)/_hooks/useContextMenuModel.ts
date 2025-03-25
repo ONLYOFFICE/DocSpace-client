@@ -83,7 +83,7 @@ export default function useContextMenuModel({
       return {
         id: "option_link-for-room-members",
         key: "link-for-room-members",
-        label: t("Files:CopyLink"),
+        label: t("Common:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: item.isFolder
           ? () => copyFolderLink(item.id)

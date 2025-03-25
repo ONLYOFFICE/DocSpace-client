@@ -354,4 +354,4 @@ export default inject(
       deleteRefMap,
     };
   },
-)(observer(withContainer(Table)));
+)(withContainer(observer(Table)));

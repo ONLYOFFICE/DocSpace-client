@@ -26,7 +26,7 @@
 
 /* eslint-disable react/prop-types */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -76,6 +76,28 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
 
+  useEffect(() => {
+    const key = searchParams.get("key");
+
+    if (
+      key &&
+      (!publicRoomKey || publicRoomKey !== key) &&
+      location.pathname.includes("/rooms/shared") &&
+      !isLoadedPublicRoom &&
+      !isLoadingPublicRoom &&
+      validatePublicRoomKey
+    ) {
+      validatePublicRoomKey(key);
+    }
+  }, [
+    searchParams,
+    publicRoomKey,
+    location.pathname,
+    isLoadedPublicRoom,
+    isLoadingPublicRoom,
+    validatePublicRoomKey,
+  ]);
+
   const renderComponent = () => {
     const key = searchParams.get("key");
 
@@ -98,17 +120,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
         return <Navigate to={`${path}?${filter.toUrlParams()}`} />;
       }
-    }
-
-    if (
-      key &&
-      (!publicRoomKey || publicRoomKey !== key) &&
-      location.pathname.includes("/rooms/shared") &&
-      !isLoadedPublicRoom &&
-      !isLoadingPublicRoom &&
-      validatePublicRoomKey
-    ) {
-      validatePublicRoomKey(key);
     }
 
     if (!user && isAuthenticated) {

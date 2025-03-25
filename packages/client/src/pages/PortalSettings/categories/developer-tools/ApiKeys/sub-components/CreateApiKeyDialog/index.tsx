@@ -31,7 +31,7 @@ import copy from "copy-to-clipboard";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { withTranslation } from "react-i18next";
-import { createApiKey } from "@docspace/shared/api/api-keys";
+import { createApiKey, getApiKeys } from "@docspace/shared/api/api-keys";
 import { TApiKey, TApiKeyRequest } from "@docspace/shared/api/api-keys/types";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -298,9 +298,11 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     } else {
       setIsRequestRunning(true);
       createApiKey(newKey)
-        .then((key) => {
+        .then(async (key) => {
           setSecretKey(key);
-          setListItems((prev) => [...prev, key]);
+          const newKeys = await getApiKeys();
+          if (newKeys) setListItems(newKeys);
+          // setListItems((prev) => [...prev, key]);
         })
         .catch((err) => toastr.error(err))
         .finally(() => setIsRequestRunning(false));

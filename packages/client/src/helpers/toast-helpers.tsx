@@ -43,7 +43,7 @@ export const showSuccessExportRoomIndexToast = (
       t={t}
       i18nKey="FileExportedToMyDocuments"
       ns="Files"
-      values={{ fileName }}
+      values={{ fileName, sectionName: t("Common:MyFilesSection") }}
       components={{
         1: (
           <ColorTheme

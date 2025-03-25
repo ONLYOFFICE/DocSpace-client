@@ -65,7 +65,6 @@
   "ExportRoomIndexAlreadyInProgressError": "ルームインデックスのエクスポートはすでに進行中です。新しいエクスポートを開始する前に、現在のエクスポートが完了するまでお待ちください。",
   "FavoritesEmptyContainerDescription": "ファイルをお気に入りとしてマークしたり、このリストから削除するには、コンテキストメニューを使用します。",
   "FileDownloadingIsRestricted": "このルームではファイルのダウンロードが制限されています。",
-  "FileExportedToMyDocuments": "<1>{{fileName}}</1>ファイルをドキュメントにエクスポートしました。",
   "FileRenamed": "ドキュメント'{{oldTitle}}'の名前が'{{newTitle}}'に変更されます。'",
   "FilesWillAppearHere": "ルームに追加されたファイルやフォルダはここに表示されます。",
   "FileWillBeDeletedPermanently": "ファイルは{{date}}に完全に削除されます",

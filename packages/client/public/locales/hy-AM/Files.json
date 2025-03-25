@@ -65,7 +65,6 @@
   "ExportRoomIndexAlreadyInProgressError": "Սենյակի ինդեքսի արտահանումն արդեն ընթացքի մեջ է: Խնդրում ենք սպասել մինչև ընթացիկ արտահանումն ավարտվի՝ նորը սկսելու համար:",
   "FavoritesEmptyContainerDescription": "Ֆայլերը որպես ընտրյալներ նշելու կամ այս ցանկից հեռացնելու համար օգտագործեք համատեքստի ցանկը:",
   "FileDownloadingIsRestricted": "Այս սենյակում ֆայլերի ներբեռնումը սահմանափակված է:",
-  "FileExportedToMyDocuments": "<1>{{fileName}}</1> ֆայլ արտահանվել է Փաստաթղթեր",
   "FileRenamed": "Փաստաթուղթը '{{oldTitle}}'-ից վերանվանվում է '{{newTitle}}'",
   "FilesWillAppearHere": "Սենյակում ավելացված ֆայլերն ու թղթապանակները կհայտնվեն այստեղ:",
   "FileWillBeDeletedPermanently": "Ֆայլն ընդմիշտ կջնջվի {{date}}",

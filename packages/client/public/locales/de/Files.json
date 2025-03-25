@@ -65,7 +65,7 @@
   "ExportRoomIndexAlreadyInProgressError": "Der Raumindex wird bereits exportiert. Bitte warten Sie, bis der aktuelle Export abgeschlossen ist, bevor Sie einen neuen starten.",
   "FavoritesEmptyContainerDescription": "Benutzen Sie das Kontext-Menü, um Dateien als Favoriten zu kennzeichnen oder sie aus dieser Liste zu entfernen.",
   "FileDownloadingIsRestricted": "Das Herunterladen von Dateien ist in diesem Raum eingeschränkt.",
-  "FileExportedToMyDocuments": "<1>{{fileName}}</1> Datei in \"Dokumente\" exportiert",
+  "FileExportedToMyDocuments": "<1>{{fileName}}</1> Datei in \"{{sectionName}}\" exportiert",
   "FileRenamed": "Das Dokument wurde von '{{oldTitle}}' in '{{newTitle}}' umbenannt",
   "FilesWillAppearHere": "Dem Raum hinzugefügte Dateien und Ordner werden hier angezeigt.",
   "FileWillBeDeletedPermanently": "Die Datei wird dauerhaft gelöscht {{date}}",

@@ -63,7 +63,6 @@
   "ExportRoomIndexAlreadyInProgressError": "تصدير فهرس الغرفة قيد التقدم بالفعل. يرجى الانتظار حتى يتم الانتهاء من التصدير الحالي لبدء تصدير جديد.",
   "FavoritesEmptyContainerDescription": "لوضع علامة على الملفات كمفضلة أو إزالتها من هذه القائمة ، استخدم قائمة السياق.",
   "FileDownloadingIsRestricted": "تنزيل الملفات مقيد في هذه الغرفة.",
-  "FileExportedToMyDocuments": "تم تصدير الملف <1>{{fileName}}</1> إلى المستندات",
   "FileRenamed": "تمت إعادة تسمية المستند \"{{oldTitle}}\" إلى \"{{newTitle}}\"",
   "FilesWillAppearHere": "ستظهر هنا الملفات والمجلدات التي تمت إضافتها إلى الغرفة.",
   "FileWillBeDeletedPermanently": "سيتم حذف الملف في {{date}} ",

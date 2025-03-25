@@ -63,7 +63,6 @@
   "ExportRoomIndexAlreadyInProgressError": "Otaq indeksinin ixracı artıq davam edir. Yenisini başlamazdan əvvəl cari ixracın tamamlanmasını gözləyin.",
   "FavoritesEmptyContainerDescription": "Faylları favorit kimi qeyd etmək və ya bu siyahıdan çıxarmaq üçün kontekst menyusundan istifadə edin. ",
   "FileDownloadingIsRestricted": "Bu otaqda faylların endirilməsi məhdudlaşdırılıb.",
-  "FileExportedToMyDocuments": "<1>{{fileName}}</1> faylı Sənədlərə ixrac edildi",
   "FileRenamed": "'{{oldTitle}}' sənəd adı '{{newTitle}}'adına dəyişdirildi",
   "FilesWillAppearHere": "Otağa əlavə edilmiş fayl və qovluqlar burada görünəcək.",
   "FileWillBeDeletedPermanently": "Fayl {{date}} tarixində silinəcək",

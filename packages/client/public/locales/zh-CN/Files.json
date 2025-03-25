@@ -65,7 +65,7 @@
   "ExportRoomIndexAlreadyInProgressError": "房间索引导出已在进行中。请等待当前导出完成后再开始新的导出。",
   "FavoritesEmptyContainerDescription": "使用上下文菜单收藏文件或将其从列表中移除。",
   "FileDownloadingIsRestricted": "在此房间内的下载文件受到限制。",
-  "FileExportedToMyDocuments": "<1>{{fileName}}</1>文件已导出到文档",
+  "FileExportedToMyDocuments": "<1>{{fileName}}</1>文件已导出到{{sectionName}}",
   "FileRenamed": "文档'{{oldTitle}}'已重命名为'{{newTitle}}'",
   "FilesWillAppearHere": "添加到房间的文件和文件夹会显示在此处。",
   "FileWillBeDeletedPermanently": "该文件将被永久删除 {{date}}",

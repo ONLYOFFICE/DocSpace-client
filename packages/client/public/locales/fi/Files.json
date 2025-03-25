@@ -63,7 +63,6 @@
   "ExportRoomIndexAlreadyInProgressError": "Huoneen indeksin vienti on jo käynnissä. Ole hyvä ja odota kunnes vienti on suoritettu aloittaaksesi uusi.",
   "FavoritesEmptyContainerDescription": "Voit merkitä tiedostot suosikkeihin tai poistaa ne tästä luettelosta käyttämällä kontekstivalikkoa.",
   "FileDownloadingIsRestricted": "Tiedostojen lataus on rajoitettu tässä huoneessa.",
-  "FileExportedToMyDocuments": "<1>{{fileName}}</1> tiedosto viety asiakirjoihin",
   "FileRenamed": "Asiakirjan \"{{oldTitle}}\" nimeksi on muutettu \"{{newTitle}}”",
   "FilesWillAppearHere": "Huoneeseen lisätyt tiedostot ja kansiot näkyvät tässä.",
   "FileWillBeDeletedPermanently": "Tiedosto poistetaan {{date}}",

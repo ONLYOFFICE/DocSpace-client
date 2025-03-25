@@ -65,7 +65,7 @@
   "ExportRoomIndexAlreadyInProgressError": "Exportul indexului de sală este deja în desfășurare. Vă rugăm să așteptați până când exportul curent este încheiat înainte de a începe un export nou.",
   "FavoritesEmptyContainerDescription": "Marcați fișiere ca preferate sau le ștergeți din lista prin intermediu meniului contextual. ",
   "FileDownloadingIsRestricted": "Descărcarea fişierelor este restricționată în această sală.",
-  "FileExportedToMyDocuments": "Fișierul <1>{{fileName}}</1> a fost exportat în secțiunea Documente",
+  "FileExportedToMyDocuments": "Fișierul <1>{{fileName}}</1> a fost exportat în secțiunea {{sectionName}}",
   "FileRenamed": "Documentul '{{oldTitle}}' este redenumit în '{{newTitle}}'",
   "FilesWillAppearHere": "Fișierele și folderele adăugate la această sală  vor fi afişate aici.",
   "FileWillBeDeletedPermanently": "Fișierul va fi ştears definitiv la data de {{date}}",

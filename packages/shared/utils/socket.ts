@@ -140,10 +140,12 @@ export type TSubscribeEmitData = {
  * Represents the data to be emitted through a socket connection with restore backup command.
  *
  * @typedef {Object} TRestoreBackupEmitData
- * @property {boolean} dump
+ * @property {boolean} dump - Flag indicating if it's a dump operation
+ * @property {boolean} [individual] - Optional flag indicating if the emission is for an individual
  */
 export type TRestoreBackupEmitData = {
   dump: boolean;
+  individual?: boolean;
 };
 
 /**

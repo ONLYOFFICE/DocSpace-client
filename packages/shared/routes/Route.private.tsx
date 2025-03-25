@@ -106,7 +106,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return <AppLoader />;
       }
 
-      if (!user) {
+      if (!user && isAuthenticated) {
         const filter = FilesFilter.getDefault();
         const subFolder = new URLSearchParams(window.location.search).get(
           "folder",

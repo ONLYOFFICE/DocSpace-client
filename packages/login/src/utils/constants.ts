@@ -26,7 +26,7 @@
 
 import { TTimeZoneOption } from "@/types";
 import { TOption } from "@docspace/shared/components/combobox";
-import EnUSReactSvgUrl from "PUBLIC_DIR/images/flags/en-US.react.svg?url";
+import EnUSReactSvgUrl from "PUBLIC_DIR/images/flags/en-US.react.svg";
 
 export const DEFAULT_EMAIL_TEXT =
   "User <1>{{email}}</1> is already registered in this {{productName}}, enter your password or go back to continue with another email.";

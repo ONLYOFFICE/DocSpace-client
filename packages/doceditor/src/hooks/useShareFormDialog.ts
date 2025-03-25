@@ -46,13 +46,17 @@ export const useShareFormDialog = (fileInfo: TFile | undefined) => {
   } = useStartFillingSelectDialog(fileInfo);
 
   const [shareFormDialogVisible, setShareFormDialogVisible] = useState(false);
+  const [shareFormDialogData, setShareFormDialogData] = useState<{
+    updateAccessLink?: () => void;
+  }>({});
 
   const onCloseShareFormDialog = () => {
     setShareFormDialogVisible(false);
   };
 
-  const openShareFormDialog = () => {
+  const openShareFormDialog = (updateAccessLink?: () => void) => {
     setShareFormDialogVisible(true);
+    setShareFormDialogData({ ...updateAccessLink });
   };
 
   const onClickFormRoom = () => {
@@ -81,5 +85,6 @@ export const useShareFormDialog = (fileInfo: TFile | undefined) => {
     onDownloadAs,
     conflictDataDialog,
     createDefineRoomType,
+    shareFormDialogData,
   };
 };

@@ -36,6 +36,7 @@ import { ColorTheme } from "../../color-theme/ColorTheme";
 import { ThemeId } from "../../color-theme/ColorTheme.enums";
 import { IconSizeType } from "../../../utils";
 import i18nextStoryDecorator from "../../../.storybook/decorators/i18nextStoryDecorator";
+import { FileType } from "../../../enums";
 
 import { FileTile } from "./FileTile";
 import { FileTileProps } from "./FileTile.types";
@@ -114,7 +115,7 @@ const meta = {
   },
   argTypes: {
     checked: { control: "boolean" },
-    dragging: { control: "boolean" },
+    isDragging: { control: "boolean" },
     inProgress: { control: "boolean" },
   },
   decorators: [i18nextStoryDecorator],
@@ -149,8 +150,8 @@ export const Default: Story = {
       id: "file-1",
       title: "Document.docx",
       fileExst: ".docx",
-      fileType: "docx",
-      contextOptions,
+      fileType: FileType.Document,
+      contextOptions: ["copy-to", "move-to"],
     },
     element,
     contextOptions,

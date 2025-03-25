@@ -157,4 +157,4 @@ export default inject(({ filesStore }) => {
     filesList,
     isDesc,
   };
-})(observer(withContainer(FilesTileContainer)));
+})(withContainer(observer(FilesTileContainer)));

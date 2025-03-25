@@ -2837,12 +2837,7 @@ class FilesStore {
   };
 
   createFile = async (folderId, title, templateId, formId) => {
-    return api.files
-      .createFile(folderId, title, templateId, formId)
-      .then((file) => {
-        return Promise.resolve(file);
-      })
-      .then(() => this.fetchFiles(folderId, this.filter, true, true, false));
+    return api.files.createFile(folderId, title, templateId, formId);
   };
 
   setRoomCreated = (roomCreated) => {
@@ -3820,14 +3815,14 @@ class FilesStore {
     });
   };
 
-  getFileInfo = async (id) => {
-    const fileInfo = await api.files.getFileInfo(id);
+  getFileInfo = async (id, skipRedirect) => {
+    const fileInfo = await api.files.getFileInfo(id, undefined, skipRedirect);
     this.setFile(fileInfo);
     return fileInfo;
   };
 
-  getFolderInfo = async (id) => {
-    const folderInfo = await api.files.getFolderInfo(id);
+  getFolderInfo = async (id, skipRedirect) => {
+    const folderInfo = await api.files.getFolderInfo(id, skipRedirect);
     this.setFolder(folderInfo);
     return folderInfo;
   };

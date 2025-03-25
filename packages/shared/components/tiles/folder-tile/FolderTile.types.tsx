@@ -29,7 +29,7 @@ import { TileItem } from "../tile-container/TileContainer.types";
 
 export interface FolderItem extends TileItem {
   title: string;
-  contextOptions?: ContextMenuModel[];
+  contextOptions?: string[];
   logo?: {
     small?: string;
     color?: string;

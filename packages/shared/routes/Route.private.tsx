@@ -26,7 +26,7 @@
 
 /* eslint-disable react/prop-types */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -76,23 +76,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
 
-  const renderComponent = () => {
+  useEffect(() => {
     const key = searchParams.get("key");
-
-    if (isLoadedUser && !user && location.pathname.includes("/rooms/shared")) {
-      const filter = FilesFilter.getDefault();
-      const subFolder = new URLSearchParams(window.location.search).get(
-        "folder",
-      );
-      const path = "/rooms/share";
-
-      filter.folder = subFolder || roomId || "";
-      if (key) {
-        filter.key = key;
-      }
-
-      window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`);
-    }
 
     if (
       key &&
@@ -103,6 +88,38 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       validatePublicRoomKey
     ) {
       validatePublicRoomKey(key);
+    }
+  }, [
+    searchParams,
+    publicRoomKey,
+    location.pathname,
+    isLoadedPublicRoom,
+    isLoadingPublicRoom,
+    validatePublicRoomKey,
+  ]);
+
+  const renderComponent = () => {
+    const key = searchParams.get("key");
+
+    if (location.pathname.includes("/rooms/shared")) {
+      if (!isLoadedUser) {
+        return <AppLoader />;
+      }
+
+      if (!user) {
+        const filter = FilesFilter.getDefault();
+        const subFolder = new URLSearchParams(window.location.search).get(
+          "folder",
+        );
+        const path = "/rooms/share";
+
+        filter.folder = subFolder || roomId || "";
+        if (key) {
+          filter.key = key;
+        }
+
+        return <Navigate to={`${path}?${filter.toUrlParams()}`} />;
+      }
     }
 
     if (!user && isAuthenticated) {

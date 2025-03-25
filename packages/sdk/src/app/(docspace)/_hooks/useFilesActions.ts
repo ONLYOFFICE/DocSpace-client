@@ -11,9 +11,9 @@ import { TTranslation } from "@docspace/shared/types";
 import type { TFileItem } from "@/app/(docspace)/_hooks/useItemList";
 import { useMediaViewerStore } from "@/app/(docspace)/_store/MediaViewerStore";
 
-type UseFolderActionsProps = { t: TTranslation };
+type UseFilesActionsProps = { t: TTranslation };
 
-export default function useFolderActions({ t }: UseFolderActionsProps) {
+export default function useFilesActions({ t }: UseFilesActionsProps) {
   const { filesSettings } = useFilesSettingsStore();
   const { shareKey } = useSettingsStore();
   const { setMediaViewerData } = useMediaViewerStore();

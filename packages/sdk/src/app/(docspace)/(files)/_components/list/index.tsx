@@ -43,6 +43,7 @@ import useItemList, {
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
 import RowView from "../row-view";
+import TileView from "../tile-view";
 import EmptyView from "../empty-view";
 
 import { ListProps } from "./List.types";
@@ -62,7 +63,7 @@ const List = ({
   const displayFileExtension = filesSettings.displayFileExtension;
   const searchParams = useSearchParams();
 
-  const settingsStore = useSettingsStore();
+  const { setIsEmptyList, filesViewAs } = useSettingsStore();
   const { setItems } = useFilesListStore();
   const { setSelection, setBufferSelection } = useFilesSelectionStore();
 
@@ -95,7 +96,6 @@ const List = ({
 
   const fetchMoreFiles = React.useCallback(async () => {
     if (!hasNextPage || requestRunning.current) return;
-
     requestRunning.current = true;
 
     filter.page += 1;
@@ -157,7 +157,7 @@ const List = ({
         ...newFiles.map(convertFileToItem),
       ];
 
-      settingsStore.setIsEmptyList(newItems.length === 0);
+      setIsEmptyList(newItems.length === 0);
 
       setFilesList(newItems);
       setTotal(newTotal);
@@ -170,7 +170,7 @@ const List = ({
   }, [
     searchParams,
     shareKey,
-    settingsStore,
+    setIsEmptyList,
     convertFolderToItem,
     convertFileToItem,
   ]);
@@ -190,7 +190,16 @@ const List = ({
     );
   }
 
-  return (
+  return filesViewAs === "tile" ? (
+    <TileView
+      items={filesList}
+      currentFolderId={filter.folder}
+      hasMoreFiles={hasNextPage}
+      fetchMoreFiles={fetchMoreFiles}
+      filesLength={filesList.length}
+      getIcon={getIcon}
+    />
+  ) : (
     <RowView
       total={total}
       items={filesList}

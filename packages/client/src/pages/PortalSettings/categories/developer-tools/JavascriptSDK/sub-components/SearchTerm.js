@@ -71,7 +71,7 @@ export const SearchTerm = ({ t, config, setConfig }) => {
         />
         <Checkbox
           className="checkbox"
-          label={t("Files:WithSubfolders")}
+          label={t("Common:WithSubfolders")}
           onChange={onChangeWithSubfolders}
           isChecked={config.withSubfolders}
         />

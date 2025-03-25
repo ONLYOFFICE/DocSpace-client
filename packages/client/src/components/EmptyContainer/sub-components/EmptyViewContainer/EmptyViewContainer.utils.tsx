@@ -152,7 +152,7 @@ export const getFolderDescription = (
       t("EmptyView:DefaultFolderDescription"),
     )
     .with([P._, DefaultFolderType, P.when(isUser)], () =>
-      t("EmptyView:UserEmptyDescription"),
+      t("Common:UserEmptyDescription"),
     )
     .otherwise(() => "");
 };
@@ -163,7 +163,7 @@ export const getRoomDescription = (
   isArchiveFolderRoot: boolean,
 ) => {
   if (isNotAdmin || isArchiveFolderRoot)
-    return t("EmptyView:UserEmptyDescription");
+    return t("Common:UserEmptyDescription");
 
   return t("EmptyView:EmptyDescription");
 };
@@ -187,9 +187,9 @@ export const getRootDescription = (
     )
     .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (
       <>
-        <span>{t("Files:RoomEmptyAtTheMoment")}</span>
+        <span>{t("Common:RoomEmptyAtTheMoment")}</span>
         <br />
-        <span>{t("Files:FilesWillAppearHere")}</span>
+        <span>{t("Common:FilesWillAppearHere")}</span>
       </>
     ))
     .with([FolderType.USER, P.when(() => security?.Create)], () =>
@@ -243,7 +243,7 @@ export const getFolderTitle = (
     .with([FolderType.FormRoom, DefaultFolderType, P._], () =>
       t("EmptyView:FormFolderDefaultTitle"),
     )
-    .with([P._, DefaultFolderType, P._], () => t("Files:EmptyScreenFolder"))
+    .with([P._, DefaultFolderType, P._], () => t("Common:EmptyScreenFolder"))
     .otherwise(() => "");
 };
 
@@ -258,7 +258,7 @@ export const getRoomTitle = (
 
   if (isCollaborator) return t("EmptyView:CollaboratorEmptyTitle");
 
-  if (isNotAdmin || isArchiveFolderRoot) return t("Files:EmptyScreenFolder");
+  if (isNotAdmin || isArchiveFolderRoot) return t("Common:EmptyScreenFolder");
 
   switch (type) {
     case RoomsType.FormRoom:
@@ -294,7 +294,7 @@ export const getRootTitle = (
         ),
       ],
       () =>
-        t("Files:EmptyRootRoomHeader", {
+        t("Common:EmptyRootRoomHeader", {
           productName: t("Common:ProductName"),
         }),
     )
@@ -305,11 +305,11 @@ export const getRootTitle = (
       t("EmptyView:EmptyTemplatesTitle"),
     )
     .with([FolderType.USER, ShareAccessRights.None], () =>
-      t("Files:EmptyScreenFolder"),
+      t("Common:EmptyScreenFolder"),
     )
     .with([FolderType.Recent, P._], () => t("Files:NoFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
-    .with([FolderType.TRASH, P._], () => t("Files:EmptyScreenFolder"))
+    .with([FolderType.TRASH, P._], () => t("Common:EmptyScreenFolder"))
     .otherwise(() => "");
 };
 

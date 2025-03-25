@@ -27,8 +27,6 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
-import { isManagement } from "@docspace/shared/utils/common";
-
 import ErrorContainer from "../../components/error-container/ErrorContainer";
 
 import { StyledPreparationPortal } from "./PreparationPortal.styled";

@@ -48,6 +48,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import Filter from "@docspace/shared/api/people/filter";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
@@ -80,6 +81,7 @@ const InvitePanel = ({
   standalone,
   hideSelector,
   isUserTariffLimit,
+  allowInvitingMembers,
   allowInvitingGuests,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
@@ -97,6 +99,7 @@ const InvitePanel = ({
   const [inputValue, setInputValue] = useState("");
   const [usersList, setUsersList] = useState([]);
   const [cultureKey, setCultureKey] = useState();
+  const [showGuestsTab, setShowGuestsTab] = useState(true);
 
   const navigate = useNavigate();
 
@@ -207,6 +210,18 @@ const InvitePanel = ({
       setInvitePanelIsLoading(false);
     }, LOADER_TIMEOUT);
   };
+
+  const checkGuests = async () => {
+    const filterDefault = Filter.getDefault();
+    filterDefault.area = "guests";
+    const res = await api.people.getUserList(filterDefault);
+
+    setShowGuestsTab(!!res.total);
+  };
+
+  useEffect(() => {
+    if (!allowInvitingMembers) checkGuests();
+  }, [allowInvitingMembers]);
 
   useEffect(() => {
     if (roomId === -1) {
@@ -535,7 +550,7 @@ const InvitePanel = ({
             withGroups={!isPublicRoomType}
             roomId={roomId}
             disableInvitedUsers={invitedUsersArray}
-            withGuests
+            withGuests={showGuestsTab}
             withHeader
             headerProps={{
               // Todo: Update groups empty screen texts when they are ready
@@ -590,7 +605,8 @@ export default inject(
     currentQuotaStore,
     userStore,
   }) => {
-    const { theme, standalone, allowInvitingGuests } = settingsStore;
+    const { theme, standalone, allowInvitingMembers, allowInvitingGuests } =
+      settingsStore;
 
     const { getUsersList, filter } = peopleStore.usersStore;
     const {
@@ -640,6 +656,7 @@ export default inject(
       hideSelector: invitePanelOptions.hideSelector,
       isUserTariffLimit,
       isAdmin,
+      allowInvitingMembers,
       allowInvitingGuests,
     };
   },

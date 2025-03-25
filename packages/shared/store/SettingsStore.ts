@@ -326,6 +326,7 @@ class SettingsStore {
   limitedAccessDevToolsForUsers = false;
 
   allowInvitingGuestsSetting: boolean = true;
+
   allowInvitingMembersSetting: boolean = true;
 
   constructor() {

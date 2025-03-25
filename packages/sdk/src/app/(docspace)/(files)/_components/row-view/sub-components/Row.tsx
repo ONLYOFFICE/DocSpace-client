@@ -53,20 +53,22 @@ import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 
 const Row = observer(
-  ({ item, index, filterSortBy, timezone, displayFileExtension }: RowProps) => {
+  ({
+    item,
+    index,
+    filterSortBy,
+    timezone,
+    displayFileExtension,
+    isSSR,
+  }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
     const { isItemActive } = useActiveItemsStore();
 
-    const [isInit, setIsInit] = React.useState(false);
     const { t } = useTranslation(["Common"]);
     const theme = useTheme();
     const { openFile } = useFilesActions({ t });
 
     const { getContextMenuModel } = useContextMenuModel({ item });
-
-    React.useEffect(() => {
-      setIsInit(true);
-    }, []);
 
     const element = (
       <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
@@ -132,7 +134,9 @@ const Row = observer(
             isDragging={false}
             isThirdPartyFolder={false}
             withAccess={false}
-            className={`${!isInit ? "row-list-item " : ""} files-row`}
+            className={classNames("files-row", {
+              "row-list-item": isSSR,
+            })}
             onSelect={() => filesSelectionStore.addSelection(item)}
             onContextClick={onContextClick}
             element={element}

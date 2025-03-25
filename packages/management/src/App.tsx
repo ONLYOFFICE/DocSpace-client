@@ -93,9 +93,12 @@ const App = observer(() => {
       SocketHelper.emit(SocketCommands.Subscribe, {
         roomParts: "restore",
       });
+      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "restore",
+      });
     }
     if (!socketSubscribers.has("backup")) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
+      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
         roomParts: "backup",
       });
     }
@@ -104,7 +107,8 @@ const App = observer(() => {
   useEffect(() => {
     return () => {
       SocketHelper.off(SocketEvents.BackupProgress);
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
+
+      SocketHelper.emit(SocketCommands.UnsubscribeInSpaces, {
         roomParts: "backup",
       });
     };

@@ -178,7 +178,7 @@ class AutomaticBackup extends React.PureComponent {
         await Promise.all([
           getSettingsThirdParty(),
           getBackupSchedule(isManagement()),
-          getBackupStorage(),
+          getBackupStorage(isManagement()),
           getStorageRegions(),
         ]);
       setConnectedThirdPartyAccount(account);
@@ -409,7 +409,7 @@ class AutomaticBackup extends React.PureComponent {
       );
       const [selectedSchedule, storageInfo] = await Promise.all([
         getBackupSchedule(isManagement()),
-        getBackupStorage(),
+        getBackupStorage(isManagement()),
       ]);
       setBackupSchedule(selectedSchedule);
       setThirdPartyStorage(storageInfo);
@@ -432,7 +432,7 @@ class AutomaticBackup extends React.PureComponent {
   deleteSchedule = () => {
     const { t, deleteSchedule, setErrorInformation } = this.props;
     this.setState({ isLoadingData: true }, () => {
-      deleteBackupSchedule()
+      deleteBackupSchedule(isManagement())
         .then(() => {
           deleteSchedule(this.weekdaysLabelArray);
           toastr.success(t("SuccessfullySaveSettingsMessage"));

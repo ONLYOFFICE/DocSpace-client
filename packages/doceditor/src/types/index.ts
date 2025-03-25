@@ -364,6 +364,7 @@ export interface UseSocketHelperProps {
   socketUrl: string;
   user?: TUser;
   shareKey?: string;
+  standalone?: boolean;
 }
 
 export interface UseEventsProps {

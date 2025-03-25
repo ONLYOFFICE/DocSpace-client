@@ -42,7 +42,7 @@
   "UploadDeviceOptionTitle": "从您的设备上传",
   "UploadDevicePDFFormOptionDescription": "从您的设备将准备好的 PDF 表单上传到房间。",
   "UploadDevicePDFFormOptionTitle": "从设备上传",
-  "UploadFromPortalDescription": "从文档或房间上传任何类型的文件",
+  "UploadFromPortalDescription": "从{{sectionNameFirst}}或{{sectionNameSecond}}上传任何类型的文件",
   "UploadFromPortalTitle": "从{{productName}}上传",
   "UploadPDFFormOptionDescription": "选择{{productName}}中可用的现成 PDF 表单并将其上传到房间。",
   "UserEmptyDescription": "管理员上传的文件和文件夹将显示在此处。",

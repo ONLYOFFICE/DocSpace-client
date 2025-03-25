@@ -42,7 +42,6 @@
   "UploadDeviceOptionTitle": "デバイスからのアップロード",
   "UploadDevicePDFFormOptionDescription": "お使いのデバイスからルームにPDFフォームをアップロードする。",
   "UploadDevicePDFFormOptionTitle": "デバイスからのアップロード",
-  "UploadFromPortalDescription": "ドキュメントまたはルームから任意のファイルをアップロード",
   "UploadFromPortalTitle": "{{productName}}からアップロード",
   "UploadPDFFormOptionDescription": "{{productName}}で利用可能なPDFフォームを選択し、ルームにアップロードする。",
   "UserEmptyDescription": "管理者がアップロードしたファイルやフォルダはここに表示されます。",

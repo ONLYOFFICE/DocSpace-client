@@ -42,7 +42,7 @@
   "UploadDeviceOptionTitle": "Nahrať zo zariadenia",
   "UploadDevicePDFFormOptionDescription": "Nahrávajte pripravený formulár PDF do miestnosti zo svojho zariadenia.",
   "UploadDevicePDFFormOptionTitle": "Nahrať zo zariadenia",
-  "UploadFromPortalDescription": "Nahrávajte akékoľvek typy súborov z Dokumentov alebo Miestností",
+  "UploadFromPortalDescription": "Nahrávajte akékoľvek typy súborov z {{sectionNameFirst}} alebo {{sectionNameSecond}}",
   "UploadFromPortalTitle": "Nahrať z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte pripravený PDF formulár dostupný v {{productName}} a nahrajte ho do miestnosti.",
   "UserEmptyDescription": "Súbory a priečinky nahrané administrátormi sa objavia tu.",

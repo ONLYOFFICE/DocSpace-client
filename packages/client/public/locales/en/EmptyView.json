@@ -44,7 +44,7 @@
   "UploadDeviceOptionTitle": "Upload from your Device",
   "UploadDevicePDFFormOptionDescription": "Upload a ready PDF form to the room from your device.",
   "UploadDevicePDFFormOptionTitle": "Upload from device",
-  "UploadFromPortalDescription": "Upload any type files from Documents or Rooms",
+  "UploadFromPortalDescription": "Upload any type files from {{sectionNameFirst}} or {{sectionNameSecond}}",
   "UploadFromPortalTitle": "Upload from {{productName}}",
   "UploadPDFFormOptionDescription": "Select a ready PDF form available in {{productName}} and upload it to the room.",
   "UserEmptyDescription": "Files and folders uploaded by admins will appeared here.",

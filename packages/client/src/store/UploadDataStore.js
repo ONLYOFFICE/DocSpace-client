@@ -327,7 +327,7 @@ class UploadDataStore {
       );
 
       const canceledFile = this.files.find((f) => f.uniqueId === id);
-      const newPercent = this.getFilesPercent(canceledFile.file.size);
+      const newPercent = this.getFilesPercent(); // canceledFile.file.size
       canceledFile.cancel = true;
       canceledFile.percent = 100;
       canceledFile.action = "uploaded";
@@ -480,19 +480,27 @@ class UploadDataStore {
     return newPercent;
   };
 
-  getFilesPercent = (uploadedSize) => {
-    const newSize = this.uploadedFilesSize + uploadedSize;
-    this.uploadedFilesSize = newSize;
+  getFilesPercent = () => {
+    // const newTotalSize = sumBy(this.files, (f) =>
+    //   !f.isCalculated && f.file && !this.uploaded ? f.file.size : 0,
+    // );
 
-    const newTotalSize = sumBy(this.files, (f) =>
-      !f.isCalculated && f.file && !this.uploaded ? f.file.size : 0,
-    );
-
-    const newPercent = (newSize / newTotalSize) * 100;
+    // const newPercent = (newSize / newTotalSize) * 100;
 
     /* console.log(
     `newPercent=${newPercent} (newTotalSize=${newTotalSize} totalUploadedSize=${totalUploadedSize} indexOfFile=${indexOfFile})`
   ); */
+
+    const largeFiles = this.uploadedFilesHistory.filter((item) => {
+      return item.chunksLength > 2;
+    });
+
+    const filesHistory =
+      largeFiles.length > 0 ? largeFiles : this.uploadedFilesHistory;
+    const percentCurrentFileHistory = sumBy(filesHistory, (f) => f.percent);
+
+    const commonPercent = filesHistory.length * 100;
+    const newPercent = (percentCurrentFileHistory / commonPercent) * 100;
 
     return newPercent;
   };
@@ -947,10 +955,9 @@ class UploadDataStore {
   };
 
   handleFilesUpload = (newUploadData, t, createNewIfExist = true) => {
-    // this.uploadedFilesHistory = newUploadData.files;
+    this.uploadedFilesHistory = newUploadData.uploadedFilesHistory;
 
     this.setUploadData(newUploadData);
-
     this.startUploadFiles(t, createNewIfExist);
   };
 
@@ -1090,7 +1097,7 @@ class UploadDataStore {
       ...this.uploadedFilesHistory,
     ]);
 
-    this.uploadedFilesHistory = clearArray;
+    // this.uploadedFilesHistory = clearArray;
 
     const newUploadData = {
       // filesWithoutConversion,
@@ -1102,6 +1109,7 @@ class UploadDataStore {
       uploadedFiles: this.uploadedFiles,
       percent: this.percent,
       uploaded: false,
+      uploadedFilesHistory: clearArray,
       // converted: !!this.tempConversionFiles.length,
     };
 
@@ -1205,36 +1213,12 @@ class UploadDataStore {
       reject, // reject cb
       isAsyncUpload = false, // async upload checker
       isFinalize = false, // is finalize chunk
-      allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
+      //  allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
       createNewIfExist,
     } = chunkUploadObj;
 
-    if (!res.data.data && res.data.message) {
-      return reject({
-        message: res.data.message,
-        chunkIndex: index,
-        chunkSize: fileSize,
-        isFinalize,
-      });
-    }
-
-    const { uploaded, id: fileId, file: fileInfo } = res.data.data;
-
-    let uploadedSize;
-
-    if (!uploaded && !allChunkUploaded) {
-      uploadedSize =
-        fileSize <= this.filesSettingsStore.chunkUploadSize
-          ? fileSize
-          : this.filesSettingsStore.chunkUploadSize;
-    } else {
-      uploadedSize = isFinalize
-        ? 0
-        : fileSize <= this.filesSettingsStore.chunkUploadSize
-          ? fileSize
-          : fileSize - index * this.filesSettingsStore.chunkUploadSize;
-    }
-    const newPercent = this.getFilesPercent(uploadedSize);
+    this.files[indexOfFile].chunkIndex = index;
+    this.files[indexOfFile].isFinalize = isFinalize;
 
     const percentCurrentFile = (index / chunksLength) * 100;
 
@@ -1243,9 +1227,43 @@ class UploadDataStore {
     );
 
     if (fileIndex > -1) {
+      this.uploadedFilesHistory[fileIndex].chunksLength = chunksLength;
       if (this.uploadedFilesHistory[fileIndex].percent < percentCurrentFile)
         this.uploadedFilesHistory[fileIndex].percent = percentCurrentFile;
     }
+
+    this.files[indexOfFile].percentCurrentFile = percentCurrentFile;
+
+    if (!res.data.data && res.data.message) {
+      return reject({
+        message: res.data.message,
+        chunkIndex: index,
+        chunkSize: fileSize,
+        isFinalize,
+        percentCurrentFile,
+      });
+    }
+
+    const { uploaded, id: fileId, file: fileInfo } = res.data.data;
+
+    // let uploadedSize;
+
+    // if (!uploaded && !allChunkUploaded) {
+    //   uploadedSize =
+    //     fileSize <= this.filesSettingsStore.chunkUploadSize
+    //       ? fileSize
+    //       : this.filesSettingsStore.chunkUploadSize;
+    // } else {
+    //   uploadedSize = isFinalize
+    //     ? 0
+    //     : fileSize <= this.filesSettingsStore.chunkUploadSize
+    //       ? fileSize
+    //       : fileSize - index * this.filesSettingsStore.chunkUploadSize;
+    // }
+
+    const newPercent = this.getFilesPercent();
+
+    this.percent = newPercent;
 
     this.primaryProgressDataStore.setPrimaryProgressBarData({
       operation: OPERATIONS_NAME.upload,
@@ -1668,15 +1686,16 @@ class UploadDataStore {
             this.uploadedFilesHistory[fileIndex].error = errorMessage;
         });
 
-        const index = error?.chunkIndex ?? 0;
+        // const index = error?.chunkIndex ?? 0;
 
-        const uploadedSize = error?.isFinalize
-          ? 0
-          : fileSize <= chunkUploadSize
-            ? fileSize
-            : fileSize - index * chunkUploadSize;
+        // const uploadedSize = error?.isFinalize
+        //   ? 0
+        //   : fileSize <= chunkUploadSize
+        //     ? fileSize
+        //     : fileSize - index * chunkUploadSize;
 
-        const newPercent = this.getFilesPercent(uploadedSize);
+        const newPercent = this.getFilesPercent();
+        this.percent = newPercent;
 
         this.primaryProgressDataStore.setPrimaryProgressBarData({
           operation: OPERATIONS_NAME.upload,

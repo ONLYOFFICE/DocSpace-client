@@ -335,7 +335,6 @@ class FilesActionStore {
 
     const pbData = {
       operation: OPERATIONS_NAME.upload,
-      percent: 0,
       completed: false,
     };
 

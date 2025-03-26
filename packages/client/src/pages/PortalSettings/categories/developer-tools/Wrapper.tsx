@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams, useLocation } from "react-router-dom";
 
 import Section from "@docspace/shared/components/section";
 
@@ -40,6 +40,7 @@ import OAuthSectionHeader from "./OAuth/OAuthSectionHeader";
 
 export const Component = () => {
   const { id, eventId } = useParams();
+  const location = useLocation();
 
   const path = location.pathname.includes("/portal-settings")
     ? "/portal-settings"

@@ -140,6 +140,7 @@ const Root = ({
     socketUrl: user ? (settings?.socketUrl ?? "") : "",
     user,
     shareKey,
+    standalone: settings?.standalone,
   });
 
   const {

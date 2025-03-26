@@ -977,11 +977,11 @@ export function getQuotaSettings() {
   });
 }
 
-export function createWebhook(name, uri, secretKey, ssl, triggers) {
+export function createWebhook(name, uri, secretKey, ssl, triggers, targetId) {
   return request({
     method: "post",
     url: `/settings/webhook`,
-    data: { name, uri, secretKey, enabled: true, ssl, triggers },
+    data: { name, uri, secretKey, enabled: true, ssl, triggers, targetId },
   });
 }
 
@@ -992,11 +992,19 @@ export function getAllWebhooks() {
   });
 }
 
-export function updateWebhook(id, name, uri, secretKey, ssl, triggers) {
+export function updateWebhook(
+  id,
+  name,
+  uri,
+  secretKey,
+  ssl,
+  triggers,
+  targetId,
+) {
   return request({
     method: "put",
     url: `/settings/webhook`,
-    data: { id, name, uri, secretKey, enabled: true, ssl, triggers },
+    data: { id, name, uri, secretKey, enabled: true, ssl, triggers, targetId },
   });
 }
 

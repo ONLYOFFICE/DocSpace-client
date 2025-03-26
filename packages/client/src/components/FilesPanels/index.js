@@ -65,7 +65,6 @@ import {
   UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
-  BackupToPublicRoom,
   SettingsPluginDialog,
   PluginDialog,
   DeletePluginDialog,
@@ -136,7 +135,6 @@ const Panels = (props) => {
     deleteLinkDialogVisible,
     embeddingPanelData,
     moveToPublicRoomVisible,
-    backupToPublicRoomVisible,
     settingsPluginDialogVisible,
     pluginDialogVisible,
     leaveRoomDialogVisible,
@@ -353,9 +351,7 @@ const Panels = (props) => {
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
-    backupToPublicRoomVisible && (
-      <BackupToPublicRoom key="backup-to-public-room-panel" />
-    ),
+
     leaveRoomDialogVisible && <LeaveRoomDialog key="leave-room-dialog" />,
     changeRoomOwnerIsVisible && (
       <ChangeRoomOwnerPanel key="change-room-owner" />
@@ -481,7 +477,6 @@ export default inject(
       deleteLinkDialogVisible,
       embeddingPanelData,
       moveToPublicRoomVisible,
-      backupToPublicRoomVisible,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
@@ -591,7 +586,6 @@ export default inject(
       deleteLinkDialogVisible,
       embeddingPanelData,
       moveToPublicRoomVisible,
-      backupToPublicRoomVisible,
       settingsPluginDialogVisible,
       pluginDialogVisible,
       leaveRoomDialogVisible,

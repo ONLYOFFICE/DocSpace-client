@@ -104,6 +104,10 @@ const StyledBodyContent = styled.div`
     grid-template-columns: 1fr auto auto;
     gap: 8px;
   }
+  .api-key_permission-container-text {
+    display: flex;
+    justify-content: center;
+  }
 
   .api-key_permission-checkbox {
     justify-content: center;
@@ -220,10 +224,18 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         <div className="api-key_permission-tab">
           <div className="api-key_permission-container">
             <div />
-            <Text fontSize="13px" fontWeight={600}>
+            <Text
+              className="api-key_permission-container-text"
+              fontSize="13px"
+              fontWeight={600}
+            >
               {t("OAuth:Read")}
             </Text>
-            <Text fontSize="13px" fontWeight={600}>
+            <Text
+              className="api-key_permission-container-text"
+              fontSize="13px"
+              fontWeight={600}
+            >
               {t("OAuth:Write")}
             </Text>
 

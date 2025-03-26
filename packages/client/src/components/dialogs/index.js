@@ -58,7 +58,6 @@ import SubmitToFormGallery from "./SubmitToFormGallery";
 import UnsavedChangesDialog from "./UnsavedChangesDialog";
 import DeleteLinkDialog from "./DeleteLinkDialog";
 import MoveToPublicRoom from "./MoveToPublicRoom";
-import BackupToPublicRoom from "./BackupToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
 import CancelUploadDialog from "./CancelUploadDialog";
 import PluginDialog from "./PluginDialog";
@@ -111,7 +110,6 @@ export {
   UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
-  BackupToPublicRoom,
   SettingsPluginDialog,
   CancelUploadDialog,
   PluginDialog,

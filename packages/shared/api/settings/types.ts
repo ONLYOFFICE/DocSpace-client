@@ -174,6 +174,7 @@ export type THelpCenterEntries = {
   administrationguides: string;
   administratormessage: string;
   alternativeurl: string;
+  appearance: string;
   autobackup: string;
   becometranslator: string;
   connectamazon: string;

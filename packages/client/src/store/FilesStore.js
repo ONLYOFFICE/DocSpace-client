@@ -2837,12 +2837,7 @@ class FilesStore {
   };
 
   createFile = async (folderId, title, templateId, formId) => {
-    return api.files
-      .createFile(folderId, title, templateId, formId)
-      .then((file) => {
-        return Promise.resolve(file);
-      })
-      .then(() => this.fetchFiles(folderId, this.filter, true, true, false));
+    return api.files.createFile(folderId, title, templateId, formId);
   };
 
   setRoomCreated = (roomCreated) => {

@@ -48,7 +48,7 @@ import {
 } from "@docspace/shared/api/settings";
 // import { getThirdPartyCommonFolderTree } from "@docspace/shared/api/files";
 import AutoBackupLoader from "@docspace/shared/skeletons/backup/AutoBackup";
-import { FloatingButton } from "@docspace/shared/components/floating-button";
+import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
@@ -467,6 +467,7 @@ class AutomaticBackup extends React.PureComponent {
       currentColorScheme,
       isBackupProgressVisible,
       errorInformation,
+      setIsBackupProgressVisible,
     } = this.props;
 
     const {
@@ -635,10 +636,22 @@ class AutomaticBackup extends React.PureComponent {
         />
 
         {isBackupProgressVisible ? (
-          <FloatingButton
+          <OperationsProgressButton
             className="layout-progress-bar"
-            alert={false}
-            percent={downloadingProgress}
+            operationsAlert={false}
+            operationsCompleted={downloadingProgress === 100}
+            operations={[
+              {
+                label:
+                  downloadingProgress === 100
+                    ? t("Backup")
+                    : downloadingProgress === 0
+                      ? t("PreparingBackup")
+                      : t("BackupProgress", { progress: downloadingProgress }),
+                percent: downloadingProgress,
+              },
+            ]}
+            clearOperationsData={() => setIsBackupProgressVisible(false)}
           />
         ) : null}
       </StyledAutoBackup>
@@ -699,6 +712,7 @@ export default inject(
       resetDownloadingProgress,
       errorInformation,
       setErrorInformation,
+      setIsBackupProgressVisible,
     } = backup;
 
     const { updateBaseFolderPath, resetNewFolderPath } = filesSelectorInput;
@@ -769,6 +783,7 @@ export default inject(
       resetDownloadingProgress,
       errorInformation,
       setErrorInformation,
+      setIsBackupProgressVisible,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(AutomaticBackup)));

@@ -40,7 +40,7 @@ import {
   getBackupStorage,
   getStorageRegions,
 } from "@docspace/shared/api/settings";
-import { FloatingButton } from "@docspace/shared/components/floating-button";
+import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import StatusMessage from "@docspace/shared/components/status-message";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
@@ -199,6 +199,7 @@ class ManualBackup extends React.Component {
       clearLocalStorage,
       setErrorInformation,
       t,
+      setIsBackupProgressVisible,
     } = this.props;
     const { TemporaryModuleType } = BackupStorageType;
 
@@ -208,6 +209,7 @@ class ManualBackup extends React.Component {
     saveToLocalStorage("LocalCopyStorageType", "TemporaryStorage");
     try {
       await startBackup(`${TemporaryModuleType}`, null, false, isManagement());
+      setIsBackupProgressVisible(true);
       setDownloadingProgress(1);
     } catch (err) {
       setErrorInformation(err, t);
@@ -246,6 +248,7 @@ class ManualBackup extends React.Component {
       setTemporaryLink,
       getStorageParams,
       setErrorInformation,
+      setIsBackupProgressVisible,
       t,
     } = this.props;
 
@@ -271,6 +274,7 @@ class ManualBackup extends React.Component {
 
     try {
       await startBackup(moduleType, storageParams, false, isManagement());
+      setIsBackupProgressVisible(true);
       setDownloadingProgress(1);
       setTemporaryLink("");
     } catch (err) {
@@ -293,6 +297,7 @@ class ManualBackup extends React.Component {
       pageIsDisabled,
       isBackupProgressVisible,
       errorInformation,
+      setIsBackupProgressVisible,
     } = this.props;
     const {
       isInitialLoading,
@@ -450,10 +455,22 @@ class ManualBackup extends React.Component {
         </StyledModules>
 
         {isBackupProgressVisible ? (
-          <FloatingButton
+          <OperationsProgressButton
             className="layout-progress-bar"
-            alert={false}
-            percent={downloadingProgress}
+            operationsAlert={false}
+            operationsCompleted={downloadingProgress === 100}
+            operations={[
+              {
+                label:
+                  downloadingProgress === 100
+                    ? t("Backup")
+                    : downloadingProgress === 0
+                      ? t("PreparingBackup")
+                      : t("BackupProgress", { progress: downloadingProgress }),
+                percent: downloadingProgress,
+              },
+            ]}
+            clearOperationsData={() => setIsBackupProgressVisible(false)}
           />
         ) : null}
       </StyledManualBackup>
@@ -481,6 +498,7 @@ export default inject(
       isBackupProgressVisible,
       errorInformation,
       setErrorInformation,
+      setIsBackupProgressVisible,
     } = backup;
 
     const { currentColorScheme, dataBackupUrl, portals } = settingsStore;
@@ -513,6 +531,7 @@ export default inject(
       pageIsDisabled,
       isBackupProgressVisible,
       setErrorInformation,
+      setIsBackupProgressVisible,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

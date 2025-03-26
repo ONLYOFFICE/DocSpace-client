@@ -30,7 +30,7 @@ import config from "PACKAGE_FILE";
 import { useNavigate } from "react-router-dom";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import { Button } from "@docspace/shared/components/button";
-import { FloatingButton } from "@docspace/shared/components/floating-button";
+import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
 import { TenantStatus } from "@docspace/shared/enums";
 import { startRestore } from "@docspace/shared/api/portal";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -57,6 +57,7 @@ const ButtonContainer = (props) => {
     uploadLocalFile,
     isBackupProgressVisible,
     setErrorInformation,
+    setIsBackupProgressVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -150,10 +151,22 @@ const ButtonContainer = (props) => {
       />
 
       {isBackupProgressVisible ? (
-        <FloatingButton
+        <OperationsProgressButton
           className="layout-progress-bar"
-          alert={false}
-          percent={downloadingProgress}
+          operationsAlert={false}
+          operationsCompleted={downloadingProgress === 100}
+          operations={[
+            {
+              label:
+                downloadingProgress === 100
+                  ? t("Backup")
+                  : downloadingProgress === 0
+                    ? t("PreparingBackup")
+                    : t("BackupProgress", { progress: downloadingProgress }),
+              percent: downloadingProgress,
+            },
+          ]}
+          clearOperationsData={() => setIsBackupProgressVisible(false)}
         />
       ) : null}
     </div>
@@ -170,6 +183,7 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
     uploadLocalFile,
     isBackupProgressVisible,
     setErrorInformation,
+    setIsBackupProgressVisible,
   } = backup;
 
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
@@ -185,5 +199,6 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
     restoreResource,
     isBackupProgressVisible,
     setErrorInformation,
+    setIsBackupProgressVisible,
   };
 })(observer(ButtonContainer));

@@ -144,6 +144,8 @@ class BackupStore {
 
   connectedAccount = [];
 
+  isBackupProgressVisible = false;
+
   constructor(authStore, thirdPartyStore) {
     makeAutoObservable(this);
 
@@ -552,6 +554,7 @@ class BackupStore {
         const { progress, link, error } = response;
 
         if (!error) {
+          this.setIsBackupProgressVisible(progress !== 100);
           this.downloadingProgress = progress;
 
           if (link && link.slice(0, 1) === "/") {
@@ -559,6 +562,7 @@ class BackupStore {
           }
           this.setErrorInformation("");
         } else {
+          this.setIsBackupProgressVisible(false);
           this.downloadingProgress = 100;
           this.setErrorInformation(error);
         }
@@ -578,9 +582,9 @@ class BackupStore {
     }
   };
 
-  get isBackupProgressVisible() {
-    return this.downloadingProgress >= 0 && this.downloadingProgress !== 100;
-  }
+  setIsBackupProgressVisible = (visible) => {
+    this.isBackupProgressVisible = visible;
+  };
 
   setDownloadingProgress = (progress) => {
     if (progress !== this.downloadingProgress)

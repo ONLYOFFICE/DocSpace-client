@@ -254,6 +254,15 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
       : primaryActiveOperations[0].label;
   };
 
+  const getPercent = () => {
+    if (isSeveralOperations) {
+      return;
+    }
+
+    return isSecondaryActive
+      ? secondaryActiveOperations[0].percent
+      : primaryActiveOperations[0].percent;
+  };
   const onCancelOperation = () => {
     cancelUpload?.(t);
   };
@@ -316,6 +325,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
                 clearUploadedFilesHistory: onCancelOperation,
               })}
             withoutStatus={withoutStatus}
+            percent={getPercent()}
           />
         </HelpButton>
 

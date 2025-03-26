@@ -82,6 +82,7 @@ const FloatingButton = ({
   withoutProgress,
   showCancelButton,
   withoutStatus = false,
+  percent,
 }: FloatingButtonProps) => {
   const iconComponent = useMemo(() => {
     return ICON_COMPONENTS[icon] ?? ICON_COMPONENTS[FloatingButtonIcons.other];
@@ -106,6 +107,8 @@ const FloatingButton = ({
     icon as (typeof accentIcons)[number],
   );
 
+  const isCompleted = completed || (percent && percent >= 100);
+
   return (
     <div
       className={classNames(
@@ -120,8 +123,8 @@ const FloatingButton = ({
         data-role="button"
         aria-label={`${icon} button`}
         className={classNames(styles.circleWrap, buttonClassName, {
-          [styles.loading]: !completed,
-          [styles.completed]: completed,
+          [styles.loading]: !isCompleted,
+          [styles.completed]: isCompleted,
         })}
         style={
           color
@@ -134,11 +137,23 @@ const FloatingButton = ({
       >
         <div
           className={classNames(styles.circle, {
-            [styles.loading]: !completed,
-            [styles.completed]: completed,
+            [styles.loading]: !isCompleted,
+            [styles.completed]: isCompleted,
           })}
+          data-testid="floating-button-progress"
         >
-          {withoutProgress ? null : <div className={styles.loader} />}
+          {withoutProgress ? null : (
+            <div
+              className={classNames(styles.loader, {
+                [styles.withProgress]: !!percent,
+              })}
+              {...(percent && {
+                style: {
+                  "--percent-percentage": `${percent}%`,
+                } as React.CSSProperties,
+              })}
+            />
+          )}
           <div className={classNames(styles.floatingButton)}>
             <div
               className={classNames(styles.iconBox, "icon-box", {
@@ -147,12 +162,12 @@ const FloatingButton = ({
             >
               {iconComponent}
             </div>
-            {!withoutStatus && (alert || completed) ? (
+            {!withoutStatus && (alert || isCompleted) ? (
               <div
                 data-testid="floating-button-alert"
                 className={classNames(styles.alertIcon, {
                   [styles.alert]: alert,
-                  [styles.complete]: !alert && completed,
+                  [styles.complete]: !alert && isCompleted,
                 })}
               >
                 {alert ? (

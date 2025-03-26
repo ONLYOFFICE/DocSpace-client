@@ -30,7 +30,7 @@
   "ApiKeys": "API keys",
   "CreateNewSecretKey": "Create new secret key",
   "EditSecretKey": "Edit secret key",
-  "ApiKeysDescription": "As an owner/admin you can view and manage all API keys in this DocSpace. Do not share your API key with others or expose it in the browser or other client-side code. To protect your account's security, DocSpace may automatically disable any API key that has leaked publicly.",
+  "ApiKeysDescription": "As an owner/admin you can view and manage all API keys in this {{productName}}. Do not share your API key with others or expose it in the browser or other client-side code. To protect your account's security, {{productName}} may automatically disable any API key that has leaked publicly.",
   "CreateNewSecretKeyDialogDescription": "Do not share your API key with anyone or expose it publicly!",
   "CreateNewSecretKeyDialogPlaceholder": "New secret key",
   "ApiPageDescription": "Create your own productivity platform based on {{organizationName}} {{productName}} and collaborate on documents with teams, clients, and partners.",

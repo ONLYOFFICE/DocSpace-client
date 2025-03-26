@@ -284,7 +284,7 @@ const StartFillingPanel = ({
             headerProps={{
               headerLabel: t("Common:ListAccounts"),
               withoutBackButton: false,
-              withoutBorder: false,
+              withoutBorder: true,
               isCloseable: true,
               onBackClick: closeInvitePanel,
               onCloseClick: () => {

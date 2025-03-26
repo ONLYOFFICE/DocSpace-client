@@ -59,7 +59,7 @@ export type TTableColumn = {
 };
 
 export interface TableHeaderProps {
-  containerRef: React.Ref<HTMLDivElement>;
+  containerRef: { current: HTMLDivElement | null };
   columns: TTableColumn[];
   sortBy?: string;
   sorted?: boolean;

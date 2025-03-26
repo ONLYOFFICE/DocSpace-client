@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import capitalize from "lodash/capitalize";
 import copy from "copy-to-clipboard";
@@ -99,25 +99,15 @@ const StyledBodyContent = styled.div`
     width: 100%;
   }
 
-  .api-key_permission-tab-header {
-    display: grid;
-    margin-bottom: 8px;
-    grid-template-columns: 1fr 40px 40px;
-  }
-
-  .api-key_permission-tab-body {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
   .api-key_permission-container {
     display: grid;
-    grid-template-columns: 1fr 40px 40px;
+    grid-template-columns: 1fr auto auto;
+    gap: 8px;
   }
 
   .api-key_permission-checkbox {
     justify-content: center;
+    margin-left: 12px;
   }
 `;
 
@@ -175,7 +165,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
       const readIsDisabled = value?.isWrite?.isChecked;
 
       list.push(
-        <div key={key} className="api-key_permission-container">
+        <React.Fragment key={key}>
           <Text fontSize="13px" fontWeight={600}>
             {category}
           </Text>
@@ -208,7 +198,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           ) : (
             <div />
           )}
-        </div>,
+        </React.Fragment>,
       );
     });
 
@@ -228,7 +218,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
       name: "Restricted",
       content: (
         <div className="api-key_permission-tab">
-          <div className="api-key_permission-tab-header">
+          <div className="api-key_permission-container">
             <div />
             <Text fontSize="13px" fontWeight={600}>
               {t("OAuth:Read")}
@@ -236,8 +226,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
             <Text fontSize="13px" fontWeight={600}>
               {t("OAuth:Write")}
             </Text>
-          </div>
-          <div className="api-key_permission-tab-body">
+
             {permissionsList.map((item) => {
               return item;
             })}

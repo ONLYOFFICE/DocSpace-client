@@ -74,7 +74,7 @@ export type TableViewProps = {
 export type TableHeaderProps = {
   userId?: TUser["id"];
   sectionWidth: number;
-  tableRef: React.Ref<HTMLDivElement>;
+  tableRef: { current: HTMLDivElement | null };
   columnStorageName: string;
   columnInfoPanelStorageName: string;
   setHideColumns: (value: boolean) => void;

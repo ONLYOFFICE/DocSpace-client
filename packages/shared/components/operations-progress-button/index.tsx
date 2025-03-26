@@ -36,15 +36,15 @@ import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
 import { isMobile } from "react-device-detect";
-import { FloatingButton } from "../../floating-button";
-import { FloatingButtonIcons } from "../../floating-button/FloatingButton.enums";
-import { DropDown } from "../../drop-down";
+import { FloatingButton } from "../floating-button";
+import { FloatingButtonIcons } from "../floating-button/FloatingButton.enums";
+import { DropDown } from "../drop-down";
 import ProgressList from "./ProgressList";
-import styles from "../Section.module.scss";
-import { OperationsProgressProps } from "../Section.types";
-import { OPERATIONS_NAME } from "../../../constants/index";
-import { HelpButton } from "../../help-button";
-import { Backdrop } from "../../backdrop";
+import styles from "./OperationsProgressButton.module.scss";
+import { OperationsProgressProps } from "./OperationsProgressButton.types";
+import { OPERATIONS_NAME } from "../../constants/index";
+import { HelpButton } from "../help-button";
+import { Backdrop } from "../backdrop";
 
 type ValueOf<T> = T[keyof T];
 
@@ -68,17 +68,18 @@ const operationToIconMap: Record<
   deleteVersionFile: FloatingButtonIcons.trash,
 };
 
-const OperationsProgress: React.FC<OperationsProgressProps> = ({
-  secondaryActiveOperations = [],
-  primaryActiveOperations = [],
+const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
+  operations = [],
+  panelOperations = [],
   operationsAlert,
   operationsCompleted = false,
-  clearSecondaryProgressData,
-  clearPrimaryProgressData,
+  clearOperationsData,
+  clearPanelOperationsData,
   cancelUpload,
   mainButtonVisible,
   needErrorChecking,
   showCancelButton,
+  isInfoPanelVisible,
 }) => {
   const { t } = useTranslation(["UploadPanel", "Files"]);
 
@@ -89,10 +90,9 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const operationsLength =
-    primaryActiveOperations.length + secondaryActiveOperations.length;
+  const operationsLength = panelOperations.length + operations.length;
   const isSeveralOperations = operationsLength > 1;
-  const isSecondaryActive = secondaryActiveOperations.length > 0;
+  const isSecondaryActive = operations.length > 0;
 
   const clearTimers = () => {
     if (hideTimerRef.current) {
@@ -113,11 +113,11 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         animation.includes("hideButton") ||
         animation.includes("hideButtonImmediate")
       ) {
-        clearSecondaryProgressData();
-        clearPrimaryProgressData?.();
+        clearOperationsData?.();
+        clearPanelOperationsData?.();
       }
     },
-    [clearSecondaryProgressData, clearPrimaryProgressData],
+    [clearOperationsData, clearPanelOperationsData],
   );
 
   const handleMouseEnter = () => {
@@ -146,7 +146,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   };
 
   const handleFloatingButtonClick = () => {
-    if (isMobile && !primaryActiveOperations.length) {
+    if (isMobile && !panelOperations.length) {
       setIsHovered(true);
     }
 
@@ -156,10 +156,10 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
       return;
     }
 
-    if (primaryActiveOperations.length) {
+    if (panelOperations.length) {
       setIsHideTooltip(true);
 
-      primaryActiveOperations[0].showPanel?.(true);
+      panelOperations[0].showPanel?.(true);
       clearTimers();
 
       resetTimerRef.current = setTimeout(() => {
@@ -214,9 +214,9 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
         ? FloatingButtonIcons.arrow
         : FloatingButtonIcons.dots;
     }
-    const operation = secondaryActiveOperations.length
-      ? secondaryActiveOperations[0].operation
-      : primaryActiveOperations[0].operation;
+    const operation = operations.length
+      ? operations[0].operation
+      : panelOperations[0].operation;
 
     return (
       operationToIconMap[operation as OperationName] ||
@@ -231,8 +231,8 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
 
     if (operationsAlert) {
       const operationName = isSecondaryActive
-        ? secondaryActiveOperations[0].label
-        : primaryActiveOperations[0].label;
+        ? operations[0].label
+        : panelOperations[0].label;
 
       return t("Files:ErrorOperation", {
         operationName,
@@ -241,17 +241,15 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
 
     if (operationsCompleted) {
       const operationName = isSecondaryActive
-        ? secondaryActiveOperations[0].label
-        : primaryActiveOperations[0].label;
+        ? operations[0].label
+        : panelOperations[0].label;
 
       return t("Files:SuccessOperation", {
         operationName,
       });
     }
 
-    return isSecondaryActive
-      ? secondaryActiveOperations[0].label
-      : primaryActiveOperations[0].label;
+    return isSecondaryActive ? operations[0].label : panelOperations[0].label;
   };
 
   const getPercent = () => {
@@ -260,24 +258,22 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
     }
 
     return isSecondaryActive
-      ? secondaryActiveOperations[0].percent
-      : primaryActiveOperations[0].percent;
+      ? operations[0].percent
+      : panelOperations[0].percent;
   };
   const onCancelOperation = () => {
     cancelUpload?.(t);
   };
 
   const disableOpenPanel =
-    primaryActiveOperations.length === 1 &&
-    !primaryActiveOperations[0].showPanel;
+    panelOperations.length === 1 && !panelOperations[0].showPanel;
 
-  const withoutStatus =
-    disableOpenPanel && primaryActiveOperations[0].withoutStatus;
+  const withoutStatus = disableOpenPanel && panelOperations[0].withoutStatus;
 
   const isLaterHide = () => {
     if (disableOpenPanel) return false;
 
-    if (primaryActiveOperations.length > 0) return true;
+    if (panelOperations.length > 0) return true;
 
     return false;
   };
@@ -300,6 +296,7 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
           [styles.immidiateHide]:
             !isSeveralOperations && operationsCompleted && disableOpenPanel,
           [styles.mainButtonVisible]: mainButtonVisible,
+          [styles.infoPanelVisible]: isInfoPanelVisible,
         })}
         style={{ zIndex: isOpenDropdown ? "211" : "201" }}
         onMouseEnter={!isMobile ? handleMouseEnter : undefined}
@@ -338,17 +335,14 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
             directionX="right"
             fixedDirection
             isDefaultMode={false}
-            className={classNames(
-              styles.styledDropDown,
-              styles.progressDropdown,
-            )}
+            className={classNames(styles.styledDropDown)}
           >
             <ProgressList
-              secondaryOperations={secondaryActiveOperations}
-              primaryOperations={primaryActiveOperations}
-              clearSecondaryProgressData={clearSecondaryProgressData}
-              clearPrimaryProgressData={(operationId, operationName) =>
-                clearPrimaryProgressData?.(operationName)
+              operations={operations}
+              panelOperations={panelOperations}
+              clearOperationsData={clearOperationsData}
+              clearPanelOperationsData={(operationId, operationName) =>
+                clearPanelOperationsData?.(operationName)
               }
               onCancel={onCancelOperation}
               onOpenPanel={handleOperationClick}
@@ -360,4 +354,4 @@ const OperationsProgress: React.FC<OperationsProgressProps> = ({
   );
 };
 
-export default observer(OperationsProgress);
+export default observer(OperationsProgressButton);

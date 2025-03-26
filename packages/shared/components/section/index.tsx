@@ -56,7 +56,7 @@ import {
   SECTION_SUBMENU_NAME,
 } from "./Section.constants";
 import { parseChildren } from "./Section.utils";
-import OperationsProgress from "./sub-components/OperationsProgress";
+import OperationsProgressButton from "../operations-progress-button";
 
 export type { SectionProps };
 
@@ -302,20 +302,21 @@ const Section = (props: SectionProps) => {
           ) : null}
 
           {isShowOperationButton ? (
-            <OperationsProgress
-              clearSecondaryProgressData={clearSecondaryProgressData}
-              secondaryActiveOperations={secondaryActiveOperations}
+            <OperationsProgressButton
+              clearOperationsData={clearSecondaryProgressData}
+              operations={secondaryActiveOperations}
               operationsCompleted={isCompletedOperations()}
-              clearPrimaryProgressData={clearPrimaryProgressData}
+              clearPanelOperationsData={clearPrimaryProgressData}
               operationsAlert={
                 primaryOperationsAlert || secondaryOperationsAlert
               }
               needErrorChecking={needErrorChecking}
-              primaryActiveOperations={primaryOperationsArray}
+              panelOperations={primaryOperationsArray}
               cancelUpload={cancelUpload}
               onOpenPanel={onOpenUploadPanel}
               mainButtonVisible={mainButtonVisible}
               showCancelButton={showCancelButton}
+              isInfoPanelVisible={isInfoPanelVisible}
             />
           ) : null}
         </SectionContainer>

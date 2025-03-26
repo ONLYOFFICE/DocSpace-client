@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -74,7 +74,9 @@ const StyledApiKeys = styled.div`
 `;
 
 const ApiKeys = (props: ApiKeysProps) => {
-  const { t, viewAs, currentColorScheme } = props;
+  const { viewAs, currentColorScheme } = props;
+
+  const { t, ready } = useTranslation(["Settings", "Common"]);
 
   const [listItems, setListItems] = useState<TApiKey[]>([]);
   const [permissions, setPermissions] = useState<string[]>([]);
@@ -177,14 +179,18 @@ const ApiKeys = (props: ApiKeysProps) => {
   }, []);
 
   useEffect(() => {
-    setDocumentTitle(t("Settings:ApiKeys"));
-  }, []);
+    if (ready) {
+      setDocumentTitle(t("Settings:ApiKeys"));
+    }
+  }, [ready]);
 
   return (
     <StyledApiKeys>
       <div className="api-keys_description">
         <Text className="api-keys_text api-keys_description-text">
-          {t("Settings:ApiKeysDescription")}
+          {t("Settings:ApiKeysDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
 
         <Text className="api-keys_text api-keys_usage-text">
@@ -262,4 +268,4 @@ export default inject(({ setup, settingsStore }: TStore) => {
     viewAs,
     currentColorScheme,
   };
-})(withTranslation(["Settings", "Common"])(observer(ApiKeys)));
+})(observer(ApiKeys));

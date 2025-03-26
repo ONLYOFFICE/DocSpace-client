@@ -223,6 +223,7 @@
   "PortalRenamingNavDescription": "Here you can change your portal address.",
   "PortalRenamingNote": "<strong>Note:</strong> Your old space address will become unavailable to new users once you click the Save button.",
   "PortalSecurityTitle": "This subsection allows you to provide users with secure and convenient ways to access the portal.",
+  "PreviewTooltipDescription": "Preview the interface with the selected color applied",
   "ProjectsDescription": "Each project is imported as a room, which will contain all the documents and users of this project. The project manager will become the owner of the room",
   "ProvideChoice": "Provide a choice (web or app)",
   "QuotaPerRoom": "Quota per room",

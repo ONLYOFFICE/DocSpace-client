@@ -16,6 +16,14 @@
   }
 }
 
+:global(.rtl) {
+  :local {
+    .toast {
+      --toast-transform: translate3d(-150%, 0, 0);
+    }
+  }
+}
+
 .toast {
   z-index: 9999;
   -webkit-transform: translateZ(9999px);

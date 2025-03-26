@@ -41,10 +41,13 @@ import OAuthSectionHeader from "./OAuth/OAuthSectionHeader";
 export const Component = () => {
   const { id, eventId } = useParams();
 
-  const webhookHistoryPath = `/developer-tools/webhooks/${id}`;
-  const webhookDetailsPath = `/developer-tools/webhooks/${id}/${eventId}`;
-  const oauthCreatePath = `/developer-tools/oauth/create`;
-  const oauthEditPath = `/developer-tools/oauth/${id}`;
+  const path = location.pathname.includes("/portal-settings")
+    ? "/portal-settings"
+    : "";
+  const webhookHistoryPath = `${path}/developer-tools/webhooks/${id}`;
+  const webhookDetailsPath = `${path}/developer-tools/webhooks/${id}/${eventId}`;
+  const oauthCreatePath = `${path}/developer-tools/oauth/create`;
+  const oauthEditPath = `${path}/developer-tools/oauth/${id}`;
   const currentPath = window.location.pathname;
 
   return (

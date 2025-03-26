@@ -89,6 +89,7 @@ const WebhookDialog = (props) => {
     enabled: webhook ? webhook.enabled : true,
     ssl: webhook ? webhook.ssl : true,
     triggers: webhook ? webhook.triggers : 0,
+    targetId: webhook ? webhook?.targetId : "",
   });
   const [passwordInputKey, setPasswordInputKey] = useState(0);
   const [triggerAll, setTriggerAll] = useState(
@@ -167,6 +168,7 @@ const WebhookDialog = (props) => {
         secretKey: "",
         enabled: true,
         triggers: 0,
+        targetId: "",
       });
       setIsPasswordValid(false);
       setPasswordInputKey((prevKey) => prevKey + 1);
@@ -187,6 +189,7 @@ const WebhookDialog = (props) => {
       enabled: webhook ? webhook.enabled : true,
       ssl: webhook ? webhook.ssl : true,
       triggers: webhook ? webhook.triggers : 0,
+      targetId: webhook ? webhook.targetId : "",
     });
     setTriggerAll(webhook ? webhook.triggers === 0 : true);
   }, [webhook]);
@@ -247,6 +250,16 @@ const WebhookDialog = (props) => {
             toggleTrigger={toggleTrigger}
             triggerAll={triggerAll}
             onChange={handleOnChangeTriggerAll}
+          />
+          <LabledInput
+            id={`${additionalId}-target-id-input`}
+            label={t("TargetId")}
+            placeholder={t("EnterTargetId")}
+            name="targetId"
+            value={webhookInfo.targetId}
+            onChange={onInputChange}
+            isDisabled={isLoading}
+            maxLength={36}
           />
           <button
             type="submit"

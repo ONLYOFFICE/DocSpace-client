@@ -217,6 +217,10 @@ const SimpleFilesTileContent = styled(TileContent)`
     align-self: flex-end;
   }
 
+  .item-file-name {
+    display: -webkit-box;
+  }
+
   .badge {
     margin-inline-end: 8px;
     cursor: pointer;

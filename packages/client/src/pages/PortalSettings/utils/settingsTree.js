@@ -534,6 +534,14 @@ export const settingsTree = [
         tKey: "OAuth:OAuth",
         isCategory: true,
       },
+      {
+        id: "portal-settings_catalog-oauth",
+        key: "7-5",
+        icon: "",
+        link: "api-keys",
+        tKey: "Settings:ApiKeys",
+        isCategory: true,
+      },
     ],
   },
   {

@@ -93,6 +93,14 @@ const generalRoutes = [
           ),
       },
       {
+        path: "api-keys",
+        lazy: () =>
+          componentLoader(
+            () =>
+              import("SRC_DIR/pages/PortalSettings/categories/developer-tools"),
+          ),
+      },
+      {
         path: "javascript-sdk",
         lazy: () =>
           componentLoader(

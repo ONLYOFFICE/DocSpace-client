@@ -125,11 +125,14 @@ const DeveloperToolsWrapper = (props) => {
   // }, [ready]);
 
   const onSelect = (e) => {
+    const path = location.pathname.includes("/portal-settings")
+      ? "/portal-settings"
+      : "";
     navigate(
       combineUrl(
         window.ClientConfig?.proxy?.url,
         config.homepage,
-        `/developer-tools/${e.id}`,
+        `${path}/developer-tools/${e.id}`,
       ),
     );
     setCurrentTabId(e.id);

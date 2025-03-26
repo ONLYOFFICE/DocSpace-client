@@ -56,6 +56,10 @@ export class FilesSelectionStore {
   }
 
   setSelection = (items?: (TFileItem | TFolderItem)[]) => {
+    if (!items?.length && !this.selection.length) {
+      return;
+    }
+
     this.selection = items ? items : [];
   };
 
@@ -75,6 +79,9 @@ export class FilesSelectionStore {
   };
 
   setBufferSelection = (item: Nullable<TFileItem | TFolderItem>) => {
+    if (item && this.bufferSelection && isSame(item, this.bufferSelection)) {
+      return;
+    }
     this.bufferSelection = item;
   };
 

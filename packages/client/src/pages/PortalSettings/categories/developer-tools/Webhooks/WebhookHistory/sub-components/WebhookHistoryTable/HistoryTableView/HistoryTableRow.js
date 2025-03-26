@@ -28,7 +28,6 @@ import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import React from "react";
-import moment from "moment-timezone";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -40,6 +39,8 @@ import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { toastr } from "@docspace/shared/components/toast";
+
+import { getCorrectDate } from "@docspace/shared/utils";
 
 import { formatFilters } from "SRC_DIR/helpers/webhooks";
 
@@ -124,10 +125,7 @@ const HistoryTableRow = (props) => {
     },
   ];
 
-  const formattedDelivery = `${moment(item.delivery)
-    .tz(window.timezone)
-    .locale(i18n.language)
-    .format("L, LT")}`;
+  const formattedDelivery = getCorrectDate(i18n.language, item.delivery);
 
   const onRowClick = (e) => {
     if (

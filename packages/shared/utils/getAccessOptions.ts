@@ -216,6 +216,7 @@ export const getAccessOptions = (
     //   ];
     //   break;
     case RoomsType.CustomRoom:
+    case RoomsType.AIRoom:
       options = [
         accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },

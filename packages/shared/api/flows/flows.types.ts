@@ -101,6 +101,107 @@ export interface RunFlowResponse {
   error?: string;
 }
 
+export interface SimpleRunFlowResponse {
+  session_id: string;
+  outputs: Array<{
+    inputs: Record<string, unknown>;
+    outputs: Array<{
+      results: {
+        message: {
+          text_key: string;
+          data: {
+            timestamp: string;
+            sender: string;
+            sender_name: string;
+            session_id: string;
+            text: string;
+            files: unknown[];
+            error: boolean;
+            edit: boolean;
+            properties: {
+              text_color: string;
+              background_color: string;
+              edited: boolean;
+              source: {
+                id: string;
+                display_name: string;
+                source: string;
+              };
+              icon: string;
+              allow_markdown: boolean;
+              positive_feedback: null | unknown;
+              state: string;
+              targets: unknown[];
+            };
+            category: string;
+            content_blocks: unknown[];
+            id: string;
+            flow_id: string;
+          };
+          default_value: string;
+          text: string;
+          sender: string;
+          sender_name: string;
+          files: unknown[];
+          session_id: string;
+          timestamp: string;
+          flow_id: string;
+          error: boolean;
+          edit: boolean;
+          properties: {
+            text_color: string;
+            background_color: string;
+            edited: boolean;
+            source: {
+              id: string;
+              display_name: string;
+              source: string;
+            };
+            icon: string;
+            allow_markdown: boolean;
+            positive_feedback: null | unknown;
+            state: string;
+            targets: unknown[];
+          };
+          category: string;
+          content_blocks: unknown[];
+        };
+      };
+      artifacts: {
+        message: string;
+        sender: string;
+        sender_name: string;
+        files: unknown[];
+        type: string;
+      };
+      outputs: {
+        message: {
+          message: string;
+          type: string;
+        };
+      };
+      logs: {
+        message: unknown[];
+      };
+      messages: Array<{
+        message: string;
+        sender: string;
+        sender_name: string;
+        session_id: string;
+        stream_url: null | string;
+        component_id: string;
+        files: [];
+        type: string;
+      }>;
+      timedelta: null | number;
+      duration: null | number;
+      component_display_name: string;
+      component_id: string;
+      used_frozen_result: boolean;
+    }>;
+  }>;
+}
+
 export interface Tweaks {
   [key: string]: Record<string, unknown>;
 }

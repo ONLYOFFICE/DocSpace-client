@@ -10,6 +10,7 @@ import {
   RunFlowResponse,
   Tweaks,
   Node,
+  SimpleRunFlowResponse,
 } from "./flows.types";
 import { getCookie } from "../../utils/cookie";
 
@@ -18,13 +19,12 @@ class FlowsApi {
 
   private baseUrl: string;
 
+  private config: { baseURL: string; headers: Record<string, string> };
+
   constructor(baseUrl: string = "/api/v1", apiKey: string = "") {
     this.baseUrl = baseUrl;
 
-    const config: {
-      baseURL: string;
-      headers: Record<string, string>;
-    } = {
+    this.config = {
       baseURL: this.baseUrl,
       headers: {
         "Content-Type": "application/json",
@@ -32,10 +32,16 @@ class FlowsApi {
     };
 
     if (apiKey) {
-      config.headers["x-api-key"] = apiKey;
+      this.config.headers["x-api-key"] = apiKey;
     }
 
-    this.api = axios.create(config);
+    this.api = axios.create(this.config);
+  }
+
+  setApiKey(apiKey: string) {
+    this.config.headers["x-api-key"] = apiKey;
+
+    this.api = axios.create(this.config);
   }
 
   getHeaders(): Record<string, string> {
@@ -115,7 +121,7 @@ class FlowsApi {
         headers: this.getHeaders(),
       },
     );
-    return data as Flow[];
+    return data as unknown as Flow[];
   }
 
   async deleteFlows(flowIds: string[]): Promise<{ deleted: number }> {
@@ -123,7 +129,7 @@ class FlowsApi {
       headers: this.getHeaders(),
       data: { flowIds },
     });
-    return data as { deleted: number };
+    return data as unknown as { deleted: number };
   }
 
   async uploadFlows(file: File, folderId?: string): Promise<Flow[]> {
@@ -139,7 +145,7 @@ class FlowsApi {
         ...this.getHeaders(),
       },
     });
-    return data as Flow[];
+    return data as unknown as Flow[];
   }
 
   async downloadFlows(flowIds: string[]): Promise<Blob> {
@@ -207,6 +213,42 @@ class FlowsApi {
     };
   }
 
+  async simpleRunFlow(
+    id: string,
+    inputValue: string,
+    inputType: string,
+    outputType: string,
+    tweaks?: Tweaks,
+  ): Promise<SimpleRunFlowResponse> {
+    try {
+      if (!id) {
+        throw new Error("Invalid flow: missing required fields");
+      }
+
+      const endpoint = `/run/${id}`;
+
+      const payload = {
+        inputValue,
+        outputType,
+        inputType,
+        ...(tweaks ? { tweaks } : {}),
+      };
+
+      const response = await this.api.post(endpoint, JSON.stringify(payload));
+
+      if ((response.data as unknown as { error: string }).error) {
+        throw new Error(
+          `Flow execution failed: ${(response.data as unknown as { error: string }).error}`,
+        );
+      }
+
+      return response.data as unknown as RunFlowResponse;
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+  }
+
   async runFlow(
     flow: Flow,
     inputValue: string | unknown = "",
@@ -237,11 +279,13 @@ class FlowsApi {
 
       const response = await this.api.post(endpoint, JSON.stringify(payload));
 
-      if (response.data.error) {
-        throw new Error(`Flow execution failed: ${response.data.error}`);
+      if ((response.data as unknown as { error: string }).error) {
+        throw new Error(
+          `Flow execution failed: ${(response.data as unknown as { error: string }).error}`,
+        );
       }
 
-      return response.data.result as RunFlowResponse;
+      return response.data as unknown as RunFlowResponse;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         // Type assertion for error response data

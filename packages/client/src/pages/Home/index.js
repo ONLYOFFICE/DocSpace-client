@@ -63,6 +63,7 @@ import {
   useOperations,
   useContacts,
   useSettings,
+  useFlows,
 } from "./Hooks";
 
 const PureHome = (props) => {
@@ -166,6 +167,8 @@ const PureHome = (props) => {
     welcomeFormFillingTipsVisible,
     formFillingTipsVisible,
     chatFiles,
+    vectorizedFiles,
+    removeActiveItem,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -192,6 +195,8 @@ const PureHome = (props) => {
     },
     [setIsSectionHeaderLoading, setIsSectionBodyLoading],
   );
+
+  useFlows({ vectorizedFiles, removeActiveItem });
 
   const { onDrop } = useFiles({
     t,
@@ -445,6 +450,7 @@ export const Component = inject(
     indexingStore,
     dialogsStore,
     filesSettingsStore,
+    flowStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -500,6 +506,8 @@ export const Component = inject(
       scrollToTop,
       wsCreatedPDFForm,
       mainButtonVisible,
+
+      removeActiveItem,
     } = filesStore;
 
     const { gallerySelected } = oformsStore;
@@ -688,6 +696,8 @@ export const Component = inject(
       hideConfirmCancelOperation,
 
       chatFiles: filesStore.filesList,
+      vectorizedFiles: flowStore.vectorizedFiles,
+      removeActiveItem,
     };
   },
 )(observer(Home));

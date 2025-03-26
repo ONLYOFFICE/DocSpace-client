@@ -268,6 +268,7 @@ class FilesStore {
     currentTariffStatusStore,
     settingsStore,
     indexingStore,
+    flowStore,
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -287,6 +288,7 @@ class FilesStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.settingsStore = settingsStore;
     this.indexingStore = indexingStore;
+    this.flowStore = flowStore;
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
@@ -1116,6 +1118,14 @@ class FilesStore {
 
     this.files = files;
 
+    if (this.selectedFolderStore.roomType === RoomsType.AIRoom) {
+      const filesId = files.map((f) => f.id);
+
+      this.setActiveFiles(filesId);
+
+      this.flowStore.checkVectorizeDocument(files[0]);
+    }
+
     if (roomPartsToSub.length > 0) {
       SocketHelper.emit(SocketCommands.Subscribe, {
         roomParts: roomPartsToSub,
@@ -1273,6 +1283,8 @@ class FilesStore {
         return roomType === RoomsType.FillingFormsRoom;
       case `room-${RoomsType.CustomRoom}`:
         return roomType === RoomsType.CustomRoom;
+      case `room-${RoomsType.AIRoom}`:
+        return roomType === RoomsType.AIRoom;
       case `room-${RoomsType.EditingRoom}`:
         return roomType === RoomsType.EditingRoom;
       case `room-${RoomsType.ReviewRoom}`:
@@ -3585,6 +3597,7 @@ class FilesStore {
         elem !== `room-${FilterType.FoldersOnly}` &&
         elem !== `room-${RoomsType.FillingFormsRoom}` &&
         elem !== `room-${RoomsType.CustomRoom}` &&
+        elem !== `room-${RoomsType.AIRoom}` &&
         elem !== `room-${RoomsType.EditingRoom}` &&
         elem !== `room-${RoomsType.ReviewRoom}` &&
         elem !== `room-${RoomsType.FormRoom}` &&

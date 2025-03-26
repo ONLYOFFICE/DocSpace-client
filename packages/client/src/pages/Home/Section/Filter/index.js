@@ -860,6 +860,13 @@ const SectionFilterContent = ({
                   group: FilterGroups.roomFilterType,
                   label: t("Common:VirtualDataRoom"),
                 };
+              case RoomsType.AIRoom:
+                return {
+                  id: "filter_type-ai",
+                  key: RoomsType.AIRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: "AI Room",
+                };
               case RoomsType.CustomRoom:
               default:
                 return {

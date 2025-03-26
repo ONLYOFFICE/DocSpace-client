@@ -410,18 +410,6 @@ class ProfileActionsStore {
         onClick: this.onVideoGuidesClick,
       }, */
       hotkeys,
-      {
-        key: "user-menu-ai-chat",
-        icon: HelpCenterReactSvgUrl, // TODO: AI icon
-        label: "Open chat", // TODO: AI translation
-        onClick: () => {
-          this.infoPanelStore.setIsVisible(false);
-          this.pluginStore.setAiChatIsVisible(
-            !this.pluginStore.aiChatIsVisible,
-          );
-        },
-      },
-
       !isMobile && {
         isSeparator: true,
         key: "separator2",

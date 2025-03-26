@@ -129,6 +129,11 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       label: t("Common:CustomRoomTitle"),
       roomType: RoomsType.CustomRoom,
     },
+    {
+      key: "room-type-ai",
+      label: t("Common:AI"),
+      roomType: RoomsType.AIRoom,
+    },
   ];
 
   const filterOptions = [

@@ -97,8 +97,6 @@ const Shell = ({ page = "home", ...rest }) => {
     registrationDate,
     logoText,
     setLogoText,
-
-    autoLogin,
   } = rest;
 
   const theme = useTheme();
@@ -440,10 +438,6 @@ const Shell = ({ page = "home", ...rest }) => {
   }, [isLoaded]);
 
   useEffect(() => {
-    autoLogin();
-  }, [autoLogin]);
-
-  useEffect(() => {
     if (isFrame) return setShowGuestReleaseTip(false);
 
     if (!releaseDate || !registrationDate) return;
@@ -580,10 +574,8 @@ const ShellWrapper = inject(
       (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin);
 
     return {
-      autoLogin: flowStore.autoLogin,
-
       loadBaseInfo: async () => {
-        await init(false, i18n);
+        await Promise.all([init(false, i18n), flowStore.autoLogin()]);
 
         setModuleInfo(config.homepage, "home");
         setProductVersion(config.version);

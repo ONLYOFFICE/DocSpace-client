@@ -94,6 +94,7 @@ const RoomLogoPure = ({
       case RoomsType.EditingRoom:
         return EditingSvg32Url;
       case RoomsType.CustomRoom:
+      case RoomsType.AIRoom:
         return CustomSvg32Url;
       case RoomsType.PublicRoom:
         return PublicRoomSvg32Url;

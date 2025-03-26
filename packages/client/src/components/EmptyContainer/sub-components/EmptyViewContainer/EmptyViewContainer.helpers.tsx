@@ -492,6 +492,7 @@ export const getOptions = (
       ];
 
     case RoomsType.CustomRoom:
+    case RoomsType.AIRoom:
       if (isNotAdmin) return [];
 
       if (isCollaborator)

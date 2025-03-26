@@ -165,6 +165,7 @@ const filesStore = new FilesStore(
   currentTariffStatusStore,
   settingsStore,
   indexingStore,
+  flowStore,
 );
 
 const guidanceStore = new GuidanceStore();

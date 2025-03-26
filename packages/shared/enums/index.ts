@@ -519,6 +519,7 @@ export enum RoomsType {
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
   VirtualDataRoom = 8,
   CustomRoom = 5,
+  AIRoom = 9,
 }
 
 export const enum RecaptchaType {

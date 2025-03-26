@@ -5,7 +5,18 @@ import type {
   FlowsFolder,
   FlowFilters,
   Node,
+  CreateFlowParams,
 } from "@docspace/shared/api/flows/flows.types";
+import { getCookie } from "@docspace/shared/utils/cookie";
+import { TFile } from "@docspace/shared/api/files/types";
+import { toastr } from "@docspace/shared/components/toast";
+
+type VectorizeDocumentStatus = "added" | "error" | "exist" | "not_found";
+
+const RAG_CHAT_NAME = "docspace_chat";
+const VECTORIZE_DOCUMENT_NAME = "vectorize_document";
+const CHECK_VECTORIZE_DOCUMENT_NAME = "check_vectorize_document";
+const API_KEY_NAME = "chat_api_key";
 
 class FlowStore {
   private api: FlowsApi;
@@ -18,6 +29,16 @@ class FlowStore {
 
   error: Error | null = null;
 
+  ragChatID: string = "";
+
+  vectorizeDocumentID: string = "";
+
+  checkVectorizeDocumentID: string = "";
+
+  apiKey: string = "";
+
+  vectorizedFiles: TFile[] = [];
+
   constructor() {
     this.api = new FlowsApi("/onlyflow/api/v1");
     makeAutoObservable(this);
@@ -27,6 +48,15 @@ class FlowStore {
     try {
       this.isLoading = true;
       await this.api.autoLogin();
+
+      this.ragChatID = getCookie(RAG_CHAT_NAME) ?? "";
+      this.vectorizeDocumentID = getCookie(VECTORIZE_DOCUMENT_NAME) ?? "";
+      this.checkVectorizeDocumentID =
+        getCookie(CHECK_VECTORIZE_DOCUMENT_NAME) ?? "";
+
+      this.apiKey = getCookie(API_KEY_NAME) ?? "";
+
+      this.api.setApiKey(this.apiKey);
     } catch (error) {
       runInAction(() => {
         this.error = error as Error;
@@ -85,7 +115,7 @@ class FlowStore {
     });
   }
 
-  createFlow = async (flow: Partial<Flow>) => {
+  createFlow = async (flow: CreateFlowParams) => {
     try {
       this.isLoading = true;
       const newFlow = await this.api.createFlow(flow);
@@ -111,7 +141,7 @@ class FlowStore {
   updateFlow = async (flowId: string, flow: Partial<Flow>) => {
     try {
       this.isLoading = true;
-      const updatedFlow = await this.api.updateFlow(flowId, flow);
+      const updatedFlow = await this.api.updateFlow({ id: flowId, ...flow });
 
       runInAction(() => {
         const index = this.flows.findIndex((f) => f.id === flowId);
@@ -157,10 +187,10 @@ class FlowStore {
     }
   };
 
-  run = async (flowId: string) => {
+  run = async (flow: Flow) => {
     try {
       this.isLoading = true;
-      await this.api.runFlow(flowId);
+      await this.api.runFlow(flow);
 
       return true;
     } catch (error) {
@@ -178,6 +208,89 @@ class FlowStore {
   clearError() {
     this.error = null;
   }
+
+  vectorizeDocument = async (file: TFile) => {
+    const response = await this.api.simpleRunFlow(
+      this.vectorizeDocumentID,
+      String(file.id),
+      "text",
+      "text",
+      {},
+    );
+
+    const msg = response.outputs[0].outputs[0].messages[0]
+      .message as VectorizeDocumentStatus;
+
+    return msg;
+  };
+
+  checkVectorizeDocument = async (file: TFile) => {
+    if (!this.apiKey || !this.checkVectorizeDocumentID) {
+      setTimeout(() => {
+        this.checkVectorizeDocument(file);
+      }, 1000);
+      return;
+    }
+
+    const isFileExists = this.vectorizedFiles.some(
+      (f) => f.id === file.id && f.version === file.version,
+    );
+
+    if (isFileExists) return;
+
+    const response = await this.api.simpleRunFlow(
+      this.checkVectorizeDocumentID,
+      String(file.id),
+      "text",
+      "text",
+      {},
+    );
+
+    const msg = response.outputs[0].outputs[0].messages[0]
+      .message as VectorizeDocumentStatus;
+
+    if (msg === "exist") {
+      this.vectorizedFiles = [...this.vectorizedFiles, file];
+
+      return;
+    }
+
+    if (msg === "error") {
+      toastr.error(`Error vectorizing document: ${file.title}`);
+      return;
+    }
+
+    if (msg === "not_found") {
+      console.log("start");
+      const newMsg = await this.vectorizeDocument(file);
+      console.log(newMsg);
+
+      if (newMsg === "error") {
+        toastr.error(`Error vectorizing document: ${file.title}`);
+        return;
+      }
+
+      if (newMsg === "added") {
+        toastr.success(`Document vectorized: ${file.title}`);
+        this.vectorizedFiles = [...this.vectorizedFiles, file];
+      }
+
+      if (newMsg === "exist") {
+        console.log("file exist");
+        this.vectorizedFiles = [...this.vectorizedFiles, file];
+      }
+    }
+  };
+
+  localCheckVectorizeDocument = (file: TFile) => {
+    if (
+      this.vectorizedFiles.some(
+        (f) => f.id === file.id && f.version === file.version,
+      )
+    )
+      return true;
+    return false;
+  };
 }
 
 export default FlowStore;

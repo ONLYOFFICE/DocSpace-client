@@ -436,6 +436,25 @@ export const getRoomIcon = (
           <EmptyCustomRoomCollaboratorDarkIcon />
         ),
       )
+      .with(
+        [
+          RoomsType.AIRoom,
+          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+        ],
+        () =>
+          isBaseTheme ? (
+            <EmptyCustomRoomLightIcon />
+          ) : (
+            <EmptyCustomRoomDarkIcon />
+          ),
+      )
+      .with([RoomsType.AIRoom, ShareAccessRights.Collaborator], () =>
+        isBaseTheme ? (
+          <EmptyCustomRoomCollaboratorLightIcon />
+        ) : (
+          <EmptyCustomRoomCollaboratorDarkIcon />
+        ),
+      )
       .with([P._, P.when(isUser)], () =>
         isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />,
       )

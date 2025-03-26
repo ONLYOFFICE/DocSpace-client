@@ -24,11 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { default as useFiles } from "./useFiles";
-export { default as useSDK } from "./useSDK";
-export { default as useOperations } from "./useOperations";
-export { default as useContacts } from "./useContacts";
-export { default as useSettings } from "./useSettings";
-export { default as usePublic } from "./usePublic";
-export { default as useAccountsHotkeys } from "./useAccountsHotkeys";
-export { default as useFlows } from "./useFlows";
+import React, { useEffect } from "react";
+
+import { TFile } from "@docspace/shared/api/files/types";
+
+type UseFlowsProps = {
+  vectorizedFiles: TFile[];
+  removeActiveItem: (file: TFile) => void;
+};
+
+const useFlows = ({ vectorizedFiles, removeActiveItem }: UseFlowsProps) => {
+  useEffect(() => {
+    vectorizedFiles.forEach((file) => {
+      removeActiveItem(file);
+    });
+  }, [vectorizedFiles]);
+};
+
+export default useFlows;

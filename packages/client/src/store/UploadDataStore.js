@@ -1269,6 +1269,7 @@ class UploadDataStore {
       operation: OPERATIONS_NAME.upload,
       percent: newPercent,
     });
+
     if (uploaded) {
       runInAction(() => {
         this.files[indexOfFile].action = "uploaded";
@@ -1660,7 +1661,6 @@ class UploadDataStore {
         if (this.files[indexOfFile] === undefined) {
           this.primaryProgressDataStore.setPrimaryProgressBarData({
             operation: OPERATIONS_NAME.upload,
-            percent: 0,
             completed: true,
             alert: true,
           });

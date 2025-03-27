@@ -1701,10 +1701,20 @@ class UploadDataStore {
         const newPercent = this.getFilesPercent();
         this.percent = newPercent;
 
+        const allFilesIsUploaded =
+          this.files.findIndex(
+            (f) =>
+              f.action !== "uploaded" &&
+              f.action !== "convert" &&
+              f.action !== "converted" &&
+              !f.error &&
+              !f.cancel,
+          ) === -1;
+
         this.primaryProgressDataStore.setPrimaryProgressBarData({
           operation: OPERATIONS_NAME.upload,
           percent: newPercent,
-          completed: true,
+          completed: allFilesIsUploaded,
           alert: true,
         });
 

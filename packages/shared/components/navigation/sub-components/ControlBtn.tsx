@@ -175,7 +175,7 @@ const ControlButtons = ({
       data-show-title={showTitle}
     >
       {renderPlusButton()}
-      {renderContextButton(isContextButtonVisible ?? false)}
+      {renderContextButton((isContextButtonVisible && !isPublicRoom) ?? false)}
       {renderToggleInfoPanel()}
       {renderContextButton((isPublicRoom && containVisible) ?? false)}
       {renderWarning()}

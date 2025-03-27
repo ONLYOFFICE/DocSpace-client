@@ -316,19 +316,27 @@ const Body = ({
 
           {isSSR && !bodyHeight ? (
             <Scrollbar
-              style={{
-                height: `calc(100% - ${Math.abs(listHeight)}px)`,
-                overflow: "hidden",
-              }}
+              style={
+                {
+                  height: `calc(100% - ${Math.abs(listHeight)}px)`,
+                  overflow: "hidden",
+                  "--scrollbar-padding-inline-end": 0,
+                  "--scrollbar-padding-inline-end-mobile": 0,
+                } as React.CSSProperties
+              }
             >
               {items.map((item, index) => (
                 <div
                   key={item.id}
-                  style={{ height: 48, display: "flex", alignItems: "center" }}
+                  style={{
+                    height: 48,
+                    display: "flex",
+                    alignItems: "stretch",
+                  }}
                 >
                   <Item
                     index={index}
-                    style={{}}
+                    style={{ flexGrow: 1 }}
                     data={{
                       items,
                       onSelect,

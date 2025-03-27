@@ -75,8 +75,6 @@ export default async function DocspaceLayout({
 
   const [filesSettings, folderList] = await Promise.all(actions);
 
-  filterProps.filesSettings = filesSettings as TFilesSettings;
-
   const { current, pathParts, folders, files } = folderList as TGetFolder;
 
   navigationProps.current = current;

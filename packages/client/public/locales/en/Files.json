@@ -223,6 +223,7 @@
   "UnarchivedRoomsAction": "The rooms are unarchived.",
   "Unpin": "Unpin",
   "Uploading": "Uploading",
+  "UploadingProgress": "Uploading: {{progress}}%",
   "VersionHistory": "Version history",
   "ViewList": "List",
   "ViewTiles": "Tiles",

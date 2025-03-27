@@ -24,48 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
-import styled from "styled-components";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-import { RowContainer } from "@docspace/shared/components/rows";
-import { TableViewProps } from "../../types";
-import RowItem from "./RowItem";
+import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
+import { TTranslation } from "@docspace/shared/types";
+import { TApiKey } from "@docspace/shared/api/api-keys/types";
 
-const StyledRowContainer = styled(RowContainer)`
-  margin-top: 16px;
-`;
-
-const RowView = (props: TableViewProps) => {
-  const { items, viewAs, setViewAs, sectionWidth, currentDeviceType, ...rest } =
-    props;
-
-  useViewEffect({
-    view: viewAs!,
-    setView: setViewAs!,
-    currentDeviceType: currentDeviceType!,
-  });
-
-  return (
-    <StyledRowContainer useReactWindow={false}>
-      {items.map((item) => (
-        <RowItem
-          key={item.id}
-          item={item}
-          sectionWidth={sectionWidth}
-          {...rest}
-        />
-      ))}
-    </StyledRowContainer>
-  );
-};
-
-export default inject(({ setup, settingsStore }: TStore) => {
-  const { currentDeviceType, culture } = settingsStore;
-  const { viewAs, setViewAs } = setup;
+export const useContextOptions = (
+  t: TTranslation,
+  item: TApiKey,
+  onEditApiKey: (id: TApiKey["id"]) => void,
+  onDeleteApiKey: (id: TApiKey["id"]) => void,
+) => {
+  const contextOptions = [
+    {
+      key: "api-key_edit",
+      label: t("Common:EditButton"),
+      icon: SettingsReactSvgUrl,
+      onClick: () => onEditApiKey(item.id),
+    },
+    {
+      key: "separator",
+      isSeparator: true,
+    },
+    {
+      key: "api-key_delete",
+      label: t("Common:Delete"),
+      icon: CatalogTrashReactSvgUrl,
+      onClick: () => onDeleteApiKey(item.id),
+    },
+  ];
 
   return {
-    viewAs,
-    setViewAs,
-    currentDeviceType,
+    contextOptions,
   };
-})(observer(RowView));
+};

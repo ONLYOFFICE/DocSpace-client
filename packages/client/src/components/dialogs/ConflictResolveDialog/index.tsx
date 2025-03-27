@@ -59,13 +59,14 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     setRestoreAllPanelVisible,
     setMoveToPublicRoomVisible,
     conflictDialogUploadHandler,
-    setShareCollectSelector,
     openFileAction,
     isFileDialog,
     isFolderDialog,
     files,
     folders,
     cancelUploadAction,
+    setFillPDFDialogData,
+    setIsShareFormData,
   } = props;
 
   const { t, ready } = useTranslation(["Common"]);
@@ -94,7 +95,8 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     setCopyPanelVisible(false);
     setRestoreAllPanelVisible(false);
     setMoveToPublicRoomVisible(false);
-    setShareCollectSelector(false);
+    setFillPDFDialogData(false);
+    setIsShareFormData({ visible: false });
   };
 
   const differenceArray = (
@@ -334,7 +336,8 @@ export default inject<TStore>(
       setRestoreAllPanelVisible,
       setCopyPanelVisible,
       setMoveToPublicRoomVisible,
-      setShareCollectSelector,
+      setFillPDFDialogData,
+      setIsShareFormData,
     } = dialogsStore;
 
     const { openFileAction } = filesActionsStore;
@@ -384,13 +387,14 @@ export default inject<TStore>(
       setCopyPanelVisible,
       setMoveToPublicRoomVisible,
       conflictDialogUploadHandler,
-      setShareCollectSelector,
       openFileAction,
       files,
       folders,
       isFileDialog: !folders.length,
       isFolderDialog: !files.length,
       cancelUploadAction,
+      setFillPDFDialogData,
+      setIsShareFormData,
     };
   },
 )(observer(ConflictResolveDialog));

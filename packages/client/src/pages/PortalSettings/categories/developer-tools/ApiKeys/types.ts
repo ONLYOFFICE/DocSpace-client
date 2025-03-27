@@ -48,7 +48,6 @@ export type ApiKeyViewProps = {
     id: TApiKey["id"],
     params: TApiKeyParamsRequest,
   ) => void;
-  onRenameApiKey: (id: TApiKey["id"]) => void;
   onEditApiKey: (id: TApiKey["id"]) => void;
   permissions: string[];
 };
@@ -60,14 +59,10 @@ export type TableViewProps = {
   userId?: TUser["id"];
   sectionWidth: number;
   currentDeviceType?: DeviceType;
-  onDeleteApiKey: (id: TApiKey["id"]) => void;
-  onRenameApiKey: (id: TApiKey["id"]) => void;
-  onChangeApiKeyParams: (
-    id: TApiKey["id"],
-    params: TApiKeyParamsRequest,
-  ) => void;
+  onDeleteApiKey: ApiKeyViewProps["onDeleteApiKey"];
+  onChangeApiKeyParams: ApiKeyViewProps["onChangeApiKeyParams"];
   culture?: string;
-  onEditApiKey: (id: TApiKey["id"]) => void;
+  onEditApiKey: ApiKeyViewProps["onEditApiKey"];
   permissions: string[];
 };
 
@@ -83,15 +78,20 @@ export type TableHeaderProps = {
 export type TableRowProps = {
   item: TApiKey;
   hideColumns: boolean;
-  onDeleteApiKey: (id: TApiKey["id"]) => void;
-  onChangeApiKeyParams: (
-    id: TApiKey["id"],
-    params: TApiKeyParamsRequest,
-  ) => void;
+  onDeleteApiKey: ApiKeyViewProps["onDeleteApiKey"];
+  onChangeApiKeyParams: ApiKeyViewProps["onChangeApiKeyParams"];
   culture?: string;
-  onRenameApiKey: (id: TApiKey["id"]) => void;
-  onEditApiKey: (id: TApiKey["id"]) => void;
+  onEditApiKey: ApiKeyViewProps["onEditApiKey"];
   permissions: string[];
+};
+
+export type RowItemType = {
+  item: TApiKey;
+  culture?: string;
+  sectionWidth: number;
+  onChangeApiKeyParams: ApiKeyViewProps["onChangeApiKeyParams"];
+  onDeleteApiKey: ApiKeyViewProps["onDeleteApiKey"];
+  onEditApiKey: ApiKeyViewProps["onEditApiKey"];
 };
 
 export type TableHeaderColumn = {
@@ -112,24 +112,7 @@ export type CreateApiKeyDialogProps = {
   actionItem?: TApiKey | null;
   permissions: string[];
   setActionItem: React.Dispatch<React.SetStateAction<TApiKey | null>>;
-  onChangeApiKeyParams: (
-    id: TApiKey["id"],
-    params: TApiKeyParamsRequest,
-  ) => void;
-  isRequestRunning: boolean;
-};
-
-export type RenameApiKeyDialogProps = {
-  t: TTranslation;
-  tReady: boolean;
-  isVisible: boolean;
-  setIsVisible: (visible: boolean) => void;
-  setListItems: React.Dispatch<React.SetStateAction<TApiKey[]>>;
-  item: TApiKey;
-  onChangeApiKeyParams: (
-    id: TApiKey["id"],
-    params: TApiKeyParamsRequest,
-  ) => void;
+  onChangeApiKeyParams: ApiKeyViewProps["onChangeApiKeyParams"];
   isRequestRunning: boolean;
 };
 

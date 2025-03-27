@@ -52,6 +52,7 @@ import {
   getFilteredOptions,
   getItemPermissions,
   PermissionGroup,
+  sortPermissions,
 } from "../../utils";
 
 const StyledBodyContent = styled.div`
@@ -101,9 +102,16 @@ const StyledBodyContent = styled.div`
 
   .api-key_permission-container {
     display: grid;
-    grid-template-columns: 1fr auto auto;
-    gap: 8px;
+    grid-template-columns: 1fr minmax(50px, auto) minmax(50px, auto);
+    gap: 8px 0;
   }
+
+  .separator {
+    padding: 15px 0px 9px;
+    margin-bottom: 6px;
+    border-bottom: ${(props) => props.theme.oauth.clientForm.headerBorder};
+  }
+
   .api-key_permission-container-text {
     display: flex;
     justify-content: center;
@@ -112,6 +120,10 @@ const StyledBodyContent = styled.div`
   .api-key_permission-checkbox {
     justify-content: center;
     margin-left: 12px;
+  }
+
+  .api-key_permission-row {
+    margin-bottom: 8px;
   }
 `;
 
@@ -137,7 +149,9 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   const isEdit = !!actionItem;
 
   const [isRequestRunning, setIsRequestRunning] = useState(false);
-  const [inputValue, setInputValue] = useState(actionItem?.name ?? "");
+  const [inputValue, setInputValue] = useState(
+    actionItem?.name ?? t("Settings:NewSecretKey"),
+  );
   const [isValid, setIsValid] = useState(true);
   const [isValidLifeTime, setIsValidLifeTime] = useState(true);
   const [lifetimeIsChecked, setLifetimeIsChecked] = useState(false);
@@ -170,13 +184,17 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
 
       list.push(
         <React.Fragment key={key}>
-          <Text fontSize="13px" fontWeight={600}>
+          <Text
+            className="api-key_permission-row"
+            fontSize="13px"
+            fontWeight={600}
+          >
             {category}
           </Text>
 
           {value.isRead ? (
             <Checkbox
-              className="api-key_permission-checkbox"
+              className="api-key_permission-row api-key_permission-checkbox"
               isChecked={value.isRead.isChecked || readIsDisabled}
               onChange={() => {
                 const obj = { ...filteredOpt };
@@ -190,7 +208,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           )}
           {value.isWrite ? (
             <Checkbox
-              className="api-key_permission-checkbox"
+              className="api-key_permission-row api-key_permission-checkbox"
               isChecked={value.isWrite.isChecked}
               onChange={() => {
                 const obj = { ...filteredOpt };
@@ -206,7 +224,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
       );
     });
 
-    return list;
+    return sortPermissions(list);
   }, [filteredOpt]);
 
   const permissionsList = getPermissionsList();
@@ -223,17 +241,17 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
       content: (
         <div className="api-key_permission-tab">
           <div className="api-key_permission-container">
-            <div />
+            <Text fontSize="13px" fontWeight={600} className="separator">
+              {t("OAuth:ScopesHeader")}
+            </Text>
             <Text
-              className="api-key_permission-container-text"
-              fontSize="13px"
+              className="api-key_permission-container-text separator"
               fontWeight={600}
             >
               {t("OAuth:Read")}
             </Text>
             <Text
-              className="api-key_permission-container-text"
-              fontSize="13px"
+              className="api-key_permission-container-text separator"
               fontWeight={600}
             >
               {t("OAuth:Write")}
@@ -303,6 +321,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           setSecretKey(key);
           const newKeys = await getApiKeys();
           if (newKeys) setListItems(newKeys);
+          toastr.success(t("Settings:SecretKeyCreated"));
           // setListItems((prev) => [...prev, key]);
         })
         .catch((err) => toastr.error(err))
@@ -359,13 +378,17 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
 
   const createBody = (
     <StyledBodyContent>
-      <Text noSelect>{t("Settings:CreateNewSecretKeyDialogDescription")}</Text>
+      {!isEdit ? (
+        <Text noSelect>
+          {t("Settings:CreateNewSecretKeyDialogDescription")}
+        </Text>
+      ) : null}
       <div className="api-key_name">
         <Text fontSize="13px" fontWeight={600}>
           {t("Common:Name")}
         </Text>
         <TextInput
-          placeholder={t("Settings:CreateNewSecretKeyDialogPlaceholder")}
+          placeholder={t("Settings:NewSecretKey")}
           value={inputValue}
           type={InputType.text}
           isAutoFocussed
@@ -455,7 +478,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           }}
         />
       </div>
-      {expiresInDays ? (
+      {lifetimeIsChecked ? (
         <div className="api-key_name-body-container">
           <Text fontSize="12px" fontWeight={600}>
             {t("Settings:ApiKeyLifetime")}

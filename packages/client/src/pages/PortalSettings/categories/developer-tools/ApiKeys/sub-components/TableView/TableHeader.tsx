@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { TableHeader as TableHeaderComponent } from "@docspace/shared/components/table";
 
 import { useTranslation } from "react-i18next";
@@ -45,8 +45,6 @@ const TableHeader = (props: TableHeaderProps) => {
   } = props;
   const { t } = useTranslation(["Webhooks", "Common", "Files", "Settings"]);
 
-  const [columns, setColumns] = useState<TableHeaderColumn[]>([]);
-
   const defaultColumns: TableHeaderColumn[] = [
     {
       key: "Name",
@@ -54,7 +52,7 @@ const TableHeader = (props: TableHeaderProps) => {
       resizable: true,
       enable: true,
       default: true,
-      minWidth: 210,
+      minWidth: 110,
     },
     {
       key: "SecretKey",
@@ -119,11 +117,8 @@ const TableHeader = (props: TableHeaderProps) => {
     return columnsList;
   };
 
-  useEffect(() => {
-    const storageColumns = getColumns(defaultColumns, userId);
-
-    setColumns(storageColumns);
-  }, []);
+  const storageColumns = getColumns(defaultColumns, userId);
+  const [columns] = useState<TableHeaderColumn[]>(storageColumns ?? []);
 
   return (
     <TableHeaderComponent
@@ -136,6 +131,7 @@ const TableHeader = (props: TableHeaderProps) => {
       setHideColumns={setHideColumns}
       infoPanelVisible={false}
       columnInfoPanelStorageName={columnInfoPanelStorageName}
+      withoutWideColumn
     />
   );
 };

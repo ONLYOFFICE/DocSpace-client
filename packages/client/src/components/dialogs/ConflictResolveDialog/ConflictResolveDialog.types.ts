@@ -76,8 +76,9 @@ export interface ConflictResolveDialogProps {
   setCopyPanelVisible: (value: boolean) => void;
   setRestoreAllPanelVisible: (value: boolean) => void;
   setMoveToPublicRoomVisible: (value: boolean) => void;
-  setShareCollectSelector: TStore["dialogsStore"]["setShareCollectSelector"];
   openFileAction: TStore["filesActionsStore"]["openFileAction"];
+  setFillPDFDialogData: TStore["dialogsStore"]["setFillPDFDialogData"];
+  setIsShareFormData: TStore["dialogsStore"]["setIsShareFormData"];
   conflictDialogUploadHandler: (
     data: {
       files: {

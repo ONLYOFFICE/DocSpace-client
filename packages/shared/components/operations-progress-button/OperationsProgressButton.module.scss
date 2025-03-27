@@ -285,3 +285,9 @@
     display: flex;
   }
 }
+
+.floatingButton {
+  &.cursorDefault {
+    cursor: default;
+  }
+}

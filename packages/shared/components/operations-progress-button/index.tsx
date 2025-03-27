@@ -90,9 +90,11 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const operationsLength = panelOperations.length + operations.length;
-  const isSeveralOperations = operationsLength > 1;
-  const isSecondaryActive = operations.length > 0;
+  const panelOperationsLength = panelOperations.length;
+  const operationsLength = operations.length;
+
+  const allOperationsLength = panelOperationsLength + operationsLength;
+  const isSeveralOperations = allOperationsLength > 1;
 
   const clearTimers = () => {
     if (hideTimerRef.current) {
@@ -146,7 +148,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   };
 
   const handleFloatingButtonClick = () => {
-    if (isMobile && !panelOperations.length) {
+    if (isMobile && !panelOperationsLength) {
       setIsHovered(true);
     }
 
@@ -156,7 +158,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
       return;
     }
 
-    if (panelOperations.length) {
+    if (panelOperationsLength) {
       setIsHideTooltip(true);
 
       panelOperations[0].showPanel?.(true);
@@ -214,7 +216,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
         ? FloatingButtonIcons.arrow
         : FloatingButtonIcons.dots;
     }
-    const operation = operations.length
+    const operation = operationsLength
       ? operations[0].operation
       : panelOperations[0].operation;
 
@@ -226,11 +228,11 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
 
   const getTooltipLabel = () => {
     if (isSeveralOperations) {
-      return t("Files:Processes", { count: operationsLength });
+      return t("Files:Processes", { count: allOperationsLength });
     }
 
     if (operationsAlert) {
-      const operationName = isSecondaryActive
+      const operationName = operationsLength
         ? operations[0].label
         : panelOperations[0].label;
 
@@ -240,7 +242,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
     }
 
     if (operationsCompleted) {
-      const operationName = isSecondaryActive
+      const operationName = operationsLength
         ? operations[0].label
         : panelOperations[0].label;
 
@@ -249,7 +251,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
       });
     }
 
-    return isSecondaryActive ? operations[0].label : panelOperations[0].label;
+    return operationsLength ? operations[0].label : panelOperations[0].label;
   };
 
   const getPercent = () => {
@@ -257,7 +259,7 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
       return;
     }
 
-    return isSecondaryActive
+    return operationsLength
       ? operations[0].percent
       : panelOperations[0].percent;
   };
@@ -266,14 +268,14 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   };
 
   const disableOpenPanel =
-    panelOperations.length === 1 && !panelOperations[0].showPanel;
+    panelOperationsLength === 1 && !panelOperations[0].showPanel;
 
   const withoutStatus = disableOpenPanel && panelOperations[0].withoutStatus;
 
   const isLaterHide = () => {
     if (disableOpenPanel) return false;
 
-    if (panelOperations.length > 0) return true;
+    if (panelOperationsLength > 0) return true;
 
     return false;
   };
@@ -312,6 +314,10 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
           noUserSelect
         >
           <FloatingButton
+            className={classNames(styles.floatingButton, {
+              [styles.cursorDefault]:
+                !panelOperationsLength || disableOpenPanel,
+            })}
             icon={getIcons()}
             alert={operationsAlert}
             completed={operationsCompleted}

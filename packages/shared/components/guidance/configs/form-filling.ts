@@ -82,7 +82,9 @@ export const getFormFillingConfig = ({ t }: GuidanceConfig): GuidanceStep[] => [
   {
     id: 5,
     header: t("FormFillingTipsDialog:HeaderUploading"),
-    description: t("FormFillingTipsDialog:TitleUploading"),
+    description: t("FormFillingTipsDialog:TitleUploading", {
+      productName: t("Common:ProductName"),
+    }),
     key: "form-filling-uploading",
     placement: "side",
     position: [

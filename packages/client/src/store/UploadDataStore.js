@@ -491,15 +491,18 @@ class UploadDataStore {
     `newPercent=${newPercent} (newTotalSize=${newTotalSize} totalUploadedSize=${totalUploadedSize} indexOfFile=${indexOfFile})`
   ); */
 
-    const largeFiles = this.uploadedFilesHistory.filter((item) => {
-      return item.chunksLength > 2;
-    });
+    // const largeFiles = this.uploadedFilesHistory.filter((item) => {
+    //   return item.chunksLength > 2;
+    // });
 
-    const filesHistory =
-      largeFiles.length > 0 ? largeFiles : this.uploadedFilesHistory;
-    const percentCurrentFileHistory = sumBy(filesHistory, (f) => f.percent);
+    // const filesHistory =
+    //   largeFiles.length > 0 ? largeFiles : this.uploadedFilesHistory;
+    const percentCurrentFileHistory = sumBy(
+      this.uploadedFilesHistory,
+      (f) => f.percent,
+    );
 
-    const commonPercent = filesHistory.length * 100;
+    const commonPercent = this.uploadedFilesHistory.length * 100;
     const newPercent = (percentCurrentFileHistory / commonPercent) * 100;
 
     return newPercent;

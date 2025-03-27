@@ -137,17 +137,17 @@ export default function useContextMenuModel({
   }, [downloadAsAction, t]);
 
   const getViewItem = useCallback(
-    (item: TFileItem | TFolderItem) => {
+    (item: TFileItem) => {
       return {
         id: "option_view",
         key: "view",
         label: t("Common:View"),
         icon: EyeReactSvgUrl,
-        onClick: () => {},
+        onClick: () => openFile(item),
         disabled: false,
       };
     },
-    [t],
+    [t, openFile],
   );
 
   const getEditItem = useCallback(
@@ -245,7 +245,7 @@ export default function useContextMenuModel({
         model.push(getOpenItem(item!));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.view))
-        model.push(getViewItem(item!));
+        model.push(getViewItem(item as TFileItem));
 
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.openPDF))
         model.push(getOpenPDFItem(item as TFileItem));

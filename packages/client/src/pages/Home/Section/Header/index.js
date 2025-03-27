@@ -313,10 +313,6 @@ const SectionHeaderContent = (props) => {
       return moveToRoomsPage();
     }
 
-    if (isRootRoom) {
-      return moveToRoomsPage();
-    }
-
     setSelectedNode(id);
 
     const rootFolderType = selectedFolder.rootFolderType;

@@ -59,6 +59,7 @@ const ButtonContainer = (props) => {
     isBackupProgressVisible,
     setErrorInformation,
     setIsBackupProgressVisible,
+    backupPrgressError,
   } = props;
 
   const navigate = useNavigate();
@@ -154,7 +155,7 @@ const ButtonContainer = (props) => {
       {isBackupProgressVisible ? (
         <OperationsProgressButton
           className="layout-progress-bar"
-          operationsAlert={false}
+          operationsAlert={backupPrgressError}
           operationsCompleted={downloadingProgress === 100}
           operations={[
             {
@@ -186,6 +187,7 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
     isBackupProgressVisible,
     setErrorInformation,
     setIsBackupProgressVisible,
+    backupPrgressError,
   } = backup;
 
   const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
@@ -202,5 +204,6 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
     isBackupProgressVisible,
     setErrorInformation,
     setIsBackupProgressVisible,
+    backupPrgressError,
   };
 })(observer(ButtonContainer));

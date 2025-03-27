@@ -147,6 +147,8 @@ class BackupStore {
 
   isBackupProgressVisible = false;
 
+  backupPrgressError = "";
+
   constructor(authStore, thirdPartyStore) {
     makeAutoObservable(this);
 
@@ -585,6 +587,10 @@ class BackupStore {
 
   setIsBackupProgressVisible = (visible) => {
     this.isBackupProgressVisible = visible;
+  };
+
+  setBackupProgressError = (error) => {
+    this.backupPrgressError = error;
   };
 
   setDownloadingProgress = (progress) => {

@@ -105,6 +105,7 @@ class ManualBackup extends React.Component {
       isNotPaidPeriod,
       setDownloadingProgress,
       setTemporaryLink,
+      setBackupProgressError,
       t,
     } = this.props;
 
@@ -120,7 +121,10 @@ class ManualBackup extends React.Component {
 
       const { error, success } = options;
 
-      if (error) toastr.error(error);
+      if (error) {
+        toastr.error(error);
+        setBackupProgressError(error);
+      }
       if (success) toastr.success(success);
     });
 
@@ -300,6 +304,7 @@ class ManualBackup extends React.Component {
       isBackupProgressVisible,
       errorInformation,
       setIsBackupProgressVisible,
+      backupPrgressError,
     } = this.props;
     const {
       isInitialLoading,
@@ -459,7 +464,7 @@ class ManualBackup extends React.Component {
         {isBackupProgressVisible ? (
           <OperationsProgressButton
             className="layout-progress-bar"
-            operationsAlert={false}
+            operationsAlert={backupPrgressError}
             operationsCompleted={downloadingProgress === 100}
             operations={[
               {
@@ -502,6 +507,8 @@ export default inject(
       errorInformation,
       setErrorInformation,
       setIsBackupProgressVisible,
+      setBackupProgressError,
+      backupPrgressError,
     } = backup;
 
     const { currentColorScheme, dataBackupUrl, portals } = settingsStore;
@@ -535,6 +542,8 @@ export default inject(
       isBackupProgressVisible,
       setErrorInformation,
       setIsBackupProgressVisible,
+      setBackupProgressError,
+      backupPrgressError,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(ManualBackup)));

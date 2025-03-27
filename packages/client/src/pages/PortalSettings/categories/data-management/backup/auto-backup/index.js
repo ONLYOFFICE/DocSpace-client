@@ -118,6 +118,7 @@ class AutomaticBackup extends React.PureComponent {
       setDownloadingProgress,
       setTemporaryLink,
       t,
+      setBackupProgressError,
     } = this.props;
 
     SocketHelper.on(SocketEvents.BackupProgress, (opt) => {
@@ -131,7 +132,10 @@ class AutomaticBackup extends React.PureComponent {
 
       const { error, success } = options;
 
-      if (error) toastr.error(error);
+      if (error) {
+        toastr.error(error);
+        setBackupProgressError(error);
+      }
       if (success) toastr.success(success);
     });
 
@@ -470,6 +474,7 @@ class AutomaticBackup extends React.PureComponent {
       isBackupProgressVisible,
       errorInformation,
       setIsBackupProgressVisible,
+      backupPrgressError,
     } = this.props;
 
     const {
@@ -640,7 +645,7 @@ class AutomaticBackup extends React.PureComponent {
         {isBackupProgressVisible ? (
           <OperationsProgressButton
             className="layout-progress-bar"
-            operationsAlert={false}
+            operationsAlert={backupPrgressError}
             operationsCompleted={downloadingProgress === 100}
             operations={[
               {
@@ -716,6 +721,8 @@ export default inject(
       errorInformation,
       setErrorInformation,
       setIsBackupProgressVisible,
+      setBackupProgressError,
+      backupPrgressError,
     } = backup;
 
     const { updateBaseFolderPath, resetNewFolderPath } = filesSelectorInput;
@@ -787,6 +794,8 @@ export default inject(
       errorInformation,
       setErrorInformation,
       setIsBackupProgressVisible,
+      setBackupProgressError,
+      backupPrgressError,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(AutomaticBackup)));

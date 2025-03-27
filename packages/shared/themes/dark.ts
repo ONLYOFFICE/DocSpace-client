@@ -2460,7 +2460,7 @@ const Dark: TTheme = {
       tooltipColor: darkToastInfo,
       iconColor: darkErrorStatus,
       positiveStatusColor: darkStatusPositive,
-      progressColor: lightGrayDark,
+      progressColor: grayDark,
       shareButton: {
         color: gray,
         sharedColor: lightGrayDark,

@@ -1073,6 +1073,7 @@ class UploadDataStore {
         cancel: false,
         needConvert,
         encrypted: file.encrypted,
+        percent: 0,
       };
 
       if (needConvert) {

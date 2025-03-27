@@ -34,6 +34,8 @@ customElements.define(
       chat_provider_name: "string",
       popup_view: "string",
       bearer_token: "string",
+      current_folder: "string",
+      set_loading: "function",
     },
   })
 );

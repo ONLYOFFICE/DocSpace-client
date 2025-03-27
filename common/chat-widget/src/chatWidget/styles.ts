@@ -344,7 +344,7 @@ const pageStyles = `
     
     .chat-panel-footer-container {
       width: 100%;
-      padding: 22px 16px;
+      // padding: 22px 16px;
       background-color: var(--fill-color);
     
       .input-component {
@@ -787,6 +787,28 @@ const scrollStyles = `
         opacity: 1;
       }
     }
+  }
+
+  @keyframes spinner-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .chat-panel-footer_icon-wrapper_loader {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    border: 2px solid transparent;
+    border-top-color: var(--accent-color, #2DA7DB);
+    border-right-color: var(--accent-color, #2DA7DB);
+    border-bottom-color: var(--accent-color, #2DA7DB);
+    animation: spinner-rotate 0.8s linear infinite;
   }
 `;
 

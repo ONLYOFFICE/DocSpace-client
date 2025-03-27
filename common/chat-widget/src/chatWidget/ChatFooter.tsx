@@ -207,7 +207,9 @@ const ChatFooter = ({
             onClick={onSendMessage}
           >
             <div className="chat-panel-footer_icon-wrapper">
-              {sendIconImage ? (
+              {sendingMessage ? (
+                <div className="chat-panel-footer_icon-wrapper_loader" />
+              ) : sendIconImage ? (
                 <img src={sendIconImage} alt="send icon" />
               ) : (
                 <Send color="#A3A9AE" />

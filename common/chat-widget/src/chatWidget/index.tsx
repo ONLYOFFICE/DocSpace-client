@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   ChatMessageType,
   DirectionType,
@@ -44,6 +44,8 @@ export default function ChatWidget({
   chat_provider_name,
   popup_view,
   bearer_token,
+  current_folder,
+  set_loading,
 }: {
   api_key?: string;
   input_value: string;
@@ -73,6 +75,8 @@ export default function ChatWidget({
   chat_provider_name?: string;
   popup_view?: string;
   bearer_token?: string;
+  current_folder?: string;
+  set_loading?: (loading: boolean) => void;
 }) {
   const sessionId = useRef(session_id ?? uuidv4());
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -95,10 +99,11 @@ export default function ChatWidget({
 
   const sendMessageFn = (message: string) => {
     setSendingMessage(true);
+    const newMsg = message + `\n @folder-${current_folder}`;
     sendMessage(
       host_url,
       flow_id,
-      message,
+      newMsg,
       input_type,
       output_type,
       sessionId,
@@ -198,6 +203,12 @@ export default function ChatWidget({
       });
   };
 
+  useEffect(() => {
+    if (set_loading) {
+      set_loading(sendingMessage);
+    }
+  }, [sendingMessage, set_loading]);
+
   return (
     <div style={{ height: "100%" }}>
       <style
@@ -220,7 +231,7 @@ export default function ChatWidget({
         isOpen={isOpen}
         isPopupView={isPopupView}
       >
-        <ChatHeader headerText={header_text} />
+        {/* <ChatHeader headerText={header_text} /> */}
 
         <ChatBody
           messages={messages}

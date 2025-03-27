@@ -47,6 +47,7 @@ const Row = React.memo(
         title={data[0][index].title}
         isRootRoom={data[0][index].isRootRoom}
         isRoot={isRoot}
+        isRootTemplates={data[0][index].isRootTemplates}
         onClick={data[1]}
         withLogo={data[2].withLogo}
         currentDeviceType={data[2].currentDeviceType}

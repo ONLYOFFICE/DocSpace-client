@@ -304,9 +304,13 @@ const SectionHeaderContent = (props) => {
       : setSelected(checked ? "all" : "none");
   };
 
-  const onClickFolder = async (id, isRootRoom) => {
+  const onClickFolder = async (id, isRootRoom, isRootTemplates) => {
     if (isPublicRoom) {
       return moveToPublicRoom(id);
+    }
+
+    if (isRootRoom || isRootTemplates) {
+      return moveToRoomsPage();
     }
 
     if (isRootRoom) {

@@ -487,16 +487,6 @@ class UploadDataStore {
 
     // const newPercent = (newSize / newTotalSize) * 100;
 
-    /* console.log(
-    `newPercent=${newPercent} (newTotalSize=${newTotalSize} totalUploadedSize=${totalUploadedSize} indexOfFile=${indexOfFile})`
-  ); */
-
-    // const largeFiles = this.uploadedFilesHistory.filter((item) => {
-    //   return item.chunksLength > 2;
-    // });
-
-    // const filesHistory =
-    //   largeFiles.length > 0 ? largeFiles : this.uploadedFilesHistory;
     const percentCurrentFileHistory = sumBy(
       this.uploadedFilesHistory,
       (f) => f.percent,
@@ -1237,30 +1227,12 @@ class UploadDataStore {
       createNewIfExist,
     } = chunkUploadObj;
 
-    this.files[indexOfFile].chunkIndex = index;
-    this.files[indexOfFile].isFinalize = isFinalize;
-
-    const percentCurrentFile = (index / chunksLength) * 100;
-
-    const fileIndex = this.uploadedFilesHistory.findIndex(
-      (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
-    );
-
-    if (fileIndex > -1) {
-      this.uploadedFilesHistory[fileIndex].chunksLength = chunksLength;
-      if (this.uploadedFilesHistory[fileIndex].percent < percentCurrentFile)
-        this.uploadedFilesHistory[fileIndex].percent = percentCurrentFile;
-    }
-
-    this.files[indexOfFile].percentCurrentFile = percentCurrentFile;
-
     if (!res.data.data && res.data.message) {
       return reject({
         message: res.data.message,
         chunkIndex: index,
         chunkSize: fileSize,
         isFinalize,
-        percentCurrentFile,
       });
     }
 
@@ -1280,6 +1252,17 @@ class UploadDataStore {
     //       ? fileSize
     //       : fileSize - index * this.filesSettingsStore.chunkUploadSize;
     // }
+
+    const percentCurrentFile = (index / chunksLength) * 100;
+
+    const fileIndex = this.uploadedFilesHistory.findIndex(
+      (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
+    );
+
+    if (fileIndex > -1) {
+      if (this.uploadedFilesHistory[fileIndex].percent < percentCurrentFile)
+        this.uploadedFilesHistory[fileIndex].percent = percentCurrentFile;
+    }
 
     const newPercent = this.getFilesPercent();
 

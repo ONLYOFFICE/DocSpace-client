@@ -41,16 +41,15 @@ import { Operation } from "./OperationsProgressButton.types";
 import { OPERATIONS_NAME } from "../../constants";
 
 interface ProgressListProps {
-  operations: Operation[];
-  panelOperations: Operation[];
   onOpenPanel: () => void;
+  operations: Operation[];
+  panelOperations?: Operation[];
   clearOperationsData?: (operationId: string | null, operation: string) => void;
   clearPanelOperationsData?: (
     operationId: string | null,
     operation: string,
   ) => void;
   onCancel?: () => void;
-  withoutStatus?: boolean;
 }
 
 const getIcon = (icon: string): string => {
@@ -81,67 +80,65 @@ const getIcon = (icon: string): string => {
   }
 };
 
-const ProgressList = observer(
-  ({
-    operations,
-    panelOperations,
-    clearOperationsData,
-    clearPanelOperationsData,
-    onCancel,
-    onOpenPanel,
-  }: ProgressListProps) => {
-    const onOpenPanelOperation = (item: Operation) => {
-      if (!item.showPanel) return;
+const ProgressList = ({
+  operations,
+  panelOperations,
+  clearOperationsData,
+  clearPanelOperationsData,
+  onCancel,
+  onOpenPanel,
+}: ProgressListProps) => {
+  const onOpenPanelOperation = (item: Operation) => {
+    if (!item.showPanel) return;
 
     item.showPanel(true);
     onOpenPanel();
   };
 
-    return (
-      <div className="progress-container">
-        {operations.map((item) => (
-          <div
-            key={`${item.operation}-${item.items?.[0]?.operationId ?? ""}-${item.completed}`}
-            className="progress-list"
-          >
-            <ProgressBar
-              completed={item.completed}
-              label={item.label}
-              alert={item.alert}
-              open
-              iconUrl={getIcon(item.operation)}
-              onClickAction={() => {}}
-              withoutProgress
-              onClearProgress={clearOperationsData}
-              operation={item.operation}
-            />
-          </div>
-        ))}
-        {panelOperations.map((item) => (
-          <div
-            key={`${item.operation}`}
-            className={`progress-list ${item.showPanel ? "withHover" : ""}`}
-          >
-            <ProgressBar
-              completed={item.completed}
-              label={item.label}
-              alert={item.alert}
-              percent={item.percent}
-              open
-              iconUrl={getIcon(item.operation)}
-              onClickAction={() => {}}
-              onClearProgress={clearPanelOperationsData}
-              operation={item.operation}
-              onCancel={onCancel}
-              onOpenPanel={() => onOpenPanelOperation(item)}
-              withoutStatus={item.withoutStatus}
-              withoutProgress={item.withoutProgress}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  },
-);
+  return (
+    <div className="progress-container">
+      {operations.map((item) => (
+        <div
+          key={`${item.operation}-${item.items?.[0]?.operationId ?? ""}-${item.completed}`}
+          className="progress-list"
+        >
+          <ProgressBar
+            completed={item.completed}
+            label={item.label}
+            alert={item.alert}
+            open
+            iconUrl={getIcon(item.operation)}
+            onClickAction={() => {}}
+            withoutProgress
+            onClearProgress={clearOperationsData}
+            operation={item.operation}
+          />
+        </div>
+      ))}
+      {panelOperations?.map((item) => (
+        <div
+          key={`${item.operation}`}
+          className={`progress-list ${item.showPanel ? "withHover" : ""}`}
+        >
+          <ProgressBar
+            completed={item.completed}
+            label={item.label}
+            alert={item.alert}
+            percent={item.percent}
+            open
+            iconUrl={getIcon(item.operation)}
+            onClickAction={() => {}}
+            onClearProgress={clearPanelOperationsData}
+            operation={item.operation}
+            onCancel={onCancel}
+            onOpenPanel={() => onOpenPanelOperation(item)}
+            withoutStatus={item.withoutStatus}
+            withoutProgress={item.withoutProgress}
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default ProgressList;

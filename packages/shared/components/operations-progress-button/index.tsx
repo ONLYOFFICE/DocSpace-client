@@ -341,9 +341,12 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
               operations={operations}
               panelOperations={panelOperations}
               clearOperationsData={clearOperationsData}
-              clearPanelOperationsData={(operationId, operationName) =>
-                clearPanelOperationsData?.(operationName)
-              }
+              clearPanelOperationsData={(
+                _: string | null,
+                operationName: string | null,
+              ) => {
+                clearPanelOperationsData?.(operationName);
+              }}
               onCancel={onCancelOperation}
               onOpenPanel={handleOperationClick}
             />
@@ -354,4 +357,4 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   );
 };
 
-export default OperationsProgress;
+export default OperationsProgressButton;

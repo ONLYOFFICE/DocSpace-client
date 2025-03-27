@@ -83,7 +83,7 @@ export type PeopleSelectorProps = TSelectorHeader &
 
     checkIfUserInvited?: (user: TUser) => boolean;
     injectedElement?: React.ReactElement;
-    filterItems?: (user: TUser | TGroup) => boolean;
     alwaysShowFooter?: boolean;
+    onlyRoomMembers?: boolean;
   } & ContactsSelectorGroups &
   ContactsSelectorGuests;

@@ -24,32 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { Dispatch, SetStateAction } from "react";
-import type { TUser } from "../../api/people/types";
-import type { TSettings } from "../../api/settings/types";
-import type { IRole } from "../../components/filling-role-selector";
-import type { TFormRoleMappingRequest } from "../../api/files/types";
-import type { TTranslation } from "../../types";
+import { memo, forwardRef } from "react";
+import type { HeaderProps } from "./StartFillingPanel.types";
 
-export type Invitation = { id: string | number; access: string | number };
+export const Header = memo(
+  forwardRef<HTMLDivElement, HeaderProps>(
+    ({ t, roleName, className, openInvitePanel }, ref) => (
+      <div className={className} ref={ref}>
+        <h3>
+          {t("Common:RoleFields", {
+            roleName,
+          })}
+        </h3>
+        <span onClick={openInvitePanel}>{t("Common:AddUserToRoom")}</span>
+      </div>
+    ),
+  ),
+);
 
-export interface IStartFillingPanelProps {
-  roles: Omit<IRole, "user">[];
-  user: TUser;
-  settings: TSettings;
-  fileId: number;
-  roomId: string;
-  setStartFillingPanelVisible: Dispatch<SetStateAction<boolean>>;
-  onSubmit: (data: TFormRoleMappingRequest) => Promise<void>;
-  inviteUserToRoom: (
-    roomId: string,
-    invitations: Invitation[],
-  ) => Promise<unknown>;
-}
-
-export interface HeaderProps {
-  className?: string;
-  roleName: string;
-  t: TTranslation;
-  openInvitePanel: VoidFunction;
-}
+Header.displayName = "Header";

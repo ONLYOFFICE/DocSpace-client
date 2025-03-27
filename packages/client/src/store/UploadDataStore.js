@@ -26,7 +26,7 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import { Trans } from "react-i18next";
-import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
+import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
 import { ConflictResolveType } from "@docspace/shared/enums";
@@ -1000,22 +1000,39 @@ class UploadDataStore {
 
   handleUploadConflicts = async (t, toFolderId, uploadData) => {
     const filesArray = uploadData.files.map((fileInfo) => fileInfo.file.name);
-    let conflicts = await checkIsFileExist(toFolderId, filesArray);
-    const folderInfo = await getFolderInfo(toFolderId);
 
-    conflicts = conflicts.map((fileTitle) => ({
-      title: fileTitle,
-      isFile: true,
-    }));
+    try {
+      let conflicts = await checkIsFileExist(toFolderId, filesArray);
+      const folderInfo = await getFolderInfo(toFolderId);
 
-    if (conflicts.length > 0) {
-      this.setConflictDialogData(conflicts, {
-        isUploadConflict: true,
-        newUploadData: uploadData,
-        folderTitle: folderInfo.title,
-      });
-    } else {
-      this.handleUploadAndOptionalConversion(uploadData, t, true);
+      conflicts = conflicts.map((fileTitle) => ({
+        title: fileTitle,
+        isFile: true,
+      }));
+
+      if (conflicts.length > 0) {
+        this.setConflictDialogData(conflicts, {
+          isUploadConflict: true,
+          newUploadData: uploadData,
+          folderTitle: folderInfo.title,
+        });
+      } else {
+        this.handleUploadAndOptionalConversion(uploadData, t, true);
+      }
+    } catch (err) {
+      let errorMessage = "";
+
+      if (typeof err === "object") {
+        errorMessage =
+          err?.response?.data?.error?.message ||
+          err?.statusText ||
+          err?.message ||
+          "";
+      } else {
+        errorMessage = err;
+      }
+
+      toastr.error(errorMessage, null, 0, true);
     }
   };
 
@@ -1761,7 +1778,7 @@ class UploadDataStore {
         if (f.error.indexOf("password") > -1) {
           toastr.warning(
             <Trans
-              i18nKey="Files:PasswordProtectedFiles"
+              i18nKey="Common:PasswordProtectedFiles"
               t={t}
               components={[
                 <ColorTheme

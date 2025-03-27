@@ -69,6 +69,7 @@ export const useEmptyView = (
     isArchiveFolderRoot,
     rootFolderType,
     isPublicRoom,
+    security,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -86,6 +87,7 @@ export const useEmptyView = (
       isRootEmptyPage,
       rootFolderType,
       isPublicRoom,
+      security,
     );
     const title = getTitle(
       type,
@@ -252,7 +254,7 @@ export const useOptions = (
       const edit = extension === FileExtensions.PDF;
 
       if (isMobile && edit && t) {
-        toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+        toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
         return;
       }
 

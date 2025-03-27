@@ -144,7 +144,7 @@ const FileTile = ({
         : temporaryIcon;
 
     return (
-      <Link type={LinkType.page} onClick={thumbnailClick}>
+      <Link type={LinkType.page}>
         {thumbnail && !errorLoadSrc ? (
           thumbSize !== null ? (
             <img
@@ -197,7 +197,8 @@ const FileTile = ({
       e.detail === 1 &&
       !(e.target as HTMLElement).closest(".badges") &&
       !(e.target as HTMLElement).closest(".item-file-name") &&
-      !(e.target as HTMLElement).closest(".tag")
+      !(e.target as HTMLElement).closest(".tag") &&
+      !(e.target as HTMLElement).closest(`.${styles.checkbox}`)
     ) {
       if (
         (e.target as HTMLElement).nodeName !== "IMG" &&
@@ -207,7 +208,7 @@ const FileTile = ({
         (e.target as HTMLElement).nodeName !== "svg"
       ) {
         if (setSelection) {
-          setSelection(false);
+          setSelection([]);
         }
       }
 
@@ -269,9 +270,12 @@ const FileTile = ({
       {...rest}
       ref={forwardRef}
       className={fileTileClassNames}
+      onContextMenu={onContextMenu}
       onClick={onFileClick}
     >
-      <div className={fileTileTopClassNames}>{icon}</div>
+      <div className={fileTileTopClassNames} onClick={thumbnailClick}>
+        {icon}
+      </div>
 
       <div className={classNames(styles.icons, styles.isBadges)}>{badges}</div>
       {contentElement ? (

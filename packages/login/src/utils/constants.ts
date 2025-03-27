@@ -26,14 +26,16 @@
 
 import { TTimeZoneOption } from "@/types";
 import { TOption } from "@docspace/shared/components/combobox";
-import EnUSReactSvgUrl from "PUBLIC_DIR/images/flags/en-US.react.svg?url";
+import EnUSReactSvgUrl from "PUBLIC_DIR/images/flags/en-US.react.svg";
 
 export const DEFAULT_EMAIL_TEXT =
   "User <1>{{email}}</1> is already registered in this {{productName}}, enter your password or go back to continue with another email.";
 export const DEFAULT_ROOM_TEXT =
-  "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
+  "<strong>{{displayName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
 export const DEFAULT_PORTAL_TEXT =
-  "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
+  "<strong>{{displayName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
+export const DEFAULT_GUEST_TEXT =
+  "<strong>{{displayName}}</strong> wants to share with you the contact of the guest.";
 
 export const DEFAULT_SELECT_TIMEZONE: TTimeZoneOption = {
   key: "UTC",

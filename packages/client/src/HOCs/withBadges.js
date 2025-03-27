@@ -31,7 +31,9 @@ import { ShareAccessRights, FileStatus } from "@docspace/shared/enums";
 import config from "PACKAGE_FILE";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
-import Badges from "../components/Badges";
+import Badges from "@docspace/shared/components/badges";
+
+import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 
 export default function withBadges(WrappedComponent) {
   class WithBadges extends React.Component {
@@ -211,6 +213,15 @@ export default function withBadges(WrappedComponent) {
           canEditing={canEditing}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
+          newFilesBadge={
+            <NewFilesBadge
+              className="tablet-badge"
+              newFilesCount={newItems}
+              folderId={item.id}
+              mute={mute}
+              isRoom={item.isRoom}
+            />
+          }
         />
       );
 

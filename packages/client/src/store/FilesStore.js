@@ -64,12 +64,12 @@ import {
 
 import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
-import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import {
   LOADER_TIMEOUT,
   MEDIA_VIEW_URL,
   PDF_FORM_DIALOG_KEY,
   ROOMS_PROVIDER_TYPE_NAME,
+  thumbnailStatuses,
 } from "@docspace/shared/constants";
 
 import {
@@ -729,7 +729,7 @@ class FilesStore {
 
         const includePathPart = pathParts.some(({ id }) => id === removedId);
 
-        if (includePathPart) {
+        if (includePathPart && !this.treeFoldersStore.isPersonalReadOnly) {
           window.DocSpace.navigate("/");
         }
 
@@ -1532,12 +1532,17 @@ class FilesStore {
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
     filterData.folder = folderId;
 
-    if (folderId === "@my" && this.userStore.user.isVisitor) {
+    if (
+      folderId === "@my" &&
+      this.userStore.user.isVisitor &&
+      !this.userStore.user.hasPersonalFolder
+    ) {
       const url = getCategoryUrl(CategoryType.Shared);
       return window.DocSpace.navigate(
         `${url}?${RoomsFilter.getDefault().toUrlParams()}`,
       );
     }
+
     this.setIsErrorRoomNotAvailable(false);
     this.setIsLoadedFetchFiles(false);
 
@@ -2040,8 +2045,8 @@ class FilesStore {
   };
 
   setCustomRoomQuota = async (
-    quotaSize,
     itemsIDs,
+    quotaSize,
     inRoom = false,
     filter = null,
   ) => {
@@ -2171,6 +2176,9 @@ class FilesStore {
         "make-form",
         "edit-pdf",
         "separator0",
+        "filling-status",
+        "start-filling",
+        "reset-and-start-filling",
         "submit-to-gallery",
         "separator-SubmitToGallery",
         "link-for-room-members",
@@ -2207,6 +2215,8 @@ class FilesStore {
         "delete",
         "remove-from-recent",
         "copy-general-link",
+        "separate-stop-filling",
+        "stop-filling",
       ];
 
       if (optionsToRemove.length) {
@@ -2227,11 +2237,34 @@ class FilesStore {
         ]);
       }
 
+      if (!item.security?.FillingStatus) {
+        fileOptions = removeOptions(fileOptions, ["filling-status"]);
+      }
+
+      if (!item.security?.StartFilling) {
+        fileOptions = removeOptions(fileOptions, ["start-filling"]);
+      }
+      if (!item.security?.ResetFilling) {
+        fileOptions = removeOptions(fileOptions, ["reset-and-start-filling"]);
+      }
+
+      if (!item.security?.StopFilling) {
+        fileOptions = removeOptions(fileOptions, [
+          "separate-stop-filling",
+          "stop-filling",
+        ]);
+      }
+
       if (!canDownload) {
         fileOptions = removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || (shouldFillForm && canFillForm) || isRecycleBinFolder) {
+      if (
+        !isPdf ||
+        (shouldFillForm && canFillForm) ||
+        isRecycleBinFolder ||
+        !item.security?.OpenForm
+      ) {
         fileOptions = removeOptions(fileOptions, ["open-pdf"]);
       }
 
@@ -2804,12 +2837,7 @@ class FilesStore {
   };
 
   createFile = async (folderId, title, templateId, formId) => {
-    return api.files
-      .createFile(folderId, title, templateId, formId)
-      .then((file) => {
-        return Promise.resolve(file);
-      })
-      .then(() => this.fetchFiles(folderId, this.filter, true, true, false));
+    return api.files.createFile(folderId, title, templateId, formId);
   };
 
   setRoomCreated = (roomCreated) => {
@@ -3292,6 +3320,7 @@ class FilesStore {
         external,
         passwordProtected,
         watermark,
+        formFillingStatus,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3470,6 +3499,7 @@ class FilesStore {
         external,
         passwordProtected,
         watermark,
+        formFillingStatus,
       };
     });
   };
@@ -3785,14 +3815,14 @@ class FilesStore {
     });
   };
 
-  getFileInfo = async (id) => {
-    const fileInfo = await api.files.getFileInfo(id);
+  getFileInfo = async (id, skipRedirect) => {
+    const fileInfo = await api.files.getFileInfo(id, undefined, skipRedirect);
     this.setFile(fileInfo);
     return fileInfo;
   };
 
-  getFolderInfo = async (id) => {
-    const folderInfo = await api.files.getFolderInfo(id);
+  getFolderInfo = async (id, skipRedirect) => {
+    const folderInfo = await api.files.getFolderInfo(id, skipRedirect);
     this.setFolder(folderInfo);
     return folderInfo;
   };
@@ -3822,7 +3852,7 @@ class FilesStore {
       `/doceditor?${searchParams.toString()}`,
     );
 
-    window.open(url, openOnNewPage ? "_blank" : "_self");
+    return window.open(url, openOnNewPage ? "_blank" : "_self");
   };
 
   createThumbnails = async (files = null) => {

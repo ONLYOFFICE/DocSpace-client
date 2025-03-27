@@ -26,11 +26,12 @@
 
 import { createContext, useContext } from "react";
 
-import SpacesStore from "./SpacesStore";
-
 import store from "client/store";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
+import SpacesStore from "./SpacesStore";
+
 const {
   authStore,
   userStore,
@@ -47,10 +48,15 @@ const {
 
 export class RootStore {
   authStore = authStore;
+
   userStore = userStore;
+
   settingsStore = settingsStore;
+
   currentTariffStatusStore = currentTariffStatusStore;
+
   spacesStore = new SpacesStore(this.settingsStore);
+
   dialogsStore = dialogsStore;
 }
 

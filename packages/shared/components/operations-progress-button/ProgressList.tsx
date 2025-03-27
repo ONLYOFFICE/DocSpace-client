@@ -24,9 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { observer } from "mobx-react";
-
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import DuplicateIconUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
@@ -96,9 +93,9 @@ const ProgressList = observer(
     const onOpenPanelOperation = (item: Operation) => {
       if (!item.showPanel) return;
 
-      item.showPanel(true);
-      onOpenPanel();
-    };
+    item.showPanel(true);
+    onOpenPanel();
+  };
 
     return (
       <div className="progress-container">

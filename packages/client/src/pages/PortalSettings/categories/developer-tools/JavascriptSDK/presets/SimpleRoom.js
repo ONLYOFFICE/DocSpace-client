@@ -43,7 +43,8 @@ import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.png?url";
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+
+import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
@@ -56,8 +57,15 @@ import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { SharedLinkHint } from "../sub-components/SharedLinkHint";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
 import Integration from "../sub-components/Integration";
+import { VersionSelector } from "../sub-components/VersionSelector";
 
-import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
+import {
+  dimensionsModel,
+  defaultSize,
+  defaultDimension,
+  sdkVersion,
+  sdkSource,
+} from "../constants";
 
 import {
   Controls,
@@ -77,13 +85,17 @@ const SimpleRoom = (props) => {
 
   setDocumentTitle(t("JavascriptSdk"));
 
+  const [version, onSetVersion] = useState(sdkVersion[200]);
+
+  const [source, onSetSource] = useState(sdkSource.Package);
+
   const [sharedLinks, setSharedLinks] = useState(null);
 
   const [selectedLink, setSelectedLink] = useState(null);
 
   const [config, setConfig] = useState({
     src: window.location.origin,
-    mode: "manager",
+    mode: "public-room",
     width: `${defaultSize.width}${defaultDimension.label}`,
     height: `${defaultSize.height}${defaultDimension.label}`,
     frameId: "ds-frame",
@@ -104,19 +116,44 @@ const SimpleRoom = (props) => {
     },
   });
 
-  const sdk = new SDK();
+  const fromPackage = source === sdkSource.Package;
+
+  const sdkScriptUrl = getSdkScriptUrl(version);
+
+  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
 
   const destroyFrame = () => {
-    sdk.frames[config.frameId]?.destroyFrame();
+    sdk?.frames[config.frameId]?.destroyFrame();
   };
 
   const initFrame = () => {
-    setTimeout(() => sdk.init(config), 10);
+    setTimeout(() => sdk?.init(config), 0);
   };
 
   useEffect(() => {
+    const script = document.getElementById("sdk-script");
+
+    if (script) {
+      script.remove();
+      destroyFrame();
+    }
+
+    if (!fromPackage) {
+      loadScript(sdkScriptUrl, "sdk-script");
+    }
+
+    return () => {
+      destroyFrame();
+      setTimeout(() => script?.remove(), 10);
+    };
+  }, [source, version]);
+
+  useEffect(() => {
     initFrame();
-    return () => destroyFrame();
+
+    return () => {
+      destroyFrame();
+    };
   });
 
   useEffect(() => {
@@ -166,6 +203,7 @@ const SimpleRoom = (props) => {
 
     newConfig.requestToken = links[0].sharedTo?.requestToken;
     newConfig.rootPath = "/rooms/share";
+    newConfig.mode = version === sdkVersion[200] ? "public-room" : "manager";
 
     setConfig((oldConfig) => {
       return { ...oldConfig, ...newConfig, init: true };
@@ -237,11 +275,16 @@ const SimpleRoom = (props) => {
           preview={preview}
           theme={theme}
           frameId={config.frameId}
-          scriptUrl={SDK_SCRIPT_URL}
+          scriptUrl={sdkScriptUrl}
           config={config}
           isDisabled={config?.id === undefined}
         />
         <Controls>
+          <VersionSelector
+            t={t}
+            onSetSource={onSetSource}
+            onSetVersion={onSetVersion}
+          />
           <ControlsSection>
             <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
             <ControlsGroup>

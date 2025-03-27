@@ -31,7 +31,6 @@ import React, {
   useRef,
   useEffect,
 } from "react";
-import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
@@ -355,4 +354,4 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   );
 };
 
-export default observer(OperationsProgressButton);
+export default OperationsProgress;

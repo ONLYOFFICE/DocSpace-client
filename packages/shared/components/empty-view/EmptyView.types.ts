@@ -18,6 +18,7 @@ export type EmptyViewLinkType = {
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
   /** Optional CSS class name for styling */
   className?: string;
+  isNext?: boolean;
 };
 
 export type EmptyViewItemType = {

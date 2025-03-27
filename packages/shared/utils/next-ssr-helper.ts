@@ -53,6 +53,7 @@ export const createRequest = (
   method: string,
   body?: string,
   apiSystem?: boolean,
+  signals: (AbortSignal | null | undefined)[] = [],
 ) => {
   const hdrs = new Headers(headers());
   hdrs.delete("content-length");
@@ -93,7 +94,8 @@ export const createRequest = (
   const urls = paths.map((path) => `${apiURL}${path}`);
 
   const requests = urls.map(
-    (url) => new Request(url, { headers: hdrs, method, body }),
+    (url, i) =>
+      new Request(url, { headers: hdrs, method, body, signal: signals[i] }),
   );
 
   return requests;

@@ -25,17 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ReactElement } from "react";
+
 import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
+
+import type { FileType } from "../../../enums";
+
+import { FolderItem } from "../folder-tile/FolderTile.types";
 
 export type FileItemType = {
   /** Unique identifier for the file */
-  id: string;
+  id: string | number;
   /** Title/name of the file */
   title: string;
   /** File extension (e.g., ".docx") */
   fileExst?: string;
   /** File type (e.g., "docx", "pdf") */
-  fileType?: string;
+  fileType?: FileType;
   /** Whether this item is a plugin */
   isPlugin?: boolean;
   /** Icon URL for plugin files */
@@ -63,7 +68,7 @@ export type FileItemType = {
     MediaView: boolean;
   };
   /** Context menu options for this file */
-  contextOptions?: ContextMenuModel[];
+  contextOptions?: string[];
 };
 
 /** Props for the FileTile component */
@@ -103,7 +108,7 @@ export type FileTileProps = {
   /** Color for the left border of the tile */
   sideColor?: string;
   /** Function to set the selection state of the tile */
-  setSelection?: (checked: boolean) => void;
+  setSelection?: (items: FolderItem[]) => void;
   /** Custom content element to be rendered in the tile */
   contentElement?: ReactElement;
   /** Custom badges to be displayed on the tile */

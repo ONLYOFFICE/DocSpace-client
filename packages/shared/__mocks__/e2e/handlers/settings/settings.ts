@@ -5,6 +5,7 @@ import {
   HEADER_WIZARD_WITH_AMI_SETTINGS,
   HEADER_PORTAL_DEACTIVATE_SETTINGS,
   HEADER_NO_STANDALONE_SETTINGS,
+  HEADER_AUTHENTICATED_SETTINGS,
 } from "../../utils";
 
 const PATH = "settings";
@@ -158,8 +159,6 @@ export const settingsWizzardWithAmi = {
   response: { ...settingsWizzard.response, isAmi: true },
 };
 
-export const settingsAuth = {};
-
 export const settingsNoAuth = {
   response: {
     trustedDomainsType: 0,
@@ -297,6 +296,11 @@ export const settingsNoAuth = {
   ],
   status: 0,
   statusCode: 200,
+};
+
+export const settingsAuth = {
+  ...settingsNoAuth,
+  response: { ...settingsNoAuth.response, socketUrl: "123" },
 };
 
 export const settingsNoAuthNoStandalone = {
@@ -448,6 +452,7 @@ export const settings = (headers?: Headers): Response => {
   let isWizardWithAmi = false;
   let isPortalDeactivate = false;
   let isNoStandalone = false;
+  let isAuthenticated = false;
 
   if (headers?.get(HEADER_WIZARD_SETTINGS)) {
     isWizard = true;
@@ -465,6 +470,10 @@ export const settings = (headers?: Headers): Response => {
     isNoStandalone = true;
   }
 
+  if (headers?.get(HEADER_AUTHENTICATED_SETTINGS)) {
+    isAuthenticated = true;
+  }
+
   if (isWizard) return new Response(JSON.stringify(settingsWizzard));
   if (isWizardWithAmi)
     return new Response(JSON.stringify(settingsWizzardWithAmi));
@@ -472,6 +481,7 @@ export const settings = (headers?: Headers): Response => {
     return new Response(JSON.stringify(settingsPortalDeactivate));
   if (isNoStandalone)
     return new Response(JSON.stringify(settingsNoAuthNoStandalone));
+  if (isAuthenticated) return new Response(JSON.stringify(settingsAuth));
 
   return new Response(JSON.stringify(settingsNoAuth));
 };

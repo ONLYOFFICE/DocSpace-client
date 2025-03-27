@@ -28,6 +28,7 @@ import { observer, inject } from "mobx-react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { TUser } from "@docspace/shared/api/people/types";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import TutorialPreview from "PUBLIC_DIR/images/form_filling_tutorial.gif";
 import TutorialPreviewDark from "PUBLIC_DIR/images/form_filling_tutorial_dark.gif";
 
@@ -47,7 +48,7 @@ type FormFillingTipsDialogProps = {
   visible: DialogsStore["welcomeFormFillingTipsVisible"];
   setWelcomeFormFillingTipsVisible: DialogsStore["setWelcomeFormFillingTipsVisible"];
   setFormFillingTipsDialog: DialogsStore["setFormFillingTipsDialog"];
-  setguidAnimationVisible: DialogsStore["setguidAnimationVisible"];
+  setGuidAnimationVisible: DialogsStore["setGuidAnimationVisible"];
   userId: TUser["id"];
 };
 
@@ -56,9 +57,21 @@ const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
     visible,
     setFormFillingTipsDialog,
     setWelcomeFormFillingTipsVisible,
-    setguidAnimationVisible,
+    setGuidAnimationVisible,
     userId,
   } = props;
+
+  const [isLoaded, setIsLoaded] = React.useState(false);
+  const imageRef = React.useRef<HTMLImageElement>(null);
+
+  const handleImageLoaded = () => {
+    if (!isLoaded) {
+      setIsLoaded(true);
+      if (imageRef.current) {
+        imageRef.current.style.display = "block";
+      }
+    }
+  };
 
   const theme = useTheme();
 
@@ -77,7 +90,7 @@ const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
     const closedFormFillingTips = localStorage.getItem(storageName);
 
     if (!closedFormFillingTips) {
-      setguidAnimationVisible(true);
+      setGuidAnimationVisible(true);
     }
     window.localStorage.setItem(storageName, "true");
   };
@@ -112,7 +125,22 @@ const FormFillingTipsDialog = (props: FormFillingTipsDialogProps) => {
           >
             {t("WelcomeDescription")}
           </Text>
-          <img src={image} alt="tips-preview" />
+          <div className="welcome-tips-image-container">
+            {!isLoaded ? (
+              <RectangleSkeleton
+                width="416px"
+                height="200px"
+                className="configName"
+              />
+            ) : null}
+            <img
+              src={image}
+              ref={imageRef}
+              className="welcome-tips-image"
+              onLoad={handleImageLoaded}
+              alt="tips-preview"
+            />
+          </div>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -150,14 +178,14 @@ export default inject(
       welcomeFormFillingTipsVisible: visible,
       setWelcomeFormFillingTipsVisible,
       setFormFillingTipsDialog,
-      setguidAnimationVisible,
+      setGuidAnimationVisible,
     } = dialogsStore;
 
     return {
       visible,
       setWelcomeFormFillingTipsVisible,
       setFormFillingTipsDialog,
-      setguidAnimationVisible,
+      setGuidAnimationVisible,
       userId: userStore?.user?.id,
     };
   },

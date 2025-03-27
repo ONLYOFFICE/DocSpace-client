@@ -77,7 +77,7 @@ const VirtualDataRoomBlock = ({
   showLifetimeDialog,
   setLifetimeDialogVisible,
 }) => {
-  const role = t("Translations:RoleViewer");
+  const role = t("Common:RoleViewer");
 
   const initialInfo = useRef(null);
 

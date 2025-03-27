@@ -66,7 +66,6 @@ newInstance
       "InfoPanel",
       "InviteDialog",
       "FormGallery",
-      "DownloadDialog",
       "DeleteDialog",
       "EmptyTrashDialog",
       "ConvertDialog",

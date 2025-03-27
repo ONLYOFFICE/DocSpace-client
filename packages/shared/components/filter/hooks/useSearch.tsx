@@ -39,9 +39,11 @@ const useSearch = ({
   getSelectedInputValue,
   placeholder,
   isIndexEditingMode,
+
+  initSearchValue,
 }: SearchInputProps) => {
   const searchRef = React.useRef<HTMLInputElement>(null);
-  const [inputValue, setInputValue] = React.useState("");
+  const [inputValue, setInputValue] = React.useState(initSearchValue ?? "");
 
   const onClearSearch = React.useCallback(() => {
     onSearch?.("");

@@ -182,6 +182,7 @@ const ArticleMainButtonContent = (props) => {
     getContactsModel,
     contactsCanCreate,
     setRefMap,
+    defaultOformLocale,
   } = props;
 
   const navigate = useNavigate();
@@ -208,7 +209,7 @@ const ArticleMainButtonContent = (props) => {
       const isPDF = format === "pdf";
 
       if (isPDF && isMobile) {
-        toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+        toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
         return;
       }
 
@@ -236,7 +237,7 @@ const ArticleMainButtonContent = (props) => {
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
-      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
       return;
     }
     setSelectFileDialogVisible(true);
@@ -293,15 +294,18 @@ const ArticleMainButtonContent = (props) => {
 
   const onShowGallery = () => {
     if (isMobile) {
-      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
       return;
     }
 
-    const initOformFilter = (
-      oformsFilter || oformsFilter.getDefault()
-    ).toUrlParams();
+    const initOformFilter = oformsFilter || oformsFilter.getDefault();
+    if (!initOformFilter.locale) initOformFilter.locale = defaultOformLocale;
+
     setOformFromFolderId(currentFolderId);
-    navigate(`/form-gallery/${currentFolderId}/filter?${initOformFilter}`);
+
+    navigate(
+      `/form-gallery/${currentFolderId}/filter?${initOformFilter.toUrlParams()}`,
+    );
   };
 
   React.useEffect(() => {
@@ -516,7 +520,7 @@ const ArticleMainButtonContent = (props) => {
       id: "actions_new-document",
       className: "main-button_drop-down",
       icon: ActionsDocumentsReactSvgUrl,
-      label: t("Files:Document"),
+      label: t("Common:Document"),
       onClick: onCreate,
       action: "docx",
       key: "docx",
@@ -526,7 +530,7 @@ const ArticleMainButtonContent = (props) => {
       id: "actions_new-spreadsheet",
       className: "main-button_drop-down",
       icon: SpreadsheetReactSvgUrl,
-      label: t("Files:Spreadsheet"),
+      label: t("Common:Spreadsheet"),
       onClick: onCreate,
       action: "xlsx",
       key: "xlsx",
@@ -536,7 +540,7 @@ const ArticleMainButtonContent = (props) => {
       id: "actions_new-folder",
       className: "main-button_drop-down",
       icon: CatalogFolderReactSvgUrl,
-      label: t("Files:Folder"),
+      label: t("Common:Folder"),
       onClick: onCreate,
       key: "new-folder",
     };
@@ -545,7 +549,7 @@ const ArticleMainButtonContent = (props) => {
       id: "actions_new-presentation",
       className: "main-button_drop-down",
       icon: ActionsPresentationReactSvgUrl,
-      label: t("Files:Presentation"),
+      label: t("Common:Presentation"),
       onClick: onCreate,
       action: "pptx",
       key: "pptx",
@@ -868,7 +872,8 @@ export default inject(
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
-    const { setOformFromFolderId, oformsFilter } = oformsStore;
+    const { setOformFromFolderId, oformsFilter, defaultOformLocale } =
+      oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
     const { frameConfig, isFrame } = settingsStore;
@@ -936,6 +941,7 @@ export default inject(
       getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
       contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
       setRefMap,
+      defaultOformLocale,
     };
   },
 )(

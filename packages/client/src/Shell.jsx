@@ -97,6 +97,7 @@ const Shell = ({ page = "home", ...rest }) => {
     registrationDate,
     logoText,
     setLogoText,
+    standalone,
   } = rest;
 
   const theme = useTheme();
@@ -138,8 +139,18 @@ const Shell = ({ page = "home", ...rest }) => {
 
   useEffect(() => {
     SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "storage-encryption",
+    });
+
+    SocketHelper.emit(SocketCommands.Subscribe, {
       roomParts: "restore",
     });
+
+    if (standalone) {
+      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "restore",
+      });
+    }
 
     SocketHelper.emit(SocketCommands.Subscribe, {
       roomParts: "quota",
@@ -150,6 +161,14 @@ const Shell = ({ page = "home", ...rest }) => {
       individual: true,
     });
   }, []);
+
+  useEffect(() => {
+    if (standalone) {
+      SocketHelper.emit(SocketCommands.SubscribeInSpaces, {
+        roomParts: "restore",
+      });
+    }
+  }, [standalone]);
 
   useEffect(() => {
     SocketHelper.emit(SocketCommands.Subscribe, { roomParts: userId });
@@ -538,6 +557,7 @@ const ShellWrapper = inject(
       buildVersionInfo,
       logoText,
       setLogoText,
+      standalone,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -613,6 +633,7 @@ const ShellWrapper = inject(
       releaseDate: buildVersionInfo.releaseDate,
       logoText,
       setLogoText,
+      standalone,
     };
   },
 )(observer(Shell));

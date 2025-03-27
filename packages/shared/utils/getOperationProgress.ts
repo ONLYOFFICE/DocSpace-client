@@ -25,12 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getProgress } from "../api/files";
+import type { TOperation } from "../api/files/types";
 
 export const getOperationProgress = async (
   id: string,
   errorMessage: string,
 ) => {
-  const promise = new Promise((resolve, reject) => {
+  const promise = new Promise<TOperation | undefined>((resolve, reject) => {
     setTimeout(async () => {
       try {
         await getProgress().then((res) => {

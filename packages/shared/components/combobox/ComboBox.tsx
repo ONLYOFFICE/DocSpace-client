@@ -272,6 +272,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
       ? 0
       : 1;
 
+  // Todo: Add support advancedOptions === Array
   const withAdvancedOptions =
     React.isValidElement(advancedOptions) && !!advancedOptions?.props.children;
 
@@ -316,7 +317,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         <DropDownItem
           key={key}
           label={label}
-          icon={icon}
+          icon={icon && typeof icon === "string" ? icon : undefined}
           isBeta={isBeta}
           data-testid="drop-down-item"
           data-focused={isOpen ? isActiveOption : undefined}
@@ -387,7 +388,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
   return (
     <StyledComboBox
       ref={ref}
-      size={size}
+      size={size as ComboBoxSize}
       scaled={scaled}
       onClick={comboBoxClick}
       isOpen={isOpen}
@@ -409,7 +410,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
         innerContainer={children}
         innerContainerClassName="optionalBlock"
         isOpen={isOpen}
-        size={size}
+        size={size as ComboBoxSize}
         scaled={scaled}
         comboIcon={comboIcon}
         modernView={modernView}

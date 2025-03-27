@@ -39,7 +39,7 @@ export function createLoader(
     timer = undefined;
   };
 
-  const startLoader = (callback: Function) => {
+  const startLoader = (callback: VoidFunction) => {
     timer = window.setTimeout(() => {
       startedLoader = new Date();
       callback();
@@ -48,7 +48,7 @@ export function createLoader(
     return timer;
   };
 
-  const endLoader = (callback: Function): void => {
+  const endLoader = (callback: VoidFunction): void => {
     if (startedLoader) {
       const currentDate = new Date();
       const diff = Math.abs(startedLoader.getTime() - currentDate.getTime());

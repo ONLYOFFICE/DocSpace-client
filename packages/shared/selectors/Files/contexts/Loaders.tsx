@@ -44,10 +44,12 @@ export const LoadersContext = createContext<TLoaderContext>({
 
 export const LoadersContextProvider = ({
   children,
+  withInit,
 }: {
   children: ReactNode;
+  withInit?: boolean;
 }) => {
-  const value = useLoadersHelper();
+  const value = useLoadersHelper({ withInit });
 
   return (
     <LoadersContext.Provider value={value}>{children}</LoadersContext.Provider>

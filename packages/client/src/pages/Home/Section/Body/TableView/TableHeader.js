@@ -28,8 +28,7 @@ import React from "react";
 import { TableHeader } from "@docspace/shared/components/table";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { Events, RoomsType } from "@docspace/shared/enums";
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { Events, SortByFieldName, RoomsType } from "@docspace/shared/enums";
 
 class FilesTableHeader extends React.Component {
   constructor(props) {
@@ -225,6 +224,8 @@ class FilesTableHeader extends React.Component {
       sizeColumnIsEnabled,
       createdColumnIsEnabled,
       modifiedColumnIsEnabled,
+      erasureColumnIsEnabled,
+      isPersonalReadOnly,
     } = this.props;
 
     const authorBlock = !isPublicRoom
@@ -235,6 +236,18 @@ class FilesTableHeader extends React.Component {
           resizable: true,
           sortBy: SortByFieldName.Author,
           // onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        }
+      : {};
+
+    const erasureBlock = isPersonalReadOnly
+      ? {
+          key: "Erasure",
+          title: t("ByErasure"),
+          enable: erasureColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.ModifiedDate,
+          onClick: this.onFilter,
           onChange: this.onColumnChange,
         }
       : {};
@@ -269,6 +282,7 @@ class FilesTableHeader extends React.Component {
         onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
+      { ...erasureBlock },
       {
         key: "Size",
         title: t("Common:Size"),
@@ -863,8 +877,13 @@ export default inject(
       setRoomsFilter,
       indexColumnSize,
     } = filesStore;
-    const { isRecentTab, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
-      treeFoldersStore;
+    const {
+      isRecentTab,
+      isArchiveFolder,
+      isTrashFolder,
+      isTemplatesFolder,
+      isPersonalReadOnly,
+    } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
     const { isFrame, frameConfig } = settingsStore;
@@ -1009,6 +1028,7 @@ export default inject(
 
       indexColumnSize,
       changeDocumentsTabs,
+      isPersonalReadOnly,
     };
   },
 )(

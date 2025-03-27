@@ -26,17 +26,8 @@
 
 import { ContextMenuModel } from "@docspace/shared/components/context-menu/ContextMenu.types";
 import { TFunction } from "i18next";
+import { TagType } from "@docspace/shared/components/tags/Tags.types";
 import { TileItem } from "../tile-container/TileContainer.types";
-
-export interface RoomTag {
-  isThirdParty?: boolean;
-  isDefault?: boolean;
-  icon?: string;
-  label: string;
-  roomType: string;
-  providerType?: string;
-  onClick?: () => void;
-}
 
 export interface RoomItem extends TileItem {
   title: string;
@@ -44,7 +35,7 @@ export interface RoomItem extends TileItem {
   providerType?: string;
   providerKey?: string;
   thirdPartyIcon?: string;
-  tags?: RoomTag[];
+  tags?: Array<TagType | string>;
   contextOptions?: ContextMenuModel[];
   logo?: {
     small?: string;
@@ -84,7 +75,7 @@ export type RoomTileProps = {
   /** Column count for tags layout */
   columnCount: number;
   /** Callback for tag selection */
-  selectTag: (tag: RoomTag | undefined) => void;
+  selectTag: (tag: Array<TagType | string> | undefined) => void;
   /** Callback for option selection */
   selectOption: (option: SelectOption) => void;
   /** Function to get room type name */

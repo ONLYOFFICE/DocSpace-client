@@ -115,7 +115,7 @@ const ButtonContainer = (props) => {
       );
       setTenantStatus(TenantStatus.PortalRestore);
 
-      SocketHelper.emit(SocketCommands.RestoreBackup);
+      SocketHelper.emit(SocketCommands.RestoreBackup, { dump: isManagement() });
 
       navigate(
         combineUrl(

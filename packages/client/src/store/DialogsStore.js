@@ -29,6 +29,7 @@ import {
   FilesSelectorFilterTypes,
   ShareAccessRights,
   Events,
+  RoomsType,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -70,6 +71,8 @@ class DialogsStore {
   deleteDialogVisible = false;
 
   lifetimeDialogVisible = false;
+
+  reducedRightsData = { visible: false, adminName: "" };
 
   lifetimeDialogCB = null;
 
@@ -212,6 +215,7 @@ class DialogsStore {
   shareCollectSelector = {
     visible: false,
     file: null,
+    createDefineRoomType: RoomsType.FormRoom,
   };
 
   warningQuotaDialogVisible = false;
@@ -271,7 +275,16 @@ class DialogsStore {
 
   downloadItems = [];
 
+  fillingStatusPanel = false;
+
+  stopFillingDialogData = {
+    visible: false,
+    formId: null,
+  };
+
   operationCancelVisible = false;
+
+  isShareFormData = { visible: false, updateAccessLink: null, fileId: null };
 
   constructor(
     authStore,
@@ -290,6 +303,10 @@ class DialogsStore {
     this.versionHistoryStore = versionHistoryStore;
     this.infoPanelStore = infoPanelStore;
   }
+
+  setIsShareFormData = ({ visible, updateAccessLink, fileId }) => {
+    this.isShareFormData = { visible, updateAccessLink, fileId };
+  };
 
   setNewFilesPanelFolderId = (folderId) => {
     this.newFilesPanelFolderId = folderId;
@@ -413,6 +430,13 @@ class DialogsStore {
     this.lifetimeDialogCB = cb;
   };
 
+  setReducedRightsData = (reducedRightsVisible, adminName = "") => {
+    this.reducedRightsData = {
+      visible: reducedRightsVisible,
+      adminName,
+    };
+  };
+
   setEventDialogVisible = (eventDialogVisible) => {
     this.eventDialogVisible = eventDialogVisible;
   };
@@ -430,7 +454,7 @@ class DialogsStore {
       if (item.checked) {
         if (!!item.fileExst || item.contentLength) {
           const format =
-            !item.format || item.format === t("OriginalFormat")
+            !item.format || item.format === t("Common:OriginalFormat")
               ? item.fileExst
               : item.format;
           if (!singleFileUrl) {
@@ -815,12 +839,18 @@ class DialogsStore {
   /**
    * @param {boolean} visible
    * @param {import("@docspace/shared/api/files/types").TFile} [file = null]
+   * @param {import("@docspace/shared/enums").RoomsType} [createDefineRoomType = RoomsType.FormRoom]
    * @returns {void}
    */
-  setShareCollectSelector = (visible, file = null) => {
+  setShareCollectSelector = (
+    visible,
+    file = null,
+    createDefineRoomType = RoomsType.FormRoom,
+  ) => {
     this.shareCollectSelector = {
       visible,
       file,
+      createDefineRoomType,
     };
   };
 
@@ -860,7 +890,7 @@ class DialogsStore {
     this.covers = covers;
   };
 
-  setguidAnimationVisible = (animation) => {
+  setGuidAnimationVisible = (animation) => {
     this.guidAnimationVisible = animation;
   };
 
@@ -937,6 +967,21 @@ class DialogsStore {
     const response = await getRoomCovers();
 
     this.setCovers(response);
+  };
+
+  setFillingStatusPanelVisible = (visible) => {
+    this.fillingStatusPanel = visible;
+  };
+
+  /**
+   * @param {boolean} visible
+   * @param {number=} formId
+   */
+  setStopFillingDialogVisible = (visible, formId = null) => {
+    this.stopFillingDialogData = {
+      visible,
+      formId,
+    };
   };
 }
 

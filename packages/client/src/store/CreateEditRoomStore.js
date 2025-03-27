@@ -526,7 +526,7 @@ class CreateEditRoomStore {
     this.setIsLoading(true);
 
     const isDeleteLogo = isTemplate
-      ? !!logo.original && !icon.uploadedFile
+      ? !!logo?.original && !icon.uploadedFile
       : false;
 
     const copyLogo =
@@ -573,7 +573,7 @@ class CreateEditRoomStore {
               ? [bufferSelection]
               : [];
 
-        preparingDataForCopyingToRoom(room, selections).catch((error) =>
+        preparingDataForCopyingToRoom(room.id, selections).catch((error) =>
           console.error(error),
         );
       }

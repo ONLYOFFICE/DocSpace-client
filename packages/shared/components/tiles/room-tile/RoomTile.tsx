@@ -28,7 +28,8 @@ import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Tags } from "@docspace/shared/components/tags";
 import classNames from "classnames";
-import { RoomTileProps, RoomTag, RoomItem } from "./RoomTile.types";
+import { TagType } from "@docspace/shared/components/tags/Tags.types";
+import { RoomTileProps, RoomItem } from "./RoomTile.types";
 import { BaseTile } from "../base-tile/BaseTile";
 import { TileItem } from "../tile-container/TileContainer.types";
 
@@ -85,15 +86,15 @@ export const RoomTile = ({
     }
   };
 
-  const tags = [];
+  const tags: Array<TagType | string> = [];
 
   if (item.providerType) {
     tags.push({
       isThirdParty: true,
       icon: item.thirdPartyIcon,
       label: item.providerKey || item.providerType,
-      roomType: item.roomType,
-      providerType: item.providerType,
+      roomType: Number(item.roomType),
+      providerType: Number(item.providerType),
       onClick: () =>
         selectOption({
           option: "typeProvider",
@@ -103,12 +104,12 @@ export const RoomTile = ({
   }
 
   if (item.tags && item?.tags?.length > 0) {
-    tags.push(...(item.tags as RoomTag[]));
+    tags.push(...item.tags);
   } else {
     tags.push({
       isDefault: true,
       label: getRoomTypeName(item.roomType, t),
-      roomType: item.roomType,
+      roomType: Number(item.roomType),
       onClick: () =>
         selectOption({
           option: "defaultTypeRoom",
@@ -132,7 +133,7 @@ export const RoomTile = ({
       return;
     }
     if ("label" in tag && "roomType" in tag) {
-      selectTag(tag as RoomTag);
+      selectTag(tag as Array<TagType | string>);
     }
   };
 

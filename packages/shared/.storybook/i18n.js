@@ -26,6 +26,9 @@ newInstance
     interpolation: {
       escapeValue: false,
     },
+    react: {
+      useSuspense: false,
+    },
   });
 
 export default newInstance;

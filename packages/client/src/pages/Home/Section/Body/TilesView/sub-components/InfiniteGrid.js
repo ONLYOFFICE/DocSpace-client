@@ -29,8 +29,8 @@ import React, { useEffect, useState } from "react";
 import uniqueid from "lodash/uniqueId";
 
 import { TileSkeleton } from "@docspace/shared/skeletons/tiles";
+import { getCountTilesInRow } from "@docspace/shared/utils";
 
-import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
 import {
   StyledCard,
   StyledItem,

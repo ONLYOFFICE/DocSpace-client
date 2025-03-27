@@ -28,7 +28,8 @@ import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import SDK from "@onlyoffice/docspace-sdk-js";
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+
+import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { WidthSetter } from "../sub-components/WidthSetter";
@@ -37,8 +38,15 @@ import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
 import Integration from "../sub-components/Integration";
+import { VersionSelector } from "../sub-components/VersionSelector";
 
-import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
+import {
+  dimensionsModel,
+  defaultSize,
+  defaultDimension,
+  sdkVersion,
+  sdkSource,
+} from "../constants";
 
 import {
   Controls,
@@ -52,6 +60,10 @@ const DocSpace = (props) => {
   const { t, theme, currentColorScheme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
+
+  const [version, onSetVersion] = useState(sdkVersion[200]);
+
+  const [source, onSetSource] = useState(sdkSource.Package);
 
   const [config, setConfig] = useState({
     src: window.location.origin,
@@ -76,19 +88,44 @@ const DocSpace = (props) => {
     },
   });
 
-  const sdk = new SDK();
+  const fromPackage = source === sdkSource.Package;
+
+  const sdkScriptUrl = getSdkScriptUrl(version);
+
+  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
 
   const destroyFrame = () => {
-    sdk.frames[config.frameId]?.destroyFrame();
+    sdk?.frames[config.frameId]?.destroyFrame();
   };
 
   const initFrame = () => {
-    setTimeout(() => sdk.init(config), 10);
+    setTimeout(() => sdk?.init(config), 0);
   };
 
   useEffect(() => {
+    const script = document.getElementById("sdk-script");
+
+    if (script) {
+      script.remove();
+      destroyFrame();
+    }
+
+    if (!fromPackage) {
+      loadScript(sdkScriptUrl, "sdk-script");
+    }
+
+    return () => {
+      destroyFrame();
+      setTimeout(() => script?.remove(), 10);
+    };
+  }, [source, version]);
+
+  useEffect(() => {
     initFrame();
-    return () => destroyFrame();
+
+    return () => {
+      destroyFrame();
+    };
   });
 
   useEffect(() => {
@@ -124,11 +161,16 @@ const DocSpace = (props) => {
           preview={preview}
           theme={theme}
           frameId={config.frameId}
-          scriptUrl={SDK_SCRIPT_URL}
+          scriptUrl={sdkScriptUrl}
           config={config}
           currentColorScheme={currentColorScheme}
         />
         <Controls>
+          <VersionSelector
+            t={t}
+            onSetSource={onSetSource}
+            onSetVersion={onSetVersion}
+          />
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
             <WidthSetter

@@ -34,7 +34,7 @@ export type TTitles = {
   infoPanel?: string;
   actions?: string;
   contextMenu?: string;
-  trashWarning?: string;
+  warningText?: string;
 };
 
 export type TContextButtonProps = {
@@ -78,6 +78,12 @@ export type TArrowButtonProps = {
   onBackToParentFolder: TOnBackToParenFolder;
 };
 
+export type TBadgesProps = {
+  titleIcon: string;
+  isRootFolder: boolean;
+  titleIconTooltip?: string;
+};
+
 export type TTextProps = {
   title: string;
   isOpen: boolean;
@@ -117,7 +123,10 @@ export type TNavigationItem = {
   isRootRoom: boolean;
 };
 
-export type TRowParam = { withLogo: boolean; currentDeviceType: DeviceType };
+export type TRowParam = {
+  withLogo: boolean | string;
+  currentDeviceType: DeviceType;
+};
 
 export type TRowData = [TNavigationItem[], TOnNavigationItemClick, TRowParam];
 
@@ -153,6 +162,7 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
     /** Used for guidance */
     addButtonRef?: RefObject<HTMLDivElement>;
     buttonRef?: LegacyRef<HTMLButtonElement>;
+    isContextButtonVisible?: boolean;
   };
 
 export type TDropBoxProps = TArrowButtonProps &

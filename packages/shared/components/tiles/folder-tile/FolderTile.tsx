@@ -35,7 +35,7 @@ import {
 } from "@docspace/shared/components/context-menu-button";
 import {
   ContextMenu,
-  TContextMenuRef,
+  ContextMenuRefType,
 } from "@docspace/shared/components/context-menu";
 import { FolderTileProps } from "./FolderTile.types";
 import { hasOwnProperty } from "../../../utils/object";
@@ -72,7 +72,7 @@ export const FolderTile = ({
 
   const { t } = useTranslation(["Translations"]);
 
-  const cmRef = useRef<TContextMenuRef>(null);
+  const cmRef = useRef<ContextMenuRefType>(null);
 
   const { isRTL } = useInterfaceDirection();
   const contextMenuDirection = isRTL ? "left" : "right";
@@ -135,7 +135,8 @@ export const FolderTile = ({
     if (
       e.detail === 1 &&
       !(e.target as HTMLElement).closest(".badges") &&
-      !(e.target as HTMLElement).closest(".item-file-name")
+      !(e.target as HTMLElement).closest(".item-file-name") &&
+      !(e.target as HTMLElement).closest(`.${styles.checkbox}`)
     ) {
       if (
         (e.target as HTMLElement).nodeName !== "IMG" &&
@@ -197,6 +198,7 @@ export const FolderTile = ({
       className={folderTileClassNames}
       onClick={onFolderClick}
       ref={forwardRef}
+      onContextMenu={onContextMenu}
     >
       {element && !isEdit ? (
         !inProgress ? (

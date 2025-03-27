@@ -285,6 +285,13 @@ const StyledHistoryBlockFile = styled.div.attrs(injectDefaultTheme)`
     }
   }
 
+  .old-item-title {
+    .name,
+    .exst {
+      ${strikethroughStyles}
+    }
+  }
+
   .location-btn {
     margin-inline-start: 8px;
     min-width: 16px;

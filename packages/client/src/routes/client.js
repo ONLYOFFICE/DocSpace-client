@@ -552,7 +552,7 @@ const ClientRoutes = [
     ],
   },
   {
-    path: "/sdk/:mode",
+    path: "/old-sdk/:mode",
     lazy: () => import("SRC_DIR/pages/Sdk"),
   },
   {
@@ -622,6 +622,22 @@ const ClientRoutes = [
             <AccessRestricted />
           </ErrorBoundary>
         </PublicRoute>
+      );
+
+      return { Component };
+    },
+  },
+  {
+    path: "/encryption-portal",
+    async lazy() {
+      const { EncryptionPortal } = await componentLoader(
+        () => import("@docspace/shared/pages/EncryptionPortal"),
+      );
+
+      const Component = () => (
+        <ErrorBoundary>
+          <EncryptionPortal />
+        </ErrorBoundary>
       );
 
       return { Component };

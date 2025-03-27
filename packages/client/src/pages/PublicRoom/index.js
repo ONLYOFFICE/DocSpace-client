@@ -32,9 +32,9 @@ import { Loader } from "@docspace/shared/components/loader";
 import { ValidationStatus } from "@docspace/shared/enums";
 import SectionWrapper from "SRC_DIR/components/Section";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { PublicRoomError } from "@docspace/shared/pages/PublicRoom";
 
 import PublicRoomPage from "./PublicRoomPage";
-import RoomErrors from "./sub-components/RoomErrors";
 import RoomPassword from "./sub-components/RoomPassword";
 
 const PublicRoom = (props) => {
@@ -68,14 +68,15 @@ const PublicRoom = (props) => {
     const filterObj = FilesFilter.getFilter(window.location);
 
     if (filterObj?.folder && filterObj?.folder !== "@my") {
-      const url = `${location.pathname}?key=${key}&${filterObj.toUrlParams()}`;
+      const url = `${location.pathname}?${filterObj.toUrlParams()}`;
 
       navigate(url);
     } else {
       const newFilter = FilesFilter.getDefault();
       newFilter.folder = roomId;
+      newFilter.key = key;
 
-      const url = `${location.pathname}?key=${key}&${newFilter.toUrlParams()}`;
+      const url = `${location.pathname}?${newFilter.toUrlParams()}`;
 
       navigate(url);
     }
@@ -106,9 +107,9 @@ const PublicRoom = (props) => {
       case ValidationStatus.Ok:
         return <PublicRoomPage />;
       case ValidationStatus.Invalid:
-        return <RoomErrors isInvalid />;
+        return <PublicRoomError isInvalid />;
       case ValidationStatus.Expired:
-        return <RoomErrors />;
+        return <PublicRoomError />;
       case ValidationStatus.Password:
         return <RoomPassword roomKey={key} />;
 

@@ -147,24 +147,19 @@ export const RoomContent = ({ item, isCurrentPortal, theme }: TRoomContent) => {
       className="spaces_row-content"
     >
       <div className="user-container-wrapper" onClick={onSpaceClick}>
-        <Text
-          fontWeight={600}
-          fontSize="14px"
-          truncate={true}
-          className="domain-text"
-        >
+        <Text fontWeight={600} fontSize="14px" truncate className="domain-text">
           {`${item.domain}`}
         </Text>
-        {currentDeviceType === DeviceType.mobile && (
+        {currentDeviceType === DeviceType.mobile ? (
           <ReactSVG src={ArrowIcon} className="arrow-icon" />
-        )}
+        ) : null}
       </div>
 
       {isCurrentPortal ? (
         <Text
           fontSize="14px"
           fontWeight={600}
-          truncate={true}
+          truncate
           className="spaces_row-current"
         >
           {t("CurrentSpace")}
@@ -173,7 +168,7 @@ export const RoomContent = ({ item, isCurrentPortal, theme }: TRoomContent) => {
         <Text
           fontSize="12px"
           fontWeight={600}
-          truncate={true}
+          truncate
           className="complete-setup"
         >
           {t("CompleteSetup")}
@@ -181,7 +176,7 @@ export const RoomContent = ({ item, isCurrentPortal, theme }: TRoomContent) => {
       ) : null}
 
       {isWizardCompleted ? (
-        <Text fontSize="12px" as="div" fontWeight={600} truncate={true}>
+        <Text fontSize="12px" as="div" fontWeight={600} truncate>
           {`${t("PortalStats", {
             roomCount: roomsCount,
             userCount: roomAdminCount + usersCount,
@@ -192,7 +187,7 @@ export const RoomContent = ({ item, isCurrentPortal, theme }: TRoomContent) => {
         <Text
           fontSize="12px"
           fontWeight={600}
-          truncate={true}
+          truncate
           className="complete-setup"
         >
           {t("CompleteSetup")}

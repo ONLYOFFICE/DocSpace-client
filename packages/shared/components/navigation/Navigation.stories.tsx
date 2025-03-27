@@ -51,7 +51,7 @@ Default.args = {
     infoPanel: "Info Panel",
     actions: "Actions",
     contextMenu: "Context Menu",
-    trashWarning: "Warning",
+    warningText: "Warning",
   },
   withMenu: true,
   onPlusClick: () => console.log("Plus clicked"),

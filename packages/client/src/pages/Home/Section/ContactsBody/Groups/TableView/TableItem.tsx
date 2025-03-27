@@ -161,6 +161,7 @@ const GroupsTableItem = ({
             fontSize="12px"
             isTextOverflow
             className="table-cell_group-manager"
+            truncate
           >
             {item.name}
           </Link>
@@ -193,6 +194,7 @@ const GroupsTableItem = ({
               className="table-cell_group-manager"
               color={globalColors.gray}
               dir="auto"
+              truncate
             >
               {item.manager?.displayName}
             </Text>

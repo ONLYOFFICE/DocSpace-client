@@ -193,7 +193,7 @@ const HistoryHeader = (props) => {
   } = props;
   const navigate = useNavigate();
   const onBack = () => {
-    navigate("/portal-settings/developer-tools/webhooks");
+    navigate("/developer-tools/webhooks");
   };
   const { t } = useTranslation(["Webhooks", "Common", "InfoPanel"]);
   const { id } = useParams();

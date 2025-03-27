@@ -70,7 +70,6 @@ const ClientForm = ({
 
   currentDeviceType,
 
-  jwtToken,
   setJwtToken,
 }: ClientFormProps) => {
   const navigate = useNavigate();
@@ -121,7 +120,7 @@ const ClientForm = ({
   }, [clientSecretProps, setClientSecretProps]);
 
   const onCancelClick = () => {
-    navigate("/portal-settings/developer-tools/oauth");
+    navigate("/developer-tools/oauth");
   };
 
   const onSaveClick = async () => {
@@ -153,9 +152,9 @@ const ClientForm = ({
 
         setIsRequestRunning(true);
 
-        await addClient?.(form, jwtToken!);
+        await addClient?.(form);
       } else {
-        await updateClient?.(clientId, form, jwtToken!);
+        await updateClient?.(clientId, form);
       }
 
       onCancelClick();
@@ -208,10 +207,9 @@ const ClientForm = ({
 
     setIsLoading(true);
 
-    const token = jwtToken || (await setJwtToken!());
-    if (!token) return;
+    await setJwtToken!();
 
-    if (id || clientId) actions.push(getClient(id ?? clientId, token!));
+    if (id || clientId) actions.push(getClient(id ?? clientId));
 
     if (scopeList?.length === 0) actions.push(fetchScopes?.());
 
@@ -256,7 +254,7 @@ const ClientForm = ({
 
       toastr.error(e as unknown as TData);
     }
-  }, [clientId, id, client, scopeList?.length, fetchScopes, jwtToken]);
+  }, [clientId, id, client, scopeList?.length, fetchScopes]);
 
   React.useEffect(() => {
     getClientData();
@@ -478,7 +476,6 @@ export default inject(
       setClientSecret,
       clientSecret,
 
-      jwtToken,
       setJwtToken,
     } = oauthStore;
 
@@ -496,7 +493,6 @@ export default inject(
       clientSecretProps: clientSecret,
       maxImageUploadSize: maxImageUploadSize ?? undefined,
 
-      jwtToken,
       setJwtToken,
     };
 

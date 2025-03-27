@@ -54,6 +54,7 @@ import { TGroup } from "../../api/groups/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Text } from "../../components/text";
 import { globalColors } from "../../themes";
+import { isNextImage } from "../../utils/typeGuards";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
 import { StyledSendClockIcon } from "./PeopleSelector.styled";
@@ -90,7 +91,11 @@ const toListItem = (
 
     const role = getUserType(item);
 
-    const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
+    const defaultUserPhotoURL = isNextImage(DefaultUserPhoto)
+      ? DefaultUserPhoto.src
+      : DefaultUserPhoto;
+
+    const userAvatar = hasAvatar ? avatar : defaultUserPhotoURL;
 
     const isInvited = checkIfUserInvited
       ? checkIfUserInvited(item)
@@ -211,6 +216,8 @@ const PeopleSelector = ({
   withoutBackground,
   withBlur,
   setActiveTab,
+  injectedElement,
+  filterItems,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -318,7 +325,10 @@ const PeopleSelector = ({
 
       const data = response.items
         .filter((item) => {
-          if (excludeItems && excludeItems.includes(item.id)) {
+          if (
+            (excludeItems && excludeItems.includes(item.id)) ||
+            filterItems?.(item)
+          ) {
             totalDifferent += 1;
             return false;
           }
@@ -350,9 +360,14 @@ const PeopleSelector = ({
         setItemsList((i) => {
           const tempItems = [...i, ...data];
 
+          const ids = new Set();
+          const filteredTempItems = tempItems.filter(
+            (item) => !ids.has(item.id) && ids.add(item.id),
+          );
+
           const newItems = withOutCurrentAuthorizedUser
-            ? removeCurrentUserFromList(tempItems)
-            : moveCurrentUserToTopOfList(tempItems);
+            ? removeCurrentUserFromList(filteredTempItems)
+            : moveCurrentUserToTopOfList(filteredTempItems);
 
           setHasNextPage(newItems.length < newTotal);
 
@@ -381,6 +396,7 @@ const PeopleSelector = ({
       withGroups,
       withGuests,
       withOutCurrentAuthorizedUser,
+      filterItems,
     ],
   );
 
@@ -585,6 +601,7 @@ const PeopleSelector = ({
       {...withAccessRightsProps}
       {...withAside}
       id={id}
+      injectedElement={injectedElement}
       alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
       className={className}
       style={style}

@@ -43,6 +43,7 @@ import {
   TGetRooms,
   TExportRoomIndexTask,
   TPublicRoomPassword,
+  TValidateShareRoom,
   TRoom,
 } from "./types";
 
@@ -84,7 +85,7 @@ export function getRoomInfo(id) {
   return request(options).then((res) => {
     if (res.rootFolderType === FolderType.Archive) res.isArchive = true;
 
-    return res;
+    return res as TRoom;
   });
 }
 
@@ -461,7 +462,7 @@ export function getPrimaryLink(roomId) {
 }
 
 export function validatePublicRoomKey(key) {
-  return request({
+  return request<TValidateShareRoom>({
     method: "get",
     url: `files/share/${key}`,
   });

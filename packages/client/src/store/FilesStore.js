@@ -1698,6 +1698,10 @@ class FilesStore {
             const isTemplatesFolder =
               data.current.rootFolderType === FolderType.RoomTemplates;
 
+            const isRootTemplates =
+              idx === 0 &&
+              data.current.rootFolderType === FolderType.RoomTemplates;
+
             return {
               id: folder.id,
               title,
@@ -1709,6 +1713,7 @@ class FilesStore {
               external,
               quotaLimit,
               usedSpace,
+              isRootTemplates,
             };
           }),
         ).then((res) => {

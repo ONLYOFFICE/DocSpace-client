@@ -1103,8 +1103,8 @@ class UploadDataStore {
     this.convertFilesSize = convertSize;
 
     const clearArray = removeDuplicate([
-      ...allFiles,
       ...this.uploadedFilesHistory,
+      ...allFiles,
     ]);
 
     // this.uploadedFilesHistory = clearArray;

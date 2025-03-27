@@ -2041,7 +2041,7 @@ class UploadDataStore {
       return;
     }
 
-    let progress = data.progress;
+    // let progress = data.progress;
 
     let operationItem = data;
     let finished = data.finished;
@@ -2053,12 +2053,12 @@ class UploadDataStore {
       );
       operationItem = item;
 
-      progress = item ? item.progress : 100;
+      // progress = item ? item.progress : 100;
       finished = item ? item.finished : true;
 
       setSecondaryProgressBarData({
         operation: pbData.operation,
-        percent: progress,
+        //  percent: progress,
         alert: false,
         currentFile: item,
         operationId: pbData.operationId,

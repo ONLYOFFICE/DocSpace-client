@@ -69,6 +69,7 @@ class PrimaryProgressDataStore {
       if (progressInfo.completed && progressInfo.percent > 0) {
         progressInfo.label = getOperationsProgressTitle(operation);
       }
+
       this.primaryOperationsArray[operationIndex] = {
         ...operationObject,
         ...progressInfo,

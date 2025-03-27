@@ -33,15 +33,13 @@ export interface ShareCollectSelectorProps {
   createDefineRoomType: RoomsType;
   onCloseActionProp?: () => void;
   headerProps?: HeaderProps | {};
+  onCancel: VoidFunction;
 }
 
 export interface InjectShareCollectSelectorProps
   extends Pick<TStore["settingsStore"], "currentDeviceType">,
     Pick<TStore["filesSettingsStore"], "getIcon">,
-    Pick<
-      TStore["dialogsStore"],
-      "setShareCollectSelector" | "conflictResolveDialogVisible"
-    >,
+    Pick<TStore["dialogsStore"], "conflictResolveDialogVisible">,
     Pick<TStore["infoPanelStore"], "setIsMobileHidden">,
     Pick<TStore["filesStore"], "setSelected">,
     Pick<

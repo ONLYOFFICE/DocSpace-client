@@ -4,6 +4,12 @@
   &.scale {
     width: 100%;
   }
+
+  :global {
+    .input-block-icon {
+      border-radius: 3px;
+    }
+  }
 }
 
 .searchInputBlock > input {

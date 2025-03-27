@@ -131,7 +131,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
     },
     {
       key: "room-type-ai",
-      label: t("Common:AI"),
+      label: "Ai room",
       roomType: RoomsType.AIRoom,
     },
   ];

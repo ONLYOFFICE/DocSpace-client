@@ -328,15 +328,15 @@ const Section = (props: SectionProps) => {
           ) : null}
         </SectionContainer>
 
-        <ChatWidget
+        {/* <ChatWidget
           viewAs={viewAs}
-          isVisible={aiChatIsVisible}
+          isVisible
           setIsVisible={setAiChatIsVisible}
           chatFiles={chatFiles}
           anotherDialogOpen={anotherDialogOpen}
           currentDeviceType={currentDeviceType}
           mainBarVisible={mainBarVisible}
-        />
+        /> */}
 
         {isInfoPanelAvailable ? (
           <InfoPanel

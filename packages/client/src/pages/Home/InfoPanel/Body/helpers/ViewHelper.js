@@ -36,6 +36,7 @@ import SeveralItems from "../views/SeveralItems";
 import Share from "../views/Share";
 import Plugin from "../views/Plugin";
 import Groups from "../views/Groups";
+import Chat from "../views/Chat";
 
 class ViewHelper {
   constructor(props) {
@@ -87,6 +88,10 @@ class ViewHelper {
 
   PluginView = () => {
     return <Plugin {...this.pluginProps} />;
+  };
+
+  ChatView = () => {
+    return <Chat {...this.defaultProps} />;
   };
 }
 

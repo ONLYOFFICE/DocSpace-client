@@ -511,6 +511,8 @@ export const enum ErrorKeys {
 }
 
 export enum RoomsType {
+  AIRoom = 9,
+
   PublicRoom = 6,
   FormRoom = 1,
   // FillingFormsRoom= 1, //TODO: Restore when certs will be done
@@ -519,7 +521,6 @@ export enum RoomsType {
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
   VirtualDataRoom = 8,
   CustomRoom = 5,
-  AIRoom = 9,
 }
 
 export const enum RecaptchaType {

@@ -88,8 +88,6 @@ export const ChatWidget = memo(
 
     const files = toChatFiles();
 
-    console.log(chatFiles[0]);
-
     const parentId = chatFiles.length
       ? "parentId" in chatFiles[0] && chatFiles[0].parentId
         ? chatFiles[0].parentId
@@ -103,7 +101,7 @@ export const ChatWidget = memo(
     useEffect(() => {
       try {
         // First check if the chat_id_key cookie exists
-        const cookieFlowId = getCookie("chat_id_key");
+        const cookieFlowId = getCookie("docspace_rag_chat");
         if (cookieFlowId) {
           setFlowId(cookieFlowId);
           return;
@@ -160,6 +158,7 @@ export const ChatWidget = memo(
       placeholder_text: "Message ...", // TODO: AI tranlstion
       chat_user_name: "Me", // TODO: AI tranlstion
       chat_provider_name: "AI", // TODO: AI tranlstion
+      current_folder: parentId,
     });
 
     const chatWidgetComponent = (

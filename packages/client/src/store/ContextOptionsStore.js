@@ -79,6 +79,7 @@ import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
+import AiRoomReactSvgUrl from "PUBLIC_DIR/images/icons/32/room/ai.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
@@ -207,6 +208,7 @@ class ContextOptionsStore {
     indexingStore,
     clientLoadingStore,
     guidanceStore,
+    flowStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -229,6 +231,7 @@ class ContextOptionsStore {
     this.indexingStore = indexingStore;
     this.clientLoadingStore = clientLoadingStore;
     this.guidanceStore = guidanceStore;
+    this.flowStore = flowStore;
   }
 
   onOpenFolder = async (item, t) => {
@@ -1492,6 +1495,14 @@ class ContextOptionsStore {
     };
   };
 
+  summarizeToFile = async (item) => {
+    this.filesStore.setActiveFiles([item]);
+
+    await this.flowStore.summarizeToFile(item);
+
+    this.filesStore.removeActiveItem([item]);
+  };
+
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {
     const optionsToRemove = isInfoPanel
       ? ["select", "room-info", "show-info"]
@@ -1826,6 +1837,16 @@ class ContextOptionsStore {
       {
         key: "separator-SubmitToGallery",
         isSeparator: true,
+      },
+      {
+        id: "summarize",
+        key: "summarize",
+        label: "Summarize",
+        icon: AiRoomReactSvgUrl,
+        onClick: () => {
+          this.summarizeToFile(item);
+        },
+        disabled: false,
       },
       {
         id: "option_reconnect-storage",

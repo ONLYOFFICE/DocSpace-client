@@ -1119,11 +1119,16 @@ class FilesStore {
     this.files = files;
 
     if (this.selectedFolderStore.roomType === RoomsType.AIRoom) {
-      const filesId = files.map((f) => f.id);
+      const filesId = files
+        .map((f) => {
+          if (this.flowStore.localCheckVectorizeDocument(f)) return false;
+
+          this.flowStore.checkVectorizeDocument(f);
+          return f.id;
+        })
+        .filter(Boolean);
 
       this.setActiveFiles(filesId);
-
-      this.flowStore.checkVectorizeDocument(files[0]);
     }
 
     if (roomPartsToSub.length > 0) {
@@ -1192,9 +1197,16 @@ class FilesStore {
 
   setFile = (file) => {
     const index = this.files.findIndex((x) => x.id === file.id);
+
     if (index !== -1) {
       this.files[index] = file;
       this.createThumbnail(file);
+
+      if (this.selectedFolderStore.roomType === RoomsType.AIRoom) {
+        if (this.flowStore.localCheckVectorizeDocument(file)) return;
+
+        this.flowStore.checkVectorizeDocument(file);
+      }
     }
   };
 
@@ -2176,6 +2188,8 @@ class FilesStore {
         item.fileExst === ".docxf" || item.fileExst === ".oform"; // TODO: Remove after change security options
       const isPdf = item.fileExst === ".pdf";
 
+      const isAIRoom = this.selectedFolderStore.roomType === RoomsType.AIRoom;
+
       let fileOptions = [
         // "open",
         "select",
@@ -2207,6 +2221,7 @@ class FilesStore {
         "show-info",
         "block-unblock-version", // need split
         "separator1",
+        "summarize",
         "open-location",
         "mark-read",
         // "mark-as-favorite",
@@ -2222,7 +2237,6 @@ class FilesStore {
         "restore",
         "rename",
         "edit-index",
-        "vectorize",
         "separator2",
         // "unsubscribe",
         "delete",
@@ -2231,6 +2245,11 @@ class FilesStore {
         "separate-stop-filling",
         "stop-filling",
       ];
+
+      if (!isAIRoom) {
+        console.log("remove");
+        fileOptions = removeOptions(fileOptions, ["summarize"]);
+      }
 
       if (optionsToRemove.length) {
         fileOptions = removeOptions(fileOptions, optionsToRemove);
@@ -3837,6 +3856,7 @@ class FilesStore {
   getFileInfo = async (id) => {
     const fileInfo = await api.files.getFileInfo(id);
     this.setFile(fileInfo);
+
     return fileInfo;
   };
 

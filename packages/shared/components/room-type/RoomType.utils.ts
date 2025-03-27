@@ -16,7 +16,7 @@ export const getRoomTypeTitleTranslation = (
     case RoomsType.CustomRoom:
       return t("Common:CustomRoomTitle");
     case RoomsType.AIRoom:
-      return "AI Room";
+      return "AI room";
     case RoomsType.PublicRoom:
       return t("Common:PublicRoom");
     case RoomsType.FormRoom:
@@ -41,7 +41,7 @@ export const getRoomTypeDescriptionTranslation = (
     case RoomsType.CustomRoom:
       return t("Common:CustomRoomDescription");
     case RoomsType.AIRoom:
-      return "Room for work with AI";
+      return "Create a room together with an AI that can help you understand room types, answer questions, and customize the room being created.";
     case RoomsType.PublicRoom:
       return t("Common:PublicRoomInfo");
     case RoomsType.FormRoom:

@@ -45,7 +45,7 @@ export const getRoomTypeName = (room, t) => {
       return t("Common:CustomRooms");
 
     case RoomsType.AIRoom:
-      return "AI Room";
+      return "Create room with AI";
 
     case RoomsType.FillingFormsRoom:
       return t("Common:FillingFormRooms");

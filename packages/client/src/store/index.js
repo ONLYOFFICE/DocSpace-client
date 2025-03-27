@@ -281,6 +281,7 @@ const contextOptionsStore = new ContextOptionsStore(
   indexingStore,
   clientLoadingStore,
   guidanceStore,
+  flowStore,
 );
 
 const hotkeyStore = new HotkeyStore(

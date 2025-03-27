@@ -228,9 +228,9 @@ class FlowsApi {
       const endpoint = `/run/${id}`;
 
       const payload = {
-        inputValue,
-        outputType,
-        inputType,
+        input_value: inputValue,
+        output_type: outputType,
+        input_type: inputType,
         ...(tweaks ? { tweaks } : {}),
       };
 

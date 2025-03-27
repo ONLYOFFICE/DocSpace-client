@@ -24,54 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled from "styled-components";
+import { request } from "../client";
+import { TApiKey, TApiKeyParamsRequest, TApiKeyRequest } from "./types";
 
-import { TextInput } from "@docspace/shared/components/text-input";
+export async function getApiKeys() {
+  const res = await request({
+    method: "get",
+    url: "/keys",
+  });
 
-import { Label } from "@docspace/shared/components/label";
+  return res as TApiKey[];
+}
 
-const StyledLabel = styled(Label)`
-  display: block;
-  margin-top: 20px;
-  line-height: 20px;
+export async function createApiKey(data: TApiKeyRequest) {
+  const res = await request({
+    method: "post",
+    url: "/keys",
+    data,
+  });
 
-  input {
-    margin-top: 4px;
-    width: 100%;
-  }
-`;
+  return res as TApiKey;
+}
 
-export const LabledInput = ({
-  label,
-  placeholder,
-  value,
-  onChange,
-  name,
-  mask,
-  hasError,
-  className,
-  required = false,
-  id,
-  isDisabled,
-  maxLength = 255,
-}) => {
-  return (
-    <StyledLabel text={label} className={className}>
-      <TextInput
-        id={id}
-        name={name}
-        placeholder={placeholder}
-        tabIndex={1}
-        value={value}
-        onChange={onChange}
-        required={required}
-        hasError={hasError}
-        isDisabled={isDisabled}
-        maxLength={maxLength}
-        scale
-        {...(mask ? { mask } : {})}
-      />
-    </StyledLabel>
-  );
-};
+export async function changeApiKeyStatus(
+  keyId: TApiKey["id"],
+  params: TApiKeyParamsRequest,
+) {
+  const res = await request({
+    method: "put",
+    url: `/keys/${keyId}`,
+    data: params,
+  });
+  return res;
+}
+
+export async function deleteApiKey(keyId: TApiKey["id"]) {
+  const res = await request({
+    method: "delete",
+    url: `/keys/${keyId}`,
+  });
+
+  return res;
+}
+
+export async function getApiKeyPermissions() {
+  const res = await request({
+    method: "get",
+    url: "/keys/permissions",
+  });
+
+  return res as string[];
+}

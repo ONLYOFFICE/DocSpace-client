@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams, useLocation } from "react-router-dom";
 
 import Section from "@docspace/shared/components/section";
 
@@ -40,11 +40,15 @@ import OAuthSectionHeader from "./OAuth/OAuthSectionHeader";
 
 export const Component = () => {
   const { id, eventId } = useParams();
+  const location = useLocation();
 
-  const webhookHistoryPath = `/developer-tools/webhooks/${id}`;
-  const webhookDetailsPath = `/developer-tools/webhooks/${id}/${eventId}`;
-  const oauthCreatePath = `/developer-tools/oauth/create`;
-  const oauthEditPath = `/developer-tools/oauth/${id}`;
+  const path = location.pathname.includes("/portal-settings")
+    ? "/portal-settings"
+    : "";
+  const webhookHistoryPath = `${path}/developer-tools/webhooks/${id}`;
+  const webhookDetailsPath = `${path}/developer-tools/webhooks/${id}/${eventId}`;
+  const oauthCreatePath = `${path}/developer-tools/oauth/create`;
+  const oauthEditPath = `${path}/developer-tools/oauth/${id}`;
   const currentPath = window.location.pathname;
 
   return (

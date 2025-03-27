@@ -187,6 +187,9 @@ class ScrollbarThumb extends React.Component<ScrollbarThumbProps, unknown> {
     }
     ev.stopPropagation();
 
+    // @ts-expect-error: get React.MouseEvent instead of MouseEvent here. DraggableCore lib probably has wrong types
+    ev.nativeEvent?.stopImmediatePropagation?.();
+
     if (!isUndef(ev.offsetX)) {
       /* istanbul ignore next */
       this.initialOffsetX = ev.offsetX;

@@ -25,13 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment-timezone";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
-import { mobile, injectDefaultTheme } from "@docspace/shared/utils";
+import {
+  mobile,
+  injectDefaultTheme,
+  getCorrectDate,
+} from "@docspace/shared/utils";
 
 import StatusBadge from "../../sub-components/StatusBadge";
 import { getTriggerTranslate } from "../../Webhooks.helpers";
@@ -78,15 +81,14 @@ const FlexWrapper = styled.div`
 const DetailsBar = ({ eventDetails }) => {
   const { t, i18n } = useTranslation(["Webhooks", "Files", "Common"]);
 
-  const formatDate = (date) => {
-    return `${moment(date)
-      .locale(i18n.language)
-      .tz(window.timezone)
-      .format("L, LT")}`;
-  };
-
-  const formattedDelivery = formatDate(eventDetails.delivery);
-  const formattedCreationTime = formatDate(eventDetails.creationTime);
+  const formattedDelivery = getCorrectDate(
+    i18n.language,
+    eventDetails.delivery,
+  );
+  const formattedCreationTime = getCorrectDate(
+    i18n.language,
+    eventDetails.creationTime,
+  );
 
   const trigger = getTriggerTranslate(eventDetails.trigger, t);
 

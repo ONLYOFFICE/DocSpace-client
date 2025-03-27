@@ -24,54 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import styled from "styled-components";
+import { Consumer } from "@docspace/shared/utils";
+import TableView from "./TableView";
+import RowView from "./RowView";
+import { ApiKeyViewProps } from "../types";
 
-import { TextInput } from "@docspace/shared/components/text-input";
-
-import { Label } from "@docspace/shared/components/label";
-
-const StyledLabel = styled(Label)`
-  display: block;
-  margin-top: 20px;
-  line-height: 20px;
-
-  input {
-    margin-top: 4px;
-    width: 100%;
-  }
-`;
-
-export const LabledInput = ({
-  label,
-  placeholder,
-  value,
-  onChange,
-  name,
-  mask,
-  hasError,
-  className,
-  required = false,
-  id,
-  isDisabled,
-  maxLength = 255,
-}) => {
+const ApiKeysView = ({ viewAs, ...rest }: ApiKeyViewProps) => {
   return (
-    <StyledLabel text={label} className={className}>
-      <TextInput
-        id={id}
-        name={name}
-        placeholder={placeholder}
-        tabIndex={1}
-        value={value}
-        onChange={onChange}
-        required={required}
-        hasError={hasError}
-        isDisabled={isDisabled}
-        maxLength={maxLength}
-        scale
-        {...(mask ? { mask } : {})}
-      />
-    </StyledLabel>
+    <Consumer>
+      {(context) =>
+        viewAs === "table" ? (
+          <TableView sectionWidth={context.sectionWidth!} {...rest} />
+        ) : (
+          <RowView sectionWidth={context.sectionWidth!} {...rest} />
+        )
+      }
+    </Consumer>
   );
 };
+
+export default ApiKeysView;

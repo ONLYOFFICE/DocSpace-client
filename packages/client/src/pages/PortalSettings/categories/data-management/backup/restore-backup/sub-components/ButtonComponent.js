@@ -36,6 +36,7 @@ import { startRestore } from "@docspace/shared/api/portal";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 const ButtonContainer = (props) => {
   const {
@@ -157,6 +158,7 @@ const ButtonContainer = (props) => {
           operationsCompleted={downloadingProgress === 100}
           operations={[
             {
+              operation: OPERATIONS_NAME.backup,
               label:
                 downloadingProgress === 100
                   ? t("Backup")

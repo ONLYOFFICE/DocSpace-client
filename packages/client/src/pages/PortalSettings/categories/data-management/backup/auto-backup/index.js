@@ -60,6 +60,8 @@ import {
   isManagement,
 } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
+
 import ButtonContainer from "./sub-components/ButtonContainer";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
 import RoomsModule from "./sub-components/RoomsModule";
@@ -642,6 +644,7 @@ class AutomaticBackup extends React.PureComponent {
             operationsCompleted={downloadingProgress === 100}
             operations={[
               {
+                operation: OPERATIONS_NAME.backup,
                 label:
                   downloadingProgress === 100
                     ? t("Backup")

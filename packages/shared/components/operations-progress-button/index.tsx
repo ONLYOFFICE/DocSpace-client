@@ -66,6 +66,7 @@ const operationToIconMap: Record<
   other: FloatingButtonIcons.other,
   upload: FloatingButtonIcons.upload,
   deleteVersionFile: FloatingButtonIcons.trash,
+  backup: FloatingButtonIcons.backup,
 };
 
 const OperationsProgressButton: React.FC<OperationsProgressProps> = ({

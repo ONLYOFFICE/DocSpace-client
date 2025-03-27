@@ -49,6 +49,8 @@ import {
   isManagement,
   getBackupProgressInfo,
 } from "@docspace/shared/utils/common";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
+
 import { getFromLocalStorage, saveToLocalStorage } from "../../../../utils";
 import { StyledModules, StyledManualBackup } from "../StyledBackup";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
@@ -461,6 +463,7 @@ class ManualBackup extends React.Component {
             operationsCompleted={downloadingProgress === 100}
             operations={[
               {
+                operation: OPERATIONS_NAME.backup,
                 label:
                   downloadingProgress === 100
                     ? t("Backup")

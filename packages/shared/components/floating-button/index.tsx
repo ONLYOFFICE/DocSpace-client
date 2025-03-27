@@ -44,6 +44,7 @@ import DuplicateIcon from "PUBLIC_DIR/images/icons/24/duplicate.react.svg";
 import MarkAsReadIcon from "PUBLIC_DIR/images/icons/24/mark-as-read.react.svg";
 import MoveIcon from "PUBLIC_DIR/images/icons/24/move.react.svg";
 import FileIcon from "PUBLIC_DIR/images/icons/24/file.react.svg";
+import BackupIcon from "PUBLIC_DIR/images/icons/24/backup.react.svg";
 
 import { classNames } from "../../utils";
 
@@ -67,6 +68,7 @@ const ICON_COMPONENTS = {
   [FloatingButtonIcons.copy]: <CopyIcon />,
   [FloatingButtonIcons.download]: <DownloadIcon />,
   [FloatingButtonIcons.markAsRead]: <MarkAsReadIcon />,
+  [FloatingButtonIcons.backup]: <BackupIcon />,
 } as const;
 
 const FloatingButton = ({

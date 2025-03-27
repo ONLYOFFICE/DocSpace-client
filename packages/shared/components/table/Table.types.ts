@@ -80,6 +80,7 @@ export interface TableHeaderProps {
     | ((node: HTMLDivElement) => void);
   theme: TTheme;
   isIndexEditingMode?: boolean;
+  withoutWideColumn?: boolean;
 }
 
 export interface TableHeaderCellProps {

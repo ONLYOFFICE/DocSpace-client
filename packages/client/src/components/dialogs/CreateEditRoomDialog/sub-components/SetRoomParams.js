@@ -341,7 +341,7 @@ const SetRoomParams = ({
           : !createRoomTitle;
 
   const element =
-    isEdit || isTemplate ? (
+    isEdit || isTemplate || fromTemplate ? (
       <ItemIcon
         id={selection?.id}
         fileExst={selection?.fileExst}

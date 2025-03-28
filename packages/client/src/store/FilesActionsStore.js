@@ -323,7 +323,7 @@ class FilesActionStore {
 
   createFoldersTree = async (t, files, folderId) => {
     //  console.log("createFoldersTree", files, folderId);
-    const { uploaded } = this.uploadDataStore;
+    const { uploaded, percent } = this.uploadDataStore;
 
     const { setPrimaryProgressBarData } =
       this.uploadDataStore.primaryProgressDataStore;
@@ -341,6 +341,7 @@ class FilesActionStore {
     const pbData = {
       operation: OPERATIONS_NAME.upload,
       completed: false,
+      percent,
     };
 
     if (roomFolder && roomFolder.quotaLimit && roomFolder.quotaLimit !== -1) {

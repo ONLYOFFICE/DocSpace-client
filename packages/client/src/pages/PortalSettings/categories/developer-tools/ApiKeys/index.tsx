@@ -39,13 +39,12 @@ import {
   TApiKey,
   TApiKeyParamsRequest,
 } from "@docspace/shared/api/api-keys/types";
-
+import { injectDefaultTheme, isMobile } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import CreateApiKeyDialog from "./sub-components/CreateApiKeyDialog";
-import RenameApiKeyDialog from "./sub-components/RenameApiKeyDialog";
 import DeleteApiKeyDialog from "./sub-components/DeleteApiKeyDialog";
 import ApiKeysView from "./sub-components";
 import { ApiKeysProps } from "./types";
@@ -73,6 +72,21 @@ const StyledApiKeys = styled.div`
   }
 `;
 
+const StyledMobileButton = styled.div.attrs(injectDefaultTheme)`
+  position: fixed;
+  width: calc(100% - 32px);
+  height: 73px;
+  bottom: 0;
+  padding: 0 16px;
+
+  inset-inline-start: 0;
+  background-color: ${(props) => props.theme.backgroundColor};
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const ApiKeys = (props: ApiKeysProps) => {
   const { viewAs, currentColorScheme } = props;
 
@@ -82,22 +96,10 @@ const ApiKeys = (props: ApiKeysProps) => {
   const [permissions, setPermissions] = useState<string[]>([]);
   const [createKeyDialogIsVisible, setCreateKeyDialogIsVisible] =
     useState(false);
-  const [renameKeyDialogIsVisible, setRenameKeyDialogIsVisible] =
-    useState(false);
   const [deleteKeyDialogIsVisible, setDeleteKeyDialogIsVisible] =
     useState(false);
   const [actionItem, setActionItem] = useState<TApiKey | null>(null);
-
   const [isRequestRunning, setIsRequestRunning] = useState(false);
-
-  const onRenameApiKey = (id: TApiKey["id"]) => {
-    const itemIndex = listItems.findIndex((x) => x.id === id);
-    if (itemIndex > -1) {
-      setActionItem(listItems[itemIndex]);
-    }
-
-    setRenameKeyDialogIsVisible(true);
-  };
 
   const onDeleteApiKey = (id: TApiKey["id"]) => {
     const itemIndex = listItems.findIndex((x) => x.id === id);
@@ -151,7 +153,6 @@ const ApiKeys = (props: ApiKeysProps) => {
       .catch((err) => toastr.error(err))
       .finally(() => {
         setIsRequestRunning(false);
-        setRenameKeyDialogIsVisible(false);
         setCreateKeyDialogIsVisible(false);
         setActionItem(null);
       });
@@ -187,10 +188,13 @@ const ApiKeys = (props: ApiKeysProps) => {
   return (
     <StyledApiKeys>
       <div className="api-keys_description">
-        <Text className="api-keys_text api-keys_description-text">
+        <Text lineHeight="20px" className="api-keys_text">
           {t("Settings:ApiKeysDescription", {
             productName: t("Common:ProductName"),
           })}
+        </Text>
+        <Text className="api-keys_text api-keys_description-text">
+          {t("Settings:ApiKeysShareDescription")}
         </Text>
 
         <Text className="api-keys_text api-keys_usage-text">
@@ -206,12 +210,24 @@ const ApiKeys = (props: ApiKeysProps) => {
         </Link>
       </div>
       <div>
-        <Button
-          onClick={() => setCreateKeyDialogIsVisible(true)}
-          label={t("Settings:CreateNewSecretKey")}
-          primary
-          size={ButtonSize.small}
-        />
+        {isMobile() ? (
+          <StyledMobileButton>
+            <Button
+              onClick={() => setCreateKeyDialogIsVisible(true)}
+              label={t("Settings:CreateNewSecretKey")}
+              primary
+              size={ButtonSize.normal}
+              scale
+            />
+          </StyledMobileButton>
+        ) : (
+          <Button
+            onClick={() => setCreateKeyDialogIsVisible(true)}
+            label={t("Settings:CreateNewSecretKey")}
+            primary
+            size={ButtonSize.small}
+          />
+        )}
         <div>
           {listItems.length ? (
             <ApiKeysView
@@ -219,7 +235,6 @@ const ApiKeys = (props: ApiKeysProps) => {
               viewAs={viewAs}
               onDeleteApiKey={onDeleteApiKey}
               onChangeApiKeyParams={onChangeApiKeyParams}
-              onRenameApiKey={onRenameApiKey}
               onEditApiKey={onEditApiKey}
               permissions={permissions}
             />
@@ -238,16 +253,7 @@ const ApiKeys = (props: ApiKeysProps) => {
           isRequestRunning={isRequestRunning}
         />
       ) : null}
-      {renameKeyDialogIsVisible && actionItem ? (
-        <RenameApiKeyDialog
-          isVisible={renameKeyDialogIsVisible}
-          setIsVisible={setRenameKeyDialogIsVisible}
-          setListItems={setListItems}
-          item={actionItem}
-          onChangeApiKeyParams={onChangeApiKeyParams}
-          isRequestRunning={isRequestRunning}
-        />
-      ) : null}
+
       {deleteKeyDialogIsVisible ? (
         <DeleteApiKeyDialog
           isVisible={deleteKeyDialogIsVisible}

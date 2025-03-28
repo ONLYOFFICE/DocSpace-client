@@ -2508,7 +2508,7 @@ class FilesStore {
       return fileOptions;
     }
     if (isTemplate) {
-      const templateOptions = [
+      let templateOptions = [
         "select",
         "open",
         "separator0",
@@ -2519,6 +2519,10 @@ class FilesStore {
         "separator1",
         "delete",
       ];
+
+      if (optionsToRemove.length) {
+        templateOptions = removeOptions(templateOptions, optionsToRemove);
+      }
 
       return templateOptions;
     }

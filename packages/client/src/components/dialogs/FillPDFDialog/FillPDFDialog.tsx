@@ -45,10 +45,10 @@ import type {
 
 const FillPDFDialog = inject<TStore>(
   ({ dialogsStore, contextOptionsStore }) => {
-    const { setFillPDFDialogData, setShareCollectSelector } = dialogsStore;
+    const { setFillPDFDialogData } = dialogsStore;
     const { gotoDocEditor } = contextOptionsStore;
 
-    return { setFillPDFDialogData, gotoDocEditor, setShareCollectSelector };
+    return { setFillPDFDialogData, gotoDocEditor };
   },
 )(
   observer(
@@ -56,7 +56,6 @@ const FillPDFDialog = inject<TStore>(
       visible,
       setFillPDFDialogData,
       gotoDocEditor,
-      //  setShareCollectSelector,
       data,
     }: FillPDFDialogProps & InjectFillPDFDialogProps) => {
       const { t } = useTranslation(["FillPDFDialog"]);
@@ -66,7 +65,7 @@ const FillPDFDialog = inject<TStore>(
       const [roomType, setRoomType] = useState<RoomsType>(RoomsType.FormRoom);
 
       const onClose = () => {
-        setFillPDFDialogData!(false, null);
+        setFillPDFDialogData!(false);
       };
 
       const openEditorFill = () => {
@@ -75,9 +74,6 @@ const FillPDFDialog = inject<TStore>(
       };
 
       const openSelector = (type: RoomsType) => {
-        // setShareCollectSelector(true, data, RoomsType.VirtualDataRoom);
-        // onClose();
-
         setIsVisibleSelectFormRoomDialog(true);
         setRoomType(type);
       };
@@ -97,8 +93,9 @@ const FillPDFDialog = inject<TStore>(
             withoutBackButton: false,
             onBackClick: onCloseSelectionFormRoom,
           }}
-          onCloseActionProp={onCloseSelectionFormRoom}
+          onCloseActionProp={onClose}
           createDefineRoomType={roomType}
+          onCancel={onCloseSelectionFormRoom}
         />
       );
 

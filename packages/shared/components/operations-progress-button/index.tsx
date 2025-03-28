@@ -44,6 +44,7 @@ import { OperationsProgressProps } from "./OperationsProgressButton.types";
 import { OPERATIONS_NAME } from "../../constants/index";
 import { HelpButton } from "../help-button";
 import { Backdrop } from "../backdrop";
+import { Text } from "../te";
 
 type ValueOf<T> = T[keyof T];
 
@@ -225,7 +226,21 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
       FloatingButtonIcons.other
     );
   };
+  const getPercent = () => {
+    if (isSeveralOperations) {
+      return;
+    }
 
+    return operationsLength
+      ? operations[0].percent
+      : panelOperations[0].percent;
+  };
+
+  const getErrorCount = () => {
+    return operationsLength
+      ? operations[0].errorCount
+      : panelOperations[0].errorCount;
+  };
   const getTooltipLabel = () => {
     if (isSeveralOperations) {
       return t("Files:Processes", { count: allOperationsLength });
@@ -236,6 +251,15 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
         ? operations[0].label
         : panelOperations[0].label;
 
+      if (getPercent()) {
+        return (
+          <>
+            {operationName}
+            <br />
+            {t("Files:ErrorUploadingFiles", { count: getErrorCount() })}
+          </>
+        );
+      }
       return t("Files:ErrorOperation", {
         operationName,
       });
@@ -254,15 +278,6 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
     return operationsLength ? operations[0].label : panelOperations[0].label;
   };
 
-  const getPercent = () => {
-    if (isSeveralOperations) {
-      return;
-    }
-
-    return operationsLength
-      ? operations[0].percent
-      : panelOperations[0].percent;
-  };
   const onCancelOperation = () => {
     cancelUpload?.(t);
   };

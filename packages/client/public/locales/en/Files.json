@@ -84,6 +84,7 @@
   "ErrorMoveItem": "Error moving <2>{{title}}</2> to <1>{{folderName}}</1>",
   "ErrorMoveItems": "Error moving <2>{{qty}} elements</2> to <1>{{folderName}}</1>",
   "ErrorOperation": "{{operationName}}: Error",
+  "ErrorUploadingFiles": "Error uploading files: {{count}}",
   "ExitWithoutSaving": "Exit without saving?",
   "ExitWithoutSavingDescription": "You have made changes in the index. If you proceed without saving, those changes will not be applied.",
   "ExportingIndex": "Exporting index",

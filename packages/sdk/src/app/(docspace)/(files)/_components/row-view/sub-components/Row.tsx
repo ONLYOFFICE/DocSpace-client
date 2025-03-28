@@ -89,7 +89,7 @@ const Row = observer(
     );
 
     const onContextClick = (isRightMouseButtonClick?: boolean) => {
-      if (isRightMouseButtonClick && filesSelectionStore.selection.length) {
+      if (isRightMouseButtonClick && filesSelectionStore.selection.length > 1) {
         return;
       }
 

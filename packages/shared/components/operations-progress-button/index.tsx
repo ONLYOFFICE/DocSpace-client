@@ -44,7 +44,6 @@ import { OperationsProgressProps } from "./OperationsProgressButton.types";
 import { OPERATIONS_NAME } from "../../constants/index";
 import { HelpButton } from "../help-button";
 import { Backdrop } from "../backdrop";
-import { Text } from "../te";
 
 type ValueOf<T> = T[keyof T];
 

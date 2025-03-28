@@ -2469,6 +2469,8 @@ const Dark: TTheme = {
       loadingButton: {
         color: white,
         background: black,
+        defaultBackground: grayDark,
+        hoverColor: white,
       },
     },
     invite: {

@@ -85,6 +85,7 @@
   line-height: 1.5;
   padding-inline-start: var(--padding-inline-start);
   -webkit-background-clip: unset !important;
+  min-height: var(--height-textarea);
 
   &[data-dir="rtl"] {
     &:placeholder-shown {

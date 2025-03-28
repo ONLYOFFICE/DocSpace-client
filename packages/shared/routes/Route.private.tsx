@@ -85,6 +85,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname.includes("/rooms/shared") &&
       !isLoadedPublicRoom &&
       !isLoadingPublicRoom &&
+      isLoadedUser &&
       validatePublicRoomKey
     ) {
       validatePublicRoomKey(key);
@@ -95,6 +96,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     location.pathname,
     isLoadedPublicRoom,
     isLoadingPublicRoom,
+    isLoadedUser,
     validatePublicRoomKey,
   ]);
 

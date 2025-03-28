@@ -121,6 +121,7 @@ export type TFile = {
   viewAccessibility: TFileViewAccessibility;
   viewUrl: string;
   webUrl: string;
+  shortWebUrl: string;
   availableExternalRights?: TAvailableExternalRights;
   providerId?: number;
   providerKey?: string;

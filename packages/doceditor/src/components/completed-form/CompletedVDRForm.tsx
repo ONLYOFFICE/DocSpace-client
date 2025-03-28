@@ -89,17 +89,7 @@ export const CompletedVDRForm = ({
   const completed = file.formFillingStatus === FileFillingFormStatus.Completed;
   const isTurnToFill = isYournTurn && isStartFilling;
 
-  const url = useMemo(() => {
-    const { origin, pathname } = new URL(file.webUrl);
-
-    const query = new URLSearchParams();
-
-    query.set("fileId", file.id.toString());
-
-    if (!completed) query.set("action", "fill");
-
-    return `${origin}${pathname}?${query.toString()}`;
-  }, [completed, file]);
+  const fileURL = file.shortWebUrl;
 
   const label = useMemo(() => {
     if (isStartFilling) return t("CompletedForm:LinkToFillOutForm");
@@ -134,24 +124,20 @@ export const CompletedVDRForm = ({
   const title = useMemo(() => getTitleWithoutExtension(file, false), [file]);
 
   const handleBackToRoom = () => {
-    const url = getFolderUrl(roomId, false);
-    window.location.assign(url);
+    const folderURL = getFolderUrl(roomId, false);
+    window.location.assign(folderURL);
   };
 
   const handleFillForm = () => {
-    window.location.assign(url);
+    window.location.assign(fileURL);
   };
 
   const handleViewForm = () => {
-    const viewURL = new URL(url);
-
-    viewURL.searchParams.delete("action");
-
-    window.location.assign(viewURL.toString());
+    window.location.assign(fileURL);
   };
 
   const copyLinkFile = async () => {
-    await copyShareLink(url);
+    await copyShareLink(fileURL);
     toastr.success(t("Common:LinkCopySuccess"));
   };
 
@@ -192,7 +178,7 @@ export const CompletedVDRForm = ({
                 isReadOnly
                 size={InputSize.middle}
                 type={InputType.text}
-                value={url}
+                value={fileURL}
                 className="input__copy-link"
                 iconButtonClassName="input__copy-link-icon"
                 iconName={CopyReactSvgUrl}

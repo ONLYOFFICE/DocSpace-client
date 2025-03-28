@@ -251,7 +251,7 @@ export async function getUserByEmail(
   return user.response as TUser;
 }
 
-export async function getScopeList(token?: string) {
+export async function getScopeList(token?: string, userId?: string) {
   const headers: [string, string][] = token
     ? [["Cookie", `x-signature=${token}`]]
     : [["", ""]];

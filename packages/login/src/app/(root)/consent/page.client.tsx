@@ -105,11 +105,11 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
 
   React.useEffect(() => {
     const validateToken = async () => {
-      const token = getOAuthJWTSignature();
+      const token = getOAuthJWTSignature(user.id);
 
       if (token) return;
 
-      await setOAuthJWTSignature();
+      await setOAuthJWTSignature(user.id);
 
       const redirect_url = getCookie("x-redirect-authorization-uri");
 
@@ -121,7 +121,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
     };
 
     validateToken();
-  }, []);
+  }, [user.id]);
 
   const onAllowClick = async () => {
     if (!("clientId" in client)) return;

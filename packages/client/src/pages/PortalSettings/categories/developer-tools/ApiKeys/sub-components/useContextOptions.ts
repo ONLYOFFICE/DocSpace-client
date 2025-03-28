@@ -23,30 +23,38 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import type { TFile } from "@docspace/shared/api/files/types";
-import type { RoomsType } from "@docspace/shared/enums";
-import { HeaderProps } from "@docspace/shared/components/selector/Selector.types";
 
-export interface ShareCollectSelectorProps {
-  visible: boolean;
-  file: TFile;
-  createDefineRoomType: RoomsType;
-  onCloseActionProp?: () => void;
-  headerProps?: HeaderProps | {};
-  onCancel: VoidFunction;
-}
+import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
+import { TTranslation } from "@docspace/shared/types";
+import { TApiKey } from "@docspace/shared/api/api-keys/types";
 
-export interface InjectShareCollectSelectorProps
-  extends Pick<TStore["settingsStore"], "currentDeviceType">,
-    Pick<TStore["filesSettingsStore"], "getIcon">,
-    Pick<TStore["dialogsStore"], "conflictResolveDialogVisible">,
-    Pick<TStore["infoPanelStore"], "setIsMobileHidden">,
-    Pick<TStore["filesStore"], "setSelected">,
-    Pick<
-      TStore["uploadDataStore"],
-      "itemOperationToFolder" | "clearActiveOperations"
-    >,
-    Pick<
-      TStore["filesActionsStore"],
-      "setConflictDialogData" | "checkFileConflicts" | "openFileAction"
-    > {}
+export const useContextOptions = (
+  t: TTranslation,
+  item: TApiKey,
+  onEditApiKey: (id: TApiKey["id"]) => void,
+  onDeleteApiKey: (id: TApiKey["id"]) => void,
+) => {
+  const contextOptions = [
+    {
+      key: "api-key_edit",
+      label: t("Common:EditButton"),
+      icon: SettingsReactSvgUrl,
+      onClick: () => onEditApiKey(item.id),
+    },
+    {
+      key: "separator",
+      isSeparator: true,
+    },
+    {
+      key: "api-key_delete",
+      label: t("Common:Delete"),
+      icon: CatalogTrashReactSvgUrl,
+      onClick: () => onDeleteApiKey(item.id),
+    },
+  ];
+
+  return {
+    contextOptions,
+  };
+};

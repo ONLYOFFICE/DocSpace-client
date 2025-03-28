@@ -26,9 +26,6 @@
 
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
-import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
-import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 import {
   TableRow as TableRowComponent,
@@ -41,13 +38,14 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { getCookie, getCorrectDate } from "@docspace/shared/utils";
-import { LANGUAGE } from "@docspace/shared/constants";
 import { TableRowProps } from "../../types";
 import {
   getItemPermissions,
   getPermissionsOptionTranslation,
+  getStatusByDate,
 } from "../../utils";
+import { useContextOptions } from "../useContextOptions";
+import { ApiKeysLifetimeIcon } from "../ApiKeysLifetimeIcon";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -55,13 +53,20 @@ const StyledWrapper = styled.div`
   .toggleButton {
     display: flex;
     align-items: center;
+    position: relative;
   }
 `;
 
 const StyledTableRow = styled(TableRowComponent)`
   .table-container_cell {
-    padding-inline-end: 30px;
+    padding-inline-end: ${({ hideColumns }) => (hideColumns ? "0px" : "30px")};
     text-overflow: ellipsis;
+  }
+
+  .api-keys_name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .api-keys_text {
@@ -94,7 +99,6 @@ const TableRow = (props: TableRowProps) => {
     culture,
     onChangeApiKeyParams,
     onDeleteApiKey,
-    onRenameApiKey,
     onEditApiKey,
     permissions,
   } = props;
@@ -108,50 +112,35 @@ const TableRow = (props: TableRowProps) => {
     t,
   );
 
-  const contextOptions = [
-    {
-      key: "api-key_edit",
-      label: t("Common:EditButton"),
-      icon: SettingsReactSvgUrl,
-      onClick: () => onEditApiKey(item.id),
-    },
-    {
-      key: "api-key_rename",
-      label: t("Common:Rename"),
-      icon: RenameReactSvgUrl,
-      onClick: () => onRenameApiKey(item.id),
-    },
-    {
-      key: "separator",
-      isSeparator: true,
-    },
-    {
-      key: "api-key_delete",
-      label: t("Common:Delete"),
-      icon: CatalogTrashReactSvgUrl,
-      onClick: () => onDeleteApiKey(item.id),
-    },
-  ];
+  const { contextOptions } = useContextOptions(
+    t,
+    item,
+    onEditApiKey,
+    onDeleteApiKey,
+  );
 
   const avatarSource = item.createBy?.hasAvatar
     ? item.createBy?.avatarSmall
     : DefaultUserPhotoSize32PngUrl;
 
-  const getStatusByDate = (date: string) => {
-    const locale = getCookie(LANGUAGE) ?? culture ?? "en";
-    const dateLabel = getCorrectDate(locale, date);
-    return dateLabel;
-  };
-
-  const createOnDate = getStatusByDate(item.createOn);
-  const lastUsedDate = getStatusByDate(item.lastUsed);
-  // const expiresAtDate = getStatusByDate(item.expiresAt);
+  const createOnDate = getStatusByDate(item.createOn, culture);
+  const lastUsedDate = getStatusByDate(item.lastUsed, culture);
+  const expiresAtDate = item.expiresAt
+    ? getStatusByDate(item.expiresAt, culture)
+    : "";
 
   return (
     <StyledWrapper>
       <StyledTableRow contextOptions={contextOptions} hideColumns={hideColumns}>
         <TableCell>
-          <Text fontWeight={600}>{item.name}</Text>
+          <div className="api-keys_name">
+            <Text fontWeight={600}>{item.name}</Text>
+            <ApiKeysLifetimeIcon
+              t={t}
+              item={item}
+              expiresAtDate={expiresAtDate}
+            />
+          </div>
         </TableCell>
         <TableCell>
           <Text

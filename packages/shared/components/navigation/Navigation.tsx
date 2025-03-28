@@ -128,7 +128,7 @@ const Navigation = ({
   );
 
   const onClickAvailable = React.useCallback(
-    (id: number | string, isRootRoom: boolean, isRootTemplates: boolean) => {
+    (id: number | string, isRootRoom: boolean, isRootTemplates?: boolean) => {
       onClickFolder?.(id, isRootRoom, isRootTemplates);
       toggleDropBox();
     },

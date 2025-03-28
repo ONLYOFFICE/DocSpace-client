@@ -38,6 +38,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { StyledInviteUserBody } from "../StyledInvitePanel";
+import { Encoder } from "@docspace/shared/utils/encoder";
 
 type ItemProps = {
   t: TTranslation;
@@ -96,7 +97,7 @@ const Item = ({
       <StyledInviteUserBody>
         <div className="invite-input-item">
           <Text truncate noSelect className="invite-input-text">
-            {name}
+            {Encoder.htmlDecode(name ?? "")}
           </Text>
           <Text truncate noSelect className="invite-input-text_me">
             {item.isOwner ? `(${t("Common:MeLabel")})` : null}

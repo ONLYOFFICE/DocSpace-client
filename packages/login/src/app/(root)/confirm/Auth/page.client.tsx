@@ -43,6 +43,7 @@ import OperationContainer from "@docspace/shared/components/operation-container"
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { getUser } from "@docspace/shared/api/people";
 
 const AuthHandler = () => {
   let searchParams = useSearchParams();
@@ -73,12 +74,13 @@ const AuthHandler = () => {
         frameCallEvent({ event: "onAuthSuccess" });
 
         if (referenceUrl && referenceUrl.includes("oauth2")) {
+          const user = await getUser();
           const newUrl = location.search.split("referenceUrl=")[1];
 
-          const token = getOAuthJWTSignature();
+          const token = getOAuthJWTSignature(user.id);
 
           if (!token) {
-            await setOAuthJWTSignature();
+            await setOAuthJWTSignature(user.id);
           }
 
           window.location.replace(newUrl);

@@ -188,7 +188,18 @@ export const getJWTToken = () => {
 };
 
 export function getOAuthJWTSignature(userId: string) {
-  return getCookie(`x-signature-${userId}`);
+  const token = getCookie(`x-signature-${userId}`);
+
+  if (!token) return;
+
+  const tokenPayload = JSON.parse(window.atob(token!.split(".")[1]));
+
+  // Get the token's original expiration time
+  const tokenExpDate = new Date(tokenPayload.exp * 1000); // Convert seconds to milliseconds
+
+  setCookie("x-signature", token, { expires: tokenExpDate });
+
+  return token;
 }
 
 export async function setOAuthJWTSignature(userId: string) {

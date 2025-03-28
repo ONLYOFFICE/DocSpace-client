@@ -27,7 +27,7 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -60,6 +60,8 @@ const AuthHandler = () => {
   const isExternalDownloading =
     referenceUrl && referenceUrl.indexOf("action=download") !== -1;
 
+  const replaced = useRef(false);
+
   useEffect(() => {
     async function loginWithKey() {
       try {
@@ -83,6 +85,9 @@ const AuthHandler = () => {
             await setOAuthJWTSignature(user.id);
           }
 
+          if (replaced.current || !token || !user.id) return;
+
+          replaced.current = true;
           window.location.replace(newUrl);
           return;
         }

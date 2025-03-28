@@ -107,7 +107,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   };
 
   const tileContextClick = (isRightMouseButtonClick?: boolean) => {
-    if (isRightMouseButtonClick && selection.length) {
+    if (isRightMouseButtonClick && selection.length > 1) {
       return;
     }
 

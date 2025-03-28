@@ -187,11 +187,22 @@ export const getJWTToken = () => {
   });
 };
 
-export function getOAuthJWTSignature() {
-  return getCookie("x-signature");
+export function getOAuthJWTSignature(userId: string) {
+  const token = getCookie(`x-signature-${userId}`);
+
+  if (!token) return;
+
+  const tokenPayload = JSON.parse(window.atob(token!.split(".")[1]));
+
+  // Get the token's original expiration time
+  const tokenExpDate = new Date(tokenPayload.exp * 1000); // Convert seconds to milliseconds
+
+  setCookie("x-signature", token, { expires: tokenExpDate });
+
+  return token;
 }
 
-export async function setOAuthJWTSignature() {
+export async function setOAuthJWTSignature(userId: string) {
   const token = await getJWTToken()!;
 
   // Parse the token payload to extract information
@@ -200,6 +211,7 @@ export async function setOAuthJWTSignature() {
   // Get the token's original expiration time
   const tokenExpDate = new Date(tokenPayload.exp * 1000); // Convert seconds to milliseconds
 
+  setCookie(`x-signature-${userId}`, token, { expires: tokenExpDate });
   setCookie("x-signature", token, { expires: tokenExpDate });
 }
 

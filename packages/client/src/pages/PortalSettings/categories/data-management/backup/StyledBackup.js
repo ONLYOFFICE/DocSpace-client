@@ -36,13 +36,6 @@ import {
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";
 
-const floatingButtonStyles = css`
-  .layout-progress-bar {
-    position: fixed;
-    inset-inline-end: 24px;
-    bottom: 24px;
-  }
-`;
 const commonStyles = css`
   .backup_modules-description {
     margin-bottom: 8px;
@@ -116,8 +109,6 @@ const commonStyles = css`
 const StyledManualBackup = styled.div`
   ${commonStyles}
 
-  ${floatingButtonStyles}
-
   .manual-backup_buttons {
     margin-top: 16px;
     margin-inline-start: 24px;
@@ -170,7 +161,6 @@ const StyledManualBackup = styled.div`
 const StyledAutoBackup = styled.div`
   ${commonStyles}
 
-  ${floatingButtonStyles}
   .auto-backup_third-party-module {
     margin-top: 16px;
     margin-inline-start: 24px;
@@ -243,7 +233,6 @@ const StyledStoragesModule = styled.div`
 `;
 const StyledRestoreBackup = styled.div`
   ${commonStyles}
-  ${floatingButtonStyles}
 
   max-width: ${TEXT_LENGTH};
 
@@ -474,9 +463,7 @@ const StyledBackup = styled.div`
     font-weight: bold;
     padding-bottom: 8px;
   }
-  .layout-progress-bar {
-    cursor: default;
-  }
+
   .backup-section_wrapper {
     margin-bottom: 27px;
     .backup-section_heading {

@@ -67,7 +67,7 @@ export default async function RootLayout({
   const theme =
     (hdrs.get(THEME_HEADER) as ThemeKeys | null) ||
     self?.theme ||
-    ThemeKeys.BaseStr;
+    ThemeKeys.SystemStr;
   const locale =
     (hdrs.get(LOCALE_HEADER) as string | null) ||
     self?.cultureName ||

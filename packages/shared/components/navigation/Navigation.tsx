@@ -128,8 +128,8 @@ const Navigation = ({
   );
 
   const onClickAvailable = React.useCallback(
-    (id: number | string, isRootRoom: boolean) => {
-      onClickFolder?.(id, isRootRoom);
+    (id: number | string, isRootRoom: boolean, isRootTemplates?: boolean) => {
+      onClickFolder?.(id, isRootRoom, isRootTemplates);
       toggleDropBox();
     },
     [onClickFolder, toggleDropBox],
@@ -188,7 +188,7 @@ const Navigation = ({
   );
 
   const onTextClick = React.useCallback(() => {
-    onClickFolder(navigationItems[navigationItems.length - 2].id, false);
+    onClickFolder(navigationItems[navigationItems.length - 2].id, false, false);
     setIsOpen(false);
   }, [navigationItems, onClickFolder]);
 

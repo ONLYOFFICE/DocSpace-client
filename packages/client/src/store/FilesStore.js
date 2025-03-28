@@ -1698,6 +1698,10 @@ class FilesStore {
             const isTemplatesFolder =
               data.current.rootFolderType === FolderType.RoomTemplates;
 
+            const isRootTemplates =
+              idx === 0 &&
+              data.current.rootFolderType === FolderType.RoomTemplates;
+
             return {
               id: folder.id,
               title,
@@ -1709,6 +1713,7 @@ class FilesStore {
               external,
               quotaLimit,
               usedSpace,
+              isRootTemplates,
             };
           }),
         ).then((res) => {
@@ -2503,7 +2508,7 @@ class FilesStore {
       return fileOptions;
     }
     if (isTemplate) {
-      const templateOptions = [
+      let templateOptions = [
         "select",
         "open",
         "separator0",
@@ -2514,6 +2519,10 @@ class FilesStore {
         "separator1",
         "delete",
       ];
+
+      if (optionsToRemove.length) {
+        templateOptions = removeOptions(templateOptions, optionsToRemove);
+      }
 
       return templateOptions;
     }

@@ -29,7 +29,6 @@ import {
   FilesSelectorFilterTypes,
   ShareAccessRights,
   Events,
-  RoomsType,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -212,12 +211,6 @@ class DialogsStore {
     data: null,
   };
 
-  shareCollectSelector = {
-    visible: false,
-    file: null,
-    createDefineRoomType: RoomsType.FormRoom,
-  };
-
   warningQuotaDialogVisible = false;
 
   isNewQuotaItemsByCurrentUser = false;
@@ -314,6 +307,14 @@ class DialogsStore {
     this.infoPanelStore = infoPanelStore;
   }
 
+  /**
+   * @typedef {object} TSetIsShareFormData
+   * @property {boolean} visible
+   * @property {Function =} updateAccessLink
+   * @property {number =} fileId
+   *
+   * @param {TSetIsShareFormData} param0
+   */
   setIsShareFormData = ({ visible, updateAccessLink, fileId }) => {
     this.isShareFormData = { visible, updateAccessLink, fileId };
   };
@@ -839,28 +840,15 @@ class DialogsStore {
     this.reorderDialogVisible = visible;
   };
 
-  setFillPDFDialogData = (visible, data) => {
+  /**
+   * @param {boolean } visible
+   * @param {import("@docspace/shared/api/files/types").TFile | null =} data
+   * @returns {void}
+   */
+  setFillPDFDialogData = (visible, data = null) => {
     this.fillPDFDialogData = {
       visible,
       data,
-    };
-  };
-
-  /**
-   * @param {boolean} visible
-   * @param {import("@docspace/shared/api/files/types").TFile} [file = null]
-   * @param {import("@docspace/shared/enums").RoomsType} [createDefineRoomType = RoomsType.FormRoom]
-   * @returns {void}
-   */
-  setShareCollectSelector = (
-    visible,
-    file = null,
-    createDefineRoomType = RoomsType.FormRoom,
-  ) => {
-    this.shareCollectSelector = {
-      visible,
-      file,
-      createDefineRoomType,
     };
   };
 

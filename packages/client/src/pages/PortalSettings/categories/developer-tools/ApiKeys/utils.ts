@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 import { TTranslation } from "@docspace/shared/types";
 import { TPermissionsList } from "./types";
 
@@ -126,4 +129,21 @@ export const getPermissionsOptionTranslation = (
     default:
       return t("Common:All");
   }
+};
+
+export const sortPermissions = (list: React.ReactNode[]) => {
+  const keyOrder = ["files", "rooms", "profile", "accounts"];
+
+  return list.sort((a, b) => {
+    const aKey = (a as React.ReactElement).key ?? "";
+    const bKey = (b as React.ReactElement).key ?? "";
+
+    return keyOrder.indexOf(aKey) - keyOrder.indexOf(bKey);
+  });
+};
+
+export const getStatusByDate = (date: string, culture?: string) => {
+  const locale = getCookie(LANGUAGE) ?? culture ?? "en";
+  const dateLabel = getCorrectDate(locale, date);
+  return dateLabel;
 };

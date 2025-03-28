@@ -309,6 +309,7 @@ class SecondaryProgressDataStore {
         alert: progressInfo.alert,
         items: updatedItems,
         completed: isCompleted,
+        percent: progressInfo.percent,
       };
     } else {
       const progress = {
@@ -317,6 +318,7 @@ class SecondaryProgressDataStore {
         items: [progressInfo],
         label: getOperationsProgressTitle(operation),
         completed: progressInfo.completed,
+        percent: progressInfo.percent,
       };
 
       this.secondaryOperationsArray = [

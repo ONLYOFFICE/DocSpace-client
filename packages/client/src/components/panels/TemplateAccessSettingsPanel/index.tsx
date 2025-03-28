@@ -404,6 +404,7 @@ const TemplateAccessSettingsPanel = ({
       isLoading={!tReady || modalIsLoading}
       onSubmit={onSubmit}
       withForm
+      withoutPadding
       containerVisible={addUsersPanelVisible}
     >
       <ModalDialog.Container>

@@ -57,7 +57,7 @@ async function Page({
 
   const cookieStore = cookies();
 
-  let token = cookieStore.get("x-signature")?.value;
+  let token = cookieStore.get(`x-signature-${user!.id}`)?.value;
   let new_token = "";
 
   if (!token) {
@@ -66,7 +66,7 @@ async function Page({
 
   const [data, scopes] = await Promise.all([
     getOAuthClient(clientId),
-    getScopeList(new_token),
+    getScopeList(new_token, user!.id),
   ]);
 
   const client = data?.client as IClientProps;

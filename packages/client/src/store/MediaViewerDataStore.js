@@ -142,7 +142,11 @@ class MediaViewerDataStore {
       const key = this.publicRoomStore.publicRoomKey;
       const filterObj = FilesFilter.getFilter(window.location);
 
-      return `${combineUrl("/rooms/share", MEDIA_VIEW_URL, id)}?key=${key}&${filterObj.toUrlParams()}`;
+      if (!filterObj.key) {
+        filterObj.key = key;
+      }
+
+      return `${combineUrl("/rooms/share", MEDIA_VIEW_URL, id)}?${filterObj.toUrlParams()}`;
     }
 
     return combineUrl(MEDIA_VIEW_URL, id);
@@ -153,7 +157,11 @@ class MediaViewerDataStore {
       const key = this.publicRoomStore.publicRoomKey;
       const filterObj = FilesFilter.getFilter(window.location);
 
-      const url = `${combineUrl("/rooms/share")}?key=${key}&${filterObj.toUrlParams()}`;
+      if (!filterObj.key) {
+        filterObj.key = key;
+      }
+
+      const url = `${combineUrl("/rooms/share")}?${filterObj.toUrlParams()}`;
 
       return url;
     }

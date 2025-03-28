@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2009-2025
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,14 +24,37 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface LoadingButtonProps {
-  id?: string;
-  className?: string;
-  style?: React.CSSProperties;
-  percent?: number;
-  onClick?: VoidFunction;
-  inConversion?: boolean;
-  loaderColor?: React.CSSProperties["color"];
-  backgroundColor?: React.CSSProperties["color"];
-  isDefaultMode?: boolean;
-}
+import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
+import { TTranslation } from "@docspace/shared/types";
+import { TApiKey } from "@docspace/shared/api/api-keys/types";
+
+export const useContextOptions = (
+  t: TTranslation,
+  item: TApiKey,
+  onEditApiKey: (id: TApiKey["id"]) => void,
+  onDeleteApiKey: (id: TApiKey["id"]) => void,
+) => {
+  const contextOptions = [
+    {
+      key: "api-key_edit",
+      label: t("Common:EditButton"),
+      icon: SettingsReactSvgUrl,
+      onClick: () => onEditApiKey(item.id),
+    },
+    {
+      key: "separator",
+      isSeparator: true,
+    },
+    {
+      key: "api-key_delete",
+      label: t("Common:Delete"),
+      icon: CatalogTrashReactSvgUrl,
+      onClick: () => onDeleteApiKey(item.id),
+    },
+  ];
+
+  return {
+    contextOptions,
+  };
+};

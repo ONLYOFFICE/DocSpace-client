@@ -2479,6 +2479,8 @@ export const getBaseTheme = () => {
         loadingButton: {
           color: lightSecondMain,
           background: white,
+          defaultBackground: gray,
+          hoverColor: lightGrayDark,
         },
       },
       invite: {

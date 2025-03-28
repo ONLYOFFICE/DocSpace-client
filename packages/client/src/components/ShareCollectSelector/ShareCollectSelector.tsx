@@ -64,8 +64,7 @@ const ShareCollectSelector = inject<TStore>(
     filesStore,
   }) => {
     const { currentDeviceType } = settingsStore;
-    const { setShareCollectSelector, conflictResolveDialogVisible } =
-      dialogsStore;
+    const { conflictResolveDialogVisible } = dialogsStore;
     const { checkFileConflicts, setConflictDialogData, openFileAction } =
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
@@ -78,7 +77,6 @@ const ShareCollectSelector = inject<TStore>(
       currentDeviceType,
       conflictResolveDialogVisible,
       getIcon,
-      setShareCollectSelector,
       checkFileConflicts,
       setConflictDialogData,
       itemOperationToFolder,
@@ -96,7 +94,6 @@ const ShareCollectSelector = inject<TStore>(
       currentDeviceType,
       conflictResolveDialogVisible,
       getIcon,
-      setShareCollectSelector,
       checkFileConflicts,
       setConflictDialogData,
       clearActiveOperations,
@@ -107,6 +104,7 @@ const ShareCollectSelector = inject<TStore>(
       createDefineRoomType,
       headerProps = {},
       onCloseActionProp,
+      onCancel,
     }: ShareCollectSelectorProps & InjectShareCollectSelectorProps) => {
       const { t } = useTranslation(["Common", "Editor"]);
       const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
@@ -120,11 +118,7 @@ const ShareCollectSelector = inject<TStore>(
       const onClose = () => {
         if (onCloseActionProp) {
           onCloseActionProp();
-          return;
         }
-        if (requestRunning.current) return;
-
-        setShareCollectSelector(false);
       };
 
       const onCloseAction = () => {
@@ -185,11 +179,10 @@ const ShareCollectSelector = inject<TStore>(
             onCloseAndDeselectAction();
 
             openFileAction(selectedFolder, t);
-            try {
-              await itemOperationToFolder(operationData);
-            } catch (error) {
+
+            await itemOperationToFolder(operationData).catch((error) => {
               console.error(error);
-            }
+            });
           }
         } catch (e: unknown) {
           toastr.error(e as TData);
@@ -273,7 +266,7 @@ const ShareCollectSelector = inject<TStore>(
           submitButtonLabel={t("Common:CopyHere")}
           cancelButtonLabel={t("Common:CancelButton")}
           cancelButtonId="share-collect-selector-cancel"
-          onCancel={onClose}
+          onCancel={onCancel}
           onSubmit={onSubmit}
           getIsDisabled={getIsDisabled}
           getFilesArchiveError={getFilesArchiveError}

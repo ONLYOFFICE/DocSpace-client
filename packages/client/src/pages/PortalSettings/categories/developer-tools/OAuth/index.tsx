@@ -43,14 +43,12 @@ import GenerateDeveloperTokenDialog from "./sub-components/GenerateDeveloperToke
 import RevokeDeveloperTokenDialog from "./sub-components/RevokeDeveloperTokenDialog";
 import DisableDialog from "./sub-components/DisableDialog";
 import DeleteDialog from "./sub-components/DeleteDialog";
-import OAuthLoader from "./sub-components/List/Loader";
-import OAuthEmptyScreen from "./sub-components/EmptyScreen";
+
 import List from "./sub-components/List";
 
 const MIN_LOADER_TIME = 0;
 
 const OAuth = ({
-  isEmptyClientList,
   clientList,
   viewAs,
 

@@ -323,6 +323,14 @@ const SectionFilterContent = ({
     (data = "") => {
       const searchValue = data?.trim() ?? "";
 
+      const currentSearch =
+        filter.search ||
+        roomsFilter.filterValue ||
+        usersFilter.search ||
+        groupsFilter.search ||
+        "";
+      if (searchValue === currentSearch) return;
+
       if (
         !filter.search &&
         !roomsFilter.filterValue &&

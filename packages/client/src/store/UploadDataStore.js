@@ -964,14 +964,14 @@ class UploadDataStore {
 
     if (!onlyConversion) {
       this.handleFilesUpload(newUploadData, t, createNewIfExist);
+    } else {
+      if (this.uploaded) {
+        newUploadData.uploaded = true;
+        this.asyncUploadObj = {};
+      }
+      this.uploadedFilesHistory = newUploadData.uploadedFilesHistory;
+      // this.setUploadData(newUploadData);
     }
-    // else {
-    //   newUploadData.uploaded = true;
-
-    //   this.asyncUploadObj = {};
-
-    //   this.setUploadData(newUploadData);
-    // }
 
     if (this.tempConversionFiles.length) {
       if (this.filesSettingsStore.hideConfirmConvertSave) {

@@ -99,14 +99,14 @@ class OAuthStore {
   }
 
   setJwtToken = async () => {
-    let cookieToken = getOAuthJWTSignature();
+    let cookieToken = getOAuthJWTSignature(this.userStore!.user!.id);
 
     if (cookieToken) return;
 
     if (this.setJwtTokenRunning) {
       await new Promise((resolve) => {
         setInterval(() => {
-          cookieToken = getOAuthJWTSignature();
+          cookieToken = getOAuthJWTSignature(this.userStore!.user!.id);
           if (cookieToken) resolve(cookieToken);
         }, 100);
       });
@@ -118,7 +118,7 @@ class OAuthStore {
 
     this.setJwtTokenRunning = true;
 
-    await setOAuthJWTSignature();
+    await setOAuthJWTSignature(this.userStore.user!.id);
 
     this.setJwtTokenRunning = false;
   };
@@ -212,9 +212,14 @@ class OAuthStore {
     this.setInfoDialogVisible(false);
     this.setPreviewDialogVisible(false);
 
-    window?.DocSpace?.navigate(
-      `/portal-settings/developer-tools/oauth/${clientId}`,
-    );
+    const isPortalSettings =
+      window?.DocSpace?.location.pathname.includes("portal-settings");
+
+    const basePath = isPortalSettings ? "/portal-settings" : "";
+
+    const path = `${basePath}/developer-tools/oauth/${clientId}`;
+
+    window?.DocSpace?.navigate(path);
   };
 
   fetchClients = async () => {

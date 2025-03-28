@@ -173,7 +173,8 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   const handleOperationClick = () => {
     setIsHideTooltip(true);
     clearTimers();
-
+    setIsOpenDropdown(false);
+    setIsHovered(false);
     resetTimerRef.current = setTimeout(() => {
       setIsHideTooltip(false);
     }, 100);

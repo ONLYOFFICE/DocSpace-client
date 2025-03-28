@@ -47,8 +47,6 @@ import OAuthLoader from "./sub-components/List/Loader";
 import OAuthEmptyScreen from "./sub-components/EmptyScreen";
 import List from "./sub-components/List";
 
-const MIN_LOADER_TIME = 500;
-
 const OAuth = ({
   isEmptyClientList,
   clientList,
@@ -76,11 +74,13 @@ const OAuth = ({
 
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
 
-  const startLoadingRef = React.useRef<null | Date>(null);
+  const isRequestRunning = React.useRef<boolean>(false);
 
   const getData = React.useCallback(async () => {
-    if (startLoadingRef.current) return;
-    const actions = [];
+    if (isRequestRunning.current) return;
+
+    isRequestRunning.current = true;
+    const actions: Promise<void>[] = [];
 
     if (!isInit) {
       actions.push(fetchScopes());
@@ -90,24 +90,8 @@ const OAuth = ({
 
     await Promise.all(actions);
 
-    startLoadingRef.current = new Date();
-
-    if (startLoadingRef.current) {
-      const currentDate = new Date();
-
-      const ms = Math.abs(
-        startLoadingRef.current.getTime() - currentDate.getTime(),
-      );
-
-      if (ms < MIN_LOADER_TIME)
-        return setTimeout(() => {
-          setIsLoading(false);
-          setIsInit(true);
-        }, MIN_LOADER_TIME - ms);
-    }
-
     setIsLoading(false);
-    startLoadingRef.current = null;
+    isRequestRunning.current = false;
     setIsInit(true);
   }, [fetchClients, fetchScopes, isInit, setIsInit]);
 
@@ -118,7 +102,7 @@ const OAuth = ({
   });
 
   React.useEffect(() => {
-    if (startLoadingRef.current) return;
+    if (isRequestRunning.current) return;
     setIsLoading(true);
     getData();
   }, [getData]);

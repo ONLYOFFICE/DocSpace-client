@@ -118,7 +118,7 @@ class OAuthStore {
 
     this.setJwtTokenRunning = true;
 
-    await setOAuthJWTSignature(this.userStore.user!.id);
+    await setOAuthJWTSignature(this.userStore!.user!.id);
 
     this.setJwtTokenRunning = false;
   };
@@ -703,7 +703,7 @@ class OAuthStore {
         icon: OauthRevokeSvgUrl,
         label: t("Revoke"),
         onClick: () => this.onRevoke(clientId),
-        disabled: false,
+        disabled: !item.enabled,
       });
 
       return items;
@@ -721,6 +721,7 @@ class OAuthStore {
       icon: CodeReactSvgUrl,
       label: t("AuthButton"),
       onClick: onShowPreview,
+      disabled: !item.enabled,
     };
 
     const enableOption = {
@@ -742,6 +743,7 @@ class OAuthStore {
       icon: GenerateIconUrl,
       label: t("OAuth:GenerateToken"),
       onClick: onGenerateDeveloperToken,
+      disabled: !item.enabled,
     };
 
     const revokeDeveloperTokenOption = {
@@ -749,6 +751,7 @@ class OAuthStore {
       icon: RevokeIconUrl,
       label: t("OAuth:RevokeDialogHeader"),
       onClick: onRevokeDeveloperToken,
+      disabled: !item.enabled,
     };
 
     const contextOptions: ContextMenuModel[] = [
@@ -774,10 +777,11 @@ class OAuthStore {
         contextOptions.unshift(enableOption);
       }
 
-      contextOptions.unshift({
-        key: "Separator dropdownItem",
-        isSeparator: true,
-      });
+      if (item.enabled)
+        contextOptions.unshift({
+          key: "Separator dropdownItem",
+          isSeparator: true,
+        });
 
       contextOptions.unshift(revokeDeveloperTokenOption);
       contextOptions.unshift(generateDeveloperTokenOption);

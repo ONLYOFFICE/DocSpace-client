@@ -118,9 +118,7 @@ const ShareCollectSelector = inject<TStore>(
       const onClose = () => {
         if (onCloseActionProp) {
           onCloseActionProp();
-          return;
         }
-        if (requestRunning.current) return;
       };
 
       const onCloseAction = () => {

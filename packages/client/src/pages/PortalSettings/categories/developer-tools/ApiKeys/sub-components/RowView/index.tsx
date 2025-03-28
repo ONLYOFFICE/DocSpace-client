@@ -60,7 +60,7 @@ const RowView = (props: TableViewProps) => {
 };
 
 export default inject(({ setup, settingsStore }: TStore) => {
-  const { currentDeviceType, culture } = settingsStore;
+  const { currentDeviceType } = settingsStore;
   const { viewAs, setViewAs } = setup;
 
   return {

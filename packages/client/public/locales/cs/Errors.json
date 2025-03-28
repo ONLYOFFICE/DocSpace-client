@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Prázdná reakce",
-  "ErrorUnavailableText": "{{productName}} není k dispozici",
-  "LinkDoesNotExist": "Odkaz, který se snažíte otevřít, neexistuje.",
-  "LinkHasExpired": "Platnost odkazu, který jste použili, vypršela."
+  "ErrorUnavailableText": "{{productName}} není k dispozici"
 }

@@ -254,7 +254,7 @@ export const useOptions = (
       const edit = extension === FileExtensions.PDF;
 
       if (isMobile && edit && t) {
-        toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+        toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
         return;
       }
 

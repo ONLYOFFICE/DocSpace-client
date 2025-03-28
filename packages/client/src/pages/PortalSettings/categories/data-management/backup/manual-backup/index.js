@@ -168,8 +168,8 @@ class ManualBackup extends React.Component {
 
       const [account, backupStorage, storageRegions] = await Promise.all([
         getSettingsThirdParty(),
-        getBackupStorage(),
-        getStorageRegions(),
+        getBackupStorage(isManagement()),
+        getStorageRegions(isManagement()),
       ]);
 
       setConnectedThirdPartyAccount(account);

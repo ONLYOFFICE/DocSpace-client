@@ -1722,6 +1722,10 @@ class FilesStore {
             const isTemplatesFolder =
               data.current.rootFolderType === FolderType.RoomTemplates;
 
+            const isRootTemplates =
+              idx === 0 &&
+              data.current.rootFolderType === FolderType.RoomTemplates;
+
             return {
               id: folder.id,
               title,
@@ -1733,6 +1737,7 @@ class FilesStore {
               external,
               quotaLimit,
               usedSpace,
+              isRootTemplates,
             };
           }),
         ).then((res) => {
@@ -2535,7 +2540,7 @@ class FilesStore {
       return fileOptions;
     }
     if (isTemplate) {
-      const templateOptions = [
+      let templateOptions = [
         "select",
         "open",
         "separator0",
@@ -2546,6 +2551,10 @@ class FilesStore {
         "separator1",
         "delete",
       ];
+
+      if (optionsToRemove.length) {
+        templateOptions = removeOptions(templateOptions, optionsToRemove);
+      }
 
       return templateOptions;
     }
@@ -2869,12 +2878,7 @@ class FilesStore {
   };
 
   createFile = async (folderId, title, templateId, formId) => {
-    return api.files
-      .createFile(folderId, title, templateId, formId)
-      .then((file) => {
-        return Promise.resolve(file);
-      })
-      .then(() => this.fetchFiles(folderId, this.filter, true, true, false));
+    return api.files.createFile(folderId, title, templateId, formId);
   };
 
   setRoomCreated = (roomCreated) => {
@@ -3853,15 +3857,15 @@ class FilesStore {
     });
   };
 
-  getFileInfo = async (id) => {
-    const fileInfo = await api.files.getFileInfo(id);
+  getFileInfo = async (id, skipRedirect) => {
+    const fileInfo = await api.files.getFileInfo(id, undefined, skipRedirect);
     this.setFile(fileInfo);
 
     return fileInfo;
   };
 
-  getFolderInfo = async (id) => {
-    const folderInfo = await api.files.getFolderInfo(id);
+  getFolderInfo = async (id, skipRedirect) => {
+    const folderInfo = await api.files.getFolderInfo(id, skipRedirect);
     this.setFolder(folderInfo);
     return folderInfo;
   };

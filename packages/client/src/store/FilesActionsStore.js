@@ -2197,7 +2197,7 @@ class FilesActionStore {
         if (!this.isAvailableOption("create-room")) return null;
         return {
           id: "menu-create-room",
-          label: t("Files:CreateRoom"),
+          label: t("Common:CreateRoom"),
           onClick: this.onClickCreateRoom,
           iconUrl: CatalogRoomsReactSvgUrl,
         };

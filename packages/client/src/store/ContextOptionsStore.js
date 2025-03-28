@@ -1369,7 +1369,7 @@ class ContextOptionsStore {
       return [
         {
           key: "public-room_share",
-          label: t("Files:CopySharedLink"),
+          label: t("Common:CopySharedLink"),
           icon: TabletLinkReactSvgUrl,
           onClick: () => {
             copy(window.location.href);
@@ -1555,7 +1555,7 @@ class ContextOptionsStore {
           {
             id: "option_show-version-history",
             key: "show-version-history",
-            label: t("ShowVersionHistory"),
+            label: t("Common:ShowVersionHistory"),
             icon: HistoryReactSvgUrl,
             onClick: () =>
               this.showVersionHistory(
@@ -1587,7 +1587,7 @@ class ContextOptionsStore {
               {
                 id: "option_version-history",
                 key: "show-version-history",
-                label: t("ShowVersionHistory"),
+                label: t("Common:ShowVersionHistory"),
                 icon: HistoryReactSvgUrl,
                 onClick: () =>
                   this.showVersionHistory(
@@ -1745,7 +1745,7 @@ class ContextOptionsStore {
         icon: AccessEditReactSvgUrl,
         onClick: () => {
           if (isMobile) {
-            toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+            toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
             return;
           }
           this.onOpenPDFEditDialog(item.id);
@@ -1761,7 +1761,7 @@ class ContextOptionsStore {
           const isPDF = item.fileExst === ".pdf";
 
           if (isPDF && isMobile) {
-            toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+            toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
             return;
           }
           this.onClickLinkEdit(item);
@@ -1859,7 +1859,7 @@ class ContextOptionsStore {
       {
         id: "option_create-room",
         key: "create-room-from-template",
-        label: t("Files:CreateRoom"),
+        label: t("Common:CreateRoom"),
         icon: CreateRoomReactSvgUrl,
         onClick: () => this.filesActionsStore.onCreateRoomFromTemplate(item),
         disabled: false,
@@ -1900,7 +1900,7 @@ class ContextOptionsStore {
       {
         id: "option_copy-general-link",
         key: "copy-general-link",
-        label: t("Files:CopySharedLink"),
+        label: t("Common:CopySharedLink"),
         icon: TabletLinkReactSvgUrl,
         disabled: !isShareable,
         onClick: async () => {
@@ -1940,7 +1940,7 @@ class ContextOptionsStore {
       {
         id: "option_copy-external-link",
         key: "external-link",
-        label: t("Files:CopySharedLink"),
+        label: t("Common:CopySharedLink"),
         icon: TabletLinkReactSvgUrl,
         disabled: !hasShareLinkRights || Boolean(item.external && item.expired),
         onClick: () => this.onCreateAndCopySharedLink(item, t),
@@ -1970,7 +1970,7 @@ class ContextOptionsStore {
         label: t("SaveAsTemplate"),
         icon: CreateTemplateSvgUrl,
         onClick: () => this.onSaveAsTemplate(item),
-        badgeLabel: t("New"),
+        badgeLabel: t("Common:New"),
         disabled: !item.security?.Create || item.providerKey,
       },
       {
@@ -2017,7 +2017,7 @@ class ContextOptionsStore {
       {
         id: "option_block-unblock-version",
         key: "block-unblock-version",
-        label: t("UnblockVersion"),
+        label: t("Common:UnblockVersion"),
         icon: LockedReactSvgUrl,
         onClick: () => this.lockFile(item, t),
         disabled: false,
@@ -2065,7 +2065,7 @@ class ContextOptionsStore {
       {
         id: "option_create_room",
         key: "create-room",
-        label: t("Files:CreateRoom"),
+        label: t("Common:CreateRoom"),
         icon: CatalogRoomsReactSvgUrl,
         onClick: () => this.onCreateRoom(item, true),
         disabled: !item.security?.CreateRoomFrom,
@@ -2424,7 +2424,7 @@ class ContextOptionsStore {
       {
         id: "create_room",
         key: "create-room",
-        label: t("Files:CreateRoom"),
+        label: t("Common:CreateRoom"),
         icon: CatalogRoomsReactSvgUrl,
         onClick: () => this.onCreateRoom(null, true),
         disabled: !selection.security?.CreateRoomFrom,
@@ -2543,7 +2543,7 @@ class ContextOptionsStore {
     const isPDf = format === FileExtensions.PDF;
 
     if (isMobile && isPDf) {
-      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
       return;
     }
 
@@ -2560,7 +2560,7 @@ class ContextOptionsStore {
 
   onCreateFormFromFile = (t) => {
     if (isMobile) {
-      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
       return;
     }
 
@@ -2569,7 +2569,7 @@ class ContextOptionsStore {
 
   onShowGallery = (t) => {
     if (isMobile) {
-      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
       return;
     }
 

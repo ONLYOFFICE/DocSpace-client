@@ -34,6 +34,7 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
+import { isManagement } from "@docspace/shared/utils/common";
 
 import {
   saveToLocalStorage,
@@ -546,7 +547,7 @@ class BackupStore {
 
   getProgress = async (t) => {
     try {
-      const response = await getBackupProgress();
+      const response = await getBackupProgress(isManagement());
 
       if (response) {
         const { progress, link, error } = response;

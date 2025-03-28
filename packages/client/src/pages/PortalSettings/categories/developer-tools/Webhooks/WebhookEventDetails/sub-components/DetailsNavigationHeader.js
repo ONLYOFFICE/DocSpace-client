@@ -31,7 +31,7 @@ import { retryWebhook } from "@docspace/shared/api/settings";
 
 import { toastr } from "@docspace/shared/components/toast";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
@@ -104,9 +104,13 @@ const DetailsNavigationHeader = () => {
 
   const { t } = useTranslation(["Webhooks", "Common"]);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onBack = () => {
-    navigate(`/developer-tools/webhooks/${id}`);
+    const path = location.pathname.includes("/portal-settings")
+      ? "/portal-settings"
+      : "";
+    navigate(`${path}/developer-tools/webhooks/${id}`);
   };
 
   const handleRetryEvent = async () => {

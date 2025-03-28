@@ -217,12 +217,12 @@ const CreateRoomDialog = ({
 
   const dialogHeader = !roomParams.type
     ? t("ChooseRoomType")
-    : t("Files:CreateRoom");
+    : t("Common:CreateRoom");
 
   return (
     <ModalDialog
       displayType="aside"
-      withBodyScroll={!isTemplate}
+      withBodyScroll
       visible={visible}
       onClose={onCloseAndDisconnectThirdparty}
       isScrollLocked={isScrollLocked}

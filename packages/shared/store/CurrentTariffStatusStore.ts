@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable no-console */
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import moment from "moment-timezone";
 
 import { TariffState } from "../enums";
@@ -179,7 +179,10 @@ class CurrentTariffStatusStore {
     return api.portal.getPortalTariff(refresh).then((res) => {
       if (!res) return;
 
-      this.portalTariffStatus = res;
+      runInAction(() => {
+        this.portalTariffStatus = res;
+      });
+
       this.setIsLoaded(true);
     });
   };

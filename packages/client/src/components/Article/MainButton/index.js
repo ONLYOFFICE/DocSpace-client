@@ -210,7 +210,7 @@ const ArticleMainButtonContent = (props) => {
       const isPDF = format === "pdf";
 
       if (isPDF && isMobile) {
-        toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+        toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
         return;
       }
 
@@ -238,7 +238,7 @@ const ArticleMainButtonContent = (props) => {
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
-      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
       return;
     }
     setSelectFileDialogVisible(true);
@@ -295,7 +295,7 @@ const ArticleMainButtonContent = (props) => {
 
   const onShowGallery = () => {
     if (isMobile) {
-      toastr.info(t("Files:MobileEditPdfNotAvailableInfo"));
+      toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
       return;
     }
 

@@ -111,7 +111,7 @@ const routes = [
         element: <Bonus />,
       },
       {
-        path: "preparation-portal",
+        path: "/management/preparation-portal",
         element: <PreparationPortal />,
       },
     ],

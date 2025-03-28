@@ -62,6 +62,7 @@ type IConfigType = IConfig & {
     onSubmit?: (event: object) => void;
     onRequestFillingStatus?: (event: object) => void;
     onStartFilling?: (data: object) => void;
+    onUserActionRequired?: (event: object) => void;
   };
   editorConfig?: {
     customization?: {
@@ -121,6 +122,8 @@ const Editor = ({
     onMakeActionLink,
     // onRequestStartFilling,
     documentReady,
+
+    onUserActionRequired,
 
     setDocTitle,
   } = useEditorEvents({
@@ -254,18 +257,13 @@ const Editor = ({
     onMakeActionLink,
     onOutdatedVersion,
     onDownloadAs,
+    onUserActionRequired,
   };
 
   if (successAuth) {
-    if (
-      fileInfo?.rootFolderType !== FolderType.USER &&
-      fileInfo?.rootFolderType !== FolderType.SHARE &&
-      fileInfo?.rootFolderType !== FolderType.Recent
-    ) {
-      //TODO: remove condition for share in my
-      newConfig.events.onRequestUsers = onSDKRequestUsers;
-      newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
-    }
+    newConfig.events.onRequestUsers = onSDKRequestUsers;
+    newConfig.events.onRequestSendNotify = onSDKRequestSendNotify;
+
     if (!user?.isVisitor) {
       newConfig.events.onRequestSaveAs = onSDKRequestSaveAs;
       if (

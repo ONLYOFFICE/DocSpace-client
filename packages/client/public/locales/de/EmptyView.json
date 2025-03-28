@@ -45,6 +45,5 @@
   "UploadFromPortalDescription": "Laden Sie beliebige Dateien aus Dokumenten oder Räumen hoch",
   "UploadFromPortalTitle": "Von {{productName}} hochladen",
   "UploadPDFFormOptionDescription": "Wählen Sie ein fertiges PDF-Formular, das in {{productName}} verfügbar ist, und laden Sie es in den Raum hoch.",
-  "UserEmptyDescription": "Von Administratoren hochgeladene Dateien und Ordner werden hier angezeigt.",
   "VirtualDataRoomEmptyTitle": "Willkommen im virtuellen Datenraum"
 }

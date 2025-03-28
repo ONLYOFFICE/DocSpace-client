@@ -290,13 +290,6 @@
 
   --background-color: #{$black};
   --text-color: #{$white};
-  --interface-direction: ltr;
-
-  --toast-tap-highlight: #{$tap-highlight};
-  --toast-text-color-comp: #{$white};
-  --toast-close-button-color: #{$white};
-  --toast-transform: translate3d(150%, 0, 0);
-  --toast-top-offset: 16px;
 
   --view-selector-items-count: unset;
 
@@ -461,7 +454,10 @@
       #{$light-second-main}
     ),
     linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
-  --button-background-primary-disabled: #{$light-second-main-disabled};
+  --button-background-primary-disabled: var(
+    --accent-button,
+    #{$light-second-main-disabled}
+  );
 
   --button-border-base: 1px solid #{$gray-dark-strong};
   --button-border-base-hover: 1px solid #{$gray-dark};
@@ -715,7 +711,7 @@
 }
 
 .dark {
-  --main-button-background-color: #{$light-blue-main};
+  --main-button-background-color: var(--accent-main, #{$light-blue-main});
   --main-button-text-color: #{$white};
   --main-button-text-color-disabled: #{$white};
   --main-button-svg-fill: #{$white};
@@ -1431,12 +1427,16 @@
   --files-section-tiles-view-tile-border: 1px solid #{$gray-strong};
 
   --files-badges-bg-color: #{$white};
+
+  --files-badges-border: 1px solid #{$white};
 }
 
 .dark {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-dark-strong};
 
   --files-badges-bg-color: #{$black};
+
+  --files-badges-border: 1px solid #{$black};
 }
 
 .light {

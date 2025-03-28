@@ -1158,6 +1158,7 @@ class TableHeaderComponent extends React.Component<
       columnInfoPanelStorageName,
       columns,
       infoPanelVisible,
+      withoutWideColumn = false,
     } = this.props;
 
     if (!infoPanelVisible) localStorage.removeItem(columnStorageName);
@@ -1182,8 +1183,13 @@ class TableHeaderComponent extends React.Component<
     const containerWidth =
       container.clientWidth - defaultColumnSize - SETTINGS_SIZE;
 
-    const nameColumnPercent = enableColumns.length > 0 ? 40 : 100;
-    const percent = enableColumns.length > 0 ? 60 / enableColumns.length : 0;
+    let nameColumnPercent = enableColumns.length > 0 ? 40 : 100;
+    let percent = enableColumns.length > 0 ? 60 / enableColumns.length : 0;
+
+    if (withoutWideColumn) {
+      nameColumnPercent = 100 / columns.length;
+      percent = 100 / columns.length;
+    }
 
     const wideColumnSize = `${(containerWidth * nameColumnPercent) / 100}px`;
     const otherColumns = `${(containerWidth * percent) / 100}px`;

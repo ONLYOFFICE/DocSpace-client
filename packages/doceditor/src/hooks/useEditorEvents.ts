@@ -167,8 +167,6 @@ const useEditorEvents = ({
 
     fixSize();
 
-    frameCallCommand("setIsLoaded");
-
     if (errorMessage || isSkipError)
       return docEditor?.showMessage?.(errorMessage || t("Common:InvalidLink"));
 
@@ -225,6 +223,8 @@ const useEditorEvents = ({
     // console.log("onDocumentReady", { docEditor });
     setDocumentReady(true);
 
+    frameCallCommand("setIsLoaded");
+
     frameCallEvent({
       event: "onAppReady",
       data: { frameId: sdkConfig?.frameId },
@@ -245,6 +245,10 @@ const useEditorEvents = ({
       ); //Do not remove: it's for Back button on Mobile App
     }
   }, [config?.errorMessage, sdkConfig?.frameId]);
+
+  const onUserActionRequired = React.useCallback(() => {
+    frameCallCommand("setIsLoaded");
+  }, []);
 
   const getBackUrl = React.useCallback(() => {
     if (!fileInfo) return;
@@ -738,6 +742,7 @@ const useEditorEvents = ({
     usersInRoom,
 
     onDocumentReady,
+    onUserActionRequired,
     onSDKRequestOpen,
     onSDKRequestReferenceData,
     onSDKAppReady,

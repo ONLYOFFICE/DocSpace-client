@@ -334,6 +334,7 @@ const ComboBoxPure: React.FC<TComboboxProps> = ({
           isActive={isActive}
           isSelected={isSelected}
           style={optionStyle}
+          isSeparator={option.isSeparator}
         />
       );
     });

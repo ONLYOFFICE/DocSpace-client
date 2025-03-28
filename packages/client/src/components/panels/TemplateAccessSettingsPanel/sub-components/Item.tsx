@@ -37,8 +37,8 @@ import cloneDeep from "lodash/cloneDeep";
 import { TTranslation } from "@docspace/shared/types";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { StyledInviteUserBody } from "../StyledInvitePanel";
 import { Encoder } from "@docspace/shared/utils/encoder";
+import { StyledInviteUserBody } from "../StyledInvitePanel";
 
 type ItemProps = {
   t: TTranslation;

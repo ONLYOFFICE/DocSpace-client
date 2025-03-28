@@ -124,7 +124,7 @@ const SectionFilterContent = ({
   isRoomAdmin,
   showStorageInfo,
   isDefaultRoomsQuotaSet,
-  isTemplate,
+  isTemplatesFolder,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -225,7 +225,8 @@ const SectionFilterContent = ({
         }
 
         const path =
-          newFilter.searchArea === RoomSearchArea.Active
+          newFilter.searchArea === RoomSearchArea.Active ||
+          newFilter.searchArea === RoomSearchArea.Templates
             ? "rooms/shared"
             : "rooms/archived";
         navigate(
@@ -292,7 +293,8 @@ const SectionFilterContent = ({
       newFilter.searchArea = roomsFilter.searchArea;
 
       const path =
-        roomsFilter.searchArea === RoomSearchArea.Active
+        roomsFilter.searchArea === RoomSearchArea.Active ||
+        roomsFilter.searchArea === RoomSearchArea.Templates
           ? "rooms/shared"
           : "rooms/archived";
 
@@ -350,7 +352,8 @@ const SectionFilterContent = ({
         newFilter.filterValue = searchValue;
 
         const path =
-          newFilter.searchArea === RoomSearchArea.Active
+          newFilter.searchArea === RoomSearchArea.Active ||
+          newFilter.searchArea === RoomSearchArea.Templates
             ? "rooms/shared"
             : "rooms/archived";
 
@@ -401,7 +404,8 @@ const SectionFilterContent = ({
 
       if (isRooms) {
         const path =
-          newFilter.searchArea === RoomSearchArea.Active
+          newFilter.searchArea === RoomSearchArea.Active ||
+          newFilter.searchArea === RoomSearchArea.Templates
             ? "rooms/shared"
             : "rooms/archived";
         setRoomsFilter(newFilter);
@@ -926,7 +930,7 @@ const SectionFilterContent = ({
       {
         key: FilterGroups.roomFilterSubject,
         group: FilterGroups.roomFilterSubject,
-        label: isTemplate ? t("TemplateOwner") : t("Common:Member"),
+        label: isTemplatesFolder ? t("TemplateOwner") : t("Common:Member"),
         isHeader: true,
         withoutSeparator: true,
         withMultiItems: true,
@@ -1035,7 +1039,7 @@ const SectionFilterContent = ({
         filterOptions.push(...tagsOptions);
       }
 
-      if (connectedThirdParty.length > 0 && !isTemplate) {
+      if (connectedThirdParty.length > 0 && !isTemplatesFolder) {
         const thirdPartyOptions = connectedThirdParty.map((thirdParty) => {
           const key = Object.entries(RoomsProviderType).find(
             (item) => item[0] === thirdParty,
@@ -1314,7 +1318,8 @@ const SectionFilterContent = ({
         newFilter.page = 0;
 
         const path =
-          newFilter.searchArea === RoomSearchArea.Active
+          newFilter.searchArea === RoomSearchArea.Active ||
+          newFilter.searchArea === RoomSearchArea.Templates
             ? "rooms/shared"
             : "rooms/archived";
 
@@ -1368,8 +1373,13 @@ const SectionFilterContent = ({
         newFilter.searchArea = RoomSearchArea.Archive;
       }
 
+      if (isTemplatesFolder) {
+        newFilter.searchArea = RoomSearchArea.Templates;
+      }
+
       const path =
-        newFilter.searchArea === RoomSearchArea.Active
+        newFilter.searchArea === RoomSearchArea.Active ||
+        newFilter.searchArea === RoomSearchArea.Templates
           ? "rooms/shared"
           : "rooms/archived";
 
@@ -1516,6 +1526,7 @@ export default inject(
       isRooms,
       isTrash,
       isArchiveFolder,
+      isTemplatesFolder,
       isIndexing: isIndexedFolder,
       isIndexEditingMode,
 
@@ -1552,7 +1563,6 @@ export default inject(
       setRoomsFilter,
       standalone,
       currentDeviceType,
-      isTemplate: isTemplatesFolder,
     };
   },
 )(

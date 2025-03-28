@@ -80,7 +80,7 @@ const OAuth = ({
 
   const getData = React.useCallback(async () => {
     if (startLoadingRef.current) return;
-    const actions = [];
+    const actions: Promise<void>[] = [];
 
     if (!isInit) {
       actions.push(fetchScopes());
@@ -88,9 +88,9 @@ const OAuth = ({
 
     actions.push(fetchClients());
 
-    await Promise.all(actions);
-
     startLoadingRef.current = new Date();
+
+    await Promise.all(actions);
 
     if (startLoadingRef.current) {
       const currentDate = new Date();

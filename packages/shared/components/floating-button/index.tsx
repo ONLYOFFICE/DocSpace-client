@@ -109,7 +109,7 @@ const FloatingButton = ({
     icon as (typeof accentIcons)[number],
   );
 
-  const isCompleted = completed || (percent && percent >= 100);
+  const isCompleted = completed || (completed && percent && percent >= 100);
 
   return (
     <div

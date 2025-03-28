@@ -149,6 +149,7 @@ class UploadDataStore {
   asyncUploadObj = {};
 
   conversionVisible = false;
+
   totalErrorsCount = 0;
 
   constructor(

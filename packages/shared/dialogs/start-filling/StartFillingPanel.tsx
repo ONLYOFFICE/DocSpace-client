@@ -228,10 +228,11 @@ const StartFillingPanel = ({
 
   return (
     <ModalDialog
-      displayType={ModalDialogType.aside}
       visible
-      containerVisible={isRoleSelectorVisible || isInvitePanelVisible}
+      withBodyScroll
       onClose={closeStartFillingPanel}
+      displayType={ModalDialogType.aside}
+      containerVisible={isRoleSelectorVisible || isInvitePanelVisible}
     >
       <ModalDialog.Container>
         {isRoleSelectorVisible && !isInvitePanelVisible ? (

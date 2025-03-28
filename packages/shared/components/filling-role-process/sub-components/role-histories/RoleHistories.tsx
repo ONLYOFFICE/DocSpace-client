@@ -39,7 +39,7 @@ const RoleHistories = ({
   className,
   stoppedBy,
 }: RoleHistoryProps) => {
-  const { t } = useTranslation("Common");
+  const { t, i18n } = useTranslation("Common");
 
   const stoppedByUserName = stoppedBy ? decode(stoppedBy.displayName) : "";
 
@@ -68,9 +68,9 @@ const RoleHistories = ({
       {histories.map((history) => {
         const [key, value] = history;
 
-        const date = DateTime.fromISO(value).toLocaleString(
-          DateTime.DATETIME_SHORT,
-        );
+        const date = DateTime.fromISO(value)
+          .setLocale(i18n.language)
+          .toLocaleString(DateTime.DATETIME_SHORT);
 
         const text = historyTexts[key];
 

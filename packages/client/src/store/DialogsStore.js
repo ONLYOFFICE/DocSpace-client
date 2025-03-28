@@ -277,6 +277,16 @@ class DialogsStore {
 
   operationCancelVisible = false;
 
+  /**
+   * @type {Object}
+   * @property {boolean} visible - The visibility of the remove user confirmation dialog.
+   * @property {() => Promise<void> | null} callback - The callback function to be called when the dialog is confirmed.
+   */
+  removeUserConfirmation = {
+    visible: false,
+    callback: null,
+  };
+
   isShareFormData = { visible: false, updateAccessLink: null, fileId: null };
 
   constructor(
@@ -969,6 +979,17 @@ class DialogsStore {
     this.stopFillingDialogData = {
       visible,
       formId,
+    };
+  };
+
+  /**
+   * @param {boolean} visible
+   * @param {()=>Promise<void>=} callback
+   */
+  setRemoveUserConfirmation = (visible, callback = null) => {
+    this.removeUserConfirmation = {
+      visible,
+      callback,
     };
   };
 }

@@ -766,3 +766,8 @@ export enum WebhookTriggers {
   RoomRestored = 67108864,
   RoomCopied = 134217728,
 }
+
+export enum RoomSecurityError {
+  None,
+  FormRoleBlockingDeletion,
+}

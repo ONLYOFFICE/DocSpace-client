@@ -29,6 +29,7 @@ import type { TUser } from "../../api/people/types";
 import type { TSettings } from "../../api/settings/types";
 import type { IRole } from "../../components/filling-role-selector";
 import type { TFormRoleMappingRequest } from "../../api/files/types";
+import type { TTranslation } from "../../types";
 
 export type Invitation = { id: string | number; access: string | number };
 
@@ -44,4 +45,11 @@ export interface IStartFillingPanelProps {
     roomId: string,
     invitations: Invitation[],
   ) => Promise<unknown>;
+}
+
+export interface HeaderProps {
+  className?: string;
+  roleName: string;
+  t: TTranslation;
+  openInvitePanel: VoidFunction;
 }

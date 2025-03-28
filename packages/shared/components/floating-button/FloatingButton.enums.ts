@@ -42,4 +42,5 @@ export const FloatingButtonIcons = {
   copy: OPERATIONS_NAME.copy,
   markAsRead: OPERATIONS_NAME.markAsRead,
   other: OPERATIONS_NAME.other,
+  backup: OPERATIONS_NAME.backup,
 } as const;

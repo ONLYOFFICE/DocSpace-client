@@ -216,6 +216,7 @@ export const OPERATIONS_NAME = Object.freeze({
   other: "other",
   upload: "upload",
   deleteVersionFile: "deleteVersionFile",
+  backup: "backup",
 });
 
 export const thumbnailStatuses = {

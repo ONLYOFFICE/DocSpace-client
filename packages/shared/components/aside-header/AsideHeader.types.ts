@@ -36,6 +36,8 @@ export type AsideHeaderProps = PickedDivProps & {
   header?: string | React.ReactNode;
   /** Array of icons to display in the header */
   headerIcons?: HeaderIcon[];
+  /** Additional component to render in the header */
+  headerComponent?: React.ReactNode;
   /** Whether the header is in a loading state */
   isLoading?: boolean;
   /** Whether to hide the bottom border */

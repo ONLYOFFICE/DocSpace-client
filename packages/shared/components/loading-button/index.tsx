@@ -25,10 +25,33 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useEffect } from "react";
+import styled, { css } from "styled-components";
 import { ColorTheme, ThemeId } from "../color-theme";
 import StyledLoadingButton from "../color-theme/sub-components/StyledLoadingButton";
 import StyledCircle from "../color-theme/sub-components/StyledCircle";
 import type { LoadingButtonProps } from "./LoadingButton.types";
+
+const StyledBody = styled(ColorTheme)<LoadingButtonProps>`
+  ${(props) =>
+    props.isDefaultMode &&
+    css`
+      .circle__mask .circle__fill {
+        background-color: ${props.theme.filesPanels.upload.loadingButton
+          .defaultBackground};
+      }
+      .loading-button {
+        cursor: pointer;
+        color: ${props.theme.filesPanels.upload.loadingButton
+          .defaultBackground};
+      }
+
+      &:hover {
+        .loading-button {
+          color: ${props.theme.filesPanels.upload.loadingButton.hoverColor};
+        }
+      }
+    `}
+`;
 
 const LoadingButton: React.FC<LoadingButtonProps> = ({
   percent = 0,
@@ -36,6 +59,7 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
   inConversion = false,
   loaderColor,
   backgroundColor,
+  isDefaultMode,
 }) => {
   const [isAnimation, setIsAnimation] = useState<boolean>(true);
 
@@ -52,10 +76,11 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
   }, [isAnimation]);
 
   return (
-    <ColorTheme
+    <StyledBody
       themeId={ThemeId.LoadingButton}
       loaderColor={loaderColor}
       onClick={onClick}
+      isDefaultMode={isDefaultMode}
     >
       <StyledCircle
         percent={percent}
@@ -76,7 +101,7 @@ const LoadingButton: React.FC<LoadingButtonProps> = ({
           {!inConversion ? <>&times;</> : null}
         </StyledLoadingButton>
       </StyledCircle>
-    </ColorTheme>
+    </StyledBody>
   );
 };
 

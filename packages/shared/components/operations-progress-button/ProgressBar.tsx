@@ -30,13 +30,13 @@ import AlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import TickIcon from "PUBLIC_DIR/images/icons/12/tick.react.svg";
 import RightArrowIcon from "PUBLIC_DIR/images/icons/12/right-arrow.react.svg";
 
-import { classNames } from "../../../utils";
-import { Text } from "../../text";
-import { IconButton } from "../../icon-button";
-import { globalColors } from "../../../themes";
-import styles from "../Section.module.scss";
-import { ProgressBarMobileProps } from "../Section.types";
-import { LoadingButton } from "../../loading-button";
+import { classNames } from "../../utils";
+import { Text } from "../text";
+import { IconButton } from "../icon-button";
+import { globalColors } from "../../themes";
+import styles from "./OperationsProgressButton.module.scss";
+import { ProgressBarMobileProps } from "./OperationsProgressButton.types";
+import { LoadingButton } from "../loading-button";
 
 const ProgressBar = ({
   label,

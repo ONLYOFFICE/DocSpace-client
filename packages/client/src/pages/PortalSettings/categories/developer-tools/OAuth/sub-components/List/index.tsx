@@ -100,7 +100,7 @@ const List = ({
       ) : null}
       <RegisterNewButton currentDeviceType={currentDeviceType} />
       {isLoading ? (
-        <OAuthLoader viewAs={viewAs} currentDeviceType={currentDeviceType} />
+        <OAuthLoader viewAs={viewAs} />
       ) : (
         <Consumer>
           {(context) =>

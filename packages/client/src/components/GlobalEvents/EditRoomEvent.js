@@ -88,7 +88,11 @@ const EditRoomEvent = ({
     if (templateMembersData?.items?.length) {
       const convertedItems = templateMembersData.items.map(
         ({ access, isOwner, sharedTo }) => {
-          return { access, isOwner, ...sharedTo };
+          return {
+            templateAccess: access,
+            templateIsOwner: isOwner,
+            ...sharedTo,
+          };
         },
       );
       setAccessItems(convertedItems);

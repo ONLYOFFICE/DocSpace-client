@@ -73,8 +73,8 @@ const Item = ({
 
     let newItems = cloneDeep(inviteItems);
 
-    if (newItems[itemIndex].access) {
-      newItems[itemIndex].access = ShareAccessRights.None;
+    if (newItems[itemIndex].templateAccess) {
+      newItems[itemIndex].templateAccess = ShareAccessRights.None;
     } else {
       newItems = newItems.filter((inviteItem) => inviteItem.id !== id);
     }
@@ -82,7 +82,7 @@ const Item = ({
     setInviteItems(newItems);
   };
 
-  const canDelete = !item.isOwner && !isDisabled;
+  const canDelete = !item.templateIsOwner && !isDisabled;
 
   return (
     <>

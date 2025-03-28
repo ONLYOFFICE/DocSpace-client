@@ -552,12 +552,9 @@ class UploadDataStore {
         });
 
         if (this.convertedFromFiles) {
-          this.totalErrorsCount += 1;
-
           this.primaryProgressDataStore.setPrimaryProgressBarData({
             operation: operationName,
             alert: true,
-            errorCount: this.totalErrorsCount,
           });
         }
 
@@ -584,12 +581,9 @@ class UploadDataStore {
         error = response && response[0] && response[0].error;
 
         if (error?.length) {
-          const percent = this.getConversationPercent(index + 1);
-
           this.primaryProgressDataStore.setPrimaryProgressBarData({
             operation: operationName,
             alert: true,
-            percent,
           });
 
           runInAction(() => {

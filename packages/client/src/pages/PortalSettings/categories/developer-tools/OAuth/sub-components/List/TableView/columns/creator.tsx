@@ -32,6 +32,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
+import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
 
 const StyledAvatar = styled(Avatar)`
   width: 16px !important;
@@ -48,6 +49,8 @@ interface CreatorCellProps {
 }
 
 const CreatorCell = ({ avatar, displayName }: CreatorCellProps) => {
+  if (!displayName) return <RectangleSkeleton width="70px" height="16px" />;
+
   return (
     <>
       <StyledAvatar

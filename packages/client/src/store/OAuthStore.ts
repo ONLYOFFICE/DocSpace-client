@@ -229,30 +229,38 @@ class OAuthStore {
       this.setClientsIsLoading(true);
       const clientList: IClientListProps = await getClientList(0, PAGE_LIMIT);
 
-      const { id, displayName, avatarSmall } = this.userStore!.user!;
+      const fetchUsers = async () => {
+        const { id, displayName, avatarSmall } = this.userStore!.user!;
 
-      const newUsers = clientList.data
-        .filter((c) => c.createdBy !== id)
-        .map((c) => c.createdBy)
-        .filter((c, idx, arr) => arr.indexOf(c) === idx);
+        const newUsers = clientList.data
+          .filter((c) => c.createdBy !== id)
+          .map((c) => c.createdBy)
+          .filter((c, idx, arr) => arr.indexOf(c) === idx);
 
-      const users = await Promise.all(
-        newUsers.map((u) => api.people.getUserById(u)),
-      );
+        const users = await Promise.all(
+          newUsers.map((u) => api.people.getUserById(u)),
+        );
 
-      clientList.data.forEach((client) => {
-        const user = users.find((u) => u.id === client.createdBy);
+        clientList.data.forEach((client) => {
+          const user = users.find((u) => u.id === client.createdBy);
 
-        if (user) {
-          client.creatorAvatar = user.avatarSmall;
-          client.creatorDisplayName = user.displayName;
-        }
+          if (user) {
+            client.creatorAvatar = user.avatarSmall;
+            client.creatorDisplayName = user.displayName;
+          }
 
-        if (client.createdBy === id) {
-          client.creatorAvatar = avatarSmall;
-          client.creatorDisplayName = displayName;
-        }
-      });
+          if (client.createdBy === id) {
+            client.creatorAvatar = avatarSmall;
+            client.creatorDisplayName = displayName;
+          }
+        });
+
+        runInAction(() => {
+          this.clients = [...clientList.data];
+        });
+      };
+
+      fetchUsers();
 
       runInAction(() => {
         this.clients = [...clientList.data];
@@ -291,38 +299,46 @@ class OAuthStore {
       PAGE_LIMIT,
     );
 
-    const { id, displayName, avatarSmall } = this.userStore!.user!;
+    const fetchUsers = async () => {
+      const { id, displayName, avatarSmall } = this.userStore!.user!;
 
-    const newUsers = clientList.data
-      .filter(
-        (c) =>
-          c.createdBy !== id ||
-          !this.clientList.find((cl) => cl.createdBy === c.createdBy),
-      )
-      .map((c) => c.createdBy)
-      .filter((c, idx, arr) => arr.indexOf(c) === idx);
+      const newUsers = clientList.data
+        .filter(
+          (c) =>
+            c.createdBy !== id ||
+            !this.clientList.find((cl) => cl.createdBy === c.createdBy),
+        )
+        .map((c) => c.createdBy)
+        .filter((c, idx, arr) => arr.indexOf(c) === idx);
 
-    const users = await Promise.all(
-      newUsers.map((u) => api.people.getUserById(u)),
-    );
+      const users = await Promise.all(
+        newUsers.map((u) => api.people.getUserById(u)),
+      );
 
-    clientList.data.forEach((client) => {
-      const user =
-        users.find((u) => u.id === client.createdBy) ??
-        this.clientList.find((cl) => cl.createdBy === client.createdBy);
+      clientList.data.forEach((client) => {
+        const user =
+          users.find((u) => u.id === client.createdBy) ??
+          this.clientList.find((cl) => cl.createdBy === client.createdBy);
 
-      if (user) {
-        client.creatorAvatar =
-          "avatarSmall" in user ? user.avatarSmall : user.creatorAvatar;
-        client.creatorDisplayName =
-          "displayName" in user ? user.displayName : user.creatorDisplayName;
-      }
+        if (user) {
+          client.creatorAvatar =
+            "avatarSmall" in user ? user.avatarSmall : user.creatorAvatar;
+          client.creatorDisplayName =
+            "displayName" in user ? user.displayName : user.creatorDisplayName;
+        }
 
-      if (client.createdBy === id) {
-        client.creatorAvatar = avatarSmall;
-        client.creatorDisplayName = displayName;
-      }
-    });
+        if (client.createdBy === id) {
+          client.creatorAvatar = avatarSmall;
+          client.creatorDisplayName = displayName;
+        }
+      });
+
+      runInAction(() => {
+        this.clients = [...this.clients, ...clientList.data];
+      });
+    };
+
+    fetchUsers();
 
     runInAction(() => {
       this.currentPage = clientList.page;

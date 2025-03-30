@@ -381,6 +381,7 @@ export type SelectorProps = TSelectorHeader &
     injectedElement?: React.ReactElement;
 
     isSSR?: boolean;
+    selectedItem?: TSelectorItem | null;
   };
 
 export type BodyProps = TSelectorInfo & {

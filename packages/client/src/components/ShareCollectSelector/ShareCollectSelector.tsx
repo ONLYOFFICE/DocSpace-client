@@ -228,7 +228,10 @@ const ShareCollectSelector = inject<TStore>(
 
       const infoBarData: TInfoBarData = {
         title: t("Common:SelectorInfoBarTitle"),
-        description: t("Common:SelectorInfoBarDescription"),
+        description:
+          createDefineRoomType === RoomsType.FormRoom
+            ? t("Common:SelectorInfoBarDescription")
+            : t("Common:SelectorInfoBarVDRDescription"),
         icon: InfoIcon,
         onClose: onCloseInfoBar,
       };

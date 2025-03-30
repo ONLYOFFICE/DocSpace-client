@@ -79,6 +79,7 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
     maxWidth,
     padding,
     borderRadius,
+    "--badge-background-color": backgroundColor,
   } as React.CSSProperties;
 
   const textStyle = {

@@ -223,7 +223,7 @@ const Body = ({
   const showSearch = withSearch && (isSearch || itemsCount > 0);
   const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
 
-  if (!withTabs && withPadding) {
+  if (withPadding) {
     listHeight -= CONTAINER_PADDING;
   }
 
@@ -248,7 +248,8 @@ const Body = ({
   const isShareFormEmpty =
     itemsCount === 0 &&
     Boolean(items?.[0]?.isRoomsOnly) &&
-    Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom);
+    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
+      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
 
   return (
     <StyledBody

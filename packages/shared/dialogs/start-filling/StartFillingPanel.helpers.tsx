@@ -23,81 +23,23 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-@import "../../styles/variables/_colors";
-@import "../../styles/_mixins.scss";
 
-:global(.dark) {
-  :local {
-    .fileStatus {
-      --file-status-color: #{$dark-gray-light};
-    }
-  }
-}
+import { memo, forwardRef } from "react";
+import type { HeaderProps } from "./StartFillingPanel.types";
 
-:global(.light) {
-  :local {
-    .fileStatus {
-      --file-status-color: #{$white};
-    }
-  }
-}
+export const Header = memo(
+  forwardRef<HTMLDivElement, HeaderProps>(
+    ({ t, roleName, className, openInvitePanel }, ref) => (
+      <div className={className} ref={ref}>
+        <h3>
+          {t("Common:RoleFields", {
+            roleName,
+          })}
+        </h3>
+        <span onClick={openInvitePanel}>{t("Common:AddUserToRoom")}</span>
+      </div>
+    ),
+  ),
+);
 
-.fileInfo {
-  display: flex;
-  align-items: center;
-
-  background-color: var(--info-block-background);
-  border-radius: 6px;
-  gap: 8px;
-  padding: 8px 15px;
-
-  margin-top: 16px;
-
-  @include no-user-select;
-}
-
-.infoBar {
-  @include no-user-select;
-}
-
-.fileName {
-  font-weight: 600;
-}
-
-.fileStatus {
-  display: flex;
-  align-items: center;
-
-  height: 16px;
-  padding: 2px 5px;
-  border-radius: 50px;
-
-  box-sizing: border-box;
-
-  margin-inline-start: auto;
-
-  span {
-    font-size: 9px;
-    line-height: 12px;
-    font-weight: 800;
-    color: white;
-  }
-}
-
-.processContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  margin-top: 16px;
-  padding-top: 8px;
-
-  @include no-user-select;
-}
-
-.processTitle {
-  font-weight: 600;
-  line-height: 16px;
-  font-size: 14px;
-  color: var(--info-block-description-color);
-}
+Header.displayName = "Header";

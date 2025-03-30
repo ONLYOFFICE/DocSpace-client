@@ -47,6 +47,10 @@ export enum FeedAction {
   CHANGE_COLOR = "changeColor",
   CHANGE_COVER = "changeCover",
   DeleteVersion = "deleteVersion",
+  FormStartedToFill = "formStartedToFill",
+  FormPartiallyFilled = "formPartiallyFilled",
+  FormCompletelyFilled = "formCompletelyFilled",
+  FormStopped = "formStopped",
 }
 
 enum FeedTarget {
@@ -149,6 +153,32 @@ export const feedInfo = [
     targetType: `${FeedTarget.File}`,
     actionType: `${FeedAction.DeleteVersion}`,
   },
+  {
+    key: "FormStartedToFill",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.FormStartedToFill}`,
+  },
+  {
+    key: "FormPartiallyFilled",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.FormPartiallyFilled}`,
+  },
+  {
+    key: "FormCompletelyFilled",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.FormCompletelyFilled}`,
+  },
+  {
+    key: "FormStopped",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.FormStopped}`,
+  },
+
+  // MessageAction.FormStartedToFill,
+  //         MessageAction.FormPartiallyFilled,
+  //         MessageAction.FormCompletelyFilled,
+  //         MessageAction.FormStopped
+
   // FOLDER
   {
     key: "FolderCreated",

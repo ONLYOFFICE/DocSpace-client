@@ -26,7 +26,6 @@
 
 import { TUser } from "../../api/people/types";
 import PeopleFilter from "../../api/people/filter";
-import type { TGroup } from "../../api/groups/types";
 import {
   TSelectorAccessRights,
   TSelectorCancelButton,
@@ -36,6 +35,8 @@ import {
   TSelectorSubmitButton,
   TSelectorWithAside,
 } from "../../components/selector/Selector.types";
+
+import type Filter from "../../api/people/filter";
 
 export interface UserTooltipProps {
   avatarUrl: string;
@@ -63,7 +64,7 @@ export type PeopleSelectorProps = TSelectorHeader &
     className?: string;
     style?: React.CSSProperties;
 
-    filter?: PeopleFilter | Function;
+    filter?: PeopleFilter | (() => Filter);
 
     isMultiSelect?: boolean;
 
@@ -83,6 +84,7 @@ export type PeopleSelectorProps = TSelectorHeader &
 
     checkIfUserInvited?: (user: TUser) => boolean;
     injectedElement?: React.ReactElement;
-    filterItems?: (user: TUser | TGroup) => boolean;
+    alwaysShowFooter?: boolean;
+    onlyRoomMembers?: boolean;
   } & ContactsSelectorGroups &
   ContactsSelectorGuests;

@@ -126,6 +126,7 @@ export const FillingStatusPanel = ({
             bodyText={t("Common:FillingStatusBarDescription")}
             iconName={InfoSvgUrl}
             onClose={() => setValue(false)}
+            className={styles.infoBar}
           />
         ) : null}
         <div className={styles.fileInfo}>

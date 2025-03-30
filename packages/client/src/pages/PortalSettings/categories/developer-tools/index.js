@@ -166,7 +166,7 @@ const DeveloperToolsWrapper = (props) => {
 export const Component = inject(({ setup, settingsStore, authStore }) => {
   const { initSettings } = setup;
 
-  const { identityServerEnabled } = authStore.capabilities;
+  const identityServerEnabled = authStore?.capabilities?.identityServerEnabled;
 
   return {
     currentDeviceType: settingsStore.currentDeviceType,

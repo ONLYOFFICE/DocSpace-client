@@ -132,7 +132,7 @@ const SectionBodyContent = (props) => {
 export default inject(({ settingsStore, clientLoadingStore, authStore }) => {
   const { showProfileLoader } = clientLoadingStore;
 
-  const { identityServerEnabled } = authStore.capabilities;
+  const identityServerEnabled = authStore?.capabilities?.identityServerEnabled;
 
   return {
     currentDeviceType: settingsStore.currentDeviceType,

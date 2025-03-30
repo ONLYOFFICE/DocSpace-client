@@ -64,6 +64,8 @@ const RowView = (props: RowViewProps) => {
     };
   }, [setSelection]);
 
+  if (!items.length) return null;
+
   return (
     <StyledRowContainer
       itemHeight={59}

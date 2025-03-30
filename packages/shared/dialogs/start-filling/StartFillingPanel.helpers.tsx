@@ -31,7 +31,11 @@ export const Header = memo(
   forwardRef<HTMLDivElement, HeaderProps>(
     ({ t, roleName, className, openInvitePanel }, ref) => (
       <div className={className} ref={ref}>
-        <h3>
+        <h3
+          title={t("Common:RoleFields", {
+            roleName,
+          })}
+        >
           {t("Common:RoleFields", {
             roleName,
           })}

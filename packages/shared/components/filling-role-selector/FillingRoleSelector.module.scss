@@ -76,8 +76,36 @@
   color: $gray;
 }
 
+.button {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.name {
+  display: inline-block;
+  flex-shrink: 1;
+
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: start;
+
+  color: var(--text-color);
+  @include truncate;
+}
+
 .plus {
+  display: inline-block;
   position: relative;
+  flex-shrink: 0;
 
   width: 32px;
   height: 32px;
@@ -144,6 +172,7 @@
 .remove {
   cursor: pointer;
   margin-inline-start: auto;
+  flex-shrink: 0;
 
   path {
     fill: var(--remove-color);

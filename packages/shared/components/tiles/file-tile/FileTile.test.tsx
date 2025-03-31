@@ -27,6 +27,9 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+
+import { FileType } from "../../../enums";
+
 import { FileTile } from "./FileTile";
 import { FileItemType } from "./FileTile.types";
 
@@ -74,7 +77,7 @@ describe("FileTile", () => {
     id: "1",
     title: "Test File",
     fileExst: ".docx",
-    fileType: "docx",
+    fileType: FileType.Document,
   };
 
   const mockContextOptions = [

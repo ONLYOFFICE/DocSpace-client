@@ -467,7 +467,7 @@
         }
 
         case "system": {
-          path = `/sdk/system`;
+          path = `/old-sdk/system`;
           break;
         }
 

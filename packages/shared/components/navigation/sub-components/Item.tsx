@@ -46,10 +46,11 @@ const Item = ({
   onClick,
   withLogo,
   currentDeviceType,
+  isRootTemplates,
   ...rest
 }: TNavigationItemProps) => {
   const onClickAvailable = () => {
-    onClick?.(id, isRootRoom);
+    onClick?.(id, isRootRoom, isRootTemplates);
   };
 
   return (

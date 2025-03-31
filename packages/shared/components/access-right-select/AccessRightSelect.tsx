@@ -101,7 +101,7 @@ export const AccessRightSelectPure = ({
           onClick={() => onSelectCurrentItem(item)}
         >
           <StyledItem>
-            {item.icon ? (
+            {item.icon && typeof item.icon === "string" ? (
               <StyledItemIcon
                 src={item.icon}
                 isShortenIcon={type === "onlyIcon"}

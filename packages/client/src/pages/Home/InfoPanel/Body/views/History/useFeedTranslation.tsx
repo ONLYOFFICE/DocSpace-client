@@ -261,6 +261,18 @@ export const useFeedTranslation = (
     case "FileCustomFilterDisabled":
       return t("InfoPanel:FileCustomFilterDisabled");
 
+    case "FormStartedToFill":
+      return t("InfoPanel:FormStartedToFill");
+
+    case "FormPartiallyFilled":
+      return t("InfoPanel:FormPartiallyFilled");
+
+    case "FormCompletelyFilled":
+      return t("InfoPanel:FormCompletelyFilled");
+
+    case "FormStopped":
+      return t("InfoPanel:FormStopped");
+
     default:
       return null;
   }

@@ -94,6 +94,9 @@ class WebhooksStore {
           enabled: data.configs.enabled,
           ssl: data.configs.ssl,
           status: data.status,
+          triggers: data.configs.triggers,
+          createdBy: data.configs.createdBy,
+          targetId: data.configs.targetId,
         }));
       });
     } catch (error) {
@@ -107,6 +110,8 @@ class WebhooksStore {
       webhook.uri,
       webhook.secretKey,
       webhook.ssl,
+      webhook.triggers,
+      webhook.targetId,
     );
 
     this.webhooks = [
@@ -118,6 +123,9 @@ class WebhooksStore {
         enabled: webhookData.enabled,
         secretKey: webhookData.secretKey,
         ssl: webhookData.ssl,
+        triggers: webhookData.triggers,
+        createdBy: webhookData.createdBy,
+        targetId: webhookData.targetId,
       },
     ];
   };
@@ -144,6 +152,8 @@ class WebhooksStore {
       webhookInfo.uri,
       webhookInfo.secretKey || prevWebhook.secretKey,
       webhookInfo.ssl,
+      webhookInfo.triggers,
+      webhookInfo.targetId,
     );
     this.webhooks = this.webhooks.map((webhook) =>
       webhook.id === prevWebhook.id
@@ -159,7 +169,7 @@ class WebhooksStore {
       count: 1,
     });
 
-    this.configName = historyData.items[0].configName;
+    this.configName = historyData.items[0]?.configName || "";
   };
 
   clearConfigName = () => {

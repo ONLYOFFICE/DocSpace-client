@@ -153,7 +153,7 @@ export default function FilesSelectorClient({
     }
   }, []);
 
-  const getIsDisabled = useCallback(() => false, []);
+  const getIsDisabled = useCallback((isDisabled: boolean) => isDisabled, []);
 
   const getFilesArchiveError = useCallback(() => "", []);
 
@@ -226,6 +226,7 @@ export default function FilesSelectorClient({
     withFooterInput: false,
     withoutBackButton: true,
     withSearch: search as boolean,
+    filterParam: filter,
   };
 
   const newProps = {

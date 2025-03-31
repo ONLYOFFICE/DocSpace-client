@@ -36,11 +36,16 @@ import {
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
-import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
-import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import {
+  HeaderProps,
+  TBreadCrumb,
+} from "@docspace/shared/components/selector/Selector.types";
+import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
+  RoomsType,
+  StartFillingMode,
 } from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
@@ -112,6 +117,7 @@ export type TDocument = {
     fileKey: string;
     instanceId: string;
     key: string;
+    roomId: string;
   };
   title: string;
   token: string;
@@ -191,8 +197,9 @@ export interface IInitialConfig {
   errorMessage?: string;
   message?: undefined;
   startFilling?: boolean;
-
+  startFillingMode?: StartFillingMode;
   fillingSessionId?: string;
+  fillingStatus?: boolean;
 }
 
 export type TError = {
@@ -249,13 +256,16 @@ export type EditorProps = {
   organizationName?: string;
 
   onDownloadAs?: (obj: object) => void;
+  openShareFormDialog?: () => void;
   onSDKRequestSharingSettings?: () => void;
   onSDKRequestSaveAs?: (event: object) => void;
   onSDKRequestInsertImage?: (event: object) => void;
   onSDKRequestSelectSpreadsheet?: (event: object) => void;
   onSDKRequestSelectDocument?: (event: object) => void;
   onSDKRequestReferenceSource?: (event: object) => void;
-  onSDKRequestStartFilling?: (haederLabel: string) => void;
+  onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
+  setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
+  onStartFilling?: VoidFunction;
 };
 
 export type TEventData = {
@@ -354,6 +364,7 @@ export interface UseSocketHelperProps {
   socketUrl: string;
   user?: TUser;
   shareKey?: string;
+  standalone?: boolean;
 }
 
 export interface UseEventsProps {
@@ -410,6 +421,7 @@ export type TDocEditor = {
   setActionLink: (link: string) => void;
   setUsers?: ({ c, users }: { c: string; users: TSharedUsers[] }) => void;
   startFilling?: VoidFunction;
+  requestRoles?: VoidFunction;
 };
 
 export type TCatchError =
@@ -428,11 +440,11 @@ export type TCatchError =
   | { message: string }
   | string;
 
-export type StartFillingSelectorDialogPprops = {
+export type StartFillingSelectorDialogProps = {
   fileInfo: TFile;
   isVisible: boolean;
   onClose: VoidFunction;
-  headerLabel: string;
+  header: HeaderProps;
 
   getIsDisabled: (
     isFirstLoad: boolean,
@@ -460,6 +472,7 @@ export type StartFillingSelectorDialogPprops = {
   ) => Promise<void>;
 
   filesSettings: TFilesSettings;
+  createDefineRoomType: RoomsType;
 };
 
 export type ConflictStateType = {
@@ -470,4 +483,9 @@ export type ConflictStateType = {
   reject: (reason?: any) => void;
   fileName: string;
   folderName: string;
+};
+
+export type TFormRole = {
+  name: string;
+  color: string;
 };

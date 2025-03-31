@@ -28,7 +28,11 @@
 
 import type { TTranslation, TViewAs } from "../../types";
 import type { TTheme } from "../../themes";
-import { type RoomsType, ShareAccessRights } from "../../enums";
+import {
+  FileFillingFormStatus,
+  type RoomsType,
+  ShareAccessRights,
+} from "../../enums";
 import { TRoomSecurity } from "../../api/rooms/types";
 import type {
   TFileSecurity,
@@ -53,6 +57,7 @@ type ItemData = {
   security?: TRoomSecurity | TFileSecurity | TFolderSecurity;
   shared?: boolean;
   viewAccessibility?: TFileViewAccessibility;
+  formFillingStatus?: FileFillingFormStatus;
   customFilterEnabled?: boolean;
 };
 

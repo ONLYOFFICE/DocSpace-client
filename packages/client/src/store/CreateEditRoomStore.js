@@ -526,7 +526,7 @@ class CreateEditRoomStore {
     this.setIsLoading(true);
 
     const isDeleteLogo = isTemplate
-      ? !!logo.original && !icon.uploadedFile
+      ? !!logo?.original && !icon.uploadedFile
       : false;
 
     const copyLogo =
@@ -557,6 +557,10 @@ class CreateEditRoomStore {
         room = await createRoom(createRoomData);
       }
 
+      if (room.errorMsg) {
+        return toastr.error(room.errorMsg);
+      }
+
       this.dialogsStore.setIsNewRoomByCurrentUser(true);
 
       // delete thirdparty account if not needed
@@ -573,15 +577,15 @@ class CreateEditRoomStore {
               ? [bufferSelection]
               : [];
 
-        preparingDataForCopyingToRoom(room, selections).catch((error) =>
+        preparingDataForCopyingToRoom(room.id, selections).catch((error) =>
           console.error(error),
         );
       }
+
+      if (successToast) toastr.success(successToast);
     } catch (err) {
       toastr.error(err);
     } finally {
-      if (successToast) toastr.success(successToast);
-
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);
       this.onClose();
@@ -611,6 +615,7 @@ class CreateEditRoomStore {
       roomParams;
 
     let isFinished = false;
+    let errorMsg = false;
     let progressData;
 
     const data = {
@@ -633,6 +638,7 @@ class CreateEditRoomStore {
       );
 
       isFinished = progressData.isCompleted;
+      errorMsg = progressData.error;
     }
 
     return {
@@ -640,6 +646,7 @@ class CreateEditRoomStore {
       title,
       roomType,
       rootFolderType: FolderType.Rooms,
+      errorMsg,
     };
   };
 

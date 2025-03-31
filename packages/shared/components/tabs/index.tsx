@@ -174,6 +174,7 @@ const Tabs = (props: TabsProps) => {
               classes,
             )}
             onClick={() => {
+              if (index === currentItem) return;
               item.onClick?.();
               setSelectedItem(item, index);
             }}

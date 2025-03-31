@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { Heading } from "@docspace/shared/components/heading";
@@ -42,9 +42,13 @@ const OAuthSectionHeader = ({ isEdit }: { isEdit: boolean }) => {
   const { t, ready } = useTranslation(["OAuth"]);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onBack = () => {
-    navigate("/portal-settings/developer-tools/oauth");
+    const path = location.pathname.includes("/portal-settings")
+      ? "/portal-settings"
+      : "";
+    navigate(`${path}/developer-tools/oauth`);
   };
 
   if (!ready) return <LoaderSectionHeader />;

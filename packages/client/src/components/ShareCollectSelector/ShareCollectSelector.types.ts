@@ -24,19 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import type { TFile } from "@docspace/shared/api/files/types";
+import type { RoomsType } from "@docspace/shared/enums";
+import { HeaderProps } from "@docspace/shared/components/selector/Selector.types";
 
 export interface ShareCollectSelectorProps {
   visible: boolean;
   file: TFile;
+  createDefineRoomType: RoomsType;
+  onCloseActionProp?: () => void;
+  headerProps?: HeaderProps | {};
+  onCancel: VoidFunction;
 }
 
 export interface InjectShareCollectSelectorProps
   extends Pick<TStore["settingsStore"], "currentDeviceType">,
     Pick<TStore["filesSettingsStore"], "getIcon">,
-    Pick<
-      TStore["dialogsStore"],
-      "setShareCollectSelector" | "conflictResolveDialogVisible"
-    >,
+    Pick<TStore["dialogsStore"], "conflictResolveDialogVisible">,
     Pick<TStore["infoPanelStore"], "setIsMobileHidden">,
     Pick<TStore["filesStore"], "setSelected">,
     Pick<

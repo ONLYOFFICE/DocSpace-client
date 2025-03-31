@@ -31,7 +31,6 @@ import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { githubLightInit, githubDarkInit } from "@uiw/codemirror-theme-github";
 import { globalColors } from "@docspace/shared/themes";
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const StyledContainer = styled.div.attrs(injectDefaultTheme)`
@@ -47,8 +46,8 @@ const StyledContainer = styled.div.attrs(injectDefaultTheme)`
   }
 `;
 
-const CodeBlock = ({ config, theme }) => {
-  const codeString = `const config = ${JSON.stringify(config, null, "\t")}\n\nconst script = document.createElement("script");\n\nscript.setAttribute("src", "${SDK_SCRIPT_URL}");\nscript.onload = () => window.DocSpace.SDK.init(config);\n\ndocument.body.appendChild(script);`;
+const CodeBlock = ({ config, scriptUrl, theme }) => {
+  const codeString = `const config = ${JSON.stringify(config, null, "\t")}\n\nconst script = document.createElement("script");\n\nscript.setAttribute("src", "${scriptUrl}");\nscript.onload = () => window.DocSpace.SDK.init(config);\n\ndocument.body.appendChild(script);`;
 
   const extensions = [javascript({ jsx: true }), EditorView.lineWrapping];
 

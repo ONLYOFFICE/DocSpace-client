@@ -32,9 +32,9 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { SimulatePassword } from "@docspace/shared/components/simulate-password";
 
 import config from "PACKAGE_FILE";
-import SimulatePassword from "../../SimulatePassword";
 import StyledComponent from "./StyledConvertPasswordDialog";
 
 const ConvertPasswordDialogComponent = (props) => {

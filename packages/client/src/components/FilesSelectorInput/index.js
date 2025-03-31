@@ -162,10 +162,7 @@ const FilesSelectorInput = (props) => {
         placeholder={t("SelectAction")}
       />
 
-      <Portal
-        visible={isPanelVisible}
-        element={<div>{selectorComponent}</div>}
-      />
+      <Portal element={<div>{selectorComponent}</div>} />
     </StyledBodyWrapper>
   );
 };

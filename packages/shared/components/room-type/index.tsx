@@ -91,7 +91,7 @@ const RoomType = ({
           </Text>
           {isTemplate ? (
             <Badge
-              label={t("New")}
+              label={t("Common:New")}
               backgroundColor={globalColors.lightBlueMain}
               fontSize="9px"
               fontWeight={700}

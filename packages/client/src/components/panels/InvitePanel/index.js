@@ -40,6 +40,7 @@ import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
+import { getAccessOptions } from "@docspace/shared/utils/getAccessOptions";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
@@ -50,7 +51,7 @@ import {
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
-import { fixAccess, getAccessOptions } from "./utils";
+import { fixAccess } from "./utils";
 import ExternalLinks from "./sub-components/ExternalLinks";
 import InviteInput from "./sub-components/InviteInput";
 import ItemsList from "./sub-components/ItemsList";
@@ -69,8 +70,6 @@ const InvitePanel = ({
   updateInfoPanelMembers,
   isRoomMembersPanelOpen,
   setInviteLanguage,
-  getUsersList,
-  filter,
   isRoomAdmin,
   setIsNewUserByCurrentUser,
 
@@ -361,9 +360,7 @@ const InvitePanel = ({
         const isPeoplePage =
           window.location.pathname.includes("accounts/people");
 
-        if (isPeoplePage) {
-          await getUsersList(filter, false);
-        } else {
+        if (!isPeoplePage) {
           navigate("/accounts/people/filter");
         }
       }
@@ -576,7 +573,6 @@ const InvitePanel = ({
 export default inject(
   ({
     settingsStore,
-    peopleStore,
     filesStore,
     dialogsStore,
     infoPanelStore,
@@ -586,7 +582,6 @@ export default inject(
   }) => {
     const { theme, standalone } = settingsStore;
 
-    const { getUsersList, filter } = peopleStore.usersStore;
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
@@ -624,8 +619,6 @@ export default inject(
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
       isRoomMembersPanelOpen,
-      getUsersList,
-      filter,
       isRoomAdmin,
 
       setIsNewUserByCurrentUser,

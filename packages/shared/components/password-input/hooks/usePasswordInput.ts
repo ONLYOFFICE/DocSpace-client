@@ -15,18 +15,19 @@ export const usePasswordInput = (
   ) => void,
   setState: React.Dispatch<React.SetStateAction<TPasswordState>>,
   onChange?: (e: ChangeEvent<HTMLInputElement>, value?: string) => void,
+  valueInput?: string,
 ) => {
   const [caretPosition, setCaretPosition] = useState<number | null>(null);
 
   const refTooltip = useRef(null);
 
   const setPasswordSettings = useCallback(
-    (newPassword: string, currentValue?: string) => {
+    (newPassword: string) => {
       let newValue;
 
-      if (!currentValue) return newPassword;
+      if (!valueInput) return newPassword;
 
-      const oldPassword = currentValue ?? "";
+      const oldPassword = valueInput ?? "";
       const oldPasswordLength = oldPassword.length;
       const newCaretPosition = (
         document.getElementById("conversion-password") as HTMLInputElement
@@ -64,7 +65,7 @@ export const usePasswordInput = (
 
       return newValue;
     },
-    [simulateSymbol],
+    [simulateSymbol, valueInput],
   );
 
   const onChangeAction = useCallback(

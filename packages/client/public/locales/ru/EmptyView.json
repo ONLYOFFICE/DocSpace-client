@@ -45,6 +45,5 @@
   "UploadFromPortalDescription": "Загружайте файлы любого типа из раздела Документы или Комнат.",
   "UploadFromPortalTitle": "Загрузить из {{productName}}",
   "UploadPDFFormOptionDescription": "Выберите готовую PDF-форму, доступную в {{productName}}, и загрузите ее в комнату.",
-  "UserEmptyDescription": "Здесь будут находиться файлы и папки, загруженные администраторами.",
   "VirtualDataRoomEmptyTitle": "Добро пожаловать в Виртуальную комнату данных"
 }

@@ -45,7 +45,7 @@ import {
   TGetReferenceData,
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
-import { EDITOR_ID } from "@docspace/shared/constants";
+import { EDITOR_ID, FILLING_STATUS_ID } from "@docspace/shared/constants";
 import {
   assign,
   frameCallCommand,
@@ -167,10 +167,13 @@ const useEditorEvents = ({
 
     fixSize();
 
-    frameCallCommand("setIsLoaded");
-
     if (errorMessage || isSkipError)
       return docEditor?.showMessage?.(errorMessage || t("Common:InvalidLink"));
+
+    if (window && FILLING_STATUS_ID in window && window[FILLING_STATUS_ID]) {
+      docEditor?.requestRoles?.();
+      delete window[FILLING_STATUS_ID];
+    }
 
     console.log("ONLYOFFICE Document Editor is ready", docEditor);
     const url = window.location.href;
@@ -220,6 +223,8 @@ const useEditorEvents = ({
     // console.log("onDocumentReady", { docEditor });
     setDocumentReady(true);
 
+    frameCallCommand("setIsLoaded");
+
     frameCallEvent({
       event: "onAppReady",
       data: { frameId: sdkConfig?.frameId },
@@ -240,6 +245,10 @@ const useEditorEvents = ({
       ); //Do not remove: it's for Back button on Mobile App
     }
   }, [config?.errorMessage, sdkConfig?.frameId]);
+
+  const onUserActionRequired = React.useCallback(() => {
+    frameCallCommand("setIsLoaded");
+  }, []);
 
   const getBackUrl = React.useCallback(() => {
     if (!fileInfo) return;
@@ -733,6 +742,7 @@ const useEditorEvents = ({
     usersInRoom,
 
     onDocumentReady,
+    onUserActionRequired,
     onSDKRequestOpen,
     onSDKRequestReferenceData,
     onSDKAppReady,

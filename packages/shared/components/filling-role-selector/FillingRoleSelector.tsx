@@ -24,109 +24,73 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+/* eslint-disable jsx-a11y/control-has-associated-label */
+
+"use client";
+
+import { decode } from "he";
 import React from "react";
-import { ReactSVG } from "react-svg";
+import { useTranslation } from "react-i18next";
 
-import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
-import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
-import AddRoleButton from "PUBLIC_DIR/images/add.role.button.react.svg?url";
-import EveryoneRoleIcon from "PUBLIC_DIR/images/everyone.role.button.react.svg?url";
+import CrossIcon from "PUBLIC_DIR/images/icons/16/circle.cross.svg";
 
-import {
-  FillingRoleSelectorProps,
-  TRole,
-  TUser,
-} from "./FillingRoleSelector.types";
+import { Avatar, AvatarSize, AvatarRole } from "../avatar";
 
 import styles from "./FillingRoleSelector.module.scss";
+import type { IFillingRoleSelectorProps } from "./FillingRoleSelector.types";
 
 const FillingRoleSelector = ({
   roles,
-  users,
-  onAddUser,
-  onRemoveUser,
-  descriptionEveryone,
-  descriptionTooltip,
-  ...props
-}: FillingRoleSelectorProps) => {
-  // If the roles in the roles array come out of order
-  const cloneRoles = JSON.parse(JSON.stringify(roles));
-  const sortedInOrderRoles = cloneRoles.sort((a: TRole, b: TRole) =>
-    a.order > b.order ? 1 : -1,
-  );
-
-  const everyoneRole = roles.find((item: TRole) => item.everyone);
-
-  const everyoneRoleNode = (
-    <>
-      <div className={styles.row}>
-        <div className={styles.number}>{everyoneRole?.order}</div>
-        <ReactSVG className={styles.everyoneRoleIcon} src={EveryoneRoleIcon} />
-        <div className={styles.everyoneRoleContainer}>
-          <div className={styles.title}>
-            <div className={styles.role}>{everyoneRole?.name}</div>
-            <div className={styles.assignedRole}>{everyoneRole?.everyone}</div>
-          </div>
-          <div className={styles.roleDescription}>{descriptionEveryone}</div>
-        </div>
-      </div>
-      <div className={styles.tooltip}>{descriptionTooltip}</div>
-    </>
-  );
+  onSelect,
+  removeUserFromRole,
+  currentUserId,
+}: IFillingRoleSelectorProps) => {
+  const { t } = useTranslation(["Common"]);
 
   return (
-    <div
-      {...props}
-      className={styles.fillingRoleSelector}
-      data-testid="filling-role-selector"
-    >
-      {everyoneRole ? everyoneRoleNode : null}
-      {sortedInOrderRoles.map((role: TRole) => {
-        if (role.everyone) return;
-        const roleWithUser = users?.find(
-          (user: TUser) => user.role === role.name,
-        );
-
-        return roleWithUser ? (
-          <div className={styles.userRow} key={`${role.name}`}>
-            <div className={styles.content}>
-              <div className={styles.number}>{role.order}</div>
-              <img
-                className={styles.avatar}
-                alt=""
-                src={
-                  roleWithUser.hasAvatar
-                    ? roleWithUser.avatar
-                    : AvatarBaseReactSvgUrl
-                }
+    <ol className={styles.roles}>
+      {roles.map((role, idx) => (
+        <li className={styles.role} key={role.name}>
+          <span className={styles.count}>{idx + 1}</span>
+          {role.user ? (
+            <>
+              <Avatar
+                source={role.user.avatar ?? ""}
+                size={AvatarSize.min}
+                role={AvatarRole.user}
               />
-              <div className={styles.userWithRole}>
-                <div className={styles.role}>{roleWithUser.displayName}</div>
-                <div className={styles.assignedRole}>{roleWithUser.role}</div>
+              <div className={styles.info}>
+                <h5>
+                  {decode(role.user.displayName)} &nbsp;
+                  {currentUserId === role.user.id ? (
+                    <span className={styles.me}>({t("Common:MeLabel")})</span>
+                  ) : null}
+                </h5>
+                <span>{role.name}</span>
               </div>
-            </div>
-            <ReactSVG
-              data-testid="remove-icon"
-              src={RemoveSvgUrl}
-              onClick={() => onRemoveUser(roleWithUser.id)}
-            />
-          </div>
-        ) : (
-          <div className={styles.row} key={`${role.name}`}>
-            <div className={styles.number}>{role.order}</div>
-            <ReactSVG
-              data-testid="add-role-button"
-              className={styles.addRoleButton}
-              style={{ "--color": role.color } as React.CSSProperties}
-              src={AddRoleButton}
-              onClick={onAddUser}
-            />
-            <div className={styles.role}>{role.name}</div>
-          </div>
-        );
-      })}
-    </div>
+              <CrossIcon
+                className={styles.remove}
+                onClick={() => removeUserFromRole(idx)}
+              />
+            </>
+          ) : (
+            <button
+              title={role.name}
+              type="button"
+              className={styles.button}
+              onClick={() => onSelect(idx)}
+            >
+              <span
+                className={styles.plus}
+                style={{ backgroundColor: role.color }}
+              />
+              <span className={styles.name}>{role.name}</span>
+            </button>
+          )}
+        </li>
+      ))}
+    </ol>
   );
 };
 
-export { FillingRoleSelector };
+export default FillingRoleSelector;

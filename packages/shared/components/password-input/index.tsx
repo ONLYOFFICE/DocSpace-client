@@ -59,6 +59,7 @@ import {
 } from "./hooks";
 
 import styles from "./PasswordInput.module.scss";
+import { useInterfaceDirection } from "../../hooks/useInterfaceDirection";
 
 export type { PasswordInputHandle } from "./PasswordInput.types";
 
@@ -151,6 +152,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       checkPassword,
       setState,
       onChange,
+      state.value,
     );
     const { onGeneratePassword } = usePasswordGenerator(
       generatorSpecial,
@@ -161,6 +163,8 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       checkPassword,
       setState,
     );
+
+    const { isRTL } = useInterfaceDirection();
 
     const changeInputType = React.useCallback(() => {
       const newType =
@@ -427,6 +431,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
         className={classNames(
           styles.styledInput,
           {
+            [styles.rtlStyledInput]: isRTL,
             [styles.fullWidth]: isFullWidth,
             [styles.disabled]: isDisabled,
           },

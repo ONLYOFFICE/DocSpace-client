@@ -523,7 +523,7 @@ const SetRoomParams = ({
         />
       ) : null}
 
-      {!isEdit && enableThirdParty && isPublicRoom ? (
+      {!isEdit && enableThirdParty && isPublicRoom && !fromTemplate ? (
         <ThirdPartyStorage
           t={t}
           roomTitle={roomParams.title}

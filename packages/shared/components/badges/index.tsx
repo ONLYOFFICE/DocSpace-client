@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
@@ -42,6 +42,13 @@ import CustomFilter16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.
 
 import { isMobile as isMobileDevice } from "react-device-detect";
 
+import { FILLING_FORM_STATUS_COLORS } from "@docspace/shared/constants";
+import {
+  classNames,
+  getFillingStatusLabel,
+  getFillingStatusTitle,
+} from "@docspace/shared/utils";
+
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
 import { Link, LinkType } from "../link";
@@ -51,13 +58,7 @@ import { ColorTheme, ThemeId } from "../color-theme";
 import { globalColors } from "../../themes";
 import { RoomsType, ShareAccessRights } from "../../enums";
 
-import {
-  classNames,
-  IconSizeType,
-  isDesktop,
-  isTablet,
-  size,
-} from "../../utils";
+import { IconSizeType, isDesktop, isTablet, size } from "../../utils";
 
 import styles from "./Badges.module.scss";
 import type { BadgesProps, BadgeWrapperProps } from "./Badges.type";
@@ -224,6 +225,14 @@ const Badges = ({
     if (!isTrashFolder) openLocationFile?.();
   };
 
+  const { fillingStatusLabel, fillingStatusTitle } = useMemo(
+    () => ({
+      fillingStatusLabel: getFillingStatusLabel(item.formFillingStatus, t),
+      fillingStatusTitle: getFillingStatusTitle(item.formFillingStatus, t),
+    }),
+    [item.formFillingStatus, t],
+  );
+
   const getTooltipContent = () => (
     <>
       <Text fontSize="12px" fontWeight={400} noSelect>
@@ -267,6 +276,23 @@ const Badges = ({
         />
       )} */}
 
+      {item.formFillingStatus ? (
+        <BadgeWrapper isTile={isTile}>
+          <Badge
+            noHover
+            isVersionBadge
+            className="badge tablet-badge icons-group"
+            backgroundColor={FILLING_FORM_STATUS_COLORS[item.formFillingStatus]}
+            label={fillingStatusLabel}
+            title={fillingStatusTitle}
+            {...versionBadgeProps}
+            style={{
+              width: "max-content",
+            }}
+          />
+        </BadgeWrapper>
+      ) : null}
+
       {hasDraft ? (
         <BadgeWrapper isTile={isTile}>
           <Badge
@@ -277,8 +303,8 @@ const Badges = ({
               "badge-version badge-version-current tablet-badge icons-group",
             )}
             backgroundColor={theme.filesBadges.badgeBackgroundColor}
-            label={t("BadgeMyDraftTitle")}
-            title={t("BadgeMyDraftTitle")}
+            label={t("Common:BadgeMyDraftTitle")}
+            title={t("Common:BadgeMyDraftTitle")}
             {...versionBadgeProps}
             style={{
               width: "max-content",
@@ -328,13 +354,13 @@ const Badges = ({
               "badge-version badge-version-current tablet-badge icons-group",
             )}
             backgroundColor={theme.filesBadges.badgeBackgroundColor}
-            label={t("VersionBadge", {
+            label={t("Common:VersionBadge", {
               version: countVersions as string,
             })}
             {...onShowVersionHistoryProp}
             noHover
             isVersionBadge
-            title={t("ShowVersionHistory")}
+            title={t("Common:ShowVersionHistory")}
           />
         </BadgeWrapper>
       ) : null}
@@ -343,7 +369,7 @@ const Badges = ({
           <Badge
             {...commonBadgeProps}
             className="badge-version badge-new-version tablet-badge icons-group"
-            label={t("Files:New")}
+            label={t("Common:New")}
             onClick={onBadgeClick}
           />
         </BadgeWrapper>
@@ -354,7 +380,7 @@ const Badges = ({
             place="bottom"
             size={isViewTable ? 12 : 16}
             className="bagde_alert icons-group"
-            tooltipContent={t("BadgeAlertDescription")}
+            tooltipContent={t("Common:BadgeAlertDescription")}
           />
         </BadgeWrapper>
       )} */}
@@ -400,7 +426,7 @@ const Badges = ({
             "badge row-copy-link icons-group tablet-badge",
           )}
           onClick={onCopyPrimaryLink}
-          title={t("Files:CopySharedLink")}
+          title={t("Common:CopySharedLink")}
         />
       ) : null}
 
@@ -413,7 +439,7 @@ const Badges = ({
             "badge tablet-row-copy-link icons-group tablet-badge",
           )}
           onClick={onCopyPrimaryLink}
-          title={t("Files:CopySharedLink")}
+          title={t("Common:CopySharedLink")}
         />
       ) : null}
 
@@ -451,10 +477,12 @@ const Badges = ({
           )}
           size={IconSizeType.medium}
           onClick={onCreateRoom}
-          title={t("Files:CreateRoom")}
+          title={t("Common:CreateRoom")}
         />
       ) : null}
-      {showNew && isTile && isRoom ? newFilesBadge : null}
+      {showNew && isTile && isRoom ? (
+        <div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>
+      ) : null}
     </div>
   );
 };

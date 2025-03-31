@@ -239,6 +239,7 @@ export type TAccessRight = {
   label: string;
   description?: string;
   access: string | number;
+  isSeparator?: boolean;
 };
 
 type TWithAccessRightsProps = {
@@ -377,8 +378,10 @@ export type SelectorProps = TSelectorHeader &
     descriptionText?: string;
 
     withPadding?: boolean;
+    injectedElement?: React.ReactElement;
 
     isSSR?: boolean;
+    selectedItem?: TSelectorItem | null;
   };
 
 export type BodyProps = TSelectorInfo & {
@@ -409,6 +412,7 @@ export type BodyProps = TSelectorInfo & {
   withFooterCheckbox?: boolean;
   descriptionText?: string;
   withInfoBadge?: boolean;
+  injectedElement?: React.ReactElement;
 
   isSSR?: boolean;
 };

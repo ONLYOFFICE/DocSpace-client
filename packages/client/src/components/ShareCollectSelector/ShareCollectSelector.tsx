@@ -64,8 +64,7 @@ const ShareCollectSelector = inject<TStore>(
     filesStore,
   }) => {
     const { currentDeviceType } = settingsStore;
-    const { setShareCollectSelector, conflictResolveDialogVisible } =
-      dialogsStore;
+    const { conflictResolveDialogVisible } = dialogsStore;
     const { checkFileConflicts, setConflictDialogData, openFileAction } =
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
@@ -78,7 +77,6 @@ const ShareCollectSelector = inject<TStore>(
       currentDeviceType,
       conflictResolveDialogVisible,
       getIcon,
-      setShareCollectSelector,
       checkFileConflicts,
       setConflictDialogData,
       itemOperationToFolder,
@@ -96,7 +94,6 @@ const ShareCollectSelector = inject<TStore>(
       currentDeviceType,
       conflictResolveDialogVisible,
       getIcon,
-      setShareCollectSelector,
       checkFileConflicts,
       setConflictDialogData,
       clearActiveOperations,
@@ -104,6 +101,10 @@ const ShareCollectSelector = inject<TStore>(
       setIsMobileHidden,
       setSelected,
       openFileAction,
+      createDefineRoomType,
+      headerProps = {},
+      onCloseActionProp,
+      onCancel,
     }: ShareCollectSelectorProps & InjectShareCollectSelectorProps) => {
       const { t } = useTranslation(["Common", "Editor"]);
       const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
@@ -115,9 +116,9 @@ const ShareCollectSelector = inject<TStore>(
       };
 
       const onClose = () => {
-        if (requestRunning.current) return;
-
-        setShareCollectSelector(false);
+        if (onCloseActionProp) {
+          onCloseActionProp();
+        }
       };
 
       const onCloseAction = () => {
@@ -178,11 +179,10 @@ const ShareCollectSelector = inject<TStore>(
             onCloseAndDeselectAction();
 
             openFileAction(selectedFolder, t);
-            try {
-              await itemOperationToFolder(operationData);
-            } catch (error) {
+
+            await itemOperationToFolder(operationData).catch((error) => {
               console.error(error);
-            }
+            });
           }
         } catch (e: unknown) {
           toastr.error(e as TData);
@@ -228,9 +228,17 @@ const ShareCollectSelector = inject<TStore>(
 
       const infoBarData: TInfoBarData = {
         title: t("Common:SelectorInfoBarTitle"),
-        description: t("Common:SelectorInfoBarDescription"),
+        description:
+          createDefineRoomType === RoomsType.FormRoom
+            ? t("Common:SelectorInfoBarDescription")
+            : t("Common:SelectorInfoBarVDRDescription"),
         icon: InfoIcon,
         onClose: onCloseInfoBar,
+      };
+
+      const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {
+        [RoomsType.VirtualDataRoom]: t("Common:CreateVirtualDataRoom"),
+        [RoomsType.FormRoom]: t("Common:CreateFormFillingRoom"),
       };
 
       return (
@@ -240,19 +248,25 @@ const ShareCollectSelector = inject<TStore>(
           withSearch
           isRoomsOnly
           withBreadCrumbs
-          withoutBackButton
+          withoutBackButton={false}
           withCancelButton
           currentFolderId=""
+          headerProps={{
+            headerLabel: t("Common:ShareAndCollect"),
+            onCloseClick: onClose,
+            ...headerProps,
+          }}
           rootFolderType={file.rootFolderType}
-          createDefineRoomType={RoomsType.FormRoom}
-          isPanelVisible={visible ? !conflictResolveDialogVisible : null}
+          createDefineRoomType={createDefineRoomType}
+          isPanelVisible={visible ? !conflictResolveDialogVisible : false}
           currentDeviceType={currentDeviceType}
-          headerLabel={t("Common:ShareAndCollect")}
-          createDefineRoomLabel={t("Common:CreateFormFillingRoom")}
+          createDefineRoomLabel={
+            createDefineRoomLabels[createDefineRoomType] ?? ""
+          }
           submitButtonLabel={t("Common:CopyHere")}
           cancelButtonLabel={t("Common:CancelButton")}
           cancelButtonId="share-collect-selector-cancel"
-          onCancel={onClose}
+          onCancel={onCancel}
           onSubmit={onSubmit}
           getIsDisabled={getIsDisabled}
           getFilesArchiveError={getFilesArchiveError}

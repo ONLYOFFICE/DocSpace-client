@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
@@ -31,6 +31,9 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { RoomsType } from "@docspace/shared/enums";
+
+import { ShareCollectSelector } from "SRC_DIR/components/ShareCollectSelector";
 
 import { Card } from "./sub-components/Card";
 
@@ -42,10 +45,10 @@ import type {
 
 const FillPDFDialog = inject<TStore>(
   ({ dialogsStore, contextOptionsStore }) => {
-    const { setFillPDFDialogData, setShareCollectSelector } = dialogsStore;
+    const { setFillPDFDialogData } = dialogsStore;
     const { gotoDocEditor } = contextOptionsStore;
 
-    return { setFillPDFDialogData, gotoDocEditor, setShareCollectSelector };
+    return { setFillPDFDialogData, gotoDocEditor };
   },
 )(
   observer(
@@ -53,24 +56,48 @@ const FillPDFDialog = inject<TStore>(
       visible,
       setFillPDFDialogData,
       gotoDocEditor,
-      setShareCollectSelector,
       data,
     }: FillPDFDialogProps & InjectFillPDFDialogProps) => {
       const { t } = useTranslation(["FillPDFDialog"]);
 
+      const [isVisibleSelectFormRoomDialog, setIsVisibleSelectFormRoomDialog] =
+        useState(false);
+      const [roomType, setRoomType] = useState<RoomsType>(RoomsType.FormRoom);
+
       const onClose = () => {
-        setFillPDFDialogData!(false, null);
+        setFillPDFDialogData!(false);
       };
 
       const openEditorFill = () => {
-        gotoDocEditor!(false, data, null, false, true);
+        gotoDocEditor!(data, false, null, false, true);
         onClose();
       };
 
-      const openSelector = () => {
-        setShareCollectSelector(true, data);
-        onClose();
+      const openSelector = (type: RoomsType) => {
+        setIsVisibleSelectFormRoomDialog(true);
+        setRoomType(type);
       };
+
+      const onCloseSelectionFormRoom = (): void => {
+        setIsVisibleSelectFormRoomDialog(false);
+      };
+
+      const container = (
+        <ShareCollectSelector
+          file={data}
+          visible={isVisibleSelectFormRoomDialog}
+          headerProps={{
+            headerLabel: t("Common:ShareAndCollect"),
+            withoutBorder: false,
+            onCloseClick: onClose,
+            withoutBackButton: false,
+            onBackClick: onCloseSelectionFormRoom,
+          }}
+          onCloseActionProp={onClose}
+          createDefineRoomType={roomType}
+          onCancel={onCloseSelectionFormRoom}
+        />
+      );
 
       return (
         <ModalDialog
@@ -78,7 +105,9 @@ const FillPDFDialog = inject<TStore>(
           visible={visible}
           onClose={onClose}
           displayType={ModalDialogType.aside}
+          containerVisible={isVisibleSelectFormRoomDialog}
         >
+          <ModalDialog.Container>{container}</ModalDialog.Container>
           <ModalDialog.Header>
             {t("FillPDFDialog:FillPDFDialogTitle")}
           </ModalDialog.Header>
@@ -94,7 +123,13 @@ const FillPDFDialog = inject<TStore>(
                 title={t("FillPDFDialog:ShareCollectTitle")}
                 description={t("FillPDFDialog:ShareCollectDescription")}
                 buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
-                onClick={openSelector}
+                onClick={() => openSelector(RoomsType.FormRoom)}
+              />
+              <Card
+                title={t("Common:InVirtualDataRoomTitle")}
+                description={t("Common:InVirtualDataRoomDescription")}
+                buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
+                onClick={() => openSelector(RoomsType.VirtualDataRoom)}
               />
             </Container>
           </ModalDialog.Body>

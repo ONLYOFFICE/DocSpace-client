@@ -2460,7 +2460,7 @@ const Dark: TTheme = {
       tooltipColor: darkToastInfo,
       iconColor: darkErrorStatus,
       positiveStatusColor: darkStatusPositive,
-      progressColor: lightGrayDark,
+      progressColor: grayDark,
       shareButton: {
         color: gray,
         sharedColor: lightGrayDark,
@@ -2469,6 +2469,8 @@ const Dark: TTheme = {
       loadingButton: {
         color: white,
         background: black,
+        defaultBackground: grayDark,
+        hoverColor: white,
       },
     },
     invite: {
@@ -2947,7 +2949,7 @@ const Dark: TTheme = {
         color: grayDark,
         linkColor: lightBlueMain,
         spanBackground: lightBlueMain,
-        filterBorder: `1px solid ${black}`,
+        filterBorder: `1px solid ${grayDarkStrong}`,
         background: darkGrayLight,
       },
     },

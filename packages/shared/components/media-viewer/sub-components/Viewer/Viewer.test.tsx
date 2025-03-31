@@ -138,6 +138,7 @@ describe("Viewer", () => {
       Read: true,
       Restrict: false,
       Review: false,
+      FillForms: false,
     },
     providerId: 0,
     providerKey: "",

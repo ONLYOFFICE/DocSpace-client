@@ -61,6 +61,7 @@ import {
   isPublicRoom,
   insertTagManager,
   isManagement,
+  openUrl,
 } from "../utils/common";
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
@@ -321,6 +322,8 @@ class SettingsStore {
 
   logoText = "";
 
+  limitedAccessDevToolsForUsers = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -336,6 +339,10 @@ class SettingsStore {
   setShowGuestReleaseTip = (showGuestReleaseTip: boolean) => {
     this.showGuestReleaseTip = showGuestReleaseTip;
   };
+
+  get wizardCompleted() {
+    return this.isLoaded && !this.wizardToken;
+  }
 
   get helpCenterDomain() {
     return this.externalResources?.helpcenter?.domain;
@@ -753,6 +760,12 @@ class SettingsStore {
 
   get bookTrainingEmail() {
     return this.externalResources?.common.entries?.booktrainingemail;
+  }
+
+  get appearanceBlockHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.appearance
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.appearance}`
+      : this.helpCenterDomain;
   }
 
   setIsDesktopClientInit = (isDesktopClientInit: boolean) => {
@@ -1446,15 +1459,13 @@ class SettingsStore {
   }
 
   openUrl = (url: string, action: UrlActionType, replace: boolean = false) => {
-    if (action === UrlActionType.Download) {
-      return this.isFrame &&
-        this.frameConfig?.downloadToEvent &&
-        this.frameConfig?.events?.onDownload
-        ? frameCallEvent({ event: "onDownload", data: url })
-        : replace
-          ? (window.location.href = url)
-          : window.open(url, "_self");
-    }
+    openUrl({
+      url,
+      action,
+      replace,
+      isFrame: this.isFrame,
+      frameConfig: this.frameConfig,
+    });
   };
 
   checkEnablePortalSettings = (isPaid: boolean) => {
@@ -1464,6 +1475,16 @@ class SettingsStore {
   setIsBannerVisible = (visible: boolean) => {
     this.isBannerVisible = visible;
   };
+
+  setDevToolsAccessSettings = async (enable: string) => {
+    const boolEnable = enable === "true";
+    await api.settings.setLimitedAccessForUsers(boolEnable);
+    this.limitedAccessDevToolsForUsers = boolEnable;
+  };
+
+  get accessDevToolsForUsers() {
+    return this.limitedAccessDevToolsForUsers.toString();
+  }
 }
 
 export { SettingsStore };

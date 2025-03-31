@@ -204,7 +204,54 @@ export async function getUser() {
   return user.response as TUser;
 }
 
-export async function getScopeList(token?: string) {
+export async function getUserByName() {
+  const hdrs = headers();
+  const cookie = hdrs.get("cookie");
+
+  const [getUser] = createRequest(
+    [`/people/firstname.lastname`],
+    [["", ""]],
+    "GET",
+  );
+
+  if (!cookie?.includes("asc_auth_key")) return undefined;
+  const userRes = IS_TEST ? selfHandler() : await fetch(getUser);
+
+  if (userRes.status === 401) return undefined;
+
+  if (!userRes.ok) return;
+
+  const user = await userRes.json();
+
+  return user.response as TUser;
+}
+
+export async function getUserByEmail(
+  userEmail: string,
+  confirmKey: string | null = null,
+) {
+  const [getUserByEmai] = createRequest(
+    [`/people/email?email=${userEmail}`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? selfHandler(null, headers())
+    : await fetch(getUserByEmai);
+
+  if (!res.ok) return;
+
+  const user = await res.json();
+
+  if (user.response && user.response.displayName) {
+    user.response.displayName = Encoder.htmlDecode(user.response.displayName);
+  }
+
+  return user.response as TUser;
+}
+
+export async function getScopeList(token?: string, userId?: string) {
   const headers: [string, string][] = token
     ? [["Cookie", `x-signature=${token}`]]
     : [["", ""]];

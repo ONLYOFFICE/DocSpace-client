@@ -27,6 +27,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { globalColors } from "@docspace/shared/themes";
 import { mobile, getLogoUrl, injectDefaultTheme } from "@docspace/shared/utils";
@@ -94,7 +95,11 @@ const HeaderUnAuth = ({
   isLoaded,
   theme,
   cultures,
+  isPublicRoom,
+  moveToPublicRoom,
+  rootFolderId,
 }) => {
+  const navigate = useNavigate();
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
   const currentCultureName = i18n.language;
@@ -107,9 +112,15 @@ const HeaderUnAuth = ({
   return (
     <Header isLoaded={isLoaded} className="navMenuHeaderUnAuth">
       <div className="header-items-wrapper">
-        {!isAuthenticated && isLoaded ? (
+        {(!isAuthenticated || isPublicRoom) && isLoaded ? (
           <div>
-            <a className="header-logo-wrapper" href="/">
+            <a
+              className="header-logo-wrapper"
+              onClick={() => {
+                if (isPublicRoom) moveToPublicRoom(rootFolderId);
+                else navigate("/");
+              }}
+            >
               <img className="header-logo-icon" src={logo} alt="Logo" />
             </a>
           </div>
@@ -138,16 +149,34 @@ HeaderUnAuth.propTypes = {
   isLoaded: PropTypes.bool,
 };
 
-export default inject(({ authStore, settingsStore }) => {
-  const { isAuthenticated, isLoaded } = authStore;
-  const { enableAdmMess, wizardToken, theme, cultures } = settingsStore;
+export default inject(
+  ({
+    authStore,
+    settingsStore,
+    publicRoomStore,
+    filesActionsStore,
+    selectedFolderStore,
+  }) => {
+    const { isAuthenticated } = authStore;
+    const { enableAdmMess, wizardToken, theme, cultures } = settingsStore;
+    const { isPublicRoom } = publicRoomStore;
+    const { moveToPublicRoom } = filesActionsStore;
+    const { navigationPath, id } = selectedFolderStore;
 
-  return {
-    enableAdmMess,
-    wizardToken,
-    isAuthenticated,
-    isLoaded,
-    theme,
-    cultures,
-  };
-})(observer(HeaderUnAuth));
+    const rootFolderId = navigationPath.length
+      ? navigationPath[navigationPath.length - 1]?.id
+      : id;
+
+    return {
+      enableAdmMess,
+      wizardToken,
+      isAuthenticated,
+      isLoaded: true,
+      theme,
+      cultures,
+      isPublicRoom,
+      moveToPublicRoom,
+      rootFolderId,
+    };
+  },
+)(observer(HeaderUnAuth));

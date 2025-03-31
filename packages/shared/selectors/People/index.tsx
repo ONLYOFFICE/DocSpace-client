@@ -54,6 +54,7 @@ import { TGroup } from "../../api/groups/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Text } from "../../components/text";
 import { globalColors } from "../../themes";
+import { isNextImage } from "../../utils/typeGuards";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
 import { StyledSendClockIcon } from "./PeopleSelector.styled";
@@ -90,9 +91,11 @@ const toListItem = (
 
     const role = getUserType(item);
 
-    const userAvatar = hasAvatar
-      ? avatar
-      : (DefaultUserPhoto as unknown as string);
+    const defaultUserPhotoURL = isNextImage(DefaultUserPhoto)
+      ? DefaultUserPhoto.src
+      : DefaultUserPhoto;
+
+    const userAvatar = hasAvatar ? avatar : defaultUserPhotoURL;
 
     const isInvited = checkIfUserInvited
       ? checkIfUserInvited(item)
@@ -213,6 +216,9 @@ const PeopleSelector = ({
   withoutBackground,
   withBlur,
   setActiveTab,
+  injectedElement,
+  alwaysShowFooter = false,
+  onlyRoomMembers,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -312,6 +318,10 @@ const PeopleSelector = ({
         currentFilter.area = "people";
       }
 
+      if (onlyRoomMembers) {
+        currentFilter.includeShared = true;
+      }
+
       const response = !roomId
         ? await getUserList(currentFilter)
         : await getMembersList(searchArea, roomId, currentFilter);
@@ -352,9 +362,14 @@ const PeopleSelector = ({
         setItemsList((i) => {
           const tempItems = [...i, ...data];
 
+          const ids = new Set();
+          const filteredTempItems = tempItems.filter(
+            (item) => !ids.has(item.id) && ids.add(item.id),
+          );
+
           const newItems = withOutCurrentAuthorizedUser
-            ? removeCurrentUserFromList(tempItems)
-            : moveCurrentUserToTopOfList(tempItems);
+            ? removeCurrentUserFromList(filteredTempItems)
+            : moveCurrentUserToTopOfList(filteredTempItems);
 
           setHasNextPage(newItems.length < newTotal);
 
@@ -383,6 +398,7 @@ const PeopleSelector = ({
       withGroups,
       withGuests,
       withOutCurrentAuthorizedUser,
+      onlyRoomMembers,
     ],
   );
 
@@ -587,7 +603,10 @@ const PeopleSelector = ({
       {...withAccessRightsProps}
       {...withAside}
       id={id}
-      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
+      injectedElement={injectedElement}
+      alwaysShowFooter={
+        itemsList.length !== 0 || Boolean(searchValue) || alwaysShowFooter
+      }
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}
@@ -595,6 +614,7 @@ const PeopleSelector = ({
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
       disableSubmitButton={disableSubmitButton || !selectedItem}
+      selectedItem={selectedItem}
       submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
       emptyScreenHeader={

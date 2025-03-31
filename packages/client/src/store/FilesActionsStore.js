@@ -98,7 +98,10 @@ import { createLoader } from "@docspace/shared/utils/createLoader";
 
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
-
+import {
+  getEmptyPersonalProgress,
+  startEmptyPersonal,
+} from "@docspace/shared/api/people";
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
@@ -149,6 +152,8 @@ class FilesActionStore {
   isGroupMenuBlocked = false;
 
   emptyTrashInProgress = false;
+
+  emptyPersonalRoomInProgress = false;
 
   processCreatingRoomFromData = false;
 
@@ -319,7 +324,7 @@ class FilesActionStore {
 
   createFoldersTree = async (t, files, folderId) => {
     //  console.log("createFoldersTree", files, folderId);
-    const { uploaded } = this.uploadDataStore;
+    const { uploaded, percent } = this.uploadDataStore;
 
     const { setPrimaryProgressBarData } =
       this.uploadDataStore.primaryProgressDataStore;
@@ -336,8 +341,8 @@ class FilesActionStore {
 
     const pbData = {
       operation: OPERATIONS_NAME.upload,
-      percent: 0,
       completed: false,
+      percent,
     };
 
     if (roomFolder && roomFolder.quotaLimit && roomFolder.quotaLimit !== -1) {
@@ -613,6 +618,93 @@ class FilesActionStore {
       return toastr.error(err.message ? err.message : err, null, 0, true);
     } finally {
       this.emptyTrashInProgress = false;
+    }
+  };
+
+  emptyPersonalRoom = async (translations) => {
+    const { secondaryProgressDataStore, clearActiveOperations } =
+      this.uploadDataStore;
+    const { setSecondaryProgressBarData } = secondaryProgressDataStore;
+
+    const { addActiveItems, files, folders } = this.filesStore;
+    const { fetchTreeFolders } = this.treeFoldersStore;
+
+    const fileIds = files.map((f) => f.id);
+    const folderIds = folders.map((f) => f.id);
+
+    addActiveItems(fileIds, folderIds);
+
+    const operationId = uniqueid("operation_");
+
+    this.emptyPersonalRoomInProgress = true;
+
+    const pbData = {
+      operation: OPERATIONS_NAME.deletePermanently,
+      operationId,
+    };
+
+    setSecondaryProgressBarData({
+      percent: 0,
+      ...pbData,
+    });
+
+    try {
+      await startEmptyPersonal().then(async (result) => {
+        if (result?.error) return Promise.reject(result.error);
+        const data = result ?? null;
+
+        if (!data) {
+          setSecondaryProgressBarData({
+            operation: pbData.operation,
+            alert: true,
+            completed: true,
+            operationId: pbData.operationId,
+          });
+
+          return;
+        }
+
+        let progress = data.percentage;
+        let finished = data.isCompleted;
+
+        while (!finished) {
+          const item = await getEmptyPersonalProgress();
+
+          progress = item ? item.percentage : 100;
+          finished = item ? item.isCompleted : true;
+
+          setSecondaryProgressBarData({
+            operation: pbData.operation,
+            percent: progress,
+            alert: false,
+            currentFile: item,
+            operationId: pbData.operationId,
+          });
+        }
+
+        toastr.success(translations.successOperation);
+
+        setSecondaryProgressBarData({
+          completed: true,
+          alert: false,
+          ...pbData,
+        });
+
+        fetchTreeFolders();
+
+        clearActiveOperations(fileIds, folderIds);
+      });
+    } catch (err) {
+      clearActiveOperations(fileIds, folderIds);
+      setSecondaryProgressBarData({
+        completed: true,
+        alert: true,
+        ...pbData,
+      });
+
+      return toastr.error(err.message ? err.message : err, null, 0, true);
+    } finally {
+      this.emptyPersonalRoomInProgress = false;
     }
   };
 
@@ -1868,7 +1960,7 @@ class FilesActionStore {
       case "archive": {
         const canArchive = selection.every((s) => s.security?.Move);
 
-        return canArchive;
+        return hasSelection && canArchive;
       }
       case "unarchive": {
         const canUnArchive = selection.some((s) => s.security?.Move);
@@ -2120,7 +2212,7 @@ class FilesActionStore {
         if (!this.isAvailableOption("create-room")) return null;
         return {
           id: "menu-create-room",
-          label: t("Files:CreateRoom"),
+          label: t("Common:CreateRoom"),
           onClick: this.onClickCreateRoom,
           iconUrl: CatalogRoomsReactSvgUrl,
         };
@@ -2131,7 +2223,7 @@ class FilesActionStore {
           id: "menu-download",
           label: t("Common:Download"),
           onClick: () =>
-            this.downloadAction(t("Translations:ArchivingData")).catch((err) =>
+            this.downloadAction(t("Common:ArchivingData")).catch((err) =>
               toastr.error(err),
             ),
           iconUrl: DownloadReactSvgUrl,
@@ -2141,7 +2233,7 @@ class FilesActionStore {
         if (!this.isAvailableOption("downloadAs")) return null;
         return {
           id: "menu-download-as",
-          label: t("Translations:DownloadAs"),
+          label: t("Common:DownloadAs"),
           onClick: () => setDownloadDialogVisible(true),
           iconUrl: DownloadAsReactSvgUrl,
         };
@@ -2253,7 +2345,7 @@ class FilesActionStore {
       case "remove-from-recent":
         return {
           id: "menu-remove-from-recent",
-          label: t("RemoveFromList"),
+          label: t("Common:RemoveFromList"),
           onClick: () => this.onClickRemoveFromRecent(selection),
           iconUrl: RemoveOutlineSvgUrl,
         };
@@ -2358,7 +2450,7 @@ class FilesActionStore {
       .set("downloadAs", downloadAs)
       .set("copy", copy)
       .set("delete", {
-        label: t("RemoveFromList"),
+        label: t("Common:RemoveFromList"),
         onClick: () => {
           setUnsubscribe(true);
           setDeleteDialogVisible(true);
@@ -2604,11 +2696,14 @@ class FilesActionStore {
 
         const isPDF = item.fileExst === ".pdf";
 
-        const canEditForm =
-          isPDF &&
-          item.isPDFForm &&
-          item.security?.EditForm &&
-          !item.startFilling;
+        const { isPersonalRoom } = this.treeFoldersStore;
+
+        const canEditForm = isPersonalRoom
+          ? item.isPDFForm
+          : isPDF &&
+            item.isPDFForm &&
+            item.security?.EditForm &&
+            !item.startFilling;
 
         return openDocEditor(id, false, shareKey, canEditForm);
       }
@@ -2833,9 +2928,11 @@ class FilesActionStore {
 
     filter.folder = id;
 
-    const currentFolder = await this.filesStore.getFolderInfo(id);
-    const shareKey = await this.getPublicKey(currentFolder);
-    if (shareKey) filter.key = shareKey;
+    if (!this.selectedFolderStore.isRootFolder && navigationPath[0]?.shared) {
+      const currentFolder = await this.filesStore.getFolderInfo(id);
+      const shareKey = await this.getPublicKey(currentFolder);
+      if (shareKey) filter.key = shareKey;
+    }
 
     const categoryType = getCategoryType(window.DocSpace.location);
     const path = getCategoryUrl(categoryType, id);
@@ -3296,6 +3393,7 @@ class FilesActionStore {
     setSecondaryProgressBarData({
       operation: pbData.operation,
       operationId: pbData.operationId,
+      percent: 0,
     });
 
     this.alreadyExportingRoomIndex = true;

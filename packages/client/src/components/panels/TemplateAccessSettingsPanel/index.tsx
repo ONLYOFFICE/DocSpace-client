@@ -181,14 +181,11 @@ const TemplateAccessSettingsPanel = ({
   useEffect(() => {
     onCheckHeight();
     window.addEventListener("resize", onCheckHeight);
+    if (isMobileView) window.addEventListener("mousedown", onMouseDown);
     return () => {
       window.removeEventListener("resize", onCheckHeight);
       window.removeEventListener("mousedown", onMouseDown);
     };
-  }, [onMouseDown]);
-
-  useEffect(() => {
-    if (isMobileView) window.addEventListener("mousedown", onMouseDown);
   }, [isMobileView, onMouseDown]);
 
   const onKeyPress = (e: KeyboardEvent) =>
@@ -211,7 +208,11 @@ const TemplateAccessSettingsPanel = ({
         if (members?.items?.length) {
           const convertedItems = members.items.map(
             ({ access, isOwner, sharedTo }) => {
-              return { access, isOwner, ...sharedTo };
+              return {
+                templateAccess: access,
+                templateIsOwner: isOwner,
+                ...sharedTo,
+              };
             },
           );
           setAccessItems(convertedItems);
@@ -258,11 +259,11 @@ const TemplateAccessSettingsPanel = ({
     }
 
     const invitations = accessItems
-      .filter((i) => !i.isOwner)
+      .filter((i) => !i.templateIsOwner)
       .map((inviteItem) => {
         return {
           id: inviteItem.id,
-          access: inviteItem.access ?? ShareAccessRights.ReadOnly,
+          access: inviteItem.templateAccess ?? ShareAccessRights.ReadOnly,
         };
       });
 
@@ -404,6 +405,7 @@ const TemplateAccessSettingsPanel = ({
       isLoading={!tReady || modalIsLoading}
       onSubmit={onSubmit}
       withForm
+      withoutPadding
       containerVisible={addUsersPanelVisible}
     >
       <ModalDialog.Container>

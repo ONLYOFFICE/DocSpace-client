@@ -67,6 +67,7 @@ import {
   ErrorKeys,
   WhiteLabelLogoType,
   EmployeeType,
+  UrlActionType,
 } from "../enums";
 import {
   COOKIE_EXPIRATION_YEAR,
@@ -87,6 +88,7 @@ import { combineUrl } from "./combineUrl";
 import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
 import { hasOwnProperty } from "./object";
+import { TFrameConfig } from "../types/Frame";
 
 export const desktopConstants = Object.freeze({
   domain: !checkIsSSR() && window.location.origin,
@@ -1242,13 +1244,13 @@ export const getUserTypeDescription = (
   t: TTranslation,
 ) => {
   if (isPortalAdmin)
-    return t("Translations:RolePortalAdminDescription", {
+    return t("Common:RolePortalAdminDescription", {
       productName: t("Common:ProductName"),
     });
 
-  if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
+  if (isRoomAdmin) return t("Common:RoleRoomAdminDescription");
 
-  if (isCollaborator) return t("Translations:RoleNewUserDescription");
+  if (isCollaborator) return t("Common:RoleNewUserDescription");
 
   return t("Translations:RoleGuestDescriprion");
 };
@@ -1360,4 +1362,36 @@ export const getBackupProgressInfo = (
 
     return { success: t("Settings:BackupCreatedSuccess") };
   }
+};
+
+type OpenUrlParams = {
+  url: string;
+  action: UrlActionType;
+  replace?: boolean;
+  isFrame?: boolean;
+  frameConfig?: TFrameConfig | null;
+};
+
+export const openUrl = ({
+  url,
+  action,
+  replace,
+  isFrame,
+  frameConfig,
+}: OpenUrlParams) => {
+  if (action === UrlActionType.Download) {
+    return isFrame &&
+      frameConfig?.downloadToEvent &&
+      frameConfig?.events?.onDownload
+      ? frameCallEvent({ event: "onDownload", data: url })
+      : replace
+        ? (window.location.href = url)
+        : window.open(url, "_self");
+  }
+};
+
+export const getSdkScriptUrl = (version: string) => {
+  return typeof window !== "undefined"
+    ? `${window.location.origin}/static/scripts/sdk/${version}/api.js`
+    : "";
 };

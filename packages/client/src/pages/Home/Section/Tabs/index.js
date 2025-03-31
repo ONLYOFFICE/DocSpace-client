@@ -47,9 +47,14 @@ const SectionSubmenuContent = ({
   return null;
 };
 
-export default inject(({ treeFoldersStore }) => ({
-  isPersonalRoom: treeFoldersStore.isPersonalRoom,
-  isRecentTab: treeFoldersStore.isRecentTab,
-  isRoomsFolderRoot: treeFoldersStore.isRoomsFolderRoot,
-  isTemplatesFolder: treeFoldersStore.isTemplatesFolder,
-}))(observer(SectionSubmenuContent));
+export default inject(({ treeFoldersStore }) => {
+  const { isPersonalRoom, isRecentTab, isRoomsFolderRoot, isTemplatesFolder } =
+    treeFoldersStore;
+
+  return {
+    isPersonalRoom,
+    isRecentTab,
+    isRoomsFolderRoot,
+    isTemplatesFolder,
+  };
+})(observer(SectionSubmenuContent));

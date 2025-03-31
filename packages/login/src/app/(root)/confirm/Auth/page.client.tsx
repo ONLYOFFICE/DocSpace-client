@@ -27,7 +27,7 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -43,6 +43,7 @@ import OperationContainer from "@docspace/shared/components/operation-container"
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { getUser } from "@docspace/shared/api/people";
 
 const AuthHandler = () => {
   let searchParams = useSearchParams();
@@ -59,6 +60,8 @@ const AuthHandler = () => {
   const isExternalDownloading =
     referenceUrl && referenceUrl.indexOf("action=download") !== -1;
 
+  const replaced = useRef(false);
+
   useEffect(() => {
     async function loginWithKey() {
       try {
@@ -73,14 +76,18 @@ const AuthHandler = () => {
         frameCallEvent({ event: "onAuthSuccess" });
 
         if (referenceUrl && referenceUrl.includes("oauth2")) {
+          const user = await getUser();
           const newUrl = location.search.split("referenceUrl=")[1];
 
-          const token = getOAuthJWTSignature();
+          const token = getOAuthJWTSignature(user.id);
 
           if (!token) {
-            await setOAuthJWTSignature();
+            await setOAuthJWTSignature(user.id);
           }
 
+          if (replaced.current || !token || !user.id) return;
+
+          replaced.current = true;
           window.location.replace(newUrl);
           return;
         }

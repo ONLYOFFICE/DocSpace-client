@@ -34,7 +34,7 @@ export type TTitles = {
   infoPanel?: string;
   actions?: string;
   contextMenu?: string;
-  trashWarning?: string;
+  warningText?: string;
 };
 
 export type TContextButtonProps = {
@@ -78,6 +78,12 @@ export type TArrowButtonProps = {
   onBackToParentFolder: TOnBackToParenFolder;
 };
 
+export type TBadgesProps = {
+  titleIcon: string;
+  isRootFolder: boolean;
+  titleIconTooltip?: string;
+};
+
 export type TTextProps = {
   title: string;
   isOpen: boolean;
@@ -98,6 +104,7 @@ export type TNavigationLogoProps = {
 export type TOnNavigationItemClick = (
   id: string | number,
   isRootRoom: boolean,
+  isRootTemplates?: boolean,
 ) => void;
 
 export type TNavigationItemProps = {
@@ -109,12 +116,14 @@ export type TNavigationItemProps = {
   withLogo: boolean | string;
   currentDeviceType: DeviceType;
   style?: React.CSSProperties;
+  isRootTemplates?: boolean;
 };
 
 export type TNavigationItem = {
   id: string | number;
   title: string;
   isRootRoom: boolean;
+  isRootTemplates?: boolean;
 };
 
 export type TRowParam = {
@@ -156,6 +165,7 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
     /** Used for guidance */
     addButtonRef?: RefObject<HTMLDivElement>;
     buttonRef?: LegacyRef<HTMLButtonElement>;
+    isContextButtonVisible?: boolean;
   };
 
 export type TDropBoxProps = TArrowButtonProps &

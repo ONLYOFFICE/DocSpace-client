@@ -34,6 +34,7 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
+import { isManagement } from "@docspace/shared/utils/common";
 
 import {
   saveToLocalStorage,
@@ -143,6 +144,10 @@ class BackupStore {
   accounts = [];
 
   connectedAccount = [];
+
+  isBackupProgressVisible = false;
+
+  backupPrgressError = "";
 
   constructor(authStore, thirdPartyStore) {
     makeAutoObservable(this);
@@ -546,12 +551,13 @@ class BackupStore {
 
   getProgress = async (t) => {
     try {
-      const response = await getBackupProgress();
+      const response = await getBackupProgress(isManagement());
 
       if (response) {
         const { progress, link, error } = response;
 
         if (!error) {
+          this.setIsBackupProgressVisible(progress !== 100);
           this.downloadingProgress = progress;
 
           if (link && link.slice(0, 1) === "/") {
@@ -559,6 +565,7 @@ class BackupStore {
           }
           this.setErrorInformation("");
         } else {
+          this.setIsBackupProgressVisible(false);
           this.downloadingProgress = 100;
           this.setErrorInformation(error);
         }
@@ -578,9 +585,13 @@ class BackupStore {
     }
   };
 
-  get isBackupProgressVisible() {
-    return this.downloadingProgress >= 0 && this.downloadingProgress !== 100;
-  }
+  setIsBackupProgressVisible = (visible) => {
+    this.isBackupProgressVisible = visible;
+  };
+
+  setBackupProgressError = (error) => {
+    this.backupPrgressError = error;
+  };
 
   setDownloadingProgress = (progress) => {
     if (progress !== this.downloadingProgress)

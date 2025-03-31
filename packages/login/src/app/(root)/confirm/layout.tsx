@@ -29,7 +29,7 @@ import { headers } from "next/headers";
 import ConfirmRoute from "@/components/ConfirmRoute";
 import { StyledBody } from "@/components/Confirm.styled";
 import { TConfirmLinkParams } from "@/types";
-import { checkConfirmLink, getSettings } from "@/utils/actions";
+import { checkConfirmLink, getSettings, getUser } from "@/utils/actions";
 import { ValidationResult } from "@/utils/enums";
 import { redirect } from "next/navigation";
 
@@ -58,6 +58,8 @@ export default async function Layout({
     checkConfirmLink(confirmLinkParams),
   ]);
 
+  const user = type === "GuestShareLink" ? await getUser() : undefined;
+
   const isUserExisted =
     confirmLinkResult?.result == ValidationResult.UserExisted;
   const isUserExcluded =
@@ -79,10 +81,10 @@ export default async function Layout({
   return (
     <StyledBody id="confirm-body">
       <ConfirmRoute
-        defaultPage={objectSettings?.defaultPage}
         socketUrl={objectSettings?.socketUrl}
         confirmLinkResult={confirmLinkResult}
         confirmLinkParams={confirmLinkParams}
+        user={user}
       >
         {children}
       </ConfirmRoute>

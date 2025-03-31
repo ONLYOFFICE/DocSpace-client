@@ -47,6 +47,8 @@ export type FloatingButtonProps = {
   showCancelButton?: boolean;
   completed?: boolean;
   withoutStatus?: boolean;
+  /** Loading indicator */
+  percent?: number;
 };
 
 export type DefaultStylesProps = {

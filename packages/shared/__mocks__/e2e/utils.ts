@@ -59,3 +59,6 @@ export const HEADER_FILTERED_ROOMS_LIST = "x-test-data-filtered-rooms-list";
 
 export const HEADER_EMPTY_FOLDER = "x-test-data-empty-folder";
 export const HEADER_FILTERED_FOLDER = "x-test-data-filtered-folder";
+
+export const HEADER_AUTHENTICATED_SETTINGS =
+  "x-test-data-authenticated-settings";

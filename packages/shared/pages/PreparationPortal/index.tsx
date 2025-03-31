@@ -131,8 +131,8 @@ export const PreparationPortal = (props: IPreparationPortal) => {
   useEffect(() => {
     if (!ready) return;
 
-    getRecoveryProgress();
-  }, [ready, getRecoveryProgress]);
+    if (!isDialog) getRecoveryProgress();
+  }, [ready, getRecoveryProgress, isDialog]);
 
   const headerText = errorMessage
     ? t("Common:Error")

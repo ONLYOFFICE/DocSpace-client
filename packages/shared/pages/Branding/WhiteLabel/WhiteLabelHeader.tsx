@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTheme } from "styled-components";
+import { globalColors } from "@docspace/shared/themes";
 
 import { Text } from "../../../components/text";
 import { Badge } from "../../../components/badge";
@@ -56,6 +58,8 @@ export const WhiteLabelHeader = ({
   onChange,
   onClear,
 }: IHeaderProps) => {
+  const theme = useTheme();
+
   return (
     <StyledHeader>
       {showNotAvailable ? <NotAvailable t={t} /> : null}
@@ -70,6 +74,11 @@ export const WhiteLabelHeader = ({
             fontWeight="700"
             label={t("Common:Paid")}
             isPaidBadge
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
           />
         ) : null}
       </div>

@@ -171,6 +171,8 @@ export default function withBadges(WrappedComponent) {
         isRecentTab,
         isTemplatesFolder,
         isExtsCustomFilter,
+        helpCenterDomain,
+        helpCenterEntries,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -184,6 +186,9 @@ export default function withBadges(WrappedComponent) {
         access === ShareAccessRights.None; // TODO: fix access type for owner (now - None)
 
       const canEditing = access === ShareAccessRights.Editing;
+
+      const customFilterExternalLink =
+        helpCenterDomain + helpCenterEntries.docspacemanagingrooms;
 
       const badgesComponent = (
         <Badges
@@ -215,6 +220,7 @@ export default function withBadges(WrappedComponent) {
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
           isExtsCustomFilter={isExtsCustomFilter}
+          customFilterExternalLink={customFilterExternalLink}
           newFilesBadge={
             <NewFilesBadge
               className="tablet-badge"
@@ -264,7 +270,13 @@ export default function withBadges(WrappedComponent) {
         checkAndOpenLocationAction,
         onCreateRoomFromTemplate,
       } = filesActionsStore;
-      const { isTabletView, isDesktopClient, theme } = settingsStore;
+      const {
+        isTabletView,
+        isDesktopClient,
+        theme,
+        helpCenterDomain,
+        helpCenterEntries,
+      } = settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
         dialogsStore;
@@ -307,6 +319,8 @@ export default function withBadges(WrappedComponent) {
         isTemplatesFolder,
         onCreateRoomFromTemplate,
         isExtsCustomFilter,
+        helpCenterDomain,
+        helpCenterEntries,
       };
     },
   )(observer(WithBadges));

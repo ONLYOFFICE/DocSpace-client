@@ -51,7 +51,7 @@ import {
 
 import { Tooltip } from "../tooltip";
 import { Text } from "../text";
-import { Link, LinkType } from "../link";
+import { Link, LinkTarget, LinkType } from "../link";
 import { Badge } from "../badge";
 import { ColorTheme, ThemeId } from "../color-theme";
 
@@ -119,6 +119,7 @@ const Badges = ({
   newFilesBadge,
   className,
   isExtsCustomFilter,
+  customFilterExternalLink,
 }: BadgesProps) => {
   const {
     id,
@@ -240,9 +241,11 @@ const Badges = ({
       </Text>
       <Link
         type={LinkType.action}
+        target={LinkTarget.blank}
         color={globalColors.lightGrayDark}
         fontSize="13px"
         fontWeight={600}
+        href={customFilterExternalLink}
         isHovered
       >
         {t("Common:LearnMore")}

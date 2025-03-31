@@ -86,6 +86,7 @@ export type BadgesProps = {
   newFilesBadge?: React.ReactElement;
   className?: string;
   isExtsCustomFilter?: boolean;
+  customFilterExternalLink?: string;
 };
 
 export type BadgeWrapperProps = {

@@ -33,13 +33,15 @@ import FilesSelector from "@docspace/shared/selectors/Files";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { DeviceType, FolderType, RoomsType } from "@docspace/shared/enums";
 import { getFileLink } from "@docspace/shared/api/files";
-import type { TRoom } from "@docspace/shared/api/rooms/types";
+import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { Nullable } from "@docspace/shared/types";
 import type {
   TFile,
   TFilesSettings,
   TFolder,
+  TFileSecurity,
+  TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type {
   TFilesSelectorInit,
@@ -153,7 +155,28 @@ export default function FilesSelectorClient({
     }
   }, []);
 
-  const getIsDisabled = useCallback((isDisabled: boolean) => isDisabled, []);
+  const getIsDisabled = useCallback(
+    (
+      isFirstLoad: boolean,
+      isSelectedParentFolder: boolean,
+      selectedItemId: string | number | undefined,
+      selectedItemType: "rooms" | "files" | undefined,
+      isRoot: boolean,
+      selectedItemSecurity:
+        | TFileSecurity
+        | TFolderSecurity
+        | TRoomSecurity
+        | undefined,
+      selectedFileInfo: TSelectedFileInfo,
+      isDisabledFolder?: boolean,
+    ) =>
+      isFirstLoad ||
+      !!isDisabledFolder ||
+      selectedItemType === "rooms" ||
+      isRoot ||
+      isSelectedParentFolder,
+    [],
+  );
 
   const getFilesArchiveError = useCallback(() => "", []);
 

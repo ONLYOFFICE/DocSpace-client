@@ -120,6 +120,7 @@ import {
   FilesSelectorFilterTypes,
   FilterType,
   FileExtensions,
+  ShareAccessRights,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
@@ -1704,6 +1705,10 @@ class ContextOptionsStore {
       disabled: !security?.EditRoom || !isIndexedFolder || isFiltered,
     };
 
+    const isTemplateOwner =
+      item.access === ShareAccessRights.None ||
+      item.access === ShareAccessRights.FullAccess;
+
     const optionsModel = [
       {
         id: "option_select",
@@ -1867,7 +1872,7 @@ class ContextOptionsStore {
         label: t("EditTemplate"),
         icon: SettingsReactSvgUrl,
         onClick: () => this.onEditRoomTemplate(item),
-        disabled: false,
+        disabled: !isTemplateOwner,
       },
       {
         id: "option_access-settings",
@@ -1875,7 +1880,7 @@ class ContextOptionsStore {
         label: t("AccessSettings"),
         icon: PersonReactSvgUrl,
         onClick: () => this.onOpenTemplateAccessOptions(),
-        disabled: false,
+        disabled: !isTemplateOwner,
       },
       {
         id: "option_invite-users-to-room",

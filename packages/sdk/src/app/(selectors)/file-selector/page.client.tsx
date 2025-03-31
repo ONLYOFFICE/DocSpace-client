@@ -226,7 +226,7 @@ export default function FilesSelectorClient({
     withFooterInput: false,
     withoutBackButton: true,
     withSearch: search as boolean,
-    filterParam: baseConfig.filter,
+    filterParam: filter,
   };
 
   const newProps = {

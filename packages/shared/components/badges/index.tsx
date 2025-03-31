@@ -37,7 +37,8 @@ import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?u
 import Mute12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/mute.react.svg?url";
 import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
-import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/12/custom-filter.react.svg?url";
+import CustomFilter12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/custom-filter.react.svg?url";
+import CustomFilter16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 
 import { isMobile as isMobileDevice } from "react-device-detect";
 
@@ -47,6 +48,7 @@ import { Link, LinkType } from "../link";
 import { Badge } from "../badge";
 import { ColorTheme, ThemeId } from "../color-theme";
 
+import { globalColors } from "../../themes";
 import { RoomsType, ShareAccessRights } from "../../enums";
 
 import {
@@ -162,7 +164,10 @@ const Badges = ({
   const iconPin = UnpinReactSvgUrl;
   const iconMute =
     sizeBadge === "medium" ? Mute16ReactSvgUrl : Mute12ReactSvgUrl;
-  const iconCustomFilter = CustomFilterReactSvgUrl;
+  const iconCustomFilter =
+    sizeBadge === "medium"
+      ? CustomFilter16ReactSvgUrl
+      : CustomFilter12ReactSvgUrl;
 
   const unpinIconProps = {
     "data-id": id,
@@ -224,8 +229,14 @@ const Badges = ({
       <Text fontSize="12px" fontWeight={400} noSelect>
         {t("CustomFilterEnableDiscription")}
       </Text>
-      <Link type={LinkType.page} fontSize="13px" fontWeight={600} isHovered>
-        {t("LearnMore")}
+      <Link
+        type={LinkType.action}
+        color={globalColors.lightGrayDark}
+        fontSize="13px"
+        fontWeight={600}
+        isHovered
+      >
+        {t("Common:LearnMore")}
       </Link>
     </>
   );
@@ -275,28 +286,6 @@ const Badges = ({
             onClick={onDraftClick}
           />
         </BadgeWrapper>
-      ) : null}
-
-      {customFilterEnabled && !isRoom && isExtsCustomFilter ? (
-        <>
-          <ColorTheme
-            themeId={ThemeId.IconButtonCustomFilter}
-            iconName={iconCustomFilter}
-            size={sizeBadge}
-            isClickable
-            data-tooltip-id="customFilterTooltip"
-            className="badge is-custom-filter tablet-badge"
-          />
-
-          <Tooltip
-            id="customFilterTooltip"
-            place="bottom"
-            getContent={getTooltipContent}
-            openOnClick
-            maxWidth="238px"
-            className="custom-filter-tooltip"
-          />
-        </>
       ) : null}
 
       {isEditing && !(isRecentTab && !canEditing) ? (
@@ -369,6 +358,31 @@ const Badges = ({
           />
         </BadgeWrapper>
       )} */}
+
+      {customFilterEnabled && !isRoom && isExtsCustomFilter ? (
+        <>
+          <ColorTheme
+            id="customFilterTooltip"
+            themeId={ThemeId.IconButtonCustomFilter}
+            iconName={iconCustomFilter}
+            size={sizeBadge}
+            isClickable
+            data-tooltip-id="customFilterTooltip"
+            className="badge is-custom-filter tablet-badge"
+          />
+
+          <Tooltip
+            id="customFilterTooltip"
+            place="bottom-start"
+            getContent={getTooltipContent}
+            openOnClick
+            clickable
+            maxWidth="238px"
+            className="custom-filter-tooltip"
+            noUserSelect
+          />
+        </>
+      ) : null}
     </div>
   ) : (
     <div

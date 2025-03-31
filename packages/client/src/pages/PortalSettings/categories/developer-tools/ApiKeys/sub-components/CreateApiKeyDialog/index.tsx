@@ -502,6 +502,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         primary
         onClick={onGenerate}
         scale
+        isDisabled={isRequestRunning}
       />
       <Button
         key="CancelButton"

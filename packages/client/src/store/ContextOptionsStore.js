@@ -87,6 +87,7 @@ import { makeAutoObservable } from "mobx";
 import copy from "copy-to-clipboard";
 import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
+import { Trans } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
@@ -484,7 +485,11 @@ class ContextOptionsStore {
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
         copyShareLink(itemLink.sharedTo.shareLink);
-        toastr.success(t("Common:LinkCopySuccess"));
+        item.customFilterEnabled
+          ? toastr.success(
+              <Trans t={t} i18nKey="Common:LinkCopySuccessWithCustomFilter" />,
+            )
+          : toastr.success(t("Common:LinkCopySuccess"));
       } catch (error) {
         toastr.error(error);
       }

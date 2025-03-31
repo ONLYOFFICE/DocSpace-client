@@ -122,6 +122,7 @@ const ApiKeys = (props: ApiKeysProps) => {
       .finally(() => {
         setIsRequestRunning(false);
         setDeleteKeyDialogIsVisible(false);
+        setActionItem(null);
       });
   };
 
@@ -257,7 +258,10 @@ const ApiKeys = (props: ApiKeysProps) => {
       {deleteKeyDialogIsVisible ? (
         <DeleteApiKeyDialog
           isVisible={deleteKeyDialogIsVisible}
-          setIsVisible={setDeleteKeyDialogIsVisible}
+          onClose={() => {
+            setDeleteKeyDialogIsVisible(false);
+            setActionItem(null);
+          }}
           onDelete={onDelete}
           isRequestRunning={isRequestRunning}
         />

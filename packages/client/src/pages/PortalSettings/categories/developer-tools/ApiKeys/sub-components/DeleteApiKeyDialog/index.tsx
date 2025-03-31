@@ -36,12 +36,7 @@ import { Text } from "@docspace/shared/components/text";
 import { DeleteApiKeyDialogProps } from "../../types";
 
 const DeleteApiKeyDialog = (props: DeleteApiKeyDialogProps) => {
-  const { t, tReady, isVisible, setIsVisible, isRequestRunning, onDelete } =
-    props;
-
-  const onClose = () => {
-    setIsVisible(false);
-  };
+  const { t, tReady, isVisible, onClose, isRequestRunning, onDelete } = props;
 
   const onKeyPress = (e: KeyboardEvent) => {
     if (e.key === "Enter" && !isRequestRunning) {

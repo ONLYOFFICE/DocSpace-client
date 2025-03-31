@@ -2233,7 +2233,7 @@ class FilesStore {
         ]);
       }
 
-      if (!canSetUpCustomFilter || !isExtsCustomFilter) {
+      if (!canSetUpCustomFilter || !isExtsCustomFilter || isMyFolder) {
         fileOptions = removeOptions(fileOptions, ["custom-filter"]);
       }
 

@@ -246,6 +246,11 @@ const DirectThirdPartyConnection = (props) => {
       </StyledComboBoxItem>
     );
   });
+
+  const updateInfo = async () => {
+    setThirdPartyAccountsInfo(t);
+  };
+
   return (
     <StyledBackup
       isConnectedAccount={
@@ -324,7 +329,7 @@ const DirectThirdPartyConnection = (props) => {
       )}
       {deleteThirdPartyDialogVisible ? (
         <DeleteThirdPartyDialog
-          updateInfo={setThirdPartyAccountsInfo}
+          updateInfo={updateInfo}
           key="thirdparty-delete-dialog"
           isConnectionViaBackupModule
         />

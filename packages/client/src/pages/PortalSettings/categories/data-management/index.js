@@ -169,9 +169,12 @@ const DataManagementWrapper = (props) => {
     const url = isManagement()
       ? `/management/settings/backup/${e.id}`
       : `/portal-settings/backup/${e.id}`;
+
     navigate(
       combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
     );
+
+    setIsLoaded(false);
   };
 
   if (!isLoaded) return null;

@@ -86,6 +86,10 @@ const Tooltip = React.forwardRef<TooltipRefProps, TooltipProps>(
       mouseleave: !openOnClick,
     };
 
+    const tooltipStyle = maxWidth
+      ? ({ ...style, "--tooltip-max-width": maxWidth } as React.CSSProperties)
+      : style;
+
     const renderTooltip = () => {
       const tooltipClass = classNames(styles.tooltip, className, {
         [styles.noUserSelect]: noUserSelect,
@@ -95,7 +99,7 @@ const Tooltip = React.forwardRef<TooltipRefProps, TooltipProps>(
         <div
           ref={tooltipRef}
           className={tooltipClass}
-          style={style}
+          style={tooltipStyle}
           data-testid="tooltip"
         >
           <ReactTooltip
@@ -155,10 +159,6 @@ const Tooltip = React.forwardRef<TooltipRefProps, TooltipProps>(
 
       if (color) {
         tooltipRef.current.style.setProperty("--tooltip-bg-color", color);
-      }
-
-      if (maxWidth) {
-        tooltipRef.current.style.setProperty("--tooltip-max-width", maxWidth);
       }
     }, [color, maxWidth]);
 

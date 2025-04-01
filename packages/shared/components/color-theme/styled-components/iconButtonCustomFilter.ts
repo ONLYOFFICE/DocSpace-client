@@ -24,21 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum ThemeId {
-  IconWrapper = "iconWrapper",
-  IconButton = "iconButton",
-  IconButtonPin = "iconButtonPin",
-  IconButtonMute = "iconButtonMute",
-  IconButtonCustomFilter = "iconButtonCustomFilter",
-  IndicatorFilterButton = "indicatorFilterButton",
-  FilterBlockItemTag = "filterBlockItemTag",
-  VersionBadge = "versionBadge",
-  LinkForgotPassword = "linkForgotPassword",
-  LoadingButton = "loadingButton",
-  InfoPanelToggle = "infoPanelToggle",
-  Link = "link",
-  IndicatorLoader = "indicatorLoader",
-  Progress = "progress",
-  SubmenuText = "submenuText",
-  IndexIconButton = "indexIconButton",
-}
+import styled from "styled-components";
+
+import { commonIconsStyles, injectDefaultTheme } from "../../../utils";
+import { TColorScheme, globalColors } from "../../../themes";
+
+import StyledCustomFilterIcon from "../sub-components/StyledCustomFilterIcon";
+
+import { IconButtonCustomFilterColorTheme } from "../ColorTheme.types";
+
+const IconButtonCustomFilterTheme = styled(StyledCustomFilterIcon).attrs(
+  injectDefaultTheme,
+)<IconButtonCustomFilterColorTheme & { $currentColorScheme?: TColorScheme }>`
+  ${commonIconsStyles}
+
+  svg {
+    path {
+      fill: ${globalColors.mainGreen} !important;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      svg {
+        path {
+          fill: ${globalColors.mainGreen} !important;
+        }
+      }
+    }
+  }
+`;
+
+export default IconButtonCustomFilterTheme;

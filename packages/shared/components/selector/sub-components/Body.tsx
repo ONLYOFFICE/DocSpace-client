@@ -319,7 +319,7 @@ const Body = ({
             <Scrollbar
               style={
                 {
-                  height: `calc(100% - ${Math.abs(listHeight)}px)`,
+                  height: `calc(100% - ${Math.abs(listHeight + CONTAINER_PADDING)}px)`,
                   overflow: "hidden",
                   "--scrollbar-padding-inline-end": 0,
                   "--scrollbar-padding-inline-end-mobile": 0,

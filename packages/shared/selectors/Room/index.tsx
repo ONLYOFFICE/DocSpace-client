@@ -184,7 +184,7 @@ const RoomSelector = ({
 
       setHasNextPage(count === PAGE_COUNT);
 
-      if (isFirstLoad.current) {
+      if (isFirstLoad.current || startIndex === 0) {
         setTotal(totalCount);
 
         setItems([...rooms]);

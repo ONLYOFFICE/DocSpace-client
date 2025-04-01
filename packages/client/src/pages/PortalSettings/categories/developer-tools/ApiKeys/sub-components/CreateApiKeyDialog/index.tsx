@@ -436,6 +436,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
                 className="api-key_lifetime-input"
                 value={expiresInDays}
                 type={InputType.text}
+                maxLength={6}
                 onChange={(e) => {
                   if (
                     e.target.value &&
@@ -502,6 +503,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         primary
         onClick={onGenerate}
         scale
+        isDisabled={isRequestRunning}
       />
       <Button
         key="CancelButton"

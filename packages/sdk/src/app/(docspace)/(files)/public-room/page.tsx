@@ -68,7 +68,8 @@ export default async function PublicRoom({
       filesFilter={filterStr}
       shareKey={baseConfig.key as string}
       baseConfig={{
-        header: baseConfig.header as boolean,
+        showFilter: baseConfig.showFilter as boolean,
+        showHeader: baseConfig.showHeader as boolean,
         folder: baseConfig.id as string,
       }}
     />

@@ -242,7 +242,7 @@ const Badges = ({
       <Link
         type={LinkType.action}
         target={LinkTarget.blank}
-        color={globalColors.lightGrayDark}
+        className="custom-filter-tooltip-link"
         fontSize="13px"
         fontWeight={600}
         href={customFilterExternalLink}

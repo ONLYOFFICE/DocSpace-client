@@ -80,11 +80,10 @@
       @include icon-size(medium);
     }
   }
+}
 
-  .custom-filter-tooltip {
-    z-index: 1;
-    max-width: 200px;
-  }
+:global(.custom-filter-tooltip-link) {
+  color: var(--files-badges-link-color);
 }
 
 .badgeWrapper {

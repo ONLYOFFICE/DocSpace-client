@@ -95,7 +95,7 @@ const DirectThirdPartyConnection = (props) => {
     loginValue = "",
     passwordValue = "",
   ) => {
-    const { label, provider_key, provider_id } = selectedThirdPartyAccount;
+    const { label, key, provider_id } = selectedThirdPartyAccount;
     setState({ isLoading: true, isUpdatingInfo: true });
     connectDialogVisible && setConnectDialogVisible(false);
     onSelectFolder && onSelectFolder("");
@@ -108,7 +108,7 @@ const DirectThirdPartyConnection = (props) => {
         token,
         false,
         label,
-        provider_key,
+        key,
         provider_id,
       );
 
@@ -147,8 +147,7 @@ const DirectThirdPartyConnection = (props) => {
     clearLocalStorage();
     onSelectFolder && onSelectFolder("");
 
-    const { provider_key, provider_link: directConnection } =
-      selectedThirdPartyAccount;
+    const { key, provider_link: directConnection } = selectedThirdPartyAccount;
 
     if (directConnection) {
       const authModal = window.open(
@@ -157,7 +156,7 @@ const DirectThirdPartyConnection = (props) => {
         "height=600, width=1020",
       );
 
-      openConnectWindow(provider_key, authModal)
+      openConnectWindow(key, authModal)
         .then((modal) => getOAuthToken(modal))
         .then((token) => {
           authModal.close();
@@ -173,8 +172,8 @@ const DirectThirdPartyConnection = (props) => {
     }
   };
 
-  const onSelectAccount = (key) => () => {
-    const account = accounts.find((a) => a.key === key);
+  const onSelectAccount = (name) => () => {
+    const account = accounts.find((a) => a.name === name);
 
     if (!account.connected) {
       setSelectedThirdPartyAccount({
@@ -183,7 +182,7 @@ const DirectThirdPartyConnection = (props) => {
       });
 
       return window.open(
-        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[key]}`,
+        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[name]}`,
         "_blank",
       );
     }
@@ -227,7 +226,7 @@ const DirectThirdPartyConnection = (props) => {
     return (
       <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
         <DropDownItem
-          onClick={onSelectAccount(item.key)}
+          onClick={onSelectAccount(item.name)}
           className={item.className}
           disabled={item.disabled}
         >
@@ -239,7 +238,7 @@ const DirectThirdPartyConnection = (props) => {
             <IconButton
               className="drop-down-item_icon"
               size="16"
-              onClick={onSelectAccount(item.key)}
+              onClick={onSelectAccount(item.name)}
               iconName={ExternalLinkReactSvgUrl}
               isFill
             />
@@ -325,7 +324,7 @@ const DirectThirdPartyConnection = (props) => {
             isThirdParty
             isSelectFolder={isSelectFolder}
             isSelect={isSelect}
-            checkCreating={selectedThirdPartyAccount?.provider_key === "WebDav"}
+            checkCreating={selectedThirdPartyAccount?.key === "WebDav"}
           />
         )
       )}

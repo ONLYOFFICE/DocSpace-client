@@ -74,6 +74,7 @@ const StyledApiKeys = styled.div`
 
 const StyledMobileButton = styled.div.attrs(injectDefaultTheme)`
   position: fixed;
+  z-index: 1;
   width: calc(100% - 32px);
   height: 73px;
   bottom: 0;

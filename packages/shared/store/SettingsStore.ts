@@ -762,6 +762,12 @@ class SettingsStore {
     return this.externalResources?.common.entries?.booktrainingemail;
   }
 
+  get appearanceBlockHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.appearance
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.appearance}`
+      : this.helpCenterDomain;
+  }
+
   setIsDesktopClientInit = (isDesktopClientInit: boolean) => {
     this.isDesktopClientInit = isDesktopClientInit;
   };

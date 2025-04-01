@@ -34,7 +34,7 @@ export const ErrorInvalidLink = () => {
   return ready ? (
     <ErrorContainer
       headerText={t("Common:InvalidLink")}
-      bodyText={t("LinkDoesNotExist")}
+      bodyText={t("Common:LinkDoesNotExist")}
     />
   ) : null;
 };

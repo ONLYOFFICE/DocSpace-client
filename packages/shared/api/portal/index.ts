@@ -100,18 +100,24 @@ export function startBackup(
   return request(options);
 }
 
-export function getBackupProgress() {
+export function getBackupProgress(dump: boolean = false) {
   const options = {
     method: "get",
     url: "/portal/getbackupprogress",
+    params: {
+      dump,
+    },
   };
   return request(options);
 }
 
-export function deleteBackupSchedule() {
+export function deleteBackupSchedule(dump: boolean = false) {
   const options = {
     method: "delete",
     url: "/portal/deletebackupschedule",
+    params: {
+      dump,
+    },
   };
   return request(options);
 }
@@ -158,16 +164,28 @@ export function createBackupSchedule(
   return request(options);
 }
 
-export function deleteBackupHistory() {
-  return request({ method: "delete", url: "/portal/deletebackuphistory" });
+export function deleteBackupHistory(dump: boolean = false) {
+  return request({
+    method: "delete",
+    url: "/portal/deletebackuphistory",
+    params: {
+      dump,
+    },
+  });
 }
 
 export function deleteBackup(id) {
   return request({ method: "delete", url: `/portal/deletebackup/${id}` });
 }
 
-export function getBackupHistory() {
-  return request({ method: "get", url: "/portal/getbackuphistory" });
+export function getBackupHistory(dump: boolean = false) {
+  return request({
+    method: "get",
+    url: "/portal/getbackuphistory",
+    params: {
+      dump,
+    },
+  });
 }
 
 export function startRestore(

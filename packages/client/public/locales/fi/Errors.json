@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "Tyhjä vastaus",
-  "ErrorUnavailableText": "{{productName}} ei ole saatavilla",
-  "LinkDoesNotExist": "Linkki, jota yrität avata ei ole olemassa.",
-  "LinkHasExpired": "Linkki, jota seurasit on vanhentunut."
+  "ErrorUnavailableText": "{{productName}} ei ole saatavilla"
 }

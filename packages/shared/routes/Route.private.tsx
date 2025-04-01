@@ -26,7 +26,7 @@
 
 /* eslint-disable react/prop-types */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -76,6 +76,30 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
 
+  useEffect(() => {
+    const key = searchParams.get("key");
+
+    if (
+      key &&
+      (!publicRoomKey || publicRoomKey !== key) &&
+      location.pathname.includes("/rooms/shared") &&
+      !isLoadedPublicRoom &&
+      !isLoadingPublicRoom &&
+      isLoadedUser &&
+      validatePublicRoomKey
+    ) {
+      validatePublicRoomKey(key);
+    }
+  }, [
+    searchParams,
+    publicRoomKey,
+    location.pathname,
+    isLoadedPublicRoom,
+    isLoadingPublicRoom,
+    isLoadedUser,
+    validatePublicRoomKey,
+  ]);
+
   const renderComponent = () => {
     const key = searchParams.get("key");
 
@@ -84,7 +108,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         return <AppLoader />;
       }
 
-      if (!user) {
+      if (!user && isAuthenticated) {
         const filter = FilesFilter.getDefault();
         const subFolder = new URLSearchParams(window.location.search).get(
           "folder",
@@ -98,17 +122,6 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
         return <Navigate to={`${path}?${filter.toUrlParams()}`} />;
       }
-    }
-
-    if (
-      key &&
-      (!publicRoomKey || publicRoomKey !== key) &&
-      location.pathname.includes("/rooms/shared") &&
-      !isLoadedPublicRoom &&
-      !isLoadingPublicRoom &&
-      validatePublicRoomKey
-    ) {
-      validatePublicRoomKey(key);
     }
 
     if (!user && isAuthenticated) {
@@ -241,13 +254,14 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       tenantStatus === TenantStatus.PortalRestore &&
       !isPortalUrl
     ) {
+      const url = isManagement
+        ? "management/preparation-portal"
+        : "/preparation-portal";
+
       return (
         <Navigate
           replace
-          to={combineUrl(
-            window.ClientConfig?.proxy?.url,
-            "/preparation-portal",
-          )}
+          to={combineUrl(window.ClientConfig?.proxy?.url, url)}
         />
       );
     }

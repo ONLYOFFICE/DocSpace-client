@@ -731,7 +731,7 @@ class HotkeyStore {
   };
 
   get countTilesInRow() {
-    return getCountTilesInRow();
+    return getCountTilesInRow(this.treeFoldersStore?.isRoomsFolder);
   }
 
   get division() {
@@ -747,7 +747,7 @@ class HotkeyStore {
     const { filesList } = this.filesStore;
 
     if (this.caretIndex !== -1) {
-      return filesList[this.caretIndex].isFolder;
+      return filesList[this.caretIndex]?.isFolder;
     }
     return false;
   }
@@ -783,7 +783,6 @@ class HotkeyStore {
 
   get nextForTileDown() {
     const { filesList, folders, files } = this.filesStore;
-
     const nextTileFile = filesList[this.caretIndex + this.countTilesInRow];
     const foldersLength = folders.length;
 

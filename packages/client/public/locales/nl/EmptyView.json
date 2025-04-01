@@ -45,6 +45,5 @@
   "UploadFromPortalDescription": "Upload elk type bestand vanuit Documenten of Kamers",
   "UploadFromPortalTitle": "Uploaden van {{productName}}",
   "UploadPDFFormOptionDescription": "Selecteer een PDF formulier dat beschikbaar is in {{productName}} en upload het naar de kamer.",
-  "UserEmptyDescription": "Bestanden en mappen die door admins zijn geüpload verschijnen hier.",
   "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer"
 }

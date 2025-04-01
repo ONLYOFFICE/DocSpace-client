@@ -36,7 +36,7 @@ export type TMode = "modern" | "default";
 export type RowProps = {
   /** Required for hosting the Checkbox component. Its location is always fixed in the first position.
    * If there is no value, the occupied space is distributed among the other child elements. */
-  checked: boolean;
+  checked?: boolean;
   /** Displays the child elements */
   children?: React.ReactNode;
   /** Accepts class */
@@ -74,7 +74,7 @@ export type RowProps = {
   /** Removes the borders */
   withoutBorder?: boolean;
   /** Required for index editing mode */
-  isIndexEditingMode: boolean;
+  isIndexEditingMode?: boolean;
   /** Indicates if the row represents a room */
   isRoom?: boolean;
   /** Title for the context menu */
@@ -90,5 +90,5 @@ export type RowProps = {
   /** Disables checkbox */
   isDisabled?: boolean;
   /** Callback for changing index */
-  onChangeIndex: (action: VDRIndexingAction) => void;
+  onChangeIndex?: (action: VDRIndexingAction) => void;
 };

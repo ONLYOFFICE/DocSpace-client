@@ -44,6 +44,7 @@ import * as management from "./management";
 import * as oforms from "./oforms";
 import * as oauth from "./oauth";
 import * as debuginfo from "./debuginfo";
+import * as apiKeys from "./api-keys";
 
 export default {
   Filter,
@@ -63,4 +64,5 @@ export default {
   oauth,
   management,
   debuginfo,
+  apiKeys,
 };

@@ -30,7 +30,6 @@ import { PAGE_COUNT } from "@/utils/constants";
 type useFilesFiltersProps = {
   filesFilter: string;
   shareKey?: string;
-  canSearchByContent: boolean;
   filesViewAs: TViewAs | null;
   setFilesViewAs: (viewAs: TViewAs) => void;
 };
@@ -38,7 +37,6 @@ type useFilesFiltersProps = {
 export default function useFilesFilter({
   filesFilter,
   shareKey,
-  canSearchByContent,
   filesViewAs,
   setFilesViewAs,
 }: useFilesFiltersProps) {
@@ -238,57 +236,8 @@ export default function useFilesFilter({
       },
     ];
 
-    const foldersOptions = [
-      {
-        key: FilterGroups.filterFolders,
-        group: FilterGroups.filterFolders,
-        label: t("Common:Search"),
-        isHeader: true,
-        withoutSeparator: true,
-      },
-      {
-        id: "filter_folders",
-        key: "folders",
-        group: FilterGroups.filterFolders,
-        label: "",
-        withOptions: true,
-        options: [
-          {
-            id: "filter_folders_exclude-subfolders",
-            key: FilterKeys.excludeSubfolders,
-            label: t("ExcludeSubfolders"),
-          },
-          {
-            id: "filter_folders_with-subfolders",
-            key: FilterKeys.withSubfolders,
-            label: t("WithSubfolders"),
-          },
-        ],
-      },
-    ];
-
-    const contentOptions: TItem[] = [
-      {
-        key: FilterGroups.filterContent,
-        group: FilterGroups.filterContent,
-        isHeader: true,
-        withoutHeader: true,
-        label: "",
-      },
-    ];
-
-    if (canSearchByContent) {
-      contentOptions.push({
-        id: "filter_search-by-file-contents",
-        key: "true" as FilterGroups,
-        group: FilterGroups.filterContent,
-        label: t("SearchByContent"),
-        isCheckbox: true,
-      });
-    }
-
-    return [...foldersOptions, ...contentOptions, ...typeOptions];
-  }, [t, canSearchByContent]);
+    return [...typeOptions];
+  }, [t]);
 
   const getSelectedFilterData = React.useCallback(() => {
     const filterValues: TItem[] = [];

@@ -43,12 +43,14 @@ const ShareFormPanel = ({
   const [roomType, setRoomType] = useState(RoomsType.FormRoom);
 
   const onClose = () => {
-    setIsShareFormData(false);
+    setIsShareFormData({
+      visible: false,
+    });
   };
 
   const onClickShareFile = () => {
     updateAccessLink();
-    setIsShareFormData(false);
+    onClose();
   };
 
   const file = files.find((item) => item.id === fileId);
@@ -85,8 +87,9 @@ const ShareFormPanel = ({
             withoutBackButton: false,
             onBackClick: onCloseSelectionFormRoom,
           }}
-          onCloseActionProp={onCloseSelectionFormRoom}
+          onCloseActionProp={onClose}
           createDefineRoomType={roomType}
+          onCancel={onCloseSelectionFormRoom}
         />
       }
     />

@@ -407,7 +407,7 @@ const Badges = ({
             openOnClick
             clickable
             maxWidth="238px"
-            className="custom-filter-tooltip"
+            className={styles.customFilterTooltip}
             noUserSelect
           />
         </>

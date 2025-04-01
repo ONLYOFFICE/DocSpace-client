@@ -24,21 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum ThemeId {
-  IconWrapper = "iconWrapper",
-  IconButton = "iconButton",
-  IconButtonPin = "iconButtonPin",
-  IconButtonMute = "iconButtonMute",
-  IconButtonCustomFilter = "iconButtonCustomFilter",
-  IndicatorFilterButton = "indicatorFilterButton",
-  FilterBlockItemTag = "filterBlockItemTag",
-  VersionBadge = "versionBadge",
-  LinkForgotPassword = "linkForgotPassword",
-  LoadingButton = "loadingButton",
-  InfoPanelToggle = "infoPanelToggle",
-  Link = "link",
-  IndicatorLoader = "indicatorLoader",
-  Progress = "progress",
-  SubmenuText = "submenuText",
-  IndexIconButton = "indexIconButton",
-}
+import styled from "styled-components";
+import commonIconsStyles from "../../../utils/common-icons-style";
+
+import { IconButton } from "../../icon-button";
+
+const StyledCustomFilterIcon = styled(IconButton)`
+  ${commonIconsStyles}
+`;
+
+export default StyledCustomFilterIcon;

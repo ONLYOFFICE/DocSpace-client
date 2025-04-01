@@ -51,6 +51,8 @@ export enum FeedAction {
   FormPartiallyFilled = "formPartiallyFilled",
   FormCompletelyFilled = "formCompletelyFilled",
   FormStopped = "formStopped",
+  CustomFilterDisabled = "customFilterDisabled",
+  CustomFilterEnabled = "customFilterEnabled",
 }
 
 enum FeedTarget {
@@ -179,6 +181,16 @@ export const feedInfo = [
   //         MessageAction.FormCompletelyFilled,
   //         MessageAction.FormStopped
 
+  {
+    key: "FileCustomFilterDisabled",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.CustomFilterDisabled}`,
+  },
+  {
+    key: "FileCustomFilterEnabled",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.CustomFilterEnabled}`,
+  },
   // FOLDER
   {
     key: "FolderCreated",

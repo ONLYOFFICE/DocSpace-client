@@ -1133,6 +1133,7 @@ const SectionFilterContent = ({
     isRecentTab,
     isTrash,
     isPublicRoom,
+    isTemplatesFolder,
     getContactsFilterData,
   ]);
 

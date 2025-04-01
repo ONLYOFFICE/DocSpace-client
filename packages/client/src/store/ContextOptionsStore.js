@@ -2209,7 +2209,7 @@ class ContextOptionsStore {
             : t("Common:Delete"),
         icon: TrashReactSvgUrl,
         onClick: () => this.onDelete(item, t),
-        disabled: false,
+        disabled: item.isTemplate ? !isTemplateOwner : false,
       },
       {
         id: "option_remove-from-recent",

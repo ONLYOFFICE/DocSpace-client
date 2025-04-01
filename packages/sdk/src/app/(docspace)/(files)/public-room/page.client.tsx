@@ -46,7 +46,8 @@ type PublicRoomPageProps = {
   portalSettings: TSettings;
   filesFilter: string;
   baseConfig: {
-    header?: boolean;
+    showHeader?: boolean;
+    showFilter?: boolean;
     folder?: string;
   };
 };

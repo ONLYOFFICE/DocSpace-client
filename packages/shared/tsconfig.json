@@ -116,9 +116,5 @@
       "module": "CommonJS"
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "types/**/*.d.ts"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "types/**/*.d.ts"]
 }

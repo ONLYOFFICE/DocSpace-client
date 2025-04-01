@@ -1,0 +1,15 @@
+.filePreviewContainer {
+  display: flex;
+  flex-direction: row;
+
+  gap: 8px;
+  height: 78px;
+}
+
+.filePreviewItem {
+  width: 128px;
+
+  height: 78px;
+
+  border-radius: 6px;
+}

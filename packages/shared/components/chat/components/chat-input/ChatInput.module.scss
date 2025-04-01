@@ -1,0 +1,27 @@
+.chatInput {
+  width: 100%;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.chatInputTextAreaWrapper {
+  min-height: 130px !important;
+  max-height: 193px !important;
+}
+
+.chatInputTextArea {
+  min-height: 130px !important;
+  max-height: 193px !important;
+}
+
+.chatInputButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

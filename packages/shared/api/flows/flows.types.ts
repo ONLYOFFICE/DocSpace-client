@@ -213,3 +213,89 @@ export interface RunFlowOptions {
   tweaks?: Tweaks;
   stream?: boolean;
 }
+
+export type Message = {
+  flow_id: string;
+  text: string;
+  sender: string;
+  sender_name: string;
+  session_id: string;
+  timestamp: string;
+  files: Array<string>;
+  id: string;
+  edit: boolean;
+  background_color: string;
+  text_color: string;
+  category?: string;
+  properties?: unknown;
+  content_blocks?: ContentBlock[];
+};
+
+// Base content type
+export interface BaseContent {
+  type: string;
+  duration?: number;
+  header?: {
+    title?: string;
+    icon?: string;
+  };
+}
+
+// Individual content types
+export interface ErrorContent extends BaseContent {
+  type: "error";
+  component?: string;
+  field?: string;
+  reason?: string;
+  solution?: string;
+  traceback?: string;
+}
+
+export interface TextContent extends BaseContent {
+  type: "text";
+  text: string;
+}
+
+export interface MediaContent extends BaseContent {
+  type: "media";
+  urls: string[];
+  caption?: string;
+}
+
+export interface JSONContent extends BaseContent {
+  type: "json";
+  data: Record<string, unknown>;
+}
+
+export interface CodeContent extends BaseContent {
+  type: "code";
+  code: string;
+  language: string;
+  title?: string;
+}
+
+export interface ToolContent extends BaseContent {
+  type: "tool_use";
+  name?: string;
+  tool_input: Record<string, unknown>;
+  output?: unknown;
+  error?: unknown;
+}
+
+// Union type for all content types
+export type ContentType =
+  | ErrorContent
+  | TextContent
+  | MediaContent
+  | JSONContent
+  | CodeContent
+  | ToolContent;
+
+// Updated ContentBlock interface
+export interface ContentBlock {
+  title: string;
+  contents: ContentType[];
+  allow_markdown: boolean;
+  media_url?: string[];
+  component: string;
+}

@@ -11,6 +11,7 @@ import {
   Tweaks,
   Node,
   SimpleRunFlowResponse,
+  Message,
 } from "./flows.types";
 import { getCookie } from "../../utils/cookie";
 
@@ -242,7 +243,7 @@ class FlowsApi {
         );
       }
 
-      return response.data as unknown as RunFlowResponse;
+      return response.data as unknown as SimpleRunFlowResponse;
     } catch (e) {
       console.log(e);
       throw e;
@@ -300,6 +301,44 @@ class FlowsApi {
       }
       throw error;
     }
+  }
+
+  static getAPI(isV2: boolean = false): AxiosInstance {
+    const xApiKey = getCookie("chat_api_key");
+    const accessToken = getCookie("access_token_lf");
+
+    const config: { baseURL: string; headers: Record<string, string> } = {
+      baseURL: isV2 ? "/onlyflow/api/v2" : "/onlyflow/api/v1",
+      headers: { "Content-Type": "application/json" },
+    };
+
+    if (xApiKey) {
+      config.headers["x-api-key"] = xApiKey;
+    }
+
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+
+    return axios.create(config);
+  }
+
+  static async uploadFile(
+    formData: FormData,
+    flowId: string,
+  ): Promise<{ file_path: string }> {
+    const response: { data: { file_path: string } } =
+      await FlowsApi.getAPI().post(`files/upload/${flowId}`, formData);
+
+    return response.data;
+  }
+
+  static async getMessages(flowId: string): Promise<Message[]> {
+    const response: { data: unknown } = await FlowsApi.getAPI().get(
+      `monitor/messages?flowId=${flowId}`,
+    );
+
+    return response.data as Message[];
   }
 
   setErrorHandler(handler: (error: unknown) => void): void {

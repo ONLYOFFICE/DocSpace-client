@@ -79,6 +79,7 @@ import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import HelpCenterReactSvgUrl from "PUBLIC_DIR/images/help.center.react.svg?url";
+import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/icons/16/custom-filter.react.svg?url";
 
 import CreateTemplateSvgUrl from "PUBLIC_DIR/images/template.react.svg?url";
 import CreateRoomReactSvgUrl from "PUBLIC_DIR/images/create.room.react.svg?url";
@@ -88,6 +89,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import copy from "copy-to-clipboard";
 import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
+import { Trans } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
@@ -489,7 +491,11 @@ class ContextOptionsStore {
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
         copyShareLink(itemLink.sharedTo.shareLink);
-        toastr.success(t("Common:LinkCopySuccess"));
+        item.customFilterEnabled
+          ? toastr.success(
+              <Trans t={t} i18nKey="Common:LinkCopySuccessWithCustomFilter" />,
+            )
+          : toastr.success(t("Common:LinkCopySuccess"));
       } catch (error) {
         toastr.error(error);
       }
@@ -660,6 +666,10 @@ class ContextOptionsStore {
 
   onClickDownloadAs = () => {
     this.dialogsStore.setDownloadDialogVisible(true);
+  };
+
+  onSetUpCustomFilter = (item, t) => {
+    this.filesActionsStore.changeCustomFilter(item, t);
   };
 
   onDuplicate = (item) => {
@@ -1996,6 +2006,16 @@ class ContextOptionsStore {
         label: t("Common:Info"),
         icon: InfoOutlineReactSvgUrl,
         onClick: () => this.onShowInfoPanel(item),
+        disabled: false,
+      },
+      {
+        id: "option_custom-filter",
+        key: "custom-filter",
+        label: item.customFilterEnabled
+          ? t("Files:CustomFilterDisable")
+          : t("Files:CustomFilterEnable"),
+        icon: CustomFilterReactSvgUrl,
+        onClick: () => this.onSetUpCustomFilter(item, t),
         disabled: false,
       },
       {

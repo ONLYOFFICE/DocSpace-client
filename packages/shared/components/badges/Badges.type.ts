@@ -58,6 +58,7 @@ type ItemData = {
   shared?: boolean;
   viewAccessibility?: TFileViewAccessibility;
   formFillingStatus?: FileFillingFormStatus;
+  customFilterEnabled?: boolean;
 };
 
 export type BadgesProps = {
@@ -84,6 +85,8 @@ export type BadgesProps = {
   onCreateRoom?: () => void;
   newFilesBadge?: React.ReactElement;
   className?: string;
+  isExtsCustomFilter?: boolean;
+  customFilterExternalLink?: string;
 };
 
 export type BadgeWrapperProps = {

@@ -1428,6 +1428,8 @@
 
   --files-badges-bg-color: #{$white};
 
+  --files-badges-link-color: #{$light-gray-dark};
+
   --files-badges-border: 1px solid #{$white};
 }
 
@@ -1435,6 +1437,8 @@
   --files-section-tiles-view-tile-border: 1px solid #{$gray-dark-strong};
 
   --files-badges-bg-color: #{$black};
+
+  --files-badges-link-color: #{$white};
 
   --files-badges-border: 1px solid #{$black};
 }

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
@@ -149,16 +149,19 @@ const Editor = ({
     organizationName,
   });
 
-  const newConfig: IConfigType = config
-    ? {
-        document: config.document,
-        documentType: config.documentType,
-        token: config.token,
-        type: config.type,
-      }
-    : {};
+  const newConfig: IConfigType = useMemo(() => {
+    return config
+      ? {
+          document: config.document,
+          documentType: config.documentType,
+          token: config.token,
+          type: config.type,
+          editorConfig: { ...config.editorConfig },
+        }
+      : {};
+  }, [config]);
 
-  if (config) newConfig.editorConfig = { ...config.editorConfig };
+  // if (config) newConfig.editorConfig = { ...config.editorConfig };
 
   //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
@@ -319,8 +322,6 @@ const Editor = ({
   if (config?.fillingStatus) {
     newConfig.events.onRequestFillingStatus = onRequestFillingStatus;
   }
-
-  // console.log({ newConfig });
 
   return (
     <DocumentEditor

@@ -29,6 +29,7 @@ import { useCallback, useEffect, useMemo } from "react";
 import classnames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "next/navigation";
 
 import Navigation, {
   TNavigationItem,
@@ -52,7 +53,21 @@ import type { HeaderProps } from "./Header.types";
 
 export type { HeaderProps };
 
-const Header = ({ current, pathParts, isEmptyList }: HeaderProps) => {
+const Header = ({
+  current,
+  pathParts,
+  isEmptyList,
+  showTitle = true,
+}: HeaderProps) => {
+  const searchParams = useSearchParams();
+
+  const getValue = (key: string) => {
+    const value = searchParams.get(key);
+    return value === "true" ? true : value === "false" ? false : value;
+  };
+
+  showTitle = getValue("showTitle") as boolean;
+
   const navigationStore = useNavigationStore();
   const filesSelectionStore = useFilesSelectionStore();
   const filesListStore = useFilesListStore();
@@ -166,7 +181,7 @@ const Header = ({ current, pathParts, isEmptyList }: HeaderProps) => {
             titleIconTooltip=""
             showNavigationButton={false}
             isCurrentFolderInfo={false}
-            showTitle
+            showTitle={showTitle}
             isPublicRoom
             isRoom={!!current.roomType}
             isInfoPanelVisible={false}

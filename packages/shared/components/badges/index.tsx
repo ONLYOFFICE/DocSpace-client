@@ -55,7 +55,6 @@ import { Link, LinkTarget, LinkType } from "../link";
 import { Badge } from "../badge";
 import { ColorTheme, ThemeId } from "../color-theme";
 
-import { globalColors } from "../../themes";
 import { RoomsType, ShareAccessRights } from "../../enums";
 
 import { IconSizeType, isDesktop, isTablet, size } from "../../utils";

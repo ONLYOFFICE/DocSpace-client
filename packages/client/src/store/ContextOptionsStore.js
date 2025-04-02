@@ -756,17 +756,16 @@ class ContextOptionsStore {
     const { deleteAction, deleteRoomsAction } = this.filesActionsStore;
     const { id: selectedFolderId, getSelectedFolder } =
       this.selectedFolderStore;
-    const { isThirdPartySelection, getFolderInfo, setBufferSelection } =
-      this.filesStore;
+    const { isThirdPartySelection, setBufferSelection } = this.filesStore;
+
+    const selectedFolder = getSelectedFolder();
 
     setIsFolderActions(true);
 
     if (confirmDelete || isThirdPartySelection) {
-      getFolderInfo(selectedFolderId).then((data) => {
-        setBufferSelection(data);
-        setIsRoomDelete(isRoom);
-        setDeleteDialogVisible(true);
-      });
+      setBufferSelection(selectedFolder);
+      setIsRoomDelete(isRoom);
+      setDeleteDialogVisible(true);
 
       return;
     }
@@ -786,8 +785,6 @@ class ContextOptionsStore {
       translations = {
         deleteFromTrash: t("Translations:DeleteFromTrash"),
       };
-
-      const selectedFolder = getSelectedFolder();
 
       deleteAction(translations, [selectedFolder], true).catch((err) =>
         toastr.error(err),

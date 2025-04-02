@@ -238,8 +238,6 @@ class CreateEditRoomStore {
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore;
     const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
 
-    const { id: currentFolderId } = this.selectedFolderStore;
-
     const {
       quota,
       denyDownload,
@@ -342,8 +340,7 @@ class CreateEditRoomStore {
         requests.push(api.rooms.removeLogoFromRoom(room.id));
       }
 
-      if (isIndexingChanged)
-        requests.push(updateCurrentFolder(null, currentFolderId));
+      if (isIndexingChanged) requests.push(updateCurrentFolder());
 
       if (room.isTemplate && invitations?.length) {
         requests.push(

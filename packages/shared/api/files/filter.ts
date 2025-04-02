@@ -99,9 +99,13 @@ const getOtherSearchParams = () => {
     KEY,
   ];
 
-  filterSearchParams.forEach((param) => {
-    if (searchParams.get(param)) {
-      searchParams.delete(param);
+  Array.from(searchParams.keys()).forEach((key) => {
+    if (
+      filterSearchParams.some(
+        (param) => param.toLowerCase() === key.toLowerCase(),
+      )
+    ) {
+      searchParams.delete(key);
     }
   });
 

@@ -613,8 +613,8 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
 
     const root =
       typeof window !== "undefined" && document.getElementById("root");
-    if (root && isMobileUtil) {
-      const portal = <Portal element={contextMenu} appendTo={root} />;
+    if (isMobileUtil) {
+      const portal = <Portal element={contextMenu} appendTo={root || null} />;
 
       return portal;
     }

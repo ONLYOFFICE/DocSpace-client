@@ -331,6 +331,7 @@
   "LinkAccessDenied": "Access to the link has been denied",
   "LinkCopiedToClipboard": "Link copied to clipboard",
   "LinkCopySuccess": "Link has been copied to the clipboard",
+  "LinkCopySuccessWithCustomFilter": "The link to the file with the enabled <strong>Custom filter</strong> is successfully copied to the clipboard.",
   "LinkExpireAfter": "The link will expire after <1>{{date}}</1>",
   "LinkExpired": "The link has expired.",
   "LinkIsValid": "The link is valid for <1>{{date}}</1>",

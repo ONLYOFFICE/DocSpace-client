@@ -170,6 +170,9 @@ export default function withBadges(WrappedComponent) {
         isPublicRoom,
         isRecentTab,
         isTemplatesFolder,
+        isExtsCustomFilter,
+        helpCenterDomain,
+        helpCenterEntries,
       } = this.props;
       const { fileStatus, access, mute } = item;
 
@@ -183,6 +186,9 @@ export default function withBadges(WrappedComponent) {
         access === ShareAccessRights.None; // TODO: fix access type for owner (now - None)
 
       const canEditing = access === ShareAccessRights.Editing;
+
+      const customFilterExternalLink =
+        helpCenterDomain + helpCenterEntries.docspacemanagingrooms;
 
       const badgesComponent = (
         <Badges
@@ -213,6 +219,8 @@ export default function withBadges(WrappedComponent) {
           canEditing={canEditing}
           onCreateRoom={this.onCreateRoom}
           isTemplatesFolder={isTemplatesFolder}
+          isExtsCustomFilter={isExtsCustomFilter}
+          customFilterExternalLink={customFilterExternalLink}
           newFilesBadge={
             <NewFilesBadge
               className="tablet-badge"
@@ -243,6 +251,7 @@ export default function withBadges(WrappedComponent) {
         publicRoomStore,
         userStore,
         settingsStore,
+        filesSettingsStore,
       },
       { item },
     ) => {
@@ -261,7 +270,13 @@ export default function withBadges(WrappedComponent) {
         checkAndOpenLocationAction,
         onCreateRoomFromTemplate,
       } = filesActionsStore;
-      const { isTabletView, isDesktopClient, theme } = settingsStore;
+      const {
+        isTabletView,
+        isDesktopClient,
+        theme,
+        helpCenterDomain,
+        helpCenterEntries,
+      } = settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
       const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
         dialogsStore;
@@ -271,6 +286,10 @@ export default function withBadges(WrappedComponent) {
 
       const isRoom = !!roomType;
       const isMutedBadge = isRoom ? mute : isMuteCurrentRoomNotifications;
+
+      const extsCustomFilter =
+        filesSettingsStore.filesSettings.extsWebCustomFilterEditing;
+      const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
 
       return {
         isArchiveFolderRoot,
@@ -299,6 +318,9 @@ export default function withBadges(WrappedComponent) {
         checkAndOpenLocationAction,
         isTemplatesFolder,
         onCreateRoomFromTemplate,
+        isExtsCustomFilter,
+        helpCenterDomain,
+        helpCenterEntries,
       };
     },
   )(observer(WithBadges));

@@ -298,10 +298,11 @@ class BackupStore {
     const isDisabled = !provider.connected && !this.authStore.isAdmin;
 
     const account = {
-      key: provider.name,
+      name: provider.name,
       label: serviceLabel,
       title: serviceLabel,
-      provider_key: provider.key,
+      provider_key: provider.key !== "WebDav" ? provider.key : provider.name,
+      key: provider.key,
       ...(provider.clientId && {
         provider_link: provider.clientId,
       }),

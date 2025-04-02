@@ -77,12 +77,6 @@
   }
 }
 
-.filter {
-  @include tablet-and-below {
-    margin-inline-end: 16px;
-  }
-}
-
 .footer {
   margin-top: 40px;
 

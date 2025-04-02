@@ -160,6 +160,13 @@
           fill: var(--room-icon-fill);
         }
       }
+      &:hover {
+        svg {
+          path {
+            fill: var(--room-icon-fill) !important;
+          }
+        }
+      }
     }
 
     .open-edit-logo-icon,

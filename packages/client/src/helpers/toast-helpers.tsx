@@ -41,7 +41,7 @@ export const showSuccessExportRoomIndexToast = (
   const toastMessage = (
     <Trans
       t={t}
-      i18nKey="FileExportedToMyDocuments"
+      i18nKey="FileExportDestination"
       ns="Files"
       values={{ fileName, sectionName: t("Common:MyFilesSection") }}
       components={{

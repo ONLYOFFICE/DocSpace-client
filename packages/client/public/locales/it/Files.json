@@ -65,7 +65,6 @@
   "ExportRoomIndexAlreadyInProgressError": "L'esportazione dell'indice della stanza è già in corso. Attendi il completamento dell'esportazione in corso per avviare quella nuova.",
   "FavoritesEmptyContainerDescription": "Non hai ancora preferiti. Per contrassegnare i file come preferiti o rimuoverli da questo elenco, utilizzare il menù contestuale.",
   "FileDownloadingIsRestricted": "In questa stanza il download dei file è limitato.",
-  "FileExportedToMyDocuments": "<1>{{fileName}}</1> file esportato in {{sectionName}}",
   "FileRenamed": "Il documento '{{oldTitle}}' è stato rinominato in '{{newTitle}}'",
   "FilesWillAppearHere": "I file e le cartelle aggiunti alla stanza verranno visualizzati qui.",
   "FileWillBeDeletedPermanently": "Il file verrà eliminato definitivamente {{date}}",

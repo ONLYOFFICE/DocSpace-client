@@ -58,7 +58,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
           <Trans
             t={t}
             ns="Files"
-            i18nKey="PersonalFolderErasureWarningInfo"
+            i18nKey="PersonalContentRemovalNotice"
             values={{ sectionName: personalUserFolderTitle }}
             components={{ 1: <span style={{ fontWeight: 600 }} /> }}
           />

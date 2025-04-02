@@ -63,7 +63,6 @@
   "ExportRoomIndexAlreadyInProgressError": "Експортирането на индекса на стаите вече е в ход. Моля, изчакайте, докато текущото експортиране приключи, за да започнете новото.",
   "FavoritesEmptyContainerDescription": "За да маркирате файлове като любими или да ги премахнете от този списък, използвайте контекстното меню.",
   "FileDownloadingIsRestricted": "Изтеглянето на файлове е ограничено в тази стая.",
-  "FileExportedToMyDocuments": "Файлът <1>{{fileName}}</1> е експортиран в {{sectionName}}",
   "FileRenamed": "Документът '{{oldTitle}}' е преименуван на '{{newTitle}}'",
   "FilesWillAppearHere": "Файловете и папките, добавени към стаята, ще се покажат тук.",
   "FileWillBeDeletedPermanently": "Файлът ще бъде изтрит на {{date}}",

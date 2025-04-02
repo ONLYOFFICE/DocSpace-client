@@ -42,7 +42,6 @@
   "UploadDeviceOptionTitle": "Télécharger à partir de votre appareil",
   "UploadDevicePDFFormOptionDescription": "Téléchargez un formulaire PDF prêt à l'emploi dans la salle à partir de votre appareil.",
   "UploadDevicePDFFormOptionTitle": "Télécharger à partir de l'appareil",
-  "UploadFromPortalDescription": "Télécharger n'importe quel type de fichier à partir de {{sectionNameFirst}} ou de {{sectionNameSecond}}",
   "UploadFromPortalTitle": "Télécharger à partir de {{productName}}",
   "UploadPDFFormOptionDescription": "Sélectionnez un formulaire PDF prêt à l'emploi disponible dans {{productName}} et téléchargez-le dans la salle.",
   "UserEmptyDescription": "Les fichiers et dossiers téléchargés par les administrateurs apparaissent ici.",

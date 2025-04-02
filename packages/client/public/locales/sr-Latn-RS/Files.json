@@ -65,7 +65,6 @@
   "ExportRoomIndexAlreadyInProgressError": "Izvoz indeksa sobe je već u toku. Sačekajte da se trenutni izvoz završi pre nego što započnete novi.",
   "FavoritesEmptyContainerDescription": "Da biste označili datoteke kao omiljene ili ih uklonili sa ove liste, koristite kontekst meni.",
   "FileDownloadingIsRestricted": "Preuzimanje datoteka je ograničeno u ovoj sobi.",
-  "FileExportedToMyDocuments": "Fajl <1>{{fileName}}</1> izvezen u {{sectionName}}",
   "FileRenamed": "Dokument '{{oldTitle}}' je preimenovan na '{{newTitle}}'",
   "FilesWillAppearHere": "Datoteke i folderi dodati u sobu će se pojaviti ovde.",
   "FileWillBeDeletedPermanently": "Fajl će biti trajno izbrisan {{date}}",

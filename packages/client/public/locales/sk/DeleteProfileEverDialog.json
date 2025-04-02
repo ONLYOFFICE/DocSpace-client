@@ -6,7 +6,6 @@
   "DeleteGroupUsersSuccessMessage": "Používatelia boli úspešne odstránení.",
   "DeleteGuest": "Odstrániť hosťa",
   "DeleteGuests": "Odstrániť hostí",
-  "DeletePersonalData": "Osobné údaje, všetky osobné súbory a priečinky v častiach  {{sectionNameFirst}} a {{sectionNameSecond}}* vybraných používateľov budú natrvalo vymazané. Súbory a priečinky vybraných používateľov uchovávané v spoločných častiach*, napríklad v miestnostiach, zostanú v {{productName}}.",
   "DeletePersonalDataApplicable": "*Platí pre vybraných používateľov, ktorí majú takéto súbory a priečinky.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Miestnosti vytvorené týmto používateľom a dokumenty uložené v týchto miestnostiach budú automaticky preradené administrátorovi, ktorý realizuje vymazávanie: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Ak chcete vybrať iného cieľového používateľa na opätovné priradenie, priraďte údaje ručne .",
   "DeleteReqassignDescriptionGuest": "{{userCaption}} bude odstránený zo všetkých miestností, do ktorých bol pozvaný. Dokumenty, ktoré {{userCaption}} vytvoril v miestnostiach, budú automaticky priradené vlastníkom miestností.",

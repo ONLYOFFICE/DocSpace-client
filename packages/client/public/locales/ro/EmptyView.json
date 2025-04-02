@@ -42,7 +42,6 @@
   "UploadDeviceOptionTitle": "Încărcare de pe dispozitivul dvs",
   "UploadDevicePDFFormOptionDescription": "Încărcați un formular PDF pregătit în sala de pe dispozitivul dvs.",
   "UploadDevicePDFFormOptionTitle": "Încărcare de pe dispozitivul",
-  "UploadFromPortalDescription": "Încărcați orice tip de fișier din secțiuni {{sectionNameFirst}} sau {{sectionNameSecond}}",
   "UploadFromPortalTitle": "Încărcare de pe {{productName}}",
   "UploadPDFFormOptionDescription": "Selectați un formular PDF existent de pe {{productName}} și încărcați-l în sala.",
   "UserEmptyDescription": "Fişierele şi folderele care au fost încărcate de administratori vor apărea aici.",

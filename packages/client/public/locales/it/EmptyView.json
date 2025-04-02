@@ -42,7 +42,6 @@
   "UploadDeviceOptionTitle": "Carica dal tuo dispositivo",
   "UploadDevicePDFFormOptionDescription": "Carica un modulo PDF pronto nella stanza dal tuo dispositivo.",
   "UploadDevicePDFFormOptionTitle": "Carica dal dispositivo",
-  "UploadFromPortalDescription": "Carica file di qualsiasi tipo da  {{sectionNameFirst}} o {{sectionNameSecond}}",
   "UploadFromPortalTitle": "Carica da {{productName}}",
   "UploadPDFFormOptionDescription": "Seleziona un modulo PDF pronto disponibile in {{productName}} e caricalo nella stanza.",
   "UserEmptyDescription": "I file e le cartelle caricati dagli amministratori verranno visualizzati qui.",

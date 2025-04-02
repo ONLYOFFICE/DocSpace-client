@@ -63,7 +63,6 @@
   "ExportRoomIndexAlreadyInProgressError": "Експорт індексу кімнати вже відбувається. Дочекайтеся закінчення поточного експорту, щоб почати новий.",
   "FavoritesEmptyContainerDescription": "Щоб додати файли до вподобань або видалити їх із цього списку, скористайтеся контекстним меню.",
   "FileDownloadingIsRestricted": "Завантаження файлів у цій кімнаті обмежено.",
-  "FileExportedToMyDocuments": "Файл <1>{{fileName}}</1> експортовано до {{sectionName}}",
   "FileRenamed": "Документ \"{{oldTitle}}\" перейменовано на \"{{newTitle}}\"",
   "FilesWillAppearHere": "Тут з’являться файли та папки, додані до кімнати.",
   "FileWillBeDeletedPermanently": "Файл буде видалено {{date}}",

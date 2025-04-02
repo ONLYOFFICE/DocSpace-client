@@ -63,7 +63,6 @@
   "ExportRoomIndexAlreadyInProgressError": "De export van de kamer index is al bezig. Wacht tot de huidige export is voltooid om de nieuwe export te starten.",
   "FavoritesEmptyContainerDescription": "Om bestanden als favorieten te markeren of ze uit deze lijst te verwijderen, gebruikt u het contextmenu.",
   "FileDownloadingIsRestricted": "Het downloaden van bestanden is in deze kamer beperkt.",
-  "FileExportedToMyDocuments": "<1>{{fileName}}</1> bestand geëxporteerd naar {{sectionName}}",
   "FileRenamed": "Het document '{{oldTitle}}' is hernoemd naar '{{newTitle}}'",
   "FilesWillAppearHere": "Bestanden en mappen die aan de kamer zijn toegevoegd, verschijnen hier.",
   "FileWillBeDeletedPermanently": "Het bestand wordt {{date}} verwijderd",

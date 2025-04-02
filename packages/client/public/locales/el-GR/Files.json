@@ -63,7 +63,6 @@
   "ExportRoomIndexAlreadyInProgressError": "Η εξαγωγή ευρετηρίου δωματίου βρίσκεται ήδη σε εξέλιξη. Περιμένετε μέχρι να ολοκληρωθεί η τρέχουσα εξαγωγή για να ξεκινήσετε τη νέα.",
   "FavoritesEmptyContainerDescription": "Για να επισημάνετε αρχεία ως αγαπημένα ή να τα καταργήσετε από αυτή τη λίστα, χρησιμοποιήστε το μενού περιβάλλοντος.",
   "FileDownloadingIsRestricted": "Η λήψη αρχείων είναι περιορισμένη σε αυτό το δωμάτιο.",
-  "FileExportedToMyDocuments": "Γίνεται εξαγωγή του αρχείου <1>{{fileName}}</1> στα {{sectionName}}",
   "FileRenamed": "Το έγγραφο «{{oldTitle}}» μετονομάστηκε σε '{{newTitle}}'",
   "FilesWillAppearHere": "Τα αρχεία και οι φάκελοι που προστίθενται στο δωμάτιο θα εμφανίζονται εδώ.",
   "FileWillBeDeletedPermanently": "Το αρχείο θα διαγραφεί {{date}}",

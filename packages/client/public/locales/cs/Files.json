@@ -63,7 +63,6 @@
   "ExportRoomIndexAlreadyInProgressError": "Export indexu místnosti již probíhá. Se spuštěním nového exportu počkejte, dokud nebude aktuální export dokončen.",
   "FavoritesEmptyContainerDescription": "Chcete-li označit soubory jako oblíbené nebo je z tohoto seznamu odstranit, použijte kontextovou nabídku.",
   "FileDownloadingIsRestricted": "Stahování souborů je v této místnosti omezeno.",
-  "FileExportedToMyDocuments": "Soubor <1>{{fileName}}</1> exportován do {{sectionName}}",
   "FileRenamed": "Dokument '{{oldTitle}}' je přejmenován na '{{newTitle}}'",
   "FilesWillAppearHere": "Zde se zobrazí soubory a složky přidané do místnosti.",
   "FileWillBeDeletedPermanently": "Soubor bude smazán {{date}}",

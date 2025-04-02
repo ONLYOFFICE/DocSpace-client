@@ -203,7 +203,7 @@ export const getOptions = (
     t("EmptyView:UploadFromPortalTitle", {
       productName: t("Common:ProductName"),
     }),
-    t("EmptyView:UploadFromPortalDescription", {
+    t("EmptyView:SectionsUploadDescription", {
       sectionNameFirst: t("Common:MyFilesSection"),
       sectionNameSecond: t("Common:TrashSection"),
     }),

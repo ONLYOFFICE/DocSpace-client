@@ -6,7 +6,6 @@
   "DeleteGroupUsersSuccessMessage": "Użytkownicy zostali pomyślnie usunięci.",
   "DeleteGuest": "Usuń gościa",
   "DeleteGuests": "Usuń gości",
-  "DeletePersonalData": "Wszystkie dane osobowe, osobiste pliki oraz katalogi w sekcjach {{sectionNameFirst}} i {{sectionNameSecond}}* wybranych użytkowników zostaną trwale usunięte. Pliki i katalogi wybranych użytkowników przechowywane we wspólnych sekcjach* takich jak pokoje pozostaną w {{productName}}.",
   "DeletePersonalDataApplicable": "*Dotyczy wybranych użytkowników, którzy mają takie pliki i katalogi.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Pokoje utworzone przez tego użytkownika oraz przechowywane w nich dokumenty zostaną automatycznie przypisane administratorowi, który dokonał usunięcia: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Przypisz dane ręcznie, aby wybrać innego użytkownika docelowego do ponownego przypisania.",
   "DeleteReqassignDescriptionGuest": "Użytkownik {{userCaption}} zostanie usunięty ze wszystkich pokoi, do których został zaproszony. Dokumenty utworzone przez użytkownika {{userCaption}} w pokojach zostaną automatycznie przypisane właścicielom pokoi.",

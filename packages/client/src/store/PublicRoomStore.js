@@ -238,13 +238,15 @@ class PublicRoomStore {
           this.publicRoomKey = key;
         });
 
+        const needPassword = res.status === ValidationStatus.Password;
+
         const currentUrl = window.location.href;
 
-        if (res?.shared && !currentUrl.includes("/rooms/shared")) {
-          return this.gotoFolder(res, key);
-        }
-
-        if (res?.isAuthenticated && !currentUrl.includes("/rooms/shared")) {
+        if (
+          !needPassword &&
+          (res?.shared || res?.isAuthenticated) &&
+          !currentUrl.includes("/rooms/shared")
+        ) {
           return this.gotoFolder(res, key);
         }
 

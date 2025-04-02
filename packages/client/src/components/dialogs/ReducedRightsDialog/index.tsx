@@ -80,7 +80,9 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
         />
         <Button
           key="RedirectButton"
-          label={t("Files:GoToPersonal")}
+          label={t("Files:GoToSection", {
+            sectionName: t("Common:MyFilesSection"),
+          })}
           size={ButtonSize.normal}
           onClick={onRedirect}
           scale

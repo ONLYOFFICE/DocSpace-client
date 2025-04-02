@@ -395,7 +395,9 @@ export const getOptions = (
         {
           ...actions.onGoToPersonal(),
           icon: <PersonIcon />,
-          description: t("Files:GoToPersonal"),
+          description: t("Files:GoToSection", {
+            sectionName: t("Common:MyFilesSection"),
+          }),
           key: "empty-view-goto-personal",
         },
       ])
@@ -411,7 +413,9 @@ export const getOptions = (
         {
           ...actions.onGoToPersonal(),
           icon: <PersonIcon />,
-          description: t("Files:GoToPersonal"),
+          description: t("Files:GoToSection", {
+            sectionName: t("Common:MyFilesSection"),
+          }),
           key: "empty-view-trash-goto-personal",
         },
       ])

@@ -80,28 +80,16 @@
     }
   }
 
-  &::-moz-range-track {
-    border: 1.4px solid var(--slider-range-track-border);
-    border-radius: var(--slider-border-radius);
-    width: 100%;
-    height: var(--runnable-track-height, var(--slider-track-height));
-    cursor: pointer;
-    background: var(--slider-range-track-background);
-
-    .disabled & {
-      cursor: default;
-    }
-  }
-
   &::-moz-range-thumb {
+    box-sizing: border-box;
     width: var(--thumb-width, var(--slider-thumb-size));
     height: var(--thumb-height, var(--slider-thumb-size));
-    background: var(--slider-range-thumb);
+    background: var(--slider-thumb-background);
     border: var(--thumb-border-width, var(--slider-thumb-border)) solid
       var(--slider-thumb-border-color);
     border-radius: 30px;
     cursor: pointer;
-    box-shadow: 0px 5px 20px var(--slider-shadow);
+    box-shadow: var(--slider-thumb-box-shadow);
 
     .disabled & {
       background: var(--slider-thumb-disabled-color);
@@ -110,15 +98,18 @@
     }
   }
 
-  @include tablet-and-below {
-    margin: 16px 0;
-    --slider-thumb-size: 20px;
-    --slider-thumb-border: 5px;
-  }
+  :global {
+    ::-moz-range-track {
+      border: 1.4px solid var(--slider-range-track-border);
+      border-radius: var(--slider-border-radius);
+      width: 100%;
+      height: var(--runnable-track-height, var(--slider-track-height));
+      cursor: pointer;
+      background: var(--slider-range-track-background);
 
-  @include mobile {
-    margin: 12px 0;
-    --slider-thumb-size: 16px;
-    --slider-thumb-border: 4px;
+      .disabled & {
+        cursor: default;
+      }
+    }
   }
 }

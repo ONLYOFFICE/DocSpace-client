@@ -58,11 +58,27 @@
     background-origin: border-box;
     background-clip: content-box, border-box;
     animation: loader 1.2s linear infinite;
+
+    &.withProgress {
+      animation: none;
+      transition: all 0.3s ease-out;
+      background-image: linear-gradient(
+          var(--color-scheme-main-accent),
+          var(--color-scheme-main-accent)
+        ),
+        conic-gradient(
+          from 0turn at 50% 50%,
+          white var(--percent-percentage, 0%),
+          white var(--percent-percentage, 0%),
+          var(--color-scheme-main-accent) var(--percent-percentage, 0%)
+        );
+    }
   }
 
   &.completed {
     .loader {
       opacity: 0;
+      transition: opacity 0.3s ease-out;
     }
   }
 }

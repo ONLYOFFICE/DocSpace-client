@@ -44,6 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "Отпреми са уређаја",
   "UploadFromPortalTitle": "Отпреми из {{productName}}",
   "UploadPDFFormOptionDescription": "Одаберите спреман PDF формулар доступан у {{productName}} и отпремите га у просторију.",
-  "UserEmptyDescription": "Датотеке и фолдери отпремљени од стране администратора ће се појавити овде.",
   "VirtualDataRoomEmptyTitle": "Добродошли у Виртуелну собу за податке"
 }

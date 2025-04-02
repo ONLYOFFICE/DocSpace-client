@@ -238,8 +238,6 @@ class CreateEditRoomStore {
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore;
     const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
 
-    const { id: currentFolderId } = this.selectedFolderStore;
-
     const {
       quota,
       denyDownload,
@@ -342,8 +340,7 @@ class CreateEditRoomStore {
         requests.push(api.rooms.removeLogoFromRoom(room.id));
       }
 
-      if (isIndexingChanged)
-        requests.push(updateCurrentFolder(null, currentFolderId));
+      if (isIndexingChanged) requests.push(updateCurrentFolder());
 
       if (room.isTemplate && invitations?.length) {
         requests.push(
@@ -557,6 +554,10 @@ class CreateEditRoomStore {
         room = await createRoom(createRoomData);
       }
 
+      if (room.errorMsg) {
+        return toastr.error(room.errorMsg);
+      }
+
       this.dialogsStore.setIsNewRoomByCurrentUser(true);
 
       // delete thirdparty account if not needed
@@ -577,11 +578,11 @@ class CreateEditRoomStore {
           console.error(error),
         );
       }
+
+      if (successToast) toastr.success(successToast);
     } catch (err) {
       toastr.error(err);
     } finally {
-      if (successToast) toastr.success(successToast);
-
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);
       this.onClose();
@@ -611,6 +612,7 @@ class CreateEditRoomStore {
       roomParams;
 
     let isFinished = false;
+    let errorMsg = false;
     let progressData;
 
     const data = {
@@ -633,6 +635,7 @@ class CreateEditRoomStore {
       );
 
       isFinished = progressData.isCompleted;
+      errorMsg = progressData.error;
     }
 
     return {
@@ -640,6 +643,7 @@ class CreateEditRoomStore {
       title,
       roomType,
       rootFolderType: FolderType.Rooms,
+      errorMsg,
     };
   };
 

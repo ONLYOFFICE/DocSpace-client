@@ -97,7 +97,7 @@ const RootFolderContainer = (props) => {
   const location = useLocation();
 
   const personalDescription = t("EmptyFolderDecription");
-  const emptyScreenHeader = t("EmptyScreenFolder");
+  const emptyScreenHeader = t("Common:EmptyScreenFolder");
   const archiveHeader = t("ArchiveEmptyScreenHeader");
   const noFilesHeader = t("NoFilesHereYet");
   const trashDescription = t("TrashEmptyDescription");
@@ -106,8 +106,8 @@ const RootFolderContainer = (props) => {
 
   const roomsDescription = isPublicRoom ? (
     <>
-      <div>{t("RoomEmptyAtTheMoment")}</div>
-      <div>{t("FilesWillAppearHere")}</div>
+      <div>{t("Common:RoomEmptyAtTheMoment")}</div>
+      <div>{t("Common:FilesWillAppearHere")}</div>
     </>
   ) : isVisitor || isCollaborator ? (
     t("RoomEmptyContainerDescriptionUser")
@@ -133,7 +133,7 @@ const RootFolderContainer = (props) => {
     t("PrivateRoomDescriptionUnbreakable"),
   ];
 
-  const roomHeader = t("EmptyRootRoomHeader", {
+  const roomHeader = t("Common:EmptyRootRoomHeader", {
     productName: t("Common:ProductName"),
   });
 
@@ -248,7 +248,7 @@ const RootFolderContainer = (props) => {
         isFill
       />
       <Link onClick={onCreateRoom} {...linkStyles}>
-        {t("CreateRoom")}
+        {t("Common:CreateRoom")}
       </Link>
     </div>
   );

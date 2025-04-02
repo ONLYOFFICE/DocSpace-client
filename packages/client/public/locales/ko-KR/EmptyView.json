@@ -44,6 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "장치에서 업로드",
   "UploadFromPortalTitle": "{{productName}}에서 업로드",
   "UploadPDFFormOptionDescription": "{{productName}}에서 이용 가능한 PDF 양식을 선택하여 룸에 업로드하세요. ",
-  "UserEmptyDescription": "관리자가 업로드한 파일 및 폴더가 여기에 표시됩니다.",
   "VirtualDataRoomEmptyTitle": "가상 데이터 룸에 오신 것을 환영합니다"
 }

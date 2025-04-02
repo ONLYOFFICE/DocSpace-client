@@ -44,6 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "Prześlij z urządzenia",
   "UploadFromPortalTitle": "Prześlij z {{productName}}",
   "UploadPDFFormOptionDescription": "Wybierz gotowy formularz PDF dostępny w {{productName}} i prześlij go do pokoju.",
-  "UserEmptyDescription": "Tutaj pojawią się pliki i katalogi przesłane przez administratorów.",
   "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych"
 }

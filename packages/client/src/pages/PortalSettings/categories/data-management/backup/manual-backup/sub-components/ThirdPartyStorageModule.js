@@ -28,13 +28,12 @@ import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?u
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { ReactSVG } from "react-svg";
 
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Text } from "@docspace/shared/components/text";
-
 import { BackupStorageType, ThirdPartyStorages } from "@docspace/shared/enums";
+import { IconButton } from "@docspace/shared/components/icon-button";
 
 import GoogleCloudStorage from "./storages/GoogleCloudStorage";
 import RackspaceStorage from "./storages/RackspaceStorage";
@@ -84,24 +83,20 @@ class ThirdPartyStorageModule extends React.PureComponent {
     }
   }
 
-  onSelect = (event) => {
-    const data = event.target.dataset;
-
-    const selectedStorageId = data.thirdPartyKey;
+  onSelect = (key) => () => {
     const { storagesInfo } = this.state;
+    const storage = storagesInfo[key];
 
-    const selectedStorage = storagesInfo[selectedStorageId];
-
-    if (!selectedStorage.isSet) {
+    if (!storage.isSet) {
       return window.open(
-        `/portal-settings/integration/third-party-services?service=${data.thirdPartyKey}`,
+        `/portal-settings/integration/third-party-services?service=${key}`,
         "_blank",
       );
     }
 
     this.setState({
-      selectedStorageTitle: selectedStorage.title,
-      selectedId: selectedStorage.id,
+      selectedStorageTitle: storage.title,
+      selectedId: storage.id,
     });
   };
 
@@ -154,9 +149,8 @@ class ThirdPartyStorageModule extends React.PureComponent {
       return (
         <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
           <DropDownItem
-            onClick={this.onSelect}
+            onClick={this.onSelect(item.key)}
             className={item.className}
-            data-third-party-key={item.key}
             disabled={item.disabled}
           >
             <Text className="drop-down-item_text" fontWeight={600}>
@@ -164,9 +158,12 @@ class ThirdPartyStorageModule extends React.PureComponent {
             </Text>
 
             {!item.disabled && !item.connected ? (
-              <ReactSVG
-                src={ExternalLinkReactSvgUrl}
+              <IconButton
                 className="drop-down-item_icon"
+                size="16"
+                onClick={this.onSelect(item.key)}
+                iconName={ExternalLinkReactSvgUrl}
+                isFill
               />
             ) : null}
           </DropDownItem>

@@ -44,6 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "Încărcare de pe dispozitivul",
   "UploadFromPortalTitle": "Încărcare de pe {{productName}}",
   "UploadPDFFormOptionDescription": "Selectați un formular PDF existent de pe {{productName}} și încărcați-l în sala.",
-  "UserEmptyDescription": "Fişierele şi folderele care au fost încărcate de administratori vor apărea aici.",
   "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date"
 }

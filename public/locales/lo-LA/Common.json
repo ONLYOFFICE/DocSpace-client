@@ -398,5 +398,21 @@
   "WantToContinue": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່?",
   "Warning": "ແຈ້ງເຕືອນ",
   "Website": "ເວັບໄຊທ໌",
-  "Yesterday": "ມື້ວານນີ້"
+  "Yesterday": "ມື້ວານນີ້",
+  "RoomSelector": "ຕົວເລືອກຫ້ອງ",
+  "FileSelector": "ຕົວເລືອກໄຟລ໌",
+  "LinkDoesNotExist": "ບໍ່ມີລິ້ງທີ່ເຈົ້າພະຍາຍາມເປີດ.",
+  "LinkHasExpired": "ລິ້ງທີ່ທ່ານຕິດຕາມໄດ້ໝົດອາຍຸແລ້ວ.",
+  "EmptyScreenFolder": "ບໍ່ມີເອກະສານຢູ່ທີ່ນີ້ເທື່ອ",
+  "RoomEmptyAtTheMoment": "ຫ້ອງນີ້ຫວ່າງເປົ່າໃນຂະນະນີ້.",
+  "FilesWillAppearHere": "ໄຟລ໌ ແລະໂຟນເດີທີ່ເພີ່ມໃສ່ຫ້ອງຈະປາກົດ ຢູ່ບ່ອນນີ້.",
+  "EmptyRootRoomHeader": "ຍິນດີຕ້ອນຮັບສູ່ {{productName}}",
+  "WithSubfolders": "ມີໂຟເດີຍ່ອຍ",
+  "VersionBadge": "V.{{version}}",
+  "ShowVersionHistory": "ສະແດງປະຫວັດສະບັບ",
+  "New": "ໃໝ່",
+  "BadgeAlertDescription": "ຫຼາຍບົດບາດແມ່ນໄດ້ລະບຸໄວ້ໃນແບບຟອມນີ້. ແບບຟອມທີ່ມີຫຼາຍບົດບາດແມ່ນບໍ່ມີສໍາລັບການຕື່ມຂໍ້ມູນໃນຫ້ອງປະເພດນີ້",
+  "CopySharedLink": "ສຳເນົາລິ້ງທີ່ແບ່ງປັນ",
+  "CreateRoom": "ສ້າງຫ້ອງ",
+  "UnblockVersion": "ເລິກການບ໋ອກ/ເຊັກອິນ"
 }

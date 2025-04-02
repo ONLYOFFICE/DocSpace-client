@@ -37,22 +37,19 @@ import UploadIconUrl from "PUBLIC_DIR/images/icons/16/upload.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import { ProgressBar } from "./ProgressBar";
-import { Operation } from "../Section.types";
-import { OPERATIONS_NAME } from "../../../constants";
+import { Operation } from "./OperationsProgressButton.types";
+import { OPERATIONS_NAME } from "../../constants";
 
 interface ProgressListProps {
-  secondaryOperations?: Operation[];
-  primaryOperations?: Operation[];
-  clearSecondaryProgressData?: (
-    operationId: string | null,
-    operation: string,
-  ) => void;
-  clearPrimaryProgressData?: (
+  onOpenPanel: () => void;
+  operations: Operation[];
+  panelOperations?: Operation[];
+  clearOperationsData?: (operationId: string | null, operation: string) => void;
+  clearPanelOperationsData?: (
     operationId: string | null,
     operation: string,
   ) => void;
   onCancel?: () => void;
-  onOpenPanel: () => void;
 }
 
 const getIcon = (icon: string): string => {
@@ -84,10 +81,10 @@ const getIcon = (icon: string): string => {
 };
 
 const ProgressList = ({
-  secondaryOperations,
-  primaryOperations,
-  clearSecondaryProgressData,
-  clearPrimaryProgressData,
+  operations,
+  panelOperations,
+  clearOperationsData,
+  clearPanelOperationsData,
   onCancel,
   onOpenPanel,
 }: ProgressListProps) => {
@@ -100,7 +97,7 @@ const ProgressList = ({
 
   return (
     <div className="progress-container">
-      {secondaryOperations?.map((item) => (
+      {operations.map((item) => (
         <div
           key={`${item.operation}-${item.items?.[0]?.operationId ?? ""}-${item.completed}`}
           className="progress-list"
@@ -113,12 +110,12 @@ const ProgressList = ({
             iconUrl={getIcon(item.operation)}
             onClickAction={() => {}}
             withoutProgress
-            onClearProgress={clearSecondaryProgressData}
+            onClearProgress={clearOperationsData}
             operation={item.operation}
           />
         </div>
       ))}
-      {primaryOperations?.map((item) => (
+      {panelOperations?.map((item) => (
         <div
           key={`${item.operation}`}
           className={`progress-list ${item.showPanel ? "withHover" : ""}`}
@@ -131,7 +128,7 @@ const ProgressList = ({
             open
             iconUrl={getIcon(item.operation)}
             onClickAction={() => {}}
-            onClearProgress={clearPrimaryProgressData}
+            onClearProgress={clearPanelOperationsData}
             operation={item.operation}
             onCancel={onCancel}
             onOpenPanel={() => onOpenPanelOperation(item)}

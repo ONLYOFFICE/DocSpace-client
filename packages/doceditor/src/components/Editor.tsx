@@ -62,6 +62,7 @@ type IConfigType = IConfig & {
     onSubmit?: (event: object) => void;
     onRequestFillingStatus?: (event: object) => void;
     onStartFilling?: (data: object) => void;
+    onUserActionRequired?: (event: object) => void;
   };
   editorConfig?: {
     customization?: {
@@ -121,6 +122,8 @@ const Editor = ({
     onMakeActionLink,
     // onRequestStartFilling,
     documentReady,
+
+    onUserActionRequired,
 
     setDocTitle,
   } = useEditorEvents({
@@ -254,6 +257,7 @@ const Editor = ({
     onMakeActionLink,
     onOutdatedVersion,
     onDownloadAs,
+    onUserActionRequired,
   };
 
   if (successAuth) {
@@ -378,8 +382,6 @@ const Editor = ({
       `${origin}/doceditor/completed-form?${combinedSearchParams.toString()}`,
     );
   };
-
-  console.log({ newConfig });
 
   return (
     <DocumentEditor

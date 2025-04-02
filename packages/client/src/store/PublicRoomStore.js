@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios from "axios";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -234,15 +234,19 @@ class PublicRoomStore {
     api.rooms
       .validatePublicRoomKey(key)
       .then((res) => {
-        this.publicRoomKey = key;
+        runInAction(() => {
+          this.publicRoomKey = key;
+        });
+
+        const needPassword = res.status === ValidationStatus.Password;
 
         const currentUrl = window.location.href;
 
-        if (res?.shared && !currentUrl.includes("/rooms/shared")) {
-          return this.gotoFolder(res, key);
-        }
-
-        if (res?.isAuthenticated && !currentUrl.includes("/rooms/shared")) {
+        if (
+          !needPassword &&
+          (res?.shared || res?.isAuthenticated) &&
+          !currentUrl.includes("/rooms/shared")
+        ) {
           return this.gotoFolder(res, key);
         }
 

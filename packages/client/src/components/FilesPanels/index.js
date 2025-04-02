@@ -65,7 +65,6 @@ import {
   UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
-  BackupToPublicRoom,
   SettingsPluginDialog,
   PluginDialog,
   DeletePluginDialog,
@@ -94,6 +93,7 @@ import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
 import FillingStatusPanel from "../panels/FillingStatusPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
+import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 
 const Panels = (props) => {
   const {
@@ -135,7 +135,6 @@ const Panels = (props) => {
     deleteLinkDialogVisible,
     embeddingPanelData,
     moveToPublicRoomVisible,
-    backupToPublicRoomVisible,
     settingsPluginDialogVisible,
     pluginDialogVisible,
     leaveRoomDialogVisible,
@@ -170,6 +169,7 @@ const Panels = (props) => {
     config,
     isShareFormData,
     reducedRightsVisible,
+    removeUserConfirmation,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -351,9 +351,7 @@ const Panels = (props) => {
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
-    backupToPublicRoomVisible && (
-      <BackupToPublicRoom key="backup-to-public-room-panel" />
-    ),
+
     leaveRoomDialogVisible && <LeaveRoomDialog key="leave-room-dialog" />,
     changeRoomOwnerIsVisible && (
       <ChangeRoomOwnerPanel key="change-room-owner" />
@@ -420,6 +418,10 @@ const Panels = (props) => {
     reducedRightsVisible ? (
       <ReducedRightsDialog key="reduced-rights-dialog" />
     ) : null,
+
+    removeUserConfirmation && (
+      <RemoveUserConfirmationDialog key="remove-user-confirmation-dialog" />
+    ),
   ];
 };
 
@@ -475,7 +477,6 @@ export default inject(
       deleteLinkDialogVisible,
       embeddingPanelData,
       moveToPublicRoomVisible,
-      backupToPublicRoomVisible,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       shareFolderDialogVisible,
@@ -503,6 +504,7 @@ export default inject(
       formFillingTipsVisible,
       isShareFormData,
       reducedRightsData,
+      removeUserConfirmation,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
@@ -584,7 +586,6 @@ export default inject(
       deleteLinkDialogVisible,
       embeddingPanelData,
       moveToPublicRoomVisible,
-      backupToPublicRoomVisible,
       settingsPluginDialogVisible,
       pluginDialogVisible,
       leaveRoomDialogVisible,
@@ -619,6 +620,7 @@ export default inject(
       config,
       isShareFormData,
       reducedRightsVisible: reducedRightsData.visible,
+      removeUserConfirmation: removeUserConfirmation.visible,
     };
   },
 )(observer(Panels));

@@ -44,6 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "デバイスからのアップロード",
   "UploadFromPortalTitle": "{{productName}}からアップロード",
   "UploadPDFFormOptionDescription": "{{productName}}で利用可能なPDFフォームを選択し、ルームにアップロードする。",
-  "UserEmptyDescription": "管理者がアップロードしたファイルやフォルダはここに表示されます。",
   "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ"
 }

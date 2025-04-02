@@ -53,7 +53,7 @@
     width: 195px;
 
     @include mobile {
-      width: calc(100vw - 64px);
+      width: calc(100vw - 32px);
     }
 
     :global {
@@ -80,7 +80,7 @@
         }
 
         @include mobile {
-          width: calc(100vw - 76px);
+          width: calc(100vw - 44px);
         }
       }
 

@@ -48,17 +48,14 @@ import useSocketHelper from "@/hooks/useSocketHelper";
 import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
-import useStartFillingSelectDialog from "@/hooks/useStartFillingSelectDialog";
 import { useStartFillingPanel } from "@/hooks/useStartFillingPanel";
 import useSDK from "@/hooks/useSDK";
 
 import Editor from "./Editor";
 
 import { calculateAsideHeight } from "@/utils";
-import { TFrameConfig } from "@docspace/shared/types/Frame";
 import { useFillingStatusDialog } from "@/hooks/userFillingStatusDialog";
 import FillingStatusDialog from "./filling-status-dialog";
-import { DialogAsideSkeleton } from "@docspace/shared/skeletons";
 import { useStopFillingDialog } from "@/hooks/useStopFillingDialog";
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { useShareFormDialog } from "@/hooks/useShareFormDialog";
@@ -81,17 +78,11 @@ const StartFillingPanel = dynamic(
     (await import("@docspace/shared/dialogs/start-filling")).StartFillingPanel,
   {
     ssr: false,
-    loading: () => {
-      return <DialogAsideSkeleton isPanel withFooterBorder={false} />;
-    },
   },
 );
 
 const ShareFormDialog = dynamic(() => import("./ShareFormDialog"), {
   ssr: false,
-  loading: () => {
-    return <DialogAsideSkeleton isPanel withFooterBorder={false} />;
-  },
 });
 
 const Root = ({
@@ -149,6 +140,7 @@ const Root = ({
     socketUrl: user ? (settings?.socketUrl ?? "") : "",
     user,
     shareKey,
+    standalone: settings?.standalone,
   });
 
   const {
@@ -245,7 +237,10 @@ const Root = ({
     if (
       isSharingDialogVisible ||
       isVisibleSelectFolderDialog ||
-      selectFileDialogVisible
+      selectFileDialogVisible ||
+      startFillingPanelVisible ||
+      fillingStatusDialogVisible ||
+      shareFormDialogVisible
     ) {
       setTimeout(() => calculateAsideHeight(calculateAsideHeight), 10);
 
@@ -262,11 +257,12 @@ const Root = ({
     isSharingDialogVisible,
     isVisibleSelectFolderDialog,
     selectFileDialogVisible,
+    startFillingPanelVisible,
+    fillingStatusDialogVisible,
+    shareFormDialogVisible,
   ]);
 
   const organizationName = settings?.logoText || t("Common:OrganizationName");
-
-  console.log({ globalConfig: config });
 
   return isShowDeepLink ? (
     <DeepLink

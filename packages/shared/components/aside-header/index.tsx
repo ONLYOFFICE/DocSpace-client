@@ -52,6 +52,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
     isLoading,
     withoutBorder = false,
     headerHeight,
+    headerComponent,
   } = props;
 
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -81,7 +82,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
 
   // TODO: Heading is temporary until all dialogues are checked
 
-  const headerComponent =
+  const headerComponentRender =
     typeof header === "string" ? (
       <Text
         fontSize="21px"
@@ -100,7 +101,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
   const mainComponent = (
     <>
       {isBackButton ? backButtonRender : null}
-      {header ? headerComponent : null}
+      {header ? headerComponentRender : null}
       {headerIcons.length > 0 ? (
         <div
           className={styles.additionalIconsContainer}
@@ -119,6 +120,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
           ))}
         </div>
       ) : null}
+      {headerComponent ?? null}
       {isCloseable ? closeIconRender : null}
     </>
   );

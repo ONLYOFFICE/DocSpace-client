@@ -115,7 +115,7 @@ const GuestReleaseTip = ({
               >
                 {t("Common:Guest")}
               </Text>
-              <Badge label={t("Files:New")} noHover />
+              <Badge label={t("Common:New")} noHover />
             </div>
 
             <IconButton

@@ -39,7 +39,9 @@ const PublicRoomError = ({ isInvalid }: { isInvalid?: boolean }) => {
   const headerText = isInvalid
     ? t("Common:InvalidLink")
     : t("Common:ExpiredLink");
-  const bodyText = isInvalid ? t("LinkDoesNotExist") : t("LinkHasExpired");
+  const bodyText = isInvalid
+    ? t("Common:LinkDoesNotExist")
+    : t("Common:LinkHasExpired");
 
   useEffect(() => {
     frameCallCommand("setIsLoaded");

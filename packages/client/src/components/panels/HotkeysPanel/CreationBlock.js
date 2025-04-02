@@ -69,7 +69,7 @@ const CreationBlock = ({ t, textStyles, keyTextStyles, AltKey }) => {
 
       <Row className="hotkeys_row">
         <>
-          <Text {...textStyles}>{t("Files:CreateRoom")}</Text>
+          <Text {...textStyles}>{t("Common:CreateRoom")}</Text>
           <Text {...keyTextStyles}>{`${AltKey} + Shift + r`}</Text>
         </>
       </Row>

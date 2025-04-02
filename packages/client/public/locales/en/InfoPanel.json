@@ -33,6 +33,10 @@
   "FolderMoved": "Folders moved.",
   "FolderMovedToTrash": "Folders moved to Trash.",
   "FolderRenamed": "Folder renamed.",
+  "FormStartedToFill": "Started to fill.",
+  "FormPartiallyFilled": "Filled out part of form.",
+  "FormCompletelyFilled": "Completely filled out form.",
+  "FormStopped": "Form stopped.",
   "GalleryEmptyScreenText": "See form template details here",
   "GroupsEmptyScreenText": "See group details here",
   "GuestsEmptyScreenText": "See guests details here",
@@ -79,5 +83,7 @@
   "SubmenuHistory": "History",
   "UserFileUpdated": "File updated.",
   "Users": "Users",
-  "Versions": "Versions"
+  "Versions": "Versions",
+  "FileCustomFilterEnabled": "Custom filter enabled.",
+  "FileCustomFilterDisabled": "Custom filter disabled."
 }

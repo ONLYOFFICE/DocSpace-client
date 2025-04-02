@@ -51,7 +51,7 @@ const ScrollList = styled.div<{
 }>`
   position: absolute;
 
-  width: 100%;
+  width: calc(100% - 16px);
   height: ${(props) =>
     props.scrollAllPanelContent && props.isTotalListHeight
       ? "auto"
@@ -65,7 +65,8 @@ const ScrollList = styled.div<{
 `;
 
 const StyledBlock = styled.div`
-  padding: 0px;
+  padding-left: 16px;
+  margin-right: -16px;
   border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
 `;
 
@@ -85,8 +86,8 @@ const StyledInviteUserBody = styled.div`
 `;
 
 const StyledSubHeader = styled(Heading)<{ inline?: boolean }>`
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 700 !important;
+  font-size: 16px !important;
   margin: 16px 0 8px 0;
 
   ${(props) =>
@@ -327,7 +328,7 @@ const StyledToggleButton = styled(ToggleButton)`
 `;
 
 const StyledBody = styled.div<{ isDisabled?: boolean }>`
-  display: contents;
+  padding-left: 16px;
 
   ${({ isDisabled, theme }) =>
     isDisabled
@@ -389,7 +390,7 @@ const StyledTemplateAccessSettingsHeader = styled.div`
 
 const StyledTemplateAccessSettingsBody = styled.div`
   height: calc(100% - 73px);
-  padding: 0 16px;
+  padding-right: 16px;
 `;
 
 const StyledTemplateAccessSettingsFooter = styled.div`

@@ -244,7 +244,6 @@
   --slider-border-radius: 5.6px;
   --slider-thumb-disabled-color: #{$gray-strong};
   --slider-thumb-disabled-border: #{$light-second-main-disabled};
-  --slider-shadow: #{$blur-dark};
   --slider-runnable-track-border: #{$gray-light-mid};
   --slider-thumb-background: var(
     --color-scheme-main-accent,
@@ -252,7 +251,6 @@
   );
   --slider-thumb-border-color: #{$white};
   --slider-thumb-box-shadow: 0px 5px 20px #{$popup-shadow};
-  --slider-range-thumb: #{$light-second-main};
   --slider-range-track-border: #{$white};
   --slider-range-track-background: #{$light-second-main};
   --slider-background: #{$gray-light-mid};
@@ -290,13 +288,6 @@
 
   --background-color: #{$black};
   --text-color: #{$white};
-  --interface-direction: ltr;
-
-  --toast-tap-highlight: #{$tap-highlight};
-  --toast-text-color-comp: #{$white};
-  --toast-close-button-color: #{$white};
-  --toast-transform: translate3d(150%, 0, 0);
-  --toast-top-offset: 16px;
 
   --view-selector-items-count: unset;
 
@@ -351,7 +342,7 @@
   --row-content-main-wrapper-margin-right: 8px;
   --row-content-main-wrapper-margin-top: 8px;
   --row-content-main-wrapper-width: 95%;
-  --row-content-icons-height: 19px;
+  --row-content-icons-height: 16px;
 
   --selector-add-button-border: none;
   --selector-add-button-box-sizing: border-box;
@@ -578,12 +569,10 @@
   --slider-border-radius: 5.6px;
   --slider-thumb-disabled-color: #{$gray-dark-strong};
   --slider-thumb-disabled-border: #{$light-second-main-disabled};
-  --slider-shadow: #{$blur-dark};
   --slider-runnable-track-border: #{$gray-dark-mid};
   --slider-thumb-background: #{$white};
   --slider-thumb-border-color: #{$black};
   --slider-thumb-box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.25);
-  --slider-range-thumb: #{$white};
   --slider-range-track-border: #{$black};
   --slider-range-track-background: #{$white};
   --slider-background: #{$gray-dark-mid};
@@ -891,6 +880,8 @@
 
   --progress-bar-icon-color: #{$white};
   --progress-bar-hover-icon: #{$gray};
+  --progress-bar-background-dropdown-color: #{$gray-text};
+  --progress-bar-background-hover: #{$light-gray-dark};
 }
 
 .dark {
@@ -901,6 +892,8 @@
 
   --progress-bar-icon-color: #{$white};
   --progress-bar-hover-icon: #{$gray};
+  --progress-bar-background-dropdown-color: #{$gray-text};
+  --progress-bar-background-hover: #{$light-gray-dark};
 }
 
 .light {
@@ -1020,7 +1013,6 @@
   --row-content-main-wrapper-margin-right: 8px;
   --row-content-main-wrapper-margin-top: 8px;
   --row-content-main-wrapper-width: 95%;
-  --row-content-icons-height: 19px;
 
   --section-header-height: 69px;
   --section-header-height-tablet: 61px;
@@ -1045,7 +1037,7 @@
   --row-content-main-wrapper-margin-top: 8px;
   --row-content-main-wrapper-width: 95%;
 
-  --row-content-icons-height: 19px;
+  --row-content-icons-height: 16px;
 }
 
 .light {
@@ -1434,12 +1426,20 @@
   --files-section-tiles-view-tile-border: 1px solid #{$gray-strong};
 
   --files-badges-bg-color: #{$white};
+
+  --files-badges-link-color: #{$light-gray-dark};
+
+  --files-badges-border: 1px solid #{$white};
 }
 
 .dark {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-dark-strong};
 
   --files-badges-bg-color: #{$black};
+
+  --files-badges-link-color: #{$white};
+
+  --files-badges-border: 1px solid #{$black};
 }
 
 .light {

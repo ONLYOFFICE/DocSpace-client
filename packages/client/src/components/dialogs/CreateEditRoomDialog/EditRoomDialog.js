@@ -77,10 +77,10 @@ const EditRoomDialog = ({
 
     if (prevParams.inviteItems && inviteItems) {
       prevInviteItems = prevParams.inviteItems.map((x) => {
-        return { id: x.id, access: x.access };
+        return { id: x.id, access: x.templateAccess };
       });
       currentInviteItems = inviteItems.map((x) => {
-        return { id: x.id, access: x.access };
+        return { id: x.id, access: x.templateAccess };
       });
     }
 
@@ -228,11 +228,11 @@ const EditRoomDialog = ({
     onCloseAccessSettings();
 
     const invitations = inviteItems
-      .filter((i) => !i.isOwner)
+      .filter((i) => !i.templateIsOwner)
       .map((inviteItem) => {
         return {
           id: inviteItem.id,
-          access: inviteItem.access ?? ShareAccessRights.ReadOnly,
+          access: inviteItem.templateAccess ?? ShareAccessRights.ReadOnly,
         };
       });
 

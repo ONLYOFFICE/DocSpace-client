@@ -152,7 +152,8 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     onCreateRoom = () => {
-      const { item, onCreateRoomFromTemplate } = this.props;
+      const { item, onCreateRoomFromTemplate, setBufferSelection } = this.props;
+      setBufferSelection(item);
 
       onCreateRoomFromTemplate(item);
     };
@@ -285,6 +286,7 @@ export default function withQuickButtons(WrappedComponent) {
         currentColorScheme: settingsStore.currentColorScheme,
         isTemplatesFolder,
         onCreateRoomFromTemplate,
+        setBufferSelection: filesStore.setBufferSelection,
       };
     },
   )(observer(WithQuickButtons));

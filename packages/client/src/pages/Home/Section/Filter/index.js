@@ -135,7 +135,7 @@ const SectionFilterContent = ({
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
 
-  const [, setSelectedFilterValues] = React.useState(null);
+  const [selectedFilterValues, setSelectedFilterValues] = React.useState(null);
 
   const {
     onContactsFilter,
@@ -663,13 +663,11 @@ const SectionFilterContent = ({
     // return filterValues;
     const currentFilterValues = [];
 
-    setSelectedFilterValues((value) => {
-      if (!value) {
-        currentFilterValues.push(...filterValues);
-        return filterValues.map((f) => ({ ...f }));
-      }
-
-      const items = value.map((v) => {
+    if (!selectedFilterValues) {
+      currentFilterValues.push(...filterValues);
+      setSelectedFilterValues(filterValues.map((f) => ({ ...f })));
+    } else {
+      const items = selectedFilterValues.map((v) => {
         const item = filterValues.find((f) => f.group === v.group);
 
         if (item) {
@@ -697,11 +695,10 @@ const SectionFilterContent = ({
       );
 
       items.push(...newItems);
-
       currentFilterValues.push(...items.filter((i) => i));
 
-      return items.filter((i) => i);
-    });
+      setSelectedFilterValues(items.filter((i) => i));
+    }
 
     return currentFilterValues;
   }, [

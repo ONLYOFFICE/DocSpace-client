@@ -27,7 +27,7 @@
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { FolderType } from "@docspace/shared/enums";
 import { AsideHeader } from "@docspace/shared/components/aside-header";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -117,7 +117,6 @@ const InfoPanelHeaderContent = ({
   const setHistory = () => setView("info_history");
   const setDetails = () => setView("info_details");
   const setShare = () => setView("info_share");
-  const setChat = () => setView("ai_chat");
 
   const memberTab = {
     id: "info_members",
@@ -133,13 +132,6 @@ const InfoPanelHeaderContent = ({
     content: null,
   };
 
-  const chatTab = {
-    id: "ai_chat",
-    name: "AI Chat",
-    onClick: setChat,
-    content: null,
-  };
-
   const templateSubmenu = [memberTab, detailsTab];
 
   const tabsData = [
@@ -151,10 +143,6 @@ const InfoPanelHeaderContent = ({
     },
     detailsTab,
   ];
-
-  if (selectedRoomType === RoomsType.AIRoom) {
-    tabsData.push(chatTab);
-  }
 
   const isRoomsType =
     selection &&

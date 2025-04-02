@@ -155,8 +155,7 @@ const InfoPanelBodyContent = ({
         return viewHelper.DetailsView();
       case "info_share":
         return viewHelper.ShareView();
-      case "ai_chat":
-        return viewHelper.ChatView();
+
       default:
         break;
     }
@@ -208,7 +207,7 @@ const InfoPanelBodyContent = ({
 
   return (
     <StyledInfoPanelBody>
-      {!isNoItem && roomsView !== "ai_chat" ? (
+      {!isNoItem ? (
         <ItemTitle
           {...defaultProps}
           selectionLength={selectedItems.length}

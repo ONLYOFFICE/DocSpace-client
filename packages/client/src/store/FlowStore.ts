@@ -22,6 +22,8 @@ const SUMMARIZE_TO_FILE_NAME = "summarize_to_file";
 class FlowStore {
   private api: FlowsApi;
 
+  aiChatIsVisible = true;
+
   flows: Flow[] = [];
 
   flowsFolders: FlowsFolder[] = [];
@@ -46,6 +48,10 @@ class FlowStore {
     this.api = new FlowsApi("/onlyflow/api/v1");
     makeAutoObservable(this);
   }
+
+  setAiChatIsVisible = (visible: boolean) => {
+    this.aiChatIsVisible = visible;
+  };
 
   autoLogin = async () => {
     try {

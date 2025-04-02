@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
+import { observer } from "mobx-react";
 
 import DocumentReactSvgUrl from "PUBLIC_DIR/images/document.react.svg?url";
 
@@ -34,10 +36,11 @@ import { IconButton } from "../../../icon-button";
 
 import styles from "./ChatInput.module.scss";
 import { useFilesStore } from "../../store/filesStore";
-import FilePreview from "../file-preview";
+
+import FilePreview from "./file-preview";
 
 const ChatInput = () => {
-  const { handleFiles } = useFilesStore();
+  const { files, handleFiles } = useFilesStore();
 
   const [value, setValue] = React.useState("");
 
@@ -51,26 +54,30 @@ const ChatInput = () => {
     inputRef.current?.click();
   };
 
+  const withFiles = files.length > 0;
+
   return (
-    <div className={styles.chatInput}>
+    <div className={classNames(styles.chatInput)}>
       <Textarea
         onChange={handleChange}
         value={value}
         isFullHeight
-        heightScale
         className={styles.chatInputTextArea}
-        wrapperClassName={styles.chatInputTextAreaWrapper}
+        wrapperClassName={classNames({
+          [styles.chatInputTextAreaWrapperWithFiles]: withFiles,
+          [styles.chatInputTextAreaWrapper]: !withFiles,
+        })}
         placeholder="Send a message..."
+        isChatMode
       />
       <FilePreview />
       <div className={styles.chatInputButtons}>
-        <Button
-          label=""
-          size={ButtonSize.small}
+        <IconButton
+          iconName={DocumentReactSvgUrl}
+          size={16}
+          isClickable
           onClick={handleFileClick}
-          icon={
-            <IconButton iconName={DocumentReactSvgUrl} size={16} isClickable />
-          }
+          className={styles.chatInputButtonsFile}
         />
 
         <Button
@@ -94,4 +101,4 @@ const ChatInput = () => {
   );
 };
 
-export default ChatInput;
+export default observer(ChatInput);

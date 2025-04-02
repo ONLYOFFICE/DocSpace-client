@@ -24,22 +24,73 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { memo, useEffect, useState, createElement } from "react";
-import { useTheme } from "styled-components";
+import { memo, useEffect, useState } from "react";
+import classNames from "classnames";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
-import SendIconReactSvgUrl from "PUBLIC_DIR/images/send-message.svg?url";
-import ProviderIconImageUrl from "PUBLIC_DIR/images/icons/32/ai.bot32.svg?url";
-import UserIconImageUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
-import ProviderImageUrl from "PUBLIC_DIR/images/ai.bot.svg?url";
+import ScreenSmallReactSvgUrl from "PUBLIC_DIR/images/icons/17/screen.small.react.svg?url";
+import ScreenFullReactSvgUrl from "PUBLIC_DIR/images/icons/17/screen.full.react.svg?url";
 
-import { TFile, TFolder } from "../../../api/files/types";
 import { DeviceType } from "../../../enums";
+import { TViewAs } from "../../../types";
+
 import { Portal } from "../../portal";
 import { IconButton } from "../../icon-button";
-import { TViewAs } from "../../../types";
-import { classNames, getCookie } from "../../../utils";
+import { Text } from "../../text";
+
 import styles from "../Section.module.scss";
+
+type HeaderProps = {
+  isFullScreen: boolean;
+  isMobile: boolean;
+  setIsFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
+  onClose: VoidFunction;
+};
+
+const Header = ({
+  isFullScreen,
+  isMobile,
+  setIsFullScreen,
+  onClose,
+}: HeaderProps) => {
+  return (
+    <div className={styles.chatPanelHeader}>
+      <Text lineHeight="24px" fontSize="18px" isBold>
+        AI Chat
+      </Text>
+      <div className={styles.chatPanelHeaderButtons}>
+        {!isMobile ? (
+          <IconButton
+            iconName={
+              isFullScreen ? ScreenSmallReactSvgUrl : ScreenFullReactSvgUrl
+            }
+            size={16}
+            isClickable
+            isFill={false}
+            isStroke
+            onClick={() => setIsFullScreen((value) => !value)}
+          />
+        ) : null}
+        <IconButton
+          iconName={CrossReactSvgUrl}
+          size={16}
+          isClickable
+          isFill={false}
+          isStroke
+          onClick={onClose}
+        />
+      </div>
+    </div>
+  );
+};
+
+type ChatWidgetProps = {
+  isVisible: boolean;
+  setIsVisible: (isVisible: boolean) => void;
+  anotherDialogOpen: boolean;
+  viewAs: TViewAs;
+  currentDeviceType: DeviceType;
+};
 
 export const ChatWidget = memo(
   ({
@@ -48,26 +99,8 @@ export const ChatWidget = memo(
     anotherDialogOpen,
     viewAs,
     currentDeviceType,
-    chatFiles = [],
-    mainBarVisible,
-  }: {
-    isVisible?: boolean;
-    setIsVisible?: (isVisible: boolean) => void;
-    anotherDialogOpen?: boolean;
-    viewAs?: TViewAs;
-    currentDeviceType?: DeviceType;
-    chatFiles?: (TFile | TFolder)[];
-    mainBarVisible?: boolean;
-  }) => {
-    const { interfaceDirection, isBase } = useTheme();
-
-    const toChatFiles = () => {
-      return chatFiles.map((f) => {
-        return { id: f.id, title: f.title, isFolder: f.isFolder };
-      });
-    };
-
-    const onClose = () => setIsVisible && setIsVisible(false);
+  }: ChatWidgetProps) => {
+    const [isFullScreen, setIsFullScreen] = useState(false);
 
     useEffect(() => {
       const onMouseDown = (e: MouseEvent) => {
@@ -86,97 +119,21 @@ export const ChatWidget = memo(
       return () => document.removeEventListener("mousedown", onMouseDown);
     }, [currentDeviceType, isVisible, setIsVisible, viewAs]);
 
-    const files = toChatFiles();
+    const onClose = () => setIsVisible?.(false);
 
-    const parentId = chatFiles.length
-      ? "parentId" in chatFiles[0] && chatFiles[0].parentId
-        ? chatFiles[0].parentId
-        : "folderId" in chatFiles[0] && chatFiles[0].folderId
-      : "";
-
-    const [flowId, setFlowId] = useState<string>(
-      "5e21f567-e68e-4f57-9a1c-e2dc3591b7ae",
-    );
-
-    useEffect(() => {
-      try {
-        // First check if the chat_id_key cookie exists
-        const cookieFlowId = getCookie("docspace_rag_chat");
-        if (cookieFlowId) {
-          setFlowId(cookieFlowId);
-          return;
-        }
-
-        // Then fallback to localStorage
-        const storedFlowId = localStorage.getItem("x-chat-flow-id");
-        if (storedFlowId) {
-          setFlowId(storedFlowId);
-        }
-      } catch (error) {
-        console.error(
-          "Error reading flowId from cookie or localStorage:",
-          error,
-        );
-      }
-    }, []);
-
-    const tweaks = parentId
-      ? JSON.stringify({
-          "FileID-29xtu": {
-            current_folder: parentId,
-          },
-        })
-      : "";
-
-    const chat = createElement("langflow-chat-widget", {
-      // api_key: "string",
-      // output_type: "string",
-      // input_type: "string",
-      // output_component: "string",
-      // host_url: "string",
-      // flow_id: "string",
-      // tweaks: "json",
-      // output_type: "string",
-      // input_type: "string",
-      // output_component: "string",
-      tweaks: tweaks || undefined,
-      host_url: window.location.origin,
-      bearer_token: getCookie("access_token_lf"),
-      // additional_headers={undefined}
-      session_id: "",
-      api_key: getCookie("chat_api_key") || undefined,
-      flow_id: flowId,
-      list_files: JSON.stringify(files),
-      provider_image: ProviderImageUrl,
-      user_icon_image: UserIconImageUrl,
-      provider_icon_image: ProviderIconImageUrl,
-      send_icon_image: SendIconReactSvgUrl,
-      interface_theme: isBase ? "light" : "dark",
-      interface_direction: interfaceDirection,
-      header_text: "DocSpace AI chat", // TODO: AI tranlstion
-      empty_screen_text: "How can I help you today?", // TODO: AI tranlstion
-      placeholder_text: "Message ...", // TODO: AI tranlstion
-      chat_user_name: "Me", // TODO: AI tranlstion
-      chat_provider_name: "AI", // TODO: AI tranlstion
-      current_folder: parentId,
-    });
-
-    const chatWidgetComponent = (
-      <div className={styles.chatWrapper} id="chatPanelWrapper">
-        <div className={styles.chatPanel}>
-          <IconButton
-            size={17}
-            className={classNames(styles.closeChatPanel, {
-              [styles.withBar]: mainBarVisible,
-            })}
-            iconName={CrossReactSvgUrl}
-            onClick={onClose}
-            isClickable
-            isStroke
-            aria-label="close"
-          />
-          {chat}
-        </div>
+    const panel = (
+      <div
+        className={classNames(styles.chatPanel, {
+          [styles.fullScreen]: isFullScreen,
+        })}
+      >
+        <Header
+          isFullScreen={isFullScreen}
+          setIsFullScreen={setIsFullScreen}
+          onClose={onClose}
+          isMobile={currentDeviceType === DeviceType.mobile}
+        />
+        Work
       </div>
     );
 
@@ -185,7 +142,7 @@ export const ChatWidget = memo(
 
       return (
         <Portal
-          element={chatWidgetComponent}
+          element={<div className={styles.chatWrapper}>{panel}</div>}
           appendTo={rootElement || undefined}
           visible={isVisible ? !anotherDialogOpen : false}
         />
@@ -201,7 +158,7 @@ export const ChatWidget = memo(
       ? null
       : isMobileView
         ? renderPortal()
-        : chatWidgetComponent;
+        : panel;
   },
 );
 

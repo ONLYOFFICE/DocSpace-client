@@ -6,17 +6,26 @@
   display: flex;
   flex-direction: column;
 
-  gap: 8px;
+  textarea {
+    padding: 0;
+  }
 }
 
 .chatInputTextAreaWrapper {
-  min-height: 130px !important;
-  max-height: 193px !important;
+  min-height: 126px !important;
+  padding: 16px 16px 48px;
+  max-height: 233px !important;
+}
+
+.chatInputTextAreaWrapperWithFiles {
+  padding: 16px 16px 134px;
+  min-height: 202px !important;
+  max-height: 311px !important;
 }
 
 .chatInputTextArea {
-  min-height: 130px !important;
-  max-height: 193px !important;
+  min-height: 56px !important;
+  max-height: 201px !important;
 }
 
 .chatInputButtons {
@@ -24,4 +33,28 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  position: absolute;
+
+  bottom: 8px;
+  padding: 0 16px;
+
+  box-sizing: border-box;
+
+  width: 100%;
+}
+
+.chatInputButtonsFile {
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid #858585;
+
+  border-radius: 3px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

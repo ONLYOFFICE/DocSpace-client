@@ -1,3 +1,14 @@
+.filePreviewWrapper {
+  position: absolute;
+
+  bottom: 48px;
+  padding: 0 16px;
+
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
 .filePreviewContainer {
   display: flex;
   flex-direction: row;

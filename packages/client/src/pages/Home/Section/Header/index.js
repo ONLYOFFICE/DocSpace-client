@@ -170,6 +170,10 @@ const SectionHeaderContent = (props) => {
     setRefMap,
     deleteRefMap,
     isPersonalReadOnly,
+
+    aiChatIsVisible,
+    setAiChatIsVisible,
+    withChat,
   } = props;
 
   const location = useLocation();
@@ -682,6 +686,9 @@ const SectionHeaderContent = (props) => {
                 contextButtonAnimation={contextButtonAnimation}
                 guidAnimationVisible={guidAnimationVisible}
                 isContextButtonVisible={isContextButtonVisible()}
+                withChat={withChat}
+                chatOpen={aiChatIsVisible}
+                toggleChat={setAiChatIsVisible}
               />
               {showSignInButton ? (
                 <Button
@@ -741,6 +748,7 @@ export default inject(
     indexingStore,
     dialogsStore,
     guidanceStore,
+    flowStore,
   }) => {
     const { startUpload } = uploadDataStore;
 
@@ -824,6 +832,8 @@ export default inject(
 
     const isRoom = !!roomType;
 
+    const withChat = roomType === RoomsType.AIRoom;
+
     const {
       onClickEditRoom,
       onClickInviteUsers,
@@ -897,6 +907,8 @@ export default inject(
     const rootFolderId = navigationPath.length
       ? navigationPath[navigationPath.length - 1]?.id
       : selectedFolder.id;
+
+    const { aiChatIsVisible, setAiChatIsVisible } = flowStore;
 
     return {
       showText: settingsStore.showText,
@@ -1000,6 +1012,10 @@ export default inject(
       setGuidAnimationVisible,
       setRefMap,
       deleteRefMap,
+
+      aiChatIsVisible,
+      setAiChatIsVisible,
+      withChat,
     };
   },
 )(

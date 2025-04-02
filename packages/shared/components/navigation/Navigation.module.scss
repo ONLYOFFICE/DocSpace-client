@@ -425,6 +425,9 @@
   &[data-is-desktop-client="true"][data-is-drop-box-component="true"] {
     max-height: 32px;
   }
+  &[data-with-chat="true"] {
+    grid-template-columns: 49px auto 1fr 1fr;
+  }
 
   :global {
     .navigation-logo {
@@ -579,6 +582,10 @@
     &[data-with-logo="true"] {
       grid-template-columns: 43px 49px 1fr auto;
     }
+
+    // &[data-with-chat="true"] {
+    //   grid-template-columns: 49px 1 1fr 1fr;
+    // }
   }
 
   @include mobile {
@@ -593,5 +600,35 @@
     &[data-is-root-folder="true"] {
       grid-template-columns: auto 1fr !important;
     }
+  }
+}
+
+.chatButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  height: 32px;
+  width: fit-content;
+  min-width: fit-content;
+
+  padding: 6px 10px;
+
+  box-sizing: border-box;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  &.chatButtonOpen {
+    background-color: #f3f4f4;
+  }
+
+  .chatButtonText {
+    background: linear-gradient(288.66deg, #4781d1 -8.09%, #664fea 93.69%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }

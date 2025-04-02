@@ -48,13 +48,13 @@ export default inject(
     dialogsStore,
     infoPanelStore,
     indexingStore,
-    pluginStore,
+    flowStore,
   }: {
     settingsStore: any;
     dialogsStore: any;
     infoPanelStore: any;
     indexingStore: any;
-    pluginStore: any;
+    flowStore: any;
   }) => {
     const {
       isDesktopClient: isDesktop,
@@ -64,7 +64,6 @@ export default inject(
       maintenanceExist,
       snackbarExist,
       showText,
-      mainBarVisible,
     } = settingsStore;
 
     const { isVisible, isMobileHidden, setIsVisible, getCanDisplay } =
@@ -80,7 +79,7 @@ export default inject(
       createRoomDialogVisible || invitePanelOptions.visible;
 
     const { isScrollLocked: isInfoPanelScrollLocked } = infoPanelStore;
-    const { aiChatIsVisible, setAiChatIsVisible } = pluginStore;
+    const { aiChatIsVisible, setAiChatIsVisible } = flowStore;
 
     return {
       isDesktop,
@@ -98,7 +97,6 @@ export default inject(
       isInfoPanelScrollLocked,
       aiChatIsVisible,
       setAiChatIsVisible,
-      mainBarVisible,
     };
   },
 )(observer(SectionWrapper));

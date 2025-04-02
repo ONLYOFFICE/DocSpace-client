@@ -118,7 +118,7 @@ const tagsStore = new TagsStore();
 const clientLoadingStore = new ClientLoadingStore();
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
-const infoPanelStore = new InfoPanelStore(userStore, pluginStore);
+const infoPanelStore = new InfoPanelStore(userStore, flowStore);
 const indexingStore = new IndexingStore(infoPanelStore, selectedFolderStore);
 
 const treeFoldersStore = new TreeFoldersStore(

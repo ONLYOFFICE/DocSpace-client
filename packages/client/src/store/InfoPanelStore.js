@@ -82,7 +82,7 @@ const infoShare = "info_share";
 class InfoPanelStore {
   userStore = null;
 
-  pluginStore = null;
+  flowStore = null;
 
   isVisible = false;
 
@@ -141,9 +141,9 @@ class InfoPanelStore {
     startIndex: 0,
   };
 
-  constructor(userStore, pluginStore) {
+  constructor(userStore, flowStore) {
     this.userStore = userStore;
-    this.pluginStore = pluginStore;
+    this.flowStore = flowStore;
 
     makeAutoObservable(this);
   }
@@ -155,7 +155,7 @@ class InfoPanelStore {
   };
 
   setIsVisible = (bool) => {
-    if (bool) this.pluginStore.setAiChatIsVisible(false);
+    if (bool) this.flowStore.setAiChatIsVisible(false);
 
     const selectedFolderIsRoomOrFolderInRoom =
       this.selectedFolderStore &&

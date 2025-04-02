@@ -1,13 +1,12 @@
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { tomorrow } from "react-syntax-highlighter/dist/cjs/styles/prism";
+
+import Code from "./Code";
 // import CodeTabsComponent from "../../../../../../components/core/codeTabsComponent/ChatCodeTabComponent";
 
 type MarkdownFieldProps = {
   chatMessage: string;
-  editedFlag: React.ReactNode;
 };
 
 // Function to replace <think> tags with a placeholder before markdown processing
@@ -18,15 +17,12 @@ const preprocessChatMessage = (text: string): string => {
     .replace(/<\/think>/g, "`</think>`");
 };
 
-export const MarkdownField = ({
-  chatMessage,
-  editedFlag,
-}: MarkdownFieldProps) => {
+export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
   // Process the chat message to handle <think> tags
   const processedChatMessage = preprocessChatMessage(chatMessage);
 
   return (
-    <div className="w-full items-baseline gap-2">
+    <div style={{ width: "100%" }}>
       <Markdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
@@ -68,13 +64,7 @@ export const MarkdownField = ({
               }
 
               return (
-                <SyntaxHighlighter
-                  language={match?.[1].toLowerCase()}
-                  style={tomorrow}
-                  className="!mt-0 h-full w-full overflow-scroll !rounded-b-md !rounded-t-none border border-border text-left !custom-scroll"
-                >
-                  {content}
-                </SyntaxHighlighter>
+                <Code language={match?.[1].toLowerCase()} content={content} />
               );
             }
           },
@@ -82,7 +72,6 @@ export const MarkdownField = ({
       >
         {processedChatMessage}
       </Markdown>
-      {editedFlag}
     </div>
   );
 };

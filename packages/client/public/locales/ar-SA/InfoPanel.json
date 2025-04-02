@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "تم إلغاء الرابط السابق </1>«{{linkTitle}}»<1> <br/> وتم إنشاء رابط جديد </1>«{{linkTitle}}»<1>",
   "RoomGroupAdded": "تمت إضافة المجموعات.",
   "RoomGroupRemove": "تمت إزالة المجموعة",
-  "RoomIndexExportSaved": "تم حفظ تصدير فهرس الغرفة في المستندات",
   "RoomIndexingEnabled": "تم تفعيل الفهرسة التلقائية للملفات في الغرفة",
   "RoomInviteResend": "تم إرسال الدعوات مرة أخرى:",
   "RoomLifeTimeDisabled": "تم تعطيل صلاحية الملف في الغرفة",

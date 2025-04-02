@@ -250,8 +250,10 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomArchived");
     case "RoomUnarchived":
       return t("InfoPanel:RoomUnarchived");
-    case "RoomIndexExportSaved":
-      return t("InfoPanel:RoomIndexExportSaved");
+    case "RoomIndexExportLocation":
+      return t("InfoPanel:RoomIndexExportLocation", {
+        sectionName: t("Common:MyFilesSection"),
+      });
     case "FormSubmit":
       return t("InfoPanel:FilledOutForm");
     case "FormOpenedForFilling":

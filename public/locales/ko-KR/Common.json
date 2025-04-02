@@ -333,6 +333,7 @@
   "MoveToTrashTitle": "휴지통으로 이동하시겠습니까?",
   "MultiplyOverwrite": "여러 폴더가 하나의 폴더로 병합되고, 파일은 버전 업데이트로 덮어쓰기됩니다",
   "MyDocuments": "내 문서",
+  "MyFilesSection": "문서",
   "Name": "이름",
   "NeedPassword": "방에 접속하려면 비밀번호가 필요합니다",
   "NewDocument": "새 문서",

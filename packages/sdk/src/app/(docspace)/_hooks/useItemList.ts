@@ -63,7 +63,7 @@ export default function useItemList({ shareKey, getIcon }: useItemListProps) {
 
       const href = previewUrl || docUrl;
 
-      const icon = getIcon(file.fileExst);
+      const icon = getIcon(file.fileExst, 32, file.contentLength);
 
       const isForm = file.fileExst === ".oform";
 

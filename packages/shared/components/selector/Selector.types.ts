@@ -30,6 +30,7 @@ import {
   EmployeeType,
   RoomsType,
   ShareAccessRights,
+  FileType,
 } from "../../enums";
 import { MergeTypes, Nullable } from "../../types";
 
@@ -495,7 +496,7 @@ export type TSelectorItemFile = MergeTypes<
   TSelectorItemEmpty,
   {
     fileExst: string;
-    fileType: string;
+    fileType: FileType;
     parentId: string | number;
     rootFolderType: string | number;
     security: TFileSecurity;

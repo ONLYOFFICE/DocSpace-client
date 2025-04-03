@@ -69,7 +69,6 @@ import InviteInput from "./sub-components/InviteInput";
 type TemplateAccessSettingsContainer =
   | {
       isContainer: true;
-      usersPanelIsVisible: boolean;
       setUsersPanelIsVisible: (visible: boolean) => void;
       onClosePanels: VoidFunction;
       onCloseAccessSettings: VoidFunction;
@@ -82,7 +81,6 @@ type TemplateAccessSettingsContainer =
     }
   | {
       isContainer?: undefined;
-      usersPanelIsVisible?: undefined;
       setUsersPanelIsVisible?: undefined;
       onClosePanels?: undefined;
       onCloseAccessSettings?: undefined;
@@ -111,7 +109,6 @@ const TemplateAccessSettingsPanel = ({
   templateItem,
   setInfoPanelIsMobileHidden,
   isContainer,
-  usersPanelIsVisible,
   setUsersPanelIsVisible,
   onClosePanels,
   onCloseAccessSettings,
@@ -353,9 +350,7 @@ const TemplateAccessSettingsPanel = ({
             inviteItems={accessItems}
             setInviteItems={setAccessItemsAction}
             roomType={roomType}
-            addUsersPanelVisible={usersPanelIsVisible}
             setAddUsersPanelVisible={setPanelVisible}
-            isMobileView={isMobileView}
             isDisabled={isAvailable}
             roomId={templateId}
           />
@@ -445,11 +440,7 @@ const TemplateAccessSettingsPanel = ({
               inviteItems={accessItems}
               setInviteItems={setAccessItemsAction}
               roomType={roomType}
-              addUsersPanelVisible={
-                isContainer ? usersPanelIsVisible : addUsersPanelVisible
-              }
               setAddUsersPanelVisible={setAddUsersPanelVisible}
-              isMobileView={isMobileView}
               isDisabled={isAvailable}
               roomId={templateId}
             />

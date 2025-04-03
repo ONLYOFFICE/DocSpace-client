@@ -272,7 +272,7 @@ const RoomIcon = ({
               className={classNames("room-icon-cover", styles.roomIconCover)}
               style={
                 {
-                  "--room-icon--text-color": isBase ? textColor : `#${color}`,
+                  "--room-icon-text-color": isBase ? textColor : `#${color}`,
                 } as React.CSSProperties
               }
               src={imgSrc}

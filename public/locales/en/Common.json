@@ -705,5 +705,9 @@
   "FileWillBeDeletedPermanently": "The file will be deleted permanently {{date}}",
   "FileWillBeMovedToTrash": "The file will be moved to Trash {{date}}",
   "UnblockVersion": "Unblock/Check-in",
-  "UserEmptyDescription": "Files and folders uploaded by admins will appeared here."
+  "UserEmptyDescription": "Files and folders uploaded by admins will appeared here.",
+  "FormDataCollection": "Form data collection",
+  "FormDataCollectionDescription": "Collect the completed form copies and data from them into XLSX for analyzing responses in Form Filling rooms.",
+  "RoleBasedFilling": "Role-based filling",
+  "RoleBasedFillingDescription": "Fill out the original form by roles with other participants in VDR."
 }

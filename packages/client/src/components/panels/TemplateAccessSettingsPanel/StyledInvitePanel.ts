@@ -401,6 +401,7 @@ const StyledTemplateAccessSettingsFooter = styled.div`
   padding: 0px 16px;
   background-color: ${(props) => props.theme.backgroundColor};
   border-top: ${(props) => props.theme.selector.border};
+  z-index: 1;
 
   display: flex;
   align-items: center;

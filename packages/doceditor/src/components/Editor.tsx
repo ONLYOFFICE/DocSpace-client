@@ -25,19 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
-import React from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import isUndefined from "lodash/isUndefined";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
 import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
 
-import {
-  FolderType,
-  StartFillingMode,
-  ThemeKeys,
-} from "@docspace/shared/enums";
+import { ThemeKeys } from "@docspace/shared/enums";
 import { getEditorTheme } from "@docspace/shared/utils";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
@@ -101,8 +95,6 @@ const Editor = ({
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
-  const searchParams = useSearchParams();
-
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
   const {
@@ -126,6 +118,9 @@ const Editor = ({
     onUserActionRequired,
 
     setDocTitle,
+    onSubmit,
+    onRequestFillingStatus,
+    onRequestStartFilling,
   } = useEditorEvents({
     user,
     successAuth,
@@ -138,6 +133,9 @@ const Editor = ({
     t,
     sdkConfig,
     organizationName,
+    setFillingStatusDialogVisible,
+    openShareFormDialog,
+    onStartFillingVDRPanel,
   });
 
   useInit({
@@ -151,18 +149,19 @@ const Editor = ({
     organizationName,
   });
 
-  const newConfig: IConfigType = config
-    ? {
-        document: config.document,
-        documentType: config.documentType,
-        token: config.token,
-        type: config.type,
-      }
-    : {};
+  const newConfig: IConfigType = useMemo(() => {
+    return config
+      ? {
+          document: config.document,
+          documentType: config.documentType,
+          token: config.token,
+          type: config.type,
+          editorConfig: { ...config.editorConfig },
+        }
+      : {};
+  }, [config]);
 
-  if (config) newConfig.editorConfig = { ...config.editorConfig };
-
-  const search = typeof window !== "undefined" ? window.location.search : "";
+  // if (config) newConfig.editorConfig = { ...config.editorConfig };
 
   //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
 
@@ -258,6 +257,7 @@ const Editor = ({
     onOutdatedVersion,
     onDownloadAs,
     onUserActionRequired,
+    onSubmit,
   };
 
   if (successAuth) {
@@ -315,73 +315,13 @@ const Editor = ({
   }
 
   if (config?.startFilling && !IS_ZOOM) {
-    newConfig.events.onRequestStartFilling = (event: {}) => {
-      switch (config.startFillingMode) {
-        case StartFillingMode.ShareToFillOut:
-          openShareFormDialog?.();
-          break;
-
-        case StartFillingMode.StartFilling:
-          if (
-            typeof event === "object" &&
-            event !== null &&
-            "data" in event &&
-            isFormRole(event.data)
-          ) {
-            onStartFillingVDRPanel?.(event.data);
-          }
-          break;
-        default:
-          break;
-      }
-    };
-
-    newConfig.events.onStartFilling = () => {
-      onStartFilling?.();
-    };
+    newConfig.events.onRequestStartFilling = onRequestStartFilling;
+    newConfig.events.onStartFilling = onStartFilling;
   }
 
   if (config?.fillingStatus) {
-    newConfig.events.onRequestFillingStatus = (event: object) => {
-      setFillingStatusDialogVisible?.(true);
-    };
+    newConfig.events.onRequestFillingStatus = onRequestFillingStatus;
   }
-
-  newConfig.events.onSubmit = () => {
-    const origin = window.location.origin;
-
-    const otherSearchParams = new URLSearchParams();
-
-    const roomId = config?.document?.referenceData.roomId;
-    const fileId = fileInfo?.id;
-
-    if (config?.fillingSessionId)
-      otherSearchParams.append("fillingSessionId", config.fillingSessionId);
-
-    if (config?.startFillingMode === StartFillingMode.StartFilling) {
-      otherSearchParams.append(
-        "type",
-        StartFillingMode.StartFilling.toString(),
-      );
-
-      if (!isUndefined(fileId)) {
-        otherSearchParams.append("formId", fileId.toString());
-      }
-
-      if (!isUndefined(roomId)) {
-        otherSearchParams.append("roomId", roomId);
-      }
-    }
-
-    const combinedSearchParams = new URLSearchParams({
-      ...Object.fromEntries(searchParams),
-      ...Object.fromEntries(otherSearchParams),
-    });
-
-    window.location.replace(
-      `${origin}/doceditor/completed-form?${combinedSearchParams.toString()}`,
-    );
-  };
 
   return (
     <DocumentEditor

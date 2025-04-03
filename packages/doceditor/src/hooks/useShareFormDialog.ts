@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useStartFillingSelectDialog from "./useStartFillingSelectDialog";
 import type { TFile } from "@docspace/shared/api/files/types";
@@ -50,25 +50,25 @@ export const useShareFormDialog = (fileInfo: TFile | undefined) => {
     updateAccessLink?: () => void;
   }>({});
 
-  const onCloseShareFormDialog = () => {
+  const onCloseShareFormDialog = useCallback(() => {
     setShareFormDialogVisible(false);
-  };
+  }, []);
 
-  const openShareFormDialog = (updateAccessLink?: () => void) => {
+  const openShareFormDialog = useCallback((updateAccessLink?: () => void) => {
     setShareFormDialogVisible(true);
     setShareFormDialogData({ ...updateAccessLink });
-  };
+  }, []);
 
-  const onClickFormRoom = () => {
+  const onClickFormRoom = useCallback(() => {
     onSDKRequestStartFilling(t("Common:ShareAndCollect"));
-  };
+  }, [onSDKRequestStartFilling, t]);
 
-  const onClickVirtualDataRoom = () => {
+  const onClickVirtualDataRoom = useCallback(() => {
     onSDKRequestStartFilling(
       t("Common:ShareAndCollect"),
       RoomsType.VirtualDataRoom,
     );
-  };
+  }, [onSDKRequestStartFilling, t]);
 
   return {
     onClickFormRoom,

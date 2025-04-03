@@ -43,8 +43,7 @@ const { Filter } = api;
 const StyledBodyContent = styled.div`
   display: contents;
 
-  .avatar-name,
-  .delete-profile-container {
+  .avatar-name {
     display: flex;
     align-items: center;
   }

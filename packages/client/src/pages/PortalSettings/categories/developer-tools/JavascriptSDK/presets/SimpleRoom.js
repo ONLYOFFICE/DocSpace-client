@@ -99,7 +99,7 @@ const SimpleRoom = (props) => {
     width: `${defaultSize.width}${defaultDimension.label}`,
     height: `${defaultSize.height}${defaultDimension.label}`,
     frameId: "ds-frame",
-    showHeader: false,
+    showHeader: true,
     showTitle: true,
     showMenu: false,
     showFilter: true,

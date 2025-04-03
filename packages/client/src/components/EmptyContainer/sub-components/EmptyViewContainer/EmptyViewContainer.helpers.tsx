@@ -203,7 +203,10 @@ export const getOptions = (
     t("EmptyView:UploadFromPortalTitle", {
       productName: t("Common:ProductName"),
     }),
-    t("EmptyView:UploadFromPortalDescription"),
+    t("EmptyView:SectionsUploadDescription", {
+      sectionNameFirst: t("Common:MyFilesSection"),
+      sectionNameSecond: t("Common:TrashSection"),
+    }),
     // TODO: need fix selector
     FilesSelectorFilterTypes.ALL,
   );
@@ -392,7 +395,9 @@ export const getOptions = (
         {
           ...actions.onGoToPersonal(),
           icon: <PersonIcon />,
-          description: t("Files:GoToPersonal"),
+          description: t("Files:GoToSection", {
+            sectionName: t("Common:MyFilesSection"),
+          }),
           key: "empty-view-goto-personal",
         },
       ])
@@ -408,7 +413,9 @@ export const getOptions = (
         {
           ...actions.onGoToPersonal(),
           icon: <PersonIcon />,
-          description: t("Files:GoToPersonal"),
+          description: t("Files:GoToSection", {
+            sectionName: t("Common:MyFilesSection"),
+          }),
           key: "empty-view-trash-goto-personal",
         },
       ])

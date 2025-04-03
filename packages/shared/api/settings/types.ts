@@ -199,6 +199,7 @@ export type THelpCenterEntries = {
   connectwordpress: string;
   connectyandex: string;
   creatingbackup: string;
+  docspacemanagingrooms: string;
   enterpriseinstall: string;
   enterpriseinstallscript: string;
   enterpriseinstallwindows: string;

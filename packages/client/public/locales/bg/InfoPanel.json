@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "Предишният линк<1>«{{linkTitle}}»</1> е отменен <br/> Създаден е нов линк <1>«{{linkTitle}}»</1>",
   "RoomGroupAdded": "Добавени групи.",
   "RoomGroupRemove": "Премахнати групи",
-  "RoomIndexExportSaved": "Експортиране индекса на стаята, запазен в Документи",
   "RoomIndexingDisabled": "Автоматичното индексиране на файлове е деактивирано в стаята",
   "RoomIndexingEnabled": "Автоматичното индексиране на файлове в стаята е активирано",
   "RoomInviteResend": "Повторно изпратени покани",

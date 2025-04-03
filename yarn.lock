@@ -4953,10 +4953,10 @@ __metadata:
 
 "@onlyoffice/docspace-sdk-js@file:./onlyoffice-docspace-sdk-js-2.0.0.tgz::locator=%40docspace%2Fclient%40workspace%3Apackages%2Fclient":
   version: 2.0.0
-  resolution: "@onlyoffice/docspace-sdk-js@file:./onlyoffice-docspace-sdk-js-2.0.0.tgz#./onlyoffice-docspace-sdk-js-2.0.0.tgz::hash=be7500&locator=%40docspace%2Fclient%40workspace%3Apackages%2Fclient"
+  resolution: "@onlyoffice/docspace-sdk-js@file:./onlyoffice-docspace-sdk-js-2.0.0.tgz#./onlyoffice-docspace-sdk-js-2.0.0.tgz::hash=0d8bcf&locator=%40docspace%2Fclient%40workspace%3Apackages%2Fclient"
   dependencies:
     pnpm: "npm:^9.15.4"
-  checksum: 10/2e0acf1352d76a5f2aba713d126ab4272118a7fe0fc1bbf9a0b180be52e6a63ea8af40c191794a7765b83bbeb86693c3b4d622055e6925e042697830e909fd8f
+  checksum: 10/75619fc692568e2dce438790ea90f80b651b76472eeb03b2de63aa925f3990dbf4864236c3faebe437b4eb2ded03287c90426cdf488302f5cb27d0b80e603170
   languageName: node
   linkType: hard
 

@@ -431,7 +431,7 @@ export async function deleteFolder(
 }
 
 export async function createFile(
-  folderId: number,
+  folderId: number | string,
   title: string,
   templateId?: number,
   formId?: number,
@@ -591,6 +591,16 @@ export async function emptyTrash() {
   const res = (await request({
     method: "put",
     url: "/files/fileops/emptytrash",
+  })) as TOperation[];
+  return res;
+}
+
+export async function enableCustomFilter(fileId: number, enabled: boolean) {
+  const data = { enabled };
+  const res = (await request({
+    method: "put",
+    url: `/files/file/${fileId}/customfilter`,
+    data,
   })) as TOperation[];
   return res;
 }

@@ -238,8 +238,6 @@ class CreateEditRoomStore {
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore;
     const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
 
-    const { id: currentFolderId } = this.selectedFolderStore;
-
     const {
       quota,
       denyDownload,
@@ -342,8 +340,7 @@ class CreateEditRoomStore {
         requests.push(api.rooms.removeLogoFromRoom(room.id));
       }
 
-      if (isIndexingChanged)
-        requests.push(updateCurrentFolder(null, currentFolderId));
+      if (isIndexingChanged) requests.push(updateCurrentFolder());
 
       if (room.isTemplate && invitations?.length) {
         requests.push(
@@ -369,9 +366,12 @@ class CreateEditRoomStore {
 
   onSaveAsTemplate = async (item, roomParams, openCreatedTemplate) => {
     this.filesStore.setRoomCreated(true);
+    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
 
-    const { title, icon, tags, invitations, roomType, isAvailable } =
+    const { title, icon, tags, invitations, roomType, isAvailable, quota } =
       roomParams;
+
+    const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
 
     const tagsToAddList = tags.map((tag) => tag.name);
     const isDeleteLogo = !!item.logo.original && !icon.uploadedFile;
@@ -382,6 +382,9 @@ class CreateEditRoomStore {
       tags: tagsToAddList,
       public: isAvailable,
       copylogo: true,
+      ...(quotaLimit && {
+        quota: +quotaLimit,
+      }),
     };
 
     if (isDeleteLogo) {

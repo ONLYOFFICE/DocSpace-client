@@ -6,4 +6,6 @@ export type HeaderProps = {
   current: TFolder | TRoom;
   pathParts: TPathParts[];
   isEmptyList: boolean;
+
+  showTitle?: boolean;
 };

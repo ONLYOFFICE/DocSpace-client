@@ -722,15 +722,23 @@ class FilesStore {
         }
       });
     } else if (opt?.type === "folder" && opt?.id) {
+      const { isRoom, isTemplate, pathParts } = this.selectedFolderStore;
       const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
       if (foundIndex == -1) {
         const removedId = opt.id;
-        const pathParts = this.selectedFolderStore.pathParts;
 
         const includePathPart = pathParts.some(({ id }) => id === removedId);
 
         if (includePathPart && !this.treeFoldersStore.isPersonalReadOnly) {
-          window.DocSpace.navigate("/");
+          if (isRoom && isTemplate) {
+            const newRoomsFilter = RoomsFilter.getDefault();
+            newRoomsFilter.searchArea = RoomSearchArea.Templates;
+            window.DocSpace.navigate(
+              `/rooms/shared/filter?${newRoomsFilter.toUrlParams()}`,
+            );
+          } else {
+            window.DocSpace.navigate("/");
+          }
         }
 
         return;
@@ -1883,7 +1891,6 @@ class FilesStore {
     clearFilter = true,
     withSubfolders = false, // eslint-disable-line  @typescript-eslint/no-unused-vars
     clearSelection = true,
-    withFilterLocalStorage = false, // eslint-disable-line  @typescript-eslint/no-unused-vars
   ) => {
     const { setSelectedNode } = this.treeFoldersStore;
 
@@ -1943,7 +1950,6 @@ class FilesStore {
                 undefined,
                 undefined,
                 undefined,
-                true,
               );
             }
           }
@@ -2148,6 +2154,7 @@ class FilesStore {
     const canDuplicate = item.security?.Duplicate;
     const canDownload = item.security?.Download || isLockedSharedRoom(item);
     const canEmbed = item.security?.Embed;
+    const canSetUpCustomFilter = item.security?.CustomFilter;
 
     if (isFile) {
       const shouldFillForm = item.viewAccessibility.WebRestrictedEditing;
@@ -2168,6 +2175,10 @@ class FilesStore {
       const isOldForm =
         item.fileExst === ".docxf" || item.fileExst === ".oform"; // TODO: Remove after change security options
       const isPdf = item.fileExst === ".pdf";
+
+      const extsCustomFilter =
+        this.filesSettingsStore.filesSettings.extsWebCustomFilterEditing;
+      const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
 
       let fileOptions = [
         // "open",
@@ -2197,6 +2208,7 @@ class FilesStore {
         "version", // category
         //   "finalize-version",
         "show-version-history",
+        "custom-filter",
         "show-info",
         "block-unblock-version", // need split
         "separator1",
@@ -2258,6 +2270,10 @@ class FilesStore {
           "separate-stop-filling",
           "stop-filling",
         ]);
+      }
+
+      if (!canSetUpCustomFilter || !isExtsCustomFilter || isMyFolder) {
+        fileOptions = removeOptions(fileOptions, ["custom-filter"]);
       }
 
       if (!canDownload) {
@@ -3330,6 +3346,7 @@ class FilesStore {
         passwordProtected,
         watermark,
         formFillingStatus,
+        customFilterEnabled,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3509,6 +3526,7 @@ class FilesStore {
         passwordProtected,
         watermark,
         formFillingStatus,
+        customFilterEnabled,
       };
     });
   };

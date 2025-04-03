@@ -82,6 +82,12 @@
   }
 }
 
+.customFilterTooltip {
+  :global(.custom-filter-tooltip-link) {
+    color: var(--files-badges-link-color);
+  }
+}
+
 .badgeWrapper {
   display: flex;
   justify-content: center;

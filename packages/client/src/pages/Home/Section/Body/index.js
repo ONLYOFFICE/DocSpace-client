@@ -106,9 +106,13 @@ const SectionBodyContent = (props) => {
   }, []);
 
   useEffect(() => {
-    const closedFormFillingTips = localStorage.getItem(
-      getFormFillingTipsStorageName(userId),
-    );
+    const storageName = getFormFillingTipsStorageName(userId);
+
+    const closedFormFillingTips = localStorage.getItem(storageName);
+
+    if (isMobile()) {
+      return window.localStorage.setItem(storageName, "true");
+    }
 
     if (roomType === RoomsType.FormRoom && !closedFormFillingTips && userId) {
       onEnableFormFillingGuid(t, roomType);

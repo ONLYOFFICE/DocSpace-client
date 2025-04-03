@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "Iepriekšējā saite <1>«{{linkTitle}}»</1> atsaukta <br/> Jauna saite <1>«{{linkTitle}}»</1> ir izveidota",
   "RoomGroupAdded": "Grupas ir pievienotas.",
   "RoomGroupRemove": "Grupa ir noņemta",
-  "RoomIndexExportSaved": "Dokumentos saglabātā telpas rādītāja eksportēšana",
   "RoomIndexingDisabled": "Automātiskā failu indeksēšana telpā ir atspējota",
   "RoomIndexingEnabled": "Automātiska failu indeksēšana telpā ir iespējota",
   "RoomInviteResend": "Uzaicinājumi, kas ir nosūtīti vēlreiz:",

@@ -61,45 +61,49 @@ export const useStartFillingPanel = (
     [],
   );
 
-  const onSubmitStartFilling = async (data: TFormRoleMappingRequest) => {
-    try {
-      await formRoleMapping(data);
-      const docEditor =
-        typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+  const onSubmitStartFilling = useCallback(
+    async (data: TFormRoleMappingRequest) => {
+      try {
+        await formRoleMapping(data);
+        const docEditor =
+          typeof window !== "undefined" &&
+          window.DocEditor?.instances[EDITOR_ID];
 
-      await new Promise<void>((resolve, reject) => {
-        resolveRef.current = resolve;
-        docEditor?.startFilling(true);
-      });
+        await new Promise<void>((resolve, reject) => {
+          resolveRef.current = resolve;
+          docEditor?.startFilling(true);
+        });
 
-      const searchParams = new URLSearchParams();
+        const searchParams = new URLSearchParams();
 
-      if (file) searchParams.append("formId", file.id.toString());
-      if (roomId) searchParams.append("roomId", roomId);
-      const origin = window.location.origin;
+        if (file) searchParams.append("formId", file.id.toString());
+        if (roomId) searchParams.append("roomId", roomId);
+        const origin = window.location.origin;
 
-      setTimeout(() => {
-        window.location.assign(
-          `${origin}/doceditor/start-filling?${searchParams.toString()}`,
-        );
-      });
-    } catch (error) {
-      console.error(error);
-      toastr.error(error as Error);
-    }
-  };
+        setTimeout(() => {
+          window.location.assign(
+            `${origin}/doceditor/start-filling?${searchParams.toString()}`,
+          );
+        });
+      } catch (error) {
+        console.error(error);
+        toastr.error(error as Error);
+      }
+    },
+    [file, roomId],
+  );
 
-  const onStartFilling = () => {
-    console.log("onStartFilling");
+  const onStartFilling = useCallback(() => {
+    console.log("Call onStartFilling");
 
     resolveRef.current?.();
     resolveRef.current = undefined;
-  };
+  }, []);
 
-  const onStartFillingVDRPanel = (roles: TFormRole[]) => {
+  const onStartFillingVDRPanel = useCallback((roles: TFormRole[]) => {
     setRoles(roles);
     setStartFillingPanelVisible(true);
-  };
+  }, []);
 
   return {
     roles,

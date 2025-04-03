@@ -547,31 +547,15 @@ export function setRoomCover(roomId, cover) {
   return request(options);
 }
 
-export function createTemplate({
-  roomId,
-  title,
-  logo,
-  share,
-  tags,
-  isPublic,
-  copylogo,
-}: {
+export function createTemplate(data: {
   roomId: number;
   title: string;
   logo: TRoom["logo"];
   share;
   tags: TRoom["tags"];
-  tags: boolean;
+  public: boolean;
+  quota: number;
 }) {
-  const data = {
-    roomId,
-    title,
-    logo,
-    share,
-    tags,
-    public: isPublic,
-    copylogo,
-  };
   const options = {
     method: "post",
     url: `/files/roomtemplate`,

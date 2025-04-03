@@ -95,7 +95,9 @@ const LoginHistory = (props) => {
         setLifetimeAuditSettings={setLifetimeAuditSettings}
         content={getContent()}
         downloadReport={t("DownloadReportBtnText")}
-        downloadReportDescription={t("DownloadReportDescription")}
+        downloadReportDescription={t("ReportSaveLocation", {
+          sectionName: t("Common:MyFilesSection"),
+        })}
         getReport={getLoginHistoryReport}
         isSettingNotPaid={!isAuditAvailable}
       />

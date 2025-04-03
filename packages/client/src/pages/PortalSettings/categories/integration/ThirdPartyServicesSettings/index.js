@@ -203,7 +203,7 @@ class ThirdPartyServices extends React.Component {
       <>
         <RootContainer className="RootContainer">
           <Text className="third-party-description">
-            {t("ThirdPartyTitleDescription")}
+            {t("AuthorizationKeysInfo")}
           </Text>
           <div className="third-party-box">
             {integrationSettingsUrl ? (

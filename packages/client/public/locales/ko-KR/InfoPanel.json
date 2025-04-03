@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "이전 <1>«{{linkTitle}}»</1> 링크가 취소되었습니다 <br/> 새로운 <1>«{{linkTitle}}»</1> 링크가 생성되었습니다",
   "RoomGroupAdded": "그룹이 추가되었습니다.",
   "RoomGroupRemove": "그룹이 제거되었습니다",
-  "RoomIndexExportSaved": "문서에 저장된 룸 인덱스 내보내기 ",
   "RoomIndexingDisabled": "룸에서 자동 파일 인덱싱이 비활성화되었습니다",
   "RoomIndexingEnabled": "룸에서 자동 파일 인덱싱이 활성화되었습니다",
   "RoomInviteResend": "초대장이 다시 전송되었습니다:",

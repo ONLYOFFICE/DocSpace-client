@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "Əvvəlki link <1>«{{linkTitle}}»</1> ləğv edildi <br/> Yeni Link <1>«{{linkTitle}}»</1> yaradıldı",
   "RoomGroupAdded": "Qruplar əlavə edildi.",
   "RoomGroupRemove": "Qrup silindi",
-  "RoomIndexExportSaved": "Sənədlərdə saxlanılan otaq indeksinin ixracı",
   "RoomIndexingDisabled": "Otaqda faylların avtomatik indeksləşdirilməsi deaktiv edilib",
   "RoomIndexingEnabled": "Otaqda faylların avtomatik indeksləşdirilməsi aktivləşdirilib",
   "RoomInviteResend": "Dəvətlər yenidən göndərildi:",

@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "上一个链接<1>«{{linkTitle}}»</1>已撤销<br/>新链接<1>«{{linkTitle}}»</1>已创建",
   "RoomGroupAdded": "组已添加。",
   "RoomGroupRemove": "组已删除",
-  "RoomIndexExportSaved": "Export of the room index saved to Documents",
   "RoomIndexingDisabled": "房间内自动文件索引已禁用",
   "RoomIndexingEnabled": "房间内自动文件索引已启用",
   "RoomInviteResend": "邀请已重新发送：",

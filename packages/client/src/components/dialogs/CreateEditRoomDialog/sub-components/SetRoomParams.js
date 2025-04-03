@@ -409,7 +409,7 @@ const SetRoomParams = ({
   const inputTitle =
     isTemplateSelected || isTemplate
       ? `${t("Files:TemplateName")}:`
-      : `${t("Common:Name")}:`;
+      : `${t("Common:Label")}:`;
 
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>

@@ -146,7 +146,7 @@ const GroupsRowComponent = ({
               isTextOverflow
               onClick={onOpenGroup}
             >
-              {t("PeopleTranslations:PeopleCount", {
+              {t("PeopleTranslations:MembersCount", {
                 count: item.membersCount,
               })}
             </Link>

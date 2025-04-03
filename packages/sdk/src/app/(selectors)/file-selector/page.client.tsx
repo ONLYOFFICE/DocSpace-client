@@ -31,7 +31,12 @@ import { useTranslation } from "react-i18next";
 
 import FilesSelector from "@docspace/shared/selectors/Files";
 import { frameCallEvent } from "@docspace/shared/utils/common";
-import { DeviceType, FolderType, RoomsType } from "@docspace/shared/enums";
+import {
+  DeviceType,
+  FolderType,
+  RoomsType,
+  FileType,
+} from "@docspace/shared/enums";
 import { getFileLink } from "@docspace/shared/api/files";
 import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
@@ -102,6 +107,21 @@ export default function FilesSelectorClient({
 
   useDocumentTitle("FileSelector");
 
+  const convertToEditorType = (type: FileType) => {
+    switch (type) {
+      case FileType.Document:
+        return "word";
+      case FileType.Presentation:
+        return "slide";
+      case FileType.Spreadsheet:
+        return "cell";
+      case FileType.PDF:
+        return "pdf";
+      default:
+        return null;
+    }
+  };
+
   const onSubmit = useCallback(
     async (
       selectedItemId: string | number | undefined,
@@ -117,6 +137,7 @@ export default function FilesSelectorClient({
         ...selectedFileInfo,
         //icon: getIcon(64, selectedFileInfo.fileExst),
       } as TSelectedFileInfo & {
+        documentType: FileType | string | null;
         requestTokens?: {
           id: string;
           primary: boolean;
@@ -124,6 +145,13 @@ export default function FilesSelectorClient({
           requestToken: string;
         }[];
       };
+
+      enrichedData.documentType =
+        selectedFileInfo?.fileType !== undefined
+          ? convertToEditorType(
+              selectedFileInfo.fileType as unknown as FileType,
+            )
+          : null;
 
       if (selectedFileInfo?.inPublic) {
         const { sharedTo } = await getFileLink(selectedFileInfo.id as number);

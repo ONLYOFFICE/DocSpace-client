@@ -152,6 +152,7 @@ export type TSelectedFileInfo = {
   title: string;
   path?: string[] | undefined;
   fileExst?: string | undefined;
+  fileType?: string | undefined;
   inPublic?: boolean | undefined;
 } | null;
 

@@ -73,16 +73,16 @@ const Footer = ({
   return (
     <StyledFooterWrapper>
       {showDeleteProfileCheckbox ? (
-        <>
+        <div className="delete-profile-container">
           <Checkbox
             className="delete-profile-checkbox"
             isChecked={isDeleteProfile}
             onClick={onToggleDeleteProfile}
           />
-          <Text className="info" noSelect>
+          <Text fontSize="13px" fontWeight="400" lineHeight="20px" noSelect>
             {t("DataReassignmentDialog:DeleteProfileIsFinished")}
           </Text>
-        </>
+        </div>
       ) : null}
       <div className="button-wrapper">
         <Button

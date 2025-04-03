@@ -385,7 +385,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
       ) : null}
       <div className="api-key_name">
         <Text fontSize="13px" fontWeight={600}>
-          {t("Common:Name")}
+          {t("Common:Label")}
         </Text>
         <TextInput
           placeholder={t("Settings:NewSecretKey")}

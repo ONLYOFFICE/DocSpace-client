@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "Önceki bağlantı <1>«{{linkTitle}}»</1> iptal edildi <br/> Yeni Bağlantı <1>«{{linkTitle}}»</1> oluşturuldu",
   "RoomGroupAdded": "Gruplar ekledi.",
   "RoomGroupRemove": "Grup kaldırıldı",
-  "RoomIndexExportSaved": "Oda dizininin dışa aktarımı Belgeler’e kaydedildi",
   "RoomIndexingDisabled": "Odada otomatik dosya dizinleme devre dışı bırakıldı",
   "RoomIndexingEnabled": "Odada otomatik dosya dizinleme etkinleştirildi",
   "RoomInviteResend": "Davetiyeler yeniden gönderildi:",

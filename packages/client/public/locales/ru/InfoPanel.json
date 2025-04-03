@@ -67,7 +67,6 @@
   "RoomGroupAdded": "Группы добавлены.",
   "RoomGroupAddedCount": "Группы добавлены ({{count}}).",
   "RoomGroupRemove": "Группа удалена",
-  "RoomIndexExportSaved": "Экспорт индекса комнат, сохраненного в Документах",
   "RoomIndexingDisabled": "В комнате отключена автоматическая индексация файлов",
   "RoomIndexingEnabled": "В комнате включена автоматическая индексация файлов",
   "RoomInviteResend": "Приглашения отправлены повторно:",

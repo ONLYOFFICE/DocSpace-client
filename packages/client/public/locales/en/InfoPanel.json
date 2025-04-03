@@ -72,7 +72,7 @@
   "RoomGroupAdded": "Groups added.",
   "RoomGroupAddedCount": "Groups added ({{count}}).",
   "RoomGroupRemove": "Group removed",
-  "RoomIndexExportSaved": "Export of the room index saved to Documents",
+  "RoomIndexExportLocation": "Export of the room index saved to {{sectionName}}",
   "RoomIndexingDisabled": "Automatic file indexing disabled in the room",
   "RoomIndexingEnabled": "Automatic file indexing enabled in the room",
   "RoomInviteResend": "Invitations sent again:",

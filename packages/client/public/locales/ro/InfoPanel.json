@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "Linkul precedent <1>«{{linkTitle}}»</1> a fost revocat <br/> Un link nou <1>«{{linkTitle}}»</1> va fi creat ",
   "RoomGroupAdded": "Grupuri au fost adăugate.",
   "RoomGroupRemove": "Grupul a fost eliminat.",
-  "RoomIndexExportSaved": "Exportul indexelor de săli din secțiunea Documente",
   "RoomIndexingDisabled": "Indexarea automată a fișierelor este dezactivată pentru această sală",
   "RoomIndexingEnabled": "Indexarea automată a fișierelor este activată pentru această sală",
   "RoomInviteResend": "Invitații au fost trimise din nou:",

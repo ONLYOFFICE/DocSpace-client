@@ -215,7 +215,6 @@ const Root = ({
     setFillingStatusDialogVisible,
     onCloseFillingStatusDialog,
     onStopFilling,
-    // onDelete,
     onResetFilling,
   } = useFillingStatusDialog({
     openStopFillingDialog,
@@ -361,7 +360,6 @@ const Root = ({
           visible={fillingStatusDialogVisible}
           onClose={onCloseFillingStatusDialog}
           onStopFilling={onStopFilling}
-          // onDelete={onDelete}
           onResetFilling={onResetFilling}
         />
       ) : null}

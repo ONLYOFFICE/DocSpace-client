@@ -444,6 +444,7 @@ type TSelectorItemEmpty = {
   status?: undefined;
   access?: undefined;
   fileExst?: undefined;
+  fileType?: undefined;
   shared?: undefined;
   parentId?: undefined;
   rootFolderType?: undefined;
@@ -494,6 +495,7 @@ export type TSelectorItemFile = MergeTypes<
   TSelectorItemEmpty,
   {
     fileExst: string;
+    fileType: string;
     parentId: string | number;
     rootFolderType: string | number;
     security: TFileSecurity;

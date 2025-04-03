@@ -380,6 +380,9 @@ export interface UseEventsProps {
 
   sdkConfig?: TFrameConfig | null;
   organizationName: string;
+  setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
+  openShareFormDialog?: VoidFunction;
+  onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
 }
 
 export interface UseInitProps {

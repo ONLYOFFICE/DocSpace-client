@@ -149,6 +149,7 @@ const useSelectorState = ({
     title: string;
     path?: string[];
     fileExst?: string;
+    fileType?: string;
     viewUrl?: string;
     inPublic?: boolean;
   } | null>(null);

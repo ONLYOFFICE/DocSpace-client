@@ -42,7 +42,6 @@
   "UploadDeviceOptionTitle": "Otpremi sa svog Uređaja",
   "UploadDevicePDFFormOptionDescription": "Otpremite spreman PDF formular na prostoriju sa svog uređaja.",
   "UploadDevicePDFFormOptionTitle": "Otpremi sa uređaja",
-  "UploadFromPortalDescription": "Otpremi datoteke bilo kog tipa iz Dokumenti ili Prostorije",
   "UploadFromPortalTitle": "Otpremi iz {{productName}}",
   "UploadPDFFormOptionDescription": "Odaberite spreman PDF formular dostupan u {{productName}} i otpremite ga u prostoriju.",
   "VirtualDataRoomEmptyTitle": "Dobrodošli u Virtuelnu sobu za podatke"

@@ -612,10 +612,23 @@ class CreateEditRoomStore {
   };
 
   onCreateTemplateRoom = async (roomParams) => {
+    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
+
     this.filesStore.setRoomCreated(true);
 
-    const { roomId, tags, title, logo, roomType, copyLogo, color, cover } =
-      roomParams;
+    const {
+      roomId,
+      tags,
+      title,
+      logo,
+      roomType,
+      copyLogo,
+      color,
+      cover,
+      quota,
+    } = roomParams;
+
+    const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
 
     let isFinished = false;
     let errorMsg = false;
@@ -629,6 +642,9 @@ class CreateEditRoomStore {
       CopyLogo: copyLogo,
       color,
       cover,
+      ...(quotaLimit && {
+        quota: +quotaLimit,
+      }),
     };
 
     const room = await api.rooms.createRoomFromTemplate(data);

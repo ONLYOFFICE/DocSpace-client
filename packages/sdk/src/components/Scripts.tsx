@@ -28,28 +28,49 @@
 
 import Script from "next/script";
 
-let runtime = null;
-
-try {
-  runtime = require("../../../runtime.json");
-} catch (e) {
-  console.log(e);
+interface RuntimeConfig {
+  date: number;
+  checksums: Record<string, string>;
 }
 
-const hashDate = runtime ? runtime?.date : new Date().getTime();
+const getRuntimeConfig = (): {
+  runtime: Partial<RuntimeConfig>;
+  hashDate: number;
+} => {
+  let runtime: Partial<RuntimeConfig> = {};
+  const fallbackDate = new Date().getTime();
+
+  try {
+    runtime = require("../../../runtime.json");
+  } catch (e) {
+    console.warn("Failed to load runtime.json:", e);
+  }
+
+  return {
+    runtime,
+    hashDate: runtime.date || fallbackDate,
+  };
+};
+
+const { runtime, hashDate } = getRuntimeConfig();
 
 const Scripts = () => {
+  const getResourceHash = (resource: string): string => {
+    return runtime.checksums?.[resource] || String(hashDate);
+  };
+
   return (
     <>
       <Script
         id="browser-detector"
-        src={`/static/scripts/browserDetector.js?hash=${runtime?.checksums?.["browserDetector.js"] ?? hashDate}`}
+        src={`/static/scripts/browserDetector.js?hash=${getResourceHash("browserDetector.js")}`}
+        strategy="beforeInteractive"
       />
 
       <Script id="portal-config" strategy="beforeInteractive">
         {`
           console.log("It's SDK INIT");
-          fetch("/static/scripts/config.json?hash=${runtime?.checksums["config.json"] ?? hashDate}")
+          fetch("/static/scripts/config.json?hash=${getResourceHash("config.json")}")
             .then((response) => {
               if (!response.ok) {
                 throw new Error("HTTP error " + response.status);
@@ -65,6 +86,7 @@ const Scripts = () => {
               window.ClientConfig = {
                 errorOnLoad: e,
               };
+              console.error("Failed to load config:", e);
             });
           `}
       </Script>

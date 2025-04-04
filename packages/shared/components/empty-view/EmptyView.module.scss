@@ -170,7 +170,7 @@
   .arrowIcon {
     flex: 0 0 12px;
 
-    [dir="rtl"] & {
+    [data-dir="rtl"] & {
       transform: scaleX(-1);
     }
   }

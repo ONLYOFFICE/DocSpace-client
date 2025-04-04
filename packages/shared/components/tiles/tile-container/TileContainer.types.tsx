@@ -84,6 +84,7 @@ export type TileContainerProps = {
   infiniteGrid?: React.ComponentType<{
     children: React.ReactNode;
     isRooms?: boolean;
+    isTemplates?: boolean;
   }>;
   /** Custom heading for folders section */
   headingFolders?: React.ReactNode;

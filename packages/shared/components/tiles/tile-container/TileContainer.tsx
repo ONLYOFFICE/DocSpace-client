@@ -62,6 +62,7 @@ export const TileContainer = ({
       fileExst,
       id: itemId,
     } = item.props.item;
+
     if ((isFolder || itemId === -1) && !fileExst && !isRoom) {
       Folders.push(
         <div
@@ -177,6 +178,7 @@ export const TileContainer = ({
   );
 
   const isRooms = Rooms.length > 0;
+  const isTemplates = Templates.length > 0;
 
   return (
     <div
@@ -185,7 +187,9 @@ export const TileContainer = ({
       style={style}
     >
       {useReactWindow && InfiniteGrid ? (
-        <InfiniteGrid isRooms={isRooms}>{renderTile}</InfiniteGrid>
+        <InfiniteGrid isRooms={isRooms} isTemplates={isTemplates}>
+          {renderTile}
+        </InfiniteGrid>
       ) : (
         renderTile
       )}

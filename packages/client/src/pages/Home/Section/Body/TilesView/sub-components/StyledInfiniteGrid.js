@@ -48,7 +48,7 @@ const StyledCard = styled.div`
 const StyledItem = styled.div`
   display: grid;
   grid-template-columns: ${(props) =>
-    props.isRoom
+    props.isRoom || props.isTemplate
       ? "repeat(auto-fill, minmax(275px, 1fr))"
       : "repeat(auto-fill, minmax(216px, 1fr))"};
   gap: ${(props) => (props.isRoom ? "16px" : "14px 16px")};

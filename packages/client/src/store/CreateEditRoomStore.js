@@ -395,6 +395,7 @@ class CreateEditRoomStore {
     if (!isDeleteLogo && typeof icon.uploadedFile !== "string") {
       const roomLogo = await this.getRoomLogo(icon);
       roomData.logo = roomLogo;
+      roomData.copylogo = false;
     }
 
     let isCompleted = false;
@@ -532,7 +533,7 @@ class CreateEditRoomStore {
       ? !!logo?.original && !icon.uploadedFile
       : false;
 
-    const copyLogo =
+    let copyLogo =
       !isDeleteLogo &&
       icon.uploadedFile &&
       typeof icon.uploadedFile === "string";
@@ -541,6 +542,7 @@ class CreateEditRoomStore {
       if (icon.uploadedFile && typeof icon.uploadedFile !== "string") {
         const roomLogo = await this.getRoomLogo(icon);
         createRoomData.logo = roomLogo;
+        copyLogo = false;
       }
 
       withConfirm && this.setConfirmDialogIsLoading(true);

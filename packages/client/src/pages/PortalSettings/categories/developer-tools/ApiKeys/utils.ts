@@ -30,6 +30,8 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { TTranslation } from "@docspace/shared/types";
 import { TPermissionsList } from "./types";
 
+export const maxKeyLifetimeDays = 365;
+
 export enum PermissionGroup {
   profile = "profile",
   accounts = "accounts",

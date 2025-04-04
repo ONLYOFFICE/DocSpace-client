@@ -23,33 +23,53 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import type { TFile } from "@docspace/shared/api/files/types";
-import type { RoomsType } from "@docspace/shared/enums";
-import { HeaderProps } from "@docspace/shared/components/selector/Selector.types";
 
-export interface ShareCollectSelectorProps {
+import { useTranslation } from "react-i18next";
+
+import { Button, ButtonSize } from "../../components/button";
+import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+
+interface AssignRolesDialogProps {
   visible: boolean;
-  file: TFile;
-  createDefineRoomType: RoomsType;
-  onCloseActionProp?: () => void;
-  headerProps?: HeaderProps | {};
-  onCancel: VoidFunction;
+  onClose: VoidFunction;
+  onSubmit: VoidFunction;
+  roomName: string;
 }
 
-export interface InjectShareCollectSelectorProps
-  extends Pick<TStore["settingsStore"], "currentDeviceType">,
-    Pick<TStore["filesSettingsStore"], "getIcon">,
-    Pick<
-      TStore["dialogsStore"],
-      "conflictResolveDialogVisible" | "setAssignRolesDialogData"
-    >,
-    Pick<TStore["infoPanelStore"], "setIsMobileHidden">,
-    Pick<TStore["filesStore"], "setSelected">,
-    Pick<
-      TStore["uploadDataStore"],
-      "itemOperationToFolder" | "clearActiveOperations"
-    >,
-    Pick<
-      TStore["filesActionsStore"],
-      "setConflictDialogData" | "checkFileConflicts" | "openFileAction"
-    > {}
+export const AssignRolesDialog = ({
+  visible,
+  roomName,
+  onClose,
+  onSubmit,
+}: AssignRolesDialogProps) => {
+  const { t } = useTranslation("Common");
+
+  return (
+    <ModalDialog
+      autoMaxHeight
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.modal}
+    >
+      <ModalDialog.Header>{t("Common:AssignRoles")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        {t("Common:AssignRolesDescription", { roomName })}
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          primary
+          onClick={onSubmit}
+          label={t("Common:Assign")}
+          size={ButtonSize.normal}
+          scale
+        />
+        <Button
+          onClick={onClose}
+          label={t("Common:Later")}
+          size={ButtonSize.normal}
+          scale
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
+};

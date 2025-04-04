@@ -709,5 +709,8 @@
   "FormDataCollection": "Form data collection",
   "FormDataCollectionDescription": "Collect the completed form copies and data from them into XLSX for analyzing responses in Form Filling rooms.",
   "RoleBasedFilling": "Role-based filling",
-  "RoleBasedFillingDescription": "Fill out the original form by roles with other participants in VDR."
+  "RoleBasedFillingDescription": "Fill out the original form by roles with other participants in VDR.",
+  "Assign": "Assign",
+  "AssignRoles": "Assign roles?",
+  "AssignRolesDescription": "The form was successfully submitted to {{roomName}}. Assign roles to the chosen users to enable form filling. Do you want to proceed now or get back to it later?"
 }

@@ -708,7 +708,6 @@ class ContextOptionsStore {
     );
 
     refPage[FILLING_STATUS_ID] = true;
-    console.log("refPage", refPage);
   };
 
   onClickResetAndStartFilling = async (item) => {

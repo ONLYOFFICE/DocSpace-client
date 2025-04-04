@@ -289,6 +289,15 @@ class DialogsStore {
 
   isShareFormData = { visible: false, updateAccessLink: null, fileId: null };
 
+  assignRolesDialogData = {
+    /** @type {boolean} */
+    visible: false,
+    /** @type {string} */
+    roomName: "",
+    /** @type {import("@docspace/shared/api/files/types").TFile | null} */
+    file: null,
+  };
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -991,6 +1000,15 @@ class DialogsStore {
       visible,
       callback,
     };
+  };
+
+  /**
+   * @param {boolean} visible
+   * @param {string} [roomName = ""]
+   * @param {import("@docspace/shared/api/files/types").TFile} [file = null]
+   */
+  setAssignRolesDialogData = (visible, roomName = "", file = null) => {
+    this.assignRolesDialogData = { visible, roomName, file };
   };
 }
 

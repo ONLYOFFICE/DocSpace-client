@@ -23,33 +23,49 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import type { TFile } from "@docspace/shared/api/files/types";
-import type { RoomsType } from "@docspace/shared/enums";
-import { HeaderProps } from "@docspace/shared/components/selector/Selector.types";
 
-export interface ShareCollectSelectorProps {
-  visible: boolean;
-  file: TFile;
-  createDefineRoomType: RoomsType;
-  onCloseActionProp?: () => void;
-  headerProps?: HeaderProps | {};
-  onCancel: VoidFunction;
+import React from "react";
+import { inject, observer } from "mobx-react";
+
+import { AssignRolesDialog } from "@docspace/shared/dialogs/assign-roles-dialog";
+
+interface AssignRolesWrapperProps {
+  setAssignRolesDialogData: TStore["dialogsStore"]["setAssignRolesDialogData"];
+  assignRolesDialogData: TStore["dialogsStore"]["assignRolesDialogData"];
+  onClickStartFilling: TStore["contextOptionsStore"]["onClickStartFilling"];
 }
 
-export interface InjectShareCollectSelectorProps
-  extends Pick<TStore["settingsStore"], "currentDeviceType">,
-    Pick<TStore["filesSettingsStore"], "getIcon">,
-    Pick<
-      TStore["dialogsStore"],
-      "conflictResolveDialogVisible" | "setAssignRolesDialogData"
-    >,
-    Pick<TStore["infoPanelStore"], "setIsMobileHidden">,
-    Pick<TStore["filesStore"], "setSelected">,
-    Pick<
-      TStore["uploadDataStore"],
-      "itemOperationToFolder" | "clearActiveOperations"
-    >,
-    Pick<
-      TStore["filesActionsStore"],
-      "setConflictDialogData" | "checkFileConflicts" | "openFileAction"
-    > {}
+const AssignRolesWrapper = ({
+  assignRolesDialogData,
+  setAssignRolesDialogData,
+  onClickStartFilling,
+}: AssignRolesWrapperProps) => {
+  const { roomName, visible, file } = assignRolesDialogData;
+
+  const onClose = () => setAssignRolesDialogData(false);
+
+  const onSubmit = () => {
+    onClickStartFilling(file);
+    onClose();
+  };
+
+  return (
+    <AssignRolesDialog
+      visible={visible}
+      roomName={roomName}
+      onSubmit={onSubmit}
+      onClose={onClose}
+    />
+  );
+};
+
+export default inject<TStore>(({ dialogsStore, contextOptionsStore }) => {
+  const { assignRolesDialogData, setAssignRolesDialogData } = dialogsStore;
+  const { onClickStartFilling } = contextOptionsStore;
+
+  return {
+    assignRolesDialogData,
+    setAssignRolesDialogData,
+    onClickStartFilling,
+  };
+})(observer(AssignRolesWrapper as React.FC));

@@ -64,7 +64,8 @@ const ShareCollectSelector = inject<TStore>(
     filesStore,
   }) => {
     const { currentDeviceType } = settingsStore;
-    const { conflictResolveDialogVisible } = dialogsStore;
+    const { conflictResolveDialogVisible, setAssignRolesDialogData } =
+      dialogsStore;
     const { checkFileConflicts, setConflictDialogData, openFileAction } =
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
@@ -84,6 +85,7 @@ const ShareCollectSelector = inject<TStore>(
       setIsMobileHidden,
       setSelected,
       openFileAction,
+      setAssignRolesDialogData,
     };
   },
 )(
@@ -105,6 +107,7 @@ const ShareCollectSelector = inject<TStore>(
       headerProps = {},
       onCloseActionProp,
       onCancel,
+      setAssignRolesDialogData,
     }: ShareCollectSelectorProps & InjectShareCollectSelectorProps) => {
       const { t } = useTranslation(["Common", "Editor"]);
       const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
@@ -180,9 +183,20 @@ const ShareCollectSelector = inject<TStore>(
 
             openFileAction(selectedFolder, t);
 
-            await itemOperationToFolder(operationData).catch((error) => {
-              console.error(error);
-            });
+            const result = await itemOperationToFolder(operationData).catch(
+              (error) => {
+                console.error(error);
+              },
+            );
+
+            if (
+              result &&
+              result.files?.length === 1 &&
+              createDefineRoomType === RoomsType.VirtualDataRoom
+            ) {
+              const [file] = result.files;
+              setAssignRolesDialogData(true, selectedTreeNode.title, file);
+            }
           }
         } catch (e: unknown) {
           toastr.error(e as TData);

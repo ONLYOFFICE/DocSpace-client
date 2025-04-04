@@ -36,6 +36,7 @@ import { CategoryType, LinkType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
 import { ValidationStatus } from "@docspace/shared/enums";
+import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 class PublicRoomStore {
   externalLinks = [];
@@ -53,6 +54,8 @@ class PublicRoomStore {
   isLoaded = false;
 
   isLoading = false;
+
+  windowIsOpen = false;
 
   clientLoadingStore;
 
@@ -257,6 +260,46 @@ class PublicRoomStore {
 
   validatePublicRoomPassword = (key, passwordHash) => {
     return api.rooms.validatePublicRoomPassword(key, passwordHash);
+  };
+
+  getAuthWindow = () => {
+    return new Promise((res, rej) => {
+      try {
+        const path = combineUrl(
+          window.ClientConfig?.proxy?.url,
+          "/login?publicAuth=true",
+        );
+
+        const authModal = window.open(path, "_blank", "height=800, width=866");
+
+        const checkConnect = setInterval(() => {
+          if (!authModal || !authModal.closed) {
+            return;
+          }
+
+          clearInterval(checkConnect);
+
+          res(authModal);
+        }, 500);
+      } catch (error) {
+        rej(error);
+      }
+    });
+  };
+
+  onOpenSignInWindow = async () => {
+    if (this.windowIsOpen) return;
+
+    this.windowIsOpen = true;
+    await this.getAuthWindow();
+    this.windowIsOpen = false;
+
+    const isAuth = localStorage.getItem(PUBLIC_STORAGE_KEY);
+
+    if (isAuth) {
+      localStorage.removeItem(PUBLIC_STORAGE_KEY);
+      window.location.reload();
+    }
   };
 
   get isPublicRoom() {

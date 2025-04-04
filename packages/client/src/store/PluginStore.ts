@@ -40,6 +40,7 @@ import {
 } from "@docspace/shared/api/files/types";
 import { TAPIPlugin } from "@docspace/shared/api/plugins/types";
 import { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
+import { TTranslation } from "@docspace/shared/types";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -64,7 +65,6 @@ import {
 } from "../helpers/plugins/enums";
 
 import SelectedFolderStore from "./SelectedFolderStore";
-import { TTranslation } from "@docspace/shared/types";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -448,8 +448,6 @@ class PluginStore {
 
   activatePlugin = async (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
-
-    console.log("name");
 
     if (!plugin) return;
 

@@ -26,6 +26,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import isUndefined from "lodash/isUndefined";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
@@ -191,11 +192,16 @@ const ShareCollectSelector = inject<TStore>(
 
             if (
               result &&
-              result.files?.length === 1 &&
+              !isUndefined(result.files) &&
+              result.files.length === 1 &&
               createDefineRoomType === RoomsType.VirtualDataRoom
             ) {
-              const [file] = result.files;
-              setAssignRolesDialogData(true, selectedTreeNode.title, file);
+              const [resultFile] = result.files;
+              setAssignRolesDialogData(
+                true,
+                selectedTreeNode.title,
+                resultFile,
+              );
             }
           }
         } catch (e: unknown) {

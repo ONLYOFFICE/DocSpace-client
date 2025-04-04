@@ -46,6 +46,7 @@ import ProgressColorTheme from "./styled-components/progress";
 import VersionBadgeTheme from "./styled-components/versionBadge";
 import SubmenuTextTheme from "./styled-components/submenuText";
 import StyledIndexWrapper from "./sub-components/StyledIndexWrapper";
+import TextTheme from "./styled-components/text";
 
 const ColorTheme = forwardRef<
   HTMLDivElement,
@@ -210,7 +211,11 @@ const ColorTheme = forwardRef<
           />
         );
       }
-
+      case ThemeId.Text: {
+        return (
+          <TextTheme {...props} $currentColorScheme={currentColorScheme} />
+        );
+      }
       default:
         return null;
     }

@@ -24,22 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum ThemeId {
-  IconWrapper = "iconWrapper",
-  IconButton = "iconButton",
-  IconButtonPin = "iconButtonPin",
-  IconButtonMute = "iconButtonMute",
-  IconButtonCustomFilter = "iconButtonCustomFilter",
-  IndicatorFilterButton = "indicatorFilterButton",
-  FilterBlockItemTag = "filterBlockItemTag",
-  VersionBadge = "versionBadge",
-  LinkForgotPassword = "linkForgotPassword",
-  LoadingButton = "loadingButton",
-  InfoPanelToggle = "infoPanelToggle",
-  Link = "link",
-  IndicatorLoader = "indicatorLoader",
-  Progress = "progress",
-  SubmenuText = "submenuText",
-  IndexIconButton = "indexIconButton",
-  Text = "text",
+.container {
+  display: flex;
+  background: var(--payment-background-color);
+  min-height: 72px;
+  padding: 16px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  align-items: center;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eceef1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    path {
+      fill: #657077;
+    }
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  line-height: 16px;
+  color: #333333;
+}
+
+.balance {
+  font-size: 14px;
+  line-height: 16px;
+  color: #666666;
 }

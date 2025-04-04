@@ -25,14 +25,66 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { Tabs } from "@docspace/shared/components/tabs";
 
-import PaymentsEnterprise from "./Standalone";
+import config from "../../../../../package.json";
+// import PaymentsEnterprise from "./Standalone";
 import PaymentsSaaS from "./SaaS";
+import Wallet from "./Wallet";
 
-const PaymentsPage = (props) => {
-  const { standalone } = props;
+const PaymentsPage = () => {
+  // const { standalone } = props;
 
-  return standalone ? <PaymentsEnterprise /> : <PaymentsSaaS />;
+  const [currentTabId, setCurrentTabId] = useState();
+  const location = useLocation();
+  const navigate = useNavigate();
+  // const [isLoaded, setIsLoaded] = useState(false);
+  const { t } = useTranslation(["Payments"]);
+
+  const data = [
+    {
+      id: "portal-payments",
+      name: t("TariffPlan"),
+      content: <PaymentsSaaS />,
+    },
+    {
+      id: "wallet",
+      name: t("Wallet"),
+      content: <Wallet />,
+    },
+  ];
+
+  const onSelect = (e) => {
+    const url = `/portal-settings/payments/${e.id}`;
+
+    navigate(
+      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
+    );
+
+    //  setIsLoaded(false);
+  };
+
+  useEffect(() => {
+    const path = location.pathname;
+    const currentTab = data.find((item) => path.includes(item.id));
+    if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
+
+    // setIsLoaded(true);
+  }, [location.pathname]);
+
+  return (
+    <Tabs
+      items={data}
+      selectedItemId={currentTabId}
+      onSelect={(e) => onSelect(e)}
+      // stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+    />
+  );
+  // return standalone ? <PaymentsEnterprise /> : <PaymentsSaaS />;
 };
 
 export const Component = inject(({ settingsStore }) => {

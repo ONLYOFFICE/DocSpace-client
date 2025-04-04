@@ -24,22 +24,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum ThemeId {
-  IconWrapper = "iconWrapper",
-  IconButton = "iconButton",
-  IconButtonPin = "iconButtonPin",
-  IconButtonMute = "iconButtonMute",
-  IconButtonCustomFilter = "iconButtonCustomFilter",
-  IndicatorFilterButton = "indicatorFilterButton",
-  FilterBlockItemTag = "filterBlockItemTag",
-  VersionBadge = "versionBadge",
-  LinkForgotPassword = "linkForgotPassword",
-  LoadingButton = "loadingButton",
-  InfoPanelToggle = "infoPanelToggle",
-  Link = "link",
-  IndicatorLoader = "indicatorLoader",
-  Progress = "progress",
-  SubmenuText = "submenuText",
-  IndexIconButton = "indexIconButton",
-  Text = "text",
-}
+import React from "react";
+import { useTranslation, Trans } from "react-i18next";
+import { inject, observer } from "mobx-react";
+import { ReactSVG } from "react-svg";
+
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { Text } from "@docspace/shared/components/text";
+
+import WalletReactSvgUrl from "PUBLIC_DIR/images/icons/16/wallet.react.svg?url";
+
+import styles from "./WalletInfo.module.scss";
+
+type WalletInfoProps = {
+  balance?: {
+    currencyCode: string;
+    value: number;
+  };
+};
+
+const WalletInfo: React.FC<WalletInfoProps> = ({ balance }) => {
+  const { t } = useTranslation(["Payments", "Common"]);
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.icon}>
+        <ReactSVG src={WalletReactSvgUrl} />
+      </div>
+      <div className={styles.body}>
+        <Text className={styles.title} fontWeight="600" fontSize="14px">
+          {t("ProductNameWallet", { productName: t("Common:ProductName") })}
+        </Text>
+        <div>
+          <Trans
+            t={t}
+            i18nKey="Balance"
+            ns="Payments"
+            values={{ balance }}
+            components={{
+              1: (
+                <ColorTheme themeId={ThemeId.Text} fontWeight={600} isInline />
+              ),
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default inject(({}) => {
+  return {};
+})(observer(WalletInfo));

@@ -2048,3 +2048,11 @@
   --download-dialog-text-color: #{$gray-dark};
   --download-dialog-warning-color: #{$dark-error-status};
 }
+
+.light {
+  --payment-background-color: #{$gray-light};
+}
+
+.dark {
+  --payment-background-color: #{$dark-gray-light};
+}

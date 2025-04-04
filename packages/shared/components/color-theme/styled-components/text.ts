@@ -24,22 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const enum ThemeId {
-  IconWrapper = "iconWrapper",
-  IconButton = "iconButton",
-  IconButtonPin = "iconButtonPin",
-  IconButtonMute = "iconButtonMute",
-  IconButtonCustomFilter = "iconButtonCustomFilter",
-  IndicatorFilterButton = "indicatorFilterButton",
-  FilterBlockItemTag = "filterBlockItemTag",
-  VersionBadge = "versionBadge",
-  LinkForgotPassword = "linkForgotPassword",
-  LoadingButton = "loadingButton",
-  InfoPanelToggle = "infoPanelToggle",
-  Link = "link",
-  IndicatorLoader = "indicatorLoader",
-  Progress = "progress",
-  SubmenuText = "submenuText",
-  IndexIconButton = "indexIconButton",
-  Text = "text",
-}
+import styled from "styled-components";
+import { Text } from "../../text";
+import { TextTheme } from "../ColorTheme.types";
+import { TColorScheme } from "../../../themes";
+
+const TextThemeStyle = styled(Text)<
+  TextTheme & { $currentColorScheme?: TColorScheme }
+>`
+  color: ${(props) => props.$currentColorScheme?.main?.accent};
+  ${(props) => props.isInline && `display: inline;`}
+`;
+
+export default TextThemeStyle;

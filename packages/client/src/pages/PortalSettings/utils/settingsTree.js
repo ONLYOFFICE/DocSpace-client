@@ -584,6 +584,14 @@ export const settingsTree = [
         tKey: "Common:PaymentsTitle",
         isCategory: true,
       },
+      {
+        id: "portal-settings_catalog-wallet",
+        key: "9-1",
+        icon: "",
+        link: "wallet",
+        tKey: "Wallet",
+        isCategory: true,
+      },
     ],
   },
   {

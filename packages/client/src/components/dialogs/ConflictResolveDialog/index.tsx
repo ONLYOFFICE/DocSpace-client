@@ -31,7 +31,7 @@ import { inject, observer } from "mobx-react";
 import ConflictResolve from "@docspace/shared/dialogs/conflict-resolve";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { ConflictResolveType } from "@docspace/shared/enums";
+import { ConflictResolveType, RoomsType } from "@docspace/shared/enums";
 import type { TFile } from "@docspace/shared/api/files/types";
 
 import {
@@ -67,6 +67,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     cancelUploadAction,
     setFillPDFDialogData,
     setIsShareFormData,
+    setAssignRolesDialogData,
   } = props;
 
   const { t, ready } = useTranslation(["Common"]);
@@ -81,6 +82,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     isUploadConflict,
     selectedFolder,
     fromShareCollectSelector,
+    createDefineRoomType,
     destFolderInfo,
   } = conflictResolveDialogData;
 
@@ -170,7 +172,18 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
       }
 
       sessionStorage.setItem("filesSelectorPath", `${destFolderId}`);
-      await itemOperationToFolder(data);
+      const result = await itemOperationToFolder(data);
+
+      if (
+        result &&
+        selectedFolder &&
+        fromShareCollectSelector &&
+        result.files?.length === 1 &&
+        createDefineRoomType === RoomsType.VirtualDataRoom
+      ) {
+        const [resultFile] = result.files;
+        setAssignRolesDialogData(true, selectedFolder.title, resultFile);
+      }
     } catch (error: unknown) {
       console.error(error);
     }
@@ -338,6 +351,7 @@ export default inject<TStore>(
       setMoveToPublicRoomVisible,
       setFillPDFDialogData,
       setIsShareFormData,
+      setAssignRolesDialogData,
     } = dialogsStore;
 
     const { openFileAction } = filesActionsStore;
@@ -395,6 +409,7 @@ export default inject<TStore>(
       cancelUploadAction,
       setFillPDFDialogData,
       setIsShareFormData,
+      setAssignRolesDialogData,
     };
   },
 )(observer(ConflictResolveDialog));

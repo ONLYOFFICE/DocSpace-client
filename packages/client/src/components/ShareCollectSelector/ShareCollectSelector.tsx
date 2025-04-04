@@ -164,6 +164,7 @@ const ShareCollectSelector = inject<TStore>(
           folderTitle,
           selectedFolder,
           fromShareCollectSelector: true,
+          createDefineRoomType,
         };
 
         setIsRequestRunning(true);

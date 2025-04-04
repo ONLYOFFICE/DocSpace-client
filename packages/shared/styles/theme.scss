@@ -1963,12 +1963,12 @@
   --storage-management-region-description-color: #{$dark-gray-dark};
 }
 
-:global(.rtl) {
+.rtl {
   --input-text-align: right;
   --input-direction: rtl;
 }
 
-:global(.rtl) {
+.rtl {
   --modal-dialog-content-transform-x: -100%;
   --toast-transform: translate3d(-150%, 0, 0);
 }
@@ -2029,7 +2029,7 @@
   --tile-icon-button-hover-color: #{$light-blue-main};
 }
 
-:global(.rtl) {
+.rtl {
   --context-menu-header-text-margin: 0 8px 0 0;
   --context-menu-submenu-list-margin: -4px;
 

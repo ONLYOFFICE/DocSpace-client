@@ -355,6 +355,9 @@
   "DeleteSecretKey": "Delete secret key",
   "DeleteSecretKeyDescription": "The secret key will be deleted permanently. You will not be able to undo this action.",
   "SecretKeyCreated": "The secret key was successfully created",
+  "SecretKeyDeleted": "The secret key was successfully deleted",
+  "SecretKeyEdited": "The secret key was successfully edited",
   "APIKeyExpired": "This API key has expired and is no longer active",
-  "APIKeyDeactivated": "The key will be deactivated after: {{date}}"
+  "APIKeyDeactivated": "The key will be deactivated after: {{date}}",
+  "APIKeyMaxDays": "Days <1>(Max {{days}})</1>"
 }

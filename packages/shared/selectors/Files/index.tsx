@@ -97,6 +97,8 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     initSearchValue,
     initTotal,
     initHasNextPage,
+
+    applyFilterOption,
   } = props;
   const { t } = useTranslation(["Common"]);
   const { isFirstLoad, setIsFirstLoad, showLoader } =
@@ -231,6 +233,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     shareKey,
 
     withInit,
+    applyFilterOption,
   });
 
   const onClickBreadCrumb = React.useCallback(

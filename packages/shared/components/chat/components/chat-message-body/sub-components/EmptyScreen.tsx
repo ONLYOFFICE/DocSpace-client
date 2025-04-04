@@ -25,51 +25,45 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import classNames from "classnames";
 
-import { DeviceType } from "../../enums";
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
-import ChatHeader from "./components/сhat-header";
-import ChatBody from "./components/chat-body";
-import ChatMessageBody from "./components/chat-message-body";
-import ChatInput from "./components/chat-input";
+import styles from "../ChatMessageBody.module.scss";
 
-import { FilesStoreContextProvider } from "./store/filesStore";
-import { CurrentFlowStoreContextProvider } from "./store/currentFlowStore";
-import { MessageStoreContextProvider } from "./store/messageStore";
+import { Text } from "../../../../text";
+import { IconButton } from "../../../../icon-button";
 
-const Chat = ({
-  currentDeviceType,
-  displayFileExtension,
-  getIcon,
-  aiChatID,
-  aiSelectedFolder,
-}: {
-  currentDeviceType: DeviceType;
-  displayFileExtension: boolean;
-  getIcon: (size: number, fileExst: string) => string;
-  aiChatID: string;
-  aiSelectedFolder: string | number;
-}) => {
+const EmptyScreen = () => {
+  const [closed, setClosed] = React.useState(false);
+
   return (
-    <ChatBody>
-      <CurrentFlowStoreContextProvider aiChatID={aiChatID}>
-        <FilesStoreContextProvider aiChatID={aiChatID}>
-          <MessageStoreContextProvider
-            aiChatID={aiChatID}
-            aiSelectedFolder={aiSelectedFolder}
-          >
-            <ChatHeader />
-            <ChatMessageBody />
-            <ChatInput
-              currentDeviceType={currentDeviceType}
-              displayFileExtension={displayFileExtension}
-              getIcon={getIcon}
-            />
-          </MessageStoreContextProvider>
-        </FilesStoreContextProvider>
-      </CurrentFlowStoreContextProvider>
-    </ChatBody>
+    <>
+      <div
+        className={classNames(
+          styles.chatEmptyMessage,
+          styles.chatMessagePadding,
+          styles.chatMessageUser,
+          { [styles.closed]: closed },
+        )}
+      >
+        <Text fontSize="12px" lineHeight="16px" fontWeight={400}>
+          Use the power of artificial intelligence to quickly identify and
+          analyze data. Just ask a question and we will prepare the results for
+          you.
+        </Text>
+        <IconButton
+          iconName={CrossReactSvgUrl}
+          isClickable
+          size={12}
+          onClick={() => setClosed(true)}
+        />
+      </div>
+      <Text isBold fontSize="18px" lineHeight="24px">
+        How can i help?
+      </Text>
+    </>
   );
 };
 
-export default Chat;
+export default EmptyScreen;

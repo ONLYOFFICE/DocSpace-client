@@ -182,6 +182,11 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     aiChatIsVisible?: boolean;
     setAiChatIsVisible?: () => void;
     mainBarVisible?: boolean;
+
+    getIcon?: (size: number, fileExst: string) => string;
+    displayFileExtension?: boolean;
+    aiChatID?: string;
+    aiSelectedFolder?: string | number;
   };
 
 export type SectionContextMenuProps = {

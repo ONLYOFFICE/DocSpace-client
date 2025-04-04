@@ -26,12 +26,13 @@
 
 import React from "react";
 import { observer } from "mobx-react";
+import classNames from "classnames";
 
 import { Scrollbar } from "../../../scrollbar";
 
 import { useMessageStore } from "../../store/messageStore";
 
-import EmptyScreen from "./sub-components/empty-screen";
+import EmptyScreen from "./sub-components/EmptyScreen";
 import Message from "./sub-components/message";
 
 import styles from "./ChatMessageBody.module.scss";
@@ -39,17 +40,23 @@ import styles from "./ChatMessageBody.module.scss";
 const ChatMessageBody = () => {
   const { messages } = useMessageStore();
 
-  console.log(messages);
+  const isEmpty = messages.length === 0;
 
   return (
-    <div className={styles.chatMessageBody}>
+    <div
+      className={classNames(styles.chatMessageBody, {
+        [styles.empty]: isEmpty,
+      })}
+    >
       {messages.length === 0 ? (
         <EmptyScreen />
       ) : (
         <Scrollbar>
-          {messages.map((message) => (
-            <Message key={message.id} message={message} />
-          ))}
+          {messages.map((message) => {
+            if (message.message === "") return null;
+
+            return <Message key={message.id} message={message} />;
+          })}
         </Scrollbar>
       )}
     </div>

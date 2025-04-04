@@ -1,27 +1,34 @@
 import React from "react";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import FlowsApi from "../../../api/flows/flows.api";
-
-import { getCookie } from "../../../utils";
 
 import { ChatMessageType, PropertiesType } from "../types/chat";
 
 export default class MessageStore {
-  flowId: string;
+  flowId: string = "";
 
   messages: ChatMessageType[] = [];
+
+  aiSelectedFolder: string | number = "";
+
+  sessions: Map<string, ChatMessageType[]> = new Map();
 
   isLoading: boolean = true;
 
   isRequestRunning: boolean = false;
 
-  constructor(flowId: string) {
-    this.flowId = flowId;
+  constructor() {
     makeAutoObservable(this);
-
-    this.fetchMessages();
   }
+
+  setFlowId = (flowId: string) => {
+    this.flowId = flowId;
+  };
+
+  setAiSelectedFolder = (aiSelectedFolder: string | number) => {
+    this.aiSelectedFolder = aiSelectedFolder;
+  };
 
   fetchMessages = async () => {
     if (this.isRequestRunning) return;
@@ -29,9 +36,8 @@ export default class MessageStore {
 
     const messages = await FlowsApi.getMessages(this.flowId);
 
-    const messagesFromMessagesStore: ChatMessageType[] = messages
-      .filter((message) => message.flow_id === this.flowId)
-      .map((message) => {
+    const messagesFromMessagesStore: ChatMessageType[] = messages.map(
+      (message) => {
         let files = message.files;
         // Handle the "[]" case, empty string, or already parsed array
         if (Array.isArray(files)) {
@@ -61,17 +67,134 @@ export default class MessageStore {
           category: message.category || "",
           properties: (message.properties || {}) as PropertiesType,
         };
-      });
+      },
+    );
 
-    const finalChatHistory = [...messagesFromMessagesStore].sort((a, b) => {
+    // First sort by timestamp to get chronological order
+    const sortedByTime = [...messagesFromMessagesStore].sort((a, b) => {
       return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
     });
 
-    console.log("finalChatHistory");
+    // Then implement alternating pattern (user → AI → user → AI)
+    const finalChatHistory: ChatMessageType[] = [];
+    const userMessages = sortedByTime.filter((msg) => msg.isSend);
+    const aiMessages = sortedByTime.filter((msg) => !msg.isSend);
+
+    // Create pairs of user message followed by AI message
+    for (
+      let i = 0;
+      i < Math.max(userMessages.length, aiMessages.length);
+      i += 1
+    ) {
+      if (i < userMessages.length) {
+        finalChatHistory.push(userMessages[i]);
+      }
+
+      if (i < aiMessages.length) {
+        finalChatHistory.push(aiMessages[i]);
+      }
+    }
+
     this.messages = finalChatHistory;
 
     this.isLoading = false;
     this.isRequestRunning = false;
+  };
+
+  sendMessage = async (message: string) => {
+    if (this.isRequestRunning) return;
+    this.isRequestRunning = true;
+
+    try {
+      const response = await FlowsApi.buildFlow(this.flowId, {
+        inputs: {
+          input_value: message,
+          session: `folder-${this.aiSelectedFolder}`,
+        },
+      });
+
+      const jobId = response.job_id;
+
+      const textDecoder = new TextDecoder();
+
+      const eventsResponse = await FlowsApi.getJobEvents(jobId);
+
+      const reader = eventsResponse.getReader();
+
+      const stream = async () => {
+        const { done, value } = await reader.read();
+
+        if (done) {
+          return;
+        }
+
+        const decodedChunk = textDecoder.decode(value);
+        try {
+          if (decodedChunk.indexOf('"event": "add_message"') !== -1) {
+            const parsedChunk = JSON.parse(decodedChunk);
+
+            const data = parsedChunk.data;
+
+            runInAction(() => {
+              if (
+                this.messages.length &&
+                this.messages[this.messages.length - 1].id === data.id
+              ) {
+                this.messages[this.messages.length - 1] = {
+                  ...this.messages[this.messages.length - 1],
+                  message: data.text,
+                  content_blocks: data.content_blocks,
+                };
+
+                return;
+              }
+
+              this.messages = [
+                ...this.messages,
+                {
+                  ...data,
+                  message: data.text,
+                  isSend:
+                    !this.messages[0] ||
+                    data.sender === this.messages[0].sender_name,
+                },
+              ];
+            });
+          }
+
+          if (decodedChunk.indexOf('"event": "token"') !== -1) {
+            const parsedChunks = decodedChunk
+              .split("\n\n")
+              .filter(Boolean)
+              .map((chunk) => JSON.parse(chunk))
+              .map((c) => c.data.chunk)
+              .join("");
+
+            runInAction(() => {
+              this.messages[this.messages.length - 1].message += parsedChunks;
+            });
+          }
+
+          if (decodedChunk.indexOf('"event": "end"') !== -1) {
+            runInAction(() => {
+              this.isRequestRunning = false;
+            });
+          } else {
+            stream();
+          }
+        } catch (e) {
+          console.log(e);
+          console.log("++++++++ERROR++++++++");
+          console.log("Parsing failed");
+          console.log("-------------------");
+          console.log(decodedChunk);
+        }
+      };
+
+      stream();
+    } catch (e) {
+      console.log(e);
+    }
   };
 }
 
@@ -81,16 +204,21 @@ export const MessageStoreContext = React.createContext<MessageStore>(
 
 export const MessageStoreContextProvider = ({
   children,
+  aiChatID,
+  aiSelectedFolder,
 }: {
   children: React.ReactNode;
+  aiChatID: string;
+  aiSelectedFolder: string | number;
 }) => {
-  const flowId = getCookie("docspace_ai_chat");
-
-  const store = React.useMemo(() => new MessageStore(flowId || ""), [flowId]);
+  const store = React.useMemo(() => new MessageStore(), []);
 
   React.useEffect(() => {
+    store.setFlowId(aiChatID);
+    store.setAiSelectedFolder(aiSelectedFolder);
+
     store.fetchMessages();
-  }, [store]);
+  }, [aiChatID, store, aiSelectedFolder]);
 
   return (
     <MessageStoreContext.Provider value={store}>

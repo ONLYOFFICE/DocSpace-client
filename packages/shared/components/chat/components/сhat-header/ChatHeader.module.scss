@@ -1,0 +1,63 @@
+@import "../../../../styles/variables/devices.scss";
+@import "../../../../styles/mixins";
+
+.chatHeader {
+  width: 100%;
+  height: 64px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  @include tablet-and-below {
+    padding: 16px;
+  }
+
+  .selectChat {
+    width: 32px;
+    height: 32px;
+
+    box-sizing: border-box;
+
+    border-radius: 50%;
+
+    background-color: #f8f9f9;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+  }
+
+  .createChat {
+    width: fit-content;
+    height: 32px;
+
+    box-sizing: border-box;
+
+    border-radius: 16px;
+
+    padding: 8px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    background-color: #f8f9f9;
+
+    cursor: pointer;
+
+    svg {
+      path {
+        fill: #657077;
+      }
+    }
+  }
+}

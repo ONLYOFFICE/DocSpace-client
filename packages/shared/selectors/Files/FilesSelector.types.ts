@@ -37,7 +37,12 @@ import {
   TFolder,
   TFolderSecurity,
 } from "../../api/files/types";
-import { DeviceType, FolderType, RoomsType } from "../../enums";
+import {
+  ApplyFilterOption,
+  DeviceType,
+  FolderType,
+  RoomsType,
+} from "../../enums";
 import { TRoom, TRoomSecurity } from "../../api/rooms/types";
 import { Nullable } from "../../types";
 
@@ -68,7 +73,7 @@ export type UseSocketHelperProps = {
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
-  filterParam?: string;
+  filterParam?: string | number;
   withCreate: boolean;
 };
 
@@ -139,6 +144,8 @@ export type UseFilesHelpersProps = {
   setSelectedItemType: (value?: "rooms" | "files") => void;
 
   withInit?: boolean;
+
+  applyFilterOption?: ApplyFilterOption;
 };
 
 export type TUseInputItemHelper = {
@@ -190,7 +197,7 @@ export type FilesSelectorProps = TSelectorHeader &
     | { getIcon?: never; filesSettings: TFilesSettings }
   ) & {
     disabledItems: (string | number)[];
-    filterParam?: string;
+    filterParam?: string | number;
     withoutBackButton: boolean;
     withBreadCrumbs: boolean;
     withSearch: boolean;
@@ -258,4 +265,6 @@ export type FilesSelectorProps = TSelectorHeader &
     formProps?: FormPropsType;
     withPadding?: boolean;
     checkCreating?: boolean;
+
+    applyFilterOption?: ApplyFilterOption;
   };

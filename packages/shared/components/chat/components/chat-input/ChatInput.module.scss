@@ -1,31 +1,51 @@
+@import "../../../../styles/variables/devices.scss";
+@import "../../../../styles/mixins.scss";
+
 .chatInput {
   width: 100%;
+  max-width: 740px;
 
   position: relative;
 
   display: flex;
   flex-direction: column;
 
+  box-sizing: border-box;
+
+  padding: 0 20px;
+
   textarea {
     padding: 0;
+    background-color: #f8f9f9;
+  }
+
+  @include tablet-and-below {
+    padding: 0 16px;
   }
 }
 
 .chatInputTextAreaWrapper {
-  min-height: 126px !important;
-  padding: 16px 16px 48px;
-  max-height: 233px !important;
+  padding: 6px 8px 44px;
+
+  min-height: 116px !important;
+  max-height: 172px !important;
+
+  background-color: #f8f9f9;
+  border: none;
 }
 
 .chatInputTextAreaWrapperWithFiles {
-  padding: 16px 16px 134px;
-  min-height: 202px !important;
-  max-height: 311px !important;
+  padding: 44px 8px 44px;
+  min-height: 160px !important;
+  max-height: 216px !important;
+
+  background-color: #f8f9f9;
+  border: none;
 }
 
 .chatInputTextArea {
   min-height: 56px !important;
-  max-height: 201px !important;
+  max-height: 112px !important;
 }
 
 .chatInputButtons {
@@ -36,19 +56,23 @@
 
   position: absolute;
 
-  bottom: 8px;
-  padding: 0 16px;
+  bottom: 6px;
+  padding: 0 8px;
 
   box-sizing: border-box;
 
-  width: 100%;
+  width: calc(100% - 40px);
+
+  @include tablet-and-below {
+    width: calc(100% - 32px);
+  }
 }
 
 .chatInputButtonsFile {
   width: 32px;
   height: 32px;
 
-  border: 1px solid #858585;
+  border: 1px solid #d0d5da;
 
   border-radius: 3px;
 
@@ -57,4 +81,66 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  svg {
+    path {
+      fill: #657077 !important;
+    }
+  }
+}
+
+.chatInputButtonsSend {
+  border: none;
+
+  background-color: var(--accent-main);
+
+  cursor: pointer;
+
+  svg {
+    path {
+      fill: #ffffff !important;
+    }
+  }
+
+  &.disabled {
+    background-color: #d0d5da;
+
+    cursor: not-allowed;
+  }
+}
+
+.filePreview {
+  position: absolute;
+
+  top: 6px;
+
+  margin: 0 8px;
+
+  height: 32px;
+
+  border: 1px solid #eceef1;
+
+  background-color: #ffffff;
+
+  border-radius: 6px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  padding-inline-end: 8px;
+
+  .imageWrapper {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .removeButton {
+    margin-left: 8px;
+  }
 }

@@ -37,6 +37,7 @@ import { TViewAs } from "../../../types";
 import { Portal } from "../../portal";
 import { IconButton } from "../../icon-button";
 import { Text } from "../../text";
+import Chat from "../../chat";
 
 import styles from "../Section.module.scss";
 
@@ -90,6 +91,10 @@ type ChatWidgetProps = {
   anotherDialogOpen: boolean;
   viewAs: TViewAs;
   currentDeviceType: DeviceType;
+  getIcon: (size: number, fileExst: string) => string;
+  displayFileExtension: boolean;
+  aiChatID: string;
+  aiSelectedFolder: string | number;
 };
 
 export const ChatWidget = memo(
@@ -99,13 +104,23 @@ export const ChatWidget = memo(
     anotherDialogOpen,
     viewAs,
     currentDeviceType,
+    getIcon,
+    displayFileExtension,
+    aiChatID,
+    aiSelectedFolder,
   }: ChatWidgetProps) => {
     const [isFullScreen, setIsFullScreen] = useState(false);
 
     useEffect(() => {
       const onMouseDown = (e: MouseEvent) => {
         const target = e.target as HTMLElement;
-        if (target?.id === "chatPanelWrapper") setIsVisible?.(false);
+
+        if (
+          !target?.closest(".chat-panel") &&
+          !target?.closest(".backdrop-active") &&
+          !target?.closest(".aside")
+        )
+          setIsVisible?.(false);
       };
 
       if (viewAs === "row" || currentDeviceType !== DeviceType.desktop)
@@ -123,7 +138,7 @@ export const ChatWidget = memo(
 
     const panel = (
       <div
-        className={classNames(styles.chatPanel, {
+        className={classNames("chat-panel", styles.chatPanel, {
           [styles.fullScreen]: isFullScreen,
         })}
       >
@@ -133,7 +148,13 @@ export const ChatWidget = memo(
           onClose={onClose}
           isMobile={currentDeviceType === DeviceType.mobile}
         />
-        Work
+        <Chat
+          currentDeviceType={currentDeviceType}
+          getIcon={getIcon}
+          displayFileExtension={displayFileExtension}
+          aiChatID={aiChatID}
+          aiSelectedFolder={aiSelectedFolder}
+        />
       </div>
     );
 

@@ -127,6 +127,11 @@ const Section = (props: SectionProps) => {
     aiChatIsVisible,
     setAiChatIsVisible,
     mainBarVisible,
+
+    getIcon,
+    displayFileExtension,
+    aiChatID,
+    aiSelectedFolder,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -329,12 +334,15 @@ const Section = (props: SectionProps) => {
         </SectionContainer>
 
         <ChatWidget
-          viewAs={viewAs}
-          isVisible={aiChatIsVisible}
-          setIsVisible={setAiChatIsVisible}
-          chatFiles={chatFiles}
-          anotherDialogOpen={anotherDialogOpen}
-          currentDeviceType={currentDeviceType}
+          viewAs={viewAs!}
+          isVisible={aiChatIsVisible!}
+          setIsVisible={setAiChatIsVisible!}
+          anotherDialogOpen={anotherDialogOpen!}
+          currentDeviceType={currentDeviceType!}
+          getIcon={getIcon!}
+          displayFileExtension={displayFileExtension!}
+          aiChatID={aiChatID!}
+          aiSelectedFolder={aiSelectedFolder!}
         />
 
         {isInfoPanelAvailable ? (

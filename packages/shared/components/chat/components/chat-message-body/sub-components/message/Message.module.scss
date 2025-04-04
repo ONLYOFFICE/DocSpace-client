@@ -8,19 +8,15 @@
   align-items: start;
   justify-content: start;
 
-  gap: 16px;
+  gap: 24px;
 
   margin-bottom: 32px;
 
-  padding: 16px 16px 24px;
+  padding: 8px 12px;
 
   box-sizing: border-box;
 
   border-radius: 6px;
-
-  &:hover {
-    background-color: #242424;
-  }
 
   position: relative;
 

@@ -2,6 +2,8 @@ import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 
+import { Text } from "../../../../../../text";
+
 import Code from "./Code";
 // import CodeTabsComponent from "../../../../../../components/core/codeTabsComponent/ChatCodeTabComponent";
 
@@ -28,7 +30,16 @@ export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
         rehypePlugins={[rehypeRaw]}
         components={{
           p({ node, ...props }) {
-            return <span className="w-fit max-w-full">{props.children}</span>;
+            return (
+              <Text
+                fontSize="12px"
+                lineHeight="16px"
+                fontWeight={400}
+                color="#555F65"
+              >
+                {props.children}
+              </Text>
+            );
           },
           ol({ node, ...props }) {
             return <ol className="max-w-full">{props.children}</ol>;

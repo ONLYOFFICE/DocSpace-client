@@ -28,33 +28,45 @@ import React from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
 
-import DocumentReactSvgUrl from "PUBLIC_DIR/images/document.react.svg?url";
+import SelectReactSvgUrl from "PUBLIC_DIR/images/select.react.svg?url";
+import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
+
+import { DeviceType } from "../../../../enums";
 
 import { Textarea } from "../../../textarea";
-import { Button, ButtonSize } from "../../../button";
 import { IconButton } from "../../../icon-button";
 
-import styles from "./ChatInput.module.scss";
 import { useFilesStore } from "../../store/filesStore";
+import { useMessageStore } from "../../store/messageStore";
 
-import FilePreview from "./file-preview";
+import FilesSelector from "./components/FileSelector";
+import FilePreview from "./components/FilePreview";
 
-const ChatInput = () => {
-  const { files, handleFiles } = useFilesStore();
+import styles from "./ChatInput.module.scss";
+
+const ChatInput = ({
+  currentDeviceType,
+  displayFileExtension,
+  getIcon,
+}: {
+  currentDeviceType: DeviceType;
+  displayFileExtension: boolean;
+  getIcon: (size: number, fileExst: string) => string;
+}) => {
+  const { file } = useFilesStore();
+  const { sendMessage, isRequestRunning } = useMessageStore();
 
   const [value, setValue] = React.useState("");
-
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [showSelector, setShowSelector] = React.useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
 
-  const handleFileClick = () => {
-    inputRef.current?.click();
+  const toggleSelector = () => {
+    setShowSelector((prev) => !prev);
   };
-
-  const withFiles = files.length > 0;
+  const withFile = file !== undefined;
 
   return (
     <div className={classNames(styles.chatInput)}>
@@ -64,39 +76,48 @@ const ChatInput = () => {
         isFullHeight
         className={styles.chatInputTextArea}
         wrapperClassName={classNames({
-          [styles.chatInputTextAreaWrapperWithFiles]: withFiles,
-          [styles.chatInputTextAreaWrapper]: !withFiles,
+          [styles.chatInputTextAreaWrapperWithFiles]: withFile,
+          [styles.chatInputTextAreaWrapper]: !withFile,
         })}
         placeholder="Send a message..."
         isChatMode
       />
-      <FilePreview />
+      <FilePreview
+        getIcon={getIcon}
+        displayFileExtension={displayFileExtension}
+      />
       <div className={styles.chatInputButtons}>
         <IconButton
-          iconName={DocumentReactSvgUrl}
+          iconName={SelectReactSvgUrl}
           size={16}
           isClickable
-          onClick={handleFileClick}
+          onClick={toggleSelector}
           className={styles.chatInputButtonsFile}
         />
 
-        <Button
-          label="Send"
-          size={ButtonSize.small}
+        <IconButton
+          iconName={SendReactSvgUrl}
+          size={16}
+          isClickable
           onClick={() => {
-            console.log("Send");
+            sendMessage(value);
+            setValue("");
           }}
+          className={classNames(
+            styles.chatInputButtonsFile,
+            styles.chatInputButtonsSend,
+            { [styles.disabled]: !value || isRequestRunning },
+          )}
+          isDisabled={!value || isRequestRunning}
         />
       </div>
-
-      <input
-        type="file"
-        onChange={(e) => handleFiles(e.target.files as FileList)}
-        hidden
-        style={{ display: "none" }}
-        ref={inputRef}
-        accept="image/png, image/jpeg"
-      />
+      {showSelector ? (
+        <FilesSelector
+          showSelector={showSelector}
+          toggleSelector={toggleSelector}
+          currentDeviceType={currentDeviceType}
+        />
+      ) : null}
     </div>
   );
 };

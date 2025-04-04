@@ -3,36 +3,29 @@ import { makeAutoObservable } from "mobx";
 
 import FlowsApi from "../../../api/flows/flows.api";
 
-import { getCookie } from "../../../utils";
-
 import { FlowType } from "../types/flow";
 
 export default class CurrentFlowStore {
   flow: FlowType | null = null;
 
-  flowId: string;
+  flowId: string = "";
 
   messages: unknown[] = [];
 
   isLoading: boolean = true;
 
-  constructor(flowId: string) {
-    this.flowId = flowId;
+  constructor() {
     makeAutoObservable(this);
   }
 
-  setFlow = (flow: FlowType | null) => {
-    this.flow = flow;
-
-    this.fetchMessages();
+  setFlowId = (flowId: string) => {
+    this.flowId = flowId;
   };
 
-  fetchMessages = async () => {
-    const messages = await FlowsApi.getMessages(this.flowId);
+  fetchFlow = async () => {
+    const flow = await FlowsApi.getFlow(this.flowId);
 
-    this.messages = messages as unknown[];
-
-    this.isLoading = false;
+    this.flow = flow as FlowType;
   };
 }
 
@@ -42,19 +35,17 @@ export const CurrentFlowStoreContext = React.createContext<CurrentFlowStore>(
 
 export const CurrentFlowStoreContextProvider = ({
   children,
+  aiChatID,
 }: {
   children: React.ReactNode;
+  aiChatID: string;
 }) => {
-  const flowId = getCookie("docspace_ai_chat");
-
-  const store = React.useMemo(
-    () => new CurrentFlowStore(flowId || ""),
-    [flowId],
-  );
+  const store = React.useMemo(() => new CurrentFlowStore(), []);
 
   React.useEffect(() => {
-    store.fetchMessages();
-  }, [store]);
+    store.setFlowId(aiChatID);
+    store.fetchFlow();
+  }, [aiChatID, store]);
 
   return (
     <CurrentFlowStoreContext.Provider value={store}>

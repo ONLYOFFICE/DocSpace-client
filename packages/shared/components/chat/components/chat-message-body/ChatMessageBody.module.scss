@@ -1,12 +1,116 @@
+@import "../../../../styles/variables/devices.scss";
+@import "../../../../styles/mixins";
+
 .chatMessageBody {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   height: 100%;
   max-height: 100%;
   width: 100%;
+  max-width: 740px;
+
+  &.empty {
+    max-height: 192px;
+  }
 
   overflow: hidden;
 
-  gap: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  padding-top: 20px;
+
+  @include tablet-and-below {
+    padding-top: 16px;
+  }
+}
+
+.chatMessageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  gap: 24px;
+
+  width: 100%;
+}
+
+.chatEmptyMessage {
+  display: grid;
+  grid-template-columns: 1fr 16px;
+
+  margin-bottom: 32px !important;
+
+  gap: 12px;
+
+  margin: 0 20px;
+
+  padding: 12px 16px;
+
+  border-radius: 6px;
+
+  @include tablet-and-below {
+    margin: 0 16px;
+  }
+
+  &.closed {
+    visibility: hidden;
+  }
+}
+
+.chatMessagePadding {
+  padding: 8px 12px;
+}
+
+.chatMessageUser {
+  background-color: rgba(71, 129, 209, 0.1);
+}
+
+.chatMessageAI {
+  background-color: #f3f4f4;
+}
+
+.chatMessageBorderRadius {
+  border-radius: 16px;
+}
+
+.message {
+  width: 100%;
+
+  height: auto;
+
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: start;
+
+  gap: 8px;
+
+  padding-inline-start: 20px;
+  padding-inline-end: 3px;
+
+  box-sizing: border-box;
+
+  border-radius: 6px;
+
+  position: relative;
+
+  user-select: text;
+
+  margin-bottom: 24px;
+
+  &.userMessage {
+    flex-direction: row-reverse;
+    justify-content: end;
+  }
+}
+
+.aiAvatar {
+  width: 16px;
+  height: 16px;
+
+  align-self: center;
 }

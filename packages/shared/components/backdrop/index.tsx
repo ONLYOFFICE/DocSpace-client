@@ -93,9 +93,11 @@ const Backdrop: React.FC<BackdropProps> = ({
 
   const handleTouch = React.useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
+      console.log("handle");
       if (!isModalDialog) {
         e.preventDefault();
       }
+
       onClick?.(e as unknown as React.MouseEvent);
     },
     [isModalDialog, onClick],

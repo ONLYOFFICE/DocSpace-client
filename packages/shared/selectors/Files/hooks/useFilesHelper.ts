@@ -86,6 +86,8 @@ const useFilesHelper = ({
   setSelectedItemId,
   setSelectedItemType,
   shareKey,
+
+  applyFilterOption,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -147,7 +149,7 @@ const useFilesHelper = ({
       filter.applyFilterOption = null;
       filter.withSubfolders = false;
       if (filterParam) {
-        filter.applyFilterOption = ApplyFilterOption.Files;
+        filter.applyFilterOption = applyFilterOption ?? ApplyFilterOption.Files;
         switch (filterParam) {
           case FilesSelectorFilterTypes.DOCX:
             filter.extension = FilesSelectorFilterTypes.DOCX;
@@ -453,6 +455,7 @@ const useFilesHelper = ({
       setSelectedItemId,
       rootThirdPartyId,
       shareKey,
+      applyFilterOption,
     ],
   );
 

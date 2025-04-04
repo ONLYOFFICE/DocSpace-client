@@ -1,119 +1,23 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
-import ShortUniqueId from "short-unique-id";
 
-import FlowsApi from "../../../api/flows/flows.api";
-import { getCookie } from "../../../utils";
-
-import { toastr } from "../../toast";
-
-import { FilePreviewType } from "../types/file";
+import { TSelectedFileInfo } from "../../../selectors/Files/FilesSelector.types";
 
 export default class FilesStore {
-  files: FilePreviewType[] = [];
+  file: TSelectedFileInfo | undefined;
 
-  flowId: string;
+  flowId: string = "";
 
-  constructor(flowId: string) {
-    this.flowId = flowId;
+  constructor() {
     makeAutoObservable(this);
   }
 
-  setFiles = (files: FilePreviewType[]) => {
-    this.files = files;
+  setFlowId = (flowId: string) => {
+    this.flowId = flowId;
   };
 
-  addFile = (file: FilePreviewType) => {
-    this.files = [...this.files, file];
-  };
-
-  updateFile = (file: FilePreviewType) => {
-    this.files = this.files.map((f) => (f.id === file.id ? file : f));
-  };
-
-  removeFile = (id: string) => {
-    this.files = this.files.filter((file) => file.id !== id);
-  };
-
-  clearFiles = () => {
-    this.files = [];
-  };
-
-  handleFiles = async (uploadedFiles: FileList) => {
-    if (uploadedFiles) {
-      const file = uploadedFiles[0];
-
-      const uid = new ShortUniqueId();
-      const newId = uid.randomUUID(3);
-
-      const type = file.type.split("/")[0];
-      const blob = file;
-
-      this.addFile({
-        file: blob,
-        loading: true,
-        error: false,
-        id: newId,
-        type,
-      });
-
-      const formData = new FormData();
-      formData.append("file", blob);
-
-      try {
-        const data = await FlowsApi.uploadFile(formData, this.flowId);
-
-        this.updateFile({
-          file: blob,
-          loading: false,
-          error: false,
-          id: newId,
-          type,
-          path: data.file_path,
-        });
-      } catch (error) {
-        toastr.error(error as unknown as string);
-        this.updateFile({
-          file: blob,
-          loading: false,
-          error: true,
-          id: newId,
-          type,
-        });
-      }
-
-      // mutate(
-      //   { file: blob, id: currentFlowId },
-      //   {
-      //     onSuccess: (data) => {
-      //       setFiles((prev) => {
-      //         const newFiles = [...prev];
-      //         const updatedIndex = newFiles.findIndex(
-      //           (file) => file.id === newId,
-      //         );
-      //         newFiles[updatedIndex].loading = false;
-      //         newFiles[updatedIndex].path = data.file_path;
-      //         return newFiles;
-      //       });
-      //     },
-      //     onError: (error) => {
-      //       setFiles((prev) => {
-      //         const newFiles = [...prev];
-      //         const updatedIndex = newFiles.findIndex(
-      //           (file) => file.id === newId,
-      //         );
-      //         newFiles[updatedIndex].loading = false;
-      //         newFiles[updatedIndex].error = true;
-      //         return newFiles;
-      //       });
-      //       setErrorData({
-      //         title: "Error uploading file",
-      //         list: [error.response?.data?.detail],
-      //       });
-      //     },
-      //   },
-      // );
-    }
+  setFile = (file?: TSelectedFileInfo) => {
+    this.file = file;
   };
 }
 
@@ -121,11 +25,16 @@ export const FilesStoreContext = React.createContext<FilesStore>(undefined!);
 
 export const FilesStoreContextProvider = ({
   children,
+  aiChatID,
 }: {
   children: React.ReactNode;
+  aiChatID: string;
 }) => {
-  const flowId = getCookie("docspace_ai_chat");
-  const store = React.useMemo(() => new FilesStore(flowId || ""), [flowId]);
+  const store = React.useMemo(() => new FilesStore(), []);
+
+  React.useEffect(() => {
+    store.setFlowId(aiChatID);
+  }, [aiChatID, store]);
 
   return (
     <FilesStoreContext.Provider value={store}>

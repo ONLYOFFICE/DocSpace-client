@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosInstance, ResponseType } from "axios";
 import {
   Flow,
   FlowsFolder,
@@ -214,42 +214,6 @@ class FlowsApi {
     };
   }
 
-  async simpleRunFlow(
-    id: string,
-    inputValue: string,
-    inputType: string,
-    outputType: string,
-    tweaks?: Tweaks,
-  ): Promise<SimpleRunFlowResponse> {
-    try {
-      if (!id) {
-        throw new Error("Invalid flow: missing required fields");
-      }
-
-      const endpoint = `/run/${id}`;
-
-      const payload = {
-        input_value: inputValue,
-        output_type: outputType,
-        input_type: inputType,
-        ...(tweaks ? { tweaks } : {}),
-      };
-
-      const response = await this.api.post(endpoint, JSON.stringify(payload));
-
-      if ((response.data as unknown as { error: string }).error) {
-        throw new Error(
-          `Flow execution failed: ${(response.data as unknown as { error: string }).error}`,
-        );
-      }
-
-      return response.data as unknown as SimpleRunFlowResponse;
-    } catch (e) {
-      console.log(e);
-      throw e;
-    }
-  }
-
   async runFlow(
     flow: Flow,
     inputValue: string | unknown = "",
@@ -303,13 +267,21 @@ class FlowsApi {
     }
   }
 
-  static getAPI(isV2: boolean = false): AxiosInstance {
+  static getAPI(
+    isV2: boolean = false,
+    isStream: boolean = false,
+  ): AxiosInstance {
     const xApiKey = getCookie("chat_api_key");
     const accessToken = getCookie("access_token_lf");
 
-    const config: { baseURL: string; headers: Record<string, string> } = {
+    const config: {
+      baseURL: string;
+      headers: Record<string, string>;
+      responseType: ResponseType;
+    } = {
       baseURL: isV2 ? "/onlyflow/api/v2" : "/onlyflow/api/v1",
       headers: { "Content-Type": "application/json" },
+      responseType: "json",
     };
 
     if (xApiKey) {
@@ -320,7 +292,13 @@ class FlowsApi {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
 
-    return axios.create(config);
+    if (isStream) {
+      config.responseType = "stream";
+    }
+
+    const instance = axios.create(config);
+
+    return instance;
   }
 
   static async uploadFile(
@@ -335,10 +313,87 @@ class FlowsApi {
 
   static async getMessages(flowId: string): Promise<Message[]> {
     const response: { data: unknown } = await FlowsApi.getAPI().get(
-      `monitor/messages?flowId=${flowId}`,
+      `monitor/messages?flow_id=${flowId}`,
     );
 
     return response.data as Message[];
+  }
+
+  static async getFlow(flowId: string): Promise<Flow> {
+    const response: { data: unknown } = await FlowsApi.getAPI().get(
+      `flows/${flowId}`,
+    );
+
+    return response.data as Flow;
+  }
+
+  static async buildFlow(
+    flowId: string,
+    data: object,
+  ): Promise<{ job_id: string }> {
+    const response: { data: { job_id: string } } = await FlowsApi.getAPI().post(
+      `build/${flowId}/flow`,
+      JSON.stringify(data),
+    );
+
+    return response.data as { job_id: string };
+  }
+
+  static async getJobEvents(
+    jobId: string,
+  ): Promise<ReadableStream<Uint8Array>> {
+    const xApiKey = getCookie("chat_api_key");
+
+    const response = await fetch(
+      `/onlyflow/api/v1/build/${jobId}/events?stream=true`,
+      {
+        headers: {
+          "x-api-key": xApiKey!,
+          Connection: "close",
+        },
+      },
+    );
+
+    return response.body as ReadableStream<Uint8Array>;
+  }
+
+  static async simpleRunFlow(
+    id: string,
+    inputValue: string,
+    inputType: string,
+    outputType: string,
+    tweaks?: Tweaks,
+  ): Promise<SimpleRunFlowResponse> {
+    try {
+      if (!id) {
+        throw new Error("Invalid flow: missing required fields");
+      }
+
+      const endpoint = `/run/${id}`;
+
+      const payload = {
+        input_value: inputValue,
+        output_type: outputType,
+        input_type: inputType,
+        ...(tweaks ? { tweaks } : {}),
+      };
+
+      const response = await FlowsApi.getAPI().post(
+        endpoint,
+        JSON.stringify(payload),
+      );
+
+      if ((response.data as unknown as { error: string }).error) {
+        throw new Error(
+          `Flow execution failed: ${(response.data as unknown as { error: string }).error}`,
+        );
+      }
+
+      return response.data as unknown as SimpleRunFlowResponse;
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
   }
 
   setErrorHandler(handler: (error: unknown) => void): void {

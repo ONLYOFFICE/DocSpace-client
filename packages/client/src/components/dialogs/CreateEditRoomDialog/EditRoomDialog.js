@@ -265,8 +265,8 @@ const EditRoomDialog = ({
         </ModalDialog.Container>
       ) : null}
 
-      <ModalDialog.Container>
-        {addUsersPanelVisible ? (
+      {addUsersPanelVisible ? (
+        <ModalDialog.Container>
           <TemplateAccessSelector
             roomId={item.id}
             onSubmit={onSubmitItems}
@@ -275,7 +275,9 @@ const EditRoomDialog = ({
             checkIfUserInvited={checkIfUserInvited}
             onCloseClick={onClose}
           />
-        ) : (
+        </ModalDialog.Container>
+      ) : changeRoomOwnerIsVisible ? null : (
+        <ModalDialog.Container>
           <TemplateAccessSettingsPanel
             templateItem={item}
             setUsersPanelIsVisible={setAddUsersPanelVisible}
@@ -289,8 +291,8 @@ const EditRoomDialog = ({
             setIsVisible={setAccessSettingsIsVisible}
             onSetAccessSettings={onSetAccessSettings}
           />
-        )}
-      </ModalDialog.Container>
+        </ModalDialog.Container>
+      )}
 
       <ModalDialog.Header>
         {isTemplate

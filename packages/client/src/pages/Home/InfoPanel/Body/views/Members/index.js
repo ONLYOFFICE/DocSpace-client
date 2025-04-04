@@ -276,7 +276,8 @@ const Members = ({
   const showPublicRoomBar =
     ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
     withPublicRoomBlock &&
-    !withoutTitlesAndLinks;
+    !withoutTitlesAndLinks &&
+    !isTemplate;
 
   const publicRoomItemsLength = publicRoomItems.length;
 

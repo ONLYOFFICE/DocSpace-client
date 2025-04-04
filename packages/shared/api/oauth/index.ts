@@ -263,12 +263,13 @@ export const onOAuthSubmit = async (
   clientId: string,
   clientState: string,
   scope: string[],
+  userId: string,
 ) => {
   const formData = new FormData();
 
-  const token = getOAuthJWTSignature();
+  const token = getOAuthJWTSignature(userId);
 
-  if (!token) await setOAuthJWTSignature();
+  if (!token) await setOAuthJWTSignature(userId);
 
   formData.append("client_id", clientId);
   formData.append("state", clientState);
@@ -292,12 +293,16 @@ export const onOAuthSubmit = async (
   );
 };
 
-export const onOAuthCancel = async (clientId: string, clientState: string) => {
+export const onOAuthCancel = async (
+  clientId: string,
+  clientState: string,
+  userId: string,
+) => {
   const formData = new FormData();
 
-  const token = getOAuthJWTSignature();
+  const token = getOAuthJWTSignature(userId);
 
-  if (!token) await setOAuthJWTSignature();
+  if (!token) await setOAuthJWTSignature(userId);
 
   formData.append("client_id", clientId);
   formData.append("state", clientState);

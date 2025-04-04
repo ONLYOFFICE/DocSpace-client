@@ -65,8 +65,8 @@ const ScrollList = styled.div<{
 `;
 
 const StyledBlock = styled.div`
-  padding-left: 16px;
-  margin-right: -16px;
+  padding-inline-start: 16px;
+  margin-inline-end: -16px;
   border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
 `;
 
@@ -198,7 +198,7 @@ const StyledInviteInput = styled.div<{ isShowCross?: boolean }>`
   .append {
     display: ${(props) => (props.isShowCross ? "flex" : "none")};
     align-items: center;
-    padding-right: 8px;
+    padding-inline-end: 8px;
     cursor: default;
   }
 
@@ -328,7 +328,7 @@ const StyledToggleButton = styled(ToggleButton)`
 `;
 
 const StyledBody = styled.div<{ isDisabled?: boolean }>`
-  padding-left: 16px;
+  padding-inline-start: 16px;
 
   ${({ isDisabled, theme }) =>
     isDisabled
@@ -390,7 +390,7 @@ const StyledTemplateAccessSettingsHeader = styled.div`
 
 const StyledTemplateAccessSettingsBody = styled.div`
   height: calc(100% - 73px);
-  padding-right: 16px;
+  padding-inline-end: 16px;
 `;
 
 const StyledTemplateAccessSettingsFooter = styled.div`

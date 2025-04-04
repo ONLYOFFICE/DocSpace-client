@@ -59,7 +59,8 @@
   box-sizing: border-box;
   margin-bottom: 23px;
 
-  &.rooms {
+  &.rooms,
+  &.templates {
     grid-template-columns: repeat(auto-fill, minmax(274px, 1fr));
   }
 

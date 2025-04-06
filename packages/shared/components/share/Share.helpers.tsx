@@ -465,3 +465,9 @@ export const getExpirationDate = (
 export const getCreateShareLinkKey = (userId: string, fileType?: FileType) => {
   return `link-create-document-${fileType ?? ""}-${userId}`;
 };
+
+export const DEFAULT_CREATE_LINK_SETTINGS = {
+  access: ShareAccessRights.ReadOnly,
+  internal: false,
+  diffExpirationDate: null,
+};

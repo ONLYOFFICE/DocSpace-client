@@ -61,7 +61,8 @@ const TemplateAccess = ({
 
   const userName = roomOwner.displayName;
 
-  const usersList = inviteItems.filter((i) => !i.isGroup && !i.isOwner);
+  const usersList = inviteItems.filter((i) => !i.isGroup && !i.templateIsOwner);
+
   const groupsList = inviteItems.filter((i) => i.isGroup);
 
   const avatarList = [];

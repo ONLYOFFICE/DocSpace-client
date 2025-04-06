@@ -24,20 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ShareAccessRights } from "../../enums";
-import { TTranslation } from "../../types";
-import { getUserRoleOptions } from "./getUserRoleOptions";
+import { TTranslation } from "../types";
 
-export const getUserRoleOptionsByUserAccess = (
-  t: TTranslation,
-  access: ShareAccessRights,
-) => {
-  if (!access) return;
+export const getSinglePDFTitle = (t: TTranslation, isForm: boolean) => {
+  return isForm ? t("Common:Document") : t("Common:Form");
+};
 
-  const options = getUserRoleOptions(t);
-  const [userOption] = Object.values(options).filter(
-    (opt) => opt.access === access,
-  );
-
-  return userOption;
+export const getManyPDFTitle = (t: TTranslation, isForms: boolean) => {
+  return `PDF-${(isForms ? t("Common:Documents") : t("Common:Forms")).toLowerCase()}`;
 };

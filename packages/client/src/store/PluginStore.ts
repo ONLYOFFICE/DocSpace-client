@@ -433,10 +433,10 @@ class PluginStore {
       if (typeof status !== "boolean") return plugin;
 
       if (status) {
-        toastr.success(t("PluginEnabled"));
+        toastr.success(t("Common:PluginEnabled"));
         this.activatePlugin(name);
       } else {
-        toastr.success(t("PluginDisabled"));
+        toastr.success(t("Common:PluginDisabled"));
         this.deactivatePlugin(name);
       }
 

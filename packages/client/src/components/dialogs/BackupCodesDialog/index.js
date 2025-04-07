@@ -110,7 +110,7 @@ class BackupCodesDialogComponent extends React.Component {
 
             <Text className="backup-codes-codes" isBold>
               {backupCodes.length > 0
-                ? backupCodes.forEach((item) => {
+                ? backupCodes.map((item) => {
                     if (!item.isUsed) {
                       return (
                         <strong key={item.code} dir="auto">
@@ -118,6 +118,7 @@ class BackupCodesDialogComponent extends React.Component {
                         </strong>
                       );
                     }
+                    return null;
                   })
                 : null}
             </Text>

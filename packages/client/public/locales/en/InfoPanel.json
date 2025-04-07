@@ -17,6 +17,8 @@
   "FileCopiedCount": "Files copied ({{count}}).",
   "FileCopiedTo": "Files copied to «{{folderTitle}}»",
   "FileCreated": "File created.",
+  "FileCustomFilterDisabled": "Custom filter disabled.",
+  "FileCustomFilterEnabled": "Custom filter enabled.",
   "FileDeleted": "Files removed.",
   "FileDeletedCount": "Files removed ({{count}}).",
   "FileExtension": "File extension",
@@ -42,9 +44,9 @@
   "FolderMovedToTrash": "Folders moved to Trash.",
   "FolderMovedToTrashCount": "Folders moved to Trash ({{count}}).",
   "FolderRenamed": "Folder renamed.",
-  "FormStartedToFill": "Started to fill.",
-  "FormPartiallyFilled": "Filled out part of form.",
   "FormCompletelyFilled": "Completely filled out form.",
+  "FormPartiallyFilled": "Filled out part of form.",
+  "FormStartedToFill": "Started to fill.",
   "FormStopped": "Form stopped.",
   "GalleryEmptyScreenText": "See form template details here",
   "GroupsEmptyScreenText": "See group details here",
@@ -94,7 +96,5 @@
   "SubmenuHistory": "History",
   "UserFileUpdated": "File updated.",
   "Users": "Users",
-  "Versions": "Versions",
-  "FileCustomFilterEnabled": "Custom filter enabled.",
-  "FileCustomFilterDisabled": "Custom filter disabled."
+  "Versions": "Versions"
 }

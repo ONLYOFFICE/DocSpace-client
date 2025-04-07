@@ -253,6 +253,7 @@ export type TOperation = {
   processed: string;
   progress: number;
   url?: string;
+  files?: TFile[];
 };
 
 export type TUploadOperation = {

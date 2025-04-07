@@ -23,12 +23,53 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+import { useTranslation } from "react-i18next";
 
-  gap: 16px;
-  margin-top: 16px;
-`;
+import { Button, ButtonSize } from "../../components/button";
+import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+
+interface AssignRolesDialogProps {
+  visible: boolean;
+  onClose: VoidFunction;
+  onSubmit: VoidFunction;
+  roomName: string;
+}
+
+export const AssignRolesDialog = ({
+  visible,
+  roomName,
+  onClose,
+  onSubmit,
+}: AssignRolesDialogProps) => {
+  const { t } = useTranslation("Common");
+
+  return (
+    <ModalDialog
+      autoMaxHeight
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.modal}
+    >
+      <ModalDialog.Header>{t("Common:AssignRoles")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        {t("Common:AssignRolesDescription", { roomName })}
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          primary
+          onClick={onSubmit}
+          label={t("Common:Assign")}
+          size={ButtonSize.normal}
+          scale
+        />
+        <Button
+          onClick={onClose}
+          label={t("Common:Later")}
+          size={ButtonSize.normal}
+          scale
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
+};

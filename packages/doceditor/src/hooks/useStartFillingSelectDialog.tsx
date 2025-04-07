@@ -25,33 +25,28 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 "use client";
 import { useCallback, useRef, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 
 import { RoomsType } from "@docspace/shared/enums";
-// import {
-//   checkFileConflicts,
-//   copyToFolder,
-//   getProgress,
-// } from "@docspace/shared/api/files";
-// import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 import { toastr } from "@docspace/shared/components/toast";
 import { CREATED_FORM_KEY, EDITOR_ID } from "@docspace/shared/constants";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { getFileInfo } from "@docspace/shared/api/files";
 
 import type {
   TFile,
   TFileSecurity,
   TFolder,
   TFolderSecurity,
-  TOperation,
 } from "@docspace/shared/api/files/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import type { TData } from "@docspace/shared/components/toast/Toast.type";
 
-// import { useTranslation } from "react-i18next";
 import { saveAs } from "@/utils";
 import type { ConflictStateType } from "@/types";
-import { getFileInfo } from "@docspace/shared/api/files";
+import { LinkTarget } from "@docspace/shared/components/link";
 
 type SuccessResponseType = {
   form: TFile;
@@ -84,8 +79,11 @@ const isSuccessResponse = (
   return Boolean(res) && typeof res === "object" && "form" in res;
 };
 
-const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
-  // const { t } = useTranslation(["Common"]);
+const useStartFillingSelectDialog = (
+  fileInfo: TFile | undefined,
+  openAssignRolesDialog: (form: TFile, roomName: string) => void,
+) => {
+  const { t } = useTranslation(["Common"]);
   const resolveRef = useRef<(value: string | PromiseLike<string>) => void>();
 
   const [createDefineRoomType, setCreateDefineRoomType] = useState<RoomsType>(
@@ -114,31 +112,6 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
     if (requestRunning.current) return;
     setIsVisible(false);
   }, []);
-
-  // const closeConflictResolveDialog = useCallback(() => {
-  //   setConflictDataDialog(DefaultConflictDataDialogState);
-  // }, []);
-
-  // const showConflictResolveDialog = async (
-  //   folderName: string,
-  //   fileName: string,
-  // ) => {
-  //   try {
-  //     return await new Promise<ConflictResolveType>((resolve, reject) => {
-  //       setConflictDataDialog({
-  //         visible: true,
-  //         resolve,
-  //         reject,
-  //         folderName,
-  //         fileName,
-  //       });
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     closeConflictResolveDialog();
-  //   }
-  // };
 
   const onDownloadAs = (obj: object) => {
     if (hasFileUrl(obj)) {
@@ -174,32 +147,7 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
       if (!fileInfo || !selectedItemId) return;
       requestRunning.current = true;
 
-      // let conflictResolve: ConflictResolveType | void =
-      //   ConflictResolveType.Duplicate;
-
-      const url = new URL(`${window.location.origin}/rooms/shared/filter`);
-      url.searchParams.set("folder", selectedItemId.toString());
-
       try {
-        // const hasConfictFiles = await checkFileConflicts(
-        //   selectedItemId,
-        //   [],
-        //   [fileInfo.id],
-        // );
-
-        // if (hasConfictFiles.length > 0) {
-        //   conflictResolve = await showConflictResolveDialog(
-        //     folderTitle,
-        //     fileInfo.title,
-        //   );
-
-        //   if (!conflictResolve) {
-        //     requestRunning.current = false;
-
-        //     return Promise.resolve();
-        //   }
-        // }
-
         const [fileUrl, file] = await Promise.all([
           getFileUrl(),
           getFileInfo(fileInfo.id),
@@ -213,51 +161,89 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
           "createForm",
         );
 
-        if (
-          isSuccessResponse(response) &&
-          createDefineRoomType === RoomsType.FormRoom
-        ) {
+        if (isSuccessResponse(response)) {
           const { form } = response;
 
-          sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(form));
+          switch (createDefineRoomType) {
+            case RoomsType.FormRoom:
+              {
+                sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(form));
+
+                const url = new URL(
+                  `${window.location.origin}/rooms/shared/filter`,
+                );
+                url.searchParams.set("folder", selectedItemId.toString());
+                window.location.replace(url.toString());
+              }
+
+              break;
+            case RoomsType.VirtualDataRoom:
+              {
+                const url = new URL(
+                  `${window.location.origin}/rooms/shared/filter`,
+                );
+                url.searchParams.set("folder", selectedItemId.toString());
+
+                const components = {
+                  1: (
+                    <ColorTheme
+                      tag="a"
+                      href={url.toString()}
+                      themeId={ThemeId.Link}
+                      target={LinkTarget.blank}
+                      $isUnderline
+                    />
+                  ),
+                  2: <strong />,
+                };
+
+                const values = {
+                  folderName: selectedTreeNode.title,
+                  title: form.title,
+                };
+
+                toastr.success(
+                  <Trans
+                    t={t}
+                    ns="Common"
+                    i18nKey="CopyItem"
+                    values={values}
+                    components={components}
+                  />,
+                );
+
+                openAssignRolesDialog(form, selectedTreeNode.title);
+              }
+              break;
+            default:
+              break;
+          }
+
+          return;
         }
 
         const [key, value] =
           typeof response === "string" ? response.split(":") : [];
 
-        // await copyToFolder(
-        //   Number(selectedItemId),
-        //   [],
-        //   [fileInfo.id],
-        //   conflictResolve,
-        //   false,
-        // );
-
-        // const error = await new Promise((resolve) => {
-        //   const interval = setInterval(async () => {
-        //     const [progress] = await getProgress();
-
-        //     if (progress?.finished) {
-        //       clearInterval(interval);
-        //       resolve(progress.error);
-        //     }
-        //   }, 1000);
-        // });
-
         if (key === "error") {
           toastr.error(value);
-        } else {
-          window.location.replace(url.toString());
-          onClose();
+          return;
         }
       } catch (e) {
         toastr.error(e as TData);
-        onClose();
       } finally {
+        onClose();
         requestRunning.current = false;
       }
     },
-    [createDefineRoomType, fileInfo, getFileUrl, onClose],
+    [
+      createDefineRoomType,
+      fileInfo,
+      getFileUrl,
+      onClose,
+      openAssignRolesDialog,
+      t,
+    ],
   );
 
   const getIsDisabled = useCallback(

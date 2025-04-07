@@ -707,8 +707,7 @@ class ContextOptionsStore {
       false,
     );
 
-    refPage[FILLING_STATUS_ID] = true;
-    console.log("refPage", refPage);
+    if (refPage) refPage.sessionStorage.setItem(FILLING_STATUS_ID, "true");
   };
 
   onClickResetAndStartFilling = async (item) => {

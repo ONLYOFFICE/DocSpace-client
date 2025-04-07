@@ -23,4 +23,42 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-export { Card } from "./Card";
+
+import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+
+import ShareFormCard from "./share-form-card";
+import type { ShareFormDialogProps } from "./share-form-dialog.types";
+
+import styles from "./share-form-dialog.module.scss";
+
+const ShareFormDialog = ({
+  visible,
+  onClose,
+  containerVisible,
+  container,
+  title,
+  cards,
+}: ShareFormDialogProps) => {
+  return (
+    <ModalDialog
+      autoMaxHeight
+      withBodyScroll
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.aside}
+      containerVisible={containerVisible}
+    >
+      <ModalDialog.Container>{container}</ModalDialog.Container>
+      <ModalDialog.Header>{title}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <section className={styles.container}>
+          {cards.map((card) => (
+            <ShareFormCard key={card.id} {...card} />
+          ))}
+        </section>
+      </ModalDialog.Body>
+    </ModalDialog>
+  );
+};
+
+export default ShareFormDialog;

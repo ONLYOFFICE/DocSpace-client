@@ -39,6 +39,7 @@ import { ModalDialog, ModalDialogType } from "../../../components/modal-dialog";
 import { Button, ButtonSize } from "../../../components/button";
 import { Text } from "../../../components/text";
 import { SimulatePassword } from "../../../components/simulate-password";
+import { isMobile } from "../../../utils";
 
 import styles from "../DownloadDialog.module.scss";
 import { isFile, type OnePasswordRowProps } from "../DownloadDialog.types";
@@ -170,7 +171,7 @@ export const OnePasswordRow = ({
               </Text>
             </div>
             <ContextMenuButton
-              directionX="right"
+              directionX={isMobile() ? "left" : "right"}
               getData={getOptions}
               title={t("Common:Actions")}
               isDisabled={false}

@@ -60,6 +60,7 @@ import { useStopFillingDialog } from "@/hooks/useStopFillingDialog";
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { useShareFormDialog } from "@/hooks/useShareFormDialog";
 import useAssignRolesDialog from "@/hooks/useAssignRolesDialog";
+import useChangeLinkTypeDialog from "@/hooks/useChangeLinkTypeDialog";
 
 const DeepLink = dynamic(() => import("./deep-link"), {
   ssr: false,
@@ -94,6 +95,10 @@ const AssignRolesDialog = dynamic(
     ssr: false,
   },
 );
+
+const ChangeLinkTypeDialog = dynamic(() => import("./ChangeLinkTypeDialog"), {
+  ssr: false,
+});
 
 const Root = ({
   settings,
@@ -152,6 +157,13 @@ const Root = ({
     shareKey,
     standalone: settings?.standalone,
   });
+
+  const {
+    changeLinkTypeDialogVisible,
+    onCloseChangeLinkTypeDialog,
+    onSubmitChangeLinkType,
+    openChangeLinkTypeDialog,
+  } = useChangeLinkTypeDialog();
 
   const {
     onSDKRequestSaveAs,
@@ -406,6 +418,7 @@ const Root = ({
           onSubmitStartFillingSelectDialog={onSubmitStartFillingSelectDialog}
           isVisibleStartFillingSelectDialog={isVisibleStartFillingSelectDialog}
           updateAccessLink={shareFormDialogData.updateAccessLink}
+          openChangeLinkTypeDialog={openChangeLinkTypeDialog}
         />
       )}
 
@@ -415,6 +428,14 @@ const Root = ({
           onClose={onCloseAssignRolesDialog}
           onSubmit={onSubmitAssignRoles}
           roomName={assignRolesDialogData.roomName}
+        />
+      )}
+
+      {changeLinkTypeDialogVisible && (
+        <ChangeLinkTypeDialog
+          visible={changeLinkTypeDialogVisible}
+          onClose={onCloseChangeLinkTypeDialog}
+          onSubmit={onSubmitChangeLinkType}
         />
       )}
     </div>

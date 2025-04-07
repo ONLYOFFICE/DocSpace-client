@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
@@ -32,12 +32,16 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 import { TextInput } from "@docspace/shared/components/text-input";
+import { toastr } from "@docspace/shared/components/toast";
+import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
+import { Link } from "@docspace/shared/components/link";
 
 import PlusIcon from "PUBLIC_DIR/images/icons/12/payment.plus.react.svg";
 
@@ -55,6 +59,27 @@ const StyledContainer = styled.div`
 
   .balance-wrapper {
     max-width: 152px;
+  }
+`;
+
+const AutomaticPaymentsBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .header {
+    display: flex;
+    align-items: center;
+
+    .toggle-button {
+      margin-inline: auto 28px;
+    }
+  }
+
+  .description {
+    max-width: 420px;
+    margin-inline-end: 28px;
+    color: ${(props) => props.theme.editLink.text.color};
   }
 `;
 
@@ -91,7 +116,7 @@ const DecimalAmount = styled(Text)`
 const StyledBody = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   margin-top: 20px;
 
   .amount-container {
@@ -110,6 +135,7 @@ const StyledBody = styled.div`
         max-width: 404px;
       }
     }
+    border-bottom: #eceef1 solid 1px;
   }
 `;
 
@@ -118,7 +144,7 @@ const AddPaymentMethodContainer = styled.div`
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  padding: 8px 0;
+  padding-top: 8px;
 `;
 
 const PlusIconWrapper = styled.div`
@@ -143,7 +169,24 @@ const AddPaymentText = styled(Text)`
   color: #a3a9ae;
 `;
 
-const Wallet = ({ balance, language }) => {
+const CardLinked = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  .ticked-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+`;
+
+const Wallet = ({
+  balance,
+  language,
+  walletInit,
+  isWalletCustomerExist,
+  cardLinked,
+}) => {
   const tooltipContent =
     "Your current wallet balance. This amount can be used for purchases and subscriptions.";
   const { t } = useTranslation(["Payments", "Common"]);
@@ -151,16 +194,22 @@ const Wallet = ({ balance, language }) => {
   const [visible, setVisible] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [size, setSize] = useState("");
+  const [isAutomaticPaymentsEnabled, setIsAutomaticPaymentsEnabled] =
+    useState(false);
+
+  useEffect(() => {
+    walletInit();
+  }, []);
 
   const formattedBalance = () => {
     const formatter = new Intl.NumberFormat(language, {
       style: "currency",
-      currency: balance?.currencyCode || "USD",
+      currency: balance.currency,
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
 
-    const parts = formatter.formatToParts(balance?.value || 0);
+    const parts = formatter.formatToParts(balance.amount || 0);
     const currencySymbol =
       parts.find((part) => part.type === "currency")?.value || "";
     const mainNumber =
@@ -173,7 +222,7 @@ const Wallet = ({ balance, language }) => {
     const isCurrencyAtEnd =
       currencyIndex > parts.findIndex((part) => part.type === "integer");
 
-    const balanceValue = formatter.format(balance?.value || 0);
+    const balanceValue = formatter.format(balance.amount);
 
     return {
       mainParts: isCurrencyAtEnd
@@ -188,7 +237,7 @@ const Wallet = ({ balance, language }) => {
   const formattedAmount = (amount) => {
     const formatter = new Intl.NumberFormat(language, {
       style: "currency",
-      currency: balance?.currencyCode || "USD",
+      currency: balance.currency,
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     });
@@ -204,7 +253,7 @@ const Wallet = ({ balance, language }) => {
       { name: formattedAmount(50), id: 3, value: 50 },
       { name: formattedAmount(100), id: 4, value: 100 },
     ],
-    [language, balance?.currencyCode],
+    [language, balance.currency],
   );
 
   const onSelectAmount = (data) => {
@@ -217,6 +266,20 @@ const Wallet = ({ balance, language }) => {
     if (validity.valid) {
       setSize(value);
     }
+  };
+
+  const goToStripeAccount = () => {
+    cardLinked
+      ? window.open(cardLinked, "_blank")
+      : toastr.error(t("ErrorNotification"));
+  };
+
+  const onToggleClick = () => {
+    setIsAutomaticPaymentsEnabled(!isAutomaticPaymentsEnabled);
+  };
+
+  const onClose = () => {
+    setVisible(false);
   };
 
   const { mainParts, fraction, balanceValue, isCurrencyAtEnd } =
@@ -258,7 +321,7 @@ const Wallet = ({ balance, language }) => {
 
       <ModalDialog
         visible={visible}
-        onClose={() => setVisible(false)}
+        onClose={onClose}
         displayType={ModalDialogType.aside}
       >
         <ModalDialog.Header>{t("TopUpWallet")}</ModalDialog.Header>
@@ -292,15 +355,42 @@ const Wallet = ({ balance, language }) => {
                 </Text>
                 <Text fontSize="12px">{t("YouHaveNotAddedAnyPayment")}</Text>
               </div>
-              <AddPaymentMethodContainer
-                onClick={() => console.log("Add payment method clicked")}
-              >
-                <PlusIconWrapper>
-                  <PlusIcon className="payment-score" />
-                </PlusIconWrapper>
-                <AddPaymentText>{t("AddPaymentMethod")}</AddPaymentText>
-              </AddPaymentMethodContainer>
+              {isWalletCustomerExist ? (
+                <CardLinked>
+                  <div className="ticked-wrapper">
+                    <CheckReactSvg />
+                    <Text fontWeight={600} fontSize="14px">
+                      Card linked
+                    </Text>
+                  </div>
+                  <Link fontWeight={600}>Go to the Stripe</Link>
+                </CardLinked>
+              ) : (
+                <AddPaymentMethodContainer onClick={goToStripeAccount}>
+                  <PlusIconWrapper>
+                    <PlusIcon className="payment-score" />
+                  </PlusIconWrapper>
+                  <AddPaymentText>{t("AddPaymentMethod")}</AddPaymentText>
+                </AddPaymentMethodContainer>
+              )}
             </div>
+
+            <AutomaticPaymentsBlock>
+              <div className="header">
+                <Text noSelect isBold fontSize="16px">
+                  {t("AutomaticPayments")}
+                </Text>
+                <ToggleButton
+                  isChecked={isAutomaticPaymentsEnabled}
+                  onChange={onToggleClick}
+                  className="toggle-button"
+                  isDisabled={!isWalletCustomerExist}
+                />
+              </div>
+              <Text fontSize="12px" className="description" noSelect>
+                {t("AutomaticallyTopUpCard")}
+              </Text>
+            </AutomaticPaymentsBlock>
           </StyledBody>
         </ModalDialog.Body>
         <ModalDialog.Footer>
@@ -311,6 +401,7 @@ const Wallet = ({ balance, language }) => {
             size="normal"
             primary
             scale
+            isDisabled={!isWalletCustomerExist}
             // onClick={onBackupTo}
           />
           <Button
@@ -319,7 +410,7 @@ const Wallet = ({ balance, language }) => {
             label={t("Common:CancelButton")}
             size="normal"
             scale
-            onClick={() => setVisible(false)}
+            onClick={onClose}
           />
         </ModalDialog.Footer>
       </ModalDialog>
@@ -329,9 +420,14 @@ const Wallet = ({ balance, language }) => {
 
 export default inject(({ paymentStore, authStore }) => {
   const { language } = authStore;
+  const { walletInit, walletBalance, isWalletCustomerExist, cardLinked } =
+    paymentStore;
 
   return {
-    balance: paymentStore.balance,
+    balance: walletBalance.subAccounts[0],
     language,
+    walletInit,
+    isWalletCustomerExist,
+    cardLinked,
   };
 })(observer(Wallet));

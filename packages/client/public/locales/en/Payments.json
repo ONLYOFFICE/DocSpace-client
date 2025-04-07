@@ -1,5 +1,7 @@
 {
   "AddPaymentMethod": "Add payment method",
+  "AutomaticPayments": "Automatic payments",
+  "AutomaticallyTopUpCard": "Automatically top up my card when my credit balance falls below a threshold",
   "Amount": "Amount",
   "AmountSelection": "Amount selection",
   "AccessingProblem": "If you are an existing user and have problems accessing this space please contact the administrator.",

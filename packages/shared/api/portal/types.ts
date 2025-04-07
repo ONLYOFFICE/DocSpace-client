@@ -125,3 +125,20 @@ export type TRestoreProgress = {
   progress: number;
   error?: TError;
 };
+
+export type TCustomerInfo =
+  | {
+      id: number;
+      portalId: string;
+      paymentCustomerId: string;
+      paymentMethodId: string;
+      setupIntentId: string;
+    }
+  | "null";
+
+export type TBalance =
+  | {
+      accountNumber?: number;
+      subAccounts: [{ currency: string; amount: number }];
+    }
+  | undefined;

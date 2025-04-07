@@ -34,7 +34,12 @@ import {
   setLicense,
   acceptLicense,
 } from "@docspace/shared/api/settings";
-import { getPaymentLink } from "@docspace/shared/api/portal";
+import {
+  getBalance,
+  getCardLinked,
+  getCustomerInfo,
+  getPaymentLink,
+} from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { authStore } from "@docspace/shared/store";
@@ -45,6 +50,7 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
 import { TTranslation } from "@docspace/shared/types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { TBalance, TCustomerInfo } from "@docspace/shared/api/portal/types";
 
 class PaymentStore {
   userStore: UserStore | null = null;
@@ -91,6 +97,16 @@ class PaymentStore {
   isInitPaymentPage = false;
 
   isLicenseCorrect = false;
+
+  isInitWalletPage = false;
+
+  customerInfo: TCustomerInfo = "null";
+
+  balance: TBalance = {
+    subAccounts: [{ currency: "USD", amount: 0.0 }],
+  };
+
+  cardLinked = "";
 
   constructor(
     userStore: UserStore,
@@ -145,6 +161,46 @@ class PaymentStore {
     if (this.isAlreadyPaid) await setPayerInfo();
 
     this.setIsUpdatingBasicSettings(false);
+  };
+
+  setIsInitWalletPage = (isInitWalletPage: boolean) => {
+    this.isInitWalletPage = isInitWalletPage;
+  };
+
+  get walletBalance() {
+    return (
+      this.balance ?? {
+        subAccounts: [{ currency: "USD", amount: 0.0 }],
+      }
+    );
+  }
+
+  get isWalletCustomerExist() {
+    return this.customerInfo !== "null";
+  }
+
+  walletInit = async () => {
+    const requests = [
+      getBalance(),
+      getCustomerInfo(),
+      getCardLinked(window.location.href),
+      this.setPaymentAccount(),
+    ];
+
+    try {
+      const [balanceInfo, customer, cardLinked] = await Promise.all(requests);
+
+      this.balance = balanceInfo as TBalance;
+      this.customerInfo = customer as TCustomerInfo;
+      this.cardLinked = cardLinked as string;
+
+    } catch (error) {
+      // toastr.error(t("Common:UnexpectedError"));
+      console.error(error);
+      return;
+    }
+
+    this.setIsInitWalletPage(true);
   };
 
   init = async (t: TTranslation) => {

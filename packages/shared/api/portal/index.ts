@@ -31,6 +31,8 @@ import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
 import {
+  TBalance,
+  TCustomerInfo,
   TPaymentQuota,
   TPortal,
   TPortalTariff,
@@ -370,6 +372,32 @@ export function sendPaymentRequest(email, userName, message) {
       message,
     },
   });
+}
+
+export function getBalance() {
+  return request({
+    method: "get",
+    url: "/portal/payment/customer/balance",
+  }) as TBalance;
+}
+
+export function getCustomerInfo() {
+  return request({
+    method: "get",
+    url: "/portal/payment/customerinfo",
+  }) as TCustomerInfo;
+}
+
+export async function getCardLinked(backUrl) {
+  const params = backUrl ? { backUrl } : {};
+
+  const res = (await request({
+    method: "get",
+    url: "/portal/payment/chechoutsetupurl",
+    params,
+  })) as string;
+
+  return res;
 }
 
 export async function getPortal() {

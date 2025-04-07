@@ -47,14 +47,22 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
     : `${portal.portalName}.${baseDomain}`;
 
   const onClick = () => {
-    const redirectUrl = getCookie("x-redirect-authorization-uri")?.replace(
-      window.location.origin,
-      name,
-    );
+    const redirectUrl = getCookie("x-redirect-authorization-uri");
+
+    const decodedRedirectUrl = window
+      .atob(redirectUrl!)
+      .replace(window.location.origin, name);
+
+    console.log(decodedRedirectUrl);
+    console.log(redirectUrl);
+
     // deleteCookie("x-redirect-authorization-uri");
     sessionStorage.removeItem("tenant-list");
 
-    window.open(`${portal.portalLink}&referenceUrl=${redirectUrl}`, "_self");
+    window.open(
+      `${portal.portalLink}&referenceUrl=${decodedRedirectUrl}`,
+      "_self",
+    );
   };
 
   return (

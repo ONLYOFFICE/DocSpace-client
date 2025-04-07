@@ -366,9 +366,12 @@ class CreateEditRoomStore {
 
   onSaveAsTemplate = async (item, roomParams, openCreatedTemplate) => {
     this.filesStore.setRoomCreated(true);
+    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
 
-    const { title, icon, tags, invitations, roomType, isAvailable } =
+    const { title, icon, tags, invitations, roomType, isAvailable, quota } =
       roomParams;
+
+    const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
 
     const tagsToAddList = tags.map((tag) => tag.name);
     const isDeleteLogo = !!item.logo.original && !icon.uploadedFile;
@@ -379,6 +382,9 @@ class CreateEditRoomStore {
       tags: tagsToAddList,
       public: isAvailable,
       copylogo: true,
+      ...(quotaLimit && {
+        quota: +quotaLimit,
+      }),
     };
 
     if (isDeleteLogo) {
@@ -389,6 +395,7 @@ class CreateEditRoomStore {
     if (!isDeleteLogo && typeof icon.uploadedFile !== "string") {
       const roomLogo = await this.getRoomLogo(icon);
       roomData.logo = roomLogo;
+      roomData.copylogo = false;
     }
 
     let isCompleted = false;
@@ -526,7 +533,7 @@ class CreateEditRoomStore {
       ? !!logo?.original && !icon.uploadedFile
       : false;
 
-    const copyLogo =
+    let copyLogo =
       !isDeleteLogo &&
       icon.uploadedFile &&
       typeof icon.uploadedFile === "string";
@@ -535,6 +542,7 @@ class CreateEditRoomStore {
       if (icon.uploadedFile && typeof icon.uploadedFile !== "string") {
         const roomLogo = await this.getRoomLogo(icon);
         createRoomData.logo = roomLogo;
+        copyLogo = false;
       }
 
       withConfirm && this.setConfirmDialogIsLoading(true);
@@ -606,10 +614,23 @@ class CreateEditRoomStore {
   };
 
   onCreateTemplateRoom = async (roomParams) => {
+    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
+
     this.filesStore.setRoomCreated(true);
 
-    const { roomId, tags, title, logo, roomType, copyLogo, color, cover } =
-      roomParams;
+    const {
+      roomId,
+      tags,
+      title,
+      logo,
+      roomType,
+      copyLogo,
+      color,
+      cover,
+      quota,
+    } = roomParams;
+
+    const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
 
     let isFinished = false;
     let errorMsg = false;
@@ -623,6 +644,9 @@ class CreateEditRoomStore {
       CopyLogo: copyLogo,
       color,
       cover,
+      ...(quotaLimit && {
+        quota: +quotaLimit,
+      }),
     };
 
     const room = await api.rooms.createRoomFromTemplate(data);

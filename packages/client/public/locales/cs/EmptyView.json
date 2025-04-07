@@ -42,7 +42,6 @@
   "UploadDeviceOptionTitle": "Nahrávání ze zařízení",
   "UploadDevicePDFFormOptionDescription": "Nahrajte do místnosti připravený PDF formulář ze svého zařízení.",
   "UploadDevicePDFFormOptionTitle": "Nahrávání ze zařízení",
-  "UploadFromPortalDescription": "Nahrát soubory libovolného typu z Dokumentů nebo Místností",
   "UploadFromPortalTitle": "Nahrát z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte připravený PDF formulář dostupný v {{productName}} a nahrajte jej do místnosti.",
   "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti"

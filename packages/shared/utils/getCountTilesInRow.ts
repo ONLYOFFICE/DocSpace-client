@@ -29,7 +29,10 @@
 import { isDesktop, isMobile } from "./device";
 
 // Used to update the number of tiles in a row after the window is resized.
-export const getCountTilesInRow = (isRooms?: boolean) => {
+export const getCountTilesInRow = (
+  isRooms?: boolean,
+  isTemplates?: boolean,
+) => {
   const isDesktopView = isDesktop();
   const isMobileView = isMobile();
   const tileGap = 16;
@@ -57,7 +60,7 @@ export const getCountTilesInRow = (isRooms?: boolean) => {
   if (!isDesktopView) containerWidth += 3; // tablet tile margin -3px (TileContainer.js)
 
   let minTileWidth;
-  if (isRooms) {
+  if (isRooms || isTemplates) {
     minTileWidth = 275 + tileGap;
   } else {
     minTileWidth = 216 + tileGap;

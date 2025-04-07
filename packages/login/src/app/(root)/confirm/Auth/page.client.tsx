@@ -76,7 +76,12 @@ const AuthHandler = () => {
         frameCallEvent({ event: "onAuthSuccess" });
 
         if (referenceUrl && referenceUrl.includes("oauth2")) {
+          if (replaced.current) return;
+
           const user = await getUser();
+
+          if (!user) return;
+
           const newUrl = location.search.split("referenceUrl=")[1];
 
           const token = getOAuthJWTSignature(user.id);

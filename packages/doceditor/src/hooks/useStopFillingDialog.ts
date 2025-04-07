@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export const useStopFillingDialog = () => {
   const [stopFillingDialogVisible, setStopFillingDialogVisible] =
@@ -32,18 +32,20 @@ export const useStopFillingDialog = () => {
 
   const [formId, setFormId] = useState<string | number | null>(null);
 
-  const onCloseStopFillingDialog = () => {
+  const onCloseStopFillingDialog = useCallback(() => {
     setStopFillingDialogVisible(false);
     setFormId(null);
-  };
+  }, []);
 
-  const openStopFillingDialog = (formId: string | number) => {
+  const openStopFillingDialog = useCallback((formId: string | number) => {
     setStopFillingDialogVisible(true);
     setFormId(formId);
-  };
-  const onSubmitStopFilling = () => {
+  }, []);
+
+  const onSubmitStopFilling = useCallback(() => {
     window.location.reload();
-  };
+  }, []);
+
   return {
     formId,
     onSubmitStopFilling,

@@ -347,6 +347,7 @@ const LoginForm = ({
             : `${portals[0].portalName}.${baseDomain}`;
 
         let redirectUrl = getCookie("x-redirect-authorization-uri");
+        redirectUrl = window.atob(redirectUrl!);
         let portalLink = portals[0].portalLink;
 
         const isLocalhost = name === "http://localhost";
@@ -380,8 +381,10 @@ const LoginForm = ({
 
     login(user, hash, pwd, session, captchaToken, currentCulture, reCaptchaType)
       .then(async (res: string | object) => {
-        const redirectUrl = getCookie("x-redirect-authorization-uri");
+        let redirectUrl = getCookie("x-redirect-authorization-uri");
         if (clientId && redirectUrl) {
+          redirectUrl = window.atob(redirectUrl!);
+
           window.location.replace(redirectUrl);
 
           return;

@@ -108,10 +108,10 @@ const useStartFillingSelectDialog = (
     [],
   );
 
-  const onClose = () => {
+  const onClose = useCallback(() => {
     if (requestRunning.current) return;
     setIsVisible(false);
-  };
+  }, []);
 
   const onDownloadAs = (obj: object) => {
     if (hasFileUrl(obj)) {
@@ -120,7 +120,7 @@ const useStartFillingSelectDialog = (
     }
   };
 
-  const getFileUrl = async () => {
+  const getFileUrl = useCallback(async () => {
     const docEditor =
       typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
 
@@ -131,132 +131,149 @@ const useStartFillingSelectDialog = (
     });
 
     return url;
-  };
+  }, []);
 
-  const onSubmit = async (
-    selectedItemId: string | number | undefined,
-    folderTitle: string,
-    isPublic: boolean,
-    breadCrumbs: TBreadCrumb[],
-    fileName: string,
-    isChecked: boolean,
-    selectedTreeNode: TFolder,
-    selectedFileInfo: TSelectedFileInfo,
-  ) => {
-    if (!fileInfo || !selectedItemId) return;
-    requestRunning.current = true;
+  const onSubmit = useCallback(
+    async (
+      selectedItemId: string | number | undefined,
+      folderTitle: string,
+      isPublic: boolean,
+      breadCrumbs: TBreadCrumb[],
+      fileName: string,
+      isChecked: boolean,
+      selectedTreeNode: TFolder,
+      selectedFileInfo: TSelectedFileInfo,
+    ) => {
+      if (!fileInfo || !selectedItemId) return;
+      requestRunning.current = true;
 
-    try {
-      const [fileUrl, file] = await Promise.all([
-        getFileUrl(),
-        getFileInfo(fileInfo.id),
-      ]);
+      try {
+        const [fileUrl, file] = await Promise.all([
+          getFileUrl(),
+          getFileInfo(fileInfo.id),
+        ]);
 
-      const response = await saveAs<ResponseType>(
-        file.title,
-        fileUrl,
-        selectedItemId,
-        false,
-        "createForm",
-      );
+        const response = await saveAs<ResponseType>(
+          file.title,
+          fileUrl,
+          selectedItemId,
+          false,
+          "createForm",
+        );
 
-      if (isSuccessResponse(response)) {
-        const { form } = response;
+        if (isSuccessResponse(response)) {
+          const { form } = response;
 
-        switch (createDefineRoomType) {
-          case RoomsType.FormRoom:
-            {
-              sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(form));
+          switch (createDefineRoomType) {
+            case RoomsType.FormRoom:
+              {
+                sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(form));
 
-              const url = new URL(
-                `${window.location.origin}/rooms/shared/filter`,
-              );
-              url.searchParams.set("folder", selectedItemId.toString());
-              window.location.replace(url.toString());
-            }
+                const url = new URL(
+                  `${window.location.origin}/rooms/shared/filter`,
+                );
+                url.searchParams.set("folder", selectedItemId.toString());
+                window.location.replace(url.toString());
+              }
 
-            break;
-          case RoomsType.VirtualDataRoom:
-            {
-              const url = new URL(
-                `${window.location.origin}/rooms/shared/filter`,
-              );
-              url.searchParams.set("folder", selectedItemId.toString());
+              break;
+            case RoomsType.VirtualDataRoom:
+              {
+                const url = new URL(
+                  `${window.location.origin}/rooms/shared/filter`,
+                );
+                url.searchParams.set("folder", selectedItemId.toString());
 
-              toastr.success(
-                <Trans
-                  t={t}
-                  ns="Common"
-                  i18nKey="CopyItem"
-                  components={{
-                    1: (
-                      <ColorTheme
-                        tag="a"
-                        href={url.toString()}
-                        themeId={ThemeId.Link}
-                        target={LinkTarget.blank}
-                        $isUnderline
-                      />
-                    ),
-                    2: <strong />,
-                  }}
-                  values={{
-                    folderName: selectedTreeNode.title,
-                    title: form.title,
-                  }}
-                />,
-              );
+                const components = {
+                  1: (
+                    <ColorTheme
+                      tag="a"
+                      href={url.toString()}
+                      themeId={ThemeId.Link}
+                      target={LinkTarget.blank}
+                      $isUnderline
+                    />
+                  ),
+                  2: <strong />,
+                };
 
-              openAssignRolesDialog(form, selectedTreeNode.title);
-            }
-            break;
-          default:
-            break;
+                const values = {
+                  folderName: selectedTreeNode.title,
+                  title: form.title,
+                };
+
+                toastr.success(
+                  <Trans
+                    t={t}
+                    ns="Common"
+                    i18nKey="CopyItem"
+                    values={values}
+                    components={components}
+                  />,
+                );
+
+                openAssignRolesDialog(form, selectedTreeNode.title);
+              }
+              break;
+            default:
+              break;
+          }
+
+          return;
         }
 
-        return;
+        const [key, value] =
+          typeof response === "string" ? response.split(":") : [];
+
+        if (key === "error") {
+          toastr.error(value);
+          return;
+        }
+      } catch (e) {
+        toastr.error(e as TData);
+      } finally {
+        onClose();
+        requestRunning.current = false;
       }
+    },
+    [
+      createDefineRoomType,
+      fileInfo,
+      getFileUrl,
+      onClose,
+      openAssignRolesDialog,
+      t,
+    ],
+  );
 
-      const [key, value] =
-        typeof response === "string" ? response.split(":") : [];
+  const getIsDisabled = useCallback(
+    (
+      isFirstLoad: boolean,
+      isSelectedParentFolder: boolean,
+      selectedItemId: string | number | undefined,
+      selectedItemType: "rooms" | "files" | undefined,
+      isRoot: boolean,
+      selectedItemSecurity:
+        | TFileSecurity
+        | TFolderSecurity
+        | TRoomSecurity
+        | undefined,
+      selectedFileInfo: TSelectedFileInfo,
+    ) => {
+      if (selectedItemType === "rooms" || isRoot) return true;
 
-      if (key === "error") {
-        toastr.error(value);
-        return;
-      }
-    } catch (e) {
-      toastr.error(e as TData);
-    } finally {
-      onClose();
-      requestRunning.current = false;
-    }
-  };
+      if (isFirstLoad) return true;
+      if (requestRunning.current) return true;
+      if (!!selectedFileInfo) return true;
 
-  const getIsDisabled = (
-    isFirstLoad: boolean,
-    isSelectedParentFolder: boolean,
-    selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
-    isRoot: boolean,
-    selectedItemSecurity:
-      | TFileSecurity
-      | TFolderSecurity
-      | TRoomSecurity
-      | undefined,
-    selectedFileInfo: TSelectedFileInfo,
-  ) => {
-    if (selectedItemType === "rooms" || isRoot) return true;
+      if (!selectedItemSecurity) return false;
 
-    if (isFirstLoad) return true;
-    if (requestRunning.current) return true;
-    if (!!selectedFileInfo) return true;
-
-    if (!selectedItemSecurity) return false;
-
-    return "CopyTo" in selectedItemSecurity
-      ? !selectedItemSecurity?.CopyTo
-      : !selectedItemSecurity.Copy;
-  };
+      return "CopyTo" in selectedItemSecurity
+        ? !selectedItemSecurity?.CopyTo
+        : !selectedItemSecurity.Copy;
+    },
+    [],
+  );
 
   return {
     createDefineRoomType,

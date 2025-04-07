@@ -27,7 +27,12 @@
 import React from "react";
 import { screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { FileStatus, FileType, FolderType, ShareAccessRights } from "enums";
+import {
+  FileStatus,
+  FileType,
+  FolderType,
+  ShareAccessRights,
+} from "../../enums";
 import Share from "./index";
 import { renderWithTheme } from "../../utils/render-with-theme";
 

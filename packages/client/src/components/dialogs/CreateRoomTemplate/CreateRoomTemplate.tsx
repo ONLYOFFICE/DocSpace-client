@@ -174,7 +174,6 @@ const CreateRoomTemplate = (props: CreateRoomTemplateProps) => {
         ) : (
           <TemplateAccessSettingsPanel
             templateItem={item}
-            usersPanelIsVisible={addUsersPanelVisible}
             setUsersPanelIsVisible={setAddUsersPanelVisible}
             onCloseAccessSettings={onCloseAccessSettings}
             onClosePanels={onClose}

@@ -128,18 +128,18 @@ const PeopleTableRow = ({
 
   const onTypeChange = React.useCallback(
     (option: TOption) => {
-      if (option.action) {
-        setIsLoading(true);
-        if (
-          !changeUserType(
-            option.action as EmployeeType,
-            [item],
-            onSuccess,
-            onAbort,
-          )
-        ) {
-          setIsLoading(false);
-        }
+      if (!option.action || option.key === role) return;
+
+      setIsLoading(true);
+      if (
+        !changeUserType(
+          option.action as EmployeeType,
+          [item],
+          onSuccess,
+          onAbort,
+        )
+      ) {
+        setIsLoading(false);
       }
     },
     [item, changeUserType],

@@ -40,6 +40,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { TSelectorItem } from "@docspace/shared/components/selector";
 import {
   getRoomMembers,
@@ -69,7 +70,6 @@ import InviteInput from "./sub-components/InviteInput";
 type TemplateAccessSettingsContainer =
   | {
       isContainer: true;
-      usersPanelIsVisible: boolean;
       setUsersPanelIsVisible: (visible: boolean) => void;
       onClosePanels: VoidFunction;
       onCloseAccessSettings: VoidFunction;
@@ -82,7 +82,6 @@ type TemplateAccessSettingsContainer =
     }
   | {
       isContainer?: undefined;
-      usersPanelIsVisible?: undefined;
       setUsersPanelIsVisible?: undefined;
       onClosePanels?: undefined;
       onCloseAccessSettings?: undefined;
@@ -111,7 +110,6 @@ const TemplateAccessSettingsPanel = ({
   templateItem,
   setInfoPanelIsMobileHidden,
   isContainer,
-  usersPanelIsVisible,
   setUsersPanelIsVisible,
   onClosePanels,
   onCloseAccessSettings,
@@ -331,48 +329,49 @@ const TemplateAccessSettingsPanel = ({
           isStroke
         />
       </StyledTemplateAccessSettingsHeader>
-      <StyledTemplateAccessSettingsBody>
-        <StyledBlock>
-          <StyledSubHeader inline>
-            {t("Files:TemplateAvailable")}
+      <Scrollbar>
+        <StyledTemplateAccessSettingsBody>
+          <StyledBlock>
+            <StyledSubHeader inline>
+              {t("Files:TemplateAvailable")}
 
-            <StyledToggleButton
-              className="invite-via-link"
-              isChecked={isAvailable}
-              onChange={onAvailableChange}
-            />
-          </StyledSubHeader>
-          <StyledDescription>
-            {t("Files:TemplateAvailableDescription", {
-              productName: t("Common:ProductName"),
-            })}
-          </StyledDescription>
-        </StyledBlock>
-        <StyledBody isDisabled={isAvailable}>
-          <InviteInput
-            inviteItems={accessItems}
-            setInviteItems={setAccessItemsAction}
-            roomType={roomType}
-            addUsersPanelVisible={usersPanelIsVisible}
-            setAddUsersPanelVisible={setPanelVisible}
-            isMobileView={isMobileView}
-            isDisabled={isAvailable}
-            roomId={templateId}
-          />
-          <StyledSubHeader className="invite-input-text">
-            {t("Files:AccessToTemplate")}
-          </StyledSubHeader>
-          {hasInvitedUsers ? (
-            <ItemsList
-              t={t}
+              <StyledToggleButton
+                className="invite-via-link"
+                isChecked={isAvailable}
+                onChange={onAvailableChange}
+              />
+            </StyledSubHeader>
+            <StyledDescription>
+              {t("Files:TemplateAvailableDescription", {
+                productName: t("Common:ProductName"),
+              })}
+            </StyledDescription>
+          </StyledBlock>
+          <StyledBody isDisabled={isAvailable}>
+            <InviteInput
               inviteItems={accessItems}
               setInviteItems={setAccessItemsAction}
-              scrollAllPanelContent={scrollAllPanelContent}
+              roomType={roomType}
+              setAddUsersPanelVisible={setPanelVisible}
               isDisabled={isAvailable}
+              roomId={templateId}
             />
-          ) : null}
-        </StyledBody>
-      </StyledTemplateAccessSettingsBody>
+
+            <StyledSubHeader className="invite-input-text">
+              {t("Files:AccessToTemplate")}
+            </StyledSubHeader>
+            {hasInvitedUsers ? (
+              <ItemsList
+                t={t}
+                inviteItems={accessItems}
+                setInviteItems={setAccessItemsAction}
+                scrollAllPanelContent={scrollAllPanelContent}
+                isDisabled={isAvailable}
+              />
+            ) : null}
+          </StyledBody>
+        </StyledTemplateAccessSettingsBody>
+      </Scrollbar>
 
       <StyledTemplateAccessSettingsFooter>
         <Button
@@ -445,11 +444,7 @@ const TemplateAccessSettingsPanel = ({
               inviteItems={accessItems}
               setInviteItems={setAccessItemsAction}
               roomType={roomType}
-              addUsersPanelVisible={
-                isContainer ? usersPanelIsVisible : addUsersPanelVisible
-              }
               setAddUsersPanelVisible={setAddUsersPanelVisible}
-              isMobileView={isMobileView}
               isDisabled={isAvailable}
               roomId={templateId}
             />

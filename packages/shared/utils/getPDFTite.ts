@@ -24,57 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { desktop, tablet } from "@docspace/shared/utils";
-import { InfiniteLoaderComponent } from "@docspace/shared/components/infinite-loader";
+import { TTranslation } from "../types";
 
-const paddingCss = css`
-  @media ${desktop} {
-    margin-inline-start: 1px;
-    padding-inline-end: 0;
-  }
+export const getSinglePDFTitle = (t: TTranslation, isForm: boolean) => {
+  return isForm ? t("Common:Document") : t("Common:Form");
+};
 
-  @media ${tablet} {
-    margin-inline-start: -1px;
-    margin-inline-end: 3px;
-  }
-`;
-
-const StyledCard = styled.div`
-  display: block;
-  height: ${({ cardHeight }) => `${cardHeight}px`};
-`;
-
-const StyledItem = styled.div`
-  display: grid;
-  grid-template-columns: ${(props) =>
-    props.isRoom || props.isTemplate
-      ? "repeat(auto-fill, minmax(275px, 1fr))"
-      : "repeat(auto-fill, minmax(216px, 1fr))"};
-  gap: ${(props) => (props.isRoom ? "16px" : "14px 16px")};
-
-  ${paddingCss};
-
-  ${(props) =>
-    !props.isRoom &&
-    css`
-      @media ${tablet} {
-        gap: 14px;
-      }
-    `}
-`;
-
-const StyledHeaderItem = styled.div`
-  height: 20px;
-  grid-column: -1 / 1;
-`;
-
-const StyledInfiniteLoader = styled(InfiniteLoaderComponent)`
-  overflow: visible !important;
-
-  & > div {
-    overflow: visible !important;
-  }
-`;
-
-export { StyledCard, StyledItem, StyledHeaderItem, StyledInfiniteLoader };
+export const getManyPDFTitle = (t: TTranslation, isForms: boolean) => {
+  return `PDF-${(isForms ? t("Common:Documents") : t("Common:Forms")).toLowerCase()}`;
+};

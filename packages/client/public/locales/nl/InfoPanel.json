@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "Eerdere link <1>«{{linkTitle}}»</1> ingetrokken <br/> Nieuwe Link <1>«{{linkTitle}}»</1> aangemaakt",
   "RoomGroupAdded": "Groepen toegevoegd.",
   "RoomGroupRemove": "Groep verwijderd",
-  "RoomIndexExportSaved": "Exporteren van de kamer index opgeslagen in Documenten",
   "RoomIndexingDisabled": "Automatische indexeren van bestanden uitgeschakeld in de kamer",
   "RoomIndexingEnabled": "Automatische indexeren van bestanden ingeschakeld in de kamer",
   "RoomInviteResend": "Uitnodigingen opnieuw verstuurd:",

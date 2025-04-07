@@ -131,7 +131,25 @@ async function Page({ searchParams }: RootPageProps) {
     }
   }
 
-  if (share) {
+  log.debug(
+    {
+      fileId: fileId ?? fileid,
+      isShare: !!share,
+      isAuth: !!cookieStore.get("asc_auth_key")?.value,
+    },
+    "Start get data for open file",
+  );
+
+  const data = await getData(
+    fileId ?? fileid ?? "",
+    version,
+    doc,
+    action,
+    share,
+    type,
+  );
+
+  if (data.error?.status === "access-denied" && share) {
     const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
     if (!roomData) {
       log.error(
@@ -158,23 +176,6 @@ async function Page({ searchParams }: RootPageProps) {
       return <FilePassword {...roomData.response} shareKey={share} />;
     }
   }
-
-  log.debug(
-    {
-      fileId: fileId ?? fileid,
-      isShare: !!share,
-      isAuth: !!cookieStore.get("asc_auth_key")?.value,
-    },
-    "Start get data for open file",
-  );
-  const data = await getData(
-    fileId ?? fileid ?? "",
-    version,
-    doc,
-    action,
-    share,
-    type,
-  );
 
   const deepLinkSettings = await getDeepLinkSettings();
 
@@ -220,7 +221,12 @@ async function Page({ searchParams }: RootPageProps) {
           src={docApiUrl}
         />
       )}
-      <Root {...data} shareKey={share} baseSdkConfig={baseSdkConfig} deepLinkSettings={deepLinkSettings?.handlingMode}/>
+      <Root
+        {...data}
+        shareKey={share}
+        baseSdkConfig={baseSdkConfig}
+        deepLinkSettings={deepLinkSettings?.handlingMode}
+      />
     </>
   );
 }

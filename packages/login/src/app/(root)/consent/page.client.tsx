@@ -105,6 +105,8 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
 
   React.useEffect(() => {
     const validateToken = async () => {
+      if (!user.id) return;
+
       const token = getOAuthJWTSignature(user.id);
 
       if (token) return;
@@ -117,7 +119,9 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
         return;
       }
 
-      window.location.replace(redirect_url);
+      const decodedRedirectUrl = window.atob(redirect_url);
+
+      window.location.replace(decodedRedirectUrl);
     };
 
     validateToken();
@@ -143,7 +147,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
         clientState = c.replace("client_state=", "").trim();
     });
 
-    await api.oauth.onOAuthSubmit(clientId, clientState, scope);
+    await api.oauth.onOAuthSubmit(clientId, clientState, scope, user.id);
 
     setIsAllowRunning(false);
   };
@@ -168,7 +172,7 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
 
     deleteCookie("client_state");
 
-    await api.oauth.onOAuthCancel(clientId, clientState);
+    await api.oauth.onOAuthCancel(clientId, clientState, user.id);
 
     setIsDenyRunning(false);
   };

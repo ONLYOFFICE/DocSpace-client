@@ -39,6 +39,7 @@ import { ModalDialog, ModalDialogType } from "../../../components/modal-dialog";
 import { Button, ButtonSize } from "../../../components/button";
 import { Text } from "../../../components/text";
 import { SimulatePassword } from "../../../components/simulate-password";
+import { isMobile } from "../../../utils";
 
 import styles from "../DownloadDialog.module.scss";
 import { isFile, type OnePasswordRowProps } from "../DownloadDialog.types";
@@ -164,12 +165,14 @@ export const OnePasswordRow = ({
                 fontWeight="600"
                 fontSize="14px"
                 className={styles.passwordTitle}
+                truncate
+                dir="auto"
               >
                 {item.title}
               </Text>
             </div>
             <ContextMenuButton
-              directionX="right"
+              directionX={isMobile() ? "left" : "right"}
               getData={getOptions}
               title={t("Common:Actions")}
               isDisabled={false}
@@ -180,6 +183,7 @@ export const OnePasswordRow = ({
           <SimulatePassword
             onChange={onChangePassword}
             forwardedRef={inputRef}
+            inputMaxWidth="none"
           />
         </div>
       </ModalDialog.Body>

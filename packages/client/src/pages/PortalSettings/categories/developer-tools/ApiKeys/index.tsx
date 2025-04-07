@@ -116,8 +116,10 @@ const ApiKeys = (props: ApiKeysProps) => {
     setIsRequestRunning(true);
     deleteApiKey(actionItem.id)
       .then((res) => {
-        if (res)
+        if (res) {
           setListItems((prev) => prev.filter((k) => k.id !== actionItem.id));
+          toastr.success(t("Settings:SecretKeyDeleted"));
+        }
       })
       .catch((err) => toastr.error(err))
       .finally(() => {
@@ -150,6 +152,7 @@ const ApiKeys = (props: ApiKeysProps) => {
           }
 
           setListItems(items);
+          toastr.success(t("Settings:SecretKeyEdited"));
         }
       })
       .catch((err) => toastr.error(err))

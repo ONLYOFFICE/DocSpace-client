@@ -35,8 +35,8 @@ const path = require("path");
 const srdDir = "../../packages/client/public/locales";
 const dstDir = "../../public/locales";
 
-const keys = ["GoToRoom"];
-const SRC_LOCALE_FILENAME = "JavascriptSdk.json";
+const keys = ["Forms"];
+const SRC_LOCALE_FILENAME = "Files.json";
 const DST_LOCALE_FILENAME = "Common.json";
 const SRC_LOCALE_DIRNAME = path.join(__dirname, srdDir);
 const DST_LOCALE_DIRNAME = path.join(__dirname, dstDir);

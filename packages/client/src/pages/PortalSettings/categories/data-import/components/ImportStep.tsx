@@ -137,7 +137,9 @@ const ImportStep = (props: ImportStepProps) => {
         isChecked={importOptions.importPersonalFiles}
         onChange={(e) => onChange(e, "importPersonalFiles")}
         sectionName={t("Settings:PersonalFiles")}
-        description={t("Settings:PersonalFilesDescription")}
+        description={t("Settings:ImportFilesLocation", {
+          sectionName: t("Common:MyFilesSection"),
+        })}
         exportSection={{
           sectionName: personalExportDetails.name,
           workspace: serviceName,
@@ -155,7 +157,9 @@ const ImportStep = (props: ImportStepProps) => {
         isChecked={importOptions.importSharedFiles}
         onChange={(e) => onChange(e, "importSharedFiles")}
         sectionName={t("Settings:SharedFiles")}
-        description={t("Settings:SharedFilesDescription")}
+        description={t("Settings:SharedFilesImportLocation", {
+          sectionName: t("Common:MyFilesSection"),
+        })}
         exportSection={{
           sectionName: sharedFilesExportDetails.name,
           workspace: serviceName,

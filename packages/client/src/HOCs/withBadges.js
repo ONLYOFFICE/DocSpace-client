@@ -288,7 +288,7 @@ export default function withBadges(WrappedComponent) {
       const isMutedBadge = isRoom ? mute : isMuteCurrentRoomNotifications;
 
       const extsCustomFilter =
-        filesSettingsStore.filesSettings.extsWebCustomFilterEditing;
+        filesSettingsStore?.extsWebCustomFilterEditing || [];
       const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
 
       return {

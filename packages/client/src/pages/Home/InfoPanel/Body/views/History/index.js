@@ -27,6 +27,7 @@
 import { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { RoomsType } from "@docspace/shared/enums";
 
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
@@ -53,6 +54,7 @@ const History = ({
   setCalendarDay,
   selectionHistoryTotal,
   fetchMoreHistory,
+  setSelectionHistory,
 }) => {
   const scrollContext = useContext(ScrollbarContext);
   const scrollElement = scrollContext.parentScrollbar?.scrollerElement;
@@ -64,6 +66,8 @@ const History = ({
   const [isShowLoader, setIsShowLoader] = useState(false);
 
   const isThirdParty = infoPanelSelection?.providerId;
+  const isPublicRoomType =
+    infoPanelSelection?.roomType === RoomsType.PublicRoom;
 
   const [isLoadingNextPage, setIsLoadingNextPage] = useState(false);
   const [currentHistory, setCurrentHistory] = useState(selectionHistory);
@@ -141,6 +145,9 @@ const History = ({
   }, [scrollElement, onScroll]);
 
   useEffect(() => {
+    if (isThirdParty && isPublicRoomType) {
+      setSelectionHistory(null, null);
+    }
     if (!isMount.current || isThirdParty) return;
 
     getHistory(infoPanelSelection);
@@ -289,6 +296,7 @@ export default inject(
       calendarDay,
       setCalendarDay,
       fetchMoreHistory,
+      setSelectionHistory,
     } = infoPanelStore;
     const { culture } = settingsStore;
 
@@ -313,6 +321,7 @@ export default inject(
       calendarDay,
       setCalendarDay,
       fetchMoreHistory,
+      setSelectionHistory,
     };
   },
 )(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));

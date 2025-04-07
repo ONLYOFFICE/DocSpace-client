@@ -232,7 +232,6 @@ const Root = ({
     setFillingStatusDialogVisible,
     onCloseFillingStatusDialog,
     onStopFilling,
-    // onDelete,
     onResetFilling,
   } = useFillingStatusDialog({
     openStopFillingDialog,
@@ -287,6 +286,7 @@ const Root = ({
       userEmail={user?.email}
       deepLinkConfig={settings?.deepLink}
       setIsShowDeepLink={setIsShowDeepLink}
+      deepLinkSettings={deepLinkSettings ?? 0}
     />
   ) : error && error.message === "restore-backup" && !isSkipError ? (
     <ErrorContainer
@@ -378,7 +378,6 @@ const Root = ({
           visible={fillingStatusDialogVisible}
           onClose={onCloseFillingStatusDialog}
           onStopFilling={onStopFilling}
-          // onDelete={onDelete}
           onResetFilling={onResetFilling}
         />
       ) : null}

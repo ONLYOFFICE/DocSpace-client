@@ -34,6 +34,9 @@ import { mobile, getLogoUrl, injectDefaultTheme } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
+import { Button } from "@docspace/shared/components/button";
+
+import PersonDefaultReactSvg from "PUBLIC_DIR/images/person.default.react.svg";
 
 import i18n from "../../../i18n";
 
@@ -89,6 +92,15 @@ const Header = styled.header.attrs(injectDefaultTheme)`
   }
 `;
 
+const StyledButton = styled(Button)`
+  position: absolute;
+  inset-inline-end: 8px;
+  top: 8px;
+  svg path {
+    fill: ${globalColors.white};
+  }
+`;
+
 const HeaderUnAuth = ({
   wizardToken,
   isAuthenticated,
@@ -98,6 +110,9 @@ const HeaderUnAuth = ({
   isPublicRoom,
   moveToPublicRoom,
   rootFolderId,
+  isFrame,
+  onOpenSignInWindow,
+  windowIsOpen,
 }) => {
   const navigate = useNavigate();
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
@@ -108,6 +123,8 @@ const HeaderUnAuth = ({
     const { key } = culture;
     setLanguageForUnauthorized(key, i18n);
   };
+
+  const showSignInButton = !isFrame && isPublicRoom && !isAuthenticated;
 
   return (
     <Header isLoaded={isLoaded} className="navMenuHeaderUnAuth">
@@ -126,6 +143,17 @@ const HeaderUnAuth = ({
           </div>
         ) : null}
       </div>
+      {showSignInButton ? (
+        <StyledButton
+          className="header-mobile-sign-in"
+          primary
+          style={{ minWidth: "32px", padding: 0 }}
+          size="small"
+          icon={<PersonDefaultReactSvg />}
+          onClick={() => onOpenSignInWindow()}
+          isDisabled={windowIsOpen}
+        />
+      ) : null}
 
       {!wizardToken ? (
         <LanguageCombobox
@@ -158,8 +186,9 @@ export default inject(
     selectedFolderStore,
   }) => {
     const { isAuthenticated } = authStore;
-    const { enableAdmMess, wizardToken, theme, cultures } = settingsStore;
-    const { isPublicRoom } = publicRoomStore;
+    const { enableAdmMess, wizardToken, theme, cultures, isFrame } =
+      settingsStore;
+    const { isPublicRoom, onOpenSignInWindow, windowIsOpen } = publicRoomStore;
     const { moveToPublicRoom } = filesActionsStore;
     const { navigationPath, id } = selectedFolderStore;
 
@@ -177,6 +206,9 @@ export default inject(
       isPublicRoom,
       moveToPublicRoom,
       rootFolderId,
+      isFrame,
+      onOpenSignInWindow,
+      windowIsOpen,
     };
   },
 )(observer(HeaderUnAuth));

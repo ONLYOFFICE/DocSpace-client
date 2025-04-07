@@ -21,6 +21,7 @@ import {
   SortByFieldName,
 } from "@docspace/shared/enums";
 import { Nullable, TSortBy, type TViewAs } from "@docspace/shared/types";
+import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import ViewRowsReactSvg from "PUBLIC_DIR/images/view-rows.react.svg";
 import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg";
@@ -212,9 +213,15 @@ export default function useFilesFilter({
       },
       {
         id: "filter_type-forms",
+        key: FilterType.PDFForm.toString(),
+        group: FilterGroups.filterType,
+        label: getManyPDFTitle(t, true),
+      },
+      {
+        id: "filter_type-pdf",
         key: FilterType.Pdf.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Forms").toLowerCase(),
+        label: getManyPDFTitle(t, false),
       },
       {
         id: "filter_type-archive",
@@ -271,7 +278,10 @@ export default function useFilesFilter({
           label = t("Common:Files");
           break;
         case FilterType.Pdf.toString():
-          label = t("Common:Forms");
+          label = getManyPDFTitle(t, false);
+          break;
+        case FilterType.PDFForm.toString():
+          label = getManyPDFTitle(t, true);
           break;
         default:
           break;

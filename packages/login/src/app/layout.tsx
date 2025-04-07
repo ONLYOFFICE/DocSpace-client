@@ -80,7 +80,6 @@ export default async function RootLayout({
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
 
   if (settings === "portal-not-found") {
-    const hdrs = headers();
     const config = await getConfig();
 
     const host = hdrs.get("host");

@@ -2177,7 +2177,7 @@ class FilesStore {
       const isPdf = item.fileExst === ".pdf";
 
       const extsCustomFilter =
-        this.filesSettingsStore.filesSettings.extsWebCustomFilterEditing;
+        this.filesSettingsStore?.extsWebCustomFilterEditing || [];
       const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
 
       let fileOptions = [

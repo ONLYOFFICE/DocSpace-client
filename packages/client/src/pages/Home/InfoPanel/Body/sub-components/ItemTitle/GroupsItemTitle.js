@@ -78,7 +78,7 @@ const GroupsItemTitle = ({
         </div>
         {groupName ? (
           <Text className="info-text__email" title={infoPanelSelection.email}>
-            {t("PeopleTranslations:PeopleCount", {
+            {t("PeopleTranslations:MembersCount", {
               count: infoPanelSelection.membersCount,
             })}
           </Text>

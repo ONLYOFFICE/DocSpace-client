@@ -719,7 +719,7 @@ class OAuthStore {
         icon: OauthRevokeSvgUrl,
         label: t("Revoke"),
         onClick: () => this.onRevoke(clientId),
-        disabled: !item.enabled,
+        disabled: false,
       });
 
       return items;

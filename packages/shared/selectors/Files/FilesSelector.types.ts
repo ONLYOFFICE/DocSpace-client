@@ -37,7 +37,7 @@ import {
   TFolder,
   TFolderSecurity,
 } from "../../api/files/types";
-import { DeviceType, FolderType, RoomsType } from "../../enums";
+import { DeviceType, FolderType, RoomsType, FileType } from "../../enums";
 import { TRoom, TRoomSecurity } from "../../api/rooms/types";
 import { Nullable } from "../../types";
 
@@ -152,6 +152,7 @@ export type TSelectedFileInfo = {
   title: string;
   path?: string[] | undefined;
   fileExst?: string | undefined;
+  fileType?: FileType | undefined;
   inPublic?: boolean | undefined;
 } | null;
 

@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useTranslation } from "react-i18next";
+
 import { Heading } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
@@ -55,11 +57,12 @@ const PluginItem = ({
   url,
 }: PluginItemProps) => {
   const imgSrc = image ? getPluginUrl(url, `/assets/${image}`) : null;
+  const { t } = useTranslation(["Common"]);
 
   const withSettings = scopes.includes(PluginScopes.Settings);
 
   const onChangeStatus = () => {
-    updatePlugin?.(name, !enabled);
+    updatePlugin?.(name, !enabled, undefined, t);
   };
 
   const onOpenSettingsDialog = () => {

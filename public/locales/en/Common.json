@@ -269,6 +269,7 @@
   "Folders": "Folders",
   "FoldersAlreadyContains": "The destination already contains folders with the same name.",
   "FoldersAndFilesWillBeCopied": "Folders and files will be copied in the destination",
+  "Form": "Form",
   "FormAuthorizeToast": "If you have an account in this {{productName}}, we recommend that you log in so that completed forms are recorded under your account.",
   "FormFilingRoomInfo": "Upload PDF forms into the room. Invite members and guests to fill out a PDF form. Review completed forms and analyze data automatically collected in a spreadsheet.",
   "FormFilingRoomTitle": "Form Filling Room",
@@ -466,6 +467,8 @@
   "Petabyte": "PB",
   "Phone": "Phone",
   "Plugins": "Plugins",
+  "PluginDisabled": "Plugin disabled",
+  "PluginEnabled": "Plugin enabled",
   "PortalAdmin": "{{productName}} admin",
   "PortalOwner": "{{productName}} owner",
   "PortalRestriction": "Your IP address is not included in the list of allowed IP addresses to access this {{productName}}. Turn off a VPN if it's enabled and reload the page, or use another IP address to log in.",
@@ -707,5 +710,6 @@
   "Yes": "Yes",
   "Yesterday": "Yesterday",
   "You": "You",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "Forms": "Forms"
 }

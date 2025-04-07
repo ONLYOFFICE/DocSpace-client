@@ -181,13 +181,7 @@ const LanguageAndTimeZoneComponent = (props) => {
       initSettings(page).then(() => setIsLoaded(true));
     }
 
-    const isLoadedSetting =
-      isLoaded &&
-      tReady &&
-      timezoneFromSessionStorage &&
-      languageFromSessionStorage &&
-      state.timezoneDefault &&
-      state.languageDefault;
+    const isLoadedSetting = isLoaded && tReady && timezoneFromSessionStorage;
 
     if (isLoadedSetting) {
       setIsLoadedLngTZSettings(isLoadedSetting);
@@ -279,12 +273,7 @@ const LanguageAndTimeZoneComponent = (props) => {
       state.timezone !== prevState.current.timezone
     ) {
       const isLoadedSetting =
-        isLoaded &&
-        tReady &&
-        state.timezone &&
-        state.language &&
-        timezoneDefault &&
-        languageDefault;
+        isLoaded && tReady && state.timezone && state.language;
 
       if (isLoadedSetting) {
         setIsLoadedLngTZSettings(isLoadedSetting);

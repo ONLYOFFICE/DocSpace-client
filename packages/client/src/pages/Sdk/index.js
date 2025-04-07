@@ -36,6 +36,7 @@ import {
   createPasswordHash,
   frameCallCommand,
 } from "@docspace/shared/utils/common";
+import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 import { RoomsType, FilterType } from "@docspace/shared/enums";
 import api from "@docspace/shared/api";
 import FilesSelector from "../../components/FilesSelector";
@@ -81,9 +82,8 @@ const Sdk = ({
     [FilterType.FoldersOnly]: t("Common:SelectTypeFiles", {
       type: t("Common:Folders").toLowerCase(),
     }),
-    [FilterType.Pdf]: t("Common:SelectTypeFiles", {
-      type: t("Files:Forms").toLowerCase(),
-    }),
+    [FilterType.Pdf]: getManyPDFTitle(t, false),
+    [FilterType.PDFForm]: getManyPDFTitle(t, true),
     EditorSupportedTypes: t("Common:SelectTypeFiles", {
       type: t("AllTypesAvailableForEditing", {
         organizationName: logoText,

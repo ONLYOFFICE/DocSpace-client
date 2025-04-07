@@ -32,6 +32,19 @@ import { getIconPathByFolderType } from "@docspace/shared/utils/common";
 import { iconSize32 } from "@docspace/shared/utils/image-helpers";
 import { FolderType } from "@docspace/shared/enums";
 
+const fakeCreatedBy = {
+  id: "id",
+  displayName: "",
+  avatar: "",
+  avatarOriginal: "",
+  avatarMax: "",
+  avatarMedium: "",
+  avatarSmall: "",
+  profileUrl: "",
+  hasAvatar: false,
+  isAnonim: false,
+};
+
 export const fakeFormFillingList = [
   {
     title: "In process",
@@ -40,6 +53,7 @@ export const fakeFormFillingList = [
     isFolder: true,
     icon: iconSize32.get(getIconPathByFolderType(FolderType.InProgress)),
     contextOptions: ["select"],
+    createdBy: fakeCreatedBy,
   },
   {
     title: "Complete",
@@ -48,6 +62,7 @@ export const fakeFormFillingList = [
     isFolder: true,
     icon: iconSize32.get(getIconPathByFolderType(FolderType.Done)),
     contextOptions: ["select"],
+    createdBy: fakeCreatedBy,
   },
   {
     title: "ONLYOFFICE Sample PDF form",
@@ -60,5 +75,6 @@ export const fakeFormFillingList = [
     security: {
       Lock: false,
     },
+    createdBy: fakeCreatedBy,
   },
 ];

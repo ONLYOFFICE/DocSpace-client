@@ -152,8 +152,12 @@ const ClientForm = ({
 
         setIsRequestRunning(true);
 
+        await setJwtToken!();
+
         await addClient?.(form);
       } else {
+        await setJwtToken!();
+
         await updateClient?.(clientId, form);
       }
 

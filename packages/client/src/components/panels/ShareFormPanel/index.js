@@ -116,7 +116,7 @@ const ShareFormPanel = ({
       cards={cards}
       visible={visible}
       onClose={onClose}
-      visibleContainer={isVisibleSelectFormRoomDialog}
+      containerVisible={isVisibleSelectFormRoomDialog}
       container={
         <ShareCollectSelector
           file={file}

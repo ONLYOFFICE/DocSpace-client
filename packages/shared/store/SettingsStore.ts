@@ -780,6 +780,13 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  get docspaceManagingRoomsHelpUrl() {
+    return this.helpCenterDomain &&
+      this.helpCenterEntries?.docspacemanagingrooms
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.docspacemanagingrooms}`
+      : this.helpCenterDomain;
+  }
+
   setIsDesktopClientInit = (isDesktopClientInit: boolean) => {
     this.isDesktopClientInit = isDesktopClientInit;
   };

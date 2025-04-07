@@ -34,6 +34,7 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 import { Text } from "../../../components/text";
 import { Checkbox } from "../../../components/checkbox";
 import { LinkWithDropdown } from "../../../components/link-with-dropdown";
+import { isMobile } from "../../../utils";
 
 import styles from "../DownloadDialog.module.scss";
 import {
@@ -193,6 +194,8 @@ export const DownloadContent = (props: DownloadContentProps) => {
                 directionX="left"
                 isAside
                 withoutBackground
+                hasScroll={isMobile()}
+                manualWidth={isMobile() ? "148px" : undefined}
               >
                 {titleFormat}
               </LinkWithDropdown>

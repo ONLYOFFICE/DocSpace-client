@@ -164,6 +164,7 @@ export const OnePasswordRow = ({
                 fontWeight="600"
                 fontSize="14px"
                 className={styles.passwordTitle}
+                truncate
               >
                 {item.title}
               </Text>

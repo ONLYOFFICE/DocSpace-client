@@ -243,6 +243,7 @@
   "FormFilingRoomInfo": "PDF formulieren uploaden naar de kamer. Nodig leden en gasten uit om een PDF formulier in te vullen. Controleer ingevulde formulieren en analyseer automatisch verzamelde gegevens in een spreadsheet.",
   "FormFilingRoomTitle": "Kamer voor het invullen van formulieren",
   "FormRoom": "Formulier kamer",
+  "Forms": "Formulieren",
   "FormTemplates": "Formulier sjablonen",
   "Free": "Gratis",
   "FreeAccessToLicensedVersion": "Gratis toegang tot {{license}} oplossing",
@@ -637,6 +638,5 @@
   "Years": "Jaren",
   "Yes": "Ja",
   "Yesterday": "Gisteren",
-  "You": "U",
-  "Forms": "Formulieren"
+  "You": "U"
 }

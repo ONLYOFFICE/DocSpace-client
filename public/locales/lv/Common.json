@@ -243,6 +243,7 @@
   "FormFilingRoomInfo": "Augšupielādējiet PDF veidlapas istabā. Uzaiciniet dalībniekus un viesus aizpildīt PDF veidlapu. Pārskatiet aizpildītās veidlapas un analizējiet automātiski apkopotos datus izklājlapā.",
   "FormFilingRoomTitle": "Veidlapu aizpildīšanas telpa",
   "FormRoom": "Veidlapu telpa",
+  "Forms": "Veidlapas",
   "FormTemplates": "Veidlapu veidnes",
   "Free": "Bezmaksas",
   "FreeAccessToLicensedVersion": "Bezmaksas piekļuve {{license}} risinājumam",
@@ -637,6 +638,5 @@
   "Years": "Gadi",
   "Yes": "Jā",
   "Yesterday": "어제",
-  "You": "Jūs",
-  "Forms": "Veidlapas"
+  "You": "Jūs"
 }

@@ -243,6 +243,7 @@
   "FormFilingRoomInfo": "Carica moduli PDF nella stanza. Invitate i membri e gli ospiti a compilare un modulo PDF. Esamina i moduli compilati e analizza i dati raccolti automaticamente in un foglio di calcolo.",
   "FormFilingRoomTitle": "Stanza per la compilazione moduli",
   "FormRoom": "Stanza dei moduli",
+  "Forms": "Moduli",
   "FormTemplates": "Modelli di moduli",
   "Free": "Gratuito",
   "FreeAccessToLicensedVersion": "Accesso gratuito alla soluzione {{license}}",
@@ -638,6 +639,5 @@
   "Years": "Anni",
   "Yes": "Sì",
   "Yesterday": "Ieri",
-  "You": "Tu",
-  "Forms": "Moduli"
+  "You": "Tu"
 }

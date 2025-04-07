@@ -215,7 +215,7 @@
   "EncryptingFile": "Encrypting file",
   "EncryptionFilePreparing": "Preparing file for encryption",
   "EncryptionKeysReload": "Encryption keys must be re-entered",
-  "EncryptionPortalSubtitle": "As soon as the process is over, the portal data will be avallable for work.",
+  "EncryptionPortalSubtitle": "As soon as the process is over, the portal data will be available for work.",
   "EncryptionPortalTitle": "The encryption process in progress",
   "EnterName": "Enter name",
   "EnterPassword": "Enter password",
@@ -274,6 +274,7 @@
   "FormFilingRoomInfo": "Upload PDF forms into the room. Invite members and guests to fill out a PDF form. Review completed forms and analyze data automatically collected in a spreadsheet.",
   "FormFilingRoomTitle": "Form Filling Room",
   "FormRoom": "Form room",
+  "Forms": "Forms",
   "FormTemplates": "Form templates",
   "ForQuestionsContactPortalAdmin": "For any questions, please contact your {{productName}} admin.",
   "Free": "Free",
@@ -466,9 +467,9 @@
   "PerUserYear": "<1>{{currencySymbol}}</1><1>{{price}}</1> per admin/year",
   "Petabyte": "PB",
   "Phone": "Phone",
-  "Plugins": "Plugins",
   "PluginDisabled": "Plugin disabled",
   "PluginEnabled": "Plugin enabled",
+  "Plugins": "Plugins",
   "PortalAdmin": "{{productName}} admin",
   "PortalOwner": "{{productName}} owner",
   "PortalRestriction": "Your IP address is not included in the list of allowed IP addresses to access this {{productName}}. Turn off a VPN if it's enabled and reload the page, or use another IP address to log in.",
@@ -710,6 +711,5 @@
   "Yes": "Yes",
   "Yesterday": "Yesterday",
   "You": "You",
-  "YourTurn": "Your turn",
-  "Forms": "Forms"
+  "YourTurn": "Your turn"
 }

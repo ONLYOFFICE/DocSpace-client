@@ -243,6 +243,7 @@
   "FormFilingRoomInfo": "PDF formlarını odaya yükleyin. Üyeleri ve misafirleri PDF formu doldurmaya davet edin. Doldurulan formları inceleyin ve bir elektronik tabloda otomatik olarak toplanan verileri analiz edin.",
   "FormFilingRoomTitle": "Form Doldurma Odası",
   "FormRoom": "Form odası",
+  "Forms": "Formlar",
   "FormTemplates": "Form şablonları",
   "Free": "Ücretsiz",
   "FreeAccessToLicensedVersion": "{{license}} çözümüne ücretsiz erişim",
@@ -637,6 +638,5 @@
   "Years": "Yıl",
   "Yes": "Evet",
   "Yesterday": "Dün",
-  "You": "Siz",
-  "Forms": "Formlar"
+  "You": "Siz"
 }

@@ -243,6 +243,7 @@
   "FormFilingRoomInfo": "Lataa PDF-lomakkeita huoneeseen. Kutsu jäseniä ja vieraita täyttämään PDF-lomake. Katsele täydennettyjä lomakkeita ja analysoi taulukkoon kerättyä tietoa automaattisesti.",
   "FormFilingRoomTitle": "Lomakkeen täyttöhuone",
   "FormRoom": "Lomakehuone",
+  "Forms": "Lomakkeet",
   "FormTemplates": "Lomakepohjat",
   "Free": "Ilmainen",
   "FreeAccessToLicensedVersion": "Vapaa pääsy {{license}} -ratkaisuun",
@@ -637,6 +638,5 @@
   "Years": "Vuosia",
   "Yes": "Kyllä",
   "Yesterday": "Eilen",
-  "You": "Sinä",
-  "Forms": "Lomakkeet"
+  "You": "Sinä"
 }

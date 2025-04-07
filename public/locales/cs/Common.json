@@ -243,6 +243,7 @@
   "FormFilingRoomInfo": "Nahrajte PDF formuláře do místnosti. Vyzvěte členy a hosty, k vyplnění PDF formuláře. Prohlédněte si vyplněné formuláře a analyzujte automaticky shromážděná data v tabulce.",
   "FormFilingRoomTitle": "Místnost pro vyplňování formulářů",
   "FormRoom": "Místnost s formuláři",
+  "Forms": "Formuláře",
   "FormTemplates": "Šablony formulářů",
   "Free": "Volno",
   "FreeAccessToLicensedVersion": "Bezplatný přístup k {{license}} řešení.",
@@ -637,6 +638,5 @@
   "Years": "Roky",
   "Yes": "Ano",
   "Yesterday": "Včera",
-  "You": "Vy",
-  "Forms": "Formuláře"
+  "You": "Vy"
 }

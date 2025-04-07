@@ -243,6 +243,7 @@
   "FormFilingRoomInfo": "Otpremite PDF obrasce u sobu. Pozovite članove i goste da popune PDF obrazac. Pregledajte popunjene obrasce i analizirajte podatke koji se automatski prikupljaju u tabeli.",
   "FormFilingRoomTitle": "Prostorija za Popunjavanje Formulara",
   "FormRoom": "Obrazac soba",
+  "Forms": "Obrasci",
   "FormTemplates": "Šabloni obrazaca",
   "Free": "Besplatno",
   "FreeAccessToLicensedVersion": "Besplatan pristup {{license}} rešenju",
@@ -638,6 +639,5 @@
   "Years": "Godine",
   "Yes": "Da",
   "Yesterday": "Juče",
-  "You": "Vi",
-  "Forms": "Obrasci"
+  "You": "Vi"
 }

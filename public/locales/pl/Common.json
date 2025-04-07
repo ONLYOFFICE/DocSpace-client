@@ -243,6 +243,7 @@
   "FormFilingRoomInfo": "Prześlij formularze PDF do pokoju. Zaproś członków i gości do wypełnienia formularza PDF. Sprawdź wypełnione formularze i przeanalizuj dane automatycznie zebrane w arkuszu kalkulacyjnym.",
   "FormFilingRoomTitle": "Pokój do wypełniania formularzy",
   "FormRoom": "Pokój z formularzami",
+  "Forms": "Formularze",
   "FormTemplates": "Szablony formularza",
   "Free": "Darmowy",
   "FreeAccessToLicensedVersion": "Bezpłatny dostęp do rozwiązania {{license}}",
@@ -637,6 +638,5 @@
   "Years": "Lata",
   "Yes": "Tak",
   "Yesterday": "Wczoraj",
-  "You": "Ty",
-  "Forms": "Formularze"
+  "You": "Ty"
 }

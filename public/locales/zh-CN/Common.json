@@ -243,6 +243,7 @@
   "FormFilingRoomInfo": "将 PDF 表单上传至房间。邀请成员和访客填写 PDF 表单。查看已完成的表单并分析电子表格中自动收集的数据。",
   "FormFilingRoomTitle": "表单填写房间",
   "FormRoom": "表单房间",
+  "Forms": "表单",
   "FormTemplates": "表单模板",
   "Free": "免费",
   "FreeAccessToLicensedVersion": "免费使用 {{license}} 解决方案",
@@ -639,6 +640,5 @@
   "Years": "年数",
   "Yes": "是",
   "Yesterday": "昨天",
-  "You": "您",
-  "Forms": "表单"
+  "You": "您"
 }

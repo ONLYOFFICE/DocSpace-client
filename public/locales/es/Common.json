@@ -243,6 +243,7 @@
   "FormFilingRoomInfo": "Cargue formularios PDF en la sala. Invite a miembros e invitados a rellenar un formulario PDF. Revise los formularios rellenados y analice los datos recopilados automáticamente en una hoja de cálculo.",
   "FormFilingRoomTitle": "Sala para rellenar formularios",
   "FormRoom": "Sala de formularios",
+  "Forms": "Formularios",
   "FormTemplates": "Plantillas de formulario",
   "Free": "Gratis",
   "FreeAccessToLicensedVersion": "Acceso gratuito a la solución {{license}}",
@@ -638,6 +639,5 @@
   "Years": "Años",
   "Yes": "Sí",
   "Yesterday": "Ayer",
-  "You": "Usted",
-  "Forms": "Formularios"
+  "You": "Usted"
 }

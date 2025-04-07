@@ -56,7 +56,7 @@ const EncryptDataPage = ({ logoText }: EncryptDataPageProps) => {
   const [status, setStatus] = useState(0);
 
   const { settingsStore } = useStore();
-  const { portals } = settingsStore;
+  const { portals, encryptionBlockHelpUrl } = settingsStore;
 
   const isDisabled = portals.length <= 1;
 
@@ -114,22 +114,25 @@ const EncryptDataPage = ({ logoText }: EncryptDataPageProps) => {
           <Text className="description">
             {t("EncryptDataWarningDescription")}
           </Text>
-          <Text>
-            <Trans
-              t={t}
-              i18nKey="MoreDetails"
-              ns="Management"
-              values={{ link: t("Common:HelpCenter") }}
-              components={{
-                1: (
-                  <Link
-                    className="link"
-                    color={currentColorScheme?.main?.accent}
-                  />
-                ),
-              }}
-            />
-          </Text>
+          {encryptionBlockHelpUrl ? (
+            <Text>
+              <Trans
+                t={t}
+                i18nKey="MoreDetails"
+                ns="Management"
+                values={{ link: t("Common:HelpCenter") }}
+                components={{
+                  1: (
+                    <Link
+                      className="link"
+                      color={currentColorScheme?.main?.accent}
+                      href={encryptionBlockHelpUrl}
+                    />
+                  ),
+                }}
+              />
+            </Text>
+          ) : null}
           <Checkbox
             className="checkbox"
             label={t("NotifyUsers")}

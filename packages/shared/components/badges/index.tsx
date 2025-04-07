@@ -238,17 +238,19 @@ const Badges = ({
       <Text fontSize="12px" fontWeight={400} noSelect>
         {t("CustomFilterEnableDiscription")}
       </Text>
-      <Link
-        type={LinkType.action}
-        target={LinkTarget.blank}
-        className="custom-filter-tooltip-link"
-        fontSize="13px"
-        fontWeight={600}
-        href={customFilterExternalLink}
-        isHovered
-      >
-        {t("Common:LearnMore")}
-      </Link>
+      {customFilterExternalLink ? (
+        <Link
+          type={LinkType.action}
+          target={LinkTarget.blank}
+          className="custom-filter-tooltip-link"
+          fontSize="13px"
+          fontWeight={600}
+          href={customFilterExternalLink}
+          isHovered
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      ) : null}
     </>
   );
 

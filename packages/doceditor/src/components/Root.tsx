@@ -269,6 +269,7 @@ const Root = ({
       userEmail={user?.email}
       deepLinkConfig={settings?.deepLink}
       setIsShowDeepLink={setIsShowDeepLink}
+      deepLinkSettings={deepLinkSettings ?? 0}
     />
   ) : error && error.message === "restore-backup" && !isSkipError ? (
     <ErrorContainer

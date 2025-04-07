@@ -259,9 +259,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const onContextOptionsClick = () => {
-    isContactsInsideGroupPage
-      ? setGroupsBufferSelection(currentGroup)
-      : setBufferSelection(selectedFolder);
+    if (isContactsInsideGroupPage) setGroupsBufferSelection(currentGroup);
+    else if (!isContactsPage) setBufferSelection(selectedFolder);
   };
 
   const onSelect = (e) => {

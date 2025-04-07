@@ -219,6 +219,8 @@ export type THelpCenterEntries = {
   twofactorauthentication: string;
   userguides: string;
   welcomepage: string;
+  limiteddevtools: string;
+  encryption: string;
 };
 
 export type TIntegrationsEntries = {

@@ -768,6 +768,18 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  get limitedDevToolsBlockHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.limiteddevtools
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.limiteddevtools}`
+      : this.helpCenterDomain;
+  }
+
+  get encryptionBlockHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.encryption
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.encryption}`
+      : this.helpCenterDomain;
+  }
+
   setIsDesktopClientInit = (isDesktopClientInit: boolean) => {
     this.isDesktopClientInit = isDesktopClientInit;
   };

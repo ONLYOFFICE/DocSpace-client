@@ -36,4 +36,6 @@ export interface DeepLinkProps {
   deepLinkConfig?: TDeepLinkConfig;
 
   setIsShowDeepLink: (value: boolean) => void;
+
+  deepLinkSettings: number;
 }

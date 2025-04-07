@@ -501,16 +501,17 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         />
       </div>
       {lifetimeIsChecked ? (
-        <div className="api-key_name-body-container">
-          <Text fontSize="12px" fontWeight={600}>
-            {t("Settings:ApiKeyLifetime")}
-          </Text>
-          <Text fontSize="12px">
-            {t("Settings:ApiKeyWillBeDeleted", {
-              days: expiresInDays,
-            })}
-          </Text>
-        </div>
+        <Text fontSize="12px" fontWeight={400}>
+          <Trans
+            t={t}
+            ns="Settings"
+            i18nKey="ApiKeyLifetime"
+            values={{ days: expiresInDays }}
+            components={{
+              1: <Text fontSize="12px" fontWeight={600} as="span" />,
+            }}
+          />
+        </Text>
       ) : null}
     </StyledBodyContent>
   );

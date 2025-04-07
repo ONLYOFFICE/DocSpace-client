@@ -57,10 +57,12 @@ const DevToolsAccess = ({
   accessDevToolsForUsers,
   setDevToolsAccessSettings,
   currentColorScheme,
+  limitedDevToolsBlockHelpUrl,
 }: {
   accessDevToolsForUsers: string;
   setDevToolsAccessSettings: (accessEnabled: string) => Promise<void>;
   currentColorScheme: TColorScheme;
+  limitedDevToolsBlockHelpUrl: string;
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -199,15 +201,17 @@ const DevToolsAccess = ({
         <Text fontSize="13px" fontWeight="400">
           {t("DeveloperToolsAccessDescription")}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target={LinkTarget.blank}
-          isHovered
-          href="" // TODO: add link
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {limitedDevToolsBlockHelpUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target={LinkTarget.blank}
+            isHovered
+            href={limitedDevToolsBlockHelpUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup
@@ -256,11 +260,13 @@ export const DevToolsAccessSection = inject(({ settingsStore }: TStore) => {
     accessDevToolsForUsers,
     setDevToolsAccessSettings,
     currentColorScheme,
+    limitedDevToolsBlockHelpUrl,
   } = settingsStore;
 
   return {
     accessDevToolsForUsers,
     setDevToolsAccessSettings,
     currentColorScheme,
+    limitedDevToolsBlockHelpUrl,
   };
 })(observer(DevToolsAccess));

@@ -183,6 +183,7 @@ export const OnePasswordRow = ({
           <SimulatePassword
             onChange={onChangePassword}
             forwardedRef={inputRef}
+            inputMaxWidth="none"
           />
         </div>
       </ModalDialog.Body>

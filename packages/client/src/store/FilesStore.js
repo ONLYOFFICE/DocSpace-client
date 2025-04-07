@@ -2927,9 +2927,10 @@ class FilesStore {
   };
 
   removeFiles = (fileIds, folderIds, showToast, destFolderId) => {
-    const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
+      this.treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     let deleteCount = 0;
 

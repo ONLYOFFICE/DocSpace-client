@@ -162,6 +162,7 @@ class SecondaryProgressDataStore {
           ) : (
             <Trans
               t={t}
+              ns="Common"
               i18nKey="CopyItem"
               components={commonComponents}
               values={commonProps}

@@ -59,6 +59,7 @@ import FillingStatusDialog from "./filling-status-dialog";
 import { useStopFillingDialog } from "@/hooks/useStopFillingDialog";
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { useShareFormDialog } from "@/hooks/useShareFormDialog";
+import useAssignRolesDialog from "@/hooks/useAssignRolesDialog";
 
 const DeepLink = dynamic(() => import("./deep-link"), {
   ssr: false,
@@ -84,6 +85,15 @@ const StartFillingPanel = dynamic(
 const ShareFormDialog = dynamic(() => import("./ShareFormDialog"), {
   ssr: false,
 });
+
+const AssignRolesDialog = dynamic(
+  async () =>
+    (await import("@docspace/shared/dialogs/assign-roles-dialog"))
+      .AssignRolesDialog,
+  {
+    ssr: false,
+  },
+);
 
 const Root = ({
   settings,
@@ -168,6 +178,13 @@ const Root = ({
   } = useSelectFileDialog({ instanceId: instanceId ?? "" });
 
   const {
+    assignRolesDialogData,
+    onCloseAssignRolesDialog,
+    openAssignRolesDialog,
+    onSubmitAssignRoles,
+  } = useAssignRolesDialog();
+
+  const {
     onCloseShareFormDialog,
     openShareFormDialog,
     shareFormDialogVisible,
@@ -182,7 +199,7 @@ const Root = ({
     headerLabelSFSDialog,
     onDownloadAs,
     createDefineRoomType,
-  } = useShareFormDialog(fileInfo);
+  } = useShareFormDialog(fileInfo, openAssignRolesDialog);
 
   const {
     isSharingDialogVisible,
@@ -390,6 +407,15 @@ const Root = ({
           onSubmitStartFillingSelectDialog={onSubmitStartFillingSelectDialog}
           isVisibleStartFillingSelectDialog={isVisibleStartFillingSelectDialog}
           updateAccessLink={shareFormDialogData.updateAccessLink}
+        />
+      )}
+
+      {assignRolesDialogData.visible && (
+        <AssignRolesDialog
+          visible={assignRolesDialogData.visible}
+          onClose={onCloseAssignRolesDialog}
+          onSubmit={onSubmitAssignRoles}
+          roomName={assignRolesDialogData.roomName}
         />
       )}
     </div>

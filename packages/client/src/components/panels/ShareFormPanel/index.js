@@ -52,7 +52,7 @@ const ShareFormPanel = ({
 
   const file = useMemo(
     () => files.find((item) => item.id === fileId),
-    [fileId],
+    [fileId, files],
   );
 
   const onClose = useCallback(() => {
@@ -83,7 +83,7 @@ const ShareFormPanel = ({
   const cards = useMemo(
     () => [
       {
-        id: "form-yourself",
+        id: "quick-sharing",
         title: t("Common:QuickSharing"),
         description: t("Common:ShareTheOriginalFormForFillingOut"),
         buttonLabel: t("Common:Share"),

@@ -100,6 +100,7 @@
   "Create": "Create",
   "CreateAndCopy": "Create and copy",
   "CreateCopy": "Create copy",
+  "CopyItem": "<2>{{title}}</2> successfully copied to <1>{{folderName}}</1>",
   "CreateDescription": "There will be two different files in the folder.",
   "CreateFileCopy": "Create file copy",
   "CreateFolderDescription": "There will be two different folders in the destination",

@@ -50,15 +50,24 @@ const StyledDropDown = styled(DropDown).attrs(injectDefaultTheme)`
 
   width: 446px;
   max-width: 446px;
-  div {
-    max-width: 446px;
+  .dropdown-item {
+    min-width: 446px;
   }
 
   @media ${mobile} {
     width: calc(100vw - 34px);
     max-width: calc(100vw - 34px);
-    div {
-      max-width: calc(100vw - 34px);
+    .dropdown-item {
+      min-width: calc(100vw - 34px);
+    }
+  }
+
+  .ScrollbarsCustom {
+    .track-vertical {
+      height: 100% !important;
+    }
+    .scroll-body {
+      padding-bottom: unset !important;
     }
   }
 

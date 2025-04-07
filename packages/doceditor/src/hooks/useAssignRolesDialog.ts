@@ -73,7 +73,7 @@ const useAssignRolesDialog = () => {
 
       const page = window.open(
         `${origin}/doceditor/?${searchParam.toString()}`,
-        "self",
+        "_self",
       );
 
       onCloseAssignRolesDialog();

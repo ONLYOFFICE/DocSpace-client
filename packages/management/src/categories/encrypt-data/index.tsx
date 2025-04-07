@@ -38,6 +38,7 @@ import { EncryptionStatus } from "@docspace/shared/enums";
 import { getEncryptionSettings } from "@docspace/shared/api/settings";
 
 import { setDocumentTitle } from "SRC_DIR/utils";
+import { useStore } from "SRC_DIR/store";
 
 import { EncryptWarningDialog } from "./EncryptWarningDialog";
 import { StyledWrapper } from "./EncryptData.styles";
@@ -53,6 +54,11 @@ const EncryptDataPage = ({ logoText }: EncryptDataPageProps) => {
     useState(false);
   const [isNotifyChecked, setIsNotifyChecked] = useState(false);
   const [status, setStatus] = useState(0);
+
+  const { settingsStore } = useStore();
+  const { portals } = settingsStore;
+
+  const isDisabled = portals.length <= 1;
 
   useEffect(() => {
     setDocumentTitle(t("Branding"), logoText);
@@ -83,7 +89,7 @@ const EncryptDataPage = ({ logoText }: EncryptDataPageProps) => {
           status={status}
         />
       ) : null}
-      <StyledWrapper>
+      <StyledWrapper isDisabled={isDisabled}>
         <div className="header">
           <Text fontSize="16px" fontWeight={700}>
             {t("EncryptData")}
@@ -129,6 +135,7 @@ const EncryptDataPage = ({ logoText }: EncryptDataPageProps) => {
             label={t("NotifyUsers")}
             onChange={() => setIsNotifyChecked(!isNotifyChecked)}
             isChecked={isNotifyChecked}
+            isDisabled={isDisabled}
           />
           <Button
             primary
@@ -139,6 +146,7 @@ const EncryptDataPage = ({ logoText }: EncryptDataPageProps) => {
             }
             size={ButtonSize.normal}
             onClick={() => setEncryptWarningDialogVisible(true)}
+            isDisabled={isDisabled}
           />
         </div>
       </StyledWrapper>

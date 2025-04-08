@@ -84,6 +84,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     fromShareCollectSelector,
     createDefineRoomType,
     destFolderInfo,
+    toFillOut,
   } = conflictResolveDialogData;
 
   const onClose = () => {
@@ -162,6 +163,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
         title: items[0].title,
         isFolder: items[0].isFolder,
       }),
+      toFillOut,
     };
 
     setSelected("none");

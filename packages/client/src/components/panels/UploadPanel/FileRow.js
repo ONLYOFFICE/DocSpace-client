@@ -97,7 +97,7 @@ class FileRow extends Component {
 
   onButtonClick = () => {
     const { password } = this.state;
-    const { convertFile, item, uploadedFiles } = this.props;
+    const { convertFile, item, uploadedFiles, t } = this.props;
     const { fileId, toFolderId, fileInfo } = item;
 
     if (this.hasError()) return;
@@ -114,7 +114,7 @@ class FileRow extends Component {
     };
     toastr.clear();
     this.onTextClick();
-    convertFile(newItem);
+    convertFile(newItem, t);
   };
 
   onChangePassword(password) {

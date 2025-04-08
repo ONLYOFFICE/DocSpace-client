@@ -119,7 +119,9 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
         return;
       }
 
-      const decodedRedirectUrl = window.atob(redirect_url);
+      const decodedRedirectUrl = window.atob(
+        redirect_url.replace(/-/g, "+").replace(/_/g, "/"),
+      );
 
       window.location.replace(decodedRedirectUrl);
     };

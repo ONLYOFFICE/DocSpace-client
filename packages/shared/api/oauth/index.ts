@@ -192,7 +192,9 @@ export function getOAuthJWTSignature(userId: string) {
 
   if (!token) return;
 
-  const tokenPayload = JSON.parse(window.atob(token!.split(".")[1]));
+  const tokenPayload = JSON.parse(
+    window.atob(token!.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")),
+  );
 
   // Get the token's original expiration time
   const tokenExpDate = new Date(tokenPayload.exp * 1000); // Convert seconds to milliseconds
@@ -206,7 +208,9 @@ export async function setOAuthJWTSignature(userId: string) {
   const token = await getJWTToken()!;
 
   // Parse the token payload to extract information
-  const tokenPayload = JSON.parse(window.atob(token!.split(".")[1]));
+  const tokenPayload = JSON.parse(
+    window.atob(token!.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")),
+  );
 
   // Get the token's original expiration time
   const tokenExpDate = new Date(tokenPayload.exp * 1000); // Convert seconds to milliseconds

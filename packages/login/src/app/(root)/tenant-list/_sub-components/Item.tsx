@@ -50,7 +50,7 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
     const redirectUrl = getCookie("x-redirect-authorization-uri");
 
     const decodedRedirectUrl = window
-      .atob(redirectUrl!)
+      .atob(redirectUrl!.replace(/-/g, "+").replace(/_/g, "/"))
       .replace(window.location.origin, name);
 
     console.log(decodedRedirectUrl);

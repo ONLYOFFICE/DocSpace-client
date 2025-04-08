@@ -1923,9 +1923,10 @@ class ContextOptionsStore {
         label: t("Common:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
-        disabled:
-          (isPublicRoomType && hasShareLinkRights) ||
-          Boolean(item.external && (item.expired || item.passwordProtected)),
+        disabled: item.isTemplate
+          ? false
+          : (isPublicRoomType && hasShareLinkRights) ||
+            Boolean(item.external && (item.expired || item.passwordProtected)),
       },
       {
         id: "option_copy-external-link",

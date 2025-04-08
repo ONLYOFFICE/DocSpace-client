@@ -38,12 +38,12 @@ import { getDownloadPasswordError } from "@/app/(docspace)/_utils/getDownloadPas
 import { useTranslation } from "react-i18next";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
-import useSDK from "@/hooks/useSDK";
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 export default function useDownloadFiles() {
   const { t } = useTranslation("Common");
   const { shareKey } = useSettingsStore();
-  const { sdkConfig } = useSDK();
+  const { sdkConfig } = useSDKConfig();
   const { addActiveItems, removeActiveItems } = useActiveItemsStore();
 
   const loopFilesOperations = useCallback(

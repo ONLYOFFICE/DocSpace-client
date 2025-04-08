@@ -182,15 +182,6 @@ const TableRow = (props: TableRowProps) => {
             {item.createBy?.displayName}
           </Text>
         </TableCell>
-
-        {/* <TableCell>
-          <Text
-            className="api-keys_text api-keys_text-overflow"
-            fontWeight={600}
-          >
-            {expiresAtDate}
-          </Text>
-        </TableCell> */}
         <TableCell>
           <Text
             className="api-keys_text api-keys_text-overflow"

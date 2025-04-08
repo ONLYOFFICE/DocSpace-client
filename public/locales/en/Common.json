@@ -247,7 +247,6 @@
   "Exabyte": "EB",
   "Example": "Example: {{example}}",
   "ExpiredLink": "Expired link",
-  "ExpiresAt": "Expires at",
   "FeedbackAndSupport": "Feedback & Support",
   "FileActionRequired": "The destination already contains a file named «<1>{{fileName}}</1>».",
   "FilePermanentlyDeleted": "The file will be permanently deleted in 30 days.",

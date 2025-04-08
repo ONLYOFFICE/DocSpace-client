@@ -84,12 +84,6 @@ const TableHeader = (props: TableHeaderProps) => {
       enable: true,
       resizable: true,
     },
-    // {
-    //   key: "ExpiresAt",
-    //   title: t("Common:ExpiresAt"),
-    //   enable: true,
-    //   resizable: true,
-    // },
     {
       key: "State",
       title: t("State"),

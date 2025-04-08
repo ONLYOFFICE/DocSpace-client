@@ -225,12 +225,12 @@ const DevToolsAccess = ({
           {
             id: "dev-tools-access-disabled",
             label: t("Common:Disabled"),
-            value: "false",
+            value: "true",
           },
           {
             id: "dev-tools-access-enable",
             label: t("Common:Enable"),
-            value: "true",
+            value: "false",
           },
         ]}
         selected={accessEnabled}

@@ -128,6 +128,7 @@ export type TSettings = {
   isAmi: boolean;
   logoText: string;
   externalResources: TExternalResources;
+  displayAbout: boolean;
 };
 
 export type TCustomSchema = {

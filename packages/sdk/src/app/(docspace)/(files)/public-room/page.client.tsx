@@ -73,7 +73,8 @@ function PublicRoomPage({
 
   React.useEffect(() => {
     settingsStore.setShareKey(shareKey);
-  }, [settingsStore, shareKey]);
+    settingsStore.setDisplayAbout(portalSettings.displayAbout);
+  }, [settingsStore, shareKey, portalSettings]);
 
   return (
     <List

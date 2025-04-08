@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "Șterge definitiv",
-  "DeleteForeverTitle": "Sigur că doriți să ștergeți definitiv?"
+  "DeleteForeverNote": "Toate elementele din secțiunea {{sectionName}} vor fi şterse pentru totdeauna. Nu le veţi putea restaura.",
+  "DeleteForeverTitle": "Sigur că doriți să ștergeți definitiv?",
+  "SuccessEmptyAction": "Conținutul {{sectionName}} secțiunii a fost șters"
 }

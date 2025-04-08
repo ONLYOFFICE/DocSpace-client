@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Ihre zuletzt angesehenen oder bearbeiteten Dokumente werden in diesem Bereich angezeigt.",
   "EmptyRootRoomUserDescription": "Der geteilte Raum wird hier angezeigt.",
   "EmptyRootRoomUserTitle": "Es gibt noch keine Räume hier",
+  "EmptyTemplatesDescription": "Sie können eine Vorlage aus einem Raum im Bereich \"Räume\" erstellen",
+  "EmptyTemplatesTitle": "Noch keine Vorlagen vorhanden",
   "FormFolderDefaultDescription": "Legen Sie PDF-Formulare hier ab oder laden Sie sie von {{productName}} oder einem Gerät hoch.",
   "FormFolderDefaultTitle": "Noch keine Formulare vorhanden",
   "FormFolderDefaultUserDescription": "Die von den Administratoren hochgeladenen Formulare werden hier angezeigt.",

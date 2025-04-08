@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Documentele pe care le-ați vizionat sau le-ați editat recent se vor afișa în această secțiune.",
   "EmptyRootRoomUserDescription": "Sala partajată va apărea aici.",
   "EmptyRootRoomUserTitle": "Nicio sală deocamdată aici",
+  "EmptyTemplatesDescription": "Puteți crea șablonul de sală în secțiunea Sală",
+  "EmptyTemplatesTitle": "Niciun șablon deocamdată aici",
   "FormFolderDefaultDescription": "Glisați și fixați formulare PDF aici sau încărcați  de pe {{productName}} sau de pe dispozitivul. ",
   "FormFolderDefaultTitle": "Niciun formular deocamdată aici",
   "FormFolderDefaultUserDescription": "Formularele încărcate de administratorul vor fi afișate aici.",

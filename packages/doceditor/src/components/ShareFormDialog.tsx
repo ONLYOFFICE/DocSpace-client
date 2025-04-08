@@ -33,7 +33,6 @@ import ShareSvg from "PUBLIC_DIR/images/icons/32/share.svg";
 
 import { ShareFormDialog as ShareFormDialogComponent } from "@docspace/shared/dialogs/share-form-dialog";
 
-// import { ShareFormDialog as ShareFormDialogComponent } from "@docspace/shared/dialogs/ShareFormDialog";
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 

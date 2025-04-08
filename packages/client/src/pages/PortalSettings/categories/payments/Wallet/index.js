@@ -42,6 +42,7 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 import { Link } from "@docspace/shared/components/link";
+import { saveDeposite } from "@docspace/shared/api/portal";
 
 import PlusIcon from "PUBLIC_DIR/images/icons/12/payment.plus.react.svg";
 
@@ -186,6 +187,7 @@ const Wallet = ({
   walletInit,
   isWalletCustomerExist,
   cardLinked,
+  accountLink,
 }) => {
   const tooltipContent =
     "Your current wallet balance. This amount can be used for purchases and subscriptions.";
@@ -247,17 +249,18 @@ const Wallet = ({
 
   const amountTabs = useMemo(
     () => [
-      { name: formattedAmount(10), id: 0, value: 10 },
-      { name: formattedAmount(20), id: 1, value: 20 },
-      { name: formattedAmount(30), id: 2, value: 30 },
-      { name: formattedAmount(50), id: 3, value: 50 },
-      { name: formattedAmount(100), id: 4, value: 100 },
+      { name: formattedAmount(10), id: "10", value: 10 },
+      { name: formattedAmount(20), id: "20", value: 20 },
+      { name: formattedAmount(30), id: "30", value: 30 },
+      { name: formattedAmount(50), id: "50", value: 50 },
+      { name: formattedAmount(100), id: "100", value: 100 },
     ],
     [language, balance.currency],
   );
 
   const onSelectAmount = (data) => {
     setSelectedAmount(data.id);
+    setSize(data.value.toString());
   };
 
   const onChangeTextInput = (e) => {
@@ -265,12 +268,19 @@ const Wallet = ({
 
     if (validity.valid) {
       setSize(value);
+      setSelectedAmount(value);
     }
   };
 
-  const goToStripeAccount = () => {
+  const goLinkCard = () => {
     cardLinked
       ? window.open(cardLinked, "_blank")
+      : toastr.error(t("ErrorNotification"));
+  };
+
+  const goStripeAccount = () => {
+    accountLink
+      ? window.open(accountLink, "_blank")
       : toastr.error(t("ErrorNotification"));
   };
 
@@ -337,6 +347,7 @@ const Wallet = ({
                 selectedItemId={selectedAmount}
                 onSelect={onSelectAmount}
                 type={TabsTypes.Secondary}
+                allowNoSelection
               />
               <Text fontWeight={600}>{t("Amount")}</Text>
               <TextInput
@@ -360,13 +371,15 @@ const Wallet = ({
                   <div className="ticked-wrapper">
                     <CheckReactSvg />
                     <Text fontWeight={600} fontSize="14px">
-                      Card linked
+                      {t("CardLinked")}
                     </Text>
                   </div>
-                  <Link fontWeight={600}>Go to the Stripe</Link>
+                  <Link fontWeight={600} onClick={goStripeAccount}>
+                    {t("GoToStripe")}
+                  </Link>
                 </CardLinked>
               ) : (
-                <AddPaymentMethodContainer onClick={goToStripeAccount}>
+                <AddPaymentMethodContainer onClick={goLinkCard}>
                   <PlusIconWrapper>
                     <PlusIcon className="payment-score" />
                   </PlusIconWrapper>
@@ -420,8 +433,13 @@ const Wallet = ({
 
 export default inject(({ paymentStore, authStore }) => {
   const { language } = authStore;
-  const { walletInit, walletBalance, isWalletCustomerExist, cardLinked } =
-    paymentStore;
+  const {
+    walletInit,
+    walletBalance,
+    isWalletCustomerExist,
+    cardLinked,
+    accountLink,
+  } = paymentStore;
 
   return {
     balance: walletBalance.subAccounts[0],
@@ -429,5 +447,6 @@ export default inject(({ paymentStore, authStore }) => {
     walletInit,
     isWalletCustomerExist,
     cardLinked,
+    accountLink,
   };
 })(observer(Wallet));

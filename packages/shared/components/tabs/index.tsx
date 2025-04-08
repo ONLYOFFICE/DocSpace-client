@@ -45,13 +45,16 @@ const Tabs = (props: TabsProps) => {
     stickyTop,
     onSelect,
     multiple = false,
+    allowNoSelection = false,
     ...rest
   } = props;
 
   const { interfaceDirection } = useInterfaceDirection();
 
   const selectedItemIndex = !selectedItemId
-    ? 0
+    ? allowNoSelection
+      ? -1
+      : 0
     : items.findIndex((item) => item.id === selectedItemId);
 
   const [currentItem, setCurrentItem] = useState(selectedItemIndex);
@@ -221,7 +224,7 @@ const Tabs = (props: TabsProps) => {
         </div>
       ) : null}
       <div className={classNames(styles.stickyIndent, "sticky-indent")} />
-      {!multiple && items[currentItem]?.content ? (
+      {!multiple && items[currentItem]?.content && currentItem !== -1 ? (
         <div className={`${styles.tabsBody} tabs-body`}>
           {items[currentItem].content}
         </div>

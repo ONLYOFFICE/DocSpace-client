@@ -54,7 +54,7 @@ import type {
 } from "@docspace/shared/selectors/Files/FilesSelector.types";
 
 import useDocumentTitle from "@/hooks/useDocumentTitle";
-import useSDK from "@/hooks/useSDK";
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 const IS_TEST = process.env.NEXT_PUBLIC_E2E_TEST;
 
@@ -101,7 +101,7 @@ export default function FilesSelectorClient({
   selectedItemType,
   total,
 }: FilesSelectorClientProps) {
-  const { sdkConfig } = useSDK();
+  const { sdkConfig } = useSDKConfig();
 
   const { t } = useTranslation(["Common"]);
 

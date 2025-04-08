@@ -179,21 +179,27 @@ class PaymentStore {
     return this.customerInfo !== "null";
   }
 
+  setBalance = async () => {
+    const res = await getBalance();
+
+    if (!res) return;
+
+    this.balance = res;
+  };
+
   walletInit = async () => {
     const requests = [
-      getBalance(),
       getCustomerInfo(),
       getCardLinked(window.location.href),
+      this.setBalance(),
       this.setPaymentAccount(),
     ];
 
     try {
-      const [balanceInfo, customer, cardLinked] = await Promise.all(requests);
+      const [customer, cardLinked] = await Promise.all(requests);
 
-      this.balance = balanceInfo as TBalance;
       this.customerInfo = customer as TCustomerInfo;
       this.cardLinked = cardLinked as string;
-
     } catch (error) {
       // toastr.error(t("Common:UnexpectedError"));
       console.error(error);

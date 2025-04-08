@@ -400,9 +400,20 @@ export async function getCardLinked(backUrl) {
   return res;
 }
 
+export async function saveDeposite(amount: number, currency: string) {
+  return request({
+    method: "post",
+    url: "/portal/payment/deposit",
+    data: {
+      amount,
+      currency,
+    },
+  }) as string;
+}
+
 export async function getPortal() {
   const options: AxiosRequestConfig = {
-    method: "get",
+    method: "post",
     url: "/portal",
   };
   const res = (await request(options)) as TPortal;

@@ -188,14 +188,16 @@ const Wallet = ({
   isWalletCustomerExist,
   cardLinked,
   accountLink,
+  setBalance,
 }) => {
   const tooltipContent =
     "Your current wallet balance. This amount can be used for purchases and subscriptions.";
   const { t } = useTranslation(["Payments", "Common"]);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState(null);
-  const [size, setSize] = useState("");
+  const [amount, setAmount] = useState("");
   const [isAutomaticPaymentsEnabled, setIsAutomaticPaymentsEnabled] =
     useState(false);
 
@@ -227,16 +229,15 @@ const Wallet = ({
     const balanceValue = formatter.format(balance.amount);
 
     return {
-      mainParts: isCurrencyAtEnd
-        ? { number: mainNumber, currency: currencySymbol }
-        : { currency: currencySymbol, number: mainNumber },
       fraction: `${decimal}${fraction}`,
       balanceValue,
       isCurrencyAtEnd,
+      mainNumber,
+      currency: currencySymbol,
     };
   };
 
-  const formattedAmount = (amount) => {
+  const formattedAmount = (value) => {
     const formatter = new Intl.NumberFormat(language, {
       style: "currency",
       currency: balance.currency,
@@ -244,7 +245,7 @@ const Wallet = ({
       maximumFractionDigits: 0,
     });
 
-    return formatter.format(amount);
+    return formatter.format(value);
   };
 
   const amountTabs = useMemo(
@@ -260,14 +261,14 @@ const Wallet = ({
 
   const onSelectAmount = (data) => {
     setSelectedAmount(data.id);
-    setSize(data.value.toString());
+    setAmount(data.value.toString());
   };
 
   const onChangeTextInput = (e) => {
     const { value, validity } = e.target;
 
     if (validity.valid) {
-      setSize(value);
+      setAmount(value);
       setSelectedAmount(value);
     }
   };
@@ -292,8 +293,24 @@ const Wallet = ({
     setVisible(false);
   };
 
-  const { mainParts, fraction, balanceValue, isCurrencyAtEnd } =
+  const onTopUp = async () => {
+    try {
+      setIsLoading(true);
+      await saveDeposite(+amount, balance.currency);
+      await setBalance();
+
+      onClose();
+    } catch (e) {
+      toastr.error(e);
+    }
+
+    setIsLoading(false);
+  };
+
+  const { fraction, balanceValue, isCurrencyAtEnd, mainNumber, currency } =
     formattedBalance();
+
+  const isButtonDisabled = !isWalletCustomerExist || !amount;
 
   return (
     <StyledContainer>
@@ -310,15 +327,11 @@ const Wallet = ({
 
         <BalanceAmountContainer>
           <MainAmount>
-            {!isCurrencyAtEnd ? mainParts.currency : ""}
-            {mainParts.number}
+            {!isCurrencyAtEnd ? currency : ""}
+            {mainNumber}
           </MainAmount>
           <DecimalAmount>{fraction}</DecimalAmount>
-          {isCurrencyAtEnd ? (
-            <MainAmount as="span">{mainParts.currency}</MainAmount>
-          ) : (
-            ""
-          )}
+          {isCurrencyAtEnd ? <MainAmount as="span">{currency}</MainAmount> : ""}
         </BalanceAmountContainer>
 
         <Button
@@ -351,7 +364,7 @@ const Wallet = ({
               />
               <Text fontWeight={600}>{t("Amount")}</Text>
               <TextInput
-                value={size}
+                value={amount}
                 onChange={onChangeTextInput}
                 pattern="^\d+(?:\.\d{0,2})?"
                 scale
@@ -414,8 +427,9 @@ const Wallet = ({
             size="normal"
             primary
             scale
-            isDisabled={!isWalletCustomerExist}
-            // onClick={onBackupTo}
+            isDisabled={isButtonDisabled}
+            onClick={onTopUp}
+            isLoading={isLoading}
           />
           <Button
             id="delete-file-modal_cancel"
@@ -439,14 +453,17 @@ export default inject(({ paymentStore, authStore }) => {
     isWalletCustomerExist,
     cardLinked,
     accountLink,
+    setBalance,
   } = paymentStore;
 
+  console.log("walletBalance.subAccounts", walletBalance.subAccounts);
   return {
     balance: walletBalance.subAccounts[0],
     language,
     walletInit,
     isWalletCustomerExist,
     cardLinked,
+    setBalance,
     accountLink,
   };
 })(observer(Wallet));

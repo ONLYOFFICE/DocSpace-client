@@ -50,6 +50,7 @@ export type TConflictResolveDialogData = {
   fromShareCollectSelector?: boolean;
   createDefineRoomType?: RoomsType;
   destFolderInfo: unknown;
+  toFillOut?: boolean;
 };
 
 export type TActiveItem = TFile | TFolder;
@@ -69,6 +70,7 @@ export interface ConflictResolveDialogProps {
     translations: {
       [key: string]: string;
     };
+    toFillOut?: boolean;
   }) => Promise<TOperation>;
   activeFiles: TActiveItem[];
   activeFolders: TActiveItem[];

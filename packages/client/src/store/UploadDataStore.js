@@ -1920,9 +1920,10 @@ class UploadDataStore {
           return Promise.reject();
         }
         return this.loopFilesOperations(data, pbData)
-          .then(() =>
-            this.moveToCopyTo(destFolderId, pbData, true, fileIds, folderIds),
-          )
+          .then((result) => {
+            this.moveToCopyTo(destFolderId, pbData, true, fileIds, folderIds);
+            return result;
+          })
           .finally(async () => {
             // to update the status of trashIsEmpty filesStore
             if (this.treeFoldersStore.isRecycleBinFolder)
@@ -1977,9 +1978,10 @@ class UploadDataStore {
         }
 
         return this.loopFilesOperations(data, pbData)
-          .then(() =>
-            this.moveToCopyTo(destFolderId, pbData, false, fileIds, folderIds),
-          )
+          .then((result) => {
+            this.moveToCopyTo(destFolderId, pbData, false, fileIds, folderIds);
+            return result;
+          })
           .finally(async () => {
             // to update the status of trashIsEmpty filesStore
             if (this.treeFoldersStore.isRecycleBinFolder)
@@ -2013,6 +2015,9 @@ class UploadDataStore {
       });
   };
 
+  /**
+   * @returns {Promise<import("@docspace/shared/api/files/types").TOperation>}
+   */
   itemOperationToFolder = (data) => {
     const {
       destFolderId,

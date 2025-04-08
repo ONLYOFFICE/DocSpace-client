@@ -23,38 +23,53 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
 
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { useTranslation } from "react-i18next";
 
-import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg";
+import { Button, ButtonSize } from "../../components/button";
+import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 
-import { Wrapper } from "./Card.styled";
-import type { CardProps } from "./Card.types";
+interface AssignRolesDialogProps {
+  visible: boolean;
+  onClose: VoidFunction;
+  onSubmit: VoidFunction;
+  roomName: string;
+}
 
-export const Card = ({
-  title,
-  description,
-  buttonLabel,
-  onClick,
-}: CardProps) => {
+export const AssignRolesDialog = ({
+  visible,
+  roomName,
+  onClose,
+  onSubmit,
+}: AssignRolesDialogProps) => {
+  const { t } = useTranslation("Common");
+
   return (
-    <Wrapper>
-      <Text as="h3" fontSize="16px" lineHeight="22px" isBold>
-        {title}
-      </Text>
-      <Text as="p" fontSize="13px" lineHeight="20px">
-        {description}
-      </Text>
-      <Button
-        scale
-        isClicked
-        onClick={onClick}
-        label={buttonLabel}
-        icon={<ArrowIcon />}
-        size={ButtonSize.normal}
-      />
-    </Wrapper>
+    <ModalDialog
+      autoMaxHeight
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.modal}
+    >
+      <ModalDialog.Header>{t("Common:AssignRoles")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        {t("Common:AssignRolesDescription", { roomName })}
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          primary
+          onClick={onSubmit}
+          label={t("Common:Assign")}
+          size={ButtonSize.normal}
+          scale
+        />
+        <Button
+          onClick={onClose}
+          label={t("Common:Later")}
+          size={ButtonSize.normal}
+          scale
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
   );
 };

@@ -23,36 +23,23 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled from "styled-components";
 
-export const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+export interface PanelCard {
+  id: string;
+  title: string;
+  icon?: React.ReactNode;
+  description: string;
+  buttonLabel: string;
+  onClick: () => void;
+  disabled?: boolean;
+}
 
-  padding: 12px 16px;
+export interface ShareFormDialogProps {
+  visible: boolean;
+  onClose: () => void;
+  containerVisible: boolean;
+  container: React.ReactNode;
 
-  border: 1px solid ${(props) => props.theme.sdkPresets.borderColor};
-  border-radius: 6px;
-
-  > button {
-    border: none;
-
-    margin-top: 4px;
-
-    .button-content {
-      flex-direction: row-reverse;
-    }
-    .icon {
-      ${({ theme }) =>
-        theme.interfaceDirection === "ltr" && "transform: scale(-1, 1);"}
-    }
-
-    @media (hover: hover) {
-      :hover {
-        border: ${(props) => props.theme.button.border.baseHover};
-        box-sizing: ${(props) => props.theme.button.boxSizing};
-      }
-    }
-  }
-`;
+  title: string;
+  cards: PanelCard[];
+}

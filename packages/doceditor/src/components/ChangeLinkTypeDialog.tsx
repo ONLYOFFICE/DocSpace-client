@@ -24,48 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type TData = {
-  id: string | number;
-  displayName: string;
-  role: string;
-  startFillingStatus: string;
-  startFillingDate: Date | string;
-  filledAndSignedStatus: string;
-  filledAndSignedDate: Date | string;
-  returnedByUser?: string | null;
-  returnedByUserDate: Date | string;
-  comment: string | null;
-  avatar: string | null;
+import { Button } from "@docspace/shared/components/button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import React from "react";
+import { useTranslation } from "react-i18next";
+
+type ChangeLinkTypeDialog = {
+  visible: boolean;
+  onClose: VoidFunction;
+  onSubmit: VoidFunction;
 };
 
-export type FillingStatusLineProps = {
-  /** Accepts id */
-  id?: string;
-  /** Accepts class */
-  className?: string;
-  /** Filling status done text */
-  statusDoneText: string;
-  /** Filling status interrupted text */
-  statusInterruptedText: string;
-  /** Filling status done */
-  statusDone: boolean;
-  /** Filling status interrupted */
-  statusInterrupted: boolean;
+const ChangeLinkTypeDialog = ({
+  visible,
+  onClose,
+  onSubmit,
+}: ChangeLinkTypeDialog) => {
+  const { t } = useTranslation(["Common", "ChangeLinkTypeDialog"]);
+
+  return (
+    <ModalDialog
+      autoMaxHeight
+      withBodyScroll
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.modal}
+    >
+      <ModalDialog.Header>{t("ChangeLinkTypeDialog:Title")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        {t("ChangeLinkTypeDialog:Description")}
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          onClick={onSubmit}
+          primary
+          scale
+          label={t("Common:ChangeButton")}
+        />
+        <Button onClick={onClose} scale label={t("Common:CancelButton")} />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
 };
 
-export type FillingStatusLineAccordionProps = {
-  id?: string | number;
-  displayName: string;
-  role: string;
-  startFilling: string;
-  startFillingDate: string;
-  filledAndSigned: string;
-  filledAndSignedDate: string;
-  returnedByUser?: string | null;
-  returnedDate: string | null;
-  comment?: string | null;
-  avatar: string | null;
-
-  isDone?: boolean;
-  isInterrupted?: boolean;
-};
+export default ChangeLinkTypeDialog;

@@ -280,7 +280,7 @@ const Editor = ({
     newConfig.events.onRequestReferenceSource = onSDKRequestReferenceSource;
   }
 
-  if (isSharingAccess) {
+  if (isSharingAccess && !config?.startFilling) {
     newConfig.events.onRequestSharingSettings = onSDKRequestSharingSettings;
   }
 

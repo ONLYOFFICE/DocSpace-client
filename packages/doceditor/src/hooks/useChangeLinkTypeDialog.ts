@@ -23,12 +23,59 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+import { useCallback, useState } from "react";
 
-  gap: 16px;
-  margin-top: 16px;
-`;
+import type { Nullable, TResolver } from "@docspace/shared/types";
+
+const defaultValue = {
+  resolve: null,
+  reject: null,
+};
+
+const useChangeLinkTypeDialog = () => {
+  const [changeLinkTypeDialogVisible, setChangeLinkTypeDialogVisible] =
+    useState(false);
+
+  const [promise, setPromise] =
+    useState<
+      TResolver<
+        Nullable<(res: string) => void>,
+        Nullable<(rej: string) => void>
+      >
+    >(defaultValue);
+
+  const onCloseChangeLinkTypeDialog = useCallback(() => {
+    setChangeLinkTypeDialogVisible(false);
+    promise.reject?.("canceled");
+    setPromise(defaultValue);
+  }, [promise]);
+
+  const openChangeLinkTypeDialog = useCallback(
+    (
+      promise: TResolver<
+        Nullable<(res: string) => void>,
+        Nullable<(rej: string) => void>
+      >,
+    ) => {
+      setChangeLinkTypeDialogVisible(true);
+
+      setPromise(promise);
+    },
+    [],
+  );
+
+  const onSubmitChangeLinkType = useCallback(() => {
+    promise.resolve?.("succeed");
+    setChangeLinkTypeDialogVisible(false);
+  }, [promise]);
+
+  return {
+    changeLinkTypeDialogVisible,
+    onCloseChangeLinkTypeDialog,
+    openChangeLinkTypeDialog,
+    onSubmitChangeLinkType,
+  };
+};
+
+export default useChangeLinkTypeDialog;

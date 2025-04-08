@@ -23,114 +23,62 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 @import "../../styles/variables/_colors.scss";
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/devices.scss";
 
-.accordionItem {
-  width: 100%;
-}
-
-.accordionItemInfo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  height: 38px;
-  padding: 18px 0;
-}
-
-.accordionItemInfoBox {
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-}
-
-.accordionRoleBox {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  margin: 0 0 0 10px;
-}
-
-.userAvatar {
-  padding: 1px;
-  border: 2px solid #{$gray};
-  border-radius: 50%;
-
-  &.isDone {
-    border-color: #{$light-blue-main};
-  }
-
-  &.isInterrupted {
-    border-color: #{$main-red};
+:global(.dark) {
+  :local {
+    .wrapper {
+      --border-color: #{$gray-dark-strong};
+    }
   }
 }
-
-.accordionRole {
-  color: #{$light-gray-dark};
-}
-
-.arrowIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transform: rotate(90deg);
-  path {
-    fill: #{$gray};
-  }
-
-  &.isOpen {
-    transform: rotate(270deg);
-    path {
-      fill: #{$light-blue-main};
+:global(.light) {
+  :local {
+    .wrapper {
+      --border-color: #{$gray-light-mid};
     }
   }
 }
 
-.accordionItemHistory {
+.container {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  padding: 16px;
+
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+
+  > button {
+    border: none;
+
+    margin-top: 4px;
+
+    .button-content {
+      flex-direction: row-reverse;
+    }
+
+    > div {
+      flex-direction: row-reverse;
+    }
+
+    svg {
+      rotate: 180deg;
+    }
+  }
+}
+
+.cardHeader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding-inline-start: 15px;
-}
-
-.accordionItemWrapper {
-  display: flex;
-  align-items: center;
-  min-height: 40px;
-  margin: 2px 0;
-  border-inline-start: 2px dashed #{$gray};
-
-  &.isDone {
-    margin: 0;
-    border-color: #{$light-blue-main};
-    border-inline-start: 2px solid #{$gray};
-  }
-
-  &.isInterrupted {
-    margin: 0;
-    border-color: #{$main-red};
-    border-inline-start: 2px solid #{$gray};
-  }
-}
-
-.statusText {
-  margin-inline-start: 15px;
-  color: #{$light-gray-dark};
-}
-
-.statusDate {
-  color: #{$light-gray-dark};
-}
-
-.filledStatusText {
-  margin-inline-start: 15px;
-  color: #{$light-gray-dark};
-
-  &.isDone {
-    color: #{$light-blue-main};
-  }
+  gap: 8px;
 }

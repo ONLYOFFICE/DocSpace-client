@@ -30,7 +30,10 @@ import useStartFillingSelectDialog from "./useStartFillingSelectDialog";
 import type { TFile } from "@docspace/shared/api/files/types";
 import { RoomsType } from "@docspace/shared/enums";
 
-export const useShareFormDialog = (fileInfo: TFile | undefined) => {
+export const useShareFormDialog = (
+  fileInfo: TFile | undefined,
+  openAssignRolesDialog: (form: TFile, roomName: string) => void,
+) => {
   const { t } = useTranslation(["Common"]);
 
   const {
@@ -43,7 +46,7 @@ export const useShareFormDialog = (fileInfo: TFile | undefined) => {
     headerLabelSFSDialog,
     onDownloadAs,
     createDefineRoomType,
-  } = useStartFillingSelectDialog(fileInfo);
+  } = useStartFillingSelectDialog(fileInfo, openAssignRolesDialog);
 
   const [shareFormDialogVisible, setShareFormDialogVisible] = useState(false);
   const [shareFormDialogData, setShareFormDialogData] = useState<{

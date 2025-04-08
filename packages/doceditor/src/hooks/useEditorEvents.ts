@@ -178,9 +178,11 @@ const useEditorEvents = ({
     if (errorMessage || isSkipError)
       return docEditor?.showMessage?.(errorMessage || t("Common:InvalidLink"));
 
-    if (window && FILLING_STATUS_ID in window && window[FILLING_STATUS_ID]) {
+    const fillingStatus = window?.sessionStorage.getItem(FILLING_STATUS_ID);
+
+    if (fillingStatus === "true") {
       docEditor?.requestRoles?.();
-      delete window[FILLING_STATUS_ID];
+      window?.sessionStorage.removeItem(FILLING_STATUS_ID);
     }
 
     console.log("ONLYOFFICE Document Editor is ready", docEditor);

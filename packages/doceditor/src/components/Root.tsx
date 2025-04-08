@@ -59,6 +59,8 @@ import FillingStatusDialog from "./filling-status-dialog";
 import { useStopFillingDialog } from "@/hooks/useStopFillingDialog";
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { useShareFormDialog } from "@/hooks/useShareFormDialog";
+import useAssignRolesDialog from "@/hooks/useAssignRolesDialog";
+import useChangeLinkTypeDialog from "@/hooks/useChangeLinkTypeDialog";
 
 const DeepLink = dynamic(() => import("./deep-link"), {
   ssr: false,
@@ -82,6 +84,19 @@ const StartFillingPanel = dynamic(
 );
 
 const ShareFormDialog = dynamic(() => import("./ShareFormDialog"), {
+  ssr: false,
+});
+
+const AssignRolesDialog = dynamic(
+  async () =>
+    (await import("@docspace/shared/dialogs/assign-roles-dialog"))
+      .AssignRolesDialog,
+  {
+    ssr: false,
+  },
+);
+
+const ChangeLinkTypeDialog = dynamic(() => import("./ChangeLinkTypeDialog"), {
   ssr: false,
 });
 
@@ -144,6 +159,13 @@ const Root = ({
   });
 
   const {
+    changeLinkTypeDialogVisible,
+    onCloseChangeLinkTypeDialog,
+    onSubmitChangeLinkType,
+    openChangeLinkTypeDialog,
+  } = useChangeLinkTypeDialog();
+
+  const {
     onSDKRequestSaveAs,
     onCloseSelectFolderDialog,
     onSubmitSelectFolderDialog,
@@ -168,6 +190,13 @@ const Root = ({
   } = useSelectFileDialog({ instanceId: instanceId ?? "" });
 
   const {
+    assignRolesDialogData,
+    onCloseAssignRolesDialog,
+    openAssignRolesDialog,
+    onSubmitAssignRoles,
+  } = useAssignRolesDialog();
+
+  const {
     onCloseShareFormDialog,
     openShareFormDialog,
     shareFormDialogVisible,
@@ -182,7 +211,7 @@ const Root = ({
     headerLabelSFSDialog,
     onDownloadAs,
     createDefineRoomType,
-  } = useShareFormDialog(fileInfo);
+  } = useShareFormDialog(fileInfo, openAssignRolesDialog);
 
   const {
     isSharingDialogVisible,
@@ -389,6 +418,24 @@ const Root = ({
           onSubmitStartFillingSelectDialog={onSubmitStartFillingSelectDialog}
           isVisibleStartFillingSelectDialog={isVisibleStartFillingSelectDialog}
           updateAccessLink={shareFormDialogData.updateAccessLink}
+          openChangeLinkTypeDialog={openChangeLinkTypeDialog}
+        />
+      )}
+
+      {assignRolesDialogData.visible && (
+        <AssignRolesDialog
+          visible={assignRolesDialogData.visible}
+          onClose={onCloseAssignRolesDialog}
+          onSubmit={onSubmitAssignRoles}
+          roomName={assignRolesDialogData.roomName}
+        />
+      )}
+
+      {changeLinkTypeDialogVisible && (
+        <ChangeLinkTypeDialog
+          visible={changeLinkTypeDialogVisible}
+          onClose={onCloseChangeLinkTypeDialog}
+          onSubmit={onSubmitChangeLinkType}
         />
       )}
     </div>

@@ -24,13 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface ShareFormDialogProps {
-  visible: boolean;
-  onClose: () => void;
+import ArrowIcon from "PUBLIC_DIR/images/arrow-left.react.svg";
 
-  onClickFormRoom?: () => void;
-  onClickVirtualDataRoom?: () => void;
-  onClickShareFile?: () => void;
-  container?: React.ReactNode;
-  visibleContainer?: boolean;
-}
+import { Button, ButtonSize } from "../../components/button";
+import { Text } from "../../components/text";
+import type { PanelCard } from "./share-form-dialog.types";
+import styles from "./share-form-dialog.module.scss";
+
+const ShareFormCard = ({
+  title,
+  description,
+  buttonLabel,
+  onClick,
+  icon,
+  id,
+  disabled,
+}: PanelCard) => {
+  if (disabled) {
+    return null;
+  }
+
+  return (
+    <div id={id} className={styles.wrapper}>
+      <div className={styles.cardHeader}>
+        {icon}
+        <Text as="h5" fontSize="14px" lineHeight="16px" isBold>
+          {title}
+        </Text>
+      </div>
+      <Text as="p" fontSize="12px" lineHeight="16px">
+        {description}
+      </Text>
+      <Button
+        scale
+        isClicked
+        onClick={onClick}
+        label={buttonLabel}
+        icon={<ArrowIcon />}
+        size={ButtonSize.normal}
+      />
+    </div>
+  );
+};
+
+export default ShareFormCard;

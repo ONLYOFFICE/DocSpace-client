@@ -24,61 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/mixins.scss";
-@import "../../styles/variables/devices.scss";
+import React from "react";
+import { inject, observer } from "mobx-react";
 
-.fillingStatusContainer {
-  width: 100%;
-  max-width: 425px;
-  padding: 10px;
+import { AssignRolesDialog } from "@docspace/shared/dialogs/assign-roles-dialog";
+
+interface AssignRolesWrapperProps {
+  setAssignRolesDialogData: TStore["dialogsStore"]["setAssignRolesDialogData"];
+  assignRolesDialogData: TStore["dialogsStore"]["assignRolesDialogData"];
+  onClickStartFilling: TStore["contextOptionsStore"]["onClickStartFilling"];
 }
 
-.statusDoneText {
-  color: #{$gray};
+const AssignRolesWrapper = ({
+  assignRolesDialogData,
+  setAssignRolesDialogData,
+  onClickStartFilling,
+}: AssignRolesWrapperProps) => {
+  const { roomName, visible, file } = assignRolesDialogData;
 
-  &.isDone {
-    color: #{$light-blue-main};
-  }
-}
+  const onClose = () => setAssignRolesDialogData(false);
 
-.statusDoneContainer {
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  margin: 15px 0 0;
-}
+  const onSubmit = () => {
+    onClickStartFilling(file);
+    onClose();
+  };
 
-.statusDoneIcon {
-  margin-inline-end: 10px;
-  circle,
-  path {
-    stroke: #{$gray};
-  }
+  return (
+    <AssignRolesDialog
+      visible={visible}
+      roomName={roomName}
+      onSubmit={onSubmit}
+      onClose={onClose}
+    />
+  );
+};
 
-  &.isDone {
-    circle,
-    path {
-      stroke: #{$light-blue-main};
-    }
-  }
-}
+export default inject<TStore>(({ dialogsStore, contextOptionsStore }) => {
+  const { assignRolesDialogData, setAssignRolesDialogData } = dialogsStore;
+  const { onClickStartFilling } = contextOptionsStore;
 
-.statusInterruptedText {
-  color: #{$main-red};
-}
-
-.statusInterruptedContainer {
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  margin: 15px 0 0;
-}
-
-.statusInterruptedIcon {
-  margin-inline-end: 10px;
-  circle,
-  path {
-    stroke: #{$main-red};
-  }
-}
+  return {
+    assignRolesDialogData,
+    setAssignRolesDialogData,
+    onClickStartFilling,
+  };
+})(observer(AssignRolesWrapper as React.FC));

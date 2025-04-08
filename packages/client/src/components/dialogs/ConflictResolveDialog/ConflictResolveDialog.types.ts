@@ -24,9 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { ConflictResolveType } from "@docspace/shared/enums";
-import { TTranslation } from "@docspace/shared/types";
+import type {
+  TFile,
+  TFolder,
+  TOperation,
+} from "@docspace/shared/api/files/types";
+import type { ConflictResolveType, RoomsType } from "@docspace/shared/enums";
+import type { TTranslation } from "@docspace/shared/types";
 
 export type TConflictResolveDialogData = {
   destFolderId: number;
@@ -44,6 +48,8 @@ export type TConflictResolveDialogData = {
 
   selectedFolder?: TFolder;
   fromShareCollectSelector?: boolean;
+  createDefineRoomType?: RoomsType;
+  destFolderInfo: unknown;
 };
 
 export type TActiveItem = TFile | TFolder;
@@ -63,7 +69,7 @@ export interface ConflictResolveDialogProps {
     translations: {
       [key: string]: string;
     };
-  }) => Promise<void>;
+  }) => Promise<TOperation>;
   activeFiles: TActiveItem[];
   activeFolders: TActiveItem[];
   setActiveFiles: (items: TActiveItem[]) => void;
@@ -97,4 +103,6 @@ export interface ConflictResolveDialogProps {
   files: TFile[];
   folders: TFolder[];
   cancelUploadAction: () => void;
+
+  setAssignRolesDialogData: TStore["dialogsStore"]["setAssignRolesDialogData"];
 }

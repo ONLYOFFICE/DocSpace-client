@@ -23,9 +23,72 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-export interface CardProps {
-  title: string;
-  description: string;
-  buttonLabel: string;
-  onClick: VoidFunction;
-}
+
+import React from "react";
+import type { TFile } from "@docspace/shared/api/files/types";
+import { FILLING_STATUS_ID } from "@docspace/shared/constants";
+
+type State = {
+  visible: boolean;
+  form: TFile | null;
+  roomName: string;
+};
+
+const useAssignRolesDialog = () => {
+  const [assignRolesDialogData, setAssignRolesDialogData] =
+    React.useState<State>({
+      visible: false,
+      form: null,
+      roomName: "",
+    });
+
+  const onCloseAssignRolesDialog = () => {
+    setAssignRolesDialogData({
+      visible: false,
+      form: null,
+      roomName: "",
+    });
+  };
+
+  const openAssignRolesDialog = (form: TFile, roomName: string) => {
+    setAssignRolesDialogData({
+      visible: true,
+      form,
+      roomName,
+    });
+  };
+
+  const onSubmitAssignRoles = () => {
+    const { form } = assignRolesDialogData;
+
+    if (form) {
+      const url = new URL(form.webUrl);
+
+      const origin = url.origin;
+
+      const searchParam = new URLSearchParams();
+
+      searchParam.append("fileId", form.id.toString());
+      searchParam.append("action", "edit");
+
+      const page = window.open(
+        `${origin}/doceditor/?${searchParam.toString()}`,
+        "_self",
+      );
+
+      onCloseAssignRolesDialog();
+      if (page) {
+        page.sessionStorage.setItem(FILLING_STATUS_ID, "true");
+      }
+    }
+  };
+
+  return {
+    assignRolesDialogData,
+    onCloseAssignRolesDialog,
+    openAssignRolesDialog,
+    onSubmitAssignRoles,
+  };
+};
+
+export default useAssignRolesDialog;

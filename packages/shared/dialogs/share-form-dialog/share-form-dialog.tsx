@@ -24,56 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/_colors.scss";
+import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
 
-:global(.dark) {
-  :local {
-    .card {
-      --border-color: #{$gray-dark-strong};
-    }
-  }
-}
-:global(.light) {
-  :local {
-    .card {
-      --border-color: #{$gray-light-mid};
-    }
-  }
-}
+import ShareFormCard from "./share-form-card";
+import type { ShareFormDialogProps } from "./share-form-dialog.types";
 
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+import styles from "./share-form-dialog.module.scss";
 
-  margin-top: 20px;
-}
+const ShareFormDialog = ({
+  visible,
+  onClose,
+  containerVisible,
+  container,
+  title,
+  cards,
+}: ShareFormDialogProps) => {
+  return (
+    <ModalDialog
+      autoMaxHeight
+      withBodyScroll
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.aside}
+      containerVisible={containerVisible}
+    >
+      <ModalDialog.Container>{container}</ModalDialog.Container>
+      <ModalDialog.Header>{title}</ModalDialog.Header>
+      <ModalDialog.Body>
+        <section className={styles.container}>
+          {cards.map((card) => (
+            <ShareFormCard key={card.id} {...card} />
+          ))}
+        </section>
+      </ModalDialog.Body>
+    </ModalDialog>
+  );
+};
 
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  padding: 12px 16px;
-
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
-}
-
-.cardHeader {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.button {
-  border: none;
-
-  > div {
-    flex-direction: row-reverse;
-  }
-
-  svg {
-    rotate: 180deg;
-  }
-}
+export default ShareFormDialog;

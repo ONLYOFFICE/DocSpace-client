@@ -534,7 +534,7 @@
   "RestoreTo": "Restore to",
   "Restricted": "Restricted",
   "Review": "Review",
-  "ItemsSuccessfullyUploaded": "{{count}} items successfully uploaded",
+  "ItemsSuccessfullyUploaded": "Uploaded items: {{count}}",
   "Reviewing": "reviewing",
   "Role": "Role",
   "RoleBasedFilling": "Role-based filling",

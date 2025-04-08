@@ -165,6 +165,7 @@ const ShareCollectSelector = inject<TStore>(
           selectedFolder,
           fromShareCollectSelector: true,
           createDefineRoomType,
+          toFillOut: createDefineRoomType === RoomsType.VirtualDataRoom,
         };
 
         setIsRequestRunning(true);

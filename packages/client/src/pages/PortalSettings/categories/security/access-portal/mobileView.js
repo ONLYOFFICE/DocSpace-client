@@ -82,7 +82,7 @@ const MobileView = ({ withoutExternalLink }) => {
         title={t("DeveloperToolsAccess")}
         subtitle={
           <Trans
-            i18nKey="DeveloperToolsAccessDescription"
+            i18nKey="DeveloperToolsAccessMobileDescription"
             ns="Settings"
             t={t}
           />

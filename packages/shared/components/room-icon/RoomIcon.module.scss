@@ -192,6 +192,11 @@
         filter: brightness(80%);
       }
 
+      .template-hover {
+        background-color: var(--room-icon-background-color);
+        filter: brightness(80%);
+      }
+
       .room-title {
         opacity: 0;
         transform: translateY(-20px);

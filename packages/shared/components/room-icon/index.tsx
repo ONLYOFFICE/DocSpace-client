@@ -222,7 +222,7 @@ const RoomIcon = ({
         onClick={onToggleOpenEditLogo}
       >
         {isTemplate ? (
-          <div className="template-icon-container hover-class">
+          <div className="template-icon-container template-hover">
             <ReactSVG className="template-icon-svg" src={TemplateRoomIcon} />
             {showDefault || !correctImage ? (
               roomTitleText
@@ -294,9 +294,7 @@ const RoomIcon = ({
 
         {hoverSrc && !isArchive ? (
           <div
-            className={classNames(styles.roomIconContainer, {
-              "hover-class": isTemplate,
-            })}
+            className={classNames(styles.roomIconContainer)}
             onClick={onToggleOpenEditLogo}
             data-testid="hover-container"
           >

@@ -489,7 +489,7 @@ const SectionHeaderContent = (props) => {
     tableGroupMenuProps.isIndeterminate = !isContactsGroupsPage
       ? isUsersHeaderIndeterminate
       : isGroupsHeaderIndeterminate;
-    tableGroupMenuProps.withoutInfoPanelToggler = false;
+    tableGroupMenuProps.withoutInfoPanelToggler = true;
   } else {
     tableGroupMenuVisible =
       (isIndexEditingMode || isHeaderVisible) && tableGroupMenuVisible;
@@ -497,7 +497,7 @@ const SectionHeaderContent = (props) => {
     tableGroupMenuProps.isIndeterminate = isHeaderIndeterminate;
     tableGroupMenuProps.isBlocked = isGroupMenuBlocked;
     tableGroupMenuProps.withoutInfoPanelToggler =
-      isIndexEditingMode || isPublicRoom;
+      !isIndexEditingMode || !isPublicRoom;
   }
 
   const currentTitle = isSettingsPage

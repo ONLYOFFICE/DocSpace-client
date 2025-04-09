@@ -97,11 +97,11 @@ type TopUpModalProps = {
   onClose: () => void;
   balanceValue: string;
   currency: string;
-  language?: string;
+  language: string;
   setTransactionHistory: () => Promise<any>;
-  isWalletCustomerExist?: boolean;
-  cardLinked?: string;
-  accountLink?: string;
+  isWalletCustomerExist: boolean;
+  cardLinked: string;
+  accountLink: string;
   setBalance: () => Promise<any>;
 };
 
@@ -113,6 +113,9 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
   isWalletCustomerExist,
   setBalance,
   onClose,
+  language,
+  cardLinked,
+  accountLink,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState("");
@@ -150,8 +153,17 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
       <ModalDialog.Body>
         <StyledBody>
           <WalletInfo balance={balanceValue} />
-          <Amount setAmount={setAmount} amount={amount} />
-          <PaymentMethod />
+          <Amount
+            setAmount={setAmount}
+            amount={amount}
+            language={language}
+            currency={currency}
+          />
+          <PaymentMethod
+            isWalletCustomerExist={isWalletCustomerExist}
+            cardLinked={cardLinked}
+            accountLink={accountLink}
+          />
           <AutomaticPaymentsBlock>
             <div className="header">
               <Text noSelect isBold fontSize="16px">
@@ -173,7 +185,7 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
       <ModalDialog.Footer>
         <Button
           key="OkButton"
-          label="Top up"
+          label={t("TopUp")}
           size={ButtonSize.normal}
           primary
           scale
@@ -193,12 +205,15 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
   );
 };
 
-export default inject(({ paymentStore }: TStore) => {
+export default inject(({ paymentStore, authStore }: TStore) => {
+  const { language } = authStore;
   const {
     walletBalance,
     isWalletCustomerExist,
     setBalance,
     setTransactionHistory,
+    cardLinked,
+    accountLink,
   } = paymentStore;
 
   return {
@@ -206,5 +221,8 @@ export default inject(({ paymentStore }: TStore) => {
     isWalletCustomerExist,
     setBalance,
     setTransactionHistory,
+    language,
+    cardLinked,
+    accountLink,
   };
 })(observer(TopUpModal));

@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { useState, useMemo } from "react";
-import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
@@ -34,8 +33,8 @@ import { Text } from "@docspace/shared/components/text";
 type AmountProps = {
   setAmount: (amount: string) => void;
   amount: string;
-  language?: string;
-  currency?: string;
+  language: string;
+  currency: string;
 };
 
 const formattedAmount = (
@@ -137,12 +136,4 @@ const Amount = ({ setAmount, amount, language, currency }: AmountProps) => {
   );
 };
 
-export default inject(({ paymentStore, authStore }: TStore) => {
-  const { language } = authStore;
-  const { walletBalance } = paymentStore;
-
-  return {
-    currency: walletBalance.subAccounts[0].currency,
-    language,
-  };
-})(observer(Amount));
+export default Amount;

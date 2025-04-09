@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
@@ -76,9 +75,9 @@ const CardLinked = styled.div`
 `;
 
 type PaymentMethodProps = {
-  isWalletCustomerExist?: boolean;
-  cardLinked?: string;
-  accountLink?: string;
+  isWalletCustomerExist: boolean;
+  cardLinked: string;
+  accountLink: string;
 };
 
 const PaymentMethod = ({
@@ -132,24 +131,4 @@ const PaymentMethod = ({
   );
 };
 
-export default inject(({ paymentStore, authStore }: TStore) => {
-  const { language } = authStore;
-  const {
-    walletBalance,
-    isWalletCustomerExist,
-    cardLinked,
-    accountLink,
-    setBalance,
-    setTransactionHistory,
-  } = paymentStore;
-
-  return {
-    currency: walletBalance.subAccounts[0].currency,
-    language,
-    isWalletCustomerExist,
-    cardLinked,
-    setBalance,
-    accountLink,
-    setTransactionHistory,
-  };
-})(observer(PaymentMethod));
+export default PaymentMethod;

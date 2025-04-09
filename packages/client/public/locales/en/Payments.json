@@ -42,6 +42,8 @@
   "NotPossibleRoomRestoring": "Restoring this room is not possible since the limit is reached for the number of rooms included in your current plan.",
   "NumberOfRoomsAccordingToTariff": "Number of rooms according to your tariff plan: {{currentValue}}/{{maxValue}}",
   "NumberOfUsersAccordingToTariff": "Number of admins according to your tariff plan: {{currentValue}}/{{maxValue}}",
+  "NoWalletTransaction": "No wallet transaction",
+  "NoWalletTransactionDescription": "You haven't made any transactions yet. Once you start using your wallet, all your payment history will be displayed here.",
   "Pay": "Pay",
   "Payer": "Payer",
   "PaymentMethod": "Payment method",

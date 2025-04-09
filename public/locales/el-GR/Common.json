@@ -638,5 +638,6 @@
   "Yes": "Ναι",
   "Yesterday": "Χθες",
   "You": "Εσείς",
-  "Forms": "Φόρμες"
+  "Forms": "Φόρμες",
+  "AllTypesAvailableForEditing": "όλοι οι τύποι αρχείων που είναι διαθέσιμοι για επεξεργασία στο {{organizationName}}"
 }

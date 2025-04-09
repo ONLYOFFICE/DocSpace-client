@@ -638,5 +638,6 @@
   "Yes": "Jā",
   "Yesterday": "어제",
   "You": "Jūs",
-  "Forms": "Veidlapas"
+  "Forms": "Veidlapas",
+  "AllTypesAvailableForEditing": "visi failu tipi, kas pieejami rediģēšanai {{organizationName}}"
 }

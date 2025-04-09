@@ -638,5 +638,6 @@
   "Yes": "Sim",
   "Yesterday": "Ontem",
   "You": "Você",
-  "Forms": "Formulários"
+  "Forms": "Formulários",
+  "AllTypesAvailableForEditing": "todos os tipos de arquivo disponíveis para edição em {{organizationName}}"
 }

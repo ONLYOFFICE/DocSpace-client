@@ -638,5 +638,6 @@
   "Yes": "Kyllä",
   "Yesterday": "Eilen",
   "You": "Sinä",
-  "Forms": "Lomakkeet"
+  "Forms": "Lomakkeet",
+  "AllTypesAvailableForEditing": "kaikki tiedostotyypit ovat muokattavissa {{organizationName}}:ssa"
 }

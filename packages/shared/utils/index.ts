@@ -93,6 +93,7 @@ import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
 import { fakeFormFillingList } from "./formFillingTourData";
 import { getCountTilesInRow } from "./getCountTilesInRow";
+import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
 
 export {
   isBetaLanguage,
@@ -153,6 +154,7 @@ export {
   getFormFillingTipsStorageName,
   fakeFormFillingList,
   getCountTilesInRow,
+  getSelectFormatTranslation,
 };
 
 export const getModalType = () => {

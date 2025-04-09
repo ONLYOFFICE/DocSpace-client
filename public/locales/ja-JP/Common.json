@@ -637,5 +637,6 @@
   "Yes": "はい",
   "Yesterday": "昨日",
   "You": "あなた",
-  "Forms": "フォーム"
+  "Forms": "フォーム",
+  "AllTypesAvailableForEditing": "{{organizationName}}で編集可能な全てのファイルタイプ"
 }

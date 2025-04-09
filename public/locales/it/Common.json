@@ -639,5 +639,6 @@
   "Yes": "Sì",
   "Yesterday": "Ieri",
   "You": "Tu",
-  "Forms": "Moduli"
+  "Forms": "Moduli",
+  "AllTypesAvailableForEditing": "tutti i tipi di file disponibili per la modifica in {{organizationName}}"
 }

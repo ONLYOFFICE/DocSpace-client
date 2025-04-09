@@ -635,5 +635,6 @@
   "Yes": "نعم",
   "Yesterday": "أمس",
   "You": "أنت",
-  "Forms": "نماذج"
+  "Forms": "نماذج",
+  "AllTypesAvailableForEditing": "جميع أنواع الملفات متاحة للتحرير في {{organizationName}}"
 }

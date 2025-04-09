@@ -639,5 +639,6 @@
   "Yes": "Да",
   "Yesterday": "Јуче",
   "You": "Ви",
-  "Forms": "Обрасци"
+  "Forms": "Обрасци",
+  "AllTypesAvailableForEditing": "Сви типови датотека доступни за уређивање у {{organizationName}}"
 }

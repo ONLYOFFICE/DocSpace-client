@@ -639,5 +639,6 @@
   "Yes": "Da",
   "Yesterday": "Ieri",
   "You": "Dvs",
-  "Forms": "Forms"
+  "Forms": "Forms",
+  "AllTypesAvailableForEditing": "toate tipuri de fișiere pot fi editate în {{organizationName}}"
 }

@@ -640,5 +640,6 @@
   "Yes": "是",
   "Yesterday": "昨天",
   "You": "您",
-  "Forms": "表单"
+  "Forms": "表单",
+  "AllTypesAvailableForEditing": "{{organizationName}} 中可供编辑的所有文件类型"
 }

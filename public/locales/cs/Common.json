@@ -638,5 +638,6 @@
   "Yes": "Ano",
   "Yesterday": "Včera",
   "You": "Vy",
-  "Forms": "Formuláře"
+  "Forms": "Formuláře",
+  "AllTypesAvailableForEditing": "všechny typy souborů dostupné k úpravám v {{organizationName}}"
 }

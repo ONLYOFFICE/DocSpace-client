@@ -639,5 +639,6 @@
   "Yes": "Ja",
   "Yesterday": "Gestern",
   "You": "Sie",
-  "Forms": "Formulare"
+  "Forms": "Formulare",
+  "AllTypesAvailableForEditing": "alle in {{organizationName}} zur Bearbeitung verfügbaren Dateitypen"
 }

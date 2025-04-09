@@ -638,5 +638,6 @@
   "Yes": "Da",
   "Yesterday": "Včeraj",
   "You": "Vi",
-  "Forms": "Obrazci"
+  "Forms": "Obrazci",
+  "AllTypesAvailableForEditing": "vse vrste datoteki na voljo za urejanje v {{organizationName}}"
 }

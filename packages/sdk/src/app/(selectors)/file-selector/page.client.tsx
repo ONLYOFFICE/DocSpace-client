@@ -52,6 +52,7 @@ import type {
   TFilesSelectorInit,
   TSelectedFileInfo,
 } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import { getSelectFormatTranslation } from "@docspace/shared/utils";
 
 import useDocumentTitle from "@/hooks/useDocumentTitle";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
@@ -84,6 +85,7 @@ type FilesSelectorClientProps = {
   selectedItemId: string | number;
   selectedItemType: "rooms" | "files";
   total: number;
+  logoText: string;
 };
 
 export default function FilesSelectorClient({
@@ -100,6 +102,7 @@ export default function FilesSelectorClient({
   selectedItemId,
   selectedItemType,
   total,
+  logoText,
 }: FilesSelectorClientProps) {
   const { sdkConfig } = useSDKConfig();
 
@@ -254,7 +257,10 @@ export default function FilesSelectorClient({
     currentDeviceType: DeviceType.desktop,
     currentFolderId,
     currentFooterInputValue: "",
-    descriptionText: !subtitle || !filter || filter === "ALL" ? "" : filter,
+    descriptionText:
+      !subtitle || !filter
+        ? ""
+        : getSelectFormatTranslation(t, filter, logoText),
     disabledItems: [],
     embedded: true,
     filesSettings,

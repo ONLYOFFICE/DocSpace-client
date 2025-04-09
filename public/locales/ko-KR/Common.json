@@ -635,5 +635,6 @@
   "Yes": "네",
   "Yesterday": "어제",
   "You": "나",
-  "Forms": "양식"
+  "Forms": "양식",
+  "AllTypesAvailableForEditing": "{{organizationName}}에서 편집 가능한 모든 파일 유형"
 }

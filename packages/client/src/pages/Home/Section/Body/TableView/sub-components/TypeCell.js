@@ -32,8 +32,7 @@ import { StyledTypeCell } from "./CellStyles";
 import { getRoomTypeName } from "../../../../../../helpers/filesUtils";
 
 const TypeCell = ({ t, item, sideColor }) => {
-  const { fileExst, fileTypeName, fileType, roomType, isForm, isPDFForm } =
-    item;
+  const { fileExst, fileTypeName, fileType, roomType, isPDFForm } = item;
   const getItemType = () => {
     switch (fileType) {
       case FileType.Unknown:
@@ -55,7 +54,7 @@ const TypeCell = ({ t, item, sideColor }) => {
       case FileType.OForm:
       case FileType.OFormTemplate:
       case FileType.PDF: {
-        return getSinglePDFTitle(t, isForm || isPDFForm);
+        return getSinglePDFTitle(t, isPDFForm);
       }
       default:
         return t("Common:Folder");

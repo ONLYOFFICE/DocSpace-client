@@ -202,3 +202,14 @@ export const getRedirectURL = () => {
 
   return decodedRedirectUrl;
 };
+
+export const encodeParams = (str: string) => {
+  return str
+    .split("&")
+    .map((pair) => {
+      const [key, value] = pair.split("=");
+      const encodedValue = encodeURIComponent(value);
+      return `${key}=${encodedValue}`;
+    })
+    .join("&");
+};

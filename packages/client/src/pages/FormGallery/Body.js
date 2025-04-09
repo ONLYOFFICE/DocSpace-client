@@ -81,7 +81,8 @@ const SectionBodyContent = ({
       e.target.closest(".scroll-body") &&
       !e.target.closest(".files-item") &&
       !e.target.closest(".not-selectable") &&
-      !e.target.closest(".info-panel")
+      !e.target.closest(".info-panel") &&
+      !e.target.closest(".info-panel-toggle-bg")
     ) {
       setGallerySelected(null);
     }

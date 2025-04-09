@@ -142,3 +142,23 @@ export type TBalance =
       subAccounts: [{ currency: string; amount: number }];
     }
   | undefined;
+
+export type TTransactionCollection = {
+  date: string;
+  service?: string;
+  serviceUnit?: string;
+  quantity: number;
+  amount: number;
+  credit: number;
+  withdrawal: number;
+  currency: string;
+};
+
+export type TTransactionHistory = {
+  collection: TTransactionCollection[];
+  offset: number;
+  limit: number;
+  totalQuantity: number;
+  totalPage: number;
+  currentPage: number;
+};

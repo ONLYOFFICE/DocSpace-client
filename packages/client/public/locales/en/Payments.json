@@ -7,6 +7,7 @@
   "AccessingProblem": "If you are an existing user and have problems accessing this space please contact the administrator.",
   "AdministratorDescription": "{{productName}} configuration, room creation and administration, ability to invite and manage users in {{productName}} and in virtual rooms, ability to manage access rights.",
   "Balance": "Balance: <1>{{balance}}</1>",
+  "BalanceTopUp": "Balance top-up",
   "BalanceText": "Balance",
   "Benefits": "Benefits",
   "BusinessExpired": "Your {{planName}} plan has expired on {{date}}",
@@ -23,6 +24,7 @@
   "ChooseNewPayer": "Choose a new Payer",
   "ChooseNewPlan": "Would you like to choose a new pricing plan?",
   "ContactUs": "For sales questions, contact us at",
+  "Cost": "Cost",
   "DelayedPayment": "Delayed payment of the {{planName}} plan dated {{date}}",
   "DowngradeNow": "Downgrade now",
   "EnterAmount": "Enter amount",
@@ -53,6 +55,7 @@
   "StartupTitle": "You are using free {{planName}} plan",
   "StripeCustomerPortal": "go to the Stripe customer portal",
   "TariffPlan": "Tariff plan",
+  "TransactionHistory": "Transaction history",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/month</3>",
   "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/year</3>",
   "TopUpBalance": "Top up balance",
@@ -65,5 +68,6 @@
   "YourPrice": "Your price",
   "YouHaveNotAddedAnyPayment": "You have not added any payment",
   "Wallet": "Wallet",
-  "WalletDescription": "{{productName}} Wallet is a flexible and convenient way to purchase storage space and AI tools. Top up your wallet and start using it by selecting the services you need in the Services section."
+  "WalletDescription": "{{productName}} Wallet is a flexible and convenient way to purchase storage space and AI tools. Top up your wallet and start using it by selecting the services you need in the Services section.",
+  "Quantity": "Quantity"
 }

@@ -411,6 +411,27 @@ export async function saveDeposite(amount: number, currency: string) {
   }) as string;
 }
 
+export async function getTransactionHistory(
+  startDate: string,
+  endDate: string,
+  credit: boolean = true,
+  withdrawal: boolean = true,
+) {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    url: "/portal/payment/customer/operations",
+    params: {
+      startDate,
+      endDate,
+      credit,
+      withdrawal,
+    },
+  };
+  const res = (await request(options)) as TCustomerOperation;
+
+  return res;
+}
+
 export async function getPortal() {
   const options: AxiosRequestConfig = {
     method: "post",

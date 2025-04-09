@@ -47,6 +47,7 @@ import { saveDeposite } from "@docspace/shared/api/portal";
 import PlusIcon from "PUBLIC_DIR/images/icons/12/payment.plus.react.svg";
 
 import WalletInfo from "./sub-components/WalletInfo";
+import TransactionHistory from "./TransactionHistory";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -60,6 +61,7 @@ const StyledContainer = styled.div`
 
   .balance-wrapper {
     max-width: 152px;
+    margin-bottom: 24px;
   }
 `;
 
@@ -189,6 +191,7 @@ const Wallet = ({
   cardLinked,
   accountLink,
   setBalance,
+  isInitWalletPage,
 }) => {
   const tooltipContent =
     "Your current wallet balance. This amount can be used for purchases and subscriptions.";
@@ -312,6 +315,8 @@ const Wallet = ({
 
   const isButtonDisabled = !isWalletCustomerExist || !amount;
 
+  if (!isInitWalletPage) return;
+
   return (
     <StyledContainer>
       <Description>
@@ -341,6 +346,8 @@ const Wallet = ({
           onClick={() => setVisible(true)}
         />
       </div>
+
+      <TransactionHistory />
 
       <ModalDialog
         visible={visible}
@@ -454,6 +461,7 @@ export default inject(({ paymentStore, authStore }) => {
     cardLinked,
     accountLink,
     setBalance,
+    isInitWalletPage,
   } = paymentStore;
 
   console.log("walletBalance.subAccounts", walletBalance.subAccounts);
@@ -465,5 +473,6 @@ export default inject(({ paymentStore, authStore }) => {
     cardLinked,
     setBalance,
     accountLink,
+    isInitWalletPage,
   };
 })(observer(Wallet));

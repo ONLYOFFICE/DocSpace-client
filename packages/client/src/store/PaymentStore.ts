@@ -28,6 +28,7 @@
 /* eslint-disable no-console */
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
+import moment from "moment";
 
 import {
   getPaymentSettings,
@@ -38,6 +39,7 @@ import {
   getBalance,
   getCardLinked,
   getCustomerInfo,
+  getTransactionHistory,
   getPaymentLink,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
@@ -50,7 +52,11 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { PaymentQuotasStore } from "@docspace/shared/store/PaymentQuotasStore";
 import { TTranslation } from "@docspace/shared/types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { TBalance, TCustomerInfo } from "@docspace/shared/api/portal/types";
+import {
+  TBalance,
+  TCustomerInfo,
+  TTransactionHistory,
+} from "@docspace/shared/api/portal/types";
 
 class PaymentStore {
   userStore: UserStore | null = null;
@@ -107,6 +113,44 @@ class PaymentStore {
   };
 
   cardLinked = "";
+
+  transactionHistory: TTransactionHistory | {} = {
+    collection: [
+      {
+        date: "2025-04-08T13:47:30.834744",
+        quantity: 1,
+        currency: "USD",
+        credit: 11,
+        withdrawal: 0,
+      },
+      {
+        date: "2025-04-08T13:46:53.201513",
+        quantity: 1,
+        currency: "USD",
+        credit: 20,
+        withdrawal: 0,
+      },
+      {
+        date: "2025-04-08T13:46:23.867701",
+        quantity: 1,
+        currency: "USD",
+        credit: 10,
+        withdrawal: 0,
+      },
+      {
+        date: "2025-04-08T13:41:18.169381",
+        quantity: 1,
+        currency: "USD",
+        credit: 10,
+        withdrawal: 0,
+      },
+    ],
+    offset: 0,
+    limit: 25,
+    totalQuantity: 4,
+    totalPage: 1,
+    currentPage: 1,
+  };
 
   constructor(
     userStore: UserStore,
@@ -187,10 +231,24 @@ class PaymentStore {
     this.balance = res;
   };
 
+  setTransactionHistory = async () => {
+    const endDate = moment().format("YYYY-MM-DDTHH:mm:ss");
+    const startDate = moment()
+      .subtract(4, "weeks")
+      .format("YYYY-MM-DDTHH:mm:ss");
+
+    const res = await getTransactionHistory(startDate, endDate);
+
+    if (!res) return;
+
+    this.transactionHistory = res;
+  };
+
   walletInit = async () => {
     const requests = [
       getCustomerInfo(),
       getCardLinked(window.location.href),
+      this.setTransactionHistory(),
       this.setBalance(),
       this.setPaymentAccount(),
     ];
@@ -203,7 +261,6 @@ class PaymentStore {
     } catch (error) {
       // toastr.error(t("Common:UnexpectedError"));
       console.error(error);
-      return;
     }
 
     this.setIsInitWalletPage(true);

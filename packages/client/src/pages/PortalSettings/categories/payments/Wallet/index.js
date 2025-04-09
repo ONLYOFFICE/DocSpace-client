@@ -125,6 +125,14 @@ const Wallet = ({ balance, language, walletInit, isInitWalletPage }) => {
   const { fraction, balanceValue, isCurrencyAtEnd, mainNumber, currency } =
     formattedBalance();
 
+  const onClose = () => {
+    setVisible(false);
+  };
+
+  const onOpen = () => {
+    setVisible(true);
+  };
+
   if (!isInitWalletPage) return;
 
   return (
@@ -152,13 +160,13 @@ const Wallet = ({ balance, language, walletInit, isInitWalletPage }) => {
           size={ButtonSize.normal}
           primary
           label={t("TopUpBalance")}
-          onClick={() => setVisible(true)}
+          onClick={onOpen}
         />
       </div>
 
       <TopUpModal
         visible={visible}
-        onClose={() => setVisible(false)}
+        onClose={onClose}
         balanceValue={balanceValue}
       />
 

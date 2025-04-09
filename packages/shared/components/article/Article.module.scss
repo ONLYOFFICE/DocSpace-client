@@ -496,7 +496,7 @@
 
       @include mobile {
         display: block;
-        padding-bottom: 20px;
+        padding: 0 8px 20px 8px !important;
       }
     }
   }

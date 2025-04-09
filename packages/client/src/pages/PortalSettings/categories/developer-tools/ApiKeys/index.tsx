@@ -74,6 +74,7 @@ const StyledApiKeys = styled.div`
 
 const StyledMobileButton = styled.div.attrs(injectDefaultTheme)`
   position: fixed;
+  z-index: 1;
   width: calc(100% - 32px);
   height: 73px;
   bottom: 0;
@@ -115,13 +116,16 @@ const ApiKeys = (props: ApiKeysProps) => {
     setIsRequestRunning(true);
     deleteApiKey(actionItem.id)
       .then((res) => {
-        if (res)
+        if (res) {
           setListItems((prev) => prev.filter((k) => k.id !== actionItem.id));
+          toastr.success(t("Settings:SecretKeyDeleted"));
+        }
       })
       .catch((err) => toastr.error(err))
       .finally(() => {
         setIsRequestRunning(false);
         setDeleteKeyDialogIsVisible(false);
+        setActionItem(null);
       });
   };
 
@@ -148,6 +152,7 @@ const ApiKeys = (props: ApiKeysProps) => {
           }
 
           setListItems(items);
+          toastr.success(t("Settings:SecretKeyEdited"));
         }
       })
       .catch((err) => toastr.error(err))
@@ -257,7 +262,10 @@ const ApiKeys = (props: ApiKeysProps) => {
       {deleteKeyDialogIsVisible ? (
         <DeleteApiKeyDialog
           isVisible={deleteKeyDialogIsVisible}
-          setIsVisible={setDeleteKeyDialogIsVisible}
+          onClose={() => {
+            setDeleteKeyDialogIsVisible(false);
+            setActionItem(null);
+          }}
           onDelete={onDelete}
           isRequestRunning={isRequestRunning}
         />

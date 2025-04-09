@@ -217,7 +217,8 @@ const PeopleSelector = ({
   withBlur,
   setActiveTab,
   injectedElement,
-  filterItems,
+  alwaysShowFooter = false,
+  onlyRoomMembers,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -317,6 +318,10 @@ const PeopleSelector = ({
         currentFilter.area = "people";
       }
 
+      if (onlyRoomMembers) {
+        currentFilter.includeShared = true;
+      }
+
       const response = !roomId
         ? await getUserList(currentFilter)
         : await getMembersList(searchArea, roomId, currentFilter);
@@ -325,10 +330,7 @@ const PeopleSelector = ({
 
       const data = response.items
         .filter((item) => {
-          if (
-            (excludeItems && excludeItems.includes(item.id)) ||
-            filterItems?.(item)
-          ) {
+          if (excludeItems && excludeItems.includes(item.id)) {
             totalDifferent += 1;
             return false;
           }
@@ -396,7 +398,7 @@ const PeopleSelector = ({
       withGroups,
       withGuests,
       withOutCurrentAuthorizedUser,
-      filterItems,
+      onlyRoomMembers,
     ],
   );
 
@@ -602,7 +604,9 @@ const PeopleSelector = ({
       {...withAside}
       id={id}
       injectedElement={injectedElement}
-      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
+      alwaysShowFooter={
+        itemsList.length !== 0 || Boolean(searchValue) || alwaysShowFooter
+      }
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}
@@ -610,6 +614,7 @@ const PeopleSelector = ({
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
       disableSubmitButton={disableSubmitButton || !selectedItem}
+      selectedItem={selectedItem}
       submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
       emptyScreenHeader={

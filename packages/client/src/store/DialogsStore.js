@@ -277,7 +277,26 @@ class DialogsStore {
 
   operationCancelVisible = false;
 
+  /**
+   * @type {Object}
+   * @property {boolean} visible - The visibility of the remove user confirmation dialog.
+   * @property {() => Promise<void> | null} callback - The callback function to be called when the dialog is confirmed.
+   */
+  removeUserConfirmation = {
+    visible: false,
+    callback: null,
+  };
+
   isShareFormData = { visible: false, updateAccessLink: null, fileId: null };
+
+  assignRolesDialogData = {
+    /** @type {boolean} */
+    visible: false,
+    /** @type {string} */
+    roomName: "",
+    /** @type {import("@docspace/shared/api/files/types").TFile | null} */
+    file: null,
+  };
 
   constructor(
     authStore,
@@ -904,7 +923,9 @@ class DialogsStore {
   };
 
   setCoverSelection = (selection) => {
-    this.coverSelection = selection;
+    runInAction(() => {
+      this.coverSelection = selection;
+    });
   };
 
   setRoomLogoCover = async (roomId) => {
@@ -970,6 +991,26 @@ class DialogsStore {
       visible,
       formId,
     };
+  };
+
+  /**
+   * @param {boolean} visible
+   * @param {()=>Promise<void>=} callback
+   */
+  setRemoveUserConfirmation = (visible, callback = null) => {
+    this.removeUserConfirmation = {
+      visible,
+      callback,
+    };
+  };
+
+  /**
+   * @param {boolean} visible
+   * @param {string} [roomName = ""]
+   * @param {import("@docspace/shared/api/files/types").TFile} [file = null]
+   */
+  setAssignRolesDialogData = (visible, roomName = "", file = null) => {
+    this.assignRolesDialogData = { visible, roomName, file };
   };
 }
 

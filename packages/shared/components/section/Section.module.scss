@@ -77,40 +77,11 @@
   }
 }
 
-.filter {
-  @include tablet-and-below {
-    margin-inline-end: 16px;
-  }
-}
-
 .footer {
   margin-top: 40px;
 
   @include mobile {
     margin-top: 32px;
-  }
-}
-
-.styledDropDown {
-  margin-bottom: 8px;
-
-  background-color: #555f65;
-
-  :global {
-    .progress-list {
-      padding: 0px 8px;
-    }
-
-    .progress-list.withHover:hover {
-      background-color: #657077;
-    }
-  }
-
-  &:active {
-    background-color: #555f65;
-  }
-  @media (hover: hover) {
-    background-color: #555f65;
   }
 }
 
@@ -463,12 +434,6 @@
         padding-inline: 16px;
         margin-inline: -16px;
       }
-    }
-  }
-
-  &.infoPanelVisible {
-    .progressBarContainer {
-      inset-inline-end: 424px;
     }
   }
 

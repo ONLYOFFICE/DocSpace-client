@@ -28,6 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 import { Nullable } from "@docspace/shared/types";
 import { isMobile } from "@docspace/shared/utils";
 
@@ -389,6 +390,7 @@ const NewFilesBadge = ({
         fontWeight={600}
         className={`new-items${className ? ` ${className}` : ""}`}
         label={label}
+        color={globalColors.white}
         onClick={onBadgeClickAction}
         onMouseOver={onMouseOver}
         onMouseLeave={onMouseLeave}

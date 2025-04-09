@@ -58,7 +58,7 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
           <Trans
             t={t}
             ns="Files"
-            i18nKey="PersonalFolderErasureWarningInfo"
+            i18nKey="PersonalContentRemovalNotice"
             values={{ sectionName: personalUserFolderTitle }}
             components={{ 1: <span style={{ fontWeight: 600 }} /> }}
           />
@@ -80,7 +80,9 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
         />
         <Button
           key="RedirectButton"
-          label={t("Files:GoToPersonal")}
+          label={t("Files:GoToSection", {
+            sectionName: t("Common:MyFilesSection"),
+          })}
           size={ButtonSize.normal}
           onClick={onRedirect}
           scale

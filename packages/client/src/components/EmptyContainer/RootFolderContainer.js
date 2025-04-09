@@ -214,7 +214,9 @@ const RootFolderContainer = (props) => {
         isFill
       />
       <Link onClick={onGoToPersonal} {...linkStyles}>
-        {t("GoToPersonal")}
+        {t("Files:GoToSection", {
+          sectionName: t("Common:MyFilesSection"),
+        })}
       </Link>
     </div>
   );
@@ -229,7 +231,9 @@ const RootFolderContainer = (props) => {
         isFill
       />
       <Link onClick={onGoToPersonal} {...linkStyles}>
-        {t("GoToPersonal")}
+        {t("Files:GoToSection", {
+          sectionName: t("Common:MyFilesSection"),
+        })}
       </Link>
     </div>
   );
@@ -409,4 +413,4 @@ export default inject(
       logoText,
     };
   },
-)(withTranslation(["Files"])(observer(RootFolderContainer)));
+)(withTranslation(["Files", "Common"])(observer(RootFolderContainer)));

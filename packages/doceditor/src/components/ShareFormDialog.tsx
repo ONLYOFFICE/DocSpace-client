@@ -24,13 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React from "react";
+import { useTranslation } from "react-i18next";
+import moment from "moment";
 
-import { ShareFormDialog as ShareFormDialogComponent } from "@docspace/shared/dialogs/ShareFormDialog";
+import FormDataCollectionIcon from "PUBLIC_DIR/images/icons/32/form.data.collection.svg";
+import RoleBasedFillingIcon from "PUBLIC_DIR/images/icons/32/role.based.filling.svg";
+import ShareSvg from "PUBLIC_DIR/images/icons/32/share.svg";
+
+import { ShareFormDialog as ShareFormDialogComponent } from "@docspace/shared/dialogs/share-form-dialog";
+
 import type { TFile, TFilesSettings } from "@docspace/shared/api/files/types";
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
 import StartFillingSelectorDialog from "./StartFillingSelectDialog";
 import { StartFillingSelectorDialogProps } from "@/types";
+import {
+  addExternalLink,
+  editExternalLink,
+  getExternalLinks,
+} from "@docspace/shared/api/files";
+import { copyDocumentShareLink } from "@docspace/shared/components/share/Share.helpers";
+import { toastr } from "@docspace/shared/components/toast";
+import { Nullable, TResolver } from "@docspace/shared/types";
 
 type SubmitFn = StartFillingSelectorDialogProps["onSubmit"];
 
@@ -47,6 +62,12 @@ type ShareFormDialogProps = {
   onSubmitStartFillingSelectDialog: SubmitFn;
   getIsDisabledStartFillingSelectDialog: StartFillingSelectorDialogProps["getIsDisabled"];
   updateAccessLink?: () => void;
+  openChangeLinkTypeDialog: (
+    promise: TResolver<
+      Nullable<(res: string) => void>,
+      Nullable<(rej: string) => void>
+    >,
+  ) => void;
 };
 
 const ShareFormDialog = ({
@@ -62,7 +83,10 @@ const ShareFormDialog = ({
   isVisibleStartFillingSelectDialog,
   createDefineRoomType,
   updateAccessLink,
+  openChangeLinkTypeDialog,
 }: ShareFormDialogProps) => {
+  const { t } = useTranslation("Common");
+
   const handleClose = () => {
     onClose();
     onCloseStartFillingSelectDialog();
@@ -70,22 +94,96 @@ const ShareFormDialog = ({
 
   const onSubmit: SubmitFn = async (...args) => {
     await onSubmitStartFillingSelectDialog(...args);
-    onClose();
-  };
-
-  const onClickShareFile = () => {
-    updateAccessLink?.();
     handleClose();
   };
+
+  const onClickShareFile = async () => {
+    try {
+      const res = await getExternalLinks(file.id);
+
+      if (res.items.length === 0) {
+        const link = await addExternalLink(
+          file.id,
+          ShareAccessRights.FormFilling,
+          false,
+          false,
+        );
+        return copyDocumentShareLink(link, t);
+      }
+
+      if (res.items.length === 1) {
+        const [link] = res.items;
+
+        if (link.access !== ShareAccessRights.FormFilling) {
+          handleClose();
+
+          await new Promise<string>((resolve, reject) => {
+            openChangeLinkTypeDialog({
+              reject,
+              resolve,
+            });
+          });
+
+          const updatedLink = await editExternalLink(
+            file.id,
+            link.sharedTo.id,
+            ShareAccessRights.FormFilling,
+            false,
+            false,
+            moment(null),
+          );
+
+          return copyDocumentShareLink(updatedLink, t);
+        }
+
+        return copyDocumentShareLink(link, t);
+      }
+    } catch (error) {
+      if (error === "canceled") {
+        return;
+      }
+
+      console.log(error);
+      toastr.error(error as Error);
+    } finally {
+      handleClose();
+    }
+  };
+
+  const cards = [
+    {
+      id: "quick-sharing",
+      title: t("Common:QuickSharing"),
+      description: t("Common:ShareTheOriginalFormForFillingOut"),
+      buttonLabel: t("Common:Share"),
+      onClick: onClickShareFile,
+      icon: <ShareSvg />,
+    },
+    {
+      id: "form-room",
+      title: t("Common:FormDataCollection"),
+      description: t("Common:FormDataCollectionDescription"),
+      buttonLabel: t("Common:ShareInTheRoom"),
+      onClick: onClickFormRoom,
+      icon: <FormDataCollectionIcon />,
+    },
+    {
+      id: "virtual-data-room",
+      title: t("Common:RoleBasedFilling"),
+      description: t("Common:RoleBasedFillingDescription"),
+      buttonLabel: t("Common:ShareInTheRoom"),
+      onClick: onClickVirtualDataRoom,
+      icon: <RoleBasedFillingIcon />,
+    },
+  ];
 
   return (
     <ShareFormDialogComponent
       visible
+      cards={cards}
       onClose={handleClose}
-      {...(updateAccessLink && { onClickShareFile })}
-      onClickFormRoom={onClickFormRoom}
-      onClickVirtualDataRoom={onClickVirtualDataRoom}
-      visibleContainer={isVisibleStartFillingSelectDialog}
+      containerVisible={isVisibleStartFillingSelectDialog}
+      title={t("Common:ShareToFillOut")}
       container={
         <StartFillingSelectorDialog
           isVisible

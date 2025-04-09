@@ -620,6 +620,7 @@ class ContactsConextOptionsStore {
       reassignUserData: dataReassignment,
       getReassignmentProgress: dataReassignmentProgress,
       cancelReassignment: dataReassignmentTerminate,
+      showDeleteProfileCheckbox: true,
     });
 
     setDataReassignmentDialogVisible(true);

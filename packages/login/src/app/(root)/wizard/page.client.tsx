@@ -276,8 +276,21 @@ function WizardForm(props: WizardFormProps) {
     try {
       const res = await setLicense(wizardToken, fd);
       setLicenseUpload(res);
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      const knownError = error as TError;
+      let errorMessage: string = "";
+
+      if (typeof knownError === "object") {
+        errorMessage =
+          knownError?.response?.data?.error?.message ||
+          knownError?.statusText ||
+          knownError?.message ||
+          "";
+      } else {
+        errorMessage = knownError;
+      }
+
+      toastr.error(errorMessage);
       setHasErrorLicense(true);
       setInvalidLicense(true);
     }

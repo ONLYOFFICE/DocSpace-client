@@ -42,7 +42,6 @@
   "UploadDeviceOptionTitle": "تحميل من جهازك",
   "UploadDevicePDFFormOptionDescription": "قم بتحميل نموذج PDF جاهز إلى الغرفة من جهازك.",
   "UploadDevicePDFFormOptionTitle": "تحميل من الجهاز",
-  "UploadFromPortalDescription": "قم بتحميل أي نوع من الملفات من المستندات أو الغرف",
   "UploadFromPortalTitle": "تحميل من {{productName}}",
   "UploadPDFFormOptionDescription": "حدد نموذج  PDFجاهزًا متاحًا في {{productName}} وقم بتحميله إلى الغرفة. ",
   "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية"

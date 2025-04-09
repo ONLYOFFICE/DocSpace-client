@@ -375,7 +375,10 @@ const DownloadDialog = (props: DownloadDialogProps) => {
     return (
       <ReactSVG
         beforeInjection={(svg) => {
-          svg.setAttribute("style", "margin-top: 4px; margin-right: 12px;");
+          svg.setAttribute(
+            "style",
+            "margin-top: 4px; margin-inline-end: 12px;",
+          );
         }}
         src={icon}
         loading={LoadingPlaceholder}

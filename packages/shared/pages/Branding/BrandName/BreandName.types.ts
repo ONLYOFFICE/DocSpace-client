@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TTranslation } from "types";
-import { DeviceType } from "enums";
+import { TTranslation } from "../../../types";
+import { DeviceType } from "../../../enums";
 import { IWhiteLabelData } from "../WhiteLabel/WhiteLabel.types";
 
 export interface IBrandNameProps {

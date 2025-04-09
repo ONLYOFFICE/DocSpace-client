@@ -145,6 +145,10 @@ class BackupStore {
 
   connectedAccount = [];
 
+  isBackupProgressVisible = false;
+
+  backupPrgressError = "";
+
   constructor(authStore, thirdPartyStore) {
     makeAutoObservable(this);
 
@@ -294,10 +298,11 @@ class BackupStore {
     const isDisabled = !provider.connected && !this.authStore.isAdmin;
 
     const account = {
-      key: provider.name,
+      name: provider.name,
       label: serviceLabel,
       title: serviceLabel,
-      provider_key: provider.key,
+      provider_key: provider.key !== "WebDav" ? provider.key : provider.name,
+      key: provider.key,
       ...(provider.clientId && {
         provider_link: provider.clientId,
       }),
@@ -553,6 +558,7 @@ class BackupStore {
         const { progress, link, error } = response;
 
         if (!error) {
+          this.setIsBackupProgressVisible(progress !== 100);
           this.downloadingProgress = progress;
 
           if (link && link.slice(0, 1) === "/") {
@@ -560,6 +566,7 @@ class BackupStore {
           }
           this.setErrorInformation("");
         } else {
+          this.setIsBackupProgressVisible(false);
           this.downloadingProgress = 100;
           this.setErrorInformation(error);
         }
@@ -579,9 +586,13 @@ class BackupStore {
     }
   };
 
-  get isBackupProgressVisible() {
-    return this.downloadingProgress >= 0 && this.downloadingProgress !== 100;
-  }
+  setIsBackupProgressVisible = (visible) => {
+    this.isBackupProgressVisible = visible;
+  };
+
+  setBackupProgressError = (error) => {
+    this.backupPrgressError = error;
+  };
 
   setDownloadingProgress = (progress) => {
     if (progress !== this.downloadingProgress)

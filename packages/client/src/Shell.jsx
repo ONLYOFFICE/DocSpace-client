@@ -63,6 +63,7 @@ import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import useCreateFileError from "./Hooks/useCreateFileError";
 
 import ReactSmartBanner from "./components/SmartBanner";
+import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
 
 const Shell = ({ page = "home", ...rest }) => {
   const {
@@ -98,6 +99,7 @@ const Shell = ({ page = "home", ...rest }) => {
     logoText,
     setLogoText,
     standalone,
+    isGuest,
   } = rest;
 
   const theme = useTheme();
@@ -172,6 +174,17 @@ const Shell = ({ page = "home", ...rest }) => {
 
   useEffect(() => {
     SocketHelper.emit(SocketCommands.Subscribe, { roomParts: userId });
+  }, [userId]);
+
+  useEffect(() => {
+    if (isGuest && userId) {
+      const token = getCookie(`x-signature`);
+
+      if (token) {
+        deleteCookie(`x-signature-${userId}`);
+        deleteCookie("x-signature");
+      }
+    }
   }, [userId]);
 
   useEffect(() => {
@@ -619,6 +632,7 @@ const ShellWrapper = inject(
       userLoginEventId: userStore?.user?.loginEventId,
       isOwner: userStore?.user?.isOwner,
       isAdmin: userStore?.user?.isAdmin,
+      isGuest: userStore?.user?.isVisitor,
       registrationDate: userStore?.user?.registrationDate,
 
       currentDeviceType,

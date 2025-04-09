@@ -431,7 +431,7 @@ export async function deleteFolder(
 }
 
 export async function createFile(
-  folderId: number,
+  folderId: number | string,
   title: string,
   templateId?: number,
   formId?: number,
@@ -591,6 +591,16 @@ export async function emptyTrash() {
   const res = (await request({
     method: "put",
     url: "/files/fileops/emptytrash",
+  })) as TOperation[];
+  return res;
+}
+
+export async function enableCustomFilter(fileId: number, enabled: boolean) {
+  const data = { enabled };
+  const res = (await request({
+    method: "put",
+    url: `/files/file/${fileId}/customfilter`,
+    data,
   })) as TOperation[];
   return res;
 }
@@ -757,6 +767,7 @@ export async function copyToFolder(
   conflictResolveType: ConflictResolveType,
   deleteAfter: boolean,
   content = false,
+  toFillOut = false,
 ) {
   const data = {
     destFolderId,
@@ -765,6 +776,7 @@ export async function copyToFolder(
     conflictResolveType,
     deleteAfter,
     content,
+    toFillOut,
   };
 
   const res = (await request({
@@ -797,6 +809,7 @@ export async function moveToFolder(
   fileIds: number[],
   conflictResolveType: ConflictResolveType,
   deleteAfter: boolean,
+  toFillOut = false,
 ) {
   const data = {
     destFolderId,
@@ -804,6 +817,7 @@ export async function moveToFolder(
     fileIds,
     conflictResolveType,
     deleteAfter,
+    toFillOut,
   };
   const res = (await request({
     method: "put",

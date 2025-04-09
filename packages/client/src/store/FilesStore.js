@@ -724,15 +724,23 @@ class FilesStore {
         }
       });
     } else if (opt?.type === "folder" && opt?.id) {
+      const { isRoom, isTemplate, pathParts } = this.selectedFolderStore;
       const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
       if (foundIndex == -1) {
         const removedId = opt.id;
-        const pathParts = this.selectedFolderStore.pathParts;
 
         const includePathPart = pathParts.some(({ id }) => id === removedId);
 
         if (includePathPart && !this.treeFoldersStore.isPersonalReadOnly) {
-          window.DocSpace.navigate("/");
+          if (isRoom && isTemplate) {
+            const newRoomsFilter = RoomsFilter.getDefault();
+            newRoomsFilter.searchArea = RoomSearchArea.Templates;
+            window.DocSpace.navigate(
+              `/rooms/shared/filter?${newRoomsFilter.toUrlParams()}`,
+            );
+          } else {
+            window.DocSpace.navigate("/");
+          }
         }
 
         return;
@@ -1907,7 +1915,6 @@ class FilesStore {
     clearFilter = true,
     withSubfolders = false, // eslint-disable-line  @typescript-eslint/no-unused-vars
     clearSelection = true,
-    withFilterLocalStorage = false, // eslint-disable-line  @typescript-eslint/no-unused-vars
   ) => {
     const { setSelectedNode } = this.treeFoldersStore;
 
@@ -1922,6 +1929,10 @@ class FilesStore {
     const filterData = filter
       ? filter.clone()
       : RoomsFilter.getDefault(this.userStore.user?.id);
+
+    if (this.roomsFilter.searchArea === RoomSearchArea.Templates) {
+      // filterData.searchArea = RoomSearchArea.Templates;
+    }
 
     const isCustomCountPage =
       filter && filter.pageCount !== 100 && filter.pageCount !== 25;
@@ -1967,7 +1978,6 @@ class FilesStore {
                 undefined,
                 undefined,
                 undefined,
-                true,
               );
             }
           }
@@ -2172,6 +2182,7 @@ class FilesStore {
     const canDuplicate = item.security?.Duplicate;
     const canDownload = item.security?.Download || isLockedSharedRoom(item);
     const canEmbed = item.security?.Embed;
+    const canSetUpCustomFilter = item.security?.CustomFilter;
 
     if (isFile) {
       const shouldFillForm = item.viewAccessibility.WebRestrictedEditing;
@@ -2194,6 +2205,9 @@ class FilesStore {
       const isPdf = item.fileExst === ".pdf";
 
       const isAIRoom = this.selectedFolderStore.roomType === RoomsType.AIRoom;
+      const extsCustomFilter =
+        this.filesSettingsStore?.extsWebCustomFilterEditing || [];
+      const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
 
       let fileOptions = [
         // "open",
@@ -2223,6 +2237,7 @@ class FilesStore {
         "version", // category
         //   "finalize-version",
         "show-version-history",
+        "custom-filter",
         "show-info",
         "block-unblock-version", // need split
         "separator1",
@@ -2290,6 +2305,10 @@ class FilesStore {
           "separate-stop-filling",
           "stop-filling",
         ]);
+      }
+
+      if (!canSetUpCustomFilter || !isExtsCustomFilter || isMyFolder) {
+        fileOptions = removeOptions(fileOptions, ["custom-filter"]);
       }
 
       if (!canDownload) {
@@ -2547,6 +2566,7 @@ class FilesStore {
         "create-room-from-template",
         "edit-template",
         "access-settings",
+        "link-for-room-members",
         "room-info",
         "separator1",
         "delete",
@@ -2943,9 +2963,10 @@ class FilesStore {
   };
 
   removeFiles = (fileIds, folderIds, showToast, destFolderId) => {
-    const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTemplatesFolder } =
+      this.treeFoldersStore;
 
-    const isRooms = isRoomsFolder || isArchiveFolder;
+    const isRooms = isRoomsFolder || isArchiveFolder || isTemplatesFolder;
 
     let deleteCount = 0;
 
@@ -3362,6 +3383,7 @@ class FilesStore {
         passwordProtected,
         watermark,
         formFillingStatus,
+        customFilterEnabled,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3541,6 +3563,7 @@ class FilesStore {
         passwordProtected,
         watermark,
         formFillingStatus,
+        customFilterEnabled,
       };
     });
   };

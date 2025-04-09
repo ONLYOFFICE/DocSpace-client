@@ -41,6 +41,7 @@ import { getSdkScriptUrl, loadScript } from "@docspace/shared/utils/common";
 
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url";
 import SearchUrlDark from "PUBLIC_DIR/images/sdk-presets_files-search_dark.png?url";
@@ -112,8 +113,12 @@ const FileSelector = (props) => {
       label: t(`Common:Spreadsheets`),
     },
     {
+      key: FilterType.PDFForm,
+      label: getManyPDFTitle(t, true),
+    },
+    {
       key: FilterType.Pdf,
-      label: t(`Files:Forms`),
+      label: getManyPDFTitle(t, false),
     },
     {
       key: FilterType.ArchiveOnly,

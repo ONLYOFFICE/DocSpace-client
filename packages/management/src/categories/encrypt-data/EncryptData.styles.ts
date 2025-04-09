@@ -24,10 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { globalColors } from "@docspace/shared/themes";
 
-export const StyledWrapper = styled.div`
+export const StyledWrapper = styled.div<{ isDisabled: boolean }>`
   width: 100%;
   max-width: 700px;
 
@@ -59,4 +59,21 @@ export const StyledWrapper = styled.div`
     border: 1px solid ${globalColors.lightStatusPositive};
     color: ${globalColors.lightStatusPositive};
   }
+
+  ${(props) =>
+    props.isDisabled &&
+    css`
+      color: ${props.theme.text.disableColor};
+      pointer-events: none;
+      cursor: default;
+
+      label {
+        color: ${props.theme.text.disableColor};
+      }
+
+      path {
+        fill: ${props.theme.text.disableColor};
+      }
+    `}
+}
 `;

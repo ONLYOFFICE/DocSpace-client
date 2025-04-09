@@ -115,7 +115,7 @@ const ChangeUserTypeDialog = ({
   const translationValues = {
     userName: isSingleUser ? userNames[0] : undefined,
     membersSection: t("Common:Members"),
-    documentsSection: t("Common:Documents"),
+    documentsSection: t("Common:MyFilesSection"),
     productName: t("Common:ProductName"),
     secondType,
   };

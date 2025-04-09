@@ -164,6 +164,7 @@ export const PasswordRow = ({
             fontSize="14px"
             className={styles.passwordTitle}
             dir="auto"
+            truncate
           >
             {item.title}
           </Text>

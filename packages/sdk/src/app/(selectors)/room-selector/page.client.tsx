@@ -37,7 +37,7 @@ import type { TSelectorItem } from "@docspace/shared/components/selector";
 
 import { getRoomsIcon } from "@/utils";
 import useDocumentTitle from "@/hooks/useDocumentTitle";
-import useSDK from "@/hooks/useSDK";
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 const IS_TEST = process.env.NEXT_PUBLIC_E2E_TEST;
 
@@ -59,7 +59,7 @@ export default function RoomSelectorClient({
   pageCount,
   roomList,
 }: RoomSelectorClientProps) {
-  const { sdkConfig } = useSDK();
+  const { sdkConfig } = useSDKConfig();
 
   useDocumentTitle("RoomSelector");
 

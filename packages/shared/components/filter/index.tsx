@@ -310,6 +310,7 @@ const FilterInput = React.memo(
           viewSelectorVisible ? (
             <ViewSelector
               id={viewAs === "tile" ? "view-switch--row" : "view-switch--tile"}
+              className={styles.viewSelector}
               style={{ marginInlineStart: "8px" }}
               viewAs={viewAs === "table" ? "row" : viewAs}
               viewSettings={viewSettings}

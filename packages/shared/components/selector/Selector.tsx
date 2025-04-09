@@ -151,6 +151,7 @@ const Selector = ({
   injectedElement,
 
   isSSR,
+  selectedItem: selectedItemProp,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
 
@@ -458,7 +459,10 @@ const Selector = ({
         (selectedItems && selectedItems.length === 0) ||
         !isMultiSelect
       ) {
-        const cloneItems = items.map((x) => ({ ...x, isSelected: false }));
+        const cloneItems = items.map((x) => ({
+          ...x,
+          isSelected: Boolean(selectedItemProp && selectedItemProp.id === x.id),
+        }));
 
         return setRenderedItems(cloneItems);
       }
@@ -478,7 +482,7 @@ const Selector = ({
       setRenderedItems(newItems);
       setNewSelectedItems(cloneSelectedItems);
     }
-  }, [items, selectedItems, isMultiSelect]);
+  }, [items, selectedItems, isMultiSelect, selectedItemProp]);
 
   const breadCrumbsProps: TSelectorBreadCrumbs = withBreadCrumbs
     ? {

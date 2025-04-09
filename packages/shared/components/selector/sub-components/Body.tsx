@@ -223,7 +223,7 @@ const Body = ({
   const showSearch = withSearch && (isSearch || itemsCount > 0);
   const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
 
-  if (!withTabs && withPadding) {
+  if (withPadding) {
     listHeight -= CONTAINER_PADDING;
   }
 
@@ -248,7 +248,8 @@ const Body = ({
   const isShareFormEmpty =
     itemsCount === 0 &&
     Boolean(items?.[0]?.isRoomsOnly) &&
-    Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom);
+    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
+      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
 
   return (
     <StyledBody
@@ -318,7 +319,7 @@ const Body = ({
             <Scrollbar
               style={
                 {
-                  height: `calc(100% - ${Math.abs(listHeight)}px)`,
+                  height: `calc(100% - ${Math.abs(listHeight + CONTAINER_PADDING)}px)`,
                   overflow: "hidden",
                   "--scrollbar-padding-inline-end": 0,
                   "--scrollbar-padding-inline-end-mobile": 0,

@@ -52,7 +52,9 @@ const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
     case RoomsType.FormRoom:
       return t("Common:RoleRoomAdminFormRoomDescription");
     case None:
-      return t("Common:RoleRoomAdminDescription");
+      return t("Common:RoleRoomAdminDescription", {
+        sectionName: t("Common:MyFilesSection"),
+      });
     default:
       return t("Common:RoleRoomManagerDescription");
   }
@@ -94,6 +96,7 @@ export const getAccessOptions = (
       label: getUserTypeTranslation(EmployeeType.Admin, t),
       description: t("Common:RolePortalAdminDescription", {
         productName: t("Common:ProductName"),
+        sectionName: t("Common:MyFilesSection"),
       }),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,

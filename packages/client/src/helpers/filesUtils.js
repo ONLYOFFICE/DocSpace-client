@@ -248,7 +248,7 @@ export const mappingActiveItems = (items, destFolderId) => {
   return arrayFormation;
 };
 
-export const getOperationsProgressTitle = (type) => {
+export const getOperationsProgressTitle = (type, progress) => {
   const {
     trash,
     move,
@@ -280,11 +280,14 @@ export const getOperationsProgressTitle = (type) => {
     case deletePermanently:
       return i18n.t("Files:DeletingPermanently");
     case upload:
+      if (progress > 0 && progress < 100)
+        return i18n.t("Files:UploadingProgress", { progress });
       return i18n.t("Files:Uploading");
     case convert:
       return i18n.t("Files:Converting");
     case deleteVersionFile:
       return i18n.t("Files:DeletingVersion");
+
     default:
       return i18n.t("Files:OtherProcesses");
   }

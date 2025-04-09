@@ -42,7 +42,6 @@
   "UploadDeviceOptionTitle": "Cihazınızdan Yükleme",
   "UploadDevicePDFFormOptionDescription": "Hazır bir PDF formunu cihazınızdan odaya yükleyin.",
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükleyin",
-  "UploadFromPortalDescription": "Belgeler veya Odalardan her tür dosyayı yükleyin",
   "UploadFromPortalTitle": "{{productName}} kaynağından yükleyin",
   "UploadPDFFormOptionDescription": "{{productName}} içinde bulunan hazır bir PDF formunu seçin ve odaya yükleyin.",
   "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz"

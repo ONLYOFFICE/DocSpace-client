@@ -41,7 +41,7 @@ import {
 import config from "PACKAGE_FILE";
 import Filter from "@docspace/shared/api/people/filter";
 import {
-  getCreateShareLinkKey,
+  DEFAULT_CREATE_LINK_SETTINGS,
   getExpirationDate,
 } from "@docspace/shared/components/share/Share.helpers";
 import { getRoomInfo, getTemplateAvailable } from "@docspace/shared/api/rooms";
@@ -960,11 +960,7 @@ class InfoPanelStore {
     /**
      *  @type {import("@docspace/shared/components/share/Share.types").DefaultCreatePropsType | null}
      */
-    const value = JSON.parse(
-      localStorage.getItem(
-        getCreateShareLinkKey(this.userStore.user?.id ?? "", file?.fileType),
-      ) ?? "null",
-    );
+    const value = DEFAULT_CREATE_LINK_SETTINGS;
 
     if (value && file.isForm) {
       value.access = ShareAccessRights.Editing;

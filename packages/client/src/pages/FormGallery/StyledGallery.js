@@ -38,10 +38,7 @@ const StyledContainer = styled.div`
 
   display: grid;
   align-items: center;
-  grid-template-columns: ${({ isInfoPanelVisible }) =>
-    isInfoPanelVisible
-      ? "29px min-content auto"
-      : "29px min-content auto 52px"};
+  grid-template-columns: 29px min-content auto 52px;
 
   .arrow-button {
     width: 17px;
@@ -118,11 +115,11 @@ const StyledSubmitToGalleryButton = styled(Button).attrs(injectDefaultTheme)`
 
 const StyledInfoPanelToggleWrapper = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
-  display: ${(props) => (props.isInfoPanelVisible ? "none" : "flex")};
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
+  height: 30px;
+  width: 30px;
 
   margin-block: 0;
   margin-inline: 28px 8px;
@@ -132,8 +129,8 @@ const StyledInfoPanelToggleWrapper = styled.div.attrs(injectDefaultTheme)`
   }
 
   .info-panel-toggle-bg {
-    height: 16px;
-    width: 16px;
+    height: 30px;
+    width: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,7 +151,7 @@ const StyledInfoPanelToggleWrapper = styled.div.attrs(injectDefaultTheme)`
       fill: ${(props) =>
         props.isInfoPanelVisible
           ? props.theme.infoPanel.sectionHeaderToggleIconActive
-          : props.theme.infoPanel.sectionHeaderToggleIcon};
+          : props.theme.infoPanel.sectionHeaderToggleIcon} !important;
     }
   }
 `;

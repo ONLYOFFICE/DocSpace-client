@@ -357,7 +357,7 @@
 
   inset-inline-start: -20px;
 
-  &[data-with-logo="true"] {
+  &[data-with-logo="true"][data-is-frame="false"] {
     inset-inline-start: 207px;
   }
 

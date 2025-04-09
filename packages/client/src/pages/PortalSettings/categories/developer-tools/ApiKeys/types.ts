@@ -120,7 +120,7 @@ export type DeleteApiKeyDialogProps = {
   t: TTranslation;
   tReady: boolean;
   isVisible: boolean;
-  setIsVisible: (visible: boolean) => void;
+  onClose: () => void;
   onDelete: () => void;
   isRequestRunning: boolean;
 };

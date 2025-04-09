@@ -178,19 +178,20 @@ export const SelectColor = ({
             open={openColorPicker}
             clickOutsideAction={() => setOpenColorPicker(false)}
           >
-            <DropDownItem className="drop-down-item-hex" noHover noActive>
-              <ColorPicker
-                id="accent-hex"
-                onClose={() => setOpenColorPicker(false)}
-                onApply={onApply}
-                forwardedRef={pickerRef}
-                isPickerOnly
-                handleChange={onApply}
-                appliedColor={selectedColor}
-                applyButtonLabel={t("Common:ApplyButton")}
-                cancelButtonLabel={t("Common:CancelButton")}
-              />
-            </DropDownItem>
+            <div ref={pickerRef}>
+              <DropDownItem className="drop-down-item-hex" noHover noActive>
+                <ColorPicker
+                  id="accent-hex"
+                  onClose={() => setOpenColorPicker(false)}
+                  onApply={onApply}
+                  isPickerOnly
+                  handleChange={onApply}
+                  appliedColor={selectedColor}
+                  applyButtonLabel={t("Common:ApplyButton")}
+                  cancelButtonLabel={t("Common:CancelButton")}
+                />
+              </DropDownItem>
+            </div>
           </DropDown>
         )}
       </div>

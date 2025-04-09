@@ -541,3 +541,9 @@
     }
   }
 }
+
+.viewSelector {
+  @include tablet-and-below {
+    display: none;
+  }
+}

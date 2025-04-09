@@ -60,7 +60,7 @@ import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 import { LoginFormProps } from "@/types";
 import { getAvailablePortals } from "@/utils/actions";
-import { getEmailFromInvitation } from "@/utils";
+import { getEmailFromInvitation, getRedirectURL } from "@/utils";
 
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
@@ -346,10 +346,7 @@ const LoginForm = ({
             ? portals[0].portalName
             : `${portals[0].portalName}.${baseDomain}`;
 
-        let redirectUrl = getCookie("x-redirect-authorization-uri");
-        redirectUrl = window.atob(
-          redirectUrl!.replace(/-/g, "+").replace(/_/g, "/"),
-        );
+        let redirectUrl = getRedirectURL();
         let portalLink = portals[0].portalLink;
 
         const isLocalhost = name === "http://localhost";

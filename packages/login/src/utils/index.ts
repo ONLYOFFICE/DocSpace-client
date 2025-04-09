@@ -27,8 +27,10 @@
 import { thirdPartyLogin } from "@docspace/shared/utils/loginUtils";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
-import { MessageKey, OAuth2ErrorKey } from "./enums";
 import { parseURL } from "@docspace/shared/utils/common";
+import { getCookie } from "@docspace/shared/utils";
+
+import { MessageKey, OAuth2ErrorKey } from "./enums";
 
 export async function oAuthLogin(profile: string) {
   let isSuccess = false;
@@ -182,4 +184,21 @@ export const getStringFromSearchParams = (searchParams: {
   }
 
   return stringSearchParams.slice(1);
+};
+
+export const getRedirectURL = () => {
+  const redirect_url = getCookie("x-redirect-authorization-uri");
+
+  if (!redirect_url) {
+    const scopes = getCookie("x-scopes");
+    const url = getCookie("x-url");
+
+    return `${url}&scope=${scopes?.split(";").join("%20")}`;
+  }
+
+  const decodedRedirectUrl = window.atob(
+    redirect_url.replace(/-/g, "+").replace(/_/g, "/"),
+  );
+
+  return decodedRedirectUrl;
 };

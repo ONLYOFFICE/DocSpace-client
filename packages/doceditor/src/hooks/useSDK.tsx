@@ -34,10 +34,23 @@ import {
 import { EDITOR_ID } from "@docspace/shared/constants";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
 
+interface EditorConnector {
+  callCommand: (
+    command: Function,
+    callback?: Function,
+    isNoCalc?: boolean,
+  ) => void;
+  executeMethod: (name: string, args: string[], callback?: Function) => void;
+  disconnect: () => void;
+}
+
 const useSDK = (baseSdkConfig?: TFrameConfig) => {
   const [sdkConfig, setSdkConfig] = useState<TFrameConfig | undefined>(
     baseSdkConfig,
   );
+
+  const [connector, setConnector] = useState<EditorConnector | null>(null);
+
   const handleMessage = useCallback(
     (e: MessageEvent) => {
       const eventData =
@@ -57,9 +70,33 @@ const useSDK = (baseSdkConfig?: TFrameConfig) => {
               setSdkConfig(newConfig);
               res = newConfig;
               break;
-            case "getEditorInstance":
+            case "createConnector":
               const instance = window.DocEditor?.instances[EDITOR_ID];
-              res = { instance, asc: window.Asc };
+              const connectorObject = instance.createConnector();
+              connectorObject.connect();
+              setConnector(connectorObject);
+              break;
+            case "removeConnector":
+              connector?.disconnect();
+              setConnector(null);
+              break;
+            case "callCommand":
+              if (connector === null) {
+                res = "Connector is not created";
+              }
+
+              connector?.callCommand(
+                data.command,
+                data.callback,
+                data.isNoCalc,
+              );
+              break;
+            case "executeMethod":
+              if (connector === null) {
+                res = "Connector is not created";
+              }
+
+              connector?.executeMethod(data.name, data.args, data.callback);
               break;
             default:
               res = "Wrong method for this mode";
@@ -71,7 +108,7 @@ const useSDK = (baseSdkConfig?: TFrameConfig) => {
         frameCallbackData(res);
       }
     },
-    [setSdkConfig],
+    [setSdkConfig, connector, setConnector, baseSdkConfig],
   );
 
   useEffect(() => {

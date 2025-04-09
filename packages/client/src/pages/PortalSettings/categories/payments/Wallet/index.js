@@ -192,6 +192,7 @@ const Wallet = ({
   accountLink,
   setBalance,
   isInitWalletPage,
+  setTransactionHistory,
 }) => {
   const tooltipContent =
     "Your current wallet balance. This amount can be used for purchases and subscriptions.";
@@ -300,14 +301,15 @@ const Wallet = ({
     try {
       setIsLoading(true);
       await saveDeposite(+amount, balance.currency);
-      await setBalance();
+
+      await Promise.allSettled([setBalance(), setTransactionHistory()]);
 
       onClose();
     } catch (e) {
       toastr.error(e);
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   const { fraction, balanceValue, isCurrencyAtEnd, mainNumber, currency } =
@@ -462,9 +464,9 @@ export default inject(({ paymentStore, authStore }) => {
     accountLink,
     setBalance,
     isInitWalletPage,
+    setTransactionHistory,
   } = paymentStore;
 
-  console.log("walletBalance.subAccounts", walletBalance.subAccounts);
   return {
     balance: walletBalance.subAccounts[0],
     language,
@@ -474,5 +476,6 @@ export default inject(({ paymentStore, authStore }) => {
     setBalance,
     accountLink,
     isInitWalletPage,
+    setTransactionHistory,
   };
 })(observer(Wallet));

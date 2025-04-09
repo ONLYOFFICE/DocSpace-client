@@ -29,7 +29,7 @@ export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
         components={{
-          p({ node, ...props }) {
+          p: ({ children }) => {
             return (
               <Text
                 fontSize="12px"
@@ -37,18 +37,18 @@ export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
                 fontWeight={400}
                 color="#555F65"
               >
-                {props.children}
+                {children as React.ReactNode}
               </Text>
             );
           },
-          ol({ node, ...props }) {
-            return <ol className="max-w-full">{props.children}</ol>;
+          ol({ children }) {
+            return <ol className="max-w-full">{children}</ol>;
           },
-          ul({ node, ...props }) {
-            return <ul className="max-w-full">{props.children}</ul>;
+          ul({ children }) {
+            return <ul className="max-w-full">{children}</ul>;
           },
-          pre({ node, ...props }) {
-            return props.children;
+          pre: ({ children }) => {
+            return <pre>{children}</pre>;
           },
           code: ({ className, children }) => {
             let content = children as string;

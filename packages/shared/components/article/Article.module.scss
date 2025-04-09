@@ -451,6 +451,10 @@
   &[data-with-main-button="true"] {
     :global(.article-body__scrollbar) {
       height: calc(100% - 190px) !important;
+
+      @include mobile {
+        height: 100% !important;
+      }
     }
   }
   &[data-with-main-button="false"] {

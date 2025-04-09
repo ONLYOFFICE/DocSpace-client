@@ -243,7 +243,6 @@
   "Exabyte": "Эб",
   "Example": "Пример: {{example}}",
   "ExpiredLink": "Просроченная ссылка",
-  "ExpiresAt": "Истекает в",
   "FeedbackAndSupport": "Обратная связь и поддержка",
   "FileActionRequired": "Место назначения уже содержит файл с именем «<1>{{fileName}}</1>».",
   "FilePermanentlyDeleted": "Файл будет удален окончательно через 30 дней.",

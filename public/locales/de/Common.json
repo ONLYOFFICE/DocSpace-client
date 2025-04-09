@@ -243,7 +243,6 @@
   "Exabyte": "EB",
   "Example": "Beispiel: {{example}}",
   "ExpiredLink": "Abgelaufener Link",
-  "ExpiresAt": "Läuft ab am",
   "FeedbackAndSupport": "Feedback und Support",
   "FileActionRequired": "Zielbereich enthält bereits eine Datei mit dem Namen «<1>{{fileName}}</1>».",
   "FilePermanentlyDeleted": "Die Datei wird nach 30 Tagen endgültig gelöscht.",

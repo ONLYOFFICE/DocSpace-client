@@ -457,9 +457,14 @@
       }
     }
   }
+
   &[data-with-main-button="false"] {
     :global(.article-body__scrollbar) {
       height: calc(100% - 150px) !important;
+
+      @include mobile {
+        height: 100% !important;
+      }
     }
   }
 

@@ -923,7 +923,9 @@ class DialogsStore {
   };
 
   setCoverSelection = (selection) => {
-    this.coverSelection = selection;
+    runInAction(() => {
+      this.coverSelection = selection;
+    });
   };
 
   setRoomLogoCover = async (roomId) => {

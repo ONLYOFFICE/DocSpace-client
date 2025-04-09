@@ -37,10 +37,7 @@ import WalletReactSvgUrl from "PUBLIC_DIR/images/icons/16/wallet.react.svg?url";
 import styles from "./WalletInfo.module.scss";
 
 type WalletInfoProps = {
-  balance?: {
-    currencyCode: string;
-    value: number;
-  };
+  balance?: string;
 };
 
 const WalletInfo: React.FC<WalletInfoProps> = ({ balance }) => {

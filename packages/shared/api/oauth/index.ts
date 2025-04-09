@@ -217,6 +217,8 @@ export async function setOAuthJWTSignature(userId: string) {
 
   setCookie(`x-signature-${userId}`, token, { expires: tokenExpDate });
   setCookie("x-signature", token, { expires: tokenExpDate });
+
+  return token;
 }
 
 export const getConsentList = async (

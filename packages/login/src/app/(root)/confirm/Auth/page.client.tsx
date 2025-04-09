@@ -26,8 +26,14 @@
 
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -62,9 +68,15 @@ const AuthHandler = () => {
 
   const replaced = useRef(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (!email || !key) return;
+
     async function loginWithKey() {
       try {
+        if (replaced.current) return;
+
+        replaced.current = true;
+
         const res = await loginWithConfirmKey({
           ConfirmData: {
             Email: email,
@@ -76,11 +88,12 @@ const AuthHandler = () => {
         frameCallEvent({ event: "onAuthSuccess" });
 
         if (referenceUrl && referenceUrl.includes("oauth2")) {
-          if (replaced.current) return;
-
           const user = await getUser();
 
-          if (!user) return;
+          if (!user) {
+            replaced.current = false;
+            return;
+          }
 
           const newUrl = location.search.split("referenceUrl=")[1];
 
@@ -90,10 +103,8 @@ const AuthHandler = () => {
             await setOAuthJWTSignature(user.id);
           }
 
-          if (replaced.current || !token || !user.id) return;
-
-          replaced.current = true;
           window.location.replace(newUrl);
+
           return;
         }
 
@@ -116,6 +127,7 @@ const AuthHandler = () => {
         if (typeof res === "string") window.location.replace(res);
         else window.location.replace("/");
       } catch (error) {
+        console.log(error);
         const knownError = error as TError;
         let errorMessage: string;
 
@@ -130,12 +142,13 @@ const AuthHandler = () => {
         }
 
         frameCallEvent({ event: "onAppError", data: error });
+        replaced.current = false;
         toastr.error(errorMessage);
       }
     }
 
     loginWithKey();
-  });
+  }, [email, key, referenceUrl, isFileHandler, isExternalDownloading]);
 
   return isFileHandler && isExternalDownloading ? (
     <OperationContainer

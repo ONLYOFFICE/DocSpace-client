@@ -114,43 +114,7 @@ class PaymentStore {
 
   cardLinked = "";
 
-  transactionHistory: TTransactionHistory | {} = {
-    collection: [
-      {
-        date: "2025-04-08T13:47:30.834744",
-        quantity: 1,
-        currency: "USD",
-        credit: 11,
-        withdrawal: 0,
-      },
-      {
-        date: "2025-04-08T13:46:53.201513",
-        quantity: 1,
-        currency: "USD",
-        credit: 20,
-        withdrawal: 0,
-      },
-      {
-        date: "2025-04-08T13:46:23.867701",
-        quantity: 1,
-        currency: "USD",
-        credit: 10,
-        withdrawal: 0,
-      },
-      {
-        date: "2025-04-08T13:41:18.169381",
-        quantity: 1,
-        currency: "USD",
-        credit: 10,
-        withdrawal: 0,
-      },
-    ],
-    offset: 0,
-    limit: 25,
-    totalQuantity: 4,
-    totalPage: 1,
-    currentPage: 1,
-  };
+  transactionHistory: TTransactionHistory | {} = {};
 
   constructor(
     userStore: UserStore,

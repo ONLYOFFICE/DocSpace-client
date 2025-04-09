@@ -31,6 +31,9 @@ import { inject, observer } from "mobx-react";
 import { TableBody, TableContainer } from "@docspace/shared/components/table";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 import { Text } from "@docspace/shared/components/text";
+import { EmptyView } from "@docspace/shared/components/empty-view";
+
+import NoTransactionsIcon from "PUBLIC_DIR/images/no.transactions.react.svg";
 
 import TableHeader from "./TableView/TableHeader";
 import TransactionRow from "./TableView/TransactionRow";
@@ -46,38 +49,52 @@ const TransactionHistory = ({ userId, sectionWidth, history }) => {
   const ref = useRef(null);
 
   const { t } = useTranslation("Payments");
+  // const imgSrc = theme.isBase ? NoTransactionsIcon : NoTransactionsIcon;
+
+  const tableBody = (
+    <TableContainer forwardedRef={ref} useReactWindow={false}>
+      <TableHeader
+        sectionWidth={sectionWidth}
+        containerRef={ref}
+        columnStorageName={columnStorageName}
+        columnInfoPanelStorageName={columnInfoPanelStorageName}
+        itemHeight={48}
+      />
+      <TableBody
+        useReactWindow={false}
+        columnStorageName={columnStorageName}
+        columnInfoPanelStorageName={columnInfoPanelStorageName}
+        itemHeight={48}
+        filesLength={history.length}
+        fetchMoreFiles={() => {}}
+        hasMoreFiles={false}
+        itemCount={history.length}
+      >
+        {history.map((transaction: TTransactionCollection, index: number) => (
+          <TransactionRow
+            transaction={transaction}
+            key={`transaction-${index}`}
+          />
+        ))}
+      </TableBody>
+    </TableContainer>
+  );
 
   return (
     <>
       <Text isBold fontSize="16px" className="transaction-history-title">
         {t("TransactionHistory")}
       </Text>
-      <TableContainer forwardedRef={ref} useReactWindow={false}>
-        <TableHeader
-          sectionWidth={sectionWidth}
-          containerRef={ref}
-          columnStorageName={columnStorageName}
-          columnInfoPanelStorageName={columnInfoPanelStorageName}
-          itemHeight={48}
+      {!history.length ? (
+        <EmptyView
+          icon={<NoTransactionsIcon />}
+          title={t("NoWalletTransaction")}
+          description={t("NoWalletTransactionDescription")}
+          options={null}
         />
-        <TableBody
-          useReactWindow={false}
-          columnStorageName={columnStorageName}
-          columnInfoPanelStorageName={columnInfoPanelStorageName}
-          itemHeight={48}
-          filesLength={history.length}
-          fetchMoreFiles={() => {}}
-          hasMoreFiles={false}
-          itemCount={history.length}
-        >
-          {history.map((transaction: TTransactionCollection, index: number) => (
-            <TransactionRow
-              transaction={transaction}
-              key={`transaction-${index}`}
-            />
-          ))}
-        </TableBody>
-      </TableContainer>
+      ) : (
+        tableBody
+      )}
     </>
   );
 };
@@ -85,7 +102,7 @@ const TransactionHistory = ({ userId, sectionWidth, history }) => {
 export default inject(
   ({ settingsStore, setup, userStore, paymentStore }: TStore) => {
     const { viewAs, setViewAs } = setup;
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, theme } = settingsStore;
     const { transactionHistory } = paymentStore;
 
     const userId = userStore.user?.id;
@@ -96,6 +113,7 @@ export default inject(
       currentDeviceType,
       userId,
       history: transactionHistory?.collection ?? [],
+      theme,
     };
   },
 )(observer(TransactionHistory));

@@ -1906,6 +1906,10 @@ class FilesStore {
       ? filter.clone()
       : RoomsFilter.getDefault(this.userStore.user?.id);
 
+    if (this.roomsFilter.searchArea === RoomSearchArea.Templates) {
+      filterData.searchArea = RoomSearchArea.Templates;
+    }
+
     const isCustomCountPage =
       filter && filter.pageCount !== 100 && filter.pageCount !== 25;
 

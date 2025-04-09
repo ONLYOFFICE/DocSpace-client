@@ -109,25 +109,18 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
   const [isDenyRunning, setIsDenyRunning] = React.useState(false);
 
   React.useEffect(() => {
-    return () => {
-      console.log("call");
-      const redirect_url = getCookie("x-redirect-authorization-uri");
+    const redirect_url = getCookie("x-redirect-authorization-uri");
+    if (!redirect_url) return;
 
-      if (!redirect_url) return;
+    // Your cookie processing logic here
+    const decodedRedirectUrl = window.atob(
+      redirect_url.replace(/-/g, "+").replace(/_/g, "/"),
+    );
 
-      const decodedRedirectUrl = window.atob(
-        redirect_url.replace(/-/g, "+").replace(/_/g, "/"),
-      );
-
-      deleteCookie("x-redirect-authorization-uri");
-
-      const splitedURL = decodedRedirectUrl.split("&scope=");
-
-      console.log(splitedURL);
-
-      setCookie("x-scopes", splitedURL[1].split("%20").join(";"));
-      setCookie("x-url", splitedURL[0]);
-    };
+    deleteCookie("x-redirect-authorization-uri");
+    const splitedURL = decodedRedirectUrl.split("&scope=");
+    setCookie("x-scopes", splitedURL[1].split("%20").join(";"));
+    setCookie("x-url", splitedURL[0]);
   }, []);
 
   React.useEffect(() => {
@@ -141,8 +134,6 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
       await setOAuthJWTSignature(user.id);
 
       const redirect_url = getRedirectURL();
-
-      console.log(redirect_url);
 
       if (!redirect_url) {
         return;

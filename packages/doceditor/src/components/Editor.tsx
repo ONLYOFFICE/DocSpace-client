@@ -169,6 +169,7 @@ const Editor = ({
 
   if (fileInfo) {
     const editorGoBack = sdkConfig?.editorGoBack;
+
     const openFileLocationText = (
       (
         i18n.getDataByLanguage(i18n.language) as unknown as {
@@ -179,7 +180,7 @@ const Editor = ({
       }
     )?.["FileLocation"]; // t("FileLocation");
 
-    if (!editorGoBack || user?.isVisitor || !user) {
+    if (editorGoBack === false || user?.isVisitor || !user) {
     } else if (editorGoBack === "event") {
       goBack = {
         requestClose: true,

@@ -2531,6 +2531,7 @@ class FilesStore {
         "create-room-from-template",
         "edit-template",
         "access-settings",
+        "link-for-room-members",
         "room-info",
         "separator1",
         "delete",

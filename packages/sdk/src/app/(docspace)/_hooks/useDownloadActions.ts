@@ -30,7 +30,7 @@ import { useCallback } from "react";
 import { openUrl } from "@docspace/shared/utils/common";
 import { UrlActionType } from "@docspace/shared/enums";
 
-import useSDK from "@/hooks/useSDK";
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 
 import { useDialogsStore } from "@/app/(docspace)/_store/DialogsStore";
@@ -42,7 +42,7 @@ import useFileType from "./useFileType";
 import useDownloadFiles from "./useDownloadFiles";
 
 export default function useDownloadActions() {
-  const { sdkConfig } = useSDK();
+  const { sdkConfig } = useSDKConfig();
   const { selection, bufferSelection, getSortedFilesFromSelection } =
     useFilesSelectionStore();
 

@@ -258,13 +258,11 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
 
       if (getPercent()) {
         return (
-          <>
-            <Text fontWeight={600}>
-              {operationName}
-              <br />
-              {t("Files:ErrorUploadingFiles", { count: getErrorCount() })}
-            </Text>
-          </>
+          <Text fontWeight={600}>
+            {operationName}
+            <br />
+            {t("Files:ErrorUploadingFiles", { count: getErrorCount() })}
+          </Text>
         );
       }
       return (

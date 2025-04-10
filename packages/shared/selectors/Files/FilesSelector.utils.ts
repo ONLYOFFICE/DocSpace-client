@@ -221,6 +221,7 @@ export const configureFilterByFilterParam = (
       break;
 
     case FilesSelectorFilterTypes.PDF:
+    case FilterType.Pdf:
       filter.filterType = FilterType.Pdf;
       break;
 

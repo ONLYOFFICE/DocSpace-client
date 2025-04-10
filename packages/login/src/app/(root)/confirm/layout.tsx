@@ -44,6 +44,9 @@ export default async function Layout({
   const hostName = hdrs.get("x-forwarded-host") ?? "";
   const proto = hdrs.get("x-forwarded-proto");
 
+  console.log("Render confirm layout");
+  console.log("TYPE", type);
+
   const queryParams = Object.fromEntries(
     new URLSearchParams(searchParams.toString()),
   ) as TConfirmLinkParams;
@@ -60,6 +63,8 @@ export default async function Layout({
 
   const user = type === "GuestShareLink" ? await getUser() : undefined;
 
+  console.log(user);
+
   const isUserExisted =
     confirmLinkResult?.result == ValidationResult.UserExisted;
   const isUserExcluded =
@@ -67,16 +72,22 @@ export default async function Layout({
   const objectSettings = typeof settings === "string" ? undefined : settings;
 
   if (isUserExisted) {
+    console.log("User existed");
     const finalUrl = confirmLinkResult?.roomId
       ? `${proto}://${hostName}/rooms/shared/${confirmLinkResult?.roomId}/filter?folder=${confirmLinkResult?.roomId}`
       : objectSettings?.defaultPage;
+
+    console.log(finalUrl);
 
     redirect(finalUrl ?? "/");
   }
 
   if (isUserExcluded) {
+    console.log("User excluded");
     redirect(objectSettings?.defaultPage ?? "/");
   }
+
+  console.log("Rendered config layout");
 
   return (
     <StyledBody id="confirm-body">

@@ -538,7 +538,7 @@
   "ShareDocument": "شارك هذا المستند",
   "ShareDocumentDescription": "توفير الوصول إلى المستند وتعيين مستويات الأذونات.",
   "SharedWithMe": "تمت مشاركتها معي",
-  "ShareLinkTitle": "<1>Hər kəs</1> يحمل هذا الرابط يمكنه <1>{{access}}</1>.",
+  "ShareLinkTitle": "<1>أي شخص</1> لديه هذا الرابط يمكنه <1>{{access}}</1>.",
   "ShareLinkTitleInternal": "فقط <1>مستخدمو {{productName}}</1> يمكنهم <1>{{access}}</1>.",
   "ShareToFillOut": "مشاركة للتعبئة ",
   "ShareVia": "شارك عبر",

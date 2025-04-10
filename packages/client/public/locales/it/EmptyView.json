@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "In questa sezione vengono visualizzati gli ultimi documenti visualizzati o modificati.",
   "EmptyRootRoomUserDescription": "La stanza condivisa apparirà qui.",
   "EmptyRootRoomUserTitle": "Qui ancora non ci sono stanze",
+  "EmptyTemplatesDescription": "Puoi creare un modello da una stanza nella sezione Stanza.",
+  "EmptyTemplatesTitle": "Nessun modello presente",
   "FormFolderDefaultDescription": "Trascina qui i moduli PDF o caricali da {{productName}} o dal dispositivo.",
   "FormFolderDefaultTitle": "Nessun modulo qui ancora",
   "FormFolderDefaultUserDescription": "I moduli caricati dagli amministratori verranno visualizzati qui.",

@@ -120,6 +120,7 @@ const RoomLogoCoverDialog = ({
   setRoomLogoCover,
   createRoomDialogVisible,
   editRoomDialogPropsVisible,
+  templateEventVisible,
   setCover,
   setRoomCoverDialogProps,
   roomCoverDialogProps,
@@ -227,7 +228,11 @@ const RoomLogoCoverDialog = ({
 
     setCover(roomCoverDialogProps.color, icon);
 
-    if (createRoomDialogVisible || editRoomDialogPropsVisible) {
+    if (
+      createRoomDialogVisible ||
+      editRoomDialogPropsVisible ||
+      templateEventVisible
+    ) {
       onCloseRoomLogo(false);
       return;
     }
@@ -294,6 +299,7 @@ export default inject<TStore>(({ dialogsStore }) => {
     setRoomLogoCover,
     setRoomCoverDialogProps,
     roomCoverDialogProps,
+    templateEventVisible,
   } = dialogsStore;
   return {
     setRoomLogoCoverDialogVisible,
@@ -306,5 +312,6 @@ export default inject<TStore>(({ dialogsStore }) => {
     roomCoverDialogProps,
     createRoomDialogVisible: createRoomDialogProps.visible,
     editRoomDialogPropsVisible: editRoomDialogProps.visible,
+    templateEventVisible,
   };
 })(observer(RoomLogoCoverDialog));

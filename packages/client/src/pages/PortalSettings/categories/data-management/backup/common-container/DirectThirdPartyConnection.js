@@ -207,7 +207,7 @@ const DirectThirdPartyConnection = (props) => {
         key: "Disconnect-settings",
         label: t("Common:Disconnect"),
         onClick: onDisconnect,
-        disabled: !selectedThirdPartyAccount?.storageIsConnected,
+        disabled: false,
         icon: AccessNoneReactSvgUrl,
       },
     ];

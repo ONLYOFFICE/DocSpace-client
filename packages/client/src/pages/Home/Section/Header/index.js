@@ -576,6 +576,10 @@ const SectionHeaderContent = (props) => {
       : "";
 
   const isContextButtonVisible = () => {
+    if (isContactsPage && !isContactsInsideGroupPage) {
+      return false;
+    }
+
     if (isPersonalReadOnly) {
       return isRootFolder;
     }

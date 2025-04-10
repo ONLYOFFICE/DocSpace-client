@@ -138,6 +138,10 @@ export const StyledPublicRoomBarContainer = styled.div`
   background: ${(props) => props.theme.backgroundColor};
   overflow: hidden;
   z-index: 1;
+
+  .public-room-bar {
+    margin-top: 0;
+  }
 `;
 
 export { LinksBlock, StyledLinkRow };

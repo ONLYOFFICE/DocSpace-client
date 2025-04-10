@@ -255,7 +255,6 @@ class BackupStore {
 
     let accounts = [];
     let selectedAccount = {};
-    let index = 0;
 
     providers.forEach((item) => {
       const { account, isConnected } = this.getThirdPartyAccount(item, t);
@@ -265,17 +264,17 @@ class BackupStore {
       accounts.push(account);
 
       if (isConnected) {
-        selectedAccount = { ...accounts[index] };
+        selectedAccount = { ...account };
       }
-      index++;
     });
 
     accounts = accounts.sort((storage) => (storage.connected ? -1 : 1));
 
     this.setThirdPartyAccounts(accounts);
 
-    console.log(selectedAccount, accounts);
     const connectedThirdPartyAccount = accounts.findLast((a) => a.connected);
+
+    if (this.selectedThirdPartyAccount) return;
 
     this.setSelectedThirdPartyAccount(
       Object.keys(selectedAccount).length !== 0
@@ -293,7 +292,7 @@ class BackupStore {
     const isConnected =
       this.connectedThirdPartyAccount?.providerKey === "WebDav"
         ? serviceTitle === this.connectedThirdPartyAccount?.title
-        : provider.key === this.connectedThirdPartyAccount?.providerKey;
+        : provider.name === this.connectedThirdPartyAccount?.title;
 
     const isDisabled = !provider.connected && !this.authStore.isAdmin;
 
@@ -661,7 +660,7 @@ class BackupStore {
     const requiredKeys = Object.keys(this.requiredFormSettings);
     if (!requiredKeys.length) return;
 
-    return !requiredKeys.some((key) => {
+    return !this.requiredFormSettings.some((key) => {
       const value = this.formSettings[key];
       return !value || !value.trim();
     });

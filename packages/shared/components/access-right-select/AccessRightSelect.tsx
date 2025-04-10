@@ -91,6 +91,8 @@ export const AccessRightSelectPure = ({
 
   const formatToAccessRightItem = (data: TOption[]) => {
     const items = data.map((item: TOption) => {
+      const isSelected = currentItem?.key === item?.key;
+
       return "isSeparator" in item && item.isSeparator ? (
         <DropDownItem key={item.key} isSeparator />
       ) : (
@@ -98,6 +100,8 @@ export const AccessRightSelectPure = ({
           className="access-right-item"
           key={item.key}
           data-key={item.key}
+          isSelected={isSelected}
+          isActive={isSelected}
           onClick={() => onSelectCurrentItem(item)}
         >
           <StyledItem>

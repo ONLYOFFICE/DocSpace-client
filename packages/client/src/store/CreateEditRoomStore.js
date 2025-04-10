@@ -367,9 +367,24 @@ class CreateEditRoomStore {
   onSaveAsTemplate = async (item, roomParams, openCreatedTemplate) => {
     this.filesStore.setRoomCreated(true);
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
+    const { cover } = this.dialogsStore;
 
-    const { title, icon, tags, invitations, roomType, isAvailable, quota } =
-      roomParams;
+    const {
+      title,
+      icon,
+      tags,
+      invitations,
+      roomType,
+      isAvailable,
+      quota,
+      logo,
+    } = roomParams;
+
+    const logoCover = cover
+      ? { cover: cover.cover, color: cover.color }
+      : logo
+        ? { cover: logo.cover?.id, color: logo.color }
+        : null;
 
     const quotaLimit = isDefaultRoomsQuotaSet ? quota : null;
 
@@ -385,6 +400,7 @@ class CreateEditRoomStore {
       ...(quotaLimit && {
         quota: +quotaLimit,
       }),
+      ...logoCover,
     };
 
     if (isDeleteLogo) {
@@ -495,6 +511,12 @@ class CreateEditRoomStore {
 
     const tagsToAddList = tags.map((tag) => tag.name);
 
+    const logoCover = cover
+      ? { cover: cover.cover, color: cover.color }
+      : logo
+        ? { cover: logo.cover.id, color: logo.color }
+        : null;
+
     const createRoomData = {
       roomId,
       roomType: type,
@@ -505,10 +527,7 @@ class CreateEditRoomStore {
       ...(quotaLimit && {
         quota: +quotaLimit,
       }),
-      ...(cover && {
-        cover: cover.cover,
-        color: cover.color,
-      }),
+      ...logoCover,
       ...(denyDownload && {
         denyDownload,
       }),

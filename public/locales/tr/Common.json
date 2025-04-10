@@ -638,5 +638,6 @@
   "Yes": "Evet",
   "Yesterday": "Dün",
   "You": "Siz",
-  "Forms": "Formlar"
+  "Forms": "Formlar",
+  "AllTypesAvailableForEditing": "{{organizationName}} içinde düzenlenebilecek tüm dosya türleri"
 }

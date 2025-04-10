@@ -661,7 +661,7 @@ class BackupStore {
     const requiredKeys = Object.keys(this.requiredFormSettings);
     if (!requiredKeys.length) return;
 
-    return !requiredKeys.some((key) => {
+    return !this.requiredFormSettings.some((key) => {
       const value = this.formSettings[key];
       return !value || !value.trim();
     });

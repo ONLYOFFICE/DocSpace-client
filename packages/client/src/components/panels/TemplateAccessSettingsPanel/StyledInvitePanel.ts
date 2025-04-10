@@ -390,7 +390,6 @@ const StyledTemplateAccessSettingsHeader = styled.div`
 
 const StyledTemplateAccessSettingsBody = styled.div`
   height: calc(100% - 73px);
-  padding-inline-end: 16px;
 `;
 
 const StyledTemplateAccessSettingsFooter = styled.div`

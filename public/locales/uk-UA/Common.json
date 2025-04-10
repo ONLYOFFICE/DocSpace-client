@@ -638,5 +638,6 @@
   "Yes": "Так",
   "Yesterday": "Вчора",
   "You": "Ви",
-  "Forms": "Форми"
+  "Forms": "Форми",
+  "AllTypesAvailableForEditing": "всі типи файлів, які можна редагувати в {{organizationName}}"
 }

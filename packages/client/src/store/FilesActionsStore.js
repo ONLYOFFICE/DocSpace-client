@@ -1499,7 +1499,12 @@ class FilesActionStore {
               ...pbData,
             });
 
-            return toastr.error(err.message ? err.message : err, null, 0, true);
+            return toastr.error(
+              err.message ? err.message : err.error ? err.error : err,
+              null,
+              0,
+              true,
+            );
           })
           .finally(() => {
             clearActiveOperations(null, items);

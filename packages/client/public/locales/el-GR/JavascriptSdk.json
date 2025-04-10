@@ -4,7 +4,6 @@
   "AddWatermarks": "Προσθήκη υδατογραφημάτων σε έγγραφα",
   "AdvancedDisplay": "Ρυθμίσεις οθόνης για προχωρημένους",
   "AllTypes": "Όλοι οι τύποι",
-  "AllTypesAvailableForEditing": "όλοι οι τύποι αρχείων που είναι διαθέσιμοι για επεξεργασία στο {{organizationName}}",
   "AllTypesSupportedByEditor": "Όλοι οι τύποι που υποστηρίζονται από τα προγράμματα επεξεργασίας του {{organizationName}}",
   "APILink": "βιβλιοθήκη API",
   "Ascending": "Αύξουσα",

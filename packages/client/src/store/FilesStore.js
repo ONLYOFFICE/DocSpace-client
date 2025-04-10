@@ -2063,7 +2063,15 @@ class FilesStore {
   ) => {
     const rooms = await api.rooms.setCustomRoomQuota(itemsIDs, +quotaSize);
 
-    if (!inRoom) await this.fetchRooms(null, filter, false, false, false);
+    if (!inRoom) {
+      if (!filter && this.roomsFilter.searchArea === RoomSearchArea.Templates) {
+        const newFilter = RoomsFilter.getDefault(this.userStore.user?.id);
+        newFilter.searchArea = RoomSearchArea.Templates;
+        await this.fetchRooms(null, newFilter, false, false, false);
+      } else {
+        await this.fetchRooms(null, filter, false, false, false);
+      }
+    }
 
     return rooms;
   };
@@ -2071,7 +2079,15 @@ class FilesStore {
   resetRoomQuota = async (itemsIDs, inRoom = false, filter = null) => {
     const rooms = await api.rooms.resetRoomQuota(itemsIDs);
 
-    if (!inRoom) await this.fetchRooms(null, filter, false, false, false);
+    if (!inRoom) {
+      if (!filter && this.roomsFilter.searchArea === RoomSearchArea.Templates) {
+        const newFilter = RoomsFilter.getDefault(this.userStore.user?.id);
+        newFilter.searchArea = RoomSearchArea.Templates;
+        await this.fetchRooms(null, newFilter, false, false, false);
+      } else {
+        await this.fetchRooms(null, filter, false, false, false);
+      }
+    }
 
     return rooms;
   };

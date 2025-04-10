@@ -96,6 +96,7 @@ const SaveAsTemplateEvent = (props: SaveAsTemplateEventProps) => {
     roomOwner: item.createdBy,
     canChangeRoomOwner: item?.security?.ChangeOwner || false,
     indexing: item.indexing,
+    logo: item.logo,
     lifetime: item.lifetime,
     denyDownload: item.denyDownload,
     watermark: item.watermark,

@@ -635,5 +635,6 @@
   "Yes": "Có",
   "Yesterday": "Hôm qua",
   "You": "Bạn",
-  "Forms": "Các Biểu mẫu"
+  "Forms": "Các Biểu mẫu",
+  "AllTypesAvailableForEditing": "tất cả các loại tập tin có sẵn để chỉnh sửa trong {{organizationName}} "
 }

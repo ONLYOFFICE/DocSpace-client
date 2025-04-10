@@ -719,5 +719,6 @@
   "Yes": "Yes",
   "Yesterday": "Yesterday",
   "You": "You",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "AllTypesAvailableForEditing": "all file types available for editing in {{organizationName}}"
 }

@@ -638,5 +638,6 @@
   "Yes": "Да",
   "Yesterday": "Вчера",
   "You": "Вие",
-  "Forms": "Формуляри"
+  "Forms": "Формуляри",
+  "AllTypesAvailableForEditing": "всички видове файлове, налични за редактиране в {{organizationName}}"
 }

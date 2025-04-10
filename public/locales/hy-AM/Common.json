@@ -639,5 +639,6 @@
   "Yes": "Այո",
   "Yesterday": "Երեկ",
   "You": "Դու",
-  "Forms": "Ձևեր"
+  "Forms": "Ձևեր",
+  "AllTypesAvailableForEditing": "բոլոր հասանելի ֆայլերի տեսակները {{organizationName}}-ում խմբագրելու համար"
 }

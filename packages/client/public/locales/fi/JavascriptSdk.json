@@ -4,7 +4,6 @@
   "AddWatermarks": "Lisää asiakirjoihin vesileimoja",
   "AdvancedDisplay": "Näytön lisäasetukset",
   "AllTypes": "Kaikki tyypit",
-  "AllTypesAvailableForEditing": "kaikki tiedostotyypit ovat muokattavissa {{organizationName}}:ssa",
   "AllTypesSupportedByEditor": "Kaikki {{organizationName}}:n editorien tukemat tyypit ",
   "APILink": "API-kirjasto",
   "Ascending": "Nouseva",

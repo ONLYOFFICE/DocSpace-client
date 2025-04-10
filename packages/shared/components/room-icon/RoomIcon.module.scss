@@ -55,6 +55,22 @@
         }
       }
 
+      .template-icon-svg-icon {
+        div:first-child {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          :local {
+            width: var(--room-icon-size);
+            height: var(--room-icon-size);
+          }
+        }
+
+        svg path {
+          fill: var(--room-icon-color, var(--room-icon-button-color));
+        }
+      }
+
       .room-image {
         width: 24px;
         height: 24px;

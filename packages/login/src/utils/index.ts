@@ -30,6 +30,8 @@ import { Nullable, TTranslation } from "@docspace/shared/types";
 import { parseURL } from "@docspace/shared/utils/common";
 import { getCookie } from "@docspace/shared/utils";
 
+import { getAvailablePortals as getAvailablePortalsServer } from "./actions";
+
 import { MessageKey, OAuth2ErrorKey } from "./enums";
 
 export async function oAuthLogin(profile: string) {
@@ -213,3 +215,66 @@ export const encodeParams = (str: string) => {
     })
     .join("&");
 };
+
+export async function getAvailablePortals(data: {
+  Email: string;
+  PasswordHash: string;
+  recaptchaResponse?: string | null | undefined;
+  recaptchaType?: unknown | undefined;
+}) {
+  const config = window.ClientConfig;
+
+  const path = `/portal/signin`;
+
+  if (config?.oauth2?.apiSystem.length) {
+    const urls: string[] = config.oauth2.apiSystem.map(
+      (url: string) => `https://${url}/apisystem${path}`,
+    );
+
+    const actions = await Promise.allSettled(
+      urls.map((url: string) =>
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }),
+      ),
+    );
+
+    const fullFiledActions = actions.filter(
+      (action) => action.status === "fulfilled",
+    );
+
+    if (fullFiledActions.length) {
+      const portalsRes = fullFiledActions
+        .filter((action) => {
+          return action.value.ok;
+        })
+        .map((action) => action.value);
+
+      if (!portalsRes.length) {
+        const portals = await fullFiledActions[0].value.json();
+
+        return { ...portals, status: fullFiledActions[0].status };
+      }
+
+      const portals = (await Promise.all(portalsRes.map((res) => res.json())))
+        .map(
+          (portals: {
+            tenants: { portalLink: string; portalName: string }[];
+          }) => portals.tenants,
+        )
+        .flat();
+
+      return portals;
+    }
+  }
+
+  const portalsRes = await getAvailablePortalsServer(data);
+
+  if (portalsRes.error) return portalsRes;
+
+  return portalsRes as { portalLink: string; portalName: string }[];
+}

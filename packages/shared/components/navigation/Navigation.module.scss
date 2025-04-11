@@ -400,28 +400,36 @@
   }
 
   grid-template-columns: 49px auto 1fr;
+
   &[data-with-logo="true"][data-is-frame="false"] {
     grid-template-columns: auto 49px auto 1fr;
   }
+
   &[data-with-logo="true"][data-is-frame="true"] {
     grid-template-columns: auto 49px auto 1fr;
   }
+
   &[data-show-navigation-button="true"][data-is-frame="false"],
   &[data-show-navigation-button="true"][data-with-logo="false"] {
     grid-template-columns: 49px auto minmax(186px, 1fr);
   }
+
   &[data-show-navigation-button="true"][data-is-frame="true"][data-with-logo="true"] {
     grid-template-columns: auto 49px auto minmax(186px, 1fr);
   }
+
   &[data-is-root-folder="true"][data-with-logo="false"] {
     grid-template-columns: auto 1fr;
   }
+
   &[data-is-root-folder="true"][data-with-logo="true"][data-is-frame="false"] {
     grid-template-columns: auto auto 1fr;
   }
+
   &[data-is-root-folder="true"][data-with-logo="true"][data-is-frame="true"] {
     grid-template-columns: auto auto 1fr;
   }
+
   &[data-is-desktop-client="true"][data-is-drop-box-component="true"] {
     max-height: 32px;
   }
@@ -462,7 +470,9 @@
         }
 
         @include mobile {
-          display: none;
+          &[data-is-frame="false"] {
+            display: none;
+          }
         }
       }
     }
@@ -512,7 +522,9 @@
       height: 21px;
 
       @include mobile {
-        display: none;
+        &[data-is-frame="false"] {
+          display: none;
+        }
       }
     }
 
@@ -579,19 +591,25 @@
     &[data-with-logo="true"] {
       grid-template-columns: 43px 49px 1fr auto;
     }
+
+    &[data-is-root-folder="false"][data-is-frame="true"] {
+      grid-template-columns: 43px 49px 1fr auto;
+    }
   }
 
   @include mobile {
-    :global {
-      .navigation-logo {
-        display: none;
+    &[data-is-frame="false"] {
+      :global {
+        .navigation-logo {
+          display: none;
+        }
       }
-    }
 
-    grid-template-columns: 29px auto 1fr !important;
+      grid-template-columns: 29px auto 1fr !important;
 
-    &[data-is-root-folder="true"] {
-      grid-template-columns: auto 1fr !important;
+      &[data-is-root-folder="true"] {
+        grid-template-columns: auto 1fr !important;
+      }
     }
   }
 }

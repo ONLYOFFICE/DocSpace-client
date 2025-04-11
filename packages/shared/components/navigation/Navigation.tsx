@@ -262,6 +262,7 @@ const Navigation = ({
                 currentDeviceType={currentDeviceType}
                 navigationTitleContainerNode={navigationTitleContainerNode}
                 onCloseDropBox={onCloseDropBox}
+                isFrame={isFrame}
               />
             </>
           ) : null}

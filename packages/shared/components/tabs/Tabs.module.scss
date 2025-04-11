@@ -157,7 +157,7 @@
 
     &.selected {
       .tabText {
-        color: var(--accent-main, --tabs-active-text-color-primary);
+        color: var(--tabs-active-text-color-primary);
       }
     }
 

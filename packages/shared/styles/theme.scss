@@ -1125,7 +1125,7 @@
 
   /* Primary tabs */
   --tabs-text-color-primary: #{$light-gray-dark};
-  --tabs-active-text-color-primary: #{$black};
+  --tabs-active-text-color-primary: var(--accent-main, #{$black});
   --tabs-hover-text-color-primary: #{$gray};
   --tabs-pressed-text-color-primary: #{$gray-text};
   --tabs-background-color-primary: #{$white};

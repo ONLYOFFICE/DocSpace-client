@@ -213,6 +213,7 @@ const Tabs = (props: TabsProps) => {
             ref={scrollRef}
             autoHide={false}
             noScrollY
+            paddingInlineEnd="0"
             className={classNames(styles.scroll, classes)}
           >
             {renderContent}

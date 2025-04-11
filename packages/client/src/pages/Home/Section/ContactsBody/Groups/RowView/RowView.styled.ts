@@ -123,50 +123,52 @@ const checkedStyle = css`
 `;
 
 export const GroupsRow = styled(Row)<{ checked?: boolean; isActive?: boolean }>`
-  ${({ checked, isActive }) => (checked || isActive) && checkedStyle};
+  &.table-row {
+    ${({ checked, isActive }) => (checked || isActive) && checkedStyle};
 
-  ${!isMobile &&
-  css`
-    &:hover {
-      ${checkedStyle}
+    ${!isMobile &&
+    css`
+      &:hover {
+        ${checkedStyle}
+      }
+    `}
+
+    .row_content {
+      height: 58px;
+      justify-content: center;
     }
-  `}
 
-  .row_content {
-    height: 58px;
-    justify-content: center;
-  }
+    height: 59px;
 
-  height: 59px;
+    border-top: ${(props) =>
+      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    border-bottom: ${(props) =>
+      `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
 
-  border-top: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-  border-bottom: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+    box-sizing: border-box;
+    margin-top: -1px;
 
-  box-sizing: border-box;
-  margin-top: -1px;
+    position: unset;
 
-  position: unset;
-
-  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-  .styled-element {
-    height: 32px;
-    margin-inline-end: 12px;
-  }
-  .group-row-element {
-    display: flex;
-    width: 32px;
-    height: 32px;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 16px;
-    background: ${(props) =>
-      props.theme.filesSection.tableView.row.backgroundGroup};
-    color: ${(props) => props.theme.filesSection.tableView.row.color};
-    border-radius: 50%;
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+    .styled-element {
+      height: 32px;
+      margin-inline-end: 12px;
+    }
+    .group-row-element {
+      display: flex;
+      width: 32px;
+      height: 32px;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 16px;
+      background: ${(props) =>
+        props.theme.filesSection.tableView.row.backgroundGroup};
+      color: ${(props) => props.theme.filesSection.tableView.row.color};
+      border-radius: 50%;
+    }
   }
 `;
 

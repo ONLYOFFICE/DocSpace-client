@@ -1082,7 +1082,6 @@ const SectionFilterContent = ({
           group: FilterGroups.filterAuthor,
           label: t("ByAuthor"),
           isHeader: true,
-          withMultiItems: true,
         },
         {
           id: "filter_author-me",

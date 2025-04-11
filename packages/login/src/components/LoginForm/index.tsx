@@ -426,11 +426,19 @@ const LoginForm = ({
           return;
         }
 
-        if (typeof res === "string")
-          window.location.replace(
-            `${res}&linkData=${linkData}&publicAuth=${isPublicAuth}`,
-          );
-        else window.location.replace("/"); //TODO: save { user, hash } for tfa
+        if (typeof res === "string") {
+          let redirectUrl = `${res}`;
+
+          if (linkData) {
+            redirectUrl += `&linkData=${linkData}`;
+          }
+
+          if (isPublicAuth) {
+            redirectUrl += `&publicAuth=${isPublicAuth}`;
+          }
+
+          window.location.replace(redirectUrl);
+        } else window.location.replace("/"); //TODO: save { user, hash } for tfa
       })
       .catch((error) => {
         let errorMessage = "";

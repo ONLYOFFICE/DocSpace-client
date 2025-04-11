@@ -720,8 +720,9 @@ const ArticleMainButtonContent = (props) => {
     isRoomAdmin && isAccountsPage ? t("Common:Invite") : t("Common:Actions");
 
   let isDisabled = false;
+
   if (isFrame) {
-    isDisabled = disableActionButton;
+    isDisabled = disableActionButton && !security?.Create;
   } else if (isSettingsPage) {
     isDisabled = isSettingsPage;
   } else if (isAccountsPage) {

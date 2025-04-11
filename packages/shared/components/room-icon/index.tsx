@@ -190,6 +190,9 @@ const RoomIcon = ({
     </Text>
   );
 
+  const isImage =
+    typeof logo === "string" || (typeof logo === "object" && logo.medium);
+
   return (
     <>
       <div
@@ -226,7 +229,7 @@ const RoomIcon = ({
             <ReactSVG className="template-icon-svg" src={TemplateRoomIcon} />
             {showDefault || !correctImage ? (
               roomTitleText
-            ) : typeof logo === "object" && logo.medium ? (
+            ) : isImage ? (
               <img
                 className={classNames([imgClassName, "room-image"])}
                 src={imgSrc}

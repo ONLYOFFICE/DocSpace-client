@@ -100,6 +100,7 @@
 .guidElement {
   position: absolute;
   border-radius: 7px;
+  -webkit-backdrop-filter: var(--backdrop-filter-value);
   backdrop-filter: var(--backdrop-filter-value);
 
   &.smallBorderRadius {

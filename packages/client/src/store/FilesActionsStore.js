@@ -2724,7 +2724,8 @@ class FilesActionStore {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
-    const { insideGroupBackUrl } = this.peopleStore.groupsStore;
+    const { insideGroupBackUrl, setInsideGroupTempTitle } =
+      this.peopleStore.groupsStore;
     const { setContactsTab } = this.peopleStore.usersStore;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
@@ -2781,12 +2782,14 @@ class FilesActionStore {
     if (categoryType === CategoryType.Accounts) {
       const contactsTab = getContactsView();
 
+      setInsideGroupTempTitle(null);
+
       if (insideGroupBackUrl) {
         console.log("set");
         setIsSectionBodyLoading(true, false);
 
         setContactsTab("groups");
-        window.DocSpace.navigate(insideGroupBackUrl);
+        window.DocSpace.navigate(-1);
 
         return;
       }

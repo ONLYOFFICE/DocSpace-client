@@ -51,6 +51,7 @@ import {
   RoomsTypes,
   isDesktop,
   isMobile,
+  isSystemFolder,
 } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 
@@ -3948,10 +3949,18 @@ class FilesStore {
 
     const share = shareKey || this.publicRoomStore.publicRoomKey;
 
+    const folderType = this.selectedFolderStore.type;
+
+    const isFormRoom = this.selectedFolderStore.roomType === RoomsType.FormRoom;
+    const isPublic = this.publicRoomStore.isPublicRoom;
+
+    const canShare =
+      share && (isPublic || !isFormRoom) && !isSystemFolder(folderType);
+
     const searchParams = new URLSearchParams();
 
     searchParams.append("fileId", id);
-    if (share) searchParams.append("share", share);
+    if (canShare) searchParams.append("share", share);
     if (preview) searchParams.append("action", "view");
     if (editForm) searchParams.append("action", "edit");
     if (fillForm) searchParams.append("action", "fill");

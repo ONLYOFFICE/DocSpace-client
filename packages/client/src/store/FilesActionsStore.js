@@ -77,7 +77,11 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { toastr } from "@docspace/shared/components/toast";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
+import {
+  isDesktop,
+  isLockedSharedRoom,
+  isSystemFolder,
+} from "@docspace/shared/utils";
 import {
   getCategoryType,
   getCategoryTypeByFolderType,
@@ -3412,8 +3416,7 @@ class FilesActionStore {
     if (
       folder.shared &&
       folder?.rootFolderType === FolderType.Rooms &&
-      folder?.type !== FolderType.Done &&
-      folder?.type !== FolderType.InProgress
+      !isSystemFolder(folder?.type)
     ) {
       const filterObj = FilesFilter.getFilter(window.location);
 

@@ -205,7 +205,7 @@ const Tabs = (props: TabsProps) => {
       {!multiple ? (
         <div
           data-sticky
-          className={classNames(styles.sticky, "sticky")}
+          className={classNames(styles.sticky, classes, "sticky")}
           style={{ top: stickyTop }}
         >
           {!isViewFirstTab ? <div className={styles.blurAhead} /> : null}

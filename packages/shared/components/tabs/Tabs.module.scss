@@ -58,7 +58,9 @@
   display: flex;
   flex-direction: row;
 
-  border-bottom: 1px solid var(--tabs-line-color);
+  &.primary {
+    border-bottom: 1px solid var(--tabs-line-color);
+  }
 }
 
 .tabs {

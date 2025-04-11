@@ -670,7 +670,7 @@ class BackupStore {
     const errors = {};
     let firstError = false;
 
-    Object.keys(this.requiredFormSettings).forEach((key) => {
+    Object.values(this.requiredFormSettings).forEach((key) => {
       const elem = this.formSettings[key];
 
       errors[key] = !elem.trim();

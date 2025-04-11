@@ -191,7 +191,7 @@ const RoomIcon = ({
   );
 
   const isImage =
-    typeof logo === "string" || (typeof logo === "object" && logo.medium);
+    typeof logo === "string" || (typeof logo === "object" && logo?.medium);
 
   return (
     <>

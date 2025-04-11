@@ -280,6 +280,7 @@ export type TEventData = {
   emails?: string[];
   c?: string;
   version?: number;
+  link?: string;
 };
 
 export type TEvent = {

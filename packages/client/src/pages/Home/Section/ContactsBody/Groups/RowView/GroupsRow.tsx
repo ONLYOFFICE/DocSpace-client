@@ -123,6 +123,7 @@ const GroupsRowComponent = ({
           className="group-row"
         >
           <GroupsRowContent
+            className="group-row-content"
             sectionWidth={sectionWidth}
             sideColor={theme.peopleTableRow.sideInfoColor}
           >

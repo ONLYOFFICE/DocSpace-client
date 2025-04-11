@@ -123,7 +123,7 @@ const checkedStyle = css`
 `;
 
 export const GroupsRow = styled(Row)<{ checked?: boolean; isActive?: boolean }>`
-  &.table-row {
+  &.group-row {
     ${({ checked, isActive }) => (checked || isActive) && checkedStyle};
 
     ${!isMobile &&
@@ -173,32 +173,34 @@ export const GroupsRow = styled(Row)<{ checked?: boolean; isActive?: boolean }>`
 `;
 
 export const GroupsRowContent = styled(RowContent)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2px;
+  &.group-row-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
 
-  ${isTablet &&
-  css`
-    .row-main-container-wrapper {
-      align-self: start;
-    }
-  `}
+    ${isTablet &&
+    css`
+      .row-main-container-wrapper {
+        align-self: start;
+      }
+    `}
 
-  @media ${tablet} {
-    .row-main-container-wrapper {
-      width: 100%;
-      display: flex;
-      -webkit-box-pack: justify;
-      justify-content: space-between;
-      max-width: inherit;
-      margin: 0;
-    }
+    @media ${tablet} {
+      .row-main-container-wrapper {
+        width: 100%;
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        max-width: inherit;
+        margin: 0;
+      }
 
-    .badges {
-      flex-direction: row-reverse;
-      margin-inline-end: 12px;
-      margin-top: -1px;
+      .badges {
+        flex-direction: row-reverse;
+        margin-inline-end: 12px;
+        margin-top: -1px;
+      }
     }
   }
 `;

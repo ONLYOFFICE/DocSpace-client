@@ -274,8 +274,6 @@ class BackupStore {
 
     const connectedThirdPartyAccount = accounts.findLast((a) => a.connected);
 
-    if (this.selectedThirdPartyAccount) return;
-
     this.setSelectedThirdPartyAccount(
       Object.keys(selectedAccount).length !== 0
         ? selectedAccount
@@ -289,10 +287,12 @@ class BackupStore {
       ? serviceTitle
       : `${serviceTitle} (${t("CreateEditRoomDialog:ActivationRequired")})`;
 
+    // const isConnected =
+    //   this.connectedThirdPartyAccount?.providerKey === "WebDav"
+    //     ? serviceTitle === this.connectedThirdPartyAccount?.title
+    //     : provider.name === this.connectedThirdPartyAccount?.title;
     const isConnected =
-      this.connectedThirdPartyAccount?.providerKey === "WebDav"
-        ? serviceTitle === this.connectedThirdPartyAccount?.title
-        : provider.name === this.connectedThirdPartyAccount?.title;
+      provider.name === this.connectedThirdPartyAccount?.title;
 
     const isDisabled = !provider.connected && !this.authStore.isAdmin;
 
@@ -670,7 +670,7 @@ class BackupStore {
     const errors = {};
     let firstError = false;
 
-    Object.keys(this.requiredFormSettings).forEach((key) => {
+    Object.values(this.requiredFormSettings).forEach((key) => {
       const elem = this.formSettings[key];
 
       errors[key] = !elem.trim();

@@ -38,9 +38,11 @@ import {
 import {
   getBalance,
   getCardLinked,
-  getCustomerInfo,
+  getWalletPayer,
   getTransactionHistory,
   getPaymentLink,
+  getAutoTopUpSettings,
+  updateAutoTopUpSettings,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
@@ -56,6 +58,7 @@ import {
   TBalance,
   TCustomerInfo,
   TTransactionHistory,
+  TAutoTopUpSettings,
 } from "@docspace/shared/api/portal/types";
 
 class PaymentStore {
@@ -106,7 +109,7 @@ class PaymentStore {
 
   isInitWalletPage = false;
 
-  customerInfo: TCustomerInfo = "null";
+  walletPayer: TCustomerInfo = "null";
 
   balance: TBalance = {
     subAccounts: [{ currency: "USD", amount: 0.0 }],
@@ -115,6 +118,8 @@ class PaymentStore {
   cardLinked = "";
 
   transactionHistory: TTransactionHistory | {} = {};
+
+  automaticPayments: TAutoTopUpSettings | null = null;
 
   constructor(
     userStore: UserStore,
@@ -184,7 +189,7 @@ class PaymentStore {
   }
 
   get isWalletCustomerExist() {
-    return this.customerInfo !== "null";
+    return this.walletPayer !== "null";
   }
 
   setBalance = async () => {
@@ -208,19 +213,46 @@ class PaymentStore {
     this.transactionHistory = res;
   };
 
+  fetchAutoPayments = async () => {
+    const res = await getAutoTopUpSettings();
+
+    if (!res) return;
+
+    this.automaticPayments = res;
+  };
+
+  updateAutoPayments = async () => {
+    if (!this.automaticPayments) return;
+
+    const { enabled, minBalance, upToBalance, currency } =
+      this.automaticPayments;
+
+    const res = (await updateAutoTopUpSettings(
+      enabled,
+      minBalance,
+      upToBalance,
+      currency || "",
+    )) as TAutoTopUpSettings;
+
+    if (!res) return;
+
+    this.automaticPayments = res;
+  };
+
   walletInit = async () => {
     const requests = [
-      getCustomerInfo(),
+      getWalletPayer(),
       getCardLinked(window.location.href),
       this.setTransactionHistory(),
       this.setBalance(),
       this.setPaymentAccount(),
+      this.fetchAutoPayments(),
     ];
 
     try {
       const [customer, cardLinked] = await Promise.all(requests);
 
-      this.customerInfo = customer as TCustomerInfo;
+      this.walletPayer = customer as TCustomerInfo;
       this.cardLinked = cardLinked as string;
     } catch (error) {
       // toastr.error(t("Common:UnexpectedError"));

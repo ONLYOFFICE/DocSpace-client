@@ -23,33 +23,20 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import React, { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
+import { formatCurrencyValue } from "../utils";
 
 type AmountProps = {
   setAmount: (amount: string) => void;
   amount: string;
   language: string;
   currency: string;
-};
-
-const formattedAmount = (
-  value: number,
-  language: string = "en",
-  currency: string = "USD",
-) => {
-  const formatter = new Intl.NumberFormat(language, {
-    style: "currency",
-    currency,
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  });
-
-  return formatter.format(value);
 };
 
 const Amount = ({ setAmount, amount, language, currency }: AmountProps) => {
@@ -59,31 +46,31 @@ const Amount = ({ setAmount, amount, language, currency }: AmountProps) => {
   const amountTabs = useMemo(
     () => [
       {
-        name: formattedAmount(10, language, currency),
+        name: formatCurrencyValue(language, 10, currency),
         id: "10",
         value: 10,
         content: null,
       },
       {
-        name: formattedAmount(20, language, currency),
+        name: formatCurrencyValue(language, 20, currency),
         id: "20",
         value: 20,
         content: null,
       },
       {
-        name: formattedAmount(30, language, currency),
+        name: formatCurrencyValue(language, 30, currency),
         id: "30",
         value: 30,
         content: null,
       },
       {
-        name: formattedAmount(50, language, currency),
+        name: formatCurrencyValue(language, 50, currency),
         id: "50",
         value: 50,
         content: null,
       },
       {
-        name: formattedAmount(100, language, currency),
+        name: formatCurrencyValue(language, 100, currency),
         id: "100",
         value: 100,
         content: null,

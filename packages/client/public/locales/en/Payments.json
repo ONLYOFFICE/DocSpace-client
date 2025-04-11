@@ -1,4 +1,5 @@
 {
+  "AutoTopUp": "Auto top-up",
   "AddPaymentMethod": "Add payment method",
   "AutomaticPayments": "Automatic payments",
   "AutomaticallyTopUpCard": "Automatically top up my card when my credit balance falls below a threshold",
@@ -17,6 +18,7 @@
   "BusinessSuggestion": "Customize your {{planName}} plan",
   "BusinessTitle": "You are using {{planName}} plan",
   "BusinessUpdated": "{{planName}} plan updated",
+  "BringCreditBackUpTo": "Bring credit back up to",
   "CannotCreateNewRoom": "Room cannot be created",
   "CannotCreatePaidUsers": "Paid users cannot be added",
   "CannotRestoreRoom": "Room cannot be restored",
@@ -28,6 +30,7 @@
   "DelayedPayment": "Delayed payment of the {{planName}} plan dated {{date}}",
   "DowngradeNow": "Downgrade now",
   "EnterAmount": "Enter amount",
+  "EnterAnIntegerAmountBetween": "Enter an integer amount between {{min}} and {{max}}",
   "ErrorNotification": "Failed to update tariff plan. Try again later or contact the sales department.",
   "GoToStripe": "Go to the Stripe",
   "GracePeriodActivatedDescription": "During the grace period, admins cannot create new rooms and add new users. After the due date of the grace period, {{productName}} will become unavailable until the payment is made.",
@@ -72,5 +75,7 @@
   "YouHaveNotAddedAnyPayment": "You have not added any payment",
   "Wallet": "Wallet",
   "WalletDescription": "{{productName}} Wallet is a flexible and convenient way to purchase storage space and AI tools. Top up your wallet and start using it by selecting the services you need in the Services section.",
+  "WhenBalanceGoesBellow": "When balance goes bellow",
+  "WhenBalanceDropsTo": "When the balance drops to {{min}}, the wallet will be automatically topped up to {{max}}.",
   "Quantity": "Quantity"
 }

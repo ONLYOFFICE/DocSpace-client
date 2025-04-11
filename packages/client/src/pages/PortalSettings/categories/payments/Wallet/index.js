@@ -34,6 +34,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import TransactionHistory from "./TransactionHistory";
 import TopUpModal from "./TopUpModal";
+import { formattedBalance } from "./utils";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -56,6 +57,7 @@ const Description = styled(Text)`
   line-height: 1.334em;
   color: #666666;
   margin-bottom: 20px;
+  max-width: 660px;
 `;
 
 const HeaderContainer = styled.div`
@@ -90,40 +92,8 @@ const Wallet = ({ balance, language, walletInit, isInitWalletPage }) => {
     walletInit();
   }, []);
 
-  const formattedBalance = () => {
-    const formatter = new Intl.NumberFormat(language, {
-      style: "currency",
-      currency: balance.currency,
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
-
-    const parts = formatter.formatToParts(balance.amount || 0);
-    const currencySymbol =
-      parts.find((part) => part.type === "currency")?.value || "";
-    const mainNumber =
-      parts.find((part) => part.type === "integer")?.value || "0";
-    const fraction =
-      parts.find((part) => part.type === "fraction")?.value || "00";
-    const decimal = parts.find((part) => part.type === "decimal")?.value || ".";
-
-    const currencyIndex = parts.findIndex((part) => part.type === "currency");
-    const isCurrencyAtEnd =
-      currencyIndex > parts.findIndex((part) => part.type === "integer");
-
-    const balanceValue = formatter.format(balance.amount);
-
-    return {
-      fraction: `${decimal}${fraction}`,
-      balanceValue,
-      isCurrencyAtEnd,
-      mainNumber,
-      currency: currencySymbol,
-    };
-  };
-
   const { fraction, balanceValue, isCurrencyAtEnd, mainNumber, currency } =
-    formattedBalance();
+    formattedBalance(language, balance);
 
   const onClose = () => {
     setVisible(false);

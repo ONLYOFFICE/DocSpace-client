@@ -31,6 +31,7 @@ import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
 import {
+  TAutoTopUpSettings,
   TBalance,
   TCustomerInfo,
   TPaymentQuota,
@@ -381,7 +382,7 @@ export function getBalance() {
   }) as TBalance;
 }
 
-export function getCustomerInfo() {
+export function getWalletPayer() {
   return request({
     method: "get",
     url: "/portal/payment/customerinfo",
@@ -417,7 +418,7 @@ export async function getTransactionHistory(
   credit: boolean = true,
   withdrawal: boolean = true,
 ) {
-  const options: AxiosRequestConfig = {
+  const options = {
     method: "get",
     url: "/portal/payment/customer/operations",
     params: {
@@ -432,8 +433,37 @@ export async function getTransactionHistory(
   return res;
 }
 
+export async function getAutoTopUpSettings() {
+  const options = {
+    method: "get",
+    url: "/portal/payment/topupsettings",
+  };
+  const res = (await request(options)) as TAutoTopUpSettings;
+
+  return res;
+}
+
+export async function updateAutoTopUpSettings(
+  enabled: boolean,
+  minBalance: number,
+  upToBalance: number,
+  currency: string,
+) {
+  const options = {
+    method: "post",
+    url: "/portal/payment/topupsettings",
+    data: {
+      enabled,
+      minBalance,
+      upToBalance,
+      currency,
+    },
+  };
+  return request(options);
+}
+
 export async function getPortal() {
-  const options: AxiosRequestConfig = {
+  const options = {
     method: "post",
     url: "/portal",
   };

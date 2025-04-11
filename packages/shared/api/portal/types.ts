@@ -162,3 +162,10 @@ export type TTransactionHistory = {
   totalPage: number;
   currentPage: number;
 };
+
+export type TAutoTopUpSettings = {
+  enabled: boolean;
+  minBalance: number;
+  upToBalance: number;
+  currency: string | null;
+};

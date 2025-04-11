@@ -50,7 +50,7 @@ const StyledBody = styled.div`
   gap: 24px;
   width: 100%;
   max-width: 480px;
-  margin: 0 auto;
+  margin: 20px auto 0 auto;
   padding: 0 0 24px;
 `;
 

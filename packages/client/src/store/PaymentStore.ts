@@ -109,7 +109,11 @@ class PaymentStore {
 
   isInitWalletPage = false;
 
-  walletPayer: TCustomerInfo = "null";
+  walletPayer: TCustomerInfo = {
+    portalId: null,
+    paymentMethodStatus: 0,
+    email: null,
+  };
 
   balance: TBalance = {
     subAccounts: [{ currency: "USD", amount: 0.0 }],
@@ -189,10 +193,10 @@ class PaymentStore {
   }
 
   get isWalletCustomerExist() {
-    return this.walletPayer !== "null";
+    return !!this.walletPayer.email;
   }
 
-  setBalance = async () => {
+  fetchBalance = async () => {
     const res = await getBalance();
 
     if (!res) return;
@@ -221,12 +225,28 @@ class PaymentStore {
     this.automaticPayments = res;
   };
 
-  updateAutoPayments = async () => {
-    if (!this.automaticPayments) return;
+  fetchWalletPayer = async () => {
+    const res = await getWalletPayer();
 
-    const { enabled, minBalance, upToBalance, currency } =
-      this.automaticPayments;
+    if (!res) return;
 
+    this.walletPayer = res;
+  };
+
+  fetchCardLinked = async () => {
+    const res = await getCardLinked(`${window.location.href}?complete=true`);
+
+    if (!res) return;
+
+    this.cardLinked = res;
+  };
+
+  updateAutoPayments = async (
+    enabled: boolean,
+    minBalance: number,
+    upToBalance: number,
+    currency: string,
+  ) => {
     const res = (await updateAutoTopUpSettings(
       enabled,
       minBalance,
@@ -240,20 +260,23 @@ class PaymentStore {
   };
 
   walletInit = async () => {
-    const requests = [
-      getWalletPayer(),
-      getCardLinked(window.location.href),
-      this.setTransactionHistory(),
-      this.setBalance(),
-      this.setPaymentAccount(),
-      this.fetchAutoPayments(),
-    ];
+    const requests = [];
 
     try {
-      const [customer, cardLinked] = await Promise.all(requests);
+      await Promise.all([this.fetchWalletPayer(), this.fetchBalance]);
 
-      this.walletPayer = customer as TCustomerInfo;
-      this.cardLinked = cardLinked as string;
+      if (this.isWalletCustomerExist) {
+        requests.push(
+          this.setPaymentAccount(),
+          this.fetchAutoPayments(),
+          this.setTransactionHistory(),
+          this.fetchCardLinked(),
+        );
+      } else {
+        requests.push(this.fetchCardLinked());
+      }
+
+      await Promise.all(requests);
     } catch (error) {
       // toastr.error(t("Common:UnexpectedError"));
       console.error(error);

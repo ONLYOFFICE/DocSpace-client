@@ -26,7 +26,6 @@
 
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
@@ -36,52 +35,7 @@ import TransactionHistory from "./TransactionHistory";
 import TopUpModal from "./TopUpModal";
 import { formattedBalance } from "./utils";
 
-const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-
-  min-height: 72px;
-
-  box-sizing: border-box;
-  border-radius: 6px;
-
-  .balance-wrapper {
-    max-width: 152px;
-    margin-bottom: 24px;
-  }
-`;
-
-const Description = styled(Text)`
-  font-size: 12px;
-  line-height: 1.334em;
-  color: #666666;
-  margin-bottom: 20px;
-  max-width: 660px;
-`;
-
-const HeaderContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-`;
-
-const BalanceAmountContainer = styled.div`
-  display: flex;
-  align-items: baseline;
-`;
-
-const MainAmount = styled(Text)`
-  font-size: 44px;
-  font-weight: 700;
-  line-height: 1.36em;
-`;
-
-const DecimalAmount = styled(Text)`
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 1.36em;
-`;
+import "./Wallet.scss";
 
 const Wallet = ({ balance, language, walletInit, isInitWalletPage }) => {
   const { t } = useTranslation(["Payments", "Common"]);
@@ -106,25 +60,31 @@ const Wallet = ({ balance, language, walletInit, isInitWalletPage }) => {
   if (!isInitWalletPage) return;
 
   return (
-    <StyledContainer>
-      <Description>
+    <div className="wallet-container">
+      <Text className="description">
         {t("WalletDescription", { productName: t("Common:ProductName") })}
-      </Description>
+      </Text>
       <div className="balance-wrapper">
-        <HeaderContainer>
+        <div className="header-container">
           <Text isBold fontSize="16px">
             {t("BalanceText")}
           </Text>
-        </HeaderContainer>
+        </div>
 
-        <BalanceAmountContainer>
-          <MainAmount>
+        <div className="balance-amount-container">
+          <Text className="main-amount">
             {!isCurrencyAtEnd ? currency : ""}
             {mainNumber}
-          </MainAmount>
-          <DecimalAmount>{fraction}</DecimalAmount>
-          {isCurrencyAtEnd ? <MainAmount as="span">{currency}</MainAmount> : ""}
-        </BalanceAmountContainer>
+          </Text>
+          <Text className="decimal-amount">{fraction}</Text>
+          {isCurrencyAtEnd ? (
+            <Text className="main-amount" as="span">
+              {currency}
+            </Text>
+          ) : (
+            ""
+          )}
+        </div>
 
         <Button
           size={ButtonSize.normal}
@@ -141,7 +101,7 @@ const Wallet = ({ balance, language, walletInit, isInitWalletPage }) => {
       />
 
       <TransactionHistory />
-    </StyledContainer>
+    </div>
   );
 };
 

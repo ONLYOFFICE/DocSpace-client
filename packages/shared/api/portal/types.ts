@@ -126,15 +126,11 @@ export type TRestoreProgress = {
   error?: TError;
 };
 
-export type TCustomerInfo =
-  | {
-      id: number;
-      portalId: string;
-      paymentCustomerId: string;
-      paymentMethodId: string;
-      setupIntentId: string;
-    }
-  | "null";
+export type TCustomerInfo = {
+  paymentMethodStatus: number;
+  email: string | null;
+  portalId: string | null;
+};
 
 export type TBalance =
   | {

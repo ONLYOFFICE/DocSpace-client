@@ -42,7 +42,12 @@ import { formatCurrencyValue } from "../utils";
 
 interface AutoPaymentsProps {
   isWalletCustomerExist: boolean;
-  updateAutoPayments: () => Promise<void>;
+  updateAutoPayments: (
+    enabled: boolean,
+    minBalance: string,
+    upToBalance: string,
+    currency: string,
+  ) => Promise<void>;
   automaticPayments: TAutoTopUpSettings | null;
   language: string;
   currency: string;
@@ -104,13 +109,13 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
       ? automaticPayments.minBalance.toString()
       : "",
   );
-  const [maxUpToBalance, setMaxUpToBalance] = useState(
+  const [upToBalance, setUpToBalance] = useState(
     automaticPayments?.upToBalance
       ? automaticPayments.upToBalance.toString()
       : "",
   );
   const [minBalanceError, setMinBalanceError] = useState(false);
-  const [maxUpToBalanceError, setMaxUpToBalanceError] = useState(false);
+  const [upToBalanceError, setUpToBalanceError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isCurrentSettings, setIsCurrentSettings] = useState(
     automaticPayments !== null,
@@ -146,11 +151,11 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
     const minValue = minInputValue + 1;
 
     if (Number.isNaN(numValue) || numValue < minValue || numValue > 5000) {
-      setMaxUpToBalanceError(true);
+      setUpToBalanceError(true);
       return;
     }
 
-    setMaxUpToBalanceError(false);
+    setUpToBalanceError(false);
   };
 
   const onMinBalanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -163,7 +168,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
   const onMaxUpToBalanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    setMaxUpToBalance(value);
+    setUpToBalance(value);
     validateMaxUpToBalance(value);
   };
 
@@ -172,10 +177,13 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
   };
 
   const onSave = async () => {
-    setIsLoading(true);
+    const timerId = setTimeout(() => {
+      setIsLoading(true);
+    }, 200);
 
     try {
-      await updateAutoPayments();
+      await updateAutoPayments(true, minBalance, upToBalance, currency);
+
       setIsCurrentSettings(true);
       setAnimateSettings(false);
       setTimeout(() => {
@@ -185,15 +193,22 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
       toastr.error(error as string);
     }
 
+    clearTimeout(timerId);
     setIsLoading(false);
   };
 
   const onClose = () => {
-    setIsCurrentSettings(true);
-    setAnimateSettings(false);
-    setTimeout(() => {
-      setAnimateSettings(true);
-    }, 50);
+    if (automaticPayments) {
+      setIsCurrentSettings(true);
+      return;
+    }
+
+    onToggleClick();
+
+    // setAnimateSettings(false);
+    // setTimeout(() => {
+    //   setAnimateSettings(true);
+    // }, 50);
   };
 
   const onEditClick = () => {
@@ -238,9 +253,9 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
         </Text>
         <TextInput
           scale
-          value={maxUpToBalance}
+          value={upToBalance}
           onChange={onMaxUpToBalanceChange}
-          hasError={maxUpToBalanceError}
+          hasError={upToBalanceError}
           type={InputType.text}
           inputMode="numeric"
         />
@@ -255,9 +270,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
           onClick={onSave}
           isLoading={isLoading}
           isDisabled={
-            minBalanceError ||
-            maxUpToBalanceError ||
-            (!minBalance && !maxUpToBalance)
+            minBalanceError || upToBalanceError || !minBalance || !upToBalance
           }
         />
         <Button

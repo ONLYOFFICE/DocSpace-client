@@ -8,5 +8,16 @@
   "FormCompletedSuccessfully": "Formularz został pomyślnie wypełniony",
   "FormNumber": "Numer formularza",
   "FormOwner": "Właściciel formularza",
-  "Title": "Formularz został wypełniony"
+  "Title": "Formularz został wypełniony",
+  "FillOutForm": "Wypełnij formularz",
+  "FormFinalized": "Formularz zatwierdzony",
+  "FormSectionCompleted": "Zakończono sekcję formularza",
+  "FormVDRCompletedDescription": "Formularz został w pełni wypełniony przez wszystkie role i jest teraz zatwierdzony. Dostępny jest w trybie tylko do odczytu.",
+  "FormVDRConfirmationOfStartDescription": "Powiadomienie zostało już wysłane do użytkownika w pierwszej roli, prosząc go o wypełnienie formularza. Możesz przejść do pokoju lub udostępnić link do wypełnienia uczestnikom.",
+  "FormVDRConfirmationOfStartTitle": "Formularz jest gotowy do wypełnienia w pokoju.",
+  "FormVDRSectionCompletedDescription": "Wypełniony fragment formularza PDF został pomyślnie ukończony. Status wypełniania formularza można monitorować w pomieszczeniu i za pomocą panelu stanu wypełniania. Powiadomienie e-mail zostanie wysłane po całkowitym wypełnieniu formularza.",
+  "FormVDRYourTurnDescription": "Zostajesz przydzielony/przydzielona do wypełnienia formularza jako pierwsza rola. Wysłano powiadomienie na Twój adres e-mail. Możesz zacząć wypełniać go teraz lub skopiować link do wypełniania i wrócić później.",
+  "LinkToFillOutForm": "Link do wypełnienia formularza:",
+  "LinkToForm": "Link do formularza: {form_url}",
+  "LinkToViewOnlyForm": "Link do formularza tylko do odczytu:"
 }

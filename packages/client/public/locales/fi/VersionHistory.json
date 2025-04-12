@@ -1,4 +1,6 @@
 {
   "EditComment": "Muokkaa kommenttia",
-  "Version": "Ver."
+  "Version": "Ver.",
+  "DeleteVersion": "Poista versio",
+  "DeleteVersionDescription": "Olet aikonut poistaa tiedostojen version. Sitä ei ole enää mahdollista nähdä tai palauttaa. Oletko varma, että haluat jatkaa?"
 }

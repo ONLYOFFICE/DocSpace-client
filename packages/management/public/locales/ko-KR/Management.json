@@ -24,5 +24,15 @@
   "SettingsForAll": "이 설정은 모든 공간에 적용됩니다.",
   "Subheader": "이 섹션을 이용하여 여러 공간을 생성하고 사용자가 액세스할 수 있도록 만드세요",
   "SubmitDelete": "삭제 요청 제출 ",
-  "VisitSpace": "생성 후 이 공간 방문"
+  "VisitSpace": "생성 후 이 공간 방문",
+  "DecryptStorage": "저장소 해독",
+  "DecryptWarningDialogContent": "복호화 과정 동안 모든 공간이 사용할 수 없게 됩니다. 계속 진행하시겠습니까?",
+  "EncryptData": "정지 데이터 암호화",
+  "EncryptDataDescription": "{{organizationName}}는 저장소에 저장된 데이터를 보호하기 위해 AES-256 암호화를 사용합니다.",
+  "EncryptDataWarningDescription": "저장소 암호화는 시간이 걸릴 수 있습니다. 프로세스 진행 중에는 해당 공간을 사용할 수 없습니다. 충분한 저장 공간이 있는지 확인하고 데이터가 백업되었는지 확인하세요. 자동 백업을 비활성화하고 실행 중인 모든 백업을 중지하는 것을 잊지 마세요. 그렇지 않으면 {max} 자동으로 진행됩니다. {min}",
+  "EncryptStorage": "저장소 암호화",
+  "EncryptWarningDialogContent": "암호화 과정 동안 모든 공간이 사용할 수 없게 됩니다. 계속 진행하시겠습니까? {field} {min} {max}",
+  "MoreDetails": "서비스 중지를 위한 자세한 내용은 <1>{{link}}</1>을 참조하십시오.",
+  "NotifyUsers": "공간이 사용할 수 없음을 사용자에게 알립니다. The {field} must remain {min} to {max}.",
+  "StorageEncrypted": "저장소 암호화됨"
 }

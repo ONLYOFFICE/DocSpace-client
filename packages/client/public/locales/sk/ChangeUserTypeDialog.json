@@ -4,5 +4,14 @@
   "ChangeUserTypeButton": "Zmeniť typ",
   "ChangeUserTypeMessage": "Používatelia s typom <strong>'{{ firstType }}'</strong> budú presunutí do typu <strong>'{{ secondType }}'</strong> .",
   "SuccessChangeGuestType": "Typ hosťa bol úspešne zmenený",
-  "SuccessChangeUserType": "Typ používateľa bol úspešne zmenený"
+  "SuccessChangeUserType": "Typ používateľa bol úspešne zmenený",
+  "ChangeContactType": "Zmeniť typ kontaktu",
+  "ChangeGuestsTypeToAdmin": "Hostiteľ <strong>{{userName}}</strong> bude presunutý do sekcie {{membersSection}} a pridelený typ <strong>'{{ secondType }}'</strong>. Administrátori {{productName}} môžu pristupovať k nastaveniam {{productName}}, spravovať a archivovať miestnosti, pozývať nových používateľov a prideľovať im role pod ich úrovňou. Administrátori {{productName}} majú prístup do sekcie {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Vybraní hostia budú presunutí do sekcie {{membersSection}} a pridelený im bude typ <strong>'{{ secondType }}'</strong>. Administrátori {{productName}} majú prístup k nastaveniam {{productName}}, spravujú a archivujú miestnosti, pozývajú nových používateľov a prideľujú im role pod ich úrovňou. Administrátori {{productName}} majú prístup do sekcie {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "Hostiteľ <strong>{{userName}}</strong> bude presunutý do sekcie {{membersSection}} a priradený typu <strong>'{{ secondType }}'</strong>. Administrátori miestností môžu vytvárať a spravovať pridelené miestnosti, pozývať nových používateľov a prideľovať role Administrátora miestnosti a nižšie. Administrátori miestností majú prístup do sekcie {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Vybraní hostia budú presunutí do sekcie {{membersSection}} a pridelený im bude typ <strong>'{{ secondType }}'</strong>. Administrátori miestností môžu vytvárať a spravovať pridelené miestnosti, pozývať nových používateľov a prideľovať role Administrátora miestnosti a nižšie. Administrátori miestností majú prístup do sekcie {{documentsSection}}.",
+  "ChangeUserTypeNote": "<1>Poznámka:</1> nemôžete zmeniť typ pre administrátora {{productName}} a pre seba.",
+  "DataReassignmentInfo": "Miesta vytvorené týmto používateľom budú automaticky pridelené vám. Ak chcete znova prideliť miestnosti inej osobe, kliknite na príslušný odkaz nižšie.",
+  "DataReassignmentWithFilesDeletion": "Všetky zdieľané súbory vytvorené týmto kontaktom budú <1>automaticky pridelené vám do 30 dní</1>. Ak chcete presunúť miestnosti/zdieľané súbory inej osobe, kliknite na príslušný odkaz nižšie.",
+  "PersonalDataDeletion": "Všetky súbory a priečinky v sekcii {{sectionName}} tohto kontaktu budú <1>trvale odstránené do 30 dní</1>."
 }

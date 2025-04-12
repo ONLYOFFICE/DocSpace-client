@@ -1,5 +1,7 @@
 {
   "ChangePricingPlan": "ປ່ຽນແປງ ລາຄາ ແຜນການ",
   "PlanStorageLimit": "ຂໍ້ຈຳກັດຂອງອັດຕາພາສີໃໝ່ແມ່ນ <1>{{storageValue}}</1> ຂອງບ່ອນຈັດເກັບຂໍ້ມູນ, ແລະການເກັບຮັກສາທີ່ໃຊ້ໃນປັດຈຸບັນຂອງທ່ານແມ່ນ <1>{{currentStorageValue}}</1>.",
-  "SaveOrChange": "ຫຼຸດພາລາມິເຕີທີ່ຕ້ອງການ ຫຼືຮັກສາແຜນລາຄາປັດຈຸບັນຂອງທ່ານ."
+  "SaveOrChange": "ຫຼຸດພາລາມິເຕີທີ່ຕ້ອງການ ຫຼືຮັກສາແຜນລາຄາປັດຈຸບັນຂອງທ່ານ.",
+  "CannotChangePlan": "Vi ne povas ŝanĝi vian planon ĉar la uzita stokspaco aŭ la nombro da administrantoj superas la limojn de la elektita plano:",
+  "PlanUsersLimit": "Želite da spuštete tim na <1>{{usersCount}}</1> administratora, a trenutni broj takvih korisnika u vašem {{productName}} je <1>{{currentUsersCount}}</1>."
 }

@@ -1,1 +1,15 @@
-{}
+{
+  "DescriptionUploading": "Kreirajte PDF obrasce u {{productName}}, npr. u vašem {{sectionName}}, i učitajte gotove obrasce u sobu. Iskoristite integrisanu biblioteku predložaka i izaberite među brojnim gotovim PDF šablonima.",
+  "HeaderComplete": "Pogodan/praktičan/zgodan (choose one based on context) analiziranje prikupljenih odgovora",
+  "HeaderSharing": "Brza deljenje",
+  "HeaderStarting": "Počinjemo proces popunjavanja obrasca",
+  "HeaderSubmitting": "Predajanje odgovora",
+  "HeaderUploading": "Lako učitavanje formulara",
+  "TitleComplete": "Proverite popunjene obrasce i automatski analizirajte podatke prikupljene u tabelu. Sve – u jednoj prostoriji. {field} {min} {max}",
+  "TitleSharing": "Pozovite druge članove {{productName}} u sobu da popune uložene PDF obrasce. Kopirajte javnu vezu za deljenje sobe sa spoljnim korisnicima.",
+  "TitleStarting": "Kada se formular otvori za popunjavanje, automatski se kreira individualna kopija za svakog učesnika i čuva se u folderu \"U toku\". To znači da je formular započet, ali još nije završen.",
+  "TitleSubmitting": "Čim se klikne dugme Kompletiraj & Pošalji u otvorenim formularima, ono se premešta u folder Kompletirano.",
+  "WelcomeDescription": "Ovde možete organizovati jednostavno popunjavanje PDF formulara, lako prikupljati i analizirati odgovore. Spremni da počnete?",
+  "WelcomeFillingForm": "Добро долаке у Соби за попуњавање формулара!",
+  "WelcomeStartTutorial": "Uzmite kratku turu"
+}

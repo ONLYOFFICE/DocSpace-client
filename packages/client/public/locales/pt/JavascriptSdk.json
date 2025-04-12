@@ -108,5 +108,14 @@
   "SubtitleDescription": "Legenda com comentários ou descrições adicionais para o diretório atual.",
   "TabPlugins": "Plug-ins de guias",
   "Viewer": "Visualizador",
-  "ViewerDescription": "Incorpore um visualizador para permitir que os usuários abram um arquivo para visualização na sala correspondente."
+  "ViewerDescription": "Incorpore um visualizador para permitir que os usuários abram um arquivo para visualização na sala correspondente.",
+  "NPMCodeConfigStep": "Crie objeto de configuração com os parâmetros necessários:",
+  "NPMCodeCreateStep": "Crie um elemento HTML com id de {config} e insira-o dentro do corpo do documento para posicionar a moldura do SDK:",
+  "NPMCodeDescription": "Descrição do pacote NPM",
+  "NPMCodeImportStep": "Importe o pacote no seu projeto:",
+  "NPMCodeInitStep": "Inicializar SDK:",
+  "NPMCodeInstallStep": "Instale o pacote do npm e salve-o no arquivo package.json com --{save}:",
+  "NPMCodeUsageStep": "Use SDK init method to create SDK frame: Utilize o método de inicialização do SDK para criar o frame do SDK.",
+  "SdkPackageVersionInfo": "Para conectar como versão do pacote sempre a mais recente",
+  "SourceType": "Tipo de conexão"
 }

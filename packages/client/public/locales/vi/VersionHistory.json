@@ -1,4 +1,6 @@
 {
   "EditComment": "Chỉnh sửa nhận xét",
-  "Version": "Bản"
+  "Version": "Bản",
+  "DeleteVersion": "Slett versjon",
+  "DeleteVersionDescription": "Du er i ferd med å slette en filversjon. Det vil ikke være mulig å se eller gjenopprette den igjen. Er du sikker på at du vil fortsette?"
 }

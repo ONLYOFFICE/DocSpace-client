@@ -34,5 +34,8 @@
   "SuccessDeletePersonalData": "Personas dati ir veiksmīgi izdzēsti",
   "SuccessSentInvitation": "Uzaicinājums tika veiksmīgi nosūtīts",
   "SuccessSentMultipleInvitatios": "Uzaicinājumi tika veiksmīgi nosūtīti",
-  "WithoutGroup": "Bez grupas"
+  "WithoutGroup": "Bez grupas",
+  "MembersCount": "locekļi: {{count}}",
+  "ShareGuest": "Kopīgo viesi",
+  "SuccessCopyContantLink": "Kontakta saite veiksmīgi kopēta. Saite ir <strong>valid for 7 days.</strong>"
 }

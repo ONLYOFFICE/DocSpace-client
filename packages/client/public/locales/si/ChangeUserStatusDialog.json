@@ -7,5 +7,14 @@
   "EnableUser": "සබල කරන්න",
   "EnableUserDescription": "ඔබ මෙම පරිශ්‍රීලකයා සබල කළහොත්, ඔහුට/ඇයට නැවත {{productName}} වෙත ඇතුළු වී ලේඛන සහ දත්ත වෙත ප්‍රවේශ වීමට හැකි වනු ඇත.",
   "EnableUsers": "පරිශ්‍රීලකයින් සබල කරන්න",
-  "EnableUsersDescription": "ඔබ මෙම පරිශ්‍රීලකයින් සබල කළහොත්, නැවත {{productName}} වෙත ඇතුළු වී ඔවුන්ගේ ලේඛන සහ දත්ත වෙත ප්‍රවේශ වීමට හැකි වනු ඇත."
+  "EnableUsersDescription": "ඔබ මෙම පරිශ්‍රීලකයින් සබල කළහොත්, නැවත {{productName}} වෙත ඇතුළු වී ඔවුන්ගේ ලේඛන සහ දත්ත වෙත ප්‍රවේශ වීමට හැකි වනු ඇත.",
+  "DisableGuest": "मेहमान अक्षम करा",
+  "DisableGuestDescription": "जर तुम्ही हा अतिथी अक्षम केला, तर ते {{productName}} मध्ये लॉग इन करू शकणार नाहीत.",
+  "DisableGuests": "অতিথிகளை নিষ্ক্রিয় করুন",
+  "DisableGuestsDescription": "जर तुम्ही हे अतिथी अक्षम केले, तर ते {{productName}} मध्ये लॉग इन करू शकणार नाहीत.",
+  "DisableGuestsGeneralDescription": "तुम्ही नंतर अक्षम केलेल्या पाहुण्यांना आवश्यक असल्यास हटवू किंवा सक्षम करू शकता.",
+  "EnableGuest": " अतिथी सक्षम करा",
+  "EnableGuestDescription": "जर तुम्ही हा अतिथी सक्षम केला, तर ते {{productName}} मध्ये पुन्हा लॉग इन करू शकतील.",
+  "EnableGuests": "मेहमान सक्षम करा",
+  "EnableGuestsDescription": "जर तुम्ही हे अतिथी सक्षम केले, तर ते {{productName}} मध्ये पुन्हा लॉग इन करू शकतील."
 }

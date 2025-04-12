@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "Məlumatı başqa istifadəçiyə təyin edin",
   "SuccessfullyDeleteGuestInfoMessage": "Qonaq uğurla silindi",
   "SuccessfullyDeleteUserInfoMessage": "İstifadəçi müvəffəqiyyətlə silinmişdir",
-  "ToBeAbleToReassignData": "Məlumatı yenidən təyin etmək üçün bir istifadəçini silin."
+  "ToBeAbleToReassignData": "Məlumatı yenidən təyin etmək üçün bir istifadəçini silin.",
+  "PersonalDataDeletionInfo": "Şəxsi məlumatlar, seçilmiş istifadəçilərin {{sectionNameFirst}} və {{sectionNameSecond}} bölmələri daxilində olan bütün şəxsi fayllar və qovşular daimi olaraq silinəcək. Otaqlar kimi ümumi bölmələrdə saxlanılan seçilmiş istifadəçilərin faylları və qovşuları {{productName}} proqramında qalacaq.",
+  "UserFilesRemovalScope": "Bu istifadəçinin {{sectionNameFirst}} və {{sectionNameSecond}} bölmələrindəki bütün şəxsi məlumatlar, fayllar və qovluclar daimi olaraq silinəcək."
 }

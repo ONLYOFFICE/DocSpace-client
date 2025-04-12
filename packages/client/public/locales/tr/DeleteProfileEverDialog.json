@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "Verileri başka bir kullanıcıya yeniden ata",
   "SuccessfullyDeleteGuestInfoMessage": "Konuk başarıyla silindi",
   "SuccessfullyDeleteUserInfoMessage": "Kullanıcı başarıyla silindi",
-  "ToBeAbleToReassignData": "Verileri yeniden atayabilmek için her seferinde sadece bir kullanıcıyı silin."
+  "ToBeAbleToReassignData": "Verileri yeniden atayabilmek için her seferinde sadece bir kullanıcıyı silin.",
+  "PersonalDataDeletionInfo": "Kişisel veriler, seçilen kullanıcıların {{sectionNameFirst}} ve {{sectionNameSecond}} bölümlerindeki tüm kişisel dosyalar ve klasörler kalıcı olarak silinecektir. Odalar gibi ortak bölümlerde tutulan seçilen kullanıcıların dosyaları ve klasörleri {{productName}} içinde kalacaktır.",
+  "UserFilesRemovalScope": "Kişisel veriler, bu kullanıcıya ait {{sectionNameFirst}} ve {{sectionNameSecond}} bölümlerindeki tüm dosyalar ve klasörler kalıcı olarak silinecektir."
 }

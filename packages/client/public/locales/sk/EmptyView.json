@@ -44,5 +44,8 @@
   "UploadDevicePDFFormOptionTitle": "Nahrať zo zariadenia",
   "UploadFromPortalTitle": "Nahrať z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte pripravený PDF formulár dostupný v {{productName}} a nahrajte ho do miestnosti.",
-  "VirtualDataRoomEmptyTitle": "Vitajte vo Virtuálnej dátovej miestnosti"
+  "VirtualDataRoomEmptyTitle": "Vitajte vo Virtuálnej dátovej miestnosti",
+  "EmptyTemplatesDescription": "Vytvoriť šablónu môžete z miestnosti v sekcii Miestnosti.",
+  "EmptyTemplatesTitle": "Zatiaľ tu nie sú žiadne šablóny.",
+  "SectionsUploadDescription": "Upload any type files from {{sectionNameFirst}} alebo {{sectionNameSecond}}"
 }

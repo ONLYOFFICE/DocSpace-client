@@ -108,5 +108,14 @@
   "SubtitleDescription": "Phụ đề với nhận xét hoặc mô tả bổ sung cho thư mục hiện tại.",
   "TabPlugins": "Tab Plugins",
   "Viewer": "Trình xem",
-  "ViewerDescription": "Nhúng trình xem để cho phép người dùng mở tập tin để xem từ phòng tương ứng."
+  "ViewerDescription": "Nhúng trình xem để cho phép người dùng mở tập tin để xem từ phòng tương ứng.",
+  "NPMCodeConfigStep": "Opprett konfigurasjonsobjekt med nødvendige parametere: {field}, {min}, {max}",
+  "NPMCodeCreateStep": "Opprett HTML-element med id fra konfigurasjon og sett det inn i dokumentets brødtekst for å plassere SDK-ramme: {field}, {min}, {max}",
+  "NPMCodeDescription": "NPM-pakke beskrivelse",
+  "NPMCodeImportStep": "Importer pakken i prosjektet ditt:",
+  "NPMCodeInitStep": "Initialiser SDK:",
+  "NPMCodeInstallStep": "Installer pakken fra npm og lagre den i package.json-filen med --{save}:",
+  "NPMCodeUsageStep": "Bruk SDK-initialiseringsmetoden for å opprette SDK-rammeverk: {field} mellom {min} og {max}.",
+  "SdkPackageVersionInfo": "For å koble til som pakkeversjon alltid siste {version}.",
+  "SourceType": "Koblingstype"
 }

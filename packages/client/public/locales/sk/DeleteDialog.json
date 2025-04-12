@@ -14,5 +14,7 @@
   "MoveToTrashButton": "Presunúť do koša",
   "UnsubscribeButton": "Zrušiť odber",
   "UnsubscribeNote": "Naozaj sa chcete odhlásiť z odberu vybratých položiek zo zoznamu?",
-  "UnsubscribeTitle": "Potvrdenie zrušenia odberu"
+  "UnsubscribeTitle": "Potvrdenie zrušenia odberu",
+  "DeleteTemplate": "Skutočne chcete zmazať šablónu miestnosti <1>«{{templateName}}»</1>? Šablónu nie je možné obnoviť.",
+  "DeleteTemplates": "Skutočne chcete zmazať vybrané šablóny miestností? Nedajú sa obnoviť."
 }

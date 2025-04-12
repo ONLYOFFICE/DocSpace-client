@@ -1,4 +1,5 @@
 {
   "DisconnectCloudTitle": "Від’єднати хмару",
-  "SuccessDeleteThirdParty": "Сторонню службу {{service}} видалено"
+  "SuccessDeleteThirdParty": "Сторонню службу {{service}} видалено",
+  "ThirdPartyDisconnectPrompt": "Ви впевнені, що хочете видалити {{service}}? Це не вплине на ваш обліковий запис {{account}} ніяким чином."
 }

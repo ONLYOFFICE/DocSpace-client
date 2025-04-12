@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "Siirrä tiedot toiselle käyttäjälle",
   "SuccessfullyDeleteGuestInfoMessage": "Vieras on onnistuneesti poistettu",
   "SuccessfullyDeleteUserInfoMessage": "Käyttäjä on poistettu onnistuneesti",
-  "ToBeAbleToReassignData": "Poista yksi käyttäjä kerrallaan voidaksesi siirtää tietoja."
+  "ToBeAbleToReassignData": "Poista yksi käyttäjä kerrallaan voidaksesi siirtää tietoja.",
+  "PersonalDataDeletionInfo": "Henkilötiedot, kaikki henkilökohtaiset tiedostot ja kansiot valittujen käyttäjien {{sectionNameFirst}} ja {{sectionNameSecond}} -osioissa* poistetaan pysyvästi. Valittujen käyttäjien tiedostot ja kansiot, jotka sijaitsevat yhteisissä osioissa* kuten huoneissa, pysyvät {{productName}}-palvelussa.",
+  "UserFilesRemovalScope": "Henkilötiedot sekä kaikki tiedostot ja kansiot tämän käyttäjän {{sectionNameFirst}} ja {{sectionNameSecond}} -osioissa poistetaan pysyvästi."
 }

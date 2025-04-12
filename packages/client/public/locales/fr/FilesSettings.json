@@ -2,5 +2,6 @@
   "DisplayFileExtension": "Afficher l'extension du fichier à côté du nom du fichier",
   "DisplayNotification": "Afficher une notification lors du déplacement d'éléments vers la corbeille",
   "OpenSameTab": "Ouvrir l'éditeur {{organizationName}} dans le même onglet",
-  "OriginalCopy": "Sauvegarder également la copie du fichier dans le format original."
+  "OriginalCopy": "Sauvegarder également la copie du fichier dans le format original.",
+  "CancellaionNotification": "Ne pas afficher à nouveau la notification d'annulation"
 }

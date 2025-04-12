@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "Atkārtoti piešķirt datus citam lietotājam",
   "SuccessfullyDeleteGuestInfoMessage": "Viesis ir veiksmīgi izdzēsts",
   "SuccessfullyDeleteUserInfoMessage": "Lietotājs ir veiksmīgi izdzēsts",
-  "ToBeAbleToReassignData": "Lai varētu atkārtoti piešķirt datus, vienlaikus izdzēsiet vienu lietotāju."
+  "ToBeAbleToReassignData": "Lai varētu atkārtoti piešķirt datus, vienlaikus izdzēsiet vienu lietotāju.",
+  "PersonalDataDeletionInfo": "Personīgie dati, visi personīgie faili un mapes {{sectionNameFirst}} un {{sectionNameSecond}} sadaļās* izvēlēto lietotāju sadaļās tiks pastāvīgi dzēsti. Izvēlēto lietotāju faili un mapes, kas atrodas kopīgās sadaļās* , piemēram, telpās, paliks {{productName}}.",
+  "UserFilesRemovalScope": "Personīgie dati, visi faili un mapes {{sectionNameFirst}} un {{sectionNameSecond}} sadaļās šī lietotāja tiks pastāvīgi dzēsti."
 }

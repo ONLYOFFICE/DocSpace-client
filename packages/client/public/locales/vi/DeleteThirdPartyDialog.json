@@ -1,4 +1,5 @@
 {
   "DisconnectCloudTitle": "Ngắt kết nối đám mây",
-  "SuccessDeleteThirdParty": "{{service}} bên thứ ba đã bị xóa"
+  "SuccessDeleteThirdParty": "{{service}} bên thứ ba đã bị xóa",
+  "ThirdPartyDisconnectPrompt": "Er du sikker på at du vil fjerne {{service}}? Dette vil ikke påvirke din {{account}} konto på noen måte."
 }

@@ -2,5 +2,6 @@
   "DisplayFileExtension": "Wyświetlaj rozszerzenie pliku obok nazwy pliku",
   "DisplayNotification": "Wyświetlaj powiadomienia podczas przenoszenia elementów do kosza",
   "OpenSameTab": "Otwórz edytor {{organizationName}} w tej samej karcie",
-  "OriginalCopy": "Zapisuj również kopię pliku w oryginalnym formacie"
+  "OriginalCopy": "Zapisuj również kopię pliku w oryginalnym formacie",
+  "CancellaionNotification": "Nie wyświetlaj ponownie powiadomienia o anulowaniu"
 }

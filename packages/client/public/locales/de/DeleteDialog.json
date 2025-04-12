@@ -14,5 +14,7 @@
   "MoveToTrashButton": "In den Papierkorb verschieben",
   "UnsubscribeButton": "Abbestellen",
   "UnsubscribeNote": "Sind Sie sicher, dass Sie die ausgewählten Elemente aus der Liste abbestellen möchten?",
-  "UnsubscribeTitle": "Abbestellungsbestätigung"
+  "UnsubscribeTitle": "Abbestellungsbestätigung",
+  "DeleteTemplate": "Möchten Sie das Template-Raum <1>«{{templateName}}»</1> wirklich löschen? Das Template kann nicht wiederhergestellt werden.",
+  "DeleteTemplates": "Möchten Sie die ausgewählten Raumvorlagen wirklich löschen? Sie können nicht wiederhergestellt werden."
 }

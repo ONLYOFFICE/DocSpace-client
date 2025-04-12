@@ -1,5 +1,7 @@
 {
   "CancelUpload": "تمت مقاطعة الرفع. لم يتم رفع بعض الملفات.",
   "HideInput": "اخفاء",
-  "Ready": "تم"
+  "Ready": "تم",
+  "UploadingAndConversion": "التحميل والتحويل",
+  "UploadingError": "خطأ في التحميل"
 }

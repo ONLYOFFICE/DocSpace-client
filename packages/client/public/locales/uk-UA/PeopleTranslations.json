@@ -34,5 +34,8 @@
   "SuccessDeletePersonalData": "Персональні дані успішно видалено",
   "SuccessSentInvitation": "Запрошення успішно відправлено",
   "SuccessSentMultipleInvitatios": "Запрошення успішно надіслані",
-  "WithoutGroup": "Без групи"
+  "WithoutGroup": "Без групи",
+  "MembersCount": "члени: {{count}}",
+  "ShareGuest": "Поділитися гостем",
+  "SuccessCopyContantLink": "Посилання для зв'язку скопійовано успішно. Посилання дійсне протягом {7} днів. {strong}"
 }

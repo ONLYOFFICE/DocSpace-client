@@ -108,5 +108,14 @@
   "SubtitleDescription": "Subtitlu cu comentarii sau descrierea suplimentară pentru repertoriul  actual.",
   "TabPlugins": "Fila Plugin-uri",
   "Viewer": "Vizualizator",
-  "ViewerDescription": "Incorporează vizualizator pentru a permite utilizatorilor să deschide fișierul în vizualizare dintr-o anumită sală."
+  "ViewerDescription": "Incorporează vizualizator pentru a permite utilizatorilor să deschide fișierul în vizualizare dintr-o anumită sală.",
+  "NPMCodeConfigStep": "Creează obiect de configurare cu parametrii necesari:",
+  "NPMCodeCreateStep": "Creează element HTML cu id din configurație și inserează-l în corpul documentului pentru a plasa cadrul SDK: {field}, {min}, {max}.",
+  "NPMCodeDescription": "Descrierea pachetului NPM",
+  "NPMCodeImportStep": "Importă pachetul în proiectul tău:",
+  "NPMCodeInitStep": "Inițializare SDK:",
+  "NPMCodeInstallStep": "Instalează pachetul din npm și salvează-l în fișierul package.json cu --{save}:",
+  "NPMCodeUsageStep": "Folosește metoda de inițializare SDK pentru a crea cadrul SDK: {SDK}.",
+  "SdkPackageVersionInfo": "Pentru conectare ca versiune pachet, întotdeauna cea mai recentă.",
+  "SourceType": "Tip de conexiune"
 }

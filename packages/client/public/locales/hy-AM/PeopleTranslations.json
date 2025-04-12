@@ -34,5 +34,8 @@
   "SuccessDeletePersonalData": "Անձնական տվյալները հաջողությամբ ջնջվել են",
   "SuccessSentInvitation": "Հրավերը հաջողությամբ ուղարկվեց",
   "SuccessSentMultipleInvitatios": "Հրավերները հաջողությամբ ուղարկվեցին",
-  "WithoutGroup": "Առանց խմբի"
+  "WithoutGroup": "Առանց խմբի",
+  "MembersCount": "անդամներ: {{count}}",
+  "ShareGuest": "Հյուրընկերոջ մասնաբաժանել",
+  "SuccessCopyContantLink": "Հետագծման հղումը հաջողությամբ է պատճենվել։ Հղումը {valid} է 7 օրով։"
 }

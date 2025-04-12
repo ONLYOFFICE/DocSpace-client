@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "Réaffecter des données à un autre utilisateur",
   "SuccessfullyDeleteGuestInfoMessage": "L'invité a été supprimé avec succès",
   "SuccessfullyDeleteUserInfoMessage": "L'utilisateur a été supprimé avec succès",
-  "ToBeAbleToReassignData": "Pour pouvoir réaffecter les données, supprimez un utilisateur à la fois."
+  "ToBeAbleToReassignData": "Pour pouvoir réaffecter les données, supprimez un utilisateur à la fois.",
+  "PersonalDataDeletionInfo": "Les données personnelles, tous les fichiers et dossiers personnels dans les sections {{sectionNameFirst}} et {{sectionNameSecond}}* des utilisateurs sélectionnés seront supprimés définitivement. Les fichiers et dossiers des utilisateurs sélectionnés conservés dans des sections communes* telles que des salles resteront dans {{productName}}.",
+  "UserFilesRemovalScope": "Les données personnelles, tous les fichiers et dossiers dans les sections {{sectionNameFirst}} et {{sectionNameSecond}} de cet utilisateur seront supprimés définitivement."
 }

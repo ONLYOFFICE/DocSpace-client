@@ -108,5 +108,14 @@
   "SubtitleDescription": "現在のディレクトリに関するコメントや説明を追加したサブタイトル。",
   "TabPlugins": "「プラグイン」タブ",
   "Viewer": "ビューア",
-  "ViewerDescription": "ビューアを埋め込み、対応するルームからファイルを開いて閲覧できるようにします。"
+  "ViewerDescription": "ビューアを埋め込み、対応するルームからファイルを開いて閲覧できるようにします。",
+  "NPMCodeConfigStep": "必要なパラメータで設定オブジェクトを作成します: {field} {min} {max}",
+  "NPMCodeCreateStep": "設定からID {id} を取得してHTML要素を作成し、SDKフレームを配置するためにドキュメントボディ内に挿入します。{min}から{max}の間で調整可能です。",
+  "NPMCodeDescription": "NPMパッケージの説明",
+  "NPMCodeImportStep": "プロジェクトにパッケージをインポートしてください。",
+  "NPMCodeInitStep": "SDKの初期化:",
+  "NPMCodeInstallStep": "npm からパッケージをインストールし、--save オプションで package.json ファイルに保存します。{field} {min} {max}",
+  "NPMCodeUsageStep": "SDKの初期化メソッドを使用してSDKフレームを作成します: {field}。{min}から{max}の範囲で設定してください。",
+  "SdkPackageVersionInfo": "パッケージのバージョンとして常に最新のものを接続します。{field} {min} から {max}。",
+  "SourceType": "接続タイプ"
 }

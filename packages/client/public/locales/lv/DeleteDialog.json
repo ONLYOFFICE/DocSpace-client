@@ -14,5 +14,7 @@
   "MoveToTrashButton": "Pārvietot uz miskasti",
   "UnsubscribeButton": "Anulēt abonementu",
   "UnsubscribeNote": "Vai tiešām vēlaties atteikties no sarakstā atlasīto vienumu abonēšanas?",
-  "UnsubscribeTitle": "Abonēšanas atcelšanas apstiprinājums"
+  "UnsubscribeTitle": "Abonēšanas atcelšanas apstiprinājums",
+  "DeleteTemplate": "Vai tiešām vēlaties dzēst veidni istabai <1>«{{templateName}}»</1>? Veidni nevar atjaunot.",
+  "DeleteTemplates": "Vai tiešām vēlaties dzēst atlasītos telpu veidņus? Tos nevar atjaunot."
 }

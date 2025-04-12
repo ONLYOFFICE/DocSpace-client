@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "Reasignar datos a otro usuario",
   "SuccessfullyDeleteGuestInfoMessage": "El invitado se ha eliminado correctamente",
   "SuccessfullyDeleteUserInfoMessage": "El usuario se ha eliminado correctamente",
-  "ToBeAbleToReassignData": "Para poder reasignar datos, elimine un usuario cada vez."
+  "ToBeAbleToReassignData": "Para poder reasignar datos, elimine un usuario cada vez.",
+  "PersonalDataDeletionInfo": "Datos personales, todos los archivos y carpetas personales en las secciones {{sectionNameFirst}} y {{sectionNameSecond}}* de los usuarios seleccionados se eliminarán permanentemente. Los archivos y carpetas de los usuarios seleccionados que se mantengan en secciones comunes* como habitaciones permanecerán en {{productName}}.",
+  "UserFilesRemovalScope": "Datos personales, todos los archivos y carpetas en las secciones {{sectionNameFirst}} y {{sectionNameSecond}} de este usuario se eliminarán permanentemente."
 }

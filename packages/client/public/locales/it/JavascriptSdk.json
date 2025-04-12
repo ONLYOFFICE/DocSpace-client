@@ -108,5 +108,14 @@
   "SubtitleDescription": "Sottotitolo con commenti o descrizioni aggiuntivi per la directory corrente.",
   "TabPlugins": "Scheda dei plugin",
   "Viewer": "Visualizzatore",
-  "ViewerDescription": "Incorpora un visualizzatore per consentire agli utenti di aprire un file per visualizzarlo dalla stanza corrispondente."
+  "ViewerDescription": "Incorpora un visualizzatore per consentire agli utenti di aprire un file per visualizzarlo dalla stanza corrispondente.",
+  "NPMCodeConfigStep": "Crea oggetto di configurazione con i parametri richiesti:",
+  "NPMCodeCreateStep": "Crea un elemento HTML con id da {config} e inseriscilo all'interno del corpo del documento per posizionare il frame SDK:",
+  "NPMCodeDescription": "Descrizione del pacchetto NPM",
+  "NPMCodeImportStep": "Importa il pacchetto nel tuo progetto:",
+  "NPMCodeInitStep": "Inizializza SDK:",
+  "NPMCodeInstallStep": "Installa il pacchetto da npm e salvalo nel file package.json con --save: {package.json}.",
+  "NPMCodeUsageStep": "Utilizza il metodo di inizializzazione SDK per creare il framework SDK: {field}, {min}, {max}.",
+  "SdkPackageVersionInfo": "Per connettersi come versione pacchetto sempre {latest}",
+  "SourceType": "Tipo di connessione"
 }

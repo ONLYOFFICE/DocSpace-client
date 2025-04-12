@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "Gegevens opnieuw toewijzen aan een andere gebruiker",
   "SuccessfullyDeleteGuestInfoMessage": "De gast is succesvol verwijderd",
   "SuccessfullyDeleteUserInfoMessage": "De gebruiker is met succes verwijderd",
-  "ToBeAbleToReassignData": "Verwijder één gebruiker per keer om gegevens opnieuw te kunnen toewijzen."
+  "ToBeAbleToReassignData": "Verwijder één gebruiker per keer om gegevens opnieuw te kunnen toewijzen.",
+  "PersonalDataDeletionInfo": "Persoonsgegevens, alle persoonlijke bestanden en mappen in de {{sectionNameFirst}} en {{sectionNameSecond}} secties* van de geselecteerde gebruikers worden permanent verwijderd. Bestanden en mappen van de geselecteerde gebruikers die in gemeenschappelijke secties* zoals kamers worden bewaard, blijven in {{productName}}.",
+  "UserFilesRemovalScope": "Persoonsgegevens, alle bestanden en mappen in de {{sectionNameFirst}} en {{sectionNameSecond}} secties van deze gebruiker worden permanent verwijderd."
 }

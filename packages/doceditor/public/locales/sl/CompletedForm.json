@@ -8,5 +8,16 @@
   "FormCompletedSuccessfully": "Obrazec je izpolnjen",
   "FormNumber": "Številka obrazca",
   "FormOwner": "Lastnik obrazca",
-  "Title": "Obrazec je izpolnjen"
+  "Title": "Obrazec je izpolnjen",
+  "FillOutForm": "Izpolnite obrazec",
+  "FormFinalized": "Obrazec je končan",
+  "FormSectionCompleted": "Dokument je izpolnjen",
+  "FormVDRCompletedDescription": "Obrazec je bil popolnoma izpolnjen s strani vseh vlog in je zdaj dokončan. Na voljo je v načinu samo za ogled.",
+  "FormVDRConfirmationOfStartDescription": "Obvestilo je že bilo poslanega uporabniku v prvi vlogi, ki ga poziva k izpolnitvi obrazca. Lahko se pomaknete do sobe ali delite povezavo za izpolnjevanje s sodelujočimi.",
+  "FormVDRConfirmationOfStartTitle": "Obrazec je pripravljen za izpolnitev v sobi.",
+  "FormVDRSectionCompletedDescription": "Dodeljeni del obrazca PDF je bil uspešno izpolnjen. Stanje izpolnjevanja obrazca je mogoče spremljati v prostoru in preko plošče za stanje izpolnjevanja. E-poštno obvestilo bo poslan, ko bo obrazec popolnoma izpolnjen.",
+  "FormVDRYourTurnDescription": "Vi ste dodeljen/a za izpolnjevanje obrazca v vlogi. Obvestilo je bilo poslan/a na vaš e-poštni naslov. Lahko ga začnete izpolnjevati zdaj ali pa kopirate povezavo za izpolnjevanje in se vrnete kasneje.",
+  "LinkToFillOutForm": "Povezava za izpolnitev obrazca: {Link}",
+  "LinkToForm": "Povezava do obrazca:",
+  "LinkToViewOnlyForm": "Povezava do obrazca za ogled le:"
 }

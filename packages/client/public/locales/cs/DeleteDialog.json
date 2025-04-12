@@ -14,5 +14,7 @@
   "MoveToTrashButton": "Přesunout do koše",
   "UnsubscribeButton": "Zrušit odběr",
   "UnsubscribeNote": "Určitě chcete zrušit odběr vybraných položek ze seznamu?",
-  "UnsubscribeTitle": "Potvrzení o odhlášení"
+  "UnsubscribeTitle": "Potvrzení o odhlášení",
+  "DeleteTemplate": "Opravdu chcete smazat šablonu místnosti <1>«{{templateName}}»</1>? Šablona nemůže být obnovena.",
+  "DeleteTemplates": "Opravdu chcete smazat vybrané šablony pokojů? Nelze je obnovit."
 }

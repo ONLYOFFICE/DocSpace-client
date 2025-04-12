@@ -7,5 +7,7 @@
   "License": "ຍອມຮັບເງື່ອນໄຂຂອງ",
   "LicenseLink": "ຂໍ້ຕົກລົງການອະນຸຍາດ",
   "PlaceholderLicense": "ຟາຍໃບອະນຍາດຂອງທ່ານ",
-  "Timezone": "ເຂດເວລາ:"
+  "Timezone": "ເຂດເວລາ:",
+  "ErrorInstanceId": "Neveljavna identifikacijska številka instance {instance_id}",
+  "WelcomeTitle": "Dobrodošli v vašem {{productName}}!"
 }

@@ -4,5 +4,14 @@
   "ChangeUserTypeButton": "Cambiar tipo",
   "ChangeUserTypeMessage": "Los usuarios con el tipo <strong>'{{ firstType }}'</strong> serán movidos al tipo <strong>'{{ secondType }}'</strong>.",
   "SuccessChangeGuestType": "El tipo de invitado se ha cambiado correctamente",
-  "SuccessChangeUserType": "Se ha cambiado el tipo de usuario correctamente"
+  "SuccessChangeUserType": "Se ha cambiado el tipo de usuario correctamente",
+  "ChangeContactType": "Cambiar tipo de contacto",
+  "ChangeGuestsTypeToAdmin": "El invitado <strong>{{userName}}</strong> será movido a la sección {{membersSection}} y se le asignará el tipo <strong>'{{ secondType }}'</strong>. Los administradores de {{productName}} pueden acceder a la configuración de {{productName}}, administrar y archivar habitaciones, invitar a nuevos usuarios y asignar roles por debajo de su nivel. Los administradores de {{productName}} tienen acceso a la sección {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Los invitados seleccionados se moverán a la sección {{membersSection}} y se les asignará el tipo <strong>'{{ secondType }}'</strong>. Los administradores de {{productName}} pueden acceder a la configuración de {{productName}}, administrar y archivar habitaciones, invitar a nuevos usuarios y asignar roles por debajo de su nivel. Los administradores de {{productName}} tienen acceso a la sección {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "El invitado <strong>{{userName}}</strong> será movido a la sección {{membersSection}} y se le asignará el tipo <strong>'{{ secondType }}'</strong>. Los administradores de la sala pueden crear y administrar las salas asignadas, invitar a nuevos usuarios y asignar roles de administrador de la sala y niveles inferiores. Los administradores de la sala tienen acceso a la sección {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Los invitados seleccionados se moverán a la sección {{membersSection}} y se les asignará el tipo <strong>'{{ secondType }}'</strong>. Los administradores de la sala pueden crear y administrar las salas asignadas, invitar a nuevos usuarios y asignar roles de administrador de la sala y niveles inferiores. Los administradores de la sala tienen acceso a la sección {{documentsSection}}.",
+  "ChangeUserTypeNote": "<1>Nota:</1> no puede cambiar el tipo para el {{productName}} administrador y para usted.",
+  "DataReassignmentInfo": "Las habitaciones creadas por este usuario se asignarán automáticamente a usted. Para reasignar las habitaciones a otra persona, haga clic en el enlace correspondiente a continuación.",
+  "DataReassignmentWithFilesDeletion": "Todos los archivos compartidos creados por este contacto se asignarán <1>automáticamente a usted en 30 días</1>. Para reasignar las habitaciones/archivos compartidos a otra persona, haga clic en el enlace correspondiente a continuación.",
+  "PersonalDataDeletion": "Todos los archivos y carpetas en la sección {{sectionName}} de este contacto se eliminarán <1>permanentemente en 30 días</1>."
 }

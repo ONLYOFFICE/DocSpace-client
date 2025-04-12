@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "Poista pysyvästi",
-  "DeleteForeverTitle": "Poistetaanko pysyvästi?"
+  "DeleteForeverTitle": "Poistetaanko pysyvästi?",
+  "DeleteForeverNote": "Kaikki kohteet {{sectionName}} -osiosta poistetaan pysyvästi. Et voi palauttaa niitä.",
+  "SuccessEmptyAction": "{{sectionName}} tyhjennetty"
 }

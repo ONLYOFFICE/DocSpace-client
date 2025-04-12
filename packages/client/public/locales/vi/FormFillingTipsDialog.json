@@ -1,1 +1,15 @@
-{}
+{
+  "DescriptionUploading": "Opprett PDF-skjemaer i {{productName}}, f.eks. i din {{sectionName}}, og last opp de ferdige skjemaene til rommet. Benytt deg av det integrerte malbiblioteket og velg blant mange ferdige PDF-maler.",
+  "HeaderComplete": "Praktisk analyse av innsamlede svar",
+  "HeaderSharing": "Rask deling",
+  "HeaderStarting": "Starterer prosessen med å fylle ut skjemaet",
+  "HeaderSubmitting": "Innlevering av svar",
+  "HeaderUploading": "Enkel filopplasting",
+  "TitleComplete": "Sjekk de utfylte skjemaene og analyser data automatisk samlet inn i et regneark. Alt – innenfor ett rom.",
+  "TitleSharing": "Inviter andre {{productName}} medlemmer til rommet for å fylle ut de lastede PDF-skjemaene. Kopier en offentlig tilgangslink for å dele rommet med eksterne brukere.",
+  "TitleStarting": "Når et skjema åpnes for utfylling, opprettes det automatisk en individuell kopi for hver deltaker og lagres i Mappen «Pågående». Det betyr at skjemaet er startet, men ikke fullført ennå.",
+  "TitleSubmitting": "Når «Fullfør og send inn»-knappen klikkes i det åpne skjemaet, flyttes det til «Fullført»-mappen.",
+  "WelcomeDescription": "Her kan du organisere PDF-skjemautfylling på en enkel måte, enkelt samle inn og analysere svar. Klar til å komme i gang?",
+  "WelcomeFillingForm": "Velkommen til skjemautfyllingsrommet!",
+  "WelcomeStartTutorial": "Ta en kort omvisning"
+}

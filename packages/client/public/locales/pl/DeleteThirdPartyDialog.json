@@ -1,4 +1,5 @@
 {
   "DisconnectCloudTitle": "Odłącz chmurę",
-  "SuccessDeleteThirdParty": "Usługa strony trzeciej – {{service}} została usunięta"
+  "SuccessDeleteThirdParty": "Usługa strony trzeciej – {{service}} została usunięta",
+  "ThirdPartyDisconnectPrompt": "Czy na pewno chcesz usunąć {{service}}? To nie wpłynie na Twoje konto {{account}} w żaden sposób."
 }

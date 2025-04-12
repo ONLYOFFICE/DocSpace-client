@@ -8,5 +8,16 @@
   "FormCompletedSuccessfully": "Formulár je vyplnený",
   "FormNumber": "Číslo formulára",
   "FormOwner": "Vlastník formulára",
-  "Title": "Formulár je vyplnený"
+  "Title": "Formulár je vyplnený",
+  "FillOutForm": "Vyplňte formulár",
+  "FormFinalized": "Finálny formulár",
+  "FormSectionCompleted": "Vyplnená sekcia formulára",
+  "FormVDRCompletedDescription": "Všetky role vyplnili formulár úplne a je teraz dokončený. Je dostupný v režime len na čítanie.",
+  "FormVDRConfirmationOfStartDescription": "Užívateľovi v prvej úlohe už bola odoslaná notifikácia, ktorá ho vyzýva vyplniť formulár. Môžete sa presunúť do miestnosti alebo zdieľať odkaz na vyplnenie s účastníkmi.",
+  "FormVDRConfirmationOfStartTitle": "Formulár je pripravený na vyplnenie v miestnosti.",
+  "FormVDRSectionCompletedDescription": "Pridelená časť PDF formulára bola úspešne vyplnená. Stav vyplnenia formulára je možné sledovať v miestnosti a cez panel stavu vyplnenia. Emailové upozornenie bude odoslané po úplnom vyplnení formulára.",
+  "FormVDRYourTurnDescription": "Stejú vám je vyplniť formulár ako prvú úlohu. Notifikácia bola odoslaná na vašu e-mailovú adresu. Môžete ho začať vypĺňať teraz alebo skopírovať odkaz na vypĺňanie a vrátiť sa neskôr.",
+  "LinkToFillOutForm": "Odkaz na vyplnenie formulára: {field}",
+  "LinkToForm": "Odkaz na formulár: {link}",
+  "LinkToViewOnlyForm": "Odkaz na formulár len na čítanie:"
 }

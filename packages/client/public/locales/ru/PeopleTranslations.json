@@ -35,5 +35,7 @@
   "SuccessDeletePersonalData": "Персональные данные успешно удалены",
   "SuccessSentInvitation": "Приглашение было успешно отправлено",
   "SuccessSentMultipleInvitatios": "Приглашения были успешно отправлены",
-  "WithoutGroup": "Без группы"
+  "WithoutGroup": "Без группы",
+  "ShareGuest": "Поделиться гостем",
+  "SuccessCopyContantLink": "Ссылка для контакта успешно скопирована. Ссылка действительна в течение {7} дней."
 }

@@ -108,5 +108,14 @@
   "SubtitleDescription": "Untertitel mit zusätzlichen Kommentaren oder Beschreibungen für das aktuelle Verzeichnis.",
   "TabPlugins": "Registerkarte “Plugins”",
   "Viewer": "Viewer",
-  "ViewerDescription": "Betten Sie einen Viewer ein, um Benutzern das Öffnen einer Datei zum Anzeigen im entsprechenden Raum zu ermöglichen."
+  "ViewerDescription": "Betten Sie einen Viewer ein, um Benutzern das Öffnen einer Datei zum Anzeigen im entsprechenden Raum zu ermöglichen.",
+  "NPMCodeConfigStep": "Erstellen Sie ein Konfigurationsobjekt mit den erforderlichen Parametern: {field}, {min}, {max}.",
+  "NPMCodeCreateStep": "Erstelle ein HTML-Element mit der ID aus der Konfiguration und füge es im Dokumentkörper ein, um den SDK-Frame zu platzieren: {field} {min} {max}",
+  "NPMCodeDescription": "Beschreibung des NPM-Pakets",
+  "NPMCodeImportStep": "Importieren Sie das Paket in Ihrem Projekt:",
+  "NPMCodeInitStep": "SDK initialisieren:",
+  "NPMCodeInstallStep": "Installiere das Paket von npm und speichere es mit --save in der package.json Datei:",
+  "NPMCodeUsageStep": "Verwenden Sie die SDK-Initialisierungsmethode, um das SDK-Framework zu erstellen: {SDK_FRAMEWORK_VERSION} {field} zwischen {min} und {max}.",
+  "SdkPackageVersionInfo": "Für die Verbindung als Paketversion immer die neueste.",
+  "SourceType": "Verbindungstyp"
 }

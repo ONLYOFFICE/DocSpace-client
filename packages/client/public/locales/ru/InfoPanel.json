@@ -88,5 +88,13 @@
   "SubmenuHistory": "История",
   "UserFileUpdated": "Файл обновлен.",
   "Users": "Пользователи",
-  "Versions": "Версии"
+  "Versions": "Версии",
+  "FileCustomFilterDisabled": "Отключен пользовательский фильтр.",
+  "FileCustomFilterEnabled": "Включен пользовательский фильтр.",
+  "FileVersionRemoved": "Удалена версия файла: V.{{version}}.",
+  "FormCompletelyFilled": "Полностью заполненная форма.",
+  "FormPartiallyFilled": "Заполнил часть формы.",
+  "FormStartedToFill": "Начал заполнять.",
+  "FormStopped": "Форма остановлена.",
+  "RoomIndexExportLocation": "Экспорт индекса комнаты сохранен в {{sectionName}}"
 }

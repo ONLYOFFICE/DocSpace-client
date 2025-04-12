@@ -24,5 +24,15 @@
   "SettingsForAll": "Những cài đặt này sẽ hiệu lực cho tất cả các không gian của bạn.",
   "Subheader": "Sử dụng phần này để tạo một số không gian và giúp người dùng của bạn có thể truy cập chúng",
   "SubmitDelete": "Gửi yêu cầu xóa",
-  "VisitSpace": "Truy cập không gian này sau khi tạo"
+  "VisitSpace": "Truy cập không gian này sau khi tạo",
+  "DecryptStorage": "Dekrypter lagring",
+  "DecryptWarningDialogContent": "Alle mellomrom vil bli utilgjengelige under dekrypteringsprosessen. Er du sikker på at du vil fortsette?",
+  "EncryptData": "Krypter data i hvile",
+  "EncryptDataDescription": "{{organizationName}} bruker AES-256-kryptering for å beskytte data i hvile i lagring.",
+  "EncryptDataWarningDescription": "Lagringskryptering kan ta tid. Plassene vil være utilgjengelige under prosessen. Sørg for at du har nok lagringsplass og at dataene dine er sikkerhetskopiert. Ikke glem å deaktivere automatisk sikkerhetskopiering og stoppe alle pågående sikkerhetskopier. Ellers vil det bli gjort automatisk.",
+  "EncryptStorage": "Krypter lagring",
+  "EncryptWarningDialogContent": "Alle mellomrom vil bli utilgjengelige under krypteringsprosessen. Er du sikker på at du vil fortsette?",
+  "MoreDetails": "For mer informasjon om hvordan du stopper tjenester, se vår <1>{{link}}</1>.",
+  "NotifyUsers": "Varsle brukere om at plassen vil være utilgjengelig.",
+  "StorageEncrypted": "Lagring kryptert"
 }

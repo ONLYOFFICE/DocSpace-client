@@ -1,5 +1,7 @@
 {
   "CancelUpload": "Sťahovanie bolo prerušené. Niektoré súbory neboli načítane.",
   "HideInput": "Skryť",
-  "Ready": "Hotovo"
+  "Ready": "Hotovo",
+  "UploadingAndConversion": "Načítanie & Konverzia",
+  "UploadingError": "Chyba pri nahrávaní"
 }

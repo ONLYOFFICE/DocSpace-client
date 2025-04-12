@@ -108,5 +108,14 @@
   "SubtitleDescription": "Apakšvirsraksts ar papildu komentāriem vai aprakstiem pašreizējam direktorijam.",
   "TabPlugins": "Ciļņu spraudņi",
   "Viewer": "Skatītājs",
-  "ViewerDescription": "Iegult skatītāju, lai ļautu lietotājiem atvērt failu skatīšanai no attiecīgās telpas."
+  "ViewerDescription": "Iegult skatītāju, lai ļautu lietotājiem atvērt failu skatīšanai no attiecīgās telpas.",
+  "NPMCodeConfigStep": "Izveidot konfigurācijas objektu ar nepieciešamajiem parametriem:",
+  "NPMCodeCreateStep": "Izveidot HTML elementu ar id no konfigurācijas un ievietot to dokumenta ķermenī, lai ievietotu SDK rāmi: {field}, {min}, {max}.",
+  "NPMCodeDescription": "NPM paketes apraksts",
+  "NPMCodeImportStep": "Importējiet pakotni savā projektā:",
+  "NPMCodeInitStep": "SDK inicializācija:",
+  "NPMCodeInstallStep": "Instalējiet pakotni no npm un saglabājiet to package.json failā ar --{save}:",
+  "NPMCodeUsageStep": "Izmantojiet SDK inicializācijas metodi, lai izveidotu SDK rāmi: {field} {min} {max}.",
+  "SdkPackageVersionInfo": "Lai savienotos kā pakotnes versija vienmēr jaunākā",
+  "SourceType": "Savienojuma tips"
 }

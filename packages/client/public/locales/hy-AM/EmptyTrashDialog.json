@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "Ջնջել ընդմիշտ",
-  "DeleteForeverTitle": "Ջնջե՞լ ընդմիշտ"
+  "DeleteForeverTitle": "Ջնջե՞լ ընդմիշտ",
+  "DeleteForeverNote": "{{sectionName}} բաժնի բոլոր իրերը կջնջվեն կայունօրինակ։ Դուք չունենաք հնարավորություն վերականգնելու դրանք։",
+  "SuccessEmptyAction": "{{sectionName}} բաժինը սպոռացվել է"
 }

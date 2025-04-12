@@ -14,5 +14,7 @@
   "MoveToTrashButton": "移至回收站",
   "UnsubscribeButton": "取消订阅",
   "UnsubscribeNote": "您确定要取消订阅列表中的选定项目吗？",
-  "UnsubscribeTitle": "取消订阅确认"
+  "UnsubscribeTitle": "取消订阅确认",
+  "DeleteTemplate": "您真的要删除模板房间 <1>«{{templateName}}»</1> 吗？该模板无法恢复。",
+  "DeleteTemplates": "您真的要删除选定的房间模板吗？它们无法恢复。"
 }

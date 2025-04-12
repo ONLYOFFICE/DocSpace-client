@@ -34,5 +34,8 @@
   "SuccessDeletePersonalData": "個人情報の削除が完了しました",
   "SuccessSentInvitation": "招待状の送信に成功しました",
   "SuccessSentMultipleInvitatios": "招待メールが正常に送信されました",
-  "WithoutGroup": "グループなし"
+  "WithoutGroup": "グループなし",
+  "MembersCount": "メンバー: {{count}}",
+  "ShareGuest": "ゲストを共有する",
+  "SuccessCopyContantLink": "連絡先リンクのコピーに成功しました。リンクは{strong}7日間有効です{/strong}。"
 }

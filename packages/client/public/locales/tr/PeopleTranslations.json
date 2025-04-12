@@ -34,5 +34,8 @@
   "SuccessDeletePersonalData": "Kişisel veriler başarıyla silindi",
   "SuccessSentInvitation": "Davetiye başarıyla gönderildi",
   "SuccessSentMultipleInvitatios": "Davetiyeler başarıyla gönderildi",
-  "WithoutGroup": "Grup olmadan"
+  "WithoutGroup": "Grup olmadan",
+  "MembersCount": "Üyeler: {{count}}",
+  "ShareGuest": "Misafirleri paylaş",
+  "SuccessCopyContantLink": "İletişim bağlantısı başarıyla kopyalandı. Bağlantı {days} gün boyunca {strong}geçerlidir.{/strong}"
 }

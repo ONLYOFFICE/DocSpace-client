@@ -1,4 +1,11 @@
 {
   "Height": "ລວງສູງ,ຄວາມສູງ",
-  "Width": "ລວງກວ້າງ ,ຄວາມກ້ວາງ"
+  "Width": "ລວງກວ້າງ ,ຄວາມກ້ວາງ",
+  "CodeSuccessfullyCopied": "Kôd za vmetanje uspešno kopiran vo opkol.",
+  "ContentRestricted": "Kopiranje sadržaja, preuzimanje datoteka i štampanje su ograničeni.",
+  "DisplaySettings": "Podešavanja prikaza",
+  "EmbeddingBarAllowList": "Dodaj URL spletne strani za vgrajevanje v <1>seznam dovoljenih</1>.",
+  "EmbeddingBarDescription": "Vgraditev bo delovala samo za URL-je, ki jih je določil skrbnik {{productName}} v nastavitvah JavaScript SDK.",
+  "Link": "Povezava",
+  "LinkProtectedWithPassword": "Povezava je zaščitena z geslom."
 }

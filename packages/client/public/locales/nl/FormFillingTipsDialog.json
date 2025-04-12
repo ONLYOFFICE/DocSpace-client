@@ -1,1 +1,15 @@
-{}
+{
+  "DescriptionUploading": "Maak PDF-formulieren in {{productName}}, bijvoorbeeld in uw {{sectionName}}, en upload de kant-en-klare formulieren naar de ruimte. Maak gebruik van de geïntegreerde sjabloonbibliotheek en kies uit talrijke kant-en-klare PDF-sjablonen.",
+  "HeaderComplete": "Handige analyse van de verzamelde reacties",
+  "HeaderSharing": "Snelle deling",
+  "HeaderStarting": "Het invullen van het formulier wordt gestart",
+  "HeaderSubmitting": "Het indienen van de antwoorden",
+  "HeaderUploading": "Eenvoudig formulier uploaden",
+  "TitleComplete": "Controleer de ingevulde formulieren en analyseer de gegevens automatisch verzameld in een spreadsheet. Alles – binnen één kamer.",
+  "TitleSharing": "Nodig andere {{productName}} leden uit naar de ruimte om de geüploade PDF-formulieren in te vullen. Kopieer een openbare toegangslink om de ruimte te delen met externe gebruikers.",
+  "TitleStarting": "Wanneer een formulier wordt geopend om in te vullen, wordt er automatisch een individueel exemplaar gemaakt voor elke respondent en wordt dit opgeslagen in de map 'In behandeling'. Dit betekent dat het formulier is gestart, maar nog niet voltooid is.",
+  "TitleSubmitting": "Zodra de Complete & Submit knop is aangeklikt in het geopende formulier, wordt deze verplaatst naar de Complete map. {field} {min} {max}",
+  "WelcomeDescription": "Hier kunt u eenvoudig PDF-formulier invullen organiseren, reacties gemakkelijk verzamelen en analyseren. Klaar om te beginnen?",
+  "WelcomeFillingForm": "Welkom in de Formulier Invulruimte!",
+  "WelcomeStartTutorial": "Maak een korte rondleiding"
+}

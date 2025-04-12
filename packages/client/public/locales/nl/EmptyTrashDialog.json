@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "Voor altijd verwijderen",
-  "DeleteForeverTitle": "Voor altijd verwijderen?"
+  "DeleteForeverTitle": "Voor altijd verwijderen?",
+  "DeleteForeverNote": "Alle items uit de {{sectionName}} sectie worden permanent verwijderd. U kunt ze niet herstellen.",
+  "SuccessEmptyAction": "{{sectionName}} sectie geleegd"
 }

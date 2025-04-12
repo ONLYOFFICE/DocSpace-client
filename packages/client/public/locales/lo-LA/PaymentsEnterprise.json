@@ -28,5 +28,11 @@
   "UpgradeToProBannerItemScalabilityHeader": "ຄວາມສາມາດໃນການຂະຫຍາຍ ແລະການຈັດກຸ່ມ.",
   "UpgradeToProBannerItemSupportDescr": "ຂໍຄວາມຊ່ວຍເຫຼືອແບບມືອາຊີບດ່ວນສຳລັບທຸກບັນຫາທີ່ເຈົ້າປະເຊີນ.",
   "UpgradeToProBannerItemSupportHeader": "ທີມງານສະຫນັບສະຫນູນເຕັກໂນໂລຢີ.",
-  "UploadLicenseFile": "ອັບໂຫຼດໄຟລ໌ໃບອະນຸຍາດ"
+  "UploadLicenseFile": "ອັບໂຫຼດໄຟລ໌ໃບອະນຸຍາດ",
+  "ActivateRenewalDescr": "Da bi aktivirali obnovo, ki ste jo že kupili, jo naložite spodaj in kliknite gumb Aktiviraj.",
+  "ActivateRenewSubscriptionHeader": "Obnovite naročnino za {{license}}",
+  "ActivateSwithToProHeader": "Preklopite na celotna verzija {{license}}",
+  "ActivateToProBannerHeaderTrial": "Kupite celo različico {{license}}, da pridobite:",
+  "UpgradeToProBannerHeader": "Preuzmite besplatan pristup poslovnom paketu za 30 dana.",
+  "UpgradeToProBannerItemMobileHeader": "Mobilno uređivanje."
 }

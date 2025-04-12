@@ -44,5 +44,8 @@
   "UploadDevicePDFFormOptionTitle": "Nahrávání ze zařízení",
   "UploadFromPortalTitle": "Nahrát z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte připravený PDF formulář dostupný v {{productName}} a nahrajte jej do místnosti.",
-  "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti"
+  "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti",
+  "EmptyTemplatesDescription": "Můžete vytvořit šablonu z místnosti v sekci Místnosti.",
+  "EmptyTemplatesTitle": "Zatím zde žádné šablony.",
+  "SectionsUploadDescription": "Nahrajte jakýkoli typ souborů z {{sectionNameFirst}} nebo {{sectionNameSecond}}"
 }

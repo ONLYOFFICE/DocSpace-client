@@ -8,5 +8,16 @@
   "FormCompletedSuccessfully": "Formulaire complété avec succès",
   "FormNumber": "Numéro de formulaire",
   "FormOwner": "Propriétaire du formulaire",
-  "Title": "Le formulaire est rempli"
+  "Title": "Le formulaire est rempli",
+  "FillOutForm": "Remplissez le formulaire",
+  "FormFinalized": "Formulaire Finalisé",
+  "FormSectionCompleted": "Section du formulaire complétée",
+  "FormVDRCompletedDescription": "Le formulaire a été entièrement rempli par tous les rôles et est maintenant finalisé. Il est disponible en mode consultation uniquement.",
+  "FormVDRConfirmationOfStartDescription": "Une notification a déjà été envoyée à l'utilisateur dans le premier {role}, l'incitant à remplir le formulaire. Vous pouvez accéder à la pièce ou partager le lien de remplissage avec les participants.",
+  "FormVDRConfirmationOfStartTitle": "Le formulaire est prêt à être rempli dans la salle {room}.",
+  "FormVDRSectionCompletedDescription": "La partie assignée du formulaire PDF a été remplie avec succès. L'état de remplissage du formulaire peut être surveillé dans la salle et via le panneau d'état de remplissage. Un e-mail de notification sera envoyé une fois que le formulaire sera entièrement rempli.",
+  "FormVDRYourTurnDescription": "Vous êtes chargé de remplir le formulaire en tant que premier rôle. Une notification a été envoyée à votre adresse e-mail. Vous pouvez commencer à le remplir maintenant ou copier le lien de remplissage et y revenir plus tard. {field} {min} {max}",
+  "LinkToFillOutForm": "Lien pour remplir le formulaire :",
+  "LinkToForm": "Lien vers le formulaire :",
+  "LinkToViewOnlyForm": "Lien vers le formulaire en mode consultation :"
 }

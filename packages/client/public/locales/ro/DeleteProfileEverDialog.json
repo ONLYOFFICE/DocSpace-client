@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "Reatribuiți datele unui alt utilizator",
   "SuccessfullyDeleteGuestInfoMessage": "Invitatul a fost șters cu succes",
   "SuccessfullyDeleteUserInfoMessage": "Utilizatorul a fost șters cu succes",
-  "ToBeAbleToReassignData": "Pentru a putea reafectaa datele, ștergeți utilizatorii unul câte unul."
+  "ToBeAbleToReassignData": "Pentru a putea reafectaa datele, ștergeți utilizatorii unul câte unul.",
+  "PersonalDataDeletionInfo": "Date personale, toate fișierele și folderele personale din secțiunile {{sectionNameFirst}} și {{sectionNameSecond}}* ale utilizatorilor selectați vor fi șterse permanent. Fișierele și folderele utilizatorilor selectați păstrate în secțiuni comune* precum camere vor rămâne în {{productName}}.",
+  "UserFilesRemovalScope": "Date personale, toate fișierele și folderele din secțiunile {{sectionNameFirst}} și {{sectionNameSecond}} ale acestui utilizator vor fi șterse permanent."
 }

@@ -1,4 +1,6 @@
 {
   "EditComment": "코멘트 수정",
-  "Version": "버전"
+  "Version": "버전",
+  "DeleteVersion": "버전 삭제",
+  "DeleteVersionDescription": "파일 버전 삭제를 진행하시려고 합니다. 삭제 후에는 더 이상 볼 수 없거나 복구할 수 없습니다. 계속하시겠습니까?"
 }

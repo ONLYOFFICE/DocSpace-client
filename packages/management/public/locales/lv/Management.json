@@ -24,5 +24,15 @@
   "SettingsForAll": "Šie iestatījumi būs spēkā visās jūsu telpās.",
   "Subheader": "Izmantojiet šo sadaļu, lai izveidotu vairākas telpas un padarītu tās pieejamas lietotājiem",
   "SubmitDelete": "Iesniegt izdzēšanas pieprasījumu",
-  "VisitSpace": "Pēc izveides apmeklējiet šo telpu"
+  "VisitSpace": "Pēc izveides apmeklējiet šo telpu",
+  "DecryptStorage": "Atšifrešu uzglabāšanu",
+  "DecryptWarningDialogContent": "Dekriptācijas procesa laikā visi {field} kļūs nepieejami. Vai Jūs patiešām vēlaties turpināt?",
+  "EncryptData": "Šifrējiet datus, kad tie ir atpūstā stāvoklī",
+  "EncryptDataDescription": "{{organizationName}} izmanto AES-256 šifrēšanu, lai aizsargātu datus, kas atrodas atmiņā.",
+  "EncryptDataWarningDescription": "Uzglabāšanas šifrēšana var aizņemt laiku. Šajā laikā šīs vietas nebūs pieejamas. Pārliecinieties, ka jums ir pietiekami daudz vietas un ka jūsu dati ir dublēti. Neaizmirstiet atslēgt automātiskās dublēšanas funkciju un apturēt visas aktīvās dublēšanas procesus. Citādi tas tiks izdarīts automātiski.",
+  "EncryptStorage": "Šifrēt uzglabāšanu",
+  "EncryptWarningDialogContent": "Visi tukšums kļūs nepieejami šifrēšanas procesa laikā. Vai Jūs patiešām vēlaties turpināt?",
+  "MoreDetails": "Lai iegūtu sīkāku informāciju par to, kā apturēt pakalpojumus, lūdzu, skatieties mūsu <1>{{link}}</1>.",
+  "NotifyUsers": "Paziņojiet lietotājiem, ka telpa būs pieejama no {start_date} līdz {end_date}, un tā nebūs pieejama no {start_date} līdz {end_date}. Lūdzu, ņemiet vērā, ka minimālais laiks ir {min}, un maksimālais laiks ir {max}.",
+  "StorageEncrypted": "Uzglabāšana šifrēta"
 }

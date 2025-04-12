@@ -34,5 +34,8 @@
   "SuccessDeletePersonalData": "个人数据已成功删除。",
   "SuccessSentInvitation": "邀请已成功发送",
   "SuccessSentMultipleInvitatios": "邀请已成功发送",
-  "WithoutGroup": "无群组"
+  "WithoutGroup": "无群组",
+  "MembersCount": "会员：{{count}}",
+  "ShareGuest": "分享访客",
+  "SuccessCopyContantLink": "链接已成功复制。该链接在 {max} 天内有效。"
 }

@@ -4,5 +4,14 @@
   "ChangeUserTypeButton": "Modifier le type",
   "ChangeUserTypeMessage": "Les utilisateurs du type <strong>'{{ firstType }}'</strong> seront transférés vers le type <strong>'{{ secondType }}'</strong>.",
   "SuccessChangeGuestType": "Le type d'invité a été modifié avec succès",
-  "SuccessChangeUserType": "Le type de l'utilisateur a été modifié avec succès"
+  "SuccessChangeUserType": "Le type de l'utilisateur a été modifié avec succès",
+  "ChangeContactType": "Modifier le type de contact",
+  "ChangeGuestsTypeToAdmin": "L'invité <strong>{{userName}}</strong> sera déplacé vers la section {{membersSection}} et aura le type <strong>'{{ secondType }}'</strong>. Les administrateurs de {{productName}} peuvent accéder aux paramètres de {{productName}}, gérer et archiver les salles, inviter de nouveaux utilisateurs et attribuer des rôles en dessous de leur niveau. Les administrateurs de {{productName}} ont accès à la section {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Les invités sélectionnés seront déplacés vers la section {{membersSection}} et recevront le type <strong>'{{ secondType }}'</strong>. Les administrateurs {{productName}} peuvent accéder aux paramètres {{productName}}, gérer et archiver les salles, inviter de nouveaux utilisateurs et attribuer des rôles en dessous de leur niveau. Les administrateurs {{productName}} ont accès à la section {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "L'invité <strong>{{userName}}</strong> sera déplacé vers la section {{membersSection}} et aura le type <strong>'{{ secondType }}'</strong>. Les administrateurs de la salle peuvent créer et gérer les salles attribuées, inviter de nouveaux utilisateurs et attribuer les rôles d'administrateur de salle et inférieur. Les administrateurs de la salle ont accès à la section {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Les invités sélectionnés seront déplacés vers la section {{membersSection}} et recevront le type <strong>'{{ secondType }}'</strong>. Les administrateurs de la salle peuvent créer et gérer les salles attribuées, inviter de nouveaux utilisateurs et attribuer les rôles d'administrateur de la salle et inférieur. Les administrateurs de la salle ont accès à la section {{documentsSection}}.",
+  "ChangeUserTypeNote": "<1>Note:</1> vous ne pouvez pas modifier le type pour l'administrateur {{productName}} et pour vous-même.",
+  "DataReassignmentInfo": "Les salles créées par cet utilisateur vous seront automatiquement attribuées. Pour réaffecter les salles à une autre personne, cliquez sur le lien correspondant ci-dessous.",
+  "DataReassignmentWithFilesDeletion": "Tous les fichiers partagés créés par ce contact vous seront <1>automatiquement attribués dans 30 jours</1>. Pour réaffecter les salles/fichiers partagés à une autre personne, cliquez sur le lien correspondant ci-dessous.",
+  "PersonalDataDeletion": "Tous les fichiers et dossiers dans la section {{sectionName}} de ce contact seront <1>supprimés définitivement dans 30 jours</1>."
 }

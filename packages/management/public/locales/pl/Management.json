@@ -24,5 +24,15 @@
   "SettingsForAll": "Ustawienia te zostaną zastosowane we wszystkich Twoich obszarach roboczych.",
   "Subheader": "Skorzystaj z tej sekcji, aby utworzyć kilka obszarów i udostępnić je swoim użytkownikom",
   "SubmitDelete": "Prześlij prośbę o usunięcie",
-  "VisitSpace": "Odwiedź ten obszar po utworzeniu"
+  "VisitSpace": "Odwiedź ten obszar po utworzeniu",
+  "DecryptStorage": "Deszyfruj pamięć",
+  "DecryptWarningDialogContent": "Wszystkie spacje staną się niedostępne podczas procesu deszyfrowania. Czy na pewno chcesz kontynuować?",
+  "EncryptData": "Szyfruj dane w spoczynku",
+  "EncryptDataDescription": "{{organizationName}} używa szyfrowania AES-256 do ochrony danych w spoczynku w pamięci.",
+  "EncryptDataWarningDescription": "Szyfrowanie pamięci może zająć trochę czasu. Przestrzenie będą niedostępne w trakcie tego procesu. Upewnij się, że masz wystarczającą ilość miejsca do przechowywania i że Twoje dane są zarchiwizowane. Pamiętaj, aby wyłączyć automatyczne kopie zapasowe i zatrzymać wszystkie uruchomione. W przeciwnym razie zostanie to zrobione automatycznie.",
+  "EncryptStorage": "Szyfrowanie pamięci",
+  "EncryptWarningDialogContent": "Wszystkie miejsca staną się niedostępne podczas procesu szyfrowania. Czy na pewno chcesz kontynuować?",
+  "MoreDetails": "Aby uzyskać więcej szczegółów na temat sposobu zatrzymywania usług, zapoznaj się z naszym <1>{{link}}</1>.",
+  "NotifyUsers": "Powiadom użytkowników, że przestrzeń będzie niedostępna.",
+  "StorageEncrypted": "Szyfrowane przechowywanie"
 }

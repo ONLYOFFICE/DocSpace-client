@@ -24,5 +24,15 @@
   "SettingsForAll": "这些设置将对您的所有空间生效。",
   "Subheader": "您可以使用这个板块创建多个协作空间，并让您的用户可以访问",
   "SubmitDelete": "提交删除请求",
-  "VisitSpace": "协作空间创建后进行访问"
+  "VisitSpace": "协作空间创建后进行访问",
+  "DecryptStorage": "解密存储",
+  "DecryptWarningDialogContent": "解密过程中，所有空间都将不可用。您确定要继续吗？",
+  "EncryptData": "对静态数据进行加密",
+  "EncryptDataDescription": "{{organizationName}} 使用 AES-256 加密来保护存储中静态数据。",
+  "EncryptDataWarningDescription": "存储加密可能需要一些时间。在处理过程中，这些空间将不可用。请确保您有足够的存储空间，并且您的数据已备份。不要忘记禁用自动备份并停止所有正在运行的备份。否则，它将自动完成。{field} {min} {max}",
+  "EncryptStorage": "加密存储",
+  "EncryptWarningDialogContent": "加密过程中，所有空间都将不可用。您确定要继续吗？",
+  "MoreDetails": "有关如何停止服务的更多详情，请参阅我们的<1>{{link}}</1>。",
+  "NotifyUsers": "通知用户该空间将不可用。",
+  "StorageEncrypted": "存储已加密"
 }

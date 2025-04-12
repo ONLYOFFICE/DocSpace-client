@@ -28,5 +28,10 @@
   "SignUp": "ລົງ​ທະ​ບຽນ",
   "SuccessDeactivate": "ບັນຊີຂອງທ່ານຖືກປິດການນຳໃຊ້ຢ່າງສຳເລັດຜົນ. ໃນ 10 ວິນາທີທ່ານຈະຖືກໂອນໄປຫາ <1>ເວັບໄຊ</1>",
   "SuccessReactivate": "ບັນຊີຂອງທ່ານໄດ້ຖືກເປີດໃຊ້ຄືນໃໝ່ສຳເລັດແລ້ວ. ໃນ 10 ວິນາທີທ່ານຈະຖືກໂອນໄປຫາ <1>ປະຕູ</1>.",
-  "SuccessRemoved": "ບັນຊີຂອງທ່ານໄດ້ຖືກເອົາອອກສຳເລັດແລ້ວ. ໃນ 10 ວິນາທີທ່ານຈະຖືກໂອນໄປຫາ <1>ເວັບໄຊ</1>."
+  "SuccessRemoved": "ບັນຊີຂອງທ່ານໄດ້ຖືກເອົາອອກສຳເລັດແລ້ວ. ໃນ 10 ວິນາທີທ່ານຈະຖືກໂອນໄປຫາ <1>ເວັບໄຊ</1>.",
+  "DeleteProfileSuccessDescription": "Vaša {{productName}} račun je uspešno onemogućen. Vlasnik ili administrator {{productName}} može trajno obrisati vaš onemogućeni račun.",
+  "EnterEmailHeader": "Внесете е-пошта",
+  "Newsletter": "Želim se naročiti na novice {{organizationName}}.",
+  "SetAppDescription": "Dve-faktorijska avtentikacija je omogočena. Konfigurirajte svojo aplikacijo za avtentikacijo, da lahko še naprej delujete v {{productName}}. Lahko uporabite Google Authenticator za <1>Android</1> in <4>iOS</4> ali Authenticator za <8>Windows Phone</8>.",
+  "TermsAndConditions": "Z nadaljevanjem, razumete in se strinjate z našimi <1>Terms and conditions</1> in <2>Privacy statement</2>."
 }

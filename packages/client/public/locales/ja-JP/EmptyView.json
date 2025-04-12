@@ -44,5 +44,8 @@
   "UploadDevicePDFFormOptionTitle": "デバイスからのアップロード",
   "UploadFromPortalTitle": "{{productName}}からアップロード",
   "UploadPDFFormOptionDescription": "{{productName}}で利用可能なPDFフォームを選択し、ルームにアップロードする。",
-  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ"
+  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ",
+  "EmptyTemplatesDescription": "ルームセクションの部屋からテンプレートを作成できます。 (Rūmu sekushon no heya kara tenpurēto o sakusei dekimasu.)",
+  "EmptyTemplatesTitle": "まだテンプレートはありません ({field})。",
+  "SectionsUploadDescription": "{{sectionNameFirst}}または{{sectionNameSecond}}から、あらゆる種類のファイルをアップロードしてください。"
 }

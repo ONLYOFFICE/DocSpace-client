@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "Opätovné priradenie údajov inému používateľovi",
   "SuccessfullyDeleteGuestInfoMessage": "Hosť bol úspešne odstránený",
   "SuccessfullyDeleteUserInfoMessage": "Používateľ bol úspešne odstránený",
-  "ToBeAbleToReassignData": "Aby ste mohli opätovne priradiť údaje, vymazávajte vždy len po jednom používateľovi."
+  "ToBeAbleToReassignData": "Aby ste mohli opätovne priradiť údaje, vymazávajte vždy len po jednom používateľovi.",
+  "PersonalDataDeletionInfo": "Osobné údaje, všetky osobné súbory a priečinky v sekciách {{sectionNameFirst}} a {{sectionNameSecond}} * vybraných používateľov budú trvale vymazané. Súbory a priečinky vybraných používateľov uložené v spoločných sekciách * ako sú miestnosti zostanú v {{productName}}.",
+  "UserFilesRemovalScope": "Osobné údaje, všetky súbory a priečinky v sekciách {{sectionNameFirst}} a {{sectionNameSecond}} tohto používateľa budú trvale vymazané."
 }

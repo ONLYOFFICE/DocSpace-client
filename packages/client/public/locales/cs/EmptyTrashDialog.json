@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "Smazat navždy",
-  "DeleteForeverTitle": "Smazat navždy?"
+  "DeleteForeverTitle": "Smazat navždy?",
+  "DeleteForeverNote": "Všechny položky z sekce {{sectionName}} budou nenávratně smazány. Nebudete je moci obnovit.",
+  "SuccessEmptyAction": "{{sectionName}} sekce vyprázdněna"
 }

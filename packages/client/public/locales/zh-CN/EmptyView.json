@@ -44,5 +44,8 @@
   "UploadDevicePDFFormOptionTitle": "从设备上传",
   "UploadFromPortalTitle": "从{{productName}}上传",
   "UploadPDFFormOptionDescription": "选择{{productName}}中可用的现成 PDF 表单并将其上传到房间。",
-  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间"
+  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间",
+  "EmptyTemplatesDescription": "您可以在房间部分从一个房间创建模板。",
+  "EmptyTemplatesTitle": "这里还没有模板",
+  "SectionsUploadDescription": "从 {{sectionNameFirst}} 或 {{sectionNameSecond}} 上传任何类型的文件。"
 }

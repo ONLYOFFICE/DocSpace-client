@@ -1,1 +1,15 @@
-{}
+{
+  "DescriptionUploading": "Twórz formularze PDF w {{productName}}, np. w twojej {{sectionName}}, i wgrywaj gotowe do pokoju. Wykorzystaj zintegrowaną bibliotekę szablonów i wybierz spośród licznych gotowych szablonów PDF.",
+  "HeaderComplete": "Wygodne analizowanie zebranych odpowiedzi",
+  "HeaderSharing": "Szybkie udostępnianie",
+  "HeaderStarting": "Rozpoczęcie procesu wypełniania formularza",
+  "HeaderSubmitting": "Przesyłanie odpowiedzi",
+  "HeaderUploading": "Łatwe przesyłanie formularzy",
+  "TitleComplete": "Sprawdź wypełnione formularze i automatycznie analizuj dane zebrane do arkusza kalkulacyjnego. Wszystko – w jednym pokoju.",
+  "TitleSharing": "Zaprosz innych członków {{productName}} do pokoju, aby wypełnili przesłane formularze PDF. Skopiuj publiczny link dostępu, aby udostępnić pokój użytkownikom zewnętrznym.",
+  "TitleStarting": "Kiedy formularz jest otwierany do wypełnienia, automatycznie tworzona jest indywidualna kopia dla każdego odpowiadającego i zapisywana do folderu „W trakcie”. Oznacza to, że formularz został rozpoczęty, ale jeszcze nie został ukończony.",
+  "TitleSubmitting": "Gdy przycisk Kompletne & Złóż zostanie kliknięty w otwartym formularzu, jest przenoszony do folderu Kompletne.",
+  "WelcomeDescription": "Tutaj możesz zorganizować proste wypełnianie formularzy PDF, łatwo zbierać i analizować odpowiedzi. Gotowy aby zacząć?",
+  "WelcomeFillingForm": "Witamy w pokoju wypełniania formularzy!",
+  "WelcomeStartTutorial": "Wykonaj krótką wycieczkę"
+}

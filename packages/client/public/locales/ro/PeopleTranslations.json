@@ -34,5 +34,8 @@
   "SuccessDeletePersonalData": "Datele cu caracter personal au fost șterse cu succes",
   "SuccessSentInvitation": "Invitația a fost trimisă cu succes",
   "SuccessSentMultipleInvitatios": "Invitaţiile au fost trimise cu succes",
-  "WithoutGroup": "Fără grup"
+  "WithoutGroup": "Fără grup",
+  "MembersCount": "membri: {{count}}",
+  "ShareGuest": "Împărtășește invitatul",
+  "SuccessCopyContantLink": "Link-ul de contact a fost copiat cu succes. Link-ul este <strong>valid pentru 7 zile.</strong>"
 }

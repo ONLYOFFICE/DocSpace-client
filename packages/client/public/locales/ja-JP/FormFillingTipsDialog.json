@@ -1,1 +1,15 @@
-{}
+{
+  "DescriptionUploading": "{{productName}} でPDFフォームを作成します。例えば、{{sectionName}} などの場所で作成し、完成したものをルームにアップロードしてください。統合されたテンプレートライブラリを活用し、多数の既存PDFテンプレートの中からお選びください。",
+  "HeaderComplete": "収集された回答の便利な分析 ({field})",
+  "HeaderSharing": "素早い共有 (Subayai Kyōyū)",
+  "HeaderStarting": "フォームの入力プロセスを開始します。Starting the form filling process",
+  "HeaderSubmitting": "回答の送信",
+  "HeaderUploading": "簡単なフォームアップロード{field}",
+  "TitleComplete": "入力されたフォームを確認し、スプレッドシートに自動的に収集されたデータを分析します。すべて、ワンルームで。",
+  "TitleSharing": "アップロードされたPDFフォームに記入するために、他の{{productName}}メンバーをルームに招待してください。外部ユーザーとルームを共有するために、パブリックアクセスリンクをコピーしてください。",
+  "TitleStarting": "フォームが入力のために開かれると、各回答者に対して個別のコピーが自動的に作成され、進行中フォルダに保存されます。これは、フォームが開始されたものの、まだ完了していないことを意味します。",
+  "TitleSubmitting": "開いたフォームのコピーで「完了して送信」ボタンがクリックされると、完了フォルダーに移動します。",
+  "WelcomeDescription": "こちらでは、{field} を使ったシンプルなPDFフォームの入力整理、回答の簡単な収集と分析が可能です。始める準備はよろしいですか？",
+  "WelcomeFillingForm": "ようこそ、フォーム入力ルームへ！",
+  "WelcomeStartTutorial": "短いツアーに参加してください。 ({Take a short tour})"
+}

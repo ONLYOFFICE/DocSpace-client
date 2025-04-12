@@ -1,4 +1,6 @@
 {
   "EditComment": "Yorumu düzenle",
-  "Version": "Sür."
+  "Version": "Sür.",
+  "DeleteVersion": "Sürüm sil",
+  "DeleteVersionDescription": "Bir dosya sürümünü silmek üzeresiniz. Artık onu görme veya geri yükleme imkanı olmayacak. Devam etmek istediğinizden emin misiniz?"
 }

@@ -108,5 +108,14 @@
   "SubtitleDescription": "Geçerli dizin için ek yorumlar veya açıklamalar içeren altyazı.",
   "TabPlugins": "Sekme Eklentileri",
   "Viewer": "Görüntüleyici",
-  "ViewerDescription": "Kullanıcıların ilgili odadan görüntülemek üzere bir dosya açmasına izin vermek için bir görüntüleyici yerleştirin."
+  "ViewerDescription": "Kullanıcıların ilgili odadan görüntülemek üzere bir dosya açmasına izin vermek için bir görüntüleyici yerleştirin.",
+  "NPMCodeConfigStep": "Gerekli parametrelerle yapılandırma nesnesi oluşturun:",
+  "NPMCodeCreateStep": "Yapılandırmadan kimlikle HTML öğesi oluşturun ve SDK çerçevesi için belge gövdesinin içine yerleştirin: {id}.",
+  "NPMCodeDescription": "NPM paketi açıklaması",
+  "NPMCodeImportStep": "Projenize paketi aktarın:",
+  "NPMCodeInitStep": "SDK'yi başlatın:",
+  "NPMCodeInstallStep": "npm'den paket yükleyin ve --save ile package.json dosyasına kaydedin:",
+  "NPMCodeUsageStep": "SDK çerçevesini oluşturmak için SDK başlatma yöntemini kullanın: {SDK init method}.",
+  "SdkPackageVersionInfo": "Paket sürümü her zaman en son sürüm olarak bağlanmak için.",
+  "SourceType": "Bağlantı türü"
 }

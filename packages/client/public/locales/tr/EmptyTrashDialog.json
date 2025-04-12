@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "Kalıcı olarak sil",
-  "DeleteForeverTitle": "Kalıcı olarak sil?"
+  "DeleteForeverTitle": "Kalıcı olarak sil?",
+  "DeleteForeverNote": "Şu {{sectionName}} bölümündeki tüm öğeler kalıcı olarak silinecektir. Onları geri yükleyemeyeceksiniz.",
+  "SuccessEmptyAction": "{{sectionName}} bölümü boşaltıldı"
 }

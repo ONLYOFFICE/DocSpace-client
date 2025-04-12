@@ -1,5 +1,7 @@
 {
   "CancelUpload": "Lataus on keskeytetty. Joitakin tiedostoja ei ole ladattu.",
   "HideInput": "Piilota",
-  "Ready": "Valmis"
+  "Ready": "Valmis",
+  "UploadingAndConversion": "Lataus & Muuntaminen",
+  "UploadingError": "Latausvirhe"
 }

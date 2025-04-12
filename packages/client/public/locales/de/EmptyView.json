@@ -44,5 +44,8 @@
   "UploadDevicePDFFormOptionTitle": "Hochladen vom Gerät",
   "UploadFromPortalTitle": "Von {{productName}} hochladen",
   "UploadPDFFormOptionDescription": "Wählen Sie ein fertiges PDF-Formular, das in {{productName}} verfügbar ist, und laden Sie es in den Raum hoch.",
-  "VirtualDataRoomEmptyTitle": "Willkommen im virtuellen Datenraum"
+  "VirtualDataRoomEmptyTitle": "Willkommen im virtuellen Datenraum",
+  "EmptyTemplatesDescription": "Sie können eine Vorlage aus einem Raum im Bereich Räume erstellen.",
+  "EmptyTemplatesTitle": "Noch keine Vorlagen hier.",
+  "SectionsUploadDescription": "Laden Sie Dateien jeder Art von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch."
 }

@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "إعادة تعيين البيانات لمستخدم آخر",
   "SuccessfullyDeleteGuestInfoMessage": "تم حذف الضيف بنجاح",
   "SuccessfullyDeleteUserInfoMessage": "تم حذف المستخدم بنجاح",
-  "ToBeAbleToReassignData": " لتتمكن من إعادة تعيين البيانات، قم بحذف مستخدم واحد في كل مرة."
+  "ToBeAbleToReassignData": " لتتمكن من إعادة تعيين البيانات، قم بحذف مستخدم واحد في كل مرة.",
+  "PersonalDataDeletionInfo": "سيتم حذف البيانات الشخصية، وجميع الملفات والمجلدات في أقسام {{sectionNameFirst}} و {{sectionNameSecond}}* للمستخدمين المحددين بشكل دائم. ستظل الملفات والمجلدات الخاصة بالمستخدمين المحددين الموجودة في أقسام مشتركة* مثل الغرف في {{productName}}.",
+  "UserFilesRemovalScope": "سيتم حذف البيانات الشخصية وجميع الملفات والمجلدات في قسمي {{sectionNameFirst}} و {{sectionNameSecond}} لهذا المستخدم بشكل دائم."
 }

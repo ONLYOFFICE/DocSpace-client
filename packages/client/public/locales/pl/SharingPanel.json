@@ -2,5 +2,6 @@
   "ExternalLink": "Link zewnętrzny",
   "LinkName": "Nazwa linku",
   "ShareEmailBody": "Udzielono Ci dostępu do dokumentu {{itemName}}. Kliknij poniższy link, aby otworzyć go już teraz: {{shareLink}}.",
-  "ShareEmailSubject": "Udzielono Ci dostępu do dokumentu {{itemName}}"
+  "ShareEmailSubject": "Udzielono Ci dostępu do dokumentu {{itemName}}",
+  "RoleForLink": "Rola dla linku {link}"
 }

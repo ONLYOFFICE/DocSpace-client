@@ -108,5 +108,14 @@
   "SubtitleDescription": "Cari kataloq üçün əlavə şərhlər və ya təsvirləri ehtiva edən alt başlıq.",
   "TabPlugins": "Nişan Plaginləri",
   "Viewer": "İzləyici",
-  "ViewerDescription": "İstifadəçilərə həmin otaqdan baxmaqla faylı açmağa icazə vermək üçün izləyici əlavə edin."
+  "ViewerDescription": "İstifadəçilərə həmin otaqdan baxmaqla faylı açmağa icazə vermək üçün izləyici əlavə edin.",
+  "NPMCodeConfigStep": "Gerekli parametrlərlə konfiq obyekti yaradın:",
+  "NPMCodeCreateStep": "Konfiqurasiyadan ID ilə HTML elementi yaradın və SDK çərçivəsini yerləşdirmək üçün onu sənəd bədəlinə daxil edin: {field}, {min}, {max}",
+  "NPMCodeDescription": "NPM paketinin təsviri",
+  "NPMCodeImportStep": "Sizə layihənizə paketi idxal edin:",
+  "NPMCodeInitStep": "SDK-ni başlat: {SDK}",
+  "NPMCodeInstallStep": "npm-dən paket quraşdırın və onu --save ilə package.json faylına kaydedin: {package.json}.",
+  "NPMCodeUsageStep": "SDK çərçivəsini yaratmaq üçün SDK başlatma metodundan istifadə edin:",
+  "SdkPackageVersionInfo": "Həmişə paket versiyası olaraq son versiyaya qoşulun.",
+  "SourceType": "Bağlantı növü"
 }

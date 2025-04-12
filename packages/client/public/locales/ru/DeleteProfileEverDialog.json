@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "Переназначить данные другому пользователю",
   "SuccessfullyDeleteGuestInfoMessage": "Гость успешно удален",
   "SuccessfullyDeleteUserInfoMessage": "Пользователь успешно удален",
-  "ToBeAbleToReassignData": "Чтобы иметь возможность переназначать данные, удаляйте не более одного пользователя за один раз."
+  "ToBeAbleToReassignData": "Чтобы иметь возможность переназначать данные, удаляйте не более одного пользователя за один раз.",
+  "PersonalDataDeletionInfo": "Персональные данные, все личные файлы и папки в разделах {{sectionNameFirst}} и {{sectionNameSecond}}* выбранных пользователей будут безвозвратно удалены. Файлы и папки выбранных пользователей, хранящиеся в общих разделах* таких как комнаты, останутся в {{productName}}.",
+  "UserFilesRemovalScope": "Личные данные, все файлы и папки в разделах {{sectionNameFirst}} и {{sectionNameSecond}} этого пользователя будут безвозвратно удалены."
 }

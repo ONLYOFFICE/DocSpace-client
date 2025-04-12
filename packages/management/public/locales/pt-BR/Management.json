@@ -24,5 +24,15 @@
   "SettingsForAll": "Essas configurações serão efetivas para todos os seus espaços.",
   "Subheader": "Use esta seção para criar vários espaços e torná-los acessíveis para seus usuários",
   "SubmitDelete": "Enviar uma solicitação de exclusão",
-  "VisitSpace": "Visite este espaço depois de criar"
+  "VisitSpace": "Visite este espaço depois de criar",
+  "DecryptStorage": "Descriptografar armazenamento",
+  "DecryptWarningDialogContent": "Todos os espaços ficarão indisponíveis durante o processo de descriptografia. Você tem certeza de que deseja continuar?",
+  "EncryptData": "Criptografar dados em repouso",
+  "EncryptDataDescription": "{{organizationName}} utiliza criptografia AES-256 para proteger dados em repouso no armazenamento.",
+  "EncryptDataWarningDescription": "A criptografia de armazenamento pode levar algum tempo. Os espaços serão indisponíveis durante o processo. Certifique-se de que você tem armazenamento suficiente e que seus dados estão salvos em backup. Não se esqueça de desabilitar os backups automáticos e interromper todos os backups em execução. Caso contrário, {process} será feito automaticamente. {field} {min} {max}",
+  "EncryptStorage": "Criptografar armazenamento",
+  "EncryptWarningDialogContent": "Todos os espaços ficarão indisponíveis durante o processo de criptografia. Você tem certeza que deseja continuar?",
+  "MoreDetails": "Para mais detalhes sobre como interromper serviços, por favor, consulte nosso <1>{{link}}</1>.",
+  "NotifyUsers": "Avise os usuários de que o espaço ficará indisponível.",
+  "StorageEncrypted": "Armazenamento criptografado"
 }

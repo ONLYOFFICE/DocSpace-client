@@ -2,5 +2,6 @@
   "DisplayFileExtension": "Prikaz ekstenzije fajla pored imena fajla",
   "DisplayNotification": "Prikaži notifikaciju kada pomerate stavke u Otpad",
   "OpenSameTab": "Otvori {{organizationName}} uređivač u istoj kartici",
-  "OriginalCopy": "Sačuvaj kopiju datoteke u originalnom formatu takođe"
+  "OriginalCopy": "Sačuvaj kopiju datoteke u originalnom formatu takođe",
+  "CancellaionNotification": "Nem prikazivati obaveštenje o otkazivanju ponovo"
 }

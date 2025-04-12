@@ -10,5 +10,11 @@
   "MoveToTrashButton": "කුණු කූඩයට දමන්න",
   "UnsubscribeButton": "දායකත්‍වය ඉවතලන්න",
   "UnsubscribeNote": "ඔබ ලැයිස්තුවෙන් තෝරාගත් අථක වලට දායක නොවීමට වුවමනා ද?",
-  "UnsubscribeTitle": "දායකත්‍වය ඉවතලීම තහවුරුව"
+  "UnsubscribeTitle": "දායකත්‍වය ඉවතලීම තහවුරුව",
+  "DeleteAllGroupDescription": "निवडलेल्या गटाहट केल्या जातील. गटांमधील वापरकर्ते {{productName}} मधून काढले जाणार नाहीत. तुम्हाला पुढे जायचे आहे का?",
+  "DeleteAllGroupsTitle": "குழுக்களை நீக்கு",
+  "DeleteGroupDescription": "गट {{groupName}} हटवला जाईल. गटातील वापरकर्ते {{productName}} मधून काढले जाणार नाहीत. तुम्हाला पुढे जायचे आहे का?",
+  "DeleteGroupTitle": "गटहटवा",
+  "DeleteTemplate": "तुम्ही खरंच टेम्पलेट रूम <1>«{{templateName}}»</1> डिलीट करू इच्छिता? टेम्पलेट रिस्टोअर करता येणार नाही.",
+  "DeleteTemplates": "तुम्ही निवडलेले रूम टेम्पलेट्स खरंच डिलीट करू इच्छिता? ते परत मिळवता येणार नाहीत."
 }

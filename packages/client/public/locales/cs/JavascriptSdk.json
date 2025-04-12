@@ -108,5 +108,14 @@
   "SubtitleDescription": "Podnadpis s dalšími komentáři nebo popisy pro aktuální adresář.",
   "TabPlugins": "Zásuvné moduly karet",
   "Viewer": "Prohlížeč",
-  "ViewerDescription": "Vložení prohlížeče, který uživatelům umožní otevřít soubor pro prohlížení v příslušné místnosti."
+  "ViewerDescription": "Vložení prohlížeče, který uživatelům umožní otevřít soubor pro prohlížení v příslušné místnosti.",
+  "NPMCodeConfigStep": "Vytvořte konfigurační objekt s požadovanými parametry: {field}, {min}, {max}.",
+  "NPMCodeCreateStep": "Vytvořte HTML element s id z konfigurace {config} a vložte ho do těla dokumentu pro umístění rámce SDK {SDK frame}.",
+  "NPMCodeDescription": "Popis balíčku NPM",
+  "NPMCodeImportStep": "Importujte balíček do svého projektu:",
+  "NPMCodeInitStep": "Inicializace SDK:",
+  "NPMCodeInstallStep": "Nainstalujte balíček z npm a uložte ho do souboru package.json s --save: {package}.",
+  "NPMCodeUsageStep": "Použijte metodu inicializace SDK k vytvoření rámce SDK: {SDK}.",
+  "SdkPackageVersionInfo": "Pro připojení jako verze balíčku vždy nejnovější.",
+  "SourceType": "Typ připojení"
 }

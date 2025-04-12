@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "Xóa vĩnh viễn",
-  "DeleteForeverTitle": "Xóa vĩnh viễn?"
+  "DeleteForeverTitle": "Xóa vĩnh viễn?",
+  "DeleteForeverNote": "Alle elementer fra {{sectionName}} seksjonen vil bli slettet for alltid. Du vil ikke kunne gjenopprette dem.",
+  "SuccessEmptyAction": "{{sectionName}} seksjonen tømt"
 }

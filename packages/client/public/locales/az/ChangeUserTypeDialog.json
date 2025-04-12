@@ -4,5 +4,14 @@
   "ChangeUserTypeButton": "Növün dəyişdirilməsi",
   "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> tipinə malik olan istifadəçilər <strong>'{{ secondType }}'</strong> istifadəçi tipinə dəyişdirildi.",
   "SuccessChangeGuestType": "Qonaq növü uğurla dəyişdirildi",
-  "SuccessChangeUserType": "İstifadəçi tipi müvəffəqiyyətlə dəyişdirildi"
+  "SuccessChangeUserType": "İstifadəçi tipi müvəffəqiyyətlə dəyişdirildi",
+  "ChangeContactType": "Əlaqə növünü dəyiş",
+  "ChangeGuestsTypeToAdmin": "Qonaq <strong>{{userName}}</strong> {{membersSection}} bölməsinə köçürüləcək və <strong>'{{ secondType }}'</strong> növünə malik olacaq. {{productName}} administratorları {{productName}} parametrlərinə daxil ola, otaqları idarə etmə və arxivləşdirə, yeni istifadəçiləri dəvət edə və onların səviyyəsindən aşağıdakılara rola təyin edə bilərlər. {{productName}} administratorlarının {{documentsSection}} bölməsinə daxil olmaq hüququ var.",
+  "ChangeGuestsTypeToAdminMulti": "Seçilmiş qonaqlar {{membersSection}} bölməsinə köçürüləcək və <strong>'{{ secondType }}'</strong> növünə malik olacaqlar. {{productName}} administratorları {{productName}} parametrlərinə daxil olub, otaqları idarə edə və arxivləşdirə, yeni istifadəçiləri dəvət edə və onların səviyyəsindən aşağıdakılara rola təyin edə bilərlər. {{productName}} administratorları {{documentsSection}} bölməsinə daxil olmağa malikdirlər.",
+  "ChangeGuestsTypeToManager": "Qonaq <strong>{{userName}}</strong> {{membersSection}} bölməsinə köçürüləcək və <strong>'{{ secondType }}'</strong> növünə malik olacaq. Otaq administratorları təyin edilmiş otaqları yarada və idarə edə, yeni istifadəçiləri dəvət edə və Room admin və daha aşağı səviyyəli rolları təyin edə bilərlər. Otaq administratorları {{documentsSection}} bölməsinə daxil olmaq hüququna malikdirlər.",
+  "ChangeGuestsTypeToManagerMulti": "Seçilmiş qonaqlar {{membersSection}} bölməsinə köçürüləcək və <strong>'{{ secondType }}'</strong> növünə malik olacaqlar. Otaq administratorları təyin edilmiş otaqları yarada və idarə edə, yeni istifadəçiləri dəvət edə və Room admin və daha aşağı səviyyəli rolları təyin edə bilərlər. Otaq administratorları {{documentsSection}} bölməsinə daxil olmaq hüququna malikdirlər.",
+  "ChangeUserTypeNote": "<1>Qeyd:</1> siz {{productName}} administratorı və özünüz üçün növü dəyişdirə bilməzsiniz.",
+  "DataReassignmentInfo": "Bu istifadəçi tərəfindən yaradılmış otaqlar avtomatik olaraq sizə təyin ediləcəkdir. Otaqları başqa bir şəxslərə təyin etmək üçün aşağıdakı uyğun linkə klikləyin.",
+  "DataReassignmentWithFilesDeletion": "Bu kontakt tərəfindən yaradılmış bütün paylaşılmış fayllar {min}30{max} gün ərzində avtomatik olaraq sizə təyin ediləcək</1>. Otaqları/paylaşılmış faylları başqa bir şəxslərə qaytarmaq üçün aşağıdakı uyğun linkə klikləyin.",
+  "PersonalDataDeletion": "Bu kontaktın {{sectionName}} bölməsindəki bütün fayllar və qovluqlar <1>30 gün ərzində daimi şəkildə silinəcək</1>."
 }

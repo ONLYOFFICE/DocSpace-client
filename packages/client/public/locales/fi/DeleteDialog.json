@@ -14,5 +14,7 @@
   "MoveToTrashButton": "Siirrä roskakoriin",
   "UnsubscribeButton": "Lopeta tilaus",
   "UnsubscribeNote": "Haluatko varmasti peruuttaa luettelosta valittujen kohteiden tilauksen?",
-  "UnsubscribeTitle": "Tilauksen peruuttamisen vahvistus"
+  "UnsubscribeTitle": "Tilauksen peruuttamisen vahvistus",
+  "DeleteTemplate": "Haluatko todella poistaa mallipohja <1>«{{templateName}}»</1>? Mallipohjaa ei voi palauttaa.",
+  "DeleteTemplates": "Haluatko todella poistaa valitut huonepohjapohjat? Niitä ei voi palauttaa."
 }

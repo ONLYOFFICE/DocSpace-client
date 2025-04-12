@@ -14,5 +14,6 @@
   "ReassigningDataToAnother": "Se ha iniciado el proceso de reasignación de datos del usuario <0>{{fromUser}}</0> al usuario <1>{{toUser}}</1>. Por favor, tenga en cuenta que puede tardar un tiempo considerable.",
   "ReassigningDataToItself": "Se ha iniciado el proceso de reasignación de datos del usuario <0>{{fromUser}}</0> al usuario <1>{{toUser}}</1> <2>{{you}}</2>. Por favor, tenga en cuenta que puede tardar un tiempo considerable.",
   "StartTransferAgain": "Volver a iniciar la transferencia",
-  "UserToWhomTheDataWillBeTransferred": "Usuario al que se transferirán los datos"
+  "UserToWhomTheDataWillBeTransferred": "Usuario al que se transferirán los datos",
+  "RoomsOnlyReassignment": "Transferiremos las habitaciones creadas por el contacto."
 }

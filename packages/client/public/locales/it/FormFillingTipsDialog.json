@@ -1,1 +1,15 @@
-{}
+{
+  "DescriptionUploading": "Crea moduli PDF in {{productName}}, ad esempio nella tua {{sectionName}}, e carica quelli pronti nella stanza. Utilizza la libreria di modelli integrata e scegli tra numerosi modelli PDF pronti.",
+  "HeaderComplete": "Comoda analisi delle risposte raccolte",
+  "HeaderSharing": "Condivisione rapida",
+  "HeaderStarting": "Inizio del processo di compilazione del modulo",
+  "HeaderSubmitting": "L'invio delle risposte",
+  "HeaderUploading": "Facile caricamento moduli",
+  "TitleComplete": "Controlla i moduli compilati e analizza automaticamente i dati raccolti in un foglio di calcolo. Tutto – in un'unica stanza.",
+  "TitleSharing": "Invita altri membri di {{productName}} nella stanza per compilare i moduli PDF caricati. Copia un link di accesso pubblico per condividere la stanza con utenti esterni.",
+  "TitleStarting": "Quando un modulo viene aperto per essere compilato, una copia individuale viene creata automaticamente per ogni risponditore e viene salvata nella cartella \"In Progress\". Ciò significa che il modulo è stato avviato ma non è stato completato ancora.",
+  "TitleSubmitting": "Una volta che il pulsante Completa & Invia è stato cliccato nella form aperta, viene spostato nella cartella Completata.",
+  "WelcomeDescription": "Qui, qui puoi organizzare la compilazione di moduli PDF in modo semplice, raccogliere e analizzare facilmente le risposte. Pronto per iniziare?",
+  "WelcomeFillingForm": "Benvenuti nella Stanza di Compilazione Moduli!",
+  "WelcomeStartTutorial": "Fai un breve tour"
+}

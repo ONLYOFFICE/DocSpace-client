@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "Reatribuir dados a outro usuário",
   "SuccessfullyDeleteGuestInfoMessage": "O convidado foi excluído com sucesso",
   "SuccessfullyDeleteUserInfoMessage": "O usuário foi excluído com sucesso",
-  "ToBeAbleToReassignData": "Para poder reatribuir dados, exclua um usuário por vez."
+  "ToBeAbleToReassignData": "Para poder reatribuir dados, exclua um usuário por vez.",
+  "PersonalDataDeletionInfo": "Dados pessoais, todos os arquivos e pastas pessoais nas seções {{sectionNameFirst}} e {{sectionNameSecond}}* dos usuários selecionados serão permanentemente excluídos. Arquivos e pastas dos usuários selecionados mantidos em seções comuns* como salas permanecerão em {{productName}}.",
+  "UserFilesRemovalScope": "Dados pessoais, todos os arquivos e pastas nas seções {{sectionNameFirst}} e {{sectionNameSecond}} deste usuário serão permanentemente excluídos."
 }

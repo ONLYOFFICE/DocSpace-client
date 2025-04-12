@@ -2,5 +2,6 @@
   "DisplayFileExtension": "Dateierweiterung neben dem Dateinamen anzeigen",
   "DisplayNotification": "Benachrichtigung beim Verschieben in den Papierkorb anzeigen",
   "OpenSameTab": "{{organizationName}}-Editor in derselben Registerkarte öffnen",
-  "OriginalCopy": "Dateikopie auch im Originalformat speichern"
+  "OriginalCopy": "Dateikopie auch im Originalformat speichern",
+  "CancellaionNotification": "Zeige die Stornierungsbenachrichtigung nicht erneut an"
 }

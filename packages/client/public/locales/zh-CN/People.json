@@ -1,5 +1,7 @@
 {
   "LblInviteAgain": "再次邀请",
   "MessageEmailActivationInstuctionsSentOnEmail": "邮件激活指示已发送至<1>{{email}}</1>邮件地址。",
-  "UserStatus": "状态"
+  "UserStatus": "状态",
+  "RemoveUser": "移除用户",
+  "RemoveUserConfirmationText": "您将要将一个用户从房间中移除。请注意，该用户正在积极参与表单填写。如果您继续操作，他们参与的任何表单都将停留在当前步骤。{field}。{min}。{max}。"
 }

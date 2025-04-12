@@ -14,5 +14,7 @@
   "MoveToTrashButton": "Mettre dans la corbeille",
   "UnsubscribeButton": "Se désabonner",
   "UnsubscribeNote": "Êtes-vous sûr de vouloir vous désabonner des éléments sélectionnés dans la liste ?",
-  "UnsubscribeTitle": "Confirmation de désabonnement"
+  "UnsubscribeTitle": "Confirmation de désabonnement",
+  "DeleteTemplate": "Voulez-vous vraiment supprimer la salle de modèle <1>«{{templateName}}»</1> ? Le modèle ne peut pas être restauré.",
+  "DeleteTemplates": "Voulez-vous vraiment supprimer les modèles de pièces sélectionnés ? Ils ne peuvent pas être restaurés."
 }

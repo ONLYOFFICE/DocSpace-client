@@ -44,5 +44,8 @@
   "UploadDevicePDFFormOptionTitle": "Загрузить с устройства",
   "UploadFromPortalTitle": "Загрузить из {{productName}}",
   "UploadPDFFormOptionDescription": "Выберите готовую PDF-форму, доступную в {{productName}}, и загрузите ее в комнату.",
-  "VirtualDataRoomEmptyTitle": "Добро пожаловать в Виртуальную комнату данных"
+  "VirtualDataRoomEmptyTitle": "Добро пожаловать в Виртуальную комнату данных",
+  "EmptyTemplatesDescription": "Вы можете создать шаблон из комнаты в разделе Комнаты.",
+  "EmptyTemplatesTitle": "Здесь пока нет шаблонов",
+  "SectionsUploadDescription": "Загрузите любые типы файлов из {{sectionNameFirst}} или {{sectionNameSecond}}"
 }

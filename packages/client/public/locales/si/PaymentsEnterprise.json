@@ -25,5 +25,14 @@
   "UpgradeToProBannerItemScalabilityHeader": "පරිමාණය සහ පොකුරු කිරීම.",
   "UpgradeToProBannerItemSupportDescr": "ඔබ මුහුණ දෙන සියළුම ගැටළු සඳහා ඉක්මනින් සහාය ගන්න.",
   "UpgradeToProBannerItemSupportHeader": "තාක්‍ෂණික සහාය",
-  "UploadLicenseFile": "බලපත්‍රය උඩුගත කරන්න"
+  "UploadLicenseFile": "බලපත්‍රය උඩුගත කරන්න",
+  "ActivateRenewalDescr": "तुम्ही आधी खरेदी केलेला नूतनीकरण सक्रिय करण्यासाठी, ते खाली अपलोड करा आणि 'सक्रिय करा' बटणावर क्लिक करा.",
+  "ActivateRenewSubscriptionHeader": "{{license}} सदस्यता नूतनीकरण करा",
+  "ActivateSwithToProHeader": "पूर्ण {{license}} आवृत्तीवर स्विच करा",
+  "ActivateTariffDescr": "तुम्ही {{organizationName}} {{productName}} {{license}} वापरत आहात.",
+  "ActivateToProBannerHeaderTrial": "पूर्ण {{license}} आवृत्ती खरेदी करा:",
+  "UpgradeToProBannerHeader": "30 दिवसांसाठी एंटरप्राइज-रेडी ऑफिस सूटमध्ये विनामूल्य प्रवेश मिळवा.",
+  "UpgradeToProBannerInformationAboutShort": "{{license}} આવૃત્તિ વિશે <1>સત્તાવાર વેબસાઇટ</1> પર વધુ જાણો.",
+  "UpgradeToProBannerInstructionHeader": "प्रो वैशिष्ट्ये ॲक्सेस करण्यासाठी, {{organizationName}} {{license}} एडिशनच्या विनामूल्य 30-दिवसांच्या चाचणीस प्रारंभ करा.",
+  "UpgradeToProBannerItemMobileHeader": "मोबाईल संपादन."
 }

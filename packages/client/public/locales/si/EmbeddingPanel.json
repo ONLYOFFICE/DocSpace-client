@@ -1,4 +1,11 @@
 {
   "Height": "උස",
-  "Width": "පළල"
+  "Width": "පළල",
+  "CodeSuccessfullyCopied": "कोड {code} यशस्वीरित्या क्लिपबोर्डवर कॉपी झाला.",
+  "ContentRestricted": "सामग्री प्रतिलिपि, फाइल डाउनलोडिंग आणि छपाई प्रतिबंधित आहे.",
+  "DisplaySettings": "प्रदर्शन सेटिंग्ज",
+  "EmbeddingBarAllowList": "एम्बेडिंगसाठी वेबसाइट URL <1>अनुमत यादी</1> मध्ये जोडा.",
+  "EmbeddingBarDescription": "Embedding will only work for the URLs specified by the {{productName}} admin in the JavaScript SDK settings.",
+  "Link": "लिंक",
+  "LinkProtectedWithPassword": "లింక్ {password}తో రక్షించబడింది."
 }

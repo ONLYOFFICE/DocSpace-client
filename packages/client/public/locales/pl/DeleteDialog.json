@@ -14,5 +14,7 @@
   "MoveToTrashButton": "Przenieś do kosza",
   "UnsubscribeButton": "Zrezygnuj z subskrypcji",
   "UnsubscribeNote": "Czy na pewno chcesz zrezygnować z subskrypcji dla wybranych elementów z listy?",
-  "UnsubscribeTitle": "Potwierdź rezygnację"
+  "UnsubscribeTitle": "Potwierdź rezygnację",
+  "DeleteTemplate": "Czy na pewno chcesz usunąć szablon pokoju <1>«{{templateName}}»</1>? Szablonu nie można przywrócić.",
+  "DeleteTemplates": "Czy naprawdę chcesz usunąć wybrane szablony pokoi? Nie można ich przywrócić."
 }

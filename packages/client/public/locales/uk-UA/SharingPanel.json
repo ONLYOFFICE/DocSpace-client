@@ -2,5 +2,6 @@
   "ExternalLink": "Зовнішнє посилання",
   "LinkName": "Назва посилання",
   "ShareEmailBody": "Вам надано доступ до документа {{itemName}}. Клацніть посилання нижче, щоб відкрити документ зараз: {{shareLink}}.",
-  "ShareEmailSubject": "Вам надано доступ до документа {{itemName}}"
+  "ShareEmailSubject": "Вам надано доступ до документа {{itemName}}",
+  "RoleForLink": "Роль для посилання"
 }

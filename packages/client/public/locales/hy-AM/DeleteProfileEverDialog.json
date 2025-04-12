@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "Վերահանձնարարել տվյալները մեկ այլ օգտվողի",
   "SuccessfullyDeleteGuestInfoMessage": "Հյուրը հաջողությամբ ջնջվել է",
   "SuccessfullyDeleteUserInfoMessage": "Օգտվողը հաջողությամբ ջնջվել է",
-  "ToBeAbleToReassignData": "Որպեսզի կարողանաք վերանշանակել տվյալները, ջնջեք մեկ օգտատեր:"
+  "ToBeAbleToReassignData": "Որպեսզի կարողանաք վերանշանակել տվյալները, ջնջեք մեկ օգտատեր:",
+  "PersonalDataDeletionInfo": "Անձնական տվյալները, ընտրված օգտագործողների {{sectionNameFirst}} և {{sectionNameSecond}} բաժիններում գտնված բոլոր անձնական ֆայլերը և ֆոլդերները մշտապես ջնջվելու են։ Ընտրված օգտագործողների ընդհանուր բաժիններում, օրինակ՝ սենյակներում պահվող ֆայլերը և ֆոլդերները մնալու են {{productName}}.",
+  "UserFilesRemovalScope": "Անձնական տվյալները, ինչպես նաև այս օգտագործողի {{sectionNameFirst}} և {{sectionNameSecond}} բաժիններում գտնված բոլոր ֆայլերը և ֆոլդերները կջնջվեն կայուն։"
 }

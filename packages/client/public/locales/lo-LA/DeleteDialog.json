@@ -10,5 +10,11 @@
   "MoveToTrashButton": "ຍ້າຍລົງຖັງຂີ້ເຫຍື້ອ",
   "UnsubscribeButton": "ຍົກເລິກຕິດຕາມ",
   "UnsubscribeNote": "ທ່ານແນ່ໃຈຫລືບໍ່ວ່າທ່ານຕ້ອງການຍົກເລິກການຕິດຕາມໄອເທັມນີ້?",
-  "UnsubscribeTitle": "ຢືນຢັນການຍົກເລິກການຕິດຕາມ"
+  "UnsubscribeTitle": "ຢືນຢັນການຍົກເລິກການຕິດຕາມ",
+  "DeleteAllGroupDescription": "Izbrisane će biti izabrane grupe. Korisnici u grupama neće biti uklonjeni iz {{productName}}. Jesi li siguran/sigurna da želiš nastaviti?",
+  "DeleteAllGroupsTitle": "Izbriši grupe",
+  "DeleteGroupDescription": "Skupina {{groupName}} bo izbrisana. Uporabniki v skupini ne bodo odstranjeni iz {{productName}}. Ste prepričani, da želite nadaljevati?",
+  "DeleteGroupTitle": "Izbriši grupa",
+  "DeleteTemplate": "Res želite resno izbrisati predlogo sobe <1>«{{templateName}}»</1>? Predloge ni mogoče obnoviti.",
+  "DeleteTemplates": "Res želite res izbrisati izbrane predloge sob? Njih ne moremo obnoviti."
 }

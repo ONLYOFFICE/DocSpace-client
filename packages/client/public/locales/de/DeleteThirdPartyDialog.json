@@ -1,4 +1,5 @@
 {
   "DisconnectCloudTitle": "Cloud-Verbindung trennen",
-  "SuccessDeleteThirdParty": "{{service}} wurde deaktiviert"
+  "SuccessDeleteThirdParty": "{{service}} wurde deaktiviert",
+  "ThirdPartyDisconnectPrompt": "Sind Sie sicher, dass Sie den {{service}} löschen möchten? Dies wirkt sich in keiner Weise auf Ihr {{account}} Konto aus."
 }

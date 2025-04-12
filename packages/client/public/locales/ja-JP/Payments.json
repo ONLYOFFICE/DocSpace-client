@@ -46,5 +46,6 @@
   "UserNotFound": "<1>{{email}}</1>ユーザーが見つかりません。",
   "UserNotFoundMatchingEmail": "我们无法找到与Stripe电子邮件匹配的用户。",
   "UsersQuotaAlmostExhausted": "有料ユーザーのストレージ容量が残りわずかです。",
-  "YourPrice": "価格"
+  "YourPrice": "価格",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/year</3>"
 }

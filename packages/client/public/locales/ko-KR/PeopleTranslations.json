@@ -34,5 +34,8 @@
   "SuccessDeletePersonalData": "개인 데이터가 성공적으로 삭제되었습니다",
   "SuccessSentInvitation": "초대장이 성공적으로 전송되었습니다",
   "SuccessSentMultipleInvitatios": "초대장이 성공적으로 발송되었습니다",
-  "WithoutGroup": "그룹 없이"
+  "WithoutGroup": "그룹 없이",
+  "MembersCount": "회원 수: {{count}}",
+  "ShareGuest": "손님 공유",
+  "SuccessCopyContantLink": "연락 링크가 성공적으로 복사되었습니다. 링크는 <strong>{7 days}</strong> 동안 유효합니다."
 }

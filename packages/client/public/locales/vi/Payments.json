@@ -46,5 +46,6 @@
   "UserNotFound": "Không tìm thấy người dùng<1>{{email}}</1>.",
   "UserNotFoundMatchingEmail": "Chúng tôi không thể tìm thấy người dùng có e-mail Stripe phù hợp.",
   "UsersQuotaAlmostExhausted": "Gần như đã dùng hết hạn mức người dùng trả phí.",
-  "YourPrice": "Phí thanh toán của bạn"
+  "YourPrice": "Phí thanh toán của bạn",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/år</3>"
 }

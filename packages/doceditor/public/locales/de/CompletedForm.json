@@ -8,5 +8,16 @@
   "FormCompletedSuccessfully": "Formular erfolgreich ausgefüllt",
   "FormNumber": "Formularnummer",
   "FormOwner": "Formularinhaber",
-  "Title": "Das Formular ist ausgefüllt"
+  "Title": "Das Formular ist ausgefüllt",
+  "FillOutForm": "Füllen Sie das Formular aus",
+  "FormFinalized": "Formular abgeschlossen",
+  "FormSectionCompleted": "Abschnittsformular abgeschlossen",
+  "FormVDRCompletedDescription": "Das Formular wurde von allen Rollen vollständig ausgefüllt und ist nun abgeschlossen. Es ist im schreibgeschützten Modus verfügbar.",
+  "FormVDRConfirmationOfStartDescription": "Eine Benachrichtigung wurde dem Benutzer in der ersten Rolle bereits gesendet, um ihn zur Ausfüllung des Formulars aufzufordern. Sie können den Raum aufrufen oder den Link zum Ausfüllen mit den Teilnehmern teilen.",
+  "FormVDRConfirmationOfStartTitle": "Das Formular ist bereit zum Ausfüllen im Raum {room}.",
+  "FormVDRSectionCompletedDescription": "Der zugewiesene Abschnitt des PDF-Formulars wurde erfolgreich ausgefüllt. Der Füllstatus des Formulars kann im Raum und über das Füllstatus-Panel überwacht werden. Eine E-Mail-Benachrichtigung wird gesendet, sobald das Formular vollständig ausgefüllt ist.",
+  "FormVDRYourTurnDescription": "Sie sind dazu bestimmt, das Formular in der ersten Rolle auszufüllen. Eine Benachrichtigung wurde an Ihre E-Mail-Adresse gesendet. Sie können jetzt mit dem Ausfüllen beginnen oder den Link zum Ausfüllen kopieren und später zurückkehren.",
+  "LinkToFillOutForm": "Link zum Ausfüllen des Formulars:",
+  "LinkToForm": "Link zum Formular:",
+  "LinkToViewOnlyForm": "Link zur schreibgeschützten Formularansicht:"
 }

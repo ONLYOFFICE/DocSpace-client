@@ -8,5 +8,16 @@
   "FormCompletedSuccessfully": "Formulário concluído com sucesso",
   "FormNumber": "Número do formulário",
   "FormOwner": "Proprietário do formulário",
-  "Title": "O formulário está preenchido"
+  "Title": "O formulário está preenchido",
+  "FillOutForm": "Preencha o formulário",
+  "FormFinalized": "Formulário Finalizado",
+  "FormSectionCompleted": "Seção do Formulário Concluída",
+  "FormVDRCompletedDescription": "O formulário foi preenchido integralmente por todos os papéis e agora está finalizado. Está disponível em modo de visualização somente.",
+  "FormVDRConfirmationOfStartDescription": "Uma notificação já foi enviada para o usuário no primeiro papel, solicitando que ele preencha o formulário. Você pode navegar até a sala ou compartilhar o link de preenchimento com os participantes.",
+  "FormVDRConfirmationOfStartTitle": "O formulário está pronto para preencher no quarto {room} com um mínimo de {min} e máximo de {max} itens.",
+  "FormVDRSectionCompletedDescription": "A parte atribuída do formulário PDF foi preenchida com sucesso. O status de preenchimento do formulário pode ser monitorado na sala e através do painel de status de preenchimento. Um e-mail de notificação será enviado assim que o formulário for totalmente preenchido.",
+  "FormVDRYourTurnDescription": "Você está designado para preencher o formulário como a primeira função. Uma notificação foi enviada para o seu e-mail. Você pode começar a preenchê-lo agora ou copiar o link de preenchimento e retornar mais tarde.",
+  "LinkToFillOutForm": "Link para preencher o formulário: ",
+  "LinkToForm": "Link para o formulário:",
+  "LinkToViewOnlyForm": "Link para formulário somente para visualização:"
 }

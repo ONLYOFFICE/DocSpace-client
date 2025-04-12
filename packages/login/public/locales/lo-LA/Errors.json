@@ -16,5 +16,8 @@
   "SsoSettingsDisabled": "ການເຂົ້າສູ່ລະບົບແບບເອກະພົດຖືກປິດໃຊ້ງານ",
   "SsoSettingsEmptyToken": "ບໍ່ພົບໂທເຄັນການພິສູດຢືນຢັນຕົວຕົນ",
   "SsoSettingsNotValidToken": "ໂທເຄັນການພິສູດຢືນຢັນຕົວຕົນບໍ່ຖືກຕ້ອງ",
-  "SsoSettingsUserTerminated": "ຜູ້ໃຊ້ນີ້ຖືກປິດໃຊ້ງານ"
+  "SsoSettingsUserTerminated": "ຜູ້ໃຊ້ນີ້ຖືກປິດໃຊ້ງານ",
+  "OAuthApplicationDisabled": "Ova aplikacija je onemogućena.",
+  "OAuthApplicationEmpty": "Aplikacija se ni mogla najti",
+  "OAuthClientEmpty": "Ključni identifikatorji stranke niso bili najdeni."
 }

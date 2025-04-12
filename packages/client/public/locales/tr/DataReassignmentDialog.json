@@ -14,5 +14,6 @@
   "ReassigningDataToAnother": "Verilerin <0>{{fromUser}}</0> kullanıcısından <1>{{toUser}}</1> kullanıcısına yeniden atanması süreci başladı. Bunun uzun sürebileceğini lütfen unutmayın.",
   "ReassigningDataToItself": "<0>{{fromUser}}</0> kullanıcısından <1>{{toUser}}</1> <2>{{you}}</2> kullanıcısına yeniden veri atama işlemi başladı. Bunun uzun sürebileceğini lütfen unutmayın.",
   "StartTransferAgain": "Aktarımı tekrar başlat",
-  "UserToWhomTheDataWillBeTransferred": "Verilerin aktarılacağı kullanıcı"
+  "UserToWhomTheDataWillBeTransferred": "Verilerin aktarılacağı kullanıcı",
+  "RoomsOnlyReassignment": "İletişim tarafından oluşturulan odaları aktaracağız."
 }

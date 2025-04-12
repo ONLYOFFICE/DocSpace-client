@@ -4,5 +4,14 @@
   "ChangeUserTypeButton": "تغيير النوع",
   "ChangeUserTypeMessage": "سيتم نقل المستخدمين من النوع <strong>\"{{ firstType }}\"</strong> إلى النوع <strong>'{{ secondType }}'</strong>.",
   "SuccessChangeGuestType": "تم تغيير نوع الضيف بنجاح",
-  "SuccessChangeUserType": "تم تغيير نوع المستخدم بنجاح"
+  "SuccessChangeUserType": "تم تغيير نوع المستخدم بنجاح",
+  "ChangeContactType": "تغيير نوع الاتصال",
+  "ChangeGuestsTypeToAdmin": "الضيف <strong>{{userName}}</strong> سيتم نقله إلى قسم <strong>{{membersSection}}</strong> وتعيين النوع <strong>'{{ secondType }}'</strong>. يمكن لمسؤولي <strong>{{productName}}</strong> الوصول إلى إعدادات <strong>{{productName}}</strong>، وإدارة الأجنحة وأرشفتها، ودعوة مستخدمين جدد وتعيين أدوار أدنى من مستواهم. يتمتع مسؤولو <strong>{{productName}}</strong> بالوصول إلى قسم <strong>{{documentsSection}}</strong>.",
+  "ChangeGuestsTypeToAdminMulti": "سيتم نقل الضيوف المختارين إلى قسم {{membersSection}} وتعيين النوع  <strong>'{{ secondType }}'</strong>. يمكن لمسؤولي {{productName}} الوصول إلى إعدادات {{productName}}، وإدارة الأجنحة وأرشفتها، ودعوة مستخدمين جدد وتعيين أدوار أقل من مستواهم. يتمتع مسؤولو {{productName}} بالوصول إلى قسم {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "الضيف <strong>{{userName}}</strong> سيتم نقله إلى قسم <strong>{{membersSection}}</strong> وسيتم تعيين النوع <strong>'{{ secondType }}'</strong>. يمكن لمسؤولي الغرف إنشاء وإدارة الغرف المخصصة، ودعوة مستخدمين جدد، وتعيين أدوار مسؤول الغرفة وما دون ذلك. يتمتع مسؤولو الغرف بالوصول إلى قسم <strong>{{documentsSection}}</strong>.",
+  "ChangeGuestsTypeToManagerMulti": "سيتم نقل الضيوف المختارين إلى قسم {{membersSection}} وتعيين النوع <strong>'{{ secondType }}'</strong>. يمكن لمسؤولي الغرف إنشاء وإدارة الغرف المعينة، ودعوة مستخدمين جدد، وتعيين أدوار مسؤول الغرفة وما دون ذلك. يتمتع مسؤولو الغرف بالوصول إلى قسم {{documentsSection}}.",
+  "ChangeUserTypeNote": "<1>ملاحظة:</1> لا يمكنك تغيير النوع للمسؤول عن {{productName}} ولك ولنفسك.",
+  "DataReassignmentInfo": "سيتم تخصيص الغرف التي أنشأها هذا المستخدم لك تلقائيًا. لإعادة تخصيص الغرف لشخص آخر، انقر على الرابط المناسب أدناه.",
+  "DataReassignmentWithFilesDeletion": "سيتم تعيين جميع الملفات المشتركة التي تم إنشاؤها بواسطة هذا الاتصال تلقائيًا لك في {30} يومًا.</1> لإعادة تعيين الغرف/الملفات المشتركة إلى شخص آخر، انقر على الرابط المقابل أدناه.",
+  "PersonalDataDeletion": "سيتم حذف جميع الملفات والمجلدات في قسم {{sectionName}} الخاص بهذا الاتصال بشكل دائم خلال 30 يومًا.</1>"
 }

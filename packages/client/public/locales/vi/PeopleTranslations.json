@@ -34,5 +34,8 @@
   "SuccessDeletePersonalData": "Dữ liệu cá nhân đã được xóa thành công",
   "SuccessSentInvitation": "Lời mời đã được gửi thành công",
   "SuccessSentMultipleInvitatios": "Lời mời đã được gửi thành công",
-  "WithoutGroup": "Không có nhóm"
+  "WithoutGroup": "Không có nhóm",
+  "MembersCount": "medlemmer: {{count}}",
+  "ShareGuest": "Del {guest}",
+  "SuccessCopyContantLink": "Kontaklinken er kopiert vellykket. Lenken er <strong>valid for 7 days.</strong>"
 }

@@ -4,5 +4,14 @@
   "ChangeUserTypeButton": "Vaihda tyyppiä",
   "ChangeUserTypeMessage": "Käyttäjät, joiden tyyppi on <strong>’{{firstType}}’</strong>, siirretään tyypiksi <strong>’{{secondType}}’</strong>.",
   "SuccessChangeGuestType": "Vierastyyppi on onnistuneesti muutettu",
-  "SuccessChangeUserType": "Käyttäjän tila muutettu onnistuneesti"
+  "SuccessChangeUserType": "Käyttäjän tila muutettu onnistuneesti",
+  "ChangeContactType": "Vaihda yhteystyyppi",
+  "ChangeGuestsTypeToAdmin": "Vieraat <strong>{{userName}}</strong> siirretään {{membersSection}}-osioon ja heille määritetään <strong>'{{ secondType }}'</strong>-tyyppi. {{productName}}-ylläpitäjät voivat käyttää {{productName}}-asetuksia, hallita ja arkistoida huoneita, kutsua uusia käyttäjiä ja määrittää rooleja alemmalla tasolla. {{productName}}-ylläpitäjillä on pääsy {{documentsSection}}-osioon.",
+  "ChangeGuestsTypeToAdminMulti": "Valitut vieraat siirretään {{membersSection}} -osioon ja heille määritetään <strong>'{{ secondType }}'</strong> -tyyppi. {{productName}} -ylläpitäjät voivat käyttää {{productName}} -asetuksia, hallita ja arkistoida huoneita, kutsua uusia käyttäjiä ja määrittää rooleja heidän alapuolellaan. {{productName}} -ylläpitäjillä on pääsy {{documentsSection}} -osioon.",
+  "ChangeGuestsTypeToManager": "Vieras <strong>{{userName}}</strong> siirretään {{membersSection}}-osioon ja sille määritetään <strong>'{{ secondType }}'</strong>-tyyppi. Huoneen ylläpitäjät voivat luoda ja hallita määritettyjä huoneita, kutsua uusia käyttäjiä ja määrittää rooleja, kuten huoneen ylläpitäjä ja alemmat. Huoneen ylläpitäjillä on pääsy {{documentsSection}}-osioon.",
+  "ChangeGuestsTypeToManagerMulti": "Valitut vieraat siirretään {{membersSection}} -osioon ja heille määritetään <strong>'{{ secondType }}'</strong> -tyyppi. Huoneen ylläpitäjät voivat luoda ja hallita määritettyjä huoneita, kutsua uusia käyttäjiä ja määrittää rooleja Huoneen ylläpitäjä ja alemmat. Huoneen ylläpitäjillä on pääsy {{documentsSection}} -osioon.",
+  "ChangeUserTypeNote": "<1>Huomautus:</1> et voi muuttaa tyyppiä {{productName}} -ylläpitäjälle ja itsellesi.",
+  "DataReassignmentInfo": "Tämän käyttäjän luomat huoneet jaetaan automaattisesti sinulle. Huoneiden uudelleenjakamiseksi toiselle henkilölle, klikkaa vastaavaa linkkiä alla.",
+  "DataReassignmentWithFilesDeletion": "Kaikki tämän yhteyshenkilön luomat jaetut tiedostot määritetään automaattisesti sinulle {max} päivän kuluttua</1>. Muiden henkilöiden nimittämiseksi huoneisiin/jaettuihin tiedostoihin, klikkaa alla olevaa linkkiä.",
+  "PersonalDataDeletion": "Kaikki tiedostot ja kansiot tässä {{sectionName}} -osiossa olevalle yhteystiedolle poistetaan pysyvästi <1>30 päivän</1> kuluttua."
 }

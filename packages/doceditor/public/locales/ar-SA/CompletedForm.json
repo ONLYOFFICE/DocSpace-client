@@ -8,5 +8,16 @@
   "FormCompletedSuccessfully": "النموذج مكتمل بنجاح",
   "FormNumber": "رقم النموذج",
   "FormOwner": "مالك النموذج",
-  "Title": "النموذج مكتمل"
+  "Title": "النموذج مكتمل",
+  "FillOutForm": "املأ النموذج",
+  "FormFinalized": "تمت المصادقة على النموذج",
+  "FormSectionCompleted": "تم إكمال قسم النموذج",
+  "FormVDRCompletedDescription": "تم ملء النموذج بالكامل من قبل جميع الأدوار وهو الآن نهائي. وهو متاح في وضع القراءة فقط.",
+  "FormVDRConfirmationOfStartDescription": "تم إرسال إشعار بالفعل إلى المستخدم في الدور الأول، مطالبًا إياه بملء النموذج. يمكنك الانتقال إلى الغرفة أو مشاركة رابط الملء مع المشاركين. {field} {min} {max}",
+  "FormVDRConfirmationOfStartTitle": "النموذج جاهز للتعبئة في الغرفة {room}.",
+  "FormVDRSectionCompletedDescription": "تم إكمال الجزء المخصص من نموذج PDF بنجاح. يمكن مراقبة حالة تعبئة النموذج في الغرفة وعبر لوحة حالة التعبئة. سيتم إرسال إشعار بالبريد الإلكتروني بمجرد اكتمال النموذج بالكامل.",
+  "FormVDRYourTurnDescription": "تم تكليفك بملء النموذج كأول دور. تم إرسال إشعار إلى بريدك الإلكتروني. يمكنك البدء في ملئه الآن أو نسخ رابط الملء والعودة لاحقًا. {field} {min} {max}",
+  "LinkToFillOutForm": "رابطة لملء النموذج: Link to fill out form: {field}",
+  "LinkToForm": "رابط إلى النموذج: {Link to form:}",
+  "LinkToViewOnlyForm": "رابط لعرض نموذج للقراءة فقط: Link to view-only form: {Link to view-only form:}"
 }

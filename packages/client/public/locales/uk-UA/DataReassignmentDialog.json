@@ -14,5 +14,6 @@
   "ReassigningDataToAnother": "Процес перепризначення даних від користувача <0>{{fromUser}}</0> користувачу <1>{{toUser}}</1> розпочато. Зауважте, що він може тривати значний час.",
   "ReassigningDataToItself": "Процес перепризначення даних від користувача <0>{{fromUser}}</0> користувачу <1>{{toUser}}</1> <2>{{you}}</2> розпочато. Зауважте, що він може тривати значний час.",
   "StartTransferAgain": "Почати передавання знову",
-  "UserToWhomTheDataWillBeTransferred": "Користувач, якому будуть передані дані"
+  "UserToWhomTheDataWillBeTransferred": "Користувач, якому будуть передані дані",
+  "RoomsOnlyReassignment": "Ми передамо кімнати, створені контактом {contact}, з {min} до {max}."
 }

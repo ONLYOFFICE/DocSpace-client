@@ -8,5 +8,6 @@
   "LicenseLink": "බලපත්‍ර ගිවිසුම්",
   "PlaceholderLicense": "ඔබගේ බලපත්‍රයේ ගොනුව",
   "Timezone": "වේලා කලාපය",
-  "WelcomeTitle": "{{productName}} වෙත පිළිගනිමු!"
+  "WelcomeTitle": "{{productName}} වෙත පිළිගනිමු!",
+  "ErrorInstanceId": "చెల్లని ఉదాహరణ ID"
 }

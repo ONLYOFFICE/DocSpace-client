@@ -1,4 +1,6 @@
 {
   "EditComment": "Uredi komentar",
-  "Version": "Ver."
+  "Version": "Ver.",
+  "DeleteVersion": "Obriši verziju",
+  "DeleteVersionDescription": "Ubrzaćete obrisati verziju fajla. Biće nemoguće da je vidite ili vratite. Jesi li siguran da želiš da nastaviš?"
 }

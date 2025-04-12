@@ -24,5 +24,15 @@
   "SettingsForAll": "Te nastavitve bodo uporabljene za vse vaše prostore.",
   "Subheader": "Uporabite ta razdelek, da ustvarite več prostorov in omogočite dostop do njih svojim uporabnikom",
   "SubmitDelete": "Oddaj zahtevo za izbris",
-  "VisitSpace": "Po kreiranju obiščite ta prostor"
+  "VisitSpace": "Po kreiranju obiščite ta prostor",
+  "DecryptStorage": "Dešifriraj shrambo",
+  "DecryptWarningDialogContent": "Vsa mesta bodo med postopkom dešifriranja postala nedostopna. Ste prepričani, da želite nadaljevati?",
+  "EncryptData": "Šifriraj podatke v miro",
+  "EncryptDataDescription": "{{organizationName}} uporablja šifriranje AES-256 za zaščito podatkov v miro v shrambi.",
+  "EncryptDataWarningDescription": "Šifriranje shranjevanja lahko traja čas. Prostor bo med postopkom nedostopen. Prepričajte se, da imate dovolj prostora za shranjevanje in da so vaši podatki varnostno kopirani. Ne pozabite izklopiti samodejne varnostne kopije in ustaviti vse tekoče. V nasprotnem primeru bo to storjeno samodejno.",
+  "EncryptStorage": "Šifriraj shranjevanje",
+  "EncryptWarningDialogContent": "Vse praznine bodo med procesom šifriranja nedostopne. Ste prepričani, da želite nadaljevati?",
+  "MoreDetails": "Za več podrobnosti o tem, kako ustaviti storitve, prosim, glejte na <1>{{link}}</1>.",
+  "NotifyUsers": "Obvestite uporabnike, da prostora ne bo na voljo.",
+  "StorageEncrypted": "Shranjevanje šifrirano"
 }

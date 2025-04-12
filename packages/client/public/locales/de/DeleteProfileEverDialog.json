@@ -16,5 +16,7 @@
   "ReassignDataToAnotherUser": "Daten an einen anderen Benutzer neu zuweisen",
   "SuccessfullyDeleteGuestInfoMessage": "Der Gast wurde erfolgreich gelöscht",
   "SuccessfullyDeleteUserInfoMessage": "Der Benutzer wurde erfolgreich gelöscht",
-  "ToBeAbleToReassignData": "Um Daten neu zuweisen zu können, löschen Sie jeweils einen Benutzer."
+  "ToBeAbleToReassignData": "Um Daten neu zuweisen zu können, löschen Sie jeweils einen Benutzer.",
+  "PersonalDataDeletionInfo": "Persönliche Daten, alle persönlichen Dateien und Ordner in den {{sectionNameFirst}} und {{sectionNameSecond}} Abschnitten* der ausgewählten Benutzer werden dauerhaft gelöscht. Dateien und Ordner der ausgewählten Benutzer, die in gemeinsamen Abschnitten* wie Räumen gespeichert sind, verbleiben in {{productName}}.",
+  "UserFilesRemovalScope": "Persönliche Daten, alle Dateien und Ordner in den {{sectionNameFirst}} und {{sectionNameSecond}} Abschnitten dieses Benutzers werden dauerhaft gelöscht."
 }

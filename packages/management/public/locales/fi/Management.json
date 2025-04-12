@@ -24,5 +24,15 @@
   "SettingsForAll": "Nämä asetukset tulevat käyttöön  kaikissa tiloissasi. ",
   "Subheader": "Käytä tätä osiota luodaksesi useita tiloja ja lisätäksesi käyttäjillesi niihin oikeudet.",
   "SubmitDelete": "Lähetä poistopyyntö",
-  "VisitSpace": "Käy tässä tilassa sen luomisen jälkeen"
+  "VisitSpace": "Käy tässä tilassa sen luomisen jälkeen",
+  "DecryptStorage": "Avaa salattu tallennus",
+  "DecryptWarningDialogContent": "Kaikki tilat muuttuvat käyttökelvottomiksi salauksen purkuprosessin aikana. Oletko varma, että haluat jatkaa?",
+  "EncryptData": "Salaa data levossa",
+  "EncryptDataDescription": "{{organizationName}} käyttää AES-256-salausta suojatakseen tietoja levossa tallennustilassa.",
+  "EncryptDataWarningDescription": "Tallennuksen salaus voi kestää jonkin aikaa. Tilat eivät ole käytettävissä prosessin aikana. Varmista, että sinulla on riittävästi tallennustilaa ja että tietosi on varmuuskopioitu. Muista poistaa automaattiset varmuuskopiot käytöstä ja lopettaa kaikki käynnissä olevat. Muuten se tehdään automaattisesti.",
+  "EncryptStorage": "Salauksen salaus",
+  "EncryptWarningDialogContent": "Kaikki tilat muuttuvat käyttökelvottomiksi salausprosessin aikana. Oletko varma, että haluat jatkaa?",
+  "MoreDetails": "Lisää tietoa palveluiden pysäyttämisestä löydät osoitteesta <1>{{link}}</1>.",
+  "NotifyUsers": "Ilmoita käyttäjille, että tila ei ole käytettävissä {field} välillä {min} - {max}.",
+  "StorageEncrypted": "Tallennus salattu"
 }

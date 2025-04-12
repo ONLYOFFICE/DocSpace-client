@@ -1,1 +1,15 @@
-{}
+{
+  "DescriptionUploading": "Kreiraj PDF obrasce u {{productName}}, npr. u vašem {{sectionName}}, i učitaj gotove obrasce u sobu. Iskoristi integrisanu biblioteku predložaka i izaberi među brojnim gotovim PDF predlošcima.",
+  "HeaderComplete": "Udobno analiziranje zbranih odgovorov.",
+  "HeaderSharing": "Hitra deljenje",
+  "HeaderStarting": "Počinjemo proces popunjavanja obrasca",
+  "HeaderSubmitting": "Predaja odgovora",
+  "HeaderUploading": "Enkorpa formo ŝarĝado",
+  "TitleComplete": "Preverite izpolnjene obrazci in avtomatsko analizirajte podatke, zbrani v preglednico. Vse – v eni sobi.",
+  "TitleSharing": "Povabite drugi {{productName}} člani v sobo, da izpolnijo naložene obrazce PDF. Kopirajte javno dostopno povezavo za deljenje sobe z zunanjimi uporabniki.",
+  "TitleStarting": "Ko se odpre obrazec za izpolnitev, se samodejno ustvari posamična kopija za vsakega udeleženca in se shrani v mapo V teku. To pomeni, da je obrazec bil začet, a še ni bil končan.",
+  "TitleSubmitting": "Koordinate {x} i {y} su važne za pozicioniranje objekata na ekranu.",
+  "WelcomeDescription": "Tukaj, lahko uredite enostavno izpolnjevanje obrazcev PDF, z lahkoto zbirate in analizirate odgovore. Ste pripravljeni začeti?",
+  "WelcomeFillingForm": "Dobrodošli u sobu za popunjavanje obrazaca!",
+  "WelcomeStartTutorial": "Vzemite kratek ogled {tour}"
+}

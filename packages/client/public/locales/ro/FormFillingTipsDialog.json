@@ -1,1 +1,15 @@
-{}
+{
+  "DescriptionUploading": "Creați formulare PDF în {{productName}}, de exemplu, în {{sectionName}}, și încărcați-le pe cele gata făcute în încăpere. Folosiți biblioteca de șabloane integrată și alegeți dintre numeroase șabloane PDF gata făcute.",
+  "HeaderComplete": "Analiza convenabilă a răspunsurilor colectate",
+  "HeaderSharing": "Partajare rapidă",
+  "HeaderStarting": "Începerea procesului de completare a formularului",
+  "HeaderSubmitting": "Depunerea răspunsurilor",
+  "HeaderUploading": "Încărcare ușoară a formularelor",
+  "TitleComplete": "Verificați formularele completate și analizați automat datele colectate într-o foaie de calcul. Totul – într-o singură cameră.",
+  "TitleSharing": "Invitați alți membri {{productName}} în cameră pentru a completa formularele PDF încărcate. Copiați un link de acces public pentru a partaja camera cu utilizatori externi.",
+  "TitleStarting": "Când un formular este deschis pentru completare, o copie individuală este creată automat pentru fiecare participant și este salvată în dosarul „În lucru”. Asta înseamnă că formularul a fost început, dar nu a fost finalizat încă.",
+  "TitleSubmitting": "După ce butonul Complete & Submit este apăsat în formularul deschis, acesta este mutat în folderul Complete.",
+  "WelcomeDescription": "Aici, puteți organiza completarea simplă de formulare PDF, puteți colecta și analiza cu ușurință răspunsurile. Gata să începeți?",
+  "WelcomeFillingForm": "Bine ați venit în Camera de Completare a Formularelor!",
+  "WelcomeStartTutorial": "Fă un tur scurt"
+}

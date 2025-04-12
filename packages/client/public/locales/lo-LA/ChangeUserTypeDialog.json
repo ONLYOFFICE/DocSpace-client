@@ -1,5 +1,17 @@
 {
   "ChangeUserTypeButton": "ປ່ຽນປະເພດ",
   "ChangeUserTypeMessage": "ຜູ້ໃຊ້ທີ່ມີປະເພດ <strong>'{{firstType}}'</strong> ຈະຖືກຍ້າຍໄປປະເພດ <strong>'{{secondType}}'</strong>.",
-  "SuccessChangeUserType": "ປະເພດຜູ້ໃຊ້ຖືກປ່ຽນແປງສຳເລັດຜົນແລ້ວ."
+  "SuccessChangeUserType": "ປະເພດຜູ້ໃຊ້ຖືກປ່ຽນແປງສຳເລັດຜົນແລ້ວ.",
+  "ChangeContactType": "Spremenite tip kontakta",
+  "ChangeGuestsTypeMessage": "Гост <strong>{{userName}}</strong> ќе биде преместен во секцијата {{membersSection}} и ќе му биде доделен типот Корисник. Корисниците имаат своја секција {{documentsSection}}, можат да креираат и уредуваат датотеки, но не можат да креираат соби.",
+  "ChangeGuestsTypeMessageMulti": "Izabrani gosti biće premešteni u sekciju {{membersSection}} i biće im dodeljen tip Korisnik. Korisnici imaju svoju sekciju {{documentsSection}}, mogu da kreiraju i uređuju fajlove, ali ne mogu da kreiraju sobe.",
+  "ChangeGuestsTypeToAdmin": "Гост <strong>{{userName}}</strong> ќе биде преместен во секцијата {{membersSection}} и ќе му биде доделен типот <strong>'{{ secondType }}'</strong>. Админаторските корисници на {{productName}} можат да пристапат до поставките на {{productName}}, да управуваат и да архивираат соби, да покануваат нови корисници и да доделуваат улоги под нивно ниво. Админаторите на {{productName}} имаат пристап до секцијата {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Izabrani gosti biće premešteni u sekciju {{membersSection}} i biće im dodeljen tip <strong>'{{ secondType }}'</strong>. Administratori {{productName}} mogu pristupiti podešavanjima {{productName}}, upravljati i arhivirati sobe, pozivati nove korisnike i dodelivati uloge ispod njihovog nivoa. Administratori {{productName}} imaju pristup sekciji {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "Гост <strong>{{userName}}</strong> ќе биде преместен во секцијата {{membersSection}} и ќе му биде доделен типот <strong>'{{ secondType }}'</strong>. Администраторите на просториите можат да креираат и управуваат со доделените простории, да поканат нови корисници и да доделат улоги на Администратор на просторија и пониско. Администраторите на просториите имаат пристап до секцијата {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Izabrani gosti biće premešteni u sekciju {{membersSection}} i biće im dodeljen tip <strong>'{{ secondType }}'</strong>. Administatori soba mogu kreirati i upravljati dodeljenim sobama, pozivati nove korisnike i dodelivati uloge administratora sobe i niže. Administatori soba imaju pristup sekciji {{documentsSection}}.",
+  "ChangeUserTypeNote": "<1>Opomba:</1> Vi ne morete spremeniti tipa za administratorja {{productName}} in zasebno.",
+  "DataReassignmentInfo": "Sobite kreirite de ĉi tiu uzanto estos aŭtomate asignitaj al vi. Por reasigani la ĉambrojn al alia persono, kliku la respondan ligilon sube.",
+  "DataReassignmentWithFilesDeletion": "Vse skupne datoteke, ki jih je ustvaril ta kontakt, bodo samodejno dodeljene vam v {30} dneh</1>. Za ponovno dodelitev sob/skupnih datotek drugi osebi kliknite ustrezno povezavo spodaj.",
+  "PersonalDataDeletion": "Vse datoteke in mape v razdelu {{sectionName}} tega kontakta bodo <1>trajno izbrisani v 30 dneh</1>.",
+  "SuccessChangeGuestType": "Tip uspešno promenjen."
 }

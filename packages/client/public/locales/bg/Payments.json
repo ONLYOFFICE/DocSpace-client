@@ -46,5 +46,6 @@
   "UserNotFound": "Потребителят <1>{{email}}</1> не е намерен.",
   "UserNotFoundMatchingEmail": "Не можахме да намерим потребителя със съответстващия Stripe имейл.",
   "UsersQuotaAlmostExhausted": "Квотата за платени потребители е почти изчерпана.",
-  "YourPrice": "Вашата цена"
+  "YourPrice": "Вашата цена",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/година</3>"
 }

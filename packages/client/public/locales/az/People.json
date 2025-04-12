@@ -1,5 +1,7 @@
 {
   "LblInviteAgain": "Bir daha dəvət et",
   "MessageEmailActivationInstuctionsSentOnEmail": "<1>{{email}}</1> elektron poçtuna aktivləşdirmə haqqında məlumat göndərilmişdir.",
-  "UserStatus": "Status"
+  "UserStatus": "Status",
+  "RemoveUser": "Kullanıcıyı sil",
+  "RemoveUserConfirmationText": "Siz otaqdan bir istifadəçini silməyə hazırıqsınız. Xahiş edirik ki, bu istifadəçi fəal olaraq form doldurma prosesində iştirak edir. Əgər siz davam edərsəniz, onlar iştirak edən hər hansı formalar {step}-də dayandırılacaq."
 }

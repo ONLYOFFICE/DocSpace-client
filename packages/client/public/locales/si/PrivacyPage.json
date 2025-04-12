@@ -2,5 +2,9 @@
   "PrivacyDescriptionConnect": "ඔබගේ මේඝය සම්බන්ධිත විට ඔබට වැඩතල යෙදුමේ අතුරු මුහුණතෙන් මෙම ගොනුව ඇරීමට හැකිය",
   "PrivacyDialog": "ඔබට කවුළුවක් නොපෙනේ නම්, පහත බොත්තම ඔබන්න",
   "PrivacyHeader": "මෙම ලේඛනය සංකේතිතයි",
-  "PrivacyInstall": "ස්ථාපනය කරන්න"
+  "PrivacyInstall": "ස්ථාපනය කරන්න",
+  "PrivacyButton": "{{organizationName}} डेस्कटॉप संपादकों को खोलें",
+  "PrivacyClick": "ब्राउझर डायलॉगमध्ये <1>{{organizationName}} Desktop</1> वर क्लिक करा एन्क्रिप्टेड डॉक्युमेंट्स सोबत काम करण्यासाठी.",
+  "PrivacyDescriptionEditors": "जर तुमच्याकडे {{organizationName}} डेस्कटॉप संपादक स्थापित केलेले असतील, पण ते या पृष्ठावरून उघडता येत नसेल, तर तुमचा ब्राउझर ते ब्लॉक करत असेल.",
+  "PrivacyEditors": "तुमच्याकडे {{organizationName}} डेस्कटॉप संपादक नाहीत का?"
 }

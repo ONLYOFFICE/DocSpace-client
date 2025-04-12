@@ -46,5 +46,6 @@
   "UserNotFound": "O <1>{{email}}</1> do utilizador não foi encontrado.",
   "UserNotFoundMatchingEmail": "Não foi possível encontrar o utilizador com o email de Stripe correspondente.",
   "UsersQuotaAlmostExhausted": "A quota de utilizadores pagos está quase esgotada.",
-  "YourPrice": "O seu preço"
+  "YourPrice": "O seu preço",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/ano</3>"
 }

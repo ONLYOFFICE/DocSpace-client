@@ -24,5 +24,15 @@
   "SettingsForAll": "Estos ajustes serán efectivos para todos sus espacios.",
   "Subheader": "Utilice esta sección para crear varios espacios y hacerlos accesibles para sus usuarios.",
   "SubmitDelete": "Enviar una solicitud de eliminación",
-  "VisitSpace": "Visitar este espacio después de crearlo"
+  "VisitSpace": "Visitar este espacio después de crearlo",
+  "DecryptStorage": "Desencriptar almacenamiento",
+  "DecryptWarningDialogContent": "Todos los espacios estarán sin estar disponibles durante el proceso de descifrado. ¿Estás seguro de que deseas continuar {continue}?",
+  "EncryptData": "Cifrar datos en reposo",
+  "EncryptDataDescription": "{{organizationName}} utiliza el cifrado AES-256 para proteger los datos en reposo en el almacenamiento.",
+  "EncryptDataWarningDescription": "El cifrado de almacenamiento puede llevar tiempo. Los espacios estarán no disponibles durante el proceso. Asegúrese de tener suficiente almacenamiento y de que sus datos estén respaldados. No olvide desactivar las copias de seguridad automáticas y detener todas las que se estén ejecutando. De lo contrario, se hará automáticamente.",
+  "EncryptStorage": "Cifrar almacenamiento",
+  "EncryptWarningDialogContent": "Todos los espacios estarán sin estar disponibles durante el proceso de encriptación. ¿Estás seguro de que deseas continuar?",
+  "MoreDetails": "Para obtener más detalles sobre cómo detener los servicios, consulte nuestro <1>{{link}}</1>.",
+  "NotifyUsers": "Notificar a los usuarios que el espacio estará {unavailable} entre {min} y {max}.",
+  "StorageEncrypted": "Almacenamiento encriptado"
 }

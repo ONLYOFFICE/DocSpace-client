@@ -4,5 +4,14 @@
   "ChangeUserTypeButton": "Změnit typ",
   "ChangeUserTypeMessage": "Uživatelé s typem <strong>'{{ firstType }}'</strong> budou přesunuti na typ <strong>'{{ secondType }}'</strong>.",
   "SuccessChangeGuestType": "Typ hosta byl úspěšně změněn",
-  "SuccessChangeUserType": "Typ uživatele byl úspěšně změněn"
+  "SuccessChangeUserType": "Typ uživatele byl úspěšně změněn",
+  "ChangeContactType": "Změnit typ kontaktu",
+  "ChangeGuestsTypeToAdmin": "Host <strong>{{userName}}</strong> bude přesunut do sekce {{membersSection}} a bude mu přidělen typ <strong>'{{ secondType }}'</strong>. Administrátoři {{productName}} mají přístup k nastavení {{productName}}, spravují a archivují místnosti, pozývají nové uživatele a přidělovat role pod jejich úrovní. Administrátoři {{productName}} mají přístup do sekce {{documentsSection}}.",
+  "ChangeGuestsTypeToAdminMulti": "Vybraní hosté budou přesunuti do sekce {{membersSection}} a přiřazena jim bude typ <strong>'{{ secondType }}'</strong>. Administrátoři {{productName}} mají přístup k nastavení {{productName}}, spravují a archivují místnosti, pozývají nové uživatele a přiřazují role pod jejich úrovní. Administrátoři {{productName}} mají přístup do sekce {{documentsSection}}.",
+  "ChangeGuestsTypeToManager": "Host <strong>{{userName}}</strong> bude přesunut do sekce {{membersSection}} a bude mu přidělen typ <strong>'{{ secondType }}'</strong>. Administrátoři místností mohou vytvářet a spravovat přidělené místnosti, pozývat nové uživatele a přidělovat role Administrátora místností a nižší. Administrátoři místností mají přístup do sekce {{documentsSection}}.",
+  "ChangeGuestsTypeToManagerMulti": "Vybraní hosté budou přesunuti do sekce {{membersSection}} a přiřazena jim bude typ <strong>'{{ secondType }}'</strong>. Administrátoři místností mohou vytvářet a spravovat přiřazené místnosti, pozývat nové uživatele a přiřazovat role Administrátora místností a nižší. Administrátoři místností mají přístup do sekce {{documentsSection}}.",
+  "ChangeUserTypeNote": "<1>Poznámka:</1> nemůžete změnit typ pro administrátora {{productName}} a pro sebe.",
+  "DataReassignmentInfo": "Místnosti vytvořené tímto uživatelem budou automaticky přiřazeny vám. Pro přiřazení místností jiné osobě klikněte na odpovídající odkaz níže.",
+  "DataReassignmentWithFilesDeletion": "Všechny sdílené soubory vytvořené tímto kontaktem budou automaticky přiděleny vám do 30 dnů.</1> Pro přeřazení pokojů/sdílených souborů jiné osobě klikněte na odpovídající odkaz níže.</1>",
+  "PersonalDataDeletion": "Všechny soubory a složky v sekci {{sectionName}} tohoto kontaktu budou <1>trvale smazány za 30 dní</1>."
 }

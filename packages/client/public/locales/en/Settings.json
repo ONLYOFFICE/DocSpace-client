@@ -115,7 +115,7 @@
   "DeleteThemeForever": "Delete theme forever?",
   "DeleteThemeNotice": "The theme will be deleted permanently. You will not be able to undo this action.",
   "DeveloperToolsAccess": "Developer Tools section",
-  "DeveloperToolsAccessDescription": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the DocSpace owner and administrators only, select Disable and click Save button.",
+  "DeveloperToolsAccessDescription": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the {{productName}} owner and administrators only, select Disable and click Save button.",
   "DeveloperToolsAccessMobileDescription": "This setting allows you to make the Developer Tools section visible to all users except guests.",
   "DisableEmailDescription": "If this box is checked, {{sectionName}} users will not need to verify their email after the first authorization in {{productName}}.",
   "DisableEmailVerification": "Disable email verification",

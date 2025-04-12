@@ -199,7 +199,9 @@ const DevToolsAccess = ({
     <MainContainer>
       <LearnMoreWrapper>
         <Text fontSize="13px" fontWeight="400">
-          {t("DeveloperToolsAccessDescription")}
+          {t("DeveloperToolsAccessDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
         {limitedDevToolsBlockHelpUrl ? (
           <Link

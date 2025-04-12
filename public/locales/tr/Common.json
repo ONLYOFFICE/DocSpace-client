@@ -14,6 +14,7 @@
   "Alert": "Alarm",
   "All": "Hepsi",
   "AllowedCharacters": "İzin verilen karakterler",
+  "AllTypesAvailableForEditing": "{{organizationName}} içinde düzenlenebilecek tüm dosya türleri",
   "AndMore": "ve <1>{{count}} daha fazla</1>",
   "Anonymous": "Anonim",
   "AnyoneWithLink": "Bağlantısı olan herkes",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "PDF formlarını odaya yükleyin. Üyeleri ve misafirleri PDF formu doldurmaya davet edin. Doldurulan formları inceleyin ve bir elektronik tabloda otomatik olarak toplanan verileri analiz edin.",
   "FormFilingRoomTitle": "Form Doldurma Odası",
   "FormRoom": "Form odası",
+  "Forms": "Formlar",
   "FormTemplates": "Form şablonları",
   "Free": "Ücretsiz",
   "FreeAccessToLicensedVersion": "{{license}} çözümüne ücretsiz erişim",
@@ -637,7 +639,5 @@
   "Years": "Yıl",
   "Yes": "Evet",
   "Yesterday": "Dün",
-  "You": "Siz",
-  "Forms": "Formlar",
-  "AllTypesAvailableForEditing": "{{organizationName}} içinde düzenlenebilecek tüm dosya türleri"
+  "You": "Siz"
 }

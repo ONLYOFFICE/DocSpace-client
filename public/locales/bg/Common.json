@@ -14,6 +14,7 @@
   "Alert": "Тревога",
   "All": "Всички",
   "AllowedCharacters": "Позволени символи",
+  "AllTypesAvailableForEditing": "всички видове файлове, налични за редактиране в {{organizationName}}",
   "AndMore": "и <1>още {{count}}</1>",
   "Anonymous": "Анонимен",
   "AnyoneWithLink": "Всеки с линка",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "Качете PDF формуляри в стаята. Поканете членове и гости да попълнят PDF формуляр. Преглеждайте попълнените формуляри и анализирайте данните, събрани автоматично в таблица.",
   "FormFilingRoomTitle": "Стая за попълване на формуляри",
   "FormRoom": "Стая за формуляри",
+  "Forms": "Формуляри",
   "FormTemplates": "Шаблони на формуляри",
   "Free": "Безплатно",
   "FreeAccessToLicensedVersion": "Безплатен достъп до решение {{license}}",
@@ -637,7 +639,5 @@
   "Years": "Години",
   "Yes": "Да",
   "Yesterday": "Вчера",
-  "You": "Вие",
-  "Forms": "Формуляри",
-  "AllTypesAvailableForEditing": "всички видове файлове, налични за редактиране в {{organizationName}}"
+  "You": "Вие"
 }

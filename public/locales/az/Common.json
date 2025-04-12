@@ -14,6 +14,7 @@
   "Alert": "Xəbərdarlıq",
   "All": "Bütün",
   "AllowedCharacters": "İcazə verilən simvollar",
+  "AllTypesAvailableForEditing": "{{organizationName}} daxilində redaktə edilə bilən bütün fayl növləri",
   "AndMore": "və <1>daha {{count}}</1>",
   "Anonymous": "Anonim",
   "AnyoneWithLink": "Linki olan hər kəs",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "PDF formalarını otağa yükləyin. Üzv və qonaqları PDF formasını doldurmağa dəvət edin. Tamamlanmış formaları nəzərdən keçirin və elektron cədvəldə avtomatik toplanan məlumatları təhlil edin.",
   "FormFilingRoomTitle": "Forma Doldurma Otağı",
   "FormRoom": "Forma otağı",
+  "Forms": "Anketlər",
   "FormTemplates": "Anket şablonları",
   "Free": "Ödənişsiz",
   "FreeAccessToLicensedVersion": "{{license}} üçün pulsuz giriş",
@@ -636,7 +638,5 @@
   "Years": "İllər",
   "Yes": "Bəli",
   "Yesterday": "Dünən",
-  "You": "Siz",
-  "Forms": "Anketlər",
-  "AllTypesAvailableForEditing": "{{organizationName}} daxilində redaktə edilə bilən bütün fayl növləri"
+  "You": "Siz"
 }

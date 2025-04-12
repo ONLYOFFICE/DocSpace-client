@@ -14,6 +14,7 @@
   "Alert": "Alert",
   "All": "Wszystko",
   "AllowedCharacters": "Dozwolone znaki",
+  "AllTypesAvailableForEditing": "wszystkie typy plików dostępne do edycji w {{organizationName}}",
   "AndMore": "i <1>{{count}} więcej</1>",
   "Anonymous": "Anonimowo",
   "AnyoneWithLink": "Każdy, kto ma link",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "Prześlij formularze PDF do pokoju. Zaproś członków i gości do wypełnienia formularza PDF. Sprawdź wypełnione formularze i przeanalizuj dane automatycznie zebrane w arkuszu kalkulacyjnym.",
   "FormFilingRoomTitle": "Pokój do wypełniania formularzy",
   "FormRoom": "Pokój z formularzami",
+  "Forms": "Formularze",
   "FormTemplates": "Szablony formularza",
   "Free": "Darmowy",
   "FreeAccessToLicensedVersion": "Bezpłatny dostęp do rozwiązania {{license}}",
@@ -637,7 +639,5 @@
   "Years": "Lata",
   "Yes": "Tak",
   "Yesterday": "Wczoraj",
-  "You": "Ty",
-  "Forms": "Formularze",
-  "AllTypesAvailableForEditing": "wszystkie typy plików dostępne do edycji w {{organizationName}}"
+  "You": "Ty"
 }

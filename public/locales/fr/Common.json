@@ -14,6 +14,7 @@
   "Alert": "Alerte",
   "All": "Tous",
   "AllowedCharacters": "Caractères autorisés",
+  "AllTypesAvailableForEditing": "tous les types de fichiers disponibles pour l'édition dans {{organizationName}}",
   "AndMore": "et <1>{{count}} plus</1>",
   "Anonymous": "Anonyme",
   "AnyoneWithLink": "Toute personne ayant le lien",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "Téléchargez des formulaires PDF dans la salle. Invitez les membres et les invités à remplir un formulaire PDF. Examinez les formulaires remplis et analysez les données collectées automatiquement dans une feuille de calcul.",
   "FormFilingRoomTitle": "Salle de remplissage de formulaires",
   "FormRoom": "Salles de remplissages de formulaires",
+  "Forms": "Formulaires",
   "FormTemplates": "Modèles de formulaire",
   "Free": "Gratuit",
   "FreeAccessToLicensedVersion": "Accès gratuit à la solution {{license}}",
@@ -638,7 +640,5 @@
   "Years": "Années",
   "Yes": "Oui",
   "Yesterday": "Hier",
-  "You": "Vous",
-  "Forms": "Formulaires",
-  "AllTypesAvailableForEditing": "tous les types de fichiers disponibles pour l'édition dans {{organizationName}}"
+  "You": "Vous"
 }

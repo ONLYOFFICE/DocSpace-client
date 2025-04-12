@@ -14,6 +14,7 @@
   "Alert": "警报",
   "All": "全部",
   "AllowedCharacters": "允许的字符",
+  "AllTypesAvailableForEditing": "{{organizationName}} 中可供编辑的所有文件类型",
   "AndMore": "还有<1>{{count}}个</1>",
   "Anonymous": "匿名",
   "AnyoneWithLink": "任何拥有此链接的人",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "将 PDF 表单上传至房间。邀请成员和访客填写 PDF 表单。查看已完成的表单并分析电子表格中自动收集的数据。",
   "FormFilingRoomTitle": "表单填写房间",
   "FormRoom": "表单房间",
+  "Forms": "表单",
   "FormTemplates": "表单模板",
   "Free": "免费",
   "FreeAccessToLicensedVersion": "免费使用 {{license}} 解决方案",
@@ -639,7 +641,5 @@
   "Years": "年数",
   "Yes": "是",
   "Yesterday": "昨天",
-  "You": "您",
-  "Forms": "表单",
-  "AllTypesAvailableForEditing": "{{organizationName}} 中可供编辑的所有文件类型"
+  "You": "您"
 }

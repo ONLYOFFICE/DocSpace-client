@@ -14,6 +14,7 @@
   "Alert": "Оповіщення",
   "All": "Усі",
   "AllowedCharacters": "Дозволені символи",
+  "AllTypesAvailableForEditing": "всі типи файлів, які можна редагувати в {{organizationName}}",
   "AndMore": "та <1>ще {{count}}</1>",
   "Anonymous": "Анонімно",
   "AnyoneWithLink": "Усі, хто має посилання",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "Передавайте PDF-форми до кімнати. Запрошуйте учасників і гостей заповнити PDF-форму. Переглядайте заповнені форми та аналізуйте дані, автоматично зібрані в електронну таблицю.",
   "FormFilingRoomTitle": "Кімната заповнення форм",
   "FormRoom": "Кімната форм",
+  "Forms": "Форми",
   "FormTemplates": "Шаблони форми",
   "Free": "Безкоштовно",
   "FreeAccessToLicensedVersion": "Безплатний доступ до рішення {{license}}",
@@ -637,7 +639,5 @@
   "Years": "Роки",
   "Yes": "Так",
   "Yesterday": "Вчора",
-  "You": "Ви",
-  "Forms": "Форми",
-  "AllTypesAvailableForEditing": "всі типи файлів, які можна редагувати в {{organizationName}}"
+  "You": "Ви"
 }

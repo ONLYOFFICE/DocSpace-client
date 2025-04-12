@@ -14,6 +14,7 @@
   "Alert": "Pozor",
   "All": "Vse",
   "AllowedCharacters": "Dovoljeni znaki",
+  "AllTypesAvailableForEditing": "vse vrste datoteki na voljo za urejanje v {{organizationName}}",
   "AndMore": "in <1>{{count}} več</1>",
   "Anonymous": "Anonimno",
   "AnyoneWithLink": "Vsak s povezavo",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "Naložite PDF obrazce v sobo. Povabite člane in goste, da izpolnijo PDF obrazec. Pregledujte izpolnjene obrazce in analizirajte samodejno zbrane podatke v preglednici.",
   "FormFilingRoomTitle": "Soba za izpolnjevanje obrazcev",
   "FormRoom": "Soba obrazcev",
+  "Forms": "Obrazci",
   "FormTemplates": "Predloge obrazcev",
   "Free": "Brezplačen",
   "FreeAccessToLicensedVersion": "Brezplačen dostop do {{license}} rešitve",
@@ -637,7 +639,5 @@
   "Years": "Let",
   "Yes": "Da",
   "Yesterday": "Včeraj",
-  "You": "Vi",
-  "Forms": "Obrazci",
-  "AllTypesAvailableForEditing": "vse vrste datoteki na voljo za urejanje v {{organizationName}}"
+  "You": "Vi"
 }

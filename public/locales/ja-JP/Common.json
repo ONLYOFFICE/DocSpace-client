@@ -14,6 +14,7 @@
   "Alert": "アラート",
   "All": "すべて",
   "AllowedCharacters": "入力可能な文字",
+  "AllTypesAvailableForEditing": "{{organizationName}}で編集可能な全てのファイルタイプ",
   "AndMore": "そして、<1>{{count}}以上</1>",
   "Anonymous": "匿名",
   "AnyoneWithLink": "リンクを持っている人",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "PDFフォームをルームにアップロードします。 メンバーとゲストを招待して、PDFフォームに入力してもらいます。 完了したフォームを確認し、スプレッドシートに自動的に収集されたデータを分析します。",
   "FormFilingRoomTitle": "フォーム記入ルーム",
   "FormRoom": "フォームルーム",
+  "Forms": "フォーム",
   "FormTemplates": "フォームのテンプレート",
   "Free": "無料",
   "FreeAccessToLicensedVersion": "{{license}}ソリューションへの無料アクセス",
@@ -636,7 +638,5 @@
   "Years": "年",
   "Yes": "はい",
   "Yesterday": "昨日",
-  "You": "あなた",
-  "Forms": "フォーム",
-  "AllTypesAvailableForEditing": "{{organizationName}}で編集可能な全てのファイルタイプ"
+  "You": "あなた"
 }

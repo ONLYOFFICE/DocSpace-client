@@ -14,6 +14,7 @@
   "Alert": "Cảnh báo",
   "All": "Tất cả",
   "AllowedCharacters": "Ký tự được phép",
+  "AllTypesAvailableForEditing": "tất cả các loại tập tin có sẵn để chỉnh sửa trong {{organizationName}} ",
   "AndMore": "và <1> thêm {{count}} </1>",
   "Anonymous": "Ẩn danh",
   "AnyoneWithLink": "Bất kỳ ai có liên kết",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "Tải biểu mẫu PDF lên phòng. Mời thành viên và khách điền vào biểu mẫu PDF. Xem lại các biểu mẫu đã hoàn thành và phân tích dữ liệu được thu thập tự động trong bảng tính.",
   "FormFilingRoomTitle": "Phòng Điền Biểu mẫu",
   "FormRoom": "Phòng biểu mẫu",
+  "Forms": "Các Biểu mẫu",
   "FormTemplates": "Mẫu biểu mẫu",
   "Free": "Miễn phí",
   "FreeAccessToLicensedVersion": "Tiếp cận phần mềm {{license}} miễn phí",
@@ -634,7 +636,5 @@
   "Years": "Năm",
   "Yes": "Có",
   "Yesterday": "Hôm qua",
-  "You": "Bạn",
-  "Forms": "Các Biểu mẫu",
-  "AllTypesAvailableForEditing": "tất cả các loại tập tin có sẵn để chỉnh sửa trong {{organizationName}} "
+  "You": "Bạn"
 }

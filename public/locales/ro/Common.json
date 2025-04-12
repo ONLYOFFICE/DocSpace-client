@@ -14,6 +14,7 @@
   "Alert": "Alertă",
   "All": "Toate",
   "AllowedCharacters": "Caractere permise",
+  "AllTypesAvailableForEditing": "toate tipuri de fișiere pot fi editate în {{organizationName}}",
   "AndMore": "și <1>{{count}} mai multe</1>",
   "Anonymous": "Anonim",
   "AnyoneWithLink": "Tuturor la link-ul",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "Încărcați formulare PDF în sala. Invitaţi membrii și invitații pentru completarea formularului PDF. Revizuiți formulare completate și analizaţi datele colectate automat într-o foaie de calcul.",
   "FormFilingRoomTitle": "Sală Completare formular",
   "FormRoom": "Sală Formulare",
+  "Forms": "Forms",
   "FormTemplates": "Șabloane formular",
   "Free": "Gratuit",
   "FreeAccessToLicensedVersion": "Acces gratuit la soluția {{license}}",
@@ -638,7 +640,5 @@
   "Years": "Ani",
   "Yes": "Da",
   "Yesterday": "Ieri",
-  "You": "Dvs",
-  "Forms": "Forms",
-  "AllTypesAvailableForEditing": "toate tipuri de fișiere pot fi editate în {{organizationName}}"
+  "You": "Dvs"
 }

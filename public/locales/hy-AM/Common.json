@@ -14,6 +14,7 @@
   "Alert": "Զգուշացում",
   "All": "Բոլոր",
   "AllowedCharacters": "Թույլատրված նիշեր",
+  "AllTypesAvailableForEditing": "բոլոր հասանելի ֆայլերի տեսակները {{organizationName}}-ում խմբագրելու համար",
   "AndMore": "և <1>{{count}} ավելին</1>",
   "Anonymous": "Անանուն",
   "AnyoneWithLink": "Ցանկացած ոք, ով ունի հղումը",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "Վերբեռնեք PDF ձևերը սենյակ: Հրավիրեք անդամներին և հյուրերին լրացնել PDF ձևը: Վերանայեք լրացված ձևերը և վերլուծեք աղյուսակում ավտոմատ հավաքագրված տվյալները:",
   "FormFilingRoomTitle": "Ձևաթղթերի լրացման սենյակ",
   "FormRoom": "Ձևի սենյակ",
+  "Forms": "Ձևեր",
   "FormTemplates": "Ձեւանմուշներ",
   "Free": "Անվճար",
   "FreeAccessToLicensedVersion": "Անվճար մուտք դեպի {{license}} տարբերակ",
@@ -638,7 +640,5 @@
   "Years": "Տարիներ",
   "Yes": "Այո",
   "Yesterday": "Երեկ",
-  "You": "Դու",
-  "Forms": "Ձևեր",
-  "AllTypesAvailableForEditing": "բոլոր հասանելի ֆայլերի տեսակները {{organizationName}}-ում խմբագրելու համար"
+  "You": "Դու"
 }

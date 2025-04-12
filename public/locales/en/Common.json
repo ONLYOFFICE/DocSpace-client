@@ -18,6 +18,7 @@
   "Alert": "Alert",
   "All": "All",
   "AllowedCharacters": "Allowed characters",
+  "AllTypesAvailableForEditing": "all file types available for editing in {{organizationName}}",
   "AndMore": "and <1>{{count}} more</1>",
   "Anonymous": "Anonymous",
   "AnyoneWithLink": "Anyone with the link",
@@ -335,6 +336,7 @@
   "InviteContacts": "Invite contacts",
   "Invited": "Invited",
   "Inviter": "Inviter",
+  "ItemsSuccessfullyUploaded": "Uploaded elements: {{count}}",
   "Kilobyte": "KB",
   "Label": "Name",
   "Language": "Language",
@@ -533,7 +535,6 @@
   "RestoreTo": "Restore to",
   "Restricted": "Restricted",
   "Review": "Review",
-  "ItemsSuccessfullyUploaded": "Uploaded elements: {{count}}",
   "Reviewing": "reviewing",
   "Role": "Role",
   "RoleBasedFilling": "Role-based filling",
@@ -719,6 +720,5 @@
   "Yes": "Yes",
   "Yesterday": "Yesterday",
   "You": "You",
-  "YourTurn": "Your turn",
-  "AllTypesAvailableForEditing": "all file types available for editing in {{organizationName}}"
+  "YourTurn": "Your turn"
 }

@@ -14,6 +14,7 @@
   "Alert": "Упозорење",
   "All": "Све",
   "AllowedCharacters": "Дозвољени карактери",
+  "AllTypesAvailableForEditing": "Сви типови датотека доступни за уређивање у {{organizationName}}",
   "AndMore": "и <1>{{count}} више </1>",
   "Anonymous": "Анонимно",
   "AnyoneWithLink": "Свако са линком",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "Отпремите PDF обрасце у собу. Позовите чланове и госте да попуне PDF образац. Прегледајте попуњене обрасце и анализирајте податке који се аутоматски прикупљају у табели.",
   "FormFilingRoomTitle": "Просторија за попуњавање формулара",
   "FormRoom": "Образац соба",
+  "Forms": "Обрасци",
   "FormTemplates": "Шаблони образаца",
   "Free": "Бесплатно",
   "FreeAccessToLicensedVersion": "Бесплатан приступ {{license}} решењу",
@@ -638,7 +640,5 @@
   "Years": "Године",
   "Yes": "Да",
   "Yesterday": "Јуче",
-  "You": "Ви",
-  "Forms": "Обрасци",
-  "AllTypesAvailableForEditing": "Сви типови датотека доступни за уређивање у {{organizationName}}"
+  "You": "Ви"
 }

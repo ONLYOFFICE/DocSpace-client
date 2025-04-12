@@ -14,6 +14,7 @@
   "Alert": "Warnung",
   "All": "Alle",
   "AllowedCharacters": "Erlaubte Zeichen",
+  "AllTypesAvailableForEditing": "alle in {{organizationName}} zur Bearbeitung verfügbaren Dateitypen",
   "AndMore": "und <1>{{count}} weitere</1>",
   "Anonymous": "Anonym",
   "AnyoneWithLink": "Jeder mit dem Link",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "Laden Sie PDF-Formulare in den Raum hoch. Laden Sie Mitglieder und Gäste ein, ein PDF-Formular auszufüllen. Überprüfen Sie ausgefüllte Formulare und analysieren Sie automatisch erfasste Daten in einer Tabelle.",
   "FormFilingRoomTitle": "Räume zum Formularausfüllen",
   "FormRoom": "Formularraum",
+  "Forms": "Formulare",
   "FormTemplates": "Formularvorlagen",
   "Free": "Kostenlos",
   "FreeAccessToLicensedVersion": "Kostenloser Zugriff auf die {{license}}-Lösung",
@@ -638,7 +640,5 @@
   "Years": "Jahre",
   "Yes": "Ja",
   "Yesterday": "Gestern",
-  "You": "Sie",
-  "Forms": "Formulare",
-  "AllTypesAvailableForEditing": "alle in {{organizationName}} zur Bearbeitung verfügbaren Dateitypen"
+  "You": "Sie"
 }

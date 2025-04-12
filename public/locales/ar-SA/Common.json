@@ -14,6 +14,7 @@
   "Alert": "تنبيه",
   "All": "كل",
   "AllowedCharacters": "الحروف المسموح بها",
+  "AllTypesAvailableForEditing": "جميع أنواع الملفات متاحة للتحرير في {{organizationName}}",
   "AndMore": "و<1> {{count}} المزيد</1>",
   "Anonymous": "مجهول",
   "AnyoneWithLink": "أي شخص لديه الرابط",
@@ -242,6 +243,7 @@
   "FormFilingRoomInfo": " تحميل نماذج PDF في الغرفة. دعوة الأعضاء والضيوف لملء نموذج PDF. مراجعة النماذج المكتملة وتحليل البيانات التي يتم جمعها تلقائيًا في جدول بيانات.",
   "FormFilingRoomTitle": "غرفة تعبئة النموذج",
   "FormRoom": "غرفة النموذج",
+  "Forms": "نماذج",
   "FormTemplates": "قوالب جاهزة",
   "Free": "مجانًا",
   "FreeAccessToLicensedVersion": "الوصول المجاني إلى حل {{license}}",
@@ -634,7 +636,5 @@
   "Years": "سنوات",
   "Yes": "نعم",
   "Yesterday": "أمس",
-  "You": "أنت",
-  "Forms": "نماذج",
-  "AllTypesAvailableForEditing": "جميع أنواع الملفات متاحة للتحرير في {{organizationName}}"
+  "You": "أنت"
 }

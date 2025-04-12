@@ -14,6 +14,7 @@
   "Alert": "Upozornenie",
   "All": "Všetko",
   "AllowedCharacters": "Povolené symboly",
+  "AllTypesAvailableForEditing": "všetky typy súborov dostupné na úpravu v {{organizationName}}",
   "AndMore": "a <1>{{count}} viac</1>",
   "Anonymous": "Anonymné",
   "AnyoneWithLink": "Ktokoľvek s odkazom",
@@ -243,6 +244,7 @@
   "FormFilingRoomInfo": "Nahrávanie PDF formulárov do miestnosti. Pozvite členov a hostí, aby vyplnili PDF formulár. Prezrite si vyplnené formuláre a analyzujte údaje automaticky zozbierané v tabuľke.",
   "FormFilingRoomTitle": "Miestnosť na vyplnenie formulárov",
   "FormRoom": "Miestnosť s formulármi",
+  "Forms": "Formuláre",
   "FormTemplates": "Šablóny formulára",
   "Free": "Zadarmo",
   "FreeAccessToLicensedVersion": "Bezplatný prístup k riešeniu {{license}} ",
@@ -637,7 +639,5 @@
   "Years": "Roky",
   "Yes": "Áno",
   "Yesterday": "Včera",
-  "You": "Vy",
-  "Forms": "Formuláre",
-  "AllTypesAvailableForEditing": "všetky typy súborov dostupné na úpravu v {{organizationName}}"
+  "You": "Vy"
 }

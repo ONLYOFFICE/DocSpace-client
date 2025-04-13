@@ -45,10 +45,16 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
 
   const handleContextMenu = (e: React.MouseEvent, namespace: string) => {
     e.preventDefault();
+    
+    // Position near the click or the menu button
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX || (rect.right - 10); // Default to near the end of the element
+    const y = e.clientY || (rect.top + rect.height / 2); // Default to middle of element
+    
     setContextMenu({
       namespace,
-      x: e.clientX,
-      y: e.clientY
+      x,
+      y
     });
     setActiveNamespace(namespace);
   };
@@ -124,7 +130,7 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
         {filteredNamespaces.map(namespace => (
           <div 
             key={namespace}
-            className={`p-2 rounded cursor-pointer mb-1 ${
+            className={`flex items-center justify-between p-2 rounded cursor-pointer mb-1 group ${
               selectedNamespace === namespace 
                 ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200' 
                 : 'hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -132,7 +138,24 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
             onClick={() => onChange(namespace)}
             onContextMenu={(e) => handleContextMenu(e, namespace)}
           >
-            {namespace}
+            <span className="truncate flex-1 pr-1">{namespace}</span>
+            <button
+              className="opacity-30 dark:opacity-50 group-hover:opacity-100 hover:opacity-100 focus:opacity-100 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-opacity"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent namespace selection
+                handleContextMenu(e, namespace);
+              }}
+              title="Namespace options"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="w-4 h-4 text-gray-500 dark:text-gray-400"
+              >
+                <path d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 14a1.5 1.5 0 110 3 1.5 1.5 0 010-3z" />
+              </svg>
+            </button>
           </div>
         ))}
 

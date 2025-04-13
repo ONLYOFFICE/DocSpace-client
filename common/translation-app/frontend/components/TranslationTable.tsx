@@ -28,6 +28,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   const [editingCell, setEditingCell] = useState<{ rowPath: string; language: string } | null>(null);
   const [editValue, setEditValue] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [currentPage, setCurrentPage] = useState<number>(0);
   
   const { updateTranslation, loading: savingTranslation } = useTranslationStore();
   const { 
@@ -109,6 +110,37 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     
     return false;
   });
+  
+  // Pagination logic
+  const totalPages = filteredTranslations.length;
+  const currentEntry = filteredTranslations[currentPage];
+  
+  // Handle page changes
+  const goToNextPage = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+  
+  const goToPreviousPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  
+  // Reset to first page when search changes
+  React.useEffect(() => {
+    setCurrentPage(0);
+  }, [searchTerm]);
+  
+  // Make sure current page is valid if items are filtered or removed
+  React.useEffect(() => {
+    if (filteredTranslations.length === 0) {
+      setCurrentPage(0);
+    } else if (currentPage >= filteredTranslations.length) {
+      setCurrentPage(filteredTranslations.length - 1);
+    }
+  }, [filteredTranslations.length, currentPage]);
 
   return (
     <div>
@@ -123,92 +155,141 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
       </div>
       
       <div className="overflow-x-auto">
-        <table className="min-w-full border-collapse">
-          <thead className="bg-gray-50 dark:bg-gray-800">
-            <tr>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
-                Key Path
-              </th>
-              {languages.map(lang => (
-                <th 
-                  key={lang} 
-                  className="px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700"
-                >
-                  {lang} {lang === baseLanguage && <span className="text-xs">(base)</span>}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {filteredTranslations.length === 0 ? (
-              <tr>
-                <td 
-                  colSpan={languages.length + 1} 
-                  className="px-4 py-4 text-center text-gray-500 border-b dark:border-gray-800"
-                >
-                  {searchTerm ? 'No matching translations found' : 'No translations available'}
-                </td>
-              </tr>
-            ) : (
-              filteredTranslations.map(entry => (
-                <tr key={entry.path} className="hover:bg-gray-50 dark:hover:bg-gray-800">
-                  <td className="px-4 py-2 border-b dark:border-gray-800 font-mono text-sm">
-                    {entry.path}
-                  </td>
-                  {languages.map(lang => (
-                    <td key={`${entry.path}-${lang}`} className="px-4 py-2 border-b dark:border-gray-800">
-                      {editingCell?.rowPath === entry.path && editingCell?.language === lang ? (
-                        <div className="flex">
-                          <textarea
-                            value={editValue}
-                            onChange={e => setEditValue(e.target.value)}
-                            className="input min-h-[60px] flex-1 mr-2"
-                            autoFocus
-                          />
-                          <div className="flex flex-col space-y-1">
-                            <button 
-                              onClick={handleEditSave}
-                              disabled={savingTranslation}
-                              className="btn btn-primary text-xs py-1"
-                            >
-                              {savingTranslation ? '...' : 'Save'}
-                            </button>
-                            <button 
-                              onClick={handleEditCancel}
-                              className="btn btn-secondary text-xs py-1"
-                            >
-                              Cancel
-                            </button>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="group flex items-start">
-                          <div 
-                            className={`flex-1 break-words ${!entry.translations[lang] ? 'text-gray-400 italic' : ''}`}
-                            onClick={() => handleEditStart(entry.path, lang, entry.translations[lang] || '')}
-                          >
-                            {entry.translations[lang] || 'Not translated'}
-                          </div>
-                          
-                          {lang !== baseLanguage && (
-                            <button
-                              onClick={() => handleTranslate(entry.path, lang)}
-                              disabled={translating || isTranslating(entry.path, lang) || !ollamaConnected}
-                              className="ml-2 text-xs opacity-0 group-hover:opacity-100 focus:opacity-100 btn btn-secondary py-0 px-2"
-                              title="Translate using Ollama"
-                            >
-                              {isTranslating(entry.path, lang) ? 'Translating...' : 'AI'}
-                            </button>
+        {filteredTranslations.length === 0 ? (
+          <div className="text-center py-6 text-gray-500">
+            {searchTerm ? 'No matching translations found' : 'No translations available'}
+          </div>
+        ) : (
+          <div>
+            {/* Pagination controls - top */}
+            <div className="flex justify-between items-center mb-4">
+              <button 
+                onClick={goToPreviousPage}
+                disabled={currentPage === 0}
+                className="btn btn-sm btn-outline-primary px-3 py-1"
+              >
+                ← Previous
+              </button>
+              <div className="text-sm">
+                Key {currentPage + 1} of {totalPages}
+              </div>
+              <button 
+                onClick={goToNextPage}
+                disabled={currentPage >= totalPages - 1}
+                className="btn btn-sm btn-outline-primary px-3 py-1"
+              >
+                Next →
+              </button>
+            </div>
+            
+            {/* Current translation key */}
+            <div className="mb-8">
+              <h3 className="text-sm font-mono mb-3 px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded">
+                {currentEntry.path}
+              </h3>
+                
+                <table className="w-full border-collapse">
+                  <thead className="bg-gray-50 dark:bg-gray-800">
+                    <tr>
+                      <th className="w-1/5 px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
+                        Language
+                      </th>
+                      <th className="w-4/5 px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
+                        Translation
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {languages.map(lang => (
+                      <tr key={`${currentEntry.path}-${lang}`} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                        <td className="px-4 py-3 border-b dark:border-gray-800 font-medium">
+                          {lang} {lang === baseLanguage && <span className="text-xs text-gray-500">(base)</span>}
+                        </td>
+                        <td className="px-4 py-3 border-b dark:border-gray-800">
+                          {editingCell?.rowPath === currentEntry.path && editingCell?.language === lang ? (
+                            <div className="flex">
+                              <textarea
+                                value={editValue}
+                                onChange={e => setEditValue(e.target.value)}
+                                className="input min-h-[60px] flex-1 mr-2"
+                                autoFocus
+                              />
+                              <div className="flex flex-col space-y-1">
+                                <button 
+                                  onClick={handleEditSave}
+                                  disabled={savingTranslation}
+                                  className="btn btn-primary text-xs py-1"
+                                >
+                                  {savingTranslation ? '...' : 'Save'}
+                                </button>
+                                <button 
+                                  onClick={handleEditCancel}
+                                  className="btn btn-secondary text-xs py-1"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="group flex items-start">
+                              <div 
+                                className={`flex-1 break-words ${!currentEntry.translations[lang] ? 'text-gray-400 italic' : ''}`}
+                                onClick={() => handleEditStart(currentEntry.path, lang, currentEntry.translations[lang] || '')}
+                              >
+                                {currentEntry.translations[lang] || 'Not translated'}
+                              </div>
+                              
+                              {lang !== baseLanguage && (
+                                <button
+                                  onClick={() => handleTranslate(currentEntry.path, lang)}
+                                  disabled={translating || isTranslating(currentEntry.path, lang) || !ollamaConnected}
+                                  className="ml-2 text-xs opacity-0 group-hover:opacity-100 focus:opacity-100 btn btn-secondary py-0 px-2"
+                                  title="Translate using Ollama"
+                                >
+                                  {isTranslating(currentEntry.path, lang) ? 'Translating...' : 'AI'}
+                                </button>
+                              )}
+                            </div>
                           )}
-                        </div>
-                      )}
-                    </td>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            
+            {/* Pagination controls - bottom */}
+            <div className="flex justify-between items-center mt-6">
+              <button 
+                onClick={goToPreviousPage}
+                disabled={currentPage === 0}
+                className="btn btn-sm btn-outline-primary px-3 py-1"
+              >
+                ← Previous
+              </button>
+              <div>
+                <select 
+                  value={currentPage}
+                  onChange={(e) => setCurrentPage(Number(e.target.value))}
+                  className="input py-1 px-2 text-sm"
+                >
+                  {filteredTranslations.map((entry, index) => (
+                    <option key={entry.path} value={index}>
+                      {index + 1}: {entry.path.length > 30 ? entry.path.substring(0, 30) + '...' : entry.path}
+                    </option>
                   ))}
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+                </select>
+              </div>
+              <button 
+                onClick={goToNextPage}
+                disabled={currentPage >= totalPages - 1}
+                className="btn btn-sm btn-outline-primary px-3 py-1"
+              >
+                Next →
+              </button>
+            </div>
+          </div>
+        )}
       </div>
       
       {filteredTranslations.length > 0 && (

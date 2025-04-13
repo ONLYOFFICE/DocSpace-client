@@ -23,7 +23,8 @@ export default function ProjectPage() {
   const projectName = params.projectName as string;
 
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
-  const [isNamespaceModalOpen, setIsNamespaceModalOpen] = useState<boolean>(false);
+  const [isNamespaceModalOpen, setIsNamespaceModalOpen] =
+    useState<boolean>(false);
 
   // Stores
   const {
@@ -216,15 +217,19 @@ export default function ProjectPage() {
                 "
                 title="Add new namespace"
               >
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  strokeWidth={1.5} 
-                  stroke="currentColor" 
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
                   className="w-5 h-5"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 4.5v15m7.5-7.5h-15"
+                  />
                 </svg>
               </button>
             </div>
@@ -250,7 +255,7 @@ export default function ProjectPage() {
         {/* Main content area */}
         <div className="lg:col-span-3">
           <div className="card">
-            <h2 className="text-lg font-semibold mb-4">
+            <h2 className="text-lg font-semibold mb-3">
               {currentNamespace
                 ? `Translations: ${currentNamespace}`
                 : "Select a namespace"}
@@ -276,7 +281,7 @@ export default function ProjectPage() {
           </div>
         </div>
       </div>
-      
+
       {/* Namespace Modal */}
       <NamespaceModal
         isOpen={isNamespaceModalOpen}

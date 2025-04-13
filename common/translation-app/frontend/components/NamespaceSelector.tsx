@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNamespaceStore } from '@/store/namespaceStore';
 
 interface NamespaceSelectorProps {
@@ -15,6 +15,7 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
   projectName
 }) => {
   const [newNamespace, setNewNamespace] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const { addNamespace, loading } = useNamespaceStore();
 
   const handleAddNamespace = async () => {
@@ -23,15 +24,37 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
     const success = await addNamespace(projectName, newNamespace.trim());
     if (success) {
       setNewNamespace('');
+      setSearchTerm(''); // Clear search after adding new namespace
       // Select the newly created namespace
       onChange(newNamespace.trim());
     }
   };
+  
+  // Filter namespaces based on search term
+  const filteredNamespaces = useMemo(() => {
+    if (!searchTerm.trim()) return namespaces;
+    
+    const searchLower = searchTerm.toLowerCase().trim();
+    return namespaces.filter(namespace => 
+      namespace.toLowerCase().includes(searchLower)
+    );
+  }, [namespaces, searchTerm]);
 
   return (
     <div>
+      {/* Search input */}
+      <div className="mb-2">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+          placeholder="Search namespaces..."
+          className="input w-full text-sm py-1"
+        />
+      </div>
+      
       <div className="max-h-60 overflow-y-auto mb-4">
-        {namespaces.map(namespace => (
+        {filteredNamespaces.map(namespace => (
           <div 
             key={namespace}
             className={`p-2 rounded cursor-pointer mb-1 ${
@@ -47,6 +70,10 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
 
         {namespaces.length === 0 && (
           <div className="text-gray-500 text-sm py-2">No namespaces found</div>
+        )}
+        
+        {namespaces.length > 0 && filteredNamespaces.length === 0 && (
+          <div className="text-gray-500 text-sm py-2">No matching namespaces found</div>
         )}
       </div>
 

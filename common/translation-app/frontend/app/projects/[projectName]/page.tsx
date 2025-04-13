@@ -173,9 +173,9 @@ export default function ProjectPage() {
         </div>
         
         {/* Languages Selector (moved from sidebar) */}
-        <div className="card p-3">
+        <div className="card p-2 rounded-md bg-white dark:bg-gray-800 shadow-sm">
           <div className="flex items-center flex-wrap">
-            <h2 className="text-base font-semibold mr-3">Languages:</h2>
+            <span className="text-xs font-medium text-gray-600 dark:text-gray-400 mr-2">Languages:</span>
             <LanguageSelector 
               languages={languages}
               baseLanguage={baseLanguage}

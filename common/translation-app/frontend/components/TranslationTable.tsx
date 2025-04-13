@@ -255,21 +255,23 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
                     <table className="w-full border-collapse">
                       <thead className="bg-gray-50 dark:bg-gray-800 sticky top-0 z-10">
                         <tr>
-                          <th className="w-1/5 px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
-                            Language
-                          </th>
-                          <th className="w-4/5 px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
-                            Translation
-                          </th>
+                        <th className="w-[100px] px-2 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
+                          Lang
+                        </th>
+                        <th className="w-auto px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
+                          Translation
+                        </th>
                         </tr>
                       </thead>
                       <tbody>
                     {languages.map(lang => (
                       <tr key={`${currentEntry.path}-${lang}`} className="hover:bg-gray-50 dark:hover:bg-gray-800">
-                        <td className="px-4 py-3 border-b dark:border-gray-800 font-medium">
-                          {lang} {lang === baseLanguage && <span className="text-xs text-gray-500">(base)</span>}
+                        <td className="px-2 py-2 border-b dark:border-gray-800 whitespace-nowrap">
+                          <span className={`inline-block px-1.5 py-0.5 rounded ${lang === baseLanguage ? 'bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 font-medium' : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'}`}>
+                            {lang}{lang === baseLanguage && '*'}
+                          </span>
                         </td>
-                        <td className="px-4 py-3 border-b dark:border-gray-800">
+                        <td className="px-3 py-2 border-b dark:border-gray-800">
                           {editingCell?.rowPath === currentEntry.path && editingCell?.language === lang ? (
                             <div className="flex">
                               <textarea

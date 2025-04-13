@@ -49,20 +49,23 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
 
   return (
     <div>
-      <div className={`${horizontal ? 'flex flex-wrap gap-2' : 'space-y-2'} mb-4`}>
+      <div className={`${horizontal ? 'flex flex-wrap gap-1' : 'space-y-1'} ${horizontal ? 'mb-2' : 'mb-3'}`}>
         {/* Select All option */}
         <button
           onClick={handleSelectAll}
           className={`
-            px-3 py-1 rounded-full text-sm mr-2 mb-1 transition-colors
+            px-2 py-0.5 rounded-md text-xs transition-colors
             bg-gray-100 text-primary-700 hover:bg-gray-200 border border-primary-300
             dark:bg-gray-800 dark:text-primary-400 dark:hover:bg-gray-700 dark:border-primary-600
+            flex items-center
           `}
           disabled={languages.length <= 1}
+          title="Select or deselect all languages"
         >
-          {languages.every(lang => selectedLanguages.includes(lang)) 
-            ? 'Deselect All' 
-            : 'Select All'}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3 h-3 mr-1">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+          </svg>
+          {languages.every(lang => selectedLanguages.includes(lang)) ? 'All' : 'All'}
         </button>
         {languages.map(lang => (
           <button 
@@ -70,17 +73,14 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
             onClick={() => lang !== baseLanguage && onToggle(lang)}
             disabled={lang === baseLanguage} // Base language is always selected
             className={`
-              px-3 py-1 rounded-full text-sm mr-2 mb-1 transition-colors
+              px-2 py-0.5 rounded-md text-xs transition-colors
               ${selectedLanguages.includes(lang) 
                 ? 'bg-primary-500 text-white hover:bg-primary-600' 
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'}
-              ${lang === baseLanguage ? 'border-2 border-primary-300' : ''}
+              ${lang === baseLanguage ? 'border border-primary-400' : ''}
             `}
           >
-            {lang}
-            {lang === baseLanguage && 
-              <span className="ml-1 text-xs bg-primary-200 text-primary-800 dark:bg-primary-900 dark:text-primary-200 px-1 rounded">base</span>
-            }
+            {lang}{lang === baseLanguage && '*'}
           </button>
         ))}
         
@@ -88,11 +88,12 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         <button
           onClick={() => setIsModalOpen(true)}
           className="
-            px-3 py-1 rounded-full text-sm mr-2 mb-1 transition-colors
+            px-2 py-0.5 rounded-md text-xs transition-colors
             bg-primary-100 text-primary-700 hover:bg-primary-200 border border-primary-300
             dark:bg-gray-800 dark:text-primary-400 dark:hover:bg-gray-700 dark:border-primary-600
             flex items-center justify-center
           "
+          title="Add new language"
         >
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
@@ -100,7 +101,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
             viewBox="0 0 24 24" 
             strokeWidth={1.5} 
             stroke="currentColor" 
-            className="w-4 h-4"
+            className="w-3 h-3"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>

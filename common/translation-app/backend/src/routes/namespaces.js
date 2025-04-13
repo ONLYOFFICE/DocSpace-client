@@ -68,6 +68,91 @@ async function routes(fastify, options) {
       return reply.code(500).send({ success: false, error: 'Failed to create namespace' });
     }
   });
+  
+  // Rename a namespace
+  fastify.put('/:projectName/rename', async (request, reply) => {
+    try {
+      const { projectName } = request.params;
+      const { oldName, newName } = request.body;
+      
+      if (!oldName || typeof oldName !== 'string') {
+        return reply.code(400).send({ success: false, error: 'Old namespace name is required' });
+      }
+      
+      if (!newName || typeof newName !== 'string') {
+        return reply.code(400).send({ success: false, error: 'New namespace name is required' });
+      }
+      
+      await fsUtils.renameNamespace(projectName, oldName, newName);
+      
+      // Broadcast update to connected clients
+      fastify.io.emit('namespace:renamed', { projectName, oldName, newName });
+      
+      return { success: true, message: `Namespace ${oldName} renamed to ${newName} successfully` };
+    } catch (error) {
+      request.log.error(error);
+      return reply.code(500).send({ success: false, error: error.message || 'Failed to rename namespace' });
+    }
+  });
+  
+  // Move a namespace to another namespace (potentially in a different project)
+  fastify.put('/:projectName/move', async (request, reply) => {
+    try {
+      const { projectName } = request.params;
+      const { sourceNamespace, targetProjectName, targetNamespace } = request.body;
+      
+      if (!sourceNamespace || typeof sourceNamespace !== 'string') {
+        return reply.code(400).send({ success: false, error: 'Source namespace is required' });
+      }
+      
+      if (!targetProjectName || typeof targetProjectName !== 'string') {
+        return reply.code(400).send({ success: false, error: 'Target project name is required' });
+      }
+      
+      if (!targetNamespace || typeof targetNamespace !== 'string') {
+        return reply.code(400).send({ success: false, error: 'Target namespace is required' });
+      }
+      
+      await fsUtils.moveNamespaceTo(projectName, sourceNamespace, targetProjectName, targetNamespace);
+      
+      // Broadcast update to connected clients
+      fastify.io.emit('namespace:moved', { 
+        sourceProjectName: projectName, 
+        sourceNamespace, 
+        targetProjectName, 
+        targetNamespace 
+      });
+      
+      return { 
+        success: true, 
+        message: `Namespace ${sourceNamespace} from project ${projectName} moved to ${targetNamespace} in project ${targetProjectName} successfully` 
+      };
+    } catch (error) {
+      request.log.error(error);
+      return reply.code(500).send({ success: false, error: error.message || 'Failed to move namespace' });
+    }
+  });
+  
+  // Delete a namespace
+  fastify.delete('/:projectName/:namespace', async (request, reply) => {
+    try {
+      const { projectName, namespace } = request.params;
+      
+      if (!namespace || typeof namespace !== 'string') {
+        return reply.code(400).send({ success: false, error: 'Namespace name is required' });
+      }
+      
+      await fsUtils.deleteNamespace(projectName, namespace);
+      
+      // Broadcast update to connected clients
+      fastify.io.emit('namespace:deleted', { projectName, namespace });
+      
+      return { success: true, message: `Namespace ${namespace} deleted successfully` };
+    } catch (error) {
+      request.log.error(error);
+      return reply.code(500).send({ success: false, error: error.message || 'Failed to delete namespace' });
+    }
+  });
 }
 
 module.exports = routes;

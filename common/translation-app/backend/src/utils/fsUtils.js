@@ -163,6 +163,133 @@ async function validateTranslationFile(filePath) {
   }
 }
 
+/**
+ * Renames a namespace across all language folders for a project
+ * @param {string} projectName - Name of the project
+ * @param {string} oldName - Current namespace name
+ * @param {string} newName - New namespace name
+ * @returns {Promise<boolean>} - Success status
+ */
+async function renameNamespace(projectName, oldName, newName) {
+  try {
+    // Check if new name already exists
+    const baseLanguage = translationConfig.baseLanguage;
+    const baseNamespaces = await getNamespaces(projectName, baseLanguage);
+    
+    if (baseNamespaces.includes(newName)) {
+      throw new Error(`Namespace "${newName}" already exists`);
+    }
+    
+    // Rename the namespace file in all language folders
+    const languages = await getAvailableLanguages(projectName);
+    const projectPath = resolveProjectPath(projectName);
+    
+    for (const language of languages) {
+      const oldPath = path.join(projectPath, language, `${oldName}.json`);
+      const newPath = path.join(projectPath, language, `${newName}.json`);
+      
+      // Only rename if old file exists
+      if (await fs.pathExists(oldPath)) {
+        await fs.move(oldPath, newPath, { overwrite: false });
+      }
+    }
+    
+    return true;
+  } catch (error) {
+    console.error(`Error renaming namespace from ${oldName} to ${newName} for project ${projectName}:`, error);
+    throw error; // Re-throw to handle in route
+  }
+}
+
+/**
+ * Moves namespace content from one namespace to another, potentially across projects
+ * @param {string} sourceProjectName - Source project name
+ * @param {string} sourceNamespace - Source namespace name
+ * @param {string} targetProjectName - Target project name
+ * @param {string} targetNamespace - Target namespace name
+ * @returns {Promise<boolean>} - Success status
+ */
+async function moveNamespaceTo(sourceProjectName, sourceNamespace, targetProjectName, targetNamespace) {
+  try {
+    // Check if the source namespace exists and target namespace exists
+    const baseLanguage = translationConfig.baseLanguage;
+    const sourceNamespaces = await getNamespaces(sourceProjectName, baseLanguage);
+    
+    if (!sourceNamespaces.includes(sourceNamespace)) {
+      throw new Error(`Source namespace "${sourceNamespace}" does not exist in project ${sourceProjectName}`);
+    }
+    
+    // Get all available languages from both projects
+    const sourceLanguages = await getAvailableLanguages(sourceProjectName);
+    const targetLanguages = await getAvailableLanguages(targetProjectName);
+    
+    // Process the move for each language
+    for (const language of sourceLanguages) {
+      // Skip if the language doesn't exist in the target project
+      if (!targetLanguages.includes(language)) {
+        console.warn(`Language ${language} not found in target project ${targetProjectName}. Skipping.`);
+        continue;
+      }
+      
+      // Read source content
+      const sourceContent = await readTranslationFile(sourceProjectName, language, sourceNamespace);
+      if (!sourceContent) {
+        console.warn(`No content found for ${language}/${sourceNamespace} in project ${sourceProjectName}. Skipping.`);
+        continue;
+      }
+      
+      // Read target content if it exists, or create empty
+      let targetContent = await readTranslationFile(targetProjectName, language, targetNamespace) || {};
+      
+      // Merge content (source takes precedence in case of conflicts)
+      targetContent = { ...targetContent, ...sourceContent };
+      
+      // Write merged content to target
+      await writeTranslationFile(targetProjectName, language, targetNamespace, targetContent);
+    }
+    
+    // Delete the source namespace now that content is moved
+    await deleteNamespace(sourceProjectName, sourceNamespace);
+    
+    return true;
+  } catch (error) {
+    console.error(`Error moving namespace ${sourceNamespace} from project ${sourceProjectName} to ${targetNamespace} in project ${targetProjectName}:`, error);
+    throw error; // Re-throw to handle in route
+  }
+}
+
+/**
+ * Deletes a namespace across all language folders for a project
+ * @param {string} projectName - Name of the project
+ * @param {string} namespace - Namespace to delete
+ * @returns {Promise<boolean>} - Success status
+ */
+async function deleteNamespace(projectName, namespace) {
+  try {
+    const languages = await getAvailableLanguages(projectName);
+    const projectPath = resolveProjectPath(projectName);
+    let deletedAny = false;
+    
+    for (const language of languages) {
+      const filePath = path.join(projectPath, language, `${namespace}.json`);
+      
+      if (await fs.pathExists(filePath)) {
+        await fs.remove(filePath);
+        deletedAny = true;
+      }
+    }
+    
+    if (!deletedAny) {
+      throw new Error(`Namespace "${namespace}" not found in project ${projectName}`);
+    }
+    
+    return true;
+  } catch (error) {
+    console.error(`Error deleting namespace ${namespace} for project ${projectName}:`, error);
+    throw error; // Re-throw to handle in route
+  }
+}
+
 module.exports = {
   resolveProjectPath,
   getAvailableLanguages,
@@ -170,5 +297,9 @@ module.exports = {
   readTranslationFile,
   writeTranslationFile,
   createLanguageFolder,
-  validateTranslationFile
+  createEmptyTranslations,
+  validateTranslationFile,
+  renameNamespace,
+  moveNamespaceTo,
+  deleteNamespace
 };

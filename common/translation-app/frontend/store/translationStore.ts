@@ -33,6 +33,9 @@ interface TranslationState {
     value: string, 
     isAiTranslated?: boolean
   ) => Promise<boolean>;
+  renameNamespace: (projectName: string, oldName: string, newName: string) => Promise<boolean>;
+  moveNamespaceTo: (sourceProjectName: string, sourceNamespace: string, targetProjectName: string, targetNamespace: string) => Promise<boolean>;
+  deleteNamespace: (projectName: string, namespace: string) => Promise<boolean>;
   setCurrentKey: (key: string | null) => void;
   clearError: () => void;
 }
@@ -199,6 +202,72 @@ export const useTranslationStore = create<TranslationState>((set, get) => ({
     set({ currentKey: key });
   },
   
+  renameNamespace: async (projectName: string, oldName: string, newName: string) => {
+    try {
+      set({ loading: true, error: null });
+      
+      const response = await api.renameNamespace(projectName, oldName, newName);
+      
+      if (response.data.success) {
+        set({ loading: false });
+        return true;
+      } else {
+        throw new Error(response.data.error || 'Failed to rename namespace');
+      }
+    } catch (error: any) {
+      console.error('Error renaming namespace:', error);
+      set({ 
+        error: error.response?.data?.error || error.message || 'Failed to rename namespace',
+        loading: false
+      });
+      return false;
+    }
+  },
+  
+  moveNamespaceTo: async (sourceProjectName: string, sourceNamespace: string, targetProjectName: string, targetNamespace: string) => {
+    try {
+      set({ loading: true, error: null });
+      
+      const response = await api.moveNamespaceTo(sourceProjectName, sourceNamespace, targetProjectName, targetNamespace);
+      
+      if (response.data.success) {
+        set({ loading: false });
+        return true;
+      } else {
+        throw new Error(response.data.error || 'Failed to move namespace');
+      }
+    } catch (error: any) {
+      console.error('Error moving namespace:', error);
+      set({ 
+        error: error.response?.data?.error || error.message || 'Failed to move namespace',
+        loading: false
+      });
+      return false;
+    }
+  },
+  
+  deleteNamespace: async (projectName: string, namespace: string) => {
+    try {
+      set({ loading: true, error: null });
+      
+      const response = await api.deleteNamespace(projectName, namespace);
+      
+      if (response.data.success) {
+        set({ loading: false });
+        return true;
+      } else {
+        throw new Error(response.data.error || 'Failed to delete namespace');
+      }
+    } catch (error: any) {
+      console.error('Error deleting namespace:', error);
+      set({ 
+        error: error.response?.data?.error || error.message || 'Failed to delete namespace',
+        loading: false
+      });
+      return false;
+    }
+  },
+
   clearError: () => {
     set({ error: null });
   }

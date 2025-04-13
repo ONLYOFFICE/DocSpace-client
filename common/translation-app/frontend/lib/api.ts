@@ -23,6 +23,12 @@ export const getNamespaces = (projectName: string, language: string) =>
   api.get(`/namespaces/${projectName}/${language}`);
 export const addNamespace = (projectName: string, namespace: string, content = {}) => 
   api.post(`/namespaces/${projectName}`, { namespace, content });
+export const renameNamespace = (projectName: string, oldName: string, newName: string) => 
+  api.put(`/namespaces/${projectName}/rename`, { oldName, newName });
+export const moveNamespaceTo = (sourceProjectName: string, sourceNamespace: string, targetProjectName: string, targetNamespace: string) => 
+  api.put(`/namespaces/${sourceProjectName}/move`, { sourceNamespace, targetProjectName, targetNamespace });
+export const deleteNamespace = (projectName: string, namespace: string) => 
+  api.delete(`/namespaces/${projectName}/${namespace}`);
 
 // Translations
 export const getTranslations = (projectName: string, language: string, namespace: string) => 

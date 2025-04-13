@@ -238,7 +238,9 @@ export default function ProjectPage() {
             <NamespaceSelector
               namespaces={namespaces}
               selectedNamespace={currentNamespace}
+              projectName={projectName}
               onChange={handleNamespaceChange}
+              onNamespaceUpdated={() => fetchNamespaces(projectName, baseLanguage)}
             />
           </div>
 

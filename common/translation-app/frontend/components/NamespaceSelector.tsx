@@ -1,34 +1,17 @@
 import React, { useState, useMemo } from 'react';
-import { useNamespaceStore } from '@/store/namespaceStore';
 
 interface NamespaceSelectorProps {
   namespaces: string[];
   selectedNamespace: string | null;
   onChange: (namespace: string) => void;
-  projectName: string;
 }
 
 const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
   namespaces,
   selectedNamespace,
-  onChange,
-  projectName
+  onChange
 }) => {
-  const [newNamespace, setNewNamespace] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const { addNamespace, loading } = useNamespaceStore();
-
-  const handleAddNamespace = async () => {
-    if (!newNamespace.trim()) return;
-    
-    const success = await addNamespace(projectName, newNamespace.trim());
-    if (success) {
-      setNewNamespace('');
-      setSearchTerm(''); // Clear search after adding new namespace
-      // Select the newly created namespace
-      onChange(newNamespace.trim());
-    }
-  };
   
   // Filter namespaces based on search term
   const filteredNamespaces = useMemo(() => {
@@ -77,27 +60,7 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
         )}
       </div>
 
-      <div className="mt-4">
-        <div className="flex space-x-2">
-          <input
-            type="text"
-            value={newNamespace}
-            onChange={e => setNewNamespace(e.target.value)}
-            placeholder="New namespace"
-            className="input flex-1 text-sm"
-          />
-          <button
-            onClick={handleAddNamespace}
-            disabled={!newNamespace.trim() || loading}
-            className="btn btn-primary text-sm py-1"
-          >
-            {loading ? '...' : 'Add'}
-          </button>
-        </div>
-        <p className="text-xs text-gray-500 mt-1">
-          Namespaces will create new JSON files (e.g., common, header, footer)
-        </p>
-      </div>
+
     </div>
   );
 };

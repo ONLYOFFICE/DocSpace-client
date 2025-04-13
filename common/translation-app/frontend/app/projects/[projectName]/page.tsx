@@ -152,30 +152,32 @@ export default function ProjectPage() {
       {/* Header */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
-          <div>
+          <div className="flex items-center">
             <button
               onClick={handleBackClick}
-              className="mb-2 text-sm text-primary-600 hover:text-primary-700 flex items-center"
+              className="text-sm text-primary-600 hover:text-primary-700 flex items-center mr-4"
             >
-              <span className="mr-1">←</span> Back to Projects
+              <span className="mr-1">←</span> Back
             </button>
-            <h1 className="text-2xl font-bold">
-              {currentProject?.name || projectName}
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
-              {currentProject?.path}
-            </p>
+            <div className="flex items-center">
+              <h1 className="text-lg font-bold mr-2">
+                {currentProject?.name || projectName}
+              </h1>
+              <span className="text-gray-500 dark:text-gray-400 text-xs">
+                {currentProject?.path}
+              </span>
+            </div>
           </div>
 
           {/* Ollama connection status */}
-          <div className="flex items-center">
+          <div className="flex items-center ml-4">
             <div
-              className={`w-3 h-3 rounded-full mr-2 ${
+              className={`w-2 h-2 rounded-full mr-1 ${
                 ollamaConnected ? "bg-green-500" : "bg-red-500"
               }`}
             ></div>
-            <span className="text-sm">
-              Ollama: {ollamaConnected ? "Connected" : "Disconnected"}
+            <span className="text-xs">
+              {ollamaConnected ? "Ollama Connected" : "Ollama Disconnected"}
             </span>
           </div>
         </div>

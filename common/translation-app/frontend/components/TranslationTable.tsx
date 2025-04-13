@@ -188,18 +188,21 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
                 {currentEntry.path}
               </h3>
                 
-                <table className="w-full border-collapse">
-                  <thead className="bg-gray-50 dark:bg-gray-800">
-                    <tr>
-                      <th className="w-1/5 px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
-                        Language
-                      </th>
-                      <th className="w-4/5 px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
-                        Translation
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <div className="border border-gray-200 dark:border-gray-700 rounded overflow-hidden">
+                  {/* Fixed-height scrollable container */}
+                  <div className="max-h-[400px] overflow-y-auto">
+                    <table className="w-full border-collapse">
+                      <thead className="bg-gray-50 dark:bg-gray-800 sticky top-0 z-10">
+                        <tr>
+                          <th className="w-1/5 px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
+                            Language
+                          </th>
+                          <th className="w-4/5 px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400 border-b dark:border-gray-700">
+                            Translation
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
                     {languages.map(lang => (
                       <tr key={`${currentEntry.path}-${lang}`} className="hover:bg-gray-50 dark:hover:bg-gray-800">
                         <td className="px-4 py-3 border-b dark:border-gray-800 font-medium">
@@ -254,8 +257,10 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
                         </td>
                       </tr>
                     ))}
-                  </tbody>
-                </table>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             
             {/* Pagination controls - bottom */}

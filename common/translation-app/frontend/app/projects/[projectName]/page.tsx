@@ -84,10 +84,11 @@ export default function ProjectPage() {
     };
   }, [projectName]);
 
-  // Select base language when languages are loaded
+  // Select all languages by default when languages are loaded
   useEffect(() => {
     if (languages.length > 0 && baseLanguage) {
-      setSelectedLanguages([baseLanguage]);
+      // Select all languages by default instead of just the base language
+      setSelectedLanguages([...languages]);
 
       // Fetch namespaces for the base language
       fetchNamespaces(projectName, baseLanguage);

@@ -54,10 +54,10 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         <button
           onClick={handleSelectAll}
           className={`
-            px-2 py-0.5 rounded-md text-xs transition-colors
-            bg-gray-100 text-primary-700 hover:bg-gray-200 border border-primary-300
-            dark:bg-gray-800 dark:text-primary-400 dark:hover:bg-gray-700 dark:border-primary-600
-            flex items-center
+            px-2 py-0.5 rounded-md text-xs transition-colors flex items-center
+            ${languages.every(lang => selectedLanguages.includes(lang)) 
+              ? 'bg-primary-500 text-white hover:bg-primary-600' 
+              : 'bg-gray-100 text-primary-700 hover:bg-gray-200 border border-primary-300 dark:bg-gray-800 dark:text-primary-400 dark:hover:bg-gray-700 dark:border-primary-600'}
           `}
           disabled={languages.length <= 1}
           title="Select or deselect all languages"

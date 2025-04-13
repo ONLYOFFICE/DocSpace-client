@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 // TopUpModal.tsx
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import {
   ModalDialog,
@@ -101,6 +102,18 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
 
   const isButtonDisabled = !amount || !isWalletCustomerExist;
 
+  const goLinkCard = () => {
+    cardLinked
+      ? window.open(cardLinked, "_blank")
+      : toastr.error(t("ErrorNotification"));
+  };
+
+  const goStripeAccount = () => {
+    accountLink
+      ? window.open(accountLink, "_blank")
+      : toastr.error(t("ErrorNotification"));
+  };
+
   const onTopUp = async () => {
     try {
       setIsLoading(true);
@@ -109,7 +122,23 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
       toastr.success(t("Common:SuccessfullySaved"));
       onClose();
     } catch (e) {
-      toastr.error(e as string);
+      console.error(e);
+
+      toastr.error(
+        <Trans
+          i18nKey="InsufficientFundsOnCard"
+          ns="Payments"
+          t={t}
+          components={{
+            1: (
+              <ColorTheme
+                themeId={ThemeId.Link}
+                onClick={isWalletCustomerExist ? goStripeAccount : goLinkCard}
+              />
+            ),
+          }}
+        />,
+      );
     } finally {
       setIsLoading(false);
     }

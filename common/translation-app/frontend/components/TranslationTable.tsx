@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslationStore } from '@/store/translationStore';
 import { useOllamaStore } from '@/store/ollamaStore';
+import { getSocket } from '@/lib/socket';
 
 interface TranslationEntry {
   key: string;
@@ -37,6 +38,9 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     loading: translating,
     translationProgress
   } = useOllamaStore();
+  
+  // State for tracking locally updated translations by AI
+  const [localUpdates, setLocalUpdates] = useState<Record<string, Record<string, string>>>({});
 
   const handleEditStart = (rowPath: string, language: string, value: string) => {
     setEditingCell({ rowPath, language });
@@ -90,8 +94,31 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     );
   };
 
+  // Create translations with any local updates applied
+  const translationsWithUpdates = React.useMemo(() => {
+    return translations.map(entry => {
+      // If we have local updates for this entry's path, apply them
+      if (localUpdates[entry.path]) {
+        const updatedTranslations = { ...entry.translations };
+        
+        // Apply each language update
+        Object.entries(localUpdates[entry.path]).forEach(([lang, value]) => {
+          updatedTranslations[lang] = value;
+        });
+        
+        return {
+          ...entry,
+          translations: updatedTranslations
+        };
+      }
+      
+      // No updates, return the original entry
+      return entry;
+    });
+  }, [translations, localUpdates]);
+  
   // Filter translations based on search term
-  const filteredTranslations = translations.filter(entry => {
+  const filteredTranslations = translationsWithUpdates.filter(entry => {
     if (!searchTerm) return true;
     
     const searchLower = searchTerm.toLowerCase();
@@ -134,13 +161,47 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   }, [searchTerm]);
   
   // Make sure current page is valid if items are filtered or removed
-  React.useEffect(() => {
+  useEffect(() => {
     if (filteredTranslations.length === 0) {
       setCurrentPage(0);
     } else if (currentPage >= filteredTranslations.length) {
       setCurrentPage(filteredTranslations.length - 1);
     }
   }, [filteredTranslations.length, currentPage]);
+  
+  // Listen for socket events to update translations in real-time
+  useEffect(() => {
+    const socket = getSocket();
+    
+    // When a translation is completed via socket
+    const handleTranslationCompleted = (data: any) => {
+      const { projectName: translatedProject, namespace: translatedNamespace, 
+             key: translatedKey, targetLanguage, value } = data;
+      
+      // Only update if it's for the current project and namespace
+      if (translatedProject === projectName && translatedNamespace === namespace) {
+        // Update our local state to reflect the new translation immediately
+        setLocalUpdates(prev => {
+          const keyUpdates = prev[translatedKey] || {};
+          return {
+            ...prev,
+            [translatedKey]: {
+              ...keyUpdates,
+              [targetLanguage]: value
+            }
+          };
+        });
+      }
+    };
+    
+    // Listen for translation completed events
+    socket.on('translation:completed', handleTranslationCompleted);
+    
+    // Cleanup listener when component unmounts
+    return () => {
+      socket.off('translation:completed', handleTranslationCompleted);
+    };
+  }, [projectName, namespace]);
 
   return (
     <div>

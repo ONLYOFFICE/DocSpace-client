@@ -16,6 +16,7 @@ import OllamaPanel from "@/components/OllamaPanel";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import ErrorDisplay from "@/components/ErrorDisplay";
 import NamespaceModal from "@/components/NamespaceModal";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function ProjectPage() {
   const params = useParams();
@@ -155,12 +156,12 @@ export default function ProjectPage() {
           <div className="flex items-center">
             <button
               onClick={handleBackClick}
-              className="text-sm text-primary-600 hover:text-primary-700 flex items-center mr-4"
+              className="text-sm text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 flex items-center mr-4"
             >
               <span className="mr-1">←</span> Back
             </button>
             <div className="flex items-center">
-              <h1 className="text-lg font-bold mr-2">
+              <h1 className="text-lg font-bold mr-2 text-gray-900 dark:text-white">
                 {currentProject?.name || projectName}
               </h1>
               <span className="text-gray-500 dark:text-gray-400 text-xs">
@@ -169,16 +170,22 @@ export default function ProjectPage() {
             </div>
           </div>
 
-          {/* Ollama connection status */}
-          <div className="flex items-center ml-4">
-            <div
-              className={`w-2 h-2 rounded-full mr-1 ${
-                ollamaConnected ? "bg-green-500" : "bg-red-500"
-              }`}
-            ></div>
-            <span className="text-xs">
-              {ollamaConnected ? "Ollama Connected" : "Ollama Disconnected"}
-            </span>
+          {/* Header Controls */}
+          <div className="flex items-center ml-4 space-x-4">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+            
+            {/* Ollama connection status */}
+            <div className="flex items-center">
+              <div
+                className={`w-2 h-2 rounded-full mr-1 ${
+                  ollamaConnected ? "bg-green-500" : "bg-red-500"
+                }`}
+              ></div>
+              <span className="text-xs text-gray-600 dark:text-gray-300">
+                {ollamaConnected ? "Ollama Connected" : "Ollama Disconnected"}
+              </span>
+            </div>
           </div>
         </div>
 
@@ -209,7 +216,7 @@ export default function ProjectPage() {
         <div className="lg:col-span-1">
           <div className="card mb-6">
             <div className="flex justify-between items-center mb-3">
-              <h2 className="text-lg font-semibold">Namespaces</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Namespaces</h2>
               <button
                 onClick={() => setIsNamespaceModalOpen(true)}
                 className="
@@ -245,7 +252,7 @@ export default function ProjectPage() {
           </div>
 
           <div className="card">
-            <h2 className="text-lg font-semibold mb-3">Translation</h2>
+            <h2 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Translation</h2>
             <OllamaPanel
               projectName={projectName}
               baseLanguage={baseLanguage}
@@ -259,7 +266,7 @@ export default function ProjectPage() {
         {/* Main content area */}
         <div className="lg:col-span-3">
           <div className="card">
-            <h2 className="text-lg font-semibold mb-3">
+            <h2 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">
               {currentNamespace
                 ? `Translations: ${currentNamespace}`
                 : "Select a namespace"}

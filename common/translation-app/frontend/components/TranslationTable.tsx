@@ -230,7 +230,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search translations..."
-            className="input w-full text-sm py-1"
+            className="input w-full text-sm py-1 text-gray-800 dark:text-gray-200"
           />
         </div>
         {filteredTranslations.length > 0 && (
@@ -238,7 +238,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
             <select
               value={currentPage}
               onChange={(e) => setCurrentPage(Number(e.target.value))}
-              className="input py-1 px-2 text-sm w-full"
+              className="input py-1 px-2 text-sm w-full text-gray-800 dark:text-gray-200"
             >
               {filteredTranslations.map((entry, index) => (
                 <option key={entry.path} value={index}>
@@ -267,17 +267,17 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
               <button
                 onClick={goToPreviousPage}
                 disabled={currentPage === 0}
-                className="btn btn-sm btn-outline-primary px-3 py-1"
+                className="btn btn-sm border border-primary-600 text-primary-600 hover:bg-primary-50 hover:text-primary-700 px-3 py-1 dark:text-primary-400 dark:hover:text-primary-300 dark:border-primary-700 dark:hover:bg-gray-800"
               >
                 ← Previous
               </button>
-              <div className="text-sm">
+              <div className="text-sm text-gray-700 dark:text-gray-300 font-medium">
                 Key {currentPage + 1} of {totalPages}
               </div>
               <button
                 onClick={goToNextPage}
                 disabled={currentPage >= totalPages - 1}
-                className="btn btn-sm btn-outline-primary px-3 py-1"
+                className="btn btn-sm border border-primary-600 text-primary-600 hover:bg-primary-50 hover:text-primary-700 px-3 py-1 dark:text-primary-400 dark:hover:text-primary-300 dark:border-primary-700 dark:hover:bg-gray-800"
               >
                 Next →
               </button>
@@ -285,7 +285,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
 
             {/* Current translation key */}
             <div className="mb-8">
-              <h3 className="text-sm font-mono mb-3 px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded">
+              <h3 className="text-sm font-mono mb-3 px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-gray-800 dark:text-gray-300">
                 {currentEntry.path}
               </h3>
 
@@ -346,7 +346,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
                             ) : (
                               <div className="group flex items-start">
                                 <div
-                                  className={`flex-1 break-words ${!currentEntry.translations[lang] ? "text-gray-400 italic" : ""}`}
+                                  className={`flex-1 break-words ${!currentEntry.translations[lang] ? "text-gray-400 dark:text-gray-500 italic" : "text-gray-800 dark:text-gray-200"}`}
                                   onClick={() =>
                                     handleEditStart(
                                       currentEntry.path,
@@ -393,7 +393,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
               <button
                 onClick={goToPreviousPage}
                 disabled={currentPage === 0}
-                className="btn btn-sm btn-outline-primary px-3 py-1"
+                className="btn btn-sm border border-primary-600 text-primary-600 hover:bg-primary-50 hover:text-primary-700 px-3 py-1 dark:text-primary-400 dark:hover:text-primary-300 dark:border-primary-700 dark:hover:bg-gray-800"
               >
                 ← Previous
               </button>
@@ -401,7 +401,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
                 <select
                   value={currentPage}
                   onChange={(e) => setCurrentPage(Number(e.target.value))}
-                  className="input py-1 px-2 text-sm"
+                  className="input py-1 px-2 text-sm text-gray-800 dark:text-gray-200"
                 >
                   {filteredTranslations.map((entry, index) => (
                     <option key={entry.path} value={index}>
@@ -416,7 +416,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
               <button
                 onClick={goToNextPage}
                 disabled={currentPage >= totalPages - 1}
-                className="btn btn-sm btn-outline-primary px-3 py-1"
+                className="btn btn-sm border border-primary-600 text-primary-600 hover:bg-primary-50 hover:text-primary-700 px-3 py-1 dark:text-primary-400 dark:hover:text-primary-300 dark:border-primary-700 dark:hover:bg-gray-800"
               >
                 Next →
               </button>
@@ -426,7 +426,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
       </div>
 
       {filteredTranslations.length > 0 && (
-        <div className="mt-4 text-sm text-gray-500">
+        <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
           Showing {filteredTranslations.length} of {translations.length}{" "}
           translations
         </div>

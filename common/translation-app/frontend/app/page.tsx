@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function Home() {
   const [projects, setProjects] = useState<any[]>([]);
@@ -33,18 +34,25 @@ export default function Home() {
 
   return (
     <main className="container mx-auto px-4 py-8">
-      <div className="mb-10 text-center">
-        <h1 className="text-4xl font-bold mb-2">DocSpace Translation Management</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400">Manage DocSpace i18n localization files</p>
+      <div className="relative mb-10">
+        {/* Theme toggle button */}
+        <div className="absolute right-0 top-0">
+          <ThemeToggle />
+        </div>
+        
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-2 text-gray-900 dark:text-white">DocSpace Translation Management</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400">Manage DocSpace i18n localization files</p>
+        </div>
       </div>
 
       <div className="card max-w-4xl mx-auto">
-        <h2 className="text-2xl font-semibold mb-6">Projects</h2>
+        <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Projects</h2>
         
         {loading && (
           <div className="text-center py-8">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
-            <p className="mt-2">Loading projects...</p>
+            <p className="mt-2 text-gray-700 dark:text-gray-300">Loading projects...</p>
           </div>
         )}
         
@@ -55,7 +63,7 @@ export default function Home() {
         )}
         
         {!loading && !error && projects.length === 0 && (
-          <div className="text-center py-6 text-gray-500">
+          <div className="text-center py-6 text-gray-500 dark:text-gray-400">
             No projects available. Server might not be running.
           </div>
         )}
@@ -68,7 +76,7 @@ export default function Home() {
                 key={project.name}
                 className="card hover:shadow-lg transition-shadow border border-gray-200 dark:border-gray-700"
               >
-                <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
+                <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">{project.name}</h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm truncate">{project.path}</p>
               </Link>
             ))}

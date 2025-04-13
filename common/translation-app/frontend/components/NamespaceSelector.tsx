@@ -138,7 +138,7 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
             onClick={() => onChange(namespace)}
             onContextMenu={(e) => handleContextMenu(e, namespace)}
           >
-            <span className="truncate flex-1 pr-1">{namespace}</span>
+            <span className="truncate flex-1 pr-1 text-gray-800 dark:text-gray-200">{namespace}</span>
             <button
               className="opacity-30 dark:opacity-50 group-hover:opacity-100 hover:opacity-100 focus:opacity-100 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-opacity"
               onClick={(e) => {
@@ -160,11 +160,11 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
         ))}
 
         {namespaces.length === 0 && (
-          <div className="text-gray-500 text-sm py-2">No namespaces found</div>
+          <div className="text-gray-500 dark:text-gray-400 text-sm py-2">No namespaces found</div>
         )}
         
         {namespaces.length > 0 && filteredNamespaces.length === 0 && (
-          <div className="text-gray-500 text-sm py-2">No matching namespaces found</div>
+          <div className="text-gray-500 dark:text-gray-400 text-sm py-2">No matching namespaces found</div>
         )}
       </div>
 

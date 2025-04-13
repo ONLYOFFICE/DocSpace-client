@@ -114,7 +114,7 @@ const OllamaPanel: React.FC<OllamaPanelProps> = ({
             <div>
               <label
                 htmlFor="model-select"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300"
               >
                 Ollama Model
               </label>
@@ -135,7 +135,7 @@ const OllamaPanel: React.FC<OllamaPanelProps> = ({
                 ))}
               </select>
               {models.length === 0 && (
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   No models available. Run 'ollama pull "any-model"' to download
                   models.
                 </p>
@@ -145,7 +145,7 @@ const OllamaPanel: React.FC<OllamaPanelProps> = ({
             <div>
               <label
                 htmlFor="language-select"
-                className="block text-sm font-medium mb-1"
+                className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300"
               >
                 Target Language
               </label>
@@ -166,7 +166,7 @@ const OllamaPanel: React.FC<OllamaPanelProps> = ({
                 ))}
               </select>
               {targetLanguages.length === 0 && (
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   Add at least one non-base language to enable translation.
                 </p>
               )}
@@ -187,7 +187,7 @@ const OllamaPanel: React.FC<OllamaPanelProps> = ({
               progress.namespace === namespace &&
               progress.targetLanguage === targetLanguage && (
                 <div className="mt-2">
-                  <div className="flex justify-between text-xs mb-1">
+                  <div className="flex justify-between text-xs mb-1 text-gray-700 dark:text-gray-300">
                     <span>Progress</span>
                     <span>
                       {progressPercentage}% ({progress.progress}/

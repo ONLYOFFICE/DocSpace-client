@@ -44,8 +44,10 @@ interface TranslationState {
   moveKey: (sourceProjectName: string, sourceNamespace: string, targetProjectName: string, targetNamespace: string, keyPath: string) => Promise<boolean>;
   deleteKey: (projectName: string, namespace: string, keyPath: string) => Promise<boolean>;
   
+  // State management
   setCurrentKey: (key: string | null) => void;
   clearError: () => void;
+  resetState: () => void; // Reset all translation-related state
 }
 
 // Helper function to flatten nested translations
@@ -278,6 +280,17 @@ export const useTranslationStore = create<TranslationState>((set, get) => ({
 
   clearError: () => {
     set({ error: null });
+  },
+  
+  resetState: () => {
+    set({
+      translationData: {},
+      flattenedTranslations: [],
+      currentKey: null,
+      loading: false,
+      saving: false,
+      error: null
+    });
   },
   
   // Key operations

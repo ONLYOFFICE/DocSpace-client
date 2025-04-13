@@ -55,6 +55,7 @@ export default function ProjectPage() {
   const {
     flattenedTranslations,
     fetchTranslations,
+    resetState: resetTranslations,
     loading: translationsLoading,
     error: translationsError,
   } = useTranslationStore();
@@ -94,6 +95,14 @@ export default function ProjectPage() {
       fetchNamespaces(projectName, baseLanguage);
     }
   }, [languages, baseLanguage]);
+  
+  // Select the first namespace when namespaces are loaded
+  useEffect(() => {
+    if (namespaces.length > 0 && !currentNamespace) {
+      // Select the first namespace in the list
+      setCurrentNamespace(namespaces[0]);
+    }
+  }, [namespaces]);
 
   // Load translations when namespace is selected
   useEffect(() => {
@@ -135,6 +144,12 @@ export default function ProjectPage() {
 
   // Back to projects list
   const handleBackClick = () => {
+    // Clear all state before navigating back
+    setCurrentNamespace(null); // Clear namespace selection
+    setSelectedLanguages([]); // Clear selected languages
+    resetTranslations(); // Reset translation data including the current key
+    
+    // Navigate back to the projects list
     router.push("/");
   };
 

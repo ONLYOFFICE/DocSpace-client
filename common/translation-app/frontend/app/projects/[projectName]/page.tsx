@@ -100,6 +100,15 @@ export default function ProjectPage() {
   // Toggle a language selection
   const handleLanguageToggle = (language: string) => {
     setSelectedLanguages(prev => {
+      // Handle special 'selectAll' and 'deselectAll' actions
+      if (language === 'selectAll') {
+        return [...languages]; // Select all languages
+      }
+      
+      if (language === 'deselectAll') {
+        return baseLanguage ? [baseLanguage] : []; // Keep only base language
+      }
+      
       // Always keep at least the base language
       if (language === baseLanguage) {
         return prev;
@@ -135,30 +144,47 @@ export default function ProjectPage() {
   return (
     <div className="container mx-auto px-4 py-6">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <button 
-            onClick={handleBackClick}
-            className="mb-2 text-sm text-primary-600 hover:text-primary-700 flex items-center"
-          >
-            <span className="mr-1">←</span> Back to Projects
-          </button>
-          <h1 className="text-2xl font-bold">
-            {currentProject?.name || projectName}
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-sm">
-            {currentProject?.path}
-          </p>
+      <div className="mb-6">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <button 
+              onClick={handleBackClick}
+              className="mb-2 text-sm text-primary-600 hover:text-primary-700 flex items-center"
+            >
+              <span className="mr-1">←</span> Back to Projects
+            </button>
+            <h1 className="text-2xl font-bold">
+              {currentProject?.name || projectName}
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
+              {currentProject?.path}
+            </p>
+          </div>
+          
+          {/* Ollama connection status */}
+          <div className="flex items-center">
+            <div className={`w-3 h-3 rounded-full mr-2 ${
+              ollamaConnected ? 'bg-green-500' : 'bg-red-500'
+            }`}></div>
+            <span className="text-sm">
+              Ollama: {ollamaConnected ? 'Connected' : 'Disconnected'}
+            </span>
+          </div>
         </div>
         
-        {/* Ollama connection status */}
-        <div className="flex items-center">
-          <div className={`w-3 h-3 rounded-full mr-2 ${
-            ollamaConnected ? 'bg-green-500' : 'bg-red-500'
-          }`}></div>
-          <span className="text-sm">
-            Ollama: {ollamaConnected ? 'Connected' : 'Disconnected'}
-          </span>
+        {/* Languages Selector (moved from sidebar) */}
+        <div className="card p-3">
+          <div className="flex items-center flex-wrap">
+            <h2 className="text-base font-semibold mr-3">Languages:</h2>
+            <LanguageSelector 
+              languages={languages}
+              baseLanguage={baseLanguage}
+              selectedLanguages={selectedLanguages}
+              onToggle={handleLanguageToggle}
+              projectName={projectName}
+              horizontal={true}
+            />
+          </div>
         </div>
       </div>
       
@@ -171,16 +197,7 @@ export default function ProjectPage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Sidebar */}
         <div className="lg:col-span-1">
-          <div className="card mb-6">
-            <h2 className="text-lg font-semibold mb-3">Languages</h2>
-            <LanguageSelector 
-              languages={languages}
-              baseLanguage={baseLanguage}
-              selectedLanguages={selectedLanguages}
-              onToggle={handleLanguageToggle}
-              projectName={projectName}
-            />
-          </div>
+
           
           <div className="card mb-6">
             <h2 className="text-lg font-semibold mb-3">Namespaces</h2>

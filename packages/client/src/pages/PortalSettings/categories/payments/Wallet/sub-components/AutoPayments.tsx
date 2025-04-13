@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -42,10 +42,11 @@ import { formatCurrencyValue } from "../utils";
 
 interface AutoPaymentsProps {
   isWalletCustomerExist: boolean;
+  isAutoPaymentExist: boolean;
   updateAutoPayments: (
     enabled: boolean,
-    minBalance: string,
-    upToBalance: string,
+    minBalance: number,
+    upToBalance: number,
     currency: string,
   ) => Promise<void>;
   automaticPayments: TAutoTopUpSettings | null;
@@ -94,6 +95,7 @@ const CurrentPaymentSettings = ({
 
 const AutoPayments: React.FC<AutoPaymentsProps> = ({
   isWalletCustomerExist,
+  isAutoPaymentExist,
   automaticPayments,
   updateAutoPayments,
   language,
@@ -101,37 +103,21 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
-  const [isAutomaticPaymentsEnabled, setIsAutomaticPaymentsEnabled] = useState(
-    automaticPayments !== null,
-  );
+  const [isAutomaticPaymentsEnabled, setIsAutomaticPaymentsEnabled] =
+    useState(isAutoPaymentExist);
   const [minBalance, setMinBalance] = useState(
-    automaticPayments?.minBalance
-      ? automaticPayments.minBalance.toString()
-      : "",
+    isAutoPaymentExist ? automaticPayments?.minBalance.toString() : "",
   );
   const [upToBalance, setUpToBalance] = useState(
-    automaticPayments?.upToBalance
-      ? automaticPayments.upToBalance.toString()
-      : "",
+    isAutoPaymentExist ? automaticPayments?.upToBalance.toString() : "",
   );
   const [minBalanceError, setMinBalanceError] = useState(false);
   const [upToBalanceError, setUpToBalanceError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isCurrentSettings, setIsCurrentSettings] = useState(
-    automaticPayments !== null,
-  );
-  const [animateSettings, setAnimateSettings] = useState(false);
+  const [isCurrentSettings, setIsCurrentSettings] =
+    useState(isAutoPaymentExist);
+  const [animateSettings, setAnimateSettings] = useState(isAutoPaymentExist);
   const [minUpToBalance, setMinUpToBalance] = useState(6);
-
-  useEffect(() => {
-    if (automaticPayments) {
-      setIsAutomaticPaymentsEnabled(true);
-      const timer = setTimeout(() => {
-        setAnimateSettings(true);
-      }, 100);
-      return () => clearTimeout(timer);
-    }
-  }, [automaticPayments]);
 
   const validateMinBalance = (value: string) => {
     const numValue = parseInt(value, 10);
@@ -182,7 +168,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
     }, 200);
 
     try {
-      await updateAutoPayments(true, minBalance, upToBalance, currency);
+      await updateAutoPayments(true, +minBalance, +upToBalance, currency);
 
       setIsCurrentSettings(true);
       setAnimateSettings(false);
@@ -198,17 +184,16 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
   };
 
   const onClose = () => {
-    if (automaticPayments) {
+    if (isAutoPaymentExist) {
       setIsCurrentSettings(true);
+      setAnimateSettings(false);
+      setTimeout(() => {
+        setAnimateSettings(true);
+      }, 50);
       return;
     }
 
     onToggleClick();
-
-    // setAnimateSettings(false);
-    // setTimeout(() => {
-    //   setAnimateSettings(true);
-    // }, 50);
   };
 
   const onEditClick = () => {
@@ -326,12 +311,17 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
 };
 
 export default inject(({ paymentStore, authStore }: TStore) => {
-  const { isWalletCustomerExist, updateAutoPayments, automaticPayments } =
-    paymentStore;
+  const {
+    isWalletCustomerExist,
+    updateAutoPayments,
+    automaticPayments,
+    isAutoPaymentExist,
+  } = paymentStore;
   const { language } = authStore;
 
   return {
     isWalletCustomerExist,
+    isAutoPaymentExist,
     updateAutoPayments,
     automaticPayments,
     language,

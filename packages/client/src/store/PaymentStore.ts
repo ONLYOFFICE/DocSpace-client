@@ -196,6 +196,10 @@ class PaymentStore {
     return !!this.walletPayer.email;
   }
 
+  get isAutoPaymentExist() {
+    return this.automaticPayments?.enabled;
+  }
+
   fetchBalance = async () => {
     const res = await getBalance();
 

@@ -43,8 +43,8 @@ const DeleteNamespaceModal: React.FC<DeleteNamespaceModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-md">
-        <h2 className="text-xl font-semibold mb-4">Delete Namespace</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-md text-gray-800 dark:text-gray-200">
+        <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Delete Namespace</h2>
         
         <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-3 rounded-md mb-4">
           <p className="text-sm text-red-700 dark:text-red-400">
@@ -55,8 +55,8 @@ const DeleteNamespaceModal: React.FC<DeleteNamespaceModalProps> = ({
         
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">
-              Type <strong>{namespace}</strong> to confirm deletion
+            <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+              Type <strong className="text-gray-900 dark:text-white">{namespace}</strong> to confirm deletion
             </label>
             <input
               type="text"

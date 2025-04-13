@@ -53,15 +53,15 @@ const RenameKeyModal: React.FC<RenameKeyModalProps> = ({
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <div className="flex justify-between mb-2">
-            <label htmlFor="currentKeyPath" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label htmlFor="currentKeyPath" className="block text-sm font-medium text-gray-800 dark:text-gray-300">
               Current Key Path
             </label>
           </div>
-          <div className="px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded text-gray-800 dark:text-gray-200 text-sm mb-4 font-mono">
+          <div className="px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded text-gray-800 dark:text-gray-200 text-sm mb-4 font-mono border border-gray-300 dark:border-gray-700">
             {keyPath}
           </div>
           
-          <label htmlFor="newKeyPath" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="newKeyPath" className="block text-sm font-medium text-gray-800 dark:text-gray-300 mb-1">
             New Key Path
           </label>
           <input

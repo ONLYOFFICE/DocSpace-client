@@ -61,7 +61,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold">{title}</h3>
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white">{title}</h3>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -82,7 +82,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
             </svg>
           </button>
         </div>
-        <div>{children}</div>
+        <div className="text-gray-800 dark:text-gray-200">{children}</div>
       </div>
     </div>
   );

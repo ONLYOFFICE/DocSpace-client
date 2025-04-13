@@ -41,7 +41,7 @@ const NamespaceModal: React.FC<NamespaceModalProps> = ({
       title="Add New Namespace"
     >
       <div className="mt-2">
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+        <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
           Enter a namespace name to create a new translation file.
         </p>
         
@@ -56,7 +56,7 @@ const NamespaceModal: React.FC<NamespaceModalProps> = ({
           />
         </div>
         
-        <p className="text-xs text-gray-500 mt-1 mb-4">
+        <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 mb-4">
           Namespaces will create new JSON files (e.g., common, header, footer)
         </p>
         

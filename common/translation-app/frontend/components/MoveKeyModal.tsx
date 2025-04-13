@@ -147,26 +147,26 @@ const MoveKeyModal: React.FC<MoveKeyModalProps> = ({
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <div className="mb-3">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-gray-800 dark:text-gray-300 mb-1">
               Current Location
             </label>
-            <div className="px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded text-gray-800 dark:text-gray-200 text-sm mb-3">
+            <div className="px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded text-gray-800 dark:text-gray-200 text-sm mb-3 border border-gray-300 dark:border-gray-700">
               Project: <span className="font-medium">{sourceProjectName}</span><br/>
               Namespace: <span className="font-medium">{sourceNamespace}</span>
             </div>
           </div>
           
           <div className="mb-3">
-            <label htmlFor="targetProject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="targetProject" className="block text-sm font-medium text-gray-800 dark:text-gray-300 mb-1">
               Key to Move
             </label>
-            <div className="px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded text-gray-800 dark:text-gray-200 text-sm font-mono mb-3">
+            <div className="px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded text-gray-800 dark:text-gray-200 text-sm font-mono mb-3 border border-gray-300 dark:border-gray-700">
               {keyPath}
             </div>
           </div>
           
           <div className="mb-3">
-            <label htmlFor="targetProject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="targetProject" className="block text-sm font-medium text-gray-800 dark:text-gray-300 mb-1">
               Target Project
             </label>
             <select
@@ -185,7 +185,7 @@ const MoveKeyModal: React.FC<MoveKeyModalProps> = ({
           </div>
           
           <div className="mb-3">
-            <label htmlFor="targetNamespace" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="targetNamespace" className="block text-sm font-medium text-gray-800 dark:text-gray-300 mb-1">
               Target Namespace
             </label>
             <select

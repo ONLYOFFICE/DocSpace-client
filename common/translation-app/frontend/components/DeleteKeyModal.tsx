@@ -52,7 +52,7 @@ const DeleteKeyModal: React.FC<DeleteKeyModalProps> = ({
             <h3 className="text-sm font-medium text-red-800 dark:text-red-300">Warning</h3>
             <div className="mt-2 text-sm text-red-700 dark:text-red-300">
               <p>
-                This will permanently delete the key <span className="font-mono font-medium">{keyPath}</span> from all language files in namespace <span className="font-medium">{namespace}</span>. This action cannot be undone.
+                This will permanently delete the key <span className="font-mono font-medium text-red-800 dark:text-red-200">{keyPath}</span> from all language files in namespace <span className="font-medium text-red-800 dark:text-red-200">{namespace}</span>. This action cannot be undone.
               </p>
             </div>
           </div>

@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslationStore } from "@/store/translationStore";
 import { useOllamaStore } from "@/store/ollamaStore";
 import { getSocket } from "@/lib/socket";
+import KeyContextMenu from "./KeyContextMenu";
+import RenameKeyModal from "./RenameKeyModal";
+import MoveKeyModal from "./MoveKeyModal";
+import DeleteKeyModal from "./DeleteKeyModal";
+import Modal from "./Modal";
 
 interface TranslationEntry {
   key: string;
@@ -47,6 +52,16 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   const [localUpdates, setLocalUpdates] = useState<
     Record<string, Record<string, string>>
   >({});
+  
+  // Context menu state
+  const [contextMenu, setContextMenu] = useState<{ keyPath: string; x: number; y: number } | null>(null);
+  const [isRenameModalOpen, setIsRenameModalOpen] = useState<boolean>(false);
+  const [isMoveModalOpen, setIsMoveModalOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [activeKeyPath, setActiveKeyPath] = useState<string>("");
+  
+  // Ref for the key container
+  const keyContainerRef = useRef<HTMLDivElement>(null);
 
   const handleEditStart = (
     rowPath: string,
@@ -178,6 +193,86 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
       setCurrentPage(filteredTranslations.length - 1);
     }
   }, [filteredTranslations.length, currentPage]);
+  
+  // Handle click outside to close context menu
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (contextMenu && !keyContainerRef.current?.contains(event.target as Node)) {
+        setContextMenu(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [contextMenu]);
+  
+  // Handle context menu for translation keys
+  const handleKeyContextMenu = (e: React.MouseEvent, keyPath: string) => {
+    e.preventDefault();
+    setActiveKeyPath(keyPath);
+    setContextMenu({
+      keyPath,
+      x: e.clientX,
+      y: e.clientY
+    });
+  };
+  
+  // Handle rename key action
+  const handleRenameKey = useCallback(() => {
+    // First close the context menu and then open the modal
+    setContextMenu(null);
+    // Use function form of setState to ensure we're working with the latest state
+    setIsRenameModalOpen(() => true);
+  }, [activeKeyPath]);
+  
+  // Handle move key action
+  const handleMoveKey = useCallback(() => {
+    // First close the context menu and then open the modal
+    setContextMenu(null);
+    // Use function form of setState to ensure we're working with the latest state
+    setIsMoveModalOpen(() => true);
+  }, [activeKeyPath]);
+  
+  // Handle delete key action
+  const handleDeleteKey = useCallback(() => {
+    // First close the context menu and then open the modal
+    setContextMenu(null);
+    // Use function form of setState to ensure we're working with the latest state
+    setIsDeleteModalOpen(() => true);
+  }, [activeKeyPath]);
+  
+  // Submit handlers for key operations
+  const handleSubmitRename = async (newKeyPath: string) => {
+    console.log('Renaming key:', activeKeyPath, 'to', newKeyPath);
+    return await useTranslationStore.getState().renameKey(
+      projectName || '',
+      namespace || '',
+      activeKeyPath,
+      newKeyPath
+    );
+  };
+  
+  const handleSubmitMove = async (targetProjectName: string, targetNamespace: string) => {
+    console.log('Moving key:', activeKeyPath, 'to', targetProjectName, targetNamespace);
+    return await useTranslationStore.getState().moveKey(
+      projectName || '', 
+      namespace || '', 
+      targetProjectName, 
+      targetNamespace, 
+      activeKeyPath
+    );
+  };
+  
+  const handleSubmitDelete = async () => {
+    console.log('Deleting key:', activeKeyPath);
+    return await useTranslationStore.getState().deleteKey(
+      projectName || '',
+      namespace || '',
+      activeKeyPath
+    );
+  };
 
   // Listen for socket events to update translations in real-time
   useEffect(() => {
@@ -285,9 +380,31 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
 
             {/* Current translation key */}
             <div className="mb-8">
-              <h3 className="text-sm font-mono mb-3 px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-gray-800 dark:text-gray-300">
-                {currentEntry.path}
-              </h3>
+              <div 
+                className="flex items-center justify-between group relative"
+                ref={keyContainerRef}
+              >
+                <h3 
+                  className="text-sm font-mono mb-3 px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-gray-800 dark:text-gray-300 flex-1"
+                  onContextMenu={(e) => handleKeyContextMenu(e, currentEntry.path)}
+                >
+                  {currentEntry.path}
+                </h3>
+                <button
+                  className="mb-3 opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400"
+                  onClick={(e) => handleKeyContextMenu(e, currentEntry.path)}
+                  title="Key options"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className="w-4 h-4"
+                  >
+                    <path d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 14a1.5 1.5 0 110 3 1.5 1.5 0 010-3z" />
+                  </svg>
+                </button>
+              </div>
 
               <div className="border border-gray-200 dark:border-gray-700 rounded overflow-hidden">
                 {/* Fixed-height scrollable container */}
@@ -431,6 +548,49 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
           translations
         </div>
       )}
+      
+      {/* Context menu and modals */}
+      {contextMenu && (
+        <KeyContextMenu
+          x={contextMenu.x}
+          y={contextMenu.y}
+          keyPath={contextMenu.keyPath}
+          onClose={() => setContextMenu(null)}
+          onRename={handleRenameKey}
+          onMove={handleMoveKey}
+          onDelete={handleDeleteKey}
+        />
+      )}
+      
+
+      
+      {/* RenameKeyModal */}
+      <RenameKeyModal
+        isOpen={isRenameModalOpen}
+        keyPath={activeKeyPath}
+        onClose={() => setIsRenameModalOpen(false)}
+        onRename={handleSubmitRename}
+      />
+      
+      {/* MoveKeyModal */}
+      <MoveKeyModal
+        isOpen={isMoveModalOpen}
+        keyPath={activeKeyPath}
+        sourceProjectName={projectName || ''}
+        sourceNamespace={namespace || ''}
+        onClose={() => setIsMoveModalOpen(false)}
+        onMove={handleSubmitMove}
+      />
+      
+      {/* DeleteKeyModal */}
+      <DeleteKeyModal
+        isOpen={isDeleteModalOpen}
+        keyPath={activeKeyPath}
+        projectName={projectName || ''}
+        namespace={namespace || ''}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onDelete={handleSubmitDelete}
+      />
     </div>
   );
 };

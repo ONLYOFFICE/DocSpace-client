@@ -33,9 +33,17 @@ interface TranslationState {
     value: string, 
     isAiTranslated?: boolean
   ) => Promise<boolean>;
+  
+  // Namespace operations
   renameNamespace: (projectName: string, oldName: string, newName: string) => Promise<boolean>;
   moveNamespaceTo: (sourceProjectName: string, sourceNamespace: string, targetProjectName: string, targetNamespace: string) => Promise<boolean>;
   deleteNamespace: (projectName: string, namespace: string) => Promise<boolean>;
+  
+  // Key operations
+  renameKey: (projectName: string, namespace: string, oldKeyPath: string, newKeyPath: string) => Promise<boolean>;
+  moveKey: (sourceProjectName: string, sourceNamespace: string, targetProjectName: string, targetNamespace: string, keyPath: string) => Promise<boolean>;
+  deleteKey: (projectName: string, namespace: string, keyPath: string) => Promise<boolean>;
+  
   setCurrentKey: (key: string | null) => void;
   clearError: () => void;
 }
@@ -270,5 +278,84 @@ export const useTranslationStore = create<TranslationState>((set, get) => ({
 
   clearError: () => {
     set({ error: null });
+  },
+  
+  // Key operations
+  renameKey: async (projectName, namespace, oldKeyPath, newKeyPath) => {
+    try {
+      set({ saving: true, error: null });
+      
+      await api.renameTranslationKey(projectName, namespace, oldKeyPath, newKeyPath);
+      
+      // Re-fetch translations to update the UI
+      const { translationData } = get();
+      const languages = Object.keys(translationData);
+      
+      await get().fetchTranslations(projectName, languages, namespace);
+      
+      set({ saving: false });
+      return true;
+    } catch (error: any) {
+      console.error('Error renaming key:', error);
+      set({ 
+        error: error.response?.data?.error || error.message || 'Failed to rename key',
+        saving: false
+      });
+      return false;
+    }
+  },
+  
+  moveKey: async (sourceProjectName, sourceNamespace, targetProjectName, targetNamespace, keyPath) => {
+    try {
+      set({ saving: true, error: null });
+      
+      await api.moveTranslationKey(
+        sourceProjectName,
+        sourceNamespace,
+        targetProjectName,
+        targetNamespace,
+        keyPath
+      );
+      
+      // Re-fetch translations for the source namespace
+      const { translationData } = get();
+      const languages = Object.keys(translationData);
+      
+      await get().fetchTranslations(sourceProjectName, languages, sourceNamespace);
+      
+      set({ saving: false });
+      return true;
+    } catch (error: any) {
+      console.error('Error moving key:', error);
+      set({ 
+        error: error.response?.data?.error || error.message || 'Failed to move key',
+        saving: false
+      });
+      return false;
+    }
+  },
+  
+  deleteKey: async (projectName, namespace, keyPath) => {
+    try {
+      set({ saving: true, error: null });
+      
+      await api.deleteTranslationKey(projectName, namespace, keyPath);
+      
+      // Re-fetch translations to update the UI
+      const { translationData } = get();
+      const languages = Object.keys(translationData);
+      
+      await get().fetchTranslations(projectName, languages, namespace);
+      
+      set({ saving: false });
+      return true;
+    } catch (error: any) {
+      console.error('Error deleting key:', error);
+      set({ 
+        error: error.response?.data?.error || error.message || 'Failed to delete key',
+        saving: false
+      });
+      return false;
+    }
   }
 }));

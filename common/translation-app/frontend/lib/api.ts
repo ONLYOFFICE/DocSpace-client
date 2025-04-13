@@ -44,6 +44,33 @@ export const updateTranslationKey = (
   isAiTranslated = false
 ) => api.put(`/translations/${projectName}/${language}/${namespace}/key`, { key, value, isAiTranslated });
 
+// Key operations
+export const renameTranslationKey = (
+  projectName: string,
+  namespace: string,
+  oldKeyPath: string,
+  newKeyPath: string
+) => api.put(`/translations/${projectName}/rename-key`, { namespace, oldKeyPath, newKeyPath });
+
+export const moveTranslationKey = (
+  sourceProjectName: string,
+  sourceNamespace: string,
+  targetProjectName: string,
+  targetNamespace: string,
+  keyPath: string
+) => api.put(`/translations/${sourceProjectName}/move-key`, { 
+  sourceNamespace, 
+  targetProjectName, 
+  targetNamespace, 
+  keyPath 
+});
+
+export const deleteTranslationKey = (
+  projectName: string,
+  namespace: string,
+  keyPath: string
+) => api.delete(`/translations/${projectName}/${namespace}/key/${encodeURIComponent(keyPath)}`);
+
 // Ollama
 export const getOllamaModels = () => api.get('/ollama/models');
 export const translateKey = (

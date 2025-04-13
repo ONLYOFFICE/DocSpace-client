@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -9,7 +9,13 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
   const modalRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState<boolean>(isOpen);
 
+  // Update visible state when isOpen changes
+  useEffect(() => {
+    setVisible(isOpen);
+  }, [isOpen, title]);
+  
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -23,7 +29,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
       }
     };
 
-    if (isOpen) {
+    if (visible) {
       document.addEventListener('keydown', handleEscape);
       document.addEventListener('mousedown', handleClickOutside);
       // Prevent scrolling when modal is open
@@ -31,20 +37,28 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.removeEventListener('mousedown', handleClickOutside);
-      // Restore scrolling when modal is closed
-      document.body.style.overflow = 'auto';
+      if (visible) {
+        document.removeEventListener('keydown', handleEscape);
+        document.removeEventListener('mousedown', handleClickOutside);
+        // Restore scrolling when modal is closed
+        document.body.style.overflow = 'auto';
+      }
     };
-  }, [isOpen, onClose]);
+  }, [visible, onClose, title]);
 
-  if (!isOpen) return null;
+  if (!visible) {
+    return null;
+  }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+    <div 
+      className="fixed inset-0 flex items-center justify-center z-[9999] bg-black bg-opacity-50"
+      onClick={(e) => e.stopPropagation()}
+    >
       <div
         ref={modalRef}
         className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-md w-full"
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold">{title}</h3>

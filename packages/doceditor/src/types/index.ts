@@ -70,6 +70,7 @@ export type SdkSearchParams = {
   theme?: string | undefined;
   editorGoBack?: boolean | "event";
   is_file?: boolean;
+  isSDK?: boolean;
 };
 
 export type RootPageProps = {

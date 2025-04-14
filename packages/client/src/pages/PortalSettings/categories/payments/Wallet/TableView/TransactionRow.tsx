@@ -69,11 +69,13 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
     currency,
   );
 
+  const dateFormat = `L ${moment.localeData().longDateFormat("LT")}`;
+
   return (
     <TableRow>
       <TableCell>
         <Text fontWeight={600} fontSize="11px">
-          {moment(transaction.date).format("M/D/YYYY, h:mm A")}
+          {moment(transaction.date).format(dateFormat)}
         </Text>
       </TableCell>
       <TableCell>

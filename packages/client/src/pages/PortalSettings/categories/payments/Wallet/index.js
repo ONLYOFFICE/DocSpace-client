@@ -115,7 +115,6 @@ export default inject(({ paymentStore, authStore }) => {
     accountLink,
     setBalance,
     isInitWalletPage,
-    setTransactionHistory,
   } = paymentStore;
 
   return {
@@ -127,6 +126,5 @@ export default inject(({ paymentStore, authStore }) => {
     setBalance,
     accountLink,
     isInitWalletPage,
-    setTransactionHistory,
   };
 })(observer(Wallet));

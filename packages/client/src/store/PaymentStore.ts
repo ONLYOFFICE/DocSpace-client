@@ -208,13 +208,26 @@ class PaymentStore {
     this.balance = res;
   };
 
-  setTransactionHistory = async () => {
-    const endDate = moment().format("YYYY-MM-DDTHH:mm:ss");
-    const startDate = moment()
-      .subtract(4, "weeks")
-      .format("YYYY-MM-DDTHH:mm:ss");
+  getEndTransactionDate = (format = "YYYY-MM-DDTHH:mm:ss") => {
+    return moment().format(format);
+  };
 
-    const res = await getTransactionHistory(startDate, endDate);
+  getStartTransactionDate = (format = "YYYY-MM-DDTHH:mm:ss") => {
+    return moment().subtract(4, "weeks").format(format);
+  };
+
+  fetchTransactionHistory = async (
+    startDate = this.getStartTransactionDate(),
+    endDate = this.getEndTransactionDate(),
+    credit = true,
+    withdrawal = true,
+  ) => {
+    const res = await getTransactionHistory(
+      startDate,
+      endDate,
+      credit,
+      withdrawal,
+    );
 
     if (!res) return;
 
@@ -273,7 +286,7 @@ class PaymentStore {
         requests.push(
           this.setPaymentAccount(),
           this.fetchAutoPayments(),
-          this.setTransactionHistory(),
+          this.fetchTransactionHistory(),
           this.fetchCardLinked(),
         );
       } else {

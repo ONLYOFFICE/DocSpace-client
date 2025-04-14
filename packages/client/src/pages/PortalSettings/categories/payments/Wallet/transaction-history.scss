@@ -37,5 +37,16 @@
 }
 
 .transaction-history-title {
-  margin-bottom: 24px;
+  margin-bottom: 8px;
+}
+
+.transaction-history-combobox {
+  display: flex;
+  margin-bottom: 29px;
+  gap: 12px;
+  p {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
 }

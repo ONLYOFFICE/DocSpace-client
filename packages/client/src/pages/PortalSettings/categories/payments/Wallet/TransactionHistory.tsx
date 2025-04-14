@@ -80,15 +80,15 @@ const TransactionHistory = ({
 
   const typeOfHistoty: TOption[] = [
     {
-      key: "AllTransactions",
+      key: "allTransactions",
       label: t("AllTransactions"),
     },
     {
-      key: "Credit",
+      key: "credit",
       label: t("Credit"),
     },
     {
-      key: "Debit",
+      key: "debit",
       label: t("Debit"),
     },
   ];
@@ -154,8 +154,26 @@ const TransactionHistory = ({
     }
   }, []);
 
-  const onSelectType = (option: TOption) => {
+  const onSelectType = async (option: TOption) => {
     setSelectedType(option);
+
+    const timerId = setTimeout(() => setIsLoading(false), 200);
+
+    const isCredit = option.key !== "debit";
+    const isDebite = option.key !== "credit";
+    try {
+      await fetchTransactionHistory(
+        selectedStartDate.key,
+        selectedEndDate.key,
+        isCredit,
+        isDebite,
+      );
+    } catch (e) {
+      toastr.error(e as Error);
+    }
+
+    setIsLoading(false);
+    clearTimeout(timerId);
   };
 
   const onSelectStartDate = async (option: TOption): void => {

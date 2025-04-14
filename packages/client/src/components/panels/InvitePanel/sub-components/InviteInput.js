@@ -602,6 +602,9 @@ const InviteInput = ({
             isDefaultMode={!isMobileView}
             fillIcon={false}
             modernView
+            withBackdrop={isMobileView}
+            withBackground={isMobileView}
+            shouldShowBackdrop={isMobileView}
           />
           {culture?.isBeta ? (
             <BetaBadge place="bottom-end" mobilePlace="bottom" />

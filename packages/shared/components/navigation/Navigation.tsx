@@ -238,6 +238,7 @@ const Navigation = ({
                 withBackground={false}
                 withoutBlur
                 zIndex={400}
+                onClick={onCloseDropBox}
               />
 
               <DropBox

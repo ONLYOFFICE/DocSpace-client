@@ -150,6 +150,7 @@ const Row = (props: RowProps) => {
           [styles.withoutBorder]: withoutBorder,
           [styles.modern]: mode === "modern",
           [styles.checked]: checked,
+          [styles.mobile]: isMobile,
         },
         className,
       )}

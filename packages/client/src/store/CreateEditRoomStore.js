@@ -234,7 +234,7 @@ class CreateEditRoomStore {
 
   onSaveEditRoom = async (t, newParams, room) => {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
-    const { cover } = this.dialogsStore;
+    const { cover, clearCoverProps } = this.dialogsStore;
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore;
     const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
 
@@ -313,6 +313,7 @@ class CreateEditRoomStore {
     }
 
     const requests = [];
+    clearCoverProps();
 
     try {
       try {
@@ -367,7 +368,7 @@ class CreateEditRoomStore {
   onSaveAsTemplate = async (item, roomParams, openCreatedTemplate) => {
     this.filesStore.setRoomCreated(true);
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
-    const { cover } = this.dialogsStore;
+    const { cover, clearCoverProps } = this.dialogsStore;
 
     const {
       title,
@@ -453,6 +454,7 @@ class CreateEditRoomStore {
       });
     }
 
+    clearCoverProps();
     return Promise.resolve(progressData);
   };
 
@@ -483,7 +485,7 @@ class CreateEditRoomStore {
     const { deleteThirdParty } = this.thirdPartyStore;
     const { createRoom, selection, bufferSelection } = this.filesStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
-    const { cover } = this.dialogsStore;
+    const { cover, clearCoverProps } = this.dialogsStore;
 
     const {
       denyDownload,
@@ -613,6 +615,7 @@ class CreateEditRoomStore {
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);
       this.onClose();
+      clearCoverProps();
 
       processCreatingRoomFromData && setProcessCreatingRoomFromData(false);
     }

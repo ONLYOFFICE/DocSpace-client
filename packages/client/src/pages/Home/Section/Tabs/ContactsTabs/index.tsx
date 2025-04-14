@@ -155,11 +155,7 @@ const ContactsTabs = ({
       onClick: onGuests,
       content: null,
       badge: !guestsTabVisited ? (
-        <Badge
-          label={t("Common:New")}
-          backgroundColor={globalColors.redRomb}
-          noHover
-        />
+        <Badge label={t("Common:New")} noHover />
       ) : undefined,
     });
   }

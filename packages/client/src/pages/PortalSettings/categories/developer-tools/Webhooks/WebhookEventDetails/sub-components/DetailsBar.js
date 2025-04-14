@@ -79,7 +79,7 @@ const FlexWrapper = styled.div`
 `;
 
 const DetailsBar = ({ eventDetails }) => {
-  const { t, i18n } = useTranslation(["Webhooks", "Files", "Common"]);
+  const { t, i18n } = useTranslation(["Webhooks", "People"]);
 
   const formattedDelivery = getCorrectDate(
     i18n.language,
@@ -95,31 +95,31 @@ const DetailsBar = ({ eventDetails }) => {
   return (
     <BarWrapper>
       <BarItem>
-        <BarItemHeader>Status</BarItemHeader>
+        <BarItemHeader>{t("People:UserStatus")}</BarItemHeader>
         <FlexWrapper>
           <StatusBadge status={eventDetails.status} />
         </FlexWrapper>
       </BarItem>
       <BarItem>
-        <BarItemHeader>Event ID</BarItemHeader>
+        <BarItemHeader>{t("EventID")}</BarItemHeader>
         <Text isInline fontWeight={600}>
           {eventDetails.id}
         </Text>
       </BarItem>
       <BarItem>
-        <BarItemHeader>Trigger</BarItemHeader>
+        <BarItemHeader>{t("EventType")}</BarItemHeader>
         <Text isInline fontWeight={600}>
           {trigger}
         </Text>
       </BarItem>
       <BarItem>
-        <BarItemHeader>Event time</BarItemHeader>
+        <BarItemHeader>{t("EventTime")}</BarItemHeader>
         <Text isInline fontWeight={600}>
           {formattedCreationTime}
         </Text>
       </BarItem>
       <BarItem>
-        <BarItemHeader>Delivery time</BarItemHeader>
+        <BarItemHeader>{t("DeliveryTime")}</BarItemHeader>
         <Text isInline fontWeight={600}>
           {formattedDelivery}
         </Text>

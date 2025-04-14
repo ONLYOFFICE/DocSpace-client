@@ -311,8 +311,6 @@ const FilterBlock = ({
 
     const headerItems = data.filter((item) => item.isHeader === true);
 
-    const newFilterValues: TGroupItem[] = [];
-
     headerItems.forEach((item, index) => {
       const groupItems = cloneDeep(
         data.filter((i) => i.group === item.group && !i.isHeader),
@@ -364,11 +362,21 @@ const FilterBlock = ({
       });
     });
 
-    selectedFilterValue.forEach((item) => {
-      Object.values(item).forEach((value) => {
-        newFilterValues.push(value);
-      });
-    });
+    const newFilterValues: TGroupItem[] = Array.from(
+      selectedFilterValue,
+      (item) => {
+        if (item[0] === FilterGroups.roomFilterTags) {
+          const newObj: TGroupItem = {
+            group: item[0],
+            key: Array.from(item[1].values(), (value) => value.key?.toString()),
+          };
+
+          return newObj as TGroupItem;
+        }
+
+        return item[1].values().next().value as TGroupItem;
+      },
+    );
 
     setFilterDataFn(headerItems);
     setFilterValues(newFilterValues);

@@ -319,10 +319,10 @@ const StyledComboButton = styled.div.attrs(injectDefaultTheme)<{
   }
   .combo-button-label {
     visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
-    margin-inline-end: ${({ theme, plusBadgeValue, noBorder }) =>
+    margin-inline-end: ${({ theme, plusBadgeValue, noBorder, modernView }) =>
       plusBadgeValue
         ? 0
-        : noBorder
+        : noBorder || modernView
           ? theme.comboBox.label.marginRight
           : theme.comboBox.label.marginRightWithBorder};
     color: ${(props) =>

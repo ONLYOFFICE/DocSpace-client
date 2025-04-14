@@ -35,11 +35,6 @@ import { TileItem } from "../tile-container/TileContainer.types";
 
 import styles from "./RoomTile.module.scss";
 
-const assertTileItem = (roomItem: RoomItem): TileItem => {
-  const { title, roomType, ...tileItem } = roomItem;
-  return tileItem;
-};
-
 export const RoomTile = ({
   item,
   checked,
@@ -166,7 +161,7 @@ export const RoomTile = ({
       checked={checked}
       isActive={isActive}
       isEdit={isEdit}
-      item={assertTileItem(item)}
+      item={item}
       onSelect={onSelectTileItem}
       isHovered={isHovered}
       onHover={onHover}

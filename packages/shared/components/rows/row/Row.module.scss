@@ -95,18 +95,16 @@
   }
 }
 
-@include not-mobile {
-  .modern .checkboxElement:hover {
-    &:not(.isIndexEditingMode) {
-      .checkbox {
-        display: flex;
-        opacity: 1;
-        user-select: none;
-      }
+.modern:not(.mobile) .checkboxElement:hover {
+  &:not(.isIndexEditingMode) {
+    .checkbox {
+      display: flex;
+      opacity: 1;
+      user-select: none;
+    }
 
-      .element {
-        display: none;
-      }
+    .element {
+      display: none;
     }
   }
 }

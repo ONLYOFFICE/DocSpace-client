@@ -33,7 +33,6 @@ import { ButtonKeys, EmployeeType } from "@docspace/shared/enums";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { downgradeUserType } from "@docspace/shared/api/people";
 
-import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import { TChangeUserTypeDialogData } from "SRC_DIR/helpers/contacts";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
@@ -45,8 +44,6 @@ type ChangeUserTypeEventProps = {
   setSelected: UsersStore["setSelected"];
   getPeopleListItem: UsersStore["getPeopleListItem"];
   needResetUserSelection: UsersStore["needResetUserSelection"];
-
-  setInfoPanelSelection: InfoPanelStore["setInfoPanelSelection"];
 
   dialogData: TChangeUserTypeDialogData;
 
@@ -61,8 +58,6 @@ const ChangeUserTypeEvent = ({
   updateUserType,
   setSelected,
   getPeopleListItem,
-
-  setInfoPanelSelection,
 
   onClose,
   personalUserFolderTitle,
@@ -104,12 +99,6 @@ const ChangeUserTypeEvent = ({
             : t("SuccessChangeUserType"),
         );
 
-        if (!needResetUserSelection && users) {
-          const user = getPeopleListItem(users[0]);
-
-          setInfoPanelSelection(user);
-        }
-
         successCallback?.(users);
       })
       .catch(() => {
@@ -139,7 +128,6 @@ const ChangeUserTypeEvent = ({
     isRequestRunning,
     needResetUserSelection,
     onClose,
-    setInfoPanelSelection,
     setSelected,
     successCallback,
     t,
@@ -197,8 +185,6 @@ const ChangeUserTypeEvent = ({
 
 export default inject(
   ({ peopleStore, infoPanelStore, treeFoldersStore }: TStore) => {
-    const { setInfoPanelSelection } = infoPanelStore;
-
     const { dialogStore, usersStore } = peopleStore;
 
     const { data: dialogData } = dialogStore!;
@@ -214,7 +200,7 @@ export default inject(
       needResetUserSelection,
 
       getPeopleListItem,
-      setInfoPanelSelection,
+
       setSelected,
 
       dialogData,

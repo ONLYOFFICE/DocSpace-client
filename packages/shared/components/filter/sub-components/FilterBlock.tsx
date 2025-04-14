@@ -213,9 +213,7 @@ const FilterBlock = ({
 
       if (isSelected && key !== "0") {
         if (isMultiSelect) {
-          const groupItemKey = filterValues.find(
-            (item) => item.group === group,
-          )!.key;
+          const groupItemKey = value.find((item) => item.group === group)!.key;
 
           if (Array.isArray(groupItemKey)) {
             const itemIdx = groupItemKey.findIndex((item) => item === key);

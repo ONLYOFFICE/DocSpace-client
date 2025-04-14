@@ -107,7 +107,7 @@ const DetailsBar = ({ eventDetails }) => {
         </Text>
       </BarItem>
       <BarItem>
-        <BarItemHeader>{t("Trigger")}</BarItemHeader>
+        <BarItemHeader>{t("EventType")}</BarItemHeader>
         <Text isInline fontWeight={600}>
           {trigger}
         </Text>

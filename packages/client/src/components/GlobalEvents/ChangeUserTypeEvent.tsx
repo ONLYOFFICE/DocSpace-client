@@ -183,29 +183,27 @@ const ChangeUserTypeEvent = ({
   );
 };
 
-export default inject(
-  ({ peopleStore, infoPanelStore, treeFoldersStore }: TStore) => {
-    const { dialogStore, usersStore } = peopleStore;
+export default inject(({ peopleStore, treeFoldersStore }: TStore) => {
+  const { dialogStore, usersStore } = peopleStore;
 
-    const { data: dialogData } = dialogStore!;
+  const { data: dialogData } = dialogStore!;
 
-    const { personalUserFolderTitle } = treeFoldersStore;
-    const {
-      updateUserType,
-      getPeopleListItem,
-      needResetUserSelection,
-      setSelected,
-    } = usersStore!;
-    return {
-      needResetUserSelection,
+  const { personalUserFolderTitle } = treeFoldersStore;
+  const {
+    updateUserType,
+    getPeopleListItem,
+    needResetUserSelection,
+    setSelected,
+  } = usersStore!;
+  return {
+    needResetUserSelection,
 
-      getPeopleListItem,
+    getPeopleListItem,
 
-      setSelected,
+    setSelected,
 
-      dialogData,
-      updateUserType,
-      personalUserFolderTitle,
-    };
-  },
-)(observer(ChangeUserTypeEvent));
+    dialogData,
+    updateUserType,
+    personalUserFolderTitle,
+  };
+})(observer(ChangeUserTypeEvent));

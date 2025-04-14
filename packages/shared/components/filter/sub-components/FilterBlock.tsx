@@ -232,42 +232,44 @@ const FilterBlock = ({
         setFilterValues(value);
         changeSelectedItems(value);
 
-        if (selectedFilterValue.has(group)) {
-          if (isMultiSelect) {
-            const groupItems = selectedFilterValue.get(group)!;
+        // Commented out the ability to remove parameters from the filter without clicking the Apply button
 
-            if (groupItems.size > 1) {
-              if (!groupItems.has(key)) return;
+        // if (selectedFilterValue.has(group)) {
+        //   if (isMultiSelect) {
+        //     const groupItems = selectedFilterValue.get(group)!;
 
-              const selectedFilterValues: TItem[] = [];
+        //     if (groupItems.size > 1) {
+        //       if (!groupItems.has(key)) return;
 
-              Object.entries(selectedFilterValue).forEach(
-                ([selectedGroup, items]) => {
-                  const item = {
-                    group: selectedGroup as FilterGroups,
-                    key:
-                      items.size === 1
-                        ? (Array.from(items.keys())[0] as string)
-                        : (Array.from(items.keys()) as string[]),
-                    label: Array.from(items.keys())[0] as string,
-                  };
+        //       const selectedFilterValues: TItem[] = [];
 
-                  if (selectedGroup === group && Array.isArray(item.key)) {
-                    const idx = item.key.findIndex((val) => val === key);
+        //       Object.entries(selectedFilterValue).forEach(
+        //         ([selectedGroup, items]) => {
+        //           const item = {
+        //             group: selectedGroup as FilterGroups,
+        //             key:
+        //               items.size === 1
+        //                 ? (Array.from(items.keys())[0] as string)
+        //                 : (Array.from(items.keys()) as string[]),
+        //             label: Array.from(items.keys())[0] as string,
+        //           };
 
-                    item.key.splice(idx, 1);
-                  }
+        //           if (selectedGroup === group && Array.isArray(item.key)) {
+        //             const idx = item.key.findIndex((val) => val === key);
 
-                  selectedFilterValues.push(item);
-                },
-              );
+        //             item.key.splice(idx, 1);
+        //           }
 
-              return onFilter(selectedFilterValues);
-            }
+        //           selectedFilterValues.push(item);
+        //         },
+        //       );
 
-            onFilter(value);
-          }
-        }
+        //       return onFilter(selectedFilterValues);
+        //     }
+
+        //     onFilter(value);
+        //   }
+        // }
 
         return;
       }
@@ -419,7 +421,23 @@ const FilterBlock = ({
   const isEqualFilter = () => {
     let isEqual = true;
 
+    const isSelectedFilterTags = selectedFilterValue.get(
+      FilterGroups.roomFilterTags,
+    );
+
+    const isFilterValuesTags = filterValues.find(
+      (value) => value.group === FilterGroups.roomFilterTags,
+    );
+
+    const isTags = !!(isSelectedFilterTags && isFilterValuesTags);
+
+    const isEqualTags =
+      isTags &&
+      isSelectedFilterTags?.size ===
+        (isFilterValuesTags.key as string[]).length;
+
     if (
+      !isEqualTags ||
       (selectedFilterValue.size === 0 && filterValues.length > 0) ||
       selectedFilterValue.size !== filterValues.length
     ) {

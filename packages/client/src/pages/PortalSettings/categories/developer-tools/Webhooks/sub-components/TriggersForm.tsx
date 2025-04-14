@@ -60,7 +60,7 @@ const TriggersForm = ({
   return (
     <div style={{ marginTop: "22px" }}>
       <Text fontWeight={600} style={{ marginBottom: "10px" }}>
-        {t("Trigger")}
+        {t("EventToTriggerThisWebhook")}
       </Text>
       <RadioButtonGroup
         fontSize="13px"
@@ -70,12 +70,12 @@ const TriggersForm = ({
         options={[
           {
             id: "enable-all",
-            label: t("Common:All"),
+            label: t("SendEverything"),
             value: "true",
           },
           {
             id: "select-from-list",
-            label: t("SelectFromList"),
+            label: t("IndividualEvents"),
             value: "false",
           },
         ]}

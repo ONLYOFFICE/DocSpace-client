@@ -92,6 +92,7 @@ const TriggersForm = ({
             gap: "8px",
             gridTemplateColumns: "repeat(2, 1fr)",
             marginTop: "10px",
+            marginInlineStart: "24px",
           }}
         >
           {triggersList.map((value) => (

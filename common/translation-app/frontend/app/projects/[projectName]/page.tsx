@@ -95,7 +95,7 @@ export default function ProjectPage() {
       fetchNamespaces(projectName, baseLanguage);
     }
   }, [languages, baseLanguage]);
-  
+
   // Select the first namespace when namespaces are loaded
   useEffect(() => {
     if (namespaces.length > 0 && !currentNamespace) {
@@ -148,7 +148,7 @@ export default function ProjectPage() {
     setCurrentNamespace(null); // Clear namespace selection
     setSelectedLanguages([]); // Clear selected languages
     resetTranslations(); // Reset translation data including the current key
-    
+
     // Navigate back to the projects list
     router.push("/");
   };
@@ -190,7 +190,7 @@ export default function ProjectPage() {
           <div className="flex items-center ml-4 space-x-4">
             {/* Theme Toggle */}
             <ThemeToggle />
-            
+
             {/* Ollama connection status */}
             <div className="flex items-center">
               <div
@@ -232,7 +232,9 @@ export default function ProjectPage() {
         <div className="lg:col-span-1">
           <div className="card mb-6">
             <div className="flex justify-between items-center mb-3">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Namespaces</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Namespaces
+              </h2>
               <button
                 onClick={() => setIsNamespaceModalOpen(true)}
                 className="
@@ -263,12 +265,16 @@ export default function ProjectPage() {
               selectedNamespace={currentNamespace}
               projectName={projectName}
               onChange={handleNamespaceChange}
-              onNamespaceUpdated={() => fetchNamespaces(projectName, baseLanguage)}
+              onNamespaceUpdated={() =>
+                fetchNamespaces(projectName, baseLanguage)
+              }
             />
           </div>
 
           <div className="card">
-            <h2 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Translation</h2>
+            <h2 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">
+              Translation
+            </h2>
             <OllamaPanel
               projectName={projectName}
               baseLanguage={baseLanguage}
@@ -284,7 +290,7 @@ export default function ProjectPage() {
           <div className="card">
             <h2 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">
               {currentNamespace
-                ? `Translations: ${currentNamespace}`
+                ? `Namespace: ${currentNamespace}`
                 : "Select a namespace"}
             </h2>
 

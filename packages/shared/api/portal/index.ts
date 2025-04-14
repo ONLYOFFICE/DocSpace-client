@@ -462,6 +462,17 @@ export async function updateAutoTopUpSettings(
   return request(options);
 }
 
+export async function getTransactionHistoryReport() {
+  const options = {
+    method: "post",
+    url: "/portal/payment/customer/operationsreport",
+    data: "",
+  };
+  const res = (await request(options)) as string;
+
+  return res;
+}
+
 export async function getPortal() {
   const options = {
     method: "post",

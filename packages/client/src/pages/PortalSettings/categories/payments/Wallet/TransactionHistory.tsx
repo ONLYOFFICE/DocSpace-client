@@ -46,6 +46,8 @@ import NoTransactionsFilterIcon from "PUBLIC_DIR/images/no.transactions.filter.r
 import TableHeader from "./TableView/TableHeader";
 import TransactionRow from "./TableView/TransactionRow";
 import "./transaction-history.scss";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { getTransactionHistoryReport } from "@docspace/shared/api/portal";
 
 type DateOption = {
   key: string;
@@ -58,6 +60,7 @@ type TransactionHistoryProps = {
   history: TTransactionCollection[];
   getStartTransactionDate: () => string;
   getEndTransactionDate: () => string;
+  openOnNewPage: boolean;
 };
 
 const TABLE_VERSION = "3";
@@ -71,12 +74,13 @@ const TransactionHistory = ({
   getStartTransactionDate,
   getEndTransactionDate,
   fetchTransactionHistory,
+  openOnNewPage,
 }: TransactionHistoryProps) => {
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
   const ref = useRef(null);
 
-  const { t } = useTranslation("Payments");
+  const { t } = useTranslation(["Payments", "Settings"]);
 
   const typeOfHistoty: TOption[] = [
     {
@@ -113,6 +117,7 @@ const TransactionHistory = ({
   const [hasAppliedDateFilter, setHasAppliedDateFilter] = useState(
     !!history.length,
   );
+  const [isFormationHistory, setIsFormationHistory] = useState(false);
 
   useEffect(() => {
     const startDateStr = getStartTransactionDate();
@@ -187,7 +192,7 @@ const TransactionHistory = ({
 
     setFilteredEndDateOptions(filteredOptions);
     setIsLoading(true);
-    const timerId = setTimeout(() => setIsLoading(false), 200);
+    const timerId = setTimeout(() => setIsLoading(true), 200);
 
     try {
       await fetchTransactionHistory(dateOption.key, selectedEndDate.key);
@@ -210,7 +215,7 @@ const TransactionHistory = ({
 
     setFilteredStartDateOptions(filteredOptions);
     setIsLoading(true);
-    const timerId = setTimeout(() => setIsLoading(false), 200);
+    const timerId = setTimeout(() => setIsLoading(true), 200);
 
     try {
       await fetchTransactionHistory(selectedStartDate.key, dateOption.key);
@@ -219,6 +224,26 @@ const TransactionHistory = ({
     }
 
     setIsLoading(false);
+    clearTimeout(timerId);
+  };
+
+  const getReport = async () => {
+    const timerId = setTimeout(() => setIsFormationHistory(true), 200);
+
+    try {
+      const editorLink = await getTransactionHistoryReport();
+
+      if (!editorLink) return;
+
+      setTimeout(
+        () => window.open(editorLink, openOnNewPage ? "_blank" : "_self"),
+        100,
+      );
+    } catch (e) {
+      toastr.error(e as Error);
+    }
+
+    setIsFormationHistory(false);
     clearTimeout(timerId);
   };
 
@@ -336,12 +361,31 @@ const TransactionHistory = ({
       </Text>
       {hasAppliedDateFilter ? filterCombobox : null}
       {history.length ? tableBody : emptyView}
+      <div className="download-wrapper">
+        <Button
+          className="download-report_button"
+          label={t("Settings:DownloadReportBtnText")}
+          size={ButtonSize.small}
+          minWidth="auto"
+          onClick={getReport}
+          isLoading={isFormationHistory}
+        />
+        <Text as="span" className="download-report_description">
+          {t("Settings:DownloadReportDescription")}
+        </Text>
+      </div>
     </>
   );
 };
 
 export default inject(
-  ({ settingsStore, setup, userStore, paymentStore }: TStore) => {
+  ({
+    settingsStore,
+    setup,
+    userStore,
+    paymentStore,
+    filesSettingsStore,
+  }: TStore) => {
     const { viewAs, setViewAs } = setup;
     const { currentDeviceType, theme } = settingsStore;
     const {
@@ -352,7 +396,7 @@ export default inject(
     } = paymentStore;
 
     const userId = userStore.user?.id;
-
+    const { openOnNewPage } = filesSettingsStore;
     return {
       viewAs,
       setViewAs,
@@ -363,6 +407,7 @@ export default inject(
       getStartTransactionDate,
       getEndTransactionDate,
       fetchTransactionHistory,
+      openOnNewPage,
     };
   },
 )(observer(TransactionHistory));

@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "您最新查看或编辑的文档将显示在这里。",
   "EmptyRootRoomUserDescription": "已共享的房间将显示在此处",
   "EmptyRootRoomUserTitle": "此处暂无房间",
+  "EmptyTemplatesDescription": "您可以在房间部分中根据房间创建模板",
+  "EmptyTemplatesTitle": "这里还没有模板",
   "FormFolderDefaultDescription": "将 PDF 表单拖放到此处或从{{productName}}或设备上传。",
   "FormFolderDefaultTitle": "此处尚无表单",
   "FormFolderDefaultUserDescription": "管理员上传的表单将显示在此处。",

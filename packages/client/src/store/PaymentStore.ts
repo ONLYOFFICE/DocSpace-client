@@ -207,20 +207,24 @@ class PaymentStore {
     }
   };
 
-  get walletBalance() {
-    return (
-      this.balance ?? {
-        subAccounts: [{ currency: "USD", amount: 0.0 }],
-      }
-    );
-  }
-
   get walletCustomerEmail() {
     return this.walletPayer.email;
   }
 
   get isAutoPaymentExist() {
-    return this.automaticPayments?.enabled;
+    return this.autoPayments?.enabled;
+  }
+
+  get walletCodeCurrency() {
+    if (this.balance) return this.balance?.subAccounts[0].currency;
+
+    return "USD";
+  }
+
+  get walletBalance() {
+    if (this.balance) return this.balance?.subAccounts[0].amount;
+
+    return 0.0;
   }
 
   fetchBalance = async () => {
@@ -262,7 +266,7 @@ class PaymentStore {
 
     if (!res) return;
 
-    this.automaticPayments = res;
+    this.autoPayments = res;
   };
 
   fetchWalletPayer = async () => {
@@ -296,7 +300,7 @@ class PaymentStore {
 
     if (!res) return;
 
-    this.automaticPayments = res;
+    this.autoPayments = res;
   };
 
   walletInit = async () => {

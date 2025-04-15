@@ -27,6 +27,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { isMobile } from "react-device-detect";
 
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Text } from "@docspace/shared/components/text";
@@ -34,6 +35,7 @@ import { TextInput, InputType } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TAutoTopUpSettings } from "@docspace/shared/api/portal/types";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
 import CheckRoundSvg from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 
@@ -49,27 +51,27 @@ interface AutoPaymentsProps {
     upToBalance: number,
     currency: string,
   ) => Promise<void>;
-  automaticPayments: TAutoTopUpSettings | null;
+  autoPayments: TAutoTopUpSettings | null;
   language: string;
   currency: string;
 }
 
 interface CurrentPaymentSettingsProps {
-  automaticPayments: TAutoTopUpSettings | null;
+  autoPayments: TAutoTopUpSettings | null;
   language: string;
   currency: string;
 }
 
 const CurrentPaymentSettings = ({
-  automaticPayments,
+  autoPayments,
   language,
   currency,
 }: CurrentPaymentSettingsProps) => {
   const { t } = useTranslation("Payments");
 
-  if (!automaticPayments) return null;
+  if (!autoPayments) return null;
 
-  const { minBalance, upToBalance } = automaticPayments;
+  const { minBalance, upToBalance } = autoPayments;
 
   return (
     <div className="info-block">
@@ -92,7 +94,7 @@ const CurrentPaymentSettings = ({
 const AutoPayments: React.FC<AutoPaymentsProps> = ({
   walletCustomerEmail,
   isAutoPaymentExist,
-  automaticPayments,
+  autoPayments,
   updateAutoPayments,
   language,
   currency,
@@ -102,17 +104,17 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
   const [isAutomaticPaymentsEnabled, setIsAutomaticPaymentsEnabled] =
     useState(isAutoPaymentExist);
   const [minBalance, setMinBalance] = useState(
-    isAutoPaymentExist ? automaticPayments?.minBalance.toString() : "",
+    isAutoPaymentExist ? autoPayments?.minBalance.toString() : "",
   );
   const [upToBalance, setUpToBalance] = useState(
-    isAutoPaymentExist ? automaticPayments?.upToBalance.toString() : "",
+    isAutoPaymentExist ? autoPayments?.upToBalance.toString() : "",
   );
   const [minBalanceError, setMinBalanceError] = useState(false);
   const [upToBalanceError, setUpToBalanceError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isCurrentSettings, setIsCurrentSettings] =
     useState(isAutoPaymentExist);
-  const [animateSettings, setAnimateSettings] = useState(isAutoPaymentExist);
+  const [animateSettings, setAnimateSettings] = useState(false);
   const [minUpToBalance, setMinUpToBalance] = useState(6);
 
   const validateMinBalance = (value: string) => {
@@ -268,7 +270,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
   const renderCurrentSettings = (
     <div className={`settings-wrapper ${animateSettings ? "animated" : ""}`}>
       <CurrentPaymentSettings
-        automaticPayments={automaticPayments}
+        autoPayments={autoPayments}
         language={language}
         currency={currency}
       />
@@ -280,23 +282,45 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
       />
     </div>
   );
+  const textTooltip = () => {
+    return (
+      <Text fontSize="12px" noSelect>
+        {t("FirstAddPaymentMethod")}
+      </Text>
+    );
+  };
 
   return (
     <div className="automatic-payments-block">
-      <div className="auto-payment-header">
-        <Text noSelect isBold fontSize="16px">
-          {t("AutomaticPayments")}
+      <div data-tooltip-id="iconTooltip">
+        <div className="auto-payment-header">
+          <Text noSelect isBold fontSize="16px">
+            {t("AutomaticPayments")}
+          </Text>
+          <ToggleButton
+            isChecked={isAutomaticPaymentsEnabled}
+            onChange={onToggleClick}
+            className="toggle-button"
+            isDisabled={!walletCustomerEmail}
+          />
+        </div>
+
+        <Text fontSize="12px" className="auto-payment-description" noSelect>
+          {t("AutomaticallyTopUpCard")}
         </Text>
-        <ToggleButton
-          isChecked={isAutomaticPaymentsEnabled}
-          onChange={onToggleClick}
-          className="toggle-button"
-          isDisabled={!walletCustomerEmail}
-        />
       </div>
-      <Text fontSize="12px" className="auto-payment-description" noSelect>
-        {t("AutomaticallyTopUpCard")}
-      </Text>
+
+      {!walletCustomerEmail ? (
+        <Tooltip
+          id="iconTooltip"
+          place="bottom"
+          maxWidth="300px"
+          float
+          getContent={textTooltip}
+          openOnClick={isMobile}
+        />
+      ) : null}
+
       {isAutomaticPaymentsEnabled
         ? isCurrentSettings
           ? renderCurrentSettings
@@ -310,7 +334,7 @@ export default inject(({ paymentStore, authStore }: TStore) => {
   const {
     walletCustomerEmail,
     updateAutoPayments,
-    automaticPayments,
+    autoPayments,
     isAutoPaymentExist,
   } = paymentStore;
   const { language } = authStore;
@@ -319,7 +343,7 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     walletCustomerEmail,
     isAutoPaymentExist,
     updateAutoPayments,
-    automaticPayments,
+    autoPayments,
     language,
   };
 })(observer(AutoPayments));

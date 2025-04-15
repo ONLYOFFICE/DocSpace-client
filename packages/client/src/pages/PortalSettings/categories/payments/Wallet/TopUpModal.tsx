@@ -55,22 +55,6 @@ const StyledBody = styled.div`
   padding: 0 0 24px;
 `;
 
-interface TStore {
-  paymentStore: {
-    walletBalance: {
-      subAccounts: Array<{ currency: string }>;
-    };
-    walletCustomerEmail: boolean;
-    fetchBalance: () => Promise<void>;
-    fetchTransactionHistory: () => Promise<void>;
-    cardLinked: string;
-    accountLink: string;
-  };
-  authStore: {
-    language: string;
-  };
-}
-
 type TopUpModalProps = {
   visible: boolean;
   currency: string;
@@ -82,6 +66,7 @@ type TopUpModalProps = {
   language: string;
   cardLinked: string;
   accountLink: string;
+  isEditAutoPayment: boolean;
 };
 
 const TopUpModal: React.FC<TopUpModalProps> = ({
@@ -95,6 +80,7 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
   language,
   cardLinked,
   accountLink,
+  isEditAutoPayment,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState("");
@@ -169,6 +155,7 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
           <AutomaticPaymentsBlock
             walletCustomerEmail={walletCustomerEmail}
             currency={currency}
+            isEditAutoPayment={isEditAutoPayment}
           />
         </StyledBody>
       </ModalDialog.Body>
@@ -198,7 +185,7 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
 export default inject(({ paymentStore, authStore }: TStore) => {
   const { language } = authStore;
   const {
-    walletBalance,
+    walletCodeCurrency,
     walletCustomerEmail,
     fetchBalance,
     fetchTransactionHistory,
@@ -207,7 +194,7 @@ export default inject(({ paymentStore, authStore }: TStore) => {
   } = paymentStore;
 
   return {
-    currency: walletBalance.subAccounts[0].currency,
+    currency: walletCodeCurrency,
     walletCustomerEmail,
     fetchBalance,
     fetchTransactionHistory,

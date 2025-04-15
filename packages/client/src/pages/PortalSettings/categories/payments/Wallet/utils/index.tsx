@@ -26,16 +26,17 @@
 
 export const formattedBalance = (
   language: string,
-  balance: { currency: string; amount: number },
+  amount: number,
+  currency: string,
 ) => {
   const formatter = new Intl.NumberFormat(language, {
     style: "currency",
-    currency: balance.currency,
+    currency,
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
 
-  const parts = formatter.formatToParts(balance.amount || 0);
+  const parts = formatter.formatToParts(amount || 0);
   const currencySymbol =
     parts.find((part) => part.type === "currency")?.value || "";
   const mainNumber =
@@ -48,7 +49,7 @@ export const formattedBalance = (
   const isCurrencyAtEnd =
     currencyIndex > parts.findIndex((part) => part.type === "integer");
 
-  const balanceValue = formatter.format(balance.amount);
+  const balanceValue = formatter.format(amount);
 
   return {
     fraction: `${decimal}${fraction}`,

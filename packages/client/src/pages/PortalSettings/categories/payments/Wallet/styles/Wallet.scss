@@ -43,10 +43,16 @@
 
   .balance-wrapper {
     max-width: 152px;
-    margin-bottom: 24px;
     margin-top: 20px;
+    margin-bottom: 12px;
   }
-
+  .auto-payment-information {
+    margin-bottom: 24px;
+    color: var(--payment-text-color);
+  }
+  .auto-payment-editing {
+    display: flex;
+  }
   .header-container {
     display: flex;
     align-items: center;

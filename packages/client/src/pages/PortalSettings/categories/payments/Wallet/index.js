@@ -30,32 +30,45 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Link } from "@docspace/shared/components/link";
 
 import TransactionHistory from "./TransactionHistory";
 import TopUpModal from "./TopUpModal";
-import { formattedBalance } from "./utils";
+import { formatCurrencyValue, formattedBalance } from "./utils";
 
 import "./styles/Wallet.scss";
 import PayerInformation from "../PayerInformation";
 
-const Wallet = ({ balance, language, walletInit, isInitWalletPage }) => {
+const Wallet = ({
+  walletBalance,
+  language,
+  walletInit,
+  isInitWalletPage,
+  autoPayments,
+  walletCodeCurrency,
+  isPayer,
+}) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
   const [visible, setVisible] = useState(false);
+  const [isEditAutoPayment, setIsEditAutoPayment] = useState(false);
 
   useEffect(() => {
     walletInit();
   }, []);
 
   const { fraction, balanceValue, isCurrencyAtEnd, mainNumber, currency } =
-    formattedBalance(language, balance);
+    formattedBalance(language, walletBalance, walletCodeCurrency);
 
   const onClose = () => {
     setVisible(false);
   };
 
-  const onOpen = () => {
+  const onOpen = (e) => {
+    const isLink = e.currentTarget.dataset.key === "link";
+
     setVisible(true);
+    setIsEditAutoPayment(isLink);
   };
 
   if (!isInitWalletPage) return;
@@ -65,9 +78,7 @@ const Wallet = ({ balance, language, walletInit, isInitWalletPage }) => {
       <Text className="wallet-description">
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
-
       <PayerInformation />
-
       <div className="balance-wrapper">
         <div className="header-container">
           <Text isBold fontSize="16px">
@@ -95,15 +106,46 @@ const Wallet = ({ balance, language, walletInit, isInitWalletPage }) => {
           primary
           label={t("TopUpBalance")}
           onClick={onOpen}
+          isDisabled={!isPayer}
         />
       </div>
+      <div className="auto-payment-information">
+        {autoPayments ? (
+          <>
+            <Text fontWeight={600}>{t("AutoTopUpEnabled")}</Text>
+            <div className="auto-payment-editing">
+              <Text>
+                {t("WhenBalanceDropsTo", {
+                  min: formatCurrencyValue(
+                    language,
+                    autoPayments.minBalance,
+                    walletCodeCurrency,
+                  ),
+                  max: formatCurrencyValue(
+                    language,
+                    autoPayments.upToBalance,
+                    walletCodeCurrency,
+                  ),
+                })}{" "}
+                {isPayer ? (
+                  <Link onClick={onOpen} data-key="link">
+                    {t("Common:EditButton")}
+                  </Link>
+                ) : null}
+              </Text>
+            </div>
+          </>
+        ) : null}
+      </div>
 
-      <TopUpModal
-        visible={visible}
-        onClose={onClose}
-        balanceValue={balanceValue}
-      />
-
+      {visible ? (
+        <TopUpModal
+          visible={visible}
+          onClose={onClose}
+          balanceValue={balanceValue}
+          isEditAutoPayment={isEditAutoPayment}
+        />
+      ) : null}
       <TransactionHistory />
     </div>
   );
@@ -119,10 +161,14 @@ export default inject(({ paymentStore, authStore }) => {
     accountLink,
     setBalance,
     isInitWalletPage,
+    autoPayments,
+    walletCodeCurrency,
+    isPayer,
   } = paymentStore;
 
   return {
-    balance: walletBalance.subAccounts[0],
+    walletBalance,
+    walletCodeCurrency,
     language,
     walletInit,
     walletCustomerEmail,
@@ -130,5 +176,7 @@ export default inject(({ paymentStore, authStore }) => {
     setBalance,
     accountLink,
     isInitWalletPage,
+    autoPayments,
+    isPayer,
   };
 })(observer(Wallet));

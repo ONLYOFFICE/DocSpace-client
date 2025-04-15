@@ -2100,7 +2100,7 @@ class ContextOptionsStore {
         label: t("Common:RemoveFromList"),
         icon: CircleCrossSvgUrl,
         onClick: () => this.onRemoveSharedRooms([item]),
-        disabled: !item.external,
+        disabled: this.userStore?.user?.isAdmin || !item.external,
       },
       {
         id: "option_download-as",

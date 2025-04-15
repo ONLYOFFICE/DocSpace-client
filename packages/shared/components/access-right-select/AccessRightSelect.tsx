@@ -64,7 +64,7 @@ export const AccessRightSelectPure = ({
       if (option) {
         if (isSelectionDisabled) {
           let isError =
-            option.access && option.access !== selectedOption.access;
+            option.access && option.access !== selectedOption?.access;
 
           if (availableAccess && option.access) {
             isError = availableAccess.every((item) => item !== option.access);
@@ -84,7 +84,7 @@ export const AccessRightSelectPure = ({
       availableAccess,
       isSelectionDisabled,
       onSelect,
-      selectedOption.access,
+      selectedOption?.access,
       selectionErrorText,
     ],
   );

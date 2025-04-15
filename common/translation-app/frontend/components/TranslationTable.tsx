@@ -110,6 +110,27 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
       rowPath
     );
   };
+  
+  // Handler to translate the current key to all available languages
+  const handleTranslateToAllLanguages = async (rowPath: string) => {
+    if (!ollamaConnected) return;
+    
+    // Get all target languages (exclude base language)
+    const targetLanguages = languages.filter(lang => lang !== baseLanguage);
+    
+    if (targetLanguages.length === 0) return;
+    
+    // Translate sequentially to all target languages
+    for (const lang of targetLanguages) {
+      await translateKey(
+        projectName,
+        baseLanguage,
+        lang,
+        namespace,
+        rowPath
+      );
+    }
+  };
 
   const isTranslating = (rowPath: string, language: string) => {
     if (!translationProgress) return false;
@@ -430,6 +451,16 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
                   Key: <strong>{currentEntry.path}</strong> (EN:{" "}
                   {currentEntry.translations["en"] || ""})
                 </span>
+                {ollamaConnected && languages.filter(lang => lang !== baseLanguage).length > 0 && (
+                  <button
+                    onClick={() => handleTranslateToAllLanguages(currentEntry.path)}
+                    disabled={translating}
+                    className="mr-2 text-xs py-1 px-2 btn btn-secondary"
+                    title="Translate this key to all languages"
+                  >
+                    {translating ? "Translating..." : "Translate All"}
+                  </button>
+                )}
                 <button
                   className="opacity-30 dark:opacity-50 group-hover:opacity-100 hover:opacity-100 focus:opacity-100 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-opacity"
                   onClick={(e) => handleKeyContextMenu(e, currentEntry.path)}

@@ -29,40 +29,28 @@ import moment from "moment";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { TableRow, TableCell } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
+import { Row, RowContent } from "@docspace/shared/components/rows";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
-import "../transaction-history.scss";
+import "../../styles/TransactionHistory.scss";
+import { accountingLedgersFormat } from "../../utils";
 
-interface TransactionRowProps {
+type TransactionRowViewProps = {
   transaction: TTransactionCollection;
   language?: string;
-}
-
-const formatCurrency = (
-  language: string,
-  amount: number,
-  isCredit: boolean,
-  currency: string,
-) => {
-  return `${isCredit ? "+" : "-"}${new Intl.NumberFormat(language, {
-    style: "currency",
-    currency,
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(Math.abs(amount))}`;
 };
 
-const TransactionRow: React.FC<TransactionRowProps> = ({
+const TransactionRowView: React.FC<TransactionRowViewProps> = ({
   transaction,
   language = "en",
+  theme,
 }) => {
   const { credit, withdrawal, currency } = transaction;
   const { t } = useTranslation("Payments");
   const isCredit = credit > 0;
 
-  const formattedAmount = formatCurrency(
+  const formattedAmount = accountingLedgersFormat(
     language,
     credit || withdrawal,
     isCredit,
@@ -70,39 +58,44 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
   );
 
   const dateFormat = `L ${moment.localeData().longDateFormat("LT")}`;
+  const formattedDate = moment(transaction.date).format(dateFormat);
+  const transactionType = transaction.service
+    ? "Service"
+    : t("Payments:BalanceTopUp");
+  const quantity = transaction.service ? transaction.quantity : "—";
 
   return (
-    <TableRow>
-      <TableCell>
-        <Text fontWeight={600} fontSize="11px">
-          {moment(transaction.date).format(dateFormat)}
-        </Text>
-      </TableCell>
-      <TableCell>
-        <Text fontWeight={600} fontSize="11px">
-          {transaction.service ? "Service" : t("Payments:BalanceTopUp")}
-        </Text>
-      </TableCell>
-      <TableCell>
-        <Text fontWeight={600} fontSize="11px">
-          {transaction.service ? transaction.quantity : "—"}
-        </Text>
-      </TableCell>
-      <TableCell>
+    <Row
+      className="transaction-row"
+      badgesComponent={
         <Text
           fontWeight={600}
-          fontSize="11px"
-          className={`transaction-row__amount--${isCredit ? "credit" : "debit"}`}
+          fontSize="13px"
+          className={`transaction-row__amount transaction-row__amount--${isCredit ? "credit" : ""}`}
         >
           {formattedAmount}
         </Text>
-      </TableCell>
-    </TableRow>
+      }
+    >
+      <RowContent sideColor={theme.filesSection.rowView.sideColor}>
+        <Text fontWeight={600} fontSize="15px">
+          {transactionType}
+        </Text>
+        <></>
+
+        <Text fontWeight={600} fontSize="11px">
+          {formattedDate}
+        </Text>
+        <Text fontWeight={600} fontSize="11px">
+          {quantity}
+        </Text>
+      </RowContent>
+    </Row>
   );
 };
 
-export default inject(({ authStore }: TStore) => {
+export default inject(({ authStore, settingsStore }: TStore) => {
   const { language } = authStore;
-
-  return { language };
-})(observer(TransactionRow));
+  const { theme } = settingsStore;
+  return { language, theme };
+})(observer(TransactionRowView));

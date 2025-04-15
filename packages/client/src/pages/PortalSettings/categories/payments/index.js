@@ -30,13 +30,14 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Tabs } from "@docspace/shared/components/tabs";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 import config from "../../../../../package.json";
 // import PaymentsEnterprise from "./Standalone";
 import PaymentsSaaS from "./SaaS";
 import Wallet from "./Wallet";
 
-const PaymentsPage = () => {
+const PaymentsPage = ({ currentDeviceType }) => {
   // const { standalone } = props;
 
   const [currentTabId, setCurrentTabId] = useState();
@@ -81,16 +82,17 @@ const PaymentsPage = () => {
       items={data}
       selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
-      // stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );
   // return standalone ? <PaymentsEnterprise /> : <PaymentsSaaS />;
 };
 
 export const Component = inject(({ settingsStore }) => {
-  const { standalone } = settingsStore;
+  const { standalone, currentDeviceType } = settingsStore;
 
   return {
     standalone,
+    currentDeviceType,
   };
 })(observer(PaymentsPage));

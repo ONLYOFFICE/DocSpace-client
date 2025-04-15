@@ -61,7 +61,7 @@ interface TStore {
       subAccounts: Array<{ currency: string }>;
     };
     isWalletCustomerExist: boolean;
-    setBalance: () => Promise<void>;
+    fetchBalance: () => Promise<void>;
     fetchTransactionHistory: () => Promise<void>;
     cardLinked: string;
     accountLink: string;
@@ -77,7 +77,7 @@ type TopUpModalProps = {
   balanceValue: string;
   fetchTransactionHistory: () => Promise<void>;
   isWalletCustomerExist: boolean;
-  setBalance: () => Promise<void>;
+  fetchBalance: () => Promise<void>;
   onClose: () => void;
   language: string;
   cardLinked: string;
@@ -90,7 +90,7 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
   balanceValue,
   fetchTransactionHistory,
   isWalletCustomerExist,
-  setBalance,
+  fetchBalance,
   onClose,
   language,
   cardLinked,
@@ -117,8 +117,9 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
   const onTopUp = async () => {
     try {
       setIsLoading(true);
+
       await saveDeposite(+amount, currency);
-      await Promise.allSettled([setBalance(), fetchTransactionHistory()]);
+      await Promise.allSettled([fetchBalance(), fetchTransactionHistory()]);
       toastr.success(t("Common:SuccessfullySaved"));
       onClose();
     } catch (e) {
@@ -199,7 +200,7 @@ export default inject(({ paymentStore, authStore }: TStore) => {
   const {
     walletBalance,
     isWalletCustomerExist,
-    setBalance,
+    fetchBalance,
     fetchTransactionHistory,
     cardLinked,
     accountLink,
@@ -208,7 +209,7 @@ export default inject(({ paymentStore, authStore }: TStore) => {
   return {
     currency: walletBalance.subAccounts[0].currency,
     isWalletCustomerExist,
-    setBalance,
+    fetchBalance,
     fetchTransactionHistory,
     language,
     cardLinked,

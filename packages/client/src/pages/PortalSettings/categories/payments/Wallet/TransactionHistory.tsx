@@ -24,30 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
 
-import { TableBody, TableContainer } from "@docspace/shared/components/table";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 import { Text } from "@docspace/shared/components/text";
-import { EmptyView } from "@docspace/shared/components/empty-view";
+
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
 } from "@docspace/shared/components/combobox";
-import { Toast, toastr } from "@docspace/shared/components/toast";
-
-import NoTransactionsIcon from "PUBLIC_DIR/images/no.transactions.react.svg";
-import NoTransactionsFilterIcon from "PUBLIC_DIR/images/no.transactions.filter.react.svg";
-
-import TableHeader from "./TableView/TableHeader";
-import TransactionRow from "./TableView/TransactionRow";
-import "./transaction-history.scss";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/shared/components/toast";
 import { getTransactionHistoryReport } from "@docspace/shared/api/portal";
+import { DeviceType } from "@docspace/shared/enums";
+
+import TransactionBody from "./sub-components/TransactionBody";
+
+import "./styles/TransactionHistory.scss";
 
 type DateOption = {
   key: string;
@@ -55,31 +53,31 @@ type DateOption = {
 };
 
 type TransactionHistoryProps = {
+  isAppliedFilter: boolean;
+  getStartTransactionDate: () => string;
+  getEndTransactionDate: () => string;
+  fetchTransactionHistory: any;
+  openOnNewPage: boolean;
   userId: string;
   sectionWidth: number;
   history: TTransactionCollection[];
-  getStartTransactionDate: () => string;
-  getEndTransactionDate: () => string;
-  openOnNewPage: boolean;
+  viewAs: string;
+  setViewAs: (view: string) => void;
+  currentDeviceType: DeviceType;
 };
 
-const TABLE_VERSION = "3";
-const COLUMNS_SIZE = `historyColumnsSize_ver-${TABLE_VERSION}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelLoginHistoryColumnsSize_ver-${TABLE_VERSION}`;
-
 const TransactionHistory = ({
-  userId,
-  sectionWidth,
-  history,
   getStartTransactionDate,
   getEndTransactionDate,
   fetchTransactionHistory,
   openOnNewPage,
+  userId,
+  sectionWidth,
+  history,
+  viewAs,
+  setViewAs,
+  currentDeviceType,
 }: TransactionHistoryProps) => {
-  const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
-  const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
-  const ref = useRef(null);
-
   const { t } = useTranslation(["Payments", "Settings"]);
 
   const typeOfHistoty: TOption[] = [
@@ -115,7 +113,7 @@ const TransactionHistory = ({
   >([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasAppliedDateFilter, setHasAppliedDateFilter] = useState(
-    !!history.length,
+    history.length > 0,
   );
   const [isFormationHistory, setIsFormationHistory] = useState(false);
 
@@ -181,7 +179,7 @@ const TransactionHistory = ({
     clearTimeout(timerId);
   };
 
-  const onSelectStartDate = async (option: TOption): void => {
+  const onSelectStartDate = async (option: TOption): Promise<void> => {
     const dateOption = option as DateOption;
     setSelectedStartDate(dateOption);
     setHasAppliedDateFilter(true);
@@ -204,7 +202,7 @@ const TransactionHistory = ({
     clearTimeout(timerId);
   };
 
-  const onSelectEndDate = async (option: TOption): void => {
+  const onSelectEndDate = async (option: TOption): Promise<void> => {
     const dateOption = option as DateOption;
     setSelectedEndDate(dateOption);
     setHasAppliedDateFilter(true);
@@ -246,37 +244,6 @@ const TransactionHistory = ({
     setIsFormationHistory(false);
     clearTimeout(timerId);
   };
-
-  const tableBody = (
-    <div className="transaction-history-body">
-      <TableContainer forwardedRef={ref} useReactWindow={false}>
-        <TableHeader
-          sectionWidth={sectionWidth}
-          containerRef={ref}
-          columnStorageName={columnStorageName}
-          columnInfoPanelStorageName={columnInfoPanelStorageName}
-          itemHeight={48}
-        />
-        <TableBody
-          useReactWindow={false}
-          columnStorageName={columnStorageName}
-          columnInfoPanelStorageName={columnInfoPanelStorageName}
-          itemHeight={48}
-          filesLength={history.length}
-          fetchMoreFiles={() => Promise.resolve()}
-          hasMoreFiles={false}
-          itemCount={history.length}
-        >
-          {history.map((transaction, index) => (
-            <TransactionRow
-              transaction={transaction}
-              key={`transaction-${transaction.date || index}`}
-            />
-          ))}
-        </TableBody>
-      </TableContainer>
-    </div>
-  );
 
   const filterCombobox = (
     <div className="transaction-history-combobox">
@@ -332,35 +299,22 @@ const TransactionHistory = ({
     </div>
   );
 
-  const title = hasAppliedDateFilter
-    ? t("NoFindingsFound")
-    : t("NoWalletTransaction");
-  const description = hasAppliedDateFilter
-    ? t("NoTransactionsFilter")
-    : t("NoWalletTransactionDescription");
-
-  const icon = hasAppliedDateFilter ? (
-    <NoTransactionsFilterIcon />
-  ) : (
-    <NoTransactionsIcon />
-  );
-
-  const emptyView = (
-    <EmptyView
-      icon={icon}
-      title={title}
-      description={description}
-      options={null}
-    />
-  );
-
   return (
     <>
       <Text isBold fontSize="16px" className="transaction-history-title">
         {t("TransactionHistory")}
       </Text>
       {hasAppliedDateFilter ? filterCombobox : null}
-      {history.length ? tableBody : emptyView}
+      <TransactionBody
+        hasAppliedDateFilter={hasAppliedDateFilter}
+        userId={userId}
+        sectionWidth={sectionWidth}
+        history={history}
+        viewAs={viewAs}
+        setViewAs={setViewAs}
+        currentDeviceType={currentDeviceType}
+      />
+
       <div className="download-wrapper">
         <Button
           className="download-report_button"
@@ -380,14 +334,12 @@ const TransactionHistory = ({
 
 export default inject(
   ({
-    settingsStore,
-    setup,
-    userStore,
     paymentStore,
     filesSettingsStore,
+    userStore,
+    setup,
+    settingsStore,
   }: TStore) => {
-    const { viewAs, setViewAs } = setup;
-    const { currentDeviceType, theme } = settingsStore;
     const {
       transactionHistory,
       getStartTransactionDate,
@@ -395,19 +347,22 @@ export default inject(
       fetchTransactionHistory,
     } = paymentStore;
 
-    const userId = userStore.user?.id;
     const { openOnNewPage } = filesSettingsStore;
+    const { viewAs, setViewAs } = setup;
+    const { currentDeviceType } = settingsStore;
+
+    const userId = userStore.user?.id;
+
     return {
-      viewAs,
-      setViewAs,
-      currentDeviceType,
-      userId,
-      history: transactionHistory?.collection ?? [],
-      theme,
       getStartTransactionDate,
       getEndTransactionDate,
       fetchTransactionHistory,
       openOnNewPage,
+      userId,
+      currentDeviceType,
+      history: transactionHistory?.collection ?? [],
+      viewAs,
+      setViewAs,
     };
   },
 )(observer(TransactionHistory));

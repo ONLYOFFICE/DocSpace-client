@@ -37,7 +37,7 @@ import { TAutoTopUpSettings } from "@docspace/shared/api/portal/types";
 
 import CheckRoundSvg from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 
-import "./AutoPayments.scss";
+import "../styles/AutoPayments.scss";
 import { formatCurrencyValue } from "../utils";
 
 interface AutoPaymentsProps {

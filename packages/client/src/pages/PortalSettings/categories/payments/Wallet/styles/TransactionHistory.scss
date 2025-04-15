@@ -29,10 +29,6 @@
     &--credit {
       color: #44bb6e;
     }
-
-    &--debit {
-      color: #f21c0e;
-    }
   }
 }
 
@@ -56,4 +52,39 @@
   gap: 12px;
   align-items: center;
   margin-top: 20px;
+}
+
+.table-container_caption-header {
+  position: absolute;
+}
+
+.transaction-row__amount {
+  min-width: fit-content;
+  width: max-content;
+  text-align: end;
+}
+
+.transaction-history-row-view {
+  .transaction-row__amount--credit {
+    color: #35ad17;
+  }
+}
+
+//  border-top: ${(props) =>
+// `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+// border-bottom: ${(props) =>
+//   `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+
+.transaction-row {
+  .row_content {
+    height: 58px;
+  }
+
+  height: 59px;
+
+  box-sizing: border-box;
+  margin-top: -1px;
+
+  position: unset;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

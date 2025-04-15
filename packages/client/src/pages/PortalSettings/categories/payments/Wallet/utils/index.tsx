@@ -75,3 +75,17 @@ export const formatCurrencyValue = (
 
   return formatter.format(amount);
 };
+
+export const accountingLedgersFormat = (
+  language: string,
+  amount: number,
+  isCredit: boolean,
+  currency: string,
+) => {
+  return `${isCredit ? "+" : "-"}${new Intl.NumberFormat(language, {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(Math.abs(amount))}`;
+};

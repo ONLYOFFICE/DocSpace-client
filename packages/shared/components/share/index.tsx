@@ -62,8 +62,6 @@ import {
   getExpirationDate,
 } from "./Share.helpers";
 
-const defaultCreate = DEFAULT_CREATE_LINK_SETTINGS;
-
 const Share = (props: ShareProps) => {
   const {
     isRooms,
@@ -152,7 +150,8 @@ const Share = (props: ShareProps) => {
     addLoaderLink();
 
     try {
-      const { access, internal, diffExpirationDate } = defaultCreate;
+      const { access, internal, diffExpirationDate } =
+        DEFAULT_CREATE_LINK_SETTINGS;
 
       const newLink = addFileLink
         ? await addFileLink(

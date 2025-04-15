@@ -61,7 +61,7 @@ type TransactionHistoryProps = {
   currentDeviceType: DeviceType;
 };
 
-const formatDate = (date: moment.Moment) => date.format("YYYY-MM-DD");
+const formatDate = (date: moment.Moment) => date.format("YYYY-MM-DDTHH:mm:ss");
 
 const TransactionHistory = ({
   getStartTransactionDate,
@@ -162,8 +162,16 @@ const TransactionHistory = ({
   const getReport = async () => {
     const timerId = setTimeout(() => setIsFormationHistory(true), 200);
 
+    const isCredit = selectedType.key !== "debit";
+    const isDebit = selectedType.key !== "credit";
+
     try {
-      const editorLink = await getTransactionHistoryReport();
+      const editorLink = await getTransactionHistoryReport(
+        formatDate(startDate),
+        formatDate(endDate),
+        isCredit,
+        isDebit,
+      );
 
       if (!editorLink) return;
 
@@ -247,19 +255,21 @@ const TransactionHistory = ({
         currentDeviceType={currentDeviceType}
       />
 
-      <div className="download-wrapper">
-        <Button
-          className="download-report_button"
-          label={t("Settings:DownloadReportBtnText")}
-          size={ButtonSize.small}
-          minWidth="auto"
-          onClick={getReport}
-          isLoading={isFormationHistory}
-        />
-        <Text as="span" className="download-report_description">
-          {t("Settings:DownloadReportDescription")}
-        </Text>
-      </div>
+      {history.length ? (
+        <div className="download-wrapper">
+          <Button
+            className="download-report_button"
+            label={t("Settings:DownloadReportBtnText")}
+            size={ButtonSize.small}
+            minWidth="auto"
+            onClick={getReport}
+            isLoading={isFormationHistory}
+          />
+          <Text as="span" className="download-report_description">
+            {t("Settings:DownloadReportDescription")}
+          </Text>
+        </div>
+      ) : null}
     </>
   );
 };

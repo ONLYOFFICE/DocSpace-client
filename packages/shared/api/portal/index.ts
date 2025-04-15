@@ -462,11 +462,21 @@ export async function updateAutoTopUpSettings(
   return request(options);
 }
 
-export async function getTransactionHistoryReport() {
+export async function getTransactionHistoryReport(
+  startDate: string,
+  endDate: string,
+  credit: boolean,
+  withdrawal: boolean,
+) {
   const options = {
     method: "post",
     url: "/portal/payment/customer/operationsreport",
-    data: "",
+    data: {
+      startDate,
+      endDate,
+      credit,
+      withdrawal,
+    },
   };
   const res = (await request(options)) as string;
 

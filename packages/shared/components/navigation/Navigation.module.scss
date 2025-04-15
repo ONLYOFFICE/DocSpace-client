@@ -406,7 +406,13 @@
   }
 
   &[data-with-logo="true"][data-is-frame="true"] {
-    grid-template-columns: auto 49px auto 1fr;
+    grid-template-columns: auto auto auto 1fr;
+  }
+
+  @include tablet-and-below {
+    &[data-with-logo="true"][data-is-frame="true"] {
+      grid-template-columns: auto 49px auto 1fr;
+    }
   }
 
   &[data-show-navigation-button="true"][data-is-frame="false"],
@@ -414,9 +420,9 @@
     grid-template-columns: 49px auto minmax(186px, 1fr);
   }
 
-  &[data-show-navigation-button="true"][data-is-frame="true"][data-with-logo="true"] {
+  /*   &[data-show-navigation-button="true"][data-is-frame="true"][data-with-logo="true"] {
     grid-template-columns: auto 49px auto minmax(186px, 1fr);
-  }
+  } */
 
   &[data-is-root-folder="true"][data-with-logo="false"] {
     grid-template-columns: auto 1fr;
@@ -424,10 +430,6 @@
 
   &[data-is-root-folder="true"][data-with-logo="true"][data-is-frame="false"] {
     grid-template-columns: auto auto 1fr;
-  }
-
-  &[data-is-root-folder="false"][data-is-frame="true"][data-with-logo="true"] {
-    grid-template-columns: 49px 49px 1fr auto;
   }
 
   &[data-is-desktop-client="true"][data-is-drop-box-component="true"] {

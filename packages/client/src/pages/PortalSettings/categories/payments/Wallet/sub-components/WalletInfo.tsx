@@ -26,7 +26,7 @@
 
 import React from "react";
 import { useTranslation, Trans } from "react-i18next";
-import { inject, observer } from "mobx-react";
+
 import { ReactSVG } from "react-svg";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
@@ -70,6 +70,4 @@ const WalletInfo: React.FC<WalletInfoProps> = ({ balance }) => {
   );
 };
 
-export default inject(({}) => {
-  return {};
-})(observer(WalletInfo));
+export default WalletInfo;

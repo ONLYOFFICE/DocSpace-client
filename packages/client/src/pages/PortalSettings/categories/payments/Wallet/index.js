@@ -36,6 +36,7 @@ import TopUpModal from "./TopUpModal";
 import { formattedBalance } from "./utils";
 
 import "./Wallet.scss";
+import PayerInformation from "../PayerInformation";
 
 const Wallet = ({ balance, language, walletInit, isInitWalletPage }) => {
   const { t } = useTranslation(["Payments", "Common"]);
@@ -64,6 +65,9 @@ const Wallet = ({ balance, language, walletInit, isInitWalletPage }) => {
       <Text className="description">
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
+
+      <PayerInformation />
+
       <div className="balance-wrapper">
         <div className="header-container">
           <Text isBold fontSize="16px">

@@ -79,7 +79,7 @@ const StyledContainer = styled.div`
   }
 `;
 
-const PayerInformationContainer = ({
+const PayerInformation = ({
   style,
   theme,
   user,
@@ -241,21 +241,33 @@ const PayerInformationContainer = ({
 
 export default inject(
   ({ settingsStore, paymentStore, userStore, currentTariffStatusStore }) => {
-    const { accountLink, isStripePortalAvailable } = paymentStore;
+    const {
+      accountLink,
+      isStripePortalAvailable,
+      walletCustomerEmail,
+      payerInfo: walletPayer,
+    } = paymentStore;
     const { theme } = settingsStore;
-    const { customerId, isGracePeriod, isNotPaidPeriod, payerInfo } =
-      currentTariffStatusStore;
+    const {
+      customerId,
+      isGracePeriod,
+      isNotPaidPeriod,
+      payerInfo: paymentPayer,
+    } = currentTariffStatusStore;
     const { user } = userStore;
+
+    const email = customerId ?? walletCustomerEmail;
+    const payerInfo = paymentPayer ?? walletPayer;
 
     return {
       isStripePortalAvailable,
       theme,
       user,
       accountLink,
-      payerInfo,
-      email: customerId,
       isGracePeriod,
       isNotPaidPeriod,
+      email,
+      payerInfo,
     };
   },
-)(observer(PayerInformationContainer));
+)(observer(PayerInformation));

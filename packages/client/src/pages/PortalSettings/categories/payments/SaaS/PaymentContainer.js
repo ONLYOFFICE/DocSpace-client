@@ -39,7 +39,7 @@ import CurrentTariffContainer from "./CurrentTariffContainer";
 import PriceCalculation from "./PriceCalculation";
 import BenefitsContainer from "./BenefitsContainer";
 import ContactContainer from "./ContactContainer";
-import PayerInformationContainer from "./PayerInformationContainer";
+import PayerInformation from "../PayerInformation";
 
 const StyledBody = styled.div`
   max-width: 660px;
@@ -310,9 +310,7 @@ const PaymentContainer = (props) => {
             : currentPlanTitle()}
 
           {!isNonProfit && isAlreadyPaid ? (
-            <PayerInformationContainer
-              isFreeAfterPaidPeriod={isFreeAfterPaidPeriod}
-            />
+            <PayerInformation isFreeAfterPaidPeriod={isFreeAfterPaidPeriod} />
           ) : null}
 
           <CurrentTariffContainer />

@@ -53,7 +53,6 @@ type DateOption = {
 };
 
 type TransactionHistoryProps = {
-  isAppliedFilter: boolean;
   getStartTransactionDate: () => string;
   getEndTransactionDate: () => string;
   fetchTransactionHistory: any;

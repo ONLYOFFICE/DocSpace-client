@@ -60,6 +60,7 @@ import {
   TTransactionHistory,
   TAutoTopUpSettings,
 } from "@docspace/shared/api/portal/types";
+import { getUserByEmail } from "@docspace/shared/api/people";
 
 class PaymentStore {
   userStore: UserStore | null = null;
@@ -122,6 +123,8 @@ class PaymentStore {
   cardLinked = "";
 
   transactionHistory: TTransactionHistory | {} = {};
+  payerInfo = null;
+
 
   automaticPayments: TAutoTopUpSettings | null = null;
 
@@ -184,12 +187,36 @@ class PaymentStore {
     this.isInitWalletPage = isInitWalletPage;
   };
 
+  setPayerInfo = async () => {
+    try {
+      if (!this.walletCustomerEmail || !this.walletCustomerEmail?.length) {
+        this.payerInfo = null;
+        return;
+      }
+
+      const result = await getUserByEmail(this.walletCustomerEmail);
+      if (!result) {
+        this.payerInfo = null;
+        return;
+      }
+
+      this.payerInfo = result;
+    } catch (e) {
+      this.payerInfo = null;
+      console.error(e);
+    }
+  };
+
   get walletBalance() {
     return (
       this.balance ?? {
         subAccounts: [{ currency: "USD", amount: 0.0 }],
       }
     );
+  }
+
+  get walletCustomerEmail() {
+    return this.walletPayer.email;
   }
 
   get isWalletCustomerExist() {
@@ -289,6 +316,7 @@ class PaymentStore {
           this.fetchTransactionHistory(),
           this.fetchCardLinked(),
         );
+        this.setPayerInfo();
       } else {
         requests.push(this.fetchCardLinked());
       }
@@ -568,13 +596,16 @@ class PaymentStore {
 
   get isPayer() {
     if (!this.userStore || !this.currentTariffStatusStore) return;
+
     const { user } = this.userStore;
 
-    const { payerInfo } = this.currentTariffStatusStore;
+    const { payerInfo: paymentPayer } = this.currentTariffStatusStore;
 
-    if (!user || !payerInfo) return false;
+    const payer = paymentPayer ?? this.payerInfo;
 
-    return user.email === payerInfo.email;
+    if (!user || !payer) return false;
+
+    return user.email === payer.email;
   }
 
   get isStripePortalAvailable() {

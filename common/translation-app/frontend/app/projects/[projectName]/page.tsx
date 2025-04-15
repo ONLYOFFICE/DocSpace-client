@@ -8,11 +8,11 @@ import { useNamespaceStore } from "@/store/namespaceStore";
 import { useTranslationStore } from "@/store/translationStore";
 import { useOllamaStore } from "@/store/ollamaStore";
 import { initSocket, getSocket } from "@/lib/socket";
+import { useEffect as useReactEffect } from "react";
 
 import LanguageSelector from "@/components/LanguageSelector";
 import NamespaceSelector from "@/components/NamespaceSelector";
 import TranslationTable from "@/components/TranslationTable";
-import OllamaPanel from "@/components/OllamaPanel";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import ErrorDisplay from "@/components/ErrorDisplay";
 import NamespaceModal from "@/components/NamespaceModal";
@@ -65,6 +65,10 @@ export default function ProjectPage() {
     checkConnection: checkOllamaConnection,
     isConnected: ollamaConnected,
     translationProgress,
+    models,
+    selectedModel,
+    setSelectedModel,
+    fetchModels,
   } = useOllamaStore();
 
   // Initialize data
@@ -103,6 +107,13 @@ export default function ProjectPage() {
       setCurrentNamespace(namespaces[0]);
     }
   }, [namespaces]);
+
+  // Fetch Ollama models when connected
+  useEffect(() => {
+    if (ollamaConnected) {
+      fetchModels();
+    }
+  }, [ollamaConnected]);
 
   // Load translations when namespace is selected
   useEffect(() => {
@@ -191,16 +202,35 @@ export default function ProjectPage() {
             {/* Theme Toggle */}
             <ThemeToggle />
 
-            {/* Ollama connection status */}
+            {/* Ollama connection status and model selection */}
             <div className="flex items-center">
               <div
                 className={`w-2 h-2 rounded-full mr-1 ${
                   ollamaConnected ? "bg-green-500" : "bg-red-500"
                 }`}
               ></div>
-              <span className="text-xs text-gray-600 dark:text-gray-300">
+              <span className="text-xs text-gray-600 dark:text-gray-300 mr-2">
                 {ollamaConnected ? "Ollama Connected" : "Ollama Disconnected"}
               </span>
+
+              {ollamaConnected && (
+                <select
+                  id="model-select"
+                  value={selectedModel || ""}
+                  onChange={(e) => setSelectedModel(e.target.value)}
+                  className="select text-xs py-0.5 px-1 border border-gray-300 dark:border-gray-700 rounded"
+                  title="Select Ollama model for translations"
+                >
+                  <option value="" disabled>
+                    Select model
+                  </option>
+                  {models.map((model) => (
+                    <option key={model.name} value={model.name}>
+                      {model.name}
+                    </option>
+                  ))}
+                </select>
+              )}
             </div>
           </div>
         </div>
@@ -230,7 +260,7 @@ export default function ProjectPage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Sidebar */}
         <div className="lg:col-span-1">
-          <div className="card mb-6">
+          <div className="card">
             <div className="flex justify-between items-center mb-3">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Namespaces
@@ -268,19 +298,6 @@ export default function ProjectPage() {
               onNamespaceUpdated={() =>
                 fetchNamespaces(projectName, baseLanguage)
               }
-            />
-          </div>
-
-          <div className="card">
-            <h2 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">
-              Translation
-            </h2>
-            <OllamaPanel
-              projectName={projectName}
-              baseLanguage={baseLanguage}
-              languages={languages}
-              namespace={currentNamespace}
-              progress={translationProgress}
             />
           </div>
         </div>

@@ -111,6 +111,19 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     );
   };
   
+  // Selected target language for single-language translations
+  const [selectedTargetLanguage, setSelectedTargetLanguage] = useState<string>("");
+  
+  // Set default target language when languages change
+  useEffect(() => {
+    if (languages.length > 0 && languages.some(lang => lang !== baseLanguage)) {
+      const nonBaseLanguages = languages.filter(lang => lang !== baseLanguage);
+      if (nonBaseLanguages.length > 0) {
+        setSelectedTargetLanguage(nonBaseLanguages[0]);
+      }
+    }
+  }, [languages, baseLanguage]);
+  
   // Handler to translate the current key to all available languages
   const handleTranslateToAllLanguages = async (rowPath: string) => {
     if (!ollamaConnected) return;
@@ -130,6 +143,19 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
         rowPath
       );
     }
+  };
+
+  // Handle translate to selected target language
+  const handleTranslateToSelectedLanguage = async (rowPath: string) => {
+    if (!ollamaConnected || !selectedTargetLanguage) return;
+    
+    await translateKey(
+      projectName,
+      baseLanguage,
+      selectedTargetLanguage,
+      namespace,
+      rowPath
+    );
   };
 
   const isTranslating = (rowPath: string, language: string) => {
@@ -373,8 +399,8 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
 
   return (
     <div>
-      <div className="mb-4 flex gap-2">
-        <div className="flex-grow">
+      <div className="mb-4 flex flex-wrap gap-2">
+        <div className="flex-grow min-w-[200px]">
           <input
             type="text"
             value={searchTerm}
@@ -383,6 +409,38 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
             className="input w-full text-sm py-1 text-gray-800 dark:text-gray-200"
           />
         </div>
+        
+        {/* Target language selector for translations */}
+        {ollamaConnected && (
+          <div className="flex gap-2 items-center">
+            <select
+              value={selectedTargetLanguage}
+              onChange={(e) => setSelectedTargetLanguage(e.target.value)}
+              className="input py-1 px-2 text-sm text-gray-800 dark:text-gray-200"
+              disabled={languages.filter(lang => lang !== baseLanguage).length === 0}
+            >
+              <option value="" disabled>Target language</option>
+              {languages
+                .filter(lang => lang !== baseLanguage)
+                .map(lang => (
+                  <option key={lang} value={lang}>{lang}</option>
+                ))
+              }
+            </select>
+            
+            {currentEntry && (
+              <button 
+                onClick={() => handleTranslateToSelectedLanguage(currentEntry.path)}
+                disabled={!selectedTargetLanguage || translating}
+                className="btn btn-sm btn-secondary py-1 px-2 text-xs"
+                title="Translate current key to selected language"
+              >
+                {translating ? "..." : "Translate"}
+              </button>
+            )}
+          </div>
+        )}
+        
         {filteredTranslations.length > 0 && (
           <div className="w-[250px]">
             <select

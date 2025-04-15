@@ -53,6 +53,7 @@ const DatePicker = (props: DatePickerProps) => {
     outerDate,
     openDate,
     isMobile,
+    hideCross,
   } = props;
 
   const calendarRef = useRef<HTMLDivElement | null>(null);
@@ -159,6 +160,7 @@ const DatePicker = (props: DatePickerProps) => {
           className={styles.selectedItem}
           propKey=""
           onClose={deleteSelectedDate}
+          hideCross={hideCross}
           label={
             showCalendarIcon ? (
               <span

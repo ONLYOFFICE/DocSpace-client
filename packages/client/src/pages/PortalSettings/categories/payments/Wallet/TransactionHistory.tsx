@@ -39,6 +39,7 @@ import {
   ComboBoxSize,
   TOption,
 } from "@docspace/shared/components/combobox";
+import { DatePicker } from "@docspace/shared/components/date-picker";
 import { toastr } from "@docspace/shared/components/toast";
 import { getTransactionHistoryReport } from "@docspace/shared/api/portal";
 import { DeviceType } from "@docspace/shared/enums";
@@ -46,11 +47,6 @@ import { DeviceType } from "@docspace/shared/enums";
 import TransactionBody from "./sub-components/TransactionBody";
 
 import "./styles/TransactionHistory.scss";
-
-type DateOption = {
-  key: string;
-  label: string;
-};
 
 type TransactionHistoryProps = {
   getStartTransactionDate: () => string;
@@ -64,6 +60,8 @@ type TransactionHistoryProps = {
   setViewAs: (view: string) => void;
   currentDeviceType: DeviceType;
 };
+
+const formatDate = (date: moment.Moment) => date.format("YYYY-MM-DD");
 
 const TransactionHistory = ({
   getStartTransactionDate,
@@ -95,81 +93,26 @@ const TransactionHistory = ({
   ];
 
   const [selectedType, setSelectedType] = useState<TOption>(typeOfHistoty[0]);
-  const [dateOptions, setDateOptions] = useState<DateOption[]>([]);
-  const [selectedStartDate, setSelectedStartDate] = useState<DateOption>({
-    key: "",
-    label: "",
-  });
-  const [selectedEndDate, setSelectedEndDate] = useState<DateOption>({
-    key: "",
-    label: "",
-  });
-  const [filteredEndDateOptions, setFilteredEndDateOptions] = useState<
-    DateOption[]
-  >([]);
-  const [filteredStartDateOptions, setFilteredStartDateOptions] = useState<
-    DateOption[]
-  >([]);
+  const [startDate, setStartDate] = useState<moment.Moment>(
+    moment(getStartTransactionDate()),
+  );
+  const [endDate, setEndDate] = useState<moment.Moment>(
+    moment(getEndTransactionDate()),
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [hasAppliedDateFilter, setHasAppliedDateFilter] = useState(
     history.length > 0,
   );
   const [isFormationHistory, setIsFormationHistory] = useState(false);
 
-  useEffect(() => {
-    const startDateStr = getStartTransactionDate();
-    const endDateStr = getEndTransactionDate();
-
-    const startDate = moment(startDateStr);
-    const endDate = moment(endDateStr);
-
-    const options: DateOption[] = [];
-    const currentDate = moment(endDate);
-
-    while (currentDate.isSameOrAfter(startDate, "day")) {
-      const dateStr = currentDate.format("YYYY-MM-DDTHH:mm:ss");
-      const formattedDate = currentDate.format("L");
-
-      options.push({
-        key: dateStr,
-        label: formattedDate,
-      });
-
-      currentDate.subtract(1, "day");
-    }
-
-    const sortedOptions = [...options].sort((a, b) =>
-      moment(a.key).diff(moment(b.key)),
-    );
-
-    setDateOptions(sortedOptions);
-
-    if (sortedOptions.length > 0) {
-      const firstDate = sortedOptions[0];
-      const lastDate = sortedOptions[sortedOptions.length - 1];
-
-      setSelectedStartDate(firstDate);
-      setSelectedEndDate(lastDate);
-
-      setFilteredEndDateOptions(sortedOptions);
-      setFilteredStartDateOptions(sortedOptions);
-    }
-  }, []);
-
-  const onSelectType = async (option: TOption) => {
+  const onSelectType = (option: TOption) => {
     setSelectedType(option);
+    setHasAppliedDateFilter(true);
+    setIsLoading(true);
+    const timerId = setTimeout(() => setIsLoading(true), 200);
 
-    const timerId = setTimeout(() => setIsLoading(false), 200);
-
-    const isCredit = option.key !== "debit";
-    const isDebite = option.key !== "credit";
     try {
-      await fetchTransactionHistory(
-        selectedStartDate.key,
-        selectedEndDate.key,
-        isCredit,
-        isDebite,
-      );
+      fetchTransactionHistory(formatDate(startDate), formatDate(endDate));
     } catch (e) {
       toastr.error(e as Error);
     }
@@ -178,21 +121,18 @@ const TransactionHistory = ({
     clearTimeout(timerId);
   };
 
-  const onSelectStartDate = async (option: TOption): Promise<void> => {
-    const dateOption = option as DateOption;
-    setSelectedStartDate(dateOption);
+  const onStartDateChange = async (
+    date: moment.Moment | null,
+  ): Promise<void> => {
+    if (!date) return;
+
+    setStartDate(date);
     setHasAppliedDateFilter(true);
-
-    const filteredOptions = dateOptions.filter((endOption) =>
-      moment(endOption.key).isSameOrAfter(moment(dateOption.key)),
-    );
-
-    setFilteredEndDateOptions(filteredOptions);
     setIsLoading(true);
     const timerId = setTimeout(() => setIsLoading(true), 200);
 
     try {
-      await fetchTransactionHistory(dateOption.key, selectedEndDate.key);
+      await fetchTransactionHistory(formatDate(date), formatDate(endDate));
     } catch (e) {
       toastr.error(e as Error);
     }
@@ -201,21 +141,16 @@ const TransactionHistory = ({
     clearTimeout(timerId);
   };
 
-  const onSelectEndDate = async (option: TOption): Promise<void> => {
-    const dateOption = option as DateOption;
-    setSelectedEndDate(dateOption);
+  const onEndDateChange = async (date: moment.Moment | null): Promise<void> => {
+    if (!date) return;
+
+    setEndDate(date);
     setHasAppliedDateFilter(true);
-
-    const filteredOptions = dateOptions.filter((startOption) =>
-      moment(startOption.key).isSameOrBefore(moment(dateOption.key)),
-    );
-
-    setFilteredStartDateOptions(filteredOptions);
     setIsLoading(true);
     const timerId = setTimeout(() => setIsLoading(true), 200);
 
     try {
-      await fetchTransactionHistory(selectedStartDate.key, dateOption.key);
+      await fetchTransactionHistory(formatDate(startDate), formatDate(date));
     } catch (e) {
       toastr.error(e as Error);
     }
@@ -265,31 +200,29 @@ const TransactionHistory = ({
           t={t}
           components={{
             1: (
-              <ComboBox
-                tabIndex={1}
-                options={filteredStartDateOptions}
-                selectedOption={selectedStartDate}
-                onSelect={onSelectStartDate}
-                directionY="both"
-                noBorder={false}
-                dropDownMaxHeight={300}
-                showDisabledItems
-                size={ComboBoxSize.content}
-                scaled={false}
+              <DatePicker
+                initialDate={startDate}
+                onChange={onStartDateChange}
+                selectDateText={t("SelectStartDate")}
+                locale={moment.locale()}
+                openDate={startDate}
+                minDate={undefined}
+                maxDate={endDate}
+                outerDate={startDate}
+                hideCross
               />
             ),
             2: (
-              <ComboBox
-                tabIndex={2}
-                options={filteredEndDateOptions}
-                selectedOption={selectedEndDate}
-                onSelect={onSelectEndDate}
-                directionY="both"
-                noBorder={false}
-                dropDownMaxHeight={300}
-                showDisabledItems
-                size={ComboBoxSize.content}
-                scaled={false}
+              <DatePicker
+                initialDate={endDate}
+                onChange={onEndDateChange}
+                selectDateText={t("SelectEndDate")}
+                locale={moment.locale()}
+                openDate={endDate}
+                minDate={startDate}
+                maxDate={undefined}
+                outerDate={endDate}
+                hideCross
               />
             ),
           }}

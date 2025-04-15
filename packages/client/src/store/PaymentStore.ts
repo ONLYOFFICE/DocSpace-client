@@ -319,7 +319,7 @@ class PaymentStore {
 
       await Promise.all(requests);
     } catch (error) {
-      toastr.error(t("Common:UnexpectedError"));
+      // toastr.error(t("Common:UnexpectedError"));
       console.error(error);
     }
 

@@ -130,6 +130,7 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
           data-with-logo={!!withLogo && isTabletView ? "true" : "false"}
           data-is-desktop={isDesktop ? "true" : "false"}
           data-is-frame={isFrame ? "true" : "false"}
+          data-is-frame-logo={isFrame && withLogo ? "true" : "false"}
           data-is-root-folder={isRootFolder ? "true" : "false"}
         >
           {withLogo ? (

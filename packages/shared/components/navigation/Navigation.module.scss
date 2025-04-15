@@ -114,7 +114,7 @@
       min-width: 15px;
     }
   }
-  &[data-frame="true"] {
+  &[data-is-frame="true"] {
     :global {
       .add-button {
         @include tablet-and-below {
@@ -426,8 +426,8 @@
     grid-template-columns: auto auto 1fr;
   }
 
-  &[data-is-root-folder="true"][data-with-logo="true"][data-is-frame="true"] {
-    grid-template-columns: auto auto 1fr;
+  &[data-is-root-folder="false"][data-is-frame="true"][data-with-logo="true"] {
+    grid-template-columns: 49px 49px 1fr auto;
   }
 
   &[data-is-desktop-client="true"][data-is-drop-box-component="true"] {
@@ -592,8 +592,12 @@
       grid-template-columns: 43px 49px 1fr auto;
     }
 
-    &[data-is-root-folder="false"][data-is-frame="true"] {
-      grid-template-columns: 43px 49px 1fr auto;
+    &[data-is-root-folder="false"][data-is-frame="true"][data-is-frame-logo="true"] {
+      grid-template-columns: 49px 49px 1fr auto;
+    }
+
+    &[data-is-root-folder="true"][data-is-frame="true"][data-with-logo="true"] {
+      grid-template-columns: 59px auto 1fr auto;
     }
   }
 

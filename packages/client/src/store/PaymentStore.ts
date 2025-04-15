@@ -219,10 +219,6 @@ class PaymentStore {
     return this.walletPayer.email;
   }
 
-  get isWalletCustomerExist() {
-    return !!this.walletPayer.email;
-  }
-
   get isAutoPaymentExist() {
     return this.automaticPayments?.enabled;
   }
@@ -307,9 +303,9 @@ class PaymentStore {
     const requests = [];
 
     try {
-      await Promise.all([this.fetchWalletPayer(), this.fetchBalance]);
+      await Promise.all([this.fetchWalletPayer(), this.fetchBalance()]);
 
-      if (this.isWalletCustomerExist) {
+      if (this.walletCustomerEmail) {
         requests.push(
           this.setPaymentAccount(),
           this.fetchAutoPayments(),
@@ -323,7 +319,7 @@ class PaymentStore {
 
       await Promise.all(requests);
     } catch (error) {
-      // toastr.error(t("Common:UnexpectedError"));
+      toastr.error(t("Common:UnexpectedError"));
       console.error(error);
     }
 

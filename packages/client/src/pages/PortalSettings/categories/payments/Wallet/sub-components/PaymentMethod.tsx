@@ -75,13 +75,13 @@ const CardLinked = styled.div`
 `;
 
 type PaymentMethodProps = {
-  isWalletCustomerExist: boolean;
+  walletCustomerEmail: boolean;
   cardLinked: string;
   accountLink: string;
 };
 
 const PaymentMethod = ({
-  isWalletCustomerExist,
+  walletCustomerEmail,
   cardLinked,
   accountLink,
 }: PaymentMethodProps) => {
@@ -107,7 +107,7 @@ const PaymentMethod = ({
         </Text>
         <Text fontSize="12px">{t("YouHaveNotAddedAnyPayment")}</Text>
       </div>
-      {isWalletCustomerExist ? (
+      {walletCustomerEmail ? (
         <CardLinked>
           <div className="ticked-wrapper">
             <CheckReactSvg />

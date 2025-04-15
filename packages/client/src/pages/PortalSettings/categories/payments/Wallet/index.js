@@ -114,7 +114,7 @@ export default inject(({ paymentStore, authStore }) => {
   const {
     walletInit,
     walletBalance,
-    isWalletCustomerExist,
+    walletCustomerEmail,
     cardLinked,
     accountLink,
     setBalance,
@@ -125,7 +125,7 @@ export default inject(({ paymentStore, authStore }) => {
     balance: walletBalance.subAccounts[0],
     language,
     walletInit,
-    isWalletCustomerExist,
+    walletCustomerEmail,
     cardLinked,
     setBalance,
     accountLink,

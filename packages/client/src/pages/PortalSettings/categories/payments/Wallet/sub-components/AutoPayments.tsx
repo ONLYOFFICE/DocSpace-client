@@ -41,7 +41,7 @@ import "../styles/AutoPayments.scss";
 import { formatCurrencyValue } from "../utils";
 
 interface AutoPaymentsProps {
-  isWalletCustomerExist: boolean;
+  walletCustomerEmail: boolean;
   isAutoPaymentExist: boolean;
   updateAutoPayments: (
     enabled: boolean,
@@ -94,7 +94,7 @@ const CurrentPaymentSettings = ({
 };
 
 const AutoPayments: React.FC<AutoPaymentsProps> = ({
-  isWalletCustomerExist,
+  walletCustomerEmail,
   isAutoPaymentExist,
   automaticPayments,
   updateAutoPayments,
@@ -295,7 +295,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
           isChecked={isAutomaticPaymentsEnabled}
           onChange={onToggleClick}
           className="toggle-button"
-          isDisabled={!isWalletCustomerExist}
+          isDisabled={!walletCustomerEmail}
         />
       </div>
       <Text fontSize="12px" className="description" noSelect>
@@ -312,7 +312,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
 
 export default inject(({ paymentStore, authStore }: TStore) => {
   const {
-    isWalletCustomerExist,
+    walletCustomerEmail,
     updateAutoPayments,
     automaticPayments,
     isAutoPaymentExist,
@@ -320,7 +320,7 @@ export default inject(({ paymentStore, authStore }: TStore) => {
   const { language } = authStore;
 
   return {
-    isWalletCustomerExist,
+    walletCustomerEmail,
     isAutoPaymentExist,
     updateAutoPayments,
     automaticPayments,

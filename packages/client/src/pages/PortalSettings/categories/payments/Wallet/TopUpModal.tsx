@@ -60,7 +60,7 @@ interface TStore {
     walletBalance: {
       subAccounts: Array<{ currency: string }>;
     };
-    isWalletCustomerExist: boolean;
+    walletCustomerEmail: boolean;
     fetchBalance: () => Promise<void>;
     fetchTransactionHistory: () => Promise<void>;
     cardLinked: string;
@@ -76,7 +76,7 @@ type TopUpModalProps = {
   currency: string;
   balanceValue: string;
   fetchTransactionHistory: () => Promise<void>;
-  isWalletCustomerExist: boolean;
+  walletCustomerEmail: boolean;
   fetchBalance: () => Promise<void>;
   onClose: () => void;
   language: string;
@@ -89,7 +89,7 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
   currency,
   balanceValue,
   fetchTransactionHistory,
-  isWalletCustomerExist,
+  walletCustomerEmail,
   fetchBalance,
   onClose,
   language,
@@ -100,7 +100,7 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
   const [amount, setAmount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const isButtonDisabled = !amount || !isWalletCustomerExist;
+  const isButtonDisabled = !amount || !walletCustomerEmail;
 
   const goLinkCard = () => {
     cardLinked
@@ -134,7 +134,7 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
             1: (
               <ColorTheme
                 themeId={ThemeId.Link}
-                onClick={isWalletCustomerExist ? goStripeAccount : goLinkCard}
+                onClick={walletCustomerEmail ? goStripeAccount : goLinkCard}
               />
             ),
           }}
@@ -162,12 +162,12 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
             currency={currency}
           />
           <PaymentMethod
-            isWalletCustomerExist={isWalletCustomerExist}
+            walletCustomerEmail={walletCustomerEmail}
             cardLinked={cardLinked}
             accountLink={accountLink}
           />
           <AutomaticPaymentsBlock
-            isWalletCustomerExist={isWalletCustomerExist}
+            walletCustomerEmail={walletCustomerEmail}
             currency={currency}
           />
         </StyledBody>
@@ -199,7 +199,7 @@ export default inject(({ paymentStore, authStore }: TStore) => {
   const { language } = authStore;
   const {
     walletBalance,
-    isWalletCustomerExist,
+    walletCustomerEmail,
     fetchBalance,
     fetchTransactionHistory,
     cardLinked,
@@ -208,7 +208,7 @@ export default inject(({ paymentStore, authStore }: TStore) => {
 
   return {
     currency: walletBalance.subAccounts[0].currency,
-    isWalletCustomerExist,
+    walletCustomerEmail,
     fetchBalance,
     fetchTransactionHistory,
     language,

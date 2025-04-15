@@ -39,7 +39,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(0);
 
-  const { updateTranslation, loading: savingTranslation } =
+  const { updateTranslation, loading: savingTranslation, newlyCreatedKey } =
     useTranslationStore();
   const {
     translateKey,
@@ -188,6 +188,27 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   React.useEffect(() => {
     setCurrentPage(0);
   }, [searchTerm]);
+  
+  // Find and highlight newly created key when it appears in translations
+  React.useEffect(() => {
+    if (newlyCreatedKey && filteredTranslations.length > 0) {
+      // Find the index of the newly created key in the filtered translations
+      const newKeyIndex = filteredTranslations.findIndex(
+        (entry) => entry.path === newlyCreatedKey
+      );
+      
+      // If found, set the current page to that index to show the new key
+      if (newKeyIndex !== -1) {
+        setCurrentPage(newKeyIndex);
+        
+        // Optionally, reset the newlyCreatedKey in the store after finding it
+        // This prevents repeatedly jumping to this key if user navigates away
+        setTimeout(() => {
+          useTranslationStore.setState({ newlyCreatedKey: null });
+        }, 100);
+      }
+    }
+  }, [newlyCreatedKey, filteredTranslations]);
 
   // Make sure current page is valid if items are filtered or removed
   useEffect(() => {
@@ -394,7 +415,10 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
             {/* Current translation key */}
             <div className="mb-8">
               <div
-                className="flex items-center justify-between p-2 rounded cursor-pointer mb-1 group bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200"
+                className={`flex items-center justify-between p-2 rounded cursor-pointer mb-1 group 
+                  ${currentEntry.path === newlyCreatedKey 
+                    ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 outline outline-2 outline-green-400 dark:outline-green-600' 
+                    : 'bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200'}`}
                 ref={keyContainerRef}
               >
                 <span

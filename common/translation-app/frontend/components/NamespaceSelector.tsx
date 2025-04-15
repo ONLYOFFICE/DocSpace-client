@@ -3,7 +3,9 @@ import NamespaceContextMenu from './NamespaceContextMenu';
 import RenameNamespaceModal from './RenameNamespaceModal';
 import MoveNamespaceModal from './MoveNamespaceModal';
 import DeleteNamespaceModal from './DeleteNamespaceModal';
+import CreateKeyModal from './CreateKeyModal';
 import { useTranslationStore } from '@/store/translationStore';
+import { useLanguageStore } from '@/store/languageStore';
 
 interface NamespaceSelectorProps {
   namespaces: string[];
@@ -25,10 +27,14 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
   const [renameModalOpen, setRenameModalOpen] = useState<boolean>(false);
   const [moveModalOpen, setMoveModalOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+  const [createKeyModalOpen, setCreateKeyModalOpen] = useState<boolean>(false);
   const [activeNamespace, setActiveNamespace] = useState<string>('');
 
   // Get translation store functions
-  const { renameNamespace, moveNamespaceTo, deleteNamespace } = useTranslationStore();
+  const { renameNamespace, moveNamespaceTo, deleteNamespace, updateTranslation, fetchTranslations } = useTranslationStore();
+  
+  // Get available languages from the store
+  const { languages } = useLanguageStore();
 
   // Close context menu when clicking elsewhere
   const containerRef = useRef<HTMLDivElement>(null);
@@ -74,6 +80,11 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
     setDeleteModalOpen(true);
   };
 
+  const handleCreateKey = (namespace: string) => {
+    setActiveNamespace(namespace);
+    setCreateKeyModalOpen(true);
+  };
+
   const handleRenameSubmit = async (oldName: string, newName: string) => {
     const success = await renameNamespace(projectName, oldName, newName);
     if (success && onNamespaceUpdated) {
@@ -111,6 +122,37 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
         onChange(''); // Or select the first available namespace
       }
     }
+  };
+
+  // Function to refresh translations after creating a new key
+  const refreshTranslations = () => {
+    if (selectedNamespace && languages.length > 0) {
+      // Fetch translations for the current namespace with all available languages
+      fetchTranslations(projectName, languages, selectedNamespace);
+    }
+  };
+
+  const handleCreateKeySubmit = async (keyPath: string, value: string) => {
+    // Create key with English value
+    const success = await updateTranslation(
+      projectName,
+      'en', // Create key with English language as specified
+      activeNamespace,
+      keyPath,
+      value
+    );
+    
+    if (success) {
+      // Refresh the namespace list if needed
+      if (onNamespaceUpdated) {
+        onNamespaceUpdated();
+      }
+      
+      // Refresh the translations table with the new key
+      refreshTranslations();
+    }
+    
+    return success;
   };
 
   return (
@@ -179,6 +221,8 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
           onRename={handleRename}
           onMove={handleMove}
           onDelete={handleDelete}
+          onCreateKey={handleCreateKey}
+          refreshTranslations={refreshTranslations}
         />
       )}
 
@@ -204,6 +248,13 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
         namespace={activeNamespace}
         onClose={() => setDeleteModalOpen(false)}
         onDelete={handleDeleteSubmit}
+      />
+
+      <CreateKeyModal
+        isOpen={createKeyModalOpen}
+        namespace={activeNamespace}
+        onClose={() => setCreateKeyModalOpen(false)}
+        onCreateKey={handleCreateKeySubmit}
       />
     </div>
   );

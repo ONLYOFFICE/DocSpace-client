@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface NamespaceContextMenuProps {
   namespace: string;
@@ -8,6 +8,8 @@ interface NamespaceContextMenuProps {
   onRename: (namespace: string) => void;
   onMove: (namespace: string) => void;
   onDelete: (namespace: string) => void;
+  onCreateKey: (namespace: string) => void;
+  refreshTranslations?: () => void;
 }
 
 const NamespaceContextMenu: React.FC<NamespaceContextMenuProps> = ({
@@ -17,25 +19,27 @@ const NamespaceContextMenu: React.FC<NamespaceContextMenuProps> = ({
   onClose,
   onRename,
   onMove,
-  onDelete
+  onDelete,
+  onCreateKey,
+  refreshTranslations,
 }) => {
   // Close menu when clicking anywhere else
   React.useEffect(() => {
     const handleClickOutside = () => {
       onClose();
     };
-    
-    document.addEventListener('click', handleClickOutside);
+
+    document.addEventListener("click", handleClickOutside);
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [onClose]);
 
   return (
-    <div 
+    <div
       className="absolute z-50 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-lg py-1 min-w-[180px] text-gray-800 dark:text-gray-200"
-      style={{ 
-        left: `${x}px`, 
+      style={{
+        left: `${x}px`,
         top: `${y}px`,
       }}
       onClick={(e) => e.stopPropagation()}
@@ -43,44 +47,113 @@ const NamespaceContextMenu: React.FC<NamespaceContextMenuProps> = ({
       <div className="px-3 py-1 text-xs text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700 mb-1">
         {namespace}
       </div>
-      
-      <button 
+
+      <button
+        className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
+        onClick={() => {
+          onCreateKey(namespace);
+          onClose();
+          // Refresh translations table after creating a new key
+          if (refreshTranslations) {
+            refreshTranslations();
+          }
+        }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-4 w-4 mr-2 text-green-500 dark:text-green-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          />
+        </svg>
+        <span className="text-gray-900 dark:text-gray-200 font-medium">
+          Create Key
+        </span>
+      </button>
+
+      <button
         className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
         onClick={() => {
           onRename(namespace);
           onClose();
         }}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-4 w-4 mr-2 text-gray-500 dark:text-gray-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+          />
         </svg>
-        <span className="text-gray-900 dark:text-gray-200 font-medium">Rename</span>
+        <span className="text-gray-900 dark:text-gray-200 font-medium">
+          Rename
+        </span>
       </button>
-      
-      <button 
+
+      <button
         className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
         onClick={() => {
           onMove(namespace);
           onClose();
         }}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-4 w-4 mr-2 text-gray-500 dark:text-gray-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+          />
         </svg>
-        <span className="text-gray-900 dark:text-gray-200 font-medium">Move To</span>
+        <span className="text-gray-900 dark:text-gray-200 font-medium">
+          Move To
+        </span>
       </button>
-      
-      <button 
+
+      <button
         className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
         onClick={() => {
           onDelete(namespace);
           onClose();
         }}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2 text-red-500 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-4 w-4 mr-2 text-red-500 dark:text-red-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+          />
         </svg>
-        <span className="text-red-600 dark:text-red-400 font-medium">Delete</span>
+        <span className="text-red-600 dark:text-red-400 font-medium">
+          Delete
+        </span>
       </button>
     </div>
   );

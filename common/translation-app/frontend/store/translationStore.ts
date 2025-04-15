@@ -19,6 +19,7 @@ interface TranslationState {
   };
   flattenedTranslations: TranslationEntry[];
   currentKey: string | null;
+  newlyCreatedKey: string | null; // Track newly created key for highlighting
   loading: boolean;
   saving: boolean;
   error: string | null;
@@ -103,6 +104,7 @@ export const useTranslationStore = create<TranslationState>((set, get) => ({
   translationData: {},
   flattenedTranslations: [],
   currentKey: null,
+  newlyCreatedKey: null,
   loading: false,
   saving: false,
   error: null,
@@ -149,6 +151,11 @@ export const useTranslationStore = create<TranslationState>((set, get) => ({
   ) => {
     try {
       set({ saving: true, error: null });
+      
+      // If this is a new key being created in the base language, mark it for highlighting
+      if (language === 'en') {
+        set({ newlyCreatedKey: key });
+      }
       
       await api.updateTranslationKey(
         projectName,
@@ -287,6 +294,7 @@ export const useTranslationStore = create<TranslationState>((set, get) => ({
       translationData: {},
       flattenedTranslations: [],
       currentKey: null,
+      newlyCreatedKey: null,
       loading: false,
       saving: false,
       error: null

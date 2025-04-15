@@ -21,7 +21,8 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
 }) => {
   const [newLanguage, setNewLanguage] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { addLanguage, loading } = useLanguageStore();
+  const [addToAllProjects, setAddToAllProjects] = useState<boolean>(true);
+  const { addLanguage, addLanguageToAllProjects, loading } = useLanguageStore();
   
   // Handler for 'Select All' option
   const handleSelectAll = () => {
@@ -40,9 +41,24 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   const handleAddLanguage = async () => {
     if (!newLanguage.trim()) return;
     
-    const success = await addLanguage(projectName, newLanguage.trim());
+    let success = false;
+
+    if (addToAllProjects) {
+      // Add to all projects
+      const result = await addLanguageToAllProjects(newLanguage.trim());
+      success = result.success;
+      
+      if (result.failedProjects.length > 0) {
+        console.warn(`Failed to add language to some projects: ${result.failedProjects.join(', ')}`);
+      }
+    } else {
+      // Add only to current project
+      success = await addLanguage(projectName, newLanguage.trim());
+    }
+    
     if (success) {
       setNewLanguage('');
+      setAddToAllProjects(true); // Reset to default
       setIsModalOpen(false);
     }
   };
@@ -120,7 +136,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
       >
         <div className="mt-2">
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-            Enter a language code to add it to the project.
+            Enter a language code to add it to your projects.
           </p>
           <div className="flex space-x-2">
             <input
@@ -132,9 +148,22 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
               autoFocus
             />
           </div>
-          <p className="text-xs text-gray-500 mt-1 mb-4">
+          <p className="text-xs text-gray-500 mt-1 mb-2">
             Language codes should follow ISO 639-1 format (e.g., en, fr, de, ru)
           </p>
+          
+          <div className="flex items-center mb-4">
+            <input
+              type="checkbox"
+              id="addToAllProjects"
+              checked={addToAllProjects}
+              onChange={() => setAddToAllProjects(!addToAllProjects)}
+              className="mr-2"
+            />
+            <label htmlFor="addToAllProjects" className="text-sm text-gray-700 dark:text-gray-300">
+              Add to all projects (recommended)
+            </label>
+          </div>
           
           <div className="flex justify-end space-x-2">
             <button

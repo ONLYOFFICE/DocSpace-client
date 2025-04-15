@@ -109,10 +109,19 @@ const TransactionHistory = ({
     setSelectedType(option);
     setHasAppliedDateFilter(true);
     setIsLoading(true);
+
     const timerId = setTimeout(() => setIsLoading(true), 200);
 
+    const isCredit = option.key !== "debit";
+    const isDebit = option.key !== "credit";
+
     try {
-      fetchTransactionHistory(formatDate(startDate), formatDate(endDate));
+      fetchTransactionHistory(
+        formatDate(startDate),
+        formatDate(endDate),
+        isCredit,
+        isDebit,
+      );
     } catch (e) {
       toastr.error(e as Error);
     }

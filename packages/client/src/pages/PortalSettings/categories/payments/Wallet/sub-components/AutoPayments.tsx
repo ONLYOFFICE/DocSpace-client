@@ -75,11 +75,7 @@ const CurrentPaymentSettings = ({
     <div className="info-block">
       <div className="info-block-title">
         <CheckRoundSvg />
-        <Text
-          fontSize="12px"
-          fontWeight={600}
-          style={{ color: "#333333", lineHeight: "1.333em" }}
-        >
+        <Text fontSize="12px" fontWeight={600}>
           {t("AutoTopUp")}
         </Text>
       </div>
@@ -287,7 +283,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
 
   return (
     <div className="automatic-payments-block">
-      <div className="header">
+      <div className="auto-payment-header">
         <Text noSelect isBold fontSize="16px">
           {t("AutomaticPayments")}
         </Text>
@@ -298,7 +294,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
           isDisabled={!walletCustomerEmail}
         />
       </div>
-      <Text fontSize="12px" className="description" noSelect>
+      <Text fontSize="12px" className="auto-payment-description" noSelect>
         {t("AutomaticallyTopUpCard")}
       </Text>
       {isAutomaticPaymentsEnabled

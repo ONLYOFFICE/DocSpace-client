@@ -35,7 +35,7 @@ import TransactionHistory from "./TransactionHistory";
 import TopUpModal from "./TopUpModal";
 import { formattedBalance } from "./utils";
 
-import "./Wallet.scss";
+import "./styles/Wallet.scss";
 import PayerInformation from "../PayerInformation";
 
 const Wallet = ({ balance, language, walletInit, isInitWalletPage }) => {
@@ -62,7 +62,7 @@ const Wallet = ({ balance, language, walletInit, isInitWalletPage }) => {
 
   return (
     <div className="wallet-container">
-      <Text className="description">
+      <Text className="wallet-description">
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
 

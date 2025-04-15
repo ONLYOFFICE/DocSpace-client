@@ -24,12 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.transaction-row {
-  &__amount {
-    &--credit {
-      color: #44bb6e;
-    }
-  }
+.transaction-row__amount--credit {
+  color: var(--payment-credit-color);
 }
 
 .transaction-history-title {
@@ -64,12 +60,6 @@
   text-align: end;
 }
 
-.transaction-history-row-view {
-  .transaction-row__amount--credit {
-    color: #35ad17;
-  }
-}
-
 //  border-top: ${(props) =>
 // `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
 // border-bottom: ${(props) =>
@@ -87,4 +77,8 @@
 
   position: unset;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.download-report_description {
+  color: var(--payment-text-color);
 }

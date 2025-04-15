@@ -24,48 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.container {
-  display: flex;
-  background: var(--payment-background-color);
-  min-height: 72px;
-  padding: 16px;
-  box-sizing: border-box;
-  border-radius: 6px;
-  align-items: center;
-}
-
-.icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #eceef1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 16px;
-
-  svg {
-    width: 24px;
-    height: 24px;
-    path {
-      fill: #657077;
-    }
-  }
-}
-
-.body {
+.wallet-container {
   display: flex;
   flex-direction: column;
   gap: 4px;
-}
+  min-height: 72px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  width: 100%;
 
-.title {
-  line-height: 16px;
-  color: #333333;
-}
+  .wallet-description {
+    font-size: 12px;
+    line-height: 1.334em;
 
-.balance {
-  font-size: 14px;
-  line-height: 16px;
-  color: #666666;
+    max-width: 660px;
+    color: var(--payment-text-color);
+  }
+
+  .balance-wrapper {
+    max-width: 152px;
+    margin-bottom: 24px;
+    margin-top: 20px;
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .balance-amount-container {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .main-amount {
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.36em;
+  }
+
+  .decimal-amount {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.36em;
+  }
 }

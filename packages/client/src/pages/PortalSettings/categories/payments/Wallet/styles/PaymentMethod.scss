@@ -24,48 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.wallet-container {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-height: 72px;
-  box-sizing: border-box;
-  border-radius: 6px;
-  width: 100%;
-
-  .description {
-    font-size: 12px;
-    line-height: 1.334em;
-
-    max-width: 660px;
+.add-payment-method {
+  .payment-method-description {
+    margin-bottom: 16px;
   }
 
-  .balance-wrapper {
-    max-width: 152px;
-    margin-bottom: 24px;
-    margin-top: 20px;
-  }
-
-  .header-container {
+  .add-payment-method-container {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
+    cursor: pointer;
+    padding-top: 8px;
   }
 
-  .balance-amount-container {
+  .plus-icon-wrapper {
+    width: 32px;
+    height: 32px;
     display: flex;
-    align-items: baseline;
+    align-items: center;
+    justify-content: center;
+    background: var(--payment-rectangle-color);
+    border: 1px solid var(--payment-rectangle-color);
+
+    svg {
+      width: 12px;
+      height: 24px;
+    }
   }
 
-  .main-amount {
-    font-size: 44px;
-    font-weight: 700;
-    line-height: 1.36em;
+  .add-payment-text {
+    font-size: 14px;
+    line-height: 16px;
+    color: #a3a9ae;
   }
 
-  .decimal-amount {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.36em;
+  .card-linked {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    background: var(--payment-background-color);
+    border-radius: 6px;
+
+    .ticked-wrapper {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      svg {
+        width: 16px;
+        height: 16px;
+        path {
+          fill: var(--payment-credit-color);
+        }
+      }
+    }
+    a {
+      color: var(--payment-text-color);
+    }
   }
 }

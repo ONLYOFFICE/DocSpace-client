@@ -42,7 +42,7 @@ const StyledContainer = styled.div`
   box-sizing: border-box;
   margin-top: 16px;
   border-radius: 6px;
-
+  max-width: 660px;
   .payer-info {
     margin-inline-start: 3px;
   }

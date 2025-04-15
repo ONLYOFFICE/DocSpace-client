@@ -23,7 +23,6 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import { Link } from "@docspace/shared/components/link";
@@ -33,46 +32,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import PlusIcon from "PUBLIC_DIR/images/icons/12/payment.plus.react.svg";
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 
-const AddPaymentMethodContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  padding-top: 8px;
-`;
-
-const PlusIconWrapper = styled.div`
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${(props) => props.theme.client.settings.payment.rectangleColor};
-  border: 1px solid
-    ${(props) => props.theme.client.settings.payment.rectangleColor};
-
-  svg {
-    width: 12px;
-    height: 24px;
-  }
-`;
-
-const AddPaymentText = styled(Text)`
-  font-size: 14px;
-  line-height: 16px;
-  color: #a3a9ae;
-`;
-
-const CardLinked = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 16px;
-  .ticked-wrapper {
-    display: flex;
-    gap: 8px;
-    align-items: baseline;
-  }
-`;
+import "../styles/PaymentMethod.scss";
 
 type PaymentMethodProps = {
   walletCustomerEmail: boolean;
@@ -105,10 +65,12 @@ const PaymentMethod = ({
         <Text isBold fontSize="16px">
           {t("PaymentMethod")}
         </Text>
-        <Text fontSize="12px">{t("YouHaveNotAddedAnyPayment")}</Text>
+        {!walletCustomerEmail ? (
+          <Text fontSize="12px">{t("YouHaveNotAddedAnyPayment")}</Text>
+        ) : null}
       </div>
       {walletCustomerEmail ? (
-        <CardLinked>
+        <div className="card-linked">
           <div className="ticked-wrapper">
             <CheckReactSvg />
             <Text fontWeight={600} fontSize="14px">
@@ -118,14 +80,14 @@ const PaymentMethod = ({
           <Link fontWeight={600} onClick={goStripeAccount}>
             {t("GoToStripe")}
           </Link>
-        </CardLinked>
+        </div>
       ) : (
-        <AddPaymentMethodContainer onClick={goLinkCard}>
-          <PlusIconWrapper>
+        <div className="add-payment-method-container" onClick={goLinkCard}>
+          <div className="plus-icon-wrapper">
             <PlusIcon className="payment-score" />
-          </PlusIconWrapper>
-          <AddPaymentText>{t("AddPaymentMethod")}</AddPaymentText>
-        </AddPaymentMethodContainer>
+          </div>
+          <Text className="add-payment-text">{t("AddPaymentMethod")}</Text>
+        </div>
       )}
     </div>
   );

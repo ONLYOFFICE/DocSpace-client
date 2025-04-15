@@ -79,7 +79,7 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
         <Text
           fontWeight={600}
           fontSize="11px"
-          className={`transaction-row__amount--${isCredit ? "credit" : "debit"}`}
+          className={`transaction-row__amount--${isCredit ? "credit" : ""}`}
         >
           {formattedAmount}
         </Text>

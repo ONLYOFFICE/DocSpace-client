@@ -24,102 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../styles/variables/index.scss";
-@import "../../styles/variables/_colors.scss";
-@import "../../styles/_mixins.scss";
-
-.dropDownStyle {
-  .drop-down {
-    > div {
-      > div {
-        margin: auto;
-      }
-      margin: auto;
-    }
-    padding: 16px 16px 16px 17px;
-
-    @include mobile {
-      position: fixed;
-      top: unset;
-      inset-inline: 0;
-      bottom: 0;
-      width: 100%;
-      width: -moz-available;
-      width: -webkit-fill-available;
-      width: fill-available;
-      border: none;
-      border-radius: 6px 6px 0px 0px;
-    }
-  }
-
-  .backdrop-active {
-    z-index: 210;
-  }
-
-  position: relative;
-}
-
-.content {
+.wallet-info-container {
+  display: flex;
+  background: var(--payment-background-color);
+  min-height: 72px;
+  padding: 16px;
   box-sizing: border-box;
-  position: relative;
-  width: 100%;
-  background-color: var(--date-picker-background);
-  padding: 0 16px 16px;
-
-  .header {
-    max-width: 500px;
-    margin: 0;
-    line-height: 56px;
-    font-weight: 700 !important;
-  }
+  border-radius: 6px;
+  align-items: center;
 }
 
-.header {
+.wallet-info-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--payment-icon-background);
   display: flex;
   align-items: center;
-  border-bottom: var(--date-picker-border);
-}
+  justify-content: center;
+  margin-right: 16px;
 
-.body {
-  position: relative;
-  padding: 16px 0;
-}
-
-.wrapper {
-  .selectedItem {
-    cursor: pointer;
-
-    .calendarIcon {
-      width: 12px;
-      height: 12px;
-      padding: 0 10px 0 2px;
-      path {
-        fill: var(--data-picker-calendar-icon);
-      }
+  svg {
+    width: 16px;
+    height: 16px;
+    path {
+      fill: var(--payment-icon-color);
     }
   }
 }
 
-.dateSelector {
-  width: fit-content;
-  cursor: pointer;
-
+.wallet-info-body {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.selectedLabel {
-  display: flex;
-  align-items: center;
+.wallet-info-title {
+  line-height: 16px;
 }
 
-.calendar {
-  position: absolute;
-
-  @include mobile {
-    position: fixed;
-    bottom: 0;
-    inset-inline-start: 0;
-  }
+.wallet-info-balance {
+  font-size: 14px;
+  line-height: 16px;
 }

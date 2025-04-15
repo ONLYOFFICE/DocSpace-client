@@ -76,9 +76,10 @@ async function Page({ searchParams }: RootPageProps) {
     theme,
     is_file,
     editorGoBack,
+    isSDK,
   } = searchParams ?? initialSearchParams;
 
-  const baseSdkConfig: TFrameConfig & { is_file?: boolean } = {
+  const baseSdkConfig: TFrameConfig & { is_file?: boolean; isSDK?: boolean } = {
     frameId: "",
     mode: "",
     src: "",
@@ -90,6 +91,7 @@ async function Page({ searchParams }: RootPageProps) {
     requestToken: share,
     theme,
     is_file,
+    isSDK,
   };
 
   const cookieStore = cookies();

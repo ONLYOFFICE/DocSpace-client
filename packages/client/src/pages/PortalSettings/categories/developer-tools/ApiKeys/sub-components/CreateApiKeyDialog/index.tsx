@@ -279,7 +279,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   };
 
   const onGenerate = () => {
-    if (!inputValue) {
+    if (!inputValue.trim()) {
       setIsValid(false);
       return;
     }
@@ -375,6 +375,38 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   useEffect(() => {
     setIsRequestRunning(isRequestRunningProp);
   }, [isRequestRunningProp]);
+
+  const generateIsDisabled =
+    selectedItemId === "restricted" && filteredOpt
+      ? Object.entries(filteredOpt).findIndex(
+          (o) => o[1].isRead.isChecked || o[1].isWrite.isChecked,
+        ) === -1
+      : false;
+
+  const restrictedOptions = getRestrictedOptions();
+
+  const checkIsChanged = () => {
+    if (selectedItemId !== selectedOption) return true;
+
+    if (
+      restrictedOptions.length !== actionItem?.permissions?.length &&
+      selectedItemId === "restricted"
+    )
+      return true;
+
+    return (
+      restrictedOptions.filter((value) =>
+        actionItem?.permissions.includes(value),
+      ).length !== restrictedOptions.length
+    );
+  };
+
+  const editIsDisabled = isEdit
+    ? inputValue === actionItem?.name && !checkIsChanged()
+    : false;
+
+  const generateButtonIsDisabled =
+    isRequestRunning || editIsDisabled || generateIsDisabled;
 
   const createBody = (
     <StyledBodyContent>
@@ -525,7 +557,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         primary
         onClick={onGenerate}
         scale
-        isDisabled={isRequestRunning}
+        isDisabled={generateButtonIsDisabled}
       />
       <Button
         key="CancelButton"

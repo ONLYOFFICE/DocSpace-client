@@ -143,11 +143,11 @@
   }
 
   &[data-size="big"] {
-    inset-inline-end: 3px;
-    bottom: 3px;
-    height: 12px;
-    width: 12px;
-    min-width: 12px;
+    inset-inline-end: 0;
+    bottom: 0;
+    height: 22px;
+    width: 22px;
+    min-width: 22px;
   }
 
   &[data-size="max"] {

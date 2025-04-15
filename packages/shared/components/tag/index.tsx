@@ -98,6 +98,7 @@ const TagPure = ({
   const openDropdownAction = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
     if (target?.className?.includes("backdrop-active")) return;
+    e.stopPropagation();
 
     setOpenDropdown(true);
   };

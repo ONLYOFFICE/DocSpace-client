@@ -39,8 +39,11 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(0);
 
-  const { updateTranslation, loading: savingTranslation, newlyCreatedKey } =
-    useTranslationStore();
+  const {
+    updateTranslation,
+    loading: savingTranslation,
+    newlyCreatedKey,
+  } = useTranslationStore();
   const {
     translateKey,
     isConnected: ollamaConnected,
@@ -110,45 +113,45 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
       rowPath
     );
   };
-  
+
   // Selected target language for single-language translations
-  const [selectedTargetLanguage, setSelectedTargetLanguage] = useState<string>("");
-  
+  const [selectedTargetLanguage, setSelectedTargetLanguage] =
+    useState<string>("");
+
   // Set default target language when languages change
   useEffect(() => {
-    if (languages.length > 0 && languages.some(lang => lang !== baseLanguage)) {
-      const nonBaseLanguages = languages.filter(lang => lang !== baseLanguage);
+    if (
+      languages.length > 0 &&
+      languages.some((lang) => lang !== baseLanguage)
+    ) {
+      const nonBaseLanguages = languages.filter(
+        (lang) => lang !== baseLanguage
+      );
       if (nonBaseLanguages.length > 0) {
         setSelectedTargetLanguage(nonBaseLanguages[0]);
       }
     }
   }, [languages, baseLanguage]);
-  
+
   // Handler to translate the current key to all available languages
   const handleTranslateToAllLanguages = async (rowPath: string) => {
     if (!ollamaConnected) return;
-    
+
     // Get all target languages (exclude base language)
-    const targetLanguages = languages.filter(lang => lang !== baseLanguage);
-    
+    const targetLanguages = languages.filter((lang) => lang !== baseLanguage);
+
     if (targetLanguages.length === 0) return;
-    
+
     // Translate sequentially to all target languages
     for (const lang of targetLanguages) {
-      await translateKey(
-        projectName,
-        baseLanguage,
-        lang,
-        namespace,
-        rowPath
-      );
+      await translateKey(projectName, baseLanguage, lang, namespace, rowPath);
     }
   };
 
   // Handle translate to selected target language
   const handleTranslateToSelectedLanguage = async (rowPath: string) => {
     if (!ollamaConnected || !selectedTargetLanguage) return;
-    
+
     await translateKey(
       projectName,
       baseLanguage,
@@ -235,7 +238,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   React.useEffect(() => {
     setCurrentPage(0);
   }, [searchTerm]);
-  
+
   // Find and highlight newly created key when it appears in translations
   React.useEffect(() => {
     if (newlyCreatedKey && filteredTranslations.length > 0) {
@@ -243,11 +246,11 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
       const newKeyIndex = filteredTranslations.findIndex(
         (entry) => entry.path === newlyCreatedKey
       );
-      
+
       // If found, set the current page to that index to show the new key
       if (newKeyIndex !== -1) {
         setCurrentPage(newKeyIndex);
-        
+
         // Optionally, reset the newlyCreatedKey in the store after finding it
         // This prevents repeatedly jumping to this key if user navigates away
         setTimeout(() => {
@@ -409,8 +412,8 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
             className="input w-full text-sm py-1 text-gray-800 dark:text-gray-200"
           />
         </div>
-        
-        {/* Target language selector for translations */}
+
+        {/* Target language selector for translations
         {ollamaConnected && (
           <div className="flex gap-2 items-center">
             <select
@@ -439,8 +442,8 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
               </button>
             )}
           </div>
-        )}
-        
+        )} */}
+
         {filteredTranslations.length > 0 && (
           <div className="w-[250px]">
             <select
@@ -495,9 +498,11 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
             <div className="mb-8">
               <div
                 className={`flex items-center justify-between p-2 rounded cursor-pointer mb-1 group 
-                  ${currentEntry.path === newlyCreatedKey 
-                    ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 outline outline-2 outline-green-400 dark:outline-green-600' 
-                    : 'bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200'}`}
+                  ${
+                    currentEntry.path === newlyCreatedKey
+                      ? "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 outline outline-2 outline-green-400 dark:outline-green-600"
+                      : "bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200"
+                  }`}
                 ref={keyContainerRef}
               >
                 <span
@@ -509,16 +514,20 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
                   Key: <strong>{currentEntry.path}</strong> (EN:{" "}
                   {currentEntry.translations["en"] || ""})
                 </span>
-                {ollamaConnected && languages.filter(lang => lang !== baseLanguage).length > 0 && (
-                  <button
-                    onClick={() => handleTranslateToAllLanguages(currentEntry.path)}
-                    disabled={translating}
-                    className="mr-2 text-xs py-1 px-2 btn btn-secondary"
-                    title="Translate this key to all languages"
-                  >
-                    {translating ? "Translating..." : "Translate All"}
-                  </button>
-                )}
+                {ollamaConnected &&
+                  languages.filter((lang) => lang !== baseLanguage).length >
+                    0 && (
+                    <button
+                      onClick={() =>
+                        handleTranslateToAllLanguages(currentEntry.path)
+                      }
+                      disabled={translating}
+                      className="mr-2 text-xs py-1 px-2 btn btn-secondary"
+                      title="Translate this key to all languages"
+                    >
+                      {translating ? "Translating..." : "Translate All"}
+                    </button>
+                  )}
                 <button
                   className="opacity-30 dark:opacity-50 group-hover:opacity-100 hover:opacity-100 focus:opacity-100 p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-opacity"
                   onClick={(e) => handleKeyContextMenu(e, currentEntry.path)}

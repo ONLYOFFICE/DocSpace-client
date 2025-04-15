@@ -260,7 +260,7 @@ export default function ProjectPage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Sidebar */}
         <div className="lg:col-span-1">
-          <div className="card">
+          <div className="card h-full">
             <div className="flex justify-between items-center mb-3">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Namespaces
@@ -299,12 +299,17 @@ export default function ProjectPage() {
                 fetchNamespaces(projectName, baseLanguage)
               }
             />
+            {namespaces.length > 0 && (
+              <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                Total {namespaces.length} namespaces
+              </div>
+            )}
           </div>
         </div>
 
         {/* Main content area */}
         <div className="lg:col-span-3">
-          <div className="card">
+          <div className="card h-full">
             <h2 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">
               {currentNamespace
                 ? `Namespace: ${currentNamespace}`

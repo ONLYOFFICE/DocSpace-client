@@ -60,7 +60,12 @@ const EmptyScreen = () => {
           onClick={() => setClosed(true)}
         />
       </div>
-      <Text isBold fontSize="18px" lineHeight="24px">
+      <Text
+        className={styles.chatEmptyHelpMessage}
+        isBold
+        fontSize="18px"
+        lineHeight="24px"
+      >
         {t("Common:AIChatHelp")}
       </Text>
     </>

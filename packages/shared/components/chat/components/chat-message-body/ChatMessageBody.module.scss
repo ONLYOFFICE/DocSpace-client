@@ -8,7 +8,7 @@
   max-width: 740px;
 
   &.empty {
-    max-height: 192px;
+    max-height: fit-content;
   }
 
   overflow: hidden;
@@ -42,23 +42,29 @@
   display: grid;
   grid-template-columns: 1fr 16px;
 
-  margin-bottom: 32px !important;
-
   gap: 12px;
 
-  margin: 0 20px;
+  margin: 0 20px 120px;
 
   padding: 12px 16px;
 
   border-radius: 6px;
 
   @include tablet-and-below {
-    margin: 0 16px;
+    margin: 0 16px 120px;
+  }
+
+  @include mobile {
+    margin-bottom: 40px;
   }
 
   &.closed {
     visibility: hidden;
   }
+}
+
+.chatEmptyHelpMessage {
+  margin-bottom: 24px;
 }
 
 .chatMessagePadding {

@@ -622,7 +622,7 @@
   cursor: pointer;
 
   &.chatButtonOpen {
-    background-color: #f3f4f4;
+    background-color: var(--chat-button-open-background-color);
   }
 
   .chatButtonText {

@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 
 import AiChatReactSvg from "PUBLIC_DIR/images/ai.chat.react.svg";
 
@@ -11,7 +12,9 @@ import styles from "../Navigation.module.scss";
 const ChatBtn = ({ chatOpen, toggleChat }: TChatProps) => {
   return (
     <div
-      className={`${styles.chatButton} ${chatOpen ? styles.chatButtonOpen : ""}`.trim()}
+      className={classNames(styles.chatButton, {
+        [styles.chatButtonOpen]: chatOpen,
+      })}
       onClick={() => toggleChat?.(!chatOpen)}
     >
       <AiChatReactSvg />

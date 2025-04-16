@@ -2048,3 +2048,11 @@
   --download-dialog-text-color: #{$gray-dark};
   --download-dialog-warning-color: #{$dark-error-status};
 }
+
+.light {
+  --chat-button-open-background-color: #{$light-gray-hover};
+}
+
+.dark {
+  --chat-button-open-background-color: #{$dark-gray-light};
+}

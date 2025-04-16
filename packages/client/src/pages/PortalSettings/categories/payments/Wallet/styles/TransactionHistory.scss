@@ -36,11 +36,12 @@
   display: flex;
   margin-bottom: 29px;
   gap: 12px;
-  p {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
+}
+
+.transaction-dates {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .download-wrapper {
@@ -81,4 +82,34 @@
 
 .download-report_description {
   color: var(--payment-text-color);
+}
+
+.filter-dialog {
+  .filter-dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 16px;
+  }
+
+  .filter-dialog-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .filter-dialog-divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--payment-devider-color);
+  }
+}
+
+.transaction-history-header {
+  display: flex;
+
+  #filter-button {
+    margin-left: auto;
+  }
 }

@@ -62,7 +62,7 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
   const transactionType = transaction.service
     ? "Service"
     : t("Payments:BalanceTopUp");
-  const quantity = transaction.service ? transaction.quantity : "—";
+  const quantity = transaction.service ? transaction.quantity : "";
 
   return (
     <Row
@@ -86,9 +86,11 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
         <Text fontWeight={600} fontSize="11px">
           {formattedDate}
         </Text>
-        <Text fontWeight={600} fontSize="11px">
-          {quantity}
-        </Text>
+        {quantity ? (
+          <Text fontWeight={600} fontSize="11px">
+            {quantity}
+          </Text>
+        ) : null}
       </RowContent>
     </Row>
   );

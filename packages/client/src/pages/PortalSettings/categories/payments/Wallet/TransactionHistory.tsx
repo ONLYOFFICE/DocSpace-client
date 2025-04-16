@@ -43,10 +43,18 @@ import { DatePicker } from "@docspace/shared/components/date-picker";
 import { toastr } from "@docspace/shared/components/toast";
 import { getTransactionHistoryReport } from "@docspace/shared/api/portal";
 import { DeviceType } from "@docspace/shared/enums";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 
+import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 import TransactionBody from "./sub-components/TransactionBody";
 
 import "./styles/TransactionHistory.scss";
+import FilterButton from "@docspace/shared/components/filter/sub-components/FilterButton";
+import FilterIcon from "@docspace/shared/components/filter/sub-components/FilterIcon";
 
 type TransactionHistoryProps = {
   getStartTransactionDate: () => string;
@@ -100,10 +108,9 @@ const TransactionHistory = ({
     moment(getEndTransactionDate()),
   );
   const [isLoading, setIsLoading] = useState(false);
-  const [hasAppliedDateFilter, setHasAppliedDateFilter] = useState(
-    history.length > 0,
-  );
+  const [hasAppliedDateFilter, setHasAppliedDateFilter] = useState(false);
   const [isFormationHistory, setIsFormationHistory] = useState(false);
+  const [isFilterDialogVisible, setIsFilterDialogVisible] = useState(false);
 
   const onSelectType = (option: TOption) => {
     setSelectedType(option);
@@ -196,6 +203,52 @@ const TransactionHistory = ({
     clearTimeout(timerId);
   };
 
+  const openFilterDialog = () => {
+    setIsFilterDialogVisible(true);
+  };
+
+  const closeFilterDialog = () => {
+    setIsFilterDialogVisible(false);
+  };
+
+  const datesComponent = (
+    <Text fontWeight={600} fontSize="14px" className="transaction-dates">
+      <Trans
+        i18nKey="FromTo"
+        ns="Payments"
+        t={t}
+        components={{
+          1: (
+            <DatePicker
+              initialDate={startDate}
+              onChange={onStartDateChange}
+              selectDateText={t("SelectStartDate")}
+              locale={moment.locale()}
+              openDate={startDate}
+              minDate={undefined}
+              maxDate={endDate}
+              outerDate={startDate}
+              hideCross
+            />
+          ),
+          2: (
+            <DatePicker
+              initialDate={endDate}
+              onChange={onEndDateChange}
+              selectDateText={t("SelectEndDate")}
+              locale={moment.locale()}
+              openDate={endDate}
+              minDate={startDate}
+              maxDate={undefined}
+              outerDate={endDate}
+              hideCross
+            />
+          ),
+        }}
+      />
+    </Text>
+  );
+
   const filterCombobox = (
     <div className="transaction-history-combobox">
       <ComboBox
@@ -210,50 +263,35 @@ const TransactionHistory = ({
         size={ComboBoxSize.content}
         scaled={false}
       />
-      <Text fontWeight={600} fontSize="14px">
-        <Trans
-          i18nKey="FromTo"
-          ns="Payments"
-          t={t}
-          components={{
-            1: (
-              <DatePicker
-                initialDate={startDate}
-                onChange={onStartDateChange}
-                selectDateText={t("SelectStartDate")}
-                locale={moment.locale()}
-                openDate={startDate}
-                minDate={undefined}
-                maxDate={endDate}
-                outerDate={startDate}
-                hideCross
-              />
-            ),
-            2: (
-              <DatePicker
-                initialDate={endDate}
-                onChange={onEndDateChange}
-                selectDateText={t("SelectEndDate")}
-                locale={moment.locale()}
-                openDate={endDate}
-                minDate={startDate}
-                maxDate={undefined}
-                outerDate={endDate}
-                hideCross
-              />
-            ),
-          }}
-        />
-      </Text>
+      {datesComponent}
     </div>
+  );
+
+  const mobileFilter = (
+    <FilterIcon
+      id="filter-button"
+      onClick={openFilterDialog}
+      isOpen={isFilterDialogVisible}
+      isShowIndicator={hasAppliedDateFilter}
+    />
   );
 
   return (
     <>
-      <Text isBold fontSize="16px" className="transaction-history-title">
-        {t("TransactionHistory")}
-      </Text>
-      {hasAppliedDateFilter ? filterCombobox : null}
+      <div className="transaction-history-header">
+        <Text isBold fontSize="16px" className="transaction-history-title">
+          {t("TransactionHistory")}
+        </Text>
+        {(hasAppliedDateFilter || history.length > 0) &&
+        currentDeviceType === DeviceType.mobile
+          ? mobileFilter
+          : null}
+      </div>
+      {(hasAppliedDateFilter || history.length > 0) &&
+      currentDeviceType !== DeviceType.mobile
+        ? filterCombobox
+        : null}
+
       <TransactionBody
         hasAppliedDateFilter={hasAppliedDateFilter}
         userId={userId}
@@ -278,6 +316,44 @@ const TransactionHistory = ({
             {t("Settings:DownloadReportDescription")}
           </Text>
         </div>
+      ) : null}
+
+      {isFilterDialogVisible ? (
+        <ModalDialog
+          visible={isFilterDialogVisible}
+          onClose={closeFilterDialog}
+          displayType={ModalDialogType.aside}
+          className="filter-dialog"
+        >
+          <ModalDialog.Header>{t("Filter")}</ModalDialog.Header>
+          <ModalDialog.Body>
+            <div className="filter-dialog-content">
+              <div className="filter-dialog-section">
+                <Text fontWeight={600} fontSize="15px">
+                  {t("Common:Type")}
+                </Text>
+                <ComboBox
+                  options={typeOfHistoty}
+                  selectedOption={selectedType}
+                  onSelect={onSelectType}
+                  directionY="both"
+                  noBorder={false}
+                  dropDownMaxHeight={300}
+                  showDisabledItems
+                  size={ComboBoxSize.content}
+                  scaled
+                />
+              </div>
+              <div className="filter-dialog-divider" />
+              <div className="filter-dialog-section">
+                <Text fontWeight={600} fontSize="15px">
+                  {t("TransactionPeriod")}
+                </Text>
+                <div>{datesComponent}</div>
+              </div>
+            </div>
+          </ModalDialog.Body>
+        </ModalDialog>
       ) : null}
     </>
   );

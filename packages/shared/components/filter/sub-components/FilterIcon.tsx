@@ -24,50 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-.wallet-container {
-  width: 100%;
+import React from "react";
+import FilterReactSvg from "PUBLIC_DIR/images/filter.react.svg";
+import classNames from "classnames";
+import styles from "../Filter.module.scss";
 
-  .wallet-description {
-    font-size: 12px;
-    line-height: 1.334em;
+import { IconButton } from "../../icon-button";
 
-    max-width: 660px;
-    color: var(--payment-text-color);
-    margin-bottom: 4px;
-  }
+type FilterIconProps = {
+  onClick: () => void;
+  isShowIndicator?: boolean;
+  isOpen?: boolean;
+  id?: string;
+  title?: string;
+};
 
-  .balance-wrapper {
-    max-width: 152px;
-    margin-top: 20px;
-    margin-bottom: 12px;
-  }
-  .auto-payment-information {
-    margin-bottom: 24px;
-    color: var(--payment-text-color);
-  }
-  .auto-payment-editing {
-    display: flex;
-  }
-  .header-container {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
+const FilterIcon = ({
+  id,
+  title,
+  onClick,
+  isOpen,
+  isShowIndicator,
+}: FilterIconProps) => {
+  return (
+    <div
+      id={id}
+      onClick={onClick}
+      title={title}
+      className={classNames({
+        [styles.button]: true,
+        [styles.isOpen]: isOpen,
+      })}
+    >
+      <IconButton iconNode={<FilterReactSvg />} size={16} />
+      {isShowIndicator ? <div className={styles.indicator} /> : null}
+    </div>
+  );
+};
 
-  .balance-amount-container {
-    display: flex;
-    align-items: baseline;
-  }
-
-  .main-amount {
-    font-size: 44px;
-    font-weight: 700;
-    line-height: 1.36em;
-  }
-
-  .decimal-amount {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.36em;
-  }
-}
+export default FilterIcon;

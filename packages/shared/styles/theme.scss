@@ -2058,6 +2058,7 @@
   --payment-icon-background: #{$gray-light-mid};
   --payment-icon-color: #{$light-gray-dark};
   --payment-dialog-text: #{$gray};
+  --payment-devider-color: #{$gray-light-mid};
 }
 
 .dark {
@@ -2067,4 +2068,5 @@
   --payment-icon-background: #{$gray-dark-mid};
   --payment-icon-color: #{$dark-gray-dark};
   --payment-dialog-text: #{$gray-dark};
+  --payment-devider-color: #{$gray-dark-mid};
 }

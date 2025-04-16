@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import ThemeToggle from '@/components/ThemeToggle';
+import TranslationStats from '@/components/TranslationStats';
 
 export default function Home() {
   const [projects, setProjects] = useState<any[]>([]);
@@ -44,6 +45,9 @@ export default function Home() {
           <h1 className="text-4xl font-bold mb-2 text-gray-900 dark:text-white">DocSpace Translation Management</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400">Manage DocSpace i18n localization files</p>
         </div>
+        
+        {/* Translation Statistics Component */}
+        <TranslationStats />
       </div>
 
       <div className="card max-w-4xl mx-auto">

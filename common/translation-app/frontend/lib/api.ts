@@ -89,4 +89,12 @@ export const translateNamespace = (
   model: string
 ) => api.post('/ollama/translate/namespace', { projectName, sourceLanguage, targetLanguage, namespace, model });
 
+// Translation Statistics
+export const fetchTranslationStats = async (projectName?: string) => {
+  const response = await api.get(projectName 
+    ? `/translations/stats/${projectName}` 
+    : '/translations/stats');
+  return response.data.data;
+};
+
 export default api;

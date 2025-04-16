@@ -1,4 +1,5 @@
 const fsUtils = require('../utils/fsUtils');
+const statsUtils = require('../utils/statsUtils');
 
 /**
  * Translations route handler
@@ -6,6 +7,29 @@ const fsUtils = require('../utils/fsUtils');
  * @param {Object} options - Route options
  */
 async function routes(fastify, options) {
+  // Get translation statistics for all projects
+  fastify.get('/stats', async (request, reply) => {
+    try {
+      const stats = await statsUtils.getAllProjectsTranslationStats();
+      return { success: true, data: stats };
+    } catch (error) {
+      request.log.error(error);
+      return reply.code(500).send({ success: false, error: 'Failed to get translation statistics' });
+    }
+  });
+
+  // Get translation statistics for a specific project
+  fastify.get('/stats/:projectName', async (request, reply) => {
+    try {
+      const { projectName } = request.params;
+      const stats = await statsUtils.getProjectTranslationStats(projectName);
+      return { success: true, data: stats };
+    } catch (error) {
+      request.log.error(error);
+      return reply.code(500).send({ success: false, error: 'Failed to get translation statistics' });
+    }
+  });
+
   // Get translations for a namespace
   fastify.get('/:projectName/:language/:namespace', async (request, reply) => {
     try {

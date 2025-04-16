@@ -114,23 +114,11 @@ const DeveloperToolsWrapper = (props) => {
     },
   ];
 
-  if (identityServerEnabled) {
-    data.push({
-      id: "oauth",
-      name: t("OAuth:OAuth"),
-      content: <OAuth />,
-    });
-  }
-
   data.push({
     id: "onlyflow",
     name: t("OnlyFlow"),
     content: <OnlyFlow />,
   });
-
-  // const load = async () => {
-  //   // await loadBaseInfo();
-  // };
 
   useEffect(() => {
     const path = location.pathname;
@@ -147,10 +135,6 @@ const DeveloperToolsWrapper = (props) => {
 
     setIsLoading(true);
   }, [location.pathname]);
-
-  // useEffect(() => {
-  //   ready && startTransition(load);
-  // }, [ready]);
 
   const onSelect = (e) => {
     const path = location.pathname.includes("/portal-settings")

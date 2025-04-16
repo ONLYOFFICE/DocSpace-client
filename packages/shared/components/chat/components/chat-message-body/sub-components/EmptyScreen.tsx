@@ -26,6 +26,7 @@
 
 import React from "react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
@@ -36,6 +37,8 @@ import { IconButton } from "../../../../icon-button";
 
 const EmptyScreen = () => {
   const [closed, setClosed] = React.useState(false);
+
+  const { t } = useTranslation(["Common"]);
 
   return (
     <>
@@ -48,8 +51,7 @@ const EmptyScreen = () => {
         )}
       >
         <Text fontSize="12px" lineHeight="16px" fontWeight={400}>
-          Leverage the power of AI for quick data search and analysis. Just ask
-          a question, and we&apos;ll provide the results for you.
+          {t("Common:AIChatEmptyMessage")}
         </Text>
         <IconButton
           iconName={CrossReactSvgUrl}
@@ -59,7 +61,7 @@ const EmptyScreen = () => {
         />
       </div>
       <Text isBold fontSize="18px" lineHeight="24px">
-        How can i help?
+        {t("Common:AIChatHelp")}
       </Text>
     </>
   );

@@ -168,17 +168,13 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
     validateMaxUpToBalance(value);
   };
 
-  const onToggleClick = () => {
-    setIsAutomaticPaymentsEnabled(!isAutomaticPaymentsEnabled);
-  };
-
-  const onSave = async () => {
+  const onSave = async (isEnable: boolean = true) => {
     const timerId = setTimeout(() => {
       setIsLoading(true);
     }, 200);
 
     try {
-      await updateAutoPayments(true, +minBalance, +upToBalance, currency);
+      await updateAutoPayments(isEnable, +minBalance, +upToBalance, currency);
 
       setIsCurrentSettings(true);
       setAnimateSettings(false);
@@ -191,6 +187,20 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
 
     clearTimeout(timerId);
     setIsLoading(false);
+  };
+
+  const onToggleClick = () => {
+    const isEnable = !isAutomaticPaymentsEnabled;
+
+    setIsAutomaticPaymentsEnabled(isEnable);
+
+    if (!isEnable && isAutoPaymentExist) {
+      onSave(isEnable);
+    }
+  };
+
+  const onSaveAutoPayment = () => {
+    onSave();
   };
 
   const onClose = () => {
@@ -262,7 +272,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
           label={t("Common:SaveButton")}
           size={ButtonSize.small}
           primary
-          onClick={onSave}
+          onClick={onSaveAutoPayment}
           isLoading={isLoading}
           isDisabled={
             minBalanceError || upToBalanceError || !minBalance || !upToBalance

@@ -45,6 +45,7 @@ type WalletProps = {
   language: string;
   walletCodeCurrency: string;
   isPayer: boolean;
+  cardLinkedOnFreeTariff: boolean;
 };
 
 const Wallet = ({
@@ -52,6 +53,7 @@ const Wallet = ({
   language,
   walletCodeCurrency,
   isPayer,
+  cardLinkedOnFreeTariff,
 }: WalletProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
@@ -74,6 +76,9 @@ const Wallet = ({
     setVisible(true);
     setIsEditAutoPayment(true);
   };
+
+  const isDisbled = cardLinkedOnFreeTariff ? isPayer : false;
+
   return (
     <div className="wallet-container">
       <Text className="wallet-description">
@@ -107,7 +112,7 @@ const Wallet = ({
           primary
           label={t("TopUpBalance")}
           onClick={onOpen}
-          isDisabled={!isPayer}
+          isDisabled={isDisbled}
         />
       </div>
 
@@ -132,7 +137,7 @@ export default inject(({ paymentStore, authStore }: TStore) => {
   const {
     walletBalance,
     cardLinked,
-
+    cardLinkedOnFreeTariff,
     walletCodeCurrency,
     isPayer,
   } = paymentStore;
@@ -143,5 +148,6 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     language,
     cardLinked,
     isPayer,
+    cardLinkedOnFreeTariff,
   };
 })(observer(Wallet));

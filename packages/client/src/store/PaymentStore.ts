@@ -187,26 +187,6 @@ class PaymentStore {
     this.isInitWalletPage = isInitWalletPage;
   };
 
-  setPayerInfo = async () => {
-    try {
-      if (!this.walletCustomerEmail || !this.walletCustomerEmail?.length) {
-        this.payerInfo = null;
-        return;
-      }
-
-      const result = await getUserByEmail(this.walletCustomerEmail);
-      if (!result) {
-        this.payerInfo = null;
-        return;
-      }
-
-      this.payerInfo = result;
-    } catch (e) {
-      this.payerInfo = null;
-      console.error(e);
-    }
-  };
-
   get walletCustomerEmail() {
     return this.walletPayer.email;
   }
@@ -219,6 +199,14 @@ class PaymentStore {
     if (this.balance) return this.balance?.subAccounts[0].currency;
 
     return "USD";
+  }
+
+  get cardLinkedOnFreeTariff() {
+    if (!this.currentQuotaStore) return;
+
+    const { isFreeTariff } = this.currentQuotaStore;
+
+    return isFreeTariff && this.walletCustomerEmail;
   }
 
   get walletBalance() {
@@ -303,10 +291,13 @@ class PaymentStore {
     this.autoPayments = res;
   };
 
-  walletInit = async () => {
+  walletInit = async (t) => {
     const requests = [];
 
     const isRefresh = window.location.href.includes("complete=true");
+    if (!this.currentTariffStatusStore) return;
+
+    const { setPayerInfo, customerId } = this.currentTariffStatusStore;
 
     try {
       await Promise.all([
@@ -318,23 +309,30 @@ class PaymentStore {
         requests.push(
           this.setPaymentAccount(),
           this.fetchAutoPayments(),
-          this.fetchTransactionHistory(),
-          this.fetchCardLinked(),
+          // this.fetchTransactionHistory(),
         );
-        this.setPayerInfo();
       } else {
         requests.push(this.fetchCardLinked());
       }
 
       await Promise.all(requests);
+
+      const payer = customerId ?? this.walletCustomerEmail;
+
+      if (payer) await setPayerInfo(payer);
+
+      this.setIsInitWalletPage(true);
+
+      if (window.location.href.includes("complete=true"))
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname,
+        );
     } catch (error) {
-      // toastr.error(t("Common:UnexpectedError"));
+      toastr.error(t("Common:UnexpectedError"));
       console.error(error);
     }
-    if (window.location.href.includes("complete=true"))
-      window.history.replaceState({}, document.title, window.location.pathname);
-
-    this.setIsInitWalletPage(true);
   };
 
   init = async (t: TTranslation) => {
@@ -608,15 +606,14 @@ class PaymentStore {
 
     const { payerInfo: paymentPayer } = this.currentTariffStatusStore;
 
-    const payer = paymentPayer ?? this.payerInfo;
+    if (!user || !paymentPayer) return false;
 
-    if (!user || !payer) return false;
-
-    return user.email === payer.email;
+    return user.email === paymentPayer.email;
   }
 
   get isStripePortalAvailable() {
     if (!this.userStore) return;
+
     const { user } = this.userStore;
 
     if (!user) return false;

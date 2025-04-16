@@ -95,15 +95,15 @@ const StyledItemDescription = styled.div.attrs(injectDefaultTheme)`
   color: ${(props) => props.theme.accessRightSelect.descriptionColor};
 `;
 
-const StyledItemIcon = styled(ReactSVG)<{ isShortenIcon?: boolean }>`
+const StyledItemIcon = styled(ReactSVG)<{ $isShortenIcon?: boolean }>`
   /* margin-inline-end: 8px; */
 
   path[fill] {
     fill: ${(props) => props.theme.dropDownItem.icon.color};
   }
 
-  ${({ isShortenIcon }) =>
-    isShortenIcon &&
+  ${({ $isShortenIcon }) =>
+    $isShortenIcon &&
     css`
       padding-top: 2px;
       width: 16px;

@@ -152,8 +152,6 @@ const Badges = ({
   const sizeBadge =
     isTile || tabletViewBadge ? IconSizeType.medium : IconSizeType.small;
 
-  const lineHeightBadge = isTile || tabletViewBadge ? "1.46" : "1.34";
-
   const paddingBadge = isTile || tabletViewBadge ? "0 5px" : "0 5px";
 
   const fontSizeBadge = isTile || tabletViewBadge ? "11px" : "9px";
@@ -181,7 +179,6 @@ const Badges = ({
     fontWeight: 800,
     maxWidth: "50px",
     padding: paddingBadge,
-    lineHeight: lineHeightBadge,
     "data-id": id,
     isMutedBadge,
   };
@@ -192,7 +189,6 @@ const Badges = ({
     fontSize: "9px",
     fontWeight: 800,
     maxWidth: "60px",
-    lineHeight: "12px",
     "data-id": id,
   };
   const unmuteIconProps = {

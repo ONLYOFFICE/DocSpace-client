@@ -125,7 +125,8 @@ export const ChatWidget = memo(
         if (
           !target?.closest(".chat-panel") &&
           !target?.closest(".backdrop-active") &&
-          !target?.closest(".aside")
+          !target?.closest(".aside") &&
+          !target?.closest(".drop-down-item")
         )
           setIsVisible?.(false);
       };

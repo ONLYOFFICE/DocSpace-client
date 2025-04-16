@@ -1,6 +1,7 @@
 {
   "AllTransactions": "All transactions",
   "AutoTopUp": "Auto top-up",
+  "AutoTopUpEnabled": "Auto top-up is enabled.",
   "AddPaymentMethod": "Add payment method",
   "AutomaticPayments": "Automatic payments",
   "AutomaticallyTopUpCard": "Automatically top up my card when my credit balance falls below a threshold",
@@ -36,6 +37,7 @@
   "EnterAnIntegerAmountBetween": "Enter an integer amount between {{min}} and {{max}}",
   "ErrorNotification": "Failed to update tariff plan. Try again later or contact the sales department.",
   "FromTo": "From <1>{{fromDate}}</1> To <2>{{toDate}}</2>",
+  "FirstAddPaymentMethod": "First you need to add a payment method",
   "GoToStripe": "Go to the Stripe",
   "GracePeriodActivatedDescription": "During the grace period, admins cannot create new rooms and add new users. After the due date of the grace period, {{productName}} will become unavailable until the payment is made.",
   "GracePeriodActivatedInfo": "Grace period is effective <1>from {{fromDate}} to {{byDate}}</1> (days remaining: {{delayDaysCount}}).",
@@ -73,6 +75,7 @@
   "TopUp": "Top up",
   "TopUpBalance": "Top up balance",
   "TopUpWallet": "Top up wallet",
+  "TransactionPeriod": "Transaction period",
   "UpgradeNow": "Upgrade now",
   "UpgradePlan": "Upgrade plan",
   "UserNotFound": "User <1>{{email}}</1> is not found.",

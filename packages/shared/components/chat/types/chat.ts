@@ -4,7 +4,7 @@ import { FlowType } from "./flow";
 
 export type ChatType = { flow: FlowType };
 export type ChatMessageType = {
-  message: string | Object;
+  message: string | object;
   template?: string;
   isSend: boolean;
   thought?: string;
@@ -88,3 +88,8 @@ export interface PlaygroundEvent {
   session_id?: string;
   edit?: boolean;
 }
+
+export type TModel = {
+  id: string;
+  name: string;
+};

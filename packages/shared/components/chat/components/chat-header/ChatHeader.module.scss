@@ -26,13 +26,19 @@
 
     border-radius: 50%;
 
-    background-color: #f8f9f9;
+    background-color: var(--chat-header-button-background-color);
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     cursor: pointer;
+
+    svg {
+      path {
+        fill: var(--chat-header-button-svg-color);
+      }
+    }
   }
 
   .createChat {
@@ -50,13 +56,13 @@
 
     gap: 10px;
 
-    background-color: #f8f9f9;
+    background-color: var(--chat-header-button-background-color);
 
     cursor: pointer;
 
     svg {
       path {
-        fill: #657077;
+        fill: var(--chat-header-button-svg-color);
       }
     }
   }

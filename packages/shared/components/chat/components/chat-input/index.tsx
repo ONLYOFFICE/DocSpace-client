@@ -38,6 +38,7 @@ import { IconButton } from "../../../icon-button";
 
 import { useFilesStore } from "../../store/filesStore";
 import { useMessageStore } from "../../store/messageStore";
+import { useCurrentFlowStore } from "../../store/currentFlowStore";
 
 import FilesSelector from "./components/FileSelector";
 import FilePreview from "./components/FilePreview";
@@ -54,6 +55,8 @@ const ChatInput = ({
   getIcon: (size: number, fileExst: string) => string;
 }) => {
   const { file } = useFilesStore();
+  const { flow } = useCurrentFlowStore();
+
   const { sendMessage, isRequestRunning } = useMessageStore();
 
   const [value, setValue] = React.useState("");
@@ -66,6 +69,31 @@ const ChatInput = ({
   const toggleSelector = () => {
     setShowSelector((prev) => !prev);
   };
+
+  const sendMessageAction = React.useCallback(() => {
+    if (isRequestRunning || !value || showSelector) return;
+
+    setValue("");
+
+    sendMessage(value, flow!);
+  }, [isRequestRunning, sendMessage, value, flow, showSelector]);
+
+  const onKeyEnter = React.useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Enter") return sendMessageAction();
+      if (e.key === "Escape") return setShowSelector(false);
+    },
+    [sendMessageAction],
+  );
+
+  React.useEffect(() => {
+    window.addEventListener("keydown", onKeyEnter);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyEnter);
+    };
+  }, [onKeyEnter]);
+
   const withFile = file !== undefined;
 
   return (
@@ -99,10 +127,7 @@ const ChatInput = ({
           iconName={SendReactSvgUrl}
           size={16}
           isClickable
-          onClick={() => {
-            sendMessage(value);
-            setValue("");
-          }}
+          onClick={sendMessageAction}
           className={classNames(
             styles.chatInputButtonsFile,
             styles.chatInputButtonsSend,

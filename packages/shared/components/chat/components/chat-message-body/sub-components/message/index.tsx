@@ -1,37 +1,23 @@
 import React from "react";
-import copyToClipboard from "copy-to-clipboard";
 import classNames from "classnames";
 
-import CopyIconUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import AIIconReactSvgUrl from "PUBLIC_DIR/images/ai.chat.avatar.react.svg?url";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../../../../avatar";
-import { Text } from "../../../../../text";
-import { IconButton } from "../../../../../icon-button";
-import { toastr } from "../../../../../toast";
 
 import { ChatMessageType } from "../../../../types/chat";
 
 import styles from "../../ChatMessageBody.module.scss";
-import { MarkdownField } from "./markdown";
+
 import Agent from "./agent";
+import { MarkdownField } from "./markdown";
 
 const Message = ({ message }: { message: ChatMessageType }) => {
-  const [hovered, setHovered] = React.useState(false);
-
-  const onCopyMessage = () => {
-    copyToClipboard(message.message as string);
-
-    toastr.success("Copied to clipboard");
-  };
-
   return (
     <div
       className={classNames(styles.message, {
         [styles.userMessage]: message.isSend,
       })}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       <Avatar
         size={AvatarSize.min}
@@ -44,7 +30,7 @@ const Message = ({ message }: { message: ChatMessageType }) => {
 
       <div
         className={classNames(
-          styles.messageContent,
+          styles.chatMessageContent,
           styles.chatMessagePadding,
           styles.chatMessageBorderRadius,
           {
@@ -53,9 +39,13 @@ const Message = ({ message }: { message: ChatMessageType }) => {
           },
         )}
       >
-        {/* {message.content_blocks && message.content_blocks.length > 0 ? (
+        {message.content_blocks &&
+        message.content_blocks.length > 0 &&
+        message.content_blocks.some((b) =>
+          b.contents.some((bc) => bc.type === "tool_use"),
+        ) ? (
           <Agent content={message.content_blocks} />
-        ) : null} */}
+        ) : null}
 
         <MarkdownField chatMessage={message.message as string} />
       </div>

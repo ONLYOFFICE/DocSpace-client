@@ -23,19 +23,11 @@ const Agent = ({ content }: { content: ChatMessageType["content_blocks"] }) => {
             block.contents.map((blockContent, idx) => {
               const type = blockContent.type;
 
-              let key: string = type;
+              const key: string = type;
 
-              let contentNode: React.ReactNode = null;
+              const contentNode: React.ReactNode = null;
 
-              if (type === "text") {
-                key = blockContent.text;
-                contentNode = (
-                  <MarkdownField
-                    chatMessage={blockContent.text}
-                    key={blockContent.text}
-                  />
-                );
-              }
+              if (type === "text") return null;
 
               return (
                 <React.Fragment key={key}>

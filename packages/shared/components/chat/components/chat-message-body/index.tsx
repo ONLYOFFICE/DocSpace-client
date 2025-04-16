@@ -24,11 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 
 import { Scrollbar } from "../../../scrollbar";
+import type { Scrollbar as CustomScrollbar } from "../../../scrollbar/custom-scrollbar";
 
 import { useMessageStore } from "../../store/messageStore";
 
@@ -39,8 +40,22 @@ import styles from "./ChatMessageBody.module.scss";
 
 const ChatMessageBody = () => {
   const { messages } = useMessageStore();
+  const scrollbarRef = useRef<CustomScrollbar>(null);
 
   const isEmpty = messages.length === 0;
+
+  // Scroll to bottom whenever messages change
+  useEffect(() => {
+    if (isEmpty) return;
+
+    // Use requestAnimationFrame to ensure the DOM has been updated
+    // Method 1: Use the scrollbar instance if available
+    requestAnimationFrame(() => {
+      if (scrollbarRef.current?.scrollToBottom) {
+        scrollbarRef.current.scrollToBottom();
+      }
+    });
+  });
 
   return (
     <div
@@ -51,7 +66,7 @@ const ChatMessageBody = () => {
       {messages.length === 0 ? (
         <EmptyScreen />
       ) : (
-        <Scrollbar>
+        <Scrollbar ref={scrollbarRef} className="chat-scroll-bar">
           {messages.map((message) => {
             if (message.message === "") return null;
 

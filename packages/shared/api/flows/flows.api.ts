@@ -4,7 +4,6 @@ import {
   FlowsFolder,
   CreateFlowParams,
   UpdateFlowParams,
-  // FlowListResponse,
   FlowFilters,
   RunFlowOptions,
   RunFlowResponse,
@@ -330,26 +329,18 @@ class FlowsApi {
   static async buildFlow(
     flowId: string,
     data: object,
-  ): Promise<{ job_id: string }> {
-    const response: { data: { job_id: string } } = await FlowsApi.getAPI().post(
-      `build/${flowId}/flow`,
-      JSON.stringify(data),
-    );
-
-    return response.data as { job_id: string };
-  }
-
-  static async getJobEvents(
-    jobId: string,
   ): Promise<ReadableStream<Uint8Array>> {
     const xApiKey = getCookie("chat_api_key");
 
     const response = await fetch(
-      `/onlyflow/api/v1/build/${jobId}/events?stream=true`,
+      `/onlyflow/api/v1/build/${flowId}/flow?stream=true`,
       {
+        method: "POST",
+        body: JSON.stringify(data),
         headers: {
           "x-api-key": xApiKey!,
           Connection: "close",
+          "Content-Type": "application/json",
         },
       },
     );

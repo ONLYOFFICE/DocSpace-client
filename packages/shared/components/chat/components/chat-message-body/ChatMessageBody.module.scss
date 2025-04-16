@@ -79,6 +79,7 @@
 
 .message {
   width: 100%;
+  max-width: 100%;
 
   height: auto;
 
@@ -113,4 +114,10 @@
   height: 16px;
 
   align-self: center;
+}
+
+.chatMessageContent {
+  max-width: calc(100% - 40px);
+
+  box-sizing: border-box;
 }

@@ -48,9 +48,8 @@ const EmptyScreen = () => {
         )}
       >
         <Text fontSize="12px" lineHeight="16px" fontWeight={400}>
-          Use the power of artificial intelligence to quickly identify and
-          analyze data. Just ask a question and we will prepare the results for
-          you.
+          Leverage the power of AI for quick data search and analysis. Just ask
+          a question, and we&apos;ll provide the results for you.
         </Text>
         <IconButton
           iconName={CrossReactSvgUrl}

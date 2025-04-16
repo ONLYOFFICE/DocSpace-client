@@ -28,7 +28,7 @@ import React from "react";
 
 import { DeviceType } from "../../enums";
 
-import ChatHeader from "./components/сhat-header";
+import ChatHeader from "./components/chat-header";
 import ChatBody from "./components/chat-body";
 import ChatMessageBody from "./components/chat-message-body";
 import ChatInput from "./components/chat-input";
@@ -36,19 +36,23 @@ import ChatInput from "./components/chat-input";
 import { FilesStoreContextProvider } from "./store/filesStore";
 import { CurrentFlowStoreContextProvider } from "./store/currentFlowStore";
 import { MessageStoreContextProvider } from "./store/messageStore";
+import { ModelStoreContextProvider } from "./store/modelStore";
 
 const Chat = ({
   currentDeviceType,
   displayFileExtension,
-  getIcon,
   aiChatID,
   aiSelectedFolder,
+
+  getIcon,
 }: {
   currentDeviceType: DeviceType;
   displayFileExtension: boolean;
-  getIcon: (size: number, fileExst: string) => string;
+
   aiChatID: string;
   aiSelectedFolder: string | number;
+
+  getIcon: (size: number, fileExst: string) => string;
 }) => {
   return (
     <ChatBody>
@@ -58,13 +62,15 @@ const Chat = ({
             aiChatID={aiChatID}
             aiSelectedFolder={aiSelectedFolder}
           >
-            <ChatHeader />
-            <ChatMessageBody />
-            <ChatInput
-              currentDeviceType={currentDeviceType}
-              displayFileExtension={displayFileExtension}
-              getIcon={getIcon}
-            />
+            <ModelStoreContextProvider selectedFolder={aiSelectedFolder}>
+              <ChatHeader />
+              <ChatMessageBody />
+              <ChatInput
+                currentDeviceType={currentDeviceType}
+                displayFileExtension={displayFileExtension}
+                getIcon={getIcon}
+              />
+            </ModelStoreContextProvider>
           </MessageStoreContextProvider>
         </FilesStoreContextProvider>
       </CurrentFlowStoreContextProvider>

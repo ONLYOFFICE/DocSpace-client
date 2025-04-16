@@ -35,6 +35,8 @@
   "Audio": "Audio",
   "Authentication": "Authentication",
   "Authorization": "Authorization",
+  "AIRoomTitle": "Room with AI",
+  "AIRoomDescription": "This room includes an AI assistant to help you work with documents, answer your questions, and assist throughout your tasks.",
   "Back": "Back",
   "BadgeAlertDescription": "Several roles are specified in this form. Forms with multiple roles are not available for filling in this type of room",
   "BadgeCompletedTitle": "Form is completely filled out by all members",

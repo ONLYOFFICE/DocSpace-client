@@ -6,6 +6,7 @@ import KeyContextMenu from "./KeyContextMenu";
 import RenameKeyModal from "./RenameKeyModal";
 import MoveKeyModal from "./MoveKeyModal";
 import DeleteKeyModal from "./DeleteKeyModal";
+import FigmaReferenceModal from "./FigmaReferenceModal";
 import Modal from "./Modal";
 
 interface TranslationEntry {
@@ -65,7 +66,9 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   const [isRenameModalOpen, setIsRenameModalOpen] = useState<boolean>(false);
   const [isMoveModalOpen, setIsMoveModalOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [isFigmaModalOpen, setIsFigmaModalOpen] = useState<boolean>(false);
   const [activeKeyPath, setActiveKeyPath] = useState<string>("");
+  const [activeTranslationValue, setActiveTranslationValue] = useState<string>("");
 
   // Ref for the key container
   const keyContainerRef = useRef<HTMLDivElement>(null);
@@ -320,6 +323,19 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     // Use function form of setState to ensure we're working with the latest state
     setIsDeleteModalOpen(() => true);
   }, [activeKeyPath]);
+
+  // Handle find in Figma action
+  const handleFindInFigma = useCallback(() => {
+    // Close the context menu and open the Figma modal
+    setContextMenu(null);
+    
+    // Find the current English translation value for the active key
+    const currentEntry = filteredTranslations.find(entry => entry.path === activeKeyPath);
+    if (currentEntry && currentEntry.translations && currentEntry.translations["en"]) {
+      setActiveTranslationValue(currentEntry.translations["en"]);
+      setIsFigmaModalOpen(true);
+    }
+  }, [activeKeyPath, filteredTranslations]);
 
   // Submit handlers for key operations
   const handleSubmitRename = async (newKeyPath: string) => {
@@ -696,35 +712,38 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
           onRename={handleRenameKey}
           onMove={handleMoveKey}
           onDelete={handleDeleteKey}
+          onFindInFigma={handleFindInFigma}
         />
       )}
 
-      {/* RenameKeyModal */}
+      {/* Modals */}
       <RenameKeyModal
         isOpen={isRenameModalOpen}
-        keyPath={activeKeyPath}
         onClose={() => setIsRenameModalOpen(false)}
+        keyPath={activeKeyPath}
         onRename={handleSubmitRename}
       />
-
-      {/* MoveKeyModal */}
       <MoveKeyModal
         isOpen={isMoveModalOpen}
+        onClose={() => setIsMoveModalOpen(false)}
         keyPath={activeKeyPath}
         sourceProjectName={projectName || ""}
         sourceNamespace={namespace || ""}
-        onClose={() => setIsMoveModalOpen(false)}
         onMove={handleSubmitMove}
       />
-
-      {/* DeleteKeyModal */}
       <DeleteKeyModal
         isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
         keyPath={activeKeyPath}
         projectName={projectName || ""}
         namespace={namespace || ""}
-        onClose={() => setIsDeleteModalOpen(false)}
         onDelete={handleSubmitDelete}
+      />
+      <FigmaReferenceModal
+        isOpen={isFigmaModalOpen}
+        onClose={() => setIsFigmaModalOpen(false)}
+        translationKey={activeKeyPath}
+        translationValue={activeTranslationValue}
       />
     </div>
   );

@@ -30,10 +30,8 @@ import { inject, observer } from "mobx-react";
 import moment from "moment";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 import { Text } from "@docspace/shared/components/text";
-
 import {
   ComboBox,
   ComboBoxSize,
@@ -43,18 +41,17 @@ import { DatePicker } from "@docspace/shared/components/date-picker";
 import { toastr } from "@docspace/shared/components/toast";
 import { getTransactionHistoryReport } from "@docspace/shared/api/portal";
 import { DeviceType } from "@docspace/shared/enums";
-import { IconButton } from "@docspace/shared/components/icon-button";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import FilterIcon from "@docspace/shared/components/filter/sub-components/FilterIcon";
 
 import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 import TransactionBody from "./sub-components/TransactionBody";
-
+import TransactionHistoryLoader from "./sub-components/TransactionHistoryLoader";
 import "./styles/TransactionHistory.scss";
-import FilterButton from "@docspace/shared/components/filter/sub-components/FilterButton";
-import FilterIcon from "@docspace/shared/components/filter/sub-components/FilterIcon";
+import TableLoader from "./sub-components/TableLoader";
 
 type TransactionHistoryProps = {
   getStartTransactionDate: () => string;
@@ -115,64 +112,64 @@ const TransactionHistory = ({
   const onSelectType = (option: TOption) => {
     setSelectedType(option);
     setHasAppliedDateFilter(true);
+    setIsFilterDialogVisible(false);
     setIsLoading(true);
-
-    const timerId = setTimeout(() => setIsLoading(true), 200);
-
-    const isCredit = option.key !== "debit";
-    const isDebit = option.key !== "credit";
-
-    try {
-      fetchTransactionHistory(
-        formatDate(startDate),
-        formatDate(endDate),
-        isCredit,
-        isDebit,
-      );
-    } catch (e) {
-      toastr.error(e as Error);
-    }
-
-    setIsLoading(false);
-    clearTimeout(timerId);
+    fetchTransactionHistory(
+      formatDate(startDate),
+      formatDate(endDate),
+      option.key !== "debit",
+      option.key !== "credit",
+    ).finally(() => {
+      setIsLoading(false);
+    });
   };
 
   const onStartDateChange = async (
     date: moment.Moment | null,
   ): Promise<void> => {
-    if (!date) return;
+    if (!date) {
+      return;
+    }
 
     setStartDate(date);
     setHasAppliedDateFilter(true);
+    setIsFilterDialogVisible(false);
     setIsLoading(true);
-    const timerId = setTimeout(() => setIsLoading(true), 200);
-
     try {
-      await fetchTransactionHistory(formatDate(date), formatDate(endDate));
-    } catch (e) {
-      toastr.error(e as Error);
+      await fetchTransactionHistory(
+        formatDate(date),
+        formatDate(endDate),
+        selectedType.key !== "debit",
+        selectedType.key !== "credit",
+      );
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
-    clearTimeout(timerId);
   };
 
   const onEndDateChange = async (date: moment.Moment | null): Promise<void> => {
-    if (!date) return;
+    if (!date) {
+      return;
+    }
 
     setEndDate(date);
     setHasAppliedDateFilter(true);
+    setIsFilterDialogVisible(false);
     setIsLoading(true);
-    const timerId = setTimeout(() => setIsLoading(true), 200);
-
     try {
-      await fetchTransactionHistory(formatDate(startDate), formatDate(date));
-    } catch (e) {
-      toastr.error(e as Error);
+      await fetchTransactionHistory(
+        formatDate(startDate),
+        formatDate(date),
+        selectedType.key !== "debit",
+        selectedType.key !== "credit",
+      );
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
-    clearTimeout(timerId);
   };
 
   const getReport = async () => {
@@ -276,33 +273,38 @@ const TransactionHistory = ({
     />
   );
 
+  const isMobile = currentDeviceType === DeviceType.mobile;
+  const isTablet = currentDeviceType === DeviceType.tablet;
+
   return (
     <>
       <div className="transaction-history-header">
         <Text isBold fontSize="16px" className="transaction-history-title">
           {t("TransactionHistory")}
         </Text>
-        {(hasAppliedDateFilter || history.length > 0) &&
-        currentDeviceType === DeviceType.mobile
+        {(hasAppliedDateFilter || history.length > 0) && isMobile
           ? mobileFilter
           : null}
       </div>
-      {(hasAppliedDateFilter || history.length > 0) &&
-      currentDeviceType !== DeviceType.mobile
+      {(hasAppliedDateFilter || history.length > 0) && !isMobile
         ? filterCombobox
         : null}
 
-      <TransactionBody
-        hasAppliedDateFilter={hasAppliedDateFilter}
-        userId={userId}
-        sectionWidth={sectionWidth}
-        history={history}
-        viewAs={viewAs}
-        setViewAs={setViewAs}
-        currentDeviceType={currentDeviceType}
-      />
+      {isLoading ? (
+        <TableLoader isMobile={isMobile} isTablet={isTablet} />
+      ) : (
+        <TransactionBody
+          hasAppliedDateFilter={hasAppliedDateFilter}
+          userId={userId}
+          sectionWidth={sectionWidth}
+          history={history}
+          viewAs={viewAs}
+          setViewAs={setViewAs}
+          currentDeviceType={currentDeviceType}
+        />
+      )}
 
-      {history.length ? (
+      {history.length && !isLoading ? (
         <div className="download-wrapper">
           <Button
             className="download-report_button"

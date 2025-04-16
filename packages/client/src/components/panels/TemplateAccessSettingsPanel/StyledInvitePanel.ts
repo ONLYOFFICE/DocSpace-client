@@ -85,13 +85,13 @@ const StyledInviteUserBody = styled.div`
   }
 `;
 
-const StyledSubHeader = styled(Heading)<{ inline?: boolean }>`
+const StyledSubHeader = styled(Heading)<{ $inline?: boolean }>`
   font-weight: 700 !important;
   font-size: 16px !important;
   margin: 16px 0 8px 0;
 
   ${(props) =>
-    props.inline &&
+    props.$inline &&
     css`
       display: inline-flex;
       align-items: center;

@@ -136,7 +136,7 @@ const StyledSubHeader = styled(Heading)`
   margin: 16px 0 8px;
 
   ${(props) =>
-    props.inline &&
+    props.$inline &&
     css`
       display: inline-flex;
       align-items: center;

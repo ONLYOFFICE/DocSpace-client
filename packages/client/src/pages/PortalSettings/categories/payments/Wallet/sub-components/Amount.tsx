@@ -32,6 +32,8 @@ import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { formatCurrencyValue } from "../utils";
 
+import "../styles/Amount.scss";
+
 type AmountProps = {
   setAmount: (amount: string) => void;
   amount: string;
@@ -99,17 +101,22 @@ const Amount = ({ setAmount, amount, language, currency }: AmountProps) => {
 
   return (
     <div className="amount-container">
-      <Text fontWeight="700" fontSize="16px">
-        {t("AmountSelection")}
+      <div className="tabs-wrapper">
+        <Text fontWeight="700" fontSize="16px" className="amount-title">
+          {t("AmountSelection")}
+        </Text>
+        <Tabs
+          items={amountTabs}
+          selectedItemId={selectedAmount}
+          onSelect={onSelectAmount}
+          type={TabsTypes.Secondary}
+          allowNoSelection
+          withoutStickyIntend
+        />
+      </div>
+      <Text fontWeight={600} className="amount-title ">
+        {t("Amount")}
       </Text>
-      <Tabs
-        items={amountTabs}
-        selectedItemId={selectedAmount}
-        onSelect={onSelectAmount}
-        type={TabsTypes.Secondary}
-        allowNoSelection
-      />
-      <Text fontWeight={600}>{t("Amount")}</Text>
       <TextInput
         value={amount}
         onChange={onChangeTextInput}

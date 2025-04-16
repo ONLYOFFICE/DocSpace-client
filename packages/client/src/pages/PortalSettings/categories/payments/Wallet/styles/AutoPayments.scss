@@ -28,11 +28,12 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  margin-top: 20px;
 
   .auto-payment-header {
     display: flex;
     align-items: center;
-
+    margin-bottom: 8px;
     .toggle-button {
       margin-inline: auto 28px;
     }
@@ -42,7 +43,6 @@
     max-width: 420px;
     margin-inline-end: 28px;
 
-    line-height: 1.333em;
     text-align: left;
 
     color: var(--payment-dialog-text);
@@ -86,13 +86,12 @@
       .check-icon {
         width: 16px;
         height: 16px;
-        color: #35ad17;
+        color: var(--payment-credit-color);
       }
     }
 
     .info-description {
       color: var(--payment-text-color);
-      line-height: 1.333em;
       text-align: left;
     }
   }
@@ -116,11 +115,15 @@
   }
 
   .settings-wrapper {
-    opacity: 0;
+    opacity: 1;
     transform: translateY(10px);
 
     &.animated {
       animation: fadeInSettings 0.5s ease-in-out forwards;
+    }
+
+    &.hideBlock {
+      opacity: 0;
     }
   }
 }

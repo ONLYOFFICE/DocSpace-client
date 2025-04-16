@@ -227,8 +227,8 @@ class PaymentStore {
     return 0.0;
   }
 
-  fetchBalance = async () => {
-    const res = await getBalance();
+  fetchBalance = async (isRefresh: boolean) => {
+    const res = await getBalance(isRefresh);
 
     if (!res) return;
 
@@ -269,8 +269,8 @@ class PaymentStore {
     this.autoPayments = res;
   };
 
-  fetchWalletPayer = async () => {
-    const res = await getWalletPayer();
+  fetchWalletPayer = async (isRefresh: boolean) => {
+    const res = await getWalletPayer(isRefresh);
 
     if (!res) return;
 
@@ -306,8 +306,13 @@ class PaymentStore {
   walletInit = async () => {
     const requests = [];
 
+    const isRefresh = window.location.href.includes("complete=true");
+
     try {
-      await Promise.all([this.fetchWalletPayer(), this.fetchBalance()]);
+      await Promise.all([
+        this.fetchWalletPayer(isRefresh),
+        this.fetchBalance(isRefresh),
+      ]);
 
       if (this.walletCustomerEmail) {
         requests.push(
@@ -326,6 +331,8 @@ class PaymentStore {
       // toastr.error(t("Common:UnexpectedError"));
       console.error(error);
     }
+    if (window.location.href.includes("complete=true"))
+      window.history.replaceState({}, document.title, window.location.pathname);
 
     this.setIsInitWalletPage(true);
   };

@@ -23,16 +23,17 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { useTranslation } from "react-i18next";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
-import PlusIcon from "PUBLIC_DIR/images/icons/12/payment.plus.react.svg";
 import CheckReactSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 
 import "../styles/PaymentMethod.scss";
+import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
 
 type PaymentMethodProps = {
   walletCustomerEmail: boolean;
@@ -66,7 +67,9 @@ const PaymentMethod = ({
           {t("PaymentMethod")}
         </Text>
         {!walletCustomerEmail ? (
-          <Text fontSize="12px">{t("YouHaveNotAddedAnyPayment")}</Text>
+          <Text fontSize="12px" className="no-payment">
+            {t("YouHaveNotAddedAnyPayment")}
+          </Text>
         ) : null}
       </div>
       {walletCustomerEmail ? (
@@ -83,10 +86,13 @@ const PaymentMethod = ({
         </div>
       ) : (
         <div className="add-payment-method-container" onClick={goLinkCard}>
-          <div className="plus-icon-wrapper">
-            <PlusIcon className="payment-score" />
-          </div>
-          <Text className="add-payment-text">{t("AddPaymentMethod")}</Text>
+          <SelectorAddButton
+            className="selector-add-button"
+            onClick={goLinkCard}
+          />
+          <Text className="add-payment-text" fontWeight={600}>
+            {t("AddPaymentMethod")}
+          </Text>
         </div>
       )}
     </div>

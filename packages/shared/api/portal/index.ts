@@ -375,17 +375,23 @@ export function sendPaymentRequest(email, userName, message) {
   });
 }
 
-export function getBalance() {
+export function getBalance(refresh?: boolean) {
+  const params = refresh ? { refresh: true } : {};
+
   return request({
     method: "get",
-    url: "/portal/payment/customer/balance",
+    url: `/portal/payment/customer/balance`,
+    params,
   }) as TBalance;
 }
 
-export function getWalletPayer() {
+export function getWalletPayer(refresh?: boolean) {
+  const params = refresh ? { refresh: true } : {};
+
   return request({
     method: "get",
-    url: "/portal/payment/customerinfo",
+    url: `/portal/payment/customerinfo`,
+    params,
   }) as TCustomerInfo;
 }
 
@@ -453,10 +459,12 @@ export async function updateAutoTopUpSettings(
     method: "post",
     url: "/portal/payment/topupsettings",
     data: {
-      enabled,
-      minBalance,
-      upToBalance,
-      currency,
+      settings: {
+        enabled,
+        minBalance,
+        upToBalance,
+        currency,
+      },
     },
   };
   return request(options);

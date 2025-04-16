@@ -25,8 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 .add-payment-method {
+  padding-bottom: 21px;
+  padding-top: 21px;
+  border-bottom: 1px solid #eceef1;
+  border-top: 1px solid #eceef1;
+
   .payment-method-description {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    .no-payment {
+      color: var(--payment-dialog-text);
+    }
   }
 
   .add-payment-method-container {
@@ -34,7 +45,6 @@
     align-items: center;
     gap: 8px;
     cursor: pointer;
-    padding-top: 8px;
   }
 
   .plus-icon-wrapper {
@@ -55,7 +65,7 @@
   .add-payment-text {
     font-size: 14px;
     line-height: 16px;
-    color: #a3a9ae;
+    color: var(--payment-dialog-text);
   }
 
   .card-linked {

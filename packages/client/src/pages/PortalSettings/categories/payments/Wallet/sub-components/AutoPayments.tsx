@@ -54,6 +54,7 @@ interface AutoPaymentsProps {
   autoPayments: TAutoTopUpSettings | null;
   language: string;
   currency: string;
+  isEditAutoPayment: boolean;
 }
 
 interface CurrentPaymentSettingsProps {
@@ -98,6 +99,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
   updateAutoPayments,
   language,
   currency,
+  isEditAutoPayment,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
@@ -112,8 +114,9 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
   const [minBalanceError, setMinBalanceError] = useState(false);
   const [upToBalanceError, setUpToBalanceError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isCurrentSettings, setIsCurrentSettings] =
-    useState(isAutoPaymentExist);
+  const [isCurrentSettings, setIsCurrentSettings] = useState(
+    isAutoPaymentExist && !isEditAutoPayment,
+  );
   const [animateSettings, setAnimateSettings] = useState(false);
   const [minUpToBalance, setMinUpToBalance] = useState(6);
 

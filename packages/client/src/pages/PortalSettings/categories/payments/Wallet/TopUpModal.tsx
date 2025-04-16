@@ -48,7 +48,6 @@ import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
 const StyledBody = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 24px;
   width: 100%;
   max-width: 480px;
   margin: 20px auto 0 auto;
@@ -88,44 +87,22 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
 
   const isButtonDisabled = !amount || !walletCustomerEmail;
 
-  const goLinkCard = () => {
-    cardLinked
-      ? window.open(cardLinked, "_blank")
-      : toastr.error(t("ErrorNotification"));
-  };
-
-  const goStripeAccount = () => {
-    accountLink
-      ? window.open(accountLink, "_blank")
-      : toastr.error(t("ErrorNotification"));
-  };
-
   const onTopUp = async () => {
     try {
       setIsLoading(true);
 
-      await saveDeposite(+amount, currency);
+      const res = await saveDeposite(+amount, currency);
+
+      if (!res) return;
+      if (!res.includes("ok")) throw new Error(res);
+
       await Promise.allSettled([fetchBalance(), fetchTransactionHistory()]);
       toastr.success(t("Common:SuccessfullySaved"));
       onClose();
     } catch (e) {
       console.error(e);
 
-      toastr.error(
-        <Trans
-          i18nKey="InsufficientFundsOnCard"
-          ns="Payments"
-          t={t}
-          components={{
-            1: (
-              <ColorTheme
-                themeId={ThemeId.Link}
-                onClick={walletCustomerEmail ? goStripeAccount : goLinkCard}
-              />
-            ),
-          }}
-        />,
-      );
+      toastr.error(e);
     } finally {
       setIsLoading(false);
     }

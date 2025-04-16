@@ -43,7 +43,7 @@ const PaymentsPage = ({ currentDeviceType }) => {
   const [currentTabId, setCurrentTabId] = useState();
   const location = useLocation();
   const navigate = useNavigate();
-  // const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const { t } = useTranslation(["Payments"]);
 
   const data = [
@@ -66,7 +66,7 @@ const PaymentsPage = ({ currentDeviceType }) => {
       combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, url),
     );
 
-    //  setIsLoaded(false);
+    setIsLoaded(false);
   };
 
   useEffect(() => {
@@ -74,8 +74,10 @@ const PaymentsPage = ({ currentDeviceType }) => {
     const currentTab = data.find((item) => path.includes(item.id));
     if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
 
-    // setIsLoaded(true);
+    setIsLoaded(true);
   }, [location.pathname]);
+
+  if (!isLoaded) return null;
 
   return (
     <Tabs

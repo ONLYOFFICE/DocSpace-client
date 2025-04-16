@@ -1,11 +1,11 @@
 services:
   tests-ci:
-    image: tests
+    image: login-tests
     build:
       context: ../..
       dockerfile: packages/login/Dockerfile
   tests-local:
-    image: tests
+    image: login-tests
     ports:
       - "5111:5111"
     volumes:

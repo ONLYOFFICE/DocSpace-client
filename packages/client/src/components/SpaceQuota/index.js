@@ -171,7 +171,7 @@ const SpaceQuota = (props) => {
 
   if (withoutLimitQuota || item?.quotaLimit === undefined) {
     return (
-      <StyledText fontWeight={600} withoutLimitQuota>
+      <StyledText fontWeight={600} $withoutLimitQuota>
         {usedQuota}
       </StyledText>
     );
@@ -179,7 +179,7 @@ const SpaceQuota = (props) => {
 
   if (isReadOnly) {
     return (
-      <StyledText fontWeight={600} isReadOnly>
+      <StyledText fontWeight={600} $isReadOnly>
         {usedQuota} / {spaceLimited}
       </StyledText>
     );

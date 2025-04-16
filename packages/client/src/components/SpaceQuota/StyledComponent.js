@@ -60,7 +60,7 @@ const StyledText = styled(Text)`
   max-width: max-content;
 
   padding-top: ${(props) =>
-    props.withoutLimitQuota || props.isReadOnly ? "0px" : "8px"};
+    props.$withoutLimitQuota || props.$isReadOnly ? "0px" : "8px"};
 
   white-space: nowrap;
   overflow: hidden;

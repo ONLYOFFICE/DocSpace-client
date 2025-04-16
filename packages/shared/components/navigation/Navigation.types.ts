@@ -176,7 +176,6 @@ export type TDropBoxProps = TArrowButtonProps &
     | "onNavigationButtonClick"
     | "navigationButtonLabel"
     | "showTitle"
-    | "isPublicRoom"
     | "isMobile"
   > &
   TRowParam & {

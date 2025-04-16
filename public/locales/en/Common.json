@@ -35,6 +35,8 @@
   "Audio": "Audio",
   "Authentication": "Authentication",
   "Authorization": "Authorization",
+  "AIChat": "AI Chat",
+  "AINewChat": "New chat",
   "AIRoomTitle": "Room with AI",
   "AIRoomDescription": "This room includes an AI assistant to help you work with documents, answer your questions, and assist throughout your tasks.",
   "Back": "Back",

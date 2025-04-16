@@ -26,6 +26,7 @@
 
 import React, { memo, useEffect, useState } from "react";
 import classNames from "classnames";
+import { useTranslation } from "react-i18next";
 
 import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import ScreenSmallReactSvgUrl from "PUBLIC_DIR/images/icons/17/screen.small.react.svg?url";
@@ -56,11 +57,13 @@ const Header = ({
   setIsFullScreen,
   onClose,
 }: HeaderProps) => {
+  const { t } = useTranslation(["Common"]);
+
   return (
     <div className={styles.chatPanelHeader}>
       <div className={styles.chatPanelHeaderTitle}>
         <Text lineHeight="24px" fontSize="18px" isBold>
-          AI Chat
+          {t("Common:AIChat")}
         </Text>
         <BetaBadge place="right" withoutTooltip />
       </div>

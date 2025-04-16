@@ -7,7 +7,7 @@
   align-items: center;
 
   height: 100%;
-  max-height: calc(100% - 69px);
+  max-height: calc(100% - 70px);
   width: 100%;
 
   overflow: hidden;
@@ -17,11 +17,11 @@
   padding-bottom: 20px;
 
   @include tablet-and-below {
-    max-height: calc(100% - 61px);
+    max-height: calc(100% - 62px);
     padding-bottom: 16px;
   }
 
   @include mobile {
-    max-height: calc(100% - 53px);
+    max-height: calc(100% - 54px);
   }
 }

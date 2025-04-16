@@ -116,6 +116,7 @@ export const ChatWidget = memo(
     aiSelectedFolder,
   }: ChatWidgetProps) => {
     const [isFullScreen, setIsFullScreen] = useState(false);
+    const [withSnackbar, setWithSnackbar] = useState(false);
 
     useEffect(() => {
       const onMouseDown = (e: MouseEvent) => {
@@ -140,12 +141,19 @@ export const ChatWidget = memo(
       return () => document.removeEventListener("mousedown", onMouseDown);
     }, [currentDeviceType, isVisible, setIsVisible, viewAs]);
 
+    useEffect(() => {
+      const snackbar = document.getElementById("snackbar-container");
+
+      setWithSnackbar(!!snackbar);
+    }, [isVisible, isFullScreen]);
+
     const onClose = () => setIsVisible?.(false);
 
     const panel = (
       <div
         className={classNames("chat-panel", styles.chatPanel, {
           [styles.fullScreen]: isFullScreen,
+          [styles.withSnackbar]: withSnackbar,
         })}
       >
         <Header

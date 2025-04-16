@@ -712,11 +712,16 @@
   &.fullScreen {
     @include desktop {
       position: fixed;
+
       right: 0;
       bottom: 0;
 
       // 250px is the width of the desktop article
       width: calc(100% - 250px);
+
+      &.withSnackbar {
+        height: calc(100% - 64px);
+      }
     }
 
     width: 100%;

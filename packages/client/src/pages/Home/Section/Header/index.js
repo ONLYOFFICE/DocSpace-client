@@ -546,6 +546,10 @@ const SectionHeaderContent = (props) => {
     };
   }, [deleteRefMap]);
 
+  React.useEffect(() => {
+    if (!withChat) setAiChatIsVisible(false);
+  }, [withChat]);
+
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
 

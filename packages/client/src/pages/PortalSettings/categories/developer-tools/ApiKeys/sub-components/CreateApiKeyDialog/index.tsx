@@ -405,9 +405,6 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
     ? inputValue === actionItem?.name && !checkIsChanged()
     : false;
 
-  const generateButtonIsDisabled =
-    isRequestRunning || editIsDisabled || generateIsDisabled;
-
   const createBody = (
     <StyledBodyContent>
       {!isEdit ? (
@@ -557,7 +554,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         primary
         onClick={onGenerate}
         scale
-        isDisabled={generateButtonIsDisabled}
+        isDisabled={isRequestRunning || editIsDisabled || generateIsDisabled}
       />
       <Button
         key="CancelButton"

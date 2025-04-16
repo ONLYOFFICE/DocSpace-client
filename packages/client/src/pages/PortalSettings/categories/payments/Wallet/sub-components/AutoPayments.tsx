@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { isMobile } from "react-device-detect";
@@ -103,6 +103,8 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
+  const showCurrentSettings = isAutoPaymentExist && !isEditAutoPayment;
+
   const [isAutomaticPaymentsEnabled, setIsAutomaticPaymentsEnabled] =
     useState(isAutoPaymentExist);
   const [minBalance, setMinBalance] = useState(
@@ -114,11 +116,18 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
   const [minBalanceError, setMinBalanceError] = useState(false);
   const [upToBalanceError, setUpToBalanceError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isCurrentSettings, setIsCurrentSettings] = useState(
-    isAutoPaymentExist && !isEditAutoPayment,
-  );
+  const [isCurrentSettings, setIsCurrentSettings] =
+    useState(showCurrentSettings);
   const [animateSettings, setAnimateSettings] = useState(false);
   const [minUpToBalance, setMinUpToBalance] = useState(6);
+
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+    }
+  }, []);
 
   const validateMinBalance = (value: string) => {
     const numValue = parseInt(value, 10);
@@ -271,7 +280,9 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
   );
 
   const renderCurrentSettings = (
-    <div className={`settings-wrapper ${animateSettings ? "animated" : ""}`}>
+    <div
+      className={`settings-wrapper ${animateSettings ? "animated" : ""} ${isFirstRender.current ? "showBlock" : ""}`}
+    >
       <CurrentPaymentSettings
         autoPayments={autoPayments}
         language={language}

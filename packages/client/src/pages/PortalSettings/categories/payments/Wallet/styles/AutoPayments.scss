@@ -115,15 +115,15 @@
   }
 
   .settings-wrapper {
-    opacity: 1;
+    opacity: 0;
     transform: translateY(10px);
 
     &.animated {
       animation: fadeInSettings 0.5s ease-in-out forwards;
     }
 
-    &.hideBlock {
-      opacity: 0;
+    &.showBlock {
+      opacity: 1;
     }
   }
 }

@@ -1,5 +1,4 @@
 {
   "DisconnectCloudTitle": "Deconectare de la cloud",
-  "SuccessDeleteThirdParty": "Serviciul de parte terță {{service}} este eliminat",
-  "ThirdPartyDisconnectPrompt": "Ești sigur că vrei să ștergi {{service}}? Aceasta nu va afecta contul tău {{account}} în niciun fel."
+  "SuccessDeleteThirdParty": "Serviciul de parte terță {{service}} este eliminat"
 }

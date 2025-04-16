@@ -1,6 +1,4 @@
 {
   "EditComment": "Modifier le commentaire",
-  "Version": "Ver.",
-  "DeleteVersion": "Supprimer la version",
-  "DeleteVersionDescription": "Vous êtes sur le point de supprimer une version de fichier. Il ne sera plus possible de la consulter ou de la restaurer. Êtes-vous sûr de vouloir continuer ?"
+  "Version": "Ver."
 }

@@ -14,6 +14,5 @@
   "ReassigningDataToAnother": "<0>{{fromUser}}</0> පරිශ්‍රීලකයාගෙන් <1>{{toUser}}</1> වෙත දත්ත යළි පැවරීමේ ක්‍රියාවලිය ආරම්භ වී ඇත. එයට සැලකිය යුතු කාලයක් ගත විය හැකි බව කරුණාවෙන් සලකන්න.",
   "ReassigningDataToItself": "<0>{{fromUser}}</0> පරිශ්‍රීලකයාගෙන් <1>{{toUser}}</1> <2>{{you}}</2> වෙත දත්ත යළි පැවරීමේ ක්‍රියාවලිය ආරම්භ වී ඇත. එයට සැලකිය යුතු කාලයක් ගත විය හැකි බව කරුණාවෙන් සලකන්න.",
   "StartTransferAgain": "මාරුව නැවත අරඹන්න",
-  "UserToWhomTheDataWillBeTransferred": "පරිශ්‍රීලකයාගෙන් දත්ත ලබන්නා ",
-  "RoomsOnlyReassignment": "අපතන්නම් සම්බන්ධතා විසින් නිර්මාණය කරන ලද గదులను මාරුවනු ඇත. {contact}."
+  "UserToWhomTheDataWillBeTransferred": "පරිශ්‍රීලකයාගෙන් දත්ත ලබන්නා "
 }

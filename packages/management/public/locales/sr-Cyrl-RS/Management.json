@@ -24,15 +24,5 @@
   "SettingsForAll": "Ова подешавања ће бити ефективна за све ваше просторе.",
   "Subheader": "Користите овај одељак да направите неколико простора и учините их доступним својим корисницима",
   "SubmitDelete": "Пошаљи захтев за брисање",
-  "VisitSpace": "Посетите овај простор после креирања",
-  "DecryptStorage": "Дешифруј складиште",
-  "DecryptWarningDialogContent": "Sva mesta će postati nedostupna tokom procesa dešifrovanja. Da li ste sigurni da želite da nastavite?",
-  "EncryptData": "Šifruj podatke u mirovanju",
-  "EncryptDataDescription": "{{organizationName}} koristi AES-256 шифровање за заштиту података у складишту.",
-  "EncryptDataWarningDescription": "Шифровање складишта може потрајати. Простор ће бити недоступан током процеса. Уверите се да имате довољно места за складиштење и да су ваши подаци архивирани. Немојте заборавити да искључите аутоматске архиве и зауставите све покренуте. Иначе, то ће бити урађено аутоматски.",
-  "EncryptStorage": "Шифруј складиште",
-  "EncryptWarningDialogContent": "Svi prostori će postati nedostupni tokom procesa enkripcije. Da li ste sigurni da želite da nastavite?",
-  "MoreDetails": "За више детаља о томе како да зауставите услуге, погледајте нашу <1>{{link}}</1>.",
-  "NotifyUsers": "Obavestite korisnike da prostor neće biti dostupan.",
-  "StorageEncrypted": "Шифрована складишта"
+  "VisitSpace": "Посетите овај простор после креирања"
 }

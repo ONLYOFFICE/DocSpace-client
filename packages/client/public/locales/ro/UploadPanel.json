@@ -1,7 +1,5 @@
 {
   "CancelUpload": "Încărcarea a fost întreruptă. Unele fișiere nu au fost încărcate.",
   "HideInput": "Ascunde",
-  "Ready": "Gata",
-  "UploadingAndConversion": "Încărcare & Conversie",
-  "UploadingError": "Eroare la încărcare"
+  "Ready": "Gata"
 }

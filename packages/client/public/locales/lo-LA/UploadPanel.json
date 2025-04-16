@@ -1,7 +1,5 @@
 {
   "CancelUpload": "ການອັບໂຫຼດຖືກຂັດຈັງຫວະ. ບາງໄຟລ໌ບໍ່ໄດ້ຖືກອັບໂຫລດ.",
   "HideInput": "ເຊື່ອງ",
-  "Ready": "ແລ້ວໆ",
-  "UploadingAndConversion": "Prenos podataka & Konverzija",
-  "UploadingError": "Napaka pri ŝarĝado"
+  "Ready": "ແລ້ວໆ"
 }

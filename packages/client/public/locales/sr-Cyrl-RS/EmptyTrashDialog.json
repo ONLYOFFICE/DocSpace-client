@@ -1,6 +1,4 @@
 {
   "DeleteForeverButton": "Обриши заувек",
-  "DeleteForeverTitle": "Обрисати заувек?",
-  "DeleteForeverNote": "Svi stavke iz sekcije {{sectionName}} biće obrisani zauvek. Не бисте могли да их вратите.",
-  "SuccessEmptyAction": "{{sectionName}} секција испражњена"
+  "DeleteForeverTitle": "Обрисати заувек?"
 }

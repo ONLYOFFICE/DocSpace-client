@@ -1,7 +1,5 @@
 {
   "CancelUpload": "Il caricamento è stato interrotto. Alcuni file non sono stati caricati.",
   "HideInput": "Nascondere",
-  "Ready": "Fatto",
-  "UploadingAndConversion": "Caricamento e Conversione",
-  "UploadingError": "Erro durante il caricamento"
+  "Ready": "Fatto"
 }

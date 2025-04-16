@@ -34,8 +34,5 @@
   "SuccessDeletePersonalData": "Şəxsi məlumatlar müvəffəqiyyətlə silindi",
   "SuccessSentInvitation": "Dəvətnamə müvəffəqiyyətlə göndərildi",
   "SuccessSentMultipleInvitatios": "Dəvətlər uğurla göndərildi",
-  "WithoutGroup": "Qrupsuz",
-  "MembersCount": "üzvlər: {{count}}",
-  "ShareGuest": "Qonaqı ilə paylaş",
-  "SuccessCopyContantLink": "Kopyalama uğurla tamamlandı. Link {expirationTime} gün ərzində etibarlıdır. <strong >Link {expirationTime} gün ərzində etibarlıdır.</strong>"
+  "WithoutGroup": "Qrupsuz"
 }

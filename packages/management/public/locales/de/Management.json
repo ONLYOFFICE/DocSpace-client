@@ -24,15 +24,5 @@
   "SettingsForAll": "Diese Einstellungen gelten für all Ihre Bereiche.",
   "Subheader": "In diesem Abschnitt können Sie mehrere Spaces erstellen und diese für Ihre Benutzer zugänglich machen",
   "SubmitDelete": "Löschanforderung absenden",
-  "VisitSpace": "Besuchen Sie dieses Space nach der Erstellung",
-  "DecryptStorage": "Speicher entschlüsseln",
-  "DecryptWarningDialogContent": "Alle Leerzeichen werden während des Decryptierungsprozesses nicht verfügbar sein. Sind Sie sicher, dass Sie fortfahren möchten?",
-  "EncryptData": "Daten im Ruhezustand verschlüsseln",
-  "EncryptDataDescription": "{{organizationName}} verwendet AES-256-Verschlüsselung, um Daten im Ruhezustand in der Speicherung zu schützen.",
-  "EncryptDataWarningDescription": "Die Speicherverschlüsselung kann Zeit in Anspruch nehmen. Die Speicherbereiche sind während des Vorgangs nicht verfügbar. Stellen Sie sicher, dass Sie genügend Speicherplatz haben und Ihre Daten gesichert sind. Vergessen Sie nicht, automatische Backups zu deaktivieren und alle laufenden zu stoppen. Andernfalls wird dies automatisch erfolgen. {field} {min} {max}",
-  "EncryptStorage": "Speicher verschlüsseln",
-  "EncryptWarningDialogContent": "Alle Leerzeichen werden während des Verschlüsselungsprozesses nicht verfügbar. Sind Sie sicher, dass Sie fortfahren möchten?",
-  "MoreDetails": "Für weitere Details zum Stoppen von Diensten, bitte beachten Sie unser <1>{{link}}</1>.",
-  "NotifyUsers": "Benachrichtigen Sie die Benutzer, dass der Bereich {space} nicht verfügbar sein wird.",
-  "StorageEncrypted": "Speicher verschlüsselt"
+  "VisitSpace": "Besuchen Sie dieses Space nach der Erstellung"
 }

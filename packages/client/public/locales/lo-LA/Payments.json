@@ -36,16 +36,5 @@
   "UpgradePlan": "ແຜນການຍົກລະດັບ",
   "UserNotFound": "ບໍ່ພົບຜູ້ໃຊ້ <1>{{email}}</1>.",
   "UserNotFoundMatchingEmail": "ພວກເຮົາບໍ່ສາມາດຊອກຫາຜູ້ໃຊ້ທີ່ມີອີເມວ Stripe ທີ່ກົງກັນໄດ້.",
-  "YourPrice": "ລາຄາຂອງເຈົ້າ",
-  "CannotCreateNewRoom": "Soba ne more biti kreirana.",
-  "CannotCreatePaidUsers": "Плаћени корисници не могу бити додати.",
-  "CannotRestoreRoom": "Soba ne more biti obnovljena.",
-  "NewRoomWillExceedLimit": "Создаването на тази стая не е възможно, тъй като е достигнат лимитът за броя на стаите, включени във вашия текущ план.",
-  "NewUsersWillExceedMembersLimit": "Dodajanje novih plačljivih uporabnikov ni možno, saj je dosežena meja za število skrbnikov, vključeno v vašo trenutno tarifo. {field} {min} {max}",
-  "NotPossibleRoomRestoring": "Obnavljanje te sobe ni mogoče, saj je dosežena meja za število sob vključeno v vašo trenutno shemo.",
-  "NumberOfRoomsAccordingToTariff": "Število sob po vaši tarifni shemi: {{currentValue}}/{{maxValue}}",
-  "NumberOfUsersAccordingToTariff": "Število skrbnikov po vaši tarifni shemi: {{currentValue}}/{{maxValue}}",
-  "RoomsQuotaAlmostExhausted": "Kvota soba je skoraj izčrpana.",
-  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/year</3>",
-  "UsersQuotaAlmostExhausted": "Kvota plaćanih korisnika je skoro iscrpljena."
+  "YourPrice": "ລາຄາຂອງເຈົ້າ"
 }

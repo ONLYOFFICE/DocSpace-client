@@ -8,16 +8,5 @@
   "FormCompletedSuccessfully": "Formular je završen",
   "FormNumber": "Broj formulara",
   "FormOwner": "Vlasnik formulara",
-  "Title": "Formular je završen",
-  "FillOutForm": "Ispunite formular",
-  "FormFinalized": "Forma finalizovana",
-  "FormSectionCompleted": "Kompletiran odeljak obrasca",
-  "FormVDRCompletedDescription": "Forma je u potpunosti popunjena od strane svih uloga i sada je finalizovana. Dostupna je u načinu rada za čitanje.",
-  "FormVDRConfirmationOfStartDescription": "Obaveštenje je već poslato korisniku u prvoj ulozi, podstičući ga da popuni formular. Možete preći do sobe ili podeliti link za popunjavanje sa učesnicima. {field} {min} {max}",
-  "FormVDRConfirmationOfStartTitle": "Формулар је спреман за попуњавање у соби {room}.",
-  "FormVDRSectionCompletedDescription": "Dodeli deo PDF obrasca je uspešno popunjen. Status popunjavanja obrasca se može pratiti u sobi i preko panela za status popunjavanja. E-mail obaveštenje će biti poslato čim bude obrazac u potpunosti popunjen.",
-  "FormVDRYourTurnDescription": "Добијени сте на задатак да попуните образац као прву улогу. Обавештење је послато на вашу електронску пошту. Можете почети са попуњавањем сада или копирати линк за попуњавање и вратити се касније.",
-  "LinkToFillOutForm": "Link za popunjavanje obrasca:",
-  "LinkToForm": "Link do obrasca: {form}",
-  "LinkToViewOnlyForm": "Link do obrasca samo za pregled:"
+  "Title": "Formular je završen"
 }

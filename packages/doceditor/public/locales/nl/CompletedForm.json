@@ -8,16 +8,5 @@
   "FormCompletedSuccessfully": "Formulier succesvol ingevuld",
   "FormNumber": "Formuliernummer",
   "FormOwner": "Formulier eigenaar",
-  "Title": "Het formulier is ingevuld",
-  "FillOutForm": "Vul het formulier in",
-  "FormFinalized": "Formulier voltooid",
-  "FormSectionCompleted": "Voltooide formuliersectie",
-  "FormVDRCompletedDescription": "Het formulier is volledig ingevuld door alle rollen en is nu voltooid. Het is beschikbaar in alleen-lezen modus.",
-  "FormVDRConfirmationOfStartDescription": "Er is al een melding naar de gebruiker in de eerste rol gestuurd, om hen te stimuleren het formulier in te vullen. U kunt naar de ruimte navigeren of de link om het formulier in te vullen delen met de deelnemers.",
-  "FormVDRConfirmationOfStartTitle": "Het formulier is klaar om in te vullen in de kamer {room}.",
-  "FormVDRSectionCompletedDescription": "Het toegewezen deel van het PDF-formulier is succesvol voltooid. De vulstatus van het formulier kan worden gemonitord in de ruimte en via het vulstatuspaneel. Er wordt een e-mailnotificatie verzonden zodra het formulier volledig is voltooid.",
-  "FormVDRYourTurnDescription": "U wordt toegewezen om het formulier als eerste in te vullen. Er is een melding naar uw e-mail gestuurd. U kunt nu beginnen met het invullen of de link om het formulier in te vullen kopiëren en later terugkeren.",
-  "LinkToFillOutForm": "Link om het formulier in te vullen:",
-  "LinkToForm": "Link naar formulier: {field}",
-  "LinkToViewOnlyForm": "Link naar formulier alleen-lezen:"
+  "Title": "Het formulier is ingevuld"
 }

@@ -4,14 +4,5 @@
   "ChangeUserTypeButton": "Thay đổi loại",
   "ChangeUserTypeMessage": "Người dùng loại <strong>'{{ firstType }}'</strong> sẽ được chuyển sang loại <strong>'{{ secondType }}'</strong>.",
   "SuccessChangeGuestType": "Kiểu khách đã được thay đổi thành công",
-  "SuccessChangeUserType": "Loại người dùng đã được thay đổi thành công",
-  "ChangeContactType": "Endre kontakttype",
-  "ChangeGuestsTypeToAdmin": "Gjest <strong>{{userName}}</strong> vil bli flyttet til {{membersSection}} seksjonen og tildelt <strong>'{{ secondType }}'</strong> typen. {{productName}} administratorer kan få tilgang til {{productName}} innstillinger, administrere og arkivere rom, invitere nye brukere og tildele roller under deres nivå. {{productName}} administratorer har tilgang til {{documentsSection}} seksjonen.",
-  "ChangeGuestsTypeToAdminMulti": "De utvalgte gjestene vil bli flyttet til {{membersSection}} seksjonen og tildelt <strong>'{{ secondType }}'</strong> typen. {{productName}} administratorer kan få tilgang til {{productName}} innstillinger, administrere og arkivere rom, invitere nye brukere og tildele roller under deres nivå. {{productName}} administratorer har tilgang til {{documentsSection}} seksjonen.",
-  "ChangeGuestsTypeToManager": "Gjest <strong>{{userName}}</strong> vil bli flyttet til {{membersSection}} seksjonen og tildelt typen <strong>'{{ secondType }}'</strong>. Romadministratorer kan opprette og administrere de tildelte rommene, invitere nye brukere, og tildele roller som romadministrator og lavere. Romadministratorer har tilgang til {{documentsSection}} seksjonen.",
-  "ChangeGuestsTypeToManagerMulti": "De utvalgte gjestene vil bli flyttet til {{membersSection}} seksjonen og tildelt typen <strong>'{{ secondType }}'</strong>. Romadministratorer kan opprette og administrere de tildelte rommene, invitere nye brukere og tildele roller som romadministrator og lavere. Romadministratorer har tilgang til {{documentsSection}} seksjonen.",
-  "ChangeUserTypeNote": "<1>Merk:</1> du kan ikke endre typen for {{productName}} admin og for deg selv.",
-  "DataReassignmentInfo": "Rommene opprettet av denne brukeren vil automatisk bli tildelt deg. For å tildele rommene til en annen person, klikk på den tilhørende lenken nedenfor.",
-  "DataReassignmentWithFilesDeletion": "Alle delte filer opprettet av denne kontakten vil automatisk bli tildelt deg i {days} dager</{days}>. For å tildele rommene/delte filer på nytt til en annen person, klikk på den tilsvarende lenken nedenfor.",
-  "PersonalDataDeletion": "Alle filer og mapper i {{sectionName}} -seksjonen for denne kontakten vil bli <1>permanent slettet om 30 dager</1>."
+  "SuccessChangeUserType": "Loại người dùng đã được thay đổi thành công"
 }

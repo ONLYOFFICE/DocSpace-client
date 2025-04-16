@@ -4,14 +4,5 @@
   "ChangeUserTypeButton": "Wijzig type",
   "ChangeUserTypeMessage": "Gebruikers met de <strong>'{{ firstType }}'</strong> type worden verplaatst naar <strong>'{{ secondType }}'</strong> type.",
   "SuccessChangeGuestType": "Het gasttype is succesvol gewijzigd",
-  "SuccessChangeUserType": "Het gebruikerstype werd met succes gewijzigd",
-  "ChangeContactType": "Wijzig contacttype",
-  "ChangeGuestsTypeToAdmin": "Gast <strong>{{userName}}</strong> wordt verplaatst naar de {{membersSection}} sectie en krijgt het <strong>'{{ secondType }}'</strong> type toegewezen. {{productName}} beheerders kunnen toegang krijgen tot {{productName}} instellingen, kamers beheren en archiveren, nieuwe gebruikers uitnodigen en rollen toewijzen onder hun niveau. {{productName}} beheerders hebben toegang tot de {{documentsSection}} sectie.",
-  "ChangeGuestsTypeToAdminMulti": "De geselecteerde gasten worden verplaatst naar de {{membersSection}} sectie en toegewezen aan het <strong>'{{ secondType }}'</strong> type. {{productName}} beheerders kunnen toegang krijgen tot {{productName}} instellingen, kamers beheren en archiveren, nieuwe gebruikers uitnodigen en rollen toewijzen onder hun niveau. {{productName}} beheerders hebben toegang tot de {{documentsSection}} sectie.",
-  "ChangeGuestsTypeToManager": "Gast <strong>{{userName}}</strong> wordt verplaatst naar de {{membersSection}} sectie en krijgt het <strong>'{{ secondType }}'</strong> type toegewezen. Ruimtebeheerders kunnen de toegewezen kamers aanmaken en beheren, nieuwe gebruikers uitnodigen en rollen toewijzen van Ruimtebeheerder en lager. Ruimtebeheerders hebben toegang tot de {{documentsSection}} sectie.",
-  "ChangeGuestsTypeToManagerMulti": "De geselecteerde gasten worden verplaatst naar de {{membersSection}} sectie en toegewezen aan het <strong>'{{ secondType }}'</strong> type. Ruimtebeheerders kunnen de toegewezen kamers aanmaken en beheren, nieuwe gebruikers uitnodigen en rollen toewijzen van Ruimtebeheerder en lager. Ruimtebeheerders hebben toegang tot de {{documentsSection}} sectie.",
-  "ChangeUserTypeNote": "<1>Let op:</1> u kunt het type niet wijzigen voor de {{productName}} beheerder en voor uzelf.",
-  "DataReassignmentInfo": "Kamers die door deze gebruiker zijn aangemaakt, worden automatisch aan jou toegewezen. Om de kamers toe te wijzen aan een andere persoon, klik op de bijbehorende link hieronder.",
-  "DataReassignmentWithFilesDeletion": "Alle gedeelde bestanden gemaakt door deze contactpersoon worden automatisch aan u toegewezen binnen {30} dagen</1>. Om de kamers/gedeelde bestanden opnieuw toe te wijzen aan een andere persoon, klik op de bijbehorende link hieronder.",
-  "PersonalDataDeletion": "Alle bestanden en mappen in de {{sectionName}} sectie van dit contact zullen <1>permanent verwijderd worden in 30 dagen</1>."
+  "SuccessChangeUserType": "Het gebruikerstype werd met succes gewijzigd"
 }

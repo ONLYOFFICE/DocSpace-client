@@ -46,6 +46,5 @@
   "UserNotFound": "Používateľ <1>{{email}}</1> sa nenašiel.",
   "UserNotFoundMatchingEmail": "Nepodarilo sa nám nájsť používateľa so zodpovedajúcou e-mailovou adresou Stripe.",
   "UsersQuotaAlmostExhausted": "Kvóta platených používateľov je takmer vyčerpaná.",
-  "YourPrice": "Vaša cena",
-  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/rok</3>"
+  "YourPrice": "Vaša cena"
 }

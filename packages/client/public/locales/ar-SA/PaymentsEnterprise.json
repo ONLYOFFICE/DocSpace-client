@@ -32,7 +32,5 @@
   "UpgradeToProBannerItemScalabilityHeader": "القابلية للتوسع والتجميع.",
   "UpgradeToProBannerItemSupportDescr": "احصل على مساعدة احترافية سريعة لجميع المشكلات التي تواجهها.",
   "UpgradeToProBannerItemSupportHeader": "دعم تقني.",
-  "UploadLicenseFile": "تحميل ملف الترخيص",
-  "ActivateRenewSubscriptionHeader": "جدد الاشتراك لـ {{license}}",
-  "UpgradeToProBannerInformationAboutShort": "تعرّف على المزيد حول إصدار {{license}} على <1>الموقع الرسمي</1>"
+  "UploadLicenseFile": "تحميل ملف الترخيص"
 }

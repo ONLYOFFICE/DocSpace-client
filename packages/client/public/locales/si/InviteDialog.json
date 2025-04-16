@@ -8,11 +8,5 @@
   "LinkCopySuccess": "සබැඳිය පිටපත් විය",
   "ResetChange": "වෙනස්කම් යළි සකසන්න",
   "SendInvitation": "ආරාධනය යවන්න",
-  "UsersAlreadyAdded": "ඇතැම් අය දැනටමත් එක් කර ඇත",
-  "GroupMaxAvailableRoleWarning": "गट {roleName} भूमिकेसह एका खोलीत जोडले जाऊ शकतात. तथापि, यशस्वीरित्या जोडल्यानंतर आपण गटातील वैयक्तिक वापरकर्त्यांची भूमिका बदलू शकता.",
-  "InviteMembersManuallyDescription": "ईमेलद्वारे {{productName}} ला वैयक्तिकरित्या नवीन सदस्य आमंत्रित करा.",
-  "InviteMembersSearchPlaceholder": "ईमेलद्वारे सदस्यांना आमंत्रित करा.",
-  "InviteToRoomManuallyInfo": "বিদ্যমান {{productName}} কন্টাক্ট যোগ করুন। অথবা ইমেলের মাধ্যমে ব্যক্তিগতভাবে নতুন অতিথি пригласите। নতুন অতিথি আপনার গেস্ট লিস্টে যোগ করা হবে।",
-  "InviteToRoomSearchPlaceholder": "नाव किंवा ईमेलद्वारे शोधा आणि आमंत्रित करा",
-  "UserMaxAvailableRoleWarning": " अतिथी आणि वापरकर्ते यांना रूम व्यवस्थापक म्हणून नियुक्त करता येणार नाही. फक्त रूम आणि {{productName}} प्रशासक या भूमिकेसाठी योग्य आहेत."
+  "UsersAlreadyAdded": "ඇතැම් අය දැනටමත් එක් කර ඇත"
 }

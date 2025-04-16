@@ -108,14 +108,5 @@
   "SubtitleDescription": "Tekstitys lisäkommenteilla tai kuvauksilla nykyiselle hakemistolle.",
   "TabPlugins": "Laajennukset-välilehti",
   "Viewer": "Esikatselu",
-  "ViewerDescription": "Upota esikatselu salliaksesi käyttäjien avata tiedosto katseltavaksi vastaavasta huoneesta.",
-  "NPMCodeConfigStep": "Luo konfigurointiobjekti vaadituilla parametreilla: {field}, {min}, {max}",
-  "NPMCodeCreateStep": "Luo HTML-elementti tunnuksella {id} asetuksista ja lisää se dokumentin runkoon SDK-kehyksen {frame} paikalle.",
-  "NPMCodeDescription": "NPM-paketin kuvaus",
-  "NPMCodeImportStep": "Tuo paketti projektiisi:",
-  "NPMCodeInitStep": "Alusta SDK: {SDK}",
-  "NPMCodeInstallStep": "Asenna paketti npm:stä ja tallenna se package.json-tiedostoon --save: -komennolla.",
-  "NPMCodeUsageStep": "Käytä SDK:n alustusmenetelmää SDK-kehyksen luomiseksi: {field} {min} {max}",
-  "SdkPackageVersionInfo": "Yhdistä pakettiversiona aina {latest}.",
-  "SourceType": "Yhdistämistyyppi"
+  "ViewerDescription": "Upota esikatselu salliaksesi käyttäjien avata tiedosto katseltavaksi vastaavasta huoneesta."
 }

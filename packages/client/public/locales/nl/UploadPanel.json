@@ -1,7 +1,5 @@
 {
   "CancelUpload": "De upload is onderbroken. Sommige bestanden zijn niet geüpload.",
   "HideInput": "Verbergen",
-  "Ready": "Gereed",
-  "UploadingAndConversion": "Uploaden & Conversie",
-  "UploadingError": "Uploadfout"
+  "Ready": "Gereed"
 }

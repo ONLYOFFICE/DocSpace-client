@@ -2,6 +2,5 @@
   "DisplayFileExtension": "Mostrar la extensión del archivo junto al nombre del archivo",
   "DisplayNotification": "Mostrar notificación al mover elementos a la Papelera",
   "OpenSameTab": "Abra el editor {{organizationName}} en la misma pestaña",
-  "OriginalCopy": "Guardar también la copia del archivo en el formato original",
-  "CancellaionNotification": "No muestre el aviso de cancelación de nuevo"
+  "OriginalCopy": "Guardar también la copia del archivo en el formato original"
 }

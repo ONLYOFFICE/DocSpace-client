@@ -34,8 +34,5 @@
   "SuccessDeletePersonalData": "Alle persönlichen Daten wurden erfolgreich gelöscht",
   "SuccessSentInvitation": "Die Einladung wurde erfolgreich gesendet",
   "SuccessSentMultipleInvitatios": "Einladungen wurden erfolgreich versendet",
-  "WithoutGroup": "Ohne Gruppe",
-  "MembersCount": "Mitglieder: {{count}}",
-  "ShareGuest": "Gast teilen",
-  "SuccessCopyContantLink": "Der Link zum Kontakt wurde erfolgreich kopiert. Der Link ist <strong>gültig für 7 Tage.</strong>"
+  "WithoutGroup": "Ohne Gruppe"
 }

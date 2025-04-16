@@ -2,6 +2,5 @@
   "DisplayFileExtension": "Näytä tiedostopääte tiedostonimen perässä ",
   "DisplayNotification": "Näytä ilmoitus, kun siirrät kohteita roskakoriin",
   "OpenSameTab": "Avaa {{organizationName}} editori samassa välilehdessä",
-  "OriginalCopy": "Tallenna kopio tiedostosta myös alkuperäisessä muodossa",
-  "CancellaionNotification": "Älä näytä peruutusilmoitusta uudelleen"
+  "OriginalCopy": "Tallenna kopio tiedostosta myös alkuperäisessä muodossa"
 }

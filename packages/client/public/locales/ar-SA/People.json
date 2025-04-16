@@ -1,7 +1,5 @@
 {
   "LblInviteAgain": "ادعوه مرة أخرى",
   "MessageEmailActivationInstuctionsSentOnEmail": "تم إرسال تعليمات تفعيل البريد الإلكتروني إلى عنوان البريد الإلكتروني <1>{{email}}</1>.",
-  "UserStatus": "الحالة",
-  "RemoveUser": "إزالة المستخدم",
-  "RemoveUserConfirmationText": "أنت على وشك إزالة مستخدم من الغرفة. يرجى ملاحظة أن هذا المستخدم يشارك بنشاط في إكمال النموذج. إذا واصلت، فسيتم إيقاف أي نماذج مشارك فيها عند خطوتهم الحالية. {field} {min} {max}"
+  "UserStatus": "الحالة"
 }

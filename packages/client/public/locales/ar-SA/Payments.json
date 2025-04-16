@@ -46,6 +46,5 @@
   "UserNotFound": "المستخدم <1> {{email}} </1> غير موجود.",
   "UserNotFoundMatchingEmail": "لم نتمكن من العثور على المستخدم الذي يحمل نفس بريد سترب المطابق.",
   "UsersQuotaAlmostExhausted": "تم استنفاد حصة المستخدمين المدفوعين تقريبًا.",
-  "YourPrice": "سعرك",
-  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/year</3>"
+  "YourPrice": "سعرك"
 }

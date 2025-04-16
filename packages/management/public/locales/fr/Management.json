@@ -24,15 +24,5 @@
   "SettingsForAll": "Ces paramètres seront applicables à tous vos espaces.",
   "Subheader": "Utilisez cette section pour créer plusieurs espaces et les rendre accessibles à vos utilisateurs",
   "SubmitDelete": "Envoyer une demande de suppression",
-  "VisitSpace": "Visiter cet espace après la création",
-  "DecryptStorage": "Décrypter le stockage",
-  "DecryptWarningDialogContent": "Tous les espaces deviendront indisponibles pendant le processus de déchiffrement. Êtes-vous sûr de vouloir continuer {process} jusqu'à {field} ? {min} {max}",
-  "EncryptData": "Chiffrer les données au repos",
-  "EncryptDataDescription": "{{organizationName}} utilise le chiffrement AES-256 pour protéger les données au repos dans le stockage.",
-  "EncryptDataWarningDescription": "Le chiffrement du stockage peut prendre du temps. Les espaces seront indisponibles pendant le processus. Assurez-vous que vous disposez de suffisamment d'espace de stockage et que vos données sont sauvegardées. N'oubliez pas de désactiver les sauvegardes automatiques et d'arrêter toutes les sauvegardes en cours. Sinon, cela sera fait automatiquement.",
-  "EncryptStorage": "Chiffrer le stockage",
-  "EncryptWarningDialogContent": "Tous les espaces deviendront indisponibles pendant le processus de cryptage. Êtes-vous sûr de vouloir continuer ?",
-  "MoreDetails": "Pour plus de détails sur la façon d'arrêter les services, veuillez consulter notre <1>{{link}}</1>.",
-  "NotifyUsers": "Informez les utilisateurs que l'espace sera indisponible.",
-  "StorageEncrypted": "Stockage crypté"
+  "VisitSpace": "Visiter cet espace après la création"
 }

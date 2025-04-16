@@ -46,6 +46,5 @@
   "UserNotFound": "<1>{{email}}</1> kullanıcısı bulunamad.",
   "UserNotFoundMatchingEmail": "Eşleşen Stripe e-postasına sahip kullanıcıyı bulamadık.",
   "UsersQuotaAlmostExhausted": "Ücretli kullanıcı kotası neredeyse doldu.",
-  "YourPrice": "Ücret",
-  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/yıl</3>"
+  "YourPrice": "Ücret"
 }

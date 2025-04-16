@@ -1,7 +1,5 @@
 {
   "LblInviteAgain": "Mời lại",
   "MessageEmailActivationInstuctionsSentOnEmail": "Email hướng dẫn kích hoạt đã được gửi đến địa chỉ email <1>{{email}}</1>.",
-  "UserStatus": "Trạng thái",
-  "RemoveUser": "Fjern bruker",
-  "RemoveUserConfirmationText": "Du er i øyeblikket i ferd med å fjerne en bruker fra rommet. Vær oppmerksom på at denne brukeren aktivt deltar i skjemautfylling. Hvis du fortsetter, vil alle skjemaer de er involvert i bli satt på pause på deres trinn. {field} {min} {max}"
+  "UserStatus": "Trạng thái"
 }

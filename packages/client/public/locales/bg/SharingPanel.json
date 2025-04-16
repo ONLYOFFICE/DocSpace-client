@@ -2,6 +2,5 @@
   "ExternalLink": "Външна връзка",
   "LinkName": "Име на линка",
   "ShareEmailBody": "Даден Ви е достъп до документ {{itemName}}. Кликнете върху връзката долу, за да отворите документа сега: {{shareLink}}.",
-  "ShareEmailSubject": "Даден Ви е достъп до документ {{itemName}}",
-  "RoleForLink": "Роля за връзка"
+  "ShareEmailSubject": "Даден Ви е достъп до документ {{itemName}}"
 }

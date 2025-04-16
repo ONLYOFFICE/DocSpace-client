@@ -44,8 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "Carica dal dispositivo",
   "UploadFromPortalTitle": "Carica da {{productName}}",
   "UploadPDFFormOptionDescription": "Seleziona un modulo PDF pronto disponibile in {{productName}} e caricalo nella stanza.",
-  "VirtualDataRoomEmptyTitle": "Benvenuto nella Virtual Data Room",
-  "EmptyTemplatesDescription": "Puoi creare un modello da una stanza nella sezione Stanze",
-  "EmptyTemplatesTitle": "Nessun template qui per ora",
-  "SectionsUploadDescription": "Carica qualsiasi tipo di file da {{sectionNameFirst}} o {{sectionNameSecond}}"
+  "VirtualDataRoomEmptyTitle": "Benvenuto nella Virtual Data Room"
 }

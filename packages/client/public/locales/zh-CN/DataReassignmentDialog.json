@@ -14,6 +14,5 @@
   "ReassigningDataToAnother": "从用户 <0>{{fromUser}}</0> 向用户 <1>{{toUser}}</1> 转让数据的过程已经开始。请注意，这可能需要相当长的时间。",
   "ReassigningDataToItself": "从用户 <0>{{fromUser}}</0> 到用户<1>{{toUser}}</1> <2>{{you}}</2> 的数据转让过程已开始。请注意，这可能需要相当长的时间。",
   "StartTransferAgain": "再次开始传输",
-  "UserToWhomTheDataWillBeTransferred": "数据传输对象用户",
-  "RoomsOnlyReassignment": "我们将由联系人创建的房间进行转移。{contact} {field} {min} {max}"
+  "UserToWhomTheDataWillBeTransferred": "数据传输对象用户"
 }

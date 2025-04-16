@@ -9,14 +9,5 @@
   "PleaseNote": "සටහන:",
   "ReassignDataToAnotherUser": "වෙනත් පරිශ්‍රීලකයෙක්ට දත්ත පවරන්න",
   "SuccessfullyDeleteUserInfoMessage": "පරිශ්‍රීලකයා සාර්ථකව මකන ලදි",
-  "ToBeAbleToReassignData": "වරකට එක් පරිශ්‍රීලකයෙක් බැගින් මැකීමෙන් දත්ත යළි පැවරීමට හැකි වේ.",
-  "ActionCannotBeUndoneGuests": "निवडलेल्या अपंग अतिथींना {{productName}} मधून काढले जाईल. ही क्रिया पूर्ववत करता येणार नाही.",
-  "DeleteGroupGuestsSuccessMessage": " अतिथी यशस्वीरित्या हटवले गेले आहेत.",
-  "DeleteGuest": "मेहमान हटवा",
-  "DeleteGuests": "मेहमान हटवा",
-  "DeletePersonalDataApplicable": "निवडलेल्या वापरकर्त्यांसाठी लागू आहे ज्यांच्याकडे असे फाइल्स आणि फोल्डर्स आहेत {files} आणि {folders}.",
-  "DeleteReqassignDescriptionGuest": "{{userCaption}} हे सर्व खोल्यांमधून काढले जाईल ज्यामध्ये त्यांना आमंत्रित केले गेले होते. या {{userCaption}} द्वारे खोल्यांमधील तयार केलेले कागदपत्रे आपोआप खोलीच्या मालकांना पुन्हा नियुक्त केले जातील.",
-  "PersonalDataDeletionInfo": "පුද්ගලික දත්ත, තෝරාගත් පරිශීලකයන්ගේ {{sectionNameFirst}} සහ {{sectionNameSecond}}ផ្នែក වල ඇති සියලුම පුද්ගලික ගොනු සහ ෆෝල්ඩሮች శాశ్వతంగా తొలగించబడతాయి. පොදු ස්ථාන වල, గదుల వంటి వాటిలో තෝරාගත් පරිශීලකයන්ගේ ගොනු සහ ෆෝල්డర్లు {{productName}} තුළ રહેશે.",
-  "SuccessfullyDeleteGuestInfoMessage": "অতিथी यशस्वीरित्या हटवण्यात आले आहे.",
-  "UserFilesRemovalScope": "వ్యక్తిగత డేటా, ఈ వినియోగదారుని {{sectionNameFirst}} మరియు {{sectionNameSecond}} విభాగాలలో ఉన్న అన్ని ఫైళ్లు మరియు ఫోల్డర్‌లు శాశ్వతంగా తొలగించబడతాయి."
+  "ToBeAbleToReassignData": "වරකට එක් පරිශ්‍රීලකයෙක් බැගින් මැකීමෙන් දත්ත යළි පැවරීමට හැකි වේ."
 }

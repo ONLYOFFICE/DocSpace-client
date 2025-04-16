@@ -24,15 +24,5 @@
   "SettingsForAll": "Deze instellingen gelden voor al uw ruimtes.",
   "Subheader": "Gebruik dit gedeelte om verschillende ruimtes aan te maken en ze toegankelijk te maken voor uw gebruikers",
   "SubmitDelete": "Dien een verzoek tot verwijdering in",
-  "VisitSpace": "Bezoek deze ruimte na het aanmaken",
-  "DecryptStorage": "Versleutel opslag",
-  "DecryptWarningDialogContent": "Alle spaties worden onbeschikbaar tijdens het decryptieproces. Ben je er zeker van dat je wilt doorgaan?",
-  "EncryptData": "Versleutel data in rust",
-  "EncryptDataDescription": "{{organizationName}} gebruikt AES-256 encryptie om gegevens in rust te beschermen in opslag.",
-  "EncryptDataWarningDescription": "Opslagencryptie kan even duren. De ruimte zal niet beschikbaar zijn tijdens het proces. Zorg ervoor dat u voldoende opslag heeft en dat uw gegevens zijn opgeslagen. Vergeet niet om automatische back-ups uit te schakelen en alle actieve back-ups te stoppen. Anders wordt dit automatisch gedaan.",
-  "EncryptStorage": "Versleutel opslag",
-  "EncryptWarningDialogContent": "Alle spaties worden onbeschikbaar tijdens het encryptieproces. Ben je er zeker van dat je wilt doorgaan?",
-  "MoreDetails": "Voor meer details over hoe u services kunt stoppen, raadpleeg onze <1>{{link}}</1>.",
-  "NotifyUsers": "Informeer gebruikers dat de ruimte niet beschikbaar zal zijn.",
-  "StorageEncrypted": "Opslag versleuteld"
+  "VisitSpace": "Bezoek deze ruimte na het aanmaken"
 }

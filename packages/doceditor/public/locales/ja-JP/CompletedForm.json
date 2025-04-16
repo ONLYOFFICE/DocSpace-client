@@ -8,16 +8,5 @@
   "FormCompletedSuccessfully": "フォームを正常に完成させました",
   "FormNumber": "フォーム番号",
   "FormOwner": "フォームの所有者",
-  "Title": "フォームが完成しました",
-  "FillOutForm": "フォームに記入してください。",
-  "FormFinalized": "フォームが完了しました",
-  "FormSectionCompleted": "フォームセクション完了",
-  "FormVDRCompletedDescription": "すべてのロールによってフォームが完全に完了し、最終化されました。閲覧専用モードで利用可能です。",
-  "FormVDRConfirmationOfStartDescription": "最初のロールのユーザーには、すでに通知が送信され、フォームへの記入を促しています。ルームに移動するか、記入リンクを参加者と共有することができます。{field} の {min} から {max} までの範囲で調整可能です。",
-  "FormVDRConfirmationOfStartTitle": "部屋で入力できるフォームです。 ({field}) が準備できました。 最小値は {min} で、最大値は {max} です。",
-  "FormVDRSectionCompletedDescription": "PDFフォームの割り当てられた部分は正常に完了しました。フォームの入力状況は、部屋と「入力状況パネル」から監視できます。フォームが完全に完了すると、メール通知が送信されます。",
-  "FormVDRYourTurnDescription": "あなたは最初の役割として、このフォームへの入力が割り当てられています。通知はあなたのメールアドレスに送信されました。今すぐ入力を開始するか、入力リンクをコピーして後で戻ることができます。{field} {min} {max}",
-  "LinkToFillOutForm": "フォームへのリンク:",
-  "LinkToForm": "フォームへのリンク:",
-  "LinkToViewOnlyForm": "閲覧専用フォームへのリンク:"
+  "Title": "フォームが完成しました"
 }

@@ -2,6 +2,5 @@
   "DisplayFileExtension": "عرض امتداد الملف بجوار اسم الملف",
   "DisplayNotification": "اعرض الإشعار عند نقل العناصر إلى المهملات",
   "OpenSameTab": "افتح محرر {{organizationName}} في نفس علامة التبويب",
-  "OriginalCopy": "احفظ نسخة الملف بالتنسيق الأصلي أيضًا",
-  "CancellaionNotification": "لا تعرض إشعار الإلغاء مرة أخرى"
+  "OriginalCopy": "احفظ نسخة الملف بالتنسيق الأصلي أيضًا"
 }

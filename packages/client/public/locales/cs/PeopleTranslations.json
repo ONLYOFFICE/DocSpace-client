@@ -34,8 +34,5 @@
   "SuccessDeletePersonalData": "Osobní údaje byly úspěšně odstraněny",
   "SuccessSentInvitation": "Pozvánka byla úspěšně odeslána",
   "SuccessSentMultipleInvitatios": "Pozvánky byly úspěšně odeslány",
-  "WithoutGroup": "Bez skupiny",
-  "MembersCount": "členové: {{count}}",
-  "ShareGuest": "Sdílet hosta",
-  "SuccessCopyContantLink": "Odkaz byl úspěšně zkopírován. Odkaz je <strong>valid for 7 days.</strong>"
+  "WithoutGroup": "Bez skupiny"
 }

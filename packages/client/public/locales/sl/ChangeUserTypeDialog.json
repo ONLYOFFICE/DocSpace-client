@@ -4,14 +4,5 @@
   "ChangeUserTypeButton": "Spremeni tip",
   "ChangeUserTypeMessage": "Uporabniki tipa <strong>'{{ firstType }}'</strong> bodo premaknjeni v <strong>'{{ secondType }}'</strong> tip.",
   "SuccessChangeGuestType": "Tip gosta je bil uspešno spremenjen",
-  "SuccessChangeUserType": "Vrsta uporabnika je bila uspešno spremenjena",
-  "ChangeContactType": "Spremenite vrsto stika",
-  "ChangeGuestsTypeToAdmin": "Povabljeni <strong>{{userName}}</strong> bo premaknjen v razdelek {{membersSection}} in mu bo dodeljen tip <strong>'{{ secondType }}'</strong>. Skrbniki {{productName}} lahko dostopajo do nastavitev {{productName}}, upravljajo in arhivirajo sobe, vabijo nove uporabnike in dodeljujejo vloge pod njihovo raven. Skrbniki {{productName}} imajo dostop do razdelka {{documentsSection}}.",
-  "ChangeGuestsTypeToAdminMulti": "Izbrani gostje bodo premaknjeni v razdelek {{membersSection}} in jim bo dodeljen tip <strong>'{{ secondType }}'</strong>. Skrbniki {{productName}} lahko dostopajo do nastavitev {{productName}}, upravljajo in arhivirajo sobe, vabijo nove uporabnike in dodeljujejo vloge pod njihovo raven. Skrbniki {{productName}} imajo dostop do razdelka {{documentsSection}}.",
-  "ChangeGuestsTypeToManager": "Gost <strong>{{userName}}</strong> bo preseljen v razdelek <strong>{{membersSection}}</strong> in mu bo dodeljen tip <strong>'{{ secondType }}'</strong>. Skrbniki sob bo lahko ustvarjali in upravljali dodeljene sobe, povabljali nove uporabnike in dodeljevali vloge skrbnika sobe in nižje. Skrbniki sob imajo dostop do razdelka <strong>{{documentsSection}}</strong>.",
-  "ChangeGuestsTypeToManagerMulti": "Izbrani gostje bodo premaknjeni v razdelek {{membersSection}} in jim bo dodeljen tip <strong>'{{ secondType }}'</strong>. Skrbniki sob lahko ustvarjajo in upravljajo dodeljene sobe, vabijo nove uporabnike in dodeljujejo vloge skrbnika sobe in nižje. Skrbniki sob imajo dostop do razdelka {{documentsSection}}.",
-  "ChangeUserTypeNote": "<1>Opomba:</1> ne morete spremeniti vrste za skrbnika {{productName}} in zasebno.",
-  "DataReassignmentInfo": "Sobe, ki jih je ta uporabnik ustvaril, bodo samodejno dodeljene vam. Za ponovno dodelitev sob drugim, kliknite ustrezno povezavo spodaj.",
-  "DataReassignmentWithFilesDeletion": "Vse skupne datoteke, ustvarjene s tem kontaktom, bodo samodejno dodeljene vam v {30} dneh</1>. Če želite ponovno dodeliti sobe/skupne datoteke drugi osebi, kliknite ustrezno povezavo spodaj.",
-  "PersonalDataDeletion": "Vse datoteke in mape v razdelku {{sectionName}} tega stika bodo <1>trajno izbrisani v 30 dneh</1>."
+  "SuccessChangeUserType": "Vrsta uporabnika je bila uspešno spremenjena"
 }

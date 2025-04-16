@@ -44,8 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükleyin",
   "UploadFromPortalTitle": "{{productName}} kaynağından yükleyin",
   "UploadPDFFormOptionDescription": "{{productName}} içinde bulunan hazır bir PDF formunu seçin ve odaya yükleyin.",
-  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz",
-  "EmptyTemplatesDescription": "Oda bölümünde bir odadan bir şablon oluşturabilirsiniz.",
-  "EmptyTemplatesTitle": "Henüz burada şablon yok",
-  "SectionsUploadDescription": "Her tür dosyayı {{sectionNameFirst}} veya {{sectionNameSecond}}'den yükleyin."
+  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz"
 }

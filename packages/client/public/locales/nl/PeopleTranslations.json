@@ -34,8 +34,5 @@
   "SuccessDeletePersonalData": "Persoonsgegevens zijn met succes verwijderd",
   "SuccessSentInvitation": "De uitnodiging werd met succes verzonden",
   "SuccessSentMultipleInvitatios": "Uitnodigingen zijn succesvol verzonden",
-  "WithoutGroup": "Zonder groep",
-  "MembersCount": "leden: {{count}}",
-  "ShareGuest": "Deel gast",
-  "SuccessCopyContantLink": "Contactlink succesvol gekopieerd. De link is <strong>valid for 7 days.</strong>"
+  "WithoutGroup": "Zonder groep"
 }

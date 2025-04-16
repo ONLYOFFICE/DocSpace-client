@@ -1,6 +1,4 @@
 {
   "DeleteForeverButton": "永久删除",
-  "DeleteForeverTitle": "永久删除？",
-  "DeleteForeverNote": "{{sectionName}} 区域下的所有项目都将被永久删除。您将无法恢复它们。",
-  "SuccessEmptyAction": "{{sectionName}} 部分已清空"
+  "DeleteForeverTitle": "永久删除？"
 }

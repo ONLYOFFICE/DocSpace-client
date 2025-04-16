@@ -1,6 +1,4 @@
 {
   "DeleteForeverButton": "permanent löschen",
-  "DeleteForeverTitle": "löschen? (dies kann nicht rückgängig gemacht werden)",
-  "DeleteForeverNote": "Alle Elemente aus dem Abschnitt {{sectionName}} werden für immer gelöscht. Sie werden sie nicht wiederherstellen können.",
-  "SuccessEmptyAction": "{{sectionName}} Abschnitt geleert"
+  "DeleteForeverTitle": "löschen? (dies kann nicht rückgängig gemacht werden)"
 }

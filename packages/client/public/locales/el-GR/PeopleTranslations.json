@@ -34,8 +34,5 @@
   "SuccessDeletePersonalData": "Τα προσωπικά δεδομένα έχουν διαγραφεί επιτυχώς",
   "SuccessSentInvitation": "Η πρόσκληση στάλθηκε με επιτυχία",
   "SuccessSentMultipleInvitatios": "Οι προσκλήσεις εστάλησαν με επιτυχία",
-  "WithoutGroup": "Χωρίς ομάδα",
-  "MembersCount": "μέλη: {{count}}",
-  "ShareGuest": "Μοιράσου καλεσμένο",
-  "SuccessCopyContantLink": "Αντιγράφηκε επιτυχώς ο σύνδεσμος επικοινωνίας. Ο σύνδεσμος είναι <strong>valid for {days}.</strong>"
+  "WithoutGroup": "Χωρίς ομάδα"
 }

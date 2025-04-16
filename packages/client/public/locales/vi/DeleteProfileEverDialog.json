@@ -16,7 +16,5 @@
   "ReassignDataToAnotherUser": "Chuyển giao lại dữ liệu cho người dùng khác",
   "SuccessfullyDeleteGuestInfoMessage": "Đã xóa khách thành công",
   "SuccessfullyDeleteUserInfoMessage": "Người dùng đã được xóa thành công",
-  "ToBeAbleToReassignData": "Để có thể chuyển giao lại dữ liệu, hãy xóa từng người dùng một.",
-  "PersonalDataDeletionInfo": "Personopplysninger, alle personlige filer og mapper i {{sectionNameFirst}} og {{sectionNameSecond}} seksjoner* av de valgte brukerne vil bli permanent slettet. Filer og mapper til de valgte brukerne som er lagret i felles seksjoner* som rom vil forbli i {{productName}}.",
-  "UserFilesRemovalScope": "Personopplysninger, alle filer og mapper i {{sectionNameFirst}} og {{sectionNameSecond}} seksjonene til denne brukeren vil bli permanent slettet."
+  "ToBeAbleToReassignData": "Để có thể chuyển giao lại dữ liệu, hãy xóa từng người dùng một."
 }

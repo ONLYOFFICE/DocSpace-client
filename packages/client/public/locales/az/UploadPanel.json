@@ -1,7 +1,5 @@
 {
   "CancelUpload": "Yükləmə dayandırıldı. Bəzi fayllar yüklənmədi.",
   "HideInput": "Gizlət",
-  "Ready": "Hazırdır",
-  "UploadingAndConversion": "Yükləmə & Konversiya",
-  "UploadingError": "Yüklənmə xətası"
+  "Ready": "Hazırdır"
 }

@@ -14,7 +14,5 @@
   "MoveToTrashButton": "Zibil qutusuna yerləşdir",
   "UnsubscribeButton": "Abunəlikdən çıx",
   "UnsubscribeNote": "Siyahıda göstərilən elementlərdən abunəliyi dayandırmağı əminsinizmi?",
-  "UnsubscribeTitle": "Abunəlikdən çıxma təsdiqi",
-  "DeleteTemplate": "Siz həqiqətən <1>«{{templateName}}»</1> şablonunu silmək istəyirsiniz? Şablonu qaytarmaq mümkün deyil.",
-  "DeleteTemplates": "Seçilmiş otaq şablonlarını silmək istəyirsinizsə, onlar bərpa edilməz."
+  "UnsubscribeTitle": "Abunəlikdən çıxma təsdiqi"
 }

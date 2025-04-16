@@ -1,7 +1,4 @@
 {
   "DisplayNotification": "අථක කුණුකූඩයට ගෙනයන විට දැනුම්දීමක් පෙන්වන්න",
-  "OriginalCopy": "මුල් ආකෘතියෙන් ද ගොනුවේ පිටපතක් සුරකින්න",
-  "CancellaionNotification": "पुन्हा रद्द करण्याची सूचना दर्शवू नका.",
-  "DisplayFileExtension": "फाईलच्या नावापुढे फाईल एक्सटेन्शन दर्शवा.",
-  "OpenSameTab": "समान टॅबमध्ये {{organizationName}} संपादक उघडा."
+  "OriginalCopy": "මුල් ආකෘතියෙන් ද ගොනුවේ පිටපතක් සුරකින්න"
 }

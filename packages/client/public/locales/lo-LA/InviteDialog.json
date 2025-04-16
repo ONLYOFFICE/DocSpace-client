@@ -8,11 +8,5 @@
   "LinkCopySuccess": "ລິ້ງຖືກຄັດລອກແລ້ວ",
   "ResetChange": "ຣີເຊັດການປ່ຽນແປງ",
   "SendInvitation": "ສົ່ງຄຳເຊີນ",
-  "UsersAlreadyAdded": "ຜູ້ໃຊ້ບາງຄົນໄດ້ຖືກເພີ່ມແລ້ວ",
-  "GroupMaxAvailableRoleWarning": "Grupë mund të shtohen në një dhomë me rolin maksimal {{roleName}}. Megjitanë, ju mund të ndryshoni rolin e përdoruesve individualë në grupë pas saj që është shtuar me sukses.",
-  "InviteMembersManuallyDescription": "Osebno povabite nove člane v {{productName}} preko e-pošte.",
-  "InviteMembersSearchPlaceholder": "Povabite članove putem e-pošte",
-  "InviteToRoomManuallyInfo": "Dodaj obstoječe {{productName}} kontakte. Ali povabi nove goste osebno preko e-pošte. Novim gostom bo dodan na seznam Gostov.",
-  "InviteToRoomSearchPlaceholder": "Poiščite in povabite po imenu ali e-pošti",
-  "UserMaxAvailableRoleWarning": "Gosti in uporabniki ne morejo biti dodeljeni kot skrbniki sob. Samo skrbniki sob in {{productName}} so primerni za določeno vlogo."
+  "UsersAlreadyAdded": "ຜູ້ໃຊ້ບາງຄົນໄດ້ຖືກເພີ່ມແລ້ວ"
 }

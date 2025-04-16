@@ -1,15 +1,1 @@
-{
-  "DescriptionUploading": "Crea formularios PDF en {{productName}}, por ejemplo, en tu {{sectionName}}, y sube los formularios listos a la sala. Utiliza la biblioteca de plantillas integrada y elige entre numerosas plantillas PDF listas.",
-  "HeaderComplete": "Análisis conveniente de las respuestas recopiladas",
-  "HeaderSharing": "Compartir rápidamente",
-  "HeaderStarting": "Comenzando el proceso de completar el formulario",
-  "HeaderSubmitting": "Presentando las respuestas",
-  "HeaderUploading": "Carga fácil de formularios",
-  "TitleComplete": "Revisa los formularios completados y analiza los datos recopilados automáticamente en una hoja de cálculo. Todo – dentro de una habitación.",
-  "TitleSharing": "Invita a otros miembros de {{productName}} a la sala para completar los formularios PDF subidos. Copia un enlace de acceso público para compartir la sala con usuarios externos.",
-  "TitleStarting": "Cuando se abre un formulario para completar, se crea automáticamente una copia individual para cada participante y se guarda en la carpeta ",
-  "TitleSubmitting": "Una vez que se hace clic en el botón 'Complete & Submit' en el formulario abierto copiado, se mueve a la carpeta 'Complete'.",
-  "WelcomeDescription": "Aquí, puede organizar el llenado de formularios PDF de forma sencilla, recolectar y analizar respuestas fácilmente. ¿Listo para empezar?",
-  "WelcomeFillingForm": "¡Bienvenido a la Sala de Llenado de Formularios!",
-  "WelcomeStartTutorial": "Realiza un recorrido corto"
-}
+{}

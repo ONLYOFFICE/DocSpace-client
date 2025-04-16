@@ -44,8 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "Tải lên từ thiết bị",
   "UploadFromPortalTitle": "Tải lên từ {{productName}}",
   "UploadPDFFormOptionDescription": "Chọn một biểu mẫu PDF sẵn có trong {{productName}} và tải nó lên phòng.",
-  "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo",
-  "EmptyTemplatesDescription": "Du kan opprette en mal fra et rom i Seksjon Rom",
-  "EmptyTemplatesTitle": "Ingen maler her ennå",
-  "SectionsUploadDescription": "Last opp filtyper fra {{sectionNameFirst}} eller {{sectionNameSecond}}"
+  "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo"
 }

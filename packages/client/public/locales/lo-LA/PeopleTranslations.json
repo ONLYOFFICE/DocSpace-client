@@ -23,19 +23,5 @@
   "SuccessDeletePersonalData": "ຂໍ້ມູນສ່ວນຕົວໄດ້ຖືກລຶບອອກສໍາເລັດ",
   "SuccessSentInvitation": "ການເຊື້ອເຊີນໄດ້ຖືກສົ່ງສໍາເລັດ",
   "SuccessSentMultipleInvitatios": "ສົ່ງຄຳເຊີນສຳເລັດແລ້ວ",
-  "WithoutGroup": "ໂດຍບໍ່ມີກຸ່ມ",
-  "GuestsRemoved": "Uspešno odstranjen/a gost/gosti {field}",
-  "LDAPAccountTooltip": "Taј korisnički račun se učitava iz LDAP-a. Ako trebate promijeniti korisničko ime i adresu e-pošte, ili onemogućiti korisnika, pogledajte LDAP direktorij.",
-  "LDAPGroupTooltip": "Ta grupa je naložena iz LDAP-a. Ako je potrebno da je preimenujete, dodate ili uklonite korisnike, konsultujte LDAP direktorijum.",
-  "MembersCount": "člani: {{count}}",
-  "PendingInviteTitle": "Čaka se povaba",
-  "RegistrationDate": "Datumi i regjistrimit",
-  "RemoveGuest": "Odstraniti gosta",
-  "RemoveGuestDescription": "Gost <strong>{{userName}}</strong> bo odstranjen iz vseh sob, v katere ste jih povabili. Te dejanje ni mogoče razveljaviti.",
-  "RemoveGuests": "Odstranite goste",
-  "RemoveGuestsDescription": "Izbrani gostje bodo odstranjeni iz vseh sob, v katere ste jih povabili. Ta akcija ni možna za razveljavitev.",
-  "ShareGuest": "Podelite gost",
-  "SSOAccountTooltip": "Taј korisnički račun se učitava iz SSO-a. Ako trebate promijeniti korisničko ime i adresu e-pošte, pogledajte SSO server.",
-  "SuccessChangeGuestStatus": "Status gostja je bil uspešno spremenjen.",
-  "SuccessCopyContantLink": " uspešno je kopirana povezava za kontakt. Povezava je <strong>veljavna 7 dni.</strong>"
+  "WithoutGroup": "ໂດຍບໍ່ມີກຸ່ມ"
 }

@@ -4,14 +4,5 @@
   "ChangeUserTypeButton": "Modificare tip",
   "ChangeUserTypeMessage": "Utilizatorii de tipul <strong>'{{ firstType }}'</strong> vor fi transferați la tipul <strong>'{{ secondType }}'</strong>.",
   "SuccessChangeGuestType": "Tip de invitat a fost modificat cu succes",
-  "SuccessChangeUserType": "Tipul utilizatorului a fost modificat cu succes",
-  "ChangeContactType": "Schimbă tipul de contact",
-  "ChangeGuestsTypeToAdmin": "Oaspetele <strong>{{userName}}</strong> va fi mutat în secțiunea {{membersSection}} și i se va atribui tipul <strong>'{{ secondType }}'</strong>. Administratorii {{productName}} pot accesa setările {{productName}}, pot gestiona și arhiva camere, pot invita utilizatori noi și pot atribui roluri sub nivelul lor. Administratorii {{productName}} au acces la secțiunea {{documentsSection}}.",
-  "ChangeGuestsTypeToAdminMulti": "Oaspeții selectați vor fi mutați în secțiunea {{membersSection}} și vor primi tipul <strong>'{{ secondType }}'</strong>. Administratorii {{productName}} pot accesa setările {{productName}}, pot gestiona și arhiva camere, pot invita utilizatori noi și pot atribui roluri sub nivelul lor. Administratorii {{productName}} au acces la secțiunea {{documentsSection}}.",
-  "ChangeGuestsTypeToManager": "Oaspetele <strong>{{userName}}</strong> va fi mutat în secțiunea {{membersSection}} și i se va atribui tipul <strong>'{{ secondType }}'</strong>. Administratorii de încăperi pot crea și gestiona camerele alocate, pot invita utilizatori noi și pot atribui rolurile de administrator de încăpere și inferior. Administratorii de încăperi au acces la secțiunea {{documentsSection}}.",
-  "ChangeGuestsTypeToManagerMulti": "Oaspeții selectați vor fi mutați în secțiunea {{membersSection}} și vor primi tipul <strong>'{{ secondType }}'</strong>. Administratorii de camere pot crea și gestiona camerele alocate, pot invita utilizatori noi și pot atribui rolurile de administrator de cameră și roluri inferioare. Administratorii de camere au acces la secțiunea {{documentsSection}}.",
-  "ChangeUserTypeNote": "<1>Notă:</1> Nu puteți schimba tipul pentru administratorul {{productName}} și pentru dumneavoastră.",
-  "DataReassignmentInfo": "Camerile create de acest utilizator vor fi alocate automat ție. Pentru a realoca camerele către o altă persoană, dați clic pe linkul corespunzător de mai jos.",
-  "DataReassignmentWithFilesDeletion": "Toate fișierele partajate create de acest contact vor fi <1>automat alocate ție în 30 de zile</1>. Pentru a realoca camerele/fișierele partajate către o altă persoană, dați clic pe linkul corespunzător de mai jos.",
-  "PersonalDataDeletion": "Toate fișierele și folderele din secțiunea {{sectionName}} a acestui contact vor fi <1>șterse permanent în 30 de zile</1>."
+  "SuccessChangeUserType": "Tipul utilizatorului a fost modificat cu succes"
 }

@@ -44,8 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "Качете от устройство",
   "UploadFromPortalTitle": "Качете от {{productName}}",
   "UploadPDFFormOptionDescription": "Изберете готов PDF формуляр, наличен в {{productName}}, и го качете в стаята.",
-  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни",
-  "EmptyTemplatesDescription": "Можете да създадете шаблон от стая в секцията \"Стаи\".",
-  "EmptyTemplatesTitle": "Още няма шаблони тук.",
-  "SectionsUploadDescription": "Качете файлове от всякакъв тип от {{sectionNameFirst}} или {{sectionNameSecond}}"
+  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни"
 }

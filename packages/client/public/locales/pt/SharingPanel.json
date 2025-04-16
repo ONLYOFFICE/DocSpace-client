@@ -2,6 +2,5 @@
   "ExternalLink": "Ligação externa",
   "LinkName": "Nome do link",
   "ShareEmailBody": "Foi-lhe concedido acesso ao documento {{itemName}}. Clique na ligação abaixo para abrir o documento agora mesmo: {{shareLink}}.",
-  "ShareEmailSubject": "Obteve acesso ao documento {{itemName}}.",
-  "RoleForLink": "Papel para link"
+  "ShareEmailSubject": "Obteve acesso ao documento {{itemName}}."
 }

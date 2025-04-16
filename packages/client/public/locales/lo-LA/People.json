@@ -1,7 +1,5 @@
 {
   "LblInviteAgain": "ເຊີນອີກຄັ້ງ",
   "MessageEmailActivationInstuctionsSentOnEmail": "ຄຳແນະນຳກ່ຽວກັບການເປີດໃຊ້ອີເມວໄດ້ຖືກສົ່ງໄປທີ່ອີເມວ <1> {{email}} </1> ທີ່ຢູ່ເມວ.",
-  "UserStatus": "ສະຖານະ",
-  "RemoveUser": "Odstraniti uporabnika",
-  "RemoveUserConfirmationText": "Vi ste na ukazano da odstranite korisnik iz soba. Imajte na umu da ovaj korisnik aktivno učestvuje u popunjavanju formulara. Ako nastavite, svi formulari u koje je uključen biće zaustavljeni na njihovom koraku. {field} {min} {max}"
+  "UserStatus": "ສະຖານະ"
 }

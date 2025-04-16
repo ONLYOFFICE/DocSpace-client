@@ -1,5 +1,4 @@
 {
   "DisconnectCloudTitle": "Прекъснете връзката с облака",
-  "SuccessDeleteThirdParty": "{{service}} от трето лице е изтрит/а",
-  "ThirdPartyDisconnectPrompt": "Сигурни ли сте, че искате да премахнете {{service}}? Това няма да засегне вашия {{account}} акаунт по никакъв начин."
+  "SuccessDeleteThirdParty": "{{service}} от трето лице е изтрит/а"
 }

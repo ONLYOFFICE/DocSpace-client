@@ -1,7 +1,5 @@
 {
   "LblInviteAgain": "Invita di nuovo",
   "MessageEmailActivationInstuctionsSentOnEmail": "Le istruzioni per l'attivazione sono state inviate tramite posta elettronica all'indirizzo <1>{{email}}</1>.",
-  "UserStatus": "Stato",
-  "RemoveUser": "Rimuovi utente",
-  "RemoveUserConfirmationText": "Stai per rimuovere un utente dalla stanza. Tieni presente che questo utente sta partecipando attivamente alla compilazione di un modulo. Se procedi, qualsiasi modulo in cui è coinvolto verrà interrotto alla fase corrente.  Please note that this user is actively participating in form completion. If you proceed, any forms they are involved in will be halted at their {step}."
+  "UserStatus": "Stato"
 }

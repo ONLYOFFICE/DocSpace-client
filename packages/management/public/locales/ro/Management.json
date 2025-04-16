@@ -24,15 +24,5 @@
   "SettingsForAll": "Aceste setări vor fi valabile pentru toate spațiile dvs.",
   "Subheader": "Folosiți această secțiune pentru a crea mai multe spații și a le face accesibile pentru utilizatorii dvs.",
   "SubmitDelete": "Trimite solicitare de ștergere",
-  "VisitSpace": "Vizitați acest spațiu după creare",
-  "DecryptStorage": "Deșifrează stocarea",
-  "DecryptWarningDialogContent": "Toate spațiile vor deveni indisponibile în timpul procesului de decriptare. Ești sigur că dorești să continui?",
-  "EncryptData": "Criptează datele în repaus",
-  "EncryptDataDescription": "{{organizationName}} utilize criptarea AES-256 pentru a proteja datele aflate în repaus în stocare.",
-  "EncryptDataWarningDescription": "Criptarea stocării poate dura ceva timp. Spațiile vor fi indisponibile în timpul procesului. Asigură-te că ai suficient spațiu de stocare și că datele tale sunt salvate ca backup. Nu uita să dezactivezi backup-urile automate și să oprești toate cele care rulează. Altfel, va fi făcut automat.",
-  "EncryptStorage": "Criptează stocarea",
-  "EncryptWarningDialogContent": "Toate spațiile vor deveni indisponibile în timpul procesului de criptare. Ești sigur că dorești să continui?",
-  "MoreDetails": "Pentru mai multe detalii despre cum să opriți serviciile, vă rugăm să consultați <1>{{link}}</1>.",
-  "NotifyUsers": "Anunță utilizatorii că spațiul va fi indisponibil.",
-  "StorageEncrypted": "Stocare criptată"
+  "VisitSpace": "Vizitați acest spațiu după creare"
 }

@@ -44,8 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "Lataa laitteesta",
   "UploadFromPortalTitle": "Lataa {{productName}}:sta",
   "UploadPDFFormOptionDescription": "Valitse valmis PDF-lomake, joka on {{productName}}:ssa ja lataa se huoneeseen.",
-  "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen.",
-  "EmptyTemplatesDescription": "Voit luoda pohjan huoneesta Huoneet-osiossa.",
-  "EmptyTemplatesTitle": "Ei pohjia vielä täällä",
-  "SectionsUploadDescription": "Lataa minkä tahansa tyyppisiä tiedostoja {{sectionNameFirst}} tai {{sectionNameSecond}}."
+  "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen."
 }

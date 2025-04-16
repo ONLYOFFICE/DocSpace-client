@@ -8,16 +8,5 @@
   "FormCompletedSuccessfully": "已成功完成表单",
   "FormNumber": "表单编号",
   "FormOwner": "表单所有者",
-  "Title": "表单已完成",
-  "FillOutForm": "填写表单",
-  "FormFinalized": "表单已完成",
-  "FormSectionCompleted": "表单部分已完成",
-  "FormVDRCompletedDescription": "所有角色已完全填写此表单，目前已最终确定。它现在以只读模式可用。",
-  "FormVDRConfirmationOfStartDescription": "一个通知已经发送给了第一个角色的用户，提示他们填写表单。您可以导航到房间或与参与者分享填写链接。{field} 限制在 {min} 到 {max} 之间。",
-  "FormVDRConfirmationOfStartTitle": "表单已准备好，可在房间内填写 {room}。",
-  "FormVDRSectionCompletedDescription": "PDF 表单的指定部分已成功完成。表单的填写状态可以在房间内和通过填写状态面板进行监控。当表单完全填写完毕后，将会发送电子邮件通知。",
-  "FormVDRYourTurnDescription": "您被分配为第一个角色填写表单。 一份通知已发送至您的邮箱。 您现在可以开始填写，或复制填写链接稍后返回。",
-  "LinkToFillOutForm": "填写表单的链接：",
-  "LinkToForm": "表单链接：",
-  "LinkToViewOnlyForm": "查看只读表单的链接："
+  "Title": "表单已完成"
 }

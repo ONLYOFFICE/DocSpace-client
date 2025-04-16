@@ -34,8 +34,5 @@
   "SuccessDeletePersonalData": "تم حذف البيانات الشخصية بنجاح",
   "SuccessSentInvitation": "تم إرسال الدعوة بنجاح",
   "SuccessSentMultipleInvitatios": "تم إرسال الدعوات بنجاح",
-  "WithoutGroup": "بدون مجموعة",
-  "MembersCount": "الأعضاء: {{count}}",
-  "ShareGuest": "مشاركة ضيف",
-  "SuccessCopyContantLink": "تم نسخ رابط الاتصال بنجاح. الرابط <strong>valid for {min} days.</strong> صالح لمدة {max} أيام."
+  "WithoutGroup": "بدون مجموعة"
 }

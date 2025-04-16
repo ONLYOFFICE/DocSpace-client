@@ -8,16 +8,5 @@
   "FormCompletedSuccessfully": "Formulář byl úspěšně vyplněn",
   "FormNumber": "Číslo formuláře",
   "FormOwner": "Vlastník formuláře",
-  "Title": "Formulář je vyplněn",
-  "FillOutForm": "Vyplňte formulář",
-  "FormFinalized": "Formulář dokončen",
-  "FormSectionCompleted": "Vyplněná sekce formuláře",
-  "FormVDRCompletedDescription": "Formulář byl kompletně vyplněn všemi rolemi a nyní je finalizován. Je dostupný v režimu pro zobrazení pouze.",
-  "FormVDRConfirmationOfStartDescription": "Už byla odeslána notifikace uživateli v první roli, která ho vyzývá k vyplnění formuláře. Můžete přejít do místnosti nebo sdílet odkaz pro vyplnění s účastníky.",
-  "FormVDRConfirmationOfStartTitle": "Formulář je připraven k vyplnění v místnosti.",
-  "FormVDRSectionCompletedDescription": "Přiřazená část PDF formuláře byla úspěšně vyplněna. Stav vyplňování formuláře lze sledovat v místnosti a prostřednictvím panelu Stav vyplňování. E-mailová notifikace bude odeslána po úplném vyplnění formuláře.",
-  "FormVDRYourTurnDescription": "Jste pověřeni vyplnit formulář jako první. Odeslána byla notifikace na vaši e-mailovou adresu. Můžete začít s vyplňováním nyní nebo zkopírovat odkaz pro vyplňování a vrátit se později. {field} {min} {max}",
-  "LinkToFillOutForm": "Odkaz pro vyplnění formuláře: {form_url}",
-  "LinkToForm": "Odkaz na formulář: {Link to form:}",
-  "LinkToViewOnlyForm": "Odkaz na formulář pro zobrazení pouze: {field}"
+  "Title": "Formulář je vyplněn"
 }

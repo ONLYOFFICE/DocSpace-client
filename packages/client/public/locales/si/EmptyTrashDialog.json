@@ -1,6 +1,4 @@
 {
   "DeleteForeverButton": "සදහටම මකන්න",
-  "DeleteForeverTitle": "සදහටම මකන්නද?",
-  "DeleteForeverNote": "{{sectionName}} विभागातील सर्व वस्तू कायमस्वरूपी हटवल्या जातील. तुम्ही त्या पुनर्संचयित करू शकणार नाही.",
-  "SuccessEmptyAction": "{{sectionName}} વિભાગ ખાલી કરવામાં આવ્યો"
+  "DeleteForeverTitle": "සදහටම මකන්නද?"
 }

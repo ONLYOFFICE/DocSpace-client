@@ -2,6 +2,5 @@
   "DisplayFileExtension": "Afișează extensia fișierului de lângă numele fișierului",
   "DisplayNotification": "Afișează notificare când elemente sunt mutate în Coșul de gunoi",
   "OpenSameTab": "Deschide editorul {{organizationName}} în aceeași filă",
-  "OriginalCopy": "Salvează copia și în formatul original",
-  "CancellaionNotification": "Nu afișa din nou notificarea de anulare"
+  "OriginalCopy": "Salvează copia și în formatul original"
 }

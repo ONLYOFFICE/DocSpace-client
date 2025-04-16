@@ -1,7 +1,5 @@
 {
   "LblInviteAgain": "もう一度招待する",
   "MessageEmailActivationInstuctionsSentOnEmail": "電子メールによるアクティベーションの指示は、<1>{{email}}</1>のメールアドレスに送信されています。",
-  "UserStatus": "ステータス",
-  "RemoveUser": "ユーザーを削除する",
-  "RemoveUserConfirmationText": "部屋からユーザーを削除しようとしています。このユーザーが現在フォームの入力を行っていることに注意してください。続行すると、そのユーザーが関与しているフォームは、現在のステップで中断されます。{field}、{min}、{max}。"
+  "UserStatus": "ステータス"
 }

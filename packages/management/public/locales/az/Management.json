@@ -24,15 +24,5 @@
   "SettingsForAll": "Bu parametrlər bütün domenləriniz üçün effektiv olacaq.",
   "Subheader": "Bir neçə sahə yaratmaq və onları istifadəçiləriniz üçün əlçatan etmək üçün bu bölmədən istifadə edin",
   "SubmitDelete": "Silinmə sorğusu göndərin",
-  "VisitSpace": "Yaradıldıqdan sonra bu sahəyə baş çəkin",
-  "DecryptStorage": "Saxlama dekriptəsi",
-  "DecryptWarningDialogContent": "Şifələşdirmə prosesi ərzində bütün boşluqlar əlçatmaz olacaq. Davam etmək istəyirsinizmi?",
-  "EncryptData": "Dayəti sakitlərarada şifrləyin",
-  "EncryptDataDescription": "{{organizationName}} əldə olan məlumatları qorumaq üçün AES-256 şifrləməsinə üstəlik istifadə edir.",
-  "EncryptDataWarningDescription": "Yaddaş şifrləməsi zaman alabilir. Prosesin davam edən vaxtı ərzində yerlər mövcud olmayacaq. Yeterli yaddaşınızın olduğunu və məlumatlarınızın ehtiyat nüsxəsinin alındığını təmin edin. Otomatik ehtiyat nüsxələrini söndürməyi və bütün işləyənləri dayandırmayı unutmayın. Xərcə qatılmazsınız, çünki bu avtomatik olaraq başa çatacaq.",
-  "EncryptStorage": "Saxlama məlumatlarını şifrlə",
-  "EncryptWarningDialogContent": "Şifrləmə prosesi zamanı bütün boşluqlar istifadəyə alınmaz. Davam etmək istəyirsiniz?",
-  "MoreDetails": "Xidmətləri dayandırmaq haqqında daha çox məlumat üçün, bizim <1>{{link}}</1>.-ə zəhmət edib baxın.",
-  "NotifyUsers": "Kullanıcılara məkanın əlçatmaz olacağı barədə xəbər verin.",
-  "StorageEncrypted": "Saxlama şifrlənib"
+  "VisitSpace": "Yaradıldıqdan sonra bu sahəyə baş çəkin"
 }

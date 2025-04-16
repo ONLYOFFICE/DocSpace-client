@@ -35,17 +35,5 @@
   "UpgradePlan": "සැලසුම උත්ශ්‍රේණි කරන්න",
   "UserNotFound": "<1>{{email}}</1> පරිශ්‍රීලකයා හමු නොවිණි.",
   "UserNotFoundMatchingEmail": "අපට ස්ට්‍රයිප් වි-තැපෑලට ගැළපෙන පරිශ්‍රීලකයෙකු හමු නොවිණි.",
-  "YourPrice": "ඔබගේ මිල",
-  "BusinessRequestDescription": "अधिक {{peopleNumber}} प्रशासक असलेले किंमत योजना विनंतीनुसारच उपलब्ध आहेत.",
-  "CannotCreateNewRoom": "कक्ष तयार करता येत नाही.",
-  "CannotCreatePaidUsers": "చెల్లించిన వినియోగదారులను జోడించలేరు.",
-  "CannotRestoreRoom": "कक्ष {room} पुनर्संचयित करता येणार नाही.",
-  "NewRoomWillExceedLimit": "तुमच्या सध्याच्या योजनेत समाविष्ट असलेल्या खोल्यांच्या संख्येची मर्यादा गाठल्यामुळे हे रूम तयार करणे शक्य नाही.",
-  "NewUsersWillExceedMembersLimit": "नवीन सशुल्क वापरकर्त्यांना जोडणे शक्य नाही, कारण तुमच्या सध्याच्या योजनेत समाविष्ट असलेल्या प्रशासकांची संख्या मर्यादेपर्यंत पोहोचली आहे. {limit}.",
-  "NotPossibleRoomRestoring": "या खोल्या पुनर्संचयित करणे शक्य नाही कारण तुमच्या सध्याच्या योजनेत समाविष्ट खोल्यांची संख्या मर्यादेपर्यंत पोहोचली आहे. {limit}.",
-  "NumberOfRoomsAccordingToTariff": "तुमच्या тариф योजनेनुसार खोल्यांची संख्या: {{currentValue}}/{{maxValue}}",
-  "NumberOfUsersAccordingToTariff": "तुमच्या тариф योजनेनुसार प्रशासकांची संख्या: {{currentValue}}/{{maxValue}}",
-  "RoomsQuotaAlmostExhausted": "कक्ष्यांची संख्या जवळपास संपली आहे.",
-  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/year</3>",
-  "UsersQuotaAlmostExhausted": "मोफत वापरकर्त्यांची संख्या जवळपास संपली आहे."
+  "YourPrice": "ඔබගේ මිල"
 }

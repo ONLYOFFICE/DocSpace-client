@@ -108,14 +108,5 @@
   "SubtitleDescription": "Subtítulo con comentarios o descripciones adicionales para el directorio actual.",
   "TabPlugins": "Pestaña Extensiones",
   "Viewer": "Visor",
-  "ViewerDescription": "Incruste un visor para permitir a los usuarios abrir un archivo para verlo desde la sala correspondiente.",
-  "NPMCodeConfigStep": "Crea objeto de configuración con los parámetros requeridos:",
-  "NPMCodeCreateStep": "Crea un elemento HTML con id de {config} e insértalo dentro del cuerpo del documento para colocar el marco SDK: {frame}",
-  "NPMCodeDescription": "Descripción del paquete NPM",
-  "NPMCodeImportStep": "Importa el paquete en tu proyecto:",
-  "NPMCodeInitStep": "Inicializar SDK:",
-  "NPMCodeInstallStep": "Instalar paquete desde npm y guardarlo en el archivo package.json con --{save}:",
-  "NPMCodeUsageStep": "Utilice el método de inicialización del SDK para crear el marco del SDK:",
-  "SdkPackageVersionInfo": "Para conectar como versión de paquete siempre {latest}.",
-  "SourceType": "Tipo de conexión"
+  "ViewerDescription": "Incruste un visor para permitir a los usuarios abrir un archivo para verlo desde la sala correspondiente."
 }

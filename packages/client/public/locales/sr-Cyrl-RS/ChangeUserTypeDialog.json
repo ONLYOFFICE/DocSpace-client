@@ -4,14 +4,5 @@
   "ChangeUserTypeButton": "Промени тип",
   "ChangeUserTypeMessage": "Корисници са типом <strong>'{{ firstType }}'</strong> биц́е премештени у тип <strong>'{{ secondType }}'</strong>.",
   "SuccessChangeGuestType": "Тип госта је успешно промењен.",
-  "SuccessChangeUserType": "Кориснички тип је успешно промењен",
-  "ChangeContactType": "Промени тип контакта",
-  "ChangeGuestsTypeToAdmin": "Гост <strong>{{userName}}</strong> биће премештен у секцију {{membersSection}} и добиће <strong>'{{ secondType }}'</strong> тип. Администратори {{productName}} могу приступити подешавањима {{productName}}, управљати и архивирати собе, позивати нове кориснике и додељивати улоге испод њиховог нивоа. Администратори {{productName}} имају приступ секцији {{documentsSection}}.",
-  "ChangeGuestsTypeToAdminMulti": "Izabrani gosti biće premešteni u sekciju {{membersSection}} i biće im dodeljen tip <strong>'{{ secondType }}'</strong>. Administratori {{productName}} mogu da pristupe podešavanjima {{productName}}, upravljaju i arhiviraju sobe, pozivaju nove korisnike i dodeljuje uloge ispod njihovog nivoa. Administratori {{productName}} imaju pristup sekciji {{documentsSection}}.",
-  "ChangeGuestsTypeToManager": "Гост <strong>{{userName}}</strong> биће премештен у секцију {{membersSection}} и додељена му биће тип <strong>'{{ secondType }}'</strong>. Администратори собе могу креирати и управљати додељеним собама, позивати нове кориснике и додељивати улоге Администратора собе и ниже. Администратори собе имају приступ секцији {{documentsSection}}.",
-  "ChangeGuestsTypeToManagerMulti": "Izabrani gosti biće premešteni u sekciju {{membersSection}} i biće im dodeljen tip <strong>'{{ secondType }}'</strong>. Administatori soba mogu da kreiraju i upravljaju dodeljenim sobama, pozivaju nove korisnike i dodeljuje uloge administratora sobe i niže. Administatori soba imaju pristup sekciji {{documentsSection}}.",
-  "ChangeUserTypeNote": "<1>Napomena:</1> Не можете променити тип за администратора {{productName}} и за себе.",
-  "DataReassignmentInfo": "Собије које је направио овај корисник аутоматски ће бити додељене вама. Да бисте доделили собе другој особи, кликните на одговарајући линк испод.",
-  "DataReassignmentWithFilesDeletion": "Svi zajednički fajlovi kreirani od strane ovog kontakta biće <1>automatski dodeljen Vama za 30 dana</1>. Da biste preuredili prostorije/zajedničke fajlove nekoj drugoj osobi, kliknite na odgovarajući link ispod.",
-  "PersonalDataDeletion": "Svi fajlovi i folderi u sekciji {{sectionName}} ovog kontakta biće <1>trajno obrisani za 30 dana</1>."
+  "SuccessChangeUserType": "Кориснички тип је успешно промењен"
 }

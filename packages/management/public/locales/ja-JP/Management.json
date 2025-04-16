@@ -24,15 +24,5 @@
   "SettingsForAll": "これらの設定は、すべてのスペースに有効です。",
   "Subheader": "このセクションでは、いくつかのスペースを作成し、ユーザーがアクセスできるように設定できます",
   "SubmitDelete": "削除リクエストを送信する",
-  "VisitSpace": "作成後、このスペースへ移動してください",
-  "DecryptStorage": "ストレージの復号化 ({Decrypt storage})",
-  "DecryptWarningDialogContent": "復号プロセス中に、すべてのスペースが利用できなくなります。続行しますか？",
-  "EncryptData": "保存中のデータを暗号化します。 (Hozon-chuu no dēta o angōka shimasu.)",
-  "EncryptDataDescription": "{{organizationName}} は、保存中のデータを保護するために AES-256 暗号化を使用します。",
-  "EncryptDataWarningDescription": "ストレージの暗号化には時間がかかる場合があります。処理中は、その領域が利用できなくなります。十分なストレージ容量があることと、データがバックアップされていることを確認してください。自動バックアップを無効にし、実行中のバックアップをすべて停止することを忘れないでください。そうしないと、自動的に完了します。{field} {min} {max}",
-  "EncryptStorage": "ストレージの暗号化",
-  "EncryptWarningDialogContent": "暗号化プロセス中、すべてのスペースが利用できなくなります。続行しますか？",
-  "MoreDetails": "サービスを停止する方法の詳細については、<1>{{link}}</1> を参照してください。",
-  "NotifyUsers": "ユーザーに、そのスペースが利用不可になることを通知してください。 (Yūzā ni, sono supēsu ga riyō fuka ni naru koto o tsūchi shite kudasai.)",
-  "StorageEncrypted": "ストレージは暗号化されています。Storage encrypted"
+  "VisitSpace": "作成後、このスペースへ移動してください"
 }

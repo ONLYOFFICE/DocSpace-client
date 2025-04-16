@@ -16,7 +16,5 @@
   "ReassignDataToAnotherUser": "Преназначете данните на друг потребител",
   "SuccessfullyDeleteGuestInfoMessage": "Гостът беше успешно изтрит",
   "SuccessfullyDeleteUserInfoMessage": "Потребителят беше изтрит успешно",
-  "ToBeAbleToReassignData": "За да можете да преназначавате данни, изтривайте потребителите един по един.",
-  "PersonalDataDeletionInfo": "Личните данни, всички лични файлове и папки в секциите {{sectionNameFirst}} и {{sectionNameSecond}}* на избраните потребители ще бъдат трайно изтрити. Файловете и папките на избраните потребители, съхранени в общи секции* като стаи, ще останат в {{productName}}.",
-  "UserFilesRemovalScope": "Личните данни, всички файлове и папки в секциите {{sectionNameFirst}} и {{sectionNameSecond}} на този потребител ще бъдат трайно изтрити."
+  "ToBeAbleToReassignData": "За да можете да преназначавате данни, изтривайте потребителите един по един."
 }

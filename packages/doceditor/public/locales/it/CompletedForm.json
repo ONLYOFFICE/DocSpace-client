@@ -8,16 +8,5 @@
   "FormCompletedSuccessfully": "Modulo completato con successo",
   "FormNumber": "Numero del modulo",
   "FormOwner": "Proprietario del modulo",
-  "Title": "Il modulo è completato",
-  "FillOutForm": "Compila il modulo",
-  "FormFinalized": "Modulo completato",
-  "FormSectionCompleted": "Sezione modulo completata",
-  "FormVDRCompletedDescription": "Il modulo è stato completamente compilato da tutti i ruoli ed è ora finalizzato. È disponibile in modalità sola lettura.",
-  "FormVDRConfirmationOfStartDescription": "È già stata inviata una notifica all'utente nel primo ruolo, invitandolo a compilare il modulo. Puoi accedere alla stanza o condividere il link di compilazione con i partecipanti.",
-  "FormVDRConfirmationOfStartTitle": "Il modulo è pronto per essere compilato in {room}.",
-  "FormVDRSectionCompletedDescription": "La parte assegnata del modulo PDF è stata completata con successo. Lo stato di compilazione del modulo può essere monitorato nella stanza e tramite il pannello di stato di compilazione. Verrà inviata una notifica via email una volta che il modulo è completamente compilato.",
-  "FormVDRYourTurnDescription": "Sei stato incaricato di compilare il modulo come primo ruolo. È stata inviata una notifica alla tua email. Puoi iniziare a compilarlo ora o copiare il link di compilazione e tornare più tardi.",
-  "LinkToFillOutForm": "Link per compilare il modulo:",
-  "LinkToForm": "Collegamento al modulo:",
-  "LinkToViewOnlyForm": "Collegamento al modulo di sola visualizzazione:"
+  "Title": "Il modulo è completato"
 }

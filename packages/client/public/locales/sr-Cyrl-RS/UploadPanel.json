@@ -1,7 +1,5 @@
 {
   "CancelUpload": "Отпремање је прекинуто. Неке датотеке нису отпремљене.",
   "HideInput": "Сакриј",
-  "Ready": "Готово",
-  "UploadingAndConversion": "Uploadovanje & Konverzija",
-  "UploadingError": "Грешка при качивању"
+  "Ready": "Готово"
 }

@@ -1,5 +1,4 @@
 {
   "DisconnectCloudTitle": "Искључи облак",
-  "SuccessDeleteThirdParty": "Трећа страна {{service}} је обрисана",
-  "ThirdPartyDisconnectPrompt": "Да ли сте сигурни да желите да уклоните {{service}}? Ово неће утицати на ваш {{account}} рачун на било који начин."
+  "SuccessDeleteThirdParty": "Трећа страна {{service}} је обрисана"
 }

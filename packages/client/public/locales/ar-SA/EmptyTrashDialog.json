@@ -1,6 +1,4 @@
 {
   "DeleteForeverButton": "احذف للأبد",
-  "DeleteForeverTitle": "هل تريد الحذف للأبد؟",
-  "DeleteForeverNote": "سيتم حذف جميع العناصر من قسم {{sectionName}} بشكل دائم. لن تتمكن من استعادتها.",
-  "SuccessEmptyAction": "تم تفريغ قسم {{sectionName}}"
+  "DeleteForeverTitle": "هل تريد الحذف للأبد؟"
 }

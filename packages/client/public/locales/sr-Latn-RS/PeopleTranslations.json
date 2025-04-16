@@ -34,8 +34,5 @@
   "SuccessDeletePersonalData": "Lični podaci su uspešno obrisani",
   "SuccessSentInvitation": "Pozivnica je uspešno poslata",
   "SuccessSentMultipleInvitatios": "Pozivnice su uspešno poslate",
-  "WithoutGroup": "Bez grupe",
-  "MembersCount": "чланови: {{count}}",
-  "ShareGuest": "Deli ",
-  "SuccessCopyContantLink": "Kontakt link kopiran uspešno. Link je <strong>važi 7 dana.</strong>"
+  "WithoutGroup": "Bez grupe"
 }

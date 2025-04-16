@@ -8,16 +8,5 @@
   "FormCompletedSuccessfully": "Veidlapa ir veiksmīgi pabeigta",
   "FormNumber": "Veidlapas numurs",
   "FormOwner": "Veidlapas īpašnieks",
-  "Title": "Veidlapa ir aizpildīta",
-  "FillOutForm": "Aizpildiet formu",
-  "FormFinalized": "Forma pabeigta",
-  "FormSectionCompleted": "Apdales formas sadaļa",
-  "FormVDRCompletedDescription": "Veidlapas ir pilnībā aizpildīta visu lomu vārdā un tagad ir pabeigta. Tā ir pieejama tikai skatīšanai režīmā.",
-  "FormVDRConfirmationOfStartDescription": "Paziņojums jau ir nosūtīts lietotājam pirmajā lomā, mudinot viņus aizpildīt formu. Jūs varat pāriet uz telpu vai dalīties ar aizpildīšanas saiti dalībniekiem.",
-  "FormVDRConfirmationOfStartTitle": "Forma ir gatava aizpildīšanai telpā {room}.",
-  "FormVDRSectionCompletedDescription": "PDF veidlapas iecirkņa piešķirtā daļa ir veiksmīgi aizpildīta. Veidlapas aizpildīšanas statusu var novērot telpā un, izmantojot aizpildīšanas statusa panelī. E-pasta paziņojums tiks nosūtīts, kad veidlapa būs pilnībā aizpildīta.",
-  "FormVDRYourTurnDescription": "Jūs esat iecelti aizpildīt formu kā pirmo lomu. Jūsu e-pastā ir nosūtīts paziņojums. Jūs varat sākt aizpildīt to tūlīt vai kopēt aizpildīšanas saiti un atgriezties vēlāk.",
-  "LinkToFillOutForm": "Saite, lai aizpildītu formu: Link to fill out form:",
-  "LinkToForm": "Saite uz formu: {link}",
-  "LinkToViewOnlyForm": "Saite, lai skatītu tikai formu: {form_id}"
+  "Title": "Veidlapa ir aizpildīta"
 }

@@ -4,14 +4,5 @@
   "ChangeUserTypeButton": "Türü değiştir",
   "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> türündeki kullanıcılar <strong>'{{ secondType }}'</strong> türüne taşınacaktır.",
   "SuccessChangeGuestType": "Konuk türü başarıyla değiştirildi",
-  "SuccessChangeUserType": "Kullanıcı türü başarıyla değiştirildi",
-  "ChangeContactType": "İletişim türünü değiştir",
-  "ChangeGuestsTypeToAdmin": "Konuk <strong>{{userName}}</strong> {{membersSection}} bölümüne taşınacak ve <strong>'{{ secondType }}'</strong> türüne atanacaktır. {{productName}} yöneticileri {{productName}} ayarlarını erişebilir, odaları yönetebilir ve arşivleyebilir, yeni kullanıcıları davet edebilir ve altlarındaki rolleri atayabilir. {{productName}} yöneticileri {{documentsSection}} bölümüne erişebilir.",
-  "ChangeGuestsTypeToAdminMulti": "Seçilen misafirler {{membersSection}} bölümüne taşınacak ve <strong>'{{ secondType }}'</strong> türü atanacaktır. {{productName}} yöneticileri {{productName}} ayarlarını erişebilir, odaları yönetebilir ve arşivleyebilir, yeni kullanıcıları davet edebilir ve alt düzeydeki rolleri atayabilir. {{productName}} yöneticileri {{documentsSection}} bölümüne erişebilir.",
-  "ChangeGuestsTypeToManager": "Konuk <strong>{{userName}}</strong> {membersSection} bölümüne taşınacak ve <strong>'{{ secondType }}'</strong> türüne atanacaktır. Oda yöneticileri, atanan odaları oluşturabilir ve yönetebilir, yeni kullanıcıları davet edebilir ve Oda yöneticisi ve alt düzey roller atayabilir. Oda yöneticileri, {{documentsSection}} bölümüne erişebilir.",
-  "ChangeGuestsTypeToManagerMulti": "Seçilen misafirler {{membersSection}} bölümüne taşınacak ve <strong>'{{ secondType }}'</strong> türü atanacaktır. Oda yöneticileri, atanan odaları oluşturabilir ve yönetebilir, yeni kullanıcıları davet edebilir ve Oda yöneticisi ve alt düzey roller atayabilir. Oda yöneticileri {{documentsSection}} bölümüne erişebilir.",
-  "ChangeUserTypeNote": "<1>Not:</1> {{productName}} yönetici ve sizin için türü değiştiremezsiniz.",
-  "DataReassignmentInfo": "Bu kullanıcı tarafından oluşturulan odalar otomatik olarak size atanacaktır. Odaları başka bir kişiye yeniden atamak için, aşağıdaki ilgili bağlantıyı tıklayın.",
-  "DataReassignmentWithFilesDeletion": "Bu kişi tarafından oluşturulan tüm paylaşılan dosyalar, {min} gün içinde size otomatik olarak atanacaktır {max}. Odaları/paylaşılan dosyaları başka bir kişiye yeniden atamak için, aşağıdaki ilgili bağlantıyı tıklayın.",
-  "PersonalDataDeletion": "Bu iletişimde {{sectionName}} bölümündeki tüm dosyalar ve klasörler <1>30 gün içinde kalıcı olarak silinecektir</1>."
+  "SuccessChangeUserType": "Kullanıcı türü başarıyla değiştirildi"
 }

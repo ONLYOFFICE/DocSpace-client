@@ -8,16 +8,5 @@
   "FormCompletedSuccessfully": "Formularul a fost completat cu succes",
   "FormNumber": "Formular nr.",
   "FormOwner": "Proprietarul formularului",
-  "Title": "Formularul este completat",
-  "FillOutForm": "Completați formularul",
-  "FormFinalized": "Formularul Finalizat",
-  "FormSectionCompleted": "Secțiunea formular completată",
-  "FormVDRCompletedDescription": "Formularul a fost completat integral de toate rolurile și este acum finalizat. Este disponibil în modul doar vizualizare.",
-  "FormVDRConfirmationOfStartDescription": "O notificare a fost deja trimisă utilizatorului în primul rol, solicitându-i să completeze formularul. Puteți naviga la cameră sau să împărțiți link-ul de completare cu participanții.",
-  "FormVDRConfirmationOfStartTitle": "Formularul este gata de completat în cameră.",
-  "FormVDRSectionCompletedDescription": "Partea alocată din formularul PDF a fost completată cu succes. Starea de completare a formularului poate fi monitorizată în încăpere și prin panoul de Stare completare. O notificare prin e-mail va fi trimisă odată ce formularul este completat integral.",
-  "FormVDRYourTurnDescription": "Ești desemnat să completezi formularul ca prim rol. O notificare a fost trimisă pe adresa ta de e-mail. Poți începe să-l completezi acum sau poți copia link-ul de completare și te poți întoarce mai târziu.",
-  "LinkToFillOutForm": "Link pentru a completa formularul: {field}",
-  "LinkToForm": "Legătură către formular:",
-  "LinkToViewOnlyForm": "Legătură către formular doar pentru vizualizare:"
+  "Title": "Formularul este completat"
 }

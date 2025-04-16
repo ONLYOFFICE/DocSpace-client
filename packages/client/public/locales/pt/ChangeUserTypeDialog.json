@@ -4,14 +4,5 @@
   "ChangeUserTypeButton": "Alterar tipo",
   "ChangeUserTypeMessage": "Os utilizadores com o tipo <strong>'{{ firstType }}'</strong> serão movidos para o tipo <strong>'{{ secondType }}'</strong>.",
   "SuccessChangeGuestType": "O tipo de convidado foi alterado com êxito",
-  "SuccessChangeUserType": "O tipo de utilizador foi alterado com êxito",
-  "ChangeContactType": "Alterar tipo de contato",
-  "ChangeGuestsTypeToAdmin": "O convidado <strong>{{userName}}</strong> será movido para a seção {{membersSection}} e receberá o tipo <strong>'{{ secondType }}'</strong>. Administradores do {{productName}} podem acessar as configurações do {{productName}}, gerenciar e arquivar salas, convidar novos usuários e atribuir funções abaixo do nível deles. Administradores do {{productName}} têm acesso à seção {{documentsSection}}.",
-  "ChangeGuestsTypeToAdminMulti": "Os convidados selecionados serão movidos para a seção {{membersSection}} e receberão o tipo <strong>'{{ secondType }}'</strong>. Administradores do {{productName}} podem acessar as configurações do {{productName}}, gerenciar e arquivar salas, convidar novos usuários e atribuir funções abaixo do nível deles. Administradores do {{productName}} têm acesso à seção {{documentsSection}}.",
-  "ChangeGuestsTypeToManager": "O convidado <strong>{{userName}}</strong> será movido para a seção {{membersSection}} e receberá o tipo <strong>'{{ secondType }}'</strong>. Administradores de sala podem criar e gerenciar as salas atribuídas, convidar novos usuários e atribuir funções de administrador de sala e níveis inferiores. Administradores de sala têm acesso à seção {{documentsSection}}.",
-  "ChangeGuestsTypeToManagerMulti": "Os convidados selecionados serão movidos para a seção {{membersSection}} e receberão o tipo <strong>'{{ secondType }}'</strong>. Administradores de sala podem criar e gerenciar as salas atribuídas, convidar novos usuários e atribuir funções de administrador de sala e níveis inferiores. Administradores de sala têm acesso à seção {{documentsSection}}.",
-  "ChangeUserTypeNote": "<1>Observação:</1> você não pode alterar o tipo para o {{productName}} administrador e para você mesmo.",
-  "DataReassignmentInfo": "Os quartos criados por este usuário serão automaticamente atribuídos a você. Para realocar os quartos para outra pessoa, clique no link correspondente abaixo.",
-  "DataReassignmentWithFilesDeletion": "Todos os arquivos compartilhados criados por este contato serão <1>automaticamente atribuídos a você em 30 dias</1>. Para realocar os quartos/arquivos compartilhados para outra pessoa, clique no link correspondente abaixo.",
-  "PersonalDataDeletion": "Todos os arquivos e pastas na seção {{sectionName}} deste contato serão <1>excluídos permanentemente em 30 dias</1>."
+  "SuccessChangeUserType": "O tipo de utilizador foi alterado com êxito"
 }

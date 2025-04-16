@@ -16,7 +16,5 @@
   "ReassignDataToAnotherUser": "Przypisz dane innemu użytkownikowi",
   "SuccessfullyDeleteGuestInfoMessage": "Gość został pomyślnie usunięty",
   "SuccessfullyDeleteUserInfoMessage": "Użytkownik został pomyślnie usunięty",
-  "ToBeAbleToReassignData": "Aby móc ponownie przypisać dane, należy usuwać po jednym użytkowniku na raz.",
-  "PersonalDataDeletionInfo": "Dane osobowe, wszystkie pliki i foldery w sekcjach {{sectionNameFirst}} i {{sectionNameSecond}}* wybranych użytkowników zostaną trwale usunięte. Pliki i foldery wybranych użytkowników znajdujące się w sekcjach wspólnych* takich jak pokoje, pozostaną w {{productName}}.",
-  "UserFilesRemovalScope": "Dane osobowe, wszystkie pliki i foldery w sekcjach {{sectionNameFirst}} i {{sectionNameSecond}} tego użytkownika zostaną trwale usunięte."
+  "ToBeAbleToReassignData": "Aby móc ponownie przypisać dane, należy usuwać po jednym użytkowniku na raz."
 }

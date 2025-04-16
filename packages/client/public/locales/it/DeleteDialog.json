@@ -14,7 +14,5 @@
   "MoveToTrashButton": "Spostare nel Cestino",
   "UnsubscribeButton": "Annullare l'iscrizione",
   "UnsubscribeNote": "Sei sicuro di voler cancellarti dagli elementi selezionati nell'elenco?",
-  "UnsubscribeTitle": "Conferma di annullamento dell'iscrizione",
-  "DeleteTemplate": "Vuoi davvero eliminare la stanza modello <1>«{{templateName}}»</1>? Il modello non può essere ripristinato.",
-  "DeleteTemplates": "Vuoi davvero eliminare i modelli stanza selezionati? Non potranno essere ripristinati."
+  "UnsubscribeTitle": "Conferma di annullamento dell'iscrizione"
 }

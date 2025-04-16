@@ -1,6 +1,4 @@
 {
   "DeleteForeverButton": "Dzēst uz visiem laikiem",
-  "DeleteForeverTitle": "Vai dzēst uz visiem laikiem?",
-  "DeleteForeverNote": "Visi priekšmeti no {sectionName} sadaļā tiks izdzēsti pavisam. Jūs nevarēsiet atjaunot tos.",
-  "SuccessEmptyAction": "{{sectionName}} sada iztukšota"
+  "DeleteForeverTitle": "Vai dzēst uz visiem laikiem?"
 }

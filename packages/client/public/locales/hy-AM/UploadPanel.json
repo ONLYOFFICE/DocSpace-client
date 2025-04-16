@@ -1,7 +1,5 @@
 {
   "CancelUpload": "Վերբեռնումն ընդհատվել է: Որոշ ֆայլեր չեն վերբեռնվել:",
   "HideInput": "Թաքցնել",
-  "Ready": "Կատարված",
-  "UploadingAndConversion": "Բեռնում և փոխարկում",
-  "UploadingError": "բեռնման սխալ"
+  "Ready": "Կատարված"
 }

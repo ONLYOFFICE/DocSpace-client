@@ -9,14 +9,5 @@
   "PleaseNote": "ກະ​ລຸ​ນາ​ບັນ​ທຶກ:",
   "ReassignDataToAnotherUser": "ມອບໝາຍຂໍ້ມູນຄືນໃໝ່ໃຫ້ຜູ້ໃຊ້ອື່ນ",
   "SuccessfullyDeleteUserInfoMessage": "ຜູ້ໃຊ້ຖືກລຶບອອກແລ້ວ",
-  "ToBeAbleToReassignData": "ເພື່ອສາມາດມອບໝາຍຂໍ້ມູນຄືນໃໝ່ໄດ້, ໃຫ້ລຶບຜູ້ໃຊ້ເທື່ອລະຄົນອອກ.\n",
-  "ActionCannotBeUndoneGuests": "Izbrani invalidi gostje bodo odstranjeni iz {{productName}}. Ta akcija ne more biti razveljavljena.",
-  "DeleteGroupGuestsSuccessMessage": "Gosti so bili uspešno izbrisani.",
-  "DeleteGuest": "Izbriši gost",
-  "DeleteGuests": "Izbriši goste",
-  "DeletePersonalDataApplicable": "Uredno za izabrane korisnike koji imaju takve datoteke i mape.",
-  "DeleteReqassignDescriptionGuest": "La {{userCaption}} do të hiqet nga të gjitha dhomat në të cilat janë ftuar. Dokumentet e kriera nga ky {{userCaption}} në dhoma do të ri-përshëndetësh automatikisht tek pronarët e dhomës.",
-  "PersonalDataDeletionInfo": "Osebni podatki, vse osebne datoteke in mape v razdelkih {{sectionNameFirst}} in {{sectionNameSecond}}* izbranih uporabnikov bodo trajno izbrisani. Datoteke in mape izbranih uporabnikov, shranjene v skupnih razdelkih* kot so sobe, bodo ostale v {{productName}}.",
-  "SuccessfullyDeleteGuestInfoMessage": "Гостът е бил успешно изтрит",
-  "UserFilesRemovalScope": "Osebni podatki, vse datoteke in mape v razdelkih {{sectionNameFirst}} in {{sectionNameSecond}} te uporabnike bodo trajno izbrisani."
+  "ToBeAbleToReassignData": "ເພື່ອສາມາດມອບໝາຍຂໍ້ມູນຄືນໃໝ່ໄດ້, ໃຫ້ລຶບຜູ້ໃຊ້ເທື່ອລະຄົນອອກ.\n"
 }

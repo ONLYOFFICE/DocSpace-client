@@ -108,14 +108,5 @@
   "SubtitleDescription": "إضافة ترجمة مع تعليقات إضافية أو وصف للدليل الحالي.",
   "TabPlugins": "إضافات علامة التبويب",
   "Viewer": "مشاهد",
-  "ViewerDescription": "قم بتضمين عارض للسماح للمستخدمين بفتح ملف للعرض من الغرفة المناسبة.",
-  "NPMCodeConfigStep": "إنشاء كائن تهيئة بالمعلمات المطلوبة: {parameters}",
-  "NPMCodeCreateStep": "أنشئ عنصر HTML بمعرّف من التكوين ({id}) وأدخله داخل جسم المستند ({document body}) لوضع إطار عمل SDK ({SDK frame}).",
-  "NPMCodeDescription": "وصف حزمة NPM",
-  "NPMCodeImportStep": "استورد الحزمة في مشروعك: {package}.",
-  "NPMCodeInitStep": "تهيئة الـ SDK: {SDK}",
-  "NPMCodeInstallStep": "قم بتثبيت الحزمة من npm واحفظها في ملف package.json باستخدام --{save}:",
-  "NPMCodeUsageStep": "استخدم طريقة التهيئة SDK لإنشاء إطار عمل SDK: {SDK}.",
-  "SdkPackageVersionInfo": "للاتصال كإصدار حزمة، دائماً أحدث إصدار {field} {min} {max}",
-  "SourceType": "نوع الاتصال"
+  "ViewerDescription": "قم بتضمين عارض للسماح للمستخدمين بفتح ملف للعرض من الغرفة المناسبة."
 }

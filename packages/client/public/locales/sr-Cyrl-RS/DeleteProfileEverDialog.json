@@ -16,7 +16,5 @@
   "ReassignDataToAnotherUser": "Поново додели податке другом кориснику",
   "SuccessfullyDeleteGuestInfoMessage": "Гост је успешно обрисан",
   "SuccessfullyDeleteUserInfoMessage": "Корисник је успешно обрисан",
-  "ToBeAbleToReassignData": "Да бисте могли поново да доделите податке, бришите једног по једног корисника.",
-  "PersonalDataDeletionInfo": "Лични подаци, сви лични фајлови и фолдере у секцијама {{sectionNameFirst}} и {{sectionNameSecond}}* одабраних корисника биће трајно избрисани. Фајлови и фолдере одабраних корисника чувани у заједничким секцијама* као што су собе остаће у {{productName}}.",
-  "UserFilesRemovalScope": "Лични подаци, све датотеке и фолдере у секцијама {{sectionNameFirst}} и {{sectionNameSecond}} овог корисника биће трајно избрисани."
+  "ToBeAbleToReassignData": "Да бисте могли поново да доделите податке, бришите једног по једног корисника."
 }

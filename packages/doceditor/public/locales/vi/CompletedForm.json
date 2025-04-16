@@ -8,16 +8,5 @@
   "FormCompletedSuccessfully": "Biểu mẫu đã được hoàn thành",
   "FormNumber": "Số của biểu mẫu",
   "FormOwner": "Chủ sở hữu biểu mẫu",
-  "Title": "Biểu mẫu đã được hoàn thành ",
-  "FillOutForm": "Fyll ut skjema",
-  "FormFinalized": "Formularen er fullført",
-  "FormSectionCompleted": "Fullført skjema seksjon",
-  "FormVDRCompletedDescription": "Skjemaet er fullstendig utfylt av alle roller og er nå endelig. Det er tilgjengelig i skrivebeskyttet modus.",
-  "FormVDRConfirmationOfStartDescription": "En varsling er allerede sendt til brukeren i den første rollen, og ber dem om å fylle ut skjemaet. Du kan navigere til rommet eller dele utfyllingslenken med deltakerne.",
-  "FormVDRConfirmationOfStartTitle": "Skjemaet er klart for utfylling i rommet",
-  "FormVDRSectionCompletedDescription": "Den tildelte delen av PDF-skjemaet er fullført med suksess. Fyllingsstatusen til skjemaet kan overvåkes i rommet og via Fyllingsstatus-panelet. En e-postvarsling vil bli sendt når skjemaet er fullstendig utfylt.",
-  "FormVDRYourTurnDescription": "Du er tildelt til å fylle ut skjemaet som den første rollen. En varsling er sendt til din e-post. Du kan begynne å fylle det ut nå eller kopiere lenken for utfylling og komme tilbake senere.",
-  "LinkToFillOutForm": "Lenke til å fylle ut skjema: {field}",
-  "LinkToForm": "Lenke til skjema: {form} ",
-  "LinkToViewOnlyForm": "Lenke til skrivebeskyttet skjema:"
+  "Title": "Biểu mẫu đã được hoàn thành "
 }

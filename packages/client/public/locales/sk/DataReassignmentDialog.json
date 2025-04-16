@@ -14,6 +14,5 @@
   "ReassigningDataToAnother": "Začal sa proces opätovného priradenia údajov od používateľa <0>{{{fromUser}}</0> k používateľovi <1>{{{toUser}}</1>. Upozorňujeme, že to môže trvať dlhšie.",
   "ReassigningDataToItself": "Začal sa proces opätovného priradenia údajov od používateľa <0>{{{fromUser}}</0> k používateľovi <1>{{{toUser}}</1> <2>{{{you}}</2>. Upozorňujeme, že to môže trvať dlhšie.",
   "StartTransferAgain": "Znovu začať prenos",
-  "UserToWhomTheDataWillBeTransferred": "Používateľ, ktorému sa údaje prenesú",
-  "RoomsOnlyReassignment": "Presuneme, že presunieme miestnosti vytvorené kontaktom."
+  "UserToWhomTheDataWillBeTransferred": "Používateľ, ktorému sa údaje prenesú"
 }

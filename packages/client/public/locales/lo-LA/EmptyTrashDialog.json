@@ -1,6 +1,4 @@
 {
   "DeleteForeverButton": "ລືບອອກເລີຍ",
-  "DeleteForeverTitle": "ລືບອອກ？",
-  "DeleteForeverNote": "Vsi predmeti iz razdelka {{sectionName}} bodo trajno izbrisani. Ne boste mogli obnoviti.",
-  "SuccessEmptyAction": "{{sectionName}} дел одделение испразнето"
+  "DeleteForeverTitle": "ລືບອອກ？"
 }

@@ -46,6 +46,5 @@
   "UserNotFound": "Käyttäjän <1>{{email}}</1> ei löydy.",
   "UserNotFoundMatchingEmail": "Käyttäjää vastaavalla Stripe-sähköpostilla ei löytynyt.",
   "UsersQuotaAlmostExhausted": "Maksettujen käyttäjien määrän kiintiö on melkein täysi.",
-  "YourPrice": "Hintasi",
-  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/vuosi</3>"
+  "YourPrice": "Hintasi"
 }

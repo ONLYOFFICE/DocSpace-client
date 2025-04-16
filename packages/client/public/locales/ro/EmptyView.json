@@ -44,8 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "Încărcare de pe dispozitivul",
   "UploadFromPortalTitle": "Încărcare de pe {{productName}}",
   "UploadPDFFormOptionDescription": "Selectați un formular PDF existent de pe {{productName}} și încărcați-l în sala.",
-  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date",
-  "EmptyTemplatesDescription": "Poți crea un șablon dintr-o cameră în secțiunea Camere.",
-  "EmptyTemplatesTitle": "Nu sunt șabloane aici încă.",
-  "SectionsUploadDescription": "Încarcă orice tip de fișiere din {{sectionNameFirst}} sau {{sectionNameSecond}}"
+  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date"
 }

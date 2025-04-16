@@ -1,6 +1,4 @@
 {
   "EditComment": "コメントの編集",
-  "Version": "に変更",
-  "DeleteVersion": "バージョンを削除する",
-  "DeleteVersionDescription": "ファイルを削除しようとしています。削除すると、もう見ることも復元することもできません。よろしいですか？"
+  "Version": "に変更"
 }

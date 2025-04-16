@@ -1,7 +1,5 @@
 {
   "CancelUpload": "Nalaganje je bilo prekinjeno. Nekatere datoteke niso bile naložene.",
   "HideInput": "Skrij",
-  "Ready": "Končano",
-  "UploadingAndConversion": "Nalaganje & Pretvorba",
-  "UploadingError": "Napaka pri nalaganju"
+  "Ready": "Končano"
 }

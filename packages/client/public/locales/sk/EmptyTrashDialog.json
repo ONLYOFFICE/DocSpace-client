@@ -1,6 +1,4 @@
 {
   "DeleteForeverButton": "Odstrániť navždy",
-  "DeleteForeverTitle": "Odstrániť navždy?",
-  "DeleteForeverNote": "Všetky položky z kategórie {{sectionName}} budú nenávratne odstránené. Nebudete ich môcť obnoviť.",
-  "SuccessEmptyAction": "{{sectionName}} sekcia vyprázdnená"
+  "DeleteForeverTitle": "Odstrániť navždy?"
 }

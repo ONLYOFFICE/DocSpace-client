@@ -14,6 +14,5 @@
   "ReassigningDataToAnother": "Byl zahájen proces přeřazení dat z uživatele <0>{{{fromUser}}</0> na uživatele <1>{{{toUser}}</1>. Upozorňujeme, že tento proces může trvat delší dobu.",
   "ReassigningDataToItself": "Byl zahájen proces přeřazení dat z uživatele <0>{{{fromUser}}</0> na uživatele <1>{{{toUser}}</1> <2>{{{you}}</2>. Upozorňujeme, že tento proces může trvat delší dobu.",
   "StartTransferAgain": "Znovu spustit přenos",
-  "UserToWhomTheDataWillBeTransferred": "Uživatel, kterému budou údaje předány",
-  "RoomsOnlyReassignment": "Přenést pokoje vytvořené kontaktem, {contact}."
+  "UserToWhomTheDataWillBeTransferred": "Uživatel, kterému budou údaje předány"
 }

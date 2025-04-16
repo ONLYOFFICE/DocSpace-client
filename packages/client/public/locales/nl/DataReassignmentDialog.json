@@ -14,6 +14,5 @@
   "ReassigningDataToAnother": "Het proces van gegevensoverdracht van gebruiker <0>{{fromUser}}</0> naar gebruiker <1>{{toUser}}</1> is gestart. Houd er rekening mee dat dit geruime tijd kan duren.",
   "ReassigningDataToItself": "Het proces van gegevensoverdracht van gebruiker <0>{{fromUser}}</0> naar gebruiker <1>{{toUser}}</1> <2>{{you}}</2> is gestart. Houd er rekening mee dat dit geruime tijd kan duren.",
   "StartTransferAgain": "Begin de overdracht opnieuw",
-  "UserToWhomTheDataWillBeTransferred": "Gebruiker aan wie de gegevens worden overgedragen",
-  "RoomsOnlyReassignment": "We zullen kamers die door contact zijn gemaakt, overdragen."
+  "UserToWhomTheDataWillBeTransferred": "Gebruiker aan wie de gegevens worden overgedragen"
 }

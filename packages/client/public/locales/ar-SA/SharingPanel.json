@@ -2,6 +2,5 @@
   "ExternalLink": "رابط خارجي",
   "LinkName": "اسم الرابط",
   "ShareEmailBody": "لقد تم منحك حق الوصول إلى المستند {{itemName}}. انقر فوق الرابط أدناه لفتح المستند الآن: {{shareLink}}.",
-  "ShareEmailSubject": "لقد تم منحك حق الوصول إلى المستند {{itemName}}",
-  "RoleForLink": "دور للرابط"
+  "ShareEmailSubject": "لقد تم منحك حق الوصول إلى المستند {{itemName}}"
 }

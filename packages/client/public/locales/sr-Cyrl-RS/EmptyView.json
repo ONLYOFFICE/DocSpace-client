@@ -44,8 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "Отпреми са уређаја",
   "UploadFromPortalTitle": "Отпреми из {{productName}}",
   "UploadPDFFormOptionDescription": "Одаберите спреман PDF формулар доступан у {{productName}} и отпремите га у просторију.",
-  "VirtualDataRoomEmptyTitle": "Добродошли у Виртуелну собу за податке",
-  "EmptyTemplatesDescription": "Можете да креирате шаблон из собе у одељку Собе.",
-  "EmptyTemplatesTitle": "Nema šablona ovde još {field}.",
-  "SectionsUploadDescription": "Upload any type files from {{sectionNameFirst}} или {{sectionNameSecond}}"
+  "VirtualDataRoomEmptyTitle": "Добродошли у Виртуелну собу за податке"
 }

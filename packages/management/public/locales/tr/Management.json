@@ -24,15 +24,5 @@
   "SettingsForAll": "Bu ayarlar tüm alanlarınız için geçerli olacaktır.",
   "Subheader": "Çeşitli alanlar oluşturmak ve bunları kullanıcılarınız için erişilebilir kılmak için bu bölümü kullanın",
   "SubmitDelete": "Silme talebi gönder",
-  "VisitSpace": "Oluşturduktan sonra bu alanı ziyaret edin",
-  "DecryptStorage": "Depolamayı çözüldür",
-  "DecryptWarningDialogContent": "Şifre çözme işlemi sırasında tüm alanlar kullanılamaz hale gelecektir. Devam etmek istediğinizden emin misiniz?",
-  "EncryptData": "Veriyi hareketsiz halde şifreleyin",
-  "EncryptDataDescription": "{{organizationName}} depolanma sırasında saklanan verileri korumak için AES-256 şifrelemesi kullanır.",
-  "EncryptDataWarningDescription": "Depolama şifrelemesi zaman alabilir. Alanlar işlem süresince kullanılamayacaktır. Yeterli depolama alanınız olduğundan ve verilerinizin yedeğinin alındığından emin olun. Otomatik yedeklemeyi devre dışı bırakmayı ve tüm çalışanları durdurmayı unutmayın. Aksi takdirde, otomatik olarak yapılacaktır.",
-  "EncryptStorage": "Depolamayı şifrele",
-  "EncryptWarningDialogContent": "Şifreleme işlemi sırasında tüm alanlar kullanılamaz hale gelecektir. Devam etmek istediğinizden emin misiniz?",
-  "MoreDetails": "Hizmetleri durdurma hakkında daha fazla bilgi için lütfen <1>{{link}}</1> adresimize bakın.",
-  "NotifyUsers": "Kullanıcılara alanın kullanılamayacağını bildirin.",
-  "StorageEncrypted": "Depolama şifrelendi"
+  "VisitSpace": "Oluşturduktan sonra bu alanı ziyaret edin"
 }

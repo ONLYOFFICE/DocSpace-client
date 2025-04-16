@@ -14,7 +14,5 @@
   "MoveToTrashButton": "Verplaats naar Prullenbak",
   "UnsubscribeButton": "Uitschrijven",
   "UnsubscribeNote": "Weet u zeker dat u zich wilt uitschrijven voor de gekozen items van de lijst?",
-  "UnsubscribeTitle": "Uitschrijven bevestiging",
-  "DeleteTemplate": "Wil je de sjabloonruimte <1>«{{templateName}}»</1> echt verwijderen? De sjabloon kan niet worden hersteld.",
-  "DeleteTemplates": "Wilt u de geselecteerde kamer templates echt verwijderen? Ze kunnen niet worden hersteld."
+  "UnsubscribeTitle": "Uitschrijven bevestiging"
 }

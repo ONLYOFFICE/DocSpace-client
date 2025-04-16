@@ -4,14 +4,5 @@
   "ChangeUserTypeButton": "タイプの変更",
   "ChangeUserTypeMessage": "<strong>「{{ firstType }}」</strong>タイプのユーザーは、<strong>「{{ secondType }}」</strong>タイプに移動します。",
   "SuccessChangeGuestType": "ゲストタイプの変更に成功しました",
-  "SuccessChangeUserType": "ユーザータイプの変更に成功しました。",
-  "ChangeContactType": "連絡先タイプを変更する (Renrakusaki taipu o henkō suru)",
-  "ChangeGuestsTypeToAdmin": "Guest <strong>{{userName}}</strong> は {{membersSection}} セクションに移動され、<strong>'{{ secondType }}'</strong> タイプが割り当てられます。{{productName}} 管理者は {{productName}} 設定にアクセスし、ルームの管理とアーカイブ、新しいユーザーの招待、および下位レベルの役割の割り当てを以下で行えます。{{productName}} 管理者は {{documentsSection}} セクションにアクセスできます。",
-  "ChangeGuestsTypeToAdminMulti": "選択されたゲストは {{membersSection}} セクションに移動され、<strong>'{{ secondType }}'</strong> タイプが割り当てられます。{{productName}} 管理者は {{productName}} 設定にアクセスし、ルームの管理とアーカイブ、新しいユーザーの招待、および下位レベルへのロールの割り当てを以下で行えます。{{productName}} 管理者は {{documentsSection}} セクションにアクセスできます。",
-  "ChangeGuestsTypeToManager": "ゲスト<strong>{{userName}}</strong>は、{{membersSection}}セクションに移動され、<strong>'{{ secondType }}'</strong>タイプが割り当てられます。ルーム管理者権限を持つユーザーは、割り当てられた部屋を作成・管理し、新しいユーザーを招待し、ルーム管理者権限以下の役割を割り当てることができます。ルーム管理者権限を持つユーザーは、{{documentsSection}}セクションへのアクセス権を持っています。",
-  "ChangeGuestsTypeToManagerMulti": "選択されたゲストは {{membersSection}} セクションに移動され、<strong>'{{ secondType }}'</strong> タイプが割り当てられます。ルーム管理者は、割り当てられた部屋を作成および管理し、新しいユーザーを招待し、ルーム管理者およびそれ以下の役割を割り当てることができます。ルーム管理者は {{documentsSection}} セクションへのアクセス権を持っています。",
-  "ChangeUserTypeNote": "<1>注意:</1> {{productName}} 管理者とご本人様は、タイプを変更することはできません。",
-  "DataReassignmentInfo": "このユーザーが作成した部屋は、自動的にあなたに割り当てられます。別のユーザーに再割り当てするには、以下のリンクをクリックしてください。{field} {min} {max}",
-  "DataReassignmentWithFilesDeletion": "この連絡先によって作成された共有ファイルは、{min}自動的に{max}あなたに30日後に割り当てられます。</1> 別の人物に部屋/共有ファイルを再割り当てするには、以下のリンクをクリックしてください。",
-  "PersonalDataDeletion": "この連絡先{{sectionName}}セクション内のすべてのファイルとフォルダは、<1>30日後に永久に削除されます</1>。"
+  "SuccessChangeUserType": "ユーザータイプの変更に成功しました。"
 }

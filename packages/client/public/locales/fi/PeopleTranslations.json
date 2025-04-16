@@ -34,8 +34,5 @@
   "SuccessDeletePersonalData": "Henkilötietojen poistaminen onnistui",
   "SuccessSentInvitation": "Kutsu lähetettiin onnistuneesti",
   "SuccessSentMultipleInvitatios": "Kutsut lähetetty onnistuneesti",
-  "WithoutGroup": "Ilman ryhmää",
-  "MembersCount": "jäsenet: {{count}}",
-  "ShareGuest": "Jaa vieras",
-  "SuccessCopyContantLink": "Yhteystiedot linkki kopioitu onnistuneesti. Linkki on voimassa {days} päivän ajan."
+  "WithoutGroup": "Ilman ryhmää"
 }

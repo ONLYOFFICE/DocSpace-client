@@ -44,8 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "Subir desde el dispositivo",
   "UploadFromPortalTitle": "Subir desde {{productName}}",
   "UploadPDFFormOptionDescription": "Seleccione un formulario PDF listo disponible en {{productName}} y cárguelo en la sala.",
-  "VirtualDataRoomEmptyTitle": "Bienvenido/a a la Sala de datos virtuales",
-  "EmptyTemplatesDescription": "Puedes crear una plantilla desde una habitación en la sección de Habitaciones",
-  "EmptyTemplatesTitle": "Aún no hay plantillas aquí {field}",
-  "SectionsUploadDescription": "Sube cualquier tipo de archivo de {{sectionNameFirst}} o {{sectionNameSecond}}"
+  "VirtualDataRoomEmptyTitle": "Bienvenido/a a la Sala de datos virtuales"
 }

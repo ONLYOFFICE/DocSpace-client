@@ -8,16 +8,5 @@
   "FormCompletedSuccessfully": "Formulario rellenado correctamente",
   "FormNumber": "Número de formulario",
   "FormOwner": "Propietario del formulario",
-  "Title": "El formulario está completado",
-  "FillOutForm": "Completa el formulario",
-  "FormFinalized": "Formulario Finalizado",
-  "FormSectionCompleted": "Sección del formulario completada",
-  "FormVDRCompletedDescription": "El formulario ha sido completado en su totalidad por todos los roles y ahora está finalizado. Está disponible en modo de solo lectura.",
-  "FormVDRConfirmationOfStartDescription": "Se ha enviado ya una notificación al usuario en el primer rol, instándolo a completar el formulario. Puede navegar a la sala o compartir el enlace de {filling} con los participantes.",
-  "FormVDRConfirmationOfStartTitle": "El formulario está listo para ser completado en la habitación {room} con un mínimo de {min} y un máximo de {max}.",
-  "FormVDRSectionCompletedDescription": "La parte asignada del formulario PDF se ha completado exitosamente. El estado de llenado del formulario se puede monitorear en la sala y a través del panel de estado de llenado. Se enviará una notificación por correo electrónico una vez que el formulario esté completamente terminado.",
-  "FormVDRYourTurnDescription": "Se le asigna completar el formulario como primer paso. Se ha enviado una notificación a su correo electrónico. Puede comenzar a completarlo ahora o copiar el enlace de completado y volver más tarde.",
-  "LinkToFillOutForm": "Enlace para completar el formulario: ",
-  "LinkToForm": "Enlace al formulario:",
-  "LinkToViewOnlyForm": "Enlace para ver un formulario de solo lectura:"
+  "Title": "El formulario está completado"
 }

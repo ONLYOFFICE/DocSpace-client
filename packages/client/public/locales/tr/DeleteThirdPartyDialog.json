@@ -1,5 +1,4 @@
 {
   "DisconnectCloudTitle": "Bulut bağlantısını kes",
-  "SuccessDeleteThirdParty": "Üçüncü taraf {{service}} silindi",
-  "ThirdPartyDisconnectPrompt": "{{service}}'yi silmek istediğinizden emin misiniz? Bu, {account} hesabınızı hiçbir şekilde etkilemeyecektir."
+  "SuccessDeleteThirdParty": "Üçüncü taraf {{service}} silindi"
 }

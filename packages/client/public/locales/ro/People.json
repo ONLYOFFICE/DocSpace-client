@@ -1,7 +1,5 @@
 {
   "LblInviteAgain": "Invită din nou",
   "MessageEmailActivationInstuctionsSentOnEmail": "Instrucțiunile de activare a adresei e-mail au fost trimise la <1>{{email}}</1>.",
-  "UserStatus": "Statutul",
-  "RemoveUser": "Șterge utilizator",
-  "RemoveUserConfirmationText": "Pe urmează să eliminați un utilizator din încăpere. Vă rugăm să rețineți că acest utilizator participă activ la completarea formularelor. Dacă continuați, orice formulare în care este implicat va fi oprită la pasul {step}."
+  "UserStatus": "Statutul"
 }

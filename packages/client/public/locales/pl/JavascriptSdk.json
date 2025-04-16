@@ -108,14 +108,5 @@
   "SubtitleDescription": "Podtytuł z dodatkowymi komentarzami lub opisami do bieżącego katalogu.",
   "TabPlugins": "Karta z wtyczkami",
   "Viewer": "Przeglądarka",
-  "ViewerDescription": "Osadź przeglądarkę, aby umożliwić użytkownikom otwarcie pliku do przeglądania z odpowiedniego pokoju.",
-  "NPMCodeConfigStep": "Utwórz obiekt konfiguracyjny z wymaganymi parametrami: {field}, {min}, {max}",
-  "NPMCodeCreateStep": "Utwórz element HTML z identyfikatorem z konfiguracji {id} i wstaw go do ciała dokumentu, aby umieścić ramkę SDK w zakresie {min} - {max}:",
-  "NPMCodeDescription": "Opis pakietu NPM",
-  "NPMCodeImportStep": "Importuj pakiet do swojego projektu:",
-  "NPMCodeInitStep": "Inicjalizacja SDK: {SDK}",
-  "NPMCodeInstallStep": "Zainstaluj pakiet z npm i zapisz go do pliku package.json za pomocą --save: {package} {npm} {file} {save}",
-  "NPMCodeUsageStep": "Użyj metody inicjalizacji SDK, aby utworzyć ramkę SDK: {field}, {min}, {max}.",
-  "SdkPackageVersionInfo": "Aby połączyć jako wersję pakietu zawsze najnowsza",
-  "SourceType": "Typ połączenia"
+  "ViewerDescription": "Osadź przeglądarkę, aby umożliwić użytkownikom otwarcie pliku do przeglądania z odpowiedniego pokoju."
 }

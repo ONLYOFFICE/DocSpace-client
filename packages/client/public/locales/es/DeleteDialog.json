@@ -14,7 +14,5 @@
   "MoveToTrashButton": "Mover a la papelera",
   "UnsubscribeButton": "Cancelar suscripción",
   "UnsubscribeNote": "¿Está seguro de que quiere cancelar la suscripción a los elementos seleccionados de la lista?",
-  "UnsubscribeTitle": "Confirmación de anulación de suscripción",
-  "DeleteTemplate": "¿Realmente desea eliminar la sala de plantilla <1>«{{templateName}}»</1>? La plantilla no se puede restaurar.",
-  "DeleteTemplates": "¿Realmente desea eliminar las plantillas de habitación seleccionadas? No se pueden restaurar."
+  "UnsubscribeTitle": "Confirmación de anulación de suscripción"
 }

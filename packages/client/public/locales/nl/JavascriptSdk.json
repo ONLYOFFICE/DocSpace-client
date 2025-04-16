@@ -108,14 +108,5 @@
   "SubtitleDescription": "Ondertitel met extra opmerkingen of beschrijvingen voor de huidige map.",
   "TabPlugins": "Tabblad Plug-ins",
   "Viewer": "Kijker",
-  "ViewerDescription": "Sluit een viewer in zodat gebruikers een bestand kunnen openen om het vanuit de bijbehorende kamer te bekijken.",
-  "NPMCodeConfigStep": "Maak een configuratieobject met de vereiste parameters: {field}, {min}, {max}",
-  "NPMCodeCreateStep": "Maak een HTML-element met id uit de configuratie {config} en plaats het in de document body om het SDK-frame {SDKframe} te plaatsen.",
-  "NPMCodeDescription": "Beschrijving van een NPM-pakket",
-  "NPMCodeImportStep": "Importeer het pakket in uw project:",
-  "NPMCodeInitStep": "Initialiseer SDK:",
-  "NPMCodeInstallStep": "Installeer het pakket van npm en sla het op in het package.json bestand met --save: {package.json}.",
-  "NPMCodeUsageStep": "Gebruik de SDK initialisatiemethode om het SDK-frame te maken:",
-  "SdkPackageVersionInfo": "Voor connectie als pakketversie altijd de nieuwste {field} {min} {max}.",
-  "SourceType": "Verbindings type"
+  "ViewerDescription": "Sluit een viewer in zodat gebruikers een bestand kunnen openen om het vanuit de bijbehorende kamer te bekijken."
 }

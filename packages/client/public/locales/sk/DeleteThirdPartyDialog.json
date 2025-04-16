@@ -1,5 +1,4 @@
 {
   "DisconnectCloudTitle": "Odpojiť Cloud",
-  "SuccessDeleteThirdParty": "Služba {{service}} tretej strany bola odstránená",
-  "ThirdPartyDisconnectPrompt": "Stehtst du sicher, dass du den/die {{service}} entfernen möchtest? Dies wird dein/e {{account}} Konto in keiner Weise beeinflussen."
+  "SuccessDeleteThirdParty": "Služba {{service}} tretej strany bola odstránená"
 }

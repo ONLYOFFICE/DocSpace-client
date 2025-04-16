@@ -1,5 +1,4 @@
 {
   "DisconnectCloudTitle": "Katkaise yhteys pilveen",
-  "SuccessDeleteThirdParty": "Kolmannen osapuolen {{service}} poistetaan",
-  "ThirdPartyDisconnectPrompt": "Oletko varma, että haluat poistaa {{service}}? Tämä ei vaikuta {{account}} -tilillesi millään tavalla."
+  "SuccessDeleteThirdParty": "Kolmannen osapuolen {{service}} poistetaan"
 }

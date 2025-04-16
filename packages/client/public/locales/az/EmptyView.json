@@ -44,8 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükləyin",
   "UploadFromPortalTitle": "{{productName}} dan yükləyin",
   "UploadPDFFormOptionDescription": "{{productName}}-də mövcud olan hazır PDF formasını seçin və onu otağa yükləyin.",
-  "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz",
-  "EmptyTemplatesDescription": "Ota hissənin ",
-  "EmptyTemplatesTitle": "Hələlik burada şablonlar yoxdur",
-  "SectionsUploadDescription": "Şablon olan {{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən hər hansı bir növ fayl yükləyin."
+  "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz"
 }

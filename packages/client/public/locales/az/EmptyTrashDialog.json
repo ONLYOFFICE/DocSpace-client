@@ -1,6 +1,4 @@
 {
   "DeleteForeverButton": "Həmişəlik sil",
-  "DeleteForeverTitle": "Həmişəlik silinsin?",
-  "DeleteForeverNote": "Bütün {{sectionName}} bölməsinin elementləri sonsuza qədər silinəcək. Onları bərpa etmək mümkün olmayacaq.",
-  "SuccessEmptyAction": "{{sectionName}} bölməsi boşaldıldı"
+  "DeleteForeverTitle": "Həmişəlik silinsin?"
 }

@@ -16,7 +16,5 @@
   "ReassignDataToAnotherUser": "Перепризначити дані іншому користувачу",
   "SuccessfullyDeleteGuestInfoMessage": "Гостя успішно видалено",
   "SuccessfullyDeleteUserInfoMessage": "Користувача успішно видалено",
-  "ToBeAbleToReassignData": "Щоб мати можливість перепризначити дані, видаляйте по одному користувачу за раз.",
-  "PersonalDataDeletionInfo": "Особисті дані, усі особисті файли та папки в розділах {{sectionNameFirst}} та {{sectionNameSecond}}* обраних користувачів будуть безповоротно видалені. Файли та папки обраних користувачів, що зберігаються в спільних розділах* таких як кімнати, залишаться в {{productName}}.",
-  "UserFilesRemovalScope": "Особисті дані, усі файли та папки в розділах {{sectionNameFirst}} та {{sectionNameSecond}} цього користувача будуть безповоротно видалені."
+  "ToBeAbleToReassignData": "Щоб мати можливість перепризначити дані, видаляйте по одному користувачу за раз."
 }

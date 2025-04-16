@@ -46,6 +46,5 @@
   "UserNotFound": "<1>{{email}}</1> օգտվողը չի գտնվել:",
   "UserNotFoundMatchingEmail": "Մենք չկարողացանք գտնել համապատասխան Stripe էլ․ հասցեով օգտվողին:",
   "UsersQuotaAlmostExhausted": "Վճարովի օգտատերերի քվոտան գրեթե սպառվել է։",
-  "YourPrice": "Ձեր գինը",
-  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/տարի</3>"
+  "YourPrice": "Ձեր գինը"
 }

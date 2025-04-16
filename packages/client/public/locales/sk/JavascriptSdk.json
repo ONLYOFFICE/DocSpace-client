@@ -108,14 +108,5 @@
   "SubtitleDescription": "Podtitul s dodatočnými komentármi alebo popismi pre daný priečinok.",
   "TabPlugins": "Tab Pluginy",
   "Viewer": "Prehliadač",
-  "ViewerDescription": "Vložte prehliadač, ktorý používateľom umožní otvoriť súbor na prehliadanie z príslušnej miestnosti.",
-  "NPMCodeConfigStep": "Vytvorte konfiguračný objekt s požadovanými parametrami: {field}, {min}, {max}",
-  "NPMCodeCreateStep": "Vytvorte HTML element s id z konfigurácie {config} a vložte ho do tela dokumentu na umiestnenie rámčeka SDK {SDK}.",
-  "NPMCodeDescription": "Popis NPM balíčka",
-  "NPMCodeImportStep": "Importujte balíček do svojho projektu:",
-  "NPMCodeInitStep": "Inicializácia SDK:",
-  "NPMCodeInstallStep": "Nainštalujte balíček z npm a uložte ho do súboru package.json s --save: {package}.",
-  "NPMCodeUsageStep": "Použite metódu inicializácie SDK na vytvorenie rámca SDK: {field} medzi {min} a {max}.",
-  "SdkPackageVersionInfo": "Pripojenie ako verzia balíka vždy najnovšia.",
-  "SourceType": "Typ pripojenia"
+  "ViewerDescription": "Vložte prehliadač, ktorý používateľom umožní otvoriť súbor na prehliadanie z príslušnej miestnosti."
 }

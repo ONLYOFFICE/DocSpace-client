@@ -108,14 +108,5 @@
   "SubtitleDescription": "현재 디렉토리에 대한 추가 코멘트나 설명이 포함된 부제를 달으세요.",
   "TabPlugins": "탭 플러그인",
   "Viewer": "뷰어",
-  "ViewerDescription": "사용자가 해당 방에서 파일을 열어 볼 수 있도록 뷰어를 임베드하세요.",
-  "NPMCodeConfigStep": "필요한 매개변수를 사용하여 구성 객체를 생성합니다:",
-  "NPMCodeCreateStep": "설정에서 id가 {id}인 HTML 요소를 생성하고 문서 본문에 삽입하여 SDK 프레임을 배치합니다.",
-  "NPMCodeDescription": "NPM 패키지 설명",
-  "NPMCodeImportStep": "프로젝트에 패키지를 가져오세요:",
-  "NPMCodeInitStep": "SDK 초기화:",
-  "NPMCodeInstallStep": "npm에서 패키지를 설치하고 --save 옵션과 함께 package.json 파일에 저장하세요.",
-  "NPMCodeUsageStep": "SDK 초기화 메서드를 사용하여 SDK 프레임을 생성하세요: {field}에서 {min}부터 {max}까지.",
-  "SdkPackageVersionInfo": "패키지 버전으로 연결할 때 항상 최신 버전을 사용하세요. For connect as package version {version} always latest {latest_version}.",
-  "SourceType": "연결 유형"
+  "ViewerDescription": "사용자가 해당 방에서 파일을 열어 볼 수 있도록 뷰어를 임베드하세요."
 }

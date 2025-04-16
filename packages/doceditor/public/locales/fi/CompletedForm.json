@@ -8,16 +8,5 @@
   "FormCompletedSuccessfully": "Lomakkeen täyttö onnistui",
   "FormNumber": "Lomakkeen numero",
   "FormOwner": "Lomakkeen omistaja",
-  "Title": "Lomake on valmis",
-  "FillOutForm": "Täytä lomake",
-  "FormFinalized": "Lomake valmis",
-  "FormSectionCompleted": "Valmistettu lomiosio",
-  "FormVDRCompletedDescription": "Lomake on täytetty kokonaan kaikilla rooleilla ja on nyt valmis. Se on käytettävissä vain luku -tilassa.",
-  "FormVDRConfirmationOfStartDescription": "Ilmoitus on jo lähetetty käyttäjälle ensimmäisessä roolissa, kehottaen heitä täyttämään lomakkeen. Voit siirtyä huoneeseen tai jakaa täyttölinkin osallistujille.",
-  "FormVDRConfirmationOfStartTitle": "Lomake on valmis täytettäväksi huoneessa {room}.",
-  "FormVDRSectionCompletedDescription": "PDF-lomakkeen määritetty osa on täytetty onnistuneesti. Lomakkeen täyttötilaa voidaan seurata tilassa ja Täyttötila-paneelissa. Sähköposti-ilmoitus lähetetään, kun lomake on täytetty kokonaan.",
-  "FormVDRYourTurnDescription": "Sinut on määritetty täyttämään lomake ensimmäisenä roolina. Ilmoitus on lähetetty sähköpostiisi. Voit aloittaa täyttämisen nyt tai kopioida täyttölinkin ja palata myöhemmin. {field} on asetettu {min} ja {max}.",
-  "LinkToFillOutForm": "Link lomakkeen täyttämiseen:",
-  "LinkToForm": "Link lomakkeeseen: {field}",
-  "LinkToViewOnlyForm": "Linkki vain luku -lomakkeeseen: {form_id}"
+  "Title": "Lomake on valmis"
 }

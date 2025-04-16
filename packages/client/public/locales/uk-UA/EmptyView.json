@@ -44,8 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "Передати з пристрою",
   "UploadFromPortalTitle": "Передати з {{productName}}",
   "UploadPDFFormOptionDescription": "Виберіть готову PDF-форму, доступну в {{productName}}, і передайте її до кімнати.",
-  "VirtualDataRoomEmptyTitle": "Ласкаво просимо до віртуальної кімнати даних",
-  "EmptyTemplatesDescription": "Ви можете створити шаблон з кімнати в розділі \"Кімнати\". ",
-  "EmptyTemplatesTitle": "Поки що тут немає шаблонів.",
-  "SectionsUploadDescription": "Завантажте будь-які типи файлів з {{sectionNameFirst}} або {{sectionNameSecond}}"
+  "VirtualDataRoomEmptyTitle": "Ласкаво просимо до віртуальної кімнати даних"
 }

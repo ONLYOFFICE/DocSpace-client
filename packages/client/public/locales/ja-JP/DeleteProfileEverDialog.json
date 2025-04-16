@@ -16,7 +16,5 @@
   "ReassignDataToAnotherUser": "データを別のユーザーに再割り当てする",
   "SuccessfullyDeleteGuestInfoMessage": "ゲストは正常に削除されました",
   "SuccessfullyDeleteUserInfoMessage": "ユーザーの削除に成功しました。",
-  "ToBeAbleToReassignData": "データを再割り当てするためには、一度に一人のユーザーを削除してください。",
-  "PersonalDataDeletionInfo": "選択されたユーザーの{{sectionNameFirst}}および{{sectionNameSecond}}セクション内の個人データ、すべての個人ファイルとフォルダは、完全に削除されます。部屋などの共通セクションに保管されている選択されたユーザーのファイルとフォルダは、{{productName}}に残り続けます。",
-  "UserFilesRemovalScope": "このユーザーの{{sectionNameFirst}}および{{sectionNameSecond}}セクション内の個人データ、すべてのファイルとフォルダは、永久に削除されます。"
+  "ToBeAbleToReassignData": "データを再割り当てするためには、一度に一人のユーザーを削除してください。"
 }

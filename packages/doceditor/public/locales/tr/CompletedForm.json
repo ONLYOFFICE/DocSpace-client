@@ -8,16 +8,5 @@
   "FormCompletedSuccessfully": "Form tamamlandı",
   "FormNumber": "Form numarası",
   "FormOwner": "Form sahibi",
-  "Title": "Form tamamlandı",
-  "FillOutForm": "Formu doldurun",
-  "FormFinalized": "Form {Finalized} tamamlandı",
-  "FormSectionCompleted": "Form Bölümü Tamamlandı",
-  "FormVDRCompletedDescription": "Tüm roller tarafından form tamamen doldurulmuş ve şimdi kesinleşmiştir. Sadece görüntüleme modunda mevcuttur.",
-  "FormVDRConfirmationOfStartDescription": "İlk roldeki kullanıcıya zaten bir bildirim gönderildi ve formu doldurması için onları yönlendirdi. Odaya gidebilir veya doldurma bağlantısını katılımcılarla paylaşabilirsiniz.",
-  "FormVDRConfirmationOfStartTitle": "Oda içinde doldurulmaya hazır form.",
-  "FormVDRSectionCompletedDescription": "PDF formunun atanan kısmı başarıyla tamamlanmıştır. Formun doldurma durumu oda içinde ve Doldurma durumu paneli aracılığıyla izlenebilir. Form tamamen doldurulduktan sonra bir e-posta bildirimi gönderilecektir.",
-  "FormVDRYourTurnDescription": "İlk rol olarak formu doldurmanız isteniyor. E-postanıza bir bildirim gönderildi. Şimdi doldurmaya başlayabilir veya doldurma bağlantısını kopyalayıp daha sonra dönebilirsiniz. {field} {min} {max}",
-  "LinkToFillOutForm": "Formu doldurmak için bağlantı:",
-  "LinkToForm": "Forma bağlantısı:",
-  "LinkToViewOnlyForm": "Sadece görüntüleme için form bağlantısı:"
+  "Title": "Form tamamlandı"
 }

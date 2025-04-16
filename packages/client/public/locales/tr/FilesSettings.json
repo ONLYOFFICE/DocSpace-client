@@ -2,6 +2,5 @@
   "DisplayFileExtension": "Dosya adının yanında dosya uzantısını görüntüle",
   "DisplayNotification": "Öğeleri Çöp Kutusuna taşırken bildirim göster",
   "OpenSameTab": "Aynı sekmede {{organizationName}} düzenleyicisini açın",
-  "OriginalCopy": "Dosya kopyasını da orijinal türünde kaydet",
-  "CancellaionNotification": "Lütfen iptal bildirimini tekrar göstermeyin."
+  "OriginalCopy": "Dosya kopyasını da orijinal türünde kaydet"
 }

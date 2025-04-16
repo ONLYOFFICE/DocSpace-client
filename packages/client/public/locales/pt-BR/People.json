@@ -1,7 +1,5 @@
 {
   "LblInviteAgain": "Convidar novamente",
   "MessageEmailActivationInstuctionsSentOnEmail": "As instruções de ativação de e-mail foram enviadas para o endereço de e-mail <1>{{email}}</1>.",
-  "UserStatus": "Status",
-  "RemoveUser": "Remover usuário",
-  "RemoveUserConfirmationText": "Você está prestes a remover um usuário do espaço. Observe que este usuário está participando ativamente no preenchimento de formulários. Se você prosseguir, qualquer formulário em que ele esteja envolvido será interrompido em sua etapa {step}."
+  "UserStatus": "Status"
 }

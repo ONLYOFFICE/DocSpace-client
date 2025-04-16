@@ -1,5 +1,4 @@
 {
   "DisconnectCloudTitle": "クラウドの接続解除",
-  "SuccessDeleteThirdParty": "第三方の{{service}}が削除されました。",
-  "ThirdPartyDisconnectPrompt": "この{{service}}を削除しますか？これはあなたの{{account}}アカウントには一切影響しません。"
+  "SuccessDeleteThirdParty": "第三方の{{service}}が削除されました。"
 }

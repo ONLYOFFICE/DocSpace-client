@@ -1,5 +1,4 @@
 {
   "DisconnectCloudTitle": "Atvienot mākoni",
-  "SuccessDeleteThirdParty": "Trešās puses {{service}} ir izdzēsts",
-  "ThirdPartyDisconnectPrompt": "Vai Jūs patiešām vēlaties izdzēst {{service}}? Tas neietekmēs Jūsu {{account}} kontu ne kādā veidā."
+  "SuccessDeleteThirdParty": "Trešās puses {{service}} ir izdzēsts"
 }

@@ -16,7 +16,5 @@
   "ReassignDataToAnotherUser": "Ponovno dodelite podatke drugemu uporabniku",
   "SuccessfullyDeleteGuestInfoMessage": "Gost je bil uspešno izbrisan",
   "SuccessfullyDeleteUserInfoMessage": "Uporabnik je bil uspešno izbrisan",
-  "ToBeAbleToReassignData": "Če želite znova dodeliti podatke, izbrišite le enega uporabnika naenkrat.",
-  "PersonalDataDeletionInfo": "Osebni podatki, vse osebne datoteke in mape v razdelkih {{sectionNameFirst}} in {{sectionNameSecond}}* izbranih uporabnikov bodo trajno izbrisani. Datoteke in mape izbranih uporabnikov, shranjene v skupnih razdelkih* kot so sobe, bodo ostale v {{productName}}.",
-  "UserFilesRemovalScope": "Osebni podatki, vse datoteke in mape v razdelkih {{sectionNameFirst}} in {{sectionNameSecond}} te uporabniške datoteke bodo trajno izbrisani."
+  "ToBeAbleToReassignData": "Če želite znova dodeliti podatke, izbrišite le enega uporabnika naenkrat."
 }

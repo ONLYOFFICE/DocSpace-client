@@ -34,8 +34,5 @@
   "TypeTitleSharePoint": "SharePoint",
   "TypeTitleSkyDrive": "OneDrive",
   "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk",
-  "GuestReleaseTipDescripton": "Vsi prej dodani Uporabniki so postali Gostje in so zdaj na voljo v seznamu Kontaktov samo za skrbnike {{productName}}. Gostje niso več del nobene skupine. Lahko vedno spremenite njihov tip in jih dodate v skupino, če je potrebno.",
-  "GuestReleaseTipLink": "Seznamte se s více informací o typech uživatelů.",
-  "RoleGuestDescriprion": "Gosti lahko dostopajo do sob, v katere so bili povabljeni, pa tudi ustvarjajo in urejajo dokumente, če jim je bila dodeljena ustrezna vloga v sobi. {field} {min} {max}"
+  "TypeTitleYandex": "Yandex.Disk"
 }

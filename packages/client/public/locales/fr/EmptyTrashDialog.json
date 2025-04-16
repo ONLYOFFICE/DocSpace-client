@@ -1,6 +1,4 @@
 {
   "DeleteForeverButton": "Supprimer définitivement",
-  "DeleteForeverTitle": "Supprimer définitivement ?",
-  "DeleteForeverNote": "Tous les éléments de la section {{sectionName}} seront supprimés définitivement. Vous ne pourrez pas les restaurer.",
-  "SuccessEmptyAction": "{{sectionName}} section vidée"
+  "DeleteForeverTitle": "Supprimer définitivement ?"
 }

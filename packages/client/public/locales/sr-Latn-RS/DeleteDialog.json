@@ -14,7 +14,5 @@
   "MoveToTrashButton": "Pomeri u Otpad",
   "UnsubscribeButton": "Otkaži pretplatu",
   "UnsubscribeNote": "Da li ste sigurni da želite da otkažete pretplatu odabranih stavki sa liste?",
-  "UnsubscribeTitle": "Konfirmacija za otkazivanje pretplate",
-  "DeleteTemplate": "Da li stvarno želite da obrišete šablon prostor <1>«{{templateName}}»</1>? Šablon se ne može vratiti.",
-  "DeleteTemplates": "Da li stvarno želite da obrišete izabrane šablone soba? Oni ne mogu da budu vraćeni."
+  "UnsubscribeTitle": "Konfirmacija za otkazivanje pretplate"
 }

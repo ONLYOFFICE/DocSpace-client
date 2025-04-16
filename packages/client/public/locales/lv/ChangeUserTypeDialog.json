@@ -4,14 +4,5 @@
   "ChangeUserTypeButton": "Mainīt veidu",
   "ChangeUserTypeMessage": "Lietotāji ar <strong>'{{ firstType }}'</strong> veidu tiks pārvietoti uz <strong>'{{ secondType }}'</strong> veidu.",
   "SuccessChangeGuestType": "Viesa veids tika veiksmīgi nomainīts",
-  "SuccessChangeUserType": "Lietotāja veids ir veiksmīgi nomainīts",
-  "ChangeContactType": "Izmainīt kontaktu veidu",
-  "ChangeGuestsTypeToAdmin": "Viesis <strong>{{userName}}</strong> tiks pārvietots uz {{membersSection}} sadaļu un piešķirts <strong>'{{ secondType }}'</strong> tips. {{productName}} administratori var piekļūt {{productName}} iestatījumiem, pārvaldīt un arhivēt telpas, uzaicināt jaunus lietotājus un piešķirt lomas zem sava līmeņa. {{productName}} administratori ir piekļuvuši {{documentsSection}} sadaļai.",
-  "ChangeGuestsTypeToAdminMulti": "Izvēlētie viesi tiks pārvietoti uz {{membersSection}} sadaļu un piešķirts <strong>'{{ secondType }}'</strong> tips. {{productName}} administratori var piekļūt {{productName}} iestatījumiem, pārvaldīt un arhivēt telpas, uzaicināt jaunus lietotājus un piešķirt lomas zem sava līmeņa. {{productName}} administratori ir piekļuve {{documentsSection}} sadaļai.",
-  "ChangeGuestsTypeToManager": "Viesis <strong>{{userName}}</strong> tiks pārvietots uz <strong>{{membersSection}}</strong> sadaļu un piešķirts <strong>'{{ secondType }}'</strong> tips. Telpu administratori var izveidot un pārvaldīt piešķirtās telpas, uzaicināt jaunus lietotājus un piešķirt Room admin un zemākus statusus. Telpu administratori ir piekļuve <strong>{{documentsSection}}</strong> sadaļai.",
-  "ChangeGuestsTypeToManagerMulti": "Izvēlētie viesi tiks pārvietoti uz {{membersSection}} sadaļu un piešķirts <strong>'{{ secondType }}'</strong> tips. Telpu administratori var izveidot un pārvaldīt piešķirtās telpas, uzaicināt jaunus lietotājus un piešķirt Room admin un zemākus pakāpes. Telpu administratori ir piekļuve {{documentsSection}} sadaļai.",
-  "ChangeUserTypeNote": "<1>Piezīme:</1> jūs nevarat mainīt tipu administratoram {{productName}} un sev.",
-  "DataReassignmentInfo": "Šī lietotāja izveidotās istabas tiks automātiski piešķirtas jums. Lai pārdalītu istabas citai personai, noklikšķiniet uz attiecīgo saiti zemāk.",
-  "DataReassignmentWithFilesDeletion": "Visi kopīgie faili, ko radījis šis kontakts, tiks automātiski piešķirti jums 30 dienās </1>. Lai pārdalītu istabas/kopīgos failus citai personai, noklikšķiniet uz attiecīgo saiti zemāk.",
-  "PersonalDataDeletion": "Visi faili un mapes {{sectionName}} sadaļā šī kontakta tiks <1>pastāvīgi dzēsti 30 dienās</1>."
+  "SuccessChangeUserType": "Lietotāja veids ir veiksmīgi nomainīts"
 }

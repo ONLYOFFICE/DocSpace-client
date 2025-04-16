@@ -14,7 +14,5 @@
   "MoveToTrashButton": "Mover para o Lixo",
   "UnsubscribeButton": "Cancelar subscrição",
   "UnsubscribeNote": "Cancelar a inscrição dos itens selecionados da lista?",
-  "UnsubscribeTitle": "Confirmar o cancelamento da subscrição",
-  "DeleteTemplate": "Você realmente deseja excluir o modelo de sala <1>«{{templateName}}»</1>? O modelo não pode ser restaurado.",
-  "DeleteTemplates": "Você realmente deseja excluir os modelos de quarto selecionados? Eles não podem ser restaurados."
+  "UnsubscribeTitle": "Confirmar o cancelamento da subscrição"
 }

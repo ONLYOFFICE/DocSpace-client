@@ -1,5 +1,4 @@
 {
   "DisconnectCloudTitle": "Ապակապակցել ամպը",
-  "SuccessDeleteThirdParty": "Երրորդ կողմի {{service}}-ը ջնջված է",
-  "ThirdPartyDisconnectPrompt": "Դուք համոզված եք, որ ուզում եք ջնջել {{service}} ծառայությունը։ Դա ոչ մի կերպ չի ảnh hưởngելու ձեր {{account}} հաշվին։"
+  "SuccessDeleteThirdParty": "Երրորդ կողմի {{service}}-ը ջնջված է"
 }

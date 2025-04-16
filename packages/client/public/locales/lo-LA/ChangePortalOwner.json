@@ -8,7 +8,5 @@
   "ManageUser": "ຈັດການບັນຊີຜູ້ໃຊ້ ",
   "NewPortalOwner": "ເຈົ້າຂອງ {{productName}} ໃໝ່",
   "PortalOwnerCan": "ເຈົ້າຂອງ {{productName}} ສາມາດ:",
-  "SetAccessRights": "ກໍານົດສິດການເຂົ້າເຖິງ",
-  "BackupPortal": "Napravi varnostno kopijo podataka {{productName}}",
-  "ManagePortal": "Upravljanje konfiguracijom {{productName}}"
+  "SetAccessRights": "ກໍານົດສິດການເຂົ້າເຖິງ"
 }

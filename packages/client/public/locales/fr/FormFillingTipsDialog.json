@@ -1,15 +1,1 @@
-{
-  "DescriptionUploading": "Créez des formulaires PDF dans {{productName}}, par exemple dans votre {{sectionName}}, et téléchargez les formulaires prêts à l'emploi dans la salle. Utilisez la bibliothèque de modèles intégrée et choisissez parmi de nombreux modèles PDF prêts à l'emploi.",
-  "HeaderComplete": "Analyse pratique des réponses collectées",
-  "HeaderSharing": "Partage rapide",
-  "HeaderStarting": "Début du processus de remplissage du formulaire",
-  "HeaderSubmitting": "La soumission des réponses",
-  "HeaderUploading": "Téléchargement de formulaire facile",
-  "TitleComplete": "Vérifiez les formulaires remplis et analysez automatiquement les données collectées dans une feuille de calcul. Tout – dans une seule pièce.",
-  "TitleSharing": "Invitez d'autres membres {{productName}} à la salle pour remplir les formulaires PDF téléchargés. Copiez un lien d'accès public pour partager la salle avec des utilisateurs externes.",
-  "TitleStarting": "Lorsque qu’un formulaire est ouvert pour être rempli, une copie individuelle est automatiquement créée pour chaque participant et est enregistrée dans le dossier « En cours ». Cela signifie que le formulaire a été commencé, mais n’a pas encore été complété.",
-  "TitleSubmitting": "Une fois que le bouton « Terminer et soumettre » est cliqué dans le formulaire ouvert, il est déplacé vers le dossier « Terminé ». ",
-  "WelcomeDescription": "Ici, vous pouvez organiser le remplissage de formulaires PDF simple, collecter et analyser facilement les réponses. Prêt à commencer ?",
-  "WelcomeFillingForm": "Bienvenue dans la salle de remplissage de formulaire !",
-  "WelcomeStartTutorial": "Faites une courte visite guidée"
-}
+{}

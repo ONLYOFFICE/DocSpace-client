@@ -1,15 +1,1 @@
-{
-  "DescriptionUploading": "Ustvarite PDF obrazce v {{productName}}, npr. v vaši {{sectionName}}, in naložite pripravljene obrazce v sobo. Izkoristite vgrajeno knjižnico predlog in izbirajte med številnimi pripravljenimi predlogami PDF.",
-  "HeaderComplete": "Udobno analiziranje zbranih odgovorov",
-  "HeaderSharing": "Hitro deljenje",
-  "HeaderStarting": "Začenjam postopek izpolnjevanja obrazca",
-  "HeaderSubmitting": "Oddaja odgovorov",
-  "HeaderUploading": "Enostavno nalaganje obrazcev",
-  "TitleComplete": "Preverite izpolnjene obrazce in samodejno analizirajte podatke, zbranih v preglednico. Vse – v eni sobi.",
-  "TitleSharing": "Povabite druge člane {{productName}} v sobo, da izpolnijo naložene obrazce PDF. Kopirajte javno povezavo za souporabo sobe z zunanjimi uporabniki.",
-  "TitleStarting": "Ko se obrazec odpre za izpolnjevanje, je samodejno ustvarjena posamična kopija za vsakega udeleženca in shranjena v mapo V teku. To pomeni, da je obrazec bil začet, a še ni bil končan.",
-  "TitleSubmitting": "Ko se klikne gumb Potrdi in oddaj v odprti kopiji obrazca, se premakne v mapo Potrdi.",
-  "WelcomeDescription": "Tukaj lahko uredite enostavno izpolnjevanje obrazcev PDF, z lahkoto zbirate in analizirate odgovore. Ste pripravljeni začeti?",
-  "WelcomeFillingForm": "Dobrodošli v sobo za izpolnjevanje obrazcev!",
-  "WelcomeStartTutorial": "Odprite kratek ogled."
-}
+{}

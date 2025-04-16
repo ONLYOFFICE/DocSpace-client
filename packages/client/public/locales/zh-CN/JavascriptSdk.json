@@ -108,14 +108,5 @@
   "SubtitleDescription": "包含当前目录的附加注释或描述的副标题。",
   "TabPlugins": "选项卡插件",
   "Viewer": "仅查看",
-  "ViewerDescription": "嵌入查看器，让用户能够从对应的房间打开文件并进行查看。",
-  "NPMCodeConfigStep": "创建带有必需参数的配置对象: {field}, {min}, {max}",
-  "NPMCodeCreateStep": "从配置中创建具有 id {id} 的 HTML 元素，并将其插入到文档主体中，用于放置 SDK 框架，范围 {min} 到 {max}。",
-  "NPMCodeDescription": "NPM 包的描述",
-  "NPMCodeImportStep": "在您的项目中导入包：",
-  "NPMCodeInitStep": "初始化 SDK: {SDK}",
-  "NPMCodeInstallStep": "从 npm 安装包并使用 --save 将其保存到 package.json 文件：",
-  "NPMCodeUsageStep": "使用 SDK 初始化方法创建 SDK 框架：{SDK init method}。",
-  "SdkPackageVersionInfo": "为了连接为包版本始终为最新 {field} {min} {max}",
-  "SourceType": "连接类型"
+  "ViewerDescription": "嵌入查看器，让用户能够从对应的房间打开文件并进行查看。"
 }

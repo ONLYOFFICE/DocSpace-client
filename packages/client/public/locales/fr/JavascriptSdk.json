@@ -108,14 +108,5 @@
   "SubtitleDescription": "Sous-titre avec des commentaires supplémentaires",
   "TabPlugins": "Onglet Module complémentaires",
   "Viewer": "Lecteur",
-  "ViewerDescription": "Intégrez le lecteur pour permettre aux utilisateurs d'ouvrir un fichier en lecture seule à partir d'une salle.",
-  "NPMCodeConfigStep": "Créez un objet de configuration avec les paramètres requis : {field}, {min}, {max}.",
-  "NPMCodeCreateStep": "Créez un élément HTML avec l'identifiant {id} provenant de la configuration et insérez-le dans le corps du document pour placer le cadre SDK : {frame}.",
-  "NPMCodeDescription": "Description du paquet NPM",
-  "NPMCodeImportStep": "Importez le paquet dans votre projet :",
-  "NPMCodeInitStep": "Initialiser le SDK :",
-  "NPMCodeInstallStep": "Installer le paquet depuis npm et l'enregistrer dans le fichier package.json avec --{save}:",
-  "NPMCodeUsageStep": "Utilisez la méthode d'initialisation SDK pour créer le cadre SDK : {SDK init method}.",
-  "SdkPackageVersionInfo": "Pour se connecter en tant que version de paquet, toujours la dernière {version}.",
-  "SourceType": "Type de connexion"
+  "ViewerDescription": "Intégrez le lecteur pour permettre aux utilisateurs d'ouvrir un fichier en lecture seule à partir d'une salle."
 }

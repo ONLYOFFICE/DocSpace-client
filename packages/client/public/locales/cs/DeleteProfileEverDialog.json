@@ -16,7 +16,5 @@
   "ReassignDataToAnotherUser": "Přeřazení dat jinému uživateli",
   "SuccessfullyDeleteGuestInfoMessage": "Host byl úspěšně odstraněn",
   "SuccessfullyDeleteUserInfoMessage": "Uživatel byl úspěšně odstraněn",
-  "ToBeAbleToReassignData": "Abyste mohli data znovu přiřadit, odstraňte vždy jednoho uživatele.",
-  "PersonalDataDeletionInfo": "Osobní data, všechny osobní soubory a složky v sekcích {{sectionNameFirst}} a {{sectionNameSecond}}* vybraných uživatelů budou trvale smazány. Soubory a složky vybraných uživatelů uložené ve sdílených sekcích* jako jsou pokoje, zůstanou v {{productName}}.",
-  "UserFilesRemovalScope": "Osobní údaje, všechny soubory a složky v sekcích {{sectionNameFirst}} a {{sectionNameSecond}} tohoto uživatele budou trvale smazány."
+  "ToBeAbleToReassignData": "Abyste mohli data znovu přiřadit, odstraňte vždy jednoho uživatele."
 }

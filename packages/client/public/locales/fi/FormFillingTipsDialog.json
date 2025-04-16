@@ -1,15 +1,1 @@
-{
-  "DescriptionUploading": "Luo PDF-lomakkeita {{productName}}-ohjelmassa, esimerkiksi omassa {{sectionName}}-osiossasi, ja lataa valmiit lomakkeet huoneeseen. Hyödynnä integroitu mallikirjasto ja valitse lukuisien valmiiden PDF-mallien joukosta.",
-  "HeaderComplete": "Kätevä analyysi kerättyjen vastausten suhteen",
-  "HeaderSharing": "Nopeasti jaettavissa",
-  "HeaderStarting": "Aloitetaan lomakon täyttämisen prosessin täyttämisen prosessin prosessin prosessin",
-  "HeaderSubmitting": "Vastausten jättäminen",
-  "HeaderUploading": "Helppo lomakkeiden lataus",
-  "TitleComplete": "Tarkista täytetyt lomakkeet ja analysoi automaattisesti taulukkolaskentaan kerätty data. Kaikki – yhdessä huoneessa.",
-  "TitleSharing": "Kutsu muita {{productName}} -jäseniä huoneeseen täytettäväksi ladattuihin PDF-lomakkeisiin. Jaa huone ulkoisille käyttäjille kopioimalla julkinen käyttölinkki.",
-  "TitleStarting": "Kun lomake avataan täytettäväksi, automaattisesti luodaan yksittäinen kopio jokaiselle vastaajalle ja se tallennetaan Työn alla -kansioon. Se tarkoittaa, että lomake on aloitettu, mutta sitä ei ole vielä täytetty.",
-  "TitleSubmitting": "Kun ",
-  "WelcomeDescription": "Täällä voit järjestää suoraviivaista PDF-lomaketäyttöä, kerätä ja analysoida vastauksia helposti. Oletko valmis aloittamaan?",
-  "WelcomeFillingForm": "Tervetuloa lomaketukhuoneeseen!",
-  "WelcomeStartTutorial": "Ota lyhyt kierros"
-}
+{}

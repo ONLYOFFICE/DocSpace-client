@@ -34,8 +34,5 @@
   "TypeTitleSharePoint": "ෂෙයාර්පොයින්ට්",
   "TypeTitleSkyDrive": "වන්ඩ්‍රයිව්",
   "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "යාන්ඩෙක්ස්.ඩිස්ක්",
-  "GuestReleaseTipDescripton": "पूर्वी जोडलेले सर्व वापरकर्ते आता अतिथी झाले आहेत आणि {{productName}} प्रशासकांच्या संपर्क यादीत फक्त उपलब्ध आहेत. अतिथी कोणत्याही गटाचा भाग नाहीत. आवश्यक असल्यास, आपण नेहमी त्यांचा प्रकार बदलू शकता आणि त्यांना गटात समाविष्ट करू शकता.",
-  "GuestReleaseTipLink": "उपयोगकर्ता प्रकारांबद्दल अधिक जाणून घ्या.",
-  "RoleGuestDescriprion": "ဧည် Guests can access the rooms they have been invited to, as well as create and edit documents if they have been assigned the appropriate {roles} in the room."
+  "TypeTitleYandex": "යාන්ඩෙක්ස්.ඩිස්ක්"
 }

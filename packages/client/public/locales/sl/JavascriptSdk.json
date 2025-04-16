@@ -108,14 +108,5 @@
   "SubtitleDescription": "Podnaslov z dodatnimi komentarji ali opisi za trenutni imenik.",
   "TabPlugins": "Vtičniki za zavihke",
   "Viewer": "Pregledovalnik",
-  "ViewerDescription": "Vdelajte pregledovalnik, da uporabnikom omogočite odpiranje datoteke za ogled iz ustrezne sobe.",
-  "NPMCodeConfigStep": "Ustvarite konfiguracijski objekt z zahtevanimi parametri: {field}, {min}, {max}.",
-  "NPMCodeCreateStep": "Ustvarite HTML element z id-jem iz konfiguracije in ga vstavite v telo dokumenta za postavitev okvirja SDK:",
-  "NPMCodeDescription": "Opis paketa NPM",
-  "NPMCodeImportStep": "Uvozite paket v vaš projekt:",
-  "NPMCodeInitStep": "Inicializacija SDK-ja:",
-  "NPMCodeInstallStep": "Namestite paket iz npm in ga shranite v datoteko package.json z možnostjo --save:",
-  "NPMCodeUsageStep": "Uporabite metodo inicializacije SDK za ustvarjanje ogrodja SDK:",
-  "SdkPackageVersionInfo": "Za povezavo kot paket različica vedno najnovejša",
-  "SourceType": "Vrsta povezave"
+  "ViewerDescription": "Vdelajte pregledovalnik, da uporabnikom omogočite odpiranje datoteke za ogled iz ustrezne sobe."
 }

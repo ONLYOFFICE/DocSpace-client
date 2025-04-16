@@ -24,15 +24,5 @@
   "SettingsForAll": "Tieto nastavenia budú platné pre všetky vaše priestory.",
   "Subheader": "V tejto časti môžete vytvoriť niekoľko priestorov a sprístupniť ich používateľom",
   "SubmitDelete": "Odoslať žiadosť o vymazanie",
-  "VisitSpace": "Navštívte tento priestor po vytvorení",
-  "DecryptStorage": "Dešifrovanie úložiska",
-  "DecryptWarningDialogContent": "Všetky miesta budú nedostupné počas procesu dešifrovania. Ste si istí, že chcete pokračovať?",
-  "EncryptData": "Zašifrujte dáta v kľude",
-  "EncryptDataDescription": "{{organizationName}} používa AES-256 šifrovanie na ochranu dát v pokoji v úložisku.",
-  "EncryptDataWarningDescription": "Šifrovanie úložiska môže trvať nejaký čas. Priestory nebudú počas procesu dostupné. Uistite sa, že máte dostatok úložiska a že vaše dáta sú zálohované. Nezabudnite vypnúť automatické zálohy a zastaviť všetky spustenú zálohy. Inak sa to stane automaticky.",
-  "EncryptStorage": "Zašifrujte úložisko",
-  "EncryptWarningDialogContent": "Všetky miesta budú nedostupné počas procesu šifrovania. Ste si istí, že chcete pokračovať?",
-  "MoreDetails": "Pre viac podrobností o tom, ako zastaviť služby, prosím, pozrite sa na náš <1>{{link}}</1>.",
-  "NotifyUsers": "Informujte používateľov, že priestor nebude dostupný.",
-  "StorageEncrypted": "Uložisko šifrované"
+  "VisitSpace": "Navštívte tento priestor po vytvorení"
 }

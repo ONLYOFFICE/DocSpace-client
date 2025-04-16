@@ -108,14 +108,5 @@
   "SubtitleDescription": "Podnaslov sa dodatnim komentarima ili opisima za trenutni direktorijum.",
   "TabPlugins": "Dodaci za Kartice",
   "Viewer": "Pregledač",
-  "ViewerDescription": "Ugradite pregledač da biste omogućili korisnicima da otvore datoteku za gledanje iz odgovarajuće sobe.",
-  "NPMCodeConfigStep": "Kreiraj objekat konfiguracije sa potrebnim parametrima: {field}, {min}, {max}",
-  "NPMCodeCreateStep": "Kreiraj HTML element sa id-jem iz konfiguracije i ubaci ga unutar tela dokumenta za smeštaj okvira SDK-a: {field}, {min}, {max}.",
-  "NPMCodeDescription": "Opis paketa NPM",
-  "NPMCodeImportStep": "Uvežite paket u vaš projekat: {package}.",
-  "NPMCodeInitStep": "Počnite SDK: {SDK}",
-  "NPMCodeInstallStep": "Instalirajte paket iz npm i sačuvajte ga u fajlu package.json sa --save: {package.json}.",
-  "NPMCodeUsageStep": "Koristite metodu inicijalizacije SDK-a da biste kreirali okvir SDK-a: {field} između {min} i {max}.",
-  "SdkPackageVersionInfo": "Za povezivanje kao verzija paketa uvek najnovija.",
-  "SourceType": "Tip veze"
+  "ViewerDescription": "Ugradite pregledač da biste omogućili korisnicima da otvore datoteku za gledanje iz odgovarajuće sobe."
 }

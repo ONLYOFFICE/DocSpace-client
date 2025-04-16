@@ -1,5 +1,4 @@
 {
   "DisconnectCloudTitle": "මේඝය විසන්ධි කරන්න",
-  "SuccessDeleteThirdParty": "{{service}} තෙවන පාර්ශ්වය මැකිණි",
-  "ThirdPartyDisconnectPrompt": "तुम्ही {{service}} काढण्याची खात्री आहे का? यामुळे तुमच्या {{account}} खात्यावर कोणताही परिणाम होणार नाही."
+  "SuccessDeleteThirdParty": "{{service}} තෙවන පාර්ශ්වය මැකිණි"
 }

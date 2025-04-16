@@ -14,6 +14,5 @@
   "ReassigningDataToAnother": "تم بدء عملية إعادة تعيين البيانات من المستخدم <0>{{fromUser}}</0>  إلى المستخدم <1>{{toUser}}</1>. يرجى العلم أن العملية من الممكن أن تستغرق بعض الوقت. ",
   "ReassigningDataToItself": "تم بدء عملية إعادة تعيين البيانات من المستخدم <0>{{fromUser}}</0>  إلى المستخدم\n<1>{{toUser}}</1> <2>{{you}}</2>. يرجى العلم أن العملية من الممكن أن تستغرق بعض الوقت. ",
   "StartTransferAgain": "بدء التحويل مجدداً",
-  "UserToWhomTheDataWillBeTransferred": "المستخدم الذي سيتم تحويل البيانات إليه",
-  "RoomsOnlyReassignment": "سنقوم بنقل الغرف التي تم إنشاؤها بواسطة {contact}."
+  "UserToWhomTheDataWillBeTransferred": "المستخدم الذي سيتم تحويل البيانات إليه"
 }

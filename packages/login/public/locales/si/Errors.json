@@ -15,9 +15,5 @@
   "SsoSettingsDisabled": "තනි පිවිසුම අබලයි",
   "SsoSettingsEmptyToken": "බලයදීමේ නිමිත්ත හමු නොවිණි",
   "SsoSettingsNotValidToken": "වැරදි බලයදීමේ නිමිත්තකි",
-  "SsoSettingsUserTerminated": "මෙම පරිශ්‍රීලකයා අබලයි",
-  "LoginWithBruteForceCaptcha": "तुम्ही रोबोट नाही आहात याची खात्री करा.",
-  "OAuthApplicationDisabled": "हे अनुप्रयोग अक्षम आहे.",
-  "OAuthApplicationEmpty": "ॲप्लिकेशन {application} शोधण्यात अयशस्वी झाले.",
-  "OAuthClientEmpty": "क्लायंट आयडी {ClientID} सापडले नाही."
+  "SsoSettingsUserTerminated": "මෙම පරිශ්‍රීලකයා අබලයි"
 }

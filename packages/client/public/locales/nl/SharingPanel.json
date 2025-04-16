@@ -2,6 +2,5 @@
   "ExternalLink": "Externe link",
   "LinkName": "Link naam",
   "ShareEmailBody": "U heeft toegang gekregen tot het {{itemName}} document. Klik op de onderstaande link om het document nu meteen te openen: {{shareLink}}.",
-  "ShareEmailSubject": "U heeft toegang gekregen tot het {{itemName}} document",
-  "RoleForLink": "Rol voor link"
+  "ShareEmailSubject": "U heeft toegang gekregen tot het {{itemName}} document"
 }

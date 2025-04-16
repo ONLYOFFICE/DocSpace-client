@@ -44,8 +44,5 @@
   "UploadDevicePDFFormOptionTitle": "تحميل من الجهاز",
   "UploadFromPortalTitle": "تحميل من {{productName}}",
   "UploadPDFFormOptionDescription": "حدد نموذج  PDFجاهزًا متاحًا في {{productName}} وقم بتحميله إلى الغرفة. ",
-  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية",
-  "EmptyTemplatesDescription": "يمكنك إنشاء قالب من غرفة في قسم الغرف.",
-  "EmptyTemplatesTitle": "لا توجد قوالب هنا حتى الآن",
-  "SectionsUploadDescription": "حمّل أي نوع من الملفات من {{sectionNameFirst}} أو {{sectionNameSecond}}"
+  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية"
 }

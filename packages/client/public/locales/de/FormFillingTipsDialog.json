@@ -1,15 +1,1 @@
-{
-  "DescriptionUploading": "Erstellen Sie PDF-Formulare in {{productName}}, z. B. in Ihrem {{sectionName}}, und laden Sie die fertigen Formulare in den Raum hoch. Nutzen Sie die integrierte Vorlagenbibliothek und wählen Sie aus zahlreichen vorgefertigten PDF-Vorlagen.",
-  "HeaderComplete": "Bequeme Analyse der gesammelten Antworten",
-  "HeaderSharing": "Schnelles Teilen",
-  "HeaderStarting": "Beginne den Prozess des Formularausfüllens",
-  "HeaderSubmitting": "Das Senden der Antworten",
-  "HeaderUploading": "Einfaches Formular-Uploaden",
-  "TitleComplete": "Überprüfen Sie die ausgefüllten Formulare und analysieren Sie die Daten, die automatisch in eine Tabelle erfasst werden. Alles – in einem Raum.",
-  "TitleSharing": "Laden Sie andere {{productName}} Mitglieder in den Raum ein, um die hochgeladenen PDF-Formulare auszufüllen. Kopieren Sie einen öffentlichen Zugriffslink, um den Raum mit externen Benutzern zu teilen.",
-  "TitleStarting": "Wenn ein Formular zum Ausfüllen geöffnet wird, wird automatisch eine individuelle Kopie für jeden Teilnehmer erstellt und in den Ordner „In Bearbeitung“ gespeichert. Das bedeutet, dass das Formular begonnen, aber noch nicht abgeschlossen wurde.",
-  "TitleSubmitting": "Sobald der Button „Vollständig ausfüllen & Absenden“ in der geöffneten Form kopiert wurde, wird er in den Ordner „Vollständig“ verschoben.",
-  "WelcomeDescription": "Hier können Sie die unkomplizierte PDF-Formularausfüllung organisieren, Antworten einfach erfassen und analysieren. Bereit loszulegen?",
-  "WelcomeFillingForm": "Willkommen im Formularausfüllraum!",
-  "WelcomeStartTutorial": "Machen Sie eine kurze Tour"
-}
+{}

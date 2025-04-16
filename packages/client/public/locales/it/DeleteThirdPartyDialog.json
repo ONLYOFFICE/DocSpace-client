@@ -1,5 +1,4 @@
 {
   "DisconnectCloudTitle": "Scollegare il cloud",
-  "SuccessDeleteThirdParty": "Il servizio di terze parti {{service}} è stato cancellato",
-  "ThirdPartyDisconnectPrompt": "Sei sicuro di voler rimuovere il {{service}}? Questo non influenzerà in alcun modo il tuo account {{account}}."
+  "SuccessDeleteThirdParty": "Il servizio di terze parti {{service}} è stato cancellato"
 }

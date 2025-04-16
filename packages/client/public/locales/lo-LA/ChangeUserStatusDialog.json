@@ -7,14 +7,5 @@
   "EnableUser": "ເປີດໃຊ້ຜູ້ໃຊ້",
   "EnableUserDescription": "ຖ້າທ່ານເປີດໃຊ້ຜູ້ໃຊ້ນີ້, ເຂົາເຈົ້າຈະສາມາດເຂົ້າສູ່ລະບົບ {{productName}} ອີກເທື່ອຫນຶ່ງແລະເຂົ້າເຖິງເອກະສານແລະຂໍ້ມູນຂອງເຂົາເຈົ້າ.",
   "EnableUsers": "ເປີດໃຊ້ຜູ້ໃຊ້",
-  "EnableUsersDescription": "ຖ້າທ່ານເປີດໃຊ້ຜູ້ໃຊ້ເຫຼົ່ານີ້, ເຂົາເຈົ້າຈະສາມາດເຂົ້າສູ່ລະບົບ {{productName}} ອີກເທື່ອຫນຶ່ງແລະເຂົ້າເຖິງເອກະສານແລະຂໍ້ມູນຂອງເຂົາເຈົ້າ.",
-  "DisableGuest": "Onemogućiti gosta",
-  "DisableGuestDescription": "Če onemogočite tega gosta, se ne bodo mogli prijaviti v {{productName}}.",
-  "DisableGuests": "Onemogućiti goste",
-  "DisableGuestsDescription": "Če onemogočite te goste, se ne bodo mogli prijaviti v {productName}.",
-  "DisableGuestsGeneralDescription": "Vi lahko kasneje izbrišete ali omogočite onemogočene goste, če je potrebno.",
-  "EnableGuest": "Omogućiti gosta",
-  "EnableGuestDescription": "Če omogočite tega gosta, se bo lahko znova prijavil v {{productName}}.",
-  "EnableGuests": "Omogućite goste",
-  "EnableGuestsDescription": "Če omogočite te goste, se bodo lahko znova prijavili v {{productName}}."
+  "EnableUsersDescription": "ຖ້າທ່ານເປີດໃຊ້ຜູ້ໃຊ້ເຫຼົ່ານີ້, ເຂົາເຈົ້າຈະສາມາດເຂົ້າສູ່ລະບົບ {{productName}} ອີກເທື່ອຫນຶ່ງແລະເຂົ້າເຖິງເອກະສານແລະຂໍ້ມູນຂອງເຂົາເຈົ້າ."
 }

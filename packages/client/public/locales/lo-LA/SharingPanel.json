@@ -2,6 +2,5 @@
   "ExternalLink": "ລິງພາຍນອກ",
   "LinkName": "ຊື່ລິ້ງ",
   "ShareEmailBody": "ທ່ານໄດ້ຮັບອະນຸຍາດເຂົ້າເຖິງເອກະສານ {{itemName}}. ກົດທີ່ລິ້ງດ້ານລຸ່ມເພື່ອເປີດເອກະສານດຽວນີ້: {{shareLink}}.",
-  "ShareEmailSubject": "ທ່ານໄດ້ຮັບອະນຸຍາດເຂົ້າເຖິງເອກະສານ {{itemName}}",
-  "RoleForLink": "Uloga za povezavo {link}"
+  "ShareEmailSubject": "ທ່ານໄດ້ຮັບອະນຸຍາດເຂົ້າເຖິງເອກະສານ {{itemName}}"
 }

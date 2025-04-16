@@ -687,7 +687,10 @@ const SectionHeaderContent = (props) => {
                 isContextButtonVisible={isContextButtonVisible()}
                 withChat={withChat}
                 chatOpen={aiChatIsVisible}
-                toggleChat={setAiChatIsVisible}
+                toggleChat={(visible) => {
+                  setAiChatIsVisible(visible);
+                  if (visible) setIsInfoPanelVisible(false);
+                }}
               />
               {showSignInButton ? (
                 <Button
@@ -831,8 +834,6 @@ export default inject(
 
     const isRoom = !!roomType;
 
-    const withChat = roomType === RoomsType.AIRoom;
-
     const {
       onClickEditRoom,
       onClickInviteUsers,
@@ -908,6 +909,10 @@ export default inject(
       : selectedFolder.id;
 
     const { aiChatIsVisible, setAiChatIsVisible } = flowStore;
+
+    const withChat =
+      roomType === RoomsType.AIRoom ||
+      navigationPath.some((r) => r.roomType === RoomsType.AIRoom);
 
     return {
       showText: settingsStore.showText,

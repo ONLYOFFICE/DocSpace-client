@@ -84,7 +84,6 @@ const AuditContent = ({
       </div>
 
       <Text
-        containerMinWidth="120px"
         fontSize="12px"
         fontWeight={600}
         truncate

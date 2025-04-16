@@ -23,7 +23,6 @@ import CatalogSpamReactSvg from "PUBLIC_DIR/images/icons/16/catalog.spam.react.s
     Demo
   </Link>
   <Link
-    containerWidth="160px"
     type="action"
     title="Demo"
     fontSize="12px"
@@ -35,7 +34,6 @@ import CatalogSpamReactSvg from "PUBLIC_DIR/images/icons/16/catalog.spam.react.s
     0 000 0000000
   </Link>
   <Link
-    containerWidth="160px"
     type="page"
     title="demo@demo.com"
     fontSize="12px"

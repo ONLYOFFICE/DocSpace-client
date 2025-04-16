@@ -83,9 +83,7 @@ const SessionsRowContent = ({
           {country && city ? ` ${city}` : null}
         </Text>
       ) : null}
-      <Text truncate containerWidth="160px">
-        {ip}
-      </Text>
+      <Text truncate>{ip}</Text>
     </StyledRowContent>
   );
 };

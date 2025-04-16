@@ -189,7 +189,6 @@ const Template = (args: RowContainerProps) => {
               </>
               {user.isHead ? (
                 <Link
-                  // containerWidth="120px"
                   type={LinkType.page}
                   title="Head of department"
                   fontSize="12px"
@@ -201,7 +200,6 @@ const Template = (args: RowContainerProps) => {
                 <div />
               )}
               <Link
-                // containerWidth="160px"
                 type={LinkType.action}
                 title={user.department}
                 fontSize="12px"
@@ -218,7 +216,6 @@ const Template = (args: RowContainerProps) => {
                 {user.mobilePhone}
               </Link>
               <Link
-                // containerWidth="180px"
                 type={LinkType.page}
                 title={user.email}
                 fontSize="12px"

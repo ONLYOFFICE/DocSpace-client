@@ -269,4 +269,6 @@ export type FilesSelectorProps = TSelectorHeader &
     checkCreating?: boolean;
 
     applyFilterOption?: ApplyFilterOption;
+
+    isMultiSelect?: boolean;
   };

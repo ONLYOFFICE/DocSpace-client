@@ -145,7 +145,12 @@ const useFilesHelper = ({
       filter.applyFilterOption = null;
       filter.withSubfolders = false;
       if (filterParam) {
-        configureFilterByFilterParam(filter, filterParam, extsWebEdited);
+        configureFilterByFilterParam(
+          filter,
+          filterParam,
+          extsWebEdited,
+          applyFilterOption,
+        );
       }
 
       const id = selectedItemId ?? (isUserOnly ? "@my" : "");

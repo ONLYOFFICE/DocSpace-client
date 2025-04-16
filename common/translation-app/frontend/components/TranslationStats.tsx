@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchTranslationStats } from '@/lib/api';
+import { getLanguageName } from '@/utils/languageUtils';
 
 interface LanguageStats {
   language: string;
@@ -82,54 +83,6 @@ const TranslationStats: React.FC<TranslationStatsProps> = ({ projectName }) => {
   const { totalKeys, languageStats } = stats;
 
   // Sort languages by completion percentage (highest first)
-  // Get proper language names from language codes
-  const getLanguageName = (code: string): string => {
-    // Language mapping based on DocSpace Common.json Culture_* entries
-    const languageMap: Record<string, string> = {
-      // Base languages
-      en: 'English',
-      'en-GB': 'English (United Kingdom)',
-      'en-US': 'English (United States)',
-      fr: 'French',
-      de: 'German',
-      'de-CH': 'German (Switzerland)',
-      es: 'Spanish',
-      'es-MX': 'Spanish (Mexico)',
-      it: 'Italian',
-      pt: 'Portuguese',
-      'pt-BR': 'Portuguese (Brazil)',
-      ru: 'Russian',
-      zh: 'Chinese',
-      'zh-CN': 'Chinese (Simplified)',
-      ja: 'Japanese',
-      'ja-JP': 'Japanese',
-      ko: 'Korean',
-      'ko-KR': 'Korean',
-      ar: 'Arabic',
-      'ar-SA': 'Arabic (Saudi Arabia)',
-      tr: 'Turkish',
-      pl: 'Polish',
-      nl: 'Dutch',
-      cs: 'Czech',
-      sk: 'Slovak',
-      bg: 'Bulgarian',
-      az: 'Azerbaijani',
-      'el-GR': 'Greek',
-      fi: 'Finnish',
-      'hy-AM': 'Armenian',
-      'lo-LA': 'Lao',
-      lv: 'Latvian',
-      ro: 'Romanian',
-      si: 'Sinhala',
-      sl: 'Slovenian',
-      'sr-Cyrl-RS': 'Serbian (Cyrillic)',
-      'sr-Latn-RS': 'Serbian (Latin)',
-      'uk-UA': 'Ukrainian',
-      vi: 'Vietnamese',
-    };
-    
-    return languageMap[code] || code.toUpperCase();
-  };
   
   // Sort by base language first (typically 'en'), then by completion percentage
   const sortedLanguageStats = [...languageStats].sort((a, b) => {

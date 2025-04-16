@@ -314,11 +314,84 @@ function countStringValues(obj) {
 }
 
 /**
+ * Get a human-readable language name from language code
+ */
+function getLanguageName(code) {
+  // Language mapping based on DocSpace translations
+  const languageMap = {
+    en: 'English',
+    'en-GB': 'English (United Kingdom)',
+    'en-US': 'English (United States)',
+    fr: 'French',
+    de: 'German',
+    'de-CH': 'German (Switzerland)',
+    es: 'Spanish',
+    'es-MX': 'Spanish (Mexico)',
+    it: 'Italian',
+    pt: 'Portuguese',
+    'pt-BR': 'Portuguese (Brazil)',
+    ru: 'Russian',
+    zh: 'Chinese',
+    'zh-CN': 'Chinese (Simplified)',
+    ja: 'Japanese',
+    'ja-JP': 'Japanese',
+    ko: 'Korean',
+    'ko-KR': 'Korean',
+    ar: 'Arabic',
+    'ar-SA': 'Arabic (Saudi Arabia)',
+    tr: 'Turkish',
+    pl: 'Polish',
+    nl: 'Dutch',
+    cs: 'Czech',
+    sk: 'Slovak',
+    bg: 'Bulgarian',
+    az: 'Azerbaijani',
+    'el-GR': 'Greek',
+    fi: 'Finnish',
+    'hy-AM': 'Armenian',
+    'lo-LA': 'Lao',
+    lv: 'Latvian',
+    ro: 'Romanian',
+    si: 'Sinhala',
+    sl: 'Slovenian',
+    'sr-Cyrl-RS': 'Serbian (Cyrillic)',
+    'sr-Latn-RS': 'Serbian (Latin)',
+    'uk-UA': 'Ukrainian',
+    vi: 'Vietnamese',
+  };
+  
+  return languageMap[code] || code.toUpperCase();
+}
+
+/**
+ * Get language information for translation context
+ */
+function getLanguageInfo(code) {
+  // List of RTL languages
+  const rtlLanguages = ['ar', 'he', 'fa', 'ur'];
+  const isRtl = rtlLanguages.some(rtlCode => code.startsWith(rtlCode));
+  
+  return {
+    code,
+    name: getLanguageName(code),
+    isRightToLeft: isRtl
+  };
+}
+
+/**
  * Translate text using Ollama API
  */
 async function translateText(text, sourceLanguage, targetLanguage, model) {
   try {
-    const prompt = `Translate the following text from ${sourceLanguage} to ${targetLanguage}. Return only the translated text without any commentary or explanations:\n\n${text}`;
+    // Get language information for better translation context
+    const sourceInfo = getLanguageInfo(sourceLanguage);
+    const targetInfo = getLanguageInfo(targetLanguage);
+    
+    // Create a more detailed prompt with language information
+    const prompt = `Translate the following text from ${sourceInfo.name} to ${targetInfo.name}.
+${targetInfo.isRightToLeft ? 'Note that the target language is written right-to-left.' : ''}
+Please maintain any formatting, placeholders (like {{variable}}), and HTML tags if present.
+Return only the translated text without any commentary or explanations.\n\n${text}`;
     
     const response = await fetch(`${ollamaConfig.apiUrl}/api/generate`, {
       method: 'POST',

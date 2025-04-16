@@ -69,6 +69,8 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
       currentDeviceType,
       navigationTitleContainerNode,
       onCloseDropBox,
+      isContextButtonVisible,
+      isPublicRoom,
     },
     ref,
   ) => {
@@ -115,6 +117,7 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
         ref={ref}
         className={styles.box}
         data-with-logo={withLogo ? "true" : "false"}
+        data-is-frame={isFrame ? "true" : "false"}
         style={
           {
             "--drop-box-width": `${dropBoxWidth}px`,
@@ -158,6 +161,8 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
             isInfoPanelVisible={isInfoPanelVisible}
             onCloseDropBox={onCloseDropBox}
             showTitle
+            isContextButtonVisible={isContextButtonVisible}
+            isPublicRoom={isPublicRoom}
           />
         </div>
 

@@ -237,7 +237,10 @@ const RoomIcon = ({
               />
             ) : (
               <ReactSVG
-                className="template-icon-svg-icon"
+                className={classNames(
+                  "room-icon-cover template-icon-svg-icon",
+                  styles.roomIconCover,
+                )}
                 src={imgSrc as string}
               />
             )}

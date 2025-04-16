@@ -264,6 +264,8 @@ const Navigation = ({
                 navigationTitleContainerNode={navigationTitleContainerNode}
                 onCloseDropBox={onCloseDropBox}
                 isFrame={isFrame}
+                isContextButtonVisible={isContextButtonVisible}
+                isPublicRoom={isPublicRoom}
               />
             </>
           ) : null}

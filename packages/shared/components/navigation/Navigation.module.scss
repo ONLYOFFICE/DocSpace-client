@@ -127,7 +127,7 @@
 
 .heading {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 18px !important;
   line-height: 24px;
   margin: 0;
 
@@ -136,12 +136,12 @@
   }
 
   @include tablet-and-below {
-    font-size: 21px;
+    font-size: 21px !important;
     line-height: 28px;
   }
 
   @include mobile {
-    font-size: 18px;
+    font-size: 18px !important;
     line-height: 24px;
   }
 }
@@ -275,7 +275,7 @@
   }
 
   @include mobile {
-    margin-inline-start: 0;
+    margin-inline-start: 0 !important;;
   }
 }
 
@@ -378,14 +378,14 @@
 
   @include tablet-and-below {
     width: var(--drop-box-width);
-    inset-inline-start: -16px;
+    inset-inline-start: -16px !important;;
     padding: 0 16px;
     padding-top: 14px;
   }
 
   @include mobile {
     padding-top: 10px !important;
-    inset-inline-start: 0;
+    inset-inline-start: 0 !important;;
   }
 }
 
@@ -522,12 +522,6 @@
       padding-inline-start: 16px;
       border-inline-end: 1px solid var(--navigation-icon-stroke);
       height: 21px;
-
-      @include mobile {
-        &[data-is-frame="false"] {
-          display: none;
-        }
-      }
     }
 
     .headline-heading {
@@ -606,7 +600,8 @@
   @include mobile {
     &[data-is-frame="false"] {
       :global {
-        .navigation-logo {
+        .navigation-logo,
+        .navigation-header-separator {
           display: none;
         }
       }

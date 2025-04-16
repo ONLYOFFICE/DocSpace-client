@@ -8,6 +8,10 @@ import MoveKeyModal from "./MoveKeyModal";
 import DeleteKeyModal from "./DeleteKeyModal";
 import FigmaReferenceModal from "./FigmaReferenceModal";
 import Modal from "./Modal";
+import TranslationTableRow from "./TranslationTableRow";
+import TranslationTableCell from "./TranslationTableCell";
+import TranslationTablePagination from "./TranslationTablePagination";
+import TranslationTableKeyHeader from "./TranslationTableKeyHeader";
 
 interface TranslationEntry {
   key: string;
@@ -574,86 +578,22 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {languages.map((lang) => (
-                        <tr
-                          key={`${currentEntry.path}-${lang}`}
-                          className="hover:bg-gray-50 dark:hover:bg-gray-800"
-                        >
-                          <td className="px-2 py-2 border-b dark:border-gray-800 whitespace-nowrap">
-                            <span
-                              className={`inline-block px-1.5 py-0.5 rounded ${lang === baseLanguage ? "bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 font-medium" : "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"}`}
-                            >
-                              {lang}
-                              {lang === baseLanguage && "*"}
-                            </span>
-                          </td>
-                          <td className="px-3 py-2 border-b dark:border-gray-800">
-                            {editingCell?.rowPath === currentEntry.path &&
-                            editingCell?.language === lang ? (
-                              <div className="flex">
-                                <textarea
-                                  value={editValue}
-                                  onChange={(e) => setEditValue(e.target.value)}
-                                  className="input min-h-[60px] flex-1 mr-2"
-                                  autoFocus
-                                />
-                                <div className="flex flex-col space-y-1">
-                                  <button
-                                    onClick={handleEditSave}
-                                    disabled={savingTranslation}
-                                    className="btn btn-primary text-xs py-1"
-                                  >
-                                    {savingTranslation ? "..." : "Save"}
-                                  </button>
-                                  <button
-                                    onClick={handleEditCancel}
-                                    className="btn btn-secondary text-xs py-1"
-                                  >
-                                    Cancel
-                                  </button>
-                                </div>
-                              </div>
-                            ) : (
-                              <div className="group flex items-start">
-                                <div
-                                  className={`flex-1 break-words ${!currentEntry.translations[lang] ? "text-gray-400 dark:text-gray-500 italic" : "text-gray-800 dark:text-gray-200"}`}
-                                  onClick={() =>
-                                    handleEditStart(
-                                      currentEntry.path,
-                                      lang,
-                                      currentEntry.translations[lang] || ""
-                                    )
-                                  }
-                                >
-                                  {currentEntry.translations[lang] ||
-                                    "Not translated"}
-                                </div>
-
-                                {lang !== baseLanguage && (
-                                  <button
-                                    onClick={() =>
-                                      handleTranslate(currentEntry.path, lang)
-                                    }
-                                    disabled={
-                                      translating ||
-                                      isTranslating(currentEntry.path, lang) ||
-                                      !ollamaConnected
-                                    }
-                                    className="ml-2 text-xs opacity-0 group-hover:opacity-100 focus:opacity-100 btn btn-secondary py-0 px-2"
-                                    title="Translate using Ollama"
-                                  >
-                                    {isTranslating(currentEntry.path, lang)
-                                      ? "Translating..."
-                                      : "AI"}
-                                  </button>
-                                )}
-                              </div>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
+                    <TranslationTableRow
+                      currentEntry={currentEntry}
+                      languages={languages}
+                      baseLanguage={baseLanguage}
+                      editingCell={editingCell}
+                      editValue={editValue}
+                      setEditValue={setEditValue}
+                      handleEditStart={handleEditStart}
+                      handleEditSave={handleEditSave}
+                      handleEditCancel={handleEditCancel}
+                      translating={translating}
+                      savingTranslation={savingTranslation}
+                      handleTranslate={handleTranslate}
+                      isTranslating={isTranslating}
+                      ollamaConnected={ollamaConnected}
+                    />
                   </table>
                 </div>
               </div>

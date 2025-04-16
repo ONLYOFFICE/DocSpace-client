@@ -45,7 +45,6 @@
   "InvalidEmailWithActiveSubscriptionForAdmin": "Your subscription remains active, but we recommend contacting the {{productName}} owner to choose a new Payer.",
   "InvalidEmailWithoutActiveSubscription": "We recommend choosing a new Payer who gets access to subscription settings in {{productName}}.",
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "We recommend contacting the {{productName}} owner to choose a new Payer.",
-  "InsufficientFundsOnCard": "Insufficient funds on the card. Please top up the card or go to Stripe to replace it. <1>Go to the Stripe</1>",
   "ManagerTypesDescription": "Admin account types and their privileges",
   "NewRoomWillExceedLimit": "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
   "NewUsersWillExceedMembersLimit": "Adding new paid users is not possible since the limit is reached for the number of admins included in your current plan.",

@@ -43,11 +43,18 @@ const TranslationStats: React.FC<TranslationStatsProps> = ({ projectName }) => {
   if (loading) {
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-200 dark:border-gray-700 max-w-4xl mx-auto mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Translation Statistics</h2>
-        <div className="text-center py-6">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
-          <p className="mt-2 text-gray-700 dark:text-gray-300">Loading statistics...</p>
-        </div>
+        <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+          Translation Statistics
+        </h2>
+        {loading && (
+          <div className="flex justify-center items-center py-12">
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary-600"></div>
+            <span className="ml-3 text-gray-700 dark:text-gray-300">Loading statistics...</span>
+          </div>
+        )}
       </div>
     );
   }
@@ -55,7 +62,12 @@ const TranslationStats: React.FC<TranslationStatsProps> = ({ projectName }) => {
   if (error) {
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border border-gray-200 dark:border-gray-700 max-w-4xl mx-auto mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Translation Statistics</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+          Translation Statistics
+        </h2>
         <div className="bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-4 py-3 rounded mb-4">
           {error}
         </div>
@@ -131,9 +143,14 @@ const TranslationStats: React.FC<TranslationStatsProps> = ({ projectName }) => {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700 max-w-4xl mx-auto mb-8">
-      <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
-        Translation Statistics
-        {projectName && <span className="text-lg ml-2 text-gray-600 dark:text-gray-400">({projectName})</span>}
+      <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+        <span>
+          Translation Statistics
+          {projectName && <span className="text-lg ml-2 text-gray-600 dark:text-gray-400">({projectName})</span>}
+        </span>
       </h2>
       
       <div className="mb-6">
@@ -176,7 +193,7 @@ const TranslationStats: React.FC<TranslationStatsProps> = ({ projectName }) => {
         <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">Language Completion</h3>
         
         {/* Histogram Chart */}
-        <div className="mb-8 bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+        <div className="mb-8 bg-gray-50 dark:bg-gray-750 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="mb-2 flex justify-between text-sm text-gray-500 dark:text-gray-400">
             <span>0%</span>
             <span>25%</span>

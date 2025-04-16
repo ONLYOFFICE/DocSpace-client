@@ -10,10 +10,31 @@ async function routes(fastify, options) {
   // Get all projects
   fastify.get('/', async (request, reply) => {
     try {
-      const projects = Object.keys(projectLocalesMap).map(name => ({
-        name,
-        path: projectLocalesMap[name]
-      }));
+      // Get all projects with file counts
+      const projectsPromises = Object.keys(projectLocalesMap).map(async (name) => {
+        // Get available languages for this project
+        const languages = await fsUtils.getAvailableLanguages(name);
+        
+        // Calculate file count by summing namespace counts across languages
+        let fileCount = 0;
+        
+        // If there are languages, get one to calculate namespace count
+        if (languages.length > 0) {
+          // Just check the first language to estimate file count
+          const baseLanguage = languages[0];
+          const namespaces = await fsUtils.getNamespaces(name, baseLanguage);
+          fileCount = namespaces.length;
+        }
+        
+        return {
+          name,
+          path: projectLocalesMap[name],
+          fileCount,
+          languageCount: languages.length
+        };
+      });
+      
+      const projects = await Promise.all(projectsPromises);
       
       return { success: true, data: projects };
     } catch (error) {

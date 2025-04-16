@@ -748,6 +748,12 @@
     height: 53px;
   }
 
+  .chatPanelHeaderTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .chatPanelHeaderButtons {
     display: flex;
     align-items: center;

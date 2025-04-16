@@ -37,6 +37,8 @@ import { TViewAs } from "../../../types";
 import { Portal } from "../../portal";
 import { IconButton } from "../../icon-button";
 import { Text } from "../../text";
+import { BetaBadge } from "../../beta-badge";
+
 import Chat from "../../chat";
 
 import styles from "../Section.module.scss";
@@ -56,9 +58,13 @@ const Header = ({
 }: HeaderProps) => {
   return (
     <div className={styles.chatPanelHeader}>
-      <Text lineHeight="24px" fontSize="18px" isBold>
-        AI Chat
-      </Text>
+      <div className={styles.chatPanelHeaderTitle}>
+        <Text lineHeight="24px" fontSize="18px" isBold>
+          AI Chat
+        </Text>
+        <BetaBadge place="right" withoutTooltip />
+      </div>
+
       <div className={styles.chatPanelHeaderButtons}>
         {!isMobile ? (
           <IconButton

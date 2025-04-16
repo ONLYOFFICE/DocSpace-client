@@ -42,6 +42,7 @@ const Backdrop: React.FC<BackdropProps> = ({
   isModalDialog = false,
   zIndex = 203,
   onClick,
+  shouldShowBackdrop: shouldShowBackdropProp = false,
   ...restProps
 }) => {
   const backdropRef = React.useRef<HTMLDivElement | null>(null);
@@ -61,7 +62,9 @@ const Backdrop: React.FC<BackdropProps> = ({
 
     // Determine if backdrop is needed
     const shouldShowBackdrop =
-      backdropCount < 1 || (isAside && backdropCount <= 2);
+      backdropCount < 1 ||
+      (isAside && backdropCount <= 2) ||
+      shouldShowBackdropProp;
 
     // Determine if background is needed
     const shouldShowBackground =
@@ -72,7 +75,14 @@ const Backdrop: React.FC<BackdropProps> = ({
 
     setNeedBackdrop(shouldShowBackdrop);
     setNeedBackground(shouldShowBackground);
-  }, [visible, isAside, withBackground, withoutBlur, withoutBackground]);
+  }, [
+    visible,
+    isAside,
+    withBackground,
+    withoutBlur,
+    withoutBackground,
+    shouldShowBackdropProp,
+  ]);
 
   const backdropClasses = classNames(
     styles.backdrop,

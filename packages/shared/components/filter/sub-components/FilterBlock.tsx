@@ -302,7 +302,7 @@ const FilterBlock = ({
       setFilterValues(value);
       changeSelectedItems(value);
     },
-    [filterValues, changeSelectedItems, selectedFilterValue, onFilter],
+    [filterValues, changeSelectedItems],
   );
 
   const getDefaultFilterData = React.useCallback(async () => {
@@ -330,14 +330,20 @@ const FilterBlock = ({
         if (!Array.isArray(groupItem.key) && groupItem.key) {
           const selectedItem = groupSelectedItem?.get(groupItem.key);
 
-          isSelected = !!selectedItem;
+          isSelected =
+            !!selectedItem ||
+            ("displaySelectorType" in groupItem &&
+              !!groupItem.displaySelectorType);
 
           if (
             "displaySelectorType" in groupItem &&
             !!groupItem.displaySelectorType
           ) {
-            groupItem.selectedLabel = selectedItem?.label;
-            groupItem.selectedKey = selectedItem?.key as string;
+            groupItem.selectedLabel = groupSelectedItem
+              ?.values()
+              .next().value?.label;
+            groupItem.selectedKey = groupSelectedItem?.values().next().value
+              ?.key as string;
           }
         }
 

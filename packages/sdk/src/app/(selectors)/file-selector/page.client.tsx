@@ -203,6 +203,7 @@ export default function FilesSelectorClient({
     ) =>
       isFirstLoad ||
       !!isDisabledFolder ||
+      !!!selectedFileInfo ||
       selectedItemType === "rooms" ||
       isRoot ||
       isSelectedParentFolder,

@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Importați datele în {{productName}} din {{organizationName}} Workspace, Google Workspace sau Nextcloud.",
   "MigrationDataTitle": "Datele de migrare",
   "PublicRoomEmptyTitle": "Bun venit în Sala publică",
+  "SectionsUploadDescription": "Încărcați orice tip de fișier din {{sectionNameFirst}} sau {{sectionNameSecond}}",
   "SendInvitationLetter": "Trimiteți o invitaţie pentru a adăuga noii membri la portalul",
   "ShareOptionDescription": "Copiați linkul public sau invitați alți utilizatori în sala pentru a proceda la completarea formularului.",
   "ShareOptionTitle": "Partajare sală",

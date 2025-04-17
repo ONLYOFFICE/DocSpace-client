@@ -9,11 +9,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "fastify": "^4.24.0",
     "@fastify/cors": "^8.3.0",
-    "fastify-socket.io": "^5.0.0",
     "dotenv": "^16.3.1",
-    "fs-extra": "^11.1.1"
+    "fastify": "^4.24.0",
+    "fastify-socket.io": "^5.0.0",
+    "fs-extra": "^11.1.1",
+    "ollama": "^0.5.15"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

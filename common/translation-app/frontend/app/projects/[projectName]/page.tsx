@@ -64,7 +64,6 @@ export default function ProjectPage() {
     setupSocketListeners,
     checkConnection: checkOllamaConnection,
     isConnected: ollamaConnected,
-    translationProgress,
     models,
     selectedModel,
     setSelectedModel,

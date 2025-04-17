@@ -30,11 +30,10 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Link } from "@docspace/shared/components/link";
 
 import TransactionHistory from "./TransactionHistory";
 import TopUpModal from "./TopUpModal";
-import { formatCurrencyValue, formattedBalance } from "./utils";
+import { formattedBalance } from "./utils";
 
 import "./styles/Wallet.scss";
 import PayerInformation from "../PayerInformation";
@@ -77,7 +76,7 @@ const Wallet = ({
     setIsEditAutoPayment(true);
   };
 
-  const isDisbled = cardLinkedOnFreeTariff ? isPayer : false;
+  const isDisbled = cardLinkedOnFreeTariff ? !isPayer : false;
 
   return (
     <div className="wallet-container">

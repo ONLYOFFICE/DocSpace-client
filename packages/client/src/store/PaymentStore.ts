@@ -205,8 +205,7 @@ class PaymentStore {
     if (!this.currentQuotaStore) return;
 
     const { isFreeTariff } = this.currentQuotaStore;
-
-    return isFreeTariff && this.walletCustomerEmail;
+    return isFreeTariff && !!this.walletCustomerEmail;
   }
 
   get walletBalance() {
@@ -257,7 +256,7 @@ class PaymentStore {
     this.autoPayments = res;
   };
 
-  fetchWalletPayer = async (isRefresh: boolean) => {
+  fetchWalletPayer = async (isRefresh?: boolean) => {
     const res = await getWalletPayer(isRefresh);
 
     if (!res) return;
@@ -317,7 +316,7 @@ class PaymentStore {
 
       await Promise.all(requests);
 
-      const payer = customerId ?? this.walletCustomerEmail;
+      const payer = customerId || this.walletCustomerEmail;
 
       if (payer) await setPayerInfo(payer);
 
@@ -363,7 +362,10 @@ class PaymentStore {
       this.setRangeStepByQuota();
       this.setBasicTariffContainer();
 
-      if (!this.isAlreadyPaid) this.setIsInitPaymentPage(true);
+      if (!this.isAlreadyPaid) {
+        this.setIsInitPaymentPage(true);
+        await this.fetchWalletPayer();
+      }
     } catch (error) {
       toastr.error(t("Common:UnexpectedError"));
       console.error(error);
@@ -371,6 +373,8 @@ class PaymentStore {
     }
 
     if (this.isAlreadyPaid) await setPayerInfo();
+    else if (this.walletCustomerEmail)
+      await setPayerInfo(this.walletCustomerEmail);
 
     this.setIsInitPaymentPage(true);
   };
@@ -623,13 +627,12 @@ class PaymentStore {
 
   get canUpdateTariff() {
     if (!this.userStore || !this.currentQuotaStore) return;
+
     const { user } = this.userStore;
-    const { isFreeTariff } = this.currentQuotaStore;
 
     if (!user) return false;
 
-    if (isFreeTariff) return true;
-
+    if (!this.cardLinkedOnFreeTariff) return true;
     return this.isPayer;
   }
 

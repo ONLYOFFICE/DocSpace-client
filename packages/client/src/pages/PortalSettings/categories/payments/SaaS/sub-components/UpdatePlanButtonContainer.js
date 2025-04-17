@@ -44,6 +44,7 @@ let timerId = null;
 let intervalId = null;
 let isWaitRequest = false;
 let previousManagersCount = null;
+
 const UpdatePlanButtonContainer = ({
   setIsLoading,
   paymentLink,
@@ -58,6 +59,7 @@ const UpdatePlanButtonContainer = ({
   t,
   canPayTariff,
   isYearTariff,
+  cardLinkedOnFreeTariff,
 }) => {
   const resetIntervalSuccess = () => {
     intervalId &&
@@ -186,6 +188,20 @@ const UpdatePlanButtonContainer = ({
     const isDowngradePlan = managersCount < maxCountManagersByQuota;
     const isTheSameCount = managersCount === maxCountManagersByQuota;
 
+    if (cardLinkedOnFreeTariff) {
+      return (
+        <Button
+          className="upgrade-now-button"
+          label={t("UpgradeNow")}
+          size="medium"
+          primary
+          isDisabled={isLoading || isDisabled}
+          onClick={onUpdateTariff}
+          isLoading={isLoading}
+        />
+      );
+    }
+
     return isDowngradePlan ? (
       <DowngradePlanButtonContainer
         onUpdateTariff={onUpdateTariff}
@@ -206,10 +222,11 @@ const UpdatePlanButtonContainer = ({
       />
     );
   };
-
   return (
     <StyledBody>
-      {isAlreadyPaid ? updatingCurrentTariffButton() : payTariffButton()}
+      {isAlreadyPaid || cardLinkedOnFreeTariff
+        ? updatingCurrentTariffButton()
+        : payTariffButton()}
     </StyledBody>
   );
 };
@@ -235,6 +252,7 @@ export default inject(
       accountLink,
       isAlreadyPaid,
       canPayTariff,
+      cardLinkedOnFreeTariff,
     } = paymentStore;
 
     return {
@@ -253,6 +271,7 @@ export default inject(
       setPortalQuotaValue,
       currentTariffPlanTitle,
       isYearTariff,
+      cardLinkedOnFreeTariff,
     };
   },
 )(observer(UpdatePlanButtonContainer));

@@ -104,14 +104,16 @@ class CurrentTariffStatusStore {
     return this.portalTariffStatus?.licenseDate;
   }
 
-  setPayerInfo = async () => {
+  setPayerInfo = async (payer?: string) => {
+    const payerInfo = payer ?? this.customerId;
+
     try {
-      if (!this.customerId || !this.customerId?.length) {
+      if (!payerInfo || !payerInfo?.length) {
         this.payerInfo = null;
         return;
       }
 
-      const result = await getUserByEmail(this.customerId);
+      const result = await getUserByEmail(payerInfo);
       if (!result) {
         this.payerInfo = null;
         return;

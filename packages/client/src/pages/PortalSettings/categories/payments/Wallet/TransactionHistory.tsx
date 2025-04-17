@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import moment from "moment";
@@ -47,9 +47,8 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import FilterIcon from "@docspace/shared/components/filter/sub-components/FilterIcon";
 
-import FilterReactSvrUrl from "PUBLIC_DIR/images/filter.react.svg?url";
 import TransactionBody from "./sub-components/TransactionBody";
-import TransactionHistoryLoader from "./sub-components/TransactionHistoryLoader";
+
 import "./styles/TransactionHistory.scss";
 import TableLoader from "./sub-components/TableLoader";
 

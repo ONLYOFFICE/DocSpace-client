@@ -110,7 +110,6 @@ const TransactionBody = ({
 
   const rowView = (
     <RowContainer
-      className="people-row-container"
       useReactWindow
       fetchMoreFiles={() => {}}
       hasMoreFiles={false}

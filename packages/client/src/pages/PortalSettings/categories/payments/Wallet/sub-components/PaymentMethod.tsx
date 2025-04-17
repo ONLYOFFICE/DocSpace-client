@@ -80,7 +80,11 @@ const PaymentMethod = ({
               {t("CardLinked")}
             </Text>
           </div>
-          <Link fontWeight={600} onClick={goStripeAccount}>
+          <Link
+            fontWeight={600}
+            onClick={goStripeAccount}
+            textDecoration="underline dashed"
+          >
             {t("GoToStripe")}
           </Link>
         </div>

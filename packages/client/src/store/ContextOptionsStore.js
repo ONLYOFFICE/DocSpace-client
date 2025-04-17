@@ -2173,6 +2173,7 @@ class ContextOptionsStore {
         icon: HelpCenterReactSvgUrl,
         onClick: () => this.onEnableFormFillingGuid(t, item.roomType),
         disabled:
+          isArchive ||
           !isFormRoom ||
           isMobileUtils() ||
           item.id !== this.selectedFolderStore.id,

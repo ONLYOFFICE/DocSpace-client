@@ -33,7 +33,6 @@
   "Conversion": "Dönüştürme",
   "Converting": "Dönüştürülüyor",
   "CopyFolderItem": "<2>{{title}}</2> klasörü <1>{{folderName}}</1> konumuna başarıyla kopyalandı",
-  "CopyItem": "<2>{{title}}</2>, <1>{{folderName}}</1> konumuna başarıyla kopyalandı",
   "CopyItems": "<2>{{qty}} öğeleri</2>, <1>{{folderName}}</1> konumuna başarıyla kopyalandı",
   "CopyLinkPassword": "Bağlantı şifresini kopyala",
   "CopyPassword": "Şifreyi kopyala",

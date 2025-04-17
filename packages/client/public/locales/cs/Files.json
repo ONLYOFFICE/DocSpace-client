@@ -33,7 +33,6 @@
   "Conversion": "Převod",
   "Converting": "Probíhá převod",
   "CopyFolderItem": "Složka <2>{{title}}</2> byla úspěšně zkopírována do <1>{{folderName}}</1>.",
-  "CopyItem": "<2>{{title}}</2> úspěšně zkopírováno do <1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}} prvků</2> úspěšně zkopírovány do <1>{{folderName}}</1>",
   "CopyLinkPassword": "Kopírovat heslo odkazu",
   "CopyPassword": "Kopírování hesla",

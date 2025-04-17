@@ -33,7 +33,6 @@
   "Conversion": "Преобразование",
   "Converting": "Конвертация",
   "CopyFolderItem": "Папка <2>{{title}}</2> успешно скопирована в <1>{{folderName}}</1>",
-  "CopyItem": "<2>{{title}}</2> успешно скопирована в <1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}} элементов</2> успешно скопированы в <1>{{folderName}}</1>",
   "CopyLinkPassword": "Скопировать пароль для ссылки",
   "CopyPassword": "Скопировать пароль",

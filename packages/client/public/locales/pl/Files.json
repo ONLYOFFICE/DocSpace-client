@@ -33,7 +33,6 @@
   "Conversion": "Konwersja",
   "Converting": "Konwertowanie",
   "CopyFolderItem": "Pomyślnie skopiowano katalog <2>{{title}}</2> do katalogu <1>{{folderName}}</1>",
-  "CopyItem": "Pomyślnie skopiowano <2>{{title}}</2> do katalogu <1>{{folderName}}</1>",
   "CopyItems": "Pomyślnie skopiowano <2>{{qty}} element(-y/-ów)</2> do katalogu <1>{{folderName}}</1>",
   "CopyLinkPassword": "Kopiuj hasło linku",
   "CopyPassword": "Kopiuj hasło",

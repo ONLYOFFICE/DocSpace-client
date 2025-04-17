@@ -33,7 +33,6 @@
   "Conversion": "Conversie",
   "Converting": "Conversie",
   "CopyFolderItem": "Folderul <2>{{title}}</2> a fost copiat cu succes în <1>{{folderName}}</1>",
-  "CopyItem": "<2>{{title}}</2> a fost copiat cu succes în <1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}} elemente</2> au fost copiate cu succes în <1>{{folderName}}</1>",
   "CopyLinkPassword": "Copiere parola linkului",
   "CopyPassword": "Copiere parola",

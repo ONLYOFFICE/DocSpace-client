@@ -33,7 +33,6 @@
   "Conversion": "Konversiya",
   "Converting": "Dəyişdirilir",
   "CopyFolderItem": "<2>{{title}}</2> qovluğu uğurla <1>{{folderName}}</1> qovluğuna kopyalandı",
-  "CopyItem": "<2>{{title}}</2> uğurla <1>{{folderName}}</1> qovluğuna kopyalandı",
   "CopyItems": "<2>{{qty}} elementlər</2> uğurla <1>{{folderName}} qovluğuna</1> kopyalandı",
   "CopyLinkPassword": "Keçid şifrəsini nüsxələyin",
   "CopyPassword": "Şifrəni nüsxələyin",

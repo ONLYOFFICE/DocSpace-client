@@ -33,7 +33,6 @@
   "Conversion": "Konverzia",
   "Converting": "Konvertovanie",
   "CopyFolderItem": "Priečinok <2>{{title}}</2> bol úspešne skopírovaný do <1>{{folderName}}</1>",
-  "CopyItem": "<2>{{title}}</2> úspešne skopírovaný do <1>{{folderName}}</1>",
   "CopyItems": "<2>{{qty}} prvkov</2> úspešne skopírované do <1>{{folderName}}</1>",
   "CopyLinkPassword": "Skopírovať heslo pre odkaz",
   "CopyPassword": "Kopírovať heslo",

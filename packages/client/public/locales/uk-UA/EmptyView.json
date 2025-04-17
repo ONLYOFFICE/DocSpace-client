@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "У цьому розділі буде показано останні переглянуті або відредаговані вами документи.",
   "EmptyRootRoomUserDescription": "Тут буде спільна кімната.",
   "EmptyRootRoomUserTitle": "Тут ще немає кімнат",
+  "EmptyTemplatesDescription": "Ви можете створити шаблон із кімнати в розділі «Кімната»",
+  "EmptyTemplatesTitle": "Тут ще немає шаблонів",
   "FormFolderDefaultDescription": "Перетягніть PDF-форми сюди або передайте з {{productName}} чи пристрою.",
   "FormFolderDefaultTitle": "Тут ще немає форм",
   "FormFolderDefaultUserDescription": "Тут з'являться форми, передані адміністраторами.",

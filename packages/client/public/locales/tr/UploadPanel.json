@@ -1,5 +1,7 @@
 {
   "CancelUpload": "Yükleme kesintiye uğradı. Bazı dosyalar yüklenmedi.",
   "HideInput": "Gizle",
-  "Ready": "Bitti"
+  "Ready": "Bitti",
+  "UploadingAndConversion": "Yükleme ve Dönüştürme",
+  "UploadingError": "Yükleme hatası"
 }

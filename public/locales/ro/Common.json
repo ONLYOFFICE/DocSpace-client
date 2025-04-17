@@ -274,7 +274,7 @@
   "FormRoom": "Sală Formulare",
   "Forms": "Forms",
   "FormTemplates": "Șabloane formular",
-  "ForQuestionsContactPortalAdmin": "Vă invităm să contactați administratorul dvs pentru orice întrebări.",
+  "ForQuestionsContactPortalAdmin": "Vă invităm să contactați {{productName}} administratorul dvs pentru orice întrebări.",
   "Free": "Gratuit",
   "FreeAccessToLicensedVersion": "Acces gratuit la soluția {{license}}",
   "FromDevice": "De pe dispozitivul",

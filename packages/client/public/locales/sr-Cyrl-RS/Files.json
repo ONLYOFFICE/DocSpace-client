@@ -135,7 +135,7 @@
   "MeAndMembersAndGroups": "Ја, чланови ({{ membersCount }}) и групе ({{ groupsCount }})",
   "MoveFolderItem": "Фолдер <2>{{title}}</2> успешно премештен у <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> успешно премештен у <1>{{folderName}}</1>",
-  "MoveItems": "<2>{{qтy}} елемената</2> успешно премештено у <1>{{folderName}}</1>",
+  "MoveItems": "<2>{{qty}} елемената</2> успешно премештено у <1>{{folderName}}</1>",
   "MoveOrCopy": "Помери или копирај",
   "MoveToArchive": "Помери у архиву",
   "MoveToPublicRoom": "Ова соба и сав њен садржај су доступни свима са линком. Да ли желите да наставите?",

@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Šajā sadaļā tiks parādīti pēdējie skatītie vai rediģētie dokumenti.",
   "EmptyRootRoomUserDescription": "Koplietotā telpa tiks parādīta šeit.",
   "EmptyRootRoomUserTitle": "Šeit vēl nav nevienas telpas",
+  "EmptyTemplatesDescription": "Varat izveidot veidni no telpas sadaļā \"Telpas\"",
+  "EmptyTemplatesTitle": "Šeit vēl nav veidņu",
   "FormFolderDefaultDescription": "Nometiet PDF veidlapas šeit vai augšupielādējiet no {{productName}} vai ierīces.",
   "FormFolderDefaultTitle": "Šeit vēl nav veidlapu",
   "FormFolderDefaultUserDescription": "Šeit tiks parādītas administratoru augšupielādētās veidlapas.",

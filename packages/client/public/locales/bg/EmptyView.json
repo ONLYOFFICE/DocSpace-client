@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Последните ви прегледани или редактирани документи ще бъдат показани в този раздел.",
   "EmptyRootRoomUserDescription": "Споделената стая ще се появи тук.",
   "EmptyRootRoomUserTitle": "Тук все още няма стаи",
+  "EmptyTemplatesDescription": "Можете да създадете шаблон от стая в раздел Стая",
+  "EmptyTemplatesTitle": "Тук още няма шаблони",
   "FormFolderDefaultDescription": "Пуснете PDF формуляри тук или качете от {{productName}} или устройство.",
   "FormFolderDefaultTitle": "Тук все още няма формуляри",
   "FormFolderDefaultUserDescription": "Тук ще се показват формуляри, качени от администраторите.",

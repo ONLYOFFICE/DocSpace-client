@@ -1,5 +1,5 @@
 {
-  "DescriptionUploading": "在{{productName}}（例如文档部分）中创建 PDF 表单，并将制作好的表单上传到房间。推荐使用内置的模板库，直接从众多现成的 PDF 模板中进行选择。",
+  "DescriptionUploading": "在{{productName}}（例如{{sectionName}}部分）中创建 PDF 表单，并将制作好的表单上传到房间。推荐使用内置的模板库，直接从众多现成的 PDF 模板中进行选择。",
   "HeaderComplete": "方便分析收集到的回答",
   "HeaderSharing": "快速共享",
   "HeaderStarting": "开始填写表单进程",

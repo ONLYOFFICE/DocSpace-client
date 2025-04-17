@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Vaši nazadnje ogledani ali urejani dokumenti bodo prikazani v tem razdelku.",
   "EmptyRootRoomUserDescription": "Tukaj se bo prikazala skupna soba.",
   "EmptyRootRoomUserTitle": "Tukaj še ni sob",
+  "EmptyTemplatesDescription": "Predlogo lahko ustvarite iz sobe v razdelku Soba",
+  "EmptyTemplatesTitle": "Tu še ni predlog",
   "FormFolderDefaultDescription": "Obrazce PDF spusti sem ali jih naloži iz {{productName}} ali naprave.",
   "FormFolderDefaultTitle": "Tukaj še ni obrazcev",
   "FormFolderDefaultUserDescription": "Tukaj bodo prikazani obrazci, ki so jih naložili skrbniki.",

@@ -125,7 +125,7 @@
   "MarkRead": "Նշել որպես ընթերցված",
   "MeAndGroups": "Ես և խմբերը ({{ groupsCount }})",
   "MeAndMembers": "Ես և անդամները({{ membersCount }})",
-  "MeAndMembersAndGroups": "Ես, անդամները ({{ membersCount }}) և խմբերը",
+  "MeAndMembersAndGroups": "Ես, անդամները ({{ membersCount }}) և խմբերը ({{ groupsCount }})",
   "MoveFolderItem": "Պանակը <2>{{title}}</2> հաջողությամբ տեղափոխվել է <1>{{folderName}}</1>",
   "MoveItem": "<2>{{title}}</2> հաջողությամբ տեղափոխվել է  <1>{{folderName}}</1>",
   "MoveItems": "<2>{{qty}} տարրերը</2> հաջողությամբ տեղափոխվել են <1>{{folderName}}</1>",

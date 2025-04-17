@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Son görüntülediğiniz veya düzenlediğiniz dokümanlar bu bölümde görüntülenecektir.",
   "EmptyRootRoomUserDescription": "Paylaşılan oda burada görünecektir.",
   "EmptyRootRoomUserTitle": "Burada henüz oda yok",
+  "EmptyTemplatesDescription": "Oda bölümünde bir odadan şablon oluşturabilirsiniz",
+  "EmptyTemplatesTitle": "Burada henüz şablon yok",
   "FormFolderDefaultDescription": "PDF formlarını buraya bırakın veya {{productName}} veya cihazdan yükleyin.",
   "FormFolderDefaultTitle": "Burada henüz form yok",
   "FormFolderDefaultUserDescription": "Yöneticiler tarafından yüklenen formlar burada görünecektir.",

@@ -41,6 +41,7 @@
   "StartupTitle": "Está a utilizar o plano gratuito {{planName}}",
   "StripeCustomerPortal": "vá para o portal do cliente Stripe",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/mês </3>",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/ano</3>",
   "UpgradeNow": "Aumentar agora",
   "UpgradePlan": "Aumentar o plano",
   "UserNotFound": "O <1>{{email}}</1> do utilizador não foi encontrado.",

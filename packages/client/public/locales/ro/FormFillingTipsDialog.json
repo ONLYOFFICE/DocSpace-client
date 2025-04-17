@@ -1,5 +1,5 @@
 {
-  "DescriptionUploading": "Creați formulare PDF în {{productName}}, de exemplu în secțiunea Documente și încărcați formulare finalizate în sală. Folosiți biblioteca șabloanelor integrată și alegeți dintre numeroasele șabloane disponibile.",
+  "DescriptionUploading": "Creați formulare PDF în {{productName}}, de exemplu în secțiunea {{sectionName}} și încărcați formulare finalizate în sală. Folosiți biblioteca șabloanelor integrată și alegeți dintre numeroasele șabloane disponibile.",
   "HeaderComplete": "Analiza convenabilă a răspunsurilor colectate",
   "HeaderSharing": "Partajare rapidă",
   "HeaderStarting": "Demararea completării a formularului",

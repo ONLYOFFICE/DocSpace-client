@@ -1,5 +1,5 @@
 {
-  "DescriptionUploading": "{{productName}}でPDFフォームを作成し、例えばあなたのドキュメントに、準備が整ったものをルームにアップロードします。統合されたテンプレートライブラリを利用し、多数の準備されたPDFテンプレートの中から選択してください。",
+  "DescriptionUploading": "{{productName}}でPDFフォームを作成し、例えば{{sectionName}}に、準備が整ったものをルームにアップロードします。統合されたテンプレートライブラリを利用し、多数の準備されたPDFテンプレートの中から選択してください。",
   "HeaderComplete": "収集した回答の便利な分析",
   "HeaderSharing": "クイック共有",
   "HeaderStarting": "フォーム記入プロセスを開始",

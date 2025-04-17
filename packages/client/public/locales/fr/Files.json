@@ -6,7 +6,7 @@
   "AddNewLink": "Ajouter un nouveau lien",
   "AddUsersOrGroups": "Ajouter des utilisateurs ou des groupes",
   "AddUsersOrGroupsDescription": "Les administrateurs ajoutés pourront créer des salles en utilisant ce modèle.",
-  "AddUsersOrGroupsInfo": "Seuls <1>{productName}}</1> et <1>Administrateurs de salle</1> sont affichés ici",
+  "AddUsersOrGroupsInfo": "Seuls <1>{{productName}}</1> et <1>Room admins</1> sont affichés ici",
   "AddUsersOrGroupsInfoGroups": "Seuls les <1>{{productName}}</1> et les <1>administrateurs de salles</1> des groupes sélectionnés pourront créer des salles à partir de ce modèle.",
   "AfterFilesWillBeDeletedPermanently": "Les fichiers suivants seront définitivement supprimés.",
   "AfterFilesWillBeMovedToTrash": "Les fichiers suivants seront déplacés dans la corbeille.",
@@ -32,7 +32,7 @@
   "Converting": "Conversion",
   "CopyFolderItem": "Le dossier <2>{{title}}</2> a été copié avec succès dans <1>{{folderName}}</1>",
   "CopyItem": "<2>{{title}}</2> copié avec succès dans <1>{{folderName}}</1>",
-  "CopyItems": "<2>{{qty}} éléments</2> copiés avec succès dans <1>{folderName}}</1>",
+  "CopyItems": "<2>{{qty}} éléments</2> copiés avec succès dans <1>{{folderName}}</1>",
   "CopyLinkPassword": "Copier le mot de passe du lien",
   "CopyPassword": "Copier le mot de passe",
   "CreateNewFolder": "Créer un nouveau dossier",
@@ -82,7 +82,7 @@
   "EnableNotifications": "Activer les notifications",
   "ErrorChangeIndex": "Erreur lors du changement d'index. Le problème peut être causé par le serveur. Rechargez la page ou vérifiez les paramètres de votre connexion Internet.",
   "ErrorCopyItem": "Erreur de copie de <2>{{title}}</2> dans <1>{{folderName}}</1>",
-  "ErrorCopyItems": "Erreur de copie de <2>{{qty}} éléments</2> dans <1>{folderName}}</1>",
+  "ErrorCopyItems": "Erreur de copie de <2>{{qty}} éléments</2> dans <1>{{folderName}}</1>",
   "ErrorDuplicateItem": "Erreur de duplication <2>{{title}}</2>",
   "ErrorMoveItem": "Erreur de déplacement de <2>{{title}}</2> dans <1>{{folderName}}</1>",
   "ErrorMoveItems": "Erreur de déplacement de <2>{{qty}} éléments</2> dans <1>{{folderName}}</1>",
@@ -95,7 +95,7 @@
   "ExportRoomIndexAlreadyInProgressError": "L'exportation de l'index des salles est déjà en cours. Veuillez attendre que l'exportation en cours soit terminée pour commencer la nouvelle exportation.",
   "FavoritesEmptyContainerDescription": "Pour marquer des fichiers comme favoris ou les supprimer de cette liste, utilisez le menu contextuel.",
   "FileDownloadingIsRestricted": "Le téléchargement de fichiers est limité dans cette salle.",
-  "FileExportDestination": "Fichier <1>{{fileName}></1> exporté vers {{sectionName}}",
+  "FileExportDestination": "Fichier <1>{{fileName}}</1> exporté vers {{sectionName}}",
   "FileRenamed": "Le document '{{oldTitle}}' est renommé en '{{newTitle}}'",
   "Filter": "Filtrer",
   "FinalizeVersion": "Finaliser la version",
@@ -240,5 +240,5 @@
   "WillBeDeletedPermanently": "{{date}} sera supprimé définitivement",
   "WillBeMovedToTrash": "{{date}} sera déplacé dans la corbeille",
   "YouLeftTheRoom": "Vous avez quitté la salle",
-  "YourUserTypeHasChanged": "Votre type d'utilisateur a été modifié en <1>“{{userType}}”</1> par l'administrateur de <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Votre type d'utilisateur a été modifié en <1>“{{userType}}”</1> par l'administrateur de {{productName}} <1>{{adminName}}</1>."
 }

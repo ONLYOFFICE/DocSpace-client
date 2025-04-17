@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "سيتم عرض المستندات التي قمت بعرضها أو تحريرها مؤخرًا في هذا القسم.",
   "EmptyRootRoomUserDescription": "ستظهر الغرفة المشتركة هنا.",
   "EmptyRootRoomUserTitle": "لا توجد غرف هنا حتى الآن",
+  "EmptyTemplatesDescription": "يمكنكم إنشاء قالب من غرفة موجودة ضمن قسم الغرف.",
+  "EmptyTemplatesTitle": "لا توجد قوالب هنا بعد.",
   "FormFolderDefaultDescription": "أسقط نماذج PDF هنا أو قم بتحميلها من {{productName}} أو من الجهاز.",
   "FormFolderDefaultTitle": "لا توجد نماذج هنا حتى الآن",
   "FormFolderDefaultUserDescription": "ستظهر هنا النماذج التي تم تحميلها من قبل المسؤولين.",

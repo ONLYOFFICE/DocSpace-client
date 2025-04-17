@@ -97,7 +97,7 @@
   "ExportRoomIndexAlreadyInProgressError": "Izvoz indeksa sobe je već u toku. Sačekajte da se trenutni izvoz završi pre nego što započnete novi.",
   "FavoritesEmptyContainerDescription": "Da biste označili datoteke kao omiljene ili ih uklonili sa ove liste, koristite kontekst meni.",
   "FileDownloadingIsRestricted": "Preuzimanje datoteka je ograničeno u ovoj sobi.",
-  "FileExportDestination": "Datoteka < 1 >{{fileName}}</1 > je izvezena u {{sectionName}}",
+  "FileExportDestination": "Datoteka <1>{{fileName}}</1> je izvezena u {{sectionName}}",
   "FileRenamed": "Dokument '{{oldTitle}}' je preimenovan na '{{newTitle}}'",
   "Filter": "Filter",
   "FinalizeVersion": "Završi verziju",

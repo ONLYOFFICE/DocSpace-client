@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "V tejto časti sa zobrazia vaše naposledy zobrazené alebo upravené dokumenty.",
   "EmptyRootRoomUserDescription": "Tu sa zobrazí zdieľaná miestnosť.",
   "EmptyRootRoomUserTitle": "Zatiaľ tu nie sú žiadne miestnosti",
+  "EmptyTemplatesDescription": "Môžete vytvoriť šablónu z miestnosti v časti Miestnosť",
+  "EmptyTemplatesTitle": "Zatiaľ tu nie sú žiadne šablóny",
   "FormFolderDefaultDescription": "Vložte sem formuláre PDF alebo ich nahrajte z {{productName}} alebo zariadenia.",
   "FormFolderDefaultTitle": "Zatiaľ tu nie sú žiadne formuláre",
   "FormFolderDefaultUserDescription": "Formuláre, ktoré nahrali administrátori, sa budú zobrazovať tu.",

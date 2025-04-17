@@ -534,7 +534,7 @@
   "RoleFormFillerDescription": "既存ファイルに対する操作：閲覧、フォームへの記入、レビュー、コメント。",
   "RoleFormFillerFormRoomDescription": "フォーム記入者は、フォームに記入し、「完成」および「処理中」フォルダ内の入力済み/開始済みフォームのみを表示することができます。",
   "RoleNewUserDescription": "ユーザーはルーム内でファイルを作成・編集できますが、ルームの作成、ユーザーの管理、設定へのアクセスはできません。",
-  "RolePortalAdminDescription": "選択されたゲストは{{membersSection}}セクションに移動し、<strong>'{{ secondType }}'</strong>タイプが割り当てられます。{{productName}}の管理者は{{productName}}の設定にアクセスし、ルームを管理・アーカイブし、新しいユーザーを招待し、自分のレベル以下の役割を割り当てることができます。の管理者は{{sectionName}}セクションにアクセスできます。",
+  "RolePortalAdminDescription": "{{productName}} 管理者は {{productName}} 設定にアクセスし、ルームを管理およびアーカイブし、新しいユーザーを招待し、彼らのレベル以下の役割を割り当てることができます。{{productName}} 管理者は {{sectionName}} セクションにアクセスできます。",
   "RolePowerUserFormRoomDescription": "ユーザーはフォームをルームにアップロードでき、[完了] フォルダと [処理中] フォルダに完全なアクセス権限があります。",
   "RoleReviewer": "レビュー用",
   "RoleReviewerDescription": "既存ファイルに対する操作：閲覧、レビュー、コメント。",

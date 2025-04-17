@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "마지막으로 본 문서나 편집한 문서가 이 섹션에 표시됩니다.",
   "EmptyRootRoomUserDescription": "공유 룸이 여기에 표시됩니다.",
   "EmptyRootRoomUserTitle": "여기에 아직 룸이 없습니다",
+  "EmptyTemplatesDescription": "룸 섹션의 룸에서 템플릿을 생성할 수 있습니다",
+  "EmptyTemplatesTitle": "아직 템플릿이 없습니다",
   "FormFolderDefaultDescription": "PDF 양식을 여기에 드롭하거나 {{productName}} 또는 장치에서 업로드하세요. ",
   "FormFolderDefaultTitle": "아직 여기에 양식이 없습니다",
   "FormFolderDefaultUserDescription": "관리자가 업로드한 양식이 여기에 표시됩니다.",

@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Daten in Ihr {{productName}} aus dem {{organizationName}} Workspace, Google Workspace oder Nextcloud importieren.",
   "MigrationDataTitle": "Migrationsdaten",
   "PublicRoomEmptyTitle": "Willkommen im öffentlichen Raum",
+  "SectionsUploadDescription": "Laden Sie beliebige Dateitypen von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch",
   "SendInvitationLetter": "Senden Sie ein Einladungsschreiben, um dem Portal neue Mitglieder hinzuzufügen",
   "ShareOptionDescription": "Kopieren Sie einen Link für den öffentlichen Zugang oder laden Sie andere Benutzer in den Raum ein, um das Ausfüllen des Formulars zu starten.",
   "ShareOptionTitle": "Raum teilen",

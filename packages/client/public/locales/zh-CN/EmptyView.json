@@ -35,6 +35,7 @@
   "MigrationDataDescription": "从{{organizationName}}工作区、Google 工作区或 Nextcloud 导入数据到您的{{productName}}。",
   "MigrationDataTitle": "迁移数据",
   "PublicRoomEmptyTitle": "欢迎来到公共房间",
+  "SectionsUploadDescription": "可从{{sectionNameFirst}}或{{sectionNameSecond}}上传任何类型的文件",
   "SendInvitationLetter": "发送邀请函以添加新成员至门户",
   "ShareOptionDescription": "复制公共访问链接或邀请其他用户加入房间以开始表单填写流程。",
   "ShareOptionTitle": "共享房间",

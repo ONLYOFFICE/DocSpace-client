@@ -79,7 +79,7 @@ const AutoPaymentInfo = ({
                 ),
               })}{" "}
               {isPayer ? (
-                <Link onClick={onOpen} textDecoration="underline dashed">
+                <Link onClick={onOpen} textDecoration="underline">
                   {t("Common:EditButton")}
                 </Link>
               ) : null}

@@ -41,6 +41,7 @@
   "StartupTitle": "Uporabljate brezplačen paket {{planName}}",
   "StripeCustomerPortal": "pojdite na portal za stranke Stripe",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/mesec</3>",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/leto</3>",
   "UpgradeNow": "Nadgradi zdaj",
   "UpgradePlan": "Načrt nadgradnje",
   "UserNotFound": "Uporabnik <1>{{email}}</1> ni najden.",

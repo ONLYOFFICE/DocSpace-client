@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "永久削除",
-  "DeleteForeverTitle": "永久削除？"
+  "DeleteForeverNote": "{{sectionName}}セクションのすべてのアイテムは永遠に削除されます。復元することはできません。",
+  "DeleteForeverTitle": "永久削除？",
+  "SuccessEmptyAction": "{{sectionName}} セクションが空になりました"
 }

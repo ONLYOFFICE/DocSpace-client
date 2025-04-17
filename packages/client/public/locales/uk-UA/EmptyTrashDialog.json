@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "Видалити назавжди",
-  "DeleteForeverTitle": "Видалити назавжди?"
+  "DeleteForeverNote": "Усі елементи розділу {{sectionName}} буде видалено назавжди. Ви не зможете їх відновити.",
+  "DeleteForeverTitle": "Видалити назавжди?",
+  "SuccessEmptyAction": "Розділ {{sectionName}} спорожнено"
 }

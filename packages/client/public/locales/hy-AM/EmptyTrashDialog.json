@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "Ջնջել ընդմիշտ",
-  "DeleteForeverTitle": "Ջնջե՞լ ընդմիշտ"
+  "DeleteForeverNote": "Բոլոր տարրերը «{{sectionName}}» բաժնից կջնջվեն ընդմիշտ։ Դրանք հնարավոր չի լինի վերականգնել։",
+  "DeleteForeverTitle": "Ջնջե՞լ ընդմիշտ",
+  "SuccessEmptyAction": "«{{sectionName}}» բաժինը դատարկվեց"
 }

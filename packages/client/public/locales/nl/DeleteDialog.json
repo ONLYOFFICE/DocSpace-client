@@ -9,6 +9,8 @@
   "DeleteRoom": "U staat op het punt deze kamer te verwijderen. U kunt dit niet meer herstellen.",
   "DeleteRooms": "U staat op het punt deze kamers te verwijderen. U kunt ze niet meer herstellen.",
   "DeleteSharedNote": "Houd er rekening mee dat als u deze met iemand hebt gedeeld, deze niet meer beschikbaar zal zijn.",
+  "DeleteTemplate": "Wilt u sjabloon kamer <1>“{{templateName}}”</1> echt verwijderen? Het sjabloon kan niet hersteld worden.",
+  "DeleteTemplates": "Wilt u echt geselecteerde kamer sjablonen verwijderen? Ze kunnen niet hersteld worden.",
   "FolderPermanentlyDeleted": "De map wordt na 30 dagen definitief verwijderd.",
   "ItemsPermanentlyDeleted": "Items worden na 30 dagen definitief verwijderd.",
   "MoveToTrashButton": "Verplaats naar Prullenbak",

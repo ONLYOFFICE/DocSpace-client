@@ -1,4 +1,5 @@
 {
+  "CancellaionNotification": "Не показвай отново известието за анулиране",
   "DisplayFileExtension": "Покажи файловото разширение до името на файла",
   "DisplayNotification": "Показвай известие, когато се изхвърлят елементи в Кошчето",
   "OpenSameTab": "Отворете редактора на {{organizationName}} в същия раздел",

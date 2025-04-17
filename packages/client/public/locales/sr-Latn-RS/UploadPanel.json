@@ -1,5 +1,7 @@
 {
   "CancelUpload": "Otpremanje je prekinuto. Neke datoteke nisu otpremljene.",
   "HideInput": "Sakrij",
-  "Ready": "Gotovo"
+  "Ready": "Gotovo",
+  "UploadingAndConversion": "Otpremanje i konverzija",
+  "UploadingError": "Greška prilikom otpremanja"
 }

@@ -12,9 +12,11 @@
   "DeleteUser": "İstifadəçini sil",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
   "DeletingUsers": "İstifadəçilər silinir",
+  "PersonalDataDeletionInfo": "Şəxsi məlumatlar, seçilmiş istifadəçilərin {{sectionNameFirst}} və {{sectionNameSecond}} bölmələrindəki bütün şəxsi fayllar və qovluqlar həmişəlik silinəcək. Seçilmiş istifadəçilərin otaqlar kimi ümumi bölmələrdə* saxlanılan fayl və qovluqları {{productName}}-da qalacaq.",
   "PleaseNote": "Lütfən, nəzərə alın",
   "ReassignDataToAnotherUser": "Məlumatı başqa istifadəçiyə təyin edin",
   "SuccessfullyDeleteGuestInfoMessage": "Qonaq uğurla silindi",
   "SuccessfullyDeleteUserInfoMessage": "İstifadəçi müvəffəqiyyətlə silinmişdir",
-  "ToBeAbleToReassignData": "Məlumatı yenidən təyin etmək üçün bir istifadəçini silin."
+  "ToBeAbleToReassignData": "Məlumatı yenidən təyin etmək üçün bir istifadəçini silin.",
+  "UserFilesRemovalScope": "Şəxsi məlumatlar, bu istifadəçinin {{sectionNameFirst}} və {{sectionNameSecond}} bölmələrindəki bütün fayl və qovluqlar həmişəlik silinəcək."
 }

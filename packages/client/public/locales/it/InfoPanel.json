@@ -74,6 +74,7 @@
   "RoomGroupAdded": "Gruppi aggiunti.",
   "RoomGroupAddedCount": "Gruppi aggiunti ({{count}}).",
   "RoomGroupRemove": "Gruppo rimosso",
+  "RoomIndexExportLocation": "L’indice della stanza è stato esportato e salvato in {{sectionName}}",
   "RoomIndexingDisabled": "Indicizzazione automatica dei file disattivata nella stanza",
   "RoomIndexingEnabled": "Indicizzazione automatica dei file attivata nella stanza",
   "RoomInviteResend": "Inviti mandati di nuovo:",

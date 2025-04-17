@@ -550,6 +550,12 @@ const SectionHeaderContent = (props) => {
     if (!withChat) setAiChatIsVisible(false);
   }, [withChat]);
 
+  React.useEffect(() => {
+    return () => {
+      setAiChatIsVisible(false);
+    };
+  }, [setAiChatIsVisible]);
+
   const isCurrentRoom =
     isLoading && typeof stateIsRoom === "boolean" ? stateIsRoom : isRoom;
 

@@ -51,12 +51,12 @@ const ColorPicker = ({
   handleChange,
   hexCodeLabel = "Hex code",
 }: ColorPickerProps) => {
-  const [color, setColor] = useState(appliedColor);
+  const [color, setColor] = useState(() => appliedColor);
   const { t } = useTranslation(["Common"]);
 
-  useEffect(() => {
-    setColor(appliedColor);
-  }, [appliedColor]);
+  // useEffect(() => {
+  //   setColor(appliedColor);
+  // }, [appliedColor]);
 
   const onColorChange = (newColor: string) => {
     setColor(newColor);

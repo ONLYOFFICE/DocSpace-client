@@ -290,7 +290,7 @@ class PaymentStore {
     this.autoPayments = res;
   };
 
-  walletInit = async (t) => {
+  walletInit = async (t: TTranslation) => {
     const requests = [];
 
     const isRefresh = window.location.href.includes("complete=true");
@@ -304,9 +304,15 @@ class PaymentStore {
         this.fetchBalance(isRefresh),
       ]);
 
+      const payer = customerId || this.walletCustomerEmail;
+      if (payer) await setPayerInfo(payer);
+
       if (this.walletCustomerEmail) {
+        if (this.isPayer) {
+          requests.push(this.setPaymentAccount());
+        }
+
         requests.push(
-          this.setPaymentAccount(),
           this.fetchAutoPayments(),
           // this.fetchTransactionHistory(),
         );
@@ -315,10 +321,6 @@ class PaymentStore {
       }
 
       await Promise.all(requests);
-
-      const payer = customerId || this.walletCustomerEmail;
-
-      if (payer) await setPayerInfo(payer);
 
       this.setIsInitWalletPage(true);
 

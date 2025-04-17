@@ -648,7 +648,7 @@ class SettingsStore {
       : this.apiDomain;
   }
 
-  get apikeysLink() {
+  get apiKeysLink() {
     return this.apiDomain && this.apiEntries?.apikeys
       ? `${this.apiDomain}${this.apiEntries.apikeys}`
       : this.apiDomain;

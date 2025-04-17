@@ -89,7 +89,7 @@ const StyledMobileButton = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const ApiKeys = (props: ApiKeysProps) => {
-  const { viewAs, currentColorScheme } = props;
+  const { viewAs, currentColorScheme, apikeysLink } = props;
 
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
@@ -210,6 +210,7 @@ const ApiKeys = (props: ApiKeysProps) => {
           color={currentColorScheme?.main?.accent}
           fontSize="13px"
           fontWeight={600}
+          onClick={() => window.open(apikeysLink, "_blank")}
         >
           {t("Settings:APIGuide")}
         </Link>
@@ -276,10 +277,11 @@ const ApiKeys = (props: ApiKeysProps) => {
 
 export default inject(({ setup, settingsStore }: TStore) => {
   const { viewAs } = setup;
-  const { currentColorScheme } = settingsStore;
+  const { currentColorScheme, apikeysLink } = settingsStore;
 
   return {
     viewAs,
     currentColorScheme,
+    apikeysLink,
   };
 })(observer(ApiKeys));

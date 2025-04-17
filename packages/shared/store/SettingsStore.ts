@@ -648,6 +648,12 @@ class SettingsStore {
       : this.apiDomain;
   }
 
+  get apikeysLink() {
+    return this.apiDomain && this.apiEntries?.apikeys
+      ? `${this.apiDomain}${this.apiEntries.apikeys}`
+      : this.apiDomain;
+  }
+
   get forEnterprisesUrl() {
     return this.siteDomain && this.siteEntries?.forenterprises
       ? `${this.siteDomain}${this.siteEntries.forenterprises}`

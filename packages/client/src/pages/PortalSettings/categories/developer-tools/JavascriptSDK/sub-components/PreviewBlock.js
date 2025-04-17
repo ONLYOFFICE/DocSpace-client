@@ -92,7 +92,6 @@ export const PreviewBlock = ({
         type={TabsTypes.Secondary}
         onSelect={loadCurrentFrame}
         items={dataTabs}
-        isDisabled={isDisabled}
       />
     </Preview>
   ) : (

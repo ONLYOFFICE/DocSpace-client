@@ -57,10 +57,12 @@ const DevToolsAccess = ({
   accessDevToolsForUsers,
   setDevToolsAccessSettings,
   currentColorScheme,
+  limitedDevToolsBlockHelpUrl,
 }: {
   accessDevToolsForUsers: string;
   setDevToolsAccessSettings: (accessEnabled: string) => Promise<void>;
   currentColorScheme: TColorScheme;
+  limitedDevToolsBlockHelpUrl: string;
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -197,17 +199,21 @@ const DevToolsAccess = ({
     <MainContainer>
       <LearnMoreWrapper>
         <Text fontSize="13px" fontWeight="400">
-          {t("DeveloperToolsAccessDescription")}
+          {t("DeveloperToolsAccessDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
-        <Link
-          className="link-learn-more"
-          color={currentColorScheme.main?.accent}
-          target={LinkTarget.blank}
-          isHovered
-          href="" // TODO: add link
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {limitedDevToolsBlockHelpUrl ? (
+          <Link
+            className="link-learn-more"
+            color={currentColorScheme.main?.accent}
+            target={LinkTarget.blank}
+            isHovered
+            href={limitedDevToolsBlockHelpUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </LearnMoreWrapper>
 
       <RadioButtonGroup
@@ -221,12 +227,12 @@ const DevToolsAccess = ({
           {
             id: "dev-tools-access-disabled",
             label: t("Common:Disabled"),
-            value: "false",
+            value: "true",
           },
           {
             id: "dev-tools-access-enable",
             label: t("Common:Enable"),
-            value: "true",
+            value: "false",
           },
         ]}
         selected={accessEnabled}
@@ -256,11 +262,13 @@ export const DevToolsAccessSection = inject(({ settingsStore }: TStore) => {
     accessDevToolsForUsers,
     setDevToolsAccessSettings,
     currentColorScheme,
+    limitedDevToolsBlockHelpUrl,
   } = settingsStore;
 
   return {
     accessDevToolsForUsers,
     setDevToolsAccessSettings,
     currentColorScheme,
+    limitedDevToolsBlockHelpUrl,
   };
 })(observer(DevToolsAccess));

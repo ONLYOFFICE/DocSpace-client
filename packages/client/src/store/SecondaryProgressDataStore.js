@@ -74,7 +74,8 @@ class SecondaryProgressDataStore {
 
     const { error, title, itemsCount, destFolderInfo, isFolder } =
       currentOperation;
-    const t = (key, options) => i18n.t(key, { ...options, ns: "Files" });
+    const t = (key, options) =>
+      i18n.t(key, { ...options, ns: ["Files", "Common"] });
 
     let toastTranslation = "";
 
@@ -162,6 +163,7 @@ class SecondaryProgressDataStore {
           ) : (
             <Trans
               t={t}
+              ns="Common"
               i18nKey="CopyItem"
               components={commonComponents}
               values={commonProps}

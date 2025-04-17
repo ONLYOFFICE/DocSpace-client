@@ -506,12 +506,24 @@ export const Footer = styled.footer`
     :active {
       filter: brightness(82%);
     }
+    ::first-letter {
+      text-transform: capitalize;
+    }
   }
 
   .primary-button {
     grid-area: primary-button;
   }
   .secondary-button {
+    .button-content {
+      display: inline-block;
+      height: auto;
+
+      ::first-letter {
+        text-transform: capitalize;
+      }
+    }
+
     grid-area: secondary-button;
   }
 

@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "Poprzedni link <1>«{{linkTitle}}»</1> został unieważniony <br/> Nowy link <1>«{{linkTitle}}»</1> został utworzony",
   "RoomGroupAdded": "Grupy zostały dodane.",
   "RoomGroupRemove": "Grupa została usunięta",
-  "RoomIndexExportSaved": "Eksportuj indeks pokoju zapisanego w Dokumentach",
   "RoomIndexingDisabled": "Automatyczne indeksowanie plików jest wyłączone w tym pokoju",
   "RoomIndexingEnabled": "Automatyczne indeksowanie plików jest włączone w tym pokoju",
   "RoomInviteResend": "Ponownie wysłane zaproszenia:",

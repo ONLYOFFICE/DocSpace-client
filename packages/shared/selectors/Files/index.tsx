@@ -365,6 +365,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
           id: item.id,
           title: item.label,
           fileExst: item.fileExst,
+          fileType: item.fileType,
           viewUrl: item.viewUrl,
           inPublic,
         });

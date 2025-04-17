@@ -190,6 +190,9 @@ const RoomIcon = ({
     </Text>
   );
 
+  const isImage =
+    typeof logo === "string" || (typeof logo === "object" && logo?.medium);
+
   return (
     <>
       <div
@@ -222,15 +225,20 @@ const RoomIcon = ({
         onClick={onToggleOpenEditLogo}
       >
         {isTemplate ? (
-          <div className="template-icon-container">
+          <div className="template-icon-container template-hover">
             <ReactSVG className="template-icon-svg" src={TemplateRoomIcon} />
             {showDefault || !correctImage ? (
               roomTitleText
-            ) : (
+            ) : isImage ? (
               <img
                 className={classNames([imgClassName, "room-image"])}
                 src={imgSrc}
                 alt="room icon"
+              />
+            ) : (
+              <ReactSVG
+                className="template-icon-svg-icon"
+                src={imgSrc as string}
               />
             )}
           </div>
@@ -272,7 +280,7 @@ const RoomIcon = ({
               className={classNames("room-icon-cover", styles.roomIconCover)}
               style={
                 {
-                  "--room-icon--text-color": isBase ? textColor : `#${color}`,
+                  "--room-icon-text-color": isBase ? textColor : `#${color}`,
                 } as React.CSSProperties
               }
               src={imgSrc}
@@ -294,7 +302,7 @@ const RoomIcon = ({
 
         {hoverSrc && !isArchive ? (
           <div
-            className={styles.roomIconContainer}
+            className={classNames(styles.roomIconContainer)}
             onClick={onToggleOpenEditLogo}
             data-testid="hover-container"
           >

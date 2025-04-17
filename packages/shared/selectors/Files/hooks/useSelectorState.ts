@@ -39,6 +39,7 @@ import {
 } from "../../../api/files/types";
 import { TRoom, TRoomSecurity } from "../../../api/rooms/types";
 import { TTranslation } from "../../../types";
+import { FileType } from "../../../enums";
 
 import { FilesSelectorProps, TFilesSelectorInit } from "../FilesSelector.types";
 import {
@@ -149,6 +150,7 @@ const useSelectorState = ({
     title: string;
     path?: string[];
     fileExst?: string;
+    fileType?: FileType;
     viewUrl?: string;
     inPublic?: boolean;
   } | null>(null);

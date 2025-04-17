@@ -41,11 +41,11 @@ const getDefaultStyles = ({
   css`
     .info-panel-toggle-bg {
       path {
-        fill: ${$currentColorScheme.main?.accent};
+        fill: ${$currentColorScheme.main?.accent} !important;
       }
       &:hover {
         path {
-          fill: ${$currentColorScheme.main?.accent};
+          fill: ${$currentColorScheme.main?.accent} !important;
         }
       }
     }

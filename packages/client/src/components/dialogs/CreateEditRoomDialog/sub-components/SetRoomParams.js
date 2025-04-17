@@ -520,6 +520,7 @@ const SetRoomParams = ({
           roomParams={roomParams}
           isEdit={isEdit}
           isLoading={isDisabled}
+          isTemplate={isTemplate || fromTemplate}
         />
       ) : null}
 

@@ -31,7 +31,12 @@ import { useTranslation } from "react-i18next";
 
 import FilesSelector from "@docspace/shared/selectors/Files";
 import { frameCallEvent } from "@docspace/shared/utils/common";
-import { DeviceType, FolderType, RoomsType } from "@docspace/shared/enums";
+import {
+  DeviceType,
+  FolderType,
+  RoomsType,
+  FileType,
+} from "@docspace/shared/enums";
 import { getFileLink } from "@docspace/shared/api/files";
 import type { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
@@ -47,9 +52,10 @@ import type {
   TFilesSelectorInit,
   TSelectedFileInfo,
 } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import { getSelectFormatTranslation } from "@docspace/shared/utils";
 
 import useDocumentTitle from "@/hooks/useDocumentTitle";
-import useSDK from "@/hooks/useSDK";
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 const IS_TEST = process.env.NEXT_PUBLIC_E2E_TEST;
 
@@ -79,6 +85,7 @@ type FilesSelectorClientProps = {
   selectedItemId: string | number;
   selectedItemType: "rooms" | "files";
   total: number;
+  logoText: string;
 };
 
 export default function FilesSelectorClient({
@@ -95,12 +102,28 @@ export default function FilesSelectorClient({
   selectedItemId,
   selectedItemType,
   total,
+  logoText,
 }: FilesSelectorClientProps) {
-  const { sdkConfig } = useSDK();
+  const { sdkConfig } = useSDKConfig();
 
   const { t } = useTranslation(["Common"]);
 
   useDocumentTitle("FileSelector");
+
+  const convertToEditorType = (type: FileType) => {
+    switch (type) {
+      case FileType.Document:
+        return "word";
+      case FileType.Presentation:
+        return "slide";
+      case FileType.Spreadsheet:
+        return "cell";
+      case FileType.PDF:
+        return "pdf";
+      default:
+        return null;
+    }
+  };
 
   const onSubmit = useCallback(
     async (
@@ -117,6 +140,7 @@ export default function FilesSelectorClient({
         ...selectedFileInfo,
         //icon: getIcon(64, selectedFileInfo.fileExst),
       } as TSelectedFileInfo & {
+        documentType: FileType | string | null;
         requestTokens?: {
           id: string;
           primary: boolean;
@@ -124,6 +148,13 @@ export default function FilesSelectorClient({
           requestToken: string;
         }[];
       };
+
+      enrichedData.documentType =
+        selectedFileInfo?.fileType !== undefined
+          ? convertToEditorType(
+              selectedFileInfo.fileType as unknown as FileType,
+            )
+          : null;
 
       if (selectedFileInfo?.inPublic) {
         const { sharedTo } = await getFileLink(selectedFileInfo.id as number);
@@ -172,6 +203,7 @@ export default function FilesSelectorClient({
     ) =>
       isFirstLoad ||
       !!isDisabledFolder ||
+      !!!selectedFileInfo ||
       selectedItemType === "rooms" ||
       isRoot ||
       isSelectedParentFolder,
@@ -226,7 +258,10 @@ export default function FilesSelectorClient({
     currentDeviceType: DeviceType.desktop,
     currentFolderId,
     currentFooterInputValue: "",
-    descriptionText: !subtitle || !filter || filter === "ALL" ? "" : filter,
+    descriptionText:
+      !subtitle || !filter
+        ? ""
+        : getSelectFormatTranslation(t, filter, logoText),
     disabledItems: [],
     embedded: true,
     filesSettings,

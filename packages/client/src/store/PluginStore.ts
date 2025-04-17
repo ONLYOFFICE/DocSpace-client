@@ -31,7 +31,16 @@ import cloneDeep from "lodash/cloneDeep";
 import api from "@docspace/shared/api";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
+import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { toastr } from "@docspace/shared/components/toast";
+import {
+  TFile,
+  TFileSecurity,
+  TFolderSecurity,
+} from "@docspace/shared/api/files/types";
+import { TAPIPlugin } from "@docspace/shared/api/plugins/types";
+import { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
+import { TTranslation } from "@docspace/shared/types";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
@@ -45,14 +54,6 @@ import {
   IframeWindow,
   TPlugin,
 } from "SRC_DIR/helpers/plugins/types";
-import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import {
-  TFile,
-  TFileSecurity,
-  TFolderSecurity,
-} from "@docspace/shared/api/files/types";
-import { TAPIPlugin } from "@docspace/shared/api/plugins/types";
-import { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
 import {
@@ -404,7 +405,12 @@ class PluginStore {
     }
   };
 
-  updatePlugin = async (name: string, status: boolean, settings: string) => {
+  updatePlugin = async (
+    name: string,
+    status: boolean,
+    settings: string,
+    t: TTranslation,
+  ) => {
     try {
       let currentSettings = settings;
       let currentStatus = status;
@@ -427,8 +433,10 @@ class PluginStore {
       if (typeof status !== "boolean") return plugin;
 
       if (status) {
+        toastr.success(t("Common:PluginEnabled"));
         this.activatePlugin(name);
       } else {
+        toastr.success(t("Common:PluginDisabled"));
         this.deactivatePlugin(name);
       }
 
@@ -543,8 +551,7 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? // @ts-expect-error its valid key
-                item.security.every((key) => security?.[key])
+              ? item.security.every((key: string) => security?.[key])
               : true;
 
             if (
@@ -571,8 +578,7 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? // @ts-expect-error its valid key
-                item.security.every((key) => security?.[key])
+              ? item.security.every((key: string) => security?.[key])
               : true;
 
             if (correctUserType && correctDevice && correctSecurity)
@@ -594,8 +600,7 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? // @ts-expect-error its valid key
-                item.security.every((key) => security?.[key])
+              ? item.security.every((key: string) => security?.[key])
               : true;
 
             if (correctUserType && correctDevice && correctSecurity)
@@ -621,8 +626,7 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? // @ts-expect-error its valid key
-                item.security.every((key) => security?.[key])
+              ? item.security.every((key: string) => security?.[key])
               : true;
 
             if (
@@ -649,8 +653,7 @@ class PluginStore {
               : true;
 
             const correctSecurity = item.security
-              ? // @ts-expect-error its valid key
-                item.security.every((key) => security?.[key])
+              ? item.security.every((key: string) => security?.[key])
               : true;
 
             if (correctUserType && correctDevice && correctSecurity)
@@ -672,8 +675,7 @@ class PluginStore {
             : true;
 
           const correctSecurity = item.security
-            ? // @ts-expect-error its valid key
-              item.security.every((key) => security?.[key])
+            ? item.security.every((key: string) => security?.[key])
             : true;
 
           if (correctUserType && correctDevice && correctSecurity)
@@ -695,7 +697,7 @@ class PluginStore {
 
     if (!items) return;
 
-    Array.from(items).forEach(([key, value]) => {
+    Array.from(items).forEach(([key, value]: [string, IContextMenuItem]) => {
       const onClick = async (fileId: number) => {
         if (!value.onClick) return;
 
@@ -741,7 +743,7 @@ class PluginStore {
 
     if (!items) return;
 
-    Array.from(items).forEach(([key]) => {
+    Array.from(items).forEach(([key]: [string, IContextMenuItem]) => {
       this.contextMenuItems.delete(key);
     });
   };
@@ -758,7 +760,7 @@ class PluginStore {
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
 
-    Array.from(items).forEach(([key, value]) => {
+    Array.from(items).forEach(([key, value]: [string, IInfoPanelItem]) => {
       const correctUserType = value.usersTypes
         ? value.usersTypes.includes(userRole)
         : true;

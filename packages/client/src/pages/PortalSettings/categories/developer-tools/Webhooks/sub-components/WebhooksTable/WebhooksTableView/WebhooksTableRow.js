@@ -107,7 +107,7 @@ const WebhooksTableRow = (props) => {
     redirectToHistory();
   };
   const handleToggleEnabled = () => {
-    toggleEnabled(webhook);
+    toggleEnabled(webhook, t);
     setIsChecked((prevIsChecked) => !prevIsChecked);
   };
 

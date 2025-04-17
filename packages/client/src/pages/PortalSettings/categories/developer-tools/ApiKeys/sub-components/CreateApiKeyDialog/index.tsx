@@ -26,11 +26,10 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import capitalize from "lodash/capitalize";
 import copy from "copy-to-clipboard";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
-import { withTranslation } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import { createApiKey, getApiKeys } from "@docspace/shared/api/api-keys";
 import { TApiKey, TApiKeyRequest } from "@docspace/shared/api/api-keys/types";
 import { Text } from "@docspace/shared/components/text";
@@ -51,6 +50,7 @@ import {
   getCategoryTranslation,
   getFilteredOptions,
   getItemPermissions,
+  maxKeyLifetimeDays,
   PermissionGroup,
   sortPermissions,
 } from "../../utils";
@@ -279,12 +279,12 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   };
 
   const onGenerate = () => {
-    if (!inputValue) {
+    if (!inputValue.trim()) {
       setIsValid(false);
       return;
     }
 
-    if (!expiresInDays) {
+    if ((!expiresInDays || !isValidLifeTime) && lifetimeIsChecked) {
       setIsValidLifeTime(false);
       return;
     }
@@ -366,7 +366,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   useEffect(() => {
     window.addEventListener("keydown", onKeyPress);
     return () => window.removeEventListener("keydown", onKeyPress);
-  }, [inputValue, secretKey]);
+  }, [inputValue, secretKey, isValidLifeTime, lifetimeIsChecked]);
 
   useEffect(() => {
     if (secretKey && inputRef) inputRef.current?.select();
@@ -375,6 +375,38 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
   useEffect(() => {
     setIsRequestRunning(isRequestRunningProp);
   }, [isRequestRunningProp]);
+
+  const generateIsDisabled =
+    selectedItemId === "restricted" && filteredOpt
+      ? Object.entries(filteredOpt).findIndex(
+          (o) => o[1].isRead.isChecked || o[1].isWrite.isChecked,
+        ) === -1
+      : false;
+
+  const restrictedOptions = getRestrictedOptions();
+
+  const checkIsChanged = () => {
+    if (selectedItemId !== selectedOption) return true;
+
+    if (
+      restrictedOptions.length !== actionItem?.permissions?.length &&
+      selectedItemId === "restricted"
+    )
+      return true;
+
+    return (
+      restrictedOptions.filter((value) =>
+        actionItem?.permissions.includes(value),
+      ).length !== restrictedOptions.length
+    );
+  };
+
+  const editIsDisabled = isEdit
+    ? inputValue === actionItem?.name && !checkIsChanged()
+    : false;
+
+  const generateButtonIsDisabled =
+    isRequestRunning || editIsDisabled || generateIsDisabled;
 
   const createBody = (
     <StyledBodyContent>
@@ -391,6 +423,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
           placeholder={t("Settings:NewSecretKey")}
           value={inputValue}
           type={InputType.text}
+          maxLength={30}
           isAutoFocussed
           onChange={(e) => {
             setIsValid(true);
@@ -443,13 +476,33 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
                     !/^(?:[1-9][0-9]*)$/.test(e.target.value)
                   )
                     return;
+
                   setExpiresInDays(e.target.value);
+                  if (+e.target.value > maxKeyLifetimeDays) {
+                    setIsValidLifeTime(false);
+                    return;
+                  }
                   setIsValidLifeTime(true);
                 }}
                 hasError={!isValidLifeTime}
               />
               <Text fontSize="13px" fontWeight={600}>
-                {capitalize(t("Common:Days"))}
+                <Trans
+                  t={t}
+                  ns="Settings"
+                  i18nKey="APIKeyMaxDays"
+                  values={{ days: maxKeyLifetimeDays }}
+                  components={{
+                    1: (
+                      <Text
+                        fontSize="13px"
+                        fontWeight={600}
+                        className="api-key_lifetime-description"
+                        as="span"
+                      />
+                    ),
+                  }}
+                />
               </Text>
             </div>
           ) : null}
@@ -480,16 +533,17 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         />
       </div>
       {lifetimeIsChecked ? (
-        <div className="api-key_name-body-container">
-          <Text fontSize="12px" fontWeight={600}>
-            {t("Settings:ApiKeyLifetime")}
-          </Text>
-          <Text fontSize="12px">
-            {t("Settings:ApiKeyWillBeDeleted", {
-              days: expiresInDays,
-            })}
-          </Text>
-        </div>
+        <Text fontSize="12px" fontWeight={400}>
+          <Trans
+            t={t}
+            ns="Settings"
+            i18nKey="ApiKeyLifetime"
+            values={{ days: expiresInDays }}
+            components={{
+              1: <Text fontSize="12px" fontWeight={600} as="span" />,
+            }}
+          />
+        </Text>
       ) : null}
     </StyledBodyContent>
   );
@@ -503,7 +557,7 @@ const CreateApiKeyDialog = (props: CreateApiKeyDialogProps) => {
         primary
         onClick={onGenerate}
         scale
-        isDisabled={isRequestRunning}
+        isDisabled={generateButtonIsDisabled}
       />
       <Button
         key="CancelButton"

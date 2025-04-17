@@ -142,9 +142,9 @@ export async function getColorTheme() {
   return colorTheme.response as TGetColorTheme;
 }
 
-export async function getThirdPartyProviders() {
+export async function getThirdPartyProviders(inviteView: boolean = false) {
   const [getThirdParty] = createRequest(
-    [`/people/thirdparty/providers`],
+    [`/people/thirdparty/providers?inviteView=${inviteView}`],
     [["", ""]],
     "GET",
   );
@@ -480,56 +480,7 @@ export async function getAvailablePortals(data: {
   recaptchaResponse?: string | null | undefined;
   recaptchaType?: unknown | undefined;
 }) {
-  const config = await getConfig();
-
   const path = `/portal/signin`;
-
-  if (config?.oauth2?.apiSystem.length) {
-    const urls: string[] = config.oauth2.apiSystem.map(
-      (url: string) => `https://${url}/apisystem${path}`,
-    );
-
-    const actions = await Promise.allSettled(
-      urls.map((url: string) =>
-        fetch(url, {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-            ...new Headers(headers()),
-          },
-        }),
-      ),
-    );
-
-    const fullFiledActions = actions.filter(
-      (action) => action.status === "fulfilled",
-    );
-
-    if (fullFiledActions.length) {
-      const portalsRes = fullFiledActions
-        .filter((action) => {
-          return action.value.ok;
-        })
-        .map((action) => action.value);
-
-      if (!portalsRes.length) {
-        const portals = await fullFiledActions[0].value.json();
-
-        return { ...portals, status: fullFiledActions[0].status };
-      }
-
-      const portals = (await Promise.all(portalsRes.map((res) => res.json())))
-        .map(
-          (portals: {
-            tenants: { portalLink: string; portalName: string }[];
-          }) => portals.tenants,
-        )
-        .flat();
-
-      return portals;
-    }
-  }
 
   const portalsRes = IS_TEST
     ? oauthSignInHelper()

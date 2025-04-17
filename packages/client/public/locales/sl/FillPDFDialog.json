@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Izpolni",
   "FillOutDescription": "Izpolni polja izvirnega obrazca v oknu urejevalnika.",
   "FillOutTitle": "Ponovno izpolni obrazec",
-  "FillPDFDialogTitle": "Izpolni kot",
-  "ShareCollectButtonLabel": "Kopiraj v sobo",
-  "ShareCollectDescription": "Deli svoj obrazec in zbiraj odgovore preko sobe za izpolnjevanje obrazcev.",
-  "ShareCollectTitle": "Deli"
+  "FillPDFDialogTitle": "Izpolni kot"
 }

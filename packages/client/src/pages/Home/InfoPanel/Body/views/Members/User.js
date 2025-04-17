@@ -186,7 +186,7 @@ const User = ({
               users: [...newUsers, ...fetchedMembers.users],
               expected: [...newExpected, ...fetchedMembers.expected],
               groups: [...newGroups, ...fetchedMembers.groups],
-              guests: [...newMembersFilter.guests],
+              guests: [...newGuests, ...fetchedMembers.guests],
             };
 
             setInfoPanelMembers({

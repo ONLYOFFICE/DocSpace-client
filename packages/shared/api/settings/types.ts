@@ -128,6 +128,7 @@ export type TSettings = {
   isAmi: boolean;
   logoText: string;
   externalResources: TExternalResources;
+  displayAbout: boolean;
 };
 
 export type TCustomSchema = {
@@ -151,6 +152,7 @@ export type TGetColorTheme = {
 };
 
 export type TApiEntries = {
+  apikeys: string;
   docspace: string;
   "javascript-sdk": string;
   "plugins-sdk": string;
@@ -219,6 +221,8 @@ export type THelpCenterEntries = {
   twofactorauthentication: string;
   userguides: string;
   welcomepage: string;
+  limiteddevtools: string;
+  encryption: string;
 };
 
 export type TIntegrationsEntries = {

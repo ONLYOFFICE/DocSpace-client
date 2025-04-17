@@ -209,7 +209,7 @@ const Tabs = (props: TabsProps) => {
       {!multiple ? (
         <div
           data-sticky
-          className={classNames(styles.sticky, "sticky")}
+          className={classNames(styles.sticky, classes, "sticky")}
           style={{ top: stickyTop }}
         >
           {!isViewFirstTab ? <div className={styles.blurAhead} /> : null}
@@ -217,6 +217,7 @@ const Tabs = (props: TabsProps) => {
             ref={scrollRef}
             autoHide={false}
             noScrollY
+            paddingInlineEnd="0"
             className={classNames(styles.scroll, classes)}
           >
             {renderContent}

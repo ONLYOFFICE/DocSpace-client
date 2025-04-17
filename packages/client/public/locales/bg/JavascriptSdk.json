@@ -4,7 +4,6 @@
   "AddWatermarks": "Добави воден знак към документите",
   "AdvancedDisplay": "Разширени настройки на дисплея",
   "AllTypes": "Всички видове",
-  "AllTypesAvailableForEditing": "всички видове файлове, налични за редактиране в {{organizationName}}",
   "AllTypesSupportedByEditor": "Всички видове, поддържани от редакторите на {{organizationName}}",
   "APILink": "API библиотека",
   "Ascending": "Възходящ",

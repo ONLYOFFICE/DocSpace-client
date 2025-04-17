@@ -42,7 +42,6 @@
   "UploadDeviceOptionTitle": "Carregar do seu dispositivo",
   "UploadDevicePDFFormOptionDescription": "Carregue um formulário PDF pronto para a sala a partir do seu dispositivo.",
   "UploadDevicePDFFormOptionTitle": "Carregar do dispositivo",
-  "UploadFromPortalDescription": "Carregue qualquer tipo de arquivo de Documentos ou Salas",
   "UploadFromPortalTitle": "Fazer upload de {{productName}}",
   "UploadPDFFormOptionDescription": "Selecione um formulário PDF pronto disponível em {{productName}} e carregue-o na sala.",
   "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual"

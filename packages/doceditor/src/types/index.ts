@@ -70,6 +70,7 @@ export type SdkSearchParams = {
   theme?: string | undefined;
   editorGoBack?: boolean | "event";
   is_file?: boolean;
+  isSDK?: boolean;
 };
 
 export type RootPageProps = {
@@ -280,6 +281,7 @@ export type TEventData = {
   emails?: string[];
   c?: string;
   version?: number;
+  link?: string;
 };
 
 export type TEvent = {
@@ -380,6 +382,9 @@ export interface UseEventsProps {
 
   sdkConfig?: TFrameConfig | null;
   organizationName: string;
+  setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
+  openShareFormDialog?: VoidFunction;
+  onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
 }
 
 export interface UseInitProps {

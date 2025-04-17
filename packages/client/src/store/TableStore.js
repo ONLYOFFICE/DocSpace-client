@@ -596,7 +596,7 @@ class TableStore {
         return;
 
       case "Activity":
-        this.setRoomColumnActivity(!this.templateRoomColumnActivityIsEnabled);
+        this.setRoomColumnActivity(!this.roomColumnActivityIsEnabled);
         return;
 
       case "ActivityTemplates":

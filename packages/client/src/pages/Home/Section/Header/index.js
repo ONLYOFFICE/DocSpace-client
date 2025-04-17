@@ -259,9 +259,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const onContextOptionsClick = () => {
-    isContactsInsideGroupPage
-      ? setGroupsBufferSelection(currentGroup)
-      : setBufferSelection(selectedFolder);
+    if (isContactsInsideGroupPage) setGroupsBufferSelection(currentGroup);
+    else if (!isContactsPage) setBufferSelection(selectedFolder);
   };
 
   const onSelect = (e) => {
@@ -490,7 +489,7 @@ const SectionHeaderContent = (props) => {
     tableGroupMenuProps.isIndeterminate = !isContactsGroupsPage
       ? isUsersHeaderIndeterminate
       : isGroupsHeaderIndeterminate;
-    tableGroupMenuProps.withoutInfoPanelToggler = false;
+    tableGroupMenuProps.withoutInfoPanelToggler = true;
   } else {
     tableGroupMenuVisible =
       (isIndexEditingMode || isHeaderVisible) && tableGroupMenuVisible;
@@ -498,7 +497,7 @@ const SectionHeaderContent = (props) => {
     tableGroupMenuProps.isIndeterminate = isHeaderIndeterminate;
     tableGroupMenuProps.isBlocked = isGroupMenuBlocked;
     tableGroupMenuProps.withoutInfoPanelToggler =
-      isIndexEditingMode || isPublicRoom;
+      !isIndexEditingMode || !isPublicRoom;
   }
 
   const currentTitle = isSettingsPage
@@ -577,6 +576,10 @@ const SectionHeaderContent = (props) => {
       : "";
 
   const isContextButtonVisible = () => {
+    if (isContactsPage && !isContactsInsideGroupPage) {
+      return false;
+    }
+
     if (isPersonalReadOnly) {
       return isRootFolder;
     }

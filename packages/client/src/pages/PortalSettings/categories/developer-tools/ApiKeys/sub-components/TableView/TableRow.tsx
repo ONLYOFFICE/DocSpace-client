@@ -67,6 +67,7 @@ const StyledTableRow = styled(TableRowComponent)`
     display: flex;
     align-items: center;
     gap: 8px;
+    overflow: hidden;
   }
 
   .api-keys_text {
@@ -134,7 +135,9 @@ const TableRow = (props: TableRowProps) => {
       <StyledTableRow contextOptions={contextOptions} hideColumns={hideColumns}>
         <TableCell>
           <div className="api-keys_name">
-            <Text fontWeight={600}>{item.name}</Text>
+            <Text truncate fontWeight={600}>
+              {item.name}
+            </Text>
             <ApiKeysLifetimeIcon
               t={t}
               item={item}
@@ -182,15 +185,6 @@ const TableRow = (props: TableRowProps) => {
             {item.createBy?.displayName}
           </Text>
         </TableCell>
-
-        {/* <TableCell>
-          <Text
-            className="api-keys_text api-keys_text-overflow"
-            fontWeight={600}
-          >
-            {expiresAtDate}
-          </Text>
-        </TableCell> */}
         <TableCell>
           <Text
             className="api-keys_text api-keys_text-overflow"

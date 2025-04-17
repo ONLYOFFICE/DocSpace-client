@@ -31,6 +31,7 @@ import {
   HEADER_EMPTY_FOLDER,
   HEADER_ROOMS_LIST,
 } from "@docspace/shared/__mocks__/e2e";
+import { FilterType } from "@docspace/shared/enums";
 
 import { expect, test } from "./fixtures/base";
 import { describe } from "node:test";
@@ -112,7 +113,7 @@ describe("File selector single param light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -269,7 +270,7 @@ describe("File selector single param dark", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Dark&filter=documents`;
+    const pageRoute = `${path}?theme=Dark&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -427,7 +428,7 @@ describe("File selector single param RTL light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?locale=ar-SA&theme=Base&filter=documents`;
+    const pageRoute = `${path}?locale=ar-SA&theme=Base&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -571,7 +572,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&search=true&cancel=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&search=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -628,7 +629,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents&id=5&selectorType=userFolderOnly`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&selectorType=userFolderOnly`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await mockRequest.router([endpoints.folder]);
@@ -643,7 +644,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&subtitle=true&acceptLabel=CustomAccept&filter=documents`;
+    const pageRoute = `${path}?theme=Base&subtitle=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -671,7 +672,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&search=true&filter=documents&cancelLabel=CustomCancel`;
+    const pageRoute = `${path}?theme=Base&search=true&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -685,7 +686,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=documents&acceptLabel=CustomAccept`;
+    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&acceptLabel=CustomAccept`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -728,7 +729,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents&cancelLabel=CustomCancel&subtitle=true`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel&subtitle=true`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -799,7 +800,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&filter=documents&id=5`;
+    const pageRoute = `${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&id=5`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await mockRequest.router([endpoints.folder]);
@@ -842,7 +843,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents&search=true&subtitle=true`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&subtitle=true`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -885,7 +886,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -899,7 +900,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -928,7 +929,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&filter=documents&id=5`;
+    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&id=5`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await mockRequest.router([endpoints.folder]);
@@ -943,7 +944,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&filter=documents&selectorType=roomsOnly`;
+    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -985,7 +986,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&breadCrumbs=true&cancel=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&breadCrumbs=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1014,7 +1015,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=documents&id=5`;
+    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&id=5`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await mockRequest.router([endpoints.folder]);
@@ -1029,7 +1030,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=documents&selectorType=roomsOnly`;
+    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1043,7 +1044,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=documents&subtitle=true`;
+    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1086,7 +1087,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&breadCrumbs=true&search=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&breadCrumbs=true&search=true&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1114,7 +1115,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&filter=documents&selectorType=roomsOnly`;
+    const pageRoute = `${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1128,7 +1129,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&filter=documents&subtitle=true`;
+    const pageRoute = `${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1200,7 +1201,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&filter=documents`;
+    const pageRoute = `${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1257,7 +1258,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&filter=documents&id=5`;
+    const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&id=5`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await mockRequest.router([endpoints.folder]);
@@ -1272,7 +1273,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&filter=documents&selectorType=roomsOnly`;
+    const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1301,7 +1302,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&search=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&search=true&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1344,7 +1345,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents&id=5&subtitle=true`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&subtitle=true`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await mockRequest.router([endpoints.folder]);
@@ -1359,7 +1360,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents&search=true&id=5`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&id=5`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await mockRequest.router([endpoints.folder]);
@@ -1374,7 +1375,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents&search=true&selectorType=roomsOnly`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&selectorType=roomsOnly`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1403,7 +1404,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&id=5&acceptLabel=CustomAccept&filter=documents`;
+    const pageRoute = `${path}?theme=Base&id=5&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await mockRequest.router([endpoints.folder]);
@@ -1463,7 +1464,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&id=5&breadCrumbs=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&id=5&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await mockRequest.router([endpoints.folder]);
@@ -1507,7 +1508,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&search=true&acceptLabel=CustomAccept&filter=documents`;
+    const pageRoute = `${path}?theme=Base&search=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1620,7 +1621,7 @@ describe("File selector param combinations light", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&selectorType=roomsOnly&filter=documents&subtitle=true`;
+    const pageRoute = `${path}?theme=Base&selectorType=roomsOnly&filter=${FilterType.DocumentsOnly}&subtitle=true`;
     await mockRequest.setHeaders(pageRoute, [HEADER_ROOMS_LIST]);
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1736,7 +1737,7 @@ describe("File selector single param light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -1894,7 +1895,7 @@ describe("File selector single param dark empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Dark&filter=documents`;
+    const pageRoute = `${path}?theme=Dark&filter=${FilterType.DocumentsOnly}`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2053,7 +2054,7 @@ describe("File selector single param RTL light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?locale=ar-SA&theme=Base&filter=documents`;
+    const pageRoute = `${path}?locale=ar-SA&theme=Base&filter=${FilterType.DocumentsOnly}`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2199,7 +2200,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&search=true&cancel=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&search=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2257,7 +2258,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents&id=5&selectorType=userFolderOnly`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&selectorType=userFolderOnly`;
     await mockRequest.setHeaders(pageRoute, [HEADER_EMPTY_FOLDER]);
 
     await page.goto(pageRoute);
@@ -2273,7 +2274,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&subtitle=true&acceptLabel=CustomAccept&filter=documents`;
+    const pageRoute = `${path}?theme=Base&subtitle=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2301,7 +2302,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&search=true&filter=documents&cancelLabel=CustomCancel`;
+    const pageRoute = `${path}?theme=Base&search=true&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2315,7 +2316,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=documents&acceptLabel=CustomAccept`;
+    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&acceptLabel=CustomAccept`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2359,7 +2360,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents&cancelLabel=CustomCancel&subtitle=true`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}&cancelLabel=CustomCancel&subtitle=true`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2431,7 +2432,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&filter=documents&id=5`;
+    const pageRoute = `${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&id=5`;
     await mockRequest.setHeaders(pageRoute, [HEADER_EMPTY_FOLDER]);
 
     await page.goto(pageRoute);
@@ -2475,7 +2476,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents&search=true&subtitle=true`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&subtitle=true`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2519,7 +2520,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2533,7 +2534,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&cancel=true&filter=${FilterType.DocumentsOnly}`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2563,7 +2564,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&filter=documents&id=5`;
+    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&id=5`;
     await mockRequest.setHeaders(pageRoute, [HEADER_EMPTY_FOLDER]);
 
     await page.goto(pageRoute);
@@ -2579,7 +2580,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&filter=documents&selectorType=roomsOnly`;
+    const pageRoute = `${path}?theme=Base&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2621,7 +2622,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&breadCrumbs=true&cancel=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&breadCrumbs=true&cancel=true&filter=${FilterType.DocumentsOnly}`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2651,7 +2652,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=documents&id=5`;
+    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&id=5`;
     await mockRequest.setHeaders(pageRoute, [HEADER_EMPTY_FOLDER]);
 
     await page.goto(pageRoute);
@@ -2667,7 +2668,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=documents&selectorType=roomsOnly`;
+    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2681,7 +2682,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=documents&subtitle=true`;
+    const pageRoute = `${path}?theme=Base&breadCrumbs=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2725,7 +2726,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&breadCrumbs=true&search=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&breadCrumbs=true&search=true&filter=${FilterType.DocumentsOnly}`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2753,7 +2754,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&filter=documents&selectorType=roomsOnly`;
+    const pageRoute = `${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2767,7 +2768,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&filter=documents&subtitle=true`;
+    const pageRoute = `${path}?theme=Base&cancel=true&filter=${FilterType.DocumentsOnly}&subtitle=true`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2841,7 +2842,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&filter=documents`;
+    const pageRoute = `${path}?theme=Base&cancel=true&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2899,7 +2900,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&filter=documents&id=5`;
+    const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&id=5`;
     await mockRequest.setHeaders(pageRoute, [HEADER_EMPTY_FOLDER]);
 
     await page.goto(pageRoute);
@@ -2915,7 +2916,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&filter=documents&selectorType=roomsOnly`;
+    const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&filter=${FilterType.DocumentsOnly}&selectorType=roomsOnly`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2945,7 +2946,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&search=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&cancelLabel=CustomCancel&search=true&filter=${FilterType.DocumentsOnly}`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -2989,7 +2990,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents&id=5&subtitle=true`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}&id=5&subtitle=true`;
     await mockRequest.setHeaders(pageRoute, [HEADER_EMPTY_FOLDER]);
 
     await page.goto(pageRoute);
@@ -3005,7 +3006,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents&search=true&id=5`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&id=5`;
     await mockRequest.setHeaders(pageRoute, [HEADER_EMPTY_FOLDER]);
 
     await page.goto(pageRoute);
@@ -3021,7 +3022,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&filter=documents&search=true&selectorType=roomsOnly`;
+    const pageRoute = `${path}?theme=Base&filter=${FilterType.DocumentsOnly}&search=true&selectorType=roomsOnly`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -3051,7 +3052,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&id=5&acceptLabel=CustomAccept&filter=documents`;
+    const pageRoute = `${path}?theme=Base&id=5&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_EMPTY_FOLDER]);
 
     await page.goto(pageRoute);
@@ -3115,7 +3116,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&id=5&breadCrumbs=true&filter=documents`;
+    const pageRoute = `${path}?theme=Base&id=5&breadCrumbs=true&filter=${FilterType.DocumentsOnly}`;
     await mockRequest.setHeaders(pageRoute, [HEADER_EMPTY_FOLDER]);
 
     await page.goto(pageRoute);
@@ -3161,7 +3162,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&search=true&acceptLabel=CustomAccept&filter=documents`;
+    const pageRoute = `${path}?theme=Base&search=true&acceptLabel=CustomAccept&filter=${FilterType.DocumentsOnly}`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([
@@ -3275,7 +3276,7 @@ describe("File selector param combinations light empty", () => {
     page,
     mockRequest,
   }) => {
-    const pageRoute = `${path}?theme=Base&selectorType=roomsOnly&filter=documents&subtitle=true`;
+    const pageRoute = `${path}?theme=Base&selectorType=roomsOnly&filter=${FilterType.DocumentsOnly}&subtitle=true`;
 
     await page.goto(pageRoute);
     await expect(page).toHaveScreenshot([

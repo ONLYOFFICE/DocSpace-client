@@ -54,6 +54,7 @@ const PublicRoomBar = forwardRef(
     return (
       <div
         className={classNames(
+          "public-room-bar",
           styles.container,
           {
             [styles.barVisible]: barIsVisible,

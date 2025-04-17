@@ -58,6 +58,7 @@ const AccessPortal = (props) => {
     isMobileView,
     resetIsInit,
     helpCenterDomain,
+    limitedDevToolsBlockHelpUrl,
   } = props;
 
   useEffect(() => {
@@ -163,20 +164,21 @@ const AccessPortal = (props) => {
       </Text>
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">
-          {t("DeveloperToolsAccessDescription")}
+          {t("DeveloperToolsAccessDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
-        <Text fontSize="13px" fontWeight="400">
-          <Trans t={t} i18nKey="SaveToApply" />
-        </Text>
-        <Link
-          className="link-learn-more"
-          target="_blank"
-          isHovered
-          color={currentColorScheme.main?.accent}
-          href="" // TODO: add link
-        >
-          {t("Common:LearnMore")}
-        </Link>
+        {limitedDevToolsBlockHelpUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={limitedDevToolsBlockHelpUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
       </div>
       <DevToolsAccessSection />
       <StyledSettingsSeparator />
@@ -281,6 +283,7 @@ export default inject(({ settingsStore, setup }) => {
     ipSettingsUrl,
     currentDeviceType,
     helpCenterDomain,
+    limitedDevToolsBlockHelpUrl,
   } = settingsStore;
   const { resetIsInit } = setup;
 
@@ -297,5 +300,6 @@ export default inject(({ settingsStore, setup }) => {
     isMobileView,
     resetIsInit,
     helpCenterDomain,
+    limitedDevToolsBlockHelpUrl,
   };
 })(withTranslation(["Settings", "Profile"])(observer(AccessPortal)));

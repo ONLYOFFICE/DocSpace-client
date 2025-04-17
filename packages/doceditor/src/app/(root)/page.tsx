@@ -76,9 +76,10 @@ async function Page({ searchParams }: RootPageProps) {
     theme,
     is_file,
     editorGoBack,
+    isSDK,
   } = searchParams ?? initialSearchParams;
 
-  const baseSdkConfig: TFrameConfig & { is_file?: boolean } = {
+  const baseSdkConfig: TFrameConfig & { is_file?: boolean; isSDK?: boolean } = {
     frameId: "",
     mode: "",
     src: "",
@@ -90,6 +91,7 @@ async function Page({ searchParams }: RootPageProps) {
     requestToken: share,
     theme,
     is_file,
+    isSDK,
   };
 
   const cookieStore = cookies();
@@ -131,7 +133,25 @@ async function Page({ searchParams }: RootPageProps) {
     }
   }
 
-  if (share) {
+  log.debug(
+    {
+      fileId: fileId ?? fileid,
+      isShare: !!share,
+      isAuth: !!cookieStore.get("asc_auth_key")?.value,
+    },
+    "Start get data for open file",
+  );
+
+  const data = await getData(
+    fileId ?? fileid ?? "",
+    version,
+    doc,
+    action,
+    share,
+    type,
+  );
+
+  if (data.error?.status === "access-denied" && share) {
     const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
     if (!roomData) {
       log.error(
@@ -158,23 +178,6 @@ async function Page({ searchParams }: RootPageProps) {
       return <FilePassword {...roomData.response} shareKey={share} />;
     }
   }
-
-  log.debug(
-    {
-      fileId: fileId ?? fileid,
-      isShare: !!share,
-      isAuth: !!cookieStore.get("asc_auth_key")?.value,
-    },
-    "Start get data for open file",
-  );
-  const data = await getData(
-    fileId ?? fileid ?? "",
-    version,
-    doc,
-    action,
-    share,
-    type,
-  );
 
   const deepLinkSettings = await getDeepLinkSettings();
 
@@ -220,7 +223,12 @@ async function Page({ searchParams }: RootPageProps) {
           src={docApiUrl}
         />
       )}
-      <Root {...data} shareKey={share} baseSdkConfig={baseSdkConfig} deepLinkSettings={deepLinkSettings?.handlingMode}/>
+      <Root
+        {...data}
+        shareKey={share}
+        baseSdkConfig={baseSdkConfig}
+        deepLinkSettings={deepLinkSettings?.handlingMode}
+      />
     </>
   );
 }

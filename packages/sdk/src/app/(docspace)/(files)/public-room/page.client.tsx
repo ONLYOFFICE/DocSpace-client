@@ -32,7 +32,7 @@ import { observer } from "mobx-react";
 import { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 
-import useSDK from "@/hooks/useSDK";
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 import { useFilesSettingsStore } from "../../_store/FilesSettingsStore";
 import { useSettingsStore } from "../../_store/SettingsStore";
@@ -62,7 +62,7 @@ function PublicRoomPage({
 }: PublicRoomPageProps) {
   const { folders, files, total, current } = folderList;
 
-  const { sdkConfig } = useSDK();
+  const { sdkConfig } = useSDKConfig();
 
   const filesSettingsStore = useFilesSettingsStore();
   const settingsStore = useSettingsStore();
@@ -73,7 +73,8 @@ function PublicRoomPage({
 
   React.useEffect(() => {
     settingsStore.setShareKey(shareKey);
-  }, [settingsStore, shareKey]);
+    settingsStore.setDisplayAbout(portalSettings.displayAbout);
+  }, [settingsStore, shareKey, portalSettings]);
 
   return (
     <List

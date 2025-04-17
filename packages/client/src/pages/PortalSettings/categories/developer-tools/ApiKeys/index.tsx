@@ -89,7 +89,7 @@ const StyledMobileButton = styled.div.attrs(injectDefaultTheme)`
 `;
 
 const ApiKeys = (props: ApiKeysProps) => {
-  const { viewAs, currentColorScheme } = props;
+  const { viewAs, currentColorScheme, apiKeysLink } = props;
 
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
@@ -116,8 +116,10 @@ const ApiKeys = (props: ApiKeysProps) => {
     setIsRequestRunning(true);
     deleteApiKey(actionItem.id)
       .then((res) => {
-        if (res)
+        if (res) {
           setListItems((prev) => prev.filter((k) => k.id !== actionItem.id));
+          toastr.success(t("Settings:SecretKeyDeleted"));
+        }
       })
       .catch((err) => toastr.error(err))
       .finally(() => {
@@ -150,6 +152,7 @@ const ApiKeys = (props: ApiKeysProps) => {
           }
 
           setListItems(items);
+          toastr.success(t("Settings:SecretKeyEdited"));
         }
       })
       .catch((err) => toastr.error(err))
@@ -207,6 +210,7 @@ const ApiKeys = (props: ApiKeysProps) => {
           color={currentColorScheme?.main?.accent}
           fontSize="13px"
           fontWeight={600}
+          onClick={() => window.open(apiKeysLink, "_blank")}
         >
           {t("Settings:APIGuide")}
         </Link>
@@ -273,10 +277,11 @@ const ApiKeys = (props: ApiKeysProps) => {
 
 export default inject(({ setup, settingsStore }: TStore) => {
   const { viewAs } = setup;
-  const { currentColorScheme } = settingsStore;
+  const { currentColorScheme, apiKeysLink } = settingsStore;
 
   return {
     viewAs,
     currentColorScheme,
+    apiKeysLink,
   };
 })(observer(ApiKeys));

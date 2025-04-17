@@ -95,7 +95,7 @@
   }
 }
 
-.modern .checkboxElement:hover {
+.modern:not(.mobile) .checkboxElement:hover {
   &:not(.isIndexEditingMode) {
     .checkbox {
       display: flex;

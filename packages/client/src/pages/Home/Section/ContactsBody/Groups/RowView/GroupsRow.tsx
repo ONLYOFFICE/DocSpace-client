@@ -26,6 +26,7 @@
 
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { useTheme } from "styled-components";
 
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import {
@@ -70,6 +71,7 @@ const GroupsRowComponent = ({
   changeGroupContextSelection,
 }: GroupsRowProps) => {
   const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
+  const theme = useTheme();
 
   const isChecked = selection?.some((el) => el.id === item.id);
   const isActive = bufferSelection?.id === item?.id;
@@ -120,7 +122,11 @@ const GroupsRowComponent = ({
           mode="modern"
           className="group-row"
         >
-          <GroupsRowContent sectionWidth={sectionWidth}>
+          <GroupsRowContent
+            className="group-row-content"
+            sectionWidth={sectionWidth}
+            sideColor={theme.peopleTableRow.sideInfoColor}
+          >
             <Link
               key="group-title"
               target={LinkTarget.blank}
@@ -146,7 +152,7 @@ const GroupsRowComponent = ({
               isTextOverflow
               onClick={onOpenGroup}
             >
-              {t("PeopleTranslations:PeopleCount", {
+              {t("PeopleTranslations:MembersCount", {
                 count: item.membersCount,
               })}
             </Link>

@@ -132,13 +132,15 @@ export const FillingStatusPanel = ({
         <div className={styles.fileInfo}>
           <PDFIcon />
           <Text className={styles.fileName}>{fileName}</Text>
-          <div
-            title={fileStatusTitle}
-            className={styles.fileStatus}
-            style={{ backgroundColor: color }}
-          >
-            <span>{fileStatusLabel}</span>
-          </div>
+          {fillingStatus ? (
+            <div
+              title={fileStatusTitle}
+              className={styles.fileStatus}
+              style={{ backgroundColor: color }}
+            >
+              <span>{fileStatusLabel}</span>
+            </div>
+          ) : null}
         </div>
         <div className={styles.processContainer}>
           <Heading

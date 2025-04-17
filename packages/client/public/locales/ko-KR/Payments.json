@@ -41,6 +41,7 @@
   "StartupTitle": "무료 {{planName}} 요금제를 사용 중입니다",
   "StripeCustomerPortal": "Stripe 고객 포털로 이동",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/월</3>",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/년</3>",
   "UpgradeNow": "지금 업그레이드",
   "UpgradePlan": "요금제 업그레이드",
   "UserNotFound": "<1>{{email}}</1> 사용자를 찾지 못했습니다.",

@@ -1,4 +1,6 @@
 {
+  "DeleteVersion": "Versiyanı silin",
+  "DeleteVersionDescription": "Fayl versiyasını silmək üzrəsiniz. Artıq ona baxmaq və ya bərpa etmək mümkün olmayacaq. Davam etmək istədiyinizə əminsiniz?",
   "EditComment": "Şərhi redaktə et",
   "Version": "Ver."
 }

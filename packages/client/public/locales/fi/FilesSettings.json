@@ -1,4 +1,5 @@
 {
+  "CancellaionNotification": "Älä näytä peruutusilmoitusta enää",
   "DisplayFileExtension": "Näytä tiedostopääte tiedostonimen perässä ",
   "DisplayNotification": "Näytä ilmoitus, kun siirrät kohteita roskakoriin",
   "OpenSameTab": "Avaa {{organizationName}} editori samassa välilehdessä",

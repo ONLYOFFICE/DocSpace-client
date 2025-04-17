@@ -41,6 +41,7 @@
   "StartupTitle": "U gebruikt het gratis {{planName}} plan",
   "StripeCustomerPortal": "ga naar het Stripe klantenportaal",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/maand</3>",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/jaar</3>",
   "UpgradeNow": "Upgrade nu",
   "UpgradePlan": "Upgrade plan",
   "UserNotFound": "Gebruiker <1>{{email}}</1> is niet gevonden.",

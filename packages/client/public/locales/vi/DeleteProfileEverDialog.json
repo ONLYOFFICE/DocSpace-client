@@ -12,9 +12,11 @@
   "DeleteUser": "Xoá người dùng",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> sẽ bị xóa. Hành động này không thể được hoàn tác.",
   "DeletingUsers": "Xóa người dùng",
+  "PersonalDataDeletionInfo": "Dữ liệu cá nhân, tất cả các tệp và thư mục cá nhân trong mục {{sectionNameFirst}} và {{sectionNameSecond}}* của người dùng đã chọn sẽ bị xóa vĩnh viễn. Các tệp và thư mục của người dùng đã chọn được lưu trữ trong mục chung* như phòng sẽ vẫn được giữ lại trong {{productName}}.",
   "PleaseNote": "Xin vui lòng lưu ý:",
   "ReassignDataToAnotherUser": "Chuyển giao lại dữ liệu cho người dùng khác",
   "SuccessfullyDeleteGuestInfoMessage": "Đã xóa khách thành công",
   "SuccessfullyDeleteUserInfoMessage": "Người dùng đã được xóa thành công",
-  "ToBeAbleToReassignData": "Để có thể chuyển giao lại dữ liệu, hãy xóa từng người dùng một."
+  "ToBeAbleToReassignData": "Để có thể chuyển giao lại dữ liệu, hãy xóa từng người dùng một.",
+  "UserFilesRemovalScope": "Dữ liệu cá nhân, tất cả các tệp và thư mục trong mục {{sectionNameFirst}} và {{sectionNameSecond}} của người dùng này sẽ bị xóa vĩnh viễn."
 }

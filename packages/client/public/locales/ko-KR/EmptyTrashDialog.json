@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "영구 삭제",
-  "DeleteForeverTitle": "영구 삭제하시겠습니까?"
+  "DeleteForeverNote": "{{sectionName}} 섹션의 모든 항목이 영구적으로 삭제됩니다. 삭제되면 복원할 수 없습니다.",
+  "DeleteForeverTitle": "영구 삭제하시겠습니까?",
+  "SuccessEmptyAction": "{{sectionName}} 섹션이 비워졌습니다"
 }

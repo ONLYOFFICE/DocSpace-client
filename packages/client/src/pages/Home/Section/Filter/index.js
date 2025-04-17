@@ -486,250 +486,258 @@ const SectionFilterContent = ({
     getContactsSelectedSortData,
   ]);
 
-  const getSelectedFilterData = React.useCallback(async () => {
-    const filterValues = isContactsPage
-      ? await getContactsSelectedFilterData()
-      : [];
+  const getSelectedFilterData = React.useCallback(
+    async (skipSetState) => {
+      const filterValues = isContactsPage
+        ? await getContactsSelectedFilterData()
+        : [];
 
-    if (isRooms) {
-      // if (!roomsFilter.withSubfolders) {
-      //   filterValues.push({
-      //     key: FilterKeys.excludeSubfolders,
-      //     label: "Exclude subfolders",
-      //     group: FilterGroups.roomFilterFolders,
-      //   });
-      // }
+      if (isRooms) {
+        // if (!roomsFilter.withSubfolders) {
+        //   filterValues.push({
+        //     key: FilterKeys.excludeSubfolders,
+        //     label: "Exclude subfolders",
+        //     group: FilterGroups.roomFilterFolders,
+        //   });
+        // }
 
-      // if (roomsFilter.searchInContent) {
-      //   filterValues.push({
-      //     key: FilterKeys.withContent,
-      //     label: "File contents",
-      //     group: FilterGroups.roomFilterContent,
-      //   });
-      // }
+        // if (roomsFilter.searchInContent) {
+        //   filterValues.push({
+        //     key: FilterKeys.withContent,
+        //     label: "File contents",
+        //     group: FilterGroups.roomFilterContent,
+        //   });
+        // }
 
-      if (roomsFilter.subjectId) {
-        const user = await getUser(roomsFilter.subjectId);
-        const isMe = userId === roomsFilter.subjectId;
+        if (roomsFilter.subjectId) {
+          const user = await getUser(roomsFilter.subjectId);
+          const isMe = userId === roomsFilter.subjectId;
 
-        const label = isMe ? t("Common:MeLabel") : user.displayName;
+          const label = isMe ? t("Common:MeLabel") : user.displayName;
 
-        const subject = {
-          key: isMe ? FilterKeys.me : roomsFilter.subjectId,
-          group: FilterGroups.roomFilterSubject,
-          label,
-        };
+          const subject = {
+            key: isMe ? FilterKeys.me : roomsFilter.subjectId,
+            group: FilterGroups.roomFilterSubject,
+            label,
+          };
 
-        if (roomsFilter.subjectFilter?.toString()) {
-          if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {
-            subject.selectedLabel = `${t("Common:Owner")}: ${label}`;
+          if (roomsFilter.subjectFilter?.toString()) {
+            if (roomsFilter.subjectFilter.toString() === FilterSubject.Owner) {
+              subject.selectedLabel = `${t("Common:Owner")}: ${label}`;
+            }
+
+            filterValues.push(subject);
+
+            filterValues.push({
+              key: roomsFilter?.subjectFilter?.toString(),
+              group: FilterGroups.roomFilterOwner,
+            });
+          } else {
+            filterValues.push(subject);
           }
+        }
 
-          filterValues.push(subject);
+        if (roomsFilter.type) {
+          const key = +roomsFilter.type;
+
+          const label = getRoomTypeName(key, t);
 
           filterValues.push({
-            key: roomsFilter?.subjectFilter?.toString(),
-            group: FilterGroups.roomFilterOwner,
+            key,
+            label,
+            group: FilterGroups.roomFilterType,
           });
-        } else {
-          filterValues.push(subject);
         }
-      }
+        if (roomsFilter.quotaFilter) {
+          const key = roomsFilter.quotaFilter;
 
-      if (roomsFilter.type) {
-        const key = +roomsFilter.type;
+          const label =
+            key === FilterKeys.customQuota
+              ? t("Common:CustomQuota")
+              : t("Common:DefaultQuota");
 
-        const label = getRoomTypeName(key, t);
-
-        filterValues.push({
-          key,
-          label,
-          group: FilterGroups.roomFilterType,
-        });
-      }
-      if (roomsFilter.quotaFilter) {
-        const key = roomsFilter.quotaFilter;
-
-        const label =
-          key === FilterKeys.customQuota
-            ? t("Common:CustomQuota")
-            : t("Common:DefaultQuota");
-
-        filterValues.push({
-          key: roomsFilter.quotaFilter,
-          label,
-          group: FilterGroups.filterQuota,
-        });
-      }
-
-      if (roomsFilter?.tags?.length > 0) {
-        filterValues.push({
-          key: roomsFilter.tags,
-          group: FilterGroups.roomFilterTags,
-          isMultiSelect: true,
-        });
-      }
-
-      if (roomsFilter.provider) {
-        const provider = +roomsFilter.provider;
-
-        const label = ROOMS_PROVIDER_TYPE_NAME[provider];
-
-        filterValues.push({
-          key: provider,
-          label,
-          group: FilterGroups.roomFilterProviderType,
-        });
-      }
-    } else if (!isContactsPage) {
-      if (filter.filterType) {
-        let label = "";
-
-        switch (filter.filterType.toString()) {
-          case FilterType.DocumentsOnly.toString():
-            label = t("Common:Documents");
-            break;
-          case FilterType.FoldersOnly.toString():
-            label = t("Common:Folders");
-            break;
-          case FilterType.SpreadsheetsOnly.toString():
-            label = t("Common:Spreadsheets");
-            break;
-          case FilterType.ArchiveOnly.toString():
-            label = t("Common:Archives");
-            break;
-          case FilterType.PresentationsOnly.toString():
-            label = t("Common:Presentations");
-            break;
-          case FilterType.ImagesOnly.toString():
-            label = t("Common:Images");
-            break;
-          case FilterType.MediaOnly.toString():
-            label = t("Common:Media");
-            break;
-          case FilterType.FilesOnly.toString():
-            label = t("Common:Files");
-            break;
-          case FilterType.PDFForm.toString():
-            label = getManyPDFTitle(t, true);
-            break;
-          case FilterType.Pdf.toString():
-            label = getManyPDFTitle(t, false);
-            break;
-          default:
-            break;
+          filterValues.push({
+            key: roomsFilter.quotaFilter,
+            label,
+            group: FilterGroups.filterQuota,
+          });
         }
 
-        filterValues.push({
-          key: `${filter.filterType}`,
-          label,
-          group: FilterGroups.filterType,
-        });
-      }
-
-      if (filter.authorType) {
-        const isMe = userId === filter.authorType.replace("user_", "");
-
-        let label = isMe
-          ? filter.excludeSubject
-            ? t("Common:OtherLabel")
-            : t("Common:MeLabel")
-          : null;
-
-        if (!isMe) {
-          const user = await getUser(filter.authorType.replace("user_", ""));
-          label = user.displayName;
+        if (roomsFilter?.tags?.length > 0) {
+          filterValues.push({
+            key: roomsFilter.tags,
+            group: FilterGroups.roomFilterTags,
+            isMultiSelect: true,
+          });
         }
 
-        filterValues.push({
-          key: isMe
+        if (roomsFilter.provider) {
+          const provider = +roomsFilter.provider;
+
+          const label = ROOMS_PROVIDER_TYPE_NAME[provider];
+
+          filterValues.push({
+            key: provider,
+            label,
+            group: FilterGroups.roomFilterProviderType,
+          });
+        }
+      } else if (!isContactsPage) {
+        if (filter.filterType) {
+          let label = "";
+
+          switch (filter.filterType.toString()) {
+            case FilterType.DocumentsOnly.toString():
+              label = t("Common:Documents");
+              break;
+            case FilterType.FoldersOnly.toString():
+              label = t("Common:Folders");
+              break;
+            case FilterType.SpreadsheetsOnly.toString():
+              label = t("Common:Spreadsheets");
+              break;
+            case FilterType.ArchiveOnly.toString():
+              label = t("Common:Archives");
+              break;
+            case FilterType.PresentationsOnly.toString():
+              label = t("Common:Presentations");
+              break;
+            case FilterType.ImagesOnly.toString():
+              label = t("Common:Images");
+              break;
+            case FilterType.MediaOnly.toString():
+              label = t("Common:Media");
+              break;
+            case FilterType.FilesOnly.toString():
+              label = t("Common:Files");
+              break;
+            case FilterType.PDFForm.toString():
+              label = getManyPDFTitle(t, true);
+              break;
+            case FilterType.Pdf.toString():
+              label = getManyPDFTitle(t, false);
+              break;
+            default:
+              break;
+          }
+
+          filterValues.push({
+            key: `${filter.filterType}`,
+            label,
+            group: FilterGroups.filterType,
+          });
+        }
+
+        if (filter.authorType) {
+          const isMe = userId === filter.authorType.replace("user_", "");
+
+          let label = isMe
             ? filter.excludeSubject
-              ? FilterKeys.other
-              : FilterKeys.me
-            : filter.authorType.replace("user_", ""),
-          group: FilterGroups.filterAuthor,
-          label,
-        });
+              ? t("Common:OtherLabel")
+              : t("Common:MeLabel")
+            : null;
+
+          if (!isMe) {
+            const user = await getUser(filter.authorType.replace("user_", ""));
+            label = user.displayName;
+          }
+
+          filterValues.push({
+            key: isMe
+              ? filter.excludeSubject
+                ? FilterKeys.other
+                : FilterKeys.me
+              : filter.authorType.replace("user_", ""),
+            group: FilterGroups.filterAuthor,
+            label,
+          });
+        }
+
+        if (filter.roomId) {
+          const room = await getRoomInfo(filter.roomId);
+          const label = room.title;
+
+          filterValues.push({
+            key: filter.roomId,
+            group: FilterGroups.filterRoom,
+            label,
+          });
+        }
       }
 
-      if (filter.roomId) {
-        const room = await getRoomInfo(filter.roomId);
-        const label = room.title;
+      // return filterValues;
+      const currentFilterValues = [];
 
-        filterValues.push({
-          key: filter.roomId,
-          group: FilterGroups.filterRoom,
-          label,
-        });
-      }
-    }
+      if (!selectedFilterValues) {
+        currentFilterValues.push(...filterValues);
 
-    // return filterValues;
-    const currentFilterValues = [];
+        if (!skipSetState) {
+          setSelectedFilterValues(filterValues.map((f) => ({ ...f })));
+        }
+      } else {
+        const items = selectedFilterValues.map((v) => {
+          const item = filterValues.find((f) => f.group === v.group);
 
-    if (!selectedFilterValues) {
-      currentFilterValues.push(...filterValues);
-      setSelectedFilterValues(filterValues.map((f) => ({ ...f })));
-    } else {
-      const items = selectedFilterValues.map((v) => {
-        const item = filterValues.find((f) => f.group === v.group);
+          if (item) {
+            if (item.isMultiSelect) {
+              let isEqual = true;
 
-        if (item) {
-          if (item.isMultiSelect) {
-            let isEqual = true;
+              item.key.forEach((k) => {
+                if (!v.key.includes(k)) {
+                  isEqual = false;
+                }
+              });
 
-            item.key.forEach((k) => {
-              if (!v.key.includes(k)) {
-                isEqual = false;
-              }
-            });
+              if (isEqual) return item;
 
-            if (isEqual) return item;
-
+              return false;
+            }
+            if (item.key === v.key) return item;
             return false;
           }
-          if (item.key === v.key) return item;
           return false;
+        });
+
+        const newItems = filterValues.filter(
+          (v) => !items.find((i) => i.group === v.group),
+        );
+
+        items.push(...newItems);
+        currentFilterValues.push(...items.filter((i) => i));
+
+        if (!skipSetState) {
+          setSelectedFilterValues(items.filter((i) => i));
         }
-        return false;
-      });
+      }
 
-      const newItems = filterValues.filter(
-        (v) => !items.find((i) => i.group === v.group),
-      );
+      return currentFilterValues;
+    },
+    [
+      filter.authorType,
+      filter.roomId,
+      filter.filterType,
+      filter.excludeSubject,
+      roomsFilter.provider,
+      roomsFilter.type,
+      roomsFilter.subjectId,
+      roomsFilter.subjectFilter,
+      roomsFilter.tags,
+      roomsFilter.tags?.length,
+      roomsFilter.excludeSubject,
+      roomsFilter.withoutTags,
+      roomsFilter.quotaFilter,
+      // roomsFilter.withSubfolders,
+      // roomsFilter.searchInContent,
+      userId,
+      isRooms,
 
-      items.push(...newItems);
-      currentFilterValues.push(...items.filter((i) => i));
+      isContactsPage,
 
-      setSelectedFilterValues(items.filter((i) => i));
-    }
+      getContactsSelectedFilterData,
 
-    return currentFilterValues;
-  }, [
-    filter.authorType,
-    filter.roomId,
-    filter.filterType,
-    filter.excludeSubject,
-    roomsFilter.provider,
-    roomsFilter.type,
-    roomsFilter.subjectId,
-    roomsFilter.subjectFilter,
-    roomsFilter.tags,
-    roomsFilter.tags?.length,
-    roomsFilter.excludeSubject,
-    roomsFilter.withoutTags,
-    roomsFilter.quotaFilter,
-    // roomsFilter.withSubfolders,
-    // roomsFilter.searchInContent,
-    userId,
-    isRooms,
-
-    isContactsPage,
-
-    getContactsSelectedFilterData,
-
-    t,
-  ]);
+      t,
+    ],
+  );
 
   const getFilterData = React.useCallback(async () => {
     const quotaFilter = [

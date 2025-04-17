@@ -105,7 +105,8 @@ const FilterInput = React.memo(
     const [selectedFilterValue, setSelectedFilterValue] = React.useState<
       Map<FilterGroups, Map<string | number, TItem>>
     >(() => {
-      const value = getSelectedFilterData();
+      // NOTE: getSelectedFilterData uses setState inside and not supposed to be used during render. Need refactoring
+      const value = getSelectedFilterData(true);
 
       if (!value || !Array.isArray(value)) return new Map();
 
@@ -142,7 +143,8 @@ const FilterInput = React.memo(
       return newValue;
     });
     const [selectedItems, setSelectedItems] = React.useState<TItem[]>(() => {
-      const value = getSelectedFilterData();
+      // NOTE: getSelectedFilterData uses setState inside and not supposed to be used during render. Need refactoring
+      const value = getSelectedFilterData(true);
 
       if (!value || !Array.isArray(value)) return [];
 

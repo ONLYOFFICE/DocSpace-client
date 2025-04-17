@@ -271,4 +271,5 @@ export type FilesSelectorProps = TSelectorHeader &
     applyFilterOption?: ApplyFilterOption;
 
     isMultiSelect?: boolean;
+    onSelectItem?: (item: TSelectorItem) => void;
   };

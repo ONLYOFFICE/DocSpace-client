@@ -99,6 +99,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
     initHasNextPage,
 
     applyFilterOption,
+    onSelectItem,
   } = props;
   const { t } = useTranslation(["Common"]);
   const { isFirstLoad, setIsFirstLoad, showLoader } =
@@ -314,6 +315,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
       isDoubleClick: boolean,
       doubleClickCallback: () => Promise<void>,
     ) => {
+      onSelectItem?.(item);
       if (item.isFolder) {
         if (isDoubleClick) return;
 
@@ -391,6 +393,7 @@ const FilesSelectorComponent = (props: FilesSelectorProps) => {
       setSelectedItemType,
       t,
       setIsDisabledFolder,
+      onSelectItem,
     ],
   );
 

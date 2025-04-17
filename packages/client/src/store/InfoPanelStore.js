@@ -955,7 +955,7 @@ class InfoPanelStore {
     /**
      *  @type {import("@docspace/shared/components/share/Share.types").DefaultCreatePropsType | null}
      */
-    const value = DEFAULT_CREATE_LINK_SETTINGS;
+    const value = { ...DEFAULT_CREATE_LINK_SETTINGS };
 
     if (value && file.isForm) {
       value.access = ShareAccessRights.Editing;

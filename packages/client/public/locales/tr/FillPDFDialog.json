@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Doldur",
   "FillOutDescription": "Düzenleyici penceresindeki orijinal formun alanlarını doldur.",
   "FillOutTitle": "Formu kendin doldur",
-  "FillPDFDialogTitle": "Şu şekilde doldur",
-  "ShareCollectButtonLabel": "Odaya kopyala",
-  "ShareCollectDescription": "Formunuzu paylaşın ve bir Form doldurma odası aracılığıyla yanıtları toplayın.",
-  "ShareCollectTitle": "Paylaş"
+  "FillPDFDialogTitle": "Şu şekilde doldur"
 }

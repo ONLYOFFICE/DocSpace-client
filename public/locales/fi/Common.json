@@ -18,6 +18,7 @@
   "Alert": "Varoitus",
   "All": "Kaikki",
   "AllowedCharacters": "Sallitut merkit",
+  "AllTypesAvailableForEditing": "kaikki tiedostotyypit ovat muokattavissa {{organizationName}}:ssa",
   "AndMore": "ja <1>{{count}} vielä </1>",
   "Anonymous": "Nimetön",
   "AnyoneWithLink": "Kuka tahansa linkin kanssa",

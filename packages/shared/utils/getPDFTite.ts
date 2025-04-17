@@ -27,9 +27,9 @@
 import { TTranslation } from "../types";
 
 export const getSinglePDFTitle = (t: TTranslation, isForm: boolean) => {
-  return isForm ? t("Common:Document") : t("Common:Form");
+  return isForm ? t("Common:Form") : t("Common:Document");
 };
 
 export const getManyPDFTitle = (t: TTranslation, isForms: boolean) => {
-  return `PDF-${(isForms ? t("Common:Documents") : t("Common:Forms")).toLowerCase()}`;
+  return `PDF-${(isForms ? t("Common:Forms") : t("Common:Documents")).toLowerCase()}`;
 };

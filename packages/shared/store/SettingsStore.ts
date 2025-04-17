@@ -648,6 +648,12 @@ class SettingsStore {
       : this.apiDomain;
   }
 
+  get apiKeysLink() {
+    return this.apiDomain && this.apiEntries?.apikeys
+      ? `${this.apiDomain}${this.apiEntries.apikeys}`
+      : this.apiDomain;
+  }
+
   get forEnterprisesUrl() {
     return this.siteDomain && this.siteEntries?.forenterprises
       ? `${this.siteDomain}${this.siteEntries.forenterprises}`
@@ -765,6 +771,25 @@ class SettingsStore {
   get appearanceBlockHelpUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.appearance
       ? `${this.helpCenterDomain}${this.helpCenterEntries.appearance}`
+      : this.helpCenterDomain;
+  }
+
+  get limitedDevToolsBlockHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.limiteddevtools
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.limiteddevtools}`
+      : this.helpCenterDomain;
+  }
+
+  get encryptionBlockHelpUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.encryption
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.encryption}`
+      : this.helpCenterDomain;
+  }
+
+  get docspaceManagingRoomsHelpUrl() {
+    return this.helpCenterDomain &&
+      this.helpCenterEntries?.docspacemanagingrooms
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.docspacemanagingrooms}`
       : this.helpCenterDomain;
   }
 

@@ -18,6 +18,7 @@
   "Alert": "Alarm",
   "All": "Hepsi",
   "AllowedCharacters": "İzin verilen karakterler",
+  "AllTypesAvailableForEditing": "{{organizationName}} içinde düzenlenebilecek tüm dosya türleri",
   "AndMore": "ve <1>{{count}} daha fazla</1>",
   "Anonymous": "Anonim",
   "AnyoneWithLink": "Bağlantısı olan herkes",

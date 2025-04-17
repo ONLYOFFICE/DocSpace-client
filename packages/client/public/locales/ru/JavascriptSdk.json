@@ -4,7 +4,6 @@
   "AddWatermarks": "Добавить водяные знаки в документы",
   "AdvancedDisplay": "Расширенные настройки отображения",
   "AllTypes": "Все типы",
-  "AllTypesAvailableForEditing": "все типы файлов доступны для редактирования в {{organizationName}}",
   "AllTypesSupportedByEditor": "Все типы поддерживаются редакторами {{organizationName}}.",
   "APILink": "библиотеку API",
   "Ascending": "По возрастанию",

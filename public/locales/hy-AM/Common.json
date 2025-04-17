@@ -18,6 +18,7 @@
   "Alert": "Զգուշացում",
   "All": "Բոլոր",
   "AllowedCharacters": "Թույլատրված նիշեր",
+  "AllTypesAvailableForEditing": "բոլոր հասանելի ֆայլերի տեսակները {{organizationName}}-ում խմբագրելու համար",
   "AndMore": "և <1>{{count}} ավելին</1>",
   "Anonymous": "Անանուն",
   "AnyoneWithLink": "Ցանկացած ոք, ով ունի հղումը",

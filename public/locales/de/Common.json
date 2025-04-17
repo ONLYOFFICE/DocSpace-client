@@ -18,6 +18,7 @@
   "Alert": "Warnung",
   "All": "Alle",
   "AllowedCharacters": "Erlaubte Zeichen",
+  "AllTypesAvailableForEditing": "alle in {{organizationName}} zur Bearbeitung verfügbaren Dateitypen",
   "AndMore": "und <1>{{count}} weitere</1>",
   "Anonymous": "Anonym",
   "AnyoneWithLink": "Jeder mit dem Link",

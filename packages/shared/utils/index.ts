@@ -84,6 +84,7 @@ import {
   FilterType,
   RoomsType,
   FileFillingFormStatus,
+  FolderType,
 } from "../enums";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
@@ -93,6 +94,7 @@ import { getFromSessionStorage } from "./getFromSessionStorage";
 import { saveToSessionStorage } from "./saveToSessionStorage";
 import { fakeFormFillingList } from "./formFillingTourData";
 import { getCountTilesInRow } from "./getCountTilesInRow";
+import { getSelectFormatTranslation } from "./getSelectFormatTranslation";
 
 export {
   isBetaLanguage,
@@ -153,6 +155,7 @@ export {
   getFormFillingTipsStorageName,
   fakeFormFillingList,
   getCountTilesInRow,
+  getSelectFormatTranslation,
 };
 
 export const getModalType = () => {
@@ -365,4 +368,13 @@ export const getCheckboxItemLabel = (
     default:
       return "";
   }
+};
+
+export const isSystemFolder = (folderType: FolderType) => {
+  return (
+    folderType === FolderType.InProgress ||
+    folderType === FolderType.Done ||
+    folderType === FolderType.SubFolderDone ||
+    folderType === FolderType.SubFolderInProgress
+  );
 };

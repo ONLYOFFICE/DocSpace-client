@@ -4,7 +4,6 @@
   "AddWatermarks": "ドキュメントに透かしを追加する",
   "AdvancedDisplay": "高度な表示設定",
   "AllTypes": "すべてのタイプ",
-  "AllTypesAvailableForEditing": "{{organizationName}}で編集可能な全てのファイルタイプ",
   "AllTypesSupportedByEditor": "{{organizationName}}のエディタがサポートする全てのファイルタイプ",
   "APILink": "APIライブラリ",
   "Ascending": "昇順",

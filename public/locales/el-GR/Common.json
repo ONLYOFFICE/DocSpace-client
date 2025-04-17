@@ -18,6 +18,7 @@
   "Alert": "Ειδοποίηση",
   "All": "Όλα",
   "AllowedCharacters": "Επιτρεπόμενοι χαρακτήρες",
+  "AllTypesAvailableForEditing": "όλοι οι τύποι αρχείων που είναι διαθέσιμοι για επεξεργασία στο {{organizationName}}",
   "AndMore": "και <1>{{count}} ακόμα</1>",
   "Anonymous": "Ανώνυμος",
   "AnyoneWithLink": "Οποιοσδήποτε με τον σύνδεσμο",

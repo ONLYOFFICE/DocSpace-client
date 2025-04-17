@@ -18,6 +18,7 @@
   "Alert": "アラート",
   "All": "すべて",
   "AllowedCharacters": "入力可能な文字",
+  "AllTypesAvailableForEditing": "{{organizationName}}で編集可能な全てのファイルタイプ",
   "AndMore": "そして、<1>{{count}}以上</1>",
   "Anonymous": "匿名",
   "AnyoneWithLink": "リンクを持っている人",

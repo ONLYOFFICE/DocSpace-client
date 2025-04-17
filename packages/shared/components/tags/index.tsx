@@ -87,7 +87,7 @@ const Tags: FC<TagsProps> = ({
         const currentTagMaxWidth =
           (containerWidth -
             thirdPartyTagCount * 40 -
-            (tags.length - thirdPartyTagCount)) /
+            (tags.length - thirdPartyTagCount) * 4) /
           (tags.length - thirdPartyTagCount);
 
         const maxWidthPercent = Math.floor(
@@ -123,7 +123,7 @@ const Tags: FC<TagsProps> = ({
         };
 
         const currentTagMaxWidth =
-          (containerWidth - columnCount - 35) / columnCount;
+          (containerWidth - columnCount * 4 - 40) / columnCount;
 
         const maxWidthPercent = Math.floor(
           (currentTagMaxWidth / containerWidth) * 100,

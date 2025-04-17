@@ -767,6 +767,7 @@ export async function copyToFolder(
   conflictResolveType: ConflictResolveType,
   deleteAfter: boolean,
   content = false,
+  toFillOut = false,
 ) {
   const data = {
     destFolderId,
@@ -775,6 +776,7 @@ export async function copyToFolder(
     conflictResolveType,
     deleteAfter,
     content,
+    toFillOut,
   };
 
   const res = (await request({
@@ -807,6 +809,7 @@ export async function moveToFolder(
   fileIds: number[],
   conflictResolveType: ConflictResolveType,
   deleteAfter: boolean,
+  toFillOut = false,
 ) {
   const data = {
     destFolderId,
@@ -814,6 +817,7 @@ export async function moveToFolder(
     fileIds,
     conflictResolveType,
     deleteAfter,
+    toFillOut,
   };
   const res = (await request({
     method: "put",

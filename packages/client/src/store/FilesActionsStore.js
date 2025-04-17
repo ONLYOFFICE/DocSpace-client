@@ -77,7 +77,11 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { toastr } from "@docspace/shared/components/toast";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
+import {
+  isDesktop,
+  isLockedSharedRoom,
+  isSystemFolder,
+} from "@docspace/shared/utils";
 import {
   getCategoryType,
   getCategoryTypeByFolderType,
@@ -202,7 +206,12 @@ class FilesActionStore {
     this.versionHistoryStore = versionHistoryStore;
   }
 
-  updateCurrentFolder = async (clearSelection, operationId, operation) => {
+  updateCurrentFolder = async (
+    clearSelection,
+    operationId,
+    operation,
+    skipFetch = false,
+  ) => {
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
@@ -225,6 +234,8 @@ class FilesActionStore {
     }
 
     try {
+      if (skipFetch) return;
+
       if (
         isRoomsFolder ||
         isArchiveFolder ||
@@ -506,7 +517,7 @@ class FilesActionStore {
             };
 
             if (this.dialogsStore.isFolderActions) {
-              this.updateCurrentFolder(false, operationId, operationName);
+              this.updateCurrentFolder(false, operationId, operationName, true);
               showToast();
             } else {
               this.updateFilesAfterDelete(operationId, operationName);
@@ -1355,7 +1366,7 @@ class FilesActionStore {
   setArchiveAction = async (action, folders, t) => {
     const { addActiveItems, setSelected } = this.filesStore;
 
-    const { isRoomsFolder, archiveRoomsId, myRoomsId } = this.treeFoldersStore;
+    const { archiveRoomsId, myRoomsId } = this.treeFoldersStore;
 
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
@@ -1413,10 +1424,11 @@ class FilesActionStore {
               );
             }
 
-            if (!isRoomsFolder) {
-              // setSelectedFolder(roomsFolder);
-              window.DocSpace.navigate("/");
-            }
+            // Will be redirected via the socket
+            // if (!isRoomsFolder) {
+            //   // setSelectedFolder(roomsFolder);
+            //   window.DocSpace.navigate("/");
+            // }
 
             this.dialogsStore.setIsFolderActions(false);
 
@@ -1499,7 +1511,12 @@ class FilesActionStore {
               ...pbData,
             });
 
-            return toastr.error(err.message ? err.message : err, null, 0, true);
+            return toastr.error(
+              err.message ? err.message : err.error ? err.error : err,
+              null,
+              0,
+              true,
+            );
           })
           .finally(() => {
             clearActiveOperations(null, items);
@@ -2715,7 +2732,8 @@ class FilesActionStore {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
-    const { insideGroupBackUrl } = this.peopleStore.groupsStore;
+    const { insideGroupBackUrl, setInsideGroupTempTitle } =
+      this.peopleStore.groupsStore;
     const { setContactsTab } = this.peopleStore.usersStore;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
@@ -2772,12 +2790,14 @@ class FilesActionStore {
     if (categoryType === CategoryType.Accounts) {
       const contactsTab = getContactsView();
 
+      setInsideGroupTempTitle(null);
+
       if (insideGroupBackUrl) {
         console.log("set");
         setIsSectionBodyLoading(true, false);
 
         setContactsTab("groups");
-        window.DocSpace.navigate(insideGroupBackUrl);
+        window.DocSpace.navigate(-1);
 
         return;
       }
@@ -3407,8 +3427,7 @@ class FilesActionStore {
     if (
       folder.shared &&
       folder?.rootFolderType === FolderType.Rooms &&
-      folder?.type !== FolderType.Done &&
-      folder?.type !== FolderType.InProgress
+      !isSystemFolder(folder?.type)
     ) {
       const filterObj = FilesFilter.getFilter(window.location);
 

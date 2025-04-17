@@ -18,6 +18,7 @@
   "Alert": "Waarschuwing",
   "All": "Alle",
   "AllowedCharacters": "Toegestane tekens",
+  "AllTypesAvailableForEditing": "alle bestandstypes beschikbaar voor bewerking in {{organizationName}}",
   "AndMore": "en nog <1>{{count}} meer</1>",
   "Anonymous": "Anoniem",
   "AnyoneWithLink": "Iedereen met de link",

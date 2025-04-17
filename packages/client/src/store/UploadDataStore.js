@@ -1787,6 +1787,9 @@ class UploadDataStore {
     const filesWithErrors = this.uploadedFilesHistory.filter(
       (f) => f.error && !f.errorShown,
     );
+    const filesWithoutErrors = this.uploadedFilesHistory.filter(
+      (f) => !f.error,
+    );
     const totalErrorsCount = filesWithErrors.length;
 
     if (totalErrorsCount > 0) {
@@ -1835,6 +1838,12 @@ class UploadDataStore {
       });
 
       console.log("Errors: ", totalErrorsCount);
+    } else {
+      toastr.success(
+        t("Common:ItemsSuccessfullyUploaded", {
+          count: filesWithoutErrors.length,
+        }),
+      );
     }
 
     this.uploaded = true;
@@ -1889,6 +1898,7 @@ class UploadDataStore {
     deleteAfter,
     operationId,
     content,
+    toFillOut,
   ) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
@@ -1904,6 +1914,7 @@ class UploadDataStore {
       conflictResolveType,
       deleteAfter,
       content,
+      toFillOut,
     )
       .then((res) => {
         let data = null;
@@ -1920,9 +1931,10 @@ class UploadDataStore {
           return Promise.reject();
         }
         return this.loopFilesOperations(data, pbData)
-          .then(() =>
-            this.moveToCopyTo(destFolderId, pbData, true, fileIds, folderIds),
-          )
+          .then((result) => {
+            this.moveToCopyTo(destFolderId, pbData, true, fileIds, folderIds);
+            return result;
+          })
           .finally(async () => {
             // to update the status of trashIsEmpty filesStore
             if (this.treeFoldersStore.isRecycleBinFolder)
@@ -1950,6 +1962,7 @@ class UploadDataStore {
     conflictResolveType,
     deleteAfter,
     operationId,
+    toFillOut,
   ) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
     const { refreshFiles, setMovingInProgress } = this.filesStore;
@@ -1960,6 +1973,7 @@ class UploadDataStore {
       fileIds,
       conflictResolveType,
       deleteAfter,
+      toFillOut,
     )
       .then((res) => {
         let data = null;
@@ -1977,9 +1991,10 @@ class UploadDataStore {
         }
 
         return this.loopFilesOperations(data, pbData)
-          .then(() =>
-            this.moveToCopyTo(destFolderId, pbData, false, fileIds, folderIds),
-          )
+          .then((result) => {
+            this.moveToCopyTo(destFolderId, pbData, false, fileIds, folderIds);
+            return result;
+          })
           .finally(async () => {
             // to update the status of trashIsEmpty filesStore
             if (this.treeFoldersStore.isRecycleBinFolder)
@@ -2013,6 +2028,9 @@ class UploadDataStore {
       });
   };
 
+  /**
+   * @returns {Promise<import("@docspace/shared/api/files/types").TOperation>}
+   */
   itemOperationToFolder = (data) => {
     const {
       destFolderId,
@@ -2025,6 +2043,7 @@ class UploadDataStore {
       title,
       itemsCount,
       isFolder,
+      toFillOut,
     } = data;
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
@@ -2056,6 +2075,7 @@ class UploadDataStore {
           deleteAfter,
           operationId,
           content,
+          toFillOut,
         )
       : this.moveToAction(
           destFolderId,
@@ -2064,6 +2084,7 @@ class UploadDataStore {
           conflictResolveType,
           deleteAfter,
           operationId,
+          toFillOut,
         );
   };
 

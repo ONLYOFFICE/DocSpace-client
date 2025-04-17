@@ -18,6 +18,7 @@
   "Alert": "Alert",
   "All": "Wszystko",
   "AllowedCharacters": "Dozwolone znaki",
+  "AllTypesAvailableForEditing": "wszystkie typy plików dostępne do edycji w {{organizationName}}",
   "AndMore": "i <1>{{count}} więcej</1>",
   "Anonymous": "Anonimowo",
   "AnyoneWithLink": "Każdy, kto ma link",

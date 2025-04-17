@@ -18,6 +18,7 @@
   "Alert": "Alertă",
   "All": "Toate",
   "AllowedCharacters": "Caractere permise",
+  "AllTypesAvailableForEditing": "toate tipuri de fișiere pot fi editate în {{organizationName}}",
   "AndMore": "și <1>{{count}} mai multe</1>",
   "Anonymous": "Anonim",
   "AnyoneWithLink": "Tuturor la link-ul",

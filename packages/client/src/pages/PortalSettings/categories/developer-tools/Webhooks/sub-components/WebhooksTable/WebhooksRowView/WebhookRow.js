@@ -52,7 +52,7 @@ const WebhookRow = (props) => {
   const [isChecked, setIsChecked] = useState(webhook.enabled);
 
   const handleToggleEnabled = () => {
-    toggleEnabled(webhook);
+    toggleEnabled(webhook, t);
     setIsChecked((prevIsChecked) => !prevIsChecked);
   };
 

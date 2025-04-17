@@ -39,7 +39,10 @@ export interface ShareCollectSelectorProps {
 export interface InjectShareCollectSelectorProps
   extends Pick<TStore["settingsStore"], "currentDeviceType">,
     Pick<TStore["filesSettingsStore"], "getIcon">,
-    Pick<TStore["dialogsStore"], "conflictResolveDialogVisible">,
+    Pick<
+      TStore["dialogsStore"],
+      "conflictResolveDialogVisible" | "setAssignRolesDialogData"
+    >,
     Pick<TStore["infoPanelStore"], "setIsMobileHidden">,
     Pick<TStore["filesStore"], "setSelected">,
     Pick<

@@ -94,6 +94,7 @@ import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
 import FillingStatusPanel from "../panels/FillingStatusPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
+import AssignRoles from "../dialogs/AssignRoles";
 
 const Panels = (props) => {
   const {
@@ -170,6 +171,7 @@ const Panels = (props) => {
     isShareFormData,
     reducedRightsVisible,
     removeUserConfirmation,
+    assignRolesDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -422,6 +424,7 @@ const Panels = (props) => {
     removeUserConfirmation && (
       <RemoveUserConfirmationDialog key="remove-user-confirmation-dialog" />
     ),
+    assignRolesDialogVisible && <AssignRoles key="assign-roles-dialog" />,
   ];
 };
 
@@ -505,6 +508,7 @@ export default inject(
       isShareFormData,
       reducedRightsData,
       removeUserConfirmation,
+      assignRolesDialogData,
     } = dialogsStore;
 
     const { viewAs } = filesStore;
@@ -621,6 +625,7 @@ export default inject(
       isShareFormData,
       reducedRightsVisible: reducedRightsData.visible,
       removeUserConfirmation: removeUserConfirmation.visible,
+      assignRolesDialogVisible: assignRolesDialogData.visible,
     };
   },
 )(observer(Panels));

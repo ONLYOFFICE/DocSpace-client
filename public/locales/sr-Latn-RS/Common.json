@@ -18,6 +18,7 @@
   "Alert": "Upozorenje",
   "All": "Sve",
   "AllowedCharacters": "Dozvoljeni karakteri",
+  "AllTypesAvailableForEditing": "Svi tipovi datoteka dostupni za uređivanje u {{organizationName}}",
   "AndMore": "i <1>{{count}} više</1>",
   "Anonymous": "Anonimno",
   "AnyoneWithLink": "Svako sa linkom",

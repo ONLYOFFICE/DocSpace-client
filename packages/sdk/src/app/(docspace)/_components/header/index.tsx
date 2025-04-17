@@ -71,7 +71,7 @@ const Header = ({
   const navigationStore = useNavigationStore();
   const filesSelectionStore = useFilesSelectionStore();
   const filesListStore = useFilesListStore();
-  const { currentDeviceType } = useSettingsStore();
+  const { currentDeviceType, displayAbout } = useSettingsStore();
   const { getHeaderContextMenuModel } = useContextMenuModel({});
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu({});
   const { isBase: isBaseTheme } = useTheme();
@@ -88,15 +88,22 @@ const Header = ({
 
   const isRoomsFolder = pathParts[0].id === rootFolderId;
 
-  const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !isBaseTheme);
-  const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !isBaseTheme);
+  const logo = displayAbout
+    ? getLogoUrl(WhiteLabelLogoType.LightSmall, !isBaseTheme)
+    : "";
+
+  const burgerLogo = displayAbout
+    ? getLogoUrl(WhiteLabelLogoType.LeftMenu, !isBaseTheme)
+    : "";
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
-    const items = pathParts.map((p) => ({
-      id: p.id,
-      title: p.title,
-      isRootRoom: !!p.roomType,
-    }));
+    const items = pathParts
+      .map((p) => ({
+        id: p.id,
+        title: p.title,
+        isRootRoom: !p.roomType,
+      }))
+      .filter((item) => item.isRootRoom);
 
     items.pop();
 

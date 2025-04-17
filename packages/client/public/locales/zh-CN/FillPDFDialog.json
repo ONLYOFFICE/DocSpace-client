@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "填写",
   "FillOutDescription": "在编辑器窗口中填写原始表单的字段。",
   "FillOutTitle": "自己填写表单",
-  "FillPDFDialogTitle": "填写为",
-  "ShareCollectButtonLabel": "复制到房间",
-  "ShareCollectDescription": "通过表单填写房间共享您的表单并收集回复",
-  "ShareCollectTitle": "共享"
+  "FillPDFDialogTitle": "填写为"
 }

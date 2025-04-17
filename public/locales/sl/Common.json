@@ -18,6 +18,7 @@
   "Alert": "Pozor",
   "All": "Vse",
   "AllowedCharacters": "Dovoljeni znaki",
+  "AllTypesAvailableForEditing": "vse vrste datoteki na voljo za urejanje v {{organizationName}}",
   "AndMore": "in <1>{{count}} več</1>",
   "Anonymous": "Anonimno",
   "AnyoneWithLink": "Vsak s povezavo",

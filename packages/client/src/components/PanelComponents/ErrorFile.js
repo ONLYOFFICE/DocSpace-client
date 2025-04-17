@@ -53,7 +53,7 @@ const ErrorFile = ({ t, item, theme, onTextClick, showPasswordInput }) => {
         id={tooltipId}
         getContent={TooltipContent}
         place={placeTooltip}
-        maxWidth="320"
+        maxWidth="320px"
         color={theme.tooltip.backgroundColor}
       />
       {item.needPassword ? (

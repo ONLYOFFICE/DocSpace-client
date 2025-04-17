@@ -59,8 +59,8 @@ import { getCookie } from "@docspace/shared/utils";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 import { LoginFormProps } from "@/types";
-import { getAvailablePortals } from "@/utils/actions";
-import { getEmailFromInvitation } from "@/utils";
+import { getAvailablePortals } from "@/utils";
+import { getEmailFromInvitation, getRedirectURL } from "@/utils";
 
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
@@ -346,7 +346,7 @@ const LoginForm = ({
             ? portals[0].portalName
             : `${portals[0].portalName}.${baseDomain}`;
 
-        let redirectUrl = getCookie("x-redirect-authorization-uri");
+        let redirectUrl = getRedirectURL();
         let portalLink = portals[0].portalLink;
 
         const isLocalhost = name === "http://localhost";
@@ -380,8 +380,12 @@ const LoginForm = ({
 
     login(user, hash, pwd, session, captchaToken, currentCulture, reCaptchaType)
       .then(async (res: string | object) => {
-        const redirectUrl = getCookie("x-redirect-authorization-uri");
+        let redirectUrl = getCookie("x-redirect-authorization-uri");
         if (clientId && redirectUrl) {
+          redirectUrl = window.atob(
+            redirectUrl!.replace(/-/g, "+").replace(/_/g, "/"),
+          );
+
           window.location.replace(redirectUrl);
 
           return;
@@ -422,11 +426,19 @@ const LoginForm = ({
           return;
         }
 
-        if (typeof res === "string")
-          window.location.replace(
-            `${res}&linkData=${linkData}&publicAuth=${isPublicAuth}`,
-          );
-        else window.location.replace("/"); //TODO: save { user, hash } for tfa
+        if (typeof res === "string") {
+          let redirectUrl = `${res}`;
+
+          if (linkData) {
+            redirectUrl += `&linkData=${linkData}`;
+          }
+
+          if (isPublicAuth) {
+            redirectUrl += `&publicAuth=${isPublicAuth}`;
+          }
+
+          window.location.replace(redirectUrl);
+        } else window.location.replace("/"); //TODO: save { user, hash } for tfa
       })
       .catch((error) => {
         let errorMessage = "";

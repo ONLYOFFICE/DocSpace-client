@@ -18,6 +18,7 @@
   "Alert": "Упозорење",
   "All": "Све",
   "AllowedCharacters": "Дозвољени карактери",
+  "AllTypesAvailableForEditing": "Сви типови датотека доступни за уређивање у {{organizationName}}",
   "AndMore": "и <1>{{count}} више </1>",
   "Anonymous": "Анонимно",
   "AnyoneWithLink": "Свако са линком",

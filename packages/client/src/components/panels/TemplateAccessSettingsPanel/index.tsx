@@ -526,12 +526,7 @@ export default inject(
     };
   },
 )(
-  withTranslation([
-    "InviteDialog",
-    "SharingPanel",
-    "Translations",
-    "Common",
-    "InfoPanel",
-    "PeopleSelector",
-  ])(observer(TemplateAccessSettingsPanel)),
+  withTranslation(["Files", "Common", "InfoPanel"])(
+    observer(TemplateAccessSettingsPanel),
+  ),
 );

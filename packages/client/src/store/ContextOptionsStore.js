@@ -707,8 +707,7 @@ class ContextOptionsStore {
       false,
     );
 
-    refPage[FILLING_STATUS_ID] = true;
-    console.log("refPage", refPage);
+    if (refPage) refPage.sessionStorage.setItem(FILLING_STATUS_ID, "true");
   };
 
   onClickResetAndStartFilling = async (item) => {
@@ -1924,9 +1923,10 @@ class ContextOptionsStore {
         label: t("Common:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
-        disabled:
-          (isPublicRoomType && hasShareLinkRights) ||
-          Boolean(item.external && (item.expired || item.passwordProtected)),
+        disabled: item.isTemplate
+          ? false
+          : (isPublicRoomType && hasShareLinkRights) ||
+            Boolean(item.external && (item.expired || item.passwordProtected)),
       },
       {
         id: "option_copy-external-link",
@@ -2100,7 +2100,7 @@ class ContextOptionsStore {
         label: t("Common:RemoveFromList"),
         icon: CircleCrossSvgUrl,
         onClick: () => this.onRemoveSharedRooms([item]),
-        disabled: !item.external,
+        disabled: this.userStore?.user?.isAdmin || !item.external,
       },
       {
         id: "option_download-as",

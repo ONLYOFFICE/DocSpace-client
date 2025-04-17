@@ -18,6 +18,7 @@
   "Alert": "Brīdinājums",
   "All": "Viss",
   "AllowedCharacters": "Atļautās rakstzīmes",
+  "AllTypesAvailableForEditing": "visi failu tipi, kas pieejami rediģēšanai {{organizationName}}",
   "AndMore": "un <1>{{count}} vairāk</1>",
   "Anonymous": "Anonīmi",
   "AnyoneWithLink": "Ikviens, kam ir saite",

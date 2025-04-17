@@ -66,6 +66,15 @@ export type NonFunctionProperties<T, ExcludeTypes> = Pick<
 
 export type MergeTypes<T, MergedType> = Omit<T, keyof MergedType> & MergedType;
 
+export type NonNullableFields<T> = {
+  [P in keyof T]: NonNullable<T[P]>;
+};
+
+export type TResolver<Res = VoidFunction, Rej = VoidFunction> = {
+  resolve: Res;
+  reject: Rej;
+};
+
 export type TPathParts = {
   id: number;
   title: string;
@@ -146,6 +155,7 @@ declare global {
       oauth2: {
         origin: string;
         secret: string;
+        apiSystem: string[];
       };
       editor?: {
         requestClose: boolean;

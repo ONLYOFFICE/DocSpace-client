@@ -289,6 +289,15 @@ class DialogsStore {
 
   isShareFormData = { visible: false, updateAccessLink: null, fileId: null };
 
+  assignRolesDialogData = {
+    /** @type {boolean} */
+    visible: false,
+    /** @type {string} */
+    roomName: "",
+    /** @type {import("@docspace/shared/api/files/types").TFile | null} */
+    file: null,
+  };
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -896,6 +905,17 @@ class DialogsStore {
     this.roomCoverDialogProps = props;
   };
 
+  clearCoverProps = () => {
+    this.setRoomCoverDialogProps({
+      icon: null,
+      color: null,
+      title: null,
+      withoutIcon: true,
+      withSelection: true,
+      customColor: null,
+    });
+  };
+
   setCover = (color, icon) => {
     if (!color) {
       return (this.cover = null);
@@ -914,7 +934,9 @@ class DialogsStore {
   };
 
   setCoverSelection = (selection) => {
-    this.coverSelection = selection;
+    runInAction(() => {
+      this.coverSelection = selection;
+    });
   };
 
   setRoomLogoCover = async (roomId) => {
@@ -991,6 +1013,15 @@ class DialogsStore {
       visible,
       callback,
     };
+  };
+
+  /**
+   * @param {boolean} visible
+   * @param {string} [roomName = ""]
+   * @param {import("@docspace/shared/api/files/types").TFile} [file = null]
+   */
+  setAssignRolesDialogData = (visible, roomName = "", file = null) => {
+    this.assignRolesDialogData = { visible, roomName, file };
   };
 }
 

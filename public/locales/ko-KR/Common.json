@@ -18,6 +18,7 @@
   "Alert": "알림",
   "All": "전체",
   "AllowedCharacters": "허용되는 문자",
+  "AllTypesAvailableForEditing": "{{organizationName}}에서 편집 가능한 모든 파일 유형",
   "AndMore": "및 <1>추가 {{count}}개</1>",
   "Anonymous": "익명",
   "AnyoneWithLink": "링크를 가진 누구나",

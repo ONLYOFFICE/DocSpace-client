@@ -52,9 +52,10 @@ import type {
   TFilesSelectorInit,
   TSelectedFileInfo,
 } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import { getSelectFormatTranslation } from "@docspace/shared/utils";
 
 import useDocumentTitle from "@/hooks/useDocumentTitle";
-import useSDK from "@/hooks/useSDK";
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 const IS_TEST = process.env.NEXT_PUBLIC_E2E_TEST;
 
@@ -84,6 +85,7 @@ type FilesSelectorClientProps = {
   selectedItemId: string | number;
   selectedItemType: "rooms" | "files";
   total: number;
+  logoText: string;
 };
 
 export default function FilesSelectorClient({
@@ -100,8 +102,9 @@ export default function FilesSelectorClient({
   selectedItemId,
   selectedItemType,
   total,
+  logoText,
 }: FilesSelectorClientProps) {
-  const { sdkConfig } = useSDK();
+  const { sdkConfig } = useSDKConfig();
 
   const { t } = useTranslation(["Common"]);
 
@@ -200,6 +203,7 @@ export default function FilesSelectorClient({
     ) =>
       isFirstLoad ||
       !!isDisabledFolder ||
+      !!!selectedFileInfo ||
       selectedItemType === "rooms" ||
       isRoot ||
       isSelectedParentFolder,
@@ -254,7 +258,10 @@ export default function FilesSelectorClient({
     currentDeviceType: DeviceType.desktop,
     currentFolderId,
     currentFooterInputValue: "",
-    descriptionText: !subtitle || !filter || filter === "ALL" ? "" : filter,
+    descriptionText:
+      !subtitle || !filter
+        ? ""
+        : getSelectFormatTranslation(t, filter, logoText),
     disabledItems: [],
     embedded: true,
     filesSettings,

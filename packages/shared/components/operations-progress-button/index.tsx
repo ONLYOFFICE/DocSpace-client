@@ -44,6 +44,7 @@ import { OperationsProgressProps } from "./OperationsProgressButton.types";
 import { OPERATIONS_NAME } from "../../constants/index";
 import { HelpButton } from "../help-button";
 import { Backdrop } from "../backdrop";
+import { Text } from "../text";
 
 type ValueOf<T> = T[keyof T];
 
@@ -243,7 +244,11 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
   };
   const getTooltipLabel = () => {
     if (isSeveralOperations) {
-      return t("Files:Processes", { count: allOperationsLength });
+      return (
+        <Text fontWeight={600}>
+          {t("Files:Processes", { count: allOperationsLength })}
+        </Text>
+      );
     }
 
     if (operationsAlert) {
@@ -253,16 +258,20 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
 
       if (getPercent()) {
         return (
-          <>
+          <Text fontWeight={600}>
             {operationName}
             <br />
             {t("Files:ErrorUploadingFiles", { count: getErrorCount() })}
-          </>
+          </Text>
         );
       }
-      return t("Files:ErrorOperation", {
-        operationName,
-      });
+      return (
+        <Text fontWeight={600}>
+          {t("Files:ErrorOperation", {
+            operationName,
+          })}
+        </Text>
+      );
     }
 
     if (operationsCompleted) {
@@ -270,12 +279,20 @@ const OperationsProgressButton: React.FC<OperationsProgressProps> = ({
         ? operations[0].label
         : panelOperations[0].label;
 
-      return t("Files:SuccessOperation", {
-        operationName,
-      });
+      return (
+        <Text fontWeight={600}>
+          {t("Files:SuccessOperation", {
+            operationName,
+          })}
+        </Text>
+      );
     }
 
-    return operationsLength ? operations[0].label : panelOperations[0].label;
+    const operationName = operationsLength
+      ? operations[0].label
+      : panelOperations[0].label;
+
+    return <Text fontWeight={600}>{operationName}</Text>;
   };
 
   const onCancelOperation = () => {

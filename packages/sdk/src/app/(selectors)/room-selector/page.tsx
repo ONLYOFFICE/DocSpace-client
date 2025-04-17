@@ -49,6 +49,7 @@ export default async function Page({
   filter.page = 0;
   filter.pageCount = PAGE_COUNT;
   filter.searchArea = RoomSearchArea.Active;
+  filter.type = (baseConfig.roomType as string | undefined) || null;
 
   const rooms = await getRooms(filter);
 

@@ -18,6 +18,7 @@
   "Alert": "تنبيه",
   "All": "كل",
   "AllowedCharacters": "الحروف المسموح بها",
+  "AllTypesAvailableForEditing": "جميع أنواع الملفات متاحة للتحرير في {{organizationName}}",
   "AndMore": "و<1> {{count}} المزيد</1>",
   "Anonymous": "مجهول",
   "AnyoneWithLink": "أي شخص لديه الرابط",

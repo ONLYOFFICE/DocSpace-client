@@ -18,6 +18,7 @@
   "Alert": "Предупреждение",
   "All": "Все",
   "AllowedCharacters": "Разрешенные символы",
+  "AllTypesAvailableForEditing": "все типы файлов доступны для редактирования в {{organizationName}}",
   "AndMore": "и <1>еще {{count}}</1>",
   "Anonymous": "Аноним",
   "AnyoneWithLink": "Любой, у кого есть ссылка",

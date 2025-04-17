@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "Ausfüllen",
   "FillOutDescription": "Füllen Sie die Felder des Originalformulars im Editorfenster aus.",
   "FillOutTitle": "Formular selbst ausfüllen",
-  "FillPDFDialogTitle": "Ausfüllen als",
-  "ShareCollectButtonLabel": "In Raum kopieren",
-  "ShareCollectDescription": "Geben Sie Ihr Formular frei und sammeln Sie Antworten über einen Raum zum Formularausfüllen.",
-  "ShareCollectTitle": "Teilen"
+  "FillPDFDialogTitle": "Ausfüllen als"
 }

@@ -225,6 +225,10 @@
   --filter-block-background: #{$white};
   --filter-block-item-color: #{$gray};
   --filter-block-selected-item-color: #{$white};
+  --filter-block-selected-backgroud-color: var(
+    --accent-main,
+    #{$light-blue-main}
+  );
   --filter-block-item-separator-background: #{$gray-light-mid};
   --filter-block-item-tag-border: 1px solid #{$gray-light-mid};
 
@@ -549,6 +553,7 @@
 
   --filter-block-background: #{$black};
   --filter-block-item-color: #{$gray};
+  --filter-block-selected-backgroud-color: #{$white};
   --filter-block-selected-item-color: #{$black};
   --filter-block-item-separator-background: #{$gray-dark-strong};
   --filter-block-item-tag-border: 1px solid #{$gray-dark-strong};
@@ -1125,7 +1130,7 @@
 
   /* Primary tabs */
   --tabs-text-color-primary: #{$light-gray-dark};
-  --tabs-active-text-color-primary: #{$black};
+  --tabs-active-text-color-primary: var(--accent-main, #{$black});
   --tabs-hover-text-color-primary: #{$gray};
   --tabs-pressed-text-color-primary: #{$gray-text};
   --tabs-background-color-primary: #{$white};
@@ -1548,7 +1553,7 @@
   --input-warning-border-focus: #{$dark-status-warning};
 
   --text-input-placeholder-color: #{$gray-dark};
-  --text-input-placeholder-disabled-color: #{$gray-dark-strong};
+  --text-input-placeholder-disabled-color: #{$gray-dark-text};
 
   // Dimensions
   --input-border-radius: 3px;

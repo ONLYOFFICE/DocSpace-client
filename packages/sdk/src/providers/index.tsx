@@ -35,6 +35,7 @@ import type { ThemeKeys } from "@docspace/shared/enums";
 import ThemeProvider from "./ThemeProvider";
 import TranslationProvider from "./TranslationProvider";
 import ErrorProvider from "./ErrorProvider";
+import { SDKConfigProvider } from "./SDKConfigProvider";
 
 export type TContextData = {
   user: TUser | undefined;
@@ -56,8 +57,10 @@ const Providers = ({ children, contextData }: TProviders) => {
     <TranslationProvider {...contextData}>
       <ThemeProvider {...contextData}>
         <ErrorProvider {...contextData}>
-          {children}
-          <Toast isSSR />
+          <SDKConfigProvider>
+            {children}
+            <Toast isSSR />
+          </SDKConfigProvider>
         </ErrorProvider>
       </ThemeProvider>
     </TranslationProvider>

@@ -238,17 +238,19 @@ const Badges = ({
       <Text fontSize="12px" fontWeight={400} noSelect>
         {t("CustomFilterEnableDiscription")}
       </Text>
-      <Link
-        type={LinkType.action}
-        target={LinkTarget.blank}
-        className="custom-filter-tooltip-link"
-        fontSize="13px"
-        fontWeight={600}
-        href={customFilterExternalLink}
-        isHovered
-      >
-        {t("Common:LearnMore")}
-      </Link>
+      {customFilterExternalLink ? (
+        <Link
+          type={LinkType.action}
+          target={LinkTarget.blank}
+          className="custom-filter-tooltip-link"
+          fontSize="13px"
+          fontWeight={600}
+          href={customFilterExternalLink}
+          isHovered
+        >
+          {t("Common:LearnMore")}
+        </Link>
+      ) : null}
     </>
   );
 
@@ -482,6 +484,7 @@ const Badges = ({
           title={t("Common:CreateRoom")}
         />
       ) : null}
+      {showNew && !isTile && isRoom ? newFilesBadge : null}
       {showNew && isTile && isRoom ? (
         <div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>
       ) : null}

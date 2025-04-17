@@ -18,6 +18,7 @@
   "Alert": "Upozornenie",
   "All": "Všetko",
   "AllowedCharacters": "Povolené symboly",
+  "AllTypesAvailableForEditing": "všetky typy súborov dostupné na úpravu v {{organizationName}}",
   "AndMore": "a <1>{{count}} viac</1>",
   "Anonymous": "Anonymné",
   "AnyoneWithLink": "Ktokoľvek s odkazom",

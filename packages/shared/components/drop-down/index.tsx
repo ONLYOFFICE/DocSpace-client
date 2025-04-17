@@ -52,6 +52,7 @@ const DropDown = (props: DropDownProps) => {
     offsetLeft = 0,
     enableKeyboardEvents = true,
     usePortalBackdrop = false,
+    shouldShowBackdrop = false,
   } = props;
 
   const toggleDropDown = (e: React.MouseEvent) => {
@@ -76,6 +77,7 @@ const DropDown = (props: DropDownProps) => {
       isAside={isAside}
       withBackground={withBackground}
       withoutBackground={withoutBackground}
+      shouldShowBackdrop={shouldShowBackdrop}
     />
   ) : null;
 

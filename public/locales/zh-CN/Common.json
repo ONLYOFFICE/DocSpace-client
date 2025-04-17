@@ -18,6 +18,7 @@
   "Alert": "警报",
   "All": "全部",
   "AllowedCharacters": "允许的字符",
+  "AllTypesAvailableForEditing": "{{organizationName}} 中可供编辑的所有文件类型",
   "AndMore": "还有<1>{{count}}个</1>",
   "Anonymous": "匿名",
   "AnyoneWithLink": "任何拥有此链接的人",

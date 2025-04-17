@@ -71,7 +71,7 @@ class AccessRightsStore {
   };
 
   canChangeUserType = (user) => {
-    const { id, isOwner, isCollaborator, isRoomAdmin } = this.userStore.user;
+    const { id, isCollaborator, isRoomAdmin } = this.userStore.user;
     if (isCollaborator || isRoomAdmin) return false;
 
     const { id: userId, statusType, role } = user;
@@ -84,10 +84,7 @@ class AccessRightsStore {
 
       case EmployeeType.Admin:
       case EmployeeType.RoomAdmin:
-        if (isOwner) {
-          return true;
-        }
-        return false;
+        return true;
 
       case EmployeeType.User:
       case EmployeeType.Guest:
@@ -107,8 +104,6 @@ class AccessRightsStore {
       isAdmin: userIsAdmin,
       isOwner: userIsOwner,
       isVisitor: userIsVisitor,
-      // isCollaborator: userIsCollaborator,
-      isRoomAdmin: userIsRoomAdmin,
     } = user;
 
     const needMakeEmployee =
@@ -118,7 +113,7 @@ class AccessRightsStore {
 
     if (isOwner) return true;
 
-    if (isAdmin) return !userIsAdmin && !userIsOwner && !userIsRoomAdmin;
+    if (isAdmin) return !userIsAdmin && !userIsOwner;
 
     if (isRoomAdmin && userIsVisitor) return true;
 

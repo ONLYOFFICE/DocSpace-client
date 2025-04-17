@@ -66,6 +66,7 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
 
   return (
     <Row
+      className="transaction-row"
       badgesComponent={
         <Text
           fontWeight={600}

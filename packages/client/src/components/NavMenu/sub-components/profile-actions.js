@@ -169,29 +169,32 @@ class ProfileActions extends React.PureComponent {
           forwardedRef={this.ref}
         >
           <div style={{ paddingTop: "8px" }}>
-            {userActions.map(
-              (action) =>
-                action &&
-                (action?.isButton ? (
-                  <StyledButtonWrapper key={action.key}>
-                    <Button
-                      size="normal"
-                      scale
-                      label={action.label}
-                      onClick={action.onClick}
-                    />
-                  </StyledButtonWrapper>
-                ) : (
-                  <Link
-                    noHover
-                    key={action.key}
-                    href={action.url}
-                    onClick={this.onClickItemLink}
-                  >
-                    <StyledDropDownItem {...action} noHover />
-                  </Link>
-                )),
-            )}
+            {userActions.map(({ key, ...action }) => {
+              return (
+                <React.Fragment key={key}>
+                  {action ? (
+                    action?.isButton ? (
+                      <StyledButtonWrapper>
+                        <Button
+                          size="normal"
+                          scale
+                          label={action.label}
+                          onClick={action.onClick}
+                        />
+                      </StyledButtonWrapper>
+                    ) : (
+                      <Link
+                        noHover
+                        href={action.url}
+                        onClick={this.onClickItemLink}
+                      >
+                        <StyledDropDownItem {...action} noHover />
+                      </Link>
+                    )
+                  ) : null}
+                </React.Fragment>
+              );
+            })}
           </div>
         </ProfileMenu>
       </StyledDiv>

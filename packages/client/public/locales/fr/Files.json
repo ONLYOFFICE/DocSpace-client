@@ -1,4 +1,6 @@
 {
+  "AccessSettings": "Paramètres d'accès",
+  "AccessToTemplate": "Accès au modèle",
   "ActionCannotUndone": "Cette action ne peut être annulée. Êtes-vous sûr de vouloir continuer ?",
   "AddAdminByNameOrEmail": "Ajouter un administrateur par nom ou par e-mail",
   "AddedToClipboard": "Éléments ajoutés au presse-papiers",

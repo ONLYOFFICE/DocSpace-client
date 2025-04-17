@@ -35,6 +35,7 @@
   "MigrationDataDescription": "استيراد البيانات إلى {{productName}} من Workspace {{organizationName}} أو Google Workspace أو Nextcloud.",
   "MigrationDataTitle": "بيانات الهجرة",
   "PublicRoomEmptyTitle": "مرحبًا بك في الغرفة العامة",
+  "SectionsUploadDescription": "رفع أي نوع من الملفات من {{sectionNameFirst}} أو {{sectionNameSecond}}",
   "SendInvitationLetter": "أرسل رسالة دعوة لإضافة أعضاء جدد إلى البوابة",
   "ShareOptionDescription": "انسخ رابط الوصول العام أو قم بدعوة مستخدمين آخرين إلى الغرفة لبدء عملية تعبئة النموذج.",
   "ShareOptionTitle": "مشاركة غرفة",

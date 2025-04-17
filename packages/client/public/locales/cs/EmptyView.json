@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Import dat do vašeho {{productName}} z {{organizationName}} Workspace, Google Workspace nebo Nextcloud.",
   "MigrationDataTitle": "Migrační údaje",
   "PublicRoomEmptyTitle": "Vítejte ve veřejné místnosti",
+  "SectionsUploadDescription": "Nahrát jakékoli typy souborů z {{sectionNameFirst}} nebo {{sectionNameSecond}}",
   "SendInvitationLetter": "Odeslání zvacího dopisu pro přidání nových členů do portálu",
   "ShareOptionDescription": "Zkopírujte odkaz pro veřejný přístup nebo pozvěte do místnosti další uživatele a spusťte proces vyplňování formuláře.",
   "ShareOptionTitle": "Sdílení místnosti",

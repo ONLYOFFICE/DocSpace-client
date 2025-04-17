@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Uvozite podatke v {{productName}} iz {{organizationName}} Workspace, Google Workspace ali Nextcloud.",
   "MigrationDataTitle": "Migracijski podatki",
   "PublicRoomEmptyTitle": "Dobrodošli v javni sobi",
+  "SectionsUploadDescription": "Naložite datoteke katere koli vrste iz {{sectionNameFirst}} ali {{sectionNameSecond}}",
   "SendInvitationLetter": "Pošljite vabilo za dodajanje novih članov na portal",
   "ShareOptionDescription": "Kopiraj javno dostopno povezavo ali povabi druge uporabnike v sobo, da začnejo postopek izpolnjevanja obrazcev.",
   "ShareOptionTitle": "Deli sobo",

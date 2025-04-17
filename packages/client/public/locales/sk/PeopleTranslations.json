@@ -12,6 +12,7 @@
   "IndividualRights": "Individuálne práva v miestnosti",
   "LDAPAccountTooltip": "Toto používateľské konto je nahrané z LDAP. Ak potrebujete zmeniť meno používateľa a e-mailovú adresu alebo používateľa vypnúť, pozrite sa do priečinka LDAP.",
   "LDAPGroupTooltip": "Táto skupina je nahraná z LDAP. Ak ju potrebujete premenovať, pridať alebo odstrániť používateľov, obráťte sa na priečinok LDAP.",
+  "MembersCount": "členovia: {{count}}",
   "NameChangeButton": "Zmeniť meno",
   "PasswordChangeButton": "Zmeniť heslo",
   "PendingInviteTitle": "Čakajúca pozvánka",

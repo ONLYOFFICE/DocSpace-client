@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Εισαγωγή δεδομένων στο {{productName}} σας από το Workspace, το Google Workspace ή το Nextcloud της {{organizationName}}.",
   "MigrationDataTitle": "Δεδομένα μετάβασης",
   "PublicRoomEmptyTitle": "Καλώς ήρθατε στο Δημόσιο δωμάτιο",
+  "SectionsUploadDescription": "Ανεβάστε αρχεία οποιουδήποτε τύπου από το {{sectionNameFirst}} ή το {{sectionNameSecond}}",
   "SendInvitationLetter": "Αποστολή επιστολής πρόσκλησης για την προσθήκη νέων μελών στην πύλη",
   "ShareOptionDescription": "Αντιγράψτε έναν σύνδεσμο δημόσιας πρόσβασης ή προσκαλέστε άλλους χρήστες στο δωμάτιο για να ξεκινήσει η διαδικασία συμπλήρωσης φορμών.",
   "ShareOptionTitle": "Κοινή χρήση δωματίου",

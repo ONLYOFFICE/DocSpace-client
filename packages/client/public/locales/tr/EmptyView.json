@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Verileri {{organizationName}} Workspace, Google Workspace veya Nextcloud'dan {{productName}} üzerine aktarın.",
   "MigrationDataTitle": "Taşınma Verileri",
   "PublicRoomEmptyTitle": "Genel odaya hoş geldiniz",
+  "SectionsUploadDescription": "{{sectionNameFirst}} veya {{sectionNameSecond}} bölümlerinden her türlü dosyayı yükle",
   "SendInvitationLetter": "Portala yeni üyeler eklemek için davet mektubu gönderin",
   "ShareOptionDescription": "Bir genel erişim bağlantısını kopyalayın veya form doldurma işlemini başlatmak için diğer kullanıcıları odaya davet edin.",
   "ShareOptionTitle": "Oda paylaşma",

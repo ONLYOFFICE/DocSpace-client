@@ -12,6 +12,7 @@
   "IndividualRights": "الحقوق الفردية في الغرفة",
   "LDAPAccountTooltip": "يتم تحميل حساب المستخدم من LDAP. إذا كنت بحاجة إلى تغيير اسم المستخدم والبريد الالكتروني، أو تعطيل حساب مستخدم، راجع دليل LDAP.",
   "LDAPGroupTooltip": "يتم تحميل هذه المجموعة من LDAP. إذا كنت بحاجة إلى إعادة تسميته أو إضافة أو إزالة المستخدمين، راجع دليل LDAP.",
+  "MembersCount": "الأعضاء: {{count}}",
   "NameChangeButton": "تغيير الاسم",
   "PasswordChangeButton": "تغيير كلمة المرور",
   "PendingInviteTitle": "دعوة مُعلقة",

@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Importeer gegevens naar uw {{productName}} vanuit {{organizationName}} Workspace, Google Workspace of Nextcloud.",
   "MigrationDataTitle": "Migratiegegevens",
   "PublicRoomEmptyTitle": "Welkom in de Openbare kamer",
+  "SectionsUploadDescription": "Upload bestanden van elk type uit {{sectionNameFirst}} of {{sectionNameSecond}}",
   "SendInvitationLetter": "Stuur een uitnodigingsbrief om nieuwe leden aan het portaal toe te voegen",
   "ShareOptionDescription": "Kopieer een openbare toegangslink of nodig andere gebruikers uit in de kamer om het formulier invulproces te starten.",
   "ShareOptionTitle": "Deel een kamer",

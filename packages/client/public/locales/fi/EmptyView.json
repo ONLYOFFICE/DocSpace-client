@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Tuo tiedot {{productName}}:een {{organizationName}} työtilasta, Googlen työtilasta tai Nextcloudista.",
   "MigrationDataTitle": "Siirtotiedot",
   "PublicRoomEmptyTitle": "Tervetuloa julkiseen huoneeseen.",
+  "SectionsUploadDescription": "Lataa mitä tahansa tiedostotyyppejä {{sectionNameFirst}}- tai {{sectionNameSecond}}-osiosta",
   "SendInvitationLetter": "Lähetä kutsukirje lisätäksesi portaaliin uusia jäseniä.",
   "ShareOptionDescription": "Kopioi julkinen pääsylinkki tai kutsu muita käyttäjiä huoneeseen aloittaaksesi lomakkeen täyttöprosessi.",
   "ShareOptionTitle": "Jaa huone",

@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Importējiet datus uz savu {{productName}} no {{organizationName}} Workspace, Google Workspace vai Nextcloud.",
   "MigrationDataTitle": "Migrācijas dati",
   "PublicRoomEmptyTitle": "Esiet sveicināti publiskajā telpā",
+  "SectionsUploadDescription": "Personas dati, visi faili un mapes šī lietotāja sadaļās {{sectionNameFirst}} un {{sectionNameSecond}} tiks neatgriezeniski dzēsti.",
   "SendInvitationLetter": "Nosūtiet uzaicinājuma vēstuli, lai pievienotu portālam jaunus dalībniekus",
   "ShareOptionDescription": "Kopējiet publiskās piekļuves saiti vai uzaiciniet citus lietotājus uz telpu, lai sāktu aizpildīt veidlapas.",
   "ShareOptionTitle": "Kopīgot telpu",

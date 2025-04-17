@@ -12,6 +12,7 @@
   "IndividualRights": "Otaqda fərdi hüquqlar",
   "LDAPAccountTooltip": "Bu istifadəçi hesabı LDAP-dan yüklənib. İstifadəçi adı və e-poçt ünvanını dəyişmək və ya istifadəçini deaktiv etmək lazımdırsa, LDAP kataloqunu yoxlayın.",
   "LDAPGroupTooltip": "Bu qrup LDAP-dan yüklənib. İstifadəçilərin adını dəyişmək, əlavə etmək və ya silmək lazımdırsa, LDAP kataloqunu yoxlayın.",
+  "MembersCount": "üzv sayı: {{count}}",
   "NameChangeButton": "Adı dəyişin",
   "PasswordChangeButton": "Şifrəni dəyişdir",
   "PendingInviteTitle": "Dəvət gözlənilir",

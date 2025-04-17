@@ -35,6 +35,7 @@
   "MigrationDataDescription": "{{organizationName}} Workspace, Google Workspace və ya Nextcloud-dan məlumatı {{productName}}-ə idxal edin.",
   "MigrationDataTitle": "Köçürülmə Məlumatları",
   "PublicRoomEmptyTitle": "Ümumi otağa xoş gəlmisiniz",
+  "SectionsUploadDescription": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən istənilən tipdə faylları yükləyin",
   "SendInvitationLetter": "Portala yeni üzvlər əlavə etmək üçün dəvət məktubu göndərin",
   "ShareOptionDescription": "Ümumi giriş linkini kopyalayın və ya formanı doldurmağa başlamaq üçün digər istifadəçiləri otağa dəvət edin.",
   "ShareOptionTitle": "Otağı paylaşın",

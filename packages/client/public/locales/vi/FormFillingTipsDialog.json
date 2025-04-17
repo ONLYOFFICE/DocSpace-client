@@ -1,4 +1,5 @@
 {
+  "DescriptionUploading": "Tạo biểu mẫu PDF trong {{productName}}, ví dụ: trong mục {{sectionName}} của bạn và tải lên các biểu mẫu đã hoàn thành vào phòng. Sử dụng thư viện mẫu tích hợp và chọn từ nhiều mẫu PDF có sẵn.",
   "HeaderComplete": "Phân tích thuận tiện các câu trả lời thu thập được",
   "HeaderSharing": "Chia sẻ nhanh",
   "HeaderStarting": "Bắt đầu quá trình điền biểu mẫu",

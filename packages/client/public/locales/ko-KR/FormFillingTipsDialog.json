@@ -1,4 +1,5 @@
 {
+  "DescriptionUploading": "{{productName}}에서 PDF 양식을 생성(예: {{sectionName}}에서)하고 완성된 양식을 채팅방에 업로드하세요. 통합 템플릿 라이브러리를 활용하고 다양한 준비된 PDF 템플릿 중에서 선택하세요.",
   "HeaderComplete": "수집된 응답 간단 분석",
   "HeaderSharing": "빠른 공유",
   "HeaderStarting": "양식 작성 프로세스 시작",

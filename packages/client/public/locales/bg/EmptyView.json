@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Импортирайте данни във вашия {{productName}} от {{organizationName}} Workspace, Google Workspace или Nextcloud.",
   "MigrationDataTitle": "Миграционни данни",
   "PublicRoomEmptyTitle": "Добре дошли в Обществената стая",
+  "SectionsUploadDescription": "Качване на всякакви файлове от {{sectionNameFirst}} или {{sectionNameSecond}}",
   "SendInvitationLetter": "Изпратете писмо с покана за добавяне на нови членове към портала",
   "ShareOptionDescription": "Копирайте линка за публичен достъп или поканете други потребители в стаята, за да започнете процеса на попълване на формуляра.",
   "ShareOptionTitle": "Споделете стая",

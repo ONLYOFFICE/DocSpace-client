@@ -12,6 +12,7 @@
   "IndividualRights": "Indywidualne prawa w pokoju",
   "LDAPAccountTooltip": "Dane konto użytkownika jest ładowane z LDAP. Aby zmienić nazwę użytkownika i adres e-mail lub wyłączyć konto użytkownika, należy odwołać się do katalogu LDAP.",
   "LDAPGroupTooltip": "Dana grupa jest ładowana z LDAP. Aby zmienić jej nazwę, dodać lub usunąć użytkowników, należy odwołać się do katalogu LDAP.",
+  "MembersCount": "członkowie: {{count}}",
   "NameChangeButton": "Zmień nazwę",
   "PasswordChangeButton": "Zmień hasło",
   "PendingInviteTitle": "Oczekujące zaproszenie",

@@ -12,6 +12,7 @@
   "IndividualRights": "Individuālās tiesības telpā",
   "LDAPAccountTooltip": "Šis lietotāja konts ir ielādēts no LDAP. Ja jums ir jāmaina lietotājvārds un e-pasta adrese vai jāatspējo lietotājs, skatiet LDAP direktoriju.",
   "LDAPGroupTooltip": "Šī grupa ir ielādēta no LDAP. Ja jums tas ir jāpārdēvē, jāpievieno vai jānoņem lietotāji, skatiet LDAP direktoriju.",
+  "MembersCount": "dalībnieki: {{count}}",
   "NameChangeButton": "Mainīt vārdu",
   "PasswordChangeButton": "Mainīt paroli",
   "PendingInviteTitle": "Gaida uzaicinājumu",

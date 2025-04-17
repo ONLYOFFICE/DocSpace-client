@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Nhập dữ liệu {{productName}} của bạn từ {{organizationName}} Workspace, Google Workspace hoặc Nextcloud.",
   "MigrationDataTitle": "Di chuyển Dữ liệu",
   "PublicRoomEmptyTitle": "Chào mừng bạn đến với Phòng Công Cộng",
+  "SectionsUploadDescription": "Tải lên bất kỳ loại tệp nào từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}",
   "SendInvitationLetter": "Gửi thư mời để thêm thành viên mới vào cổng thông tin",
   "ShareOptionDescription": "Sao chép liên kết truy cập công khai hoặc mời người dùng khác vào phòng để bắt đầu quá trình điền biểu mẫu.",
   "ShareOptionTitle": "Chia sẻ phòng",

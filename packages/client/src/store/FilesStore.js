@@ -3595,7 +3595,7 @@ class FilesStore {
         type,
         hasDraft,
         isForm,
-        isPDFForm: item.isForm,
+        isPDFForm: item.isForm || item.isPDFForm,
         requestToken,
         lastOpened,
         quotaLimit,

@@ -1,13 +1,15 @@
 import React from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import {
   TFileSecurity,
   TFilesSettings,
-  TFolder,
   TFolderSecurity,
 } from "../../../../../api/files/types";
 import { TRoomSecurity } from "../../../../../api/rooms/types";
+
+import { TSelectorItem } from "../../../../selector/Selector.types";
 
 import {
   ApplyFilterOption,
@@ -20,7 +22,6 @@ import FilesSelectorComponent from "../../../../../selectors/Files";
 import { TSelectedFileInfo } from "../../../../../selectors/Files/FilesSelector.types";
 
 import { Portal } from "../../../../portal";
-import { TBreadCrumb } from "../../../../selector/Selector.types";
 
 import { useFilesStore } from "../../../store/filesStore";
 
@@ -31,35 +32,37 @@ type FilesSelectorProps = {
   currentDeviceType: DeviceType;
 };
 
+const disabledItems: Array<string | number> = [];
+
 const FilesSelector = ({
   showSelector,
   toggleSelector,
 
   currentDeviceType,
 }: FilesSelectorProps) => {
-  const { setFile } = useFilesStore();
+  const { setFiles } = useFilesStore();
+
+  const { t } = useTranslation(["Common"]);
+
+  const [items, setItems] = React.useState<TSelectorItem[]>([]);
 
   const root = document.getElementById("root");
 
-  const disabledItems = React.useMemo(() => [], []);
+  const onSelect = React.useCallback((item: TSelectorItem) => {
+    setItems((prev) => {
+      if (prev.some((i) => i.id === item.id)) {
+        return prev.filter((i) => i.id !== item.id);
+      }
 
-  const onSubmit = React.useCallback(
-    (
-      selectedItemId: string | number | undefined,
-      folderTitle: string,
-      isPublic: boolean,
-      breadCrumbs: TBreadCrumb[],
-      fileName: string,
-      isChecked: boolean,
-      selectedTreeNode: TFolder,
-      selectedFileInfo: TSelectedFileInfo,
-    ) => {
-      setFile(selectedFileInfo);
+      return [...prev, item];
+    });
+  }, []);
 
-      toggleSelector();
-    },
-    [toggleSelector, setFile],
-  );
+  const onSubmit = React.useCallback(() => {
+    setFiles(items);
+    setItems([]);
+    toggleSelector();
+  }, [toggleSelector, setFiles, items]);
 
   const getIsDisabled = React.useCallback(
     (
@@ -75,12 +78,13 @@ const FilesSelector = ({
         | undefined,
       selectedFileInfo: TSelectedFileInfo,
     ) => {
+      if (items.length === 0) return true;
       if (isFirstLoad) return true;
       if (selectedFileInfo) return false;
 
       return true;
     },
-    [],
+    [items.length],
   );
 
   return (
@@ -94,13 +98,13 @@ const FilesSelector = ({
           filterParam={FilterType.DocumentsOnly}
           withHeader
           headerProps={{
-            headerLabel: "Select",
+            headerLabel: t("Common:Select"),
             onCloseClick: toggleSelector,
             isCloseable: true,
           }}
           withCancelButton
-          cancelButtonLabel="Cancel"
-          submitButtonLabel="Select"
+          cancelButtonLabel={t("Common:CancelButton")}
+          submitButtonLabel={t("Common:Select")}
           onCancel={toggleSelector}
           filesSettings={{} as TFilesSettings}
           withBreadCrumbs={false}
@@ -122,6 +126,8 @@ const FilesSelector = ({
           descriptionText=""
           getFilesArchiveError={() => ""}
           applyFilterOption={ApplyFilterOption.All}
+          isMultiSelect
+          onSelectItem={onSelect}
         />
       }
     />

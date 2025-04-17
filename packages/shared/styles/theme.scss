@@ -2054,6 +2054,16 @@
 
   --chat-header-button-background-color: #{$gray-light};
   --chat-header-button-svg-color: #{$light-gray-dark};
+
+  --chat-file-item-border-color: #{$gray-light-mid};
+  --chat-file-item-background-color: #{$white};
+  --chat-file-item-exst-color: #{$gray};
+
+  --chat-input-background-color: #{$gray-light};
+  --chat-input-button-file-border-color: #{$gray-strong};
+  --chat-input-button-file-background-color: unset;
+  --chat-input-button-file-color: #{$light-gray-dark};
+  --chat-input-button-send-color: #{$white};
 }
 
 .dark {
@@ -2061,4 +2071,14 @@
 
   --chat-header-button-background-color: #{$light-dark-gray-hover};
   --chat-header-button-svg-color: #{$dark-gray-dark};
+
+  --chat-file-item-border-color: #{$gray-dark-strong};
+  --chat-file-item-background-color: unset;
+  --chat-file-item-exst-color: #{$gray-dark};
+
+  --chat-input-background-color: #{$dark-gray-light};
+  --chat-input-button-file-border-color: #{$black};
+  --chat-input-button-file-background-color: #{$black};
+  --chat-input-button-file-color: #{$gray};
+  --chat-input-button-send-color: #{$white};
 }

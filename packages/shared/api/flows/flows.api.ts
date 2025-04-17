@@ -329,6 +329,7 @@ class FlowsApi {
   static async buildFlow(
     flowId: string,
     data: object,
+    abortController: AbortController,
   ): Promise<ReadableStream<Uint8Array>> {
     const xApiKey = getCookie("chat_api_key");
 
@@ -337,6 +338,7 @@ class FlowsApi {
       {
         method: "POST",
         body: JSON.stringify(data),
+        signal: abortController.signal,
         headers: {
           "x-api-key": xApiKey!,
           Connection: "close",

@@ -1,0 +1,64 @@
+@import "../../../../styles/variables/devices.scss";
+@import "../../../../styles/mixins.scss";
+
+.filePreviewContainer {
+  position: absolute;
+
+  top: 12px;
+
+  margin: 0 8px 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  width: 100%;
+  max-width: calc(100% - 56px);
+
+  box-sizing: border-box;
+
+  @include tablet-and-below {
+    max-width: calc(100% - 48px);
+  }
+}
+
+.filePreview {
+  width: fit-content;
+  max-width: 100%;
+  height: 32px;
+
+  border: 1px solid var(--chat-file-item-border-color);
+
+  background-color: var(--chat-file-item-background-color);
+
+  border-radius: 6px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  padding-inline-end: 8px;
+
+  .fileExtension {
+    color: var(--chat-file-item-exst-color);
+  }
+
+  .imageWrapper {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .removeButton {
+    margin-left: 8px;
+    min-width: 16px;
+  }
+}

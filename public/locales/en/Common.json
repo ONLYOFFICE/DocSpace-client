@@ -38,6 +38,8 @@
   "AIChat": "AI Chat",
   "AIChatEmptyMessage": "Leverage the power of AI for quick data search and analysis. Just ask a question, and we'll provide the results for you.",
   "AIChatHelp": "How can i help?",
+  "AIChatInputFirstMessage": "Start chat with AI",
+  "AIChatInputAskAI": "Ask AI",
   "AINewChat": "New chat",
   "AIRoomTitle": "Room with AI",
   "AIRoomDescription": "This room includes an AI assistant to help you work with documents, answer your questions, and assist throughout your tasks.",

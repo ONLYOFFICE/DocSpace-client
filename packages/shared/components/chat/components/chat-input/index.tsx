@@ -27,6 +27,7 @@
 import React from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import SelectReactSvgUrl from "PUBLIC_DIR/images/select.react.svg?url";
 import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
@@ -40,8 +41,9 @@ import { useFilesStore } from "../../store/filesStore";
 import { useMessageStore } from "../../store/messageStore";
 import { useCurrentFlowStore } from "../../store/currentFlowStore";
 
+import FilePreview from "../file-preview";
+
 import FilesSelector from "./components/FileSelector";
-import FilePreview from "./components/FilePreview";
 
 import styles from "./ChatInput.module.scss";
 
@@ -54,10 +56,17 @@ const ChatInput = ({
   displayFileExtension: boolean;
   getIcon: (size: number, fileExst: string) => string;
 }) => {
-  const { file } = useFilesStore();
   const { flow } = useCurrentFlowStore();
+  const { t } = useTranslation(["Common"]);
 
-  const { sendMessage, isRequestRunning } = useMessageStore();
+  const {
+    sendMessage,
+    cancelBuild,
+    isInit,
+    isRequestRunning,
+    isEmptyMessages,
+  } = useMessageStore();
+  const { files, wrapperHeight, clearFiles } = useFilesStore();
 
   const [value, setValue] = React.useState("");
   const [showSelector, setShowSelector] = React.useState(false);
@@ -73,10 +82,18 @@ const ChatInput = ({
   const sendMessageAction = React.useCallback(() => {
     if (isRequestRunning || !value || showSelector) return;
 
+    sendMessage(value, flow!, files);
     setValue("");
-
-    sendMessage(value, flow!);
-  }, [isRequestRunning, sendMessage, value, flow, showSelector]);
+    clearFiles();
+  }, [
+    isRequestRunning,
+    value,
+    flow,
+    showSelector,
+    files,
+    sendMessage,
+    clearFiles,
+  ]);
 
   const onKeyEnter = React.useCallback(
     (e: KeyboardEvent) => {
@@ -94,10 +111,35 @@ const ChatInput = ({
     };
   }, [onKeyEnter]);
 
-  const withFile = file !== undefined;
+  const withFile = files.length !== 0;
+
+  const placeholder = isEmptyMessages
+    ? t("Common:AIChatInputFirstMessage")
+    : t("Common:AIChatInputAskAI");
+
+  const isDisabled = !isInit ? !value : isRequestRunning ? false : !value;
+
+  const sendIconProps = !isInit
+    ? { onClick: sendMessageAction, isDisabled, iconNode: null }
+    : {
+        onClick: isRequestRunning ? cancelBuild : sendMessageAction,
+        isDisabled,
+        iconNode: isRequestRunning ? (
+          <div className={styles.whiteSquare} />
+        ) : null,
+      };
 
   return (
-    <div className={classNames(styles.chatInput)}>
+    <div
+      className={classNames(styles.chatInput)}
+      style={
+        {
+          "--chat-input-textarea-wrapper-with-files-padding": `${wrapperHeight + 24}px 8px 44px`,
+          "--chat-input-textarea-wrapper-with-files-height": `${116 + wrapperHeight + 24}px`,
+          "--chat-input-textarea-wrapper-with-files-max-height": `${172 + wrapperHeight + 24}px`,
+        } as React.CSSProperties
+      }
+    >
       <Textarea
         onChange={handleChange}
         value={value}
@@ -107,12 +149,14 @@ const ChatInput = ({
           [styles.chatInputTextAreaWrapperWithFiles]: withFile,
           [styles.chatInputTextAreaWrapper]: !withFile,
         })}
-        placeholder="Send a message..."
+        placeholder={placeholder}
         isChatMode
       />
       <FilePreview
         getIcon={getIcon}
         displayFileExtension={displayFileExtension}
+        withRemoveFile
+        files={files}
       />
       <div className={styles.chatInputButtons}>
         <IconButton
@@ -125,15 +169,16 @@ const ChatInput = ({
 
         <IconButton
           iconName={SendReactSvgUrl}
-          size={16}
+          size={12}
           isClickable
-          onClick={sendMessageAction}
           className={classNames(
             styles.chatInputButtonsFile,
             styles.chatInputButtonsSend,
-            { [styles.disabled]: !value || isRequestRunning },
+            {
+              [styles.disabled]: isDisabled,
+            },
           )}
-          isDisabled={!value || isRequestRunning}
+          {...sendIconProps}
         />
       </div>
       {showSelector ? (

@@ -16,36 +16,38 @@
 
   textarea {
     padding: 0;
-    background-color: #f8f9f9;
+    background-color: var(--chat-input-background-color);
   }
 
   @include tablet-and-below {
     padding: 0 16px;
   }
-}
 
-.chatInputTextAreaWrapper {
-  padding: 6px 8px 44px;
+  .chatInputTextAreaWrapper {
+    padding: 6px 8px 44px;
 
-  min-height: 116px !important;
-  max-height: 172px !important;
+    min-height: 116px !important;
+    max-height: 172px !important;
 
-  background-color: #f8f9f9;
-  border: none;
-}
+    background-color: var(--chat-input-background-color);
+    border: none;
+  }
 
-.chatInputTextAreaWrapperWithFiles {
-  padding: 44px 8px 44px;
-  min-height: 160px !important;
-  max-height: 216px !important;
+  .chatInputTextAreaWrapperWithFiles {
+    padding: var(--chat-input-textarea-wrapper-with-files-padding);
+    min-height: var(--chat-input-textarea-wrapper-with-files-height) !important;
+    max-height: var(
+      --chat-input-textarea-wrapper-with-files-max-height
+    ) !important;
 
-  background-color: #f8f9f9;
-  border: none;
-}
+    background-color: var(--chat-input-background-color);
+    border: none;
+  }
 
-.chatInputTextArea {
-  min-height: 56px !important;
-  max-height: 112px !important;
+  .chatInputTextArea {
+    min-height: 56px !important;
+    max-height: 112px !important;
+  }
 }
 
 .chatInputButtons {
@@ -66,81 +68,56 @@
   @include tablet-and-below {
     width: calc(100% - 32px);
   }
-}
 
-.chatInputButtonsFile {
-  width: 32px;
-  height: 32px;
-
-  border: 1px solid #d0d5da;
-
-  border-radius: 3px;
-
-  box-sizing: border-box;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  svg {
-    path {
-      fill: #657077 !important;
-    }
-  }
-}
-
-.chatInputButtonsSend {
-  border: none;
-
-  background-color: var(--accent-main);
-
-  cursor: pointer;
-
-  svg {
-    path {
-      fill: #ffffff !important;
-    }
-  }
-
-  &.disabled {
-    background-color: #d0d5da;
-
-    cursor: not-allowed;
-  }
-}
-
-.filePreview {
-  position: absolute;
-
-  top: 6px;
-
-  margin: 0 8px;
-
-  height: 32px;
-
-  border: 1px solid #eceef1;
-
-  background-color: #ffffff;
-
-  border-radius: 6px;
-
-  box-sizing: border-box;
-
-  display: flex;
-  align-items: center;
-
-  padding-inline-end: 8px;
-
-  .imageWrapper {
+  .chatInputButtonsFile {
     width: 32px;
     height: 32px;
+
+    border: 1px solid var(--chat-input-button-file-border-color);
+
+    background-color: var(--chat-button-file-background-color);
+
+    border-radius: 3px;
+
+    box-sizing: border-box;
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    svg {
+      path {
+        fill: var(--chat-input-button-file-color) !important;
+      }
+    }
   }
 
-  .removeButton {
-    margin-left: 8px;
+  .chatInputButtonsSend {
+    border: none;
+
+    background-color: var(--accent-main);
+
+    cursor: pointer;
+
+    svg {
+      path {
+        fill: var(--chat-input-button-send-color) !important;
+      }
+    }
+
+    &.disabled {
+      opacity: 0.6;
+
+      cursor: not-allowed;
+    }
+
+    .whiteSquare {
+      width: 12px;
+      height: 12px;
+
+      background-color: #fff;
+
+      border-radius: 2px;
+    }
   }
 }

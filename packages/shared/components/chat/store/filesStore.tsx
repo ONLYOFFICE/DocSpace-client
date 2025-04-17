@@ -1,10 +1,12 @@
 import React from "react";
 import { makeAutoObservable } from "mobx";
 
-import { TSelectedFileInfo } from "../../../selectors/Files/FilesSelector.types";
+import { TSelectorItem } from "../../selector/Selector.types";
 
 export default class FilesStore {
-  file: TSelectedFileInfo | undefined;
+  files: TSelectorItem[] = [];
+
+  wrapperHeight: number = 0;
 
   flowId: string = "";
 
@@ -16,8 +18,20 @@ export default class FilesStore {
     this.flowId = flowId;
   };
 
-  setFile = (file?: TSelectedFileInfo) => {
-    this.file = file;
+  setFiles = (files: TSelectorItem[] = []) => {
+    this.files = files;
+  };
+
+  removeFile = (file: TSelectorItem) => {
+    this.files = this.files.filter((f) => f.id !== file.id);
+  };
+
+  clearFiles = () => {
+    this.files = [];
+  };
+
+  setWrapperHeight = (height: number) => {
+    this.wrapperHeight = height;
   };
 }
 

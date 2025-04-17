@@ -3,6 +3,8 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import FlowsApi from "../../../api/flows/flows.api";
 
+import { TSelectorItem } from "../../selector";
+
 import { ChatMessageType, PropertiesType } from "../types/chat";
 import { FlowType } from "../types/flow";
 
@@ -17,9 +19,11 @@ export default class MessageStore {
 
   currentSessions: string = "";
 
-  isLoading: boolean = true;
+  isInit: boolean = false;
 
   isRequestRunning: boolean = false;
+
+  abortController: AbortController | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -121,30 +125,47 @@ export default class MessageStore {
 
     runInAction(() => {
       this.sessions = newSessions;
-      this.isLoading = false;
+      this.isInit = true;
       this.isRequestRunning = false;
     });
   };
 
-  sendMessage = async (message: string, flow: FlowType) => {
+  sendMessage = async (
+    message: string,
+    flow: FlowType,
+    files: TSelectorItem[],
+  ) => {
     if (this.isRequestRunning) return;
     this.isRequestRunning = true;
 
     try {
       const textDecoder = new TextDecoder();
 
-      const eventsResponse = await FlowsApi.buildFlow(this.flowId, {
-        inputs: {
-          input_value: message,
-          session: this.currentSessions,
+      const filesStr = files ? `\n@${files.map((f) => f.id).join(",@")}` : "";
+
+      const folderStr = `\n@folder-${this.aiSelectedFolder}`;
+
+      this.abortController = new AbortController();
+
+      const eventsResponse = await FlowsApi.buildFlow(
+        this.flowId,
+        {
+          inputs: {
+            input_value: `${message}${filesStr}${folderStr}`,
+            session: this.currentSessions,
+          },
+          data: flow.data,
+          files: [],
         },
-        data: flow.data,
-        files: [],
-      });
+        this.abortController!,
+      );
 
       const reader = eventsResponse.getReader();
 
       const stream = async () => {
+        if (this.abortController?.signal.aborted)
+          throw this.abortController.signal.reason;
+
         const { done, value } = await reader.read();
 
         if (done) {
@@ -213,10 +234,19 @@ export default class MessageStore {
               }
             });
           } else {
-            stream();
+            await stream();
           }
-        } catch (e) {
-          console.log(e);
+        } catch (e: unknown) {
+          if (
+            (e as Error).name === "AbortError" ||
+            (e as Error).message.includes("aborted")
+          ) {
+            console.log("Request was canceled");
+            this.isRequestRunning = false;
+            this.abortController = null;
+            return; // Stop processing
+          }
+
           console.log("++++++++ERROR++++++++");
           console.log("Parsing failed");
           console.log("-------------------");
@@ -225,7 +255,31 @@ export default class MessageStore {
         }
       };
 
-      stream();
+      await stream();
+    } catch (e) {
+      // Check if this is an abort error
+      if (
+        e instanceof Error &&
+        (e.name === "AbortError" ||
+          e.message.includes("aborted") ||
+          e.message.includes("abort"))
+      ) {
+        console.log("Request was canceled at outer level");
+        this.isRequestRunning = false;
+        this.abortController = null;
+        return;
+      }
+      console.log("Unexpected error in sendMessage:", e);
+      this.isRequestRunning = false;
+    }
+  };
+
+  cancelBuild = () => {
+    try {
+      if (this.abortController) {
+        this.abortController.abort();
+        this.isRequestRunning = false;
+      }
     } catch (e) {
       console.log(e);
     }
@@ -242,6 +296,10 @@ export default class MessageStore {
     this.currentSessions = `folder-${this.aiSelectedFolder}-${new Date().getTime()}`;
     this.messages = [];
   };
+
+  get isEmptyMessages() {
+    return this.messages.length === 0;
+  }
 }
 
 export const MessageStoreContext = React.createContext<MessageStore>(

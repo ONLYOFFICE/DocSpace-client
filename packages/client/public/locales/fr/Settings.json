@@ -115,7 +115,7 @@
   "DeleteThemeForever": "Supprimer le thème définitivement ?",
   "DeleteThemeNotice": "Le thème sera définitivement supprimé. Vous ne pourrez pas annuler cette action.",
   "DeveloperToolsAccess": "Accès limité aux outils de développement",
-  "DeveloperToolsAccessDescription": "Ce paramètre vous permet de rendre la section Outils de développement visible à tous les utilisateurs, à l'exception des invités. Si vous souhaitez restreindre l'accès à cette section, en la rendant accessible uniquement au propriétaire et aux administrateurs de {{nomduproduit}}, sélectionnez Désactiver et cliquez sur le bouton Enregistrer.",
+  "DeveloperToolsAccessDescription": "Ce paramètre vous permet de rendre la section Outils de développement visible à tous les utilisateurs, à l'exception des invités. Si vous souhaitez restreindre l'accès à cette section, en la rendant accessible uniquement au propriétaire et aux administrateurs de {{productName}}, sélectionnez Désactiver et cliquez sur le bouton Enregistrer.",
   "DeveloperToolsAccessMobileDescription": "Ce paramètre vous permet de rendre la section Outils de développement visible à tous les utilisateurs, à l'exception des invités.",
   "DisableEmailDescription": "Si cette case est cochée, les utilisateurs de {{sectionName}} n'auront pas besoin de vérifier leur adresse électronique après la première autorisation dans {{productName}}.",
   "DisableEmailVerification": "Désactiver la vérification de l'e-mail",

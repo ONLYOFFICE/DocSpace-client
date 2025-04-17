@@ -256,7 +256,8 @@ export default inject(
     } = currentTariffStatusStore;
     const { user } = userStore;
 
-    const email = customerId ?? walletCustomerEmail;
+    const email = customerId || walletCustomerEmail;
+
     const payerInfo = paymentPayer ?? walletPayer;
 
     return {

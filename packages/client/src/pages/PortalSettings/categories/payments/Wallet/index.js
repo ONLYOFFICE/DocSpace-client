@@ -44,7 +44,7 @@ const Wallet = ({ walletInit, isInitWalletPage }) => {
   console.log(isInitWalletPage, ready, shouldShowLoader);
 
   useEffect(() => {
-    walletInit();
+    walletInit(t);
   }, []);
 
   useEffect(() => {

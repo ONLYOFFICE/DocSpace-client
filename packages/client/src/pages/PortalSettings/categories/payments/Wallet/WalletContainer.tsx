@@ -83,7 +83,7 @@ const Wallet = ({
       <Text className="wallet-description">
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
-      {isPayer ? <PayerInformation /> : null}
+      {cardLinkedOnFreeTariff ? <PayerInformation /> : null}
       <div className="balance-wrapper">
         <div className="header-container">
           <Text isBold fontSize="16px">

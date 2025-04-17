@@ -5,7 +5,7 @@ const { Ollama } = require("ollama");
 // Add debugger to help diagnose connection issues
 const DEBUG = true;
 function debug(...args) {
-  if (DEBUG) console.log('[OLLAMA DEBUG]', ...args);
+  if (DEBUG) console.log("[OLLAMA DEBUG]", ...args);
 }
 
 // Helper to verify Ollama connection
@@ -14,11 +14,15 @@ async function verifyOllamaConnection() {
   try {
     const response = await fetch(`${ollamaConfig.apiUrl}/api/tags`);
     if (!response.ok) {
-      debug(`Ollama connection failed: ${response.status} ${response.statusText}`);
+      debug(
+        `Ollama connection failed: ${response.status} ${response.statusText}`
+      );
       return false;
     }
     const data = await response.json();
-    debug(`Ollama connection successful, found ${data.models?.length || 0} models`);
+    debug(
+      `Ollama connection successful, found ${data.models?.length || 0} models`
+    );
     return true;
   } catch (error) {
     debug(`Ollama connection error: ${error.message}`);
@@ -36,23 +40,23 @@ async function routes(fastify, options) {
   fastify.get("/models", async (request, reply) => {
     try {
       debug(`Attempting to connect to Ollama API at: ${ollamaConfig.apiUrl}`);
-      
+
       // First verify connection using standard fetch
       const isConnected = await verifyOllamaConnection();
       if (!isConnected) {
-        return reply.code(503).send({ 
-          success: false, 
-          error: 'Ollama service is unavailable',
-          details: 'Connection to Ollama API failed'
+        return reply.code(503).send({
+          success: false,
+          error: "Ollama service is unavailable",
+          details: "Connection to Ollama API failed",
         });
       }
-      
-      debug('Creating ollama client');
-      
+
+      debug("Creating ollama client");
+
       // Create a new Ollama client instance
       const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
-      
-      debug('Ollama client created, requesting models list');
+
+      debug("Ollama client created, requesting models list");
       // Get models using ollama client with error handling
       try {
         const { models } = await ollamaClient.list();
@@ -60,9 +64,9 @@ async function routes(fastify, options) {
         return { success: true, data: models || [] };
       } catch (clientError) {
         debug(`Ollama client error: ${clientError.message}`);
-        
+
         // Fallback to direct fetch if client fails
-        debug('Falling back to direct fetch API call');
+        debug("Falling back to direct fetch API call");
         const response = await fetch(`${ollamaConfig.apiUrl}/api/tags`);
         const data = await response.json();
         return { success: true, data: data.models || [] };
@@ -113,12 +117,10 @@ async function routes(fastify, options) {
       let sourceText = sourceTranslations;
       for (const part of keyParts) {
         if (!sourceText[part]) {
-          return reply
-            .code(404)
-            .send({
-              success: false,
-              error: `Key "${key}" not found in source`,
-            });
+          return reply.code(404).send({
+            success: false,
+            error: `Key "${key}" not found in source`,
+          });
         }
         sourceText = sourceText[part];
       }
@@ -489,61 +491,40 @@ ${text}`;
     // First verify Ollama connection
     const isConnected = await verifyOllamaConnection();
     if (!isConnected) {
-      throw new Error('Ollama service is unavailable');
+      throw new Error("Ollama service is unavailable");
     }
-    
+
     // Configure Ollama API settings
-    debug(`Connecting to Ollama API at: ${ollamaConfig.apiUrl} for translation`);
+    debug(
+      `Connecting to Ollama API at: ${ollamaConfig.apiUrl} for translation`
+    );
     debug(`Using model: ${model}`);
-    debug(`Translating text of length ${text.length} from ${sourceLanguage} to ${targetLanguage}`);
-    
+    debug(
+      `Translating text of length ${text.length} from ${sourceLanguage} to ${targetLanguage}`
+    );
+
     // Create a new Ollama client instance
     const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
 
     // Generate translation using ollama client
-    debug('Sending translation request...');
-    try {
-      const { response } = await ollamaClient.generate({
+    debug("Sending translation request...");
+
+    const { response } = await ollamaClient.generate({
       model,
       prompt,
       stream: false,
       options: {
-        temperature: 0.3, // Lower temperature for more accurate translations
+        temperature: 0, // Lower temperature for more accurate translations
       },
     });
 
     return response.trim();
-    } catch (clientError) {
-      debug('Ollama client error during translation:', clientError);
-      
-      // Fall back to direct fetch API call
-      debug('Falling back to direct fetch API for translation');
-      const response = await fetch(`${ollamaConfig.apiUrl}/api/generate`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model,
-          prompt,
-          stream: false,
-          options: {
-            temperature: 0.3
-          }
-        })
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Ollama API error: ${response.statusText}`);
-      }
-      
-      const data = await response.json();
-      return data.response.trim();
-    }
   } catch (error) {
-    debug('Translation error details:', {
+    debug("Translation error details:", {
       message: error.message,
       name: error.name,
       code: error.code,
-      stack: error.stack
+      stack: error.stack,
     });
     console.error("Translation error:", error);
     throw error;

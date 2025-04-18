@@ -32,6 +32,8 @@ import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import ScreenSmallReactSvgUrl from "PUBLIC_DIR/images/icons/17/screen.small.react.svg?url";
 import ScreenFullReactSvgUrl from "PUBLIC_DIR/images/icons/17/screen.full.react.svg?url";
 
+import { TFile } from "../../../api/files/types";
+
 import { DeviceType } from "../../../enums";
 import { TViewAs } from "../../../types";
 
@@ -104,6 +106,7 @@ type ChatWidgetProps = {
   displayFileExtension: boolean;
   aiChatID: string;
   aiSelectedFolder: string | number;
+  vectorizedFiles: TFile[];
 };
 
 export const ChatWidget = memo(
@@ -117,6 +120,7 @@ export const ChatWidget = memo(
     displayFileExtension,
     aiChatID,
     aiSelectedFolder,
+    vectorizedFiles,
   }: ChatWidgetProps) => {
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [withSnackbar, setWithSnackbar] = useState(false);
@@ -172,6 +176,7 @@ export const ChatWidget = memo(
           displayFileExtension={displayFileExtension}
           aiChatID={aiChatID}
           aiSelectedFolder={aiSelectedFolder}
+          vectorizedFiles={vectorizedFiles}
         />
       </div>
     );

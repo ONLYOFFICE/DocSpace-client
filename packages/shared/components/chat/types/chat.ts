@@ -22,6 +22,7 @@ export type ChatMessageType = {
   category?: string;
   properties?: PropertiesType;
   content_blocks?: ContentBlock[];
+  fileIds?: string[];
 };
 
 export type SourceType = {

@@ -27,6 +27,7 @@
 import React from "react";
 
 import { DeviceType } from "../../enums";
+import { TFile } from "../../api/files/types";
 
 import ChatHeader from "./components/chat-header";
 import ChatBody from "./components/chat-body";
@@ -43,6 +44,7 @@ const Chat = ({
   displayFileExtension,
   aiChatID,
   aiSelectedFolder,
+  vectorizedFiles,
 
   getIcon,
 }: {
@@ -51,6 +53,8 @@ const Chat = ({
 
   aiChatID: string;
   aiSelectedFolder: string | number;
+
+  vectorizedFiles: TFile[];
 
   getIcon: (size: number, fileExst: string) => string;
 }) => {
@@ -64,7 +68,11 @@ const Chat = ({
           >
             <ModelStoreContextProvider selectedFolder={aiSelectedFolder}>
               <ChatHeader />
-              <ChatMessageBody />
+              <ChatMessageBody
+                displayFileExtension={displayFileExtension}
+                getIcon={getIcon}
+                vectorizedFiles={vectorizedFiles}
+              />
               <ChatInput
                 currentDeviceType={currentDeviceType}
                 displayFileExtension={displayFileExtension}

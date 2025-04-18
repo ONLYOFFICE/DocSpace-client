@@ -133,6 +133,7 @@ const Section = (props: SectionProps) => {
     displayFileExtension,
     aiChatID,
     aiSelectedFolder,
+    vectorizedFiles,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -345,6 +346,7 @@ const Section = (props: SectionProps) => {
           displayFileExtension={displayFileExtension!}
           aiChatID={aiChatID!}
           aiSelectedFolder={aiSelectedFolder!}
+          vectorizedFiles={vectorizedFiles!}
         />
 
         {isInfoPanelAvailable ? (

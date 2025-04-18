@@ -2,26 +2,30 @@
 @import "../../../../styles/mixins.scss";
 
 .filePreviewContainer {
-  position: absolute;
-
-  top: 12px;
-
-  margin: 0 8px 6px;
+  margin: 12px 0px 0px;
 
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   flex-wrap: wrap;
 
   gap: 8px;
 
-  width: 100%;
-  max-width: calc(100% - 56px);
-
   box-sizing: border-box;
 
-  @include tablet-and-below {
-    max-width: calc(100% - 48px);
+  &.withRemove {
+    position: absolute;
+
+    margin: 12px 8px 6px;
+
+    justify-content: flex-start;
+
+    width: 100%;
+    max-width: calc(100% - 56px);
+
+    @include tablet-and-below {
+      max-width: calc(100% - 48px);
+    }
   }
 }
 

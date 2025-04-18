@@ -28,6 +28,8 @@ import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 
+import { TFile } from "../../../../api/files/types";
+
 import { Scrollbar } from "../../../scrollbar";
 import type { Scrollbar as CustomScrollbar } from "../../../scrollbar/custom-scrollbar";
 
@@ -38,7 +40,15 @@ import Message from "./sub-components/message";
 
 import styles from "./ChatMessageBody.module.scss";
 
-const ChatMessageBody = () => {
+const ChatMessageBody = ({
+  displayFileExtension,
+  vectorizedFiles,
+  getIcon,
+}: {
+  displayFileExtension: boolean;
+  vectorizedFiles: TFile[];
+  getIcon: (size: number, fileExst: string) => string;
+}) => {
   const { messages } = useMessageStore();
   const scrollbarRef = useRef<CustomScrollbar>(null);
 
@@ -70,7 +80,15 @@ const ChatMessageBody = () => {
           {messages.map((message) => {
             if (message.message === "") return null;
 
-            return <Message key={message.id} message={message} />;
+            return (
+              <Message
+                key={message.id}
+                message={message}
+                displayFileExtension={displayFileExtension}
+                vectorizedFiles={vectorizedFiles}
+                getIcon={getIcon}
+              />
+            );
           })}
         </Scrollbar>
       )}

@@ -7,6 +7,7 @@ import { TSelectorItem } from "../../selector";
 
 import { ChatMessageType, PropertiesType } from "../types/chat";
 import { FlowType } from "../types/flow";
+import { extractFilesFromMessage, removeFolderFromMessage } from "../utils";
 
 export default class MessageStore {
   flowId: string = "";
@@ -64,9 +65,16 @@ export default class MessageStore {
         }
       }
 
+      const msgWithoutFolder = removeFolderFromMessage(message.text);
+
+      const { cleanedMessage, fileIds } =
+        extractFilesFromMessage(msgWithoutFolder);
+
+      const isSend = message.sender === "User";
+
       const chatMessage: ChatMessageType = {
-        isSend: message.sender === "User",
-        message: message.text,
+        isSend,
+        message: isSend ? cleanedMessage : message.text,
         sender_name: message.sender_name,
         files,
         id: message.id,
@@ -76,6 +84,7 @@ export default class MessageStore {
         content_blocks: message.content_blocks || [],
         category: message.category || "",
         properties: (message.properties || {}) as PropertiesType,
+        fileIds,
       };
 
       if (!chatMessage.session) {

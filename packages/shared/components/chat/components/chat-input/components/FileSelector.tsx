@@ -24,6 +24,7 @@ import { TSelectedFileInfo } from "../../../../../selectors/Files/FilesSelector.
 import { Portal } from "../../../../portal";
 
 import { useFilesStore } from "../../../store/filesStore";
+import { useMessageStore } from "../../../store/messageStore";
 
 type FilesSelectorProps = {
   showSelector: boolean;
@@ -41,6 +42,7 @@ const FilesSelector = ({
   currentDeviceType,
 }: FilesSelectorProps) => {
   const { setFiles } = useFilesStore();
+  const { aiSelectedFolder } = useMessageStore();
 
   const { t } = useTranslation(["Common"]);
 
@@ -95,7 +97,7 @@ const FilesSelector = ({
         <FilesSelectorComponent
           isPanelVisible={showSelector}
           getIsDisabled={getIsDisabled}
-          filterParam={FilterType.DocumentsOnly}
+          filterParam={FilterType.FilesOnly}
           withHeader
           headerProps={{
             headerLabel: t("Common:Select"),
@@ -108,7 +110,7 @@ const FilesSelector = ({
           onCancel={toggleSelector}
           filesSettings={{} as TFilesSettings}
           withBreadCrumbs={false}
-          currentFolderId={35}
+          currentFolderId={aiSelectedFolder}
           withoutBackButton
           withSearch
           isRoomsOnly={false}

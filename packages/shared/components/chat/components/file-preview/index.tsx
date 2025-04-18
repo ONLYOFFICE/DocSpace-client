@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 import { observer } from "mobx-react";
 
 import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/icons/16/close.circle.react.svg?url";
@@ -38,7 +39,12 @@ const FilePreview = ({
   }, [files.length, setWrapperHeight, withRemoveFile]);
 
   return (
-    <div className={styles.filePreviewContainer} ref={wrapperRef}>
+    <div
+      className={classNames(styles.filePreviewContainer, {
+        [styles.withRemove]: withRemoveFile,
+      })}
+      ref={wrapperRef}
+    >
       {files.length === 0
         ? null
         : files.map((file) => {

@@ -13,7 +13,6 @@ import { TSelectorItem } from "../../../../selector/Selector.types";
 
 import {
   ApplyFilterOption,
-  DeviceType,
   FilterType,
   FolderType,
 } from "../../../../../enums";
@@ -26,12 +25,7 @@ import { Portal } from "../../../../portal";
 import { useFilesStore } from "../../../store/filesStore";
 import { useMessageStore } from "../../../store/messageStore";
 
-type FilesSelectorProps = {
-  showSelector: boolean;
-  toggleSelector: () => void;
-
-  currentDeviceType: DeviceType;
-};
+import { FilesSelectorProps } from "../ChatInput.types";
 
 const disabledItems: Array<string | number> = [];
 

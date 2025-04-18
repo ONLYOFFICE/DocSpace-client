@@ -27,8 +27,9 @@
 import React from "react";
 
 import styles from "./ChatBody.module.scss";
+import { ChatBodyProps } from "./ChatBody.types";
 
-const ChatBody = ({ children }: { children: React.ReactNode }) => {
+const ChatBody = ({ children }: ChatBodyProps) => {
   return <div className={styles.chatBody}>{children}</div>;
 };
 

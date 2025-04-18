@@ -32,8 +32,6 @@ import { useTranslation } from "react-i18next";
 import SelectReactSvgUrl from "PUBLIC_DIR/images/select.react.svg?url";
 import SendReactSvgUrl from "PUBLIC_DIR/images/icons/12/arrow.up.react.svg?url";
 
-import { DeviceType } from "../../../../enums";
-
 import { Textarea } from "../../../textarea";
 import { IconButton } from "../../../icon-button";
 
@@ -46,16 +44,13 @@ import FilePreview from "../file-preview";
 import FilesSelector from "./components/FileSelector";
 
 import styles from "./ChatInput.module.scss";
+import { ChatInputProps } from "./ChatInput.types";
 
 const ChatInput = ({
   currentDeviceType,
   displayFileExtension,
   getIcon,
-}: {
-  currentDeviceType: DeviceType;
-  displayFileExtension: boolean;
-  getIcon: (size: number, fileExst: string) => string;
-}) => {
+}: ChatInputProps) => {
   const { flow } = useCurrentFlowStore();
   const { t } = useTranslation(["Common"]);
 

@@ -6,11 +6,11 @@ import CloseCircleReactSvgUrl from "PUBLIC_DIR/images/icons/16/close.circle.reac
 
 import { Text } from "../../../text";
 import { IconButton } from "../../../icon-button";
-import { TSelectorItem } from "../../../selector";
 
 import { useFilesStore } from "../../store/filesStore";
 
 import styles from "./FilePreview.module.scss";
+import { TFilePreviewProps } from "./FilePreview.types";
 
 const FilePreview = ({
   files,
@@ -19,14 +19,7 @@ const FilePreview = ({
   withRemoveFile,
 
   getIcon,
-}: {
-  files: TSelectorItem[];
-  displayFileExtension: boolean;
-
-  withRemoveFile?: boolean;
-
-  getIcon: (size: number, fileExst: string) => string;
-}) => {
+}: TFilePreviewProps) => {
   const { removeFile, setWrapperHeight } = useFilesStore();
 
   const wrapperRef = React.useRef<HTMLDivElement>(null);

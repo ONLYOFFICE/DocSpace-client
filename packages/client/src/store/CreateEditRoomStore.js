@@ -516,7 +516,7 @@ class CreateEditRoomStore {
     const logoCover = cover
       ? { cover: cover.cover, color: cover.color }
       : logo
-        ? { cover: logo.cover.id, color: logo.color }
+        ? { cover: logo.cover?.id, color: logo.color }
         : null;
 
     const createRoomData = {

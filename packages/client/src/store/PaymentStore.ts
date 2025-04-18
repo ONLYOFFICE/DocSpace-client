@@ -123,10 +123,10 @@ class PaymentStore {
   cardLinked = "";
 
   transactionHistory: TTransactionHistory | {} = {};
+
   payerInfo = null;
 
-
-  automaticPayments: TAutoTopUpSettings | null = null;
+  autoPayments: TAutoTopUpSettings | null = null;
 
   constructor(
     userStore: UserStore,
@@ -312,10 +312,7 @@ class PaymentStore {
           requests.push(this.setPaymentAccount());
         }
 
-        requests.push(
-          this.fetchAutoPayments(),
-          // this.fetchTransactionHistory(),
-        );
+        requests.push(this.fetchAutoPayments(), this.fetchTransactionHistory());
       } else {
         requests.push(this.fetchCardLinked());
       }

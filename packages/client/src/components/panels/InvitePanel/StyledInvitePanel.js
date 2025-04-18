@@ -403,14 +403,14 @@ const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: ${(props) =>
-    props.primary ? "14px" : props.info ? "11px" : "12px"};
-  font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
+    props.$primary ? "14px" : props.$info ? "11px" : "12px"};
+  font-weight: ${(props) => (props.$primary || props.$info ? "600" : "400")};
 
   color: ${(props) =>
-    (props.primary && !props.disabled) || props.info
+    (props.$primary && !props.disabled) || props.$info
       ? props.theme.text.color
       : props.theme.text.emailColor};
-  ${(props) => props.info && `margin-inline-start: auto`}
+  ${(props) => props.$info && `margin-inline-start: auto`}
 `;
 
 const StyledEditButton = styled(Button)`

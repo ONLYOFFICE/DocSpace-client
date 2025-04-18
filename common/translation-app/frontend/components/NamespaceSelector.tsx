@@ -13,6 +13,8 @@ interface NamespaceSelectorProps {
   projectName: string;
   onChange: (namespace: string) => void;
   onNamespaceUpdated?: () => void;
+  onCheckErrors?: (namespace: string) => void;
+  onRunLLMAnalysis?: (namespace: string) => void;
 }
 
 const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
@@ -21,6 +23,8 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
   projectName,
   onChange,
   onNamespaceUpdated,
+  onCheckErrors,
+  onRunLLMAnalysis,
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [contextMenu, setContextMenu] = useState<{
@@ -249,6 +253,8 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
           onMove={handleMove}
           onDelete={handleDelete}
           onCreateKey={handleCreateKey}
+          onCheckErrors={onCheckErrors || (() => {})}
+          onRunLLMAnalysis={onRunLLMAnalysis}
           refreshTranslations={refreshTranslations}
         />
       )}

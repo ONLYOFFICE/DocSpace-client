@@ -9,6 +9,8 @@ interface NamespaceContextMenuProps {
   onMove: (namespace: string) => void;
   onDelete: (namespace: string) => void;
   onCreateKey: (namespace: string) => void;
+  onCheckErrors: (namespace: string) => void;
+  onRunLLMAnalysis?: (namespace: string) => void;
   refreshTranslations?: () => void;
 }
 
@@ -21,6 +23,8 @@ const NamespaceContextMenu: React.FC<NamespaceContextMenuProps> = ({
   onMove,
   onDelete,
   onCreateKey,
+  onCheckErrors,
+  onRunLLMAnalysis,
   refreshTranslations,
 }) => {
   // Close menu when clicking anywhere else
@@ -129,6 +133,60 @@ const NamespaceContextMenu: React.FC<NamespaceContextMenuProps> = ({
           Move To
         </span>
       </button>
+
+      <button
+        className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
+        onClick={() => {
+          onCheckErrors(namespace);
+          onClose();
+        }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-4 w-4 mr-2 text-blue-500 dark:text-blue-400"
+          fill="none" 
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span className="text-gray-900 dark:text-gray-200 font-medium">
+          Check Translations
+        </span>
+      </button>
+
+      {onRunLLMAnalysis && (
+        <button
+          className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
+          onClick={() => {
+            onRunLLMAnalysis(namespace);
+            onClose();
+          }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 mr-2 text-purple-500 dark:text-purple-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 10V3L4 14h7v7l9-11h-7z"
+            />
+          </svg>
+          <span className="text-gray-900 dark:text-gray-200 font-medium">
+            LLM Translation Analysis
+          </span>
+        </button>
+      )}
 
       <button
         className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"

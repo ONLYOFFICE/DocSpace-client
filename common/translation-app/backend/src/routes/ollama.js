@@ -81,6 +81,228 @@ async function routes(fastify, options) {
     }
   });
 
+    // Validate translations using LLM
+  fastify.post("/validate/translation", async (request, reply) => {
+    try {
+      const {
+        projectName,
+        sourceLanguage,
+        targetLanguage,
+        namespace,
+        key,
+        sourceText,
+        targetText,
+        model,
+      } = request.body;
+
+      if (!model) {
+        return reply
+          .code(400)
+          .send({ success: false, error: "Model is required" });
+      }
+
+      if (!sourceText || !targetText) {
+        return reply
+          .code(400)
+          .send({ success: false, error: "Source and target texts are required" });
+      }
+
+      // Send notification that validation is starting
+      fastify.io.emit("validation:started", {
+        projectName,
+        targetLanguage,
+        namespace,
+        key,
+      });
+
+      // Validate with Ollama
+      const result = await validateTranslation(
+        sourceText,
+        targetText,
+        sourceLanguage,
+        targetLanguage,
+        model
+      );
+
+      // Send notification that validation is completed
+      fastify.io.emit("validation:completed", {
+        projectName,
+        targetLanguage,
+        namespace,
+        key,
+        result,
+      });
+
+      return {
+        success: true,
+        data: result,
+      };
+    } catch (error) {
+      request.log.error(error);
+      return reply.code(500).send({
+        success: false,
+        error: "Failed to validate translation",
+        details: error.message,
+      });
+    }
+  });
+
+  // Validate multiple translations in a namespace
+  fastify.post("/validate/namespace", async (request, reply) => {
+    try {
+      const {
+        projectName,
+        sourceLanguage,
+        targetLanguage,
+        namespace,
+        model,
+        maxKeys = 10,  // Limit the number of keys to validate to avoid overloading
+      } = request.body;
+
+      if (!model) {
+        return reply
+          .code(400)
+          .send({ success: false, error: "Model is required" });
+      }
+
+      // Get source and target translations
+      const sourceTranslations = await fsUtils.readTranslationFile(
+        projectName,
+        sourceLanguage,
+        namespace
+      );
+
+      const targetTranslations = await fsUtils.readTranslationFile(
+        projectName,
+        targetLanguage,
+        namespace
+      );
+
+      if (!sourceTranslations) {
+        return reply.code(404).send({
+          success: false,
+          error: "Source translation file not found",
+        });
+      }
+
+      if (!targetTranslations) {
+        return reply.code(404).send({
+          success: false,
+          error: "Target translation file not found",
+        });
+      }
+
+      // Flatten the translations for easier processing
+      const flattenedSource = flattenObject(sourceTranslations);
+      const flattenedTarget = flattenObject(targetTranslations);
+
+      // Select keys that exist in both source and target
+      const keysToValidate = Object.keys(flattenedSource)
+        .filter(key => key in flattenedTarget && 
+                 typeof flattenedSource[key] === 'string' && 
+                 typeof flattenedTarget[key] === 'string' &&
+                 flattenedSource[key] && flattenedTarget[key])
+        .slice(0, maxKeys);
+
+      // Track overall progress
+      const totalKeys = keysToValidate.length;
+      let completedKeys = 0;
+
+      // Send notification that validation is starting
+      fastify.io.emit("validation:batch:started", {
+        projectName,
+        namespace,
+        sourceLanguage,
+        targetLanguage,
+        total: totalKeys,
+      });
+
+      // Create a promise for each key validation
+      const results = {};
+
+      // Process keys sequentially to avoid overwhelming the LLM service
+      for (const key of keysToValidate) {
+        try {
+          const sourceText = flattenedSource[key];
+          const targetText = flattenedTarget[key];
+
+          // Validate the translation
+          const validationResult = await validateTranslation(
+            sourceText,
+            targetText,
+            sourceLanguage,
+            targetLanguage,
+            model
+          );
+
+          results[key] = validationResult;
+
+          // Update progress
+          completedKeys++;
+          fastify.io.emit("validation:batch:progress", {
+            projectName,
+            namespace,
+            sourceLanguage,
+            targetLanguage,
+            progress: completedKeys,
+            total: totalKeys,
+            currentKey: key,
+          });
+        } catch (error) {
+          console.error(`Error validating ${key}:`, error);
+          results[key] = {
+            isValid: false,
+            errors: [{ message: `Validation failed: ${error.message}` }],
+            suggestions: [],
+          };
+          
+          // Update progress even when error occurs
+          completedKeys++;
+          fastify.io.emit("validation:batch:progress", {
+            projectName,
+            namespace,
+            sourceLanguage,
+            targetLanguage,
+            progress: completedKeys,
+            total: totalKeys,
+            currentKey: key,
+            error: error.message,
+          });
+        }
+      }
+
+      // Send notification that validation is completed
+      fastify.io.emit("validation:batch:completed", {
+        projectName,
+        namespace,
+        sourceLanguage,
+        targetLanguage,
+        total: totalKeys,
+        completed: completedKeys,
+      });
+
+      return {
+        success: true,
+        data: {
+          results,
+          stats: {
+            total: totalKeys,
+            completed: completedKeys,
+            valid: Object.values(results).filter(r => r.isValid).length,
+            invalid: Object.values(results).filter(r => !r.isValid).length,
+          },
+        },
+      };
+    } catch (error) {
+      request.log.error(error);
+      return reply.code(500).send({
+        success: false,
+        error: "Failed to validate namespace translations",
+        details: error.message,
+      });
+    }
+  });
+
   // Translate a single key
   fastify.post("/translate/key", async (request, reply) => {
     try {
@@ -527,6 +749,126 @@ ${text}`;
       stack: error.stack,
     });
     console.error("Translation error:", error);
+    throw error;
+  }
+}
+
+/**
+ * Helper to flatten a nested object with dot notation
+ */
+function flattenObject(obj, prefix = "", result = {}) {
+  for (const key in obj) {
+    const newKey = prefix ? `${prefix}.${key}` : key;
+    if (typeof obj[key] === "object" && obj[key] !== null) {
+      flattenObject(obj[key], newKey, result);
+    } else {
+      result[newKey] = obj[key];
+    }
+  }
+  return result;
+}
+
+/**
+ * Validate a translation using Ollama LLM
+ */
+async function validateTranslation(
+  sourceText,
+  targetText,
+  sourceLanguage,
+  targetLanguage,
+  model
+) {
+  try {
+    // Get language information for better context
+    const sourceInfo = getLanguageInfo(sourceLanguage);
+    const targetInfo = getLanguageInfo(targetLanguage);
+
+    // Create a detailed prompt for validation
+    const prompt = `You are a professional translation validator.
+
+Source language: ${sourceInfo.name}
+Target language: ${targetInfo.name}
+
+Source text: "${sourceText}"
+Translated text: "${targetText}"
+
+Your task is to analyze if the translation is accurate and identify any errors.
+
+Provide your response in this exact JSON format with no extra text:
+{
+  "isValid": true/false,
+  "errors": [{ "type": "error_type", "message": "detailed error description" }],
+  "suggestions": ["suggested correction if there are errors"],
+  "rating": 1-5 score of translation quality
+}
+
+Error types can be: "missing_content", "mistranslation", "grammar", "style", "cultural_context".
+Keep your analysis concise and precise.`;
+
+    // Verify Ollama connection
+    const isConnected = await verifyOllamaConnection();
+    if (!isConnected) {
+      throw new Error("Ollama service is unavailable");
+    }
+
+    // Configure Ollama API
+    debug(`Connecting to Ollama API at: ${ollamaConfig.apiUrl} for validation`);
+    debug(`Using model: ${model}`);
+
+    // Create Ollama client
+    const ollamaClient = new Ollama({ host: ollamaConfig.apiUrl });
+
+    // Generate validation using ollama client
+    debug("Sending validation request...");
+
+    const { response } = await ollamaClient.generate({
+      model,
+      prompt,
+      stream: false,
+      options: {
+        temperature: 0, // Lower temperature for more consistent analysis
+      },
+    });
+
+    // Parse the JSON response
+    try {
+      // Extract JSON from the response (in case there's any extra text)
+      const jsonMatch = response.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) {
+        throw new Error("Invalid JSON format in response");
+      }
+      
+      const jsonStr = jsonMatch[0];
+      const result = JSON.parse(jsonStr);
+      
+      // Ensure the result has the expected structure
+      return {
+        isValid: Boolean(result.isValid),
+        errors: Array.isArray(result.errors) ? result.errors : [],
+        suggestions: Array.isArray(result.suggestions) ? result.suggestions : [],
+        rating: Number(result.rating) || 0,
+      };
+    } catch (jsonError) {
+      debug("Failed to parse LLM response as JSON:", jsonError);
+      debug("Raw response:", response);
+      
+      // Fallback: create a structured response based on the text
+      return {
+        isValid: false,
+        errors: [{ type: "validation_error", message: "Failed to analyze translation" }],
+        suggestions: [],
+        rating: 0,
+        rawResponse: response.trim(),
+      };
+    }
+  } catch (error) {
+    debug("Validation error details:", {
+      message: error.message,
+      name: error.name,
+      code: error.code,
+      stack: error.stack,
+    });
+    console.error("Translation validation error:", error);
     throw error;
   }
 }

@@ -7,6 +7,8 @@ import { useLanguageStore } from "@/store/languageStore";
 import { useNamespaceStore } from "@/store/namespaceStore";
 import { useTranslationStore } from "@/store/translationStore";
 import { useOllamaStore } from "@/store/ollamaStore";
+import { useValidationStore } from "@/store/validationStore";
+import { useOllamaValidationStore } from "@/store/ollamaValidationStore";
 import { initSocket, getSocket } from "@/lib/socket";
 import { useEffect as useReactEffect } from "react";
 
@@ -16,6 +18,8 @@ import TranslationTable from "@/components/TranslationTable";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import ErrorDisplay from "@/components/ErrorDisplay";
 import NamespaceModal from "@/components/NamespaceModal";
+import TranslationErrorModal from "@/components/TranslationErrorModal";
+import LLMValidationProgressModal from "@/components/LLMValidationProgressModal";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function ProjectPage() {
@@ -26,6 +30,13 @@ export default function ProjectPage() {
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
   const [isNamespaceModalOpen, setIsNamespaceModalOpen] =
     useState<boolean>(false);
+  const [namespaceForContextMenu, setNamespaceForContextMenu] = useState<string | null>(null);
+  const [isProgressModalOpen, setIsProgressModalOpen] = useState<boolean>(false);
+  const [llmValidationParams, setLlmValidationParams] = useState<{
+    sourceLang: string;
+    targetLang: string;
+    namespace: string;
+  } | null>(null);
 
   // Stores
   const {
@@ -34,6 +45,25 @@ export default function ProjectPage() {
     loading: projectLoading,
     error: projectError,
   } = useProjectStore();
+  
+  const {
+    validateNamespace,
+    errors: validationErrors,
+    loading: validationLoading,
+    isValidationModalOpen,
+    setIsValidationModalOpen,
+    resetState: resetValidationState,
+  } = useValidationStore();
+  
+  const {
+    validateNamespaceLLM,
+    errors: llmValidationErrors,
+    loading: llmValidationLoading,
+    isValidationModalOpen: isLLMValidationModalOpen,
+    setIsValidationModalOpen: setLLMValidationModalOpen,
+    progress: llmValidationProgress,
+    resetState: resetLLMValidationState,
+  } = useOllamaValidationStore();
 
   const {
     languages,
@@ -80,11 +110,23 @@ export default function ProjectPage() {
       initSocket();
       setupSocketListeners();
       checkOllamaConnection();
+      
+      // Initialize LLM validation socket listeners
+      const setupValidationSockets = async () => {
+        // Wait briefly to ensure socket is connected
+        await new Promise(resolve => setTimeout(resolve, 500));
+        // Call the setupSocketListeners from the store, not from the function
+        useOllamaValidationStore.getState().setupSocketListeners();
+      };
+      
+      setupValidationSockets();
     }
 
     // Cleanup function
     return () => {
       setCurrentNamespace(null);
+      // Clean up socket listeners
+      useOllamaValidationStore.getState().cleanupSocketListeners();
     };
   }, [projectName]);
 
@@ -151,6 +193,75 @@ export default function ProjectPage() {
   const handleNamespaceChange = (namespace: string) => {
     setCurrentNamespace(namespace);
   };
+  
+  // Handle translation error checking
+  const handleCheckTranslationErrors = (namespace: string) => {
+    validateNamespace(projectName, namespace, selectedLanguages);
+  };
+  
+  // Handle LLM translation analysis
+  const handleRunLLMAnalysis = (namespace: string) => {
+    if (!selectedModel) {
+      alert("Please select an Ollama model first");
+      return;
+    }
+    
+    // Default to base language (usually 'en') if available
+    const sourceLang = baseLanguage || "en";
+    // Pick the first non-base language as target
+    const targetLang = selectedLanguages.find(lang => lang !== sourceLang) || 
+                     (selectedLanguages.length > 0 ? selectedLanguages[0] : "");
+    
+    if (!targetLang) {
+      alert("Please select at least one language for validation");
+      return;
+    }
+    
+    // Store the params and show progress modal
+    setLlmValidationParams({
+      sourceLang,
+      targetLang,
+      namespace
+    });
+    setIsProgressModalOpen(true);
+    
+    // Run LLM validation
+    validateNamespaceLLM(
+      projectName,
+      namespace,
+      sourceLang,
+      targetLang,
+      selectedModel
+    );
+  };
+  
+  // Handle modal closes - reset appropriate state
+  const handleValidationModalClose = () => {
+    setIsValidationModalOpen(false);
+    // Don't reset state immediately to avoid flickering if we're going to show LLM validation
+    setTimeout(() => {
+      if (!isLLMValidationModalOpen) {
+        resetValidationState();
+      }
+    }, 500);
+  };
+  
+  const handleLLMValidationModalClose = () => {
+    setLLMValidationModalOpen(false);
+    resetLLMValidationState();
+  };
+  
+  const handleProgressModalClose = () => {
+    setIsProgressModalOpen(false);
+  };
+  
+  // Monitor progress for automatic modal transitions
+  useEffect(() => {
+    // When LLM validation completes and results are available, close progress modal
+    if (isProgressModalOpen && !llmValidationLoading && llmValidationErrors.length > 0) {
+      setIsProgressModalOpen(false);
+    }
+  }, [isProgressModalOpen, llmValidationLoading, llmValidationErrors]);
 
   // Back to projects list
   const handleBackClick = () => {
@@ -297,6 +408,8 @@ export default function ProjectPage() {
               onNamespaceUpdated={() =>
                 fetchNamespaces(projectName, baseLanguage)
               }
+              onCheckErrors={handleCheckTranslationErrors}
+              onRunLLMAnalysis={ollamaConnected ? handleRunLLMAnalysis : undefined}
             />
             {namespaces.length > 0 && (
               <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
@@ -343,6 +456,41 @@ export default function ProjectPage() {
         projectName={projectName}
         onNamespaceAdded={handleNamespaceChange}
       />
+      
+      {/* Basic Translation Error Modal */}
+      <TranslationErrorModal
+        isOpen={isValidationModalOpen}
+        onClose={handleValidationModalClose}
+        namespace={namespaceForContextMenu || currentNamespace || ''}
+        projectName={projectName}
+        errors={validationErrors}
+        loading={validationLoading}
+      />
+      
+      {/* LLM-powered Translation Error Modal */}
+      <TranslationErrorModal
+        isOpen={isLLMValidationModalOpen}
+        onClose={handleLLMValidationModalClose}
+        namespace={namespaceForContextMenu || currentNamespace || ''}
+        projectName={projectName}
+        errors={llmValidationErrors}
+        loading={llmValidationLoading}
+        isLLMValidation={true}
+        progress={llmValidationProgress}
+      />
+      
+      {/* LLM Validation Progress Modal */}
+      {llmValidationParams && (
+        <LLMValidationProgressModal
+          isOpen={isProgressModalOpen && llmValidationLoading}
+          onClose={handleProgressModalClose}
+          namespace={llmValidationParams.namespace}
+          projectName={projectName}
+          sourceLanguage={llmValidationParams.sourceLang}
+          targetLanguage={llmValidationParams.targetLang}
+          progress={llmValidationProgress}
+        />
+      )}
     </div>
   );
 }

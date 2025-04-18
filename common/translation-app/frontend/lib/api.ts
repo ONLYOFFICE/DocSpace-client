@@ -89,6 +89,43 @@ export const translateNamespace = (
   model: string
 ) => api.post('/ollama/translate/namespace', { projectName, sourceLanguage, targetLanguage, namespace, model });
 
+// Validation with Ollama LLM
+export const validateTranslation = (
+  projectName: string,
+  sourceLanguage: string,
+  targetLanguage: string,
+  namespace: string,
+  key: string,
+  sourceText: string,
+  targetText: string,
+  model: string
+) => api.post('/ollama/validate/translation', { 
+  projectName, 
+  sourceLanguage, 
+  targetLanguage, 
+  namespace, 
+  key, 
+  sourceText, 
+  targetText, 
+  model 
+});
+
+export const validateNamespaceTranslations = (
+  projectName: string,
+  sourceLanguage: string,
+  targetLanguage: string,
+  namespace: string,
+  model: string,
+  maxKeys?: number
+) => api.post('/ollama/validate/namespace', { 
+  projectName, 
+  sourceLanguage, 
+  targetLanguage, 
+  namespace, 
+  model,
+  maxKeys
+});
+
 // Translation Statistics
 export const fetchTranslationStats = async (projectName?: string) => {
   const response = await api.get(projectName 

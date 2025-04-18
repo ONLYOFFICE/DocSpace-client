@@ -71,12 +71,7 @@ const HistoryContent = ({ sectionWidth, item, locale, theme }) => {
       sectionWidth={sectionWidth}
     >
       <div className="user-container-wrapper">
-        <Text
-          fontWeight={600}
-          fontSize="14px"
-          isTextOverflow
-          className="settings_unavailable"
-        >
+        <Text fontWeight={600} fontSize="14px" className="settings_unavailable">
           {item.user}
         </Text>
       </div>

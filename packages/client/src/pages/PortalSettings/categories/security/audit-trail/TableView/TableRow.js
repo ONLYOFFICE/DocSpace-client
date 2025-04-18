@@ -102,7 +102,6 @@ const PeopleTableRow = (props) => {
           title={email}
           fontSize="12px"
           fontWeight={600}
-          isTextOverflow
           className="settings_unavailable"
         >
           {item.context}
@@ -115,7 +114,6 @@ const PeopleTableRow = (props) => {
           title={email}
           fontSize="12px"
           fontWeight={600}
-          isTextOverflow
           className="settings_unavailable"
         >
           {item.action}

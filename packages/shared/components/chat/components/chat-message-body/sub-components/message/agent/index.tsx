@@ -5,7 +5,7 @@ import { Text } from "../../../../../../text";
 import { ChatMessageType } from "../../../../../types/chat";
 
 import styles from "./Agent.module.scss";
-import { MarkdownField } from "../markdown";
+import { MarkdownField } from "../Markdown-field";
 
 const Agent = ({ content }: { content: ChatMessageType["content_blocks"] }) => {
   const [isOpen, setIsOpen] = React.useState(false);

@@ -50,7 +50,12 @@ const EmptyScreen = () => {
           { [styles.closed]: closed },
         )}
       >
-        <Text fontSize="12px" lineHeight="16px" fontWeight={400}>
+        <Text
+          fontSize="12px"
+          lineHeight="16px"
+          fontWeight={400}
+          className={styles.chatMessageTextColor}
+        >
           {t("Common:AIChatEmptyMessage")}
         </Text>
         <IconButton

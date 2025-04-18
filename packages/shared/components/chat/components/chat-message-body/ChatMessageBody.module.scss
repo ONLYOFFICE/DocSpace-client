@@ -61,10 +61,10 @@
   &.closed {
     visibility: hidden;
   }
-}
 
-.chatEmptyHelpMessage {
-  margin-bottom: 24px;
+  .chatEmptyHelpMessage {
+    margin-bottom: 24px;
+  }
 }
 
 .chatMessagePadding {
@@ -72,11 +72,15 @@
 }
 
 .chatMessageUser {
-  background-color: rgba(71, 129, 209, 0.1);
+  background-color: #4781d11a;
 }
 
 .chatMessageAI {
-  background-color: #f3f4f4;
+  background-color: var(--chat-message-ai-background-color);
+}
+
+.chatMessageTextColor {
+  color: var(--chat-message-color);
 }
 
 .chatMessageBorderRadius {
@@ -126,4 +130,41 @@
   max-width: calc(100% - 40px);
 
   box-sizing: border-box;
+}
+
+.codeContainer {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--chat-message-code-block-background-color);
+
+  border-radius: 3px;
+
+  box-sizing: border-box;
+
+  margin: 8px 0;
+
+  .codeHeader {
+    width: 100%;
+
+    height: 32px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 8px;
+
+    box-sizing: border-box;
+
+    border-bottom: 1px solid var(--chat-message-code-block-separator-color);
+  }
+
+  .codeBody {
+    background-color: var(--chat-message-code-block-background-color);
+  }
 }

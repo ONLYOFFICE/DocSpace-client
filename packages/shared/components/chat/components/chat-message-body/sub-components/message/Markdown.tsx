@@ -1,11 +1,14 @@
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
+// @ts-expect-error we cant change our config
+import rehypeMathjax from "rehype-mathjax";
 
-import { Text } from "../../../../../../text";
+import { Text } from "../../../../../text";
 
-import Code from "./Code";
-// import CodeTabsComponent from "../../../../../../components/core/codeTabsComponent/ChatCodeTabComponent";
+import styles from "../../ChatMessageBody.module.scss";
+
+import CodeBlock from "./CodeBlock";
 
 type MarkdownFieldProps = {
   chatMessage: string;
@@ -27,7 +30,7 @@ export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
     <div style={{ width: "100%" }}>
       <Markdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw]}
+        rehypePlugins={[rehypeRaw, rehypeMathjax]}
         components={{
           p: ({ children }) => {
             return (
@@ -35,7 +38,7 @@ export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
                 fontSize="12px"
                 lineHeight="16px"
                 fontWeight={400}
-                color="#555F65"
+                className={styles.chatMessageTextColor}
               >
                 {children as React.ReactNode}
               </Text>
@@ -50,8 +53,11 @@ export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
           pre: ({ children }) => {
             return <pre>{children}</pre>;
           },
-          code: ({ className, children }) => {
+          code: ({ className, children, ...props }) => {
             let content = children as string;
+
+            const inline = content.indexOf("\n") === -1;
+
             if (
               Array.isArray(children) &&
               children.length === 1 &&
@@ -74,8 +80,19 @@ export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
                 }
               }
 
+              if (inline) {
+                return (
+                  <code className={className} {...props}>
+                    {content}
+                  </code>
+                );
+              }
+
               return (
-                <Code language={match?.[1].toLowerCase()} content={content} />
+                <CodeBlock
+                  language={match?.[1].toLowerCase()}
+                  content={content}
+                />
               );
             }
           },

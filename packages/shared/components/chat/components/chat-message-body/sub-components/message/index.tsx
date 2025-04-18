@@ -14,7 +14,7 @@ import FilePreview from "../../../file-preview";
 import styles from "../../ChatMessageBody.module.scss";
 
 import Agent from "./agent";
-import { MarkdownField } from "./markdown";
+import { MarkdownField } from "./Markdown";
 
 const Message = ({
   message,

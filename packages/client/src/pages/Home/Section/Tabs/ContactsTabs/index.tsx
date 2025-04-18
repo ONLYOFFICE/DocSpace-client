@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -38,7 +37,6 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import Filter from "@docspace/shared/api/people/filter";
-import api from "@docspace/shared/api";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
@@ -69,7 +67,7 @@ type ContactsTabsProps = {
   isVisitor: TUser["isVisitor"];
   isCollaborator: TUser["isCollaborator"];
   isRoomAdmin: TUser["isRoomAdmin"];
-  allowInvitingMembers: boolean;
+  showGuestsTab: boolean;
 };
 
 const ContactsTabs = ({
@@ -89,27 +87,13 @@ const ContactsTabs = ({
   guestsTabVisited,
 
   contactsTab,
-  allowInvitingMembers,
+  showGuestsTab,
 }: ContactsTabsProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [showGuestsTab, setShowGuestsTab] = useState(true);
-
   const contactsView = getContactsView(location);
-
-  const checkGuests = async () => {
-    const filter = Filter.getDefault();
-    filter.area = "guests";
-    const res = await api.people.getUserList(filter);
-
-    setShowGuestsTab(!!res.total);
-  };
-
-  useEffect(() => {
-    if (!allowInvitingMembers) checkGuests();
-  }, []);
 
   const onPeople = () => {
     setUsersSelection([]);
@@ -198,7 +182,6 @@ export default inject(
     peopleStore,
     clientLoadingStore,
     userStore,
-    settingsStore,
   }: {
     peopleStore: PeopleStore;
     clientLoadingStore: ClientLoadingStore;
@@ -207,7 +190,6 @@ export default inject(
   }) => {
     const { showTabsLoader, setIsSectionBodyLoading } = clientLoadingStore;
     const { usersStore, groupsStore } = peopleStore;
-    const { allowInvitingMembers } = settingsStore;
 
     const {
       isVisitor,
@@ -250,7 +232,6 @@ export default inject(
       guestsTabVisited,
 
       contactsTab,
-      allowInvitingMembers,
     };
   },
 )(observer(ContactsTabs));

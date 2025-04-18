@@ -23,7 +23,12 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
+
+import api from "@docspace/shared/api";
+import Filter from "@docspace/shared/api/people/filter";
 
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { inject, observer } from "mobx-react";
@@ -36,25 +41,45 @@ const SectionSubmenuContent = ({
   isRecentTab,
   isRoomsFolderRoot,
   isTemplatesFolder,
+  allowInvitingGuests,
 }) => {
+  const [showGuestsTab, setShowGuestsTab] = useState(true);
+  const [isCheckGuests, setIsCheckGuests] = useState(false);
+
   const location = useLocation();
 
   const isContacts = getContactsView(location);
 
+  const checkGuests = async () => {
+    const filter = Filter.getDefault();
+    filter.area = "guests";
+    const res = await api.people.getUserList(filter);
+    const show = !!res.total;
+
+    if (!show) setShowGuestsTab(show);
+    setIsCheckGuests(true);
+  };
+
+  if (isContacts && !allowInvitingGuests) checkGuests();
+
   if (isPersonalRoom || isRecentTab) return <MyDocumentsTabs />;
-  if (isContacts) return <ContactsTabs />;
+  if (isContacts && (allowInvitingGuests || isCheckGuests))
+    return <ContactsTabs showGuestsTab={showGuestsTab} />;
   if (isRoomsFolderRoot || isTemplatesFolder) return <RoomTemplatesTabs />;
   return null;
 };
 
-export default inject(({ treeFoldersStore }) => {
+export default inject(({ treeFoldersStore, settingsStore }) => {
   const { isPersonalRoom, isRecentTab, isRoomsFolderRoot, isTemplatesFolder } =
     treeFoldersStore;
+
+  const { allowInvitingGuests } = settingsStore;
 
   return {
     isPersonalRoom,
     isRecentTab,
     isRoomsFolderRoot,
     isTemplatesFolder,
+    allowInvitingGuests,
   };
 })(observer(SectionSubmenuContent));

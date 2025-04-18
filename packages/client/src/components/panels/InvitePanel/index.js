@@ -79,7 +79,7 @@ const InvitePanel = ({
   standalone,
   hideSelector,
   isUserTariffLimit,
-  allowInvitingMembers,
+
   allowInvitingGuests,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
@@ -218,8 +218,8 @@ const InvitePanel = ({
   };
 
   useEffect(() => {
-    if (!allowInvitingMembers) checkGuests();
-  }, [allowInvitingMembers]);
+    if (!allowInvitingGuests) checkGuests();
+  }, [allowInvitingGuests]);
 
   useEffect(() => {
     if (roomId === -1) {
@@ -600,8 +600,7 @@ export default inject(
     currentQuotaStore,
     userStore,
   }) => {
-    const { theme, standalone, allowInvitingMembers, allowInvitingGuests } =
-      settingsStore;
+    const { theme, standalone, allowInvitingGuests } = settingsStore;
 
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
@@ -648,7 +647,7 @@ export default inject(
       hideSelector: invitePanelOptions.hideSelector,
       isUserTariffLimit,
       isAdmin,
-      allowInvitingMembers,
+
       allowInvitingGuests,
     };
   },

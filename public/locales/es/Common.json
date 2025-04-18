@@ -288,7 +288,7 @@
   "FromDevice": "Desde el dispositivo",
   "FromPortal": "De {{productName}}",
   "FromTemplate": "Desde plantilla",
-  "FromTemplateRoomInfo": "Cree una sala basada en una plantilla. Todos los ajustes, usuarios, carpetas y archivos se tomarán de la plantilla de sala seleccionada.",
+  "FromTemplateRoomInfo": "Cree una sala basada en una plantilla. Todos los ajustes, carpetas y archivos se tomarán de la plantilla de sala seleccionada.",
   "GeneratePassword": "Generar contraseña",
   "Gigabyte": "GB",
   "GoBack": "Volver ",

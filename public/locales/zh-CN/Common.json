@@ -288,7 +288,7 @@
   "FromDevice": "来自设备",
   "FromPortal": "来自{{productName}}",
   "FromTemplate": "从模板",
-  "FromTemplateRoomInfo": "使用模板创建房间，将套用房间模板中的所有设置、用户、文件夹和文件。",
+  "FromTemplateRoomInfo": "使用模板创建房间，将套用房间模板中的所有设置、文件夹和文件。",
   "GeneratePassword": "生成密码",
   "Gigabyte": "GB",
   "GoBack": "返回",

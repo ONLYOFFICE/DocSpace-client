@@ -288,7 +288,7 @@
   "FromDevice": "De l'appareil",
   "FromPortal": "De {{productName}}",
   "FromTemplate": "À partir du modèle",
-  "FromTemplateRoomInfo": "Créez une salle à partir d'un modèle. Tous les paramètres, utilisateurs, dossiers et fichiers seront repris du modèle de salle sélectionné.",
+  "FromTemplateRoomInfo": "Créez une salle à partir d'un modèle. Tous les paramètres, dossiers et fichiers seront repris du modèle de salle sélectionné.",
   "GeneratePassword": "Générer un mot de passe",
   "Gigabyte": "Go",
   "GoBack": " Retourner",

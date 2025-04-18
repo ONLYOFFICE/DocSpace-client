@@ -288,7 +288,7 @@
   "FromDevice": "Do dispositivo",
   "FromPortal": "De {{productName}}",
   "FromTemplate": "Do modelo",
-  "FromTemplateRoomInfo": "Crie uma sala com base em um modelo. Todas as configurações, usuários, pastas e arquivos serão retirados do modelo de sala selecionado.",
+  "FromTemplateRoomInfo": "Crie uma sala com base em um modelo. Todas as configurações, pastas e arquivos serão retirados do modelo de sala selecionado.",
   "GeneratePassword": "Gerar senha",
   "Gigabyte": "GB",
   "GoBack": "Voltar",

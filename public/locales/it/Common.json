@@ -288,7 +288,7 @@
   "FromDevice": "Dal dispositivo",
   "FromPortal": "Da {{productName}}",
   "FromTemplate": "Da modello",
-  "FromTemplateRoomInfo": "Crea una stanza basata su un modello. Tutte le impostazioni, gli utenti, le cartelle e i file verranno presi dal modello di stanza selezionato.",
+  "FromTemplateRoomInfo": "Crea una stanza basata su un modello. Tutte le impostazioni, le cartelle e i file verranno presi dal modello di stanza selezionato.",
   "GeneratePassword": "Genera la password",
   "Gigabyte": "GB",
   "GoBack": " Torna indietro",

@@ -283,7 +283,7 @@
   "FromDevice": "Iz naprave",
   "FromPortal": "Od {{productName}}",
   "FromTemplate": "Predloga obrazca",
-  "FromTemplateRoomInfo": "Ustvarite sobo na podlagi predloge. Vse nastavitve, uporabniki, mape in datoteke bodo prevzete iz izbrane predloge sobe.",
+  "FromTemplateRoomInfo": "Ustvarite sobo na podlagi predloge. Vse nastavitve, mape in datoteke bodo prevzete iz izbrane predloge sobe.",
   "GeneratePassword": "Generirajte geslo",
   "Gigabyte": "GB",
   "GoBack": "Pojdi nazaj",

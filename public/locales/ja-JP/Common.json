@@ -288,7 +288,7 @@
   "FromDevice": "デバイスから",
   "FromPortal": "{{productName}}から",
   "FromTemplate": "テンプレートから",
-  "FromTemplateRoomInfo": "テンプレートに基づいてルームを作成します。すべての設定、ユーザー、フォルダー、およびファイルは、選択されたルームのテンプレートから取得されます。",
+  "FromTemplateRoomInfo": "テンプレートに基づいてルームを作成します。すべての設定、フォルダー、およびファイルは、選択されたルームのテンプレートから取得されます。",
   "GeneratePassword": "パスワードの生成",
   "Gigabyte": "GB",
   "GoBack": "戻る",

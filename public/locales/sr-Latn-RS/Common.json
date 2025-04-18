@@ -288,7 +288,7 @@
   "FromDevice": "Iz uređaja",
   "FromPortal": "Iz {{productName}}",
   "FromTemplate": "Iz šablona",
-  "FromTemplateRoomInfo": "Kreirajte sobu na osnovu šablona. Svi podešavanja, korisnici, folderi i fajlovi biće preuzeti iz odabranog šablona sobe",
+  "FromTemplateRoomInfo": "Kreirajte sobu na osnovu šablona. Svi podešavanja, folderi i fajlovi biće preuzeti iz odabranog šablona sobe",
   "GeneratePassword": "Generiši lozinku",
   "Gigabyte": "GB",
   "GoBack": "Idi nazad",

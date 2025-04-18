@@ -288,7 +288,7 @@
   "FromDevice": "From device",
   "FromPortal": "From {{productName}}",
   "FromTemplate": "From template",
-  "FromTemplateRoomInfo": "Create a room based on a template. All settings, users, folders and files will be taken from the selected room template.",
+  "FromTemplateRoomInfo": "Create a room based on a template. All settings, folders and files will be taken from the selected room template.",
   "GeneratePassword": "Generate password",
   "Gigabyte": "GB",
   "GoBack": "Go back",

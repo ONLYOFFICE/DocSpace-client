@@ -282,7 +282,7 @@
   "FromDevice": "장치에서",
   "FromPortal": "{{productName}}에서",
   "FromTemplate": "템플릿에서",
-  "FromTemplateRoomInfo": "템플릿을 기반으로 룸을 생성하세요. 모든 설정, 사용자, 폴더 및 파일은 선택된 룸 템플릿에서 가져오기됩니다. ",
+  "FromTemplateRoomInfo": "템플릿을 기반으로 룸을 생성하세요. 모든 설정, 폴더 및 파일은 선택된 룸 템플릿에서 가져오기됩니다. ",
   "GeneratePassword": "비밀번호 생성",
   "Gigabyte": "GB",
   "GoBack": "돌아가기",

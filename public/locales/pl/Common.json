@@ -283,7 +283,7 @@
   "FromDevice": "Z urządzenia",
   "FromPortal": "Z {{productName}}",
   "FromTemplate": "Z szablonu",
-  "FromTemplateRoomInfo": "Utwórz pokój na podstawie szablonu. Wszystkie ustawienia, użytkownicy, katalogi i pliki zostaną wzięte z wybranego szablonu pokoju.",
+  "FromTemplateRoomInfo": "Utwórz pokój na podstawie szablonu. Wszystkie ustawienia, katalogi i pliki zostaną wzięte z wybranego szablonu pokoju.",
   "GeneratePassword": "Wygeneruj hasło",
   "Gigabyte": "GB",
   "GoBack": "Wróć",

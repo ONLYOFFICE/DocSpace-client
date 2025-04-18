@@ -224,7 +224,10 @@ const DirectThirdPartyConnection = (props) => {
 
   const advancedOptions = accounts?.map((item) => {
     return (
-      <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+      <StyledComboBoxItem
+        isDisabled={item.disabled}
+        key={`${item.key}_${item.name}`}
+      >
         <DropDownItem
           onClick={onSelectAccount(item.name)}
           className={item.className}

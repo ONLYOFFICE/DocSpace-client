@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Sus últimos documentos vistos o editados se mostrarán en esta sección.",
   "EmptyRootRoomUserDescription": "La sala compartida aparecerá aquí.",
   "EmptyRootRoomUserTitle": "Todavía no hay salas aquí",
+  "EmptyTemplatesDescription": "Puede crear una plantilla a partir de una sala en la sección Salas",
+  "EmptyTemplatesTitle": "Aún no hay plantillas aquí",
   "FormFolderDefaultDescription": "Coloque formularios PDF aquí o cárguelos desde {{productName}} o dispositivo.",
   "FormFolderDefaultTitle": "Todavía no hay formularios aquí",
   "FormFolderDefaultUserDescription": "Los formularios cargados por los administradores aparecerán aquí.",

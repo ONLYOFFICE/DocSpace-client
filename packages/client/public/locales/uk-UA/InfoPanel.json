@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "Попереднє посилання <1>«{{linkTitle}}»</1> анульовано. <br/> Створено нове посилання <1>«{{linkTitle}}»</1>",
   "RoomGroupAdded": "Групи додано.",
   "RoomGroupRemove": "Групу видалено",
-  "RoomIndexExportSaved": "Експорт індексу кімнати збережено в Документах",
   "RoomIndexingDisabled": "У кімнаті вимкнено автоматичне індексування файлів",
   "RoomIndexingEnabled": "У кімнаті ввімкнено автоматичне індексування файлів",
   "RoomInviteResend": "Запрошення надіслані повторно:",

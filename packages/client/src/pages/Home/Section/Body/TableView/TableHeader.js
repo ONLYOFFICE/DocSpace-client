@@ -224,6 +224,8 @@ class FilesTableHeader extends React.Component {
       sizeColumnIsEnabled,
       createdColumnIsEnabled,
       modifiedColumnIsEnabled,
+      erasureColumnIsEnabled,
+      isPersonalReadOnly,
     } = this.props;
 
     const authorBlock = !isPublicRoom
@@ -234,6 +236,18 @@ class FilesTableHeader extends React.Component {
           resizable: true,
           sortBy: SortByFieldName.Author,
           // onClick: this.onFilter,
+          onChange: this.onColumnChange,
+        }
+      : {};
+
+    const erasureBlock = isPersonalReadOnly
+      ? {
+          key: "Erasure",
+          title: t("ByErasure"),
+          enable: erasureColumnIsEnabled,
+          resizable: true,
+          sortBy: SortByFieldName.ModifiedDate,
+          onClick: this.onFilter,
           onChange: this.onColumnChange,
         }
       : {};
@@ -268,6 +282,7 @@ class FilesTableHeader extends React.Component {
         onClick: this.onFilter,
         onChange: this.onColumnChange,
       },
+      { ...erasureBlock },
       {
         key: "Size",
         title: t("Common:Size"),
@@ -644,7 +659,7 @@ class FilesTableHeader extends React.Component {
     const columns = [
       {
         key: "Name",
-        title: t("Common:Name"),
+        title: t("Common:Label"),
         resizable: true,
         enable: roomColumnNameIsEnabled,
         default: true,
@@ -862,8 +877,13 @@ export default inject(
       setRoomsFilter,
       indexColumnSize,
     } = filesStore;
-    const { isRecentTab, isArchiveFolder, isTrashFolder, isTemplatesFolder } =
-      treeFoldersStore;
+    const {
+      isRecentTab,
+      isArchiveFolder,
+      isTrashFolder,
+      isTemplatesFolder,
+      isPersonalReadOnly,
+    } = treeFoldersStore;
     const withContent = canShare;
     const sortingVisible = true;
     const { isFrame, frameConfig } = settingsStore;
@@ -1008,6 +1028,7 @@ export default inject(
 
       indexColumnSize,
       changeDocumentsTabs,
+      isPersonalReadOnly,
     };
   },
 )(

@@ -45,6 +45,7 @@ import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStor
 interface Props {
   isMobileView: boolean;
   deepLinkSettings: DeepLinkType;
+  initSettings: (path: string) => Promise<void>;
 }
 
 const StyledWrapper = styled.div`
@@ -64,7 +65,7 @@ const StyledWrapper = styled.div`
 `;
 
 const ConfigureDeepLinkComponent = (props: Props) => {
-  const { isMobileView, deepLinkSettings } = props;
+  const { isMobileView, deepLinkSettings, initSettings } = props;
 
   const { t } = useTranslation(["Settings", "Common"]);
   const navigate = useNavigate();
@@ -102,6 +103,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
   }, [type]);
 
   useEffect(() => {
+    initSettings(isMobileView ? "configure-deep-link" : "general");
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
@@ -194,9 +196,10 @@ const ConfigureDeepLinkComponent = (props: Props) => {
 
 export const ConfigureDeepLink = inject<TStore>(({ settingsStore, common }) => {
   const isMobileView = settingsStore.currentDeviceType === DeviceType.mobile;
-  const { deepLinkSettings } = common;
+  const { deepLinkSettings, initSettings } = common;
   return {
     isMobileView,
     deepLinkSettings,
+    initSettings,
   };
 })(observer(ConfigureDeepLinkComponent));

@@ -35,6 +35,7 @@ import { ThemeId } from "./ColorTheme.enums";
 import IconButtonTheme from "./styled-components/iconButton";
 import IconButtonMuteTheme from "./styled-components/iconButtonMute";
 import IconButtonPinTheme from "./styled-components/iconButtonPin";
+import IconButtonCustomFilterTheme from "./styled-components/iconButtonCustomFilter";
 import IconWrapperTheme from "./styled-components/iconWrapper";
 import IndicatorLoaderTheme from "./styled-components/indicatorLoader";
 import InfoPanelToggleTheme from "./styled-components/infoPanelToggle";
@@ -96,6 +97,16 @@ const ColorTheme = forwardRef<
         return (
           <IconButtonPinTheme
             {...props}
+            $currentColorScheme={currentColorScheme}
+          />
+        );
+      }
+
+      case ThemeId.IconButtonCustomFilter: {
+        return (
+          <IconButtonCustomFilterTheme
+            {...props}
+            themeId={themeId}
             $currentColorScheme={currentColorScheme}
           />
         );

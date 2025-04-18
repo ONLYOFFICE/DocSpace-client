@@ -35,7 +35,6 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import CloudServicesWebdavReactSvgUrl from "PUBLIC_DIR/images/cloud.services.webdav.react.svg?url";
 import { RoomsType } from "@docspace/shared/enums";
 
-import { isDesktop, isMobile } from "@docspace/shared/utils";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 import i18n from "../i18n";
@@ -186,44 +185,6 @@ export const connectedCloudsTypeIcon = (key) => {
   }
 };
 
-// Used to update the number of tiles in a row after the window is resized.
-export const getCountTilesInRow = (isRooms) => {
-  const isDesktopView = isDesktop();
-  const isMobileView = isMobile();
-  const tileGap = isRooms ? 16 : 14;
-
-  const elem = document.getElementsByClassName("section-wrapper-content")[0];
-  let containerWidth = 0;
-  if (elem) {
-    const elemPadding = window
-      .getComputedStyle(elem)
-      ?.getPropertyValue("padding");
-
-    if (elemPadding) {
-      const paddingValues = elemPadding.split("px");
-      if (paddingValues.length >= 4) {
-        containerWidth =
-          (elem.clientWidth || 0) -
-          parseInt(paddingValues[1], 10) -
-          parseInt(paddingValues[3], 10);
-      }
-    }
-  }
-
-  containerWidth += tileGap;
-  if (!isMobileView) containerWidth -= 1;
-  if (!isDesktopView) containerWidth += 3; // tablet tile margin -3px (TileContainer.js)
-
-  let minTileWidth;
-  if (isRooms) {
-    minTileWidth = 275 + tileGap;
-  } else {
-    minTileWidth = 216 + tileGap;
-  }
-
-  return Math.floor(containerWidth / minTileWidth);
-};
-
 export const calculateRoomLogoParams = (img, x, y, zoom) => {
   let imgWidth;
   let imgHeight;
@@ -284,7 +245,7 @@ export const mappingActiveItems = (items, destFolderId) => {
   return arrayFormation;
 };
 
-export const getOperationsProgressTitle = (type) => {
+export const getOperationsProgressTitle = (type, progress) => {
   const {
     trash,
     move,
@@ -316,11 +277,14 @@ export const getOperationsProgressTitle = (type) => {
     case deletePermanently:
       return i18n.t("Files:DeletingPermanently");
     case upload:
+      if (progress > 0 && progress < 100)
+        return i18n.t("Files:UploadingProgress", { progress });
       return i18n.t("Files:Uploading");
     case convert:
       return i18n.t("Files:Converting");
     case deleteVersionFile:
       return i18n.t("Files:DeletingVersion");
+
     default:
       return i18n.t("Files:OtherProcesses");
   }

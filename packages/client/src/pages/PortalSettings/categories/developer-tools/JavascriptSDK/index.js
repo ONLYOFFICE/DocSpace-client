@@ -111,13 +111,13 @@ const PortalIntegration = (props) => {
       handleOnClick: navigateToViewer,
     },
     {
-      title: t("RoomSelector"),
+      title: t("Common:RoomSelector"),
       description: t("RoomSelectorDescription"),
       image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,
       handleOnClick: navigateToRoomSelector,
     },
     {
-      title: t("FileSelector"),
+      title: t("Common:FileSelector"),
       description: t("FileSelectorDescription"),
       image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,
       handleOnClick: navigateToFileSelector,

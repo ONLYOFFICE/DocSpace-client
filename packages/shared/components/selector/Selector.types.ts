@@ -30,6 +30,7 @@ import {
   EmployeeType,
   RoomsType,
   ShareAccessRights,
+  FileType,
 } from "../../enums";
 import { MergeTypes, Nullable } from "../../types";
 
@@ -239,6 +240,7 @@ export type TAccessRight = {
   label: string;
   description?: string;
   access: string | number;
+  isSeparator?: boolean;
 };
 
 type TWithAccessRightsProps = {
@@ -377,8 +379,10 @@ export type SelectorProps = TSelectorHeader &
     descriptionText?: string;
 
     withPadding?: boolean;
+    injectedElement?: React.ReactElement;
 
     isSSR?: boolean;
+    selectedItem?: TSelectorItem | null;
   };
 
 export type BodyProps = TSelectorInfo & {
@@ -409,6 +413,7 @@ export type BodyProps = TSelectorInfo & {
   withFooterCheckbox?: boolean;
   descriptionText?: string;
   withInfoBadge?: boolean;
+  injectedElement?: React.ReactElement;
 
   isSSR?: boolean;
 };
@@ -440,6 +445,7 @@ type TSelectorItemEmpty = {
   status?: undefined;
   access?: undefined;
   fileExst?: undefined;
+  fileType?: undefined;
   shared?: undefined;
   parentId?: undefined;
   rootFolderType?: undefined;
@@ -490,6 +496,7 @@ export type TSelectorItemFile = MergeTypes<
   TSelectorItemEmpty,
   {
     fileExst: string;
+    fileType: FileType;
     parentId: string | number;
     rootFolderType: string | number;
     security: TFileSecurity;

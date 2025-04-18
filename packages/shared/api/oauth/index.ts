@@ -45,11 +45,29 @@ import {
   TIntrospectDeveloperToken,
 } from "../../utils/oauth/types";
 
+const STORAGE_KEY = "x-signature";
+
+const getOAuth2Headers = () => {
+  let token = getCookie(STORAGE_KEY);
+
+  if (!token) {
+    token = localStorage.getItem(STORAGE_KEY);
+
+    if (!token) return {};
+  }
+
+  return {
+    [STORAGE_KEY]: token,
+  };
+};
+
 export const getClient = async (clientId: string): Promise<IClientProps> => {
+  const hdrs = getOAuth2Headers();
   const client = (await request(
     {
       method: "get",
       url: `/clients/${clientId}`,
+      headers: hdrs,
     },
     false,
     true,
@@ -62,10 +80,12 @@ export const getClientList = async (
   page: number,
   limit: number,
 ): Promise<IClientListProps> => {
+  const hdrs = getOAuth2Headers();
   const data = (await request(
     {
       method: "get",
       url: `/clients?page=${page}&limit=${limit}`,
+      headers: hdrs,
     },
     false,
     true,
@@ -85,6 +105,7 @@ export const getClientList = async (
 export const addClient = async (
   dataParam: IClientReqDTO,
 ): Promise<IClientProps> => {
+  const hdrs = getOAuth2Headers();
   const data = { ...dataParam };
   data.logout_redirect_uri = data.website_url;
 
@@ -93,6 +114,7 @@ export const addClient = async (
       method: "post",
       url: `/clients`,
       data,
+      headers: hdrs,
     },
     false,
     true,
@@ -102,11 +124,14 @@ export const addClient = async (
 };
 
 export const updateClient = async (clientId: string, data: IClientReqDTO) => {
+  const hdrs = getOAuth2Headers();
+
   await request(
     {
       method: "put",
       url: `/clients/${clientId}`,
       data,
+      headers: hdrs,
     },
     false,
     true,
@@ -117,11 +142,14 @@ export const changeClientStatus = async (
   clientId: string,
   status: boolean,
 ): Promise<void> => {
+  const hdrs = getOAuth2Headers();
+
   await request(
     {
       method: "patch",
       url: `/clients/${clientId}/activation`,
       data: { status },
+      headers: hdrs,
     },
     false,
     true,
@@ -131,10 +159,13 @@ export const changeClientStatus = async (
 export const regenerateSecret = async (
   clientId: string,
 ): Promise<{ client_secret: string }> => {
+  const hdrs = getOAuth2Headers();
+
   const clientSecret = (await request(
     {
       method: "patch",
       url: `/clients/${clientId}/regenerate`,
+      headers: hdrs,
     },
     false,
     true,
@@ -144,10 +175,13 @@ export const regenerateSecret = async (
 };
 
 export const deleteClient = async (clientId: string): Promise<void> => {
+  const hdrs = getOAuth2Headers();
+
   await request(
     {
       method: "delete",
       url: `/clients/${clientId}`,
+      headers: hdrs,
     },
     false,
     true,
@@ -155,10 +189,13 @@ export const deleteClient = async (clientId: string): Promise<void> => {
 };
 
 export const getScope = async (name: string): Promise<TScope> => {
+  const hdrs = getOAuth2Headers();
+
   const scope = (await request(
     {
       method: "get",
       url: `/scopes/${name}`,
+      headers: hdrs,
     },
     false,
     true,
@@ -168,10 +205,13 @@ export const getScope = async (name: string): Promise<TScope> => {
 };
 
 export const getScopeList = async (): Promise<TScope[]> => {
+  const hdrs = getOAuth2Headers();
+
   const scopeList = (await request(
     {
       method: "get",
       url: `/scopes`,
+      headers: hdrs,
     },
     false,
     true,
@@ -187,30 +227,62 @@ export const getJWTToken = () => {
   });
 };
 
-export function getOAuthJWTSignature() {
-  return getCookie("x-signature");
-}
+export function getOAuthJWTSignature(userId: string) {
+  let token = getCookie(`${STORAGE_KEY}-${userId}`);
 
-export async function setOAuthJWTSignature() {
-  const token = await getJWTToken()!;
+  if (!token) {
+    token = localStorage.getItem(`${STORAGE_KEY}-${userId}`);
 
-  // Parse the token payload to extract information
-  const tokenPayload = JSON.parse(window.atob(token!.split(".")[1]));
+    if (!token) return;
+  }
+
+  const tokenPayload = JSON.parse(
+    window.atob(token!.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")),
+  );
 
   // Get the token's original expiration time
   const tokenExpDate = new Date(tokenPayload.exp * 1000); // Convert seconds to milliseconds
 
-  setCookie("x-signature", token, { expires: tokenExpDate });
+  // Check expired token
+  if (tokenExpDate < new Date()) return;
+
+  setCookie(STORAGE_KEY, token, { expires: tokenExpDate });
+  localStorage.setItem(STORAGE_KEY, token);
+
+  return token;
+}
+
+export async function setOAuthJWTSignature(userId: string) {
+  const token = await getJWTToken()!;
+
+  // Parse the token payload to extract information
+  const tokenPayload = JSON.parse(
+    window.atob(token!.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")),
+  );
+
+  // Get the token's original expiration time
+  const tokenExpDate = new Date(tokenPayload.exp * 1000); // Convert seconds to milliseconds
+
+  setCookie(`${STORAGE_KEY}-${userId}`, token, { expires: tokenExpDate });
+  setCookie(STORAGE_KEY, token, { expires: tokenExpDate });
+
+  localStorage.setItem(`${STORAGE_KEY}-${userId}`, token);
+  localStorage.setItem(STORAGE_KEY, token);
+
+  return token;
 }
 
 export const getConsentList = async (
   page: number = 0,
   limit: number = 50,
 ): Promise<TConsentList & { consents: IClientProps[] }> => {
+  const hdrs = getOAuth2Headers();
+
   const consentList = (await request(
     {
       method: "get",
       url: `/clients/consents?page=${page}&limit=${limit}`,
+      headers: hdrs,
     },
     false,
     true,
@@ -237,10 +309,13 @@ export const getConsentList = async (
 };
 
 export const revokeUserClient = async (clientId: string): Promise<void> => {
+  const hdrs = getOAuth2Headers();
+
   await request(
     {
       method: "delete",
       url: `/clients/${clientId}/revoke`,
+      headers: hdrs,
     },
     false,
     true,
@@ -251,12 +326,15 @@ export const onOAuthSubmit = async (
   clientId: string,
   clientState: string,
   scope: string[],
+  userId: string,
 ) => {
+  const hdrs = getOAuth2Headers();
+
   const formData = new FormData();
 
-  const token = getOAuthJWTSignature();
+  const token = getOAuthJWTSignature(userId);
 
-  if (!token) await setOAuthJWTSignature();
+  if (!token) await setOAuthJWTSignature(userId);
 
   formData.append("client_id", clientId);
   formData.append("state", clientState);
@@ -273,6 +351,7 @@ export const onOAuthSubmit = async (
       withRedirect: true,
       headers: {
         "X-Disable-Redirect": "true",
+        ...hdrs,
       },
     },
     false,
@@ -280,12 +359,18 @@ export const onOAuthSubmit = async (
   );
 };
 
-export const onOAuthCancel = async (clientId: string, clientState: string) => {
+export const onOAuthCancel = async (
+  clientId: string,
+  clientState: string,
+  userId: string,
+) => {
+  const hdrs = getOAuth2Headers();
+
   const formData = new FormData();
 
-  const token = getOAuthJWTSignature();
+  const token = getOAuthJWTSignature(userId);
 
-  if (!token) await setOAuthJWTSignature();
+  if (!token) await setOAuthJWTSignature(userId);
 
   formData.append("client_id", clientId);
   formData.append("state", clientState);
@@ -298,6 +383,7 @@ export const onOAuthCancel = async (clientId: string, clientState: string) => {
       withRedirect: true,
       headers: {
         "X-Disable-Redirect": "true",
+        ...hdrs,
       },
     },
     false,
@@ -310,6 +396,8 @@ export const generateDevelopToken = (
   client_secret: string,
   scopes: string[],
 ): Promise<TGenerateDeveloperToken> | undefined => {
+  const hdrs = getOAuth2Headers();
+
   const params = new URLSearchParams();
   params.append("grant_type", "personal_access_token");
   params.append("client_id", client_id);
@@ -323,6 +411,7 @@ export const generateDevelopToken = (
       data: params,
       headers: {
         "X-Disable-Redirect": "true",
+        ...hdrs,
       },
     },
     false,
@@ -335,6 +424,8 @@ export const revokeDeveloperToken = (
   client_id: string,
   client_secret: string,
 ) => {
+  const hdrs = getOAuth2Headers();
+
   const params = new URLSearchParams();
   params.append("token", token);
   params.append("client_id", client_id);
@@ -345,6 +436,9 @@ export const revokeDeveloperToken = (
       method: "post",
       url: "/oauth2/revoke",
       data: params,
+      headers: {
+        ...hdrs,
+      },
     },
     false,
     true,
@@ -352,11 +446,18 @@ export const revokeDeveloperToken = (
 };
 
 export const introspectDeveloperToken = (token: string) => {
+  const hdrs = getOAuth2Headers();
+
   const params = new URLSearchParams();
   params.append("token", token);
 
   return request<TIntrospectDeveloperToken>(
-    { method: "post", url: "/oauth2/introspect", data: params },
+    {
+      method: "post",
+      url: "/oauth2/introspect",
+      data: params,
+      headers: { ...hdrs },
+    },
     false,
     true,
   );

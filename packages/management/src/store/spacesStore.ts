@@ -35,7 +35,9 @@ import type { Nullable } from "@docspace/shared/types";
 
 export class SpacesStore {
   createPortalDialogVisible = false;
+
   deletePortalDialogVisible = false;
+
   domainDialogVisible = false;
   connectDialogVisible = false;
 

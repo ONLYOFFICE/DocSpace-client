@@ -47,6 +47,8 @@ import { toastr } from "@docspace/shared/components/toast";
 import ListLoader from "@docspace/shared/skeletons/list";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { isManagement } from "@docspace/shared/utils/common";
+
 import { TenantStatus } from "@docspace/shared/enums";
 
 // import config from "PACKAGE_FILE";
@@ -78,8 +80,8 @@ const BackupListModalDialog = ({
   const isCopyingToLocal = downloadingProgress !== 100;
 
   React.useEffect(() => {
-    getBackupHistory()
-      ?.then((filesList) =>
+    getBackupHistory(isManagement())
+      .then((filesList) =>
         setState((val) => ({ ...val, filesList, isLoading: false })),
       )
       .catch(() => setState((val) => ({ ...val, isLoading: false })));
@@ -102,27 +104,25 @@ const BackupListModalDialog = ({
     }));
   };
 
-  const onCleanBackupList = async () => {
-    try {
-      setState((val) => ({ ...val, isLoading: true }));
-      await deleteBackupHistory();
-      const filesList = await getBackupHistory();
-      setState((val) => ({
-        ...val,
-        filesList: filesList ?? val.filesList,
-        isLoading: false,
-      }));
-    } catch (error) {
-      toastr.error(error as Error);
-      setState((val) => ({ ...val, isLoading: false }));
-    }
+  const onCleanBackupList = () => {
+    setState((val) => ({ ...val, isLoading: true }));
+    deleteBackupHistory(isManagement())
+      .then(() => getBackupHistory(isManagement()))
+      .then((filesList) =>
+        setState((val) => ({ ...val, filesList, isLoading: false })),
+      )
+      .catch((error) => {
+        toastr.error(error);
+        setState((val) => ({ ...val, isLoading: false }));
+      });
   };
+
   const onDeleteBackup = (backupId: string) => {
     if (!backupId) return;
 
     setState((val) => ({ ...val, isLoading: true }));
     deleteBackup(backupId)
-      ?.then(() => getBackupHistory())
+      .then(() => getBackupHistory(isManagement()))
       .then((filesList) =>
         setState((val) => ({
           ...val,
@@ -157,7 +157,9 @@ const BackupListModalDialog = ({
     startRestore(backupId, storageType, storageParams, isNotify)
       ?.then(() => setTenantStatus(TenantStatus.PortalRestore))
       .then(() => {
-        SocketHelper.emit(SocketCommands.RestoreBackup);
+        SocketHelper.emit(SocketCommands.RestoreBackup, {
+          dump: isManagement(),
+        });
       })
       .then(() => {
         navigate("/preparation-portal");

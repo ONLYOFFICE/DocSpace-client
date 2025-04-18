@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { Operation } from "../operations-progress-button/OperationsProgressButton.types";
 import { DeviceType } from "../../enums";
 import { TViewAs } from "../../types";
 
@@ -104,39 +105,6 @@ export type SectionSubmenuProps = {
   children: React.ReactNode;
 };
 
-export interface Operation {
-  operation: string;
-  label: string;
-  alert: boolean;
-  completed: boolean;
-  percent?: number;
-  withoutStatus?: boolean;
-  showPanel?: (open: boolean) => void;
-  withoutProgress?: boolean;
-  items?: Array<{
-    operationId: string;
-    percent: number;
-  }>;
-}
-
-export interface OperationsProgressProps {
-  primaryActiveOperations?: Operation[];
-  secondaryActiveOperations?: Operation[];
-  operationsAlert?: boolean;
-  operationsCompleted?: boolean;
-  clearSecondaryProgressData?: (
-    operationId?: string | null,
-    operation?: string | null,
-  ) => void;
-  clearPrimaryProgressData?: (operation?: string | null) => void;
-  cancelUpload?: (t: (key: string) => string) => void;
-  onOpenPanel?: () => void;
-  mainButtonVisible?: boolean;
-  needErrorChecking?: boolean;
-  showCancelButton?: boolean;
-  onCancelOperation?: (callback: () => void) => void;
-}
-
 export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
   Omit<SectionSubmenuProps, "children"> &
   Omit<SubInfoPanelBodyProps, "children"> &
@@ -182,41 +150,3 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
 export type SectionContextMenuProps = {
   getContextModel?: () => ContextMenuModel[];
 };
-
-export interface ProgressBarMobileProps {
-  /** Display text for the progress bar */
-  label?: string;
-  /** Alert status */
-  alert?: boolean;
-  /** Status text to display */
-  status?: string;
-  /** Progress completion percentage */
-  percent?: number;
-  /** Controls visibility of the progress bar */
-  open?: boolean;
-  /** The function that facilitates hiding the button */
-  onCancel?: () => void;
-  /** Icon URL or component */
-  icon?: React.ReactNode;
-  /** The function called after the progress header is clicked */
-  onClickAction?: () => void;
-  /** The function that facilitates hiding the button */
-  hideButton?: () => void;
-  /** Changes the progress bar color, if set to true */
-  error?: boolean;
-  /** Hides the progress bar */
-  withoutProgress?: boolean;
-  /** Icon URL */
-  iconUrl?: string;
-  /** Indicates if the operation is completed */
-  completed?: boolean;
-  /** Callback function for clearing progress */
-  onClearProgress?: (operationId: string | null, operation: string) => void;
-  /** Unique identifier for the operation */
-  operationId?: string;
-  /** Type of operation */
-  operation?: string;
-  /** The function called after the progress header is clicked */
-  onOpenPanel?: () => void;
-  withoutStatus?: boolean;
-}

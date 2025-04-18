@@ -29,14 +29,13 @@ import { inject, observer } from "mobx-react";
 import moment from "moment";
 
 import { toastr } from "@docspace/shared/components/toast";
+import { QuickButtons } from "@docspace/shared/components/quick-buttons";
 import {
   copyDocumentShareLink,
   copyRoomShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
-
-import QuickButtons from "../components/QuickButtons";
 
 export default function withQuickButtons(WrappedComponent) {
   class WithQuickButtons extends React.Component {
@@ -153,7 +152,8 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     onCreateRoom = () => {
-      const { item, onCreateRoomFromTemplate } = this.props;
+      const { item, onCreateRoomFromTemplate, setBufferSelection } = this.props;
+      setBufferSelection(item);
 
       onCreateRoomFromTemplate(item);
     };
@@ -286,6 +286,7 @@ export default function withQuickButtons(WrappedComponent) {
         currentColorScheme: settingsStore.currentColorScheme,
         isTemplatesFolder,
         onCreateRoomFromTemplate,
+        setBufferSelection: filesStore.setBufferSelection,
       };
     },
   )(observer(WithQuickButtons));

@@ -58,7 +58,6 @@ import SubmitToFormGallery from "./SubmitToFormGallery";
 import UnsavedChangesDialog from "./UnsavedChangesDialog";
 import DeleteLinkDialog from "./DeleteLinkDialog";
 import MoveToPublicRoom from "./MoveToPublicRoom";
-import BackupToPublicRoom from "./BackupToPublicRoom";
 import SettingsPluginDialog from "./SettingsPluginDialog";
 import CancelUploadDialog from "./CancelUploadDialog";
 import PluginDialog from "./PluginDialog";
@@ -73,6 +72,7 @@ import GuestReleaseTipDialog from "./GuestReleaseTip";
 import DeleteVersionDialog from "./DeleteVersionDialog";
 import CancelOperationDialog from "./CancelOperationDialog";
 import FormFillingTipsDialog from "./FormFillingTipsDialog";
+import ReducedRightsDialog from "./ReducedRightsDialog";
 
 export {
   EmptyTrashDialog,
@@ -109,7 +109,6 @@ export {
   UnsavedChangesDialog,
   DeleteLinkDialog,
   MoveToPublicRoom,
-  BackupToPublicRoom,
   SettingsPluginDialog,
   CancelUploadDialog,
   PluginDialog,
@@ -124,4 +123,5 @@ export {
   DeleteVersionDialog,
   CancelOperationDialog,
   FormFillingTipsDialog,
+  ReducedRightsDialog,
 };

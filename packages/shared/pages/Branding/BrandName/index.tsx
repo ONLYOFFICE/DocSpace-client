@@ -27,8 +27,9 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "react-device-detect";
-
-import { Nullable } from "../../../types";
+import { useTheme } from "styled-components";
+import { globalColors } from "@docspace/shared/themes";
+import { Nullable } from "types";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { Text } from "../../../components/text";
 import { Badge } from "../../../components/badge";
@@ -54,6 +55,8 @@ export const BrandName = ({
   brandName,
 }: IBrandNameProps) => {
   const { t } = useTranslation("Common");
+
+  const theme = useTheme();
 
   const [brandNameWhiteLabel, setBrandNameWhiteLabel] =
     useState<Nullable<string>>(null);
@@ -98,6 +101,11 @@ export const BrandName = ({
             fontWeight="700"
             label={t("Common:Paid")}
             isPaidBadge
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
           />
         ) : null}
       </div>

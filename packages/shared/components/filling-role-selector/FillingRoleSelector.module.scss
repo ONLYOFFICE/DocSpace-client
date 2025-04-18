@@ -23,118 +23,158 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 @import "../../styles/variables/_colors.scss";
-@import "../../styles/_mixins.scss";
+@import "../../styles/mixins.scss";
 
-.fillingRoleSelector {
+:global(.dark) {
+  :local {
+    .plus {
+      --plus-color: #{$black};
+    }
+    .remove {
+      --remove-color: #{$gray-dark};
+    }
+  }
+}
+
+:global(.light) {
+  :local {
+    .plus {
+      --plus-color: #{$light-gray-dark};
+    }
+    .remove {
+      --remove-color: #{$gray};
+    }
+  }
+}
+
+.roles {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-}
-
-.row {
-  height: 48px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.userRow {
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.content {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.userWithRole {
-  display: flex;
-}
-
-.number {
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 16px;
-  color: #{$gray};
-}
-
-.avatar {
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
+  padding: 0;
 }
 
 .role {
+  display: flex;
+  padding-block: 12px;
+  gap: 8px;
+
+  align-items: center;
+
+  height: 32px;
+
+  @include no-user-select;
+}
+
+.count {
   font-weight: 600;
   font-size: 14px;
   line-height: 16px;
+  letter-spacing: 0px;
+  text-align: center;
+
+  color: $gray;
 }
 
-.assignedRole {
-  padding-inline-start: 4px;
-  color: #{$gray};
+.button {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
 
-  ::before {
-    content: "(";
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.name {
+  display: inline-block;
+  flex-shrink: 1;
+
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: start;
+
+  color: var(--text-color);
+  @include truncate;
+}
+
+.plus {
+  display: inline-block;
+  position: relative;
+  flex-shrink: 0;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 3px;
+  border: none;
+
+  cursor: pointer;
+
+  &::after,
+  &::before {
+    content: "";
+    display: block;
+
+    background-color: var(--plus-color);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
-  ::after {
-    content: ")";
+
+  &::before {
+    width: 10px;
+    height: 2px;
+  }
+
+  &::after {
+    width: 2px;
+    height: 10px;
   }
 }
 
-.everyoneRoleContainer {
+.info {
   display: flex;
   flex-direction: column;
-}
 
-.title {
-  display: flex;
-}
+  h5 {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
 
-.roleDescription {
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 14px;
-  color: #{$light-gray-dark};
-}
+    color: var(--text-color);
+    margin: 0;
+  }
 
-.tooltip {
-  background: #{$light-toast-info};
-  color: #{$black};
-  border-radius: 6px;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  padding: 8px 12px;
-  height: 48px;
-  box-sizing: border-box;
-  margin: 8px 0;
-}
+  .me {
+    color: $light-gray-dark;
 
-.addRoleButton {
-  svg {
-    width: 32px;
-    height: 32px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0px;
+  }
 
-    path {
-      fill: var(--color);
-    }
-
-    rect {
-      stroke: var(--color);
-    }
+  span {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    color: var(--empty-view-description-color);
   }
 }
 
-.everyoneRoleIcon {
-  svg {
-    width: 32px;
-    height: 32px;
+.remove {
+  cursor: pointer;
+  margin-inline-start: auto;
+  flex-shrink: 0;
+
+  path {
+    fill: var(--remove-color);
   }
 }

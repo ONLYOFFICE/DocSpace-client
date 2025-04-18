@@ -95,7 +95,6 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  border: var(--files-article-body-dev-tools-border);
   border-radius: 6px;
 
   @include mobile {
@@ -121,6 +120,19 @@
       fill: var(--files-article-body-dev-tools-color);
     }
   }
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--files-article-body-dev-tools-background-color);
+  opacity: var(--files-article-body-dev-tools-background-opacity);
+  border-radius: 6px;
+  z-index: -1;
 }
 
 .hideArticleMenuButton {
@@ -439,6 +451,10 @@
   &[data-with-main-button="true"] {
     :global(.article-body__scrollbar) {
       height: calc(100% - 190px) !important;
+
+      @include mobile {
+        height: 100% !important;
+      }
     }
   }
   &[data-with-main-button="false"] {

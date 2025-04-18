@@ -49,6 +49,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const hdrs = headers();
+  const type = hdrs.get("x-confirm-type") ?? "";
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
     console.log("is health check");
@@ -68,10 +69,17 @@ export default async function RootLayout({
     getUser(),
   ]);
 
+  if (
+    type === "GuestShareLink" &&
+    typeof settings !== "string" &&
+    !settings?.socketUrl
+  ) {
+    redirectUrl = "login";
+  }
+
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
 
   if (settings === "portal-not-found") {
-    const hdrs = headers();
     const config = await getConfig();
 
     const host = hdrs.get("host");

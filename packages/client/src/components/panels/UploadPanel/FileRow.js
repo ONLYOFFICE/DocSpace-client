@@ -35,16 +35,15 @@ import { Button } from "@docspace/shared/components/button";
 import { ProgressBar } from "@docspace/shared/components/progress-bar";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { toastr } from "@docspace/shared/components/toast";
+import { SimulatePassword } from "@docspace/shared/components/simulate-password";
 
-import CloseSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
+import CloseSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
 import {
   StyledFileRow,
   ErrorFile,
   FileActions,
 } from "SRC_DIR/components/PanelComponents";
-
-import SimulatePassword from "../../SimulatePassword";
 
 class FileRow extends Component {
   constructor(props) {
@@ -98,7 +97,7 @@ class FileRow extends Component {
 
   onButtonClick = () => {
     const { password } = this.state;
-    const { convertFile, item, uploadedFiles } = this.props;
+    const { convertFile, item, uploadedFiles, t } = this.props;
     const { fileId, toFolderId, fileInfo } = item;
 
     if (this.hasError()) return;
@@ -115,7 +114,7 @@ class FileRow extends Component {
     };
     toastr.clear();
     this.onTextClick();
-    convertFile(newItem);
+    convertFile(newItem, t);
   };
 
   onChangePassword(password) {
@@ -244,7 +243,7 @@ class FileRow extends Component {
           ) : (
             <>
               <div className="actions-wrapper">
-                {item.percent ? (
+                {item.percent >= 0 ? (
                   <Text className="upload-panel_percent-text">
                     {Math.trunc(item.percent)}&#37;
                   </Text>

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RecaptchaType, TenantStatus } from "../../enums";
+import { RecaptchaType, TenantStatus, EncryptionStatus } from "../../enums";
 import { TColorScheme } from "../../themes";
 
 export type TTfaType = "sms" | "app" | "none";
@@ -130,6 +130,7 @@ export type TSettings = {
   logoText: string;
   displayAbout: boolean;
   externalResources: TExternalResources;
+  displayAbout: boolean;
 };
 
 export type TCustomSchema = {
@@ -176,6 +177,7 @@ export type THelpCenterEntries = {
   administrationguides: string;
   administratormessage: string;
   alternativeurl: string;
+  appearance: string;
   autobackup: string;
   becometranslator: string;
   connectamazon: string;
@@ -200,6 +202,7 @@ export type THelpCenterEntries = {
   connectwordpress: string;
   connectyandex: string;
   creatingbackup: string;
+  docspacemanagingrooms: string;
   enterpriseinstall: string;
   enterpriseinstallscript: string;
   enterpriseinstallwindows: string;
@@ -219,6 +222,8 @@ export type THelpCenterEntries = {
   twofactorauthentication: string;
   userguides: string;
   welcomepage: string;
+  limiteddevtools: string;
+  encryption: string;
 };
 
 export type TIntegrationsEntries = {
@@ -497,4 +502,10 @@ export type TStorageBackup = {
   isSet: boolean;
   title: string;
   properties: PropertiesType[];
+};
+
+export type TEncryptionSettings = {
+  password: string;
+  status: EncryptionStatus;
+  notifyUsers: boolean;
 };

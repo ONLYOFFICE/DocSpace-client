@@ -409,7 +409,7 @@ const SetRoomParams = ({
   const inputTitle =
     isTemplateSelected || isTemplate
       ? `${t("Files:TemplateName")}:`
-      : `${t("Common:Name")}:`;
+      : `${t("Common:Label")}:`;
 
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
@@ -520,10 +520,11 @@ const SetRoomParams = ({
           roomParams={roomParams}
           isEdit={isEdit}
           isLoading={isDisabled}
+          isTemplate={isTemplate || fromTemplate}
         />
       ) : null}
 
-      {!isEdit && enableThirdParty && isPublicRoom ? (
+      {!isEdit && enableThirdParty && isPublicRoom && !fromTemplate ? (
         <ThirdPartyStorage
           t={t}
           roomTitle={roomParams.title}

@@ -43,6 +43,7 @@ type SectionProps = {
 
   isEmptyPage: boolean;
   filesFilter: string;
+
   showFilter?: boolean;
   showHeader?: boolean;
 };
@@ -54,10 +55,18 @@ export const SectionWrapper = observer(
     sectionBodyContent,
     isEmptyPage,
     filesFilter,
-    showFilter = false,
+    showFilter = true,
     showHeader = true,
   }: SectionProps) => {
     const searchParams = useSearchParams();
+
+    const getValue = (key: string) => {
+      const value = searchParams.get(key);
+      return value === "true" ? true : value === "false" ? false : value;
+    };
+
+    showFilter = getValue("showFilter") as boolean;
+    showHeader = getValue("showHeader") as boolean;
 
     const [isFiltered, setIsFiltered] = React.useState(() =>
       FilesFilter.getFilter({

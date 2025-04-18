@@ -34,6 +34,7 @@ import type {
   TGetFolder,
 } from "@docspace/shared/api/files/types";
 import type { TGetRooms, TRoom } from "@docspace/shared/api/rooms/types";
+import { configureFilterByFilterParam } from "@docspace/shared/selectors/Files/FilesSelector.utils";
 
 import { getFilesSettings, getFolder, getFoldersTree } from "@/api/files";
 import { getRooms } from "@/api/rooms";
@@ -47,10 +48,13 @@ export default async function Page({
   searchParams: { [key: string]: string };
 }) {
   const baseConfig = Object.fromEntries(
-    Object.entries(searchParams).map(([k, v]) => [
-      k,
-      v === "true" ? true : v === "false" ? false : v,
-    ]),
+    Object.entries(searchParams).map(([k, v]) => {
+      if (v === "true") return [k, true];
+      if (v === "false") return [k, false];
+      if (k === "filter") return [k, isNaN(+v) ? v : +v];
+
+      return [k, v];
+    }),
   );
 
   const folderId = +(baseConfig.id ?? 0) || null;
@@ -72,6 +76,14 @@ export default async function Page({
 
   filter.page = 0;
   filter.pageCount = PAGE_COUNT;
+
+  if (filter instanceof FilesFilter && baseConfig.filter) {
+    configureFilterByFilterParam(
+      filter,
+      baseConfig.filter,
+      filesSettings?.extsWebEdited || [],
+    );
+  }
 
   const itemsList = isRoomView
     ? await getRooms(filter as RoomsFilter)

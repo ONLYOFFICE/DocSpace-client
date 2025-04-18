@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "Edellinen linkki <1>«{{linkTitle}}»</1> peruutettu<br/> Uusi linkki <1>«{{linkTitle}}»</1> luotu",
   "RoomGroupAdded": "Ryhmät lisätty.",
   "RoomGroupRemove": "Ryhmät poistettu",
-  "RoomIndexExportSaved": "Vie asiakirjoihin tallennetun huoneen hakemisto ",
   "RoomIndexingDisabled": "Automaattinen tiedostojen indeksointi on poistettu käytöstä tässä huoneessa",
   "RoomIndexingEnabled": "Automaattinen tiedostojen indeksointi on otettu käyttöön tässä huoneessa",
   "RoomInviteResend": "Kutsut on jälleen lähetetty:",

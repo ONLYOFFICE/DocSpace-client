@@ -90,11 +90,14 @@ const Body = ({
   withInfoBadge,
   setInputItemVisible,
   inputItemVisible,
+  injectedElement,
 
   isSSR,
 }: BodyProps) => {
   const infoBarRef = useRef<HTMLDivElement>(null);
+  const injectedElementRef = useRef<HTMLElement>(null);
   const [infoBarHeight, setInfoBarHeight] = useState(0);
+  const [injectedElementHeight, setInjectedElementHeight] = useState(0);
 
   const { withSearch } = React.useContext(SearchContext);
   const isSearch = React.useContext(SearchValueContext);
@@ -204,13 +207,23 @@ const Body = ({
       }
     }
   }, [withInfoBar, itemsCount]);
+  useLayoutEffect(() => {
+    if (injectedElement) {
+      const element = injectedElementRef.current;
 
-  let listHeight = bodyHeight - infoBarHeight;
+      if (element) {
+        const { height } = element.getBoundingClientRect();
+        setInjectedElementHeight(height);
+      }
+    }
+  }, [injectedElement, itemsCount]);
+
+  let listHeight = bodyHeight - infoBarHeight - injectedElementHeight;
 
   const showSearch = withSearch && (isSearch || itemsCount > 0);
   const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
 
-  if (!withTabs && withPadding) {
+  if (withPadding) {
     listHeight -= CONTAINER_PADDING;
   }
 
@@ -235,7 +248,8 @@ const Body = ({
   const isShareFormEmpty =
     itemsCount === 0 &&
     Boolean(items?.[0]?.isRoomsOnly) &&
-    Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom);
+    (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
+      Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
 
   return (
     <StyledBody
@@ -258,6 +272,10 @@ const Body = ({
     >
       <InfoBar ref={infoBarRef} visible={itemsCount !== 0} />
       <BreadCrumbs visible={!isShareFormEmpty} />
+
+      {injectedElement
+        ? React.cloneElement(injectedElement, { ref: injectedElementRef })
+        : null}
 
       {withTabs && tabsData ? (
         <StyledTabs
@@ -299,19 +317,27 @@ const Body = ({
 
           {isSSR && !bodyHeight ? (
             <Scrollbar
-              style={{
-                height: `calc(100% - ${Math.abs(listHeight)}px)`,
-                overflow: "hidden",
-              }}
+              style={
+                {
+                  height: `calc(100% - ${Math.abs(listHeight + CONTAINER_PADDING)}px)`,
+                  overflow: "hidden",
+                  "--scrollbar-padding-inline-end": 0,
+                  "--scrollbar-padding-inline-end-mobile": 0,
+                } as React.CSSProperties
+              }
             >
               {items.map((item, index) => (
                 <div
                   key={item.id}
-                  style={{ height: 48, display: "flex", alignItems: "center" }}
+                  style={{
+                    height: 48,
+                    display: "flex",
+                    alignItems: "stretch",
+                  }}
                 >
                   <Item
                     index={index}
-                    style={{}}
+                    style={{ flexGrow: 1 }}
                     data={{
                       items,
                       onSelect,

@@ -1,8 +1,16 @@
 .searchInputBlock {
   max-height: 32px;
+  background-color: var(--input-bg);
+  border-radius: 3px;
 
   &.scale {
     width: 100%;
+  }
+
+  :global {
+    .input-block-icon {
+      border-radius: 3px;
+    }
   }
 }
 

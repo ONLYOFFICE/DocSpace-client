@@ -33,7 +33,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 const BackupToPublicRoomComponent = (props) => {
-  const { visible, setIsVisible } = props;
+  const { visible, setIsVisible, backupToPublicRoomData } = props;
   const { t, ready } = useTranslation(["Files", "Common"]);
 
   const onClose = () => {
@@ -41,9 +41,17 @@ const BackupToPublicRoomComponent = (props) => {
   };
 
   const onBackupTo = () => {
-    const { backupToPublicRoom, backupToPublicRoomData } = props;
-    backupToPublicRoom(backupToPublicRoomData);
+    const {
+      selectedItemId,
+      breadCrumbs,
+      onSelectFolder,
+      onClose: onCloseAction,
+    } = backupToPublicRoomData;
+
+    onSelectFolder && onSelectFolder(selectedItemId, breadCrumbs);
+
     onClose();
+    onCloseAction();
   };
 
   const onKeyUp = (e) => {

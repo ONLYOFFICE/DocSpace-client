@@ -95,16 +95,18 @@
   }
 }
 
-.modern .checkboxElement:hover {
-  &:not(.isIndexEditingMode) {
-    .checkbox {
-      display: flex;
-      opacity: 1;
-      user-select: none;
-    }
+@include not-mobile {
+  .modern .checkboxElement:hover {
+    &:not(.isIndexEditingMode) {
+      .checkbox {
+        display: flex;
+        opacity: 1;
+        user-select: none;
+      }
 
-    .element {
-      display: none;
+      .element {
+        display: none;
+      }
     }
   }
 }
@@ -115,12 +117,12 @@
 
   min-width: var(--row-min-width);
 
-  @include tablet {
-    white-space: nowrap;
-    overflow: var(--row-overflow);
-    text-overflow: var(--row-text-overflow);
-    height: var(--row-content-height);
-  }
+  // @include tablet-and-below {
+  //   white-space: nowrap;
+  //   overflow: var(--row-overflow);
+  //   text-overflow: var(--row-text-overflow);
+  //   height: var(--row-content-height);
+  // }
 }
 
 .contentElement {

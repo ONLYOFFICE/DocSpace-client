@@ -35,7 +35,12 @@ import { loginWithTfaCode } from "../api/user";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
 import { logout as logoutDesktop } from "../utils/desktop";
-import { frameCallEvent, isAdmin, insertDataLayer } from "../utils/common";
+import {
+  frameCallEvent,
+  isAdmin,
+  insertDataLayer,
+  isPublicRoom,
+} from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
@@ -180,12 +185,18 @@ class AuthStore {
     const isPortalRestore =
       this.settingsStore?.tenantStatus === TenantStatus.PortalRestore;
 
-    if (!isPortalRestore) requests.push(this.getCapabilities());
+    const isPortalEncryption =
+      this.settingsStore?.tenantStatus === TenantStatus.EncryptionProcess;
+
+    if (!isPortalRestore && !isPortalEncryption)
+      requests.push(this.getCapabilities());
 
     if (
       this.settingsStore?.isLoaded &&
-      this.settingsStore?.socketUrl &&
-      !isPortalDeactivated
+      !!this.settingsStore?.socketUrl &&
+      !isPortalDeactivated &&
+      !isPortalEncryption &&
+      !isPublicRoom()
     ) {
       requests.push(
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
@@ -249,7 +260,9 @@ class AuthStore {
 
     await Promise.all(request);
 
-    this.isPortalInfoLoaded = true;
+    runInAction(() => {
+      this.isPortalInfoLoaded = true;
+    });
   };
 
   setLanguage() {
@@ -455,8 +468,9 @@ class AuthStore {
 
   get isAuthenticated() {
     return (
-      this.settingsStore?.isLoaded && !!this.settingsStore?.socketUrl
-      // !isPublicRoom()
+      this.settingsStore?.isLoaded &&
+      !!this.settingsStore?.socketUrl &&
+      !isPublicRoom()
       //  this.userStore?.isAuthenticated
     );
   }

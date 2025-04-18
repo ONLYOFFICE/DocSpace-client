@@ -26,6 +26,9 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
+
+import { globalColors } from "../../../themes";
 
 import { Text } from "../../../components/text";
 import { Badge } from "../../../components/badge";
@@ -57,6 +60,7 @@ export const WhiteLabelHeader = ({
   onClear,
 }: IHeaderProps) => {
   const { t } = useTranslation("Common");
+  const theme = useTheme();
 
   return (
     <StyledHeader>
@@ -72,6 +76,11 @@ export const WhiteLabelHeader = ({
             fontWeight="700"
             label={t("Common:Paid")}
             isPaidBadge
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
           />
         ) : null}
       </div>

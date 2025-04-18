@@ -55,7 +55,7 @@ const withLoader = (WrappedComponent) => (Loader) => {
         ? accountsViewAs
         : viewAs;
 
-    const showLoader = window.ClientConfig.loaders.showLoader;
+    const showLoader = window?.ClientConfig?.loaders?.showLoader;
 
     return (!isEditor && firstLoad && !isGallery) ||
       !isLoaded ||

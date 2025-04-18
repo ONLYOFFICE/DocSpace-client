@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useCallback, useState } from "react";
+import merge from "lodash/merge";
 
 import {
   frameCallbackData,
@@ -52,8 +53,9 @@ const useSDK = (baseSdkConfig?: TFrameConfig) => {
         try {
           switch (methodName) {
             case "setConfig":
-              setSdkConfig(data);
-              res = data;
+              const newConfig = merge(baseSdkConfig, data);
+              setSdkConfig(newConfig);
+              res = newConfig;
               break;
             case "getEditorInstance":
               const instance = window.DocEditor?.instances[EDITOR_ID];

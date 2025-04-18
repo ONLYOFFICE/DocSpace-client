@@ -284,14 +284,7 @@ const useFiles = ({
 
         if (newFilter) {
           if (isRooms) {
-            return fetchRooms(
-              null,
-              newFilter,
-              undefined,
-              undefined,
-              undefined,
-              true,
-            );
+            return fetchRooms(null, newFilter, undefined, undefined, undefined);
           }
           const folderId = newFilter.folder;
           return fetchFiles(folderId, newFilter)?.finally(() => {

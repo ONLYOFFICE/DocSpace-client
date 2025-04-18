@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "Předchozí odkaz <1>«{{linkTitle}}»</1> zrušen <br/> Nový odkaz <1>«{{linkTitle}}»</1> vytvořen",
   "RoomGroupAdded": "Skupiny přidány.",
   "RoomGroupRemove": "Skupina odstraněna",
-  "RoomIndexExportSaved": "Export indexu místnosti uloženého do Dokumentů",
   "RoomIndexingDisabled": "Vypnutí automatického indexování souborů v místnosti",
   "RoomIndexingEnabled": "Automatické indexování souborů v místnosti povoleno",
   "RoomInviteResend": "Opětovné odeslání pozvánek:",

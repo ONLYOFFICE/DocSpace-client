@@ -36,13 +36,19 @@ const AdvancedSettings = ({
   isUIDisabled,
   isSendWelcomeEmail,
   setIsSendWelcomeEmail,
+  disableEmailVerification,
+  setDisableEmailVerification,
 }) => {
   const { t } = useTranslation("Ldap");
 
-  const onChange = (e) => {
+  const onChangeSendWelcomeEmail = (e) => {
     const checked = e.target.checked;
-
     setIsSendWelcomeEmail(checked);
+  };
+
+  const onChangeDisableEmailVerification = (e) => {
+    const checked = e.target.checked;
+    setDisableEmailVerification(checked);
   };
 
   return (
@@ -56,10 +62,26 @@ const AdvancedSettings = ({
           className="ldap_checkbox-send-welcome-email"
           label={t("LdapSendWelcomeLetter")}
           isChecked={isSendWelcomeEmail}
+          onChange={onChangeSendWelcomeEmail}
           isDisabled={!isLdapEnabled || isUIDisabled}
-          onChange={onChange}
         />
         <HelpButton tooltipContent={t("LdapSendWelcomeLetterTooltip")} />
+      </div>
+
+      <div className="ldap_advanced-settings-header">
+        <Checkbox
+          className="ldap_checkbox-disable-email-verification"
+          label={t("Settings:DisableEmailVerification")}
+          isChecked={disableEmailVerification}
+          onChange={onChangeDisableEmailVerification}
+          isDisabled={!isLdapEnabled || isUIDisabled}
+        />
+        <HelpButton
+          tooltipContent={t("Settings:DisableEmailDescription", {
+            sectionName: t("Common:LDAP"),
+            productName: t("Common:ProductName"),
+          })}
+        />
       </div>
     </div>
   );
@@ -67,6 +89,8 @@ const AdvancedSettings = ({
 
 export default inject(({ ldapStore }) => {
   const {
+    disableEmailVerification,
+    setDisableEmailVerification,
     isLdapEnabled,
     isUIDisabled,
     setIsSendWelcomeEmail,
@@ -77,5 +101,7 @@ export default inject(({ ldapStore }) => {
     isUIDisabled,
     setIsSendWelcomeEmail,
     isSendWelcomeEmail,
+    disableEmailVerification,
+    setDisableEmailVerification,
   };
 })(observer(AdvancedSettings));

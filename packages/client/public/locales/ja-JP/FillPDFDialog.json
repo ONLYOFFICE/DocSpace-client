@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "記入する",
   "FillOutDescription": "エディターウィンドウで元のフォームのフィールドに入力できます。",
   "FillOutTitle": "自分で記入する",
-  "FillPDFDialogTitle": "次の役割として記入する：",
-  "ShareCollectButtonLabel": "ルームにコピー",
-  "ShareCollectDescription": "フォーム記入ルームでフォームを共有し、回答を収集します。既存のルームを選択するか、新しいルームを作成してください。",
-  "ShareCollectTitle": "共有"
+  "FillPDFDialogTitle": "次の役割として記入する："
 }

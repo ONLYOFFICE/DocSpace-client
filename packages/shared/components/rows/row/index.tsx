@@ -139,7 +139,7 @@ const Row = (props: RowProps) => {
     action: VDRIndexingAction,
   ) => {
     e.stopPropagation();
-    onChangeIndex(action);
+    onChangeIndex?.(action);
   };
 
   return (

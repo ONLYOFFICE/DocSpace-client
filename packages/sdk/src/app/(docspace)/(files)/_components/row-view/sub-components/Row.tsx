@@ -43,28 +43,32 @@ import Badges from "@docspace/shared/components/badges";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 
 import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
-import { generateFilesRowValue } from "../../../_utils";
+import { generateFilesItemValue } from "../../../_utils";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "../RowView.types";
 
 import styles from "../RowView.module.scss";
 import useFilesActions from "@/app/(docspace)/_hooks/useFilesActions";
+import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 
 const Row = observer(
-  ({ item, index, filterSortBy, timezone, displayFileExtension }: RowProps) => {
+  ({
+    item,
+    index,
+    filterSortBy,
+    timezone,
+    displayFileExtension,
+    isSSR,
+  }: RowProps) => {
     const filesSelectionStore = useFilesSelectionStore();
+    const { isItemActive } = useActiveItemsStore();
 
-    const [isInit, setIsInit] = React.useState(false);
     const { t } = useTranslation(["Common"]);
     const theme = useTheme();
     const { openFile } = useFilesActions({ t });
 
     const { getContextMenuModel } = useContextMenuModel({ item });
-
-    React.useEffect(() => {
-      setIsInit(true);
-    }, []);
 
     const element = (
       <RoomIcon logo={item.icon} title={item.title} showDefault={false} />
@@ -84,11 +88,21 @@ const Row = observer(
       />
     );
 
+    const onContextClick = (isRightMouseButtonClick?: boolean) => {
+      if (isRightMouseButtonClick && filesSelectionStore.selection.length > 1) {
+        return;
+      }
+
+      filesSelectionStore.setSelection([]);
+      filesSelectionStore.setBufferSelection(item);
+    };
+
     const contextMenuModel = getContextMenuModel(true);
 
     const isChecked = filesSelectionStore.isCheckedItem(item);
+    const inProgress = isItemActive(item);
 
-    const value = generateFilesRowValue(item, false, index);
+    const value = generateFilesItemValue(item, false, index);
 
     return (
       <StyledWrapper
@@ -120,12 +134,16 @@ const Row = observer(
             isDragging={false}
             isThirdPartyFolder={false}
             withAccess={false}
-            className={`${!isInit ? "row-list-item " : ""} files-row`}
+            className={classNames("files-row", {
+              "row-list-item": isSSR,
+            })}
             onSelect={() => filesSelectionStore.addSelection(item)}
+            onContextClick={onContextClick}
             element={element}
             contextOptions={contextMenuModel}
             getContextModel={getContextMenuModel}
             badgesComponent={badgesComponent}
+            inProgress={inProgress}
           >
             <RowContent
               item={item}

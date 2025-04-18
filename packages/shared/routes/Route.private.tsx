@@ -26,6 +26,7 @@
 
 /* eslint-disable react/prop-types */
 
+import React, { useEffect } from "react";
 import { Navigate, useLocation, useSearchParams } from "react-router-dom";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -68,28 +69,15 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     roomId,
     isLoadedPublicRoom,
     isLoadingPublicRoom,
+
+    limitedAccessDevToolsForUsers,
   } = props;
 
   const location = useLocation();
   const [searchParams] = useSearchParams();
 
-  const renderComponent = () => {
+  useEffect(() => {
     const key = searchParams.get("key");
-
-    if (isLoadedUser && !user && location.pathname.includes("/rooms/shared")) {
-      const filter = FilesFilter.getDefault();
-      const subFolder = new URLSearchParams(window.location.search).get(
-        "folder",
-      );
-      const path = "/rooms/share";
-
-      filter.folder = subFolder || roomId || "";
-      if (key) {
-        filter.key = key;
-      }
-
-      window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`);
-    }
 
     if (
       key &&
@@ -97,9 +85,43 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname.includes("/rooms/shared") &&
       !isLoadedPublicRoom &&
       !isLoadingPublicRoom &&
+      isLoadedUser &&
       validatePublicRoomKey
     ) {
       validatePublicRoomKey(key);
+    }
+  }, [
+    searchParams,
+    publicRoomKey,
+    location.pathname,
+    isLoadedPublicRoom,
+    isLoadingPublicRoom,
+    isLoadedUser,
+    validatePublicRoomKey,
+  ]);
+
+  const renderComponent = () => {
+    const key = searchParams.get("key");
+
+    if (location.pathname.includes("/rooms/shared")) {
+      if (!isLoadedUser) {
+        return <AppLoader />;
+      }
+
+      if (!user && isAuthenticated) {
+        const filter = FilesFilter.getDefault();
+        const subFolder = new URLSearchParams(window.location.search).get(
+          "folder",
+        );
+        const path = "/rooms/share";
+
+        filter.folder = subFolder || roomId || "";
+        if (key) {
+          filter.key = key;
+        }
+
+        return <Navigate to={`${path}?${filter.toUrlParams()}`} />;
+      }
     }
 
     if (!user && isAuthenticated) {
@@ -132,6 +154,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname === "/preparation-portal" ||
       location.pathname === "/management/preparation-portal";
 
+    const isEncryptionUrl = location.pathname === "/encryption-portal";
+
     const isPaymentsUrl =
       location.pathname === "/portal-settings/payments/portal-payments";
     const isBackupUrl =
@@ -149,9 +173,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname ===
       "/portal-settings/customization/general/portal-renaming";
 
-    const isOAuthPage = location.pathname.includes(
-      "portal-settings/developer-tools/oauth",
-    );
+    const isOAuthPage = location.pathname.includes("/developer-tools/oauth");
     const isAuthorizedAppsPage = location.pathname.includes("authorized-apps");
 
     const isBrandingPage = location.pathname.includes(
@@ -169,6 +191,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname.includes("bonus") && !isCommunity;
 
     const isAboutPage = location.pathname.includes("about");
+    const isDeveloperToolsPage = location.pathname.includes("/developer-tools");
 
     if (location.pathname === "/shared/invalid-link") {
       return children;
@@ -214,16 +237,31 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (
       isLoaded &&
       isAuthenticated &&
-      tenantStatus === TenantStatus.PortalRestore &&
-      !isPortalUrl
+      tenantStatus === TenantStatus.EncryptionProcess &&
+      !isEncryptionUrl
     ) {
       return (
         <Navigate
           replace
-          to={combineUrl(
-            window.ClientConfig?.proxy?.url,
-            "/preparation-portal",
-          )}
+          to={combineUrl(window.ClientConfig?.proxy?.url, "/encryption-portal")}
+        />
+      );
+    }
+
+    if (
+      isLoaded &&
+      isAuthenticated &&
+      tenantStatus === TenantStatus.PortalRestore &&
+      !isPortalUrl
+    ) {
+      const url = isManagement
+        ? "management/preparation-portal"
+        : "/preparation-portal";
+
+      return (
+        <Navigate
+          replace
+          to={combineUrl(window.ClientConfig?.proxy?.url, url)}
         />
       );
     }
@@ -306,12 +344,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     }
 
     if (isOAuthPage && !identityServerEnabled) {
-      return (
-        <Navigate
-          replace
-          to="/portal-settings/developer-tools/javascript-sdk"
-        />
-      );
+      return <Navigate replace to="/developer-tools/javascript-sdk" />;
     }
 
     if (isAuthorizedAppsPage && !identityServerEnabled) {
@@ -323,11 +356,17 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       );
     }
 
+    if (isDeveloperToolsPage) {
+      if (user?.isVisitor || (limitedAccessDevToolsForUsers && !user?.isAdmin))
+        return <Navigate replace to="/error/403" />;
+    }
+
     if (
       !restricted ||
       isAdmin ||
       (withManager && !user?.isVisitor && !user?.isCollaborator) ||
-      (withCollaborator && !user?.isVisitor)
+      (withCollaborator &&
+        (!user?.isVisitor || (user?.isVisitor && user?.hasPersonalFolder)))
     ) {
       return children;
     }

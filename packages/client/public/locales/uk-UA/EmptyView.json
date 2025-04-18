@@ -42,9 +42,7 @@
   "UploadDeviceOptionTitle": "Передати з пристрою",
   "UploadDevicePDFFormOptionDescription": "Передайте готову PDF-форму до кімнати зі свого пристрою",
   "UploadDevicePDFFormOptionTitle": "Передати з пристрою",
-  "UploadFromPortalDescription": "Передавайте файли будь-якого типу з розділів «Документи» та «Кімнати»",
   "UploadFromPortalTitle": "Передати з {{productName}}",
   "UploadPDFFormOptionDescription": "Виберіть готову PDF-форму, доступну в {{productName}}, і передайте її до кімнати.",
-  "UserEmptyDescription": "Тут з'являться файли та папки, передані адміністраторами.",
   "VirtualDataRoomEmptyTitle": "Ласкаво просимо до віртуальної кімнати даних"
 }

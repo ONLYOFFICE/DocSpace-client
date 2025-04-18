@@ -31,13 +31,12 @@ import { RoomsType } from "@docspace/shared/enums";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { isMobile } from "@docspace/shared/utils";
+import { isMobile, getCountTilesInRow } from "@docspace/shared/utils";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
 
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
-import { getCountTilesInRow } from "SRC_DIR/helpers/filesUtils";
 import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
 
 class HotkeyStore {
@@ -731,7 +730,7 @@ class HotkeyStore {
   };
 
   get countTilesInRow() {
-    return getCountTilesInRow();
+    return getCountTilesInRow(this.treeFoldersStore?.isRoomsFolder);
   }
 
   get division() {
@@ -747,7 +746,7 @@ class HotkeyStore {
     const { filesList } = this.filesStore;
 
     if (this.caretIndex !== -1) {
-      return filesList[this.caretIndex].isFolder;
+      return filesList[this.caretIndex]?.isFolder;
     }
     return false;
   }
@@ -783,7 +782,6 @@ class HotkeyStore {
 
   get nextForTileDown() {
     const { filesList, folders, files } = this.filesStore;
-
     const nextTileFile = filesList[this.caretIndex + this.countTilesInRow];
     const foldersLength = folders.length;
 

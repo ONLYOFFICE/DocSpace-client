@@ -130,6 +130,7 @@ const GroupsRowComponent = ({
               lineHeight="20px"
               isTextOverflow
               onClick={onOpenGroup}
+              truncate
             >
               {item.name}
             </Link>
@@ -145,7 +146,7 @@ const GroupsRowComponent = ({
               isTextOverflow
               onClick={onOpenGroup}
             >
-              {t("PeopleTranslations:PeopleCount", {
+              {t("PeopleTranslations:MembersCount", {
                 count: item.membersCount,
               })}
             </Link>

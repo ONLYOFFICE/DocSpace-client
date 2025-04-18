@@ -178,14 +178,14 @@ const CustomSelectedColor = styled.div<ColorItemProps>`
       fill: ${(props) =>
         props.color === globalColors.white
           ? globalColors.black
-          : globalColors.white};
+          : globalColors.white} !important;
     }
     &:hover {
       path {
         fill: ${(props) =>
           props.color === globalColors.white
             ? globalColors.black
-            : globalColors.white};
+            : globalColors.white} !important;
       }
     }
   }

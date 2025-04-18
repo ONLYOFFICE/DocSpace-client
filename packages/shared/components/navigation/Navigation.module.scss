@@ -206,7 +206,7 @@
   }
 }
 
-.trashWarning {
+.warningText {
   box-sizing: border-box;
   height: 32px;
   padding: 8px 12px;
@@ -357,7 +357,7 @@
 
   inset-inline-start: -20px;
 
-  &[data-with-logo="true"] {
+  &[data-with-logo="true"][data-is-frame="false"] {
     inset-inline-start: 207px;
   }
 
@@ -493,7 +493,16 @@
       .room-title {
         cursor: pointer;
         min-height: 33px;
+        overflow: hidden;
       }
+    }
+
+    .badges-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      @include truncate;
     }
 
     .navigation-header-separator {
@@ -579,10 +588,10 @@
       }
     }
 
-    grid-template-columns: 29px auto 1fr;
+    grid-template-columns: 29px auto 1fr !important;
 
     &[data-is-root-folder="true"] {
-      grid-template-columns: auto 1fr;
+      grid-template-columns: auto 1fr !important;
     }
   }
 }

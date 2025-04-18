@@ -2,8 +2,5 @@
   "FillOutButtonLabel": "작성: ",
   "FillOutDescription": "편집기 창에서 원래 양식의 필드를 작성합니다.",
   "FillOutTitle": "직접 양식 작성",
-  "FillPDFDialogTitle": "다음으로 작성:",
-  "ShareCollectButtonLabel": "룸으로 복사",
-  "ShareCollectDescription": "양식 작성 룸을 통해 양식을 공유하고 응답을 수집합니다.",
-  "ShareCollectTitle": "공유"
+  "FillPDFDialogTitle": "다음으로 작성:"
 }

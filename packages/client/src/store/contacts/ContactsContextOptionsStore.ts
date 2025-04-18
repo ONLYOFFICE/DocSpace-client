@@ -64,6 +64,7 @@ import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url
 import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
 import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
+import PersonShareReactSvgUrl from "PUBLIC_DIR/images/person.share.react.svg?url";
 import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
 
@@ -74,11 +75,13 @@ import {
   onDeletePersonalDataClick,
   onInviteAgainClick,
   onInviteMultipleAgain,
+  shareGuest,
 } from "SRC_DIR/helpers/contacts";
 
 import InfoPanelStore from "../InfoPanelStore";
 import ProfileActionsStore from "../ProfileActionsStore";
 import DialogsStore from "../DialogsStore";
+import SettingsSetupStore from "../SettingsSetupStore";
 
 import UsersStore from "./UsersStore";
 import DialogStore from "./DialogStore";
@@ -100,6 +103,7 @@ class ContactsConextOptionsStore {
     public targetUserStore: TargetUserStore,
     public dialogsStore: DialogsStore,
     public currentQuotaStore: CurrentQuotasStore,
+    public setup: SettingsSetupStore,
   ) {
     this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
@@ -111,7 +115,7 @@ class ContactsConextOptionsStore {
     this.targetUserStore = targetUserStore;
     this.dialogsStore = dialogsStore;
     this.currentQuotaStore = currentQuotaStore;
-
+    this.setup = setup;
     makeAutoObservable(this);
   }
 
@@ -162,6 +166,8 @@ class ContactsConextOptionsStore {
         case "separator-1":
           return { key: option, isSeparator: true };
         case "separator-2":
+          return { key: option, isSeparator: true };
+        case "separator-3":
           return { key: option, isSeparator: true };
 
         case "profile":
@@ -281,6 +287,14 @@ class ContactsConextOptionsStore {
             onClick: () => this.onResetAuth(item),
             disabled: this.tfaStore.tfaSettings !== "app",
           };
+        case "share-guest":
+          return {
+            id: "option_share-guest",
+            key: option,
+            icon: PersonShareReactSvgUrl,
+            label: t("PeopleTranslations:ShareGuest"),
+            onClick: () => shareGuest(item, t),
+          };
         case "change-type":
           return {
             id: "option_change-type",
@@ -326,6 +340,7 @@ class ContactsConextOptionsStore {
     const isGuests = contactsTab === "guests";
 
     const { isOwner: isUserOwner, isAdmin: isUserAdmin } = this.userStore.user!;
+    const { standalone } = this.settingsStore;
 
     const { isCollaborator, isRoomAdmin, isAdmin, isVisitor } =
       item ?? selectionUsersRights;
@@ -339,7 +354,7 @@ class ContactsConextOptionsStore {
       title: getUserTypeTranslation(EmployeeType.Admin, t),
       icon: isGuests ? PersonAdminReactSvgUrl : null,
       badgeLabel: isGuests ? t("Common:Paid") : undefined,
-      isPaidBadge: isGuests,
+      isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.Admin,
       action: EmployeeType.Admin,
@@ -354,7 +369,7 @@ class ContactsConextOptionsStore {
       title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       icon: isGuests ? PersonManagerReactSvgUrl : null,
       badgeLabel: isGuests ? t("Common:Paid") : undefined,
-      isPaidBadge: isGuests,
+      isPaidBadge: !standalone,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.RoomAdmin,
       action: EmployeeType.RoomAdmin,
@@ -376,19 +391,25 @@ class ContactsConextOptionsStore {
       isActive: item ? isCollaborator : userSelectionRole === EmployeeType.User,
     };
 
-    if (
-      (isRoomAdmin || isCollaborator || isAdmin || isVisitor) &&
-      isUserOwner
-    ) {
-      options.push(adminOption);
+    const guestOption = {
+      id: "menu_change-guest",
+      key: EmployeeType.Guest,
+      label: getUserTypeTranslation(EmployeeType.Guest, t),
+      title: getUserTypeTranslation(EmployeeType.Guest, t),
+      "data-action": EmployeeType.Guest,
+      action: EmployeeType.Guest,
+      onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
+      isActive: item ? isVisitor : userSelectionRole === EmployeeType.Guest,
+    };
 
-      if ((isAdmin || isRoomAdmin) && !isCollaborator)
-        options.push(roomAdminOption);
-    }
+    if (isUserAdmin) {
+      if (isUserOwner) {
+        options.push(adminOption);
+      }
 
-    if ((isCollaborator || isVisitor) && isUserAdmin) {
       options.push(roomAdminOption);
       options.push(userOption);
+      if (!isVisitor) options.push(guestOption);
     }
 
     return options;
@@ -565,6 +586,15 @@ class ContactsConextOptionsStore {
   toggleDataReassignmentDialog = (item: TItem) => {
     const { setDialogData, setDataReassignmentDialogVisible, closeDialogs } =
       this.dialogStore;
+
+    if (!this.setup) return;
+
+    const {
+      dataReassignment,
+      dataReassignmentProgress,
+      dataReassignmentTerminate,
+    } = this.setup;
+
     const {
       id,
       displayName,
@@ -578,13 +608,19 @@ class ContactsConextOptionsStore {
     closeDialogs();
 
     setDialogData({
-      id,
-      avatar,
-      displayName,
-      statusType,
-      userName,
-      isCollaborator,
-      isVisitor,
+      user: {
+        id,
+        avatar,
+        displayName,
+        statusType,
+        userName,
+        isCollaborator,
+        isVisitor,
+      },
+      reassignUserData: dataReassignment,
+      getReassignmentProgress: dataReassignmentProgress,
+      cancelReassignment: dataReassignmentTerminate,
+      showDeleteProfileCheckbox: true,
     });
 
     setDataReassignmentDialogVisible(true);

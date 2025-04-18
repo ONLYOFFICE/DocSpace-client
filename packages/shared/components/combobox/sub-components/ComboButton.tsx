@@ -80,6 +80,12 @@ const ComboButton: React.FC<TComboButtonProps> = ({
 
   const comboButtonClassName = `combo-button combo-button_${isOpen ? "open" : "closed"}`;
 
+  const Icon = selectedOption.icon;
+  const isIconReactElement =
+    Icon &&
+    typeof Icon === "function" &&
+    React.isValidElement(React.createElement(Icon));
+
   return (
     <ComboButtonTheme
       isOpen={isOpen}
@@ -124,10 +130,14 @@ const ComboButton: React.FC<TComboButtonProps> = ({
           isLoading={isLoading}
           data-test-id="combo-button-icon"
         >
-          <ReactSVG
-            src={selectedOption.icon}
-            className={fillIcon ? "combo-button_selected-icon" : ""}
-          />
+          {isIconReactElement ? React.createElement(Icon) : null}
+
+          {typeof selectedOption.icon === "string" ? (
+            <ReactSVG
+              src={selectedOption.icon}
+              className={fillIcon ? "combo-button_selected-icon" : ""}
+            />
+          ) : null}
         </StyledIcon>
       ) : null}
 

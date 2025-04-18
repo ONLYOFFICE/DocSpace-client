@@ -26,11 +26,13 @@
 
 import moment from "moment";
 import { TCreatedBy, TPathParts } from "../../types";
-import {
+import type {
   EmployeeActivationStatus,
   EmployeeStatus,
+  FileFillingFormStatus,
   FileStatus,
   FileType,
+  FillingFormStatusHistory,
   FolderType,
   RoomsType,
   ShareAccessRights,
@@ -69,6 +71,8 @@ export type TFileSecurity = {
   Rename: boolean;
   Review: boolean;
   SubmitToFormGallery: boolean;
+  StopFilling?: boolean;
+  ResetFilling?: boolean;
   EditForm: boolean;
   Comment: boolean;
   CreateRoomFrom: boolean;
@@ -84,6 +88,7 @@ export type TAvailableExternalRights = {
   Read: boolean;
   Restrict: boolean;
   Review: boolean;
+  FillForms: boolean;
 };
 
 export type TFile = {
@@ -116,6 +121,7 @@ export type TFile = {
   viewAccessibility: TFileViewAccessibility;
   viewUrl: string;
   webUrl: string;
+  shortWebUrl: string;
   availableExternalRights?: TAvailableExternalRights;
   providerId?: number;
   providerKey?: string;
@@ -124,6 +130,7 @@ export type TFile = {
   expired?: string;
   isForm?: boolean;
   isFolder?: boolean;
+  formFillingStatus?: FileFillingFormStatus;
   startFilling?: boolean;
   fileEntryType: number;
   hasDraft?: boolean;
@@ -245,6 +252,8 @@ export type TOperation = {
   id: string;
   processed: string;
   progress: number;
+  url?: string;
+  files?: TFile[];
 };
 
 export type TUploadOperation = {
@@ -492,4 +501,25 @@ export type TUploadBackup = {
   EndUpload: boolean;
   Success: boolean;
   ChunkSize: number;
+};
+
+export type TFormRoleMappingRequest = {
+  formId: number;
+  roles: {
+    userId: string;
+    roleName: string;
+    roleColor: string;
+    roomId: number;
+  }[];
+};
+
+export type TFileFillingFormStatus = {
+  user: TUser;
+  stopedBy?: TUser;
+  roleName: string;
+  roleColor: string;
+  roleStatus: FileFillingFormStatus;
+  sequence: number;
+  submitted: boolean;
+  history?: Record<FillingFormStatusHistory, string>;
 };

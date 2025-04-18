@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "Prethodni link <1>«{{linkTitle}}»</1> je opozvan <br/> Novi link <1>«{{linkTitle}}»</1> je kreiran",
   "RoomGroupAdded": "Grupe dodate.",
   "RoomGroupRemove": "Grupa uklonjena",
-  "RoomIndexExportSaved": "Izvoz indeksa sobe sačuvan u Dokumentima",
   "RoomIndexingDisabled": "Automatsko indeksiranje fajlova onemogućeno u sobi",
   "RoomIndexingEnabled": "Automatsko indeksiranje fajlova omogućeno u sobi",
   "RoomInviteResend": "Pozivnice ponovo poslate:",

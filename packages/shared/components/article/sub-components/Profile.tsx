@@ -97,22 +97,7 @@ const ArticleProfile = (props: ArticleProfileProps) => {
 
   const model = getActions?.(t);
 
-  const firstName = user?.firstName
-    .split(" ")
-    .filter((name) => name.trim().length > 0)
-    .join(" ");
-  const lastName = user?.lastName
-    .split(" ")
-    .filter((name) => name.trim().length > 0)
-    .join(" ");
-
   const displayName = user?.displayName;
-
-  const [firstTerm, secondTerm] =
-    displayName &&
-    displayName.indexOf(user.firstName) > displayName.indexOf(user.lastName)
-      ? [lastName, firstName]
-      : [firstName, lastName];
 
   const { interfaceDirection } = useTheme();
   const isRtl = interfaceDirection === "rtl";
@@ -154,12 +139,7 @@ const ArticleProfile = (props: ArticleProfileProps) => {
               onClick={onNameClick}
             >
               <Text fontWeight={600} noSelect truncate dir="auto">
-                {firstTerm}
-                &nbsp;
-              </Text>
-              <Text fontWeight={600} noSelect truncate dir="auto">
-                {secondTerm}
-                &nbsp;
+                {displayName}
               </Text>
             </div>
             <div ref={iconRef} className="option-button">

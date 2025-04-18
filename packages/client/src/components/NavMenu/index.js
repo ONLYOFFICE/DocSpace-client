@@ -96,6 +96,8 @@ const NavMenu = (props) => {
     isNavOpened: isNavOpenedProp = false,
     isNavHoverEnabled: isNavHoverEnabledProp = true,
     isBackdropVisible: isBackdropVisibleProp = false,
+
+    isPublicRoom,
   } = props;
 
   const timeout = React.useRef(null);
@@ -173,7 +175,7 @@ const NavMenu = (props) => {
       />
 
       {!hideHeader ? (
-        isLoaded && isAuthenticated ? (
+        isLoaded && isAuthenticated && !isPublicRoom ? (
           <>
             {!isPreparationPortal ? (
               <HeaderNav hideProfileMenu={hideProfileMenu} />
@@ -189,7 +191,7 @@ const NavMenu = (props) => {
               backdropClick={backdropClick}
             />
           </>
-        ) : !isLoaded && isAuthenticated ? (
+        ) : !isLoaded && isAuthenticated && !isPublicRoom ? (
           <NavMenuHeaderLoader />
         ) : (
           <HeaderUnAuth />
@@ -220,26 +222,31 @@ NavMenu.propTypes = {
   isLoaded: PropTypes.bool,
 };
 
-const NavMenuWrapper = inject(({ authStore, settingsStore }) => {
-  const { isAuthenticated, isLoaded, language } = authStore;
-  const {
-    isDesktopClient: isDesktop,
-    frameConfig,
-    isFrame,
-    currentDeviceType,
-  } = settingsStore;
+const NavMenuWrapper = inject(
+  ({ authStore, settingsStore, publicRoomStore }) => {
+    const { isAuthenticated, isLoaded, language } = authStore;
+    const {
+      isDesktopClient: isDesktop,
+      frameConfig,
+      isFrame,
+      currentDeviceType,
+    } = settingsStore;
+    const { isPublicRoom } = publicRoomStore;
 
-  return {
-    isAuthenticated,
-    isLoaded,
-    isDesktop,
-    language,
+    return {
+      isAuthenticated,
+      isLoaded,
+      isDesktop,
+      language,
 
-    showHeader: frameConfig?.showHeader,
-    isFrame,
-    currentDeviceType,
-  };
-})(observer(withTranslation(["Common"])(NavMenu)));
+      showHeader: frameConfig?.showHeader,
+      isFrame,
+      currentDeviceType,
+
+      isPublicRoom,
+    };
+  },
+)(observer(withTranslation(["Common"])(NavMenu)));
 
 const NavMenuComponent = ({ ...props }) => <NavMenuWrapper {...props} />;
 NavMenuComponent.displayName = "NavMenuComponent";

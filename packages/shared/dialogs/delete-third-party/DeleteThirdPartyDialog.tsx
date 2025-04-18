@@ -124,7 +124,7 @@ const DeleteThirdPartyDialog = ({
     >
       <ModalDialog.Header>{t("DisconnectCloudTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {t("DisconnectCloudMessage", {
+        {t("ThirdPartyDisconnectPrompt", {
           service: removeItem.title,
           account: removeItem.provider_key,
         })}

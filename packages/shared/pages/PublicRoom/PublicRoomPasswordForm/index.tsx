@@ -145,7 +145,7 @@ const PublicRoomPassword = (props: PublicRoomPasswordProps) => {
             <FormWrapper>
               <div className="password-form">
                 <Text fontSize="16px" fontWeight="600">
-                  {t("UploadPanel:EnterPassword")}
+                  {t("Common:EnterPassword")}
                 </Text>
 
                 <Text

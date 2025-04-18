@@ -120,7 +120,7 @@ const ClientForm = ({
   }, [clientSecretProps, setClientSecretProps]);
 
   const onCancelClick = () => {
-    navigate("/portal-settings/developer-tools/oauth");
+    navigate("/developer-tools/oauth");
   };
 
   const onSaveClick = async () => {
@@ -152,8 +152,12 @@ const ClientForm = ({
 
         setIsRequestRunning(true);
 
+        await setJwtToken!();
+
         await addClient?.(form);
       } else {
+        await setJwtToken!();
+
         await updateClient?.(clientId, form);
       }
 

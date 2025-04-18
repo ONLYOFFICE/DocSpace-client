@@ -58,6 +58,7 @@ import {
   TSendWelcomeEmailData,
   TPortalCultures,
   TStorageBackup,
+  TEncryptionSettings,
 } from "./types";
 
 export async function getSettings(withPassword = false, headers = null) {
@@ -977,11 +978,11 @@ export function getQuotaSettings() {
   });
 }
 
-export function createWebhook(name, uri, secretKey, ssl) {
+export function createWebhook(name, uri, secretKey, ssl, triggers, targetId) {
   return request({
     method: "post",
     url: `/settings/webhook`,
-    data: { name, uri, secretKey, ssl },
+    data: { name, uri, secretKey, enabled: true, ssl, triggers, targetId },
   });
 }
 
@@ -992,23 +993,30 @@ export function getAllWebhooks() {
   });
 }
 
-export function updateWebhook(id, name, uri, secretKey, ssl) {
+export function updateWebhook(
+  id,
+  name,
+  uri,
+  secretKey,
+  ssl,
+  triggers,
+  targetId,
+) {
   return request({
     method: "put",
     url: `/settings/webhook`,
-    data: { id, name, uri, secretKey, ssl },
+    data: { id, name, uri, secretKey, enabled: true, ssl, triggers, targetId },
   });
 }
 
 export function toggleEnabledWebhook(webhook) {
   return request({
     method: "put",
-    url: `/settings/webhook`,
+    url: `/settings/webhook/enable`,
     data: {
       id: webhook.id,
       name: webhook.name,
       uri: webhook.uri,
-      secretKey: webhook.secretKey,
       enabled: !webhook.enabled,
     },
   });
@@ -1277,6 +1285,17 @@ export function getCronLdap() {
   return request(options);
 }
 
+export function setLimitedAccessForUsers(enable: boolean) {
+  const data = { limitedAccessForUsers: enable };
+  const options = {
+    method: "post",
+    url: "/settings/devtoolsaccess",
+    data,
+  };
+
+  return request(options);
+}
+
 export function getDeepLinkSettings() {
   const options = {
     method: "get",
@@ -1294,4 +1313,32 @@ export function saveDeepLinkSettings(handlingMode: number) {
   };
 
   return request(options);
+}
+
+export function startEncryption(notifyUsers) {
+  const options = {
+    method: "post",
+    url: "/settings/encryption/start",
+    data: { notifyUsers },
+  };
+
+  return request(options);
+}
+
+export function getEncryptionProgress() {
+  const options = {
+    method: "get",
+    url: "/settings/encryption/progress",
+  };
+
+  return request(options);
+}
+
+export function getEncryptionSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/encryption/settings",
+  };
+
+  return request(options) as TEncryptionSettings;
 }

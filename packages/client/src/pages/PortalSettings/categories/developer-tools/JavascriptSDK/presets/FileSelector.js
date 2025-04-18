@@ -24,55 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
-import { Label } from "@docspace/shared/components/label";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 import { inject, observer } from "mobx-react";
+
 import SDK from "@onlyoffice/docspace-sdk-js";
 
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ComboBox } from "@docspace/shared/components/combobox";
 import { HelpButton } from "@docspace/shared/components/help-button";
+import { Label } from "@docspace/shared/components/label";
+import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
+import { Text } from "@docspace/shared/components/text";
 import { FilterType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import { getSdkScriptUrl, loadScript } from "@docspace/shared/utils/common";
 
-import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
-import { loadScript } from "@docspace/shared/utils/common";
-import { ViewSelector } from "@docspace/shared/components/view-selector";
-
-import FromScriptUrl from "PUBLIC_DIR/images/code.react.svg?url";
-import FromLibUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
-
-import SubtitleUrl from "PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url";
-import SearchUrl from "PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url";
-import SubtitleUrlDark from "PUBLIC_DIR/images/sdk-presets_subtitle_dark.png?url";
-import SearchUrlDark from "PUBLIC_DIR/images/sdk-presets_files-search_dark.png?url";
+import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import { TooltipContent } from "../sub-components/TooltipContent";
-import Integration from "../sub-components/Integration";
+import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
-import { WidthSetter } from "../sub-components/WidthSetter";
-import { HeightSetter } from "../sub-components/HeightSetter";
-import { FrameIdSetter } from "../sub-components/FrameIdSetter";
-import { PresetWrapper } from "../sub-components/PresetWrapper";
-import { SelectTextInput } from "../sub-components/SelectTextInput";
-import { CancelTextInput } from "../sub-components/CancelTextInput";
-import { MainElementParameter } from "../sub-components/MainElementParameter";
-import { PreviewBlock } from "../sub-components/PreviewBlock";
-
-import { dimensionsModel, defaultSize, defaultDimension } from "../constants";
+import SearchUrl from "PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url";
+import SearchUrlDark from "PUBLIC_DIR/images/sdk-presets_files-search_dark.png?url";
+import SubtitleUrl from "PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url";
+import SubtitleUrlDark from "PUBLIC_DIR/images/sdk-presets_subtitle_dark.png?url";
 
 import {
-  Controls,
+  defaultDimension,
+  defaultSize,
+  dimensionsModel,
+  sdkSource,
+  sdkVersion,
+} from "../constants";
+
+import { CancelTextInput } from "../sub-components/CancelTextInput";
+import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { HeightSetter } from "../sub-components/HeightSetter";
+import Integration from "../sub-components/Integration";
+import { MainElementParameter } from "../sub-components/MainElementParameter";
+import { PresetWrapper } from "../sub-components/PresetWrapper";
+import { PreviewBlock } from "../sub-components/PreviewBlock";
+import { SelectTextInput } from "../sub-components/SelectTextInput";
+import { TooltipContent } from "../sub-components/TooltipContent";
+import { VersionSelector } from "../sub-components/VersionSelector";
+import { WidthSetter } from "../sub-components/WidthSetter";
+
+import {
   CategorySubHeader,
-  ControlsGroup,
-  LabelGroup,
-  ControlsSection,
-  Frame,
   Container,
+  Controls,
+  ControlsGroup,
+  ControlsSection,
   FilesSelectorInputWrapper,
+  Frame,
+  LabelGroup,
 } from "./StyledPresets";
 
 const FileSelector = (props) => {
@@ -109,8 +113,12 @@ const FileSelector = (props) => {
       label: t(`Common:Spreadsheets`),
     },
     {
+      key: FilterType.PDFForm,
+      label: getManyPDFTitle(t, true),
+    },
+    {
       key: FilterType.Pdf,
-      label: t(`Files:Forms`),
+      label: getManyPDFTitle(t, false),
     },
     {
       key: FilterType.ArchiveOnly,
@@ -130,7 +138,9 @@ const FileSelector = (props) => {
     },
   ];
 
-  const [fromPackage, setFromPackage] = useState(true);
+  const [version, onSetVersion] = useState(sdkVersion[200]);
+
+  const [source, onSetSource] = useState(sdkSource.Package);
 
   const [sharedLinks, setSharedLinks] = useState(null);
   const [typeDisplay, setTypeDisplay] = useState(fileTypeDisplay[0].value);
@@ -165,6 +175,10 @@ const FileSelector = (props) => {
     },
   });
 
+  const fromPackage = source === sdkSource.Package;
+
+  const sdkScriptUrl = getSdkScriptUrl(version);
+
   const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
 
   const destroyFrame = () => {
@@ -178,17 +192,20 @@ const FileSelector = (props) => {
   useEffect(() => {
     const script = document.getElementById("sdk-script");
 
-    if (!fromPackage && !script) {
-      loadScript(SDK_SCRIPT_URL, "sdk-script");
-    } else {
-      script?.remove();
+    if (script) {
+      script.remove();
+      destroyFrame();
+    }
+
+    if (!fromPackage) {
+      loadScript(sdkScriptUrl, "sdk-script");
     }
 
     return () => {
       destroyFrame();
       setTimeout(() => script?.remove(), 10);
     };
-  }, [fromPackage]);
+  }, [source, version]);
 
   useEffect(() => {
     initFrame();
@@ -276,35 +293,12 @@ const FileSelector = (props) => {
     }));
   };
 
-  const surceSelectorData = [
-    {
-      id: "sdk-source-script",
-      value: "script",
-      icon: FromScriptUrl,
-    },
-    {
-      id: "sdk-source-lib",
-      value: "lib",
-      icon: FromLibUrl,
-    },
-  ];
-
-  const onChangeView = useCallback((view) => {
-    setFromPackage(view === "lib");
-  }, []);
-
   const preview = (
     <Frame
       width={config.width.includes("px") ? config.width : undefined}
       height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
-      <ViewSelector
-        onChangeView={onChangeView}
-        viewAs={fromPackage}
-        viewSettings={surceSelectorData}
-        style={{ position: "absolute", right: "8px", top: "8px", zIndex: 10 }}
-      />
       <div id={config.frameId} />
     </Frame>
   );
@@ -321,10 +315,15 @@ const FileSelector = (props) => {
           preview={preview}
           theme={theme}
           frameId={config.frameId}
-          scriptUrl={SDK_SCRIPT_URL}
+          scriptUrl={sdkScriptUrl}
           config={config}
         />
         <Controls>
+          <VersionSelector
+            t={t}
+            onSetSource={onSetSource}
+            onSetVersion={onSetVersion}
+          />
           <MainElementParameter
             t={t}
             config={config}

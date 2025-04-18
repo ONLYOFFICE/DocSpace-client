@@ -41,6 +41,8 @@ import { IpSecuritySection } from "./ipSecurity";
 import { AdminMessageSection } from "./adminMessage";
 import { SessionLifetimeSection } from "./sessionLifetime";
 import { BruteForceProtectionSection } from "./bruteForceProtection";
+import { DevToolsAccessSection } from "./devToolsAccess";
+
 import MobileView from "./mobileView";
 
 const AccessPortal = (props) => {
@@ -56,6 +58,7 @@ const AccessPortal = (props) => {
     isMobileView,
     resetIsInit,
     helpCenterDomain,
+    limitedDevToolsBlockHelpUrl,
   } = props;
 
   useEffect(() => {
@@ -66,7 +69,8 @@ const AccessPortal = (props) => {
     return () => resetIsInit();
   }, []);
 
-  if (isMobileView) return <MobileView />;
+  if (isMobileView)
+    return <MobileView withoutExternalLink={!helpCenterDomain} />;
   return (
     <MainContainer
       className="desktop-view"
@@ -154,6 +158,29 @@ const AccessPortal = (props) => {
 
       <TrustedMailSection />
       <StyledSettingsSeparator />
+
+      <Text fontSize="16px" fontWeight="700">
+        {t("DeveloperToolsAccess")}
+      </Text>
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight="400">
+          {t("DeveloperToolsAccessDescription")}
+        </Text>
+        {limitedDevToolsBlockHelpUrl ? (
+          <Link
+            className="link-learn-more"
+            target="_blank"
+            isHovered
+            color={currentColorScheme.main?.accent}
+            href={limitedDevToolsBlockHelpUrl}
+          >
+            {t("Common:LearnMore")}
+          </Link>
+        ) : null}
+      </div>
+      <DevToolsAccessSection />
+      <StyledSettingsSeparator />
+
       <Text fontSize="16px" fontWeight="700">
         {t("IPSecurity")}
       </Text>
@@ -254,6 +281,7 @@ export default inject(({ settingsStore, setup }) => {
     ipSettingsUrl,
     currentDeviceType,
     helpCenterDomain,
+    limitedDevToolsBlockHelpUrl,
   } = settingsStore;
   const { resetIsInit } = setup;
 
@@ -270,5 +298,6 @@ export default inject(({ settingsStore, setup }) => {
     isMobileView,
     resetIsInit,
     helpCenterDomain,
+    limitedDevToolsBlockHelpUrl,
   };
 })(withTranslation(["Settings", "Profile"])(observer(AccessPortal)));

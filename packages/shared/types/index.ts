@@ -100,6 +100,15 @@ export type NonFunctionProperties<T, ExcludeTypes> = Pick<
 
 export type MergeTypes<T, MergedType> = Omit<T, keyof MergedType> & MergedType;
 
+export type NonNullableFields<T> = {
+  [P in keyof T]: NonNullable<T[P]>;
+};
+
+export type TResolver<Res = VoidFunction, Rej = VoidFunction> = {
+  resolve: Res;
+  reject: Rej;
+};
+
 export type TPathParts = {
   id: number;
   title: string;
@@ -153,6 +162,16 @@ declare module "styled-components" {
     currentColorScheme?: TColorScheme;
   }
 }
+
+export interface StaticImageData {
+  src: string;
+  height: number;
+  width: number;
+  blurDataURL?: string;
+  blurWidth?: number;
+  blurHeight?: number;
+}
+
 declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;

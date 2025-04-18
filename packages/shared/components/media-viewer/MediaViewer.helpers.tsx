@@ -80,7 +80,7 @@ export const getPDFContextModel = (
     {
       id: "option_link-for-room-members",
       key: "link-for-room-members",
-      label: t("Files:CopyLink"),
+      label: t("Common:CopyLink"),
       icon: InvitationLinkReactSvgUrl,
       onClick: () => funcs.onCopyLink?.(item, t),
       disabled: false,
@@ -111,7 +111,7 @@ export const getPDFContextModel = (
     {
       id: "option_download-as",
       key: "download-as",
-      label: t("Translations:DownloadAs"),
+      label: t("Common:DownloadAs"),
       icon: DownloadAsReactSvgUrl,
       onClick: funcs.onClickDownloadAs,
       disabled: !item.security.Download,

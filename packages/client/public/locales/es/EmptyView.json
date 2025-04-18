@@ -42,9 +42,7 @@
   "UploadDeviceOptionTitle": "Sube desde tu dispositivo",
   "UploadDevicePDFFormOptionDescription": "Cargue un formulario PDF listo a la sala desde su dispositivo.",
   "UploadDevicePDFFormOptionTitle": "Subir desde el dispositivo",
-  "UploadFromPortalDescription": "Cargue cualquier tipo de archivos desde Documentos o Salas",
   "UploadFromPortalTitle": "Subir desde {{productName}}",
   "UploadPDFFormOptionDescription": "Seleccione un formulario PDF listo disponible en {{productName}} y cárguelo en la sala.",
-  "UserEmptyDescription": "Los archivos y carpetas cargados por los administradores aparecerán aquí.",
   "VirtualDataRoomEmptyTitle": "Bienvenido/a a la Sala de datos virtuales"
 }

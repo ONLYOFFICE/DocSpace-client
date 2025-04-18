@@ -1,6 +1,4 @@
 {
   "ErrorEmptyResponse": "反応なし",
-  "ErrorUnavailableText": "{{productName}}は現在、ご利用いただけません",
-  "LinkDoesNotExist": "開こうとしているリンクは存在しません。",
-  "LinkHasExpired": "リンクの有効期限が切れています。"
+  "ErrorUnavailableText": "{{productName}}は現在、ご利用いただけません"
 }

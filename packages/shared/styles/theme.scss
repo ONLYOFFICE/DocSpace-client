@@ -5,7 +5,6 @@
 
   --background-color: #{$white};
   --text-color: #{$black};
-  --interface-direction: ltr;
 
   --accent-main: var(--color-scheme-main-accent, #{$light-blue-main});
   --accent-text: var(--color-scheme-text-accent, #{$light-blue-main});
@@ -15,8 +14,12 @@
   --app-loader-background-color: #{$white};
 
   --files-article-body-download-app-list-text-color: #{$gray};
-  --files-article-body-dev-tools-border: 1px solid #{$light-gray-selected};
-  --files-article-body-dev-tools-color: #{$gray};
+  --files-article-body-dev-tools-background-color: var(
+    --accent-main,
+    #{$light-blue-main}
+  );
+  --files-article-body-dev-tools-background-opacity: 0.17;
+  --files-article-body-dev-tools-color: #{$gray-text};
   --article-catalog-background: #{$gray-light};
   --article-catalog-show-text: #{$light-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-light-mid};
@@ -241,7 +244,6 @@
   --slider-border-radius: 5.6px;
   --slider-thumb-disabled-color: #{$gray-strong};
   --slider-thumb-disabled-border: #{$light-second-main-disabled};
-  --slider-shadow: #{$blur-dark};
   --slider-runnable-track-border: #{$gray-light-mid};
   --slider-thumb-background: var(
     --color-scheme-main-accent,
@@ -249,7 +251,6 @@
   );
   --slider-thumb-border-color: #{$white};
   --slider-thumb-box-shadow: 0px 5px 20px #{$popup-shadow};
-  --slider-range-thumb: #{$light-second-main};
   --slider-range-track-border: #{$white};
   --slider-range-track-background: #{$light-second-main};
   --slider-background: #{$gray-light-mid};
@@ -287,13 +288,6 @@
 
   --background-color: #{$black};
   --text-color: #{$white};
-  --interface-direction: ltr;
-
-  --toast-tap-highlight: #{$tap-highlight};
-  --toast-text-color-comp: #{$white};
-  --toast-close-button-color: #{$white};
-  --toast-transform: translate3d(150%, 0, 0);
-  --toast-top-offset: 16px;
 
   --view-selector-items-count: unset;
 
@@ -348,7 +342,7 @@
   --row-content-main-wrapper-margin-right: 8px;
   --row-content-main-wrapper-margin-top: 8px;
   --row-content-main-wrapper-width: 95%;
-  --row-content-icons-height: 19px;
+  --row-content-icons-height: 16px;
 
   --selector-add-button-border: none;
   --selector-add-button-box-sizing: border-box;
@@ -364,8 +358,9 @@
   --app-loader-background-color: #{$black};
 
   --files-article-body-download-app-list-text-color: #{$gray-dark};
-  --files-article-body-dev-tools-border: 1px solid #{$gray-dark-strong};
-  --files-article-body-dev-tools-color: #{$gray-dark};
+  --files-article-body-dev-tools-background-color: #{$dark-gray-dark};
+  --files-article-body-dev-tools-background-opacity: 1;
+  --files-article-body-dev-tools-color: #{$black};
   --article-catalog-background: #{$dark-gray-light};
   --article-catalog-show-text: #{$dark-gray-dark};
   --article-catalog-header-border-bottom: 1px solid #{$gray-dark-strong};
@@ -457,7 +452,10 @@
       #{$light-second-main}
     ),
     linear-gradient(0deg, #{$on-white-color}, #{$on-white-color});
-  --button-background-primary-disabled: #{$light-second-main-disabled};
+  --button-background-primary-disabled: var(
+    --accent-button,
+    #{$light-second-main-disabled}
+  );
 
   --button-border-base: 1px solid #{$gray-dark-strong};
   --button-border-base-hover: 1px solid #{$gray-dark};
@@ -571,12 +569,10 @@
   --slider-border-radius: 5.6px;
   --slider-thumb-disabled-color: #{$gray-dark-strong};
   --slider-thumb-disabled-border: #{$light-second-main-disabled};
-  --slider-shadow: #{$blur-dark};
   --slider-runnable-track-border: #{$gray-dark-mid};
   --slider-thumb-background: #{$white};
   --slider-thumb-border-color: #{$black};
   --slider-thumb-box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.25);
-  --slider-range-thumb: #{$white};
   --slider-range-track-border: #{$black};
   --slider-range-track-background: #{$white};
   --slider-background: #{$gray-dark-mid};
@@ -711,7 +707,7 @@
 }
 
 .dark {
-  --main-button-background-color: #{$light-blue-main};
+  --main-button-background-color: var(--accent-main, #{$light-blue-main});
   --main-button-text-color: #{$white};
   --main-button-text-color-disabled: #{$white};
   --main-button-svg-fill: #{$white};
@@ -839,7 +835,7 @@
 }
 
 .dark {
-  --section-header-trash-erasure-label-background: #{$black};
+  --section-header-trash-erasure-label-background: #{$dark-gray-light};
   --section-header-trash-erasure-label-text: #{$dark-gray-dark};
   --navigation-root-folder-title-color: #{$dark-gray-dark};
   --navigation-expander-color: #{$white};
@@ -884,6 +880,8 @@
 
   --progress-bar-icon-color: #{$white};
   --progress-bar-hover-icon: #{$gray};
+  --progress-bar-background-dropdown-color: #{$gray-text};
+  --progress-bar-background-hover: #{$light-gray-dark};
 }
 
 .dark {
@@ -894,6 +892,8 @@
 
   --progress-bar-icon-color: #{$white};
   --progress-bar-hover-icon: #{$gray};
+  --progress-bar-background-dropdown-color: #{$gray-text};
+  --progress-bar-background-hover: #{$light-gray-dark};
 }
 
 .light {
@@ -917,6 +917,7 @@
   --room-icon-background-color-archive: #{$gray};
   --room-icon-button-color: #{$gray};
   --room-icon-opacity: 1;
+  --room-icon-edit-icon-background: #{$gray-light-mid};
 }
 
 .dark {
@@ -928,6 +929,7 @@
   --room-icon-background-color-archive: #{$white};
   --room-icon-button-color: #{$gray-dark};
   --room-icon-opacity: 0.1;
+  --room-icon-edit-icon-background: #{$gray-dark-mid};
 }
 
 .light {
@@ -1011,7 +1013,6 @@
   --row-content-main-wrapper-margin-right: 8px;
   --row-content-main-wrapper-margin-top: 8px;
   --row-content-main-wrapper-width: 95%;
-  --row-content-icons-height: 19px;
 
   --section-header-height: 69px;
   --section-header-height-tablet: 61px;
@@ -1036,7 +1037,7 @@
   --row-content-main-wrapper-margin-top: 8px;
   --row-content-main-wrapper-width: 95%;
 
-  --row-content-icons-height: 19px;
+  --row-content-icons-height: 16px;
 }
 
 .light {
@@ -1425,12 +1426,20 @@
   --files-section-tiles-view-tile-border: 1px solid #{$gray-strong};
 
   --files-badges-bg-color: #{$white};
+
+  --files-badges-link-color: #{$light-gray-dark};
+
+  --files-badges-border: 1px solid #{$white};
 }
 
 .dark {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-dark-strong};
 
   --files-badges-bg-color: #{$black};
+
+  --files-badges-link-color: #{$white};
+
+  --files-badges-border: 1px solid #{$black};
 }
 
 .light {
@@ -1539,7 +1548,7 @@
   --input-warning-border-focus: #{$dark-status-warning};
 
   --text-input-placeholder-color: #{$gray-dark};
-  --text-input-placeholder-disabled-color: #{$gray-dark-strong};
+  --text-input-placeholder-disabled-color: #{$gray-dark-text};
 
   // Dimensions
   --input-border-radius: 3px;
@@ -1964,12 +1973,12 @@
   --storage-management-region-description-color: #{$dark-gray-dark};
 }
 
-:global(.rtl) {
+.rtl {
   --input-text-align: right;
   --input-direction: rtl;
 }
 
-:global(.rtl) {
+.rtl {
   --modal-dialog-content-transform-x: -100%;
   --toast-transform: translate3d(-150%, 0, 0);
 }
@@ -2030,10 +2039,22 @@
   --tile-icon-button-hover-color: #{$light-blue-main};
 }
 
-:global(.rtl) {
+.rtl {
   --context-menu-header-text-margin: 0 8px 0 0;
   --context-menu-submenu-list-margin: -4px;
 
   --context-menu-submenu-transoform: scaleX(-1);
   --context-menu-submenu-transoform-box: content-box;
+}
+
+.light {
+  --download-dialog-bg: #{$gray-light};
+  --download-dialog-text-color: #{$gray};
+  --download-dialog-warning-color: #{$light-error-status};
+}
+
+.dark {
+  --download-dialog-bg: #{$dark-gray-light};
+  --download-dialog-text-color: #{$gray-dark};
+  --download-dialog-warning-color: #{$dark-error-status};
 }

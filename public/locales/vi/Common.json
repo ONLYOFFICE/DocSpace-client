@@ -283,7 +283,7 @@
   "FromDevice": "Từ thiết bị",
   "FromPortal": "Từ {{productName}}",
   "FromTemplate": "Từ mẫu",
-  "FromTemplateRoomInfo": "Tạo phòng dựa trên biểu mẫu. Tất cả các cài đặt, người dùng, thư mục và tập tin sẽ được lấy từ mẫu phòng đã chọn.",
+  "FromTemplateRoomInfo": "Tạo phòng dựa trên biểu mẫu. Tất cả các cài đặt, thư mục và tập tin sẽ được lấy từ mẫu phòng đã chọn.",
   "GeneratePassword": "Tạo mật khẩu",
   "Gigabyte": "GB",
   "GoBack": "Quay lại",

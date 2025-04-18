@@ -283,7 +283,7 @@
   "FromDevice": "No ierīces",
   "FromPortal": "No {{productName}}",
   "FromTemplate": "No veidnes",
-  "FromTemplateRoomInfo": "Izveidojiet telpu, pamatojoties uz veidni. Visi iestatījumi, lietotāji, mapes un faili tiks pārņemti no izvēlētās telpas veidnes.",
+  "FromTemplateRoomInfo": "Izveidojiet telpu, pamatojoties uz veidni. Visi iestatījumi, mapes un faili tiks pārņemti no izvēlētās telpas veidnes.",
   "GeneratePassword": "Ģenerēt paroli",
   "Gigabyte": "GB",
   "GoBack": "Atgriezties",

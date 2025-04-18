@@ -283,7 +283,7 @@
   "FromDevice": "Cihazdan",
   "FromPortal": "{{productName}} kaynağından",
   "FromTemplate": "Şablondan",
-  "FromTemplateRoomInfo": "Bir şablona göre oda oluşturun. Tüm ayarlar, kullanıcılar, klasörler ve dosyalar seçilen oda şablonundan alınacaktır.",
+  "FromTemplateRoomInfo": "Bir şablona göre oda oluşturun. Tüm ayarlar, klasörler ve dosyalar seçilen oda şablonundan alınacaktır.",
   "GeneratePassword": "Şifre üret",
   "Gigabyte": "GB",
   "GoBack": "Geri git",

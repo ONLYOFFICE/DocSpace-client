@@ -9,6 +9,8 @@
   "DeleteRoom": "Você está prestes a excluir esta sala. Você não será capaz de restaurá-lo.",
   "DeleteRooms": "Você está prestes a excluir estas salas. Você não poderá restaurá-los.",
   "DeleteSharedNote": "Observe que se você o compartilhou com alguém, ele ficará indisponível.",
+  "DeleteTemplate": "Você realmente deseja excluir a sala modelo <1>«{{templateName}}»</1>? O modelo não pode ser restaurado.",
+  "DeleteTemplates": "Você realmente deseja excluir os modelos de sala selecionados? Eles não podem ser restaurados.",
   "FolderPermanentlyDeleted": "A pasta será excluída permanentemente em 30 dias.",
   "ItemsPermanentlyDeleted": "Os itens serão excluídos permanentemente em 30 dias.",
   "MoveToTrashButton": "Mover para a lixeira",

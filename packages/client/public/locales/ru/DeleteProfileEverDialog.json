@@ -12,9 +12,11 @@
   "DeleteUser": "Удалить пользователя",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> будет удален. Это действие не может быть отменено.",
   "DeletingUsers": "Удаление пользователей",
+  "PersonalDataDeletionInfo": "Персональные данные, все персональные файлы и папки в разделах {{sectionNameFirst}} и {{sectionNameSecond}}* выбранных пользователей будут удалены навсегда. Файлы и папки выбранных пользователей, хранящиеся в общих разделах*, например, в комнатах, останутся в {{productName}}.",
   "PleaseNote": "Пожалуйста, обратите внимание:",
   "ReassignDataToAnotherUser": "Переназначить данные другому пользователю",
   "SuccessfullyDeleteGuestInfoMessage": "Гость успешно удален",
   "SuccessfullyDeleteUserInfoMessage": "Пользователь успешно удален",
-  "ToBeAbleToReassignData": "Чтобы иметь возможность переназначать данные, удаляйте не более одного пользователя за один раз."
+  "ToBeAbleToReassignData": "Чтобы иметь возможность переназначать данные, удаляйте не более одного пользователя за один раз.",
+  "UserFilesRemovalScope": "Персональные данные, все файлы и папки в разделах {{sectionNameFirst}} и {{sectionNameSecond}} этого пользователя будут удалены навсегда."
 }

@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "Xóa vĩnh viễn",
-  "DeleteForeverTitle": "Xóa vĩnh viễn?"
+  "DeleteForeverNote": "Tất cả các mục từ phần {{sectionName}} này sẽ bị xóa vĩnh viễn. Bạn sẽ không thể khôi phục chúng.",
+  "DeleteForeverTitle": "Xóa vĩnh viễn?",
+  "SuccessEmptyAction": "Phần {{sectionName}} đã được làm trống"
 }

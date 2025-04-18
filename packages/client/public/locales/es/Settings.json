@@ -91,6 +91,8 @@
   "DeleteTheme": "Eliminar tema",
   "DeleteThemeForever": "¿Eliminar el tema para siempre?",
   "DeleteThemeNotice": "El tema se eliminará definitivamente. No podrá deshacer esta acción.",
+  "DeveloperToolsAccessDescription": "Esta configuración le permite hacer que la sección Herramientas de desarrollo sea visible para todos los usuarios excepto los invitados. Si desea restringir el acceso a esta sección para que solo puedan acceder a ella el propietario y los administradores de {{productName}}, seleccione Desactivar y haga clic en el botón Guardar.",
+  "DeveloperToolsAccessMobileDescription": "Esta configuración le permite hacer que la sección Herramientas de desarrollo sea visible para todos los usuarios excepto los invitados.",
   "DiskSpaceUsed": "Espacio en disco utilizado",
   "DNSSettings": "Configuración DNS",
   "DNSSettingsDescription": "Establezca una dirección URL alternativa para su espacio. Envíe su solicitud a nuestro equipo de soporte para obtener ayuda con la configuración.",

@@ -1,4 +1,5 @@
 {
+  "CancellaionNotification": "Non mostrare più la notifica di annullamento",
   "DisplayFileExtension": "Mostra l’estensione del file vicino al nome del file",
   "DisplayNotification": "Visualizza la notifica quando sposti gli elementi nel Cestino",
   "OpenSameTab": "Apri l'editor di {{organizationName}} nella stessa scheda",

@@ -645,6 +645,7 @@ class FilesStore {
           }
 
           const navigationPath = [...this.selectedFolderStore.navigationPath];
+          const pathParts = [...this.selectedFolderStore.pathParts];
 
           const idx = navigationPath.findIndex((p) => p.id === f.id);
 
@@ -656,6 +657,7 @@ class FilesStore {
             this.selectedFolderStore.setSelectedFolder({
               ...f,
               navigationPath,
+              pathParts,
             });
           }
 
@@ -3595,7 +3597,7 @@ class FilesStore {
         type,
         hasDraft,
         isForm,
-        isPDFForm: item.isForm,
+        isPDFForm: item.isForm || item.isPDFForm,
         requestToken,
         lastOpened,
         quotaLimit,

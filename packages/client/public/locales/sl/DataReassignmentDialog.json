@@ -13,6 +13,7 @@
   "ReassignData": "Prerazporedi podatke",
   "ReassigningDataToAnother": "Postopek prerazporeditve podatkov uporabnika<0>{{fromUser}}</0> na uporabnika <1>{{toUser}}</1> se je začel. Upoštevajte, da lahko traja nekaj časa.",
   "ReassigningDataToItself": "Postopek prerazporeditve podatkov uporabnika <0>{{fromUser}}</0> na uporabnika <1>{{toUser}}</1> <2>{{you}}</2> se je začel. Upoštevajte, da lahko traja nekaj časa.",
+  "RoomsOnlyReassignment": "Prenesli bomo sobe, ki jih je ustvaril kontakt.",
   "StartTransferAgain": "Ponovno začni prenos",
   "UserToWhomTheDataWillBeTransferred": "Uporabnik, h kateremu bodo podatki preneseni"
 }

@@ -1,5 +1,7 @@
 {
   "CancelUpload": "Quá trình tải lên đã bị gián đoạn. Một số tập tin chưa được tải lên.",
   "HideInput": "Ẩn",
-  "Ready": "Xong"
+  "Ready": "Xong",
+  "UploadingAndConversion": "Tải lên & Chuyển đổi",
+  "UploadingError": "Lỗi tải lên"
 }

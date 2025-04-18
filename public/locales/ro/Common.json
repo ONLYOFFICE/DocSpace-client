@@ -288,7 +288,7 @@
   "FromDevice": "De pe dispozitivul",
   "FromPortal": "De la {{productName}}",
   "FromTemplate": "Șablon de formular",
-  "FromTemplateRoomInfo": "Creați o sală cu ajutorul șablonului. Toate setările, utilizatorii, folderele și fișierele vor fi preluate din șablonul de sală selectat.",
+  "FromTemplateRoomInfo": "Creați o sală cu ajutorul șablonului. Toate setările, folderele și fișierele vor fi preluate din șablonul de sală selectat.",
   "GeneratePassword": "Generează o parolă",
   "Gigabyte": "GO",
   "GoBack": "Înapoi",

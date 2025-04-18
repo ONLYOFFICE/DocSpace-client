@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Ներմուծեք տվյալները ձեր {{productName}} {{organizationName}} Workspace-ից, Google Workspace-ից կամ Nextcloud-ից: ",
   "MigrationDataTitle": "Միգրացիոն տվյալներ",
   "PublicRoomEmptyTitle": "Բարի գալուստ Հանրային սենյակ",
+  "SectionsUploadDescription": "Վերբեռնեք ցանկացած տեսակի ֆայլ {{sectionNameFirst}} կամ {{sectionNameSecond}}-ից",
   "SendInvitationLetter": "Ուղարկեք հրավեր նամակ՝ պորտալում նոր անդամներ ավելացնելու համար",
   "ShareOptionDescription": "Պատճենեք հանրային մուտքի հղումը կամ հրավիրեք այլ օգտվողների սենյակ՝ ձևաթղթերի լրացման գործընթացը սկսելու համար:",
   "ShareOptionTitle": "Կիսվել սենյակով",

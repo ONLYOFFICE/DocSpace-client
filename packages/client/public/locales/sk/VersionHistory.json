@@ -1,4 +1,6 @@
 {
+  "DeleteVersion": "Odstrániť verziu",
+  "DeleteVersionDescription": "Práve sa chystáte odstrániť verziu súboru. Už ju nebude možné zobraziť ani obnoviť. Ste si istí, že chcete pokračovať?",
   "EditComment": "Upraviť komentár",
   "Version": "Ver."
 }

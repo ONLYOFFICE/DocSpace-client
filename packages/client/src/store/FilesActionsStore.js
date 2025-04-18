@@ -206,7 +206,12 @@ class FilesActionStore {
     this.versionHistoryStore = versionHistoryStore;
   }
 
-  updateCurrentFolder = async (clearSelection, operationId, operation) => {
+  updateCurrentFolder = async (
+    clearSelection,
+    operationId,
+    operation,
+    skipFetch = false,
+  ) => {
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
@@ -229,6 +234,8 @@ class FilesActionStore {
     }
 
     try {
+      if (skipFetch) return;
+
       if (
         isRoomsFolder ||
         isArchiveFolder ||
@@ -510,7 +517,7 @@ class FilesActionStore {
             };
 
             if (this.dialogsStore.isFolderActions) {
-              this.updateCurrentFolder(false, operationId, operationName);
+              this.updateCurrentFolder(false, operationId, operationName, true);
               showToast();
             } else {
               this.updateFilesAfterDelete(operationId, operationName);
@@ -1359,7 +1366,7 @@ class FilesActionStore {
   setArchiveAction = async (action, folders, t) => {
     const { addActiveItems, setSelected } = this.filesStore;
 
-    const { isRoomsFolder, archiveRoomsId, myRoomsId } = this.treeFoldersStore;
+    const { archiveRoomsId, myRoomsId } = this.treeFoldersStore;
 
     const { secondaryProgressDataStore, clearActiveOperations } =
       this.uploadDataStore;
@@ -1417,10 +1424,11 @@ class FilesActionStore {
               );
             }
 
-            if (!isRoomsFolder) {
-              // setSelectedFolder(roomsFolder);
-              window.DocSpace.navigate("/");
-            }
+            // Will be redirected via the socket
+            // if (!isRoomsFolder) {
+            //   // setSelectedFolder(roomsFolder);
+            //   window.DocSpace.navigate("/");
+            // }
 
             this.dialogsStore.setIsFolderActions(false);
 

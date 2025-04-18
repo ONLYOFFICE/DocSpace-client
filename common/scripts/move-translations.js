@@ -35,7 +35,7 @@ const path = require("path");
 const srdDir = "../../packages/client/public/locales";
 const dstDir = "../../public/locales";
 
-const keys = ["Forms"];
+const keys = ["CopyItem"];
 const SRC_LOCALE_FILENAME = "Files.json";
 const DST_LOCALE_FILENAME = "Common.json";
 const SRC_LOCALE_DIRNAME = path.join(__dirname, srdDir);

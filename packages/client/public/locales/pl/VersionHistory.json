@@ -1,4 +1,6 @@
 {
+  "DeleteVersion": "Usuń wersję",
+  "DeleteVersionDescription": "Zamierzasz usunąć wersję pliku. Nie będzie już można jej zobaczyć ani przywrócić. Czy na pewno chcesz kontynuować?",
   "EditComment": "Edytuj komentarz",
   "Version": "Wer."
 }

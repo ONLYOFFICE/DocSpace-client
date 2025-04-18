@@ -41,6 +41,7 @@
   "StartupTitle": "您正在使用免费{{planName}}版本",
   "StripeCustomerPortal": "前往 Stripe 客户门户",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/月</3>",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/年</3>",
   "UpgradeNow": "立即升级",
   "UpgradePlan": "升级版本",
   "UserNotFound": "未找到用户 <1>{{email}}</1>。",

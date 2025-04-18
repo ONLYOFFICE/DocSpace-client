@@ -12,9 +12,11 @@
   "DeleteUser": "Obriši korisnika",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> će biti obrisan. Ova radnja se ne može opozvati.",
   "DeletingUsers": "Brisanje korisnika",
+  "PersonalDataDeletionInfo": "Lični podaci, sve lične datoteke i fascikle u odeljcima {{sectionNameFirst}} i {{sectionNameSecond}}* izabranih korisnika biće trajno izbrisani. Datoteke i direktorijumi izabranih korisnika koji se čuvaju u zajedničkim odeljcima* kao što su sobe ostaće u {{productName}}.",
   "PleaseNote": "Molim obratite pažnju:",
   "ReassignDataToAnotherUser": "Ponovo dodeli podatke drugom korisniku",
   "SuccessfullyDeleteGuestInfoMessage": "Gost je uspešno obrisan",
   "SuccessfullyDeleteUserInfoMessage": "Korisnik je uspešno obrisan",
-  "ToBeAbleToReassignData": "Da biste mogli ponovo da dodelite podatke, brišite jednog po jednog korisnika."
+  "ToBeAbleToReassignData": "Da biste mogli ponovo da dodelite podatke, brišite jednog po jednog korisnika.",
+  "UserFilesRemovalScope": "Lični podaci, sve datoteke i fascikle u odeljcima {{sectionNameFirst}} i {{sectionNameSecond}} ovog korisnika će biti trajno izbrisani."
 }

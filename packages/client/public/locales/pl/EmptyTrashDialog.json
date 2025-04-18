@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "Usuń na zawsze",
-  "DeleteForeverTitle": "Usunąć na zawsze?"
+  "DeleteForeverNote": "Wszystkie pozycje z sekcji  {{sectionName}} zostaną trwale usunięte. Nie będzie można ich przywrócić.",
+  "DeleteForeverTitle": "Usunąć na zawsze?",
+  "SuccessEmptyAction": "Secja {{sectionName}} została opróżniona"
 }

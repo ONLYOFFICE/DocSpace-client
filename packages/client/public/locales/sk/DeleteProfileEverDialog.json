@@ -12,9 +12,11 @@
   "DeleteUser": "Odstrániť používateľa",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> bude vymazaný. Tento úkon sa nedá odvolať.",
   "DeletingUsers": "Vymazávanie používateľov",
+  "PersonalDataDeletionInfo": "Osobné údaje, všetky osobné súbory a priečinky v sekciách {{sectionNameFirst}} a {{sectionNameSecond}}* vybraných používateľov budú trvalo odstránené. Súbory a priečinky vybraných používateľov uložené v spoločných sekciách* ako miestnosti zostanú v {{productName}}.",
   "PleaseNote": "Upozornenie:",
   "ReassignDataToAnotherUser": "Opätovné priradenie údajov inému používateľovi",
   "SuccessfullyDeleteGuestInfoMessage": "Hosť bol úspešne odstránený",
   "SuccessfullyDeleteUserInfoMessage": "Používateľ bol úspešne odstránený",
-  "ToBeAbleToReassignData": "Aby ste mohli opätovne priradiť údaje, vymazávajte vždy len po jednom používateľovi."
+  "ToBeAbleToReassignData": "Aby ste mohli opätovne priradiť údaje, vymazávajte vždy len po jednom používateľovi.",
+  "UserFilesRemovalScope": "Osobné údaje, všetky súbory a priečinky v sekciách {{sectionNameFirst}} a {{sectionNameSecond}} tohto používateľa budú trvalo odstránené."
 }

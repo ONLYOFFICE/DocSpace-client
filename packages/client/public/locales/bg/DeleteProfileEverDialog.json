@@ -12,9 +12,11 @@
   "DeleteUser": "Изтриване на потребител",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> ще бъде изтрит. Това действие не може да бъде отменено.",
   "DeletingUsers": "Изтриване на потребители",
+  "PersonalDataDeletionInfo": "Лични данни, всички лични файлове и папки в раздели {{sectionNameFirst}} и {{sectionNameSecond}}* на избраните потребители ще бъдат изтрити за постоянно. Файловете и папките на избраните потребители, съхранявани в общи раздели* като стаи, ще останат в {{productName}}.",
   "PleaseNote": "Молим да имате предвид:",
   "ReassignDataToAnotherUser": "Преназначете данните на друг потребител",
   "SuccessfullyDeleteGuestInfoMessage": "Гостът беше успешно изтрит",
   "SuccessfullyDeleteUserInfoMessage": "Потребителят беше изтрит успешно",
-  "ToBeAbleToReassignData": "За да можете да преназначавате данни, изтривайте потребителите един по един."
+  "ToBeAbleToReassignData": "За да можете да преназначавате данни, изтривайте потребителите един по един.",
+  "UserFilesRemovalScope": "Лични данни, всички файлове и папки в раздели {{sectionNameFirst}} и {{sectionNameSecond}} на този потребител ще бъдат изтрити за постоянно."
 }

@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "Οριστική διαγραφή",
-  "DeleteForeverTitle": "Οριστική διαγραφή;"
+  "DeleteForeverNote": "Όλα τα στοιχεία από την ενότητα {{sectionName}} θα διαγραφούν για πάντα. Δεν θα μπορείτε να τα επαναφέρετε.",
+  "DeleteForeverTitle": "Οριστική διαγραφή;",
+  "SuccessEmptyAction": "Το τμήμα {{sectionName}} άδειασε"
 }

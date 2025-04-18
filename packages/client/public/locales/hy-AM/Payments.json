@@ -41,6 +41,7 @@
   "StartupTitle": "Դուք օգտագործում եք անվճար {{planName}} պլանը",
   "StripeCustomerPortal": "գնալ Stripe հաճախորդների պորտալ",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/ամիս</3>",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/տարի</3>",
   "UpgradeNow": "Թարմացնել հիմա",
   "UpgradePlan": "Թարմացման պլան",
   "UserNotFound": "<1>{{email}}</1> օգտվողը չի գտնվել:",

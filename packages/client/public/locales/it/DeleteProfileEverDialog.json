@@ -12,9 +12,11 @@
   "DeleteUser": "Elimina utente",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> verrà eliminato. Questa azione non può essere annullata.",
   "DeletingUsers": "Eliminazione di utenti",
+  "PersonalDataDeletionInfo": "I dati personali, tutti i file e le cartelle personali nelle sezioni {{sectionNameFirst}} e {{sectionNameSecond}}* degli utenti selezionati verranno eliminati definitivamente. I file e le cartelle degli utenti selezionati presenti nelle sezioni comuni* come le stanze resteranno in {{productName}}.",
   "PleaseNote": "Ti preghiamo di notare:",
   "ReassignDataToAnotherUser": "Riassegna i dati a un altro utente",
   "SuccessfullyDeleteGuestInfoMessage": "L'ospite è stato eliminato con successo",
   "SuccessfullyDeleteUserInfoMessage": "L'utente è stato cancellato con successo",
-  "ToBeAbleToReassignData": "Per poter riassegnare i dati, elimina un utente alla volta."
+  "ToBeAbleToReassignData": "Per poter riassegnare i dati, elimina un utente alla volta.",
+  "UserFilesRemovalScope": "I dati personali, tutti i file e le cartelle nelle sezioni {{sectionNameFirst}} e {{sectionNameSecond}} di questo utente verranno eliminati definitivamente."
 }

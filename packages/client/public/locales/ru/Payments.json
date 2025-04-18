@@ -41,6 +41,7 @@
   "StartupTitle": "Вы используете бесплатный {{planName}} тариф",
   "StripeCustomerPortal": "перейти на клиентский портал Stripe",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/месяц</3>",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3> в год</3>",
   "UpgradeNow": "Обновить прямо сейчас",
   "UpgradePlan": "Обновить план",
   "UserNotFound": "Пользователь <1>{{email}}</1> не найден.",

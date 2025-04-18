@@ -1,5 +1,7 @@
 {
   "LblInviteAgain": "다시 초대",
   "MessageEmailActivationInstuctionsSentOnEmail": "이메일 활성화 방법이 <1>{{email}}</1> 이메일 주소로 전송되었습니다.",
+  "RemoveUser": "사용자 제거",
+  "RemoveUserConfirmationText": "룸에서 사용자를 제거하려고 합니다. 이 사용자는 양식 작성에 적극적으로 참여하고 있음을 참고하시기 바랍니다. 계속 진행하면 해당 사용자가 참여한 모든 양식이 해당 단계에서 중지됩니다.",
   "UserStatus": "상태"
 }

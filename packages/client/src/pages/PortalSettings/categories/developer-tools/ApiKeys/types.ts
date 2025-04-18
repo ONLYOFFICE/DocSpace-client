@@ -38,6 +38,7 @@ export type ApiKeysProps = {
   t: TTranslation;
   viewAs: TStore["setup"]["viewAs"];
   currentColorScheme: TColorScheme;
+  apiKeysLink: string;
 };
 
 export type ApiKeyViewProps = {

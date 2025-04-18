@@ -1,5 +1,7 @@
 {
   "LblInviteAgain": "Erneut einladen",
   "MessageEmailActivationInstuctionsSentOnEmail": "Anleitungen zur Änderung eines Passworts wurden an <1>{{email}}</1> gesendet.",
+  "RemoveUser": "Nutzer entfernen",
+  "RemoveUserConfirmationText": "Sie sind dabei, einen Nutzer aus dem Raum zu entfernen. Bitte beachten Sie, dass dieser Nutzer aktiv am Ausfüllen des Formulars beteiligt ist. Wenn Sie fortfahren, werden alle Formulare, an denen er beteiligt ist, an diesem Schritt angehalten.",
   "UserStatus": "Status"
 }

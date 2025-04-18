@@ -41,6 +41,7 @@
   "StartupTitle": "Χρησιμοποιείτε το δωρεάν πρόγραμμα {{planName}}",
   "StripeCustomerPortal": "μεταβείτε στην πύλη πελατών της Stripe",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/μήνα</3>",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/έτος</3>",
   "UpgradeNow": "Αναβάθμιση τώρα",
   "UpgradePlan": "Αναβάθμιση προγράμματος",
   "UserNotFound": "Ο χρήστης <1>{{email}}</1> δεν βρέθηκε.",

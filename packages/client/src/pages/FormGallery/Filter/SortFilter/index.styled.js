@@ -129,8 +129,8 @@ export const SortDropdownItem = styled(DropDownItem)`
           }
         `}
 
-  ${({ isDescending }) =>
-    !isDescending &&
+  ${({ $isDescending }) =>
+    !$isDescending &&
     css`
       .sortorder-arrow {
         transform: rotate(180deg);

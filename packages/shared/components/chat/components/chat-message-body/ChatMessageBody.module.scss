@@ -168,3 +168,12 @@
     background-color: var(--chat-message-code-block-background-color);
   }
 }
+
+.buttonsBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 12px;
+}

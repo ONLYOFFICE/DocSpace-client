@@ -1,3 +1,5 @@
+const fileRegex = /@\d+/g;
+
 /**
  * Removes all folder references (e.g., "@folder-123") from a message
  * @param message - The input message that might contain folder references
@@ -6,7 +8,11 @@
 export const removeFolderFromMessage = (message: string): string => {
   const folderRegex = /@folder-\d+/g;
 
-  return message.replace(folderRegex, "").trim();
+  const newMsg = message.replace(folderRegex, "").trim();
+
+  if (message.match(fileRegex)) return newMsg;
+
+  return newMsg.replace("@", "");
 };
 
 /**
@@ -20,7 +26,6 @@ export const extractFilesFromMessage = (
   cleanedMessage: string;
   fileIds: string[];
 } => {
-  const fileRegex = /@\d+/g;
   const fileIds: string[] = [];
 
   message.matchAll(fileRegex).forEach((match) => {

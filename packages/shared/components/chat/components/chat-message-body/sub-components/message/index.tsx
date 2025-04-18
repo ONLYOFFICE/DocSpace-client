@@ -15,6 +15,7 @@ import styles from "../../ChatMessageBody.module.scss";
 
 import Agent from "./agent";
 import { MarkdownField } from "./Markdown";
+import ButtonsBlock from "./ButtonsBlock";
 
 const Message = ({
   message,
@@ -76,7 +77,7 @@ const Message = ({
           <MarkdownField chatMessage={message.message as string} />
         </div>
 
-        {files && files.length > 0 ? (
+        {message.isSend && files && files.length > 0 ? (
           <FilePreview
             files={files.map((f) => ({
               id: f.id,
@@ -91,6 +92,9 @@ const Message = ({
             displayFileExtension={displayFileExtension}
             getIcon={getIcon}
           />
+        ) : null}
+        {!message.isSend ? (
+          <ButtonsBlock message={message.message as string} />
         ) : null}
       </div>
     </div>

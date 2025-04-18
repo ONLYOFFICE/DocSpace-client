@@ -423,6 +423,8 @@ export async function getTransactionHistory(
   endDate: string,
   credit: boolean = true,
   withdrawal: boolean = true,
+  offset: number = 0,
+  limit: number = 25,
 ) {
   const options = {
     method: "get",
@@ -432,6 +434,8 @@ export async function getTransactionHistory(
       endDate,
       credit,
       withdrawal,
+      offset,
+      limit,
     },
   };
   const res = (await request(options)) as TCustomerOperation;

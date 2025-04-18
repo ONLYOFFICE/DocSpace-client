@@ -128,6 +128,11 @@ class PaymentStore {
 
   autoPayments: TAutoTopUpSettings | null = null;
 
+  transactionHistoryCollection = [];
+
+  offset = 0;
+  limit = 25;
+
   constructor(
     userStore: UserStore,
     currentTariffStatusStore: CurrentTariffStatusStore,
@@ -230,6 +235,10 @@ class PaymentStore {
     return moment().subtract(4, "weeks").format(format);
   };
 
+  fetchMoreTransactionHistory = async () => {
+    console.log("fetchMoreTransactionHistory");
+  };
+
   fetchTransactionHistory = async (
     startDate = this.getStartTransactionDate(),
     endDate = this.getEndTransactionDate(),
@@ -241,11 +250,20 @@ class PaymentStore {
       endDate,
       credit,
       withdrawal,
+      this.offset,
+      this.limit,
     );
 
     if (!res) return;
 
     this.transactionHistory = res;
+    this.transactionHistoryCollection = [
+      ...this.transactionHistoryCollection,
+      ...res.collection,
+    ];
+    this.totalQuantity = this.transactionHistory.totalQuantity;
+    this.offset += 25;
+    this.limit += 25;
   };
 
   fetchAutoPayments = async () => {
@@ -289,6 +307,10 @@ class PaymentStore {
 
     this.autoPayments = res;
   };
+
+  get hasMoreTransaction() {
+    return this.transactionHistoryCollection.length < this.totalQuantity;
+  }
 
   walletInit = async (t: TTranslation) => {
     const requests = [];

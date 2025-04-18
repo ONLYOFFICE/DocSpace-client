@@ -42,6 +42,7 @@ const RoomTemplatesTabs = ({
   isRoomsFolderRoot,
   isTemplatesFolder,
   withTabs,
+  userId,
 }) => {
   const { t } = useTranslation(["Common"]);
 
@@ -60,18 +61,19 @@ const RoomTemplatesTabs = ({
     (isRoomsFolderRoot || isTemplatesFolder) && isRoot && withTabs;
 
   const onSelect = (e) => {
-    const filter = RoomsFilter.getDefault();
+    const templates = e.id === "templates";
+
+    const newRoomsFilter = RoomsFilter.getDefault(
+      userId,
+      templates ? RoomSearchArea.Templates : RoomSearchArea.Active,
+    );
+
+    const params = newRoomsFilter.toUrlParams(userId, true);
 
     const path = getCategoryUrl(CategoryType.Shared);
 
-    if (e.id === "templates") {
-      filter.searchArea = RoomSearchArea.Templates;
-    } else {
-      filter.searchArea = RoomSearchArea.Active;
-    }
-
-    setFilter(filter);
-    window.DocSpace.navigate(`${path}?${filter.toUrlParams()}`, {
+    setFilter(newRoomsFilter);
+    window.DocSpace.navigate(`${path}?${params}`, {
       replace: true,
     });
   };
@@ -90,7 +92,13 @@ const RoomTemplatesTabs = ({
 };
 
 export default inject(
-  ({ authStore, treeFoldersStore, filesStore, clientLoadingStore }) => {
+  ({
+    authStore,
+    treeFoldersStore,
+    filesStore,
+    clientLoadingStore,
+    userStore,
+  }) => {
     const { isRoomAdmin, isAdmin } = authStore;
     const { isRoomsFolderRoot, isTemplatesFolder, isRoot } = treeFoldersStore;
     const { setFilter } = filesStore;
@@ -103,6 +111,7 @@ export default inject(
       isRoomsFolderRoot,
       isTemplatesFolder,
       withTabs: isRoomAdmin || isAdmin,
+      userId: userStore.user?.id,
     };
   },
 )(observer(RoomTemplatesTabs));

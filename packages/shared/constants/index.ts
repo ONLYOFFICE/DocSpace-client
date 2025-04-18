@@ -123,7 +123,7 @@ export const PROVIDERS_DATA = Object.freeze({
   twitter: {
     label: "twitter",
     icon: ShareTwitterReactSvg,
-    iconOptions: { color: globalColors.darkBlack },
+    iconOptions: undefined,
   },
   linkedin: {
     label: "linkedin",
@@ -216,6 +216,7 @@ export const OPERATIONS_NAME = Object.freeze({
   other: "other",
   upload: "upload",
   deleteVersionFile: "deleteVersionFile",
+  backup: "backup",
 });
 
 export const thumbnailStatuses = {

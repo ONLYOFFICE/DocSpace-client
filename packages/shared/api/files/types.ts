@@ -121,6 +121,7 @@ export type TFile = {
   viewAccessibility: TFileViewAccessibility;
   viewUrl: string;
   webUrl: string;
+  shortWebUrl: string;
   availableExternalRights?: TAvailableExternalRights;
   providerId?: number;
   providerKey?: string;
@@ -252,6 +253,7 @@ export type TOperation = {
   processed: string;
   progress: number;
   url?: string;
+  files?: TFile[];
 };
 
 export type TUploadOperation = {
@@ -487,7 +489,12 @@ export type TConnectingStorages = TConnectingStorage[];
 
 export type TFormRoleMappingRequest = {
   formId: number;
-  roles: { userId: string; roleName: string; roleColor: string }[];
+  roles: {
+    userId: string;
+    roleName: string;
+    roleColor: string;
+    roomId: number;
+  }[];
 };
 
 export type TFileFillingFormStatus = {

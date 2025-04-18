@@ -24,12 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
-import { ShareFormDialog } from "@docspace/shared/dialogs/ShareFormDialog";
+import React, { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { ShareCollectSelector } from "SRC_DIR/components/ShareCollectSelector";
+
+import FormDataCollectionIcon from "PUBLIC_DIR/images/icons/32/form.data.collection.svg";
+import RoleBasedFillingIcon from "PUBLIC_DIR/images/icons/32/role.based.filling.svg";
+import ShareSvg from "PUBLIC_DIR/images/icons/32/share.svg";
 
 import { RoomsType } from "@docspace/shared/enums";
+import { ShareCollectSelector } from "SRC_DIR/components/ShareCollectSelector";
+
+import { ShareFormDialog } from "@docspace/shared/dialogs/share-form-dialog";
 
 const ShareFormPanel = ({
   visible,
@@ -38,43 +44,79 @@ const ShareFormPanel = ({
   fileId,
   files,
 }) => {
+  const { t } = useTranslation("Common");
+
   const [isVisibleSelectFormRoomDialog, setIsVisibleSelectFormRoomDialog] =
     useState(false);
   const [roomType, setRoomType] = useState(RoomsType.FormRoom);
 
-  const onClose = () => {
-    setIsShareFormData(false);
-  };
+  const file = useMemo(
+    () => files.find((item) => item.id === fileId),
+    [fileId, files],
+  );
 
-  const onClickShareFile = () => {
+  const onClose = useCallback(() => {
+    setIsShareFormData({
+      visible: false,
+    });
+  }, []);
+
+  const onClickShareFile = useCallback(() => {
     updateAccessLink();
-    setIsShareFormData(false);
-  };
+    onClose();
+  }, [onClose, updateAccessLink]);
 
-  const file = files.find((item) => item.id === fileId);
-
-  const onClickFormRoom = () => {
+  const onClickFormRoom = useCallback(() => {
     setRoomType(RoomsType.FormRoom);
     setIsVisibleSelectFormRoomDialog(true);
-  };
+  }, []);
 
-  const onClickVirtualDataRoom = () => {
+  const onClickVirtualDataRoom = useCallback(() => {
     setRoomType(RoomsType.VirtualDataRoom);
     setIsVisibleSelectFormRoomDialog(true);
-  };
+  }, []);
 
-  const onCloseSelectionFormRoom = () => {
+  const onCloseSelectionFormRoom = useCallback(() => {
     setIsVisibleSelectFormRoomDialog(false);
-  };
+  }, []);
+
+  const cards = useMemo(
+    () => [
+      {
+        id: "quick-sharing",
+        title: t("Common:QuickSharing"),
+        description: t("Common:ShareTheOriginalFormForFillingOut"),
+        buttonLabel: t("Common:Share"),
+        onClick: onClickShareFile,
+        icon: <ShareSvg />,
+      },
+      {
+        id: "form-data-collection",
+        title: t("Common:FormDataCollection"),
+        description: t("Common:FormDataCollectionDescription"),
+        buttonLabel: t("Common:ShareInTheRoom"),
+        onClick: onClickFormRoom,
+        icon: <FormDataCollectionIcon />,
+      },
+      {
+        id: "role-based-filling",
+        title: t("Common:RoleBasedFilling"),
+        description: t("Common:RoleBasedFillingDescription"),
+        buttonLabel: t("Common:ShareInTheRoom"),
+        onClick: onClickVirtualDataRoom,
+        icon: <RoleBasedFillingIcon />,
+      },
+    ],
+    [t, onClickShareFile, onClickFormRoom, onClickVirtualDataRoom],
+  );
 
   return (
     <ShareFormDialog
+      title={t("Common:ShareToFillOut")}
+      cards={cards}
       visible={visible}
       onClose={onClose}
-      onClickShareFile={onClickShareFile}
-      onClickFormRoom={onClickFormRoom}
-      onClickVirtualDataRoom={onClickVirtualDataRoom}
-      visibleContainer={isVisibleSelectFormRoomDialog}
+      containerVisible={isVisibleSelectFormRoomDialog}
       container={
         <ShareCollectSelector
           file={file}
@@ -85,8 +127,9 @@ const ShareFormPanel = ({
             withoutBackButton: false,
             onBackClick: onCloseSelectionFormRoom,
           }}
-          onCloseActionProp={onCloseSelectionFormRoom}
+          onCloseActionProp={onClose}
           createDefineRoomType={roomType}
+          onCancel={onCloseSelectionFormRoom}
         />
       }
     />

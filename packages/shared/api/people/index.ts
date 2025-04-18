@@ -320,6 +320,15 @@ export async function getUserById(userId: string) {
     url: `/people/${userId}`,
   })) as TUser;
 
+  res.displayName = Encoder.htmlDecode(res.displayName);
+
+  if (res.createdBy?.displayName) {
+    res.createdBy = {
+      ...res.createdBy,
+      displayName: Encoder.htmlDecode(res.createdBy.displayName),
+    };
+  }
+
   return res;
 }
 

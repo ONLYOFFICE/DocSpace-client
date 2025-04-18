@@ -162,11 +162,11 @@
   -webkit-tap-highlight-color: #{$tap-highlight};
   text-transform: none;
 
-  &:hover {
+  &:hover:not(.separator) {
     background-color: var(--drop-down-item-hover-color);
   }
 
-  &:active {
+  &:active:not(.separator) {
     background-color: var(--drop-down-item-hover-color);
   }
 

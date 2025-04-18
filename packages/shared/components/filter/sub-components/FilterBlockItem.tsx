@@ -162,7 +162,7 @@ const FilterBlockItem = ({
           fontWeight={400}
           lineHeight="20px"
         >
-          {item?.selectedLabel?.toLowerCase()}
+          {item?.selectedLabel}
         </Text>
         {item.isSelected ? (
           <div className={styles.filterBlockItemTagIcon} ref={clearSelectorRef}>

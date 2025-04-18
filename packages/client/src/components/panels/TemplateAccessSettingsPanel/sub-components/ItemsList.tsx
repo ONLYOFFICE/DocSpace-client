@@ -96,7 +96,7 @@ const ItemsList = ({
   const { interfaceDirection } = useTheme();
 
   const listItems = [...inviteItems].filter(
-    (l) => l.access !== ShareAccessRights.None,
+    (l) => l.templateAccess !== ShareAccessRights.None,
   );
 
   const onBodyResize = useCallback(() => {

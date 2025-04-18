@@ -143,9 +143,9 @@ export async function getColorTheme() {
   return colorTheme.response as TGetColorTheme;
 }
 
-export async function getThirdPartyProviders() {
+export async function getThirdPartyProviders(inviteView: boolean = false) {
   const [getThirdParty] = createRequest(
-    [`/people/thirdparty/providers`],
+    [`/people/thirdparty/providers?inviteView=${inviteView}`],
     [["", ""]],
     "GET",
   );
@@ -252,7 +252,7 @@ export async function getUserByEmail(
   return user.response as TUser;
 }
 
-export async function getScopeList(token?: string) {
+export async function getScopeList(token?: string, userId?: string) {
   const headers: [string, string][] = token
     ? [["Cookie", `x-signature=${token}`]]
     : [["", ""]];

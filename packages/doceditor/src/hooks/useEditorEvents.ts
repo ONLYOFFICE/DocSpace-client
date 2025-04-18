@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useCallback } from "react";
+import isUndefined from "lodash/isUndefined";
 import { usePathname, useSearchParams } from "next/navigation";
 
 import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
@@ -52,7 +53,7 @@ import {
   frameCallEvent,
 } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, StartFillingMode } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { Nullable } from "@docspace/shared/types";
@@ -61,7 +62,11 @@ import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 
 import { isMobile } from "react-device-detect";
 
-import { getCurrentDocumentVersion, setDocumentTitle } from "@/utils";
+import {
+  getCurrentDocumentVersion,
+  isFormRole,
+  setDocumentTitle,
+} from "@/utils";
 
 import {
   TCatchError,
@@ -87,6 +92,9 @@ const useEditorEvents = ({
   t,
   sdkConfig,
   organizationName,
+  setFillingStatusDialogVisible,
+  openShareFormDialog,
+  onStartFillingVDRPanel,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -167,14 +175,14 @@ const useEditorEvents = ({
 
     fixSize();
 
-    frameCallCommand("setIsLoaded");
-
     if (errorMessage || isSkipError)
       return docEditor?.showMessage?.(errorMessage || t("Common:InvalidLink"));
 
-    if (window && FILLING_STATUS_ID in window && window[FILLING_STATUS_ID]) {
+    const fillingStatus = window?.sessionStorage.getItem(FILLING_STATUS_ID);
+
+    if (fillingStatus === "true") {
       docEditor?.requestRoles?.();
-      delete window[FILLING_STATUS_ID];
+      window?.sessionStorage.removeItem(FILLING_STATUS_ID);
     }
 
     console.log("ONLYOFFICE Document Editor is ready", docEditor);
@@ -225,6 +233,8 @@ const useEditorEvents = ({
     // console.log("onDocumentReady", { docEditor });
     setDocumentReady(true);
 
+    frameCallCommand("setIsLoaded");
+
     frameCallEvent({
       event: "onAppReady",
       data: { frameId: sdkConfig?.frameId },
@@ -245,6 +255,10 @@ const useEditorEvents = ({
       ); //Do not remove: it's for Back button on Mobile App
     }
   }, [config?.errorMessage, sdkConfig?.frameId]);
+
+  const onUserActionRequired = React.useCallback(() => {
+    frameCallCommand("setIsLoaded");
+  }, []);
 
   const getBackUrl = React.useCallback(() => {
     if (!fileInfo) return;
@@ -731,6 +745,76 @@ const useEditorEvents = ({
     };
   }, [onOrientationChange]);
 
+  const onSubmit = useCallback(() => {
+    const origin = window.location.origin;
+
+    const otherSearchParams = new URLSearchParams();
+
+    const roomId = config?.document?.referenceData.roomId;
+    const fileId = fileInfo?.id;
+
+    if (config?.fillingSessionId)
+      otherSearchParams.append("fillingSessionId", config.fillingSessionId);
+
+    if (config?.startFillingMode === StartFillingMode.StartFilling) {
+      otherSearchParams.append(
+        "type",
+        StartFillingMode.StartFilling.toString(),
+      );
+
+      if (!isUndefined(fileId)) {
+        otherSearchParams.append("formId", fileId.toString());
+      }
+
+      if (!isUndefined(roomId)) {
+        otherSearchParams.append("roomId", roomId);
+      }
+    }
+
+    const combinedSearchParams = new URLSearchParams({
+      ...Object.fromEntries(searchParams),
+      ...Object.fromEntries(otherSearchParams),
+    });
+
+    window.location.replace(
+      `${origin}/doceditor/completed-form?${combinedSearchParams.toString()}`,
+    );
+  }, [
+    config?.document?.referenceData.roomId,
+    config?.fillingSessionId,
+    config?.startFillingMode,
+    fileInfo?.id,
+    searchParams,
+  ]);
+
+  const onRequestFillingStatus = useCallback(() => {
+    setFillingStatusDialogVisible?.(true);
+  }, [setFillingStatusDialogVisible]);
+
+  const onRequestStartFilling = useCallback(
+    (event: {}) => {
+      switch (config?.startFillingMode) {
+        case StartFillingMode.ShareToFillOut:
+          openShareFormDialog?.();
+          break;
+
+        case StartFillingMode.StartFilling:
+          if (
+            typeof event === "object" &&
+            event !== null &&
+            "data" in event &&
+            isFormRole(event.data)
+          ) {
+            onStartFillingVDRPanel?.(event.data);
+          }
+          break;
+        default:
+          break;
+      }
+    },
+    [config?.startFillingMode, openShareFormDialog, onStartFillingVDRPanel],
+  );
+
   return {
     events,
     createUrl,
@@ -738,6 +822,7 @@ const useEditorEvents = ({
     usersInRoom,
 
     onDocumentReady,
+    onUserActionRequired,
     onSDKRequestOpen,
     onSDKRequestReferenceData,
     onSDKAppReady,
@@ -753,6 +838,9 @@ const useEditorEvents = ({
     onMakeActionLink,
     // onRequestStartFilling,
     setDocTitle,
+    onSubmit,
+    onRequestFillingStatus,
+    onRequestStartFilling,
   };
 };
 

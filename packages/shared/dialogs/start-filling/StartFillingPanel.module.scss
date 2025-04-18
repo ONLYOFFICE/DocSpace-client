@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 @import "../../styles/variables/_colors";
+@import "../../styles/mixins.scss";
 
 :global(.light) {
   :local {
@@ -44,10 +45,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 
   padding: 20px 16px 8px 16px;
 
   color: var(--color-text);
+
+  @include no-user-select;
 
   h3 {
     margin: 0;
@@ -55,6 +59,9 @@
     font-size: 16px;
     line-height: 22px;
     letter-spacing: 0px;
+
+    @include truncate;
+    min-width: 0;
   }
 
   span {
@@ -66,6 +73,8 @@
     text-decoration: underline dashed;
     text-underline-offset: 2px;
     cursor: pointer;
+
+    white-space: nowrap;
   }
 }
 

@@ -35,6 +35,7 @@ import { getCookie } from "@docspace/shared/utils/cookie";
 import ArrowRightSvrUrl from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 import DefaultLogoUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
 import { TPortal } from "@/types";
+import { getRedirectURL } from "@/utils";
 
 type ItemProps = {
   portal: TPortal;
@@ -47,11 +48,8 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
     : `${portal.portalName}.${baseDomain}`;
 
   const onClick = () => {
-    const redirectUrl = getCookie("x-redirect-authorization-uri")?.replace(
-      window.location.origin,
-      name,
-    );
-    // deleteCookie("x-redirect-authorization-uri");
+    const redirectUrl = getRedirectURL().replace(window.location.origin, name);
+
     sessionStorage.removeItem("tenant-list");
 
     window.open(`${portal.portalLink}&referenceUrl=${redirectUrl}`, "_self");

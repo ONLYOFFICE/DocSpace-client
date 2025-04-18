@@ -68,7 +68,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
   ] = await Promise.all([
     getUserFromConfirm(uid, confirmKey),
     getSettings(),
-    getThirdPartyProviders(),
+    getThirdPartyProviders(true),
     getCapabilities(),
     getPortalPasswordSettings(confirmKey),
     getInvitationSettings(),

@@ -260,7 +260,9 @@ class AuthStore {
 
     await Promise.all(request);
 
-    this.isPortalInfoLoaded = true;
+    runInAction(() => {
+      this.isPortalInfoLoaded = true;
+    });
   };
 
   setLanguage() {
@@ -466,8 +468,9 @@ class AuthStore {
 
   get isAuthenticated() {
     return (
-      this.settingsStore?.isLoaded && !!this.settingsStore?.socketUrl
-      // !isPublicRoom()
+      this.settingsStore?.isLoaded &&
+      !!this.settingsStore?.socketUrl &&
+      !isPublicRoom()
       //  this.userStore?.isAuthenticated
     );
   }

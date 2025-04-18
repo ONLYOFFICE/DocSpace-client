@@ -35,11 +35,16 @@ export const useFeedTranslation = (
   feed: { action: { key: AnyFeedInfo["key"] }; data: any },
   hasRelatedItems: boolean,
 ) => {
+  const count = feed.related.length + 1;
+
   switch (feed.action.key) {
     case "FileCreated":
       return t("InfoPanel:FileCreated");
     case "FileUploaded":
-      if (hasRelatedItems) return t("InfoPanel:FileUploaded").slice(0, -1);
+      if (hasRelatedItems)
+        return t("InfoPanel:FileUploadedCount", {
+          count,
+        });
       return t("InfoPanel:FileUploaded");
     case "UserFileUpdated":
       return t("InfoPanel:UserFileUpdated");
@@ -53,8 +58,16 @@ export const useFeedTranslation = (
           folderTitle: feed.data.parentTitle,
         });
       }
+      if (hasRelatedItems)
+        return t("InfoPanel:FileMovedCount", {
+          count,
+        });
       return t("InfoPanel:FileMoved");
     case "FileMovedToTrash":
+      if (hasRelatedItems)
+        return t("InfoPanel:FileMovedToTrashCount", {
+          count,
+        });
       return t("InfoPanel:FileMovedToTrash");
     case "FileCopied":
       if (feed.data.fromParentTitle) {
@@ -62,8 +75,16 @@ export const useFeedTranslation = (
           folderTitle: feed.data.parentTitle,
         });
       }
+      if (hasRelatedItems)
+        return t("InfoPanel:FileCopiedCount", {
+          count,
+        });
       return t("InfoPanel:FileCopied");
     case "FileDeleted":
+      if (hasRelatedItems)
+        return t("InfoPanel:FileDeletedCount", {
+          count,
+        });
       return t("InfoPanel:FileDeleted");
     case "FileLocked":
       return `${t("Translations:FileLocked")}.`;
@@ -85,17 +106,28 @@ export const useFeedTranslation = (
     case "FolderRenamed":
       return t("InfoPanel:FolderRenamed");
     case "FolderMoved":
-      if (hasRelatedItems) return t("InfoPanel:FolderMoved").slice(0, -1);
+      if (hasRelatedItems)
+        return t("InfoPanel:FolderMovedCount", {
+          count,
+        });
       return t("InfoPanel:FolderMoved");
     case "FolderMovedToTrash":
       if (hasRelatedItems)
-        return t("InfoPanel:FolderMovedToTrash").slice(0, -1);
+        return t("InfoPanel:FolderMovedToTrashCount", {
+          count,
+        });
       return t("InfoPanel:FolderMovedToTrash");
     case "FolderCopied":
-      if (hasRelatedItems) return t("InfoPanel:FolderCopied").slice(0, -1);
+      if (hasRelatedItems)
+        return t("InfoPanel:FolderCopiedCount", {
+          count,
+        });
       return t("InfoPanel:FolderCopied");
     case "FolderDeleted":
-      if (hasRelatedItems) return t("InfoPanel:FolderDeleted").slice(0, -1);
+      if (hasRelatedItems)
+        return t("InfoPanel:FolderDeletedCount", {
+          count,
+        });
       return t("InfoPanel:FolderDeleted");
     case "RoomCreated":
       return (
@@ -185,7 +217,7 @@ export const useFeedTranslation = (
         />
       );
     case "RoomCreateUser":
-      if (hasRelatedItems) return t("InfoPanel:RoomCreateUser").slice(0, -1);
+      if (hasRelatedItems) return t("InfoPanel:RoomCreateUserCount", { count });
       return t("InfoPanel:RoomCreateUser");
     case "RoomUpdateAccessForUser":
       return t("InfoPanel:RoomUpdateAccess");
@@ -194,7 +226,10 @@ export const useFeedTranslation = (
     case "RoomInviteResend":
       return t("InfoPanel:RoomInviteResend");
     case "RoomGroupAdded":
-      if (hasRelatedItems) return t("InfoPanel:RoomGroupAdded").slice(0, -1);
+      if (hasRelatedItems)
+        return t("InfoPanel:RoomGroupAddedCount", {
+          count,
+        });
       return t("InfoPanel:RoomGroupAdded");
     case "RoomUpdateAccessForGroup":
       return t("InfoPanel:RoomUpdateAccess");
@@ -250,12 +285,30 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomArchived");
     case "RoomUnarchived":
       return t("InfoPanel:RoomUnarchived");
-    case "RoomIndexExportSaved":
-      return t("InfoPanel:RoomIndexExportSaved");
+    case "RoomIndexExportLocation":
+      return t("InfoPanel:RoomIndexExportLocation", {
+        sectionName: t("Common:MyFilesSection"),
+      });
     case "FormSubmit":
       return t("InfoPanel:FilledOutForm");
     case "FormOpenedForFilling":
       return t("InfoPanel:StartedFillingItOut");
+    case "FileCustomFilterEnabled":
+      return t("InfoPanel:FileCustomFilterEnabled");
+    case "FileCustomFilterDisabled":
+      return t("InfoPanel:FileCustomFilterDisabled");
+
+    case "FormStartedToFill":
+      return t("InfoPanel:FormStartedToFill");
+
+    case "FormPartiallyFilled":
+      return t("InfoPanel:FormPartiallyFilled");
+
+    case "FormCompletelyFilled":
+      return t("InfoPanel:FormCompletelyFilled");
+
+    case "FormStopped":
+      return t("InfoPanel:FormStopped");
 
     default:
       return null;

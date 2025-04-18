@@ -128,6 +128,7 @@ export type TSettings = {
   isAmi: boolean;
   logoText: string;
   externalResources: TExternalResources;
+  displayAbout: boolean;
 };
 
 export type TCustomSchema = {
@@ -174,6 +175,7 @@ export type THelpCenterEntries = {
   administrationguides: string;
   administratormessage: string;
   alternativeurl: string;
+  appearance: string;
   autobackup: string;
   becometranslator: string;
   connectamazon: string;
@@ -198,6 +200,7 @@ export type THelpCenterEntries = {
   connectwordpress: string;
   connectyandex: string;
   creatingbackup: string;
+  docspacemanagingrooms: string;
   enterpriseinstall: string;
   enterpriseinstallscript: string;
   enterpriseinstallwindows: string;
@@ -217,6 +220,8 @@ export type THelpCenterEntries = {
   twofactorauthentication: string;
   userguides: string;
   welcomepage: string;
+  limiteddevtools: string;
+  encryption: string;
 };
 
 export type TIntegrationsEntries = {

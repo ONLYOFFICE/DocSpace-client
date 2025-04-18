@@ -46,6 +46,7 @@ const StyledProgress = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding-top: 24px;
 
   .description {
     line-height: 20px;

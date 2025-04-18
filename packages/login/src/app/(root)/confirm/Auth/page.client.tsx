@@ -26,8 +26,14 @@
 
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -43,6 +49,7 @@ import OperationContainer from "@docspace/shared/components/operation-container"
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { getUser } from "@docspace/shared/api/people";
 
 const AuthHandler = () => {
   let searchParams = useSearchParams();
@@ -59,9 +66,17 @@ const AuthHandler = () => {
   const isExternalDownloading =
     referenceUrl && referenceUrl.indexOf("action=download") !== -1;
 
-  useEffect(() => {
+  const replaced = useRef(false);
+
+  useLayoutEffect(() => {
+    if (!email || !key) return;
+
     async function loginWithKey() {
       try {
+        if (replaced.current) return;
+
+        replaced.current = true;
+
         const res = await loginWithConfirmKey({
           ConfirmData: {
             Email: email,
@@ -73,15 +88,23 @@ const AuthHandler = () => {
         frameCallEvent({ event: "onAuthSuccess" });
 
         if (referenceUrl && referenceUrl.includes("oauth2")) {
+          const user = await getUser();
+
+          if (!user) {
+            replaced.current = false;
+            return;
+          }
+
           const newUrl = location.search.split("referenceUrl=")[1];
 
-          const token = getOAuthJWTSignature();
+          const token = getOAuthJWTSignature(user.id);
 
           if (!token) {
-            await setOAuthJWTSignature();
+            await setOAuthJWTSignature(user.id);
           }
 
           window.location.replace(newUrl);
+
           return;
         }
 
@@ -104,6 +127,7 @@ const AuthHandler = () => {
         if (typeof res === "string") window.location.replace(res);
         else window.location.replace("/");
       } catch (error) {
+        console.log(error);
         const knownError = error as TError;
         let errorMessage: string;
 
@@ -118,12 +142,13 @@ const AuthHandler = () => {
         }
 
         frameCallEvent({ event: "onAppError", data: error });
+        replaced.current = false;
         toastr.error(errorMessage);
       }
     }
 
     loginWithKey();
-  });
+  }, [email, key, referenceUrl, isFileHandler, isExternalDownloading]);
 
   return isFileHandler && isExternalDownloading ? (
     <OperationContainer

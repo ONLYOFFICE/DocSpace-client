@@ -155,35 +155,28 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   );
 
   const fileConfig = {
+    src: window.location.origin,
+    frameId: "ds-frame",
     mode: "editor",
+    id: itemId,
     width: `${widthValue}${dataDimensions[0].label}`,
     height: `${heightValue}${dataDimensions[1].label}`,
-    frameId: "ds-frame",
     init: true,
-    id: itemId,
   };
 
   const roomConfig = {
+    src: window.location.origin,
+    frameId: "ds-frame",
+    mode: "public-room",
+    id: roomId,
     width: `${widthValue}${dataDimensions[0].label}`,
     height: `${heightValue}${dataDimensions[1].label}`,
-    frameId: "ds-frame",
     showHeader: true,
     showTitle: true,
     showMenu: false,
     showFilter: true,
-    mode: "manager",
-    init: true,
     requestToken: link?.sharedTo?.requestToken,
-    rootPath: "/rooms/share",
-    id: roomId,
-    filter: {
-      count: 100,
-      page: 1,
-      sortorder: "descending",
-      sortby: "DateAndTime",
-      search: "",
-      withSubfolders: false,
-    },
+    init: true,
   };
 
   const isFile = itemId && !isRoom;

@@ -31,6 +31,7 @@
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
+import { useTheme } from "styled-components";
 
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
@@ -57,6 +58,7 @@ const RowContent = observer(
   }: RowContentProps) => {
     const { title, createdBy, created, updated } = item;
 
+    const theme = useTheme();
     const { t, i18n } = useTranslation(["Common"]);
 
     const { openFolder } = useFolderActions({ t });
@@ -100,7 +102,7 @@ const RowContent = observer(
     const mainInfo = getContentComponent();
 
     return (
-      <SimpleFilesRowContent>
+      <SimpleFilesRowContent sideColor={theme.filesSection.rowView.sideColor}>
         <Link
           className="row-content-link"
           type={LinkType.page}

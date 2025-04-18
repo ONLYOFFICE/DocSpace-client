@@ -74,15 +74,18 @@ const FillingRoleSelector = ({
               />
             </>
           ) : (
-            <>
-              <button
-                type="button"
+            <button
+              title={role.name}
+              type="button"
+              className={styles.button}
+              onClick={() => onSelect(idx)}
+            >
+              <span
                 className={styles.plus}
-                onClick={() => onSelect(idx)}
                 style={{ backgroundColor: role.color }}
               />
               <span className={styles.name}>{role.name}</span>
-            </>
+            </button>
           )}
         </li>
       ))}

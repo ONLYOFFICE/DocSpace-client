@@ -35,11 +35,10 @@
   align-items: center;
   justify-content: center;
 
-  margin-inline-end: 12px;
-
   :global {
     .room-logo_checkbox {
       display: none;
+      margin-inline-start: 12px;
 
       .checkbox {
         margin-inline-end: 0;

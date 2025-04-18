@@ -25,14 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import moment from "moment-timezone";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { RowContent } from "@docspace/shared/components/rows";
 
-import { useTranslation } from "react-i18next";
 import { globalColors } from "@docspace/shared/themes";
+import { getCorrectDate } from "@docspace/shared/utils";
+
 import StatusBadge from "../../../../sub-components/StatusBadge";
 
 const StyledRowContent = styled(RowContent)`
@@ -58,10 +59,7 @@ const StatusHeader = styled.div`
 export const HistoryRowContent = ({ sectionWidth, historyItem }) => {
   const { i18n } = useTranslation("Webhooks");
 
-  const formattedDelivery = `${moment(historyItem.delivery)
-    .tz(window.timezone)
-    .locale(i18n.language)
-    .format("L, LT")}`;
+  const formattedDelivery = getCorrectDate(i18n.language, historyItem.delivery);
 
   return (
     <StyledRowContent sectionWidth={sectionWidth}>

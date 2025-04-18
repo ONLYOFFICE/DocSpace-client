@@ -21,6 +21,7 @@ import {
   SortByFieldName,
 } from "@docspace/shared/enums";
 import { Nullable, TSortBy, type TViewAs } from "@docspace/shared/types";
+import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import ViewRowsReactSvg from "PUBLIC_DIR/images/view-rows.react.svg";
 import ViewTilesReactSvg from "PUBLIC_DIR/images/view-tiles.react.svg";
@@ -30,7 +31,6 @@ import { PAGE_COUNT } from "@/utils/constants";
 type useFilesFiltersProps = {
   filesFilter: string;
   shareKey?: string;
-  canSearchByContent: boolean;
   filesViewAs: TViewAs | null;
   setFilesViewAs: (viewAs: TViewAs) => void;
 };
@@ -38,7 +38,6 @@ type useFilesFiltersProps = {
 export default function useFilesFilter({
   filesFilter,
   shareKey,
-  canSearchByContent,
   filesViewAs,
   setFilesViewAs,
 }: useFilesFiltersProps) {
@@ -214,9 +213,15 @@ export default function useFilesFilter({
       },
       {
         id: "filter_type-forms",
+        key: FilterType.PDFForm.toString(),
+        group: FilterGroups.filterType,
+        label: getManyPDFTitle(t, true),
+      },
+      {
+        id: "filter_type-pdf",
         key: FilterType.Pdf.toString(),
         group: FilterGroups.filterType,
-        label: t("Common:Forms").toLowerCase(),
+        label: getManyPDFTitle(t, false),
       },
       {
         id: "filter_type-archive",
@@ -238,57 +243,8 @@ export default function useFilesFilter({
       },
     ];
 
-    const foldersOptions = [
-      {
-        key: FilterGroups.filterFolders,
-        group: FilterGroups.filterFolders,
-        label: t("Common:Search"),
-        isHeader: true,
-        withoutSeparator: true,
-      },
-      {
-        id: "filter_folders",
-        key: "folders",
-        group: FilterGroups.filterFolders,
-        label: "",
-        withOptions: true,
-        options: [
-          {
-            id: "filter_folders_exclude-subfolders",
-            key: FilterKeys.excludeSubfolders,
-            label: t("ExcludeSubfolders"),
-          },
-          {
-            id: "filter_folders_with-subfolders",
-            key: FilterKeys.withSubfolders,
-            label: t("WithSubfolders"),
-          },
-        ],
-      },
-    ];
-
-    const contentOptions: TItem[] = [
-      {
-        key: FilterGroups.filterContent,
-        group: FilterGroups.filterContent,
-        isHeader: true,
-        withoutHeader: true,
-        label: "",
-      },
-    ];
-
-    if (canSearchByContent) {
-      contentOptions.push({
-        id: "filter_search-by-file-contents",
-        key: "true" as FilterGroups,
-        group: FilterGroups.filterContent,
-        label: t("SearchByContent"),
-        isCheckbox: true,
-      });
-    }
-
-    return [...foldersOptions, ...contentOptions, ...typeOptions];
-  }, [t, canSearchByContent]);
+    return [...typeOptions];
+  }, [t]);
 
   const getSelectedFilterData = React.useCallback(() => {
     const filterValues: TItem[] = [];
@@ -322,7 +278,10 @@ export default function useFilesFilter({
           label = t("Common:Files");
           break;
         case FilterType.Pdf.toString():
-          label = t("Common:Forms");
+          label = getManyPDFTitle(t, false);
+          break;
+        case FilterType.PDFForm.toString():
+          label = getManyPDFTitle(t, true);
           break;
         default:
           break;

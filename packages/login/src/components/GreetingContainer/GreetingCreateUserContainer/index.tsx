@@ -59,8 +59,6 @@ export const GreetingCreateUserContainer = ({
     culture,
   );
 
-  console.log("displayName", displayName);
-
   return (
     <GreetingContainer>
       <img src={logoUrl} className="portal-logo" alt="greeting-logo" />

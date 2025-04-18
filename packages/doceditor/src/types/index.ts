@@ -364,6 +364,7 @@ export interface UseSocketHelperProps {
   socketUrl: string;
   user?: TUser;
   shareKey?: string;
+  standalone?: boolean;
 }
 
 export interface UseEventsProps {
@@ -379,6 +380,9 @@ export interface UseEventsProps {
 
   sdkConfig?: TFrameConfig | null;
   organizationName: string;
+  setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
+  openShareFormDialog?: VoidFunction;
+  onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
 }
 
 export interface UseInitProps {

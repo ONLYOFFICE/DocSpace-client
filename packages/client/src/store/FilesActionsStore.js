@@ -57,6 +57,7 @@ import {
   changeIndex,
   reorderIndex,
   deleteVersionFile,
+  enableCustomFilter,
 } from "@docspace/shared/api/files";
 import {
   Events,
@@ -201,13 +202,7 @@ class FilesActionStore {
     this.versionHistoryStore = versionHistoryStore;
   }
 
-  updateCurrentFolder = async (
-    fileIds,
-    folderIds,
-    clearSelection,
-    operationId,
-    operation,
-  ) => {
+  updateCurrentFolder = async (clearSelection, operationId, operation) => {
     const { setSecondaryProgressBarData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
@@ -242,7 +237,6 @@ class FilesActionStore {
           undefined,
           undefined,
           undefined,
-          true,
         );
       } else {
         await fetchFiles(
@@ -323,7 +317,7 @@ class FilesActionStore {
 
   createFoldersTree = async (t, files, folderId) => {
     //  console.log("createFoldersTree", files, folderId);
-    const { uploaded } = this.uploadDataStore;
+    const { uploaded, percent } = this.uploadDataStore;
 
     const { setPrimaryProgressBarData } =
       this.uploadDataStore.primaryProgressDataStore;
@@ -340,8 +334,8 @@ class FilesActionStore {
 
     const pbData = {
       operation: OPERATIONS_NAME.upload,
-      percent: 0,
       completed: false,
+      percent,
     };
 
     if (roomFolder && roomFolder.quotaLimit && roomFolder.quotaLimit !== -1) {
@@ -512,13 +506,7 @@ class FilesActionStore {
             };
 
             if (this.dialogsStore.isFolderActions) {
-              this.updateCurrentFolder(
-                fileIds,
-                folderIds,
-                false,
-                operationId,
-                operationName,
-              );
+              this.updateCurrentFolder(false, operationId, operationName);
               showToast();
             } else {
               this.updateFilesAfterDelete(operationId, operationName);
@@ -596,13 +584,7 @@ class FilesActionStore {
 
         await loopFilesOperations(data, pbData);
         toastr.success(translations.successOperation);
-        this.updateCurrentFolder(
-          fileIds,
-          folderIds,
-          null,
-          pbData.operationId,
-          pbData.operation,
-        );
+        this.updateCurrentFolder(null, pbData.operationId, pbData.operation);
         getIsEmptyTrash();
         clearActiveOperations(fileIds, folderIds);
       });
@@ -741,13 +723,7 @@ class FilesActionStore {
 
         await loopFilesOperations(data, pbData);
         toastr.success(translations.successOperation);
-        this.updateCurrentFolder(
-          null,
-          folderIds,
-          null,
-          pbData.operationId,
-          pbData.operation,
-        );
+        this.updateCurrentFolder(null, pbData.operationId, pbData.operation);
         // getIsEmptyTrash();
         clearActiveOperations(null, folderIds);
       });
@@ -1082,13 +1058,7 @@ class FilesActionStore {
             operation,
             operationId,
           });
-          this.updateCurrentFolder(
-            null,
-            [itemId],
-            null,
-            operationId,
-            operation,
-          );
+          this.updateCurrentFolder(null, operationId, operation);
         })
         .then(() =>
           toastr.success(
@@ -1150,6 +1120,20 @@ class FilesActionStore {
     } finally {
       clearTimeout(timer);
     }
+  };
+
+  changeCustomFilter = async (item, t) => {
+    return enableCustomFilter(item.id, !item.customFilterEnabled)
+      .then((res) => {
+        if (res.customFilterEnabled) {
+          toastr.success(t("CustomFilterEnabled"));
+        } else {
+          toastr.success(t("CustomFilterDisabled"));
+        }
+      })
+      .catch((err) => {
+        toastr.error(err);
+      });
   };
 
   duplicateAction = async (item) => {
@@ -1277,7 +1261,7 @@ class FilesActionStore {
     const updatingFolderList = (elems, isPin = false) => {
       if (elems.length === 0) return;
 
-      this.updateCurrentFolder(null, elems, true, operationId);
+      this.updateCurrentFolder(true, operationId);
 
       const itemCount = { count: elems.length };
 
@@ -1362,7 +1346,7 @@ class FilesActionStore {
       .catch((e) => toastr.error(e))
       .finally(() => {
         Promise.all([
-          this.updateCurrentFolder(null, [id], null, operationId),
+          this.updateCurrentFolder(null, operationId),
           this.treeFoldersStore.fetchTreeFolders(),
         ]);
       });
@@ -2197,7 +2181,7 @@ class FilesActionStore {
         if (!this.isAvailableOption("create-room")) return null;
         return {
           id: "menu-create-room",
-          label: t("Files:CreateRoom"),
+          label: t("Common:CreateRoom"),
           onClick: this.onClickCreateRoom,
           iconUrl: CatalogRoomsReactSvgUrl,
         };
@@ -3027,7 +3011,7 @@ class FilesActionStore {
           this.selectedFolderStore.setInRoom(false);
 
           const operationId = uniqueid("operation_");
-          this.updateCurrentFolder(null, [roomId], null, operationId);
+          this.updateCurrentFolder(null, operationId);
         } else {
           this.filesStore.setInRoomFolder(roomId, false);
         }
@@ -3289,7 +3273,7 @@ class FilesActionStore {
       await reorderIndex(id);
       toastr.success(t("Common:SuccessfullyCompletedOperation"));
       setIsIndexEditingMode(false);
-      this.updateCurrentFolder(null, [id], true, operationId);
+      this.updateCurrentFolder(true, operationId);
     } catch (e) {
       toastr.error(t("Files:ErrorChangeIndex"));
     }
@@ -3378,6 +3362,7 @@ class FilesActionStore {
     setSecondaryProgressBarData({
       operation: pbData.operation,
       operationId: pbData.operationId,
+      percent: 0,
     });
 
     this.alreadyExportingRoomIndex = true;

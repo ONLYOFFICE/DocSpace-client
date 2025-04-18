@@ -44,6 +44,7 @@ import PluginSDK from "./PluginSDK";
 import OAuth from "./OAuth";
 
 import SSOLoader from "./sub-components/ssoLoader";
+import ApiKeys from "./ApiKeys";
 
 const DeveloperToolsWrapper = (props) => {
   const { currentDeviceType, identityServerEnabled } = props;
@@ -75,6 +76,14 @@ const DeveloperToolsWrapper = (props) => {
     </div>
   );
 
+  const oauthData = identityServerEnabled
+    ? {
+        id: "oauth",
+        name: t("OAuth:OAuth"),
+        content: <OAuth />,
+      }
+    : {};
+
   const data = [
     {
       id: "api",
@@ -96,15 +105,13 @@ const DeveloperToolsWrapper = (props) => {
       name: t("Webhooks:Webhooks"),
       content: <Webhooks />,
     },
+    { ...oauthData },
+    {
+      id: "api-keys",
+      name: t("Settings:ApiKeys"),
+      content: <ApiKeys />,
+    },
   ];
-
-  if (identityServerEnabled) {
-    data.push({
-      id: "oauth",
-      name: t("OAuth:OAuth"),
-      content: <OAuth />,
-    });
-  }
 
   // const load = async () => {
   //   // await loadBaseInfo();
@@ -112,7 +119,13 @@ const DeveloperToolsWrapper = (props) => {
 
   useEffect(() => {
     const path = location.pathname;
-    const currentTab = data.find((item) => path.includes(item.id));
+
+    const currentTab = data.find(
+      (item) =>
+        path === `/portal-settings/developer-tools/${item.id}` ||
+        path === `/developer-tools/${item.id}`,
+    );
+
     if (currentTab !== -1 && data.length) {
       setCurrentTabId(currentTab.id);
     }
@@ -125,11 +138,14 @@ const DeveloperToolsWrapper = (props) => {
   // }, [ready]);
 
   const onSelect = (e) => {
+    const path = location.pathname.includes("/portal-settings")
+      ? "/portal-settings"
+      : "";
     navigate(
       combineUrl(
         window.ClientConfig?.proxy?.url,
         config.homepage,
-        `/developer-tools/${e.id}`,
+        `${path}/developer-tools/${e.id}`,
       ),
     );
     setCurrentTabId(e.id);
@@ -150,7 +166,7 @@ const DeveloperToolsWrapper = (props) => {
 export const Component = inject(({ setup, settingsStore, authStore }) => {
   const { initSettings } = setup;
 
-  const { identityServerEnabled } = authStore.capabilities;
+  const identityServerEnabled = authStore?.capabilities?.identityServerEnabled;
 
   return {
     currentDeviceType: settingsStore.currentDeviceType,

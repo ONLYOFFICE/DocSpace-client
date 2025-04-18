@@ -150,6 +150,8 @@ class UploadDataStore {
 
   conversionVisible = false;
 
+  totalErrorsCount = 0;
+
   constructor(
     settingsStore,
     treeFoldersStore,
@@ -327,7 +329,7 @@ class UploadDataStore {
       );
 
       const canceledFile = this.files.find((f) => f.uniqueId === id);
-      const newPercent = this.getFilesPercent(canceledFile.file.size);
+      const newPercent = this.getFilesPercent(); // canceledFile.file.size
       canceledFile.cancel = true;
       canceledFile.percent = 100;
       canceledFile.action = "uploaded";
@@ -480,19 +482,20 @@ class UploadDataStore {
     return newPercent;
   };
 
-  getFilesPercent = (uploadedSize) => {
-    const newSize = this.uploadedFilesSize + uploadedSize;
-    this.uploadedFilesSize = newSize;
+  getFilesPercent = () => {
+    // const newTotalSize = sumBy(this.files, (f) =>
+    //   !f.isCalculated && f.file && !this.uploaded ? f.file.size : 0,
+    // );
 
-    const newTotalSize = sumBy(this.files, (f) =>
-      !f.isCalculated && f.file && !this.uploaded ? f.file.size : 0,
+    // const newPercent = (newSize / newTotalSize) * 100;
+
+    const percentCurrentFileHistory = sumBy(
+      this.uploadedFilesHistory,
+      (f) => f.percent,
     );
 
-    const newPercent = (newSize / newTotalSize) * 100;
-
-    /* console.log(
-    `newPercent=${newPercent} (newTotalSize=${newTotalSize} totalUploadedSize=${totalUploadedSize} indexOfFile=${indexOfFile})`
-  ); */
+    const commonPercent = this.uploadedFilesHistory.length * 100;
+    const newPercent = (percentCurrentFileHistory / commonPercent) * 100;
 
     return newPercent;
   };
@@ -578,12 +581,9 @@ class UploadDataStore {
         error = response && response[0] && response[0].error;
 
         if (error?.length) {
-          const percent = this.getConversationPercent(index + 1);
-
           this.primaryProgressDataStore.setPrimaryProgressBarData({
             operation: operationName,
             alert: true,
-            percent,
           });
 
           runInAction(() => {
@@ -685,9 +685,11 @@ class UploadDataStore {
         });
 
         if (this.uploaded) {
+          this.totalErrorsCount += 1;
           const primaryProgressData = {
             operation: OPERATIONS_NAME.upload,
             alert: true,
+            errorCount: this.totalErrorsCount,
           };
 
           this.primaryProgressDataStore.setPrimaryProgressBarData(
@@ -733,7 +735,16 @@ class UploadDataStore {
               if (newFile) {
                 newFile.error = error;
                 newFile.inConversion = false;
-                if (fileInfo === "password") newFile.needPassword = true;
+                if (fileInfo === "password") {
+                  newFile.needPassword = true;
+                  this.totalErrorsCount += 1;
+
+                  this.primaryProgressDataStore.setPrimaryProgressBarData({
+                    operation: OPERATIONS_NAME.upload,
+                    alert: true,
+                    errorCount: this.totalErrorsCount,
+                  });
+                }
               }
 
               const hFile = this.uploadedFilesHistory.find(
@@ -794,6 +805,14 @@ class UploadDataStore {
 
               if (error.indexOf("password") !== -1) {
                 hFile.needPassword = true;
+
+                this.totalErrorsCount += 1;
+
+                this.primaryProgressDataStore.setPrimaryProgressBarData({
+                  operation: OPERATIONS_NAME.upload,
+                  alert: true,
+                  errorCount: this.totalErrorsCount,
+                });
               } else hFile.action = "converted";
             }
           });
@@ -947,10 +966,9 @@ class UploadDataStore {
   };
 
   handleFilesUpload = (newUploadData, t, createNewIfExist = true) => {
-    // this.uploadedFilesHistory = newUploadData.files;
+    this.uploadedFilesHistory = newUploadData.uploadedFilesHistory;
 
     this.setUploadData(newUploadData);
-
     this.startUploadFiles(t, createNewIfExist);
   };
 
@@ -964,14 +982,14 @@ class UploadDataStore {
 
     if (!onlyConversion) {
       this.handleFilesUpload(newUploadData, t, createNewIfExist);
+    } else {
+      if (this.uploaded) {
+        newUploadData.uploaded = true;
+        this.asyncUploadObj = {};
+      }
+      this.uploadedFilesHistory = newUploadData.uploadedFilesHistory;
+      // this.setUploadData(newUploadData);
     }
-    // else {
-    //   newUploadData.uploaded = true;
-
-    //   this.asyncUploadObj = {};
-
-    //   this.setUploadData(newUploadData);
-    // }
 
     if (this.tempConversionFiles.length) {
       if (this.filesSettingsStore.hideConfirmConvertSave) {
@@ -1039,6 +1057,7 @@ class UploadDataStore {
       this.filesSize = 0;
       this.uploadToFolder = null;
       this.percent = 0;
+      this.totalErrorsCount = 0;
     }
     if (this.uploaded && this.converted) {
       this.files = [];
@@ -1073,6 +1092,7 @@ class UploadDataStore {
         cancel: false,
         needConvert,
         encrypted: file.encrypted,
+        percent: 0,
       };
 
       if (needConvert) {
@@ -1103,11 +1123,11 @@ class UploadDataStore {
     this.convertFilesSize = convertSize;
 
     const clearArray = removeDuplicate([
-      ...allFiles,
       ...this.uploadedFilesHistory,
+      ...allFiles,
     ]);
 
-    this.uploadedFilesHistory = clearArray;
+    // this.uploadedFilesHistory = clearArray;
 
     const newUploadData = {
       // filesWithoutConversion,
@@ -1119,6 +1139,7 @@ class UploadDataStore {
       uploadedFiles: this.uploadedFiles,
       percent: this.percent,
       uploaded: false,
+      uploadedFilesHistory: clearArray,
       // converted: !!this.tempConversionFiles.length,
     };
 
@@ -1222,7 +1243,7 @@ class UploadDataStore {
       reject, // reject cb
       isAsyncUpload = false, // async upload checker
       isFinalize = false, // is finalize chunk
-      allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
+      //  allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
       createNewIfExist,
     } = chunkUploadObj;
 
@@ -1237,21 +1258,20 @@ class UploadDataStore {
 
     const { uploaded, id: fileId, file: fileInfo } = res.data.data;
 
-    let uploadedSize;
+    // let uploadedSize;
 
-    if (!uploaded && !allChunkUploaded) {
-      uploadedSize =
-        fileSize <= this.filesSettingsStore.chunkUploadSize
-          ? fileSize
-          : this.filesSettingsStore.chunkUploadSize;
-    } else {
-      uploadedSize = isFinalize
-        ? 0
-        : fileSize <= this.filesSettingsStore.chunkUploadSize
-          ? fileSize
-          : fileSize - index * this.filesSettingsStore.chunkUploadSize;
-    }
-    const newPercent = this.getFilesPercent(uploadedSize);
+    // if (!uploaded && !allChunkUploaded) {
+    //   uploadedSize =
+    //     fileSize <= this.filesSettingsStore.chunkUploadSize
+    //       ? fileSize
+    //       : this.filesSettingsStore.chunkUploadSize;
+    // } else {
+    //   uploadedSize = isFinalize
+    //     ? 0
+    //     : fileSize <= this.filesSettingsStore.chunkUploadSize
+    //       ? fileSize
+    //       : fileSize - index * this.filesSettingsStore.chunkUploadSize;
+    // }
 
     const percentCurrentFile = (index / chunksLength) * 100;
 
@@ -1264,10 +1284,15 @@ class UploadDataStore {
         this.uploadedFilesHistory[fileIndex].percent = percentCurrentFile;
     }
 
+    const newPercent = this.getFilesPercent();
+
+    this.percent = newPercent;
+
     this.primaryProgressDataStore.setPrimaryProgressBarData({
       operation: OPERATIONS_NAME.upload,
       percent: newPercent,
     });
+
     if (uploaded) {
       runInAction(() => {
         this.files[indexOfFile].action = "uploaded";
@@ -1656,12 +1681,14 @@ class UploadDataStore {
         );
       })
       .catch((error) => {
+        this.totalErrorsCount += 1;
+
         if (this.files[indexOfFile] === undefined) {
           this.primaryProgressDataStore.setPrimaryProgressBarData({
             operation: OPERATIONS_NAME.upload,
-            percent: 0,
             completed: true,
             alert: true,
+            errorCount: this.totalErrorsCount,
           });
           return Promise.resolve();
         }
@@ -1676,23 +1703,42 @@ class UploadDataStore {
           errorMessage = error;
         }
 
-        this.files[indexOfFile].error = errorMessage;
+        runInAction(() => {
+          this.files[indexOfFile].error = errorMessage;
+          const fileIndex = this.uploadedFilesHistory.findIndex(
+            (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
+          );
+          if (fileIndex > -1)
+            this.uploadedFilesHistory[fileIndex].error = errorMessage;
+        });
 
-        const index = error?.chunkIndex ?? 0;
+        // const index = error?.chunkIndex ?? 0;
 
-        const uploadedSize = error?.isFinalize
-          ? 0
-          : fileSize <= chunkUploadSize
-            ? fileSize
-            : fileSize - index * chunkUploadSize;
+        // const uploadedSize = error?.isFinalize
+        //   ? 0
+        //   : fileSize <= chunkUploadSize
+        //     ? fileSize
+        //     : fileSize - index * chunkUploadSize;
 
-        const newPercent = this.getFilesPercent(uploadedSize);
+        const newPercent = this.getFilesPercent();
+        this.percent = newPercent;
+
+        const allFilesIsUploaded =
+          this.files.findIndex(
+            (f) =>
+              f.action !== "uploaded" &&
+              f.action !== "convert" &&
+              f.action !== "converted" &&
+              !f.error &&
+              !f.cancel,
+          ) === -1;
 
         this.primaryProgressDataStore.setPrimaryProgressBarData({
           operation: OPERATIONS_NAME.upload,
           percent: newPercent,
-          completed: true,
+          completed: allFilesIsUploaded,
           alert: true,
+          errorCount: this.totalErrorsCount,
         });
 
         this.currentUploadNumber -= 1;
@@ -1741,6 +1787,9 @@ class UploadDataStore {
     const filesWithErrors = this.uploadedFilesHistory.filter(
       (f) => f.error && !f.errorShown,
     );
+    const filesWithoutErrors = this.uploadedFilesHistory.filter(
+      (f) => !f.error,
+    );
     const totalErrorsCount = filesWithErrors.length;
 
     if (totalErrorsCount > 0) {
@@ -1781,12 +1830,20 @@ class UploadDataStore {
       });
 
       // for empty file
+      this.totalErrorsCount += 1;
       this.primaryProgressDataStore.setPrimaryProgressBarData({
         operation: OPERATIONS_NAME.upload,
         alert: true,
+        errorCount: this.totalErrorsCount,
       });
 
       console.log("Errors: ", totalErrorsCount);
+    } else {
+      toastr.success(
+        t("Common:ItemsSuccessfullyUploaded", {
+          count: filesWithoutErrors.length,
+        }),
+      );
     }
 
     this.uploaded = true;
@@ -1804,6 +1861,7 @@ class UploadDataStore {
       uploadedFiles: 0,
       percent: 0,
       conversionPercent: 0,
+      totalErrorsCount: 0,
     };
 
     if (this.files.length > 0) {
@@ -1840,6 +1898,7 @@ class UploadDataStore {
     deleteAfter,
     operationId,
     content,
+    toFillOut,
   ) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
@@ -1855,6 +1914,7 @@ class UploadDataStore {
       conflictResolveType,
       deleteAfter,
       content,
+      toFillOut,
     )
       .then((res) => {
         let data = null;
@@ -1871,9 +1931,10 @@ class UploadDataStore {
           return Promise.reject();
         }
         return this.loopFilesOperations(data, pbData)
-          .then(() =>
-            this.moveToCopyTo(destFolderId, pbData, true, fileIds, folderIds),
-          )
+          .then((result) => {
+            this.moveToCopyTo(destFolderId, pbData, true, fileIds, folderIds);
+            return result;
+          })
           .finally(async () => {
             // to update the status of trashIsEmpty filesStore
             if (this.treeFoldersStore.isRecycleBinFolder)
@@ -1901,6 +1962,7 @@ class UploadDataStore {
     conflictResolveType,
     deleteAfter,
     operationId,
+    toFillOut,
   ) => {
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
     const { refreshFiles, setMovingInProgress } = this.filesStore;
@@ -1911,6 +1973,7 @@ class UploadDataStore {
       fileIds,
       conflictResolveType,
       deleteAfter,
+      toFillOut,
     )
       .then((res) => {
         let data = null;
@@ -1928,9 +1991,10 @@ class UploadDataStore {
         }
 
         return this.loopFilesOperations(data, pbData)
-          .then(() =>
-            this.moveToCopyTo(destFolderId, pbData, false, fileIds, folderIds),
-          )
+          .then((result) => {
+            this.moveToCopyTo(destFolderId, pbData, false, fileIds, folderIds);
+            return result;
+          })
           .finally(async () => {
             // to update the status of trashIsEmpty filesStore
             if (this.treeFoldersStore.isRecycleBinFolder)
@@ -1964,6 +2028,9 @@ class UploadDataStore {
       });
   };
 
+  /**
+   * @returns {Promise<import("@docspace/shared/api/files/types").TOperation>}
+   */
   itemOperationToFolder = (data) => {
     const {
       destFolderId,
@@ -1976,6 +2043,7 @@ class UploadDataStore {
       title,
       itemsCount,
       isFolder,
+      toFillOut,
     } = data;
     const { setSecondaryProgressBarData } = this.secondaryProgressDataStore;
 
@@ -2007,6 +2075,7 @@ class UploadDataStore {
           deleteAfter,
           operationId,
           content,
+          toFillOut,
         )
       : this.moveToAction(
           destFolderId,
@@ -2015,6 +2084,7 @@ class UploadDataStore {
           conflictResolveType,
           deleteAfter,
           operationId,
+          toFillOut,
         );
   };
 
@@ -2032,7 +2102,7 @@ class UploadDataStore {
       return;
     }
 
-    let progress = data.progress;
+    // let progress = data.progress;
 
     let operationItem = data;
     let finished = data.finished;
@@ -2044,12 +2114,12 @@ class UploadDataStore {
       );
       operationItem = item;
 
-      progress = item ? item.progress : 100;
+      // progress = item ? item.progress : 100;
       finished = item ? item.finished : true;
 
       setSecondaryProgressBarData({
         operation: pbData.operation,
-        percent: progress,
+        //  percent: progress,
         alert: false,
         currentFile: item,
         operationId: pbData.operationId,

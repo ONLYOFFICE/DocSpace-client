@@ -26,6 +26,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import isUndefined from "lodash/isUndefined";
 
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
@@ -64,7 +65,7 @@ const ShareCollectSelector = inject<TStore>(
     filesStore,
   }) => {
     const { currentDeviceType } = settingsStore;
-    const { setShareCollectSelector, conflictResolveDialogVisible } =
+    const { conflictResolveDialogVisible, setAssignRolesDialogData } =
       dialogsStore;
     const { checkFileConflicts, setConflictDialogData, openFileAction } =
       filesActionsStore;
@@ -78,7 +79,6 @@ const ShareCollectSelector = inject<TStore>(
       currentDeviceType,
       conflictResolveDialogVisible,
       getIcon,
-      setShareCollectSelector,
       checkFileConflicts,
       setConflictDialogData,
       itemOperationToFolder,
@@ -86,6 +86,7 @@ const ShareCollectSelector = inject<TStore>(
       setIsMobileHidden,
       setSelected,
       openFileAction,
+      setAssignRolesDialogData,
     };
   },
 )(
@@ -96,7 +97,6 @@ const ShareCollectSelector = inject<TStore>(
       currentDeviceType,
       conflictResolveDialogVisible,
       getIcon,
-      setShareCollectSelector,
       checkFileConflicts,
       setConflictDialogData,
       clearActiveOperations,
@@ -107,6 +107,8 @@ const ShareCollectSelector = inject<TStore>(
       createDefineRoomType,
       headerProps = {},
       onCloseActionProp,
+      onCancel,
+      setAssignRolesDialogData,
     }: ShareCollectSelectorProps & InjectShareCollectSelectorProps) => {
       const { t } = useTranslation(["Common", "Editor"]);
       const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
@@ -120,11 +122,7 @@ const ShareCollectSelector = inject<TStore>(
       const onClose = () => {
         if (onCloseActionProp) {
           onCloseActionProp();
-          return;
         }
-        if (requestRunning.current) return;
-
-        setShareCollectSelector(false);
       };
 
       const onCloseAction = () => {
@@ -166,6 +164,8 @@ const ShareCollectSelector = inject<TStore>(
           folderTitle,
           selectedFolder,
           fromShareCollectSelector: true,
+          createDefineRoomType,
+          toFillOut: createDefineRoomType === RoomsType.VirtualDataRoom,
         };
 
         setIsRequestRunning(true);
@@ -185,10 +185,25 @@ const ShareCollectSelector = inject<TStore>(
             onCloseAndDeselectAction();
 
             openFileAction(selectedFolder, t);
-            try {
-              await itemOperationToFolder(operationData);
-            } catch (error) {
-              console.error(error);
+
+            const result = await itemOperationToFolder(operationData).catch(
+              (error) => {
+                console.error(error);
+              },
+            );
+
+            if (
+              result &&
+              !isUndefined(result.files) &&
+              result.files.length === 1 &&
+              createDefineRoomType === RoomsType.VirtualDataRoom
+            ) {
+              const [resultFile] = result.files;
+              setAssignRolesDialogData(
+                true,
+                selectedTreeNode.title,
+                resultFile,
+              );
             }
           }
         } catch (e: unknown) {
@@ -235,7 +250,10 @@ const ShareCollectSelector = inject<TStore>(
 
       const infoBarData: TInfoBarData = {
         title: t("Common:SelectorInfoBarTitle"),
-        description: t("Common:SelectorInfoBarDescription"),
+        description:
+          createDefineRoomType === RoomsType.FormRoom
+            ? t("Common:SelectorInfoBarDescription")
+            : t("Common:SelectorInfoBarVDRDescription"),
         icon: InfoIcon,
         onClose: onCloseInfoBar,
       };
@@ -270,7 +288,7 @@ const ShareCollectSelector = inject<TStore>(
           submitButtonLabel={t("Common:CopyHere")}
           cancelButtonLabel={t("Common:CancelButton")}
           cancelButtonId="share-collect-selector-cancel"
-          onCancel={onClose}
+          onCancel={onCancel}
           onSubmit={onSubmit}
           getIsDisabled={getIsDisabled}
           getFilesArchiveError={getFilesArchiveError}

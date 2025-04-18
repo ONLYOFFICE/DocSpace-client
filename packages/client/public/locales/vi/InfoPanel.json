@@ -56,7 +56,6 @@
   "RoomExternalLinkRevoked": "Liên kết trước <1>«{{linkTitle}}»</1> đã được hủy  <br/> Liên kết mới <1>«{{linkTitle}}»</1> đã được tạo",
   "RoomGroupAdded": "Đã thêm nhóm.",
   "RoomGroupRemove": "Đã xóa nhóm",
-  "RoomIndexExportSaved": "Xuất chỉ mục phòng đã lưu vào Tài liệu",
   "RoomIndexingDisabled": "Tự động lập chỉ mục tập tin đã bị vô hiệu hóa trong phòng",
   "RoomIndexingEnabled": "Tự động lập chỉ mục tập tin đã được bật trong phòng",
   "RoomInviteResend": "Đã gửi lại lời mời:",

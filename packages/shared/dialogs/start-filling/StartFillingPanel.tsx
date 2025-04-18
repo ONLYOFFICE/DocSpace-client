@@ -45,13 +45,12 @@ import {
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import PeopleSelector from "../../selectors/People";
 import type {
+  HeaderProps,
   TAccessRight,
   TOnSubmit,
 } from "../../components/selector/Selector.types";
 
 import styles from "./StartFillingPanel.module.scss";
-import type { TUser } from "../../api/people/types";
-import type { TGroup } from "../../api/groups/types";
 import { getAccessOptions } from "../../utils/getAccessOptions";
 import { RoomsType, ShareAccessRights } from "../../enums";
 
@@ -59,6 +58,7 @@ import type {
   Invitation,
   IStartFillingPanelProps,
 } from "./StartFillingPanel.types";
+import { Header } from "./StartFillingPanel.helpers";
 
 const StartFillingPanel = ({
   user,
@@ -105,10 +105,9 @@ const StartFillingPanel = ({
   const [isRoleSelectorVisible, setIsRoleSelectorVisible] = useState(false);
   const [isInvitePanelVisible, setIsInvitePanelVisible] = useState(false);
 
-  const closeUsersPanel = () => {
+  const closeUsersPanel = useCallback(() => {
     setIsRoleSelectorVisible(false);
-  };
-
+  }, []);
   const closeStartFillingPanel = () => {
     setStartFillingPanelVisible(false);
   };
@@ -117,9 +116,9 @@ const StartFillingPanel = ({
     setIsInvitePanelVisible(false);
   };
 
-  const openInvitePanel = () => {
+  const openInvitePanel = useCallback(() => {
     setIsInvitePanelVisible(true);
-  };
+  }, []);
 
   const onSubmit = async () => {
     startTransition(async () => {
@@ -130,6 +129,7 @@ const StartFillingPanel = ({
             userId: role.user!.id,
             roleName: role.name,
             roleColor: role.color.split("#")[1],
+            roomId: Number(roomId),
           })),
         })
         .catch((err) => {
@@ -141,31 +141,34 @@ const StartFillingPanel = ({
     });
   };
 
-  const onSelectUser: TOnSubmit = (item) => {
-    if (item.length === 0) return;
+  const onSelectUser: TOnSubmit = useCallback(
+    (item) => {
+      if (item.length === 0) return;
 
-    const selectedUser = item[0];
+      const selectedUser = item[0];
 
-    const { avatar, id, displayName } = selectedUser;
+      const { avatar, id, displayName } = selectedUser;
 
-    if (id && displayName) {
-      setRoles((prev) => {
-        if (currentRoleIndex === -1) return prev;
+      if (id && displayName) {
+        setRoles((prev) => {
+          if (currentRoleIndex === -1) return prev;
 
-        const role = prev[currentRoleIndex];
-        const newRole = {
-          ...role,
-          user: {
-            id: id.toString(),
-            avatar,
-            displayName,
-          },
-        };
-        return prev.map((x, i) => (i === currentRoleIndex ? newRole : x));
-      });
-    }
-    setIsRoleSelectorVisible(false);
-  };
+          const role = prev[currentRoleIndex];
+          const newRole = {
+            ...role,
+            user: {
+              id: id.toString(),
+              avatar,
+              displayName,
+            },
+          };
+          return prev.map((x, i) => (i === currentRoleIndex ? newRole : x));
+        });
+      }
+      setIsRoleSelectorVisible(false);
+    },
+    [currentRoleIndex, setRoles],
+  );
 
   const inviteUsers: TOnSubmit = async (selectedItems, access) => {
     if (isNull(access) || selectedItems.length === 0) return;
@@ -193,6 +196,8 @@ const StartFillingPanel = ({
     setIsRoleSelectorVisible(true);
   };
 
+  const checkIfUserInvited = useCallback(() => false, []);
+
   const removeUserFromRole = (roleIdx: number) => {
     setRoles((prev) => {
       if (roleIdx === -1) return prev;
@@ -206,29 +211,28 @@ const StartFillingPanel = ({
     });
   };
 
-  const filterItems = useCallback((item: TUser | TGroup) => {
-    return !item.shared;
-  }, []);
-
   const disabledSubmit = roles.some((role) => !role.user);
 
-  const header = (
-    <div className={styles.header}>
-      <h3>
-        {t("Common:RoleFields", {
-          roleName: roles[currentRoleIndex]?.name ?? "",
-        })}
-      </h3>
-      <span onClick={openInvitePanel}>{t("Common:AddUserToRoom")}</span>
-    </div>
-  );
+  const headerProps = useMemo(() => {
+    return {
+      headerLabel: t("Common:AssignToRole"),
+      withoutBackButton: false,
+      withoutBorder: false,
+      isCloseable: true,
+      onBackClick: closeUsersPanel,
+      onCloseClick: () => {
+        closeUsersPanel();
+      },
+    } satisfies HeaderProps;
+  }, [closeUsersPanel, t]);
 
   return (
     <ModalDialog
-      displayType={ModalDialogType.aside}
       visible
-      containerVisible={isRoleSelectorVisible || isInvitePanelVisible}
+      withBodyScroll
       onClose={closeStartFillingPanel}
+      displayType={ModalDialogType.aside}
+      containerVisible={isRoleSelectorVisible || isInvitePanelVisible}
     >
       <ModalDialog.Container>
         {isRoleSelectorVisible && !isInvitePanelVisible ? (
@@ -237,7 +241,9 @@ const StartFillingPanel = ({
             useAside
             withHeader
             withGuests
+            onlyRoomMembers
             withCancelButton
+            alwaysShowFooter
             onSubmit={onSelectUser}
             onCancel={closeUsersPanel}
             onClose={closeUsersPanel}
@@ -245,20 +251,16 @@ const StartFillingPanel = ({
             cancelButtonLabel={t("Common:CancelButton")}
             disableDisabledUsers={false}
             disableSubmitButton={false}
-            disableInvitedUsers={[]}
-            checkIfUserInvited={() => false}
-            filterItems={filterItems}
-            injectedElement={header}
-            headerProps={{
-              headerLabel: t("Common:AssignToRole"),
-              withoutBackButton: false,
-              withoutBorder: false,
-              isCloseable: true,
-              onBackClick: closeUsersPanel,
-              onCloseClick: () => {
-                closeUsersPanel();
-              },
-            }}
+            checkIfUserInvited={checkIfUserInvited}
+            injectedElement={
+              <Header
+                t={t}
+                className={styles.header}
+                roleName={roles[currentRoleIndex]?.name ?? ""}
+                openInvitePanel={openInvitePanel}
+              />
+            }
+            headerProps={headerProps}
           />
         ) : null}
 
@@ -269,6 +271,7 @@ const StartFillingPanel = ({
             withHeader
             withGuests
             isMultiSelect
+            alwaysShowFooter
             withAccessRights
             accessRights={accessOptions as TAccessRight[]}
             selectedAccessRight={selectedAccessRight as TAccessRight}
@@ -281,7 +284,7 @@ const StartFillingPanel = ({
             headerProps={{
               headerLabel: t("Common:ListAccounts"),
               withoutBackButton: false,
-              withoutBorder: false,
+              withoutBorder: true,
               isCloseable: true,
               onBackClick: closeInvitePanel,
               onCloseClick: () => {

@@ -93,7 +93,7 @@ export const SharePDFFormDialog = inject<TStore>(
               primary
               tabIndex={0}
               size={ButtonSize.normal}
-              label={t("Files:CreateRoom")}
+              label={t("Common:CreateRoom")}
               onClick={onSubmit}
             />
             <Button

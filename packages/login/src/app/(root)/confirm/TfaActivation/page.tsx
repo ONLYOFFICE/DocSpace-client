@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getStringFromSearchParams } from "@/utils";
+import { getStringFromSearchParams, encodeParams } from "@/utils";
 import {
   getSettings,
   getTfaSecretKeyAndQR,
@@ -39,7 +39,7 @@ type TfaActivationProps = {
 };
 
 async function Page({ searchParams }: TfaActivationProps) {
-  const confirmKey = getStringFromSearchParams(searchParams);
+  const confirmKey = encodeParams(getStringFromSearchParams(searchParams));
   const uid = searchParams.uid;
 
   const [res, settings, user] = await Promise.all([

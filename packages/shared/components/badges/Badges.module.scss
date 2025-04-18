@@ -31,6 +31,18 @@
 @import "../../styles/variables/devices";
 @import "../../styles/mixins";
 
+:global(.rtl) {
+  .badgeWrapperNewBadge {
+    left: -6px;
+  }
+}
+
+:global(.ltr) {
+  .badgeWrapperNewBadge {
+    right: -6px;
+  }
+}
+
 .badges {
   &.tableView {
     .versionBadge > div {
@@ -70,6 +82,12 @@
   }
 }
 
+.customFilterTooltip {
+  :global(.custom-filter-tooltip-link) {
+    color: var(--files-badges-link-color);
+  }
+}
+
 .badgeWrapper {
   display: flex;
   justify-content: center;
@@ -79,4 +97,16 @@
   padding: 6px;
   border-radius: 4px;
   box-shadow: 0 2px 4px $badge-shadow;
+}
+
+.badgeWrapperNewBadge {
+  position: absolute;
+
+  top: -6px;
+  padding: 0;
+
+  background: var(--files-badges-bg-color);
+
+  border-radius: 11px;
+  border: var(--files-badges-border);
 }

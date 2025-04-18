@@ -87,7 +87,9 @@ const RoleStep = ({
             alt={user.userName}
           />
         </picture>
-        <h5 className={styles.roleTitle}>{roleName}</h5>
+        <h5 title={roleName} className={styles.roleTitle}>
+          {roleName}
+        </h5>
         <p className={styles.userName}>
           {userName}{" "}
           {currentUserId === user.id ? `(${t("Common:MeLabel")})` : null}

@@ -71,8 +71,6 @@ const InvitePanel = ({
   updateInfoPanelMembers,
   isRoomMembersPanelOpen,
   setInviteLanguage,
-  getUsersList,
-  filter,
   isRoomAdmin,
   setIsNewUserByCurrentUser,
 
@@ -382,9 +380,7 @@ const InvitePanel = ({
         const isPeoplePage =
           window.location.pathname.includes("accounts/people");
 
-        if (isPeoplePage) {
-          await getUsersList(filter, false);
-        } else {
+        if (!isPeoplePage) {
           navigate("/accounts/people/filter");
         }
       }
@@ -597,7 +593,6 @@ const InvitePanel = ({
 export default inject(
   ({
     settingsStore,
-    peopleStore,
     filesStore,
     dialogsStore,
     infoPanelStore,
@@ -608,7 +603,6 @@ export default inject(
     const { theme, standalone, allowInvitingMembers, allowInvitingGuests } =
       settingsStore;
 
-    const { getUsersList, filter } = peopleStore.usersStore;
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
@@ -646,8 +640,6 @@ export default inject(
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
       isRoomMembersPanelOpen,
-      getUsersList,
-      filter,
       isRoomAdmin,
 
       setIsNewUserByCurrentUser,

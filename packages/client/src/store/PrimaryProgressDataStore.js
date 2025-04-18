@@ -59,6 +59,16 @@ class PrimaryProgressDataStore {
       if (progressInfo.alert) {
         this.setNeedErrorChecking(true, operation);
       }
+      if (progressInfo.percent > 0 && !progressInfo.completed) {
+        progressInfo.label = getOperationsProgressTitle(
+          operation,
+          Math.trunc(progressInfo.percent),
+        );
+      }
+
+      if (progressInfo.completed && progressInfo.percent > 0) {
+        progressInfo.label = getOperationsProgressTitle(operation);
+      }
 
       this.primaryOperationsArray[operationIndex] = {
         ...operationObject,

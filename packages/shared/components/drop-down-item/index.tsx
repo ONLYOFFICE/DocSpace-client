@@ -101,6 +101,7 @@ const DropDownItem = ({
   isModern,
   style,
   isPaidBadge,
+  heightTablet,
   ...rest
 }: DropDownItemProps) => {
   const { t } = useTranslation(["Common"]);

@@ -347,7 +347,7 @@
   "LinkAccessDenied": "Հղման մուտքը մերժվել է",
   "LinkCopiedToClipboard": "Հղումը պատճենվեց սեղմատախտակին",
   "LinkCopySuccess": "Հղումը պատճենվել է սեղմատախտակին",
-  "LinkCopySuccessWithCustomFilter": " Միացված <ուժեղ>Հատուկ ֆիլտրով</ուժեղ> ֆայլի հղումը հաջողությամբ պատճենվել է սեղմատախտակում:",
+  "LinkCopySuccessWithCustomFilter": " Միացված <strong>Հատուկ ֆիլտրով</strong> ֆայլի հղումը հաջողությամբ պատճենվել է սեղմատախտակում:",
   "LinkDoesNotExist": "Հղումը, որը փորձում եք բացել, գոյություն չունի:",
   "LinkExpireAfter": "Հղման ժամկետը կսպառվի <1>{{date}}</1>-ից հետո",
   "LinkExpired": "Հղման ժամկետը սպառվել է",

@@ -26,6 +26,7 @@
   "ResetAuth": "Restablecer autenticación",
   "SearchByGroupMembers": "Buscar por miembros del grupo",
   "SendInviteAgain": "Enviar invitación una vez más",
+  "ShareGuest": "Compartir invitado",
   "SSOAccountTooltip": "Esta cuenta de usuario se carga desde SSO. Si necesita cambiar el nombre de usuario y la dirección de correo electrónico, consulte el servidor SSO.",
   "StandardLogin": "Inicio de sesión estándar",
   "SuccessChangeGuestStatus": "El estado del invitado se ha modificado correctamente",

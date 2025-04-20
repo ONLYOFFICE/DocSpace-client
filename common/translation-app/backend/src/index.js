@@ -2,6 +2,8 @@ const fastify = require('fastify');
 const cors = require('@fastify/cors');
 const socketioServer = require('fastify-socket.io');
 const { serverConfig } = require('./config/config');
+const dbMigrations = require('./db/migrations');
+const { getDatabase } = require('./db/connection');
 
 // Initialize Fastify with logger
 const server = fastify(serverConfig);
@@ -43,6 +45,9 @@ async function registerRoutes() {
   server.register(require('./routes/translations'), { prefix: '/api/translations' });
   server.register(require('./routes/ollama'), { prefix: '/api/ollama' });
   
+  // Register metadata routes
+  server.register(require('./routes/metadata'), { prefix: '/api/metadata' });
+  
   // Health check route
   server.get('/health', async (request, reply) => {
     return { status: 'ok', timestamp: new Date().toISOString() };
@@ -52,6 +57,18 @@ async function registerRoutes() {
 // Start server
 async function startServer() {
   try {
+    // Initialize database and run migrations
+    console.log('Initializing database...');
+    const dbInitialized = dbMigrations.initializeDatabase();
+    if (!dbInitialized) {
+      throw new Error('Failed to initialize database');
+    }
+    console.log('Database initialized successfully');
+    
+    // Verify database connection
+    getDatabase();
+    
+    // Register plugins and routes
     await registerPlugins();
     await registerRoutes();
     
@@ -63,6 +80,7 @@ async function startServer() {
     console.log(`Server listening on ${address}`);
     
   } catch (err) {
+    console.error('Server startup error:', err);
     server.log.error(err);
     process.exit(1);
   }

@@ -36,3 +36,4 @@ playwright-report
 common/tests/reports/tests-results.html
 
 **/.next/
+common/translation-app/backend/db

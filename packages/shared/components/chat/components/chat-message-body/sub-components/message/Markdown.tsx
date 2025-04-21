@@ -45,10 +45,10 @@ export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
             );
           },
           ol({ children }) {
-            return <ol className="max-w-full">{children}</ol>;
+            return <ol className={styles.chatMessageTextColor}>{children}</ol>;
           },
           ul({ children }) {
-            return <ul className="max-w-full">{children}</ul>;
+            return <ul className={styles.chatMessageTextColor}>{children}</ul>;
           },
           pre: ({ children }) => {
             return <pre>{children}</pre>;
@@ -82,7 +82,7 @@ export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
 
               if (inline) {
                 return (
-                  <code className={className} {...props}>
+                  <code className={styles.inlineCodeBlock} {...props}>
                     {content}
                   </code>
                 );

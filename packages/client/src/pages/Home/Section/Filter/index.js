@@ -878,7 +878,7 @@ const SectionFilterContent = ({
                   id: "filter_type-ai",
                   key: RoomsType.AIRoom,
                   group: FilterGroups.roomFilterType,
-                  label: "Create room with AI",
+                  label: t("Common:AIRoomTitle"),
                 };
               case RoomsType.CustomRoom:
               default:

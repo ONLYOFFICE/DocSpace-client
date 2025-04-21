@@ -14,6 +14,13 @@ import {
 } from "./flows.types";
 import { getCookie } from "../../utils/cookie";
 
+import {
+  VECTORIZE_FILE_ID,
+  CHECK_FILE_ID,
+  CHECK_FOLDER_ID,
+  CHAT_ID,
+} from "./flows.constants";
+
 class FlowsApi {
   private api: AxiosInstance;
 
@@ -350,6 +357,10 @@ class FlowsApi {
     return response.body as ReadableStream<Uint8Array>;
   }
 
+  static async sendMessage(data: object, abortController: AbortController) {
+    return FlowsApi.buildFlow(CHAT_ID, data, abortController);
+  }
+
   static async simpleRunFlow(
     id: string,
     inputValue: string,
@@ -389,13 +400,35 @@ class FlowsApi {
     }
   }
 
-  setErrorHandler(handler: (error: unknown) => void): void {
-    this.api.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        handler(error);
-        return Promise.reject(error);
-      },
+  static async vectorizeFile(
+    inputValue: string,
+  ): Promise<SimpleRunFlowResponse> {
+    return FlowsApi.simpleRunFlow(
+      VECTORIZE_FILE_ID,
+      String(inputValue),
+      "text",
+      "text",
+      {},
+    );
+  }
+
+  static async checkFile(inputValue: string): Promise<SimpleRunFlowResponse> {
+    return FlowsApi.simpleRunFlow(
+      CHECK_FILE_ID,
+      String(inputValue),
+      "text",
+      "text",
+      {},
+    );
+  }
+
+  static async checkFolder(inputValue: string): Promise<SimpleRunFlowResponse> {
+    return FlowsApi.simpleRunFlow(
+      CHECK_FOLDER_ID,
+      String(inputValue),
+      "text",
+      "text",
+      {},
     );
   }
 }

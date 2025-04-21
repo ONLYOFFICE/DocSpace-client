@@ -93,6 +93,7 @@ const Message = ({
             getIcon={getIcon}
           />
         ) : null}
+
         {!message.isSend ? (
           <ButtonsBlock message={message.message as string} />
         ) : null}

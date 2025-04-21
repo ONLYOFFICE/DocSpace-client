@@ -12,7 +12,7 @@ export const removeFolderFromMessage = (message: string): string => {
 
   if (message.match(fileRegex)) return newMsg;
 
-  return newMsg.replace("@", "");
+  return newMsg.replaceAll("@", "");
 };
 
 /**

@@ -156,8 +156,7 @@ export default class MessageStore {
 
       this.abortController = new AbortController();
 
-      const eventsResponse = await FlowsApi.buildFlow(
-        this.flowId,
+      const eventsResponse = await FlowsApi.sendMessage(
         {
           inputs: {
             input_value: `${message}${filesStr}${folderStr}`,
@@ -189,6 +188,10 @@ export default class MessageStore {
 
             const data = parsedChunk.data;
 
+            const { cleanedMessage, fileIds } = extractFilesFromMessage(
+              removeFolderFromMessage(data.text),
+            );
+
             runInAction(() => {
               if (
                 this.messages.length &&
@@ -196,7 +199,8 @@ export default class MessageStore {
               ) {
                 this.messages[this.messages.length - 1] = {
                   ...this.messages[this.messages.length - 1],
-                  message: data.text,
+                  message: cleanedMessage,
+                  fileIds,
                   content_blocks: data.content_blocks,
                 };
 
@@ -207,7 +211,8 @@ export default class MessageStore {
                 ...this.messages,
                 {
                   ...data,
-                  message: data.text,
+                  message: cleanedMessage,
+                  fileIds,
                   isSend:
                     !this.messages[0] ||
                     data.sender === this.messages[0].sender_name,

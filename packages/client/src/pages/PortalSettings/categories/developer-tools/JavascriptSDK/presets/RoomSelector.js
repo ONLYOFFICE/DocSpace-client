@@ -99,7 +99,7 @@ const RoomSelector = (props) => {
     },
     {
       key: "room-type-ai",
-      label: t("Common:AI"),
+      label: t("Common:AIRoomTitle"),
       roomType: RoomsType.AIRoom,
     },
   ];

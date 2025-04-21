@@ -81,6 +81,9 @@
 
 .chatMessageTextColor {
   color: var(--chat-message-color);
+
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .chatMessageBorderRadius {
@@ -176,4 +179,9 @@
   gap: 8px;
 
   margin-top: 12px;
+}
+
+.inlineCodeBlock {
+  font-weight: 700;
+  font-style: italic;
 }

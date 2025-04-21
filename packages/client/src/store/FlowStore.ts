@@ -13,11 +13,9 @@ import { toastr } from "@docspace/shared/components/toast";
 
 type VectorizeDocumentStatus = "added" | "error" | "exist" | "not_found";
 
-const CHAT_NAME = "docspace_ai_chat";
-const VECTORIZE_DOCUMENT_NAME = "vectorize_document";
-const CHECK_VECTORIZE_DOCUMENT_NAME = "check_vectorize_document";
+type SimpleFile = Pick<TFile, "id" | "version" | "title">;
+
 const API_KEY_NAME = "chat_api_key";
-const SUMMARIZE_TO_FILE_NAME = "summarize_to_file";
 
 class FlowStore {
   private api: FlowsApi;
@@ -32,17 +30,9 @@ class FlowStore {
 
   error: Error | null = null;
 
-  aiChatID: string = "";
-
-  vectorizeDocumentID: string = "";
-
-  checkVectorizeDocumentID: string = "";
-
-  summarizeToFileID: string = "";
-
   apiKey: string = "";
 
-  vectorizedFiles: TFile[] = [];
+  vectorizedFiles: (TFile | SimpleFile)[] = [];
 
   constructor() {
     this.api = new FlowsApi("/onlyflow/api/v1");
@@ -58,11 +48,6 @@ class FlowStore {
       this.isLoading = true;
       await this.api.autoLogin();
 
-      this.aiChatID = getCookie(CHAT_NAME) ?? "";
-      this.vectorizeDocumentID = getCookie(VECTORIZE_DOCUMENT_NAME) ?? "";
-      this.checkVectorizeDocumentID =
-        getCookie(CHECK_VECTORIZE_DOCUMENT_NAME) ?? "";
-      this.summarizeToFileID = getCookie(SUMMARIZE_TO_FILE_NAME) ?? "";
       this.apiKey = getCookie(API_KEY_NAME) ?? "";
     } catch (error) {
       runInAction(() => {
@@ -75,11 +60,22 @@ class FlowStore {
     }
   };
 
+  localCheckVectorizeDocument = (file: TFile | SimpleFile) => {
+    if (
+      this.vectorizedFiles.some(
+        (f) => f.id === file.id && f.version === file.version,
+      )
+    )
+      return true;
+
+    return false;
+  };
+
   checkVectorizeDocument = async (file: TFile) => {
-    if (!this.apiKey || !this.checkVectorizeDocumentID) {
+    if (!this.apiKey) {
       setTimeout(() => {
         this.checkVectorizeDocument(file);
-      }, 1000);
+      }, 300);
       return;
     }
 
@@ -88,13 +84,7 @@ class FlowStore {
     if (isFileExists) return;
 
     try {
-      const response = await FlowsApi.simpleRunFlow(
-        this.checkVectorizeDocumentID,
-        String(file.id),
-        "text",
-        "text",
-        {},
-      );
+      const response = await FlowsApi.checkFile(String(file.id));
 
       const msg = response.outputs[0].outputs[0].messages[0]
         .message as VectorizeDocumentStatus;
@@ -123,26 +113,64 @@ class FlowStore {
     }
   };
 
-  localCheckVectorizeDocument = (file: TFile) => {
-    if (
-      this.vectorizedFiles.some(
-        (f) => f.id === file.id && f.version === file.version,
-      )
-    )
-      return true;
+  checkVectorizedDocuments = async (
+    folderId: number | string,
+    filesId: SimpleFile[],
+  ) => {
+    if (!this.apiKey) {
+      setTimeout(() => {
+        this.checkVectorizedDocuments(folderId, filesId);
+      }, 300);
+      return;
+    }
 
-    return false;
+    const response = await FlowsApi.checkFolder(String(folderId));
+
+    const msg = response.outputs[0].outputs[0].messages[0]
+      ?.message as VectorizeDocumentStatus;
+
+    if (msg === "error") {
+      toastr.error(`Error checking vectorized documents`);
+      return;
+    }
+
+    if (!msg) {
+      filesId.forEach((f) => {
+        this.vectorizeDocument(f);
+      });
+
+      return;
+    }
+
+    const files: SimpleFile[] = msg
+      .split(",")
+      .map((s) => {
+        const [id, version] = s.split(":");
+
+        const f = {
+          id: Number(id),
+          version: Number(version),
+          title: "",
+        };
+
+        if (!this.localCheckVectorizeDocument(f)) return f;
+
+        return null;
+      })
+      .filter(Boolean);
+
+    files.forEach(({ id, version }) => {
+      const isFound = msg.includes(`${id}:${version}`);
+
+      if (!isFound) this.vectorizeDocument({ id, version, title: "" });
+    });
+
+    this.vectorizedFiles = [...this.vectorizedFiles, ...files];
   };
 
-  vectorizeDocument = async (file: TFile) => {
+  vectorizeDocument = async (file: TFile | SimpleFile) => {
     try {
-      const response = await FlowsApi.simpleRunFlow(
-        this.vectorizeDocumentID,
-        String(file.id),
-        "text",
-        "text",
-        {},
-      );
+      const response = await FlowsApi.vectorizeFile(String(file.id));
 
       const msg = response.outputs[0].outputs[0].messages[0]
         .message as VectorizeDocumentStatus;
@@ -173,21 +201,21 @@ class FlowStore {
   };
 
   summarizeToFile = async (file: TFile) => {
-    if (!this.apiKey || !this.summarizeToFileID) {
-      setTimeout(() => {
-        this.summarizeToFile(file);
-      }, 1000);
-      return;
-    }
+    // if (!this.apiKey || !this.summarizeToFileID) {
+    //   setTimeout(() => {
+    //     this.summarizeToFile(file);
+    //   }, 1000);
+    //   return;
+    // }
 
     try {
-      await FlowsApi.simpleRunFlow(
-        this.summarizeToFileID,
-        String(file.id),
-        "text",
-        "text",
-        {},
-      );
+      // await FlowsApi.simpleRunFlow(
+      //   this.summarizeToFileID,
+      //   String(file.id),
+      //   "text",
+      //   "text",
+      //   {},
+      // );
 
       toastr.success(`Document summarized: ${file.title}`);
     } catch (error) {

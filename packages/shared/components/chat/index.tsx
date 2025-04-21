@@ -28,6 +28,7 @@ import React from "react";
 
 import { DeviceType } from "../../enums";
 import { TFile } from "../../api/files/types";
+import { CHAT_ID } from "../../api/flows/flows.constants";
 
 import ChatHeader from "./components/chat-header";
 import ChatBody from "./components/chat-body";
@@ -42,7 +43,7 @@ import { ModelStoreContextProvider } from "./store/modelStore";
 const Chat = ({
   currentDeviceType,
   displayFileExtension,
-  aiChatID,
+  aiChatID = CHAT_ID,
   aiSelectedFolder,
   vectorizedFiles,
 

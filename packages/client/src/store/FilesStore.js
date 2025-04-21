@@ -1126,17 +1126,27 @@ class FilesStore {
 
     this.files = files;
 
-    if (this.selectedFolderStore.roomType === RoomsType.AIRoom) {
+    if (this.selectedFolderStore.isAIRoom) {
       const filesId = files
         .map((f) => {
           if (this.flowStore.localCheckVectorizeDocument(f)) return false;
 
-          this.flowStore.checkVectorizeDocument(f);
           return f.id;
         })
         .filter(Boolean);
 
-      this.setActiveFiles(filesId);
+      if (filesId.length > 0) {
+        if (filesId.length > 1) {
+          this.flowStore.checkVectorizedDocuments(
+            this.selectedFolderStore.id,
+            files.filter((f) => filesId.some((id) => id === f.id)),
+          );
+        } else {
+          this.flowStore.checkVectorizeDocument(this.files[0]);
+        }
+
+        this.setActiveFiles(filesId);
+      }
     }
 
     if (roomPartsToSub.length > 0) {
@@ -1210,7 +1220,7 @@ class FilesStore {
       this.files[index] = file;
       this.createThumbnail(file);
 
-      if (this.selectedFolderStore.roomType === RoomsType.AIRoom) {
+      if (this.selectedFolderStore.isAIRoom) {
         if (this.flowStore.localCheckVectorizeDocument(file)) return;
 
         this.flowStore.checkVectorizeDocument(file);
@@ -2216,7 +2226,7 @@ class FilesStore {
         item.fileExst === ".docxf" || item.fileExst === ".oform"; // TODO: Remove after change security options
       const isPdf = item.fileExst === ".pdf";
 
-      const isAIRoom = this.selectedFolderStore.roomType === RoomsType.AIRoom;
+      const isAIRoom = this.selectedFolderStore.isAIRoom;
       const extsCustomFilter =
         this.filesSettingsStore?.extsWebCustomFilterEditing || [];
       const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
@@ -2279,7 +2289,6 @@ class FilesStore {
       ];
 
       if (!isAIRoom) {
-        console.log("remove");
         fileOptions = removeOptions(fileOptions, ["summarize"]);
       }
 

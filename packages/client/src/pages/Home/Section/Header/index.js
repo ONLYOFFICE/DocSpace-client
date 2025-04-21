@@ -835,6 +835,7 @@ export default inject(
       security,
       rootFolderType,
       shared,
+      isAIRoom,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -920,9 +921,7 @@ export default inject(
 
     const { aiChatIsVisible, setAiChatIsVisible } = flowStore;
 
-    const withChat =
-      roomType === RoomsType.AIRoom ||
-      navigationPath.some((r) => r.roomType === RoomsType.AIRoom);
+    const withChat = isAIRoom;
 
     return {
       showText: settingsStore.showText,

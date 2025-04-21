@@ -27,6 +27,8 @@
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ModuleFederationPlugin =
+  require("webpack").container.ModuleFederationPlugin;
 const DefinePlugin = require("webpack").DefinePlugin;
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
@@ -388,7 +390,6 @@ module.exports = (env, argv) => {
           }
           return acc;
         }, {}),
-        ...sharedDeps,
         "@onlyoffice/docspace-sdk-js": {
           singleton: true,
           eager: true,

@@ -1,5 +1,7 @@
 {
   "ChangeUserTypeButton": "ປ່ຽນປະເພດ",
   "ChangeUserTypeMessage": "ຜູ້ໃຊ້ທີ່ມີປະເພດ <strong>'{{firstType}}'</strong> ຈະຖືກຍ້າຍໄປປະເພດ <strong>'{{secondType}}'</strong>.",
-  "SuccessChangeUserType": "ປະເພດຜູ້ໃຊ້ຖືກປ່ຽນແປງສຳເລັດຜົນແລ້ວ."
+  "SuccessChangeUserType": "ປະເພດຜູ້ໃຊ້ຖືກປ່ຽນແປງສຳເລັດຜົນແລ້ວ.",
+  "ChangeContactType": "ປ່ຽນປະເພດຕິດຕໍ່",
+  "ChangeGuestsTypeMessage": "แขກຮັບເຊີນ <strong>{{userName}}</strong> ຈະຖືກຍ້າຍໄປທີ່ພາກສ່ວນ <strong>{{membersSection}}</strong> ແລະຖືກມອບຫມາຍເປັນປະເພດຜູ້ໃຊ້. ຜູ້ໃຊ້ມີພາກສ່ວນ <strong>{{documentsSection}}</strong> ຂອງຕົນເອງ, ສາມາດສ້າງ ແລະແກ້ໄຂເອກະສານໄດ້, ແຕ່ບໍ່ສາມາດສ້າງຫ້ອງໄດ້."
 }

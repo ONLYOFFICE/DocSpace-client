@@ -1,5 +1,7 @@
 {
   "ChangeUserTypeButton": "වර්ගය සංශෝධනය",
   "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> වර්ගය වන පරිශ්‍රීලකයින් <strong>'{{ secondType }}'</strong> වර්ගයට ගෙන යනු ඇත.",
-  "SuccessChangeUserType": "පරිශ්‍රීලකයාගේ වර්ගය වෙනස් වී ඇත"
+  "SuccessChangeUserType": "පරිශ්‍රීලකයාගේ වර්ගය වෙනස් වී ඇත",
+  "ChangeContactType": "ව්‍යාපාර සම්බන්ධතා ආකාරය වෙනස් කරන්න",
+  "ChangeGuestsTypeMessage": "මුරණ්ඩු <strong>{{userName}}</strong>  හောင်း {{membersSection}} කොටසට යවා, User වර්ගයට පත්කරනු ලැබේ. භාවිතකරුවන්ට {{documentsSection}} ඔවුන්ගේම කොටසක් ඇත, ෆයිල්ස් සාදා, සංස්කරණය කිරීමට හැකි නමුත්, ඔවුන්ට කාමර සාදාගත නොහැකිය."
 }

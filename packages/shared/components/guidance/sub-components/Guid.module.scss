@@ -49,6 +49,7 @@
 
 :global {
   .guidance-dialog {
+    z-index: 1000;
     .modal-header {
       margin: 20px 20px 12px 20px;
       height: auto;
@@ -97,10 +98,16 @@
   }
 }
 
+.guidance {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .guidElement {
   position: absolute;
   border-radius: 7px;
-  backdrop-filter: var(--backdrop-filter-value);
+  z-index: 1;
 
   &.smallBorderRadius {
     border-radius: 4px;
@@ -117,7 +124,7 @@
   position: fixed;
   left: 0;
   top: 0;
-
+  z-index: 999;
   background-color: var(--backdrop-background-color);
 
   @include mobile {

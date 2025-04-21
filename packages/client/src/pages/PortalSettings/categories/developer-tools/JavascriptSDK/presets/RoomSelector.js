@@ -198,16 +198,8 @@ const RoomSelector = (props) => {
 
   const preview = (
     <Frame
-      width={
-        config.id !== undefined && config.width.includes("px")
-          ? config.width
-          : undefined
-      }
-      height={
-        config.id !== undefined && config.height.includes("px")
-          ? config.height
-          : undefined
-      }
+      width={config.width.includes("px") ? config.width : undefined}
+      height={config.height.includes("px") ? config.height : undefined}
       targetId={config.frameId}
     >
       <div id={config.frameId} />

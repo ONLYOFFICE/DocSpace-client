@@ -2121,7 +2121,7 @@ class ContextOptionsStore {
         label: t("Common:RemoveFromList"),
         icon: CircleCrossSvgUrl,
         onClick: () => this.onRemoveSharedRooms([item]),
-        disabled: !item.external,
+        disabled: this.userStore?.user?.isAdmin || !item.external,
       },
       {
         id: "option_download-as",
@@ -2194,6 +2194,7 @@ class ContextOptionsStore {
         icon: HelpCenterReactSvgUrl,
         onClick: () => this.onEnableFormFillingGuid(t, item.roomType),
         disabled:
+          isArchive ||
           !isFormRoom ||
           isMobileUtils() ||
           item.id !== this.selectedFolderStore.id,

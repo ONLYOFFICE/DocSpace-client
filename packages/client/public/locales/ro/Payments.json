@@ -41,6 +41,7 @@
   "StartupTitle": "Utilizaţi abonamentul gratuit {{planName}}",
   "StripeCustomerPortal": "salt la portalul de client Stripe",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/lună</3>",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/an</3>",
   "UpgradeNow": "Upgrade acum",
   "UpgradePlan": "Actualizare abonament",
   "UserNotFound": "Utilizatorul <1>{{email}}</1> nu a fost găsit.",

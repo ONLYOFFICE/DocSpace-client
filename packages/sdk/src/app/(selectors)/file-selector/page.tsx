@@ -38,6 +38,7 @@ import { configureFilterByFilterParam } from "@docspace/shared/selectors/Files/F
 
 import { getFilesSettings, getFolder, getFoldersTree } from "@/api/files";
 import { getRooms } from "@/api/rooms";
+import { getSettings } from "@/api/settings";
 import { PAGE_COUNT } from "@/utils/constants";
 
 import FilesSelectorClient from "./page.client";
@@ -59,9 +60,10 @@ export default async function Page({
 
   const folderId = +(baseConfig.id ?? 0) || null;
 
-  const [foldersTree, filesSettings] = await Promise.all([
+  const [foldersTree, filesSettings, portalSettings] = await Promise.all([
     getFoldersTree(),
     getFilesSettings(),
+    getSettings(),
   ]);
 
   const roomsID = foldersTree.find(
@@ -129,6 +131,10 @@ export default async function Page({
     selectedItemId: current.id,
     selectedItemType: (isRoomView ? "rooms" : "files") as "files" | "rooms",
     total,
+    logoText:
+      portalSettings && typeof portalSettings !== "string"
+        ? portalSettings.logoText
+        : "",
   };
 
   return <FilesSelectorClient {...clientProps} />;

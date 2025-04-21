@@ -99,6 +99,7 @@ const SectionBodyContent = (props) => {
     roomType,
     userId,
     onEnableFormFillingGuid,
+    isArchiveFolderRoot,
   } = props;
 
   useEffect(() => {
@@ -114,7 +115,12 @@ const SectionBodyContent = (props) => {
       return window.localStorage.setItem(storageName, "true");
     }
 
-    if (roomType === RoomsType.FormRoom && !closedFormFillingTips && userId) {
+    if (
+      roomType === RoomsType.FormRoom &&
+      !closedFormFillingTips &&
+      userId &&
+      !isArchiveFolderRoot
+    ) {
       onEnableFormFillingGuid(t, roomType);
     }
   }, [roomType, onEnableFormFillingGuid]);
@@ -489,6 +495,7 @@ export default inject(
       roomType: selectedFolderStore.roomType,
       setTooltipPosition,
       isRecycleBinFolder: treeFoldersStore.isRecycleBinFolder,
+      isArchiveFolderRoot: treeFoldersStore.isArchiveFolderRoot,
       moveDragItems: filesActionsStore.moveDragItems,
       changeIndex: filesActionsStore.changeIndex,
       viewAs,

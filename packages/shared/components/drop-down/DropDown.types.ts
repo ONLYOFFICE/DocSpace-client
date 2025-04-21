@@ -86,6 +86,7 @@ export interface DropDownProps {
   topSpace?: number;
   usePortalBackdrop?: boolean;
   backDrop?: JSX.Element | null;
+  shouldShowBackdrop?: boolean;
 }
 
 export interface VirtualListProps {

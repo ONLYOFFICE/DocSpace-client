@@ -12,9 +12,11 @@
   "DeleteUser": "Eliminar utilizador",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> será excluído. Essa ação não pode ser desfeita.",
   "DeletingUsers": "Excluindo usuários",
+  "PersonalDataDeletionInfo": "Dados pessoais, todos os arquivos e pastas pessoais nas seções {{sectionNameFirst}} e {{sectionNameSecond}}* dos usuários selecionados serão permanentemente excluídos. Arquivos e pastas dos usuários selecionados armazenados em seções compartilhadas* como salas permanecerão no {{productName}}.",
   "PleaseNote": "Observe:",
   "ReassignDataToAnotherUser": "Reatribuir dados a outro usuário",
   "SuccessfullyDeleteGuestInfoMessage": "O convidado foi excluído com sucesso",
   "SuccessfullyDeleteUserInfoMessage": "O utilizador foi eliminado com êxito",
-  "ToBeAbleToReassignData": "Para poder reatribuir dados, exclua um usuário por vez."
+  "ToBeAbleToReassignData": "Para poder reatribuir dados, exclua um usuário por vez.",
+  "UserFilesRemovalScope": "Dados pessoais, todos os arquivos e pastas nas seções {{sectionNameFirst}} e {{sectionNameSecond}} deste usuário serão permanentemente excluídos."
 }

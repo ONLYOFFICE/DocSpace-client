@@ -102,24 +102,15 @@ const MainButtonMobile = forwardRef<MainButtonMobileRef, MainButtonMobileProps>(
       setIsOpen(opened);
     }, [opened]);
 
-    const usePrevious = (value?: string) => {
-      const prevRef = useRef<string>();
-
-      useEffect(() => {
-        prevRef.current = value;
-      });
-
-      return prevRef.current;
-    };
-
-    const currentLocation = window.location.href;
-    const prevLocation = usePrevious(window.location.href);
-
     useEffect(() => {
-      if (prevLocation !== currentLocation) {
-        setIsOpen(false);
-      }
-    }, [prevLocation, currentLocation]);
+      const handlePopState = () => setIsOpen(false);
+
+      window.addEventListener("popstate", handlePopState);
+
+      return () => {
+        window.removeEventListener("popstate", handlePopState);
+      };
+    }, []);
 
     const setDialogBackground = (scrollHeight: number) => {
       if (!buttonBackground) {
@@ -220,7 +211,7 @@ const MainButtonMobile = forwardRef<MainButtonMobileRef, MainButtonMobileProps>(
         onClose();
       }
 
-      return setIsOpen(value);
+      setIsOpen(value);
     };
 
     const onMainButtonClick = (e: React.MouseEvent) => {

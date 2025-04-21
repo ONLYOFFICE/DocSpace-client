@@ -233,7 +233,7 @@ const PeopleSelector = ({
   const [total, setTotal] = useState<number>(-1);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [isNextPageLoading, setIsNextPageLoading] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<TSelectorItem | null>(null);
+  const [selectedItems, setSelectedItems] = useState<TSelectorItem[]>([]);
   const isFirstLoadRef = useRef(true);
   const afterSearch = useRef(false);
   const totalRef = useRef(0);
@@ -244,10 +244,14 @@ const PeopleSelector = ({
     isDoubleClick: boolean,
     doubleClickCallback: () => void,
   ) => {
-    setSelectedItem((el) => {
-      if (el?.id === item.id) return null;
+    setSelectedItems((prevItems) => {
+      if (!isMultiSelect) {
+        return item.isSelected ? [] : [item];
+      }
 
-      return item;
+      return item.isSelected
+        ? prevItems.filter((p) => p.id !== item.id)
+        : [...prevItems, item];
     });
     if (isDoubleClick) {
       doubleClickCallback();
@@ -504,7 +508,7 @@ const PeopleSelector = ({
           }}
         >
           <Text
-            className="label"
+            className="selector-item_label"
             fontWeight={600}
             fontSize="14px"
             noSelect
@@ -518,7 +522,7 @@ const PeopleSelector = ({
         {!isGroup ? (
           <div style={{ display: "flex" }}>
             <Text
-              className="label"
+              className="selector-item_label"
               fontWeight={400}
               fontSize="12px"
               noSelect
@@ -613,8 +617,8 @@ const PeopleSelector = ({
       items={itemsList}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
-      disableSubmitButton={disableSubmitButton || !selectedItem}
-      selectedItem={selectedItem}
+      disableSubmitButton={disableSubmitButton || !selectedItems.length}
+      selectedItem={isMultiSelect ? null : selectedItems[0]}
       submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
       emptyScreenHeader={

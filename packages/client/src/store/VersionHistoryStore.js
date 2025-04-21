@@ -26,7 +26,7 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
-import { FileStatus } from "@docspace/shared/enums";
+import { FileStatus, FileAction } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
@@ -53,9 +53,10 @@ class VersionHistoryStore {
 
   versionDeletionProcess = false;
 
-  constructor(filesStore) {
+  constructor(filesStore, filesActionsStore) {
     makeAutoObservable(this);
     this.filesStore = filesStore;
+    this.filesActionsStore = filesActionsStore;
 
     if (this.versions) {
       // TODO: Files store in not initialized on versionHistory page. Need socket.
@@ -166,6 +167,8 @@ class VersionHistoryStore {
   };
 
   restoreVersion = (id, version) => {
+    const { completeAction } = this.filesActionsStore;
+
     this.timerId = setTimeout(() => this.setShowProgressBar(true), 100);
 
     return api.files
@@ -174,6 +177,12 @@ class VersionHistoryStore {
         const updatedVersions = this.versions.slice();
         updatedVersions.unshift(newVersion);
         this.setVerHistoryFileVersions(updatedVersions);
+      })
+      .then(() => {
+        const file = this.filesStore.files.find((x) => x.id === +this.fileId);
+        if (file) {
+          completeAction(file, FileAction.RestoreVersion);
+        }
       })
       .catch((e) => toastr.error(e))
       .finally(() => {

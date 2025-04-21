@@ -6,8 +6,10 @@
   "DeleteUser": "පරිශ්‍රීලකයා මක්නන",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> මකා දැමෙනු ඇත. මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි.",
   "DeletingUsers": "පරිශ්‍රීලකයින් මැකෙමින්",
+  "PersonalDataDeletionInfo": "Osebni podatki, vse osebne datoteke in mape v oddelkih {{sectionNameFirst}} in {{sectionNameSecond}}* izbranih uporabnikov bodo trajno izbrisane. Datoteke in mape izbranih uporabnikov v skupnih oddelkih*, kot so sobe, bodo ostale v {{productName}}.",
   "PleaseNote": "සටහන:",
   "ReassignDataToAnotherUser": "වෙනත් පරිශ්‍රීලකයෙක්ට දත්ත පවරන්න",
   "SuccessfullyDeleteUserInfoMessage": "පරිශ්‍රීලකයා සාර්ථකව මකන ලදි",
-  "ToBeAbleToReassignData": "වරකට එක් පරිශ්‍රීලකයෙක් බැගින් මැකීමෙන් දත්ත යළි පැවරීමට හැකි වේ."
+  "ToBeAbleToReassignData": "වරකට එක් පරිශ්‍රීලකයෙක් බැගින් මැකීමෙන් දත්ත යළි පැවරීමට හැකි වේ.",
+  "UserFilesRemovalScope": "Osebni podatki, vse datoteke in mape v oddelkih {{sectionNameFirst}} in {{sectionNameSecond}} tega uporabnika bodo trajno izbrisane."
 }

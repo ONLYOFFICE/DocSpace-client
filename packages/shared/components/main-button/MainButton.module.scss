@@ -73,11 +73,11 @@
       opacity: 1;
       cursor: pointer;
 
-      &[data-theme="Base"] {
+      &[data-theme="light"] {
         filter: brightness(90%);
       }
 
-      &[data-theme="Dark"] {
+      &[data-theme="dark"] {
         filter: brightness(82%);
       }
     }

@@ -60,6 +60,7 @@ type IconProps = {
   onIconClick?: (e: React.MouseEvent) => void;
   /** Icon button class name */
   iconButtonClassName?: string;
+  noIcon?: boolean;
 };
 
 export type InputBlockProps = InputProps & IconProps & CommonProps;

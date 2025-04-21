@@ -1,5 +1,7 @@
 {
   "CancelUpload": "Das Hochladen wurde unterbrochen. Einige Dateien sind nicht hochgeladen worden.",
   "HideInput": "Ausblenden",
-  "Ready": "Fertig"
+  "Ready": "Fertig",
+  "UploadingAndConversion": "Hochladen & Konvertieren",
+  "UploadingError": "Fehler beim Hochladen"
 }

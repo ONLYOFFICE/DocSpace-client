@@ -33,7 +33,7 @@ export const MemberLoader = ({ count = 1 }: { count?: number }) => {
   return (
     <>
       {[...Array(count).keys()].map((i) => (
-        <div className={styles.memberLoader} key={i}>
+        <div className={styles.styledMemberLoader} key={i}>
           <RectangleSkeleton
             className="avatar"
             width="32px"
@@ -55,7 +55,7 @@ export const MemberLoader = ({ count = 1 }: { count?: number }) => {
 
 const MembersLoader = () => {
   return (
-    <div className={styles.styledMemberLoader} data-testid="members-loader">
+    <div className={styles.memberLoader} data-testid="members-loader">
       <div className={styles.memberSubtitleLoader}>
         <RectangleSkeleton width="111px" height="16px" borderRadius="3px" />
         <RectangleSkeleton width="16px" height="16px" borderRadius="3px" />

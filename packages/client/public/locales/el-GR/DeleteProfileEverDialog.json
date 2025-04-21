@@ -12,9 +12,11 @@
   "DeleteUser": "Διαγραφή χρήστη",
   "DeleteUserMessage": "{{userCaption}} Ο χρήστης <strong>{{user}}</strong> θα διαγραφεί. Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
   "DeletingUsers": "Διαγραφή χρηστών",
+  "PersonalDataDeletionInfo": "Προσωπικά δεδομένα, όλα τα προσωπικά αρχεία και φάκελοι στις ενότητες {{sectionNameFirst}} και {{sectionNameSecond}}* των επιλεγμένων χρηστών θα διαγραφούν οριστικά. Τα αρχεία και οι φάκελοι των επιλεγμένων χρηστών που βρίσκονται σε κοινές ενότητες* όπως δωμάτια θα παραμείνουν στο {{productName}}.",
   "PleaseNote": "Λάβετε υπόψη σας:",
   "ReassignDataToAnotherUser": "Εκ νέου ανάθεση δεδομένων σε άλλον χρήστη",
   "SuccessfullyDeleteGuestInfoMessage": "Ο επισκέπτης διαγράφηκε επιτυχώς",
   "SuccessfullyDeleteUserInfoMessage": "Ο χρήστης έχει διαγραφεί επιτυχώς",
-  "ToBeAbleToReassignData": "Για να μπορέσετε να αναθέσετε εκ νέου δεδομένα, διαγράψτε έναν χρήστη κάθε φορά."
+  "ToBeAbleToReassignData": "Για να μπορέσετε να αναθέσετε εκ νέου δεδομένα, διαγράψτε έναν χρήστη κάθε φορά.",
+  "UserFilesRemovalScope": "Προσωπικά δεδομένα, όλα τα αρχεία και φάκελοι στις ενότητες {{sectionNameFirst}} και {{sectionNameSecond}} αυτού του χρήστη θα διαγραφούν οριστικά."
 }

@@ -28,6 +28,15 @@ import styled, { css } from "styled-components";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 
+export const getDropdownHoverRules = () => [
+  `.drop-down-item:hover:not(.separator) {
+    background-color: var(--drop-down-item-hover-color) !important;
+  }`,
+  `.drop-down-item.activeDescendant {
+    background-color: var(--drop-down-item-hover-color) !important;
+  }`,
+];
+
 export const StyledWrapper = styled.div`
   width: 100%;
   max-width: 660px;
@@ -308,6 +317,10 @@ export const StyledInfo = styled.div`
           min-width: 75px;
           max-width: 75px;
           white-space: nowrap;
+        }
+
+        .backdrop-active {
+          z-index: 203 !important;
         }
       }
 

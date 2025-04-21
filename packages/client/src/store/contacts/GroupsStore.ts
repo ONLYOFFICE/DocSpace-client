@@ -559,6 +559,10 @@ class GroupsStore {
   ) => {
     const { setIsSectionBodyLoading } = this.clientLoadingStore;
 
+    const isSameGroup =
+      this.peopleStore.usersStore.contactsTab === "inside_group" &&
+      this.currentGroup?.id === groupId;
+
     this.peopleStore.usersStore!.setContactsTab("inside_group");
 
     const insideGroupUrl = getContactsUrl("inside_group", groupId);
@@ -577,7 +581,7 @@ class GroupsStore {
       this.setInsideGroupBackUrl(url);
     }
 
-    window.DocSpace.navigate(insideGroupUrl);
+    window.DocSpace.navigate(insideGroupUrl, { replace: isSameGroup });
   };
 
   updateGroup = async (

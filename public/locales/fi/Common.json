@@ -283,7 +283,7 @@
   "FromDevice": "Laitteesta",
   "FromPortal": "{{productName}}:sta",
   "FromTemplate": "Mallista",
-  "FromTemplateRoomInfo": "Luo huone mallin perusteella. Kaikki asetukset, käyttäjät, kansiot ja tiedostot otetaan valitusta huoneen mallista.",
+  "FromTemplateRoomInfo": "Luo huone mallin perusteella. Kaikki asetukset, kansiot ja tiedostot otetaan valitusta huoneen mallista.",
   "GeneratePassword": "Luo salasana",
   "Gigabyte": "GB",
   "GoBack": "Palaa",

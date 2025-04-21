@@ -283,7 +283,7 @@
   "FromDevice": "Cihazdan",
   "FromPortal": "{{productName}} dan",
   "FromTemplate": "Şablondan",
-  "FromTemplateRoomInfo": "Şablon əsasında otaq yaradın. Bütün parametrlər, istifadəçilər, qovluqlar və fayllar seçilmiş otaq şablonundan idxal ediləcək.",
+  "FromTemplateRoomInfo": "Şablon əsasında otaq yaradın. Bütün parametrlər, qovluqlar və fayllar seçilmiş otaq şablonundan idxal ediləcək.",
   "GeneratePassword": "Şifrə yaradın",
   "Gigabyte": "GB",
   "GoBack": "Geriyə qayıdın",

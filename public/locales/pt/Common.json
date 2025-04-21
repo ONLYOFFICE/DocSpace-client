@@ -283,7 +283,7 @@
   "FromDevice": "Do dispositivo",
   "FromPortal": "De {{productName}}",
   "FromTemplate": "De template",
-  "FromTemplateRoomInfo": "Crie uma sala com base num template. Todas as definições, utilizadores, pastas e ficheiros serão retirados do modelo de sala selecionado.",
+  "FromTemplateRoomInfo": "Crie uma sala com base num template. Todas as definições, pastas e ficheiros serão retirados do modelo de sala selecionado.",
   "GeneratePassword": "Gerar palavra-passe",
   "Gigabyte": "GB",
   "GoBack": "Volte",

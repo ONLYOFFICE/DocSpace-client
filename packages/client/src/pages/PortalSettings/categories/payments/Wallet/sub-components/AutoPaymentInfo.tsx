@@ -67,32 +67,20 @@ const AutoPaymentInfo = ({
 
   return (
     <div className="auto-payment-information">
-      {isAutoPaymentExist ? (
-        <>
-          <Text fontWeight={600}>{t("AutoTopUpEnabled")}</Text>
-          <div className="auto-payment-editing">
-            <Text>
-              {t("WhenBalanceDropsTo", {
-                min: formatCurrencyValue(
-                  language,
-                  minBalance,
-                  walletCodeCurrency,
-                ),
-                max: formatCurrencyValue(
-                  language,
-                  upToBalance,
-                  walletCodeCurrency,
-                ),
-              })}{" "}
-              {isPayer ? (
-                <Link onClick={onOpen} textDecoration="underline">
-                  {t("Common:EditButton")}
-                </Link>
-              ) : null}
-            </Text>
-          </div>
-        </>
-      ) : null}
+      <Text fontWeight={600}>{t("AutoTopUpEnabled")}</Text>
+      <div className="auto-payment-editing">
+        <Text>
+          {t("WhenBalanceDropsTo", {
+            min: formatCurrencyValue(language, minBalance, walletCodeCurrency),
+            max: formatCurrencyValue(language, upToBalance, walletCodeCurrency),
+          })}{" "}
+          {isPayer ? (
+            <Link onClick={onOpen} textDecoration="underline">
+              {t("Common:EditButton")}
+            </Link>
+          ) : null}
+        </Text>
+      </div>
     </div>
   );
 };

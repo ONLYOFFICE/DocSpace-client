@@ -318,6 +318,10 @@ export const StyledInfo = styled.div`
           max-width: 75px;
           white-space: nowrap;
         }
+
+        .backdrop-active {
+          z-index: 203 !important;
+        }
       }
 
       @media ${mobile} {

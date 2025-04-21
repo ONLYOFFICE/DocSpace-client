@@ -48,6 +48,7 @@ type PropsFromCombobox = Pick<
   | "noBorder"
   | "isDisabled"
   | "isMobileView"
+  | "shouldShowBackdrop"
 >;
 
 export type AccessRightSelectProps = PropsFromCombobox & {

@@ -22,6 +22,8 @@
   "EmptyRecentDescription": "Ձեր վերջին դիտված կամ խմբագրված փաստաթղթերը կցուցադրվեն այս բաժնում:",
   "EmptyRootRoomUserDescription": "Կիսված սենյակը կհայտնվի այստեղ:",
   "EmptyRootRoomUserTitle": "Այստեղ դեռ սենյակներ չկան",
+  "EmptyTemplatesDescription": "Դուք կարող եք սենյակից ստեղծել կաղապար «Սենյակներ» բաժնում։",
+  "EmptyTemplatesTitle": "Այստեղ կաղապարներ դեռ չկան",
   "FormFolderDefaultDescription": "Թողեք PDF ձևերը այստեղ կամ վերբեռնեք {{productName}}-ից կամ սարքից:",
   "FormFolderDefaultTitle": "Այստեղ դեռ ձևեր չկան",
   "FormFolderDefaultUserDescription": "Ադմինիստրատորների կողմից վերբեռնված ձևերը կհայտնվեն այստեղ:",

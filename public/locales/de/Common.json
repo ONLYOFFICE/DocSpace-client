@@ -288,7 +288,7 @@
   "FromDevice": "Vom Gerät",
   "FromPortal": "Von {{productName}}",
   "FromTemplate": "Aus Vorlage",
-  "FromTemplateRoomInfo": "Erstellen Sie einen Raum basierend auf einer Vorlage. Alle Einstellungen, Benutzer, Ordner und Dateien werden aus der ausgewählten Raumvorlage übernommen.",
+  "FromTemplateRoomInfo": "Erstellen Sie einen Raum basierend auf einer Vorlage. Alle Einstellungen, Ordner und Dateien werden aus der ausgewählten Raumvorlage übernommen.",
   "GeneratePassword": "Passwort generieren",
   "Gigabyte": "GB",
   "GoBack": "Zurück",

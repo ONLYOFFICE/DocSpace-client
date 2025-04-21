@@ -283,7 +283,7 @@
   "FromDevice": "Van apparaat",
   "FromPortal": "Van {{productName}}",
   "FromTemplate": "Van sjabloon",
-  "FromTemplateRoomInfo": "Maak een kamer op basis van een sjabloon. Alle instellingen, gebruikers, mappen en bestanden worden overgenomen van de geselecteerde kamer sjabloon.",
+  "FromTemplateRoomInfo": "Maak een kamer op basis van een sjabloon. Alle instellingen, mappen en bestanden worden overgenomen van de geselecteerde kamer sjabloon.",
   "GeneratePassword": "Genereer wachtwoord",
   "Gigabyte": "GB",
   "GoBack": "Ga terug",

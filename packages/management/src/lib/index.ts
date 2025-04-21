@@ -51,6 +51,7 @@ export const getHeaderByPathname = (pathname: string, t: TTranslation) => {
     case "data-backup":
     case "auto-backup":
     case "restore":
+    case "encrypt-data":
       return { key: t("Common:Settings"), isSubPage: false };
     case "payments":
       return { key: t("Common:PaymentsTitle"), isSubPage: false };

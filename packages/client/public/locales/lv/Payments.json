@@ -41,6 +41,7 @@
   "StartupTitle": "Jūs izmantojat bezmaksas {{planName}} plānu",
   "StripeCustomerPortal": "doties uz Stripe klientu portālu",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/mēnesī</3>",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/gadā</3>",
   "UpgradeNow": "Atjaunot tagad",
   "UpgradePlan": "Jaunināt plānu",
   "UserNotFound": "Lietotājs <1>{{email}}</1> nav atrasts.",

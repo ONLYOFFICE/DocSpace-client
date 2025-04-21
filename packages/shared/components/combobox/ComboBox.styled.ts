@@ -319,10 +319,10 @@ const StyledComboButton = styled.div.attrs(injectDefaultTheme)<{
   }
   .combo-button-label {
     visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
-    margin-inline-end: ${({ theme, plusBadgeValue, noBorder }) =>
+    margin-inline-end: ${({ theme, plusBadgeValue, noBorder, modernView }) =>
       plusBadgeValue
         ? 0
-        : noBorder
+        : noBorder || modernView
           ? theme.comboBox.label.marginRight
           : theme.comboBox.label.marginRightWithBorder};
     color: ${(props) =>
@@ -484,9 +484,11 @@ const StyledArrowIcon = styled.div.attrs(injectDefaultTheme)<{
 
 const StyledLoader = styled(Loader)<{ displaySize?: ComboBoxSize }>`
   position: absolute;
-  margin-inline-start: ${({ displaySize }) =>
-    displaySize === "content" ? "-16px" : "-8px"};
   margin-top: 2px;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const getDefaultStyles = ({

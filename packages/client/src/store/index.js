@@ -259,6 +259,7 @@ const filesActionsStore = new FilesActionsStore(
 
 mediaViewerDataStore.filesActionsStore = filesActionsStore;
 secondaryProgressDataStore.filesActionsStore = filesActionsStore;
+versionHistoryStore.filesActionsStore = filesActionsStore;
 
 const contextOptionsStore = new ContextOptionsStore(
   settingsStore,

@@ -38,6 +38,7 @@ const useSDK = (baseSdkConfig?: TFrameConfig) => {
   const [sdkConfig, setSdkConfig] = useState<TFrameConfig | undefined>(
     baseSdkConfig,
   );
+
   const handleMessage = useCallback(
     (e: MessageEvent) => {
       const eventData =
@@ -57,9 +58,21 @@ const useSDK = (baseSdkConfig?: TFrameConfig) => {
               setSdkConfig(newConfig);
               res = newConfig;
               break;
-            case "getEditorInstance":
+            case "executeInEditor":
               const instance = window.DocEditor?.instances[EDITOR_ID];
-              res = { instance, asc: window.Asc };
+
+              try {
+                const cFn = new Function(
+                  "instance",
+                  "data",
+                  `const c = ${data.callback}; c(instance, data);`,
+                );
+
+                cFn(instance, data.data);
+              } catch (e) {
+                console.error("Error executing editor callback:", e);
+              }
+
               break;
             default:
               res = "Wrong method for this mode";
@@ -71,7 +84,7 @@ const useSDK = (baseSdkConfig?: TFrameConfig) => {
         frameCallbackData(res);
       }
     },
-    [setSdkConfig],
+    [setSdkConfig, baseSdkConfig],
   );
 
   useEffect(() => {

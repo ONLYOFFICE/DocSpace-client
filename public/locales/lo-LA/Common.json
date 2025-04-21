@@ -193,6 +193,7 @@
   "FirstName": "ຊື່ແທ້",
   "Folder": "ແຟ້ມ",
   "Folders": "ໂຟນເດີ",
+  "Forms": "ແບບຟອມ",
   "FormTemplates": "ຮູບແບບແບບຟອມ",
   "Free": "ຟຣີ",
   "GeneratePassword": "ສ້າງລະຫັດຜ່ານ",
@@ -414,6 +415,5 @@
   "Warning": "ແຈ້ງເຕືອນ",
   "Website": "ເວັບໄຊທ໌",
   "WithSubfolders": "ມີໂຟເດີຍ່ອຍ",
-  "Yesterday": "ມື້ວານນີ້",
-  "Forms": "ແບບຟອມ"
+  "Yesterday": "ມື້ວານນີ້"
 }

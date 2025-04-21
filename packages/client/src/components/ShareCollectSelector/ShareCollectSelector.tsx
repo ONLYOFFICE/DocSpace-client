@@ -110,7 +110,7 @@ const ShareCollectSelector = inject<TStore>(
       onCancel,
       setAssignRolesDialogData,
     }: ShareCollectSelectorProps & InjectShareCollectSelectorProps) => {
-      const { t } = useTranslation(["Common", "Editor"]);
+      const { t } = useTranslation(["Common"]);
       const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
 
       const requestRunning = React.useRef(false);

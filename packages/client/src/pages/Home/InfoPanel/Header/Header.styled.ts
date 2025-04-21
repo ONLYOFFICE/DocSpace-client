@@ -49,6 +49,10 @@ export const StyledInfoPanelHeader = styled.div<{ withTabs: boolean }>`
     width: 100%;
     justify-content: center;
 
+    .sticky-indent {
+      height: 0;
+    }
+
     .scroll-body > div {
       justify-content: center;
     }

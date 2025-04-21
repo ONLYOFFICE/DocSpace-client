@@ -113,6 +113,7 @@
     &:hover:not(:disabled) {
       background: var(--button-background-primary-hover);
       color: var(--button-color-primary-hover);
+      border: var(--button-border-primary);
       opacity: 0.85;
     }
 

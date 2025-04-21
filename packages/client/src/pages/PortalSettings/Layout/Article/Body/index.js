@@ -300,7 +300,7 @@ const ArticleBodyContent = (props) => {
           linkData={linkData}
           folderId={item.id}
           style={{
-            marginTop: `${item.key.includes(9) ? "16px" : "0"}`,
+            margin: `${item.key.includes(9) ? "16px 0px" : "0"}`,
           }}
           $currentColorScheme={currentColorScheme}
         />,

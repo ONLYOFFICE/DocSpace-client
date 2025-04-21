@@ -155,6 +155,7 @@ declare global {
       oauth2: {
         origin: string;
         secret: string;
+        apiSystem: string[];
       };
       editor?: {
         requestClose: boolean;

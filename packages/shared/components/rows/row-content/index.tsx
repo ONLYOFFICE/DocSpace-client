@@ -73,7 +73,13 @@ const RowContent = (props: RowContentProps) => {
       style={style}
       data-testid="row-content"
     >
-      <div className={styles.mainContainerWrapper} style={mainContainerStyle}>
+      <div
+        className={classNames(
+          styles.mainContainerWrapper,
+          "row-main-container-wrapper",
+        )}
+        style={mainContainerStyle}
+      >
         <div className={classNames(styles.mainContainer, "rowMainContainer")}>
           {children[0]}
         </div>

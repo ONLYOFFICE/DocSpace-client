@@ -418,18 +418,8 @@ module.exports = (env, argv) => {
         "./ConnectDialog": "./src/components/dialogs/ConnectDialog",
       },
       shared: {
-        ...Object.entries(deps).reduce((acc, [key, value]) => {
-          if (key !== "@onlyoffice/docspace-sdk-js") {
-            acc[key] = value;
-          }
-          return acc;
-        }, {}),
+        ...deps,
         ...sharedDeps,
-        "@onlyoffice/docspace-sdk-js": {
-          singleton: true,
-          eager: true,
-          requiredVersion: deps["@onlyoffice/docspace-sdk-js"],
-        },
       },
     }),
   );

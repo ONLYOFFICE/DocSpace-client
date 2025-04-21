@@ -118,7 +118,7 @@ const ControlButtons = ({
   };
 
   const renderPlusButton = () => {
-    if (isMobile || !canCreate) return null;
+    if ((isMobile && !isFrame) || !canCreate) return null;
 
     return (
       <PlusButton
@@ -183,7 +183,7 @@ const ControlButtons = ({
   return (
     <div
       className={styles.controlButtonContainer}
-      data-frame={isFrame}
+      data-is-frame={isFrame}
       data-show-title={showTitle}
     >
       {renderPlusButton()}

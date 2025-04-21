@@ -106,15 +106,30 @@ const useEditorEvents = ({
   const [docTitle, setDocTitle] = React.useState("");
   const [docSaved, setDocSaved] = React.useState(false);
 
-  const onSDKRequestReferenceData = React.useCallback(async (event: object) => {
-    const currEvent = event as TEvent;
-    const referenceData = await getReferenceData(
-      currEvent.data.referenceData ??
-        (currEvent.data as unknown as TGetReferenceData),
-    );
+  const onSDKRequestReferenceData = React.useCallback(
+    async (event: object) => {
+      const currEvent = event as TEvent;
 
-    docEditor?.setReferenceData?.(referenceData);
-  }, []);
+      const link = currEvent?.data?.link ?? "";
+      const reference = currEvent?.data?.referenceData;
+      const path = currEvent?.data?.path ?? "";
+
+      // (inDto.FileKey, inDto.InstanceId, inDto.SourceFileId, inDto.Path, inDto.Link);
+      // string fileId, string portalName, T sourceFileId, string path, string link
+      const data = {
+        fileKey: reference?.fileKey ?? "",
+        instanceId: reference?.instanceId ?? "",
+        sourceFileId: fileInfo?.id,
+        path,
+        link,
+      } as TGetReferenceData;
+
+      const referenceData = await getReferenceData(data);
+
+      docEditor?.setReferenceData?.(referenceData);
+    },
+    [fileInfo?.id],
+  );
 
   const onSDKRequestOpen = React.useCallback(
     async (event: object) => {

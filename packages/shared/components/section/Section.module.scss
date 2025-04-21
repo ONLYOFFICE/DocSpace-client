@@ -372,6 +372,17 @@
   }
 }
 
+.isFixed {
+  position: sticky;
+  top: 61px;
+  background: var(--section-header-bg);
+  z-index: 200;
+
+  @include mobile {
+    top: 53px;
+  }
+}
+
 .sectionContainer {
   position: relative;
 

@@ -142,7 +142,7 @@ const DropDownItem = ({
           [styles.activeDescendant]: isActiveDescendant && !disabled,
           [styles.textOverflow]: textOverflow,
           [styles.modern]: isModern,
-          [styles.disabled]: disabled,
+          [styles.disabled]: disabled && !isSelected,
         },
         className,
       )}

@@ -9,6 +9,8 @@
   "DeleteRoom": "Chystáte se odstranit tuto místnost. Nebudete ji moci obnovit.",
   "DeleteRooms": "Tyto místnosti se chystáte smazat. Nebudete je moci obnovit.",
   "DeleteSharedNote": "Upozorňujeme, že pokud jste jej s někým sdíleli, stane se nedostupným.",
+  "DeleteTemplate": "Opravdu chcete odstranit místnost šablony <1>\"{{templateName}}\"</1>? Šablonu nelze obnovit.",
+  "DeleteTemplates": "Opravdu chcete odstranit vybrané šablony místností? Nelze je obnovit.",
   "FolderPermanentlyDeleted": "Složka bude za 30 dní trvale odstraněna.",
   "ItemsPermanentlyDeleted": "Položky budou trvale odstraněny za 30 dní.",
   "MoveToTrashButton": "Přesunout do koše",

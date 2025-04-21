@@ -396,7 +396,6 @@ const Badges = ({
             themeId={ThemeId.IconButtonCustomFilter}
             iconName={iconCustomFilter}
             size={sizeBadge}
-            isClickable
             data-tooltip-id="customFilterTooltip"
             className="badge is-custom-filter tablet-badge"
           />
@@ -405,7 +404,6 @@ const Badges = ({
             id="customFilterTooltip"
             place="bottom-start"
             getContent={getTooltipContent}
-            openOnClick
             clickable
             maxWidth="238px"
             className={styles.customFilterTooltip}
@@ -484,6 +482,7 @@ const Badges = ({
           title={t("Common:CreateRoom")}
         />
       ) : null}
+      {showNew && !isTile && isRoom ? newFilesBadge : null}
       {showNew && isTile && isRoom ? (
         <div className={styles.badgeWrapperNewBadge}>{newFilesBadge}</div>
       ) : null}

@@ -1,5 +1,7 @@
 {
   "CancelUpload": "上传已中断。一些文件未上传成功。",
   "HideInput": "隐藏",
-  "Ready": "完成"
+  "Ready": "完成",
+  "UploadingAndConversion": "上传 & 转换",
+  "UploadingError": "上传错误"
 }

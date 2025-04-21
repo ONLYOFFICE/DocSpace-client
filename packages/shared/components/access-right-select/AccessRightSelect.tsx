@@ -64,7 +64,7 @@ export const AccessRightSelectPure = ({
       if (option) {
         if (isSelectionDisabled) {
           let isError =
-            option.access && option.access !== selectedOption.access;
+            option.access && option.access !== selectedOption?.access;
 
           if (availableAccess && option.access) {
             isError = availableAccess.every((item) => item !== option.access);
@@ -84,13 +84,15 @@ export const AccessRightSelectPure = ({
       availableAccess,
       isSelectionDisabled,
       onSelect,
-      selectedOption.access,
+      selectedOption?.access,
       selectionErrorText,
     ],
   );
 
   const formatToAccessRightItem = (data: TOption[]) => {
     const items = data.map((item: TOption) => {
+      const isSelected = currentItem?.key === item?.key;
+
       return "isSeparator" in item && item.isSeparator ? (
         <DropDownItem key={item.key} isSeparator />
       ) : (
@@ -98,6 +100,8 @@ export const AccessRightSelectPure = ({
           className="access-right-item"
           key={item.key}
           data-key={item.key}
+          isSelected={isSelected}
+          isActive={isSelected}
           onClick={() => onSelectCurrentItem(item)}
         >
           <StyledItem>

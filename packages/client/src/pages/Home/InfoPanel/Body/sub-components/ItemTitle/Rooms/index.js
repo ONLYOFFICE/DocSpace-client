@@ -73,8 +73,10 @@ const RoomsItemHeader = ({
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
-  const isTemplate = selection.isTemplate;
-
+  const isTemplate =
+    (selection.isTemplate ||
+      selection?.rootFolderType === FolderType.RoomTemplates) &&
+    selection?.isRoom;
   const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
 
   const badgeUrl = getRoomBadgeUrl(selection);

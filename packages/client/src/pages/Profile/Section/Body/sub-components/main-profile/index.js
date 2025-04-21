@@ -63,6 +63,7 @@ import {
   StyledInfo,
   StyledLabel,
   StyledAvatarWrapper,
+  getDropdownHoverRules,
 } from "./styled-main-profile";
 
 const TooltipContent = ({ content }) => <Text fontSize="12px">{content}</Text>;
@@ -94,6 +95,24 @@ const MainProfile = (props) => {
     image,
     setImage,
   } = props;
+
+  const styleContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (!styleContainerRef.current) return;
+
+    const styleElement = document.createElement("style");
+    styleContainerRef.current.appendChild(styleElement);
+
+    const sheet = styleElement.sheet;
+    const rules = getDropdownHoverRules();
+
+    rules.forEach((rule, index) => {
+      sheet.insertRule(rule, index);
+    });
+
+    return () => styleElement.parentNode?.removeChild(styleElement);
+  }, []);
 
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [dropDownMaxHeight, setDropDownMaxHeight] = useState(352);
@@ -236,7 +255,7 @@ const MainProfile = (props) => {
   const isBetaLanguage = selectedLanguage?.isBeta;
 
   return (
-    <StyledWrapper>
+    <StyledWrapper ref={styleContainerRef}>
       <StyledAvatarWrapper className="avatar-wrapper">
         <Avatar
           className="avatar"

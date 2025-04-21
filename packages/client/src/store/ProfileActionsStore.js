@@ -453,7 +453,7 @@ class ProfileActionsStore {
       });
     }
 
-    return actions;
+    return actions.filter(Boolean);
   };
 }
 

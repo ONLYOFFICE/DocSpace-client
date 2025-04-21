@@ -47,7 +47,6 @@ import {
   TTimeZone,
   TVersionBuild,
   TExternalResources,
-  TInvitationSettings,
 } from "../api/settings/types";
 import { TUser } from "../api/people/types";
 import {

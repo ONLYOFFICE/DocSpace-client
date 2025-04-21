@@ -37,9 +37,10 @@ import { size } from "@docspace/shared/utils";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { saveToSessionStorage } from "@docspace/shared/utils/saveToSessionStorage";
 import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
-
+import { DeviceType } from "@docspace/shared/enums";
 import styles from "./InvitationSettings.module.scss";
 import { LearnMoreWrapper } from "../StyledSecurity";
+import InvitationLoader from "../sub-components/loaders/invitation-loader";
 
 const InvitationSettings = (props) => {
   const {
@@ -49,6 +50,7 @@ const InvitationSettings = (props) => {
     setInvitationSettings,
     allowInvitingMembers,
     allowInvitingGuests,
+    currentDeviceType,
   } = props;
 
   const [showReminder, setShowReminder] = useState(false);
@@ -182,6 +184,10 @@ const InvitationSettings = (props) => {
     setShowReminder(false);
   };
 
+  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
+    return <InvitationLoader />;
+  }
+
   return (
     <>
       <LearnMoreWrapper>
@@ -269,6 +275,7 @@ export const InvitationSettingsSection = inject(
       setInvitationSettings,
       allowInvitingMembers,
       allowInvitingGuests,
+      currentDeviceType,
     } = settingsStore;
 
     const { isInit } = setup;
@@ -284,6 +291,7 @@ export const InvitationSettingsSection = inject(
       setInvitationSettings,
       allowInvitingMembers,
       allowInvitingGuests,
+      currentDeviceType,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(InvitationSettings)));

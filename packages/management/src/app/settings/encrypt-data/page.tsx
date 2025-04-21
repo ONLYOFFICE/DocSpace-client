@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { redirect } from "next/navigation";
+import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { EncryptionStatus } from "@docspace/shared/enums";
 
 import {
@@ -41,7 +43,12 @@ async function Page() {
     getEncryptionSettings(),
   ]);
 
-  const encryptionBlockHelpUrl = "";
+  if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
+
+  const domain = settings?.externalResources?.helpcenter?.domain;
+  const path = settings?.externalResources?.helpcenter?.entries?.encryption;
+
+  const encryptionBlockHelpUrl = domain && path ? `${domain}${path}` : "";
   const { status, notifyUsers } = encryptionSettings ?? {};
 
   return (

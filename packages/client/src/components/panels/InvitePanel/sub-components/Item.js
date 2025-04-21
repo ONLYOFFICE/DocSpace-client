@@ -211,7 +211,13 @@ const Item = ({
 
   const errorsInList = () => {
     const hasErrors = inviteItems.some((elm) => !!elm.errors?.length);
-    setHasErrors(hasErrors);
+    const needRemoveGuests = !allowInvitingGuests
+      ? inviteItems.some(
+          (inviteItem) => inviteItem.userType === EmployeeType.Guest,
+        )
+      : false;
+
+    setHasErrors(hasErrors || needRemoveGuests);
   };
 
   const onEdit = (e) => {

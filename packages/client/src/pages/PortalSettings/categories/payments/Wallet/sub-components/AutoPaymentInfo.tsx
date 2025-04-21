@@ -56,7 +56,13 @@ const AutoPaymentInfo = ({
 }: AutoPaymentInfoProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
-  if (!language || !walletCodeCurrency || !minBalance || !upToBalance)
+  if (
+    !isAutoPaymentExist ||
+    !language ||
+    !walletCodeCurrency ||
+    !minBalance ||
+    !upToBalance
+  )
     return null;
 
   return (

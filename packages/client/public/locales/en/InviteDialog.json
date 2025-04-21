@@ -14,5 +14,6 @@
   "ResetChange": "Reset change",
   "SendInvitation": "Send invitation",
   "UserMaxAvailableRoleWarning": "Guests and Users cannot be assigned as Room managers. Only Room and {{productName}} admins are suitable for the specified role.",
-  "UsersAlreadyAdded": "Some users have already been added"
+  "UsersAlreadyAdded": "Some users have already been added",
+  "UsersCannotBeAdded": "Disabled contacts cannot be added to a room"
 }

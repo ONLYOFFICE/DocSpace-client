@@ -508,7 +508,7 @@ const PeopleSelector = ({
           }}
         >
           <Text
-            className="label"
+            className="selector-item_label"
             fontWeight={600}
             fontSize="14px"
             noSelect
@@ -522,7 +522,7 @@ const PeopleSelector = ({
         {!isGroup ? (
           <div style={{ display: "flex" }}>
             <Text
-              className="label"
+              className="selector-item_label"
               fontWeight={400}
               fontSize="12px"
               noSelect

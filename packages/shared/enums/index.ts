@@ -201,6 +201,7 @@ export const enum RoomSearchArea {
 export const enum FileAction {
   Create = 0,
   Rename = 1,
+  RestoreVersion = 2,
 }
 
 /**

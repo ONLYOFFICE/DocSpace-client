@@ -332,10 +332,14 @@ const InviteInput = ({
       status,
     } = item;
 
+    const isDisabled = status === EmployeeStatus.Disabled;
+
     item.access = selectedAccess;
 
     const addUser = () => {
-      if (shared) {
+      if (isDisabled) {
+        toastr.warning(t("UsersCannotBeAdded"));
+      } else if (shared) {
         toastr.warning(t("UsersAlreadyAdded"));
       } else {
         if (isGroup && checkIfAccessPaid(item.access)) {
@@ -379,10 +383,11 @@ const InviteInput = ({
           source={avatar}
           userName={groupName}
           isGroup={isGroup}
+          className={isDisabled ? "avatar-disabled" : ""}
         />
         <div className="list-item_content">
           <div className="list-item_content-box">
-            <SearchItemText primary disabled={shared}>
+            <SearchItemText primary disabled={shared || isDisabled}>
               {displayName || groupName}
             </SearchItemText>
             {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
@@ -391,6 +396,9 @@ const InviteInput = ({
         </div>
         {shared ? (
           <SearchItemText info>{t("Common:Invited")}</SearchItemText>
+        ) : null}
+        {isDisabled ? (
+          <SearchItemText disabled>{t("Common:Disabled")}</SearchItemText>
         ) : null}
       </DropDownItem>
     );

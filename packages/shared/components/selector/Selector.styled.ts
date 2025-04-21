@@ -166,7 +166,7 @@ const StyledSelectAll = styled.div.attrs(injectDefaultTheme)`
     min-width: 32px;
   }
 
-  .label {
+  .selector-item_label {
     // width: 100%;
     // max-width: 100%;
 
@@ -215,7 +215,7 @@ const StyledItem = styled.div.attrs(injectDefaultTheme)<{
     border-radius: 6px;
   }
 
-  .label {
+  .selector-item_label {
     // width: 100%;
     // max-width: 100%;
 
@@ -251,7 +251,7 @@ const StyledItem = styled.div.attrs(injectDefaultTheme)<{
             opacity: 0.5;
           }
 
-          .label {
+          .selector-item_label {
             color: ${props.theme.selector.item.disableTextColor};
           }
 
@@ -276,7 +276,7 @@ const StyledItem = styled.div.attrs(injectDefaultTheme)<{
     gap: 6px;
     width: calc(100% - 32px);
 
-    .label {
+    .selector-item_label {
       width: unset;
 
       .item-file-exst {

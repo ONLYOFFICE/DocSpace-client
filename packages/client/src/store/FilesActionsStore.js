@@ -911,6 +911,16 @@ class FilesActionStore {
           false,
         );
         break;
+      case FileAction.RestoreVersion:
+        this.onSelectItem(
+          {
+            id: selectedItem.id,
+            isFolder: false,
+          },
+          false,
+          false,
+        );
+        break;
       default:
         break;
     }

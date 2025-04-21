@@ -72,7 +72,7 @@ const SelectAll = React.memo(
         />
 
         <Text
-          className="label"
+          className="selector-item_label"
           fontWeight={600}
           fontSize="14px"
           noSelect

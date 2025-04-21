@@ -138,7 +138,7 @@ const RoomLogoCoverDialog = ({
     null,
   );
 
-  const contentRef = React.useRef();
+  const contentRef = React.useRef<HTMLDivElement>(null);
 
   const recalculateHeight = React.useCallback(() => {
     const screenHeight = document.documentElement.clientHeight;

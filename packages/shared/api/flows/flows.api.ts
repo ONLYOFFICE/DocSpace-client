@@ -19,6 +19,7 @@ import {
   CHECK_FILE_ID,
   CHECK_FOLDER_ID,
   CHAT_ID,
+  SUMMARIZE_FILE_ID,
 } from "./flows.constants";
 
 class FlowsApi {
@@ -425,6 +426,18 @@ class FlowsApi {
   static async checkFolder(inputValue: string): Promise<SimpleRunFlowResponse> {
     return FlowsApi.simpleRunFlow(
       CHECK_FOLDER_ID,
+      String(inputValue),
+      "text",
+      "text",
+      {},
+    );
+  }
+
+  static async summirizeFile(
+    inputValue: string,
+  ): Promise<SimpleRunFlowResponse> {
+    return FlowsApi.simpleRunFlow(
+      SUMMARIZE_FILE_ID,
       String(inputValue),
       "text",
       "text",

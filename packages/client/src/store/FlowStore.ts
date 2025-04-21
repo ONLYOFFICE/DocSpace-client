@@ -201,21 +201,15 @@ class FlowStore {
   };
 
   summarizeToFile = async (file: TFile) => {
-    // if (!this.apiKey || !this.summarizeToFileID) {
-    //   setTimeout(() => {
-    //     this.summarizeToFile(file);
-    //   }, 1000);
-    //   return;
-    // }
+    if (!this.apiKey) {
+      setTimeout(() => {
+        this.summarizeToFile(file);
+      }, 1000);
+      return;
+    }
 
     try {
-      // await FlowsApi.simpleRunFlow(
-      //   this.summarizeToFileID,
-      //   String(file.id),
-      //   "text",
-      //   "text",
-      //   {},
-      // );
+      await FlowsApi.summirizeFile(String(file.id));
 
       toastr.success(`Document summarized: ${file.title}`);
     } catch (error) {

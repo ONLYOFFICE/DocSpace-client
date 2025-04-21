@@ -33,9 +33,14 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import TransactionHistory from "./TransactionHistory";
 import TopUpModal from "./TopUpModal";
-import { formattedBalance } from "./utils";
+import {
+  formatCurrencyValue,
+  formattedBalance,
+  formattedBalanceTokens,
+} from "./utils";
 
 import "./styles/Wallet.scss";
+
 import PayerInformation from "../PayerInformation";
 import AutoPaymentInfo from "./sub-components/AutoPaymentInfo";
 
@@ -45,6 +50,16 @@ type WalletProps = {
   walletCodeCurrency: string;
   isPayer: boolean;
   cardLinkedOnFreeTariff: boolean;
+  isFreeTariff: boolean;
+};
+
+const typeClassMap: Record<string, string> = {
+  integer: "integer",
+  group: "group",
+  decimal: "decimal",
+  fraction: "fraction",
+  currency: "currency",
+  literal: "literal",
 };
 
 const Wallet = ({
@@ -53,14 +68,26 @@ const Wallet = ({
   walletCodeCurrency,
   isPayer,
   cardLinkedOnFreeTariff,
+  isFreeTariff,
 }: WalletProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
   const [visible, setVisible] = useState(false);
   const [isEditAutoPayment, setIsEditAutoPayment] = useState(false);
 
-  const { fraction, balanceValue, isCurrencyAtEnd, mainNumber, currency } =
-    formattedBalance(language, walletBalance, walletCodeCurrency);
+  const tokens = formattedBalanceTokens(
+    language,
+    walletBalance,
+    walletCodeCurrency || "",
+  );
+
+  const balanceValue = formatCurrencyValue(
+    language,
+    walletBalance,
+    walletCodeCurrency || "",
+    2,
+    2,
+  );
 
   const onClose = () => {
     setVisible(false);
@@ -76,14 +103,15 @@ const Wallet = ({
     setIsEditAutoPayment(true);
   };
 
-  const isDisbled = cardLinkedOnFreeTariff ? !isPayer : false;
+  const isDisbled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
 
   return (
     <div className="wallet-container">
       <Text className="wallet-description">
         {t("WalletDescription", { productName: t("Common:ProductName") })}
       </Text>
-      {cardLinkedOnFreeTariff ? <PayerInformation /> : null}
+      {cardLinkedOnFreeTariff || !isFreeTariff ? <PayerInformation /> : null}
+
       <div className="balance-wrapper">
         <div className="header-container">
           <Text isBold fontSize="16px">
@@ -92,18 +120,14 @@ const Wallet = ({
         </div>
 
         <div className="balance-amount-container">
-          <Text className="main-amount">
-            {!isCurrencyAtEnd ? currency : ""}
-            {mainNumber}
-          </Text>
-          <Text className="decimal-amount">{fraction}</Text>
-          {isCurrencyAtEnd ? (
-            <Text className="main-amount" as="span">
-              {currency}
+          {tokens.map((token) => (
+            <Text
+              key={`${token.type}-${token.value}`}
+              className={typeClassMap[token.type] || ""}
+            >
+              {token.value}
             </Text>
-          ) : (
-            ""
-          )}
+          ))}
         </div>
 
         <Button
@@ -131,22 +155,26 @@ const Wallet = ({
   );
 };
 
-export default inject(({ paymentStore, authStore }: TStore) => {
-  const { language } = authStore;
-  const {
-    walletBalance,
-    cardLinked,
-    cardLinkedOnFreeTariff,
-    walletCodeCurrency,
-    isPayer,
-  } = paymentStore;
+export default inject(
+  ({ paymentStore, authStore, currentQuotaStore }: TStore) => {
+    const { language } = authStore;
+    const {
+      walletBalance,
+      cardLinked,
+      cardLinkedOnFreeTariff,
+      walletCodeCurrency,
+      isPayer,
+    } = paymentStore;
+    const { isFreeTariff } = currentQuotaStore;
 
-  return {
-    walletBalance,
-    walletCodeCurrency,
-    language,
-    cardLinked,
-    isPayer,
-    cardLinkedOnFreeTariff,
-  };
-})(observer(Wallet));
+    return {
+      walletBalance,
+      walletCodeCurrency,
+      language,
+      cardLinked,
+      isPayer,
+      cardLinkedOnFreeTariff,
+      isFreeTariff,
+    };
+  },
+)(observer(Wallet));

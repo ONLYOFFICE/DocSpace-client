@@ -97,7 +97,7 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
       if (!res.includes("ok")) throw new Error(res);
 
       await Promise.allSettled([fetchBalance(), fetchTransactionHistory()]);
-      toastr.success(t("Common:SuccessfullySaved"));
+
       onClose();
     } catch (e) {
       console.error(e);

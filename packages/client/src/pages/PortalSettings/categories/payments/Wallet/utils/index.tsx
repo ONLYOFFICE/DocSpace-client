@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const formattedBalance = (
+export const formattedBalanceTokens = (
   language: string,
   amount: number,
   currency: string,
@@ -36,28 +36,7 @@ export const formattedBalance = (
     maximumFractionDigits: 2,
   });
 
-  const parts = formatter.formatToParts(amount || 0);
-  const currencySymbol =
-    parts.find((part) => part.type === "currency")?.value || "";
-  const mainNumber =
-    parts.find((part) => part.type === "integer")?.value || "0";
-  const fraction =
-    parts.find((part) => part.type === "fraction")?.value || "00";
-  const decimal = parts.find((part) => part.type === "decimal")?.value || ".";
-
-  const currencyIndex = parts.findIndex((part) => part.type === "currency");
-  const isCurrencyAtEnd =
-    currencyIndex > parts.findIndex((part) => part.type === "integer");
-
-  const balanceValue = formatter.format(amount);
-
-  return {
-    fraction: `${decimal}${fraction}`,
-    balanceValue,
-    isCurrencyAtEnd,
-    mainNumber,
-    currency: currencySymbol,
-  };
+  return formatter.formatToParts(amount);
 };
 
 export const formatCurrencyValue = (
@@ -88,5 +67,5 @@ export const accountingLedgersFormat = (
     currency,
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  }).format(Math.abs(amount))}`;
+  }).format(amount)}`;
 };

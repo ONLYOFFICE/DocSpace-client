@@ -131,6 +131,7 @@ class PaymentStore {
   transactionHistoryCollection = [];
 
   offset = 0;
+
   limit = 25;
 
   constructor(
@@ -250,8 +251,6 @@ class PaymentStore {
       endDate,
       credit,
       withdrawal,
-      this.offset,
-      this.limit,
     );
 
     if (!res) return;

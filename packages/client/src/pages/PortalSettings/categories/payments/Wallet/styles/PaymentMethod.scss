@@ -27,8 +27,8 @@
 .add-payment-method {
   padding-bottom: 21px;
   padding-top: 21px;
-  border-bottom: 1px solid #eceef1;
-  border-top: 1px solid #eceef1;
+  border-bottom: 1px solid var(--aside-header-border-color);
+  border-top: 1px solid var(--aside-header-border-color);
 
   .payment-method-description {
     margin-bottom: 12px;

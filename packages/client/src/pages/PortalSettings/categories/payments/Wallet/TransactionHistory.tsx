@@ -112,15 +112,25 @@ const TransactionHistory = ({
     setSelectedType(option);
     setHasAppliedDateFilter(true);
     setIsFilterDialogVisible(false);
-    setIsLoading(true);
-    fetchTransactionHistory(
-      formatDate(startDate),
-      formatDate(endDate),
-      option.key !== "debit",
-      option.key !== "credit",
-    ).finally(() => {
-      setIsLoading(false);
-    });
+
+    const timerId = setTimeout(() => setIsLoading(true), 200);
+
+    const isCredit = option.key !== "debit";
+    const isDebit = option.key !== "credit";
+
+    try {
+      fetchTransactionHistory(
+        formatDate(startDate),
+        formatDate(endDate),
+        isCredit,
+        isDebit,
+      );
+    } catch (e) {
+      toastr.error(e as Error);
+    }
+
+    setIsLoading(false);
+    clearTimeout(timerId);
   };
 
   const onStartDateChange = async (
@@ -133,19 +143,17 @@ const TransactionHistory = ({
     setStartDate(date);
     setHasAppliedDateFilter(true);
     setIsFilterDialogVisible(false);
-    setIsLoading(true);
+
+    const timerId = setTimeout(() => setIsLoading(true), 200);
+
     try {
-      await fetchTransactionHistory(
-        formatDate(date),
-        formatDate(endDate),
-        selectedType.key !== "debit",
-        selectedType.key !== "credit",
-      );
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
+      await fetchTransactionHistory(formatDate(date), formatDate(endDate));
+    } catch (e) {
+      toastr.error(e as Error);
     }
+
+    setIsLoading(false);
+    clearTimeout(timerId);
   };
 
   const onEndDateChange = async (date: moment.Moment | null): Promise<void> => {
@@ -156,19 +164,17 @@ const TransactionHistory = ({
     setEndDate(date);
     setHasAppliedDateFilter(true);
     setIsFilterDialogVisible(false);
-    setIsLoading(true);
+
+    const timerId = setTimeout(() => setIsLoading(true), 200);
+
     try {
-      await fetchTransactionHistory(
-        formatDate(startDate),
-        formatDate(date),
-        selectedType.key !== "debit",
-        selectedType.key !== "credit",
-      );
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
+      await fetchTransactionHistory(formatDate(startDate), formatDate(date));
+    } catch (e) {
+      toastr.error(e as Error);
     }
+
+    setIsLoading(false);
+    clearTimeout(timerId);
   };
 
   const getReport = async () => {
@@ -314,7 +320,9 @@ const TransactionHistory = ({
             isLoading={isFormationHistory}
           />
           <Text as="span" className="download-report_description">
-            {t("Settings:DownloadReportDescription")}
+            {t("Settings:ReportSaveLocation", {
+              sectionName: t("Common:MyFilesSection"),
+            })}
           </Text>
         </div>
       ) : null}

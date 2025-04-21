@@ -120,7 +120,7 @@ const Amount = ({ setAmount, amount, language, currency }: AmountProps) => {
       <TextInput
         value={amount}
         onChange={onChangeTextInput}
-        pattern="^\d+(?:\.\d{0,2})?"
+        pattern="\d+"
         scale
         withBorder
         type={InputType.text}

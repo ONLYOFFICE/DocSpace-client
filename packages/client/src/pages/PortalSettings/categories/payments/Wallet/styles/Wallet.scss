@@ -58,16 +58,23 @@
     display: flex;
     align-items: baseline;
   }
-
-  .main-amount {
-    font-size: 44px;
-    font-weight: 700;
-    line-height: 1.36em;
+  .balanceAmountContainer {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
   }
 
-  .decimal-amount {
-    font-size: 28px;
+  .integer,
+  .group,
+  .decimal,
+  .literal,
+  .currency {
     font-weight: 700;
-    line-height: 1.36em;
+    font-size: 44px;
+  }
+
+  .fraction {
+    font-weight: 700;
+    font-size: 28px;
   }
 }

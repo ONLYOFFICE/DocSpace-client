@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 
 import { TableBody, TableContainer } from "@docspace/shared/components/table";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
@@ -56,8 +55,6 @@ type TransactionHistoryProps = {
   hasAppliedDateFilter: boolean;
   setViewAs: (view: string) => void;
   currentDeviceType: DeviceType;
-  hasMoreTransaction: boolean;
-  totalQuantity: number;
 };
 
 const TransactionBody = ({
@@ -68,9 +65,6 @@ const TransactionBody = ({
   setViewAs,
   currentDeviceType,
   hasAppliedDateFilter,
-  hasMoreTransaction,
-  fetchMoreTransactionHistory,
-  totalQuantity,
 }: TransactionHistoryProps) => {
   const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
@@ -83,7 +77,6 @@ const TransactionBody = ({
 
   const { t } = useTranslation(["Payments", "Settings"]);
 
-  console.log("filterTotal", totalQuantity, hasMoreTransaction, history.length);
   const tableView = (
     <div className="transaction-history-body">
       <TableContainer forwardedRef={ref} useReactWindow={false}>
@@ -100,10 +93,9 @@ const TransactionBody = ({
           columnInfoPanelStorageName={columnInfoPanelStorageName}
           itemHeight={48}
           filesLength={history.length}
-          fetchMoreFiles={fetchMoreTransactionHistory}
-          hasMoreFiles={hasMoreTransaction}
-          // hasMoreFiles={false}
-          itemCount={totalQuantity}
+          fetchMoreFiles={() => Promise.resolve()}
+          hasMoreFiles={false}
+          itemCount={history.length}
         >
           {history.map((transaction, index) => (
             <TransactionRow
@@ -119,11 +111,9 @@ const TransactionBody = ({
   const rowView = (
     <RowContainer
       useReactWindow
-      fetchMoreFiles={fetchMoreTransactionHistory}
-      hasMoreFiles={hasMoreTransaction}
-      itemCount={totalQuantity}
-      filesLength={history!.length}
-      itemHeight={58}
+      fetchMoreFiles={() => {}}
+      hasMoreFiles={false}
+      itemCount={history.length}
     >
       {history.map((transaction, index) => (
         <TransactionRowView
@@ -163,13 +153,4 @@ const TransactionBody = ({
     : emptyView;
 };
 
-export default inject(({ paymentStore }: TStore) => {
-  const { hasMoreTransaction, fetchMoreTransactionHistory, totalQuantity } =
-    paymentStore;
-
-  return {
-    hasMoreTransaction,
-    fetchMoreTransactionHistory,
-    totalQuantity,
-  };
-})(observer(TransactionBody));
+export default TransactionBody;

@@ -33,11 +33,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import TransactionHistory from "./TransactionHistory";
 import TopUpModal from "./TopUpModal";
-import {
-  formatCurrencyValue,
-  formattedBalance,
-  formattedBalanceTokens,
-} from "./utils";
+import { formatCurrencyValue, formattedBalanceTokens } from "./utils";
 
 import "./styles/Wallet.scss";
 

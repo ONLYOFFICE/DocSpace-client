@@ -24,7 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+"use client";
+
+import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { useTheme } from "styled-components";
 
@@ -32,52 +34,33 @@ import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Link } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { toastr } from "@docspace/shared/components/toast";
 
 import { EncryptionStatus } from "@docspace/shared/enums";
-import { getEncryptionSettings } from "@docspace/shared/api/settings";
-
-import { setDocumentTitle } from "SRC_DIR/utils";
-import { useStore } from "SRC_DIR/store";
+import type { TPortals } from "@docspace/shared/api/management/types";
 
 import { EncryptWarningDialog } from "./EncryptWarningDialog";
 import { StyledWrapper } from "./EncryptData.styles";
 
 type EncryptDataPageProps = {
-  logoText: string;
+  portals: TPortals[];
+  encryptionBlockHelpUrl: string;
+  isNotify: boolean;
+  status: number;
 };
 
-const EncryptDataPage = ({ logoText }: EncryptDataPageProps) => {
+const EncryptDataPage = ({
+  portals,
+  encryptionBlockHelpUrl,
+  isNotify,
+  status,
+}: EncryptDataPageProps) => {
   const { t } = useTranslation(["Management", "Common"]);
   const { currentColorScheme } = useTheme();
   const [encryptWarningDialogVisible, setEncryptWarningDialogVisible] =
     useState(false);
-  const [isNotifyChecked, setIsNotifyChecked] = useState(false);
-  const [status, setStatus] = useState(0);
-
-  const { settingsStore } = useStore();
-  const { portals, encryptionBlockHelpUrl } = settingsStore;
+  const [isNotifyChecked, setIsNotifyChecked] = useState(isNotify);
 
   const isDisabled = portals.length <= 1;
-
-  useEffect(() => {
-    setDocumentTitle(t("Branding"), logoText);
-  }, []);
-
-  useEffect(() => {
-    const fetchSettings = async () => {
-      try {
-        const res = await getEncryptionSettings();
-        setStatus(res.status);
-        setIsNotifyChecked(res.notifyUsers);
-      } catch (e) {
-        console.error(e);
-        toastr.error(e!);
-      }
-    };
-
-    fetchSettings();
-  }, []);
 
   return (
     <>
@@ -158,3 +141,4 @@ const EncryptDataPage = ({ logoText }: EncryptDataPageProps) => {
 };
 
 export default EncryptDataPage;
+

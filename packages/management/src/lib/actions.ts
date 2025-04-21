@@ -36,6 +36,7 @@ import type {
   TVersionBuild,
   TPaymentSettings,
   TStorageBackup,
+  TEncryptionSettings,
 } from "@docspace/shared/api/settings/types";
 import type { TGetAllPortals } from "@docspace/shared/api/management/types";
 import type {
@@ -442,3 +443,20 @@ export async function getFoldersTree() {
     } as TFolder;
   });
 }
+
+export async function getEncryptionSettings() {
+  const [getEncryptionSettings] = createRequest(
+    [`/settings/encryption/settings`],
+    [["", ""]],
+    "GET",
+  );
+
+  const encryptionSettingsRes = await fetch(getEncryptionSettings);
+
+  if (!encryptionSettingsRes.ok) return;
+
+  const encryptionSettings = await encryptionSettingsRes.json();
+
+  return encryptionSettings.response as TEncryptionSettings;
+}
+

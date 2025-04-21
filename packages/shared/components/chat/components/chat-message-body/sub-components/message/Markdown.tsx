@@ -1,7 +1,6 @@
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
-// @ts-expect-error we cant change our config
 import rehypeMathjax from "rehype-mathjax";
 
 import { Text } from "../../../../../text";

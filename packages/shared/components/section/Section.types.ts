@@ -155,7 +155,7 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     displayFileExtension?: boolean;
     aiChatID?: string;
     aiSelectedFolder?: string | number;
-    vectorizedFiles: TFile[];
+    vectorizedFiles?: TFile[];
   };
 
 export type SectionContextMenuProps = {

@@ -210,7 +210,7 @@ const useSelectorBody = ({
       {...footerInputProps}
       {...footerCheckboxProps}
       {...breadCrumbsProps}
-      isMultiSelect={isMultiSelect}
+      isMultiSelect={isMultiSelect ?? false}
       items={items}
       onSelect={onSelect}
       emptyScreenImage={

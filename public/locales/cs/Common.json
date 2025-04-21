@@ -283,7 +283,7 @@
   "FromDevice": "Ze zařízení",
   "FromPortal": "Od {{productName}}",
   "FromTemplate": "Ze šablony",
-  "FromTemplateRoomInfo": "Vytvoření místnosti podle šablony. Všechna nastavení, uživatelé, složky a soubory budou převzaty z vybrané šablony místnosti.",
+  "FromTemplateRoomInfo": "Vytvoření místnosti podle šablony. Všechna nastavení, složky a soubory budou převzaty z vybrané šablony místnosti.",
   "GeneratePassword": "Generovat heslo",
   "Gigabyte": "GB",
   "GoBack": "Vrátit se zpět",

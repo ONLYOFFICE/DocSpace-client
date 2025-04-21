@@ -28,7 +28,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
-
+import { TTranslation } from "@docspace/shared/types";
 import { toastr } from "@docspace/shared/components/toast";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Text } from "@docspace/shared/components/text";
@@ -42,17 +42,23 @@ import styles from "./InvitationSettings.module.scss";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import InvitationLoader from "../sub-components/loaders/invitation-loader";
 
-const InvitationSettings = (props) => {
-  const {
-    t,
-    isInit,
-    loadSettings,
-    setInvitationSettings,
-    allowInvitingMembers,
-    allowInvitingGuests,
-    currentDeviceType,
-  } = props;
-
+const InvitationSettings = ({
+  t,
+  isInit,
+  loadSettings,
+  setInvitationSettings,
+  allowInvitingMembers,
+  allowInvitingGuests,
+  currentDeviceType,
+}: {
+  t: TTranslation;
+  isInit: boolean;
+  loadSettings: () => void;
+  setInvitationSettings: (settings: any) => void;
+  allowInvitingMembers: boolean;
+  allowInvitingGuests: boolean;
+  currentDeviceType: DeviceType;
+}) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

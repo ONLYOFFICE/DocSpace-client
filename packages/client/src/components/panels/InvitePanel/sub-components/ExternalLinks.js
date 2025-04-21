@@ -234,8 +234,6 @@ const ExternalLinks = ({
   const filteredAccesses =
     roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
 
-  console.log("allowInvitingGuests", allowInvitingGuests);
-
   return (
     <StyledExternalLink noPadding ref={inputsRef}>
       <StyledSubHeader inline>

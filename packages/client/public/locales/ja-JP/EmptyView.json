@@ -35,6 +35,7 @@
   "MigrationDataDescription": "{{organizationName}} のWorkspace、Google Workspace、または Nextcloud から、{{productName}} にデータをインポートできます。",
   "MigrationDataTitle": "移行データ",
   "PublicRoomEmptyTitle": "パブリックルームへようこそ",
+  "SectionsUploadDescription": "{{sectionNameFirst}} または {{sectionNameSecond}} から任意のタイプのファイルをアップロード",
   "SendInvitationLetter": "招待状を送信してポータルに新しいメンバーを追加してください",
   "ShareOptionDescription": "フォーム記入プロセスを開始するために、公開アクセスリンクをコピーするか、他のユーザーをルームに招待する。",
   "ShareOptionTitle": "ルームの共有",

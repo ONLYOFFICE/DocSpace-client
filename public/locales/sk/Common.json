@@ -283,7 +283,7 @@
   "FromDevice": "Zo zariadenia",
   "FromPortal": "Z {{productName}}",
   "FromTemplate": "Zo šablóny",
-  "FromTemplateRoomInfo": "Vytvorenie miestnosti na základe šablóny. Všetky nastavenia, používatelia, priečinky a súbory budú prevzaté z vybranej šablóny miestnosti.",
+  "FromTemplateRoomInfo": "Vytvorenie miestnosti na základe šablóny. Všetky nastavenia, priečinky a súbory budú prevzaté z vybranej šablóny miestnosti.",
   "GeneratePassword": "Vytvoriť heslo",
   "Gigabyte": "GB",
   "GoBack": "Vráťte sa späť",

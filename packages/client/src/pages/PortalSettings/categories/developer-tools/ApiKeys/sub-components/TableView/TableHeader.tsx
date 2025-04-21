@@ -80,7 +80,7 @@ const TableHeader = (props: TableHeaderProps) => {
     },
     {
       key: "Permissions",
-      title: t("Settings:Permissions"),
+      title: t("Common:Permissions"),
       enable: true,
       resizable: true,
     },

@@ -35,6 +35,10 @@ export const Header = styled.div`
   font-size: 14px;
   font-weight: 600;
   line-height: 16px;
+
+  &.membersHeader {
+    padding-top: 20px;
+  }
 `;
 
 export const AddMembersButton = styled.div<{}>`

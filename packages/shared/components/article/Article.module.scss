@@ -457,9 +457,14 @@
       }
     }
   }
+
   &[data-with-main-button="false"] {
     :global(.article-body__scrollbar) {
       height: calc(100% - 150px) !important;
+
+      @include mobile {
+        height: 100% !important;
+      }
     }
   }
 
@@ -491,7 +496,7 @@
 
       @include mobile {
         display: block;
-        padding-bottom: 20px;
+        padding: 0 8px 20px 8px !important;
       }
     }
   }

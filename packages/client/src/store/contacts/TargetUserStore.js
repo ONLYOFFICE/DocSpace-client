@@ -174,6 +174,7 @@ class TargetUserStore {
         onClick: (ref) => ref.current.click(),
       },
       {
+        key: "delete",
         label: t("Common:Delete"),
         icon: TrashIconSvgUrl,
         onClick: () => this.deleteProfileAvatar(),

@@ -60,9 +60,8 @@ import {
   copyDocumentShareLink,
   DEFAULT_CREATE_LINK_SETTINGS,
   getExpirationDate,
+  evenPrimaryLink,
 } from "./Share.helpers";
-
-const defaultCreate = DEFAULT_CREATE_LINK_SETTINGS;
 
 const Share = (props: ShareProps) => {
   const {
@@ -130,7 +129,15 @@ const Share = (props: ShareProps) => {
         : await getPrimaryLink(infoPanelSelection.id);
 
       if (link) {
-        setFileLinks([link]);
+        setFileLinks((links) => {
+          const newLinks: TLink[] = [...links];
+
+          const idx = newLinks.findIndex((l) => "isLoaded" in l && l.isLoaded);
+
+          if (typeof idx !== "undefined") newLinks[idx] = { ...link };
+
+          return newLinks;
+        });
         copyDocumentShareLink(link, t);
       } else {
         setFileLinks([]);
@@ -152,7 +159,8 @@ const Share = (props: ShareProps) => {
     addLoaderLink();
 
     try {
-      const { access, internal, diffExpirationDate } = defaultCreate;
+      const { access, internal, diffExpirationDate } =
+        DEFAULT_CREATE_LINK_SETTINGS;
 
       const newLink = addFileLink
         ? await addFileLink(
@@ -377,6 +385,8 @@ const Share = (props: ShareProps) => {
 
   if (hideSharePanel) return null;
 
+  const isEvenPrimaryLink = evenPrimaryLink(fileLinks as TFileLink[]);
+
   return (
     <div data-testid="shared-links">
       {visibleBar ? (
@@ -401,7 +411,9 @@ const Share = (props: ShareProps) => {
                 <IconButton
                   className="link-to-viewing-icon"
                   iconName={LinksToViewingIconUrl}
-                  onClick={addAdditionalLinks}
+                  onClick={
+                    isEvenPrimaryLink ? addAdditionalLinks : addGeneralLink
+                  }
                   size={16}
                   isDisabled={fileLinks.length > LINKS_LIMIT_COUNT}
                 />

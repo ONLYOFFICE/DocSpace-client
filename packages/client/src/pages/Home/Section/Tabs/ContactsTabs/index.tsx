@@ -35,7 +35,6 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import { TUser } from "@docspace/shared/api/people/types";
 import { Badge } from "@docspace/shared/components/badge";
-import { globalColors } from "@docspace/shared/themes";
 import Filter from "@docspace/shared/api/people/filter";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
@@ -159,11 +158,7 @@ const ContactsTabs = ({
       onClick: onGuests,
       content: null,
       badge: !guestsTabVisited ? (
-        <Badge
-          label={t("Common:New")}
-          backgroundColor={globalColors.redRomb}
-          noHover
-        />
+        <Badge label={t("Common:New")} noHover />
       ) : undefined,
     });
   }

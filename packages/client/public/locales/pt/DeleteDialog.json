@@ -9,6 +9,8 @@
   "DeleteRoom": "Está prestes a apagar esta sala. Não será possível restaurá-la.",
   "DeleteRooms": "Está prestes a eliminar estas salas. Não será possível restaurá-las.",
   "DeleteSharedNote": "Observe que se você o compartilhou com alguém, ele ficará indisponível.",
+  "DeleteTemplate": "Pretende mesmo eliminar a sala de modelos <1>“{{templateName}}”</1>? Não pode restaurar os templates.",
+  "DeleteTemplates": "Pretende mesmo apagar os templates de salas selecionadas? Não podem ser restaurados.",
   "FolderPermanentlyDeleted": "A pasta será excluída permanentemente em 30 dias.",
   "ItemsPermanentlyDeleted": "Os itens serão excluídos permanentemente em 30 dias.",
   "MoveToTrashButton": "Mover para o Lixo",

@@ -911,6 +911,17 @@ class DialogsStore {
     this.roomCoverDialogProps = props;
   };
 
+  clearCoverProps = () => {
+    this.setRoomCoverDialogProps({
+      icon: null,
+      color: null,
+      title: null,
+      withoutIcon: true,
+      withSelection: true,
+      customColor: null,
+    });
+  };
+
   setCover = (color, icon) => {
     if (!color) {
       return (this.cover = null);

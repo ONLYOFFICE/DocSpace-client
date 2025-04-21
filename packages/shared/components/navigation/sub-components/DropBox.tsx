@@ -64,9 +64,13 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
       withLogo,
       burgerLogo,
 
+      isFrame,
+
       currentDeviceType,
       navigationTitleContainerNode,
       onCloseDropBox,
+      isContextButtonVisible,
+      isPublicRoom,
     },
     ref,
   ) => {
@@ -113,6 +117,7 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
         ref={ref}
         className={styles.box}
         data-with-logo={withLogo ? "true" : "false"}
+        data-is-frame={isFrame ? "true" : "false"}
         style={
           {
             "--drop-box-width": `${dropBoxWidth}px`,
@@ -127,6 +132,9 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
           data-is-desktop-client={isDesktopClient ? "true" : "false"}
           data-with-logo={!!withLogo && isTabletView ? "true" : "false"}
           data-is-desktop={isDesktop ? "true" : "false"}
+          data-is-frame={isFrame ? "true" : "false"}
+          data-is-frame-logo={isFrame && withLogo ? "true" : "false"}
+          data-is-root-folder={isRootFolder ? "true" : "false"}
         >
           {withLogo ? (
             <NavigationLogo
@@ -153,6 +161,8 @@ const DropBox = React.forwardRef<HTMLDivElement, TDropBoxProps>(
             isInfoPanelVisible={isInfoPanelVisible}
             onCloseDropBox={onCloseDropBox}
             showTitle
+            isContextButtonVisible={isContextButtonVisible}
+            isPublicRoom={isPublicRoom}
           />
         </div>
 

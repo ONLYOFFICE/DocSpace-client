@@ -96,7 +96,7 @@ const HistoryTableHeader = (props) => {
     },
     {
       key: "Trigger",
-      title: t("Trigger"),
+      title: t("EventType"),
       enable: true,
       resizable: true,
       onChange: onColumnChange,

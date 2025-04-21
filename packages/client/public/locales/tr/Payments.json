@@ -41,6 +41,7 @@
   "StartupTitle": "Ücretsiz {{planName}} planı kullanıyorsunuz",
   "StripeCustomerPortal": "Stripe müşteri portalına gidin",
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/ay</3>",
+  "TotalPricePerYear": "<2>{{price}}</2><1>{{currencySymbol}}</1><3>/yıl</3>",
   "UpgradeNow": "Şimdi Yükselt",
   "UpgradePlan": "Yükseltme planı",
   "UserNotFound": "<1>{{email}}</1> kullanıcısı bulunamad.",

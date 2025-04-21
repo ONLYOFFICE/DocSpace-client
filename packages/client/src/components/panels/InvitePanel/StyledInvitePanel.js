@@ -346,6 +346,10 @@ const StyledDropDown = styled(DropDown)`
     gap: 8px;
     height: 53px;
 
+    .avatar-disabled {
+      opacity: 0.5;
+    }
+
     .list-item_content {
       text-overflow: ellipsis;
       overflow: hidden;

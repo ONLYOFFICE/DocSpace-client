@@ -152,6 +152,7 @@ export type TGetColorTheme = {
 };
 
 export type TApiEntries = {
+  apikeys: string;
   docspace: string;
   "javascript-sdk": string;
   "plugins-sdk": string;

@@ -41,14 +41,9 @@
       padding-inline-start: 12px;
 
       svg {
-        rect {
-          fill: var(--tile-ckeckbox-background);
-          stroke: var(--tile-ckeckbox-border);
-        }
-
-        path {
-          fill: initial;
-        }
+        margin: -8px;
+        padding: 8px;
+        margin-inline-end: 4px;
       }
     }
 
@@ -68,22 +63,6 @@
           path {
             fill: var(--tile-icon-button-color);
           }
-        }
-
-        &:hover {
-          svg {
-            path {
-              fill: var(--accent-main) !important;
-            }
-          }
-        }
-      }
-    }
-
-    .expandButton > div:first-child {
-      &:hover {
-        path {
-          fill: var(--tile-icon-button-hover-color);
         }
       }
     }

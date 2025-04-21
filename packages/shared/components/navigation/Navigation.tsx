@@ -238,6 +238,7 @@ const Navigation = ({
                 withBackground={false}
                 withoutBlur
                 zIndex={400}
+                onClick={onCloseDropBox}
               />
 
               <DropBox
@@ -262,6 +263,9 @@ const Navigation = ({
                 currentDeviceType={currentDeviceType}
                 navigationTitleContainerNode={navigationTitleContainerNode}
                 onCloseDropBox={onCloseDropBox}
+                isFrame={isFrame}
+                isContextButtonVisible={isContextButtonVisible}
+                isPublicRoom={isPublicRoom}
               />
             </>
           ) : null}

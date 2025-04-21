@@ -374,9 +374,12 @@ class LdapFormStore {
 
     const respose = await syncLdap();
 
-    // console.log(respose);
+    if (respose?.completed || !respose?.id) {
+      this.onGetStatus(t, respose);
+      return;
+    }
 
-    if (respose?.id) {
+    if (respose?.id && !respose?.completed) {
       this.inProgress = true;
       this.progressBarIntervalId = setInterval(
         () => this.checkStatus(t),
@@ -463,7 +466,12 @@ class LdapFormStore {
       this.password = "";
     }
 
-    if (respose?.id) {
+    if (respose?.completed || !respose?.id) {
+      this.onGetStatus(t, respose, toDefault);
+      return;
+    }
+
+    if (respose?.id && !respose?.completed) {
       this.inProgress = true;
       this.progressBarIntervalId = setInterval(
         () => this.checkStatus(t, toDefault),

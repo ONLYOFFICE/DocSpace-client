@@ -150,6 +150,7 @@ export type TGetReferenceData = {
   instanceId: string;
   sourceFileId?: number;
   path?: string;
+  link?: string;
 };
 
 export type TGetReferenceDataRequest = {

@@ -51,6 +51,7 @@ import {
   RoomsTypes,
   isDesktop,
   isMobile,
+  isSystemFolder,
 } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 
@@ -644,6 +645,7 @@ class FilesStore {
           }
 
           const navigationPath = [...this.selectedFolderStore.navigationPath];
+          const pathParts = [...this.selectedFolderStore.pathParts];
 
           const idx = navigationPath.findIndex((p) => p.id === f.id);
 
@@ -655,6 +657,7 @@ class FilesStore {
             this.selectedFolderStore.setSelectedFolder({
               ...f,
               navigationPath,
+              pathParts,
             });
           }
 
@@ -722,26 +725,18 @@ class FilesStore {
         }
       });
     } else if (opt?.type === "folder" && opt?.id) {
-      const { isRoom, isTemplate, pathParts } = this.selectedFolderStore;
+      const { isRoom, isTemplate, pathParts, rootFolderType } =
+        this.selectedFolderStore;
       const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
-      if (foundIndex == -1) {
-        const removedId = opt.id;
 
-        const includePathPart = pathParts.some(({ id }) => id === removedId);
-
-        if (includePathPart && !this.treeFoldersStore.isPersonalReadOnly) {
-          if (isRoom && isTemplate) {
-            const newRoomsFilter = RoomsFilter.getDefault();
-            newRoomsFilter.searchArea = RoomSearchArea.Templates;
-            window.DocSpace.navigate(
-              `/rooms/shared/filter?${newRoomsFilter.toUrlParams()}`,
-            );
-          } else {
-            window.DocSpace.navigate("/");
-          }
-        }
-
-        return;
+      if (foundIndex === -1) {
+        return this.redirectToParent(
+          opt,
+          pathParts,
+          isRoom,
+          isTemplate,
+          rootFolderType,
+        );
       }
 
       const foundFolder = this.folders[foundIndex];
@@ -797,6 +792,79 @@ class FilesStore {
     });
 
     window?.dispatchEvent(event);
+  };
+
+  redirectToParent = (opt, pathParts, isRoom, isTemplate, rootFolderType) => {
+    const removedId = opt.id;
+
+    const includePathPartIndex = pathParts.findIndex(
+      ({ id }) => id === removedId,
+    );
+
+    if (includePathPartIndex === -1 || this.treeFoldersStore.isPersonalReadOnly)
+      return;
+
+    if (isRoom && isTemplate) {
+      const newRoomsFilter = RoomsFilter.getDefault();
+      newRoomsFilter.searchArea = RoomSearchArea.Templates;
+      return window.DocSpace.navigate(
+        `/rooms/shared/filter?${newRoomsFilter.toUrlParams()}`,
+      );
+    }
+    const pathPart = pathParts[includePathPartIndex - 1];
+    const { myFolderId, roomsFolderId } = this.treeFoldersStore;
+    const userId = this.userStore.user && this.userStore.user.id;
+
+    switch (rootFolderType) {
+      case FolderType.Archive: {
+        const archiveFilter = RoomsFilter.getDefault(
+          userId,
+          RoomSearchArea.Archive,
+        );
+        archiveFilter.searchArea = RoomSearchArea.Archive;
+        const params = archiveFilter.toUrlParams(userId, true);
+        const path = getCategoryUrl(CategoryType.Archive);
+
+        return window.DocSpace.navigate(`${path}?${params}`);
+      }
+      default: {
+        if (!pathPart) {
+          return;
+        }
+
+        if (pathPart.id === roomsFolderId) {
+          return window.DocSpace.navigate("/");
+        }
+
+        const filter = FilesFilter.getDefault();
+
+        filter.folder = pathPart.id;
+
+        const filterStorageItem =
+          userId && localStorage.getItem(`UserFilter=${userId}`);
+
+        if (filterStorageItem && myFolderId === pathPart.id) {
+          const splitFilter = filterStorageItem.split(",");
+
+          filter.sortBy = splitFilter[0];
+          filter.sortOrder = splitFilter[1];
+        }
+        const isPublic = this.publicRoomStore.isPublicRoom;
+        if (isPublic) {
+          filter.key = this.publicRoomStore.publicRoomKey;
+        }
+
+        const params = filter.toUrlParams();
+
+        const categoryType = isPublic
+          ? CategoryType.PublicRoom
+          : getCategoryTypeByFolderType(rootFolderType, pathPart.id);
+
+        const path = getCategoryUrl(categoryType, pathPart.id);
+
+        return window.DocSpace.navigate(`${path}?${params}`);
+      }
+    }
   };
 
   setIsErrorRoomNotAvailable = (state) => {
@@ -3531,7 +3599,7 @@ class FilesStore {
         type,
         hasDraft,
         isForm,
-        isPDFForm: item.isForm,
+        isPDFForm: item.isForm || item.isPDFForm,
         requestToken,
         lastOpened,
         quotaLimit,
@@ -3885,10 +3953,18 @@ class FilesStore {
 
     const share = shareKey || this.publicRoomStore.publicRoomKey;
 
+    const folderType = this.selectedFolderStore.type;
+
+    const isFormRoom = this.selectedFolderStore.roomType === RoomsType.FormRoom;
+    const isPublic = this.publicRoomStore.isPublicRoom;
+
+    const canShare =
+      share && (isPublic || !isFormRoom) && !isSystemFolder(folderType);
+
     const searchParams = new URLSearchParams();
 
     searchParams.append("fileId", id);
-    if (share) searchParams.append("share", share);
+    if (canShare) searchParams.append("share", share);
     if (preview) searchParams.append("action", "view");
     if (editForm) searchParams.append("action", "edit");
     if (fillForm) searchParams.append("action", "fill");

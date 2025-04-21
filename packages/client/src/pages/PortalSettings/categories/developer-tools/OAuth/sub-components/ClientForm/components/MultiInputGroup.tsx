@@ -198,6 +198,7 @@ const MultiInputGroup = ({
             hasError={isError || hasError}
             size={InputSize.base}
             type={InputType.text}
+            noIcon
           />
           <StyledInputAddBlock ref={addRef} onClick={onAddAction}>
             <Text fontSize="13px" fontWeight={600} lineHeight="20px" truncate>

@@ -158,6 +158,7 @@ const FilesTileContent = ({
     >
       <Link
         className="item-file-name"
+        containerWidth="100%"
         type="page"
         title={title}
         fontWeight={isTemplate ? 700 : 600}

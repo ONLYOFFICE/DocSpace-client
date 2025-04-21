@@ -77,6 +77,7 @@ const HistoryContent = ({ sectionWidth, item, locale, theme }) => {
       </div>
 
       <Text
+        containerMinWidth="120px"
         fontSize="12px"
         fontWeight={600}
         truncate

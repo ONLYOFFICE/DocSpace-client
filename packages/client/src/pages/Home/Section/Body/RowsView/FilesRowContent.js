@@ -134,6 +134,7 @@ const FilesRowContent = ({
     >
       <Link
         className="row-content-link"
+        containerWidth="55%"
         type="page"
         title={title}
         fontWeight="600"
@@ -155,12 +156,24 @@ const FilesRowContent = ({
       </div>
 
       {isIndexing ? (
-        <Text fontSize="12px" fontWeight={400} className="row_update-text">
+        <Text
+          containerMinWidth="200px"
+          containerWidth="15%"
+          fontSize="12px"
+          fontWeight={400}
+          className="row_update-text"
+        >
           {`${t("Files:Index")} ${order}`}
         </Text>
       ) : null}
       {mainInfo ? (
-        <Text fontSize="12px" fontWeight={400} className="row_update-text">
+        <Text
+          containerMinWidth="200px"
+          containerWidth="15%"
+          fontSize="12px"
+          fontWeight={400}
+          className="row_update-text"
+        >
           {mainInfo}
         </Text>
       ) : null}

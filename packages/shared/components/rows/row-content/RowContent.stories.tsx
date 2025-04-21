@@ -79,6 +79,7 @@ const Template = (args: RowContentProps) => {
           Demo
         </Link>
         <Link
+          // containerWidth="160px"
           type={LinkType.action}
           title="Demo"
           fontSize="12px"
@@ -95,6 +96,7 @@ const Template = (args: RowContentProps) => {
           0 000 0000000
         </Link>
         <Link
+          // containerWidth="160px"
           type={LinkType.page}
           title="demo@demo.com"
           fontSize="12px"
@@ -114,6 +116,7 @@ const Template = (args: RowContentProps) => {
         />
 
         <Link
+          // containerWidth="160px"
           type={LinkType.action}
           title="Demo Demo"
           fontSize="12px"
@@ -130,6 +133,7 @@ const Template = (args: RowContentProps) => {
           0 000 0000000
         </Link>
         <Link
+          // containerWidth="160px"
           type={LinkType.action}
           title="demo.demo@demo.com"
           fontSize="12px"
@@ -149,6 +153,7 @@ const Template = (args: RowContentProps) => {
         </Link>
 
         <Link
+          // containerWidth="160px"
           type={LinkType.action}
           title="Demo Demo Demo"
           fontSize="12px"
@@ -165,6 +170,7 @@ const Template = (args: RowContentProps) => {
           0 000 0000000
         </Link>
         <Link
+          // containerWidth="160px"
           type={LinkType.action}
           title="demo.demo.demo@demo.com"
           fontSize="12px"
@@ -197,6 +203,7 @@ const Template = (args: RowContentProps) => {
           Demo
         </Link>
         <Link
+          // containerWidth="160px"
           type={LinkType.action}
           title="Demo Demo Demo Demo"
           fontSize="12px"
@@ -213,6 +220,7 @@ const Template = (args: RowContentProps) => {
           0 000 0000000
         </Link>
         <Link
+          // containerWidth="160px"
           type={LinkType.action}
           title="demo.demo.demo.demo@demo.com"
           fontSize="12px"

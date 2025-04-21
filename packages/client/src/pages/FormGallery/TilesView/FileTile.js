@@ -36,6 +36,7 @@ const FileTile = ({ item, selectableRef }) => {
         <SimpleFilesTileContent>
           <Link
             className="item-file-name"
+            containerWidth="100%"
             type="page"
             fontWeight="600"
             fontSize={isDesktop() ? "13px" : "14px"}

@@ -194,7 +194,7 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
         />
       </div>
 
-      <div className="max-h-[562px] overflow-y-auto mb-4 border border-gray-200 dark:border-gray-700 rounded p-1">
+      <div className="max-h-[594px] overflow-y-auto mb-4 border border-gray-200 dark:border-gray-700 rounded p-1">
         {filteredNamespaces.map((namespace) => (
           <div
             key={namespace}

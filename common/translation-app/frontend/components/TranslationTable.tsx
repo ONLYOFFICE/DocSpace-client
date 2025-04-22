@@ -73,7 +73,8 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isFigmaModalOpen, setIsFigmaModalOpen] = useState<boolean>(false);
   const [activeKeyPath, setActiveKeyPath] = useState<string>("");
-  const [activeTranslationValue, setActiveTranslationValue] = useState<string>("");
+  const [activeTranslationValue, setActiveTranslationValue] =
+    useState<string>("");
 
   // Ref for the key container
   const keyContainerRef = useRef<HTMLDivElement>(null);
@@ -333,10 +334,16 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   const handleFindInFigma = useCallback(() => {
     // Close the context menu and open the Figma modal
     setContextMenu(null);
-    
+
     // Find the current English translation value for the active key
-    const currentEntry = filteredTranslations.find(entry => entry.path === activeKeyPath);
-    if (currentEntry && currentEntry.translations && currentEntry.translations["en"]) {
+    const currentEntry = filteredTranslations.find(
+      (entry) => entry.path === activeKeyPath
+    );
+    if (
+      currentEntry &&
+      currentEntry.translations &&
+      currentEntry.translations["en"]
+    ) {
       setActiveTranslationValue(currentEntry.translations["en"]);
       setIsFigmaModalOpen(true);
     }
@@ -515,7 +522,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
             </div>
 
             {/* Current translation key */}
-            <div className="mb-8">
+            <div>
               <TranslationTableKeyHeader
                 currentEntry={currentEntry}
                 newlyCreatedKey={newlyCreatedKey}
@@ -532,7 +539,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
 
               <div className="border border-gray-200 dark:border-gray-700 rounded overflow-hidden">
                 {/* Fixed-height scrollable container */}
-                <div className="max-h-[400px] overflow-y-auto">
+                <div className="max-h-[490px] overflow-y-auto">
                   <table className="w-full border-collapse">
                     <thead className="bg-gray-50 dark:bg-gray-800 sticky top-0 z-10">
                       <tr>
@@ -563,40 +570,6 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
                   </table>
                 </div>
               </div>
-            </div>
-
-            {/* Pagination controls - bottom */}
-            <div className="flex justify-between items-center mt-6">
-              <button
-                onClick={goToPreviousPage}
-                disabled={currentPage === 0}
-                className="btn btn-sm border border-primary-600 text-primary-600 hover:bg-primary-50 hover:text-primary-700 px-3 py-1 dark:text-primary-400 dark:hover:text-primary-300 dark:border-primary-700 dark:hover:bg-gray-800"
-              >
-                ← Previous
-              </button>
-              <div>
-                <select
-                  value={currentPage}
-                  onChange={(e) => setCurrentPage(Number(e.target.value))}
-                  className="input py-1 px-2 text-sm text-gray-800 dark:text-gray-200"
-                >
-                  {filteredTranslations.map((entry, index) => (
-                    <option key={entry.path} value={index}>
-                      {index + 1}:{" "}
-                      {entry.path.length > 30
-                        ? entry.path.substring(0, 30) + "..."
-                        : entry.path}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <button
-                onClick={goToNextPage}
-                disabled={currentPage >= totalPages - 1}
-                className="btn btn-sm border border-primary-600 text-primary-600 hover:bg-primary-50 hover:text-primary-700 px-3 py-1 dark:text-primary-400 dark:hover:text-primary-300 dark:border-primary-700 dark:hover:bg-gray-800"
-              >
-                Next →
-              </button>
             </div>
           </div>
         )}

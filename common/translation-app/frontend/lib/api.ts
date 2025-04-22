@@ -134,4 +134,40 @@ export const fetchTranslationStats = async (projectName?: string) => {
   return response.data.data;
 };
 
+// Key Usage
+export const getKeyUsage = async (key: string) => {
+  const response = await api.get(`/key-usage/${encodeURIComponent(key)}`);
+  return response.data;
+};
+
+export const getModuleKeys = async (module: string) => {
+  const response = await api.get(`/key-usage/module/${encodeURIComponent(module)}`);
+  return response.data.keys;
+};
+
+export const getAllModules = async () => {
+  const response = await api.get('/key-usage/modules');
+  return response.data.modules;
+};
+
+export const setKeyComment = async (key: string, comment: string) => {
+  const response = await api.post(`/key-usage/${encodeURIComponent(key)}/comment`, { comment });
+  return response.data;
+};
+
+export const searchKeys = async (query: string) => {
+  const response = await api.get(`/key-usage/search?query=${encodeURIComponent(query)}`);
+  return response.data.keys;
+};
+
+export const getKeyUsageStats = async () => {
+  const response = await api.get('/key-usage/stats');
+  return response.data;
+};
+
+export const triggerKeyUsageAnalysis = async () => {
+  const response = await api.post('/key-usage/analyze');
+  return response.data;
+};
+
 export default api;

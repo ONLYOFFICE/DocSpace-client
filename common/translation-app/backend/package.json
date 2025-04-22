@@ -16,7 +16,9 @@
     "fastify-socket.io": "^5.0.0",
     "fs-extra": "^11.1.1",
     "node-fetch": "^2.7.0",
-    "ollama": "^0.5.15"
+    "ollama": "^0.5.15",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

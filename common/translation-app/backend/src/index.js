@@ -45,6 +45,9 @@ async function registerRoutes() {
   server.register(require('./routes/translations'), { prefix: '/api/translations' });
   server.register(require('./routes/ollama'), { prefix: '/api/ollama' });
   
+  // Register key usage routes
+  server.register(require('./routes/keyUsageRoutes'));
+  
   // Register metadata routes
   server.register(require('./routes/metadata'), { prefix: '/api/metadata' });
   

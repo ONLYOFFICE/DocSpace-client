@@ -1,10 +1,10 @@
 /**
  * Database connection manager for the translation app
  */
-const Database = require('better-sqlite3');
-const fs = require('fs-extra');
-const path = require('path');
-const { dbConfig } = require('./config');
+const Database = require("better-sqlite3");
+const fs = require("fs-extra");
+const path = require("path");
+const { dbConfig } = require("./config");
 
 // Singleton connection instance
 let db = null;
@@ -29,21 +29,24 @@ function initializeDatabase() {
   try {
     // Ensure the database directory exists
     ensureDatabaseDirectory();
-    
+
     // Create new database connection
-    db = new Database(dbConfig.dbPath, dbConfig.connectionOptions);
-    
+    db = new Database(
+      path.join(dbConfig.dbPath, "translations.sqlite"),
+      dbConfig.connectionOptions
+    );
+
     // Enable foreign keys
-    db.pragma('foreign_keys = ON');
-    
+    db.pragma("foreign_keys = ON");
+
     // For better performance in concurrent environments
-    db.pragma('journal_mode = WAL');
-    
+    db.pragma("journal_mode = WAL");
+
     console.log(`Connected to SQLite database at ${dbConfig.dbPath}`);
-    
+
     return db;
   } catch (error) {
-    console.error('Failed to initialize database connection:', error);
+    console.error("Failed to initialize database connection:", error);
     throw error;
   }
 }
@@ -66,19 +69,19 @@ function closeDatabase() {
   if (db) {
     db.close();
     db = null;
-    console.log('Database connection closed');
+    console.log("Database connection closed");
   }
 }
 
 // Create database connection on module import
 initializeDatabase();
 
-process.on('exit', () => {
+process.on("exit", () => {
   closeDatabase();
 });
 
 module.exports = {
   getDatabase,
   closeDatabase,
-  initializeDatabase
+  initializeDatabase,
 };

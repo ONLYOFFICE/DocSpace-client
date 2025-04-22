@@ -196,6 +196,54 @@ const getQuotaFilter = (filterValues: TGroupItem[] | TItem[]) => {
   return filterType?.toString() ? +filterType : null;
 };
 
+const convertFilterDataToSelectedFilterValues = (
+  filterData: TItem[],
+): Map<FilterGroups, Map<string | number, TItem>> => {
+  const newValue: Map<FilterGroups, Map<string | number, TItem>> = new Map();
+
+  filterData.forEach((item) => {
+    const groupItems = Array.isArray(item.key)
+      ? (item.key.map((key) => ({
+          key,
+          group: item.group,
+          label: key,
+        })) as TItem[])
+      : [item];
+
+    if (!newValue.has(item.group)) {
+      const groupItemsMap = new Map(
+        groupItems.map((groupItem) => [groupItem.key as string, groupItem]),
+      );
+
+      newValue.set(item.group, groupItemsMap);
+    } else {
+      groupItems.forEach((groupItem) => {
+        newValue.get(item.group)?.set(groupItem.key as string, groupItem);
+      });
+    }
+  });
+
+  return newValue;
+};
+
+const convertFilterDataToSelectedItems = (filterData: TItem[]): TItem[] => {
+  const newSelectedItems: TItem[] = [];
+
+  filterData.forEach((item) => {
+    const groupItems = Array.isArray(item.key)
+      ? (item.key.map((key) => ({
+          key,
+          group: item.group,
+          label: key,
+        })) as TItem[])
+      : [item];
+
+    newSelectedItems.push(...groupItems);
+  });
+
+  return newSelectedItems;
+};
+
 export {
   getFilterType,
   getSubjectFilter,
@@ -208,4 +256,6 @@ export {
   getFilterContent,
   getTags,
   getQuotaFilter,
+  convertFilterDataToSelectedFilterValues,
+  convertFilterDataToSelectedItems,
 };

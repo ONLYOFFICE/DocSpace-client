@@ -40,6 +40,10 @@ import useSearch from "./hooks/useSearch";
 
 import styles from "./Filter.module.scss";
 import { FilterProps, TItem } from "./Filter.types";
+import {
+  convertFilterDataToSelectedFilterValues,
+  convertFilterDataToSelectedItems,
+} from "./Filter.utils";
 
 const FilterInput = React.memo(
   ({
@@ -87,6 +91,8 @@ const FilterInput = React.memo(
     disableThirdParty,
 
     initSearchValue,
+    initSelectedFilterValues,
+    initSelectedItems,
   }: FilterProps) => {
     const { searchComponent } = useSearch({
       onSearch,
@@ -104,80 +110,10 @@ const FilterInput = React.memo(
     >(getViewSettingsData());
     const [selectedFilterValue, setSelectedFilterValue] = React.useState<
       Map<FilterGroups, Map<string | number, TItem>>
-    >(() => {
-      const value = getSelectedFilterData();
-
-      if (!value || !Array.isArray(value)) return new Map();
-
-      const newValue: Map<
-        FilterGroups,
-        Map<string | number, TItem>
-      > = new Map();
-      const newSelectedItems: TItem[] = [];
-
-      value.forEach((item) => {
-        const groupItems = Array.isArray(item.key)
-          ? (item.key.map((key) => ({
-              key,
-              group: item.group,
-              label: key,
-            })) as TItem[])
-          : [item];
-
-        newSelectedItems.push(...groupItems);
-
-        if (!newValue.has(item.group)) {
-          const groupItemsMap = new Map(
-            groupItems.map((groupItem) => [groupItem.key as string, groupItem]),
-          );
-
-          newValue.set(item.group, groupItemsMap);
-        } else {
-          groupItems.forEach((groupItem) => {
-            newValue.get(item.group)?.set(groupItem.key as string, groupItem);
-          });
-        }
-      });
-
-      return newValue;
-    });
-    const [selectedItems, setSelectedItems] = React.useState<TItem[]>(() => {
-      const value = getSelectedFilterData();
-
-      if (!value || !Array.isArray(value)) return [];
-
-      const newValue: Map<
-        FilterGroups,
-        Map<string | number, TItem>
-      > = new Map();
-      const newSelectedItems: TItem[] = [];
-
-      value.forEach((item) => {
-        const groupItems = Array.isArray(item.key)
-          ? (item.key.map((key) => ({
-              key,
-              group: item.group,
-              label: key,
-            })) as TItem[])
-          : [item];
-
-        newSelectedItems.push(...groupItems);
-
-        if (!newValue.has(item.group)) {
-          const groupItemsMap = new Map(
-            groupItems.map((groupItem) => [groupItem.key as string, groupItem]),
-          );
-
-          newValue.set(item.group, groupItemsMap);
-        } else {
-          groupItems.forEach((groupItem) => {
-            newValue.get(item.group)?.set(groupItem.key as string, groupItem);
-          });
-        }
-      });
-
-      return newSelectedItems;
-    });
+    >(initSelectedFilterValues || new Map());
+    const [selectedItems, setSelectedItems] = React.useState<TItem[]>(
+      initSelectedItems || [],
+    );
 
     const { t } = useTranslation(["Common"]);
 
@@ -194,37 +130,10 @@ const FilterInput = React.memo(
 
       if (!mountRef.current) return;
 
-      const newValue: Map<
-        FilterGroups,
-        Map<string | number, TItem>
-      > = new Map();
-      const newSelectedItems: TItem[] = [];
+      const newSelectedValue = convertFilterDataToSelectedFilterValues(value);
+      const newSelectedItems = convertFilterDataToSelectedItems(value);
 
-      value.forEach((item) => {
-        const groupItems = Array.isArray(item.key)
-          ? (item.key.map((key) => ({
-              key,
-              group: item.group,
-              label: key,
-            })) as TItem[])
-          : [item];
-
-        newSelectedItems.push(...groupItems);
-
-        if (!newValue.has(item.group)) {
-          const groupItemsMap = new Map(
-            groupItems.map((groupItem) => [groupItem.key as string, groupItem]),
-          );
-
-          newValue.set(item.group, groupItemsMap);
-        } else {
-          groupItems.forEach((groupItem) => {
-            newValue.get(item.group)?.set(groupItem.key as string, groupItem);
-          });
-        }
-      });
-
-      setSelectedFilterValue(newValue);
+      setSelectedFilterValue(newSelectedValue);
       setSelectedItems(newSelectedItems);
     }, [getSelectedFilterData]);
 

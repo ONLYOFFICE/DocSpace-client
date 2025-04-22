@@ -231,7 +231,7 @@ export default function useFilesFilter({
     return [...typeOptions];
   }, [t]);
 
-  const getSelectedFilterData = React.useCallback(() => {
+  const getActiveFilterValues = React.useCallback(() => {
     const filterValues: TItem[] = [];
 
     if (filter.filterType) {
@@ -279,6 +279,17 @@ export default function useFilesFilter({
       });
     }
 
+    return filterValues;
+  }, [filter.filterType, t]);
+
+  const initSelectedFilterData = React.useMemo(
+    () => getActiveFilterValues(),
+    [getActiveFilterValues],
+  );
+
+  const getSelectedFilterData = React.useCallback(() => {
+    const filterValues: TItem[] = getActiveFilterValues();
+
     const currentFilterValues: TItem[] = [];
 
     setSelectedFilterValues((value: Nullable<TItem[]>) => {
@@ -320,7 +331,7 @@ export default function useFilesFilter({
     });
 
     return isSSR ? filterValues : currentFilterValues;
-  }, [filter.filterType, t]);
+  }, [getActiveFilterValues]);
 
   const getViewSettingsData = React.useCallback(() => {
     const viewSettings = [
@@ -391,5 +402,6 @@ export default function useFilesFilter({
     onChangeViewAs,
     removeSelectedItem,
     clearAll,
+    initSelectedFilterData,
   };
 }

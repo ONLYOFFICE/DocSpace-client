@@ -31,7 +31,6 @@ import { AxiosRequestConfig } from "axios";
 import { EmployeeType } from "../../enums";
 import { request } from "../client";
 import type {
-  TBackupHistory,
   TBackupSchedule,
   TPaymentQuota,
   TPortal,

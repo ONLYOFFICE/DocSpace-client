@@ -26,7 +26,6 @@
 
 import type { TSelectorItem } from "../../components/selector";
 import {
-  HeaderProps,
   TBreadCrumb,
   TInfoBar,
 } from "../../components/selector/Selector.types";

@@ -48,6 +48,9 @@ async function registerRoutes() {
   // Register key usage routes
   server.register(require('./routes/keyUsageRoutes'));
   
+  // Register test runner routes
+  server.register(require('./routes/testRunner'));
+  
   // Register metadata routes
   server.register(require('./routes/metadata'), { prefix: '/api/metadata' });
   

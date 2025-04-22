@@ -197,7 +197,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           <div className="logos-wrapper">
             <Logo
               name={logoUrls[0].name}
-              title={t("Profile:LightTheme")}
+              title={t("LightTheme")}
               src={logoUrls[0].path.light}
               imageClass="logo-header background-light"
               inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_light`}
@@ -208,7 +208,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             />
             <Logo
               name={logoUrls[0].name}
-              title={t("Profile:DarkTheme")}
+              title={t("DarkTheme")}
               src={logoUrls[0].path.dark}
               imageClass="logo-header background-dark"
               inputId={`logoUploader_${WhiteLabelLogoType.LightSmall}_dark`}
@@ -232,7 +232,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           <div className="logos-wrapper">
             <Logo
               name={logoUrls[5].name}
-              title={t("Profile:LightTheme")}
+              title={t("LightTheme")}
               src={logoUrls[5].path.light}
               imageClass="border-img logo-compact background-light"
               inputId={`logoUploader_${WhiteLabelLogoType.LeftMenu}_light`}
@@ -243,7 +243,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             />
             <Logo
               name={logoUrls[5].name}
-              title={t("Profile:DarkTheme")}
+              title={t("DarkTheme")}
               src={logoUrls[5].path.dark}
               imageClass="border-img logo-compact background-dark"
               inputId={`logoUploader_${WhiteLabelLogoType.LeftMenu}_dark`}
@@ -267,7 +267,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           <div className="logos-login-wrapper">
             <Logo
               name={logoUrls[1].name}
-              title={t("Profile:LightTheme")}
+              title={t("LightTheme")}
               src={logoUrls[1].path.light}
               imageClass="border-img logo-big background-white"
               inputId={`logoUploader_${WhiteLabelLogoType.LoginPage}_light`}
@@ -278,7 +278,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             />
             <Logo
               name={logoUrls[1].name}
-              title={t("Profile:DarkTheme")}
+              title={t("DarkTheme")}
               src={logoUrls[1].path.dark}
               imageClass="border-img logo-big background-dark"
               inputId={`logoUploader_${WhiteLabelLogoType.LoginPage}_dark`}
@@ -303,7 +303,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             <div className="logos-wrapper">
               <Logo
                 name={logoUrls[6].name}
-                title={t("Profile:LightTheme")}
+                title={t("LightTheme")}
                 src={logoUrls[6].path.light}
                 imageClass="border-img logo-about background-white"
                 inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_light`}
@@ -314,7 +314,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
               />
               <Logo
                 name={logoUrls[6].name}
-                title={t("Profile:DarkTheme")}
+                title={t("DarkTheme")}
                 src={logoUrls[6].path.dark}
                 imageClass="border-img logo-about background-dark"
                 inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_dark`}

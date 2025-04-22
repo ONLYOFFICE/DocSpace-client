@@ -162,7 +162,7 @@ const Dialog = ({
           <TextInput
             id="create-text-input"
             name="create"
-            type="text"
+            type="search"
             scale
             value={value}
             isAutoFocussed

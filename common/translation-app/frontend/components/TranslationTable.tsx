@@ -9,6 +9,7 @@ import DeleteKeyModal from "./DeleteKeyModal";
 import FigmaReferenceModal from "./FigmaReferenceModal";
 import Modal from "./Modal";
 import TranslationTableRow from "./TranslationTableRow";
+import SearchInput from "./SearchInput";
 import TranslationTableCell from "./TranslationTableCell";
 import TranslationTablePagination from "./TranslationTablePagination";
 import TranslationTableKeyHeader from "./TranslationTableKeyHeader";
@@ -424,12 +425,11 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     <div>
       <div className="mb-4 flex flex-wrap gap-2">
         <div className="flex-grow min-w-[200px]">
-          <input
-            type="text"
+          <SearchInput
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={setSearchTerm}
             placeholder="Search translations..."
-            className="input w-full text-sm py-1 text-gray-800 dark:text-gray-200"
+            inputClassName="input text-sm py-1 text-gray-800 dark:text-gray-200"
           />
         </div>
 

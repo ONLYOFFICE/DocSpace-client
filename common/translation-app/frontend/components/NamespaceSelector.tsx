@@ -4,6 +4,7 @@ import RenameNamespaceModal from "./RenameNamespaceModal";
 import MoveNamespaceModal from "./MoveNamespaceModal";
 import DeleteNamespaceModal from "./DeleteNamespaceModal";
 import CreateKeyModal from "./CreateKeyModal";
+import SearchInput from "./SearchInput";
 import { useTranslationStore } from "@/store/translationStore";
 import { useLanguageStore } from "@/store/languageStore";
 
@@ -185,12 +186,11 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
     <div ref={containerRef}>
       {/* Search input */}
       <div className="mb-4">
-        <input
-          type="text"
+        <SearchInput
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={setSearchTerm}
           placeholder="Search namespaces..."
-          className="input w-full text-sm py-1"
+          inputClassName="input text-sm py-1"
         />
       </div>
 

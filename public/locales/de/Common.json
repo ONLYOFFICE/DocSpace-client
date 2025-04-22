@@ -836,5 +836,6 @@
   "GenerateLogoLabel": "Logo aus Text generieren",
   "YourLogo": "Ihr Logo",
   "LightTheme": "Heller Modus",
-  "DarkTheme": "Dunkelmodus"
+  "DarkTheme": "Dunkelmodus",
+  "GenerateLogoButton": "Generieren"
 }

@@ -825,5 +825,6 @@
   "GenerateLogoLabel": "Tạo logo từ văn bản",
   "YourLogo": "Logo của bạn",
   "LightTheme": "Nền sáng",
-  "DarkTheme": "Nền tối"
+  "DarkTheme": "Nền tối",
+  "GenerateLogoButton": "Tạo"
 }

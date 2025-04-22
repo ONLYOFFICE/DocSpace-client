@@ -828,5 +828,6 @@
   "GenerateLogoLabel": "Генерирай лого от текст",
   "YourLogo": "Вашето лого",
   "LightTheme": "Светла тема",
-  "DarkTheme": "Тъмна тема"
+  "DarkTheme": "Тъмна тема",
+  "GenerateLogoButton": "Генерирай"
 }

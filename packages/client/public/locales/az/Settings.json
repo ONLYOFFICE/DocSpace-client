@@ -150,7 +150,6 @@
   "ErrorOccuredDownloadLog": "Məlumatı idxal edərkən xətalar baş verdi. Onları yoxlamaq üçün jurnalı endirin.",
   "ErrorsWereFound": "{{errors}} xətalar tapıldı",
   "ForcePathStyle": "Məcburi Keçid Üslubu",
-  "GenerateLogoButton": "Yaradın",
   "GoogleDriveFiles": "Google Diskin Faylları",
   "GroupsDescription": "Əvvəlki addımda seçdiyiniz istifadəçilər {{serviceName}} daxilində yaradılmış qruplara köçürüləcək. Qruplar {{contactsName}} bölməsində görünəcək.",
   "HexCode": "Hex kodu",

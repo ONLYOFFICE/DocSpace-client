@@ -824,5 +824,6 @@
   "GenerateLogoLabel": "توليد شعار من نص",
   "YourLogo": "شعاركم",
   "LightTheme": "الوضع النهاري",
-  "DarkTheme": "الوضع الداكن"
+  "DarkTheme": "الوضع الداكن",
+  "GenerateLogoButton": "توليد"
 }

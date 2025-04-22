@@ -828,5 +828,6 @@
   "GenerateLogoLabel": "Metinden logo oluştur",
   "YourLogo": "Logonuz",
   "LightTheme": "Açık tema",
-  "DarkTheme": "Koyu Tema"
+  "DarkTheme": "Koyu Tema",
+  "GenerateLogoButton": "Oluştur"
 }

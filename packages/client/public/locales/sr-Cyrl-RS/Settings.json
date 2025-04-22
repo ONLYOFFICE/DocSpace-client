@@ -150,7 +150,6 @@
   "ErrorOccuredDownloadLog": "Дошло је до грешака приликом увоза података. Преузмите записник да бисте их проверили.",
   "ErrorsWereFound": "{{errors}} грешке су пронађене",
   "ForcePathStyle": "Присили Стил путање",
-  "GenerateLogoButton": "Генериши",
   "GoogleDriveFiles": "Фајлови на Google Drive-у",
   "GroupsDescription": "Корисници које сте одабрали у претходном кораку биће увезени у групе креиране у {{serviceName}}. Групе ће се појавити у одељку {{contactsName}}.",
   "HexCode": "Hex код",

@@ -828,5 +828,6 @@
   "GenerateLogoLabel": "Generování loga z textu",
   "YourLogo": "Vaše logo",
   "LightTheme": "Světlý motiv",
-  "DarkTheme": "Tmavý motiv"
+  "DarkTheme": "Tmavý motiv",
+  "GenerateLogoButton": "Generovat"
 }

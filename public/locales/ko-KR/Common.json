@@ -826,5 +826,6 @@
   "GenerateLogoLabel": "텍스트에서 로고 생성",
   "YourLogo": "로고",
   "LightTheme": "라이트 테마",
-  "DarkTheme": "다크 테마"
+  "DarkTheme": "다크 테마",
+  "GenerateLogoButton": "생성"
 }

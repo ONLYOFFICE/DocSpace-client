@@ -828,5 +828,6 @@
   "GenerateLogoLabel": "Wygeneruj logo z tekstu",
   "YourLogo": "Twoje Logo",
   "LightTheme": "Motyw jasny",
-  "DarkTheme": "Motyw ciemny"
+  "DarkTheme": "Motyw ciemny",
+  "GenerateLogoButton": "Generuj"
 }

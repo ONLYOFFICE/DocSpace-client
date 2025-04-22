@@ -826,5 +826,6 @@
   "GenerateLogoLabel": "Generiši logo iz teksta",
   "YourLogo": "Vaš logo",
   "LightTheme": "Svetla tema",
-  "DarkTheme": "Tamna tema"
+  "DarkTheme": "Tamna tema",
+  "GenerateLogoButton": "Generiši"
 }

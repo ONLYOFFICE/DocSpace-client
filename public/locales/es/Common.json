@@ -836,5 +836,6 @@
   "GenerateLogoLabel": "Generar logotipo a partir de texto",
   "YourLogo": "Su logotipo",
   "LightTheme": "Tema claro",
-  "DarkTheme": "Tema oscuro"
+  "DarkTheme": "Tema oscuro",
+  "GenerateLogoButton": "Generar"
 }

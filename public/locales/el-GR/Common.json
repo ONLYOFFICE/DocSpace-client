@@ -828,5 +828,6 @@
   "GenerateLogoLabel": "Δημιουργία λογότυπου από κείμενο",
   "YourLogo": "Το λογότυπό σας",
   "LightTheme": "Ανοιχτό θέμα",
-  "DarkTheme": "Σκούρο θέμα"
+  "DarkTheme": "Σκούρο θέμα",
+  "GenerateLogoButton": "Δημιουργία"
 }

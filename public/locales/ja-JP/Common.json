@@ -836,5 +836,6 @@
   "GenerateLogoLabel": "テキストからロゴを生成",
   "YourLogo": "あなたのロゴ",
   "LightTheme": "ライトのテーマ",
-  "DarkTheme": "ダークテーマ"
+  "DarkTheme": "ダークテーマ",
+  "GenerateLogoButton": "生成"
 }

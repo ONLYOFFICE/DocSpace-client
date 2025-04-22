@@ -828,5 +828,6 @@
   "GenerateLogoLabel": "Ustvari logotip iz besedila",
   "YourLogo": "Vaš logotip",
   "LightTheme": "Svetla tema",
-  "DarkTheme": "Temna tema"
+  "DarkTheme": "Temna tema",
+  "GenerateLogoButton": "Ustvari"
 }

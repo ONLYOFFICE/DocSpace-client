@@ -150,7 +150,6 @@
   "ErrorOccuredDownloadLog": "Đã xảy ra lỗi trong quá trình nhập dữ liệu. Hãy tải nhật ký xuống để kiểm tra.",
   "ErrorsWereFound": "đã tìm thấy {{errors}} lỗi",
   "ForcePathStyle": "Kiểu đường dẫn bắt buộc",
-  "GenerateLogoButton": "Tạo",
   "GoogleDriveFiles": "Tập tin Google Drive",
   "GroupsDescription": "Người dùng mà bạn đã chọn ở bước trước sẽ được nhập vào các nhóm được tạo trong {{serviceName}}. Các nhóm sẽ xuất hiện trong phần {{contactsName}}.",
   "HexCode": "Mã Hex",

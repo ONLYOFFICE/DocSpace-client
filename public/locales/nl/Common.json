@@ -828,5 +828,6 @@
   "GenerateLogoLabel": "Logo genereren uit tekst",
   "YourLogo": "Uw logo",
   "LightTheme": "Licht thema",
-  "DarkTheme": "Donker thema"
+  "DarkTheme": "Donker thema",
+  "GenerateLogoButton": "Genereren"
 }

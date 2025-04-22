@@ -150,7 +150,6 @@
   "ErrorOccuredDownloadLog": "حدثت أخطاء أثناء استيراد البيانات. قم بتنزيل السجل للتحقق منها.",
   "ErrorsWereFound": "تم العثور على أخطاء {{errors}}",
   "ForcePathStyle": "فرض نمط المسار",
-  "GenerateLogoButton": "توليد",
   "GoogleDriveFiles": "ملفات  Google Drive",
   "GroupsDescription": "سيتم استيراد المستخدمين الذين حددتهم في الخطوة السابقة إلى المجموعات التي تم إنشاؤها في {{serviceName}}. ستظهر المجموعات في قسم {{contactsName}}.",
   "HexCode": "رمز سداسي عشري",

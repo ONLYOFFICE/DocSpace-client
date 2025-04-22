@@ -150,7 +150,6 @@
   "ErrorOccuredDownloadLog": "W trakcie importowania danych wystąpiły błędy. Pobierz dziennik, aby je sprawdzić.",
   "ErrorsWereFound": "Znaleziono {{errors}} błędy(-ów)",
   "ForcePathStyle": "Wymuś styl ścieżki",
-  "GenerateLogoButton": "Generuj",
   "GoogleDriveFiles": "Pliki na Dysku Google",
   "GroupsDescription": "Wybrani w poprzednim kroku użytkownicy zostaną zaimportowani do grup utworzonych w usłudze {{serviceName}}. Grupy pojawią się w sekcji {{contactsName}}.",
   "HexCode": "Kod szesnastkowy",

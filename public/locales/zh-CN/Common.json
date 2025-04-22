@@ -836,5 +836,6 @@
   "GenerateLogoLabel": "从文本生成logo",
   "YourLogo": "您的logo",
   "LightTheme": "浅色主题",
-  "DarkTheme": "深色主题"
+  "DarkTheme": "深色主题",
+  "GenerateLogoButton": "生成"
 }

@@ -818,5 +818,6 @@
   "GenerateLogoLabel": "Створити логотип із тексту",
   "YourLogo": "Ваш логотип",
   "LightTheme": "Світла тема",
-  "DarkTheme": "Темна тема"
+  "DarkTheme": "Темна тема",
+  "GenerateLogoButton": "Створити"
 }

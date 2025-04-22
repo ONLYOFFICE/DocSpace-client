@@ -828,5 +828,6 @@
   "GenerateLogoLabel": "Luo tekstistä logo",
   "YourLogo": "Logosi",
   "LightTheme": "Kevyt teema",
-  "DarkTheme": "Tumma teema"
+  "DarkTheme": "Tumma teema",
+  "GenerateLogoButton": "Luo"
 }

@@ -150,7 +150,6 @@
   "ErrorOccuredDownloadLog": "Er zijn fouten opgetreden tijdens het importeren van gegevens. Download het logbestand om dit te controleren.",
   "ErrorsWereFound": "{{errors}} fouten gevonden",
   "ForcePathStyle": "Forceer Path Style",
-  "GenerateLogoButton": "Genereren",
   "GoogleDriveFiles": "Bestanden op Google Drive",
   "GroupsDescription": "Gebruikers die u in de vorige stap hebt geselecteerd, worden geïmporteerd in groepen die zijn aangemaakt in {{serviceName}}. Groepen verschijnen in het gedeelte {{contactsName}}.",
   "HexCode": "Hexcode",

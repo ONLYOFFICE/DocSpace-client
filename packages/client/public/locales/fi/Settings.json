@@ -150,7 +150,6 @@
   "ErrorOccuredDownloadLog": "Tietojen tuonnin aikana tapahtui virheitä. Lataa loki tarkistaaksesi ne.",
   "ErrorsWereFound": "{{errors}} virhettä löytyi",
   "ForcePathStyle": "Pakota polku -tyyli",
-  "GenerateLogoButton": "Luo",
   "GoogleDriveFiles": "Google Driven tiedostot",
   "GroupsDescription": "Käyttäjät, jotka valitsit edellisessä vaiheessa tuodaan huoneisiin,  jotka on luotu {{serviceName}}ssa. Ryhmät ilmestyvät {{contactsName}}-osioon.",
   "HexCode": "Hex-koodi",

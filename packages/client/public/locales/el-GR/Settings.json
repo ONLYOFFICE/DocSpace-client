@@ -150,7 +150,6 @@
   "ErrorOccuredDownloadLog": "Παρουσιάστηκαν σφάλματα κατά την εισαγωγή δεδομένων. Κατεβάστε το αρχείο καταγραφής για να τα ελέγξετε.",
   "ErrorsWereFound": "Βρέθηκαν {{errors}}σφάλματα",
   "ForcePathStyle": "Στυλ διαδρομής δύναμης",
-  "GenerateLogoButton": "Δημιουργία",
   "GoogleDriveFiles": "Αρχεία του Google Drive",
   "GroupsDescription": "Οι χρήστες που επιλέξατε στο προηγούμενο βήμα θα εισαχθούν στις ομάδες που δημιουργήθηκαν στο {{serviceName}}. Οι ομάδες θα εμφανιστούν στην ενότητα «{{contactsName}}».",
   "HexCode": "Κωδικός Hex",

@@ -150,7 +150,6 @@
   "ErrorOccuredDownloadLog": "データのインポート中にエラーが発生しました。ログをダウンロードして確認してください。",
   "ErrorsWereFound": "{{errors}} エラーが見つかりました",
   "ForcePathStyle": "強制パススタイル",
-  "GenerateLogoButton": "生成",
   "GoogleDriveFiles": "Googleドライブのファイル",
   "GroupsDescription": "前のステップで選択したユーザーは、{{serviceName}}で作成されたグループにインポートされます。グループは{{contactsName}}セクションに表示されます。",
   "HexCode": "HEXコード",

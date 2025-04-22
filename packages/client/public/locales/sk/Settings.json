@@ -150,7 +150,6 @@
   "ErrorOccuredDownloadLog": "Počas importu údajov sa vyskytli chyby. Stiahnite si protokol, aby ste ich skontrolovali.",
   "ErrorsWereFound": "{{errors}} chýb nájdených",
   "ForcePathStyle": "Zapnúť Path-Style",
-  "GenerateLogoButton": "Generovať",
   "GoogleDriveFiles": "Súbory Google Disk",
   "GroupsDescription": "Používatelia, ktorých ste vybrali v predchádzajúcom kroku, budú importovaní do skupín vytvorených v {{serviceName}}. Skupiny sa zobrazia v časti {{contactsName}}.",
   "HexCode": "Hex kód",

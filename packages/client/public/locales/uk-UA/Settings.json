@@ -150,7 +150,6 @@
   "ErrorOccuredDownloadLog": "Під час імпорту даних виникли помилки. Завантажте журнал, щоб їх подивитися.",
   "ErrorsWereFound": "Було знайдено помилок: {{errors}}",
   "ForcePathStyle": "Примусово використати стиль шляху",
-  "GenerateLogoButton": "Створити",
   "GoogleDriveFiles": "Файли Google Drive",
   "GroupsDescription": "Користувачів, яких ви вибрали на попередньому кроці, буде імпортовано до груп, створених у {{serviceName}}. Групи з’являться в розділі «{{contactsName}}».",
   "HexCode": "Шістнадцятковий код",

@@ -128,7 +128,7 @@ const ConfigureDeepLinkComponent = (props: Props) => {
       setShowReminder(false);
       saveToSessionStorage("defaultConfigureDeepLink", type);
       saveToSessionStorage("currentConfigureDeepLink", type);
-      toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
     } catch (e) {
       toastr.error(e!);
     } finally {

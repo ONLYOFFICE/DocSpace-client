@@ -30,8 +30,11 @@ export default function ProjectPage() {
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
   const [isNamespaceModalOpen, setIsNamespaceModalOpen] =
     useState<boolean>(false);
-  const [namespaceForContextMenu, setNamespaceForContextMenu] = useState<string | null>(null);
-  const [isProgressModalOpen, setIsProgressModalOpen] = useState<boolean>(false);
+  const [namespaceForContextMenu, setNamespaceForContextMenu] = useState<
+    string | null
+  >(null);
+  const [isProgressModalOpen, setIsProgressModalOpen] =
+    useState<boolean>(false);
   const [llmValidationParams, setLlmValidationParams] = useState<{
     sourceLang: string;
     targetLang: string;
@@ -45,7 +48,7 @@ export default function ProjectPage() {
     loading: projectLoading,
     error: projectError,
   } = useProjectStore();
-  
+
   const {
     validateNamespace,
     errors: validationErrors,
@@ -54,7 +57,7 @@ export default function ProjectPage() {
     setIsValidationModalOpen,
     resetState: resetValidationState,
   } = useValidationStore();
-  
+
   const {
     validateNamespaceLLM,
     errors: llmValidationErrors,
@@ -110,15 +113,15 @@ export default function ProjectPage() {
       initSocket();
       setupSocketListeners();
       checkOllamaConnection();
-      
+
       // Initialize LLM validation socket listeners
       const setupValidationSockets = async () => {
         // Wait briefly to ensure socket is connected
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 500));
         // Call the setupSocketListeners from the store, not from the function
         useOllamaValidationStore.getState().setupSocketListeners();
       };
-      
+
       setupValidationSockets();
     }
 
@@ -193,38 +196,39 @@ export default function ProjectPage() {
   const handleNamespaceChange = (namespace: string) => {
     setCurrentNamespace(namespace);
   };
-  
+
   // Handle translation error checking
   const handleCheckTranslationErrors = (namespace: string) => {
     validateNamespace(projectName, namespace, selectedLanguages);
   };
-  
+
   // Handle LLM translation analysis
   const handleRunLLMAnalysis = (namespace: string) => {
     if (!selectedModel) {
       alert("Please select an Ollama model first");
       return;
     }
-    
+
     // Default to base language (usually 'en') if available
     const sourceLang = baseLanguage || "en";
     // Pick the first non-base language as target
-    const targetLang = selectedLanguages.find(lang => lang !== sourceLang) || 
-                     (selectedLanguages.length > 0 ? selectedLanguages[0] : "");
-    
+    const targetLang =
+      selectedLanguages.find((lang) => lang !== sourceLang) ||
+      (selectedLanguages.length > 0 ? selectedLanguages[0] : "");
+
     if (!targetLang) {
       alert("Please select at least one language for validation");
       return;
     }
-    
+
     // Store the params and show progress modal
     setLlmValidationParams({
       sourceLang,
       targetLang,
-      namespace
+      namespace,
     });
     setIsProgressModalOpen(true);
-    
+
     // Run LLM validation
     validateNamespaceLLM(
       projectName,
@@ -234,7 +238,7 @@ export default function ProjectPage() {
       selectedModel
     );
   };
-  
+
   // Handle modal closes - reset appropriate state
   const handleValidationModalClose = () => {
     setIsValidationModalOpen(false);
@@ -245,20 +249,24 @@ export default function ProjectPage() {
       }
     }, 500);
   };
-  
+
   const handleLLMValidationModalClose = () => {
     setLLMValidationModalOpen(false);
     resetLLMValidationState();
   };
-  
+
   const handleProgressModalClose = () => {
     setIsProgressModalOpen(false);
   };
-  
+
   // Monitor progress for automatic modal transitions
   useEffect(() => {
     // When LLM validation completes and results are available, close progress modal
-    if (isProgressModalOpen && !llmValidationLoading && llmValidationErrors.length > 0) {
+    if (
+      isProgressModalOpen &&
+      !llmValidationLoading &&
+      llmValidationErrors.length > 0
+    ) {
       setIsProgressModalOpen(false);
     }
   }, [isProgressModalOpen, llmValidationLoading, llmValidationErrors]);
@@ -288,7 +296,7 @@ export default function ProjectPage() {
   return (
     <div className="container mx-auto px-4 py-6">
       {/* Header */}
-      <div className="mb-6">
+      <div className="mb-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
             <button
@@ -346,7 +354,7 @@ export default function ProjectPage() {
         </div>
 
         {/* Languages Selector (moved from sidebar) */}
-        <div className="card p-2 rounded-md bg-white dark:bg-gray-800 shadow-sm">
+        <div className="card p-4 rounded-md bg-white dark:bg-gray-800 shadow-sm">
           <div className="flex items-center flex-wrap">
             <span className="text-xs font-medium text-gray-600 dark:text-gray-400 mr-2 mb-2">
               Languages:
@@ -367,7 +375,7 @@ export default function ProjectPage() {
       {error && <ErrorDisplay error={error} />}
 
       {/* Main content */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
         {/* Sidebar */}
         <div className="lg:col-span-1">
           <div className="card h-full">
@@ -409,7 +417,9 @@ export default function ProjectPage() {
                 fetchNamespaces(projectName, baseLanguage)
               }
               onCheckErrors={handleCheckTranslationErrors}
-              onRunLLMAnalysis={ollamaConnected ? handleRunLLMAnalysis : undefined}
+              onRunLLMAnalysis={
+                ollamaConnected ? handleRunLLMAnalysis : undefined
+              }
             />
             {namespaces.length > 0 && (
               <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
@@ -456,29 +466,29 @@ export default function ProjectPage() {
         projectName={projectName}
         onNamespaceAdded={handleNamespaceChange}
       />
-      
+
       {/* Basic Translation Error Modal */}
       <TranslationErrorModal
         isOpen={isValidationModalOpen}
         onClose={handleValidationModalClose}
-        namespace={namespaceForContextMenu || currentNamespace || ''}
+        namespace={namespaceForContextMenu || currentNamespace || ""}
         projectName={projectName}
         errors={validationErrors}
         loading={validationLoading}
       />
-      
+
       {/* LLM-powered Translation Error Modal */}
       <TranslationErrorModal
         isOpen={isLLMValidationModalOpen}
         onClose={handleLLMValidationModalClose}
-        namespace={namespaceForContextMenu || currentNamespace || ''}
+        namespace={namespaceForContextMenu || currentNamespace || ""}
         projectName={projectName}
         errors={llmValidationErrors}
         loading={llmValidationLoading}
         isLLMValidation={true}
         progress={llmValidationProgress}
       />
-      
+
       {/* LLM Validation Progress Modal */}
       {llmValidationParams && (
         <LLMValidationProgressModal

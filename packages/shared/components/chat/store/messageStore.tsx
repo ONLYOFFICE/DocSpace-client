@@ -150,7 +150,9 @@ export default class MessageStore {
     try {
       const textDecoder = new TextDecoder();
 
-      const filesStr = files ? `\n@${files.map((f) => f.id).join(",@")}` : "";
+      const filesStr = files.length
+        ? `\n@${files.map((f) => f.id).join(",@")}`
+        : "";
 
       const folderStr = `\n@folder-${this.aiSelectedFolder}`;
 

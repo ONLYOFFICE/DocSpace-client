@@ -153,16 +153,18 @@ class FlowStore {
           title: "",
         };
 
+        console.log(this.localCheckVectorizeDocument(f));
+
         if (!this.localCheckVectorizeDocument(f)) return f;
 
         return null;
       })
       .filter(Boolean);
 
-    files.forEach(({ id, version }) => {
+    filesId.forEach(({ id, version, title }) => {
       const isFound = msg.includes(`${id}:${version}`);
 
-      if (!isFound) this.vectorizeDocument({ id, version, title: "" });
+      if (!isFound) this.vectorizeDocument({ id, version, title });
     });
 
     this.vectorizedFiles = [...this.vectorizedFiles, ...files];

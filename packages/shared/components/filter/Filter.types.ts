@@ -215,9 +215,7 @@ export type SearchInputProps = {
 export type FilterProps = SearchInputProps &
   Omit<SortButtonProps, "id" | "title" | "viewSettings"> &
   Omit<FilterButtonProps, "id" | "title" | "selectedFilterValue"> & {
-    getSelectedFilterData: (
-      skipSetState?: boolean,
-    ) => Promise<TItem[]> | TItem[];
+    getSelectedFilterData: () => Promise<TItem[]> | TItem[];
     getViewSettingsData: () => TViewSelectorOption[];
 
     clearAll: () => void;

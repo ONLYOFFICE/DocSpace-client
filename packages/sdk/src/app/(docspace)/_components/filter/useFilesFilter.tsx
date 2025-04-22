@@ -246,121 +246,116 @@ export default function useFilesFilter({
     return [...typeOptions];
   }, [t]);
 
-  const getSelectedFilterData = React.useCallback(
-    (skipSetState?: boolean) => {
-      const filterValues: TItem[] = [];
+  const getSelectedFilterData = React.useCallback(() => {
+    const filterValues: TItem[] = [];
 
-      if (filter.filterType) {
-        let label = "";
+    if (filter.filterType) {
+      let label = "";
 
-        switch (filter.filterType.toString()) {
-          case FilterType.DocumentsOnly.toString():
-            label = t("Common:Documents");
-            break;
-          case FilterType.FoldersOnly.toString():
-            label = t("Common:Folders");
-            break;
-          case FilterType.SpreadsheetsOnly.toString():
-            label = t("Common:Spreadsheets");
-            break;
-          case FilterType.ArchiveOnly.toString():
-            label = t("Common:Archives");
-            break;
-          case FilterType.PresentationsOnly.toString():
-            label = t("Common:Presentations");
-            break;
-          case FilterType.ImagesOnly.toString():
-            label = t("Common:Images");
-            break;
-          case FilterType.MediaOnly.toString():
-            label = t("Common:Media");
-            break;
-          case FilterType.FilesOnly.toString():
-            label = t("Common:Files");
-            break;
-          case FilterType.Pdf.toString():
-            label = getManyPDFTitle(t, false);
-            break;
-          case FilterType.PDFForm.toString():
-            label = getManyPDFTitle(t, true);
-            break;
-          default:
-            break;
-        }
-
-        filterValues.push({
-          key: `${filter.filterType}`,
-          label: label.toLowerCase(),
-          group: FilterGroups.filterType,
-        });
+      switch (filter.filterType.toString()) {
+        case FilterType.DocumentsOnly.toString():
+          label = t("Common:Documents");
+          break;
+        case FilterType.FoldersOnly.toString():
+          label = t("Common:Folders");
+          break;
+        case FilterType.SpreadsheetsOnly.toString():
+          label = t("Common:Spreadsheets");
+          break;
+        case FilterType.ArchiveOnly.toString():
+          label = t("Common:Archives");
+          break;
+        case FilterType.PresentationsOnly.toString():
+          label = t("Common:Presentations");
+          break;
+        case FilterType.ImagesOnly.toString():
+          label = t("Common:Images");
+          break;
+        case FilterType.MediaOnly.toString():
+          label = t("Common:Media");
+          break;
+        case FilterType.FilesOnly.toString():
+          label = t("Common:Files");
+          break;
+        case FilterType.Pdf.toString():
+          label = getManyPDFTitle(t, false);
+          break;
+        case FilterType.PDFForm.toString():
+          label = getManyPDFTitle(t, true);
+          break;
+        default:
+          break;
       }
 
-      if (filter.withSubfolders) {
-        filterValues.push({
-          key: FilterKeys.withSubfolders,
-          label: t("Common:WithSubfolders"),
-          group: FilterGroups.filterFolders,
-        });
+      filterValues.push({
+        key: `${filter.filterType}`,
+        label: label.toLowerCase(),
+        group: FilterGroups.filterType,
+      });
+    }
+
+    if (filter.withSubfolders) {
+      filterValues.push({
+        key: FilterKeys.withSubfolders,
+        label: t("Common:WithSubfolders"),
+        group: FilterGroups.filterFolders,
+      });
+    }
+
+    if (filter.searchInContent) {
+      filterValues.push({
+        key: "true",
+        label: t("FileContents"),
+        group: FilterGroups.filterContent,
+      });
+    }
+
+    const currentFilterValues: TItem[] = [];
+
+    setSelectedFilterValues((value: Nullable<TItem[]>) => {
+      if (!value) {
+        currentFilterValues.push(...filterValues);
+
+        return filterValues.map((f) => ({ ...f }));
       }
 
-      if (filter.searchInContent) {
-        filterValues.push({
-          key: "true",
-          label: t("FileContents"),
-          group: FilterGroups.filterContent,
-        });
-      }
+      const items = value.map((v) => {
+        const item = filterValues.find((f) => f.group === v.group);
 
-      const currentFilterValues: TItem[] = [];
+        if (item) {
+          if (item.isMultiSelect) {
+            let isEqual = true;
 
-      if (!skipSetState) {
-        setSelectedFilterValues((value: Nullable<TItem[]>) => {
-          if (!value) {
-            currentFilterValues.push(...filterValues);
+            if (Array.isArray(item.key))
+              item.key.forEach((k) => {
+                if (Array.isArray(v.key) && !v.key.includes(k)) {
+                  isEqual = false;
+                }
+              });
 
-            return filterValues.map((f) => ({ ...f }));
-          }
+            if (isEqual) return item;
 
-          const items = value.map((v) => {
-            const item = filterValues.find((f) => f.group === v.group);
-
-            if (item) {
-              if (item.isMultiSelect) {
-                let isEqual = true;
-
-                if (Array.isArray(item.key))
-                  item.key.forEach((k) => {
-                    if (Array.isArray(v.key) && !v.key.includes(k)) {
-                      isEqual = false;
-                    }
-                  });
-
-                if (isEqual) return item;
-
-                return false;
-              }
-              if (item.key === v.key) return item;
-              return false;
-            }
             return false;
-          });
+          }
+          if (item.key === v.key) return item;
+          return false;
+        }
+        return false;
+      });
 
-          const newItems = filterValues.filter(
-            (v) => !items.find((i) => i && i.group === v.group),
-          );
+      const newItems = filterValues.filter(
+        (v) => !items.find((i) => i && i.group === v.group),
+      );
 
-          const filteredItems = items.filter((i) => i) as TItem[];
+      const filteredItems = items.filter((i) => i) as TItem[];
 
-          currentFilterValues.push(...filteredItems);
+      currentFilterValues.push(...filteredItems);
 
-          return filteredItems;
-        });
-      }
+      return filteredItems;
+    });
 
-      return isSSR ? filterValues : currentFilterValues;
-    },
-    [filter.filterType, filter.searchInContent, filter.withSubfolders, t],
-  );
+    return isSSR ? filterValues : currentFilterValues;
+  }, [filter.filterType, filter.searchInContent, filter.withSubfolders, t]);
 
   const getViewSettingsData = React.useCallback(() => {
     const viewSettings = [

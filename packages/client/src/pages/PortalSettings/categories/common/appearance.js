@@ -145,7 +145,7 @@ const Appearance = (props) => {
     () => [
       {
         id: "light-theme",
-        name: t("Profile:LightTheme"),
+        name: t("Common:LightTheme"),
         content: (
           <Preview
             appliedColorAccent={appliedColorAccent}
@@ -158,7 +158,7 @@ const Appearance = (props) => {
       },
       {
         id: "dark-theme",
-        name: t("Profile:DarkTheme"),
+        name: t("Common:DarkTheme"),
         content: (
           <Preview
             appliedColorAccent={appliedColorAccent}

@@ -51,12 +51,22 @@ const ContextButton = ({
   const [animationClasses, setAnimationClasses] = useState<string[]>([]);
   const ref = useRef<HTMLDivElement | null>(null);
   const menuRef = useRef<ContextMenuRefType>(null);
+  const [animationPlayed, setAnimationPlayed] = useState(false);
 
   useEffect(() => {
-    if (guidAnimationVisible) {
-      return contextButtonAnimation?.(setAnimationClasses);
+    if (isOpen) {
+      return;
     }
-  }, [guidAnimationVisible, contextButtonAnimation]);
+
+    if (guidAnimationVisible && contextButtonAnimation) {
+      setAnimationPlayed(true);
+      return contextButtonAnimation(setAnimationClasses);
+    }
+    if (!guidAnimationVisible) {
+      setAnimationPlayed(false);
+      setAnimationClasses([]);
+    }
+  }, [guidAnimationVisible, contextButtonAnimation, isOpen, animationPlayed]);
 
   const toggle = (e: React.MouseEvent<HTMLDivElement>, open: boolean) => {
     if (open) {

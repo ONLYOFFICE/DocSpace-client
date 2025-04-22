@@ -233,7 +233,8 @@ const LinkRow = ({
                     fixedDirection={isMobileViewLink}
                     isAside={isMobileViewLink}
                     topSpace={16}
-                    usePortalBackdrop={isMobileViewLink}
+                    usePortalBackdrop
+                    shouldShowBackdrop={isMobileViewLink}
                   />
                 ) : null}
                 {!isArchiveFolder ? (

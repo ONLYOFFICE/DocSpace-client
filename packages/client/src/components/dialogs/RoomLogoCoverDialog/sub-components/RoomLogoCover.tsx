@@ -279,11 +279,11 @@ export default inject<TStore>(({ settingsStore, dialogsStore }) => {
 
   return {
     isBaseTheme: theme?.isBase,
-    logo,
+    logo: coverSelection?.isTemplate ? coverSelection?.logo : logo,
     title,
     cover: cover ?? {
-      color: coverSelection.color,
-      cover: coverSelection.cover?.id,
+      color: coverSelection?.color,
+      cover: coverSelection?.cover?.id,
     },
     setCover,
     setRoomCoverDialogProps,

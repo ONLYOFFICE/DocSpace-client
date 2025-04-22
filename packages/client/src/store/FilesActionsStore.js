@@ -3107,10 +3107,12 @@ class FilesActionStore {
     await refreshFiles();
   };
 
-  onCreateRoomFromTemplate = (item) => {
+  onCreateRoomFromTemplate = (item, addSelection) => {
     const event = new Event(Events.ROOM_CREATE);
     event.item = item;
     window.dispatchEvent(event);
+
+    if (addSelection) this.filesStore.setBufferSelection(item);
   };
 
   copyFromTemplateForm = async (fileInfo) => {

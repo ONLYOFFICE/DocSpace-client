@@ -7,17 +7,10 @@ import {
   TOnFilter,
 } from "@docspace/shared/components/filter/Filter.types";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { getFilterType } from "@docspace/shared/components/filter/Filter.utils";
 import {
-  getFilterType,
-  getAuthorType,
-  getSearchParams,
-  getFilterContent,
-  getRoomId,
-} from "@docspace/shared/components/filter/Filter.utils";
-import {
-  FilterType,
   FilterGroups,
-  FilterKeys,
+  FilterType,
   SortByFieldName,
 } from "@docspace/shared/enums";
 import { Nullable, TSortBy, type TViewAs } from "@docspace/shared/types";
@@ -150,18 +143,10 @@ export default function useFilesFilter({
     (data) => {
       const filterType = getFilterType(data) || null;
 
-      const withSubfolders = getSearchParams(data);
-      const withContent = getFilterContent(data);
-
       const newFilter = filter.clone();
       newFilter.page = 0;
 
       newFilter.filterType = filterType;
-
-      newFilter.withSubfolders =
-        withSubfolders === FilterKeys.excludeSubfolders ? false : true;
-
-      newFilter.searchInContent = withContent === "true" ? true : null;
 
       setFilter(newFilter);
 
@@ -294,22 +279,6 @@ export default function useFilesFilter({
       });
     }
 
-    if (filter.withSubfolders) {
-      filterValues.push({
-        key: FilterKeys.withSubfolders,
-        label: t("Common:WithSubfolders"),
-        group: FilterGroups.filterFolders,
-      });
-    }
-
-    if (filter.searchInContent) {
-      filterValues.push({
-        key: "true",
-        label: t("FileContents"),
-        group: FilterGroups.filterContent,
-      });
-    }
-
     const currentFilterValues: TItem[] = [];
 
     setSelectedFilterValues((value: Nullable<TItem[]>) => {
@@ -343,10 +312,6 @@ export default function useFilesFilter({
         return false;
       });
 
-      const newItems = filterValues.filter(
-        (v) => !items.find((i) => i && i.group === v.group),
-      );
-
       const filteredItems = items.filter((i) => i) as TItem[];
 
       currentFilterValues.push(...filteredItems);
@@ -355,7 +320,7 @@ export default function useFilesFilter({
     });
 
     return isSSR ? filterValues : currentFilterValues;
-  }, [filter.filterType, filter.searchInContent, filter.withSubfolders, t]);
+  }, [filter.filterType, t]);
 
   const getViewSettingsData = React.useCallback(() => {
     const viewSettings = [
@@ -392,12 +357,6 @@ export default function useFilesFilter({
       if (group === FilterGroups.filterAuthor) {
         newFilter.authorType = null;
         newFilter.excludeSubject = null;
-      }
-      if (group === FilterGroups.filterFolders) {
-        newFilter.withSubfolders = null;
-      }
-      if (group === FilterGroups.filterContent) {
-        newFilter.searchInContent = null;
       }
       if (group === FilterGroups.filterRoom) {
         newFilter.roomId = null;

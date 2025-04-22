@@ -4,7 +4,7 @@
 const Database = require("better-sqlite3");
 const fs = require("fs-extra");
 const path = require("path");
-const { dbConfig } = require("./config");
+const { dbConfig } = require("../config/config");
 
 // Singleton connection instance
 let db = null;
@@ -31,10 +31,7 @@ function initializeDatabase() {
     ensureDatabaseDirectory();
 
     // Create new database connection
-    db = new Database(
-      path.join(dbConfig.dbPath, "translations.sqlite"),
-      dbConfig.connectionOptions
-    );
+    db = new Database(dbConfig.dbPath, dbConfig.connectionOptions);
 
     // Enable foreign keys
     db.pragma("foreign_keys = ON");

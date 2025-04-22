@@ -5,7 +5,25 @@ const path = require("path");
 const appRootPath =
   process.env.APP_ROOT_PATH || path.resolve(__dirname, "../../../../../");
 
-const dbPath = process.env.DB_PATH || path.resolve(__dirname, "../../db");
+// Database configuration
+const dbConfig = {
+  // Database file path
+  dbPath: process.env.DB_PATH
+    ? path.join(process.env.DB_PATH, process.env.DB_NAME)
+    : path.resolve(
+        __dirname,
+        "../../db/",
+        process.env.DB_NAME || "translations.db"
+      ),
+
+  // Connection options
+  connectionOptions: {
+    readonly: false, // Read-write mode
+    fileMustExist: false, // Create the file if it doesn't exist
+    timeout: 5000, // Timeout in ms
+    verbose: process.env.NODE_ENV === "development" ? console.log : null,
+  },
+};
 
 // Fixed mapping between project names and their relative locale paths
 const projectLocalesMap = {
@@ -39,5 +57,5 @@ module.exports = {
   serverConfig,
   ollamaConfig,
   translationConfig,
-  dbPath,
+  dbConfig,
 };

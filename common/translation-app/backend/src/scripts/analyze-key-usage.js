@@ -15,10 +15,11 @@
  */
 
 const { analyzeCodebase } = require("../utils/keyUsageUtils");
+const { getKeyRecord } = require("../utils/dbUtils");
 const readline = require("readline");
 const { open } = require("sqlite");
 const sqlite3 = require("sqlite3").verbose();
-const { dbPath } = require("../config/config");
+const { dbConfig } = require("../config/config");
 const path = require("path");
 const fs = require("fs");
 
@@ -120,10 +121,7 @@ async function lookupKey(key) {
 
   try {
     // Get key ID
-    const keyRecord = await db.get(
-      "SELECT id FROM translation_keys WHERE key = ?",
-      key
-    );
+    const keyRecord = await getKeyRecord(db, key);
 
     if (!keyRecord) {
       console.log(`Key "${key}" not found in database.`);
@@ -267,8 +265,8 @@ async function listKeysByModule(moduleName) {
 async function openDatabase() {
   try {
     // Make sure we're working with absolute paths
-    const dbDir = path.resolve(dbPath);
-    const dbFilePath = path.join(dbDir, "translations.sqlite");
+    const dbDir = path.resolve(dbConfig.dbPath);
+    const dbFilePath = dbConfig.dbPath;
 
     console.log(`Database directory: ${dbDir}`);
     console.log(`Database file path: ${dbFilePath}`);

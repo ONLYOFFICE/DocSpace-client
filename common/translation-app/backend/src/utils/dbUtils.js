@@ -1,8 +1,8 @@
-const fs = require('fs-extra');
-const path = require('path');
-const sqlite3 = require('sqlite3').verbose();
-const { open } = require('sqlite');
-const { dbPath } = require('../config/config');
+const fs = require("fs-extra");
+const path = require("path");
+const sqlite3 = require("sqlite3").verbose();
+const { open } = require("sqlite");
+const { dbConfig } = require("../config/config");
 
 /**
  * Initializes the SQLite database for translation key usage tracking
@@ -11,21 +11,15 @@ const { dbPath } = require('../config/config');
 async function initializeDatabase() {
   try {
     // Ensure the database directory exists
-    const dbDir = path.dirname(path.resolve(dbPath));
+    const dbDir = path.dirname(path.resolve(dbConfig.dbPath));
     await fs.ensureDir(dbDir);
-    
-    // Use the configured dbPath directly if it has a file extension,
-    // otherwise treat it as a directory and append a filename
-    const dbFilePath = dbPath.endsWith('.db') || dbPath.endsWith('.sqlite') 
-      ? dbPath 
-      : path.join(dbPath, 'translations.db');
-    
+
     // Open the database connection
     const db = await open({
-      filename: dbFilePath,
-      driver: sqlite3.Database
+      filename: dbConfig.dbPath,
+      driver: sqlite3.Database,
     });
-    
+
     // Create tables if they don't exist
     await db.exec(`
       CREATE TABLE IF NOT EXISTS translation_keys (
@@ -55,10 +49,10 @@ async function initializeDatabase() {
         UNIQUE (key_id)
       );
     `);
-    
+
     return db;
   } catch (error) {
-    console.error('Error initializing database:', error);
+    console.error("Error initializing database:", error);
     throw error;
   }
 }
@@ -72,10 +66,13 @@ async function initializeDatabase() {
 async function storeTranslationKey(db, key) {
   try {
     // Try to insert the key if it doesn't exist yet
-    await db.run('INSERT OR IGNORE INTO translation_keys (key) VALUES (?)', key);
-    
+    await db.run(
+      "INSERT OR IGNORE INTO translation_keys (key) VALUES (?)",
+      key
+    );
+
     // Get the key's ID
-    const result = await db.get('SELECT id FROM translation_keys WHERE key = ?', key);
+    const result = await getKeyRecord(db, key);
     return result.id;
   } catch (error) {
     console.error(`Error storing translation key "${key}":`, error);
@@ -93,14 +90,24 @@ async function storeTranslationKey(db, key) {
  * @param {string} module - Module name
  * @returns {Promise<void>}
  */
-async function recordKeyUsage(db, keyId, filePath, lineNumber, context, module) {
+async function recordKeyUsage(
+  db,
+  keyId,
+  filePath,
+  lineNumber,
+  context,
+  module
+) {
   try {
     await db.run(
-      'INSERT OR REPLACE INTO key_usages (key_id, file_path, line_number, context, module) VALUES (?, ?, ?, ?, ?)',
+      "INSERT OR REPLACE INTO key_usages (key_id, file_path, line_number, context, module) VALUES (?, ?, ?, ?, ?)",
       [keyId, filePath, lineNumber, context, module]
     );
   } catch (error) {
-    console.error(`Error recording key usage for key ID ${keyId} in ${filePath}:`, error);
+    console.error(
+      `Error recording key usage for key ID ${keyId} in ${filePath}:`,
+      error
+    );
     throw error;
   }
 }
@@ -115,7 +122,7 @@ async function recordKeyUsage(db, keyId, filePath, lineNumber, context, module) 
 async function setKeyAutoComment(db, keyId, comment) {
   try {
     await db.run(
-      'INSERT OR REPLACE INTO key_comments (key_id, comment, is_auto, updated_at) VALUES (?, ?, 1, CURRENT_TIMESTAMP)',
+      "INSERT OR REPLACE INTO key_comments (key_id, comment, is_auto, updated_at) VALUES (?, ?, 1, CURRENT_TIMESTAMP)",
       [keyId, comment]
     );
   } catch (error) {
@@ -132,13 +139,16 @@ async function setKeyAutoComment(db, keyId, comment) {
  */
 async function getKeyUsages(db, key) {
   try {
-    const result = await db.all(`
+    const result = await db.all(
+      `
       SELECT ku.file_path, ku.line_number, ku.context, ku.module
       FROM key_usages ku
       JOIN translation_keys tk ON ku.key_id = tk.id
       WHERE tk.key = ?
-    `, key);
-    
+    `,
+      key
+    );
+
     return result;
   } catch (error) {
     console.error(`Error getting usages for key "${key}":`, error);
@@ -154,13 +164,16 @@ async function getKeyUsages(db, key) {
  */
 async function getKeyComment(db, key) {
   try {
-    const result = await db.get(`
+    const result = await db.get(
+      `
       SELECT kc.comment, kc.is_auto, kc.updated_at
       FROM key_comments kc
       JOIN translation_keys tk ON kc.key_id = tk.id
       WHERE tk.key = ?
-    `, key);
-    
+    `,
+      key
+    );
+
     return result;
   } catch (error) {
     console.error(`Error getting comment for key "${key}":`, error);
@@ -175,12 +188,37 @@ async function getKeyComment(db, key) {
  */
 async function clearKeyUsageData(db) {
   try {
-    await db.run('DELETE FROM key_usages');
+    await db.run("DELETE FROM key_usages");
     // Note: We don't delete from translation_keys or key_comments to preserve user-defined comments
   } catch (error) {
-    console.error('Error clearing key usage data:', error);
+    console.error("Error clearing key usage data:", error);
     throw error;
   }
+}
+
+/**
+ * Gets translation key record from database
+ * @param {Object} db - Database connection
+ * @param {string} key - Translation key
+ * @returns {Promise<Object|null>} - Key record
+ */
+async function getKeyRecord(db, key) {
+  // Get key ID
+  let keyRecord = await db.get(
+    "SELECT id FROM translation_keys WHERE key = ?",
+    key
+  );
+
+  // If key not found and contains namespace, try without namespace
+  if (!keyRecord && key.includes(":")) {
+    const keyWithoutNamespace = key.split(":")[1];
+    keyRecord = await db.get(
+      "SELECT id FROM translation_keys WHERE key = ?",
+      keyWithoutNamespace
+    );
+  }
+
+  return keyRecord;
 }
 
 module.exports = {
@@ -190,5 +228,6 @@ module.exports = {
   setKeyAutoComment,
   getKeyUsages,
   getKeyComment,
-  clearKeyUsageData
+  clearKeyUsageData,
+  getKeyRecord,
 };

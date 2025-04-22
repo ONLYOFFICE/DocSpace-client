@@ -13,6 +13,7 @@ import SearchInput from "./SearchInput";
 import TranslationTableCell from "./TranslationTableCell";
 import TranslationTablePagination from "./TranslationTablePagination";
 import TranslationTableKeyHeader from "./TranslationTableKeyHeader";
+import KeyUsageDetails from "./KeyUsageDetails";
 
 interface TranslationEntry {
   key: string;
@@ -72,6 +73,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   const [isMoveModalOpen, setIsMoveModalOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isFigmaModalOpen, setIsFigmaModalOpen] = useState<boolean>(false);
+  const [isKeyInfoModalOpen, setIsKeyInfoModalOpen] = useState<boolean>(false);
   const [activeKeyPath, setActiveKeyPath] = useState<string>("");
   const [activeTranslationValue, setActiveTranslationValue] =
     useState<string>("");
@@ -349,6 +351,15 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     }
   }, [activeKeyPath, filteredTranslations]);
 
+  // Handle show key info action
+  const handleShowKeyInfo = useCallback(() => {
+    // Close the context menu
+    setContextMenu(null);
+    
+    // Open the key info modal
+    setIsKeyInfoModalOpen(true);
+  }, [activeKeyPath]);
+
   // Submit handlers for key operations
   const handleSubmitRename = async (newKeyPath: string) => {
     console.log("Renaming key:", activeKeyPath, "to", newKeyPath);
@@ -592,6 +603,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
           onMove={handleMoveKey}
           onDelete={handleDeleteKey}
           onFindInFigma={handleFindInFigma}
+          onShowInfo={handleShowKeyInfo}
         />
       )}
 
@@ -624,6 +636,32 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
         translationKey={activeKeyPath}
         translationValue={activeTranslationValue}
       />
+
+      {/* Key Info Modal */}
+      {isKeyInfoModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+              <div>
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Translation Key Details</h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  {`Project: ${projectName || ""}, Key: ${activeKeyPath}`}
+                </p>
+              </div>
+              <button 
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                onClick={() => setIsKeyInfoModalOpen(false)}
+                aria-label="Close dialog"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="p-4 overflow-y-auto flex-grow">
+              <KeyUsageDetails translationKey={activeKeyPath} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

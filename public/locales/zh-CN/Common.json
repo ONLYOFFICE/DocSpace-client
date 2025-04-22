@@ -827,5 +827,12 @@
   "PortalNameLength": "账户名称的长度必须在{{minLength}}至{{maxLength}}个字符之间",
   "PortalNameIncorrect": "账户名称不正确",
   "BackupCreatedSuccess": "备份副本已成功创建。",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "BrandName": "品牌名称",
+  "BrandNameSubtitle": "您的品牌名称将显示在邀请函、通知和其他引用您的{{productName}}名称的地方。",
+  "BrandNameSubtitleMobile": "请输入公司或品牌名称，该名称将显示在通知邮件、导出表格和其他相关资源中。",
+  "AdditionalResourcesSubtitle": "为用户配置显示有用资源的链接。",
+  "BrandingSubtitleMobile": "上传企业logo或通过文本生成，为用户提供品牌化体验。此设置将应用于所有门户界面。",
+  "GenerateLogoLabel": "从文本生成logo",
+  "YourLogo": "您的logo"
 }

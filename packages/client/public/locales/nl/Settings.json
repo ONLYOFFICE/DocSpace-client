@@ -11,7 +11,6 @@
   "AddEmailsWarning": "U heeft geen gebruikers met e-mails. Ga door naar de volgende stap om ze toe te voegen.",
   "AdditionalResources": "Aanvullende bronnen",
   "AdditionalResourcesDescription": "Kies of u links naar aanvullende bronnen in {{productName}} wilt weergeven.",
-  "AdditionalResourcesSubtitle": "Configureer de weergave van links naar nuttige bronnen voor uw gebruikers.",
   "AddTrustedDomain": "Voeg vertrouwd domein toe",
   "Admins": "Beheerders",
   "AdminsMessage": "Beheerder Bericht Instellingen",
@@ -59,10 +58,6 @@
   "Branding": "Branding",
   "BrandingSectionDescription": "Specificeer uw bedrijfsinformatie, voeg links toe naar externe bronnen en e-mailadressen die in de {{productName}} interface worden weergegeven.",
   "BrandingSubtitle": "Gebruik deze optie om gebruikers een on-brand ervaring te bieden.",
-  "BrandingSubtitleMobile": "Upload uw logo of genereer het aan de hand van tekst om uw gebruikers een on-brand ervaring te bieden. Deze instellingen zijn van invloed op al uw portalen.",
-  "BrandName": "Merknaam",
-  "BrandNameSubtitle": "Uw Merknaam zal worden weergegeven in uitnodigingen, meldingen en andere plekken waar naar uw {{productName}} naam wordt verwezen.",
-  "BrandNameSubtitleMobile": "Voer uw bedrijfs- of merknaam in die zal worden weergegeven in meldingen, geëxporteerde spreadsheets en andere bronnen.",
   "BreakpointMobileWarningText": "Dit gedeelte is niet beschikbaar in de mobiele versie",
   "BreakpointMobileWarningTextPrompt": "Gebruik een desktop of tablet om toegang te krijgen tot de <1>{{sectionName}}</1>.",
   "BreakpointSmallText": "Uw venster is te klein om alle inhoud van de pagina weer te geven",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "{{errors}} fouten gevonden",
   "ForcePathStyle": "Forceer Path Style",
   "GenerateLogoButton": "Genereren",
-  "GenerateLogoLabel": "Logo genereren uit tekst",
   "GoogleDriveFiles": "Bestanden op Google Drive",
   "GroupsDescription": "Gebruikers die u in de vorige stap hebt geselecteerd, worden geïmporteerd in groepen die zijn aangemaakt in {{serviceName}}. Groepen verschijnen in het gedeelte {{contactsName}}.",
   "HexCode": "Hexcode",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "De afmetingen zijn weergegeven voor de Retina schermen. Voor beeldschermen met standaardresoluties worden de breedte en hoogte van het logo bij het uploaden dienovereenkomstig aangepast.",
   "WithoutEmailHint": "U heeft geen gebruikers zonder e-mails. Ga door naar de volgende stap.",
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
-  "YourCurrentDomain": "Uw huidige domein",
-  "YourLogo": "Uw logo"
+  "YourCurrentDomain": "Uw huidige domein"
 }

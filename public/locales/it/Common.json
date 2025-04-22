@@ -827,5 +827,12 @@
   "PortalNameLength": "Il nome dell'account deve contenere da {{minLength}} a {{maxLength}} caratteri",
   "PortalNameIncorrect": "Nome account errato",
   "BackupCreatedSuccess": "La copia di backup è stata creata con successo.",
-  "YourTurn": "Il tuo turno"
+  "YourTurn": "Il tuo turno",
+  "BrandName": "Nome del brand",
+  "BrandNameSubtitle": "Il nome del brand verrà mostrato in inviti, notifiche e altri luoghi in cui viene indicato il nome di {{productName}}.",
+  "BrandNameSubtitleMobile": "Inserisci il nome della tua azienda o del tuo brand, che verrà mostrato in notifiche, fogli di calcolo esportati e altre risorse.",
+  "AdditionalResourcesSubtitle": "onfigura la visualizzazione dei collegamenti a risorse utili per i tuoi utenti.",
+  "BrandingSubtitleMobile": "Carica il tuo logo o generane uno da testo per offrire un’esperienza coerente con il brand ai tuoi utenti. Queste impostazioni influenzeranno tutti i tuoi portali.",
+  "GenerateLogoLabel": "Genera logo da testo",
+  "YourLogo": "Il tuo logo"
 }

@@ -819,5 +819,12 @@
   "PortalNameLength": "Ime računa mora imeti dolžino od {{minLength}} do {{maxLength}} znakov",
   "PortalNameIncorrect": "Napačno ime računa",
   "BackupCreatedSuccess": "Varnostna kopija je bila uspešno ustvarjena.",
-  "YourTurn": "Vi ste na vrsti"
+  "YourTurn": "Vi ste na vrsti",
+  "BrandName": "Ime blagovne znamke",
+  "BrandNameSubtitle": "Ime vaše blagovne znamke bo prikazano v vabilih, obvestilih in na drugih mestih, kjer je navedeno vaše ime {{productName}}.",
+  "BrandNameSubtitleMobile": "Vnesite ime vašega podjetja ali blagovne znamke, ki bo prikazano v obvestilih, izvoženih preglednicah in drugih virih.",
+  "AdditionalResourcesSubtitle": "Konfigurirajte prikaz povezav do koristnih virov za vaše uporabnike.",
+  "BrandingSubtitleMobile": "Naložite svoj logotip ali ga ustvarite iz besedila, da svojim uporabnikom zagotovite izkušnjo blagovne znamke. Te nastavitve bodo vplivale na vse vaše portale.",
+  "GenerateLogoLabel": "Ustvari logotip iz besedila",
+  "YourLogo": "Vaš logotip"
 }

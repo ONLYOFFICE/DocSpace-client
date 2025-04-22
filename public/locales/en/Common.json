@@ -288,7 +288,7 @@
   "FromDevice": "From device",
   "FromPortal": "From {{productName}}",
   "FromTemplate": "From template",
-  "FromTemplateRoomInfo": "Create a room based on a template. All settings, folders and files will be taken from the selected room template.",
+  "FromTemplateRoomInfo": "Create a room based on a template. All settings, users, folders and files will be taken from the selected room template.",
   "GeneratePassword": "Generate password",
   "Gigabyte": "GB",
   "GoBack": "Go back",
@@ -811,8 +811,6 @@
   "RestoreBackupWarningText": "{{productName}} will become unavailable during the restore process. After the restore is complete all the changes made after the date of the selected restore point will be lost.",
   "UserAgreement": "I confirm and want to proceed",
   "LocalFile": "Local file",
-  "FromTemplate": "From template",
-  "FromTemplateRoomInfo": "Create a room based on a template. All settings, users, folders and files will be taken from the selected room template.",
   "BrandName": "Brand name",
   "BrandNameSubtitle": "Your Brand name will be displayed in invitations, notifications, and other places where your {{productName}} name is referenced.",
   "BrandNameSubtitleMobile": "Enter your company or brand name which will be displayed in notifications, exported spreadsheets, and other resources.",
@@ -836,5 +834,6 @@
   "PortalNameLength": "The account name must be between {{minLength}} and {{maxLength}} characters long",
   "PortalNameIncorrect": "Incorrect account name",
   "BackupCreatedSuccess": "The backup copy has been successfully created.",
-  "YourTurn": "Your turn"
+  "YourTurn": "Your turn",
+  "AdditionalResourcesSubtitle": "Configure the display of links to helpful resources for your users."
 }

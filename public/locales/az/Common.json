@@ -819,5 +819,12 @@
   "PortalNameLength": "Hesab adı ən az {{minLength}}, ən çox {{maxLength}} işarədən ibarət ola bilər",
   "PortalNameIncorrect": "Yanlış hesab adı",
   "BackupCreatedSuccess": "Ehtiyat nüsxə uğurla yaradıldı.",
-  "YourTurn": "Sizin növbəniz"
+  "YourTurn": "Sizin növbəniz",
+  "BrandName": "Brend adı",
+  "BrandNameSubtitle": "Brend adınız dəvətnamələrdə, bildirişlərdə və adınız {{productName}} qeyd edildiyi digər yerlərdə görünəcək.",
+  "BrandNameSubtitleMobile": "Bildirişlərdə, ixrac edilmiş cədvəllərdə və digər resurslarda görünmək üçün şirkət və ya brend adınızı daxil edin.",
+  "AdditionalResourcesSubtitle": "İstifadəçiləriniz üçün faydalı resurslara keçidlərin görünüşünü konfiqurasiya edin.",
+  "BrandingSubtitleMobile": "İstifadəçilərinizə brend təcrübəsi bəxş etmək üçün loqonu yükləyin və ya mətndən yaradın. Bu parametrlər bütün portallarınıza təsir edəcək.",
+  "GenerateLogoLabel": "Mətndən loqo yaradın",
+  "YourLogo": "Loqonuz"
 }

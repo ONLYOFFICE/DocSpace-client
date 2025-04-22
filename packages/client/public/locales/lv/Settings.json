@@ -11,7 +11,6 @@
   "AddEmailsWarning": "Jums nav lietotāju ar e-pasta ziņojumiem. Pārejiet pie nākamās darbības, lai to pievienotu.",
   "AdditionalResources": "Papildu resursi",
   "AdditionalResourcesDescription": "Izvēlieties, vai vēlaties, lai {{productName}} tiktu parādītas saites uz papildu resursiem.",
-  "AdditionalResourcesSubtitle": "Konfigurējiet lietotājiem noderīgu resursu saišu rādīšanu.",
   "AddTrustedDomain": "Pievienot uzticamu domēnu",
   "Admins": "Administratori",
   "AdminsMessage": "Administratora ziņojumu iestatījumi",
@@ -59,10 +58,6 @@
   "Branding": "Zīmolrade",
   "BrandingSectionDescription": "Norādiet sava uzņēmuma informāciju, pievienojiet saites uz ārējiem resursiem un e-pasta adresēm, kas tiek rādītas {{productName}} interfeisā.",
   "BrandingSubtitle": "Izmantojiet šo opciju, lai lietotājiem nodrošinātu zīmola lietošanas pieredzi.",
-  "BrandingSubtitleMobile": "Augšupielādējiet savu logotipu vai ģenerējiet to no teksta, lai lietotājiem nodrošinātu zīmolam atbilstošu pieredzi. Šie iestatījumi ietekmēs visus jūsu portālus.",
-  "BrandName": "Zīmola nosaukums",
-  "BrandNameSubtitle": "Jūsu zīmola nosaukums tiks parādīts uzaicinājumos, paziņojumos un citās vietās, kur ir atsauce uz jūsu {{productName}} nosaukumu.",
-  "BrandNameSubtitleMobile": "Ievadiet savu uzņēmuma vai zīmola nosaukumu, kas tiks parādīts paziņojumos, eksportētajās izklājlapās un citos resursos.",
   "BreakpointMobileWarningText": "Šī sadaļa nav pieejama mobilajā versijā",
   "BreakpointMobileWarningTextPrompt": "Izmantojiet datoru vai planšetdatoru, lai piekļūtu <1>{{sectionName}}</1>.",
   "BreakpointSmallText": "Jūsu logs ir pārāk mazs, lai parādītu visu lapas saturu",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "tika atrasta (-s){{errors}} kļūda (-s)",
   "ForcePathStyle": "Uzspiest ceļa stilu",
   "GenerateLogoButton": "Ģenerēt",
-  "GenerateLogoLabel": "Ģenerēt logotipu no teksta",
   "GoogleDriveFiles": "Google Drive faili",
   "GroupsDescription": "Lietotāji, kurus atlasījāt iepriekšējā darbībā, tiks importēti grupās, kas izveidotas {{serviceName}}. Grupas tiks parādītas sadaļā {{contactsName}}.",
   "HexCode": "Heksadecimālais kods",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Izmēri ir parādīti Retina displejiem. Logotipa platuma un augstuma izmēri standarta izšķirtspējas displejiem pēc augšupielādes tiks atbilstoši mainīti.",
   "WithoutEmailHint": "Jums nav lietotāju bez e-pasta ziņojumiem. Turpiniet ar nākamo darbību.",
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
-  "YourCurrentDomain": "Jūsu pašreizējais domēns",
-  "YourLogo": "Jūsu logotips"
+  "YourCurrentDomain": "Jūsu pašreizējais domēns"
 }

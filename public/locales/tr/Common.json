@@ -819,5 +819,12 @@
   "PortalNameLength": "Hesap adı {{minLength}} ila {{maxLength}} karakter uzunluğunda olmalıdır",
   "PortalNameIncorrect": "Yanlış hesap adı",
   "BackupCreatedSuccess": "Yedekleme kopyası başarıyla oluşturuldu.",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "BrandName": "Marka adı",
+  "BrandNameSubtitle": "Marka adınız, davetlerde, bildirimlerde ve {{productName}} adının yer aldığı diğer alanlarda gösterilecektir.",
+  "BrandNameSubtitleMobile": "Bildirimlerde, dışa aktarılan tablolar ve diğer kaynaklarda gösterilecek şirket veya marka adınızı girin.",
+  "AdditionalResourcesSubtitle": "Kullanıcılarınız için yararlı kaynaklara yönelik bağlantıların görünümünü yapılandırın.",
+  "BrandingSubtitleMobile": "Kullanıcılara markanıza uygun bir deneyim sunmak için logonuzu yükleyin veya metinden oluşturun. Bu ayarlar tüm portallarınızı etkiler.",
+  "GenerateLogoLabel": "Metinden logo oluştur",
+  "YourLogo": "Logonuz"
 }

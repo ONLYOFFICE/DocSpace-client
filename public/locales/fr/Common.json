@@ -817,5 +817,12 @@
   "PortalNameLength": "Le nom du compte doit comporter entre {{minLength}} et {{maxLength}} caractères",
   "PortalNameIncorrect": "Nom de compte incorrect",
   "BackupCreatedSuccess": "La copie de sauvegarde a été créée avec succès.",
-  "YourTurn": "Votre tour"
+  "YourTurn": "Votre tour",
+  "BrandName": "Nom de marque",
+  "BrandNameSubtitle": "Votre nom de marque sera affiché dans les invitations, les notifications et les autres endroits où votre nom {{productName}} est référencé.",
+  "BrandNameSubtitleMobile": "Saisissez le nom de votre entreprise ou de votre marque, qui sera affiché dans les notifications, les feuilles de calcul exportées et d'autres ressources.",
+  "AdditionalResourcesSubtitle": "Configurez l'affichage de liens vers des ressources utiles pour vos utilisateurs.",
+  "BrandingSubtitleMobile": "Téléchargez votre logo ou générez-le à partir d'un texte pour offrir une expérience de marque à vos utilisateurs. Ces paramètres s'appliquent à tous vos portails.",
+  "GenerateLogoLabel": "Générer un logo à partir d'un texte",
+  "YourLogo": "Votre logo"
 }

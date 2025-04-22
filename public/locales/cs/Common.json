@@ -819,5 +819,12 @@
   "PortalNameLength": "Název účtu musí mít délku od {{minLength}} do {{maxLength}} znaků",
   "PortalNameIncorrect": "Nesprávný název účtu",
   "BackupCreatedSuccess": "Kopie zálohy byla úspěšně vytvořena.",
-  "YourTurn": "Jste na řadě"
+  "YourTurn": "Jste na řadě",
+  "BrandName": "Název značky",
+  "BrandNameSubtitle": "Název vaší značky se bude zobrazovat v pozvánkách, oznámeních a na dalších místech, kde se odkazuje na váš název {{productName}}.",
+  "BrandNameSubtitleMobile": "Zadejte název své společnosti nebo značky, který se bude zobrazovat na v oznámeních, exportovaných tabulkách a dalších zdrojích.",
+  "AdditionalResourcesSubtitle": "Konfigurace zobrazení odkazů na užitečné zdroje pro uživatele.",
+  "BrandingSubtitleMobile": "Nahrajte své logo nebo jej vygenerujte z textu a poskytněte uživatelům zážitek s ohledem na značku. Tato nastavení ovlivní všechny vaše portály.",
+  "GenerateLogoLabel": "Generování loga z textu",
+  "YourLogo": "Vaše logo"
 }

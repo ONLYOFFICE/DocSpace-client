@@ -11,7 +11,6 @@
   "AddEmailsWarning": "이메일이 있는 사용자가 없습니다. 이메일이 있는 사용자를 추가하려면 다음 단계를 진행하세요.",
   "AdditionalResources": "추가 리소스",
   "AdditionalResourcesDescription": "{{productName}}의 추가 리소스 링크 표시 여부를 선택하세요.",
-  "AdditionalResourcesSubtitle": "사용자를 위한 유용한 리소스에 대한 링크 표시를 구성하세요.",
   "AddTrustedDomain": "신뢰할 수있는 도메인을 추가",
   "Admins": "관리자",
   "AdminsMessage": "관리자 메시지 설정",
@@ -59,10 +58,6 @@
   "Branding": "브랜딩",
   "BrandingSectionDescription": "회사 정보를 지정하고 {{productName}} 인터페이스 내에 표시되는 이메일 주소 및 외부 리소스에 대한 링크를 추가하세요.",
   "BrandingSubtitle": "사용자에게 브랜드 경험을 제공하려면 이 옵션을 사용하세요.",
-  "BrandingSubtitleMobile": "로고를 업로드하거나 텍스트에서 로고를 생성하여 사용자에게 브랜드 경험을 제공하세요. 이러한 설정은 모든 포털에 적용됩니다.",
-  "BrandName": "브랜드 이름",
-  "BrandNameSubtitle": "브랜드 이름은 초대장, 알림 및 {{productName}} 이름이 참조되는 기타 위치에 표시됩니다.",
-  "BrandNameSubtitleMobile": "알림, 내보내기한 스프레드시트 및 기타 리소스에 표시될 회사 또는 브랜드 이름을 입력하세요.",
   "BreakpointMobileWarningText": "이 섹션은 모바일 버전에서 이용할 수 없습니다",
   "BreakpointMobileWarningTextPrompt": "<1>{{sectionName}}</1>에 액세스하려면 데스크톱이나 태블릿을 사용하세요.",
   "BreakpointSmallText": "창이 너무 작아 모든 페이지 콘텐츠를 표시할 수 없습니다",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "{{errors}}개의 오류가 발견되었습니다",
   "ForcePathStyle": "경로 스타일 강제",
   "GenerateLogoButton": "생성",
-  "GenerateLogoLabel": "텍스트에서 로고 생성",
   "GoogleDriveFiles": "Google Drive의 파일",
   "GroupsDescription": "이전 단계에서 선택한 사용자가 {{serviceName}}에서 생성한 그룹으로 가져오기됩니다. 그룹은 {{contactsName}} 섹션에 표시됩니다.",
   "HexCode": "헥스 코드",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "크기는 Retina 디스플레이용으로 표시됩니다. 표준 해상도를 사용하는 디스플레이의 경우 로고 너비와 높이는 업로드 시 그에 따라 크기가 조정됩니다.",
   "WithoutEmailHint": "이메일이 없는 사용자가 없습니다. 다음 단계를 진행하세요.",
   "YouHaveUnsavedChanges": "저장하지 않은 변경 사항이 있습니다",
-  "YourCurrentDomain": "내 현재 도메인",
-  "YourLogo": "로고"
+  "YourCurrentDomain": "내 현재 도메인"
 }

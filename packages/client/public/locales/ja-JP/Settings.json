@@ -11,7 +11,6 @@
   "AddEmailsWarning": "メールアドレスを持つユーザーがいません。次のステップに進んで追加してください。",
   "AdditionalResources": "追加リソース",
   "AdditionalResourcesDescription": "{{productName}}に追加リソースへのリンクを表示するかどうかを選択してください。",
-  "AdditionalResourcesSubtitle": "ユーザーに役立つリソースへのリンクの表示を設定します。",
   "AddTrustedDomain": "信頼されたドメインを追加",
   "Admins": "管理者",
   "AdminsMessage": "管理者メッセージの設定",
@@ -59,10 +58,6 @@
   "Branding": "ブランディング",
   "BrandingSectionDescription": "{{productName}}のインターフェイス内に表示される企業情報、外部リソースへのリンク、メールアドレスの追加を指定してください。",
   "BrandingSubtitle": "このオプションを使用すると、ユーザーにオンブランドのエクスペリエンスを提供することができます。",
-  "BrandingSubtitleMobile": "ロゴをアップロードするか、テキストから生成して、ユーザーにブランドに合った体験を提供してください。これらの設定は、すべてのポータルに影響を与えます。",
-  "BrandName": "ブランド名",
-  "BrandNameSubtitle": "あなたのブランド名は、招待状、通知、およびあなたの {{productName}} 名が参照される他の場所に表示されます。",
-  "BrandNameSubtitleMobile": "通知、エクスポートされたスプレッドシート、およびその他のリソースに表示される会社名またはブランド名を入力してください。",
   "BreakpointMobileWarningText": "このセクションはモバイル版ではご利用いただけません",
   "BreakpointMobileWarningTextPrompt": "デスクトップまたはタブレットで<1>{{sectionName}}</1>にアクセスしてください。",
   "BreakpointSmallText": "ウィンドウが小さいため、すべてのコンテンツが表示されない場合があります",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "{{errors}} エラーが見つかりました",
   "ForcePathStyle": "強制パススタイル",
   "GenerateLogoButton": "生成",
-  "GenerateLogoLabel": "テキストからロゴを生成",
   "GoogleDriveFiles": "Googleドライブのファイル",
   "GroupsDescription": "前のステップで選択したユーザーは、{{serviceName}}で作成されたグループにインポートされます。グループは{{contactsName}}セクションに表示されます。",
   "HexCode": "HEXコード",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "サイズはRetinaディスプレイ用に表示されています。標準的な解像度のディスプレイの場合、ロゴの幅と高さはアップロード時に適宜リサイズされます。",
   "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。",
   "YouHaveUnsavedChanges": "未保存変更はあります。",
-  "YourCurrentDomain": "現在お使いのドメイン",
-  "YourLogo": "あなたのロゴ"
+  "YourCurrentDomain": "現在お使いのドメイン"
 }

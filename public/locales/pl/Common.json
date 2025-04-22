@@ -819,5 +819,12 @@
   "PortalNameLength": "Nazwa konta musi zawierać od {{minLength}} do {{maxLength}} znaków",
   "PortalNameIncorrect": "Nieprawidłowa nazwa konta",
   "BackupCreatedSuccess": "Kopia zapasowa została pomyślnie utworzona.",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "BrandName": "Nazwa marki",
+  "BrandNameSubtitle": "Nazwa Twojej marki będzie wyświetlana w zaproszeniach, powiadomieniach i innych miejscach, gdzie występuje nazwa {{productName}}.",
+  "BrandNameSubtitleMobile": "Wpisz nazwę swojej firmy lub marki, która będzie wyświetlana w powiadomieniach, wyeksportowanych arkuszach kalkulacyjnych oraz innych zasobach.",
+  "AdditionalResourcesSubtitle": "Skonfiguruj wyświetlanie linków do przydatnych zasobów dla użytkowników.",
+  "BrandingSubtitleMobile": "Prześlij swoje logo lub wygeneruj je z tekstu, aby  pokazywać użytkownikom branding marki. Ustawienia te zostaną zastosowane na wszystkich Twoich portalach.",
+  "GenerateLogoLabel": "Wygeneruj logo z tekstu",
+  "YourLogo": "Twoje Logo"
 }

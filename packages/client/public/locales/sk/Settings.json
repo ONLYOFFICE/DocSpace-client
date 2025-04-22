@@ -11,7 +11,6 @@
   "AddEmailsWarning": "Nemáte používateľov, ktorí majú uvedený e-mail. Prejdite na ďalší krok a pridajte ich.",
   "AdditionalResources": "Dodatočné zdroje",
   "AdditionalResourcesDescription": "Vyberte, či chcete v časti {{productName}} zobraziť odkazy na ďalšie zdroje.",
-  "AdditionalResourcesSubtitle": "Nastavte zobrazovanie odkazov na užitočné zdroje pre vašich používateľov.",
   "AddTrustedDomain": "Pridať dôveryhodnú doménu",
   "Admins": "Administrátori",
   "AdminsMessage": "Nastavenia správ administrátora",
@@ -59,10 +58,6 @@
   "Branding": "Branding",
   "BrandingSectionDescription": "Zadajte informácie o vašej spoločnosti, pridajte odkazy na externé zdroje a e-mailové adresy zobrazené v rozhraní {{productName}}.",
   "BrandingSubtitle": "Toto nastavenie použite, ak chcete používateľom poskytnúť zážitok zo značky.",
-  "BrandingSubtitleMobile": "Nahrajte svoje logo alebo ho vygenerujte z textu, aby ste používateľom poskytli on-brand zážitok. Tieto nastavenia ovplyvnia všetky vaše portály.",
-  "BrandName": "Názov značky",
-  "BrandNameSubtitle": "Názov vašej značky sa bude zobrazovať v pozvánkach, oznámeniach a na ďalších miestach, kde sa odkazuje na názov vášho {{productName}}.",
-  "BrandNameSubtitleMobile": "Zadajte názov svojej spoločnosti alebo značky, ktorý sa bude zobrazovať v oznámeniach, exportovaných tabuľkách a iných zdrojoch.",
   "BreakpointMobileWarningText": "Táto časť nie je dostupná v mobilnej verzii",
   "BreakpointMobileWarningTextPrompt": "Na prístup k <1>{{sectionName}}</1> prosím použite počítač alebo tablet.",
   "BreakpointSmallText": "Vaše okno je príliš malé na zobrazenie celého obsahu stránky",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "{{errors}} chýb nájdených",
   "ForcePathStyle": "Zapnúť Path-Style",
   "GenerateLogoButton": "Generovať",
-  "GenerateLogoLabel": "Generovať logo z textu",
   "GoogleDriveFiles": "Súbory Google Disk",
   "GroupsDescription": "Používatelia, ktorých ste vybrali v predchádzajúcom kroku, budú importovaní do skupín vytvorených v {{serviceName}}. Skupiny sa zobrazia v časti {{contactsName}}.",
   "HexCode": "Hex kód",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Rozmery sú pre Retina obrazovky. Pri obrazovkách so štandardným rozlíšením sa šírka a výška loga prispôsobí pri načítaní.",
   "WithoutEmailHint": "Nemáte používateľov bez zadaného e-mailu. Pokračujte na ďalší krok.",
   "YouHaveUnsavedChanges": "Máte neuložené zmeny",
-  "YourCurrentDomain": "Vaša aktuálna doména",
-  "YourLogo": "Vaše logo"
+  "YourCurrentDomain": "Vaša aktuálna doména"
 }

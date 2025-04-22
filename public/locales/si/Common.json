@@ -594,5 +594,6 @@
   "PortalNameEmpty": "ගිණුමේ නම හිස්ය",
   "PortalNameLength": "ගිණුමේ නම අකුරු {{minLength}} සහ {{maxLength}} අතර විය යුතුය",
   "PortalNameIncorrect": "ගිණුමේ නම වැරදිය",
-  "BackupCreatedSuccess": "උපස්ථ පිටපත සාර්ථකව සාදා ඇත."
+  "BackupCreatedSuccess": "උපස්ථ පිටපත සාර්ථකව සාදා ඇත.",
+  "AdditionalResourcesSubtitle": "ඔබගේ පරිශ්‍රීලකයින්ට ප්‍රයෝජනවත් සම්පත් වෙත සබැඳි පෙන්වීම වින්‍යාස කරන්න."
 }

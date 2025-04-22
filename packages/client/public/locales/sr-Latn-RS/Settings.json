@@ -11,7 +11,6 @@
   "AddEmailsWarning": "Nemate korisnike sa email-om. Molimo pređite na sledeći korak da ih dodate.",
   "AdditionalResources": "Dodatni resursi",
   "AdditionalResourcesDescription": "Izaberite da li želite da prikažete linkove ka dodatnim resursima u okviru {{productName}}.",
-  "AdditionalResourcesSubtitle": "Konfigurišite prikaz linkova ka korisnim resursima za vaše korisnike.",
   "AddTrustedDomain": "Dodajte pouzdani domen",
   "Admins": "Administratori",
   "AdminsMessage": "Podešavanja poruka administratora",
@@ -59,10 +58,6 @@
   "Branding": "Brendiranje",
   "BrandingSectionDescription": "Navedite informacije o vašoj kompaniji, dodajte linkove ka spoljnim resursima i email adrese prikazane u okviru {{productName}} interfejsa.",
   "BrandingSubtitle": "Koristite ovu opciju da biste korisnicima pružili iskustvo sa brendom.",
-  "BrandingSubtitleMobile": "Otpremite svoj logo ili ga generišite iz teksta kako biste korisnicima pružili iskustvo u skladu sa vašim brendom. Ova podešavanja će uticati na sve vaše portale.",
-  "BrandName": "Naziv brenda",
-  "BrandNameSubtitle": "Naziv vašeg brenda će biti prikazan u pozivnicama, obaveštenjima i drugim mestima gde se pominje naziv {{productName}}.",
-  "BrandNameSubtitleMobile": "Unesite ime vaše kompanije ili brenda koje će biti prikazano u obaveštenjima, eksportovanim tabelama i drugim resursima.",
   "BreakpointMobileWarningText": "Ovaj odeljak je nedostupan u mobilnoj verziji",
   "BreakpointMobileWarningTextPrompt": "Molimo koristite desktop ili tablet da pristupite <1>{{sectionName}}</1>.",
   "BreakpointSmallText": "Vaš prozor je previše mali da prikaže sav sadržaj stranica",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "{{errors}} greške su pronađene",
   "ForcePathStyle": "Prisili Stil putanje",
   "GenerateLogoButton": "Generiši",
-  "GenerateLogoLabel": "Generiši logo iz teksta",
   "GoogleDriveFiles": "Fajlovi na Google Drive-u",
   "GroupsDescription": "Korisnici koje ste odabrali u prethodnom koraku biće uvezeni u grupe kreirane u {{serviceName}}. Grupe će se pojaviti u odeljku {{contactsName}}.",
   "HexCode": "Hex kod",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Veličine su prikazane za Retina ekrane. Za ekrane sa standardnim rezolucijama, širina i visina logotipa će biti automatski prilagođene prilikom otpremanja.",
   "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak.",
   "YouHaveUnsavedChanges": "Imate nesačuvane promene",
-  "YourCurrentDomain": "Vaš trenutni domen",
-  "YourLogo": "Vaš logo"
+  "YourCurrentDomain": "Vaš trenutni domen"
 }

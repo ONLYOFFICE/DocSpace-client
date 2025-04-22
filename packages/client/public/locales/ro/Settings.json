@@ -11,7 +11,6 @@
   "AddEmailsWarning": "Nu aveți utilizatori cu adrese de e-mail. Treceți la etapa următoare pentru a le adăuga.",
   "AdditionalResources": "Resurse suplimentare",
   "AdditionalResourcesDescription": "Alegeţi dacă doriţi să afişaţi linkurile către resurse suplimentare în {{productName}}.",
-  "AdditionalResourcesSubtitle": "Configurați modul de afișare a linkurilor către resurse utile pentru utilizatorii dvs.",
   "AddTrustedDomain": "Adăugare domeniu de încredere",
   "Admins": "Administratori",
   "AdminsMessage": "Setări mesagerie de administrator",
@@ -59,10 +58,6 @@
   "Branding": "Branding",
   "BrandingSectionDescription": "Specificaţi informaţiile despre compania dumneavoastră, adăugaţi linkuri către resurse externe şi adrese de email care trebuie afişate în interfaţa {{productName}}.",
   "BrandingSubtitle": "Utilizaţi această opţiune pentru a oferi utilizatorilor o experienţă de creştere a implicării şi de conştientizare a mărcii.",
-  "BrandingSubtitleMobile": "Încărcați logo-ul dvs. sau generați unul din text pentru a oferi utilizatorilor dvs o experientă de creștere a implicării şi de conștientizare a mărcii. Aceste setări vor afecta toate portalurile dvs.",
-  "BrandName": "Nume de marcă",
-  "BrandNameSubtitle": "Numele de marcă dvs. va fi afișat în invitații, notificări și în alte locuri în care se face referire la numele dvs. {{productName}}.",
-  "BrandNameSubtitleMobile": "Introduceți numele de companie sau de marcă dvs., care va fi afișat în notificări, în foile de calcul exportate și în alte materiale.",
   "BreakpointMobileWarningText": "Această secţiune nu este disponibilă în versiunea mobilă.",
   "BreakpointMobileWarningTextPrompt": "Utilizaţi desktopul sau tabletă pentru a accesa <1>{{sectionName}}</1>.",
   "BreakpointSmallText": "Fereastra este prea mică pentru întregul conținut al paginii.",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "{{errors}} de erori au fost găsite",
   "ForcePathStyle": "Tip cale forțat",
   "GenerateLogoButton": "Generare",
-  "GenerateLogoLabel": "Generare logo din text",
   "GoogleDriveFiles": "Fișiere din Google Drive",
   "GroupsDescription": "Utilizatorii pe care i-ați selectat  în etapa anterioară vor fi importați în grupurile create în {{serviceName}}. Grupurile vor fi afișate în secțiunea {{contactsName}}.",
   "HexCode": "Cod hexa",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Dimensiunile sunt specificate pentru ecranele Retina. Pentru rezoluţie de ecran standard, lăţimea şi înălţimea siglei se scalează corespunzător la încărcare.",
   "WithoutEmailHint": "Nu aveți utilizatori fără adrese e-mail. Treceți la etapa următoare.",
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
-  "YourCurrentDomain": "Domeniul dvs. actual",
-  "YourLogo": "Logo-ul dvs"
+  "YourCurrentDomain": "Domeniul dvs. actual"
 }

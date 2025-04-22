@@ -11,7 +11,6 @@
   "AddEmailsWarning": "Você não tem usuários com e-mails. Prossiga para a próxima etapa para adicioná-los.",
   "AdditionalResources": "Recursos adicionais",
   "AdditionalResourcesDescription": "Escolha se deseja exibir links para recursos adicionais em {{productName}}.",
-  "AdditionalResourcesSubtitle": "Configure a exibição de links para recursos úteis para seus usuários.",
   "AddTrustedDomain": "Adicionar domínio confiável",
   "Admins": "Administradores",
   "AdminsMessage": "Configurações de mensagem do administrador",
@@ -59,10 +58,6 @@
   "Branding": "Marca",
   "BrandingSectionDescription": "Especifique as informações da sua empresa, adicione links para recursos externos e endereços de e-mail exibidos na interface do {{productName}}.",
   "BrandingSubtitle": "Use esta opção para fornecer experiência on-brand aos usuários.",
-  "BrandingSubtitleMobile": "Carregue seu logotipo ou gere-o a partir de texto para fornecer experiência de marca aos seus usuários. Essas configurações afetarão todos os seus portais.",
-  "BrandName": "Nome da marca",
-  "BrandNameSubtitle": "O nome da sua marca será exibido em convites, notificações e outros lugares onde seu nome {{productName}} for referenciado.",
-  "BrandNameSubtitleMobile": "Insira o nome da sua empresa ou marca que será exibido em notificações, planilhas exportadas e outros recursos.",
   "BreakpointMobileWarningText": "Esta seção não está disponível na versão móvel",
   "BreakpointMobileWarningTextPrompt": "Use o desktop ou tablet para acessar <1>{{sectionName}}</1>.",
   "BreakpointSmallText": "Sua janela é muito pequena para exibir todo o conteúdo da página",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "{{errors}} erros foram encontrados",
   "ForcePathStyle": "Estilo de Caminho de Força",
   "GenerateLogoButton": "Gerar",
-  "GenerateLogoLabel": "Gerar logotipo a partir do texto",
   "GoogleDriveFiles": "Arquivos do Google Drive",
   "GroupsDescription": "Os usuários selecionados na etapa anterior serão importados para grupos criados em {{serviceName}}. Os grupos aparecerão na seção {{contactsName}}.",
   "HexCode": "Código hexadecimal",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Os tamanhos são mostrados para as telas Retina. Para os monitores com resoluções padrão, a largura e a altura do logotipo serão redimensionadas de acordo com o upload.",
   "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
   "YouHaveUnsavedChanges": "Você tem mudanças não salvas",
-  "YourCurrentDomain": "Seu domínio atual",
-  "YourLogo": "Seu logotipo"
+  "YourCurrentDomain": "Seu domínio atual"
 }

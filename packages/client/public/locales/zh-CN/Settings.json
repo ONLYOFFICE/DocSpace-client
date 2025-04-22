@@ -11,7 +11,6 @@
   "AddEmailsWarning": "您没有拥有电子邮件的用户。请继续执行下一步添加。",
   "AdditionalResources": "额外资源",
   "AdditionalResourcesDescription": "选择是否要在{{productName}}中显示指向其他资源的链接。",
-  "AdditionalResourcesSubtitle": "为用户配置显示有用资源的链接。",
   "AddTrustedDomain": "添加受信任的域名",
   "Admins": "管理员",
   "AdminsMessage": "管理员消息设置",
@@ -59,10 +58,6 @@
   "Branding": "品牌",
   "BrandingSectionDescription": "指定您的公司信息，添加{{productName}}界面中显示的外部资源链接和电子邮件地址。",
   "BrandingSubtitle": "为用户提供更好的品牌体验",
-  "BrandingSubtitleMobile": "上传企业logo或通过文本生成，为用户提供品牌化体验。此设置将应用于所有门户界面。",
-  "BrandName": "品牌名称",
-  "BrandNameSubtitle": "您的品牌名称将显示在邀请函、通知和其他引用您的{{productName}}名称的地方。",
-  "BrandNameSubtitleMobile": "请输入公司或品牌名称，该名称将显示在通知邮件、导出表格和其他相关资源中。",
   "BreakpointMobileWarningText": "此部分在移动版本中不可用",
   "BreakpointMobileWarningTextPrompt": "请使用桌面或平板电脑访问<1>{{sectionName}}</1>。",
   "BreakpointSmallText": "您的窗口太小，无法显示页面的所有内容",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "发现 {{errors}} 个错误",
   "ForcePathStyle": "力路风格",
   "GenerateLogoButton": "生成",
-  "GenerateLogoLabel": "从文本生成logo",
   "GoogleDriveFiles": "Google Drive 文件",
   "GroupsDescription": "您在前一步选择的用户将被导入到在{{serviceName}}中创建的群组。这些群组将显示在{{contactsName}}部分。",
   "HexCode": "十六进制代码",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "该尺寸将针对 Retina 屏幕进行显示。对于标准分辨率的显示器，徽标宽度和高度将在上传时相应调整。",
   "WithoutEmailHint": "的用户全部拥有电子邮件。请继续执行下一步。",
   "YouHaveUnsavedChanges": "您有未保存的变更",
-  "YourCurrentDomain": "您当前的域",
-  "YourLogo": "您的logo"
+  "YourCurrentDomain": "您当前的域"
 }

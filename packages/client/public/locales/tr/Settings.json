@@ -11,7 +11,6 @@
   "AddEmailsWarning": "E-postası olan kullanıcılarınız yok. Lütfen onları eklemek için bir sonraki adıma geçin.",
   "AdditionalResources": "Ek kaynaklar",
   "AdditionalResourcesDescription": "{{productName}} içinde ek kaynaklara ait bağlantıları görüntülemek isteyip istemediğinizi seçin.",
-  "AdditionalResourcesSubtitle": "Kullanıcılarınız için yararlı kaynaklara yönelik bağlantıların görünümünü yapılandırın.",
   "AddTrustedDomain": "Güvenilen alan adı ekle",
   "Admins": "Yöneticiler",
   "AdminsMessage": "Yönetici Mesajı Ayarları",
@@ -59,10 +58,6 @@
   "Branding": "Markalaşma",
   "BrandingSectionDescription": "Şirket bilgilerinizi belirtin, {{productName}} arayüzünde görüntülenen harici kaynaklara ve e-posta adreslerine bağlantılar ekleyin.",
   "BrandingSubtitle": "Kullanıcılara markayla ilgili deneyim sağlamak için bu seçeneği kullanın.",
-  "BrandingSubtitleMobile": "Kullanıcılara markanıza uygun bir deneyim sunmak için logonuzu yükleyin veya metinden oluşturun. Bu ayarlar tüm portallarınızı etkiler.",
-  "BrandName": "Marka adı",
-  "BrandNameSubtitle": "Marka adınız, davetlerde, bildirimlerde ve {{productName}} adının yer aldığı diğer alanlarda gösterilecektir.",
-  "BrandNameSubtitleMobile": "Bildirimlerde, dışa aktarılan tablolar ve diğer kaynaklarda gösterilecek şirket veya marka adınızı girin.",
   "BreakpointMobileWarningText": "Bu bölüm mobil sürümde kullanılamıyor",
   "BreakpointMobileWarningTextPrompt": "<1>{{sectionName}}</1> bölümüne erişmek için lütfen masaüstü veya tablet kullanın.",
   "BreakpointSmallText": "Pencereniz tüm sayfa içeriğini görüntülemek için çok küçük",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "{{errors}} hata bulundu",
   "ForcePathStyle": "Zorla Yol Stili",
   "GenerateLogoButton": "Oluştur",
-  "GenerateLogoLabel": "Metinden logo oluştur",
   "GoogleDriveFiles": "Google Drive Dosyaları",
   "GroupsDescription": "Önceki adımda seçtiğiniz kullanıcılar {{serviceName}} içinde oluşturulan gruplara aktarılacaktır. Gruplar {{contactsName}} bölümünde görünecektir.",
   "HexCode": "Onaltılık kod",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Boyutlar Retina ekranlar için gösterilmiştir. Standart çözünürlüğe sahip ekranlar için logo genişliği ve yüksekliği yükleme sırasında uygun şekilde yeniden boyutlandırılacaktır.",
   "WithoutEmailHint": "E-postası olmayan kullanıcınız yok. Lütfen bir sonraki adıma geçin.",
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
-  "YourCurrentDomain": "Mevcut alanınız",
-  "YourLogo": "Logonuz"
+  "YourCurrentDomain": "Mevcut alanınız"
 }

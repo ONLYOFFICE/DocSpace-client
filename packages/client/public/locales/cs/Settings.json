@@ -11,7 +11,6 @@
   "AddEmailsWarning": "Nemáte uživatele s e-maily. Přejděte k dalšímu kroku a přidejte je.",
   "AdditionalResources": "Další zdroje",
   "AdditionalResourcesDescription": "Zvolte, zda chcete zobrazit odkazy na další zdroje v {{productName}}.",
-  "AdditionalResourcesSubtitle": "Konfigurace zobrazení odkazů na užitečné zdroje pro uživatele.",
   "AddTrustedDomain": "Přidat důvěryhodné domény",
   "Admins": "Administrátoři",
   "AdminsMessage": "Nastavení zpráv administrátora",
@@ -59,10 +58,6 @@
   "Branding": "Branding",
   "BrandingSectionDescription": "Zadejte informace o své společnosti, přidejte odkazy na externí zdroje a e-mailové adresy zobrazené v rozhraní {{productName}}.",
   "BrandingSubtitle": "Tuto možnost použijte, abyste uživatelům poskytli zážitek na úrovni značky.",
-  "BrandingSubtitleMobile": "Nahrajte své logo nebo jej vygenerujte z textu a poskytněte uživatelům zážitek s ohledem na značku. Tato nastavení ovlivní všechny vaše portály.",
-  "BrandName": "Název značky",
-  "BrandNameSubtitle": "Název vaší značky se bude zobrazovat v pozvánkách, oznámeních a na dalších místech, kde se odkazuje na váš název {{productName}}.",
-  "BrandNameSubtitleMobile": "Zadejte název své společnosti nebo značky, který se bude zobrazovat na v oznámeních, exportovaných tabulkách a dalších zdrojích.",
   "BreakpointMobileWarningText": "Tato sekce není v mobilní verzi dostupná.",
   "BreakpointMobileWarningTextPrompt": "Pro přístup k <1>{{sectionName}}</1> použijte prosím stolní počítač nebo tablet.",
   "BreakpointSmallText": "Vaše okno je příliš malé na zobrazení celého obsahu stránky",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "bylo nalezeno {{errors}} chyb",
   "ForcePathStyle": "Vynutit styl cesty",
   "GenerateLogoButton": "Generovat",
-  "GenerateLogoLabel": "Generování loga z textu",
   "GoogleDriveFiles": "Soubory na Disku Google",
   "GroupsDescription": "Uživatelé, které jste vybrali v předchozím kroku, budou importováni do skupin vytvořených v {{serviceName}}. Skupiny se zobrazí v sekci {{contactsName}}.",
   "HexCode": "Hexadecimální kód",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Velikosti jsou uvedeny pro displeje Retina. U displejů se standardním rozlišením se šířka a výška loga při nahrávání odpovídajícím způsobem změní.",
   "WithoutEmailHint": "Bez e-mailů nemáte uživatele. Přejděte k dalšímu kroku.",
   "YouHaveUnsavedChanges": "Máte neuložené změny",
-  "YourCurrentDomain": "Vaše aktuální doména",
-  "YourLogo": "Vaše logo"
+  "YourCurrentDomain": "Vaše aktuální doména"
 }

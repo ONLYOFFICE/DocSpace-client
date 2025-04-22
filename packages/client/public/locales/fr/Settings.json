@@ -11,7 +11,6 @@
   "AddEmailsWarning": "Il n'y a aucun utilisateur avec l'adresse e-mail.  Veuillez passer à l'étape suivante pour les ajouter.",
   "AdditionalResources": "Ressources supplémentaires",
   "AdditionalResourcesDescription": "Indiquez si vous souhaitez afficher des liens vers des ressources supplémentaires dans {{productName}}.",
-  "AdditionalResourcesSubtitle": "Configurez l'affichage de liens vers des ressources utiles pour vos utilisateurs.",
   "AddTrustedDomain": "Ajouter domaine autorisé",
   "Admins": "Administrateurs",
   "AdminsMessage": "Paramètres des messages de l’administrateur",
@@ -59,10 +58,6 @@
   "Branding": "Personnalisation",
   "BrandingSectionDescription": "Précisez les informations relatives à votre entreprise, ajoutez des liens vers des ressources externes et des adresses e-mail affichées dans l’interface de {{productName}}.",
   "BrandingSubtitle": "Utilisez cette option pour offrir aux utilisateurs une expérience conforme à la marque.",
-  "BrandingSubtitleMobile": "Téléchargez votre logo ou générez-le à partir d'un texte pour offrir une expérience de marque à vos utilisateurs. Ces paramètres s'appliquent à tous vos portails.",
-  "BrandName": "Nom de marque",
-  "BrandNameSubtitle": "Votre nom de marque sera affiché dans les invitations, les notifications et les autres endroits où votre nom {{productName}} est référencé.",
-  "BrandNameSubtitleMobile": "Saisissez le nom de votre entreprise ou de votre marque, qui sera affiché dans les notifications, les feuilles de calcul exportées et d'autres ressources.",
   "BreakpointMobileWarningText": "Cette section n’est pas disponible dans la version mobile",
   "BreakpointMobileWarningTextPrompt": "Veuillez utiliser un PC ou une tablette pour accéder à la section <1>{{sectionName}}</1>.",
   "BreakpointSmallText": "Votre fenêtre est trop petite pour afficher tout le contenu de la page",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "{{errors}} erreurs ont été détectées",
   "ForcePathStyle": "Force le style de chemin",
   "GenerateLogoButton": "Générer",
-  "GenerateLogoLabel": "Générer un logo à partir d'un texte",
   "GoogleDriveFiles": "Fichiers de Google Drive",
   "GroupsDescription": "Les utilisateurs que vous avez sélectionnés à l'étape précédente seront importés vers les groupes qu'on a créé dans {{serviceName}}. Groupes apparaîtront dans la section {{contactsName}}.",
   "HexCode": "Code hexadécimal ",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Les tailles sont indiquées pour les écrans Retina. Pour les écrans de résolution standard, la largeur et la hauteur du logo seront redimensionnées en conséquence lors du téléchargement.",
   "WithoutEmailHint": "Il n'y a aucun utilisateur sans l'adresse e-mail Veuillez passer à l'étape suivante.",
   "YouHaveUnsavedChanges": "Vous avec des modifications non-sauvegardées",
-  "YourCurrentDomain": "Votre domaine actuel",
-  "YourLogo": "Votre logo"
+  "YourCurrentDomain": "Votre domaine actuel"
 }

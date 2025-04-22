@@ -11,7 +11,6 @@
   "AddEmailsWarning": "Sinulla ei ole käyttäjiä, joilla on sähköpostit. Ole hyvä ja jatka seuraavaan vaiheeseen lisätäksesi ne.",
   "AdditionalResources": "Lisäresurssit",
   "AdditionalResourcesDescription": "Valitse haluatko näyttää linkit lisäresursseille  {{productName}} :ssa.",
-  "AdditionalResourcesSubtitle": "Määritä käyttäjillesi lista linkeistä helpottaviin resursseihin. ",
   "AddTrustedDomain": "Lisää luotettu verkkotunnus",
   "Admins": "Järjestelmänvalvojat",
   "AdminsMessage": "Järjestelmänvalvojan viestiasetukset",
@@ -59,10 +58,6 @@
   "Branding": "Brändäys",
   "BrandingSectionDescription": "Tarkenna yrityksesi tiedot, lisää linkit {{productName}}-käyttöliittymässä näkyvät ulkoiset resurssit ja sähköpostiosoitteet.",
   "BrandingSubtitle": "Käytä tätä vaihtoehtoa tarjotaksesi käyttäjille brändikokemusta.",
-  "BrandingSubtitleMobile": "Lataa logosi tai luo se tekstistä tarjotaksesi brändikokemuksen käyttäjillesi. Nämä aseutukset vaikuttavat kaikkiin portaaleihisi.",
-  "BrandName": "Brändinimi",
-  "BrandNameSubtitle": "Brändinimesi näytetään kaikissa kutsuissa, ilmoituksissa, ja muissa paikoissa, missä {{productName}} näkyy.",
-  "BrandNameSubtitleMobile": "Syötä yrityksesi tai brändinimi, joka näytetään ilmoituksissa, viedyissä laskentataulukoissa ja muissa resursseissa.",
   "BreakpointMobileWarningText": "Tämä osio ei ole käytettävissä mobiiliversiossa",
   "BreakpointMobileWarningTextPrompt": "Ole hyvä ja käytä työpöytää tai tablettia käyttääksesi <1>{{sectionName}}</1>.",
   "BreakpointSmallText": "Ikkunasi on liian pieni näyttämään koko sivun sisällön",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "{{errors}} virhettä löytyi",
   "ForcePathStyle": "Pakota polku -tyyli",
   "GenerateLogoButton": "Luo",
-  "GenerateLogoLabel": "Luo tekstistä logo",
   "GoogleDriveFiles": "Google Driven tiedostot",
   "GroupsDescription": "Käyttäjät, jotka valitsit edellisessä vaiheessa tuodaan huoneisiin,  jotka on luotu {{serviceName}}ssa. Ryhmät ilmestyvät {{contactsName}}-osioon.",
   "HexCode": "Hex-koodi",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Koot näytetään Retinanäytöille. Logon leveys ja korkeus vakioresoluution näytöille muutetaan vastaavasti latauksen yhteydessä.",
   "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen.",
   "YouHaveUnsavedChanges": "Sinulla on tallentamattomia muutoksia",
-  "YourCurrentDomain": "Nykyinen verkkotunnuksesi",
-  "YourLogo": "Logosi"
+  "YourCurrentDomain": "Nykyinen verkkotunnuksesi"
 }

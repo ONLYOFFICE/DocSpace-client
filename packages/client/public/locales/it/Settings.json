@@ -11,7 +11,6 @@
   "AddEmailsWarning": "Non hai utenti con email. Procedi al passo successivo per aggiungerli.",
   "AdditionalResources": "Risorse aggiuntive",
   "AdditionalResourcesDescription": "Scegli se mostrare i link a risorse aggiuntive in {{productName}}.",
-  "AdditionalResourcesSubtitle": "onfigura la visualizzazione dei collegamenti a risorse utili per i tuoi utenti.",
   "AddTrustedDomain": "Aggiungi dominio affidabile",
   "Admins": "Amministratori",
   "AdminsMessage": "Impostazioni dei Messaggi dell’Amministratore",
@@ -59,10 +58,6 @@
   "Branding": "Marchio",
   "BrandingSectionDescription": "Specifica le informazioni sulla tua azienda, aggiungi link a risorse esterne e indirizzi email visualizzati nell’interfaccia di {{productName}}.",
   "BrandingSubtitle": "Utilizza questa opzione per offrire agli utenti un’esperienza on-brand.",
-  "BrandingSubtitleMobile": "Carica il tuo logo o generane uno da testo per offrire un’esperienza coerente con il brand ai tuoi utenti. Queste impostazioni influenzeranno tutti i tuoi portali.",
-  "BrandName": "Nome del brand",
-  "BrandNameSubtitle": "Il nome del brand verrà mostrato in inviti, notifiche e altri luoghi in cui viene indicato il nome di {{productName}}.",
-  "BrandNameSubtitleMobile": "Inserisci il nome della tua azienda o del tuo brand, che verrà mostrato in notifiche, fogli di calcolo esportati e altre risorse.",
   "BreakpointMobileWarningText": "Questa sezione non è disponibile nella versione mobile",
   "BreakpointMobileWarningTextPrompt": "Per accedere alla sezione <1>{{sectionName}}</1>, utilizza il desktop o il tablet.",
   "BreakpointSmallText": "La tua finestra è troppo piccola per visualizzare tutti i contenuti della pagina",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "Sono stati rilevati {{errors}} errori",
   "ForcePathStyle": "Forza percorso stile",
   "GenerateLogoButton": "Genera",
-  "GenerateLogoLabel": "Genera logo da testo",
   "GoogleDriveFiles": "File di Google Drive",
   "GroupsDescription": "Gli utenti selezionati nel passaggio precedente verranno importati nei gruppi creati in {{serviceName}}. I gruppi verranno visualizzati nella sezione {{contactsName}}.",
   "HexCode": "Codice esadecimale",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Le dimensioni sono mostrate per i display Retina. Per i display con risoluzioni standard, la larghezza e l’altezza del logo verranno ridimensionate di conseguenza al momento del caricamento.",
   "WithoutEmailHint": "Non hai utenti senza email. Ti preghiamo di procedere al passaggio successivo.",
   "YouHaveUnsavedChanges": "Hai delle modifiche non salvate",
-  "YourCurrentDomain": "Il tuo dominio attuale",
-  "YourLogo": "Il tuo logo"
+  "YourCurrentDomain": "Il tuo dominio attuale"
 }

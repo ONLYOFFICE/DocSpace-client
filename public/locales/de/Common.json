@@ -827,5 +827,12 @@
   "PortalNameLength": "Der Kontoname muss zwischen {{minLength}} und {{maxLength}} Zeichen lang sein",
   "PortalNameIncorrect": "Inkorrekter Kontoname",
   "BackupCreatedSuccess": "Die Sicherungskopie wurde erfolgreich erstellt.",
-  "YourTurn": "Jetzt sind Sie dran"
+  "YourTurn": "Jetzt sind Sie dran",
+  "BrandName": "Markenname",
+  "BrandNameSubtitle": "Ihr Markenname wird in Einladungen, Benachrichtigungen und an anderen Stellen angezeigt, an denen Ihr {{productName}}-Name erwähnt wird.",
+  "BrandNameSubtitleMobile": "Geben Sie Ihren Firmen- oder Markennamen ein, der in Benachrichtigungen, exportierten Tabellen und anderen Ressourcen angezeigt wird.",
+  "AdditionalResourcesSubtitle": "Konfigurieren Sie die Anzeige von Links zu hilfreichen Ressourcen für Ihre Benutzer.",
+  "BrandingSubtitleMobile": "Laden Sie Ihr Logo hoch oder generieren Sie es aus Text, um Ihren Nutzern ein markengerechtes Erlebnis zu bieten. Diese Einstellungen wirken sich auf alle Ihre Portale aus.",
+  "GenerateLogoLabel": "Logo aus Text generieren",
+  "YourLogo": "Ihr Logo"
 }

@@ -817,5 +817,12 @@
   "PortalNameLength": "계정 이름은 {{minLength}}~{{maxLength}}글자여야 합니다",
   "PortalNameIncorrect": "계정 이름이 잘못되었습니다",
   "BackupCreatedSuccess": "백업 복사본 생성에 성공했습니다.",
-  "YourTurn": "고객님의 차례입니다"
+  "YourTurn": "고객님의 차례입니다",
+  "BrandName": "브랜드 이름",
+  "BrandNameSubtitle": "브랜드 이름은 초대장, 알림 및 {{productName}} 이름이 참조되는 기타 위치에 표시됩니다.",
+  "BrandNameSubtitleMobile": "알림, 내보내기한 스프레드시트 및 기타 리소스에 표시될 회사 또는 브랜드 이름을 입력하세요.",
+  "AdditionalResourcesSubtitle": "사용자를 위한 유용한 리소스에 대한 링크 표시를 구성하세요.",
+  "BrandingSubtitleMobile": "로고를 업로드하거나 텍스트에서 로고를 생성하여 사용자에게 브랜드 경험을 제공하세요. 이러한 설정은 모든 포털에 적용됩니다.",
+  "GenerateLogoLabel": "텍스트에서 로고 생성",
+  "YourLogo": "로고"
 }

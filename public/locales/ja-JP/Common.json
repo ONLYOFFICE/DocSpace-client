@@ -827,5 +827,12 @@
   "PortalNameLength": "アカウント名は{{minLength}}～{{maxLength}}文字がある必要です。",
   "PortalNameIncorrect": "アカウント名が無効です。",
   "BackupCreatedSuccess": "バックアップ・コピーは正常に作成されました。",
-  "YourTurn": "あなたの番です"
+  "YourTurn": "あなたの番です",
+  "BrandName": "ブランド名",
+  "BrandNameSubtitle": "あなたのブランド名は、招待状、通知、およびあなたの {{productName}} 名が参照される他の場所に表示されます。",
+  "BrandNameSubtitleMobile": "通知、エクスポートされたスプレッドシート、およびその他のリソースに表示される会社名またはブランド名を入力してください。",
+  "AdditionalResourcesSubtitle": "ユーザーに役立つリソースへのリンクの表示を設定します。",
+  "BrandingSubtitleMobile": "ロゴをアップロードするか、テキストから生成して、ユーザーにブランドに合った体験を提供してください。これらの設定は、すべてのポータルに影響を与えます。",
+  "GenerateLogoLabel": "テキストからロゴを生成",
+  "YourLogo": "あなたのロゴ"
 }

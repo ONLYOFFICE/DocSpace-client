@@ -11,7 +11,6 @@
   "AddEmailsWarning": "Nimate uporabnikov z e-maili. Nadaljujte z naslednjim korakom, da jih dodate.",
   "AdditionalResources": "Dodatni viri",
   "AdditionalResourcesDescription": "Izberite, ali želite prikazati povezave do dodatnih virov v {{productName}}.",
-  "AdditionalResourcesSubtitle": "Konfigurirajte prikaz povezav do koristnih virov za vaše uporabnike.",
   "AddTrustedDomain": "Dodaj zaupanja vredno domeno",
   "Admins": "Administratorji",
   "AdminsMessage": "Nastavitve sporočil skrbnika",
@@ -59,10 +58,6 @@
   "Branding": "Blagovna znamka",
   "BrandingSectionDescription": "Specificiraj podatke o svojem podjetju, dodaj povezave do zunanjih virov in e-mail naslove, prikazane v vmesniku {{productName}}.",
   "BrandingSubtitle": "Uporabite to možnost, da uporabnikom zagotovite izkušnjo blagovne znamke.",
-  "BrandingSubtitleMobile": "Naložite svoj logotip ali ga ustvarite iz besedila, da svojim uporabnikom zagotovite izkušnjo blagovne znamke. Te nastavitve bodo vplivale na vse vaše portale.",
-  "BrandName": "Ime blagovne znamke",
-  "BrandNameSubtitle": "Ime vaše blagovne znamke bo prikazano v vabilih, obvestilih in na drugih mestih, kjer je navedeno vaše ime {{productName}}.",
-  "BrandNameSubtitleMobile": "Vnesite ime vašega podjetja ali blagovne znamke, ki bo prikazano v obvestilih, izvoženih preglednicah in drugih virih.",
   "BreakpointMobileWarningText": "Ta razdelek ni na voljo v mobilni različici",
   "BreakpointMobileWarningTextPrompt": "Za dostop do <1>{{sectionName}}</1> uporabite namizje ali tablico.",
   "BreakpointSmallText": "Vaše okno je premajhno za prikaz celotne vsebine strani",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "Najdenih je bilo {{errors}} napak",
   "ForcePathStyle": "Stil vsiljene poti",
   "GenerateLogoButton": "Ustvari",
-  "GenerateLogoLabel": "Ustvari logotip iz besedila",
   "GoogleDriveFiles": "Google Drive datoteke",
   "GroupsDescription": "Uporabniki, ki ste jih izbrali v prejšnjem koraku, bodo uvoženi v skupine, ustvarjene v {{serviceName}}. Skupine bodo prikazane v razdelku {{contactsName}}.",
   "HexCode": "Hex koda",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Velikosti so prikazane za zaslone Retina. Pri zaslonih s standardno ločljivostjo bosta širina in višina logotipa ustrezno spremenjeni ob nalaganju.",
   "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom.",
   "YouHaveUnsavedChanges": "Imate neshranjene spremembe",
-  "YourCurrentDomain": "Vaša trenutna domena",
-  "YourLogo": "Vaš logotip"
+  "YourCurrentDomain": "Vaša trenutna domena"
 }

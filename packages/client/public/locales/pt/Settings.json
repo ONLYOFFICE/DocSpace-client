@@ -11,7 +11,6 @@
   "AddEmailsWarning": "Você não tem usuários com e-mails. Prossiga para a próxima etapa para adicioná-los.",
   "AdditionalResources": "Funcionalidades Adicionais",
   "AdditionalResourcesDescription": "Escolha se pretende mostrar links para recursos adicionais em {{productName}}.",
-  "AdditionalResourcesSubtitle": "Configure a exibição de links para recursos úteis para seus usuários.",
   "AddTrustedDomain": "Adicionar domínio confiável",
   "Admins": "Administradores",
   "AdminsMessage": "Definições de Mensagens para Administrador",
@@ -59,10 +58,6 @@
   "Branding": "Imagem de Marca",
   "BrandingSectionDescription": "Especifique a informação da sua empresa, adicione ligações a recursos externos e endereços de correio eletrónico exibidos dentro da interface do {{productName}}.",
   "BrandingSubtitle": "Utilize esta opção para fornecer uma experiência de marca aos utilizadores.",
-  "BrandingSubtitleMobile": "Carregue o seu logótipo ou gere-o a partir de texto para proporcionar uma experiência de marca aos seus utilizadores. Estas definições afectarão todos os seus portais.",
-  "BrandName": "Nome da Marca",
-  "BrandNameSubtitle": "O nome da sua Marca será apresentado em convites, notificações e outros locais onde o seu nome {{productName}} é referenciado.",
-  "BrandNameSubtitleMobile": "Introduza o nome da sua empresa ou marca que será apresentado em notificações, folhas de cálculo exportadas e outros recursos.",
   "BreakpointMobileWarningText": "Esta seção não está disponível na versão móvel",
   "BreakpointMobileWarningTextPrompt": "Use o desktop ou tablet para acessar <1>{{sectionName}}</1>.",
   "BreakpointSmallText": "A sua janela é demasiado pequena para apresentar todo o conteúdo da página",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "{{errors}} erros foram encontrados",
   "ForcePathStyle": "Forçar a Formatação do Destino",
   "GenerateLogoButton": "Gerar",
-  "GenerateLogoLabel": "Gerar logótipo a partir de texto",
   "GoogleDriveFiles": "Arquivos do Google Drive",
   "GroupsDescription": "Os usuários selecionados na etapa anterior serão importados para grupos criados em {{serviceName}}. Os grupos aparecerão na seção {{contactsName}}.",
   "HexCode": "Código hexadecimal",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Os tamanhos são mostrados para os mostradores da Retina. Para os ecrãs com resoluções padrão, a largura e altura do logótipo serão redimensionadas em conformidade no momento do carregamento do ficheiro.",
   "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
   "YouHaveUnsavedChanges": "Tem alterações que não foram guardadas",
-  "YourCurrentDomain": "O seu domínio atual",
-  "YourLogo": "O seu logótipo"
+  "YourCurrentDomain": "O seu domínio atual"
 }

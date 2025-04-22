@@ -11,7 +11,6 @@
   "AddEmailsWarning": "Bạn không có người dùng có email. Vui lòng chuyển sang bước tiếp theo để thêm chúng.",
   "AdditionalResources": "Nguồn Thông tin Bổ sung",
   "AdditionalResourcesDescription": "Chọn xem bạn có muốn hiển thị liên kết đến các tài nguyên bổ sung trong {{productName}} hay không.",
-  "AdditionalResourcesSubtitle": "Định cấu hình hiển thị các liên kết đến các tài nguyên hữu ích cho người dùng của bạn.",
   "AddTrustedDomain": "Thêm tên miền được tin cậy",
   "Admins": "Quản trị viên",
   "AdminsMessage": "Cài đặt Tin nhắn Quản trị viên",
@@ -59,10 +58,6 @@
   "Branding": "Thương hiệu",
   "BrandingSectionDescription": "Nêu rõ thông tin công ty của bạn, thêm liên kết đến tài nguyên bên ngoài và địa chỉ email được hiển thị trong giao diện {{productName}}.",
   "BrandingSubtitle": "Sử dụng tùy chọn này để cung cấp trải nghiệm thương hiệu cho người dùng.",
-  "BrandingSubtitleMobile": "Tải logo của bạn lên hoặc tạo logo từ văn bản để cung cấp trải nghiệm  thương hiệu cho người dùng của bạn. Những cài đặt này sẽ ảnh hưởng đến tất cả các cổng thông tin của bạn.",
-  "BrandName": "Tên thương hiệu",
-  "BrandNameSubtitle": "Tên Thương hiệu của bạn sẽ được hiển thị trong lời mời, thông báo và những nơi khác mà  {{productName}} của bạn được tham chiếu.",
-  "BrandNameSubtitleMobile": "Nhập tên công ty hoặc thương hiệu của bạn sẽ được hiển thị trong thông báo, bảng tính được xuất và các tài nguyên khác.",
   "BreakpointMobileWarningText": "Phần này không khả dụng ở phiên bản cho di động",
   "BreakpointMobileWarningTextPrompt": "Vui lòng sử dụng máy tính hoặc máy tính bảng để truy cập <1>{{sectionName}} </1>.",
   "BreakpointSmallText": "Cửa sổ của bạn quá nhỏ để hiển thị tất cả nội dung trang",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "đã tìm thấy {{errors}} lỗi",
   "ForcePathStyle": "Kiểu đường dẫn bắt buộc",
   "GenerateLogoButton": "Tạo",
-  "GenerateLogoLabel": "Tạo logo từ văn bản",
   "GoogleDriveFiles": "Tập tin Google Drive",
   "GroupsDescription": "Người dùng mà bạn đã chọn ở bước trước sẽ được nhập vào các nhóm được tạo trong {{serviceName}}. Các nhóm sẽ xuất hiện trong phần {{contactsName}}.",
   "HexCode": "Mã Hex",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Các kích thước được hiển thị cho màn hình Retina. Đối với màn hình có độ phân giải tiêu chuẩn, chiều rộng và chiều cao logo sẽ được thay đổi kích thước tương ứng khi tải lên.",
   "WithoutEmailHint": "Bạn không có người dùng không có email. Vui lòng chuyển sang bước tiếp theo.",
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
-  "YourCurrentDomain": "Tên miền hiện tại của bạn",
-  "YourLogo": "Logo của bạn"
+  "YourCurrentDomain": "Tên miền hiện tại của bạn"
 }

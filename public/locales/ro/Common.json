@@ -827,5 +827,12 @@
   "PortalNameLength": "Denumirea contului trebuie să conțină de la {{minLength}} până la {{maxLength}} de caractere",
   "PortalNameIncorrect": "Denumirea contului incorectă",
   "BackupCreatedSuccess": "O copie de rezervă a fost creată cu succes.",
-  "YourTurn": "Acum e rândul dvs."
+  "YourTurn": "Acum e rândul dvs.",
+  "BrandName": "Nume de marcă",
+  "BrandNameSubtitle": "Numele de marcă dvs. va fi afișat în invitații, notificări și în alte locuri în care se face referire la numele dvs. {{productName}}.",
+  "BrandNameSubtitleMobile": "Introduceți numele de companie sau de marcă dvs., care va fi afișat în notificări, în foile de calcul exportate și în alte materiale.",
+  "AdditionalResourcesSubtitle": "Configurați modul de afișare a linkurilor către resurse utile pentru utilizatorii dvs.",
+  "BrandingSubtitleMobile": "Încărcați logo-ul dvs. sau generați unul din text pentru a oferi utilizatorilor dvs o experientă de creștere a implicării şi de conștientizare a mărcii. Aceste setări vor afecta toate portalurile dvs.",
+  "GenerateLogoLabel": "Generare logo din text",
+  "YourLogo": "Logo-ul dvs"
 }

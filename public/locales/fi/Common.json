@@ -819,5 +819,12 @@
   "PortalNameLength": "Tilin nimen on oltava {{minLength}}-{{maxLength}} merkkiä pitkä",
   "PortalNameIncorrect": "Virheellinen tilin nimi",
   "BackupCreatedSuccess": "Turvatallenteen kopio on luotu onnistuneesti.",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "BrandName": "Brändinimi",
+  "BrandNameSubtitle": "Brändinimesi näytetään kaikissa kutsuissa, ilmoituksissa, ja muissa paikoissa, missä {{productName}} näkyy.",
+  "BrandNameSubtitleMobile": "Syötä yrityksesi tai brändinimi, joka näytetään ilmoituksissa, viedyissä laskentataulukoissa ja muissa resursseissa.",
+  "AdditionalResourcesSubtitle": "Määritä käyttäjillesi lista linkeistä helpottaviin resursseihin. ",
+  "BrandingSubtitleMobile": "Lataa logosi tai luo se tekstistä tarjotaksesi brändikokemuksen käyttäjillesi. Nämä aseutukset vaikuttavat kaikkiin portaaleihisi.",
+  "GenerateLogoLabel": "Luo tekstistä logo",
+  "YourLogo": "Logosi"
 }

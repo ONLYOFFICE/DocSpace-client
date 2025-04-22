@@ -816,5 +816,12 @@
   "PortalNameLength": "Tên tài khoản phải dài từ {{minLength}} đến {{maxLength}} ký tự",
   "PortalNameIncorrect": "Tên tài khoản không chính xác",
   "BackupCreatedSuccess": "Bản sao lưu đã được tạo thành công.",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "BrandName": "Tên thương hiệu",
+  "BrandNameSubtitle": "Tên Thương hiệu của bạn sẽ được hiển thị trong lời mời, thông báo và những nơi khác mà  {{productName}} của bạn được tham chiếu.",
+  "BrandNameSubtitleMobile": "Nhập tên công ty hoặc thương hiệu của bạn sẽ được hiển thị trong thông báo, bảng tính được xuất và các tài nguyên khác.",
+  "AdditionalResourcesSubtitle": "Định cấu hình hiển thị các liên kết đến các tài nguyên hữu ích cho người dùng của bạn.",
+  "BrandingSubtitleMobile": "Tải logo của bạn lên hoặc tạo logo từ văn bản để cung cấp trải nghiệm  thương hiệu cho người dùng của bạn. Những cài đặt này sẽ ảnh hưởng đến tất cả các cổng thông tin của bạn.",
+  "GenerateLogoLabel": "Tạo logo từ văn bản",
+  "YourLogo": "Logo của bạn"
 }

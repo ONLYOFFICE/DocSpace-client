@@ -819,5 +819,12 @@
   "PortalNameLength": "Konta nosaukumam ir jābūt no {{minLength}} līdz {{maxLength}} rakstzīmēm garam",
   "PortalNameIncorrect": "Nepareizs konta nosaukums",
   "BackupCreatedSuccess": "Rezerves kopija veiksmīgi izveidota.",
-  "YourTurn": "Jūsu kārta"
+  "YourTurn": "Jūsu kārta",
+  "BrandName": "Zīmola nosaukums",
+  "BrandNameSubtitle": "Jūsu zīmola nosaukums tiks parādīts uzaicinājumos, paziņojumos un citās vietās, kur ir atsauce uz jūsu {{productName}} nosaukumu.",
+  "BrandNameSubtitleMobile": "Ievadiet savu uzņēmuma vai zīmola nosaukumu, kas tiks parādīts paziņojumos, eksportētajās izklājlapās un citos resursos.",
+  "AdditionalResourcesSubtitle": "Konfigurējiet lietotājiem noderīgu resursu saišu rādīšanu.",
+  "BrandingSubtitleMobile": "Augšupielādējiet savu logotipu vai ģenerējiet to no teksta, lai lietotājiem nodrošinātu zīmolam atbilstošu pieredzi. Šie iestatījumi ietekmēs visus jūsu portālus.",
+  "GenerateLogoLabel": "Ģenerēt logotipu no teksta",
+  "YourLogo": "Jūsu logotips"
 }

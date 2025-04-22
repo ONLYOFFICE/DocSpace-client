@@ -11,7 +11,6 @@
   "AddEmailsWarning": "Sie haben keine Benutzer mit E-Mails. Bitte fahren Sie mit dem nächsten Schritt fort, um sie hinzuzufügen.",
   "AdditionalResources": "Zusätzliche Ressourcen",
   "AdditionalResourcesDescription": "Wählen Sie aus, ob Links zu weiteren Ressourcen in {{productName}} angezeigt werden sollen.",
-  "AdditionalResourcesSubtitle": "Konfigurieren Sie die Anzeige von Links zu hilfreichen Ressourcen für Ihre Benutzer.",
   "AddTrustedDomain": "Sichere Domain hinzufügen",
   "Admins": "Administratoren",
   "AdminsMessage": "Einstellungen von Nachrichten für Administrator",
@@ -59,10 +58,6 @@
   "Branding": "Branding",
   "BrandingSectionDescription": "Geben Sie Ihre Unternehmensinformationen an, fügen Sie Links zu externen Ressourcen und E-Mail-Adressen hinzu, die auf der {{productName}}-Oberfläche angezeigt werden.",
   "BrandingSubtitle": "Verwenden Sie diese Option, um den Nutzern ein markengerechtes Erlebnis zu bieten.",
-  "BrandingSubtitleMobile": "Laden Sie Ihr Logo hoch oder generieren Sie es aus Text, um Ihren Nutzern ein markengerechtes Erlebnis zu bieten. Diese Einstellungen wirken sich auf alle Ihre Portale aus.",
-  "BrandName": "Markenname",
-  "BrandNameSubtitle": "Ihr Markenname wird in Einladungen, Benachrichtigungen und an anderen Stellen angezeigt, an denen Ihr {{productName}}-Name erwähnt wird.",
-  "BrandNameSubtitleMobile": "Geben Sie Ihren Firmen- oder Markennamen ein, der in Benachrichtigungen, exportierten Tabellen und anderen Ressourcen angezeigt wird.",
   "BreakpointMobileWarningText": "Dieser Abschnitt ist in der mobilen Version nicht verfügbar",
   "BreakpointMobileWarningTextPrompt": "Bitte verwenden Sie den Desktop oder das Tablet, um auf <1>{{sectionName}}</1> zuzugreifen.",
   "BreakpointSmallText": "Ihr Fenster ist zu klein, um alle Inhalte anzuzeigen",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "Es wurden {{errors}} Fehler gefunden",
   "ForcePathStyle": "Erzwinge Pfad-Stil",
   "GenerateLogoButton": "Generieren",
-  "GenerateLogoLabel": "Logo aus Text generieren",
   "GoogleDriveFiles": "Dateien von Google Drive",
   "GroupsDescription": "Benutzer, die Sie im vorherigen Schritt ausgewählt haben, werden in Gruppen importiert, die in {{serviceName}} erstellt wurden. Gruppen werden im Abschnitt „{{contactsName}}“ angezeigt.",
   "HexCode": "Hex-Code",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Die Größen sind für Retina-Displays angegeben. Für Displays mit Standardauflösungen werden die Breite und Höhe des Logos beim Hochladen entsprechend angepasst.",
   "WithoutEmailHint": "Es gibt keine Benutzer ohne E-Mails. Bitte fahren Sie mit dem nächsten Schritt fort.",
   "YouHaveUnsavedChanges": "Sie haben nicht gespeicherte Änderungen.",
-  "YourCurrentDomain": "Ihre aktuelle Domain",
-  "YourLogo": "Ihr Logo"
+  "YourCurrentDomain": "Ihre aktuelle Domain"
 }

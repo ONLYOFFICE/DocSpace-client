@@ -817,5 +817,12 @@
   "PortalNameLength": "Ime naloga mora biti između {{minLength}} i {{maxLength}} znakova dugačko",
   "PortalNameIncorrect": "Netačno ime naloga",
   "BackupCreatedSuccess": "Rezervna kopija je uspešno kreirana.",
-  "YourTurn": "Vaš red"
+  "YourTurn": "Vaš red",
+  "BrandName": "Naziv brenda",
+  "BrandNameSubtitle": "Naziv vašeg brenda će biti prikazan u pozivnicama, obaveštenjima i drugim mestima gde se pominje naziv {{productName}}.",
+  "BrandNameSubtitleMobile": "Unesite ime vaše kompanije ili brenda koje će biti prikazano u obaveštenjima, eksportovanim tabelama i drugim resursima.",
+  "AdditionalResourcesSubtitle": "Konfigurišite prikaz linkova ka korisnim resursima za vaše korisnike.",
+  "BrandingSubtitleMobile": "Otpremite svoj logo ili ga generišite iz teksta kako biste korisnicima pružili iskustvo u skladu sa vašim brendom. Ova podešavanja će uticati na sve vaše portale.",
+  "GenerateLogoLabel": "Generiši logo iz teksta",
+  "YourLogo": "Vaš logo"
 }

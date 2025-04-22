@@ -11,7 +11,6 @@
   "AddEmailsWarning": "E-poçtu olan heç bir istifadəçiniz yoxdur. Onları əlavə etmək üçün növbəti addıma davam edin.",
   "AdditionalResources": "Əlavə resurslar",
   "AdditionalResourcesDescription": "{{productName}} məhsulunda əlavə resurslara linklərin göstərilməsini seçin.",
-  "AdditionalResourcesSubtitle": "İstifadəçiləriniz üçün faydalı resurslara keçidlərin görünüşünü konfiqurasiya edin.",
   "AddTrustedDomain": "İnanılmış domen əlavə et",
   "Admins": "Adminlər",
   "AdminsMessage": "Administrator Mesaj Parametrləri",
@@ -59,10 +58,6 @@
   "Branding": "Brendləşmə",
   "BrandingSectionDescription": "Şirkət məlumatlarınızı göstərin, {{productName}} interfeysində göstərilən xarici resurslara və e-poçt ünvanlarına keçidlər əlavə edin.",
   "BrandingSubtitle": "İstifadəçilərə brendlə bağlı təcrübə təmin etmək üçün bu seçimdən istifadə edin.",
-  "BrandingSubtitleMobile": "İstifadəçilərinizə brend təcrübəsi bəxş etmək üçün loqonu yükləyin və ya mətndən yaradın. Bu parametrlər bütün portallarınıza təsir edəcək.",
-  "BrandName": "Brend adı",
-  "BrandNameSubtitle": "Brend adınız dəvətnamələrdə, bildirişlərdə və adınız {{productName}} qeyd edildiyi digər yerlərdə görünəcək.",
-  "BrandNameSubtitleMobile": "Bildirişlərdə, ixrac edilmiş cədvəllərdə və digər resurslarda görünmək üçün şirkət və ya brend adınızı daxil edin.",
   "BreakpointMobileWarningText": "Bu bölmə mobil versiyada əlçatan deyil",
   "BreakpointMobileWarningTextPrompt": "<1>{{sectionName}}</1>-ə daxil olmaq üçün masaüstü və ya planşetdən istifadə edin.",
   "BreakpointSmallText": "Pəncərəniz bütün səhifə məzmununu göstərmək üçün çox kiçikdir",
@@ -156,7 +151,6 @@
   "ErrorsWereFound": "{{errors}} xətalar tapıldı",
   "ForcePathStyle": "Məcburi Keçid Üslubu",
   "GenerateLogoButton": "Yaradın",
-  "GenerateLogoLabel": "Mətndən loqo yaradın",
   "GoogleDriveFiles": "Google Diskin Faylları",
   "GroupsDescription": "Əvvəlki addımda seçdiyiniz istifadəçilər {{serviceName}} daxilində yaradılmış qruplara köçürüləcək. Qruplar {{contactsName}} bölməsində görünəcək.",
   "HexCode": "Hex kodu",
@@ -358,6 +352,5 @@
   "WhiteLabelTooltip": "Retina displeylər üçün göstərilən ölçülər. Standart ekranlar üçün loqonun eni və hündürlüyü yükləmə zamanı müvafiq olaraq dəyişdiriləcək.",
   "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin.",
   "YouHaveUnsavedChanges": "Yadda saxlanmayan dəyişiklikləriniz var",
-  "YourCurrentDomain": "Cari domen adınız",
-  "YourLogo": "Loqonuz"
+  "YourCurrentDomain": "Cari domen adınız"
 }

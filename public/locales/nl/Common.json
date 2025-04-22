@@ -819,5 +819,12 @@
   "PortalNameLength": "De naam van de account moet tussen {{minLength}} en {{maxLength}} tekens lang zijn",
   "PortalNameIncorrect": "Onjuiste accountnaam",
   "BackupCreatedSuccess": "De back-up kopie is succesvol aangemaakt.",
-  "YourTurn": "Uw beurt"
+  "YourTurn": "Uw beurt",
+  "BrandName": "Merknaam",
+  "BrandNameSubtitle": "Uw Merknaam zal worden weergegeven in uitnodigingen, meldingen en andere plekken waar naar uw {{productName}} naam wordt verwezen.",
+  "BrandNameSubtitleMobile": "Voer uw bedrijfs- of merknaam in die zal worden weergegeven in meldingen, geëxporteerde spreadsheets en andere bronnen.",
+  "AdditionalResourcesSubtitle": "Configureer de weergave van links naar nuttige bronnen voor uw gebruikers.",
+  "BrandingSubtitleMobile": "Upload uw logo of genereer het aan de hand van tekst om uw gebruikers een on-brand ervaring te bieden. Deze instellingen zijn van invloed op al uw portalen.",
+  "GenerateLogoLabel": "Logo genereren uit tekst",
+  "YourLogo": "Uw logo"
 }

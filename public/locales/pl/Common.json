@@ -826,5 +826,7 @@
   "AdditionalResourcesSubtitle": "Skonfiguruj wyświetlanie linków do przydatnych zasobów dla użytkowników.",
   "BrandingSubtitleMobile": "Prześlij swoje logo lub wygeneruj je z tekstu, aby  pokazywać użytkownikom branding marki. Ustawienia te zostaną zastosowane na wszystkich Twoich portalach.",
   "GenerateLogoLabel": "Wygeneruj logo z tekstu",
-  "YourLogo": "Twoje Logo"
+  "YourLogo": "Twoje Logo",
+  "LightTheme": "Motyw jasny",
+  "DarkTheme": "Motyw ciemny"
 }

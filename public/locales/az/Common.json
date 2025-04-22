@@ -826,5 +826,7 @@
   "AdditionalResourcesSubtitle": "İstifadəçiləriniz üçün faydalı resurslara keçidlərin görünüşünü konfiqurasiya edin.",
   "BrandingSubtitleMobile": "İstifadəçilərinizə brend təcrübəsi bəxş etmək üçün loqonu yükləyin və ya mətndən yaradın. Bu parametrlər bütün portallarınıza təsir edəcək.",
   "GenerateLogoLabel": "Mətndən loqo yaradın",
-  "YourLogo": "Loqonuz"
+  "YourLogo": "Loqonuz",
+  "LightTheme": "İşıqlı tema",
+  "DarkTheme": "Qaranlıq tema"
 }

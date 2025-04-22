@@ -834,5 +834,7 @@
   "AdditionalResourcesSubtitle": "为用户配置显示有用资源的链接。",
   "BrandingSubtitleMobile": "上传企业logo或通过文本生成，为用户提供品牌化体验。此设置将应用于所有门户界面。",
   "GenerateLogoLabel": "从文本生成logo",
-  "YourLogo": "您的logo"
+  "YourLogo": "您的logo",
+  "LightTheme": "浅色主题",
+  "DarkTheme": "深色主题"
 }

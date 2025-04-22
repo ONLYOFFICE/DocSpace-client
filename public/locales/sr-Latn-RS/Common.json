@@ -824,5 +824,7 @@
   "AdditionalResourcesSubtitle": "Konfigurišite prikaz linkova ka korisnim resursima za vaše korisnike.",
   "BrandingSubtitleMobile": "Otpremite svoj logo ili ga generišite iz teksta kako biste korisnicima pružili iskustvo u skladu sa vašim brendom. Ova podešavanja će uticati na sve vaše portale.",
   "GenerateLogoLabel": "Generiši logo iz teksta",
-  "YourLogo": "Vaš logo"
+  "YourLogo": "Vaš logo",
+  "LightTheme": "Svetla tema",
+  "DarkTheme": "Tamna tema"
 }

@@ -834,5 +834,7 @@
   "AdditionalResourcesSubtitle": "ユーザーに役立つリソースへのリンクの表示を設定します。",
   "BrandingSubtitleMobile": "ロゴをアップロードするか、テキストから生成して、ユーザーにブランドに合った体験を提供してください。これらの設定は、すべてのポータルに影響を与えます。",
   "GenerateLogoLabel": "テキストからロゴを生成",
-  "YourLogo": "あなたのロゴ"
+  "YourLogo": "あなたのロゴ",
+  "LightTheme": "ライトのテーマ",
+  "DarkTheme": "ダークテーマ"
 }

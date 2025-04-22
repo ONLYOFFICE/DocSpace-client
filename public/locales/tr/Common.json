@@ -826,5 +826,7 @@
   "AdditionalResourcesSubtitle": "Kullanıcılarınız için yararlı kaynaklara yönelik bağlantıların görünümünü yapılandırın.",
   "BrandingSubtitleMobile": "Kullanıcılara markanıza uygun bir deneyim sunmak için logonuzu yükleyin veya metinden oluşturun. Bu ayarlar tüm portallarınızı etkiler.",
   "GenerateLogoLabel": "Metinden logo oluştur",
-  "YourLogo": "Logonuz"
+  "YourLogo": "Logonuz",
+  "LightTheme": "Açık tema",
+  "DarkTheme": "Koyu Tema"
 }

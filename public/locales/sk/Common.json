@@ -826,5 +826,7 @@
   "AdditionalResourcesSubtitle": "Nastavte zobrazovanie odkazov na užitočné zdroje pre vašich používateľov.",
   "BrandingSubtitleMobile": "Nahrajte svoje logo alebo ho vygenerujte z textu, aby ste používateľom poskytli on-brand zážitok. Tieto nastavenia ovplyvnia všetky vaše portály.",
   "GenerateLogoLabel": "Generovať logo z textu",
-  "YourLogo": "Vaše logo"
+  "YourLogo": "Vaše logo",
+  "LightTheme": "Svetlá téma",
+  "DarkTheme": "Tmavá téma"
 }

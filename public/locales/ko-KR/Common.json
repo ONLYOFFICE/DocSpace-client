@@ -824,5 +824,7 @@
   "AdditionalResourcesSubtitle": "사용자를 위한 유용한 리소스에 대한 링크 표시를 구성하세요.",
   "BrandingSubtitleMobile": "로고를 업로드하거나 텍스트에서 로고를 생성하여 사용자에게 브랜드 경험을 제공하세요. 이러한 설정은 모든 포털에 적용됩니다.",
   "GenerateLogoLabel": "텍스트에서 로고 생성",
-  "YourLogo": "로고"
+  "YourLogo": "로고",
+  "LightTheme": "라이트 테마",
+  "DarkTheme": "다크 테마"
 }

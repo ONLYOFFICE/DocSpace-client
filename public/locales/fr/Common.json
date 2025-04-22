@@ -824,5 +824,7 @@
   "AdditionalResourcesSubtitle": "Configurez l'affichage de liens vers des ressources utiles pour vos utilisateurs.",
   "BrandingSubtitleMobile": "Téléchargez votre logo ou générez-le à partir d'un texte pour offrir une expérience de marque à vos utilisateurs. Ces paramètres s'appliquent à tous vos portails.",
   "GenerateLogoLabel": "Générer un logo à partir d'un texte",
-  "YourLogo": "Votre logo"
+  "YourLogo": "Votre logo",
+  "LightTheme": "Thème clair",
+  "DarkTheme": "Thème sombre"
 }

@@ -823,5 +823,7 @@
   "AdditionalResourcesSubtitle": "Định cấu hình hiển thị các liên kết đến các tài nguyên hữu ích cho người dùng của bạn.",
   "BrandingSubtitleMobile": "Tải logo của bạn lên hoặc tạo logo từ văn bản để cung cấp trải nghiệm  thương hiệu cho người dùng của bạn. Những cài đặt này sẽ ảnh hưởng đến tất cả các cổng thông tin của bạn.",
   "GenerateLogoLabel": "Tạo logo từ văn bản",
-  "YourLogo": "Logo của bạn"
+  "YourLogo": "Logo của bạn",
+  "LightTheme": "Nền sáng",
+  "DarkTheme": "Nền tối"
 }

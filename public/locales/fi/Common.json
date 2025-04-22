@@ -826,5 +826,7 @@
   "AdditionalResourcesSubtitle": "Määritä käyttäjillesi lista linkeistä helpottaviin resursseihin. ",
   "BrandingSubtitleMobile": "Lataa logosi tai luo se tekstistä tarjotaksesi brändikokemuksen käyttäjillesi. Nämä aseutukset vaikuttavat kaikkiin portaaleihisi.",
   "GenerateLogoLabel": "Luo tekstistä logo",
-  "YourLogo": "Logosi"
+  "YourLogo": "Logosi",
+  "LightTheme": "Kevyt teema",
+  "DarkTheme": "Tumma teema"
 }

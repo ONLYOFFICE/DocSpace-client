@@ -826,5 +826,7 @@
   "AdditionalResourcesSubtitle": "Configure a exibição de links para recursos úteis para seus usuários.",
   "BrandingSubtitleMobile": "Carregue o seu logótipo ou gere-o a partir de texto para proporcionar uma experiência de marca aos seus utilizadores. Estas definições afectarão todos os seus portais.",
   "GenerateLogoLabel": "Gerar logótipo a partir de texto",
-  "YourLogo": "O seu logótipo"
+  "YourLogo": "O seu logótipo",
+  "LightTheme": "Tema claro",
+  "DarkTheme": "Tema escuro"
 }

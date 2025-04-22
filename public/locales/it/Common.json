@@ -834,5 +834,7 @@
   "AdditionalResourcesSubtitle": "onfigura la visualizzazione dei collegamenti a risorse utili per i tuoi utenti.",
   "BrandingSubtitleMobile": "Carica il tuo logo o generane uno da testo per offrire un’esperienza coerente con il brand ai tuoi utenti. Queste impostazioni influenzeranno tutti i tuoi portali.",
   "GenerateLogoLabel": "Genera logo da testo",
-  "YourLogo": "Il tuo logo"
+  "YourLogo": "Il tuo logo",
+  "LightTheme": "Tema chiaro",
+  "DarkTheme": "Tema scuro"
 }

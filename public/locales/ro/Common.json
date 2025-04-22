@@ -834,5 +834,7 @@
   "AdditionalResourcesSubtitle": "Configurați modul de afișare a linkurilor către resurse utile pentru utilizatorii dvs.",
   "BrandingSubtitleMobile": "Încărcați logo-ul dvs. sau generați unul din text pentru a oferi utilizatorilor dvs o experientă de creștere a implicării şi de conștientizare a mărcii. Aceste setări vor afecta toate portalurile dvs.",
   "GenerateLogoLabel": "Generare logo din text",
-  "YourLogo": "Logo-ul dvs"
+  "YourLogo": "Logo-ul dvs",
+  "LightTheme": "Tema luminoasă",
+  "DarkTheme": "Tema întunecată"
 }

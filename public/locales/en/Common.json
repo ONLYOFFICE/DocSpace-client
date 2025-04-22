@@ -835,5 +835,7 @@
   "PortalNameIncorrect": "Incorrect account name",
   "BackupCreatedSuccess": "The backup copy has been successfully created.",
   "YourTurn": "Your turn",
-  "AdditionalResourcesSubtitle": "Configure the display of links to helpful resources for your users."
+  "AdditionalResourcesSubtitle": "Configure the display of links to helpful resources for your users.",
+  "LightTheme": "Light theme",
+  "DarkTheme": "Dark theme"
 }

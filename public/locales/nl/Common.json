@@ -826,5 +826,7 @@
   "AdditionalResourcesSubtitle": "Configureer de weergave van links naar nuttige bronnen voor uw gebruikers.",
   "BrandingSubtitleMobile": "Upload uw logo of genereer het aan de hand van tekst om uw gebruikers een on-brand ervaring te bieden. Deze instellingen zijn van invloed op al uw portalen.",
   "GenerateLogoLabel": "Logo genereren uit tekst",
-  "YourLogo": "Uw logo"
+  "YourLogo": "Uw logo",
+  "LightTheme": "Licht thema",
+  "DarkTheme": "Donker thema"
 }

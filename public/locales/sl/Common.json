@@ -826,5 +826,7 @@
   "AdditionalResourcesSubtitle": "Konfigurirajte prikaz povezav do koristnih virov za vaše uporabnike.",
   "BrandingSubtitleMobile": "Naložite svoj logotip ali ga ustvarite iz besedila, da svojim uporabnikom zagotovite izkušnjo blagovne znamke. Te nastavitve bodo vplivale na vse vaše portale.",
   "GenerateLogoLabel": "Ustvari logotip iz besedila",
-  "YourLogo": "Vaš logotip"
+  "YourLogo": "Vaš logotip",
+  "LightTheme": "Svetla tema",
+  "DarkTheme": "Temna tema"
 }

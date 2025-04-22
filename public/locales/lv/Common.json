@@ -826,5 +826,7 @@
   "AdditionalResourcesSubtitle": "Konfigurējiet lietotājiem noderīgu resursu saišu rādīšanu.",
   "BrandingSubtitleMobile": "Augšupielādējiet savu logotipu vai ģenerējiet to no teksta, lai lietotājiem nodrošinātu zīmolam atbilstošu pieredzi. Šie iestatījumi ietekmēs visus jūsu portālus.",
   "GenerateLogoLabel": "Ģenerēt logotipu no teksta",
-  "YourLogo": "Jūsu logotips"
+  "YourLogo": "Jūsu logotips",
+  "LightTheme": "Gaišs dizains",
+  "DarkTheme": "Tumšs dizains"
 }

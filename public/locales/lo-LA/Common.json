@@ -519,5 +519,7 @@
   "PortalNameIncorrect": "ບໍ່ຖືກຕ້ອງ ບັນຊີ ຊື່ ",
   "BackupCreatedSuccess": "ສຳເນົາສໍາຮອງໄດ້ຖືກສ້າງສຳເລັດແລ້ວ.",
   "WithSubfolders": "ມີໂຟເດີຍ່ອຍ",
-  "AdditionalResourcesSubtitle": "ຕັ້ງຄ່າການສະແດງລິ້ງໄປຫາຊັບພະຍາກອນທີ່ເປັນປະໂຫຍດສໍາລັບຜູ້ໃຊ້ຂອງທ່ານ."
+  "AdditionalResourcesSubtitle": "ຕັ້ງຄ່າການສະແດງລິ້ງໄປຫາຊັບພະຍາກອນທີ່ເປັນປະໂຫຍດສໍາລັບຜູ້ໃຊ້ຂອງທ່ານ.",
+  "LightTheme": "ແສງສະຫວ່າງ ຫົວ​ຂໍ້",
+  "DarkTheme": "ມືດ ຫົວ​ຂໍ້"
 }

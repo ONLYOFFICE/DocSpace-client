@@ -153,8 +153,6 @@ class FlowStore {
           title: "",
         };
 
-        console.log(this.localCheckVectorizeDocument(f));
-
         if (!this.localCheckVectorizeDocument(f)) return f;
 
         return null;

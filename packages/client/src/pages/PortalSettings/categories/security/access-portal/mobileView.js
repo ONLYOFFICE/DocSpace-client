@@ -93,7 +93,12 @@ const MobileView = ({ withoutExternalLink }) => {
       <MobileCategoryWrapper
         title={t("InvitationSettings")}
         subtitle={
-          <Trans i18nKey="InvitationSettingsMobile" ns="Settings" t={t} />
+          <Trans
+            i18nKey="InvitationSettingsMobile"
+            ns="Settings"
+            t={t}
+            values={{ productName: t("Common:ProductName") }}
+          />
         }
         url="/portal-settings/security/access-portal/invitation-settings"
         onClickLink={onClickLink}

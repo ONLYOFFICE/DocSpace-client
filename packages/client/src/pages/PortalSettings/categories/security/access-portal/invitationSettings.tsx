@@ -198,7 +198,9 @@ const InvitationSettings = ({
     <>
       <LearnMoreWrapper>
         <Text fontSize="13px" fontWeight="400">
-          {t("InvitationSettingsDescription")}
+          {t("InvitationSettingsDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
       </LearnMoreWrapper>
 
@@ -216,7 +218,9 @@ const InvitationSettings = ({
               lineHeight="20px"
               onClick={onChangeContacts}
             >
-              {t("InvitationSettingsContacts")}
+              {t("InvitationSettingsContacts", {
+                productName: t("Common:ProductName"),
+              })}
             </Text>
           </div>
 
@@ -226,7 +230,9 @@ const InvitationSettings = ({
             lineHeight="16px"
             className={styles.checkboxDescription}
           >
-            {t("InvitationSettingsContactsDescription")}
+            {t("InvitationSettingsContactsDescription", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
         </div>
 
@@ -253,7 +259,9 @@ const InvitationSettings = ({
             lineHeight="16px"
             className={styles.checkboxDescription}
           >
-            {t("InvitationSettingsGuestsDescription")}
+            {t("InvitationSettingsGuestsDescription", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
         </div>
       </div>

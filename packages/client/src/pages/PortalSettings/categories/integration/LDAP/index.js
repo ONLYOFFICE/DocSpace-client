@@ -87,7 +87,7 @@ const LDAP = ({
           t={t}
           i18nKey="LdapIntro"
           ns="Ldap"
-          values={{ link }}
+          values={{ productName: t("Common:ProductName"), link }}
           components={{
             1: (
               <Link

@@ -597,7 +597,9 @@ const InviteInput = ({
               productName: t("Common:ProductName"),
             })
           : !allowInvitingGuests
-            ? t("InviteToRoomManuallyInfoMembers")
+            ? t("InviteToRoomManuallyInfoMembers", {
+                productName: t("Common:ProductName"),
+              })
             : t("InviteToRoomManuallyInfoGuest", {
                 productName: t("Common:ProductName"),
               })}

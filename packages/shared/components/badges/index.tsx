@@ -290,9 +290,7 @@ const Badges = ({
             label={fillingStatusLabel}
             title={fillingStatusTitle}
             {...versionBadgeProps}
-            style={{
-              width: "max-content",
-            }}
+            maxWidth="max-content"
           />
         </BadgeWrapper>
       ) : null}

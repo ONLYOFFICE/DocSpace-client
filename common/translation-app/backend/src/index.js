@@ -44,6 +44,7 @@ async function registerRoutes() {
   server.register(require('./routes/namespaces'), { prefix: '/api/namespaces' });
   server.register(require('./routes/translations'), { prefix: '/api/translations' });
   server.register(require('./routes/ollama'), { prefix: '/api/ollama' });
+  server.register(require('./routes/search'), { prefix: '/api/search' });
   
   // Register key usage routes
   server.register(require('./routes/keyUsageRoutes'));

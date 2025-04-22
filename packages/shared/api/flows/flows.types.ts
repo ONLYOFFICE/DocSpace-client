@@ -299,3 +299,5 @@ export interface ContentBlock {
   media_url?: string[];
   component: string;
 }
+
+export type TEventDelivery = "polling" | "direct" | "stream" | "";

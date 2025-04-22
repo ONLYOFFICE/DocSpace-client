@@ -11,6 +11,7 @@ import {
   Node,
   SimpleRunFlowResponse,
   Message,
+  TEventDelivery,
 } from "./flows.types";
 import { getCookie } from "../../utils/cookie";
 
@@ -21,6 +22,8 @@ import {
   CHAT_ID,
   SUMMARIZE_FILE_ID,
 } from "./flows.constants";
+
+let eventDelivery: TEventDelivery = "";
 
 class FlowsApi {
   private api: AxiosInstance;
@@ -341,11 +344,40 @@ class FlowsApi {
   ): Promise<ReadableStream<Uint8Array>> {
     const xApiKey = getCookie("chat_api_key");
 
+    if (!eventDelivery) {
+      const configResponse: { data: { event_delivery: TEventDelivery } } =
+        await FlowsApi.getAPI().get("/config");
+
+      eventDelivery = configResponse.data.event_delivery;
+    }
+
+    if (eventDelivery === "direct") {
+      const response = await fetch(
+        `/onlyflow/api/v1/build/${flowId}/flow?stream=true`,
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          signal: abortController.signal,
+          headers: {
+            "x-api-key": xApiKey!,
+            Connection: "close",
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      return response.body as ReadableStream<Uint8Array>;
+    }
+
+    const buildResponse: { data: { job_id: string } } =
+      await FlowsApi.getAPI().post(`/build/${flowId}/flow`, data);
+
+    const jobId = buildResponse.data.job_id;
+
     const response = await fetch(
-      `/onlyflow/api/v1/build/${flowId}/flow?stream=true`,
+      `/onlyflow/api/v1/build/${jobId}/events?stream=true`,
       {
-        method: "POST",
-        body: JSON.stringify(data),
+        method: "GET",
         signal: abortController.signal,
         headers: {
           "x-api-key": xApiKey!,

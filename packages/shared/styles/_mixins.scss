@@ -18,19 +18,19 @@
 }
 
 @mixin not-mobile {
-  @media (min-width: #{$mobile + 1}) {
+  @media (min-width: #{$mobile + 0.1}) {
     @content;
   }
 }
 
 @mixin tablet {
-  @media (min-width: #{$mobile + 1}) and (max-width: #{$tablet}) {
+  @media (min-width: #{$mobile + 0.1}) and (max-width: #{$desktop - 0.1}) {
     @content;
   }
 }
 
 @mixin tablet-and-below {
-  @media (max-width: #{$tablet}) {
+  @media (max-width: #{$desktop - 0.1}) {
     @content;
   }
 }

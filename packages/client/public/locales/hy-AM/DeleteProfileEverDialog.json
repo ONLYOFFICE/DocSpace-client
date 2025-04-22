@@ -12,9 +12,11 @@
   "DeleteUser": "Ջնջել օգտվողին",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> կջնջվի. Այս գործողությունը հնարավոր չէ հետարկել:",
   "DeletingUsers": "Օգտատերերի ջնջում",
+  "PersonalDataDeletionInfo": " Անձնական տվյալները, ընտրված օգտատերերի {{sectionNameFirst}} և {{sectionNameSecond}} բաժինների բոլոր անձնական ֆայլերն ու թղթապանակները ընդմիշտ կջնջվեն: Ընտրված օգտատերերի ֆայլերն ու թղթապանակները, որոնք պահվում են ընդհանուր բաժիններում*, օրինակ՝ սենյակներում, կմնան {{productName}}-ում:",
   "PleaseNote": "Խնդրում ենք հաշվի առնել՝",
   "ReassignDataToAnotherUser": "Վերահանձնարարել տվյալները մեկ այլ օգտվողի",
   "SuccessfullyDeleteGuestInfoMessage": "Հյուրը հաջողությամբ ջնջվել է",
   "SuccessfullyDeleteUserInfoMessage": "Օգտվողը հաջողությամբ ջնջվել է",
-  "ToBeAbleToReassignData": "Որպեսզի կարողանաք վերանշանակել տվյալները, ջնջեք մեկ օգտատեր:"
+  "ToBeAbleToReassignData": "Որպեսզի կարողանաք վերանշանակել տվյալները, ջնջեք մեկ օգտատեր:",
+  "UserFilesRemovalScope": "Անձնական տվյալները, բոլոր ֆայլերն ու թղթապանակները այս օգտատիրոջ {{sectionNameFirst}} և {{sectionNameSecond}} բաժիններում ընդմիշտ կջնջվեն:"
 }

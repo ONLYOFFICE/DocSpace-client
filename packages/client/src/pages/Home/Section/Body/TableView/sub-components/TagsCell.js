@@ -35,6 +35,7 @@ const TagsCell = ({ item, tagCount, onSelectTag, sideColor }) => {
     width: "100%",
     overflow: "hidden",
     display: item.thirdPartyIcon ? "flex" : "",
+    marginInlineEnd: "8px",
   };
 
   const tags = [];

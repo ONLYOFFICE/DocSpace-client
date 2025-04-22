@@ -190,6 +190,9 @@ export type TComboboxProps = {
   onSelect?: (option: TOption) => void;
   /** On toggle */
   onToggle?: (e: React.MouseEvent<HTMLDivElement>, isOpen: boolean) => void;
+
+  /** Indicates if the backdrop should be shown */
+  shouldShowBackdrop?: boolean;
 };
 
 export type TComboButtonProps = {

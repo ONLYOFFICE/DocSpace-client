@@ -1,5 +1,7 @@
 {
   "CancelUpload": "Nahrávání bylo přerušeno. Některé soubory nebyly nahrány.",
   "HideInput": "Skrýt",
-  "Ready": "Hotovo"
+  "Ready": "Hotovo",
+  "UploadingAndConversion": "Nahrávání a konverze",
+  "UploadingError": "Chyba při nahrávání"
 }

@@ -1,11 +1,11 @@
 services:
   tests-ci:
-    image: tests
+    image: sdk-tests
     build:
       context: ../..
       dockerfile: packages/sdk/Dockerfile
   tests-local:
-    image: tests
+    image: sdk-tests
     ports:
       - "5112:5112"
     volumes:

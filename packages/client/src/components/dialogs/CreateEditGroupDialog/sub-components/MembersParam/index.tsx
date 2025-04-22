@@ -69,7 +69,9 @@ const MembersParam = ({
 
   return (
     <div>
-      <Styled.Header>{t("Common:Members")}</Styled.Header>
+      <Styled.Header className="membersHeader">
+        {t("Common:Members")}
+      </Styled.Header>
 
       <Styled.AddMembersButton onClick={onShowSelectMembersPanel}>
         <SelectorAddButton iconName={PlusSvgUrl} />

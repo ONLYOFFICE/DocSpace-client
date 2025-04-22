@@ -466,6 +466,10 @@ export const getCreateShareLinkKey = (userId: string, fileType?: FileType) => {
   return `link-create-document-${fileType ?? ""}-${userId}`;
 };
 
+export const evenPrimaryLink = (fileLinks: TFileLink[]) => {
+  return fileLinks.map((link) => link?.sharedTo?.primary).includes(true);
+};
+
 export const DEFAULT_CREATE_LINK_SETTINGS = {
   access: ShareAccessRights.ReadOnly,
   internal: false,

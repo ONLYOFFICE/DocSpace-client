@@ -1,4 +1,6 @@
 {
   "DeleteForeverButton": "Изтрий завинаги",
-  "DeleteForeverTitle": "Изтриване завинаги?"
+  "DeleteForeverNote": "Всички елементи от раздел {{sectionName}} ще бъдат изтрити завинаги. Няма да можете да ги възстановите.",
+  "DeleteForeverTitle": "Изтриване завинаги?",
+  "SuccessEmptyAction": "Раздел {{sectionName}} е изпразнен"
 }

@@ -70,6 +70,7 @@ export type SdkSearchParams = {
   theme?: string | undefined;
   editorGoBack?: boolean | "event";
   is_file?: boolean;
+  isSDK?: boolean;
 };
 
 export type RootPageProps = {
@@ -280,6 +281,7 @@ export type TEventData = {
   emails?: string[];
   c?: string;
   version?: number;
+  link?: string;
 };
 
 export type TEvent = {

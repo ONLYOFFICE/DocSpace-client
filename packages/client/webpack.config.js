@@ -41,6 +41,8 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 const minifyJson = require("@docspace/shared/utils/minifyJson");
 
+const sharedDeps = require("@docspace/shared/constants/sharedDependencies");
+
 const path = require("path");
 
 const pkg = require("./package.json");
@@ -384,17 +386,8 @@ module.exports = (env, argv) => {
       remotes: [],
       exposes: {},
       shared: {
-        ...Object.entries(deps).reduce((acc, [key, value]) => {
-          if (key !== "@onlyoffice/docspace-sdk-js") {
-            acc[key] = value;
-          }
-          return acc;
-        }, {}),
-        "@onlyoffice/docspace-sdk-js": {
-          singleton: true,
-          eager: true,
-          requiredVersion: deps["@onlyoffice/docspace-sdk-js"],
-        },
+        ...deps,
+        ...sharedDeps,
       },
     }),
   );

@@ -1,4 +1,6 @@
 {
+  "DeleteVersion": "バージョンを削除",
+  "DeleteVersionDescription": "ファイルのバージョンを削除しようとしています。これ以上見ることや復元することはできません。本当に続行してもよろしいですか？",
   "EditComment": "コメントの編集",
   "Version": "に変更"
 }

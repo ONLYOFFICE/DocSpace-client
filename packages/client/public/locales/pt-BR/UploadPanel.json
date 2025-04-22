@@ -1,5 +1,7 @@
 {
   "CancelUpload": "O upload foi interrompido. Alguns arquivos não foram carregados.",
   "HideInput": "Oculta",
-  "Ready": "Concluído"
+  "Ready": "Concluído",
+  "UploadingAndConversion": "Upload e conversão",
+  "UploadingError": "Erro de upload"
 }

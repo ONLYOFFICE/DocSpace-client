@@ -193,6 +193,7 @@
   "FirstName": "ຊື່ແທ້",
   "Folder": "ແຟ້ມ",
   "Folders": "ໂຟນເດີ",
+  "Forms": "ແບບຟອມ",
   "FormTemplates": "ຮູບແບບແບບຟອມ",
   "Free": "ຟຣີ",
   "GeneratePassword": "ສ້າງລະຫັດຜ່ານ",
@@ -517,6 +518,5 @@
   "PortalNameLength": "ຊື່ບັນຊີຕ້ອງມີຄວາມຍາວລະຫວ່າງ {{minLength}} ຫາ {{maxLength}} ຕົວອັກສອນ",
   "PortalNameIncorrect": "ບໍ່ຖືກຕ້ອງ ບັນຊີ ຊື່ ",
   "BackupCreatedSuccess": "ສຳເນົາສໍາຮອງໄດ້ຖືກສ້າງສຳເລັດແລ້ວ.",
-  "WithSubfolders": "ມີໂຟເດີຍ່ອຍ",
-  "Forms": "ແບບຟອມ"
+  "WithSubfolders": "ມີໂຟເດີຍ່ອຍ"
 }

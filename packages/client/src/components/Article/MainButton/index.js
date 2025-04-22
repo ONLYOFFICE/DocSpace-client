@@ -79,7 +79,8 @@ const StyledButton = styled(Button)`
       $currentColorScheme.main?.accent} !important;
     background: ${({ $currentColorScheme }) =>
       $currentColorScheme.main?.accent};
-    border: ${({ $currentColorScheme }) => $currentColorScheme.main?.accent};
+    border-color: ${({ $currentColorScheme }) =>
+      $currentColorScheme.main?.accent};
 
     ${(props) =>
       !props.isDisabled &&
@@ -90,7 +91,7 @@ const StyledButton = styled(Button)`
           opacity: 0.85;
           background: ${({ $currentColorScheme }) =>
             $currentColorScheme.main?.accent};
-          border: ${({ $currentColorScheme }) =>
+          border-color: ${({ $currentColorScheme }) =>
             $currentColorScheme.main?.accent};
         }
 
@@ -99,8 +100,8 @@ const StyledButton = styled(Button)`
             $currentColorScheme.main?.accent};
           background: ${({ $currentColorScheme }) =>
             $currentColorScheme.main?.accent};
-          border: ${({ $currentColorScheme }) =>
-            $currentColorScheme.main?.accent};
+          border-color: ${({ $currentColorScheme }) =>
+            $currentColorScheme.main?.accent} !important;
           opacity: 1;
           filter: brightness(90%);
           cursor: pointer;
@@ -720,8 +721,9 @@ const ArticleMainButtonContent = (props) => {
     isRoomAdmin && isAccountsPage ? t("Common:Invite") : t("Common:Actions");
 
   let isDisabled = false;
+
   if (isFrame) {
-    isDisabled = disableActionButton;
+    isDisabled = disableActionButton && !security?.Create;
   } else if (isSettingsPage) {
     isDisabled = isSettingsPage;
   } else if (isAccountsPage) {

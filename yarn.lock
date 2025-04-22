@@ -2828,7 +2828,7 @@ __metadata:
     "@babel/preset-react": "npm:7.25.7"
     "@babel/preset-typescript": "npm:7.25.7"
     "@codemirror/lang-javascript": "npm:6.2.2"
-    "@onlyoffice/docspace-sdk-js": "file:./onlyoffice-docspace-sdk-js-2.0.0.tgz"
+    "@onlyoffice/docspace-sdk-js": "npm:2.0.0"
     "@svgr/webpack": "npm:5.5.0"
     "@types/crypto-js": "npm:4.2.2"
     "@types/element-resize-detector": "npm:1.1.6"
@@ -4951,12 +4951,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@onlyoffice/docspace-sdk-js@file:./onlyoffice-docspace-sdk-js-2.0.0.tgz::locator=%40docspace%2Fclient%40workspace%3Apackages%2Fclient":
+"@onlyoffice/docspace-sdk-js@npm:2.0.0":
   version: 2.0.0
-  resolution: "@onlyoffice/docspace-sdk-js@file:./onlyoffice-docspace-sdk-js-2.0.0.tgz#./onlyoffice-docspace-sdk-js-2.0.0.tgz::hash=5b0aa4&locator=%40docspace%2Fclient%40workspace%3Apackages%2Fclient"
+  resolution: "@onlyoffice/docspace-sdk-js@npm:2.0.0"
   dependencies:
-    pnpm: "npm:^9.15.4"
-  checksum: 10/ca20192d77ccf038f4ec9bffa189e5a3afa298d268d5db4de34237181b7f9cf0c658f0f7b79efa242fb49e0185689c6c039591fee925f4b73c5eafbd0064a8dc
+    pnpm: "npm:9.15.4"
+  checksum: 10/d0ee1a45d47458009d2db0ed7f4547e360f8c408464edbc3a68d4e21ab4420996b9dffefdc28344ff26206be113f619d8d5cda9f8dbb01a864d00116d6d5c17d
   languageName: node
   linkType: hard
 
@@ -22942,15 +22942,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pnpm@npm:^9.15.4":
-  version: 9.15.7
-  resolution: "pnpm@npm:9.15.7"
+"pnpm@npm:9.15.4":
+  version: 9.15.4
+  resolution: "pnpm@npm:9.15.4"
   dependencies:
     node-gyp: "npm:latest"
   bin:
     pnpm: bin/pnpm.cjs
     pnpx: bin/pnpx.cjs
-  checksum: 10/b91272ea3bc176ca30c5bee7b8a5aa8a6e2ec6a91ed944d29bf86ab6ba3f673f62e1e745f72851dcb758465dc5d98981992855a280c91b81958338b1ef30ed0b
+  checksum: 10/67713be937d6d8c36ba6c83514eff0a0a3bcb5df2efaf065ef8acb76875896169bfb381b82eed0f6a718ea54fad9ba7fb4a506d99e38b9e5d7743748998fc085
   languageName: node
   linkType: hard
 

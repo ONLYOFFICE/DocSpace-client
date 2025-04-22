@@ -189,6 +189,12 @@
       flex-wrap: nowrap;
       align-items: center;
       align-items: center;
+
+      &:hover {
+        svg path {
+          fill: var(--icon-button-hover-color) !important;
+        }
+      }
     }
   }
 

@@ -195,7 +195,9 @@
   "FirstName": "මුල් නම",
   "Folder": "බහාලුම",
   "Folders": "බහාලුම්",
+  "Form": "Obrazec",
   "FormRoom": "ආකෘතිපත්‍ර කාමරය",
+  "Forms": "ආකෘතිපත්‍ර",
   "FormTemplates": "ආකෘතිපත්‍ර අච්චු",
   "Free": "නොමිලේ",
   "GeneratePassword": "මුරපදයක් උත්පාදනය",
@@ -237,6 +239,7 @@
   "LearnMore": "තව දැනගන්න",
   "LinkAccessDenied": "සබැඳියට ප්‍රවේශය ප්‍රතික්ෂේපිතයි",
   "LinkCopySuccess": "සබැඳිය පසුරුපුවරුවට පිටපත් විය",
+  "LinkCopySuccessWithCustomFilter": "Povezava do datoteke z omogočenim <strong>Prilagojenim filtrom</strong> je uspešno kopirana v odložišče.",
   "LinkDoesNotExist": "ඔබ විවෘත කිරීමට උත්සාහ කරන සබැඳිය නොපවතී.",
   "LinkExpireAfter": "සබැඳිය <1>{{date}}</1>ට පසු කල් ඉකුත් වේ",
   "LinkExpired": "සබැඳිය කල් ඉකුත් වී ඇත.",
@@ -315,6 +318,8 @@
   "People": "පුද්ගලයින්",
   "Petabyte": "පෙ.බ.",
   "Phone": "දුරකථනය",
+  "PluginDisabled": "Vtičnik onemogočen",
+  "PluginEnabled": "Vtičnik omogočen",
   "Plugins": "පේනු",
   "PortalAdmin": "{{productName}} පරිපාලක",
   "PortalOwner": "{{productName}} හිමිකරු",
@@ -369,6 +374,7 @@
   "RoleEditorDescription": "පවතින ගොනුවල මෙහෙයුම්: බැලීම්, සංස්කරණ, ආකෘතිපත්‍ර පිරවීම්, සමාලෝචන, අදහස් දැක්වීම්.",
   "RoleFormFiller": "ආකෘතිපත්‍ර පිරවුම",
   "RoleFormFillerDescription": "පවතින ගොනුවල මෙහෙයුම්: බැලීම්, ආකෘතිපත්‍ර පිරවීම්, සමාලෝචන, අදහස් දැක්වීම්.",
+  "RolePortalAdminDescription": "Skrbniki {{productName}} imajo dostop do nastavitev {{productName}}, lahko upravljajo in arhivirajo sobe, vabijo nove uporabnike in dodeljujejo vloge pod svojo raven. Vsi skrbniki imajo dostop do oddelka {{sectionName}}.",
   "RoleReviewer": "සමාලෝචක",
   "RoleReviewerDescription": "පවතින ගොනුවල මෙහෙයුම්: බැලීම්, සමාලෝචන, අදහස් දැක්වීම්.",
   "RoleViewer": "දකින්නා",
@@ -588,6 +594,5 @@
   "PortalNameEmpty": "ගිණුමේ නම හිස්ය",
   "PortalNameLength": "ගිණුමේ නම අකුරු {{minLength}} සහ {{maxLength}} අතර විය යුතුය",
   "PortalNameIncorrect": "ගිණුමේ නම වැරදිය",
-  "BackupCreatedSuccess": "උපස්ථ පිටපත සාර්ථකව සාදා ඇත.",
-  "Forms": "ආකෘතිපත්‍ර"
+  "BackupCreatedSuccess": "උපස්ථ පිටපත සාර්ථකව සාදා ඇත."
 }

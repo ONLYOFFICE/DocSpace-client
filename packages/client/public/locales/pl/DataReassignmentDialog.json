@@ -13,6 +13,7 @@
   "ReassignData": "Ponownie przypisz dane",
   "ReassigningDataToAnother": "Rozpoczęto proces przypisywania danych użytkownika <0>{{fromUser}}</0> użytkownikowi <1>{{toUser}}</1>. Może to zająć trochę czasu.",
   "ReassigningDataToItself": "Rozpoczęto proces przypisywania danych użytkownika <0>{{fromUser}}</0> użytkownikowi <1>{{toUser}}</1> <2>{{you}}</2>. Może to zająć trochę czasu.",
+  "RoomsOnlyReassignment": "Przeniesiemy pokoje utworzone przez kontakt.",
   "StartTransferAgain": "Rozpocznij transfer ponownie",
   "UserToWhomTheDataWillBeTransferred": "Użytkownik, któremu zostaną przekazane dane"
 }

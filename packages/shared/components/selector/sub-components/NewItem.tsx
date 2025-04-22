@@ -99,7 +99,7 @@ const NewItem = ({
     >
       <SelectorAddButton onClick={onCreateClickAction} isAction />
       <Text
-        className="label label-disabled clicked-label"
+        className="selector-item_label label-disabled clicked-label"
         fontWeight={600}
         fontSize="14px"
         noSelect

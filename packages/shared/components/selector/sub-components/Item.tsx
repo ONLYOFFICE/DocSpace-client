@@ -256,7 +256,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         ) : (
           <div className="selector-item_name">
             <Text
-              className="label label-disabled"
+              className="selector-item_label label-disabled"
               fontWeight={600}
               fontSize="14px"
               noSelect
@@ -290,7 +290,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
         {isDisabled && disabledText ? (
           <Text
-            className="label disabled-text"
+            className="selector-item_label disabled-text"
             fontWeight={600}
             fontSize="13px"
             lineHeight="20px"

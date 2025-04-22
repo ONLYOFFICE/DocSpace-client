@@ -12,9 +12,11 @@
   "DeleteUser": "ユーザーを削除します",
   "DeleteUserMessage": "{{userCaption}}<strong>{{user}}</strong>は削除されます。このアクションは元に戻せません。",
   "DeletingUsers": "ユーザーの削除",
+  "PersonalDataDeletionInfo": "選択したユーザーの個人データ、{{sectionNameFirst}} および {{sectionNameSecond}} セクション内のすべての個人ファイルとフォルダは完全に削除されます。ルームなどの共通セクションに保存されているユーザーのファイルとフォルダは {{productName}} に残ります。",
   "PleaseNote": "ご注意ください：",
   "ReassignDataToAnotherUser": "データを別のユーザーに再割り当てする",
   "SuccessfullyDeleteGuestInfoMessage": "ゲストは正常に削除されました",
   "SuccessfullyDeleteUserInfoMessage": "ユーザーの削除に成功しました。",
-  "ToBeAbleToReassignData": "データを再割り当てするためには、一度に一人のユーザーを削除してください。"
+  "ToBeAbleToReassignData": "データを再割り当てするためには、一度に一人のユーザーを削除してください。",
+  "UserFilesRemovalScope": "このユーザーの個人データ、{{sectionNameFirst}} および {{sectionNameSecond}} セクション内のすべてのファイルとフォルダは完全に削除されます。"
 }

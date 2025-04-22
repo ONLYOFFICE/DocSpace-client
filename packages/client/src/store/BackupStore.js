@@ -267,7 +267,6 @@ class BackupStore {
     let accounts = [];
     /** @type {ThirdPartyAccountType} */
     let selectedAccount = {};
-    let index = 0;
 
     providers.forEach((item) => {
       const { account, isConnected } = this.getThirdPartyAccount(item, t);
@@ -277,9 +276,8 @@ class BackupStore {
       accounts.push(account);
 
       if (isConnected) {
-        selectedAccount = { ...accounts[index] };
+        selectedAccount = { ...account };
       }
-      index++;
     });
 
     accounts = accounts.sort((storage) => (storage.connected ? -1 : 1));
@@ -310,10 +308,12 @@ class BackupStore {
       ? serviceTitle
       : `${serviceTitle} (${t("Common:ActivationRequired")})`;
 
+    // const isConnected =
+    //   this.connectedThirdPartyAccount?.providerKey === "WebDav"
+    //     ? serviceTitle === this.connectedThirdPartyAccount?.title
+    //     : provider.name === this.connectedThirdPartyAccount?.title;
     const isConnected =
-      this.connectedThirdPartyAccount?.providerKey === "WebDav"
-        ? serviceTitle === this.connectedThirdPartyAccount?.title
-        : provider.key === this.connectedThirdPartyAccount?.providerKey;
+      provider.name === this.connectedThirdPartyAccount?.title;
 
     const isDisabled = !provider.connected && !this.authStore.isAdmin;
 
@@ -693,7 +693,7 @@ class BackupStore {
     const requiredKeys = Object.keys(this.requiredFormSettings);
     if (!requiredKeys.length) return;
 
-    return !requiredKeys.some((key) => {
+    return !this.requiredFormSettings.some((key) => {
       const value = this.formSettings[key];
       return !value || !value.trim();
     });
@@ -703,7 +703,7 @@ class BackupStore {
     const errors = {};
     let firstError = false;
 
-    Object.keys(this.requiredFormSettings).forEach((key) => {
+    Object.values(this.requiredFormSettings).forEach((key) => {
       const elem = this.formSettings[key];
 
       errors[key] = !elem.trim();

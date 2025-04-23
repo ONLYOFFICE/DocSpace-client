@@ -2061,3 +2061,11 @@
   --download-dialog-text-color: #{$gray-dark};
   --download-dialog-warning-color: #{$dark-error-status};
 }
+
+.light {
+  --modal-dialog-border-color: #{$gray-light-mid};
+}
+
+.dark {
+  --modal-dialog-border-color: #{$gray-dark-strong};
+}

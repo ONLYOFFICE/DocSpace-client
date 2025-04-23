@@ -67,6 +67,7 @@ const StartFillingPanel = ({
   settings,
   inviteUserToRoom,
   setStartFillingPanelVisible,
+  withBorder,
   ...props
 }: IStartFillingPanelProps) => {
   const [infoBarVisible, setInfoBarVisible] = useLocalStorage(
@@ -230,6 +231,7 @@ const StartFillingPanel = ({
     <ModalDialog
       visible
       withBodyScroll
+      withBorder={withBorder}
       onClose={closeStartFillingPanel}
       displayType={ModalDialogType.aside}
       containerVisible={isRoleSelectorVisible || isInvitePanelVisible}

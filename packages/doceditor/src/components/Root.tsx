@@ -373,6 +373,7 @@ const Root = ({
 
       {user && settings && fileInfo && startFillingPanelVisible && roomId && (
         <StartFillingPanel
+          withBorder
           user={user}
           roles={roles}
           roomId={roomId}

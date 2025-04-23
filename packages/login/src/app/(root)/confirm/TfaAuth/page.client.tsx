@@ -51,7 +51,6 @@ import { TError } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { useSearchParams } from "next/navigation";
 import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
-import { useTheme } from "styled-components";
 
 type TfaAuthFormProps = {
   passwordHash: TPasswordHash;
@@ -64,11 +63,9 @@ const TfaAuthForm = ({
   passwordHash,
   userName,
   defaultPage = "/",
-  colorTheme,
 }: TfaAuthFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
-  const theme = useTheme();
 
   const searchParams = useSearchParams();
 
@@ -194,15 +191,9 @@ const TfaAuthForm = ({
                 ? t("Common:LoadingProcessing")
                 : t("Common:ContinueButton")
             }
-            isDisabled={false}
+            isDisabled={!code.length || isLoading}
             isLoading={isLoading}
             onClick={onSubmit}
-            style={
-              {
-                "--button-background-primary-disabled": `${theme.currentColorScheme?.main?.accent}`,
-                "--button-border-primary-disabled": `${theme.currentColorScheme?.main?.accent}`,
-              } as React.CSSProperties
-            }
           />
         </div>
       </div>

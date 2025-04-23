@@ -647,13 +647,6 @@ const LoginForm = ({
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onSubmit}
-        style={
-          {
-            "--button-background-primary": `${theme.currentColorScheme?.main?.accent}`,
-            "--button-border-primary": `${theme.currentColorScheme?.main?.accent}`,
-            "--button-background-primary-active": `${theme.currentColorScheme?.main?.accent}`,
-          } as React.CSSProperties
-        }
       />
     </form>
   );

@@ -249,15 +249,9 @@ const TfaActivationForm = ({
               label={
                 isLoading ? t("Common:LoadingProcessing") : t("SetAppButton")
               }
-              isDisabled={false}
+              isDisabled={!code.length || isLoading}
               isLoading={isLoading}
               onClick={onSubmit}
-              style={
-                {
-                  "--button-background-primary-disabled": `${theme.currentColorScheme?.main?.accent}`,
-                  "--button-border-primary-disabled": `${theme.currentColorScheme?.main?.accent}`,
-                } as React.CSSProperties
-              }
             />
           </div>
         </div>

@@ -62,7 +62,9 @@ const ContextButton = ({
     }
     setAnimationClasses([]);
     setAnimationPlayed(false);
-    setGuidAnimationVisible(false);
+    if (setGuidAnimationVisible) {
+      setGuidAnimationVisible(false);
+    }
   }, [setGuidAnimationVisible]);
 
   useEffect(() => {
@@ -95,7 +97,9 @@ const ContextButton = ({
         cleanupRef.current();
         cleanupRef.current = null;
       }
-      setGuidAnimationVisible(false);
+      if (setGuidAnimationVisible) {
+        setGuidAnimationVisible(false);
+      }
       setAnimationClasses([]);
     };
   }, [setGuidAnimationVisible]);

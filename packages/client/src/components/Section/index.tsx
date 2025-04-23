@@ -51,6 +51,7 @@ export default inject(
     flowStore,
     filesSettingsStore,
     selectedFolderStore,
+    userStore,
   }: {
     settingsStore: any;
     dialogsStore: any;
@@ -59,6 +60,7 @@ export default inject(
     flowStore: any;
     filesSettingsStore: any;
     selectedFolderStore: any;
+    userStore: any;
   }) => {
     const {
       isDesktopClient: isDesktop,
@@ -90,6 +92,8 @@ export default inject(
 
     const { id } = selectedFolderStore;
 
+    const { user } = userStore;
+
     return {
       isDesktop,
       currentDeviceType,
@@ -112,6 +116,7 @@ export default inject(
       aiSelectedFolder: id,
       aiUserId: flowStore.userId,
       vectorizedFiles,
+      user,
     };
   },
 )(observer(SectionWrapper));

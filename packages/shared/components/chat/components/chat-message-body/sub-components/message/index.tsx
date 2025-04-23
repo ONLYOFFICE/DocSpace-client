@@ -4,6 +4,7 @@ import classNames from "classnames";
 import AIIconReactSvgUrl from "PUBLIC_DIR/images/ai.chat.avatar.react.svg?url";
 
 import { TFile } from "../../../../../../api/files/types";
+import { TUser } from "../../../../../../api/people/types";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../../../../avatar";
 
@@ -21,11 +22,13 @@ const Message = ({
   message,
   displayFileExtension,
   vectorizedFiles,
+  user,
   getIcon,
 }: {
   message: ChatMessageType;
   displayFileExtension: boolean;
   vectorizedFiles: TFile[];
+  user: TUser;
   getIcon: (size: number, fileExst: string) => string;
 }) => {
   const files: TFile[] = message.fileIds?.length
@@ -48,7 +51,7 @@ const Message = ({
     >
       <Avatar
         size={AvatarSize.min}
-        source={!message.isSend ? AIIconReactSvgUrl : message.icon || ""}
+        source={!message.isSend ? AIIconReactSvgUrl : user.avatarSmall || ""}
         role={AvatarRole.user}
         noClick
         isNotIcon

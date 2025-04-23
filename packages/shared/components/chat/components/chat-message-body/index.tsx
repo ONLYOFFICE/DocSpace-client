@@ -29,6 +29,7 @@ import { observer } from "mobx-react";
 import classNames from "classnames";
 
 import { TFile } from "../../../../api/files/types";
+import { TUser } from "../../../../api/people/types";
 
 import { Scrollbar } from "../../../scrollbar";
 import type { Scrollbar as CustomScrollbar } from "../../../scrollbar/custom-scrollbar";
@@ -43,10 +44,12 @@ import styles from "./ChatMessageBody.module.scss";
 const ChatMessageBody = ({
   displayFileExtension,
   vectorizedFiles,
+  user,
   getIcon,
 }: {
   displayFileExtension: boolean;
   vectorizedFiles: TFile[];
+  user: TUser;
   getIcon: (size: number, fileExst: string) => string;
 }) => {
   const { messages } = useMessageStore();
@@ -86,6 +89,7 @@ const ChatMessageBody = ({
                 message={message}
                 displayFileExtension={displayFileExtension}
                 vectorizedFiles={vectorizedFiles}
+                user={user}
                 getIcon={getIcon}
               />
             );

@@ -30,6 +30,7 @@ import { TViewAs } from "../../types";
 
 import { ContextMenuModel } from "../context-menu";
 import { TFile, TFolder } from "../../api/files/types";
+import { TUser } from "../../api/people/types";
 
 export type SubInfoPanelHeaderProps = {
   children: React.JSX.Element | null;
@@ -157,6 +158,7 @@ export type SectionProps = Omit<SubInfoPanelHeaderProps, "children"> &
     aiSelectedFolder?: string | number;
     aiUserId?: string;
     vectorizedFiles?: TFile[];
+    user?: TUser;
   };
 
 export type SectionContextMenuProps = {

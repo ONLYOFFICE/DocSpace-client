@@ -29,6 +29,7 @@ import React from "react";
 import { DeviceType } from "../../enums";
 import { TFile } from "../../api/files/types";
 import { CHAT_ID } from "../../api/flows/flows.constants";
+import { TUser } from "../../api/people/types";
 
 import ChatHeader from "./components/chat-header";
 import ChatBody from "./components/chat-body";
@@ -47,6 +48,7 @@ const Chat = ({
   aiSelectedFolder,
   aiUserId,
   vectorizedFiles,
+  user,
 
   getIcon,
 }: {
@@ -58,6 +60,8 @@ const Chat = ({
   aiUserId: string;
 
   vectorizedFiles: TFile[];
+
+  user: TUser;
 
   getIcon: (size: number, fileExst: string) => string;
 }) => {
@@ -76,6 +80,7 @@ const Chat = ({
                 displayFileExtension={displayFileExtension}
                 getIcon={getIcon}
                 vectorizedFiles={vectorizedFiles}
+                user={user}
               />
               <ChatInput
                 currentDeviceType={currentDeviceType}

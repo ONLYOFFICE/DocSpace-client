@@ -16,6 +16,8 @@ export default class MessageStore {
 
   aiSelectedFolder: string | number = "";
 
+  aiUserId: string = "";
+
   sessions: Map<string, ChatMessageType[]> = new Map();
 
   currentSessions: string = "";
@@ -37,7 +39,11 @@ export default class MessageStore {
   setAiSelectedFolder = (aiSelectedFolder: string | number) => {
     this.aiSelectedFolder = aiSelectedFolder;
 
-    this.currentSessions = `folder-${aiSelectedFolder}-${new Date().getTime()}`;
+    this.currentSessions = `folder-${aiSelectedFolder}-${new Date().getTime()}-${this.aiUserId}`;
+  };
+
+  setAiUserId = (aiUserId: string) => {
+    this.aiUserId = aiUserId;
   };
 
   fetchMessages = async () => {
@@ -45,7 +51,10 @@ export default class MessageStore {
 
     this.isRequestRunning = true;
 
-    const messages = await FlowsApi.getMessages(this.flowId);
+    const messages = await FlowsApi.getMessages(
+      this.flowId,
+      this.aiSelectedFolder.toString(),
+    );
 
     const sessions = new Map<string, ChatMessageType[]>();
 
@@ -65,16 +74,15 @@ export default class MessageStore {
         }
       }
 
-      const msgWithoutFolder = removeFolderFromMessage(message.text);
+      const { cleanedMessage, fileIds } = extractFilesFromMessage(message.text);
 
-      const { cleanedMessage, fileIds } =
-        extractFilesFromMessage(msgWithoutFolder);
+      const msgWithoutFolder = removeFolderFromMessage(cleanedMessage);
 
       const isSend = message.sender === "User";
 
       const chatMessage: ChatMessageType = {
         isSend,
-        message: isSend ? cleanedMessage : message.text,
+        message: isSend ? msgWithoutFolder : message.text,
         sender_name: message.sender_name,
         files,
         id: message.id,
@@ -158,6 +166,14 @@ export default class MessageStore {
 
       this.abortController = new AbortController();
 
+      if (!this.messages.length) {
+        const startMsg = extractFilesFromMessage(
+          removeFolderFromMessage(message.substring(0, 15)),
+        );
+
+        this.currentSessions = `${this.currentSessions}_${startMsg.cleanedMessage}`;
+      }
+
       const eventsResponse = await FlowsApi.sendMessage(
         {
           inputs: {
@@ -184,74 +200,85 @@ export default class MessageStore {
 
         const decodedChunk = textDecoder.decode(value);
 
+        const allChunks = decodedChunk.split("\n\n").filter(Boolean);
+
         try {
-          if (decodedChunk.indexOf('"event": "add_message"') !== -1) {
-            const parsedChunk = JSON.parse(decodedChunk);
-
-            const data = parsedChunk.data;
-
-            const { cleanedMessage, fileIds } = extractFilesFromMessage(
-              removeFolderFromMessage(data.text),
-            );
-
-            runInAction(() => {
+          allChunks.forEach(async (c) => {
+            try {
               if (
-                this.messages.length &&
-                this.messages[this.messages.length - 1].id === data.id
-              ) {
-                this.messages[this.messages.length - 1] = {
-                  ...this.messages[this.messages.length - 1],
-                  message: cleanedMessage,
-                  fileIds,
-                  content_blocks: data.content_blocks,
-                };
-
+                !c.includes('"event": "add_message"') &&
+                !c.includes('"event": "token"') &&
+                !c.includes('"event": "end"')
+              )
                 return;
+
+              const chunk = JSON.parse(c);
+
+              if (chunk.event === "add_message") {
+                const data = chunk.data;
+
+                const { cleanedMessage, fileIds } = extractFilesFromMessage(
+                  removeFolderFromMessage(data.text),
+                );
+
+                runInAction(() => {
+                  if (
+                    this.messages.length &&
+                    this.messages[this.messages.length - 1].id === data.id
+                  ) {
+                    this.messages[this.messages.length - 1] = {
+                      ...this.messages[this.messages.length - 1],
+                      message: cleanedMessage,
+                      fileIds,
+                      content_blocks: data.content_blocks,
+                    };
+
+                    return;
+                  }
+
+                  this.messages = [
+                    ...this.messages,
+                    {
+                      ...data,
+                      message: cleanedMessage,
+                      fileIds,
+                      isSend:
+                        !this.messages[0] ||
+                        data.sender === this.messages[0].sender_name,
+                    },
+                  ];
+                });
               }
 
-              this.messages = [
-                ...this.messages,
-                {
-                  ...data,
-                  message: cleanedMessage,
-                  fileIds,
-                  isSend:
-                    !this.messages[0] ||
-                    data.sender === this.messages[0].sender_name,
-                },
-              ];
-            });
-          }
-
-          if (decodedChunk.indexOf('"event": "token"') !== -1) {
-            const parsedChunks = decodedChunk
-              .split("\n\n")
-              .filter(Boolean)
-              .map((chunk) => JSON.parse(chunk))
-              .map((c) => c.data.chunk)
-              .join("");
-
-            runInAction(() => {
-              this.messages[this.messages.length - 1].message += parsedChunks;
-            });
-          }
-
-          if (decodedChunk.indexOf('"event": "end"') !== -1) {
-            const userMsg = this.messages[this.messages.length - 2];
-            const msg = this.messages[this.messages.length - 1];
-
-            runInAction(() => {
-              this.isRequestRunning = false;
-
-              if (this.sessions.get(this.currentSessions)) {
-                this.sessions.get(this.currentSessions)!.push(userMsg, msg);
-              } else {
-                this.sessions.set(this.currentSessions, [userMsg, msg]);
+              if (chunk.event === "token") {
+                runInAction(() => {
+                  this.messages[this.messages.length - 1].message +=
+                    chunk.data.chunk;
+                });
               }
-            });
-          } else {
-            await stream();
-          }
+
+              if (chunk.event === "end") {
+                const userMsg = this.messages[this.messages.length - 2];
+                const msg = this.messages[this.messages.length - 1];
+
+                runInAction(() => {
+                  this.isRequestRunning = false;
+
+                  if (this.sessions.get(this.currentSessions)) {
+                    this.sessions.get(this.currentSessions)!.push(userMsg, msg);
+                  } else {
+                    this.sessions.set(this.currentSessions, [userMsg, msg]);
+                  }
+                });
+              }
+            } catch (e: unknown) {
+              console.log("++++++++ERROR++++++++");
+              console.log("Parsing failed");
+              console.log("-------------------");
+              console.log(c);
+            }
+          });
+          if (this.isRequestRunning) await stream();
         } catch (e: unknown) {
           if (
             (e as Error).name === "AbortError" ||
@@ -260,14 +287,7 @@ export default class MessageStore {
             console.log("Request was canceled");
             this.isRequestRunning = false;
             this.abortController = null;
-            return; // Stop processing
           }
-
-          console.log("++++++++ERROR++++++++");
-          console.log("Parsing failed");
-          console.log("-------------------");
-          console.log(decodedChunk);
-          this.isRequestRunning = false;
         }
       };
 
@@ -309,7 +329,7 @@ export default class MessageStore {
   };
 
   startNewSessions = () => {
-    this.currentSessions = `folder-${this.aiSelectedFolder}-${new Date().getTime()}`;
+    this.currentSessions = `folder-${this.aiSelectedFolder}-${new Date().getTime()}-${this.aiUserId}`;
     this.messages = [];
   };
 
@@ -326,19 +346,22 @@ export const MessageStoreContextProvider = ({
   children,
   aiChatID,
   aiSelectedFolder,
+  aiUserId,
 }: {
   children: React.ReactNode;
   aiChatID: string;
   aiSelectedFolder: string | number;
+  aiUserId: string;
 }) => {
   const store = React.useMemo(() => new MessageStore(), []);
 
   React.useEffect(() => {
     store.setFlowId(aiChatID);
+    store.setAiUserId(aiUserId);
     store.setAiSelectedFolder(aiSelectedFolder);
 
     store.fetchMessages();
-  }, [aiChatID, store, aiSelectedFolder]);
+  }, [aiChatID, store, aiSelectedFolder, aiUserId]);
 
   return (
     <MessageStoreContext.Provider value={store}>

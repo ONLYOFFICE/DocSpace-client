@@ -110,6 +110,7 @@ export default inject(
       displayFileExtension,
       aiChatID,
       aiSelectedFolder: id,
+      aiUserId: flowStore.userId,
       vectorizedFiles,
     };
   },

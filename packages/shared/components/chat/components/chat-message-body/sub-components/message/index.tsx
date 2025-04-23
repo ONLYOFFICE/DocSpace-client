@@ -28,10 +28,10 @@ const Message = ({
   vectorizedFiles: TFile[];
   getIcon: (size: number, fileExst: string) => string;
 }) => {
-  const files: TFile[] = message.fileIds
+  const files: TFile[] = message.fileIds?.length
     ? (message.fileIds
         ?.map((id) => {
-          const file = vectorizedFiles.find((f) => String(f.id) === id);
+          const file = vectorizedFiles.find((f) => String(f.id) === String(id));
 
           if (!file) return false;
 

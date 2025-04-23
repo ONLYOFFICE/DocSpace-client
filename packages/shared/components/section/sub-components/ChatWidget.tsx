@@ -106,6 +106,7 @@ type ChatWidgetProps = {
   displayFileExtension: boolean;
   aiChatID: string;
   aiSelectedFolder: string | number;
+  aiUserId: string;
   vectorizedFiles: TFile[];
 };
 
@@ -120,6 +121,7 @@ export const ChatWidget = memo(
     displayFileExtension,
     aiChatID,
     aiSelectedFolder,
+    aiUserId,
     vectorizedFiles,
   }: ChatWidgetProps) => {
     const [isFullScreen, setIsFullScreen] = useState(false);
@@ -176,6 +178,7 @@ export const ChatWidget = memo(
           displayFileExtension={displayFileExtension}
           aiChatID={aiChatID}
           aiSelectedFolder={aiSelectedFolder}
+          aiUserId={aiUserId}
           vectorizedFiles={vectorizedFiles}
         />
       </div>

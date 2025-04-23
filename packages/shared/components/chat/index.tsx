@@ -45,6 +45,7 @@ const Chat = ({
   displayFileExtension,
   aiChatID = CHAT_ID,
   aiSelectedFolder,
+  aiUserId,
   vectorizedFiles,
 
   getIcon,
@@ -54,6 +55,7 @@ const Chat = ({
 
   aiChatID: string;
   aiSelectedFolder: string | number;
+  aiUserId: string;
 
   vectorizedFiles: TFile[];
 
@@ -66,6 +68,7 @@ const Chat = ({
           <MessageStoreContextProvider
             aiChatID={aiChatID}
             aiSelectedFolder={aiSelectedFolder}
+            aiUserId={aiUserId}
           >
             <ModelStoreContextProvider selectedFolder={aiSelectedFolder}>
               <ChatHeader />

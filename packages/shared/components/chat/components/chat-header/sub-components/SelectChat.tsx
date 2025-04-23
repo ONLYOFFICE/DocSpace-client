@@ -24,6 +24,18 @@ const SelectChat = () => {
     setIsOpen(false);
   };
 
+  const preparedMessages = React.useMemo(() => {
+    const messages = Array.from(sessions.keys())
+      .reverse()
+      .map((value) => {
+        const splitedValue = value.split("_");
+
+        return { title: splitedValue[1], value };
+      });
+
+    return messages;
+  }, [sessions]);
+
   return (
     <>
       <div className={styles.selectChat} onClick={toggleOpen} ref={parentRef}>
@@ -39,17 +51,15 @@ const SelectChat = () => {
         topSpace={16}
         forwardedRef={parentRef}
       >
-        {Array.from(sessions.keys())
-          .reverse()
-          .map((session) => (
-            <DropDownItem
-              key={session}
-              onClick={() => onSelectAction(session)}
-              className="drop-down-item"
-            >
-              {session}
-            </DropDownItem>
-          ))}
+        {preparedMessages.map(({ title, value }) => (
+          <DropDownItem
+            key={value}
+            onClick={() => onSelectAction(value)}
+            className="drop-down-item"
+          >
+            {title}
+          </DropDownItem>
+        ))}
       </DropDown>
     </>
   );

@@ -301,3 +301,10 @@ export interface ContentBlock {
 }
 
 export type TEventDelivery = "polling" | "direct" | "stream" | "";
+
+export type TAutoLogin = {
+  access_token: string;
+  refresh_token: string;
+  token_type: string;
+  user_id: string;
+};

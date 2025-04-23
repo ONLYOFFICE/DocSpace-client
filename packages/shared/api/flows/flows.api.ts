@@ -12,6 +12,7 @@ import {
   SimpleRunFlowResponse,
   Message,
   TEventDelivery,
+  TAutoLogin,
 } from "./flows.types";
 import { getCookie } from "../../utils/cookie";
 
@@ -78,9 +79,10 @@ class FlowsApi {
     return headers;
   }
 
-  async autoLogin(): Promise<void> {
+  async autoLogin(): Promise<TAutoLogin> {
     const { data } = await this.api.get("/auto_login");
-    console.log("autoLogin", { data });
+
+    return data;
   }
 
   async getFolders(): Promise<FlowsFolder[]> {
@@ -321,9 +323,12 @@ class FlowsApi {
     return response.data;
   }
 
-  static async getMessages(flowId: string): Promise<Message[]> {
+  static async getMessages(
+    flowId: string,
+    aiSelectedFolder: string,
+  ): Promise<Message[]> {
     const response: { data: unknown } = await FlowsApi.getAPI().get(
-      `monitor/messages?flow_id=${flowId}`,
+      `monitor/messages?flow_id=${flowId}&session_id=${aiSelectedFolder}`,
     );
 
     return response.data as Message[];

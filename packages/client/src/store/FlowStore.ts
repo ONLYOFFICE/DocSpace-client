@@ -32,6 +32,8 @@ class FlowStore {
 
   apiKey: string = "";
 
+  userId: string = "";
+
   vectorizedFiles: (TFile | SimpleFile)[] = [];
 
   constructor() {
@@ -46,9 +48,12 @@ class FlowStore {
   autoLogin = async () => {
     try {
       this.isLoading = true;
-      await this.api.autoLogin();
+      const data = await this.api.autoLogin();
 
-      this.apiKey = getCookie(API_KEY_NAME) ?? "";
+      runInAction(() => {
+        this.userId = data.user_id;
+        this.apiKey = getCookie(API_KEY_NAME) ?? "";
+      });
     } catch (error) {
       runInAction(() => {
         this.error = error as Error;
@@ -115,7 +120,7 @@ class FlowStore {
 
   checkVectorizedDocuments = async (
     folderId: number | string,
-    filesId: SimpleFile[],
+    filesId: (SimpleFile | TFile)[],
   ) => {
     if (!this.apiKey) {
       setTimeout(() => {
@@ -143,26 +148,24 @@ class FlowStore {
     }
 
     const files: SimpleFile[] = msg
-      .split(",")
+      .split(", ")
       .map((s) => {
         const [id, version] = s.split(":");
 
-        const f = {
-          id: Number(id),
-          version: Number(version),
-          title: "",
-        };
+        const file = filesId.find(
+          (f) => String(f.id) === id && String(f.version) === version,
+        );
 
-        if (!this.localCheckVectorizeDocument(f)) return f;
+        if (!this.localCheckVectorizeDocument(file)) return file;
 
         return null;
       })
       .filter(Boolean);
 
-    filesId.forEach(({ id, version, title }) => {
-      const isFound = msg.includes(`${id}:${version}`);
+    filesId.forEach((f) => {
+      const isFound = msg.includes(`${f.id}:${f.version}`);
 
-      if (!isFound) this.vectorizeDocument({ id, version, title });
+      if (!isFound) this.vectorizeDocument(f);
     });
 
     this.vectorizedFiles = [...this.vectorizedFiles, ...files];

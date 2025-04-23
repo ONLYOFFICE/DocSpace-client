@@ -133,6 +133,7 @@ const Section = (props: SectionProps) => {
     displayFileExtension,
     aiChatID,
     aiSelectedFolder,
+    aiUserId,
     vectorizedFiles,
   } = props;
 
@@ -346,6 +347,7 @@ const Section = (props: SectionProps) => {
           displayFileExtension={displayFileExtension!}
           aiChatID={aiChatID!}
           aiSelectedFolder={aiSelectedFolder!}
+          aiUserId={aiUserId!}
           vectorizedFiles={vectorizedFiles!}
         />
 

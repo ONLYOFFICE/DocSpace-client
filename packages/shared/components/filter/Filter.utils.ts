@@ -244,6 +244,44 @@ const convertFilterDataToSelectedItems = (filterData: TItem[]): TItem[] => {
   return newSelectedItems;
 };
 
+const replaceEqualFilterValuesWithPrev = (
+  prevFilterValues: TItem[] | null,
+  newFilterValues: TItem[],
+): TItem[] => {
+  if (!prevFilterValues) return newFilterValues;
+
+  const items = prevFilterValues.map((v) => {
+    const item = newFilterValues.find((f) => f.group === v.group);
+
+    if (item) {
+      if (item.isMultiSelect && Array.isArray(item.key)) {
+        let isEqual = true;
+
+        item.key.forEach((k) => {
+          if (!Array.isArray(v.key) || !v.key.includes(k)) {
+            isEqual = false;
+          }
+        });
+
+        if (isEqual) return item;
+
+        return false;
+      }
+      if (item.key === v.key) return item;
+      return false;
+    }
+    return false;
+  });
+
+  const newItems = newFilterValues.filter(
+    (v) => !items.find((i) => i && i.group === v.group),
+  );
+
+  items.push(...newItems);
+
+  return [...items.filter((i) => i !== false)];
+};
+
 export {
   getFilterType,
   getSubjectFilter,
@@ -258,4 +296,5 @@ export {
   getQuotaFilter,
   convertFilterDataToSelectedFilterValues,
   convertFilterDataToSelectedItems,
+  replaceEqualFilterValuesWithPrev,
 };

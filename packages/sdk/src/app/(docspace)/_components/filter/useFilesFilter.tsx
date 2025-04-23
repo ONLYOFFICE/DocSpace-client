@@ -40,13 +40,6 @@ export default function useFilesFilter({
   const [filter, setFilter] = React.useState<FilesFilter>(
     FilesFilter.getFilter({ search: `?${filesFilter}` } as Location)!,
   );
-  const [, setSelectedFilterValues] = React.useState<Nullable<TItem[]>>(null);
-
-  const isSSR = React.useRef<boolean>(true);
-
-  React.useEffect(() => {
-    isSSR.current = false;
-  }, []);
 
   React.useEffect(() => {
     setFilter(FilesFilter.getFilter(window.location)!);
@@ -231,7 +224,7 @@ export default function useFilesFilter({
     return [...typeOptions];
   }, [t]);
 
-  const getActiveFilterValues = React.useCallback(() => {
+  const getSelectedFilterData = React.useCallback(() => {
     const filterValues: TItem[] = [];
 
     if (filter.filterType) {
@@ -283,55 +276,10 @@ export default function useFilesFilter({
   }, [filter.filterType, t]);
 
   const initSelectedFilterData = React.useMemo(
-    () => getActiveFilterValues(),
-    [getActiveFilterValues],
+    () => getSelectedFilterData(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [], // should be calculated once
   );
-
-  const getSelectedFilterData = React.useCallback(() => {
-    const filterValues: TItem[] = getActiveFilterValues();
-
-    const currentFilterValues: TItem[] = [];
-
-    setSelectedFilterValues((value: Nullable<TItem[]>) => {
-      if (!value) {
-        currentFilterValues.push(...filterValues);
-
-        return filterValues.map((f) => ({ ...f }));
-      }
-
-      const items = value.map((v) => {
-        const item = filterValues.find((f) => f.group === v.group);
-
-        if (item) {
-          if (item.isMultiSelect) {
-            let isEqual = true;
-
-            if (Array.isArray(item.key))
-              item.key.forEach((k) => {
-                if (Array.isArray(v.key) && !v.key.includes(k)) {
-                  isEqual = false;
-                }
-              });
-
-            if (isEqual) return item;
-
-            return false;
-          }
-          if (item.key === v.key) return item;
-          return false;
-        }
-        return false;
-      });
-
-      const filteredItems = items.filter((i) => i) as TItem[];
-
-      currentFilterValues.push(...filteredItems);
-
-      return filteredItems;
-    });
-
-    return isSSR ? filterValues : currentFilterValues;
-  }, [getActiveFilterValues]);
 
   const getViewSettingsData = React.useCallback(() => {
     const viewSettings = [

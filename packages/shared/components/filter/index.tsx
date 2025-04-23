@@ -43,6 +43,7 @@ import { FilterProps, TItem } from "./Filter.types";
 import {
   convertFilterDataToSelectedFilterValues,
   convertFilterDataToSelectedItems,
+  replaceEqualFilterValuesWithPrev,
 } from "./Filter.utils";
 
 const FilterInput = React.memo(
@@ -91,8 +92,7 @@ const FilterInput = React.memo(
     disableThirdParty,
 
     initSearchValue,
-    initSelectedFilterValues,
-    initSelectedItems,
+    initSelectedFilterData,
   }: FilterProps) => {
     const { searchComponent } = useSearch({
       onSearch,
@@ -110,14 +110,25 @@ const FilterInput = React.memo(
     >(getViewSettingsData());
     const [selectedFilterValue, setSelectedFilterValue] = React.useState<
       Map<FilterGroups, Map<string | number, TItem>>
-    >(initSelectedFilterValues || new Map());
-    const [selectedItems, setSelectedItems] = React.useState<TItem[]>(
-      initSelectedItems || [],
+    >(() =>
+      initSelectedFilterData
+        ? convertFilterDataToSelectedFilterValues(initSelectedFilterData)
+        : new Map(),
+    );
+    const [selectedItems, setSelectedItems] = React.useState<TItem[]>(() =>
+      initSelectedFilterData
+        ? convertFilterDataToSelectedItems(initSelectedFilterData)
+        : [],
+    );
+    const currentSelectedFilterDataRef = React.useRef<TItem[] | null>(
+      initSelectedFilterData || null,
     );
 
     const { t } = useTranslation(["Common"]);
 
     const mountRef = React.useRef(true);
+
+    const isFirstRenderRef = React.useRef(true);
 
     React.useEffect(() => {
       const value = getViewSettingsData?.();
@@ -126,20 +137,32 @@ const FilterInput = React.memo(
     }, [getViewSettingsData]);
 
     const getSelectedFilterDataAction = React.useCallback(async () => {
-      const value = await getSelectedFilterData();
+      const newSelectedFilterData = await getSelectedFilterData();
+      const processedFilterData = replaceEqualFilterValuesWithPrev(
+        currentSelectedFilterDataRef.current,
+        newSelectedFilterData,
+      );
+
+      currentSelectedFilterDataRef.current = processedFilterData;
 
       if (!mountRef.current) return;
 
-      const newSelectedValue = convertFilterDataToSelectedFilterValues(value);
-      const newSelectedItems = convertFilterDataToSelectedItems(value);
+      const newSelectedValue =
+        convertFilterDataToSelectedFilterValues(processedFilterData);
+      const newSelectedItems =
+        convertFilterDataToSelectedItems(processedFilterData);
 
       setSelectedFilterValue(newSelectedValue);
       setSelectedItems(newSelectedItems);
     }, [getSelectedFilterData]);
 
     React.useEffect(() => {
+      if (isFirstRenderRef.current && currentSelectedFilterDataRef.current) {
+        return;
+      }
+
       getSelectedFilterDataAction();
-    }, [getSelectedFilterDataAction, getSelectedFilterData]);
+    }, [getSelectedFilterDataAction]);
 
     const removeSelectedItemAction = React.useCallback(
       (
@@ -166,6 +189,10 @@ const FilterInput = React.memo(
       return () => {
         mountRef.current = false;
       };
+    }, []);
+
+    React.useEffect(() => {
+      isFirstRenderRef.current = false;
     }, []);
 
     return (

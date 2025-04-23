@@ -68,12 +68,6 @@ export const Filter = observer(({ filesFilter, shareKey }: FilterProps) => {
   });
 
   const initSearchValue = getSelectedInputValue();
-  const initSelectedFilterValues = convertFilterDataToSelectedFilterValues(
-    initSelectedFilterData,
-  );
-  const initSelectedItems = convertFilterDataToSelectedItems(
-    initSelectedFilterData,
-  );
 
   return (
     <FilterComponent
@@ -113,8 +107,7 @@ export const Filter = observer(({ filesFilter, shareKey }: FilterProps) => {
       selectorLabel=""
       isIndexing={false}
       initSearchValue={initSearchValue}
-      initSelectedFilterValues={initSelectedFilterValues}
-      initSelectedItems={initSelectedItems}
+      initSelectedFilterData={initSelectedFilterData}
     />
   );
 });

@@ -235,6 +235,5 @@ export type FilterProps = SearchInputProps &
     sortByTitle: string;
 
     currentDeviceType: DeviceType;
-    initSelectedFilterValues?: Map<FilterGroups, Map<string | number, TItem>>;
-    initSelectedItems?: TItem[];
+    initSelectedFilterData?: TItem[];
   };

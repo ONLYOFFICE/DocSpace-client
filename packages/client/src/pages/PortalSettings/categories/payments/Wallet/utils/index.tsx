@@ -66,6 +66,6 @@ export const accountingLedgersFormat = (
     style: "currency",
     currency,
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    maximumFractionDigits: 7,
   }).format(amount)}`;
 };

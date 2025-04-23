@@ -33,6 +33,7 @@
   "DelayedPayment": "Delayed payment of the {{planName}} plan dated {{date}}",
   "Debit": "Debit",
   "DowngradeNow": "Downgrade now",
+  "DiskSpace": "Disk space",
   "EnterAmount": "Enter amount",
   "EnterAnIntegerAmountBetween": "Enter an integer amount between {{min}} and {{max}}",
   "ErrorNotification": "Failed to update tariff plan. Try again later or contact the sales department.",

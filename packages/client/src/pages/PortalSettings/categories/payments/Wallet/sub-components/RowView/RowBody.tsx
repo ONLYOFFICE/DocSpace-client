@@ -59,10 +59,22 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
 
   const dateFormat = `L ${moment.localeData().longDateFormat("LT")}`;
   const formattedDate = moment(transaction.date).format(dateFormat);
-  const transactionType = transaction.service
-    ? "Service"
-    : t("Payments:BalanceTopUp");
-  const quantity = transaction.service ? transaction.quantity : "";
+  const getServiceTitle = (service: string) => {
+    switch (service) {
+      case "disk-storage":
+        return t("DiskSpace");
+      default:
+        return t("Payments:BalanceTopUp");
+    }
+  };
+  const getServiceQuantity = (quantity: number, service: string) => {
+    switch (service) {
+      case "disk-storage":
+        return `${quantity} ${t(t("Common:Gigabyte"))}`;
+      default:
+        return "—";
+    }
+  };
 
   return (
     <Row
@@ -79,18 +91,17 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
     >
       <RowContent sideColor={theme.filesSection.rowView.sideColor}>
         <Text fontWeight={600} fontSize="15px">
-          {transactionType}
+          {getServiceTitle(transaction.service)}
         </Text>
         <></>
 
         <Text fontWeight={600} fontSize="11px">
           {formattedDate}
         </Text>
-        {quantity ? (
-          <Text fontWeight={600} fontSize="11px">
-            {quantity}
-          </Text>
-        ) : null}
+
+        <Text fontWeight={600} fontSize="11px">
+          {getServiceQuantity(transaction.quantity, transaction.service)}
+        </Text>
       </RowContent>
     </Row>
   );

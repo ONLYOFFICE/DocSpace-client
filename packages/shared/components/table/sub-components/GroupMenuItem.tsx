@@ -195,10 +195,6 @@ const GroupMenuItem = ({
           {options?.map((option) => {
             const { key, ...rest } = option;
 
-            if ("badgeLabel" in rest) {
-              delete rest.badgeLabel;
-            }
-
             return (
               <DropDownItem key={option.key} {...rest} setOpen={setOpen} />
             );

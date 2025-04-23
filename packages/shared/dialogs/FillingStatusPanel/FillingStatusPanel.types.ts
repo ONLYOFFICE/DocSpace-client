@@ -38,6 +38,7 @@ export type FillingStatusPanelProps = {
   onStopFilling: (item: TFile) => void;
   onDelete?: (item: TFile) => void;
   onResetFilling: (item: TFile) => void;
+  withBorder?: boolean;
 };
 
 export type FillingStatusPanelBodyProps = {

@@ -459,17 +459,21 @@ export async function updateAutoTopUpSettings(
   upToBalance: number,
   currency: string,
 ) {
+  const body = enabled
+    ? {
+        settings: {
+          enabled,
+          minBalance,
+          upToBalance,
+          currency,
+        },
+      }
+    : {};
+
   const options = {
     method: "post",
     url: "/portal/payment/topupsettings",
-    data: {
-      settings: {
-        enabled,
-        minBalance,
-        upToBalance,
-        currency,
-      },
-    },
+    data: { ...body },
   };
   return request(options);
 }

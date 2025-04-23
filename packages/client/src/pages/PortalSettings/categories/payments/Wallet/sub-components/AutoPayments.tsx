@@ -176,7 +176,11 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
     try {
       await updateAutoPayments(isEnable, +minBalance, +upToBalance, currency);
 
-      setIsCurrentSettings(true);
+      setIsCurrentSettings(isEnable);
+      if (!isEnable) {
+        setMinBalance("");
+        setUpToBalance("");
+      }
       setAnimateSettings(false);
       setTimeout(() => {
         setAnimateSettings(true);

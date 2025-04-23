@@ -25,7 +25,7 @@ interface TranslationState {
   error: string | null;
   
   // Actions
-  fetchTranslations: (projectName: string, languages: string[], namespace: string) => Promise<void>;
+  fetchTranslations: (projectName: string, languages: string[], namespace: string) => Promise<TranslationEntry[]>;
   updateTranslation: (
     projectName: string, 
     language: string, 
@@ -127,17 +127,32 @@ export const useTranslationStore = create<TranslationState>((set, get) => ({
       // Create flattened representation for the UI
       const flattenedTranslations = flattenTranslations(translationData, languages);
       
+      // Preserve current key when reloading translations for the same namespace
+      // This helps maintain pagination state after reload
+      const prevState = get();
+      const currentKey = prevState.currentKey;
+      
       set({ 
         translationData,
         flattenedTranslations,
-        loading: false 
+        // Only maintain currentKey if translations aren't empty
+        loading: false
       });
+      
+      // For debugging URL state persistence
+      console.log(`Loaded ${flattenedTranslations.length} translations for namespace ${namespace}`);
+      if (currentKey) {
+        console.log(`Current key: ${currentKey}`);
+      }
+      
+      return flattenedTranslations; // Return the translations for easier handling
     } catch (error: any) {
       console.error('Error fetching translations:', error);
       set({ 
         error: error.response?.data?.error || error.message || 'Failed to fetch translations',
         loading: false
       });
+      return [];
     }
   },
   

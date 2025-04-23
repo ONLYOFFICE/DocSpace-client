@@ -93,15 +93,17 @@ export default function Home() {
           <button
             onClick={async () => {
               if (!searchQuery.trim()) return;
-              
+
               try {
                 setIsSearching(true);
-                const response = await fetch(`${process.env.API_URL}/search?query=${encodeURIComponent(searchQuery)}`);
-                
+                const response = await fetch(
+                  `${process.env.API_URL}/search?query=${encodeURIComponent(searchQuery)}`
+                );
+
                 if (!response.ok) {
                   throw new Error("Failed to search translations");
                 }
-                
+
                 const data = await response.json();
                 setSearchResults(data.data);
               } catch (err: any) {
@@ -111,7 +113,7 @@ export default function Home() {
               }
             }}
             disabled={isSearching || !searchQuery.trim()}
-            className={`px-4 py-2 rounded-lg text-white font-medium ${isSearching || !searchQuery.trim() ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary-600 hover:bg-primary-700'} transition-colors`}
+            className={`px-4 py-2 rounded-lg text-white font-medium ${isSearching || !searchQuery.trim() ? "bg-gray-400 cursor-not-allowed" : "bg-primary-600 hover:bg-primary-700"} transition-colors`}
           >
             {isSearching ? (
               <>
@@ -137,7 +139,9 @@ export default function Home() {
                 </svg>
                 Searching...
               </>
-            ) : "Search"}
+            ) : (
+              "Search"
+            )}
           </button>
         </div>
 
@@ -146,7 +150,7 @@ export default function Home() {
             <h3 className="text-lg font-medium mb-2 text-gray-800 dark:text-gray-200">
               Results for "{searchQuery}" ({searchResults.totalResults} matches)
             </h3>
-            
+
             {searchResults.results.length === 0 ? (
               <div className="py-4 text-gray-500 dark:text-gray-400 text-center">
                 No matches found. Try a different search term.
@@ -154,23 +158,31 @@ export default function Home() {
             ) : (
               <div className="space-y-6">
                 {searchResults.results.map((result: any, index: number) => (
-                  <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <div
+                    key={index}
+                    className="border border-gray-200 dark:border-gray-700 rounded-lg p-4"
+                  >
                     <div className="flex justify-between items-start mb-2">
                       <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200">
-                        Project: <span className="text-primary-600 dark:text-primary-400">{result.projectName}</span>
+                        Project:{" "}
+                        <span className="text-primary-600 dark:text-primary-400">
+                          {result.projectName}
+                        </span>
                       </h4>
-                      <Link 
+                      <Link
                         href={`/projects/${result.projectName}`}
                         className="text-sm text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                       >
                         Go to project
                       </Link>
                     </div>
-                    
+
                     <div className="flex items-center mb-3">
-                      <span className="text-gray-700 dark:text-gray-300">Namespace: </span>
-                      <Link 
-                        href={`/projects/${result.projectName}/${result.namespace}`}
+                      <span className="text-gray-700 dark:text-gray-300">
+                        Namespace:{" "}
+                      </span>
+                      <a
+                        href={`/projects/${result.projectName}?namespace=${result.namespace}`}
                         className="ml-2 text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
                       >
                         {result.namespace}
@@ -179,40 +191,55 @@ export default function Home() {
                             Match
                           </span>
                         )}
-                      </Link>
+                      </a>
                     </div>
-                    
+
                     {result.matches.length > 0 && (
                       <div className="mt-3">
                         <h5 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Matching Keys and Values:
                         </h5>
                         <div className="space-y-2 pl-2 border-l-2 border-gray-200 dark:border-gray-700">
-                          {result.matches.map((match: any, matchIndex: number) => (
-                            <div key={matchIndex} className="text-sm">
-                              <div className="flex flex-wrap gap-2 items-center">
-                                <span className="font-medium text-gray-800 dark:text-gray-200">
-                                  {match.key}
-                                  {match.keyMatch && (
-                                    <span className="ml-2 text-xs px-2 py-0.5 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full">
-                                      Key Match
-                                    </span>
-                                  )}
-                                </span>
-                              </div>
-                              {match.valueMatch && (
-                                <div className="mt-1 pl-4">
-                                  <span className="text-gray-600 dark:text-gray-400">Value: </span>
-                                  <span className="text-gray-800 dark:text-gray-200">
-                                    {typeof match.value === 'string' ? match.value : JSON.stringify(match.value)}
-                                    <span className="ml-2 text-xs px-2 py-0.5 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full">
-                                      Value Match
-                                    </span>
+                          {result.matches.map(
+                            (match: any, matchIndex: number) => (
+                              <div key={matchIndex} className="text-sm">
+                                <div className="flex flex-wrap gap-2 items-center">
+                                  <span className="font-medium text-gray-800 dark:text-gray-200">
+                                    {match.key}
+                                    {match.keyMatch && (
+                                      <>
+                                        <span className="ml-2 text-xs px-2 py-0.5 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full">
+                                          Key Match
+                                        </span>
+                                        <a
+                                          href={`/projects/${result.projectName}?namespace=${result.namespace}&key=${match.key}`}
+                                          className="ml-2 text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                                          target="_blank"
+                                        >
+                                          Go to key
+                                        </a>
+                                      </>
+                                    )}
                                   </span>
                                 </div>
-                              )}
-                            </div>
-                          ))}
+                                {match.valueMatch && (
+                                  <div className="mt-1 pl-4">
+                                    <span className="text-gray-600 dark:text-gray-400">
+                                      Value:{" "}
+                                    </span>
+                                    <span className="text-gray-800 dark:text-gray-200">
+                                      {typeof match.value === "string"
+                                        ? match.value
+                                        : JSON.stringify(match.value)}
+                                      <span className="ml-2 text-xs px-2 py-0.5 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded-full">
+                                        Value Match
+                                      </span>
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                            )
+                          )}
                         </div>
                       </div>
                     )}

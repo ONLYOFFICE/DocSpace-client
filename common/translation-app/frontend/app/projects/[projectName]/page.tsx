@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useProjectStore } from "@/store/projectStore";
 import { useLanguageStore } from "@/store/languageStore";
@@ -144,13 +144,101 @@ export default function ProjectPage() {
     }
   }, [languages, baseLanguage]);
 
-  // Select the first namespace when namespaces are loaded
+  // Get URL parameters and manage state
+  const [keyFromUrl, setKeyFromUrl] = useState<string | null>(null);
+  const [namespaceFromUrl, setNamespaceFromUrl] = useState<string | null>(null);
+  const previousKeyRef = useRef<string | null>(null);
+  const ignoreUrlUpdatesRef = useRef<boolean>(false);
+  const urlUpdateTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastUrlUpdateTimeRef = useRef<number>(0);
+  const lockUpdateRef = useRef<boolean>(false); // Complete lock on updates
+
+  // Read URL parameters on component mount ONLY
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        // Lock updates during initialization
+        lockUpdateRef.current = true;
+
+        const url = new URL(window.location.href);
+        const key = url.searchParams.get("key");
+        const namespace = url.searchParams.get("namespace");
+
+        console.log(
+          `Initial URL parameters - namespace: ${namespace}, key: ${key}`
+        );
+
+        // Set initial URL values
+        if (key) {
+          previousKeyRef.current = key; // Remember this immediately
+          setKeyFromUrl(key);
+        }
+
+        if (namespace) {
+          setNamespaceFromUrl(namespace);
+        }
+
+        // Unlock updates after a delay to ensure initialization is complete
+        setTimeout(() => {
+          lockUpdateRef.current = false;
+          console.log("URL parameter initialization complete");
+        }, 500);
+      } catch (error) {
+        console.error("Error parsing URL:", error);
+        lockUpdateRef.current = false; // Ensure lock is released even on error
+      }
+    }
+  }, []);
+
+  // Read URL parameters on component mount AND when URL changes
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Function to read params from URL
+      const readUrlParams = () => {
+        const url = new URL(window.location.href);
+        const namespaceParam = url.searchParams.get("namespace");
+        const keyParam = url.searchParams.get("key");
+
+        // Only update state if not currently ignoring URL updates
+        if (!ignoreUrlUpdatesRef.current && !lockUpdateRef.current) {
+          setNamespaceFromUrl(namespaceParam);
+          setKeyFromUrl(keyParam);
+          console.log(
+            `Read from URL - namespace: ${namespaceParam}, key: ${keyParam}`
+          );
+        }
+      };
+
+      // Read params initially
+      readUrlParams();
+
+      // Set up listener for popstate events (back/forward buttons)
+      const handlePopState = () => {
+        readUrlParams();
+      };
+
+      // Listen for URL changes via back/forward buttons
+      window.addEventListener("popstate", handlePopState);
+
+      // Clean up listener
+      return () => {
+        window.removeEventListener("popstate", handlePopState);
+      };
+    }
+  }, []);
+
+  // Select namespace from URL or first namespace when namespaces are loaded
   useEffect(() => {
     if (namespaces.length > 0 && !currentNamespace) {
-      // Select the first namespace in the list
-      setCurrentNamespace(namespaces[0]);
+      // If namespace from URL exists and is valid, select it
+      if (namespaceFromUrl && namespaces.includes(namespaceFromUrl)) {
+        setCurrentNamespace(namespaceFromUrl);
+      } else {
+        // Otherwise select the first namespace in the list
+        setCurrentNamespace(namespaces[0]);
+      }
     }
-  }, [namespaces]);
+  }, [namespaces, namespaceFromUrl]);
 
   // Fetch Ollama models when connected
   useEffect(() => {
@@ -161,10 +249,29 @@ export default function ProjectPage() {
 
   // Load translations when namespace is selected
   useEffect(() => {
-    if (currentNamespace && selectedLanguages.length > 0) {
-      fetchTranslations(projectName, selectedLanguages, currentNamespace);
+    if (currentNamespace && selectedLanguages.length > 0 && !projectLoading) {
+      // Use an async function to handle the loading and waiting
+      const loadTranslations = async () => {
+        return await fetchTranslations(
+          projectName,
+          selectedLanguages,
+          currentNamespace
+        );
+      };
+
+      loadTranslations().then((newTranslations) => {
+        // Update URL with the selected namespace
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.set("namespace", currentNamespace);
+
+        if (newTranslations.length > 0) {
+          newUrl.searchParams.set("key", newTranslations[0].path);
+        }
+
+        window.history.pushState({}, "", newUrl.toString());
+      });
     }
-  }, [currentNamespace, selectedLanguages]);
+  }, [currentNamespace, selectedLanguages, projectName, projectLoading]);
 
   // Toggle a language selection
   const handleLanguageToggle = (language: string) => {
@@ -195,6 +302,12 @@ export default function ProjectPage() {
   // Handle namespace selection
   const handleNamespaceChange = (namespace: string) => {
     setCurrentNamespace(namespace);
+
+    // Update URL with the selected namespace
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set("namespace", namespace);
+
+    window.history.pushState({}, "", newUrl.toString());
   };
 
   // Handle translation error checking
@@ -431,7 +544,7 @@ export default function ProjectPage() {
 
         {/* Main content area */}
         <div className="lg:col-span-3">
-          <div className="card h-full">
+          <div className="card h-full" style={{ minHeight: "748px" }}>
             <h2 className="text-lg font-semibold mb-3 text-gray-900 dark:text-white">
               {currentNamespace
                 ? `Namespace: ${currentNamespace}`
@@ -447,6 +560,81 @@ export default function ProjectPage() {
                 baseLanguage={baseLanguage}
                 projectName={projectName}
                 namespace={currentNamespace}
+                initialSelectedKey={keyFromUrl}
+                // SIMPLIFIED URL-ONLY KEY SELECTION HANDLER
+                initialKeySelection={(keyPath) => {
+                  // Just return the URL key parameter for initial load
+                  return keyFromUrl;
+                }}
+                onKeySelect={(keyPath) => {
+                  // Skip empty keys or during initialization
+                  if (!keyPath /*|| lockUpdateRef.current*/) {
+                    console.log(
+                      `URL update skipped for: ${keyPath || "empty key"}`
+                    );
+                    return;
+                  }
+
+                  // Skip duplicates
+                  if (keyPath === previousKeyRef.current) return;
+
+                  // Create immutable copy and verify
+                  const targetKey = String(keyPath);
+
+                  previousKeyRef.current = targetKey;
+
+                  if (typeof window !== "undefined") {
+                    const url = new URL(window.location.href);
+                    const prevKey = url.searchParams.get("key");
+                    url.searchParams.set("key", targetKey);
+
+                    if (currentNamespace) {
+                      url.searchParams.set("namespace", currentNamespace);
+                    }
+
+                    window.history.replaceState(
+                      { key: targetKey, namespace: currentNamespace },
+                      "",
+                      url.toString()
+                    );
+
+                    console.log(`URL updated: ${prevKey} → ${targetKey}`);
+                  }
+
+                  // Create atomic update with locking
+                  // clearTimeout(urlUpdateTimeoutRef.current);
+                  // urlUpdateTimeoutRef.current = setTimeout(() => {
+                  //   if (lockUpdateRef.current) return;
+
+                  //   try {
+                  //     lockUpdateRef.current = true;
+                  //     previousKeyRef.current = targetKey;
+
+                  //     if (typeof window !== "undefined") {
+                  //       const url = new URL(window.location.href);
+                  //       const prevKey = url.searchParams.get("key");
+                  //       url.searchParams.set("key", targetKey);
+
+                  //       if (currentNamespace) {
+                  //         url.searchParams.set("namespace", currentNamespace);
+                  //       }
+
+                  //       window.history.replaceState(
+                  //         { key: targetKey, namespace: currentNamespace },
+                  //         "",
+                  //         url.toString()
+                  //       );
+
+                  //       console.log(`URL updated: ${prevKey} → ${targetKey}`);
+                  //     }
+
+                  //     setTimeout(() => (lockUpdateRef.current = false), 300);
+                  //   } catch (e) {
+                  //     console.error(`URL update error: ${e}`);
+                  //     lockUpdateRef.current = false;
+                  //   }
+                  // }, 100);
+                }}
               />
             )}
 

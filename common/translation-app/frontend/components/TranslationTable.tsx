@@ -29,6 +29,9 @@ interface TranslationTableProps {
   baseLanguage: string;
   projectName: string;
   namespace: string;
+  initialSelectedKey?: string | null;
+  initialKeySelection?: (keyPath: string | null) => string | null;
+  onKeySelect?: (keyPath: string | null) => void;
 }
 
 const TranslationTable: React.FC<TranslationTableProps> = ({
@@ -37,6 +40,9 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   baseLanguage,
   projectName,
   namespace,
+  initialSelectedKey,
+  initialKeySelection,
+  onKeySelect,
 }) => {
   const [editingCell, setEditingCell] = useState<{
     rowPath: string;
@@ -44,7 +50,12 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   } | null>(null);
   const [editValue, setEditValue] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(() => {
+    const index = translations.findIndex(
+      (entry) => entry.path === initialSelectedKey
+    );
+    return initialSelectedKey ? (index > -1 ? index : 0) : 0;
+  });
 
   const {
     updateTranslation,
@@ -126,23 +137,23 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   };
 
   // Selected target language for single-language translations
-  const [selectedTargetLanguage, setSelectedTargetLanguage] =
-    useState<string>("");
+  // const [selectedTargetLanguage, setSelectedTargetLanguage] =
+  //   useState<string>("");
 
-  // Set default target language when languages change
-  useEffect(() => {
-    if (
-      languages.length > 0 &&
-      languages.some((lang) => lang !== baseLanguage)
-    ) {
-      const nonBaseLanguages = languages.filter(
-        (lang) => lang !== baseLanguage
-      );
-      if (nonBaseLanguages.length > 0) {
-        setSelectedTargetLanguage(nonBaseLanguages[0]);
-      }
-    }
-  }, [languages, baseLanguage]);
+  // // Set default target language when languages change
+  // useEffect(() => {
+  //   if (
+  //     languages.length > 0 &&
+  //     languages.some((lang) => lang !== baseLanguage)
+  //   ) {
+  //     const nonBaseLanguages = languages.filter(
+  //       (lang) => lang !== baseLanguage
+  //     );
+  //     if (nonBaseLanguages.length > 0) {
+  //       setSelectedTargetLanguage(nonBaseLanguages[0]);
+  //     }
+  //   }
+  // }, [languages, baseLanguage]);
 
   // Handler to translate the current key to all available languages
   const handleTranslateToAllLanguages = async (rowPath: string) => {
@@ -160,17 +171,17 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   };
 
   // Handle translate to selected target language
-  const handleTranslateToSelectedLanguage = async (rowPath: string) => {
-    if (!ollamaConnected || !selectedTargetLanguage) return;
+  // const handleTranslateToSelectedLanguage = async (rowPath: string) => {
+  //   if (!ollamaConnected || !selectedTargetLanguage) return;
 
-    await translateKey(
-      projectName,
-      baseLanguage,
-      selectedTargetLanguage,
-      namespace,
-      rowPath
-    );
-  };
+  //   await translateKey(
+  //     projectName,
+  //     baseLanguage,
+  //     selectedTargetLanguage,
+  //     namespace,
+  //     rowPath
+  //   );
+  // };
 
   const isTranslating = (rowPath: string, language: string) => {
     if (!translationProgress) return false;
@@ -208,40 +219,134 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   }, [translations, localUpdates]);
 
   // Filter translations based on search term
-  const filteredTranslations = translationsWithUpdates.filter((entry) => {
-    if (!searchTerm) return true;
+  const filteredTranslations = translationsWithUpdates.filter(
+    (entry: TranslationEntry) => {
+      if (!searchTerm) return true;
 
-    const searchLower = searchTerm.toLowerCase();
+      const searchLower = searchTerm.toLowerCase();
 
-    // Search in key path
-    if (entry.path.toLowerCase().includes(searchLower)) {
-      return true;
-    }
-
-    // Search in translation values
-    for (const lang of languages) {
-      if (entry.translations[lang]?.toLowerCase().includes(searchLower)) {
+      // Search in key path
+      if (entry.path.toLowerCase().includes(searchLower)) {
         return true;
       }
-    }
 
-    return false;
-  });
+      // Search in translation values
+      for (const lang of languages) {
+        if (entry.translations[lang]?.toLowerCase().includes(searchLower)) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  );
 
   // Pagination logic
   const totalPages = filteredTranslations.length;
   const currentEntry = filteredTranslations[currentPage];
 
+  console.log({ currentEntry, currentPage, totalPages, filteredTranslations });
+
   // Handle page changes
+  // Pagination handler with translation store update
+  const forceNavigateTo = (pageIndex: number) => {
+    if (filteredTranslations.length === 0) {
+      console.log("Navigation blocked: No translations available");
+      return;
+    }
+
+    // Bound the page index to valid range
+    const safeIndex = Math.max(
+      0,
+      Math.min(pageIndex, filteredTranslations.length - 1)
+    );
+
+    // Skip if we're already at this index
+    if (safeIndex === currentPageRef.current) {
+      console.log(`Navigation skipped: Already at page ${safeIndex}`);
+      return;
+    }
+
+    // CRITICAL: Cache a stable reference to the key BEFORE any state updates
+    // This prevents any possibility of the key changing during the navigation process
+    const targetKey = filteredTranslations[safeIndex]?.path;
+    if (!targetKey) {
+      console.error(`Cannot navigate - invalid key at index ${safeIndex}`);
+      return;
+    }
+
+    // Create an immutable copy of the key to ensure stability
+    // This is crucial to prevent reference issues
+    const stableKeyReference = String(targetKey);
+
+    // Print detailed debug info
+    console.log(`----- NAVIGATION -----`);
+    console.log(
+      `From page ${currentPageRef.current} (${filteredTranslations[currentPageRef.current]?.path || "unknown"})`
+    );
+    console.log(`To page ${safeIndex} (${stableKeyReference})`);
+
+    // Set flags first to prevent cycles
+    isManualNavRef.current = true;
+    isPaginatingRef.current = true;
+
+    // Update state and refs next
+    currentPageRef.current = safeIndex;
+    setCurrentPage(safeIndex);
+    setLastReportedPage(safeIndex);
+
+    // Show key mapping for easier debugging
+    console.log("Current key index mapping:");
+    filteredTranslations
+      .slice(Math.max(0, safeIndex - 2), safeIndex + 3)
+      .forEach((entry: TranslationEntry, idx: number) => {
+        const actualIdx = Math.max(0, safeIndex - 2) + idx;
+        const indicator = actualIdx === safeIndex ? "➜" : " ";
+        console.log(`  ${indicator} Page ${actualIdx}: ${entry.path}`);
+      });
+
+    // CRITICAL ADDITION: Update the translation store with the new key
+    // This ensures the key is actually updated in the UI
+    useTranslationStore.getState().setCurrentKey(stableKeyReference);
+    console.log(`Translation store key updated: ${stableKeyReference}`);
+
+    // Use a longer delay to ensure React state updates complete
+    // and the stable key reference is used
+    if (onKeySelect) {
+      setTimeout(() => {
+        // Triple verify we're using the stable reference
+        console.log(`URL update for EXACT key: "${stableKeyReference}"`);
+        onKeySelect(stableKeyReference);
+      }, 150);
+    }
+    console.log(`----- END NAVIGATION -----`);
+  };
+
+  // Next button handler - use forceNavigateTo for consistency
   const goToNextPage = () => {
-    if (currentPage < totalPages - 1) {
-      setCurrentPage(currentPage + 1);
+    if (filteredTranslations.length > 0) {
+      const current = currentPageRef.current;
+      const nextPage = Math.min(current + 1, filteredTranslations.length - 1);
+
+      // Only navigate if we're not already at the end
+      if (nextPage !== current) {
+        console.log(`Next page: ${current} → ${nextPage}`);
+        forceNavigateTo(nextPage);
+      }
     }
   };
 
+  // Previous button handler - use forceNavigateTo for consistency
   const goToPreviousPage = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
+    if (filteredTranslations.length > 0) {
+      const current = currentPageRef.current;
+      const prevPage = Math.max(0, current - 1);
+
+      // Only navigate if we're not already at the beginning
+      if (prevPage !== current) {
+        console.log(`Previous page: ${current} → ${prevPage}`);
+        forceNavigateTo(prevPage);
+      }
     }
   };
 
@@ -279,6 +384,29 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
       setCurrentPage(filteredTranslations.length - 1);
     }
   }, [filteredTranslations.length, currentPage]);
+
+  // Set initial key from URL if provided
+  // React.useEffect(() => {
+  //   if (initialSelectedKey && filteredTranslations.length > 0) {
+  //     // Find the index of the key from URL in the filtered translations
+  //     const keyIndex = filteredTranslations.findIndex(
+  //       (entry) => entry.path === initialSelectedKey
+  //     );
+
+  //     // If found, set the current page to that index
+  //     if (keyIndex !== -1) {
+  //       setCurrentPage(keyIndex);
+  //     }
+  //   }
+  // }, [initialSelectedKey, filteredTranslations]);
+
+  // Notify parent when key changes
+  // React.useEffect(() => {
+  //   if (onKeySelect && filteredTranslations.length > 0) {
+  //     const currentKeyPath = filteredTranslations[currentPage]?.path || null;
+  //     onKeySelect(currentKeyPath);
+  //   }
+  // }, [currentPage, filteredTranslations, onKeySelect]);
 
   // Handle click outside to close context menu
   useEffect(() => {
@@ -355,10 +483,141 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   const handleShowKeyInfo = useCallback(() => {
     // Close the context menu
     setContextMenu(null);
-    
+
     // Open the key info modal
     setIsKeyInfoModalOpen(true);
   }, [activeKeyPath]);
+
+  // Track state for pagination and URL selection
+  const [initialKeySet, setInitialKeySet] = useState(false);
+  const currentPageRef = useRef(currentPage);
+
+  // Using a manual flag to prevent notification loops
+  const isManualNavRef = useRef(false);
+
+  // MUCH more restricted synchronization with additional guard flags
+  useEffect(() => {
+    // Skip synchronization entirely if we're in manual navigation mode
+    if (isManualNavRef.current) {
+      // Just clear the flag to prepare for the next action
+      setTimeout(() => {
+        isManualNavRef.current = false;
+      }, 50);
+      return;
+    }
+
+    // Skip synchronization if we're in the pagination action
+    if (isPaginatingRef.current) {
+      return;
+    }
+
+    // Only if we're NOT in manual navigation AND not paginating,
+    // sync the currentPage to our ref (this may happen from other state changes)
+    if (currentPage !== currentPageRef.current) {
+      console.log(
+        `Restricted sync: page state ${currentPage} → ref ${currentPageRef.current}`
+      );
+      currentPageRef.current = currentPage;
+    }
+  }, [currentPage]);
+
+  // One-time only initialization from URL parameters
+  useEffect(() => {
+    // Only run this once when translations are first loaded and not yet initialized
+    if (!initialKeySet && filteredTranslations.length > 0) {
+      // Get the key from URL via callback or direct prop
+      const keyToSelect = initialKeySelection
+        ? initialKeySelection(null)
+        : initialSelectedKey;
+
+      // Only proceed if we have a key to select
+      if (keyToSelect) {
+        console.log(
+          `Attempting one-time selection of key from URL: ${keyToSelect}`
+        );
+
+        // Find this key in available translations
+        const keyIndex = filteredTranslations.findIndex(
+          (entry) => entry.path === keyToSelect
+        );
+
+        if (keyIndex !== -1) {
+          // Found the key - directly update page position without triggering effects
+          console.log(`Found URL key: ${keyToSelect} at index ${keyIndex}`);
+          currentPageRef.current = keyIndex;
+          setCurrentPage(keyIndex);
+
+          // Block any notifications that would normally happen due to this change
+          isPaginatingRef.current = true;
+          isManualNavRef.current = true;
+        } else {
+          console.log(`URL key not found in translations: ${keyToSelect}`);
+        }
+      }
+
+      // Mark initialization complete regardless of outcome
+      // This ensures we don't try to initialize again
+      setInitialKeySet(true);
+    }
+  }, [
+    initialKeySelection,
+    initialSelectedKey,
+    filteredTranslations,
+    initialKeySet,
+  ]);
+
+  // IMPORTANT: Reset initialKeySet when namespace or translations change
+  useEffect(() => {
+    setInitialKeySet(false);
+  }, [namespace, translations.length]);
+
+  // Track if we're in a pagination action to prevent update loops
+  const isPaginatingRef = useRef(false);
+
+  // Almost completely disabling automatic URL updates to prevent cycles
+  // We'll update URL ONLY after a deliberate manual pagination or when a key is clicked directly
+  // (NOT when state changes happen due to other causes)
+  const [lastReportedPage, setLastReportedPage] = useState<number | null>(null);
+
+  // Notify parent when key changes ONLY when we explicitly want to
+  useEffect(() => {
+    // Skip notification entirely if we're in the initialization phase
+    if (!initialKeySet) return;
+
+    // Skip if we don't have a callback or data
+    if (!onKeySelect || filteredTranslations.length === 0) return;
+
+    // Skip if we're in a pagination action - we'll handle URL updates separately
+    if (isPaginatingRef.current) return;
+
+    // Get the current key that's selected
+    const currentKeyPath = filteredTranslations[currentPage]?.path || null;
+
+    // Only notify if:
+    // 1. We have a valid key
+    // 2. We haven't already reported this same page (prevents loops)
+    // 3. This isn't the initialization from URL (prevents cycles)
+    if (
+      currentKeyPath &&
+      currentPage !== lastReportedPage &&
+      !isManualNavRef.current
+    ) {
+      console.log(`Manual notification of key change: ${currentKeyPath}`);
+      setLastReportedPage(currentPage); // Remember this page was reported
+      onKeySelect(currentKeyPath);
+    }
+  }, [
+    currentPage,
+    filteredTranslations,
+    onKeySelect,
+    initialKeySet,
+    lastReportedPage,
+  ]);
+
+  // Reset tracking state when translations or namespace changes
+  useEffect(() => {
+    setLastReportedPage(null);
+  }, [translations, namespace]);
 
   // Submit handlers for key operations
   const handleSubmitRename = async (newKeyPath: string) => {
@@ -486,7 +745,10 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
           <div className="w-[250px]">
             <select
               value={currentPage}
-              onChange={(e) => setCurrentPage(Number(e.target.value))}
+              onChange={(e) => {
+                const pageIndex = Number(e.target.value);
+                setCurrentPage(pageIndex);
+              }}
               className="input py-1 px-2 text-sm w-full text-gray-800 dark:text-gray-200"
             >
               {filteredTranslations.map((entry, index) => (
@@ -515,17 +777,17 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
             <div className="flex justify-between items-center mb-4">
               <button
                 onClick={goToPreviousPage}
-                disabled={currentPage === 0}
+                disabled={currentPageRef.current === 0}
                 className="btn btn-sm border border-primary-600 text-primary-600 hover:bg-primary-50 hover:text-primary-700 px-3 py-1 dark:text-primary-400 dark:hover:text-primary-300 dark:border-primary-700 dark:hover:bg-gray-800"
               >
                 ← Previous
               </button>
               <div className="text-sm text-gray-700 dark:text-gray-300 font-medium">
-                Key {currentPage + 1} of {totalPages}
+                Key {currentPageRef.current + 1} of {totalPages}
               </div>
               <button
                 onClick={goToNextPage}
-                disabled={currentPage >= totalPages - 1}
+                disabled={currentPageRef.current >= totalPages - 1}
                 className="btn btn-sm border border-primary-600 text-primary-600 hover:bg-primary-50 hover:text-primary-700 px-3 py-1 dark:text-primary-400 dark:hover:text-primary-300 dark:border-primary-700 dark:hover:bg-gray-800"
               >
                 Next →
@@ -643,12 +905,14 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col">
             <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
               <div>
-                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">Translation Key Details</h2>
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                  Translation Key Details
+                </h2>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   {`Project: ${projectName || ""}, Key: ${activeKeyPath}`}
                 </p>
               </div>
-              <button 
+              <button
                 className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                 onClick={() => setIsKeyInfoModalOpen(false)}
                 aria-label="Close dialog"

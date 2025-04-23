@@ -116,7 +116,7 @@ export const RowContent = ({
         </Text>
       ) : null}
 
-      {isWizardCompleted ? (
+      {isMobileView ? null : isWizardCompleted ? (
         <Text fontSize="12px" as="div" fontWeight={600} truncate>
           {`${t("PortalStats", {
             roomCount: roomsCount,

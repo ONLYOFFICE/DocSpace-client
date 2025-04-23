@@ -25,7 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { logger } from "@/../logger.mjs";
 
-import { getFileById, getFormFillingStatus, getUser } from "@/utils/actions";
+import {
+  getFileById,
+  getFormFillingStatus,
+  getSettings,
+  getUser,
+} from "@/utils/actions";
 import { CompletedVDRForm } from "@/components/completed-form/CompletedVDRForm";
 import { CompletedFormEmpty } from "@/components/completed-form/CompletedForm.empty";
 
@@ -36,17 +41,26 @@ interface PageProps {
 }
 
 async function Page({ searchParams }: PageProps) {
-  const { formId, roomId } = searchParams;
+  const { formId, roomId, share } = searchParams;
 
   log.info("Open start filling form page");
 
-  const [formFillingStatus, file, user] = await Promise.all([
+  const [formFillingStatus, file, user, settings] = await Promise.all([
     getFormFillingStatus(formId!),
     getFileById(formId!),
     getUser(),
+    getSettings(share),
   ]);
 
-  if (!file || !user || !roomId || !formId) return <CompletedFormEmpty />;
+  if (
+    !file ||
+    !user ||
+    !roomId ||
+    !formId ||
+    !settings ||
+    settings === "access-restricted"
+  )
+    return <CompletedFormEmpty />;
 
   return (
     <CompletedVDRForm
@@ -55,6 +69,7 @@ async function Page({ searchParams }: PageProps) {
       roomId={roomId}
       isStartFilling
       formFillingStatus={formFillingStatus}
+      settings={settings}
     />
   );
 }

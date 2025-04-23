@@ -680,6 +680,7 @@ const SectionHeaderContent = (props) => {
                 addButtonRef={addButtonRefCallback}
                 contextButtonAnimation={contextButtonAnimation}
                 guidAnimationVisible={guidAnimationVisible}
+                setGuidAnimationVisible={setGuidAnimationVisible}
                 isContextButtonVisible={isContextButtonVisible()}
               />
               {showSignInButton ? (

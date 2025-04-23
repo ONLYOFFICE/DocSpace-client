@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
@@ -39,6 +39,7 @@ import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import {
   FileFillingFormStatus,
+  FileStatus,
   WhiteLabelLogoType,
 } from "@docspace/shared/enums";
 import {
@@ -69,15 +70,20 @@ import type { CompletedVDRFormProps } from "./CompletedForm.types";
 import { getFolderUrl } from "./CompletedForm.helper";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
+import type { TFile } from "@docspace/shared/api/files/types";
 
-export const CompletedVDRForm = ({
-  user,
-  file,
-  roomId,
-  isStartFilling,
-  formFillingStatus,
-}: CompletedVDRFormProps) => {
+export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
+  const { user, file, roomId, isStartFilling, formFillingStatus, settings } =
+    props;
+
   const { t } = useTranslation(["CompletedForm", "Common"]);
+  const [form, setForm] = useState<TFile>(file);
+
+  const isInitSocket = useRef(false);
 
   const theme = useTheme();
 
@@ -85,11 +91,44 @@ export const CompletedVDRForm = ({
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
   const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
-  const isYournTurn = file.formFillingStatus === FileFillingFormStatus.YourTurn;
-  const completed = file.formFillingStatus === FileFillingFormStatus.Completed;
+  const isYournTurn = form.formFillingStatus === FileFillingFormStatus.YourTurn;
+  const completed = form.formFillingStatus === FileFillingFormStatus.Completed;
   const isTurnToFill = isYournTurn && isStartFilling;
 
-  const fileURL = file.shortWebUrl;
+  const fileURL = form.shortWebUrl;
+
+  const socketUrl = settings.socketUrl;
+  const formId = form.id;
+
+  useEffect(() => {
+    if (!isInitSocket.current) {
+      SocketHelper.connect(socketUrl, "");
+    }
+
+    const fileSocketPart = `FILE-${formId}`;
+
+    if (!SocketHelper.socketSubscribers.has(fileSocketPart))
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: [fileSocketPart],
+        individual: true,
+      });
+
+    const stopEditFileHandler = (id: number | string) => {
+      if (Number(id) === formId) {
+        setForm((prev) => ({
+          ...prev,
+          fileStatus: prev.fileStatus & ~FileStatus.IsEditing,
+        }));
+      }
+    };
+
+    SocketHelper.on(SocketEvents.StopEditFile, stopEditFileHandler);
+
+    isInitSocket.current = true;
+    return () => {
+      SocketHelper.off(SocketEvents.StopEditFile, stopEditFileHandler);
+    };
+  }, [socketUrl, formId]);
 
   const label = useMemo(() => {
     if (isStartFilling) return t("CompletedForm:LinkToFillOutForm");
@@ -121,7 +160,7 @@ export const CompletedVDRForm = ({
     return t("CompletedForm:FormVDRSectionCompletedDescription");
   }, [t, isStartFilling, completed, isYournTurn]);
 
-  const title = useMemo(() => getTitleWithoutExtension(file, false), [file]);
+  const title = useMemo(() => getTitleWithoutExtension(form, false), [form]);
 
   const handleBackToRoom = () => {
     const folderURL = getFolderUrl(roomId, false);
@@ -145,6 +184,8 @@ export const CompletedVDRForm = ({
     if (isYournTurn) handleFillForm();
     else handleViewForm();
   };
+
+  const isEditing = form.fileStatus === FileStatus.IsEditing;
 
   return (
     <ContainerCompletedForm bgPattern={bgPattern}>
@@ -212,6 +253,7 @@ export const CompletedVDRForm = ({
               scale
               primary
               size={ButtonSize.medium}
+              isLoading={isTurnToFill && isEditing}
               label={
                 isTurnToFill
                   ? t("CompletedForm:FillOutForm")

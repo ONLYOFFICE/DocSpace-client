@@ -86,6 +86,7 @@ const Navigation = ({
   addButtonRef,
   contextButtonAnimation,
   guidAnimationVisible,
+  setGuidAnimationVisible,
   isContextButtonVisible,
   ...rest
 }: TNavigationProps) => {
@@ -326,6 +327,7 @@ const Navigation = ({
               isMobile={currentDeviceType !== DeviceType.desktop}
               contextButtonAnimation={contextButtonAnimation}
               guidAnimationVisible={guidAnimationVisible}
+              setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
             />
           </div>

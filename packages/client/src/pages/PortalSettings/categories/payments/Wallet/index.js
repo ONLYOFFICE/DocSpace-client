@@ -41,8 +41,6 @@ const Wallet = ({ walletInit, isInitWalletPage }) => {
   const [showLoader, setShowLoader] = useState(false);
   const shouldShowLoader = !isInitWalletPage || !ready;
 
-  console.log(isInitWalletPage, ready, shouldShowLoader);
-
   useEffect(() => {
     walletInit(t);
   }, []);

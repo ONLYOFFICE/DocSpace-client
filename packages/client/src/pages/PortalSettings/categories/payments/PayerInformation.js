@@ -87,7 +87,7 @@ const PayerInformation = ({
   payerInfo,
   email,
   isNotPaidPeriod,
-  isFreeAfterPaidPeriod,
+
   isStripePortalAvailable,
 }) => {
   const { t } = useTranslation("Payments");
@@ -119,7 +119,7 @@ const PayerInformation = ({
           productName: t("Common:ProductName"),
         });
 
-    if (isNotPaidPeriod || isFreeAfterPaidPeriod) {
+    if (isNotPaidPeriod) {
       invalidEmailDescription = user.isOwner
         ? t("InvalidEmailWithoutActiveSubscription", {
             productName: t("Common:ProductName"),

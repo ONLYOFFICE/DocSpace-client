@@ -112,7 +112,6 @@ const PaymentContainer = (props) => {
     isGracePeriod,
     theme,
     isNotPaidPeriod,
-    payerEmail,
     isPaidPeriod,
     currencySymbol,
     startValue,
@@ -295,8 +294,6 @@ const PaymentContainer = (props) => {
       );
   };
 
-  const isFreeAfterPaidPeriod = isFreeTariff && payerEmail?.length !== 0;
-
   return (
     <Consumer>
       {(context) => (
@@ -309,19 +306,14 @@ const PaymentContainer = (props) => {
             ? expiredTitleSubscriptionWarning()
             : currentPlanTitle()}
 
-          {!isNonProfit && isAlreadyPaid ? (
-            <PayerInformation isFreeAfterPaidPeriod={isFreeAfterPaidPeriod} />
-          ) : null}
+          {!isNonProfit && isAlreadyPaid ? <PayerInformation /> : null}
 
           <CurrentTariffContainer />
 
           {planSuggestion()}
           {planDescription()}
 
-          {!isNonProfit &&
-          !isGracePeriod &&
-          !isNotPaidPeriod &&
-          !isFreeAfterPaidPeriod ? (
+          {!isNonProfit && !isGracePeriod && !isNotPaidPeriod ? (
             <div className="payment-info_wrapper">
               <Text
                 noSelect
@@ -353,12 +345,7 @@ const PaymentContainer = (props) => {
           ) : null}
 
           <div className="payment-info">
-            {!isNonProfit ? (
-              <PriceCalculation
-                t={t}
-                isFreeAfterPaidPeriod={isFreeAfterPaidPeriod}
-              />
-            ) : null}
+            {!isNonProfit ? <PriceCalculation t={t} /> : null}
 
             <BenefitsContainer t={t} />
           </div>

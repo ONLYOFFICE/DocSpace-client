@@ -33,13 +33,11 @@ import { Tabs } from "@docspace/shared/components/tabs";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 import config from "../../../../../package.json";
-// import PaymentsEnterprise from "./Standalone";
+import PaymentsEnterprise from "./Standalone";
 import PaymentsSaaS from "./SaaS";
 import Wallet from "./Wallet";
 
-const PaymentsPage = ({ currentDeviceType }) => {
-  // const { standalone } = props;
-
+const PaymentsPage = ({ currentDeviceType, standalone }) => {
   const [currentTabId, setCurrentTabId] = useState();
   const location = useLocation();
   const navigate = useNavigate();
@@ -50,7 +48,7 @@ const PaymentsPage = ({ currentDeviceType }) => {
     {
       id: "portal-payments",
       name: t("TariffPlan"),
-      content: <PaymentsSaaS />,
+      content: standalone ? <PaymentsEnterprise /> : <PaymentsSaaS />,
     },
     {
       id: "wallet",
@@ -87,7 +85,6 @@ const PaymentsPage = ({ currentDeviceType }) => {
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );
-  // return standalone ? <PaymentsEnterprise /> : <PaymentsSaaS />;
 };
 
 export const Component = inject(({ settingsStore }) => {

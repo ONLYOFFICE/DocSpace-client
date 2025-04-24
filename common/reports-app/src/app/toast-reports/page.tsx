@@ -3,5 +3,5 @@
 import { PageContent } from "@/components/page-content";
 
 export default function Page() {
-  return <PageContent path="reports" />;
+  return <PageContent path="toasts" />;
 }

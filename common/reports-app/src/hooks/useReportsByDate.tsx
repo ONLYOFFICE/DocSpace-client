@@ -8,14 +8,14 @@ type ReportsByDateResult = {
   loading: boolean;
 };
 
-export const useReportsByDate = (days: number = 7): ReportsByDateResult => {
+export const useReportsByDate = (type: "reports" | "toasts", days: number = 7): ReportsByDateResult => {
   const [result, setResult] = useState<ReportsByDateResult>({
     data: [],
     loading: true,
   });
 
   useEffect(() => {
-    const reportsRef = ref(db, "reports");
+    const reportsRef = ref(db, type);
 
     const unsubscribe = onValue(reportsRef, (snapshot) => {
       const data = snapshot.val();
@@ -66,7 +66,7 @@ export const useReportsByDate = (days: number = 7): ReportsByDateResult => {
     });
 
     return () => unsubscribe();
-  }, [days]);
+  }, [days, type]);
 
   return result;
 };

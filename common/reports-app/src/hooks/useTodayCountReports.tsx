@@ -5,11 +5,11 @@ import { ref, onValue } from "firebase/database";
 import { db } from "@/firebase";
 import { RawReportData } from "@/types";
 
-export const useTodayCountReports = () => {
+export const useTodayCountReports = (type: "reports" | "toasts") => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const reportsRef = ref(db, "reports");
+    const reportsRef = ref(db, type);
 
     const unsubscribe = onValue(reportsRef, (snapshot) => {
       const data = snapshot.val();
@@ -39,7 +39,7 @@ export const useTodayCountReports = () => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [type]);
 
   return count;
 };

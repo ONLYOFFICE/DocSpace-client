@@ -5,12 +5,12 @@ import { ref, onValue } from "firebase/database";
 import { db } from "@/firebase";
 import type { ErrorReport, RawReportData } from "@/types";
 
-export const useReports = () => {
+export const useReports = (type: "reports" | "toasts") => {
   const [reports, setReports] = useState<ErrorReport[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const reportsRef = ref(db, "reports");
+    const reportsRef = ref(db, type);
     const unsubscribe = onValue(reportsRef, (snapshot) => {
       const data = snapshot.val() as Record<string, RawReportData> | null;
       const parsed: ErrorReport[] = data
@@ -42,7 +42,7 @@ export const useReports = () => {
       setLoading(false);
     });
     return () => unsubscribe();
-  }, []);
+  }, [type]);
 
   return { reports, loading };
 };

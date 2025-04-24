@@ -871,7 +871,7 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
     if (!item) return item;
 
     if ("updatedBy" in item) {
-      const updatedBy = item.updatedBy as {};
+      const updatedBy = item.updatedBy;
       if (
         updatedBy &&
         "displayName" in updatedBy &&
@@ -882,7 +882,7 @@ export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
     }
 
     if ("createdBy" in item) {
-      const createdBy = item.createdBy as {};
+      const createdBy = item.createdBy;
       if (
         createdBy &&
         "displayName" in createdBy &&

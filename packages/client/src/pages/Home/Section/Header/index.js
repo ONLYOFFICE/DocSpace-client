@@ -967,7 +967,7 @@ export default inject(
       theme,
       isFrame,
       showTitle: frameConfig?.showTitle,
-      hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
+      hideInfoPanel: isFrame,
       showMenu: frameConfig?.showMenu,
       currentDeviceType,
       insideGroupTempTitle,

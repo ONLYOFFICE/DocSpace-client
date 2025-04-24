@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ref, onValue } from "firebase/database";
 import { db } from "@/firebase";
-import { ErrorReport, ChartData } from "@/types";
+import { ErrorReport, RawReportData, ChartData } from "@/types";
 
 type ReportsByDateResult = {
   data: ChartData[];
@@ -24,17 +24,11 @@ export const useReportsByDate = (days: number = 7): ReportsByDateResult => {
         return;
       }
 
-      type FirebaseReport = {
-        errorMessage: string;
-        reportTime: string;
-        [key: string]: any;
-      };
-
       const reports: ErrorReport[] = Object.entries(data).map(
         ([id, value]) => ({
           id,
-          errorMessage: (value as FirebaseReport).errorMessage,
-          reportTime: (value as FirebaseReport).reportTime,
+          errorMessage: (value as RawReportData).errorMessage,
+          reportTime: (value as RawReportData).reportTime,
         })
       );
 

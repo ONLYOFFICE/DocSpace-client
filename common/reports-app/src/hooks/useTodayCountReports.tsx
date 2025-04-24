@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { ref, onValue } from "firebase/database";
 import { db } from "@/firebase";
+import { RawReportData } from "@/types";
 
 export const useTodayCountReports = () => {
   const [count, setCount] = useState(0);
@@ -22,14 +23,8 @@ export const useTodayCountReports = () => {
 
       let todayCount = 0;
 
-      type FirebaseReport = {
-        errorMessage: string;
-        reportTime: string;
-        [key: string]: unknown;
-      };
-
       Object.values(data).forEach((report) => {
-        const typedReport = report as FirebaseReport;
+        const typedReport = report as RawReportData;
         if (typedReport.reportTime) {
           const reportDate = new Date(typedReport.reportTime);
           const reportDateStr = reportDate.toISOString().split("T")[0];

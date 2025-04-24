@@ -3,14 +3,7 @@
 import { useState, useEffect } from "react";
 import { ref, onValue, set } from "firebase/database";
 import { db } from "@/firebase";
-
-export type ReportStatus = "new" | "bug_created" | "bug_fixed";
-
-export interface ReportDetail {
-  id: string;
-  status: ReportStatus;
-  updatedAt: string;
-}
+import { ReportDetail, ReportStatus } from "@/types";
 
 export const useReportStatus = () => {
   const [reportStatuses, setReportStatuses] = useState<

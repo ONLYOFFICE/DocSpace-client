@@ -42,7 +42,7 @@ import type { FilesSelectorProps } from "@docspace/shared/selectors/Files/FilesS
 import { StyledBodyWrapper } from "./FilesSelectorInput.styled";
 import {
   getAcceptButtonLabel,
-  getHeaderLabel,
+  // getHeaderLabel,
   getIsDisabled,
 } from "./FilesSelector.helpers";
 
@@ -125,7 +125,7 @@ const FilesSelectorInput = ({
     if (folders) setNewPath(folders, fileInfo?.title);
   };
 
-  const headerLabel = getHeaderLabel(t, isSelect, filterParam, isSelectFolder);
+  // const headerLabel = getHeaderLabel(t, isSelect, filterParam, isSelectFolder);
   const acceptButtonLabel = getAcceptButtonLabel(
     t,
     isSelect,
@@ -199,14 +199,12 @@ const FilesSelectorInput = ({
         withoutHeader
       >
         <FilesSelector
-          withHeader
           withSearch
           withBreadCrumbs
           withoutBackButton
           withCancelButton
           openRoot={openRoot}
           isRoomsOnly={isRoomsOnly}
-          headerLabel={headerLabel}
           currentFolderId={id ?? ""}
           filterParam={filterParam}
           checkCreating={checkCreating}
@@ -252,12 +250,9 @@ const FilesSelectorInput = ({
         isDisabled={isDisabled || isLoading}
         hasError={isError || isErrorPath}
         isDocumentIcon={isDocumentIcon}
-        placeholder={t("SelectAction")}
+        placeholder={t("Common:SelectAction")}
       />
-      <Portal
-        visible={isPanelVisible}
-        element={<div>{selectorComponent}</div>}
-      />
+      <Portal element={<div>{selectorComponent}</div>} />
     </StyledBodyWrapper>
   );
 };

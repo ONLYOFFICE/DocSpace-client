@@ -82,7 +82,7 @@ const RoomsModule = ({
 
   const [isStartCopy, setIsStartCopy] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState<string | number>(() => {
-    folderRef.current = getFromLocalStorage("LocalCopyFolder");
+    folderRef.current = getFromLocalStorage("LocalCopyFolder") ?? "";
     const moduleType = getFromLocalStorage("LocalCopyStorageType");
 
     return moduleType === Documents ? folderRef.current : "";

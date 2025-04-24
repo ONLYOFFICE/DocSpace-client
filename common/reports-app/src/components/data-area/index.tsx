@@ -33,6 +33,7 @@ export const DataArea = ({ chartData }: { chartData: ChartData[] }) => {
               tickLine={false}
               tickMargin={10}
               axisLine={false}
+              tickFormatter={(value) => new Date(value).toLocaleDateString("en-US", { weekday: "short" })}
             />
             <ChartTooltip
               cursor={false}

@@ -487,7 +487,7 @@
             config.editorGoBack = "event";
           }
 
-          path = `/doceditor?fileId=${config.id}&editorType=${config.editorType}&editorGoBack=${config.editorGoBack}&customization=${customization}`;
+          path = `/doceditor?fileId=${config.id}&isSDK=true&theme=${config.theme}&editorType=${config.editorType}&editorGoBack=${config.editorGoBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}&is_file=true`;
@@ -512,7 +512,7 @@
             config.editorGoBack = "event";
           }
 
-          path = `/doceditor?fileId=${config.id}&editorType=${config.editorType}&action=view&editorGoBack=${config.editorGoBack}&customization=${customization}`;
+          path = `/doceditor?fileId=${config.id}&isSDK=true&theme=${config.theme}&editorType=${config.editorType}&action=view&editorGoBack=${config.editorGoBack}&customization=${customization}`;
 
           if (config.requestToken) {
             path = `${path}&share=${config.requestToken}&is_file=true`;

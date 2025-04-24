@@ -26,7 +26,7 @@
 
 import React, { useEffect } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";

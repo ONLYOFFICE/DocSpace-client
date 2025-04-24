@@ -36,7 +36,7 @@ import SDK from "@onlyoffice/docspace-sdk-js";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { RoomsType } from "@docspace/shared/enums";
 import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";

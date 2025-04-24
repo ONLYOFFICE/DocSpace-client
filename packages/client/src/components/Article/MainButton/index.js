@@ -50,7 +50,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import {
   Events,
   DeviceType,

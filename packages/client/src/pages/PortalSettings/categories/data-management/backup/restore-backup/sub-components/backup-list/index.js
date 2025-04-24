@@ -27,7 +27,7 @@
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";

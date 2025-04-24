@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { decode } from "he";
 import { inject, observer } from "mobx-react";
 import { Link } from "@docspace/shared/components/link";

@@ -27,7 +27,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import { Link } from "@docspace/shared/components/link";

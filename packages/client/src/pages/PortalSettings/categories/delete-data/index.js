@@ -26,7 +26,7 @@
 
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

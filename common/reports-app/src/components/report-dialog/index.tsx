@@ -5,13 +5,14 @@ import { ErrorReport } from "@/types";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useReportStatus, ReportStatus } from "@/hooks/useReportStatus";
+import { Badge, BadgeVariant } from "@/components/ui/badge";
+import { useReportStatus } from "@/hooks/useReportStatus";
+import { ReportStatus } from "@/types";
 
 interface ReportDialogProps {
   report: ErrorReport | null;
@@ -55,16 +56,16 @@ export function ReportDialog({
     handleStatusChange("bug_created");
   };
 
-  const getStatusInfo = (status: ReportStatus) => {
+  const getStatusInfo = (status: ReportStatus): { text: string; variant: BadgeVariant } => {
     switch (status) {
       case "new":
-        return { text: "New", color: "bg-blue-100 text-blue-800" };
+        return { text: "New", variant: "new" };
       case "bug_created":
-        return { text: "Bug Created", color: "bg-yellow-100 text-yellow-800" };
+        return { text: "Bug Created", variant: "yellow" };
       case "bug_fixed":
-        return { text: "Bug Fixed", color: "bg-green-100 text-green-800" };
+        return { text: "Bug Fixed", variant: "green" };
       default:
-        return { text: "Unknown", color: "bg-gray-100 text-gray-800" };
+        return { text: "Unknown", variant: "default" };
     }
   };
 
@@ -74,15 +75,11 @@ export function ReportDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="w-auto overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Error Report Details</DialogTitle>
-          <DialogDescription className="flex items-center gap-2">
-            Status:
-            <span
-              className={`px-2 py-1 rounded-full text-xs font-medium ${statusInfo.color}`}
-            >
+          <DialogTitle className="flex items-center gap-2">Error Report Details
+            <Badge variant={statusInfo.variant}>
               {statusInfo.text}
-            </span>
-          </DialogDescription>
+            </Badge>
+          </DialogTitle>
         </DialogHeader>
 
         <div className="space-y-2">

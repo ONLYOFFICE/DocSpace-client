@@ -46,7 +46,7 @@ export type TabsProps = {
   /** Child elements. */
   items: TTabItem[];
   /** Selected item of tabs. */
-  selectedItemId?: number | string;
+  selectedItemId: number | string;
   selectedItems?: number[];
   /** Theme for displaying tabs. */
   type?: TabsTypes;
@@ -57,7 +57,7 @@ export type TabsProps = {
   /** Sets a tab class name */
   className?: string;
   /** Sets a callback function that is triggered when the tab is selected. */
-  onSelect?: (element: TTabItem) => void;
+  onSelect: (element: TTabItem) => void;
 
   style?: React.CSSProperties;
 };

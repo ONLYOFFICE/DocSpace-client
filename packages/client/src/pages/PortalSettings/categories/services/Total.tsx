@@ -141,7 +141,10 @@ const Total: React.FC<TotalProps> = ({
         t={t}
         value={stepValue || 0}
       />
-      <WalletInfo balance={balanceValue} onTopUp={onTopUp} />
+      <WalletInfo
+        balance={balanceValue}
+        {...(isInsufficientFunds && { onTopUp })}
+      />
       {isInsufficientFunds ? (
         <Text className={styles.balanceWarning} fontSize="12px">
           {t("BalanceNotEnough")}

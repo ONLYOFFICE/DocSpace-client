@@ -32,6 +32,7 @@
   box-sizing: border-box;
   border-radius: 6px;
   align-items: center;
+  position: relative;
 }
 
 .wallet-info-icon {
@@ -66,4 +67,15 @@
 .wallet-info-balance {
   font-size: 14px;
   line-height: 16px;
+}
+
+.wallet-info-top-up {
+  margin-left: auto;
+  color: var(--payment-link-color, #4781D1);
+  cursor: pointer;
+  font-weight: 600;
+  
+  &:hover {
+    text-decoration: underline;
+  }
 }

@@ -38,9 +38,10 @@ import "../styles/WalletInfo.scss";
 
 type WalletInfoProps = {
   balance?: string;
+  onTopUp?: () => void;
 };
 
-const WalletInfo: React.FC<WalletInfoProps> = ({ balance }) => {
+const WalletInfo: React.FC<WalletInfoProps> = ({ balance, onTopUp }) => {
   const { t } = useTranslation(["Payments", "Common"]);
 
   return (
@@ -66,6 +67,18 @@ const WalletInfo: React.FC<WalletInfoProps> = ({ balance }) => {
           />
         </div>
       </div>
+      {onTopUp ? (
+        <ColorTheme
+          className="wallet-info-top-up"
+          themeId={ThemeId.Link}
+          fontSize="13px"
+          fontWeight="600"
+          onClick={onTopUp}
+          $isUnderline
+        >
+          {t("TopUp")}
+        </ColorTheme>
+      ) : null}
     </div>
   );
 };

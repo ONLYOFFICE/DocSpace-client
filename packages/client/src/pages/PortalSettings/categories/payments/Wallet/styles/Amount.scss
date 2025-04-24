@@ -30,8 +30,16 @@
 }
 
 .amount-title {
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 }
 .tabs-wrapper {
   margin-bottom: 12px;
+}
+.quantity,
+.storage-per-month {
+  color: var(--payment-dialog-text);
+}
+
+.storage-per-month {
+  margin-top: 4px;
 }

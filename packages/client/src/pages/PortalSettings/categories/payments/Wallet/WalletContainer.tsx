@@ -33,7 +33,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import TransactionHistory from "./TransactionHistory";
 import TopUpModal from "./TopUpModal";
-import { formatCurrencyValue, formattedBalanceTokens } from "./utils";
+import { formattedBalanceTokens } from "./utils";
 
 import "./styles/Wallet.scss";
 
@@ -75,14 +75,6 @@ const Wallet = ({
     language,
     walletBalance,
     walletCodeCurrency || "",
-  );
-
-  const balanceValue = formatCurrencyValue(
-    language,
-    walletBalance,
-    walletCodeCurrency || "",
-    2,
-    2,
   );
 
   const onClose = () => {
@@ -141,7 +133,6 @@ const Wallet = ({
         <TopUpModal
           visible={visible}
           onClose={onClose}
-          balanceValue={balanceValue}
           isEditAutoPayment={isEditAutoPayment}
         />
       ) : null}

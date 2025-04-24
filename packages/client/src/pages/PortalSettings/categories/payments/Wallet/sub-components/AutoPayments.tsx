@@ -44,17 +44,17 @@ import { formatCurrencyValue } from "../utils";
 
 interface AutoPaymentsProps {
   walletCustomerEmail: boolean;
-  isAutoPaymentExist: boolean;
-  updateAutoPayments: (
+  currency: string;
+  isAutoPaymentExist?: boolean;
+  updateAutoPayments?: (
     enabled: boolean,
     minBalance: number,
     upToBalance: number,
     currency: string,
   ) => Promise<void>;
-  autoPayments: TAutoTopUpSettings | null;
-  language: string;
-  currency: string;
-  isEditAutoPayment: boolean;
+  autoPayments?: TAutoTopUpSettings | null;
+  language?: string;
+  isEditAutoPayment?: boolean;
 }
 
 interface CurrentPaymentSettingsProps {
@@ -70,9 +70,7 @@ const CurrentPaymentSettings = ({
 }: CurrentPaymentSettingsProps) => {
   const { t } = useTranslation("Payments");
 
-  if (!autoPayments) return null;
-
-  const { minBalance, upToBalance } = autoPayments;
+  const { minBalance, upToBalance } = autoPayments!;
 
   return (
     <div className="info-block">
@@ -174,7 +172,12 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
     }, 200);
 
     try {
-      await updateAutoPayments(isEnable, +minBalance, +upToBalance, currency);
+      await updateAutoPayments!(
+        isEnable,
+        +minBalance!,
+        +upToBalance!,
+        currency,
+      );
 
       setIsCurrentSettings(isEnable);
       if (!isEnable) {
@@ -247,7 +250,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
         </Text>
         <TextInput
           scale
-          value={minBalance}
+          value={minBalance!}
           onChange={onMinBalanceChange}
           hasError={minBalanceError}
           type={InputType.text}
@@ -262,7 +265,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
         </Text>
         <TextInput
           scale
-          value={upToBalance}
+          value={upToBalance!}
           onChange={onMaxUpToBalanceChange}
           hasError={upToBalanceError}
           type={InputType.text}

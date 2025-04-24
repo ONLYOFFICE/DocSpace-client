@@ -25,10 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 // TopUpModal.tsx
 import React, { useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import {
   ModalDialog,
@@ -44,6 +43,7 @@ import WalletInfo from "./sub-components/WalletInfo";
 import PaymentMethod from "./sub-components/PaymentMethod";
 import Amount from "./sub-components/Amount";
 import AutomaticPaymentsBlock from "./sub-components/AutoPayments";
+import { formatCurrencyValue } from "./utils";
 
 const StyledBody = styled.div`
   display: flex;
@@ -56,22 +56,27 @@ const StyledBody = styled.div`
 
 type TopUpModalProps = {
   visible: boolean;
-  currency: string;
-  balanceValue: string;
-  fetchTransactionHistory: () => Promise<void>;
-  walletCustomerEmail: boolean;
-  fetchBalance: () => Promise<void>;
+  currency?: string;
+  balanceValue?: string;
+  fetchTransactionHistory?: () => Promise<void>;
+  walletCustomerEmail?: boolean;
+  fetchBalance?: () => Promise<void>;
   onClose: () => void;
-  language: string;
-  cardLinked: string;
-  accountLink: string;
-  isEditAutoPayment: boolean;
+  language?: string;
+  cardLinked?: string;
+  accountLink?: string;
+  isEditAutoPayment?: boolean;
+  headerProps?: {
+    isBackButton: boolean;
+    onBackClick: () => void;
+    onCloseClick: () => void;
+  };
+  walletBalance?: number;
 };
 
 const TopUpModal: React.FC<TopUpModalProps> = ({
   visible,
-  currency,
-  balanceValue,
+  currency = "",
   fetchTransactionHistory,
   walletCustomerEmail,
   fetchBalance,
@@ -80,6 +85,8 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
   cardLinked,
   accountLink,
   isEditAutoPayment,
+  headerProps,
+  walletBalance = 0,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState("");
@@ -96,23 +103,32 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
       if (!res) return;
       if (!res.includes("ok")) throw new Error(res);
 
-      await Promise.allSettled([fetchBalance(), fetchTransactionHistory()]);
+      await Promise.allSettled([fetchBalance!(), fetchTransactionHistory!()]);
 
       onClose();
     } catch (e) {
       console.error(e);
 
-      toastr.error(e);
+      toastr.error(e instanceof Error ? e.message : String(e));
     } finally {
       setIsLoading(false);
     }
   };
+
+  const balanceValue = formatCurrencyValue(
+    language!,
+    walletBalance,
+    currency,
+    2,
+    2,
+  );
 
   return (
     <ModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.aside}
+      {...headerProps}
     >
       <ModalDialog.Header>{t("TopUpWallet")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -121,18 +137,18 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
           <Amount
             setAmount={setAmount}
             amount={amount}
-            language={language}
+            language={language!}
             currency={currency}
           />
           <PaymentMethod
-            walletCustomerEmail={walletCustomerEmail}
-            cardLinked={cardLinked}
-            accountLink={accountLink}
+            walletCustomerEmail={walletCustomerEmail!}
+            cardLinked={cardLinked!}
+            accountLink={accountLink!}
           />
           <AutomaticPaymentsBlock
-            walletCustomerEmail={walletCustomerEmail}
+            walletCustomerEmail={walletCustomerEmail!}
             currency={currency}
-            isEditAutoPayment={isEditAutoPayment}
+            isEditAutoPayment={isEditAutoPayment!}
           />
         </StyledBody>
       </ModalDialog.Body>
@@ -162,12 +178,13 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
 export default inject(({ paymentStore, authStore }: TStore) => {
   const { language } = authStore;
   const {
-    walletCodeCurrency,
     walletCustomerEmail,
     fetchBalance,
     fetchTransactionHistory,
     cardLinked,
     accountLink,
+    walletBalance,
+    walletCodeCurrency,
   } = paymentStore;
 
   return {
@@ -178,5 +195,6 @@ export default inject(({ paymentStore, authStore }: TStore) => {
     language,
     cardLinked,
     accountLink,
+    walletBalance,
   };
 })(observer(TopUpModal));

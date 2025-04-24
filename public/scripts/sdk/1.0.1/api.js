@@ -547,7 +547,7 @@
           <body style="background: #F3F4F4;">
           <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css">
           <div style="display: flex; flex-direction: column; gap: 80px; align-items: center; justify-content: flex-start; margin-top: 60px; padding: 0 30px;">
-          <div style="flex-shrink: 0; width: 211px; height: 24px; position: relative">
+          <div style="flex-shrink: 0; position: relative">
           <img src="${this.config.src}/static/images/logo/lightsmall.svg">
           </div>
           <div style="display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: flex-start; flex-shrink: 0; position: relative;">
@@ -556,7 +556,7 @@
           </div>
           <span style="color: #A3A9AE; text-align: center; font-family: Open Sans; font-size: 14px; font-style: normal; font-weight: 700; line-height: 16px;">
           ${cspErrorText} Please add it via 
-          <a href="${this.config.src}/portal-settings/developer-tools/javascript-sdk" target="_blank" style="color: #4781D1; text-align: center; font-family: Open Sans; font-size: 14px; font-style: normal; font-weight: 700; line-height: 16px; text-decoration-line: underline;">
+          <a href="${this.config.src}/developer-tools/javascript-sdk" target="_blank" style="color: #4781D1; text-align: center; font-family: Open Sans; font-size: 14px; font-style: normal; font-weight: 700; line-height: 16px; text-decoration-line: underline;">
           the Developer Tools section</a>.
           </span>
           </div>

@@ -282,15 +282,23 @@ const ArticleBodyContent = (props) => {
 
     if (selectedKeys.length === 0) return null;
 
-    resultTree.forEach((item) => {
+    const resultTreeLength = resultTree.length;
+
+    resultTree.forEach((item, index) => {
       const icon = getCatalogIconUrlByType(item.type, {
         isSettingsCatalog: true,
       });
+
+      const isLastIndex = resultTreeLength - 1 === index;
 
       const patternSearching = selectedKeys[0].split("-");
       const selectedKey = patternSearching[0];
       const title = mapKeys(item.tKey);
       const linkData = getLinkData(item.key);
+
+      const style = isLastIndex
+        ? { margin: `${item.key.includes(9) ? "16px 0px" : "0"}` }
+        : { marginTop: `${item.key.includes(9) ? "16px" : "0"}` };
 
       items.push(
         <ArticleItem
@@ -305,9 +313,7 @@ const ArticleBodyContent = (props) => {
           onClick={(e) => onSelect(item.key, e)}
           linkData={linkData}
           folderId={item.id}
-          style={{
-            margin: `${item.key.includes(9) ? "16px 0px" : "0"}`,
-          }}
+          style={style}
           $currentColorScheme={currentColorScheme}
         />,
       );

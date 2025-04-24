@@ -708,5 +708,13 @@
   "Yes": "Jā",
   "Yesterday": "어제",
   "You": "Jūs",
-  "YourTurn": "Jūsu kārta"
+  "YourTurn": "Jūsu kārta",
+  "Assign": "Piedēļ",
+  "AssignRoles": "Piedāvāt lomas?",
+  "AssignRolesDescription": "Forma ir veiksmīgi iesniegta {{roomName}}. Piešķiriet lomas izvēlētajiem lietotājiem, lai iespējotu formas aizpildīšanu. Vai vēlaties turpināt tūlīt vai atgriezties pie tā vēlāk?",
+  "FormDataCollection": "Formu datu savākšana",
+  "FormDataCollectionDescription": "Aizpildīto veidlapu kopiju un no tām iegūto datu apkopošana XLSX, lai analizētu atbildes veidlapu aizpildīšanas telpās.",
+  "ItemsSuccessfullyUploaded": "Augšupielādētie elementi: {{count}}",
+  "RoleBasedFilling": "Lomas balstīta piepildīšana",
+  "RoleBasedFillingDescription": "Apiepilniniet sākotnējo formu ar lomām un citiem dalībniekiem VDR."
 }

@@ -708,5 +708,13 @@
   "Yes": "Ano",
   "Yesterday": "Včera",
   "You": "Vy",
-  "YourTurn": "Jste na řadě"
+  "YourTurn": "Jste na řadě",
+  "Assign": "Přiřadit",
+  "AssignRoles": "Přiřadit role?",
+  "AssignRolesDescription": "Formulář byl úspěšně odeslán do {{roomName}}. Přiřaďte role vybraným uživatelům, abyste umožnili vyplňování formuláře. Chcete pokračovat nyní nebo se k němu později vrátit?",
+  "FormDataCollection": "Sběr dat formulářů",
+  "FormDataCollectionDescription": "Shromážděte vyplněné kopie formulářů a data z nich do souboru XLSX pro analýzu odpovědí v místnostech pro vyplňování formulářů.",
+  "ItemsSuccessfullyUploaded": "Nahráno prvků: {{count}}",
+  "RoleBasedFilling": "Plnění na základě rolí",
+  "RoleBasedFillingDescription": "Vyplňte úvodní formulář podle rolí s ostatními účastníky virtuální datové místnosti."
 }

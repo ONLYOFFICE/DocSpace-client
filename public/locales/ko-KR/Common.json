@@ -706,5 +706,13 @@
   "Yes": "네",
   "Yesterday": "어제",
   "You": "나",
-  "YourTurn": "고객님의 차례입니다"
+  "YourTurn": "고객님의 차례입니다",
+  "Assign": "지정하다",
+  "AssignRoles": "역할 할당하시겠습니까?",
+  "AssignRolesDescription": "{{roomName}}에 양식이 성공적으로 제출되었습니다. 선택한 사용자에게 역할을 할당하여 양식 작성을 활성화하세요. 지금 진행하시겠습니까, 아니면 나중에 다시 하시겠습니까?",
+  "FormDataCollection": "양식 데이터 수집",
+  "FormDataCollectionDescription": "완료된 서식 사본과 데이터를 XLSX 형식으로 수집하여 Form Filling 룸에서 응답을 분석합니다.",
+  "ItemsSuccessfullyUploaded": "업로드된 요소: {{count}}",
+  "RoleBasedFilling": "역할 기반 채우기",
+  "RoleBasedFillingDescription": "VDR에 참여한 다른 사람들과 함께 원래 양식을 역할별로 작성해 주세요."
 }

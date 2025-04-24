@@ -708,5 +708,13 @@
   "Yes": "Bəli",
   "Yesterday": "Dünən",
   "You": "Siz",
-  "YourTurn": "Sizin növbəniz"
+  "YourTurn": "Sizin növbəniz",
+  "Assign": "Təyin et",
+  "AssignRoles": "Rolları təyin et?",
+  "AssignRolesDescription": "Form {{roomName}} vasitəsilə uğurla göndərildi. Formu doldurmaq üçün seçilmiş istifadəçilərə rollar təyin edin. İndi davam etmək istəyirsiniz, yoxsa daha sonra geri dönmək?",
+  "FormDataCollection": "Form məlumatların toplanması",
+  "FormDataCollectionDescription": "Doldurma otaqlarında cavabları təhlil etmək üçün tamamlanmış forma nüsxələrini və onlardan məlumatları XLSX-ə toplayın.",
+  "ItemsSuccessfullyUploaded": "Yüklənən elementlər: {{count}}",
+  "RoleBasedFilling": "Rolə əsaslanan doldurma",
+  "RoleBasedFillingDescription": "VDR-də digər iştirakçılarla rola görə orijinal formanı doldurun."
 }

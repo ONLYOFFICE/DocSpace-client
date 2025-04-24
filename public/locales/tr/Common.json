@@ -708,5 +708,13 @@
   "Yes": "Evet",
   "Yesterday": "Dün",
   "You": "Siz",
-  "YourTurn": "Sıra sizde"
+  "YourTurn": "Sıra sizde",
+  "Assign": "Atamak",
+  "AssignRoles": "Rolleri atama?",
+  "AssignRolesDescription": "Form başarıyla {{roomName}}'e gönderildi. Form doldurmayı etkinleştirmek için seçilen kullanıcılara roller atayın. Şimdi devam etmek ister misiniz yoksa daha sonra geri dönmek ister misiniz?",
+  "FormDataCollection": "Form verisi toplama",
+  "FormDataCollectionDescription": "Form Doldurma odalarındaki yanıtları analiz etmek için doldurulan form kopyalarını ve verilerini XLSX'te toplayın.",
+  "ItemsSuccessfullyUploaded": "Yüklenen öğeler: {{count}}",
+  "RoleBasedFilling": "Rol tabanlı doldurma",
+  "RoleBasedFillingDescription": "VDR'deki diğer katılımcılarla birlikte rollere göre orijinal formu doldurun."
 }

@@ -8,5 +8,6 @@
   "LinkCopySuccess": "ລິ້ງຖືກຄັດລອກແລ້ວ",
   "ResetChange": "ຣີເຊັດການປ່ຽນແປງ",
   "SendInvitation": "ສົ່ງຄຳເຊີນ",
-  "UsersAlreadyAdded": "ຜູ້ໃຊ້ບາງຄົນໄດ້ຖືກເພີ່ມແລ້ວ"
+  "UsersAlreadyAdded": "ຜູ້ໃຊ້ບາງຄົນໄດ້ຖືກເພີ່ມແລ້ວ",
+  "UsersCannotBeAdded": "ຜູ້ຕິດຕໍ່ທີ່ຖືກປິດການໃຊ້ງານ ບໍ່ສາມາດເພີ່ມເຂົ້າຫ້ອງໄດ້"
 }

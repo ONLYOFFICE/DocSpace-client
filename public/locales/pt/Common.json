@@ -708,5 +708,13 @@
   "Yes": "Sim",
   "Yesterday": "Ontem",
   "You": "Você",
-  "YourTurn": "A sua vez"
+  "YourTurn": "A sua vez",
+  "Assign": "Atribuir",
+  "AssignRoles": "Atribuir funções?",
+  "AssignRolesDescription": "O formulário foi enviado com sucesso para {{roomName}}. Atribua funções aos usuários escolhidos para permitir o preenchimento do formulário. Deseja prosseguir agora ou retornar a ele mais tarde?",
+  "FormDataCollection": "Coleta de dados do formulário",
+  "FormDataCollectionDescription": "Reúna as cópias preenchidas do formulário e os dados deles em XLSX para analisar as respostas nas salas de preenchimento de formulários.",
+  "ItemsSuccessfullyUploaded": "Elementos carregados: {{count}}",
+  "RoleBasedFilling": "Preenchimento baseado em funções",
+  "RoleBasedFillingDescription": "Preencha o formulário original por funções com outros participantes no VDR."
 }

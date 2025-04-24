@@ -708,5 +708,13 @@
   "Yes": "Tak",
   "Yesterday": "Wczoraj",
   "You": "Ty",
-  "YourTurn": "Twoja kolej"
+  "YourTurn": "Twoja kolej",
+  "Assign": "Przypisz",
+  "AssignRoles": "Przypisać role?",
+  "AssignRolesDescription": "Formularz został pomyślnie wysłany do {{roomName}}. Przypisz role wybranym użytkownikom, aby umożliwić im wypełnianie formularza. Czy chcesz kontynuować teraz, czy wrócić do tego później?",
+  "FormDataCollection": "Zbieranie danych formularza",
+  "FormDataCollectionDescription": "Zbierz skopiowane formularze i dane z nich do formatu XLSX w celu analizy odpowiedzi w pomieszczeniach do wypełniania formularzy.",
+  "ItemsSuccessfullyUploaded": "Załadowane elementy: {{count}}",
+  "RoleBasedFilling": "Wypełnianie oparte na rolach",
+  "RoleBasedFillingDescription": "Wypełnij formularz początkowy, biorąc pod uwagę rolę, z innymi uczestnikami Wirtualnego pokoju danych."
 }

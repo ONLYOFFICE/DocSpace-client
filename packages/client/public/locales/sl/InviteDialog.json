@@ -14,5 +14,6 @@
   "ResetChange": "Ponastavi spremembe",
   "SendInvitation": "Pošlji povabilo",
   "UserMaxAvailableRoleWarning": "Gostov in uporabnikov ni mogoče določiti za upravitelje sob. Samo skrbniki sobe in {{productName}} so primerni za to vlogo.",
-  "UsersAlreadyAdded": "Nekateri uporabniki so že dodani"
+  "UsersAlreadyAdded": "Nekateri uporabniki so že dodani",
+  "UsersCannotBeAdded": "Onemogočeni kontakti se ne morejo dodati v sobo."
 }

@@ -708,5 +708,13 @@
   "Yes": "Ja",
   "Yesterday": "Gisteren",
   "You": "U",
-  "YourTurn": "Uw beurt"
+  "YourTurn": "Uw beurt",
+  "Assign": "Toewijzen",
+  "AssignRoles": "Rollen toewijzen?",
+  "AssignRolesDescription": "Het formulier is succesvol ingediend bij {{roomName}}. Wijs rollen toe aan de gekozen gebruikers om het invullen van het formulier mogelijk te maken. Wilt u nu verdergaan of het later nog eens bekijken?",
+  "FormDataCollection": "Form data verzameling",
+  "FormDataCollectionDescription": "Verzamelen van kopieën van de ingevulde formulieren en de daaruit geëxtraheerde gegevens in XLSX om de antwoorden in de formulierenkamers te analyseren.",
+  "ItemsSuccessfullyUploaded": "Geüploade elementen: {{count}}",
+  "RoleBasedFilling": "Rolgebaseerd invullen",
+  "RoleBasedFillingDescription": "Vul het originele formulier in per rol met andere deelnemers in VDR."
 }

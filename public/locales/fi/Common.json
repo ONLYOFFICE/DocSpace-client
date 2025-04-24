@@ -708,5 +708,13 @@
   "Yes": "Kyllä",
   "Yesterday": "Eilen",
   "You": "Sinä",
-  "YourTurn": "Sinun vuorosi"
+  "YourTurn": "Sinun vuorosi",
+  "Assign": "Määritä",
+  "AssignRoles": "Määritetäänkö roolit?",
+  "AssignRolesDescription": "Lomake on lähetetty onnistuneesti {{roomName}}-kohteeseen. Määritä rooleja valituille käyttäjille, jotta he voivat täyttää lomakkeen. Haluatko jatkaa nyt vai palata siihen myöhemmin?",
+  "FormDataCollection": "Lomaketietojen kerääminen",
+  "FormDataCollectionDescription": "Kerää täytetyt lomakekopiot ja tiedot niistä XLSX-tiedostoon vastausten analysoimiseksi lomakkeiden täyttöhuoneissa.",
+  "ItemsSuccessfullyUploaded": "Ladatut elementit: {{count}}",
+  "RoleBasedFilling": "Roolipohjainen täyttö",
+  "RoleBasedFillingDescription": "Täytä alkuperäinen lomake rooleineen muiden VDR:n osallistujien kanssa."
 }

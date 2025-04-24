@@ -14,5 +14,6 @@
   "ResetChange": "Atiestatīt izmaiņas",
   "SendInvitation": "Sūtīt ielūgumu",
   "UserMaxAvailableRoleWarning": "Viesi un lietotāji nevar būt telpu pārvaldnieki. Norādītajai lomai ir piemērota tikai telpa un {{productName}} administratori.",
-  "UsersAlreadyAdded": "Daži lietotāji jau ir pievienoti"
+  "UsersAlreadyAdded": "Daži lietotāji jau ir pievienoti",
+  "UsersCannotBeAdded": "Invalid kontaktpersonas nevar pievienot telpai"
 }

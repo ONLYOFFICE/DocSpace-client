@@ -706,5 +706,13 @@
   "Yes": "Có",
   "Yesterday": "Hôm qua",
   "You": "Bạn",
-  "YourTurn": "Phiên của bạn"
+  "YourTurn": "Phiên của bạn",
+  "Assign": "Chỉ định",
+  "AssignRoles": "Phân công vai trò?",
+  "AssignRolesDescription": "Đã gửi biểu mẫu thành công đến {{roomName}}. Phân quyền cho những người dùng đã chọn để cho phép điền vào biểu mẫu. Bạn có muốn tiến hành ngay bây giờ hay quay lại sau?",
+  "FormDataCollection": "Thu thập dữ liệu mẫu",
+  "FormDataCollectionDescription": "Thu thập các bản sao mẫu đã hoàn thành và dữ liệu từ chúng vào XLSX để phân tích các phản hồi trong phòng Điền Mẫu.",
+  "ItemsSuccessfullyUploaded": "Các phần tử đã tải lên: {{count}}",
+  "RoleBasedFilling": "Điền dựa trên vai trò",
+  "RoleBasedFillingDescription": "Điền vào mẫu gốc theo vai trò với những người tham gia khác trong VDR."
 }

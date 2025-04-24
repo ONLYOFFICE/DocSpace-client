@@ -8,5 +8,6 @@
   "LinkCopySuccess": "සබැඳිය පිටපත් විය",
   "ResetChange": "වෙනස්කම් යළි සකසන්න",
   "SendInvitation": "ආරාධනය යවන්න",
-  "UsersAlreadyAdded": "ඇතැම් අය දැනටමත් එක් කර ඇත"
+  "UsersAlreadyAdded": "ඇතැම් අය දැනටමත් එක් කර ඇත",
+  "UsersCannotBeAdded": "අවලංගු සම්බන්ධතා ක්‍රියාවලියට එක් කිරීමට නොහැකිය."
 }

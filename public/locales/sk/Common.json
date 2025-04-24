@@ -708,5 +708,13 @@
   "Yes": "Áno",
   "Yesterday": "Včera",
   "You": "Vy",
-  "YourTurn": "Ste na rade"
+  "YourTurn": "Ste na rade",
+  "Assign": "Priradenie",
+  "AssignRoles": "Prideliť roly?",
+  "AssignRolesDescription": "Formulár bol úspešne odoslaný do {{roomName}}. Priraďte používateľom, ktorých ste vybrali, role, aby ste umožnili vyplňovanie formulára. Chcete teraz pokračovať alebo sa k nemu vrátiť neskôr?",
+  "FormDataCollection": "Zber údajov z formulárov",
+  "FormDataCollectionDescription": "Zozbierajte vyplnené kópie formulárov a dáta z nich do formátu XLSX na analýzu odpovedí v miestnostiach na vyplňovanie formulárov.",
+  "ItemsSuccessfullyUploaded": "Nahraté prvky: {{count}}",
+  "RoleBasedFilling": "Základné vyplňovanie na základe rolí",
+  "RoleBasedFillingDescription": "Vyplňte úvodný formulár podľa roly s ostatnými účastníkmi virtuálnej dátovej miestnosti."
 }

@@ -53,7 +53,6 @@ type ContactsTabsProps = {
   setUsersBufferSelection: UsersStore["setBufferSelection"];
   setContactsTab: UsersStore["setContactsTab"];
   guestsTabVisited: UsersStore["guestsTabVisited"];
-  contactsTab: UsersStore["contactsTab"];
 
   setGroupsSelection: GroupsStore["setSelection"];
   setGroupsBufferSelection: GroupsStore["setBufferSelection"];
@@ -81,8 +80,6 @@ const ContactsTabs = ({
   setContactsTab,
 
   guestsTabVisited,
-
-  contactsTab,
 }: ContactsTabsProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
@@ -95,7 +92,7 @@ const ContactsTabs = ({
     setUsersBufferSelection(null);
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
-    setIsSectionBodyLoading(true, contactsTab !== "groups");
+    setIsSectionBodyLoading(true, contactsView !== "groups");
     setContactsTab("people");
     navigate(PEOPLE_ROUTE_WITH_FILTER);
   };
@@ -115,7 +112,7 @@ const ContactsTabs = ({
     setUsersBufferSelection(null);
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
-    setIsSectionBodyLoading(true, contactsTab !== "groups");
+    setIsSectionBodyLoading(true, contactsView !== "groups");
 
     const filter = Filter.getDefault();
 
@@ -195,8 +192,6 @@ export default inject(
       setContactsTab,
 
       guestsTabVisited,
-
-      contactsTab,
     } = usersStore!;
     const {
       setSelection: setGroupsSelection,
@@ -220,8 +215,6 @@ export default inject(
       setContactsTab,
 
       guestsTabVisited,
-
-      contactsTab,
     };
   },
 )(observer(ContactsTabs));

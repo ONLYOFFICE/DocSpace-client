@@ -274,6 +274,7 @@ const TrustedMail = (props) => {
           onClickAdd={onClickAdd}
           regexp={regexp}
           classNameAdditional="add-trusted-domain"
+          isAutoFocussed
         />
       ) : null}
 

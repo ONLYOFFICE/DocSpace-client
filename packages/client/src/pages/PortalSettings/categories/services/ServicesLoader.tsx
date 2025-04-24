@@ -33,9 +33,9 @@ import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
 import styles from "./styles/ServicesLoader.module.scss";
 
-interface ServicesLoaderProps {
+type ServicesLoaderProps = {
   currentDeviceType?: DeviceType;
-}
+};
 
 const LoaderContainer = () => {
   return (
@@ -46,10 +46,12 @@ const LoaderContainer = () => {
       </div>
 
       <div className={styles.middleRow}>
-        <RectangleSkeleton width="130px" height="16px" />
+        <RectangleSkeleton width="100%" height="16px" />
       </div>
 
-      <RectangleSkeleton width="271px" height="16px" />
+      <div className={styles.longRow}>
+        <RectangleSkeleton width="100%" height="16px" />
+      </div>
 
       <div className={styles.bottomRow}>
         <RectangleSkeleton width="111px" height="16px" />

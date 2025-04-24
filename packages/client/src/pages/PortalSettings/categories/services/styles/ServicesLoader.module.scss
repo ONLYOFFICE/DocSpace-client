@@ -39,7 +39,7 @@
 }
 
 .loaderContainer {
-  width: 280px;
+  max-width: 280px;
   padding: 20px;
 }
 
@@ -52,8 +52,12 @@
 
 .middleRow {
   margin-bottom: 12px;
+  max-width: 130px;
 }
 
+.longRow {
+  max-width: 271px;
+}
 .bottomRow {
   margin-top: 12px;
 }

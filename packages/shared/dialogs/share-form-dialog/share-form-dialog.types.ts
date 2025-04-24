@@ -42,4 +42,5 @@ export interface ShareFormDialogProps {
 
   title: string;
   cards: PanelCard[];
+  withBorder?: boolean;
 }

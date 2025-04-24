@@ -65,6 +65,7 @@ export const FillingStatusPanel = ({
   user,
   onDelete,
   onResetFilling,
+  withBorder,
 }: FillingStatusPanelProps) => {
   const { t } = useTranslation(["Common"]);
   const [value, setValue] = useLocalStorage(
@@ -117,6 +118,7 @@ export const FillingStatusPanel = ({
       onClose={onClose}
       isLoading={isLoading}
       displayType={ModalDialogType.aside}
+      withBorder={withBorder}
     >
       <ModalDialog.Header>{t("Common:FillingStatus")}</ModalDialog.Header>
       <ModalDialog.Body>

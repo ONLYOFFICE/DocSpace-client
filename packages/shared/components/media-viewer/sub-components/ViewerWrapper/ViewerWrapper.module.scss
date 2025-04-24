@@ -56,6 +56,6 @@
   }
 
   &:hover {
-    background: var(--viewer-dropdown-item-hover-bg);
+    background-color: var(--viewer-dropdown-item-hover-bg) !important;
   }
 }

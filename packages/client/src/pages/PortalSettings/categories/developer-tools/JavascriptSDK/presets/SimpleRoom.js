@@ -201,7 +201,7 @@ const SimpleRoom = (props) => {
       setSharedLinks(linksOptions);
     }
 
-    newConfig.requestToken = links[0].sharedTo?.requestToken;
+    newConfig.requestToken = links[0]?.sharedTo?.requestToken;
     newConfig.rootPath = "/rooms/share";
     newConfig.mode = version === sdkVersion[200] ? "public-room" : "manager";
 

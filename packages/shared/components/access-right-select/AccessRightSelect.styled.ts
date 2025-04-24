@@ -40,7 +40,7 @@ const StyledWrapper = styled(ComboBox).attrs(injectDefaultTheme)`
       `}
   }
 
-  ${({ type, theme }) =>
+  ${({ type, theme, isDisabled }) =>
     type === "onlyIcon" &&
     css`
       .combo-button {
@@ -54,7 +54,9 @@ const StyledWrapper = styled(ComboBox).attrs(injectDefaultTheme)`
       .combo-buttons_arrow-icon,
       .combo-button_selected-icon-container {
         svg path {
-          fill: ${theme.color};
+          fill: ${isDisabled
+            ? theme.comboBox.childrenButton.defaultDisabledColor
+            : theme.color};
         }
       }
     `}

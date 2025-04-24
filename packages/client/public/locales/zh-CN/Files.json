@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "更改房间所有者",
   "ChooseExpirationDate": "通过设置失效日期，限制此链接的有效期。",
   "Clean": "清理",
-  "ContainsSpecCharacter": "标题中不得包含任意以下字符：*+:\"<>?|/",
   "Conversion": "转换",
   "Converting": "转换中",
   "CopyFolderItem": "文件夹<2>{{title}}</2>已成功复制到<1>{{folderName}}</1>",

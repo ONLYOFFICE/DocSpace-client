@@ -598,7 +598,7 @@ export const useContactsFilter = ({
           {
             key: "filter-account",
             group: "filter-account",
-            label: t("ConnectDialog:Account"),
+            label: t("Common:Account"),
             isHeader: true,
             isLast: false,
           },

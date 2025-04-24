@@ -837,5 +837,12 @@
   "YourLogo": "Ваш логотип",
   "LightTheme": "Светлая тема",
   "DarkTheme": "Тёмная тема",
-  "GenerateLogoButton": "Сгенерировать"
+  "GenerateLogoButton": "Сгенерировать",
+  "ConnectingAccount": "Подключение аккаунта",
+  "ContainsSpecCharacter": "Название не должно содержать следующих символов: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Подключение стороннего ресурса прошло успешно.",
+  "Account": "Аккаунт",
+  "ConnectionUrl": "URL-адрес подключения",
+  "Login": "Логин",
+  "ConnectFolderTitle": "Название папки"
 }

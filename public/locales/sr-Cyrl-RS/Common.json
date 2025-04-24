@@ -837,5 +837,12 @@
   "YourLogo": "Ваш лого",
   "LightTheme": "Светла тема",
   "DarkTheme": "Тамна тема",
-  "GenerateLogoButton": "Генериши"
+  "GenerateLogoButton": "Генериши",
+  "ConnectingAccount": "Повезивање налога",
+  "ContainsSpecCharacter": "Наслов не сме да садржи било који од следећих знакова: *+:\"<>?||/",
+  "SuccessfulConnectionOfAThirdParty": "Услуга треће стране је успешно повезана.",
+  "Account": "Налог",
+  "ConnectionUrl": "URL адреса везе",
+  "Login": "Пријављивање",
+  "ConnectFolderTitle": "Наслов фолдера"
 }

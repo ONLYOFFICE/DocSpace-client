@@ -837,5 +837,12 @@
   "YourTurn": "Your turn",
   "AdditionalResourcesSubtitle": "Configure the display of links to helpful resources for your users.",
   "LightTheme": "Light theme",
-  "DarkTheme": "Dark theme"
+  "DarkTheme": "Dark theme",
+  "ConnectingAccount": "Connecting account",
+  "ContainsSpecCharacter": "The title can't contain any of the following characters: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Third-party service was successfully connected.",
+  "Account": "Account",
+  "ConnectionUrl": "Connection URL",
+  "Login": "Login",
+  "ConnectFolderTitle": "Folder title"
 }

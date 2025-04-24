@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "Mainiet telpas īpašnieku",
   "ChooseExpirationDate": "Ierobežojiet šīs saites pieejamības periodu, iestatot derīguma termiņu.",
   "Clean": "Notīrīt",
-  "ContainsSpecCharacter": "Nosaukumā nedrīkst būt neviena no šīm rakstzīmēm: *+:\"<>?|/",
   "Conversion": "Konvertēšana",
   "Converting": "Konvertēšana",
   "CopyFolderItem": "Mape <2>{{title}}</2> veiksmīgi pārkopēta uz <1>{{folderName}}</1>",

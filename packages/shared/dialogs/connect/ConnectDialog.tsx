@@ -112,7 +112,7 @@ const ConnectDialog = ({
 
   const header = isConnectDialogReconnect
     ? t("Common:ReconnectStorage")
-    : t("Translations:ConnectingAccount");
+    : t("Common:ConnectingAccount");
 
   const onChangeUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsUrlValid(true);
@@ -132,7 +132,7 @@ const ConnectDialog = ({
     // const chars = '*+:"<>?|/'; TODO: think how to solve problem with interpolation escape values in i18n translate
 
     if (newTitle.match(folderFormValidation)) {
-      toastr.warning(t("Files:ContainsSpecCharacter"));
+      toastr.warning(t("Common:ContainsSpecCharacter"));
     }
     newTitle = newTitle.replace(folderFormValidation, "_");
 
@@ -216,7 +216,7 @@ const ConnectDialog = ({
     )
       .then(async (res) => {
         setSaveThirdpartyResponse?.(res);
-        toastr.success(t("SuccessfulConnectionOfAThirdParty"));
+        toastr.success(t("Common:SuccessfulConnectionOfAThirdParty"));
         await fetchThirdPartyProviders();
       })
       .catch((err) => {
@@ -300,7 +300,7 @@ const ConnectDialog = ({
           <FieldContainer
             style={roomCreation ? { margin: "0" } : {}}
             labelVisible
-            labelText={t("Account")}
+            labelText={t("Common:Account")}
             isVertical
           >
             <Button
@@ -317,7 +317,7 @@ const ConnectDialog = ({
               <FieldContainer
                 labelVisible
                 isRequired
-                labelText={t("ConnectionUrl")}
+                labelText={t("Common:ConnectionUrl")}
                 isVertical
                 hasError={!isUrlValid}
                 errorMessage={t("Common:RequiredField")}
@@ -339,7 +339,7 @@ const ConnectDialog = ({
 
             <FieldContainer
               labelVisible
-              labelText={t("Login")}
+              labelText={t("Common:Login")}
               isRequired
               isVertical
               hasError={!isLoginValid}
@@ -383,7 +383,7 @@ const ConnectDialog = ({
         )}
         {!(isConnectionViaBackupModule || roomCreation) ? (
           <FieldContainer
-            labelText={t("ConnectFolderTitle")}
+            labelText={t("Common:ConnectFolderTitle")}
             isRequired
             isVertical
             hasError={!isTitleValid}

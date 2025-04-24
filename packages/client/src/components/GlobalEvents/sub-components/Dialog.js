@@ -156,7 +156,7 @@ const Dialog = ({
           hasError={isError}
           labelVisible={false}
           errorMessageWidth="100%"
-          errorMessage={t("Files:ContainsSpecCharacter")}
+          errorMessage={t("Common:ContainsSpecCharacter")}
           removeMargin
         >
           <TextInput

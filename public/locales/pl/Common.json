@@ -829,5 +829,12 @@
   "YourLogo": "Twoje Logo",
   "LightTheme": "Motyw jasny",
   "DarkTheme": "Motyw ciemny",
-  "GenerateLogoButton": "Generuj"
+  "GenerateLogoButton": "Generuj",
+  "ConnectingAccount": "Podłączanie konta",
+  "ContainsSpecCharacter": "Tytuł nie może zawierać następujących znaków: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Usługa podmiotu trzeciego została pomyślnie podłączona.",
+  "Account": "Konto",
+  "ConnectionUrl": "Adres URL połączenia",
+  "Login": "Logowanie",
+  "ConnectFolderTitle": "Nazwa folderu"
 }

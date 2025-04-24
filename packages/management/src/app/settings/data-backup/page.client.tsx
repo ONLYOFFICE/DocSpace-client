@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { observer } from "mobx-react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";

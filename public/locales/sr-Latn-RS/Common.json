@@ -827,5 +827,12 @@
   "YourLogo": "Vaš logo",
   "LightTheme": "Svetla tema",
   "DarkTheme": "Tamna tema",
-  "GenerateLogoButton": "Generiši"
+  "GenerateLogoButton": "Generiši",
+  "ConnectingAccount": "Povezivanje naloga",
+  "ContainsSpecCharacter": "Naslov ne sme da sadrži bilo koji od sledećih znakova: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Usluga treće strane je uspešno povezana.",
+  "Account": "Nalog",
+  "ConnectionUrl": "URL veze",
+  "Login": "Prijava",
+  "ConnectFolderTitle": "Naslov foldera"
 }

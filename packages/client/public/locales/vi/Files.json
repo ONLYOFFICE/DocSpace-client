@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "Thay đổi Chủ sở hữu Phòng",
   "ChooseExpirationDate": "Giới hạn thời gian còn hiệu lực cho liên kết này bằng cách đặt ngày hết hạn.",
   "Clean": "Xóa",
-  "ContainsSpecCharacter": "Tiêu đề không được chứa bất kỳ ký tự nào sau đây: *+:\"<>?|/",
   "Conversion": "Chuyển đổi",
   "Converting": "Đang chuyển đổi",
   "CopyFolderItem": "Thư mục <2>{{title}} </2> được sao chép thành công vào <1>{{folderName}} </1>",

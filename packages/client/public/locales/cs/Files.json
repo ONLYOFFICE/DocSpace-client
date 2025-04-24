@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "Změna vlastníka místnosti",
   "ChooseExpirationDate": "Omezte dobu dostupnosti tohoto odkazu nastavením data vypršení platnosti.",
   "Clean": "Vymazat",
-  "ContainsSpecCharacter": "Název nesmí obsahovat žádný z následujících znaků: *+:\"<>?|/",
   "Conversion": "Převod",
   "Converting": "Probíhá převod",
   "CopyFolderItem": "Složka <2>{{title}}</2> byla úspěšně zkopírována do <1>{{folderName}}</1>.",

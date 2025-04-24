@@ -456,7 +456,7 @@ const SetRoomParams = ({
           onBlur={() => setForceHideRoomTypeDropdown(false)}
           errorMessage={
             isWrongTitle
-              ? t("Files:ContainsSpecCharacter")
+              ? t("Common:ContainsSpecCharacter")
               : t("Common:RequiredField")
           }
           onKeyUp={onKeyUp}

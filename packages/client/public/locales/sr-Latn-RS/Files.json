@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "Promeni Vlasnika sobe",
   "ChooseExpirationDate": "Ograniči period dostupnosti za ovaj link postavljanjem roka upotrebe.",
   "Clean": "Očistiti",
-  "ContainsSpecCharacter": "Naslov ne sme da sadrži bilo koji od sledećih znakova: *+:\"<>?|/",
   "Conversion": "Konverzija",
   "Converting": "Konvertovanje",
   "CopyFolderItem": "Folder <2>{{title}}</2> uspešno kopiran u <1>{{folderName}}</1>.",

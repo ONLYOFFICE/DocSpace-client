@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "تغيير مالك الغرفة",
   "ChooseExpirationDate": "قم بتقييد فترة الصلاحية لهذا الرابط من خلال تعيين تاريخ لصلاحية هذا الرابط.",
   "Clean": "تنظيف",
-  "ContainsSpecCharacter": "لا يمكن أن يحتوي العنوان على أي من الأحرف التالية: * +: \\ \"<>؟ | /",
   "Conversion": "تحويل",
   "Converting": "التحويل جارٍ",
   "CopyFolderItem": "تم نسخ المجلد <2>{{title}}</2> بنجاح إلى <1>{{folderName}}</1>",

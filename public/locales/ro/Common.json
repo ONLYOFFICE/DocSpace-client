@@ -837,5 +837,12 @@
   "YourLogo": "Logo-ul dvs",
   "LightTheme": "Tema luminoasă",
   "DarkTheme": "Tema întunecată",
-  "GenerateLogoButton": "Generare"
+  "GenerateLogoButton": "Generare",
+  "ConnectingAccount": "Conectare cont",
+  "ContainsSpecCharacter": "Numele nu poate conține niciun din caractere următoare: *+:\"<>?|/ ",
+  "SuccessfulConnectionOfAThirdParty": "Serviciu terț conectat cu succes.",
+  "Account": "Cont",
+  "ConnectionUrl": "Adresă URL de conectare",
+  "Login": "Login",
+  "ConnectFolderTitle": "Titlul dosarului"
 }

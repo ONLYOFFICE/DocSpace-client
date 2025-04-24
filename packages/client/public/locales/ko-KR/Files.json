@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "방 소유자 변경",
   "ChooseExpirationDate": "만료 날짜를 설정하여 이 링크의 사용 가능 기간을 제한하세요.",
   "Clean": "삭제",
-  "ContainsSpecCharacter": "제목에는 다음 문자가 포함될 수 없습니다: *+:\"<>?|/",
   "Conversion": "변환",
   "Converting": "변환 중",
   "CopyFolderItem": "<2>{{title}}</2> 폴더가 <1>{{folderName}}</1>에 복사되었습니다",

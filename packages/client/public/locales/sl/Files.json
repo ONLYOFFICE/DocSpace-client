@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "Spremeni lastnika sobe",
   "ChooseExpirationDate": "Omejite obdobje razpoložljivosti te povezave tako, da nastavite datum poteka.",
   "Clean": "Počisti",
-  "ContainsSpecCharacter": "Naslov ne sme vsebovati nobenega od naslednjih znakov: *+:\"<>?|/",
   "Conversion": "Pretvorba",
   "Converting": "Pretvarjanje",
   "CopyFolderItem": "Mapa <2>{{title}}</2> je bila uspešno kopirana v <1>{{folderName}}</1>",

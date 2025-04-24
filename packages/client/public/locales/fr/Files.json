@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "Changer le propriétaire de la salle",
   "ChooseExpirationDate": "Limitez la période de disponibilité de ce lien en fixant une date d'expiration.",
   "Clean": "Effacer",
-  "ContainsSpecCharacter": "Le titre ne peut contenir aucun des caractères suivants : *+ :\"<>?|/",
   "Conversion": "Conversion",
   "Converting": "Conversion",
   "CopyFolderItem": "Le dossier <2>{{title}}</2> a été copié avec succès dans <1>{{folderName}}</1>",

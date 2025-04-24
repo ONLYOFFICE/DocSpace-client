@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "Raumbesitzer ändern",
   "ChooseExpirationDate": "Begrenzen Sie den Verfügbarkeitszeitraum für diesen Link, indem Sie ein Verfallsdatum festlegen.",
   "Clean": "Löschen",
-  "ContainsSpecCharacter": "Der Titel darf diese Symbole nicht beinhalten: *+:\"<>?|/",
   "Conversion": "Konvertierung",
   "Converting": "Konvertieren",
   "CopyFolderItem": "Der Ordner <2>{{title}}</2> wurde erfolgreich nach <1>{{folderName}}</1> kopiert",

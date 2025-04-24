@@ -829,5 +829,12 @@
   "YourLogo": "Vaše logo",
   "LightTheme": "Světlý motiv",
   "DarkTheme": "Tmavý motiv",
-  "GenerateLogoButton": "Generovat"
+  "GenerateLogoButton": "Generovat",
+  "ConnectingAccount": "Připojovací účet",
+  "ContainsSpecCharacter": "Název nesmí obsahovat žádný z následujících znaků: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Služba třetí strany byla úspěšně připojena.",
+  "Account": "Účet",
+  "ConnectionUrl": "url adresa připojení",
+  "Login": "Přihlášení",
+  "ConnectFolderTitle": "Název složky"
 }

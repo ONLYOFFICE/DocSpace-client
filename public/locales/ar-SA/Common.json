@@ -825,5 +825,12 @@
   "YourLogo": "شعاركم",
   "LightTheme": "الوضع النهاري",
   "DarkTheme": "الوضع الداكن",
-  "GenerateLogoButton": "توليد"
+  "GenerateLogoButton": "توليد",
+  "ConnectingAccount": "ربط الحساب",
+  "ContainsSpecCharacter": "لا يمكن أن يحتوي العنوان على أي من الأحرف التالية: * +: \\ \"<>؟ | /",
+  "SuccessfulConnectionOfAThirdParty": "تم ربط خدمة الطرف الثالث بنجاح.",
+  "Account": "حساب",
+  "ConnectionUrl": "رابط الصلة",
+  "Login": "تسجيل الدخول",
+  "ConnectFolderTitle": "عنوان المجلد"
 }

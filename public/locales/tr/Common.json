@@ -829,5 +829,12 @@
   "YourLogo": "Logonuz",
   "LightTheme": "Açık tema",
   "DarkTheme": "Koyu Tema",
-  "GenerateLogoButton": "Oluştur"
+  "GenerateLogoButton": "Oluştur",
+  "ConnectingAccount": "Hesap bağlanıyor",
+  "ContainsSpecCharacter": "Başlık şu karakterlerden herhangi birini içeremez:: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Üçüncü taraf hizmeti başarıyla bağlandı.",
+  "Account": "Hesap",
+  "ConnectionUrl": "Bağlantı url'si",
+  "Login": "Giriş",
+  "ConnectFolderTitle": "Klasör başlığı"
 }

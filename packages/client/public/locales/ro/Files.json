@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "Schimbați proprietarul sălii",
   "ChooseExpirationDate": "Indicați data expirării pentru a limita perioada de disponibilitate a acestui link.",
   "Clean": "Golire",
-  "ContainsSpecCharacter": "Numele nu poate conține niciun din caractere următoare: *+:\"<>?|/ ",
   "Conversion": "Conversie",
   "Converting": "Conversie",
   "CopyFolderItem": "Folderul <2>{{title}}</2> a fost copiat cu succes în <1>{{folderName}}</1>",

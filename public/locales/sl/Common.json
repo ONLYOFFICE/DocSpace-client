@@ -829,5 +829,12 @@
   "YourLogo": "Vaš logotip",
   "LightTheme": "Svetla tema",
   "DarkTheme": "Temna tema",
-  "GenerateLogoButton": "Ustvari"
+  "GenerateLogoButton": "Ustvari",
+  "ConnectingAccount": "Povezovanje računa",
+  "ContainsSpecCharacter": "Naslov ne sme vsebovati nobenega od naslednjih znakov: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Storitev tretje osebe je bila uspešno povezana.",
+  "Account": "Račun",
+  "ConnectionUrl": "Url povezave",
+  "Login": "Prijava",
+  "ConnectFolderTitle": "Naslov mape"
 }

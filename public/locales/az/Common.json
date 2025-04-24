@@ -829,5 +829,12 @@
   "YourLogo": "Loqonuz",
   "LightTheme": "İşıqlı tema",
   "DarkTheme": "Qaranlıq tema",
-  "GenerateLogoButton": "Yaradın"
+  "GenerateLogoButton": "Yaradın",
+  "ConnectingAccount": "Akkauntun qoşulması",
+  "ContainsSpecCharacter": "Başlıqda aşağıdakı simvollardan heç biri ola bilməz: *+: \"<>? |/ ",
+  "SuccessfulConnectionOfAThirdParty": "Üçüncü tərəf xidməti uğurla qoşuldu.",
+  "Account": "Akkaunt",
+  "ConnectionUrl": "Qoşulma üçün URL",
+  "Login": "Giriş edin",
+  "ConnectFolderTitle": "Qovluq başlığı"
 }

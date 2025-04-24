@@ -829,5 +829,12 @@
   "YourLogo": "Uw logo",
   "LightTheme": "Licht thema",
   "DarkTheme": "Donker thema",
-  "GenerateLogoButton": "Genereren"
+  "GenerateLogoButton": "Genereren",
+  "ConnectingAccount": "Account koppelen",
+  "ContainsSpecCharacter": "De titel mag geen van de volgende tekens bevatten: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Externe dienst is succesvol verbonden.",
+  "Account": "Account",
+  "ConnectionUrl": "Verbindings-url",
+  "Login": "Inloggen",
+  "ConnectFolderTitle": "Map titel"
 }

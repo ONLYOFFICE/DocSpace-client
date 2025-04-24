@@ -837,5 +837,12 @@
   "YourLogo": "您的logo",
   "LightTheme": "浅色主题",
   "DarkTheme": "深色主题",
-  "GenerateLogoButton": "生成"
+  "GenerateLogoButton": "生成",
+  "ConnectingAccount": "连接账户",
+  "ContainsSpecCharacter": "标题中不得包含任意以下字符：*+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "第三方服务已成功连接。",
+  "Account": "账户",
+  "ConnectionUrl": "连接URL",
+  "Login": "登录",
+  "ConnectFolderTitle": "文件夹标题"
 }

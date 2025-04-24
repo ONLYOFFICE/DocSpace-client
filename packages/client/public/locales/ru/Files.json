@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "Изменить владельца комнаты",
   "ChooseExpirationDate": "Вы можете выбрать срок действия для этой ссылки.",
   "Clean": "Очистить",
-  "ContainsSpecCharacter": "Название не должно содержать следующих символов: *+:\"<>?|/",
   "Conversion": "Преобразование",
   "Converting": "Конвертация",
   "CopyFolderItem": "Папка <2>{{title}}</2> успешно скопирована в <1>{{folderName}}</1>",

@@ -826,5 +826,12 @@
   "YourLogo": "Logo của bạn",
   "LightTheme": "Nền sáng",
   "DarkTheme": "Nền tối",
-  "GenerateLogoButton": "Tạo"
+  "GenerateLogoButton": "Tạo",
+  "ConnectingAccount": "Đang kết nối tài khoản",
+  "ContainsSpecCharacter": "Tiêu đề không được chứa bất kỳ ký tự nào sau đây: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Dịch vụ của bên thứ ba đã được kết nối thành công.",
+  "Account": "Tài khoản",
+  "ConnectionUrl": "Url kết nối",
+  "Login": "Đăng nhập",
+  "ConnectFolderTitle": "Tiêu đề thư mục "
 }

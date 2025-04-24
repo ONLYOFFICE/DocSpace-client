@@ -829,5 +829,12 @@
   "YourLogo": "Jūsu logotips",
   "LightTheme": "Gaišs dizains",
   "DarkTheme": "Tumšs dizains",
-  "GenerateLogoButton": "Ģenerēt"
+  "GenerateLogoButton": "Ģenerēt",
+  "ConnectingAccount": "Savieno kontu",
+  "ContainsSpecCharacter": "Nosaukumā nedrīkst būt neviena no šīm rakstzīmēm: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Trešās puses pakalpojums tika veiksmīgi savienots.",
+  "Account": "Konts",
+  "ConnectionUrl": "Savienojuma vietrādis URL",
+  "Login": "Piesakieties",
+  "ConnectFolderTitle": "Mapes nosaukums"
 }

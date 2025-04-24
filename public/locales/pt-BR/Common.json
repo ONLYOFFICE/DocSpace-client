@@ -837,5 +837,12 @@
   "YourLogo": "Seu logotipo",
   "LightTheme": "Tema claro",
   "DarkTheme": "Tema Escuro",
-  "GenerateLogoButton": "Gerar"
+  "GenerateLogoButton": "Gerar",
+  "ConnectingAccount": "Conectando conta",
+  "ContainsSpecCharacter": "O título não pode conter nenhum dos seguintes caracteres: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "O serviço de terceiros foi conectado com sucesso.",
+  "Account": "Conta",
+  "ConnectionUrl": "Url de conexão",
+  "Login": "Login",
+  "ConnectFolderTitle": "Título da pasta"
 }

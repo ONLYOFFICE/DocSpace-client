@@ -827,5 +827,12 @@
   "YourLogo": "로고",
   "LightTheme": "라이트 테마",
   "DarkTheme": "다크 테마",
-  "GenerateLogoButton": "생성"
+  "GenerateLogoButton": "생성",
+  "ConnectingAccount": "계정 연결 중",
+  "ContainsSpecCharacter": "제목에는 다음 문자가 포함될 수 없습니다: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "제3자 서비스가 성공적으로 연결되었습니다.",
+  "Account": "계정",
+  "ConnectionUrl": "연결 url",
+  "Login": "로그인",
+  "ConnectFolderTitle": "폴더 제목"
 }

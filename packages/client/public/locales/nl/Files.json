@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "De Eigenaar Van De Kamer Wijzigen",
   "ChooseExpirationDate": "Beperk de beschikbaarheidsperiode voor deze link door een vervaldatum in te stellen.",
   "Clean": "Reinig",
-  "ContainsSpecCharacter": "De titel mag geen van de volgende tekens bevatten: *+:\"<>?|/",
   "Conversion": "Conversie",
   "Converting": "Omzetten",
   "CopyFolderItem": "De map <2>{{title}}</2> is met succes gekopieerd naar <1>{{folderName}}</1>.",

@@ -837,5 +837,12 @@
   "YourLogo": "Ձեր լոգոն",
   "LightTheme": "Բաց ոճ",
   "DarkTheme": "Մուգ ոճ",
-  "GenerateLogoButton": "Ստեղծել"
+  "GenerateLogoButton": "Ստեղծել",
+  "ConnectingAccount": "Հաշիվը միանում է",
+  "ContainsSpecCharacter": "Վերնագիրը չի կարող պարունակել հետևյալ նիշերից որևէ մեկը՝ *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Երրորդ կողմի ծառայությունը հաջողությամբ միացավ:",
+  "Account": "Հաշիվ",
+  "ConnectionUrl": "Կապակցման URL",
+  "Login": "Մուտքգործում",
+  "ConnectFolderTitle": "Պանակի անվանում"
 }

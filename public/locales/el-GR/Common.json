@@ -829,5 +829,12 @@
   "YourLogo": "Το λογότυπό σας",
   "LightTheme": "Ανοιχτό θέμα",
   "DarkTheme": "Σκούρο θέμα",
-  "GenerateLogoButton": "Δημιουργία"
+  "GenerateLogoButton": "Δημιουργία",
+  "ConnectingAccount": "Σύνδεση λογαριασμού",
+  "ContainsSpecCharacter": "Ο τίτλος δεν μπορεί να περιέχει τους ακόλουθους χαρακτήρες: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Η υπηρεσία τρίτου μέρους συνδέθηκε επιτυχώς.",
+  "Account": "Λογαριασμός",
+  "ConnectionUrl": "Σύνδεση url",
+  "Login": "Σύνδεση",
+  "ConnectFolderTitle": "Τίτλος φακέλου"
 }

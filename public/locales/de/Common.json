@@ -837,5 +837,12 @@
   "YourLogo": "Ihr Logo",
   "LightTheme": "Heller Modus",
   "DarkTheme": "Dunkelmodus",
-  "GenerateLogoButton": "Generieren"
+  "GenerateLogoButton": "Generieren",
+  "ConnectingAccount": "Konto wird verbunden",
+  "ContainsSpecCharacter": "Der Titel darf diese Symbole nicht beinhalten: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Der Drittanbieterdienst wurde erfolgreich verbunden.",
+  "Account": "Konto",
+  "ConnectionUrl": "Verbindungs-URL",
+  "Login": "Anmeldung",
+  "ConnectFolderTitle": "Ordnertitel"
 }

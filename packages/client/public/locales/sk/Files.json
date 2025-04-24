@@ -29,7 +29,6 @@
   "ChangeTheRoomOwner": "Zmeniť vlastníka miestnosti",
   "ChooseExpirationDate": "Nastavte dátum vypršania platnosti, aby ste obmedzili obdobie platnosti tohto odkazu.",
   "Clean": "Očistiť",
-  "ContainsSpecCharacter": "Názov nemôže obsahovať žiadne z nasledujúcich znakov: *+:\"<>?|/",
   "Conversion": "Konverzia",
   "Converting": "Konvertovanie",
   "CopyFolderItem": "Priečinok <2>{{title}}</2> bol úspešne skopírovaný do <1>{{folderName}}</1>",

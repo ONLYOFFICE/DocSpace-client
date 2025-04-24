@@ -837,5 +837,12 @@
   "YourLogo": "Il tuo logo",
   "LightTheme": "Tema chiaro",
   "DarkTheme": "Tema scuro",
-  "GenerateLogoButton": "Genera"
+  "GenerateLogoButton": "Genera",
+  "ConnectingAccount": "Collegamento dell'account",
+  "ContainsSpecCharacter": "Il titolo non può contenere nessuno dei seguenti caratteri: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Il servizio di terze parti è stato connesso correttamente.",
+  "Account": "Account",
+  "ConnectionUrl": "URL di connessione",
+  "Login": "Accedi",
+  "ConnectFolderTitle": "Nome cartella"
 }

@@ -829,5 +829,12 @@
   "YourLogo": "Вашето лого",
   "LightTheme": "Светла тема",
   "DarkTheme": "Тъмна тема",
-  "GenerateLogoButton": "Генерирай"
+  "GenerateLogoButton": "Генерирай",
+  "ConnectingAccount": "Свързване на профил",
+  "ContainsSpecCharacter": "Заглавието не може да съдържа някой от следните символи: *+:\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "Услугата на трета страна бе успешно свързана.",
+  "Account": "Профил",
+  "ConnectionUrl": "Свързващ url",
+  "Login": "Вписване",
+  "ConnectFolderTitle": "Заглавие на папката"
 }

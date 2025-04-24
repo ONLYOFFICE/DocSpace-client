@@ -597,5 +597,12 @@
   "BackupCreatedSuccess": "උපස්ථ පිටපත සාර්ථකව සාදා ඇත.",
   "AdditionalResourcesSubtitle": "ඔබගේ පරිශ්‍රීලකයින්ට ප්‍රයෝජනවත් සම්පත් වෙත සබැඳි පෙන්වීම වින්‍යාස කරන්න.",
   "LightTheme": "දීප්ත තේමාව",
-  "DarkTheme": "අඳුරු තේමාව"
+  "DarkTheme": "අඳුරු තේමාව",
+  "ConnectingAccount": "ගිණුම සම්බන්ධ වෙමින්",
+  "ContainsSpecCharacter": "සිරැසියේ මෙවැනි අකුරු අඩංගු නොවිය යුතුය: *+:\\\"<>?|/",
+  "SuccessfulConnectionOfAThirdParty": "තෙවන පාර්ශ්ව සේවාව සම්බන්ධිතයි.",
+  "Account": "ගිණුම",
+  "ConnectionUrl": "සම්බන්ධතාවයේ ඒ.ස.නි.",
+  "Login": "පිවිසෙන්න",
+  "ConnectFolderTitle": "බහාලුමේ සිරැසිය"
 }

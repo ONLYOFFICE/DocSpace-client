@@ -829,5 +829,12 @@
   "YourLogo": "Logosi",
   "LightTheme": "Kevyt teema",
   "DarkTheme": "Tumma teema",
-  "GenerateLogoButton": "Luo"
+  "GenerateLogoButton": "Luo",
+  "ConnectingAccount": "Yhdistetään tili",
+  "ContainsSpecCharacter": "Otsikko ei voi sisältää mitään seuraavista merkeistä: *+: \"<>? |/",
+  "SuccessfulConnectionOfAThirdParty": "Kolmannen osapuolen palvelu onnistuneesti yhdistetty.",
+  "Account": "Tili",
+  "ConnectionUrl": "Yhteyden url-osoite",
+  "Login": "Kirjaudu sisään",
+  "ConnectFolderTitle": "Kansion nimi"
 }

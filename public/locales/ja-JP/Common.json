@@ -837,5 +837,12 @@
   "YourLogo": "あなたのロゴ",
   "LightTheme": "ライトのテーマ",
   "DarkTheme": "ダークテーマ",
-  "GenerateLogoButton": "生成"
+  "GenerateLogoButton": "生成",
+  "ConnectingAccount": "接続アカウント",
+  "ContainsSpecCharacter": "タイトルには以下の文字*+:\"<>?|/は使用できません。",
+  "SuccessfulConnectionOfAThirdParty": "サードパーティーのサービスが正常に接続されました。",
+  "Account": "アカウント",
+  "ConnectionUrl": "接続先URL",
+  "Login": "ログイン",
+  "ConnectFolderTitle": "フォルダ名"
 }

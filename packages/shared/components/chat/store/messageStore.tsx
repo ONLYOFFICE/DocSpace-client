@@ -20,7 +20,7 @@ export default class MessageStore {
 
   sessions: Map<string, ChatMessageType[]> = new Map();
 
-  currentSessions: string = "";
+  currentSession: string = "";
 
   isInit: boolean = false;
 
@@ -39,7 +39,7 @@ export default class MessageStore {
   setAiSelectedFolder = (aiSelectedFolder: string | number) => {
     this.aiSelectedFolder = aiSelectedFolder;
 
-    this.currentSessions = `folder-${aiSelectedFolder}-${new Date().getTime()}-${this.aiUserId}`;
+    this.currentSession = `folder-${aiSelectedFolder}-${this.aiUserId}-${new Date().getTime()}`;
   };
 
   setAiUserId = (aiUserId: string) => {
@@ -171,14 +171,14 @@ export default class MessageStore {
           removeFolderFromMessage(message.substring(0, 15)),
         );
 
-        this.currentSessions = `${this.currentSessions}_${startMsg.cleanedMessage}`;
+        this.currentSession = `${this.currentSession}_${startMsg.cleanedMessage}`;
       }
 
       const eventsResponse = await FlowsApi.sendMessage(
         {
           inputs: {
             input_value: `${message}${filesStr}${folderStr}`,
-            session: this.currentSessions,
+            session: this.currentSession,
           },
           data: flow.data,
           files: [],
@@ -264,10 +264,10 @@ export default class MessageStore {
                 runInAction(() => {
                   this.isRequestRunning = false;
 
-                  if (this.sessions.get(this.currentSessions)) {
-                    this.sessions.get(this.currentSessions)!.push(userMsg, msg);
+                  if (this.sessions.get(this.currentSession)) {
+                    this.sessions.get(this.currentSession)!.push(userMsg, msg);
                   } else {
-                    this.sessions.set(this.currentSessions, [userMsg, msg]);
+                    this.sessions.set(this.currentSession, [userMsg, msg]);
                   }
                 });
               }
@@ -276,6 +276,7 @@ export default class MessageStore {
               console.log("Parsing failed");
               console.log("-------------------");
               console.log(c);
+              console.log(e);
             }
           });
           if (this.isRequestRunning) await stream();
@@ -324,12 +325,12 @@ export default class MessageStore {
   selectSession = (session: string) => {
     if (!this.sessions.has(session)) return;
 
-    this.currentSessions = session;
+    this.currentSession = session;
     this.messages = this.sessions.get(session) || [];
   };
 
   startNewSessions = () => {
-    this.currentSessions = `folder-${this.aiSelectedFolder}-${new Date().getTime()}-${this.aiUserId}`;
+    this.currentSession = `folder-${this.aiSelectedFolder}-${this.aiUserId}-${new Date().getTime()}`;
     this.messages = [];
   };
 

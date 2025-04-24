@@ -235,7 +235,7 @@ const ExternalLinks = ({
 
   return (
     <StyledExternalLink noPadding ref={inputsRef}>
-      <StyledSubHeader inline>
+      <StyledSubHeader $inline>
         {t("InviteViaLink")}
         {/* {false ? (
           <div style={{ position: "relative" }}>

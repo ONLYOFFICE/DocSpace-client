@@ -39,7 +39,9 @@ const DetailsLoader = () => {
 
       <div className={styles.detailsProperty}>
         {propertyDetailsDimensions.map((property) => (
-          <React.Fragment key={property.propertyTitle}>
+          <React.Fragment
+            key={`${property.propertyTitle}_${property.propertyContent}`}
+          >
             <RectangleSkeleton
               className="property-title"
               width={property.propertyTitle}

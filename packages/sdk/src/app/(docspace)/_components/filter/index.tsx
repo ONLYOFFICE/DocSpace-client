@@ -30,6 +30,10 @@ import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
 import FilterComponent from "@docspace/shared/components/filter";
+import {
+  convertFilterDataToSelectedFilterValues,
+  convertFilterDataToSelectedItems,
+} from "@docspace/shared/components/filter/Filter.utils";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 
 import type { FilterProps } from "./Filter.types";
@@ -55,6 +59,7 @@ export const Filter = observer(({ filesFilter, shareKey }: FilterProps) => {
     getSelectedFilterData,
     removeSelectedItem,
     onChangeViewAs,
+    initSelectedFilterData,
   } = useFilesFilter({
     filesFilter,
     shareKey,
@@ -102,6 +107,7 @@ export const Filter = observer(({ filesFilter, shareKey }: FilterProps) => {
       selectorLabel=""
       isIndexing={false}
       initSearchValue={initSearchValue}
+      initSelectedFilterData={initSelectedFilterData}
     />
   );
 });

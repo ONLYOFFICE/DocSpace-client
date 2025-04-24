@@ -385,7 +385,6 @@ const NewFilesBadge = ({
     <>
       <Badge
         ref={badgeRef}
-        lineHeight="16px"
         fontSize="11px"
         fontWeight={600}
         className={`new-items${className ? ` ${className}` : ""}`}

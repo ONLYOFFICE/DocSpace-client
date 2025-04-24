@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 
 import VerticalDotsReactSvg from "PUBLIC_DIR/images/icons/17/vertical-dots.react.svg";
 
@@ -45,6 +45,7 @@ const ContextButton = ({
   onContextOptionsClick,
   contextButtonAnimation,
   guidAnimationVisible,
+  setGuidAnimationVisible,
   ...rest
 }: TContextButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,23 +53,62 @@ const ContextButton = ({
   const ref = useRef<HTMLDivElement | null>(null);
   const menuRef = useRef<ContextMenuRefType>(null);
   const [animationPlayed, setAnimationPlayed] = useState(false);
+  const cleanupRef = useRef<(() => void) | null>(null);
+
+  const resetAnimation = useCallback(() => {
+    if (cleanupRef.current) {
+      cleanupRef.current();
+      cleanupRef.current = null;
+    }
+    setAnimationClasses([]);
+    setAnimationPlayed(false);
+    if (setGuidAnimationVisible) {
+      setGuidAnimationVisible(false);
+    }
+  }, [setGuidAnimationVisible]);
 
   useEffect(() => {
+    if (isOpen && animationPlayed) {
+      resetAnimation();
+      return;
+    }
+
     if (isOpen) {
       return;
     }
 
-    if (guidAnimationVisible && contextButtonAnimation) {
+    if (guidAnimationVisible && contextButtonAnimation && !animationPlayed) {
       setAnimationPlayed(true);
-      return contextButtonAnimation(setAnimationClasses);
+      const cleanup = contextButtonAnimation(setAnimationClasses);
+      cleanupRef.current = cleanup;
     }
-    if (!guidAnimationVisible) {
-      setAnimationPlayed(false);
+  }, [
+    guidAnimationVisible,
+    contextButtonAnimation,
+    isOpen,
+    animationPlayed,
+    setGuidAnimationVisible,
+    resetAnimation,
+  ]);
+
+  useEffect(() => {
+    return () => {
+      if (cleanupRef.current) {
+        cleanupRef.current();
+        cleanupRef.current = null;
+      }
+      if (setGuidAnimationVisible) {
+        setGuidAnimationVisible(false);
+      }
       setAnimationClasses([]);
-    }
-  }, [guidAnimationVisible, contextButtonAnimation, isOpen, animationPlayed]);
+    };
+  }, [setGuidAnimationVisible]);
 
   const toggle = (e: React.MouseEvent<HTMLDivElement>, open: boolean) => {
+    if (open && animationPlayed) {
+      resetAnimation();
+    }
+
     if (open) {
       menuRef.current?.show(e);
     } else {

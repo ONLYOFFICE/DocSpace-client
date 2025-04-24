@@ -29,7 +29,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { request } from "@docspace/shared/api/client";
 import { convertFile } from "@docspace/shared/api/files";
 import { TEditHistory } from "@docspace/shared/api/files/types";
-import { FolderType } from "@docspace/shared/enums";
+import { FolderType, RoomSearchArea } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { TFormRole } from "@/types";
 
@@ -51,6 +51,8 @@ export const getBackUrl = (
     }
   } else if (rootFolderType === FolderType.Archive) {
     backUrl = `/rooms/archived/${folderId}/filter?folder=${folderId}`;
+  } else if (rootFolderType === FolderType.RoomTemplates) {
+    backUrl = `/rooms/shared/${folderId}/filter?folder=${folderId}&searchArea=${RoomSearchArea.Templates}`;
   } else {
     if (
       rootFolderType === FolderType.SHARE ||

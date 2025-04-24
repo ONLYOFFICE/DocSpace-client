@@ -120,6 +120,7 @@ const DataBackup = ({
     setConnectedThirdPartyAccount,
     setCompletedFormFields,
     resetDownloadingProgress,
+    isBackupProgressVisible,
   } = useBackup({
     account,
     backupScheduleResponse,
@@ -212,6 +213,7 @@ const DataBackup = ({
       selectedThirdPartyAccount={
         selectedThirdPartyAccount as ThirdPartyAccountType
       }
+      isBackupProgressVisible={isBackupProgressVisible}
       connectedThirdPartyAccount={connectedThirdPartyAccount}
       errorInformation={errorInformation}
       isFormReady={isFormReady}
@@ -254,4 +256,3 @@ const DataBackup = ({
 };
 
 export default observer(DataBackup);
-

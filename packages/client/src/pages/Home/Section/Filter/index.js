@@ -1481,7 +1481,6 @@ export default inject(
       user,
       userId: user?.id,
 
-      selectedItem: filter.selectedItem,
       filter,
       roomsFilter,
       viewAs,

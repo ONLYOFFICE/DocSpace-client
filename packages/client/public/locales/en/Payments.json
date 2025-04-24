@@ -62,6 +62,7 @@
   "NoWalletTransactionDescription": "Once you start using the wallet, the payment history will be displayed here.",
   "NoFindingsFound": "No findings found",
   "NoTransactionsFilter": "No transactions match this filter. Try another or remove the filter to view all transactions.",
+  "SufficientPermissions": "You don't have sufficient permissions. Please contact the payer (<1>{{name}}</1>) to access and configure the services.",
   "Pay": "Pay",
   "Payer": "Payer",
   "PaymentMethod": "Payment method",

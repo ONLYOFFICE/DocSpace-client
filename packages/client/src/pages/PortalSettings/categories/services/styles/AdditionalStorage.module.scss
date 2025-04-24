@@ -34,9 +34,13 @@
   max-width: 320px;
   box-sizing: border-box;
   cursor: pointer;
-  &:hover {
+  &:not(.disabled):hover {
     background-color: var(--background-service-color);
   }
+}
+
+.disabled {
+  cursor: default;
 }
 
 .headerContainer {

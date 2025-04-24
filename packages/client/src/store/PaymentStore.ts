@@ -183,7 +183,8 @@ class PaymentStore {
 
     const requests = [fetchPortalTariff()];
 
-    if (this.isAlreadyPaid) requests.push(this.setPaymentAccount());
+    if (this.isAlreadyPaid && this.isPayer)
+      requests.push(this.setPaymentAccount());
     else requests.push(this.getBasicPaymentLink(addedManagersCount));
 
     try {
@@ -346,6 +347,13 @@ class PaymentStore {
       this.fetchBalance(isRefresh),
       this.fetchWalletPayer(isRefresh),
     ];
+    if (!this.currentTariffStatusStore) return;
+
+    const { setPayerInfo, customerId } = this.currentTariffStatusStore;
+
+    const payer = customerId || this.walletCustomerEmail;
+
+    if (payer) await setPayerInfo(payer);
 
     if (this.walletCustomerEmail) {
       if (this.isPayer) {
@@ -433,7 +441,8 @@ class PaymentStore {
 
     const requests = [this.getSettingsPayment(), setPortalPaymentQuotas()];
 
-    if (this.isAlreadyPaid) requests.push(this.setPaymentAccount());
+    if (this.isAlreadyPaid && this.isPayer)
+      requests.push(this.setPaymentAccount());
     else requests.push(this.getBasicPaymentLink(addedManagersCount));
 
     try {

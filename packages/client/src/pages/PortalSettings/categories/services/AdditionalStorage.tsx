@@ -24,13 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import { isMobile } from "react-device-detect";
+import classNames from "classnames";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { getConvertedSize } from "@docspace/shared/utils/common";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
 import styles from "./styles/AdditionalStorage.module.scss";
 import { formatCurrencyValue } from "../payments/Wallet/utils";
@@ -50,6 +53,9 @@ type AdditionalStorageProps = {
   onClick?: () => void;
   language?: string;
   value?: number;
+  isPayer?: boolean;
+  cardLinkedOnFreeTariff?: boolean;
+  isFreeTariff?: boolean;
 };
 
 const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
@@ -60,6 +66,10 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   isEnabled,
   language,
   value,
+  cardLinkedOnFreeTariff,
+  isFreeTariff,
+  isPayer,
+  payerInfo,
 }) => {
   // const [isChecked, setIsChecked] = useState(isEnabled);
 
@@ -73,6 +83,28 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
 
   const { t } = useTranslation(["Payments", "Common"]);
 
+  const textTooltip = () => {
+    return payerInfo ? (
+      <Text fontSize="12px" noSelect>
+        <Trans
+          i18nKey="SufficientPermissions"
+          ns="Payments"
+          t={t}
+          values={{ name: payerInfo.displayName }}
+          components={{
+            1: <Text isBold as="span" />,
+          }}
+        />
+      </Text>
+    ) : (
+      <Text fontSize="12px" noSelect>
+        ""
+      </Text>
+    );
+  };
+
+  const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
+
   return (
     <div>
       <Text className={styles.storageDescription}>
@@ -84,8 +116,11 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
         return (
           <div
             key={item.title}
-            className={styles.storageContainer}
-            onClick={onClick}
+            className={classNames(styles.storageContainer, {
+              [styles.disabled]: isDisabled,
+            })}
+            {...(!isDisabled ? { onClick } : {})}
+            data-tooltip-id="serviceTooltip"
           >
             <div className={styles.headerContainer}>
               <div className={styles.iconWrapper}>
@@ -98,6 +133,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                 isChecked={isEnabled}
                 // onChange={handleToggle}
                 className={styles.serviceToggle}
+                isDisabled={isDisabled}
               />
             </div>
             <div className={styles.contentContainer}>
@@ -123,6 +159,17 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                 </Text>
               </div>
             </div>
+
+            {isDisabled ? (
+              <Tooltip
+                id="serviceTooltip"
+                place="bottom"
+                maxWidth="300px"
+                float
+                getContent={textTooltip}
+                openOnClick={isMobile}
+              />
+            ) : null}
           </div>
         );
       })}
@@ -131,16 +178,27 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
 };
 
 export default inject(
-  ({ paymentStore, currentTariffStatusStore, authStore }: TStore) => {
+  ({
+    paymentStore,
+    currentTariffStatusStore,
+    authStore,
+    currentQuotaStore,
+  }: TStore) => {
     const {
       servicesQuotasFeatures,
       storageQuotaIncrementPrice,
       storageQuotaIncrement,
+      cardLinkedOnFreeTariff,
+      isPayer,
+      walletPayer,
     } = paymentStore;
-    const { walletQuotas } = currentTariffStatusStore;
+    const { walletQuotas, payerInfo: paymentPayer } = currentTariffStatusStore;
     const isEnabled = walletQuotas.length;
     const { language } = authStore;
     const { value, isoCurrencySymbol } = storageQuotaIncrementPrice;
+    const { isFreeTariff } = currentQuotaStore;
+
+    const payerInfo = paymentPayer ?? walletPayer;
 
     return {
       servicesQuotasFeatures,
@@ -149,6 +207,10 @@ export default inject(
       storageQuotaIncrement,
       isEnabled,
       language,
+      isPayer,
+      cardLinkedOnFreeTariff,
+      isFreeTariff,
+      payerInfo,
     };
   },
 )(observer(AdditionalStorage));

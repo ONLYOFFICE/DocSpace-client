@@ -350,7 +350,7 @@ const Section = (props: SectionProps) => {
           aiSelectedFolder={aiSelectedFolder!}
           aiUserId={aiUserId!}
           vectorizedFiles={vectorizedFiles!}
-          user={user}
+          user={user!}
         />
 
         {isInfoPanelAvailable ? (

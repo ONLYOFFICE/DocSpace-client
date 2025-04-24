@@ -45,6 +45,7 @@ export interface IStartFillingPanelProps {
     roomId: string,
     invitations: Invitation[],
   ) => Promise<unknown>;
+  withBorder?: boolean;
 }
 
 export interface HeaderProps {

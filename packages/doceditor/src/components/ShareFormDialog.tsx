@@ -180,6 +180,7 @@ const ShareFormDialog = ({
   return (
     <ShareFormDialogComponent
       visible
+      withBorder
       cards={cards}
       onClose={handleClose}
       containerVisible={isVisibleStartFillingSelectDialog}

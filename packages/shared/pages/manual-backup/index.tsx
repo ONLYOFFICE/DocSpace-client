@@ -320,7 +320,7 @@ const ManualBackup = ({
             {temporaryLink && temporaryLink.length > 0 && isMaxProgress ? (
               <Button
                 id="download-copy"
-                label={t("DownloadCopy")}
+                label={t("Common:DownloadCopy")}
                 onClick={onClickDownloadBackup}
                 isDisabled={pageIsDisabled}
                 size={buttonSize}

@@ -38,7 +38,7 @@
   "Debit": "Debit",
   "DowngradeNow": "Downgrade now",
   "DiskSpace": "Disk space",
-  "EnterAmount": "Enter an integer amount ..",
+  "EnterAmount": "Enter an integer amount...",
   "EnterAnIntegerAmountBetween": "Enter an integer amount between {{min}} and {{max}}",
   "ErrorNotification": "Failed to update tariff plan. Try again later or contact the sales department.",
   "PriceForEach": "{{amount}} each",

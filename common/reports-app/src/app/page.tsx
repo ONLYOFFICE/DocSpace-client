@@ -21,10 +21,10 @@ export default function Home() {
   return (
     <div className="p-6 space-y-4">
       <h2 className="text-2xl font-bold">Reports analyzer</h2>
-      <div className="w-full flex gap-4">
+      <div className="w-full flex flex-col gap-4 md:flex-row">
         <DataArea chartData={lastWeekReports} />
-        <div className="flex flex-col gap-4">
-          <Card className="w-64 h-full">
+        <div className="flex flex-row gap-4 md:flex-col">
+          <Card className="w-full h-full md:w-64">
             <CardHeader className="relative">
               <CardDescription>Total reports</CardDescription>
               <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
@@ -32,7 +32,7 @@ export default function Home() {
               </CardTitle>
             </CardHeader>
           </Card>
-          <Card className="w-64 h-full">
+          <Card className="w-full h-full md:w-64">
             <CardHeader className="relative">
               <CardDescription>Today reports</CardDescription>
               <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">

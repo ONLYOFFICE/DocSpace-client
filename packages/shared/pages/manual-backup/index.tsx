@@ -455,7 +455,7 @@ const ManualBackup = ({
           alert={false}
           percent={downloadingProgress}
           className="layout-progress-bar"
-          icon={FloatingButtonIcons.file}
+          icon={FloatingButtonIcons.backup}
         />
       ) : null}
     </StyledManualBackup>

@@ -44,7 +44,7 @@ const Services: React.FC<ServicesProps> = ({
   servicesInit,
   isInitServicesPage,
 }) => {
-  const { t, ready } = useTranslation(["Payment", "Common"]);
+  const { t, ready } = useTranslation(["Payments", "Common"]);
   const [isVisible, setIsVisible] = useState(false);
 
   const [showLoader, setShowLoader] = useState(false);

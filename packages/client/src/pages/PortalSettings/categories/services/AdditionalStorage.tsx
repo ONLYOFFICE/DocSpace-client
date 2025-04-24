@@ -61,7 +61,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   language,
   value,
 }) => {
-  const [isChecked, setIsChecked] = useState(isEnabled);
+  // const [isChecked, setIsChecked] = useState(isEnabled);
 
   // const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   const newValue = e.target.checked;
@@ -95,7 +95,7 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
                 />
               </div>
               <ToggleButton
-                isChecked={isChecked}
+                isChecked={isEnabled}
                 // onChange={handleToggle}
                 className={styles.serviceToggle}
               />

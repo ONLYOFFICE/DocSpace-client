@@ -84,7 +84,17 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
     }, 200);
 
     try {
-      await buyStorage(amount, 1);
+      const res = await buyStorage(amount, 1);
+
+      if (res === false) {
+        toastr.error(t("Common:UnexpectedError"));
+
+        clearTimeout(timerId);
+        setIsLoading(false);
+
+        return;
+      }
+
       await fetchPortalTariff!();
       onClose();
     } catch (e) {

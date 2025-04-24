@@ -371,8 +371,8 @@ export function buyStorage(amount, productQuantityType) {
     data: {
       quantity: {
         storage: +amount,
-        productQuantityType,
       },
+      productQuantityType,
     },
   });
 }

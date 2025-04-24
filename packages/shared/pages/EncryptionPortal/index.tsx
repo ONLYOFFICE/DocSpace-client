@@ -60,15 +60,16 @@ export const EncryptionPortal = () => {
 
     try {
       const percentage = (await getEncryptionProgress()) as number;
+      const roundedPercentage = Math.round(percentage);
 
-      if (!percentage) {
+      if (!roundedPercentage) {
         setMessage();
         return;
       }
 
-      setPercent(percentage);
+      setPercent(roundedPercentage);
 
-      if (percentage === 100) {
+      if (roundedPercentage === 100) {
         returnToPortal();
       }
     } catch (err: unknown) {
@@ -103,10 +104,11 @@ export const EncryptionPortal = () => {
   useEffect(() => {
     SocketHelper?.on(SocketEvents.EncryptionProgress, (opt) => {
       const { percentage, error } = opt;
+      const roundedPercentage = Math.round(percentage);
 
-      setPercent(percentage);
+      setPercent(roundedPercentage);
 
-      if (percentage >= 100) {
+      if (roundedPercentage >= 100) {
         if (error) {
           setErrorMessage(error);
 

@@ -219,7 +219,7 @@ const Editor = ({
       uiTheme: getEditorTheme(theme as ThemeKeys),
     };
 
-    if (SHOW_CLOSE && !sdkConfig?.theme) {
+    if (SHOW_CLOSE && !sdkConfig?.isSDK) {
       newConfig.editorConfig.customization.close = {
         visible: SHOW_CLOSE,
         text: t("Common:CloseButton"),

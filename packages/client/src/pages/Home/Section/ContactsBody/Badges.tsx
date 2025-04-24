@@ -131,7 +131,6 @@ const Badges = ({
           fontSize="9px"
           fontWeight={800}
           noHover
-          lineHeight="13px"
           onClick={onLDAPClick}
         />
       ) : null}
@@ -148,7 +147,6 @@ const Badges = ({
           fontSize="9px"
           fontWeight={800}
           noHover
-          lineHeight="13px"
           onClick={onSSOClick}
         />
       ) : null}
@@ -163,7 +161,6 @@ const Badges = ({
           }
           fontSize="9px"
           fontWeight={800}
-          lineHeight="13px"
           noHover
           onClick={onClickPaid}
           isPaidBadge

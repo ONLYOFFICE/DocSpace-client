@@ -38,6 +38,7 @@ const FillingStatusDialog = ({
 }: FillingStatusDialogProps) => {
   return (
     <FillingStatusPanel
+      withBorder
       user={user}
       file={file}
       visible={visible}

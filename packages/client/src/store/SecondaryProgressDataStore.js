@@ -83,11 +83,14 @@ class SecondaryProgressDataStore {
 
     const onClickLocation = () => {
       toastr.clear();
+
       const { visible, setMediaViewerData } = this.mediaViewerDataStore;
 
       if (visible) {
         setMediaViewerData({ visible: false, id: null });
       }
+
+      if (window.ClientConfig?.isFrame) return;
 
       window.DocSpace.navigate(url, { state });
     };

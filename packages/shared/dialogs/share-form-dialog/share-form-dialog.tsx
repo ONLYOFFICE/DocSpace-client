@@ -38,6 +38,7 @@ const ShareFormDialog = ({
   container,
   title,
   cards,
+  withBorder,
 }: ShareFormDialogProps) => {
   return (
     <ModalDialog
@@ -47,6 +48,7 @@ const ShareFormDialog = ({
       onClose={onClose}
       displayType={ModalDialogType.aside}
       containerVisible={containerVisible}
+      withBorder={withBorder}
     >
       <ModalDialog.Container>{container}</ModalDialog.Container>
       <ModalDialog.Header>{title}</ModalDialog.Header>

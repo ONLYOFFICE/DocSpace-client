@@ -3180,7 +3180,7 @@ __metadata:
     react-transition-group: "npm:4.4.5"
     react-values: "npm:0.3.3"
     react-viewer: "npm:3.2.2"
-    react-virtualized: "npm:9.22.5"
+    react-virtualized: "npm:^9.22.6"
     react-virtualized-auto-sizer: "npm:1.0.24"
     react-window: "npm:1.8.10"
     react-window-infinite-loader: "npm:1.0.9"
@@ -24429,9 +24429,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-virtualized@npm:9.22.5":
-  version: 9.22.5
-  resolution: "react-virtualized@npm:9.22.5"
+"react-virtualized@npm:^9.22.6":
+  version: 9.22.6
+  resolution: "react-virtualized@npm:9.22.6"
   dependencies:
     "@babel/runtime": "npm:^7.7.2"
     clsx: "npm:^1.0.4"
@@ -24440,9 +24440,9 @@ __metadata:
     prop-types: "npm:^15.7.2"
     react-lifecycles-compat: "npm:^3.0.4"
   peerDependencies:
-    react: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0
-    react-dom: ^15.3.0 || ^16.0.0-alpha || ^17.0.0 || ^18.0.0
-  checksum: 10/90baad7426478d9f2bcaee27a16f4f9529fcbd7eeb12c2f3496458ed9702d9056d7728e80a66422341683c8b3707c6aae80f9d583c0617603449e355d099147d
+    react: ^16.3.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/57c24aa6226e628d970dd57b5d20693aec1ebc456c33667833779d26b82addbcbf03b65d874ad25154fb65a070a6a52d3dbdc699932442f1862246ee5d7e328c
   languageName: node
   linkType: hard
 

@@ -388,7 +388,7 @@ const InviteInput = ({
         />
         <div className="list-item_content">
           <div className="list-item_content-box">
-            <SearchItemText primary disabled={shared || isDisabled}>
+            <SearchItemText $primary disabled={shared || isDisabled}>
               {displayName || groupName}
             </SearchItemText>
             {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
@@ -396,7 +396,7 @@ const InviteInput = ({
           <SearchItemText>{email}</SearchItemText>
         </div>
         {shared ? (
-          <SearchItemText info>{t("Common:Invited")}</SearchItemText>
+          <SearchItemText $info>{t("Common:Invited")}</SearchItemText>
         ) : null}
         {isDisabled ? (
           <SearchItemText disabled>{t("Common:Disabled")}</SearchItemText>

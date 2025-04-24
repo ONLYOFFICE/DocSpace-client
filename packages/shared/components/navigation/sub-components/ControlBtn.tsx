@@ -77,6 +77,7 @@ const ControlButtons = ({
   buttonRef,
   contextButtonAnimation,
   guidAnimationVisible,
+  setGuidAnimationVisible,
   isContextButtonVisible,
 }: TControlButtonProps) => {
   const toggleInfoPanelAction = () => {
@@ -145,6 +146,7 @@ const ControlButtons = ({
         onContextOptionsClick={onContextOptionsClick}
         contextButtonAnimation={contextButtonAnimation}
         guidAnimationVisible={guidAnimationVisible}
+        setGuidAnimationVisible={setGuidAnimationVisible}
       />
     );
   };

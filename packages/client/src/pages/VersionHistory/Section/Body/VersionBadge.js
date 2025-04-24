@@ -67,7 +67,7 @@ const VersionBadgeText = styled(Text)`
 
   display: flex;
   justify-content: flex-start;
-  ${({ reverse }) => reverse && `flex-direction: row-reverse;`}
+  ${({ $reverse }) => $reverse && `flex-direction: row-reverse;`}
   gap: 3px;
 
   span:first-child {
@@ -113,7 +113,7 @@ const VersionBadge = ({
         color={theme.filesVersionHistory.badge.color}
         isBold
         fontSize="12px"
-        reverse={isJapanese}
+        $reverse={isJapanese}
       >
         {isVersion ? (
           <>

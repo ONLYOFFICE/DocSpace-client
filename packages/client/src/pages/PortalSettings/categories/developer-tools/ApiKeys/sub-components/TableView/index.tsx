@@ -73,6 +73,8 @@ const TABLE_VERSION = "1";
 const COLUMNS_SIZE = `apiKeysColumnsSize_ver-${TABLE_VERSION}`;
 const INFO_PANEL_COLUMNS_SIZE = `infoPanelApiKeysColumnsSize_ver-${TABLE_VERSION}`;
 
+const emptyAsyncCallback = async () => {};
+
 const TableView = (props: TableViewProps) => {
   const {
     items,
@@ -115,6 +117,7 @@ const TableView = (props: TableViewProps) => {
         hasMoreFiles={false}
         itemCount={items.length}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
+        fetchMoreFiles={emptyAsyncCallback}
       >
         {items.map((item) => (
           <TableRow

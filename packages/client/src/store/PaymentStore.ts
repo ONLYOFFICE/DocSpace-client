@@ -43,6 +43,7 @@ import {
   getPaymentLink,
   getAutoTopUpSettings,
   updateAutoTopUpSettings,
+  getServicesQuotas,
 } from "@docspace/shared/api/portal";
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
@@ -59,8 +60,13 @@ import {
   TCustomerInfo,
   TTransactionHistory,
   TAutoTopUpSettings,
+  TPaymentFeature,
+  TNumericPaymentFeature,
+  TPaymentQuota,
 } from "@docspace/shared/api/portal/types";
-import { getUserByEmail } from "@docspace/shared/api/people";
+
+// Constants for feature identifiers
+export const TOTAL_SIZE = "total_size";
 
 class PaymentStore {
   userStore: UserStore | null = null;
@@ -128,11 +134,15 @@ class PaymentStore {
 
   autoPayments: TAutoTopUpSettings | null = null;
 
-  transactionHistoryCollection = [];
-
   offset = 0;
 
   limit = 25;
+
+  servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map();
+
+  servicesQuotas: TPaymentQuota | null = null;
+
+  isInitServicesPage = false;
 
   constructor(
     userStore: UserStore,
@@ -211,7 +221,12 @@ class PaymentStore {
     if (!this.currentQuotaStore) return;
 
     const { isFreeTariff } = this.currentQuotaStore;
-    return isFreeTariff && !!this.walletCustomerEmail;
+    const { payerInfo: paymentPayer } = this.currentTariffStatusStore;
+
+    return (
+      (isFreeTariff && !!this.walletCustomerEmail) ||
+      (isFreeTariff && !!paymentPayer)
+    );
   }
 
   get walletBalance() {
@@ -220,7 +235,7 @@ class PaymentStore {
     return 0.0;
   }
 
-  fetchBalance = async (isRefresh: boolean) => {
+  fetchBalance = async (isRefresh?: boolean) => {
     const res = await getBalance(isRefresh);
 
     if (!res) return;
@@ -256,11 +271,6 @@ class PaymentStore {
     if (!res) return;
 
     this.transactionHistory = res;
-    this.transactionHistoryCollection = [
-      ...this.transactionHistoryCollection,
-      ...res.collection,
-    ];
-    this.totalQuantity = this.transactionHistory.totalQuantity;
     this.offset += 25;
     this.limit += 25;
   };
@@ -307,9 +317,58 @@ class PaymentStore {
     this.autoPayments = res;
   };
 
-  get hasMoreTransaction() {
-    return this.transactionHistoryCollection.length < this.totalQuantity;
+  get storageQuotaIncrement() {
+    return (
+      (this.servicesQuotasFeatures.get(TOTAL_SIZE) as TNumericPaymentFeature)
+        ?.value || 0
+    );
   }
+
+  get storageQuotaIncrementPrice() {
+    return (
+      this.servicesQuotas?.price ?? {
+        value: 0,
+        currencySymbol: "",
+        isoCurrencySymbol: "USD",
+      }
+    );
+  }
+
+  setIsInitServicesPage = (isInitServicesPage: boolean) => {
+    this.isInitServicesPage = isInitServicesPage;
+  };
+
+  servicesInit = async () => {
+    const isRefresh = window.location.href.includes("complete=true");
+
+    const requests = [
+      getServicesQuotas(),
+      this.fetchBalance(isRefresh),
+      this.fetchWalletPayer(isRefresh),
+    ];
+
+    if (this.walletCustomerEmail) {
+      if (this.isPayer) {
+        requests.push(this.setPaymentAccount());
+      }
+
+      requests.push(this.fetchAutoPayments());
+    } else {
+      requests.push(this.fetchCardLinked());
+    }
+
+    const [quotas] = await Promise.all(requests);
+
+    if (!quotas) return;
+
+    quotas[0].features.forEach((feature) => {
+      this.servicesQuotasFeatures.set(feature.id, feature);
+    });
+
+    this.servicesQuotas = quotas[0];
+
+    this.setIsInitServicesPage(true);
+  };
 
   walletInit = async (t: TTranslation) => {
     const requests = [];
@@ -584,8 +643,9 @@ class PaymentStore {
     const { currentPlanCost, maxCountManagersByQuota, addedManagersCount } =
       this.currentQuotaStore;
     const currentTotalPrice = currentPlanCost.value;
+    const isFreeTariff = this.currentQuotaStore?.isFreeTariff;
 
-    if (this.isAlreadyPaid) {
+    if (!isFreeTariff) {
       const countOnRequest =
         maxCountManagersByQuota > this.maxAvailableManagersCount;
 
@@ -653,6 +713,7 @@ class PaymentStore {
     if (!user) return false;
 
     if (!this.cardLinkedOnFreeTariff) return true;
+
     return this.isPayer;
   }
 

@@ -155,8 +155,12 @@ const ArticleBodyContent = (props) => {
         setSelectedKeys(["9-0"]);
       }
 
-      if (location.pathname.includes("bonus")) {
+      if (location.pathname.includes("services")) {
         setSelectedKeys(["10-0"]);
+      }
+
+      if (location.pathname.includes("bonus")) {
+        setSelectedKeys(["11-0"]);
       }
     }
   }, [
@@ -230,6 +234,8 @@ const ArticleBodyContent = (props) => {
         return t("DataImport");
       case "StorageManagement":
         return t("StorageManagement");
+      case "Services":
+        return t("Services");
       default:
         throw new Error("Unexpected translation key");
     }

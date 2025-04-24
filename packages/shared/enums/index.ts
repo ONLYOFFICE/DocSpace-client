@@ -220,6 +220,7 @@ export const enum PageType {
   bonus = "bonus",
   dataImport = "dataImport",
   storageManagement = "storageManagement",
+  services = "services",
 }
 
 /**

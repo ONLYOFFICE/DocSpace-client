@@ -292,6 +292,15 @@ export async function getPortalPaymentQuotas() {
   return res;
 }
 
+export async function getServicesQuotas() {
+  const res = (await request({
+    method: "get",
+    url: "/portal/payment/quotas?wallet=true",
+  })) as TPaymentQuota[];
+
+  return res;
+}
+
 export async function getPortalQuota(refresh = false) {
   const params = refresh ? { refresh: true } : {};
   // console.log("getPortalQuota", { params });
@@ -351,6 +360,19 @@ export function updatePayment(adminCount, isYearTariff) {
     url: `/portal/payment/update`,
     data: {
       quantity: data,
+    },
+  });
+}
+
+export function buyStorage(amount, productQuantityType) {
+  return request({
+    method: "put",
+    url: `/portal/payment/update`,
+    data: {
+      quantity: {
+        storage: +amount,
+        productQuantityType,
+      },
     },
   });
 }

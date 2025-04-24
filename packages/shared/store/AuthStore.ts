@@ -246,7 +246,8 @@ class AuthStore {
 
     if (
       window.location.search === "?complete=true" &&
-      !window.location.href.includes("wallet")
+      !window.location.href.includes("wallet") &&
+      !window.location.href.includes("services")
     ) {
       window.history.replaceState({}, document.title, window.location.pathname);
       refresh = true;

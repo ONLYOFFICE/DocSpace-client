@@ -46,6 +46,8 @@ class CurrentTariffStatusStore {
 
   language: string = "en";
 
+  walletQuotas = [];
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -183,6 +185,10 @@ class CurrentTariffStatusStore {
 
       runInAction(() => {
         this.portalTariffStatus = res;
+
+        this.walletQuotas = res.quotas.filter((quota) => {
+          return quota.wallet === true;
+        });
       });
 
       this.setIsLoaded(true);

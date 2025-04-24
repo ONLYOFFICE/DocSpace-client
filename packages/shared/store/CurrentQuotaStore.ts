@@ -38,6 +38,7 @@ import {
   TPaymentQuota,
   TNumericPaymentFeature,
   TBooleanPaymentFeature,
+  TStringPaymentFeature,
 } from "../api/portal/types";
 import {
   MANAGER,
@@ -123,6 +124,14 @@ class CurrentQuotasStore {
       TOTAL_SIZE,
     ) as TNumericPaymentFeature;
     return result?.used?.value || 0;
+  }
+
+  get usedTotalStorageSizeTitle() {
+    const result = this.currentPortalQuotaFeatures.get(
+      TOTAL_SIZE,
+    ) as TPaymentFeature;
+
+    return result?.used?.title;
   }
 
   get maxFileSizeByQuota() {

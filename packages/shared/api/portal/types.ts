@@ -54,6 +54,10 @@ export type TBasePaymentFeature = {
   };
 };
 
+export type TStringPaymentFeature = TBasePaymentFeature & {
+  title: string;
+};
+
 export type TNumericPaymentFeature = TBasePaymentFeature & {
   value: number;
 };
@@ -62,7 +66,10 @@ export type TBooleanPaymentFeature = TBasePaymentFeature & {
   value: boolean;
 };
 
-export type TPaymentFeature = TNumericPaymentFeature | TBooleanPaymentFeature;
+export type TPaymentFeature =
+  | TNumericPaymentFeature
+  | TBooleanPaymentFeature
+  | TStringPaymentFeature;
 
 export type TPaymentQuota = {
   id: number;
@@ -70,6 +77,7 @@ export type TPaymentQuota = {
   price: {
     value: string;
     currencySymbol?: string;
+    isoCurrencySymbol?: string;
   };
   nonProfit: boolean;
   free: boolean;

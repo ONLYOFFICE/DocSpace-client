@@ -431,6 +431,13 @@ const PortalSettingsRoutes = {
         ),
     },
     {
+      path: "services",
+      lazy: () =>
+        componentLoader(
+          () => import("SRC_DIR/pages/PortalSettings/categories/services"),
+        ),
+    },
+    {
       path: "management/disk-space",
       lazy: () =>
         componentLoader(

@@ -92,7 +92,8 @@ const ContactsTabs = ({
   const location = useLocation();
   const navigate = useNavigate();
 
-  const contactsView = getContactsView(location);
+  const view = getContactsView(location);
+  const contactsView = !showGuestsTab && view === "guests" ? "people" : view;
 
   const onPeople = () => {
     setUsersSelection([]);

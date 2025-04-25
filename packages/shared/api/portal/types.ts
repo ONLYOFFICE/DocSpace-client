@@ -27,7 +27,12 @@
 import { TError } from "../../utils/axiosClient";
 import { TariffState } from "../../enums";
 
-export type TQuotas = { id: number; quantity: number };
+export type TQuotas = {
+  id: number;
+  quantity: number;
+  wallet?: boolean;
+  dueDate?: string;
+};
 
 export type TPortalTariff = {
   id: number;

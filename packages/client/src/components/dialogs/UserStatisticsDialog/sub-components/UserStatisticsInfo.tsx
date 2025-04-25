@@ -44,7 +44,7 @@ export const UserStatisticsInfo = ({
   return (
     <div>
       <div className={styles.textContainer}>
-        <Text lineHeight={"20px"}>
+        <Text lineHeight="20px">
           <Trans
             i18nKey="EditUserLimit"
             t={t}
@@ -53,7 +53,7 @@ export const UserStatisticsInfo = ({
             components={{ 1: <Text fontWeight={600} as="span" /> }}
           />
         </Text>
-        <Text lineHeight={"20px"}>
+        <Text lineHeight="20px">
           <Trans
             i18nKey="EditUserInfo"
             t={t}

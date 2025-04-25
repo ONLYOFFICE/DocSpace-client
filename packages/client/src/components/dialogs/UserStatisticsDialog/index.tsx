@@ -147,15 +147,15 @@ const UserStatisticsDialog = ({
       <ModalDialog.Body>
         <div className={styles.modalBodyContent}>
           <div className={styles.textContainer}>
-            <Text lineHeight={"20px"}>{t("EditAccessInfo")}</Text>
-            <Text lineHeight={"20px"} fontWeight={600}>
+            <Text lineHeight="20px">{t("EditAccessInfo")}</Text>
+            <Text lineHeight="20px" fontWeight={600}>
               {t("EditUserDefinition")}
             </Text>
           </div>
 
           <UserStatisticsInfo statistics={statistics} />
 
-          <Text lineHeight={"20px"}>{t("EditLimitReachedInfo")}</Text>
+          <Text lineHeight="20px">{t("EditLimitReachedInfo")}</Text>
 
           <Link
             className={styles.modalLink}

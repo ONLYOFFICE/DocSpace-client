@@ -228,9 +228,8 @@ export const useContactsFilter = ({
           newFilter.group = groupId;
         }
 
-        if (quota) {
-          newFilter.quotaFilter = quota;
-        }
+        newFilter.quotaFilter = quota;
+
         newFilter.page = 0;
 
         if (status) newFilter.employeeStatus = status;

@@ -844,5 +844,10 @@
   "Account": "アカウント",
   "ConnectionUrl": "接続先URL",
   "Login": "ログイン",
-  "ConnectFolderTitle": "フォルダ名"
+  "ConnectFolderTitle": "フォルダ名",
+  "BackupListWarningText": "リストからアイテムを削除すると、対応するファイルも削除されます。この操作を元に戻すことができません。すべてのファイルを削除するために次のリンクをクリックしてください：",
+  "RestoreBackupResetInfoWarningText": "現在のパスワードはすべてリセットされます。{{productName}}ユーザーには、アクセス回復リンクが記載されたメールが送信されます。",
+  "ClearBackupList": "すべてのバックアップを削除",
+  "EmptyBackupList": "バックアップはまだ作成されていません。バックアップを作成すると、このリストに表示されるようになります。",
+  "RecoveryFileNotSelected": "回復エラー。回復ファイルが選択されていません。"
 }

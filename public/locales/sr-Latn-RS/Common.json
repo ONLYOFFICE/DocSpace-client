@@ -834,5 +834,10 @@
   "Account": "Nalog",
   "ConnectionUrl": "URL veze",
   "Login": "Prijava",
-  "ConnectFolderTitle": "Naslov foldera"
+  "ConnectFolderTitle": "Naslov foldera",
+  "BackupListWarningText": "Ako izbrišete bilo koju stavku sa liste, njihove odgovarajuće datoteke će takođe biti izbrisane. Ova radnja se ne može opozvati. Za brisanje svih datoteka koristite link:",
+  "RestoreBackupResetInfoWarningText": "Sve trenutne lozinke će biti resetovane. {{productName}} korisnici će dobiti email sa pristupom linku za obnovu.",
+  "ClearBackupList": "Obriši sve rezervne kopije",
+  "EmptyBackupList": "Još uvek nije kreirana nijedna rezervna kopija. Kreirajte jednu ili više rezervnih kopija da bi se pojavile na ovoj listi.",
+  "RecoveryFileNotSelected": "Oporavak greška. Datoteka za oporavak nije odabrana."
 }

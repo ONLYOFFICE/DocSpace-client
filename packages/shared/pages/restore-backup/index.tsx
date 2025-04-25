@@ -316,7 +316,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           className="restore-backup_warning-link settings_unavailable"
           noSelect
         >
-          {t("RestoreBackupResetInfoWarningText", {
+          {t("Common:RestoreBackupResetInfoWarningText", {
             productName: t("Common:ProductName"),
           })}
         </Text>

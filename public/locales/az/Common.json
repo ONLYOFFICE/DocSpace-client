@@ -836,5 +836,10 @@
   "Account": "Akkaunt",
   "ConnectionUrl": "Qoşulma üçün URL",
   "Login": "Giriş edin",
-  "ConnectFolderTitle": "Qovluq başlığı"
+  "ConnectFolderTitle": "Qovluq başlığı",
+  "BackupListWarningText": "Siyahıdan müəyyən elementləri silsəniz, onların müvafiq faylları da silinəcək. Bu əməliyyat geri qaytarıla bilməz. Bütün faylları silmək üçün linkdən istifadə edin:",
+  "RestoreBackupResetInfoWarningText": "Bütün mövcud şifrələr sıfırlanacaq. {{productName}} istifadəçiləri girişi bərpa etmək üçün keçidi olan e-məktub alacaqlar.",
+  "ClearBackupList": "Bütün ehtiyat nüsxələri silin",
+  "EmptyBackupList": "Hələ heç bir ehtiyat nüsxəsi yaradılmayıb. Onların bu siyahıda görünməsi üçün bir və ya bir neçə ehtiyat nüsxəsi yaradın.",
+  "RecoveryFileNotSelected": "Bərpa xətası. Bərpa olunacaq fayl seçilməyib."
 }

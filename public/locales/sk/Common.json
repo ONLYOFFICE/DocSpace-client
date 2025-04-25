@@ -836,5 +836,10 @@
   "Account": "Účet",
   "ConnectionUrl": "URL adresa pripojenia",
   "Login": "Prihlásiť sa",
-  "ConnectFolderTitle": "Názov priečinka"
+  "ConnectFolderTitle": "Názov priečinka",
+  "BackupListWarningText": "Ak odstránite niektoré položky zo zoznamu, odstránia sa aj ich príslušné súbory. Táto akcia sa nedá vrátiť späť. Ak chcete odstrániť všetky súbory, použite odkaz:",
+  "RestoreBackupResetInfoWarningText": "Všetky aktuálne heslá sa resetujú. Používatelia {{productName}} dostanú e-mail s odkazom na obnovenie prístupu.",
+  "ClearBackupList": "Odstrániť všetky zálohované údaje",
+  "EmptyBackupList": "Zatiaľ neboli vytvorené žiadne zálohy. Vytvorte jednu alebo viac záloh, aby sa v tomto zozname zobrazili.",
+  "RecoveryFileNotSelected": "Vyskytla sa chyba. Nie je vybratý zálohový súbor."
 }

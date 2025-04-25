@@ -844,5 +844,10 @@
   "Account": "账户",
   "ConnectionUrl": "连接URL",
   "Login": "登录",
-  "ConnectFolderTitle": "文件夹标题"
+  "ConnectFolderTitle": "文件夹标题",
+  "BackupListWarningText": "若您从列表中删除任何项目，其相应的文件也将被删除。此操作无法撤消。若想删除所有文件，请使用以下链接：",
+  "RestoreBackupResetInfoWarningText": "所有当前密码都将被重置。{{productName}}用户将收到一封包含访问恢复链接的电子邮件。",
+  "ClearBackupList": "删除所有备份",
+  "EmptyBackupList": "尚未创建任何备份。请创建一个或多个备份，使其显示在此列表中。",
+  "RecoveryFileNotSelected": "恢复错误。未选择恢复文件"
 }

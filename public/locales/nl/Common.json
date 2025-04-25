@@ -836,5 +836,10 @@
   "Account": "Account",
   "ConnectionUrl": "Verbindings-url",
   "Login": "Inloggen",
-  "ConnectFolderTitle": "Map titel"
+  "ConnectFolderTitle": "Map titel",
+  "BackupListWarningText": "Als u items uit de lijst verwijdert, worden hun bijbehorende bestanden ook verwijderd. Deze actie kan niet ongedaan gemaakt worden. Om alle bestanden te verwijderen, gebruik de link:",
+  "RestoreBackupResetInfoWarningText": "Alle huidige wachtwoorden worden gereset. {{productName}} gebruikers ontvangen een e-mail met de link voor het herstellen van de toegang.",
+  "ClearBackupList": "Verwijder alle back-ups",
+  "EmptyBackupList": "Er zijn nog geen back-ups gemaakt. Maak een of meer back-ups om ze in de lijst te laten zien.",
+  "RecoveryFileNotSelected": "Herstelfout. Herstelbestand niet geselecteerd."
 }

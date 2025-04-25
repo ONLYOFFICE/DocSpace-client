@@ -141,7 +141,7 @@ const BackupListModalDialog = ({
     const { selectedFileId } = state;
 
     if (!selectedFileId) {
-      toastr.error(t("RecoveryFileNotSelected"));
+      toastr.error(t("Common:RecoveryFileNotSelected"));
       return;
     }
     setState((val) => ({ ...val, isLoading: true }));
@@ -195,7 +195,7 @@ const BackupListModalDialog = ({
       })}{" "}
       {!standalone ? (
         <Text as="span" className="restore-backup_warning-link">
-          {t("RestoreBackupResetInfoWarningText", {
+          {t("Common:RestoreBackupResetInfoWarningText", {
             productName: t("Common:ProductName"),
           })}
         </Text>
@@ -209,14 +209,14 @@ const BackupListModalDialog = ({
       visible={isVisibleDialog}
       onClose={onModalClose}
     >
-      <ModalDialog.Header>{t("BackupList")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:BackupList")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledBackupList>
           <div className="backup-list_content">
             {filesList.length > 0 ? (
               <div className="backup-restore_dialog-header">
                 <Text fontSize="12px" style={{ marginBottom: "10px" }}>
-                  {t("BackupListWarningText")}
+                  {t("Common:BackupListWarningText")}
                 </Text>
                 <Link
                   id="delete-backups"
@@ -224,7 +224,7 @@ const BackupListModalDialog = ({
                   fontWeight={600}
                   style={{ textDecoration: "underline dotted" }}
                 >
-                  {t("ClearBackupList")}
+                  {t("Common:ClearBackupList")}
                 </Link>
               </div>
             ) : null}
@@ -244,7 +244,7 @@ const BackupListModalDialog = ({
                     textAlign="center"
                     className="backup-restore_empty-list"
                   >
-                    {t("EmptyBackupList")}
+                    {t("Common:EmptyBackupList")}
                   </Text>
                 )
               ) : (

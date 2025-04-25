@@ -834,5 +834,10 @@
   "Account": "Compte",
   "ConnectionUrl": "URL de connexion",
   "Login": "Identifiant",
-  "ConnectFolderTitle": "Titre du dossier"
+  "ConnectFolderTitle": "Titre du dossier",
+  "BackupListWarningText": "Si vous supprimez certains éléments de la liste, leurs fichiers correspondants seront également supprimés. Cette action ne peut être annulée. Pour supprimer tous les fichiers, utilisez le lien:",
+  "RestoreBackupResetInfoWarningText": "Tous les mots de passe actuels seront réinitialisés. Les utilisateurs de {{productName}} recevront un e-mail contenant le lien de restauration de l'accès.",
+  "ClearBackupList": "Supprimer toutes les sauvegardes",
+  "EmptyBackupList": "Aucune sauvegarde n'a encore été créée. Créez une ou plusieurs sauvegardes pour qu'elles apparaissent dans cette liste.",
+  "RecoveryFileNotSelected": "Erreur de récupération. Fichier de récupération non sélectionné."
 }

@@ -836,5 +836,10 @@
   "Account": "Tili",
   "ConnectionUrl": "Yhteyden url-osoite",
   "Login": "Kirjaudu sisään",
-  "ConnectFolderTitle": "Kansion nimi"
+  "ConnectFolderTitle": "Kansion nimi",
+  "BackupListWarningText": "Jos poistat luettelosta kohteita, myös vastaavat tiedostot poistetaan. Tätä toimintoa ei voi kumota. Jos haluat poistaa kaikki tiedostot, käytä linkkiä:",
+  "RestoreBackupResetInfoWarningText": "Kaikki nykyiset salasanat nollataan. {{productName}}-käyttäjät saavat sähköpostin, jossa on palautuslinkki.",
+  "ClearBackupList": "Poista kaikki varmuuskopiot",
+  "EmptyBackupList": "Ei varmuuskopioita. Luo yksi tai useampi varmuuskopio ja ne näkyvät tässä listassa.",
+  "RecoveryFileNotSelected": "Palautusvirhe. Palautustiedostoa ei ole valittu."
 }

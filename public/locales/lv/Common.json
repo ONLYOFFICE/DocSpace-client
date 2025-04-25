@@ -836,5 +836,10 @@
   "Account": "Konts",
   "ConnectionUrl": "Savienojuma vietrādis URL",
   "Login": "Piesakieties",
-  "ConnectFolderTitle": "Mapes nosaukums"
+  "ConnectFolderTitle": "Mapes nosaukums",
+  "BackupListWarningText": "Ja jūs dzēsīsit jebkādus elementus no saraksta, tiem atbilstošie faili arī tiks dzēsti. Šo darbību nevar atsaukt. Lai dzēstu visus failus, izmantojiet saiti:",
+  "RestoreBackupResetInfoWarningText": "Visas pašreizējās paroles tiks atiestatītas. {{productName}} lietotāji saņems e-pasta ziņojumu ar piekļuves atjaunošanas saiti.",
+  "ClearBackupList": "Dzēst visus dublējumus",
+  "EmptyBackupList": "Vēl nav izveidotas rezerves kopijas. Izveidojiet vismaz vienu rezerves kopiju, lai tā parādītos šajā sarakstā.",
+  "RecoveryFileNotSelected": "Atkopšanas kļūda. Atkopšanas fails nav atlasīts."
 }

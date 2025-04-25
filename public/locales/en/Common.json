@@ -844,5 +844,10 @@
   "Account": "Account",
   "ConnectionUrl": "Connection URL",
   "Login": "Login",
-  "ConnectFolderTitle": "Folder title"
+  "ConnectFolderTitle": "Folder title",
+  "BackupListWarningText": "If you delete any items from the list, their corresponding files will also be deleted. This action cannot be undone. To delete all the files use the link:",
+  "RestoreBackupResetInfoWarningText": "All current passwords will be reset. {{productName}} users will get an email with the access restoration link.",
+  "ClearBackupList": "Delete all backups",
+  "EmptyBackupList": "No backups have been created yet. Create one or more backups for them to appear in this list.",
+  "RecoveryFileNotSelected": "Recovery error. Recovery file not selected."
 }

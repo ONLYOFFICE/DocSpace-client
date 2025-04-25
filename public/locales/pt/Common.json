@@ -836,5 +836,10 @@
   "Account": "Conta",
   "ConnectionUrl": "Url de ligação",
   "Login": "Entrar",
-  "ConnectFolderTitle": "Título da pasta"
+  "ConnectFolderTitle": "Título da pasta",
+  "BackupListWarningText": "Se eliminar qualquer item desta lista, os ficheiros que lhes correspondem serão também eliminados. Esta ação não pode ser anulada. Para eliminar todos os ficheiros utilize o link:",
+  "RestoreBackupResetInfoWarningText": "Todas as senhas atuais serão redefinidas. Os usuários do {{productName}} receberão um email com o link de restauração do acesso.",
+  "ClearBackupList": "Eliminar todas as cópias de segurança",
+  "EmptyBackupList": "Ainda não foi criada nenhuma cópia de segurança. Crie uma ou mais cópias de segurança para que elas apareçam na lista.",
+  "RecoveryFileNotSelected": "Erro na recuperação. O ficheiro de Recuperação não foi selecionado."
 }

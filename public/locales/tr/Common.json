@@ -836,5 +836,10 @@
   "Account": "Hesap",
   "ConnectionUrl": "Bağlantı url'si",
   "Login": "Giriş",
-  "ConnectFolderTitle": "Klasör başlığı"
+  "ConnectFolderTitle": "Klasör başlığı",
+  "BackupListWarningText": "Listeden herhangi bir öğe silerseniz bu öğe ile ilgili dosyalar da silinir. Bu işlem geri alınamaz. Tüm dosyaları silmek için linke tıklayın:",
+  "RestoreBackupResetInfoWarningText": "Mevcut tüm şifreler sıfırlanacaktır. {{productName}} kullanıcıları erişimi geri yükleme bağlantısını içeren bir e-posta alacaktır.",
+  "ClearBackupList": "Tüm yedekleri sil",
+  "EmptyBackupList": "Henüz hiçbir yedekleme yapılmadı. Listede yer alması için bir veya daha fazla yedekleme yapın.",
+  "RecoveryFileNotSelected": "Kurtarma hatası. Kurtarma dosyası seçilmedi."
 }

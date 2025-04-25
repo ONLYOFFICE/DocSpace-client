@@ -836,5 +836,10 @@
   "Account": "Účet",
   "ConnectionUrl": "url adresa připojení",
   "Login": "Přihlášení",
-  "ConnectFolderTitle": "Název složky"
+  "ConnectFolderTitle": "Název složky",
+  "BackupListWarningText": "Pokud odstraníte nějaké položky ze seznamu, budou také odstraněny odpovídající soubory. Tuto akci nelze vrátit zpět. Chcete-li odstranit všechny soubory, použijte odkaz:",
+  "RestoreBackupResetInfoWarningText": "Všechna stávající hesla budou resetována. Uživatelé {{productName}} obdrží e-mail s odkazem na obnovení přístupu.",
+  "ClearBackupList": "Odstranit všechny zálohy",
+  "EmptyBackupList": "Zatím nebyly vytvořeny žádné zálohy. Vytvořte jednu nebo více záloh, aby byly zobrazeny v seznamu.",
+  "RecoveryFileNotSelected": "Chyba při obnově. Soubor pro obnovení nebyl vybrán."
 }

@@ -836,5 +836,10 @@
   "Account": "Račun",
   "ConnectionUrl": "Url povezave",
   "Login": "Prijava",
-  "ConnectFolderTitle": "Naslov mape"
+  "ConnectFolderTitle": "Naslov mape",
+  "BackupListWarningText": "Če izbrišete kateri koli predmet iz seznama, bodo izbrisane tudi ustrezne datoteke. Tega dejanja ni mogoče razveljaviti. Če želite izbrisati vse datoteke, uporabite povezavo:",
+  "RestoreBackupResetInfoWarningText": "Vsa trenutna gesla bodo ponastavljena. Uporabniki {{productName}} bodo prejeli e-pošto s povezavo za obnovitev dostopa.",
+  "ClearBackupList": "Izbriši vse varnostne kopije",
+  "EmptyBackupList": "Varnostno kopiranje še ni bilo ustvarjeno. Ustvarite eno ali več varnostnih kopiranj, če želite, da se prikažejo na seznamu.",
+  "RecoveryFileNotSelected": "Napaka pri obnovitvi. Datoteka za obnovitev ni izbrana."
 }

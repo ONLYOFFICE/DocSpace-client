@@ -844,5 +844,10 @@
   "Account": "Conta",
   "ConnectionUrl": "Url de conexão",
   "Login": "Login",
-  "ConnectFolderTitle": "Título da pasta"
+  "ConnectFolderTitle": "Título da pasta",
+  "BackupListWarningText": "Se você excluir qualquer item da lista, seus arquivos correspondentes também serão excluídos. Esta ação não pode ser desfeita. Para excluir todos os arquivos use o link:",
+  "RestoreBackupResetInfoWarningText": "Todas as senhas atuais serão redefinidas. Os usuários do {{productName}} receberão um email com o link de restauração do acesso.",
+  "ClearBackupList": "Excluir todos os backups",
+  "EmptyBackupList": "Nenhum backup foi criado ainda, crie um ou mais backups para eles aparecerem nesta lista.",
+  "RecoveryFileNotSelected": "Erro de recuperação. Arquivo de recuperação não selecionado."
 }

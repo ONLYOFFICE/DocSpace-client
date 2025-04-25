@@ -844,5 +844,10 @@
   "Account": "Account",
   "ConnectionUrl": "URL di connessione",
   "Login": "Accedi",
-  "ConnectFolderTitle": "Nome cartella"
+  "ConnectFolderTitle": "Nome cartella",
+  "BackupListWarningText": "Se si eliminano tutti gli elementi dall'elenco, i relativi file verranno eliminati. Questa azione non può essere annullata. Per eliminare tutti i file, utilizzare il collegamento:",
+  "RestoreBackupResetInfoWarningText": "Tutte le password attuali verranno reimpostate. Gli utenti di {{productName}} riceveranno un'e-mail con il collegamento per il ripristino dell'accesso.",
+  "ClearBackupList": "Elimina tutti i backup",
+  "EmptyBackupList": "Nessun backup creato. Crea almeno una copia di backup per visualizzarla in questo elenco.",
+  "RecoveryFileNotSelected": "Errore di ripristino. File di ripristino non selezionato."
 }

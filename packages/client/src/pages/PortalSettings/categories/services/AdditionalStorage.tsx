@@ -104,7 +104,6 @@ const AdditionalStorage: React.FC<AdditionalStorageProps> = ({
   };
 
   const isDisabled = cardLinkedOnFreeTariff || !isFreeTariff ? !isPayer : false;
-
   return (
     <div>
       <Text className={styles.storageDescription}>

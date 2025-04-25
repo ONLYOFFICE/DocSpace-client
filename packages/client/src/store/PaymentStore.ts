@@ -349,6 +349,10 @@ class PaymentStore {
     ];
     if (!this.currentTariffStatusStore) return;
 
+    const [quotas] = await Promise.all(requests);
+
+    if (!quotas) return;
+
     const { setPayerInfo, customerId } = this.currentTariffStatusStore;
 
     const payer = customerId || this.walletCustomerEmail;
@@ -364,10 +368,6 @@ class PaymentStore {
     } else {
       requests.push(this.fetchCardLinked());
     }
-
-    const [quotas] = await Promise.all(requests);
-
-    if (!quotas) return;
 
     quotas[0].features.forEach((feature) => {
       this.servicesQuotasFeatures.set(feature.id, feature);

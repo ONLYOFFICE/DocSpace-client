@@ -111,6 +111,8 @@ class DialogsStore {
 
   roomCreation = false;
 
+  userStatisticsDialogVisible = false;
+
   culture = {
     key: "",
     label: "",
@@ -443,6 +445,10 @@ class DialogsStore {
 
   setDeleteDialogVisible = (deleteDialogVisible) => {
     this.deleteDialogVisible = deleteDialogVisible;
+  };
+
+  setUserStatisticsDialogVisible = (userStatisticsDialogVisible) => {
+    this.userStatisticsDialogVisible = userStatisticsDialogVisible;
   };
 
   setLifetimeDialogVisible = (lifetimeDialogVisible, cb) => {

@@ -645,7 +645,6 @@ export default inject(
       hideSelector: invitePanelOptions.hideSelector,
       isUserTariffLimit,
       isAdmin,
-
       allowInvitingGuests,
       checkGuests,
       hasGuests,

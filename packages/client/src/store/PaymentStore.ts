@@ -339,7 +339,7 @@ class PaymentStore {
     this.isInitServicesPage = isInitServicesPage;
   };
 
-  servicesInit = async () => {
+  servicesInit = async (t: TTranslation) => {
     const isRefresh = window.location.href.includes("complete=true");
 
     const requests = [
@@ -347,35 +347,41 @@ class PaymentStore {
       this.fetchBalance(isRefresh),
       this.fetchWalletPayer(isRefresh),
     ];
+
     if (!this.currentTariffStatusStore) return;
 
-    const [quotas] = await Promise.all(requests);
+    try {
+      const [quotas] = await Promise.all(requests);
 
-    if (!quotas) return;
+      if (!quotas) throw new Error();
 
-    const { setPayerInfo, customerId } = this.currentTariffStatusStore;
+      const { setPayerInfo, customerId } = this.currentTariffStatusStore;
 
-    const payer = customerId || this.walletCustomerEmail;
+      const payer = customerId || this.walletCustomerEmail;
 
-    if (payer) await setPayerInfo(payer);
+      if (payer) await setPayerInfo(payer);
 
-    if (this.walletCustomerEmail) {
-      if (this.isPayer) {
-        requests.push(this.setPaymentAccount());
+      if (this.walletCustomerEmail) {
+        if (this.isPayer) {
+          requests.push(this.setPaymentAccount());
+        }
+
+        requests.push(this.fetchAutoPayments());
+      } else {
+        requests.push(this.fetchCardLinked());
       }
 
-      requests.push(this.fetchAutoPayments());
-    } else {
-      requests.push(this.fetchCardLinked());
+      quotas[0].features.forEach((feature) => {
+        this.servicesQuotasFeatures.set(feature.id, feature);
+      });
+
+      this.servicesQuotas = quotas[0];
+
+      this.setIsInitServicesPage(true);
+    } catch (e) {
+      toastr.error(t("Common:UnexpectedError"));
+      console.error(e);
     }
-
-    quotas[0].features.forEach((feature) => {
-      this.servicesQuotasFeatures.set(feature.id, feature);
-    });
-
-    this.servicesQuotas = quotas[0];
-
-    this.setIsInitServicesPage(true);
   };
 
   walletInit = async (t: TTranslation) => {

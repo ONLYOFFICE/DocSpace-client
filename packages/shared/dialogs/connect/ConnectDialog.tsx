@@ -70,12 +70,7 @@ const ConnectDialog = ({
   setThirdPartyAccountsInfo,
   connectingStorages,
 }: ConnectDialogProps) => {
-  const { t, ready } = useTranslation([
-    "ConnectDialog",
-    "Common",
-    "Translations",
-    "Files",
-  ]);
+  const { t, ready } = useTranslation(["Common"]);
 
   const {
     title,

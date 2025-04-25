@@ -24,22 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-@import "../../../../../shared/styles/variables/colors";
-
-:global(.light) {
-  :local {
-    .link {
-      color: $light-gray-dark;
-    }
-  }
-}
-
-:global(.dark) {
-  :local {
-    .link {
-      color: $dark-gray-dark;
-    }
-  }
+.modalLink {
+  color: var(--modal-dialog-link-underline-color);
 }
 
 .modalBodyContent {
@@ -52,12 +38,4 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-}
-
-.text {
-  line-height: 20px;
-
-  span {
-    font-weight: 600;
-  }
 }

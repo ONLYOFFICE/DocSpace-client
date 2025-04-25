@@ -26,8 +26,8 @@
 
 export type TUserStatisticsDialogProps = {
   visible: boolean;
-  onClose?: () => void;
-  onDownloadAndReport?: () => void;
+  onClose?: VoidFunction;
+  onDownloadAndReport?: VoidFunction;
 };
 
 export type TUserStatistics = {
@@ -39,5 +39,4 @@ export type TUserStatistics = {
 
 export type TUserStatisticsInfoProps = {
   statistics: TUserStatistics | null;
-  t: any;
 };

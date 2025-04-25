@@ -26,14 +26,15 @@
 
 import { Text } from "@docspace/shared/components/text";
 import { ProgressBar } from "@docspace/shared/components/progress-bar";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { TUserStatisticsInfoProps } from "../UserStatisticsDialog.types";
 import styles from "../UserStatisticsDialog.module.scss";
 
 export const UserStatisticsInfo = ({
   statistics,
-  t,
 }: TUserStatisticsInfoProps) => {
+  const { t } = useTranslation(["Payments", "Common"]);
+
   if (!statistics) return null;
 
   const { limit, docspaceCount, editingCount, externalCount } = statistics;
@@ -43,16 +44,16 @@ export const UserStatisticsInfo = ({
   return (
     <div>
       <div className={styles.textContainer}>
-        <Text className={styles.text}>
+        <Text lineHeight={"20px"}>
           <Trans
             i18nKey="EditUserLimit"
             t={t}
             ns="Payments"
             values={{ limit }}
-            components={{ 1: <span /> }}
+            components={{ 1: <Text fontWeight={600} as="span" /> }}
           />
         </Text>
-        <Text className={styles.text}>
+        <Text lineHeight={"20px"}>
           <Trans
             i18nKey="EditUserInfo"
             t={t}
@@ -61,8 +62,9 @@ export const UserStatisticsInfo = ({
               editingCount,
               docspaceCount,
               externalCount,
+              productName: t("Common:ProductName"),
             }}
-            components={{ 1: <span /> }}
+            components={{ 1: <Text fontWeight={600} as="span" /> }}
           />
         </Text>
       </div>

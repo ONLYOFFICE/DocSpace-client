@@ -130,8 +130,6 @@ export default async function RootLayout({
     (theme) => theme.id === colorTheme.selected,
   );
 
-  console.log("dirClass", dirClass);
-
   const styles = {
     "--color-scheme-main-accent": currentColorScheme?.main.accent,
     "--color-scheme-text-accent": currentColorScheme?.text.accent,
@@ -168,6 +166,7 @@ export default async function RootLayout({
             }}
             redirectURL={redirectUrl}
             user={user}
+            locale={locale}
           >
             <Toast isSSR />
             {children}

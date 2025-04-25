@@ -48,6 +48,7 @@ export type CompletedFormProps = {
   };
   isShareFile: boolean;
   share?: string;
+  isSDK?: boolean;
 };
 
 export type CompletedVDRFormProps = {

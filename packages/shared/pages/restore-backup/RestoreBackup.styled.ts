@@ -246,6 +246,7 @@ export const StyledBackupList = styled.div<StyledBackupListProps>`
     height: 16px;
   }
   .backup-restore_dialog-header {
+    margin-block-start: 8px;
     margin-bottom: 16px;
   }
   .backup-restore_dialog-clear {
@@ -295,15 +296,28 @@ export const StyledBackupList = styled.div<StyledBackupListProps>`
         background: ${theme.client.settings.backup
           .backupCheckedListItemBackground};
       `}
-    padding-inline: 16px;
+    padding-inline: 16px 8px;
   }
   .backup-restore_dialog-scroll-body {
-    margin-inline: -16px 17px;
+    margin-inline: -16px -7px;
 
     .nav-thumb-vertical {
       margin-inline-start: -8px !important;
     }
   }
+
+  .backup-list-dialog_checked {
+    width: 16px;
+
+    > .radio-button_text:empty {
+      display: none;
+    }
+
+    > svg {
+      margin: 0px;
+    }
+  }
+
   .backup-restore_empty-list {
     margin-top: 96px;
     margin-inline: 16px;

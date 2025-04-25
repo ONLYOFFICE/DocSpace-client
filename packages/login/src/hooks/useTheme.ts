@@ -144,7 +144,7 @@ const useTheme = ({
 
       window.AscDesktopEditor.execCommand("portal:uitheme", editorTheme);
     }
-  }, [user?.theme, currentColorTheme, i18n, lang]);
+  }, [user?.theme, currentColorTheme, lang]);
 
   React.useEffect(() => {
     getCurrentColorTheme();

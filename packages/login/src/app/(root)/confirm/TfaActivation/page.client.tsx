@@ -85,7 +85,7 @@ const TfaActivationForm = ({
 
   const { confirmHeader = null } = linkData;
 
-  const linkUrlData = searchParams.get("linkData");
+  const linkUrlData = searchParams?.get("linkData");
 
   const proxyBaseUrl = useRef("");
   useEffect(() => {

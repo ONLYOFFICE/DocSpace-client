@@ -75,8 +75,8 @@ const TfaAuthForm = ({
 
   const { confirmHeader = null } = linkData;
 
-  const linkUrlData = searchParams.get("linkData");
-  const isPublicAuth = searchParams.get("publicAuth");
+  const linkUrlData = searchParams?.get("linkData");
+  const isPublicAuth = searchParams?.get("publicAuth");
 
   const onSubmit = async () => {
     try {

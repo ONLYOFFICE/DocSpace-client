@@ -620,7 +620,7 @@ const AutomaticBackup = ({
       {isBackupProgressVisible ? (
         <FloatingButton
           className="layout-progress-bar"
-          icon={FloatingButtonIcons.file}
+          icon={FloatingButtonIcons.backup}
           alert={false}
           percent={downloadingProgress}
         />

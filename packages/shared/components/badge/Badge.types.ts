@@ -36,8 +36,6 @@ export type BadgeProps = TextProps & {
   padding?: string;
   /** Maximum width of the badge. Useful for text truncation. Accepts CSS size values */
   maxWidth?: string;
-  /** Custom line height for the badge text. Accepts CSS line-height values */
-  lineHeight?: string;
   /** Mouse leave event handler */
   onMouseLeave?: (e: React.MouseEvent) => void;
   /** Mouse over event handler */

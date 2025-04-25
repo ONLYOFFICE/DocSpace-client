@@ -284,7 +284,6 @@ const MainProfile = (props) => {
               fontSize="9px"
               fontWeight={800}
               noHover
-              lineHeight="13px"
             />
           </div>
         ) : null}
@@ -302,7 +301,6 @@ const MainProfile = (props) => {
               fontSize="9px"
               fontWeight={800}
               noHover
-              lineHeight="13px"
             />
           </div>
         ) : null}
@@ -332,7 +330,6 @@ const MainProfile = (props) => {
                   fontSize="9px"
                   fontWeight={800}
                   noHover
-                  lineHeight="13px"
                 />
                 <Tooltip anchorSelect={`div[id='sso-badge-profile'] div`}>
                   {t("PeopleTranslations:SSOAccountTooltip")}
@@ -355,7 +352,6 @@ const MainProfile = (props) => {
                   fontSize="9px"
                   fontWeight={800}
                   noHover
-                  lineHeight="13px"
                 />
                 <Tooltip anchorSelect={`div[id='ldap-badge-profile'] div`}>
                   {t("PeopleTranslations:LDAPAccountTooltip")}

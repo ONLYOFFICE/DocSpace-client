@@ -73,6 +73,7 @@ const SharingDialog = ({
       onClose={onCancel}
       displayType={ModalDialogType.aside}
       withBodyScroll
+      withBorder
     >
       <ModalDialog.Header>{t("Common:Share")}</ModalDialog.Header>
       <ModalDialog.Body>

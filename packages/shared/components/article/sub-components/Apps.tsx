@@ -57,7 +57,7 @@ const ArticleApps = React.memo(
 
     return (
       <div
-        data-showText={showText ? "true" : "false"}
+        data-show-text={showText ? "true" : "false"}
         data-with-dev-tools={withDevTools ? "true" : "false"}
         className={classNames(styles.apps, {
           [styles.withDevTools]: withDevTools,

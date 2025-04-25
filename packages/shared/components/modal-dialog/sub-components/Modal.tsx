@@ -70,6 +70,7 @@ const Modal = ({
   isInvitePanelLoader = false,
   onSubmit,
   withBodyScrollForcibly = false,
+  withBorder = false,
   ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
@@ -145,6 +146,7 @@ const Modal = ({
     [styles.displayTypeAside]: currentDisplayType === "aside",
     [styles.autoMaxHeight]: autoMaxHeight,
     [styles.autoMaxWidth]: autoMaxWidth,
+    [styles.withBorder]: withBorder,
   });
 
   const headerClassName = classNames(

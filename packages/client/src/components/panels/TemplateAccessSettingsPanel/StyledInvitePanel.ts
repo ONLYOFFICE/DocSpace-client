@@ -85,13 +85,13 @@ const StyledInviteUserBody = styled.div`
   }
 `;
 
-const StyledSubHeader = styled(Heading)<{ inline?: boolean }>`
+const StyledSubHeader = styled(Heading)<{ $inline?: boolean }>`
   font-weight: 700 !important;
   font-size: 16px !important;
   margin: 16px 0 8px 0;
 
   ${(props) =>
-    props.inline &&
+    props.$inline &&
     css`
       display: inline-flex;
       align-items: center;
@@ -276,8 +276,8 @@ const StyledDropDown = styled(DropDown)<{
 `;
 
 const SearchItemText = styled(Text)<{
-  primary?: boolean;
-  info?: boolean;
+  $primary?: boolean;
+  $info?: boolean;
   disabled?: boolean;
 }>`
   line-height: ${({ theme }) =>
@@ -286,14 +286,14 @@ const SearchItemText = styled(Text)<{
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: ${(props) =>
-    props.primary ? "14px" : props.info ? "11px" : "12px"};
-  font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
+    props.$primary ? "14px" : props.$info ? "11px" : "12px"};
+  font-weight: ${(props) => (props.$primary || props.$info ? "600" : "400")};
 
   color: ${(props) =>
-    (props.primary && !props.disabled) || props.info
+    (props.$primary && !props.disabled) || props.$info
       ? props.theme.text.color
       : props.theme.text.emailColor};
-  ${(props) => props.info && `margin-inline-start: auto`}
+  ${(props) => props.$info && `margin-inline-start: auto`}
 `;
 
 const iconStyles = css`

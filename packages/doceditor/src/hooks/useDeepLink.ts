@@ -58,8 +58,10 @@ const useDeepLink = ({
     const defaultOpenDocument = localStorage.getItem("defaultOpenDocument");
     const params = new URLSearchParams(window.location.search);
     const withoutRedirect = params.get("without_redirect");
+    const isSDK = params.get("isSDK");
 
     if (
+      !isSDK &&
       isMobile &&
       !defaultOpenDocument &&
       androidID &&
@@ -73,6 +75,7 @@ const useDeepLink = ({
     }
 
     if (
+      !isSDK &&
       isMobile &&
       (defaultOpenDocument === "app" || deepLinkSettings === DeepLinkType.App)
     ) {

@@ -12,11 +12,13 @@
     "test:skip-base-languages": "SKIP_BASE_LANGUAGES_TEST=true jest locales.test.js",
     "test:locales": "jest locales.test.js",
     "test:images": "jest images.test.js",
-    "test:colors": "jest colors.test.js"
+    "test:colors": "jest colors.test.js",
+    "test:ollama": "jest ollama.test.js"
   },
   "devDependencies": {
     "jest": "29.7.0",
     "jest-expect-message": "1.1.3",
-    "jest-html-reporter": "3.10.2"
+    "jest-html-reporter": "3.10.2",
+    "ollama": "^0.5.15"
   }
 }

@@ -73,6 +73,7 @@ import {
   scopesHandler,
   companyInfoHandler,
   oauthSignInHelper,
+  invitationSettingsHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 const IS_TEST = process.env.E2E_TEST;
@@ -527,7 +528,9 @@ export async function getInvitationSettings() {
     "GET",
   );
 
-  const res = await fetch(getInvitationSettings);
+  const res = IS_TEST
+    ? invitationSettingsHandler()
+    : await fetch(getInvitationSettings);
 
   if (!res.ok) return;
 

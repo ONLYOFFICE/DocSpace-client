@@ -107,7 +107,7 @@ const BackupListModalDialog = ({
   const onCleanBackupList = () => {
     setState((val) => ({ ...val, isLoading: true }));
     deleteBackupHistory(isManagement())
-      .then(() => getBackupHistory(isManagement()))
+      ?.then(() => getBackupHistory(isManagement()))
       .then((filesList) =>
         setState((val) => ({ ...val, filesList, isLoading: false })),
       )
@@ -122,7 +122,7 @@ const BackupListModalDialog = ({
 
     setState((val) => ({ ...val, isLoading: true }));
     deleteBackup(backupId)
-      .then(() => getBackupHistory(isManagement()))
+      ?.then(() => getBackupHistory(isManagement()))
       .then((filesList) =>
         setState((val) => ({
           ...val,

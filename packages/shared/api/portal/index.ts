@@ -179,7 +179,9 @@ export function deleteBackup(id: string) {
   return request({ method: "delete", url: `/portal/deletebackup/${id}` });
 }
 
-export function getBackupHistory(dump: boolean = false) {
+export function getBackupHistory(
+  dump: boolean = false,
+): Promise<TBackupHistory[]> {
   return request({
     method: "get",
     url: "/portal/getbackuphistory",

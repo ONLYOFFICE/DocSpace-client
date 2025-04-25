@@ -57,6 +57,7 @@ type StorageDialogProps = {
   isoCurrencySymbol?: string;
   language?: string;
   fetchPortalTariff?: () => void;
+  fetchBalance?: () => void;
 };
 
 const StorageDialog: React.FC<StorageDialogProps> = ({
@@ -72,6 +73,7 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
   isoCurrencySymbol,
   language,
   fetchPortalTariff,
+  fetchBalance,
 }) => {
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState<string>("");
@@ -95,7 +97,7 @@ const StorageDialog: React.FC<StorageDialogProps> = ({
         return;
       }
 
-      await fetchPortalTariff!();
+      await Promise.all([fetchPortalTariff!(), fetchBalance!()]);
       onClose();
     } catch (e) {
       const errorMessage = e instanceof Error ? e.message : String(e);
@@ -228,8 +230,12 @@ export default inject(
       maxTotalSizeByQuota,
     } = currentQuotaStore;
     const { walletQuotas, fetchPortalTariff } = currentTariffStatusStore;
-    const { walletBalance, walletCodeCurrency, storageQuotaIncrementPrice } =
-      paymentStore;
+    const {
+      walletBalance,
+      walletCodeCurrency,
+      storageQuotaIncrementPrice,
+      fetchBalance,
+    } = paymentStore;
     const { value, isoCurrencySymbol } = storageQuotaIncrementPrice;
     const { language } = authStore;
     const isTariffExist = walletQuotas?.length > 0;
@@ -249,6 +255,7 @@ export default inject(
       currentStorageQuantity,
       isoCurrencySymbol,
       fetchPortalTariff,
+      fetchBalance,
     };
   },
 )(observer(StorageDialog));

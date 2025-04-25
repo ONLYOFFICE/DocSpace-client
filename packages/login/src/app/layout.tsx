@@ -29,6 +29,7 @@ import { cookies, headers } from "next/headers";
 import { Toast } from "@docspace/shared/components/toast";
 import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
 import { LANGUAGE, SYSTEM_THEME_KEY } from "@docspace/shared/constants";
+import { getDirectionByLanguage } from "@docspace/shared/utils/common";
 
 import StyledComponentsRegistry from "@/utils/registry";
 import { Providers } from "@/providers";
@@ -118,6 +119,26 @@ export default async function RootLayout({
 
   console.log("Render root layout");
 
+  const locale =
+    settings && typeof settings !== "string" ? settings.culture : "en";
+
+  const dirClass = getDirectionByLanguage(locale || "en");
+  const themeClass =
+    systemTheme?.value === ThemeKeys.DarkStr ? "dark" : "light";
+
+  const currentColorScheme = colorTheme?.themes.find(
+    (theme) => theme.id === colorTheme.selected,
+  );
+
+  const styles = {
+    "--color-scheme-main-accent": currentColorScheme?.main.accent,
+    "--color-scheme-text-accent": currentColorScheme?.text.accent,
+    "--color-scheme-main-buttons": currentColorScheme?.main.buttons,
+    "--color-scheme-text-buttons": currentColorScheme?.text.buttons,
+
+    "--interface-direction": dirClass,
+  } as React.CSSProperties;
+
   return (
     <html lang="en" translate="no">
       <head>
@@ -135,9 +156,7 @@ export default async function RootLayout({
         />
         <meta name="google" content="notranslate" />
       </head>
-      <body
-        className={`${systemTheme?.value === ThemeKeys.DarkStr ? "dark" : "light"}`}
-      >
+      <body style={styles} className={`${dirClass} ${themeClass}`}>
         <StyledComponentsRegistry>
           <Providers
             value={{
@@ -147,6 +166,7 @@ export default async function RootLayout({
             }}
             redirectURL={redirectUrl}
             user={user}
+            locale={locale}
           >
             <Toast isSSR />
             {children}

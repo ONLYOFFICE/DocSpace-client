@@ -75,7 +75,7 @@ const TfaActivationForm = ({
 }: TfaActivationFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
-  const { currentColorScheme } = useTheme();
+  const theme = useTheme();
 
   const searchParams = useSearchParams();
 
@@ -173,7 +173,7 @@ const TfaActivationForm = ({
           security. Configure your authenticator application to continue work on
           the portal. For example you could use Google Authenticator for
           <Link
-            color={currentColorScheme?.main?.accent}
+            color={theme.currentColorScheme?.main?.accent}
             href={TFA_ANDROID_APP_URL}
             target={LinkTarget.blank}
           >
@@ -181,7 +181,7 @@ const TfaActivationForm = ({
           </Link>
           and{" "}
           <Link
-            color={currentColorScheme?.main?.accent}
+            color={theme.currentColorScheme?.main?.accent}
             href={TFA_IOS_APP_URL}
             target={LinkTarget.blank}
           >
@@ -189,7 +189,7 @@ const TfaActivationForm = ({
           </Link>{" "}
           or Authenticator for{" "}
           <Link
-            color={currentColorScheme?.main?.accent}
+            color={theme.currentColorScheme?.main?.accent}
             href={TFA_WIN_APP_URL}
             target={LinkTarget.blank}
           >
@@ -240,7 +240,7 @@ const TfaActivationForm = ({
               />
             </FieldContainer>
           </div>
-          <div className="app-code-continue-btn">
+          <div>
             <Button
               scale
               primary

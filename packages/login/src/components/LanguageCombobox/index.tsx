@@ -34,20 +34,25 @@ import { LanguageCombobox } from "@docspace/shared/components/language-combobox"
 import { DeviceType } from "@docspace/shared/enums";
 import { Nullable } from "@docspace/shared/types";
 import { TPortalCultures } from "@docspace/shared/api/settings/types";
+import { classNames } from "@docspace/shared/utils";
 
 import useDeviceType from "@/hooks/useDeviceType";
 
 type TLanguageComboboxWrapper = {
   initialCultures?: TPortalCultures;
+  className?: string;
 };
 
 const LanguageComboboxWrapper = ({
   initialCultures,
+  className,
 }: TLanguageComboboxWrapper) => {
   const { i18n } = useTranslation(["Login", "Common"]);
   const currentCulture = i18n.language;
 
-  const [cultures, setCultures] = useState<Nullable<TPortalCultures>>(null);
+  const [cultures, setCultures] = useState<Nullable<TPortalCultures>>(
+    initialCultures || null,
+  );
 
   useEffect(() => {
     if (initialCultures) setCultures(initialCultures);
@@ -66,7 +71,7 @@ const LanguageComboboxWrapper = ({
 
   return (
     <LanguageCombobox
-      className="language-combo-box"
+      className={classNames("language-combo-box", className)}
       onSelectLanguage={onLanguageSelect}
       cultures={cultures}
       selectedCulture={currentCulture}

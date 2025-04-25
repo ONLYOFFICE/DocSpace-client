@@ -46,21 +46,29 @@ const IconComponent = ({
   icon,
   fillIcon = true,
 }: {
-  icon: string;
+  icon: string | React.ReactElement | React.ElementType;
   fillIcon?: boolean;
 }) => {
-  if (
-    (!icon.includes("images/") && !icon.includes(".svg")) ||
-    icon.includes("webplugins")
-  ) {
+  const isImageSrc = (src: string) =>
+    (!src.includes("images/") && !src.includes(".svg")) ||
+    src.includes("webplugins");
+
+  if (typeof icon === "string" && isImageSrc(icon)) {
     return (
       <img className="drop-down-icon_image" src={icon} alt="plugin-logo" />
     );
   }
 
+  if (
+    typeof icon === "function" &&
+    React.isValidElement(React.createElement(icon))
+  ) {
+    return <div>{React.createElement(icon)}</div>;
+  }
+
   return (
     <ReactSVG
-      src={icon}
+      src={typeof icon === "string" ? icon : ""}
       className={
         fillIcon
           ? classNames(styles.dropDownItemIcon, "drop-down-item_icon")

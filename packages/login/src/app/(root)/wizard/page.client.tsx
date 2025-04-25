@@ -28,7 +28,6 @@
 
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
-import Image from "next/image";
 
 import {
   convertLanguage,

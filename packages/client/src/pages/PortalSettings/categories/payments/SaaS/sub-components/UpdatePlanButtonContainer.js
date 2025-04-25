@@ -93,7 +93,7 @@ const UpdatePlanButtonContainer = ({
         }
 
         isWaitRequest = true;
-        const res = await api.portal.getPortalQuota();
+        const res = await api.portal.getPortalQuota(true);
 
         const managersObject = res.features.find((obj) => obj.id === MANAGER);
 

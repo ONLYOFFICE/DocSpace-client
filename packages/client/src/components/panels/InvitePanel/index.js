@@ -48,7 +48,6 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import Filter from "@docspace/shared/api/people/filter";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
@@ -81,6 +80,8 @@ const InvitePanel = ({
   isUserTariffLimit,
 
   allowInvitingGuests,
+  checkGuests,
+  hasGuests,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -209,17 +210,13 @@ const InvitePanel = ({
     }, LOADER_TIMEOUT);
   };
 
-  const checkGuests = async () => {
-    const filterDefault = Filter.getDefault();
-    filterDefault.area = "guests";
-    const res = await api.people.getUserList(filterDefault);
-
-    setShowGuestsTab(!!res.total);
-  };
-
   useEffect(() => {
     if (!allowInvitingGuests) checkGuests();
   }, [allowInvitingGuests]);
+
+  useEffect(() => {
+    if (typeof hasGuests === "boolean") setShowGuestsTab(hasGuests);
+  }, [hasGuests]);
 
   useEffect(() => {
     if (roomId === -1) {
@@ -600,7 +597,8 @@ export default inject(
     currentQuotaStore,
     userStore,
   }) => {
-    const { theme, standalone, allowInvitingGuests } = settingsStore;
+    const { theme, standalone, allowInvitingGuests, checkGuests, hasGuests } =
+      settingsStore;
 
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
@@ -649,6 +647,8 @@ export default inject(
       isAdmin,
 
       allowInvitingGuests,
+      checkGuests,
+      hasGuests,
     };
   },
 )(

@@ -45,19 +45,24 @@ import InvitationLoader from "../sub-components/loaders/invitation-loader";
 const InvitationSettings = ({
   t,
   isInit,
-  loadSettings,
   setInvitationSettings,
   allowInvitingMembers,
   allowInvitingGuests,
   currentDeviceType,
+  getInvitationSettings,
+  tReady,
 }: {
   t: TTranslation;
   isInit: boolean;
-  loadSettings: () => void;
-  setInvitationSettings: (settings: any) => void;
+  setInvitationSettings: (
+    allowInvitingMembers: boolean,
+    allowInvitingGuests: boolean,
+  ) => void;
   allowInvitingMembers: boolean;
   allowInvitingGuests: boolean;
   currentDeviceType: DeviceType;
+  getInvitationSettings: () => void;
+  tReady: boolean;
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -74,6 +79,14 @@ const InvitationSettings = ({
     window.innerWidth > size.mobile &&
       location.pathname.includes("invitation-settings") &&
       navigate("/portal-settings/security/access-portal");
+  };
+
+  const load = async () => {
+    if (isInit) return;
+
+    setIsLoading(true);
+    getInvitationSettings();
+    setIsLoading(false);
   };
 
   const getSettingsFromDefault = () => {
@@ -103,21 +116,24 @@ const InvitationSettings = ({
         ? currentSettings.allowInvitingGuests
         : allowInvitingGuests,
     );
-
-    setIsLoading(true);
   };
 
   useEffect(() => {
+    load();
     checkWidth();
     window.addEventListener("resize", checkWidth);
-
-    if (!isInit) loadSettings().then(() => setIsLoading(true));
-    else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
+    if (
+      isLoading ||
+      typeof allowInvitingMembers !== "boolean" ||
+      typeof allowInvitingGuests !== "boolean"
+    )
+      return;
+
     const currentSettings = getFromSessionStorage("currentInvitationSettings");
     const defaultSettings = getFromSessionStorage("defaultInvitationSettings");
 
@@ -126,15 +142,18 @@ const InvitationSettings = ({
     } else {
       getSettingsFromDefault();
     }
-  }, [isLoading]);
+  }, [isLoading, allowInvitingMembers, allowInvitingGuests]);
 
   useEffect(() => {
-    if (!isLoading) return;
+    if (isLoading) return;
+
     const defaultSettings = getFromSessionStorage("defaultInvitationSettings");
+
     const newSettings = {
       allowInvitingMembers: isCheckedContacts,
       allowInvitingGuests: isCheckedGuests,
     };
+
     saveToSessionStorage("currentInvitationSettings", newSettings);
 
     if (isEqual(defaultSettings, newSettings)) {
@@ -156,7 +175,7 @@ const InvitationSettings = ({
     setIsSaving(true);
 
     try {
-      await setInvitationSettings(isCheckedGuests, isCheckedContacts);
+      setInvitationSettings(isCheckedGuests, isCheckedContacts);
 
       saveToSessionStorage("currentInvitationSettings", {
         allowInvitingMembers: isCheckedContacts,
@@ -190,7 +209,12 @@ const InvitationSettings = ({
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
+  if (
+    (currentDeviceType !== DeviceType.desktop && isLoading) ||
+    !tReady ||
+    typeof allowInvitingMembers !== "boolean" ||
+    typeof allowInvitingGuests !== "boolean"
+  ) {
     return <InvitationLoader />;
   }
 
@@ -294,14 +318,9 @@ export const InvitationSettingsSection = inject(
 
     const { isInit } = setup;
 
-    const loadSettings = async () => {
-      await getInvitationSettings();
-    };
-
     return {
       isInit,
       getInvitationSettings,
-      loadSettings,
       setInvitationSettings,
       allowInvitingMembers,
       allowInvitingGuests,

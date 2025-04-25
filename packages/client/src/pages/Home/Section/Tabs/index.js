@@ -24,11 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
-import api from "@docspace/shared/api";
-import Filter from "@docspace/shared/api/people/filter";
 
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 import { inject, observer } from "mobx-react";
@@ -42,6 +39,8 @@ const SectionSubmenuContent = ({
   isRoomsFolderRoot,
   isTemplatesFolder,
   allowInvitingGuests,
+  checkGuests,
+  hasGuests,
 }) => {
   const [showGuestsTab, setShowGuestsTab] = useState(true);
   const [isCheckGuests, setIsCheckGuests] = useState(false);
@@ -50,21 +49,19 @@ const SectionSubmenuContent = ({
 
   const isContacts = getContactsView(location);
 
-  const checkGuests = async () => {
-    const filter = Filter.getDefault();
-    filter.area = "guests";
-    const res = await api.people.getUserList(filter);
-    const show = !!res.total;
-
-    if (!show) setShowGuestsTab(show);
+  useEffect(() => {
+    if (typeof hasGuests !== "boolean") return;
+    if (!hasGuests) setShowGuestsTab(hasGuests);
     setIsCheckGuests(true);
-  };
+  }, [hasGuests]);
 
-  if (isContacts && !allowInvitingGuests) checkGuests();
+  if (isContacts && allowInvitingGuests === false) checkGuests();
 
   if (isPersonalRoom || isRecentTab) return <MyDocumentsTabs />;
   if (isContacts && (allowInvitingGuests || isCheckGuests))
-    return <ContactsTabs showGuestsTab={showGuestsTab} />;
+    return (
+      <ContactsTabs showGuestsTab={allowInvitingGuests || showGuestsTab} />
+    );
   if (isRoomsFolderRoot || isTemplatesFolder) return <RoomTemplatesTabs />;
   return null;
 };
@@ -73,7 +70,7 @@ export default inject(({ treeFoldersStore, settingsStore }) => {
   const { isPersonalRoom, isRecentTab, isRoomsFolderRoot, isTemplatesFolder } =
     treeFoldersStore;
 
-  const { allowInvitingGuests } = settingsStore;
+  const { allowInvitingGuests, checkGuests, hasGuests } = settingsStore;
 
   return {
     isPersonalRoom,
@@ -81,5 +78,7 @@ export default inject(({ treeFoldersStore, settingsStore }) => {
     isRoomsFolderRoot,
     isTemplatesFolder,
     allowInvitingGuests,
+    checkGuests,
+    hasGuests,
   };
 })(observer(SectionSubmenuContent));

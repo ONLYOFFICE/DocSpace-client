@@ -35,6 +35,7 @@ import {
   TPortal,
   TPortalTariff,
   TRestoreProgress,
+  TTenantExtra,
 } from "./types";
 import { Nullable } from "../../types";
 
@@ -217,6 +218,7 @@ export async function getRestoreProgress() {
   return res;
 }
 
+
 export function enableRestore() {
   return request({ method: "get", url: "/portal/enablerestore" });
 }
@@ -382,10 +384,16 @@ export async function getPortal() {
   return res;
 }
 
+
 export function getPortalUsersCount() {
   const options = {
     method: "get",
     url: "/portal/userscount",
   };
   return request(options);
+}
+
+
+export async function getTenantExtra() {
+  return await (request({ method: "get", url: "/portal/tenantextra" })) as TTenantExtra;
 }

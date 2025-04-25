@@ -125,3 +125,31 @@ export type TRestoreProgress = {
   progress: number;
   error?: TError;
 };
+
+export type TDocServerLicense = {
+  branding: boolean;
+  customization: boolean;
+  timeLimited: boolean;
+  end_date: Date;
+  trial: boolean;
+  customer_id: string;
+  resource_key: string;
+  users_count: number;
+  users_expire: number;
+  connections: number;
+  docspace_dev: boolean;
+}
+
+export type TTenantExtra = {
+  customMode: boolean;
+  opensource: boolean;
+  enterprise: boolean;
+  developer: boolean;
+  tariff: TTariff;
+  quota: TPaymentQuota;
+  notPaid: boolean;
+  licenseAccept: Date;
+  enableTariffPage: boolean;
+  docServerUserQuota: Record<string, unknown>;
+  docServerLicense: TDocServerLicense;
+}

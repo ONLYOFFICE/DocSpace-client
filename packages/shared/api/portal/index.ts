@@ -218,7 +218,6 @@ export async function getRestoreProgress() {
   return res;
 }
 
-
 export function enableRestore() {
   return request({ method: "get", url: "/portal/enablerestore" });
 }
@@ -384,7 +383,6 @@ export async function getPortal() {
   return res;
 }
 
-
 export function getPortalUsersCount() {
   const options = {
     method: "get",
@@ -393,7 +391,9 @@ export function getPortalUsersCount() {
   return request(options);
 }
 
-
 export async function getTenantExtra() {
-  return await (request({ method: "get", url: "/portal/tenantextra" })) as TTenantExtra;
+  return (await request({
+    method: "get",
+    url: "/portal/tenantextra",
+  })) as TTenantExtra;
 }

@@ -37,9 +37,9 @@ export const UserStatisticsInfo = ({
 
   if (!statistics) return null;
 
-  const { limit, usersCount, editingCount, externalCount } = statistics;
+  const { userLimit, usersCount, editingCount, externalCount } = statistics;
 
-  const percentEditing = Math.round((usersCount / limit) * 100);
+  const percentEditing = Math.round((editingCount / userLimit) * 100);
 
   return (
     <div>
@@ -49,7 +49,7 @@ export const UserStatisticsInfo = ({
             i18nKey="EditUserLimit"
             t={t}
             ns="Payments"
-            values={{ limit }}
+            values={{ limit: userLimit }}
             components={{ 1: <Text fontWeight={600} as="span" /> }}
           />
         </Text>

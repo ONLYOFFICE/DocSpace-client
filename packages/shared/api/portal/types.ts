@@ -138,7 +138,7 @@ export type TDocServerLicense = {
   users_expire: number;
   connections: number;
   docspace_dev: boolean;
-}
+};
 
 export type TTenantExtra = {
   customMode: boolean;
@@ -152,4 +152,4 @@ export type TTenantExtra = {
   enableTariffPage: boolean;
   docServerUserQuota: Record<string, unknown>;
   docServerLicense: TDocServerLicense;
-}
+};

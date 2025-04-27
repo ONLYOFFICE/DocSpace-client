@@ -30,10 +30,10 @@ export type TUserStatisticsDialogProps = {
 };
 
 export type TUserStatistics = {
-  limit: number;
+  userLimit: number;
   editingCount: number;
-  usersCount: number;
   externalCount: number;
+  usersCount: number;
 };
 
 export type TUserStatisticsInfoProps = {

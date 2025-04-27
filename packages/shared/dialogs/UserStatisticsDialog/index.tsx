@@ -87,22 +87,26 @@ import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import { getTenantExtra } from "@docspace/shared/api/portal";
+import { TDocServerLicense } from "api/portal/types";
 import {
   TUserStatisticsDialogProps,
   TUserStatistics,
 } from "./UserStatisticsDialog.types";
 import styles from "./UserStatisticsDialog.module.scss";
 import { UserStatisticsInfo } from "./sub-components/UserStatisticsInfo";
-import { TDocServerLicense } from "api/portal/types";
 
 const parseStatistics = (statistics: TDocServerLicense): TUserStatistics => {
-  const { users_count, users_expire, connections } = statistics;
+  const {
+    users_count: usersCount,
+    users_expire: usersExpire,
+    connections: externalCount,
+  } = statistics;
 
   return {
-    limit: users_count + users_expire + connections,
-    editingCount: users_count + connections,
-    externalCount: connections,
-    usersCount: users_count,
+    userLimit: usersExpire,
+    editingCount: usersCount + externalCount,
+    externalCount,
+    usersCount,
   };
 };
 
@@ -113,16 +117,16 @@ const UserStatisticsDialog = ({
   const { t } = useTranslation(["Payments"]);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [statistics, setStatistics] = useState<TUserStatistics | null>(null);
 
   useEffect(() => {
     const loadStatistics = async () => {
       setIsLoading(true);
       try {
-        const { docServerLicense: data } = await getTenantExtra();
-        const statistics = parseStatistics(data);
-        setStatistics(statistics);
+        const { docServerLicense } = await getTenantExtra();
+        const parcedStatistics = parseStatistics(docServerLicense);
+        setStatistics(parcedStatistics);
       } catch (error) {
         toastr.error(error!);
       } finally {

@@ -31,6 +31,7 @@ import { useTranslation } from "react-i18next";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
+import UserStatisticsDialog from "@docspace/shared/dialogs/UserStatisticsDialog";
 
 import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
 import LicenseContainer from "./LicenseContainer";
@@ -72,6 +73,7 @@ const StandalonePage = (props) => {
       {isTrial ? <TrialContainer t={t} /> : <EnterpriseContainer t={t} />}
       <LicenseContainer t={t} />
       <ContactContainer />
+      <UserStatisticsDialog />
     </StyledComponent>
   );
 };

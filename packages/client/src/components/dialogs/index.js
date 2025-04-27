@@ -74,7 +74,6 @@ import DeleteVersionDialog from "./DeleteVersionDialog";
 import CancelOperationDialog from "./CancelOperationDialog";
 import FormFillingTipsDialog from "./FormFillingTipsDialog";
 import ReducedRightsDialog from "./ReducedRightsDialog";
-import UserStatisticsDialog from "./UserStatisticsDialog";
 
 export {
   EmptyTrashDialog,
@@ -127,5 +126,4 @@ export {
   CancelOperationDialog,
   FormFillingTipsDialog,
   ReducedRightsDialog,
-  UserStatisticsDialog,
 };

@@ -45,15 +45,17 @@ type AutoPaymentInfoProps = {
   isPayer?: boolean;
 };
 
-const AutoPaymentInfo = ({
-  minBalance,
-  upToBalance,
-  isAutoPaymentExist,
-  language,
-  walletCodeCurrency,
-  isPayer,
-  onOpen,
-}: AutoPaymentInfoProps) => {
+const AutoPaymentInfo = (props: AutoPaymentInfoProps) => {
+  const {
+    minBalance,
+    upToBalance,
+    isAutoPaymentExist,
+    language,
+    walletCodeCurrency,
+    isPayer,
+    onOpen,
+  } = props;
+
   const { t } = useTranslation(["Payments", "Common"]);
 
   if (

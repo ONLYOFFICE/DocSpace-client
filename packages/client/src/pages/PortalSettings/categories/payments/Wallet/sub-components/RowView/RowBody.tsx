@@ -29,6 +29,7 @@ import moment from "moment";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import { TTheme } from "@docspace/shared/themes";
 import { Text } from "@docspace/shared/components/text";
 import { Row, RowContent } from "@docspace/shared/components/rows";
 import { TTransactionCollection } from "@docspace/shared/api/portal/types";
@@ -39,12 +40,15 @@ import { accountingLedgersFormat } from "../../utils";
 type TransactionRowViewProps = {
   transaction: TTransactionCollection;
   language?: string;
+  theme?: TTheme;
+  sectionWidth: number;
 };
 
 const TransactionRowView: React.FC<TransactionRowViewProps> = ({
   transaction,
   language = "en",
   theme,
+  sectionWidth,
 }) => {
   const { credit, withdrawal, currency } = transaction;
   const { t } = useTranslation("Payments");
@@ -67,7 +71,7 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
         return t("Payments:BalanceTopUp");
     }
   };
-  const getServiceQuantity = (quantity: number, service: string) => {
+  const getServiceQuantity = (quantity: number, service?: string) => {
     switch (service) {
       case "disk-storage":
         return `${quantity} ${t(t("Common:Gigabyte"))}`;
@@ -89,9 +93,12 @@ const TransactionRowView: React.FC<TransactionRowViewProps> = ({
         </Text>
       }
     >
-      <RowContent sideColor={theme.filesSection.rowView.sideColor}>
+      <RowContent
+        sideColor={theme?.filesSection?.rowView?.sideColor || ""}
+        sectionWidth={sectionWidth}
+      >
         <Text fontWeight={600} fontSize="15px">
-          {getServiceTitle(transaction.service)}
+          {getServiceTitle(transaction.service || "")}
         </Text>
         <></>
 

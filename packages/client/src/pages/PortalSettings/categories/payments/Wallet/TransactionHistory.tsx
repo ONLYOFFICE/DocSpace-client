@@ -30,7 +30,6 @@ import { inject, observer } from "mobx-react";
 import moment from "moment";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 import { Text } from "@docspace/shared/components/text";
 import {
   ComboBox,
@@ -48,37 +47,30 @@ import {
 import FilterIcon from "@docspace/shared/components/filter/sub-components/FilterIcon";
 
 import TransactionBody from "./sub-components/TransactionBody";
-
 import "./styles/TransactionHistory.scss";
 import TableLoader from "./sub-components/TableLoader";
 
 type TransactionHistoryProps = {
-  getStartTransactionDate: () => string;
-  getEndTransactionDate: () => string;
-  fetchTransactionHistory: any;
-  openOnNewPage: boolean;
-  userId: string;
-  sectionWidth: number;
-  history: TTransactionCollection[];
-  viewAs: string;
-  setViewAs: (view: string) => void;
-  currentDeviceType: DeviceType;
+  getStartTransactionDate?: () => string;
+  getEndTransactionDate?: () => string;
+  fetchTransactionHistory?: any;
+  openOnNewPage?: boolean;
+  isTransactionHistoryExist?: boolean;
+  currentDeviceType?: DeviceType;
 };
 
 const formatDate = (date: moment.Moment) => date.format("YYYY-MM-DDTHH:mm:ss");
 
-const TransactionHistory = ({
-  getStartTransactionDate,
-  getEndTransactionDate,
-  fetchTransactionHistory,
-  openOnNewPage,
-  userId,
-  sectionWidth,
-  history,
-  viewAs,
-  setViewAs,
-  currentDeviceType,
-}: TransactionHistoryProps) => {
+const TransactionHistory = (props: TransactionHistoryProps) => {
+  const {
+    getStartTransactionDate,
+    getEndTransactionDate,
+    fetchTransactionHistory,
+    openOnNewPage,
+    isTransactionHistoryExist,
+    currentDeviceType,
+  } = props;
+
   const { t } = useTranslation(["Payments", "Settings"]);
 
   const typeOfHistoty: TOption[] = [
@@ -98,10 +90,10 @@ const TransactionHistory = ({
 
   const [selectedType, setSelectedType] = useState<TOption>(typeOfHistoty[0]);
   const [startDate, setStartDate] = useState<moment.Moment>(
-    moment(getStartTransactionDate()),
+    moment(getStartTransactionDate!()),
   );
   const [endDate, setEndDate] = useState<moment.Moment>(
-    moment(getEndTransactionDate()),
+    moment(getEndTransactionDate!()),
   );
   const [isLoading, setIsLoading] = useState(false);
   const [hasAppliedDateFilter, setHasAppliedDateFilter] = useState(false);
@@ -287,11 +279,11 @@ const TransactionHistory = ({
         <Text isBold fontSize="16px" className="transaction-history-title">
           {t("TransactionHistory")}
         </Text>
-        {(hasAppliedDateFilter || history.length > 0) && isMobile
+        {(hasAppliedDateFilter || isTransactionHistoryExist) && isMobile
           ? mobileFilter
           : null}
       </div>
-      {(hasAppliedDateFilter || history.length > 0) && !isMobile
+      {(hasAppliedDateFilter || isTransactionHistoryExist) && !isMobile
         ? filterCombobox
         : null}
 
@@ -300,16 +292,12 @@ const TransactionHistory = ({
       ) : (
         <TransactionBody
           hasAppliedDateFilter={hasAppliedDateFilter}
-          userId={userId}
-          sectionWidth={sectionWidth}
-          history={history}
-          viewAs={viewAs}
-          setViewAs={setViewAs}
-          currentDeviceType={currentDeviceType}
+          isTransactionHistoryExist={isTransactionHistoryExist!}
+          currentDeviceType={currentDeviceType!}
         />
       )}
 
-      {history.length && !isLoading ? (
+      {isTransactionHistoryExist && !isLoading ? (
         <div className="download-wrapper">
           <Button
             className="download-report_button"
@@ -369,22 +357,16 @@ const TransactionHistory = ({
 };
 
 export default inject(
-  ({
-    paymentStore,
-    filesSettingsStore,
-    userStore,
-    setup,
-    settingsStore,
-  }: TStore) => {
+  ({ paymentStore, filesSettingsStore, userStore, settingsStore }: TStore) => {
     const {
-      transactionHistory,
       getStartTransactionDate,
       getEndTransactionDate,
       fetchTransactionHistory,
+      isTransactionHistoryExist,
     } = paymentStore;
 
     const { openOnNewPage } = filesSettingsStore;
-    const { viewAs, setViewAs } = setup;
+
     const { currentDeviceType } = settingsStore;
 
     const userId = userStore.user?.id;
@@ -396,9 +378,7 @@ export default inject(
       openOnNewPage,
       userId,
       currentDeviceType,
-      history: transactionHistory?.collection ?? [],
-      viewAs,
-      setViewAs,
+      isTransactionHistoryExist,
     };
   },
 )(observer(TransactionHistory));

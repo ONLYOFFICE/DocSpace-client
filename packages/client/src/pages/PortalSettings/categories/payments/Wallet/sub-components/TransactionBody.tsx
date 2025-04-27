@@ -23,106 +23,46 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useRef } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
-import { TableBody, TableContainer } from "@docspace/shared/components/table";
-import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 import { EmptyView } from "@docspace/shared/components/empty-view";
-import { RowContainer } from "@docspace/shared/components/rows";
+
 import { DeviceType } from "@docspace/shared/enums";
+import { Consumer } from "@docspace/shared/utils";
 
 import NoTransactionsIcon from "PUBLIC_DIR/images/no.transactions.react.svg";
 import NoTransactionsFilterIcon from "PUBLIC_DIR/images/no.transactions.filter.react.svg";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import TableHeader from "./TableView/TableHeader";
-import TransactionRow from "./TableView/TableBody";
-import TransactionRowView from "./RowView/RowBody";
-
 import "../styles/TransactionHistory.scss";
-
-const TABLE_VERSION = "3";
-const COLUMNS_SIZE = `historyColumnsSize_ver-${TABLE_VERSION}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelLoginHistoryColumnsSize_ver-${TABLE_VERSION}`;
+import TableView from "./TableView";
+import RowView from "./RowView";
 
 type TransactionHistoryProps = {
-  userId: string;
-  sectionWidth: number;
-  history: TTransactionCollection[];
-  viewAs: string;
-  hasAppliedDateFilter: boolean;
-  setViewAs: (view: string) => void;
   currentDeviceType: DeviceType;
+  isTransactionHistoryExist: boolean;
+  hasAppliedDateFilter: boolean;
+  viewAs?: string;
+  setViewAs?: (view: string) => void;
 };
 
 const TransactionBody = ({
-  userId,
-  sectionWidth,
-  history,
   viewAs,
   setViewAs,
   currentDeviceType,
   hasAppliedDateFilter,
+  isTransactionHistoryExist,
 }: TransactionHistoryProps) => {
-  const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
-  const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
-  const ref = useRef(null);
   useViewEffect({
-    view: viewAs,
-    setView: setViewAs,
+    view: viewAs!,
+    setView: setViewAs!,
     currentDeviceType,
   });
 
   const { t } = useTranslation(["Payments", "Settings"]);
-
-  const tableView = (
-    <div className="transaction-history-body">
-      <TableContainer forwardedRef={ref} useReactWindow={false}>
-        <TableHeader
-          sectionWidth={sectionWidth}
-          containerRef={ref}
-          columnStorageName={columnStorageName}
-          columnInfoPanelStorageName={columnInfoPanelStorageName}
-          itemHeight={48}
-        />
-        <TableBody
-          useReactWindow
-          columnStorageName={columnStorageName}
-          columnInfoPanelStorageName={columnInfoPanelStorageName}
-          itemHeight={48}
-          filesLength={history.length}
-          fetchMoreFiles={() => Promise.resolve()}
-          hasMoreFiles={false}
-          itemCount={history.length}
-        >
-          {history.map((transaction, index) => (
-            <TransactionRow
-              transaction={transaction}
-              key={`transaction-${transaction.date || index}`}
-            />
-          ))}
-        </TableBody>
-      </TableContainer>
-    </div>
-  );
-
-  const rowView = (
-    <RowContainer
-      useReactWindow
-      fetchMoreFiles={() => {}}
-      hasMoreFiles={false}
-      itemCount={history.length}
-    >
-      {history.map((transaction, index) => (
-        <TransactionRowView
-          transaction={transaction}
-          key={`transaction-row-${transaction.date || index}`}
-        />
-      ))}
-    </RowContainer>
-  );
 
   const icon = hasAppliedDateFilter ? (
     <NoTransactionsFilterIcon />
@@ -146,11 +86,26 @@ const TransactionBody = ({
     />
   );
 
-  return history.length
-    ? viewAs === "table"
-      ? tableView
-      : rowView
-    : emptyView;
+  const renderContent = (
+    <Consumer>
+      {(context) =>
+        viewAs === "table" ? (
+          <TableView sectionWidth={context.sectionWidth || 0} />
+        ) : (
+          <RowView sectionWidth={context.sectionWidth || 0} />
+        )
+      }
+    </Consumer>
+  );
+
+  return isTransactionHistoryExist ? renderContent : emptyView;
 };
 
-export default TransactionBody;
+export default inject(({ setup }: TStore) => {
+  const { viewAs, setViewAs } = setup;
+
+  return {
+    viewAs,
+    setViewAs,
+  };
+})(observer(TransactionBody));

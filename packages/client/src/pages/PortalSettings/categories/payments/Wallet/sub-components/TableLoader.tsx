@@ -33,7 +33,7 @@ type TableLoaderProps = {
   isTablet?: boolean;
 };
 
-const TableLoader: React.FC<TableLoaderProps> = ({ isMobile, isTablet }) => {
+const TableLoader = ({ isMobile, isTablet }: TableLoaderProps) => {
   return !isMobile && !isTablet ? (
     <div className="loader-row body-row">
       <RectangleSkeleton

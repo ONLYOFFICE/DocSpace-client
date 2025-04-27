@@ -42,7 +42,7 @@ import CheckRoundSvg from "PUBLIC_DIR/images/icons/16/check.round.react.svg";
 import "../styles/AutoPayments.scss";
 import { formatCurrencyValue } from "../utils";
 
-interface AutoPaymentsProps {
+type AutoPaymentsProps = {
   walletCustomerEmail: boolean;
   currency: string;
   isAutoPaymentExist?: boolean;
@@ -53,15 +53,15 @@ interface AutoPaymentsProps {
     currency: string,
   ) => Promise<void>;
   autoPayments?: TAutoTopUpSettings | null;
-  language?: string;
+  language: string;
   isEditAutoPayment?: boolean;
-}
+};
 
-interface CurrentPaymentSettingsProps {
-  autoPayments: TAutoTopUpSettings | null;
+type CurrentPaymentSettingsProps = {
+  autoPayments: TAutoTopUpSettings | null | undefined;
   language: string;
   currency: string;
-}
+};
 
 const CurrentPaymentSettings = ({
   autoPayments,
@@ -69,6 +69,8 @@ const CurrentPaymentSettings = ({
   currency,
 }: CurrentPaymentSettingsProps) => {
   const { t } = useTranslation("Payments");
+
+  if (!autoPayments) return;
 
   const { minBalance, upToBalance } = autoPayments!;
 
@@ -90,15 +92,17 @@ const CurrentPaymentSettings = ({
   );
 };
 
-const AutoPayments: React.FC<AutoPaymentsProps> = ({
-  walletCustomerEmail,
-  isAutoPaymentExist,
-  autoPayments,
-  updateAutoPayments,
-  language,
-  currency,
-  isEditAutoPayment,
-}) => {
+const AutoPayments = (props: AutoPaymentsProps) => {
+  const {
+    walletCustomerEmail,
+    isAutoPaymentExist,
+    autoPayments,
+    updateAutoPayments,
+    language,
+    currency,
+    isEditAutoPayment,
+  } = props;
+
   const { t } = useTranslation(["Payments", "Common"]);
 
   const showCurrentSettings = isAutoPaymentExist && !isEditAutoPayment;
@@ -236,8 +240,8 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
       fontWeight={400}
     >
       {t("EnterAnIntegerAmountBetween", {
-        min: formatCurrencyValue(language, min, currency),
-        max: formatCurrencyValue(language, max, currency),
+        min: formatCurrencyValue(language!, min, currency),
+        max: formatCurrencyValue(language!, max, currency),
       })}
     </Text>
   );
@@ -302,7 +306,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
     >
       <CurrentPaymentSettings
         autoPayments={autoPayments}
-        language={language}
+        language={language!}
         currency={currency}
       />
       <Button
@@ -313,6 +317,7 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
       />
     </div>
   );
+
   const textTooltip = () => {
     return (
       <Text fontSize="12px" noSelect>
@@ -361,20 +366,18 @@ const AutoPayments: React.FC<AutoPaymentsProps> = ({
   );
 };
 
-export default inject(({ paymentStore, authStore }: TStore) => {
+export default inject(({ paymentStore }: TStore) => {
   const {
     walletCustomerEmail,
     updateAutoPayments,
     autoPayments,
     isAutoPaymentExist,
   } = paymentStore;
-  const { language } = authStore;
 
   return {
     walletCustomerEmail,
     isAutoPaymentExist,
     updateAutoPayments,
     autoPayments,
-    language,
   };
 })(observer(AutoPayments));

@@ -41,11 +41,9 @@ type PaymentMethodProps = {
   accountLink: string;
 };
 
-const PaymentMethod = ({
-  walletCustomerEmail,
-  cardLinked,
-  accountLink,
-}: PaymentMethodProps) => {
+const PaymentMethod = (props: PaymentMethodProps) => {
+  const { walletCustomerEmail, cardLinked, accountLink } = props;
+
   const { t } = useTranslation("Payments");
 
   const goLinkCard = () => {

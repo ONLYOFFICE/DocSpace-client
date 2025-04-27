@@ -27,7 +27,7 @@
 import React, { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
+import { Tabs, TabsTypes, TTabItem } from "@docspace/shared/components/tabs";
 import { InputType, TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { formatCurrencyValue } from "../utils";
@@ -41,7 +41,9 @@ type AmountProps = {
   currency: string;
 };
 
-const Amount = ({ setAmount, amount, language, currency }: AmountProps) => {
+const Amount = (props: AmountProps) => {
+  const { setAmount, amount, language, currency } = props;
+
   const [selectedAmount, setSelectedAmount] = useState<string | undefined>();
   const { t } = useTranslation("Payments");
 
@@ -81,13 +83,9 @@ const Amount = ({ setAmount, amount, language, currency }: AmountProps) => {
     [language, currency],
   );
 
-  const onSelectAmount = (data: {
-    id: string;
-    value: number;
-    name: string;
-  }) => {
+  const onSelectAmount = (data: TTabItem) => {
     setSelectedAmount(data.id);
-    setAmount(data.value.toString());
+    setAmount(data.id);
   };
 
   const onChangeTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {

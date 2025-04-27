@@ -23,54 +23,46 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
 
-import "./styles/Wallet.scss";
+import { RowContainer } from "@docspace/shared/components/rows";
+import { TTransactionCollection } from "@docspace/shared/api/portal/types";
 
-import TransactionHistoryLoader from "./sub-components/TransactionHistoryLoader";
-import WalletContainer from "./WalletContainer";
+import TransactionRowView from "./RowBody";
 
-let timerId = null;
-
-const Wallet = (props) => {
-  const { walletInit, isInitWalletPage } = props;
-
-  const { t, ready } = useTranslation(["Payments", "Common"]);
-
-  const [showLoader, setShowLoader] = useState(false);
-  const shouldShowLoader = !isInitWalletPage || !ready;
-
-  useEffect(() => {
-    walletInit(t);
-  }, []);
-
-  useEffect(() => {
-    timerId = setTimeout(() => {
-      setShowLoader(true);
-    }, 200);
-
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, []);
-
-  return shouldShowLoader ? (
-    showLoader ? (
-      <TransactionHistoryLoader />
-    ) : null
-  ) : (
-    <WalletContainer t={t} />
+const RowView = ({
+  history = [],
+  sectionWidth,
+}: {
+  history?: TTransactionCollection[];
+  sectionWidth: number;
+}) => {
+  return (
+    <RowContainer
+      useReactWindow
+      fetchMoreFiles={() => Promise.resolve()}
+      hasMoreFiles={false}
+      itemCount={history.length}
+      filesLength={history.length}
+      itemHeight={50}
+    >
+      {history.map((transaction, index) => (
+        <TransactionRowView
+          transaction={transaction}
+          key={`transaction-row-${transaction.date || index}`}
+          sectionWidth={sectionWidth}
+        />
+      ))}
+    </RowContainer>
   );
 };
 
-export default inject(({ paymentStore }) => {
-  const { walletInit, isInitWalletPage } = paymentStore;
+export default inject(({ paymentStore, userStore }: TStore) => {
+  const { transactionHistory } = paymentStore;
+  const userId = userStore.user?.id;
 
   return {
-    walletInit,
-    isInitWalletPage,
+    userId,
+    history: transactionHistory,
   };
-})(observer(Wallet));
+})(observer(RowView));

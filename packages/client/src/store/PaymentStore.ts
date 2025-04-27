@@ -63,6 +63,7 @@ import {
   TPaymentFeature,
   TNumericPaymentFeature,
   TPaymentQuota,
+  TTransactionCollection,
 } from "@docspace/shared/api/portal/types";
 
 // Constants for feature identifiers
@@ -128,15 +129,13 @@ class PaymentStore {
 
   cardLinked = "";
 
-  transactionHistory: TTransactionHistory | {} = {};
+  transactionHistory: TTransactionCollection[] = [];
+
+  isTransactionHistoryExist = false;
 
   payerInfo = null;
 
   autoPayments: TAutoTopUpSettings | null = null;
-
-  offset = 0;
-
-  limit = 25;
 
   servicesQuotasFeatures: Map<string, TPaymentFeature> = new Map();
 
@@ -271,9 +270,8 @@ class PaymentStore {
 
     if (!res) return;
 
-    this.transactionHistory = res;
-    this.offset += 25;
-    this.limit += 25;
+    this.transactionHistory = res.collection;
+    this.isTransactionHistoryExist = res.collection.length > 0;
   };
 
   fetchAutoPayments = async () => {

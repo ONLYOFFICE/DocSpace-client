@@ -74,20 +74,22 @@ type TopUpModalProps = {
   walletBalance?: number;
 };
 
-const TopUpModal: React.FC<TopUpModalProps> = ({
-  visible,
-  currency = "",
-  fetchTransactionHistory,
-  walletCustomerEmail,
-  fetchBalance,
-  onClose,
-  language,
-  cardLinked,
-  accountLink,
-  isEditAutoPayment,
-  headerProps,
-  walletBalance = 0,
-}) => {
+const TopUpModal = (props: TopUpModalProps) => {
+  const {
+    visible,
+    currency = "",
+    fetchTransactionHistory,
+    walletCustomerEmail,
+    fetchBalance,
+    onClose,
+    language,
+    cardLinked,
+    accountLink,
+    isEditAutoPayment,
+    headerProps,
+    walletBalance = 0,
+  } = props;
+
   const { t } = useTranslation(["Payments", "Common"]);
   const [amount, setAmount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -149,6 +151,7 @@ const TopUpModal: React.FC<TopUpModalProps> = ({
             walletCustomerEmail={walletCustomerEmail!}
             currency={currency}
             isEditAutoPayment={isEditAutoPayment!}
+            language={language!}
           />
         </StyledBody>
       </ModalDialog.Body>

@@ -41,7 +41,8 @@ type WalletInfoProps = {
   onTopUp?: () => void;
 };
 
-const WalletInfo: React.FC<WalletInfoProps> = ({ balance, onTopUp }) => {
+const WalletInfo = (props: WalletInfoProps) => {
+  const { balance, onTopUp } = props;
   const { t } = useTranslation(["Payments", "Common"]);
 
   return (

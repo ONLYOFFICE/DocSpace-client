@@ -58,14 +58,16 @@ const typeClassMap: Record<string, string> = {
   literal: "literal",
 };
 
-const Wallet = ({
-  walletBalance,
-  language,
-  walletCodeCurrency,
-  isPayer,
-  cardLinkedOnFreeTariff,
-  isFreeTariff,
-}: WalletProps) => {
+const Wallet = (props: WalletProps) => {
+  const {
+    walletBalance,
+    language,
+    walletCodeCurrency,
+    isPayer,
+    cardLinkedOnFreeTariff,
+    isFreeTariff,
+  } = props;
+
   const { t } = useTranslation(["Payments", "Common"]);
 
   const [visible, setVisible] = useState(false);

@@ -266,7 +266,7 @@ const AutomaticBackup = ({
 
   const handleDeleteSchedule = () => {
     setIsLoadingData(true, () => {
-      deleteBackupSchedule()
+      deleteBackupSchedule(isManagement)
         ?.then(() => {
           deleteSchedule(weekdaysLabelArray);
           toastr.success(t("Common:SuccessfullySaveSettingsMessage"));

@@ -159,7 +159,7 @@ const DirectThirdPartyConnection = ({
         false,
         label,
         provider_key,
-        provider_id,
+        provider_id ?? "",
       );
 
       await setThirdPartyAccountsInfo(t);

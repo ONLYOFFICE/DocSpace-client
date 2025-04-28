@@ -37,6 +37,7 @@ import { MainContainer } from "../StyledSecurity";
 import { TfaSection } from "./tfa";
 import { PasswordStrengthSection } from "./passwordStrength";
 import { TrustedMailSection } from "./trustedMail";
+import { InvitationSettingsSection } from "./invitationSettings";
 import { IpSecuritySection } from "./ipSecurity";
 import { AdminMessageSection } from "./adminMessage";
 import { SessionLifetimeSection } from "./sessionLifetime";
@@ -181,6 +182,20 @@ const AccessPortal = (props) => {
         ) : null}
       </div>
       <DevToolsAccessSection />
+      <StyledSettingsSeparator />
+
+      <Text fontSize="16px" fontWeight="700">
+        {t("InvitationSettings")}
+      </Text>
+      <div className="category-item-description">
+        <Text fontSize="13px" fontWeight="400">
+          {t("InvitationSettingsDescription", {
+            productName: t("Common:ProductName"),
+          })}
+        </Text>
+      </div>
+      <InvitationSettingsSection />
+
       <StyledSettingsSeparator />
 
       <Text fontSize="16px" fontWeight="700">

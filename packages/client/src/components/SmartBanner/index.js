@@ -28,7 +28,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { isMobile, isIOS } from "react-device-detect";
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import SmartBanner from "react-smartbanner";
 import { getCookie } from "@docspace/shared/utils";
 import "./main.css";

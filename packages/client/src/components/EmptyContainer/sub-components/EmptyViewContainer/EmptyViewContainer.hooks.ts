@@ -26,7 +26,7 @@
 
 import { useTheme } from "styled-components";
 import { useMemo, useCallback } from "react";
-import { useNavigate, LinkProps } from "react-router-dom";
+import { useNavigate, LinkProps } from "react-router";
 
 import {
   Events,

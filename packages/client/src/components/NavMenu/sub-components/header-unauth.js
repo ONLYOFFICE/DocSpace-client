@@ -27,7 +27,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 import { globalColors } from "@docspace/shared/themes";
 import { mobile, getLogoUrl, injectDefaultTheme } from "@docspace/shared/utils";

@@ -27,7 +27,7 @@
 /* eslint-disable react/prop-types */
 
 import React, { useEffect } from "react";
-import { Navigate, useLocation, useSearchParams } from "react-router-dom";
+import { Navigate, useLocation, useSearchParams } from "react-router";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import AppLoader from "../components/app-loader";

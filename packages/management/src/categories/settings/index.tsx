@@ -26,7 +26,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { observer } from "mobx-react";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

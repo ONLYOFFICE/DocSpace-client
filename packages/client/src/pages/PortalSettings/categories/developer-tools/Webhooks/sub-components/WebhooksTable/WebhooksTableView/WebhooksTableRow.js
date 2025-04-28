@@ -31,7 +31,7 @@ import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_s
 
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 

@@ -61,32 +61,6 @@
 
   -webkit-tap-highlight-color: #{$tap-highlight};
 
-  &.isDisabled {
-    cursor: default;
-
-    background: var(--selector-add-button-disabled-background) !important;
-
-    svg path {
-      fill: var(--selector-add-button-icon-color-disabled) !important;
-    }
-
-    &:hover {
-      background: var(--selector-add-button-background);
-
-      svg path {
-        fill: var(--selector-add-button-icon-color);
-      }
-    }
-
-    &:active {
-      background: var(--selector-add-button-background);
-
-      svg path {
-        fill: var(--selector-add-button-icon-color);
-      }
-    }
-  }
-
   &.isAction {
     background-color: var(--main-accent-button) !important;
 
@@ -119,6 +93,16 @@
 
     div {
       opacity: 1;
+    }
+  }
+
+  &.isDisabled {
+    cursor: default;
+
+    background: var(--selector-add-button-disabled-background) !important;
+
+    svg path {
+      fill: var(--selector-add-button-icon-color-disabled) !important;
     }
   }
 }

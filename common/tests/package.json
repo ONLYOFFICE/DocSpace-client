@@ -13,12 +13,15 @@
     "test:locales": "jest locales.test.js",
     "test:images": "jest images.test.js",
     "test:colors": "jest colors.test.js",
-    "test:ollama": "jest ollama.test.js"
+    "test:ollama": "jest --config=jest.config.ollama.js"
   },
   "devDependencies": {
     "jest": "29.7.0",
     "jest-expect-message": "1.1.3",
     "jest-html-reporter": "3.10.2",
     "ollama": "^0.5.15"
+  },
+  "jest": {
+    "testTimeout": 3600000
   }
 }

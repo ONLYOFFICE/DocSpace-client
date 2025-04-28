@@ -15,6 +15,8 @@ module.exports = {
   testEnvironment: "node",
   setupFilesAfterEnv: ["jest-expect-message"],
   verbose: true,
+  // Set a very long timeout for long-running tests like the Ollama LLM translation validation
+  testTimeout: 3600000, // 1 hour
   reporters: [
     "default",
     [

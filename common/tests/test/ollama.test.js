@@ -26,6 +26,8 @@ const {
   getLanguageInfo,
 } = require("../utils/ollama");
 
+// No global timeout settings here - we'll set timeouts at the test level
+
 // Global variables to store translation files data
 let workspaces = [];
 let translationFiles = [];
@@ -345,5 +347,5 @@ describe("Ollama Translation Validation Tests", () => {
       validationResults.validTranslations / validationResults.totalTranslations,
       message
     ).toBeGreaterThanOrEqual(0.6);
-  }, 999999); // Disable timeout completely for this test
+  }, 3600000); // 1 hour timeout for this test
 });

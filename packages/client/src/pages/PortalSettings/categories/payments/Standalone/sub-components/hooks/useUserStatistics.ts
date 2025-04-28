@@ -31,59 +31,59 @@ import { TUserStatistics } from "@docspace/shared/dialogs/UserStatisticsDialog/U
 import { useEffect, useState } from "react";
 
 const parseUserStatistics = (
-  userStatics: TDocServerLicense,
+    userStatics: TDocServerLicense,
 ): TUserStatistics => {
-  const {
-    users_count: usersCount,
-    users_expire: usersExpire,
-    connections: externalCount,
-  } = userStatics;
+    const {
+        users_count: usersCount,
+        users_expire: usersExpire,
+        connections: externalCount,
+    } = userStatics;
 
-  return {
-    userLimit: usersExpire,
-    editingCount: usersCount + externalCount,
-    externalCount,
-    usersCount,
-  };
+    return {
+        userLimit: usersExpire,
+        editingCount: usersCount + externalCount,
+        externalCount,
+        usersCount,
+    };
 };
 
 export const useUserStatistics = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const [userStatistics, setUserStatistics] = useState<TUserStatistics | null>(
-    null,
-  );
+    const [isLoading, setIsLoading] = useState(false);
+    const [visible, setVisible] = useState(false);
+    const [userStatistics, setUserStatistics] = useState<TUserStatistics | null>(
+        null,
+    );
 
-  useEffect(() => {
-    const loadStatistics = async () => {
-      setIsLoading(true);
-      try {
-        const { docServerLicense } = await getTenantExtra();
-        const parcedUserStatistics = parseUserStatistics(docServerLicense);
-        setUserStatistics(parcedUserStatistics);
-      } catch (error) {
-        toastr.error(error!);
-      } finally {
-        setIsLoading(false);
-      }
+    useEffect(() => {
+        const loadStatistics = async () => {
+            setIsLoading(true);
+            try {
+                const { docServerLicense } = await getTenantExtra();
+                const parcedUserStatistics = parseUserStatistics(docServerLicense);
+                setUserStatistics(parcedUserStatistics);
+            } catch (error) {
+                toastr.error(error!);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        loadStatistics();
+    }, []);
+
+    const openUserStatistics = () => {
+        setVisible(true);
     };
 
-    loadStatistics();
-  }, []);
+    const closeUserStatistics = () => {
+        setVisible(false);
+    };
 
-  const openUserStatistics = () => {
-    setVisible(true);
-  };
-
-  const closeUserStatistics = () => {
-    setVisible(false);
-  };
-
-  return {
-    isUserStatisticsLoading: isLoading,
-    userStatistics,
-    isUserStatisticsVisible: visible,
-    openUserStatistics,
-    closeUserStatistics,
-  };
+    return {
+        isUserStatisticsLoading: isLoading,
+        userStatistics,
+        isUserStatisticsVisible: visible,
+        openUserStatistics,
+        closeUserStatistics,
+    };
 };

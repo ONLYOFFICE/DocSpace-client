@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "고급 설정",
   "LdapAdvancedSettingsTooltip": "LDAP 서버와 동기화하려는 사용자 속성을 선택합니다. ",
   "LdapAttributeMapping": "속성 매핑",
-  "LdapAuthenticationTooltip": "현재 Windows 사용자에게 LDAP 서버에서 읽을 권한이 없는 경우 이 옵션을 활성화하고, 읽기 권한이 있는 다른 사용자의 자격 증명을 입력하세요.",
+  "LdapAuthenticationTooltip": "현재 사용자에게 LDAP 서버에서 읽을 권한이 없는 경우 이 옵션을 활성화하고, 읽기 권한이 있는 다른 사용자의 자격 증명을 입력하세요.",
   "LdapAutoSyncToggle": "자동 동기화",
   "LdapAutoSyncToggleDescription": "동기화를 통해 포털에서 모든 데이터를 업로드하고 설정을 변경한 후 새 데이터를 업데이트할 수 있습니다. 포털에 사용자에 대한 새로운 데이터가 있을 때마다 동기화하세요.",
   "LdapAvatar": "프로필 사진",

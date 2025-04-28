@@ -228,9 +228,8 @@ export const useContactsFilter = ({
           newFilter.group = groupId;
         }
 
-        if (quota) {
-          newFilter.quotaFilter = quota;
-        }
+        newFilter.quotaFilter = quota;
+
         newFilter.page = 0;
 
         if (status) newFilter.employeeStatus = status;
@@ -380,7 +379,7 @@ export const useContactsFilter = ({
       }
 
       if (usersFilter.quotaFilter) {
-        const key = usersFilter.quotaFilter as unknown as FilterKeys;
+        const key = usersFilter.quotaFilter.toString();
 
         const label =
           key === FilterKeys.customQuota

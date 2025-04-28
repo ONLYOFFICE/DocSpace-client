@@ -192,8 +192,12 @@ class UsersStore {
 
       const user = await api.people.getUserById(data.id);
 
+      const { setInfoPanelSelection, isVisible } = this.infoPanelStore;
+
       runInAction(() => {
         this.users[idx] = user;
+
+        if (isVisible) setInfoPanelSelection(this.getPeopleListItem(user));
       });
     };
 

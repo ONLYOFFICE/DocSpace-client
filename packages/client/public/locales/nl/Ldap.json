@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "Geavanceerde Instellingen",
   "LdapAdvancedSettingsTooltip": "Kies gebruikersattributen die u met uw LDAP-server wilt synchroniseren.",
   "LdapAttributeMapping": "Attribute mapping",
-  "LdapAuthenticationTooltip": "Schakel deze optie in als de huidige Windows gebruiker geen rechten heeft om van de LDAP server te lezen, en voer de inloggegevens in van een andere gebruiker met leesrechten.",
+  "LdapAuthenticationTooltip": "Schakel deze optie in als de huidige gebruiker geen rechten heeft om van de LDAP server te lezen, en voer de inloggegevens in van een andere gebruiker met leesrechten.",
   "LdapAutoSyncToggle": "Automatische synchronisatie",
   "LdapAutoSyncToggleDescription": "Synchronisatie maakt het mogelijk om alle gegevens van het portaal te uploaden en de nieuwe gegevens bij te werken na het wijzigen van de instellingen. Synchroniseer elke keer als u nieuwe gegevens over gebruikers in de portaal hebt.",
   "LdapAvatar": "Profielfoto",

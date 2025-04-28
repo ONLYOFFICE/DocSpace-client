@@ -304,7 +304,7 @@ export async function getSettingsThirdParty() {
   return settingsThirdPartyRes.response as SettingsThirdPartyType;
 }
 
-export async function getBackupSchedule(dump: boolean = false) {
+export async function getBackupSchedule(dump: boolean = true) {
   const searchParams = new URLSearchParams();
 
   searchParams.append("dump", dump.toString());
@@ -375,10 +375,14 @@ export async function getSettingsFiles(): Promise<TFilesSettings> {
   return settingsFiles.response;
 }
 
-export async function getBackupProgress() {
+export async function getBackupProgress(dump = true) {
+  const searchParams = new URLSearchParams();
+
+  searchParams.append("dump", dump.toString());
+
   try {
     const [getBackupProgress] = createRequest(
-      ["/portal/getbackupprogress"],
+      [`/portal/getbackupprogress?${searchParams}`],
       [["", ""]],
       "GET",
     );
@@ -459,4 +463,3 @@ export async function getEncryptionSettings() {
 
   return encryptionSettings.response as TEncryptionSettings;
 }
-

@@ -224,26 +224,20 @@ export const useContactsFilter = ({
           newFilter.area = "people";
         }
 
-        if (groupId) {
-          newFilter.group = groupId;
-        }
+        newFilter.group = groupId || null;
 
-        if (quota) {
-          newFilter.quotaFilter = quota;
-        }
+        newFilter.quotaFilter = quota;
+
         newFilter.page = 0;
 
-        if (status) newFilter.employeeStatus = status;
+        newFilter.employeeStatus = status;
 
-        if (role) newFilter.role = role;
-        if (payments) newFilter.payments = payments;
-        if (accountLoginType) newFilter.accountLoginType = accountLoginType;
-        if (withoutGroup) newFilter.withoutGroup = withoutGroup;
-        if (group) newFilter.group = group;
-        if (inviterId) {
-          newFilter.inviterId =
-            inviterId === FilterKeys.me ? userId : inviterId;
-        }
+        newFilter.role = role;
+        newFilter.payments = payments;
+        newFilter.accountLoginType = accountLoginType;
+        newFilter.withoutGroup = withoutGroup;
+        newFilter.group = group;
+        newFilter.inviterId = inviterId === FilterKeys.me ? userId : inviterId;
 
         const url = getContactsUrl(contactsTab, group ?? undefined);
 
@@ -380,7 +374,7 @@ export const useContactsFilter = ({
       }
 
       if (usersFilter.quotaFilter) {
-        const key = usersFilter.quotaFilter as unknown as FilterKeys;
+        const key = usersFilter.quotaFilter.toString();
 
         const label =
           key === FilterKeys.customQuota

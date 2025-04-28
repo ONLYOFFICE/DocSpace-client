@@ -147,10 +147,8 @@ const DatePicker = (props: DatePickerProps) => {
             title={selectDateText}
             className="add-delivery-date-button"
             iconName={CalendarIconUrl}
+            label={selectDateText}
           />
-          <Text isInline fontWeight={600} color={globalColors.gray}>
-            {selectDateText}
-          </Text>
         </div>
       ) : null}
 

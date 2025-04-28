@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "高级设置",
   "LdapAdvancedSettingsTooltip": "选择要与 LDAP 服务器同步的用户属性。",
   "LdapAttributeMapping": "属性映射",
-  "LdapAuthenticationTooltip": "如果当前 Windows 用户无权从 LDAP 服务器 读取，请启用此选项，并输入具有读取权限的其他用户的凭据。",
+  "LdapAuthenticationTooltip": "如果当前用户无权从 LDAP 服务器 读取，请启用此选项，并输入具有读取权限的其他用户的凭据。",
   "LdapAutoSyncToggle": "自动同步",
   "LdapAutoSyncToggleDescription": "同步将允许从门户上传所有数据并在更改设置后更新新数据。每次门户中有新用户数据时都将进行同步。",
   "LdapAvatar": "个人资料照片",

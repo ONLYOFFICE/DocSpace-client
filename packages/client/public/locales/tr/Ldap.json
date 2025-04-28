@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "Gelişmiş Ayarlar",
   "LdapAdvancedSettingsTooltip": "LDAP sunucunuzla senkronize edilmesini istediğiniz kullanıcı özelliklerini seçin.",
   "LdapAttributeMapping": "Özellik eşleme",
-  "LdapAuthenticationTooltip": "Geçerli Windows kullanıcısının LDAP sunucusu okuma hakları yoksa bu seçeneği etkinleştirin ve okuma haklarına sahip başka bir kullanıcının kimlik bilgilerini girin.",
+  "LdapAuthenticationTooltip": "Geçerli kullanıcısının LDAP sunucusu okuma hakları yoksa bu seçeneği etkinleştirin ve okuma haklarına sahip başka bir kullanıcının kimlik bilgilerini girin.",
   "LdapAutoSyncToggle": "Otomatik senkronizasyon",
   "LdapAutoSyncToggleDescription": "Senkronizasyon, portaldan tüm verilerin yüklenmesine ve ayarlar değiştirildikten sonra yeni verilerin güncellenmesine olanak sağlayacaktır. Portaldaki kullanıcılara ilişkin her yeni veriye sahip olduğunuzda senkronizasyon yapın.",
   "LdapAvatar": "Profil fotoğrafı",

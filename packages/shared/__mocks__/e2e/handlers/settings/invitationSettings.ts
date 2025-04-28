@@ -24,40 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { TabsTypes } from "./Tabs.enums";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-export type TTabItem = {
-  /** Element id. */
-  id: string;
-  /** Tab text. */
-  name: string | React.ReactNode;
-  /** Content that is shown when you click on the tab.  */
-  content: React.ReactNode;
-  /** State of tab inclusion. State only works for tabs with a secondary theme. */
-  isDisabled?: boolean;
-  /** Sets a callback function that is triggered when the tab is selected */
-  onClick?: () => void;
-  /** Badge shown after tab. Only for primary tabs type */
-  badge?: React.ReactNode;
+export const PATH = "settings/invitationsettings";
+
+const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+
+export const invitationSettingsSuccess = {
+  response: {
+    allowInvitingMembers: true,
+    allowInvitingGuests: true,
+  },
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
-export type TabsProps = {
-  /** Child elements. */
-  items: TTabItem[];
-  /** Selected item of tabs. */
-  selectedItemId: number | string;
-  selectedItems?: number[];
-  /** Theme for displaying tabs. */
-  type?: TabsTypes;
-  /** Tab indentation for sticky positioning. */
-  stickyTop?: string;
-  /** Enables multiple select  */
-  multiple?: boolean;
-  /** Sets a tab class name */
-  className?: string;
-  /** Sets a callback function that is triggered when the tab is selected. */
-  onSelect?: (element: TTabItem) => void;
-
-  style?: React.CSSProperties;
+export const invitationSettings = (): Response => {
+  return new Response(JSON.stringify(invitationSettingsSuccess));
 };

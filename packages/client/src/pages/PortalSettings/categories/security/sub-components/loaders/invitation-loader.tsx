@@ -24,40 +24,69 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { TabsTypes } from "./Tabs.enums";
+import styled from "styled-components";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-export type TTabItem = {
-  /** Element id. */
-  id: string;
-  /** Tab text. */
-  name: string | React.ReactNode;
-  /** Content that is shown when you click on the tab.  */
-  content: React.ReactNode;
-  /** State of tab inclusion. State only works for tabs with a secondary theme. */
-  isDisabled?: boolean;
-  /** Sets a callback function that is triggered when the tab is selected */
-  onClick?: () => void;
-  /** Badge shown after tab. Only for primary tabs type */
-  badge?: React.ReactNode;
+const StyledLoader = styled.div`
+  .description {
+    margin-bottom: 12px;
+  }
+
+  .setting {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-direction: row;
+
+    margin-bottom: 4px;
+  }
+
+  .checkbox {
+    margin-top: 2px;
+  }
+
+  .description-setting {
+    margin-left: 24px;
+    width: calc(100% - 24px);
+  }
+
+  .setting-container {
+    margin-bottom: 12px;
+  }
+
+  .buttons {
+    width: calc(100% - 16px);
+    position: absolute;
+    bottom: 16px;
+  }
+`;
+
+const InvitationLoader = () => {
+  return (
+    <StyledLoader>
+      <RectangleSkeleton className="description" height="80px" />
+
+      <div className="setting-container">
+        <div className="setting">
+          <RectangleSkeleton className="checkbox" width="16px" height="16px" />
+          <RectangleSkeleton width="243px" height="20px" />
+        </div>
+
+        <RectangleSkeleton className="description-setting" height="64px" />
+      </div>
+
+      <div>
+        <div className="setting">
+          <RectangleSkeleton className="checkbox" width="16px" height="16px" />
+          <RectangleSkeleton width="129px" height="20px" />
+        </div>
+
+        <RectangleSkeleton className="description-setting" height="32px" />
+      </div>
+
+      <RectangleSkeleton className="buttons" height="40px" />
+    </StyledLoader>
+  );
 };
 
-export type TabsProps = {
-  /** Child elements. */
-  items: TTabItem[];
-  /** Selected item of tabs. */
-  selectedItemId: number | string;
-  selectedItems?: number[];
-  /** Theme for displaying tabs. */
-  type?: TabsTypes;
-  /** Tab indentation for sticky positioning. */
-  stickyTop?: string;
-  /** Enables multiple select  */
-  multiple?: boolean;
-  /** Sets a tab class name */
-  className?: string;
-  /** Sets a callback function that is triggered when the tab is selected. */
-  onSelect?: (element: TTabItem) => void;
-
-  style?: React.CSSProperties;
-};
+export default InvitationLoader;

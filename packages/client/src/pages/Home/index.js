@@ -165,6 +165,9 @@ const PureHome = (props) => {
     hideConfirmCancelOperation,
     welcomeFormFillingTipsVisible,
     formFillingTipsVisible,
+    allowInvitingGuests,
+    checkGuests,
+    hasGuests,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -175,7 +178,14 @@ const PureHome = (props) => {
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
-  const contactsView = getContactsView(location);
+  const view = getContactsView(location);
+  if (allowInvitingGuests === false && view === "guests") checkGuests();
+  const contactsView = allowInvitingGuests
+    ? view
+    : typeof hasGuests === "boolean" && view === "guests" && !hasGuests
+      ? "people"
+      : view;
+
   const isContactsPage = !!contactsView;
   const isContactsEmptyView =
     contactsView === "groups" ? isEmptyGroups : isUsersEmptyView;
@@ -540,6 +550,9 @@ export const Component = inject(
       enablePlugins,
       getSettings,
       showGuestReleaseTip,
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
     } = settingsStore;
 
     const {
@@ -680,6 +693,9 @@ export const Component = inject(
       isErrorChecking,
       setOperationCancelVisible,
       hideConfirmCancelOperation,
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
     };
   },
 )(observer(Home));

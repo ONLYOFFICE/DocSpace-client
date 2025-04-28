@@ -73,6 +73,7 @@ const ExternalLinks = ({
   getPortalInviteLink,
   isUserTariffLimit,
   standalone,
+  allowInvitingGuests,
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
@@ -276,7 +277,11 @@ const ExternalLinks = ({
           ? t("InviteViaLinkDescriptionAccounts", {
               productName: t("Common:ProductName"),
             })
-          : t("InviteViaLinkDescriptionRoom")}
+          : !allowInvitingGuests
+            ? t("InviteViaLinkDescriptionRoomMembers", {
+                productName: t("Common:ProductName"),
+              })
+            : t("InviteViaLinkDescriptionRoomGuest")}
       </StyledDescription>
       {externalLinksVisible ? (
         <StyledInviteInputContainer key={activeLink.id}>
@@ -325,7 +330,7 @@ export default inject(
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
-    const { standalone } = settingsStore;
+    const { standalone, allowInvitingGuests } = settingsStore;
 
     return {
       roomId,
@@ -336,6 +341,7 @@ export default inject(
       getPortalInviteLink,
       isUserTariffLimit,
       standalone,
+      allowInvitingGuests,
     };
   },
 )(observer(ExternalLinks));

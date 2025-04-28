@@ -49,6 +49,7 @@ const Chat = ({
   aiUserId,
   vectorizedFiles,
   user,
+  isFullScreen,
 
   getIcon,
 }: {
@@ -63,19 +64,27 @@ const Chat = ({
 
   user: TUser;
 
+  isFullScreen: boolean;
+
   getIcon: (size: number, fileExst: string) => string;
 }) => {
   return (
-    <ChatBody>
-      <CurrentFlowStoreContextProvider aiChatID={aiChatID}>
-        <FilesStoreContextProvider aiChatID={aiChatID}>
-          <MessageStoreContextProvider
-            aiChatID={aiChatID}
-            aiSelectedFolder={aiSelectedFolder}
-            aiUserId={aiUserId}
-          >
-            <ModelStoreContextProvider selectedFolder={aiSelectedFolder}>
-              <ChatHeader />
+    <CurrentFlowStoreContextProvider aiChatID={aiChatID}>
+      <FilesStoreContextProvider aiChatID={aiChatID}>
+        <MessageStoreContextProvider
+          aiChatID={aiChatID}
+          aiSelectedFolder={aiSelectedFolder}
+          aiUserId={aiUserId}
+        >
+          <ModelStoreContextProvider selectedFolder={aiSelectedFolder}>
+            <ChatBody
+              isFullScreen={isFullScreen}
+              currentDeviceType={currentDeviceType}
+            >
+              <ChatHeader
+                isFullScreen={isFullScreen}
+                currentDeviceType={currentDeviceType}
+              />
               <ChatMessageBody
                 displayFileExtension={displayFileExtension}
                 getIcon={getIcon}
@@ -87,11 +96,11 @@ const Chat = ({
                 displayFileExtension={displayFileExtension}
                 getIcon={getIcon}
               />
-            </ModelStoreContextProvider>
-          </MessageStoreContextProvider>
-        </FilesStoreContextProvider>
-      </CurrentFlowStoreContextProvider>
-    </ChatBody>
+            </ChatBody>
+          </ModelStoreContextProvider>
+        </MessageStoreContextProvider>
+      </FilesStoreContextProvider>
+    </CurrentFlowStoreContextProvider>
   );
 };
 

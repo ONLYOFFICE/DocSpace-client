@@ -2060,6 +2060,9 @@
   --chat-header-button-background-color: #{$gray-light};
   --chat-header-button-svg-color: #{$light-gray-dark};
 
+  --chat-header-select-session-date-color: #{$gray};
+  --chat-header-select-session-border-color: #{$gray-light-mid};
+
   --chat-file-item-border-color: #{$gray-light-mid};
   --chat-file-item-background-color: #{$white};
   --chat-file-item-exst-color: #{$gray};
@@ -2083,6 +2086,9 @@
 
   --chat-header-button-background-color: #{$light-dark-gray-hover};
   --chat-header-button-svg-color: #{$dark-gray-dark};
+
+  --chat-header-select-session-date-color: #{$gray-dark};
+  --chat-header-select-session-border-color: #{$gray-dark-strong};
 
   --chat-file-item-border-color: #{$gray-dark-strong};
   --chat-file-item-background-color: unset;

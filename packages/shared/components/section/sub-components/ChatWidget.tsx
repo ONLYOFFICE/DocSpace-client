@@ -184,6 +184,7 @@ export const ChatWidget = memo(
           aiUserId={aiUserId}
           vectorizedFiles={vectorizedFiles}
           user={user}
+          isFullScreen={isFullScreen}
         />
       </div>
     );

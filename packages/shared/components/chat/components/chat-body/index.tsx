@@ -25,12 +25,80 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { observer } from "mobx-react";
+import classNames from "classnames";
+import { useTranslation } from "react-i18next";
+
+import { Scrollbar } from "../../../scrollbar";
+import { DropDownItem } from "../../../drop-down-item";
+
+import { useMessageStore } from "../../store/messageStore";
+
+import ChatHeader from "../chat-header";
 
 import styles from "./ChatBody.module.scss";
 import { ChatBodyProps } from "./ChatBody.types";
 
-const ChatBody = ({ children }: ChatBodyProps) => {
-  return <div className={styles.chatBody}>{children}</div>;
+const ChatBody = ({
+  children,
+  isFullScreen,
+  currentDeviceType,
+}: ChatBodyProps) => {
+  const { preparedMessages, selectSession } = useMessageStore();
+
+  const { t } = useTranslation(["Common"]);
+
+  const onSelectAction = (session: string) => {
+    selectSession(session);
+  };
+
+  return (
+    <div className={styles.chatBody}>
+      {isFullScreen &&
+      currentDeviceType === "desktop" &&
+      preparedMessages.length > 0 ? (
+        <div className={styles.selectSessionContainer}>
+          <ChatHeader
+            isPanel
+            isFullScreen={isFullScreen}
+            currentDeviceType={currentDeviceType}
+          />
+
+          <Scrollbar className={styles.container}>
+            <div className={styles.container}>
+              {preparedMessages.map(({ title, value, isActive, isDate }) => {
+                const currentTitle =
+                  !isDate || title
+                    ? title
+                    : value === "today"
+                      ? t("Common:Today")
+                      : value === "yesterday"
+                        ? t("Common:Yesterday")
+                        : "";
+
+                return (
+                  <DropDownItem
+                    key={value}
+                    onClick={() => {
+                      if (!isDate) onSelectAction(value);
+                    }}
+                    className={classNames("drop-down-item", {
+                      [styles.dropDownItemDate]: isDate,
+                    })}
+                    isActive={isActive}
+                    noHover={isDate}
+                  >
+                    {currentTitle}
+                  </DropDownItem>
+                );
+              })}
+            </div>
+          </Scrollbar>
+        </div>
+      ) : null}
+      <div className={styles.chatBodyContainer}>{children}</div>
+    </div>
+  );
 };
 
-export default ChatBody;
+export default observer(ChatBody);

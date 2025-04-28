@@ -7,7 +7,11 @@ import { TSelectorItem } from "../../selector";
 
 import { ChatMessageType, PropertiesType } from "../types/chat";
 import { FlowType } from "../types/flow";
-import { extractFilesFromMessage, removeFolderFromMessage } from "../utils";
+import {
+  extractFilesFromMessage,
+  getChatDate,
+  removeFolderFromMessage,
+} from "../utils";
 
 export default class MessageStore {
   flowId: string = "";
@@ -20,6 +24,8 @@ export default class MessageStore {
 
   sessions: Map<string, ChatMessageType[]> = new Map();
 
+  sortedSessions: Array<[string, Date]> = [];
+
   currentSession: string = "";
 
   isInit: boolean = false;
@@ -28,9 +34,15 @@ export default class MessageStore {
 
   abortController: AbortController | null = null;
 
+  isSelectSessionOpen = false;
+
   constructor() {
     makeAutoObservable(this);
   }
+
+  setIsSelectSessionOpen = (value: boolean) => {
+    this.isSelectSessionOpen = value;
+  };
 
   setFlowId = (flowId: string) => {
     this.flowId = flowId;
@@ -108,6 +120,8 @@ export default class MessageStore {
 
     const newSessions = new Map<string, ChatMessageType[]>();
 
+    const timestampSessions = new Map<string, Date>();
+
     // Process each session individually
     Array.from(sessions.entries()).forEach(([sessionId, sessionMessages]) => {
       // First sort by timestamp to get chronological order
@@ -138,10 +152,21 @@ export default class MessageStore {
 
       // Update the session with sorted and paired messages
       newSessions.set(sessionId, finalSessionHistory);
+      timestampSessions.set(
+        sessionId,
+        new Date(finalSessionHistory[finalSessionHistory.length - 1].timestamp),
+      );
     });
+
+    const sortedTimestampSessions = Array.from(timestampSessions.entries())
+      .sort((a, b) => {
+        return new Date(a[1]).getTime() - new Date(b[1]).getTime();
+      })
+      .reverse();
 
     runInAction(() => {
       this.sessions = newSessions;
+      this.sortedSessions = sortedTimestampSessions;
       this.isInit = true;
       this.isRequestRunning = false;
     });
@@ -268,6 +293,10 @@ export default class MessageStore {
                     this.sessions.get(this.currentSession)!.push(userMsg, msg);
                   } else {
                     this.sessions.set(this.currentSession, [userMsg, msg]);
+                    this.sortedSessions = [
+                      [this.currentSession, new Date(msg.timestamp)],
+                      ...this.sortedSessions,
+                    ];
                   }
                 });
               }
@@ -336,6 +365,57 @@ export default class MessageStore {
 
   get isEmptyMessages() {
     return this.messages.length === 0;
+  }
+
+  get preparedMessages() {
+    const messages: {
+      title: string;
+      value: string;
+      isActive?: boolean;
+      isDate?: boolean;
+    }[] = [];
+
+    let prevDate: string = "";
+
+    this.sortedSessions.forEach(([value, date]) => {
+      const currentDate = getChatDate(date);
+      if (prevDate !== currentDate) {
+        prevDate = currentDate;
+
+        if (prevDate === "today") {
+          messages.push({
+            title: "",
+            value: prevDate,
+            isActive: false,
+            isDate: true,
+          });
+        } else if (prevDate === "yesterday") {
+          messages.push({
+            title: "",
+            value: prevDate,
+            isActive: false,
+            isDate: true,
+          });
+        } else if (prevDate) {
+          messages.push({
+            title: prevDate,
+            value: prevDate,
+            isActive: false,
+            isDate: true,
+          });
+        }
+      }
+
+      const splitedValue = value.split("_");
+
+      messages.push({
+        title: splitedValue[1],
+        value,
+        isActive: value === this.currentSession,
+      });
+    });
+
+    return messages;
   }
 }
 

@@ -1,3 +1,7 @@
+import { LANGUAGE } from "../../../constants";
+import { getCookie } from "../../../utils";
+import getCorrectDate from "../../../utils/getCorrectDate";
+
 const fileRegex = /@\d+/g;
 
 /**
@@ -38,4 +42,25 @@ export const extractFilesFromMessage = (
     cleanedMessage,
     fileIds,
   };
+};
+
+export const getChatDate = (date: Date): string => {
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  // Reset hours to compare just the dates
+  const dateToCheck = new Date(date);
+  today.setHours(0, 0, 0, 0);
+  yesterday.setHours(0, 0, 0, 0);
+  dateToCheck.setHours(0, 0, 0, 0);
+
+  if (dateToCheck.getTime() === today.getTime()) {
+    return "today";
+  }
+  if (dateToCheck.getTime() === yesterday.getTime()) {
+    return "yesterday";
+  }
+  const locale = getCookie(LANGUAGE);
+  return getCorrectDate(locale || "en", dateToCheck).split(" ")[0];
 };

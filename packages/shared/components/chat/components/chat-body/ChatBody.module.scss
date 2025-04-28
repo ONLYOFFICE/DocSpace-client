@@ -3,8 +3,7 @@
 
 .chatBody {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
 
   height: 100%;
   max-height: calc(100% - 70px);
@@ -14,14 +13,64 @@
 
   box-sizing: border-box;
 
-  padding-bottom: 20px;
-
   @include tablet-and-below {
     max-height: calc(100% - 62px);
-    padding-bottom: 16px;
   }
 
   @include mobile {
     max-height: calc(100% - 54px);
+  }
+}
+
+.selectSessionContainer {
+  display: flex;
+  flex-direction: column;
+
+  width: 264px;
+  min-width: 264px;
+  height: 100%;
+
+  border-right: 1px solid var(--chat-header-select-session-border-color);
+
+  box-sizing: border-box;
+
+  .container {
+    padding: 0 3px 0 20px;
+    height: 100%;
+    width: 100%;
+
+    box-sizing: border-box;
+
+    :global(.drop-down-item) {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+
+  .dropDownItemDate {
+    padding-top: 8px;
+
+    color: var(--chat-header-select-session-date-colo);
+
+    cursor: default;
+  }
+}
+
+.chatBodyContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+
+  padding-bottom: 20px;
+
+  @include tablet-and-below {
+    padding-bottom: 16px;
   }
 }

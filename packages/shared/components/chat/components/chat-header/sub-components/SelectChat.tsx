@@ -1,7 +1,11 @@
 import React from "react";
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import SelectSessionReactSvg from "PUBLIC_DIR/images/select.session.react.svg";
+
+import { DeviceType } from "../../../../../enums";
 
 import { DropDown } from "../../../../drop-down";
 import { DropDownItem } from "../../../../drop-down-item";
@@ -10,57 +14,94 @@ import { useMessageStore } from "../../../store/messageStore";
 
 import styles from "../ChatHeader.module.scss";
 
-const SelectChat = () => {
+export type SelectChatProps = {
+  isFullScreen: boolean;
+  isPanel?: boolean;
+  currentDeviceType: DeviceType;
+};
+
+const SelectChat = ({
+  isFullScreen,
+  isPanel,
+  currentDeviceType,
+}: SelectChatProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const parentRef = React.useRef<HTMLDivElement>(null);
 
-  const { sessions, selectSession } = useMessageStore();
+  console.log(isPanel);
 
-  const toggleOpen = () => setIsOpen((value) => !value);
+  const {
+    selectSession,
+    isSelectSessionOpen,
+    setIsSelectSessionOpen,
+
+    preparedMessages,
+  } = useMessageStore();
+
+  const { t } = useTranslation(["Common"]);
+
+  const toggleOpen = () => {
+    console.log("toggle");
+    if (isFullScreen && currentDeviceType === "desktop") {
+      console.log(isSelectSessionOpen);
+      setIsSelectSessionOpen(!isSelectSessionOpen);
+
+      return;
+    }
+
+    setIsOpen((value) => !value);
+  };
 
   const onSelectAction = (session: string) => {
     selectSession(session);
     setIsOpen(false);
   };
 
-  const preparedMessages = React.useMemo(() => {
-    const messages = Array.from(sessions.keys())
-      .reverse()
-      .map((value) => {
-        const splitedValue = value.split("_");
-
-        return { title: splitedValue[1], value };
-      });
-
-    return messages;
-  }, [sessions]);
-
   return (
     <>
       <div className={styles.selectChat} onClick={toggleOpen} ref={parentRef}>
         <SelectSessionReactSvg />
       </div>
-      <DropDown
-        open={isOpen}
-        isDefaultMode
-        zIndex={500}
-        clickOutsideAction={() => setIsOpen(false)}
-        directionY="bottom"
-        directionX="right"
-        topSpace={16}
-        forwardedRef={parentRef}
-      >
-        {preparedMessages.map(({ title, value }) => (
-          <DropDownItem
-            key={value}
-            onClick={() => onSelectAction(value)}
-            className="drop-down-item"
-          >
-            {title}
-          </DropDownItem>
-        ))}
-      </DropDown>
+      {isOpen ? (
+        <DropDown
+          open={isOpen}
+          isDefaultMode
+          zIndex={500}
+          clickOutsideAction={() => setIsOpen(false)}
+          directionY="bottom"
+          directionX="right"
+          topSpace={16}
+          forwardedRef={parentRef}
+        >
+          {preparedMessages.map(({ title, value, isActive, isDate }) => {
+            const currentTitle =
+              !isDate || title
+                ? title
+                : value === "today"
+                  ? t("Common:Today")
+                  : value === "yesterday"
+                    ? t("Common:Yesterday")
+                    : "";
+
+            return (
+              <DropDownItem
+                key={value}
+                onClick={() => {
+                  if (!isDate) onSelectAction(value);
+                }}
+                className={classNames("drop-down-item", {
+                  [styles.dropDownItemDate]: isDate,
+                })}
+                isActive={isActive}
+                noHover={isDate}
+              >
+                {currentTitle}
+              </DropDownItem>
+            );
+          })}
+        </DropDown>
+      ) : null}
     </>
   );
 };

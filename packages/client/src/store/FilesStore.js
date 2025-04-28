@@ -1096,6 +1096,7 @@ class FilesStore {
       getEncryptionKeys,
       // setModuleInfo,
       isDesktopClient,
+      getInvitationSettings,
     } = this.settingsStore;
 
     // setModuleInfo(config.homepage, config.id);
@@ -1111,6 +1112,7 @@ class FilesStore {
     if (!this.isEditor) {
       requests.push(
         getPortalCultures(),
+        getInvitationSettings(),
         this.treeFoldersStore.fetchTreeFolders().then((treeFolders) => {
           if (!treeFolders || !treeFolders.length) return;
 

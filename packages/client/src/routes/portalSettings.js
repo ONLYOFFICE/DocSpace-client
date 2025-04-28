@@ -260,6 +260,19 @@ const PortalSettingsRoutes = {
       },
     },
     {
+      path: "security/access-portal/invitation-settings",
+      async lazy() {
+        const { InvitationSettingsSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/invitationSettings"
+            ),
+        );
+
+        return { Component: InvitationSettingsSection };
+      },
+    },
+    {
       path: "security/access-portal/ip",
       async lazy() {
         const { IpSecuritySection } = await componentLoader(

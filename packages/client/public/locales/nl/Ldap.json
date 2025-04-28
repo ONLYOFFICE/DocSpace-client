@@ -26,7 +26,6 @@
   "LdapGroupNameAttribute": "Groepsnaam Attribuut",
   "LdapGroupNameAttributeTooltip": "Geef het objectattribuut op dat overeenkomt met de groepsnaam.",
   "LdapGroupUserAttributeTooltip": "Voer het gebruikersobject attribuut in dat gebruikt wordt om te bepalen of deze gebruiker lid is van de groepen.",
-  "LdapIntro": "LDAP is een manier om gebruikers en groepen van een LDAP server te importeren, en om gebruikersverificatie op de portaal te bieden met behulp van logins/wachtwoorden die op de LDAP server zijn opgeslagen. Gebruikers worden onmiddellijk geïmporteerd nadat de instellingen zijn opgeslagen. Gebruikers die later worden toegevoegd, worden geïmporteerd tijdens hun eerste verificatie op het portaal.",
   "LdapLoginAttribute": "Login Attribuut",
   "LdapLoginAttributeTooltip": "Voer het objectkenmerk in dat overeenkomt met de gebruikerslogin.",
   "LdapLoginTooltip": "Geef een Login gebruiker op die leestoegang heeft tot de LDAP server.",

@@ -386,6 +386,11 @@ export type TIpRestrictionSettings = {
   enable: boolean;
 };
 
+export type TInvitationSettings = {
+  allowInvitingGuests: boolean;
+  allowInvitingMembers: boolean;
+};
+
 export type TCookieSettings = {
   lifeTime: number;
   enabled: boolean;

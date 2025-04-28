@@ -85,10 +85,10 @@ import {
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
+import "@docspace/client/global";
 import { TUserStatisticsDialogProps } from "./UserStatisticsDialog.types";
 import styles from "./UserStatisticsDialog.module.scss";
 import { UserStatisticsInfo } from "./sub-components/UserStatisticsInfo";
-import type TStore from "@docspace/client/global";
 
 const UserStatisticsDialog = ({
   onClose,
@@ -123,7 +123,7 @@ const UserStatisticsDialog = ({
 
           <Text lineHeight="20px">{t("EditLimitReachedInfo")}</Text>
 
-          {workspaceFaqUrl && (
+          {workspaceFaqUrl ? (
             <Link
               className={styles.modalLink}
               isHovered
@@ -134,7 +134,7 @@ const UserStatisticsDialog = ({
             >
               {t("LearnHowItIsCounted")}
             </Link>
-          )}
+          ) : null}
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>

@@ -112,42 +112,19 @@ const parseStatistics = (statistics: TDocServerLicense): TUserStatistics => {
 
 const UserStatisticsDialog = ({
   onClose,
+  isLoading,
+  isVisible,
+  statistics,
   onDownloadAndReport,
 }: TUserStatisticsDialogProps) => {
   const { t } = useTranslation(["Payments"]);
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [statistics, setStatistics] = useState<TUserStatistics | null>(null);
-
-  useEffect(() => {
-    const loadStatistics = async () => {
-      setIsLoading(true);
-      try {
-        const { docServerLicense } = await getTenantExtra();
-        const parcedStatistics = parseStatistics(docServerLicense);
-        setStatistics(parcedStatistics);
-      } catch (error) {
-        toastr.error(error!);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadStatistics();
-  }, []);
-
-  const handleClose = () => {
-    setVisible(false);
-    onClose?.();
-  };
 
   return (
     <ModalDialog
       isLarge
       zIndex={312}
-      onClose={handleClose}
-      visible={visible}
+      onClose={onClose}
+      visible={isVisible}
       isLoading={isLoading}
       displayType={ModalDialogType.modal}
     >

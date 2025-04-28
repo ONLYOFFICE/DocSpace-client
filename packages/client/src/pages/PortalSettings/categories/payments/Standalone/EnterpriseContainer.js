@@ -49,9 +49,7 @@ const EnterpriseContainer = (props) => {
             : t("Common:EnterpriseLicense"),
         })}
       </Text>
-
       <TariffTitleContainer />
-
       {isLicenseDateExpired ? <BenefitsContainer t={t} /> : null}
       <Text fontSize="14px" className="payments_renew-subscription">
         {isLicenseDateExpired
@@ -59,7 +57,6 @@ const EnterpriseContainer = (props) => {
           : t("ActivatePurchaseRenewLicense")}
       </Text>
       <ButtonContainer t={t} />
-
       <div className="payments_support">
         <Text>
           <Trans i18nKey="ActivateRenewDescr" ns="PaymentsEnterprise" t={t}>

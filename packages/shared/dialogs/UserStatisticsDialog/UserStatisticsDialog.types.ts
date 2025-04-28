@@ -25,7 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export type TUserStatisticsDialogProps = {
+  isVisible: boolean;
+  isLoading: boolean;
   onClose?: VoidFunction;
+  statistics: TUserStatistics | null;
   onDownloadAndReport?: VoidFunction;
 };
 

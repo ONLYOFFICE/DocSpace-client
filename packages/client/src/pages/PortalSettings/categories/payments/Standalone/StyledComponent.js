@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-
+import "@docspace/shared/styles/variables/index.scss";
 import { tablet, mobile } from "@docspace/shared/utils";
 
 const StyledComponent = styled.div`

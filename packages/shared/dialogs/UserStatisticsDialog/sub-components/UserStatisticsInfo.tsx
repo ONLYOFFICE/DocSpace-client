@@ -41,6 +41,33 @@ export const UserStatisticsInfo = ({
 
   const percentEditing = Math.round((editingCount / userLimit) * 100);
 
+  const getDetailedEditInfo = () => {
+    const editUserCount = usersCount
+      ? t("EditUserCount", {
+          count: usersCount,
+          productName: t("Common:ProductName"),
+        })
+      : null;
+
+    const editExternalUserCount = externalCount
+      ? t("EditExternalUserCount", {
+          externalCount,
+        })
+      : null;
+
+    const detailedInfo = [editUserCount, editExternalUserCount]
+      .filter(Boolean)
+      .map((item, index, arr) => {
+        return index === arr.length - 1 ? item : `${item} / `;
+      });
+
+    if (detailedInfo.length === 0) {
+      return null;
+    }
+
+    return ` (${detailedInfo})`;
+  };
+
   return (
     <div>
       <div className={styles.textContainer}>
@@ -66,6 +93,7 @@ export const UserStatisticsInfo = ({
             }}
             components={{ 1: <Text fontWeight={600} as="span" /> }}
           />
+          {getDetailedEditInfo()};
         </Text>
       </div>
       <ProgressBar percent={percentEditing} />

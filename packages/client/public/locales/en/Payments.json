@@ -52,7 +52,9 @@
   "EditAccessInfo": "We specified how many users can have access to editing docs.",
   "EditUserDefinition": "1 user = 1 user who opened and changed a document.",
   "EditUserLimit": "<1>Your limit:</1> {{limit}} users",
-  "EditUserInfo": "<1>Already editing:</1> {{editingCount}} ({{count}} {{productName}} users / {{externalCount}} external users)",
+  "EditUserInfo": "<1>Already editing:</1> {{editingCount}}",
+  "EditUserCount": "{{count}} {{productName}} users",
+  "EditExternalUserCount": "{{externalCount}} external users",
   "EditLimitReachedInfo": "When your user limit is reached, other users will be able to open documents for viewing only.",
   "LearnHowItIsCounted": "Learn how it is counted",
   "DownloadAndOpenReport": "Download end open report"

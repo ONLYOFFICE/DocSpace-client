@@ -37,7 +37,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     errorElement: <Error404 />,
-    hydrateFallbackElement: <></>,
+    hydrateFallbackElement: <>Loading...</>,
     children: [...routes],
   },
 ]);

@@ -29,6 +29,7 @@ import { createBrowserRouter, Navigate } from "react-router";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
 import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 
 import { WhiteLabel } from "client/WhiteLabelPage";
 import { BrandName } from "client/BrandNamePage";
@@ -55,7 +56,9 @@ const routes = [
         </PrivateRouteWrapper>
       </ErrorBoundary>
     ),
-    hydrateFallbackElement: <>Loading...</>,
+    hydrateFallbackElement: (
+      <Loader className="pageLoader" type={LoaderTypes.rombs} size="40px" />
+    ),
     errorElement: <Error404 />,
     children: [
       { index: true, element: <Navigate to="/management/spaces" replace /> },

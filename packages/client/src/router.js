@@ -28,6 +28,7 @@ import React from "react";
 import { createBrowserRouter } from "react-router";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
+import { Loader, LoaderTypes } from "@docspace/shared/components/loader";
 import routes from "./routes";
 
 import Root from "./Shell";
@@ -37,7 +38,9 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     errorElement: <Error404 />,
-    hydrateFallbackElement: <>Loading...</>,
+    hydrateFallbackElement: (
+      <Loader className="pageLoader" type={LoaderTypes.rombs} size="40px" />
+    ),
     children: [...routes],
   },
 ]);

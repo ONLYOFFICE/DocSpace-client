@@ -26,7 +26,6 @@
 
 import React from "react";
 
-import { Text } from "../../text";
 import { SelectorAddButton } from "../../selector-add-button";
 
 import { StyledItem } from "../Selector.styled";

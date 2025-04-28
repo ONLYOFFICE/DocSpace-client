@@ -379,7 +379,7 @@ export const useContactsFilter = ({
       }
 
       if (usersFilter.quotaFilter) {
-        const key = usersFilter.quotaFilter as unknown as FilterKeys;
+        const key = usersFilter.quotaFilter.toString();
 
         const label =
           key === FilterKeys.customQuota

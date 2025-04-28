@@ -26,12 +26,15 @@
 "use client";
 import { observer } from "mobx-react";
 import { useTheme } from "styled-components";
-import React, { useCallback, useLayoutEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import AutomaticBackup from "@docspace/shared/pages/auto-backup";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { openConnectWindowUtils } from "@docspace/shared/utils/openConnectWindow";
+import { deleteThirdParty as deleteThirdPartyApi } from "@docspace/shared/api/files";
+import { useDefaultOptions } from "@docspace/shared/pages/auto-backup/hooks";
 
 import type {
   SettingsThirdPartyType,
@@ -44,20 +47,18 @@ import type {
   TPaymentFeature,
   TStorageRegion,
 } from "@docspace/shared/api/portal/types";
-import { openConnectWindowUtils } from "@docspace/shared/utils/openConnectWindow";
-import { deleteThirdParty as deleteThirdPartyApi } from "@docspace/shared/api/files";
-import type { TError } from "@docspace/shared/utils/axiosClient";
 
+import type { TError } from "@docspace/shared/utils/axiosClient";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 import type { TPortals } from "@docspace/shared/api/management/types";
+import type { TStorageBackup } from "@docspace/shared/api/settings/types";
 
 import { useBackup } from "@/hooks/useBackup";
-import { TStorageBackup } from "@docspace/shared/api/settings/types";
 import { useTreeFolders } from "@/hooks/useTreeFolders";
 import { useFilesSelectorInput } from "@/hooks/useFilesSelectorInput";
 import { useStores } from "@/hooks/useStores";
 import useAppState from "@/hooks/useAppState";
-import { useDefaultOptions } from "@docspace/shared/pages/auto-backup/hooks";
+import { getAutomaticBackupUrl } from "@/lib";
 
 interface AutoBackupProps {
   account: SettingsThirdPartyType | undefined;
@@ -219,7 +220,10 @@ const AutoBackup = ({
     return portals.length === 1 ? false : isRestoreAndAutoBackupAvailable;
   };
 
-  const automaticBackupUrl = `${settings?.helpLink ?? ""}/administration/docspace-settings.aspx#AutoBackup`;
+  const automaticBackupUrl = useMemo(
+    () => getAutomaticBackupUrl(settings),
+    [settings],
+  );
 
   const isEnableAuto = checkEnablePortalSettings();
 
@@ -328,4 +332,3 @@ const AutoBackup = ({
 };
 
 export default observer(AutoBackup);
-

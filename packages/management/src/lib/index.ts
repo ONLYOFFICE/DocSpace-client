@@ -25,10 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import moment from "moment-timezone";
+
 import { TTranslation } from "@docspace/shared/types";
 import type { TPaymentQuota } from "@docspace/shared/api/portal/types";
 import type { TPortals } from "@docspace/shared/api/management/types";
 import type { TDefaultWhiteLabel } from "@/types";
+import type { TSettings } from "@docspace/shared/api/settings/types";
 
 export const getMinifyTitle = (title: string) => {
   const titleArr = title.split(" ");
@@ -108,3 +110,14 @@ export const getDaysLeft = (dueDate: string | Date) => {
   return moment(dueDate).startOf("day").diff(moment().startOf("day"), "days");
 };
 
+export const getAutomaticBackupUrl = (settings?: TSettings): string => {
+  if (!settings) return "";
+
+  const domain = settings.externalResources?.helpcenter?.domain;
+
+  const entries = settings.externalResources?.helpcenter?.entries;
+
+  if (domain && entries) return `${domain}${entries.autobackup}`;
+
+  return domain ?? "";
+};

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
 import { TTranslation } from "@docspace/shared/types";

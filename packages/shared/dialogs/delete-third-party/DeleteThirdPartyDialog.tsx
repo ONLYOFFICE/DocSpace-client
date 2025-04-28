@@ -26,7 +26,6 @@
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
 
 import { toastr } from "@docspace/shared/components/toast";
 import {
@@ -62,9 +61,6 @@ const DeleteThirdPartyDialog = ({
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
   const onClose = () => setDeleteThirdPartyDialogVisible(false);
 
   const onDeleteThirdParty = () => {
@@ -96,11 +92,15 @@ const DeleteThirdPartyDialog = ({
       .then(() => {
         setThirdPartyProviders(newProviders);
         if (currentFolderId) {
+          const location = window.location;
+
           const filter = FilesFilter.getDefault();
 
           filter.folder = currentFolderId.toString();
 
-          navigate(`${location.pathname}?${filter.toUrlParams()}`);
+          window.location.replace(
+            `${location.pathname}?${filter.toUrlParams()}`,
+          );
         } else {
           toastr.success(
             t("SuccessDeleteThirdParty", { service: removeItem.title }),

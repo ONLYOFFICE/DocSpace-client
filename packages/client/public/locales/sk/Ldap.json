@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "Rozšírené nastavenia",
   "LdapAdvancedSettingsTooltip": "Vyberte atribúty používateľa, ktoré chcete synchronizovať so serverom LDAP.",
   "LdapAttributeMapping": "Mapovanie atribútov",
-  "LdapAuthenticationTooltip": "Túto možnosť povoľte, ak aktuálny používateľ systému Windows nemá práva na čítanie zo servera LDAP, a zadajte prihlasovacie údaje iného používateľa, ktorý tieto práva má.",
+  "LdapAuthenticationTooltip": "Túto možnosť povoľte, ak aktuálny používateľ nemá práva na čítanie zo servera LDAP, a zadajte prihlasovacie údaje iného používateľa, ktorý tieto práva má.",
   "LdapAutoSyncToggle": "Automatická synchronizácia",
   "LdapAutoSyncToggleDescription": "Synchronizácia umožní nahrať všetky údaje z portálu a aktualizovať nové údaje po zmene nastavení. Synchronizujte vždy, keď máte na portáli nové údaje o používateľoch.",
   "LdapAvatar": "Profilová fotografia",

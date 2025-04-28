@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "Papildu iestatījumi",
   "LdapAdvancedSettingsTooltip": "Izvēlieties lietotāja atribūtus, kurus vēlaties sinhronizēt ar LDAP serveri.",
   "LdapAttributeMapping": "Atribūtu kartēšana",
-  "LdapAuthenticationTooltip": "Iespējojiet šo opciju, ja pašreizējam Windows lietotājam nav tiesību lasīt no LDAP servera un ievadīt cita lietotāja akreditācijas datus ar lasīšanas tiesībām.",
+  "LdapAuthenticationTooltip": "Iespējojiet šo opciju, ja pašreizējam lietotājam nav tiesību lasīt no LDAP servera un ievadīt cita lietotāja akreditācijas datus ar lasīšanas tiesībām.",
   "LdapAutoSyncToggle": "Automātiska sinhronizācija",
   "LdapAutoSyncToggleDescription": "Sinhronizācija ļaus augšupielādēt visus datus no portāla un atjaunināt jaunos datus pēc iestatījumu maiņas. Sinhronizējiet katru reizi, kad portālā ir jauni dati par lietotājiem.",
   "LdapAvatar": "Profila fotoattēls",

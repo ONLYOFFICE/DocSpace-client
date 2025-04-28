@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "Cài Đặt Nâng Cao ",
   "LdapAdvancedSettingsTooltip": "Chọn các thuộc tính người dùng mà bạn muốn đồng bộ hóa với máy chủ LDAP của mình.",
   "LdapAttributeMapping": "Ánh xạ thuộc tính",
-  "LdapAuthenticationTooltip": "Bật tùy chọn này nếu người dùng Windows hiện tại không có quyền đọc từ máy chủ LDAP và nhập thông tin đăng nhập của người dùng khác có quyền đọc.",
+  "LdapAuthenticationTooltip": "Bật tùy chọn này nếu người dùng hiện tại không có quyền đọc từ máy chủ LDAP và nhập thông tin đăng nhập của người dùng khác có quyền đọc.",
   "LdapAutoSyncToggle": "Tự động đồng bộ hóa",
   "LdapAutoSyncToggleDescription": "Đồng bộ hóa sẽ cho phép tải lên tất cả dữ liệu từ cổng thông tin và cập nhật dữ liệu mới sau khi thay đổi cài đặt. Đồng bộ hóa mỗi khi bạn có dữ liệu mới về người dùng trong cổng thông tin.",
   "LdapAvatar": "Ảnh đại diện",

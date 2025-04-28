@@ -106,7 +106,7 @@ const TariffTitleContainer = ({
     >
       <div className="payments_subscription">
         <div className="title">
-          <Text fontWeight={600} fontSize="13px" as="span">
+          <Text fontWeight={600} fontSize="13" as="span">
             <Trans
               i18nKey="ActivateTariffDescr"
               values={{
@@ -132,7 +132,7 @@ const TariffTitleContainer = ({
             />
           </Text>{" "}
           {!isLicenseDateExpired ? (
-            <Text fontSize="13px" as="span">
+            <Text fontSize="13" as="span">
               {expiresDate()}
             </Text>
           ) : null}

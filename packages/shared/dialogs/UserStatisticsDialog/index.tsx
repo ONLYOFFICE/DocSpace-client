@@ -75,40 +75,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 
-import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
-import { getTenantExtra } from "@docspace/shared/api/portal";
-import { TDocServerLicense } from "api/portal/types";
-import {
-  TUserStatisticsDialogProps,
-  TUserStatistics,
-} from "./UserStatisticsDialog.types";
+
+import { TUserStatisticsDialogProps } from "./UserStatisticsDialog.types";
 import styles from "./UserStatisticsDialog.module.scss";
 import { UserStatisticsInfo } from "./sub-components/UserStatisticsInfo";
-
-const parseStatistics = (statistics: TDocServerLicense): TUserStatistics => {
-  const {
-    users_count: usersCount,
-    users_expire: usersExpire,
-    connections: externalCount,
-  } = statistics;
-
-  return {
-    userLimit: usersExpire,
-    editingCount: usersCount + externalCount,
-    externalCount,
-    usersCount,
-  };
-};
 
 const UserStatisticsDialog = ({
   onClose,

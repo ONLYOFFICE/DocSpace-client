@@ -3717,6 +3717,7 @@ class FilesStore {
       presentations: [],
       masterForms: [],
       other: [],
+      pdfForms: [],
     };
 
     let selection = this.selection.length
@@ -3738,8 +3739,10 @@ class FilesStore {
           sortedFiles.presentations.push(item);
         } else if (isMasterFormExtension(item.fileExst)) {
           sortedFiles.masterForms.push(item);
-        } else if (isDocument(item.fileExst)) {
+        } else if (!item.isPDFForm && isDocument(item.fileExst)) {
           sortedFiles.documents.push(item);
+        } else if (item.isPDFForm) {
+          sortedFiles.pdfForms.push(item);
         } else {
           sortedFiles.other.push(item);
         }

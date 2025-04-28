@@ -3404,7 +3404,7 @@ class FilesActionStore {
         res = await this.loopExportRoomIndexStatusChecking(pbData);
       }
 
-      if (res.status === ExportRoomIndexTaskStatus.Failed) {
+      if (res.error || res.status === ExportRoomIndexTaskStatus.Failed) {
         toastr.error(res.error);
 
         setSecondaryProgressBarData({

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import find from "lodash/find";
 import result from "lodash/result";
 
@@ -228,9 +228,8 @@ export const useContactsFilter = ({
           newFilter.group = groupId;
         }
 
-        if (quota) {
-          newFilter.quotaFilter = quota;
-        }
+        newFilter.quotaFilter = quota;
+
         newFilter.page = 0;
 
         if (status) newFilter.employeeStatus = status;
@@ -380,7 +379,7 @@ export const useContactsFilter = ({
       }
 
       if (usersFilter.quotaFilter) {
-        const key = usersFilter.quotaFilter as unknown as FilterKeys;
+        const key = usersFilter.quotaFilter.toString();
 
         const label =
           key === FilterKeys.customQuota

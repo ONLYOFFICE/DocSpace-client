@@ -27,7 +27,7 @@
 import React, { useEffect, useTransition, Suspense } from "react";
 import styled from "styled-components";
 
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";

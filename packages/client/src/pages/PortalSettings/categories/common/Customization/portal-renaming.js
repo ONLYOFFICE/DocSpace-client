@@ -31,7 +31,7 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { isMobileDevice } from "@docspace/shared/utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";

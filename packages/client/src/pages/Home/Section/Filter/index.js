@@ -26,7 +26,7 @@
 
 import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 
 import { withTranslation } from "react-i18next";
 
@@ -194,9 +194,7 @@ const SectionFilterContent = ({
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
 
-        if (quota) {
-          newFilter.quotaFilter = quota;
-        }
+        newFilter.quotaFilter = quota;
 
         if (subjectId) {
           newFilter.subjectId = subjectId;

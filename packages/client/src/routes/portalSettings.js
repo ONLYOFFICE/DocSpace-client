@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
 import componentLoader from "@docspace/shared/utils/component-loader";
@@ -257,6 +257,19 @@ const PortalSettingsRoutes = {
         );
 
         return { Component: DevToolsAccessSection };
+      },
+    },
+    {
+      path: "security/access-portal/invitation-settings",
+      async lazy() {
+        const { InvitationSettingsSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/invitationSettings"
+            ),
+        );
+
+        return { Component: InvitationSettingsSection };
       },
     },
     {

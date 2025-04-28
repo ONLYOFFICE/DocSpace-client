@@ -29,7 +29,7 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import { inject, observer } from "mobx-react";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import config from "PACKAGE_FILE";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";

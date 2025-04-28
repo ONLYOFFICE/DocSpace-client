@@ -435,12 +435,9 @@ const FilterBlock = ({
       (value) => value.group === FilterGroups.roomFilterTags,
     );
 
-    const isTags = !!(isSelectedFilterTags && isFilterValuesTags);
-
     const isEqualTags =
-      isTags &&
       isSelectedFilterTags?.size ===
-        (isFilterValuesTags.key as string[]).length;
+      (isFilterValuesTags?.key as string[])?.length;
 
     if (
       !isEqualTags ||

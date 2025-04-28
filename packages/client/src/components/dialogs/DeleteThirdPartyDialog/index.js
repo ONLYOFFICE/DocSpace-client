@@ -32,7 +32,7 @@ import { Button } from "@docspace/shared/components/button";
 import { withTranslation } from "react-i18next";
 
 import { inject, observer } from "mobx-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 const DeleteThirdPartyDialog = (props) => {

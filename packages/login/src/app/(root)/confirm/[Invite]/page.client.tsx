@@ -44,6 +44,7 @@ import {
   TPasswordHash,
   TPasswordSettings,
   TThirdPartyProvider,
+  TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
 import { toastr } from "@docspace/shared/components/toast";
 import {
@@ -90,6 +91,7 @@ export type CreateUserFormProps = {
   displayName?: string;
   isStandalone: boolean;
   logoText: string;
+  invitationSettings?: TInvitationSettings;
 };
 
 const CreateUserForm = (props: CreateUserFormProps) => {
@@ -105,6 +107,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     legalTerms,
     isStandalone,
     logoText,
+    invitationSettings,
   } = props;
 
   const { linkData, roomData } = useContext(ConfirmRouteContext);
@@ -218,7 +221,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     const headerKey = linkData?.confirmHeader ?? null;
 
     try {
-      await getUserByEmail(email, headerKey);
+      await getUserByEmail(email, headerKey, currentCultureName);
 
       setCookie(LANGUAGE, currentCultureName, {
         "max-age": COOKIE_EXPIRATION_YEAR,
@@ -255,7 +258,19 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         typeof knownError === "object" ? knownError?.response?.status : "";
       const isNotExistUser = status === 404;
 
-      if (isNotExistUser) {
+      const forbiddenInviteUsersPortal = roomData.roomId
+        ? !invitationSettings?.allowInvitingGuests
+        : !invitationSettings?.allowInvitingMembers;
+
+      if (forbiddenInviteUsersPortal) {
+        setEmailValid(false);
+
+        const errorInvite =
+          typeof knownError === "object"
+            ? knownError?.response?.data?.error?.message
+            : "";
+        setEmailErrorText(errorInvite);
+      } else if (isNotExistUser) {
         setRegistrationForm(true);
       }
     }

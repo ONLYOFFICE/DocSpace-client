@@ -52,7 +52,8 @@ const withLoading = (WrappedComponent) => {
     const setting = pathname.slice(index + 1);
 
     useEffect(() => {
-      if (setting === "developer-tools") return;
+      if (pathname.includes("developer-tools"))
+        return setIsBurgerLoading(false);
       if (pathname.includes("profile")) {
         if (!isLoadedArticleBody) {
           setIsBurgerLoading(true);

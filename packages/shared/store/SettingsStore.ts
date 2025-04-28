@@ -28,6 +28,7 @@
 /* eslint-disable prefer-regex-literals */
 import { makeAutoObservable, runInAction } from "mobx";
 
+import Filter from "../api/people/filter";
 import { TFrameConfig } from "../types/Frame";
 import api from "../api";
 import { TFolder } from "../api/files/types";
@@ -323,6 +324,12 @@ class SettingsStore {
   logoText = "";
 
   limitedAccessDevToolsForUsers = false;
+
+  allowInvitingGuests: boolean | null = null;
+
+  allowInvitingMembers: boolean | null = null;
+
+  hasGuests: boolean | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -1326,6 +1333,27 @@ class SettingsStore {
     this.ipRestrictionEnable = res.enable;
   };
 
+  getInvitationSettings = async () => {
+    const res = await api.settings.getInvitationSettings();
+
+    this.allowInvitingGuests = res.allowInvitingGuests;
+    this.allowInvitingMembers = res.allowInvitingMembers;
+  };
+
+  setInvitationSettings = async (
+    allowInvitingGuests: boolean,
+    allowInvitingMembers: boolean,
+  ) => {
+    const data = {
+      allowInvitingGuests,
+      allowInvitingMembers,
+    };
+    const res = await api.settings.setInvitationSettings(data);
+
+    this.allowInvitingGuests = res.allowInvitingGuests;
+    this.allowInvitingMembers = res.allowInvitingMembers;
+  };
+
   setMessageSettings = async (turnOn: boolean) => {
     await api.settings.setMessageSettings(turnOn);
     this.enableAdmMess = turnOn;
@@ -1516,6 +1544,13 @@ class SettingsStore {
   get accessDevToolsForUsers() {
     return this.limitedAccessDevToolsForUsers.toString();
   }
+
+  checkGuests = async () => {
+    const filterDefault = Filter.getDefault();
+    filterDefault.area = "guests";
+    const res = await api.people.getUserList(filterDefault);
+    this.hasGuests = !!res.total;
+  };
 }
 
 export { SettingsStore };

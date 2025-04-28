@@ -55,6 +55,7 @@ const routes = [
         </PrivateRouteWrapper>
       </ErrorBoundary>
     ),
+    hydrateFallbackElement: <></>,
     errorElement: <Error404 />,
     children: [
       { index: true, element: <Navigate to="/management/spaces" replace /> },

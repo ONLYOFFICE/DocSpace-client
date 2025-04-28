@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "Setări avansate",
   "LdapAdvancedSettingsTooltip": "Alegeți atribute de utilizator pe care le doriți să sincronizați cu serverul dvs LDAP.",
   "LdapAttributeMapping": "Mapare atribute",
-  "LdapAuthenticationTooltip": "Activați această opțiune dacă utilizatorul Windows actual nu are permisiuni de citire de pe serverul LDAP și introduceți datele de identificare ale unui alt utilizator cu permisiuni de citire.",
+  "LdapAuthenticationTooltip": "Activați această opțiune dacă utilizatorul actual nu are permisiuni de citire de pe serverul LDAP și introduceți datele de identificare ale unui alt utilizator cu permisiuni de citire.",
   "LdapAutoSyncToggle": "Sincronizare automată",
   "LdapAutoSyncToggleDescription": "Sincronizare permite încărcarea tuturor datelor de pe portalul și actualizarea datelor după modificarea setărilor. Realizarea sincronizării este necesară de fiecare dată când adăugați datele noi despre utilizatorii din portal.",
   "LdapAvatar": "Fotografie de profil",

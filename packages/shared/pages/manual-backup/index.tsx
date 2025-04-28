@@ -24,7 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useMemo, useState } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
@@ -49,6 +51,8 @@ import { getBackupProgressInfo } from "@docspace/shared/utils/common";
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
 
 import { StyledModules, StyledManualBackup } from "./ManualBackup.styled";
+
+import { useDidMount } from "../../hooks/useDidMount";
 
 import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 import RoomsModule from "./sub-components/RoomsModule";
@@ -123,23 +127,33 @@ const ManualBackup = ({
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const selectedStorageType = useMemo(
-    () => getFromLocalStorage<string>("LocalCopyStorageType"),
-    [],
-  );
+  const [isCheckedDocuments, setIsCheckedDocuments] = useState(false);
+  const [isCheckedThirdParty, setIsCheckedThirdParty] = useState(false);
+  const [isCheckedTemporaryStorage, setIsCheckedTemporaryStorage] =
+    useState(false);
+  const [isCheckedThirdPartyStorage, setIsCheckedThirdPartyStorage] =
+    useState(false);
 
-  const [isCheckedDocuments, setIsCheckedDocuments] = useState(
-    () => selectedStorageType === "Documents",
-  );
-  const [isCheckedThirdParty, setIsCheckedThirdParty] = useState(
-    () => selectedStorageType === "ThirdPartyResource",
-  );
-  const [isCheckedTemporaryStorage, setIsCheckedTemporaryStorage] = useState(
-    () => selectedStorageType === "TemporaryStorage",
-  );
-  const [isCheckedThirdPartyStorage, setIsCheckedThirdPartyStorage] = useState(
-    () => selectedStorageType === "ThirdPartyStorage",
-  );
+  useDidMount(() => {
+    const storageType = getFromLocalStorage<string>("LocalCopyStorageType");
+
+    switch (storageType) {
+      case "Documents":
+        setIsCheckedDocuments(true);
+        break;
+      case "ThirdPartyResource":
+        setIsCheckedThirdParty(true);
+        break;
+      case "TemporaryStorage":
+        setIsCheckedTemporaryStorage(true);
+        break;
+      case "ThirdPartyStorage":
+        setIsCheckedThirdPartyStorage(true);
+        break;
+      default:
+        break;
+    }
+  });
 
   useEffect(() => {
     const onBackupProgress: TSocketListener<SocketEvents.BackupProgress> = (

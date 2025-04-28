@@ -126,7 +126,7 @@ const ThirdPartyModule = ({
   // const [isLoading, setIsLoading] = useState(false);
   const [isStartCopy, setIsStartCopy] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState<string | number>(() => {
-    folderRef.current = getFromLocalStorage("LocalCopyFolder");
+    folderRef.current = getFromLocalStorage("LocalCopyFolder") ?? "";
     const moduleType = getFromLocalStorage<string>("LocalCopyStorageType");
     return moduleType === ThirdPartyResource ? folderRef.current : "";
   });

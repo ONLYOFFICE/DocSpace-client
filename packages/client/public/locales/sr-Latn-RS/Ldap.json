@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "Napredna Podešavanja",
   "LdapAdvancedSettingsTooltip": "Odaberite korisničke atribute koje želite da budu sinhronizovani sa vašim LDAP serverom.",
   "LdapAttributeMapping": "Mapiranje Atributa",
-  "LdapAuthenticationTooltip": "Omogućite ovu opciju ako trenutni korisnik Windows-a nema prava na čitanje sa LDAP servera i unesite akreditive drugog korisnika sa pravima čitanja.",
+  "LdapAuthenticationTooltip": "Omogućite ovu opciju ako trenutni korisnik nema prava na čitanje sa LDAP servera i unesite akreditive drugog korisnika sa pravima čitanja.",
   "LdapAutoSyncToggle": "Automatsko sinhronizovanje",
   "LdapAutoSyncToggleDescription": "Sinhronizacija će omogućiti otpremanje svih podataka sa portala i ažuriranje novih podataka nakon promene podešavanja. Sinhronizujte svaki put kada imate nove podatke o korisnicima na portalu.",
   "LdapAvatar": "Profilna fotografija",

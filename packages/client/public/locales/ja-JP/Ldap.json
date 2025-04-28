@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "詳細設定",
   "LdapAdvancedSettingsTooltip": "LDAPサーバーと同期するユーザー属性を選択してください。",
   "LdapAttributeMapping": "属性のマッピング",
-  "LdapAuthenticationTooltip": "現在の Windows ユーザーに LDAP サーバー からの読み取り権限がない場合は、このオプションを有効にし、読み取り権限を持つ別のユーザーの資格情報を入力してください。",
+  "LdapAuthenticationTooltip": "現在のユーザーに LDAP サーバー からの読み取り権限がない場合は、このオプションを有効にし、読み取り権限を持つ別のユーザーの資格情報を入力してください。",
   "LdapAutoSyncToggle": "自動同期",
   "LdapAutoSyncToggleDescription": "同期により、ポータルからすべてのデータをアップロードし、設定変更後に新しいデータを更新することができます。ポータルのユーザーの新しいデータがあるたびに同期してください。",
   "LdapAvatar": "プロフィール写真",

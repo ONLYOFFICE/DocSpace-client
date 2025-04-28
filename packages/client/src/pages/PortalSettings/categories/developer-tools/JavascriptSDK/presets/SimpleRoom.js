@@ -37,6 +37,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import { useNavigate } from "react-router-dom";
+import { getPrimaryLink } from "@docspace/shared/api/rooms";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { RoomsType } from "@docspace/shared/enums";
 import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
@@ -172,7 +173,12 @@ const SimpleRoom = (props) => {
       rootPath: "/rooms/shared/",
     };
 
-    const links = await fetchExternalLinks(publicRoom.id);
+    let links = await fetchExternalLinks(publicRoom.id);
+
+    if (links.length === 0) {
+      const primaryLink = await getPrimaryLink(publicRoom.id);
+      links = [primaryLink];
+    }
 
     if (links.length > 1) {
       const linksOptions = links.map((link) => {

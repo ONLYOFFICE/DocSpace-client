@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "Configuración avanzada",
   "LdapAdvancedSettingsTooltip": "Elija los atributos de usuario que desea sincronizar con su servidor LDAP.",
   "LdapAttributeMapping": "Asignación de atributos",
-  "LdapAuthenticationTooltip": "Active esta opción si el usuario actual de Windows no tiene derechos de lectura del servidor LDAP e introduzca las credenciales de otro usuario con derechos de lectura.",
+  "LdapAuthenticationTooltip": "Active esta opción si el usuario actual no tiene derechos de lectura del servidor LDAP e introduzca las credenciales de otro usuario con derechos de lectura.",
   "LdapAutoSyncToggle": "Sincronización automática",
   "LdapAutoSyncToggleDescription": "La sincronización permitirá cargar todos los datos del portal y actualizar los nuevos datos después de cambiar la configuración. Sincronice cada vez que tenga nuevos datos de usuarios en el portal.",
   "LdapAvatar": "Foto de perfil",

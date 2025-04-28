@@ -47,7 +47,7 @@ interface PageProps {
 }
 
 async function Page({ searchParams }: PageProps) {
-  const { share, fillingSessionId, roomId, is_file, formId, type } =
+  const { share, fillingSessionId, roomId, is_file, formId, type, isSDK } =
     searchParams;
 
   log.info("Open completed form page");
@@ -85,9 +85,15 @@ async function Page({ searchParams }: PageProps) {
   const session = await getFillingSession(fillingSessionId, share);
 
   const isShareFile = is_file === "true";
+  const isSDKForm = isSDK === "true";
 
   return (
-    <CompletedForm session={session} share={share} isShareFile={isShareFile} />
+    <CompletedForm
+      session={session}
+      share={share}
+      isShareFile={isShareFile}
+      isSDK={isSDKForm}
+    />
   );
 }
 

@@ -166,6 +166,7 @@ const AutoBackup = ({
     account,
     backupScheduleResponse,
     backupStorageResponse,
+    backupProgress,
   });
 
   const { periodsObject, weekdaysLabelArray } = useDefaultOptions(t, language);

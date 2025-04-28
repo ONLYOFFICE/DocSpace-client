@@ -127,6 +127,7 @@ const DataBackup = ({
     account,
     backupScheduleResponse,
     backupStorageResponse,
+    backupProgress,
   });
 
   const {

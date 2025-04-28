@@ -34,9 +34,13 @@ import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage"
 import { saveToLocalStorageUtils } from "@docspace/shared/utils/saveToLocalStorage";
 
 import type { Nullable, Option, TTranslation } from "@docspace/shared/types";
-import type { TBackupSchedule } from "@docspace/shared/api/portal/types";
+import type {
+  TBackupProgress,
+  TBackupSchedule,
+} from "@docspace/shared/api/portal/types";
 import type { TStorageBackup } from "@docspace/shared/api/settings/types";
 import type { SettingsThirdPartyType } from "@docspace/shared/api/files/types";
+import type { TError } from "@docspace/shared/utils/axiosClient";
 
 import type { ErrorResponse } from "@/types";
 
@@ -48,12 +52,14 @@ interface BackupProps {
   account: SettingsThirdPartyType | undefined;
   backupScheduleResponse: TBackupSchedule | undefined;
   backupStorageResponse: TStorageBackup[];
+  backupProgress?: TBackupProgress | TError;
 }
 
 export const useBackup = ({
   account,
   backupScheduleResponse,
   backupStorageResponse,
+  backupProgress,
 }: BackupProps) => {
   const { backupStore } = useStores();
   const { isAdmin } = useAppState();
@@ -104,7 +110,13 @@ export const useBackup = ({
 
   const [errorInformation, setErrorInformationState] = useState<string>("");
 
-  const [downloadingProgress, setDownloadingProgress] = useState<number>(100);
+  const [downloadingProgress, setDownloadingProgress] = useState<number>(() => {
+    if (backupProgress && "progress" in backupProgress)
+      return backupProgress.progress;
+
+    return 100;
+  });
+
   const [temporaryLink, setTemporaryLink] = useState<string | null>(null);
 
   const setErrorInformation = useCallback((err: unknown, t: TTranslation) => {

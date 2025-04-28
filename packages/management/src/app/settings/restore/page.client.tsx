@@ -125,6 +125,7 @@ const Restore = ({
     account,
     backupScheduleResponse,
     backupStorageResponse,
+    backupProgress,
   });
 
   const {

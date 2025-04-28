@@ -27,7 +27,7 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import config from "PACKAGE_FILE";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import { Button } from "@docspace/shared/components/button";
 import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";

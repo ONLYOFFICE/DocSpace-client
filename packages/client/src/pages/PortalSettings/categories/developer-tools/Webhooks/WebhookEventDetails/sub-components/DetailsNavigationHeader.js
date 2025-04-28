@@ -31,7 +31,7 @@ import { retryWebhook } from "@docspace/shared/api/settings";
 
 import { toastr } from "@docspace/shared/components/toast";
 
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";

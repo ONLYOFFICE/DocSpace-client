@@ -26,7 +26,7 @@
 
 import { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 
 import { TfaStore } from "@docspace/shared/store/TfaStore";

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet } from "react-router";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";

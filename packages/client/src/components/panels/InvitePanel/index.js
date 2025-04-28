@@ -27,7 +27,7 @@
 import { useEffect, useState, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import {
   EmployeeType,

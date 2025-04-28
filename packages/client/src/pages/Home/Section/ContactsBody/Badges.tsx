@@ -27,7 +27,7 @@
 import { inject, observer } from "mobx-react";
 import styled, { css, useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 
 import Filter from "@docspace/shared/api/people/filter";
 import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";

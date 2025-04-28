@@ -28,7 +28,7 @@ import { useState, useEffect } from "react";
 import { isDesktop } from "react-device-detect";
 import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";

@@ -26,7 +26,7 @@
 
 import React from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";

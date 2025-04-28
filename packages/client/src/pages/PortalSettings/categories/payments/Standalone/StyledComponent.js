@@ -88,7 +88,7 @@ const StyledTitleComponent = styled.div`
     gap: 8px;
     align-items: baseline;
     .title {
-      line-height: 16px;
+      line-height: 20px;
       ${(props) => props.limitedWidth && "max-width: 376px"};
       span:first-child {
         ${(props) => props.isLicenseDateExpired && "margin-top: 5px"};

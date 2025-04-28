@@ -271,7 +271,7 @@ export default inject<
       setNewPath,
 
       // settingsStore
-      dataBackupUrl,
+      dataBackupUrl: dataBackupUrl ?? "",
       pageIsDisabled,
       currentDeviceType,
       currentColorScheme: colorScheme,

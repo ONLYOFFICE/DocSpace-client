@@ -121,3 +121,14 @@ export const getAutomaticBackupUrl = (settings?: TSettings): string => {
 
   return domain ?? "";
 };
+export const getDataBackupUrl = (settings?: TSettings): string => {
+  if (!settings) return "";
+
+  const domain = settings.externalResources?.helpcenter?.domain;
+
+  const entries = settings.externalResources?.helpcenter?.entries;
+
+  if (domain && entries) return `${domain}${entries.creatingbackup}`;
+
+  return domain ?? "";
+};

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { observer } from "mobx-react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
@@ -36,6 +36,8 @@ import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 import { openConnectWindowUtils } from "@docspace/shared/utils/openConnectWindow";
 import { deleteThirdParty as deleteThirdPartyApi } from "@docspace/shared/api/files";
 import ManualBackup from "@docspace/shared/pages/manual-backup";
+import { TariffState } from "@docspace/shared/enums";
+
 import type {
   SettingsThirdPartyType,
   TFilesSettings,
@@ -47,6 +49,7 @@ import type {
   TPortalTariff,
   TStorageRegion,
 } from "@docspace/shared/api/portal/types";
+import type { TError } from "@docspace/shared/utils/axiosClient";
 import type { TStorageBackup } from "@docspace/shared/api/settings/types";
 import type { ThirdPartyAccountType } from "@docspace/shared/types";
 import type { TPortals } from "@docspace/shared/api/management/types";
@@ -55,9 +58,8 @@ import useAppState from "@/hooks/useAppState";
 import { useBackup } from "@/hooks/useBackup";
 import { useStores } from "@/hooks/useStores";
 import { useFilesSelectorInput } from "@/hooks/useFilesSelectorInput";
-import { TariffState } from "@docspace/shared/enums";
+import { getDataBackupUrl } from "@/lib";
 import { useTreeFolders } from "@/hooks/useTreeFolders";
-import { TError } from "@docspace/shared/utils/axiosClient";
 
 interface DataBackupProps {
   account: SettingsThirdPartyType | undefined;
@@ -158,7 +160,7 @@ const DataBackup = ({
       ? (defaults.formSettings.region as string)
       : "";
 
-  const dataBackupUrl = `${settings?.helpLink ?? ""}/administration/docspace-settings.aspx#CreatingBackup_block`;
+  const dataBackupUrl = useMemo(() => getDataBackupUrl(settings), [settings]);
 
   const pageIsDisabled = portals.length === 1;
 

@@ -108,7 +108,7 @@ const TariffTitleContainer = ({
         <div className="title">
           <Text fontWeight={600} fontSize="13" as="span">
             <Trans
-              i18nKey="ActivateTariffDescr"
+              i18nKey="ActivateTariffDescrUsers"
               values={{
                 productName: t("Common:ProductName"),
                 organizationName: logoText,

@@ -774,6 +774,12 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  get workspaceFaqUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.workspacefaq
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.workspacefaq}`
+      : this.helpCenterDomain;
+  }
+
   get limitedDevToolsBlockHelpUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.limiteddevtools
       ? `${this.helpCenterDomain}${this.helpCenterEntries.limiteddevtools}`

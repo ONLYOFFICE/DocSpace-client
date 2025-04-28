@@ -223,6 +223,7 @@ export type THelpCenterEntries = {
   welcomepage: string;
   limiteddevtools: string;
   encryption: string;
+  workspacefaq: string;
 };
 
 export type TIntegrationsEntries = {

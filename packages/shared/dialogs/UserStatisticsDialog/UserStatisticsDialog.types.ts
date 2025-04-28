@@ -30,6 +30,7 @@ export type TUserStatisticsDialogProps = {
   onClose?: VoidFunction;
   statistics: TUserStatistics | null;
   onDownloadAndReport?: VoidFunction;
+  workspaceFaqUrl: string;
 };
 
 export type TUserStatistics = {

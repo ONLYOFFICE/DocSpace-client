@@ -26,10 +26,9 @@
 "use client";
 
 import { observer } from "mobx-react";
-import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback,  useMemo, useState } from "react";
 
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
@@ -94,7 +93,6 @@ const Restore = ({
 
   const { backupStore, spacesStore } = useStores();
   const { settings } = useAppState();
-  const router = useRouter();
   const {
     accounts,
     selectedThirdPartyAccount,
@@ -175,7 +173,9 @@ const Restore = ({
 
   const navigate = (path: string) => {
     if (window.ClientConfig?.proxy?.url)
-      router.push(combineUrl(window.ClientConfig?.proxy?.url, path));
+      window.location.replace(
+        combineUrl(window.ClientConfig?.proxy?.url, path),
+      );
   };
 
   const checkEnablePortalSettings = () => {
@@ -352,4 +352,3 @@ const Restore = ({
 };
 
 export default observer(Restore);
-

@@ -194,9 +194,7 @@ const SectionFilterContent = ({
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
 
-        if (quota) {
-          newFilter.quotaFilter = quota;
-        }
+        newFilter.quotaFilter = quota;
 
         if (subjectId) {
           newFilter.subjectId = subjectId;

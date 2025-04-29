@@ -33,7 +33,6 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
-import { ReactSVG } from "react-svg";
 import { Reducer, useEffect, useReducer } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -49,6 +48,7 @@ import { ContextMenuButton } from "@docspace/shared/components/context-menu-butt
 import { DeleteThirdPartyDialog } from "@docspace/shared/dialogs/delete-third-party";
 import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import type { ConnectedThirdPartyAccountType } from "@docspace/shared/types";
 
 import {
@@ -202,12 +202,8 @@ const DirectThirdPartyConnection = ({
     }
   };
 
-  const onSelectAccount = (
-    event: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const data = event.currentTarget.dataset;
-
-    const account = accounts.find((acc) => acc.key === data.thirdPartyKey);
+  const onSelectAccount = (key: string | number) => {
+    const account = accounts.find((acc) => acc.key === key);
 
     if (!account?.connected) {
       setSelectedThirdPartyAccount({
@@ -215,14 +211,10 @@ const DirectThirdPartyConnection = ({
         label: selectedThirdPartyAccount?.label,
       });
 
-      const thirdPartyKey = data.thirdPartyKey;
-
-      if (!thirdPartyKey) return;
-      window.open(
-        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[thirdPartyKey as keyof typeof ThirdPartyServicesUrlName]}`,
+      return window.open(
+        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[key as keyof typeof ThirdPartyServicesUrlName]}`,
         "_blank",
       );
-      return;
     }
 
     setSelectedThirdPartyAccount(account);
@@ -265,7 +257,7 @@ const DirectThirdPartyConnection = ({
     return (
       <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
         <DropDownItem
-          onClick={onSelectAccount}
+          onClick={() => onSelectAccount(item.key)}
           className={item.className}
           data-third-party-key={item.key}
           disabled={item.disabled}
@@ -275,9 +267,12 @@ const DirectThirdPartyConnection = ({
           </Text>
 
           {!item.disabled && !item.connected ? (
-            <ReactSVG
-              src={ExternalLinkReactSvgUrl}
+            <IconButton
               className="drop-down-item_icon"
+              size={16}
+              onClick={() => onSelectAccount(item.key)}
+              iconName={ExternalLinkReactSvgUrl}
+              isFill
             />
           ) : null}
         </DropDownItem>

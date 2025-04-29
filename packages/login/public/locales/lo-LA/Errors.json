@@ -16,5 +16,8 @@
   "SsoSettingsDisabled": "ການເຂົ້າສູ່ລະບົບແບບເອກະພົດຖືກປິດໃຊ້ງານ",
   "SsoSettingsEmptyToken": "ບໍ່ພົບໂທເຄັນການພິສູດຢືນຢັນຕົວຕົນ",
   "SsoSettingsNotValidToken": "ໂທເຄັນການພິສູດຢືນຢັນຕົວຕົນບໍ່ຖືກຕ້ອງ",
-  "SsoSettingsUserTerminated": "ຜູ້ໃຊ້ນີ້ຖືກປິດໃຊ້ງານ"
+  "SsoSettingsUserTerminated": "ຜູ້ໃຊ້ນີ້ຖືກປິດໃຊ້ງານ",
+  "OAuthApplicationDisabled": "ຄໍາຮ້ອງສະຫມັກນີ້ຖືກປິດງານແລ້ວ",
+  "OAuthApplicationEmpty": "ຄໍາຮ້ອງສະຫມັກບໍ່ພົບ",
+  "OAuthClientEmpty": "ບໍ່ພົບ ID ຂອງລູກຄ້າ"
 }

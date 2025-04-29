@@ -700,7 +700,7 @@
   "VirtualDataRoomDescription": "Izmantojiet VDR papildu failu drošībai un pārredzamībai, soli pa solim aizpildot un parakstot dokumentus. Iestatiet ūdenszīmes, automātiski indeksējiet un izsekojiet visu saturu, ierobežojiet lejupielādi un kopēšanu.",
   "WantToContinue": "Vai tiešām vēlaties turpināt?",
   "Warning": "Brīdinājums",
-  "WarningCopyToFormRoom": "Failu nevar kopēt šajā telpā. Mēģiniet kopēt {{ organizationName }} PDF veidlapu.",
+  "WarningCopyToFormRoom": "Failu nevar kopēt šajā telpā. Mēģiniet kopēt {{organizationName}} PDF veidlapu.",
   "Website": "Vietne",
   "WithoutIcon": "Bez ikonas",
   "WithSubfolders": "Ar apakšmapēm",

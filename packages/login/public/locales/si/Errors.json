@@ -15,5 +15,9 @@
   "SsoSettingsDisabled": "තනි පිවිසුම අබලයි",
   "SsoSettingsEmptyToken": "බලයදීමේ නිමිත්ත හමු නොවිණි",
   "SsoSettingsNotValidToken": "වැරදි බලයදීමේ නිමිත්තකි",
-  "SsoSettingsUserTerminated": "මෙම පරිශ්‍රීලකයා අබලයි"
+  "SsoSettingsUserTerminated": "මෙම පරිශ්‍රීලකයා අබලයි",
+  "LoginWithBruteForceCaptcha": "ඔබ රොබෝවෙක් නොවන බව තහවුරු කරන්න",
+  "OAuthApplicationDisabled": "This application is disabled",
+  "OAuthApplicationEmpty": "යෙදුම සොයා ගැනීමට නොහැකි විය",
+  "OAuthClientEmpty": "සේවාලාභී ID සොයා ගැනීමට නොහැකි විය"
 }

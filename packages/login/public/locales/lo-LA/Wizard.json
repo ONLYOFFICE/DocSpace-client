@@ -7,5 +7,7 @@
   "License": "ຍອມຮັບເງື່ອນໄຂຂອງ",
   "LicenseLink": "ຂໍ້ຕົກລົງການອະນຸຍາດ",
   "PlaceholderLicense": "ຟາຍໃບອະນຍາດຂອງທ່ານ",
-  "Timezone": "ເຂດເວລາ:"
+  "Timezone": "ເຂດເວລາ:",
+  "ErrorInstanceId": "ລະຫັດຕົວຢ່າງບໍ່ຖືກຕ້ອງ",
+  "WelcomeTitle": "ຕ້ອນຮັບສູ່ {{productName}} ຂອງທ່ານ!"
 }

@@ -714,5 +714,7 @@
   "FormDataCollectionDescription": "Thu thập các bản sao mẫu đã hoàn thành và dữ liệu từ chúng vào XLSX để phân tích các phản hồi trong phòng Điền Mẫu.",
   "ItemsSuccessfullyUploaded": "Các phần tử đã tải lên: {{count}}",
   "RoleBasedFilling": "Điền dựa trên vai trò",
-  "RoleBasedFillingDescription": "Điền vào mẫu gốc theo vai trò với những người tham gia khác trong VDR."
+  "RoleBasedFillingDescription": "Điền vào mẫu gốc theo vai trò với những người tham gia khác trong VDR.",
+  "RolePowerUserFormRoomDescription": "Người dùng có thể tải biểu mẫu lên phòng và có quyền truy cập đầy đủ vào các thư mục Đang hoàn thành và Đang xử lý.",
+  "RoleRoomAdminDescription": "Quản trị viên phòng có thể tạo và quản lý các phòng được chỉ định, mời người dùng mới và chỉ định vai trò quản trị viên phòng và các vai trò cấp dưới. Tất cả quản trị viên đều có quyền truy cập vào phần {{sectionName}}."
 }

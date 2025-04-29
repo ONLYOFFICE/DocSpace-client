@@ -700,7 +700,7 @@
   "VirtualDataRoomDescription": "VDR zapewnia zaawansowane zabezpieczenia i przejrzystość plików. Dodawaj znaki wodne, automatycznie indeksuj i śledź całą zawartość, a także ograniczaj pobierania i kopiowanie.",
   "WantToContinue": "Czy na pewno chcesz kontynuować?",
   "Warning": "Ostrzeżenie",
-  "WarningCopyToFormRoom": "Plik nie może zostać skopiowany do tego pokoju. Spróbuj skopiować formularz PDF {{ organizationName }}.",
+  "WarningCopyToFormRoom": "Plik nie może zostać skopiowany do tego pokoju. Spróbuj skopiować formularz PDF {{organizationName}}.",
   "Website": "Strona internetowa",
   "WithoutIcon": "Bez ikony",
   "WithSubfolders": "Z podkatalogami",

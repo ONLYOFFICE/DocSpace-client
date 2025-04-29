@@ -115,7 +115,7 @@ const ButtonContainer = (props: ButtonContainerProps) => {
       );
       setTenantStatus(TenantStatus.PortalRestore);
 
-      SocketHelper.emit(SocketCommands.RestoreBackup);
+      SocketHelper.emit(SocketCommands.RestoreBackup, { dump: isManagement() });
 
       navigate(
         "/preparation-portal",
@@ -157,7 +157,7 @@ const ButtonContainer = (props: ButtonContainerProps) => {
       {isBackupProgressVisible ? (
         <FloatingButton
           className="layout-progress-bar"
-          icon={FloatingButtonIcons.file}
+          icon={FloatingButtonIcons.backup}
           alert={false}
         />
       ) : null}

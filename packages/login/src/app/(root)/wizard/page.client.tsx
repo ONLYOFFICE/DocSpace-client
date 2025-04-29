@@ -28,6 +28,7 @@
 
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 
 import {
   convertLanguage,
@@ -39,7 +40,6 @@ import {
 } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 import { EmailSettings } from "@docspace/shared/utils";
@@ -489,6 +489,7 @@ function WizardForm(props: WizardFormProps) {
             placeholder={t("PlaceholderLicense")}
             onInput={onLicenseFileHandler}
             hasError={hasErrorLicense}
+            isDisabled={isCreated}
           />
         </FieldContainer>
       )}
@@ -579,7 +580,7 @@ function WizardForm(props: WizardFormProps) {
           color={
             hasErrorAgree
               ? theme.checkbox.errorColor
-              : theme.client.wizard.linkColor
+              : theme.currentColorScheme?.main.accent
           }
           fontSize="13px"
           target={LinkTarget.blank}

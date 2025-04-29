@@ -838,5 +838,6 @@
   "RestoreBackupResetInfoWarningText": "Tất cả mật khẩu hiện tại sẽ được đặt lại. Người dùng {{productName}} sẽ nhận được một email có liên kết khôi phục quyền truy cập.",
   "ClearBackupList": "Xóa tất cả bản sao lưu",
   "EmptyBackupList": "Chưa có bản sao lưu nào được tạo. Tạo một hoặc nhiều bản sao lưu để chúng xuất hiện trong danh sách này.",
-  "RecoveryFileNotSelected": "Lỗi khôi phục. Tập tin khôi phục không được chọn."
+  "RecoveryFileNotSelected": "Lỗi khôi phục. Tập tin khôi phục không được chọn.",
+  "SelectFileInGZFormat": "Chọn tập tin có định dạng GZ"
 }

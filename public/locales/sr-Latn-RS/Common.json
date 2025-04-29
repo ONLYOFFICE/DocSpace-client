@@ -839,5 +839,6 @@
   "RestoreBackupResetInfoWarningText": "Sve trenutne lozinke će biti resetovane. {{productName}} korisnici će dobiti email sa pristupom linku za obnovu.",
   "ClearBackupList": "Obriši sve rezervne kopije",
   "EmptyBackupList": "Još uvek nije kreirana nijedna rezervna kopija. Kreirajte jednu ili više rezervnih kopija da bi se pojavile na ovoj listi.",
-  "RecoveryFileNotSelected": "Oporavak greška. Datoteka za oporavak nije odabrana."
+  "RecoveryFileNotSelected": "Oporavak greška. Datoteka za oporavak nije odabrana.",
+  "SelectFileInGZFormat": "Izaberi datoteku u .GZ formatu"
 }

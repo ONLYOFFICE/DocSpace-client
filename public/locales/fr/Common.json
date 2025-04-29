@@ -839,5 +839,6 @@
   "RestoreBackupResetInfoWarningText": "Tous les mots de passe actuels seront réinitialisés. Les utilisateurs de {{productName}} recevront un e-mail contenant le lien de restauration de l'accès.",
   "ClearBackupList": "Supprimer toutes les sauvegardes",
   "EmptyBackupList": "Aucune sauvegarde n'a encore été créée. Créez une ou plusieurs sauvegardes pour qu'elles apparaissent dans cette liste.",
-  "RecoveryFileNotSelected": "Erreur de récupération. Fichier de récupération non sélectionné."
+  "RecoveryFileNotSelected": "Erreur de récupération. Fichier de récupération non sélectionné.",
+  "SelectFileInGZFormat": "Sélectionnez le fichier au format .GZ"
 }

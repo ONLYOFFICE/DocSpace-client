@@ -841,5 +841,6 @@
   "RestoreBackupResetInfoWarningText": "Kaikki nykyiset salasanat nollataan. {{productName}}-käyttäjät saavat sähköpostin, jossa on palautuslinkki.",
   "ClearBackupList": "Poista kaikki varmuuskopiot",
   "EmptyBackupList": "Ei varmuuskopioita. Luo yksi tai useampi varmuuskopio ja ne näkyvät tässä listassa.",
-  "RecoveryFileNotSelected": "Palautusvirhe. Palautustiedostoa ei ole valittu."
+  "RecoveryFileNotSelected": "Palautusvirhe. Palautustiedostoa ei ole valittu.",
+  "SelectFileInGZFormat": "Valitse tiedosto .GZ-muodossa"
 }

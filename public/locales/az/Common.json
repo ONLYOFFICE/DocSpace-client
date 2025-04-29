@@ -841,5 +841,6 @@
   "RestoreBackupResetInfoWarningText": "Bütün mövcud şifrələr sıfırlanacaq. {{productName}} istifadəçiləri girişi bərpa etmək üçün keçidi olan e-məktub alacaqlar.",
   "ClearBackupList": "Bütün ehtiyat nüsxələri silin",
   "EmptyBackupList": "Hələ heç bir ehtiyat nüsxəsi yaradılmayıb. Onların bu siyahıda görünməsi üçün bir və ya bir neçə ehtiyat nüsxəsi yaradın.",
-  "RecoveryFileNotSelected": "Bərpa xətası. Bərpa olunacaq fayl seçilməyib."
+  "RecoveryFileNotSelected": "Bərpa xətası. Bərpa olunacaq fayl seçilməyib.",
+  "SelectFileInGZFormat": ".GZ formatında qovluq seçin"
 }

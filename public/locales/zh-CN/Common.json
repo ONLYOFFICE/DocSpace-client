@@ -849,5 +849,6 @@
   "RestoreBackupResetInfoWarningText": "所有当前密码都将被重置。{{productName}}用户将收到一封包含访问恢复链接的电子邮件。",
   "ClearBackupList": "删除所有备份",
   "EmptyBackupList": "尚未创建任何备份。请创建一个或多个备份，使其显示在此列表中。",
-  "RecoveryFileNotSelected": "恢复错误。未选择恢复文件"
+  "RecoveryFileNotSelected": "恢复错误。未选择恢复文件",
+  "SelectFileInGZFormat": "选择 .GZ 格式的文件"
 }

@@ -841,5 +841,6 @@
   "RestoreBackupResetInfoWarningText": "Všechna stávající hesla budou resetována. Uživatelé {{productName}} obdrží e-mail s odkazem na obnovení přístupu.",
   "ClearBackupList": "Odstranit všechny zálohy",
   "EmptyBackupList": "Zatím nebyly vytvořeny žádné zálohy. Vytvořte jednu nebo více záloh, aby byly zobrazeny v seznamu.",
-  "RecoveryFileNotSelected": "Chyba při obnově. Soubor pro obnovení nebyl vybrán."
+  "RecoveryFileNotSelected": "Chyba při obnově. Soubor pro obnovení nebyl vybrán.",
+  "SelectFileInGZFormat": "Vyberte soubor ve formátu .GZ"
 }

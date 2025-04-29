@@ -839,5 +839,6 @@
   "RestoreBackupResetInfoWarningText": "현재 비밀번호가 모두 재설정됩니다. {{productName}} 사용자는 액세스 복원 링크가 포함된 이메일을 받게 됩니다.",
   "ClearBackupList": "모든 백업 삭제",
   "EmptyBackupList": "아직 백업이 생성되지 않았습니다. 이 목록에 표시될 하나 이상의 백업을 생성하세요.",
-  "RecoveryFileNotSelected": "복원 오류입니다. 복원 파일이 선택되지 않았습니다"
+  "RecoveryFileNotSelected": "복원 오류입니다. 복원 파일이 선택되지 않았습니다",
+  "SelectFileInGZFormat": ".GZ 형식의 파일을 선택해주세요"
 }

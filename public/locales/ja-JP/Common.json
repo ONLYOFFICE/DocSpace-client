@@ -849,5 +849,6 @@
   "RestoreBackupResetInfoWarningText": "現在のパスワードはすべてリセットされます。{{productName}}ユーザーには、アクセス回復リンクが記載されたメールが送信されます。",
   "ClearBackupList": "すべてのバックアップを削除",
   "EmptyBackupList": "バックアップはまだ作成されていません。バックアップを作成すると、このリストに表示されるようになります。",
-  "RecoveryFileNotSelected": "回復エラー。回復ファイルが選択されていません。"
+  "RecoveryFileNotSelected": "回復エラー。回復ファイルが選択されていません。",
+  "SelectFileInGZFormat": "「.GZ」形式ファイルを選択してください。"
 }

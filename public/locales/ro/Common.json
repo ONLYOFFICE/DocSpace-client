@@ -849,5 +849,6 @@
   "RestoreBackupResetInfoWarningText": "Toate parolele curente vor fi resetate. Utilizatorii spațiului {{productName}} vor primi prin email un mesaj cu link-ul pentru restaurarea accesului.",
   "ClearBackupList": "Șterge toate copiile de rezervă",
   "EmptyBackupList": "Nu există nicio copie de rezervă salvată. Creați una sau mai multe copii de rezervă pentru ca acestea să apară în lista.",
-  "RecoveryFileNotSelected": "Eroare la recuperarea. Fișierul de recuperare nu a fost selectat."
+  "RecoveryFileNotSelected": "Eroare la recuperarea. Fișierul de recuperare nu a fost selectat.",
+  "SelectFileInGZFormat": "Alegeți format de fișier .GZ"
 }

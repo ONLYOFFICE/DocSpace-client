@@ -849,5 +849,6 @@
   "RestoreBackupResetInfoWarningText": "Se restablecerán todas las contraseñas actuales. Los usuarios de {{productName}} recibirán un correo electrónico con el enlace para restablecer el acceso.",
   "ClearBackupList": "Eliminar todas las copias de seguridad",
   "EmptyBackupList": "No hay ningunas copias de seguridad creadas todavía. Cree por lo menos una copia para que se muestre en esta lista.",
-  "RecoveryFileNotSelected": "Error de recuperación. No se ha seleccionado el archivo de recuperación."
+  "RecoveryFileNotSelected": "Error de recuperación. No se ha seleccionado el archivo de recuperación.",
+  "SelectFileInGZFormat": "Seleccione el archivo en formato .GZ"
 }

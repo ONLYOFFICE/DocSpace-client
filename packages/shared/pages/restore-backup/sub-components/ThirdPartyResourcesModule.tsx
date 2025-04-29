@@ -90,7 +90,7 @@ const ThirdPartyResources = ({
         withoutInitPath
         buttonSize={buttonSize}
         onSelectFile={onSelectFile}
-        descriptionText={t("SelectFileInGZFormat")}
+        descriptionText={t("Common:SelectFileInGZFormat")}
         filterParam={FilesSelectorFilterTypes.BackupOnly}
         openConnectWindow={openConnectWindow}
         connectDialogVisible={connectDialogVisible}

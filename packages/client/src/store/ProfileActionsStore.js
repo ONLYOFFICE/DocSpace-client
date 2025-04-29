@@ -270,6 +270,8 @@ class ProfileActionsStore {
 
     const protocol = window?.location?.protocol;
 
+    console.log({ portals });
+
     const managementItems = portals.map((portal) => {
       return {
         key: portal.tenantId,

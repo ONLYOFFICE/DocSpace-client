@@ -246,7 +246,6 @@
   "SelectFileDescriptionGoogle": "选择 Google Workspace 备份文件，开始数据导入。您可以选择多个文件。数据上传和分析完成后，系统会自动启动下一步。",
   "SelectFileDescriptionNextcloud": "选择 Nextcloud 备份文件，开始数据导入。您只能选择一个文件。数据上传和分析完成后，系统会自动启动下一步。",
   "SelectFileDescriptionWorkspace": "选择 {{organizationName}} 工作区备份文件，开始数据导入。数据上传和分析完成后，系统会自动启动下一步。",
-  "SelectFileInGZFormat": "选择 .GZ 格式的文件",
   "SelectUsers": "选择用户",
   "SelectUsersDescriptionGoogle": "从列表中选中要导入 {{organizationName}}{{productName}}的用户。来自 Google 工作区 的用户将不带名字/姓氏导入，而是使用他们的电子邮件名称。导入后可以更改用户的名称。{{organizationName}}{{productName}}中已存在的用户会以绿色突出显示，默认情况下不会选中。",
   "SelectUsersDescriptionNextcloud": "从列表中选中要导入 {{organizationName}}{{productName}}的用户。只能选择有电子邮件的用户。 {{organizationName}}{{productName}}中已存在的用户会以绿色突出显示，默认情况下不会选中。",

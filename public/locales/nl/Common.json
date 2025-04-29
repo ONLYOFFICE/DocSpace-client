@@ -841,5 +841,6 @@
   "RestoreBackupResetInfoWarningText": "Alle huidige wachtwoorden worden gereset. {{productName}} gebruikers ontvangen een e-mail met de link voor het herstellen van de toegang.",
   "ClearBackupList": "Verwijder alle back-ups",
   "EmptyBackupList": "Er zijn nog geen back-ups gemaakt. Maak een of meer back-ups om ze in de lijst te laten zien.",
-  "RecoveryFileNotSelected": "Herstelfout. Herstelbestand niet geselecteerd."
+  "RecoveryFileNotSelected": "Herstelfout. Herstelbestand niet geselecteerd.",
+  "SelectFileInGZFormat": "Selecteer het bestand in .GZ formaat"
 }

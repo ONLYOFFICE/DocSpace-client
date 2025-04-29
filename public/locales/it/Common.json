@@ -849,5 +849,6 @@
   "RestoreBackupResetInfoWarningText": "Tutte le password attuali verranno reimpostate. Gli utenti di {{productName}} riceveranno un'e-mail con il collegamento per il ripristino dell'accesso.",
   "ClearBackupList": "Elimina tutti i backup",
   "EmptyBackupList": "Nessun backup creato. Crea almeno una copia di backup per visualizzarla in questo elenco.",
-  "RecoveryFileNotSelected": "Errore di ripristino. File di ripristino non selezionato."
+  "RecoveryFileNotSelected": "Errore di ripristino. File di ripristino non selezionato.",
+  "SelectFileInGZFormat": "Selezionare il file in formato .GZ"
 }

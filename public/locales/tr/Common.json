@@ -841,5 +841,6 @@
   "RestoreBackupResetInfoWarningText": "Mevcut tüm şifreler sıfırlanacaktır. {{productName}} kullanıcıları erişimi geri yükleme bağlantısını içeren bir e-posta alacaktır.",
   "ClearBackupList": "Tüm yedekleri sil",
   "EmptyBackupList": "Henüz hiçbir yedekleme yapılmadı. Listede yer alması için bir veya daha fazla yedekleme yapın.",
-  "RecoveryFileNotSelected": "Kurtarma hatası. Kurtarma dosyası seçilmedi."
+  "RecoveryFileNotSelected": "Kurtarma hatası. Kurtarma dosyası seçilmedi.",
+  "SelectFileInGZFormat": ".GZ formatındaki dosyayı seçin"
 }

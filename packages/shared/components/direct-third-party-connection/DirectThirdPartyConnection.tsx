@@ -110,7 +110,7 @@ const DirectThirdPartyConnection = ({
     >
   >((prevState, newState) => ({ ...prevState, ...newState }), initialState);
 
-  const { t } = useTranslation(["Translations", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const onSetSettings = async () => {
     try {

@@ -841,5 +841,6 @@
   "RestoreBackupResetInfoWarningText": "Todas as senhas atuais serão redefinidas. Os usuários do {{productName}} receberão um email com o link de restauração do acesso.",
   "ClearBackupList": "Eliminar todas as cópias de segurança",
   "EmptyBackupList": "Ainda não foi criada nenhuma cópia de segurança. Crie uma ou mais cópias de segurança para que elas apareçam na lista.",
-  "RecoveryFileNotSelected": "Erro na recuperação. O ficheiro de Recuperação não foi selecionado."
+  "RecoveryFileNotSelected": "Erro na recuperação. O ficheiro de Recuperação não foi selecionado.",
+  "SelectFileInGZFormat": "Selecione o ficheiro no formato .GZ"
 }

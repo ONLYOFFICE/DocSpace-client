@@ -841,5 +841,6 @@
   "RestoreBackupResetInfoWarningText": "Visas pašreizējās paroles tiks atiestatītas. {{productName}} lietotāji saņems e-pasta ziņojumu ar piekļuves atjaunošanas saiti.",
   "ClearBackupList": "Dzēst visus dublējumus",
   "EmptyBackupList": "Vēl nav izveidotas rezerves kopijas. Izveidojiet vismaz vienu rezerves kopiju, lai tā parādītos šajā sarakstā.",
-  "RecoveryFileNotSelected": "Atkopšanas kļūda. Atkopšanas fails nav atlasīts."
+  "RecoveryFileNotSelected": "Atkopšanas kļūda. Atkopšanas fails nav atlasīts.",
+  "SelectFileInGZFormat": "Izvēlieties failu .GZ formātā"
 }

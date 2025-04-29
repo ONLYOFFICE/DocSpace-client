@@ -849,5 +849,6 @@
   "RestoreBackupResetInfoWarningText": "All current passwords will be reset. {{productName}} users will get an email with the access restoration link.",
   "ClearBackupList": "Delete all backups",
   "EmptyBackupList": "No backups have been created yet. Create one or more backups for them to appear in this list.",
-  "RecoveryFileNotSelected": "Recovery error. Recovery file not selected."
+  "RecoveryFileNotSelected": "Recovery error. Recovery file not selected.",
+  "SelectFileInGZFormat": "Select the file in .GZ format"
 }

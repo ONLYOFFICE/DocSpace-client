@@ -246,7 +246,6 @@
   "SelectFileDescriptionGoogle": "Izaberite Google Workspace datoteku za rezervnu kopiju da biste započeli uvoz podataka. Možete izabrati više datoteka. Nakon što se završe otpremanje i analiza podataka, sledeći korak će se automatski pokrenuti.",
   "SelectFileDescriptionNextcloud": "Izaberite Nextcloud datoteku za rezervnu kopiju kako biste započeli uvoz podataka. Možete izabrati samo jednu datoteku. Nakon što se završi otpremanje i analiza podataka, sledeći korak će se automatski pokrenuti.",
   "SelectFileDescriptionWorkspace": "Izaberite {{organizationName}} Workspace datoteku za rezervnu kopiju kako biste započeli uvoz podataka. Nakon što se završi otpremanje i analiza podataka, sledeći korak će se automatski pokrenuti.",
-  "SelectFileInGZFormat": "Izaberi datoteku u .GZ formatu",
   "SelectUsers": "Izaberi korisnike",
   "SelectUsersDescriptionGoogle": "Proverite korisnike sa liste koje želite da uvezete u {{organizationName}} {{productName}}. Korisnici iz Google Workspace će biti uvezeni bez imena i prezimena, umesto toga koristiće se njihovo email ime. Imena korisnika mogu biti promenjena nakon uvoza. Korisnici koji već postoje u {{organizationName}} {{productName}}-u su označeni zelenom bojom i podrazumevano nisu označeni.",
   "SelectUsersDescriptionNextcloud": "Proverite korisnike sa liste koje želite da uvezete u {{organizationName}} {{productName}}. Samo korisnici sa email-ovima će biti odabrani. Korisnici koji već postoje u {{organizationName}} {{productName}}-u su označeni zelenom bojom i podrazumevano nisu označeni.",

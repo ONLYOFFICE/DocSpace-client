@@ -403,11 +403,9 @@ const PureHome = (props) => {
           </Section.SectionHeader>
         ) : null}
 
-        {isFlowsPage ? null : (
-          <Section.SectionSubmenu>
-            <SectionSubmenuContent />
-          </Section.SectionSubmenu>
-        )}
+        <Section.SectionSubmenu>
+          <SectionSubmenuContent />
+        </Section.SectionSubmenu>
 
         <Section.SectionWarning>
           <SectionWarningContent />

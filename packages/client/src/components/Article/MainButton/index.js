@@ -191,7 +191,6 @@ const ArticleMainButtonContent = (props) => {
 
   const isAccountsPage = location.pathname.includes("/accounts");
   const isSettingsPage = location.pathname.includes("settings");
-  const isFlowsPage = location.pathname.includes("flows");
 
   const inputFilesElement = React.useRef(null);
   const inputPDFFilesElement = React.useRef(null);

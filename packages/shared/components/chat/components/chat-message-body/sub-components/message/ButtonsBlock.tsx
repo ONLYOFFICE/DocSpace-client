@@ -1,5 +1,6 @@
 import React from "react";
 import copy from "copy-to-clipboard";
+import { useTranslation } from "react-i18next";
 
 import FileReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
@@ -13,6 +14,7 @@ type ButtonsBlockProps = {
 };
 
 const ButtonsBlock = ({ message }: ButtonsBlockProps) => {
+  const { t } = useTranslation(["Common"]);
   const onCopy = () => {
     copy(message);
   };
@@ -24,8 +26,16 @@ const ButtonsBlock = ({ message }: ButtonsBlockProps) => {
         size={16}
         isClickable
         onClick={onCopy}
+        tooltipId="copyTooltip"
+        tooltipContent={t("Common:CopyMessage")}
       />
-      <IconButton iconName={FileReactSvgUrl} size={16} isClickable />
+      <IconButton
+        iconName={FileReactSvgUrl}
+        size={16}
+        isClickable
+        tooltipId="fileTooltip"
+        tooltipContent={t("Common:SaveMessage")}
+      />
     </div>
   );
 };

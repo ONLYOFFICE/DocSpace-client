@@ -423,13 +423,8 @@ const StyledNewEmptyScreen = styled.section.attrs(injectDefaultTheme)`
     margin-top: 16px;
   }
 
-  .empty-button {
-    width: 36px;
-    height: 36px;
-  }
-
-  .empty-button-label {
-    cursor: pointer;
+  .empty-button p {
+    padding-inline-start: 16px;
   }
 `;
 

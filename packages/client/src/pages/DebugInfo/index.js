@@ -38,7 +38,7 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const StyledBodyContent = styled.div`
   display: contents;
-
+  user-select: text;
   table {
     border-spacing: 0;
     border-collapse: collapse;
@@ -78,7 +78,7 @@ const StyledBodyContent = styled.div`
 
 const StyledFooterContent = styled.div`
   display: contents;
-
+  user-select: text;
   .markdown-wrapper {
     box-sizing: border-box;
     overflow: auto;

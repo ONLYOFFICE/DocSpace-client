@@ -211,7 +211,9 @@ const FilterBlock = ({
     ) => {
       let value: TGroupItem[] = cloneDeep(filterValues);
 
-      if (isSelected && key !== "0") {
+      const isFilterOwner = group === FilterGroups.roomFilterOwner;
+
+      if (isSelected && !isFilterOwner) {
         if (isMultiSelect) {
           const groupItemKey = value.find((item) => item.group === group)!.key;
 
@@ -284,7 +286,7 @@ const FilterBlock = ({
             ) {
               value[idx].key.push(key);
             } else {
-              value[idx].key = isSelected && key === "0" ? "1" : key;
+              value[idx].key = isSelected && isFilterOwner ? "1" : key;
               if (label) {
                 value[idx].label = label;
               }

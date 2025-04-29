@@ -87,10 +87,10 @@ const EmptyScreenFormRoom = ({
           className="empty-button"
           iconName={Plus16SvgUrl}
           title={buttonLabel}
+          label={buttonLabel}
+          size="36px"
+          noSelect
         />
-        <Text className="empty-button-label" noSelect>
-          {buttonLabel}
-        </Text>
       </div>
     </StyledNewEmptyScreen>
   );

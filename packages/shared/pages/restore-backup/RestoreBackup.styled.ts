@@ -341,6 +341,7 @@ export const StyledComboBoxItem = styled.div<StyledComboBoxItemProps>`
   .drop-down-item_icon {
     display: flex;
     align-items: center;
+    align-self: center;
 
     div {
       display: flex;

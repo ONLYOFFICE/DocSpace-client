@@ -27,20 +27,16 @@
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
 import React, { useMemo, useState } from "react";
-import { ReactSVG } from "react-svg";
 
 import { Text } from "@docspace/shared/components/text";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
-import {
-  ComboBox,
-  ComboBoxSize,
-  TOption,
-} from "@docspace/shared/components/combobox";
+import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import {
   getOptions,
   type ReturnOptions,
 } from "@docspace/shared/utils/getThirdPartyStoragesOptions";
+import { IconButton } from "@docspace/shared/components/icon-button";
 
 import type {
   SelectedStorageType,
@@ -108,28 +104,15 @@ const ThirdPartyStoragesModule = ({
     thirdPartyOptions.selectedStorageId,
   );
 
-  const onSelect = (
-    event:
-      | TOption
-      | React.MouseEvent<HTMLElement>
-      | React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    if (!("currentTarget" in event)) return;
-
-    const data = event.currentTarget.dataset;
-
+  const onSelect = (key: string) => {
     const { storagesInfo } = thirdPartyOptions;
 
-    const storageId = data.thirdPartyKey;
-
-    if (!storageId) return;
-
-    const storage = storagesInfo[storageId];
-    const selectedStorage = storagesInfo[storageId];
+    const storage = storagesInfo[key];
+    const selectedStorage = storagesInfo[key];
 
     if (!selectedStorage.isSet) {
       return window.open(
-        `/portal-settings/integration/third-party-services?service=${data.thirdPartyKey}`,
+        `/portal-settings/integration/third-party-services?service=${key}`,
         "_blank",
       );
     }
@@ -154,7 +137,7 @@ const ThirdPartyStoragesModule = ({
     return (
       <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
         <DropDownItem
-          onClick={onSelect}
+          onClick={() => onSelect(item.key)}
           data-third-party-key={item.key}
           disabled={item.disabled}
         >
@@ -163,9 +146,12 @@ const ThirdPartyStoragesModule = ({
           </Text>
 
           {!item.disabled && !item.connected ? (
-            <ReactSVG
-              src={ExternalLinkReactSvgUrl}
+            <IconButton
+              isFill
+              size={16}
               className="drop-down-item_icon"
+              onClick={() => onSelect(item.key)}
+              iconName={ExternalLinkReactSvgUrl}
             />
           ) : null}
         </DropDownItem>
@@ -179,7 +165,6 @@ const ThirdPartyStoragesModule = ({
         options={[]}
         advancedOptions={advancedOptions}
         selectedOption={{ key: 0, label: selectedStorageTitle }}
-        onSelect={onSelect}
         isDisabled={!thirdPartyStorage}
         size={ComboBoxSize.content}
         manualWidth="400px"

@@ -154,7 +154,7 @@ const BackupListModalDialog = ({
       },
     ];
 
-    startRestore(backupId, storageType, storageParams, isNotify)
+    startRestore(backupId, storageType, storageParams, isNotify, isManagement())
       ?.then(() => setTenantStatus(TenantStatus.PortalRestore))
       .then(() => {
         SocketHelper.emit(SocketCommands.RestoreBackup, {

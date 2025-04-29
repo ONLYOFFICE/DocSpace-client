@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 
 import config from "PACKAGE_FILE";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { Tabs } from "@docspace/shared/components/tabs";

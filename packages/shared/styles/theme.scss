@@ -848,6 +848,14 @@
   --navigation-background: #{$black};
   --navigation-box-shadow: 0px 8px 16px 0px #{$box-shadow-dark-color};
   --navigation-icon-stroke: #{$gray-dark-strong};
+  --navigation-guid-animation-small-border: 1px solid
+    var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-border: 2px solid
+    var(--accent-main, #{$light-second-main});
+  --navigation-guid-animation-icon-color: var(
+    --accent-main,
+    #{$light-second-main}
+  );
   --navigation-header-icon-fill: #{$dark-gray-dark};
   --navigation-lifetime-enabled-fill: none;
   --navigation-lifetime-enabled-stroke: #{$main-red};
@@ -2046,12 +2054,16 @@
   --download-dialog-bg: #{$gray-light};
   --download-dialog-text-color: #{$gray};
   --download-dialog-warning-color: #{$light-error-status};
+
+  --modal-dialog-border-color: #{$gray-light-mid};
 }
 
 .dark {
   --download-dialog-bg: #{$dark-gray-light};
   --download-dialog-text-color: #{$gray-dark};
   --download-dialog-warning-color: #{$dark-error-status};
+
+  --modal-dialog-border-color: #{$gray-dark-strong};
 }
 
 .light {

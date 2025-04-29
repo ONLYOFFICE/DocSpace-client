@@ -179,7 +179,7 @@ async function Page({ searchParams }: RootPageProps) {
     }
   }
 
-  const deepLinkSettings = await getDeepLinkSettings();
+  const deepLinkSettings = isSDK ? null : await getDeepLinkSettings();
 
   if (data.error?.status === "not-found" && error) {
     data.error.message = error;
@@ -192,6 +192,11 @@ async function Page({ searchParams }: RootPageProps) {
   if (url && !url.endsWith("/")) url += "/";
 
   const docApiUrl = `${url}web-apps/apps/api/documents/api.js${urlQuery}`;
+
+  if (isSDK) {
+    delete data.config?.editorConfig?.embedded?.embedUrl;
+    delete data.config?.editorConfig?.embedded?.shareUrl;
+  }
 
   if (urlQuery) {
     if (data.config?.editorUrl) {

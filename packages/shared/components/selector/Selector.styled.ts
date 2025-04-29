@@ -463,15 +463,15 @@ const StyledBreadCrumbs = styled.div.attrs(injectDefaultTheme)<{
 `;
 
 const StyledItemText = styled(Text).attrs(injectDefaultTheme)<{
-  isCurrent: boolean;
-  isLoading?: boolean;
+  $isCurrent: boolean;
+  $isLoading?: boolean;
 }>`
   ${(props) =>
-    !props.isCurrent &&
+    !props.$isCurrent &&
     css`
       color: ${props.theme.selector.breadCrumbs.prevItemColor};
 
-      ${!props.isLoading && `cursor: pointer`};
+      ${!props.$isLoading && `cursor: pointer`};
     `}
 `;
 

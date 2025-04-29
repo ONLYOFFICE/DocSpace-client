@@ -78,6 +78,7 @@ const ControlButtons = ({
   buttonRef,
   contextButtonAnimation,
   guidAnimationVisible,
+  setGuidAnimationVisible,
   isContextButtonVisible,
 
   // Chat props
@@ -151,6 +152,7 @@ const ControlButtons = ({
         onContextOptionsClick={onContextOptionsClick}
         contextButtonAnimation={contextButtonAnimation}
         guidAnimationVisible={guidAnimationVisible}
+        setGuidAnimationVisible={setGuidAnimationVisible}
       />
     );
   };

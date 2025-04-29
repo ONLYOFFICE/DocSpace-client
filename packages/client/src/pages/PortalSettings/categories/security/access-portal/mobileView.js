@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { Trans } from "react-i18next";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -89,6 +89,19 @@ const MobileView = (props) => {
           />
         }
         url="/portal-settings/security/access-portal/access-dev-tools"
+        onClickLink={onClickLink}
+      />
+      <MobileCategoryWrapper
+        title={t("InvitationSettings")}
+        subtitle={
+          <Trans
+            i18nKey="InvitationSettingsMobile"
+            ns="Settings"
+            t={t}
+            values={{ productName: t("Common:ProductName") }}
+          />
+        }
+        url="/portal-settings/security/access-portal/invitation-settings"
         onClickLink={onClickLink}
       />
       <MobileCategoryWrapper

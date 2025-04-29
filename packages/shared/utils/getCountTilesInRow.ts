@@ -49,8 +49,8 @@ export const getCountTilesInRow = (
       if (paddingValues.length >= 4) {
         containerWidth =
           (elem.clientWidth || 0) -
-          parseInt(paddingValues[1], 10) -
-          parseInt(paddingValues[3], 10);
+          (parseInt(paddingValues[1], 10) || 0) -
+          (parseInt(paddingValues[3], 10) || 0);
       }
     }
   }

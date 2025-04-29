@@ -1,4 +1,4 @@
-import type { To } from "react-router-dom";
+import type { To } from "react-router";
 
 import type { Nullable } from "../../types";
 import type { ContextMenuModel } from "../context-menu";

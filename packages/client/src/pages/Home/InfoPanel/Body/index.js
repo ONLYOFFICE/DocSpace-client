@@ -27,7 +27,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 
 import { RoomsType } from "@docspace/shared/enums";
 import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";

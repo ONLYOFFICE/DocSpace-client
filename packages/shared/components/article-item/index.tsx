@@ -27,7 +27,7 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 import classNames from "classnames";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { isMobile } from "react-device-detect";
 
 import { Text } from "../text";

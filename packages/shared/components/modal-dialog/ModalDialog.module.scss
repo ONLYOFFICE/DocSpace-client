@@ -63,6 +63,10 @@
   color: var(--modal-dialog-text-color);
   padding: 0 0 -16px;
 
+  &.withBorder {
+    border-inline-start: 1px solid var(--modal-dialog-border-color);
+  }
+
   &.displayTypeModal {
     padding: 0;
     height: auto;

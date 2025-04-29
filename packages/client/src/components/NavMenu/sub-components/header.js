@@ -28,7 +28,7 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Link as LinkWithoutRedirect, useLocation } from "react-router-dom";
+import { Link as LinkWithoutRedirect, useLocation } from "react-router";
 import {
   isDesktop,
   NoUserSelect,

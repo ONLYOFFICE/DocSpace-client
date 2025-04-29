@@ -25,12 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { UserStore } from "@docspace/shared/store/UserStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
 import { TUser } from "@docspace/shared/api/people/types";
 import { Badge } from "@docspace/shared/components/badge";
 import Filter from "@docspace/shared/api/people/filter";
@@ -64,6 +66,7 @@ type ContactsTabsProps = {
   isVisitor: TUser["isVisitor"];
   isCollaborator: TUser["isCollaborator"];
   isRoomAdmin: TUser["isRoomAdmin"];
+  showGuestsTab: boolean;
 };
 
 const ContactsTabs = ({
@@ -83,12 +86,14 @@ const ContactsTabs = ({
   guestsTabVisited,
 
   contactsTab,
+  showGuestsTab,
 }: ContactsTabsProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const contactsView = getContactsView(location);
+  const view = getContactsView(location);
+  const contactsView = !showGuestsTab && view === "guests" ? "people" : view;
 
   const onPeople = () => {
     setUsersSelection([]);
@@ -147,7 +152,7 @@ const ContactsTabs = ({
     },
   ];
 
-  if (!isVisitor && !isCollaborator) {
+  if (!isVisitor && !isCollaborator && showGuestsTab) {
     items.splice(2, 0, {
       id: "guests",
       name: t("Common:Guests"),
@@ -177,6 +182,7 @@ export default inject(
     peopleStore: PeopleStore;
     clientLoadingStore: ClientLoadingStore;
     userStore: UserStore;
+    settingsStore: SettingsStore;
   }) => {
     const { showTabsLoader, setIsSectionBodyLoading } = clientLoadingStore;
     const { usersStore, groupsStore } = peopleStore;

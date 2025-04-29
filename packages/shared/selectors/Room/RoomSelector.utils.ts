@@ -41,6 +41,11 @@ export const convertToItems = (folders: TRoom[]) => {
       foldersCount,
       rootFolderType,
       security,
+
+      denyDownload,
+      indexing,
+      lifetime,
+      watermark,
     } = folder;
 
     const icon = logo.medium;
@@ -66,6 +71,12 @@ export const convertToItems = (folders: TRoom[]) => {
       cover,
       isTemplate,
       logo,
+
+      title,
+      denyDownload,
+      indexing,
+      lifetime,
+      watermark,
     };
   });
 

@@ -26,7 +26,7 @@
 
 import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 
 import { withTranslation } from "react-i18next";
 
@@ -137,8 +137,6 @@ const SectionFilterContent = ({
   const isContactsGuestsPage = contactsTab === "guests";
   const isFlowsPage = location.pathname.includes("flows");
 
-  const [selectedFilterValues, setSelectedFilterValues] = React.useState(null);
-
   const {
     onContactsFilter,
     onContactsSearch,
@@ -197,9 +195,7 @@ const SectionFilterContent = ({
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
 
-        if (quota) {
-          newFilter.quotaFilter = quota;
-        }
+        newFilter.quotaFilter = quota;
 
         if (subjectId) {
           newFilter.subjectId = subjectId;
@@ -665,47 +661,7 @@ const SectionFilterContent = ({
       }
     }
 
-    // return filterValues;
-    const currentFilterValues = [];
-
-    if (!selectedFilterValues) {
-      currentFilterValues.push(...filterValues);
-      setSelectedFilterValues(filterValues.map((f) => ({ ...f })));
-    } else {
-      const items = selectedFilterValues.map((v) => {
-        const item = filterValues.find((f) => f.group === v.group);
-
-        if (item) {
-          if (item.isMultiSelect) {
-            let isEqual = true;
-
-            item.key.forEach((k) => {
-              if (!v.key.includes(k)) {
-                isEqual = false;
-              }
-            });
-
-            if (isEqual) return item;
-
-            return false;
-          }
-          if (item.key === v.key) return item;
-          return false;
-        }
-        return false;
-      });
-
-      const newItems = filterValues.filter(
-        (v) => !items.find((i) => i.group === v.group),
-      );
-
-      items.push(...newItems);
-      currentFilterValues.push(...items.filter((i) => i));
-
-      setSelectedFilterValues(items.filter((i) => i));
-    }
-
-    return currentFilterValues;
+    return filterValues;
   }, [
     filter.authorType,
     filter.roomId,
@@ -1532,7 +1488,6 @@ export default inject(
       user,
       userId: user?.id,
 
-      selectedItem: filter.selectedItem,
       filter,
       roomsFilter,
       viewAs,

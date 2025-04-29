@@ -114,7 +114,6 @@ const Article = ({
   downloaddesktopUrl,
   officeforandroidUrl,
   officeforiosUrl,
-  ...rest
 }: ArticleProps) => {
   const [articleHeaderContent, setArticleHeaderContent] =
     React.useState<null | React.JSX.Element>(null);
@@ -237,7 +236,6 @@ const Article = ({
         data-show-text={showText ? "true" : "false"}
         data-open={articleOpen ? "true" : "false"}
         data-with-main-button={withMainButton ? "true" : "false"}
-        {...rest}
         className={styles.article}
         data-testid="article"
       >

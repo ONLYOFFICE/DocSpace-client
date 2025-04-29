@@ -87,6 +87,7 @@ const Navigation = ({
   addButtonRef,
   contextButtonAnimation,
   guidAnimationVisible,
+  setGuidAnimationVisible,
   isContextButtonVisible,
 
   withChat,
@@ -335,6 +336,7 @@ const Navigation = ({
               isMobile={currentDeviceType !== DeviceType.desktop}
               contextButtonAnimation={contextButtonAnimation}
               guidAnimationVisible={guidAnimationVisible}
+              setGuidAnimationVisible={setGuidAnimationVisible}
               isContextButtonVisible={isContextButtonVisible}
               withChat={withChat}
               chatOpen={chatOpen}

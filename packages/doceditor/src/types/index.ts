@@ -150,6 +150,14 @@ export type TEditorConfigCustomization = {
 
 export type TEditorConfigMode = "edit" | "view";
 
+export type TEditorConfigEmbedded = {
+  fullscreenUrl: string;
+  saveUrl: string;
+  toolbarDocked: string;
+  embedUrl?: string;
+  shareUrl?: string;
+};
+
 export type TEditorConfig = {
   callbackUrl: string;
   canCoAuthoring: boolean;
@@ -172,6 +180,7 @@ export type TEditorConfig = {
   canUseHistory: boolean;
   createUrl: string;
   customization: TEditorConfigCustomization;
+  embedded: TEditorConfigEmbedded;
   lang: string;
   mergeFolderUrl?: unknown;
   mode: TEditorConfigMode;

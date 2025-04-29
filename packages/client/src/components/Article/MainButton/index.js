@@ -50,7 +50,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import {
   Events,
   DeviceType,
@@ -718,25 +718,17 @@ const ArticleMainButtonContent = (props) => {
     setMainButtonVisible(mainButtonVisible);
   }, [mainButtonVisible]);
 
-  let mainButtonText = t("Common:Actions");
+  const mainButtonText =
+    isRoomAdmin && isAccountsPage ? t("Common:Invite") : t("Common:Actions");
 
   let isDisabled = false;
 
-  if (isFrame) {
-    isDisabled = disableActionButton && !security?.Create;
-  } else if (isSettingsPage) {
+  if (isSettingsPage) {
     isDisabled = isSettingsPage;
   } else if (isAccountsPage) {
-    isDisabled = !contactsCanCreate;
-    if (isRoomAdmin) mainButtonText = t("Common:Invite");
-  } else if (isFlowsPage) {
-    isDisabled = true;
-    mainButtonText = t("Common:Actions");
-  } else if (isRoomsFolder) {
-    isDisabled = !security?.Create;
-    mainButtonText = t("Common:NewRoom");
+    isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
   } else {
-    isDisabled = !security?.Create;
+    isDisabled = (isFrame && disableActionButton) || !security?.Create;
   }
 
   if (showArticleLoader)

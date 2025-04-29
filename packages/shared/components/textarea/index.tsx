@@ -194,6 +194,7 @@ const Textarea = ({
             {numerationValue}
           </pre>
         ) : null}
+        {/*  @ts-expect-error: Passing pointer events causes a React warning - "Unknown event handler". TextareaAutosize types are outdated */}
         <TextareaAutosize
           id={id}
           className={classNames(styles.textarea, {
@@ -220,8 +221,6 @@ const Textarea = ({
           dir="auto"
           data-dir={isRTL ? "rtl" : undefined}
           data-testid="textarea"
-          onPointerEnterCapture={() => {}}
-          onPointerLeaveCapture={() => {}}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
         />

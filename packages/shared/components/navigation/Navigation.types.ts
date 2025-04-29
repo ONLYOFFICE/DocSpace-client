@@ -51,6 +51,7 @@ export type TContextButtonProps = {
     setAnimationClasses: (classes: string[]) => void,
   ) => () => void;
   guidAnimationVisible?: boolean;
+  setGuidAnimationVisible?: (visible: boolean) => void;
 };
 
 export type TPlusButtonProps = {

@@ -31,9 +31,16 @@ import { TColorScheme } from "../../../themes";
 import { StyledIcon } from "../sub-components/StyledIcon";
 import { IconButtonColorTheme } from "../ColorTheme.types";
 
-const StyledIconTheme = styled(StyledIcon)<
-  IconButtonColorTheme & { $currentColorScheme?: TColorScheme }
->`
+const scProps: (keyof IconButtonColorTheme)[] = [
+  "shared",
+  "locked",
+  "isFavorite",
+  "isEditing",
+];
+
+const StyledIconTheme = styled(StyledIcon).withConfig({
+  shouldForwardProp: (prop) => !scProps.includes(prop),
+})<IconButtonColorTheme & { $currentColorScheme?: TColorScheme }>`
   ${commonIconsStyles}
   svg {
     path {

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet } from "react-router";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
@@ -169,6 +169,9 @@ const PureHome = (props) => {
     chatFiles,
     vectorizedFiles,
     removeActiveItem,
+    allowInvitingGuests,
+    checkGuests,
+    hasGuests,
   } = props;
 
   // console.log(t("ComingSoon"))
@@ -179,9 +182,14 @@ const PureHome = (props) => {
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
-  const isFlowsPage = location.pathname.includes("flows");
+  const view = getContactsView(location);
+  if (allowInvitingGuests === false && view === "guests") checkGuests();
+  const contactsView = allowInvitingGuests
+    ? view
+    : typeof hasGuests === "boolean" && view === "guests" && !hasGuests
+      ? "people"
+      : view;
 
-  const contactsView = getContactsView(location);
   const isContactsPage = !!contactsView;
   const isContactsEmptyView =
     contactsView === "groups" ? isEmptyGroups : isUsersEmptyView;
@@ -554,6 +562,9 @@ export const Component = inject(
       enablePlugins,
       getSettings,
       showGuestReleaseTip,
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
     } = settingsStore;
 
     const {
@@ -698,6 +709,9 @@ export const Component = inject(
       chatFiles: filesStore.filesList,
       vectorizedFiles: flowStore.vectorizedFiles,
       removeActiveItem,
+      allowInvitingGuests,
+      checkGuests,
+      hasGuests,
     };
   },
 )(observer(Home));

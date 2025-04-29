@@ -95,7 +95,6 @@ const GroupsItemTitle = ({
               fontSize="9px"
               fontWeight={800}
               noHover
-              lineHeight="13px"
             />
             <Tooltip anchorSelect={`div[id='ldap-badge-info-panel'] div`}>
               {t("PeopleTranslations:LDAPGroupTooltip")}

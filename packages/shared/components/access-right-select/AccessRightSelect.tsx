@@ -108,7 +108,7 @@ export const AccessRightSelectPure = ({
             {item.icon && typeof item.icon === "string" ? (
               <StyledItemIcon
                 src={item.icon}
-                isShortenIcon={type === "onlyIcon"}
+                $isShortenIcon={type === "onlyIcon"}
               />
             ) : null}
             <StyledItemContent>

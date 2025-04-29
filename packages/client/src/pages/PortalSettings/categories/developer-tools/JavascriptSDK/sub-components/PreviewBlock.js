@@ -73,6 +73,8 @@ export const PreviewBlock = ({
     },
   ];
 
+  const [selectedItemId, setSelectedItemId] = useState(dataTabs[0].id);
+
   const onResize = () => {
     const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
     if (isEnoughWidthForPreview !== showPreview)
@@ -90,9 +92,12 @@ export const PreviewBlock = ({
     <Preview>
       <Tabs
         type={TabsTypes.Secondary}
-        onSelect={loadCurrentFrame}
+        onSelect={(e) => {
+          setSelectedItemId(e.id);
+          loadCurrentFrame(e);
+        }}
         items={dataTabs}
-        isDisabled={isDisabled}
+        selectedItemId={selectedItemId}
       />
     </Preview>
   ) : (

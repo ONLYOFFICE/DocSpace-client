@@ -850,5 +850,8 @@
   "ClearBackupList": "Удалить все резервные копии",
   "EmptyBackupList": "Еще не было создано ни одной резервной копии. Создайте хотя бы одну резервную копию, чтобы она появилась в этом списке.",
   "RecoveryFileNotSelected": "Ошибка восстановления. Файл восстановления не выбран.",
-  "SelectFileInGZFormat": "Выбрать файл в формате .GZ"
+  "SelectFileInGZFormat": "Выбрать файл в формате .GZ",
+  "DisconnectCloudTitle": "Отключить облако",
+  "ThirdPartyDisconnectPrompt": "Вы уверены, что хотите удалить {{service}}? Это не повлияет на ваш аккаунт {{account}}.",
+  "SuccessDeleteThirdParty": "Сторонний ресурс {{service}} отключен"
 }

@@ -842,5 +842,8 @@
   "ClearBackupList": "Tüm yedekleri sil",
   "EmptyBackupList": "Henüz hiçbir yedekleme yapılmadı. Listede yer alması için bir veya daha fazla yedekleme yapın.",
   "RecoveryFileNotSelected": "Kurtarma hatası. Kurtarma dosyası seçilmedi.",
-  "SelectFileInGZFormat": ".GZ formatındaki dosyayı seçin"
+  "SelectFileInGZFormat": ".GZ formatındaki dosyayı seçin",
+  "DisconnectCloudTitle": "Bulut bağlantısını kes",
+  "ThirdPartyDisconnectPrompt": "{{service}} hizmetini kaldırmak istediğinizden emin misiniz? Bu işlem {{account}} hesabınızı hiçbir şekilde etkilemeyecektir.",
+  "SuccessDeleteThirdParty": "Üçüncü taraf {{service}} silindi"
 }

@@ -842,5 +842,8 @@
   "ClearBackupList": "Odstrániť všetky zálohované údaje",
   "EmptyBackupList": "Zatiaľ neboli vytvorené žiadne zálohy. Vytvorte jednu alebo viac záloh, aby sa v tomto zozname zobrazili.",
   "RecoveryFileNotSelected": "Vyskytla sa chyba. Nie je vybratý zálohový súbor.",
-  "SelectFileInGZFormat": "Vyberte súbor vo formáte .GZ"
+  "SelectFileInGZFormat": "Vyberte súbor vo formáte .GZ",
+  "DisconnectCloudTitle": "Odpojiť Cloud",
+  "ThirdPartyDisconnectPrompt": "Ste si istí, že chcete odstrániť {{service}}? Toto nijako neovplyvní váš účet {{account}}.",
+  "SuccessDeleteThirdParty": "Služba {{service}} tretej strany bola odstránená"
 }

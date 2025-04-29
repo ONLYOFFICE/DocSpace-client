@@ -838,5 +838,8 @@
   "ClearBackupList": "احذف جميع النسخ الاحتياطية",
   "EmptyBackupList": "لم يتم إنشاء نسخ احتياطية حتى الآن. قم بإنشاء نسخة احتياطية واحدة أو أكثر لكي تظهر في هذه القائمة.",
   "RecoveryFileNotSelected": "خطأ في الاسترداد. لم يتم تحديد ملف الاسترداد.",
-  "SelectFileInGZFormat": "حدد الملف بتنسيق ملف مضغوط"
+  "SelectFileInGZFormat": "حدد الملف بتنسيق ملف مضغوط",
+  "DisconnectCloudTitle": "فك ربط التخزين السحابي",
+  "ThirdPartyDisconnectPrompt": "هل أنت متأكد أنك تريد إزالة {{service}}؟ هذا لن يؤثر على حساب {{account}} بأي شكل.",
+  "SuccessDeleteThirdParty": "تم حذف {{service}} الجهة الخارجية"
 }

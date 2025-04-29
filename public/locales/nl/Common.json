@@ -842,5 +842,8 @@
   "ClearBackupList": "Verwijder alle back-ups",
   "EmptyBackupList": "Er zijn nog geen back-ups gemaakt. Maak een of meer back-ups om ze in de lijst te laten zien.",
   "RecoveryFileNotSelected": "Herstelfout. Herstelbestand niet geselecteerd.",
-  "SelectFileInGZFormat": "Selecteer het bestand in .GZ formaat"
+  "SelectFileInGZFormat": "Selecteer het bestand in .GZ formaat",
+  "DisconnectCloudTitle": "Verbreek de verbinding met de cloud",
+  "ThirdPartyDisconnectPrompt": "Weet u zeker dat u {{service}} wilt verwijderen? Dit heeft geen invloed op uw {{account}}-account.",
+  "SuccessDeleteThirdParty": "Externe partij {{service}} is verwijderd"
 }

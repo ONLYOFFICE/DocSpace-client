@@ -850,5 +850,8 @@
   "ClearBackupList": "Alle Datensicherungen löschen",
   "EmptyBackupList": "Keine Sicherungskopien wurden noch erstellt. Erstellen Sie eine oder mehrere Sicherungskopien, damit sie in dieser Liste erscheint.",
   "RecoveryFileNotSelected": "Fehler bei der Wiederherstellung. Datei zur Wiederherstellung nicht ausgewählt.",
-  "SelectFileInGZFormat": "Die Datei im GZ-Format auswählen"
+  "SelectFileInGZFormat": "Die Datei im GZ-Format auswählen",
+  "DisconnectCloudTitle": "Cloud-Verbindung trennen",
+  "ThirdPartyDisconnectPrompt": "Möchten Sie {{service}} wirklich entfernen? Dies hat keinerlei Auswirkungen auf Ihr {{account}}-Konto.",
+  "SuccessDeleteThirdParty": "{{service}} wurde deaktiviert"
 }

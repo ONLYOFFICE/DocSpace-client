@@ -842,5 +842,8 @@
   "ClearBackupList": "Eliminar todas as cópias de segurança",
   "EmptyBackupList": "Ainda não foi criada nenhuma cópia de segurança. Crie uma ou mais cópias de segurança para que elas apareçam na lista.",
   "RecoveryFileNotSelected": "Erro na recuperação. O ficheiro de Recuperação não foi selecionado.",
-  "SelectFileInGZFormat": "Selecione o ficheiro no formato .GZ"
+  "SelectFileInGZFormat": "Selecione o ficheiro no formato .GZ",
+  "DisconnectCloudTitle": "Desassociar núvem",
+  "ThirdPartyDisconnectPrompt": "Tem certeza que deseja remover o {{service}}? Isso não afetará sua conta {{account}} de forma alguma.",
+  "SuccessDeleteThirdParty": "O {{service}} de terceiros é eliminado"
 }

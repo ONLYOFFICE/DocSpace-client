@@ -842,5 +842,8 @@
   "ClearBackupList": "Изтриване на всички архиви",
   "EmptyBackupList": "Все още не са създадени резервни копия. Създайте едно или повече резервни копия, които да се показват в този списък.",
   "RecoveryFileNotSelected": "Грешка при възстановяване. Файлът за възстановяване не е избран.",
-  "SelectFileInGZFormat": "Изберете файла във формат .GZ"
+  "SelectFileInGZFormat": "Изберете файла във формат .GZ",
+  "DisconnectCloudTitle": "Прекъснете връзката с облака",
+  "ThirdPartyDisconnectPrompt": "Сигурни ли сте, че искате да премахнете {{service}}? Това няма да повлияе по никакъв начин на вашия акаунт {{account}}.",
+  "SuccessDeleteThirdParty": "{{service}} от трето лице е изтрит/а"
 }

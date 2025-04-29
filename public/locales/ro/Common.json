@@ -850,5 +850,8 @@
   "ClearBackupList": "Șterge toate copiile de rezervă",
   "EmptyBackupList": "Nu există nicio copie de rezervă salvată. Creați una sau mai multe copii de rezervă pentru ca acestea să apară în lista.",
   "RecoveryFileNotSelected": "Eroare la recuperarea. Fișierul de recuperare nu a fost selectat.",
-  "SelectFileInGZFormat": "Alegeți format de fișier .GZ"
+  "SelectFileInGZFormat": "Alegeți format de fișier .GZ",
+  "DisconnectCloudTitle": "Deconectare de la cloud",
+  "ThirdPartyDisconnectPrompt": "Sigur doriţi să eliminaţi {{service}}? Acest lucru nu va afecta în niciun fel contul dvs {{account}}.",
+  "SuccessDeleteThirdParty": "Serviciul de parte terță {{service}} este eliminat"
 }

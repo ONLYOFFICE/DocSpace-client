@@ -850,5 +850,8 @@
   "ClearBackupList": "Delete all backups",
   "EmptyBackupList": "No backups have been created yet. Create one or more backups for them to appear in this list.",
   "RecoveryFileNotSelected": "Recovery error. Recovery file not selected.",
-  "SelectFileInGZFormat": "Select the file in .GZ format"
+  "SelectFileInGZFormat": "Select the file in .GZ format",
+  "DisconnectCloudTitle": "Disconnect cloud",
+  "ThirdPartyDisconnectPrompt": "Are you sure you want to remove the {{service}}? This will not affect your {{account}} account in any way.",
+  "SuccessDeleteThirdParty": "Third-party {{service}} is deleted"
 }

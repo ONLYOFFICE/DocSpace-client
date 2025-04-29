@@ -842,5 +842,8 @@
   "ClearBackupList": "Izbriši vse varnostne kopije",
   "EmptyBackupList": "Varnostno kopiranje še ni bilo ustvarjeno. Ustvarite eno ali več varnostnih kopiranj, če želite, da se prikažejo na seznamu.",
   "RecoveryFileNotSelected": "Napaka pri obnovitvi. Datoteka za obnovitev ni izbrana.",
-  "SelectFileInGZFormat": "Izberite datoteko v .GZ formatu"
+  "SelectFileInGZFormat": "Izberite datoteko v .GZ formatu",
+  "DisconnectCloudTitle": "Prekini povezavo z oblakom",
+  "ThirdPartyDisconnectPrompt": "Ali ste prepričani, da želite odstraniti {{service}}? To ne bo vplivalo na vaš račun {{account}}.",
+  "SuccessDeleteThirdParty": "Tretja oseba {{service}} je izbrisana"
 }

@@ -850,5 +850,8 @@
   "ClearBackupList": "Ջնջել բոլոր պահուստները",
   "EmptyBackupList": "Պահուստային պատճեններ դեռ չեն ստեղծվել:Ստեղծեք մեկ կամ մի քանի կրկնօրինակներ, որպեսզի դրանք հայտնվեն այս ցանկում։",
   "RecoveryFileNotSelected": "Վերականգնման սխալ. Վերականգնման ֆայլը ընտրված չէ:",
-  "SelectFileInGZFormat": "Ընտրեք ֆայլը .GZ ձևաչափով"
+  "SelectFileInGZFormat": "Ընտրեք ֆայլը .GZ ձևաչափով",
+  "DisconnectCloudTitle": "Ապակապակցել ամպը",
+  "ThirdPartyDisconnectPrompt": " Իսկապե՞ս ուզում եք հեռացնել {{service}}-ը: Սա որևէ կերպ չի ազդի ձեր {{account}} հաշվի վրա:",
+  "SuccessDeleteThirdParty": "Երրորդ կողմի {{service}}-ը ջնջված է"
 }

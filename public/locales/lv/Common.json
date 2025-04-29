@@ -842,5 +842,8 @@
   "ClearBackupList": "Dzēst visus dublējumus",
   "EmptyBackupList": "Vēl nav izveidotas rezerves kopijas. Izveidojiet vismaz vienu rezerves kopiju, lai tā parādītos šajā sarakstā.",
   "RecoveryFileNotSelected": "Atkopšanas kļūda. Atkopšanas fails nav atlasīts.",
-  "SelectFileInGZFormat": "Izvēlieties failu .GZ formātā"
+  "SelectFileInGZFormat": "Izvēlieties failu .GZ formātā",
+  "DisconnectCloudTitle": "Atvienot mākoni",
+  "ThirdPartyDisconnectPrompt": "Vai tiešām vēlaties noņemt {{service}}? Tas nekādā veidā neietekmēs jūsu {{account}} kontu.",
+  "SuccessDeleteThirdParty": "Trešās puses {{service}} ir izdzēsts"
 }

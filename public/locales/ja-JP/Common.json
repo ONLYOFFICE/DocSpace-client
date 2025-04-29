@@ -850,5 +850,8 @@
   "ClearBackupList": "すべてのバックアップを削除",
   "EmptyBackupList": "バックアップはまだ作成されていません。バックアップを作成すると、このリストに表示されるようになります。",
   "RecoveryFileNotSelected": "回復エラー。回復ファイルが選択されていません。",
-  "SelectFileInGZFormat": "「.GZ」形式ファイルを選択してください。"
+  "SelectFileInGZFormat": "「.GZ」形式ファイルを選択してください。",
+  "DisconnectCloudTitle": "クラウドの接続解除",
+  "ThirdPartyDisconnectPrompt": "{{service}} を削除してもよろしいですか？これは {{account}} アカウントには影響しません。",
+  "SuccessDeleteThirdParty": "第三方の{{service}}が削除されました。"
 }

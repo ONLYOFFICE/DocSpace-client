@@ -842,5 +842,8 @@
   "ClearBackupList": "Bütün ehtiyat nüsxələri silin",
   "EmptyBackupList": "Hələ heç bir ehtiyat nüsxəsi yaradılmayıb. Onların bu siyahıda görünməsi üçün bir və ya bir neçə ehtiyat nüsxəsi yaradın.",
   "RecoveryFileNotSelected": "Bərpa xətası. Bərpa olunacaq fayl seçilməyib.",
-  "SelectFileInGZFormat": ".GZ formatında qovluq seçin"
+  "SelectFileInGZFormat": ".GZ formatında qovluq seçin",
+  "DisconnectCloudTitle": "Buludla bağlantını dayandırın",
+  "ThirdPartyDisconnectPrompt": "{{service}} xidmətini silmək istədiyinizə əminsiniz? Bu, {{account}} hesabınıza heç bir şəkildə təsir etməyəcək.",
+  "SuccessDeleteThirdParty": "Üçüncü tərəf {{service}} silinir "
 }

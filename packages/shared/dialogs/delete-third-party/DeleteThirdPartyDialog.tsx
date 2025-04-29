@@ -53,11 +53,7 @@ const DeleteThirdPartyDialog = ({
   setDeleteThirdPartyDialogVisible,
   setConnectedThirdPartyAccount,
 }: DeleteThirdPartyDialogProps) => {
-  const { t, ready } = useTranslation([
-    "DeleteThirdPartyDialog",
-    "Common",
-    "Translations",
-  ]);
+  const { t, ready } = useTranslation(["Common"]);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -103,7 +99,7 @@ const DeleteThirdPartyDialog = ({
           );
         } else {
           toastr.success(
-            t("SuccessDeleteThirdParty", { service: removeItem.title }),
+            t("Common:SuccessDeleteThirdParty", { service: removeItem.title }),
           );
         }
       })
@@ -122,9 +118,11 @@ const DeleteThirdPartyDialog = ({
       isLoading={!ready}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("DisconnectCloudTitle")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("Common:DisconnectCloudTitle")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
-        {t("ThirdPartyDisconnectPrompt", {
+        {t("Common:ThirdPartyDisconnectPrompt", {
           service: removeItem.title,
           account: removeItem.provider_key,
         })}

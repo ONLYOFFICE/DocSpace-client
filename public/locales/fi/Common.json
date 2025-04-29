@@ -842,5 +842,8 @@
   "ClearBackupList": "Poista kaikki varmuuskopiot",
   "EmptyBackupList": "Ei varmuuskopioita. Luo yksi tai useampi varmuuskopio ja ne näkyvät tässä listassa.",
   "RecoveryFileNotSelected": "Palautusvirhe. Palautustiedostoa ei ole valittu.",
-  "SelectFileInGZFormat": "Valitse tiedosto .GZ-muodossa"
+  "SelectFileInGZFormat": "Valitse tiedosto .GZ-muodossa",
+  "DisconnectCloudTitle": "Katkaise yhteys pilveen",
+  "ThirdPartyDisconnectPrompt": "Haluatko varmasti poistaa {{service}}? Tämä ei vaikuta {{account}}-tililläsi millään tavalla.",
+  "SuccessDeleteThirdParty": "Kolmannen osapuolen {{service}} poistetaan"
 }

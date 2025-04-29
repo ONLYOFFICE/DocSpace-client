@@ -609,5 +609,8 @@
   "ClearBackupList": "සියළුම උපස්ථ මකන්න",
   "EmptyBackupList": "තවමත් උපස්ථයක් සාදා නැත. ඒවා මෙහි දිස්වීමට උපස්ථයක් හෝ කිහිපයක් සාදන්න.",
   "RecoveryFileNotSelected": "ප්‍රතිසාධන දෝෂයකි. ප්‍රතිසාධන ගොනුව තෝරා නැත.",
-  "SelectFileInGZFormat": ".GZ ආකෘතියෙන් ගොනුව තෝරන්න"
+  "SelectFileInGZFormat": ".GZ ආකෘතියෙන් ගොනුව තෝරන්න",
+  "DisconnectCloudTitle": "මේඝය විසන්ධි කරන්න",
+  "ThirdPartyDisconnectPrompt": "Ali ste prepričani, da želite odstraniti {{service}}? To ne bo vplivalo na vaš račun {{account}}.",
+  "SuccessDeleteThirdParty": "{{service}} තෙවන පාර්ශ්වය මැකිණි"
 }

@@ -850,5 +850,8 @@
   "ClearBackupList": "Elimina tutti i backup",
   "EmptyBackupList": "Nessun backup creato. Crea almeno una copia di backup per visualizzarla in questo elenco.",
   "RecoveryFileNotSelected": "Errore di ripristino. File di ripristino non selezionato.",
-  "SelectFileInGZFormat": "Selezionare il file in formato .GZ"
+  "SelectFileInGZFormat": "Selezionare il file in formato .GZ",
+  "DisconnectCloudTitle": "Scollegare il cloud",
+  "ThirdPartyDisconnectPrompt": "Sei sicuro di voler rimuovere {{service}}? Questo non influirà in alcun modo sul tuo account {{account}}.",
+  "SuccessDeleteThirdParty": "Il servizio di terze parti {{service}} è stato cancellato"
 }

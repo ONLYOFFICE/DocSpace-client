@@ -850,5 +850,8 @@
   "ClearBackupList": "Excluir todos os backups",
   "EmptyBackupList": "Nenhum backup foi criado ainda, crie um ou mais backups para eles aparecerem nesta lista.",
   "RecoveryFileNotSelected": "Erro de recuperação. Arquivo de recuperação não selecionado.",
-  "SelectFileInGZFormat": "Selecione o arquivo no formato .GZ"
+  "SelectFileInGZFormat": "Selecione o arquivo no formato .GZ",
+  "DisconnectCloudTitle": "Desconecte a nuvem",
+  "ThirdPartyDisconnectPrompt": "Tem certeza de que deseja remover o {{service}}? Isso não afetará sua conta {{account}} de forma alguma.",
+  "SuccessDeleteThirdParty": "O {{service}} de terceiros é excluído"
 }

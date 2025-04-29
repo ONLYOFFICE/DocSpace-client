@@ -850,5 +850,8 @@
   "ClearBackupList": "删除所有备份",
   "EmptyBackupList": "尚未创建任何备份。请创建一个或多个备份，使其显示在此列表中。",
   "RecoveryFileNotSelected": "恢复错误。未选择恢复文件",
-  "SelectFileInGZFormat": "选择 .GZ 格式的文件"
+  "SelectFileInGZFormat": "选择 .GZ 格式的文件",
+  "DisconnectCloudTitle": "断开云端的连接",
+  "ThirdPartyDisconnectPrompt": "您确定要删除{{service}}吗？这不会对您的{{account}}账户造成任何影响。",
+  "SuccessDeleteThirdParty": "第三方{{service}}已删除"
 }

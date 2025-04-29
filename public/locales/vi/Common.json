@@ -839,5 +839,8 @@
   "ClearBackupList": "Xóa tất cả bản sao lưu",
   "EmptyBackupList": "Chưa có bản sao lưu nào được tạo. Tạo một hoặc nhiều bản sao lưu để chúng xuất hiện trong danh sách này.",
   "RecoveryFileNotSelected": "Lỗi khôi phục. Tập tin khôi phục không được chọn.",
-  "SelectFileInGZFormat": "Chọn tập tin có định dạng GZ"
+  "SelectFileInGZFormat": "Chọn tập tin có định dạng GZ",
+  "DisconnectCloudTitle": "Ngắt kết nối đám mây",
+  "ThirdPartyDisconnectPrompt": "Bạn có chắc chắn muốn xóa {{service}} không? Điều này sẽ không ảnh hưởng đến tài khoản {{account}} của bạn.",
+  "SuccessDeleteThirdParty": "{{service}} bên thứ ba đã bị xóa"
 }

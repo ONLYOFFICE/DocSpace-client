@@ -832,5 +832,8 @@
   "ClearBackupList": "Видалити всі резервні копії",
   "EmptyBackupList": "Резервних копій поки не існує. Створіть одну або декілька резервних копій, які з'являтимуться у цьому списку.",
   "RecoveryFileNotSelected": "Помилка відновлення. Файл відновлення не вибрано.",
-  "SelectFileInGZFormat": "Виберіть файл у форматі.GZ"
+  "SelectFileInGZFormat": "Виберіть файл у форматі.GZ",
+  "DisconnectCloudTitle": "Від’єднати хмару",
+  "ThirdPartyDisconnectPrompt": "Ви впевнені, що хочете видалити {{service}}? Це ніяк не вплине на ваш обліковий запис {{account}}.",
+  "SuccessDeleteThirdParty": "Сторонню службу {{service}} видалено"
 }

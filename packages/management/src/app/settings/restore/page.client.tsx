@@ -28,7 +28,8 @@
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { useCallback,  useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+import isNil from "lodash/isNil";
 
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
@@ -172,10 +173,11 @@ const Restore = ({
   }, [features]);
 
   const navigate = (path: string) => {
-    if (window.ClientConfig?.proxy?.url)
-      window.location.replace(
-        combineUrl(window.ClientConfig?.proxy?.url, path),
-      );
+    const url = window.ClientConfig?.proxy?.url;
+
+    if (isNil(url)) return;
+
+    window.location.replace(combineUrl(url, path));
   };
 
   const checkEnablePortalSettings = () => {

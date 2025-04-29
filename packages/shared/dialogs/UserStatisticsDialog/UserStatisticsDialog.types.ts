@@ -28,9 +28,9 @@ export type TUserStatisticsDialogProps = {
   isVisible: boolean;
   isLoading: boolean;
   onClose?: VoidFunction;
-  statistics: TUserStatistics | null;
+  statistics: TUserStatistics;
   onDownloadAndReport?: VoidFunction;
-  workspaceFaqUrl: string;
+  docspaceFaqUrl: string;
 };
 
 export type TUserStatistics = {
@@ -41,5 +41,5 @@ export type TUserStatistics = {
 };
 
 export type TUserStatisticsInfoProps = {
-  statistics: TUserStatistics | null;
+  statistics: TUserStatistics;
 };

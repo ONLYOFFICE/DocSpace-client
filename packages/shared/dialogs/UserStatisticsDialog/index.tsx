@@ -76,7 +76,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 import {
   ModalDialog,
   ModalDialogType,
@@ -85,7 +84,6 @@ import {
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
-import "@docspace/client/global";
 import { TUserStatisticsDialogProps } from "./UserStatisticsDialog.types";
 import styles from "./UserStatisticsDialog.module.scss";
 import { UserStatisticsInfo } from "./sub-components/UserStatisticsInfo";
@@ -96,9 +94,9 @@ const UserStatisticsDialog = ({
   isVisible,
   statistics,
   onDownloadAndReport,
-  workspaceFaqUrl,
+  docspaceFaqUrl,
 }: TUserStatisticsDialogProps) => {
-  const { t } = useTranslation(["Payments"]);
+  const { t } = useTranslation(["Common"]);
 
   return (
     <ModalDialog
@@ -123,18 +121,16 @@ const UserStatisticsDialog = ({
 
           <Text lineHeight="20px">{t("EditLimitReachedInfo")}</Text>
 
-          {workspaceFaqUrl ? (
-            <Link
-              className={styles.modalLink}
-              isHovered
-              fontSize="15"
-              target={LinkTarget.blank}
-              href={workspaceFaqUrl}
-              fontWeight={600}
-            >
-              {t("LearnHowItIsCounted")}
-            </Link>
-          ) : null}
+          <Link
+            className={styles.modalLink}
+            isHovered
+            fontSize="15"
+            target={LinkTarget.blank}
+            href={docspaceFaqUrl}
+            fontWeight={600}
+          >
+            {t("LearnHowItIsCounted")}
+          </Link>
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -150,10 +146,4 @@ const UserStatisticsDialog = ({
   );
 };
 
-export default inject<TStore>(({ settingsStore }) => {
-  const { workspaceFaqUrl } = settingsStore;
-
-  return {
-    workspaceFaqUrl,
-  };
-})(observer(UserStatisticsDialog));
+export default UserStatisticsDialog;

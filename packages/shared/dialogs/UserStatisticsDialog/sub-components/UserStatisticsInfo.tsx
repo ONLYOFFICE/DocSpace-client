@@ -33,19 +33,17 @@ import styles from "../UserStatisticsDialog.module.scss";
 export const UserStatisticsInfo = ({
   statistics,
 }: TUserStatisticsInfoProps) => {
-  const { t } = useTranslation(["Payments", "Common"]);
-
-  if (!statistics) return null;
+  const { t } = useTranslation(["Common"]);
 
   const { userLimit, usersCount, editingCount, externalCount } = statistics;
 
   const percentEditing = Math.round((editingCount / userLimit) * 100);
 
-  const getDetailedEditInfo = () => {
+  const detailedEditInfo = () => {
     const editUserCount = usersCount
       ? t("EditUserCount", {
           count: usersCount,
-          productName: t("Common:ProductName"),
+          productName: t("ProductName"),
         })
       : null;
 
@@ -75,7 +73,6 @@ export const UserStatisticsInfo = ({
           <Trans
             i18nKey="EditUserLimit"
             t={t}
-            ns="Payments"
             values={{ limit: userLimit }}
             components={{ 1: <Text fontWeight={600} as="span" /> }}
           />
@@ -84,16 +81,15 @@ export const UserStatisticsInfo = ({
           <Trans
             i18nKey="EditUserInfo"
             t={t}
-            ns="Payments"
             values={{
               editingCount,
               count: usersCount,
               externalCount,
-              productName: t("Common:ProductName"),
+              productName: t("ProductName"),
             }}
             components={{ 1: <Text fontWeight={600} as="span" /> }}
           />
-          {getDetailedEditInfo()};
+          {detailedEditInfo()}
         </Text>
       </div>
       <ProgressBar percent={percentEditing} />

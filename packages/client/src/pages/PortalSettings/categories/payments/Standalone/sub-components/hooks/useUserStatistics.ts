@@ -50,15 +50,14 @@ const parseUserStatistics = (
 export const useUserStatistics = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [userStatistics, setUserStatistics] = useState<TUserStatistics | null>(
-    null,
-  );
+  const [userStatistics, setUserStatistics] = useState<TUserStatistics>();
 
   useEffect(() => {
     const loadStatistics = async () => {
       setIsLoading(true);
       try {
         const { docServerLicense } = await getTenantExtra();
+
         const parcedUserStatistics = parseUserStatistics(docServerLicense);
         setUserStatistics(parcedUserStatistics);
       } catch (error) {

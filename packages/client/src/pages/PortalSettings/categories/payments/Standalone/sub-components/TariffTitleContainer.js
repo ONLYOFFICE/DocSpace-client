@@ -42,6 +42,7 @@ const TariffTitleContainer = ({
   paymentDate,
   isDeveloper,
   logoText,
+  docspaceFaqUrl,
 }) => {
   const { t } = useTranslation(["PaymentsEnterprise", "Common"]);
 
@@ -144,6 +145,7 @@ const TariffTitleContainer = ({
         isVisible={isUserStatisticsVisible}
         statistics={userStatistics}
         onClose={closeUserStatistics}
+        docspaceFaqUrl={docspaceFaqUrl}
       />
     </StyledTitleComponent>
   );
@@ -154,7 +156,7 @@ export default inject(
     const { trialDaysLeft, paymentDate, isLicenseDateExpired, isDeveloper } =
       currentTariffStatusStore;
     const { isTrial } = currentQuotaStore;
-    const { logoText } = settingsStore;
+    const { logoText, docspaceFaqUrl } = settingsStore;
     return {
       isTrial,
       trialDaysLeft,
@@ -162,6 +164,7 @@ export default inject(
       isLicenseDateExpired,
       isDeveloper,
       logoText,
+      docspaceFaqUrl,
     };
   },
 )(observer(TariffTitleContainer));

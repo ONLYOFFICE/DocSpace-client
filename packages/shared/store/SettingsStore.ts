@@ -781,9 +781,9 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
-  get workspaceFaqUrl() {
-    return this.helpCenterDomain && this.helpCenterEntries?.workspacefaq
-      ? `${this.helpCenterDomain}${this.helpCenterEntries.workspacefaq}`
+  get docspaceFaqUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.docspacefaq
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.docspacefaq}`
       : this.helpCenterDomain;
   }
 

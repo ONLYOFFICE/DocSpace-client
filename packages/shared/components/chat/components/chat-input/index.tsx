@@ -67,7 +67,9 @@ const ChatInput = ({
   const [showSelector, setShowSelector] = React.useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(e.target.value);
+    if (e.target.value.trim()) {
+      setValue(e.target.value);
+    }
   };
 
   const toggleSelector = () => {

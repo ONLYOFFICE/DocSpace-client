@@ -44,7 +44,8 @@ const ChatBody = ({
   isFullScreen,
   currentDeviceType,
 }: ChatBodyProps) => {
-  const { preparedMessages, selectSession } = useMessageStore();
+  const { preparedMessages, selectSession, isSelectSessionOpen } =
+    useMessageStore();
 
   const { t } = useTranslation(["Common"]);
 
@@ -56,12 +57,13 @@ const ChatBody = ({
     <div className={styles.chatBody}>
       {isFullScreen &&
       currentDeviceType === "desktop" &&
-      preparedMessages.length > 0 ? (
+      preparedMessages.length > 0 &&
+      isSelectSessionOpen ? (
         <div className={styles.selectSessionContainer}>
           <ChatHeader
-            isPanel
             isFullScreen={isFullScreen}
             currentDeviceType={currentDeviceType}
+            isPanel
           />
 
           <Scrollbar className={styles.container}>

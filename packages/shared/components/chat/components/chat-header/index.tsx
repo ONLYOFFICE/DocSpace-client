@@ -13,17 +13,19 @@ const ChatHeader = ({
   isFullScreen,
   isPanel,
   currentDeviceType,
-}: SelectChatProps) => {
-  const { sessions, messages } = useMessageStore();
+}: SelectChatProps & { isPanel: boolean }) => {
+  const { sessions, messages, isSelectSessionOpen } = useMessageStore();
 
   return (
     <div className={styles.chatHeader} data-panel={isPanel ? "true" : "false"}>
-      {isFullScreen && currentDeviceType === "desktop" && !isPanel ? null : (
+      {isFullScreen &&
+      currentDeviceType === "desktop" &&
+      !isPanel &&
+      isSelectSessionOpen ? null : (
         <>
           {sessions.size > 0 ? (
             <SelectChat
               isFullScreen={isFullScreen}
-              isPanel={isPanel}
               currentDeviceType={currentDeviceType}
             />
           ) : null}

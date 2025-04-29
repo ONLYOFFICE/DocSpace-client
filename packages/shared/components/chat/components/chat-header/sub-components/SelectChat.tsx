@@ -16,20 +16,13 @@ import styles from "../ChatHeader.module.scss";
 
 export type SelectChatProps = {
   isFullScreen: boolean;
-  isPanel?: boolean;
   currentDeviceType: DeviceType;
 };
 
-const SelectChat = ({
-  isFullScreen,
-  isPanel,
-  currentDeviceType,
-}: SelectChatProps) => {
+const SelectChat = ({ isFullScreen, currentDeviceType }: SelectChatProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const parentRef = React.useRef<HTMLDivElement>(null);
-
-  console.log(isPanel);
 
   const {
     selectSession,
@@ -42,9 +35,7 @@ const SelectChat = ({
   const { t } = useTranslation(["Common"]);
 
   const toggleOpen = () => {
-    console.log("toggle");
     if (isFullScreen && currentDeviceType === "desktop") {
-      console.log(isSelectSessionOpen);
       setIsSelectSessionOpen(!isSelectSessionOpen);
 
       return;

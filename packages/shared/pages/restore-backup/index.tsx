@@ -247,7 +247,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           setBasePath={setBasePath}
           setNewPath={setNewPath}
           setRestoreResource={setRestoreResource}
-          isEnableRestore={false}
+          isEnableRestore={isEnableRestore}
         />
       ) : null}
       {radioButtonState === DISK_SPACE ? (

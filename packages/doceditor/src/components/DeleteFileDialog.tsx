@@ -53,12 +53,16 @@ const DeleteFileDialog = ({ onSubmit, onClose }: DeleteFileDialogProps) => {
         <Button
           id="delete-file-button_submit"
           key="OkButton"
-          label={t("Common:MoveToTrash")}
+          label={t("Common:TrashAction", {
+            sectionName: t("Common:TrashSection"),
+          })}
           size={ButtonSize.normal}
           primary
           scale
           onClick={onSubmit}
-          aria-label={t("Common:MoveToTrash")}
+          aria-label={t("Common:TrashAction", {
+            sectionName: t("Common:TrashSection"),
+          })}
         />
         <Button
           id="delete-file-button_cancel"

@@ -386,7 +386,6 @@
   "MoveTo": "이동 위치",
   "MoveToFolderMessage": "해당 폴더를 하위 폴더로 이동할 수 없습니다",
   "MoveToOperation": "이동 중",
-  "MoveToTrash": "휴지통으로 이동",
   "MoveToTrashTitle": "휴지통으로 이동하시겠습니까?",
   "MultiplyOverwrite": "여러 폴더가 하나의 폴더로 병합되고, 파일은 버전 업데이트로 덮어쓰기됩니다",
   "MyDocuments": "내 문서",

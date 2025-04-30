@@ -393,7 +393,6 @@
   "MoveTo": "移动至",
   "MoveToFolderMessage": "您不能将文件夹移至其子文件夹",
   "MoveToOperation": "移动中",
-  "MoveToTrash": "移动到回收站",
   "MoveToTrashTitle": "要移动到回收站吗？",
   "MultiplyOverwrite": "多个文件夹将合并为一个文件夹，文件将被新版本重写",
   "MyDocuments": "我的文档",

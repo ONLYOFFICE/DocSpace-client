@@ -393,7 +393,6 @@
   "MoveTo": "Verschieben",
   "MoveToFolderMessage": "Ordner können nicht in Unterordner verschoben werden",
   "MoveToOperation": "Wird verschoben",
-  "MoveToTrash": "In den Papierkorb verschieben",
   "MoveToTrashTitle": "In Papierkorb verschieben?",
   "MultiplyOverwrite": "Mehrere Ordner werden zu einem zusammengeführt, Dateien werden mit dem Versionsupdate überschrieben.",
   "MyDocuments": "Meine Dokumente",

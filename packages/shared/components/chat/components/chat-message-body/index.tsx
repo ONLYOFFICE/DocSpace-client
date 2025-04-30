@@ -46,11 +46,13 @@ const ChatMessageBody = ({
   vectorizedFiles,
   user,
   getIcon,
+  isFullScreen,
 }: {
   displayFileExtension: boolean;
   vectorizedFiles: TFile[];
   user: TUser;
   getIcon: (size: number, fileExst: string) => string;
+  isFullScreen: boolean;
 }) => {
   const { messages } = useMessageStore();
   const scrollbarRef = useRef<CustomScrollbar>(null);
@@ -80,7 +82,11 @@ const ChatMessageBody = ({
         <EmptyScreen />
       ) : (
         <Scrollbar ref={scrollbarRef} className="chat-scroll-bar">
-          <div className={styles.chatMessageContainer}>
+          <div
+            className={classNames(styles.chatMessageContainer, {
+              [styles.isFullScreen]: isFullScreen,
+            })}
+          >
             {messages.map((message) => {
               if (message.message === "") return null;
 
@@ -92,6 +98,7 @@ const ChatMessageBody = ({
                   vectorizedFiles={vectorizedFiles}
                   user={user}
                   getIcon={getIcon}
+                  isFullScreen={isFullScreen}
                 />
               );
             })}

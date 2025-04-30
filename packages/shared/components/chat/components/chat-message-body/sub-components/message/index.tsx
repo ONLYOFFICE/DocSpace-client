@@ -24,12 +24,14 @@ const Message = ({
   vectorizedFiles,
   user,
   getIcon,
+  isFullScreen,
 }: {
   message: ChatMessageType;
   displayFileExtension: boolean;
   vectorizedFiles: TFile[];
   user: TUser;
   getIcon: (size: number, fileExst: string) => string;
+  isFullScreen: boolean;
 }) => {
   const files: TFile[] = message.fileIds?.length
     ? (message.fileIds
@@ -47,6 +49,7 @@ const Message = ({
     <div
       className={classNames(styles.message, {
         [styles.userMessage]: message.isSend,
+        [styles.isFullScreen]: isFullScreen,
       })}
     >
       <Avatar

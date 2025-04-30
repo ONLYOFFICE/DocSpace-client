@@ -84,12 +84,14 @@ const Chat = ({
               <ChatHeader
                 isFullScreen={isFullScreen}
                 currentDeviceType={currentDeviceType}
+                isPanel={false}
               />
               <ChatMessageBody
                 displayFileExtension={displayFileExtension}
                 getIcon={getIcon}
                 vectorizedFiles={vectorizedFiles}
                 user={user}
+                isFullScreen={isFullScreen}
               />
               <ChatInput
                 currentDeviceType={currentDeviceType}

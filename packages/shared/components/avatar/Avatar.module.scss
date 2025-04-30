@@ -290,3 +290,8 @@
     }
   }
 }
+
+.adminIcon,
+.ownerIcon {
+  @include common-icons-style;
+}

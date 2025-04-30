@@ -79,6 +79,7 @@ export interface RestoreBackupProps {
   selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
   isTheSameThirdPartyAccount: boolean;
   downloadingProgress: number;
+  connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
   setErrorInformation: (error: unknown, t?: TTranslation) => void;
   setTemporaryLink: (link: string) => void;
   setDownloadingProgress: (progress: number) => void;

@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useLayoutEffect, useMemo, useState } from "react";
 
 import axios, { AxiosError } from "axios";
 
@@ -92,6 +92,10 @@ export const useBackup = ({
     setStorageId,
   } = useBackupSettings({ backupScheduleResponse });
 
+  useLayoutEffect(() => {
+    backupStore.setConnectedThirdPartyAccount(account ?? null);
+  }, [account, backupStore]);
+
   // TODO: required fix is object
   const [requiredFormSettings, setRequiredFormSettings] = useState<string[]>(
     [],
@@ -100,10 +104,6 @@ export const useBackup = ({
   const [thirdPartyStorage, setThirdPartyStorage] = useState<TStorageBackup[]>(
     backupStorageResponse,
   );
-
-  const [connectedThirdPartyAccount, setConnectedThirdPartyAccount] = useState<
-    Nullable<SettingsThirdPartyType>
-  >(() => account ?? null);
 
   const [isThirdStorageChanged, setIsThirdStorageChanged] =
     useState<boolean>(false);
@@ -206,13 +206,19 @@ export const useBackup = ({
   }, [downloadingProgress]);
 
   const isTheSameThirdPartyAccount = useMemo(() => {
-    if (connectedThirdPartyAccount && backupStore.selectedThirdPartyAccount)
+    if (
+      backupStore.connectedThirdPartyAccount &&
+      backupStore.selectedThirdPartyAccount
+    )
       return (
-        connectedThirdPartyAccount.title ===
+        backupStore.connectedThirdPartyAccount.title ===
         backupStore.selectedThirdPartyAccount.title
       );
     return true;
-  }, [connectedThirdPartyAccount, backupStore.selectedThirdPartyAccount]);
+  }, [
+    backupStore.connectedThirdPartyAccount,
+    backupStore.selectedThirdPartyAccount,
+  ]);
 
   const clearLocalStorage = useCallback(() => {
     if (getFromLocalStorage("LocalCopyStorageType"))
@@ -289,8 +295,8 @@ export const useBackup = ({
     thirdPartyStorage,
     setThirdPartyStorage,
 
-    connectedThirdPartyAccount,
-    setConnectedThirdPartyAccount,
+    connectedThirdPartyAccount: backupStore.connectedThirdPartyAccount,
+    setConnectedThirdPartyAccount: backupStore.setConnectedThirdPartyAccount,
 
     toDefault,
     setRequiredFormSettings,

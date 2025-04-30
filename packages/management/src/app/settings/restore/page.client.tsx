@@ -105,6 +105,7 @@ const Restore = ({
     defaults,
     isTheSameThirdPartyAccount,
     downloadingProgress,
+    connectedThirdPartyAccount,
     setErrorInformation,
     setTemporaryLink,
     setDownloadingProgress,
@@ -319,6 +320,7 @@ const Restore = ({
       }
       isTheSameThirdPartyAccount={isTheSameThirdPartyAccount}
       downloadingProgress={downloadingProgress}
+      connectedThirdPartyAccount={connectedThirdPartyAccount}
       setErrorInformation={(error: unknown) => setErrorInformation(error, t)}
       setTemporaryLink={setTemporaryLink}
       setDownloadingProgress={setDownloadingProgress}

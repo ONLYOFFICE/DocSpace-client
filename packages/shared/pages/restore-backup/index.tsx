@@ -114,6 +114,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     setDownloadingProgress,
     setTemporaryLink,
     setErrorInformation,
+    connectedThirdPartyAccount,
   } = props;
 
   const { t } = useTranslation(["Common"]);
@@ -264,7 +265,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
           openConnectWindow={openConnectWindow}
           connectDialogVisible={connectDialogVisible}
           deleteThirdPartyDialogVisible={deleteThirdPartyDialogVisible}
-          connectedThirdPartyAccount={null}
+          connectedThirdPartyAccount={connectedThirdPartyAccount}
           setConnectDialogVisible={setConnectDialogVisible}
           setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
           clearLocalStorage={clearLocalStorage}

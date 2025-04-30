@@ -46,6 +46,7 @@
     "re-resizable": "6.10.0",
     "react": "19.1.0",
     "react-autosize-textarea": "7.1.0",
+    "react-avatar-editor": "14.0.0-beta.6",
     "react-content-loader": "7.0.2",
     "react-countdown": "2.3.6",
     "react-device-detect": "2.2.3",

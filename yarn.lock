@@ -3142,6 +3142,7 @@ __metadata:
     re-resizable: "npm:6.10.0"
     react: "npm:19.1.0"
     react-autosize-textarea: "npm:7.1.0"
+    react-avatar-editor: "npm:14.0.0-beta.6"
     react-content-loader: "npm:7.0.2"
     react-countdown: "npm:2.3.6"
     react-device-detect: "npm:2.2.3"

@@ -16,6 +16,7 @@ interface NamespaceSelectorProps {
   onNamespaceUpdated?: () => void;
   onCheckErrors?: (namespace: string) => void;
   onRunLLMAnalysis?: (namespace: string) => void;
+  onTranslateUntranslated?: (namespace: string) => void;
   showUntranslated?: boolean;
   baseLanguage?: string;
 }
@@ -28,6 +29,7 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
   onNamespaceUpdated,
   onCheckErrors,
   onRunLLMAnalysis,
+  onTranslateUntranslated,
   showUntranslated = false,
   baseLanguage = 'en',
 }) => {
@@ -286,13 +288,30 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
           x={contextMenu.x}
           y={contextMenu.y}
           onClose={() => setContextMenu(null)}
-          onRename={handleRename}
-          onMove={handleMove}
-          onDelete={handleDelete}
-          onCreateKey={handleCreateKey}
-          onCheckErrors={onCheckErrors || (() => {})}
+          onRename={(namespace) => {
+            setActiveNamespace(namespace);
+            setRenameModalOpen(true);
+            setContextMenu(null);
+          }}
+          onMove={(namespace) => {
+            setActiveNamespace(namespace);
+            setMoveModalOpen(true);
+            setContextMenu(null);
+          }}
+          onDelete={(namespace) => {
+            setActiveNamespace(namespace);
+            setDeleteModalOpen(true);
+            setContextMenu(null);
+          }}
+          onCreateKey={(namespace) => {
+            setActiveNamespace(namespace);
+            setCreateKeyModalOpen(true);
+            setContextMenu(null);
+          }}
+          onCheckErrors={onCheckErrors || ((namespace) => {})}
           onRunLLMAnalysis={onRunLLMAnalysis}
-          refreshTranslations={refreshTranslations}
+          onTranslateUntranslated={onTranslateUntranslated}
+          refreshTranslations={onNamespaceUpdated ? () => onNamespaceUpdated() : undefined}
         />
       )}
 

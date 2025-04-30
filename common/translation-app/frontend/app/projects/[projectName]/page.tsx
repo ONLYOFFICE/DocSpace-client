@@ -2,11 +2,13 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { toast, Id } from "react-toastify";
 import { useProjectStore } from "@/store/projectStore";
 import { useLanguageStore } from "@/store/languageStore";
 import { useNamespaceStore } from "@/store/namespaceStore";
 import { useTranslationStore } from "@/store/translationStore";
 import { useOllamaStore } from "@/store/ollamaStore";
+import { translateKey, translateNamespace } from "@/lib/api";
 import { useValidationStore } from "@/store/validationStore";
 import { useOllamaValidationStore } from "@/store/ollamaValidationStore";
 import { initSocket, getSocket } from "@/lib/socket";
@@ -26,6 +28,9 @@ export default function ProjectPage() {
   const params = useParams();
   const router = useRouter();
   const projectName = params.projectName as string;
+
+  // we need to keep a reference of the toastId to be able to update it
+  const toastId = useRef<Id | null>(null);
 
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
   const [showUntranslated, setShowUntranslated] = useState<boolean>(false);
@@ -240,12 +245,12 @@ export default function ProjectPage() {
       }
     }
   }, [namespaces, namespaceFromUrl]);
-  
+
   // Re-fetch namespaces when showUntranslated changes
   useEffect(() => {
     if (projectName && baseLanguage) {
       fetchNamespaces(projectName, baseLanguage, {
-        untranslatedOnly: showUntranslated
+        untranslatedOnly: showUntranslated,
       });
     }
   }, [showUntranslated, projectName, baseLanguage]);
@@ -323,6 +328,138 @@ export default function ProjectPage() {
   // Handle translation error checking
   const handleCheckTranslationErrors = (namespace: string) => {
     validateNamespace(projectName, namespace, selectedLanguages);
+  };
+
+  // Function to translate all untranslated keys in a namespace
+  const handleTranslateUntranslated = async (namespace: string) => {
+    if (!selectedModel) {
+      toast.error("Please select an Ollama model first");
+      return;
+    }
+
+    if (!ollamaConnected) {
+      toast.error("Ollama is not connected");
+      return;
+    }
+
+    try {
+      // First, fetch all translations for this namespace
+      const allTranslations = await fetchTranslations(
+        projectName, 
+        [...selectedLanguages, baseLanguage], 
+        namespace
+      );
+      
+      // Only keep non-base languages
+      const targetLanguages = selectedLanguages.filter(lang => lang !== baseLanguage);
+      if (targetLanguages.length === 0) {
+        toast.info("No target languages selected for translation");
+        return;
+      }
+
+      // Get keys that need translation (have content in base language but missing in at least one target language)
+      const keysToTranslate = allTranslations.filter(entry => {
+        // Must have content in base language
+        const hasBaseContent = entry.translations[baseLanguage] && entry.translations[baseLanguage].trim() !== '';
+        
+        // Must be missing in at least one target language
+        const hasUntranslatedTargets = targetLanguages.some(lang => 
+          !entry.translations[lang] || entry.translations[lang].trim() === ''
+        );
+        
+        return hasBaseContent && hasUntranslatedTargets;
+      });
+
+      if (keysToTranslate.length === 0) {
+        toast.info("No untranslated keys found in this namespace");
+        return;
+      }
+
+      // Start progress tracking
+      const totalItems = keysToTranslate.length * targetLanguages.length;
+      let completedItems = 0;
+
+      // Start with initial toast
+      toastId.current = toast.info(`Starting translation of ${keysToTranslate.length} keys in namespace ${namespace}...`, {
+        autoClose: false,
+        progress: 0
+      });
+
+      // Process each key that needs translation
+      for (const entry of keysToTranslate) {
+        const keyPath = entry.path;
+        
+        // For each target language
+        for (const targetLang of targetLanguages) {
+          // Skip if already translated
+          if (entry.translations[targetLang] && entry.translations[targetLang].trim() !== '') {
+            completedItems++;
+            continue;
+          }
+
+          try {
+            // Update progress toast
+            const progress = completedItems / totalItems;
+            toast.update(toastId.current!, {
+              render: `Translating key "${keyPath}" to ${targetLang}... (${Math.round(progress * 100)}%)`,
+              progress: progress
+            });
+
+            // Translate this specific key
+            await translateKey(
+              projectName,
+              baseLanguage,
+              targetLang,
+              namespace,
+              keyPath,
+              selectedModel
+            );
+
+            completedItems++;
+          } catch (error) {
+            console.error(`Error translating key ${keyPath} to ${targetLang}:`, error);
+            // Continue with other translations even if one fails
+            toast.error(`Failed to translate key "${keyPath}" to ${targetLang}: ${(error as Error).message}`);
+          }
+        }
+      }
+
+      // Refresh translations to show the changes
+      if (currentNamespace === namespace) {
+        fetchTranslations(projectName, selectedLanguages, namespace);
+      }
+
+      // Complete the toast
+      if (toastId.current) {
+        toast.update(toastId.current, {
+          render: `Completed translating ${keysToTranslate.length} keys in namespace ${namespace}`,
+          type: "success",
+          progress: 1,
+          autoClose: 5000
+        });
+        
+        // Reset toast ID
+        setTimeout(() => {
+          toastId.current = null;
+        }, 5000);
+      }
+    } catch (error) {
+      console.error("Translation error:", error);
+      toast.error(`Failed to translate namespace ${namespace}: ${(error as Error).message}`);
+      
+      // Reset toast ID on error too
+      if (toastId.current) {
+        toast.update(toastId.current, {
+          render: `Translation failed: ${(error as Error).message}`,
+          type: "error",
+          autoClose: 5000
+        });
+        
+        setTimeout(() => {
+          toastId.current = null;
+        }, 5000);
+      }
+    }
   };
 
   // Handle LLM translation analysis
@@ -541,12 +678,15 @@ export default function ProjectPage() {
               onChange={handleNamespaceChange}
               onNamespaceUpdated={() =>
                 fetchNamespaces(projectName, baseLanguage, {
-                  untranslatedOnly: showUntranslated
+                  untranslatedOnly: showUntranslated,
                 })
               }
               onCheckErrors={handleCheckTranslationErrors}
               onRunLLMAnalysis={
                 ollamaConnected ? handleRunLLMAnalysis : undefined
+              }
+              onTranslateUntranslated={
+                ollamaConnected ? handleTranslateUntranslated : undefined
               }
               showUntranslated={showUntranslated}
             />

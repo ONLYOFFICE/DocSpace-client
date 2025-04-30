@@ -11,6 +11,7 @@ interface NamespaceContextMenuProps {
   onCreateKey: (namespace: string) => void;
   onCheckErrors: (namespace: string) => void;
   onRunLLMAnalysis?: (namespace: string) => void;
+  onTranslateUntranslated?: (namespace: string) => void;
   refreshTranslations?: () => void;
 }
 
@@ -25,6 +26,7 @@ const NamespaceContextMenu: React.FC<NamespaceContextMenuProps> = ({
   onCreateKey,
   onCheckErrors,
   onRunLLMAnalysis,
+  onTranslateUntranslated,
   refreshTranslations,
 }) => {
   // Close menu when clicking anywhere else
@@ -184,6 +186,34 @@ const NamespaceContextMenu: React.FC<NamespaceContextMenuProps> = ({
           </svg>
           <span className="text-gray-900 dark:text-gray-200 font-medium">
             LLM Translation Analysis
+          </span>
+        </button>
+      )}
+
+      {onTranslateUntranslated && (
+        <button
+          className="w-full text-left px-3 py-1.5 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
+          onClick={() => {
+            onTranslateUntranslated(namespace);
+            onClose();
+          }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 mr-2 text-yellow-500 dark:text-yellow-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+            />
+          </svg>
+          <span className="text-gray-900 dark:text-gray-200 font-medium">
+            Translate Untranslated Keys
           </span>
         </button>
       )}

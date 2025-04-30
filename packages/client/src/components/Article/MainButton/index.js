@@ -722,14 +722,12 @@ const ArticleMainButtonContent = (props) => {
 
   let isDisabled = false;
 
-  if (isFrame) {
-    isDisabled = disableActionButton && !security?.Create;
-  } else if (isSettingsPage) {
+  if (isSettingsPage) {
     isDisabled = isSettingsPage;
   } else if (isAccountsPage) {
-    isDisabled = !contactsCanCreate;
+    isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
   } else {
-    isDisabled = !security?.Create;
+    isDisabled = (isFrame && disableActionButton) || !security?.Create;
   }
 
   if (showArticleLoader)

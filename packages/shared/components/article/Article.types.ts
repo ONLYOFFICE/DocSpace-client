@@ -62,6 +62,7 @@ export type ArticleDevToolsBarProps = {
   articleOpen: boolean;
   currentDeviceType: DeviceType;
   toggleArticleOpen: TToggleArticleOpen;
+  path?: string;
 };
 
 export type ArticleZendeskProps = {

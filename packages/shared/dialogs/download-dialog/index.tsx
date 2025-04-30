@@ -76,6 +76,12 @@ const getInitialState = (sortedFiles: TSortedFiles) => {
       format: null,
       files: sortedFiles.masterForms,
     },
+    pdfForms: {
+      isChecked: true,
+      isIndeterminate: false,
+      format: null,
+      files: sortedFiles.pdfForms,
+    },
     other: {
       isChecked: true,
       isIndeterminate: false,
@@ -161,14 +167,21 @@ const DownloadDialog = (props: DownloadDialogProps) => {
   );
 
   const onDownload = useCallback(() => {
-    const { documents, spreadsheets, presentations, masterForms, other } =
-      state;
+    const {
+      documents,
+      spreadsheets,
+      presentations,
+      masterForms,
+      other,
+      pdfForms,
+    } = state;
 
     const itemList = [
       ...documents.files,
       ...spreadsheets.files,
       ...presentations.files,
       ...masterForms.files,
+      ...pdfForms.files,
       ...other.files,
     ];
 
@@ -307,6 +320,9 @@ const DownloadDialog = (props: DownloadDialogProps) => {
       case "masterForms":
         updateDocsState(DownloadedDocumentType.MasterForms, id);
         break;
+      case "pdfForms":
+        updateDocsState(DownloadedDocumentType.PdfForms, id);
+        break;
       case "other":
         updateDocsState(DownloadedDocumentType.Other, id);
         break;
@@ -317,14 +333,21 @@ const DownloadDialog = (props: DownloadDialogProps) => {
   };
 
   const getCheckedFileLength = useCallback(() => {
-    const { documents, spreadsheets, presentations, masterForms, other } =
-      state;
+    const {
+      documents,
+      spreadsheets,
+      presentations,
+      masterForms,
+      other,
+      pdfForms,
+    } = state;
 
     return (
       documents.files.filter((f) => f.checked).length +
       spreadsheets.files.filter((f) => f.checked).length +
       presentations.files.filter((f) => f.checked).length +
       masterForms.files.filter((f) => f.checked).length +
+      pdfForms.files.filter((f) => f.checked).length +
       other.files.filter((f) => f.checked).length
     );
   }, [state]);
@@ -460,6 +483,17 @@ const DownloadDialog = (props: DownloadDialogProps) => {
           titleFormat={state.masterForms.format || t("Common:OriginalFormat")}
           type={DownloadedDocumentType.MasterForms}
           title={t("Common:FormTemplates")}
+        />
+      ) : null}
+      {state.pdfForms.files.length > 0 ? (
+        <DownloadContent
+          {...downloadContentProps}
+          isChecked={state.pdfForms.isChecked}
+          isIndeterminate={state.pdfForms.isIndeterminate}
+          items={state.pdfForms.files}
+          titleFormat={state.pdfForms.format || t("Common:OriginalFormat")}
+          type={DownloadedDocumentType.PdfForms}
+          title={t("Common:Forms")}
         />
       ) : null}
 

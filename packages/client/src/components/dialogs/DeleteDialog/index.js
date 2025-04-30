@@ -281,7 +281,7 @@ const DeleteDialogComponent = (props) => {
         ? t("Common:OKButton")
         : unsubscribe
           ? t("UnsubscribeButton")
-          : t("MoveToTrashButton");
+          : t("Common:TrashAction", { sectionName: t("Common:TrashSection") });
 
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>

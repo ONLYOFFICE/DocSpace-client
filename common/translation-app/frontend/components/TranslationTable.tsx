@@ -15,6 +15,8 @@ import TranslationTablePagination from "./TranslationTablePagination";
 import TranslationTableKeyHeader from "./TranslationTableKeyHeader";
 import KeyUsageDetails from "./KeyUsageDetails";
 
+import { ToastContainer, toast } from "react-toastify";
+
 interface TranslationEntry {
   key: string;
   path: string;
@@ -157,12 +159,29 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
 
   // Handler to translate the current key to all available languages
   const handleTranslateToAllLanguages = async (rowPath: string) => {
-    if (!ollamaConnected) return;
+    if (!ollamaConnected) {
+      toast.error("Ollama is not connected");
+      return;
+    }
 
-    // Get all target languages (exclude base language)
-    const targetLanguages = languages.filter((lang) => lang !== baseLanguage);
+    const keyTranslation = translations.find(
+      (entry) => entry.path === rowPath
+    )?.translations;
 
-    if (targetLanguages.length === 0) return;
+    if (!keyTranslation) {
+      toast.error("Key not found");
+      return;
+    }
+
+    // Get all target selected languages that not translated yet (exclude base language, already translated languages)
+    const targetLanguages = languages
+      .filter((lang) => lang !== baseLanguage)
+      .filter((lang) => !keyTranslation[lang] || keyTranslation[lang] === "");
+
+    if (targetLanguages.length === 0) {
+      toast.error("No languages to translate");
+      return;
+    }
 
     // Translate sequentially to all target languages
     for (const lang of targetLanguages) {
@@ -926,6 +945,19 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
           </div>
         </div>
       )}
+
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

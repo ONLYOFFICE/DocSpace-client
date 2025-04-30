@@ -70,7 +70,6 @@ import {
   StyledCrossIcon,
 } from "../StyledInvitePanel";
 import AccessSelector from "../../../AccessSelector";
-import BetaBadge from "../../../BetaBadgeWrapper";
 import {
   fixAccess,
   getTopFreeRole,
@@ -145,7 +144,6 @@ const InviteInput = ({
       cultureNames.map((item) => ({
         label: item.label,
         key: item.key,
-        isBeta: isBetaLanguage(item.key),
       })),
     [cultureNames],
   );
@@ -614,9 +612,6 @@ const InviteInput = ({
             withBackground={isMobileView}
             shouldShowBackdrop={isMobileView}
           />
-          {culture?.isBeta ? (
-            <BetaBadge place="bottom-end" mobilePlace="bottom" />
-          ) : null}
         </div>
         {isChangeLangMail && !isMobileView ? (
           <StyledLink

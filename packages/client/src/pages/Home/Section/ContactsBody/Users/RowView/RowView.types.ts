@@ -32,6 +32,8 @@ import { UserStore } from "@docspace/shared/store/UserStore";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
+import type { JSX } from "react";
+
 export type RowViewStores = {
   peopleStore: PeopleStore;
   settingsStore: SettingsStore;

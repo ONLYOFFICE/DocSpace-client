@@ -137,8 +137,8 @@ export const sortPermissions = (list: React.ReactNode[]) => {
   const keyOrder = ["files", "rooms", "profile", "accounts"];
 
   return list.sort((a, b) => {
-    const aKey = (a as React.ReactElement).key ?? "";
-    const bKey = (b as React.ReactElement).key ?? "";
+    const aKey = (a as React.ReactElement<any>).key ?? "";
+    const bKey = (b as React.ReactElement<any>).key ?? "";
 
     return keyOrder.indexOf(aKey) - keyOrder.indexOf(bKey);
   });

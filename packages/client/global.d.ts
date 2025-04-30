@@ -29,7 +29,7 @@ import type store from "./src/store";
 import "@docspace/shared/index.d";
 
 declare module "*.svg" {
-  const SVG: React.VFC<React.SVGProps<SVGSVGElement>>;
+  const SVG: React.FC<React.SVGProps<SVGSVGElement>>;
   export default SVG;
 }
 declare module "*.svg?url" {

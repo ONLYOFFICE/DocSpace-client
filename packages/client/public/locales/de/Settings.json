@@ -30,7 +30,7 @@
   "APIGuide": "API-Leitfaden",
   "ApiKeyCopied": "API-Leitfaden",
   "APIKeyDeactivated": "Der Schlüssel wird deaktiviert nach: {{date}}",
-  "APIKeyExpired": "Der Schlüssel wird deaktiviert nach: {{date}}",
+  "APIKeyExpired": "Dieser API-Schlüssel ist abgelaufen und nicht mehr aktiv.",
   "ApiKeyLifetime": "<1>Die Lebensdauer ist festgelegt.</1> Der geheime Schlüssel wird deaktiviert nach: {{days}} Tagen",
   "APIKeyMaxDays": "Tage <1>(Max. {{days}})</1>",
   "ApiKeys": "API-Schlüssel",

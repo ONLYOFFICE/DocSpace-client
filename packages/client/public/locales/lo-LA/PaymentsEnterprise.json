@@ -13,7 +13,7 @@
   "UpgradeToProBannerInformationAboutShort": "ສຶກສາເພີ່ມເຕີມກ່ຽວກັບ {{license}} Edition ຢູ່<1>ໃນເວັບໄຊທ໌ທາງການ</1>",
   "UpgradeToProBannerInformationDemo": "ຮ້ອງຂໍການສາທິດ <1>ທີ່ນີ້</1>",
   "UpgradeToProBannerInformationPurchase": "ຖາມຄຳຖາມຊື້ຢູ່ <1>{{email}}</1>",
-  "UpgradeToProBannerInformationSupport": "ຂໍຄວາມຊ່ວຍເຫຼືອດ້ານເທັກໂນໂລຍີ <1>{{ helpUrl }}</1>",
+  "UpgradeToProBannerInformationSupport": "ຂໍຄວາມຊ່ວຍເຫຼືອດ້ານເທັກໂນໂລຍີ <1>{{helpUrl}}</1>",
   "UpgradeToProBannerInstructionDescr": "ໃຊ້ເອກະສານທາງການເພື່ອຍົກລະດັບ:",
   "UpgradeToProBannerInstructionHeader": "ເພື່ອນຳໃຊ້ຄວາມສາມາດແບບມືອາຊີບ, ເລີຍທົດລອງນຳໃຊ້ {{organizationName}} {{license}} Edition ຟຣີ 30 ມື້.",
   "UpgradeToProBannerInstructionItemDocker": "ຄໍາແນະນໍາສຳລັບ Docker.",

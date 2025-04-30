@@ -149,117 +149,6 @@ const selectedCss = css`
     props.theme.selector.item.selectedBackground} !important;
 `;
 
-const StyledItem = styled.div.attrs(injectDefaultTheme)<{
-  isSelected: boolean | undefined;
-  isDisabled?: boolean;
-  isMultiSelect: boolean;
-  noHover?: boolean;
-}>`
-  display: flex;
-  align-items: center;
-
-  padding: 0 16px;
-
-  box-sizing: border-box;
-
-  .room-logo__container {
-    margin: 0;
-  }
-
-  .room-logo,
-  .user-avatar {
-    min-width: 32px;
-  }
-
-  .room-logo {
-    height: 32px;
-
-    border-radius: 6px;
-  }
-
-  .selector-item_label {
-    // width: 100%;
-    // max-width: 100%;
-
-    line-height: 18px;
-
-    margin-inline-start: 8px;
-  }
-
-  .clicked-label {
-    width: fit-content;
-    cursor: pointer;
-  }
-
-  .input-component {
-    margin-inline-start: 8px;
-  }
-
-  .checkbox {
-    svg {
-      margin-inline-end: 0px;
-    }
-  }
-
-  .item-logo {
-    min-width: 32px;
-  }
-
-  ${(props) =>
-    props.isDisabled
-      ? css`
-          .item-logo,
-          .user-avatar {
-            opacity: 0.5;
-          }
-
-          .selector-item_label {
-            color: ${props.theme.selector.item.disableTextColor};
-          }
-
-          .disabled-text {
-            text-align: end;
-          }
-        `
-      : css`
-          ${props.isSelected && !props.isMultiSelect && selectedCss}
-          ${!props.noHover &&
-          ` @media (hover: hover) {
-            &:hover {
-              cursor: pointer;
-              background: ${props.theme.selector.item.hoverBackground};
-            }
-          }`}
-        `}
-
-  .selector-item_name {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    width: calc(100% - 32px);
-
-    .selector-item_label {
-      width: unset;
-
-      .item-file-exst {
-        color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
-      }
-    }
-
-    svg {
-      path {
-        fill: ${({ theme }) => theme.navigation.lifetimeIconFill} !important;
-        stroke: ${({ theme }) =>
-          theme.navigation.lifetimeIconStroke} !important;
-      }
-    }
-  }
-
-  .title-icon {
-    cursor: pointer;
-  }
-`;
-
 const StyledEmptyScreen = styled.div.attrs(injectDefaultTheme)<{
   withSearch: boolean;
 }>`
@@ -493,7 +382,6 @@ export {
   StyledSelector,
   StyledHeader,
   StyledBody,
-  StyledItem,
   StyledEmptyScreen,
   StyledArrowRightSvg,
   StyledComboBox,

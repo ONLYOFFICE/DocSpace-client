@@ -1446,6 +1446,8 @@
 .light {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-strong};
 
+  --files-section-table-view-exst-color: #{$gray};
+
   --files-badges-bg-color: #{$white};
 
   --files-badges-link-color: #{$light-gray-dark};
@@ -1455,6 +1457,8 @@
 
 .dark {
   --files-section-tiles-view-tile-border: 1px solid #{$gray-dark-strong};
+
+  --files-section-table-view-exst-color: #{$gray};
 
   --files-badges-bg-color: #{$black};
 
@@ -2084,6 +2088,10 @@
 
   --selector-info-background-color: #{$gray-light};
   --selector-info-color: #{$gray-text};
+
+  --selector-item-hover-background: #{$gray-light};
+  --selector-item-disabled-text-color: #{$gray};
+  --selector-item-selected-background: #{$light-gray-hover};
 }
 
 .dark {
@@ -2092,4 +2100,8 @@
 
   --selector-info-background-color: #{$dark-gray-light};
   --selector-info-color: #{$dark-gray-dark};
+
+  --selector-item-hover-background: #{$dark-gray-light};
+  --selector-item-disabled-text-color: #{$gray-dark};
+  --selector-item-selected-background: #{$light-dark-gray-hover};
 }

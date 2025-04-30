@@ -144,7 +144,7 @@ const DirectThirdPartyConnection = ({
   ) => {
     if (isNullOrUndefined(selectedThirdPartyAccount)) return;
 
-    const { label, provider_key, provider_id } = selectedThirdPartyAccount;
+    const { label, key, provider_id } = selectedThirdPartyAccount;
 
     setState({ isLoading: true, isUpdatingInfo: true });
     if (connectDialogVisible) setConnectDialogVisible(false);
@@ -158,7 +158,7 @@ const DirectThirdPartyConnection = ({
         token,
         false,
         label,
-        provider_key,
+        key,
         provider_id ?? "",
       );
 
@@ -176,8 +176,7 @@ const DirectThirdPartyConnection = ({
 
     if (isNullOrUndefined(selectedThirdPartyAccount)) return;
 
-    const { provider_key, provider_link: directConnection } =
-      selectedThirdPartyAccount;
+    const { key, provider_link: directConnection } = selectedThirdPartyAccount;
 
     if (directConnection) {
       const authModal = window.open(
@@ -186,7 +185,7 @@ const DirectThirdPartyConnection = ({
         "height=600, width=1020",
       );
 
-      openConnectWindow(provider_key, authModal)
+      openConnectWindow(key, authModal)
         .then((modal) => getOAuthToken(modal))
         .then((token) => {
           authModal?.close();
@@ -202,17 +201,17 @@ const DirectThirdPartyConnection = ({
     }
   };
 
-  const onSelectAccount = (key: string | number) => {
-    const account = accounts.find((acc) => acc.key === key);
+  const onSelectAccount = (name: string) => {
+    const account = accounts.find((acc) => acc.name === name);
 
     if (!account?.connected) {
       setSelectedThirdPartyAccount({
-        key: 0,
+        key: "0",
         label: selectedThirdPartyAccount?.label,
       });
 
       return window.open(
-        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[key as keyof typeof ThirdPartyServicesUrlName]}`,
+        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[name as keyof typeof ThirdPartyServicesUrlName]}`,
         "_blank",
       );
     }
@@ -255,9 +254,9 @@ const DirectThirdPartyConnection = ({
 
   const advancedOptions = accounts?.map((item) => {
     return (
-      <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+      <StyledComboBoxItem isDisabled={item.disabled} key={item.name}>
         <DropDownItem
-          onClick={() => onSelectAccount(item.key)}
+          onClick={() => onSelectAccount(item.name)}
           className={item.className}
           data-third-party-key={item.key}
           disabled={item.disabled}
@@ -270,7 +269,7 @@ const DirectThirdPartyConnection = ({
             <IconButton
               className="drop-down-item_icon"
               size={16}
-              onClick={() => onSelectAccount(item.key)}
+              onClick={() => onSelectAccount(item.name)}
               iconName={ExternalLinkReactSvgUrl}
               isFill
             />

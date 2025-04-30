@@ -110,17 +110,16 @@ class BackupStore {
       : `${serviceTitle} (${t("Common:ActivationRequired")})`;
 
     const isConnected =
-      this.connectedThirdPartyAccount?.providerKey === "WebDav"
-        ? serviceTitle === this.connectedThirdPartyAccount?.title
-        : provider.key === this.connectedThirdPartyAccount?.providerKey;
+      provider.name === this.connectedThirdPartyAccount?.title;
 
     const isDisabled = !provider.connected && !isAdmin;
 
     const account: ThirdPartyAccountType = {
-      key: provider.name,
+      key: provider.key,
+      name: provider.name,
       label: serviceLabel,
       title: serviceLabel,
-      provider_key: provider.key,
+      provider_key: provider.key !== "WebDav" ? provider.key : provider.name,
       ...(provider.clientId && {
         provider_link: provider.clientId,
       }),
@@ -147,31 +146,31 @@ class BackupStore {
 
     if (connectedAccount) this.setConnectedThirdPartyAccount(connectedAccount);
 
-    let tempAccounts: ThirdPartyAccountType[] = [];
-
     let selectedAccount: ThirdPartyAccountType | undefined;
-    let index = 0;
 
-    providers.forEach((item) => {
-      const thirdPartyAccount = this.getThirdPartyAccount(item, t, isAdmin);
+    const tempAccounts: ThirdPartyAccountType[] = providers
+      .map((item) => {
+        const { account, isConnected } = this.getThirdPartyAccount(
+          item,
+          t,
+          isAdmin,
+        );
 
-      if (!thirdPartyAccount.account) return true; // continue
+        if (isConnected) {
+          selectedAccount = { ...account };
+        }
 
-      tempAccounts.push(thirdPartyAccount.account);
-
-      if (thirdPartyAccount.isConnected) {
-        selectedAccount = { ...tempAccounts[index] };
-      }
-      index++;
-    });
-
-    tempAccounts = tempAccounts.sort((storage) => (storage.connected ? -1 : 1));
+        return account;
+      })
+      .sort((storage) => (storage.connected ? -1 : 1));
 
     this.setThirdPartyAccounts(tempAccounts);
 
     const connectedThirdPartyAccount = tempAccounts.findLast(
       (a) => a.connected,
     );
+
+    if (this.selectedThirdPartyAccount) return;
 
     this.setSelectedThirdPartyAccount(
       selectedAccount && Object.keys(selectedAccount).length !== 0

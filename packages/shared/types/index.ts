@@ -59,7 +59,8 @@ export type ConnectedThirdPartyAccountType = {
 };
 
 export type ThirdPartyAccountType = {
-  key: string | number;
+  name: string;
+  key: string;
   title: string;
   label: string;
   provider_key: string;

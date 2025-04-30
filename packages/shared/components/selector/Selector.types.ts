@@ -70,6 +70,7 @@ export type TInfoBar = {
 };
 
 export type InfoBarProps = {
+  ref?: React.RefObject<HTMLDivElement>;
   visible: boolean;
 };
 

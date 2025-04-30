@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ScrollbarProps as ScrollbarLibraryProps } from "./custom-scrollbar";
+import {
+  ScrollbarProps as ScrollbarLibraryProps,
+  Scrollbar as CustomScrollbar,
+} from "./custom-scrollbar";
 
 type PickedScrollbarLibraryProps = Pick<
   ScrollbarLibraryProps,
@@ -32,6 +35,8 @@ type PickedScrollbarLibraryProps = Pick<
 >;
 
 export type ScrollbarProps = PickedScrollbarLibraryProps & {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.RefObject<CustomScrollbar>;
   /** This class will be placed on scroller element */
   scrollClass?: string;
   /** Enable tracks auto hiding.  */

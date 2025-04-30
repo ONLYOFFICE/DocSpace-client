@@ -63,8 +63,7 @@ const CustomScrollbars = ({
       // @ts-expect-error error from custom scrollbar
       ref={(scrollbarsRef: React.RefObject<Scrollbar | null>) => {
         refSetter(scrollbarsRef, forwardedRef);
-      }
-      }
+      }}
       style={{ ...style, overflow: "hidden" }}
       onScroll={onScroll}
       className={className}
@@ -78,17 +77,19 @@ const CustomScrollbars = ({
   );
 };
 
-const CustomScrollbarsVirtualList = React.forwardRef(
-  (props: CustomScrollbarsVirtualListProps, ref) => (
-    <CustomScrollbars {...props} forwardedRef={ref} />
-  ),
-);
+const CustomScrollbarsVirtualList = ({
+  ref,
+  ...props
+}: CustomScrollbarsVirtualListProps & {
+  ref: React.RefObject<unknown>;
+}) => <CustomScrollbars {...props} forwardedRef={ref} />;
 
-const CustomScrollbarsVirtualListWithAutoFocus = React.forwardRef(
-  (props: CustomScrollbarsVirtualListProps, ref) => (
-    <CustomScrollbars {...props} forwardedRef={ref} autoFocus />
-  ),
-);
+const CustomScrollbarsVirtualListWithAutoFocus = ({
+  ref,
+  ...props
+}: CustomScrollbarsVirtualListProps & {
+  ref: React.RefObject<unknown>;
+}) => <CustomScrollbars {...props} forwardedRef={ref} autoFocus />;
 
 export {
   CustomScrollbarsVirtualList,

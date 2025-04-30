@@ -180,6 +180,7 @@ export type TDropBoxProps = TArrowButtonProps &
     | "isMobile"
   > &
   TRowParam & {
+    ref?: React.RefObject<HTMLDivElement>;
     sectionHeight: number;
     dropBoxWidth: number;
 

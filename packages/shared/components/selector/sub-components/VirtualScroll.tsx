@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { forwardRef, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { CustomScrollbarsVirtualList } from "../../scrollbar";
 import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../constants";
 
-export const VirtualScroll = forwardRef((props, ref) => {
+export const VirtualScroll = ({ ref, ...props }) => {
   const scrollContentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -50,6 +50,6 @@ export const VirtualScroll = forwardRef((props, ref) => {
       contentRef={scrollContentRef}
     />
   );
-});
+};
 
 VirtualScroll.displayName = "VirtualScroll";

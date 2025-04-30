@@ -92,6 +92,8 @@ export type ActionOption = {
 };
 
 export type MainButtonMobileProps = {
+  /** Ref to access the DOM element or React component instance */
+  ref?: React.RefObject<MainButtonMobileRef>;
   /** Accepts css style */
   style?: React.CSSProperties;
   /** Drop down items options */

@@ -28,6 +28,7 @@ import type { Dispatch, SetStateAction, JSX } from "react";
 import type { getCustomToolbar } from "../../MediaViewer.helpers";
 
 interface ImageViewerToolbarProps {
+  ref?: React.RefObject<ImperativeHandle>;
   toolbar: ReturnType<typeof getCustomToolbar>;
   generateContextMenu: (
     isOpen: boolean,

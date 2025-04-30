@@ -24,35 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
-  ForwardedRef,
-  PropsWithChildren,
-  forwardRef,
-  useContext,
-} from "react";
+import React, { PropsWithChildren, useContext } from "react";
 import { ThemeContext } from "styled-components";
 
 import { StyledThemeComboButton } from "./ComboBox.styled";
 import type { TComboButtonThemeProps } from "./ComboBox.types";
 
-const ComboButtonTheme = forwardRef(
-  (
-    props: PropsWithChildren<TComboButtonThemeProps>,
-    ref: ForwardedRef<HTMLDivElement>,
-  ) => {
-    const defaultTheme = useContext(ThemeContext);
+const ComboButtonTheme = ({
+  ref,
+  ...props
+}: PropsWithChildren<TComboButtonThemeProps> & {
+  ref: React.RefObject<HTMLDivElement>;
+}) => {
+  const defaultTheme = useContext(ThemeContext);
 
-    const currentColorScheme = defaultTheme?.currentColorScheme;
+  const currentColorScheme = defaultTheme?.currentColorScheme;
 
-    return (
-      <StyledThemeComboButton
-        {...props}
-        ref={ref}
-        $currentColorScheme={currentColorScheme}
-      />
-    );
-  },
-);
+  return (
+    <StyledThemeComboButton
+      {...props}
+      ref={ref}
+      $currentColorScheme={currentColorScheme}
+    />
+  );
+};
 
 ComboButtonTheme.displayName = "ComboButtonTheme";
 

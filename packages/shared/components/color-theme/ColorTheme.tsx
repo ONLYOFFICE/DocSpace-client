@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { PropsWithChildren, forwardRef, useContext } from "react";
+import React, { PropsWithChildren, useContext } from "react";
 import { ThemeContext } from "styled-components";
 
 import { ColorThemeProps } from "./ColorTheme.types";
@@ -47,10 +47,15 @@ import VersionBadgeTheme from "./styled-components/versionBadge";
 import SubmenuTextTheme from "./styled-components/submenuText";
 import StyledIndexWrapper from "./sub-components/StyledIndexWrapper";
 
-const ColorTheme = forwardRef<
-  HTMLDivElement,
-  PropsWithChildren<ColorThemeProps>
->(({ isVersion, themeId, hoverColor, ...props }, ref) => {
+const ColorTheme = ({
+  ref,
+  isVersion,
+  themeId,
+  hoverColor,
+  ...props
+}: PropsWithChildren<ColorThemeProps> & {
+  ref: React.RefObject<HTMLDivElement>;
+}) => {
   const defaultTheme = useContext(ThemeContext);
 
   const currentColorScheme = defaultTheme?.currentColorScheme;
@@ -212,7 +217,7 @@ const ColorTheme = forwardRef<
   const element = getElement();
 
   return element;
-});
+};
 
 ColorTheme.displayName = "ColorTheme";
 

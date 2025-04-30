@@ -393,7 +393,6 @@
   "MoveTo": "に移動します",
   "MoveToFolderMessage": "フォルダをそのサブフォルダに移動できません。",
   "MoveToOperation": "移動中",
-  "MoveToTrashTitle": "ゴミ箱に移動しますか？",
   "MultiplyOverwrite": "複数のフォルダは 1 つにマージされ、ファイルはバージョン アップデートで上書きされます",
   "MyDocuments": "私の文書",
   "MyFilesSection": "文書",

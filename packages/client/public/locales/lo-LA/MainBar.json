@@ -4,7 +4,7 @@
   "PersonalUserQuotaAdminsDescription": "ເພື່ອອັບໂຫລດ ແລະສ້າງໄຟລ໌ ແລະໂຟນເດີໃໝ່, ກະລຸນາສ້າງພື້ນທີ່ຫວ່າງໃນດິສກ໌ ຫຼືຈັດການໂຄຕ້າຕໍ່ຜູ້ໃຊ້ໃນ <1>ການຕັ້ງຄ່າການຈັດການບ່ອນເກັບຂໍ້ມູນ.</1>",
   "PersonalUserQuotaDescription": "ເພື່ອອັບໂຫຼດ ແລະສ້າງໄຟລ໌ ແລະໂຟນເດີ້ໃໝ່, ກະລຸນາສ້າງພື້ນທີ່ຫວ່າງໃນດິສກ໌ ຫຼືຕິດຕໍ່ຜູ້ເບິ່ງແຍງລະບົບ {{productName}} ເພື່ອເພີ່ມໂຄຕ້າບ່ອນຈັດເກັບຂໍ້ມູນ",
   "RequestActivation": "ຮ້ອງຂໍການເປີດໃຊ້ອີກເທື່ອຫນຶ່ງ",
-  "RoomQuotaHeader": "ຫ້ອງກຳລັງຈະເກີນ: {{ currentValue }} / {{ maxValue }}",
-  "StorageQuotaHeader": "ຈຳນວນພື້ນທີ່ຈັດເກັບກຳລັງຈະເກີນ: {{ currentValue }} / {{ maxValue }}",
+  "RoomQuotaHeader": "ຫ້ອງກຳລັງຈະເກີນ: {{currentValue}} / {{maxValue}}",
+  "StorageQuotaHeader": "ຈຳນວນພື້ນທີ່ຈັດເກັບກຳລັງຈະເກີນ: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "ທ່ານສາມາດລຶບໄຟລ໌ທີ່ບໍ່ຈໍາເປັນອອກ ຫຼືປ່ຽນໂຄຕ້າໄດ້ໃນ <1>ການຕັ້ງຄ່າການຈັດການບ່ອນເກັບຂໍ້ມູນ.</1>"
 }

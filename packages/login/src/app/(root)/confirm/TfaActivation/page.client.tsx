@@ -136,7 +136,6 @@ const TfaActivationForm = ({
 
       setError(errorMessage);
       toastr.error(errorMessage);
-    } finally {
       setIsLoading(false);
     }
   };

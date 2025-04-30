@@ -129,7 +129,6 @@ const TfaAuthForm = ({
 
       setError(errorMessage);
       toastr.error(errorMessage);
-    } finally {
       setIsLoading(false);
     }
   };

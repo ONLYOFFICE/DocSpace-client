@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef } from "react";
+import { classNames } from "@docspace/shared/utils";
 
 import { Button, ButtonSize } from "../../button";
 import { TextInput, InputSize, InputType } from "../../text-input";
 import { Checkbox } from "../../checkbox";
-import classNames from "classnames";
 import styles from "../Selector.module.scss";
 
 import { FooterProps } from "../Selector.types";

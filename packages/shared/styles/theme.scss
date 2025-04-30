@@ -2077,3 +2077,13 @@
 .dark {
   --modal-dialog-border-color: #{$gray-dark-strong};
 }
+
+.light {
+  --selector-breadcrumbs-prev-item-color: #{$light-gray-dark};
+  --selector-breadcrumbs-arrow-right-color: #{$light-gray-dark};
+}
+
+.dark {
+  --selector-breadcrumbs-prev-item-color: #{$dark-gray-dark};
+  --selector-breadcrumbs-arrow-right-color: #{$dark-gray-dark};
+}

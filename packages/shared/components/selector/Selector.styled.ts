@@ -428,48 +428,6 @@ const StyledNewEmptyScreen = styled.section.attrs(injectDefaultTheme)`
   }
 `;
 
-const StyledBreadCrumbs = styled.div.attrs(injectDefaultTheme)<{
-  itemsCount: number;
-  gridTemplateColumns: string;
-}>`
-  width: 100%;
-  height: 38px;
-
-  padding: 0 16px 16px;
-
-  box-sizing: border-box;
-
-  display: grid;
-
-  grid-template-columns: ${(props) => props.gridTemplateColumns};
-
-  grid-column-gap: 8px;
-
-  align-items: center;
-
-  .context-menu-button {
-    transform: rotate(90deg);
-    svg {
-      path {
-        fill: ${(props) => props.theme.selector.breadCrumbs.prevItemColor};
-      }
-    }
-  }
-`;
-
-const StyledItemText = styled(Text).attrs(injectDefaultTheme)<{
-  $isCurrent: boolean;
-  $isLoading?: boolean;
-}>`
-  ${(props) =>
-    !props.$isCurrent &&
-    css`
-      color: ${props.theme.selector.breadCrumbs.prevItemColor};
-
-      ${!props.$isLoading && `cursor: pointer`};
-    `}
-`;
-
 const StyledArrowRightSvg = styled(ArrowRightSvg).attrs(injectDefaultTheme)`
   ${({ theme }) =>
     theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
@@ -597,8 +555,6 @@ export {
   StyledSelectAll,
   StyledItem,
   StyledEmptyScreen,
-  StyledBreadCrumbs,
-  StyledItemText,
   StyledArrowRightSvg,
   StyledComboBox,
   StyledTabs,

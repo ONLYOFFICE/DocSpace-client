@@ -26,6 +26,7 @@
 
 import React from "react";
 
+import { classNames } from "@docspace/shared/utils/classNames";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
@@ -37,13 +38,11 @@ import {
   TBreadCrumb,
   TDisplayedItem,
 } from "../Selector.types";
-import {
-  StyledBreadCrumbs,
-  StyledItemText,
-  StyledArrowRightSvg,
-} from "../Selector.styled";
+import { StyledArrowRightSvg } from "../Selector.styled";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 import { SearchDispatchContext } from "../contexts/Search";
+import styles from "../Selector.module.scss";
+import { Text } from "../../text";
 
 const calculateDisplayedItems = (
   items: TBreadCrumb[],
@@ -200,15 +199,20 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
   if (isBreadCrumbsLoading) return breadCrumbsLoader;
 
   return (
-    <StyledBreadCrumbs
-      itemsCount={displayedItems.length}
-      gridTemplateColumns={gridTemplateColumns}
+    <div
+      className={styles.breadCrumbs}
+      style={
+        {
+          "--items-count": displayedItems.length,
+          "--grid-template-columns": gridTemplateColumns,
+        } as React.CSSProperties
+      }
     >
       {displayedItems.map((item, index) =>
         item.isList ? (
           <ContextMenuButton
             key={`bread-crumb-item-${item.id}`}
-            className="context-menu-button"
+            className={styles.contextMenuButton}
             displayType={ContextMenuButtonDisplayType.dropdown}
             getData={() => {
               const items = item.listItems
@@ -220,15 +224,17 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
         ) : item.isArrow ? (
           <StyledArrowRightSvg key={`bread-crumb-item-${item.id}`} />
         ) : (
-          <StyledItemText
+          <Text
             key={`bread-crumb-item-${item.id}`}
             fontSize="16px"
             fontWeight={600}
             lineHeight="22px"
+            className={classNames(styles.itemText, {
+              [styles.isNotCurrent]: index !== displayedItems.length - 1,
+              [styles.isNotLoading]: !isBreadCrumbsLoading,
+            })}
             noSelect
             truncate
-            $isCurrent={index === displayedItems.length - 1}
-            $isLoading={isBreadCrumbsLoading}
             onClick={() => {
               if (index === displayedItems.length - 1 || isBreadCrumbsLoading)
                 return;
@@ -243,10 +249,10 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
             }}
           >
             {item.label}
-          </StyledItemText>
+          </Text>
         ),
       )}
-    </StyledBreadCrumbs>
+    </div>
   );
 };
 

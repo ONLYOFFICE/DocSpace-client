@@ -256,7 +256,6 @@
   "FileSelector": "Seletor de arquivos",
   "FilesWillAppearHere": "Os arquivos e pastas adicionados à sala aparecerão aqui.",
   "FileWillBeDeletedPermanently": "O ficheiro será eliminado {{date}}",
-  "FileWillBeMovedToTrash": "O arquivo será movido para a Lixeira {{date}}",
   "FillFormButton": "Preencha o formulário",
   "FillingFormRooms": "Preenchimento de formulário",
   "FillingStatus": "Estado de preenchimento",

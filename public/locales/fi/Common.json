@@ -256,7 +256,6 @@
   "FileSelector": "Tiedoston valitsija",
   "FilesWillAppearHere": "Huoneeseen lisätyt tiedostot ja kansiot näkyvät tässä.",
   "FileWillBeDeletedPermanently": "Tiedosto poistetaan {{date}}",
-  "FileWillBeMovedToTrash": "Tiedosto siirretään Roskakoriin {{date}}",
   "FillFormButton": "Täytä lomake",
   "FillingFormRooms": "Täyttölomake",
   "FillingStatus": "Täyttöstatus",

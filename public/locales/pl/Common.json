@@ -256,7 +256,6 @@
   "FileSelector": "Selektor plików",
   "FilesWillAppearHere": "Tutaj pojawią się pliki i katalogi dodane do pokoju.",
   "FileWillBeDeletedPermanently": "Plik zostanie usunięty {{date}}",
-  "FileWillBeMovedToTrash": "Plik zostanie przeniesiony do kosza {{date}}",
   "FillFormButton": "Wypełnij formularz",
   "FillingFormRooms": "Wypełnianie formularza",
   "FillingStatus": "Status wypełnienia",

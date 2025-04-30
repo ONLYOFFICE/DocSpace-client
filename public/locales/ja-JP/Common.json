@@ -259,7 +259,6 @@
   "FileSelector": "ファイルセレクタ",
   "FilesWillAppearHere": "ルームに追加されたファイルやフォルダはここに表示されます。",
   "FileWillBeDeletedPermanently": "ファイルは{{date}}に完全に削除されます",
-  "FileWillBeMovedToTrash": "ファイルは{{date}}にゴミ箱に移動されます",
   "FillFormButton": "フォームへの入力",
   "FillingFormRooms": "フォーム記入",
   "FillingStatus": "記入状況",

@@ -143,7 +143,10 @@ export const QuickButtons = (props: QuickButtonsProps) => {
     <Text fontSize="12px" fontWeight={400} noSelect>
       {roomLifetime?.deletePermanently
         ? t("Common:FileWillBeDeletedPermanently", { date: expiredDate || "" })
-        : t("Common:FileWillBeMovedToTrash", { date: expiredDate || "" })}
+        : t("Common:TrashMoveNotification", {
+            sectionName: t("Common:TrashSection"),
+            date: expiredDate || "",
+          })}
     </Text>
   );
 

@@ -259,7 +259,6 @@
   "FileSelector": "Selector de archivos",
   "FilesWillAppearHere": "Los archivos y carpetas añadidos a la sala aparecerán aquí.",
   "FileWillBeDeletedPermanently": "El archivo se eliminará de forma permanente {{date}}",
-  "FileWillBeMovedToTrash": "El archivo se moverá a la Papelera {{date}}",
   "FillFormButton": "Rellenar el formulario",
   "FillingFormRooms": "Relleno de formularios",
   "FillingStatus": "Estado de rellenado",

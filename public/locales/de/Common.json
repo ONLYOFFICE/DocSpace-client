@@ -259,7 +259,6 @@
   "FileSelector": "Dateiauswahl",
   "FilesWillAppearHere": "Dem Raum hinzugefügte Dateien und Ordner werden hier angezeigt.",
   "FileWillBeDeletedPermanently": "Die Datei wird dauerhaft gelöscht {{date}}",
-  "FileWillBeMovedToTrash": "Die Datei wird in den Papierkorb verschoben {{date}}",
   "FillFormButton": "Formular ausfüllen",
   "FillingFormRooms": "Formular ausfüllen",
   "FillingStatus": "Füllstatus",

@@ -259,7 +259,6 @@
   "FileSelector": "Selettore di file",
   "FilesWillAppearHere": "I file e le cartelle aggiunti alla stanza verranno visualizzati qui.",
   "FileWillBeDeletedPermanently": "Il file verrà eliminato definitivamente {{date}}",
-  "FileWillBeMovedToTrash": "Il file verrà spostato nel cestino {{date}}",
   "FillFormButton": "Compilare il modulo",
   "FillingFormRooms": "Compilazione modulo",
   "FillingStatus": "Stato della compilazione",

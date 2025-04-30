@@ -255,7 +255,6 @@
   "FileSelector": "محدد الملف",
   "FilesWillAppearHere": "ستظهر هنا الملفات والمجلدات التي تمت إضافتها إلى الغرفة.",
   "FileWillBeDeletedPermanently": "سيتم حذف الملف في {{date}} ",
-  "FileWillBeMovedToTrash": "سيتم نقل الملف إلى سلة المهملات {{date}}",
   "FillFormButton": "إملأ النموذج",
   "FillingFormRooms": "قم بتعبئة الاستمارة",
   "FillingStatus": "حالة التعبئة",

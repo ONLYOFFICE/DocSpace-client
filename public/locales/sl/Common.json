@@ -256,7 +256,6 @@
   "FileSelector": "Izbira datot",
   "FilesWillAppearHere": "Tukaj bodo prikazane datoteke in mape, dodane v sobi.",
   "FileWillBeDeletedPermanently": "Datoteka bo izbrisana {{date}}",
-  "FileWillBeMovedToTrash": "Datoteka bo premaknjena v koš {{date}}",
   "FillFormButton": "Izpolni obrazec",
   "FillingFormRooms": "Obrazec za izpolnjevanje",
   "FillingStatus": "Status izpolnjevanja",

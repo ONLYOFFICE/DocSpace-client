@@ -259,7 +259,6 @@
   "FileSelector": "文件选择器",
   "FilesWillAppearHere": "添加到房间的文件和文件夹会显示在此处。",
   "FileWillBeDeletedPermanently": "该文件将被永久删除 {{date}}",
-  "FileWillBeMovedToTrash": "该文件将被移至回收站 {{date}}",
   "FillFormButton": "\"填写表单,",
   "FillingFormRooms": "填写表单",
   "FillingStatus": "填写状态",

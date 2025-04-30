@@ -256,7 +256,6 @@
   "FileSelector": "Dosya seçici",
   "FilesWillAppearHere": "Odaya eklenen dosyalar ve klasörler burada görünecektir.",
   "FileWillBeDeletedPermanently": "Dosya silinecek {{date}}",
-  "FileWillBeMovedToTrash": "Dosya Çöp Kutusuna şu tarihte taşınacak {{date}}",
   "FillFormButton": "Formu doldurun",
   "FillingFormRooms": "Doldurma formu",
   "FillingStatus": "Doldurma durumu",

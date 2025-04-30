@@ -256,7 +256,6 @@
   "FileSelector": "Селектор на файлове",
   "FilesWillAppearHere": "Файловете и папките, добавени към стаята, ще се покажат тук.",
   "FileWillBeDeletedPermanently": "Файлът ще бъде изтрит на {{date}}",
-  "FileWillBeMovedToTrash": "Файлът ще бъде преместен в Кошчето на {{date}}",
   "FillFormButton": "Попълнете формуляра",
   "FillingFormRooms": "Формуляр за попълване",
   "FillingStatus": "Статус на попълване",

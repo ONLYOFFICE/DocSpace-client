@@ -256,7 +256,6 @@
   "FileSelector": "Засіб вибору файлів",
   "FilesWillAppearHere": "Тут з’являться файли та папки, додані до кімнати.",
   "FileWillBeDeletedPermanently": "Файл буде видалено {{date}}",
-  "FileWillBeMovedToTrash": "Файл буде переміщено до Кошика {{date}}",
   "FillFormButton": "Заповнити форму",
   "FillingFormRooms": "Заповнення форми",
   "FillingStatus": "Статус заповнення",

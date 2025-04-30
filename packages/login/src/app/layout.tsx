@@ -43,6 +43,7 @@ import {
 import "../styles/globals.scss";
 import "../../../shared/styles/theme.scss";
 import Scripts from "@/components/Scripts";
+import { TConfirmLinkParams } from "@/types";
 
 export default async function RootLayout({
   children,
@@ -51,11 +52,16 @@ export default async function RootLayout({
 }) {
   const hdrs = headers();
   const type = hdrs.get("x-confirm-type") ?? "";
+  const searchParams = hdrs.get("x-confirm-query") ?? "";
 
   if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
     console.log("is health check");
     return <></>;
   }
+
+  const queryParams = Object.fromEntries(
+    new URLSearchParams(searchParams.toString()),
+  ) as TConfirmLinkParams;
 
   const cookieStore = cookies();
 
@@ -120,7 +126,8 @@ export default async function RootLayout({
   console.log("Render root layout");
 
   const locale =
-    settings && typeof settings !== "string" ? settings.culture : "en";
+    queryParams?.culture ||
+    (settings && typeof settings !== "string" ? settings.culture : "en");
 
   const dirClass = getDirectionByLanguage(locale || "en");
   const themeClass =

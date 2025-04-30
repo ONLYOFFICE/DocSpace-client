@@ -86,6 +86,7 @@ export const Providers = ({
 
   const { i18n } = useI18N({
     settings: value.settings,
+    locale,
   });
 
   const { theme, currentColorTheme } = useTheme({

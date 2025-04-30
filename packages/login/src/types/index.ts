@@ -115,6 +115,7 @@ export type TConfirmLinkParams = {
   first?: string;
   roomId?: string;
   linkData?: string;
+  culture?: string;
 };
 
 export type TConfirmLinkResult = {

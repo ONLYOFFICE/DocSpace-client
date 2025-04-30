@@ -76,7 +76,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Тут ви знайдете форми, повністю заповнені іншими користувачами.",
   "EmptyFormSubFolderHeaderText": "У цій папці ще немає файлів.",
   "EmptyFormSubFolderProgressDescriptionText": "Тут ви знайдете форми в процесі заповнення, тобто такі, які користувачі почали й не закінчили заповнювати.",
-  "EmptyRecycleBin": "Очистити кошик",
   "EmptySection": "Спорожнити {{sectionName}}",
   "EnableNotifications": "Увімкнути сповіщення",
   "ErrorChangeIndex": "Помилка під час зміни індексу. Проблема могла виникнути на боці сервера. Перезавантажте сторінку або перевірте параметри з’єднання з Інтернетом.",

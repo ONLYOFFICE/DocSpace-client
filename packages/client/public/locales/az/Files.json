@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Burada digər istifadəçilər tərəfindən tamamilə doldurulmuş formaları tapa bilərsiniz.",
   "EmptyFormSubFolderHeaderText": "Bu qovluqda hələ heç bir fayl yoxdur",
   "EmptyFormSubFolderProgressDescriptionText": "Burada davam edən formaları, yəni istifadəçilərin doldurmağa başladığı, lakin hələ tamamlamamış formaları tapa bilərsiniz.",
-  "EmptyRecycleBin": "Boş zibil qutusu",
   "EmptySection": "Boş {{sectionName}}",
   "EnableNotifications": "Bildirişləri aktivləşdirin",
   "ErrorChangeIndex": "İndeks dəyişdirilərkən xəta baş verdi. Problem server tərəfində yarana bilər. Səhifəni yenidən yükləyin və ya İnternet bağlantısı parametrlərinizi yoxlayın.",

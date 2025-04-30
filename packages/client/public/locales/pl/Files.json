@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Tutaj znajdziesz formularze, które zostały całkowicie wypełnione przez innych użytkowników.",
   "EmptyFormSubFolderHeaderText": "Brak plików w tym katalogu",
   "EmptyFormSubFolderProgressDescriptionText": "Tutaj znajdziesz formularze w trakcie wypełniania, tzn. formularze, które użytkownicy zaczęli wypełniać, ale jeszcze nie skończyli.",
-  "EmptyRecycleBin": "Opróżnij kosz",
   "EmptySection": "Opróżnij {{sectionName}}",
   "EnableNotifications": "Włącz powiadomienia",
   "ErrorChangeIndex": "Błąd podczas zmiany indeksu. Problem mógł zostać wywołany po stronie serwera. Odśwież stronę lub sprawdź swoje ustawienia połączenia internetowego.",

@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Hier vindt u formulieren die volledig door andere gebruikers zijn ingevuld.",
   "EmptyFormSubFolderHeaderText": "Nog geen bestanden in deze map",
   "EmptyFormSubFolderProgressDescriptionText": "Hier vindt u formulieren die nog in behandeling zijn, d.w.z. formulieren die gebruikers zijn begonnen in te vullen maar nog niet hebben voltooid.",
-  "EmptyRecycleBin": "Leeg de Prullenbak",
   "EmptySection": "Leeg {{sectionName}}",
   "EnableNotifications": "Meldingen inschakelen",
   "ErrorChangeIndex": "Fout bij het wijzigen van index. Het probleem kan aan de serverkant worden veroorzaakt. Laad de pagina opnieuw of controleer de instellingen van uw internetverbinding.",

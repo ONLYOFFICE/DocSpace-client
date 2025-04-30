@@ -76,7 +76,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Tukaj boste našli obrazce, ki so jih v celoti izpolnili drugi uporabniki.",
   "EmptyFormSubFolderHeaderText": "V tej mapi še ni datotek",
   "EmptyFormSubFolderProgressDescriptionText": "Tukaj boste našli obrazce v teku, torej obrazce, ki so jih uporabniki začeli izpolnjevati, a jih niso dokončali.",
-  "EmptyRecycleBin": "Izprazni koš",
   "EmptySection": "Izprazni {{sectionName}}",
   "EnableNotifications": "Omogoči obvestila",
   "ErrorChangeIndex": "Napaka pri spreminjanju indeksa. Težava se lahko pojavi na strani strežnika. Ponovno naložite stran ali preverite nastavitve internetne povezave.",

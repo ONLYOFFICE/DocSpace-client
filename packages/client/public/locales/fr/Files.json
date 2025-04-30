@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Vous trouverez ici des formulaires qui ont été entièrement remplis par d'autres utilisateurs.",
   "EmptyFormSubFolderHeaderText": "Aucun fichier dans ce dossier pour l'instant",
   "EmptyFormSubFolderProgressDescriptionText": "Vous y trouverez les formulaires en cours d'élaboration, c'est-à-dire les formulaires que les utilisateurs ont commencé à remplir mais qu'ils n'ont pas encore terminés.",
-  "EmptyRecycleBin": "Vider la corbeille",
   "EmptySection": "Vide {{sectionName}}",
   "EnableNotifications": "Activer les notifications",
   "ErrorChangeIndex": "Erreur lors du changement d'index. Le problème peut être causé par le serveur. Rechargez la page ou vérifiez les paramètres de votre connexion Internet.",

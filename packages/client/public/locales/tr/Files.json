@@ -76,7 +76,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Burada diğer kullanıcılar tarafından tamamen doldurulmuş formları bulacaksınız.",
   "EmptyFormSubFolderHeaderText": "Bu klasörde henüz dosya yok",
   "EmptyFormSubFolderProgressDescriptionText": "Burada devam etmekte olan formları, yani kullanıcıların doldurmaya başladığı fakat henüz tamamlamadığı formları bulacaksınız.",
-  "EmptyRecycleBin": "Çöp Kutusunu Boşalt",
   "EmptySection": "{{sectionName}} bölümünü boşalt",
   "EnableNotifications": "Bildirimleri etkinleştir",
   "ErrorChangeIndex": "Dizin değiştirilirken hata oluştu. Sorun sunucu tarafından kaynaklanıyor olabilir. Sayfayı yeniden yükleyin veya internet bağlantı ayarlarınızı kontrol edin.",

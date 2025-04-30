@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Hier finden Sie Formulare, die von anderen Benutzern ausgefüllt wurden.",
   "EmptyFormSubFolderHeaderText": "Noch keine Dateien in diesem Ordner",
   "EmptyFormSubFolderProgressDescriptionText": "Hier finden Sie Formulare in Bearbeitung, d. h. Formulare, mit deren Ausfüllen die Benutzer begonnen haben, die sie aber noch nicht abgeschlossen haben.",
-  "EmptyRecycleBin": "Papierkorb leeren",
   "EmptySection": "{{sectionName}} leer",
   "EnableNotifications": "Benachrichtigungen einschalten",
   "ErrorChangeIndex": "Fehler beim Ändern des Index. Das Problem kann serverseitig verursacht sein. Laden Sie die Seite neu oder überprüfen Sie Ihre Internetverbindungseinstellungen.",

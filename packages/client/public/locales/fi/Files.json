@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Täältä löydät muiden täyttämät lomakkeet, jotka ovat valmiita.",
   "EmptyFormSubFolderHeaderText": "Tässä kansiossa ei ole vielä tiedostoja",
   "EmptyFormSubFolderProgressDescriptionText": "Tästä löydät keskeneräiset lomakkeet. esim. lomakkeet, joita käyttäjät ovat aloittaneet täyttämään, mutta eivät ole saaneet valmiiksi.",
-  "EmptyRecycleBin": "Tyhjennä roskakori",
   "EmptySection": "Tyhjä {{sectionName}}",
   "EnableNotifications": "Salli ilmoitukset",
   "ErrorChangeIndex": "Virhe muutettaessa indeksiä. Ongelma voi olla palvelimen puolella. Lataa sivu tai tarkista internetyhteysasetukset.",

@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Zde najdete formuláře, které byly kompletně vyplněny jinými uživateli.",
   "EmptyFormSubFolderHeaderText": "V této složce zatím nejsou žádné soubory",
   "EmptyFormSubFolderProgressDescriptionText": "Zde najdete rozpracované formuláře, tj. formuláře, které uživatelé začali vyplňovat, ale nedokončili je.",
-  "EmptyRecycleBin": "Vysypat kos",
   "EmptySection": "Prázdná sekce {{sectionName}}",
   "EnableNotifications": "Povolení oznámení",
   "ErrorChangeIndex": "Chyba při změně indexu. Problém může být způsoben na straně serveru. Znovu načtěte stránku nebo zkontrolujte nastavení internetového připojení.",

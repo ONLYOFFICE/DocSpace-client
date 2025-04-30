@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Ovde ćete pronaći obrasce koje su u potpunosti popunili drugi korisnici.",
   "EmptyFormSubFolderHeaderText": "Još nema datoteka u ovom folderu",
   "EmptyFormSubFolderProgressDescriptionText": "Ovde ćete pronaći obrasce u toku, odnosno obrasce koje su korisnici počeli da popunjavaju, ali nisu završili.",
-  "EmptyRecycleBin": "Prazan Otpad",
   "EmptySection": "Isprazni {{sectionName}}",
   "EnableNotifications": "Omogući notifikacije",
   "ErrorChangeIndex": "Greška prilikom promene indeksa. Problem može biti uzrokovan na strani servera. Osvežite stranicu ili proverite podešavanja internet konekcije.",

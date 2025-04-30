@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Aquí encontrará formularios que otros usuarios han rellenado completamente.",
   "EmptyFormSubFolderHeaderText": "Aún no hay archivos en esta carpeta",
   "EmptyFormSubFolderProgressDescriptionText": "Aquí encontrará formularios en progreso, es decir, formularios que los usuarios han comenzado a rellenar pero no han completado.",
-  "EmptyRecycleBin": "Vaciar Papelera",
   "EmptySection": "Vaciar {{sectionName}}",
   "EnableNotifications": "Habilitar notificaciones",
   "ErrorChangeIndex": "Error al cambiar el índice. El problema puede deberse al servidor. Vuelva a cargar la página o compruebe la configuración de su conexión a Internet.",

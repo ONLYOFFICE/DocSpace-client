@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Šeit jūs atradīsiet veidlapas, kuras ir pilnībā aizpildījuši citi lietotāji.",
   "EmptyFormSubFolderHeaderText": "Šajā mapē nav failu",
   "EmptyFormSubFolderProgressDescriptionText": "Šeit jūs atradīsiet nepabeigtas veidlapas, t.i., veidlapas, kuras lietotāji ir sākuši aizpildīt, bet nav pabeiguši.",
-  "EmptyRecycleBin": "Iztukšot atkritni",
   "EmptySection": "Iztukšot {{sectionName}}",
   "EnableNotifications": "Aktivizēt paziņojumus",
   "ErrorChangeIndex": "Mainot indeksu, radās kļūda. Problēma, iespējams, radās servera pusē. Atkārtoti ielādējiet lapu vai pārbaudiet interneta savienojuma iestatījumus.",

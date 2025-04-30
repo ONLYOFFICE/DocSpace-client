@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Aici veți găsi formulare, care au fost completate și finalizate de alți utilizatori.",
   "EmptyFormSubFolderHeaderText": "Niciun fișier în acest folder deocamdată",
   "EmptyFormSubFolderProgressDescriptionText": "Aici veți găsi formulare în curs de completare, adică formulare pe care utilizatorii au început să le completeze, dar nu le-au finalizat.",
-  "EmptyRecycleBin": "Golire Coș de gunoi",
   "EmptySection": "Golire {{sectionName}}",
   "EnableNotifications": "Activare notificări",
   "ErrorChangeIndex": "A intervenit o eroare în timpul modificării indexului. Problema poate fi din partea serverului. Reîncărcați pagina sau verificați setările conexiunii la Internet.",

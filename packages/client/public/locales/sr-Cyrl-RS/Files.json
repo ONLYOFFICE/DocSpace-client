@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Овде ц́ете пронац́и обрасце које су у потпуности попунили други корисници.",
   "EmptyFormSubFolderHeaderText": "Још нема датотека у овом фолдеру",
   "EmptyFormSubFolderProgressDescriptionText": "Овде ц́ете пронац́и обрасце у току, односно обрасце које су корисници почели да попуњавају, али нису завршили.",
-  "EmptyRecycleBin": "Празан Отпад",
   "EmptySection": "Испразни {{sectionName}}",
   "EnableNotifications": "Омогући нотификације",
   "ErrorChangeIndex": "Грешка приликом промене индекса. Проблем може бити узрокован на страни сервера. Освежите страницу или проверите подешавања интернет конекције.",

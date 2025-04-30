@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Aqui você encontrará formulários que foram totalmente preenchidos por outros usuários.",
   "EmptyFormSubFolderHeaderText": "Ainda não há arquivos nesta pasta",
   "EmptyFormSubFolderProgressDescriptionText": "Aqui você encontrará formulários em andamento, ou seja, formulários que os usuários começaram a preencher, mas não concluíram.",
-  "EmptyRecycleBin": "Esvaziar lixeira",
   "EmptySection": "{{sectionName}} vazio",
   "EnableNotifications": "Ativar notificações",
   "ErrorChangeIndex": "Erro ao alterar o índice. O problema pode ser causado pelo servidor. Recarregue a página ou verifique suas configurações de conexão com a Internet.",

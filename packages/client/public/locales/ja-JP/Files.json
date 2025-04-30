@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "ここでは、他のユーザーによって完全に記入されたフォームが表示されます。",
   "EmptyFormSubFolderHeaderText": "このフォルダにはまだファイルがありません",
   "EmptyFormSubFolderProgressDescriptionText": "ここには、ユーザーが記入を開始したが完了していない、記入中のフォームが表示されます。",
-  "EmptyRecycleBin": "空きゴミ箱",
   "EmptySection": "空の{{sectionName}}",
   "EnableNotifications": "通知をオンにする",
   "ErrorChangeIndex": "インデックスを変更するとエラーが発生します。この問題はサーバー側で発生している可能性があります。ページを再読み込みするか、インターネット接続の設定を確認してください。",

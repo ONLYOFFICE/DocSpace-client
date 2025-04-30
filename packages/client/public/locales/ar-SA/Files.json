@@ -76,7 +76,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "ستجد هنا النماذج التي تم ملؤها بالكامل من قبل مستخدمين آخرين.",
   "EmptyFormSubFolderHeaderText": "لا توجد ملفات في هذا المجلد حتى الآن",
   "EmptyFormSubFolderProgressDescriptionText": "ستجد هنا نماذج قيد التقدم، أي النماذج التي بدأ المستخدمون في تعبئتها ولكنهم لم يكملوها.",
-  "EmptyRecycleBin": "سلة مهملات فارغة",
   "EmptySection": "إفراغ قسم {{sectionName}}",
   "EnableNotifications": "تفعيل الاشعارات",
   "ErrorChangeIndex": "حدث خطأ عند تغيير الفهرس. قد تكون المشكلة ناجمة عن جانب الخادم. أعد تحميل الصفحة أو تحقق من إعدادات اتصال الإنترنت الخاصة بك.",

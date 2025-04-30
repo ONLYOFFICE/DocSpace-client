@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Here you will find forms which have been completely filled out by other users.",
   "EmptyFormSubFolderHeaderText": "No files in this folder yet",
   "EmptyFormSubFolderProgressDescriptionText": "Here you will find forms in progress, i.e., forms which users have started to fill out but haven't completed.",
-  "EmptyRecycleBin": "Empty Trash",
   "EmptySection": "Empty {{sectionName}}",
   "EnableNotifications": "Enable notifications",
   "ErrorChangeIndex": "Error when changing index. The problem may be caused on the server side. Reload the page or check your Internet connection settings.",

@@ -77,7 +77,6 @@
   "EmptyFormSubFolderDoneDescriptionText": "Qui troverai i moduli che sono stati completamente compilati da altri utenti.",
   "EmptyFormSubFolderHeaderText": "Ancora nessun file in questa cartella",
   "EmptyFormSubFolderProgressDescriptionText": "Qui troverai i moduli in elaborazione, ovvero i moduli che gli utenti hanno iniziato a compilare ma non hanno completato.",
-  "EmptyRecycleBin": "Svuota cestino",
   "EmptySection": "Svuota {{sectionName}}",
   "EnableNotifications": "Abilita le notifiche",
   "ErrorChangeIndex": "Errore durante la modifica dell'indice. Il problema potrebbe essere causato dal server. Ricarica la pagina o controlla le impostazioni della connessione a Internet.",

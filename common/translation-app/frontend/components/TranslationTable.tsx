@@ -15,7 +15,7 @@ import TranslationTablePagination from "./TranslationTablePagination";
 import TranslationTableKeyHeader from "./TranslationTableKeyHeader";
 import KeyUsageDetails from "./KeyUsageDetails";
 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast, Id } from "react-toastify";
 
 interface TranslationEntry {
   key: string;
@@ -70,6 +70,9 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     loading: translating,
     translationProgress,
   } = useOllamaStore();
+
+  // we need to keep a reference of the toastId to be able to update it
+  const toastId = useRef<Id | null>(null);
 
   // State for tracking locally updated translations by AI
   const [localUpdates, setLocalUpdates] = useState<
@@ -184,8 +187,37 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     }
 
     // Translate sequentially to all target languages
+    const totalProgress = targetLanguages.length + 1;
+    let progress = 0;
+
+    if (toastId.current === null) {
+      toastId.current = toast(`Translating to ${targetLanguages[0]}...`, {
+        progress: 0.1,
+        autoClose: false,
+      });
+    }
+
     for (const lang of targetLanguages) {
-      await translateKey(projectName, baseLanguage, lang, namespace, rowPath);
+      try {
+        await translateKey(projectName, baseLanguage, lang, namespace, rowPath);
+        // check if we already displayed a toast
+
+        progress++;
+
+        if (toastId.current !== null) {
+          toast.update(toastId.current, {
+            render: `Translating to ${targetLanguages[progress]}...`,
+            progress: progress / totalProgress,
+          });
+        }
+      } catch (error) {
+        toast.error(`Translation to language ${lang} failed`);
+      }
+    }
+
+    if (toastId.current !== null) {
+      toast.done(toastId.current);
+      toastId.current = null;
     }
   };
 
@@ -949,14 +981,12 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
       <ToastContainer
         position="top-center"
         autoClose={5000}
-        hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={false}
         rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored"
       />
     </div>
   );

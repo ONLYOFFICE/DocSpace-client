@@ -7,16 +7,18 @@ import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
 import { IconButton } from "../../../../../icon-button";
 
+import { ChatMessageType } from "../../../../types/chat";
+
 import styles from "../../ChatMessageBody.module.scss";
 
-type ButtonsBlockProps = {
-  message: string;
-};
+type ButtonsBlockProps = Pick<ChatMessageType, "message">;
 
 const ButtonsBlock = ({ message }: ButtonsBlockProps) => {
   const { t } = useTranslation(["Common"]);
   const onCopy = () => {
-    copy(message);
+    if (typeof message === "string") {
+      copy(message);
+    }
   };
 
   return (

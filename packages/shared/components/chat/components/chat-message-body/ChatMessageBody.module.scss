@@ -6,10 +6,6 @@
   max-height: 100%;
   width: 100%;
 
-  &.empty {
-    max-height: fit-content;
-  }
-
   overflow: hidden;
 
   display: flex;
@@ -17,6 +13,10 @@
   align-items: center;
 
   box-sizing: border-box;
+
+  &.empty {
+    max-height: fit-content;
+  }
 }
 
 .chatMessageContainer {

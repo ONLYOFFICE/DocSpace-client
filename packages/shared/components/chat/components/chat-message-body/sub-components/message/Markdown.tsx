@@ -1,7 +1,6 @@
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
-import rehypeMathjax from "rehype-mathjax";
 import classNames from "classnames";
 
 import { Text } from "../../../../../text";
@@ -22,7 +21,7 @@ const preprocessChatMessage = (text: string): string => {
     .replace(/<\/think>/g, "`</think>`");
 };
 
-export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
+const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
   // Process the chat message to handle <think> tags
   const processedChatMessage = preprocessChatMessage(chatMessage);
 
@@ -30,7 +29,7 @@ export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
     <div style={{ width: "100%" }}>
       <Markdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw, rehypeMathjax]}
+        rehypePlugins={[rehypeRaw]}
         components={{
           p: ({ children }) => {
             return (
@@ -121,3 +120,5 @@ export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
     </div>
   );
 };
+
+export default MarkdownField;

@@ -1,7 +1,10 @@
 import { DeviceType } from "../../../enums";
 import { TFile } from "../../../api/files/types";
 import { TUser } from "../../../api/people/types";
+
 import { TSelectorItem } from "../../selector";
+
+import { ChatMessageType } from "./chat";
 
 export type TGetIcon = (size: number, fileExst: string) => string;
 
@@ -25,6 +28,18 @@ export type FilePreviewProps = {
   withRemoveFile?: boolean;
 
   getIcon: TGetIcon;
+};
+
+export type MessageProps = Pick<
+  FilePreviewProps,
+  "displayFileExtension" | "getIcon"
+> & {
+  message: ChatMessageType;
+
+  vectorizedFiles: TFile[];
+  user: TUser;
+
+  isFullScreen: boolean;
 };
 
 export type ChatProps = GeneralTypes &

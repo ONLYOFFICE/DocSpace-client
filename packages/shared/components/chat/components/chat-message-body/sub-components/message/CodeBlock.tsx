@@ -25,10 +25,11 @@ const CodeBlock = ({ language, content }: CodeBlockProps) => {
   const onCopy = () => {
     copy(content);
   };
+
   return (
     <div className={styles.codeContainer}>
       <div className={styles.codeHeader}>
-        <Text>{language}</Text>
+        {language ? <Text>{language}</Text> : null}
         <IconButton
           iconName={CopyIconUrl}
           size={16}

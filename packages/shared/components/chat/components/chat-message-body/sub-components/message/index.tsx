@@ -4,18 +4,17 @@ import classNames from "classnames";
 import AIIconReactSvgUrl from "PUBLIC_DIR/images/ai.chat.avatar.react.svg?url";
 
 import { TFile } from "../../../../../../api/files/types";
-import { TUser } from "../../../../../../api/people/types";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../../../../avatar";
 
-import { ChatMessageType } from "../../../../types/chat";
+import { MessageProps } from "../../../../types";
 
 import FilePreview from "../../../file-preview";
 
 import styles from "../../ChatMessageBody.module.scss";
 
 import Agent from "./agent";
-import { MarkdownField } from "./Markdown";
+import Markdown from "./Markdown";
 import ButtonsBlock from "./ButtonsBlock";
 
 const Message = ({
@@ -23,16 +22,10 @@ const Message = ({
   displayFileExtension,
   vectorizedFiles,
   user,
-  getIcon,
   isFullScreen,
-}: {
-  message: ChatMessageType;
-  displayFileExtension: boolean;
-  vectorizedFiles: TFile[];
-  user: TUser;
-  getIcon: (size: number, fileExst: string) => string;
-  isFullScreen: boolean;
-}) => {
+
+  getIcon,
+}: MessageProps) => {
   const files: TFile[] = message.fileIds?.length
     ? (message.fileIds
         ?.map((id) => {
@@ -80,7 +73,7 @@ const Message = ({
             <Agent content={message.content_blocks} />
           ) : null}
 
-          <MarkdownField chatMessage={message.message as string} />
+          <Markdown chatMessage={message.message as string} />
         </div>
 
         {message.isSend && files && files.length > 0 ? (

@@ -2081,9 +2081,15 @@
 .light {
   --selector-breadcrumbs-prev-item-color: #{$light-gray-dark};
   --selector-breadcrumbs-arrow-right-color: #{$light-gray-dark};
+
+  --selector-info-background-color: #{$gray-light};
+  --selector-info-color: #{$gray-text};
 }
 
 .dark {
   --selector-breadcrumbs-prev-item-color: #{$dark-gray-dark};
   --selector-breadcrumbs-arrow-right-color: #{$dark-gray-dark};
+
+  --selector-info-background-color: #{$dark-gray-light};
+  --selector-info-color: #{$dark-gray-dark};
 }

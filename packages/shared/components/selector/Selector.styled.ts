@@ -416,27 +416,6 @@ const StyledTabs = styled(Tabs)`
   }
 `;
 
-const StyledInfo = styled.div.attrs(injectDefaultTheme)`
-  width: calc(100% - 32px);
-
-  padding: 12px 16px;
-  margin: 0 16px 12px;
-
-  border-radius: 6px;
-  box-sizing: border-box;
-
-  background-color: ${(props) => props.theme.selector.info.backgroundColor};
-
-  .text {
-    color: ${(props) => props.theme.selector.info.color};
-  }
-
-  .selector-info-text-wrapper {
-    display: flex;
-    gap: 8px;
-  }
-`;
-
 const StyledInputWrapper = styled.div.attrs(injectDefaultTheme)`
   width: 32px;
   height: 32px;
@@ -519,7 +498,6 @@ export {
   StyledArrowRightSvg,
   StyledComboBox,
   StyledTabs,
-  StyledInfo,
   StyledAccessSelector,
   StyledInputWrapper,
   StyledCreateDropDown,

@@ -1,4 +1,4 @@
-const { projectLocalesMap } = require('../config/config');
+const { projectLocalesMap, translationConfig } = require('../config/config');
 const fsUtils = require('../utils/fsUtils');
 
 /**
@@ -25,12 +25,17 @@ async function routes(fastify, options) {
           const namespaces = await fsUtils.getNamespaces(name, baseLanguage);
           fileCount = namespaces.length;
         }
+
+        // Check if the project has any untranslated keys
+        const baseLanguage = translationConfig.baseLanguage || 'en';
+        const hasUntranslatedKeys = await fsUtils.projectHasUntranslatedKeys(name, baseLanguage);
         
         return {
           name,
           path: projectLocalesMap[name],
           fileCount,
-          languageCount: languages.length
+          languageCount: languages.length,
+          fullyTranslated: !hasUntranslatedKeys
         };
       });
       

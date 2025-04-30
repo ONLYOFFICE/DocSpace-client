@@ -300,7 +300,11 @@ export default function Home() {
                 href={`/projects/${project.name}`}
                 passHref
               >
-                <div className="block p-6 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 hover:shadow-md transition-all duration-200 ease-in-out group">
+                <div className={`block p-6 border rounded-lg hover:shadow-md transition-all duration-200 ease-in-out group
+                  ${project.fullyTranslated 
+                    ? 'border-green-200 dark:border-green-700 bg-green-50 dark:bg-green-900/10 hover:bg-green-100 dark:hover:bg-green-900/20' 
+                    : 'border-pink-200 dark:border-pink-700 bg-pink-50 dark:bg-pink-900/10 hover:bg-pink-100 dark:hover:bg-pink-900/20'
+                  }`}>
                   <div className="flex items-center mb-3">
                     <div className="h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center mr-3 text-primary-600 dark:text-primary-400">
                       <svg
@@ -318,9 +322,16 @@ export default function Home() {
                         />
                       </svg>
                     </div>
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                      {project.name}
-                    </h3>
+                    <div className="flex items-center">
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                        {project.name}
+                      </h3>
+                      <span className={`ml-2 px-2 py-0.5 text-xs font-medium rounded-full ${project.fullyTranslated 
+                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
+                        : 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200'}`}>
+                        {project.fullyTranslated ? 'Fully Translated' : 'Needs Translation'}
+                      </span>
+                    </div>
                   </div>
                   <div className="flex flex-wrap gap-3 mt-2 ml-1">
                     <p className="text-sm text-gray-500 dark:text-gray-400">

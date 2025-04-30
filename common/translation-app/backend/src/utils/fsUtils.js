@@ -365,12 +365,85 @@ async function deleteNamespace(projectName, namespace) {
   }
 }
 
+/**
+ * Checks if a project has any untranslated keys in any namespace
+ * @param {string} projectName - Name of the project
+ * @param {string} baseLanguage - The base language to compare against (typically 'en')
+ * @returns {Promise<boolean>} - Returns true if the project has untranslated keys, false if all are translated
+ */
+async function projectHasUntranslatedKeys(projectName, baseLanguage = 'en') {
+  try {
+    // Get all languages and namespaces
+    const languages = await getAvailableLanguages(projectName);
+    const targetLanguages = languages.filter(lang => lang !== baseLanguage);
+    
+    // If there are no other languages, consider the project fully translated
+    if (targetLanguages.length === 0) return false;
+    
+    const namespaces = await getNamespaces(projectName, baseLanguage);
+    
+    // Check each namespace for untranslated content
+    for (const namespace of namespaces) {
+      const baseTranslations = await readTranslationFile(projectName, baseLanguage, namespace);
+      if (!baseTranslations) continue;
+      
+      // Check each target language for untranslated content in this namespace
+      for (const targetLang of targetLanguages) {
+        const targetTranslations = await readTranslationFile(projectName, targetLang, namespace);
+        if (!targetTranslations) return true; // Missing translation file means untranslated
+        
+        // Compare keys recursively
+        const hasUntranslated = compareTranslations(baseTranslations, targetTranslations);
+        if (hasUntranslated) return true;
+      }
+    }
+    
+    // If we get here, all keys in all namespaces are translated
+    return false;
+  } catch (error) {
+    console.error(`Error checking untranslated keys for project ${projectName}:`, error);
+    // In case of error, assume there are untranslated keys
+    return true;
+  }
+}
+
+/**
+ * Helper function to compare two translation objects recursively
+ * @param {Object} baseObj - The base language translation object
+ * @param {Object} targetObj - The target language translation object
+ * @returns {boolean} - Returns true if untranslated keys are found
+ */
+function compareTranslations(baseObj, targetObj, path = '') {
+  for (const key in baseObj) {
+    const currentPath = path ? `${path}.${key}` : key;
+    
+    // Skip if base value is empty or null
+    if (baseObj[key] === null || baseObj[key] === '') continue;
+    
+    // Check if key exists in target
+    if (!(key in targetObj)) return true;
+    
+    // If nested object, recurse
+    if (typeof baseObj[key] === 'object' && baseObj[key] !== null && 
+        typeof targetObj[key] === 'object' && targetObj[key] !== null) {
+      if (compareTranslations(baseObj[key], targetObj[key], currentPath)) return true;
+    } 
+    // If value is missing or empty in target language
+    else if (typeof baseObj[key] === 'string' && 
+             (targetObj[key] === null || targetObj[key] === '')) {
+      return true;
+    }
+  }
+  return false;
+}
+
 module.exports = {
   resolveProjectPath,
   getAvailableLanguages,
   getNamespaces,
   readTranslationFile,
   writeTranslationFile,
+  projectHasUntranslatedKeys,
   createLanguageFolder,
   createEmptyTranslations,
   validateTranslationFile,

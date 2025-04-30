@@ -141,3 +141,18 @@
     }
   }
 }
+
+// Storybook specific styles
+.storybookWrapper {
+  position: relative;
+  height: 300px;
+  padding: 20px;
+  background: var(--background-primary);
+
+  .positionAbsolute {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}

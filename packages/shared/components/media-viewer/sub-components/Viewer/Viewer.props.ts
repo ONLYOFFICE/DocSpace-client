@@ -29,6 +29,8 @@ import type { DeviceType } from "../../../../enums";
 import type { getCustomToolbar } from "../../MediaViewer.helpers";
 import type { PlaylistType } from "../../MediaViewer.types";
 
+import type { JSX } from "react";
+
 interface ViewerProps {
   targetFile?: TFile;
   title: string;

@@ -27,7 +27,7 @@
 import React from "react";
 import { isTablet } from "../../utils";
 
-const getItemHeight = (item: React.ReactElement) => {
+const getItemHeight = (item: React.ReactElement<any>) => {
   const isTabletDevice = isTablet();
 
   const height = item?.props.height ?? 32;

@@ -99,9 +99,9 @@ export const ImageViewer = ({
 
   const lastTapTimeRef = useRef<number>(0);
   const isDoubleTapRef = useRef<boolean>(false);
-  const setTimeoutIDTapRef = useRef<NodeJS.Timeout>();
+  const setTimeoutIDTapRef = useRef<NodeJS.Timeout>(undefined);
   // const changeSourceTimeoutRef = useRef<NodeJS.Timeout>();
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout>(undefined);
   const startAngleRef = useRef<number>(0);
   const toolbarRef = useRef<ImperativeHandle>(null);
 

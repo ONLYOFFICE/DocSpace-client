@@ -36,6 +36,8 @@ import {
   ProtectedFileCategoryType,
 } from "./DownloadDialog.enums";
 
+import type { JSX } from "react";
+
 export type TDownloadedFile = (TFile | TFolder) & {
   checked?: boolean;
   format?: string | null;

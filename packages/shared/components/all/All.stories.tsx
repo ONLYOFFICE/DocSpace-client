@@ -194,7 +194,7 @@ const rowContent = (
 );
 
 let rowCount = 5;
-const rowArray: React.ReactElement[] = [];
+const rowArray: React.ReactElement<any>[] = [];
 while (rowCount !== 0) {
   rowArray.push(rowContent);
   rowCount -= 1;

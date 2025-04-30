@@ -26,6 +26,8 @@
 
 import { TDirectionX, TDirectionY } from "../../types";
 
+import type { JSX } from "react";
+
 export interface DropDownProps {
   /** Children elements */
   children?: React.ReactNode;
@@ -105,7 +107,7 @@ export interface VirtualListProps {
   /** Clean children elements */
   cleanChildren?: React.ReactNode;
   /** Children elements */
-  children: React.ReactElement | React.ReactNode;
+  children: React.ReactElement<any> | React.ReactNode;
   /** Row component */
   Row: React.MemoExoticComponent<
     ({ data, index, style }: RowProps) => JSX.Element

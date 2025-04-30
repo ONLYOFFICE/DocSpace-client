@@ -124,7 +124,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
     ref,
   ) => {
     const usePrevious = (value: string) => {
-      const inputValueRef = useRef<string>();
+      const inputValueRef = useRef<string>(undefined);
       useEffect(() => {
         inputValueRef.current = value;
       });

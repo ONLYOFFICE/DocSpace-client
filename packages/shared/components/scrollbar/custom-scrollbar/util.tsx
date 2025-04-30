@@ -56,7 +56,7 @@ export const isNum = (v: unknown): v is number => {
 export const renderDivWithRenderer = (
   props: ElementPropsWithElementRefAndRenderer,
   elementRef: ElementRef,
-): React.ReactElement | null => {
+): React.ReactElement<any> | null => {
   if (isFun(props.renderer)) {
     props.elementRef = elementRef;
 

@@ -52,7 +52,7 @@ export type RowProps = {
   data?: TData;
   /** In case Checkbox component is specified, it is located in a fixed order,
    * otherwise it is located in the first position. If there is no value, the occupied space is distributed among the other child elements. */
-  element?: React.ReactElement;
+  element?: React.ReactElement<any>;
   /** Accepts id  */
   id?: string;
   /** If true, this state is shown as a rectangle in the checkbox */

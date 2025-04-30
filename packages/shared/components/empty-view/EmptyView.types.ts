@@ -11,7 +11,7 @@ export type EmptyViewLinkType = {
   /** Optional state to pass to the router */
   state?: unknown;
   /** Icon component to display */
-  icon: React.ReactElement;
+  icon: React.ReactElement<any>;
   /** Text description for the link */
   description: string;
   /** Optional click handler for the link */
@@ -29,7 +29,7 @@ export type EmptyViewItemType = {
   /** Description content, can be text or React node */
   description: React.ReactNode;
   /** Icon component to display */
-  icon: React.ReactElement;
+  icon: React.ReactElement<any>;
   /** Optional click handler for the item */
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   /** Optional flag to disable the item */

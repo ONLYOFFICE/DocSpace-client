@@ -26,7 +26,7 @@
 
 export type TViewSelectorOption = {
   value: string;
-  icon: string | React.ReactElement;
+  icon: string | React.ReactElement<any>;
   id?: string;
   callback?: () => void;
 };

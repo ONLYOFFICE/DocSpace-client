@@ -31,7 +31,7 @@ export const getSideInfo = (
   convert: boolean,
   interfaceDirection: string = "ltr",
 ) => {
-  const info: React.ReactElement[] = [];
+  const info: React.ReactElement<any>[] = [];
   let child = null;
   const lastIndex = content.length - 1;
 

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable react/prop-types */
-import React, { useMemo, forwardRef, memo, ForwardedRef } from "react";
+import React, { useMemo, forwardRef, memo, ForwardedRef, type JSX } from "react";
 
 import classNames from "classnames";
 

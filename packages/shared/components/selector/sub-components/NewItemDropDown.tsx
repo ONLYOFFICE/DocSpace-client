@@ -45,7 +45,7 @@ const NewItemDropDown = ({
   onCloseDropDown,
   listHeight,
 }: {
-  dropDownItems: React.ReactElement[];
+  dropDownItems: React.ReactElement<any>[];
   isEmpty?: boolean;
   onCloseDropDown: (e?: MouseEvent) => void;
   listHeight?: number;

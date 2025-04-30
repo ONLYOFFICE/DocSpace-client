@@ -24,12 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
-  forwardRef,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, useImperativeHandle, useRef, useState, type JSX } from "react";
 import classNames from "classnames";
 import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import styles from "./ViewerToolbar.module.scss";

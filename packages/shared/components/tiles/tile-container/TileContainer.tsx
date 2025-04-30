@@ -42,10 +42,10 @@ export const TileContainer = ({
   isDesc,
   style,
 }: TileContainerProps) => {
-  const Rooms: React.ReactElement[] = [];
-  const Folders: React.ReactElement[] = [];
-  const Files: React.ReactElement[] = [];
-  const Templates: React.ReactElement[] = [];
+  const Rooms: React.ReactElement<any>[] = [];
+  const Folders: React.ReactElement<any>[] = [];
+  const Files: React.ReactElement<any>[] = [];
+  const Templates: React.ReactElement<any>[] = [];
 
   React.Children.map(children, (item) => {
     if (

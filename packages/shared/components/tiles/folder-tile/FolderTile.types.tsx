@@ -82,5 +82,5 @@ export type FolderTileProps = {
   isActive?: boolean;
   /** Flag for edit mode */
   isEdit?: boolean;
-  forwardRef?: React.RefObject<HTMLDivElement>;
+  forwardRef?: React.RefObject<HTMLDivElement | null>;
 };

@@ -31,7 +31,7 @@ import { ThemeProvider } from "styled-components";
 import { Base } from "../../themes";
 import { TimePicker } from ".";
 
-const renderWithTheme = (component: React.ReactElement) => {
+const renderWithTheme = (component: React.ReactElement<any>) => {
   return render(<ThemeProvider theme={Base}>{component}</ThemeProvider>);
 };
 

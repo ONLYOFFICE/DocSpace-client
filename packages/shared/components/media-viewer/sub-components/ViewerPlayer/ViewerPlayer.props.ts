@@ -26,6 +26,8 @@
 
 import { DevicesType } from "../../MediaViewer.types";
 
+import type { JSX } from "react";
+
 interface ViewerPlayerProps {
   src?: string;
   isAudio: boolean;

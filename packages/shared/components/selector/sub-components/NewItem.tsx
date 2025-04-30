@@ -44,7 +44,7 @@ const NewItem = ({
 }: {
   label: string;
   style: React.CSSProperties;
-  dropDownItems?: React.ReactElement[];
+  dropDownItems?: React.ReactElement<any>[];
   onCreateClick?: VoidFunction;
   hotkey?: string;
   inputItemVisible?: boolean;

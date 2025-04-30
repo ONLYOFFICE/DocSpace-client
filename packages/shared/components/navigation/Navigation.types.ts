@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { RefObject, LegacyRef } from "react";
+import { RefObject, Ref } from "react";
 import { DeviceType } from "../../enums";
 import { TGetContextMenuModel } from "../context-menu";
 
@@ -63,7 +63,7 @@ export type TPlusButtonProps = {
   onPlusClick?: VoidFunction;
   isFrame?: boolean;
   onCloseDropBox?: () => void;
-  forwardedRef?: React.RefObject<HTMLDivElement>;
+  forwardedRef?: React.RefObject<HTMLDivElement | null>;
 };
 
 export type TToggleInfoPanelButtonProps = {
@@ -158,14 +158,14 @@ export type TControlButtonProps = Omit<TToggleInfoPanelButtonProps, "id"> &
     /** Used for navigation button click handler */
     onNavigationButtonClick?: () => void;
     /** Optional tariff bar element */
-    tariffBar?: React.ReactElement;
+    tariffBar?: React.ReactElement<any>;
     /** Controls visibility of TrashWarning */
     isEmptyPage?: boolean;
 
     isMobile?: boolean;
     /** Used for guidance */
-    addButtonRef?: RefObject<HTMLDivElement>;
-    buttonRef?: LegacyRef<HTMLButtonElement>;
+    addButtonRef?: RefObject<HTMLDivElement | null>;
+    buttonRef?: Ref<HTMLButtonElement>;
     isContextButtonVisible?: boolean;
   };
 

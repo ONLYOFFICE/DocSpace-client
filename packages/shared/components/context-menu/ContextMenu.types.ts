@@ -161,7 +161,7 @@ export interface ContextMenuProps {
   rightOffset?: number;
   isRoom?: boolean;
   isArchive?: boolean;
-  ref?: React.RefObject<HTMLDivElement>;
+  ref?: React.RefObject<HTMLDivElement | null>;
   badgeUrl?: string;
   headerOnlyMobile?: boolean;
 }

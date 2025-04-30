@@ -65,6 +65,6 @@ export type BaseTileProps = {
   onLeave?: () => void;
   className?: string;
   onRoomClick?: (e: React.MouseEvent) => void;
-  checkboxContainerRef?: React.RefObject<HTMLDivElement>;
-  forwardRef?: React.RefObject<HTMLDivElement>;
+  checkboxContainerRef?: React.RefObject<HTMLDivElement | null>;
+  forwardRef?: React.RefObject<HTMLDivElement | null>;
 };

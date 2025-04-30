@@ -133,7 +133,7 @@ export type MainButtonMobileProps = {
   /** Custom styles for the dropdown */
   dropdownStyle?: React.CSSProperties;
   /** Main button ref, used for guidance */
-  mainButtonRef?: React.RefObject<HTMLDivElement>;
+  mainButtonRef?: React.RefObject<HTMLDivElement | null>;
 };
 
 export type SubmenuItemProps = {

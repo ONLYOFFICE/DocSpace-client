@@ -42,7 +42,7 @@ const CustomScrollbars = ({
   paddingAfterLastItem,
 }: CustomScrollbarsVirtualListProps) => {
   const refSetter = (
-    scrollbarsRef: React.RefObject<CustomScrollbar>,
+    scrollbarsRef: React.RefObject<CustomScrollbar | null>,
     forwardedRefArg: unknown,
   ) => {
     // @ts-expect-error Don`t know how fix it
@@ -61,8 +61,9 @@ const CustomScrollbars = ({
   return (
     <Scrollbar
       // @ts-expect-error error from custom scrollbar
-      ref={(scrollbarsRef: React.RefObject<Scrollbar>) =>
-        refSetter(scrollbarsRef, forwardedRef)
+      ref={(scrollbarsRef: React.RefObject<Scrollbar | null>) => {
+        refSetter(scrollbarsRef, forwardedRef);
+      }
       }
       style={{ ...style, overflow: "hidden" }}
       onScroll={onScroll}

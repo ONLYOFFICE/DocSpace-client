@@ -68,7 +68,7 @@ const Scrollbar = React.forwardRef<CustomScrollbar, ScrollbarProps>(
 
     // onScroll handler placed here on Scroller element to get native event instead of parameters that library put
     const renderScroller = React.useCallback(
-      (libProps: { elementRef?: React.LegacyRef<HTMLDivElement> }) => {
+      (libProps: { elementRef?: React.Ref<HTMLDivElement> }) => {
         const { elementRef, ...restLibProps } = libProps;
 
         return (
@@ -119,7 +119,7 @@ const Scrollbar = React.forwardRef<CustomScrollbar, ScrollbarProps>(
     const tabIndexProp = tabIndex !== null ? { tabIndex } : {};
 
     const renderScrollBody = (libProps: {
-      elementRef?: React.LegacyRef<HTMLDivElement>;
+      elementRef?: React.Ref<HTMLDivElement>;
     }) => {
       const { elementRef, ...restLibProps } = libProps;
 

@@ -84,7 +84,7 @@ Object.defineProperty(window, "sessionStorage", {
 });
 
 // Test wrapper with providers if needed
-const renderWithProviders = (ui: React.ReactElement) => {
+const renderWithProviders = (ui: React.ReactElement<any>) => {
   return render(ui);
 };
 

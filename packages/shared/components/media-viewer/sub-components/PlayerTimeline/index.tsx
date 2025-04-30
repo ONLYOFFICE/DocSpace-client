@@ -41,7 +41,7 @@ const PlayerTimeline = forwardRef<PlayerTimelineRef, PlayerTimelineProps>(
     const timelineTooltipRef = useRef<HTMLTimeElement>(null);
     const timelineRef = useRef<HTMLDivElement>(null);
     const hoverProgressRef = useRef<HTMLDivElement>(null);
-    const setTimeoutTimelineTooltipRef = useRef<NodeJS.Timeout>();
+    const setTimeoutTimelineTooltipRef = useRef<NodeJS.Timeout>(undefined);
     const progressRef = useRef<HTMLDivElement>(null);
 
     const showTimelineTooltip = () => {

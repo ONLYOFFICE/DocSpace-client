@@ -83,7 +83,7 @@ export type BadgesProps = {
   canEditing?: boolean;
   isTemplatesFolder?: boolean;
   onCreateRoom?: () => void;
-  newFilesBadge?: React.ReactElement;
+  newFilesBadge?: React.ReactElement<any>;
   className?: string;
   isExtsCustomFilter?: boolean;
   customFilterExternalLink?: string;
@@ -92,5 +92,5 @@ export type BadgesProps = {
 export type BadgeWrapperProps = {
   onClick?: () => void;
   isTile?: boolean;
-  children: React.ReactElement;
+  children: React.ReactElement<any>;
 };

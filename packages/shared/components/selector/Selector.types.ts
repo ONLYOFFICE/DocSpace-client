@@ -281,7 +281,7 @@ export type AccessSelectorProps = Omit<
   TWithAccessRightsProps,
   "withAccessRights"
 > & {
-  footerRef: React.RefObject<HTMLDivElement>;
+  footerRef: React.RefObject<HTMLDivElement | null>;
 };
 
 // footer input
@@ -379,7 +379,7 @@ export type SelectorProps = TSelectorHeader &
     descriptionText?: string;
 
     withPadding?: boolean;
-    injectedElement?: React.ReactElement;
+    injectedElement?: React.ReactElement<any>;
 
     isSSR?: boolean;
     selectedItem?: TSelectorItem | null; // no multiSelect only
@@ -413,7 +413,7 @@ export type BodyProps = TSelectorInfo & {
   withFooterCheckbox?: boolean;
   descriptionText?: string;
   withInfoBadge?: boolean;
-  injectedElement?: React.ReactElement;
+  injectedElement?: React.ReactElement<any>;
 
   isSSR?: boolean;
 };
@@ -549,7 +549,7 @@ export type TSelectorItemNew = MergeTypes<
   {
     isCreateNewItem: boolean;
     hotkey?: string;
-    dropDownItems?: React.ReactElement[];
+    dropDownItems?: React.ReactElement<any>[];
     onCreateClick?: VoidFunction;
     onBackClick: VoidFunction;
 

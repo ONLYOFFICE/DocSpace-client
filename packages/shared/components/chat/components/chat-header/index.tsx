@@ -2,18 +2,20 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import { useMessageStore } from "../../store/messageStore";
+import { ChatHeaderProps } from "../../types";
 
 import styles from "./ChatHeader.module.scss";
 
-import SelectChat, { SelectChatProps } from "./sub-components/SelectChat";
+import SelectChat from "./sub-components/SelectChat";
 import CreateChat from "./sub-components/CreateChat";
 import SelectModel from "./sub-components/SelectModel";
 
 const ChatHeader = ({
   isFullScreen,
-  isPanel,
   currentDeviceType,
-}: SelectChatProps & { isPanel: boolean }) => {
+
+  isPanel,
+}: ChatHeaderProps) => {
   const { sessions, messages, isSelectSessionOpen } = useMessageStore();
 
   return (

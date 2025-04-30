@@ -8,18 +8,19 @@ import { Text } from "../../../text";
 import { IconButton } from "../../../icon-button";
 
 import { useFilesStore } from "../../store/filesStore";
+import { FilePreviewProps } from "../../types";
 
 import styles from "./FilePreview.module.scss";
-import { TFilePreviewProps } from "./FilePreview.types";
 
 const FilePreview = ({
   files,
+
   displayFileExtension,
 
   withRemoveFile,
 
   getIcon,
-}: TFilePreviewProps) => {
+}: FilePreviewProps) => {
   const { removeFile, setWrapperHeight } = useFilesStore();
 
   const wrapperRef = React.useRef<HTMLDivElement>(null);

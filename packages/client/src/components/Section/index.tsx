@@ -85,8 +85,7 @@ export default inject(
       createRoomDialogVisible || invitePanelOptions.visible;
 
     const { isScrollLocked: isInfoPanelScrollLocked } = infoPanelStore;
-    const { aiChatIsVisible, setAiChatIsVisible, aiChatID, vectorizedFiles } =
-      flowStore;
+    const { aiChatIsVisible, setAiChatIsVisible, vectorizedFiles } = flowStore;
 
     const { getIcon, displayFileExtension } = filesSettingsStore;
 
@@ -112,7 +111,6 @@ export default inject(
       setAiChatIsVisible,
       getIcon,
       displayFileExtension,
-      aiChatID,
       aiSelectedFolder: id,
       aiUserId: flowStore.userId,
       vectorizedFiles,

@@ -6,6 +6,7 @@
   flex-direction: row;
 
   height: 100%;
+  // 70px - height of navigation
   max-height: calc(100% - 70px);
   width: 100%;
 
@@ -14,10 +15,12 @@
   box-sizing: border-box;
 
   @include tablet-and-below {
+    // 62px - height of navigation
     max-height: calc(100% - 62px);
   }
 
   @include mobile {
+    // 54px - height of navigation
     max-height: calc(100% - 54px);
   }
 }
@@ -35,6 +38,7 @@
   box-sizing: border-box;
 
   .container {
+    // 3px - padding from right with scrollbar padding = 20px
     padding: 0 3px 0 20px;
     height: 100%;
     width: 100%;

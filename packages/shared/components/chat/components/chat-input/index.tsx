@@ -37,7 +37,6 @@ import { IconButton } from "../../../icon-button";
 
 import { useFilesStore } from "../../store/filesStore";
 import { useMessageStore } from "../../store/messageStore";
-import { useCurrentFlowStore } from "../../store/currentFlowStore";
 
 import FilePreview from "../file-preview";
 
@@ -51,7 +50,6 @@ const ChatInput = ({
   displayFileExtension,
   getIcon,
 }: ChatInputProps) => {
-  const { flow } = useCurrentFlowStore();
   const { t } = useTranslation(["Common"]);
 
   const {
@@ -79,18 +77,10 @@ const ChatInput = ({
   const sendMessageAction = React.useCallback(() => {
     if (isRequestRunning || !value || showSelector) return;
 
-    sendMessage(value, flow!, files);
+    sendMessage(value, files);
     setValue("");
     clearFiles();
-  }, [
-    isRequestRunning,
-    value,
-    flow,
-    showSelector,
-    files,
-    sendMessage,
-    clearFiles,
-  ]);
+  }, [isRequestRunning, value, showSelector, files, sendMessage, clearFiles]);
 
   const onKeyEnter = React.useCallback(
     (e: KeyboardEvent) => {

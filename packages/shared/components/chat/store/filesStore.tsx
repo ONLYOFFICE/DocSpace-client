@@ -8,15 +8,9 @@ export default class FilesStore {
 
   wrapperHeight: number = 0;
 
-  flowId: string = "";
-
   constructor() {
     makeAutoObservable(this);
   }
-
-  setFlowId = (flowId: string) => {
-    this.flowId = flowId;
-  };
 
   setFiles = (files: TSelectorItem[] = []) => {
     this.files = files;
@@ -39,16 +33,10 @@ export const FilesStoreContext = React.createContext<FilesStore>(undefined!);
 
 export const FilesStoreContextProvider = ({
   children,
-  aiChatID,
 }: {
   children: React.ReactNode;
-  aiChatID: string;
 }) => {
   const store = React.useMemo(() => new FilesStore(), []);
-
-  React.useEffect(() => {
-    store.setFlowId(aiChatID);
-  }, [aiChatID, store]);
 
   return (
     <FilesStoreContext.Provider value={store}>

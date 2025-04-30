@@ -1,3 +1,4 @@
+import { TTranslation } from "../../../types";
 import { LANGUAGE } from "../../../constants";
 import { getCookie } from "../../../utils";
 import getCorrectDate from "../../../utils/getCorrectDate";
@@ -63,4 +64,16 @@ export const getChatDate = (date: Date): string => {
   }
   const locale = getCookie(LANGUAGE);
   return getCorrectDate(locale || "en", dateToCheck).split(" ")[0];
+};
+
+export const getSessionId = (folderId: string | number, userId: string) => {
+  return `folder-${folderId}-${userId}-${new Date().getTime()}`;
+};
+
+export const getChateTranslationDate = (t: TTranslation, value: string) => {
+  return value === "today"
+    ? t("Common:Today")
+    : value === "yesterday"
+      ? t("Common:Yesterday")
+      : "";
 };

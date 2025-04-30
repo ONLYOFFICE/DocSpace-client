@@ -6,56 +6,56 @@ import FlowsApi from "../../../api/flows/flows.api";
 import { TSelectorItem } from "../../selector";
 
 import { ChatMessageType, PropertiesType } from "../types/chat";
-import { FlowType } from "../types/flow";
 import {
   extractFilesFromMessage,
-  getChatDate,
   removeFolderFromMessage,
+  getSessionId,
+  getChatDate,
 } from "../utils";
 
 export default class MessageStore {
-  flowId: string = "";
-
-  messages: ChatMessageType[] = [];
+  flowId = "";
 
   aiSelectedFolder: string | number = "";
 
-  aiUserId: string = "";
+  aiUserId = "";
+
+  messages: ChatMessageType[] = [];
 
   sessions: Map<string, ChatMessageType[]> = new Map();
 
   sortedSessions: Array<[string, Date]> = [];
 
-  currentSession: string = "";
+  currentSession = "";
 
-  isInit: boolean = false;
+  isInit = false;
 
-  isRequestRunning: boolean = false;
-
-  abortController: AbortController | null = null;
+  isRequestRunning = false;
 
   isSelectSessionOpen = false;
+
+  abortController: AbortController | null = null;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setIsSelectSessionOpen = (value: boolean) => {
-    this.isSelectSessionOpen = value;
-  };
-
   setFlowId = (flowId: string) => {
     this.flowId = flowId;
+  };
+
+  setAiUserId = (aiUserId: string) => {
+    this.aiUserId = aiUserId;
   };
 
   setAiSelectedFolder = (aiSelectedFolder: string | number) => {
     this.aiSelectedFolder = aiSelectedFolder;
 
-    this.currentSession = `folder-${aiSelectedFolder}-${this.aiUserId}-${new Date().getTime()}`;
+    this.currentSession = getSessionId(aiSelectedFolder, this.aiUserId);
   };
 
-  setAiUserId = (aiUserId: string) => {
-    this.aiUserId = aiUserId;
+  setIsSelectSessionOpen = (value: boolean) => {
+    this.isSelectSessionOpen = value;
   };
 
   fetchMessages = async () => {
@@ -71,21 +71,6 @@ export default class MessageStore {
     const sessions = new Map<string, ChatMessageType[]>();
 
     messages.forEach((message) => {
-      let files = message.files;
-      // Handle the "[]" case, empty string, or already parsed array
-      if (Array.isArray(files)) {
-        // files is already an array, no need to parse
-      } else if (files === "[]" || files === "") {
-        files = [];
-      } else if (typeof files === "string") {
-        try {
-          files = JSON.parse(files);
-        } catch (error) {
-          console.error("Error parsing files:", error);
-          files = [];
-        }
-      }
-
       const { cleanedMessage, fileIds } = extractFilesFromMessage(message.text);
 
       const msgWithoutFolder = removeFolderFromMessage(cleanedMessage);
@@ -96,7 +81,6 @@ export default class MessageStore {
         isSend,
         message: isSend ? msgWithoutFolder : message.text,
         sender_name: message.sender_name,
-        files,
         id: message.id,
         timestamp: message.timestamp,
         session: message.session_id,
@@ -122,20 +106,25 @@ export default class MessageStore {
 
     const timestampSessions = new Map<string, Date>();
 
-    // Process each session individually
     Array.from(sessions.entries()).forEach(([sessionId, sessionMessages]) => {
-      // First sort by timestamp to get chronological order
       const sortedByTime = [...sessionMessages].sort(
         (a, b) =>
           new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
       );
 
-      // Then implement alternating pattern (user → AI → user → AI) for this session
       const finalSessionHistory: ChatMessageType[] = [];
-      const userMessages = sortedByTime.filter((msg) => msg.isSend);
-      const aiMessages = sortedByTime.filter((msg) => !msg.isSend);
 
-      // Create pairs of user message followed by AI message
+      const userMessages: ChatMessageType[] = [];
+      const aiMessages: ChatMessageType[] = [];
+
+      sortedByTime.forEach((msg) => {
+        if (msg.isSend) {
+          userMessages.push(msg);
+        } else {
+          aiMessages.push(msg);
+        }
+      });
+
       for (
         let i = 0;
         i < Math.max(userMessages.length, aiMessages.length);
@@ -150,7 +139,6 @@ export default class MessageStore {
         }
       }
 
-      // Update the session with sorted and paired messages
       newSessions.set(sessionId, finalSessionHistory);
       timestampSessions.set(
         sessionId,
@@ -172,11 +160,7 @@ export default class MessageStore {
     });
   };
 
-  sendMessage = async (
-    message: string,
-    flow: FlowType,
-    files: TSelectorItem[],
-  ) => {
+  sendMessage = async (message: string, files: TSelectorItem[]) => {
     if (this.isRequestRunning) return;
     this.isRequestRunning = true;
 
@@ -205,7 +189,6 @@ export default class MessageStore {
             input_value: `${message}${filesStr}${folderStr}`,
             session: this.currentSession,
           },
-          data: flow.data,
           files: [],
         },
         this.abortController!,
@@ -301,10 +284,6 @@ export default class MessageStore {
                 });
               }
             } catch (e: unknown) {
-              console.log("++++++++ERROR++++++++");
-              console.log("Parsing failed");
-              console.log("-------------------");
-              console.log(c);
               console.log(e);
             }
           });
@@ -323,7 +302,6 @@ export default class MessageStore {
 
       await stream();
     } catch (e) {
-      // Check if this is an abort error
       if (
         e instanceof Error &&
         (e.name === "AbortError" ||
@@ -359,7 +337,7 @@ export default class MessageStore {
   };
 
   startNewSessions = () => {
-    this.currentSession = `folder-${this.aiSelectedFolder}-${this.aiUserId}-${new Date().getTime()}`;
+    this.currentSession = getSessionId(this.aiSelectedFolder, this.aiUserId);
     this.messages = [];
   };
 

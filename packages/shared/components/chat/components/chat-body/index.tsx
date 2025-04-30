@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { observer } from "mobx-react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -33,18 +33,19 @@ import { Scrollbar } from "../../../scrollbar";
 import { DropDownItem } from "../../../drop-down-item";
 
 import { useMessageStore } from "../../store/messageStore";
+import { getChateTranslationDate } from "../../utils";
+import { ChatBodyProps } from "../../types";
 
 import ChatHeader from "../chat-header";
 
 import styles from "./ChatBody.module.scss";
-import { ChatBodyProps } from "./ChatBody.types";
 
 const ChatBody = ({
   children,
   isFullScreen,
   currentDeviceType,
-}: ChatBodyProps) => {
-  const { preparedMessages, selectSession, isSelectSessionOpen } =
+}: PropsWithChildren<ChatBodyProps>) => {
+  const { preparedMessages, isSelectSessionOpen, selectSession } =
     useMessageStore();
 
   const { t } = useTranslation(["Common"]);
@@ -70,13 +71,7 @@ const ChatBody = ({
             <div className={styles.container}>
               {preparedMessages.map(({ title, value, isActive, isDate }) => {
                 const currentTitle =
-                  !isDate || title
-                    ? title
-                    : value === "today"
-                      ? t("Common:Today")
-                      : value === "yesterday"
-                        ? t("Common:Yesterday")
-                        : "";
+                  !isDate || title ? title : getChateTranslationDate(t, value);
 
                 return (
                   <DropDownItem

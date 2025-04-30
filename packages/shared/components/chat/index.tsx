@@ -26,10 +26,7 @@
 
 import React from "react";
 
-import { DeviceType } from "../../enums";
-import { TFile } from "../../api/files/types";
 import { CHAT_ID } from "../../api/flows/flows.constants";
-import { TUser } from "../../api/people/types";
 
 import ChatHeader from "./components/chat-header";
 import ChatBody from "./components/chat-body";
@@ -37,9 +34,10 @@ import ChatMessageBody from "./components/chat-message-body";
 import ChatInput from "./components/chat-input";
 
 import { FilesStoreContextProvider } from "./store/filesStore";
-import { CurrentFlowStoreContextProvider } from "./store/currentFlowStore";
 import { MessageStoreContextProvider } from "./store/messageStore";
 import { ModelStoreContextProvider } from "./store/modelStore";
+
+import { ChatProps } from "./types";
 
 const Chat = ({
   currentDeviceType,
@@ -52,57 +50,40 @@ const Chat = ({
   isFullScreen,
 
   getIcon,
-}: {
-  currentDeviceType: DeviceType;
-  displayFileExtension: boolean;
-
-  aiChatID: string;
-  aiSelectedFolder: string | number;
-  aiUserId: string;
-
-  vectorizedFiles: TFile[];
-
-  user: TUser;
-
-  isFullScreen: boolean;
-
-  getIcon: (size: number, fileExst: string) => string;
-}) => {
+}: ChatProps) => {
   return (
-    <CurrentFlowStoreContextProvider aiChatID={aiChatID}>
-      <FilesStoreContextProvider aiChatID={aiChatID}>
-        <MessageStoreContextProvider
-          aiChatID={aiChatID}
-          aiSelectedFolder={aiSelectedFolder}
-          aiUserId={aiUserId}
-        >
-          <ModelStoreContextProvider selectedFolder={aiSelectedFolder}>
-            <ChatBody
+    <FilesStoreContextProvider>
+      <MessageStoreContextProvider
+        aiChatID={aiChatID}
+        aiSelectedFolder={aiSelectedFolder}
+        aiUserId={aiUserId}
+      >
+        <ModelStoreContextProvider selectedFolder={aiSelectedFolder}>
+          <ChatBody
+            isFullScreen={isFullScreen}
+            currentDeviceType={currentDeviceType}
+          >
+            <ChatHeader
               isFullScreen={isFullScreen}
               currentDeviceType={currentDeviceType}
-            >
-              <ChatHeader
-                isFullScreen={isFullScreen}
-                currentDeviceType={currentDeviceType}
-                isPanel={false}
-              />
-              <ChatMessageBody
-                displayFileExtension={displayFileExtension}
-                getIcon={getIcon}
-                vectorizedFiles={vectorizedFiles}
-                user={user}
-                isFullScreen={isFullScreen}
-              />
-              <ChatInput
-                currentDeviceType={currentDeviceType}
-                displayFileExtension={displayFileExtension}
-                getIcon={getIcon}
-              />
-            </ChatBody>
-          </ModelStoreContextProvider>
-        </MessageStoreContextProvider>
-      </FilesStoreContextProvider>
-    </CurrentFlowStoreContextProvider>
+              isPanel={false}
+            />
+            <ChatMessageBody
+              displayFileExtension={displayFileExtension}
+              getIcon={getIcon}
+              vectorizedFiles={vectorizedFiles}
+              user={user}
+              isFullScreen={isFullScreen}
+            />
+            <ChatInput
+              currentDeviceType={currentDeviceType}
+              displayFileExtension={displayFileExtension}
+              getIcon={getIcon}
+            />
+          </ChatBody>
+        </ModelStoreContextProvider>
+      </MessageStoreContextProvider>
+    </FilesStoreContextProvider>
   );
 };
 

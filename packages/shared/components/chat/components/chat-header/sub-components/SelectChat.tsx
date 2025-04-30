@@ -5,19 +5,14 @@ import classNames from "classnames";
 
 import SelectSessionReactSvg from "PUBLIC_DIR/images/select.session.react.svg";
 
-import { DeviceType } from "../../../../../enums";
-
 import { DropDown } from "../../../../drop-down";
 import { DropDownItem } from "../../../../drop-down-item";
 
 import { useMessageStore } from "../../../store/messageStore";
+import { SelectChatProps } from "../../../types";
+import { getChateTranslationDate } from "../../../utils";
 
 import styles from "../ChatHeader.module.scss";
-
-export type SelectChatProps = {
-  isFullScreen: boolean;
-  currentDeviceType: DeviceType;
-};
 
 const SelectChat = ({ isFullScreen, currentDeviceType }: SelectChatProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -28,7 +23,6 @@ const SelectChat = ({ isFullScreen, currentDeviceType }: SelectChatProps) => {
     selectSession,
     isSelectSessionOpen,
     setIsSelectSessionOpen,
-
     preparedMessages,
   } = useMessageStore();
 
@@ -67,13 +61,7 @@ const SelectChat = ({ isFullScreen, currentDeviceType }: SelectChatProps) => {
         >
           {preparedMessages.map(({ title, value, isActive, isDate }) => {
             const currentTitle =
-              !isDate || title
-                ? title
-                : value === "today"
-                  ? t("Common:Today")
-                  : value === "yesterday"
-                    ? t("Common:Yesterday")
-                    : "";
+              !isDate || title ? title : getChateTranslationDate(t, value);
 
             return (
               <DropDownItem

@@ -71,6 +71,7 @@ export type TInfoBar = {
 
 export type InfoBarProps = {
   visible: boolean;
+  className?: string;
 };
 
 export type BreadCrumbsProps = {

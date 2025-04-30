@@ -2083,6 +2083,7 @@
 }
 
 .light {
+  --selector-body-description-text: #{$gray};
   --selector-breadcrumbs-prev-item-color: #{$light-gray-dark};
   --selector-breadcrumbs-arrow-right-color: #{$light-gray-dark};
 
@@ -2095,6 +2096,8 @@
 }
 
 .dark {
+  --selector-body-description-text: #{$gray-dark};
+
   --selector-breadcrumbs-prev-item-color: #{$dark-gray-dark};
   --selector-breadcrumbs-arrow-right-color: #{$dark-gray-dark};
 

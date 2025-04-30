@@ -33,6 +33,49 @@
   overflow: hidden;
 }
 
+.body {
+  width: 100%;
+
+  &.withHeaderAndFooter {
+    height: calc(100% - var(--footer-height) - var(--header-height));
+  }
+
+  &.withFooterOnly {
+    height: calc(100% - var(--footer-height));
+  }
+
+  &.withHeaderOnly {
+    height: calc(100% - var(--header-height));
+  }
+
+  &.noHeaderFooter {
+    height: 100%;
+  }
+
+  &.withPadding {
+    padding: 16px 0 0;
+  }
+
+  .searchInput,
+  .searchLoader {
+    padding: 0 16px;
+    margin-bottom: 12px;
+  }
+
+  .bodyDescriptionText {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    margin-bottom: 12px;
+    padding: 0 16px;
+    color: var(--selector-body-description-text);
+  }
+
+  .selectorInfoBar {
+    margin: 0px 20px 16px;
+  }
+}
+
 .footer {
   width: calc(100% - 32px);
   padding: 0 16px;

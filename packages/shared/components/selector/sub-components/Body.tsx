@@ -27,10 +27,10 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
-
+import { classNames } from "@docspace/shared/utils";
 import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
-
+import styles from "../Selector.module.scss";
 import { Scrollbar } from "../../scrollbar";
 import { Text } from "../../text";
 
@@ -40,7 +40,7 @@ import { TabsContext } from "../contexts/Tabs";
 import { SelectAllContext } from "../contexts/SelectAll";
 import { InfoBarContext } from "../contexts/InfoBar";
 
-import { StyledBody, StyledTabs } from "../Selector.styled";
+import { StyledTabs } from "../Selector.styled";
 import { BodyProps } from "../Selector.types";
 
 import { InfoBar } from "./InfoBar";
@@ -251,26 +251,43 @@ const Body = ({
     (Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom) ||
       Boolean(items?.[0]?.createDefineRoomType === RoomsType.VirtualDataRoom));
 
+  const getFooterHeight = () => {
+    if (withFooterCheckbox) return FOOTER_WITH_CHECKBOX_HEIGHT;
+    if (withFooterInput) return FOOTER_WITH_NEW_NAME_HEIGHT;
+    return FOOTER_HEIGHT;
+  };
+
+  const getHeaderHeight = () => {
+    if (withTabs) return HEADER_HEIGHT;
+    return HEADER_HEIGHT + CONTAINER_PADDING;
+  };
+
   return (
-    <StyledBody
+    <div
       ref={bodyRef}
-      footerHeight={
-        withFooterCheckbox
-          ? FOOTER_WITH_CHECKBOX_HEIGHT
-          : withFooterInput
-            ? FOOTER_WITH_NEW_NAME_HEIGHT
-            : FOOTER_HEIGHT
+      className={classNames(
+        styles.body,
+        {
+          [styles.withHeaderAndFooter]: footerVisible && withHeader,
+          [styles.withFooterOnly]: footerVisible && !withHeader,
+          [styles.withHeaderOnly]: !footerVisible && withHeader,
+          [styles.noHeaderFooter]: !footerVisible && !withHeader,
+          [styles.withPadding]: !withTabs && withPadding,
+        },
+        "selector_body",
+      )}
+      style={
+        {
+          "--footer-height": `${getFooterHeight()}px`,
+          "--header-height": `${getHeaderHeight()}px`,
+        } as React.CSSProperties
       }
-      className="selector_body"
-      headerHeight={
-        withTabs ? HEADER_HEIGHT : HEADER_HEIGHT + CONTAINER_PADDING
-      }
-      footerVisible={footerVisible}
-      withHeader={withHeader}
-      withTabs={withTabs}
-      withPadding={withPadding}
     >
-      <InfoBar ref={infoBarRef} visible={itemsCount !== 0} />
+      <InfoBar
+        className={styles.selectorInfoBar}
+        ref={infoBarRef}
+        visible={itemsCount !== 0}
+      />
       <BreadCrumbs visible={!isShareFormEmpty} />
 
       {injectedElement
@@ -285,7 +302,10 @@ const Body = ({
         />
       ) : null}
 
-      <Search isSearch={itemsCount > 0 || isSearch} />
+      <Search
+        className={styles.searchInput}
+        isSearch={itemsCount > 0 || isSearch}
+      />
 
       {withInfo && !isLoading ? (
         <Info
@@ -306,7 +326,9 @@ const Body = ({
       ) : (
         <>
           {descriptionText ? (
-            <Text className="body-description-text">{descriptionText}</Text>
+            <Text className={styles.bodyDescriptionText}>
+              {descriptionText}
+            </Text>
           ) : null}
 
           <SelectAll
@@ -393,7 +415,7 @@ const Body = ({
           )}
         </>
       )}
-    </StyledBody>
+    </div>
   );
 };
 

@@ -52,103 +52,6 @@ const accessComboboxStyles = css`
   }
 `;
 
-const StyledSelector = styled.div.attrs(injectDefaultTheme)`
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-
-  overflow: hidden;
-`;
-
-const StyledHeader = styled.div.attrs(injectDefaultTheme)<{
-  withoutBorder?: boolean;
-  withoutIcon: boolean;
-}>`
-  width: calc(100% - 53px);
-  min-height: 53px;
-  height: 53px;
-  max-height: 53px;
-
-  padding: 0 16px;
-
-  ${(props) =>
-    props.withoutBorder
-      ? "border-bottom: none;"
-      : `border-bottom: ${props.theme.selector.border};`}
-
-  display: flex;
-  align-items: center;
-
-  .arrow-button {
-    cursor: pointer;
-    margin-inline-end: 12px;
-    min-width: 17px;
-
-    svg {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-    }
-  }
-
-  .heading-text {
-    font-weight: 700;
-    font-size: 21px;
-    line-height: 28px;
-  }
-`;
-
-const StyledBody = styled.div.attrs(injectDefaultTheme)<{
-  footerVisible: boolean;
-  withHeader?: boolean;
-  footerHeight: number;
-  headerHeight: number;
-  withTabs?: boolean;
-  withPadding?: boolean;
-}>`
-  width: 100%;
-
-  height: ${(props) =>
-    props.footerVisible
-      ? props.withHeader
-        ? `calc(100% - ${props.footerHeight}px - ${props.headerHeight}px)`
-        : `calc(100% - ${props.footerHeight}px)`
-      : props.withHeader
-        ? `calc(100% - ${props.headerHeight}px)`
-        : "100%"};
-
-  padding: ${({ withTabs, withPadding }) =>
-    withTabs || !withPadding ? "0" : "16px 0 0"};
-
-  .search-input,
-  .search-loader {
-    padding: 0 16px;
-
-    margin-bottom: 12px;
-  }
-
-  .body-description-text {
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 20px;
-    margin-bottom: 12px;
-
-    padding: 0 16px;
-
-    color: ${(props) => props.theme.selector.bodyDescriptionText};
-  }
-
-  .selector_info-bar {
-    margin: 0px 20px 16px;
-  }
-`;
-
-const selectedCss = css`
-  background: ${(props) =>
-    props.theme.selector.item.selectedBackground} !important;
-`;
-
 const StyledEmptyScreen = styled.div.attrs(injectDefaultTheme)<{
   withSearch: boolean;
 }>`
@@ -379,9 +282,6 @@ const StyledCreateDropDown = styled.div.attrs(injectDefaultTheme)<{
 `;
 
 export {
-  StyledSelector,
-  StyledHeader,
-  StyledBody,
   StyledEmptyScreen,
   StyledArrowRightSvg,
   StyledComboBox,

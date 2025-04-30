@@ -718,6 +718,7 @@
     height: calc(100% - 48px);
     width: 100vw;
     max-width: 100vw;
+    min-width: unset;
   }
 
   &.fullScreen {

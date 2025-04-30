@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Овде су приказани само <1>{{productName}}</1> и <1> администратори соба </1>.",
   "AddUsersOrGroupsInfoGroups": "Само <1>{{productName}}</1> и <1> администратори соба </1> из изабраних група моћи ће да креирају собе користећи овај шаблон.",
   "AfterFilesWillBeDeletedPermanently": "Након што се датотеке трајно обришу.",
-  "AfterFilesWillBeMovedToTrash": "Након што се фајлови преместе у корпу.",
   "AllLinksAreDisabled": "Сви линкови су онемогућени",
   "AppointNewOwner": "Поставили сте новог власника.",
   "ArchiveAction": "Празна архива",

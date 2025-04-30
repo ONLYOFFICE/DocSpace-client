@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "ここに表示されるのは、<1>{{productName}}</1>と<1>ルーム管理者</1>のみです。",
   "AddUsersOrGroupsInfoGroups": "選択されたグループからの<1>{{productName}}</1>と<1>ルーム管理者</1>のみが、このテンプレートを使用してルームを作成できます。",
   "AfterFilesWillBeDeletedPermanently": "ファイルは削除されます。",
-  "AfterFilesWillBeMovedToTrash": "ファイルはゴミ箱に移動されます。",
   "AllLinksAreDisabled": "すべてのリンクは無効です",
   "AppointNewOwner": "新しい所有者を任命されました。",
   "ArchiveAction": "空のアーカイブ",

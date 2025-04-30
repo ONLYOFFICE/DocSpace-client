@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Solo administradores de <1>{{productName}}</1> y <1>administradores de sala</1> se muestran aquí",
   "AddUsersOrGroupsInfoGroups": "Solo administradores  de <1>{{productName}}</1> y <1>administradores de salas</1> de los grupos seleccionados podrán crear salas usando esta plantilla.",
   "AfterFilesWillBeDeletedPermanently": "Después los archivos se eliminarán permanentemente.",
-  "AfterFilesWillBeMovedToTrash": "Después los archivos se moverán a la Papelera.",
   "AllLinksAreDisabled": "Todos los enlaces están desactivados",
   "AppointNewOwner": "Ha asignado un nuevo propietario.",
   "ArchiveAction": "Archivo vacío",

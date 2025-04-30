@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "فقط <1>{{productName}}</1> و<1>مسؤولو الغرف</1> يظهرون هنا.",
   "AddUsersOrGroupsInfoGroups": "فقط <1>{{productName}}</1> و<1>مسؤولو الغرف</1> من المجموعات المحددة سيتمكنون من إنشاء غرف باستخدام هذا القالب.",
   "AfterFilesWillBeDeletedPermanently": " بعد ذلك سيتم حذف الملفات نهائيًا.",
-  "AfterFilesWillBeMovedToTrash": " بعد أن يتم نقل الملفات إلى سلة المهملات.",
   "AllLinksAreDisabled": "جميع الروابط معطلة",
   "AppointNewOwner": "لقد قمت بتعيين مالك جديد",
   "ArchiveAction": "أرشيف فارغ",

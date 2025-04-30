@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Burada sadece <1>{{productName}}</1> ve <1>Oda yöneticileri</1> gösterilir",
   "AddUsersOrGroupsInfoGroups": "Sadece seçilen gruplardaki <1>{{productName}}</1> ve <1>Oda yöneticileri</1> bu şablonu kullanarak oda oluşturabilir.",
   "AfterFilesWillBeDeletedPermanently": "Dosyalar kalıcı olarak silindikten sonra.",
-  "AfterFilesWillBeMovedToTrash": "Dosyalar Çöp Kutusuna taşındıktan sonra.",
   "AllLinksAreDisabled": "Tüm bağlantılar devre dışı bırakıldı",
   "AppointNewOwner": "Yeni bir sahip atadınız.",
   "ArchiveAction": "Arşivi boşalt",

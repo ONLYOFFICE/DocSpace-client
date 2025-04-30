@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Chỉ <1>{{productName}} </1> và <1> Quản trị viên phòng </1> được hiển thị ở đây",
   "AddUsersOrGroupsInfoGroups": "Chỉ <1>{{productName}} </1> và <1> Quản trị viên phòng </1> từ các nhóm đã được chọn mới có thể tạo phòng bằng mẫu này.",
   "AfterFilesWillBeDeletedPermanently": "Sau đó các tập tin sẽ bị xóa vĩnh viễn.",
-  "AfterFilesWillBeMovedToTrash": "Sau đó các tập tin sẽ được chuyển vào Thùng rác.",
   "AllLinksAreDisabled": "Tất cả các liên kết đã bị vô hiệu hóa",
   "AppointNewOwner": "Bạn đã chỉ định chủ sở hữu mới.",
   "ArchiveAction": "Kho sao lưu trống",

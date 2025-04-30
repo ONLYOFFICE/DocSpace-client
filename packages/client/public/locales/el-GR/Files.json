@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Μόνο διαχειριστές <1>{{productName}}</1> και <1>δωματίων</1> εμφανίζονται εδώ",
   "AddUsersOrGroupsInfoGroups": "Μόνο διαχειριστές <1>{{productName}}</1> και <1> δωματίων</1> από τις επιλεγμένες ομάδες θα μπορούν να δημιουργούν δωμάτια χρησιμοποιώντας αυτό το πρότυπο.",
   "AfterFilesWillBeDeletedPermanently": "Μετά, τα αρχεία θα διαγραφούν οριστικά.",
-  "AfterFilesWillBeMovedToTrash": "Μετά, τα αρχεία θα μεταφερθούν στον Κάδο Απορριμμάτων.",
   "AllLinksAreDisabled": "Όλοι οι σύνδεσμοι είναι απενεργοποιημένοι",
   "AppointNewOwner": "Έχετε ορίσει νέο ιδιοκτήτη.",
   "ArchiveAction": "Κενό αρχείο",

@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Widać tu tylko <1>{{productName}}</1> i <1>administratorów pokoi</1>",
   "AddUsersOrGroupsInfoGroups": "Tylko <1>administratorzy pokoi</1> i <1>{{productName}}</1> z wybranych grup będą w stanie tworzyć pokoje za pomocą tego szablonu.",
   "AfterFilesWillBeDeletedPermanently": "Następnie pliki zostaną trwale usunięte.",
-  "AfterFilesWillBeMovedToTrash": "Następnie pliki zostaną przeniesione do Kosza.",
   "AllLinksAreDisabled": "Wszystkie linki są wyłączone",
   "AppointNewOwner": "Wyznaczono nowego właściciela.",
   "ArchiveAction": "Opróżnij archiwum",

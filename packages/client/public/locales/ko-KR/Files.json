@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "<1>{{productName}}</1> 및 <1>룸 관리자</1>만 여기에 표시됩니다",
   "AddUsersOrGroupsInfoGroups": "선택한 그룹의 <1>{{productName}}</1> 및 <1>룸 관리자</1>만 이 템플릿을 사용하여 룸을 생성할 수 있습니다. ",
   "AfterFilesWillBeDeletedPermanently": "뒤의 파일은 영구적으로 삭제됩니다.",
-  "AfterFilesWillBeMovedToTrash": "뒤의 파일은 휴지통으로 이동됩니다.",
   "AllLinksAreDisabled": "모든 링크가 비활성화되었습니다",
   "AppointNewOwner": "새로운 소유자를 지정하셨습니다.",
   "ArchiveAction": "아카이브 비우기",

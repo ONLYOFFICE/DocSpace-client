@@ -436,7 +436,9 @@ const SectionHeaderContent = (props) => {
       })}. ${
         lifetime.deletePermanently
           ? t("Files:AfterFilesWillBeDeletedPermanently")
-          : t("Files:AfterFilesWillBeMovedToTrash")
+          : t("Files:FilesMovedToTrashNotice", {
+              sectionName: t("Common:TrashSection"),
+            })
       }`;
 
     return null;

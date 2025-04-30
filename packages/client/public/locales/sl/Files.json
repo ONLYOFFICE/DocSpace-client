@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Tukaj je prikazani samo <1>{{productName}}</1> in <1>skrbniki sobe</1>",
   "AddUsersOrGroupsInfoGroups": "Samo <1>{{productName}}</1> in <1>skrbniki sob</1> iz izbranih skupin bodo lahko ustvarili sobe s to predlogo.",
   "AfterFilesWillBeDeletedPermanently": "Po tem bodo datoteke trajno izbrisane.",
-  "AfterFilesWillBeMovedToTrash": "Po tem bodo datoteke premaknjene v koš.",
   "AllLinksAreDisabled": "Vse povezave so onemogočene",
   "AppointNewOwner": "Imenovali ste novega lastnika.",
   "ArchiveAction": "Prazen arhiv",

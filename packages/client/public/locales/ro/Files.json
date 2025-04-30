@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Numai Administratorul <1>{{productName}}</1> și <1>Administratori de sală</1> sunt afișate aici.",
   "AddUsersOrGroupsInfoGroups": "Numai Administratorul <1>{{productName}}</1> și <1>Administratori de sală</1> din grupuri selectate pot crea săli cu ajutorul acestui șablon.",
   "AfterFilesWillBeDeletedPermanently": "Fișierele vor fi şterse definitiv.",
-  "AfterFilesWillBeMovedToTrash": "Fișierele vor fi mutați în Coșul de gunoi",
   "AllLinksAreDisabled": "Toate link-uri sunt dezactivate",
   "AppointNewOwner": "Ați desemnat un nou proprietar.",
   "ArchiveAction": "Arhivă goală",

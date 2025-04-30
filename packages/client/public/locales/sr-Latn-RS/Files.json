@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Ovde su prikazani samo <1>{{productName}}</1> i <1>administratori soba</1>.",
   "AddUsersOrGroupsInfoGroups": "Samo <1>{{productName}}</1> i <1>administratori soba</1> iz izabranih grupa moći će da kreiraju sobe koristeći ovaj šablon.",
   "AfterFilesWillBeDeletedPermanently": "Nakon što se datoteke trajno obrišu.",
-  "AfterFilesWillBeMovedToTrash": "Nakon što se fajlovi premeste u korpu.",
   "AllLinksAreDisabled": "Svi linkovi su onemogućeni",
   "AppointNewOwner": "Postavili ste novog vlasnika.",
   "ArchiveAction": "Prazna arhiva",

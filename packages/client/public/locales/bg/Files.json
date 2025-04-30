@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Тук се показват само <1>{{productName}}</1> и <1>Администратори на стаи</1>",
   "AddUsersOrGroupsInfoGroups": "Само <1>{{productName}}</1> и <1>администратори на стаи</1> от избраните групи ще могат да създават стаи с помощта на този шаблон.",
   "AfterFilesWillBeDeletedPermanently": "Крайните файлове ще бъдат окончателно изтрити.",
-  "AfterFilesWillBeMovedToTrash": "Крайните файлове ще бъдат преместени с Кошчето.",
   "AllLinksAreDisabled": "Всички линкове са деактивирани",
   "AppointNewOwner": "Назначили сте нов собственик.",
   "ArchiveAction": "Празен архив",

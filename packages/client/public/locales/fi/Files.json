@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Vain <1>{{productName}}</1> ja  <1>Huoneen pääkäyttäjät </1> näytetään täällä",
   "AddUsersOrGroupsInfoGroups": "Vain <1>{{productName}}</1> and <1>Huoneen pääkäyttäjät</1> valituista ryhmistä voivat luoda huoneita käyttäen tätä mallia.",
   "AfterFilesWillBeDeletedPermanently": " Sen jälkeen, kun tiedostot poistetaan lopullisesti.",
-  "AfterFilesWillBeMovedToTrash": "Sen jälkeen, kun tiedostot siirretään Roskakoriin.",
   "AllLinksAreDisabled": "Kaikki linkit ovat poistettu käytöstä",
   "AppointNewOwner": "Olet nimittänyt uuden omistajan.",
   "ArchiveAction": "Tyhjä arkisto",

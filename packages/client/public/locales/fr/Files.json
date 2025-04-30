@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Seuls <1>{{productName}}</1> et <1>Room admins</1> sont affichés ici",
   "AddUsersOrGroupsInfoGroups": "Seuls les <1>{{productName}}</1> et les <1>administrateurs de salles</1> des groupes sélectionnés pourront créer des salles à partir de ce modèle.",
   "AfterFilesWillBeDeletedPermanently": "Les fichiers suivants seront définitivement supprimés.",
-  "AfterFilesWillBeMovedToTrash": "Les fichiers suivants seront déplacés dans la corbeille.",
   "AllLinksAreDisabled": "Tous les liens sont désactivés",
   "AppointNewOwner": "Vous avez choisi un nouveau propriétaire.",
   "ArchiveAction": "Archives vides",

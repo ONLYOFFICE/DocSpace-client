@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Hier werden nur <1>{{productName}}</1> und <1>Raumadministratoren</1> angezeigt",
   "AddUsersOrGroupsInfoGroups": "Nur <1>{{productName}}</1> und <1>Raumadministratoren</1> aus den ausgewählten Gruppen können mit dieser Vorlage Räume erstellen.",
   "AfterFilesWillBeDeletedPermanently": "Danach werden die Dateien dauerhaft gelöscht.",
-  "AfterFilesWillBeMovedToTrash": "Danach werden die Dateien dauerhaft gelöscht.",
   "AllLinksAreDisabled": "Alle Links sind deaktiviert",
   "AppointNewOwner": "Sie haben einen neuen Besitzer ernannt.",
   "ArchiveAction": "Leeres Archiv",

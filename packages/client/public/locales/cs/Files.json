@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Zde jsou zobrazeny pouze položky <1>{{productName}}</1> a <1>správci místností</1>",
   "AddUsersOrGroupsInfoGroups": "Pomocí této šablony budou moci vytvářet místnosti pouze <1>{{productName}}</1> a <1>správci místností</1> z vybraných skupin.",
   "AfterFilesWillBeDeletedPermanently": "Poté budou soubory trvale odstraněny.",
-  "AfterFilesWillBeMovedToTrash": "Poté budou soubory přesunuty do koše.",
   "AllLinksAreDisabled": "Všechny odkazy jsou zakázány",
   "AppointNewOwner": "Jmenovali jste nového majitele.",
   "ArchiveAction": "Prázdný archiv",

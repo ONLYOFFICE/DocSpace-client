@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "此处仅显示<1>{{productName}}</1>和<1>房间管理员</1>",
   "AddUsersOrGroupsInfoGroups": "只有所选群组中的<1>{{productName}}</1>和<1>房间管理员</1>可使用此模板创建房间。",
   "AfterFilesWillBeDeletedPermanently": "之后文件将被永久删除。",
-  "AfterFilesWillBeMovedToTrash": "之后文件将被移至回收站。",
   "AllLinksAreDisabled": "所有链接都已被禁用",
   "AppointNewOwner": "您已指定一个新的所有者。",
   "ArchiveAction": "清空存档",

@@ -11,7 +11,6 @@
   "AddUsersOrGroupsInfo": "Тут показуються лише адміністратори <1>{{productName}}</1> та <1>адміністратори кімнати</1>",
   "AddUsersOrGroupsInfoGroups": "Лише адміністратори <1>{{productName}}</1> та <1>адміністратори кімнати</1> з вибраних груп зможуть створювати кімнати на основі цього шаблону.",
   "AfterFilesWillBeDeletedPermanently": "Після файли буде видалено назавжди.",
-  "AfterFilesWillBeMovedToTrash": "Після файли буде переміщено до Кошика.",
   "AllLinksAreDisabled": "Усі посилання вимкнено",
   "AppointNewOwner": "Ви призначили нового власника.",
   "ArchiveAction": "Очистити архів",

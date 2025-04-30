@@ -276,6 +276,7 @@ export type TThirdParty = {
   providerId: string;
   providerKey: string;
   provider_id?: string;
+  customer_title?: string;
 };
 
 export type TThirdParties = TThirdParty[];

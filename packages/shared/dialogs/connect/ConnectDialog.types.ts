@@ -42,7 +42,11 @@ export type ConnectionItemType = {
 
 export interface ConnectDialogProps {
   visible: boolean;
-  item: Nullable<ThirdPartyAccountType | ConnectionItemType>;
+  item: Nullable<
+    | (ThirdPartyAccountType &
+        Partial<Pick<ConnectionItemType, "token" | "link">>)
+    | ConnectionItemType
+  >;
   providers: TThirdParty[];
   selectedFolderId: Nullable<string | number>;
   selectedFolderFolders: Nullable<TFolder[]>;

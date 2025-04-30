@@ -205,7 +205,7 @@ const ConnectDialog = ({
       oAuthToken,
       false,
       customerTitle,
-      provider_key || key,
+      provider_key || key.toString(),
       provider_id,
       roomCreation,
     )

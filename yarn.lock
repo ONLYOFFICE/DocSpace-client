@@ -2073,22 +2073,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-runtime@npm:^7.12.1":
-  version: 7.26.8
-  resolution: "@babel/plugin-transform-runtime@npm:7.26.8"
-  dependencies:
-    "@babel/helper-module-imports": "npm:^7.25.9"
-    "@babel/helper-plugin-utils": "npm:^7.26.5"
-    babel-plugin-polyfill-corejs2: "npm:^0.4.10"
-    babel-plugin-polyfill-corejs3: "npm:^0.10.6"
-    babel-plugin-polyfill-regenerator: "npm:^0.6.1"
-    semver: "npm:^6.3.1"
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  checksum: 10/2292a98b764165423768a4d2dc9e916a89930854c015d551eaf448f0662bcc36edaefc8dc67e390929a5f2e9006aad5883ec9e82ffddf11af3c6aa7d9af5e779
-  languageName: node
-  linkType: hard
-
 "@babel/plugin-transform-shorthand-properties@npm:^7.25.7, @babel/plugin-transform-shorthand-properties@npm:^7.25.9, @babel/plugin-transform-shorthand-properties@npm:^7.8.3":
   version: 7.25.9
   resolution: "@babel/plugin-transform-shorthand-properties@npm:7.25.9"
@@ -2870,7 +2854,7 @@ __metadata:
     prettier: "npm:3.3.3"
     queue-promise: "npm:2.2.1"
     react: "npm:18.3.1"
-    react-avatar-editor: "npm:13.0.2"
+    react-avatar-editor: "npm:14.0.0-beta.6"
     react-colorful: "npm:5.6.1"
     react-dom: "npm:18.3.1"
     react-hotkeys-hook: "npm:3.4.7"
@@ -23759,17 +23743,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-avatar-editor@npm:13.0.2":
-  version: 13.0.2
-  resolution: "react-avatar-editor@npm:13.0.2"
-  dependencies:
-    "@babel/plugin-transform-runtime": "npm:^7.12.1"
-    "@babel/runtime": "npm:^7.12.5"
-    prop-types: "npm:^15.7.2"
+"react-avatar-editor@npm:14.0.0-beta.6":
+  version: 14.0.0-beta.6
+  resolution: "react-avatar-editor@npm:14.0.0-beta.6"
   peerDependencies:
-    react: ^0.14.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^0.14.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 10/bf8e48e85d70777f356bb9d36e408b46395e8b0795594a124ee871dca8ce2482b06cc6787e3018c69cd83ed643e2ea256a649ffca86a4d8e8a4bc31db8df8d9d
+    react: ^0.14.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^0.14.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/874e9a9491458c5d3495172d15a18e8b167d6b98d6a8fd97f32910f56b28d363f124048ab4b8735522f795f34b704056643fd0b6248baa2931da3ffe3ecf9287
   languageName: node
   linkType: hard
 

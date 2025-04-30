@@ -122,3 +122,37 @@
     }
   }
 }
+
+.selectAll {
+  width: 100%;
+  max-height: 61px;
+  height: 61px;
+  min-height: 61px;
+
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+
+  border-bottom: var(--selector-border);
+
+  box-sizing: border-box;
+
+  padding: 8px 16px 20px;
+
+  .avatar {
+    min-width: 32px;
+  }
+
+  .label {
+    line-height: 16px;
+
+    margin-inline-start: 8px;
+  }
+
+  .checkbox {
+    svg {
+      margin-inline-end: 0px;
+    }
+  }
+}

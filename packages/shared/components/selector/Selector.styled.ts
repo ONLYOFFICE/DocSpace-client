@@ -32,7 +32,6 @@ import { Tabs } from "../tabs";
 import { mobile } from "../../utils/device";
 
 import { ComboBox } from "../combobox";
-import { Text } from "../text";
 
 import { AccessRightSelect } from "../access-right-select";
 import { injectDefaultTheme } from "../../utils";
@@ -142,43 +141,6 @@ const StyledBody = styled.div.attrs(injectDefaultTheme)<{
 
   .selector_info-bar {
     margin: 0px 20px 16px;
-  }
-`;
-
-const StyledSelectAll = styled.div.attrs(injectDefaultTheme)`
-  width: 100%;
-  max-height: 61px;
-  height: 61px;
-  min-height: 61px;
-
-  display: flex;
-  align-items: center;
-
-  cursor: pointer;
-
-  border-bottom: ${(props) => props.theme.selector.border};
-
-  box-sizing: border-box;
-
-  padding: 8px 16px 20px;
-
-  .select-all_avatar {
-    min-width: 32px;
-  }
-
-  .selector-item_label {
-    // width: 100%;
-    // max-width: 100%;
-
-    line-height: 16px;
-
-    margin-inline-start: 8px;
-  }
-
-  .checkbox {
-    svg {
-      margin-inline-end: 0px;
-    }
   }
 `;
 
@@ -552,7 +514,6 @@ export {
   StyledSelector,
   StyledHeader,
   StyledBody,
-  StyledSelectAll,
   StyledItem,
   StyledEmptyScreen,
   StyledArrowRightSvg,

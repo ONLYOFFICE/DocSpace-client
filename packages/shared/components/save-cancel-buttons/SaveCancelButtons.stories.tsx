@@ -29,7 +29,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { SaveCancelButtons } from ".";
 import { SaveCancelButtonProps } from "./SaveCancelButton.types";
-import styles from "./SaveCancelButtons.module.scss";
+import styles from "./SaveCancelButtons.stories.module.scss";
 
 const meta = {
   title: "Components/SaveCancelButtons",
@@ -124,7 +124,7 @@ const Template = ({
     typeof window !== "undefined" && window?.location?.href.includes("docs");
 
   return (
-    <div className={styles.storybookWrapper}>
+    <div className={styles.wrapper}>
       <SaveCancelButtons
         {...args}
         className={

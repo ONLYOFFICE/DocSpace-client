@@ -42,21 +42,3 @@
     background: var(--filter-input-selected-items-hover-background);
   }
 }
-
-// Storybook specific styles
-.storybookContainer {
-  padding: 0;
-  display: grid;
-  grid-gap: 10px;
-}
-
-.storybookContainerInline {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-
-  > * {
-    margin-inline-end: 10px;
-    margin-bottom: 10px;
-  }
-}

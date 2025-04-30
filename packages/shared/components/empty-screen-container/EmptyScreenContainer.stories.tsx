@@ -34,7 +34,7 @@ import { IconSizeType } from "../../utils";
 import { Link, LinkType } from "../link";
 import { EmptyScreenContainer } from ".";
 
-import styles from "./EmptyScreenContainer.module.scss";
+import styles from "./EmptyScreenContainer.stories.module.scss";
 
 const meta = {
   title: "Base UI Components/EmptyScreenContainer",
@@ -90,9 +90,9 @@ type Story = StoryObj<typeof meta>;
 export default meta;
 
 const ResetFilterButton = () => (
-  <div className={styles.storybookResetFilterButton}>
+  <div className={styles.resetFilterButton}>
     <CrossReactSvgUrl
-      className={styles.storybookCrossIcon}
+      className={styles.crossIcon}
       data-size={IconSizeType.small}
     />
     <Link type={LinkType.action} isHovered>

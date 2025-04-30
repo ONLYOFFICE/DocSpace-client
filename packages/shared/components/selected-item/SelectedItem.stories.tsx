@@ -28,7 +28,7 @@ import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { SelectedItem } from "./SelectedItem";
-import styles from "./SelectedItem.module.scss";
+import styles from "./SelectedItem.stories.module.scss";
 
 const meta = {
   title: "Base UI Components/SelectedItem",
@@ -55,7 +55,7 @@ const AllTemplate = () => {
   const onCloseHandler = () => {};
   return (
     <>
-      <div className={styles.storybookContainerInline}>
+      <div className={styles.containerInline}>
         <SelectedItem
           label="Selected item"
           propKey=""
@@ -71,7 +71,7 @@ const AllTemplate = () => {
         />
       </div>
 
-      <div className={styles.storybookContainer}>
+      <div className={styles.container}>
         <SelectedItem
           label="Selected item"
           propKey=""

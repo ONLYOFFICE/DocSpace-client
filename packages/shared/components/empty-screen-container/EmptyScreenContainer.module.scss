@@ -117,14 +117,3 @@
     }
   }
 }
-
-// Storybook specific styles
-.storybookCrossIcon {
-  @include common-icons-style;
-  margin-inline-end: 4px;
-}
-
-.storybookResetFilterButton {
-  display: flex;
-  align-items: center;
-}

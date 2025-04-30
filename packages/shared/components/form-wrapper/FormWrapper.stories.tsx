@@ -2,7 +2,7 @@ import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { FormWrapper } from "./index";
 
-import styles from "./FormWrapper.module.scss";
+import styles from "./FormWrapper.stories.module.scss";
 
 const meta: Meta<typeof FormWrapper> = {
   title: "Base UI Components/FormWrapper",
@@ -24,7 +24,7 @@ type Story = StoryObj<typeof FormWrapper>;
 export const Default: Story = {
   args: {
     children: (
-      <div className={styles.storybookDemoContent}>
+      <div className={styles.demoContent}>
         <h3>Welcome</h3>
         <p>This is a basic form wrapper example</p>
       </div>
@@ -35,18 +35,14 @@ export const Default: Story = {
 export const WithLoginForm: Story = {
   args: {
     children: (
-      <form className={styles.storybookDemoForm}>
+      <form className={styles.demoForm}>
+        <input className={styles.demoInput} type="email" placeholder="Email" />
         <input
-          className={styles.storybookDemoInput}
-          type="email"
-          placeholder="Email"
-        />
-        <input
-          className={styles.storybookDemoInput}
+          className={styles.demoInput}
           type="password"
           placeholder="Password"
         />
-        <button className={styles.storybookDemoButton} type="submit">
+        <button className={styles.demoButton} type="submit">
           Sign In
         </button>
       </form>
@@ -57,28 +53,24 @@ export const WithLoginForm: Story = {
 export const WithRegistrationForm: Story = {
   args: {
     children: (
-      <form className={styles.storybookDemoForm}>
+      <form className={styles.demoForm}>
         <input
-          className={styles.storybookDemoInput}
+          className={styles.demoInput}
           type="text"
           placeholder="Full Name"
         />
+        <input className={styles.demoInput} type="email" placeholder="Email" />
         <input
-          className={styles.storybookDemoInput}
-          type="email"
-          placeholder="Email"
-        />
-        <input
-          className={styles.storybookDemoInput}
+          className={styles.demoInput}
           type="password"
           placeholder="Password"
         />
         <input
-          className={styles.storybookDemoInput}
+          className={styles.demoInput}
           type="password"
           placeholder="Confirm Password"
         />
-        <button className={styles.storybookDemoButton} type="submit">
+        <button className={styles.demoButton} type="submit">
           Create Account
         </button>
       </form>

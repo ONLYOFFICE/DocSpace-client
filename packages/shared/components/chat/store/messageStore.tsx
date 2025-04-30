@@ -193,7 +193,7 @@ export default class MessageStore {
 
       if (!this.messages.length) {
         const startMsg = extractFilesFromMessage(
-          removeFolderFromMessage(message.substring(0, 15)),
+          removeFolderFromMessage(message.substring(0, 25)),
         );
 
         this.currentSession = `${this.currentSession}_${startMsg.cleanedMessage}`;

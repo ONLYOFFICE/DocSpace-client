@@ -479,65 +479,6 @@ const StyledArrowRightSvg = styled(ArrowRightSvg).attrs(injectDefaultTheme)`
   }
 `;
 
-const StyledFooter = styled.div.attrs(injectDefaultTheme)<{
-  withFooterInput?: boolean;
-  withFooterCheckbox?: boolean;
-}>`
-  width: calc(100% - 32px);
-  max-height: ${(props) =>
-    props.withFooterCheckbox
-      ? "181px"
-      : props.withFooterInput
-        ? "145px"
-        : "73px"};
-  height: ${(props) =>
-    props.withFooterCheckbox
-      ? "181px"
-      : props.withFooterInput
-        ? "145px"
-        : "73px"};
-  min-height: ${(props) =>
-    props.withFooterCheckbox
-      ? "181px"
-      : props.withFooterInput
-        ? "145px"
-        : "73px"};
-
-  padding: 0 16px;
-
-  background-color: ${(props) => props.theme.backgroundColor};
-
-  border-top: ${(props) => props.theme.selector.border};
-
-  .button {
-    min-height: 40px;
-
-    margin-bottom: 2px;
-  }
-`;
-
-const StyledNewNameContainer = styled.div`
-  margin-top: 16px;
-
-  .new-file-input {
-    margin-bottom: 16px;
-  }
-`;
-
-const StyledNewNameHeader = styled(Text)`
-  margin-bottom: 4px;
-`;
-
-const StyledButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 8px;
-
-  margin-top: 16px;
-`;
-
 const StyledComboBox = styled(ComboBox).attrs(injectDefaultTheme)`
   ${accessComboboxStyles}
 `;
@@ -659,10 +600,6 @@ export {
   StyledBreadCrumbs,
   StyledItemText,
   StyledArrowRightSvg,
-  StyledFooter,
-  StyledNewNameContainer,
-  StyledNewNameHeader,
-  StyledButtonContainer,
   StyledComboBox,
   StyledTabs,
   StyledInfo,

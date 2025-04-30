@@ -468,9 +468,9 @@ const WrappedComponent = ({
   );
 
   return (
-    <PropsContext.Provider value={contextValue}>
+    <PropsContext value={contextValue}>
       <PluginComponent component={component} pluginName={pluginName} />
-    </PropsContext.Provider>
+    </PropsContext>
   );
 };
 

@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import Planet12ReactSvg from "PUBLIC_DIR/images/icons/12/planet.react.svg";
 import LifetimeRoomIcon from "PUBLIC_DIR/images/lifetime-room.react.svg";
+import { classNames } from "@docspace/shared/utils";
 
 import { SettingsContext } from "../../../selectors/Files/contexts/Settings";
 import { getUserTypeTranslation } from "../../../utils/common";
@@ -43,7 +44,6 @@ import { EmployeeType, RoomsType } from "../../../enums";
 import NewItem from "./NewItem";
 import InputItem from "./InputItem";
 import styles from "../Selector.module.scss";
-import { classNames } from "@docspace/shared/utils";
 
 const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
   const prevData = prevProps.data;

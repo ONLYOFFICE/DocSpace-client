@@ -19,8 +19,20 @@ export const addLanguage = (projectName: string, language: string) =>
   api.post(`/languages/${projectName}`, { language });
 
 // Namespaces
-export const getNamespaces = (projectName: string, language: string) => 
-  api.get(`/namespaces/${projectName}/${language}`);
+export const getNamespaces = (projectName: string, language: string, options?: { untranslatedOnly?: boolean, baseLanguage?: string }) => {
+  const params = new URLSearchParams();
+  
+  if (options?.untranslatedOnly !== undefined) {
+    params.append('untranslatedOnly', options.untranslatedOnly.toString());
+  }
+  
+  if (options?.baseLanguage) {
+    params.append('baseLanguage', options.baseLanguage);
+  }
+  
+  const queryString = params.toString();
+  return api.get(`/namespaces/${projectName}/${language}${queryString ? `?${queryString}` : ''}`);
+};
 export const addNamespace = (projectName: string, namespace: string, content = {}) => 
   api.post(`/namespaces/${projectName}`, { namespace, content });
 export const renameNamespace = (projectName: string, oldName: string, newName: string) => 

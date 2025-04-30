@@ -36,15 +36,90 @@ async function getAvailableLanguages(projectName) {
  * Gets all namespace files for a specific language in a project
  * @param {string} projectName - Name of the project
  * @param {string} language - Language code
+ * @param {Object} options - Additional options
+ * @param {boolean} options.untranslatedOnly - Filter namespaces that have untranslated keys
+ * @param {string} options.baseLanguage - Base language to compare against (required if untranslatedOnly is true)
  * @returns {Promise<string[]>} - Array of namespace files
  */
-async function getNamespaces(projectName, language) {
+async function getNamespaces(projectName, language, options = {}) {
   try {
+    const { untranslatedOnly = false, baseLanguage = 'en' } = options;
     const langPath = path.join(resolveProjectPath(projectName), language);
     const entries = await fs.readdir(langPath, { withFileTypes: true });
-    return entries
+    
+    // Get all namespace files
+    const namespaces = entries
       .filter(entry => entry.isFile() && path.extname(entry.name) === '.json')
       .map(entry => path.basename(entry.name, '.json'));
+    
+    // If untranslatedOnly is false, return all namespaces
+    if (!untranslatedOnly) {
+      return namespaces;
+    }
+    
+    // Otherwise, filter namespaces with untranslated keys
+    const namespaceWithUntranslatedKeys = [];
+    
+    // Get available languages to compare with
+    const languages = await getAvailableLanguages(projectName);
+    const targetLanguages = languages.filter(lang => lang !== baseLanguage);
+    
+    // Check each namespace for untranslated keys
+    for (const namespace of namespaces) {
+      // Get base language translations for this namespace
+      const baseTranslations = await readTranslationFile(projectName, baseLanguage, namespace);
+      if (!baseTranslations) continue;
+      
+      // Check if this namespace has untranslated keys in any target language
+      let hasUntranslatedKeys = false;
+      
+      // Logic to determine if a nested object has untranslated keys
+      const checkForUntranslatedKeys = async (targetLang) => {
+        const targetTranslations = await readTranslationFile(projectName, targetLang, namespace);
+        if (!targetTranslations) return true; // Missing translation file means untranslated
+        
+        // Compare keys recursively
+        const compareObjects = (baseObj, targetObj, path = '') => {
+          for (const key in baseObj) {
+            const currentPath = path ? `${path}.${key}` : key;
+            
+            // Skip if base value is empty or null
+            if (baseObj[key] === null || baseObj[key] === '') continue;
+            
+            // Check if key exists in target
+            if (!(key in targetObj)) return true;
+            
+            // If nested object, recurse
+            if (typeof baseObj[key] === 'object' && baseObj[key] !== null && 
+                typeof targetObj[key] === 'object' && targetObj[key] !== null) {
+              if (compareObjects(baseObj[key], targetObj[key], currentPath)) return true;
+            } 
+            // If value is missing or empty in target language
+            else if (typeof baseObj[key] === 'string' && 
+                    (targetObj[key] === null || targetObj[key] === '')) {
+              return true;
+            }
+          }
+          return false;
+        };
+        
+        return compareObjects(baseTranslations, targetTranslations);
+      };
+      
+      // Check each target language for untranslated content
+      for (const targetLang of targetLanguages) {
+        if (await checkForUntranslatedKeys(targetLang)) {
+          hasUntranslatedKeys = true;
+          break; // Found an untranslated key, no need to check other languages
+        }
+      }
+      
+      if (hasUntranslatedKeys) {
+        namespaceWithUntranslatedKeys.push(namespace);
+      }
+    }
+    
+    return namespaceWithUntranslatedKeys;
   } catch (error) {
     console.error(`Error getting namespaces for project ${projectName}, language ${language}:`, error);
     return [];

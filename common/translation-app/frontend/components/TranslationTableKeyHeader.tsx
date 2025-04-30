@@ -35,7 +35,7 @@ const TranslationTableKeyHeader: React.FC<TranslationTableKeyHeaderProps> = ({
       <div
         className={`p-2 rounded cursor-pointer group \
         ${
-          currentEntry.path === newlyCreatedKey
+          currentEntry && currentEntry.path === newlyCreatedKey
             ? "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 outline outline-2 outline-green-400 dark:outline-green-600"
             : "bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200"
         }`}

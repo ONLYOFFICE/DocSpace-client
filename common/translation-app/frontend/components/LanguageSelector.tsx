@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguageStore } from '@/store/languageStore';
 import Modal from './Modal';
 
@@ -9,6 +9,8 @@ interface LanguageSelectorProps {
   onToggle: (language: string) => void;
   projectName: string;
   horizontal?: boolean;
+  onShowUntranslatedChange?: (showUntranslated: boolean) => void;
+  showUntranslated?: boolean;
 }
 
 const LanguageSelector: React.FC<LanguageSelectorProps> = ({
@@ -17,13 +19,30 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   selectedLanguages,
   onToggle,
   projectName,
-  horizontal = false
+  horizontal = false,
+  onShowUntranslatedChange,
+  showUntranslated = false
 }) => {
   const [newLanguage, setNewLanguage] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [addToAllProjects, setAddToAllProjects] = useState<boolean>(true);
+  const [showUntranslatedOnly, setShowUntranslatedOnly] = useState<boolean>(showUntranslated);
   const { addLanguage, addLanguageToAllProjects, loading } = useLanguageStore();
   
+  // Sync local state with prop when it changes
+  useEffect(() => {
+    setShowUntranslatedOnly(showUntranslated);
+  }, [showUntranslated]);
+
+  // Handle toggle for showing untranslated only
+  const handleShowUntranslatedToggle = () => {
+    const newValue = !showUntranslatedOnly;
+    setShowUntranslatedOnly(newValue);
+    if (onShowUntranslatedChange) {
+      onShowUntranslatedChange(newValue);
+    }
+  };
+
   // Handler for 'Select All' option
   const handleSelectAll = () => {
     // Toggle between all selected or just the base language
@@ -65,67 +84,83 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
 
   return (
     <div>
-      <div className={`${horizontal ? 'flex flex-wrap gap-1' : 'space-y-1'} ${horizontal ? 'mb-2' : 'mb-3'}`}>
-        {/* Select All option */}
-        <button
-          onClick={handleSelectAll}
-          className={`
-            px-2 py-0.5 rounded-md text-xs transition-colors flex items-center
-            ${languages.every(lang => selectedLanguages.includes(lang)) 
-              ? 'bg-primary-500 text-white hover:bg-primary-600' 
-              : 'bg-gray-100 text-primary-700 hover:bg-gray-200 border border-primary-300 dark:bg-gray-800 dark:text-primary-400 dark:hover:bg-gray-700 dark:border-primary-600'}
-          `}
-          disabled={languages.length <= 1}
-          title="Select or deselect all languages"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3 h-3 mr-1">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-          </svg>
-          {languages.every(lang => selectedLanguages.includes(lang)) ? 'All' : 'All'}
-        </button>
-        {languages.map(lang => (
-          <button 
-            key={lang}
-            onClick={() => lang !== baseLanguage && onToggle(lang)}
-            disabled={lang === baseLanguage} // Base language is always selected
-            className={`
-              px-2 py-0.5 rounded-md text-xs transition-colors
-              ${selectedLanguages.includes(lang) 
-                ? 'bg-primary-500 text-white hover:bg-primary-600' 
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'}
-              ${lang === baseLanguage ? 'border border-primary-400' : ''}
-            `}
-          >
-            {lang}{lang === baseLanguage && '*'}
-          </button>
-        ))}
+      <div className={`${horizontal ? 'mb-2' : 'mb-3'}`}>
+        {/* Show Untranslated Only checkbox */}
+        <div className="flex items-center mb-2">
+          <input
+            type="checkbox"
+            id="showUntranslatedOnly"
+            checked={showUntranslatedOnly}
+            onChange={handleShowUntranslatedToggle}
+            className="mr-2"
+          />
+          <label htmlFor="showUntranslatedOnly" className="text-xs text-gray-700 dark:text-gray-300">
+            Show untranslated only
+          </label>
+        </div>
         
-        {/* Add language button */}
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="
-            px-2 py-0.5 rounded-md text-xs transition-colors
-            bg-primary-100 text-primary-700 hover:bg-primary-200 border border-primary-300
-            dark:bg-gray-800 dark:text-primary-400 dark:hover:bg-gray-700 dark:border-primary-600
-            flex items-center justify-center
-          "
-          title="Add new language"
-        >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            strokeWidth={1.5} 
-            stroke="currentColor" 
-            className="w-3 h-3"
+        <div className={`${horizontal ? 'flex flex-wrap gap-1' : 'space-y-1'}`}>
+          {/* Select All option */}
+          <button
+            onClick={handleSelectAll}
+            className={`
+              px-2 py-0.5 rounded-md text-xs transition-colors flex items-center
+              ${languages.every(lang => selectedLanguages.includes(lang)) 
+                ? 'bg-primary-500 text-white hover:bg-primary-600' 
+                : 'bg-gray-100 text-primary-700 hover:bg-gray-200 border border-primary-300 dark:bg-gray-800 dark:text-primary-400 dark:hover:bg-gray-700 dark:border-primary-600'}
+            `}
+            disabled={languages.length <= 1}
+            title="Select or deselect all languages"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-          </svg>
-        </button>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-3 h-3 mr-1">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+            {languages.every(lang => selectedLanguages.includes(lang)) ? 'All' : 'All'}
+          </button>
+          {languages.map(lang => (
+            <button 
+              key={lang}
+              onClick={() => lang !== baseLanguage && onToggle(lang)}
+              disabled={lang === baseLanguage} // Base language is always selected
+              className={`
+                px-2 py-0.5 rounded-md text-xs transition-colors
+                ${selectedLanguages.includes(lang) 
+                  ? 'bg-primary-500 text-white hover:bg-primary-600' 
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'}
+                ${lang === baseLanguage ? 'border border-primary-400' : ''}
+              `}
+            >
+              {lang}{lang === baseLanguage && '*'}
+            </button>
+          ))}
+          
+          {/* Add language button */}
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="
+              px-2 py-0.5 rounded-md text-xs transition-colors
+              bg-primary-100 text-primary-700 hover:bg-primary-200 border border-primary-300
+              dark:bg-gray-800 dark:text-primary-400 dark:hover:bg-gray-700 dark:border-primary-600
+              flex items-center justify-center
+            "
+            title="Add new language"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              strokeWidth={1.5} 
+              stroke="currentColor" 
+              className="w-3 h-3"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </button>
 
-        {languages.length === 0 && (
-          <div className="text-gray-500 text-sm py-2">No languages found</div>
-        )}
+          {languages.length === 0 && (
+            <div className="text-gray-500 text-sm py-2">No languages found</div>
+          )}
+        </div>
       </div>
 
       {/* Add Language Modal */}
@@ -148,6 +183,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
               autoFocus
             />
           </div>
+          
           <p className="text-xs text-gray-500 mt-1 mb-2">
             Language codes should follow ISO 639-1 format (e.g., en, fr, de, ru)
           </p>

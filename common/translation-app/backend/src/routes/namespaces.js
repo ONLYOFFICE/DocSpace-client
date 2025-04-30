@@ -11,7 +11,18 @@ async function routes(fastify, options) {
   fastify.get("/:projectName/:language", async (request, reply) => {
     try {
       const { projectName, language } = request.params;
-      const namespaces = await fsUtils.getNamespaces(projectName, language);
+      const { untranslatedOnly, baseLanguage } = request.query;
+      
+      // Parse boolean query parameter
+      const showUntranslatedOnly = untranslatedOnly === 'true';
+      
+      // Options for the getNamespaces function
+      const options = {
+        untranslatedOnly: showUntranslatedOnly,
+        baseLanguage: baseLanguage || translationConfig.baseLanguage
+      };
+      
+      const namespaces = await fsUtils.getNamespaces(projectName, language, options);
 
       return { success: true, data: namespaces };
     } catch (error) {

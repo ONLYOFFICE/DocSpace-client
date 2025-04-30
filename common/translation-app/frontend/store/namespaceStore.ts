@@ -8,7 +8,11 @@ interface NamespaceState {
   error: string | null;
   
   // Actions
-  fetchNamespaces: (projectName: string, language: string) => Promise<void>;
+  fetchNamespaces: (
+    projectName: string, 
+    language: string, 
+    options?: { untranslatedOnly?: boolean, baseLanguage?: string }
+  ) => Promise<void>;
   addNamespace: (projectName: string, namespace: string) => Promise<boolean>;
   setCurrentNamespace: (namespace: string | null) => void;
   clearError: () => void;
@@ -20,10 +24,14 @@ export const useNamespaceStore = create<NamespaceState>((set, get) => ({
   loading: false,
   error: null,
   
-  fetchNamespaces: async (projectName: string, language: string) => {
+  fetchNamespaces: async (
+    projectName: string, 
+    language: string, 
+    options?: { untranslatedOnly?: boolean, baseLanguage?: string }
+  ) => {
     try {
       set({ loading: true, error: null });
-      const response = await api.getNamespaces(projectName, language);
+      const response = await api.getNamespaces(projectName, language, options);
       set({ 
         namespaces: response.data.data || [], 
         loading: false 

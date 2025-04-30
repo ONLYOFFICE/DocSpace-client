@@ -16,6 +16,8 @@ interface NamespaceSelectorProps {
   onNamespaceUpdated?: () => void;
   onCheckErrors?: (namespace: string) => void;
   onRunLLMAnalysis?: (namespace: string) => void;
+  showUntranslated?: boolean;
+  baseLanguage?: string;
 }
 
 const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
@@ -26,6 +28,8 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
   onNamespaceUpdated,
   onCheckErrors,
   onRunLLMAnalysis,
+  showUntranslated = false,
+  baseLanguage = 'en',
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [contextMenu, setContextMenu] = useState<{
@@ -46,6 +50,7 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
     deleteNamespace,
     updateTranslation,
     fetchTranslations,
+    flattenedTranslations,
   } = useTranslationStore();
 
   // Get available languages from the store
@@ -54,15 +59,47 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
   // Close context menu when clicking elsewhere
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Filter namespaces based on search term
-  const filteredNamespaces = useMemo(() => {
-    if (!searchTerm.trim()) return namespaces;
+  // Check if a namespace has any untranslated keys
+  const namespaceHasUntranslatedKeys = (namespace: string) => {
+    // If we're not showing the current namespace translations yet, we can't filter it
+    if (selectedNamespace !== namespace) {
+      // For performance reasons, we'll just show all namespaces when showUntranslated is true
+      // We'll properly filter them when they're selected
+      return true;
+    }
 
-    const searchLower = searchTerm.toLowerCase().trim();
-    return namespaces.filter((namespace) =>
-      namespace.toLowerCase().includes(searchLower)
-    );
-  }, [namespaces, searchTerm]);
+    // Look through all translations in the current namespace
+    return flattenedTranslations.some(entry => {
+      // Get non-base languages
+      const nonBaseLanguages = languages.filter(lang => lang !== baseLanguage);
+      
+      // Check if any language is missing a translation
+      return nonBaseLanguages.some(lang => {
+        return !entry.translations[lang] || entry.translations[lang].trim() === '';
+      });
+    });
+  };
+
+  // Filter namespaces based on search term and showUntranslated
+  const filteredNamespaces = useMemo(() => {
+    // Start with full list
+    let filtered = [...namespaces];
+
+    // Apply untranslated filter if enabled
+    if (showUntranslated) {
+      filtered = filtered.filter(namespace => namespaceHasUntranslatedKeys(namespace));
+    }
+
+    // Then apply search term filter
+    if (searchTerm.trim()) {
+      const searchLower = searchTerm.toLowerCase().trim();
+      filtered = filtered.filter((namespace) =>
+        namespace.toLowerCase().includes(searchLower)
+      );
+    }
+
+    return filtered;
+  }, [namespaces, searchTerm, showUntranslated, selectedNamespace, flattenedTranslations]);
 
   const handleContextMenu = (e: React.MouseEvent, namespace: string) => {
     e.preventDefault();

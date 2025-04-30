@@ -31,6 +31,7 @@ interface TranslationTableProps {
   baseLanguage: string;
   projectName: string;
   namespace: string;
+  showUntranslated?: boolean;
   initialSelectedKey?: string | null;
   initialKeySelection?: (keyPath: string | null) => string | null;
   onKeySelect?: (keyPath: string | null) => void;
@@ -42,6 +43,7 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   baseLanguage,
   projectName,
   namespace,
+  showUntranslated = false,
   initialSelectedKey,
   initialKeySelection,
   onKeySelect,
@@ -269,9 +271,27 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     });
   }, [translations, localUpdates]);
 
-  // Filter translations based on search term
+  // Check if a key has any untranslated languages
+  const hasUntranslatedLanguages = (entry: TranslationEntry) => {
+    // Base language should always be translated, skip it
+    const nonBaseLanguages = languages.filter(lang => lang !== baseLanguage);
+    
+    // Check if any language is missing a translation
+    return nonBaseLanguages.some(lang => {
+      // Check if translation is empty or undefined
+      return !entry.translations[lang] || entry.translations[lang].trim() === '';
+    });
+  };
+
+  // Filter translations based on search term and untranslated filter
   const filteredTranslations = translationsWithUpdates.filter(
     (entry: TranslationEntry) => {
+      // Filter by untranslated if enabled
+      if (showUntranslated && !hasUntranslatedLanguages(entry)) {
+        return false;
+      }
+
+      // Then apply search term filter
       if (!searchTerm) return true;
 
       const searchLower = searchTerm.toLowerCase();

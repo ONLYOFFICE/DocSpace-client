@@ -28,6 +28,7 @@ export default function ProjectPage() {
   const projectName = params.projectName as string;
 
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
+  const [showUntranslated, setShowUntranslated] = useState<boolean>(false);
   const [isNamespaceModalOpen, setIsNamespaceModalOpen] =
     useState<boolean>(false);
   const [namespaceForContextMenu, setNamespaceForContextMenu] = useState<
@@ -239,6 +240,15 @@ export default function ProjectPage() {
       }
     }
   }, [namespaces, namespaceFromUrl]);
+  
+  // Re-fetch namespaces when showUntranslated changes
+  useEffect(() => {
+    if (projectName && baseLanguage) {
+      fetchNamespaces(projectName, baseLanguage, {
+        untranslatedOnly: showUntranslated
+      });
+    }
+  }, [showUntranslated, projectName, baseLanguage]);
 
   // Fetch Ollama models when connected
   useEffect(() => {
@@ -479,6 +489,8 @@ export default function ProjectPage() {
               onToggle={handleLanguageToggle}
               projectName={projectName}
               horizontal={true}
+              showUntranslated={showUntranslated}
+              onShowUntranslatedChange={setShowUntranslated}
             />
           </div>
         </div>
@@ -525,14 +537,18 @@ export default function ProjectPage() {
               namespaces={namespaces}
               selectedNamespace={currentNamespace}
               projectName={projectName}
+              baseLanguage={baseLanguage}
               onChange={handleNamespaceChange}
               onNamespaceUpdated={() =>
-                fetchNamespaces(projectName, baseLanguage)
+                fetchNamespaces(projectName, baseLanguage, {
+                  untranslatedOnly: showUntranslated
+                })
               }
               onCheckErrors={handleCheckTranslationErrors}
               onRunLLMAnalysis={
                 ollamaConnected ? handleRunLLMAnalysis : undefined
               }
+              showUntranslated={showUntranslated}
             />
             {namespaces.length > 0 && (
               <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
@@ -560,6 +576,7 @@ export default function ProjectPage() {
                 baseLanguage={baseLanguage}
                 projectName={projectName}
                 namespace={currentNamespace}
+                showUntranslated={showUntranslated}
                 initialSelectedKey={keyFromUrl}
                 // SIMPLIFIED URL-ONLY KEY SELECTION HANDLER
                 initialKeySelection={(keyPath) => {

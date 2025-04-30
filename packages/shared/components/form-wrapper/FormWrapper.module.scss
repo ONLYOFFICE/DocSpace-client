@@ -27,3 +27,37 @@
     background: transparent !important;
   }
 }
+
+// Storybook specific styles
+.storybookDemoContent {
+  width: 100%;
+  text-align: center;
+}
+
+.storybookDemoForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.storybookDemoInput {
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.storybookDemoButton {
+  padding: 8px;
+  margin: 8px 0;
+  background-color: #2da7db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #1f8fc2;
+  }
+}

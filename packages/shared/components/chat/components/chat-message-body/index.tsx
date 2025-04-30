@@ -80,20 +80,22 @@ const ChatMessageBody = ({
         <EmptyScreen />
       ) : (
         <Scrollbar ref={scrollbarRef} className="chat-scroll-bar">
-          {messages.map((message) => {
-            if (message.message === "") return null;
+          <div className={styles.chatMessageContainer}>
+            {messages.map((message) => {
+              if (message.message === "") return null;
 
-            return (
-              <Message
-                key={message.id}
-                message={message}
-                displayFileExtension={displayFileExtension}
-                vectorizedFiles={vectorizedFiles}
-                user={user}
-                getIcon={getIcon}
-              />
-            );
-          })}
+              return (
+                <Message
+                  key={message.id}
+                  message={message}
+                  displayFileExtension={displayFileExtension}
+                  vectorizedFiles={vectorizedFiles}
+                  user={user}
+                  getIcon={getIcon}
+                />
+              );
+            })}
+          </div>
         </Scrollbar>
       )}
     </div>

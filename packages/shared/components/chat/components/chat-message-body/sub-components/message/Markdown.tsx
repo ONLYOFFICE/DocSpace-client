@@ -2,6 +2,7 @@ import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import rehypeMathjax from "rehype-mathjax";
+import classNames from "classnames";
 
 import { Text } from "../../../../../text";
 
@@ -44,10 +45,28 @@ export const MarkdownField = ({ chatMessage }: MarkdownFieldProps) => {
             );
           },
           ol({ children }) {
-            return <ol className={styles.chatMessageTextColor}>{children}</ol>;
+            return (
+              <ol
+                className={classNames(
+                  styles.chatMessageTextColor,
+                  styles.listBlock,
+                )}
+              >
+                {children}
+              </ol>
+            );
           },
           ul({ children }) {
-            return <ul className={styles.chatMessageTextColor}>{children}</ul>;
+            return (
+              <ul
+                className={classNames(
+                  styles.chatMessageTextColor,
+                  styles.listBlock,
+                )}
+              >
+                {children}
+              </ul>
+            );
           },
           pre: ({ children }) => {
             return <pre>{children}</pre>;

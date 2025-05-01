@@ -26,13 +26,13 @@
 
 import React from "react";
 
+import { classNames } from "@docspace/shared/utils";
 import { SelectorAddButton } from "../../selector-add-button";
 
 import NewItemDropDown from "./NewItemDropDown";
 import useCreateDropDown from "../hooks/useCreateDropDown";
 
 import styles from "../Selector.module.scss";
-import { classNames } from "@docspace/shared/utils";
 
 const NewItem = ({
   label,

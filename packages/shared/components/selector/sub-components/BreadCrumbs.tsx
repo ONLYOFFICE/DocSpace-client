@@ -27,6 +27,8 @@
 import React from "react";
 
 import { classNames } from "@docspace/shared/utils/classNames";
+import ArrowIcon from "PUBLIC_DIR/images/right.arrow.react.svg";
+
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
@@ -38,12 +40,11 @@ import {
   TBreadCrumb,
   TDisplayedItem,
 } from "../Selector.types";
-import { StyledArrowRightSvg } from "../Selector.styled";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 import { SearchDispatchContext } from "../contexts/Search";
 import styles from "../Selector.module.scss";
 import { Text } from "../../text";
-import { number } from "prop-types";
+import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
 
 const calculateDisplayedItems = (
   items: TBreadCrumb[],
@@ -161,6 +162,7 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
     onSelectBreadCrumb,
   } = React.useContext(BreadCrumbsContext);
   const setIsSearch = React.useContext(SearchDispatchContext);
+  const { isRTL } = useInterfaceDirection();
 
   const onClickItem = React.useCallback(
     ({ item }: { item: TBreadCrumb }) => {
@@ -223,7 +225,12 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
             }}
           />
         ) : item.isArrow ? (
-          <StyledArrowRightSvg key={`bread-crumb-item-${item.id}`} />
+          <ArrowIcon
+            className={classNames(styles.arrowRightSvg, {
+              [styles.rtl]: isRTL,
+            })}
+            key={`bread-crumb-item-${item.id}`}
+          />
         ) : (
           <Text
             key={`bread-crumb-item-${item.id}`}

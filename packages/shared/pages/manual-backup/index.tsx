@@ -50,21 +50,20 @@ import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
 import { getBackupProgressInfo } from "@docspace/shared/utils/common";
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
 
-import { StyledModules, StyledManualBackup } from "./ManualBackup.styled";
-
 import { useDidMount } from "../../hooks/useDidMount";
 
 import ThirdPartyModule from "./sub-components/ThirdPartyModule";
 import RoomsModule from "./sub-components/RoomsModule";
 import ThirdPartyStorageModule from "./sub-components/ThirdPartyStorageModule";
-import type { ManualBackupProps } from "./ManualBackup.types";
 
-const switches = [
-  "isCheckedTemporaryStorage",
-  "isCheckedDocuments",
-  "isCheckedThirdParty",
-  "isCheckedThirdPartyStorage",
-];
+import { StyledModules, StyledManualBackup } from "./ManualBackup.styled";
+import type { ManualBackupProps, TStorageType } from "./ManualBackup.types";
+import {
+  DOCUMENTS,
+  TEMPORARY_STORAGE,
+  THIRD_PARTY_RESOURCE,
+  THIRD_PARTY_STORAGE,
+} from "./ManualBackup.constants";
 
 const ManualBackup = ({
   isInitialLoading,
@@ -127,32 +126,20 @@ const ManualBackup = ({
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const [isCheckedDocuments, setIsCheckedDocuments] = useState(false);
-  const [isCheckedThirdParty, setIsCheckedThirdParty] = useState(false);
-  const [isCheckedTemporaryStorage, setIsCheckedTemporaryStorage] =
-    useState(false);
-  const [isCheckedThirdPartyStorage, setIsCheckedThirdPartyStorage] =
-    useState(false);
+  const [storageType, setStorageType] =
+    useState<TStorageType>(TEMPORARY_STORAGE);
+
+  const isCheckedTemporaryStorage = storageType === TEMPORARY_STORAGE;
+  const isCheckedDocuments = storageType === DOCUMENTS;
+  const isCheckedThirdParty = storageType === THIRD_PARTY_RESOURCE;
+  const isCheckedThirdPartyStorage = storageType === THIRD_PARTY_STORAGE;
 
   useDidMount(() => {
-    const storageType = getFromLocalStorage<string>("LocalCopyStorageType");
+    const saveStorageType = getFromLocalStorage<TStorageType>(
+      "LocalCopyStorageType",
+    );
 
-    switch (storageType) {
-      case "Documents":
-        setIsCheckedDocuments(true);
-        break;
-      case "ThirdPartyResource":
-        setIsCheckedThirdParty(true);
-        break;
-      case "TemporaryStorage":
-        setIsCheckedTemporaryStorage(true);
-        break;
-      case "ThirdPartyStorage":
-        setIsCheckedThirdPartyStorage(true);
-        break;
-      default:
-        break;
-    }
+    if (saveStorageType) setStorageType(saveStorageType);
   });
 
   useEffect(() => {
@@ -211,23 +198,9 @@ const ManualBackup = ({
   const onClickShowStorage = (
     e: React.MouseEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const newStateObj: Record<
-      string,
-      React.Dispatch<React.SetStateAction<boolean>>
-    > = {
-      isCheckedTemporaryStorage: setIsCheckedTemporaryStorage,
-      isCheckedDocuments: setIsCheckedDocuments,
-      isCheckedThirdParty: setIsCheckedThirdParty,
-      isCheckedThirdPartyStorage: setIsCheckedThirdPartyStorage,
-    };
+    const name = e.currentTarget.name as TStorageType;
 
-    const name = e.currentTarget.name;
-
-    newStateObj[name]?.(true);
-
-    const newState = switches.filter((el) => el !== name);
-
-    newState.forEach((stateName) => newStateObj[stateName]?.(false));
+    setStorageType(name);
   };
 
   const onMakeCopy = async (
@@ -313,7 +286,7 @@ const ManualBackup = ({
           key={0}
           id="temporary-storage"
           label={t("Common:TemporaryStorage")}
-          name="isCheckedTemporaryStorage"
+          name={TEMPORARY_STORAGE}
           isChecked={isCheckedTemporaryStorage}
           isDisabled={!isMaxProgress || pageIsDisabled}
           {...commonRadioButtonProps}
@@ -356,7 +329,7 @@ const ManualBackup = ({
         <RadioButton
           id="backup-room"
           label={t("Common:RoomsModule")}
-          name="isCheckedDocuments"
+          name={DOCUMENTS}
           key={1}
           isChecked={isCheckedDocuments}
           isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
@@ -391,7 +364,7 @@ const ManualBackup = ({
         <RadioButton
           id="third-party-resource"
           label={t("Common:ThirdPartyResource")}
-          name="isCheckedThirdParty"
+          name={THIRD_PARTY_RESOURCE}
           key={2}
           isChecked={isCheckedThirdParty}
           isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
@@ -434,7 +407,7 @@ const ManualBackup = ({
         <RadioButton
           id="third-party-storage"
           label={t("Common:ThirdPartyStorage")}
-          name="isCheckedThirdPartyStorage"
+          name={THIRD_PARTY_STORAGE}
           key={3}
           isChecked={isCheckedThirdPartyStorage}
           isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}

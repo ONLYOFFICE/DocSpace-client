@@ -38,11 +38,23 @@ import type { TColorScheme } from "../../themes";
 import type { ButtonSize } from "../../components/button";
 import type { FilesSelectorSettings } from "../../components/files-selector-input";
 import type { TBreadCrumb } from "../../components/selector/Selector.types";
+import {
+  DOCUMENTS,
+  TEMPORARY_STORAGE,
+  THIRD_PARTY_RESOURCE,
+  THIRD_PARTY_STORAGE,
+} from "./ManualBackup.constants";
 
 type StorageParamsType = {
   key: string;
   value: string;
 };
+
+export type TStorageType =
+  | typeof DOCUMENTS
+  | typeof THIRD_PARTY_RESOURCE
+  | typeof TEMPORARY_STORAGE
+  | typeof THIRD_PARTY_STORAGE;
 
 export interface ManualBackupProps {
   isManagement?: boolean;

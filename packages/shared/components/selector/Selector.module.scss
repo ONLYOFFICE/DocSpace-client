@@ -509,3 +509,32 @@
     background: var(--selector-item-hover-background);
   }
 }
+
+.inputWrapper {
+  width: 32px;
+  height: 32px;
+
+  margin-inline-start: 8px;
+
+  border: var(--selector-item-input-button-border);
+  border-radius: 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  &:hover {
+    div {
+      cursor: pointer;
+    }
+    cursor: pointer;
+
+    border-color: var(--selector-item-input-button-border-hover);
+
+    path {
+      fill: var(--selector-item-input-button-border-hover);
+    }
+  }
+}

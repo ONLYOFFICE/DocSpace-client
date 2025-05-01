@@ -39,9 +39,6 @@ import { IconButton } from "../../icon-button";
 import { RoomIcon } from "../../room-icon";
 import { RoomLogo } from "../../room-logo";
 import styles from "../Selector.module.scss";
-import { classNames } from "@docspace/shared/utils";
-
-import { StyledInputWrapper } from "../Selector.styled";
 
 const InputItem = ({
   defaultInputValue,
@@ -173,12 +170,12 @@ const InputItem = ({
         forwardedRef={inputRef}
         placeholder={placeholder}
       />
-      <StyledInputWrapper onClick={onAcceptInputAction}>
+      <div className={styles.inputWrapper} onClick={onAcceptInputAction}>
         <IconButton iconName={AcceptIconSvgUrl} size={16} />
-      </StyledInputWrapper>
-      <StyledInputWrapper onClick={onCancelInputAction}>
+      </div>
+      <div className={styles.inputWrapper} onClick={onCancelInputAction}>
         <IconButton iconName={CancelIconSvgUrl} size={16} />
-      </StyledInputWrapper>
+      </div>
     </div>
   );
 };

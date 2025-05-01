@@ -41,36 +41,6 @@ const StyledArrowRightSvg = styled(ArrowRightSvg).attrs(injectDefaultTheme)`
   }
 `;
 
-const StyledInputWrapper = styled.div.attrs(injectDefaultTheme)`
-  width: 32px;
-  height: 32px;
-
-  margin-inline-start: 8px;
-
-  border: 1px solid ${(props) => props.theme.selector.item.inputButtonBorder};
-  border-radius: 3px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  box-sizing: border-box;
-
-  :hover {
-    div {
-      cursor: pointer;
-    }
-    cursor: pointer;
-
-    border-color: ${(props) =>
-      props.theme.selector.item.inputButtonBorderHover};
-
-    path {
-      fill: ${(props) => props.theme.selector.item.inputButtonBorderHover};
-    }
-  }
-`;
-
 // fix empty container padding with calc +24px
 const StyledCreateDropDown = styled.div.attrs(injectDefaultTheme)<{
   isEmpty: boolean;
@@ -114,4 +84,4 @@ const StyledCreateDropDown = styled.div.attrs(injectDefaultTheme)<{
   }
 `;
 
-export { StyledArrowRightSvg, StyledInputWrapper, StyledCreateDropDown };
+export { StyledArrowRightSvg, StyledCreateDropDown };

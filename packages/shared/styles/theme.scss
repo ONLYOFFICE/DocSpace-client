@@ -2093,11 +2093,14 @@
   --selector-item-hover-background: #{$gray-light};
   --selector-item-disabled-text-color: #{$gray};
   --selector-item-selected-background: #{$light-gray-hover};
+  --selector-item-input-button-border: 1px solid #{$gray-strong};
+  --selector-item-input-button-border-hover: #{$light-gray-dark};
 
   --selector-empty-screen-pressed-button-color: #{$gray-text};
   --selector-empty-screen-button-color: #{$light-gray-dark};
   --selector-empty-screen-hover-button-color: #{$black};
   --selector-empty-screen-description-color: #{$gray-text};
+
   --selector-navigation-lifetime-fill: #{$gray};
   --selector-navigation-lifetime-stroke: #{$gray};
 }
@@ -2114,6 +2117,8 @@
   --selector-item-hover-background: #{$light-dark-gray-hover};
   --selector-item-disabled-text-color: #{$gray-dark};
   --selector-item-selected-background: #{$light-dark-gray-hover};
+  --selector-item-input-button-border: 1px solid #{$gray-dark-strong};
+  --selector-item-input-button-border-hover: #{$white};
 
   --selector-empty-screen-pressed-button-color: #{$gray-dark-text};
   --selector-empty-screen-button-color: #{$dark-gray-dark};

@@ -52,7 +52,7 @@ export const ConnectDialog = observer(() => {
   const [isConnectDialogReconnect, setIsConnectDialogReconnect] =
     useState(false);
 
-  const { t } = useTranslation(["Settings", "Common"]);
+  const { t } = useTranslation(["Common"]);
 
   const openConnectWindow = useCallback(
     (serviceName: string, modal: Window | null) => {

@@ -24,33 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import ArrowRightSvg from "PUBLIC_DIR/images/arrow.right.react.svg";
 
 import { Tabs } from "../tabs";
 import { mobile } from "../../utils/device";
 
-import { ComboBox } from "../combobox";
-
-import { AccessRightSelect } from "../access-right-select";
 import { injectDefaultTheme } from "../../utils";
-
-const accessComboboxStyles = css`
-  margin-bottom: 2px;
-  max-height: 50px;
-
-  .combo-button {
-    min-height: 40px;
-    padding-inline-start: ${({ theme }) => theme.comboBox.button.paddingLeft};
-  }
-
-  .combo-button-label,
-  .combo-button-label:hover {
-    font-size: 14px;
-    text-decoration: none;
-  }
-`;
 
 const StyledEmptyScreen = styled.div.attrs(injectDefaultTheme)<{
   withSearch: boolean;
@@ -191,14 +172,6 @@ const StyledArrowRightSvg = styled(ArrowRightSvg).attrs(injectDefaultTheme)`
   }
 `;
 
-const StyledComboBox = styled(ComboBox).attrs(injectDefaultTheme)`
-  ${accessComboboxStyles}
-`;
-
-const StyledAccessSelector = styled(AccessRightSelect)`
-  ${accessComboboxStyles}
-`;
-
 const StyledTabs = styled(Tabs)`
   padding: 0 16px;
   margin-bottom: 16px;
@@ -284,9 +257,7 @@ const StyledCreateDropDown = styled.div.attrs(injectDefaultTheme)<{
 export {
   StyledEmptyScreen,
   StyledArrowRightSvg,
-  StyledComboBox,
   StyledTabs,
-  StyledAccessSelector,
   StyledInputWrapper,
   StyledCreateDropDown,
   StyledNewEmptyScreen,

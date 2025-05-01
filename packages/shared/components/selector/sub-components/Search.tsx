@@ -67,7 +67,7 @@ const Search = React.memo(
 
     return (
       <SearchInput
-        className={"search-input"}
+        className={className}
         placeholder={searchPlaceholder}
         value={searchValue ?? ""}
         onChange={onSearchAction}

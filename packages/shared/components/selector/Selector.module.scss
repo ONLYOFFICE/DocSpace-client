@@ -56,10 +56,12 @@
     padding: 16px 0 0;
   }
 
-  .searchInput,
-  .searchLoader {
-    padding: 0 16px;
-    margin-bottom: 12px;
+  :global {
+    .search-input,
+    .search-loader {
+      padding: 0 16px;
+      margin-bottom: 12px;
+    }
   }
 
   .bodyDescriptionText {
@@ -74,6 +76,32 @@
   .selectorInfoBar {
     margin: 0px 20px 16px;
   }
+}
+
+%accessComboboxStyles {
+  margin-bottom: 2px;
+  max-height: 50px;
+
+  :global {
+    .combo-button {
+      min-height: 40px;
+      padding-inline-start: var(--combobox-button-padding-left);
+    }
+
+    .combo-button-label,
+    .combo-button-label:hover {
+      font-size: 14px;
+      text-decoration: none;
+    }
+  }
+}
+
+.comboBox {
+  @extend %accessComboboxStyles;
+}
+
+.accessRightSelect {
+  @extend %accessComboboxStyles;
 }
 
 .footer {

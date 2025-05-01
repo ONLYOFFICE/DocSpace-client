@@ -2108,3 +2108,11 @@
   --selector-item-disabled-text-color: #{$gray-dark};
   --selector-item-selected-background: #{$light-dark-gray-hover};
 }
+
+.light {
+  --combobox-button-padding-left: 16px;
+}
+
+.dark {
+  --combobox-button-padding-left: 16px;
+}

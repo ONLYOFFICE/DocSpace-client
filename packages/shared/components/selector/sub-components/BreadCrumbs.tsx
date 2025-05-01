@@ -43,6 +43,7 @@ import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 import { SearchDispatchContext } from "../contexts/Search";
 import styles from "../Selector.module.scss";
 import { Text } from "../../text";
+import { number } from "prop-types";
 
 const calculateDisplayedItems = (
   items: TBreadCrumb[],

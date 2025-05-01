@@ -40,7 +40,6 @@ import { TabsContext } from "../contexts/Tabs";
 import { SelectAllContext } from "../contexts/SelectAll";
 import { InfoBarContext } from "../contexts/InfoBar";
 
-import { StyledTabs } from "../Selector.styled";
 import { BodyProps } from "../Selector.types";
 
 import { InfoBar } from "./InfoBar";
@@ -51,6 +50,7 @@ import { BreadCrumbs } from "./BreadCrumbs";
 import { Item } from "./Item";
 import { Info } from "./Info";
 import { VirtualScroll } from "./VirtualScroll";
+import { Tabs } from "../../tabs";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -295,10 +295,10 @@ const Body = ({
         : null}
 
       {withTabs && tabsData ? (
-        <StyledTabs
+        <Tabs
           items={tabsData}
           selectedItemId={activeTabId}
-          className="selector_body_tabs"
+          className={classNames(styles.tabs, "selector_body_tabs")}
         />
       ) : null}
 

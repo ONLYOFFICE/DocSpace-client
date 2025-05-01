@@ -2093,6 +2093,13 @@
   --selector-item-hover-background: #{$gray-light};
   --selector-item-disabled-text-color: #{$gray};
   --selector-item-selected-background: #{$light-gray-hover};
+
+  --selector-empty-screen-pressed-button-color: #{$gray-text};
+  --selector-empty-screen-button-color: #{$light-gray-dark};
+  --selector-empty-screen-hover-button-color: #{$black};
+  --selector-empty-screen-description-color: #{$gray-text};
+  --selector-navigation-lifetime-fill: #{$gray};
+  --selector-navigation-lifetime-stroke: #{$gray};
 }
 
 .dark {
@@ -2104,9 +2111,17 @@
   --selector-info-background-color: #{$dark-gray-light};
   --selector-info-color: #{$dark-gray-dark};
 
-  --selector-item-hover-background: #{$dark-gray-light};
+  --selector-item-hover-background: #{$light-dark-gray-hover};
   --selector-item-disabled-text-color: #{$gray-dark};
   --selector-item-selected-background: #{$light-dark-gray-hover};
+
+  --selector-empty-screen-pressed-button-color: #{$gray-dark-text};
+  --selector-empty-screen-button-color: #{$dark-gray-dark};
+  --selector-empty-screen-hover-button-color: #{$white};
+  --selector-empty-screen-description-color: #{$dark-gray-dark};
+
+  --selector-navigation-lifetime-fill: #{$dark-gray-dark};
+  --selector-navigation-lifetime-stroke: #{$gray};
 }
 
 .light {
@@ -2115,4 +2130,7 @@
 
 .dark {
   --combobox-button-padding-left: 16px;
+}
+
+.light {
 }

@@ -28,140 +28,9 @@ import styled from "styled-components";
 
 import ArrowRightSvg from "PUBLIC_DIR/images/arrow.right.react.svg";
 
-import { Tabs } from "../tabs";
 import { mobile } from "../../utils/device";
 
 import { injectDefaultTheme } from "../../utils";
-
-const StyledEmptyScreen = styled.div.attrs(injectDefaultTheme)<{
-  withSearch: boolean;
-}>`
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  margin-top: ${(props) => (props.withSearch ? "80px" : "64px")};
-  padding: 0 28px;
-
-  box-sizing: border-box;
-
-  .buttons {
-    position: relative;
-
-    width: 100%;
-
-    margin-top: 32px;
-
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    justify-content: center;
-
-    .empty-folder_container-links {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      .empty-folder_link {
-        color: ${(props) => props.theme.selector.emptyScreen.buttonColor};
-      }
-
-      &:hover {
-        .empty-folder_link {
-          color: ${(props) =>
-            props.theme.selector.emptyScreen.hoverButtonColor};
-        }
-
-        svg path {
-          fill: ${(props) => props.theme.selector.emptyScreen.hoverButtonColor};
-        }
-      }
-    }
-  }
-
-  .empty-image {
-    max-width: 72px;
-    max-height: 72px;
-
-    margin-bottom: 32px;
-  }
-
-  .empty-header {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 22px;
-
-    margin: 0;
-  }
-
-  .empty-description {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-
-    text-align: center;
-
-    color: ${(props) => props.theme.selector.emptyScreen.descriptionColor};
-
-    margin-top: 8px;
-  }
-`;
-
-const StyledNewEmptyScreen = styled.section.attrs(injectDefaultTheme)`
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  padding: 0 28px;
-
-  box-sizing: border-box;
-
-  .empty-image {
-    margin-top: 64px;
-  }
-
-  .empty-header {
-    font-size: 16px;
-    line-height: 22px;
-    font-weight: 700;
-    text-align: center;
-
-    margin: 0;
-
-    margin-top: 32px;
-  }
-
-  .empty-description {
-    font-size: 12px;
-    line-height: 16px;
-    text-align: center;
-
-    margin-top: 8px;
-
-    color: ${(props) => props.theme.selector.emptyScreen.pressedButtonColor};
-  }
-
-  .empty_button-wrapper {
-    display: flex;
-    justify-content: flex-start;
-
-    align-self: flex-start;
-
-    align-items: center;
-    gap: 16px;
-
-    padding: 12px 0;
-    margin-top: 16px;
-  }
-
-  .empty-button p {
-    padding-inline-start: 16px;
-  }
-`;
 
 const StyledArrowRightSvg = styled(ArrowRightSvg).attrs(injectDefaultTheme)`
   ${({ theme }) =>
@@ -169,15 +38,6 @@ const StyledArrowRightSvg = styled(ArrowRightSvg).attrs(injectDefaultTheme)`
 
   path {
     fill: ${(props) => props.theme.selector.breadCrumbs.arrowRightColor};
-  }
-`;
-
-const StyledTabs = styled(Tabs)`
-  padding: 0 16px;
-  margin-bottom: 16px;
-
-  .sticky-indent {
-    height: 0;
   }
 `;
 
@@ -254,11 +114,4 @@ const StyledCreateDropDown = styled.div.attrs(injectDefaultTheme)<{
   }
 `;
 
-export {
-  StyledEmptyScreen,
-  StyledArrowRightSvg,
-  StyledTabs,
-  StyledInputWrapper,
-  StyledCreateDropDown,
-  StyledNewEmptyScreen,
-};
+export { StyledArrowRightSvg, StyledInputWrapper, StyledCreateDropDown };

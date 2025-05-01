@@ -220,7 +220,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       >
         {avatar || isGroup ? (
           <Avatar
-            className={styles.userAvarar}
+            className={styles.userAvatar}
             source={avatar ?? ""}
             role={currentRole}
             size={AvatarSize.min}

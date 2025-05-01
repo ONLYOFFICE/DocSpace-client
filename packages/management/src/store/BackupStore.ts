@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import isNil from "lodash/isNil";
 import { makeAutoObservable } from "mobx";
 
 import { getConnectingStorages } from "@docspace/shared/api/files";
@@ -170,13 +171,19 @@ class BackupStore {
       (a) => a.connected,
     );
 
-    if (this.selectedThirdPartyAccount) return;
+    const newSelectedThirdPartyAccount =
+      selectedAccount ?? connectedThirdPartyAccount ?? null;
 
-    this.setSelectedThirdPartyAccount(
-      selectedAccount && Object.keys(selectedAccount).length !== 0
-        ? selectedAccount
-        : (connectedThirdPartyAccount ?? {}),
-    );
+    if (
+      !isNil(this.selectedThirdPartyAccount?.provider_id) &&
+      !isNil(newSelectedThirdPartyAccount?.provider_id) &&
+      this.selectedThirdPartyAccount.provider_id ===
+        newSelectedThirdPartyAccount.provider_id
+    ) {
+      return;
+    }
+
+    this.setSelectedThirdPartyAccount(newSelectedThirdPartyAccount);
   };
 }
 

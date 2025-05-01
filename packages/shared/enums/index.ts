@@ -772,3 +772,11 @@ export enum RoomSecurityError {
   None,
   FormRoleBlockingDeletion,
 }
+
+export enum BackupStorageLocalKey {
+  StorageType = "LocalCopyStorageType",
+  Folder = "LocalCopyFolder",
+  Storage = "LocalCopyStorage",
+  ThirdPartyStorageType = "LocalCopyThirdPartyStorageType",
+  ThirdPartyStorageValues = "LocalCopyThirdPartyStorageValues",
+}

@@ -27,7 +27,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable jsx-a11y/tabindex-no-positive */
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -54,8 +54,8 @@ const ConnectDialog = ({
   item,
   fetchThirdPartyProviders,
   providers,
-  selectedFolderId,
-  selectedFolderFolders,
+  // selectedFolderId,
+  // selectedFolderFolders,
   saveThirdParty,
   openConnectWindow,
   setConnectDialogVisible,
@@ -224,22 +224,26 @@ const ConnectDialog = ({
         setIsLoading(false);
         setSaveAfterReconnectOAuth(false);
       });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     customerTitle,
-    fetchThirdPartyProviders,
-    link,
-    loginValue,
-    oAuthToken,
-    onClose,
-    passwordValue,
-    provider_id,
-    provider_key,
-    selectedFolderFolders,
-    selectedFolderId,
     urlValue,
+    loginValue,
+    passwordValue,
+    link,
+    showUrlField,
+    isConnectionViaBackupModule,
     saveThirdParty,
+    oAuthToken,
+    provider_key,
+    key,
+    provider_id,
+    roomCreation,
+    setThirdPartyAccountsInfo,
+    t,
+    onClose,
+    setSaveThirdpartyResponse,
+    fetchThirdPartyProviders,
+    setSaveAfterReconnectOAuth,
   ]);
 
   const onReconnect = () => {
@@ -258,10 +262,13 @@ const ConnectDialog = ({
 
   const onKeyUpHandler = useCallback(
     (e: KeyboardEvent) => {
-      if (e.keyCode === 13) onSave();
+      if (e.key === "Enter") onSave();
     },
     [onSave],
   );
+
+  const saveRef = useRef(onSave);
+  saveRef.current = onSave;
 
   useEffect(() => {
     window.addEventListener("keyup", onKeyUpHandler);
@@ -274,9 +281,8 @@ const ConnectDialog = ({
 
   useEffect(() => {
     if (saveAfterReconnectOAuth) {
-      onSave();
+      saveRef.current();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [saveAfterReconnectOAuth]);
 
   return (

@@ -33,6 +33,7 @@ import {
   InputType,
   TextInput,
 } from "@docspace/shared/components/text-input";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import {
   FILE_PATH,
@@ -60,7 +61,7 @@ const SelectelSettings = ({
   const publicPlaceholder =
     selectedStorage && selectedStorage.properties[1].title;
 
-  useEffect(() => {
+  useDidMount(() => {
     const filePathField = isNeedFilePath ? [FILE_PATH] : [];
     setIsThirdStorageChanged(false);
     setRequiredFormSettings([
@@ -68,8 +69,7 @@ const SelectelSettings = ({
       PRIVATE_CONTAINER,
       ...filePathField,
     ]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;

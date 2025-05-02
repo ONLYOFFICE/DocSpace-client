@@ -26,12 +26,13 @@
 
 /* eslint-disable jsx-a11y/tabindex-no-positive */
 
-import React, { useEffect } from "react";
+import React from "react";
 import {
   InputSize,
   InputType,
   TextInput,
 } from "@docspace/shared/components/text-input";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 import { RackspaceSettingsProps } from "./RackspaceSettings.types";
 import {
   FILE_PATH,
@@ -60,7 +61,7 @@ const RackspaceSettings = ({
   const regionPlaceholder =
     selectedStorage && selectedStorage.properties[2].title;
 
-  useEffect(() => {
+  useDidMount(() => {
     setIsThirdStorageChanged(false);
     const filePathField = isNeedFilePath ? [FILE_PATH] : [];
     setRequiredFormSettings([
@@ -69,8 +70,7 @@ const RackspaceSettings = ({
       PRIVATE_CONTAINER,
       ...filePathField,
     ]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;

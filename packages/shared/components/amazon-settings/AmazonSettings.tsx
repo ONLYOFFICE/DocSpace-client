@@ -40,6 +40,7 @@ import {
 } from "@docspace/shared/components/text-input";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { RadioButton } from "@docspace/shared/components/radio-button";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import { StyledBody } from "./AmazonSettings.styled";
 import {
@@ -128,27 +129,25 @@ const AmazonSettings = ({
       }
     }
     return tempRegions;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [defaultRegion, storageRegions]);
 
   const [region, setRegion] = useState(() =>
     defaultRegionValue.current ? defaultRegionValue.current : regions[0],
   );
 
-  useEffect(() => {
+  useDidMount(() => {
     const filePathField = isNeedFilePath ? [filePath] : [];
     setRequiredFormSettings([bucket, ...filePathField]);
     setIsThirdStorageChanged(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   useEffect(() => {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const value of regions) {
-      if (value.systemName === formSettings[REGION]) {
-        return setRegion(value);
-      }
-    }
+    const regionValue = regions.find(
+      (r) => r?.systemName === formSettings[REGION],
+    );
+    if (!regionValue) return;
+
+    setRegion(regionValue);
   }, [formSettings, regions]);
 
   const onSelectEncryptionMethod = (options: TOption) => {

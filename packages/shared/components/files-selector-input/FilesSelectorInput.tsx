@@ -35,6 +35,7 @@ import { FileInput } from "@docspace/shared/components/file-input";
 import { Portal } from "@docspace/shared/components/portal";
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
+import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { FilesSelectorProps } from "@docspace/shared/selectors/Files/FilesSelector.types";
@@ -91,10 +92,9 @@ const FilesSelectorInput = ({
   const [isLoading, setIsLoading] = useState(!!id && !withoutInitPath);
   // const [isRequestRunning, setIsRequestRunning] = useState<boolean>(false);
 
-  useEffect(() => {
-    return () => toDefault();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useUnmount(() => {
+    toDefault();
+  });
 
   const onClick = () => {
     setIsPanelVisible(true);

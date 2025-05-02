@@ -25,13 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable jsx-a11y/tabindex-no-positive */
-import React, { useEffect } from "react";
+import React from "react";
 
 import {
   InputSize,
   InputType,
   TextInput,
 } from "@docspace/shared/components/text-input";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import { BUCKET, FILE_PATH } from "./GoogleCloudSettings.constants";
 import type { GoogleCloudSettingsProps } from "./GoogleCloudSettings.types";
@@ -48,12 +49,11 @@ const GoogleCloudSettings = ({
   isLoading,
   isLoadingData,
 }: GoogleCloudSettingsProps) => {
-  useEffect(() => {
+  useDidMount(() => {
     const filePathField = isNeedFilePath ? [FILE_PATH] : [];
     setRequiredFormSettings([BUCKET, ...filePathField]);
     setIsThirdStorageChanged(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   const isDisabled = selectedStorage && !selectedStorage.isSet;
   const bucketPlaceholder =

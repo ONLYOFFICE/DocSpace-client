@@ -24,15 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React from "react";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { ThirdPartyStorages } from "@docspace/shared/enums";
+import {
+  BackupStorageLocalKey,
+  ThirdPartyStorages,
+} from "@docspace/shared/enums";
 import {
   AmazonSettings,
   formNames,
 } from "@docspace/shared/components/amazon-settings";
 
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
+import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
 import type {
   SelectedStorageType,
   StorageRegionsType,
@@ -85,22 +90,21 @@ const AmazonStorage = ({
   setIsThirdStorageChanged,
   setRequiredFormSettings,
 }: AmazonStorageProps) => {
-  useEffect(() => {
+  useDidMount(() => {
     const basicValues = formNames(storageRegions[0].systemName);
 
-    const moduleValues = JSON.parse(
-      localStorage.getItem("LocalCopyThirdPartyStorageValues") ?? "null",
+    const moduleValues = getFromLocalStorage<Record<string, string>>(
+      BackupStorageLocalKey.ThirdPartyStorageValues,
     );
+
     const moduleType =
-      JSON.parse(localStorage.getItem("LocalCopyStorage") ?? "null") ===
+      getFromLocalStorage<ThirdPartyStorages>(BackupStorageLocalKey.Storage) ===
       ThirdPartyStorages.AmazonId;
 
     setCompletedFormFields(
       moduleType && moduleValues ? moduleValues : basicValues,
     );
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   const isDisabled = selectedStorage && !selectedStorage.isSet;
 

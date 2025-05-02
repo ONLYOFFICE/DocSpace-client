@@ -24,13 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React from "react";
 
 import { BackupStorageType } from "@docspace/shared/enums";
 import {
   DirectThirdPartyConnection,
   type DirectThirdPartyConnectionProps,
 } from "@docspace/shared/components/direct-third-party-connection";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import type { Nullable } from "@docspace/shared/types";
 
@@ -116,10 +117,9 @@ const ThirdPartyModule = ({
     defaultStorageType === BackupStorageType.ResourcesModuleType.toString();
   const passedId = isResourcesDefault ? (defaultFolderId ?? "") : "";
 
-  useEffect(() => {
+  useDidMount(() => {
     if (!isResourcesDefault) setSelectedFolder("");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   const onSelectFolder = (id: string | number | undefined) => {
     setSelectedFolder(`${id}`);

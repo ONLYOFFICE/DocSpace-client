@@ -24,13 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 import {
   AmazonSettings,
   formNames,
 } from "@docspace/shared/components/amazon-settings";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import { ScheduleComponent } from "../../ScheduleComponent";
 
@@ -71,10 +72,9 @@ const AmazonStorage = ({
 }: AmazonStorageProps) => {
   const { t } = useTranslation(["Common"]);
 
-  useEffect(() => {
+  useDidMount(() => {
     setCompletedFormFields(formNames(storageRegions[0].systemName), "s3");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   return (
     <StyledStoragesModule>

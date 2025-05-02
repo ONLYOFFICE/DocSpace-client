@@ -26,10 +26,11 @@
 
 "use client";
 
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
 import { getOptions } from "@docspace/shared/utils/getThirdPartyStoragesOptions";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import { GoogleCloudStorage } from "../storages/GoogleCloudStorage";
 import { RackspaceStorage } from "../storages/RackspaceStorage";
@@ -80,10 +81,9 @@ const ThirdPartyStorageModule = ({
     selectedStorageId: defaultSelectedStorageId,
   } = useMemo(() => getOptions(thirdPartyStorage), [thirdPartyStorage]);
 
-  useEffect(() => {
+  useDidMount(() => {
     if (!defaultStorageId) setStorageId(defaultSelectedStorageId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   const onSelect = (option: TOption) => {
     const key = option.key;

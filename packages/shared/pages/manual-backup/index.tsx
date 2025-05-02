@@ -35,7 +35,11 @@ import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { startBackup } from "@docspace/shared/api/portal";
 import { RadioButton } from "@docspace/shared/components/radio-button";
 import { toastr } from "@docspace/shared/components/toast";
-import { BackupStorageType, FolderType } from "@docspace/shared/enums";
+import {
+  BackupStorageLocalKey,
+  BackupStorageType,
+  FolderType,
+} from "@docspace/shared/enums";
 import StatusMessage from "@docspace/shared/components/status-message";
 import SocketHelper, {
   SocketEvents,
@@ -136,7 +140,7 @@ const ManualBackup = ({
 
   useDidMount(() => {
     const saveStorageType = getFromLocalStorage<TStorageType>(
-      "LocalCopyStorageType",
+      BackupStorageLocalKey.StorageType,
     );
 
     if (saveStorageType) setStorageType(saveStorageType);
@@ -172,8 +176,8 @@ const ManualBackup = ({
     setErrorInformation("");
     clearLocalStorage();
     localStorage.setItem(
-      "LocalCopyStorageType",
-      JSON.stringify("TemporaryStorage"),
+      BackupStorageLocalKey.StorageType,
+      JSON.stringify(TEMPORARY_STORAGE),
     );
 
     try {

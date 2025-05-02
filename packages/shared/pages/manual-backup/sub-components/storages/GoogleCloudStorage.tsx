@@ -24,10 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React from "react";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { ThirdPartyStorages } from "@docspace/shared/enums";
+import {
+  BackupStorageLocalKey,
+  ThirdPartyStorages,
+} from "@docspace/shared/enums";
+import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
+import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import {
   GoogleCloudSettings,
@@ -76,21 +81,21 @@ const GoogleCloudStorage = ({
 }: GoogleCloudStorageProps) => {
   const isDisabled = selectedStorage && !selectedStorage.isSet;
 
-  useEffect(() => {
+  useDidMount(() => {
     const basicValues = formNames();
-    const moduleValues = JSON.parse(
-      localStorage.getItem("LocalCopyThirdPartyStorageValues") ?? "null",
+
+    const moduleValues = getFromLocalStorage<Record<string, string>>(
+      BackupStorageLocalKey.ThirdPartyStorageValues,
     );
 
     const moduleType =
-      JSON.parse(localStorage.getItem("LocalCopyStorage") ?? "null") ===
+      getFromLocalStorage<ThirdPartyStorages>(BackupStorageLocalKey.Storage) ===
       ThirdPartyStorages.GoogleId;
 
     setCompletedFormFields(
       moduleType && moduleValues ? moduleValues : basicValues,
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   return (
     <>

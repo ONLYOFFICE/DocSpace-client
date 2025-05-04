@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { observer } from "mobx-react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
@@ -33,8 +33,6 @@ import { useTranslation } from "react-i18next";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
-import { openConnectWindowUtils } from "@docspace/shared/utils/openConnectWindow";
-import { deleteThirdParty as deleteThirdPartyApi } from "@docspace/shared/api/files";
 import ManualBackup from "@docspace/shared/pages/manual-backup";
 import { TariffState } from "@docspace/shared/enums";
 
@@ -87,9 +85,6 @@ const DataBackup = ({
   const { settings } = useAppState();
   const { backupStore, spacesStore } = useStores();
 
-  const [deleteThirdPartyDialogVisible, setDeleteThirdPartyDialogVisible] =
-    useState(false);
-
   const { currentColorScheme } = useTheme();
 
   const { t } = useTranslation(["Common"]);
@@ -123,6 +118,13 @@ const DataBackup = ({
     setCompletedFormFields,
     resetDownloadingProgress,
     isBackupProgressVisible,
+    deleteThirdPartyDialogVisible,
+    setDeleteThirdPartyDialogVisible,
+    getProgress,
+    deleteThirdParty,
+    openConnectWindow,
+
+    defaultRegion,
   } = useBackup({
     account,
     backupScheduleResponse,
@@ -139,53 +141,13 @@ const DataBackup = ({
     toDefaultFileSelector,
   } = useFilesSelectorInput();
 
-  const deleteThirdParty = useCallback(async (id: string) => {
-    try {
-      await deleteThirdPartyApi(id);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
-
-  const openConnectWindow = useCallback(
-    (serviceName: string, modal: Window | null) => {
-      return openConnectWindowUtils(serviceName, modal, t);
-    },
-    [t],
-  );
-
   const rootFoldersTitles = useTreeFolders({ foldersTree });
-
-  const defaultRegion =
-    defaults.formSettings && "region" in defaults.formSettings
-      ? (defaults.formSettings.region as string)
-      : "";
 
   const dataBackupUrl = useMemo(() => getDataBackupUrl(settings), [settings]);
 
   const pageIsDisabled = portals.length === 1;
 
   const isNotPaidPeriod = portalTariff?.state === TariffState.NotPaid;
-
-  const getProgress = async () => {
-    if (backupProgress && "progress" in backupProgress) {
-      const { progress, link, error } = backupProgress;
-
-      if (!error) {
-        setDownloadingProgress(progress);
-
-        if (link && link.slice(0, 1) === "/") {
-          setTemporaryLink(link);
-        }
-        setErrorInformation("", t);
-      } else {
-        setDownloadingProgress(100);
-        setErrorInformation(error, t);
-      }
-    } else if (backupProgress) {
-      setErrorInformation(backupProgress, t);
-    }
-  };
 
   useUnmount(() => {
     resetDownloadingProgress();

@@ -26,17 +26,21 @@
 
 "use client";
 
+import { useTranslation } from "react-i18next";
 import { useCallback, useLayoutEffect, useMemo, useState } from "react";
 
 import axios, { AxiosError } from "axios";
 
+import { deleteThirdParty as deleteThirdPartyApi } from "@docspace/shared/api/files";
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
 import { saveToLocalStorageUtils } from "@docspace/shared/utils/saveToLocalStorage";
+import { openConnectWindowUtils } from "@docspace/shared/utils/openConnectWindow";
 
 import type { Nullable, Option, TTranslation } from "@docspace/shared/types";
 import type {
   TBackupProgress,
   TBackupSchedule,
+  TPaymentFeature,
 } from "@docspace/shared/api/portal/types";
 import type { TStorageBackup } from "@docspace/shared/api/settings/types";
 import type { SettingsThirdPartyType } from "@docspace/shared/api/files/types";
@@ -47,12 +51,14 @@ import type { ErrorResponse } from "@/types";
 import { useStores } from "./useStores";
 import useAppState from "./useAppState";
 import { useBackupSettings } from "./useBackupSettings";
+import { TPortals } from "@docspace/shared/api/management/types";
 
 interface BackupProps {
   account: SettingsThirdPartyType | undefined;
   backupScheduleResponse: TBackupSchedule | undefined;
   backupStorageResponse: TStorageBackup[];
   backupProgress?: TBackupProgress | TError;
+  features?: TPaymentFeature[];
 }
 
 export const useBackup = ({
@@ -60,7 +66,10 @@ export const useBackup = ({
   backupScheduleResponse,
   backupStorageResponse,
   backupProgress,
+  features,
 }: BackupProps) => {
+  const { t } = useTranslation(["Common"]);
+
   const { backupStore } = useStores();
   const { isAdmin } = useAppState();
   const {
@@ -109,6 +118,8 @@ export const useBackup = ({
     useState<boolean>(false);
 
   const [errorInformation, setErrorInformationState] = useState<string>("");
+  const [deleteThirdPartyDialogVisible, setDeleteThirdPartyDialogVisible] =
+    useState(false);
 
   const [downloadingProgress, setDownloadingProgress] = useState<number>(() => {
     if (backupProgress && "progress" in backupProgress)
@@ -267,6 +278,59 @@ export const useBackup = ({
     [backupStore, isAdmin],
   );
 
+  const getProgress = useCallback(async () => {
+    if (backupProgress && "progress" in backupProgress) {
+      const { progress, link, error } = backupProgress;
+
+      if (!error) {
+        setDownloadingProgress(progress);
+
+        if (link && link.slice(0, 1) === "/") {
+          setTemporaryLink(link);
+        }
+        setErrorInformation("", t);
+      } else {
+        setDownloadingProgress(100);
+        setErrorInformation(error, t);
+      }
+    } else if (backupProgress) {
+      setErrorInformation(backupProgress, t);
+    }
+  }, [backupProgress, setErrorInformation, t]);
+
+  const deleteThirdParty = useCallback(async (id: string) => {
+    try {
+      await deleteThirdPartyApi(id);
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
+
+  const openConnectWindow = useCallback(
+    (serviceName: string, modal: Window | null) => {
+      return openConnectWindowUtils(serviceName, modal, t);
+    },
+    [t],
+  );
+
+  const isRestoreAndAutoBackupAvailable = useMemo(() => {
+    return Boolean(
+      features?.find((feature) => feature.id === "restore")?.value,
+    );
+  }, [features]);
+
+  const defaultRegion =
+    defaults.formSettings && "region" in defaults.formSettings
+      ? (defaults.formSettings.region as string)
+      : "";
+
+  const checkEnablePortalSettings = useCallback(
+    (portals: Array<TPortals>) => {
+      return portals.length === 1 ? false : isRestoreAndAutoBackupAvailable;
+    },
+    [isRestoreAndAutoBackupAvailable],
+  );
+
   return {
     defaults,
     setDefaults,
@@ -334,5 +398,14 @@ export const useBackup = ({
     setSelectedFolder,
     setStorageId,
     saveToLocalStorage,
+    deleteThirdPartyDialogVisible,
+    setDeleteThirdPartyDialogVisible,
+    getProgress,
+    deleteThirdParty,
+    openConnectWindow,
+
+    defaultRegion,
+    isRestoreAndAutoBackupAvailable,
+    checkEnablePortalSettings,
   };
 };

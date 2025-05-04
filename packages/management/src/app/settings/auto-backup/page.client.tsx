@@ -25,15 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 "use client";
 import { observer } from "mobx-react";
+import React, { useMemo } from "react";
 import { useTheme } from "styled-components";
-import React, { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import AutomaticBackup from "@docspace/shared/pages/auto-backup";
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
 import { useDidMount } from "@docspace/shared/hooks/useDidMount";
-import { openConnectWindowUtils } from "@docspace/shared/utils/openConnectWindow";
-import { deleteThirdParty as deleteThirdPartyApi } from "@docspace/shared/api/files";
+
 import { useDefaultOptions } from "@docspace/shared/pages/auto-backup/hooks";
 
 import type {
@@ -83,9 +82,6 @@ const AutoBackup = ({
   foldersTree,
   backupProgress,
 }: AutoBackupProps) => {
-  const [deleteThirdPartyDialogVisible, setDeleteThirdPartyDialogVisible] =
-    useState(false);
-
   const { t } = useTranslation(["Common"]);
 
   const { currentColorScheme } = useTheme();
@@ -95,21 +91,6 @@ const AutoBackup = ({
   const language = user?.cultureName || "en";
 
   const rootFoldersTitles = useTreeFolders({ foldersTree });
-
-  const openConnectWindow = useCallback(
-    (serviceName: string, modal: Window | null) => {
-      return openConnectWindowUtils(serviceName, modal, t);
-    },
-    [t],
-  );
-
-  const deleteThirdParty = useCallback(async (id: string) => {
-    try {
-      await deleteThirdPartyApi(id);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
 
   const {
     accounts,
@@ -162,11 +143,20 @@ const AutoBackup = ({
     seStorageType,
     setSelectedFolder,
     setStorageId,
+    deleteThirdPartyDialogVisible,
+    setDeleteThirdPartyDialogVisible,
+    getProgress,
+    deleteThirdParty,
+    openConnectWindow,
+
+    defaultRegion,
+    checkEnablePortalSettings,
   } = useBackup({
     account,
     backupScheduleResponse,
     backupStorageResponse,
     backupProgress,
+    features,
   });
 
   const { periodsObject, weekdaysLabelArray } = useDefaultOptions(t, language);
@@ -181,26 +171,6 @@ const AutoBackup = ({
     updateBaseFolderPath,
   } = useFilesSelectorInput();
 
-  const getProgress = async () => {
-    if (backupProgress && "progress" in backupProgress) {
-      const { progress, link, error } = backupProgress;
-
-      if (!error) {
-        setDownloadingProgress(progress);
-
-        if (link && link.slice(0, 1) === "/") {
-          setTemporaryLink(link);
-        }
-        setErrorInformation("", t);
-      } else {
-        setDownloadingProgress(100);
-        setErrorInformation(error, t);
-      }
-    } else if (backupProgress) {
-      setErrorInformation(backupProgress, t);
-    }
-  };
-
   useUnmount(() => {
     resetDownloadingProgress();
   });
@@ -210,28 +180,12 @@ const AutoBackup = ({
     setDefaultOptions(t, periodsObject, weekdaysLabelArray);
   });
 
-  const isRestoreAndAutoBackupAvailable = useMemo(() => {
-    return Boolean(
-      features.find((feature: TPaymentFeature) => feature.id === "restore")
-        ?.value,
-    );
-  }, [features]);
-
-  const checkEnablePortalSettings = () => {
-    return portals.length === 1 ? false : isRestoreAndAutoBackupAvailable;
-  };
-
   const automaticBackupUrl = useMemo(
     () => getAutomaticBackupUrl(settings),
     [settings],
   );
 
-  const isEnableAuto = checkEnablePortalSettings();
-
-  const defaultRegion =
-    defaults.formSettings && "region" in defaults.formSettings
-      ? (defaults.formSettings.region as string)
-      : "";
+  const isEnableAuto = checkEnablePortalSettings(portals);
 
   return (
     <AutomaticBackup

@@ -28,7 +28,7 @@
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { useCallback, useMemo, useState } from "react";
+import { useState } from "react";
 import isNil from "lodash/isNil";
 
 import { useUnmount } from "@docspace/shared/hooks/useUnmount";
@@ -36,12 +36,9 @@ import { useDidMount } from "@docspace/shared/hooks/useDidMount";
 
 import { RestoreBackup } from "@docspace/shared/pages/restore-backup";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { openConnectWindowUtils } from "@docspace/shared/utils/openConnectWindow";
+
 import { ButtonSize } from "@docspace/shared/components/button";
-import {
-  deleteThirdParty as deleteThirdPartyApi,
-  uploadBackup,
-} from "@docspace/shared/api/files";
+import { uploadBackup } from "@docspace/shared/api/files";
 
 import type {
   SettingsThirdPartyType,
@@ -87,8 +84,6 @@ const Restore = ({
 }: RestoreProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const [deleteThirdPartyDialogVisible, setDeleteThirdPartyDialogVisible] =
-    useState(false);
   const [restoreResource, setRestoreResource] =
     useState<Nullable<File | string | number>>(null);
 
@@ -121,11 +116,19 @@ const Restore = ({
     isFormReady,
     getStorageParams,
     resetDownloadingProgress,
+    deleteThirdPartyDialogVisible,
+    setDeleteThirdPartyDialogVisible,
+    getProgress,
+    deleteThirdParty,
+    openConnectWindow,
+    defaultRegion,
+    checkEnablePortalSettings,
   } = useBackup({
     account,
     backupScheduleResponse,
     backupStorageResponse,
     backupProgress,
+    features,
   });
 
   const {
@@ -137,26 +140,6 @@ const Restore = ({
     toDefaultFileSelector,
   } = useFilesSelectorInput();
 
-  const getProgress = async () => {
-    if (backupProgress && "progress" in backupProgress) {
-      const { progress, link, error } = backupProgress;
-
-      if (!error) {
-        setDownloadingProgress(progress);
-
-        if (link && link.slice(0, 1) === "/") {
-          setTemporaryLink(link);
-        }
-        setErrorInformation("", t);
-      } else {
-        setDownloadingProgress(100);
-        setErrorInformation(error, t);
-      }
-    } else if (backupProgress) {
-      setErrorInformation(backupProgress, t);
-    }
-  };
-
   useUnmount(() => {
     resetDownloadingProgress();
     setRestoreResource(null);
@@ -166,13 +149,6 @@ const Restore = ({
     getProgress();
   });
 
-  const isRestoreAndAutoBackupAvailable = useMemo(() => {
-    return Boolean(
-      features.find((feature: TPaymentFeature) => feature.id === "restore")
-        ?.value,
-    );
-  }, [features]);
-
   const navigate = (path: string) => {
     const url = window.ClientConfig?.proxy?.url;
 
@@ -180,25 +156,6 @@ const Restore = ({
 
     window.location.replace(combineUrl(url, path));
   };
-
-  const checkEnablePortalSettings = () => {
-    return portals.length === 1 ? false : isRestoreAndAutoBackupAvailable;
-  };
-
-  const deleteThirdParty = useCallback(async (id: string) => {
-    try {
-      await deleteThirdPartyApi(id);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
-
-  const openConnectWindow = useCallback(
-    (serviceName: string, modal: Window | null) => {
-      return openConnectWindowUtils(serviceName, modal, t);
-    },
-    [t],
-  );
 
   async function* uploadBackupFile(requestsDataArray: FormData[], url: string) {
     const length = requestsDataArray.length;
@@ -282,12 +239,7 @@ const Restore = ({
     }
   };
 
-  const isEnableRestore = checkEnablePortalSettings();
-
-  const defaultRegion =
-    defaults.formSettings && "region" in defaults.formSettings
-      ? (defaults.formSettings.region as string)
-      : "";
+  const isEnableRestore = checkEnablePortalSettings(portals);
 
   return (
     <RestoreBackup

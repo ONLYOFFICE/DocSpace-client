@@ -162,7 +162,6 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
     onSelectBreadCrumb,
   } = React.useContext(BreadCrumbsContext);
   const setIsSearch = React.useContext(SearchDispatchContext);
-  const { isRTL } = useInterfaceDirection();
 
   const onClickItem = React.useCallback(
     ({ item }: { item: TBreadCrumb }) => {

@@ -65,6 +65,7 @@
   "AutoSavePeriod": "Częstotliwość autozapisywania",
   "AutoSavePeriodHelp": "Widoczny poniżej czas odpowiada strefie czasowej ustawionej w {{productName}}.",
   "Back": "Wróć",
+  "Backup": "Kopia zapasowa",
   "BackupCreatedSuccess": "Kopia zapasowa została pomyślnie utworzona.",
   "BackupList": "Lista kopii zapasowych",
   "BackupListWarningText": "Jeśli usuniesz wszystkie elementy z listy, odpowiadające im pliki zostaną również usunięte. Ta czynność nie może zostać cofnięta. Aby usunąć wszystkie pliki, użyj linku:",
@@ -847,6 +848,5 @@
   "YouHaveUnsavedChanges": "Masz niezapisane zmiany",
   "YourCurrentDomain": "Twoja obecna domena",
   "YourLogo": "Twoje Logo",
-  "YourTurn": "Twoja kolej",
-  "Backup": "Kopia zapasowa"
+  "YourTurn": "Twoja kolej"
 }

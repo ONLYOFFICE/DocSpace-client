@@ -45,7 +45,7 @@ import SocketHelper, {
   SocketEvents,
   TSocketListener,
 } from "@docspace/shared/utils/socket";
-
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
 import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
 import { getBackupProgressInfo } from "@docspace/shared/utils/common";
@@ -460,7 +460,7 @@ const ManualBackup = ({
                         progress: downloadingProgress,
                       }),
               percent: downloadingProgress,
-              operation: "",
+              operation: OPERATIONS_NAME.backup,
               alert: false,
               completed: false,
             },

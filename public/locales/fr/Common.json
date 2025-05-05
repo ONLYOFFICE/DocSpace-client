@@ -67,6 +67,7 @@
   "AutoSavePeriod": "Période de sauvegarde automatique",
   "AutoSavePeriodHelp": "L'heure indiquée ci-dessous correspond au fuseau horaire défini dans {{productName}}.",
   "Back": "Retour",
+  "Backup": "Sauvegarde",
   "BackupCreatedSuccess": "La copie de sauvegarde a été créée avec succès.",
   "BackupList": "Liste des sauvegardes",
   "BackupListWarningText": "Si vous supprimez certains éléments de la liste, leurs fichiers correspondants seront également supprimés. Cette action ne peut être annulée. Pour supprimer tous les fichiers, utilisez le lien:",
@@ -845,6 +846,5 @@
   "YouHaveUnsavedChanges": "Vous avec des modifications non-sauvegardées",
   "YourCurrentDomain": "Votre domaine actuel",
   "YourLogo": "Votre logo",
-  "YourTurn": "Votre tour",
-  "Backup": "Sauvegarde"
+  "YourTurn": "Votre tour"
 }

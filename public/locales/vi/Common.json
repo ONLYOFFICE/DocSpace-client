@@ -64,6 +64,7 @@
   "AutoSavePeriod": "Thời gian lưu tự động",
   "AutoSavePeriodHelp": "Thời gian hiển thị bên dưới tương ứng với múi giờ được đặt trong {{productName}}.",
   "Back": "Quay lại",
+  "Backup": "Sao lưu",
   "BackupCreatedSuccess": "Bản sao lưu đã được tạo thành công.",
   "BackupList": "Danh sách sao lưu",
   "BackupListWarningText": "Nếu bạn xóa bất kỳ mục nào trong danh sách, các file tương ứng của chúng cũng sẽ bị xóa. Tác vụ này không thể được hoàn tác. Để xóa tất cả các file này sử dụng liên kết:",
@@ -844,6 +845,5 @@
   "YouHaveUnsavedChanges": "Bạn có các thay đổi chưa được lưu",
   "YourCurrentDomain": "Tên miền hiện tại của bạn",
   "YourLogo": "Logo của bạn",
-  "YourTurn": "Phiên của bạn",
-  "Backup": "Sao lưu"
+  "YourTurn": "Phiên của bạn"
 }

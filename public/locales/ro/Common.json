@@ -68,6 +68,7 @@
   "AutoSavePeriod": "Interval de timp pentru salvarea automată",
   "AutoSavePeriodHelp": "Ora afișată mai jos va corespunde fusului orar în {{productName}}.",
   "Back": "Înapoi",
+  "Backup": "Copie de siguranță",
   "BackupCreatedSuccess": "O copie de rezervă a fost creată cu succes.",
   "BackupList": "Lista copiilor de rezervă",
   "BackupListWarningText": "Dacă ștergeți un element din lista, se șterg și toate fișierele respective. Această acțiune nu poate fi anulată. Pentru a șterge toate fișierele folosiți link-ul:",
@@ -855,6 +856,5 @@
   "YouHaveUnsavedChanges": "Nu ați salvat modificările efectuate de dvs",
   "YourCurrentDomain": "Domeniul dvs. actual",
   "YourLogo": "Logo-ul dvs",
-  "YourTurn": "Acum e rândul dvs.",
-  "Backup": "Copie de siguranță"
+  "YourTurn": "Acum e rândul dvs."
 }

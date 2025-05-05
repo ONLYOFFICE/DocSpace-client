@@ -65,6 +65,7 @@
   "AutoSavePeriod": "Automātiskās saglabāšanas periods",
   "AutoSavePeriodHelp": "Zemāk redzamais laiks atbilst {{productName}} iestatītajai laika joslai.",
   "Back": "Atpakaļ",
+  "Backup": "Dublēšana",
   "BackupCreatedSuccess": "Rezerves kopija veiksmīgi izveidota.",
   "BackupList": "Rezerves kopiju saraksts",
   "BackupListWarningText": "Ja jūs dzēsīsit jebkādus elementus no saraksta, tiem atbilstošie faili arī tiks dzēsti. Šo darbību nevar atsaukt. Lai dzēstu visus failus, izmantojiet saiti:",
@@ -847,6 +848,5 @@
   "YouHaveUnsavedChanges": "Jums ir nesaglabātas izmaiņas",
   "YourCurrentDomain": "Jūsu pašreizējais domēns",
   "YourLogo": "Jūsu logotips",
-  "YourTurn": "Jūsu kārta",
-  "Backup": "Dublēšana"
+  "YourTurn": "Jūsu kārta"
 }

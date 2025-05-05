@@ -67,6 +67,7 @@
   "AutoSavePeriod": "Period automatskog čuvanja",
   "AutoSavePeriodHelp": "Dole prikazano vreme odgovara vremenskoj zoni podešenoj u {{productName}}-u.",
   "Back": "Nazad",
+  "Backup": "Rezervna kopija",
   "BackupCreatedSuccess": "Rezervna kopija je uspešno kreirana.",
   "BackupList": "Lista rezervnih kopija",
   "BackupListWarningText": "Ako izbrišete bilo koju stavku sa liste, njihove odgovarajuće datoteke će takođe biti izbrisane. Ova radnja se ne može opozvati. Za brisanje svih datoteka koristite link:",
@@ -845,6 +846,5 @@
   "YouHaveUnsavedChanges": "Imate nesačuvane promene",
   "YourCurrentDomain": "Vaš trenutni domen",
   "YourLogo": "Vaš logo",
-  "YourTurn": "Vaš red",
-  "Backup": "Rezervna kopija"
+  "YourTurn": "Vaš red"
 }

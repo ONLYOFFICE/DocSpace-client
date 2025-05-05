@@ -68,6 +68,7 @@
   "AutoSavePeriod": "自动保存期间",
   "AutoSavePeriodHelp": "下面显示的时间对应于{{productName}}中设置的时区。",
   "Back": "后退",
+  "Backup": "备份",
   "BackupCreatedSuccess": "备份副本已成功创建。",
   "BackupList": "备份列表",
   "BackupListWarningText": "若您从列表中删除任何项目，其相应的文件也将被删除。此操作无法撤消。若想删除所有文件，请使用以下链接：",
@@ -855,6 +856,5 @@
   "YouHaveUnsavedChanges": "您有未保存的变更",
   "YourCurrentDomain": "您当前的域",
   "YourLogo": "您的logo",
-  "YourTurn": "轮到您了",
-  "Backup": "备份"
+  "YourTurn": "轮到您了"
 }

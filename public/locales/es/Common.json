@@ -68,6 +68,7 @@
   "AutoSavePeriod": "Periodo de autoguardado",
   "AutoSavePeriodHelp": "La hora que se muestra abajo corresponde a la zona horaria establecida en {{productName}}.",
   "Back": "Volver",
+  "Backup": "Copia de seguridad de datos",
   "BackupCreatedSuccess": "La copia de seguridad se ha creado con éxito.",
   "BackupList": "Lista de copias de seguridad",
   "BackupListWarningText": "Si elimina cualquier artículo de la lista, también se eliminarán los archivos correspondientes. No se puede cancelar esta acción. Para eliminar todos los archivos use el enlace:",
@@ -855,6 +856,5 @@
   "YouHaveUnsavedChanges": "Tiene cambios no guardados",
   "YourCurrentDomain": "Su dominio actual",
   "YourLogo": "Su logotipo",
-  "YourTurn": "Su turno",
-  "Backup": "Copia de seguridad de datos"
+  "YourTurn": "Su turno"
 }

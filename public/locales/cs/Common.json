@@ -65,6 +65,7 @@
   "AutoSavePeriod": "Doba automatického ukládání",
   "AutoSavePeriodHelp": "Níže uvedený čas odpovídá časovému pásmu nastavenému na {{productName}}.",
   "Back": "Zpět",
+  "Backup": "Záloha",
   "BackupCreatedSuccess": "Kopie zálohy byla úspěšně vytvořena.",
   "BackupList": "Seznam záloh",
   "BackupListWarningText": "Pokud odstraníte nějaké položky ze seznamu, budou také odstraněny odpovídající soubory. Tuto akci nelze vrátit zpět. Chcete-li odstranit všechny soubory, použijte odkaz:",
@@ -847,6 +848,5 @@
   "YouHaveUnsavedChanges": "Máte neuložené změny",
   "YourCurrentDomain": "Vaše aktuální doména",
   "YourLogo": "Vaše logo",
-  "YourTurn": "Jste na řadě",
-  "Backup": "Záloha"
+  "YourTurn": "Jste na řadě"
 }

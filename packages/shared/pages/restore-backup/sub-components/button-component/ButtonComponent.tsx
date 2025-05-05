@@ -30,6 +30,7 @@ import React, { useState } from "react";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import { Button } from "@docspace/shared/components/button";
 import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 
 import { TenantStatus } from "@docspace/shared/enums";
 import { startRestore } from "@docspace/shared/api/portal";
@@ -167,7 +168,7 @@ const ButtonContainer = (props: ButtonContainerProps) => {
                     ? t("PreparingBackup")
                     : t("BackupProgress", { progress: downloadingProgress }),
               percent: downloadingProgress,
-              operation: "",
+              operation: OPERATIONS_NAME.backup,
               alert: false,
               completed: false,
             },

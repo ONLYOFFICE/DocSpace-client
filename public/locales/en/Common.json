@@ -68,6 +68,7 @@
   "AutoSavePeriod": "Autosave period",
   "AutoSavePeriodHelp": "The time shown below corresponds to the time zone set in the {{productName}}.",
   "Back": "Back",
+  "Backup": "Backup",
   "BackupCreatedSuccess": "The backup copy has been successfully created.",
   "BackupList": "Backup List",
   "BackupListWarningText": "If you delete any items from the list, their corresponding files will also be deleted. This action cannot be undone. To delete all the files use the link:",
@@ -855,6 +856,5 @@
   "YouHaveUnsavedChanges": "You have unsaved changes",
   "YourCurrentDomain": "Your current domain",
   "YourLogo": "Your logo",
-  "YourTurn": "Your turn",
-  "Backup": "Backup"
+  "YourTurn": "Your turn"
 }

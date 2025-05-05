@@ -153,15 +153,23 @@ export const useBackup = ({
     setSelected({ enableSchedule: !selected.enableSchedule });
   }, [selected.enableSchedule, setSelected]);
 
+  const setProgress = useCallback(
+    (progress: number) => {
+      setDownloadingProgress(progress);
+      backupStore.setIsBackupProgressVisible(progress !== 100);
+    },
+    [backupStore],
+  );
+
   const resetDownloadingProgress = useCallback(() => {
     if (
       typeof window !== "undefined" &&
       !window.location.pathname.includes("data-backup") &&
       !window.location.pathname.includes("restore-backup")
     ) {
-      setDownloadingProgress(100);
+      setProgress(100);
     }
-  }, []);
+  }, [setProgress]);
 
   const isFormReady = () => {
     const errors: Record<string, boolean> = {};
@@ -279,7 +287,7 @@ export const useBackup = ({
     if (backupProgress && "progress" in backupProgress) {
       const { progress, link } = backupProgress;
 
-      setDownloadingProgress(progress);
+      setProgress(progress);
       backupStore.setIsBackupProgressVisible(progress !== 100);
 
       if (link && link.slice(0, 1) === "/") {
@@ -292,11 +300,11 @@ export const useBackup = ({
           ? backupProgress.error
           : backupProgress;
 
-      setDownloadingProgress(100);
+      setProgress(100);
       setErrorInformation(error, t);
       backupStore.setIsBackupProgressVisible(false);
     }
-  }, [backupProgress, setErrorInformation, t, backupStore]);
+  }, [backupProgress, setErrorInformation, t, backupStore, setProgress]);
 
   const deleteThirdParty = useCallback(async (id: string) => {
     try {
@@ -347,7 +355,7 @@ export const useBackup = ({
 
     setterSelectedEnableSchedule,
 
-    setDownloadingProgress,
+    setDownloadingProgress: setProgress,
     downloadingProgress,
 
     temporaryLink,

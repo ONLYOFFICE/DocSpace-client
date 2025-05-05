@@ -123,6 +123,10 @@ const Restore = ({
     openConnectWindow,
     defaultRegion,
     checkEnablePortalSettings,
+
+    setIsBackupProgressVisible,
+    backupProgressError,
+    setBackupProgressError,
   } = useBackup({
     account,
     backupScheduleResponse,
@@ -298,6 +302,9 @@ const Restore = ({
       setConnectDialogVisible={spacesStore.setConnectDialogVisible}
       deleteThirdPartyDialogVisible={deleteThirdPartyDialogVisible}
       setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
+      setIsBackupProgressVisible={setIsBackupProgressVisible}
+      backupProgressError={backupProgressError}
+      setBackupProgressError={setBackupProgressError}
     />
   );
 };

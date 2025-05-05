@@ -68,6 +68,7 @@
   "AutoSavePeriod": "Zeitraum für automatische Speicherung",
   "AutoSavePeriodHelp": "Die unten angegebene Zeit entspricht der im {{productName}} eingestellten Zeitzone.",
   "Back": "Zurück",
+  "Backup": "Backup",
   "BackupCreatedSuccess": "Die Sicherungskopie wurde erfolgreich erstellt.",
   "BackupList": "Backup-Liste",
   "BackupListWarningText": "Falls Sie einige Elemente aus der Liste löschen, werden die entsprechende Dateien auch gelöscht. Dieser Vorgang nicht rückgängig gemacht werden kann. Um alle Dateien zu löschen, verwenden Sie den Link:",
@@ -855,6 +856,5 @@
   "YouHaveUnsavedChanges": "Sie haben nicht gespeicherte Änderungen.",
   "YourCurrentDomain": "Ihre aktuelle Domain",
   "YourLogo": "Ihr Logo",
-  "YourTurn": "Jetzt sind Sie dran",
-  "Backup": "Backup"
+  "YourTurn": "Jetzt sind Sie dran"
 }

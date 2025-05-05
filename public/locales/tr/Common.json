@@ -65,6 +65,7 @@
   "AutoSavePeriod": "Otomatik kaydetme süresi",
   "AutoSavePeriodHelp": "Aşağıda gösterilen saat, {{productName}} ayarlanan saat dilimine karşılık gelir.",
   "Back": "Geri",
+  "Backup": "Yedek",
   "BackupCreatedSuccess": "Yedekleme kopyası başarıyla oluşturuldu.",
   "BackupList": "Yedekleme listesi",
   "BackupListWarningText": "Listeden herhangi bir öğe silerseniz bu öğe ile ilgili dosyalar da silinir. Bu işlem geri alınamaz. Tüm dosyaları silmek için linke tıklayın:",
@@ -847,6 +848,5 @@
   "YouHaveUnsavedChanges": "Kaydedilmemiş değişiklikleriniz var",
   "YourCurrentDomain": "Mevcut alanınız",
   "YourLogo": "Logonuz",
-  "YourTurn": "Sıra sizde",
-  "Backup": "Yedek"
+  "YourTurn": "Sıra sizde"
 }

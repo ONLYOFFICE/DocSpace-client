@@ -43,6 +43,7 @@ import {
   AutoBackupPeriod,
   FolderType,
 } from "@docspace/shared/enums";
+import { OPERATIONS_NAME } from "@docspace/shared/constants";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { getBackupStorage } from "@docspace/shared/api/settings";
 import AutoBackupLoader from "@docspace/shared/skeletons/backup/AutoBackup";
@@ -636,7 +637,7 @@ const AutomaticBackup = ({
                       progress: downloadingProgress,
                     }),
               percent: downloadingProgress,
-              operation: "",
+              operation: OPERATIONS_NAME.backup,
               alert: false,
               completed: false,
             },

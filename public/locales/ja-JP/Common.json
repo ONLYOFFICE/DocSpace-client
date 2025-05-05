@@ -68,6 +68,7 @@
   "AutoSavePeriod": "自動保存期間",
   "AutoSavePeriodHelp": "下記の時間は{{productName}}で設定したタイムゾーンに対応しています。",
   "Back": "前に",
+  "Backup": "バックアップ",
   "BackupCreatedSuccess": "バックアップ・コピーは正常に作成されました。",
   "BackupList": "バックアップリスト",
   "BackupListWarningText": "リストからアイテムを削除すると、対応するファイルも削除されます。この操作を元に戻すことができません。すべてのファイルを削除するために次のリンクをクリックしてください：",
@@ -855,6 +856,5 @@
   "YouHaveUnsavedChanges": "未保存変更はあります。",
   "YourCurrentDomain": "現在お使いのドメイン",
   "YourLogo": "あなたのロゴ",
-  "YourTurn": "あなたの番です",
-  "Backup": "バックアップ"
+  "YourTurn": "あなたの番です"
 }

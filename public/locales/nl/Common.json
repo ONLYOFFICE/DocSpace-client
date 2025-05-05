@@ -65,6 +65,7 @@
   "AutoSavePeriod": "Autosave periode",
   "AutoSavePeriodHelp": "De hieronder aangegeven tijd komt overeen met de in de  {{productName}} ingestelde tijdzone.",
   "Back": "Terug",
+  "Backup": "Back-up",
   "BackupCreatedSuccess": "De back-up kopie is succesvol aangemaakt.",
   "BackupList": "Back-up lijst",
   "BackupListWarningText": "Als u items uit de lijst verwijdert, worden hun bijbehorende bestanden ook verwijderd. Deze actie kan niet ongedaan gemaakt worden. Om alle bestanden te verwijderen, gebruik de link:",
@@ -847,6 +848,5 @@
   "YouHaveUnsavedChanges": "U hebt niet opgeslagen wijzigingen",
   "YourCurrentDomain": "Uw huidige domein",
   "YourLogo": "Uw logo",
-  "YourTurn": "Uw beurt",
-  "Backup": "Back-up"
+  "YourTurn": "Uw beurt"
 }

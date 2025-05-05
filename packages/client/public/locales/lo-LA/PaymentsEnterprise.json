@@ -28,5 +28,11 @@
   "UpgradeToProBannerItemScalabilityHeader": "ຄວາມສາມາດໃນການຂະຫຍາຍ ແລະການຈັດກຸ່ມ.",
   "UpgradeToProBannerItemSupportDescr": "ຂໍຄວາມຊ່ວຍເຫຼືອແບບມືອາຊີບດ່ວນສຳລັບທຸກບັນຫາທີ່ເຈົ້າປະເຊີນ.",
   "UpgradeToProBannerItemSupportHeader": "ທີມງານສະຫນັບສະຫນູນເຕັກໂນໂລຢີ.",
-  "UploadLicenseFile": "ອັບໂຫຼດໄຟລ໌ໃບອະນຸຍາດ"
+  "UploadLicenseFile": "ອັບໂຫຼດໄຟລ໌ໃບອະນຸຍາດ",
+  "ActivateRenewalDescr": "ເພື່ອກະດຳການຕໍ່ອາຍຸການຕໍ່ເຕີມທີ່ທ່ານໄດ້ຊື້ໄວ້ແລ້ວ ໃຫ້ອັບໂຫຼດມັນລົງໃຕ້ ແລະ ກົດປຸ່ມກະດຳການ.",
+  "ActivateRenewSubscriptionHeader": "ຕໍ່ນະໃໝ່ການສັນຈີການໃຊ້ງານ {{license}}",
+  "ActivateSwithToProHeader": "ປ່ຽນເປັນລຸ້ນ {{license}}ເຕັມ",
+  "ActivateToProBannerHeaderTrial": "ຊື້ບູລິມະນູກຳເຕັມ {{license}} ເພື່ອຮັບ:",
+  "UpgradeToProBannerHeader": "ຮັບ​ຟັງ​ຂໍ້​ສະ ເໜີ ນຳ້ ຂອງ​ການ​ໃຊ້​ງານ​ຟຣີ ຂອງ​ໂອກາດ​ການ​ເຮັດ​ງານ​ບໍ ລິ ຫານ​ທີ່​ພ້ອມ​ໃຊ້ງານ​ເປັນ​ເວລາ 30 ມື້",
+  "UpgradeToProBannerItemMobileHeader": "ການຂຽນແກ້ໄຂມືຖື."
 }

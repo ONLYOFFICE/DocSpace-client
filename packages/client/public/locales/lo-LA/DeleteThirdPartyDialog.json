@@ -1,4 +1,5 @@
 {
   "DisconnectCloudTitle": "ຕັດການເຊື່ອມຕໍ່ຄລາວ",
-  "SuccessDeleteThirdParty": "ລົບ {{service}} ຂອງບຸກຄົນທີສາມແລ້ວ"
+  "SuccessDeleteThirdParty": "ລົບ {{service}} ຂອງບຸກຄົນທີສາມແລ້ວ",
+  "ThirdPartyDisconnectPrompt": "ເຈົ້າໝັ້ນໃຈຫຼືບໍທີ່ຈະລົບຂໍ້ມູນ {{service}}? ການເຮັດເຊັ່ນນີ້ຈະບໍ່ສົ່ງຜົນກະທົບໃສ່ບັນຊີ {{account}} ຂອງເຈົ້າຢ່າງໃດກໍຕາມ។"
 }

@@ -51,5 +51,7 @@
   "WebhookRedilivered": "Webhook යළි බාරදුණි",
   "WebhookRemoved": "Webhook ඉවත් කෙරිණි",
   "Webhooks": "Webhooks",
-  "WebhooksGuide": "Webhooks මාර්ගෝපදේශය"
+  "WebhooksGuide": "Webhooks මාර්ගෝපදේශය",
+  "DeliveryTime": "සැපයුම් කාලය",
+  "EventTime": "සන්දේශය කාලය"
 }

@@ -34,5 +34,8 @@
   "TypeTitleSharePoint": "SharePoint",
   "TypeTitleSkyDrive": "OneDrive",
   "TypeTitleWebDav": "WebDAV",
-  "TypeTitleYandex": "Yandex.Disk"
+  "TypeTitleYandex": "Yandex.Disk",
+  "GuestReleaseTipDescripton": "ຜູ້ໃຊ້ທັງໝົດທີ່ເຄີຍເພີ່ມໄວ້ກາຍເປັນແຂກ ແລະປັດຈຸບັນສາມາດເຫັນໄດ້ໃນບັນຊີຕິດຕໍ່ຂອງຜູ້ບໍລິຫານ {{productName}} ຜູ້ດຽວເທົ່ານັ້ນ ແຂກບໍ່ແມ່ນສ່ວນຫນຶ່ງຂອງກຸ່ມໃດໆອີກຕໍ່ໄປ ທ່ານສາມາດປ່ຽນປະເພດຂອງເຂົາເຈົ້າ ແລະເພີ່ມເຂົາເຈົ້າເຂົ້າສູ່ກຸ່ມຖ້າຈໍາເປັນໄດ້ຕະຫຼອດເວລາ",
+  "GuestReleaseTipLink": "ຮຽນຮູ້ເພີ່ມເຕີມກ່ຽວກັບປະເພດຜູ້ໃຊ້",
+  "RoleGuestDescriprion": "ແຂກສາມາດເຂົ້າເຖິງຫ້ອງທີ່ຖືກເຊີນເຂົ້າໄດ້, ນອກຈາກນັ້ນຍັງສາມາດສ້າງ ແລະ ແກ້ໄຂເອກະສານໄດ້ຖ້າຖືກມອບບົດບາດທີ່ເຫມາະສົມໃນຫ້ອງນັ້ນໆ."
 }

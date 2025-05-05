@@ -25,7 +25,7 @@
   "Pay": "ຈ່າຍ",
   "Payer": "ຜູ້ຈ່າຍເງິນ",
   "PayerDescription": "ຜູ້ໃຊ້ນີ້ມີການເຂົ້າເຖິງລາຍລະອຽດການຈ່າຍເງິນ ແລະເປັນຜູ້ໃຊ້ດຽວທີ່ສາມາດປັບໂຄຕ້າ ແລະຊໍາລະໄດ້. ເຈົ້າ ຂອງ {{productName}} , ເຊັ່ນດຽວກັນກັບຜູ້ຈັດການການຊໍາລະດ້ວຍຕົນເອງ, ສາມາດມອບຫມາຍຫນ້າທີ່ການຊໍາລະເງິນຄືນໃຫມ່ໂດຍໃຊ້ປະຕູລູກຄ້າ Stripe.",
-  "PriceCalculation": "Calcule o seu preço",
+  "PriceCalculation": "ຄິດໄລ້ລາຄາຂອງເຈົ້າ",
   "RenewSubscription": "ຕໍ່ອາຍຸການສະໝັກໃຊ້ແຜນການ {{planName}}",
   "RoomManagerDescription": "ການບໍລິຫານຫ້ອງແລະການເກັບຮັກສາ, ການເຊື້ອເຊີນຜູ້ໃຊ້ແລະການຄຸ້ມຄອງ. ຜູ້ເບິ່ງແຍງຫຼາຍຄົນສາມາດຖືກມອບຫມາຍໃຫ້ຫ້ອງ.",
   "StartupSuggestion": "ເຮັດໄດ້ຫຼາຍຂຶ້ນກັບແຜນ {{planName}}",
@@ -36,5 +36,16 @@
   "UpgradePlan": "ແຜນການຍົກລະດັບ",
   "UserNotFound": "ບໍ່ພົບຜູ້ໃຊ້ <1>{{email}}</1>.",
   "UserNotFoundMatchingEmail": "ພວກເຮົາບໍ່ສາມາດຊອກຫາຜູ້ໃຊ້ທີ່ມີອີເມວ Stripe ທີ່ກົງກັນໄດ້.",
-  "YourPrice": "ລາຄາຂອງເຈົ້າ"
+  "YourPrice": "ລາຄາຂອງເຈົ້າ",
+  "CannotCreateNewRoom": "ຫ້ອງບໍ່ສາມາດສ້າງໄດ້",
+  "CannotCreatePaidUsers": "ຜູ້ໃຊ້ທີ່ຈ່າຍເງິນບໍ່ສາມາດເພີ່ມໄດ້",
+  "CannotRestoreRoom": "ຫ້ອງບໍ່ສາມາດຟື້ນຟູໄດ້",
+  "NewRoomWillExceedLimit": "ການສ້າງຫ້ອງນີ້ບໍ່ສາມາດເຮັດໄດ້ເພາະວ່າບັນລຸຂີດຈຳກັດໃນຈຳນວນຫ້ອງທີ່ລວມເຂົ້າໃນແຜນການປັດຈຸບັນຂອງທ່ານແລ້ວ.",
+  "NewUsersWillExceedMembersLimit": "ການເພີ່ມຜູ້ໃຊ້ຈ່າຍທືນໃໝ່ບໍ່ສາມາດເຮັດໄດ້ເນື່ອງຈາກວ່າບັນຫາຄໍານິ້າມສຳລັບຈຳນວນຜູ້ປົກຄອງຖືກກໍານົດໄວ້ແລ້ວໃນແຜນການປັດຈຸບັນຂອງທ່ານ.",
+  "NotPossibleRoomRestoring": "ການຟື້ນຟູຫ້ອງນີ້ບໍ່ສາມາດເຮັດໄດ້ເພາະວ່າເຕັມຈຳນວນຫ້ອງທີ່ລວມຢູ່ໃນແຜນການປັດຈຸບັນຂອງທ່ານແລ້ວ.",
+  "NumberOfRoomsAccordingToTariff": "ຈຳນວນຫ້ອງຕາມແຜນລາຄາຂອງທ່ານ: {{currentValue}}/{{maxValue}}",
+  "NumberOfUsersAccordingToTariff": "ຈຳນວນຜູ້ປົກຄອງຕາມແຜນລາຄາຂອງທ່ານ: {{currentValue}}/{{maxValue}}",
+  "RoomsQuotaAlmostExhausted": "ຈຳນວນຫ້ອງເກືອບໝົດແລ້ວ.",
+  "TotalPricePerYear": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/ປີ</3>",
+  "UsersQuotaAlmostExhausted": "ກໍານົດຈຳນວນຜູ້ໃຊ້ທີ່ຈ່າຍແລ້ວເກືອບໝົດແລ້ວ."
 }

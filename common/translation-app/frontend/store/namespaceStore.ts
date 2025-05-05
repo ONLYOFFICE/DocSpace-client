@@ -16,6 +16,7 @@ interface NamespaceState {
   addNamespace: (projectName: string, namespace: string) => Promise<boolean>;
   setCurrentNamespace: (namespace: string | null) => void;
   clearError: () => void;
+  setNamespaces: (namespaces: string[]) => void;
 }
 
 export const useNamespaceStore = create<NamespaceState>((set, get) => ({

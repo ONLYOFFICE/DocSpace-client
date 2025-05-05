@@ -146,7 +146,7 @@ export interface AutomaticBackupProps {
   // end treeFoldersStore
 
   // settingsStore
-  automaticBackupUrl: string;
+  automaticBackupUrl?: string;
   currentColorScheme?: TColorScheme;
   // emd settingsStore
 

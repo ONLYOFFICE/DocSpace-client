@@ -42,6 +42,8 @@ import type {
   TBackupSchedule,
   TPaymentFeature,
 } from "@docspace/shared/api/portal/types";
+import type { TPortals } from "@docspace/shared/api/management/types";
+import { BackupStorageLocalKey } from "@docspace/shared/enums";
 import type { TStorageBackup } from "@docspace/shared/api/settings/types";
 import type { SettingsThirdPartyType } from "@docspace/shared/api/files/types";
 import type { TError } from "@docspace/shared/utils/axiosClient";
@@ -51,7 +53,6 @@ import type { ErrorResponse } from "@/types";
 import { useStores } from "./useStores";
 import useAppState from "./useAppState";
 import { useBackupSettings } from "./useBackupSettings";
-import { TPortals } from "@docspace/shared/api/management/types";
 
 interface BackupProps {
   account: SettingsThirdPartyType | undefined;
@@ -232,20 +233,20 @@ export const useBackup = ({
   ]);
 
   const clearLocalStorage = useCallback(() => {
-    if (getFromLocalStorage("LocalCopyStorageType"))
-      localStorage.removeItem("LocalCopyStorageType");
+    if (getFromLocalStorage(BackupStorageLocalKey.StorageType))
+      localStorage.removeItem(BackupStorageLocalKey.StorageType);
 
-    if (getFromLocalStorage("LocalCopyFolder"))
-      localStorage.removeItem("LocalCopyFolder");
+    if (getFromLocalStorage(BackupStorageLocalKey.Folder))
+      localStorage.removeItem(BackupStorageLocalKey.Folder);
 
-    if (getFromLocalStorage("LocalCopyStorage"))
-      localStorage.removeItem("LocalCopyStorage");
+    if (getFromLocalStorage(BackupStorageLocalKey.Storage))
+      localStorage.removeItem(BackupStorageLocalKey.Storage);
 
-    if (getFromLocalStorage("LocalCopyThirdPartyStorageType"))
-      localStorage.removeItem("LocalCopyThirdPartyStorageType");
+    if (getFromLocalStorage(BackupStorageLocalKey.ThirdPartyStorageType))
+      localStorage.removeItem(BackupStorageLocalKey.ThirdPartyStorageType);
 
-    if (getFromLocalStorage("LocalCopyThirdPartyStorageValues"))
-      localStorage.removeItem("LocalCopyThirdPartyStorageValues");
+    if (getFromLocalStorage(BackupStorageLocalKey.ThirdPartyStorageValues))
+      localStorage.removeItem(BackupStorageLocalKey.ThirdPartyStorageValues);
   }, []);
 
   const saveToLocalStorage = (
@@ -254,20 +255,20 @@ export const useBackup = ({
     selectedId: string | number | undefined,
     selectedStorageTitle?: string,
   ) => {
-    saveToLocalStorageUtils("LocalCopyStorageType", moduleName);
+    saveToLocalStorageUtils(BackupStorageLocalKey.StorageType, moduleName);
 
     if (isStorage) {
-      saveToLocalStorageUtils("LocalCopyStorage", `${selectedId}`);
+      saveToLocalStorageUtils(BackupStorageLocalKey.Storage, `${selectedId}`);
       saveToLocalStorageUtils(
-        "LocalCopyThirdPartyStorageType",
+        BackupStorageLocalKey.ThirdPartyStorageType,
         selectedStorageTitle,
       );
       saveToLocalStorageUtils(
-        "LocalCopyThirdPartyStorageValues",
+        BackupStorageLocalKey.ThirdPartyStorageValues,
         selected.formSettings,
       );
     } else {
-      saveToLocalStorageUtils("LocalCopyFolder", `${selectedId}`);
+      saveToLocalStorageUtils(BackupStorageLocalKey.Folder, `${selectedId}`);
     }
   };
 

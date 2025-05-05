@@ -213,10 +213,6 @@ export const useBackup = ({
     return storageParams as Option[];
   };
 
-  const isBackupProgressVisible = useMemo(() => {
-    return downloadingProgress >= 0 && downloadingProgress !== 100;
-  }, [downloadingProgress]);
-
   const isTheSameThirdPartyAccount = useMemo(() => {
     if (
       backupStore.connectedThirdPartyAccount &&
@@ -281,23 +277,26 @@ export const useBackup = ({
 
   const getProgress = useCallback(async () => {
     if (backupProgress && "progress" in backupProgress) {
-      const { progress, link, error } = backupProgress;
+      const { progress, link } = backupProgress;
 
-      if (!error) {
-        setDownloadingProgress(progress);
+      setDownloadingProgress(progress);
+      backupStore.setIsBackupProgressVisible(progress !== 100);
 
-        if (link && link.slice(0, 1) === "/") {
-          setTemporaryLink(link);
-        }
-        setErrorInformation("", t);
-      } else {
-        setDownloadingProgress(100);
-        setErrorInformation(error, t);
+      if (link && link.slice(0, 1) === "/") {
+        setTemporaryLink(link);
       }
-    } else if (backupProgress) {
-      setErrorInformation(backupProgress, t);
+      setErrorInformation("", t);
+    } else {
+      const error =
+        backupProgress && "error" in backupProgress
+          ? backupProgress.error
+          : backupProgress;
+
+      setDownloadingProgress(100);
+      setErrorInformation(error, t);
+      backupStore.setIsBackupProgressVisible(false);
     }
-  }, [backupProgress, setErrorInformation, t]);
+  }, [backupProgress, setErrorInformation, t, backupStore]);
 
   const deleteThirdParty = useCallback(async (id: string) => {
     try {
@@ -373,7 +372,8 @@ export const useBackup = ({
 
     getStorageParams,
     deleteSchedule,
-    isBackupProgressVisible,
+    isBackupProgressVisible: backupStore.isBackupProgressVisible,
+    setIsBackupProgressVisible: backupStore.setIsBackupProgressVisible,
     isChanged,
 
     setMaxCopies,
@@ -408,5 +408,8 @@ export const useBackup = ({
     defaultRegion,
     isRestoreAndAutoBackupAvailable,
     checkEnablePortalSettings,
+
+    backupProgressError: backupStore.backupProgressError,
+    setBackupProgressError: backupStore.setBackupProgressError,
   };
 };

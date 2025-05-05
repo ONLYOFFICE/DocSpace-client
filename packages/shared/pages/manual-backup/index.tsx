@@ -46,10 +46,7 @@ import SocketHelper, {
   TSocketListener,
 } from "@docspace/shared/utils/socket";
 
-import {
-  FloatingButton,
-  FloatingButtonIcons,
-} from "@docspace/shared/components/floating-button";
+import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
 import DataBackupLoader from "@docspace/shared/skeletons/backup/DataBackup";
 import { getBackupProgressInfo } from "@docspace/shared/utils/common";
 import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
@@ -127,6 +124,10 @@ const ManualBackup = ({
   setErrorInformation,
   errorInformation,
   isManagement = false,
+
+  backupProgressError,
+  setBackupProgressError,
+  setIsBackupProgressVisible,
 }: ManualBackupProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -161,7 +162,10 @@ const ManualBackup = ({
 
       const { error, success } = options;
 
-      if (error) toastr.error(error);
+      if (error) {
+        toastr.error(error);
+        setBackupProgressError(error);
+      }
       if (success) toastr.success(success);
     };
 
@@ -170,7 +174,7 @@ const ManualBackup = ({
     return () => {
       SocketHelper.off(SocketEvents.BackupProgress, onBackupProgress);
     };
-  }, [setDownloadingProgress, setTemporaryLink, t]);
+  }, [setDownloadingProgress, setTemporaryLink, setBackupProgressError, t]);
 
   const onMakeTemporaryBackup = async () => {
     setErrorInformation("");
@@ -442,11 +446,26 @@ const ManualBackup = ({
       </StyledModules>
 
       {isBackupProgressVisible ? (
-        <FloatingButton
-          alert={false}
-          percent={downloadingProgress}
-          className="layout-progress-bar"
-          icon={FloatingButtonIcons.backup}
+        <OperationsProgressButton
+          operationsAlert={Boolean(backupProgressError)}
+          operationsCompleted={downloadingProgress === 100}
+          operations={[
+            {
+              label:
+                downloadingProgress === 100
+                  ? t("Common:Backup")
+                  : downloadingProgress === 0
+                    ? t("Common:PreparingBackup")
+                    : t("Common:BackupProgress", {
+                        progress: downloadingProgress,
+                      }),
+              percent: downloadingProgress,
+              operation: "",
+              alert: false,
+              completed: false,
+            },
+          ]}
+          clearOperationsData={() => setIsBackupProgressVisible(false)}
         />
       ) : null}
     </StyledManualBackup>

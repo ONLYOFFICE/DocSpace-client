@@ -52,10 +52,20 @@ class BackupStore {
   public selectedThirdPartyAccount: Nullable<Partial<ThirdPartyAccountType>> =
     null;
   public accounts: ThirdPartyAccountType[] = [];
+  public backupProgressError = "";
+  public isBackupProgressVisible = false;
 
   constructor() {
     makeAutoObservable(this);
   }
+
+  public setBackupProgressError = (error: string) => {
+    this.backupProgressError = error;
+  };
+
+  public setIsBackupProgressVisible = (visible: boolean) => {
+    this.isBackupProgressVisible = visible;
+  };
 
   public setThirdPartyProviders = (providers: TThirdParty[]) => {
     this.providers = providers;

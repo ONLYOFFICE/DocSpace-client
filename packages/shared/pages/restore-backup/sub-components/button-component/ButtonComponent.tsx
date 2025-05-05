@@ -29,10 +29,8 @@ import React, { useState } from "react";
 
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import { Button } from "@docspace/shared/components/button";
-import {
-  FloatingButton,
-  FloatingButtonIcons,
-} from "@docspace/shared/components/floating-button";
+import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
+
 import { TenantStatus } from "@docspace/shared/enums";
 import { startRestore } from "@docspace/shared/api/portal";
 import { toastr } from "@docspace/shared/components/toast";
@@ -60,6 +58,8 @@ const ButtonContainer = (props: ButtonContainerProps) => {
     uploadLocalFile,
     isBackupProgressVisible,
     setErrorInformation,
+    setIsBackupProgressVisible,
+    operationsAlert,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -155,10 +155,24 @@ const ButtonContainer = (props: ButtonContainerProps) => {
       />
 
       {isBackupProgressVisible ? (
-        <FloatingButton
-          className="layout-progress-bar"
-          icon={FloatingButtonIcons.backup}
-          alert={false}
+        <OperationsProgressButton
+          operationsAlert={operationsAlert}
+          operationsCompleted={downloadingProgress === 100}
+          operations={[
+            {
+              label:
+                downloadingProgress === 100
+                  ? t("Backup")
+                  : downloadingProgress === 0
+                    ? t("PreparingBackup")
+                    : t("BackupProgress", { progress: downloadingProgress }),
+              percent: downloadingProgress,
+              operation: "",
+              alert: false,
+              completed: false,
+            },
+          ]}
+          clearOperationsData={() => setIsBackupProgressVisible(false)}
         />
       ) : null}
     </div>

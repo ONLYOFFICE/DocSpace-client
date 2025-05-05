@@ -132,4 +132,9 @@ export interface RestoreBackupProps {
   setConnectDialogVisible: (visible: boolean) => void;
   deleteThirdPartyDialogVisible: boolean;
   setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
+
+  setIsBackupProgressVisible: (visible: boolean) => void;
+
+  backupProgressError: string;
+  setBackupProgressError: (error: string) => void;
 }

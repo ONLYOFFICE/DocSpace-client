@@ -115,6 +115,9 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     setTemporaryLink,
     setErrorInformation,
     connectedThirdPartyAccount,
+    setIsBackupProgressVisible,
+    backupProgressError,
+    setBackupProgressError,
   } = props;
 
   const { t } = useTranslation(["Common"]);
@@ -143,7 +146,10 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
 
       const { error, success } = options;
 
-      if (error) toastr.error(error);
+      if (error) {
+        toastr.error(error);
+        setBackupProgressError(error);
+      }
 
       if (success) toastr.success(success);
     };
@@ -153,7 +159,7 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
     return () => {
       SocketHelper.off(SocketEvents.BackupProgress, onBackupProgress);
     };
-  }, [setDownloadingProgress, setTemporaryLink, t]);
+  }, [setDownloadingProgress, setTemporaryLink, setBackupProgressError, t]);
 
   const onChangeRadioButton = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -400,6 +406,8 @@ export const RestoreBackup = (props: RestoreBackupProps) => {
         isBackupProgressVisible={isBackupProgressVisible}
         isEnableRestore={isEnableRestore}
         setTenantStatus={setTenantStatus}
+        setIsBackupProgressVisible={setIsBackupProgressVisible}
+        operationsAlert={Boolean(backupProgressError)}
       />
     </StyledRestoreBackup>
   );

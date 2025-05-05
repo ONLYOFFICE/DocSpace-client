@@ -151,6 +151,10 @@ const AutoBackup = ({
 
     defaultRegion,
     checkEnablePortalSettings,
+
+    backupProgressError,
+    setBackupProgressError,
+    setIsBackupProgressVisible,
   } = useBackup({
     account,
     backupScheduleResponse,
@@ -257,6 +261,9 @@ const AutoBackup = ({
       isTheSameThirdPartyAccount={isTheSameThirdPartyAccount}
       setThirdPartyAccountsInfo={setThirdPartyAccountsInfo}
       defaultRegion={defaultRegion}
+      setIsBackupProgressVisible={setIsBackupProgressVisible}
+      backupProgressError={backupProgressError}
+      setBackupProgressError={setBackupProgressError}
       // treeFoldersStore
       rootFoldersTitles={rootFoldersTitles}
       // settingsStore

@@ -207,7 +207,7 @@ const ArticleBodyContent = (props) => {
       case "Migration":
         return t("Migration");
       case "Backup":
-        return t("Backup");
+        return t("Common:Backup");
       case "Common:PaymentsTitle":
         return t("Common:PaymentsTitle");
       case "ManagementCategoryDataManagement":

@@ -47,14 +47,11 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { getBackupStorage } from "@docspace/shared/api/settings";
 import AutoBackupLoader from "@docspace/shared/skeletons/backup/AutoBackup";
 import StatusMessage from "@docspace/shared/components/status-message";
+import OperationsProgressButton from "@docspace/shared/components/operations-progress-button";
 import SocketHelper, {
   SocketEvents,
   type TSocketListener,
 } from "@docspace/shared/utils/socket";
-import {
-  FloatingButton,
-  FloatingButtonIcons,
-} from "@docspace/shared/components/floating-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { getBackupProgressInfo } from "@docspace/shared/utils/common";
@@ -120,6 +117,7 @@ const AutomaticBackup = ({
   automaticBackupUrl,
   currentColorScheme,
   isBackupProgressVisible,
+  setIsBackupProgressVisible,
   isChanged,
   isThirdStorageChanged,
   settingsFileSelector,
@@ -177,6 +175,8 @@ const AutomaticBackup = ({
   isInitialError,
   errorInformation,
   isManagement = false,
+  backupProgressError,
+  setBackupProgressError,
 }: AutomaticBackupProps) => {
   const isCheckedDocuments =
     selectedStorageType === `${BackupStorageType.DocumentModuleType}`;
@@ -209,7 +209,10 @@ const AutomaticBackup = ({
 
       const { error, success } = options;
 
-      if (error) toastr.error(error);
+      if (error) {
+        toastr.error(error);
+        setBackupProgressError(error);
+      }
       if (success) toastr.success(success);
     };
 
@@ -218,7 +221,7 @@ const AutomaticBackup = ({
     return () => {
       SocketHelper.off(SocketEvents.BackupProgress, onBackupProgress);
     };
-  }, [setDownloadingProgress, setTemporaryLink, t]);
+  }, [setDownloadingProgress, setBackupProgressError, setTemporaryLink, t]);
 
   const onClickPermissions = () => {
     seStorageType(BackupStorageType.DocumentModuleType.toString());
@@ -382,6 +385,8 @@ const AutomaticBackup = ({
     className: "backup_radio-button",
     onClick: onClickShowStorage,
   };
+
+  const operationsCompleted = downloadingProgress === 100;
 
   const roomName = rootFoldersTitles[FolderType.USER]?.title;
 
@@ -618,11 +623,25 @@ const AutomaticBackup = ({
       />
 
       {isBackupProgressVisible ? (
-        <FloatingButton
-          className="layout-progress-bar"
-          icon={FloatingButtonIcons.backup}
-          alert={false}
-          percent={downloadingProgress}
+        <OperationsProgressButton
+          operationsAlert={Boolean(backupProgressError)}
+          operationsCompleted={operationsCompleted}
+          operations={[
+            {
+              label: operationsCompleted
+                ? t("Common:Backup")
+                : downloadingProgress === 0
+                  ? t("Common:PreparingBackup")
+                  : t("Common:BackupProgress", {
+                      progress: downloadingProgress,
+                    }),
+              percent: downloadingProgress,
+              operation: "",
+              alert: false,
+              completed: false,
+            },
+          ]}
+          clearOperationsData={() => setIsBackupProgressVisible(false)}
         />
       ) : null}
     </StyledAutoBackup>

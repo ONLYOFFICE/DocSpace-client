@@ -102,6 +102,11 @@ export interface AutomaticBackupProps {
   downloadingProgress: number;
 
   isBackupProgressVisible: boolean;
+  setIsBackupProgressVisible: (visible: boolean) => void;
+
+  backupProgressError: string;
+  setBackupProgressError: (error: string) => void;
+
   isChanged: boolean;
   isThirdStorageChanged: boolean;
   defaultStorageType: Nullable<string>;

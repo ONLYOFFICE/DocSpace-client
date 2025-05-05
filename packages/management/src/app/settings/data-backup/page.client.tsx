@@ -125,6 +125,10 @@ const DataBackup = ({
     openConnectWindow,
 
     defaultRegion,
+
+    backupProgressError,
+    setBackupProgressError,
+    setIsBackupProgressVisible,
   } = useBackup({
     account,
     backupScheduleResponse,
@@ -216,6 +220,9 @@ const DataBackup = ({
       deleteThirdParty={deleteThirdParty}
       setThirdPartyProviders={backupStore.setThirdPartyProviders}
       openConnectWindow={openConnectWindow}
+      backupProgressError={backupProgressError}
+      setBackupProgressError={setBackupProgressError}
+      setIsBackupProgressVisible={setIsBackupProgressVisible}
     />
   );
 };

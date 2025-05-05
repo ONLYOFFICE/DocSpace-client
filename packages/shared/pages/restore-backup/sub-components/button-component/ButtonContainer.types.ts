@@ -55,6 +55,9 @@ export interface ButtonContainerProps {
     false | AxiosResponse<TUploadBackup> | undefined | null
   >;
   isBackupProgressVisible: boolean;
+  setIsBackupProgressVisible: (visible: boolean) => void;
+
+  operationsAlert: boolean;
 
   // currentQuotaStore
   isEnableRestore: boolean; // isRestoreAndAutoBackupAvailable,

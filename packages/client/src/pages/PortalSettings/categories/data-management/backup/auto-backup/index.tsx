@@ -258,6 +258,10 @@ export default inject<
       setThirdPartyAccountsInfo,
       setDownloadingProgress,
       setTemporaryLink,
+
+      setIsBackupProgressVisible,
+      backupProgressError,
+      setBackupProgressError,
     } = backup;
 
     const defaultRegion =
@@ -335,6 +339,9 @@ export default inject<
       selectedThirdPartyAccount,
       accounts,
       setThirdPartyAccountsInfo,
+      setIsBackupProgressVisible,
+      backupProgressError,
+      setBackupProgressError,
 
       // treeFoldersStore
       rootFoldersTitles,

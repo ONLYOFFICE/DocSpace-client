@@ -80,6 +80,12 @@ export interface ManualBackupProps {
   selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
   connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
   errorInformation: string;
+
+  setIsBackupProgressVisible: (visible: boolean) => void;
+
+  backupProgressError: string;
+  setBackupProgressError: (error: string) => void;
+
   isFormReady: () => boolean;
   clearLocalStorage: VoidFunction;
   setErrorInformation: (error: unknown, t?: TTranslation) => void;

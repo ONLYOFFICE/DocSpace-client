@@ -54,7 +54,7 @@ const ColorTheme = ({
   hoverColor,
   ...props
 }: PropsWithChildren<ColorThemeProps> & {
-  ref: React.RefObject<HTMLDivElement>;
+  ref?: React.RefObject<HTMLDivElement>;
 }) => {
   const defaultTheme = use(ThemeContext);
 

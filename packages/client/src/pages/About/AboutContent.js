@@ -109,6 +109,7 @@ const AboutContent = (props) => {
     licenseAgreementsUrl,
     isEnterprise,
     logoText,
+    isBrandingAvailable,
   } = props;
   const { t } = useTranslation(["About", "Common"]);
   const isCommercial = !standalone || isEnterprise;
@@ -136,6 +137,10 @@ const AboutContent = (props) => {
 
   const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !theme.isBase, true);
 
+  const logoName = isBrandingAvailable
+    ? logoText
+    : t("Common:OrganizationName");
+
   return (
     companyInfoSettingsData && (
       <StyledAboutBody>
@@ -161,7 +166,7 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;{logoText} {t("Common:ProductName")}&nbsp;
+            &nbsp;{logoName} {t("Common:ProductName")}&nbsp;
           </ColorTheme>
 
           <Text
@@ -192,7 +197,7 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;{logoText} {t("Common:ProductEditorsName")}&nbsp;
+            &nbsp;{logoName} {t("Common:ProductEditorsName")}&nbsp;
           </ColorTheme>
           <Text className="row-el select-el" fontSize="13px" fontWeight="600">
             v.
@@ -292,22 +297,26 @@ const AboutContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore, currentTariffStatusStore }) => {
-  const {
-    theme,
-    companyInfoSettingsData,
-    standalone,
-    licenseAgreementsUrl,
-    logoText,
-  } = settingsStore;
-  const { isEnterprise } = currentTariffStatusStore;
+export default inject(
+  ({ settingsStore, currentTariffStatusStore, currentQuotaStore }) => {
+    const {
+      theme,
+      companyInfoSettingsData,
+      standalone,
+      licenseAgreementsUrl,
+      logoText,
+    } = settingsStore;
+    const { isBrandingAvailable } = currentQuotaStore;
+    const { isEnterprise } = currentTariffStatusStore;
 
-  return {
-    theme,
-    companyInfoSettingsData,
-    standalone,
-    licenseAgreementsUrl,
-    isEnterprise,
-    logoText,
-  };
-})(observer(AboutContent));
+    return {
+      theme,
+      companyInfoSettingsData,
+      standalone,
+      licenseAgreementsUrl,
+      isEnterprise,
+      logoText,
+      isBrandingAvailable,
+    };
+  },
+)(observer(AboutContent));

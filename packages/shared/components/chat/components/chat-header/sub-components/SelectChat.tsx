@@ -51,17 +51,21 @@ const SelectChat = ({ isFullScreen, currentDeviceType }: SelectChatProps) => {
       {isOpen ? (
         <DropDown
           open={isOpen}
-          isDefaultMode
+          // isDefaultMode
           zIndex={500}
           clickOutsideAction={() => setIsOpen(false)}
           directionY="bottom"
           directionX="right"
           topSpace={16}
           forwardedRef={parentRef}
+          maxHeight={300}
+          manualWidth="280px"
         >
           {preparedMessages.map(({ title, value, isActive, isDate }) => {
             const currentTitle =
               !isDate || title ? title : getChateTranslationDate(t, value);
+
+            if (!currentTitle) return null;
 
             return (
               <DropDownItem

@@ -116,8 +116,9 @@ export const useFeedTranslation = (
       return t("InfoPanel:FolderMoved");
     case "FoldersTrashMoveCompleted":
       if (hasRelatedItems)
-        return t("InfoPanel:FolderMovedToTrashCount", {
+        return t("InfoPanel:FoldersTrashMoveCompletedCount", {
           count,
+          sectionName: t("Common:TrashSection"),
         });
       return t("InfoPanel:FoldersTrashMoveCompleted", {
         sectionName: t("Common:TrashSection"),

@@ -39,7 +39,6 @@
   "FolderIndexReordered": "インデックスの並び替え",
   "FolderMoved": "フォルダが移動されました。",
   "FolderMovedCount": "フォルダが移動されました ({{count}})。",
-  "FolderMovedToTrashCount": "フォルダがゴミ箱に移動されました ({{count}})。",
   "FolderRenamed": "フォルダ名が変更されました。",
   "FormCompletelyFilled": "完全に記入されたフォーム。",
   "FormPartiallyFilled": "一部しか記入していないフォーム。",

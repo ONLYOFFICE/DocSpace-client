@@ -39,7 +39,6 @@
   "FolderIndexReordered": "인덱스가 재정렬되었습니다",
   "FolderMoved": "폴더가 이동되었습니다.",
   "FolderMovedCount": "폴더 이동됨 ({{count}}).",
-  "FolderMovedToTrashCount": "폴더가 휴지통으로 이동됨 ({{count}}).",
   "FolderRenamed": "폴더명이 변경되었습니다.",
   "FormCompletelyFilled": "양식 작성이 완료되었습니다.",
   "FormPartiallyFilled": "양식의 일부가 작성되었습니다.",

@@ -39,8 +39,7 @@ import { Heading } from "../../../heading";
 import { SelectorAddButton } from "../../../selector-add-button";
 
 import { StyledNewEmptyScreen } from "../../Selector.styled";
-import { EmptyScreenFormRoomProps } from "components/selector/Selector.types";
-
+import { EmptyScreenFormRoomProps } from "../../Selector.types";
 
 const EmptyScreenFormRoom = ({
   onCreateClickAction,

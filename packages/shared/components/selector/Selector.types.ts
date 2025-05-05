@@ -201,7 +201,7 @@ export type TSelectorEmptyScreen = {
   searchEmptyScreenDescription: string;
 };
 
-//NewItem
+// NewItem
 export interface NewItemProps {
   label: string;
   style: React.CSSProperties;
@@ -212,7 +212,7 @@ export interface NewItemProps {
   listHeight: number;
 }
 
-//NewItemDropDown
+// NewItemDropDown
 export interface NewItemDropDownProps {
   dropDownItems: React.ReactElement[];
   isEmpty?: boolean;
@@ -220,7 +220,7 @@ export interface NewItemDropDownProps {
   listHeight?: number;
 }
 
-//InputItem
+// InputItem
 export interface InputItemProps {
   defaultInputValue: string;
   onAcceptInput: (value: string) => void;

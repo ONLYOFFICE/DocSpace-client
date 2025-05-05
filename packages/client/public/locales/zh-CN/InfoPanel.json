@@ -39,7 +39,6 @@
   "FolderIndexReordered": "索引已重新排序",
   "FolderMoved": "文件夹已移动。",
   "FolderMovedCount": "文件夹已移动 ({{count}})。",
-  "FolderMovedToTrash": "文件夹已移至回收站。",
   "FolderMovedToTrashCount": "文件夹已移至回收站 ({{count}})。",
   "FolderRenamed": "文件夹已重命名。",
   "FormCompletelyFilled": "已全部填写表单。",

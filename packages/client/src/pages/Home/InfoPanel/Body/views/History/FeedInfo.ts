@@ -208,7 +208,7 @@ export const feedInfo = [
     actionType: `${FeedAction.Move}`,
   },
   {
-    key: "FolderMovedToTrash",
+    key: "FoldersTrashMoveCompleted",
     targetType: `${FeedTarget.Folder}`,
     actionType: `${FeedAction.Move}`,
   },

@@ -255,8 +255,9 @@ const InvitationSettings = ({
             lineHeight="16px"
             className={styles.checkboxDescription}
           >
-            {t("InvitationSettingsContactsDescription", {
+            {t("ContactsInviteNote", {
               productName: t("Common:ProductName"),
+              sectionName: t("Common:Contacts"),
             })}
           </Text>
         </div>

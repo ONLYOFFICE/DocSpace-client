@@ -298,7 +298,6 @@
   "GroupsNotFoundDescription": "Aucun groupe ne correspond à votre recherche. Veuillez ajuster vos paramètres de recherche ou effacer le champ de recherche pour afficher la liste complète des groupes.",
   "Guest": "Invité",
   "GuestInvitation": "<1>{{displayName}}</1> souhaite partager avec vous le contact de l'invité.",
-  "GuestInvitationInfo": "Une fois approuvé, l'invité partagé sera ajouté à votre liste d'invités dans Contacts.",
   "Guests": "Invités",
   "Guide": "Guide",
   "HasFullAccess": "Il a un accès complet à la salle",

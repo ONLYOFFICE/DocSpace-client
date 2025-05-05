@@ -293,7 +293,6 @@
   "GroupsNotFoundDescription": "Aramanızla eşleşen grup yok. Grupların tam listesini görüntülemek için lütfen arama parametrelerinizi değiştirin veya arama alanını temizleyin.",
   "Guest": "Konuk",
   "GuestInvitation": "<1>{{displayName}}</1> sizinle konuğun iletişim bilgilerini paylaşmak istiyor.",
-  "GuestInvitationInfo": "Onaylandıktan sonra, paylaşılan kişi, Kişilerdeki Konuklar listenize eklenecektir.",
   "Guests": "Konuklar",
   "Guide": "Kılavuz",
   "HasFullAccess": "Odaya tam erişimi var",

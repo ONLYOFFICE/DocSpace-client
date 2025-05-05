@@ -293,7 +293,6 @@
   "GroupsNotFoundDescription": "Ei hakuasi vastaavia ryhmiä. Ole hyvä ja muokkaa hakuehtojasi tai tyhjennä hakukenttä nähdäksesi koko ryhmien listan.",
   "Guest": "Vieras",
   "GuestInvitation": "<1>{{displayName}}</1> haluaa jakaa sinulle vieraan yhteystiedot.",
-  "GuestInvitationInfo": "Hyväksymisen jälkeen jaettu vieras lisätään Vieraslistaasi Yhteystiedoissasi.",
   "Guests": "Vieraat",
   "Guide": "Opas",
   "HasFullAccess": "Hänellä on rajoittamaton pääsy huoneeseen",

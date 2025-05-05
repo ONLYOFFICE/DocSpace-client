@@ -298,7 +298,6 @@
   "GroupsNotFoundDescription": "検索条件に一致するグループがありません。検索パラメータを調整するか、検索フィールドをクリアしてグループの全リストを表示してください。",
   "Guest": "ゲスト",
   "GuestInvitation": "<1>{{displayName}}</1>さんがゲストの連絡先をあなたと共有したいと思っています。",
-  "GuestInvitationInfo": "承認されると、共有されたゲストが連絡先のゲストリストに追加されます。",
   "Guests": "ゲスト",
   "Guide": "ガイド",
   "HasFullAccess": "ルームへのフルアクセスを持っています",

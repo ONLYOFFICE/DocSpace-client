@@ -293,7 +293,6 @@
   "GroupsNotFoundDescription": "Axtarışınıza uyğun qrup yoxdur. Qrupların tam siyahısına baxmaq üçün axtarış parametrlərinizi tənzimləyin və ya axtarış sahəsini təmizləyin.",
   "Guest": "Qonaq",
   "GuestInvitation": "<1>{{displayName}}</1> qonağın əlaqə məlumatını sizinlə paylaşmaq istəyir.",
-  "GuestInvitationInfo": "Təsdiq edildikdən sonra paylaşılan qonaq Kontaktlarda Qonaqlar siyahısına əlavə olunacaq.",
   "Guests": "Qonaqlar",
   "Guide": "Bələdçi",
   "HasFullAccess": "Otağa tam giriş imkanı var",

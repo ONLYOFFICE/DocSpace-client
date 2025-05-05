@@ -292,7 +292,6 @@
   "GroupsNotFoundDescription": "검색과 일치하는 그룹이 없습니다. 전체 그룹 목록을 보려면 검색 매개변수를 조정하거나 검색 필드를 삭제하세요.",
   "Guest": "게스트",
   "GuestInvitation": "<1>{{displayName}}</1>님이 고객님에게  게스트 연락처를 공유하길 원합니다.",
-  "GuestInvitationInfo": "승인하면 공유된 게스트가 연락처의 고객님의 게스트 목록에 추가됩니다.",
   "Guests": "게스트",
   "Guide": "가이드",
   "HasFullAccess": "방에 대한 전체 액세스 권한이 있습니다",

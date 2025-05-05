@@ -298,7 +298,6 @@
   "GroupsNotFoundDescription": "没有与您的搜索条件匹配的群组。请调整搜索参数，或清除搜索字段查看完整的群组列表。",
   "Guest": "访客",
   "GuestInvitation": "<1>{{displayName}}</1>想要与您分享该访客的联系信息。",
-  "GuestInvitationInfo": "同意后，即可将该访客添加至您的“联系人信息”中的“访客”列表。",
   "Guests": "访客",
   "Guide": "指南",
   "HasFullAccess": "有完整的房间访问权限",

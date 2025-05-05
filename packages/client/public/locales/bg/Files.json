@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Файлът не може да бъде преместен в тази стая. Моля, опитайте да преместите {{ organizationName }} PDF формуляра.",
   "WarningMoveToFormRoomServal": "Преместването на няколко файла в стаята за попълване на формуляри не се поддържа. Премествайте по един {{ organizationName }} PDF формуляр.",
   "WillBeDeletedPermanently": "{{date}} ще бъде изтрита окончателно",
-  "WillBeMovedToTrash": "{{date}} ще бъде преместена в Кошчето",
   "YouLeftTheRoom": "Напуснахте стаята",
   "YourUserTypeHasChanged": "Вашият потребителски тип е променен на <1>“{{userType}}“</1> от администратора на {{productName}} <1>{{adminName}}</1>."
 }

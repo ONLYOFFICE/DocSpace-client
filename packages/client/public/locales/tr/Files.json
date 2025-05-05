@@ -234,7 +234,6 @@
   "WarningMoveToFormRoom": "Dosya bu odaya taşınamıyor. Lütfen {{ organizationName }} PDF formunu taşımayı deneyin.",
   "WarningMoveToFormRoomServal": "Birden fazla dosyanın Form Doldurma odasına taşınması desteklenmiyor. Tek seferde bir {{ organizationName }} PDF formu taşıyın.",
   "WillBeDeletedPermanently": "{{date}} kalıcı olarak silinecek",
-  "WillBeMovedToTrash": "{{date}} Çöp Kutusuna taşınacak",
   "YouLeftTheRoom": "Odadan ayrıldınız",
   "YourUserTypeHasChanged": "Kullanıcı türünüz, {{productName}} yöneticisi <1>{{adminName}}</1> tarafından <1>“{{userType}}”</1> olarak değiştirildi."
 }

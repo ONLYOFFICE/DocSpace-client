@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Plik nie może zostać przeniesiony do tego pokoju. Spróbuj przenieść formularz PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Przenoszenie kilku plików do Pokoju do wypełniania formularzy nie jest obsługiwane. Przenoś po jednym formularzu PDF {{ organizationName }} na raz.",
   "WillBeDeletedPermanently": "{{date}} nastąpi trwałe usunięcie",
-  "WillBeMovedToTrash": "{{date}} nastąpi przeniesienie do Kosza",
   "YouLeftTheRoom": "Opuszczono pokój",
   "YourUserTypeHasChanged": "Twój rodzaj użytkownika został zmieniony na <1>“{{userType}}”</1> przez administratora {{productName}} <1>{{adminName}}</1>."
 }

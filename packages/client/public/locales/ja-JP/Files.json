@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "このルームにファイルを移動できません。{{ organizationName }} PDFフォームを移動してみてください。",
   "WarningMoveToFormRoomServal": "フォーム記入ルームへの複数のファイルの移動はサポートされていません。{{ organizationName }} PDFフォームを1つずつ移動してください。",
   "WillBeDeletedPermanently": "{{date}}は完全に削除されます",
-  "WillBeMovedToTrash": "{{date}}はゴミ箱に移動されます",
   "YouLeftTheRoom": "正常に退室されました。",
   "YourUserTypeHasChanged": "あなたのユーザータイプは、{{productName}}管理者<1>{{adminName}}</1>によって<1>“{{userType}}”</1>に変更されました。"
 }

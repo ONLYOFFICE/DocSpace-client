@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Fajl ne može biti premesten u ovu sobu. Pokušajte da premestite {{ organizationName }} PDF obrazac.",
   "WarningMoveToFormRoomServal": "Premještanje više fajlova u sobu za popunjavanje obrazaca nije podržano. Premestite jedan {{ organizationName }} PDF obrazac u isto vreme.",
   "WillBeDeletedPermanently": "{{date}} će biti trajno obrisan",
-  "WillBeMovedToTrash": "{{date}} će biti premešten u smeće",
   "YouLeftTheRoom": "Napustili ste sobu",
   "YourUserTypeHasChanged": "Vaš tip korisnika je promenjen na <1>“{{userType}}”</1> od strane administratora {{productName}} <1>{{adminName}}</1>."
 }

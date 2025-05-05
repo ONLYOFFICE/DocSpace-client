@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Фајл не може бити преместен у ову собу. Покушајте да преместите {{ organizationName }} PDF образац.",
   "WarningMoveToFormRoomServal": "Премјештање више фајлова у собу за попуњавање образаца није подржано. Преместите један {{ organizationName }} PDF образац у исто време.",
   "WillBeDeletedPermanently": "{{date }} ће бити трајно обрисан",
-  "WillBeMovedToTrash": "{{date}} ће бити премештен у смеће",
   "YouLeftTheRoom": "Напустили сте собу",
   "YourUserTypeHasChanged": "Ваш тип корисника је промењен на <1>“{{userType}}”</1> од стране администратора {{productName}}<1>{{adminName}}</1>."
 }

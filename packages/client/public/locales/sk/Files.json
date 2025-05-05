@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Súbor nie je možné presunúť do tejto miestnosti. Pokúste sa presunúť {{ organizationName }} PDF formulár.",
   "WarningMoveToFormRoomServal": "Presunutie viacerých súborov do miestnosti na vyplnenie formulárov nie je podporované. Premiestňujte jeden {{ organizationName }} PDF formulára naraz.",
   "WillBeDeletedPermanently": "{{date}} bude natrvalo odstránený",
-  "WillBeMovedToTrash": "{{date}} bude presunutý do Koša",
   "YouLeftTheRoom": "Opustili ste miestnosť",
   "YourUserTypeHasChanged": "Váš typ používateľa bol zmenený na <1>“{{userType}}“</1> administrátorom {{productName}} <1>{{adminName}}</1>."
 }

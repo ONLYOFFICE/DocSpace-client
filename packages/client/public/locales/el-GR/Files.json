@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Δεν είναι δυνατή η μετακίνηση του αρχείου σε αυτό το δωμάτιο. Δοκιμάστε να μετακινήσετε τη φόρμα PDF του {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Η μετακίνηση πολλών αρχείων στο δωμάτιο συμπλήρωσης φορμών δεν υποστηρίζεται. Μετακινήστε μία φόρμα PDF του {{ organizationName }} τη φορά.",
   "WillBeDeletedPermanently": "Το αρχείο {{date}} θα διαγραφεί μόνιμα",
-  "WillBeMovedToTrash": "Θα μετακινηθεί {{date}} στον Κάδο Απορριμμάτων",
   "YouLeftTheRoom": "Έχετε φύγει από το δωμάτιο",
   "YourUserTypeHasChanged": "Ο τύπος χρήστη σας έχει αλλάξει σε <1>”{{userType}}”</1> από τον διαχειριστή {{productName}} <1>{{adminName}}</1>."
 }

@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Imposibil de mutat fișierul în acestă sală. Încercați să deplasați formularul PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Deplasarea mai multor fișiere în Sala de completare a formularelor nu este acceptată. Deplasați câte un formular PDF  {{ organizationName }}.",
   "WillBeDeletedPermanently": "{{date}} va fi şters definitiv",
-  "WillBeMovedToTrash": "{{date}} va fi mutat în Coșul de gunoi",
   "YouLeftTheRoom": "Ați părăsit sala",
   "YourUserTypeHasChanged": "Tipul de utilizator a fost schimbat în <1>“{{userType}}”</1> de către administratorul  <1>{{adminName}}</1> al {{productName}}."
 }

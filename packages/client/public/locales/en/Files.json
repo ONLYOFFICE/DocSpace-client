@@ -200,6 +200,7 @@
   "RoomUnpinned": "Room unpinned",
   "SaveAsTemplate": "Save as template",
   "SaveAsTemplateToast": "Room template <1>«{{title}}»</1> saved",
+  "ScheduledTrashMove": "{{date}} will be moved to {{sectionName}}",
   "SendByEmail": "Send by email",
   "ShareFolder": "Share folder",
   "ShareFolderDescription": "A new room will be created and all the contents of the selected folder will be copied there. Afterward, you can invite other users to collaborate on the files within a room.",
@@ -238,7 +239,6 @@
   "WarningMoveToFormRoom": "The file cannot be moved to this room. Please try to move the {{ organizationName }} PDF form.",
   "WarningMoveToFormRoomServal": "Moving several files to the Form Filling room is not supported. Move one {{ organizationName }} PDF form at a time.",
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
-  "WillBeMovedToTrash": "{{date}} will be moved to Trash",
   "YouLeftTheRoom": "You have left the room",
   "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>."
 }

@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Soubor nelze do této místnosti přesunout. Zkuste prosím přesunout soubor {{ organizationName }}. PDF formulář.",
   "WarningMoveToFormRoomServal": "Přesunutí několika souborů do místnosti pro vyplňování formulářů není podporováno. Přesunujte PDF formuláře {{ organizationName }} po jednom.",
   "WillBeDeletedPermanently": "{{date}} bude trvale smazáno",
-  "WillBeMovedToTrash": "{{date}} bude přesunuto do koše",
   "YouLeftTheRoom": "Opustili jste místnost",
   "YourUserTypeHasChanged": "Váš typ uživatele byl změněn na <1>\"{{userType}}\"</1> správcem {{productName}} <1>{{{adminName}}</1>."
 }

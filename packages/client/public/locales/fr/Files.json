@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Le fichier ne peut pas être déplacé dans cette salle. Veuillez essayer de déplacer le formulaire PDF de {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Le déplacement de plusieurs fichiers vers la salle de remplissage des formulaires n'est pas pris en charge. Déplacez un formulaire PDF {{ organizationName }} à la fois.",
   "WillBeDeletedPermanently": "{{date}} sera supprimé définitivement",
-  "WillBeMovedToTrash": "{{date}} sera déplacé dans la corbeille",
   "YouLeftTheRoom": "Vous avez quitté la salle",
   "YourUserTypeHasChanged": "Votre type d'utilisateur a été modifié en <1>“{{userType}}”</1> par l'administrateur de {{productName}} <1>{{adminName}}</1>."
 }

@@ -234,7 +234,6 @@
   "WarningMoveToFormRoom": "Datoteke ni mogoče premakniti v to sobo. Poskusite premakniti obrazec PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Premikanje več datotek v prostor za izpolnjevanje obrazcev ni podprto. Premaknite po en obrazec PDF {{ organizationName }} naenkrat.",
   "WillBeDeletedPermanently": "{{date}} bo trajno izbrisan",
-  "WillBeMovedToTrash": "{{date}} bo premaknjen v koš",
   "YouLeftTheRoom": "Zapustili ste sobo",
   "YourUserTypeHasChanged": "Vaš tip uporabnika je spremenil v <1>»{{userType}}«</1> skrbnik za {{productName}} <1>{{adminName}}</1>."
 }

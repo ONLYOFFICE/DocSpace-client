@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Ֆայլը չի կարող տեղափոխվել այս սենյակ: Խնդրում ենք, փորձել տեղափոխել {{ organizationName }} PDF ձևը:",
   "WarningMoveToFormRoomServal": "Մի քանի ֆայլ տեղափոխելը Ձևաթղթերի լրացման սենյակ չի աջակցվում: Միանգամից տեղափոխեք մեկ {{ organizationName }} PDF ձև:",
   "WillBeDeletedPermanently": "{{date}}-ն ընդմիշտ կջնջվի",
-  "WillBeMovedToTrash": "{{date}}-ը կտեղափոխվի աղբարկղ",
   "YouLeftTheRoom": "Դուք դուրս եք եկել սենյակից",
   "YourUserTypeHasChanged": "Օգտատիրոջ տեսակը փոխվել է <1>«{{userType}}»</1> by the {{productName}} ադմին <1>{{adminName}}</1>"
 }

@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Tiedostoa ei voi kopioida tähän huoneeseen. Ole hyvä ja siirrä {{ organizationName }} PDF-lomake. ",
   "WarningMoveToFormRoomServal": "Useiden tiedostojen siirtämistä lomakkeentäyttöhuoneeseen ei tueta. Siirrä yksi {{ organizationName }} PDF-lomake kerrallaan.",
   "WillBeDeletedPermanently": "{{date}} poistetaan lopullisesti",
-  "WillBeMovedToTrash": "{{date}} siirretään Roskakoriin",
   "YouLeftTheRoom": "Olet poistunut huoneesta",
   "YourUserTypeHasChanged": "{{productName}} :n pääkäyttäjä <1>{{adminName}}</1> on vaihtanut käyttäjätyypiksesi <1>“{{userType}}”</1>."
 }

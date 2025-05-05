@@ -234,7 +234,6 @@
   "WarningMoveToFormRoom": "Không thể di chuyển tập tin đến phòng này. Xin hãy thử di chuyển biểu mẫu PDF {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Không hỗ trợ di chuyển một số tập tin vào phòng Điền Biểu mẫu. Hãy di chuyển từng biểu mẫu PDF {{ organizationName }} mỗi lần.",
   "WillBeDeletedPermanently": "{{date}} sẽ bị xóa vĩnh viễn",
-  "WillBeMovedToTrash": "{{date}} sẽ được chuyển vào Thùng rác",
   "YouLeftTheRoom": "Bạn đã rời khỏi phòng",
   "YourUserTypeHasChanged": "Loại người dùng của bạn đã được quản trị viên <1>{{adminName}}</1> của {{productName}} thay đổi thành <1>“{{userType}}”</1>."
 }

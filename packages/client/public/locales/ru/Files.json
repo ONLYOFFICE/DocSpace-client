@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Файл не может быть перемещен в эту комнату. Пожалуйста, попробуйте переместить PDF-форму {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "Перемещение нескольких файлов в Комнату заполнения форм не поддерживается. Перемещайте по одной PDF-форме {{ organizationName }}.",
   "WillBeDeletedPermanently": "{{date}} будет удален навсегда",
-  "WillBeMovedToTrash": "{{date}} будет перемещен в Корзину",
   "YouLeftTheRoom": "Вы покинули комнату",
   "YourUserTypeHasChanged": "Ваш тип пользователя был изменен на <1>«{{userType}}»</1> администратором {{productName}} <1>{{adminName}}</1>."
 }

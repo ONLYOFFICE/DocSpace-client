@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Non è possibile spostare il file in questa stanza. Provare a spostare un modulo PDF {{ organizationName }} alla volta.",
   "WarningMoveToFormRoomServal": "Lo spostamento di più file nella stanza di compilazione dei moduli non è supportato. Sposta un modulo PDF {{ organizationName }} alla volta.",
   "WillBeDeletedPermanently": "{{date}} verrà eliminato definitivamente",
-  "WillBeMovedToTrash": "{{date}} verrà spostato nel cestino",
   "YouLeftTheRoom": "Hai lasciato la stanza",
   "YourUserTypeHasChanged": "Il tuo tipo di utente è stato modificato in <1>“{{userType}}”</1> dall’amministratore di {{productName}}, <1>{{adminName}}</1>."
 }

@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "O arquivo não pode ser movido para esta sala. Tente mover o formulário em PDF {{ organizationName }} formulário PDF.",
   "WarningMoveToFormRoomServal": "Não há suporte para a movimentação de vários arquivos para a sala de preenchimento de formulários. Mova um formulário PDF {{ organizationName }} formulário PDF de cada vez.",
   "WillBeDeletedPermanently": "{{date}} será excluído permanentemente",
-  "WillBeMovedToTrash": "{{date}} será movido para a Lixeira",
   "YouLeftTheRoom": "Você saiu da sala",
   "YourUserTypeHasChanged": "Seu tipo de usuário foi alterado para <1>“{{userType}}”</1> pelo administrador do {{productName}} <1>{{adminName}}</1>."
 }

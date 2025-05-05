@@ -234,7 +234,6 @@
   "WarningMoveToFormRoom": "لا يمكن نقل الملف إلى هذه الغرفة. يُرجى محاولة نقل نموذج PDF الخاص بـ {{ organizationName }}.",
   "WarningMoveToFormRoomServal": "لا يُسمح بنقل أكثر من ملف واحد إلى غرفة تعبئة النماذج. يرجى نقل نماذج PDF من {{ organizationName }} بشكل فردي.",
   "WillBeDeletedPermanently": "سيتم حذف {{date}} نهائيًا",
-  "WillBeMovedToTrash": "سيتم نقل {{date}} إلى سلة المهملات",
   "YouLeftTheRoom": "لقد قمت بمغادرة الغرفة",
   "YourUserTypeHasChanged": "تم تغيير نوع المستخدم الخاص بكم إلى <1>«{{userType}}»</1> من قِبل مسؤول {{productName}} <1>{{adminName}}</1>."
 }

@@ -235,7 +235,6 @@
   "WarningMoveToFormRoom": "Fayl bu otağa köçürülə bilməz. {{ organizationName }} PDF formasını köçürməyə cəhd edin.",
   "WarningMoveToFormRoomServal": "Birdən çox faylın Forma Doldurma otağına köçürülməsi dəstəklənmir. Eyni anda bir {{organizationName }} PDF formasını köçürün.",
   "WillBeDeletedPermanently": "{{date}} həmişəlik silinəcək",
-  "WillBeMovedToTrash": "{{date}} Zibil qutusuna köçürüləcək",
   "YouLeftTheRoom": "Otağı tərk etdiniz",
   "YourUserTypeHasChanged": "İstifadəçi tipiniz {{productName}} administratoru <1>{{adminName}}</1> tərəfindən <1>“{{userType}}”</1> olaraq dəyişdirilib."
 }

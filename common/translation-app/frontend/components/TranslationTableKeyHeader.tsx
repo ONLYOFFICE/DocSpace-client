@@ -83,8 +83,8 @@ const TranslationTableKeyHeader: React.FC<TranslationTableKeyHeaderProps> = ({
             className="truncate flex-1 pr-1 text-gray-800 dark:text-gray-200"
             onContextMenu={(e) => handleKeyContextMenu(e, currentEntry.path)}
           >
-            Key: <strong>{currentEntry.path}</strong> (EN:{" "}
-            {currentEntry.translations["en"] || ""})
+            Key: <strong>{currentEntry?.path}</strong> (EN:{" "}
+            {currentEntry?.translations["en"] || ""})
           </span>
           {ollamaConnected &&
             languages.filter((lang) => lang !== baseLanguage).length > 0 && (

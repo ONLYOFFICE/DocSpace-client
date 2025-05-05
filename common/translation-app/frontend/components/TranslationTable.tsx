@@ -140,7 +140,9 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
       targetLanguage,
       namespace,
       rowPath
-    );
+    ).catch((error) => {
+      toast.error(error.message);
+    });
   };
 
   // Selected target language for single-language translations
@@ -274,12 +276,14 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
   // Check if a key has any untranslated languages
   const hasUntranslatedLanguages = (entry: TranslationEntry) => {
     // Base language should always be translated, skip it
-    const nonBaseLanguages = languages.filter(lang => lang !== baseLanguage);
-    
+    const nonBaseLanguages = languages.filter((lang) => lang !== baseLanguage);
+
     // Check if any language is missing a translation
-    return nonBaseLanguages.some(lang => {
+    return nonBaseLanguages.some((lang) => {
       // Check if translation is empty or undefined
-      return !entry.translations[lang] || entry.translations[lang].trim() === '';
+      return (
+        !entry.translations[lang] || entry.translations[lang].trim() === ""
+      );
     });
   };
 

@@ -33,7 +33,8 @@ const TranslationTableCell: React.FC<TranslationTableCellProps> = ({
 }) => {
   return (
     <td className="px-3 py-2 border-b dark:border-gray-800">
-      {editingCell?.rowPath === currentEntry.path && editingCell?.language === lang ? (
+      {editingCell?.rowPath === currentEntry?.path &&
+      editingCell?.language === lang ? (
         <div className="flex">
           <textarea
             value={editValue}
@@ -60,29 +61,25 @@ const TranslationTableCell: React.FC<TranslationTableCellProps> = ({
       ) : (
         <div className="group flex items-start">
           <div
-            className={`flex-1 break-words ${!currentEntry.translations[lang] ? "text-gray-400 dark:text-gray-500 italic" : "text-gray-800 dark:text-gray-200"}`}
+            className={`flex-1 break-words ${!currentEntry?.translations[lang] ? "text-gray-400 dark:text-gray-500 italic" : "text-gray-800 dark:text-gray-200"}`}
             onClick={() =>
               handleEditStart(
-                currentEntry.path,
+                currentEntry?.path,
                 lang,
-                currentEntry.translations[lang] || ""
+                currentEntry?.translations[lang] || ""
               )
             }
           >
-            {currentEntry.translations[lang] || "Not translated"}
+            {currentEntry?.translations[lang] || "Not translated"}
           </div>
-          {lang !== "en" && (
+          {lang !== "en" && ollamaConnected && (
             <button
-              onClick={() => handleTranslate(currentEntry.path, lang)}
-              disabled={
-                translating ||
-                isTranslating(currentEntry.path, lang) ||
-                !ollamaConnected
-              }
-              className="ml-2 text-xs opacity-0 group-hover:opacity-100 focus:opacity-100 btn btn-secondary py-0 px-2"
+              onClick={() => handleTranslate(currentEntry?.path, lang)}
+              disabled={translating || isTranslating(currentEntry?.path, lang)}
+              className="ml-2 text-xs btn btn-secondary py-0 px-2"
               title="Translate using Ollama"
             >
-              {isTranslating(currentEntry.path, lang)
+              {isTranslating(currentEntry?.path, lang)
                 ? "Translating..."
                 : "AI"}
             </button>

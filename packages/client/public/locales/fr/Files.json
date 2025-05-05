@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Copier {{element}}",
   "TooltipElementsCopyMessage": "Copier {{element}} des éléments",
   "TooltipElementsMoveMessage": "Déplacer les éléments {{element}}",
-  "TrashErasureWarning": "Les éléments placés dans la corbeille sont automatiquement supprimés dans les 30 jours.",
   "UnarchivedRoomAction": "La salle '{{name}}' n'est plus archivée.",
   "UnarchivedRoomsAction": "Les salles ne sont plus archivées.",
   "Unpin": "Désépingler",

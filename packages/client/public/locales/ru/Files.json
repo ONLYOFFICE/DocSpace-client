@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Скопировать {{element}}",
   "TooltipElementsCopyMessage": "Скопировать {{element}} элемента(ов)",
   "TooltipElementsMoveMessage": "Переместить {{element}} элемента(ов)",
-  "TrashErasureWarning": "Элементы в корзине автоматически удаляются через 30 дней.",
   "UnarchivedRoomAction": "Комната '{{name}}' разархивирована",
   "UnarchivedRoomsAction": "Комнаты разархивированы",
   "Unpin": "Открепить",

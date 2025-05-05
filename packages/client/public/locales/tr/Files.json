@@ -217,7 +217,6 @@
   "TooltipElementCopyMessage": "Kopyala {{element}}",
   "TooltipElementsCopyMessage": "{{element}} öğelerini kopyala",
   "TooltipElementsMoveMessage": "{{element}} öğelerini taşı",
-  "TrashErasureWarning": "Çöp Kutusundaki öğeler 30 gün sonra otomatik olarak silinir.",
   "UnarchivedRoomAction": "'{{name}}' odası arşivden çıkarıldı.",
   "UnarchivedRoomsAction": "Odalar arşivden çıkarıldı.",
   "Unpin": "Sabitlemeyi kaldır",

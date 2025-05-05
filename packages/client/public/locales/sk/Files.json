@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Kopírovať {{element}}",
   "TooltipElementsCopyMessage": "Kopírovať prvky {{element}}",
   "TooltipElementsMoveMessage": "Presunúť prvky {{element}}",
-  "TrashErasureWarning": "Položky v smetnom koši sa automaticky vymažú po 30 dňoch.",
   "UnarchivedRoomAction": "Miestnosť '{{name}}' bola rozbalená z archívu.",
   "UnarchivedRoomsAction": "Miestnosti nie sú archivované.",
   "Unpin": "Odopnúť",

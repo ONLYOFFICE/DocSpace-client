@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Zkopírovat {{element}}",
   "TooltipElementsCopyMessage": "Zkopírovat prvky {{element}}",
   "TooltipElementsMoveMessage": "Přesunout prvky {{element}}",
-  "TrashErasureWarning": "Položky v koši se automaticky odstraní po 30 dnech.",
   "UnarchivedRoomAction": "Místnost '{{name}}' není archivována.",
   "UnarchivedRoomsAction": "Místnosti nejsou archivovány.",
   "Unpin": "Odepnout",

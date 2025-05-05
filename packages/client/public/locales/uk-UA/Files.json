@@ -217,7 +217,6 @@
   "TooltipElementCopyMessage": "Копіювати {{element}}",
   "TooltipElementsCopyMessage": "Копіювати елементи {{element}}",
   "TooltipElementsMoveMessage": "Перемістити елементи {{element}}",
-  "TrashErasureWarning": "Елементи в Кошику автоматично видаляються через 30 днів.",
   "UnarchivedRoomAction": "Кімнату '{{name}}' розархівовано.",
   "UnarchivedRoomsAction": "Кімнати розархівовано.",
   "Unpin": "Відкріпити",

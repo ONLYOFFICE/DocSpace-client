@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Kopiraj {{element}}",
   "TooltipElementsCopyMessage": "Kopiraj {{element}} elemente",
   "TooltipElementsMoveMessage": "Pomeri {{element}} elemente",
-  "TrashErasureWarning": "Stavke u Otpadu su automatski obrisane nakon 30 dana.",
   "UnarchivedRoomAction": "Soba '{{name}}' je nearhivirana.",
   "UnarchivedRoomsAction": "Sobe su nearhivirane.",
   "Unpin": "Otkači",

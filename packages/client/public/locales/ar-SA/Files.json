@@ -217,7 +217,6 @@
   "TooltipElementCopyMessage": "انسخ {{element}}",
   "TooltipElementsCopyMessage": "انسخ {{element}} العناصر",
   "TooltipElementsMoveMessage": "انقل عناصر {{element}}",
-  "TrashErasureWarning": "يتم حذف العناصر الموجودة في المهملات تلقائيًا بعد 30 يومًا.",
   "UnarchivedRoomAction": "تم إخراج الغرفة \"{{name}}\" من الأرشيف.",
   "UnarchivedRoomsAction": "الغرف غير مؤرشفة.",
   "Unpin": "إلغاء التثبيت",

@@ -217,7 +217,6 @@
   "TooltipElementCopyMessage": "{{element}} 복사",
   "TooltipElementsCopyMessage": "{{element}} 요소 복사",
   "TooltipElementsMoveMessage": "{{element}} 요소 이동",
-  "TrashErasureWarning": "휴지통에 든 항목은 30일 후에 자동으로 삭제됩니다.",
   "UnarchivedRoomAction": "'{{name}}' 방의 아카이브가 취소되었습니다.",
   "UnarchivedRoomsAction": "방의 아카이브가 취소되었습니다.",
   "Unpin": "고정 해제",

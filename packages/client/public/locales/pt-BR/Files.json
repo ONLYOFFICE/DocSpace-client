@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Cópia {{element}}",
   "TooltipElementsCopyMessage": "Cópia {{element}} elementos",
   "TooltipElementsMoveMessage": "Mover {{element}} elementos",
-  "TrashErasureWarning": "Os itens na Lixeira são excluídos automaticamente após 30 dias.",
   "UnarchivedRoomAction": "A sala '{{name}}' foi desarquivada.",
   "UnarchivedRoomsAction": "As salas são desarquivadas.",
   "Unpin": "Desafixar",

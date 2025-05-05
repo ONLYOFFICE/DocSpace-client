@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Copiere {{element}}",
   "TooltipElementsCopyMessage": "Copiere elemente {{element}}",
   "TooltipElementsMoveMessage": "Mutare elemente {{element}}",
-  "TrashErasureWarning": "Elementele din Coșul de gunoi sunt șterse automat după 30 zile.",
   "UnarchivedRoomAction": "Sala '{{name}}' este dezarhivată.",
   "UnarchivedRoomsAction": "Sălile sunt dezarhivate.",
   "Unpin": "Anulare fixare",

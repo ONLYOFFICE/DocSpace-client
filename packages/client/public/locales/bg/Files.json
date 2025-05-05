@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Копирай {{element}}",
   "TooltipElementsCopyMessage": "Копирай {{element}} елемента",
   "TooltipElementsMoveMessage": "Премести {{element}} елемента",
-  "TrashErasureWarning": "Елементите в кошчето се изтриват автоматично след 30 дни.",
   "UnarchivedRoomAction": "Стаята '{{name}}' е изкарана от архива.",
   "UnarchivedRoomsAction": "Стаите са изкарани от архива.",
   "Unpin": "Откачване",

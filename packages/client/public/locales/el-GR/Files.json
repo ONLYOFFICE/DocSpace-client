@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Αντιγραφή {{element}}",
   "TooltipElementsCopyMessage": "Αντιγραφή στοιχείων {{element}}",
   "TooltipElementsMoveMessage": "Μετακίνηση στοιχείων {{element}}",
-  "TrashErasureWarning": "Τα αντικείμενα στον Κάδο Απορριμμάτων διαγράφονται αυτόματα μετά από 30 ημέρες.",
   "UnarchivedRoomAction": "Το δωμάτιο '{{name}}' δεν έχει αρχειοθετηθεί.",
   "UnarchivedRoomsAction": "Τα δωμάτια δεν έχουν αρχειοθετηθεί.",
   "Unpin": "Ξεκαρφίτσωμα",

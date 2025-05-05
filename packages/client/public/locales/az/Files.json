@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "{{element}} köçür",
   "TooltipElementsCopyMessage": "{{element}} elementlərini köçürmək",
   "TooltipElementsMoveMessage": "{{element}} elementinin yerdəyişməsi",
-  "TrashErasureWarning": "Zibil qutusundakı elementlər 30 gündən sonra avtomatik silinir.",
   "UnarchivedRoomAction": "'{{name}}' otağı arxivdən çıxarıldı.",
   "UnarchivedRoomsAction": "Otaqlar arxivdən çıxarıldı.",
   "Unpin": "Sabitləmədən çıxarın",

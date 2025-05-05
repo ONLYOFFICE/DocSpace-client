@@ -119,7 +119,6 @@
   "TooltipElementCopyMessage": "ຄັດລອກ {{element}}",
   "TooltipElementsCopyMessage": "ຄັດລອກ {{element}} ອົງປະກອບ",
   "TooltipElementsMoveMessage": "ຍ້າຍ {{element}} ອົງປະກອບ",
-  "TrashErasureWarning": "ລາຍການໃນຖັງຂີ້ເຫຍື້ອຈະຖືກລຶບໂດຍອັດຕະໂນມັດຫຼັງຈາກ 30 ມື້.",
   "UnarchivedRoomAction": "ຫ້ອງ '{{name}}' ບໍ່ໄດ້ຖືກເກັບໄວ້.",
   "UnarchivedRoomsAction": "ຫ້ອງຖືກຍົກເລີກການຈັດເກັບ.",
   "Unpin": "ຖອນປັກໝຸດ",

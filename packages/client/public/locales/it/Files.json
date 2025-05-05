@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Copia {{element}}",
   "TooltipElementsCopyMessage": "Copia {{element}} elementi",
   "TooltipElementsMoveMessage": "Sposta {{element}} elementi",
-  "TrashErasureWarning": "Gli elementi nel Cestino vengono automaticamente eliminati dopo 30 giorni.",
   "UnarchivedRoomAction": "La stanza '{{name}}' è stata rimossa dall'archivio.",
   "UnarchivedRoomsAction": "Le stanze non sono state archiviate.",
   "Unpin": "Rimuovi pin",

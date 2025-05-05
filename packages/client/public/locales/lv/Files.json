@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Kopēt {{element}}",
   "TooltipElementsCopyMessage": "Kopēt {{element}} elementus",
   "TooltipElementsMoveMessage": "Pārvietot {{element}} elementus",
-  "TrashErasureWarning": "Atkritnē esošie vienumi tiek automātiski izdzēsti pēc 30 dienām.",
   "UnarchivedRoomAction": "Telpa '{{name}}' nav arhivēta.",
   "UnarchivedRoomsAction": "Telpas nav arhivētas.",
   "Unpin": "Atspraust",

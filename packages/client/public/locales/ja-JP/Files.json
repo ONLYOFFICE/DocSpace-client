@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "{{element}}をコピー",
   "TooltipElementsCopyMessage": " {{element}} 要素をコピー",
   "TooltipElementsMoveMessage": " {{element}} 要素を移動",
-  "TrashErasureWarning": "ゴミ箱にあるアイテムは、30日後に自動的に削除されます。",
   "UnarchivedRoomAction": "ルーム '{{name}}' はアーカイブが解除されました。",
   "UnarchivedRoomsAction": "ルームはアーカイブが解除されました。",
   "Unpin": "固定の削除",

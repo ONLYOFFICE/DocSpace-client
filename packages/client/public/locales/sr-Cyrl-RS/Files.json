@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Копирај {{element}}",
   "TooltipElementsCopyMessage": "Копирај {{element}} елементе",
   "TooltipElementsMoveMessage": "Помери {{element}} елементе",
-  "TrashErasureWarning": "Ставке у Отпаду су аутоматски обрисане након 30 дана.",
   "UnarchivedRoomAction": "Соба '{{name}}' је неархивирана.",
   "UnarchivedRoomsAction": "Собе су неархивиране.",
   "Unpin": "Откачи",

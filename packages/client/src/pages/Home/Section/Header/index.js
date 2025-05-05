@@ -572,7 +572,9 @@ const SectionHeaderContent = (props) => {
   const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
 
   const warningText = isRecycleBinFolder
-    ? t("TrashErasureWarning")
+    ? t("TrashAutoDeleteWarning", {
+        sectionName: t("Common:TrashSection"),
+      })
     : isPersonalReadOnly
       ? t("PersonalFolderErasureWarning")
       : "";

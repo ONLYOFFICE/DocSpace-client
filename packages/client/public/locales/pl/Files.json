@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Skopiuj {{element}}",
   "TooltipElementsCopyMessage": "Skopiuj elementy {{element}}",
   "TooltipElementsMoveMessage": "Przenieś elementy {{element}}",
-  "TrashErasureWarning": "Pliki w Koszu zostaną usunięte automatycznie po 30 dniach.",
   "UnarchivedRoomAction": "Pokój '{{name}}' został przywrócony z archiwum.",
   "UnarchivedRoomsAction": "Pokoje zostały przywrócone z archiwum.",
   "Unpin": "Odepnij",

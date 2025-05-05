@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "复制{{element}}",
   "TooltipElementsCopyMessage": "复制{{element}}元素",
   "TooltipElementsMoveMessage": "移动{{element}}元素",
-  "TrashErasureWarning": "回收站中的文件在30天后会自动删除。",
   "UnarchivedRoomAction": "房间 '{{name}}' 已取消存档。",
   "UnarchivedRoomsAction": "房间已取消存档。",
   "Unpin": "取消标记",

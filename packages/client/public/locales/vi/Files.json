@@ -217,7 +217,6 @@
   "TooltipElementCopyMessage": "Sao chép {{element}}",
   "TooltipElementsCopyMessage": "Sao chép {{element}} thành phần",
   "TooltipElementsMoveMessage": "Di chuyển {{element}} thành phần",
-  "TrashErasureWarning": "Các mục trong Thùng rác sẽ tự động bị xóa sau 30 ngày.",
   "UnarchivedRoomAction": "Phòng '{{name}}' chưa được sao lưu.",
   "UnarchivedRoomsAction": "Các phòng chưa được sao lưu.",
   "Unpin": "Bỏ ghim",

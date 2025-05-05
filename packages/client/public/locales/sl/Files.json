@@ -217,7 +217,6 @@
   "TooltipElementCopyMessage": "Kopiraj {{element}}",
   "TooltipElementsCopyMessage": "Kopiraj {{element}} elemente",
   "TooltipElementsMoveMessage": "Premakni {{element}} elemente",
-  "TrashErasureWarning": "Elementi v košu se samodejno izbrišejo po 30 dneh.",
   "UnarchivedRoomAction": "Soba '{{name}}' ni arhivirana.",
   "UnarchivedRoomsAction": "Sobe niso arhivirane.",
   "Unpin": "Odpni",

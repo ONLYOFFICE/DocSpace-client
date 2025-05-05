@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Kopioi {{element}}",
   "TooltipElementsCopyMessage": "Kopioi {{element}} elementit",
   "TooltipElementsMoveMessage": "Siirrä {{element}} elementit",
-  "TrashErasureWarning": "Roskakorin kohteet poistetaan automaattisesti 30 päivän jälkeen.",
   "UnarchivedRoomAction": "Huone '{{name}}' on arkistoimaton.",
   "UnarchivedRoomsAction": "Huoneet ovat arkistoimattomia.",
   "Unpin": "Irrota",

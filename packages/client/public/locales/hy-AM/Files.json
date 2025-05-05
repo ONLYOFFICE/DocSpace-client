@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Պատճենել {{element}}",
   "TooltipElementsCopyMessage": "Պատճենել {{element}} տարրեր",
   "TooltipElementsMoveMessage": "Տեղափոխել {{element}} տարրեր",
-  "TrashErasureWarning": "Աղբարկղում գտնվող տարրերն ավտոմատ կերպով ջնջվում են 30 օր հետո:",
   "UnarchivedRoomAction": "'{{name}}' սենյակը հանված է արխիվից:",
   "UnarchivedRoomsAction": "Սենյակները արխիվացված են։",
   "Unpin": "Ապամրացնել",

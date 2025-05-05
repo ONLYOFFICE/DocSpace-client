@@ -2077,3 +2077,11 @@
 .dark {
   --modal-dialog-border-color: #{$gray-dark-strong};
 }
+
+.light {
+  --search-input-icon-fill-hover: #{$gray};
+}
+
+.dark {
+  --search-input-icon-fill-hover: #{$white};
+}

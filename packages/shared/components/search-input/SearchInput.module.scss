@@ -5,22 +5,17 @@
     width: 100%;
   }
 
-  :global {
-    .input-block-icon {
-      border-radius: 0px;
-      border-start-end-radius: 3px;
-      border-end-end-radius: 3px;
-    }
+  :global(.input-block-icon) {
+    border-radius: 0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
   }
 
-  input {
-    border-radius: 0px;
-    border-start-start-radius: 3px;
-    border-end-start-radius: 3px;
+  :global(.search-input-block > input) {
+    font-weight: 600;
   }
-}
 
-.searchInputBlock > input {
-  font-size: 14px;
-  font-weight: 600;
+  &:hover :global(svg path) {
+    fill: var(--search-input-icon-fill-hover);
+  }
 }

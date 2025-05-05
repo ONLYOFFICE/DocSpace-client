@@ -213,9 +213,11 @@ const FileInputPure = ({
                   data-testid="icon-button"
                   className={iconButtonClasses}
                   iconNode={
-                    isDocumentIcon
-                      ? <DocumentReactSvgUrl/>
-                      : <CatalogFolderReactSvgUrl/>
+                    isDocumentIcon ? (
+                      <DocumentReactSvgUrl />
+                    ) : (
+                      <CatalogFolderReactSvgUrl />
+                    )
                   }
                   color={globalColors.gray}
                   size={iconSize}

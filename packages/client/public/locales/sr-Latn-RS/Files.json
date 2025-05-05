@@ -218,7 +218,6 @@
   "TooltipElementCopyMessage": "Kopiraj {{element}}",
   "TooltipElementsCopyMessage": "Kopiraj {{element}} elemente",
   "TooltipElementsMoveMessage": "Pomeri {{element}} elemente",
-  "TrashEmptyDescription": "Sve izbrisane datoteke se premeštaju u 'Otpad'. Povratite datoteke obrisane greškom ili ih trajno obrišite. Datoteke u 'Otpadu' se automatski brišu nakon 30 dana. Imajte na umu da se datoteke obrisane iz 'Otpada' više ne mogu povratiti.",
   "TrashErasureWarning": "Stavke u Otpadu su automatski obrisane nakon 30 dana.",
   "UnarchivedRoomAction": "Soba '{{name}}' je nearhivirana.",
   "UnarchivedRoomsAction": "Sobe su nearhivirane.",

@@ -217,7 +217,6 @@
   "TooltipElementCopyMessage": "انسخ {{element}}",
   "TooltipElementsCopyMessage": "انسخ {{element}} العناصر",
   "TooltipElementsMoveMessage": "انقل عناصر {{element}}",
-  "TrashEmptyDescription": "يتم نقل جميع الملفات المحذوفة إلى \"المهملات\". استرجع الملفات المحذوفة عن طريق الخطأ أو حذفها نهائيا. يتم حذف الملفات الموجودة في \"المهملات\" تلقائيًا بعد 30 يومًا. يرجى ملاحظة أن الملفات المحذوفة من \"المهملات\" لا يمكن استعادتها بعد الآن.",
   "TrashErasureWarning": "يتم حذف العناصر الموجودة في المهملات تلقائيًا بعد 30 يومًا.",
   "UnarchivedRoomAction": "تم إخراج الغرفة \"{{name}}\" من الأرشيف.",
   "UnarchivedRoomsAction": "الغرف غير مؤرشفة.",

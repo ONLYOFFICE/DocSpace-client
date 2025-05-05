@@ -45,6 +45,7 @@ import { SearchDispatchContext } from "../contexts/Search";
 import styles from "../Selector.module.scss";
 import { Text } from "../../text";
 import { useInterfaceDirection } from "../../../hooks/useInterfaceDirection";
+import { StyledArrowRightSvg } from "../Selector.styled";
 
 const calculateDisplayedItems = (
   items: TBreadCrumb[],
@@ -225,12 +226,7 @@ const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
             }}
           />
         ) : item.isArrow ? (
-          <ArrowIcon
-            className={classNames(styles.arrowRightSvg, {
-              [styles.rtl]: isRTL,
-            })}
-            key={`bread-crumb-item-${item.id}`}
-          />
+          <StyledArrowRightSvg key={`bread-crumb-item-${item.id}`} />
         ) : (
           <Text
             key={`bread-crumb-item-${item.id}`}

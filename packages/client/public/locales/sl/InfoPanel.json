@@ -25,7 +25,6 @@
   "FileMoved": "Datoteke premaknjene.",
   "FileMovedCount": "Datoteke premaknjene ({{count}})",
   "FileMovedTo": "Datoteka premaknjena v «{{folderTitle}}»",
-  "FileMovedToTrash": "Datoteke premaknjene v koš.",
   "FileMovedToTrashCount": "Datoteke premaknjene v koš ({{count}})",
   "FileRenamed": "Datoteka preimenovana.",
   "FilesEmptyScreenText": "Tukaj si oglejte podrobnosti o datotekah in mapah",

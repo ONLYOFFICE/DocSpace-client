@@ -25,7 +25,6 @@
   "FileMoved": "Dateien verschoben.",
   "FileMovedCount": "Dateien verschoben ({{count}}).",
   "FileMovedTo": "Datei verschoben in «{{folderTitle}}»",
-  "FileMovedToTrash": "Dateien in den Papierkorb verschoben.",
   "FileMovedToTrashCount": "Dateien in den Papierkorb verschoben ({{count}}).",
   "FileRenamed": "Datei umbenannt.",
   "FilesEmptyScreenText": "Finden Sie Details zur Datei und zum Ordner hier",

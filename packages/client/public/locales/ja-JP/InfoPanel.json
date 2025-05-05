@@ -25,7 +25,6 @@
   "FileMoved": "ファイルが移動されました。",
   "FileMovedCount": "ファイルが移動されました ({{count}})。",
   "FileMovedTo": "ファイルが「{{folderTitle}}」に移動しました",
-  "FileMovedToTrash": "ファイルはゴミ箱に移動されました。",
   "FileMovedToTrashCount": "ファイルはゴミ箱に移動されました ({{count}})。",
   "FileRenamed": "ファイル名が変更されました。",
   "FilesEmptyScreenText": "ファイルやフォルダの詳細はこちら",

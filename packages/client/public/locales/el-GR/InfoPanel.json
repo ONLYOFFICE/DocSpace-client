@@ -25,7 +25,6 @@
   "FileMoved": "Τα αρχεία μετακινήθηκαν.",
   "FileMovedCount": "Μετακίνηση αρχείων ({{count}}).",
   "FileMovedTo": "Το αρχείο μεταφέρθηκε στο «{{folderTitle}}»",
-  "FileMovedToTrash": "Τα αρχεία μεταφέρθηκαν στον Κάδο Απορριμμάτων.",
   "FileMovedToTrashCount": "Μετακίνηση αρχείων στον Κάδο ανακύκλωσης ({{count}}).",
   "FileRenamed": "Το αρχείου μετονομάστηκε.",
   "FilesEmptyScreenText": "Δείτε εδώ λεπτομέρειες αρχείου και φακέλου",

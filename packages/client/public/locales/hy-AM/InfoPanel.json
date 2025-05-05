@@ -25,7 +25,6 @@
   "FileMoved": "Ֆայլերը տեղափոխվել են:",
   "FileMovedCount": "Ֆայլերը տեղափոխվել են ({{count}}):",
   "FileMovedTo": "Ֆայլը տեղափոխվեց «{{folderTitle}}»",
-  "FileMovedToTrash": "Ֆայլերը տեղափոխվեցին աղբարկղ:",
   "FileMovedToTrashCount": "Ֆայլերը տեղափոխվեցին աղբարկղ ({{count}}):",
   "FileRenamed": "Ֆայլը վերանվանվել է:",
   "FilesEmptyScreenText": "Ֆայլի և պանակի մանրամասները տես այստեղ",

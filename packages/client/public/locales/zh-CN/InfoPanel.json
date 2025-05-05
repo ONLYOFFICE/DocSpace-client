@@ -25,7 +25,6 @@
   "FileMoved": "文件已移动。",
   "FileMovedCount": "文件已移动 ({{count}})。",
   "FileMovedTo": "文件已移动到«{{folderTitle}}»",
-  "FileMovedToTrash": "文件已移至回收站。",
   "FileMovedToTrashCount": "文件已移至回收站 ({{count}})。",
   "FileRenamed": "文件已重命名。",
   "FilesEmptyScreenText": "在此查看文件和文件夹的详细信息",

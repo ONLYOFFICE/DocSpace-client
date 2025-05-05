@@ -25,7 +25,6 @@
   "FileMoved": "Fichiers déplacés.",
   "FileMovedCount": "Fichiers déplacés ({{count}}).",
   "FileMovedTo": "Fichier déplacé vers «{{folderTitle}}»",
-  "FileMovedToTrash": "Fichiers déplacés dans la corbeille.",
   "FileMovedToTrashCount": "Fichiers déplacés dans la corbeille ({{count}}).",
   "FileRenamed": "Fichier renommé.",
   "FilesEmptyScreenText": "Voir ici les détails des fichiers et des dossiers",

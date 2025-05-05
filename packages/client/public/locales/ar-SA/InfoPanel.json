@@ -25,7 +25,6 @@
   "FileMoved": "تم نقل الملفات.",
   "FileMovedCount": "تم نقل الملفات ({{count}}).",
   "FileMovedTo": "تم نقل الملف إلى «{{folderTitle}}»",
-  "FileMovedToTrash": " تم نقل الملفات إلى سلة المهملات.",
   "FileMovedToTrashCount": "تم نقل الملفات إلى سلة المحذوفات ({{count}}).",
   "FileRenamed": "تمت إعادة تسمية الملف.",
   "FilesEmptyScreenText": "انظر تفاصيل الملف والمجلد هنا",

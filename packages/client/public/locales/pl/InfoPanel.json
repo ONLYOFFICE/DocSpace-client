@@ -25,7 +25,6 @@
   "FileMoved": "Pliki zostały przeniesione.",
   "FileMovedCount": "Pliki przeniesione ({{count}}).",
   "FileMovedTo": "Plik został przeniesiony do katalogu «{{folderTitle}}»",
-  "FileMovedToTrash": "Pliki zostały przeniesione do Kosza.",
   "FileMovedToTrashCount": "Pliki przeniesione do Kosza ({{count}}).",
   "FileRenamed": "Nazwa pliku została zmieniona.",
   "FilesEmptyScreenText": "Zobacz szczegóły plików i folderów tutaj",

@@ -25,7 +25,6 @@
   "FileMoved": "Arquivos movidos.",
   "FileMovedCount": "Arquivos movidos ({{count}}).",
   "FileMovedTo": "Arquivo movido para «{{folderTitle}}»",
-  "FileMovedToTrash": "Os ficheiros foram movidos para o lixo.",
   "FileMovedToTrashCount": "Arquivos movidos para a Lixeira ({{count}}).",
   "FileRenamed": "Arquivo renomeado.",
   "FilesEmptyScreenText": "Veja aqui os detalhes dos ficheiros e pastas",

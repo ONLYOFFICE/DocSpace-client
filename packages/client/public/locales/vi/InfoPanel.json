@@ -25,7 +25,6 @@
   "FileMoved": "Đã di chuyển các tập tin.",
   "FileMovedCount": "Đã di chuyển tệp ({{count}}).",
   "FileMovedTo": "Tập tin được chuyển đến «{{folderTitle}}»",
-  "FileMovedToTrash": "Các tập tin đã được chuyển vào thùng rác.",
   "FileMovedToTrashCount": "Đã di chuyển tệp vào Thùng rác ({{count}}).",
   "FileRenamed": "Đã đổi tên tập tin.",
   "FilesEmptyScreenText": "Xem chi tiết tệp và thư mục tại đây",

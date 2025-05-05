@@ -63,12 +63,14 @@ export const useFeedTranslation = (
           count,
         });
       return t("InfoPanel:FileMoved");
-    case "FileMovedToTrash":
+    case "FilesTrashMoveCompleted":
       if (hasRelatedItems)
         return t("InfoPanel:FileMovedToTrashCount", {
           count,
         });
-      return t("InfoPanel:FileMovedToTrash");
+      return t("InfoPanel:FilesTrashMoveCompleted", {
+        sectionName: t("Common:TrashSection"),
+      });
     case "FileCopied":
       if (feed.data.fromParentTitle) {
         return t("InfoPanel:FileCopiedTo", {

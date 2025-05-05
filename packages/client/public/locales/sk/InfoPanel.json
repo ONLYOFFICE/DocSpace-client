@@ -25,7 +25,6 @@
   "FileMoved": "Súbory presunuté.",
   "FileMovedCount": "Súbory presunuté ({{count}}).",
   "FileMovedTo": "Súbor presunutý do zložky «{{folderTitle}}»",
-  "FileMovedToTrash": "Súbory presunuté do Koša.",
   "FileMovedToTrashCount": "Súbory presunuté do Koša ({{count}}).",
   "FileRenamed": "Súbor premenovaný.",
   "FilesEmptyScreenText": "Podrobnosti o súboroch a priečinkoch nájdete tu",

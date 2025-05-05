@@ -25,7 +25,6 @@
   "FileMoved": "Bestanden verplaatst.",
   "FileMovedCount": "Bestanden verplaatst ({{count}}).",
   "FileMovedTo": "Bestand verplaatst naar «{{folderTitle}}»",
-  "FileMovedToTrash": "Bestanden verplaatst naar prullenbak.",
   "FileMovedToTrashCount": "Bestanden naar Prullenbak verplaatst ({{count}}).",
   "FileRenamed": "Bestand hernoemd.",
   "FilesEmptyScreenText": "Bekijk hier bestands- en mapdetails",

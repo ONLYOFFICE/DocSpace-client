@@ -25,7 +25,6 @@
   "FileMoved": "Fayllar köçürüldü.",
   "FileMovedCount": "Fayllar köçürüldü ({{count}}).",
   "FileMovedTo": "Fayl «{{folderTitle}}» qovluğuna köçürüldü",
-  "FileMovedToTrash": "Fayllar zibil qutusuna köçürüldü.",
   "FileMovedToTrashCount": "Fayllar Zibil qutusuna köçürüldü ({{count}}).",
   "FileRenamed": "Faylın adı dəyişdirildi.",
   "FilesEmptyScreenText": "Fayl və qovluq detallarına burada baxın",

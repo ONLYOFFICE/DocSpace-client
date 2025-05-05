@@ -25,7 +25,6 @@
   "FileMoved": "Dosyalar taşındı.",
   "FileMovedCount": "Dosyalar taşındı ({{count}}).",
   "FileMovedTo": "Dosya «{{folderTitle}}» klasörüne taşındı",
-  "FileMovedToTrash": "Dosyalar çöp kutusuna taşındı.",
   "FileMovedToTrashCount": "Dosyalar Çöp Kutusu'na taşındı ({{count}}).",
   "FileRenamed": "Dosya yeniden adlandırıldı.",
   "FilesEmptyScreenText": "Dosya ve klasör ayrıntılarını burada görebilirsiniz",

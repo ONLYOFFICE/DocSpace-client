@@ -25,7 +25,6 @@
   "FileMoved": "Fişiere au fost mutate.",
   "FileMovedCount": "Fişiere au fost mutate ({{count}}).",
   "FileMovedTo": "Fișierul a fost deplasat în folderul «{{folderTitle}}»",
-  "FileMovedToTrash": "Fișiere au fost mutale în coșul de gunoi.",
   "FileMovedToTrashCount": "Fișiere au fost mutale în coșul de gunoi ({{count}}).",
   "FileRenamed": "Fişier a fost redenumit.",
   "FilesEmptyScreenText": "Vizualizarea detaliilor despre fișiere și foldere",

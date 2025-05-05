@@ -25,7 +25,6 @@
   "FileMoved": "파일이 이동되었습니다.",
   "FileMovedCount": "파일 이동됨 ({{count}}).",
   "FileMovedTo": "파일이 «{{folderTitle}}» 폴더로 이동되었습니다",
-  "FileMovedToTrash": "파일이 휴지통으로 이동되었습니다.",
   "FileMovedToTrashCount": "파일이 휴지통으로 이동됨 ({{count}}).",
   "FileRenamed": "파일명이 변경되었습니다.",
   "FilesEmptyScreenText": "여기에서 파일 및 폴더 세부 정보 보기",

@@ -767,9 +767,12 @@ const TranslationTable: React.FC<TranslationTableProps> = ({
     // Listen for translation completed events
     socket.on("translation:completed", handleTranslationCompleted);
 
+    socket.on("translation:updated", handleTranslationCompleted);
+
     // Cleanup listener when component unmounts
     return () => {
       socket.off("translation:completed", handleTranslationCompleted);
+      socket.off("translation:updated", handleTranslationCompleted);
     };
   }, [projectName, namespace]);
 

@@ -1,7 +1,6 @@
 {
   "ChooseFromList": "Choose from list",
   "ConnectingAccount": "Connecting account",
-  "DeleteFromTrash": "Selected elements were successfully deleted from Trash",
   "FileLocked": "File locked",
   "FileProtected": "The file is password protected",
   "FileUnlocked": "File unlocked",
@@ -29,6 +28,7 @@
   "ThirdPartyTitle": "Third-party services",
   "TitleShowActions": "Show File Actions",
   "TitleShowFolderActions": "Show Folder Actions",
+  "TrashItemsDeleteSuccess": "Selected elements were successfully deleted from {{sectionName}}",
   "TypeTitleBoxNet": "Box",
   "TypeTitleDocuSign": "DocuSign",
   "TypeTitleDropBox": "Dropbox",

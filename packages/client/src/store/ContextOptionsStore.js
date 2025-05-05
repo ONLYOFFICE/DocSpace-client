@@ -782,7 +782,9 @@ class ContextOptionsStore {
       );
     } else {
       translations = {
-        deleteFromTrash: t("Translations:DeleteFromTrash"),
+        deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+          sectionName: t("Common:TrashSection"),
+        }),
       };
 
       deleteAction(translations, [selectedFolder], true).catch((err) =>
@@ -2497,7 +2499,9 @@ class ContextOptionsStore {
                 setDeleteDialogVisible(true);
               } else {
                 const translations = {
-                  deleteFromTrash: t("Translations:DeleteFromTrash"),
+                  deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+                    sectionName: t("Common:TrashSection"),
+                  }),
                 };
 
                 this.filesActionsStore

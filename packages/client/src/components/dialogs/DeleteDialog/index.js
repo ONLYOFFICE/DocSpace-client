@@ -90,7 +90,9 @@ const DeleteDialogComponent = (props) => {
     onClose();
 
     const translations = {
-      deleteFromTrash: t("Translations:DeleteFromTrash"),
+      deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+        sectionName: t("Common:TrashSection"),
+      }),
     };
 
     if (!selection.length) return;

@@ -300,7 +300,9 @@ const Items = ({
 
   const onRemove = React.useCallback(() => {
     const translations = {
-      deleteFromTrash: t("Translations:DeleteFromTrash"),
+      deleteFromTrash: t("Translations:TrashItemsDeleteSuccess", {
+        sectionName: t("Common:TrashSection"),
+      }),
     };
 
     deleteAction(translations);

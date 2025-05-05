@@ -82,7 +82,9 @@ const ArchiveDialogComponent = (props) => {
       displayType="modal"
     >
       <ModalDialog.Header>
-        {t("ArchiveDialog:ArchiveHeader")}
+        {t("Common:SectionMoveConfirmation", {
+          sectionName: t("Common:Archive"),
+        })}
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Text noSelect>{description}</Text>

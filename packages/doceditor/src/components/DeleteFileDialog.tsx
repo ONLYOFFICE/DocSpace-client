@@ -42,7 +42,7 @@ const DeleteFileDialog = ({ onSubmit, onClose }: DeleteFileDialogProps) => {
   return (
     <ModalDialog visible displayType={ModalDialogType.modal} onClose={onClose}>
       <ModalDialog.Header>
-        {t("Common:TrashConfirmation", {
+        {t("Common:SectionMoveConfirmation", {
           sectionName: t("Common:TrashSection"),
         })}
       </ModalDialog.Header>

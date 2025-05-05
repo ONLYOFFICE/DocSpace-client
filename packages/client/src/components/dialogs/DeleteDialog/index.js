@@ -163,7 +163,7 @@ const DeleteDialogComponent = (props) => {
 
   const moveToTrashTitle = () => {
     if (unsubscribe) return t("UnsubscribeTitle");
-    return t("Common:TrashConfirmation", {
+    return t("Common:SectionMoveConfirmation", {
       sectionName: t("Common:TrashSection"),
     });
   };

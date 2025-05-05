@@ -84,6 +84,7 @@ export default function ProjectPage() {
 
   const {
     namespaces,
+    setNamespaces,
     currentNamespace,
     fetchNamespaces,
     setCurrentNamespace,
@@ -134,6 +135,7 @@ export default function ProjectPage() {
     // Cleanup function
     return () => {
       setCurrentNamespace(null);
+      setNamespaces([]);
       // Clean up socket listeners
       useOllamaValidationStore.getState().cleanupSocketListeners();
     };
@@ -345,28 +347,33 @@ export default function ProjectPage() {
     try {
       // First, fetch all translations for this namespace
       const allTranslations = await fetchTranslations(
-        projectName, 
-        [...selectedLanguages, baseLanguage], 
+        projectName,
+        [...selectedLanguages, baseLanguage],
         namespace
       );
-      
+
       // Only keep non-base languages
-      const targetLanguages = selectedLanguages.filter(lang => lang !== baseLanguage);
+      const targetLanguages = selectedLanguages.filter(
+        (lang) => lang !== baseLanguage
+      );
       if (targetLanguages.length === 0) {
         toast.info("No target languages selected for translation");
         return;
       }
 
       // Get keys that need translation (have content in base language but missing in at least one target language)
-      const keysToTranslate = allTranslations.filter(entry => {
+      const keysToTranslate = allTranslations.filter((entry) => {
         // Must have content in base language
-        const hasBaseContent = entry.translations[baseLanguage] && entry.translations[baseLanguage].trim() !== '';
-        
+        const hasBaseContent =
+          entry.translations[baseLanguage] &&
+          entry.translations[baseLanguage].trim() !== "";
+
         // Must be missing in at least one target language
-        const hasUntranslatedTargets = targetLanguages.some(lang => 
-          !entry.translations[lang] || entry.translations[lang].trim() === ''
+        const hasUntranslatedTargets = targetLanguages.some(
+          (lang) =>
+            !entry.translations[lang] || entry.translations[lang].trim() === ""
         );
-        
+
         return hasBaseContent && hasUntranslatedTargets;
       });
 
@@ -380,19 +387,25 @@ export default function ProjectPage() {
       let completedItems = 0;
 
       // Start with initial toast
-      toastId.current = toast.info(`Starting translation of ${keysToTranslate.length} keys in namespace ${namespace}...`, {
-        autoClose: false,
-        progress: 0
-      });
+      toastId.current = toast.info(
+        `Starting translation of ${keysToTranslate.length} keys in namespace ${namespace}...`,
+        {
+          autoClose: false,
+          progress: 0,
+        }
+      );
 
       // Process each key that needs translation
       for (const entry of keysToTranslate) {
         const keyPath = entry.path;
-        
+
         // For each target language
         for (const targetLang of targetLanguages) {
           // Skip if already translated
-          if (entry.translations[targetLang] && entry.translations[targetLang].trim() !== '') {
+          if (
+            entry.translations[targetLang] &&
+            entry.translations[targetLang].trim() !== ""
+          ) {
             completedItems++;
             continue;
           }
@@ -402,7 +415,7 @@ export default function ProjectPage() {
             const progress = completedItems / totalItems;
             toast.update(toastId.current!, {
               render: `Translating key "${keyPath}" to ${targetLang}... (${Math.round(progress * 100)}%)`,
-              progress: progress
+              progress: progress,
             });
 
             // Translate this specific key
@@ -417,9 +430,14 @@ export default function ProjectPage() {
 
             completedItems++;
           } catch (error) {
-            console.error(`Error translating key ${keyPath} to ${targetLang}:`, error);
+            console.error(
+              `Error translating key ${keyPath} to ${targetLang}:`,
+              error
+            );
             // Continue with other translations even if one fails
-            toast.error(`Failed to translate key "${keyPath}" to ${targetLang}: ${(error as Error).message}`);
+            toast.error(
+              `Failed to translate key "${keyPath}" to ${targetLang}: ${(error as Error).message}`
+            );
           }
         }
       }
@@ -435,9 +453,9 @@ export default function ProjectPage() {
           render: `Completed translating ${keysToTranslate.length} keys in namespace ${namespace}`,
           type: "success",
           progress: 1,
-          autoClose: 5000
+          autoClose: 5000,
         });
-        
+
         // Reset toast ID
         setTimeout(() => {
           toastId.current = null;
@@ -445,16 +463,18 @@ export default function ProjectPage() {
       }
     } catch (error) {
       console.error("Translation error:", error);
-      toast.error(`Failed to translate namespace ${namespace}: ${(error as Error).message}`);
-      
+      toast.error(
+        `Failed to translate namespace ${namespace}: ${(error as Error).message}`
+      );
+
       // Reset toast ID on error too
       if (toastId.current) {
         toast.update(toastId.current, {
           render: `Translation failed: ${(error as Error).message}`,
           type: "error",
-          autoClose: 5000
+          autoClose: 5000,
         });
-        
+
         setTimeout(() => {
           toastId.current = null;
         }, 5000);

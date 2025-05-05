@@ -27,7 +27,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 import { ThemeProvider } from "../../../components/theme-provider";
 import Base from "../../../themes/base";
 import { BrandName } from "./index";

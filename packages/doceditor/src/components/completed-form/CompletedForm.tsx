@@ -77,6 +77,7 @@ export const CompletedForm = ({
   session,
   share,
   isShareFile,
+  isSDK,
 }: CompletedFormProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["CompletedForm", "Common"]);
@@ -213,7 +214,7 @@ export const CompletedForm = ({
               }
               onClick={isAnonym ? handleDownload : gotoCompleteFolder}
             />
-            {(!isShareFile || isRoomMember) && (
+            {(!isShareFile || isRoomMember) && !isSDK && (
               <Button
                 scale
                 size={ButtonSize.medium}

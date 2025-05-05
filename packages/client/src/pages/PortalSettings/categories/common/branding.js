@@ -26,7 +26,7 @@
 
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 

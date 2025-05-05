@@ -30,7 +30,7 @@ import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import React from "react";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { retryWebhook } from "@docspace/shared/api/settings";

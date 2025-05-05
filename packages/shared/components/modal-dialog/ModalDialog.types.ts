@@ -97,6 +97,8 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   isInvitePanelLoader?: boolean;
   /** Forces body scroll regardless of display type */
   withBodyScrollForcibly?: boolean;
+
+  withBorder?: boolean;
 };
 
 export type ModalDialogProps = Partial<

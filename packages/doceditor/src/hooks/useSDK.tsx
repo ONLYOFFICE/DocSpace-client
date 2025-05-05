@@ -60,15 +60,17 @@ const useSDK = (baseSdkConfig?: TFrameConfig) => {
               break;
             case "executeInEditor":
               const instance = window.DocEditor?.instances[EDITOR_ID];
+              const asc = window.Asc;
 
               try {
                 const cFn = new Function(
                   "instance",
+                  "asc",
                   "data",
-                  `const c = ${data.callback}; c(instance, data);`,
+                  `const c = ${data.callback}; c(instance, asc, data);`,
                 );
 
-                cFn(instance, data.data);
+                cFn(instance, asc, data.data);
               } catch (e) {
                 console.error("Error executing editor callback:", e);
               }

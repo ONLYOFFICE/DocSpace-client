@@ -109,6 +109,7 @@ const InviteInput = ({
   setInputValue,
   usersList,
   setUsersList,
+  allowInvitingGuests,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
@@ -387,7 +388,7 @@ const InviteInput = ({
         />
         <div className="list-item_content">
           <div className="list-item_content-box">
-            <SearchItemText primary disabled={shared || isDisabled}>
+            <SearchItemText $primary disabled={shared || isDisabled}>
               {displayName || groupName}
             </SearchItemText>
             {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
@@ -395,7 +396,7 @@ const InviteInput = ({
           <SearchItemText>{email}</SearchItemText>
         </div>
         {shared ? (
-          <SearchItemText info>{t("Common:Invited")}</SearchItemText>
+          <SearchItemText $info>{t("Common:Invited")}</SearchItemText>
         ) : null}
         {isDisabled ? (
           <SearchItemText disabled>{t("Common:Disabled")}</SearchItemText>
@@ -495,7 +496,15 @@ const InviteInput = ({
       prevDropDownContent.current = usersList.map((user) =>
         getItemContent(user),
       );
-    } else {
+    } else if (roomId !== -1 && !allowInvitingGuests)
+      prevDropDownContent.current = (
+        <DropDownItem disabled className="no-users-list">
+          <Text truncate fontSize="13px" fontWeight={400} lineHeight="20px">
+            {t("Common:NotFoundUsers")}
+          </Text>
+        </DropDownItem>
+      );
+    else {
       prevDropDownContent.current = (
         <DropDownItem
           className="list-item"
@@ -579,57 +588,66 @@ const InviteInput = ({
           </StyledLink>
         ) : null}
       </StyledSubHeader>
-      <StyledDescription noSelect>
+      <StyledDescription
+        noSelect
+        noAllowInvitingGuests={roomId !== -1 ? !allowInvitingGuests : null}
+      >
         {roomId === -1
           ? t("InviteMembersManuallyDescription", {
               productName: t("Common:ProductName"),
             })
-          : t("InviteToRoomManuallyInfo", {
-              productName: t("Common:ProductName"),
-            })}
+          : !allowInvitingGuests
+            ? t("InviteToRoomManuallyInfoMembers", {
+                productName: t("Common:ProductName"),
+              })
+            : t("InviteToRoomManuallyInfoGuest", {
+                productName: t("Common:ProductName"),
+              })}
       </StyledDescription>
-      <StyledInviteLanguage>
-        <Text className="invitation-language" noSelect>
-          {t("InvitationLanguage")}:
-        </Text>
-        <div className="language-combo-box-wrapper">
-          <ComboBox
-            className="language-combo-box"
-            directionY="both"
-            options={cultureNamesNew}
-            selectedOption={culture}
-            onSelect={onLanguageSelect}
-            isDisabled={false}
-            scaled={isMobileView}
-            scaledOptions={false}
-            size="content"
-            manualWidth="280px"
-            showDisabledItems
-            dropDownMaxHeight={364}
-            withBlur={isMobileView}
-            isDefaultMode={!isMobileView}
-            fillIcon={false}
-            modernView
-            withBackdrop={isMobileView}
-            withBackground={isMobileView}
-            shouldShowBackdrop={isMobileView}
-          />
-          {culture?.isBeta ? (
-            <BetaBadge place="bottom-end" mobilePlace="bottom" />
+      {roomId === -1 || allowInvitingGuests ? (
+        <StyledInviteLanguage>
+          <Text className="invitation-language" noSelect>
+            {t("InvitationLanguage")}:
+          </Text>
+          <div className="language-combo-box-wrapper">
+            <ComboBox
+              className="language-combo-box"
+              directionY="both"
+              options={cultureNamesNew}
+              selectedOption={culture}
+              onSelect={onLanguageSelect}
+              isDisabled={false}
+              scaled={isMobileView}
+              scaledOptions={false}
+              size="content"
+              manualWidth="280px"
+              showDisabledItems
+              dropDownMaxHeight={364}
+              withBlur={isMobileView}
+              isDefaultMode={!isMobileView}
+              fillIcon={false}
+              modernView
+              withBackdrop={isMobileView}
+              withBackground={isMobileView}
+              shouldShowBackdrop={isMobileView}
+            />
+            {culture?.isBeta ? (
+              <BetaBadge place="bottom-end" mobilePlace="bottom" />
+            ) : null}
+          </div>
+          {isChangeLangMail && !isMobileView ? (
+            <StyledLink
+              className="list-link"
+              fontWeight="600"
+              type="action"
+              isHovered
+              onClick={onResetLangMail}
+            >
+              {t("ResetChange")}
+            </StyledLink>
           ) : null}
-        </div>
-        {isChangeLangMail && !isMobileView ? (
-          <StyledLink
-            className="list-link"
-            fontWeight="600"
-            type="action"
-            isHovered
-            onClick={onResetLangMail}
-          >
-            {t("ResetChange")}
-          </StyledLink>
-        ) : null}
-      </StyledInviteLanguage>
+        </StyledInviteLanguage>
+      ) : null}
       {isChangeLangMail && isMobileView ? (
         <ResetLink
           className="reset-link"
@@ -651,7 +669,9 @@ const InviteInput = ({
             placeholder={
               roomId === -1
                 ? t("InviteMembersSearchPlaceholder")
-                : t("InviteToRoomSearchPlaceholder")
+                : !allowInvitingGuests
+                  ? t("InviteToRoomAddPlaceholder")
+                  : t("InviteToRoomSearchPlaceholder")
             }
             value={inputValue}
             isAutoFocussed
@@ -715,7 +735,7 @@ export default inject(
       isPaidUserAccess,
     } = dialogsStore;
 
-    const { culture: language } = settingsStore;
+    const { culture: language, allowInvitingGuests } = settingsStore;
     const { isUserTariffLimit } = currentQuotaStore;
     return {
       language,
@@ -730,6 +750,7 @@ export default inject(
       isAdmin,
       isPaidUserAccess,
       isUserTariffLimit,
+      allowInvitingGuests,
     };
   },
 )(

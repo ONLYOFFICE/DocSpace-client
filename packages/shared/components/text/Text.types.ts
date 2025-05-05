@@ -77,6 +77,10 @@ export type TextProps = {
   rel?: string;
   /** Used as HTML `tabindex` property */
   tabIndex?: number;
+  /** Used in container component */
+  containerWidth?: string;
+  /** Used in container component */
+  containerMinWidth?: string;
 };
 
 export type StyledTextProps = {

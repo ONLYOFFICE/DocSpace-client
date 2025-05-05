@@ -35,7 +35,7 @@ import classnames from "classnames";
 
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/shared/components/navigation";
@@ -489,7 +489,7 @@ const SectionHeaderContent = (props) => {
     tableGroupMenuProps.isIndeterminate = !isContactsGroupsPage
       ? isUsersHeaderIndeterminate
       : isGroupsHeaderIndeterminate;
-    tableGroupMenuProps.withoutInfoPanelToggler = true;
+    tableGroupMenuProps.withoutInfoPanelToggler = false;
   } else {
     tableGroupMenuVisible =
       (isIndexEditingMode || isHeaderVisible) && tableGroupMenuVisible;
@@ -497,7 +497,7 @@ const SectionHeaderContent = (props) => {
     tableGroupMenuProps.isIndeterminate = isHeaderIndeterminate;
     tableGroupMenuProps.isBlocked = isGroupMenuBlocked;
     tableGroupMenuProps.withoutInfoPanelToggler =
-      !isIndexEditingMode || !isPublicRoom;
+      isIndexEditingMode || isPublicRoom;
   }
 
   const currentTitle = isSettingsPage
@@ -680,6 +680,7 @@ const SectionHeaderContent = (props) => {
                 addButtonRef={addButtonRefCallback}
                 contextButtonAnimation={contextButtonAnimation}
                 guidAnimationVisible={guidAnimationVisible}
+                setGuidAnimationVisible={setGuidAnimationVisible}
                 isContextButtonVisible={isContextButtonVisible()}
               />
               {showSignInButton ? (
@@ -966,7 +967,7 @@ export default inject(
       theme,
       isFrame,
       showTitle: frameConfig?.showTitle,
-      hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
+      hideInfoPanel: isFrame,
       showMenu: frameConfig?.showMenu,
       currentDeviceType,
       insideGroupTempTitle,

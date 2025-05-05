@@ -50,6 +50,7 @@ export const Button = React.forwardRef<
     type,
     id,
     minWidth,
+    style,
     ...rest
   } = props;
 
@@ -72,6 +73,8 @@ export const Button = React.forwardRef<
     "button-content": true,
   });
 
+  const buttonStyle = minWidth ? { ...style, minWidth } : style;
+
   return (
     <button
       {...rest}
@@ -85,6 +88,7 @@ export const Button = React.forwardRef<
       aria-label={label}
       aria-disabled={isDisabled ? "true" : undefined}
       aria-busy={isLoading ? "true" : undefined}
+      style={buttonStyle}
     >
       {isLoading ? (
         <Loader

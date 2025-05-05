@@ -423,13 +423,8 @@ const StyledNewEmptyScreen = styled.section.attrs(injectDefaultTheme)`
     margin-top: 16px;
   }
 
-  .empty-button {
-    width: 36px;
-    height: 36px;
-  }
-
-  .empty-button-label {
-    cursor: pointer;
+  .empty-button p {
+    padding-inline-start: 16px;
   }
 `;
 
@@ -463,15 +458,15 @@ const StyledBreadCrumbs = styled.div.attrs(injectDefaultTheme)<{
 `;
 
 const StyledItemText = styled(Text).attrs(injectDefaultTheme)<{
-  isCurrent: boolean;
-  isLoading?: boolean;
+  $isCurrent: boolean;
+  $isLoading?: boolean;
 }>`
   ${(props) =>
-    !props.isCurrent &&
+    !props.$isCurrent &&
     css`
       color: ${props.theme.selector.breadCrumbs.prevItemColor};
 
-      ${!props.isLoading && `cursor: pointer`};
+      ${!props.$isLoading && `cursor: pointer`};
     `}
 `;
 

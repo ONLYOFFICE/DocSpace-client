@@ -28,7 +28,6 @@ import isUndefined from "lodash/isUndefined";
 import { useTranslation } from "react-i18next";
 
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
-
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import {
   ModalDialog,

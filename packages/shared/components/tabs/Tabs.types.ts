@@ -46,7 +46,7 @@ export type TabsProps = {
   /** Child elements. */
   items: TTabItem[];
   /** Selected item of tabs. */
-  selectedItemId?: number | string;
+  selectedItemId: number | string;
   selectedItems?: number[];
   /** Theme for displaying tabs. */
   type?: TabsTypes;

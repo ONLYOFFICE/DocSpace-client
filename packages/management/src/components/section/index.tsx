@@ -92,4 +92,3 @@ export const Section = ({
     </StyledSection>
   );
 };
-

@@ -26,7 +26,7 @@
 
 import React, { useEffect } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
@@ -51,6 +51,7 @@ const TabsCommon = (props) => {
     isMobileView,
     isCommunity,
   } = props;
+  const location = useLocation();
   const navigate = useNavigate();
 
   const data = [
@@ -75,7 +76,7 @@ const TabsCommon = (props) => {
   }
 
   const getCurrentTabId = () => {
-    const path = window.location.pathname;
+    const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
     return currentTab && data.length ? currentTab.id : data[0].id;
   };
@@ -122,7 +123,7 @@ const TabsCommon = (props) => {
     <Tabs
       items={data}
       selectedItemId={getCurrentTabId()}
-      onSelect={(e) => onSelect(e)}
+      onSelect={onSelect}
       stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );

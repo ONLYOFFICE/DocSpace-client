@@ -97,7 +97,6 @@ const PeopleTableRow = (props) => {
           fontSize="12px"
           fontWeight={600}
           onClick={onEmailClick}
-          isTextOverflow
           className="settings_unavailable"
         >
           {item.action}

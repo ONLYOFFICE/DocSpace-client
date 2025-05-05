@@ -235,4 +235,5 @@ export type FilterProps = SearchInputProps &
     sortByTitle: string;
 
     currentDeviceType: DeviceType;
+    initSelectedFilterData?: TItem[];
   };

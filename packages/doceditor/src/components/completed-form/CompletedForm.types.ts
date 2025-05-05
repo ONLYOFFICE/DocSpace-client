@@ -29,6 +29,7 @@ import type {
   TFileFillingFormStatus,
 } from "@docspace/shared/api/files/types";
 import type { TUser } from "@docspace/shared/api/people/types";
+import type { TSettings } from "@docspace/shared/api/settings/types";
 
 export type CompletedFormLayoutProps = {
   bgPattern: string;
@@ -47,6 +48,7 @@ export type CompletedFormProps = {
   };
   isShareFile: boolean;
   share?: string;
+  isSDK?: boolean;
 };
 
 export type CompletedVDRFormProps = {
@@ -55,4 +57,5 @@ export type CompletedVDRFormProps = {
   formFillingStatus: TFileFillingFormStatus[];
   user: TUser;
   roomId: string;
+  settings: TSettings;
 };

@@ -128,6 +128,8 @@ export const DownloadContent = (props: DownloadContentProps) => {
         return formats;
       case "masterForms":
         return formats;
+      case "pdfForms":
+        return formats;
       default:
         return [];
     }

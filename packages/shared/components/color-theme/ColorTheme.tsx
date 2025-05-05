@@ -106,7 +106,6 @@ const ColorTheme = forwardRef<
         return (
           <IconButtonCustomFilterTheme
             {...props}
-            themeId={themeId}
             $currentColorScheme={currentColorScheme}
           />
         );

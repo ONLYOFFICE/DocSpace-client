@@ -30,7 +30,7 @@ import DownloadReactSvgUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?u
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
 
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { withTranslation } from "react-i18next";
 
 import { Link } from "@docspace/shared/components/link";

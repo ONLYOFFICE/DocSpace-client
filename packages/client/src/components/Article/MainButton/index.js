@@ -50,7 +50,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 
 import { withTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import {
   Events,
   DeviceType,
@@ -722,14 +722,12 @@ const ArticleMainButtonContent = (props) => {
 
   let isDisabled = false;
 
-  if (isFrame) {
-    isDisabled = disableActionButton && !security?.Create;
-  } else if (isSettingsPage) {
+  if (isSettingsPage) {
     isDisabled = isSettingsPage;
   } else if (isAccountsPage) {
-    isDisabled = !contactsCanCreate;
+    isDisabled = (isFrame && disableActionButton) || !contactsCanCreate;
   } else {
-    isDisabled = !security?.Create;
+    isDisabled = (isFrame && disableActionButton) || !security?.Create;
   }
 
   if (showArticleLoader)

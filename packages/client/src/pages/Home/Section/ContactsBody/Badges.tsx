@@ -27,7 +27,7 @@
 import { inject, observer } from "mobx-react";
 import styled, { css, useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 
 import Filter from "@docspace/shared/api/people/filter";
 import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
@@ -131,7 +131,6 @@ const Badges = ({
           fontSize="9px"
           fontWeight={800}
           noHover
-          lineHeight="13px"
           onClick={onLDAPClick}
         />
       ) : null}
@@ -148,7 +147,6 @@ const Badges = ({
           fontSize="9px"
           fontWeight={800}
           noHover
-          lineHeight="13px"
           onClick={onSSOClick}
         />
       ) : null}
@@ -163,7 +161,6 @@ const Badges = ({
           }
           fontSize="9px"
           fontWeight={800}
-          lineHeight="13px"
           noHover
           onClick={onClickPaid}
           isPaidBadge

@@ -36,7 +36,8 @@ import SDK from "@onlyoffice/docspace-sdk-js";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
+import { getPrimaryLink } from "@docspace/shared/api/rooms";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { RoomsType } from "@docspace/shared/enums";
 import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
@@ -172,7 +173,12 @@ const SimpleRoom = (props) => {
       rootPath: "/rooms/shared/",
     };
 
-    const links = await fetchExternalLinks(publicRoom.id);
+    let links = await fetchExternalLinks(publicRoom.id);
+
+    if (links.length === 0) {
+      const primaryLink = await getPrimaryLink(publicRoom.id);
+      links = [primaryLink];
+    }
 
     if (links.length > 1) {
       const linksOptions = links.map((link) => {
@@ -201,7 +207,7 @@ const SimpleRoom = (props) => {
       setSharedLinks(linksOptions);
     }
 
-    newConfig.requestToken = links[0].sharedTo?.requestToken;
+    newConfig.requestToken = links[0]?.sharedTo?.requestToken;
     newConfig.rootPath = "/rooms/share";
     newConfig.mode = version === sdkVersion[200] ? "public-room" : "manager";
 
